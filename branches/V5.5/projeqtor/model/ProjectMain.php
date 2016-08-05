@@ -73,6 +73,9 @@ class ProjectMain extends SqlElement {
   public $_sec_Affectations;
   public $_spe_affectations;
   
+  public $_sec_Productproject_products;
+  public $_ProductProject=array();
+  
   public $_sec_Versionproject_versions;
   public $_VersionProject=array();
   

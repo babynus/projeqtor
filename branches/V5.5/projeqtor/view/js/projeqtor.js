@@ -2656,6 +2656,9 @@ function globalSave() {
   } else if (dijit.byId('dialogVersionProject')
       && dijit.byId('dialogVersionProject').open) {
     var button = dijit.byId('dialogVersionProjectSubmit');
+  } else if (dijit.byId('dialogProductProject')
+      && dijit.byId('dialogProductProject').open) {
+    var button = dijit.byId('dialogProductProjectSubmit');
   } else if (dijit.byId('dialogAffectation')
       && dijit.byId('dialogAffectation').open) {
     var button = dijit.byId('dialogAffectationSubmit');

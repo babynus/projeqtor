@@ -29,47 +29,47 @@
  * The new values are fetched in $_REQUEST
  */
 require_once "../tool/projeqtor.php";
-scriptLog('   ->/tool/saveVersionProject.php');
+scriptLog('   ->/tool/saveProductProject.php');
 // Get the info
-if (! array_key_exists('versionProjectId',$_REQUEST)) {
-  throwError('versionProjectId parameter not found in REQUEST');
+if (! array_key_exists('productProjectId',$_REQUEST)) {
+  throwError('productProjectId parameter not found in REQUEST');
 }
-$id=($_REQUEST['versionProjectId']);
+$id=($_REQUEST['productProjectId']);
 
-if (! array_key_exists('versionProjectProject',$_REQUEST)) {
-  throwError('versionProjectProject parameter not found in REQUEST');
+if (! array_key_exists('productProjectProject',$_REQUEST)) {
+  throwError('productProjectProject parameter not found in REQUEST');
 }
-$project=($_REQUEST['versionProjectProject']);
+$project=($_REQUEST['productProjectProject']);
 
-if (! array_key_exists('versionProjectVersion',$_REQUEST)) {
-  throwError('versionProjectVersion parameter not found in REQUEST');
+if (! array_key_exists('productProjectProduct',$_REQUEST)) {
+  throwError('productProjectProduct parameter not found in REQUEST');
 }
-$version=($_REQUEST['versionProjectVersion']);
+$product=($_REQUEST['productProjectProduct']);
 
-if (! array_key_exists('versionProjectStartDate',$_REQUEST)) {
-  throwError('versionProjectStartDate parameter not found in REQUEST');
+if (! array_key_exists('productProjectStartDate',$_REQUEST)) {
+  throwError('productProjectStartDate parameter not found in REQUEST');
 }
-$startDate=($_REQUEST['versionProjectStartDate']);
+$startDate=($_REQUEST['productProjectStartDate']);
 
-if (! array_key_exists('versionProjectEndDate',$_REQUEST)) {
-  throwError('versionProjectEndDate parameter not found in REQUEST');
+if (! array_key_exists('productProjectEndDate',$_REQUEST)) {
+  throwError('productProjectEndDate parameter not found in REQUEST');
 }
-$endDate=($_REQUEST['versionProjectEndDate']);
+$endDate=($_REQUEST['productProjectEndDate']);
 
 $idle=0;
-if (array_key_exists('versionProjectIdle',$_REQUEST)) {
+if (array_key_exists('productProjectIdle',$_REQUEST)) {
   $idle=1;
 }
 Sql::beginTransaction();
-$versionProject=new VersionProject($id);
+$productProject=new ProductProject($id);
 
-$versionProject->idProject=$project;
-$versionProject->idVersion=$version;
-$versionProject->idle=$idle;
-$versionProject->startDate=$startDate;
-$versionProject->endDate=$endDate;
+$productProject->idProject=$project;
+$productProject->idProduct=$product;
+$productProject->idle=$idle;
+$productProject->startDate=$startDate;
+$productProject->endDate=$endDate;
 
-$result=$versionProject->save();
+$result=$productProject->save();
 
 // Message of correct saving
 displayLastOperationStatus($result);

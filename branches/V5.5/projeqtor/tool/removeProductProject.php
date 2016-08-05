@@ -30,19 +30,19 @@
 
 require_once "../tool/projeqtor.php";
 
-$versionProjectId=null;
-if (array_key_exists('idVersionProject',$_REQUEST)) {
-  $versionProjectId=$_REQUEST['idVersionProject']; // validated to be numeric value in SqlElement base constructor.
+$productProjectId=null;
+if (array_key_exists('idProductProject',$_REQUEST)) {
+  $productProjectId=$_REQUEST['idProductProject']; // validated to be numeric value in SqlElement base constructor.
 }
-$versionProjectId=trim($versionProjectId);
-if ($versionProjectId=='') {
-  $versionProjectId=null;
+$productProjectId=trim($productProjectId);
+if ($productProjectId=='') {
+  $productProjectId=null;
 } 
-if ($versionProjectId==null) {
-  throwError('versionProjectId parameter not found in REQUEST');
+if ($productProjectId==null) {
+  throwError('productProjectId parameter not found in REQUEST');
 }
 Sql::beginTransaction();
-$obj=new VersionProject($versionProjectId);
+$obj=new ProductProject($productProjectId);
 $result=$obj->delete();
 
 // Message of correct saving
