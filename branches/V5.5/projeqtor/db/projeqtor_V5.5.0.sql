@@ -20,3 +20,6 @@ CREATE TABLE `${prefix}productproject` (
 
 CREATE INDEX productprojectProject ON `${prefix}productproject` (idProject);
 CREATE INDEX productprojectProduct ON `${prefix}productproject` (idProduct);
+
+ALTER TABLE `${prefix}project` ADD `lastUpdateDateTime` datetime DEFAULT NULL;
+ALTER TABLE `${prefix}activity` ADD `lastUpdateDateTime` datetime DEFAULT NULL;
