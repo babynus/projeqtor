@@ -44,10 +44,23 @@ if (array_key_exists('year',$_REQUEST)) {
   $year=$_REQUEST['year'];
 }
 
+$refType=-1;
+if (array_key_exists('refTypeComment',$_REQUEST)) {
+  $refType=$_REQUEST['refTypeComment'];
+}
+
+$refId=-1;
+if (array_key_exists('refIdComment',$_REQUEST)) {
+  $refId=$_REQUEST['refIdComment'];
+}
+
+
 $commentImputation='';
 if (array_key_exists('commentImputation',$_REQUEST)) {
   $commentImputation=$_REQUEST['commentImputation'];
 }
+$commentImputationNote=false;
+if(Parameter::getUserParameter("commentImputationNote")!=null && Parameter::getUserParameter("commentImputationNote")==1)$commentImputationNote=true;
 if(trim($commentImputation)==''){
 ?>
   <form id='commentImputationForm' name='commentImputationForm' onSubmit="return false;" >
@@ -60,6 +73,24 @@ if(trim($commentImputation)==''){
         <div dojoType="dijit.form.TextBox" required="true" class="input required" 
         style="width: 98%;" name="commentImputation" id="commentImputation">
         </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+       <br>
+      </td>
+    </tr>
+    <tr>
+      <td style="float:right;">
+      <?php echo i18n('commentImputationSaveNote');?>&nbsp;
+        <div dojoType="dijit.form.CheckBox" type="checkbox" class="greyCheck"
+         name="commentImputationNote" id="commentImputationNote" <?php if($commentImputationNote)echo 'checked';?>>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+       <br>
       </td>
     </tr>
   <?php 
@@ -84,7 +115,7 @@ if(trim($commentImputation)==''){
           <button class="mediumTextButton" dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogCommentImputation').hide();formChangeInProgress=false;">
             <?php echo i18n("buttonCancel");?>
           </button>
-          <button class="mediumTextButton" dojoType="dijit.form.Button" type="submit" onclick="protectDblClick(this);commentImputationSubmit('<?php echo $year.'\',\''.$week;?>',<?php echo $idAssignment;?>);return false;">
+          <button class="mediumTextButton" dojoType="dijit.form.Button" type="submit" onclick="protectDblClick(this);commentImputationSubmit('<?php echo $year.'\',\''.$week;?>',<?php echo $idAssignment;?>,'<?php echo $refType;?>',<?php echo $refId;?>);return false;">
             <?php echo i18n("buttonOK");?>
           </button>
         <?php 
@@ -102,9 +133,27 @@ if(trim($commentImputation)==''){
   </form>
 <?php 
 }else{
+  $commentImputationNote=false;
+  if (array_key_exists('commentImputationNote',$_REQUEST)) {
+    $commentImputationNote=true;
+  }
+  Parameter::storeUserParameter("commentImputationNote", $commentImputationNote ? 1 : 0);
+  $finalComment='['.$year.'-'.$week.']: '.$commentImputation;
   $assignment=new Assignment($idAssignment);
-  $assignment->comment="[".$year."-".$week."]: ".$commentImputation."\n\n".$assignment->comment;
+  $assignment->comment=$finalComment."\n\n".$assignment->comment;
   $assignment->save();
-  echo '['.$year.'-'.$week.']: '.$commentImputation;
+  if($commentImputationNote){
+    debugLog("startNote");
+    $note = new Note();
+    $note->idUser=getSessionUser()->id;
+    $note->creationDate=date("Y-m-d H:i:s");
+    $note->refId=$refId;
+    $note->refType=$refType;
+    $note->note=$finalComment;
+    $note->idPrivacy=1;
+    debugLog($note->save());
+    debugLog("finishNote");
+  }
+  echo $finalComment;
 }
 ?>
