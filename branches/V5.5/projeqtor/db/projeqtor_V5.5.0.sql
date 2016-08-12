@@ -21,6 +21,58 @@ CREATE TABLE `${prefix}productproject` (
 CREATE INDEX productprojectProject ON `${prefix}productproject` (idProject);
 CREATE INDEX productprojectProduct ON `${prefix}productproject` (idProduct);
 
+INSERT INTO `${prefix}textable` (`id`,`name`,`idle`) VALUES 
+(20,'Quotation',0);
+
+ALTER TABLE `${prefix}project` ADD `lastUpdateDateTime` datetime DEFAULT NULL;
+ALTER TABLE `${prefix}activity` ADD `lastUpdateDateTime` datetime DEFAULT NULL;
+
+INSERT INTO `${prefix}menu` (`id`,`name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
+(151,'menuExpenses', 74, 'menu', 202, NULL, 0, ''),
+(152,'menuIncomings', 74, 'menu', 225, NULL, 0, ''),
+(153,'menuCallForTender', 151, 'object', 204, NULL, 0, 'Financial '),
+(154,'menuTender', 151, 'object', 206, NULL, 0, 'Financial ');
+
+UPDATE `${prefix}menu` SET `idMenu`=151 WHERE `id` IN (75,76);
+UPDATE `${prefix}menu` SET `idMenu`=152 WHERE `id` IN (131,125,96,97,78,94,146);
+
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
+SELECT `idProfile`, 153, `allowAccess` FROM `${prefix}habilitation` WHERE `idMenu`=131;
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
+SELECT `idProfile`, 154, `allowAccess` FROM `${prefix}habilitation` WHERE `idMenu`=131;
+
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) 
+SELECT `idProfile`, 153, `idAccessProfile` FROM `${prefix}accessright` WHERE `idMenu`=131;  
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) 
+SELECT `idProfile`, 154, `idAccessProfile` FROM `${prefix}accessright` WHERE `idMenu`=131;
+
+CREATE TABLE `${prefix}tender` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `idProject` int(12) unsigned DEFAULT NULL,
+  `idTenderType` int(12) unsigned DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `description` varchar(4000) DEFAULT NULL,
+  `creationDate` datetime DEFAULT NULL,
+  `idUser` int(12) unsigned DEFAULT NULL,
+  `idStatus` int(12) unsigned DEFAULT NULL,
+  `idResource` int(12) unsigned DEFAULT NULL,
+  `idProvider` int(12) unsigned DEFAULT NULL,
+  `idContact` int(12) unsigned DEFAULT NULL,
+  `handled` int(1) unsigned DEFAULT '0',
+  `done` int(1) unsigned DEFAULT '0',
+  `idle` int(1) unsigned DEFAULT '0',
+  `cancelled` int(1) unsigned DEFAULT '0',
+  `handledDate` date DEFAULT NULL,
+  `doneDate` date DEFAULT NULL,
+  `idleDate` date DEFAULT NULL,
+  `reference` varchar(100) DEFAULT NULL,
+  `sendDate` date DEFAULT NULL,
+  `validityEndDate` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE INDEX tenderProject ON `${prefix}tender` (idProject);
+
 ALTER TABLE `${prefix}project` ADD `lastUpdateDateTime` datetime DEFAULT NULL;
 ALTER TABLE `${prefix}activity` ADD `lastUpdateDateTime` datetime DEFAULT NULL;
 
