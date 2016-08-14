@@ -110,8 +110,8 @@ CREATE TABLE `${prefix}callfortender` (
   `idUser` int(12) unsigned DEFAULT NULL,
   `description` mediumtext DEFAULT NULL,
   `technicalRequirements` mediumtext DEFAULT NULL,
-  `functionalRequirements` mediumtext DEFAULT NULL,
-  `financialRequirements` mediumtext DEFAULT NULL,
+  `businessRequirements` mediumtext DEFAULT NULL,
+  `otherRequirements` mediumtext DEFAULT NULL,
   `creationDate` datetime DEFAULT NULL,
   `idStatus` int(12) unsigned DEFAULT NULL,
   `idResource` int(12) unsigned DEFAULT NULL,
@@ -119,8 +119,12 @@ CREATE TABLE `${prefix}callfortender` (
   `expectedTenderDate` date DEFAULT NULL,
   `maxAmount` decimal(11,2) UNSIGNED,
   `deliveryDate` date DEFAULT NULL,
-  `expensePlannedDate` date DEFAULT NULL,
   `evaluationMaxValue` decimal(7,2) DEFAULT NULL,
+  `fixValue` int(1) unsigned DEFAULT '0',
+  `idProduct` int(12) unsigned DEFAULT NULL,
+  `idProductVersion` int(12) unsigned DEFAULT NULL,
+  `idComponent` int(12) unsigned DEFAULT NULL,
+  `idComponentVersion` int(12) unsigned DEFAULT NULL,
   `result` mediumtext DEFAULT NULL,
   `handled` int(1) unsigned DEFAULT '0',
   `done` int(1) unsigned DEFAULT '0',
@@ -158,7 +162,7 @@ CREATE TABLE `${prefix}tenderevaluationcriteria` (
   `idCallForTender` int(12) unsigned DEFAULT NULL,
   `criteriaName` varchar(100) DEFAULT NULL,
   `criteriaMaxValue` int(3) unsigned DEFAULT 10,
-  `criteriaCoef` int(3) unsigned DEFAULT 1,
+  `criteriaCoef` int(3) unsigned DEFAULT 1
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -174,3 +178,13 @@ CREATE TABLE `${prefix}tenderevaluation` (
 
 CREATE INDEX tenderevaluationTenderEvaluationCriteria ON `${prefix}tenderevaluation` (idTenderEvaluationCriteria);
 CREATE INDEX tenderevaluationTender ON `${prefix}tenderevaluation` (idTender);
+
+INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idle`, `idWorkflow`, `mandatoryDescription`, `mandatoryResultOnDone`, `mandatoryResourceOnHandled`, `lockHandled`, `lockDone`, `lockIdle`, `code`) VALUES 
+('CallForTender', 'by mutual agreement', '10', '0', '1', '0', '0', '0', '0', '0', '0', ''),
+('CallForTender', 'adapted procedure', '20', '0', '1', '0', '0', '0', '0', '0', '0', ''),
+('CallForTender', 'open call for tender', '30', '0', '1', '0', '0', '0', '0', '0', '0', ''),
+('CallForTender', 'restricted call for tender', '40', '0', '1', '0', '0', '0', '0', '0', '0', '');
+INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idle`, `idWorkflow`, `mandatoryDescription`, `mandatoryResultOnDone`, `mandatoryResourceOnHandled`, `lockHandled`, `lockDone`, `lockIdle`, `code`) VALUES 
+('Tender', 'out of date answer', '10', '0', '1', '0', '0', '0', '0', '0', '0', ''),
+('Tender', 'incomplete file', '20', '0', '1', '0', '0', '0', '0', '0', '0', ''),
+('Tender', 'admissible tender', '30', '0', '1', '0', '0', '0', '0', '0', '0', '');

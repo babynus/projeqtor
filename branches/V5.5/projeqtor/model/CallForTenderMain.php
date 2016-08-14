@@ -35,41 +35,47 @@ class CallForTenderMain extends SqlElement {
   public $id;    // redefine $id to specify its visible place
   public $reference; 
   public $name;
-  public $idProjectExpenseType;
+  public $idCallForTenderType;
   public $idProject;
   public $idUser;
-  public $idProvider;
-  public $externalReference;
-  public $idResource;
-  public $idResponsible;
-  public $paymentCondition;
-  public $description;
-  public $_sec_treatment;
-  public $idStatus;  
-  public $sendDate;
-  public $idDeliveryMode;
-  public $deliveryDelay;
+  public $creationDate;
+  public $maxAmount;
   public $deliveryDate;
-  public $receptionDate;
+  public $description;
+  public $businessRequirements;
+  public $technicalRequirements;
+  public $otherRequirements;
+  
+  public $_sec_treatment;
+  public $idStatus;
+  public $idResource;
+  public $sendDate;
+  public $expectedTenderDate;
+  public $handled;
+  public $handledDate;
+  public $done;
+  public $doneDate;
   public $idle;
+  public $idleDate;
   public $cancelled;
   public $_lib_cancelled;
-  public $_tab_5_2_smallLabel = array('untaxedAmountShort', 'tax', '', 'fullAmountShort','paymentDateShort', 'planned', 'real');
-  public $plannedAmount;
-  public $taxPct;
-  public $plannedTaxAmount;
-  public $plannedFullAmount;
-  public $expensePlannedDate;
-  public $realAmount;
-  public $_void_1;
-  public $realTaxAmount;
-  public $realFullAmount;
-  public $expenseRealDate;
-  public $paymentDone;
   public $result;
-  public $_sec_ExpenseDetail;
-  public $_ExpenseDetail=array();
-  public $_expenseDetail_colSpan="2";
+  
+  public $_sec_productComponent;
+  public $idProduct;
+  public $idComponent;
+  public $idProductVersion;
+  public $idComponentVersion;
+  
+  public $_sec_evaluationCriteria;
+  public $_spe_evaluationCriteria;
+  public $evaluationMaxValue;
+  public $fixValue;
+  public $_lib_colFixValue;
+  
+  public $_sec_submissions;
+
+  
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
@@ -80,45 +86,33 @@ class CallForTenderMain extends SqlElement {
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
     <th field="nameProject" width="15%" >${idProject}</th>
-    <th field="nameProjectExpenseType" width="15%" >${type}</th>
+    <th field="nameCallForTenderType" width="15%" >${type}</th>
     <th field="name" width="50%" >${name}</th>
     <th field="colorNameStatus" width="10%" formatter="colorNameFormatter">${idStatus}</th>
     <th field="idle" width="5%" formatter="booleanFormatter" >${idle}</th>
     ';
 
   private static $_fieldsAttributes=array("id"=>"nobr", "reference"=>"readonly",
-                                  "idProject"=>"required",
+                                  "idProject"=>"",
                                   "name"=>"required",
-                                  "idProjectExpenseType"=>"required",
-                                  "expensePlannedDate"=>"",
-                                  "plannedAmount"=>"",
+                                  "idCallForTenderType"=>"required",
                                   "idStatus"=>"required",
-  								                "idUser"=>"hidden",              
-                                  "day"=>"hidden",
-                                  "week"=>"hidden",
-                                  "month"=>"hidden",
-                                  "year"=>"hidden",
+  								                "idUser"=>"",      
+                                  "handled"=>"nobr",
+                                  "done"=>"nobr",
                                   "idle"=>"nobr",
+                                  "idleDate"=>"nobr",
                                   "cancelled"=>"nobr",
-                                  "plannedTaxAmount"=>"calculated,readonly",
-                                  "realTaxAmount"=>"calculated,readonly"
+                                  "evaluationMaxValue"=>"nobr",
+                                  "fixValue"=>"nobr"
   );  
   
-  private static $_colCaptionTransposition = array('idProjectExpenseType'=>'type',
-  'expensePlannedDate'=>'plannedDate',
-  'expenseRealDate'=>'realDate',
-  'idResource'=>'businessResponsible',
-  'idResponsible'=>'financialResponsible',
-  'sendDate'=>'orderDate'
+  private static $_colCaptionTransposition = array('idUser'=>'issuer',
+      'idCallForTenderType'=>'type', 
+      'idResource'=>'responsible'
   );
   
-  //private static $_databaseColumnName = array('idResource'=>'idUser');
-  private static $_databaseColumnName = array("idProjectExpenseType"=>"idExpenseType",
-  );
-
-  private static $_databaseCriteria = array('scope'=>'ProjectExpense');
-
-  private static $_databaseTableName = 'expense';
+  private static $_databaseColumnName = array();
   
    /** ==========================================================================
    * Constructor
@@ -127,15 +121,10 @@ class CallForTenderMain extends SqlElement {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
-    if (count($this->getExpenseDetail())>0) {
-      self::$_fieldsAttributes['realAmount']="readonly";
-      self::$_fieldsAttributes['realFullAmount']="readonly";
-    }
-    if ($this->realFullAmount>0) {
-      $this->realTaxAmount=$this->realFullAmount-$this->realAmount;
-    }
-    if ($this->plannedFullAmount>0) {
-      $this->plannedTaxAmount=$this->plannedFullAmount-$this->plannedAmount;
+    if ($this->fixValue) {
+      self::$_fieldsAttributes['evaluationMaxValue']='nobr';
+    } else {
+      self::$_fieldsAttributes['evaluationMaxValue']='nobr,readonly';
     }
   }
 
@@ -175,15 +164,6 @@ class CallForTenderMain extends SqlElement {
   protected function getStaticColCaptionTransposition($fld=null) {
     return self::$_colCaptionTransposition;
   }
-
-  /** ========================================================================
-   * Return the specific databaseTableName
-   * @return the databaseTableName
-   */
-  protected function getStaticDatabaseTableName() {
-    $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
-    return $paramDbPrefix . self::$_databaseTableName;
-  }
   
   /** ========================================================================
    * Return the specific databaseTableName
@@ -192,14 +172,6 @@ class CallForTenderMain extends SqlElement {
   protected function getStaticDatabaseColumnName() {
     return self::$_databaseColumnName;
   }
-
-  /** ========================================================================
-   * Return the specific database criteria
-   * @return the databaseTableName
-   */
-  protected function getStaticDatabaseCriteria() {
-    return self::$_databaseCriteria; 
-  }
   
   /**=========================================================================
    * Overrides SqlElement::save() function to add specific treatments
@@ -207,8 +179,6 @@ class CallForTenderMain extends SqlElement {
    * @return the return message of persistence/SqlElement#save() method
    */
   public function save() {
-    $this->realFullAmount=$this->realAmount*(1+$this->taxPct/100);
-    $this->plannedFullAmount=$this->plannedAmount*(1+$this->taxPct/100);
     return parent::save(); 
   }
 
@@ -222,23 +192,70 @@ class CallForTenderMain extends SqlElement {
    */
   public function getValidationScript($colName) {
     $colScript = parent::getValidationScript($colName);
-    if ($colName=="expenseRealDate") {
-      //$colScript .= '<script type="dojo/connect" event="onChange" >';
-      //$colScript .= '  if (this.value) {';
-      //$colScript .= '    dijit.byId("paymentDone").set("checked",true);';
-      //$colScript .= '  }';
-      //$colScript .= '  formChanged();';
-      //$colScript .= '</script>';
-    } else if ($colName=="paymentDone") {
+    if ($colName=='fixValue') {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  if (this.checked && !dijit.byId("expenseRealDate").get("value")) {';
-      $colScript .= '    var curDate = new Date();';
-      $colScript .= '    dijit.byId("expenseRealDate").set("value",curDate);';
-      $colScript .= '  }';
+      $colScript .= '  if (this.checked) { ';
+      $colScript .= '    dijit.byId("evaluationMaxValue").set("readOnly",false); ';
+      $colScript .= '  } else {';
+      $colScript .= '    dijit.byId("evaluationMaxValue").set("readOnly",true); ';
+      $colScript .= '  } ';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
     }
     return $colScript;
+  }
+  public function drawSpecificItem($item, $included=false) {
+    global $print, $comboDetail, $nbColMax;
+    $result = "";
+    if ($item == 'evaluationCriteria' and ! $comboDetail) {
+      $this->drawTenderEvaluationCriteriaFromObject();
+    }
+    return $result;
+  }
+  
+  function drawTenderEvaluationCriteriaFromObject() {
+    global $cr, $print, $outMode, $user, $comboDetail, $displayWidth, $printWidth;
+    if ($comboDetail) {
+      return;
+    }
+    $canUpdate=securityGetAccessRightYesNo('menu' . get_class($this), 'update', $this) == "YES";
+    if ($this->idle == 1) {
+      $canUpdate=false;
+    }
+    $eval=new TenderEvaluationCriteria();
+    $evalList=$eval->getSqlElementsFromCriteria(array('idCallForTender'=>$this->id));
+    echo '<table width="99.9%">';
+    echo '<tr>';
+    if (!$print) {
+      echo '<td class="noteHeader smallButtonsGroup" style="width:10%">';
+      if ($this->id != null and !$print and $canUpdate) {
+        echo '<img class="roundedButtonSmall" src="css/images/smallButtonAdd.png" onClick="addTenderEvaluationCriteria('.htmlEncode($this->id).');" title="' . i18n('addTenderEvaluationCriteria') . '" /> ';
+      }
+      echo '</td>';
+    }
+    echo '<td class="noteHeader" style="width:' . (($print)?'60':'50') . '%">' . i18n('colName') . '</td>';
+    echo '<td class="noteHeader" style="width:20%">' . i18n('colEvaluationMaxValue') . '</td>';
+    echo '<td class="noteHeader" style="width:20%">' . i18n('colCoefficient') . '</td>';
+    echo '</tr>';
+    foreach ( $evalList as $eval ) {     
+      echo '<tr>';
+      if (!$print) {
+        echo '<td class="noteData smallButtonsGroup">';
+        if (!$print and $canUpdate) {
+          echo ' <img class="roundedButtonSmall" src="css/images/smallButtonEdit.png" onClick="editTenderEvaluationCriteria(' . htmlEncode($eval->id) . ');" title="' . i18n('editTenderEvaluationCriteria') . '" /> ';
+          echo ' <img class="roundedButtonSmall" src="css/images/smallButtonRemove.png" onClick="removeTenderEvaluationCriteria(' . htmlEncode($eval->id) . ');" title="' . i18n('removeTenderEvaluationCriteria') . '" /> ';
+        }
+        echo '</td>';
+      }
+      echo '<td class="noteData">' . htmlEncode($eval->criteriaName) . '</td>';
+      echo '<td class="noteData">' . htmlEncode($eval->criteriaMaxValue) . '</td>';
+      echo '<td class="noteData">' . htmlEncode($eval->criteriaCoef) . '</td>';
+      echo '</tr>';
+    }
+    echo '<tr>';
+    echo '<td colspan="'.(($print)?'3':'4').'" class="noteDataClosetable">&nbsp;</td>';
+    echo '</tr>';
+    echo '</table>';
   }
   
 }
