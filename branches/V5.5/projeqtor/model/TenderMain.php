@@ -35,41 +35,49 @@ class TenderMain extends SqlElement {
   public $id;    // redefine $id to specify its visible place
   public $reference; 
   public $name;
-  public $idProjectExpenseType;
+  public $idTenderType;
   public $idProject;
+  public $idCallForTender;
+  public $idTenderStatus;
   public $idUser;
+  public $creationDate;
   public $idProvider;
   public $externalReference;
-  public $idResource;
-  public $idResponsible;
-  public $paymentCondition;
   public $description;
+  
   public $_sec_treatment;
   public $idStatus;  
-  public $sendDate;
-  public $idDeliveryMode;
-  public $deliveryDelay;
-  public $deliveryDate;
+  public $idResource;
+  public $idContact;
+  
+  public $_tab_3_1 = array('requested', 'expected', 'received','dates');
+  public $requestDate;
+  public $expectedTenderDate;
   public $receptionDate;
-  public $idle;
-  public $cancelled;
-  public $_lib_cancelled;
-  public $_tab_5_2_smallLabel = array('untaxedAmountShort', 'tax', '', 'fullAmountShort','paymentDateShort', 'planned', 'real');
-  public $plannedAmount;
+  public $offerValidityEndDate;
+  public $_tab_4_2 = array('untaxedAmountShort', 'tax', '', 'fullAmountShort','initial', 'negotiated');
+  public $initialAmount;
   public $taxPct;
+  public $initialTaxAmount;
+  public $initialFullAmount;
+  public $plannedAmount;
+  public $_void_1;
   public $plannedTaxAmount;
   public $plannedFullAmount;
-  public $expensePlannedDate;
-  public $realAmount;
-  public $_void_1;
-  public $realTaxAmount;
-  public $realFullAmount;
-  public $expenseRealDate;
-  public $paymentDone;
+  public $handled;
+  public $handledDate;
+  public $done;
+  public $doneDate;
+  public $idle;
+  public $idleDate;
+  public $cancelled;
+  public $_lib_cancelled;
   public $result;
-  public $_sec_ExpenseDetail;
-  public $_ExpenseDetail=array();
-  public $_expenseDetail_colSpan="2";
+  
+  public $_sec_evaluation;
+  public $evaluationValue;
+  public $evaluationRank;
+  
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
@@ -79,9 +87,12 @@ class TenderMain extends SqlElement {
   // Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
-    <th field="nameProject" width="15%" >${idProject}</th>
-    <th field="nameProjectExpenseType" width="15%" >${type}</th>
-    <th field="name" width="50%" >${name}</th>
+    <th field="nameProject" width="10%" >${idProject}</th>
+    <th field="nameTenderType" width="10%" >${type}</th>
+    <th field="name" width="30%" >${name}</th>
+    <th field="colorNameTenderStatus" width="10%" formatter="colorNameFormatter">${idTenderStatus}</th>
+    <th field="evaluationValue" width="10%" >${evaluationValue}</th>
+    <th field="plannedAmount" width="10%" formatter="amountFormatter">${plannedAmount}</th>
     <th field="colorNameStatus" width="10%" formatter="colorNameFormatter">${idStatus}</th>
     <th field="idle" width="5%" formatter="booleanFormatter" >${idle}</th>
     ';
@@ -89,36 +100,21 @@ class TenderMain extends SqlElement {
   private static $_fieldsAttributes=array("id"=>"nobr", "reference"=>"readonly",
                                   "idProject"=>"required",
                                   "name"=>"required",
-                                  "idProjectExpenseType"=>"required",
-                                  "expensePlannedDate"=>"",
-                                  "plannedAmount"=>"",
-                                  "idStatus"=>"required",
-  								                "idUser"=>"hidden",              
-                                  "day"=>"hidden",
-                                  "week"=>"hidden",
-                                  "month"=>"hidden",
-                                  "year"=>"hidden",
+                                  "idTenderType"=>"required",
+                                  "handled"=>"nobr",
+                                  "done"=>"nobr",
                                   "idle"=>"nobr",
+                                  "idleDate"=>"nobr",
                                   "cancelled"=>"nobr",
                                   "plannedTaxAmount"=>"calculated,readonly",
-                                  "realTaxAmount"=>"calculated,readonly"
+                                  "initialTaxAmount"=>"calculated,readonly",
+      "idStatus"=>"required",
+      "idTenderStatus"=>"required"
   );  
   
-  private static $_colCaptionTransposition = array('idProjectExpenseType'=>'type',
-  'expensePlannedDate'=>'plannedDate',
-  'expenseRealDate'=>'realDate',
-  'idResource'=>'businessResponsible',
-  'idResponsible'=>'financialResponsible',
-  'sendDate'=>'orderDate'
-  );
+  private static $_colCaptionTransposition = array('idTenderType'=>'type' );
   
-  //private static $_databaseColumnName = array('idResource'=>'idUser');
-  private static $_databaseColumnName = array("idProjectExpenseType"=>"idExpenseType",
-  );
-
-  private static $_databaseCriteria = array('scope'=>'ProjectExpense');
-
-  private static $_databaseTableName = 'expense';
+  private static $_databaseColumnName = array();
   
    /** ==========================================================================
    * Constructor
@@ -127,15 +123,12 @@ class TenderMain extends SqlElement {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
-    if (count($this->getExpenseDetail())>0) {
-      self::$_fieldsAttributes['realAmount']="readonly";
-      self::$_fieldsAttributes['realFullAmount']="readonly";
-    }
-    if ($this->realFullAmount>0) {
-      $this->realTaxAmount=$this->realFullAmount-$this->realAmount;
-    }
-    if ($this->plannedFullAmount>0) {
-      $this->plannedTaxAmount=$this->plannedFullAmount-$this->plannedAmount;
+    if ($this->idCallForTender and $this->idProvider) {
+      self::$_fieldsAttributes['name']='readonly';
+      self::$_fieldsAttributes['idTenderStatus']='required';
+    } else {
+      self::$_fieldsAttributes['name']='required';
+      self::$_fieldsAttributes['idTenderStatus']='';
     }
   }
 
@@ -175,15 +168,6 @@ class TenderMain extends SqlElement {
   protected function getStaticColCaptionTransposition($fld=null) {
     return self::$_colCaptionTransposition;
   }
-
-  /** ========================================================================
-   * Return the specific databaseTableName
-   * @return the databaseTableName
-   */
-  protected function getStaticDatabaseTableName() {
-    $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
-    return $paramDbPrefix . self::$_databaseTableName;
-  }
   
   /** ========================================================================
    * Return the specific databaseTableName
@@ -193,13 +177,6 @@ class TenderMain extends SqlElement {
     return self::$_databaseColumnName;
   }
 
-  /** ========================================================================
-   * Return the specific database criteria
-   * @return the databaseTableName
-   */
-  protected function getStaticDatabaseCriteria() {
-    return self::$_databaseCriteria; 
-  }
   
   /**=========================================================================
    * Overrides SqlElement::save() function to add specific treatments
@@ -207,9 +184,25 @@ class TenderMain extends SqlElement {
    * @return the return message of persistence/SqlElement#save() method
    */
   public function save() {
-    $this->realFullAmount=$this->realAmount*(1+$this->taxPct/100);
-    $this->plannedFullAmount=$this->plannedAmount*(1+$this->taxPct/100);
+    
+    if ($this->idCallForTender and $this->idProvider) {
+      $this->name=SqlList::getNameFromId('CallForTender', $this->idCallForTender).' - '.SqlList::getNameFromId('Provider', $this->idProvider);
+    }
     return parent::save(); 
+  }
+  
+  public function control(){
+    $result="";
+    // Check dupplicate CallForTender / Provider
+    
+    $defaultControl=parent::control();
+    if ($defaultControl!='OK') {
+      $result.=$defaultControl;
+    }
+    if ($result=="") {
+      $result='OK';
+    }
+    return $result;
   }
 
   // ============================================================================**********
@@ -222,18 +215,20 @@ class TenderMain extends SqlElement {
    */
   public function getValidationScript($colName) {
     $colScript = parent::getValidationScript($colName);
-    if ($colName=="expenseRealDate") {
-      //$colScript .= '<script type="dojo/connect" event="onChange" >';
-      //$colScript .= '  if (this.value) {';
-      //$colScript .= '    dijit.byId("paymentDone").set("checked",true);';
-      //$colScript .= '  }';
-      //$colScript .= '  formChanged();';
-      //$colScript .= '</script>';
-    } else if ($colName=="paymentDone") {
+    if ($colName=="idProvider" or $colName=="idCallForTender") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  if (this.checked && !dijit.byId("expenseRealDate").get("value")) {';
-      $colScript .= '    var curDate = new Date();';
-      $colScript .= '    dijit.byId("expenseRealDate").set("value",curDate);';
+      $colScript .= '  if (trim(dijit.byId("idCallForTender").get("value")) && trim(dijit.byId("idProvider").get("value"))) {';
+      $colScript .= '    dojo.removeClass(dijit.byId("name").domNode, "required");';
+      $colScript .= '    dijit.byId("name").set("required",false);';
+      $colScript .= '    dijit.byId("name").set("readonly",true);';
+      $colScript .= '    dojo.addClass(dijit.byId("idTenderStatus").domNode, "required");';
+      $colScript .= '    dijit.byId("idTenderStatus").set("required",true);';
+      $colScript .= '  } else {';
+      $colScript .= '    dojo.addClass(dijit.byId("name").domNode, "required");';
+      $colScript .= '    dijit.byId("name").set("required",true);';
+      $colScript .= '    dijit.byId("name").set("readonly",false);';
+      $colScript .= '    dojo.removeClass(dijit.byId("idTenderStatus").domNode, "required");';
+      $colScript .= '    dijit.byId("idTenderStatus").set("required",false);';
       $colScript .= '  }';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';

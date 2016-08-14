@@ -179,6 +179,7 @@ class CallForTenderMain extends SqlElement {
    * @return the return message of persistence/SqlElement#save() method
    */
   public function save() {
+    $this->updateEvaluationMaxValue();
     return parent::save(); 
   }
 
@@ -258,5 +259,17 @@ class CallForTenderMain extends SqlElement {
     echo '</table>';
   }
   
+  public function updateEvaluationMaxValue($withSave=false) {
+    if (!$this->fixValue) {
+      $crit=new TenderEvaluationCriteria();
+      $list=$crit->getSqlElementsFromCriteria(array('idCallForTender'=>$this->id));
+      $sum=0;
+      foreach ($list as $crit) {
+        $sum+=($crit->criteriaMaxValue*$crit->criteriaCoef);
+      }
+      $this->evaluationMaxValue=$sum;
+      if ($withSave) $this->save();
+    }
+  }
 }
 ?>

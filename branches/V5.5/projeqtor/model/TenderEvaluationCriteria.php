@@ -66,15 +66,7 @@ class TenderEvaluationCriteria extends SqlElement {
   }
   function updateCallForTender() {
     $cft=new CallForTender($this->idCallForTender);
-    if (!$cft->fixValue) {
-      $list=$this->getSqlElementsFromCriteria(array('idCallForTender'=>$this->idCallForTender));
-      $sum=0;
-      foreach ($list as $crit) {
-        $sum+=($crit->criteriaMaxValue*$crit->criteriaCoef);
-      }
-      $cft->evaluationMaxValue=$sum;
-      $cft->save();
-    }
+    $cft->updateEvaluationMaxValue(true);
   }
   
     
