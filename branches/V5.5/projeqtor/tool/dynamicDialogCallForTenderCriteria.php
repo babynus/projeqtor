@@ -80,6 +80,7 @@ if ($mode=='add') {
 							<td>
 							  <div dojoType="dijit.form.NumberTextBox" 
       	          id="dialogTenderCriteriaMaxValue" name="dialogTenderCriteriaMaxValue" 
+      	          constraints="{min:1,max:999}"
       	          style="width: 100px;" class="input" required="true"
       	          value="<?php echo $criteria->criteriaMaxValue;?>">
 						  </td>
@@ -90,6 +91,7 @@ if ($mode=='add') {
 							<td>
 							  <div dojoType="dijit.form.NumberTextBox" 
       	          id="dialogTenderCriteriaCoef" name="dialogTenderCriteriaCoef" 
+      	          constraints="{min:1,max:999}"
       	          style="width: 100px;" class="input" required="true"
       	          value="<?php echo $criteria->criteriaCoef;?>">
 						  </td>
