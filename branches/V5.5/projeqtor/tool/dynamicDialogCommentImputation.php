@@ -143,7 +143,6 @@ if(trim($commentImputation)==''){
   $assignment->comment=$finalComment."\n\n".$assignment->comment;
   $assignment->save();
   if($commentImputationNote){
-    debugLog("startNote");
     $note = new Note();
     $note->idUser=getSessionUser()->id;
     $note->creationDate=date("Y-m-d H:i:s");
@@ -151,8 +150,6 @@ if(trim($commentImputation)==''){
     $note->refType=$refType;
     $note->note=$finalComment;
     $note->idPrivacy=1;
-    debugLog($note->save());
-    debugLog("finishNote");
   }
   echo $finalComment;
 }
