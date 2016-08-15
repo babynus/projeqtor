@@ -49,8 +49,8 @@ class CallForTenderMain extends SqlElement {
   public $_sec_treatment;
   public $idStatus;
   public $idResource;
-  public $sendDate;
-  public $expectedTenderDate;
+  public $sendDateTime;
+  public $expectedTenderDateTime;
   public $handled;
   public $handledDate;
   public $done;
@@ -67,14 +67,14 @@ class CallForTenderMain extends SqlElement {
   public $idProductVersion;
   public $idComponentVersion;
   
+  public $_sec_submissions;
+  public $_spe_submissions;
+  
   public $_sec_evaluationCriteria;
   public $_spe_evaluationCriteria;
   public $evaluationMaxValue;
   public $fixValue;
   public $_lib_colFixValue;
-  
-  public $_sec_submissions;
-
   
   public $_sec_Link;
   public $_Link=array();
@@ -109,7 +109,9 @@ class CallForTenderMain extends SqlElement {
   
   private static $_colCaptionTransposition = array('idUser'=>'issuer',
       'idCallForTenderType'=>'type', 
-      'idResource'=>'responsible'
+      'idResource'=>'responsible',
+      'sendDateTime'=>'sendDate',
+      'expectedTenderDateTime'=>'expectedTenderDate',
   );
   
   private static $_databaseColumnName = array();
@@ -179,8 +181,23 @@ class CallForTenderMain extends SqlElement {
    * @return the return message of persistence/SqlElement#save() method
    */
   public function save() {
+    $old=$this->getOld();
     $this->updateEvaluationMaxValue();
-    return parent::save(); 
+    $result = parent::save();
+    if ($this->sendDateTime!=$old->sendDateTime 
+     or $this->expectedTenderDateTime!=$old->expectedTenderDateTime
+     or $this->idProject!=$old->idProject
+     or $this->idCallForTenderType!=$old->idCallForTenderType) {
+      $tender=new Tender();
+      $listTender=$tender->getSqlElementsFromCriteria(array('idCallForTender'=>$this->id));
+      foreach ($listTender as $tender) {
+        if ($this->sendDateTime!=$old->sendDateTime and $tender->requestDateTime==$old->sendDateTime) $tender->requestDateTime=$this->sendDateTime;
+        if ($this->expectedTenderDateTime!=$old->expectedTenderDateTime and $tender->expectedTenderDateTime<=$this->expectedTenderDateTime) $tender->expectedTenderDateTime=$this->expectedTenderDateTime;
+        // idProject and idTenderType will be updated in Tender::save()
+        $tender->save();
+      }
+    }
+    return $result;
   }
 
   // ============================================================================**********
@@ -211,6 +228,9 @@ class CallForTenderMain extends SqlElement {
     if ($item == 'evaluationCriteria' and ! $comboDetail) {
       $this->drawTenderEvaluationCriteriaFromObject();
     }
+    if ($item == 'submissions' and ! $comboDetail) {
+      $this->drawTenderSubmissionsFromObject();
+    }
     return $result;
   }
   
@@ -238,6 +258,7 @@ class CallForTenderMain extends SqlElement {
     echo '<td class="noteHeader" style="width:20%">' . i18n('colEvaluationMaxValue') . '</td>';
     echo '<td class="noteHeader" style="width:20%">' . i18n('colCoefficient') . '</td>';
     echo '</tr>';
+    $sum=0;
     foreach ( $evalList as $eval ) {     
       echo '<tr>';
       if (!$print) {
@@ -249,16 +270,75 @@ class CallForTenderMain extends SqlElement {
         echo '</td>';
       }
       echo '<td class="noteData">' . htmlEncode($eval->criteriaName) . '</td>';
-      echo '<td class="noteData">' . htmlEncode($eval->criteriaMaxValue) . '</td>';
-      echo '<td class="noteData">' . htmlEncode($eval->criteriaCoef) . '</td>';
+      echo '<td class="noteData" style="text-align:center">' . htmlEncode($eval->criteriaMaxValue) . '</td>';
+      echo '<td class="noteData" style="text-align:center">' . htmlEncode($eval->criteriaCoef) . '</td>';
+      $sum+=$eval->criteriaMaxValue*$eval->criteriaCoef;
       echo '</tr>';
     }
+    echo '<tr>';
+    echo '<td class="noteData" style="text-align:right" colspan="'.(($print)?'2':'3').'">' .i18n('colCountTotal') . '&nbsp;:&nbsp;</td>';
+    echo '<td class="noteData" style="text-align:center">' . htmlEncode($sum) . '</td>';
+    echo '</tr>';
     echo '<tr>';
     echo '<td colspan="'.(($print)?'3':'4').'" class="noteDataClosetable">&nbsp;</td>';
     echo '</tr>';
     echo '</table>';
   }
   
+  function drawTenderSubmissionsFromObject() {
+    global $cr, $print, $outMode, $user, $comboDetail, $displayWidth, $printWidth;
+    if ($comboDetail) {
+      return;
+    }
+    $canUpdate=securityGetAccessRightYesNo('menu' . get_class($this), 'update', $this) == "YES";
+    if ($this->idle == 1) {
+      $canUpdate=false;
+    }
+    $tender=new Tender();
+    $tenderList=$tender->getSqlElementsFromCriteria(array('idCallForTender'=>$this->id),false,null, 'evaluationValue desc, id asc');
+    echo '<table width="99.9%">';
+    echo '<tr>';
+    if (!$print) {
+      echo '<td class="noteHeader smallButtonsGroup" style="width:10%">';
+      if ($this->id != null and !$print and $canUpdate) {
+        echo '<img class="roundedButtonSmall" src="css/images/smallButtonAdd.png" onClick="addTenderSubmission('.htmlEncode($this->id).');" title="' . i18n('addTenderSubmission') . '" /> ';
+      }
+      echo '</td>';
+    }
+    echo '<td class="noteHeader" style="width:' . (($print)?'40':'30') . '%">' . i18n('colIdProvider') . '</td>';
+    echo '<td class="noteHeader" style="width:15%">' . i18n('colRequested') . '</td>';
+    echo '<td class="noteHeader" style="width:15%">' . i18n('colExpected') . '</td>';
+    echo '<td class="noteHeader" style="width:15%">' . i18n('colReceived') . '</td>';
+    echo '<td class="noteHeader" style="width:15%">' . i18n('evaluationValueAndAmount') . '</td>';
+    echo '</tr>';
+    $sum=0;
+    foreach ( $tenderList as $tender ) {
+      echo '<tr>';
+      if (!$print) {
+        echo '<td class="noteData smallButtonsGroup">';
+        if (!$print and $canUpdate) {
+          echo ' <img class="roundedButtonSmall" src="css/images/smallButtonEdit.png" onClick="editTenderSubmission(' . htmlEncode($tender->id) . ');" title="' . i18n('editTenderSubmission') . '" /> ';
+          echo ' <img class="roundedButtonSmall" src="css/images/smallButtonRemove.png" onClick="removeTenderSubmission(' . htmlEncode($tender->id) . ');" title="' . i18n('removeTenderSubmission') . '" /> ';
+        }
+        echo '</td>';
+      }
+      $tenderStatus=new TenderStatus($tender->idTenderStatus);
+      echo '<td class="noteData" style="cursor:pointer" onClick="gotoElement(\'Tender\','.htmlEncode($tender->id).');">' . htmlEncode(SqlList::getNameFromId('Provider',$tender->idProvider)) 
+        . formatColorThumb('idTenderStatus',$tenderStatus->color, 20, 'right',htmlEncode($tenderStatus->name,'protectQuotes'))
+        . '</td>';
+      echo '<td class="noteData" style="text-align:center">' . htmlFormatDate($tender->requestDateTime) . '</td>';
+      echo '<td class="noteData" style="text-align:center">' . htmlFormatDate($tender->expectedTenderDateTime) . '</td>';
+      echo '<td class="noteData" style="text-align:center">' . htmlFormatDate($tender->receptionDateTime) . '</td>';
+      echo '<td class="noteData" style="text-align:center">' . (($tender->evaluationValue===null)?'':htmlDisplayNumericWithoutTrailingZeros($tender->evaluationValue)) 
+        . '<br/><span style="white-space:nowrap;font-size:90%;color:#555555"><i>'.htmlDisplayCurrency(($tender->plannedAmount)?$tender->plannedAmount:$tender->initialAmount,true).'</i></span>' 
+        . '</td>';
+      echo '</tr>';
+    }
+    echo '<tr>';
+    echo '<td colspan="'.(($print)?'5':'6').'" class="noteDataClosetable">&nbsp;</td>';
+    echo '</tr>';
+    echo '</table>';
+  }
   public function updateEvaluationMaxValue($withSave=false) {
     if (!$this->fixValue) {
       $crit=new TenderEvaluationCriteria();
