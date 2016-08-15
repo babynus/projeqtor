@@ -28,13 +28,13 @@
  * Note is an object that can be included in all objects, as comments.
  */ 
 require_once('_securityCheck.php');
-class TenderEvaluationCriteria extends SqlElement {
+class TenderEvaluation extends SqlElement {
 
   public $id;
-  public $idCallForTender;
-  public $criteriaName;
-  public $criteriaMaxValue;
-  public $criteriaCoef;
+  public $idTenderEvaluationCriteria;
+  public $idTender;
+  public $evaluationValue;
+  //public $comment;
     
   /** ==========================================================================
    * Constructor
@@ -44,7 +44,6 @@ class TenderEvaluationCriteria extends SqlElement {
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
   }
-  
   
   /** ==========================================================================
    * Destructor
@@ -56,31 +55,11 @@ class TenderEvaluationCriteria extends SqlElement {
 
   function save() {
     $result=parent::save();
-    $this->updateCallForTender();
-    $this->updateTenders();
     return $result;
   }
   function delete() {
     $result=parent::delete();
-    $this->updateCallForTender();
-    $this->removeEvaluations();
-    $this->updateTenders();
     return $result;
-  }
-  function updateCallForTender() {
-    $cft=new CallForTender($this->idCallForTender);
-    $cft->updateEvaluationMaxValue(true);
-  }
-  function removeEvaluations() {
-    $te=new TenderEvaluation();
-    $te->purge('idTenderEvaluationCriteria='.Sql::fmtId($this->id));
-  }
-  function updateTenders() {
-    $tender=new Tender();
-    $list=$tender->getSqlElementsFromCriteria(array('idCallForTender'=>$this->idCallForTender));
-    foreach($list as $tender) {
-      $tender->save();
-    }
   }
     
 }

@@ -78,9 +78,9 @@ CREATE TABLE `${prefix}tender` (
   `idStatus` int(12) unsigned DEFAULT NULL,
   `idResource` int(12) unsigned DEFAULT NULL,
   `idContact` int(12) unsigned DEFAULT NULL,
-  `requestDate` date DEFAULT NULL,
-  `expectedTenderDate` date DEFAULT NULL,
-  `receptionDate` date DEFAULT NULL,
+  `requestDateTime` datetime DEFAULT NULL,
+  `expectedTenderDateTime` datetime DEFAULT NULL,
+  `receptionDateTime` datetime DEFAULT NULL,
   `evaluationValue` decimal(7,2) DEFAULT NULL,
   `evaluationRank` int(3) DEFAULT NULL,
   `offerValidityEndDate` date DEFAULT NULL,
@@ -124,8 +124,8 @@ CREATE TABLE `${prefix}callfortender` (
   `creationDate` datetime DEFAULT NULL,
   `idStatus` int(12) unsigned DEFAULT NULL,
   `idResource` int(12) unsigned DEFAULT NULL,
-  `sendDate` date DEFAULT NULL,
-  `expectedTenderDate` date DEFAULT NULL,
+  `sendDateTime` datetime DEFAULT NULL,
+  `expectedTenderDateTime` datetime DEFAULT NULL,
   `maxAmount` decimal(11,2) UNSIGNED,
   `deliveryDate` date DEFAULT NULL,
   `evaluationMaxValue` decimal(7,2) DEFAULT NULL,
@@ -166,6 +166,7 @@ CREATE TABLE `${prefix}tenderevaluation` (
   `idTenderEvaluationCriteria` int(12) unsigned DEFAULT NULL,
   `idTender` int(12) unsigned DEFAULT NULL,
   `evaluationValue` decimal(5,2) DEFAULT NULL,
+  `comment` varchar(4000) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -205,3 +206,5 @@ INSERT INTO `${prefix}tenderstatus` (`name`, `color`, `sortOrder`, `idle`, `isWa
 ('short list',            '#4169e1', '60', '0', '0', '1', '0', '0'),
 ('not selected',          '#c0c0c0', '70', '0', '0', '1', '1', '0'),
 ('selected',              '#98fb98', '80', '0', '0', '1', '0', '1');
+
+ALTER TABLE `${prefix}resource` ADD `idProvider` int(12) unsigned DEFAULT NULL;
