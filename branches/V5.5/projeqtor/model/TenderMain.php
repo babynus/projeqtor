@@ -50,10 +50,9 @@ class TenderMain extends SqlElement {
   public $idResource;
   public $idContact;
   
-  public $_tab_3_1 = array('requested', 'expected', 'received','dates');
-  public $requestDate;
-  public $expectedTenderDate;
-  public $receptionDate;
+  public $requestDateTime;
+  public $expectedTenderDateTime;
+  public $receptionDateTime;
   public $offerValidityEndDate;
   public $_tab_4_2 = array('untaxedAmountShort', 'tax', '', 'fullAmountShort','initial', 'negotiated');
   public $initialAmount;
@@ -75,6 +74,7 @@ class TenderMain extends SqlElement {
   public $result;
   
   public $_sec_evaluation;
+  public $_spe_evaluation;
   public $evaluationValue;
   public $evaluationRank;
   
@@ -98,7 +98,7 @@ class TenderMain extends SqlElement {
     ';
 
   private static $_fieldsAttributes=array("id"=>"nobr", "reference"=>"readonly",
-                                  "idProject"=>"required",
+                                  "idProject"=>"",
                                   "name"=>"required",
                                   "idTenderType"=>"required",
                                   "handled"=>"nobr",
@@ -109,10 +109,13 @@ class TenderMain extends SqlElement {
                                   "plannedTaxAmount"=>"calculated,readonly",
                                   "initialTaxAmount"=>"calculated,readonly",
       "idStatus"=>"required",
-      "idTenderStatus"=>"required"
+      "idTenderStatus"=>"required",
+      "evaluationValue"=>"readonly",
+      "evaluationRank"=>"hidden,readonly",
+      "idProvider"=>"required"
   );  
   
-  private static $_colCaptionTransposition = array('idTenderType'=>'type' );
+  private static $_colCaptionTransposition = array('idTenderType'=>'type', 'requestDateTime'=>'requestDate', 'expectedTenderDateTime'=>'expectedTenderDate' );
   
   private static $_databaseColumnName = array();
   
@@ -129,6 +132,10 @@ class TenderMain extends SqlElement {
     } else {
       self::$_fieldsAttributes['name']='required';
       self::$_fieldsAttributes['idTenderStatus']='';
+    }
+    if (! $this->idCallForTender) {
+      self::$_fieldsAttributes['evaluationValue']='hidden';
+      self::$_fieldsAttributes['evaluationRank']='hidden';
     }
   }
 
@@ -188,13 +195,72 @@ class TenderMain extends SqlElement {
     if ($this->idCallForTender and $this->idProvider) {
       $this->name=SqlList::getNameFromId('CallForTender', $this->idCallForTender).' - '.SqlList::getNameFromId('Provider', $this->idProvider);
     }
-    return parent::save(); 
+    $cft=new CallForTender($this->idCallForTender);
+    // Save data from Call For Tender
+    if ($this->idCallForTender) {
+      // Project
+      $this->idProject=$cft->idProject;
+      // Type
+      $cftTypeName=SqlList::getNameFromId('CallForTenderType', $cft->idCallForTenderType);
+      $list=SqlList::getList('TenderType');
+      foreach ($list as $tenderTypeId=>$tenderTypeName) {
+        if ($this->idTenderType==null) $this->idTenderType=$tenderTypeId;
+        if ($tenderTypeName==$cftTypeName) $this->idTenderType=$tenderTypeId;
+      }
+    }
+    // Status : set defaut or move with TenderStatus (with same name)
+    $tenderStatusName=SqlList::getNameFromId('TenderStatus', $this->idTenderStatus);
+    $list=SqlList::getList('Status');
+    foreach ($list as $statusId=>$statusName) {
+      if ($this->idStatus==null) $this->idStatus=$statusId;
+      if ($statusName==$tenderStatusName) $this->idStatus=$statusId;
+    }
+    // Save evaluation
+    $eval=new TenderEvaluationCriteria();
+    $evalList=$eval->getSqlElementsFromCriteria(array('idCallForTender'=>$this->idCallForTender));
+    $sum=null;
+    $this->evaluationValue=null;
+    $sumMax=0;
+    $resultEval=""; $resultEvalId="##";
+    foreach ( $evalList as $eval ) {
+      $tenderEval=SqlElement::getSingleSqlElementFromCriteria('TenderEvaluation', array('idTender'=>$this->id,'idTenderEvaluationCriteria'=>$eval->id));
+      $tenderEval->idTenderEvaluationCriteria=$eval->id;
+      $tenderEval->idTender=$this->id;
+      $value=$tenderEval->evaluationValue;
+      if (isset($_REQUEST['tenderEvaluation_'.$eval->id])) {
+        $value=$_REQUEST['tenderEvaluation_'.$eval->id];
+      }
+      $tenderEval->evaluationValue=$value;
+      if ($tenderEval->evaluationValue!=null) $sum+=$tenderEval->evaluationValue*$eval->criteriaCoef;
+      $sumMax+=$eval->criteriaMaxValue*$eval->criteriaCoef;
+      $resultEvalTemp=$tenderEval->save();
+      if (getLastOperationStatus($resultEvalTemp)=="OK") {
+        $resultEval=$resultEvalTemp;
+        $resultEvalId=$tenderEval->id;
+      }
+    }
+    if ($cft->fixValue and $sum!=null and $sumMax!=0) {
+      $this->evaluationValue=round($cft->evaluationMaxValue*$sum/$sumMax,2);
+    } else {
+      $this->evaluationValue=$sum;
+    }
+    $result=parent::save();
+    if (getLastOperationStatus($result)=='NO_CHANGE' and getLastOperationStatus($resultEval)=="OK") {
+      return str_replace(array(getLastOperationMessage($result),'NO_CHANGE','#'.$resultEvalId),array(getLastOperationMessage($resultEval),"OK",'#'.$this->id),$result);
+    }
+    return $result;
   }
   
   public function control(){
     $result="";
     // Check dupplicate CallForTender / Provider
-    
+    if ($this->idCallForTender and $this->idProvider) {
+      $duplicate=SqlElement::getSingleSqlElementFromCriteria('Tender', array('idCallForTender'=>$this->idCallForTender,'idProvider'=>$this->idProvider));
+      if ($duplicate->id and $duplicate->id!=$this->id) {
+        $result.='<br/>' . i18n('errorDuplicateTender');
+      }
+    }
+        
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
       $result.=$defaultControl;
@@ -234,6 +300,80 @@ class TenderMain extends SqlElement {
       $colScript .= '</script>';
     }
     return $colScript;
+  }
+  
+  public function drawSpecificItem($item, $included=false) {
+    global $print, $comboDetail, $nbColMax;
+    $result = "";
+    if ($item == 'evaluation' and ! $comboDetail) {
+      $this->drawTenderEvaluationFromObject();
+    }
+    return $result;
+  }
+  
+  function drawTenderEvaluationFromObject() {
+    global $cr, $print, $outMode, $user, $comboDetail, $displayWidth, $printWidth;
+    if ($comboDetail) {
+      return;
+    }
+    if (! $this->idCallForTender) {
+      echo "<div>&nbsp;&nbsp;&nbsp;<i>".i18n('msgNoCallForTender')."</i></div><div style='font-size:5px'>&nbsp;</div>";
+      return;
+    }
+    $canUpdate=securityGetAccessRightYesNo('menu' . get_class($this), 'update', $this) == "YES";
+    if ($this->idle == 1) {
+      $canUpdate=false;
+    }
+    $cft=new CallForTender($this->idCallForTender);
+    $eval=new TenderEvaluationCriteria();
+    $evalList=$eval->getSqlElementsFromCriteria(array('idCallForTender'=>$this->idCallForTender));
+    echo '<table width="99.9%">';
+    echo '<tr>';
+    echo '<td class="noteHeader" style="width:50%">' . i18n('colName') . '</td>';
+    echo '<td class="noteHeader" style="width:20%">' . i18n('colValue') . '</td>';
+    echo '<td class="noteHeader" style="width:15%">' . i18n('colCoefficient') . '</td>';
+    echo '<td class="noteHeader" style="width:15%">' . i18n('colCountTotal') . '</td>';
+    echo '</tr>';
+    $sum=null;
+    $sumMax=0;
+    $idList='';
+    foreach ( $evalList as $eval ) {
+      $tenderEval=SqlElement::getSingleSqlElementFromCriteria('TenderEvaluation', array('idTender'=>$this->id,'idTenderEvaluationCriteria'=>$eval->id));
+      echo '<tr>';
+      echo '<td class="noteData">' . htmlEncode($eval->criteriaName) . '</td>';
+      echo '<td class="noteData"><input type="text" dojoType="dijit.form.NumberTextBox"  
+                  id="tenderEvaluation_'.$eval->id.'" name="tenderEvaluation_'.$eval->id.'"
+                  constraints="{min:0,max:'.$eval->criteriaMaxValue.'}" style="width: 50px;" class="input" 
+                  value="'.$tenderEval->evaluationValue.'" onChange="changeTenderEvaluationValue('.$eval->id.');"/>
+            /&nbsp;'.htmlEncode($eval->criteriaMaxValue).'&nbsp;</td>';
+      echo '<td class="noteData" style="text-align:center">' . htmlEncode($eval->criteriaCoef) . '<input type="hidden" id="tenderCoef_'.$eval->id.'" value="'.$eval->criteriaCoef.'"/></td>';
+      echo '<td class="noteData"><input type="text" dojoType="dijit.form.NumberTextBox"  readonly="true" tabindex="-1"
+                  id="tenderTotal_'.$eval->id.'" name="tenderTotal_'.$eval->id.'"
+                  value="'.(($tenderEval->evaluationValue===null)?null:($tenderEval->evaluationValue*$eval->criteriaCoef)).'" style="width: 50px;" class="input" /></td>';
+      echo '</tr>';
+      if ($tenderEval->evaluationValue!==null) $sum+=$tenderEval->evaluationValue*$eval->criteriaCoef;
+      $sumMax+=$eval->criteriaMaxValue*$eval->criteriaCoef;
+      $idList.=(($idList!='')?';':'').$eval->id;
+    }
+    echo '<tr>';
+    echo '<td class="noteData" style="border-right:0;text-align:center;color:#555555">';
+    if ($cft->fixValue) {
+      echo '<i>'.i18n('msgEvalutationMaxValue').' '.(($cft->evaluationMaxValue===null)?null:htmlDisplayNumericWithoutTrailingZeros($cft->evaluationMaxValue)).'</i>';
+    }
+    echo '<input type="hidden" id="evaluationMaxCriteriaValue" value="'.$cft->evaluationMaxValue.'" />';
+    echo '<input type="hidden" id="evaluationSumCriteriaValue" value="'.$sumMax.'" />';
+    echo '<input type="hidden" id="idTenderCriteriaList" value="'.$idList.'" />';
+    echo '</td>';  
+    echo '<td class="noteData" colspan="2" style="border-left:0;text-align:center;color:#555555">'.i18n('colEvaluationMaxValue')."&nbsp;:&nbsp;".$sumMax;
+    echo '</td>';
+    echo '<td class="noteData"><input type="text" dojoType="dijit.form.NumberTextBox"  readonly="true" tabindex="-1"
+                  id="tenderTotal" name="tenderTotal"
+                  value="'.$sum.'" style="width: 50px;" class="input" /></td>';
+    echo '</tr>';
+    echo '<tr>';
+    echo '<td colspan="4" class="noteDataClosetable">&nbsp;</td>';
+    echo '</tr>';
+    echo '</table>';
   }
   
 }
