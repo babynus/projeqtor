@@ -187,12 +187,14 @@ class CallForTenderMain extends SqlElement {
     if ($this->sendDateTime!=$old->sendDateTime 
      or $this->expectedTenderDateTime!=$old->expectedTenderDateTime
      or $this->idProject!=$old->idProject
-     or $this->idCallForTenderType!=$old->idCallForTenderType) {
+     or $this->idCallForTenderType!=$old->idCallForTenderType
+     or $this->deliveryDate!=$old->deliveryDate) {
       $tender=new Tender();
       $listTender=$tender->getSqlElementsFromCriteria(array('idCallForTender'=>$this->id));
       foreach ($listTender as $tender) {
         if ($this->sendDateTime!=$old->sendDateTime and $tender->requestDateTime==$old->sendDateTime) $tender->requestDateTime=$this->sendDateTime;
         if ($this->expectedTenderDateTime!=$old->expectedTenderDateTime and $tender->expectedTenderDateTime<=$this->expectedTenderDateTime) $tender->expectedTenderDateTime=$this->expectedTenderDateTime;
+        if ($this->deliveryDate>$old->deliveryDate and $tender->deliveryDate<$this->deliveryDate)  $tender->deliveryDate=$this->deliveryDate;
         // idProject and idTenderType will be updated in Tender::save()
         $tender->save();
       }

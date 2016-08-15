@@ -91,6 +91,7 @@ CREATE TABLE `${prefix}tender` (
   `initialAmount` decimal(11,2) UNSIGNED,
   `initialTaxAmount` decimal(11,2) UNSIGNED,
   `initialFullAmount` decimal(11,2) UNSIGNED,
+  `deliveryDate` date DEFAULT NULL,
   `evaluation` decimal(7,2) DEFAULT NULL,
   `result` mediumtext DEFAULT NULL,
   `handled` int(1) unsigned DEFAULT '0',
@@ -208,3 +209,5 @@ INSERT INTO `${prefix}tenderstatus` (`name`, `color`, `sortOrder`, `idle`, `isWa
 ('selected',              '#98fb98', '80', '0', '0', '1', '0', '1');
 
 ALTER TABLE `${prefix}resource` ADD `idProvider` int(12) unsigned DEFAULT NULL;
+
+INSERT INTO `${prefix}copyable` (`id`,`name`, `idle`, `sortOrder`) VALUES (16,'Tender', '0', '120');

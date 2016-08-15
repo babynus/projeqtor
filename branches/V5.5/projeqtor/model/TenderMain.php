@@ -63,6 +63,7 @@ class TenderMain extends SqlElement {
   public $_void_1;
   public $plannedTaxAmount;
   public $plannedFullAmount;
+  public $deliveryDate;
   public $handled;
   public $handledDate;
   public $done;
@@ -196,6 +197,7 @@ class TenderMain extends SqlElement {
       $this->name=SqlList::getNameFromId('CallForTender', $this->idCallForTender).' - '.SqlList::getNameFromId('Provider', $this->idProvider);
     }
     $cft=new CallForTender($this->idCallForTender);
+    if (!$this->deliveryDate) $this->deliveryDate=$cft->deliveryDate;
     // Save data from Call For Tender
     if ($this->idCallForTender) {
       // Project
@@ -234,7 +236,7 @@ class TenderMain extends SqlElement {
       if ($tenderEval->evaluationValue!=null) $sum+=$tenderEval->evaluationValue*$eval->criteriaCoef;
       $sumMax+=$eval->criteriaMaxValue*$eval->criteriaCoef;
       $resultEvalTemp=$tenderEval->save();
-      if (getLastOperationStatus($resultEvalTemp)=="OK") {
+      if (getLastOperationStatus($resultEvalTemp)=="OK") {        
         $resultEval=$resultEvalTemp;
         $resultEvalId=$tenderEval->id;
       }
@@ -245,7 +247,7 @@ class TenderMain extends SqlElement {
       $this->evaluationValue=$sum;
     }
     $result=parent::save();
-    if (getLastOperationStatus($result)=='NO_CHANGE' and getLastOperationStatus($resultEval)=="OK") {
+    if (getLastOperationStatus($result)=='NO_CHANGE' and $resultEval!="" and getLastOperationStatus($resultEval)=="OK") {
       return str_replace(array(getLastOperationMessage($result),'NO_CHANGE','#'.$resultEvalId),array(getLastOperationMessage($resultEval),"OK",'#'.$this->id),$result);
     }
     return $result;
@@ -271,6 +273,17 @@ class TenderMain extends SqlElement {
     return $result;
   }
 
+  
+  public function copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = NULL, $toActivity = NULL, $copyToWithResult = false) {
+    if ($newClass=='ProjectExpense') {
+      if (! $this->plannedAmount) {
+        $this->plannedAmount=$this->initialAmount;
+        $this->plannedFullAmount=$this->initialFullAmount;
+      }
+      $this->expensePlannedDate=$this->deliveryDate;
+    }
+    return parent::copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks);
+  }
   // ============================================================================**********
   // GET VALIDATION SCRIPT
   // ============================================================================**********
