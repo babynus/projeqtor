@@ -342,6 +342,7 @@ class TenderMain extends SqlElement {
       $colScript .= '    dojo.removeClass(dijit.byId("idTenderStatus").domNode, "required");';
       $colScript .= '    dijit.byId("idTenderStatus").set("required",false);';
       $colScript .= '  }';
+      $colScript .= '  refreshList("idContact", "idProvider", dijit.byId("idProvider").get("value"), dijit.byId("idContact").get("value"),null, false);';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
     } else if ($colName=="initialAmount" or $colName=="plannedAmount" or $colName=="taxPct") {
