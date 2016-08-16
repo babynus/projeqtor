@@ -213,3 +213,5 @@ INSERT INTO `${prefix}tenderstatus` (`name`, `color`, `sortOrder`, `idle`, `isWa
 ALTER TABLE `${prefix}resource` ADD `idProvider` int(12) unsigned DEFAULT NULL;
 
 INSERT INTO `${prefix}copyable` (`id`,`name`, `idle`, `sortOrder`) VALUES (16,'Tender', '0', '120');
+
+ALTER TABLE `${prefix}expense` ADD `idContact` int(12) unsigned DEFAULT NULL;

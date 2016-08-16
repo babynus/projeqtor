@@ -202,6 +202,19 @@ class CallForTenderMain extends SqlElement {
     return $result;
   }
 
+  public function copy() {
+    $result=parent::copy();
+    $newId=Sql::$lastCopyId;
+    debugLog($newId);
+    $crit=new TenderEvaluationCriteria();
+    $list=$crit->getSqlElementsFromCriteria(array('idCallForTender'=>$this->id));
+    foreach ($list as $crit) {
+      $crit->idCallForTender=$newId;
+      $crit->id=null;
+      $crit->save();
+    }
+    return $result;
+  }
   // ============================================================================**********
   // GET VALIDATION SCRIPT
   // ============================================================================**********

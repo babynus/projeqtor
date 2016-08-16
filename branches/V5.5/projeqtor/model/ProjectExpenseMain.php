@@ -39,6 +39,7 @@ class ProjectExpenseMain extends Expense {
   public $idProject;
   public $idUser;
   public $idProvider;
+  public $idContact;
   public $externalReference;
   public $Origin;
   public $idResource;
@@ -291,6 +292,10 @@ class ProjectExpenseMain extends Expense {
       $colScript .= '  dijit.byId("plannedTaxAmount").set("value",planTax);';
       $colScript .= '  dijit.byId("plannedFullAmount").set("value",planFull);';
       $colScript .= '  formChanged();';
+      $colScript .= '</script>';
+    } else if ($colName=="idProvider") {
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  refreshList("idContact", "idProvider", this.value, dijit.byId("idContact").get("value"),null, false);';
       $colScript .= '</script>';
     }
     return $colScript;
