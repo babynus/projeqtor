@@ -92,7 +92,8 @@ class ProjectExpenseMain extends Expense {
                                   "name"=>"required",
                                   "idProjectExpenseType"=>"required",
                                   "expensePlannedDate"=>"",
-                                  "plannedAmount"=>"",
+                                  "plannedFullAmount"=>"readonly",
+                                  "realFullAmount"=>"readonly",
                                   "idStatus"=>"required",
   								                "idUser"=>"hidden",              
                                   "day"=>"hidden",
@@ -208,8 +209,30 @@ class ProjectExpenseMain extends Expense {
    * @return the return message of persistence/SqlElement#save() method
    */
   public function save() {
-    $this->realFullAmount=$this->realAmount*(1+$this->taxPct/100);
-    $this->plannedFullAmount=$this->plannedAmount*(1+$this->taxPct/100);
+      // Update amounts
+    if ($this->realAmount!=null) {
+      if ($this->taxPct!=null) {
+        $this->realTaxAmount=round(($this->realAmount*$this->taxPct/100),2);
+      } else {
+        $this->realTaxAmount=null;
+      } 
+      $this->realFullAmount=$this->realAmount+$this->realTaxAmount;
+    } else {
+      $this->realTaxAmount=null;
+      $this->realFullAmount=null;
+    }  
+    if ($this->plannedAmount!=null) {
+      if ($this->taxPct!=null) {
+        $this->plannedTaxAmount=round(($this->plannedAmount*$this->taxPct/100),2);
+      } else {
+        $this->plannedTaxAmount=null;
+      }
+      $this->plannedFullAmount=$this->plannedAmount+$this->plannedTaxAmount;
+    } else {
+      $this->plannedTaxAmount=null;
+      $this->plannedFullAmount=null;
+    }
+    
     return parent::save(); 
   }
 
@@ -236,6 +259,37 @@ class ProjectExpenseMain extends Expense {
       $colScript .= '    var curDate = new Date();';
       $colScript .= '    dijit.byId("expenseRealDate").set("value",curDate);';
       $colScript .= '  }';
+      $colScript .= '  formChanged();';
+      $colScript .= '</script>';
+    } else if ($colName=="realAmount" or $colName=="plannedAmount" or $colName=="taxPct") {
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  var init=dijit.byId("realAmount").get("value");';
+      $colScript .= '  var plan=dijit.byId("plannedAmount").get("value");';
+      $colScript .= '  var tax=dijit.byId("taxPct").get("value");';
+      $colScript .= '  var initTax=null;';
+      $colScript .= '  var planTax=null;';
+      $colScript .= '  var initFull=null;';
+      $colScript .= '  var planFull=null; console.log(init); console.log(tax);';
+      $colScript .= '  if (!isNaN(init)) {';
+      $colScript .= '    if (!isNaN(tax)) {';
+      $colScript .= '      initTax=Math.round(init*tax)/100;';
+      $colScript .= '      initFull=init+initTax;';
+      $colScript .= '    } else {';
+      $colScript .= '      initFull=init;';
+      $colScript .= '    }';
+      $colScript .= '  }';
+      $colScript .= '  if (!isNaN(plan)) {';
+      $colScript .= '    if (!isNaN(tax)) {';
+      $colScript .= '      planTax=Math.round(plan*tax)/100;';
+      $colScript .= '      planFull=plan+planTax;';
+      $colScript .= '    } else {';
+      $colScript .= '      planFull=plan;';
+      $colScript .= '    }';
+      $colScript .= '  }';
+      $colScript .= '  dijit.byId("realTaxAmount").set("value",initTax);';
+      $colScript .= '  dijit.byId("realFullAmount").set("value",initFull);';
+      $colScript .= '  dijit.byId("plannedTaxAmount").set("value",planTax);';
+      $colScript .= '  dijit.byId("plannedFullAmount").set("value",planFull);';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
     }
