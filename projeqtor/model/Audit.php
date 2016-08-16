@@ -214,7 +214,7 @@ class Audit extends SqlElement {
 		}
 		try {
 			$_SESSION=array();
-			session_write_close‌​();
+			if (function_exists(' session_write_close‌​')) session_write_close‌​();
 			@session_destroy();
 		} catch ( Exception $e ) {
 			// tried twice : OK let's give up.
