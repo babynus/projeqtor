@@ -63,6 +63,8 @@ class TenderMain extends SqlElement {
   public $_void_1;
   public $plannedTaxAmount;
   public $plannedFullAmount;
+  public $paymentCondition;
+  public $deliveryDelay;
   public $deliveryDate;
   public $handled;
   public $handledDate;
@@ -107,13 +109,15 @@ class TenderMain extends SqlElement {
                                   "idle"=>"nobr",
                                   "idleDate"=>"nobr",
                                   "cancelled"=>"nobr",
-                                  "plannedTaxAmount"=>"calculated,readonly",
-                                  "initialTaxAmount"=>"calculated,readonly",
-      "idStatus"=>"required",
-      "idTenderStatus"=>"required",
-      "evaluationValue"=>"readonly",
-      "evaluationRank"=>"hidden,readonly",
-      "idProvider"=>"required"
+                                  "plannedTaxAmount"=>"readonly",
+                                  "initialTaxAmount"=>"readonly",
+                                  "plannedFullAmount"=>"readonly",
+                                  "initialFullAmount"=>"readonly",
+                                  "idStatus"=>"required",
+                                  "idTenderStatus"=>"",
+                                  "evaluationValue"=>"readonly",
+                                  "evaluationRank"=>"hidden,readonly",
+                                  "idProvider"=>"required"
   );  
   
   private static $_colCaptionTransposition = array('idTenderType'=>'type', 'requestDateTime'=>'requestDate', 'expectedTenderDateTime'=>'expectedTenderDate' );
@@ -127,14 +131,19 @@ class TenderMain extends SqlElement {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
-    if ($this->idCallForTender and $this->idProvider) {
-      self::$_fieldsAttributes['name']='readonly';
-      self::$_fieldsAttributes['idTenderStatus']='required';
+    if ($this->idCallForTender) {
+      if ($this->idProvider) {
+        self::$_fieldsAttributes['name']='readonly';
+        self::$_fieldsAttributes['idTenderStatus']='required';
+      }
+      $cft=new CallForTender($this->idCallForTender,true);
+      if ($cft->idProject) {
+        self::$_fieldsAttributes['idProject']='readonly';
+      }
+      if (SqlList::getNameFromId('Type',$cft->idCallForTenderType)==SqlList::getNameFromId('Type',$this->idTenderType)) {
+        self::$_fieldsAttributes['idTenderType']='readonly';
+      }
     } else {
-      self::$_fieldsAttributes['name']='required';
-      self::$_fieldsAttributes['idTenderStatus']='';
-    }
-    if (! $this->idCallForTender) {
       self::$_fieldsAttributes['evaluationValue']='hidden';
       self::$_fieldsAttributes['evaluationRank']='hidden';
     }
@@ -193,6 +202,30 @@ class TenderMain extends SqlElement {
    */
   public function save() {
     
+    // Update amounts
+    if ($this->initialAmount!=null) {
+      if ($this->taxPct!=null) {
+        $this->initialTaxAmount=round(($this->initialAmount*$this->taxPct/100),2);
+      } else {
+        $this->initialTaxAmount=null;
+      } 
+      $this->initialFullAmount=$this->initialAmount+$this->initialTaxAmount;
+    } else {
+      $this->initialTaxAmount=null;
+      $this->initialFullAmount=null;
+    }  
+    if ($this->plannedAmount!=null) {
+      if ($this->taxPct!=null) {
+        $this->plannedTaxAmount=round(($this->plannedAmount*$this->taxPct/100),2);
+      } else {
+        $this->plannedTaxAmount=null;
+      }
+      $this->plannedFullAmount=$this->plannedAmount+$this->plannedTaxAmount;
+    } else {
+      $this->plannedTaxAmount=null;
+      $this->plannedFullAmount=null;
+    }
+    
     if ($this->idCallForTender and $this->idProvider) {
       $this->name=SqlList::getNameFromId('CallForTender', $this->idCallForTender).' - '.SqlList::getNameFromId('Provider', $this->idProvider);
     }
@@ -201,7 +234,7 @@ class TenderMain extends SqlElement {
     // Save data from Call For Tender
     if ($this->idCallForTender) {
       // Project
-      $this->idProject=$cft->idProject;
+      if ($cft->idProject) $this->idProject=$cft->idProject;
       // Type
       $cftTypeName=SqlList::getNameFromId('CallForTenderType', $cft->idCallForTenderType);
       $list=SqlList::getList('TenderType');
@@ -309,6 +342,37 @@ class TenderMain extends SqlElement {
       $colScript .= '    dojo.removeClass(dijit.byId("idTenderStatus").domNode, "required");';
       $colScript .= '    dijit.byId("idTenderStatus").set("required",false);';
       $colScript .= '  }';
+      $colScript .= '  formChanged();';
+      $colScript .= '</script>';
+    } else if ($colName=="initialAmount" or $colName=="plannedAmount" or $colName=="taxPct") {
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  var init=dijit.byId("initialAmount").get("value");';
+      $colScript .= '  var plan=dijit.byId("plannedAmount").get("value");';
+      $colScript .= '  var tax=dijit.byId("taxPct").get("value");';
+      $colScript .= '  var initTax=null;';
+      $colScript .= '  var planTax=null;';
+      $colScript .= '  var initFull=null;';
+      $colScript .= '  var planFull=null; console.log(init); console.log(tax);';
+      $colScript .= '  if (!isNaN(init)) {';
+      $colScript .= '    if (!isNaN(tax)) {';
+      $colScript .= '      initTax=Math.round(init*tax)/100;';
+      $colScript .= '      initFull=init+initTax;';
+      $colScript .= '    } else {';
+      $colScript .= '      initFull=init;';
+      $colScript .= '    }';
+      $colScript .= '  }';
+      $colScript .= '  if (!isNaN(plan)) {';
+      $colScript .= '    if (!isNaN(tax)) {';
+      $colScript .= '      planTax=Math.round(plan*tax)/100;';
+      $colScript .= '      planFull=plan+planTax;';
+      $colScript .= '    } else {';
+      $colScript .= '      planFull=plan;';
+      $colScript .= '    }';
+      $colScript .= '  }';
+      $colScript .= '  dijit.byId("initialTaxAmount").set("value",initTax);';
+      $colScript .= '  dijit.byId("initialFullAmount").set("value",initFull);';
+      $colScript .= '  dijit.byId("plannedTaxAmount").set("value",planTax);';
+      $colScript .= '  dijit.byId("plannedFullAmount").set("value",planFull);';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
     }
