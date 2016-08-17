@@ -300,27 +300,28 @@ class CallForTenderMain extends SqlElement {
     echo '</table>';
   }
   
-  function drawTenderSubmissionsFromObject() {
+  function drawTenderSubmissionsFromObject($readOnly=false) {
     global $cr, $print, $outMode, $user, $comboDetail, $displayWidth, $printWidth;
     if ($comboDetail) {
       return;
     }
     $canUpdate=securityGetAccessRightYesNo('menu' . get_class($this), 'update', $this) == "YES";
-    if ($this->idle == 1) {
+    if ($this->idle == 1 or $readOnly ) {
       $canUpdate=false;
     }
     $tender=new Tender();
     $tenderList=$tender->getSqlElementsFromCriteria(array('idCallForTender'=>$this->id),false,null, 'evaluationValue desc, id asc');
+    if (count($tenderList)==0 and $readOnly) return;
     echo '<table width="99.9%">';
     echo '<tr>';
-    if (!$print) {
+    if (!$print and !$readOnly) {
       echo '<td class="noteHeader smallButtonsGroup" style="width:10%">';
       if ($this->id != null and !$print and $canUpdate) {
         echo '<img class="roundedButtonSmall" src="css/images/smallButtonAdd.png" onClick="addTenderSubmission('.htmlEncode($this->id).');" title="' . i18n('addTenderSubmission') . '" /> ';
       }
       echo '</td>';
     }
-    echo '<td class="noteHeader" style="width:' . (($print)?'40':'30') . '%">' . i18n('colIdProvider') . '</td>';
+    echo '<td class="noteHeader" style="width:' . (($print or $readOnly)?'40':'30') . '%">' . i18n('colIdProvider') . '</td>';
     echo '<td class="noteHeader" style="width:15%">' . i18n('colRequested') . '</td>';
     echo '<td class="noteHeader" style="width:15%">' . i18n('colExpected') . '</td>';
     echo '<td class="noteHeader" style="width:15%">' . i18n('colReceived') . '</td>';
@@ -329,7 +330,7 @@ class CallForTenderMain extends SqlElement {
     $sum=0;
     foreach ( $tenderList as $tender ) {
       echo '<tr>';
-      if (!$print) {
+      if (!$print and !$readOnly) {
         echo '<td class="noteData smallButtonsGroup">';
         if (!$print and $canUpdate) {
           echo ' <img class="roundedButtonSmall" src="css/images/smallButtonEdit.png" onClick="editTenderSubmission(' . htmlEncode($tender->id) . ');" title="' . i18n('editTenderSubmission') . '" /> ';

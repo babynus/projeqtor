@@ -454,5 +454,50 @@ class TenderMain extends SqlElement {
     echo '</table>';
   }
   
+  public static function drawListFromCriteria($crit,$val) {
+    global $print,$collapsedList, $widthPct;
+    // TODO : retrict with parameter
+    $param=Parameter::getGlobalParameter('showTendersOnVersions');
+    if (strpos($param,'#'.substr($crit,2).'#')==null) return;
+    $titlePane='sectionTender_'.$crit;
+    // Finish previous section
+    echo '</table>';
+    if (!$print) {
+      echo '</div>';
+    } else {
+      echo '<br/>';
+    }
+    // Start section
+    if (!$print) {
+      echo '<div dojoType="dijit.TitlePane" title="' . i18n('menuCallForTender') . '"';
+      echo ' open="' . (array_key_exists($titlePane, $collapsedList)?'false':'true') . '" ';
+      echo ' id="'.$titlePane.'" ';
+      echo ' style="display:inline-block;position:relative;width:'.$widthPct.';float:right;;margin: 0 0 4px 4px; padding: 0;top:0px;"';
+      echo ' onHide="saveCollapsed(\'' . $titlePane . '\');"';
+      echo ' onShow="saveExpanded(\'' . $titlePane . '\');">';
+      echo '<table class="detail"  style="width: 100%;" >';
+    } else {
+      echo '<table class="detail" style="width:'.$widthPct.';" >';
+      echo '<tr><td class="section">' . i18n('sectionTender') . '</td></tr>';
+      echo '<tr class="detail" style="height:2px;font-size:2px;">';
+      echo '<td class="detail" >&nbsp;</td>';
+      echo '</tr>';
+      echo '</table><table class="detail" style="width:99%;" >';
+    }
+    $cft=new CallForTender();
+    $list=$cft->getSqlElementsFromCriteria(array($crit=>$val));
+    $cpt=0;
+    foreach($list as $cft) {
+      $cpt++;
+      if ($cpt>1) echo "<br/>";
+      echo '<table style="width:99.9%"><tr class="noteHeader">';
+      echo '<td  style="padding:3px 10px;vertical-align:middle;font-weight:bold;text-align:left">';
+      echo '<img src="../view/css/images/iconTender16.png" />';
+      echo '<span onClick="gotoElement(\'CallForTender\','.$cft->id.')" style="cursor:pointer;padding-left:10px;position:relative;top:-3px;">'.$cft->name.'</span>';
+      echo '</td></tr></table>';
+      $cft->drawTenderSubmissionsFromObject(true);
+    } 
+    
+  }
 }
 ?>
