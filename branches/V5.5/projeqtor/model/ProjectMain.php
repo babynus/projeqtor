@@ -792,7 +792,7 @@ scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursi
   	return '(' . implode(', ',$arrayProj) . ')';
   }
 
-  public static function getFixedProjectList() {
+  public static function getFixedProjectList($returnResultAsArray=false) {
     $arrayProj=array();
     $arrayProj[]=0;
     $proj=new Project(); 
@@ -807,6 +807,7 @@ scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursi
         }
       }
     }
+    if ($returnResultAsArray) return $arrayProj;
     return '(' . implode(', ',$arrayProj) . ')';
   }
   
