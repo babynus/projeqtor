@@ -42,7 +42,7 @@ class TenderStatus extends SqlElement {
   public $sortOrder=0;
   public $idle;
   public $_sec_void;
-  public $isCopyStatus;
+
   
   // Define the layout that will be used for lists
   private static $_layout='
