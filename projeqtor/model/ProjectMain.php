@@ -774,7 +774,7 @@ scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursi
     return $result;
   }
   
-  public static function getAdminitrativeProjectList() {
+  public static function getAdminitrativeProjectList($returnResultAsArray=false) {
   	$arrayProj=array();
   	$arrayProj[]=0;
   	$type=new ProjectType();
@@ -785,9 +785,10 @@ scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursi
   		$critProj=array('idProjectType'=>$type->id);
       $listProj=$proj->getSqlElementsFromCriteria($critProj, false);
       foreach ($listProj as $proj) {
-      	$arrayProj[]=$proj->id;
+      	$arrayProj[$proj->id]=$proj->id;
       }
   	}
+  	if ($returnResultAsArray) return $arrayProj;
   	return '(' . implode(', ',$arrayProj) . ')';
   }
 
