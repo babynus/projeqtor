@@ -226,7 +226,7 @@ ALTER TABLE `${prefix}indicatorvalue` ADD `columnCriteria` varchar(100) DEFAULT 
 
 INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (14,'Tender', '0');
 INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (15,'IndividualExpense', '0');
-INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (15,'ProjectExpense', '0');*
+INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (16,'ProjectExpense', '0');*
 
 INSERT INTO `${prefix}indicator` (`id`, `code`, `type`, `name`, `sortOrder`, `idle`, `columnName`, `columnCriteria`) VALUES
 (17, 'DELAY', 'delay', 'expectedTenderDateTime', 310, 0, 'expectedTenderDateTime','receptionDateTime'),
@@ -235,6 +235,6 @@ INSERT INTO `${prefix}indicator` (`id`, `code`, `type`, `name`, `sortOrder`, `id
 
 INSERT INTO `${prefix}indicatorableindicator` (`idIndicatorable`, `nameIndicatorable`, `idIndicator`, `idle`) VALUES 
 ('14', 'Tender', '17', '0'),
-('15', 'Tender', '18', '0')
-('16', 'Tender', '18', '0')
+('15', 'Tender', '18', '0'),
+('16', 'Tender', '18', '0'),
 ('16', 'Tender', '19', '0');
