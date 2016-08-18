@@ -215,3 +215,26 @@ ALTER TABLE `${prefix}resource` ADD `idProvider` int(12) unsigned DEFAULT NULL;
 INSERT INTO `${prefix}copyable` (`id`,`name`, `idle`, `sortOrder`) VALUES (16,'Tender', '0', '120');
 
 ALTER TABLE `${prefix}expense` ADD `idContact` int(12) unsigned DEFAULT NULL;
+
+ALTER TABLE `${prefix}indicator` ADD `columnName` varchar(100) DEFAULT NULL,
+ADD `columnCriteria` varchar(100) DEFAULT NULL;
+ALTER TABLE `${prefix}indicatorvalue` ADD `columnCriteria` varchar(100) DEFAULT NULL;
+
+--INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (13,'Meeting', '0');
+--INSERT INTO `${prefix}indicatorableindicator` (`idIndicatorable`, `nameIndicatorable`, `idIndicator`, `idle`) VALUES 
+--('13', 'Meeting', '???', '0');
+
+INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (14,'Tender', '0');
+INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (15,'IndividualExpense', '0');
+INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (15,'ProjectExpense', '0');*
+
+INSERT INTO `${prefix}indicator` (`id`, `code`, `type`, `name`, `sortOrder`, `idle`, `columnName`, `columnCriteria`) VALUES
+(17, 'DELAY', 'delay', 'expectedTenderDateTime', 310, 0, 'expectedTenderDateTime','receptionDateTime'),
+(18, 'DELAY', 'delay', 'expectedPlannedDate', 320, 0, 'expectedPlannedDate','expenseRealDate'),
+(19, 'DELAY', 'delay', 'deliveryDate', 330, 0, 'deliveryDate','receptionDate');
+
+INSERT INTO `${prefix}indicatorableindicator` (`idIndicatorable`, `nameIndicatorable`, `idIndicator`, `idle`) VALUES 
+('14', 'Tender', '17', '0'),
+('15', 'Tender', '18', '0')
+('16', 'Tender', '18', '0')
+('16', 'Tender', '19', '0');
