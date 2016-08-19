@@ -150,6 +150,7 @@ if(trim($commentImputation)==''){
     $note->refType=$refType;
     $note->note=$finalComment;
     $note->idPrivacy=1;
+    $note->save();
   }
   echo $finalComment;
 }
