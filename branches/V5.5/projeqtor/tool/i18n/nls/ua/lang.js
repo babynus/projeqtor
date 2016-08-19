@@ -2421,6 +2421,7 @@ validatedStartDate: "визнання затвердженої дати поча
 validatedWorkPeriod: "затверджено через  ${2} на <br/>${1}",
 validatePassword: "gідтвердження паролю",
 validateWorkPeriod: "затрвердження роботи",
+validityEndDate: "[respect of offer validity end date]",
 valueNotSelected: "Значення не може бути порожнім",
 Version: "Версія",
 versionDraftUpdate: "чернетка",
