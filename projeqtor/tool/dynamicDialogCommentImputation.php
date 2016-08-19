@@ -70,9 +70,7 @@ if(trim($commentImputation)==''){
   ?>
     <tr>
       <td>
-        <div dojoType="dijit.form.TextBox" required="true" class="input required" 
-        style="width: 98%;" name="commentImputation" id="commentImputation">
-        </div>
+        <div dojoType="dijit.form.Textarea" required="true" class="input required" style="width:500px;"  name="commentImputation" id="commentImputation"></div>
       </td>
     </tr>
     <tr>
@@ -115,7 +113,7 @@ if(trim($commentImputation)==''){
           <button class="mediumTextButton" dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogCommentImputation').hide();formChangeInProgress=false;">
             <?php echo i18n("buttonCancel");?>
           </button>
-          <button class="mediumTextButton" dojoType="dijit.form.Button" type="submit" onclick="protectDblClick(this);commentImputationSubmit('<?php echo $year.'\',\''.$week;?>',<?php echo $idAssignment;?>,'<?php echo $refType;?>',<?php echo $refId;?>);return false;">
+          <button class="mediumTextButton" id="dialogCommentImputationSubmit" dojoType="dijit.form.Button" type="submit" onclick="protectDblClick(this);commentImputationSubmit('<?php echo $year.'\',\''.$week;?>',<?php echo $idAssignment;?>,'<?php echo $refType;?>',<?php echo $refId;?>);return false;">
             <?php echo i18n("buttonOK");?>
           </button>
         <?php 
@@ -148,10 +146,10 @@ if(trim($commentImputation)==''){
     $note->creationDate=date("Y-m-d H:i:s");
     $note->refId=$refId;
     $note->refType=$refType;
-    $note->note=$finalComment;
+    $note->note=nl2br($finalComment);
     $note->idPrivacy=1;
     $note->save();
   }
-  echo $finalComment;
+  echo htmlEncode($finalComment,'title');
 }
 ?>
