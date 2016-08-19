@@ -169,6 +169,7 @@ class IndicatorValue extends SqlElement {
   		  $indVal->targetDateTime.=(strlen($indVal->targetDateTime)=='10')?" 00:00:00":"";
   	  } else {
   	    $indVal->targetDateTime=$obj->$fld;
+  	    if ($fld=="meetingDate" and property_exists($obj,'meetingStartTime')) $indVal->targetDateTime.=" ".$obj->meetingStartTime;
   	    $indVal->targetDateTime.=(strlen($indVal->targetDateTime)=='10')?" 00:00:00":"";
   	  }
   	  if (! trim($indVal->targetDateTime)) {
