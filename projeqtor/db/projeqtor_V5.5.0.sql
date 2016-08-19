@@ -216,25 +216,24 @@ INSERT INTO `${prefix}copyable` (`id`,`name`, `idle`, `sortOrder`) VALUES (16,'T
 
 ALTER TABLE `${prefix}expense` ADD `idContact` int(12) unsigned DEFAULT NULL;
 
-ALTER TABLE `${prefix}indicator` ADD `columnName` varchar(100) DEFAULT NULL,
-ADD `columnCriteria` varchar(100) DEFAULT NULL;
-ALTER TABLE `${prefix}indicatorvalue` ADD `columnCriteria` varchar(100) DEFAULT NULL;
-
 --INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (13,'Meeting', '0');
 --INSERT INTO `${prefix}indicatorableindicator` (`idIndicatorable`, `nameIndicatorable`, `idIndicator`, `idle`) VALUES 
 --('13', 'Meeting', '???', '0');
 
+ALTER TABLE `${prefix}indicator` ADD `targetDateColumnName` varchar(100) DEFAULT NULL;
+ALTER TABLE `${prefix}indicatorvalue` ADD `targetDateColumnName` varchar(100) DEFAULT NULL;
+
 INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (14,'Tender', '0');
 INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (15,'IndividualExpense', '0');
-INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (16,'ProjectExpense', '0');*
+INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (16,'ProjectExpense', '0');
 
-INSERT INTO `${prefix}indicator` (`id`, `code`, `type`, `name`, `sortOrder`, `idle`, `columnName`, `columnCriteria`) VALUES
-(17, 'DELAY', 'delay', 'expectedTenderDateTime', 310, 0, 'expectedTenderDateTime','receptionDateTime'),
-(18, 'DELAY', 'delay', 'expectedPlannedDate', 320, 0, 'expectedPlannedDate','expenseRealDate'),
-(19, 'DELAY', 'delay', 'deliveryDate', 330, 0, 'deliveryDate','receptionDate');
+INSERT INTO `${prefix}indicator` (`id`, `code`, `type`, `name`, `sortOrder`, `idle`, `targetDateColumnName`) VALUES
+(17, 'DELAY', 'delay', 'expectedTenderDateTime', 310, 0, 'receptionDateTime'),
+(18, 'DELAY', 'delay', 'expensePlannedDate', 320, 0, 'expenseRealDate'),
+(19, 'DELAY', 'delay', 'deliveryDate', 330, 0, 'receptionDate');
 
 INSERT INTO `${prefix}indicatorableindicator` (`idIndicatorable`, `nameIndicatorable`, `idIndicator`, `idle`) VALUES 
 ('14', 'Tender', '17', '0'),
-('15', 'Tender', '18', '0'),
-('16', 'Tender', '18', '0'),
-('16', 'Tender', '19', '0');
+('15', 'IndividualExpense', '18', '0'),
+('16', 'ProjectExpense', '18', '0'),
+('16', 'ProjectExpense', '19', '0');
