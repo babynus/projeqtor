@@ -61,7 +61,7 @@ if ($obj->id and $updateRight) {
 ?>
 <div style="float:left;">
 <?php 
-if ($obj->lastUpdateDateTime) {
+if (property_exists ( $obj, 'lastUpdateDateTime' ) && $obj->lastUpdateDateTime) {
   echo formatDateThumb(null,$obj->lastUpdateDateTime,'left',32,'Update');
 }
 ?>
