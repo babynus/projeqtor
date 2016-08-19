@@ -283,7 +283,7 @@ class IndicatorValue extends SqlElement {
       case 'IED' :    //InitialEndDate
       case 'VED' :    //ValidatedEndDate
       case 'PED' :    //PlannedEndDate
-      	$date=date('Y-m-d');
+      	$date=date('Y-m-d'). " 00:00:00";
         if ($obj and $obj->done) {
         	$date=$obj->doneDate . " 00:00:00";
         	$this->status=($date>$this->targetDateTime)?'KO':'OK';
@@ -314,23 +314,39 @@ class IndicatorValue extends SqlElement {
           }
           $this->status=($date>$this->targetDateTime)?'KO':'OK';
         }
-        debugLog("date=$date");
         break;
   	}
-    if (trim($this->warningTargetDateTime) and $date>=$this->warningTargetDateTime) {
-      debugLog("warning");
-      if (! $this->warningSent and !$this->done) {
+  	debugLog("date=$date ,warning=$this->warningTargetDateTime, alert=$this->alertTargetDateTime, done=$this->done");
+    if (trim($this->warningTargetDateTime) and $date>=$this->warningTargetDateTime and !$this->done) {
+      debugLog("warning (not done)");
+      $this->warningSent='1';
+      if (! $this->warningSent ) {
         debugLog('send Warning');
         $this->sendWarning();
-        $this->warningSent='1';
+      }
+    } else if (trim($this->warningTargetDateTime) and $date>$this->warningTargetDateTime and $this->done) {
+      debugLog("warning (done)");
+      $this->warningSent='1';
+      if (! $this->warningSent) {
+        debugLog('send Warning');
+        $this->sendWarning();
       }
     } else {
       $this->warningSent='0';
     }
-    if (trim($this->alertTargetDateTime) and $date>=$this->alertTargetDateTime) {
-      if (! $this->alertSent and !$this->done) {
+    if (trim($this->alertTargetDateTime) and $date>=$this->alertTargetDateTime and !$this->done) {
+      debugLog("alert (not done)");
+      $this->alertSent='1';
+      if (! $this->alertSent) {
+        debugLog('send Alert');
         $this->sendAlert();
-        $this->alertSent='1';
+      }
+    } else if (trim($this->alertTargetDateTime) and $date>$this->alertTargetDateTime and $this->done) {
+      debugLog("alert (done)");
+      $this->alertSent='1';
+      if (! $this->alertSent) {
+        debugLog('send Alert');
+        $this->sendAlert();
       }
     } else {
       $this->alertSent='0';
