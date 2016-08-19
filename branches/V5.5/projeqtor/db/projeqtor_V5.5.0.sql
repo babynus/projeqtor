@@ -216,24 +216,41 @@ INSERT INTO `${prefix}copyable` (`id`,`name`, `idle`, `sortOrder`) VALUES (16,'T
 
 ALTER TABLE `${prefix}expense` ADD `idContact` int(12) unsigned DEFAULT NULL;
 
---INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (13,'Meeting', '0');
---INSERT INTO `${prefix}indicatorableindicator` (`idIndicatorable`, `nameIndicatorable`, `idIndicator`, `idle`) VALUES 
---('13', 'Meeting', '???', '0');
-
 ALTER TABLE `${prefix}indicator` ADD `targetDateColumnName` varchar(100) DEFAULT NULL;
 ALTER TABLE `${prefix}indicatorvalue` ADD `targetDateColumnName` varchar(100) DEFAULT NULL;
 
 INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (14,'Tender', '0');
 INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (15,'IndividualExpense', '0');
 INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (16,'ProjectExpense', '0');
+INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (17,'Quotation', '0');
+INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (18,'Command', '0');
+INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (19,'Term', '0');
+INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (20,'Bill', '0');
+INSERT INTO `${prefix}indicatorable` (`id`,`name`, `idle`) VALUES (21,'Meeting', '0');
 
 INSERT INTO `${prefix}indicator` (`id`, `code`, `type`, `name`, `sortOrder`, `idle`, `targetDateColumnName`) VALUES
 (17, 'DELAY', 'delay', 'expectedTenderDateTime', 310, 0, 'receptionDateTime'),
 (18, 'DELAY', 'delay', 'expensePlannedDate', 320, 0, 'expenseRealDate'),
 (19, 'DELAY', 'delay', 'deliveryDate', 330, 0, 'receptionDate');
+INSERT INTO `${prefix}indicator` (`id`, `code`, `type`, `name`, `sortOrder`, `idle`, `targetDateColumnName`) VALUES
+(20, 'DELAY', 'delay', 'validityEndDate', 340, 0, 'idleDate'),
+(21, 'DELAY', 'delay', 'validatedEndDate', 350, 0, 'idBill'),
+(22, 'DELAY', 'delay', 'plannedEndDate', 360, 0, 'idBill'),
+(23, 'DELAY', 'delay', 'realEndDate', 370, 0, 'idBill'),
+(24, 'DELAY', 'delay', 'paymentDueDate', 380, 0, 'paymentDone'),
+(25, 'DELAY', 'delay', 'meetingDate', 390, 0, 'done');
 
 INSERT INTO `${prefix}indicatorableindicator` (`idIndicatorable`, `nameIndicatorable`, `idIndicator`, `idle`) VALUES 
 ('14', 'Tender', '17', '0'),
 ('15', 'IndividualExpense', '18', '0'),
 ('16', 'ProjectExpense', '18', '0'),
 ('16', 'ProjectExpense', '19', '0');
+INSERT INTO `${prefix}indicatorableindicator` (`idIndicatorable`, `nameIndicatorable`, `idIndicator`, `idle`) VALUES 
+('17', 'Quotation', '20', '0'),
+('18', 'Command', '5', '0'),
+('18', 'Command', '6', '0'),
+('19', 'Term', '21', '0'),
+('19', 'Term', '22', '0'),
+('19', 'Term', '23', '0'),
+('20', 'Bill', '24', '0'),
+('21', 'Meeting', '25', '0');
