@@ -190,6 +190,9 @@
 	text-shadow: none !important;
 	border-right:  #ffffff solid 1px;
 }
+.ProjeQtOr .messageData {
+	color: #545281;
+}
 .ProjeQtOr .dijitAccordionTitle {
 	background: url() #a6a0bc !important;
 	color: #ffffff !important;
@@ -728,8 +731,6 @@
 .ProjeQtOr .iconReports22 { background-image: url(customIcons/iconReports.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOr .iconReports16 { background-image: url(customIcons/iconReports.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
-.ProjeQtOr .iconReportsFavorite { background-image: url(images/iconReportsFavorite.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-
 .ProjeQtOr .iconRequestor32 { background-image: url(images/iconRequestor32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOr .iconRequestor22 { background-image: url(images/iconRequestor22.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOr .iconRequestor16 { background-image: url(images/iconRequestor16.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
@@ -894,6 +895,9 @@
 .ProjeQtOr .iconWorkflow32 { background-image: url(images/iconWorkflow32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOr .iconWorkflow22 { background-image: url(images/iconWorkflow22.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOr .iconWorkflow16 { background-image: url(images/iconWorkflow16.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+/* MISC */
+.ProjeQtOr .iconReportsFavorite { background-image: url(images/iconReportsFavorite.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 
 /* =============================================================================== */
 /* ProjeQtOr THEME END                                                             */
