@@ -139,7 +139,7 @@ if(trim($commentImputation)==''){
   $finalComment='['.$year.'-'.$week.']: '.$commentImputation;
   $assignment=new Assignment($idAssignment);
   $assignment->comment=$finalComment."\n\n".$assignment->comment;
-  $assignment->save();
+  debugLog($assignment->save());
   if($commentImputationNote){
     $note = new Note();
     $note->idUser=getSessionUser()->id;

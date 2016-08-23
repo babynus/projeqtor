@@ -773,12 +773,14 @@ scriptLog("      => ImputationLine->getParent()-exit");
 					echo '<div style="float:right; color:#8080DD; font-size:80%;font-weight:normal;">'.htmlEncode($line->functionName).'</div>';
 			}
 			echo '</td>';
-			if ($line->comment and !$print) {
-			  $explodeComment=explode("\n\n", $line->comment);
-					echo '<td id="showBig'.$line->idAssignment.'" style="cursor:pointer" onclick="loadDialog(\'dialogCommentImputation\', function(){commentImputationTitlePopup(\'view\');}, true, \'&idAssignment='.$line->idAssignment.'\', true);">'.formatCommentThumb($explodeComment[0]).'</td>';
+			if (!$print && $line->idAssignment) {
+			  $explodeComment=array(" a");
+			  if($line->comment)$explodeComment=explode("\n\n", $line->comment);
+				echo '<td id="showBig'.$line->idAssignment.'" style="cursor:pointer;'.($line->comment ? "" : "display:none;").'" onclick="loadDialog(\'dialogCommentImputation\', function(){commentImputationTitlePopup(\'view\');}, true, \'&idAssignment='.$line->idAssignment.'\', true);">'.formatCommentThumb($explodeComment[0]).'</td>';
 		  }
 		  
-		  if($line->idAssignment)echo '<td onclick="loadDialog(\'dialogCommentImputation\', function(){commentImputationTitlePopup(\'add\');}, true, \'&year='.$currentYear.'&week='.$currentWeek.'&idAssignment='.$line->idAssignment.'&refIdComment='.$line->refId.'&refTypeComment='.$line->refType.'\', true);" style="cursor:pointer"><img src="img/noteAdd.png"></td>';
+		  if($line->idAssignment)
+		    echo '<td title="'.i18n('commentImputationAdd').'" onclick="loadDialog(\'dialogCommentImputation\', function(){commentImputationTitlePopup(\'add\');}, true, \'&year='.$currentYear.'&week='.$currentWeek.'&idAssignment='.$line->idAssignment.'&refIdComment='.$line->refId.'&refTypeComment='.$line->refType.'\', true);" style="cursor:pointer"><img src="img/noteAdd.png"></td>';
 		  
 			echo '</tr></table>';
 			echo '</td>';

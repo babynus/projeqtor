@@ -7005,6 +7005,7 @@ function commentImputationSubmit(year,week,idAssignment,refType,refId){
     form : 'commentImputationForm',
     load : function(data, args) {
       formChangeInProgress=false;
+      document.getElementById("showBig"+idAssignment).style.display='block'; 
       dojo.byId("showBig"+idAssignment).childNodes[0].onmouseover=function(){
         showBigImage(null,null,this,data);
       };
