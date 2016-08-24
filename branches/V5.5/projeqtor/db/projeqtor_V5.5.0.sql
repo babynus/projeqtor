@@ -256,3 +256,5 @@ INSERT INTO `${prefix}indicatorableindicator` (`idIndicatorable`, `nameIndicator
 ('20', 'Bill', '24', '0'),
 ('21', 'Meeting', '25', '0'),
 ('20', 'Bill', '26', '0'),;
+
+CREATE UNIQUE INDEX workReference ON `${prefix}work` (idAssignment, workDate);
