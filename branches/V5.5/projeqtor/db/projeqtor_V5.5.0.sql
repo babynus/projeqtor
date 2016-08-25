@@ -239,7 +239,7 @@ INSERT INTO `${prefix}indicator` (`id`, `code`, `type`, `name`, `sortOrder`, `id
 (23, 'DELAY', 'delay', 'realEndDate', 370, 0, 'idBill'),
 (24, 'DELAY', 'delay', 'paymentDueDate', 380, 0, 'paymentDone'),
 (25, 'DELAY', 'delay', 'meetingDate', 390, 0, 'done'),
-(26, 'DELAY', 'delay', 'date', 400, 0, 'sendDate'),;
+(26, 'DELAY', 'delay', 'date', 400, 0, 'sendDate');
 
 INSERT INTO `${prefix}indicatorableindicator` (`idIndicatorable`, `nameIndicatorable`, `idIndicator`, `idle`) VALUES 
 ('14', 'Tender', '17', '0'),
@@ -255,6 +255,6 @@ INSERT INTO `${prefix}indicatorableindicator` (`idIndicatorable`, `nameIndicator
 ('19', 'Term', '23', '0'),
 ('20', 'Bill', '24', '0'),
 ('21', 'Meeting', '25', '0'),
-('20', 'Bill', '26', '0'),;
+('20', 'Bill', '26', '0');
 
 CREATE UNIQUE INDEX workReference ON `${prefix}work` (idAssignment, workDate);
