@@ -106,7 +106,7 @@
   color: #FEFEFE !important;
   border-radius: 0px;
   text-shadow: none;
-  /* background: #a6a0bc !important; */
+  background: #7b769c !important; 
 }
 
  
@@ -246,6 +246,23 @@
   font-weight: bold;
   position:relative; top:2px;
 }
+.linkHeader {
+	background-image: url();
+	background: url() #cdcadb !important;
+	color: #545381;
+	text-shadow: none;
+}
+.linkData {
+	color: #545381;
+}
+
+.hyperlink {
+	color: #545381;
+}
+.hyperlink:hover {
+	color: #545381;
+}
+
 
 .ProjeQtOr .menuBarItem  {
   -webkit-transition: all 0.5s ease;
@@ -260,6 +277,41 @@
     transform: rotate(-7deg);
     /* height:170px; */
 }
+
+.ProjeQtOr .dijitButtonNode, .ProjeQtOr .dijitReset.dijitInline.dijitButtonNode {
+	background: #cdcadb;
+	-webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+.ProjeQtOr .dijitButtonNode:hover, .ProjeQtOr .dijitReset.dijitInline.dijitButtonNode:hover {
+  background: #ffffff;
+}
+/* Scrollbars */
+
+.ProjeQtOr ::-webkit-scrollbar {
+    height: 12px;
+    width: 12px;
+    background: #dcdae6;
+}
+
+.ProjeQtOr ::-webkit-scrollbar-thumb {
+    background: #7b769c;
+}
+
+body .ProjeQtOr {
+    scrollbar-face-color: #7b769c;
+    scrollbar-track-color: #dcdae6 ;
+}
+
+.ProjeQtOr .iconButtonDownload16 { background-image: url(customIcons/iconDownload.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOr .iconButtonEdit16 { background-image: url(customIcons/iconEdit.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOr .iconButtonRemove16 { background-image: url(customIcons/iconRemove.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOr .iconButtonAdd16 { background-image: url(customIcons/iconAdd.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOr .iconButtonLink16 { background-image: url(customIcons/iconLink.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOr .iconButtonView16 { background-image: url(customIcons/iconView.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 /* =============================================================================== */
 /* ICONS                                                                           */
 /* =============================================================================== */
