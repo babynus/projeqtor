@@ -337,9 +337,10 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
   if (! $obj) $sepChar='no';
   $selectedFound=false;
   $next="";
+  if (isset($table['*'])) unset($table['*']);
   foreach($table as $key => $val) {
     if (! array_key_exists($key, $excludeArray) and ( count($restrictArray)==0 or array_key_exists($key, $restrictArray) or $key==$selection) ) {
-      if ($col=="idProject" and $sepChar!='no') {
+      if ($col=="idProject" and $sepChar!='no') {   
         $wbs=$wbsList[$key];
         $wbsTest=$wbs;
         $level=1;
