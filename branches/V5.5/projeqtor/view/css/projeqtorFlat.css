@@ -317,6 +317,13 @@ body .ProjeQtOr {
    transform: rotate(-22.5deg);
 }
 
+.ProjeQtOr .dijitDialogTitleBar {
+	background-image: url();
+  background: url() #7b769c !important;
+  color: #ffffff;
+  text-shadow: none;
+}
+
 .ProjeQtOr .iconButtonDownload16 { background-image: url(customIcons/iconDownload.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOr .iconButtonEdit16 { background-image: url(customIcons/iconEdit.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOr .iconButtonRemove16 { background-image: url(customIcons/iconRemove.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}

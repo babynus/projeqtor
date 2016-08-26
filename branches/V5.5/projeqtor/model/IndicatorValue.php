@@ -114,7 +114,7 @@ class IndicatorValue extends SqlElement {
   	  if ($class=='Project') {
   	    $proj=$obj;
   	  } else {
-  	    $proj=new Project($obj->idStatus, true);
+  	    $proj=new Project($obj->idProject, true);
   	  }
   	  if ($proj->isUnderConstruction) { // Project "under construction" : do not generate indicator alerts
   	    return;
@@ -311,8 +311,12 @@ class IndicatorValue extends SqlElement {
         if ($obj and trim($obj->$targetControlColumnName)) {
           if (substr($targetControlColumnName,-8)=='DateTime'){
             $date=$obj->$targetControlColumnName;
-          } else {
+          } else if (substr($targetControlColumnName,-4)=='Date'){ 
             $date=$obj->$targetControlColumnName . " 00:00:00";
+          } else {
+            if ($obj->$targetControlColumnName) {
+              return; // $targetControlColumnName is not a date, so if set don't update indicator
+            }
           }
           $this->status=($date>$this->targetDateTime)?'KO':'OK';
         }

@@ -234,10 +234,10 @@ INSERT INTO `${prefix}indicator` (`id`, `code`, `type`, `name`, `sortOrder`, `id
 (19, 'DELAY', 'delay', 'deliveryDate', 330, 0, 'receptionDate');
 INSERT INTO `${prefix}indicator` (`id`, `code`, `type`, `name`, `sortOrder`, `idle`, `targetDateColumnName`) VALUES
 (20, 'DELAY', 'delay', 'validityEndDate', 340, 0, 'idleDate'),
-(21, 'DELAY', 'delay', 'validatedEndDate', 350, 0, 'idBill'),
-(22, 'DELAY', 'delay', 'plannedEndDate', 360, 0, 'idBill'),
-(23, 'DELAY', 'delay', 'realEndDate', 370, 0, 'idBill'),
-(24, 'DELAY', 'delay', 'paymentDueDate', 380, 0, 'paymentDone'),
+(21, 'DELAY', 'delay', 'validatedDate', 350, 0, 'idBill'),
+(22, 'DELAY', 'delay', 'plannedDate', 360, 0, 'idBill'),
+(23, 'DELAY', 'delay', 'date', 370, 0, 'idBill'),
+(24, 'DELAY', 'delay', 'paymentDueDate', 380, 0, 'paymentDate'),
 (25, 'DELAY', 'delay', 'meetingDate', 390, 0, 'done'),
 (26, 'DELAY', 'delay', 'date', 400, 0, 'sendDate');
 
