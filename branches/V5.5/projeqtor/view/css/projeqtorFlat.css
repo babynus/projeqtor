@@ -246,13 +246,13 @@
   font-weight: bold;
   position:relative; top:2px;
 }
-.ProjeQtOr .linkHeader, .ProjeQtOr .attachmentHeader, .ProjeQtOr .noteHeader {
+.ProjeQtOr .linkHeader, .ProjeQtOr .attachmentHeader, .ProjeQtOr .noteHeader, .ProjeQtOr .dependencyHeader {
 	background-image: url();
 	background: url() #cdcadb !important;
 	color: #545381;
 	text-shadow: none;
 }
-.ProjeQtOr .linkData, .ProjeQtOr .attachmentData, .ProjeQtOr .noteData {
+.ProjeQtOr .linkData, .ProjeQtOr .attachmentData, .ProjeQtOr .noteData, .ProjeQtOr .dependencyData {
 	color: #545381;
 }
 
@@ -289,6 +289,13 @@
 .ProjeQtOr .dijitButtonNode:hover, .ProjeQtOr .dijitReset.dijitInline.dijitButtonNode:hover {
   background: #ffffff;
 }
+.ProjeQtOr .dijitButtonDisabled .dijitButtonNode, .ProjeQtOr .dijitButtonDisabled .dijitReset.dijitInline.dijitButtonNode { 
+	background: rgba(128,128,128,0.2) !important;
+	
+}
+.ProjeQtOr .dijitDisabled .dijitButtonText {
+	color: #aaaaaa !important;
+}	
 /* Scrollbars */
 
 .ProjeQtOr ::-webkit-scrollbar {
