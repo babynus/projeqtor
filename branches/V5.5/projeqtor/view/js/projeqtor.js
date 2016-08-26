@@ -734,7 +734,23 @@ function loadContent(page, destination, formName, isResultMessage,
               node : contentNode,
               duration : 100,
               onEnd : function() {
-                finalizeMessageDisplay(destination, validationType);
+                if(!editorInFullScreen())finalizeMessageDisplay(destination, validationType);
+                else{
+                  var elemDiv = document.createElement('div');
+                  elemDiv.id='testFade';
+                  elemDiv.style.cssText = 'position:absolute;width:200px;height:16px;z-index:10000;';
+                  elemDiv.className='messageOK';
+                  elemDiv.innerHTML=i18n('resultOk');
+                  document.body.appendChild(elemDiv);
+                  resultDivFadingOut = dojo.fadeOut({
+                    node : elemDiv,
+                    duration : 3000,
+                    onEnd : function() {
+                      elemDiv.remove();
+                    }
+                  }).play();
+                  hideWait();
+                }
               }
             }).play();
           } else if (destination == "loginResultDiv") {
