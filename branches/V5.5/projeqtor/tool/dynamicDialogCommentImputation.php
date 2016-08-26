@@ -97,9 +97,14 @@ if(trim($commentImputation)==''){
   ?>
     <tr>
       <td>
-        <div style="width: 98%;" name="commentImputation" id="commentImputation">
+        <div style="min-width: 500px;max-height: 500px; overflow: auto;" name="commentImputation" id="commentImputation">
         <?php echo htmlEncode($assignment->comment,'title');?>
         </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        &nbsp;
       </td>
     </tr>
   <?php 
