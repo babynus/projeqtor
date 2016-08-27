@@ -353,7 +353,7 @@ class TenderMain extends SqlElement {
       $colScript .= '  var initTax=null;';
       $colScript .= '  var planTax=null;';
       $colScript .= '  var initFull=null;';
-      $colScript .= '  var planFull=null; console.log(init); console.log(tax);';
+      $colScript .= '  var planFull=null;';
       $colScript .= '  if (!isNaN(init)) {';
       $colScript .= '    if (!isNaN(tax)) {';
       $colScript .= '      initTax=Math.round(init*tax)/100;';
