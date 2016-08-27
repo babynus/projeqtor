@@ -246,13 +246,15 @@
   font-weight: bold;
   position:relative; top:2px;
 }
-.ProjeQtOr .linkHeader, .ProjeQtOr .attachmentHeader, .ProjeQtOr .noteHeader, .ProjeQtOr .dependencyHeader {
+.ProjeQtOr .linkHeader, .ProjeQtOr .attachmentHeader, .ProjeQtOr .noteHeader, .ProjeQtOr .dependencyHeader,
+.ProjeQtOr .historyHeader, .ProjeQtOr .assignHeader {
 	background-image: url();
 	background: url() #cdcadb !important;
 	color: #545381;
 	text-shadow: none;
 }
-.ProjeQtOr .linkData, .ProjeQtOr .attachmentData, .ProjeQtOr .noteData, .ProjeQtOr .dependencyData {
+.ProjeQtOr .linkData, .ProjeQtOr .attachmentData, .ProjeQtOr .noteData, .ProjeQtOr .dependencyData,
+.ProjeQtOr .historyData, .ProjeQtOr .assignData {
 	color: #545381;
 }
 
@@ -345,6 +347,7 @@ body .ProjeQtOr {
 .ProjeQtOr .iconButtonAdd16 { background-image: url(customIcons/iconAdd.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOr .iconButtonLink16 { background-image: url(customIcons/iconLink.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOr .iconButtonView16 { background-image: url(customIcons/iconView.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOr .iconButtonSwitch16 { background-image: url(customIcons/iconSwitch.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOr .iconView { background-image: url(customIcons/iconSearch.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOr .iconGoto { background-image: url(customIcons/iconGoto.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 /* =============================================================================== */
