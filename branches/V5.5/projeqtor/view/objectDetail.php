@@ -1172,7 +1172,7 @@ scriptLog("drawTableFromObject(obj, included=$included, parentReadOnly=$parentRe
         if (!$readOnly) {
           echo '<div id="' . 'colorButton" dojoType="dijit.form.DropDownButton"  ';
           // echo ' style="width: 100px; background-color: ' . $val . ';"';
-          echo ' showlabel="false" iconClass="colorSelector" >';
+          echo ' showlabel="false" iconClass="colorSelector" style="position:relative;top:-2px;height:19px">';
           echo '  <span>' . i18n('selectColor') . '</span>';
           echo '  <div dojoType="dijit.ColorPalette" >';
           echo '    <script type="dojo/method" event="onChange" >';
@@ -1582,12 +1582,11 @@ scriptLog("drawTableFromObject(obj, included=$included, parentReadOnly=$parentRe
         }
         if ($hasOtherVersion) {
           if ($obj->id and $canUpdate) {
-            echo '<div class="roundedButton generalColClass '.$col.'Class" style="float:right;margin-right:3px;'.$specificStyle.'" ';
-            echo ' title="' . i18n('otherVersionAdd') . '" class="roundedButtonSmall">';
-            echo '<div class="iconAdd"';
+            echo '<a class="generalColClass '.$col.'Class" style="float:right;margin-right:5px;'.$specificStyle.'" ';
             echo ' onClick="addOtherVersion(' . "'" . $versionType . "'" . ');" ';
-            echo '></div>';
-            echo '</div>';
+            echo ' title="' . i18n('otherVersionAdd') . '">';
+            echo formatSmallButton('Add');
+            echo '</a>';
           }
           if (count($obj->$otherVersion) > 0) {
             drawOtherVersionFromObject($obj->$otherVersion, $obj, $versionType);
@@ -2119,8 +2118,7 @@ function drawOrigin($refType, $refId, $obj, $col, $print) {
   if ($refType and $refId) {
     echo '<table width="100%"><tr height="20px"><td xclass="noteData" width="1%" xvalign="top">';
     if (!$print and $canUpdate) {
-      echo '<img class="roundedButtonSmall" src="css/images/smallButtonRemove.png" ';
-      echo ' onClick="removeOrigin(\'' . $obj->$col->id . '\',\'' . $refType . '\',\'' . $refId . '\');" title="' . i18n('removeOrigin') . '" class="roundedButtonSmall"/> ';
+      echo '<a onClick="removeOrigin(\'' . $obj->$col->id . '\',\'' . $refType . '\',\'' . $refId . '\');" title="' . i18n('removeOrigin') . '" > '.formatSmallButton('Remove').'</a>';
     }
     echo '</td><td width="5%" xclass="noteData" xvalign="top" style="white-space:nowrap">';
     echo '&nbsp;&nbsp;' . i18n($refType) . '&nbsp;#' . $refId . '&nbsp;:&nbsp;';
