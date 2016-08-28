@@ -503,7 +503,6 @@ function showDetailOrigin() {
 }
 
 function showDetail(comboName, canCreate, objectClass, multiSelect, objectId) {
-  console.log(comboName, canCreate, objectClass, multiSelect, objectId);
   var contentWidget=dijit.byId("comboDetailResult");
   
   dojo.byId("canCreateDetail").value=canCreate;
@@ -790,6 +789,9 @@ function hideDetail() {
   hideField('comboCloseButton');
   frames['comboDetailFrame'].location.href="preparePreview.php";
   dijit.byId("dialogDetail").hide();
+  if (dijit.byId(dojo.byId('comboName').value)) {
+    dijit.byId(dojo.byId('comboName').value).focus();
+  }
 }
 
 //=============================================================================
