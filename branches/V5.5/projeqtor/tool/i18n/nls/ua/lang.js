@@ -1638,6 +1638,7 @@ messageNoImputationChange: "Жодних змін&#44; щоб оновлюват
 messageParametersNoChangeSaved: "Жодних змін&#44; щоб зберегти в параметрах",
 messageParametersSaved: "Параметри збережено",
 messagePreview: "Підготовка попереднього перегляду:",
+messageResourceDouble: "[You can't add a resource already present]",
 messageSelectedNotAvailable: "Ви обрали '${1}'.<br/> Ця функція недоступна для цієї версії ProjeQtOr.<br/>Пробачте .:",
 messageTextTooLong: "довжина поля ${1} перевищує ${2} символів",
 MessageType: "Тип Повідомлення",

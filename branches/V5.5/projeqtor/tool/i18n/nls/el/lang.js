@@ -1638,6 +1638,7 @@ messageNoImputationChange: "Δεν υπάρχουν αλλαγές για ενη
 messageParametersNoChangeSaved: "Δεν υπάρχουν αλλαγές προς αποθήκευση",
 messageParametersSaved: "Οι παράμετροι αποθηκεύτηκαν",
 messagePreview: "Προετοιμασία προεπισκόπησης …",
+messageResourceDouble: "[You can't add a resource already present]",
 messageSelectedNotAvailable: "You selected '${1}'.<br/>This feature is not available on this version of ProjecQtOr.<br/>Sorry…",
 messageTextTooLong: "το μήκος του πεδίου ${1} υπερβαίνει τους ${2} χαρακτήρες",
 MessageType: "Τύπος μηνύματος",
