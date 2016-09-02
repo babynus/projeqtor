@@ -3356,7 +3356,11 @@ function onKeyDownCkEditorFunction(event, editor) {
       top.stopDef();
     }
     top.showHelp();
-  }
+  }else if(event.data.keyCode==27){
+    if(top.editorInFullScreen() && top.whichFullScreen!=-1){
+      top.editorArray[whichFullScreen].execCommand('maximize');
+    }
+  } 
 }
 function isEditingKey(evt) {
   if (evt.ctrlKey && (evt.keyCode == 65 || evt.keyCode == 67))
@@ -3552,6 +3556,9 @@ function ckEditorReplaceAll() {
   }
 }
 var maxEditorHeight = Math.round(screen.height * 0.6);
+
+
+
 function ckEditorReplaceEditor(editorName, numEditor) {
   var height = 200;
   if (editorName == 'noteNote')
@@ -3582,6 +3589,8 @@ function ckEditorReplaceEditor(editorName, numEditor) {
     evt.editor.updateElement();
     // formChanged();
   });
+
+  
   editorArray[numEditor].on('key', function(evt) {
     onKeyDownCkEditorFunction(evt, this);
   });

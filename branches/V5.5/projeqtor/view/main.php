@@ -255,8 +255,13 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
           event.preventDefault();
           if (dojo.isFF) stopDef(event);
           showHelp();
-        }  
+        }else if(event.keyCode==27){
+          if(editorInFullScreen() && whichFullScreen!=-1){
+            editorArray[whichFullScreen].execCommand('maximize');
+          }
+        }
       };
+
       var onKeyDownFunc = function(event) {
         if (event.keyCode == 83 && (navigator.platform.match("Mac") ? event.metaKey : event.ctrlKey) && ! event.altKey) { // CTRL + S
           event.preventDefault();
