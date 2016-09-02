@@ -416,6 +416,31 @@ class Parameter extends SqlElement {
           '3#Product#Component#'=>i18n("menuProduct").', '.i18n("menuComponent"),
           '4#Product#Component#ProductVersion#ComponentVersion#'=>i18n("menuProduct").', '.i18n("menuComponent").', '.i18n("menuVersion")) ;
         break;
+      case 'imputationAlertGenerationDay': 
+        $list=array(
+          0=>i18n("Monday"), 
+          1=>i18n('Tuesday'),
+          2=>i18n('Wednesday'),
+          3=>i18n('Thursday'),
+          4=>i18n('Friday'),
+          5=>i18n('Saturday'),
+          6=>i18n('Sunday')
+        );
+        break;
+      case 'imputationAlertControlDay' :
+        $list=array(
+            'current'=>i18n('imputationControlCurrentDay'),
+            'previous'=>i18n('imputationControlPreviousDay'),
+            'next'=>i18n('imputationControlNextDay')
+        );
+        break;
+      case 'imputationAlertSendToResource': case 'imputationAlertSendToProjectLeader':
+        $list=array("NO"=>i18n("displayNo"),
+          "MAIL"=>i18n("sendAsMail"),
+          "INTERNAL"=>i18n("sendAsInternal"),
+          "BOTH"=>i18n("sendAsMailAndInternal"));
+        break;
+      
     } 
     return $list;
   }
@@ -480,6 +505,13 @@ class Parameter extends SqlElement {
       	                       'setDoneOnNoLeftWork'=>'list',
       	                       'maxDaysToBookWork'=>'number',
       	                       'maxDaysToBookWorkBlocking'=>'number',
+      	                     'sectionImputationAlert'=>'section',
+      	                       'imputationAlertGenerationDay'=>'list',
+      	                       'imputationAlertGenerationHour'=>'time',
+      	                       'imputationAlertControlDay'=>'list',
+      	                       'imputationAlertControlNumberOfDays'=>'number',
+      	                       'imputationAlertSendToResource'=>'list',
+      	                       'imputationAlertSendToProjectLeader'=>'list',
       	                     'sectionPlanning'=>'section',
                                'displayResourcePlan'=>'list',
       	                       'maxProjectsToDisplay'=>'number',
@@ -602,7 +634,9 @@ class Parameter extends SqlElement {
       	                       'paramMailTitleUser'=>'longtext',
       	                       'paramMailBodyUser'=>'longtext',
       	                       'paramMailTitleApprover'=>'longtext',
-      	                       'paramMailBodyApprover'=>'longtext'
+      	                       'paramMailBodyApprover'=>'longtext',
+      	                       'paramMessageAlertImputationResource'=>'longtext',
+      	                       'paramMessageAlertImputationProjectLeader'=>'longtext'
       	                     
       	);
     }
