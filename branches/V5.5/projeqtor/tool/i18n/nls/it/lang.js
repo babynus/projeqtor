@@ -1638,6 +1638,7 @@ messageNoImputationChange: "Nessuna modifica da aggiornare sull'assegnazione del
 messageParametersNoChangeSaved: "Nessuna modifica ai parametri da dover salvare",
 messageParametersSaved: "Parametri salvati",
 messagePreview: "Preparazione anteprima ...",
+messageResourceDouble: "[You can't add a resource already present]",
 messageSelectedNotAvailable: "Hai selezionato '${1}'.<br/>Questa funzionalità non è disponibile in questa versione di ProjecQtOr.<br/>Sorry…",
 messageTextTooLong: "la lunghezza del campo ${1} eccede di ${2} caratteri",
 MessageType: "Tipi messaggi",

@@ -1638,6 +1638,7 @@ messageNoImputationChange: "Aucune modification n'a été effectuée dans la feu
 messageParametersNoChangeSaved: "Aucune modification de paramètre à sauvegarder",
 messageParametersSaved: "Paramètres sauvegardés",
 messagePreview: "Préparation de l'aperçu …",
+messageResourceDouble: "Vous ne pouvez pas ajouter une ressource déjà présente",
 messageSelectedNotAvailable: "Vous avez sélectionné '${1}'.<br/>Cette fonctionnalité n'est pas disponible dans cette version de ProjeQtOr. <br/>Désolé…",
 messageTextTooLong: "La longueur du champ ${1} dépasse ${2} caractères",
 MessageType: "Type de messages",
