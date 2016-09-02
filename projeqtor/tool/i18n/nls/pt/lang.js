@@ -1638,6 +1638,7 @@ messageNoImputationChange: "Nenhuma alteração para gravar a atribuição de tr
 messageParametersNoChangeSaved: "Nenhum alteração para gravar os parâmetros",
 messageParametersSaved: "Parâmetros guardados",
 messagePreview: "Preparando a pré-visualização …",
+messageResourceDouble: "[You can't add a resource already present]",
 messageSelectedNotAvailable: "Você seleccionou '${1}'.<br/>Esta funcionalidade não está disponível nesta versão do ProjeQtOr.<br/>As nossas desculpas…",
 messageTextTooLong: "tamanho do campo ${1} excede ${2} caracteres",
 MessageType: "Tipo de Mensagens",

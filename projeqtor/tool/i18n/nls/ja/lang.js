@@ -1638,6 +1638,7 @@ messageNoImputationChange: "変更がないため実績作業は更新されま�
 messageParametersNoChangeSaved: "変更がないためパラメータは保存されません",
 messageParametersSaved: "パラメーターが保存されました",
 messagePreview: "プレビューを準備しています…",
+messageResourceDouble: "[You can't add a resource already present]",
 messageSelectedNotAvailable: "「${1}」を選択しました。<br/>このバージョンのProjeQtOrではこの機能は利用できません。<br/>あしからず",
 messageTextTooLong: "${1}の長さが${2}文字を超えています",
 MessageType: "メッセージタイプ",

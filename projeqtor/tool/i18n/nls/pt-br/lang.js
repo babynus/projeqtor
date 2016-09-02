@@ -1638,6 +1638,7 @@ messageNoImputationChange: "Nenhuma alteração para atualizar a alocação real
 messageParametersNoChangeSaved: "Não foi realizada nenhuma alteração no parâmetros",
 messageParametersSaved: "Parâmetros salvos",
 messagePreview: "Preparando a visualização…",
+messageResourceDouble: "[You can't add a resource already present]",
 messageSelectedNotAvailable: "Você selecionou '${1}'.<br/>Esta funcionalidade não está disponível nesta versão do ProjeQtOr.<br/>Pedimos desculpas…",
 messageTextTooLong: "tamanho do campo ${1} excede ${2} caracteres",
 MessageType: "Tipo de Mensagens",

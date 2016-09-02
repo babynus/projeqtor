@@ -1638,6 +1638,7 @@ messageNoImputationChange: "Нет изменений для обновлени�
 messageParametersNoChangeSaved: "Нет изменений для сохранения параметров",
 messageParametersSaved: "Параметры сохранены!",
 messagePreview: "Подготовка предпросмотра …",
+messageResourceDouble: "[You can't add a resource already present]",
 messageSelectedNotAvailable: "Вы выбрали '${1}'.<br/>Эта функция недоступна в данной версии ProjeQtOr.<br/>Извините…",
 messageTextTooLong: "длина поля ${1} превышает ${2} символа (ов)",
 MessageType: "Тип сообщений",
