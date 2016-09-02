@@ -418,13 +418,14 @@ class Parameter extends SqlElement {
         break;
       case 'imputationAlertGenerationDay': 
         $list=array(
-          0=>i18n("Monday"), 
-          1=>i18n('Tuesday'),
-          2=>i18n('Wednesday'),
-          3=>i18n('Thursday'),
-          4=>i18n('Friday'),
-          5=>i18n('Saturday'),
-          6=>i18n('Sunday')
+          'NEVER'=>i18n('never'),
+          1=>i18n("Monday"), 
+          2=>i18n('Tuesday'),
+          3=>i18n('Wednesday'),
+          4=>i18n('Thursday'),
+          5=>i18n('Friday'),
+          6=>i18n('Saturday'),
+          0=>i18n('Sunday')
         );
         break;
       case 'imputationAlertControlDay' :
