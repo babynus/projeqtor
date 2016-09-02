@@ -440,7 +440,6 @@ class Parameter extends SqlElement {
           "INTERNAL"=>i18n("sendAsInternal"),
           "BOTH"=>i18n("sendAsMailAndInternal"));
         break;
-      
     } 
     return $list;
   }
@@ -634,9 +633,9 @@ class Parameter extends SqlElement {
       	                       'paramMailTitleUser'=>'longtext',
       	                       'paramMailBodyUser'=>'longtext',
       	                       'paramMailTitleApprover'=>'longtext',
-      	                       'paramMailBodyApprover'=>'longtext',
-      	                       'paramMessageAlertImputationResource'=>'longtext',
-      	                       'paramMessageAlertImputationProjectLeader'=>'longtext'
+      	                       'paramMailBodyApprover'=>'longtext'
+      	                       //'messageAlertImputationResource'=>'longtext',
+      	                       //'messageAlertImputationProjectLeader'=>'longtext'
       	                     
       	);
     }
