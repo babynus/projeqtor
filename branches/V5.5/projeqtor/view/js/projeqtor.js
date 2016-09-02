@@ -3407,7 +3407,6 @@ var whichFullScreen=-1;
 var isCk=false;
 function editorInFullScreen() {
   fullScreenTest = false;
-  isCk=false;
   whichFullScreen=-1;
   dojo.query(".dijitEditor").forEach(function(node, index, arr) {
     var editorWidth = node.offsetWidth;
@@ -3424,7 +3423,6 @@ function editorInFullScreen() {
         if(editorArray[numEditor].toolbar && editorArray[numEditor].toolbar[3].items[1]._.state==1){
           fullScreenTest=true;
           whichFullScreen=numEditor;
-          isCk=true;
         }
       }
       numEditor++;
