@@ -266,7 +266,11 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
           event.preventDefault();
           if (dojo.isFF) stopDef();
           showHelp();
-        }
+        }else if(event.keyCode==27){
+          if(editorInFullScreen() && whichFullScreen!=-1){
+            editorArray[whichFullScreen].execCommand('maximize');
+          }
+        } 
       };
       if (dojo.isIE && dojo.isIE<=8) {
         dojo.connect(document, "onkeypress", this, onKeyPressFunc);
