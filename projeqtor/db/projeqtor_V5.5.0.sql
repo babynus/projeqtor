@@ -264,3 +264,14 @@ ALTER TABLE `${prefix}activity` ADD `idComponentVersion` int(12) unsigned DEFAUL
 ALTER TABLE `${prefix}risk` ADD `mitigationPlan` mediumtext DEFAULT NULL;
 
 ALTER TABLE `${prefix}team` ADD `idResource` int(12) unsigned DEFAULT NULL;
+
+INSERT INTO `${prefix}parameter` (idUser,idProject, parameterCode, parameterValue) VALUES 
+(null, null, 'messageAlertImputationResource', 'Your real work allocation is not complete up to ${DAY}'),
+(null, null, 'messageAlertImputationProjectLeader', 'Some of your resources did not enter real work up to ${DAY}'),
+(null, null, 'imputationAlertGenerationDay', '4'),
+(null, null, 'imputationAlertGenerationHour', '17:00'),
+(null, null, 'imputationAlertControlDay', 'current'),
+(null, null, 'imputationAlertControlNumberOfDays', '7'),
+(null, null, 'imputationAlertSendToResource', 'MAIL'),
+(null, null, 'imputationAlertSendToProjectLeader', 'MAIL');
+
