@@ -5011,6 +5011,7 @@ function adminLaunchScript(scriptName,needRefresh) {
     url : url,
     handleAs : "text",
     load : function(data, args) {
+      
     },
     error : function() {
     }
