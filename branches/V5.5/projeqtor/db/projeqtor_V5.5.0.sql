@@ -262,3 +262,5 @@ CREATE UNIQUE INDEX workReference ON `${prefix}work` (idAssignment, workDate);
 ALTER TABLE `${prefix}activity` ADD `idComponentVersion` int(12) unsigned DEFAULT NULL;
 
 ALTER TABLE `${prefix}risk` ADD `mitigationPlan` mediumtext DEFAULT NULL;
+
+ALTER TABLE `${prefix}team` ADD `idResource` int(12) unsigned DEFAULT NULL;
