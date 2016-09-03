@@ -305,7 +305,8 @@ class Parameter extends SqlElement {
       case 'ldapDefaultProfile': case 'defaultProfile':
       	$list=SqlList::getList('Profile');
       	break;
-      case 'ldapMsgOnUserCreation':
+      case 'ldapMsgOnUserCreation': case 'imputationAlertSendToResource': 
+      case 'imputationAlertSendToProjectLeader': case 'imputationAlertSendToTeamManager':
         $list=array('NO'=>i18n('displayNo'),
                     'ALERT'=>i18n('displayAlert'),
                     'MAIL'=>i18n('displayMail'),
@@ -435,12 +436,6 @@ class Parameter extends SqlElement {
             'next'=>i18n('imputationControlNextDay')
         );
         break;
-      case 'imputationAlertSendToResource': case 'imputationAlertSendToProjectLeader':
-        $list=array("NO"=>i18n("displayNo"),
-          "MAIL"=>i18n("sendAsMail"),
-          "INTERNAL"=>i18n("sendAsInternal"),
-          "BOTH"=>i18n("sendAsMailAndInternal"));
-        break;
     } 
     return $list;
   }
@@ -512,6 +507,7 @@ class Parameter extends SqlElement {
       	                       'imputationAlertControlNumberOfDays'=>'number',
       	                       'imputationAlertSendToResource'=>'list',
       	                       'imputationAlertSendToProjectLeader'=>'list',
+      	                       'imputationAlertSendToTeamManager'=>'list',
       	                     'sectionPlanning'=>'section',
                                'displayResourcePlan'=>'list',
       	                       'maxProjectsToDisplay'=>'number',

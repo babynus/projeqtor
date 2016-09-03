@@ -268,10 +268,11 @@ ALTER TABLE `${prefix}team` ADD `idResource` int(12) unsigned DEFAULT NULL;
 INSERT INTO `${prefix}parameter` (idUser,idProject, parameterCode, parameterValue) VALUES 
 (null, null, 'messageAlertImputationResource', 'Your real work allocation is not complete up to ${DAY}'),
 (null, null, 'messageAlertImputationProjectLeader', 'Some of your resources did not enter real work up to ${DAY}'),
-(null, null, 'imputationAlertGenerationDay', '4'),
+(null, null, 'imputationAlertGenerationDay', '5'),
 (null, null, 'imputationAlertGenerationHour', '17:00'),
 (null, null, 'imputationAlertControlDay', 'current'),
 (null, null, 'imputationAlertControlNumberOfDays', '7'),
 (null, null, 'imputationAlertSendToResource', 'MAIL'),
-(null, null, 'imputationAlertSendToProjectLeader', 'MAIL');
+(null, null, 'imputationAlertSendToProjectLeader', 'MAIL'),
+(null, null, 'imputationAlertSendToTeamManager', 'MAIL');
 
