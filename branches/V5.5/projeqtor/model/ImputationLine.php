@@ -947,10 +947,11 @@ scriptLog("      => ImputationLine->getParent()-exit");
   				} else {
   					echo  Work::displayImputation($line->leftWork);
   				}
-  			} else if($line->refType=='Project') { 
+  			} else {
+  			  if($line->refType=='Project') { 
   			    echo '<div id="sumWeekProject_'.$line->refId.'">'.ImputationLine::getAllWorkProjectWeek($listLienProject, $tab, $line->refId, $nbDays).'</div>';
-		    } else {
-  				  echo '<input type="hidden" id="leftWork_' . $nbLine . '" name="leftWork[]" />';
+		      }
+  				echo '<input type="hidden" id="leftWork_' . $nbLine . '" name="leftWork[]" />';
   			}
   			echo '</td>';
   			if($line->refType!='Project'){
