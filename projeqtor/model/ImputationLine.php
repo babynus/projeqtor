@@ -79,6 +79,8 @@ class ImputationLine {
 	  SqlElement::$_cachedQuery['Assignment']=array();
 	  SqlElement::$_cachedQuery['PlanningElement']=array();
 	  SqlElement::$_cachedQuery['WorkElement']=array();
+	  SqlElement::$_cachedQuery['Activity']=array();
+	  SqlElement::$_cachedQuery['Project']=array();
 		
 		// Insert new lines for admin projects
 		Assignment::insertAdministrativeLines($resourceId);
@@ -104,16 +106,16 @@ class ImputationLine {
 		  $crit['idle']='0';
 		}
 		$ass=new Assignment();
-		$assList=$ass->getSqlElementsFromCriteria($crit,false,null,null, true);
+		$assList=$ass->getSqlElementsFromCriteria($crit,false,null,null, true, true);
 		
 		// Retrieve realwork and planned work entered for period
 		$crit=array('idResource' => $resourceId);
 		$crit[$rangeType]=$rangeValue;
 		$work=new Work();
-		$workList=$work->getSqlElementsFromCriteria($crit,false);
+		$workList=$work->getSqlElementsFromCriteria($crit,false,null,null,false,true);
 		$plannedWork=new PlannedWork();
 	  if ($showPlanned) {
-      $plannedWorkList=$plannedWork->getSqlElementsFromCriteria($crit,false);
+      $plannedWorkList=$plannedWork->getSqlElementsFromCriteria($crit,false,null,null,false,true);
     }
     
     // Get acces restriction to hide projects dependong on access rights 
@@ -198,7 +200,7 @@ class ImputationLine {
 				if ($work->idWorkElement) { // Check idWorkElement : if set, add new line for ticket, locked
 				  $acticityAss=$ass; // Save reference to parent activity
 				  $ass=new Assignment();
-				  $we=new WorkElement($work->idWorkElement);
+				  $we=new WorkElement($work->idWorkElement,true);
 				  $ass->id=$acticityAss->id;
 				  $ass->name=$we->refName;;
 				  $ass->refType=$we->refType;
@@ -406,7 +408,7 @@ class ImputationLine {
 
 		//$visibleProjectList=explode(', ', getVisibleProjectsList());
 		if ($elt->topId) {
-			$plan=new PlanningElement($elt->topId);
+			$plan=new PlanningElement($elt->topId,true);
 		}
 		if ($plan) {
 			$key=$plan->wbsSortable . ' ' . htmlEncode($plan->refType) . '#' . $plan->refId;
@@ -454,7 +456,7 @@ scriptLog("      => ImputationLine->getParent()-exit");
 		$canValidate=false;
 		$crit=array('scope'=>'workValid', 'idProfile'=>$user->idProfile);
     $habilitation=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', $crit);
-    $scope=new AccessScope($habilitation->rightAccess);
+    $scope=new AccessScope($habilitation->rightAccess,true);
     if ($scope->accessCode=='NO') {
       $canValidate=false;
     } else if ($scope->accessCode=='ALL') {
@@ -464,7 +466,7 @@ scriptLog("      => ImputationLine->getParent()-exit");
     } else if ($scope->accessCode=='PRO') {
       $crit='idProject in ' . transformListIntoInClause($user->getVisibleProjects());
       $aff=new Affectation();
-      $lstAff=$aff->getSqlElementsFromCriteria(null, false, $crit, null, true);
+      $lstAff=$aff->getSqlElementsFromCriteria(null, false, $crit, null, true,true);
       $fullTable=SqlList::getList('Resource');
       foreach ($lstAff as $id=>$aff) {
         if ($aff->idResource==$resourceId) {
@@ -949,7 +951,7 @@ scriptLog("      => ImputationLine->getParent()-exit");
   				}
   			} else {
   			  if($line->refType=='Project') { 
-  			    echo '<div id="sumWeekProject_'.$line->refId.'">'.ImputationLine::getAllWorkProjectWeek($listLienProject, $tab, $line->refId, $nbDays).'</div>';
+  			    echo '<div id="sumWeekProject_'.$line->refId.'">'.htmlDisplayNumericWithoutTrailingZeros(ImputationLine::getAllWorkProjectWeek($listLienProject, $tab, $line->refId, $nbDays)).'</div>';
 		      }
   				echo '<input type="hidden" id="leftWork_' . $nbLine . '" name="leftWork[]" />';
   			}
@@ -1047,7 +1049,7 @@ scriptLog("      => ImputationLine->getParent()-exit");
 		  $inputWidthFooter=2*$inputWidth;
 		}
 		
-		echo '  <TD '.$colSpanFooter.' class="ganttLeftTitle" style="width: 132px;><span class="nobr" ><div id="totalWork" type="text" trim="true" disabled="true" dojoType="dijit.form.NumberTextBox" style="width: 95%; text-align: center; color: #000000 !important;" class="'.$classTotalWork.'" value="'.$totalWork
+		echo '  <TD '.$colSpanFooter.' class="ganttLeftTitle" style="width: 132px;><span class="nobr" ><div id="totalWork" type="text" trim="true" disabled="true" dojoType="dijit.form.NumberTextBox" style="font-weight:bold;width: 95%; text-align: center; color: #000000 !important;" class="'.$classTotalWork.'" value="'.$totalWork
 		.  '"</div></span></TD>';
 			
 		echo '</TR>';
@@ -1098,7 +1100,7 @@ scriptLog("      => ImputationLine->getParent()-exit");
   	     }
   	     if(!$find)$listLienProject[$idProject][]=$listLienProject[$idProjectOld][$idLP];
 	    }
-	    if($listAllProject[$idProject]->idProject && $listAllProject[$idProject]->idProject!=$listAllProject[$idProject]->id){
+	    if(isset($listAllProject[$idProject]) && $listAllProject[$idProject]->idProject && $listAllProject[$idProject]->idProject!=$listAllProject[$idProject]->id){
 	      $listLienProject=ImputationLine::addProjectToListLienProject($listLienProject, $listAllProject, $listAllProject[$idProject]->idProject, $listAllProject[$idProject]->id);
 	    }
 	  }
