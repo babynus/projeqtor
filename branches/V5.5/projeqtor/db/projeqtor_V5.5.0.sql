@@ -276,3 +276,4 @@ INSERT INTO `${prefix}parameter` (idUser,idProject, parameterCode, parameterValu
 (null, null, 'imputationAlertSendToProjectLeader', 'MAIL'),
 (null, null, 'imputationAlertSendToTeamManager', 'MAIL');
 
+ALTER TABLE `${prefix}billline` ADD `billingType` varchar(10) default null;

@@ -2670,7 +2670,7 @@ function removeDependency(dependencyId, refType, refId) {
  * Display a add line Box
  * 
  */
-function addBillLine() {
+function addBillLine(billingType) {
   var postLoad=function() {  
     var prj=dijit.byId('idProject').get('value');
     refreshListSpecific('listTermProject', 'billLineIdTerm', 'idProject', prj);
@@ -2681,6 +2681,7 @@ function addBillLine() {
   var params="&id=";
   params+="&refType="+dojo.byId("objectClass").value;
   params+="&refId="+dojo.byId("objectId").value;
+  if (billingType) params+="&billingType="+billingType;
   loadDialog('dialogBillLine', postLoad, true, params, true);
 }
 
@@ -2688,10 +2689,11 @@ function addBillLine() {
  * Display a edit line Box
  * 
  */
-function editBillLine(id) {
+function editBillLine(id,billingType) {
   var params="&id="+id;
   params+="&refType="+dojo.byId("objectClass").value;
   params+="&refId="+dojo.byId("objectId").value;
+  if (billingType) params+="&billingType="+billingType;
   loadDialog('dialogBillLine', null, true, params, true)
 }
 
