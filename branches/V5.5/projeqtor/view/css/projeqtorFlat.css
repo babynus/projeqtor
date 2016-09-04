@@ -354,6 +354,18 @@ body .ProjeQtOr {
 
 .ProjeQtOr .iconFilter { background-image: url(customIcons/iconFilter.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOr .iconActiveFilter { background-image: url(customIcons/iconActiveFilter.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+
+.ProjeQtOr .ganttRightTitle, .ProjeQtOr .ganttLeftTopLine, .ProjeQtOr .ganttLeftTitle {
+	background: url() #a6a0bc;
+}
+.ProjeQtOr .ganttTaskgroup {
+  /* background: #dedae6; */
+  background: #ecebf2;
+}
+.ProjeQtOr .ganttTaskgroup:Hover, .ProjeQtOr .ganttTaskrow:hover, .ProjeQtOr .ganttTaskmile:Hover, .ProjeQtOr .ganttRowHover {
+  background-color: #ffffaa;
+}
+
 /* =============================================================================== */
 /* ICONS                                                                           */
 /* =============================================================================== */

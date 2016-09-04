@@ -726,7 +726,7 @@ scriptLog("      => ImputationLine->getParent()-exit");
           . ' value="' . (($line->locked)?'1':'0') . '"/>';
   			}
   			if (! $line->refType) {$line->refType='Imputation';};
-  			echo '<img src="css/images/icon' . htmlEncode($line->refType) . '16.png" ';
+  			echo '<a ';
   			if ($line->refType!='Imputation' and !$print) {
   			  echo ' onmouseover="showBigImage(null,null,this,\''.i18n($line->refType).' #'.htmlEncode($line->refId).'<br/>';
   			  if ($canRead) echo '<i>'. i18n("clickToView").'</i>';
@@ -735,7 +735,9 @@ scriptLog("      => ImputationLine->getParent()-exit");
   			if (! $print and $canRead) {
   			  echo ' class="pointer" onClick="directDisplayDetail(\''.htmlEncode($line->refType).'\',\''.htmlEncode($line->refId).'\')"';
   			}
-  			echo '/>';
+  			echo '>';
+  			echo formatIcon($line->refType, 16);
+  			echo '</a>';
   			echo '</td>';
   			echo '<td class="ganttName" >';
   			// tab the name depending on level
@@ -879,7 +881,7 @@ scriptLog("      => ImputationLine->getParent()-exit");
   						echo '<div type="text" idProject="'.$line->idProject.'" dojoType="dijit.form.NumberTextBox" ';
   						echo ' constraints="{min:0}"';
   						echo '  style="width: 45px; text-align: center; ' . (($line->idle or $line->locked)?'color:#A0A0A0; xbackground: #EEEEEE;':'') .' " ';
-  						echo ' trim="true" maxlength="4" class="input" ';
+  						echo ' trim="true" maxlength="4" class="input imputation" ';
   						echo ' id="workValue_' . $nbLine . '_' . $i . '"';
   						echo ' name="workValue_' . $i . '[]"';
   						echo ' value="' .  Work::displayImputation($valWork) . '" ';
@@ -915,7 +917,12 @@ scriptLog("      => ImputationLine->getParent()-exit");
   				  $sumWork=0;
   				  if($line->refType=='Project'){
   				    $sumWork=ImputationLine::getAllWorkProjectDay($i,$listLienProject,$tab,$line->refId);
-  					  echo '<div id="sumProject_'.$line->refId.'_'.$i.'">'.$sumWork.'</div>';
+  					  echo '<div style="display:none" id="sumProject_'.$line->refId.'_'.$i.'">'.$sumWork.'</div>';
+  					  echo '<input type="text" style="width: 45px; text-align: center;font-weight:bold;" ';
+  					  echo ' class="input dijitTextBox dijitNumberTextBox dijitValidationTextBox displayTransparent imputation" readOnly="true" tabindex="-1" ';
+  					  echo ' id="sumProjectDisplay_'.$line->refId.'_'.$i.'"';
+  					  echo ' value="' . htmlDisplayNumericWithoutTrailingZeros($sumWork) . '" ';
+  					  echo ' />';
   					  if($listAllProject[$line->refId]->idProject && $listAllProject[$line->refId]->idProject!=$line->refId)echo '<input type="hidden" id="projectParent_'.$line->refId.'_'.$i.'" value="'.$listAllProject[$line->refId]->idProject.'">';
   				  }
   				  /*foreach ($line->arrayWork as $idW=>$lll){
@@ -933,7 +940,7 @@ scriptLog("      => ImputationLine->getParent()-exit");
   					echo '<div type="text" dojoType="dijit.form.NumberTextBox" ';
   					echo ' constraints="{min:0}"';
   					echo '  style="width: 60px; text-align: center;' . (($line->idle or $line->locked)?'color:#A0A0A0; xbackground: #EEEEEE;':'') .' " ';
-  					echo ' trim="true" class="input" ';
+  					echo ' trim="true" class="input imputation" ';
   					echo ' id="leftWork_' . $nbLine . '"';
   					echo ' name="leftWork[]"';
   					echo ' value="' .  Work::displayImputation($line->leftWork) . '" ';
@@ -951,7 +958,12 @@ scriptLog("      => ImputationLine->getParent()-exit");
   				}
   			} else {
   			  if($line->refType=='Project') { 
-  			    echo '<div id="sumWeekProject_'.$line->refId.'">'.htmlDisplayNumericWithoutTrailingZeros(ImputationLine::getAllWorkProjectWeek($listLienProject, $tab, $line->refId, $nbDays)).'</div>';
+  			    echo '<div style="display:none" id="sumWeekProject_'.$line->refId.'">'.ImputationLine::getAllWorkProjectWeek($listLienProject, $tab, $line->refId, $nbDays).'</div>';
+  			    echo '<input type="text" style="width: 90px; text-align: center;font-weight:bold;" ';
+  			    echo ' class="input dijitTextBox dijitNumberTextBox dijitValidationTextBox displayTransparent" readOnly="true" tabindex="-1" ';
+  			    echo ' id="sumWeekProjectDisplay_'.$line->refId.'"';
+  			    echo ' value="' . htmlDisplayNumericWithoutTrailingZeros(ImputationLine::getAllWorkProjectWeek($listLienProject, $tab, $line->refId, $nbDays)) . '" ';
+  			    echo ' />';
 		      }
   				echo '<input type="hidden" id="leftWork_' . $nbLine . '" name="leftWork[]" />';
   			}
@@ -1016,11 +1028,11 @@ scriptLog("      => ImputationLine->getParent()-exit");
 				//echo ' constraints="{pattern:\'###0.0#\'}"';
 				echo ' trim="true" disabled="true" ';
 				if (round($colSum[$i],2)>$capacity) {
-				  echo ' class="imputationInvalidCapacity"';
+				  echo ' class="imputationInvalidCapacity imputation"';
 				} else if (round($colSum[$i],2)<$capacity) {
-					echo ' class="displayTransparent"'; 
+					echo ' class="displayTransparent imputation"'; 
 				} else  {
-					echo ' class="imputationValidCapacity"';
+					echo ' class="imputationValidCapacity imputation"';
 				}
 				echo '  style="width: 45px; text-align: center; color: #000000 !important;" ';
 				echo ' id="colSumWork_' . $i . '"';
@@ -1049,7 +1061,7 @@ scriptLog("      => ImputationLine->getParent()-exit");
 		  $inputWidthFooter=2*$inputWidth;
 		}
 		
-		echo '  <TD '.$colSpanFooter.' class="ganttLeftTitle" style="width: 132px;><span class="nobr" ><div id="totalWork" type="text" trim="true" disabled="true" dojoType="dijit.form.NumberTextBox" style="font-weight:bold;width: 95%; text-align: center; color: #000000 !important;" class="'.$classTotalWork.'" value="'.$totalWork
+		echo '  <TD '.$colSpanFooter.' class="ganttLeftTitle" style="width: 132px;><span class="nobr" ><div id="totalWork" type="text" trim="true" disabled="true" dojoType="dijit.form.NumberTextBox" style="font-weight:bold;width: 95%; text-align: center; color: #000000 !important;" class="'.$classTotalWork.' imputation" value="'.$totalWork
 		.  '"</div></span></TD>';
 			
 		echo '</TR>';

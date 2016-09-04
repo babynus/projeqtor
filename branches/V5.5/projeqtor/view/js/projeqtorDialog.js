@@ -3870,12 +3870,14 @@ function addAffectation(objectClass, type, idResource, idProject) {
     showAlert(i18n('alertOngoingChange'));
     return;
   }
+  
   if (dijit.byId('idProfile')) {
     dijit.byId("affectationProfile").set('value',
         dijit.byId('idProfile').get('value'));
   } else {
     dijit.byId("affectationProfile").reset();
   }
+  refreshList('idProfile', 'idProject', idProject, null, 'affectationProfile', false  ); // Attention, selected is given as idAffectation => must seach its profile ...
   if (objectClass == 'Project') {
     refreshList('idProject', 'id', idProject, idProject, 'affectationProject', true);
     dijit.byId("affectationProject").set('value', idProject);
@@ -3939,6 +3941,7 @@ function editAffectation(id, objectClass, type, idResource, idProject, rate,
     showAlert(i18n('alertOngoingChange'));
     return;
   }
+  refreshList('idProfile', 'idProject', idProject, id, 'affectationProfile', false  ); // Attention, selected is given as idAffectation => must seach its profile ...
   disableWidget("affectationDescription");
   dojo.xhrGet({
     url : '../tool/getSingleData.php?dataType=affectationDescription&idAffectation='+id,
@@ -3953,6 +3956,7 @@ function editAffectation(id, objectClass, type, idResource, idProject, rate,
   } else {
     dijit.byId("affectationProfile").reset();
   }
+  
   refreshList('idProject', null, null, idProject, 'affectationProject', true);
   if (objectClass == 'Project') {
     refreshList('id' + type, null, null, idResource, 'affectationResource',
