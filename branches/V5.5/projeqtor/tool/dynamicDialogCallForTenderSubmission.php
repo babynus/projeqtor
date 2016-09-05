@@ -70,7 +70,7 @@ if (!$tender->expectedTenderDateTime) $tender->expectedTenderDateTime=$callForTe
 								id="dialogCallForTenderSubmissionProvider" name="dialogCallForTenderSubmissionProvider"
 								onChange="refreshList('idContact', 'idProvider', this.value, dijit.byId('dialogCallForTenderSubmissionContact').get('value'),'dialogCallForTenderSubmissionContact', false);"
 								class="input" required="required">
-                 <?php htmlDrawOptionForReference('idProvider', $tender->idProvider, null, true);?>
+                 <?php htmlDrawOptionForReference('idProvider', $tender->idProvider, null, false);?>
                </select>
 								<button id="dialogCallForTenderSubmissionProviderDetailButton"
 									dojoType="dijit.form.Button" showlabel="false"
