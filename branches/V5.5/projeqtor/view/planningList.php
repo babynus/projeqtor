@@ -84,13 +84,13 @@ if ($canPlan) {
 	 style="z-index: 3; position: relative; overflow: visible !important;">
 		<table width="100%" height="27px" class="listTitle" >
 		  <tr height="27px">
-		    <td style="vertical-align:top; width:300px;">
+		    <td style="vertical-align:top; width:250px;">
 		      <table >
     		    <tr height="32px">
       		    <td width="50px" align="center">
                 <?php echo formatIcon('Planning', 32, null, true);?>
               </td>
-              <td width="250px" ><span class="title"><?php echo i18n('menuPlanning');?></span></td>
+              <td width="200px" ><span class="title" style="max-width:200px;white-space:normal"><?php echo i18n('menuPlanning');?></span></td>
       		  </tr>
     		  </table>
 		    </td>

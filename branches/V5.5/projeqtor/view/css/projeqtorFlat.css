@@ -341,6 +341,26 @@ body .ProjeQtOr {
   text-shadow: none;
 }
 
+.ProjeQtOr .cke_top, .ProjeQtOr .cke_bottom {
+	background: #cdcadb !important;
+	background-image: url();
+}
+.ProjeQtOr .cke_toolgroup, .ProjeQtOr a.cke_combo_button {
+	background: #dcdae6 !important;
+  background-image: url();
+  
+}
+.ProjeQtOr a.cke_button, .ProjeQtOr a.cke_combo_button {
+	-webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.ProjeQtOr a.cke_button:hover, .ProjeQtOr a.cke_combo_button:hover {
+  background: #a6a0bc !important;
+  background-image: url();
+}
 .ProjeQtOr .iconButtonDownload16 { background-image: url(customIcons/iconDownload.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOr .iconButtonEdit16 { background-image: url(customIcons/iconEdit.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOr .iconButtonRemove16 { background-image: url(customIcons/iconRemove.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
