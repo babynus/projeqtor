@@ -109,7 +109,7 @@ CREATE TABLE `${prefix}tender` (
 CREATE INDEX tenderProject ON `${prefix}tender` (idProject);
 CREATE INDEX tenderType ON `${prefix}tender` (idTenderType);
 CREATE INDEX tenderProvider ON `${prefix}tender` (idProvider);
-CREATE INDEX tenderStatus ON `${prefix}tender` (idStatus);
+CREATE INDEX tenderStatusIndex ON `${prefix}tender` (idStatus);
 CREATE INDEX tenderTenderStatus ON `${prefix}tender` (idTenderStatus);
 CREATE INDEX tenderCallForTender ON `${prefix}tender` (idCallForTender);
 
