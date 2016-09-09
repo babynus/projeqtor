@@ -386,6 +386,7 @@ body .ProjeQtOr {
   background-color: #ffffaa;
 }
 
+.ProjeQtOr .iconMenuBarCustom16 { background-image: url(customIcons/favorite.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 /* =============================================================================== */
 /* ICONS                                                                           */
 /* =============================================================================== */
