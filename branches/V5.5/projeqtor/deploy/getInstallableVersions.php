@@ -120,20 +120,25 @@ $arrayVersion['V2.5.1']=array('name'=>'V2.5.1', 'stable'=>'N', 'lastStable'=>'N'
 $arrayVersion['V2.5.0']=array('name'=>'V2.5.0', 'stable'=>'N', 'lastStable'=>'N', 'last'=>'N', 'file'=>'projectorriaV2.5.0.zip');
 $arrayVersion['V2.4.3']=array('name'=>'V2.4.3', 'stable'=>'Y', 'lastStable'=>'N', 'last'=>'N', 'file'=>'projectorriaV2.4.3.zip');
 
+$currentVersion=null;
+if (isset($_REQUEST['currentVersion'])) {
+  $currentVersion=$_REQUEST['currentVersion'];
+}
 $nb=0;
-echo '{"identifier":"id",' ;
-echo 'label: "name",';
-echo ' "items":[';
+//echo '{"identifier":"id",' ;
+//echo '"label": "name",';
+echo '{';
+//echo ' "items":';
 foreach ($arrayVersion as $vers) {
+  if ($currentVersion and version_compare($currentVersion,$vers['name'])>=0) continue;
   if ($nb>0) echo ',';
   $nb++;
-  echo '{';
-  echo '"id":"'.$vers['name'].'"';
-  echo ',"name":"'.$vers['name'].'"';
+  echo '"'.$vers['name'].'":{';
+  echo '"name":"'.$vers['name'].'"';
   echo ',"stable":"'.$vers['stable'].'"';
   echo ',"lastStable":"'.$vers['lastStable'].'"';
   echo ',"last":"'.$vers['last'].'"';
   echo ',"url":"'.$versionPath.$vers['file'].'"';
   echo '}';
 }
-echo ']}';
+echo '}';
