@@ -3576,7 +3576,6 @@ function ckEditorReplaceEditor(editorName, numEditor) {
     height : height,
     readOnly : readOnly,
     language : currentLocale,
-    uiColor: '#A0A0A0',
     startupFocus : autofocus
   });
   if (editorName != 'noteNote') { // No formChanged for notes
