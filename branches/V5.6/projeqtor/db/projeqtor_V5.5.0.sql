@@ -257,8 +257,6 @@ INSERT INTO `${prefix}indicatorableindicator` (`idIndicatorable`, `nameIndicator
 ('21', 'Meeting', '25', '0'),
 ('20', 'Bill', '26', '0');
 
-CREATE UNIQUE INDEX workReference ON `${prefix}work` (idAssignment, workDate);
-
 ALTER TABLE `${prefix}activity` ADD `idComponentVersion` int(12) unsigned DEFAULT NULL;
 
 ALTER TABLE `${prefix}risk` ADD `mitigationPlan` mediumtext DEFAULT NULL;
@@ -277,3 +275,24 @@ INSERT INTO `${prefix}parameter` (idUser,idProject, parameterCode, parameterValu
 (null, null, 'imputationAlertSendToTeamManager', 'MAIL');
 
 ALTER TABLE `${prefix}billline` ADD `billingType` varchar(10) default null;
+
+-- remove duplicate
+
+DELETE FROM `${prefix}tempupdate` WHERE 1=1;
+
+ALTER TABLE `${prefix}tempupdate` ADD `workValue` DECIMAL(8,5) UNSIGNED,
+ADD `costValue` DECIMAL(11,2) UNSIGNED;
+
+INSERT INTO `${prefix}tempupdate` (select distinct min(id), day, idAssignment, sum(work), sum(cost) from `${prefix}work` 
+ where idAssignment is not null and idWorkElement is null group by day, idAssignment having count(*) >1 );
+  
+UPDATE `${prefix}work` SET work=(select workValue from `${prefix}tempupdate` temp where temp.id=`${prefix}work`.id),
+cost=(select costValue from `${prefix}tempupdate` temp where temp.id=`${prefix}work`.id)
+WHERE id in (select id from `${prefix}tempupdate`);
+ 
+DELETE FROM `${prefix}work` WHERE (day, idAssignment) in ( select refType, refId from  `${prefix}tempupdate`) 
+AND id not in (select id from `${prefix}tempupdate`) and idWorkElement is null;
+
+DELETE FROM `${prefix}tempupdate` WHERE 1=1;
+
+CREATE UNIQUE INDEX workReference ON `${prefix}work` (idAssignment, workDate, idWorkElement);
