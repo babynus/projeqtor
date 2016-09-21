@@ -4076,7 +4076,9 @@ function affectationChangeResource() {
 
 function replaceAffectation (id, objectClass, type, idResource, idProject, rate,
     idle, startDate, endDate, idProfile) {
-  var callback=function() {};
+  var callback=function() {
+    refreshList('idProfile', 'idProject', idProject, null, 'replaceAffectationProfile', false  );
+  };
   var param="&idAffectation="+id;
   loadDialog("dialogReplaceAffectation", callback, true, param);
 }
