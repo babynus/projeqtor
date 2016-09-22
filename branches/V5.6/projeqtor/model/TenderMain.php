@@ -120,7 +120,8 @@ class TenderMain extends SqlElement {
                                   "idProvider"=>"required"
   );  
   
-  private static $_colCaptionTransposition = array('idTenderType'=>'type', 'requestDateTime'=>'requestDate', 'expectedTenderDateTime'=>'expectedTenderDate' );
+  private static $_colCaptionTransposition = array('idTenderType'=>'type', 'requestDateTime'=>'requestDate', 'expectedTenderDateTime'=>'expectedTenderDate',
+     'idResource'=>'responsible' );
   
   private static $_databaseColumnName = array();
   
