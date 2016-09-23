@@ -1082,7 +1082,6 @@ scriptLog("      => ImputationLine->getParent()-exit");
 	  foreach ($imputationList as $id=>$line){
 	    foreach ($listLienProject[$idProject] as $id2=>$line2){
 	      if($line->idProject==$line2){
-	        if ($line->refType=='Ticket')debugLog($line);
 	        $sumWork+=$line->arrayWork[$day]->work;
 	      }
 	    }
