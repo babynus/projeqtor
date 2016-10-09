@@ -4472,8 +4472,15 @@ abstract class SqlElement {
 	   $hideAutoloadError=true; // Avoid error message in autoload
 	   if (is_object($object)) {
 	     $result=($object instanceof $class);
+	   } else if (version_compare(PHP_VERSION, '5.3.9') >= 0) {
+	     $result=@is_a($object,$class,true); // 3rd parameter "allow_string" is compatible only since V5.3.9
 	   } else {
-	     $result=@is_a($object,$class);
+	     if (self::class_exists($object)) {
+	       $obj=new $object();
+	       $result=($obj instanceof $class);
+	     } else {
+	       $result=false;
+	     }
 	   }
 	   $hideAutoloadError=true;
 	   return $result;
