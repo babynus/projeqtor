@@ -591,7 +591,7 @@ abstract class SqlElement {
 		if ($force) {
 			$control="OK";
 		} else {
-			$control=$this->control();			
+		  $control=$this->control();			
 			$class=get_class($this);
 			if ( ($control=='OK' or strpos($control,'id="confirmControl" value="save"')>0 )
 			and property_exists($class, $class.'PlanningElement')) {
@@ -3046,11 +3046,22 @@ abstract class SqlElement {
 					$right='YES';
 				}
 			}
+		} else if (get_class($this)=='Affectation' and property_exists($this, '_automaticCreation') and $this->_automaticCreation) {
+		  $right='YES';
 		}
-		if ($right!='YES' and get_class($this)=='Project' and $this->idProject) {
-		  $proj=new Project($this->idProject,true);
-		  $right=securityGetAccessRightYesNo('menuProject', 'update', $proj);
-		} else if ($right!='YES' and get_class($this)=='Affectation' ) {
+		if ($right!='YES' and get_class($this)=='Project') {
+		  if ($this->idProject) {
+		    $proj=new Project($this->idProject,true);
+		    $right=securityGetAccessRightYesNo('menuProject', 'update', $proj);
+		  } else {
+		    //  $right=securityGetAccessRightYesNo('menu' . get_class($this), (($this->id)?'update':'create'), $this); // This shoulod be applied to avoid creation at root
+		    if ($this->id) {
+		      $right=securityGetAccessRightYesNo('menu' . get_class($this), 'update', $this);
+		    } else {
+          $right=securityGetAccessRightYesNo('menu' . get_class($this), 'create');
+		    }
+		  }
+		} else if ($right!='YES' and get_class($this)=='Affectation') {
 		  $prj=new Project($this->idProject,true);
 		  $right=securityGetAccessRightYesNo('menuProject', 'update', $prj);
 		} else if ($right!='YES') {
