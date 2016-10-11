@@ -8,7 +8,7 @@
 ALTER TABLE `${prefix}product` ADD `idUser` int(12) UNSIGNED DEFAULT NULL;
 ALTER TABLE `${prefix}version` ADD `idUser` int(12) UNSIGNED DEFAULT NULL;
 ALTER TABLE `${prefix}action` ADD `idContact` int(12) UNSIGNED DEFAULT NULL;
-ALTER TABLE `${prefix}dependency` ADD `idDependencyComment` int(12) UNSIGNED DEFAULT NULL;
+ALTER TABLE `${prefix}dependency` ADD `comment` varchar(4000)DEFAULT NULL;
 
 UPDATE `${prefix}product` set idUser=
 (select min(idUser) from `${prefix}history` where (refType='Product' or refType='Component') and refId=`${prefix}product`.id and operationDate=
