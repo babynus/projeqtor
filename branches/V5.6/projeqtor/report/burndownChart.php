@@ -95,63 +95,62 @@ while ($date<=$end) {
   
 }
 
+$old=null;
 foreach ($arrDates as $date => $period) {
   if (isset($tabLeft[$date])) {
-    $resLeft[$period]=$tabLeft[$date];
+    $resLeft[$period]=Work::displayWork($tabLeft[$date]);
+    $old=$tabLeft[$date];
+  } else {
+    $resLeft[$period]=Work::displayWork($old);
   }
+  
 }
-var_dump($resLeft);
-exit;
+
 
 // Graph
 if (! testGraphEnabled()) { return;}
 include("../external/pChart/pData.class");  
 include("../external/pChart/pChart.class");  
 $dataSet=new pData;
-$nbItem=0;
-/*foreach($sumProjUnit as $id=>$vals) {
-  $dataSet->AddPoint($vals,$id);
-  $dataSet->SetSerieName($tab[$id]['name'],$id);
-  $dataSet->AddSerie($id);
-  $nbItem++;
-}
+
+$vals=array('2016-10-12'=>2);
+$dataSet->AddPoint($vals,0);
+$dataSet->SetSerieName('xxxNbxxx',0);
+$dataSet->AddSerie(0);
+
 $arrLabel=array();
 foreach($arrDates as $date){
-  $arrLabel[]=substr($date,0,4) . '-' . substr($date,4,2);
+  $arrLabel[]=$date;
 }
 $dataSet->AddPoint($arrLabel,"dates");  
 $dataSet->SetAbsciseLabelSerie("dates");   
 $width=900;
 $graph = new pChart($width,360);  
-for ($i=0;$i<=$nbItem;$i++) {
-  $graph->setColorPalette($i,$rgbPalette[($i % 12)]['R'],$rgbPalette[($i % 12)]['G'],$rgbPalette[($i % 12)]['B']);
-}*/
+//$graph->setColorPalette(0,$rgbPalette[(0)]['R'],$rgbPalette[(5)]['G'],$rgbPalette[(10)]['B']);
+
 $graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",10);
 $graph->drawRoundedRectangle(5,5,$width-5,358,5,230,230,230);  
 $graph->setGraphArea(40,30,$width-300,300);  
 $graph->drawGraphArea(252,252,252);  
 $graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",8);  
 $graph->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(), SCALE_ADDALLSTART0 ,0,0,0,TRUE,90,1, true);  
+
 $graph->drawGrid(5,TRUE,230,230,230,255);  
 $graph->drawStackedBarGraph($dataSet->GetData(),$dataSet->GetDataDescription(),TRUE);  
 $graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",8);  
 $graph->drawLegend($width-250,15,$dataSet->GetDataDescription(),240,240,240);  
-
 $graph->clearScale();
-$serie=0;  
-foreach($sumProjUnit as $id=>$vals) {
-  $serie+=1;
-  $dataSet->RemoveSerie($id);
-}
-$dataSet->AddPoint($cumulUnit,"sum");
-$dataSet->SetSerieName(i18n("cumulated"),"sum");  
-$dataSet->AddSerie("sum");
-$dataSet->SetYAxisName(i18n("cumulated"));
+
+$dataSet->RemoveSerie(0);
+$dataSet->AddPoint($resLeft,1);
+$dataSet->SetSerieName(i18n("legendRemainingEffort"),1);  
+$dataSet->AddSerie(1);
+$dataSet->SetYAxisName(i18n("sum"));
 $graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",8);
-$graph->setColorPalette($serie,0,0,0);  
+//$graph->setColorPalette(0,0,0,0);  
 $graph->drawRightScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_START0,0,0,0,true,90,1, true);
 $graph->drawLineGraph($dataSet->GetData(),$dataSet->GetDataDescription());  
-$graph->drawPlotGraph($dataSet->GetData(),$dataSet->GetDataDescription(),3,2,255,255,255);  
+//$graph->drawPlotGraph($dataSet->GetData(),$dataSet->GetDataDescription(),3,2,255,255,255);  
 
 $imgName=getGraphImgName("burndownChart");
 $graph->Render($imgName);
