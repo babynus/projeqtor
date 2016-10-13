@@ -1858,6 +1858,10 @@ function editAssignment(assignmentId, idResource, idRole, cost, rate,
       dijit.byId("assignmentIdRole").set('readOnly', true);
     }
   }
+  ///////////KEVIN////////////
+//  if (assignedWork == 0){
+//    dijit.byId("assignmentRealWork").set('value',dojo.number.format(assignmentLeftWork);
+//  }
   setTimeout("editAssignmentLoading=false", 1000);
 }
 
@@ -1877,12 +1881,19 @@ function assignmentUpdateLeftWork(prefix) {
     assigned.value=dojo.number.format(newAssigned);
   }
   var left=dojo.byId(prefix + "LeftWork");
-  // var real = dojo.byId(prefix + "RealWork");
+  //// KEVIN #2338 ////
+  var real = dojo.byId(prefix + "RealWork");
   // var planned = dojo.byId(prefix + "PlannedWork");
   diff=dojo.number.parse(assigned.value) - initAssigned.value;
   newLeft=parseFloat(initLeft.value) + diff;
   if (newLeft < 0 || isNaN(newLeft)) {
     newLeft=0;
+  }
+  if(assigned.value != initAssigned.value){
+    diffe=dojo.number.parse(assigned.value) - real.value ;
+    if (initAssigned.value==0 || isNaN(initAssigned.value)){
+      newLeft= 0 + diffe;
+    }
   }
   left.value=dojo.number.format(newLeft);
   assignmentUpdatePlannedWork(prefix);
@@ -2630,7 +2641,6 @@ function refreshDependencyList(selected) {
   }
   loadContent(url, 'dialogDependencyList', 'dependencyForm', false);
 }
-
 /**
  * save a Dependency (after addLink)
  * 
