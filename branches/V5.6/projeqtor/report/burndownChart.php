@@ -79,7 +79,7 @@ while ($line = Sql::fetchLine($result)) {
   if ($day>date('Y-m-d')) break;
 }
 $endReal=$end;
-echo $endReal.'<br/>';
+
 // constitute query and execute for planned post $end (last real work day)
 $pw=new PlannedWork();
 $pwTable=$pw->getDatabaseTableName();
@@ -95,6 +95,7 @@ $query=$querySelect.$queryFrom.$queryWhere.$queryOrder;
 $resultPlanned=Sql::query($query);
 $tabLeftPlanned=array();
 $resLeftPlanned=array();
+$resBest=array();
 $tabLeftPlanned[$end]=$lastLeft;
 $newLastLeft=$lastLeft;
 while ($line = Sql::fetchLine($resultPlanned)) {
@@ -107,12 +108,13 @@ while ($line = Sql::fetchLine($resultPlanned)) {
   if ($end=="" or $end<$day) { $end=$day;}
   if ($newLastLeft==0) break;
 }
+
 if (checkNoData(array_merge($tabLeft,$tabLeftPlanned))) exit;
 
 $pe=SqlElement::getSingleSqlElementFromCriteria('PlanningElement',array('refType'=>'Project', 'refId'=>$idProject));
 if (trim($pe->realStartDate)) $start=$pe->realStartDate;
 if (trim($pe->realEndDate)) $end=$pe->realEndDate;
-
+if (trim($pe->validatedEndDate) and $pe->validatedEndDate>$end) $end=$pe->validatedEndDate;
 $arrDates=array();
 $date=$start;
 while ($date<=$end) {
@@ -125,6 +127,7 @@ while ($date<=$end) {
 $old=null;
 $old=reset($tabLeft);
 $oldPlanned=$lastLeft;
+$nbSteps=0;
 foreach ($arrDates as $date => $period) {
   if ($date>$endReal) {
     $resLeft[$period]="";
@@ -144,22 +147,39 @@ foreach ($arrDates as $date => $period) {
       $resLeftPlanned[$period]="";
     }
   }
-  
+  if ($date<=$pe->validatedEndDate) $nbSteps++;
+}
+
+$maxLeft=$pe->validatedWork;
+if (!$maxLeft) $maxLeft=max(array($resLeft[$start],$resLeftPlanned[$start]));
+$minLeft=0;
+//$nbSteps=count($arrDates)-1;
+$stepValue=($nbSteps)?(($maxLeft-$minLeft)/($nbSteps-1)):0;
+$val=$maxLeft;
+foreach ($arrDates as $date => $period) {
+  $resBest[$date]=$val;
+  if ($val) {
+    $val-=$stepValue;
+    if ($val<0.1) $val=0;
+  } else {
+    $val="";
+  }
 }
 
 // Graph
 if (! testGraphEnabled()) { return;}
 
-$width=1200;
-$height=700;
+$graphWidth=1000;
+$graphHeight=500;
+
 $maxPlotted=30; // 30 ?
 include("../external/pChart/pData.class");  
 include("../external/pChart/pChart.class");  
 $dataSet=new pData;
-$graph = new pChart($width,360);
+$graph = new pChart($graphWidth,$graphHeight);
 $graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",10);
-$graph->drawRoundedRectangle(5,5,$width-5,$height-5,5,230,230,230);
-$graph->setGraphArea(60,20,$width-20,500);
+$graph->drawRoundedRectangle(5,5,$graphWidth-5,$graphHeight-5,5,230,230,230);
+$graph->setGraphArea(60,20,$graphWidth-20,$graphHeight-90);
 $graph->drawGraphArea(252,252,252);
 
 $arrLabel=array();
@@ -170,20 +190,24 @@ $dataSet->AddPoint($arrLabel,"dates");
 $dataSet->SetAbsciseLabelSerie("dates");
 
 // Left Work
+$dataSet->AddPoint($resBest,"best");
 $dataSet->AddPoint($resLeft,"left");
 $dataSet->AddPoint($resLeftPlanned,"leftPlanned");
 //$dataSet->AddPoint(array("",120,110,100,"","",10,5,2,0),1);
+$dataSet->SetSerieName(i18n("legendBestBurndown"),"best");
 $dataSet->SetSerieName(i18n("legendRemainingEffort"),"left");
 $dataSet->SetSerieName(i18n("legendRemainingEffort").' ('.i18n('planned').')',"leftPlanned");
+$dataSet->AddSerie("best");
 $dataSet->AddSerie("left");
-
 $dataSet->SetYAxisName(i18n("legendRemainingEffort"));
 $graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",8);
-$graph->setColorPalette(0,120,120,250);
-$graph->setColorPalette(1,150,150,200);
+$graph->setColorPalette(0,250,180,210);
+$graph->setColorPalette(1,120,140,250);
+$graph->setColorPalette(2,180,180,250);
 $graph->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_START0,0,0,0,true,90,1, true);
 $graph->drawGrid(3,TRUE,230,230,230,255);
 $graph->setLineStyle(1,0);
+
 $graph->drawLineGraph($dataSet->GetData(),$dataSet->GetDataDescription());
 $dataSet->RemoveSerie('left');
 $graph->setLineStyle(1,3);
@@ -195,7 +219,7 @@ if (count($resLeft)<$maxPlotted) {
 $dataSet->RemoveSerie('left');
 
 $graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",8);
-$graph->drawLegend($width-200,30,$dataSet->GetDataDescription(),240,240,240);
+$graph->drawLegend($graphWidth-200,30,$dataSet->GetDataDescription(),240,240,240);
 $graph->clearScale();
 
 /*
