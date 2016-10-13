@@ -2602,7 +2602,6 @@ function editDependency(depType, id, refType, refTypeName, refId, delay) {
   dijit.byId("dependencyRefTypeDep").set('readOnly', true);
   dijit.byId("dependencyRefIdDepEdit").set('readOnly', true);
   disableWidget('dialogDependencySubmit');
-  
   //KEVIN TICKET #2038 
   disableWidget('dependencyComment');
   dijit.byId('dependencyComment').set('value',"");
@@ -2631,7 +2630,6 @@ function refreshDependencyList(selected) {
   }
   loadContent(url, 'dialogDependencyList', 'dependencyForm', false);
 }
-
 
 /**
  * save a Dependency (after addLink)
