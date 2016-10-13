@@ -49,37 +49,66 @@ if (!$idProject) {
   echo i18n('messageNoData',array(i18n('Project'))); // TODO i18n message
   exit; 
 }
-  
-$ph=new ProjectHistory();
-$phTable=$ph->getDatabaseTableName();
+
 $user=getSessionUser();
 
+// constitute query and execute for left work (history)
+$ph=new ProjectHistory();
+$phTable=$ph->getDatabaseTableName();
 $querySelect= "select leftWork as leftwork, realWork as realwork, day "; 
 $queryFrom=   " from $phTable ph";
 $queryWhere=  " where ph.idProject=".Sql::fmtId($idProject);
 $queryWhere.= " and ph.idProject in ".transformListIntoInClause($user->getVisibleProjects(false));
 $queryOrder= "  order by day asc";
 $query=$querySelect.$queryFrom.$queryWhere.$queryOrder;
-echo $query;
-// constitute query and execute
-
+//echo $query.'<br/>'; // debugLog
+$result=Sql::query($query);
 $tabLeft=array();
 $resLeft=array();
 $start="";
 $end="";
 $hasReal=false;
-
-$result=Sql::query($query);
+$lastLeft=0;
 while ($line = Sql::fetchLine($result)) {
   $day=substr($line['day'],0,4).'-'.substr($line['day'],4,2).'-'.substr($line['day'],6);
   $left=$line['leftwork'];
   $tabLeft[$day]=$left;
+  $lastLeft=$left;
   if ($start=="" or $start>$day) {$start=$day;}
   if ($end=="" or $end<$day) { $end=$day;}
+  if ($day>date('Y-m-d')) break;
 }
+$endReal=$end;
+echo $endReal.'<br/>';
+// constitute query and execute for planned post $end (last real work day)
+$pw=new PlannedWork();
+$pwTable=$pw->getDatabaseTableName();
+$querySelect= "select sum(pw.work) as work, pw.workDate as day ";
+$queryFrom=   " from $pwTable pw";
+$queryWhere=  " where pw.workDate>'$end'";
+$proj=new Project($idProject);
+$queryWhere.= " and pw.idProject in " . transformListIntoInClause($proj->getRecursiveSubProjectsFlatList(false, true));
+$queryWhere.= " and pw.idProject in ".transformListIntoInClause($user->getVisibleProjects(false));
+$queryOrder= "  group by pw.workDate";
+$query=$querySelect.$queryFrom.$queryWhere.$queryOrder;
+//echo $query.'<br/>'; // debugLog
+$resultPlanned=Sql::query($query);
+$tabLeftPlanned=array();
+$resLeftPlanned=array();
+$tabLeftPlanned[$end]=$lastLeft;
+$newLastLeft=$lastLeft;
+while ($line = Sql::fetchLine($resultPlanned)) {
+  $day=$line['day'];
+  $planned=$line['work'];
+  $newLastLeft-=$planned;
+  if ($newLastLeft<0) $newLastLeft=0;
+  $tabLeftPlanned[$day]=$newLastLeft;
+  if ($start=="" or $start>$day) {$start=$day;}
+  if ($end=="" or $end<$day) { $end=$day;}
+  if ($newLastLeft==0) break;
+}
+if (checkNoData(array_merge($tabLeft,$tabLeftPlanned))) exit;
 
-if (checkNoData($tabLeft)) exit;
-debugLog("1");
 $pe=SqlElement::getSingleSqlElementFromCriteria('PlanningElement',array('refType'=>'Project', 'refId'=>$idProject));
 if (trim($pe->realStartDate)) $start=$pe->realStartDate;
 if (trim($pe->realEndDate)) $end=$pe->realEndDate;
@@ -87,72 +116,104 @@ if (trim($pe->realEndDate)) $end=$pe->realEndDate;
 $arrDates=array();
 $date=$start;
 while ($date<=$end) {
-  debugLog($date);
   if ($scale=='week') { $arrDates[$date]=date('Y-W',strtotime($date)); } 
   else if ($scale=='month') { $arrDates[$date]=date('Y-m');  } 
   else { $arrDates[$date]=$date;}
   $date=addDaysToDate($date, 1);
-  
 }
 
-$old="";
+$old=null;
+$old=reset($tabLeft);
+$oldPlanned=$lastLeft;
 foreach ($arrDates as $date => $period) {
-  if (isset($tabLeft[$date])) {
+  if ($date>$endReal) {
+    $resLeft[$period]="";
+  } else if (isset($tabLeft[$date])) {
     $resLeft[$period]=Work::displayWork($tabLeft[$date]);
     $old=$tabLeft[$date];
   } else {
-    $resLeft[$period]=Work::displayWork($old);
+    $resLeft[$period]=($old===null)?'':Work::displayWork($old);
+  }
+  if (isset($tabLeftPlanned[$date])) {
+    $resLeftPlanned[$period]=$tabLeftPlanned[$date];
+    $oldPlanned=$tabLeftPlanned[$date];
+  } else {
+    if ($date>=$endReal) {
+      $resLeftPlanned[$period]=$oldPlanned;
+    } else  {
+      $resLeftPlanned[$period]="";
+    }
   }
   
 }
 
-
 // Graph
 if (! testGraphEnabled()) { return;}
+
+$width=1200;
+$height=700;
+$maxPlotted=30; // 30 ?
 include("../external/pChart/pData.class");  
 include("../external/pChart/pChart.class");  
 $dataSet=new pData;
-
-$vals=array('2016-10-12'=>2);
-$dataSet->AddPoint($vals,0);
-$dataSet->SetSerieName(i18n('legendCompletedTasks'),0);
-$dataSet->AddSerie(0);
+$graph = new pChart($width,360);
+$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",10);
+$graph->drawRoundedRectangle(5,5,$width-5,$height-5,5,230,230,230);
+$graph->setGraphArea(60,20,$width-20,500);
+$graph->drawGraphArea(252,252,252);
 
 $arrLabel=array();
 foreach($arrDates as $date){
   $arrLabel[]=$date;
 }
-$dataSet->AddPoint($arrLabel,"dates");  
-$dataSet->SetAbsciseLabelSerie("dates");   
-$width=900;
-$height=700;
-$graph = new pChart($width,360);  
-//$graph->setColorPalette(0,$rgbPalette[(0)]['R'],$rgbPalette[(5)]['G'],$rgbPalette[(10)]['B']);
+$dataSet->AddPoint($arrLabel,"dates");
+$dataSet->SetAbsciseLabelSerie("dates");
 
-$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",10);
-$graph->drawRoundedRectangle(5,5,$width-5,358,5,230,230,230);  
-$graph->setGraphArea(60,20,$width-300,280);  
-$graph->drawGraphArea(252,252,252);  
-$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",8);  
-$graph->drawRightScale($dataSet->GetData(),$dataSet->GetDataDescription(), SCALE_START0 ,0,0,0,TRUE,90,1, true);  
+// Left Work
+$dataSet->AddPoint($resLeft,"left");
+$dataSet->AddPoint($resLeftPlanned,"leftPlanned");
+//$dataSet->AddPoint(array("",120,110,100,"","",10,5,2,0),1);
+$dataSet->SetSerieName(i18n("legendRemainingEffort"),"left");
+$dataSet->SetSerieName(i18n("legendRemainingEffort").' ('.i18n('planned').')',"leftPlanned");
+$dataSet->AddSerie("left");
 
-$graph->drawGrid(3,TRUE,230,230,230,255);  
-$graph->drawStackedBarGraph($dataSet->GetData(),$dataSet->GetDataDescription(),TRUE);  
-$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",8);  
-$graph->drawLegend($width-150,15,$dataSet->GetDataDescription(),240,240,240);  
+$dataSet->SetYAxisName(i18n("legendRemainingEffort"));
+$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",8);
+$graph->setColorPalette(0,120,120,250);
+$graph->setColorPalette(1,150,150,200);
+$graph->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_START0,0,0,0,true,90,1, true);
+$graph->drawGrid(3,TRUE,230,230,230,255);
+$graph->setLineStyle(1,0);
+$graph->drawLineGraph($dataSet->GetData(),$dataSet->GetDataDescription());
+$dataSet->RemoveSerie('left');
+$graph->setLineStyle(1,3);
+$dataSet->AddSerie("leftPlanned");
+$graph->drawLineGraph($dataSet->GetData(),$dataSet->GetDataDescription());
+if (count($resLeft)<$maxPlotted) {
+ $graph->drawPlotGraph($dataSet->GetData(),$dataSet->GetDataDescription(),3,2,255,255,255);
+}
+$dataSet->RemoveSerie('left');
+
+$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",8);
+$graph->drawLegend($width-200,30,$dataSet->GetDataDescription(),240,240,240);
 $graph->clearScale();
 
-$dataSet->RemoveSerie(0);
-$dataSet->AddPoint($resLeft,1);
-//$dataSet->AddPoint(array("",120,110,100,"","",10,5,2,0),1);
-$dataSet->SetSerieName(i18n("legendRemainingEffort"),1);  
-$dataSet->AddSerie(1);
-$dataSet->SetYAxisName(i18n("sum"));
-$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",8);
-//$graph->setColorPalette(0,0,0,0);  
-$graph->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_START0,0,0,0,true,90,1, true);
-$graph->drawLineGraph($dataSet->GetData(),$dataSet->GetDataDescription());  
-$graph->drawPlotGraph($dataSet->GetData(),$dataSet->GetDataDescription(),3,2,255,255,255);  
+/*
+
+
+// Completed Tasks
+$vals=array('2016-10-12'=>2);
+$dataSet->AddPoint($vals,'completedTasks');
+$dataSet->SetSerieName(i18n('legendCompletedTasks'),'completedTasks');
+$dataSet->AddSerie('completedTasks');
+//$graph->setColorPalette(0,$rgbPalette[(0)]['R'],$rgbPalette[(5)]['G'],$rgbPalette[(10)]['B']);
+$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",8);  
+$graph->drawRightScale($dataSet->GetData(),$dataSet->GetDataDescription(), SCALE_START0 ,0,0,0,TRUE,90,1, true);  
+$graph->drawStackedBarGraph($dataSet->GetData(),$dataSet->GetDataDescription(),TRUE);
+
+*/
+
+ 
 
 $imgName=getGraphImgName("burndownChart");
 $graph->Render($imgName);
