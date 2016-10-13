@@ -1858,10 +1858,6 @@ function editAssignment(assignmentId, idResource, idRole, cost, rate,
       dijit.byId("assignmentIdRole").set('readOnly', true);
     }
   }
-  ///////////KEVIN////////////
-//  if (assignedWork == 0){
-//    dijit.byId("assignmentRealWork").set('value',dojo.number.format(assignmentLeftWork);
-//  }
   setTimeout("editAssignmentLoading=false", 1000);
 }
 
