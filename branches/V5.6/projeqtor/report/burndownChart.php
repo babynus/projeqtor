@@ -52,6 +52,8 @@ if (!$idProject) {
   echo '</div>';
   exit; 
 }
+// Graph
+if (! testGraphEnabled()) { return;}
 
 $user=getSessionUser();
 $proj=new Project($idProject);
@@ -157,7 +159,12 @@ $arrDates=array();
 $date=$start;
 while ($date<=$end) {
   if ($scale=='week') { $arrDates[$date]=date('Y-W',strtotime($date)); } 
-  else if ($scale=='month') { $arrDates[$date]=date('Y-m');  } 
+  else if ($scale=='month') { $arrDates[$date]=date('Y-m',strtotime($date));  } 
+  else if ($scale=='quarter') { 
+    $year=date('Y',strtotime($date));
+    $month=date('m',strtotime($date));
+    $quarter=1+intval(($month-1)/3);
+    $arrDates[$date]=$year.'-Q'.$quarter;  }
   else { $arrDates[$date]=$date;}
   $date=addDaysToDate($date, 1);
 }
@@ -168,7 +175,7 @@ $oldPlanned=$lastLeft;
 $nbSteps=0;
 foreach ($arrDates as $date => $period) {
   if ($date>$endReal) {
-    $resLeft[$period]="";
+    if (!isset($resLeft[$period])) $resLeft[$period]="";
   } else if (isset($tabLeft[$date])) {
     $resLeft[$period]=Work::displayWork($tabLeft[$date]);
     $old=$tabLeft[$date];
@@ -188,27 +195,38 @@ foreach ($arrDates as $date => $period) {
   if ($date<=$pe->validatedEndDate) $nbSteps++;
 }
 
+
 $maxLeft=$pe->validatedWork;
 if (!$maxLeft) $maxLeft=max(array($resLeft[$start],$resLeftPlanned[$start]));
 $minLeft=0;
 //$nbSteps=count($arrDates)-1;
 $stepValue=($nbSteps)?(($maxLeft-$minLeft)/($nbSteps-1)):0;
 $val=$maxLeft;
+
+$graphWidth=1000;
+$graphHeight=500;
+
 foreach ($arrDates as $date => $period) {
-  $resBest[$date]=$val;
+  if ($val!=="" or ! isset($resBest[$period])) $resBest[$period]=$val;
   if ($val) {
     $val-=$stepValue;
-    if ($val<0.1) $val=0;
+    if ($val<0.01) $val=0;
   } else {
     $val="";
   }
 }
-
-// Graph
-if (! testGraphEnabled()) { return;}
-
-$graphWidth=1000;
-$graphHeight=500;
+$arrDates=array_flip($arrDates);
+$cpt=0;
+$modulo=intVal(30*count($arrDates)/$graphWidth);
+if ($modulo<1) $modulo=1;
+foreach ($arrDates as $date => $period) {
+  if ($cpt % $modulo !=0 ) {
+    $arrDates[$date]="";
+  } else {
+    $arrDates[$date]=htmlFormatDate($date);
+  }
+  $cpt++;
+}
 
 $maxPlotted=30; // 30 ?
 include("../external/pChart/pData.class");  
