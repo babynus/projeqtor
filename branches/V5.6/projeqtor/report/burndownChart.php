@@ -42,15 +42,19 @@ if ($idProject!="") {
 if ( $scale) {
   $headerParameters.= i18n("colFormat") . ' : ' . i18n($scale) . '<br/>';
 }
+$showCompleted=true;
 
 include "header.php";
 
 if (!$idProject) {
+  echo '<div style="background: #FFDDDD;font-size:200%;text-align:center;padding:20px">';
   echo i18n('messageNoData',array(i18n('Project'))); // TODO i18n message
+  echo '</div>';
   exit; 
 }
 
 $user=getSessionUser();
+$proj=new Project($idProject);
 
 // constitute query and execute for left work (history)
 $ph=new ProjectHistory();
@@ -107,6 +111,40 @@ while ($line = Sql::fetchLine($resultPlanned)) {
   if ($start=="" or $start>$day) {$start=$day;}
   if ($end=="" or $end<$day) { $end=$day;}
   if ($newLastLeft==0) break;
+}
+
+// constitute query and execute for completed tasks
+$pe=new PlanningElement();
+$peTable=$pe->getDatabaseTableName();
+$querySelect= "select plannedEndDate as planned, realEndDate as real ";
+$queryFrom=   " from $peTable pe";
+$queryWhere=  " where pe.idProject in " . transformListIntoInClause($proj->getRecursiveSubProjectsFlatList(false, true));
+$queryWhere.= " and pe.idProject in ".transformListIntoInClause($user->getVisibleProjects(false));
+$queryWhere= "  and pe.elementary=1";
+$queryOrder= "  order by COALESCE(pe.realEndDated, pe.plannedEndDate";
+$query=$querySelect.$queryFrom.$queryWhere.$queryOrder;
+//echo $query.'<br/>'; // debugLog
+$tabCompleted=array();
+$tabCompletedPlanned=array();
+$resCompleted=array();
+$resCompletedPlanned=array();
+$resCompletedCumul=array();
+$resCompletedPlannedCumul=array();
+if ($showCompleted) {
+  $resultCompleted=Sql::query($query);
+  while ($line = Sql::fetchLine($resultPlanned)) {
+    if ($line['real']) {
+      $day=$line['real'];
+      if (isset($tabCompleted[$day])){ $tabCompleted[$day]++;}
+      else {$tabCompleted[$day]=1;}
+    } else if ($line['planned']){
+      $day=$line['real'];
+      if (isset($tabCompletedPlanned[$day])) {$tabCompletedPlanned[$day]++;}
+      else {$tabCompletedPlanned[$day]=1;}
+    } else {
+      // No real, no planned => not taken into account
+    }
+  }
 }
 
 if (checkNoData(array_merge($tabLeft,$tabLeftPlanned))) exit;
