@@ -25,6 +25,7 @@
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
 include_once '../tool/projeqtor.php';
+include_once '../tool/formatter.php';
 
 $idProject="";
 if (array_key_exists('idProject',$_REQUEST) and trim($_REQUEST['idProject'])!="") {
@@ -35,6 +36,11 @@ $scale="";
 if (array_key_exists('format',$_REQUEST)) {
 	$scale=$_REQUEST['format'];
 };
+$showCompleted=false;
+if (array_key_exists('showBurndownActivities',$_REQUEST)) {
+  $showCompleted=true;
+}
+
 $headerParameters="";
 if ($idProject!="") {
   $headerParameters.= i18n("colIdProject") . ' : ' . htmlEncode(SqlList::getNameFromId('Project',$idProject)) . '<br/>';
@@ -42,7 +48,9 @@ if ($idProject!="") {
 if ( $scale) {
   $headerParameters.= i18n("colFormat") . ' : ' . i18n($scale) . '<br/>';
 }
-$showCompleted=true;
+if ($showCompleted) {
+  $headerParameters.= i18n("colShowBurndownActivities"). '<br/>';
+}
 
 include "header.php";
 
@@ -162,7 +170,7 @@ $arrDates=array();
 $date=$start;
 while ($date<=$end) {
   if ($scale=='week') { $arrDates[$date]=date('Y-W',strtotime($date)); } 
-  else if ($scale=='month') { $arrDates[$date]=date('Y-m',strtotime($date));  } 
+  else if ($scale=='month') { $arrDates[$date]=getMonthName(date('m',strtotime($date))).' '.date('Y',strtotime($date));  } 
   else if ($scale=='quarter') { 
     $year=date('Y',strtotime($date));
     $month=date('m',strtotime($date));
@@ -189,11 +197,11 @@ foreach ($arrDates as $date => $period) {
     $resLeft[$period]=($old===null)?'':Work::displayWork($old);
   }
   if (isset($tabLeftPlanned[$date])) {
-    $resLeftPlanned[$period]=$tabLeftPlanned[$date];
+    $resLeftPlanned[$period]=Work::displayWork($tabLeftPlanned[$date]);
     $oldPlanned=$tabLeftPlanned[$date];
   } else {
     if ($date>=$endReal) {
-      $resLeftPlanned[$period]=$oldPlanned;
+      $resLeftPlanned[$period]=Work::displayWork($oldPlanned);
     } else  {
       $resLeftPlanned[$period]="";
     }
@@ -221,7 +229,9 @@ foreach ($arrDates as $date => $period) {
       $resLeftTasks[$period]=$leftTasks; 
       $resLeftTasksPlanned[$period]="";
     } else {
-      $resLeftTasks[$period]="";
+      if (! isset($resLeftTasks[$period])) {
+        $resLeftTasks[$period]="";
+      }
       $resLeftTasksPlanned[$period]=$leftTasks;
     }
     if (isset($tabCompletedTasks[$date])) {
@@ -237,7 +247,7 @@ foreach ($arrDates as $date => $period) {
   if ($date<=$pe->validatedEndDate) $nbSteps++;
 }
 
-$maxLeft=$pe->validatedWork;
+$maxLeft=Work::displayWork($pe->validatedWork);
 if (!$maxLeft) $maxLeft=max(array($resLeft[$start],$resLeftPlanned[$start]));
 $minLeft=0;
 //$nbSteps=count($arrDates)-1;
@@ -293,92 +303,104 @@ include("../external/pChart/pData.class");
 include("../external/pChart/pChart.class");  
 $dataSet=new pData;
 $graph = new pChart($graphWidth,$graphHeight);
-$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",10);
-$graph->drawRoundedRectangle(5,5,$graphWidth-5,$graphHeight-5,5,230,230,230);
-$graph->setGraphArea(60,20,$graphWidth-50,$graphHeight-90);
+$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",9);
+$graph->drawFilledRoundedRectangle(5,5,$graphWidth-5,$graphHeight-5,10,240,240,240);
+$graph->drawRoundedRectangle(5,5,$graphWidth-5,$graphHeight-5,10,200,200,200);
+$graph->setGraphArea(70,20,$graphWidth-50,$graphHeight-(($scale=='month')?90:70));
 $graph->drawGraphArea(252,252,252);
 
 // Definition of series
 $dataSet->AddPoint($resBest,"best");
 $dataSet->AddPoint($resLeft,"left");
 $dataSet->AddPoint($resLeftPlanned,"leftPlanned");
-$dataSet->AddPoint($resLeftTasks,"leftTasks");
-$dataSet->AddPoint($resLeftTasksPlanned,"leftTasksPlanned");
-$dataSet->AddPoint($resCompletedTasks,"completedTasks");
-$dataSet->AddPoint($resCompletedTasksPlanned,"completedTasksPlanned");
+if ($showCompleted){
+  $dataSet->AddPoint($resLeftTasks,"leftTasks");
+  $dataSet->AddPoint($resLeftTasksPlanned,"leftTasksPlanned");
+  $dataSet->AddPoint($resCompletedTasks,"completedTasks");
+  $dataSet->AddPoint($resCompletedTasksPlanned,"completedTasksPlanned");
+}
 $dataSet->AddPoint($arrLabel,"dates");
 $dataSet->AddPoint($arrVoidLabel,"empty");
 $dataSet->AddPoint($resLeftTasksScale,"taskScale");
 $dataSet->SetSerieName(i18n("legendBestBurndown"),"best");
 $dataSet->SetSerieName(i18n("legendRemainingEffort"),"left");
 $dataSet->SetSerieName(i18n("legendRemainingEffort").' ('.i18n('planned').')',"leftPlanned");
-$dataSet->SetSerieName(i18n('legendRemainingTasks'),'leftTasks');
-$dataSet->SetSerieName(i18n('legendRemainingTasks').' ('.i18n('planned').')','leftTasksPlanned');
-$dataSet->SetSerieName(i18n('legendCompletedTasks'),'completedTasks');
-$dataSet->SetSerieName(i18n('legendCompletedTasks').' ('.i18n('planned').')','completedTasksPlanned');
-$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",8);
+if ($showCompleted){
+  $dataSet->SetSerieName(i18n('legendRemainingTasks'),'leftTasks');
+  $dataSet->SetSerieName(i18n('legendRemainingTasks').' ('.i18n('planned').')','leftTasksPlanned');
+  $dataSet->SetSerieName(i18n('legendCompletedTasks'),'completedTasks');
+  $dataSet->SetSerieName(i18n('legendCompletedTasks').' ('.i18n('planned').')','completedTasksPlanned');
+}
+$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",9);
 $graph->setColorPalette(0,250,180,210);
 $graph->setColorPalette(1,120,140,250);
 $graph->setColorPalette(2,180,180,250);
-$graph->setColorPalette(3,50,150,50);
-$graph->setColorPalette(4,100,200,100);
-$graph->setColorPalette(5,200,200,100);
-$graph->setColorPalette(6,240,240,150);
+if ($showCompleted){
+  $graph->setColorPalette(3,50,150,50);
+  $graph->setColorPalette(4,100,200,100);
+  $graph->setColorPalette(5,200,200,100);
+  $graph->setColorPalette(6,240,240,150);
+}
 
 // Draw grid and scales
 $dataSet->AddSerie("best");
 $dataSet->AddSerie("left");
-$dataSet->AddSerie('leftTasks');
-$dataSet->SetYAxisName(i18n("legendRemainingEffort"));
+if ($showCompleted){
+  $dataSet->AddSerie('leftTasks');
+}
+$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",9);
+$dataSet->SetYAxisName(i18n("legendRemainingEffort"). ' ('.i18n(Work::getWorkUnit()).')');
+$dataSet->SetYAxisUnit(' '.Work::displayShortWorkUnit());
 $dataSet->SetAbsciseLabelSerie("empty");
-$graph->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_START0,0,0,0,true,0,1, true);
-$graph->drawGrid(2,TRUE,230,230,230,255);
+$graph->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_START0,150,150,150,true,0,0, true);
+$graph->drawGrid(2,TRUE,230,230,230,200);
 $graph->setLineStyle(1,0);
-
-// Clear
 $dataSet->RemoveSerie('best');
 $dataSet->RemoveSerie('left');
-$dataSet->RemoveSerie('leftTasks');
+if ($showCompleted){
+  $dataSet->RemoveSerie('leftTasks');
+}
 $graph->clearScale();
+$dataSet->SetYAxisUnit("");
 
 // Draw complete tasks line
-$dataSet->AddSerie('leftTasks');
-$dataSet->AddSerie('leftTasksPlanned');
-$dataSet->AddSerie('taskScale');
-$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",8);
-$dataSet->SetYAxisName(i18n("legendNumberOfTasks"));
-$dataSet->SetAbsciseLabelSerie("dates");
-$graph->drawRightScale($dataSet->GetData(),$dataSet->GetDataDescription(), SCALE_START0 ,0,0,0,true,45,1, true);
-$dataSet->RemoveSerie('taskScale');
-$dataSet->RemoveSerie('leftTasksPlanned');
-$dataSet->RemoveSerie('leftTasks');
-$dataSet->AddSerie('completedTasks');
-$graph->drawBarGraph($dataSet->GetData(),$dataSet->GetDataDescription(),false);
-$dataSet->RemoveSerie('completedTasks');
-$dataSet->AddSerie('completedTasksPlanned');
-$graph->drawBarGraph($dataSet->GetData(),$dataSet->GetDataDescription(),false);
-$dataSet->RemoveSerie('completedTasksPlanned');
-$dataSet->AddSerie('leftTasks');
-$graph->drawLineGraph($dataSet->GetData(),$dataSet->GetDataDescription(),TRUE);
-if (count($resLeft)<$maxPlotted) {
-  $graph->drawPlotGraph($dataSet->GetData(),$dataSet->GetDataDescription(),3,2,255,255,255);
+if ($showCompleted){
+  $dataSet->AddSerie('leftTasks');
+  $dataSet->AddSerie('leftTasksPlanned');
+  $dataSet->AddSerie('taskScale');
+  $graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",9);
+  $dataSet->SetYAxisName(i18n("legendNumberOfTasks"));
+  $dataSet->SetAbsciseLabelSerie("dates");
+  $graph->drawRightScale($dataSet->GetData(),$dataSet->GetDataDescription(), SCALE_START0 ,150,150,150,true,45,0, true);
+  $dataSet->RemoveSerie('taskScale');
+  $dataSet->RemoveSerie('leftTasksPlanned');
+  $dataSet->RemoveSerie('leftTasks');
+  $dataSet->AddSerie('completedTasks');
+  $dataSet->AddSerie('completedTasksPlanned');
+  //$graph->drawBarGraph($dataSet->GetData(),$dataSet->GetDataDescription(),false);
+  $graph->drawStackedBarGraph($dataSet->GetData(),$dataSet->GetDataDescription(),70);
+  $dataSet->RemoveSerie('completedTasks');
+  $dataSet->RemoveSerie('completedTasksPlanned');
+  $dataSet->AddSerie('leftTasks');
+  $graph->drawLineGraph($dataSet->GetData(),$dataSet->GetDataDescription(),TRUE);
+  if (count($resLeft)<$maxPlotted) {
+    $graph->drawPlotGraph($dataSet->GetData(),$dataSet->GetDataDescription(),3,2,255,255,255);
+  }
+  $dataSet->RemoveSerie('leftTasks');
+  $dataSet->AddSerie('leftTasksPlanned');
+  $graph->setLineStyle(1,3);
+  $graph->drawLineGraph($dataSet->GetData(),$dataSet->GetDataDescription(),TRUE);
+  $dataSet->RemoveSerie('leftTasks');
+  $dataSet->RemoveSerie('leftTasksPlanned');
 }
-$dataSet->RemoveSerie('leftTasks');
-$dataSet->AddSerie('leftTasksPlanned');
-$graph->setLineStyle(1,3);
-$graph->drawLineGraph($dataSet->GetData(),$dataSet->GetDataDescription(),TRUE);
 $graph->setLineStyle(1,0);
-
-// Clear
-$dataSet->RemoveSerie('leftTasks');
-$dataSet->RemoveSerie('leftTasksPlanned');
 $graph->clearScale();
 
 // Draw "left" lines
 $dataSet->SetAbsciseLabelSerie("dates");
 $dataSet->AddSerie("best");
 $dataSet->AddSerie("left");
-$graph->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(), SCALE_START0 ,0,0,0,false,0,0, false);
+$graph->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(), SCALE_START0 ,150,150,150,false,0,0, true);
 $dataSet->RemoveSerie('left');
 $graph->drawLineGraph($dataSet->GetData(),$dataSet->GetDataDescription());
 $dataSet->RemoveSerie('best');
@@ -393,8 +415,8 @@ $dataSet->AddSerie("leftPlanned");
 $graph->drawLineGraph($dataSet->GetData(),$dataSet->GetDataDescription());
 
 
-$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",8);
-$graph->drawLegend($graphWidth-250,30,$dataSet->GetDataDescription(),240,240,240);
+$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",9);
+$graph->drawLegend($graphWidth-250,30,$dataSet->GetDataDescription(),240,240,240,-1,-1,-1,100,100,100,true);
 $graph->clearScale();
 
 $imgName=getGraphImgName("burndownChart");
