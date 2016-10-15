@@ -55,7 +55,7 @@ if ($showCompleted) {
 include "header.php";
 
 if (!$idProject) {
-  echo '<div style="background: #FFDDDD;font-size:200%;text-align:center;padding:20px">';
+  echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
   echo i18n('messageNoData',array(i18n('Project'))); // TODO i18n message
   echo '</div>';
   exit; 
@@ -75,7 +75,6 @@ $queryWhere=  " where ph.idProject=".Sql::fmtId($idProject);
 $queryWhere.= " and ph.idProject in ".transformListIntoInClause($user->getVisibleProjects(false));
 $queryOrder= "  order by day asc";
 $query=$querySelect.$queryFrom.$queryWhere.$queryOrder;
-//echo $query.'<br/>'; // debugLog
 $result=Sql::query($query);
 $tabLeft=array();
 $resLeft=array();
@@ -105,7 +104,6 @@ $queryWhere.= " and pw.idProject in " . transformListIntoInClause($proj->getRecu
 $queryWhere.= " and pw.idProject in ".transformListIntoInClause($user->getVisibleProjects(false));
 $queryOrder= "  group by pw.workDate";
 $query=$querySelect.$queryFrom.$queryWhere.$queryOrder;
-//echo $query.'<br/>'; // debugLog
 $resultPlanned=Sql::query($query);
 $tabLeftPlanned=array();
 $resLeftPlanned=array();
@@ -133,7 +131,6 @@ $queryWhere.= " and pe.idProject in ".transformListIntoInClause($user->getVisibl
 $queryWhere.= "  and pe.elementary=1";
 $queryOrder= "  order by COALESCE(pe.realEndDate, pe.plannedEndDate)";
 $query=$querySelect.$queryFrom.$queryWhere.$queryOrder;
-//echo $query.'<br/>'; // debugLog
 $tabCompletedTasks=array();
 $tabCompletedTasksPlanned=array();
 $resCompletedTasks=array();
@@ -168,6 +165,12 @@ if (trim($pe->realEndDate)) $end=$pe->realEndDate;
 if (trim($pe->validatedEndDate) and $pe->validatedEndDate>$end) $end=$pe->validatedEndDate;
 $arrDates=array();
 $date=$start;
+if (!$start or !$end) {
+  echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
+  echo i18n('reportNoData'); 
+  echo '</div>';
+  exit;
+}
 while ($date<=$end) {
   if ($scale=='week') { $arrDates[$date]=date('Y-W',strtotime($date)); } 
   else if ($scale=='month') { $arrDates[$date]=getMonthName(date('m',strtotime($date))).' '.date('Y',strtotime($date));  } 
@@ -416,7 +419,7 @@ $graph->drawLineGraph($dataSet->GetData(),$dataSet->GetDataDescription());
 
 
 $graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",9);
-$graph->drawLegend($graphWidth-250,30,$dataSet->GetDataDescription(),240,240,240,-1,-1,-1,100,100,100,true);
+$graph->drawLegend($graphWidth-255,30,$dataSet->GetDataDescription(),240,240,240,-1,-1,-1,100,100,100,true);
 $graph->clearScale();
 
 $imgName=getGraphImgName("burndownChart");
