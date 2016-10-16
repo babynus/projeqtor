@@ -257,8 +257,10 @@ foreach ($arrDates as $date => $period) {
   if ($date<=$pe->validatedEndDate) $nbSteps++;
 }
 
+$startLabel=reset($arrDates);
 $maxLeft=Work::displayWork($pe->validatedWork);
-if (!$maxLeft) $maxLeft=max(array($resLeft[$start],$resLeftPlanned[$start]));
+if (!$maxLeft and isset($resLeft[$startLabel])) $maxLeft=$resLeft[$startLabel];
+if (!$maxLeft and isset($resLeftPlanned[$startLabel])) $maxLeft=$resLeftPlanned[$startLabel];
 $minLeft=0;
 //$nbSteps=count($arrDates)-1;
 if (!$nbSteps) $nbSteps=count($arrDates);
