@@ -261,6 +261,7 @@ $maxLeft=Work::displayWork($pe->validatedWork);
 if (!$maxLeft) $maxLeft=max(array($resLeft[$start],$resLeftPlanned[$start]));
 $minLeft=0;
 //$nbSteps=count($arrDates)-1;
+if (!$nbSteps) $nbSteps=count($arrDates);
 $stepValue=($nbSteps)?(($maxLeft-$minLeft)/($nbSteps-1)):0;
 $val=$maxLeft;
 
