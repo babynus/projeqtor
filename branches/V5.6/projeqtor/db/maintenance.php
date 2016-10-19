@@ -525,3 +525,5 @@ traceLog("=====================================");
 traceLog("");
 echo "<br/>__________________________________<br/><br/>";
 echo '</div>';
+//Gautier
+Parameter::refreshParameters();
