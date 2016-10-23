@@ -2985,6 +2985,22 @@ function planSaveDates() {
       "dialogPlanSaveDatesForm", true, null);
   dijit.byId("dialogPlanSaveDates").hide();
 }
+function showPlanningBaseline() {
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  callBack=function() {
+    var proj=dijit.byId('idProjectPlan');
+    if (proj) {
+      dijit.byId('idProjectPlanBaseline').set('value', proj.get('value'));
+    }
+  };
+  loadDialog('dialogPlanBaseline', callBack, true);
+}
+function savePlanningBaseline() {
+  dijit.byId("dialogPlanBaseline").hide();
+}
 // =============================================================================
 // = Filter
 // =============================================================================
