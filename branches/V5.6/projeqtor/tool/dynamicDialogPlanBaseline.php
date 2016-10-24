@@ -26,6 +26,8 @@
 
 ?>
 <table width="500px">
+    <tr><td style="width:100%;background-color:#F0F0F0;font-weight:bold;text-align:center;padding:10px;"><?php echo i18n("saveNewBaseline");?></td></tr>
+    <tr><td >&nbsp;</td></tr>
     <tr>
       <td width="100%">
        <form id='dialogPlanBaselineForm' name='dialogPlanBaselineForm' onSubmit="return false;">
@@ -93,4 +95,8 @@
         </button>
       </td>
     </tr>
+    <tr><td >&nbsp;</td></tr>
+    <tr><td style="width:100%;background-color:#F0F0F0;font-weight:bold;text-align:center;padding:10px;"><?php echo i18n("existingBaselines");?></td></tr>
+    <tr><td style="width:100%;"><?php echo i18n("noBaseline");?></td></tr>
+    <tr><td >&nbsp;</td></tr>
   </table>

@@ -119,7 +119,8 @@ if ($canPlan) {
                           saveUserParameter('automaticRunPlanning',((this.checked)?'1':'0'));
                         </script>                    
                   </span>&nbsp;<?php echo i18n('automaticRunPlan')?>
-                  </div>            
+                  </div>
+<?php }?>             
 		            </td>
 		            <td style="white-space:nowrap;width:240px">
 		              <table>
@@ -168,7 +169,7 @@ if ($canPlan) {
                     <?php if ($canPlan) { ?>
                       <td width="32px">
                         <button id="savePlanningButton" dojoType="dijit.form.Button" showlabel="false"
-                         title="<?php echo i18n('savePlannedDates');?>"
+                         title="<?php echo i18n('validatePlanning');?>"
                          iconClass="dijitButtonIcon dijitButtonIconValidPlan" class="detailButton">
                          <script type="dojo/connect" event="onClick" args="evt">
 		                      showPlanSaveDates();

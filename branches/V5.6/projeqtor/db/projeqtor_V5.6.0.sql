@@ -10,9 +10,9 @@ ALTER TABLE `${prefix}version` ADD `idUser` int(12) UNSIGNED DEFAULT NULL;
 ALTER TABLE `${prefix}action` ADD `idContact` int(12) UNSIGNED DEFAULT NULL;
 ALTER TABLE `${prefix}dependency` ADD `comment` varchar(4000)DEFAULT NULL;
 
-UPDATE `${prefix}parameter` set parameterValue='ProjeQtOrFlatBlue' where parameterValue='ProjeQtOr' and (parameterCode='defaultTheme' or parameterCode='defaultTheme');
-UPDATE `${prefix}parameter` set parameterValue='ProjeQtOrFlatRed' where parameterValue='ProjeQtOrFire' and (parameterCode='defaultTheme' or parameterCode='defaultTheme');
-UPDATE `${prefix}parameter` set parameterValue='ProjeQtOrFlatGreen' where parameterValue='ProjeQtOrForest' and (parameterCode='defaultTheme' or parameterCode='defaultTheme');
+UPDATE `${prefix}parameter` set parameterValue='ProjeQtOrFlatBlue' where parameterValue='ProjeQtOr' and (parameterCode='theme' or parameterCode='defaultTheme');
+UPDATE `${prefix}parameter` set parameterValue='ProjeQtOrFlatRed' where parameterValue='ProjeQtOrFire' and (parameterCode='theme' or parameterCode='defaultTheme');
+UPDATE `${prefix}parameter` set parameterValue='ProjeQtOrFlatGreen' where parameterValue='ProjeQtOrForest' and (parameterCode='theme' or parameterCode='defaultTheme');
 
 UPDATE `${prefix}product` set idUser=
 (select min(idUser) from `${prefix}history` where (refType='Product' or refType='Component') and refId=`${prefix}product`.id and operationDate=
@@ -60,7 +60,7 @@ CREATE TABLE `plannedworkbaseline` (
   `cost` decimal(11,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-CREATE INDEX plannedworkbaselineWorkDay ON `${prefix}plannedworkbaseline` (`workDay`);
+CREATE INDEX plannedworkbaselineWorkDate ON `${prefix}plannedworkbaseline` (`workDate`);
 CREATE INDEX plannedworkbaselineRef ON `${prefix}plannedworkbaseline` (`refType`,`refId`);
 CREATE INDEX plannedworkbaselineBaseline ON `${prefix}plannedworkbaseline` (`idBaseline`);
 
