@@ -32,10 +32,11 @@ class Baseline extends SqlElement {
 
   public $id;
   public $idProject;
+  public $baselineNumber;
   public $name;
   public $baselineDate;
   public $idUser;
-  public $creationDate;
+  public $creationDateTime;
   public $idPrivacy;
   public $idTeam;
     
@@ -60,41 +61,42 @@ class Baseline extends SqlElement {
 // ============================================================================**********
 // GET VALIDATION SCRIPT
 // ============================================================================**********
- 
-  /** ==========================================================================
-   * Return the validation sript for some fields
-   * @return the validation javascript (for dojo frameword)
-   */
-  public function getValidationScript($colName) {
-    $colScript = parent::getValidationScript($colName);
-  }
     
-  public function save() {
-    $result = parent::save ();
-    if ($this->idPrivacy != 3) {
-      $class = $this->refType;
-      $id = $this->refId;
-      $obj = new $class( $id );
-      if (property_exists ( $class, 'lastUpdateDateTime' )) {
-        $obj->lastUpdateDateTime = date ( "Y-m-d H:i:s" );
-        $resObj=$obj->saveForced();
-      }
-    }
+  public function saveWithPlanning() {
+    $result = parent::save();
+    $this->copyItem('PlanningElement');
+    $this->copyItem('PlannedWork');
     return $result;
   }
   
   public function delete() {
-    $result = parent::delete ();
-    if ($this->idPrivacy != 3) {
-      $class = $this->refType;
-      $id = $this->refId;
-      $obj = new $class( $id );
-      if (property_exists ( $class, 'lastUpdateDateTime' )) {
-        $obj->lastUpdateDateTime = date ( "Y-m-d H:i:s" );
-        $resObj=$obj->saveForced();
+
+  }
+  
+  public function copyItem($itemFrom) {
+    $objFrom=new $itemFrom();
+    $tableFrom=$objFrom->getDatabaseTableName();
+    $itemTo=$itemFrom.'Baseline';
+    $objTo=new $itemTo();
+    $tableTo=$objTo->getDatabaseTableName();
+    $colList="";
+    foreach ($objFrom as $fld=>$val) {
+      if (substr($fld,0,1)=='_' or $fld=='id') continue;
+      $col=$objFrom->getDatabaseColumnName($fld);
+      if ($col) {
+        $colList.="$col, ";
       }
     }
-    return $result;
+    $idBaseline=$this->id;
+    $proj=new Project($this->idProject,true);
+    $query="INSERT INTO $tableTo ($colList idBaseline)\n"
+        ."SELECT $colList $idBaseline FROM $tableFrom \n"
+        ." where idProject in ".transformListIntoInClause($proj->getRecursiveSubProjectsFlatList(true, true));
+    $res=SqlDirectElement::execute($query);
+    debugLog($query);
+    debugLog($res);
+    debugLog("");
   }
+  
 }
 ?>
