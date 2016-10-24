@@ -34,20 +34,22 @@ INSERT INTO `${prefix}habilitationreport` (`idProfile`,`idReport`,`allowAccess`)
 (2,59,1),
 (3,59,1);
 
-CREATE TABLE `baseline` (
+CREATE TABLE `${prefix}baseline` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `idProject` int(12) unsigned DEFAULT NULL,
+  `baselineNumber` int(3) unsigned DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   `baselineDate` date DEFAULT NULL,
+  `creationDateTime` datetime DEFAULT NULL,
   `idUser` int(12) unsigned DEFAULT NULL,
   `idTeam` int(12) unsigned DEFAULT NULL,
-  `idPrivacy` int(12) unsigned DEFAULT NULL,
+  `idPrivacy` int(12) unsigned DEFAULT 1,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE INDEX `baselineProject` ON `${prefix}baseline` (`idProject`);
 CREATE INDEX `baselineUser` ON `${prefix}baseline` (`idUser`);
   
-CREATE TABLE `plannedworkbaseline` (
+CREATE TABLE `${prefix}plannedworkbaseline` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `idBaseline` int(12) unsigned DEFAULT NULL,
   `idResource` int(12) unsigned NOT NULL,
