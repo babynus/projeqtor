@@ -39,8 +39,13 @@ CREATE TABLE `baseline` (
   `idProject` int(12) unsigned DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   `baselineDate` date DEFAULT NULL,
+  `idUser` int(12) unsigned DEFAULT NULL,
+  `idTeam` int(12) unsigned DEFAULT NULL,
+  `idPrivacy` int(12) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE INDEX `baselineProject` ON `${prefix}baseline` (`idProject`);
+CREATE INDEX `baselineUser` ON `${prefix}baseline` (`idUser`);
   
 CREATE TABLE `plannedworkbaseline` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
