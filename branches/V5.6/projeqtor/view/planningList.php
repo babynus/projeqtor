@@ -111,8 +111,7 @@ if ($canPlan) {
                      return false;
                     </script>
 		              </button>
-<?php $showAutoPlan=true;?>
-                  <div style="white-space:nowrap;<?php if (!isset($showAutoPlan) or $showAutoPlan!=true) echo 'visibility:hidden;'?>">
+                  <div style="white-space:nowrap;">
 		              <span title="<?php echo i18n('automaticRunPlanHelp');?>" dojoType="dijit.form.CheckBox"
                         type="checkbox" id="automaticRunPlan" name="automaticRunPlan" class="whiteCheck"
                         <?php if ( $automaticRunPlanning) {echo 'checked="checked"'; } ?>  >  
@@ -120,8 +119,7 @@ if ($canPlan) {
                           saveUserParameter('automaticRunPlanning',((this.checked)?'1':'0'));
                         </script>                    
                   </span>&nbsp;<?php echo i18n('automaticRunPlan')?>
-                  </div>
-<?php }?>             
+                  </div>            
 		            </td>
 		            <td style="white-space:nowrap;width:240px">
 		              <table>
