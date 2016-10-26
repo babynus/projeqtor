@@ -318,7 +318,7 @@ if ($proj=='*' or !$proj) {
                         <script type="dojo/method" event="onChange" >
                            refreshJsonPlanning();
                         </script>
-                        
+                        <?php htmlDrawOptionForReference('idBaseline', null, null,false,($proj)?'idProject':null,($proj)?$proj:null);?>
                       </select>
                   </td></tr>
                   <tr><td style="text-align:right"><?php echo i18n('baselineBottom').'&nbsp;:&nbsp';?>
@@ -331,7 +331,7 @@ if ($proj=='*' or !$proj) {
                         <script type="dojo/method" event="onChange" >
                            refreshJsonPlanning();
                         </script>
-                        <?php htmlDrawOptionForReference('idBaseline', null, null,false);?>
+                        <?php htmlDrawOptionForReference('idBaseline', null, null,false,($proj)?'idProject':null,($proj)?$proj:null);?>
                       </select>
                   </td></tr>
                   </table>
