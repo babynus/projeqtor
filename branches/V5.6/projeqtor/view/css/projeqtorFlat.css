@@ -140,10 +140,13 @@
 	border-radius : 0px;
 	color: #545281;
 	font-weight: bold;
-  background-color:#dcdae6;
+	background: rgba(255,255,255,0.5);
+}
+.ProjeQtOrFlatBlue .pseudoButton:hover {
+  background: rgba(255,255,255,1);
 }
 .ProjeQtOrFlatBlue .whiteBackground {
-  background-color:#a6a0bc;
+  background-color:#ffffff;
   border-radius : 0px;
 }
 
@@ -1161,7 +1164,10 @@ body .ProjeQtOrFlatBlue {
   border-radius : 0px;
   color: #833e3e;
   font-weight: bold;
-  background-color:#dcdae6;
+  background: rgba(255,255,255,0.5);
+}
+.ProjeQtOrFlatRed .pseudoButton:hover {
+  background: rgba(255,255,255,1);
 }
 .ProjeQtOrFlatRed .whiteBackground {
   background-color:#bda1a6;
@@ -2181,7 +2187,10 @@ body .ProjeQtOrFlatRed {
   border-radius : 0px;
   color: #537665;
   font-weight: bold;
-  background-color:#dcdae6;
+  background: rgba(255,255,255,0.5);
+}
+.ProjeQtOrFlatGreen .pseudoButton:hover {
+  background: rgba(255,255,255,1);
 }
 .ProjeQtOrFlatGreen .whiteBackground {
   background-color:#86a790;
@@ -3200,7 +3209,10 @@ body .ProjeQtOrFlatGreen {
   border-radius : 0px;
   color: #656565;
   font-weight: bold;
-  background-color:#dcdae6;
+  background: rgba(255,255,255,0.5);
+}
+.ProjeQtorFlatGrey .pseudoButton:hover {
+  background: rgba(255,255,255,1);
 }
 .ProjeQtorFlatGrey .whiteBackground {
   background-color:#AEAEAE;
