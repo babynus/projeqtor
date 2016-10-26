@@ -58,7 +58,7 @@ $listCtrlDate=$base->getSqlElementsFromCriteria($crit);
 
 ?>
 <table width="500px">
-    <tr><td style="width:100%;background-color:#F0F0F0;font-weight:bold;text-align:center;padding:10px;"><?php echo i18n($mode."Baseline");?></td></tr>
+    <tr><td class="section"><?php echo i18n($mode."Baseline");?></td></tr>
     <tr><td >&nbsp;</td></tr>
     <tr>
       <td width="100%">
@@ -178,7 +178,7 @@ $listCtrlDate=$base->getSqlElementsFromCriteria($crit);
       </td>
     </tr>
     <tr><td >&nbsp;</td></tr>
-    <tr><td style="width:100%;background-color:#F0F0F0;font-weight:bold;text-align:center;padding:10px;"><?php echo i18n("existingBaselines");?></td></tr>
+    <tr><td class="section"><?php echo i18n("existingBaselines");?></td></tr>
     <?php if (count($listeBase)==0) {?>
     <tr><td style="width:100%;padding:10px;text-align:center;"><?php echo i18n("noBaseline");?></td></tr>
     <?php } else {?>
