@@ -771,7 +771,7 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatBlue .iconPeriodicMeeting22 { background-image: url(customIcons/blue/iconPeriodicMeeting.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .iconPeriodicMeeting16 { background-image: url(customIcons/blue/iconPeriodicMeeting.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
-.ProjeQtOrFlatBlue .iconPlanStopped { background-image: url(customIcons/blue/iconPlanStopped.gif);}
+.ProjeQtOrFlatBlue .iconPlanStopped { background-image: url(customIcons/blue/iconPlanStopped.png);}
 
 .ProjeQtOrFlatBlue .iconPlan { background-image: url(customIcons/blue/iconPlan.gif);}
 
@@ -1797,7 +1797,7 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatRed .iconPeriodicMeeting16 { background-image: url(customIcons/red/iconPeriodicMeeting.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 
-.ProjeQtOrFlatRed  .iconPlanStopped { background-image: url(customIcons/red/iconPlanStopped.gif);}
+.ProjeQtOrFlatRed  .iconPlanStopped { background-image: url(customIcons/red/iconPlanStopped.png);}
 
 .ProjeQtOrFlatRed  .iconPlan { background-image: url(customIcons/red/iconPlan.gif);}
 
@@ -2821,7 +2821,7 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconPeriodicMeeting22 { background-image: url(customIcons/green/iconPeriodicMeeting.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconPeriodicMeeting16 { background-image: url(customIcons/green/iconPeriodicMeeting.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
-.ProjeQtOrFlatGreen .iconPlanStopped { background-image: url(customIcons/green/iconPlanStopped.gif);}
+.ProjeQtOrFlatGreen .iconPlanStopped { background-image: url(customIcons/green/iconPlanStopped.png);}
 
 .ProjeQtOrFlatGreen .iconPlan { background-image: url(customIcons/green/iconPlan.gif);}
 
@@ -3845,9 +3845,9 @@ body .ProjeQtorFlatGrey {
 .ProjeQtorFlatGrey .iconPeriodicMeeting22 { background-image: url(customIcons/grey/iconPeriodicMeeting.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtorFlatGrey .iconPeriodicMeeting16 { background-image: url(customIcons/grey/iconPeriodicMeeting.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
-.ProjeQtOrFlatGrey .iconPlanStopped { background-image: url(customIcons/Grey/iconPlanStopped.gif);}
+.ProjeQtorFlatGrey .iconPlanStopped { background-image: url(customIcons/grey/iconPlanStopped.png);}
 
-.ProjeQtOrFlatGrey .iconPlan { background-image: url(customIcons/Grey/iconPlan.gif);}
+.ProjeQtOrFlatGrey .iconPlan { background-image: url(customIcons/grey/iconPlan.gif);}
 
 .ProjeQtorFlatGrey .iconPlanning32 { background-image: url(customIcons/grey/iconPlanning.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtorFlatGrey .iconPlanning22 { background-image: url(customIcons/grey/iconPlanning.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
