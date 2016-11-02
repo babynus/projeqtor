@@ -545,6 +545,10 @@ class Parameter extends SqlElement {
       	                       'OpenDayFriday'=>'list',
       	                       'OpenDaySaturday'=>'list',
       	                       'OpenDaySunday'=>'list',
+      	                     'connectionSslToBd'=>'section',
+      	                       'SslKey'=>'text',
+      	                       'SslCert'=>'text',
+      	                       'SslCa'=>'text',      	                     
       	                     'sectionWorkUnit'=>'section',      	                     
       	                       'imputationUnit'=>'list',
       	                       'workUnit'=>'list',
@@ -1547,5 +1551,25 @@ static public function getTimezoneList() {
   return $zones_array;
  }
   
+ public function control(){
+   $result="";
+   if ($this->parameterCode=="SslKey" and trim($this->parameterValue)!="" and !file_exists($this->parameterValue)) {
+       $result.='<br/>' . i18n('msgNotaFile',array(i18n("paramSslKey"),$this->parameterValue));
+   }
+   if ($this->parameterCode=="SslCert" and trim($this->parameterValue)!="" and !file_exists($this->parameterValue)) {
+       $result.='<br/>' . i18n('msgNotaFile',array(i18n("paramSslCert"),$this->parameterValue));
+   }
+   if ($this->parameterCode=="SslCa" and trim($this->parameterValue)!="" and !file_exists($this->parameterValue)) {
+       $result.='<br/>' . i18n('msgNotaFile',array(i18n("paramSslCa"),$this->parameterValue));
+   }
+   $defaultControl=parent::control();
+   if ($defaultControl!='OK') {
+     $result.=$defaultControl;
+   }
+   if ($result=="") {
+     $result='OK';
+   }
+   return $result;
+ }
 }
 ?>
