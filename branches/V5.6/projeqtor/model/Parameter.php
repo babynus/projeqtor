@@ -843,6 +843,9 @@ class Parameter extends SqlElement {
     if (count(self::$planningColumnDescription)) return self::$planningColumnDescription;
     $arrayFields=array(
         'Name'=>300,
+        'StartDate'=>80,
+        'EndDate'=>80,
+        'Progress'=>50,
         'ValidatedWork'=>70,
         'AssignedWork'=>70,
         'RealWork'=>70,
@@ -856,9 +859,6 @@ class Parameter extends SqlElement {
         'PlannedCost'=>70,
         'IdStatus'=>70, 
         'Type'=>120,
-        'Progress'=>50,
-        'StartDate'=>80,
-        'EndDate'=>80,
         'Resource'=>90,
         'Priority'=>50,
         'IdPlanningMode'=>150
@@ -913,11 +913,11 @@ class Parameter extends SqlElement {
   	  self::$planningColumnDescription['PlannedCost']['show']=0;
   	}
   	$arrayFieldsSorted=array();
+  	$arrayFieldsSorted[0]='Name';
   	foreach ($orderList as $param) {
-  	  $arrayFieldsSorted[$param->parameterValue]=substr($param->parameterCode,19);	
+  	  $arrayFieldsSorted[intval($param->parameterValue)+1]=substr($param->parameterCode,19);	
   	}
   	ksort($arrayFieldsSorted);
-  	
   	foreach($arrayFields as $column=>$width) {
   	  if (! in_array($column,$arrayFieldsSorted)) {
   	  	$arrayFieldsSorted[]=$column;
