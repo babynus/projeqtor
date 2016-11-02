@@ -186,8 +186,8 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor,
   this.getFieldValue = function(pField) {
     if (pField=='Name') return vName;
     else if (pField=='ID') return vID;
-    else if (pField=='StartDate') return this.getStart();
-    else if (pField=='EndDate') return (this.getEnd())?this.getEnd():this.getRealEnd();
+    else if (pField=='StartDate') return JSGantt.formatDateStr(this.getStart(),'default');
+    else if (pField=='EndDate') return JSGantt.formatDateStr((this.getEnd())?this.getEnd():this.getRealEnd(),'default');
     else if (pField=='Resource') return vRes;
     else if (pField=='PlanEnd') return vPlanEnd;
     else if (pField=='RealEnd') return vRealEnd;
@@ -208,7 +208,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor,
     else if (pField=='Duration') return this.getDuration(g.getFormat());
     else if (pField=='Progress') return this.getCompStr();
     else return "["+pField+"]";
-  }
+  };
   this.getID       = function(){ return vID; };
   this.getName     = function(){ return vName; };
   this.getStart    = function(){ return vStart;};
@@ -612,7 +612,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
     var vPlanningModeWidth=150;
     var vWidth=this.getWidth();
     var sortArray=this.getSortArray();
-    var vLeftWidth = vIconWidth+getPlanningFieldWidth('Name')+1;
+    var vLeftWidth = vIconWidth+getPlanningFieldWidth('Name')+2;
     for (var iSort=0;iSort<sortArray.length;iSort++) {
       var field=sortArray[iSort];
       if (field.substr(0,6)=='Hidden') field=field.substr(6);
@@ -1889,7 +1889,7 @@ function setGanttVisibility(g) {
 	g.setSortArray(planningColumnOrder);
 }
 JSGantt.ganttMouseOver = function( pID, pPos, pType) {
-  if (!g) return;
+  if (dojo.byId('bodyPrint')) return;
   if (! pType) {
 	vTaskList=g.getList();	
 	if( vTaskList[pID].getGroup()) {	
@@ -1916,7 +1916,7 @@ JSGantt.ganttMouseOver = function( pID, pPos, pType) {
 };
 
 JSGantt.ganttMouseOut = function(pID, pPos, pType) {
-  if (!g) return;
+  if (dojo.byId('bodyPrint')) return;
   if (! pType) {
 	vTaskList=g.getList();	
 	if( vTaskList[pID].getGroup()) {	
@@ -1937,13 +1937,13 @@ JSGantt.ganttMouseOut = function(pID, pPos, pType) {
 
 ongoingJsLink=-1;
 JSGantt.startLink = function (idRow) {
-	if (!g) return;
+  if (dojo.byId('bodyPrint')) return;
 	vTaskList=g.getList();
 	document.body.style.cursor="url('css/images/dndLink.png'),help";
 	ongoingJsLink=idRow;
 };
 JSGantt.endLink = function (idRow) {
-	if (!g) return;
+  if (dojo.byId('bodyPrint')) return;
 	vTaskList=g.getList();
 	document.body.style.cursor='default';
 	if (ongoingJsLink>=0 && idRow!=ongoingJsLink) {
@@ -1967,7 +1967,7 @@ JSGantt.endLink = function (idRow) {
 	ongoingJsLink=-1;
 };
 JSGantt.cancelLink = function (idRow) {
-	if (!g) return;
+  if (dojo.byId('bodyPrint')) return;
 	vTaskList=g.getList();
 	document.body.style.cursor='default';
 	if (idRow) {
@@ -1984,11 +1984,12 @@ JSGantt.cancelLink = function (idRow) {
 	ongoingJsLink=-1;
 };
 JSGantt.enterBarLink = function (idRow) {
+  if (dojo.byId('bodyPrint')) return;
 	JSGantt.ganttMouseOver(idRow);
 	vTaskList=g.getList();
 	if (ongoingJsLink>=0) {
 		if (idRow!=ongoingJsLink) {
-			g.drawDependency(vTaskList[ongoingJsLink].getEndX(),vTaskList[ongoingJsLink].getEndY(),
+		  g.drawDependency(vTaskList[ongoingJsLink].getEndX(),vTaskList[ongoingJsLink].getEndY(),
 			              vTaskList[idRow].getStartX()-1,vTaskList[idRow].getStartY(),
 			              "#"+vTaskList[ongoingJsLink].getColor(),true);
 		}
@@ -1998,6 +1999,7 @@ JSGantt.enterBarLink = function (idRow) {
 	}
 };
 JSGantt.exitBarLink = function (idRow) {
+  if (dojo.byId('bodyPrint')) return;
 	JSGantt.ganttMouseOut(idRow);
 	vTaskList=g.getList();
 	if (ongoingJsLink>=0) {

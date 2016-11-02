@@ -5235,6 +5235,9 @@ function changePlanningColumn(col, status, order) {
     order=dojo.indexOf(planningColumnOrder, col);
     planningColumnOrder[order]='Hidden' + col;
   }
+  if (col=='IdStatus' || col=='Type') {
+    validatePlanningColumnNeedRefresh=true;
+  }
   setPlanningFieldShow(col,status);
   dojo.xhrGet({
     url : '../tool/savePlanningColumn.php?action=status&status='
@@ -5247,13 +5250,21 @@ function changePlanningColumn(col, status, order) {
   });
 }
 
+var validatePlanningColumnNeedRefresh=false;
 function validatePlanningColumn() {
   dijit.byId('planningColumnSelector').closeDropDown();
   showWait();
   setGanttVisibility(g);
-  JSGantt.changeFormat(g.getFormat(), g);
-  hideWait();
+  if (validatePlanningColumnNeedRefresh) { 
+    refreshJsonPlanning();
+    
+  } else {
+    JSGantt.changeFormat(g.getFormat(), g);
+    hideWait();
+  }
+  validatePlanningColumnNeedRefresh=false;
 }
+
 function movePlanningColumn(source, destination) {
   var mode='';
   var list='';
