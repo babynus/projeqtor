@@ -397,6 +397,18 @@ function dispatchLeftWorkValueChange(rowId) {
   var newPlanned=newReal+newLeft;
   dojo.byId('plannedWork_' + rowId).value=formatDecimalToDisplay(newPlanned);
   formChanged();
+  
+  disableWidget("userName");
+  disableWidget("yearSpinner");
+  disableWidget("weekSpinner");
+  disableWidget("dateSelector");
+  disableWidget("listDisplayOnlyCurrentWeekMeetings");
+  disableWidget("listHideDone");
+  disableWidget("listHideNotHandled");
+  disableWidget("listShowIdle");
+  disableWidget("listShowPlannedWork");
+  disableWidget("showId");
+  
 }
 
 
