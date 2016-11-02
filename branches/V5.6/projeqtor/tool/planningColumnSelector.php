@@ -43,7 +43,7 @@ debugLog("$order => $col");
 		// noting 
 	} else {
 	  if ($col=='Name') {
-		  echo '<div id="columnSelector'.$col.'" >';		
+		  echo '<div style="padding: 2px;" id="columnSelector'.$col.'" >';		
 		  echo '<span style="display:inline-block;width:15px">&nbsp;</span>'; 
 		} else {
 		  echo '<div class="dojoDndItem" id="columnSelector'.$col.'" dndType="planningColumn">';
@@ -53,10 +53,18 @@ debugLog("$order => $col");
 	    . ((substr($columns[$order],0,6)!='Hidden')?' checked="checked" ':'') 
 	    . (($col=='Name')?' readonly':'')
 	    . ' onChange="changePlanningColumn(\'' . $col . '\',this.checked,\'' . $order . '\')" '
-	    . '></span><label for="checkColumnSelector'.$col.'" class="checkLabel">';
+	    . '></span><label for="checkColumnSelector'.$col.'" class="checkLabel" style="white-space:nowrap">';
 	  echo '&nbsp;';
 	  echo i18n('col' . $col) . "</label>";
-	  echo '</div>';
+	  echo '<div style="float: right; text-align:right">&nbsp;';
+	  echo '<div dojoType="dijit.form.NumberSpinner" id="planningColumnSelectorWidthId'.$order.'" ';
+	  echo (substr($columns[$order],0,6)=='Hidden')?'disabled="disabled" ':'';
+	  echo ' onChange="changePlanningColumnWidth(\'' . $order . '\','.$order.',this.value)" ';
+	  echo ' constraints="{ min:10, max:500, places:0 }"';
+	  echo ' style="width:50px; text-align: center;" value="'.htmlEncode(10).'" >';
+	  echo '</div>'; // NumberSpinner
+	  echo '&nbsp;</div>'; // style="float: right
+	  echo '</div>'; // id=columnSelector
 	}
 }
 
