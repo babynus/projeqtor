@@ -5235,6 +5235,7 @@ function changePlanningColumn(col, status, order) {
     order=dojo.indexOf(planningColumnOrder, col);
     planningColumnOrder[order]='Hidden' + col;
   }
+  setPlanningFieldShow(col,status);
   dojo.xhrGet({
     url : '../tool/savePlanningColumn.php?action=status&status='
         + ((status) ? 'visible' : 'hidden') + '&item=' + col,
