@@ -183,3 +183,23 @@ SELECT id, null, 'planningHideColumnIdStatus', '1' FROM `${prefix}resource` WHER
 INSERT INTO `${prefix}parameter` (idUser,idProject, parameterCode, parameterValue) 
 SELECT id, null, 'planningHideColumnType', '1' FROM `${prefix}resource` WHERE isUser=1; 
 
+CREATE TABLE `${prefix}organization` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `description` mediumtext,
+  `idle` int(1) unsigned DEFAULT '0',
+  `idUser` int(12) unsigned DEFAULT NULL,
+  `idResource` int(12) unsigned DEFAULT NULL,
+  `sortOrder` varchar(400) DEFAULT NULL,
+  `idOrganizationType` int(12) unsigned DEFAULT NULL,
+  `creationDate` datetime DEFAULT NULL,
+  `lastUpdateDateTime` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE INDEX resourceOrganization ON `${prefix}organization` (`idResource`);
+
+INSERT INTO `${prefix}menu` (`id`,`name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
+(158,'menuOrganization', 0, 'object', 18, NULL, 0, 'EnvironmentalParameter');
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES 
+(1,158,1);
