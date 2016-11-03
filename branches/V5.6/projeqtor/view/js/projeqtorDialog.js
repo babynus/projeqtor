@@ -5249,7 +5249,20 @@ function changePlanningColumn(col, status, order) {
     }
   });
 }
-
+function changePlanningColumnWidth(col, width) {
+  setPlanningFieldWidth(col,width);
+  showWait();
+  JSGantt.changeFormat(g.getFormat(), g);
+  dojo.xhrGet({
+    url : '../tool/savePlanningColumn.php?action=width&width='+width+'&item=' + col,
+    handleAs : "text",
+    load : function(data, args) {
+    },
+    error : function() {
+    }
+  });
+  hideWait();
+}
 var validatePlanningColumnNeedRefresh=false;
 function validatePlanningColumn() {
   dijit.byId('planningColumnSelector').closeDropDown();
