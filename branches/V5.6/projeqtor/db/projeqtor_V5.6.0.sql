@@ -165,8 +165,8 @@ CREATE INDEX planningelementbaselineProject ON `${prefix}planningelementbaseline
 CREATE INDEX planningelementbaselineWbsSortable ON `${prefix}planningelementbaseline` (`wbsSortable`(255));
 
 -- gautier ticket 2354
-INSERT INTO `${prefix}reportparameter` (`id`, `idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES
-(185, 8, 'showIdle', 'boolean', 20, 'currentProject');
+INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES
+(8, 'showIdle', 'boolean', 20, 'currentProject');
 
 INSERT INTO `${prefix}parameter` (idUser,idProject, parameterCode, parameterValue) 
 SELECT id, null, 'planningHideColumnValidatedCost', '1' FROM `${prefix}resource` WHERE isUser=1; 
