@@ -200,6 +200,23 @@ CREATE TABLE `${prefix}organization` (
 CREATE INDEX resourceOrganization ON `${prefix}organization` (`idResource`);
 
 INSERT INTO `${prefix}menu` (`id`,`name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
-(158,'menuOrganization', 0, 'object', 18, NULL, 0, 'EnvironmentalParameter');
+(158,'menuOrganization', 0, 'object', 18, 'ReadWriteEnvironment', 0, 'EnvironmentalParameter');
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES 
 (1,158,1);
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES 
+(1,158, 1000001);
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) 
+SELECT `id`, 158, 1000002 FROM `${prefix}profile` WHERE `id`!=1;
+
+INSERT INTO `${prefix}menu` (`id`,`name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
+(159,'menuOrganizationType', 79, 'object', 803, 'ReadWriteType', 0, 'Type');
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) 
+SELECT `idProfile`, 159, `allowAccess` FROM `${prefix}habilitation` WHERE `idMenu`=93;
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) 
+SELECT `idProfile`, 159, `idAccessProfile` FROM `${prefix}accessright` WHERE `idMenu`=93;  
+
+INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idle`, `mandatoryDescription`, `code`) VALUES 
+('Organization', 'Department', '10',0,false,'DEPT'),
+('Organization', 'Unit', '20',0,false,'UNIT'),
+('Organization', 'Location', '30',0,false,'LOC');
+
