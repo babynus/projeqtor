@@ -39,6 +39,14 @@ $scale="";
 if (array_key_exists('format',$_REQUEST)) {
 	$scale=$_REQUEST['format'];
 };
+$startDateReport="";
+if (array_key_exists('startDate',$_REQUEST)) {
+  $startDateReport=$_REQUEST['startDate'];
+};
+$endDateReport="";
+if (array_key_exists('endDate',$_REQUEST)) {
+  $endDateReport=$_REQUEST['endDate'];
+};
 $showCompleted=false;
 if (array_key_exists('showBurndownActivities',$_REQUEST)) {
   $showCompleted=true;
@@ -58,6 +66,12 @@ if ($idProject!="") {
 }
 if ( $scale) {
   $headerParameters.= i18n("colFormat") . ' : ' . i18n($scale) . '<br/>';
+}
+if ($startDateReport!="") {
+  $headerParameters.= i18n("colStartDate") . ' : ' . htmlFormatDate($startDateReport) . '<br/>';
+}
+if ($endDateReport!="") {
+  $headerParameters.= i18n("colEndDate") . ' : ' . htmlFormatDate($endDateReport) . '<br/>';
 }
 if ($showCompleted) {
   $headerParameters.= i18n("colShowBurndownActivities"). '<br/>';
@@ -306,6 +320,29 @@ foreach ($arrDates as $date => $period) {
     $val=VOID;
   }
 }
+
+$startDatePeriod=null;
+$endDatePeriod=null;
+if ($startDateReport and isset($arrDates[$startDateReport])) $startDatePeriod=$arrDates[$startDateReport];
+if ($endDateReport and isset($arrDates[$endDateReport])) $endDatePeriod=$arrDates[$endDateReport];
+if ($startDatePeriod or $endDatePeriod) {
+  foreach ($arrDates as $date => $period) {
+    if ( ($startDatePeriod and $period<$startDatePeriod) or ($endDatePeriod and $period>$endDatePeriod) ) {
+      unset($arrDates[$date]);
+      unset($resBest[$period]);
+      unset($resLeft[$period]);
+      unset($resLeftPlanned[$period]);
+      if ($showCompleted){
+        unset($resLeftTasks[$period]);
+        unset($resLeftTasksPlanned[$period]);
+        unset($resCompletedTasks[$period]);
+        unset($resCompletedTasksPlanned[$period]);
+      }
+    }
+  }
+}
+
+
 $arrDates=array_flip($arrDates);
 $cpt=0;
 $modulo=intVal(50*count($arrDates)/$graphWidth);
@@ -402,10 +439,10 @@ $graph->setFontProperties(array("FontName"=>"../external/pChart2/fonts/verdana.t
 /* Draw the scale */
 $graph->setGraphArea(60,30,$graphWidth-55,$graphHeight-(($scale=='month')?100:75));
 $graph->drawFilledRectangle(60,30,$graphWidth-55,$graphHeight-(($scale=='month')?100:75),array("R"=>255,"G"=>255,"B"=>255,"Surrounding"=>-200,"Alpha"=>230));
-$formatGrid=array("LabelSkip"=>$modulo, "SkippedAxisAlpha"=>0,
-    "Mode"=>SCALE_MODE_START0,
+$formatGrid=array("LabelSkip"=>$modulo, "SkippedAxisAlpha"=>(($modulo>9)?0:20), "SkippedGridTicks"=>0,
+    "Mode"=>SCALE_MODE_START0, "GridTicks"=>0,
     "DrawYLines"=>array(0), "DrawXLines"=>true,"Pos"=>SCALE_POS_LEFTRIGHT, 
-    "LabelRotation"=>60, "GridR"=>100,"GridG"=>100,"GridB"=>100);
+    "LabelRotation"=>60, "GridR"=>200,"GridG"=>200,"GridB"=>200);
 $graph->drawScale($formatGrid);
 
 $dataSet->setSerieWeight("best",1);
