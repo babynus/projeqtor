@@ -31,16 +31,28 @@
 require_once "../tool/projeqtor.php";
 $nbAff = 0;
 // need security
-if (array_key_exists('assignmentRefId',$_REQUEST)) {
-  $assignmentRefId=$_REQUEST['assignmentRefId']; // validated to be numeric value in SqlElement base constructor.
-}
+if (! array_key_exists('assignmentRefId',$_REQUEST)) {
+  throwError('assignmentRefId parameter not found in REQUEST');
+ }
+$assignmentRefId=$_REQUEST['assignmentRefId'];
+Security::checkValidId($assignmentRefId);// validated to be numeric value in SqlElement base constructor.
+
 // need control
+if (! array_key_exists('assignmentRefId',$_REQUEST)) {
+  throwError('$assignmentRefType parameter not found in REQUEST');
+}
 $assignmentRefType = $_REQUEST['assignmentRefType'];
+Security::checkValidClass($assignmentRefType);
+
 
 $meet = new $assignmentRefType($assignmentRefId);
 $crit = array('idProject'=> $meet->idProject);
 $aff = new Affectation();
 $list=$aff->getSqlElementsFromCriteria($crit);
+
+$hoursPerDay=Parameter::getGlobalParameter('dayTime');
+$hourMeeting = ($meet->meetingEndTime)-($meet->meetingStartTime);
+
 // Message error
 $result=i18n('Assignment') . ' ' . i18n('resultInserted') . ' : 0';
 $result .= '<input type="hidden" id="lastSaveId" value="" />';
@@ -56,7 +68,7 @@ foreach ($list as $aff) {
     $ass->refId = $assignmentRefId;
     $ass->refType = $assignmentRefType;
     $ass->idProject = $aff->idProject;
-    $ass->assignedWork = 0.2; // A partir de la durée de la réunion // temps reunion/temps de la journée
+    $ass->assignedWork = $hourMeeting/$hoursPerDay;
     //$ass->idRole=(isset($costArray[$aff->idRole]))?$aff->idRole:$defaultRole;
     $ass->realWork = 0;
     $ass->leftWork = $ass->assignedWork;
