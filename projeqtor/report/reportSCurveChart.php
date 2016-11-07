@@ -44,13 +44,13 @@ $scale="";
 if (array_key_exists('format',$_REQUEST)) {
 	$scale=$_REQUEST['format'];
 };
-$startDate="";
+$startDateReport="";
 if (array_key_exists('startDate',$_REQUEST)) {
-  $startDate=$_REQUEST['startDate'];
+  $startDateReport=$_REQUEST['startDate'];
 };
-$endDate="";
+$endDateReport="";
 if (array_key_exists('endDate',$_REQUEST)) {
-  $endDate=$_REQUEST['endDate'];
+  $endDateReport=$_REQUEST['endDate'];
 };
 $showToday=false;
 if (array_key_exists('showBurndownToday',$_REQUEST)) {
@@ -71,11 +71,11 @@ if ($idBaseline!="") {
 if ( $scale) {
   $headerParameters.= i18n("colFormat") . ' : ' . i18n($scale) . '<br/>';
 }
-if ($startDate!="") {
-  $headerParameters.= i18n("colStartDate") . ' : ' . htmlFormatDate($startDate) . '<br/>';
+if ($startDateReport!="") {
+  $headerParameters.= i18n("colStartDate") . ' : ' . htmlFormatDate($startDateReport) . '<br/>';
 }
-if ($endDate!="") {
-  $headerParameters.= i18n("colEndDate") . ' : ' . htmlFormatDate($endDate) . '<br/>';
+if ($endDateReport!="") {
+  $headerParameters.= i18n("colEndDate") . ' : ' . htmlFormatDate($endDateReport) . '<br/>';
 }
 if ($showToday) {
   $headerParameters.= i18n("colShowBurndownToday"). '<br/>';
@@ -139,10 +139,6 @@ if (!$end) $end=$today;
 if (!$start) $start=$today;
 $endReal=$end;
 
-
-debugLog($tableReal);
-
-
 // constitute query and execute for planned post $end (last real work day)
 $pw=new PlannedWork();
 $pwTable=$pw->getDatabaseTableName();
@@ -201,7 +197,6 @@ $sumReal=0;
 $resPlanned=array();
 $sumPlanned=0;
 foreach ($arrDates as $date => $period) {
-  debugLog("$date => $period");
   if (isset($tableReal[$date])) {
     $sumReal+=$tableReal[$date];
   }
@@ -222,6 +217,20 @@ foreach ($arrDates as $date => $period) {
     $resPlanned[$period]=$sumPlanned;
   } 
 }
+$startDatePeriod=null;
+$endDatePeriod=null;
+if ($startDateReport and isset($arrDates[$startDateReport])) $startDatePeriod=$arrDates[$startDateReport];
+if ($endDateReport and isset($arrDates[$endDateReport])) $endDatePeriod=$arrDates[$endDateReport];
+
+if ($startDatePeriod or $endDatePeriod) {
+  foreach ($arrDates as $date => $period) {
+    if ( ($startDatePeriod and $period<$startDatePeriod) or ($endDatePeriod and $period>$endDatePeriod) ) {
+      unset($arrDates[$date]);
+      unset($resReal[$period]);
+      unset($resPlanned[$period]);
+    }
+  }
+}
 
 $graphWidth=1200;
 $graphHeight=720;
@@ -237,7 +246,7 @@ foreach ($arrDates as $date => $period) {
     $arrDates[$date]=VOID;
   } else {
     if ($scale=='day') {
-      $arrDates[$date]=htmlFormatDate($date);
+      $arrDates[$date]=htmlFormatDate($date); 
     } else if ($scale=='month') {
       $arrDates[$date]=getMonthName(substr($date,5)).' '.substr($date,0,4);
     } else {
@@ -287,10 +296,10 @@ $graph->setFontProperties(array("FontName"=>"../external/pChart2/fonts/verdana.t
 /* Draw the scale */
 $graph->setGraphArea(60,30,$graphWidth-55,$graphHeight-(($scale=='month')?100:75));
 $graph->drawFilledRectangle(60,30,$graphWidth-55,$graphHeight-(($scale=='month')?100:75),array("R"=>255,"G"=>255,"B"=>255,"Surrounding"=>-200,"Alpha"=>230));
-$formatGrid=array("LabelSkip"=>$modulo, "SkippedAxisAlpha"=>0,
-    "Mode"=>SCALE_MODE_START0,
+$formatGrid=array("LabelSkip"=>$modulo, "SkippedAxisAlpha"=>(($modulo>9)?0:20), "SkippedGridTicks"=>0,
+    "Mode"=>SCALE_MODE_START0, "GridTicks"=>0, 
     "DrawYLines"=>array(0), "DrawXLines"=>true,"Pos"=>SCALE_POS_LEFTRIGHT, 
-    "LabelRotation"=>60, "GridR"=>100,"GridG"=>100,"GridB"=>100);
+    "LabelRotation"=>60, "GridR"=>200,"GridG"=>200,"GridB"=>200);
 $graph->drawScale($formatGrid);
 
 $dataSet->setSerieWeight("real",1);
@@ -313,14 +322,14 @@ if ($legend=="top") {
       "R"=>255,"G"=>255,"B"=>255,"Alpha"=>0,
       "FontR"=>55,"FontG"=>55,"FontB"=>55,
       "Margin"=>0));
-  $graph->drawText($graphWidth/2,50,i18n("reportBurndownChart"),array("FontSize"=>14,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
+  $graph->drawText($graphWidth/2,50,i18n("reportSCurveChart"),array("FontSize"=>14,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
 } else {
   $graph->setFontProperties(array("FontName"=>"../external/pChart2/fonts/verdana.ttf","FontSize"=>11,"R"=>100,"G"=>100,"B"=>100));
   $graph->drawLegend(100,50,array("Mode"=>LEGEND_VERTICAL, "Family"=>LEGEND_FAMILY_BOX ,
       "R"=>255,"G"=>255,"B"=>255,"Alpha"=>100,
       "FontR"=>55,"FontG"=>55,"FontB"=>55,
       "Margin"=>5));
-  $graph->drawText($graphWidth/2,20,i18n("reportBurndownChart"),array("FontSize"=>14,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
+  $graph->drawText($graphWidth/2,20,i18n("reportSCurveChart"),array("FontSize"=>14,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
 }
 /* Render the picture (choose the best way) */
 $imgName=getGraphImgName("burndownChart");
