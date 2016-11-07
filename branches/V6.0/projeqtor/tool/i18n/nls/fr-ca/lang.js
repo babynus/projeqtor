@@ -1706,6 +1706,7 @@ msgEnterPlannedDA: "Vous devez renseigner à la fois la date et le montant plani
 msgEnterRealDA: "Vous devez renseigner à la fois la date et le montant réels",
 msgEnterRPAmount: "Vous devez renseigner un montant (prévu ou réel)",
 msgEnterRPDate: "Vous devez renseigner une date (prévue ou réelle)",
+msgErrorSelectedBaseline: "La référence de planification sélectionnée ne correspond pas au projet sélectionné",
 msgEvalutationMaxValue: "La note d'évaluation est établie sur",
 msgFirstStatusMandatoryInWorkflow: "Vous devez inclure l'état initial '${1}' dans le flux de travail",
 msgIncorrectReceiver: "Ce destinataire ne peut pas être sélectionné pour cet élément",

@@ -1706,6 +1706,7 @@ msgEnterPlannedDA: "A data planeada e o montante têm ambos de ser especificados
 msgEnterRealDA: "A data real e o montante têm ambos de ser especificados",
 msgEnterRPAmount: "Você tem de introduzir um montante (planeado ou real)",
 msgEnterRPDate: "Você tem de introduzir uma data (planeada ou real)",
+msgErrorSelectedBaseline: "[The selected baseline does not fit the selected project]",
 msgEvalutationMaxValue: "Valor máximo de avaliação ",
 msgFirstStatusMandatoryInWorkflow: "tem de incluir o primeiro estado '${1}' no fluxo de trabalho",
 msgIncorrectReceiver: "este destinatário não pode ser selecionado para este elemento",
