@@ -2267,8 +2267,6 @@ function isOpenDay($dateValue, $idCalendarDefinition = '1') {
     $bankHolidays [$year . '#' . $idCalendarDefinition] = $aBankHolidays;
   }
   $arrayDefaultOffDays=array();
-  debugLog("Monday:'".Parameter::getGlobalParameter('OpenDayMonday')."'");
-  debugLog("Sundy:'".Parameter::getGlobalParameter('OpenDaySunday')."'");
   if (Parameter::getGlobalParameter('OpenDayMonday')=='offDays') $arrayDefaultOffDays[]=1;
   if (Parameter::getGlobalParameter('OpenDayTuesday')=='offDays') $arrayDefaultOffDays[]=2;
   if (Parameter::getGlobalParameter('OpenDayWednesday')=='offDays') $arrayDefaultOffDays[]=3;
