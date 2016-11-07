@@ -80,6 +80,7 @@ if (! testGraphEnabled()) { return;}
 $user=getSessionUser();
 $proj=new Project($idProject);
 
+$today=date('Y-m-d');
 // constitute query and execute for left work (history)
 $ph=new ProjectHistory();
 $phTable=$ph->getDatabaseTableName();
@@ -99,12 +100,18 @@ $lastLeft=0;
 while ($line = Sql::fetchLine($result)) {
   $day=substr($line['day'],0,4).'-'.substr($line['day'],4,2).'-'.substr($line['day'],6);
   $left=$line['leftwork'];
-  $tabLeft[$day]=$left;
-  $lastLeft=$left;
-  if ($start=="" or $start>$day) {$start=$day;}
-  if ($end=="" or $end<$day) { $end=$day;}
+  $real=$line['realwork'];
+  if ($real>0) {
+    $tabLeft[$day]=$left;
+  
+    $lastLeft=$left;
+    if ( ($start=="" or $start>$day) and $day<=$today) {$start=$day;}
+    if ( ($end=="" or $end<$day) and $day<=$today) { $end=$day;}
+  }
   if ($day>date('Y-m-d')) break;
 }
+if (!$end) $end=$today;
+if (!$start) $start=$today;
 $endReal=$end;
 
 // constitute query and execute for planned post $end (last real work day)
@@ -174,9 +181,14 @@ if ($showCompleted) {
 if (checkNoData(array_merge($tabLeft,$tabLeftPlanned))) exit;
 
 $pe=SqlElement::getSingleSqlElementFromCriteria('PlanningElement',array('refType'=>'Project', 'refId'=>$idProject));
-if (trim($pe->realStartDate)) $start=$pe->realStartDate;
-if (trim($pe->realEndDate)) $end=$pe->realEndDate;
+if (trim($pe->realStartDate) and $pe->realStartDate<$start) $start=$pe->realStartDate;
+if (trim($pe->realEndDate) and $pe->realEndDate>$end) $end=$pe->realEndDate;
 if (trim($pe->validatedEndDate) and $pe->validatedEndDate>$end) $end=$pe->validatedEndDate;
+if (trim($pe->validatedStartDate)) {
+  $valStart=$pe->realStartDate;
+} else {
+  $valStart=$start;
+}
 $arrDates=array();
 $date=$start;
 if (!$start or !$end) {
@@ -185,6 +197,7 @@ if (!$start or !$end) {
   echo '</div>';
   exit;
 }
+
 while ($date<=$end) {
   if ($scale=='week') { $arrDates[$date]=date('Y-W',strtotime($date)); } 
   else if ($scale=='month') { $arrDates[$date]=date('Y-m',strtotime($date));  } 
@@ -261,7 +274,7 @@ foreach ($arrDates as $date => $period) {
     }
     
   }
-  if ($date<=$pe->validatedEndDate) $nbSteps++;
+  if ($date>=$valStart and $date<=$pe->validatedEndDate) $nbSteps++;
 }
 
 $startLabel=reset($arrDates);
@@ -280,6 +293,10 @@ $indexToday=0;
 $today=null;
 foreach ($arrDates as $date => $period) {
   if ($date==date('Y-m-d')) {$today=$period;}
+  if ($date<$valStart) {
+    $resBest[$period]=VOID;
+    continue;
+  }
   if ($val!==VOID or ! isset($resBest[$period])) $resBest[$period]=$val;
   if ($val) {
     $val-=$stepValue;

@@ -115,97 +115,64 @@ $end="";
 $w=new Work();
 $wTable=$w->getDatabaseTableName();
 $querySelect= "select sum(w.work) as work, w.workDate as day ";
-$queryFrom=   " from $pwTable w";
+$queryFrom=   " from $wTable w";
 $proj=new Project($idProject);
-$queryWhere.= " where w.idProject in " . transformListIntoInClause($proj->getRecursiveSubProjectsFlatList(false, true));
+$queryWhere= " where w.idProject in " . transformListIntoInClause($proj->getRecursiveSubProjectsFlatList(false, true));
 $queryWhere.= " and w.idProject in ".transformListIntoInClause($user->getVisibleProjects(false));
 $queryOrder= "  group by w.workDate";
 $query=$querySelect.$queryFrom.$queryWhere.$queryOrder;
 $resultReal=Sql::query($query);
-while ($line = Sql::fetchLine($resultPlanned)) {
+$tableReal=array();
+//$tableRealSum=array();
+//$sumReal=0;
+$today=date('Y-m-d');
+while ($line = Sql::fetchLine($resultReal)) {
   $day=$line['day'];
   $real=$line['work'];
-  if ($start=="" or $start>$day) {$start=$day;}
-  if ($end=="" or $end<$day) { $end=$day;}
+  $tableReal[$day]=$real;
+  //$sumReal+=$real;
+  //$tableRealSum[$day]=$sumReal;
+  if ( ($start=="" or $start>$day) and $day<=$today) {$start=$day;}
+  if ( ($end=="" or $end<$day) and $day<=$today) { $end=$day;}
 }
-
-// constitute query and execute for left work (history)
-$ph=new ProjectHistory();
-$phTable=$ph->getDatabaseTableName();
-$querySelect= "select leftWork as leftwork, realWork as realwork, day "; 
-$queryFrom=   " from $phTable ph";
-$queryWhere=  " where ph.idProject=".Sql::fmtId($idProject);
-$queryWhere.= " and ph.idProject in ".transformListIntoInClause($user->getVisibleProjects(false));
-$queryOrder= "  order by day asc";
-$query=$querySelect.$queryFrom.$queryWhere.$queryOrder;
-$result=Sql::query($query);
-$tabLeft=array();
-$resLeft=array();
-
-$hasReal=false;
-$lastLeft=0;
-while ($line = Sql::fetchLine($result)) {
-  $day=substr($line['day'],0,4).'-'.substr($line['day'],4,2).'-'.substr($line['day'],6);
-  $left=$line['leftwork'];
-  $tabLeft[$day]=$left;
-  $lastLeft=$left;
-  if ($start=="" or $start>$day) {$start=$day;}
-  if ($end=="" or $end<$day) { $end=$day;}
-  if ($day>date('Y-m-d')) break;
-}
+if (!$end) $end=$today;
+if (!$start) $start=$today;
 $endReal=$end;
+
+
+debugLog($tableReal);
+
 
 // constitute query and execute for planned post $end (last real work day)
 $pw=new PlannedWork();
 $pwTable=$pw->getDatabaseTableName();
 $querySelect= "select sum(pw.work) as work, pw.workDate as day ";
 $queryFrom=   " from $pwTable pw";
-$queryWhere=  " where pw.workDate>'$end'";
+$queryWhere=  " where pw.workDate>'$endReal'";
 $proj=new Project($idProject);
 $queryWhere.= " and pw.idProject in " . transformListIntoInClause($proj->getRecursiveSubProjectsFlatList(false, true));
 $queryWhere.= " and pw.idProject in ".transformListIntoInClause($user->getVisibleProjects(false));
 $queryOrder= "  group by pw.workDate";
 $query=$querySelect.$queryFrom.$queryWhere.$queryOrder;
 $resultPlanned=Sql::query($query);
-$tabLeftPlanned=array();
-$resLeftPlanned=array();
-$tabLeftPlanned[$end]=$lastLeft;
-$newLastLeft=$lastLeft;
+$tablePlanned=array();
+//$tablePlannedSum=array();
+//$sumPlanned=$sumReal; // We start left sum at real
 while ($line = Sql::fetchLine($resultPlanned)) {
   $day=$line['day'];
   $planned=$line['work'];
-  $newLastLeft-=$planned;
-  if ($newLastLeft<0) $newLastLeft=0;
-  $tabLeftPlanned[$day]=$newLastLeft;
-  if ($start=="" or $start>$day) {$start=$day;}
-  if ($end=="" or $end<$day) { $end=$day;}
-  if ($newLastLeft==0) break;
+  //$sumPlanned+=$planned;
+  $tablePlanned[$day]=$planned;
+  //$tablePlannedSum[$day]=$sumPlanned;
+  if ($start>$day) {$start=$day;}
+  if ($end<$day) { $end=$day;}
 }
 
-// constitute query and execute for completed tasks
-$pe=new PlanningElement();
-$peTable=$pe->getDatabaseTableName();
-$querySelect= "select plannedEndDate as plannedend, realEndDate as realend ";
-$queryFrom=   " from $peTable pe";
-$queryWhere=  " where pe.idProject in " . transformListIntoInClause($proj->getRecursiveSubProjectsFlatList(false, true));
-$queryWhere.= " and pe.idProject in ".transformListIntoInClause($user->getVisibleProjects(false));
-$queryWhere.= "  and pe.elementary=1";
-$queryOrder= "  order by COALESCE(pe.realEndDate, pe.plannedEndDate)";
-$query=$querySelect.$queryFrom.$queryWhere.$queryOrder;
-$tabCompletedTasks=array();
-$tabCompletedTasksPlanned=array();
-$resCompletedTasks=array();
-$resCompletedTasksPlanned=array();
-$resLeftTasks=array();
-$resLeftTasksPlanned=array();
-
-
-
-if (checkNoData(array_merge($tabLeft,$tabLeftPlanned))) exit;
+if (checkNoData(array_merge($tablePlanned,$tableReal))) exit;
 
 $pe=SqlElement::getSingleSqlElementFromCriteria('PlanningElement',array('refType'=>'Project', 'refId'=>$idProject));
-if (trim($pe->realStartDate)) $start=$pe->realStartDate;
-if (trim($pe->realEndDate)) $end=$pe->realEndDate;
+if (trim($pe->realStartDate) and $pe->realStartDate<$start) $start=$pe->realStartDate;
+if (trim($pe->realEndDate) and $pe->realEndDate>$end) $end=$pe->realEndDate;
 if (trim($pe->validatedEndDate) and $pe->validatedEndDate>$end) $end=$pe->validatedEndDate;
 $arrDates=array();
 $date=$start;
@@ -223,66 +190,49 @@ while ($date<=$end) {
     $month=date('m',strtotime($date));
     $quarter=1+intval(($month-1)/3);
     $arrDates[$date]=$year.'-Q'.$quarter;  }
-  else { $arrDates[$date]=$date;}
+  else { 
+    $arrDates[$date]=$date;
+  }
   $date=addDaysToDate($date, 1);
 }
 
-$old=null;
-$old=reset($tabLeft);
-$oldPlanned=$lastLeft;
-$nbSteps=0;
+$resReal=array();
+$sumReal=0;
+$resPlanned=array();
+$sumPlanned=0;
 foreach ($arrDates as $date => $period) {
-  if ($date>$endReal) {
-    if (!isset($resLeft[$period])) $resLeft[$period]=VOID;
-  } else if (isset($tabLeft[$date])) {
-    $resLeft[$period]=Work::displayWork($tabLeft[$date]);
-    $old=$tabLeft[$date];
-  } else {
-    $resLeft[$period]=($old===null)?'':Work::displayWork($old);
+  debugLog("$date => $period");
+  if (isset($tableReal[$date])) {
+    $sumReal+=$tableReal[$date];
   }
-  if (isset($tabLeftPlanned[$date])) {
-    $resLeftPlanned[$period]=Work::displayWork($tabLeftPlanned[$date]);
-    $oldPlanned=$tabLeftPlanned[$date];
-  } else {
-    if ($date>=$endReal) {
-      $resLeftPlanned[$period]=Work::displayWork($oldPlanned);
-    } else  {
-      $resLeftPlanned[$period]=VOID;
-    }
+  if ($date==$endReal) {
+    $sumPlanned=$sumReal;
   }
-  if ($date<=$pe->validatedEndDate) $nbSteps++;
+  if (isset($tablePlanned[$date])) {
+    $sumPlanned+=$tablePlanned[$date];
+  }
+  if ($date<$endReal) {
+    $resReal[$period]=$sumReal;
+    $resPlanned[$period]=VOID;
+  } else if ($date==$endReal) {
+    $resReal[$period]=$sumReal;
+    $resPlanned[$period]=$sumPlanned;
+  } else if ($date>$endReal) {
+    if (!isset($resReal[$period])) $resReal[$period]=VOID;
+    $resPlanned[$period]=$sumPlanned;
+  } 
 }
-
-$startLabel=reset($arrDates);
-$maxLeft=Work::displayWork($pe->validatedWork);
-if (!$maxLeft and isset($resLeft[$startLabel])) $maxLeft=$resLeft[$startLabel];
-if (!$maxLeft and isset($resLeftPlanned[$startLabel])) $maxLeft=$resLeftPlanned[$startLabel];
-$minLeft=0;
-//$nbSteps=count($arrDates)-1;
-if (!$nbSteps) $nbSteps=count($arrDates);
-$stepValue=($nbSteps)?(($maxLeft-$minLeft)/($nbSteps-1)):0;
-$val=$maxLeft;
 
 $graphWidth=1200;
 $graphHeight=720;
 $indexToday=0;
-$today=null;
-foreach ($arrDates as $date => $period) {
-  if ($date==date('Y-m-d')) {$today=$period;}
-  if ($val) {
-    $val-=$stepValue;
-    if ($val<0) $val=VOID;
-    else if ($val<0.1) $val=VOID;
-  } else {
-    $val=VOID;
-  }
-}
+
 $arrDates=array_flip($arrDates);
 $cpt=0;
 $modulo=intVal(50*count($arrDates)/$graphWidth);
 if ($modulo<0.5) $modulo=0;
 foreach ($arrDates as $date => $period) {
-  if ($date<$today) $indexToday++;
+  if ($period<$today) $indexToday++;
   if (0 and $cpt % $modulo !=0 ) {
     $arrDates[$date]=VOID;
   } else {
@@ -297,31 +247,26 @@ foreach ($arrDates as $date => $period) {
   $cpt++;
 }
 $arrLabel=array();
-$arrVoidLabel=array();
 foreach($arrDates as $date){
   $arrLabel[]=$date;
-  $arrVoidLabel[]=VOID;
 }
 
 $maxPlotted=30; // max number of point to get plotted lines. If over lines are not plotted/
 
 $dataSet = new pData();
 // Definition of series
-$dataSet->addPoints($resLeft,"left");
-$dataSet->addPoints($resLeftPlanned,"leftPlanned");
-$dataSet->setSerieOnAxis("left",0);
-$dataSet->setSerieOnAxis("leftPlanned",0);
-
-$dataSet->setAxisPosition(1,AXIS_POSITION_RIGHT);
-$dataSet->setAxisName(0,i18n("legendRemainingEffort"). ' ('.i18n(Work::getWorkUnit()).')');
-$dataSet->setAxisName(1,i18n("legendNumberOfTasks"));
-$dataSet->setAxisUnit(0,' '.Work::displayShortWorkUnit().' ');
-$dataSet->setAxisUnit(1,' ');
-/* Create the abscissa serie */
+$dataSet->addPoints($resReal,"real");
+$dataSet->addPoints($resPlanned,"planned");
 $dataSet->addPoints($arrLabel,"dates");
-//$dataSet->setSerieDescription("dates","My labels");
-$dataSet->setSerieDescription("left",i18n("legendRemainingEffort")."  ");
-$dataSet->setSerieDescription("leftPlanned",i18n("legendRemainingEffort").' ('.i18n('planned').')  ',"leftPlanned");
+
+$dataSet->setSerieOnAxis("real",0);
+$dataSet->setSerieOnAxis("planned",0);
+
+$dataSet->setAxisName(0,i18n("legendRealWork"). ' ('.i18n(Work::getWorkUnit()).')');
+$dataSet->setAxisUnit(0,' '.Work::displayShortWorkUnit().' ');
+
+$dataSet->setSerieDescription("real",i18n("legendACWP")."  ");
+$dataSet->setSerieDescription("planned",i18n("legendACWP").' ('.i18n('planned').')  ');
 
 $dataSet->setAbscissa("dates");
 
@@ -348,48 +293,19 @@ $formatGrid=array("LabelSkip"=>$modulo, "SkippedAxisAlpha"=>0,
     "LabelRotation"=>60, "GridR"=>100,"GridG"=>100,"GridB"=>100);
 $graph->drawScale($formatGrid);
 
-$dataSet->setSerieWeight("left",1);
-$dataSet->setSerieWeight("leftPlanned",1);
-$dataSet->setSerieWeight("leftTasks",1);
-$dataSet->setSerieWeight("leftTasksPlanned",1);
-$dataSet->setPalette("left",array("R"=>120,"G"=>140,"B"=>250,"Alpha"=>255));
-$dataSet->setPalette("leftPlanned",array("R"=>180,"G"=>180,"B"=>250,"Alpha"=>50));
-$dataSet->setPalette("leftTasks",array("R"=>50,"G"=>150,"B"=>50,"Alpha"=>100));
-$dataSet->setPalette("leftTasksPlanned",array("R"=>100,"G"=>200,"B"=>100,"Alpha"=>50));
-$dataSet->setPalette("completedTasks",array("R"=>200,"G"=>200,"B"=>100,"Alpha"=>80));
-$dataSet->setPalette("completedTasksPlanned",array("R"=>240,"G"=>240,"B"=>150,"Alpha"=>80));
-$dataSet->setSerieTicks("leftTasksPlanned",3);
-$dataSet->setSerieTicks("leftPlanned",3);
+$dataSet->setSerieWeight("real",1);
+$dataSet->setSerieWeight("planned",1);
+$dataSet->setPalette("real",array("R"=>120,"G"=>140,"B"=>250,"Alpha"=>255));
+$dataSet->setPalette("planned",array("R"=>180,"G"=>180,"B"=>250,"Alpha"=>50));
+$dataSet->setSerieTicks("planned",3);
 
-$dataSet->setSerieDrawable("completedTasks",true);
-$dataSet->setSerieDrawable("completedTasksPlanned",true);
-$dataSet->setSerieDrawable("left",FALSE);
-$dataSet->setSerieDrawable("leftPlanned",FALSE);
-$dataSet->setSerieDrawable("leftTasks",FALSE);
-$dataSet->setSerieDrawable("leftTasksPlanned",FALSE);
-$graph->drawStackedBarChart();
-
-$graph->Antialias = TRUE;
-/* Write the chart title */
-$dataSet->setSerieDrawable("left",true);
-$dataSet->setSerieDrawable("leftPlanned",true);
-$dataSet->setSerieDrawable("leftTasks",true);
-$dataSet->setSerieDrawable("leftTasksPlanned",true);
-//$graph->setShadow(TRUE,array("X"=>1,"Y"=>1,"R"=>0,"G"=>0,"B"=>0,"Alpha"=>10));
+$dataSet->setSerieDrawable("real",true);
+$dataSet->setSerieDrawable("planned",true);
 $graph->drawLineChart();
-//$graph->drawSplineChart();
-
-if (count($resLeft)<$maxPlotted) {
+if (count($arrLabel)<$maxPlotted) {
   $graph->drawPlotChart();
 }
 if ($showToday) $graph->drawXThreshold(array($indexToday),array("Alpha"=>70,"Ticks"=>0));
-
-$dataSet->setSerieDrawable("left",true);
-$dataSet->setSerieDrawable("leftPlanned",true);
-$dataSet->setSerieDrawable("leftTasks",true);
-$dataSet->setSerieDrawable("leftTasksPlanned",true);
-$dataSet->setSerieDrawable("completedTasks",true);
-$dataSet->setSerieDrawable("completedTasksPlanned",true);
 
 if ($legend=="top") {
   $graph->setFontProperties(array("FontName"=>"../external/pChart2/fonts/verdana.ttf","FontSize"=>10.8,"R"=>100,"G"=>100,"B"=>100));
@@ -400,7 +316,7 @@ if ($legend=="top") {
   $graph->drawText($graphWidth/2,50,i18n("reportBurndownChart"),array("FontSize"=>14,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
 } else {
   $graph->setFontProperties(array("FontName"=>"../external/pChart2/fonts/verdana.ttf","FontSize"=>11,"R"=>100,"G"=>100,"B"=>100));
-  $graph->drawLegend($graphWidth-350,50,array("Mode"=>LEGEND_VERTICAL, "Family"=>LEGEND_FAMILY_BOX ,
+  $graph->drawLegend(100,50,array("Mode"=>LEGEND_VERTICAL, "Family"=>LEGEND_FAMILY_BOX ,
       "R"=>255,"G"=>255,"B"=>255,"Alpha"=>100,
       "FontR"=>55,"FontG"=>55,"FontB"=>55,
       "Margin"=>5));
