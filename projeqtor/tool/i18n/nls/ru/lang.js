@@ -1706,6 +1706,7 @@ msgEnterPlannedDA: "Должны быть введены дата планиро
 msgEnterRealDA: "Должны быть введены реальная дата и сумма",
 msgEnterRPAmount: "Вы должны ввести сумму (плановую или реальную)",
 msgEnterRPDate: "Вы должны ввести дату (плановую или реальную)",
+msgErrorSelectedBaseline: "[The selected baseline does not fit the selected project]",
 msgEvalutationMaxValue: "[Max evaluation value set to]",
 msgFirstStatusMandatoryInWorkflow: "вы должны включить первый статус '${1}' рабочего проекта",
 msgIncorrectReceiver: "данный получатель не может быть выбран для этого элемента",

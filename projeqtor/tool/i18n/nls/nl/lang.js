@@ -1706,6 +1706,7 @@ msgEnterPlannedDA: "Geplande datum en hoeveelheid moeten beide worden ingevoerd"
 msgEnterRealDA: "Werkelijke datum en hoeveelheid moeten beide worden ingevoerd",
 msgEnterRPAmount: "Je moet een hoeveelheid invoeren (geplanned of werkelijk)",
 msgEnterRPDate: "Je moet een datum invoeren (geplanned of werkelijk)",
+msgErrorSelectedBaseline: "[The selected baseline does not fit the selected project]",
 msgEvalutationMaxValue: "[Max evaluation value set to]",
 msgFirstStatusMandatoryInWorkflow: "je moet de eerste status '${1}' toepassen in de workflow",
 msgIncorrectReceiver: "deze ontvanger kan niet worden geselecteerd voor dit element",

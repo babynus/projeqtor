@@ -105,8 +105,10 @@ $user=getSessionUser();
 $proj=new Project($idProject);
 $baseline=new Baseline($idBaseline);
 if ($baseline->idProject!=$idProject) {
-  // TODO : check if baseline fits selected project
-  //exit;
+  echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
+  echo i18n('messageNoData',array(i18n('colIdBaselineSelect'))); // TODO i18n message
+  echo '</div>';
+  exit;
 }
 
 $start="";
@@ -164,7 +166,28 @@ while ($line = Sql::fetchLine($resultPlanned)) {
   if ($end<$day) { $end=$day;}
 }
 
-if (checkNoData(array_merge($tablePlanned,$tableReal))) exit;
+// constitute query and execute for baseline
+$pwb=new PlannedWorkBaseline();
+$pwbTable=$pwb->getDatabaseTableName();
+$querySelect= "select sum(pwb.work) as work, pwb.workDate as day ";
+$queryFrom=   " from $pwbTable pwb";
+$queryWhere=  " where pwb.idBaseline=".Sql::fmtId($idBaseline);
+$proj=new Project($idProject);
+$queryWhere.= " and pwb.idProject in " . transformListIntoInClause($proj->getRecursiveSubProjectsFlatList(false, true));
+$queryWhere.= " and pwb.idProject in ".transformListIntoInClause($user->getVisibleProjects(false));
+$queryOrder= "  group by pwb.workDate";
+$query=$querySelect.$queryFrom.$queryWhere.$queryOrder;
+$resultBaseline=Sql::query($query);
+$tableBaseline=array();
+while ($line = Sql::fetchLine($resultBaseline)) {
+  $day=$line['day'];
+  $planned=$line['work'];
+  $tableBaseline[$day]=$planned;
+  if ($start>$day) {$start=$day;}
+  if ($end<$day) { $end=$day;}
+}
+
+if (checkNoData(array_merge($tablePlanned,$tableReal,$tableBaseline))) exit;
 
 $pe=SqlElement::getSingleSqlElementFromCriteria('PlanningElement',array('refType'=>'Project', 'refId'=>$idProject));
 if (trim($pe->realStartDate) and $pe->realStartDate<$start) $start=$pe->realStartDate;
@@ -196,6 +219,8 @@ $resReal=array();
 $sumReal=0;
 $resPlanned=array();
 $sumPlanned=0;
+$resBaseline=array();
+$sumBaseline=0;
 foreach ($arrDates as $date => $period) {
   if (isset($tableReal[$date])) {
     $sumReal+=$tableReal[$date];
@@ -205,6 +230,9 @@ foreach ($arrDates as $date => $period) {
   }
   if (isset($tablePlanned[$date])) {
     $sumPlanned+=$tablePlanned[$date];
+  }
+  if (isset($tableBaseline[$date])) {
+    $sumBaseline+=$tableBaseline[$date];
   }
   if ($date<$endReal) {
     $resReal[$period]=$sumReal;
@@ -216,6 +244,7 @@ foreach ($arrDates as $date => $period) {
     if (!isset($resReal[$period])) $resReal[$period]=VOID;
     $resPlanned[$period]=$sumPlanned;
   } 
+  $resBaseline[$period]=$sumBaseline;
 }
 $startDatePeriod=null;
 $endDatePeriod=null;
@@ -228,6 +257,7 @@ if ($startDatePeriod or $endDatePeriod) {
       unset($arrDates[$date]);
       unset($resReal[$period]);
       unset($resPlanned[$period]);
+      unset($resBaseline[$period]);
     }
   }
 }
@@ -266,16 +296,19 @@ $dataSet = new pData();
 // Definition of series
 $dataSet->addPoints($resReal,"real");
 $dataSet->addPoints($resPlanned,"planned");
+$dataSet->addPoints($resBaseline,"baseline");
 $dataSet->addPoints($arrLabel,"dates");
 
 $dataSet->setSerieOnAxis("real",0);
 $dataSet->setSerieOnAxis("planned",0);
+$dataSet->setSerieOnAxis("baseline",0);
 
-$dataSet->setAxisName(0,i18n("legendRealWork"). ' ('.i18n(Work::getWorkUnit()).')');
+$dataSet->setAxisName(0,i18n("colWork"). ' ('.i18n(Work::getWorkUnit()).')');
 $dataSet->setAxisUnit(0,' '.Work::displayShortWorkUnit().' ');
 
 $dataSet->setSerieDescription("real",i18n("legendACWP")."  ");
 $dataSet->setSerieDescription("planned",i18n("legendACWP").' ('.i18n('planned').')  ');
+$dataSet->setSerieDescription("baseline",i18n("legendBCWS")."  ");
 
 $dataSet->setAbscissa("dates");
 
@@ -294,22 +327,26 @@ $graph->drawRectangle(0,0,$graphWidth-1,$graphHeight-1,array("R"=>150,"G"=>150,"
 $graph->setFontProperties(array("FontName"=>"../external/pChart2/fonts/verdana.ttf","FontSize"=>9,"R"=>100,"G"=>100,"B"=>100));
 
 /* Draw the scale */
-$graph->setGraphArea(60,30,$graphWidth-55,$graphHeight-(($scale=='month')?100:75));
-$graph->drawFilledRectangle(60,30,$graphWidth-55,$graphHeight-(($scale=='month')?100:75),array("R"=>255,"G"=>255,"B"=>255,"Surrounding"=>-200,"Alpha"=>230));
+$graph->setGraphArea(60,30,$graphWidth-20,$graphHeight-(($scale=='month')?100:75));
+$graph->drawFilledRectangle(60,30,$graphWidth-20,$graphHeight-(($scale=='month')?100:75),array("R"=>255,"G"=>255,"B"=>255,"Surrounding"=>-200,"Alpha"=>230));
 $formatGrid=array("LabelSkip"=>$modulo, "SkippedAxisAlpha"=>(($modulo>9)?0:20), "SkippedGridTicks"=>0,
     "Mode"=>SCALE_MODE_START0, "GridTicks"=>0, 
     "DrawYLines"=>array(0), "DrawXLines"=>true,"Pos"=>SCALE_POS_LEFTRIGHT, 
     "LabelRotation"=>60, "GridR"=>200,"GridG"=>200,"GridB"=>200);
 $graph->drawScale($formatGrid);
 
+$graph->Antialias = TRUE;
 $dataSet->setSerieWeight("real",1);
 $dataSet->setSerieWeight("planned",1);
+$dataSet->setSerieWeight("baseline",1);
 $dataSet->setPalette("real",array("R"=>120,"G"=>140,"B"=>250,"Alpha"=>255));
 $dataSet->setPalette("planned",array("R"=>180,"G"=>180,"B"=>250,"Alpha"=>50));
+$dataSet->setPalette("baseline",array("R"=>250,"G"=>180,"B"=>210,"Alpha"=>255));
 $dataSet->setSerieTicks("planned",3);
 
 $dataSet->setSerieDrawable("real",true);
 $dataSet->setSerieDrawable("planned",true);
+$dataSet->setSerieDrawable("baseline",true);
 $graph->drawLineChart();
 if (count($arrLabel)<$maxPlotted) {
   $graph->drawPlotChart();
