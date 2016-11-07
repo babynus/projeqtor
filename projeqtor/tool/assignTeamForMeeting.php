@@ -35,11 +35,11 @@ if (! array_key_exists('assignmentRefId',$_REQUEST)) {
   throwError('assignmentRefId parameter not found in REQUEST');
  }
 $assignmentRefId=$_REQUEST['assignmentRefId'];
-Security::checkValidId($assignmentRefId);// validated to be numeric value in SqlElement base constructor.
+Security::checkValidId($assignmentRefId);// validated to be id value in SqlElement base constructor.
 
 // need control
-if (! array_key_exists('assignmentRefId',$_REQUEST)) {
-  throwError('$assignmentRefType parameter not found in REQUEST');
+if (! array_key_exists('assignmentRefType',$_REQUEST)) {
+  throwError('assignmentRefType parameter not found in REQUEST');
 }
 $assignmentRefType = $_REQUEST['assignmentRefType'];
 Security::checkValidClass($assignmentRefType);
