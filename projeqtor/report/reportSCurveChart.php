@@ -221,7 +221,6 @@ while ($date<=$end) {
   }
   $date=addDaysToDate($date, 1);
 }
-debugLog($arrDates);
 $resReal=array();
 $sumReal=0;
 $resPlanned=array();
