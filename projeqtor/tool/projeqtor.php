@@ -2847,4 +2847,10 @@ function formatSmallButton($class) {
   $result.="<span class='roundedButtonSmall' style='top:0px;display:inline-block;width:".$size."px;height:".$size."px;'><div class='iconButton$class$size' style='' >&nbsp;</div></span>";
   return $result;
 }
+function formatBigButton($class) {
+  $size="32";
+  $result='';
+  $result.="<span class='roundedButtonSmall' style='top:0px;display:inline-block;width:".$size."px;height:".$size."px;'><div class='iconButton$class$size' style='' >&nbsp;</div></span>";
+  return $result;
+}
 ?>
