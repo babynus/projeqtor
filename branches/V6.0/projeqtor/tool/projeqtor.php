@@ -2204,8 +2204,11 @@ function weekFormat($dateValue) {
   // return date('Y-W', strtotime ($dateValue) );
   $w = (date ( 'W', strtotime ( $dateValue ) ));
   $m = (date ( 'm', strtotime ( $dateValue ) ));
+  $y = (date ( 'Y', strtotime ( $dateValue ) ));
   if ($w == 1 && $m == 12) {
-    return date ( "Y-W", strtotime ( "+1 year", strtotime ( $dateValue . "-01" ) ) );
+    return ($y+1).'-'.$w;
+  } else if ($w>=52 && $m == 1) {
+    return ($y-1).'-'.$w;
   } else {
     return date ( 'Y-W', strtotime ( $dateValue ) );
   }
