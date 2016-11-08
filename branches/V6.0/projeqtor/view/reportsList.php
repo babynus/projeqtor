@@ -69,17 +69,14 @@ scriptLog('   ->/view/reportsList.php');
 <div dojoType="dijit.layout.ContentPane" region="center" id="gridContainerDiv">
   <table>
     <tr>
-      <td class="tabLabel">
-        <?php echo i18n('colReports');?>        
-      </td>
-      <td width="5px">&nbsp;</td>
+      <td width="5px" height="35px">&nbsp;</td>
       <td class="tabLabel" >
         <?php echo i18n('colParameters');?>
       </td>
     </tr>
     <tr>
-      <td valign="top" style="width:40%">
-        <div id="reportMenuList" style="width:100%">
+      <td valign="top" style="width:40%" >
+        <div id="reportMenuList" style="width:558px;overflow-y:auto;overflow-x:hidden;height:200px;">
            <?php include "reportListMenu.php";?>
         </div>
       </td>
