@@ -263,8 +263,7 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (62, 'idMilestoneType', 'milestoneList', 30, null),
 (62, 'startDate', 'date', 40, null),
 (62, 'endDate', 'date', 45, null),
-(62, 'showBurndownToday', 'boolean', 60, '1'),
-(62, 'showBurndownLegendOnTop', 'boolean', 70, '0');
+(62, 'showBurndownToday', 'boolean', 60, '1');
 
 UPDATE `${prefix}menu` SET idMenu=11,  sortOrder=435  WHERE ID=122; 
 UPDATE `${prefix}menu` SET idMenu=0,   sortOrder=1100 WHERE ID=37;
