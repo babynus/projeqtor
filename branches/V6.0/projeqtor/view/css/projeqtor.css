@@ -3270,6 +3270,7 @@ p {
     position: relative;
     margin-left:20px;
     margin-right:20px;
+    margin-top:0px;
     width:100%;
 }
 
@@ -3278,14 +3279,14 @@ p {
 	  cursor:pointer;
 	  color: #505050 !important;
     display: block;
-    width:200px;
+    width:250px;
     float:left;
 	  text-transform: uppercase;
 	  text-shadow: 1px 1px 2px rgba(89,22,20,0.3);
 	  text-align:center;
 	  margin: 2px;
 	  height:30px;
-	  padding: 2px 2px 2px 2px;
+	  padding:0px;
 	  background: rgba(255,255,255,0.2);
 	  -webkit-transition: all 0.3s ease-in-out;
 	  -moz-transition: all 0.3s ease-in-out;
@@ -3296,19 +3297,18 @@ p {
 .bmenuText {
 	font-size: 11px;
 	display:table-cell;
-	width:200px;
-	line-height:1em;
+	width:250px;
 	height: 30px;
 	vertical-align: middle;
 	font-weight:normal;
 	text-transform: none;
 	letter-spacing:0px;
-	
+	padding:0px;
 }
 .bmenuCategText {
 	padding: 0px 10px;
   display:table-cell;
-  width:200px;
+  width:250px;
   height: 28px;
   vertical-align: middle;
   letter-spacing: 1px;
@@ -3325,7 +3325,6 @@ p {
 	font-size:105%;
 	font-weight:bold;
 	background-color: #e97b2c  !important;
-	padding: 0px;
 }
 .reportSelected .bmenuText{
   font-size:105%;
@@ -3335,10 +3334,15 @@ p {
 
 .headerReport{
   color:black;
-  font-size: 24px; 
-  margin-left: 207px;
+  font-size: 22px; 
   font-family: Verdana,"Arial Black", Arial, sans-serif;
   font-weight: bold;
   border:0px;
+  position:absolute;
+  top:3px;
+  text-align:center;
+  background:transparent;
+  left:40px;
+  width:470px;
 }
 

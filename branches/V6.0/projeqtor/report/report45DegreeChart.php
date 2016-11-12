@@ -84,7 +84,7 @@ include "header.php";
 
 if (!$idProject) {
   echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
-  echo i18n('messageNoData',array(i18n('Project'))); // TODO i18n message
+  echo i18n('messageNoData',array(i18n('Project'))); 
   echo '</div>';
   exit; 
 }
@@ -126,7 +126,6 @@ while ($line = Sql::fetchLine($resultMile)) {
   $arrayMile[$idpe]=array('id'=>$id, 'idpe'=>$idpe, 'name'=>$name,'type'=>$tp,'dates'=>array(), 'periods'=>array(), 'current'=>VOID, 'lastDate'=>null);
 }
 $listMilePE.=')';
-debugLog($arrayMile);
 
 $h=new History();
 $hTable=$h->getDatabaseTableName();
@@ -143,7 +142,6 @@ $existingDates=array();
 while ($line = Sql::fetchLine($resultPlanned)) {
   $day=substr($line['date'],0,10);
   $existingDates[$day]=$day;
-  $arrDates[$day]=$day;
   $idpe=$line['idpe'];
   $old=$line['old'];
   $new=$line['new'];
@@ -166,18 +164,14 @@ $start=substr($start,0,8).'01';
 $end=substr($end,0,8).date('t',strtotime($end));
 $arrDates=array();
 while ($date<=$end) {
-  if ($scale=='week') { 
-    $arrDates[$date]=weekFormat($date); 
-  } else if ($scale=='month') { 
-    $arrDates[$date]=date('Y-m',strtotime($date));  
-  } else if ($scale=='quarter') { 
-    $year=date('Y',strtotime($date));
-    $month=date('m',strtotime($date));
-    $quarter=1+intval(($month-1)/3);
-    $arrDates[$date]=$year.'-Q'.$quarter;  }
-  else { 
-    if (isset($existingDates[$date])) {
-      $arrDates[$date]=$date;
+  if (isset($existingDates[$date]) or $date==$today) {
+    if ($scale=='day') { 
+      $arrDates[$date]=strtotime($date.' 12:00:00');
+    } else {
+      $dt=new DateTime();
+      $dt->setTimestamp(strtotime($date.' 12:00:00'));
+      $last=lastDayOf($scale,$dt);
+      $arrDates[$date]=$last->getTimestamp(); 
     }
   }
   $date=addDaysToDate($date, 1);
@@ -185,8 +179,17 @@ while ($date<=$end) {
 
 $resBase=array();
 
+$startDatePeriod=null;
+$endDatePeriod=null;
+if ($startDateReport and isset($arrDates[$startDateReport])) $startDatePeriod=$arrDates[$startDateReport];
+if ($endDateReport and isset($arrDates[$endDateReport])) $endDatePeriod=$arrDates[$endDateReport];
+
 foreach ($arrDates as $date => $period) {
-  $resBase[$period]=strtotime($date);
+  if ( ($startDateReport and $date<$startDateReport) or ($endDateReport and $date>$endDateReport) ) {
+    unset ($arrDates[$date]);
+    continue;
+  } 
+  $resBase[$period]=$period;
   foreach($arrayMile as $idx=>$arr) {
     if (isset($arrayMile[$idx]['dates'][$date])) {
       $arrayMile[$idx]['current']=$arrayMile[$idx]['dates'][$date];
@@ -199,44 +202,31 @@ foreach ($arrDates as $date => $period) {
     }
   }
 }
-$startDatePeriod=null;
-$endDatePeriod=null;
-if ($startDateReport and isset($arrDates[$startDateReport])) $startDatePeriod=$arrDates[$startDateReport];
-if ($endDateReport and isset($arrDates[$endDateReport])) $endDatePeriod=$arrDates[$endDateReport];
+if (count($arrDates)<2) {
+  echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
+  echo i18n('reportNoData');
+  echo '</div>';
+  exit;
+}
 
-/*if ($startDatePeriod or $endDatePeriod) {
-  foreach ($arrDates as $date => $period) {
-    if ( ($startDatePeriod and $period<$startDatePeriod) or ($endDatePeriod and $period>$endDatePeriod) ) {
-      unset($arrDates[$date]);
-      unset($resReal[$period]);
-      unset($resPlanned[$period]);
-      unset($resBaseline[$period]);
-    }
-  }
-}*/
+
 
 $graphWidth=1200;
 $graphHeight=720;
 $indexToday=0;
 
 $arrDates=array_flip($arrDates);
-$arrLabel=array();
 $cpt=0;
 $modulo=intVal(50*count($arrDates)/$graphWidth);
 if ($modulo<0.5) $modulo=0;
 foreach ($arrDates as $date => $period) {
   if ($period<$today) $indexToday++;
-  if (0 and $cpt % $modulo !=0 ) {
-    $arrDates[$date]=VOID;
+  if ($scale=='day') {
+    //$arrDates[$date]=htmlFormatDate($date); 
   } else {
-    if ($scale=='day') {
-      $arrDates[$date]=htmlFormatDate($date); 
-    } else if ($scale=='month') {
-      $arrDates[$date]=getMonthName(substr($date,5)).' '.substr($date,0,4);
-    } else {
-      $arrDates[$date]=$date;
-    }
+    $arrDates[$date]=$date;
   }
+
   $cpt++;
 }
 
@@ -261,9 +251,12 @@ $dataSet->setSerieWeight("base",1);
 $dataSet->setPalette("base",array("R"=>250,"G"=>180,"B"=>210,"Alpha"=>255));
 $dataSet->setSerieDescription("base",i18n("legendBaseline")."  ");
 
-if ($scale=='day') {
-  foreach ($arrLabel as $idx=>$val) {
-    $arrLabel[$idx]=strtotime($val);
+foreach ($arrLabel as $idx=>$val) {
+  if ($scale=='day') {
+    $arrLabel[$idx]=strtotime($val.' 12:00:00');
+  }
+  if ($scale=='month') {
+    //$arrLabel[$idx]=strtotime($val.date(' 12:00:00')
   }
 }
 $dataSet->addPoints($arrLabel,"dates");
@@ -271,6 +264,10 @@ $dataSet->setAxisDisplay(0,AXIS_FORMAT_DATE);
 $dataSet->setAbscissa("dates");
 if ($scale=='day') {
   $dataSet->setXAxisDisplay(AXIS_FORMAT_DATE);
+} else if ($scale=='week') {
+  $dataSet->setXAxisDisplay(AXIS_FORMAT_DATE,'Y-W');
+} else if ($scale=='month' or $scale=='quarter') {
+    $dataSet->setXAxisDisplay(AXIS_FORMAT_DATE,'F Y');  
 }
 
 /* Create the pChart object */
@@ -286,25 +283,21 @@ $graph->drawRectangle(0,0,$graphWidth-1,$graphHeight-1,array("R"=>150,"G"=>150,"
 $graph->setFontProperties(array("FontName"=>"../external/pChart2/fonts/verdana.ttf","FontSize"=>9,"R"=>100,"G"=>100,"B"=>100));
 
 /* Draw the scale */
-$graph->setGraphArea(90,30,$graphWidth-20,$graphHeight-(($scale=='month')?100:75));
-$graph->drawFilledRectangle(90,30,$graphWidth-20,$graphHeight-(($scale=='month')?100:75),array("R"=>255,"G"=>255,"B"=>255,"Surrounding"=>-200,"Alpha"=>230));
+$graph->setGraphArea(90,30,$graphWidth-200,$graphHeight-(($scale=='month' or $scale=='quarter')?100:75));
+$graph->drawFilledRectangle(90,30,$graphWidth-200,$graphHeight-(($scale=='month' or $scale=='quarter')?100:75),array("R"=>255,"G"=>255,"B"=>255,"Surrounding"=>-200,"Alpha"=>230));
 $formatGrid=array("LabelSkip"=>$modulo, "SkippedAxisAlpha"=>(($modulo>9)?0:20), "SkippedGridTicks"=>0,
     "Mode"=>SCALE_MODE_FLOATING, "GridTicks"=>0, 
     "DrawYLines"=>array(0), "DrawXLines"=>true,"Pos"=>SCALE_POS_LEFTRIGHT, 
     "LabelRotation"=>60, "GridR"=>200,"GridG"=>200,"GridB"=>200,
-    "ScaleModeAuto"=>TRUE);
+    "ScaleModeAuto"=>TRUE
+    );
 $graph->drawScale($formatGrid);
 
 $graph->Antialias = TRUE;
 
 $dataSet->setSerieDrawable("base",true);
 
-//$drawFormat=array("DisplayValues"=>TRUE,"DisplayColor"=>DISPLAY_AUTO,"ScaleModeAuto"=>TRUE);
-if ($scale=='day') {
-  $drawFormat=array("ScaleModeAuto"=>TRUE);
-} else {
-  $drawFormat=array();
-}
+$drawFormat=array("ScaleModeAuto"=>TRUE);
 $graph->drawLineChart($drawFormat);
 $dataSet->setSerieDrawable("base",false);
 if (count($arrLabel)<$maxPlotted) {
@@ -312,21 +305,12 @@ if (count($arrLabel)<$maxPlotted) {
 }
 if ($showToday) $graph->drawXThreshold(array($indexToday),array("Alpha"=>70,"Ticks"=>0));
 
-if ($legend=="top") {
-  $graph->setFontProperties(array("FontName"=>"../external/pChart2/fonts/verdana.ttf","FontSize"=>10.8,"R"=>100,"G"=>100,"B"=>100));
-  $graph->drawLegend(10,10,array("Mode"=>LEGEND_HORIZONTAL, "Family"=>LEGEND_FAMILY_BOX ,
-      "R"=>255,"G"=>255,"B"=>255,"Alpha"=>0,
-      "FontR"=>55,"FontG"=>55,"FontB"=>55,
-      "Margin"=>0));
-  $graph->drawText($graphWidth/2,50,i18n("reportSCurveChart"),array("FontSize"=>14,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
-} else {
-  $graph->setFontProperties(array("FontName"=>"../external/pChart2/fonts/verdana.ttf","FontSize"=>11,"R"=>100,"G"=>100,"B"=>100));
-  $graph->drawLegend(100,50,array("Mode"=>LEGEND_VERTICAL, "Family"=>LEGEND_FAMILY_BOX ,
-      "R"=>255,"G"=>255,"B"=>255,"Alpha"=>100,
-      "FontR"=>55,"FontG"=>55,"FontB"=>55,
-      "Margin"=>5));
-  $graph->drawText($graphWidth/2,20,i18n("report45DegreeChart"),array("FontSize"=>14,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
-}
+$graph->setFontProperties(array("FontName"=>"../external/pChart2/fonts/verdana.ttf","FontSize"=>10,"R"=>100,"G"=>100,"B"=>100));
+$graph->drawLegend($graphWidth-190,50,array("Mode"=>LEGEND_VERTICAL, "Family"=>LEGEND_FAMILY_BOX ,
+    "R"=>255,"G"=>255,"B"=>255,"Alpha"=>100,
+    "FontR"=>55,"FontG"=>55,"FontB"=>55,
+    "Margin"=>5));
+$graph->drawText($graphWidth/2,20,i18n("report45DegreeChart"),array("FontSize"=>14,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
 
 /* Render the picture (choose the best way) */
 $imgName=getGraphImgName("scurvechart");
@@ -337,4 +321,81 @@ echo '<img style="width:1000px;height:600px" src="' . $imgName . '" />';
 echo '</td></tr></table>';
 echo '<br/>';
 
+// ===============================================================================================================
+/*
+function firstDayOf($period, DateTime $date = null)
+{
+  $period = strtolower($period);
+  $validPeriods = array('year', 'quarter', 'month', 'week');
+
+  if ( ! in_array($period, $validPeriods))
+    throw new InvalidArgumentException('Period must be one of: ' . implode(', ', $validPeriods));
+
+  $newDate = ($date === null) ? new DateTime() : clone $date;
+
+  switch ($period) {
+  	case 'year':
+  	  $newDate->modify('first day of january ' . $newDate->format('Y'));
+  	  break;
+  	case 'quarter':
+  	  $month = $newDate->format('n') ;
+
+  	  if ($month < 4) {
+  	    $newDate->modify('first day of january ' . $newDate->format('Y'));
+  	  } elseif ($month > 3 && $month < 7) {
+  	    $newDate->modify('first day of april ' . $newDate->format('Y'));
+  	  } elseif ($month > 6 && $month < 10) {
+  	    $newDate->modify('first day of july ' . $newDate->format('Y'));
+  	  } elseif ($month > 9) {
+  	    $newDate->modify('first day of october ' . $newDate->format('Y'));
+  	  }
+  	  break;
+  	case 'month':
+  	  $newDate->modify('first day of this month');
+  	  break;
+  	case 'week':
+  	  $newDate->modify(($newDate->format('w') === '0') ? 'monday last week' : 'monday this week');
+  	  break;
+  }
+
+  return $newDate;
+}*/
+function lastDayOf($period, DateTime $date = null)
+{
+  $period = strtolower($period);
+  $validPeriods = array('year', 'quarter', 'month', 'week');
+
+  if ( ! in_array($period, $validPeriods))
+    throw new InvalidArgumentException('Period must be one of: ' . implode(', ', $validPeriods));
+
+  $newDate = ($date === null) ? new DateTime() : clone $date;
+
+  switch ($period)
+  {
+  	case 'year':
+  	  $newDate->modify('last day of december ' . $newDate->format('Y'));
+  	  break;
+  	case 'quarter':
+  	  $month = $newDate->format('n') ;
+
+  	  if ($month < 4) {
+  	    $newDate->modify('last day of march ' . $newDate->format('Y'));
+  	  } elseif ($month > 3 && $month < 7) {
+  	    $newDate->modify('last day of june ' . $newDate->format('Y'));
+  	  } elseif ($month > 6 && $month < 10) {
+  	    $newDate->modify('last day of september ' . $newDate->format('Y'));
+  	  } elseif ($month > 9) {
+  	    $newDate->modify('last day of december ' . $newDate->format('Y'));
+  	  }
+  	  break;
+  	case 'month':
+  	  $newDate->modify('last day of this month');
+  	  break;
+  	case 'week':
+  	  $newDate->modify(($newDate->format('w') === '0') ? 'now' : 'sunday this week');
+  	  break;
+  }
+
+  return $newDate;
+}
 ?>
