@@ -70,8 +70,8 @@ scriptLog('   ->/view/reportsList.php');
   <table>
     <tr>
       <td width="5px" height="35px">&nbsp;</td>
-      <td class="tabLabel" >
-        <?php echo i18n('colParameters');?>
+      <td class="tabLabel">
+        <div style="position:relative;left:100px"><?php echo i18n('colParameters');?></div>
       </td>
     </tr>
     <tr>

@@ -260,9 +260,9 @@ INSERT INTO `${prefix}habilitationreport` (`idProfile`,`idReport`,`allowAccess`)
 INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES 
 (62, 'idProject', 'projectList', 10, 'currentProject'),
 (62, 'format', 'periodScale', 20, 'day'),
-(62, 'startDate', 'date', 30, null),
-(62, 'endDate', 'date', 40, null),
-(62, 'idMilestoneType', 'milestoneList', 50, null),
+(62, 'idMilestoneType', 'milestoneList', 30, null),
+(62, 'startDate', 'date', 40, null),
+(62, 'endDate', 'date', 45, null),
 (62, 'showBurndownToday', 'boolean', 60, '1'),
 (62, 'showBurndownLegendOnTop', 'boolean', 70, '0');
 
