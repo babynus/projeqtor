@@ -221,8 +221,8 @@ class OrganizationMain extends SqlElement {
     $bec->totalLeftCost=0;
     $bec->totalPlannedCost=0;
     
-    // Add all elementary
-    $crit=array('idOrganization'=>$this->id);
+    // Add all Projects
+    $crit=array('idOrganization'=>$this->id, 'idle'=>'0');
     $peList=$pe->getSqlElementsFromCriteria($crit);
     foreach ($peList as $pe) {
       $bec->validatedWork+=$pe->validatedWork;
@@ -247,6 +247,9 @@ class OrganizationMain extends SqlElement {
       $bec->totalLeftCost+=$pe->totalLeftCost;
       $bec->totalPlannedCost+=$pe->totalPlannedCost;
       $crit=array('topId'=>$pe->id,'refType'=>'Project');
+      // Remove sub-projects : will remove sub-projects of same Organization (already included) and of different Organization (must not be included)
+      // This way, for projects with sub-projects we count only work on main project, sub-projects are added separately
+      // It is importatn to di this way to remove sub-projects of different Organization 
       $subList=$pe->getSqlElementsFromCriteria($crit);
       foreach ($subList as $sub) {
         $bec->validatedWork-=$sub->validatedWork;
