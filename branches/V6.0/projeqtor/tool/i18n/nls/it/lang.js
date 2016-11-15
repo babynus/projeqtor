@@ -1604,6 +1604,7 @@ menuProduct: "preservare UTF-8 per i file CSV esportati; se impostato su No&#44;
 menuProductOrComponent: "Mailing list per il log dei risultati delle integrazione automatizzato (se la destinazione è 'mail')",
 menuProductType: "password di default per l'inizializzazione della password",
 menuProductVersion: "Filtri memorizzati",
+menuProductVersionType: "[Products versions types]",
 menuProfile: "importo iniziale",
 menuProject: "email 'da' nell'invio di mails",
 menuProjectExpense: "Gestione Rischi e Problemi",
