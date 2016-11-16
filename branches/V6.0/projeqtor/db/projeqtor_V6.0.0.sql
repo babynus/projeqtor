@@ -330,3 +330,5 @@ ADD `organizationInherited` int(1) unsigned DEFAULT NULL,
 ADD `organizationElementary` int(1) unsigned DEFAULT NULL;
 
 CREATE INDEX planningelementOrganization ON `${prefix}planningelement` (`idOrganization`);
+
+ALTER TABLE `${prefix}resource` ADD `idOrganization` int(12) UNSIGNED DEFAULT NULL;
