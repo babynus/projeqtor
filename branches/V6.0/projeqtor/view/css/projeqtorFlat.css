@@ -367,6 +367,8 @@ body .ProjeQtOrFlatBlue {
   background: #a6a0bc !important;
   background-image: url();
 }
+.ProjeQtOrFlatBlue .iconButtonArrowRight16 { background-image: url(customIcons/blue/iconArrowRight.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrFlatBlue .iconButtonCopy16 { background-image: url(customIcons/blue/iconCopy.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOrFlatBlue .iconButtonBlocked16 { background-image: url(customIcons/blue/iconBlocked.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOrFlatBlue .iconButtonDownload16 { background-image: url(customIcons/blue/iconDownload.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOrFlatBlue .iconButtonEdit16 { background-image: url(customIcons/blue/iconEdit.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
@@ -1447,6 +1449,8 @@ body .ProjeQtOrFlatRed {
   background: #bda1a6 !important;
   background-image: url();
 }
+.ProjeQtOrFlatRed .iconButtonArrowRight16 { background-image: url(customIcons/red/iconArrowRight.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrFlatRed .iconButtonCopy16 { background-image: url(customIcons/red/iconCopy.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOrFlatRed .iconButtonBlocked16 { background-image: url(customIcons/red/iconBlocked.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOrFlatRed .iconButtonDownload16 { background-image: url(customIcons/red/iconDownload.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOrFlatRed .iconButtonEdit16 { background-image: url(customIcons/red/iconEdit.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
@@ -2528,6 +2532,8 @@ body .ProjeQtOrFlatGreen {
   background: #86a790 !important;
   background-image: url();
 }
+.ProjeQtOrFlatGreen .iconButtonArrowRight16 { background-image: url(customIcons/green/iconArrowRight.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrFlatGreen .iconButtonCopy16 { background-image: url(customIcons/green/iconCopy.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOrFlatGreen .iconButtonBlocked16 { background-image: url(customIcons/green/iconBlocked.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOrFlatGreen .iconButtonDownload16 { background-image: url(customIcons/green/iconDownload.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOrFlatGreen .iconButtonEdit16 { background-image: url(customIcons/green/iconEdit.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
@@ -3609,6 +3615,8 @@ body .ProjeQtOrFlatGrey {
   background: #AEAEAE !important;
   background-image: url();
 }
+.ProjeQtOrFlatGrey .iconButtonArrowRight16 { background-image: url(customIcons/grey/iconArrowRight.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrFlatGrey .iconButtonCopy16 { background-image: url(customIcons/grey/iconCopy.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOrFlatGrey .iconButtonBlocked16 { background-image: url(customIcons/grey/iconBlocked.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOrFlatGrey .iconButtonDownload16 { background-image: url(customIcons/grey/iconDownload.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOrFlatGrey .iconButtonEdit16 { background-image: url(customIcons/grey/iconEdit.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
