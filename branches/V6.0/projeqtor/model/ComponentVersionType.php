@@ -56,7 +56,7 @@ class ComponentVersionType extends Type {
     <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
     ';
    
-  private static $_databaseCriteria = array('scope'=>'Product');
+  private static $_databaseCriteria = array('scope'=>'ComponentVersion');
   
    /** ==========================================================================
    * Constructor
