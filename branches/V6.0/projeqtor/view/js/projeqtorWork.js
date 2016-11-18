@@ -348,7 +348,8 @@ function dispatchWorkValueChange(rowId, colId) {
 }
 
 function isOffDay(vDate) {
-  if ( vDate.getDay() % 6 == 0) {
+  
+  if ( defaultOffDays.indexOf(vDate.getDay()) != -1) {
     var day=(vDate.getFullYear()*10000)+((vDate.getMonth()+1)*100)+vDate.getDate();
     if (workDayList.lastIndexOf('#'+day+'#')>=0) {
     return false; 
@@ -363,26 +364,17 @@ function isOffDay(vDate) {
       return false;
     }
   }
-  
 }
-function isOffDayNotWeekEnd(vDate) {
-  /*if ( vDate.getDay() % 6 == 0) {
-    var day=(vDate.getFullYear()*10000)+((vDate.getMonth()+1)*100)+vDate.getDate();
-    if (workDayList.lastIndexOf('#'+day+'#')>=0) {
-    return false; 
-    } else {
-      return true;
-    }
-  } else {*/
+// V6.0.0 : not used any more
+/*function isOffDayNotWeekEnd(vDate) {
     var day=(vDate.getFullYear()*10000)+((vDate.getMonth()+1)*100)+vDate.getDate();
     if (offDayList.lastIndexOf('#'+day+'#')>=0) {
     return true; 
     } else {
       return false;
     }
-  /*}*/
-  
-}
+}*/
+
 /**
  * Dispatch updates for left work : re-calculate planned work 
  */
