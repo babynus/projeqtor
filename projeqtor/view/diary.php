@@ -173,10 +173,14 @@ function drawDay($date,$ress,$inScopeDay,$period,$calendar=1) {
 		echo '<tr>';
 		echo '<td style="padding: 3px 3px 0px 3px; width:100%">';
 		echo '<div id="item_'.$cpt.'" style="border:1px solid: #EEEEEE; box-shadow: 2px 2px 4px #AAAAAA; width: 100%;background-color:'.$item['color'].'">';
-		echo '<table><tr><td style="vertical-align:top">';
+		echo '<table><tr><td style="vertical-align:top">';		
 		$attr=((! $item['real'])?'':' style="top:0px;opacity:0.5;filter:alpha(opacity=50);"');
 		echo '<img src="../view/css/images/icon'.$item['type'].'16.png"'.$attr.'/></td><td style="width:1px">';
 		echo '</td><td style="color:#555555">';
+		//Modification ici , typename ne marche pas...
+		if ($period=='week') {
+		  echo $item['typename'];
+		}
 		echo '<div style="cursor:pointer;color:'.getForeColor($item['color']).'" onClick="gotoElement(\''.$item['type'].'\', '.$item['id'].', false);" >';
 		if ($item['real']) {
 		  echo $item['display'];
@@ -254,6 +258,19 @@ function getAllActivities($startDate, $endDate, $ress, $showDone=false, $showIdl
 				$projectColorArray[$o->idProject]=$color;
 				$projectNameArray[$o->idProject]=$projName;
 			}
+			$typeName=null;
+			$type='id'.get_class($obj).'Type';
+			if (property_exists($obj,$type)) {
+			  $typeName=SqlList::getNameFromId('Type', $obj->$type);
+			}
+			$priorityName=null;
+			if (property_exists($obj,'idPriority')) {
+			  $priorityName=SqlList::getNameFromId('Priority', $obj->idPriority);
+			}
+			$description=null;
+			if (property_exists($obj,'description')) {
+			  $description=$obj->description;
+			}
 			$date=null;
 			$dateField="";
 			$name="";
@@ -308,7 +325,10 @@ function getAllActivities($startDate, $endDate, $ress, $showDone=false, $showIdl
 						'display'=>$display,
 						'date'=>$dateField,
 						'project'=>$projName,
-						'real'=>false
+						'real'=>false,
+				    'typename'=>$typeName,
+				    'priority'=>$priorityName,
+				    'description'=>$description
 				);
 			}
 		}
@@ -351,6 +371,19 @@ function getAllActivities($startDate, $endDate, $ress, $showDone=false, $showIdl
 		if (!array_key_exists($date, $result)) {
 			$result[$date]=array();
 		}
+		$typeName=null;
+		$type='id'.get_class($obj).'Type';
+		if (property_exists($obj,$type)) {
+		  $typeName=SqlList::getNameFromId('Type', $obj->$type);
+		}
+		$priorityName=null;
+		if (property_exists($obj,'idPriority')) {
+		  $priorityName=SqlList::getNameFromId('Priority', $obj->idPriority);
+		}
+		$description=null;
+		if (property_exists($obj,'description')) {
+		  $description=$obj->description;
+		}
 		$result[$date][$pw->refType.'#'.$pw->refId]=array(
 				'type'=>$pw->refType,
 		    'id'=>$pw->refId,
@@ -360,7 +393,10 @@ function getAllActivities($startDate, $endDate, $ress, $showDone=false, $showIdl
 				'display'=>$display,
 				'project'=>$projName,
 				'date'=>"",
-				'real'=>((get_class($pw)=='Work')?true:false)
+				'real'=>((get_class($pw)=='Work')?true:false),
+		    'typename'=>$typeName,
+		    'priority'=>$priorityName,
+		    'description'=>$description
 		);
 	}
 	return $result;
