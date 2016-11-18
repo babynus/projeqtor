@@ -295,9 +295,9 @@ function getAllActivities($startDate, $endDate, $ress, $showDone=false, $showIdl
 				  $item=new $o->refType($o->refId);
 				}
 				$display=$name;
-				$display.='<div style="cursor:move;width:129px;height:23px;position:relative;">';
-				$display.='   <div style="float:right;width:22px;height:22px;margin-right:-20px;margin-top:10px;position:relative;" id="userThumbMilestone'.$item->id.'">'.formatUserThumb($item->idResource, SqlList::getNameFromId("Affectable", $item->idResource), "", 22, 'left', false).'</div>';
-				$display.='   <div style="float:right;margin-left:50%;width:22px;height:22px;margin-right:-50px;margin-top:10px;position:relative">'.formatColorThumb("idStatus",$item->idStatus, 22, 'left', SqlList::getNameFromId("Status", $item->idStatus)).'</div>';
+				$display.='<div style="cursor:move;width:195px;height:24px;position:relative;">';
+				$display.='   <div style="float:right;margin-left:3px;width:22px;height:22px;position:relative;" id="userThumbMilestone'.$item->id.'">'.formatUserThumb($item->idResource, SqlList::getNameFromId("Affectable", $item->idResource), "", 22, 'left', false).'</div>';
+				$display.='   <div style="float:right;width:22px;height:22px;position:relative">'.formatColorThumb("idStatus",$item->idStatus, 22, 'left', SqlList::getNameFromId("Status", $item->idStatus)).'</div>';
 				$display.= "</div>";
 				$result[$date][get_class($o).'#'.$o->id]=array(
 						'type'=>$class,
