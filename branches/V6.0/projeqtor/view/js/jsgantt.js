@@ -847,7 +847,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
       cpt=0;
       while(Date.parse(vTmpDate) <= Date.parse(vMaxDate)) {  
         if(vFormat == 'day' ) {
-          if (isOffDayNotWeekEnd(vTmpDate))	{
+          if (isOffDay(vTmpDate))	{
         	  vTaskLeft = Math.ceil((Date.parse(vTmpDate) - Date.parse(vMinDate) + (1000*60*60)) / (24 * 60 * 60 * 1000) );
             vDayLeft=Math.ceil( (vTaskLeft-1) * (vDayWidth));
             vScpecificDayCount++;
