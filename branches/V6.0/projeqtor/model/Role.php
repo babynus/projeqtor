@@ -35,6 +35,7 @@ class Role extends SqlElement {
   public $id;    // redefine $id to specify its visible place 
   public $name;
   public $sortOrder=0;
+  public $defaultCost;
   public $idle;
   public $description;
   public $_sec_void;
