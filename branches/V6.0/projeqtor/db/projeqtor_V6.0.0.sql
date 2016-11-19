@@ -357,3 +357,8 @@ INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idle`, `mandatoryDes
 ALTER TABLE `${prefix}version` ADD `idVersionType` int(12) unsigned DEFAULT NULL;
 
 ALTER TABLE `${prefix}role` ADD `defaultCost` decimal(9,2) DEFAULT NULL;
+
+INSERT INTO `${prefix}list` (`id`, `list`, `name`, `code`, `sortOrder`, `idle`) VALUES
+(101, 'teamOrga', 'displayAll', 'all', 10, 0),
+(102, 'teamOrga', 'displayOrga', 'orga', 20, 0),
+(103, 'teamOrga', 'displayTeam', 'team', 30, 0);
