@@ -41,6 +41,7 @@ class Affectable extends SqlElement {
   public $isContact;
   public $email;
   public $idTeam;
+  public $idOrganization;
   public $idle;
   public $_constructForName=true;
   public $_calculateForColumn=array("name" => "coalesce(fullName,concat(name,' #'))","userName" => "coalesce(name,concat(fullName,' *'))");
@@ -48,6 +49,8 @@ class Affectable extends SqlElement {
   private static $_databaseTableName='resource';
   private static $_databaseColumnName=array('name' => 'fullName','userName' => 'name');
   private static $_databaseCriteria=array();
+  
+  private static $_visibilityScope;
 
   /**
    * ==========================================================================
@@ -277,6 +280,18 @@ class Affectable extends SqlElement {
       }
     }
     return false;
+  }
+  
+  public static function  getVisibilityScope($scope='List') {
+    if (self::$_visibilityScope) return self::$_visibilityScope;
+    $res='all';
+    $crit=array('idProfile'=>getSessionUser()->idProfile, 'scope'=>'resVisibility'.$scope);
+    $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', $crit);
+    if ($habil and $habil->id) {
+      $res=SqlList::getFieldFromId('ListTeamOrga', $habil->rightAccess,'code',false);
+    }
+    self::$_visibilityScope==$res;
+    return $res;
   }
 }
 ?>
