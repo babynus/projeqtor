@@ -37,9 +37,17 @@
       Security::checkValidId($idRol);
       if (! $idRol) return;
       $r=new Resource($idRes);
-      // #303
-      //echo htmlDisplayNumeric($r->getActualResourceCost($idRol));
       echo $r->getActualResourceCost($idRol);
+    } else if ($type=='resourceCostDefault') {
+      $idRol=$_REQUEST['idRole'];
+      if (! $idRol) return;
+      Security::checkValidId($idRol);
+      $role=new Role($idRol);
+      debugLog("defaultCost=".$role->defaultCost);
+      if ($role->defaultCost) {
+        echo $role->defaultCost;
+        return;
+      }
     } else if ($type=='resourceRole') {
       $idRes=$_REQUEST['idResource']; // validated to be numeric value in SqlElement base constructor.
       if (! $idRes) return;
