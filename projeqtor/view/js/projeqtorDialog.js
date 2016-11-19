@@ -1981,20 +1981,17 @@ function assignmentChangeResource() {
 }
 
 function assignmentChangeRole() {
-  console.log("assignmentChangeRole");
   if (editAssignmentLoading)
     return;
   var idResource=dijit.byId("assignmentIdResource").get("value");
   var idRole=dijit.byId("assignmentIdRole").get("value");
   if (!idResource || !idRole)
     return;
-  console.log("call");
   dojo.xhrGet({
     url : '../tool/getSingleData.php?dataType=resourceCost&idResource='
         + idResource + '&idRole=' + idRole,
     handleAs : "text",
     load : function(data) {
-      console.log(data);
       // #303
       // dijit.byId('assignmentDailyCost').set('value',data);
       dijit.byId('assignmentDailyCost').set('value', dojo.number.format(data));
@@ -3718,12 +3715,10 @@ function resourceCostUpdateRole() {
     return;
   }
   if (dijit.byId("resourceCostIdRole").get('value') ) {
-    console.log("call");
     dojo.xhrGet({
       url : '../tool/getSingleData.php?dataType=resourceCostDefault&idRole=' + dijit.byId("resourceCostIdRole").get('value'),
       handleAs : "text",
       load : function(data) {
-        console.log(data);
         dijit.byId('resourceCostValue').set('value', dojo.number.format(data));
       }
     });

@@ -43,7 +43,6 @@
       if (! $idRol) return;
       Security::checkValidId($idRol);
       $role=new Role($idRol);
-      debugLog("defaultCost=".$role->defaultCost);
       if ($role->defaultCost) {
         echo $role->defaultCost;
         return;
