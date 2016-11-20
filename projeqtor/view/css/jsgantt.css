@@ -496,3 +496,12 @@ div .scrollRightTop {
 .columnHandle:hover {
 	cursor:col-resize;
 }
+
+#rightTableBarDetail {
+	width:200px;
+	height:100px;
+	position: absolute;
+	/*background-color:#E0E0E0;*/
+	z-index:60000;
+	display:none;
+}
