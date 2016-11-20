@@ -208,7 +208,11 @@
         and ($critField=='idProductOrComponent' or $critField=='idComponent')) {
           $critField='idProduct';
         }
-        $crit=array( $critField => $_REQUEST['critValue']);
+        if (property_exists($class,$critField)) {
+          $crit=array( $critField => $_REQUEST['critValue']);
+        } else {
+          $crit=array();
+        }
         if (substr($dataType,-16)=='ComponentVersion' and isset($_REQUEST['critField1']) and isset($_REQUEST['critValue1'])) {
           $crit[$_REQUEST['critField1']]=$_REQUEST['critValue1'];
         }

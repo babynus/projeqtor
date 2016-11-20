@@ -908,7 +908,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
             <table width="100%"><tr><td width="300px" align="right">
               <button  id="sendToPrinter" dojoType="dijit.form.Button" showlabel="false"
                 title="<?php echo i18n('sendToPrinter');?>" 
-                iconClass="dijitEditorIcon dijitEditorIconPrint" >
+                iconClass="dijitButtonIcon dijitButtonIconPrint" >
                 <script type="dojo/connect" event="onClick" args="evt">
                   sendFrameToPrinter();
                 </script>

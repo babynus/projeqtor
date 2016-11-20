@@ -2288,8 +2288,8 @@ function drawGantt() {
       if (item.reftype=='Project' || item.reftype=='Fixed' || item.reftype=='Construction' ) pGroup=1;
       // runScript : JavaScript to run when click on task (to display the
       // detail of the task)
-      var runScript = "runScript('" + item.reftype + "','" + item.refid + "','"
-          + item.id + "');";
+      var runScript = "runScript('" + item.reftype + "','" + item.refid + "','"+ item.id + "');";
+      var contextMenu = "runScriptContextMenu('" + item.reftype + "','" + item.refid + "','"+ item.id + "');";
       // display Name of the task
       var pName = ((showWBS) ? item.wbs : '') + " " + item.refname; // for
                                                                     // testeing
@@ -2342,7 +2342,7 @@ function drawGantt() {
       }
       keys += "#" + curKey + "#";
       g.AddTaskItem(new JSGantt.TaskItem(item.id, pName, pStart, pEnd, pColor,
-          runScript, pMile, pResource, progress, pGroup, 
+          runScript, contextMenu, pMile, pResource, progress, pGroup, 
           topId, pOpen, pDepend,
           pCaption, pClass, pScope, pRealEnd, pPlannedStart,
           item.validatedworkdisplay, item.assignedworkdisplay, item.realworkdisplay, item.leftworkdisplay, item.plannedworkdisplay,
@@ -2377,6 +2377,31 @@ function runScript(refType, refId, id) {
   loadContent('objectDetail.php?planning=true&planningType='
       + dojo.byId('objectClassManual').value, 'detailDiv', 'listForm');
   highlightPlanningLine(id);
+}
+function runScriptContextMenu(refType, refId, id) {
+  showWait();
+  setTimeout("document.body.style.cursor='default';",100);
+  dojo.xhrGet({
+    url : "../view/planningBarDetail.php?class="+refType+"&id="+refId+"&scale="+ganttPlanningScale,
+    load : function(data, args) {
+      setTimeout("document.body.style.cursor='default';",100);
+      var bar = dojo.byId('bardiv_'+id);
+      var line = dojo.byId('childgrid_'+id);
+      var detail = dojo.byId('rightTableBarDetail');
+      detail.innerHTML=data;
+      detail.style.display="block";
+      detail.style.width=(parseInt(bar.style.width)+202)+'px';
+      detail.style.left=(bar.offsetLeft-1)+"px";
+      detail.style.top=(line.offsetTop+22)+"px";
+      
+      hideWait();
+    },
+    error : function () {
+      console.warn ("error on return from planningBarDetail.php");
+      hideWait();
+    }
+  });
+  return false;
 }
 function highlightPlanningLine(id) {
   if (id == null)
