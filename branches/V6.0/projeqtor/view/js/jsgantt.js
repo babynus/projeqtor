@@ -134,7 +134,7 @@ function getPlanningField(attribute,field) {
 
 
 JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, 
-                            pLink, pMile, pRes, pComp, pGroup, 
+                            pLink, pContextMenu, pMile, pRes, pComp, pGroup, 
                             pParent, pOpen, pDepend, 
                             pCaption, pClass, pScope, pRealEnd, pPlanStart,
                             pValidatedWork, pAssignedWork, pRealWork, pLeftWork, pPlannedWork, 
@@ -148,6 +148,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor,
   var vEnd   = new Date();
   var vColor = pColor;
   var vLink  = pLink;
+  var vContextMenu  = pContextMenu;
   var vMile  = pMile;
   var vRes   = pRes;
   var vComp  = pComp;
@@ -247,6 +248,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor,
   this.getBaseBottomEnd     = function(){ return vBaseBottomEnd;  };
   this.getColor    = function(){ return vColor;};
   this.getLink     = function(){ return vLink; };
+  this.getContextMenu = function(){ return vContextMenu; };
   this.getMile     = function(){ return vMile; };
   this.getDepend   = function(){ if(vDepend) return vDepend; else return null; };
   this.getCaption  = function(){ if(vCaption) return vCaption; else return ''; };
@@ -1234,6 +1236,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
                 + ' onmouseup=JSGantt.endLink('+i+'); '
                 + ' onMouseover=JSGantt.enterBarLink('+i+'); '
                 + ' onMouseout=JSGantt.exitBarLink('+i+'); '
+                + ' oncontextmenu="'+vTaskList[i].getContextMenu()+';return false;" '
   	            + ' onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '"); >';
   	            vRightTable += ' </div>';	        	
   	        	if (g.getSplitted()) {
@@ -1271,7 +1274,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
       //vRightTable+=vHighlightToday;  
         //vRightTable+='<div class="ganttUnselectable" style="position: absolute; z-index:25; opacity:0.1; filter: alpha(opacity=10); width: 200px; height: 200px; left: 0px; top:0px; background-color: red"></div>';
       dojo.byId("leftGanttChartDIV").innerHTML=vLeftTable;
-      dojo.byId("rightGanttChartDIV").innerHTML='<div id="rightTableContainer">'+vRightTable+'</div>';
+      dojo.byId("rightGanttChartDIV").innerHTML='<div id="rightTableContainer"><div id="rightTableBarDetail">&nbsp;</div>'+vRightTable+'</div>';
       dojo.byId("topGanttChartDIV").innerHTML=vTopRightTable;
       dojo.parser.parse('leftGanttChartDIV');
       //dojo.parser.parse('rightGanttChartDIV');
@@ -2036,6 +2039,10 @@ JSGantt.exitBarLink = function (idRow) {
 	  g.clearDependencies(true);
 	} else {
 	  document.body.style.cursor='default';
+	}
+	if (dojo.byId('rightTableBarDetail')) {
+	  dojo.byId('rightTableBarDetail').innerHTML=""; 
+	  dojo.byId('rightTableBarDetail').style.display="none";
 	}
 };
 

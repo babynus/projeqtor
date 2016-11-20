@@ -129,9 +129,7 @@ class DocumentDirectory extends SqlElement {
     $crit="location='" . $this->location . "' and id<>'" . Sql::fmtId($this->id) . "'";
     $dirList=$this->getSqlElementsFromCriteria(null, false, $crit);
     if (count($dirList)>0) {
-      debugLog("ERROR : ".$this->name." - ".$this->location);
-      debugLog($dirList);
-    	$result.="<br/>" . i18n('existingDirectoryName',null);
+      $result.="<br/>" . i18n('existingDirectoryName',null);
     }
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {

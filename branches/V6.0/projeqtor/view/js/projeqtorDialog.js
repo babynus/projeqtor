@@ -2018,7 +2018,7 @@ function addExpenseDetail(expenseType) {
   dijit.byId("expenseDetailReference").reset();
   dijit.byId("expenseDetailDate").set('value', null);
   dijit.byId("expenseDetailType").reset();
-  dojo.byId("expenseDetailDiv").innerHtml="";
+  dojo.byId("expenseDetailDiv").innerHTML="";
   dijit.byId("expenseDetailAmount").reset();
   refreshList('idExpenseDetailType', expenseType, '1', null,'expenseDetailType', false);
   // dijit.byId("dialogExpenseDetail").set('title',i18n("dialogExpenseDetail"));
@@ -3167,9 +3167,12 @@ function filterSelectAtribute(value) {
           if (value == 'idTargetVersion' || value == 'idOriginalValue') {
             value='idVersion';
           }
+          var urlListFilter='../tool/jsonList.php?required=true&listType=list&dataType='+value;
+          if (currentSelectedProject && currentSelectedProject!='' && currentSelectedProject!='*') {
+            urlListFilter+='&critField=idProject&critValue='+currentSelectedProject;
+          }
           var tmpStore=new dojo.data.ItemFileReadStore({
-            url : '../tool/jsonList.php?required=true&listType=list&dataType='
-                + value
+            url : urlListFilter
           });
           var mySelect=dojo.byId("filterValueList");
           mySelect.options.length=0;

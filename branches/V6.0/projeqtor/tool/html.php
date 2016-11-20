@@ -936,14 +936,16 @@ function htmlDisplayFilterCriteria($filterArray, $filterName="") {
   echo '<button title="' . i18n('saveFilter') . '" ';  
   echo ' dojoType="dijit.form.Button" '; 
   echo ' id="dialogFilterSave" name="dialogFilterSave" ';
-  echo ' iconClass="dijitEditorIcon dijitEditorIconSave" showLabel="false"> ';
+  echo ' iconClass="dijitButtonIcon dijitButtonIconSave" showLabel="false"> ';
   echo ' <script type="dojo/connect" event="onClick" args="evt">saveFilter();</script>';
   echo '</button>';
   echo "</td></tr>";
   echo "<tr>";
   echo "<td class='filterHeader' style='width:525px;'>" . i18n("criteria") . "</td>";
   echo "<td class='filterHeader' style='width:25px;'>";
-  echo ' <img src="css/images/smallButtonRemove.png" class="roundedButtonSmall" onClick="removefilterClause(\'all\');" title="' . i18n('removeAllFilters') . '" class="smallButton"/> ';
+  echo ' <a src="css/images/smallButtonRemove.png" onClick="removefilterClause(\'all\');" title="' . i18n('removeAllFilters') . '" > ';
+  echo formatSmallButton('Remove');
+  echo ' </a>';
   echo "</td>";
   echo "</tr>";
   if (count($filterArray)>0) { 
@@ -955,7 +957,9 @@ function htmlDisplayFilterCriteria($filterArray, $filterName="") {
            $filter['disp']['value'] .
            "</td>";
       echo "<td class='filterData' style='text-align: center;'>";
-      echo ' <img src="css/images/smallButtonRemove.png" class="roundedButtonSmall" onClick="removefilterClause(' . $id . ');" title="' . i18n('removeFilter') . '" class="smallButton"/> ';
+      echo ' <a src="css/images/smallButtonRemove.png" onClick="removefilterClause(' . $id . ');" title="' . i18n('removeFilter') . '" > ';
+      echo formatSmallButton('Remove');
+      echo ' </a>';
       echo "</td>";
       echo "</tr>";
     }
@@ -1011,7 +1015,9 @@ function htmlDisplayStoredFilter($filterArray,$filterObjectClass,$currentFilter=
            . "</td>";
       if ($context!='directFilterList') {
         echo "<td class='filterData' style='text-align: center;'>";      
-        echo ' <img src="css/images/smallButtonRemove.png" class="roundedButtonSmall" onClick="removeStoredFilter('. "'" . htmlEncode($filter->id) . "','" . htmlEncode(htmlEncode($filter->name)) . "'" . ');" title="' . i18n('removeStoredFilter') . '" class="smallButton"/> ';
+        echo ' <a src="css/images/smallButtonRemove.png" onClick="removeStoredFilter('. "'" . htmlEncode($filter->id) . "','" . htmlEncode(htmlEncode($filter->name)) . "'" . ');" title="' . i18n('removeStoredFilter') . '" > ';
+        echo formatSmallButton('Remove');
+        echo ' </a>';
         echo "</td>";
         echo "<td class='filterData' style='text-align: center;'>";
         if($filter->isShared==0)echo ' <img src="css/images/share.png" class="roundedButtonSmall" onClick="shareStoredFilter('. "'" . htmlEncode($filter->id) . "','" . htmlEncode(htmlEncode($filter->name)) . "'" . ');" title="' . i18n('shareStoredFilter') . '" class="smallButton"/> ';
