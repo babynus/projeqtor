@@ -91,24 +91,25 @@ require_once "../tool/projeqtor.php";
                <select id="filterValueList" name="filterValueList[]" value=""  
                  dojoType="dijit.form.MultiSelect" multiple
                  style="width:400px" size="10" class="selectList"></select>
-                <input type="checkbox" id="filterValueCheckbox" name="filterValueCheckbox" value=""  
-                 dojoType="dijit.form.CheckBox" style="padding-top:7px";
-                 /> 
-                <input id="filterValueDate" name="filterValueDate" value=""  
+               <input type="checkbox" id="filterValueCheckbox" name="filterValueCheckbox" value=""  
+                 dojoType="dijit.form.CheckBox" style="padding-top:7px";/> 
+               <input id="filterValueDate" name="filterValueDate" value=""  
                  dojoType="dijit.form.DateTextBox" 
                  constraints="{datePattern:browserLocaleDateFormatJs}"
                  style="width:100px" />
-                 <select id="filterSortValueList" name="filterSortValueList" value="asc"  
+               <select id="filterSortValueList" name="filterSortValueList" value="asc"  
                  dojoType="dijit.form.FilteringSelect"
                  <?php echo autoOpenFilteringSelect();?>
                  missingMessage="<?php echo i18n('valueNotSelected');?>" 
                  style="width:400px" size="10" class="input">
                   <option value="asc" SELECTED><?php echo i18n('sortAsc');?></option>
                   <option value="desc"><?php echo i18n('sortDesc');?></option>
-                 </select> 
+               </select> 
              </td>
              <td style="width:25px; text-align: center;vertical-align:middle;" align="center">
-               <img src="css/images/smallButtonAdd.png" style="margin-top:3px" class="roundedButtonSmall" onClick="addfilterClause();" title="<?php echo i18n('addFilterClause');?>" class="smallButton"/> 
+               <a src="css/images/smallButtonAdd.png" style="margin-top:3px" onClick="addfilterClause();" title="<?php echo i18n('addFilterClause');?>" class="smallButton">
+               <?php echo formatSmallButton('Add');?>
+               </a> 
              </td>
            </tr>
          </table>
