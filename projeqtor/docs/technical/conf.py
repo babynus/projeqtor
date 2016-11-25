@@ -220,7 +220,7 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
   ('index', 'ProjeQtOrTechnicalGuide.tex', u'ProjeQtOr Technical Guide',
-   u'ProjeQtOr', 'technical'),
+   u'ProjeQtOr', 'sphinxmanual'),
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
