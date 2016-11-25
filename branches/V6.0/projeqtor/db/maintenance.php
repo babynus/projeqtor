@@ -507,7 +507,7 @@ if (beforeVersion($currVersion,"V5.5.4") and $currVersion!='V0.0.0' and file_exi
 if ($currVersion=="V6.0.0" or $currVersion=="V6.0.1" ) {
   enableCatchErrors();
   if (file_exists('../model/OrganizationPlanningElement.php')) {
-    if ( ! kill('../model/OrganizationPlanningElement.php') {
+    if ( ! kill('../model/OrganizationPlanningElement.php') ) {
       
     }
   }
