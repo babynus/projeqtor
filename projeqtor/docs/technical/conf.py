@@ -206,7 +206,7 @@ htmlhelp_basename = 'ProjeQtOrTechnicalGuideDoc'
 
 latex_elements = {
 # The paper size ('letterpaper' or 'a4paper').
-'papersize': 'a4paper',
+'papersize': 'a4paper,openany',
 
 # The font size ('10pt', '11pt' or '12pt').
 #'pointsize': '10pt',
