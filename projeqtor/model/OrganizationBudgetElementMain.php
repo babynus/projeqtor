@@ -27,7 +27,7 @@
  * Budget Element is an object included in all objects that can be budgeted.
  */ 
 require_once('_securityCheck.php');
-class BudgetElementCurrent extends BudgetElement {
+class OrganizationBudgetElementMain extends BudgetElement {
 
   public $id;
   public $refType;

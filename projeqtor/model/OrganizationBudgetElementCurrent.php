@@ -1,8 +1,7 @@
-<?php 
+<?php
 /*** COPYRIGHT NOTICE *********************************************************
  *
  * Copyright 2009-2016 ProjeQtOr - Pascal BERNARD - support@projeqtor.org
- * Contributors : -
  *
  * This file is part of ProjeQtOr.
  * 
@@ -24,13 +23,13 @@
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
-/** ============================================================================
- * Activity is main planned element
- */  
+/* ============================================================================
+ * Budget Element is an object included in all objects that can be budgeted.
+ */ 
 require_once('_securityCheck.php');
-class OrganizationPlanningElement extends OrganizationPlanningElementMain {
+class OrganizationBudgetElementCurrent extends OrganizationBudgetElement {
 
-   /** ==========================================================================
+  /** ==========================================================================
    * Constructor
    * @param $id the id of the object in the database (null if not stored yet)
    * @return void
@@ -38,15 +37,14 @@ class OrganizationPlanningElement extends OrganizationPlanningElementMain {
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
   }
-
-   /** ==========================================================================
+  
+  /** ==========================================================================
    * Destructor
    * @return void
    */ 
   function __destruct() {
     parent::__destruct();
   }
-
-
+ 
 }
 ?>
