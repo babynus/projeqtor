@@ -629,7 +629,7 @@ function selectDetailItem(selectedValue, lastSavedName) {
       critVal=prj.get("value");
     }
   }
-  if (comboName != 'idStatus' && comboName != 'idProject') {
+  if (comboName != 'idStatus' && comboName != 'idProject') { 
     if (combo) {
       refreshList('id' + comboClass, crit, critVal, idFldVal, comboName);
     } else {
@@ -682,7 +682,7 @@ function displaySearch(objClass) {
   showWait();
   hideField('comboSearchButton');
   showField('comboSelectButton');
-  if (dojo.byId("canCreateDetail").value == "1") {
+  if (dojo.byId("canCreateDetail").value=="1" && objClass!='Project' && objectClass!='Status' ) {
     showField('comboNewButton');
   } else {
     hideField('comboNewButton');
