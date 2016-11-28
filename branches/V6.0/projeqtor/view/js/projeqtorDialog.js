@@ -867,9 +867,13 @@ function addNote() {
       ckEditorReplaceEditor("noteNote",999);
     } else if (editorType=="text") {
       dijit.byId("noteNote").focus();
+      dojo.byId("noteNote").style.height=(screen.height*0.6)+'px';
+      dojo.byId("noteNote").style.width=(screen.width*0.6)+'px';
     } else if (dijit.byId("noteNoteEditor")) { // Dojo type editor
       dijit.byId("noteNoteEditor").set("class", "input");
       dijit.byId("noteNoteEditor").focus();
+      dijit.byId("noteNoteEditor").set("height", (screen.height*0.6)+'px'); // Works on first time
+      dojo.byId("noteNoteEditor_iframe").style.height=(screen.height*0.6)+'px'; // Works after first time
     }
   };
   var params="&objectClass="+dojo.byId("objectClass").value;
@@ -914,9 +918,13 @@ function editNote(noteId, privacy) {
       ckEditorReplaceEditor("noteNote",999);
     } else if (editorType=="text") { 
       dijit.byId("noteNote").focus();
+      dojo.byId("noteNote").style.height=(screen.height*0.6)+'px';
+      dojo.byId("noteNote").style.width=(screen.width*0.6)+'px';
     } else if (dijit.byId("noteNoteEditor")) { // Dojo type editor
       dijit.byId("noteNoteEditor").set("class", "input");
       dijit.byId("noteNoteEditor").focus();
+      dijit.byId("noteNoteEditor").set("height", (screen.height*0.6)+'px'); // Works on first time
+      dojo.byId("noteNoteEditor_iframe").style.height=(screen.height*0.6)+'px'; // Works after first time
     } 
   };
   var params="&objectClass="+dojo.byId("objectClass").value;
@@ -4969,7 +4977,7 @@ function checkAlert() {
       checkAlertRetour(data);
     },
     error : function() {
-      setTimeout('checkAlert();', alertCheckTime * 1000);
+      if (alertCheckTime>0) setTimeout('checkAlert();', alertCheckTime * 1000);
     }
   });
 }
@@ -4981,7 +4989,7 @@ function checkAlertRetour(data) {
     if (dojo.byId("requestRefreshProject")
         && dojo.byId("requestRefreshProject").value == "true") {
       refreshProjectSelectorList();
-      setTimeout('checkAlert();', alertCheckTime * 1000);
+      if (alertCheckTime>0) setTimeout('checkAlert();', alertCheckTime * 1000);
     } else if (dojo.byId('alertType')) {
       if (dojo.byId('alertCount') && dojo.byId('alertCount').value>1) {
         dijit.byId('markAllAsReadButton').set('label',i18n('markAllAsRead',new Array(dojo.byId('alertCount').value)));
@@ -5018,7 +5026,7 @@ function checkAlertRetour(data) {
       }).play();
     }
   } else {
-    setTimeout('checkAlert();', alertCheckTime * 1000);
+    if (alertCheckTime>0) setTimeout('checkAlert();', alertCheckTime * 1000);
   }
 }
 function setAlertReadMessage() {
