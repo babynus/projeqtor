@@ -3177,7 +3177,11 @@ function filterSelectAtribute(value) {
           }
           var urlListFilter='../tool/jsonList.php?required=true&listType=list&dataType='+value;
           if (currentSelectedProject && currentSelectedProject!='' && currentSelectedProject!='*') {
-            urlListFilter+='&critField=idProject&critValue='+currentSelectedProject;
+            if (value=='idActivity') {
+              urlListFilter+='&critField=idProjectSub&critValue='+currentSelectedProject;
+            } else {
+              urlListFilter+='&critField=idProject&critValue='+currentSelectedProject;
+            }
           }
           var tmpStore=new dojo.data.ItemFileReadStore({
             url : urlListFilter
