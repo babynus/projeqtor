@@ -131,7 +131,7 @@ while ($line = Sql::fetchLine($resultMile)) {
   } else {
     $mpeEndDate=$line['plannedend'];
   }
-  $arrayMile[$idpe]['dates'][$mpeEndDate]=$mpeEndDate;
+  $arrayMile[$idpe]['dates'][$mpeEndDate]=strtotime($mpeEndDate);
   $arrayMile[$idpe]['lastDate']=$mpeEndDate;
   $existingDates[$mpeEndDate]=$mpeEndDate;
   if ($end=="" or $end<$mpeEndDate) { $end=$mpeEndDate;}
