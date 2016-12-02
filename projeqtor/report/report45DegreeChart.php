@@ -254,7 +254,7 @@ foreach($arrayMile as $idx=>$arr) {
   $dataSet->addPoints($arrayMile[$idx]['periods'],"mile$idx");
   $dataSet->setSerieOnAxis("mile$idx",0);
   $dataSet->setSerieWeight("mile$idx",1);
-  $dataSet->setSerieDescription("mile$idx",$arrayMile[$idx]['name']."  ");
+  $dataSet->setSerieDescription("mile$idx",wordwrap($arrayMile[$idx]['name']."  ",25,"\n"));
 }
 $dataSet->addPoints($resBase,"base");
 $dataSet->setSerieOnAxis("base",0);
