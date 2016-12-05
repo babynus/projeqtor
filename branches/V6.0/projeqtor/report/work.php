@@ -113,7 +113,6 @@ if ($paramProject!='') {
   $where.=  " and idProject in " . getVisibleProjectsList(true, $paramProject); 
 }
 $where.=($paramResource!='')?" and idResource='" . $paramResource . "'":'';
-debugLog($where);
 $order="";
 //echo $where;
 $work=new Work();
