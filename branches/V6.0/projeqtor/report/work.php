@@ -104,15 +104,16 @@ if ( $paramResource=='') {
 }
 include "header.php";
 
-$where=(getAccesRestrictionClause('Activity',false,false,true,true) ." or idResource=". getSessionUser()->id . ""); 
+$where="(".getAccesRestrictionClause('Activity',false,false,true,true) ." or idResource=". getSessionUser()->id . ")"; 
 //$where="1=1 ";
 $where.=($periodType=='week')?" and week='" . $periodValue . "'":'';
 $where.=($periodType=='month')?" and month='" . $periodValue . "'":'';
 $where.=($periodType=='year')?" and year='" . $periodValue . "'":'';
 if ($paramProject!='') {
-  $where.=  "and (idProject in " . getVisibleProjectsList(true, $paramProject)." or idResource=". getSessionUser()->id .")"; 
+  $where.=  " and idProject in " . getVisibleProjectsList(true, $paramProject); 
 }
 $where.=($paramResource!='')?" and idResource='" . $paramResource . "'":'';
+debugLog($where);
 $order="";
 //echo $where;
 $work=new Work();
