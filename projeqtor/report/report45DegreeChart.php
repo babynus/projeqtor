@@ -316,12 +316,10 @@ if (count($arrLabel)<$maxPlotted) {
   $graph->drawPlotChart($drawFormat);
 }
 if ($showToday) { 
-  debugLog($arrLabel);
   $min=reset($arrLabel);
   $max=$arrLabel[count($arrLabel)-1];
   $td=strtotime($today.$refTime);
   $pos=($td-$min)/($max-$min)*(count($arrLabel)-1);
-  debugLog($pos);
   $graph->drawXThreshold(array($pos),array("Alpha"=>70,"Ticks"=>0));
 }
 $graph->setFontProperties(array("FontName"=>"../external/pChart2/fonts/verdana.ttf","FontSize"=>10,"R"=>100,"G"=>100,"B"=>100));
