@@ -27,6 +27,15 @@
 /* =============================================================================== */
 /* ProjeqtorFlatBlue THEME                                                             */
 /* =============================================================================== */
+.ProjeQtOrFlatBlue .dijitFolderOpened {
+  background: url('customIcons/blue/folderOpened.png') no-repeat;
+  width:16px; height: 16px;
+}
+
+.ProjeQtOrFlatBlue .dijitFolderClosed {
+  background: url('customIcons/blue/folderClosed.png') no-repeat;
+  width:16px; height: 16px;
+}
 
 .ProjeQtOrFlatBlue html, .ProjeQtOrFlatBlue body, .ProjeQtOrFlatBlue #leftDiv, .ProjeQtOrFlatBlue #logoDiv,
 .ProjeQtOrFlatBlue .dijitSplitterH, .ProjeQtOrFlatBlue .dijitGutterH, .ProjeQtOrFlatBlue .dijitSplitterV, .ProjeQtOrFlatBlue .dijitGutterV,
@@ -1156,6 +1165,16 @@ body .ProjeQtOrFlatBlue {
 /* ProjeqtorFlatRed THEME                                                             */
 /* =============================================================================== */
 
+.ProjeQtOrFlatRed .dijitFolderOpened {
+  background: url('customIcons/red/folderOpened.png') no-repeat;
+  width:16px; height: 16px;
+}
+
+.ProjeQtOrFlatRed .dijitFolderClosed {
+  background: url('customIcons/red/folderClosed.png') no-repeat;
+  width:16px; height: 16px;
+}
+
 .ProjeQtOrFlatRed html, .ProjeQtOrFlatRed body, .ProjeQtOrFlatRed #leftDiv, .ProjeQtOrFlatRed #logoDiv,
 .ProjeQtOrFlatRed .dijitSplitterH, .ProjeQtOrFlatRed .dijitGutterH, .ProjeQtOrFlatRed .dijitSplitterV, .ProjeQtOrFlatRed .dijitGutterV,
 .ProjeQtOrFlatRed .loginBackground {
@@ -2242,6 +2261,15 @@ body .ProjeQtOrFlatRed {
 /* =============================================================================== */
 /* ProjeqtorFlatGreen THEME                                                             */
 /* =============================================================================== */
+.ProjeQtOrFlatGreen .dijitFolderOpened {
+  background: url('customIcons/green/folderOpened.png') no-repeat;
+  width:16px; height: 16px;
+}
+
+.ProjeQtOrFlatGreen .dijitFolderClosed {
+  background: url('customIcons/green/folderClosed.png') no-repeat;
+  width:16px; height: 16px;
+}
 
 .ProjeQtOrFlatGreen html, .ProjeQtOrFlatGreen body, .ProjeQtOrFlatGreen #leftDiv, .ProjeQtOrFlatGreen #logoDiv,
 .ProjeQtOrFlatGreen .dijitSplitterH, .ProjeQtOrFlatGreen .dijitGutterH, .ProjeQtOrFlatGreen .dijitSplitterV, .ProjeQtOrFlatGreen .dijitGutterV,
@@ -3329,6 +3357,15 @@ body .ProjeQtOrFlatGreen {
 /* =============================================================================== */
 /* ProjeqtorFlatGrey THEME                                                  */
 /* =============================================================================== */
+.ProjeQtOrFlatGrey .dijitFolderOpened {
+  background: url('customIcons/grey/folderOpened.png') no-repeat;
+  width:16px; height: 16px;
+}
+
+.ProjeQtOrFlatGrey .dijitFolderClosed {
+  background: url('customIcons/grey/folderClosed.png') no-repeat;
+  width:16px; height: 16px;
+}
 
 .ProjeQtOrFlatGrey html, .ProjeQtOrFlatGrey body, .ProjeQtOrFlatGrey #leftDiv, .ProjeQtOrFlatGrey #logoDiv,
 .ProjeQtOrFlatGrey .dijitSplitterH, .ProjeQtOrFlatGrey .dijitGutterH, .ProjeQtOrFlatGrey .dijitSplitterV, .ProjeQtOrFlatGrey .dijitGutterV,
