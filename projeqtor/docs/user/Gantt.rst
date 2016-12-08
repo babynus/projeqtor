@@ -531,10 +531,10 @@ Assigned tasks are grouped under resource level.
 * Left work can be displayed at right from Gantt bar.
 * Click on “Show left work” to display left work for each item.
 
-.. rubric:: |three| - Displays selected ressource and team 
+.. rubric:: |three| - Limit display to selected ressource or team 
 
-* Click and select one ressource for displays his data.
-* Click and select one team for displays his data.
+* Click and select one ressource to display only his data.
+* Click and select one team to display only data of resources of this team.
 
 .. raw:: latex
 
