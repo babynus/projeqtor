@@ -347,7 +347,9 @@ class WorkElementMain extends SqlElement {
 			$ass->refType = $work->refType;
 			$ass->refId = $work->refId;
 			$ass->idResource = $work->idResource;
+			$ass->isNotImputable='1';
 		}
+		debugLog($ass);
 		$ass->leftWork -= $diff;
 		$ass->realWork += $diff;
 		if ($ass->leftWork < 0 or $ass->leftWork == null) {
@@ -355,11 +357,11 @@ class WorkElementMain extends SqlElement {
 		}
 		if ($ass->realWork < 0) {
 			$ass->realWork = 0;
+			debugLog($ass);
 		}
 		$ass->save();
 		return $ass;
 	}
-	
 	public function start() {
 		// First, stop all ongoing work
 		getSessionUser()->stopAllWork ();
