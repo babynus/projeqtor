@@ -289,7 +289,7 @@ class WorkElementMain extends SqlElement {
 					} else {
 						$resWork=$work->save ();
 					}
-					if (getLastOperationStatus($resWork!='OK')) {
+					if ($resWork!="" and getLastOperationStatus($resWork!='OK')) {
 					  return $resWork;
 					}
   				if ($ass) {
