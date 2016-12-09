@@ -308,6 +308,7 @@ class ImputationLine {
         $elt->endDate=($plan->realEndDate)?$plan->realEndDate:$plan->plannedEndDate;
         if (! $ass->isNotImputable){
           $elt->imputable=true;
+        }
       } else {
         $cptNotAssigned+=1;
         if (isset($ass->name)) {
