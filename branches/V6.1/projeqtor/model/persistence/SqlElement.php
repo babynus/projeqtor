@@ -605,6 +605,22 @@ abstract class SqlElement {
 					$control=$controlPe;
 				}
 			}
+			if ( ($control=='OK' or strpos($control,'id="confirmControl" value="save"')>0 )
+			and property_exists($class, 'WorkElement')) {
+			  $we='WorkElement';
+			  $controlWe=$this->$we->control();
+			  if ($controlWe!='OK') {
+			    $control=$controlWe;
+			  }
+			}
+			if ( ($control=='OK' or strpos($control,'id="confirmControl" value="save"')>0 )
+			and property_exists($class, 'OrganizationBudgetElementCurrent')) {
+			  $be='OrganizationBudgetElementCurrent';
+			  $controlBe=$this->$be->control();
+			  if ($controlBe!='OK') {
+			    $control=$controlBe;
+			  }
+			}
 		}
 		if ($control=="OK") {
 			//$old=new Project();
