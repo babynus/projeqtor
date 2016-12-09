@@ -192,8 +192,16 @@ class WorkElementMain extends SqlElement {
 					$ass=self::updateAssignment ( $work, $work->work, true );
 					$work->idAssignment=($ass)?$ass->id:null;
 					$work->idWorkElement=$this->id;
-					$work->save ();
-          if ($ass) $ass->saveWithRefresh();
+					$resWork=$work->save ();
+					if (getLastOperationStatus($resWork!='OK')) {
+					  return $resWork;
+					}
+          if ($ass) {
+            $resAss=$ass->saveWithRefresh();
+            if (getLastOperationStatus($resAss!='OK')) {
+              return $resAss;
+            }
+          }
 				}
 			}
 		}
