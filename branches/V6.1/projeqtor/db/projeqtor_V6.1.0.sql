@@ -5,4 +5,4 @@
 -- // Date : 2016-12-08                                     //
 -- ///////////////////////////////////////////////////////////
 
-ALTER TABLE `${prefix}assignment` ADD `isNotImputable` BOOLEAN default NULL;
+ALTER TABLE `${prefix}assignment` ADD `isNotImputable` int(1) unsigned default '0';
