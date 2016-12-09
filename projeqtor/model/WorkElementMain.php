@@ -349,7 +349,6 @@ class WorkElementMain extends SqlElement {
 			$ass->idResource = $work->idResource;
 			$ass->isNotImputable='1';
 		}
-		debugLog($ass);
 		$ass->leftWork -= $diff;
 		$ass->realWork += $diff;
 		if ($ass->leftWork < 0 or $ass->leftWork == null) {
@@ -357,7 +356,6 @@ class WorkElementMain extends SqlElement {
 		}
 		if ($ass->realWork < 0) {
 			$ass->realWork = 0;
-			debugLog($ass);
 		}
 		$ass->save();
 		return $ass;
