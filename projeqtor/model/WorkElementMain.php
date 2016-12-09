@@ -255,8 +255,16 @@ class WorkElementMain extends SqlElement {
 				$ass=self::updateAssignment ( $work, $diff );
 				$work->idAssignment=($ass)?$ass->id:null;
 				$work->idWorkElement=$this->id;
-				$work->save();
-				if ($ass) $ass->saveWithRefresh();
+				$resWork=$work->save ();
+				if (getLastOperationStatus($resWork!='OK')) {
+				  return $resWork;
+				}
+				if ($ass) {
+				  $resAss=$ass->saveWithRefresh();
+				  if (getLastOperationStatus($resAss!='OK')) {
+				    return $resAss;
+				  }
+				}
 			} else {
 			  // Remove work : so need to remove from existing (reverse loop on date) 
 				while ( $diff < 0 and $idx >= 0 ) {
@@ -273,14 +281,23 @@ class WorkElementMain extends SqlElement {
 					$ass=self::updateAssignment ( $work, $valDiff );
 					$work->idAssignment=($ass)?$ass->id:null;
 					$work->idWorkElement=$this->id;
+					$resWork="";
 					if ($work->work == 0) {
 						if ($work->id) {
-							$work->delete ();
+							$resWork=$work->delete ();
 						}
 					} else {
-						$work->save ();
+						$resWork=$work->save ();
 					}
-					if ($ass) $ass->saveWithRefresh();
+					if (getLastOperationStatus($resWork!='OK')) {
+					  return $resWork;
+					}
+  				if ($ass) {
+  				  $resAss=$ass->saveWithRefresh();
+  				  if (getLastOperationStatus($resAss!='OK')) {
+  				    return $resAss;
+  				  }
+  				}
 					$idx --;
 					if ($idx >= 0) { // Retrieve previous work element
 						$work = $workList [$idx];
