@@ -249,7 +249,7 @@ For each planning element, a Gantt bar is displayed at them right.
 
  .. compound:: **Purple bar** 
 
-    * The planning calculator tries to plan, the remaining work on the task assigned to a resource within the project affection period.
+    * The planning calculator tries to plan, the remaining work on the task assigned to a resource within the allocation to project period.
     * If remaining work on the task can't be planned, a purple bar appears in the Gantt view.
 
 
