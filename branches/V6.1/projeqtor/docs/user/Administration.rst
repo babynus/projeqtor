@@ -178,8 +178,50 @@ Global parameters screen allows configuration of application settings.
 
     * Defines if a task can begin the same day as the preceding one.
  
+ 
+.. rubric:: Section: Generation of alerts if real work is not entered
 
+* Specific parameters about alerts.
 
+ .. compound:: **Send reminder on**
+ 
+ * Select a day if you want send a reminder.
+  
+        .. note:: 
+  
+            * It is possible to choose every day or never.
+
+ .. compound:: **Send reminder at** 
+
+      * Select the hour when you want receive the reminder.
+
+ .. compound:: **Control input up to**
+
+      * Select when you want to be controlled, current day, previous day or next days.
+
+ .. compound:: **Number of days to control**
+
+      * Choose how many days will be controled
+      
+        .. note::
+              
+              * All days of the week, open or off days are taken into account.
+              
+              * Off days in real work allocation will not send you an alert.
+
+ .. compound:: **Send alert to resource**
+
+      * Select how send alert to ressource, Internal alert, email, both or none.
+
+ .. compound:: **Send alert to project leader**
+
+      * Select how send alert to project leader
+      
+ .. compound:: **Send alert to team manager**   
+      
+      * Select how send alert to team manager
+  
+  
 .. index:: ! Real work allocation (Behavior)
 
 .. _realWorkAllocation-section:
@@ -226,7 +268,7 @@ Global parameters screen allows configuration of application settings.
 
  .. compound:: **Auto set responsible if single resource**
 
-    * Automatically set responsible if not set and only one resource if affected to the project.
+    * Automatically set responsible if not set and only one resource if allocated to the project.
 
  .. compound:: **Auto set responsible if needed**
 
