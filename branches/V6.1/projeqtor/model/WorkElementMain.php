@@ -193,12 +193,12 @@ class WorkElementMain extends SqlElement {
 					$work->idAssignment=($ass)?$ass->id:null;
 					$work->idWorkElement=$this->id;
 					$resWork=$work->save ();
-					if (getLastOperationStatus($resWork)!='OK' and ($resWork)!= 'NO_CHANGE') {
+					if (getLastOperationStatus($resWork)!='OK') {
 					  return $resWork;
 					}
           if ($ass) {
             $resAss=$ass->saveWithRefresh();
-            if (getLastOperationStatus($resAss)!='OK' and ($resAss)!= 'NO_CHANGE') {
+            if (getLastOperationStatus($resAss)!='OK') {
               return $resAss;
             }
           }
@@ -256,12 +256,12 @@ class WorkElementMain extends SqlElement {
 				$work->idAssignment=($ass)?$ass->id:null;
 				$work->idWorkElement=$this->id;
 				$resWork=$work->save ();
-				if (getLastOperationStatus($resWork)!='OK' and ($resWork)!= 'NO_CHANGE') {
+				if (getLastOperationStatus($resWork)!='OK') {
 				  return $resWork;
 				}
 				if ($ass) {
 				  $resAss=$ass->saveWithRefresh();
-				  if (getLastOperationStatus($resAss)!='OK' and ($resAss)!= 'NO_CHANGE') {
+				  if (getLastOperationStatus($resAss)!='OK') {
 				    return $resAss;
 				  }
 				}
@@ -289,12 +289,12 @@ class WorkElementMain extends SqlElement {
 					} else {
 						$resWork=$work->save ();
 					}
-					if ($resWork!="" and getLastOperationStatus($resWork)!='OK' and ($resWork)!= 'NO_CHANGE') {
+					if ($resWork!="" and getLastOperationStatus($resWork)!='OK') {
 					  return $resWork;
 					}
   				if ($ass) {
   				  $resAss=$ass->saveWithRefresh();
-  				  if (getLastOperationStatus($resAss)!='OK' and ($resAss)!= 'NO_CHANGE') {
+  				  if (getLastOperationStatus($resAss)!='OK') {
   				    return $resAss;
   				  }
   				}
