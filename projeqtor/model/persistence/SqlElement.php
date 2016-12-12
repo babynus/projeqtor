@@ -864,12 +864,14 @@ abstract class SqlElement {
 			if (!$result) {$returnStatus="ERROR";}
 		}
 		// save depedant elements (properties that are objects)
-		if ($returnStatus!="ERROR") {
+		if ($returnStatus!="ERROR" and $returnStatus!="INVALID") {
 			$returnStatus=$this->saveDependantObjects($depedantObjects,$returnStatus);
 			if ($returnStatus=="ERROR") {
 			  $returnValue=Sql::$lastQueryErrorMessage;
 			} else if ($returnStatus=="OK") {
 			  $returnValue=i18n(get_class($this)) . ' #' . htmlEncode($this->id) . ' ' . i18n('resultUpdated');
+			} else if ($returnStatus=="NO_CHANGE" or $returnStatus=="INCOMPLETE" or $returnStatus=="WARNING" or $returnStatus=="CONFIRM") {
+			  // OK 
 			} else if (getLastOperationStatus($returnStatus)=='INVALID') {
 			  return $returnStatus;
 			}
@@ -1112,12 +1114,14 @@ abstract class SqlElement {
 		}
 
 		// save depedant elements (properties that are objects)
-		if ($returnStatus!="ERROR" and ! $withoutDependencies) {
+		if ($returnStatus!="ERROR" and $returnStatus!="INVALID" and ! $withoutDependencies) {
 			$returnStatus=$this->saveDependantObjects($depedantObjects,$returnStatus);
 			if ($returnStatus=="ERROR") {
 				$returnValue=Sql::$lastQueryErrorMessage;
 			} else if ($returnStatus=="OK") {
 				$returnValue=i18n(get_class($this)) . ' #' . htmlEncode($this->id) . ' ' . i18n('resultUpdated');
+			} else if ($returnStatus=="NO_CHANGE" or $returnStatus=="INCOMPLETE" or $returnStatus=="WARNING" or $returnStatus=="CONFIRM") {
+			  // OK 
 			} else if (getLastOperationStatus($returnStatus)=='INVALID') {
 			  return $returnStatus;
 			}
