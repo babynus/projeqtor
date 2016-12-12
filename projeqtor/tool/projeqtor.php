@@ -2718,7 +2718,7 @@ function getLastOperationStatus($result) {
   }
   $start = stripos ( $result, $search ) + strlen ( $search );
   if (strlen($result)<=$start) {
-    errorLog("invaliud search for result in string '$result'");
+    errorLog("invalid search for result in string '$result'");
     debugPrintTraceStack();
   }
   $end = stripos ( $result, '"', $start );
