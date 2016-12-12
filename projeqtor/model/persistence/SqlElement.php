@@ -1597,6 +1597,13 @@ abstract class SqlElement {
 		if (property_exists($newObj,"idUser") and get_class($newObj)!='Affectation' and get_class($newObj)!='Message') {
 			$newObj->idUser=getSessionUser()->id;
 		}
+		if (property_exists($newObj,"paymentAmount")) {
+		  $newObj->paymentAmount=null;
+		}
+		if (property_exists($newObj,"paymentDate")) {
+		  $newObj->paymentDate=null;
+		  debugLog($newObj);
+		}
 		if (property_exists($newObj,"creationDate")) {
 			$newObj->creationDate=date('Y-m-d');
 		}
