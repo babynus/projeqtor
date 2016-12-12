@@ -866,6 +866,13 @@ abstract class SqlElement {
 		// save depedant elements (properties that are objects)
 		if ($returnStatus!="ERROR") {
 			$returnStatus=$this->saveDependantObjects($depedantObjects,$returnStatus);
+			if ($returnStatus=="ERROR") {
+			  $returnValue=Sql::$lastQueryErrorMessage;
+			} else if ($returnStatus=="OK") {
+			  $returnValue=i18n(get_class($this)) . ' #' . htmlEncode($this->id) . ' ' . i18n('resultUpdated');
+			} else if (getLastOperationStatus($returnStatus)=='INVALID') {
+			  return $returnStatus;
+			}
 		}
 		// Prepare return data
 		if ($returnStatus!="ERROR") {
@@ -1109,9 +1116,10 @@ abstract class SqlElement {
 			$returnStatus=$this->saveDependantObjects($depedantObjects,$returnStatus);
 			if ($returnStatus=="ERROR") {
 				$returnValue=Sql::$lastQueryErrorMessage;
-			}
-			if ($returnStatus=="OK") {
+			} else if ($returnStatus=="OK") {
 				$returnValue=i18n(get_class($this)) . ' #' . htmlEncode($this->id) . ' ' . i18n('resultUpdated');
+			} else if (getLastOperationStatus($returnStatus)=='INVALID') {
+			  return $returnStatus;
 			}
 		}
 		if ($returnStatus=="OK") {
@@ -1151,6 +1159,8 @@ abstract class SqlElement {
 				$ret=$depObj->save();
 				if (stripos($ret,'id="lastOperationStatus" value="ERROR"')) {
 					$returnStatusDep="ERROR";
+				} else if (stripos($ret,'id="lastOperationStatus" value="INVALID"')) {
+					$returnStatusDep=$ret;
 				} else if (stripos($ret,'id="lastOperationStatus" value="OK"')) {
 					$returnStatusDep='OK';
 				}
