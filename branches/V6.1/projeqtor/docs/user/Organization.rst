@@ -16,6 +16,15 @@ Organizations
 
 Depending on the profile, you can limit the visibility of resources to people in the same organization or team as the current user.
 
+
+.. sidebar:: Other sections
+
+   * :ref:`Current project<progress-section-activity>`
+   * :ref:`Linked element<linkElement-section>`   
+   * :ref:`Attachments<attachment-section>`   
+   * :ref:`Notes<note-section>`
+
+
 .. rubric:: Section: Description
 
 .. tabularcolumns:: |l|l|
