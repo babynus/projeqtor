@@ -4,6 +4,8 @@
 
 .. index:: ! Organizations
 
+.. _Organizations:
+
 Organizations
 -------------------
 
