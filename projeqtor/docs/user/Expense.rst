@@ -14,7 +14,7 @@ The expenses incurred for the project are monitored.
    :backlinks: top
    :local:
 
-.. index:: ! Expense (Call of tender)
+.. index:: ! Expense (Call_for_tender)
 
 .. _call-for-tenders:
 
@@ -108,7 +108,7 @@ You have the possibility to create some different evaluation criterias like tech
 .. _tenders:
 
 Tenders
-------------------
+-------
 
 Tenders store information about the responses to the call for tenders that you have submitted.
 
