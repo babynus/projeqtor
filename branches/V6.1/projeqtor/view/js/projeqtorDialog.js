@@ -4667,11 +4667,13 @@ function debugLogHistory(msg) {
   }
 }
 
-function stockHistory(curClass, curId) {
+function stockHistory(curClass, curId, currentScreen) {
   debugLogHistory("before");
-  currentScreen="object";
-  if (dojo.byId("GanttChartDIV")) {
-    currentScreen="planning";
+  if (!currentScreen) {
+    currentScreen="object";
+    if (dojo.byId("objectClassManual")){
+      currentScreen=dojo.byId("objectClassManual").value;
+    }
   }
   if (historyPosition>=0) {
     current=historyTable[historyPosition];
@@ -4693,7 +4695,7 @@ function stockHistory(curClass, curId) {
 }
 
 
-function undoItemButton() {
+function undoItemButton(curClass,curId) {
   var len=historyTable.length;
   if (len == 0) {
     return;
@@ -4702,29 +4704,81 @@ function undoItemButton() {
     return;
   }
   historyPosition-=1;
-  gotoElement(historyTable[historyPosition][0],
-  historyTable[historyPosition][1], true, false, historyTable[historyPosition][2]);
+  var currentItem=historyTable[historyPosition];
+  var currentScreen=currentItem[2];
+  
+  var target="";
+  if (currentScreen=="object" && currentItem[1]!=null){
+    gotoElement(currentItem[0], currentItem[1], true, false, currentScreen);
+  } else if (currentScreen=="object") {
+    loadContent("objectMain.php?objectClass=" + currentItem[0],"centerDiv");
+  } else {
+    target=getTargetFromCurrentScreen(currentScreen);
+    loadContent(target,"centerDiv"); 
+  }
   enableWidget('menuBarRedoButton');
   if (historyPosition == 0) {
     disableWidget('menuBarUndoButton');
   }
 }
 
+function getTargetFromCurrentScreen(currentScreen){
+  if (currentScreen=="Administration" || currentScreen=="Admin"){ 
+    target="admin.php";
+  } else if (currentScreen=="Import" || currentScreen=="ImportData"){ 
+    target="importData.php";
+  } else if (currentScreen=="Plugin"){ 
+    target="pluginManagement.php";
+  } else if (currentScreen=="Today"){ 
+    target="today.php";
+  } else if (currentScreen=="UserParameter") {
+    target="parameter.php?type=userParameter";
+  } else if (currentScreen=="ProjectParameter") {
+    target="parameter.php?type=projectParameter";
+  } else if (currentScreen=="GlobalParameter") {
+    target="parameter.php?type=globalParameter";
+  } else if (currentScreen=="Habilitation") {
+    target="parameter.php?type=habilitation";
+  } else if (currentScreen=="HabilitationReport") {
+    target="parameter.php?type=habilitationReport";
+  } else if (currentScreen=="HabilitationOther") {
+    target="parameter.php?type=habilitationOther";
+  } else if (currentScreen=="AccessRight") {
+    target="parameter.php?type=accessRight";
+  } else if (currentScreen=="AccessRightNoProject") {
+    target="parameter.php?type=accessRightNoProject";
+  } else {
+    target=currentScreen.charAt(0).toLowerCase()+currentScreen.substr(1)+"Main.php";
+  }
+  return target;
+}
+
 function redoItemButton() {
   var len=historyTable.length;
   if (len == 0) {
     return;
-  }
+  }  
   if (historyPosition == len - 1) {
     return;
   }
   historyPosition+=1;
-  gotoElement(historyTable[historyPosition][0],
-      historyTable[historyPosition][1], true, false, historyTable[historyPosition][2]);
+  
+  var currentItem=historyTable[historyPosition];
+  var currentScreen=currentItem[2];
+  var target="";
+  if (currentScreen=="object" && currentItem[1]!=null){
+    gotoElement(currentItem[0], currentItem[1], true, false, currentScreen);
+  } else if (currentScreen=="object") {
+    loadContent("objectMain.php?objectClass=" + currentItem[0],"centerDiv");
+  } else {
+    target=getTargetFromCurrentScreen(currentScreen);
+    loadContent(target,"centerDiv"); 
+  }
   enableWidget('menuBarUndoButton');
   if (historyPosition == (len - 1)) {
     disableWidget('menuBarRedoButton');
   }
+  getTargetFromCurrentScreen(currentScreen);
 }
 
 // Stock id and name, to
@@ -4862,7 +4916,9 @@ function loadMenuBarObject(menuClass, itemName, from) {
   }
   cleanContent("detailDiv");
   formChangeInProgress=false;
-  loadContent("objectMain.php?objectClass=" + menuClass, "centerDiv");
+  var currentScreen=menuClass; 
+    loadContent("objectMain.php?objectClass=" + currentScreen, "centerDiv"); 
+  stockHistory(currentScreen,null,"object");
   return true;
 }
 
@@ -4876,6 +4932,7 @@ function loadMenuBarItem(item, itemName, from) {
   }
   cleanContent("detailDiv");
   formChangeInProgress=false;
+  var currentScreen=item;
   if (item == 'Today') {
     loadContent("today.php", "centerDiv");
   } else if (item == 'Planning') {
@@ -4930,6 +4987,8 @@ function loadMenuBarItem(item, itemName, from) {
   } else {  
     showInfo(i18n("messageSelectedNotAvailable", new Array(itemName)));
   }
+  stockHistory(null,null,currentScreen);
+  
   return true;
 }
 
