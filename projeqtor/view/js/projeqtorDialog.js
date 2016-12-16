@@ -4668,7 +4668,7 @@ function debugLogHistory(msg) {
 }
 
 function stockHistory(curClass, curId, currentScreen) {
-  debugLogHistory("before");
+  //debugLogHistory("before");
   if (!currentScreen) {
     currentScreen="object";
     if (dojo.byId("objectClassManual")){
