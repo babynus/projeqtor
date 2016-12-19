@@ -221,6 +221,10 @@
 .iconCallForTenderType22 { background-image: url(images/iconCallForTenderType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconCallForTenderType16 { background-image: url(images/iconCallForTenderType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
+.iconCategory32 { background-image: url(images/iconCategory.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconCategory22  { background-image: url(images/iconCategory.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconCategory16  { background-image: url(images/iconCategory.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
 .iconChecklistDefinition32 { background-image: url(images/iconChecklistDefinition32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconChecklistDefinition22 { background-image: url(images/iconChecklistDefinition22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconChecklistDefinition16 { background-image: url(images/iconChecklistDefinition16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
