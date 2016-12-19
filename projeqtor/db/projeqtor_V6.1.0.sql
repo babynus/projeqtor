@@ -16,6 +16,8 @@ ALTER TABLE `${prefix}report` ADD COLUMN `hasCsv` int(1) unsigned DEFAULT '0';
 
 UPDATE `${prefix}report` SET hasCsv = 1 WHERE `id` = 49;
 
+UPDATE `${prefix}menu` SET name='menuIncomes' WHERE name='menuIncomings';
+
 -- PAPJUL ADDITION FOR REPORTS (END)
 -- =================================
 
