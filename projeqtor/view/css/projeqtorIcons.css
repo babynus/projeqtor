@@ -293,6 +293,22 @@
 .iconDecisionType22 { background-image: url(images/iconDecisionType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconDecisionType16 { background-image: url(images/iconDecisionType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
+.iconDeliverable32 { background-image: url(images/iconDeliverable32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconDeliverable22 { background-image: url(images/iconDeliverable32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconDeliverable16 { background-image: url(images/iconDeliverable32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
+.iconDeliverableStatus32 { background-image: url(images/iconDeliverableStatus32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconDeliverableStatus22 { background-image: url(images/iconDeliverableStatus32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconDeliverableStatus16 { background-image: url(images/iconDeliverableStatus32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
+.iconDeliverableType32 { background-image: url(images/iconDeliverableType32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconDeliverableType22 { background-image: url(images/iconDeliverableType32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconDeliverableType16 { background-image: url(images/iconDeliverableType32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
+.iconDeliverableWeight32 { background-image: url(images/iconDeliverableWeight32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconDeliverableWeight22 { background-image: url(images/iconDeliverableWeight32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconDeliverableWeight16 { background-image: url(images/iconDeliverableWeight32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
 .iconDeliveryMode32 { background-image: url(images/iconDeliveryMode32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconDeliveryMode22 { background-image: url(images/iconDeliveryMode22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconDeliveryMode16 { background-image: url(images/iconDeliveryMode16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
@@ -377,9 +393,17 @@
 .iconHealth22 { background-image: url(images/iconHealth22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconHealth16 { background-image: url(images/iconHealth16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
-.iconIncomes32 { background-image: url(images/iconIncomes32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconIncomes22 { background-image: url(images/iconIncomes22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconIncomes16 { background-image: url(images/iconIncomes16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+.iconIncoming32 { background-image: url(images/iconIncoming32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconIncoming22 { background-image: url(images/iconIncoming32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconIncoming16 { background-image: url(images/iconIncoming32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
+.iconIncomingType32 { background-image: url(images/iconIncomingType32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconIncomingType22 { background-image: url(images/iconIncomingType32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconIncomingType16 { background-image: url(images/iconIncomingType32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
+.iconIncomes32 { background-image: url(images/iconIncomes32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconIncomes22 { background-image: url(images/iconIncomes32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconIncomes16 { background-image: url(images/iconIncomes32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
 .iconIndividualExpense32 { background-image: url(images/iconIndividualExpense32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconIndividualExpense22 { background-image: url(images/iconIndividualExpense22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
@@ -417,9 +441,13 @@
 .iconIssueType22 { background-image: url(images/iconIssueType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconIssueType16 { background-image: url(images/iconIssueType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
-.iconJoblistDefinition32 { background-image: url(images/iconJoblistDefinition32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconJoblistDefinition22 { background-image: url(images/iconJoblistDefinition32.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconJoblistDefinition16 { background-image: url(images/iconJoblistDefinition32.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+.iconJoblistDefinition32 { background-image: url(images/iconJoblistDefinition.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconJoblistDefinition22 { background-image: url(images/iconJoblistDefinition.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconJoblistDefinition16 { background-image: url(images/iconJoblistDefinition.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
+.iconKpiDefinition32 { background-image: url(images/iconKpiDefinition32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconKpiDefinition22 { background-image: url(images/iconKpiDefinition32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconKpiDefinition16 { background-image: url(images/iconKpiDefinition32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
 .iconLikelihood32 { background-image: url(images/iconLikelihood32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconLikelihood22 { background-image: url(images/iconLikelihood22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
