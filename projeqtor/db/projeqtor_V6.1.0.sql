@@ -197,10 +197,10 @@ INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idle`, `code`) VALUE
 INSERT INTO `${prefix}menu` (`id`,`name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
 (163,'menuDeliverableWeight', 36, 'object', 792, 'ReadWriteList', 0, 'ListOfValues'),
 (164,'menuDeliverableStatus', 36, 'object', 794, 'ReadWriteList', 0, 'ListOfValues'),
-(165,'menuDeliverableType', 79, 'object', 936, 'ReadWriteType', 0, 'ListOfValues'),
-(166,'menuIncomingType', 79, 'object', 938, 'ReadWriteType', 0, 'Type'),
-(167,'menuDeliverable', 6, 'object', 372, 'Project', 0, 'Work Meeting'),
-(168,'menuIncoming', 6, 'object', 374, 'Project', 0, 'Work Meeting'),
+(165,'menuDeliverableType', 79, 'object', 938, 'ReadWriteType', 0, 'ListOfValues'),
+(166,'menuIncomingType', 79, 'object', 936, 'ReadWriteType', 0, 'Type'),
+(167,'menuDeliverable', 6, 'object', 374, 'Project', 0, 'Work Meeting'),
+(168,'menuIncoming', 6, 'object', 372, 'Project', 0, 'Work Meeting'),
 (169,'menuKpiDefinition', 88, 'object', 615, 'ReadWriteEnvironment', 0, 'Automation');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES 
