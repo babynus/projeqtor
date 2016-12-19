@@ -218,3 +218,26 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`)
 SELECT `idProfile`, 167, `idAccessProfile` FROM `${prefix}accessright` WHERE `idMenu`=16;
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) 
 SELECT `idProfile`, 168, `idAccessProfile` FROM `${prefix}accessright` WHERE `idMenu`=16;   
+
+CREATE TABLE `${prefix}category` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `idle` int(1) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `${prefix}menu` (`id`,`name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
+(162,'menuCategory', 36, 'object', 791, 'ReadWriteType', 0, ' ListOfValues');
+
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES 
+(1,162,1);
+
+INSERT INTO `${prefix}category` (`id`, `name`, `idle`) VALUES 
+(1, 'Build', 0),
+(2, 'Run', 0);
+
+ALTER TABLE `${prefix}category` ADD COLUMN `sortOrder` int(3) unsigned DEFAULT NULL;
+
+ALTER TABLE `${prefix}project` ADD COLUMN `idCategory` int(12) unsigned DEFAULT NULL;
+
+ALTER TABLE `${prefix}type` ADD COLUMN `idCategory` int(12) unsigned DEFAULT NULL;
