@@ -197,6 +197,7 @@ checkUncheckAll: "выделить все / снять все выделения
 chooseColumnExport: "Выбрать стошлбцы для экспорта",
 chronological: "Хронология",
 CKEditor: "CK редактор (расширенный веб-редактор)",
+CkEditorInline: "[CK Editor Inline (activated when needed)]",
 clickToEditRichText: "щелкните на поле для вызова расширенного редактора",
 clickToView: "щелкните чтобы увидеть",
 Client: "Заказчик",
