@@ -2875,15 +2875,18 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
       echo formatCommentThumb($link->comment);
       
       echo '</td>';
-      if (property_exists($linkObj, 'idStatus')) {
-        $objStatus=new Status($linkObj->idStatus);
-        // $color=$objStatus->color;
-        // $foreColor=getForeColor($color);
-        // echo '<td class="linkData"><table width="100%"><tr><td style="background-color: ' . htmlEncode($objStatus->color) . '; color:' . $foreColor . ';width: 100%;">' . htmlEncode($objStatus->name) . '</td></tr></table></td>';
-        echo '<td class="dependencyData"  style="width:15%">' . colorNameFormatter($objStatus->name . "#split#" . $objStatus->color) . '</td>';
+      $idStatus='idStatus';
+      $statusClass='Status';
+      if (! property_exists($linkObj, $idStatus) and property_exists($linkObj, 'id'.get_class($linkObj).'Status')) {
+        $idStatus='id'.get_class($linkObj).'Status';
+        $statusClass=get_class($linkObj).'Status';
       }
-      //echo '<td class="dependencyData"  style="width:15%">' . htmlFormatDateTime($creationDate) . '<br/></td>';
-      //echo '<td class="dependencyData"  style="width:15%">' . $userName . '</td>';
+      if (property_exists($linkObj, $idStatus)) {
+        $objStatus=new $statusClass($linkObj->$idStatus);
+        echo '<td class="dependencyData"  style="width:15%">' . colorNameFormatter($objStatus->name . "#split#" . $objStatus->color) . '</td>';
+      } else {
+        echo '<td class="dependencyData"  style="width:15%">&nbsp;</td>';
+      }
       echo '</tr>';
     }
   }

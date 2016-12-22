@@ -31,7 +31,7 @@ require_once('_securityCheck.php');
 class IncomingMain extends SqlElement {
 
   // List of fields that will be exposed in general user interface
-  public $_sec_description;
+public $_sec_description;
   public $id;    // redefine $id to specify its visible place 
   public $reference;
   public $scope;
@@ -82,7 +82,9 @@ class IncomingMain extends SqlElement {
   );
   
   //private static $_databaseColumnName = array('idResource'=>'idUser');
-  private static $_databaseColumnName = array();
+  private static $_databaseColumnName = array('idIncomingType'=>'idDeliverableType',
+  'idIncomingStatus'=>'idDeliverableStatus',
+  'idIncomingWeight'=>'idDeliverableWeight');
   
   private static $_databaseTableName = 'deliverable';
   private static $_databaseCriteria = array('scope'=>'Incoming');
@@ -145,6 +147,14 @@ class IncomingMain extends SqlElement {
    */
   protected function getStaticDatabaseCriteria() {
     return self::$_databaseCriteria;
+  }
+  /** ========================================================================
+   * Return the specific databaseTableName
+   * @return the databaseTableName
+   */
+  protected function getStaticDatabaseTableName() {
+    $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
+    return $paramDbPrefix . self::$_databaseTableName;
   }
 // ============================================================================**********
 // GET VALIDATION SCRIPT
