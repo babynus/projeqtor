@@ -4657,7 +4657,7 @@ function listClick() {
   setTimeout("hideList(null,true);", 1);
 }
 
-function debugLogHistory(msg) {
+function consoleLogHistory(msg) {
   console.log ('====='+msg+'==== ('+historyTable.length+')');
   if (historyTable.length==0) {
     console.log(msg+' => Empty');
@@ -4669,7 +4669,7 @@ function debugLogHistory(msg) {
 }
 
 function stockHistory(curClass, curId, currentScreen) {
-  //debugLogHistory("before");
+  //consoleLogHistory("before");
   if (!currentScreen) {
     currentScreen="object";
     if (dojo.byId("objectClassManual")){
@@ -4692,7 +4692,7 @@ function stockHistory(curClass, curId, currentScreen) {
   if (historyPosition == historyTable.length - 1) {
     disableWidget('menuBarRedoButton');
   }
-  debugLogHistory("after");
+  consoleLogHistory("after");
 }
 
 
