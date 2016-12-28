@@ -922,6 +922,7 @@ copyToWithAttachments: "να γίνει αντιγραφή επισυνάψεω�
 copyToWithLinks: "αντιγραφή και συνδέσμων",
 copyToWithNotes: "αντιγραφή και σημειώσεων",
 copyToWithResult: "[also copy result]",
+copyToWithVersionProjects: "[Copy versions linked to the project]",
 copyWithStructure: "αντιγραφή όλης της δομής υπο-δραστηριότητες & ορόσημα)",
 costAccess: "Ορατότητα κόστους",
 count: "πλήθος",

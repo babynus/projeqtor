@@ -922,6 +922,7 @@ copyToWithAttachments: "також скопіювати прикріпи (attach
 copyToWithLinks: "також скопіювати посилання (links)",
 copyToWithNotes: "також скопіювати нотатки",
 copyToWithResult: "також скопіювати результат",
+copyToWithVersionProjects: "[Copy versions linked to the project]",
 copyWithStructure: "скопіювати всю структуру (суб-справи (sub-activities) & репери (віхи&#44;етапи))",
 costAccess: "Показати вартість",
 count: "кількість",
