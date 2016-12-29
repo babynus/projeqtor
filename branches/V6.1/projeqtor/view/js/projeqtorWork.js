@@ -166,7 +166,7 @@ function refreshImputationPeriod(directDate) {
       week='01';
       year+=1;
     dijit.byId('yearSpinner').set('value', year);
-    dijit.byId('weekSpinner').set('value', '1');
+    dijit.byId('weekSpinner').set('value', week);
   } else if (parseInt(week,10)>52) {
     lastWeek=getWeek(31,12,year);
     if (lastWeek==1) {
@@ -178,7 +178,7 @@ function refreshImputationPeriod(directDate) {
       week='01';
         year+=1;
       dijit.byId('yearSpinner').set('value', year);
-      dijit.byId('weekSpinner').set('value', '1');
+      dijit.byId('weekSpinner').set('value', week);
     }
   }
   var day=getFirstDayOfWeek(week,year);
