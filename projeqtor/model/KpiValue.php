@@ -131,11 +131,13 @@ class KpiValue extends SqlElement {
     }
   }
   public static function consolidate($refType,$refId) {
+    debugLog("consolidate($refType,$refId)");
     if (! SqlElement::class_exists($refType)) return;
     if (! $refId) return;
     $obj=new $refType($refId);
     if (! property_exists($obj,'idOrganization') or ! $obj->idOrganization) return;
     $consolidatedList=self::consolidateOrganization($obj->idOrganization);
+    debugLog($consolidatedList);
     foreach ($consolidatedList as $id=>$consolidated) {
       $kv=SqlElement::getSingleSqlElementFromCriteria('KpiValue',array('refType'=>'Category','refId'=>$obj->idOrganization,'idKpiDefinition'=>$id));
       $kv->idKpiDefinition=$id;
@@ -153,7 +155,7 @@ class KpiValue extends SqlElement {
     $result=array();
     $crit=array('idOrganization'=>$id);
     $listPrj=SqlList::getListWithCrit('Project', $crit);
-    $where="idKpiDefinition in (1,2) and refDone=1 and refType='Project' and refId in (".transformListIntoInClause($listPrj).")";
+    $where="idKpiDefinition in (1,2) and refDone=1 and refType='Project' and refId in ".transformListIntoInClause($listPrj); // For organization only done projects are consolidated
     $kpi=new KpiValue();
     $kpiList=$kpi->getSqlElementsFromCriteria(null,false,$where);
     foreach($kpiList as $kpi) {
