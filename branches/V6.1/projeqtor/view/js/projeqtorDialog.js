@@ -5120,7 +5120,6 @@ function checkAlertRetour(data) {
   }
   checkAlertDisplayQuick=false;
   if (dojo.byId("alertCount")) {
-    console.log(dojo.byId("alertCount").value);
     if (dojo.byId("alertCount").value>1) {
       checkAlertDisplayQuick=true;
     }

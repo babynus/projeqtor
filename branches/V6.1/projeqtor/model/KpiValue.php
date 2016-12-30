@@ -130,7 +130,6 @@ class KpiValue extends SqlElement {
         }
       }
     } else if ($class=='Term') {
-      debugLog("OK Kpi to calculate for term");
       if (isset($kpiListToCalculate['term'])) {
         $idP=$obj->idProject;
         $real=0;
@@ -157,7 +156,6 @@ class KpiValue extends SqlElement {
       }
     } else if ($class=='Deliverable' or $class=='Incoming') {
       if (isset($kpiListToCalculate[strtolower($class)])) {
-        debugLog("calculate KPI for $class");
         $idP=$obj->idProject;
         $ppe=SqlElement::getSingleSqlElementFromCriteria('ProjectPlanningElement',array('refType'=>'Project', 'refId'=>$idP));
         $classWeight=$class.'Weight';
@@ -187,7 +185,6 @@ class KpiValue extends SqlElement {
             $maxQuality+=$weight*$maxStatus;
           }
         }
-        debugLog("$quality=$quality, $maxQuality=$maxQuality");
         if ($maxQuality!=0) {
           $kpi=$kpiListToCalculate[strtolower($class)];
           $kv=SqlElement::getSingleSqlElementFromCriteria('KpiValue',array('refType'=>'Project','refId'=>$idP,'idKpiDefinition'=>$kpi->id));
