@@ -290,10 +290,10 @@ UPDATE `${prefix}linkable` set `idDefaultLinkable`=21 WHERE id=9;
 DELETE FROM `${prefix}type` where scope='Invoice';
 
 INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `orientation`) VALUES 
-(64, 'reportKpiDurationProject', 10, 'kpiDuration.php?scope=Project', 1110, 'P'),
-(65, 'reportKpiDurationOrganization', 10, 'kpiDuration.php?scope=Organization', 1120, 'P'),
-(66, 'reportKpiWorkloadProject', 10, 'kpiWorkload.php?scope=Project', 1130, 'P'),
-(67, 'reportKpiWorkloadOrganization', 10, 'kpiWorkload.php?scope=Organization', 1140, 'P');
+(64, 'reportKpiDurationProject', 10, 'kpiDuration.php?scope=Project', 970, 'P'),
+(65, 'reportKpiDurationOrganization', 10, 'kpiDuration.php?scope=Organization', 975, 'P'),
+(66, 'reportKpiWorkloadProject', 10, 'kpiWorkload.php?scope=Project', 830, 'P'),
+(67, 'reportKpiWorkloadOrganization', 10, 'kpiWorkload.php?scope=Organization', 840, 'P');
 
 --INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES 
 --(64, 'idProject', 'projectList', 10, 'currentProject'),
