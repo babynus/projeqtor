@@ -93,6 +93,7 @@ foreach($listProjects as $prj) {
   echo '<td class="reportTableDataSpanned" rowspan="'.$nbTerms.'" style="width:20%;text-align:left">' . htmlEncode($prj->name) . '</td>';
   echo '<td class="reportTableDataSpanned" rowspan="'.$nbTerms.' style="width:20%;text-align:left">' . htmlEncode(SqlList::getNameFromId('Client', $prj->idClient)) . '</td>';
   $cptTerms=0;
+  if (count($lstTerms)==0) $lstTerms[]=new Term();
   foreach ($lstTerms as $term) {
     $cptTerms++;
     $validated=$term->validatedAmount;
