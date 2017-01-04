@@ -119,8 +119,26 @@ This indicator has no intrinsic meaning but has some compared to project progres
 So for this indicator, thresholds will not be compared to KPI value directly but to : [project progress] - [KPI value] <br/>(that should then be as small as possible).<br/>
 <br/>
 This indicator is not consolidated amongst projects (for organization).'),
-(4, 'project deliverables quality KPI', 'deliverable', 0, ''),
-(5, 'project incomings quality KPI', 'incoming', 0, '');  
+(4, 'project deliverables quality KPI', 'deliverable', 0, '
+<b>KPI for deliverable = [Estimated quality value of deliverable] / [Nominal (max) quality value for deliverables]</b><br/>
+Quality value is defined in the deliverable status list, that will be selected on the deliverable.<br/>
+Nominal quality value is the max of the values defined in the deliverable status list.<br/>
+<b>KPI consolidated on project = Sum of ([Estimated quality value of deliverables]*[Weighting of deliverable]) / Sum([Nominal (max) quality value of deliverables]*[Weighting of deliverable])</b><br/>
+Weigting value of deliverable is defined in the deliverable weighting list, that will be selected on the deliverable.<br/>
+Consolidated value may not be calculated if all deliverables have zero weight.<br/>
+Unitary value of KPI for single deliverable is not stored in KPI history. Only consolidated value for project is stored is KPI history.<br/>
+<br/>
+This indicator is consolidated amongst projects (for organization) with weighting on global weight of deliverables on each project.'),
+(5, 'project incomings quality KPI', 'incoming', 0, '
+<b>KPI for incoming = ( [Estimated Quality value of incoming] / [Nominal (max) Quality value for incomings]</b><br/>
+Quality value is defined in the incoming Status list, that will be selected on the incoming.<br/>
+Nominal Quality value is the max of the values defined in the incoming Status list.<br/>
+<b>KPI consolidated on project = ( Sum of ([Estimated Quality value of incomings]*[Weighting of incoming]) / Sum([Nominal (max) Quality value of incomings]*[Weighting of incoming])</b><br/>
+Weigting value of incoming is defined in the incoming Weighting list, that will be selected on the incoming.<br/>
+Consolidated value may not be calculated if all incomings have zero weight.<br/>
+Unitary value of KPI for single incoming is not stored in KPI history. Only consolidated value for project is stored is KPI history.<br/>
+<br/>
+This indicator is consolidated amongst projects (for organization) with weighting on global weight of incomings on each project.');  
 
 CREATE TABLE `${prefix}kpithreshold` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
