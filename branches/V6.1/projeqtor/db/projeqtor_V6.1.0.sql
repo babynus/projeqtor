@@ -207,6 +207,7 @@ CREATE TABLE `${prefix}deliverable` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `idProject` int(12) unsigned DEFAULT NULL,
   `reference` varchar(100) DEFAULT NULL,
+  `externalReference` varchar(256) DEFAULT NULL,
   `scope` varchar(100) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   `idDeliverableType` int(12) unsigned DEFAULT NULL,
@@ -218,6 +219,10 @@ CREATE TABLE `${prefix}deliverable` (
   `externalReference` varchar(100),
   `plannedDate` date DEFAULT NULL,
   `realDate` date DEFAULT NULL,
+  `validationDate` date DEFAULT NULL,
+  `impactWork` decimal(5) DEFAULT NULL,
+  `impactDuration` int(5) DEFAULT NULL,
+  `impactCost` decimal(9) DEFAULT null,
   `idDeliverableWeight` int(12) unsigned DEFAULT NULL,
   `idDeliverableStatus` int(12) unsigned DEFAULT NULL,
   `idle` int(1) unsigned DEFAULT '0',
@@ -258,11 +263,11 @@ CREATE TABLE `${prefix}deliverableStatus` (
 INSERT INTO `${prefix}deliverableStatus` (`id`, `scope`, `name`, `value`, `sortOrder`, `color`, `idle`) VALUES 
 (1, 'Deliverable', 'not done', 0, 10, '#ff0000', '0'),
 (2, 'Deliverable', 'delivery refused (major reservations)', 1, 20, '#ff8c00', '0'),
-(3, 'Deliverable', 'accepted with minor reservations', 2, 30, '#afeeee', '0'),
+(3, 'Deliverable', 'accepted with minor reservations', 2, 30, '#ffff00', '0'),
 (4, 'Deliverable', 'accepted without reservations', 3, 40, '#7fff00', '0'),
 (5, 'Incoming', 'not provided', 0, 10, '#ff0000', '0'),
 (6, 'Incoming', 'not conform', 1, 20, '#ff8c00', '0'),
-(7, 'Incoming', 'accepted with minor reservations', 2, 30, '#afeeee', '0'),
+(7, 'Incoming', 'accepted with minor reservations', 2, 30, '#ffff00', '0'),
 (8, 'Incoming', 'accepted without reservations', 3, 40, '#7fff00', '0');
 
 INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idle`, `code`) VALUES 
@@ -340,10 +345,10 @@ INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOr
 (66, 'reportKpiWorkloadProject', 11, 'kpiWorkload.php?scope=Project', 1120, 'P'),
 (67, 'reportKpiWorkloadOrganization', 11, 'kpiWorkload.php?scope=Organization', 1125, 'P'),
 (68, 'reportKpiTerm', 11, 'kpiTerm.php', 1150, 'P'),
-(69, 'reportKpiDeliverableProject', 11, 'kpiDeliverable.php?scope=Project', 1130, 'P'),
+(69, 'reportKpiDeliverableProject', 11, 'kpiDeliverable.php?class=Deliverable&scope=Project', 1130, 'P'),
 (70, 'reportKpiDeliverableOrganization', 11, 'kpiDeliverable.php?scope=Organization', 1135, 'P'),
-(71, 'reportKpiIncomingProject', 11, 'kpiIncoming.php?scope=Project', 1140, 'P'),
-(72, 'reportKpiIncomingOrganization', 11, 'kpiIncoming.php?scope=Organization', 1145, 'P');
+(71, 'reportKpiIncomingProject', 11, 'kpiDeliverable.php?class=Incoming&scope=Project', 1140, 'P'),
+(72, 'reportKpiIncomingOrganization', 11, 'kpiDeliverable.php?scope=Organization', 1145, 'P');
 
 --INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES 
 --(64, 'idProject', 'projectList', 10, 'currentProject'),
