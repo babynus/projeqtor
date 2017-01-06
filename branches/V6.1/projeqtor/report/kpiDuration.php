@@ -272,7 +272,7 @@ if ($cptProjectsDisplayed>0 and $scope=='Organization') {
     echo '<td class="reportTableDataSpanned" style="width:20%;font-weight:bold;text-align:left">' . (($consolidated)?htmlDisplayColored($consolidated, $color):'') . '</td>';
   }
   echo '</tr>'; 
-}
+} 
 echo '</table>';
 
 // Graph
