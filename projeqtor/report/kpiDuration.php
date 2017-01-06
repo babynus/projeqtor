@@ -273,7 +273,7 @@ if ($cptProjectsDisplayed>0 and $scope=='Organization') {
   }
   echo '</tr>'; 
 }
-echo '</table>'; 
+echo '</table>';
 
 // Graph
 if (! testGraphEnabled()) { return;}
