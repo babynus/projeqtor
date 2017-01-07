@@ -226,15 +226,11 @@ foreach($listProjects as $prj) {
     $kpiValue=SqlElement::getSingleSqlElementFromCriteria('KpiValue', $critKpi);
   } else {
     $critKpi[$period]=$periodValue;
-    $lstKpi=(new KpiHistory())->getSqlElementsFromCriteria($critKpi,false,null,'kpiDate desc');
     $lstKpi=(new KpiHistory())->getSqlElementsFromCriteria($critKpi,false,null,'kpiValue desc');
     if (count($lstKpi)==0) {
       $where="idKpiDefinition=$kpi->id and refType='Project' and refId=$prj->id and $period<=$periodValue";
       $lstKpi=(new KpiHistory())->getSqlElementsFromCriteria(null,false,$where,'kpiDate desc');
     }
-    
-    
-    
     $kpiValue=reset($lstKpi);
   }
   if (!$kpiValue) $kpiValue=new KpiValue();
