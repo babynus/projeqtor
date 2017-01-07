@@ -176,7 +176,7 @@ foreach($listProjects as $prj) {
       $dispValue=$kpiValue->kpiValue;
       if ($dispValue and $displayAsPct) $dispValue=htmlDisplayPct($dispValue*100);
       if ($kpiColorFull) {
-        echo '<td class="reportTableData" rowspan="'.($nbTerms+1).'" style="width:15%;background-color:'.$color.';text-align:left">' . (($dispValue)?htmlDisplayColoredFull($dispValue, $color):'') . '</td>';
+        echo '<td class="reportTableData" rowspan="'.($nbTerms+1).'" style="width:15%;background-color:'.$color.';text-align:center;">' . (($dispValue)?htmlDisplayColoredFull($dispValue, $color):'') . '</td>';
       } else {
         echo '<td class="reportTableDataSpanned" rowspan="'.($nbTerms+1).'" style="width:15%;text-align:left">' . (($dispValue)?htmlDisplayColored($dispValue, $color):'') . '</td>';
       }
