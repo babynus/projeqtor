@@ -54,6 +54,8 @@ if ($idProject!="") {
 
 include "header.php";
 
+if ($month and $month<10) $month='0'.intval($month);
+
 if (!$idProject) {
   echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
   echo i18n('messageNoData',array(i18n('Project'))); 
