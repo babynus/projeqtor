@@ -235,7 +235,7 @@ foreach($listProjects as $prj) {
   $dispValue=$kpiValue->kpiValue;
   if ($dispValue and $displayAsPct) $dispValue=htmlDisplayPct($dispValue*100);
   if ($kpiColorFull) {
-    echo '<td class="reportTableData" style="width:20%;background-color:'.$color.';text-align:left">' . (($dispValue)?htmlDisplayColoredFull($dispValue, $color):'') . '</td>';
+    echo '<td class="reportTableData" style="width:20%;background-color:'.$color.';text-align:center;">' . (($dispValue)?htmlDisplayColoredFull($dispValue, $color):'') . '</td>';
   } else {
     echo '<td class="reportTableDataSpanned" style="width:20%;text-align:left">' . (($dispValue)?htmlDisplayColored($dispValue, $color):'') . '</td>';
   }
@@ -270,7 +270,7 @@ if ($cptProjectsDisplayed>0 and $scope=='Organization') {
   }
   if ($consolidated and $displayAsPct) $consolidated=htmlDisplayPct($consolidated*100);
   if ($kpiColorFull) {
-    echo '<td class="reportTableData" style="width:20%;background-color:'.$color.';text-align:left">' . (($consolidated)?htmlDisplayColoredFull($consolidated, $color):'') . '</td>';
+    echo '<td class="reportTableData" style="width:20%;background-color:'.$color.';text-align:center;">' . (($consolidated)?htmlDisplayColoredFull($consolidated, $color):'') . '</td>';
   } else {
     echo '<td class="reportTableDataSpanned" style="width:20%;font-weight:bold;text-align:left">' . (($consolidated)?htmlDisplayColored($consolidated, $color):'') . '</td>';
   }
