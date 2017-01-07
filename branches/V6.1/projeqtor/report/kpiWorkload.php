@@ -102,6 +102,8 @@ if ($done) {
 
 include "header.php";
 
+if ($month and $month<10) $month='0'.intval($month);
+
 $scope=$_REQUEST['scope'];
 if ($scope=='Project') {
   if (!$idProject) {
@@ -176,7 +178,7 @@ if ($idProject) {
   $listProjects=$prj->getSqlElementsFromCriteria(null,false,$where);
 }
 
-if (checkNoData($listProjects)) exit;
+//if (checkNoData($listProjects)) exit;
 
 $period=null;
 $periodValue='';
@@ -225,6 +227,14 @@ foreach($listProjects as $prj) {
   } else {
     $critKpi[$period]=$periodValue;
     $lstKpi=(new KpiHistory())->getSqlElementsFromCriteria($critKpi,false,null,'kpiDate desc');
+    $lstKpi=(new KpiHistory())->getSqlElementsFromCriteria($critKpi,false,null,'kpiValue desc');
+    if (count($lstKpi)==0) {
+      $where="idKpiDefinition=$kpi->id and refType='Project' and refId=$prj->id and $period<=$periodValue";
+      $lstKpi=(new KpiHistory())->getSqlElementsFromCriteria(null,false,$where,'kpiDate desc');
+    }
+    
+    
+    
     $kpiValue=reset($lstKpi);
   }
   if (!$kpiValue) $kpiValue=new KpiValue();
@@ -295,11 +305,13 @@ $query.= " from (select MAX(h.kpiValue*h.weight) as valueP, MIN(h.weight) as wei
 $query.= " from $hTable h";
 $query.= " where h.idKpiDefinition=$kpi->id and h.refType='Project' and h.refId in " . transformListIntoInClause($arrayProj);
 if ($done) {$query.= " and h.refDone=1";}
-if ($year) {
-  if ($month==1 or (!$month and $year==date('Y') and date('m')==1)) {
-    $query.= " and (h.year='$year' or h.year='".($year-1)."')";
-  } else {
-    $query.= " and h.year='$year'";
+if (! $idProject) {
+  if ($year) {
+    if ($month==1 or (!$month and $year==date('Y') and date('m')==1)) {
+      $query.= " and (h.year='$year' or h.year='".($year-1)."')";
+    } else {
+      $query.= " and h.year='$year'";
+    }
   }
 }
 $query.= " group by h.$scale, h.refId) prj ";
@@ -315,7 +327,8 @@ foreach ($result as $line) {
   $arrValues[$line['period']]=round($line['value'],2)*(($displayAsPct)?100:1);
 }
 
-if ($cptProjectsDisplayed==0 and (!$start or !$end)) {
+//if ($cptProjectsDisplayed==0 and (!$start or !$end)) {
+if ($cptProjectsDisplayed==0 or (!$start or !$end)) {
   echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
   echo i18n('reportNoData'); 
   echo '</div>';

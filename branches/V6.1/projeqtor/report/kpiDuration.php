@@ -59,6 +59,7 @@ if (array_key_exists('monthSpinner',$_REQUEST)) {
   $month = Security::checkValidMonth($month);
   if ($month and !$year) $year=date('Y');
 }
+
 $done=false;
 if (array_key_exists('onlyFinished',$_REQUEST)) {
   $done=true;
@@ -93,6 +94,8 @@ if ($done) {
 }
 
 include "header.php";
+
+if ($month and $month<10) $month='0'.intval($month);
 
 $scope=$_REQUEST['scope'];
 if ($scope=='Project') {
@@ -165,7 +168,7 @@ if ($idProject) {
   $listProjects=$prj->getSqlElementsFromCriteria(null,false,$where);
 }
 
-if (checkNoData($listProjects)) exit;
+//if (checkNoData($listProjects)) exit;
 
 $period=null;
 $periodValue='';
@@ -217,7 +220,7 @@ foreach($listProjects as $prj) {
     $lstKpi=(new KpiHistory())->getSqlElementsFromCriteria($critKpi,false,null,'kpiValue desc');
     if (count($lstKpi)==0) {
     	$where="idKpiDefinition=$kpi->id and refType='Project' and refId=$prj->id and $period<=$periodValue";
-    	$lstKpi=(new KpiHistory())->getSqlElementsFromCriteria(null,false,$where,'kpiValue desc');
+    	$lstKpi=(new KpiHistory())->getSqlElementsFromCriteria(null,false,$where,'kpiDate desc');
     }
     $kpiValue=reset($lstKpi);
   }
@@ -309,11 +312,12 @@ foreach ($result as $line) {
   $arrValues[$line['period']]=round($line['value'],2)*(($displayAsPct)?100:1);;
 }
 
-if ($cptProjectsDisplayed==0 and (!$start or !$end)) {
-  echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
-  echo i18n('reportNoData'); 
-  echo '</div>';
-  exit;
+//if ($cptProjectsDisplayed==0 and (!$start or !$end)) {
+if ($cptProjectsDisplayed==0 or (!$start or !$end)) {
+  //echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
+  //echo i18n('reportNoData'); 
+  //echo '</div>';
+  return;
 }
 $lastValue=VOID;
 $arrDates=array();
