@@ -98,6 +98,8 @@ if ($done) {
 
 include "header.php";
 
+if ($month and $month<10) $month='0'.intval($month);
+
 $scope=$_REQUEST['scope'];
 if ($scope=='Project') {
   if (!$idProject) {
