@@ -62,6 +62,8 @@ class Plugin extends SqlElement {
       $this->zipFile=$file['path'];
       $plugin=$this->name;
       
+      $metaData=$this->getMetadata($this->zipFile);
+      $this->pluginVersion=$metaData['pluginVersion'];
       $checkCompatibility=$this->checkProjeQtOrCompatibility();
       if ($checkCompatibility!='OK') {
         $result=$checkCompatibility;
