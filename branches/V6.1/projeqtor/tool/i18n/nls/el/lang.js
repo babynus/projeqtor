@@ -185,6 +185,7 @@ changeInitialDueDateTime: "αλλαγή αρχικής ημερ./ώρας παρ
 changeInitialEndDate: "αλλαγή αρχικής ημερ. λήξης σε",
 changePassword: "αλλαγή συνθηματικού",
 changePlanningMode: "αλλαγή μεθόδου προγραμμ. σε",
+changeValidatedData: "[Change validated data]",
 changeValidatedEndDate: "αλλαγή πιστοποιημ. ημέρ. λήξης σε",
 changeValidatedStartDate: "αλλαγή πιστοποιημ. ημέρ. έναρξης σε",
 checkAsList: "επιλογή λίστας στηλών",

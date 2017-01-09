@@ -185,6 +185,7 @@ changeInitialDueDateTime: "promijenite izvorni dizajner. Datum / vrijeme kako bi
 changeInitialEndDate: "promijenite izvorni dizajner. Datum završetka previše",
 changePassword: "promijeni lozinku",
 changePlanningMode: "promijeni na planiranje modu",
+changeValidatedData: "[Change validated data]",
 changeValidatedEndDate: "promjena potvrdio završni datum na",
 changeValidatedStartDate: "promijeni potvrdio datum početka u",
 checkAsList: "odaberite stupce za prikaz",
