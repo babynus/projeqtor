@@ -185,6 +185,7 @@ changeInitialDueDateTime: "изменить начальную дату / вре
 changeInitialEndDate: "изменить начальную конечную дату в",
 changePassword: "изменить пароль",
 changePlanningMode: "изменить режим планирования в",
+changeValidatedData: "[Change validated data]",
 changeValidatedEndDate: "изменитьдату «проверка окончание» на",
 changeValidatedStartDate: "изменить дату «проверка начало» на",
 checkAsList: "выбрать список столбцов",
