@@ -279,11 +279,13 @@ $query.= " from (select MAX(h.kpiValue) as valueP, h.$scale as periodP, h.refId 
 $query.= " from $hTable h";
 $query.= " where h.idKpiDefinition=$kpi->id and h.refType='Project' and h.refId in " . transformListIntoInClause($arrayProj);
 if ($year) {
-	if ($month==1 or (!$month and $year==date('Y') and date('m')==1)) {
-		$query.= " and (h.year='$year' or h.year='".($year-1)."')";
-	} else {
-		$query.= " and h.year='$year'";
-	}
+	if ($month) {
+		$query.= " and h.month='$year$month'";
+	} else if ($year==date('Y') and date('m')==1) {
+    $query.= " and (h.year='$year' or h.year='".($year-1)."')";
+  } else {
+    $query.= " and h.year='$year'";
+  }
 }
 $query.= " group by h.$scale, h.refId) prj ";
 $query.= " group by periodP";
@@ -311,11 +313,8 @@ while ($date<=$end) {
   if (isset($arrValues[$date])) {
     $lastValue=$arrValues[$date];
   } else {
-    if ($done) {
-      $arrValues[$date]=VOID;
-    } else {
-      $arrValues[$date]=$lastValue;
-    }
+    //$arrValues[$date]=VOID;
+    $arrValues[$date]=$lastValue;
   }
   $arrDates[$date]=$date;
   if ($scale=='day') {
