@@ -3275,6 +3275,42 @@ abstract class SqlElement {
 				}
 			}
 		}
+   
+  //Gautier #1816 // ticket is particular case but can't test
+  if(get_class($this)=='Activity' or get_class($this)=='Project' or get_class($this)=='Milestones' or get_class($this)=='Meeting' or get_class($this)=='TestSession'){
+    $classe = get_class($this);
+    $classeType = $classe.'Type';
+    $idClasseType = 'id'.$classeType;
+    $obj=get_class($this)."PlanningElement";
+    $type1 = new $classe($this->id);
+    //passing to done
+    $old = $this->getOld();
+    if($this->done and !$old->done){
+      $type2 = new $classeType ($type1->$idClasseType);
+      //checkbox lockNoLeftOnDone checked
+      if($type2->lockNoLeftOnDone == 1){
+        $pe=new $obj();
+        $crit=array('refType'=>$classe,'refId'=>$this->id);
+        $peLst=$pe->getSqlElementsFromCriteria($crit);
+        foreach ($peLst as $pe){
+          // particular case ticket
+  
+            //left work
+            if($pe->leftWork != 0){
+              //error message
+              $result.='<br/>' . i18n("NoLeftOnDone");
+            }
+          }
+        }
+      }
+    }
+// gautier : do not delete this comment please 
+//or get_class($this)=='Ticket'
+//        if($obj == 'TicketPlanningElement'){
+//           debugLog($obj);
+//         }else{
+
+			
 		// Control for Closed item that all items are closed
 		if (property_exists($this,'idle') and $this->idle and $this->id) { // #1690 : should be possible to import closed items
 			$relationShip=self::$_closeRelationShip;
