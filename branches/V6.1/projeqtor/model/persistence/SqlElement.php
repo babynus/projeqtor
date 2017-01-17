@@ -4591,7 +4591,6 @@ abstract class SqlElement {
 	  }
 	  if (property_exists($testObj,'idStatus') and $newStatus!='*') {
 	    $status=($newStatus)?$newStatus:$testObj->idStatus;
-	    debugLog($list['Status']);
 	    if (isset($list['Status']) and isset($list['Status'][$class]) and isset($list['Status'][$class][$status]) ) {
 	      $listStatus=$list['Status'][$class][$status];
 	    }
