@@ -290,15 +290,16 @@ $query.= " from $hTable h";
 $query.= " where h.idKpiDefinition=$kpi->id and h.refType='Project' and h.refId in " . transformListIntoInClause($arrayProj);
 if ($done) {$query.= " and h.refDone=1";}
 //if (! $idProject) {
-if (1) {
 	if ($year) {
-	  if ($month==1 or (!$month and $year==date('Y') and date('m')==1)) {
+		if ($month) {
+			$query.= " and h.month='$year$month'";
+		} else if ($year==date('Y') and date('m')==1) {
 	    $query.= " and (h.year='$year' or h.year='".($year-1)."')";
 	  } else {
 	    $query.= " and h.year='$year'";
 	  }
 	}
-}
+//}
 $query.= " group by h.$scale, h.refId) prj ";
 $query.= " group by periodP";
 $result=Sql::query($query);
