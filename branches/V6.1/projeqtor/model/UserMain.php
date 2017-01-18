@@ -1333,6 +1333,5 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
     }
     return $result;
   }
-  
 }
 ?>
