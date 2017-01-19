@@ -88,10 +88,7 @@ $result="";
 
 $Lnk=new Link();
 
-foreach ($arrayId as $ref2Id) {
-  debugLog($ref1Type);
-  debugLog($ref1Id);
-  
+foreach ($arrayId as $ref2Id) {  
   $crit1=array('ref1Type'=>$ref2Type,'ref1Id'=>intval($ref2Id));
   $list1=$Lnk->getSqlElementsFromCriteria($crit1);
   
@@ -114,7 +111,6 @@ foreach ($arrayId as $ref2Id) {
       $link->ref1Type=$ref1Type;
       $link->ref1Id=$ref1Id;
       $link->save();
-      debugLog($list1);
       
     }
     foreach($list2 as $link){
