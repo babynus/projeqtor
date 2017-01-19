@@ -202,7 +202,6 @@ class Audit extends SqlElement {
 			$audit->idle = 1;
 			if($audit->idle== 1){
 			  $audit->sessionId=$audit->sessionId.'_'.date('Y-m-d');
-			  debugLog($audit->sessionId);
 			}
 			$audit->save ();
 		}
