@@ -51,11 +51,12 @@ if (! array_key_exists('linkRef2Id',$_REQUEST)) {
 }
 $ref2Id=$_REQUEST['linkRef2Id'];
 
-if (! array_key_exists('copyLinksofLinked',$_REQUEST)) {
-  throwError('copyLinksofLinked parameter not found in REQUEST');
+$copyLinksofLinked=false;
+if (array_key_exists('copyLinksofLinked', $_REQUEST)){
+  if ($_REQUEST['copyLinksofLinked']!='0') {
+    $copyLinksofLinked=true;
+  }
 }
-
-$copyLinksofLinked=$_REQUEST['copyLinksofLinked'];
 
 if ($ref2Type=='Document') {
   if (array_key_exists('linkDocumentVersion',$_REQUEST)) {
