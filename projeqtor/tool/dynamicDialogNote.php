@@ -75,8 +75,12 @@ if (array_key_exists('screenHeight',$_SESSION)) {
           <textarea style="width:<?php echo $detailWidth;?>px; height:<?php echo $detailHeight;?>px"
           name="noteNote" id="noteNote"><?php echo htmlspecialchars($note->note);?></textarea>
         <?php } else if (getEditorType()=="text"){
-          $text=new Html2Text($note->note);
-          $val=$text->getText();?>
+          if (isTextFieldHtmlFormatted($note->note)) {
+          	$text=new Html2Text($note->note);
+          	$val=$text->getText();
+          } else {
+            $val=str_replace(array("\n",'<br>','<br/>','<br />'),array("","\n","\n","\n"),$note->note);
+          }?>
           <textarea dojoType="dijit.form.Textarea" 
           id="noteNote" name="noteNote"
           style="max-width:<?php echo $detailWidth;?>px;height:<?php echo $detailHeight;?>px;max-height:<?php echo $detailHeight;?>px"
