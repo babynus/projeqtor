@@ -2468,8 +2468,9 @@ function drawNotesFromObject($obj, $refresh=false) {
       }
       if (! isTextFieldHtmlFormatted($strDataHTML)) {
       	$strDataHTML=htmlEncode($strDataHTML,'plainText');
+      } else {
+      	$strDataHTML=preg_replace('@(https?://([-\w\.]<+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" target="_blank">$1</a>', $strDataHTML);
       }
-      debugLog($strDataHTML);
       echo $strDataHTML;
       if (! $print) echo '</div>';
       // END ADDED BRW
