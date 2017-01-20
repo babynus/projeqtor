@@ -73,7 +73,12 @@ if (array_key_exists('screenHeight',$_SESSION)) {
          <input id="noteEditorType" name="noteEditorType" type="hidden" value="<?php echo getEditorType();?>" />
          <?php if (getEditorType()=="CK") {?> 
           <textarea style="width:<?php echo $detailWidth;?>px; height:<?php echo $detailHeight;?>px"
-          name="noteNote" id="noteNote"><?php echo htmlspecialchars($note->note);?></textarea>
+          name="noteNote" id="noteNote"><?php 
+	          if (!isTextFieldHtmlFormatted($note->note)) {
+	          	echo formatPlainTextForHtmlEditing($note->note);
+	          } else {
+	          	echo htmlspecialchars($note->note);
+	          } ?></textarea>
         <?php } else if (getEditorType()=="text"){
           if (isTextFieldHtmlFormatted($note->note)) {
           	$text=new Html2Text($note->note);
@@ -99,7 +104,12 @@ if (array_key_exists('screenHeight',$_SESSION)) {
               ,onBlur:function(event){top.editorBlur('noteNoteEditor',this);}
               ,extraPlugins:['dijit._editor.plugins.AlwaysShowToolbar','foreColor','hiliteColor']"
               style="color:#606060 !important; background:none;padding:3px 0px 3px 3px;margin-right:2px;width:<?php echo $detailWidth;?>px;overflow:auto;"
-              class="input"><?php echo $note->note;?></div>
+              class="input"><?php 
+			          if (!isTextFieldHtmlFormatted($note->note)) {
+			          	echo formatPlainTextForHtmlEditing($note->note,'single');
+			          } else {
+			          	echo $note->note;
+			          } ?></div>
         <?php }?>
           <table width="100%"><tr height="25px">
             <td width="33%" class="smallTabLabel" >
