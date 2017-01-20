@@ -2869,4 +2869,9 @@ function isTextFieldHtmlFormatted($val) {
 		return false;
 	}
 }
+// Replace nl to <br/> : will remove nl, what nl2br does not do
+function nl2brForPlainText($val) {
+	if (isTextFieldHtmlFormatted($val)) return $val;
+	return str_replace(array("\r\n","\r","\n"),'',nl2br($val));
+}
 ?>
