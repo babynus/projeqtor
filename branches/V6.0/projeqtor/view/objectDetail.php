@@ -1807,7 +1807,12 @@ scriptLog("drawTableFromObject(obj, included=$included, parentReadOnly=$parentRe
           echo $name;
           echo $attributes;
           echo '>';
-          echo htmlspecialchars($val);
+          if (!isTextFieldHtmlFormatted($val)) {
+          	echo formatPlainTextForHtmlEditing($val,'single');
+          } else {
+          	echo ($val);
+          }
+          
           echo '</textarea>';
           if (isIE() and ! $val) $val='<div></div>'; 
           echo '<div style="text-align:left;font-weight:normal; width:300px;" class="tabLabel">' . htmlEncode($obj->getColCaption($col),'stipAllTags') . '</div>';
@@ -1878,7 +1883,11 @@ scriptLog("drawTableFromObject(obj, included=$included, parentReadOnly=$parentRe
           //echo '  <script type="dojo/connect" event="onKeyPress" args="evt">';
           //echo '   alert("OK");';
           //echo '  </script>';
-          echo  str_replace( "\n", '<br/>', $val );
+          if (!isTextFieldHtmlFormatted($val)) {
+          	echo formatPlainTextForHtmlEditing($val,'single');
+          } else {
+          	echo ($val);
+          }
           //echo $val;
           echo '</div>';
         }
