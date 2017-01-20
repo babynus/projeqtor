@@ -1833,9 +1833,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
           echo $attributes;
           echo '>';
           if (!isTextFieldHtmlFormatted($val)) {
-          	echo formatPlainTextForHtmlEditing($val);
+          	echo formatPlainTextForHtmlEditing($val,'single');
           } else {
-          	echo htmlspecialchars($val);
+          	echo ($val);
           }
           echo '</textarea>';
           if (isIE() and ! $val) $val='<div></div>'; 
@@ -1908,9 +1908,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
           //echo '   alert("OK");';
           //echo '  </script>';
           if (!isTextFieldHtmlFormatted($val)) {
-          	echo formatPlainTextForHtmlEditing($val);
+          	echo formatPlainTextForHtmlEditing($val,'single');
           } else {
-          	echo htmlspecialchars($val);
+          	echo ($val);
           }
           //echo $val;
           echo '</div>';
