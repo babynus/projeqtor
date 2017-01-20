@@ -2872,7 +2872,7 @@ function formatBigButton($class) {
   return $result;
 }
 function isTextFieldHtmlFormatted($val) {
-	if (strtolower(substr($val,0,5))=='<div>' and strtolower(substr($val,-6))=='</div>') {
+	if (strtolower(substr($val,0,5))=='<div>' and strtolower(substr(rtrim($val,"\r\n"),-6))=='</div>') {
 		return true;
 	} else {
 		return false;
@@ -2882,4 +2882,9 @@ function isTextFieldHtmlFormatted($val) {
 function nl2brForPlainText($val) {
 	if (isTextFieldHtmlFormatted($val)) return $val;
 	return str_replace(array("\r\n","\r","\n"),'',nl2br($val));
+}
+function formatPlainTextForHtmlEditing($val,$mode="full") {
+	if ($mode=='full') return nl2br(htmlspecialchars(htmlEncode(str_replace(array('<br>','<br/>','<br />'),"\n",$val))));
+	else if ($mode=='single') return nl2br(htmlEncode(str_replace(array('<br>','<br/>','<br />'),"\n",$val)));
+	else return $val;
 }
