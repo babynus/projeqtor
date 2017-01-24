@@ -1467,7 +1467,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
             if ($obj->id) {
               $critFld='idProject';
               $critVal=$obj->idProject;
-            } else if ($obj->isAttributeSetToField('idProject', 'required')) {
+            } else if ($obj->isAttributeSetToField('idProject', 'required') or (array_key_exists('project', $_SESSION) and $_SESSION ['project'] != '*')) {
               if (array_key_exists('project', $_SESSION) and $_SESSION ['project'] != '*') {
                 $critFld='idProject';
                 $critVal=$_SESSION ['project'];
