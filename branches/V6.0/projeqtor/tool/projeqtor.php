@@ -2875,7 +2875,7 @@ function formatBigButton($class) {
 }
 function isTextFieldHtmlFormatted($val) {
   $test=strtolower(substr(ltrim($val),0,10));
-	if (substr($test,0,5)=='<div>' or substr($test,0,4)=='<ul>' or substr($test,0,4)=='<ol>') {
+	if (substr($test,0,1)=='<') {
 		return true;
 	} else {
 		return false;
