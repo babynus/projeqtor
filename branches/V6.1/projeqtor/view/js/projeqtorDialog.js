@@ -7204,6 +7204,13 @@ function getLocalLocation(){
     return dojo.locale.split('-')[0]+"_"+dojo.locale.split('-')[1].toUpperCase();
   }
 }
+function getLocalScaytAutoStartup() {
+  if (typeof scaytAutoStartup == "undefined" || scaytAutoStartup===null || scaytAutoStartup==='') {
+    return true;
+  } else {
+    return scaytAutoStartup;
+  }
+}
 
 function commentImputationSubmit(year,week,idAssignment,refType,refId){
   var text=dijit.byId('commentImputation').get('value');
