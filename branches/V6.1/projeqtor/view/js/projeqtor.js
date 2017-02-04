@@ -3673,21 +3673,24 @@ function ckEditorReplaceAll() {
 }
 var maxEditorHeight = Math.round(screen.height * 0.6);
 
-
-
+var currentEditorIsNote=false;
 function ckEditorReplaceEditor(editorName, numEditor) {
   var height = 200;
   if (dojo.byId("ckeditorHeight"+numEditor)) {
     height=dojo.byId("ckeditorHeight"+numEditor).value;
   }
-  if (editorName == 'noteNote')
+  currentEditorIsNote=false;
+  if (editorName == 'noteNote') {
     height = maxEditorHeight - 150;
+    currentEditorIsNote=true;
+  }
   var readOnly = false;
   if (dojo.byId('ckeditor' + numEditor + 'ReadOnly')
       && dojo.byId('ckeditor' + numEditor + 'ReadOnly').value == 'true') {
     readOnly = true;
   }
   autofocus = (editorName == 'noteNote') ? true : false;
+  
   editorArray[numEditor] = CKEDITOR.replace(editorName, {
     customConfig : 'projeqtorConfig.js',
     filebrowserUploadUrl : '../tool/uploadImage.php',
