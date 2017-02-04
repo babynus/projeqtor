@@ -4667,7 +4667,6 @@ function consoleLogHistory(msg) {
 }
 
 function stockHistory(curClass, curId, currentScreen) {
-  consoleLogHistory("before");
   if (!currentScreen) {
     currentScreen="object";
     if (dojo.byId("objectClassManual")){
@@ -4690,8 +4689,6 @@ function stockHistory(curClass, curId, currentScreen) {
   if (historyPosition == historyTable.length - 1) {
     disableWidget('menuBarRedoButton');
   }
-  consoleLogHistory("after");
-  consoleLogHistory(currentScreen);
 }
 
 
