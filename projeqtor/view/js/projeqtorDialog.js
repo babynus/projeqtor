@@ -889,7 +889,7 @@ function noteSelectPredefinedText(idPrefefinedText) {
     handleAs : "text",
     load : function(data) {
       var editorType=dojo.byId("noteEditorType").value;
-      if (editorType=="CK") { // CKeditor type
+      if (editorType=="CK" || editorType=="CKInline") { // CKeditor type
         CKEDITOR.instances['noteNote'].setData(data);
       } else if (editorType=="text") { 
         dijit.byId('noteNote').set('value', data);
@@ -939,7 +939,7 @@ function editNote(noteId, privacy) {
  */
 function saveNote() {
   var editorType=dojo.byId("noteEditorType").value;
-  if (editorType=="CK") {
+  if (editorType=="CK" || editorType=="CKInline") {
     noteEditor=CKEDITOR.instances['noteNote'];
     noteEditor.updateElement();
     var tmpCkEditor=noteEditor.document.getBody().getText();
@@ -949,14 +949,14 @@ function saveNote() {
       showAlert(msg);
       return;
     }
-  } else if (editorType=="CK") {
+/*  } else if (editorType=="CK") {
     if (dijit.byId("noteNote").getValue() == '') {
       dijit.byId("noteNote").set("class", "input required");
       var msg=i18n('messageMandatory', new Array(i18n('Note')));
       dijit.byId("noteNote").focus();
       showAlert(msg);
       return;
-    }
+    }*/
   } else if (dijit.byId("noteNoteEditor")) {
     if (dijit.byId("noteNote").getValue() == '') {
       dijit.byId("noteNoteEditor").set("class", "input required");

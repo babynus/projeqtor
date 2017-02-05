@@ -2161,7 +2161,7 @@ abstract class SqlElement {
 				// get all data fetched
 				foreach ($this as $col_name => $col_value) {
 					if (substr($col_name,0,1)=="_") {
-						$colName=substr($col_name,1);
+					  $colName=substr($col_name,1);
 						if (is_array($this->{$col_name}) and ucfirst($colName) == $colName and ! $withoutDependentObjects) {
 							if (substr($colName,0,4)=="Link") {
 								$linkClass=null;
@@ -2304,7 +2304,7 @@ abstract class SqlElement {
 			// set the reference data
 			// build query
 			$query = "select id from " . $obj->getDatabaseTableName();
-			if (property_exists($objClass, 'id'.get_class($this))) {
+			if (property_exists($objClass, 'id'.get_class($this)) and $objClass!='Note' and $objClass!='Attachment' and $objClass!='Link' ) {
 				$query .= " where " . $obj->getDatabaseColumnName('id' . get_class($this)) . "= " . Sql::str($curId) . " ";
 			} else {
 				$refType=get_class($this);
