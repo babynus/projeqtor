@@ -3791,8 +3791,9 @@ abstract class SqlElement {
 		$message .
       '</body>' . 
       '</html>';
+    $references = $objectClass . "-" . $this->id;
 		$message = wordwrap($message, 70); // wrapt text so that line do not exceed 70 cars per line
-		$resultMail=sendMail($dest, $title, $message, $this);
+		$resultMail=sendMail($dest, $title, $message, $this, null, null, null , null, $references);
 		if ($directStatusMail) {
 			if ($resultMail) {
 				return array('result'=>'OK', 'dest'=>$dest);
