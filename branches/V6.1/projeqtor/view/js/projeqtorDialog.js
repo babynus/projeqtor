@@ -4291,6 +4291,9 @@ function refreshList(field, param, paramVal, selected, destination, required, pa
   if (param) {
     urlList+='&critField=' + param;
     urlList+='&critValue=' + paramVal;
+    if(Array.isArray(paramVal)) {
+      urlList += '&critArray=1';
+    }
   }
   if (param1) {
     urlList+='&critField1=' + param1;
@@ -4299,7 +4302,7 @@ function refreshList(field, param, paramVal, selected, destination, required, pa
   if (selected) {
     urlList+='&selected=' + selected;
   }
-  if (required) {
+  if (required || Array.isArray(paramVal)) {
     urlList+='&required=true';
   }
   if (objectClass) urlList+='&objectClass='+objectClass;
@@ -4314,7 +4317,8 @@ function refreshList(field, param, paramVal, selected, destination, required, pa
   } else {
     var mySelect=dijit.byId(field);
   }
-  mySelect.set('store', store);
+  //mySelect.set('store', store);
+  mySelect.set({labelAttr: 'name', store: store});
   store.query({
     id : "*"
   }).then(function(items) {
