@@ -634,7 +634,7 @@ foreach ($listParam as $param) {
     <td>
     <select data-dojo-type="<?php echo (($param->multiple == 1) ? 'dojox.form.CheckedMultiSelect' : 'dijit.form.FilteringSelect') ?>" class="input" 
     <?php echo ($param->multiple == 1) ? '' : autoOpenFilteringSelect(); ?>
-       style="width: 200px<?php echo (($param->multiple == 1) ? '!important; height: 50px" multiple="true' : '') ?>"
+       style="width: 200px<?php echo (($param->multiple == 1) ? '!important; height: 90px" multiple="true' : '') ?>"
        id="<?php echo $param->name;?>" name="<?php echo $param->name . (($param->multiple == 1) ? '[]' : '');?>"
      >
        <?php htmlDrawOptionForReference($param->name, $defaultValue, null, ($class=='Baseline' || $param->multiple)); ?>

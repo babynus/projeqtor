@@ -75,7 +75,7 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `hasCsv`, `sortOrder`, `idle`, `orientation`) VALUES 
 (63, 'reportMacroJoblist', 4, 'joblist.php', 1, 460, 0, 'L');
 INSERT INTO `${prefix}reportparameter` (`id`, `idReport`, `name`, `paramType`, `sortOrder`, `idle`, `defaultValue`, `multiple`) VALUES 
-(913, 63, 'idActivity', 'activityList', 20, 0, NULL, 0),
+(913, 63, 'idActivity', 'activityList', 20, 0, NULL, 1),
 (912, 63, 'idProject', 'projectList', 10, 0, 'currentProject', 0);
 INSERT INTO `${prefix}habilitationreport` (`idProfile`,`idReport`,`allowAccess`) VALUES
 (1,63,1),

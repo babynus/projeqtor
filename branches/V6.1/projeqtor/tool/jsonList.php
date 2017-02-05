@@ -255,7 +255,7 @@
       if ($dataType=="idProject") { $wbsList=SqlList::getList('Project','sortOrder',$selected, true);} 
       $nbRows=0;
       // return result in json format
-      if (! array_key_exists('required', $_REQUEST)) {
+      if (! array_key_exists('required', $_REQUEST) and ! isset($_REQUEST['critArray']) ) {
       	echo '{id:" ", name:""}';
         $nbRows+=1;
       }
