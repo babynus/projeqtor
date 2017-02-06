@@ -30,7 +30,7 @@
 require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
 
-$reorg=(isset($paramReorg) and $paramReorg==true)?true:false; // For testing purpose until it works fine, set it to false for deployment
+$reorg=(isset($paramReorg) and $paramReorg==false)?false:true;
 $leftPane="";
 $rightPane="";
 $extraPane="";
@@ -2539,7 +2539,7 @@ function drawBillLinesFromObject($obj, $refresh=false) {
   }
   if (!$print) {
     echo '<input type="hidden" id="billLineIdle" value="' . htmlEncode($obj->idle) . '" />';
-    //echo '<table width="100%">'; 
+    if ($refresh) echo '<table width="100%">'; 
   }
   echo '<tr>';
   $billingType='M';
@@ -2610,7 +2610,7 @@ function drawBillLinesFromObject($obj, $refresh=false) {
   echo '<td class="noteDataClosetable">&nbsp;</td>';
   echo '</tr>';
   if (!$print) {
-    //echo '</table>';
+    if ($refresh) echo '</table>';
   }
 }
 
