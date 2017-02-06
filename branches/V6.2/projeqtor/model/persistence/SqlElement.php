@@ -910,8 +910,8 @@ abstract class SqlElement {
 	    }
 	  }
 	  if ( isset($_REQUEST['directAccessIndex'])) {
-	    if (isset($_SESSION['directAccessIndex'][$_REQUEST['directAccessIndex'].(($isComboDetail)?'_comboDetail':'')]) ) {
-  	    $testObject=$_SESSION['directAccessIndex'][$_REQUEST['directAccessIndex'].(($isComboDetail)?'_comboDetail':'')];
+	    if ( sessionTableValueExist('directAccessIndex', $_REQUEST['directAccessIndex'].(($isComboDetail)?'_comboDetail':'')) ) {
+  	    $testObject=getSessionTableValue('directAccessIndex', $_REQUEST['directAccessIndex'].(($isComboDetail)?'_comboDetail':''));
   	    if (!$objectClass or get_class($testObject)==$objectClass) {
   	      $oldObject=$testObject;
   	    } else if ($throwError) {
@@ -922,8 +922,8 @@ abstract class SqlElement {
 	      throwError('currentObject parameter not found in SESSION');
 	      return null;
 	    }
-	  } else if (array_key_exists('currentObject'.(($isComboDetail)?'_comboDetail':''),$_SESSION)) {
-	    $testObject = $_SESSION['currentObject'.(($isComboDetail)?'_comboDetail':'')];
+	  } else if (sessionValueExists('currentObject'.(($isComboDetail)?'_comboDetail':'')) ) {
+	    $testObject = getSessionValue('currentObject'.(($isComboDetail)?'_comboDetail':''));
 	    if (!$objectClass or get_class($testObject)==$objectClass) {
 	      $oldObject=$testObject;
 	    } else if ($throwError) {
@@ -938,25 +938,27 @@ abstract class SqlElement {
 	}
 	public static function setCurrentObject ($obj, $isComboDetail=false) {
 	  if (isset($_REQUEST ['directAccessIndex'])) {
-	    if (!isset($_SESSION ['directAccessIndex'])) $_SESSION ['directAccessIndex']=array();
+	    if (!sessionValueExists('directAccessIndex')) {
+	      setSessionValue('directAccessIndex', array());
+	    }
 	    if ($isComboDetail) {
-	      $_SESSION ['directAccessIndex'][$_REQUEST ['directAccessIndex'].'_comboDetail']=$obj;
+	      setSessionTableValue('directAccessIndex', $_REQUEST ['directAccessIndex'].'_comboDetail', $obj);
 	    } else {
-	      $_SESSION ['directAccessIndex'][$_REQUEST ['directAccessIndex']]=$obj;
+	      setSessionTableValue('directAccessIndex', $_REQUEST ['directAccessIndex'], $obj);
 	    }
 	  } else {
 	    if ($isComboDetail) {
-	      $_SESSION ['currentObject_comboDetail']=$obj;
+	      setSessionValue('currentObject_comboDetail', $obj);
 	    } else {
-	      $_SESSION ['currentObject']=$obj;
+	      setSessionValue('currentObject', $obj);
 	    }
 	  }
 	}
 	public static function unsetCurrentObject () {
-	  if (isset($_REQUEST ['directAccessIndex']) and isset($_SESSION ['directAccessIndex'][$_REQUEST ['directAccessIndex']])) {
-	    unset($_SESSION ['directAccessIndex'][$_REQUEST ['directAccessIndex']]);
-	  } else if (isset($_SESSION ['currentObject'])){
-	    unset($_SESSION ['currentObject']);
+	  if (isset($_REQUEST ['directAccessIndex']) and  sessionTableValueExist('directAccessIndex', $_REQUEST ['directAccessIndex'])) {
+	    unsetSessionTable('directAccessIndex', $_REQUEST ['directAccessIndex']);
+	  } else if (sessionValueExists('currentObject')){
+	    unsetSessionValue('currentObject');
 	  }
 	}
 	/** =========================================================================

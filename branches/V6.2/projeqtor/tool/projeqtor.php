@@ -142,6 +142,10 @@ if (false === function_exists('lcfirst')) {
 /*
  * ============================================================================ main controls ============================================================================
  */
+debugLog("\n\n\n\n\================================================================================================");
+debugLog($_SESSION);
+debugLog("\n\n");
+
 
 // Check 'magic_quotes' : must be disabled ====================================
 if (get_magic_quotes_runtime ()) {
@@ -161,8 +165,8 @@ if (! (isset ( $maintenance ) and $maintenance) and ! (isset ( $batchMode ) and 
       throw new Exception ( i18n ( "invalidAccessAttempt" ) );
     }
     $oldRoot = "";
-    if (array_key_exists ( 'appRoot', $_SESSION )) {
-      $oldRoot = $_SESSION ['appRoot'];
+    if (sessionValueExists('appRoot')) {
+      $oldRoot = getSessionValue('appRoot');
     }
     if ($oldRoot != "" and $oldRoot != getAppRoot ()) {
       $appRoot = getAppRoot ();
@@ -263,27 +267,27 @@ if (! (isset ( $maintenance ) and $maintenance) and ! (isset ( $batchMode ) and 
 function setupLocale() {
   global $currentLocale, $browserLocale, $browserLocaleDateFormat;
   $paramDefaultLocale = Parameter::getGlobalParameter ( 'paramDefaultLocale' );
-  if (isset ( $_SESSION ['currentLocale'] )) {
+  if (sessionValueExists('currentLocale')) {
     // First fetch in Session (filled in at login depending on user parameter)
-    $currentLocale = $_SESSION ['currentLocale'];
+    $currentLocale = getSessionValue('currentLocale');
   } else if (isset ( $_REQUEST ['currentLocale'] )) {
     // Second fetch from request (for screens before user id identified)
     $currentLocale = trim($_REQUEST ['currentLocale']);
     Security::checkValidLocale($currentLocale);
-    $_SESSION ['currentLocale'] = $currentLocale;
+    setSessionValue('currentLocale', $currentLocale);
     $i18nMessages = null; // Should be null at this moment, just to be sure
   } else {
     // none of the above methods worked : get the default one form parameter file
     $currentLocale = $paramDefaultLocale;
   }
-  if (isset ( $_SESSION ['browserLocale'] )) {
-    $browserLocale = $_SESSION ['browserLocale'];
+  if (sessionValueExists('browserLocale')) {
+    $browserLocale = getSessionValue('browserLocale');
   } else {
     $browserLocale = $currentLocale;
   }
-  $_SESSION ['lang'] = $currentLocale; // Must be kept for user parameter screen initialization
-  if (isset ( $_SESSION ['browserLocaleDateFormat'] )) {
-    $browserLocaleDateFormat = $_SESSION ['browserLocaleDateFormat'];
+  setSessionValue('lang', $currentLocale); // Must be kept for user parameter screen initialization
+  if (sessionValueExists('browserLocaleDateFormat')) {
+    $browserLocaleDateFormat = getSessionValue('browserLocaleDateFormat');
   }
 }
 
@@ -719,25 +723,25 @@ function securityCheckDisplayMenu($idMenu, $class = null) {
  * @return the list of projects as a string of id
  */
 function getVisibleProjectsList($limitToActiveProjects = true, $idProject = null) {
-  if (! array_key_exists ( 'project', $_SESSION )) {
+  if (! sessionValueExists('project')) {
     return '( 0 )';
   }
   if ($idProject) {
     $project = $idProject;
   } else {
-    $project = $_SESSION ['project'];
+    $project = getSessionValue('project');
   }
   $keyVPL = (($limitToActiveProjects) ? 'TRUE' : 'FALSE') . '_' . (($project) ? $project : '*');
-  if (! isset ( $_SESSION ['visibleProjectsList'] )) {
-    $_SESSION ['visibleProjectsList'] = array ();
+  if (! sessionValueExists('visibleProjectsList')) {
+    setSessionValue('visibleProjectsList', array ());
   }
-  if (isset ( $_SESSION ['visibleProjectsList'] [$keyVPL] )) {
-    return $_SESSION ['visibleProjectsList'] [$keyVPL];
+  if ( sessionTableValueExist('visibleProjectsList', $keyVPL)) {
+    getSessionTableValue('visibleProjectsList', $keyVPL);
   }
   if ($project == "*" or $project == '') {
     $user = getSessionUser();
-    $_SESSION ['visibleProjectsList'] [$keyVPL] = transformListIntoInClause ( $user->getVisibleProjects ( $limitToActiveProjects ) );
-    return $_SESSION ['visibleProjectsList'] [$keyVPL];
+    setSessionTableValue('visibleProjectsList', $keyVPL, transformListIntoInClause ( $user->getVisibleProjects ( $limitToActiveProjects ) ));
+    getSessionTableValue('visibleProjectsList', $keyVPL);
   }
   $prj = new Project ( $project );
   $subProjectsList = $prj->getRecursiveSubProjectsFlatList ( $limitToActiveProjects );
@@ -749,7 +753,7 @@ function getVisibleProjectsList($limitToActiveProjects = true, $idProject = null
     $result .= ', ' . $id;
   }
   $result .= ')';
-  $_SESSION ['visibleProjectsList'] [$keyVPL] = $result;
+  setSessionTableValue('visibleProjectsList', $keyVPL, $result);
   return $result;
 }
 
@@ -869,14 +873,14 @@ function getTheme() {
   if (isset ( $defaultTheme )) {
     $theme = $defaultTheme;
   }
-  if (array_key_exists ( 'theme', $_SESSION ) and trim($_SESSION ['theme'])) {
-    $theme = $_SESSION ['theme'];
+  if (sessionValueExists('theme') and trim(getSessionValue('theme'))) {
+    $theme = getSessionValue('theme');
   }
   if ($theme == "random") {
     $themes = array_keys ( Parameter::getList ( 'theme' ) );
     $rnd = rand ( 0, count ( $themes ) - 2 );
     $theme = $themes [$rnd];
-    $_SESSION ['theme'] = $theme; // keep value in session to have same theme during all session...
+    setSessionValue('theme', $theme); // keep value in session to have same theme during all session...
   }
   return $theme;
 }
@@ -1663,7 +1667,7 @@ function securityGetAccessRightYesNo($menuName, $accessType, $obj = null, $user 
           }
         } else if (property_exists ( $obj, 'idProject' )) {
           $limitToActiveProjects = (get_class ( $obj ) == 'Affectation') ? false : true;
-          if (isset ( $_SESSION ['projectSelectorShowIdle'] ) and $_SESSION ['projectSelectorShowIdle'] == 1)
+          if (sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle') == 1)
             $limitToActiveProjects = false;
           if (array_key_exists ( $obj->idProject, $user->getAffectedProjects ( $limitToActiveProjects ) ) ) {
             $accessRight = 'YES';
@@ -1697,7 +1701,7 @@ function securityGetAccessRightYesNo($menuName, $accessType, $obj = null, $user 
           }
         } else if (property_exists ( $obj, 'idProject' )) {
           $limitToActiveProjects = (get_class ( $obj ) == 'Affectation') ? false : true;
-          if (isset ( $_SESSION ['projectSelectorShowIdle'] ) and $_SESSION ['projectSelectorShowIdle'] == 1)
+          if (sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle') == 1)
             $limitToActiveProjects = false;
           if (array_key_exists ( $obj->idProject, $user->getAffectedProjects ( $limitToActiveProjects ) ) or $obj->id == null) {
             $accessRight = 'YES';
@@ -2397,10 +2401,10 @@ function getAppRoot() {
 
 function getPrintInNewWindow($mode = 'print') {
   $printInNewWindow = ($mode == 'pdf') ? true : false;
-  if (array_key_exists ( $mode . 'InNewWindow', $_SESSION )) {
-    if ($_SESSION [$mode . 'InNewWindow'] == 'YES') {
+  if (sessionValueExists($mode . 'InNewWindow')) {
+    if (getSessionValue($mode . 'InNewWindow') == 'YES') {
       $printInNewWindow = true;
-    } else if ($_SESSION [$mode . 'InNewWindow'] == 'NO') {
+    } else if (getSessionValue($mode . 'InNewWindow') == 'NO') {
       $printInNewWindow = false;
     }
   }
@@ -2652,8 +2656,11 @@ function unsetSessionValue($code, $global=false) {
   } else {
     $projeqtorSession = 'ProjeQtOr_' . $paramDbName . (($paramDbPrefix) ? '_' . $paramDbPrefix : '');
   }
+  if(!isset ( $_SESSION [$projeqtorSession])){
+    return null;
+  }
   if (isset ( $_SESSION [$projeqtorSession] [$code] )) {
-    unset($_SESSION [$projeqtorSession] [$code]);
+    unset($_SESSION [$projeqtorSession][$code]);
   }
 }
 function getSessionValue($code, $default = null, $global=false) {
@@ -2673,6 +2680,89 @@ function getSessionValue($code, $default = null, $global=false) {
   }
   return $_SESSION [$projeqtorSession] [$code];
 }
+
+//Gautier #2512
+function sessionValueExists($code,$global=false) {
+  global $paramDbName, $paramDbPrefix;
+  if ($global) {
+    $projeqtorSession = 'ProjeQtOr';
+  } else {
+    $projeqtorSession = 'ProjeQtOr_' . $paramDbName . (($paramDbPrefix) ? '_' . $paramDbPrefix : '');
+  }
+  if (! isset($_SESSION [$projeqtorSession])) {
+    return false;
+  }
+  if (isset($_SESSION[$projeqtorSession][$code])) {
+    return true;
+  } else {
+    return  false;
+  }
+}
+function setSessionTableValue($table,$code,$val,$global=false){
+  global $paramDbName, $paramDbPrefix;
+  if ($global) {
+    $projeqtorSession = 'ProjeQtOr';
+  } else {
+    $projeqtorSession = 'ProjeQtOr_' . $paramDbName . (($paramDbPrefix) ? '_' . $paramDbPrefix : '');
+  }
+  if (! isset ( $_SESSION [$projeqtorSession][$table] )) {
+    $_SESSION [$projeqtorSession][$table] = array ();
+  }
+  $_SESSION [$projeqtorSession][$table][$code]=$val;
+}
+function resetSession(){
+  global $paramDbName, $paramDbPrefix;
+  if ($global) {
+    $projeqtorSession = 'ProjeQtOr';
+  } else {
+    $projeqtorSession = 'ProjeQtOr_' . $paramDbName . (($paramDbPrefix) ? '_' . $paramDbPrefix : '');
+  }
+  $_SESSION[$projeqtorSession]=array();
+}
+function getSessionTableValue($table,$code,$default = null,$global=false){
+  global $paramDbName, $paramDbPrefix;
+  if ($global) {
+    $projeqtorSession = 'ProjeQtOr';
+  } else {
+    $projeqtorSession = 'ProjeQtOr_' . $paramDbName . (($paramDbPrefix) ? '_' . $paramDbPrefix : '');
+  }
+  if (! isset ( $_SESSION [$projeqtorSession] )) {
+    return $default;
+  }
+  if (! isset ( $_SESSION [$projeqtorSession] [$table] [$code] )) {
+    return $default;
+  }
+  return $_SESSION [$projeqtorSession] [$table] [$code];
+}
+function sessionTableValueExist($table,$code,$global=false){
+  global $paramDbName, $paramDbPrefix;
+  if ($global) {
+    $projeqtorSession = 'ProjeQtOr';
+  } else {
+    $projeqtorSession = 'ProjeQtOr_' . $paramDbName . (($paramDbPrefix) ? '_' . $paramDbPrefix : '');
+  }
+  if (! isset($_SESSION [$projeqtorSession])) {
+    return false;
+  }
+  if (isset($_SESSION [$projeqtorSession][$table][$code])) {
+    return true;
+  } else {
+    return  false;
+  }
+}
+function unsetSessionTable($table,$code,$global=false){
+  global $paramDbName, $paramDbPrefix;
+  if ($global) {
+    $projeqtorSession = 'ProjeQtOr';
+  } else {
+    $projeqtorSession = 'ProjeQtOr_' . $paramDbName . (($paramDbPrefix) ? '_' . $paramDbPrefix : '');
+  }
+  if (isset ($_SESSION [$projeqtorSession][$table][$code])){
+    unset($_SESSION [$projeqtorSession][$table][$code]);
+  }
+}
+//end #2512
+
 // Functions to get and set current user value from session
 function getSessionUser() {
   $user=getSessionValue('user');
@@ -2912,16 +3002,16 @@ function formatPlainTextForHtmlEditing($val,$mode="full") {
 	else return $val;
 }
 function formatAnyTextToPlainText($val,$removeNl=true) {
-  if (isTextFieldHtmlFormatted($val)) {
-    $text=new Html2Text($val);
-    $val=$text->getText();
-    echo htmlEncode($val);
-  } else if ($removeNl) {
-    echo str_replace(array("\n",'<br>','<br/>','<br />'),array("","\n","\n","\n"),$val);
-  } else {
-    echo str_replace(array('<br>','<br/>','<br />'),array("\n","\n","\n"),$val);
-  }
+	if (isTextFieldHtmlFormatted($val)) {
+	 	$text=new Html2Text($val);
+	  $val=$text->getText();
+	  echo htmlEncode($val);
+	} else if ($removeNl) {
+	  echo str_replace(array("\n",'<br>','<br/>','<br />'),array("","\n","\n","\n"),$val);
+	} else {
+	  echo str_replace(array('<br>','<br/>','<br />'),array("\n","\n","\n"),$val);
+	}
 }
 function br2nl($val) {
-  return str_replace(array('<br>','<br/>','<br />'),array("\n","\n","\n"),$val);
+	return str_replace(array('<br>','<br/>','<br />'),array("\n","\n","\n"),$val);
 }
