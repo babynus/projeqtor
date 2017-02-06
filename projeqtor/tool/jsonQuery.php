@@ -101,7 +101,7 @@
     }
     
     // --- Should idle projects be shown ?
-    $showIdleProjects=(! $comboDetail and isset($_SESSION['projectSelectorShowIdle']) and $_SESSION['projectSelectorShowIdle']==1)?1:0;
+    $showIdleProjects=(! $comboDetail and sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle')==1)?1:0;
     // --- "show idle checkbox is checked ?
     if (! isset($showIdle)) $showIdle=false;
     if (!$showIdle and ! array_key_exists('idle',$_REQUEST) and ! $quickSearch) {
@@ -167,8 +167,8 @@
         $queryWhere.= ')';
     }  
     // --- Restrict to allowed project taking into account selected project : for all list that are project dependant
-    if (property_exists($obj, 'idProject') and array_key_exists('project',$_SESSION)) {
-        if ($_SESSION['project']!='*') {
+    if (property_exists($obj, 'idProject') and sessionValueExists('project')) {
+        if (getSessionValue('project')!='*') {
           $queryWhere.= ($queryWhere=='')?'':' and ';
           if ($objectClass=='Project') {
             $queryWhere.=  $table . '.id in ' . getVisibleProjectsList(! $showIdleProjects) ;
@@ -221,9 +221,9 @@
     }
     // --- When browsing Docments throught directory view, limit list of Documents to currently selected Directory
     if ($objectClass=='Document') {
-    	if (array_key_exists('Directory',$_SESSION) and ! $quickSearch) {
+    	if (sessionValueExists('Directory') and ! $quickSearch) {
     		$queryWhere.= ($queryWhere=='')?'':' and ';
-        $queryWhere.= $obj->getDatabaseTableName() . '.' . $obj->getDatabaseColumnName('idDocumentDirectory') . "='" . $_SESSION['Directory'] . "'";
+        $queryWhere.= $obj->getDatabaseTableName() . '.' . $obj->getDatabaseColumnName('idDocumentDirectory') . "='" . getSessionValue('Directory') . "'";
     	}
     }
     
