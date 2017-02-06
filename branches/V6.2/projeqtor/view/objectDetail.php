@@ -168,8 +168,8 @@ if (array_key_exists('destinationWidth', $_REQUEST)) {
   $width-=30;
   $displayWidth=$width . 'px';
 } else {
-  if (array_key_exists('screenWidth', $_SESSION)) {
-    $detailWidth=round(($_SESSION ['screenWidth'] * 0.8) - 15); // 80% of screen - split barr - padding (x2)
+  if (sessionValueExists('screenWidth')) {
+    $detailWidth=round((getSessionValue('screenWidth') * 0.8) - 15); // 80% of screen - split barr - padding (x2)
   } else {
     $displayWidth='98%';
   }
@@ -443,8 +443,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
   if (array_key_exists('destinationWidth', $_REQUEST)) {
     $detailWidth=$_REQUEST ['destinationWidth'];
   } else {
-    if (array_key_exists('screenWidth', $_SESSION)) {
-      $detailWidth=round(($_SESSION ['screenWidth'] * 0.8) - 15); // 80% of screen - split barr - padding (x2)
+    if (sessionValueExists('screenWidth')) {
+      $detailWidth=round((getSessionValue('screenWidth') * 0.8) - 15); // 80% of screen - split barr - padding (x2)
     }
   }
   // Set some king of responsive design : number of display columns depends on screen width
@@ -494,11 +494,10 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
       }
     }
   }
-  //if ($included) return;
   $extraHiddenFields=$obj->getExtraHiddenFields( ($objType)?$objType->id:null );
   if (!$included) $section='';
   $nbLineSection=0;
-
+  
   if (SqlElement::is_subclass_of($obj, 'PlanningElement')) {
    	$obj->setVisibility();
     $workVisibility=$obj->_workVisibility;
@@ -633,7 +632,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
         $section=substr($col, 5);
       } else {
         $section='';
-      }   
+      }    
       // Determine number of items to be displayed in Header
       $sectionField='_'.$section;
       $sectionFieldDep='_Dependency_'.ucfirst($section);
@@ -1298,8 +1297,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
         echo $attributes;
         echo ' invalidMessage="' . i18n('messageInvalidDate') . '"';
         echo ' type="text" maxlength="' . $dataLength . '" ';
-        if (isset($_SESSION ['browserLocaleDateFormatJs'])) {
-          echo ' constraints="{datePattern:\'' . $_SESSION ['browserLocaleDateFormatJs'] . '\'}" ';
+        if (sessionValueExists('browserLocaleDateFormatJs')) {
+          echo ' constraints="{datePattern:\'' . getSessionValue('browserLocaleDateFormatJs') . '\'}" ';
         }
         echo ' style="'.$negative.'width:' . $dateWidth . 'px; text-align: center;' . $specificStyle . '" class="input '.(($isRequired)?'required':'').' generalColClass '.$col.'Class" ';
         echo ' value="' . htmlEncode($val) . '" ';
@@ -1325,8 +1324,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
         echo $attributes;
         echo ' invalidMessage="' . i18n('messageInvalidDate') . '"';
         echo ' type="text" maxlength="10" ';
-        if (isset($_SESSION ['browserLocaleDateFormatJs'])) {
-          echo ' constraints="{datePattern:\'' . $_SESSION ['browserLocaleDateFormatJs'] . '\'}" ';
+        if (sessionValueExists('browserLocaleDateFormatJs')) {
+          echo ' constraints="{datePattern:\'' . getSessionValue('browserLocaleDateFormatJs') . '\'}" ';
         }
         echo ' style="width:' . $dateWidth . 'px; text-align: center;' . $specificStyle . '" class="input '.(($isRequired)?'required':'').' generalColClass '.$col.'Class" ';
         echo ' value="' . $valDate . '" ';
@@ -1436,8 +1435,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
         }
         if ($col == 'idProject') {
           if ($obj->id == null) {
-            if (array_key_exists('project', $_SESSION) and !$obj->$col) {
-              $val=$_SESSION ['project'];
+            if (sessionValueExists('project') and !$obj->$col ) {
+              $val=getSessionValue('project');
             }
             $accessRight=securityGetAccessRight('menu' . $classObj, 'create'); // TODO : study use of this variable...
           } else {
@@ -1473,10 +1472,10 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
             if ($obj->id) {
               $critFld='idProject';
               $critVal=$obj->idProject;
-            } else if ($obj->isAttributeSetToField('idProject', 'required') or (array_key_exists('project', $_SESSION) and $_SESSION ['project'] != '*')) {
-              if (array_key_exists('project', $_SESSION) and $_SESSION ['project'] != '*') {
+            } else if ($obj->isAttributeSetToField('idProject', 'required') or (sessionValueExists('project') and getSessionValue('project') != '*')) {
+              if (sessionValueExists('project') and getSessionValue('project') != '*') {
                 $critFld='idProject';
-                $critVal=$_SESSION ['project'];
+                $critVal=getSessionValue('project');
               } else {
                 $table=SqlList::getList('Project', 'name', null);
                 $restrictArray=array();

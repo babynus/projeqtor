@@ -785,28 +785,28 @@ class Parameter extends SqlElement {
       }
       return $nl;
     }
-  	if (!isset($_SESSION['globalParamatersArray'])) {
-      $_SESSION['globalParamatersArray']=array();
+  	if (!sessionValueExists('globalParamatersArray')) {
+  	  setSessionValue('globalParamatersArray', array());
       $p=new Parameter();
       $crit=" (idUser is null and idProject is null)";
       $lst=$p->getSqlElementsFromCriteria(null, false, $crit);
       foreach ($lst as $param) {
-        $_SESSION['globalParamatersArray'][$param->parameterCode]=$param->parameterValue;
+        setSessionTableValue('globalParamatersArray', $param->parameterCode, $param->parameterValue);
       }
   	}
-  	if (isset($_SESSION['globalParamatersArray'][$code])) {
-  		return $_SESSION['globalParamatersArray'][$code];
+  	if (sessionTableValueExist('globalParamatersArray', $code)) {
+  		getSessionTableValue('globalParamatersArray', $code);
   	} else {
       	return '';
     }
   }
 
   static public function getUserParameter($code) {
-  	if (!array_key_exists('userParamatersArray',$_SESSION)) {
-      $_SESSION['userParamatersArray']=array();
+  	if (!sessionValueExists('userParamatersArray')) {
+      setSessionValue('userParamatersArray', array());
     }
-    if (array_key_exists($code,$_SESSION['userParamatersArray'])) {
-      return $_SESSION['userParamatersArray'][$code];
+    if (sessionTableValueExist('userParamatersArray', $code)) {
+      getSessionTableValue('userParamatersArray', $code);
     } 
     $p=new Parameter();
     $user=getSessionUser();
@@ -823,7 +823,7 @@ class Parameter extends SqlElement {
       $val=self::getGlobalParameter($code);
     }
     if ($user->id) {
-      $_SESSION['userParamatersArray'][$code]=$val;
+      setSessionTableValue('userParamatersArray', $code, $val);
     }
     return $val;
   }
@@ -840,10 +840,10 @@ class Parameter extends SqlElement {
   	}
     $param->parameterValue=$value;
   	$param->save();
-  	if (!array_key_exists('userParamatersArray',$_SESSION)) {
-  		$_SESSION['userParamatersArray']=array();
+  	if (!sessionValueExists('userParamatersArray')) {
+  	  setSessionValue('userParamatersArray', array());
   	}
-  	$_SESSION['userParamatersArray'][$code]=$value;
+    setSessionTableValue('userParamatersArray', $code, $value);
   }
   static function storeGlobalParameter($code,$value) {
     $param=SqlElement::getSingleSqlElementFromCriteria('Parameter', array('idUser'=>null,'parameterCode'=>$code));
@@ -854,10 +854,10 @@ class Parameter extends SqlElement {
     }
     $param->parameterValue=$value;
     $param->save();
-    if (!array_key_exists('globalParamatersArray',$_SESSION)) {
-      $_SESSION['globalParamatersArray']=array();
+    if (!sessionValueExists('globalParamatersArray')) {
+      setSessionValue('globalParamatersArray', array());
     }
-    $_SESSION['globalParamatersArray'][$code]=$value;
+    setSessionTableValue('globalParamatersArray', $code, $value);
   }
   
   static public function getPlanningColumnOrder($all=false) {
@@ -1067,7 +1067,7 @@ class Parameter extends SqlElement {
   
   static public function clearGlobalParameters() {
   	// This function is call on most of admin functionalities or global parameters update, to force refresh of parameters
-  	unset($_SESSION['globalParamatersArray']);
+  	unsetSessionValue('globalParamatersArray');
     $aut=new Audit();
     $table=$aut->getDatabaseTableName();
     $sessionId=session_id();
@@ -1078,7 +1078,7 @@ class Parameter extends SqlElement {
   static public function refreshParameters() {
 scriptLog('refreshParameters()');
   	// This function is call when refresh of parameters is requested
-  	unset($_SESSION['globalParamatersArray']);
+  	unsetSessionValue('globalParamatersArray');
   }
   
   static public function getLangList() {

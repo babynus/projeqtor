@@ -51,9 +51,9 @@ if (array_key_exists('objectElementable',$_REQUEST)) {
 $obj=new $objectClass;
 
 if (array_key_exists('Directory', $_REQUEST)) {
-	$_SESSION['Directory']=$_REQUEST['Directory'];
+	setSessionValue('Directory', $_REQUEST['Directory']);
 } else {
-	unset($_SESSION['Directory']);
+  unsetSessionValue('Directory');
 }
 $multipleSelect=false;
 if (array_key_exists('multipleSelect', $_REQUEST)) {
@@ -61,7 +61,7 @@ if (array_key_exists('multipleSelect', $_REQUEST)) {
 		$multipleSelect=true;
 	}
 }
-$showIdle=(! $comboDetail and isset($_SESSION['projectSelectorShowIdle']) and $_SESSION['projectSelectorShowIdle']==1)?1:0;
+$showIdle=(! $comboDetail and sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle')==1)?1:0;
 if (! $comboDetail and is_array( getSessionUser()->_arrayFilters)) {
   if (array_key_exists($objectClass, getSessionUser()->_arrayFilters)) {
     $arrayFilter=getSessionUser()->_arrayFilters[$objectClass];
