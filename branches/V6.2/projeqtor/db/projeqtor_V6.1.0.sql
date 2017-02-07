@@ -236,7 +236,7 @@ CREATE TABLE `${prefix}deliverable` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE INDEX `deliverableType` ON `${prefix}deliverable` (`idDeliverableType`);
-CREATE INDEX `deliverableStatus` ON `${prefix}deliverable` (`idDeliverableStatus`);
+CREATE INDEX `deliverableStatusIdx` ON `${prefix}deliverable` (`idDeliverableStatus`);
 CREATE INDEX `deliverableProject` ON `${prefix}deliverable` (`idProject`);
 
 CREATE TABLE `${prefix}deliverableweight` (
