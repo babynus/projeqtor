@@ -27,7 +27,7 @@
 /** ===========================================================================
  * Save the current object : call corresponding method in SqlElement Class
  * The new values are fetched in $_REQUEST
- * The old values are fetched in $currentObject of $_SESSION
+ * The old values are fetched in $currentObject of SESSION
  * Only changed values are saved. 
  * This way, 2 users updating the same object don't mess.
  */
@@ -153,7 +153,6 @@ if (array_key_exists($pe.'_priority',$_REQUEST)) {
   $pe_priority=trim($_REQUEST[$pe.'_priority']);
 }
 
-//unset($_SESSION['currentObject']); // Clear last accessed item : otherwise history will get wrong
 SqlElement::unsetCurrentObject();
 
 $cptOk=0;
