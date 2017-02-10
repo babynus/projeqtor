@@ -795,9 +795,9 @@ class Parameter extends SqlElement {
       }
   	}
   	if (sessionTableValueExist('globalParamatersArray', $code)) {
-  		getSessionTableValue('globalParamatersArray', $code);
+  		return getSessionTableValue('globalParamatersArray', $code);
   	} else {
-      	return '';
+      return '';
     }
   }
 
@@ -806,7 +806,7 @@ class Parameter extends SqlElement {
       setSessionValue('userParamatersArray', array());
     }
     if (sessionTableValueExist('userParamatersArray', $code)) {
-      getSessionTableValue('userParamatersArray', $code);
+      return getSessionTableValue('userParamatersArray', $code);
     } 
     $p=new Parameter();
     $user=getSessionUser();
