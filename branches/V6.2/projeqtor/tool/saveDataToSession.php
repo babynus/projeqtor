@@ -68,7 +68,7 @@ $value=$_REQUEST['value'];
 setSessionValue($id, $value);
 setSessionValue($id, $value);
 if ($id=='browserLocaleDateFormat') {
-	setSessionValue('browserLocaleDateFormatJs', str_replace(array('D','Y'), array('d','y'), $value));
+	//setSessionValue('browserLocaleDateFormatJs', str_replace(array('D','Y'), array('d','y'), $value));
 	setSessionValue('browserLocaleDateFormatJs', str_replace(array('D','Y'), array('d','y'), $value));
 }
 
