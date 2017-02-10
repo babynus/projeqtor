@@ -911,9 +911,6 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   <?php 
     $printHeight=600;
     $printWidth=1010;
-    //if (array_key_exists('screenWidth',$_SESSION)) {
-    //   $printWidth = $_SESSION['screenWidth'] * 0.8;
-    //}
     if (sessionValueExists('screenHeight')) {
       $printHeight=round(getSessionValue('screenHeight')*0.65);
     }
