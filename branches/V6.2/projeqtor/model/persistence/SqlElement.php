@@ -607,7 +607,7 @@ abstract class SqlElement {
 				}
 			}
 			if ( ($control=='OK' or strpos($control,'id="confirmControl" value="save"')>0 )
-			and property_exists($class, 'WorkElement')) {
+		  and property_exists($this, 'WorkElement') and self::is_a($this,'WorkElement')) {
 			  $we='WorkElement';
 			  $controlWe=$this->$we->control();
 			  if ($controlWe!='OK') {
