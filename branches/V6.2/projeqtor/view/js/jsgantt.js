@@ -1221,6 +1221,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               + ' onmouseup=JSGantt.endLink('+i+'); '
               + ' onMouseover=JSGantt.enterBarLink('+i+'); '
               + ' onMouseout=JSGantt.exitBarLink('+i+'); '
+              + ' oncontextmenu="'+vTaskList[i].getContextMenu()+';return false;" '
             	+ ' onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '");>'
                 + ' </div>'; 
   	        if (Date.parse(vMaxDate)>=Date.parse(vTaskList[i].getStart())) {
