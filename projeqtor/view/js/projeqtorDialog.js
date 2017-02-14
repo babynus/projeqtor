@@ -2013,6 +2013,23 @@ function assignmentChangeRole() {
     }
   });
 }
+//gautier #2516
+function billLineChangeCatalog(){
+  console.log('test');
+  var idCatalog=dijit.byId("billLineIdCatalog").get("value");
+  dojo.xhrGet({
+    url : '../tool/getSingleData.php?dataType=catalogBillLine&idCatalog='+idCatalog,
+    handleAs : "text",
+    load : function(data) {
+      arrayData=data.split('#!#!#!#!#!#');
+      dijit.byId('billLineDescription').set('value',arrayData[0]);
+      dijit.byId('billLineDetail').set('value',arrayData[1]);
+      dijit.byId('billLinePrice').set('value',arrayData[2]);
+      dijit.byId('billLineUnit').set('value',arrayData[3]);
+    }
+  });
+}
+//end
 
 // =============================================================================
 // = ExpenseDetail
