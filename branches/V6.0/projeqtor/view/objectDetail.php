@@ -184,7 +184,7 @@ if (array_key_exists('destinationWidth', $_REQUEST)) {
 if ($print) {
   $displayWidth=$printWidth . 'px'; // must match iFrame size (see main.php)
 }
-
+$colWidth=$displayWidth; // Initialized to be sure...
 if ($print) {
   echo '<br/>';
   echo '<div class="reportTableHeader" style="width:' . ($printWidth - 10) . 'px;font-size:150%;">' . i18n($objClass) . ' #' . ($objId + 0) 
