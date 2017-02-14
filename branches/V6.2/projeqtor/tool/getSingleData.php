@@ -136,7 +136,13 @@
       $typeClass=$className.'Type';
       $type=new $typeClass($idType);
       echo $type->idCategory;
-    } else {
+    } else if ($type=='catalogBillLine') { //gautier #2516
+      $idCat=$_REQUEST['idCatalog']; 
+      $r=new Catalog($idCat);
+      $catalog_array = "$r->description#!#!#!#!#!#$r->nomenclature#!#!#!#!#!#$r->unitPrice#!#!#!#!#!#$r->idMeasureUnit";
+      echo $catalog_array;
+      //end
+    }else {
       debugTraceLog("Unknown type '$type'");          
       echo '';
     } 
