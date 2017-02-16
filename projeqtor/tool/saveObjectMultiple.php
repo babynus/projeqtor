@@ -122,6 +122,7 @@ $actualDueTime="";
 if (array_key_exists('actualDueTime',$_REQUEST)) {
 	$actualDueTime=trim($_REQUEST['actualDueTime']);
 }
+
 $pe=$className.'PlanningElement';
 $pe_validatedStartDate="";
 if (array_key_exists($pe.'_validatedStartDate',$_REQUEST)) {
@@ -131,6 +132,18 @@ $pe_validatedEndDate="";
 if (array_key_exists($pe.'_validatedEndDate',$_REQUEST)) {
 	$pe_validatedEndDate=trim($_REQUEST[$pe.'_validatedEndDate']);
 }
+
+$pe_validatedWork="";
+if (array_key_exists($pe.'_validatedWork',$_REQUEST)) {
+  $pe_validatedWork=trim($_REQUEST[$pe.'_validatedWork']);
+}
+
+$pe_validatedCost="";
+if (array_key_exists($pe.'_validatedCost',$_REQUEST)) {
+  $pe_validatedCost=trim($_REQUEST[$pe.'_validatedCost']);
+}
+debugLog($_REQUEST);
+
 $pm='id'.$className.'PlanningMode';
 $pe_pm="";
 if (array_key_exists($pe.'_'.$pm,$_REQUEST)) {
@@ -220,6 +233,7 @@ foreach ($selectList as $id) {
   if ($actualEndDate and property_exists($item,'actualEndDate')) {
   	$item->actualEndDate=$actualEndDate;
   }
+
   if ($initialDueDate and $initialDueTime and property_exists($item,'initialDueDateTime')) {
   	$item->initialDueDateTime=$initialDueDate.' '.substr($initialDueTime,1);
   }
@@ -245,8 +259,16 @@ foreach ($selectList as $id) {
     if ($pe_priority and property_exists($item->$pe,'priority')) {
   		$item->$pe->priority=$pe_priority;
   	} 
+  	// KROWRY DEBUGLOG
+  	if ($pe_validatedCost and property_exists($item->$pe,'validatedCost')) {
+  	  $item->$pe->validatedCost=$pe_validatedCost;
+  	}
+  	if ($pe_validatedWork and property_exists($item->$pe,'validatedWork')) {
+  	  $item->$pe->validatedWork=$pe_validatedWork;
+  	}
   }
   $resultSave=$item->save();
+  debugLog($resultSave);
   if ($note and property_exists($item,'_Note')) {
     $noteObj=new Note();
     $noteObj->refType=$className;

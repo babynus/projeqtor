@@ -52,6 +52,14 @@
               <img style="position: absolute; top: 0px; left: 0px" src="css/images/icon<?php echo $objectClass;?>22.png" width="22" height="22" />
               <img style="position: absolute; top: 5px; left: 5px" src="css/images/icon<?php echo $objectClass;?>22.png" width="22" height="22" />
               <img style="position: absolute; top: 10px; left: 10px" src="css/images/icon<?php echo $objectClass;?>22.png" width="22" height="22" />
+              
+              
+<!--               /// Modification krowry debug -->
+              <img style="position: absolute; top: 0px; left: 0px" <?php echo formatIcon($objectClass, 22,null,true);?> />
+              <img style="position: absolute; top: 5px; left: 5px"  <?php echo formatIcon($objectClass, 22,null,true);?> />
+              <img style="position: absolute; top: 10px; left: 10px"  <?php echo formatIcon($objectClass, 22,null,true);?> />
+              
+                
             </td>
             <td valign="middle"><span class="title"><?php echo i18n('labelMultipleMode');?></span></td>
             <td width="15px">&nbsp;</td>
@@ -432,7 +440,7 @@
             <tr class="detail">
               <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('changeValidatedStartDate');?>&nbsp;:&nbsp;</td>
               <td>
-                <div dojoType="dijit.form.DateTextBox" name="<?php echo $pe;?>_validatedStartDate" id="<?php echo $pe;?>_validatedStartDate"
+                <div dojoType="dijit.form.FilteringSelect" name="<?php echo $pe;?>_validatedStartDate" id="<?php echo $pe;?>_validatedStartDate"
                 <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
 										echo ' constraints="{datePattern:\''.getSessionValue('browserLocaleDateFormatJs').'\'}" ';
 									}?>
@@ -451,6 +459,29 @@
 										echo ' constraints="{datePattern:\''.getSessionValue('browserLocaleDateFormatJs').'\'}" ';
 									}?>
                  style="width:100px;" class="input" value="" ></div>
+              </td>
+            </tr>
+            <?php }
+     // validatedCost and validatedWork krowry debug
+            $pe=get_class($obj).'PlanningElement';
+            if (isDisplayable($obj,'priority', true)) {?>
+            <tr class="detail">
+              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colValidatedWork');?>&nbsp;:&nbsp;</td>
+              <td>
+                <textarea dojoType="dijit.form.Textarea" name="<?php echo $pe;?>_validatedWork" id="<?php echo $pe;?>_validatedWork"
+                 rows="2" style="width:60px;" maxlength="4000" maxSize="4" class="input" ></textarea>
+              </td>
+            </tr>
+            <?php }
+     // validatedCost and validatedWork krowry debug
+            $pe=get_class($obj).'PlanningElement';
+            if (isDisplayable($obj,'priority', true)) {?>
+            <tr class="detail">
+              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colValidatedCost');?>&nbsp;:&nbsp;</td>
+              <td>
+                <textarea dojoType="dijit.form.Textarea" name="<?php echo $pe;?>_validatedCost" id="<?php echo $pe;?>_validatedCost"
+                 rows="2" style="width:60px;" maxlength="4000" maxSize="4" class="input" ></textarea>
+                 <?php echo '$';?>
               </td>
             </tr>
             <?php }
