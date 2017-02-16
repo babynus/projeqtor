@@ -142,7 +142,6 @@ $pe_validatedCost="";
 if (array_key_exists($pe.'_validatedCost',$_REQUEST)) {
   $pe_validatedCost=trim($_REQUEST[$pe.'_validatedCost']);
 }
-debugLog($_REQUEST);
 
 $pm='id'.$className.'PlanningMode';
 $pe_pm="";
@@ -268,7 +267,6 @@ foreach ($selectList as $id) {
   	}
   }
   $resultSave=$item->save();
-  debugLog($resultSave);
   if ($note and property_exists($item,'_Note')) {
     $noteObj=new Note();
     $noteObj->refType=$className;
