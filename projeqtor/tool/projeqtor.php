@@ -289,6 +289,18 @@ function setupLocale() {
 
 /**
  * ============================================================================
+ * Set up the icon size, converting session text value (small, medium, big)
+ * to int corresponding value (16, 22, 32)
+ *
+ * @return void
+ */
+// Not used any more this way - user Parameter::getUserParameter("paramIconSize");
+/*
+ * function setupIconSize() { global $iconSizeMode; $paramIconSize=Parameter::getGlobalParameter('paramIconSize');; //default // Search in Session, if found, convert from text to int corresponding value if (isset($_SESSION['iconSize'])) { $iconSizeMode = $_SESSION['iconSize']; switch ($iconSizeMode) { case 'small' : $paramIconSize='16'; break; case 'medium' : $paramIconSize='22'; break; case 'big' : $paramIconSize='32'; break; } } return $paramIconSize; }
+ */
+
+/**
+ * ============================================================================
  * Internationalization / same function exists in js exploiting same resources
  *
  * @param $str the
@@ -2620,9 +2632,7 @@ function projeqtor_set_memory_limit($memory) {
   @ini_set ( 'memory_limit', $memory );
 }
 
-// *****************************************************************************************************************
-// Functions to set and retrieve data from SESSION : do not use direct $_SESSION out out this functions - START
-// *****************************************************************************************************************
+// Functions to set and retrieve data from SESSION : do not use direct $_SESSION
 function setSessionValue($code, $value, $global=false) {
   global $paramDbName, $paramDbPrefix;
   if ($global) {
@@ -2748,9 +2758,6 @@ function unsetSessionTable($table,$code,$global=false){
   }
 }
 //end #2512
-// *****************************************************************************************************************
-// Functions to set and retrieve data from SESSION : do not use direct $_SESSION out out this functions - END
-// *****************************************************************************************************************
 
 // Functions to get and set current user value from session
 function getSessionUser() {
