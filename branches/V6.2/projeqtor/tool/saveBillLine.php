@@ -156,7 +156,6 @@ $line->billingType=$billingType;
 if($boolCatalog){
   if($line->refType=="Bill"){
     $bill=new Bill($line->refId);
-    debugLog("TEST_DEDEBUG='".strpos($bill->description,$catalogSpecification )."'");
     if(!$bill->description or strpos($bill->description,$catalogSpecification )=== FALSE){ 
       $bill->description .= $catalogSpecification;
     }
@@ -164,16 +163,16 @@ if($boolCatalog){
   }
   if($line->refType=="Quotation"){
     $quot=new Quotation($line->refId);
-    //if(strpos($bill->description,$catalogSpecification )=== null){
-    $quot->comment .= $catalogSpecification;
-    //}
+    if(!$quot->comment or strpos($quot->comment,$catalogSpecification )=== FALSE){ 
+      $quot->comment .= $catalogSpecification;
+    }
     $quot->save();
   }
   if($line->refType=="Command"){
     $order=new Command($line->refId);
-    //if(strpos($bill->description,$catalogSpecification )=== null){
-    $order->comment .= $catalogSpecification;
-    //}
+    if(!$order->comment or strpos($order->comment,$catalogSpecification )=== FALSE){ 
+      $order->comment .= $catalogSpecification;
+    }
     $order->save();
   }
 }//end

@@ -2028,16 +2028,6 @@ function billLineChangeCatalog(){
     }
   });
 }
-//function catalogCommentBill(){
-//  var idCatalog=dijit.byId("billLineIdCatalog").get("value");
-//  dojo.xhrGet({
-//    url : '../tool/getSingleData.php?dataType=catalogComment&idCatalog='+idCatalog,
-//    handleAs : "text",
-//    load : function(data) {
-//      dojo.byId("billLineSpecification").value=('value',data);
-//    }
-//  });
-//}
 //end
 
 // =============================================================================
