@@ -461,6 +461,9 @@ CREATE TABLE `${prefix}catalog` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ALTER TABLE `${prefix}billline`
+ADD idCatalog int(12) unsigned DEFAULT NULL;
+
 INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES 
 (173, 'menuCatalog', 152, 'object', 286, 'Project', 0, 'Financial'),
 (174, 'menuCatalogType', 79, 'object', 935, 'ReadWriteType', 0, 'Type');
