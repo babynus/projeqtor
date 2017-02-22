@@ -2670,6 +2670,8 @@ VersionProject: "Посилання на проект-версію (Project-Vers
 versions: "версії",
 viewComponents: "Можна переглядати складникі (components) на виправлення (tickets)",
 viewMonthSelection: "[Switch to month view ]",
+viewSevenDaysSelection: "[Switch to seven days view]",
+viewThirtyDaysSelection: "[Switch to thirty days view]",
 viewTodaySelection: "[Switch to today view ]",
 viewWeekSelection: "[Switch to week view ]",
 visibilityScopeAll: "Все відображати",
