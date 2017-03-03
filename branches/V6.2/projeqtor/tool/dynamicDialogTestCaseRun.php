@@ -180,8 +180,7 @@ if (count($listTcr)) {
 		               <select dojoType="dijit.form.FilteringSelect" 
 		               <?php echo autoOpenFilteringSelect();?>
 		                id="testCaseRunTicket" name="testCaseRunTicket"
-		                class="input"><?php echo $testCaseRun->idTicket;?>
-		                <?php htmlDrawOptionForReference('idTicket',$testCaseRun->idTicket, null, true); ?>
+		                class="input"><?php htmlDrawOptionForReference('idTicket',$testCaseRun->idTicket, null, false); ?>
 		               </select>
 		             </td>
                  <td style="vertical-align: top">
