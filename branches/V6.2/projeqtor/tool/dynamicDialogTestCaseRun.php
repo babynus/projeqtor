@@ -110,7 +110,7 @@ if (count($listTcr)) {
                      foreach ($list as $lstObj) {
                        //echo "<option value='$lstObj->id'" . ((in_array($lstObj->id,$selectedArray))?' selected ':'') . ">#".htmlEncode($lstObj->id)." - ".htmlEncode($lstObj->name)."</option>";
                      }?>
-                     <?php htmlDrawOptionForReference('idTestCase',1, null, true); ?>
+                     <?php htmlDrawOptionForReference('idTestCase',null, null, true); ?>
                     </select>
 	               </div>
 	             </td>
