@@ -6010,7 +6010,16 @@ function hideBigImage(objectClass, objectId) {
   }
 }
 
+showHtmlContent=null;
 function showLink(link) {
+  if (dojo.isIE) {
+    console.log(window.frames['showHtmlFrame']);
+    if (showHtmlContent==null) {
+      showHtmlContent=dijit.byId("dialogShowHtml").get('content');
+    } else {
+      dijit.byId("dialogShowHtml").set('content',showHtmlContent);
+    }
+  }
   // window.frames['showHtmlFrame'].location.href='../view/preparePreview.php';
   dijit.byId("dialogShowHtml").title=link;
   window.frames['showHtmlFrame'].location.href=link;
@@ -6018,9 +6027,18 @@ function showLink(link) {
   window.frames['showHtmlFrame'].focus();
 }
 function showHtml(id, file, className) {
+  if (dojo.isIE) {
+    console.log(window.frames['showHtmlFrame']);
+    if (showHtmlContent==null) {
+      showHtmlContent=dijit.byId("dialogShowHtml").get('content');
+    } else {
+      dijit.byId("dialogShowHtml").set('content',showHtmlContent);
+    }
+  }
   dijit.byId("dialogShowHtml").title=file;
   window.frames['showHtmlFrame'].location.href='../tool/download.php?class='+className+'&id='
       + id + '&showHtml=true';
+  dijit.byId("dialogShowHtml").clearOnHide=false;
   dijit.byId("dialogShowHtml").show();
   window.frames['showHtmlFrame'].focus();
 } 
