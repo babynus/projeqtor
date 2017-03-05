@@ -234,6 +234,17 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     var browserLocaleDecimalSeparator="<?php echo $fmt->decimalSeparator?>";
     var aesKeyLength=<?php echo Parameter::getGlobalParameter('aesKeyLength');?>;
     dojo.addOnLoad(function(){
+      // FIX IE11 not recognized as IE
+      if( !dojo.isIE ) {
+        var userAgent = navigator.userAgent.toLowerCase();
+        var IEReg = /(msie\s|trident.*rv:)([\w.]+)/;
+        var match = IEReg.exec(userAgent);
+        if( match )
+          dojo.isIE = match[2] - 0;
+        else
+          dojo.isIE = undefined;
+      }
+         
       currentLocale="<?php echo $currentLocale;?>";
       <?php 
       if (sessionValueExists('project')) {
