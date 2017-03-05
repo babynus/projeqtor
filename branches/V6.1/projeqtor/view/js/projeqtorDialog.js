@@ -5997,7 +5997,6 @@ function hideBigImage(objectClass, objectId) {
 showHtmlContent=null;
 function showLink(link) {
   if (dojo.isIE) {
-    console.log(window.frames['showHtmlFrame']);
     if (showHtmlContent==null) {
       showHtmlContent=dijit.byId("dialogShowHtml").get('content');
     } else {
@@ -6012,7 +6011,6 @@ function showLink(link) {
 }
 function showHtml(id, file, className) {
   if (dojo.isIE) {
-    console.log(window.frames['showHtmlFrame']);
     if (showHtmlContent==null) {
       showHtmlContent=dijit.byId("dialogShowHtml").get('content');
     } else {
