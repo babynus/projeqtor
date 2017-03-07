@@ -481,3 +481,6 @@ INSERT INTO ${prefix}habilitation (idProfile, idMenu, allowAccess) VALUES
 INSERT INTO `${prefix}type` (`scope`, `name`, `idle`) VALUES 
 ('Catalog', 'Product',0),
 ('Catalog', 'Service',0);
+
+ALTER TABLE `${prefix}quotation`
+ADD `idRecipient` int(12) unsigned DEFAULT null;
