@@ -1435,6 +1435,7 @@ function addProductVersionStructure(way) {
   var param="&objectClass="+objectClass+"&objectId="+objectId+"&way="+way;
   loadDialog('dialogProductVersionStructure',null, true, param, true);
 }
+
 function editProductVersionStructure(way, productVersionStructureId) {
   if (checkFormChangeInProgress()) {
    showAlert(i18n('alertOngoingChange'));
@@ -1444,6 +1445,26 @@ function editProductVersionStructure(way, productVersionStructureId) {
   var objectId=dojo.byId("objectId").value;
   var param="&objectClass="+objectClass+"&objectId="+objectId+"&way="+way+"&structureId="+productVersionStructureId;
   loadDialog('dialogProductVersionStructure',null, true, param, true);
+}
+
+function upgradeProductVersionStructure() {
+  if (checkFormChangeInProgress()) {
+   showAlert(i18n('alertOngoingChange'));
+   return;
+  }
+  var objectClass=dojo.byId("objectClass").value;
+  var objectId=dojo.byId("objectId").value;
+  var param="&objectClass="+objectClass+"&objectId="+objectId;
+  dojo.xhrGet({
+    url : "../tool/upgradeProductVersionStructure.php?confirm=false"+params,
+    handleAs : "text",
+    load : function(data) {
+      actionOK=function() {
+        loadContent("../tool/upgradeProductVersionStructure.php?confirm=true"+params, "resultDiv", null, true, 'ProductVersionStructure');
+      };
+      showConfirm(data, actionOK);
+    }
+  });
 }
 
 function refreshProductVersionStructureList(selected,newName) {
