@@ -1356,6 +1356,17 @@ function addProductStructure(way) {
   var param="&objectClass="+objectClass+"&objectId="+objectId+"&way="+way;
   loadDialog('dialogProductStructure',null, true, param, true);
 }
+function editProductStructure(way,productStructureId) {
+  if (checkFormChangeInProgress()) {
+   showAlert(i18n('alertOngoingChange'));
+   return;
+  }
+  var objectClass=dojo.byId("objectClass").value;
+  var objectId=dojo.byId("objectId").value;
+  
+  var param="&objectClass="+objectClass+"&objectId="+objectId+"&way="+way+"&structureId="+productStructureId;
+  loadDialog('dialogProductStructure',null, true, param, true);
+}
 
 function refreshProductStructureList(selected,newName) {
   var selectList=dojo.byId('productStructureListId');
@@ -1422,6 +1433,16 @@ function addProductVersionStructure(way) {
   var objectClass=dojo.byId("objectClass").value;
   var objectId=dojo.byId("objectId").value;
   var param="&objectClass="+objectClass+"&objectId="+objectId+"&way="+way;
+  loadDialog('dialogProductVersionStructure',null, true, param, true);
+}
+function editProductVersionStructure(way, productVersionStructureId) {
+  if (checkFormChangeInProgress()) {
+   showAlert(i18n('alertOngoingChange'));
+   return;
+  }
+  var objectClass=dojo.byId("objectClass").value;
+  var objectId=dojo.byId("objectId").value;
+  var param="&objectClass="+objectClass+"&objectId="+objectId+"&way="+way+"&structureId="+productVersionStructureId;
   loadDialog('dialogProductVersionStructure',null, true, param, true);
 }
 

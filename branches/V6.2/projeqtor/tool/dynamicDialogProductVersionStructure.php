@@ -51,13 +51,18 @@ if ($way!='structure' and $way!='composition') {
   throwError("Incorrect value for parameter way='$way'");
 }
 
+$str=new ProductVersionStructure($structureId);
+
 if ($objectClass=='ProductVersion') {
   $listClass='ComponentVersion';
+  $listId=$str->idComponentVersion;
 } else if ($objectClass=='ComponentVersion') {
   if ($way=='structure') {
     $listClass='ProductVersion';
+    $listId=$str->idProductVersion;
   } else {
     $listClass='ComponentVersion';
+    $listId=$str->idComponentVersion;
   }
 } else {
   errorLog("Unexpected objectClass $objectClass");
@@ -70,6 +75,7 @@ if ($way=='structure') {
 } else {
   $critClass='ProductVersion';
 }
+
 ?>
 <table>
   <tr>
@@ -78,6 +84,7 @@ if ($way=='structure') {
         <input id="productVersionStructureObjectClass" name="productVersionStructureObjectClass" type="hidden" value="<?php echo $objectClass;?>" />
         <input id="productVersionStructureObjectId" name="productVersionStructureObjectId" type="hidden" value="<?php echo $objectId;?>" />
         <input id="productVersionStructureListClass" name="productVersionStructureListClass" type="hidden" value="<?php echo $listClass;?>" />
+        <input id="productVersionStructureId" name="productVersionStructureId" type="hidden" value="<?php echo $structureId;?>" />
         <input id="productVersionStructureWay" name="productVersionStructureWay" type="hidden" value="<?php echo $way;?>" />
         <table>
           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
@@ -89,8 +96,8 @@ if ($way=='structure') {
             </td>
             <td>
               <select size="14" id="productVersionStructureListId" name="productVersionStructureListId[]""
-                multiple class="selectList" onchange="enableWidget('dialogProductVersionStructureSubmit');"  ondblclick="saveProductVersionStructure();" value="">
-                  <?php htmlDrawOptionForReference('id'.$listClass, null, null, true, 'id'.$critClass, $objectId);?>
+                <?php if (!$structureId) echo 'multiple';?> class="selectList" onchange="enableWidget('dialogProductVersionStructureSubmit');"  ondblclick="saveProductVersionStructure();" value="">
+                  <?php htmlDrawOptionForReference('id'.$listClass, $listId, null, true, 'id'.$critClass, $objectId);?>
               </select>
             </td>
             <td style="vertical-align: top">
@@ -132,7 +139,7 @@ if ($way=='structure') {
                 id="productVersionStructureComment" name="productVersionStructureComment"
                 style="width: 400px;"
                 maxlength="4000"
-                class="input"></textarea>
+                class="input"><?php echo $str->comment;?></textarea>
             </td>
           </tr>
           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
@@ -145,7 +152,7 @@ if ($way=='structure') {
       <button class="mediumTextButton" dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogProductVersionStructure').hide();">
         <?php echo i18n("buttonCancel");?>
       </button>
-      <button class="mediumTextButton" disabled dojoType="dijit.form.Button" type="submit" id="dialogProductVersionStructureSubmit" onclick="protectDblClick(this);saveProductVersionStructure();return false;">
+      <button class="mediumTextButton" <?php if (!$structureId) echo 'disabled';?> dojoType="dijit.form.Button" type="submit" id="dialogProductVersionStructureSubmit" onclick="protectDblClick(this);saveProductVersionStructure();return false;">
         <?php echo i18n("buttonOK");?>
       </button>
     </td>
