@@ -3051,7 +3051,9 @@ function drawVersionStructureFromObject($obj, $refresh=false,$way,$item) {
     echo '<td class="linkHeader" style="width:5%">';
     if ($obj->id != null and !$print and $canUpdate) {
       echo '<a onClick="addProductVersionStructure(\''.$way.'\');" title="' . i18n('addProductVersionStructure') . '" > '.formatSmallButton('Add').'</a>';
-      echo '<a onClick="upgradeProductVersionStructure(\''.$way.'\');" title="' . i18n('upgradeProductVersionStructure') . '" > '.formatSmallButton('Switch').'</a>';
+      if ($way=='composition' and count($list)>0) {
+        echo '<a onClick="upgradeProductVersionStructure(\''.$way.'\');" title="' . i18n('upgradeProductVersionStructure') . '" > '.formatSmallButton('Switch').'</a>';
+      }
     }
     echo '</td>';
   }
