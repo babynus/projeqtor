@@ -2995,6 +2995,8 @@ function drawStructureFromObject($obj, $refresh=false,$way,$item) {
     if (!$print) {
       echo '<td class="linkData" style="text-align:center;width:5%;white-space:nowrap;">';
       if ($canUpdate) {
+      	echo '  <a onClick="editProductStructure(\''.$way.'\',' . htmlEncode($comp->id). ');" '
+      			.'title="' . i18n('editProductStructure') . '" > '.formatSmallButton('Edit').'</a>';
         echo '  <a onClick="removeProductStructure(' . "'" . htmlEncode($comp->id) . "','" . get_class($compObj) . "','" . htmlEncode($compObj->id) . "','" . $classCompName . "'" . ');" '
               .'title="' . i18n('removeProductStructure') . '" > '.formatSmallButton('Remove').'</a>';
       }
@@ -3074,7 +3076,10 @@ function drawVersionStructureFromObject($obj, $refresh=false,$way,$item) {
     if (!$print) {
       echo '<td class="linkData" style="text-align:center;width:5%;white-space:nowrap;">';
       if ($canUpdate) {
-        echo '  <a onClick="removeProductVersionStructure(' . "'" . htmlEncode($comp->id) . "','" . get_class($compObj) . "','" . htmlEncode($compObj->id) . "','" . $classCompName . "'" . ');" '
+      	echo '  <a onClick="editProductVersionStructure(\''.$way.'\',' . htmlEncode($comp->id). ');" '
+      			.'title="' . i18n('editProductStructure') . '" > '.formatSmallButton('Edit').'</a>';
+      	
+      	echo '  <a onClick="removeProductVersionStructure(' . "'" . htmlEncode($comp->id) . "','" . get_class($compObj) . "','" . htmlEncode($compObj->id) . "','" . $classCompName . "'" . ');" '
               .'title="' . i18n('removeProductStructure') . '" > '.formatSmallButton('Remove').'</a>';
       }
       echo '</td>';
