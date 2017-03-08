@@ -1454,12 +1454,15 @@ function upgradeProductVersionStructure() {
   }
   var objectClass=dojo.byId("objectClass").value;
   var objectId=dojo.byId("objectId").value;
-  var param="&objectClass="+objectClass+"&objectId="+objectId;
+  var params="&objectClass="+objectClass+"&objectId="+objectId;
   dojo.xhrGet({
     url : "../tool/upgradeProductVersionStructure.php?confirm=false"+params,
     handleAs : "text",
     load : function(data) {
       actionOK=function() {
+        var objectClass=dojo.byId("objectClass").value;
+        var objectId=dojo.byId("objectId").value;
+        var params="&objectClass="+objectClass+"&objectId="+objectId;
         loadContent("../tool/upgradeProductVersionStructure.php?confirm=true"+params, "resultDiv", null, true, 'ProductVersionStructure');
       };
       showConfirm(data, actionOK);
