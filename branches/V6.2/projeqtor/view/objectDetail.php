@@ -972,7 +972,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
       if (is_object($val)) {
         if (!$obj->isAttributeSetToField($col, 'hidden')) {
           if ($col == 'Origin') {
-            drawOrigin($val->originType, $val->originId, $obj, $col, $print);
+            drawOrigin($obj->Origin,$val->originType, $val->originId, $obj, $col, $print);
           } else {
             // Draw an included object (recursive call) =========================== Type Object
             $visibileSubObject=true;
@@ -2195,7 +2195,7 @@ function drawDocumentVersionFromObject($list, $obj, $refresh=false) {
   echo '</table></td></tr>';
 }
 
-function drawOrigin($refType, $refId, $obj, $col, $print) {
+function drawOrigin($list,$refType, $refId, $obj, $col, $print) {
   echo '<tr class="detail"><td class="label" xstyle="width:10%;">';
   echo '<label for="' . $col . '" >' . htmlEncode($obj->getColCaption($col),'stipAllTags') . '&nbsp;:&nbsp;</label>';
   echo '</td>';
@@ -2215,10 +2215,20 @@ function drawOrigin($refType, $refId, $obj, $col, $print) {
     }
     echo '</td><td width="5%" xclass="noteData" xvalign="top" style="white-space:nowrap">';
     echo '&nbsp;&nbsp;' . i18n($refType) . '&nbsp;#' . $refId . '&nbsp;:&nbsp;';
-    echo '</td><td xclass="noteData" style="height: 15px">';
-    $orig=new $refType($refId);
-    echo htmlEncode($orig->name);
-    echo '</td></tr></table>';
+    /// Krowry debug #2555
+    foreach ( $list as $origin ) {
+      $origObj=null;
+      if ($list->originType == get_class($obj) and $list->originId == $obj->id) {
+        $origObj=new $list->refType($list->refId);
+      } else {
+        $origObj=new $list->originType($list->originId);
+      }
+      $gotoE=' onClick="gotoElement(' . "'" . get_class($origObj) . "','" . htmlEncode($origObj->id) . "'" . ');" style="cursor: pointer;" ';
+      echo '</td><td xclass="noteData" '.$gotoE.' style="height: 15px">';
+    }
+      $orig=new $refType($refId);
+      echo htmlEncode($orig->name);
+      echo '</td></tr></table>';      
   } else {
     echo '<table><tr height="20px"><td>';
     if ($obj->id and !$print and $canUpdate) {
@@ -2227,6 +2237,7 @@ function drawOrigin($refType, $refId, $obj, $col, $print) {
     echo '</td></tr></table>';
   }
 }
+
 
 function drawHistoryFromObjects($refresh=false) {
   global $cr, $print, $treatedObjects, $comboDetail;
@@ -2850,6 +2861,8 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
   //echo '<td class="linkHeader" style="width:15%">' . i18n('colUser') . '</td>';
   echo '</tr>';
   foreach ( $list as $link ) {
+    //debugLog($link);
+    debugLog($list);
     $linkObj=null;
     if ($link->ref1Type == get_class($obj) and $link->ref1Id == $obj->id) {
       $linkObj=new $link->ref2Type($link->ref2Id);
