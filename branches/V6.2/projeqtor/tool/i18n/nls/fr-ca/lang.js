@@ -1833,6 +1833,7 @@ newVersion: "Une nouvelle version ${1} est disponible sur le site web de ProjeQt
 nextDays: "prochains jours",
 noAttachmentFound: "Aucune pièce jointe trouvée",
 noBaseline: "Aucune référence n'existe",
+noChange: "aucune modification",
 noChecklistDefined: "Aucune liste de contrôle n'est définie pour cet élément",
 noDataFound: "Aucune donnée à afficher",
 noDataToDisplay: "Aucune donnée à afficher",

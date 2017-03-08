@@ -55,37 +55,53 @@ $result="";
 //Retrieve the existing list of versions 
 // and for each version, find the next version for the component
 if (!$confirm) {
-	echo i18n("messageConfirmationNeeded");
-	echo "<table>";
+	echo '<b>'.i18n('upgradeProductVersionStructure').'</b><br/><br/>';
+	echo '<table style="width:100%">';
 	echo '<tr><td class="noteHeader">'.i18n('colValueBefore').'</td><td class="noteHeader">'.i18n('colValueAfter').'</td></tr>';
 }
 foreach ($strList as $str) {
 	$vers=new ComponentVersion($str->idComponentVersion);
-	
-	
+	$oldLabel=$vers->name;
+	$newLabel='<i>'.i18n('noChange').'</i>';
+	$change=false;
+	if ($vers->isEis) $oldLabel.=' <i>('.htmlFormatDate($vers->realEisDate).')</i>';
+	$crit="idProduct=$vers->idComponent and isEis=1 and realEisDate is not null";
+	$lstCompVers=$vers->getSqlElementsFromCriteria(null,false,$crit,'realEisDate desc');
+	if (count($lstCompVers)>0) {
+		$new=reset($lstCompVers);
+		debugLog("id=$new->id, name=$new->name");
+		if ($new->id!=$vers->id) {
+			$change=true;
+			$str->idComponentVersion=$new->id;
+			$newLabel=$new->name.' <i>('.htmlFormatDate($new->realEisDate).')</i>';
+		}
+	}
 	if ($confirm) {
 	  $res=$str->save();
 	} else {
-		echo '<tr><td class="noteData">'.$vers->name.'</td><td class="noteData">'.$vers->name.'</td></tr>';
+		echo '<tr><td class="noteData">'.$oldLabel.'</td><td class="noteData">'.$newLabel.'</td></tr>';
 	}
-  if (!$result) {
-    $result=$res;
-  } else if (stripos($res,'id="lastOperationStatus" value="OK"')>0 ) {
-  	if (stripos($result,'id="lastOperationStatus" value="OK"')>0 ) {
-  		$deb=stripos($res,'#');
-  		$fin=stripos($res,' ',$deb);
-  		$resId=substr($res,$deb, $fin-$deb);
-  		$deb=stripos($result,'#');
-      $fin=stripos($result,' ',$deb);
-      $result=substr($result, 0, $fin).','.$resId.substr($result,$fin);
-  	} else {
-  	  $result=$res;
-  	} 
-  }
+	if ($confirm) {
+	  if (!$result) {
+	    $result=$res;
+	  } else if (stripos($res,'id="lastOperationStatus" value="OK"')>0 ) {
+	  	if (stripos($result,'id="lastOperationStatus" value="OK"')>0 ) {
+	  		$deb=stripos($res,'#');
+	  		$fin=stripos($res,' ',$deb);
+	  		$resId=substr($res,$deb, $fin-$deb);
+	  		$deb=stripos($result,'#');
+	      $fin=stripos($result,' ',$deb);
+	      $result=substr($result, 0, $fin).','.$resId.substr($result,$fin);
+	  	} else {
+	  	  $result=$res;
+	  	} 
+	  }
+	}
 }
 if (!$confirm) {
 	echo "</table>";
+	echo '<br/>'.i18n("messageConfirmationNeeded").'<br/><br/>';
 }
 // Message of correct saving
-displayLastOperationStatus($result);
+if ($confirm) displayLastOperationStatus($result);
 ?>
