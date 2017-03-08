@@ -3095,6 +3095,28 @@ abstract class SqlElement {
 			$colScript .= '  formChanged();';
 			$colScript .= '</script>';
 		}
+    
+		//debugLog Krowry
+		if(substr($colName, -7)=="StartDate"){ // If change start date
+		  $end = str_replace('StartDate', 'EndDate', $colName);
+		  debugLog($end);
+		  debugLog($colName);
+		  if (property_exists($this, $end)){
+		  $colScript .= '<script type="dojo/connect" event="onChange" args="evt">';
+		    echo "if(this.value){";
+		        echo "  var end = dijit.byId('$end');"; // $end will be replaced by value as enclosed by "
+		    echo " if(end){";
+		    //echo " var today = dd+'/'+mm+'/'+yyyy;";
+		    echo " var dtStart = this.value "; // => rÃ©cupÃ©rer la date de this, qui est en string, au format Date javascrpit
+		    echo "console.log(dtStart)";
+		    echo "  end.constraints.min=dtStart;";
+		        echo " }";
+		            echo "}";
+		  $colScript .= '</script>';
+		  }
+		  
+
+				}
 		return $colScript;
 	}
 
