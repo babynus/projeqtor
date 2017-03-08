@@ -3097,26 +3097,33 @@ abstract class SqlElement {
 		}
     
 		//debugLog Krowry
-		if(substr($colName, -7)=="StartDate"){ // If change start date
+		if(substr($colName, -9)=="StartDate"){ // If change start date
 		  $end = str_replace('StartDate', 'EndDate', $colName);
-		  debugLog($end);
-		  debugLog($colName);
+		  $start=$colName;
 		  if (property_exists($this, $end)){
-		  $colScript .= '<script type="dojo/connect" event="onChange" args="evt">';
-		    echo "if(this.value){";
-		        echo "  var end = dijit.byId('$end');"; // $end will be replaced by value as enclosed by "
-		    echo " if(end){";
-		    //echo " var today = dd+'/'+mm+'/'+yyyy;";
-		    echo " var dtStart = this.value "; // => rÃ©cupÃ©rer la date de this, qui est en string, au format Date javascrpit
-		    echo "console.log(dtStart)";
-		    echo "  end.constraints.min=dtStart;";
-		        echo " }";
-		            echo "}";
-		  $colScript .= '</script>';
+		  	if (self::is_subclass_of($this,'PlanningElement')) {
+		  		$end=get_class($this).'_'.$end;
+		  		$start=get_class($this).'_'.$start;
+		  		$duration=get_class($this).'_'.str_replace('StartDate', 'Duration', $colName);
+		  	}
+		    $colScript .= '<script type="dojo/connect" event="onChange" args="evt">';
+		    $colScript .= "if(this.value){";
+		    $colScript .= "  var end = dijit.byId('$end');"; // $end will be replaced by value as enclosed by "
+		    $colScript .= "  if(end){";
+		    $colScript .= "    var dtStart = dijit.byId('$start').get('value'); "; // => rÃ©cupÃ©rer la date de this, qui est en string, au format Date javascrpit
+		    $colScript .= "    end.constraints.min=dtStart;";
+		    $colScript .= "    if (! end.get('value') ) {";
+		    $colScript .= "      end.set('value',dtStart);";
+		    $colScript .= "      if (dijit.byId('$duration')) {";
+		    $colScript .= "        dijit.byId('$duration').set('value',1);";
+		    $colScript .= "      }";
+		    $colScript .= "    }";
+		    $colScript .= " }";
+		    $colScript .= "}";
+		    $colScript .= '</script>';
 		  }
-		  
-
-				}
+		}
+		
 		return $colScript;
 	}
 
