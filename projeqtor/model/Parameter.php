@@ -410,7 +410,8 @@ class Parameter extends SqlElement {
       	if (securityCheckDisplayMenu(null,'Planning')) {$list['planningMain.php']=i18n('menuPlanning');}
       	if (securityCheckDisplayMenu(null,'PortfolioPlanning')) {$list['portfolioPlanningMain.php']=i18n('menuPortfolioPlanning');}
       	if (securityCheckDisplayMenu(null,'ResourcePlanning')) {$list['resourcePlanningMain.php']=i18n('menuResourcePlanning');}
-      	$arrayItem=array('Project','Document','Ticket','TicketSimple','Activity','Action');
+        if (securityCheckDisplayMenu(null,'Kanban')) {$list['../plugin/kanban/kanbanViewMain.php']=i18n('menuKanban');}
+      	$arrayItem=array('Project','Document','Ticket','TicketSimple','Activity','Action','Requirement','ProductVersion','ComponentVersion');
       	foreach  ($arrayItem as $item) {
       		if (securityCheckDisplayMenu(null,$item)) {$list['objectMain.php?objectClass='.$item]=i18n('menu'.$item);}
       	}
