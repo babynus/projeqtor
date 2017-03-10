@@ -3745,6 +3745,22 @@ function setDefaultPlanningMode(typeValue) {
   });
 }
 
+function setDefaultPriority(typeValue) {
+  url='../tool/getSingleData.php?dataType=defaultPriority&idType='
+    + typeValue + "&objectClass=" + dojo.byId('objectClass').value;
+  console.log(url);
+  dojo.xhrGet({
+    url : url,
+    handleAs : "text",
+    load : function(data) {
+      var objClass = dojo.byId('objectClass').value;
+      var planningMode = objClass + "PlanningElement_priority" ;
+      console.log(planningMode);
+      dijit.byId(planningMode).set('value', data);
+    }
+  });
+}
+
 function setDefaultCategory(typeValue) {
   dojo.xhrGet({
     url : '../tool/getSingleData.php?dataType=defaultCategory&idType='
