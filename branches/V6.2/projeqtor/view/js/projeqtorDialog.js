@@ -672,6 +672,10 @@ function selectDetailItem(selectedValue, lastSavedName) {
     combo.set("value", idFldVal);
   }
   hideDetail();
+  if (dojo.byId('directAccessToList') && dojo.byId('directAccessToList').value=='true' && dojo.byId('directAccessToListButton')) {
+    var idButton = dojo.byId('directAccessToListButton').value;
+    setTimeout("dijit.byId('" + idButton + "').onClick();", 20);
+  }
 }
 
 function displaySearch(objClass) {
@@ -1354,7 +1358,16 @@ function addProductStructure(way) {
   var objectClass=dojo.byId("objectClass").value;
   var objectId=dojo.byId("objectId").value;
   var param="&objectClass="+objectClass+"&objectId="+objectId+"&way="+way;
-  loadDialog('dialogProductStructure',null, true, param, true);
+  console.log("OK");
+  var callBackFunc=function() {
+    console.log(dojo.byId('directAccessToList'));
+    if (dojo.byId('directAccessToList') && dojo.byId('directAccessToList').value=='true') {
+      showDetail('productStructureListId', 1, 'Component', true); // TODO Retreive can create
+    } else {
+      dijit.byId('dialogProductStructure').show();
+    }
+  }
+  loadDialog('dialogProductStructure',callBackFunc, false, param, true);
 }
 function editProductStructure(way,productStructureId) {
   if (checkFormChangeInProgress()) {
