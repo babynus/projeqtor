@@ -1304,7 +1304,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
           $start=str_replace("EndDate", "StartDate", $col);
           if (property_exists($obj, $start)) {
             $min=$obj->$start;             
-            debugLog("voici le min !!!!!!!! ". $min);
           } 
           echo ' constraints="{datePattern:\'' . getSessionValue('browserLocaleDateFormatJs') . '\', min:\'' .$min. '\' }" ';
         }
@@ -2867,8 +2866,6 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
   //echo '<td class="linkHeader" style="width:15%">' . i18n('colUser') . '</td>';
   echo '</tr>';
   foreach ( $list as $link ) {
-    //debugLog($link);
-    debugLog($list);
     $linkObj=null;
     if ($link->ref1Type == get_class($obj) and $link->ref1Id == $obj->id) {
       $linkObj=new $link->ref2Type($link->ref2Id);
