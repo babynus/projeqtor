@@ -1448,6 +1448,7 @@ helpVersionNameAutoformat: "[Automatic format of version name from product name 
 helpVersionNameAutoformatSeparator: "[Separator between name of product and number of version to build the name of version]",
 helpVersionReferenceSuffix: "version reference suffix",
 helpWorkUnit: "Единица для нагрузки",
+hideInService: "[hide versions in service]",
 hideWork: "скрыть работу",
 hour: "час",
 hours: "часов",

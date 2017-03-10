@@ -1448,6 +1448,7 @@ helpVersionNameAutoformat: "製品名とバージョン番号からバージョ�
 helpVersionNameAutoformatSeparator: "製品名とバージョン番号からバージョン名を自動生成する際のセパレータ",
 helpVersionReferenceSuffix: "バージョン参照接尾辞",
 helpWorkUnit: "作業の単位",
+hideInService: "[hide versions in service]",
 hideWork: "作業を隠す",
 hour: "時間",
 hours: "hours",
