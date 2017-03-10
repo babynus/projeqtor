@@ -72,6 +72,13 @@ if ($objectClass=='Product') {
 }
 $object=new $objectClass($objectId);
 
+$directAccessToList='false';
+if ($way=='composition') {
+	$paramDirect=Parameter::getUserParameter('directAccessToComponentList');
+	if ($paramDirect=='YES') {
+		$directAccessToList='true';
+	}
+}
 
 ?>
 <table>
@@ -83,6 +90,8 @@ $object=new $objectClass($objectId);
         <input id="productStructureListClass" name="productStructureListClass" type="hidden" value="<?php echo $listClass;?>" />
         <input id="productStructureId" name="productStructureId" type="hidden" value="<?php echo $structureId;?>" />
         <input id="productStructureWay" name="productStructureWay" type="hidden" value="<?php echo $way;?>" />
+        <input id="directAccessToList" name="directAccessToList" type="hidden" value="<?php echo $directAccessToList;?>" />
+        <input id="directAccessToListButton" name="directAccessToListButton" type="hidden" value="dialogProductStructureSubmit" />
         <table>
           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
           <tr><td colspan="2" class="section"><?php echo i18n('section'.ucfirst($way),array(i18n($objectClass),intval($objectId).' '.$object->name));?></td></tr>  
