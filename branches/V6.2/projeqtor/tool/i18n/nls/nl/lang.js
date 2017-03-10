@@ -1448,6 +1448,7 @@ helpVersionNameAutoformat: "Automatische opmaak van versienaam middels de naam v
 helpVersionNameAutoformatSeparator: "Scheidingsteken tussen de naam van het product en het versienummer om de naam van de versie te maken",
 helpVersionReferenceSuffix: "achtervoegsel referentie versie",
 helpWorkUnit: "Eenheid voor werk",
+hideInService: "[hide versions in service]",
 hideWork: "verberg werk",
 hour: "uur",
 hours: "uren",

@@ -40,7 +40,7 @@ if (isset($_REQUEST['idData'])) {
 $ValidSessionIDs = '(param(ConfirmQuit|(Top)?IconSize)|lang|hideMenu'
     .'|browserLocale(DateFormat|DecimalPoint|ThousandSeparator)?|currentLocale'
     .'|defaultProject|disconnect|(switched|multiple)Mode|project(Selector(DisplayMode|ShowIdle)?)?'
-    .'|screen(Width|Height)?|showWorkHistory|theme'
+    .'|screen(Width|Height)?|showWorkHistory|theme|hideInService'
     .'|defaultProject|(print|pdf)InNewWindow|accordionPane(Top|Bottom)'
     .'|contentPane(Left(DivWidth|BottomDivHeight)|Top(DetailDivHeight(.*)?|(Portfolio|Resource)?PlanningDivHeight))'
     .'|contentPaneBottomLiveMeeting|contentPaneTopLiveMeeting|plgKanbanname|plgKanbanresponsible|plgKanbanstatus|plgKanbantargetProductVersion)';
