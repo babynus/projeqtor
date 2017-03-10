@@ -72,8 +72,20 @@
       Security::checkValidClass($className);
       $typeClass=$className.'Type';
       $type=new $typeClass($idType);
-      $planningModeName='id'.$className.'PlanningMode';
+      $planningModeName='id'.$className.'PlanningMode'; //idActivityPlanningMode
       echo $type->$planningModeName;
+    } else if ($type=='defaultPriority') {
+      $idType=$_REQUEST['idType'];
+      $className=$_REQUEST['objectClass'];
+      Security::checkValidClass($className);
+      $typeClass=$className.'Type';
+      $type=new $typeClass($idType);
+      $priorityName='priority'; //idActivityPlanningMode
+      echo $type->$priorityName;
+      if(!$priorityName){
+        $priorityName=500;
+      }
+      //$priority=$_REQUEST['priority'];
     } else if ($type=='restrictedTypeClass') {
       $idProjectType=$_REQUEST['idProjectType'];
       $idProject=$_REQUEST['idProject'];
