@@ -89,13 +89,31 @@ if ($way=='structure') {
         <table>
           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
           <tr><td colspan="2" class="section"><?php echo i18n('sectionVersion'.ucfirst($way),array(i18n($objectClass),intval($objectId).' '.$object->name));?></td></tr>  
-          <tr><td>&nbsp;</td><td>&nbsp;</td></tr>  
+          <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+        <?php if (0) {?>
+          <tr>
+            <td class="dialogLabel">
+              <label for="productVersionStructureHideInService" class="nobr">&nbsp;&nbsp;<?php echo i18n("hideInService");?>&nbsp;:&nbsp;</label>
+            </td>
+            <td><?php $hideInService=Parameter::getUserParameter('hideInService');?>
+              <div title="<?php echo i18n('hideInService')?>" dojoType="dijit.form.CheckBox" 
+                class="" <?php if ($hideInService=='true') echo " checked ";?>
+                type="checkbox" id="productVersionStructureHideInService" name="productVersionStructureHideInService">
+                <script type="dojo/method" event="onChange" >
+                  saveDataToSession('hideInService',((this.checked)?true:false),true);
+                  refreshList('id<?php echo $listClass;?>',null, null, null,'productVersionStructureListId', true);
+                </script>
+              </div>&nbsp;
+            </td>
+          </tr>
+       <?php }?>     
           <tr>
             <td class="dialogLabel"  >
               <label for="productVersionStructureListId" ><?php echo i18n($listClass) ?>&nbsp;:&nbsp;</label>
             </td>
             <td>
-              <select size="14" id="productVersionStructureListId" name="productVersionStructureListId[]""
+              <select size="14" id="productVersionStructureListId" name="productVersionStructureListId[]"
+                 dojoType="dijit.form.MultiSelect" 
                 <?php if (!$structureId) echo 'multiple';?> class="selectList" onchange="enableWidget('dialogProductVersionStructureSubmit');"  ondblclick="saveProductVersionStructure();" value="">
                   <?php htmlDrawOptionForReference('id'.$listClass, $listId, null, true, 'id'.$critClass, $objectId);?>
               </select>
