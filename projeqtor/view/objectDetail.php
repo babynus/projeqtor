@@ -2220,7 +2220,6 @@ function drawOrigin($list,$refType, $refId, $obj, $col, $print) {
     }
     echo '</td><td width="5%" xclass="noteData" xvalign="top" style="white-space:nowrap">';
     echo '&nbsp;&nbsp;' . i18n($refType) . '&nbsp;#' . $refId . '&nbsp;:&nbsp;';
-    /// Krowry debug #2555
     foreach ( $list as $origin ) {
       $origObj=null;
       if ($list->originType == get_class($obj) and $list->originId == $obj->id) {
