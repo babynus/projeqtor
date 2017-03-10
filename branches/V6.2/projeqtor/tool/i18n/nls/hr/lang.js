@@ -1448,6 +1448,7 @@ helpVersionNameAutoformat: "Automatski format ime verzija od naziva proizvoda i 
 helpVersionNameAutoformatSeparator: "Separator između nazivom proizvoda i broj verzije da izgradi ime verzije",
 helpVersionReferenceSuffix: "napomene za Version Reference",
 helpWorkUnit: "Jedinica za rad",
+hideInService: "[hide versions in service]",
 hideWork: "ne prikazuj rad",
 hour: "sat",
 hours: "sati",

@@ -110,6 +110,15 @@
     } else {
       $showIdle=true;
     }
+    // For versions, hide versions in service
+    debugLog($_REQUEST);
+    if (isset($_REQUEST['hideInService']) and property_exists($obj, 'isEis') and ! $quickSearch) {
+    	debugLog("filter");
+    	$queryWhere.= ($queryWhere=='')?'':' and ';
+    	$queryWhere.= $table . "." . $obj->getDatabaseColumnName('isEis') . "=0";
+    } else {
+    	$showIdle=true;
+    }
     
     // --- Direct filter on id (only used for printing, as direct filter is done on client side)
     if (array_key_exists('listIdFilter',$_REQUEST)  and ! $quickSearch) {
