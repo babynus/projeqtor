@@ -216,7 +216,7 @@ if (! $comboDetail and is_array( getSessionUser()->_arrayFilters)) {
               <td style="width: 10px;text-align: center; align: center;white-space:nowrap;">
                 <?php $hideInService=Parameter::getUserParameter('hideInService');?>
                 <div title="<?php echo i18n('hideInService')?>" dojoType="dijit.form.CheckBox" 
-                class="whiteCheck" <?php if ($hideInService) echo " checked ";?>
+                class="whiteCheck" <?php if ($hideInService=='true') echo " checked ";?>
                 type="checkbox" id="hideInService" name="hideInService">
                 <script type="dojo/method" event="onChange" >
                   saveDataToSession('hideInService',((this.checked)?true:false),true);
