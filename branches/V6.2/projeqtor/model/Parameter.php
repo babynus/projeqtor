@@ -251,8 +251,11 @@ class Parameter extends SqlElement {
         $list=array('YES'=>i18n('displayYes'),
             'REQ'=>i18n('displayOnRequest'));
         break;
-      case 'printHistory': case 'csvExportUTF8': case 'allowTypeRestrictionOnProject' :
-      case 'versionNameAutoformat' :
+      case 'printHistory': 
+      case 'csvExportUTF8': 
+      case 'allowTypeRestrictionOnProject' :
+      case 'versionNameAutoformat' : 
+      case 'directAccessToComponentList' :
         $list=array('NO'=>i18n('displayNo'),
             'YES'=>i18n('displayYes')); 
         break;
@@ -531,6 +534,7 @@ class Parameter extends SqlElement {
                            "editor"=>'list',
                            "scaytAutoStartup"=>'list',
                            "maxColumns"=>'list',
+                           "directAccessToComponentList"=>'list',
                          'sectionPrintExport'=>'section',
                            'printHistory'=>'list',  
                            "printInNewWindow"=>"list",
@@ -648,6 +652,7 @@ class Parameter extends SqlElement {
       	                       "scaytAutoStartup"=>'list',
       	                       'allowTypeRestrictionOnProject'=>'list',
       	                       'showTendersOnVersions'=>'list',
+      	                       "directAccessToComponentList"=>'list',
       	                       'limitPlanningActivity'=>'list',
       	                   //'newColumn'=>'newColumn',
       	                     'sectionDisplay'=>'section',
