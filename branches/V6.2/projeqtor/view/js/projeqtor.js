@@ -1112,8 +1112,9 @@ function finalizeMessageDisplay(destination, validationType) {
           needProjectListRefresh = true;
           dojo.byId('objectClass').value = "Project";
         } else {
-          dojo.byId('objectClass').value = copyableArray[dijit.byId(
-              'copyToClass').get('value')];
+          if (dijit.byId('copyToClass') ) {
+            dojo.byId('objectClass').value = copyableArray[dijit.byId('copyToClass').get('value')];
+          }
         }
         var lastSaveId = dojo.byId('lastSaveId');
         var lastSaveClass = dojo.byId('objectClass');
