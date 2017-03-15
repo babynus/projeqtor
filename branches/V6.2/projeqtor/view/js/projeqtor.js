@@ -3819,6 +3819,11 @@ function showExtraButtons(location) {
     console.log(btnNode.offsetLeft);
     divNode.style.left=(btnNode.offsetLeft-5)+"px";
   }
- 
-  
+}
+function hideExtraButtons(location) {
+  var btnNode=dojo.byId(location);
+  var divNode=dojo.byId(location+'Div');
+  if (divNode.style.display=='block') {
+    divNode.style.display='none';
+  }
 }
