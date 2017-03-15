@@ -260,10 +260,10 @@
     //if (array_key_exists('planning',$_REQUEST) and array_key_exists('planningType',$_REQUEST) and $_REQUEST['planningType']=='Planning') {
     ?> 
     <?php organizeButtons(2);?>
-    <span id="indentButtonDiv">
+    <span id="indentButtonDiv" class="statusBar" style="display:inline-block;height:32px; width:72px;">
      <button id="indentDecreaseButton" dojoType="dijit.form.Button" showlabel="false"
         title="<?php echo i18n('indentDecreaseButton');?>"
-        iconClass="dijitButtonIcon dijitButtonIconDecrease" class="detailButton">
+        iconClass="dijitButtonIcon dijitButtonIconDecrease" class="statusBar detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
           indentTask("decrease");  
         </script>
@@ -331,6 +331,7 @@
         iconClass="dijitButtonIcon dijitButtonIconHistory" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
           showHistory('<?php echo get_class($obj);?>');  
+          hideExtraButtons('extraButtonsDetail');
         </script>
       </button>
       <?php }?>
