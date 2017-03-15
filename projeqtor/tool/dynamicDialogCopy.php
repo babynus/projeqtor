@@ -241,6 +241,20 @@ if($copyType=="copyObjectTo"){
            </tr>
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
+             <td class="dialogLabel"  >
+               <label for="copyProjectToSubProject" ><?php echo i18n("colIsSubProject") ?>&nbsp;:&nbsp;</label>
+             </td>
+             <td>
+               <select dojoType="dijit.form.FilteringSelect" 
+               <?php echo autoOpenFilteringSelect();?>
+                id="copyProjectToSubProject" name="copyProjectToSubProject"
+                class="input" >
+                <?php htmlDrawOptionForReference('idProject', $toCopy->idProject,null,false);?> 
+               </select>
+             </td>
+           </tr>
+           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+           <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
                <label for="copyProjectStructure" style="width:90%;text-align: right;"><?php echo i18n("copyProjectStructure") ?>&nbsp;:&nbsp;</label>
                <div id="copyProjectStructure" name="copyProjectStructure" dojoType="dijit.form.CheckBox" type="checkbox" 
