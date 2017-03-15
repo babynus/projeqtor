@@ -98,7 +98,7 @@
     &nbsp;
   </td>
   <td  style="white-space:nowrap;">
-    <div style="float:left;position:50%;width:45%;white-space:nowrap"> 
+    <div style="float:left;position:relative;width:45%;white-space:nowrap"> 
     <?php if (! $comboDetail ) {?>
       <?php organizeButtons();?>
       <button id="newButton" dojoType="dijit.form.Button" showlabel="false"
@@ -379,18 +379,23 @@
 <?php 
 function organizeButtons($nbButton=1) {
 	global $displayWidth, $cptButton,$showAttachment,$entendedZone;
-	$buttonWidth=40;
+	$buttonWidth=36;
 	$cptButton+=$nbButton;
-	if ($entendedZone) return;
 	$requiredWidth=$cptButton*$buttonWidth;
 	if ($showAttachment) {
 		$requiredWidth+=100;
 	}
-	if ($requiredWidth+$buttonWidth>($displayWidth/2)) {
+	if ($requiredWidth>($displayWidth/2)) {
 		if (! $entendedZone) {
 			$entendedZone=true;
-			echo '<div style="display:inline-block;style=position:absolute;width:32px;height:32px;border:1px solid red;">...</div>';
-			echo '<div style="display:none;width:50px;max-width:50px;height:500px;border:1px solid red;">';
+			echo '<div dojoType="dijit.form.Button" showlabel="false" title="'. i18n('showHistory'). '" '
+          .' iconClass="dijitButtonIcon dijitButtonIconExtraButtons" class="detailButton"'
+ 		      .' id="extraButtonsDetail" onClick="showExtraButtons(\'extraButtonsDetail\')" '
+ 		      .'></div>';
+			echo '<div class="statusBar" id="extraButtonsDetailDiv" style="display:none;position:absolute;width:36px;">';
+		} else {
+			debugLog("OK");
+			echo '<div></div>';
 		}
 	}
 	
