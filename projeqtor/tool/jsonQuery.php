@@ -111,11 +111,8 @@
       $showIdle=true;
     }
     // For versions, hide versions in service
-    debugLog("parameter1=".Parameter::getUserParameter('hideInService'));
     $hideInService=Parameter::getUserParameter('hideInService');
-    debugLog("parameter2=".$hideInService);
     if (Parameter::getUserParameter('hideInService')=='true' and property_exists($obj, 'isEis') and ! $quickSearch) {
-    	debugLog(" => filter");
     	$queryWhere.= ($queryWhere=='')?'':' and ';
     	$queryWhere.= $table . "." . $obj->getDatabaseColumnName('isEis') . "=0";
     } else {
