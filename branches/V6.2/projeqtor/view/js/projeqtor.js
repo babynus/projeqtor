@@ -1528,6 +1528,8 @@ function finaliseButtonDisplay() {
       enableWidget('saveButton');
       disableWidget('undoButton');
       disableWidget('mailButton');
+      disableWidget('changeStatusButton');
+      disableWidget('subscribeButton');
       if (dijit.byId("objectGrid")) {
         enableWidget('multiUpdateButton');
       } else {
@@ -1541,6 +1543,8 @@ function finaliseButtonDisplay() {
     formLock();
     enableWidget('newButton');
     enableWidget('newButtonList');
+    disableWidget('changeStatusButton');
+    disableWidget('subscribeButton');
     if (dijit.byId("objectGrid")) {
       enableWidget('multiUpdateButton');
     } else {
@@ -1667,6 +1671,13 @@ function formInitialize() {
   enableWidget('deleteButton');
   enableWidget('refreshButton');
   enableWidget('mailButton');
+  if ( (dojo.byId("id") && dojo.byId("id").value != "") || (dojo.byId("lastSaveId") && dojo.byId("lastSaveId")!= "") ) {
+    enableWidget('changeStatusButton');
+    enableWidget('subscribeButton');
+  } else {
+    disableWidget('changeStatusButton');
+    disableWidget('subscribeButton');
+  }
   if (dijit.byId("objectGrid")) {
     enableWidget('multiUpdateButton');
   } else {
@@ -1697,7 +1708,8 @@ function formLock() {
   disableWidget('mailButton');
   disableWidget('multiUpdateButton');
   disableWidget('indentDecreaseButton');
-  disableWidget('indentIncreaseButton');
+  disableWidget('changeStatusButton');
+  disableWidget('subscribeButton');
 }
 
 /**
@@ -1722,6 +1734,8 @@ function buttonRightLock() {
       disableWidget('multiUpdateButton');
       disableWidget('indentDecreaseButton');
       disableWidget('indentIncreaseButton');
+      disableWidget('changeStatusButton');
+      disableWidget('subscribeButton');
     }
   }
   if (deleteRight) {

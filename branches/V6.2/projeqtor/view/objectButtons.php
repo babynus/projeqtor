@@ -98,7 +98,7 @@
     </div> 
   </td>     
   <td style="width:8%; text-align:right;"  >
-      <div style="width:120px;margin-right:16px;" id="buttonDivCreationInfo"><?php include_once '../tool/getObjectCreationInfo.php';?></div>
+      <div style="width:<?php echo (property_exists($obj, 'idStatus'))?'220':'120';?>px;margin-right:16px;" id="buttonDivCreationInfo"><?php include_once '../tool/getObjectCreationInfo.php';?></div>
   </td>
   <td style="width:2%;">
     &nbsp;
@@ -133,6 +133,18 @@
 		      saveObject();
         </script>
       </button>
+       <?php organizeButtons();?>
+       <button id="changeStatusButton" dojoType="dijit.form.Button" showlabel="false"
+       title="<?php echo i18n('changeStatus');?>"
+       <?php if ($noselect) {echo "disabled";} ?> 
+       iconClass="dijitButtonIcon dijitButtonIconStatusChange" class="detailButton">
+        <script type="dojo/connect" event="onClick" args="evt">
+        //dojo.byId("printButton").blur();
+        hideExtraButtons('extraButtonsDetail');
+        
+        
+        </script>
+      </button>   
       <?php organizeButtons();?>
       <button id="printButton" dojoType="dijit.form.Button" showlabel="false"
        title="<?php echo i18n('buttonPrint', array(i18n($_REQUEST['objectClass'])));?>"
@@ -253,6 +265,18 @@
           hideExtraButtons('extraButtonsDetail');  
         </script>
       </button>
+      <?php organizeButtons();?>
+      <button id="subscribeButton" dojoType="dijit.form.Button" showlabel="false"
+       title="<?php echo i18n('subscribeToItem');?>"
+       <?php if ($noselect) {echo "disabled";} ?> 
+       iconClass="dijitButtonIcon dijitButtonIconSubscribe" class="detailButton">
+        <script type="dojo/connect" event="onClick" args="evt">
+        
+          hideExtraButtons('extraButtonsDetail');
+        
+        
+        </script>
+      </button>   
     <?php 
     if (! array_key_exists('planning',$_REQUEST)) {?>
     <?php organizeButtons();?> 
