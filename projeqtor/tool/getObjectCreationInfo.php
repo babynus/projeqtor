@@ -59,6 +59,16 @@ if ($obj->id and $updateRight) {
   }
 }
 ?>
+<?php  if (property_exists($obj, 'idStatus')) {?>
+<div style="float:left;display:table-cell ;width:100px;height:35px;vertical-align:middle;position:relative;">
+  <div style="width:110px;height:39px;max-height:39px;display:table-cell ; padding:0px 4px;vertical-align: middle;zoom:0.9;overflow:hidden;position:relative;">
+  <?php if ($obj->idStatus) {
+  	$status=new Status($obj->idStatus);
+  	echo colorNameFormatter($status->name."#split#".$status->color);
+  }?>
+  </div>
+</div>
+<?php }?>
 <div style="float:left;">
 <?php 
 if (property_exists ( $obj, 'lastUpdateDateTime' ) && $obj->lastUpdateDateTime) {
