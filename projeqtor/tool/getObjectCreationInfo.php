@@ -65,15 +65,15 @@ if (isset($_REQUEST ['destinationWidth'])) {
 debugLog("displayWidthButton=$displayWidthButtonCI");
 ?>
 <?php  if (property_exists($obj, 'idStatus') and $displayWidthButtonCI>=1000) {?>
-<div style="float:left;display:table-cell ;width:130px;height:35px;vertical-align:middle;position:relative;">
-  <div style="width:133px;height:39px;display:table-cell ; padding:0px 4px;vertical-align: middle;zoom:0.9;overflow:hidden;position:relative;<?php if ($updateRight) echo "cursor:pointer;";?>"
-  <?php if ($updateRight) {?> onClick="showDirectChangeStatus();" <?php }?> >
+<div style="float:left;display:table-cell ;width:130px;height:35px;vertical-align:middle;position:relative;z-index:99999;">
+  <div style="width:133px;height:39px;display:table-cell;padding:0px 4px;vertical-align: middle;zoom:0.9;-moz-transform: scale(0.9);overflow:hidden;position:relative;<?php if ($updateRight) echo "cursor:pointer;";?>"
+  <?php if ($updateRight) {?> onClick="showDirectChangeStatus();" title="<?php echo i18n('moveStatusBar');?>" <?php }?> >
   <?php if ($obj->idStatus) {
   	$status=new Status($obj->idStatus);
   	echo colorNameFormatter($status->name."#split#".$status->color);
   }?>
   </div>
-  <div class="statusBar" id="directChangeStatusDiv" style="display:none;position:absolute;width:133px;zoom:0.9; padding:0px 4px 4px 4px;border-top:2px solid #ffffff">
+  <div class="statusBar" id="directChangeStatusDiv" style="display:none;position:absolute;width:133px;zoom:0.9; -moz-transform: scale(0.9);padding:0px 4px 4px 4px;">
     <?php 
   	$idType='id' . get_class($obj) . 'Type';
   	$typeClass=get_class($obj) . 'Type';
