@@ -65,7 +65,7 @@
   if (isset($_REQUEST ['destinationWidth'])) {
     $displayWidthButton=$_REQUEST ['destinationWidth'];
   }
-  debugLog("displayWidthButton=$displayWidthButton");
+
   $cptButton=0;
   $isAttachmentEnabled = true; // allow attachment
   if (! Parameter::getGlobalParameter ( 'paramAttachmentDirectory' ) or ! Parameter::getGlobalParameter ( 'paramAttachmentMaxSize' )) {
@@ -96,9 +96,9 @@
         </tr>
       </table>  
     </div> 
-  </td>     
+  </td>
   <td style="width:8%; text-align:right;"  >
-      <div style="width:<?php echo (property_exists($obj, 'idStatus'))?'220':'120';?>px;margin-right:16px;" id="buttonDivCreationInfo"><?php include_once '../tool/getObjectCreationInfo.php';?></div>
+      <div style="width:<?php echo (property_exists($obj, 'idStatus') and $displayWidthButton>=1000)?'250':'120';?>px;margin-right:16px;" id="buttonDivCreationInfo"><?php include_once '../tool/getObjectCreationInfo.php';?></div>
   </td>
   <td style="width:2%;">
     &nbsp;
@@ -133,18 +133,6 @@
 		      saveObject();
         </script>
       </button>
-       <?php organizeButtons();?>
-       <button id="changeStatusButton" dojoType="dijit.form.Button" showlabel="false"
-       title="<?php echo i18n('changeStatus');?>"
-       <?php if ($noselect) {echo "disabled";} ?> 
-       iconClass="dijitButtonIcon dijitButtonIconStatusChange" class="detailButton">
-        <script type="dojo/connect" event="onClick" args="evt">
-        //dojo.byId("printButton").blur();
-        hideExtraButtons('extraButtonsDetail');
-        
-        
-        </script>
-      </button>   
       <?php organizeButtons();?>
       <button id="printButton" dojoType="dijit.form.Button" showlabel="false"
        title="<?php echo i18n('buttonPrint', array(i18n($_REQUEST['objectClass'])));?>"
@@ -418,7 +406,6 @@ function organizeButtons($nbButton=1) {
 	if ($showAttachment and $obj->id) {
 		$requiredWidth+=100;
 	}
-	debugLog("requiredWidth=$requiredWidth, displayWidthButton=$displayWidthButton");
 	if ($requiredWidth>($displayWidthButton/2)) {
 		if (! $entendedZone) {
 			$entendedZone=true;
