@@ -857,6 +857,11 @@ function loadContent(page, destination, formName, isResultMessage,
  */
 function loadDiv(page, destinationDiv, formName, callback) {
   var contentNode = dojo.byId(destinationDiv);
+  if (page.indexOf('getObjectCreationInfo')>=0 && dijit.byId('detailDiv') && page.indexOf('destinationWidth')<0) {
+    var destinationWidth = dojo.style(dojo.byId('detailDiv'), "width");
+    // var destinationHeight = dojo.style(dojo.byId('detailDiv'), "height");
+    page+=((page.indexOf('?')>=0)?'&':'?')+'destinationWidth='+destinationWidth;
+  }
   dojo.xhrPost({
     url : page,
     form : dojo.byId(formName),
@@ -3838,6 +3843,25 @@ function showExtraButtons(location) {
 function hideExtraButtons(location) {
   var btnNode=dojo.byId(location);
   var divNode=dojo.byId(location+'Div');
+  if (! divNode) return;
+  if (divNode.style.display=='block') {
+    divNode.style.display='none';
+  }
+}
+
+function showDirectChangeStatus() {
+  var divNode=dojo.byId('directChangeStatusDiv');
+  if (! divNode) return;
+  if (divNode.style.display=='block') {
+    divNode.style.display='none';
+  } else {
+    divNode.style.display='block';
+    //console.log(btnNode.offsetLeft);
+    //divNode.style.left=(btnNode.offsetLeft-5)+"px";
+  }
+}
+function hideDirectChangeStatus() {
+  var divNode=dojo.byId('directChangeStatusDiv');
   if (! divNode) return;
   if (divNode.style.display=='block') {
     divNode.style.display='none';
