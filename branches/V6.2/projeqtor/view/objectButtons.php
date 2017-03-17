@@ -255,7 +255,7 @@
       </button>
       <?php organizeButtons();?>
       <button id="subscribeButton" dojoType="dijit.form.Button" showlabel="false"
-       title="<?php echo i18n('subscribeToItem');?>"
+       title="<?php echo i18n('showSubscribeOptions');?>"
        <?php if ($noselect) {echo "disabled";} ?> 
        iconClass="dijitButtonIcon dijitButtonIconSubscribe" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
@@ -409,7 +409,7 @@ function organizeButtons($nbButton=1) {
 	if ($requiredWidth>($displayWidthButton/2)) {
 		if (! $entendedZone) {
 			$entendedZone=true;
-			echo '<div dojoType="dijit.form.Button" showlabel="false" title="'. i18n('showHistory'). '" '
+			echo '<div dojoType="dijit.form.Button" showlabel="false" title="'. i18n('extraButtonsBar'). '" '
           .' iconClass="dijitButtonIcon dijitButtonIconExtraButtons" class="detailButton"'
  		      .' id="extraButtonsDetail" onClick="showExtraButtons(\'extraButtonsDetail\')" '
  		      .'></div>';
