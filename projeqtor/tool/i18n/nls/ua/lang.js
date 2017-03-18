@@ -2522,6 +2522,7 @@ showProjectLevel: "показати вищевказані справи (activit
 showProjectsLinked: "показати проекти&#44; пов'язані з версіями",
 showResources: "показати ресурси праворуч рядка Ганта",
 showStructure: "відобразити структуру",
+showSubscribedItemsList: "[Show list of subscriptions]",
 showSubscribeOptions: "[Show subscription options]",
 showThisPageOnStart: "показати цю сторінку на старті    ",
 showThisPageUnckeck: "ця сторінка вже не відображатиметься <br/> Щоб показати її знову&#44; виберіть її в якості стартової сторінки в параметрах користувача.",
