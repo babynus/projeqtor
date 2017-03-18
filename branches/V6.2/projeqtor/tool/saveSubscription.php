@@ -30,6 +30,43 @@
  */
 require_once "../tool/projeqtor.php";
 
-debugLog($_REQUEST);
-echo '{"result":"OK","itemLabel":"test"}';
+$mode=RequestHandler::getExpected('mode',array('on','off'));
+$class=RequestHandler::getClass('objectClass',true);
+$id=RequestHandler::getId('objectId',true);
+$userId=RequestHandler::getId('userId',true);
+
+$result='OK';
+$sub=SqlElement::getSingleSqlElementFromCriteria('Subscription', array('refType'=>$class,'refId'=>$id,'idAffectable'=>$userId));
+if ($mode=='on') {
+  if (!$sub->id) {
+    $sub->idAffectable=$userId;
+    $sub->refType=$class;
+    $sub->refId=$id;
+    $sub->idUser=getSessionUser()->id;
+    $sub->creationDateTime=date('Y-m-d H:i:s');
+    //$sub->comment;
+    $message=$sub->save();
+    $result=getLastOperationStatus($message);
+  } else {
+    $result="ERROR";
+    $message=i18n('errorDuplicateLink');
+  }
+} else if ($mode=='off') {
+  if ($sub->id) {
+    $message=$sub->delete();
+    $result=getLastOperationStatus($message);
+  } else {
+    $result="ERROR";
+    $message=i18n('messageDeleted',array($class));
+  }
+} else {
+  $result="ERROR";
+  $message='invalid mode (on/off)';
+}
+
+$itemLabel=i18n($class).' #'.$id;
+$posTag=strpos($message,'<');
+if ($posTag) $message=substr($message,0,$posTag);
+
+echo '{"result":"'.$result.'","itemLabel":"'.$itemLabel.'", "message":"'.$message.'"}';
 ?>

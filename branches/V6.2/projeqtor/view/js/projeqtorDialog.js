@@ -7734,6 +7734,9 @@ function subscribeToItem(objectClass, objectId, userId) {
       });
       if (result=='OK') {
         addMessage(i18n('subscriptionSuccess',new Array(itemLabel)));
+        dijit.byId('subscribeButton').set('iconClass','dijitButtonIcon dijitButtonIconSubscribeValid');
+        enableWidget('subscribeButtonUnsubscribe');
+        disableWidget('subscribeButtonSubscribe');
       } else {
         showError(i18n('subscriptionFailed'));
       }
@@ -7755,15 +7758,20 @@ function unsubscribeFromItem(objectClass, objectId, userId) {
     load : function(data) {
       var result="KO";
       var itemLabel="";
+      var message="";
       console.log(data);
       JSON.parse(data, (key, value) => {
         if (key=='result') result=value;
         else if (key=='itemLabel') itemLabel=value;
+        else if (key=='message') message=value;
       });
       if (result=='OK') {
         addMessage(i18n('unsubscriptionSuccess',new Array(itemLabel)));
+        dijit.byId('subscribeButton').set('iconClass','dijitButtonIcon dijitButtonIconSubscribe');
+        enableWidget('subscribeButtonSubscribe');
+        disableWidget('subscribeButtonUnsubscribe');
       } else {
-        showError(i18n('subscriptionFailed'));
+        showError(i18n('subscriptionFailed')+'<br/>'+message);
       }
     },
     error : function() {

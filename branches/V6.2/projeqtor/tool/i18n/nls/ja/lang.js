@@ -2522,6 +2522,7 @@ showProjectLevel: "アクティビティのプロジェクトレベルを表示"
 showProjectsLinked: "バージョンに関連付いているプロジェクトを表示",
 showResources: "ガントチャートバーの右部にリソースを表示",
 showStructure: "構成を表示",
+showSubscribedItemsList: "[Show list of subscriptions]",
 showSubscribeOptions: "[Show subscription options]",
 showThisPageOnStart: "スタートアップにこのページを表示",
 showThisPageUnckeck: "このページは今後表示されません。<br/>表示する場合はユーザーパラメータでスタートアップとして表示するように設定してください。",
