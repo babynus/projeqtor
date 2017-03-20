@@ -316,7 +316,7 @@ function drawTableFromObjectList($objectList) {
   	htmlDrawCrossTable(array('imputation'=>i18n('imputationAccess'), 
   	                         'workValid'=>i18n('workValidate'),
   	                         'diary'=>i18n('diaryAccess'),
-  	                         //'expense'=>i18n('resourceExpenseAccess')
+  			                     'subscription'=>i18n('canSubscribeForOthers')
   	                         ), 
   	    'scope', 'profile', 'idProfile', 'habilitationOther', 'rightAccess', 'list', 'accessScope') ;
   	echo '</div><br/>';
