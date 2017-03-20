@@ -35,8 +35,15 @@ $objectClass=RequestHandler::getClass('objectClass',true);
 $objectId=RequestHandler::getId('objectId',true);
 
 $res=new Affectable();
-$crit=array("idle"=>"0");
-$lstRes=$res->getSqlElementsFromCriteria($crit,false,null,'fullName asc, name asc',true);
+$scope=Affectable::getVisibilityScope();
+$crit="idle=0";
+if ($scope=='orga') {
+	$crit.=" and idOrganization in (". Organization::getUserOrganisationList().")";
+} else if ($scope=='team') {
+	$aff=new Affectable(getSessionUser()->id,true);
+	$crit.=" and idTeam=".Sql::fmtId($aff->idTeam);
+}
+$lstRes=$res->getSqlElementsFromCriteria(null,false,$crit,'fullName asc, name asc',true);
 $sub=new Subscription();
 $crit=array("refType"=>$objectClass,"refId"=>$objectId);
 $lstSub=$sub->getSqlElementsFromCriteria($crit,false,null,null,true);
@@ -44,7 +51,7 @@ foreach ($lstSub as $sub) {
   if (isset($lstRes['#'.$sub->idAffectable])) unset($lstRes['#'.$sub->idAffectable]);
 }
 if (sessionValueExists('screenHeight') and getSessionValue('screenHeight')) {
-	$showHeight = round(getSessionValue('screenHeight') * 0.2)."px";
+	$showHeight = round(getSessionValue('screenHeight') * 0.4)."px";
 } else {
 	$showHeight="100%";
 }
@@ -69,14 +76,17 @@ echo '<input dojoType="dijit.form.TextBox" id="subscriptionSubscribedSearch" cla
 echo '<div style="position:absolute;right:4px;top:3px;" class="iconView"></div>';
 echo '</td></tr>';
 echo '<tr>';
-echo '<td style="max-width:200px;max-height:'.$showHeight.';vertical-align:top" id="subscriptionAvailable" dojotype="dojo.dnd.Source" dndType="subsription" withhandles="false" class="dijitAccordionTitle" data-dojo-props="accept: [ \'subscription\' ]">';
+echo '<td style="max-width:200px;vertical-align:top" class="dijitAccordionTitle" >';
+echo '<div style="height:'.$showHeight.';overflow:auto;" id="subscriptionAvailable" dojotype="dojo.dnd.Source" dndType="subsription" withhandles="false" data-dojo-props="accept: [ \'subscription\' ]">';
 foreach($lstRes as $res) {
   drawResourceTile($res,"subscriptionAvailable");
 }
+echo '</div>';
 echo '</td>';
 echo '<td class="" ></td>';
-echo '<td style="position:relative;max-width:200px;max-height:'.$showHeight.';vertical-align:top" id="subscriptionSubscribed" dojotype="dojo.dnd.Source" dndType="subsription" withhandles="false" class="dijitAccordionTitle " data-dojo-props="accept: [ \'subscription\' ]">';
+echo '<td style="position:relative;max-width:200px;max-height:'.$showHeight.';vertical-align:top" class="dijitAccordionTitle" >';
 echo '<div style="position:absolute;bottom:5px;left:5px;width:24px;height:24px;opacity:0.7;" class="dijitButtonIcon dijitButtonIconSubscribe" ></div>';
+echo '<div style="height:'.$showHeight.';overflow:auto;" id="subscriptionSubscribed" dojotype="dojo.dnd.Source" dndType="subsription" withhandles="false" data-dojo-props="accept: [ \'subscription\' ]">';
 foreach($lstSub as $sub) {
   $res=new Affectable($sub->idAffectable);
   drawResourceTile($res,"subscriptionSubscribed");
