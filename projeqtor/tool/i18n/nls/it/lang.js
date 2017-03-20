@@ -1281,7 +1281,7 @@ ganttDetailScaleError: "passare alla scala più piccola<br/>(giorno o settimana)
 Health: "Stato di salute",
 help: "Manuale online",
 helpAlertCheckTime: "Ritardo in secondi tra ogni chiamata (dalla parte cliente) per controllare se è disponibile un nuovo allarme",
-helpAllocateResponsibleToProject: "[automatically create an allocation for the project manager]",
+helpAllocateResponsibleToProject: "[automatically create an allocation for the project manager to the project]",
 helpAllowTypeRestrictionOnProject: "permette di definire una ulteriore restrizione di tipi su ogni progetto in aggiunta alle restrizioni definite a livello tipo di progetto",
 helpBillNumSize: "Numero di cifre per formattare il numero fattura",
 helpBillNumStart: "Numero di partenza per il calcolo del numero fattura",
