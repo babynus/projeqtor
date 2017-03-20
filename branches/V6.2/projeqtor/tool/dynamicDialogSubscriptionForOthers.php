@@ -46,7 +46,7 @@ if ($scope=='orga') {
 $lstRes=$res->getSqlElementsFromCriteria(null,false,$crit,'fullName asc, name asc',true);
 $sub=new Subscription();
 $crit=array("refType"=>$objectClass,"refId"=>$objectId);
-$lstSub=$sub->getSqlElementsFromCriteria($crit,false,null,null,true);
+$lstSub=$sub->getSqlElementsFromCriteria($crit,false,null,null,false);
 
 if (sessionValueExists('screenHeight') and getSessionValue('screenHeight')) {
 	$showHeight = round(getSessionValue('screenHeight') * 0.4)."px";
@@ -54,15 +54,27 @@ if (sessionValueExists('screenHeight') and getSessionValue('screenHeight')) {
 	$showHeight="100%";
 }
 
+foreach ($lstSub as $idSub=>$sub) {
+  if (isset($lstRes['#'.$sub->idAffectable])) {
+    $lstSub['#'.$sub->idAffectable]=$lstRes['#'.$sub->idAffectable];
+    unset($lstRes['#'.$sub->idAffectable]);
+  } else {
+    $lstSub['#'.$sub->idAffectable]=new Affectable($sub->idAffectable);
+  }
+  unset($lstSub[$idSub]);
+}
+
 $crit=array('scope' => 'subscription','idProfile' => getSessionUser()->idProfile);
 $habilitation=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', $crit);
 $scope=new AccessScope($habilitation->rightAccess, true);
 if (! $scope->accessCode or $scope->accessCode == 'NO') {
 	$lstRes=array(); // No access to this feature ;)
+	$lstSub=array(); // No access to this feature ;)
 } else if ($scope->accessCode == 'ALL') {
 	// OK
 } else if ($scope->accessCode == 'OWN')  {
 	$lstRes=array(); // Not for other, should not come here
+	$lstSub=array(); // Not for other, should not come here
 } else if ($scope->accessCode == 'PRO') {
 	$stockRes=$lstRes;
 	$stockSub=$lstSub;
@@ -83,9 +95,8 @@ if (! $scope->accessCode or $scope->accessCode == 'NO') {
 	}
 }
 
-foreach ($lstSub as $sub) {
-	if (isset($lstRes['#'.$sub->idAffectable])) unset($lstRes['#'.$sub->idAffectable]);
-}
+uasort($lstRes,'Affectable::sort');
+uasort($lstSub,'Affectable::sort');
 
 echo '<input type="hidden" id="subscriptionObjectClass" value="'.$objectClass.'" />';
 echo '<input type="hidden" id="subscriptionObjectClass" value="'.$objectId.'" />';
@@ -107,7 +118,8 @@ echo '<input dojoType="dijit.form.TextBox" id="subscriptionSubscribedSearch" cla
 echo '<div style="position:absolute;right:4px;top:3px;" class="iconView"></div>';
 echo '</td></tr>';
 echo '<tr>';
-echo '<td style="max-width:200px;vertical-align:top" class="dijitAccordionTitle" >';
+echo '<td style="position:relative;max-width:200px;vertical-align:top" class="dijitAccordionTitle" >';
+echo '<div style="position:absolute;bottom:5px;left:5px;width:24px;height:24px;opacity:0.7;" class="dijitButtonIcon dijitButtonIconDelete" ></div>';
 echo '<div style="height:'.$showHeight.';overflow:auto;" id="subscriptionAvailable" dojotype="dojo.dnd.Source" dndType="subsription" withhandles="false" data-dojo-props="accept: [ \'subscription\' ]">';
 foreach($lstRes as $res) {
   drawResourceTile($res,"subscriptionAvailable");
@@ -119,8 +131,7 @@ echo '<td style="position:relative;max-width:200px;max-height:'.$showHeight.';ve
 echo '<div style="position:absolute;bottom:5px;left:5px;width:24px;height:24px;opacity:0.7;" class="dijitButtonIcon dijitButtonIconSubscribe" ></div>';
 echo '<div style="height:'.$showHeight.';overflow:auto;" id="subscriptionSubscribed" dojotype="dojo.dnd.Source" dndType="subsription" withhandles="false" data-dojo-props="accept: [ \'subscription\' ]">';
 foreach($lstSub as $sub) {
-  $res=new Affectable($sub->idAffectable);
-  drawResourceTile($res,"subscriptionSubscribed");
+  drawResourceTile($sub,"subscriptionSubscribed");
 }
 echo '</td>';
 echo '</tr>';

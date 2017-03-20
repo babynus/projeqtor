@@ -42,3 +42,6 @@ UPDATE `${prefix}accessscope` set `nameSpecific`=replace(`name`,'accessScope','a
 UPDATE `${prefix}habilitationother` set `rightAccess`=2 WHERE `rightAccess`=5 and `scope` in ('imputation','workValid','diary');
 
 ALTER TABLE `${prefix}statusmail` ADD `mailToSubscribers` int(1) unsigned DEFAULT 0;
+
+ALTER TABLE `${prefix}indicatordefinition` ADD `mailToSubscribers` int(1) unsigned DEFAULT 0,
+ADD `alertToSubscribers` int(1) unsigned DEFAULT 0;
