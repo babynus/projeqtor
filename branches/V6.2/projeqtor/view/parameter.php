@@ -318,7 +318,7 @@ function drawTableFromObjectList($objectList) {
   	                         'diary'=>i18n('diaryAccess'),
   			                     'subscription'=>i18n('canSubscribeForOthers')
   	                         ), 
-  	    'scope', 'profile', 'idProfile', 'habilitationOther', 'rightAccess', 'list', 'accessScope') ;
+  	    'scope', 'profile', 'idProfile', 'habilitationOther', 'rightAccess', 'list', 'accessScopeSpecific') ;
   	echo '</div><br/>';
   	$titlePane="habilitationOther_WorkCost";
   	echo '<div dojoType="dijit.TitlePane"';
