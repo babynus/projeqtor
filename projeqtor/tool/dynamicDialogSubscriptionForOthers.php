@@ -56,6 +56,35 @@ if (sessionValueExists('screenHeight') and getSessionValue('screenHeight')) {
 	$showHeight="100%";
 }
 
+
+
+$crit=array('scope' => 'subscription','idProfile' => getSessionUser()->idProfile);
+$habilitation=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', $crit);
+$scope=new AccessScope($habilitation->rightAccess, true);
+if (! $scope->accessCode or $scope->accessCode == 'NO') {
+	$canValidate=false;
+} else if ($scope->accessCode == 'ALL') {
+	$canValidate=true;
+} else if (($scope->accessCode == 'OWN' or $scope->accessCode == 'RES') and $user->isResource and $resourceId == $user->id) {
+	$canValidate=true;
+} else if ($scope->accessCode == 'PRO') {
+	$crit='idProject in ' . transformListIntoInClause($user->getVisibleProjects());
+	$aff=new Affectation();
+	$lstAff=$aff->getSqlElementsFromCriteria(null, false, $crit, null, true, true);
+	$fullTable=SqlList::getList('Resource');
+	foreach ( $lstAff as $id => $aff ) {
+		if ($aff->idResource == $resourceId) {
+			$canValidate=true;
+			continue;
+		}
+	}
+}
+
+
+
+
+
+
 echo '<input type="hidden" id="subscriptionObjectClass" value="'.$objectClass.'" />';
 echo '<input type="hidden" id="subscriptionObjectClass" value="'.$objectId.'" />';
 echo '<table style="width:100%;height:100%;min-height:300px">';
