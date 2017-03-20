@@ -47,43 +47,45 @@ $lstRes=$res->getSqlElementsFromCriteria(null,false,$crit,'fullName asc, name as
 $sub=new Subscription();
 $crit=array("refType"=>$objectClass,"refId"=>$objectId);
 $lstSub=$sub->getSqlElementsFromCriteria($crit,false,null,null,true);
-foreach ($lstSub as $sub) {
-  if (isset($lstRes['#'.$sub->idAffectable])) unset($lstRes['#'.$sub->idAffectable]);
-}
+
 if (sessionValueExists('screenHeight') and getSessionValue('screenHeight')) {
 	$showHeight = round(getSessionValue('screenHeight') * 0.4)."px";
 } else {
 	$showHeight="100%";
 }
 
-
-
 $crit=array('scope' => 'subscription','idProfile' => getSessionUser()->idProfile);
 $habilitation=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', $crit);
 $scope=new AccessScope($habilitation->rightAccess, true);
 if (! $scope->accessCode or $scope->accessCode == 'NO') {
-	$canValidate=false;
+	$lstRes=array(); // No access to this feature ;)
 } else if ($scope->accessCode == 'ALL') {
-	$canValidate=true;
-} else if (($scope->accessCode == 'OWN' or $scope->accessCode == 'RES') and $user->isResource and $resourceId == $user->id) {
-	$canValidate=true;
+	// OK
+} else if ($scope->accessCode == 'OWN')  {
+	$lstRes=array(); // Not for other, should not come here
 } else if ($scope->accessCode == 'PRO') {
-	$crit='idProject in ' . transformListIntoInClause($user->getVisibleProjects());
-	$aff=new Affectation();
+	$stockRes=$lstRes;
+	$stockSub=$lstSub;
+	$lstRes=array();
+	$lstSub=array();
+	$crit='idProject in ' . transformListIntoInClause($user->getAffectedProjects(true));
+	$aff=new Affectation(); 
 	$lstAff=$aff->getSqlElementsFromCriteria(null, false, $crit, null, true, true);
 	$fullTable=SqlList::getList('Resource');
 	foreach ( $lstAff as $id => $aff ) {
-		if ($aff->idResource == $resourceId) {
-			$canValidate=true;
-			continue;
+		$key='#'.$aff->idResource;
+		if (isset($stockRes[$key])) {
+		  $lstRes[$key]=$stockRes[$key];
+		}
+		if (isset($stockSub[$key])) {
+			$lstSub[$key]=$stockSub[$key];
 		}
 	}
 }
 
-
-
-
-
+foreach ($lstSub as $sub) {
+	if (isset($lstRes['#'.$sub->idAffectable])) unset($lstRes['#'.$sub->idAffectable]);
+}
 
 echo '<input type="hidden" id="subscriptionObjectClass" value="'.$objectClass.'" />';
 echo '<input type="hidden" id="subscriptionObjectClass" value="'.$objectId.'" />';
