@@ -40,3 +40,5 @@ ALTER TABLE `${prefix}accessscope` ADD `nameSpecific` varchar(100) DEFAULT null;
 UPDATE `${prefix}accessscope` set `specific`=0 WHERE accessCode='RES';
 UPDATE `${prefix}accessscope` set `nameSpecific`=replace(`name`,'accessScope','accessScopeSpecific') WHERE `specific`=1;
 UPDATE `${prefix}habilitationother` set `rightAccess`=2 WHERE `rightAccess`=5 and `scope` in ('imputation','workValid','diary');
+
+ALTER TABLE `${prefix}statusmail` ADD `mailToSubscribers` int(1) unsigned DEFAULT 0;
