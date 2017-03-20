@@ -3756,7 +3756,7 @@ abstract class SqlElement {
 				}
 			}
 			if ($statusMail->mailToSubscribers) {
-			  $crit=array('refType'=>$this->refType, 'refId'=>$this->refId);
+			  $crit=array('refType'=>get_class($this), 'refId'=>$this->id);
 			  $sub=new Subscription();
 			  $lstSub=$sub->getSqlElementsFromCriteria($crit);
 			  foreach ($lstSub as $sub) {
