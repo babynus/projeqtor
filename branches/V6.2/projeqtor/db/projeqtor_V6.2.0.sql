@@ -85,3 +85,5 @@ INSERT INTO `${prefix}type` (`scope`, `name`, `idle`) VALUES
 
 ALTER TABLE `${prefix}quotation`
 ADD `idRecipient` int(12) unsigned DEFAULT null;
+
+UPDATE `${prefix}menu` SET `idle`=1 WHERE id=173;
