@@ -66,18 +66,18 @@ ALTER TABLE `${prefix}billline`
 ADD idCatalog int(12) unsigned DEFAULT NULL;
 
 INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES 
-(173, 'menuCatalog', 152, 'object', 286, 'Project', 0, 'Financial'),
-(174, 'menuCatalogType', 79, 'object', 935, 'ReadWriteType', 0, 'Type');
+(174, 'menuCatalog', 152, 'object', 286, 'Project', 0, 'Financial'),
+(175, 'menuCatalogType', 79, 'object', 935, 'ReadWriteType', 0, 'Type');
 
 INSERT INTO ${prefix}habilitation (idProfile, idMenu, allowAccess) VALUES 
-(1, 173, 1),
 (1, 174, 1),
-(2, 174, 0),
-(3, 174, 0),
-(4, 174, 0),
-(5, 174, 0),
-(6, 174, 0),
-(7, 174, 0);
+(1, 175, 1),
+(2, 175, 0),
+(3, 175, 0),
+(4, 175, 0),
+(5, 175, 0),
+(6, 175, 0),
+(7, 175, 0);
 
 INSERT INTO `${prefix}type` (`scope`, `name`, `idle`) VALUES 
 ('Catalog', 'Product',0),
