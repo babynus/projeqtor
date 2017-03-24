@@ -45,6 +45,7 @@ echo '</tr>';
 $sub=new Subscription();
 $critArray=array('idAffectable'=>$userId);
 $list=$sub->getSqlElementsFromCriteria($critArray);
+var_dump($list);
 foreach ($list as $sub) {
   $item=new $sub->refType($sub->refId);
   $objStatus=new Status($item->idStatus);
