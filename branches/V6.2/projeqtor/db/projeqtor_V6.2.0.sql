@@ -54,7 +54,7 @@ CREATE TABLE `${prefix}catalog` (
   `detail` varchar(400)  DEFAULT NULL,
   `nomenclature` varchar(100)  DEFAULT NULL,
   `specification` mediumtext  DEFAULT NULL,
-  `unitPrice` decimal(12,2)  DEFAULT NULL,
+  `unitCost` decimal(10,2)  DEFAULT NULL,
   `idMeasureUnit` int(12) unsigned DEFAULT NULL,
   `idProduct` int(12) unsigned DEFAULT NULL,
   `idProductVersion` int(12) unsigned DEFAULT NULL,
