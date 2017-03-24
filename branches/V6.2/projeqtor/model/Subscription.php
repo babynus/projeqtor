@@ -42,7 +42,9 @@ class Subscription extends SqlElement {
   
   //public $_noHistory=true;
     
-  
+  private static $_fieldsAttributes=array("refType"=>"required", 
+  		"refId"=>"required"
+  }
   
    /** ==========================================================================
    * Constructor
@@ -65,6 +67,12 @@ class Subscription extends SqlElement {
 // ============================================================================**********
 // GET STATIC DATA FUNCTIONS
 // ============================================================================**********
-  
+  /** ==========================================================================
+   * Return the specific fieldsAttributes
+   * @return the fieldsAttributes
+   */
+  protected function getStaticFieldsAttributes() {
+  	return self::$_fieldsAttributes;
+  }
 }
 ?>
