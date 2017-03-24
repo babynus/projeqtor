@@ -88,3 +88,11 @@ ALTER TABLE `${prefix}quotation`
 ADD `idRecipient` int(12) unsigned DEFAULT null;
 
 UPDATE `${prefix}menu` SET `idle`=1 WHERE id=173;
+
+CREATE TABLE `${prefix}extrareadonlyfield` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `scope` varchar(100),
+  `idType` int(12) unsigned DEFAULT NULL,
+  `field` varchar(100),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
