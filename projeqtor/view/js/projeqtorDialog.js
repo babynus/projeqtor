@@ -7714,6 +7714,7 @@ function toggleFullScreen() {
 *
 */
 function subscribeToItem(objectClass, objectId, userId) {
+  if (! objectId && dojo.byId('id')) objectId=dojo.byId('id').value;
   var url="../tool/saveSubscription.php?mode=on";
   url+="&objectClass="+objectClass;
   url+="&objectId="+objectId;
@@ -7744,6 +7745,7 @@ function subscribeToItem(objectClass, objectId, userId) {
 }
 
 function unsubscribeFromItem(objectClass, objectId, userId) {
+  if (! objectId && dojo.byId('id')) objectId=dojo.byId('id').value;
   var url="../tool/saveSubscription.php?mode=off";
   url+="&objectClass="+objectClass;
   url+="&objectId="+objectId;
@@ -7776,9 +7778,11 @@ function unsubscribeFromItem(objectClass, objectId, userId) {
 }
 
 function subscribeForOthers(objectClass, objectId) {
+  if (! objectId && dojo.byId('id')) objectId=dojo.byId('id').value;
   loadDialog('dialogSubscriptionForOthers',null,true,'&objectClass='+objectClass+'&objectId='+objectId,true);
 }
 function showSubscribersList(objectClass, objectId) {
+  if (! objectId && dojo.byId('id')) objectId=dojo.byId('id').value;
   loadDialog('dialogSubscribersList',null,true,'&objectClass='+objectClass+'&objectId='+objectId,true);
 }
 
@@ -7787,6 +7791,7 @@ function showSubscriptionList(userId) {
 }
 
 function changeSubscriptionFromDialog(mode,dialog,objectClass,objectId,userId,key,currentUserId) {
+  if (! objectId && dojo.byId('id')) objectId=dojo.byId('id').value;
   var url="../tool/saveSubscription.php?mode="+mode;
   url+="&objectClass="+objectClass;
   url+="&objectId="+objectId;
