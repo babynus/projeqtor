@@ -43,7 +43,7 @@ class Subscription extends SqlElement {
   //public $_noHistory=true;
     
   private static $_fieldsAttributes=array("refType"=>"required", 
-  		"refId"=>"required"
+  		 "refId"=>"required"
   }
   
    /** ==========================================================================
