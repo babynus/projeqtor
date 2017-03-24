@@ -59,6 +59,7 @@ CREATE TABLE `${prefix}catalog` (
   `idProduct` int(12) unsigned DEFAULT NULL,
   `idProductVersion` int(12) unsigned DEFAULT NULL,
   `idle` int(1) unsigned DEFAULT '0',
+  `quantity` decimal(5,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
