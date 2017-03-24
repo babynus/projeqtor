@@ -2082,8 +2082,11 @@ function billLineChangeCatalog(){
       arrayData=data.split('#!#!#!#!#!#');
       dijit.byId('billLineDescription').set('value',arrayData[0]);
       dijit.byId('billLineDetail').set('value',arrayData[1]);
-      dijit.byId('billLinePrice').set('value',parseFloat(arrayData[2]));
-      dijit.byId('billLineUnit').set('value',arrayData[3]);
+      dijit.byId('billLinePrice').set('value',parseFloat(arrayData[3]));
+      dijit.byId('billLineUnit').set('value',arrayData[4]);
+      if(arrayData[6]){
+        dijit.byId('billLineQuantity').set('value',parseFloat(arrayData[6])); 
+      }
     }
   });
 }
