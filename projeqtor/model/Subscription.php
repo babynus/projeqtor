@@ -44,7 +44,7 @@ class Subscription extends SqlElement {
     
   private static $_fieldsAttributes=array("refType"=>"required", 
   		 "refId"=>"required"
-  }
+  );
   
    /** ==========================================================================
    * Constructor
