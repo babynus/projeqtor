@@ -43,6 +43,7 @@ class Catalog extends SqlElement {
   public $_sec_treatment;
   public $unitCost;
   public $idMeasureUnit;
+  public $quantity;
   public $idProduct;
   public $idProductVersion;
   
@@ -60,6 +61,7 @@ class Catalog extends SqlElement {
       "idle"=>"hidden",
       "description"=>"required",
       "idCatalogType"=>"required",
+      "unitCost"=>"nobr",
   );
   /** ==========================================================================
    * Constructor
