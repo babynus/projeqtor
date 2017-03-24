@@ -96,3 +96,7 @@ CREATE TABLE `${prefix}extrareadonlyfield` (
   `field` varchar(100),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+INSERT INTO `${prefix}mailable` (`id`, `name`, `idle`) VALUES 
+(27,'Incoming', '0'), 
+(28,'Deliverable', '0');

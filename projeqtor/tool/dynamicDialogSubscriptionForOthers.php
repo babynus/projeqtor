@@ -125,7 +125,7 @@ echo '<input dojoType="dijit.form.TextBox" id="subscriptionSubscribedSearch" cla
 echo '<div style="position:absolute;right:4px;top:3px;" class="iconView"></div>';
 echo '</td></tr>';
 echo '<tr>';
-echo '<td style="position:relative;max-width:200px;vertical-align:top;padding: 5px" class="noteHeader" >';
+echo '<td style="position:relative;max-width:200px;vertical-align:top;" class="noteHeader" >';
 echo '<div style="position:absolute;bottom:5px;left:5px;width:24px;height:24px;opacity:0.7;" class="dijitButtonIcon dijitButtonIconDelete" ></div>';
 echo '<div style="height:'.$showHeight.';overflow:auto;" id="subscriptionAvailable" dojotype="dojo.dnd.Source" dndType="subsription" withhandles="false" data-dojo-props="accept: [ \'subscription\' ]">';
 foreach($lstRes as $res) {
@@ -134,7 +134,7 @@ foreach($lstRes as $res) {
 echo '</div>';
 echo '</td>';
 echo '<td class="" ></td>';
-echo '<td style="position:relative;max-width:200px;max-height:'.$showHeight.';vertical-align:top;padding: 5px" class="noteHeader" >';
+echo '<td style="position:relative;max-width:200px;max-height:'.$showHeight.';vertical-align:top;" class="noteHeader" >';
 echo '<div style="position:absolute;bottom:5px;left:5px;width:24px;height:24px;opacity:0.7;" class="dijitButtonIcon dijitButtonIconSubscribe" ></div>';
 echo '<div style="height:'.$showHeight.';overflow:auto;" id="subscriptionSubscribed" dojotype="dojo.dnd.Source" dndType="subsription" withhandles="false" data-dojo-props="accept: [ \'subscription\' ]">';
 foreach($lstSub as $sub) {
@@ -151,7 +151,7 @@ function drawResourceTile($res,$dndSource){
   global $objectClass, $objectId;
   $name=($res->name)?$res->name:$res->userName;
   $canDnD=(isset($res->_readOnly))?false:true;
-  echo '<div class="'.(($canDnD)?'dojoDndItem':'').' subscription" id="subscription'.$res->id.'" value="'.str_replace('"','',$name).'" objectclass="'.$objectClass.'" objectid="'.$objectId.'" userid="'.$res->id.'" currentuserid="'.getSessionUser()->id.'" dndType="subscription" style="position:relative;padding: 2px 5px 3px 5px;margin:0px 0px 5px 0px;color:#707070;min-height:22px;background-color:#ffffff; border:1px solid #707070" >'
+  echo '<div class="'.(($canDnD)?'dojoDndItem':'').' subscription" id="subscription'.$res->id.'" value="'.str_replace('"','',$name).'" objectclass="'.$objectClass.'" objectid="'.$objectId.'" userid="'.$res->id.'" currentuserid="'.getSessionUser()->id.'" dndType="subscription" style="position:relative;padding: 2px 5px 3px 5px;margin:5px;color:#707070;min-height:22px;background-color:#ffffff; border:1px solid #707070" >'
     .formatUserThumb($res->id, "", "")
     .$name
     .'</div>';
