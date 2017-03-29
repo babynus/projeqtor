@@ -2086,9 +2086,9 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
     startBuffering($included);
     //$sectionName=(strpos($section, '_')!=0)?explode('_',$section)[0]:$section;
     $sectionName=$section;
-    if (strpos($section, '_')!=0) {
-      $split=explode('_',$section);
-      $section=$split[0];
+    if (strpos($sectionName, '_')!=0) {
+      $split=explode('_',$sectionName);
+      $sectionName=$split[0];
     }
     
     echo '<div dojoType="dijit.TitlePane" title="' . i18n('section' . ucfirst($sectionName)) . (($nbBadge!==null)?'<div id=\''.$section.'Badge\' class=\'sectionBadge\'>'.$nbBadge.'</div>':'').'"';
@@ -2100,7 +2100,7 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
     echo '<table class="detail"  style="width: 100%;" >';
   } else {
     echo '<table class="detail" style="width:' . $widthPct . ';" >';
-    echo '<tr><td class="section">' . i18n('section' . ucfirst($section)) . '</td></tr>';
+    echo '<tr><td class="section">' . i18n('section' . ucfirst($sectionName)) . '</td></tr>';
     echo '<tr class="detail" style="height:2px;font-size:2px;">';
     echo '<td class="detail" >&nbsp;</td>';
     echo '</tr>';
