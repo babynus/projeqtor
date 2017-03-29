@@ -135,7 +135,7 @@ if (array_key_exists($pe.'_validatedEndDate',$_REQUEST)) {
 
 $pe_validatedWork="";
 if (array_key_exists($pe.'_validatedWork',$_REQUEST)) {
-  $pe_validatedWork=trim($_REQUEST[$pe.'_validatedWork']);
+  $pe_validatedWork=Work::convertWork(trim($_REQUEST[$pe.'_validatedWork']));
 }
 
 $pe_validatedCost="";
@@ -263,7 +263,7 @@ foreach ($selectList as $id) {
   	  $item->$pe->validatedCost=$pe_validatedCost;
   	}
   	if ($pe_validatedWork and property_exists($item->$pe,'validatedWork')) {
-  	  $item->$pe->validatedWork=$pe_validatedWork;
+  	  $item->$pe->validatedWork=Work::convertWork($pe_validatedWork);
   	}
   }
   $resultSave=$item->save();
