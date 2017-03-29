@@ -33,10 +33,10 @@
   $listHeight='60%';
   $topDetailDivHeight=Parameter::getUserParameter('contentPaneTopPortfolioPlanningDivHeight');
   $screenHeight=getSessionValue('screenHeight');
-  	if ($screenHeight and $topDetailDivHeight>$screenHeight-300) {
-  		$topDetailDivHeight=$screenHeight-300;
-  		debugLog("now topDetailDivHeight=$topDetailDivHeight");
-  	}
+  if ($screenHeight and $topDetailDivHeight>$screenHeight-300) {
+  	$topDetailDivHeight=$screenHeight-300;
+  	debugLog("now topDetailDivHeight=$topDetailDivHeight");
+  }
   $listHeight=($topDetailDivHeight)?$topDetailDivHeight.'px':$listHeight;
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="PortfolioPlanning" />
