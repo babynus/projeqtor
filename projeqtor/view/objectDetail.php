@@ -2150,6 +2150,7 @@ function drawDocumentVersionFromObject($list, $obj, $refresh=false) {
   if (!$preserveFileName) {
     $preserveFileName="NO";
   }
+  rsort($list);
   foreach ( $list as $version ) {
     echo '<tr>';
     if (!$print) {
