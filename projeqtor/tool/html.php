@@ -161,7 +161,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     if ($selection) {
       $refTable=$listType;
       if (substr($listType,-7)=='Version' and SqlElement::is_a($refTable, 'Version')) $refTable='Version';
-      $table[$selection]=SqlList::getNameFromId($refTable, $selection);
+      $table[$selection]=SqlList::getFieldFromId($refTable, $selection,$column);
     } 
   }
   $restrictArray=array();
