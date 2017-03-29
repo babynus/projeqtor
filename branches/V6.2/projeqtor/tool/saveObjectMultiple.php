@@ -135,7 +135,7 @@ if (array_key_exists($pe.'_validatedEndDate',$_REQUEST)) {
 
 $pe_validatedWork="";
 if (array_key_exists($pe.'_validatedWork',$_REQUEST)) {
-  $pe_validatedWork=Work::convertWork(trim($_REQUEST[$pe.'_validatedWork']));
+  $pe_validatedWork=trim($_REQUEST[$pe.'_validatedWork']);
 }
 
 $pe_validatedCost="";
