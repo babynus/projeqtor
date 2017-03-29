@@ -1303,13 +1303,15 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
         echo $attributes;
         echo ' invalidMessage="' . i18n('messageInvalidDate') . '"';
         echo ' type="text" maxlength="' . $dataLength . '" ';
-        if (sessionValueExists('browserLocaleDateFormatJs')) {       
-          $min='';       
-          $start=str_replace("EndDate", "StartDate", $col);
-          if (property_exists($obj, $start)) {
-            $min=$obj->$start;             
-          } 
+        if (sessionValueExists('browserLocaleDateFormatJs')) { 
+          if (substr($col,-7)=="EndDate"){    
+            $min='';       
+            $start=str_replace("EndDate", "StartDate", $col);
+            if (property_exists($obj, $start)) {
+              $min=$obj->$start;        
+            } 
           echo ' constraints="{datePattern:\'' . getSessionValue('browserLocaleDateFormatJs') . '\', min:\'' .$min. '\' }" ';
+          }
         }
         echo ' style="'.$negative.'width:' . $dateWidth . 'px; text-align: center;' . $specificStyle . '" class="input '.(($isRequired)?'required':'').' generalColClass '.$col.'Class" ';
         echo ' value="' . htmlEncode($val) . '" ';
