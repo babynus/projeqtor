@@ -804,15 +804,6 @@ class PlanningElement extends SqlElement {
 	          }
 	          $dep->save();
           }
-//           $dep=new Dependency($dependencyId);
-//           $dep->successorId=$successor->id;
-//           $dep->successorRefType=$successor->refType;
-//           $dep->successorRefId=$successor->refId;
-//           $dep->predecessorId=$predecessor->id;
-//           $dep->predecessorRefType=$predecessor->refType;
-//           $dep->predecessorRefId=$predecessor->refId;
-//           $dep->comment=$dependencyComment;
-//           $dep->dependencyType='E-S';
         }
       }
     }
