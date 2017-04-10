@@ -111,6 +111,11 @@
             </td>
           </tr>
         </table>
+
+    </div>
+   <div id="detailBarShow" class="dijitAccordionTitle" onMouseover="hideList('mouse');" onClick="hideList('click');">
+     <div id="detailBarIcon" align="center">
+   </div>
       </div>
       <div dojoType="dijit.layout.ContentPane" region="center" 
        style="z-index: 3; height: 35px; position: absolute !important; overflow: visible !important;">
