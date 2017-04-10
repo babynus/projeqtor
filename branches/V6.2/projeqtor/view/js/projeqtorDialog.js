@@ -5952,11 +5952,19 @@ function endMultipleUpdateMode(objectClass) {
   // dojo.xhrPost({url:
   // "../tool/saveDataToSession.php?idData=multipleMode&value=false"});
   formChangeInProgress=false;
+  var sm='';
   if (switchedModeBeforeMultiSelection) {
-    switchMode();
+    if (!switchedMode) {
+      switchMode();
+      sm='&switchedMode=on';
+    }
+  } else {
+    if (switchedMode) {
+      switchMode();
+    }
   }
   if (objectClass) {
-    loadContent('../view/objectDetail.php?noselect=true&objectClass='
+    loadContent('../view/objectDetail.php?noselect=true'+sm+'&objectClass='
         + objectClass, 'detailDiv');
   }
 }

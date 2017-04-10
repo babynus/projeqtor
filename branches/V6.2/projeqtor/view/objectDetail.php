@@ -205,7 +205,8 @@ if (array_key_exists('refresh', $_REQUEST)) {
     <div id="resultDiv" dojoType="dijit.layout.ContentPane" region="top"
       style="display: none;z-index:99999;"></div>
 		<?php  include 'objectButtons.php'; ?>
-		<div id="detailBarShow" class="dijitAccordionTitle" onMouseover="hideList('mouse');" onClick="hideList('click');">
+		<div id="detailBarShow" class="dijitAccordionTitle" onMouseover="hideList('mouse');" onClick="hideList('click');"
+		 <?php if (RequestHandler::isCodeSet('switchedMode') and RequestHandler::getValue('switchedMode')=='on') echo ' style="display:block;"'?>>
       <div id="detailBarIcon" align="center"></div>
     </div>
 	</div>
@@ -2041,6 +2042,11 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
     }
   }
   endBuffering($prevSection,$included);
+  $sectionName=$section;
+  if (strpos($sectionName, '_')!=0) {
+  	$split=explode('_',$sectionName);
+  	$sectionName=$split[0];
+  }
   if (!$print) {
     
     $arrayPosition=array(
@@ -2086,11 +2092,6 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
     $titlePane=$classObj . "_" . $section;
     startBuffering($included);
     //$sectionName=(strpos($section, '_')!=0)?explode('_',$section)[0]:$section;
-    $sectionName=$section;
-    if (strpos($sectionName, '_')!=0) {
-      $split=explode('_',$sectionName);
-      $sectionName=$split[0];
-    }
     
     echo '<div dojoType="dijit.TitlePane" title="' . i18n('section' . ucfirst($sectionName)) . (($nbBadge!==null)?'<div id=\''.$section.'Badge\' class=\'sectionBadge\'>'.$nbBadge.'</div>':'').'"';
     echo ' open="' . (array_key_exists($titlePane, $collapsedList)?'false':'true') . '" ';
