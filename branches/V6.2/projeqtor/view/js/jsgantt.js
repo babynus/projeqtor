@@ -497,6 +497,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
     oDiv.style.padding = "0px";
     oDiv.style.overflow = "hidden";
     oDiv.style.border = "0px";
+    oDiv.setAttribute('dependencyid','test');
     oDiv.style.zIndex = 50000;
     oDiv.style.cursor = "pointer";
     oDiv.className="dependencyLine"+keyDep;
@@ -2114,9 +2115,13 @@ function resizeJsHeader(event) {
 }
 
 function dependencyRightClick(evt){ 
-  if (dojo.byId("rightClickDependencyId")) {
+  /*if (dojo.byId("rightClickDependencyId")) {
     id=dojo.byId("rightClickDependencyId").value;
-  }
+  }*/
+  console.log(evt);
+  depNode=evt.target;
+  id=depNode.getAttribute('dependencyid');
+  console.log('id='+id);
   console.log(dojo.byId("rightClickDependencyId").value);
   var divNode=dojo.byId("editDependencyDiv");
   divNode.style.display="block";
