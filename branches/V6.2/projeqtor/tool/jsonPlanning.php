@@ -394,7 +394,7 @@
         $depList=$d->getSqlElementsFromCriteria($crit,false);
         foreach ($depList as $dep) {
           $listPred.=($listPred!="")?',':'';
-          $listPred.=$dep->predecessorId;
+          $listPred.="$dep->predecessorId#$dep->id#$dep->successorRefType";
         }
         echo ', "depend":"' . $listPred . '"';
         echo '}';
