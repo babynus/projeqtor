@@ -1833,6 +1833,12 @@ function addAssignment(unit, rawUnit, hoursPerDay) {
 
   dojo.byId("assignmentId").value="";
   dojo.byId("assignmentRefType").value=dojo.byId("objectClass").value;
+  /*gautier #1702*/
+  if(dojo.byId("objectClass").value=='Meeting' || dojo.byId("objectClass").value=='PeriodicMeeting' ){
+    dojo.byId('optional').style.display='block';
+  }else{
+    dojo.byId('optional').style.display='none';
+  } 
   dojo.byId("assignmentRefId").value=dojo.byId("objectId").value;
   dijit.byId("assignmentIdRole").reset();
   dijit.byId("assignmentDailyCost").reset();
@@ -1900,6 +1906,11 @@ function editAssignment(assignmentId, idResource, idRole, cost, rate,
   dijit.byId("assignmentIdRole").set("value", idRole);
   dojo.byId("assignmentId").value=assignmentId;
   dojo.byId("assignmentRefType").value=dojo.byId("objectClass").value;
+  if(dojo.byId("objectClass").value=='Meeting' || dojo.byId("objectClass").value=='PeriodicMeeting' ){
+    dojo.byId('optional').style.display='block';
+  }else{
+    dojo.byId('optional').style.display='none';
+  } 
   dojo.byId("assignmentRefId").value=dojo.byId("id").value;
   dijit.byId("assignmentDailyCost")
       .set('value', dojo.number.format(cost / 100));
