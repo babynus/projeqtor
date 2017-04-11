@@ -103,3 +103,6 @@ INSERT INTO `${prefix}mailable` (`id`, `name`, `idle`) VALUES
 
 INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES
 (62, 'showIdle', 'boolean', 70, '0');
+
+ALTER TABLE `${prefix}assignment`
+ADD `optional` int(1) unsigned DEFAULT '0',

@@ -3396,6 +3396,12 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
       echo formatCommentThumb($assignment->comment);
       echo '</td>';
     }
+    //gautier #1702
+    if (! $assignment->optional and (get_class($obj)== 'Meeting' or get_class($obj)== 'PeriodicMeeting' ) ) {
+      echo '<td>';
+      echo '<a style="float:right";> '.formatIcon('Favorite',16,i18n('mandatoryAttendant')).'</a>';
+      echo '</td>';
+    }
     echo '</tr></table>';
     echo '</td>';
     echo '<td class="assignData" align="center">' . htmlEncode($assignment->rate) . '</td>';
