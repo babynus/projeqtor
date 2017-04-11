@@ -105,4 +105,9 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (62, 'showIdle', 'boolean', 70, '0');
 
 ALTER TABLE `${prefix}assignment`
-ADD `optional` int(1) unsigned DEFAULT '0',
+ADD `optional` int(1) unsigned DEFAULT '0';
+
+ALTER TABLE `${prefix}project` CHANGE `creationDate` `creationDate` date;
+ALTER TABLE `${prefix}callfortender` CHANGE `creationDate` `creationDate` date;
+ALTER TABLE `${prefix}tender` CHANGE `creationDate` `creationDate` date;
+ALTER TABLE `${prefix}organization` CHANGE `creationDate` `creationDate` date;

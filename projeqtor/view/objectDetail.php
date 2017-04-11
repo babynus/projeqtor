@@ -839,7 +839,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
         $specificStyle.=' display:none';
         if ($print) $hide=true;
       }
-      if (($col == 'idUser' or $col == 'creationDate' or $col == 'creationDateTime' || $col=='lastUpdateDateTime') and !$print) {
+      if (($col == 'idUser' or $col == 'creationDate' or $col == 'creationDateTime' or $col=='lastUpdateDateTime') and !$print) {
         $hide=true;
       }
       if (strpos($obj->getFieldAttributes($col), 'nobr') !== false) {
