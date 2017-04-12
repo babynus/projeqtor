@@ -1307,6 +1307,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
         //vRightTable+='<div class="ganttUnselectable" style="position: absolute; z-index:25; opacity:0.1; filter: alpha(opacity=10); width: 200px; height: 200px; left: 0px; top:0px; background-color: red"></div>';
       dojo.byId("leftGanttChartDIV").innerHTML=vLeftTable;
       dojo.byId("rightGanttChartDIV").innerHTML='<div id="rightTableContainer" style="position:relative;"><div id="rightTableBarDetail">&nbsp;</div>'+vRightTable+'</div>';
+      dojo.byId('editDependencyDiv').addEventListener('click',function(evt){evt.stopPropagation();});
       dojo.byId("topGanttChartDIV").innerHTML=vTopRightTable;
       dojo.parser.parse('leftGanttChartDIV');
       dojo.parser.parse('editDependencyDiv');
@@ -2124,7 +2125,6 @@ function dependencyRightClick(evt){
   /*if (dojo.byId("rightClickDependencyId")) {
     id=dojo.byId("rightClickDependencyId").value;
   }*/
-
   depNode=evt.target;
   id=depNode.getAttribute('dependencyid');
   console.log('id='+id);
@@ -2135,8 +2135,9 @@ function dependencyRightClick(evt){
   divNode.style.top=evt.pageY+"px";
   var url = '../tool/dynamicDialogDependency.php?id='+ id;
   console.log(url);
-  loadDiv(url, 'editDependencyDiv','dynamicRightClickDependencyForm',false,true);
+  loadDiv(url, 'editDependencyDiv','dynamicRightClickDependencyForm',null,null);
   evt.preventDefault();
+  evt.stopPropagation();
 }
 
 
