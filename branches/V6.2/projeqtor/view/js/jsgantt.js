@@ -993,7 +993,6 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             + '<TR id=childrow_' + vID + ' class="ganttTaskmile" style="height: 21px;"'
             + ' onMouseover=JSGantt.ganttMouseOver(' + vID + ',"right","mile") ' 
             + ' oncontextmenu="return false;"'
-            + ' onclick=hideDependencyRightClick() '
             + ' onMouseout=JSGantt.ganttMouseOut(' + vID + ',"right","mile")>' + vItemRowStr + '</TR></TABLE></DIV>';
           vDateRowStr = JSGantt.formatDateStr(vTaskStart,vDateDisplayFormat);
           var vBaselineTopTitle="";
@@ -1104,7 +1103,6 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               + '<TR id=childrow_' + vID + ' class="ganttTaskgroup" style="height: 21px;"'
               + ' onMouseover=JSGantt.ganttMouseOver(' + vID + ',"right","group") '
               + ' oncontextmenu="return false;"'
-              + ' onclick=hideDependencyRightClick() '
               + ' onMouseout=JSGantt.ganttMouseOut(' + vID + ',"right","group")>' + vItemRowStr + '</TR></TABLE></DIV>';
             var vBaselineTopTitle="";
             if (vTaskList[i].getBaseTopStart() && vTaskList[i].getBaseTopEnd()) {              
@@ -1195,7 +1193,6 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               +'<TR id=childrow_' + vID + ' class="ganttTaskrow" style="height: 21px;"  '
               +'  onMouseover=JSGantt.ganttMouseOver(' + vID + ',"right","row") '
               + ' oncontextmenu="return false;"'
-              + ' onclick=hideDependencyRightClick() '
               + ' onMouseout=JSGantt.ganttMouseOut(' + vID + ',"right","row")>' + vItemRowStr + '</TR></TABLE></DIV>';
             if (Date.parse(vMaxDate)>=Date.parse(vTaskList[i].getStart()) ) {
   	          vBardivName='bardiv_' + vID;
@@ -1297,7 +1294,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
       }
       vRightTable+=vHighlightSpecificDays;
 
-      var editDependencyDiv='<div style="position:fixed;width:40px;height:70px;display:none;z-index:99999;" id="editDependencyDiv" class="editDependencyDiv">';    
+      var editDependencyDiv='<div style="position:fixed;width:40px;height:70px;display:none;z-index:99999999;" id="editDependencyDiv" class="editDependencyDiv">';    
       editDependencyDiv+='</div>';      
       editDependencyDiv+='<input type="hidden" name="rightClickDependencyId" id="rightClickDependencyId" />';
   
@@ -2150,7 +2147,7 @@ function removeDependencyRightClick(dependencyId,evt){
   console.log("voici le dependencyid de la function remove : "+dependencyId);
     loadContent("../tool/removeDependency.php?dependencyId=" + dependencyId, "planResultDiv", "",
         true, 'dependency');
-
+  hideDependencyRightClick();
 }
 
 function saveDependencyRightClick() {
@@ -2166,6 +2163,7 @@ function saveDependencyRightClick() {
   loadContent("../tool/saveDependencyRightClick.php", "planResultDiv", "dynamicRightClickDependencyForm",
       true, 'dependency');
   dijit.byId('dialogDependency').hide();
+  hideDependencyRightClick();
 }
 
 function highlightDependency(event) { 
