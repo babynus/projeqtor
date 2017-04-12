@@ -1294,7 +1294,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
       }
       vRightTable+=vHighlightSpecificDays;
 
-      var editDependencyDiv='<div style="position:fixed;width:40px;height:70px;display:none;z-index:99999999;" id="editDependencyDiv" class="editDependencyDiv">';    
+      var editDependencyDiv='<div style="position:fixed;width:40px;height:70px;display:none;z-index:99999999999;" id="editDependencyDiv" class="editDependencyDiv">';    
       editDependencyDiv+='</div>';      
       editDependencyDiv+='<input type="hidden" name="rightClickDependencyId" id="rightClickDependencyId" />';
   
