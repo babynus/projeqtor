@@ -993,6 +993,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             + '<TR id=childrow_' + vID + ' class="ganttTaskmile" style="height: 21px;"'
             + ' onMouseover=JSGantt.ganttMouseOver(' + vID + ',"right","mile") ' 
             + ' oncontextmenu="return false;"'
+            + ' onclick=hideDependencyRightClick() '
             + ' onMouseout=JSGantt.ganttMouseOut(' + vID + ',"right","mile")>' + vItemRowStr + '</TR></TABLE></DIV>';
           vDateRowStr = JSGantt.formatDateStr(vTaskStart,vDateDisplayFormat);
           var vBaselineTopTitle="";
@@ -1103,6 +1104,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               + '<TR id=childrow_' + vID + ' class="ganttTaskgroup" style="height: 21px;"'
               + ' onMouseover=JSGantt.ganttMouseOver(' + vID + ',"right","group") '
               + ' oncontextmenu="return false;"'
+              + ' onclick=hideDependencyRightClick() '
               + ' onMouseout=JSGantt.ganttMouseOut(' + vID + ',"right","group")>' + vItemRowStr + '</TR></TABLE></DIV>';
             var vBaselineTopTitle="";
             if (vTaskList[i].getBaseTopStart() && vTaskList[i].getBaseTopEnd()) {              
@@ -1193,6 +1195,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               +'<TR id=childrow_' + vID + ' class="ganttTaskrow" style="height: 21px;"  '
               +'  onMouseover=JSGantt.ganttMouseOver(' + vID + ',"right","row") '
               + ' oncontextmenu="return false;"'
+              + ' onclick=hideDependencyRightClick() '
               + ' onMouseout=JSGantt.ganttMouseOut(' + vID + ',"right","row")>' + vItemRowStr + '</TR></TABLE></DIV>';
             if (Date.parse(vMaxDate)>=Date.parse(vTaskList[i].getStart()) ) {
   	          vBardivName='bardiv_' + vID;

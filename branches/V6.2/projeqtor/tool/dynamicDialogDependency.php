@@ -67,9 +67,15 @@ $commentDep=$dep->comment;
 			      <div div class="section" style="display: inline-block;width:50%;margin-top:2px;margin-left:6px;"> 
 			       <p style="text-align:center;color:white;height:20px;font-size:15px;display:inline-block;"><?php echo i18n("close");?></a>		       	    
 	          </div>
-	          <div style="width:60px;float:right;margin-top:-25px;margin-right:-19px;">		    
-	           <a style="margin-left:25%;"><?php echo formatMediumButton('Remove') ;?></a>	
-	           <a style="margin-left:25%;"><?php echo formatMediumButton('Mark') ;?></a>
+	          <div style="float:right;margin-top:-25px;>		 
+	           <ul>   
+	             <li style="list-style: none;">
+	               <a onclick="removeDependencyRightClick();" <?php echo formatMediumButton('Remove') ;?></a>	
+	             </li>
+	             <li style="list-style: none;">
+	               <a onclick="hideDependencyRightClick();" <?php echo formatMediumButton('Mark') ;?></a>
+	             </li>
+	           </ul>
 	          </div>
 			    </div> 
 			    	
