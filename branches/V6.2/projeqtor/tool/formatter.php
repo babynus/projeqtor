@@ -230,19 +230,22 @@ function formatUserThumb($userId,$userName,$title,$size=22,$float='right',$alway
 	  $title=htmlEncode($userName,'quotes');
 	}
 	if ($file=='letter') {
-		$res='<span style="border:1px solid red;color:#555555;font-size:25px;background-color:#ffffff" ';
+		$res='<span style="position:relative;color:#545381;float:right;padding:4px;padding-bottom:0px;padding-top:1px;margin-right:6px;margin-top:2px;font-size:25px;background-color:#ffffff;border-radius:50%;font-weight:bold;" ';
 	} else {
 	  $res='<img '.($idTicket!=-1 ? 'id="responsible'.$idTicket.'"' : '').' valueuser="'.$title.'" style="border: 1px solid #AAA;width:'.$size.'px;height:'.($size).'px;float:'.$float.';border-radius:'.$radius.'px"';
 	  $res.=' src="'.$file.'" ';
 	}
 
+	// Ceci est la partie quand on passe la souris sur l'image de la barre ( le "a" de admin par exemple )
 	if (! $print and ($known or $alwaysDisplayBigImage)) {
 	  $res.=' onMouseOver="showBigImage(\'Affectable\',\''.$userId.'\',this,\''.$title.'\''.(($known)?",false":",true").',\''.$nocache.'\');" onMouseOut="hideBigImage();"';
 	} else if (!$known and $userName) {
 	  $res.=' onMouseOver="showBigImage(\'Affectable\',\''.$userId.'\',this,\''.$title.'\',true,\''.$nocache.'\');" onMouseOut="hideBigImage();"';
 	}
+	//
+	
 	if ($file=='letter') {
-		$res.='>'.substr($userName, 0,1);
+		$res.='>'.ucfirst(substr($userName, 0,1));
 	  $res.='</span>';
 	} else {
 		$res.='/>';
