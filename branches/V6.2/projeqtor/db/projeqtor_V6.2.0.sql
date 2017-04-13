@@ -71,7 +71,7 @@ ADD idCatalog int(12) unsigned DEFAULT NULL;
 
 INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES 
 (174, 'menuCatalog', 152, 'object', 286, 'Project', 0, 'Financial'),
-(175, 'menuCatalogType', 79, 'object', 935, 'ReadWriteType', 0, 'Type');
+(175, 'menuCatalogType', 79, 'object', 858, 'ReadWriteType', 0, 'Type');
 
 INSERT INTO ${prefix}habilitation (idProfile, idMenu, allowAccess) VALUES 
 (1, 174, 1),
