@@ -130,8 +130,8 @@ class PlanningElement extends SqlElement {
   
   private static $predecessorItemsArray = array();
 
-  private static $staticCostVisibility=null;
-  private static $staticWorkVisibility=null;
+  protected static $staticCostVisibility=null;
+  protected static $staticWorkVisibility=null;
   public static $_noDispatch=false;
   public static $_noDispatchArray=array();
   public static $_copiedItems=array();
@@ -390,7 +390,6 @@ class PlanningElement extends SqlElement {
     if ($this->realEndDate){
       $this->plannedEndDate=$this->realEndDate;
     }
-    
     $result=parent::save();
     if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
       return $result;     
@@ -411,7 +410,7 @@ class PlanningElement extends SqlElement {
     
     // update topObject
     if ($topElt) {
-      if ($topElt->refId) {
+      if ($topElt->refId and $topElt->refType) {
         if (! self::$_noDispatch) {
           $topElt->save();   
       	} else {
@@ -421,7 +420,6 @@ class PlanningElement extends SqlElement {
       	}
       }
     }
-    
     //if ($this->topId!=$old->topId)
     
     // save old parent (for synthesis update) if parent has changed
@@ -436,8 +434,10 @@ class PlanningElement extends SqlElement {
     	$refType=$this->refType;
       if ($refType=='Project') {
         $refObj=new $refType($this->refId);
-        $refObj->sortOrder=$this->wbsSortable;
-        $subRes=$refObj->saveForced(true);
+        if ($refObj and $refObj->id) {
+        	$refObj->sortOrder=$this->wbsSortable;
+        	$subRes=$refObj->saveForced(true);
+        }
       }
     }
     // remove existing planned work (if any)
@@ -740,12 +740,13 @@ class PlanningElement extends SqlElement {
    * @return a boolean 
    */
   public static function updateSynthesis ($refType, $refId) { 
+  	if (!$refType or !$refId) return;
     $crit=array("refType"=>$refType, "refId"=>$refId);
     $obj=SqlElement::getSingleSqlElementFromCriteria($refType.'PlanningElement', $crit);
     if (! $obj or ! $obj->id) {
       $obj=SqlElement::getSingleSqlElementFromCriteria('PlanningElement', $crit);
     }
-    if ($obj) {
+    if ($obj and $obj->id) {
     	$method='updateSynthesis'.$refType;
     	if (method_exists($obj,$method )) {
     		return $obj->$method();
