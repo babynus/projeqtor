@@ -2834,6 +2834,9 @@ function globalSave() {
   } else if (dijit.byId('dialogRestrictTypes')
       && dijit.byId('dialogRestrictTypes').open) {
     var button = dijit.byId('dialogRestrictTypesSubmit');
+  } else if (dojo.byId("editDependencyDiv") && dojo.byId("editDependencyDiv").style.display=="block") {
+    dojo.byId("dependencyRightClickSave").click();
+    return;
   } else {
     dojo.query(".projeqtorDialogClass").forEach(
         function(node, index, nodelist) {
