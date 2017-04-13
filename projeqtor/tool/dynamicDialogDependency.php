@@ -65,15 +65,11 @@ $commentDep=$dep->comment;
                </div>   
 					     <label for="commentDependency" style="text-align: left;"><?php echo i18n("colComment");?>&nbsp;:&nbsp;</label>
 					     <input id="commentDependency" name="commentDependency"  dojoType="dijit.form.Textarea"
-						             value="<?php echo $commentDep;?>" />
-
-                             
+						             value="<?php echo $commentDep;?>" />                        
 				   </form>
 
 				  <div style="width:180px;height:25px;"> 
-				    <div class="section" style="display: inline-block;width:70%;margin-left:6px;">
-			       <p style="text-align:center;color:white;height:20px;font-size:15px;display:inline-block;"><?php echo i18n("deleteButton");?></a>                 		      
-			      </div>			 
+				     <label for="commentDependency" style="height:25px;margin-top:7px;"><?php echo i18n("deleteButton");?>&nbsp;:&nbsp;</label>               		      		 
 	          <div style="float:right;>		 
 	           <ul>   
 	             <li style="list-style: none;">
