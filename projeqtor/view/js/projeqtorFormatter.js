@@ -485,10 +485,15 @@ function thumb(value, size) {
       var ind=tab[1]%arrayColors.length;
       var bgColor=arrayColors[ind]; // TODO : test if is set
       var fontSize=(size==32)?24:((size==16)?10:15);
-      result+='<span style="position:relative;color:#ffffff;background-color:'+bgColor+';float:right;font-size:'+fontSize+'px;border-radius:50%;font-weight:300;text-shadow:none;text-align:center;border:1px solid #eeeeee;height:'+(size-2)+'px;width:'+(size-2)+'px; top:1px;" >';
-      result+=tab[2].substr(0,1);
+      var name=tab[2];
+      var initial=tab[2].substr(0,1);
+      if (tab.length>=4) initial=tab[3];
+      result+='<span style="position:relative;color:#ffffff;background-color:'+bgColor+';display:block;'
+      if (name) result+='float:left;';
+      result+='font-size:'+fontSize+'px;border-radius:50%;font-weight:300;text-shadow:none;text-align:center;border:1px solid #eeeeee;height:'+(size-2)+'px;width:'+(size-2)+'px; top:1px;" >';
+      result+=initial;
       result+='</span>';
-      result+=tab[2];
+      result+=name;
     } else {
       result+= '<div style="'+((thumbName)?'text-align:left;':'text-align:center;')+'">';    
       result+='<img style="border-radius:'+radius+'px;height:' + size + 'px;'+((thumbName)?'float:left;':'')+'" src="' + filePath + '"';
