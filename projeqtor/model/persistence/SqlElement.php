@@ -3594,10 +3594,11 @@ abstract class SqlElement {
 		  $canBeSend=!SqlList::getFieldFromId("Project", $idProject, "isUnderConstruction");
 		}
 		$statusMailList=array();
+		$sender=Parameter::getGlobalParameter('paramMailSender');
 		if ($directStatusMail) { // Direct Send Mail
 			$statusMailList=array($directStatusMail->id => $directStatusMail);
+			if (getSessionUser()->email) $sender=getSessionUser()->email;
 		} else if($canBeSend)  {
-			
 			$mailable=SqlElement::getSingleSqlElementFromCriteria('Mailable', array('name'=>$objectClass));
 			if (! $mailable or ! $mailable->id) {
 				return false; // exit if not mailable object
@@ -3838,7 +3839,7 @@ abstract class SqlElement {
       '</html>';
     $references = $objectClass . "-" . $this->id;
 		$message = wordwrap($message, 70); // wrapt text so that line do not exceed 70 cars per line
-		$resultMail=sendMail($dest, $title, $message, $this, null, null, null , null, $references);
+		$resultMail=sendMail($dest, $title, $message, $this, null, $sender, null , null, $references);
 		if ($directStatusMail) {
 			if ($resultMail) {
 				return array('result'=>'OK', 'dest'=>$dest);
