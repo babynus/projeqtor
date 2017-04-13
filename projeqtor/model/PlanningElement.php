@@ -783,27 +783,32 @@ class PlanningElement extends SqlElement {
       $pe->renumberWbs();
     }
     //krowry
-    $dep=new Dependency($this->id);  
-    $critSuccessor=array( 'successorRefId'=>$this->refId,'successorRefType'=>$this->refType);
-    $lp=$dep->getSqlElementsFromCriteria($critSuccessor);
-    $critPredecessor=array('predecessorRefId'=>$this->refId,'predecessorRefType'=>$this->refType);
-    $ls=$dep->getSqlElementsFromCriteria($critPredecessor);
+    $dep=new Dependency();  
+    $critPredecessor=array('successorRefId'=>$this->refId,'successorRefType'=>$this->refType);
+    //$critPredecessor=array('successorId'=>$this->id); // Alternative
+    $lp=$dep->getSqlElementsFromCriteria($critPredecessor);
+    $critSuccessor=array('predecessorRefId'=>$this->refId,'predecessorRefType'=>$this->refType);
+    //$critSuccessor=array('predecessorId'=>$this->id); // Alternative
+    $ls=$dep->getSqlElementsFromCriteria($critSuccessor);
     if(count($ls)>0 || count($lp)>0 ){
       foreach ($lp as $depP){
         foreach ($ls as $depS){
-          $critElt=array('successorRefId'=>$depS->successorRefId,'successorRefType'=>$depS->successorRefType,'predecessorRefId'=>$depP->predecessorRefId,'predecessorRefType'=>$depP->predecessorRefType);
+          $critElt=array('successorRefType'=>$depS->successorRefType,'successorRefId'=>$depS->successorRefId,'predecessorRefType'=>$depP->predecessorRefType,'predecessorRefId'=>$depP->predecessorRefId);
           $eltLsLp=$dep->getSqlElementsFromCriteria($critElt);
-          if(!$eltLsLp){
-	          $dep->predecessorId=$depP->predecessorId;
-	          $dep->predecessorRefId=$depP->predecessorRefId;
-	          $dep->predecessorRefType=$depP->predecessorRefType;
-	          $dep->successorId=$depS->successorId;
-	          $dep->successorRefId=$depS->successorRefId;
-	          $dep->successorRefType=$depS->successorRefType;
-	          if($depS->dependencyType='E-S' && $depP->dependencyType='E-S'){
-	          $dep->dependencyType='E-S';
-	          }
-	          $dep->save();
+          //$eltLsLp=SqlElement::getSingleSqlElementFromCriteria('PlanningElement', $eltLsLp); // Alternative
+          if(count($eltLsLp)==0){
+          //if (! $eltLsLp->id) { // Alternative
+          	if($depS->dependencyType='E-S' && $depP->dependencyType='E-S'){
+          		$dp=new Dependency();
+			        $dp->predecessorId=$depP->predecessorId;
+		          $dp->predecessorRefId=$depP->predecessorRefId;
+		          $dp->predecessorRefType=$depP->predecessorRefType;
+		          $dp->successorId=$depS->successorId;
+		          $dp->successorRefId=$depS->successorRefId;
+		          $dp->successorRefType=$depS->successorRefType;
+	            $dp->dependencyType='E-S';
+	            $dp->save();
+	          }	         
           }
         }
       }
