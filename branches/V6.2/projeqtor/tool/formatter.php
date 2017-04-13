@@ -186,12 +186,17 @@ function thumbFormatter($objectClass,$id,$size) {
 }
 
 function formatLetterThumb($idUser,$size,$userName=null) {
+  global $print;
 	if (!$userName) $userName=SqlList::getNameFromId('Affectable',$idUser);
 	$arrayColors=array('#3366FF','#FF9900','#99CC00');
 	$ind=$idUser%count($arrayColors);
 	$bgColor=(isset($arrayColors[$ind]))?$arrayColors[$ind]:'#000000';
 	$fontSize=($size==32)?24:(($size==16)?10:15);
-	$result='<span style="position:relative;color:#ffffff;background-color:'.$bgColor.';float:left;font-size:'.$fontSize.'px;border-radius:50%;font-weight:300;text-shadow:none;text-align:center;border:1px solid #eeeeee;height:'.($size-2).'px;width:'.($size-2).'px; top:1px;" >';
+	if($print){
+	  $result='<span style="position:relative;color:#ffffff;background-color:'.$bgColor.';float:left;font-size:'.$fontSize.'px;border-radius:50%;font-weight:300;text-shadow:none;text-align:center;border:1px solid #eeeeee;height:'.($size-2).'px;width:'.($size-2).'px; top:1px;" >';
+	}else{
+	  $result='<span style="position:relative;color:#ffffff;background-color:'.$bgColor.';float:right;font-size:'.$fontSize.'px;border-radius:50%;font-weight:300;text-shadow:none;text-align:center;border:1px solid #eeeeee;height:'.($size-2).'px;width:'.($size-2).'px; top:1px;" >';
+	}
 	$result.=strtoupper(substr($userName,0,1));
 	$result.='</span>';
 	return $result;

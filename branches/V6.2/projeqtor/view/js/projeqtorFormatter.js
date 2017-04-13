@@ -486,9 +486,11 @@ function thumb(value, size) {
       var bgColor=arrayColors[ind]; // TODO : test if is set
       var fontSize=(size==32)?24:((size==16)?10:15);
       var name=tab[2];
-      var initial=tab[2].substr(0,1);
-      if (tab.length>=4) initial=tab[3];
-      result+='<span style="position:relative;color:#ffffff;background-color:'+bgColor+';display:block;'
+      var initial=tab[2].substr(0,1).toUpperCase();
+      if (tab.length>=4) initial=tab[3].toUpperCase();
+      
+      result+='<div style="line-height:24px;">';
+      result+='<span style="position:relative;line-height:20px;color:#ffffff;background-color:'+bgColor+';display:block;';
       if (name) result+='float:left;';
       result+='font-size:'+fontSize+'px;border-radius:50%;font-weight:300;text-shadow:none;text-align:center;border:1px solid #eeeeee;height:'+(size-2)+'px;width:'+(size-2)+'px; top:1px;" >';
       result+=initial;
@@ -504,8 +506,9 @@ function thumb(value, size) {
       result+='/>';
       if (thumbName) {
         // text-shadow:1px 1px #FFFFFF; Can ease view when test is over thumb, but is ugly when line is selected (when text color is white)
-        result+='<div style="margin-left:'+(size+2)+'px;">'+thumbName+'</div>';
+        result+='<div style="margin-left:'+(size+2)+'px;line-height:20px;">'+thumbName+'</div>';
       }
+      result+='</div>';
       result+='</div>';
     }
   } else {
