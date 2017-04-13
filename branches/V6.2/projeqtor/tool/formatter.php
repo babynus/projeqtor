@@ -181,8 +181,20 @@ function thumbFormatter($objectClass,$id,$size) {
   if ($image->id and $image->isThumbable()) {
     return '<img src="'.getImageThumb($image->getFullPathFileName(),$size).'" />';
   } else {
-  	return "";
+  	return formatLetterThumb($id,$size);
   }
+}
+
+function formatLetterThumb($idUser,$size,$userName=null) {
+	if (!$userName) $userName=SqlList::getNameFromId('Affectable',$idUser);
+	$arrayColors=array('#3366FF','#FF9900','#99CC00');
+	$ind=$idUser%count($arrayColors);
+	$bgColor=(isset($arrayColors[$ind]))?$arrayColors[$ind]:'#000000';
+	$fontSize=($size==32)?24:(($size==16)?10:15);
+	$result='<span style="position:relative;color:#ffffff;background-color:'.$bgColor.';float:left;font-size:'.$fontSize.'px;border-radius:50%;font-weight:300;text-shadow:none;text-align:center;border:1px solid #eeeeee;height:'.($size-2).'px;width:'.($size-2).'px; top:1px;" >';
+	$result.=strtoupper(substr($userName,0,1));
+	$result.='</span>';
+	return $result;
 }
 
 function numericFixLengthFormatter($val, $numericLength=0) {  
@@ -230,29 +242,16 @@ function formatUserThumb($userId,$userName,$title,$size=22,$float='right',$alway
 	  $title=htmlEncode($userName,'quotes');
 	}
 	if (substr($file,0,6)=='letter') {
-		$arrayColors=array('#3366FF','#FF9900','#99CC00');
-		$ind=$userId%count($arrayColors);
-		$bgColor=(isset($arrayColors[$ind]))?$arrayColors[$ind]:'#000000';
-		$fontSize=($size==32)?24:(($size==16)?10:15);
-		$res='<span style="position:relative;color:#ffffff;background-color:'.$bgColor.';float:left;font-size:'.$fontSize.'px;border-radius:50%;font-weight:300;text-shadow:none;text-align:center;border:1px solid #eeeeee;height:'.($size-2).'px;width:'.($size-2).'px; top:1px;" ';
+		$res=formatLetterThumb($userId, $size,$userName);
 	} else {
 	  $res='<img '.($idTicket!=-1 ? 'id="responsible'.$idTicket.'"' : '').' valueuser="'.$title.'" style="border: 1px solid #AAA;width:'.$size.'px;height:'.($size).'px;float:'.$float.';border-radius:'.$radius.'px"';
 	  $res.=' src="'.$file.'" ';
-	}
-
-	// Ceci est la partie quand on passe la souris sur l'image de la barre ( le "a" de admin par exemple )
-	if (! $print and ($known or $alwaysDisplayBigImage)) {
-	  $res.=' onMouseOver="showBigImage(\'Affectable\',\''.$userId.'\',this,\''.$title.'\''.(($known)?",false":",true").',\''.$nocache.'\');" onMouseOut="hideBigImage();"';
-	} else if (!$known and $userName) {
-	  $res.=' onMouseOver="showBigImage(\'Affectable\',\''.$userId.'\',this,\''.$title.'\',true,\''.$nocache.'\');" onMouseOut="hideBigImage();"';
-	}
-	//
-	
-	if (substr($file,0,6)=='letter') {
-		if (!$userName) $userName=SqlList::getNameFromId('Affectable',$userId);
-		$res.='>'.ucfirst(substr($userName, 0,1));
-	  $res.='</span>';
-	} else {
+		// Ceci est la partie quand on passe la souris sur l'image de la barre ( le "a" de admin par exemple )
+		if (! $print and ($known or $alwaysDisplayBigImage)) {
+		  $res.=' onMouseOver="showBigImage(\'Affectable\',\''.$userId.'\',this,\''.$title.'\''.(($known)?",false":",true").',\''.$nocache.'\');" onMouseOut="hideBigImage();"';
+		} else if (!$known and $userName) {
+		  $res.=' onMouseOver="showBigImage(\'Affectable\',\''.$userId.'\',this,\''.$title.'\',true,\''.$nocache.'\');" onMouseOut="hideBigImage();"';
+		}
 		$res.='/>';
 	}
 	return $res;

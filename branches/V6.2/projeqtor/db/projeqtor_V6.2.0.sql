@@ -22,7 +22,11 @@ CREATE INDEX `subscriptionReference` ON `${prefix}subscription` (`refType`,`refI
 
 INSERT INTO `${prefix}checklistable` (`id`, `name`, `idle`) VALUES 
 (17, 'ProductVersion', '0'),
-(18, 'ComponentVersion', '0');
+(18, 'ComponentVersion', '0'),
+(19, 'Product', '0'),
+(20, 'Component', '0'),
+(21, 'Incoming', '0'), 
+(22, 'Deliverable', '0');
 
 INSERT INTO `${prefix}linkable` (`id`, `name`, `idle`, `idDefaultLinkable`) VALUES 
 (23, 'Bill', '0', '18');
