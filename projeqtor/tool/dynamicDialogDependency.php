@@ -59,7 +59,7 @@ $commentDep=$dep->comment;
 	                 style="width:25px; text-align: right;display:inline-block;margin-left:-23px;" 
 						       value="<?php echo $delayDep;?>" />
 						   <div style="display:inline-block;margin-left:38px;">
-				          <a onclick="saveDependencyRightClick(<?php $typeDep;?>);">
+				          <a id="dependencyRightClickSave" onclick="saveDependencyRightClick(<?php $typeDep;?>);">
                       <?php echo formatMediumButton('Save') ;?>
                   </a> 
                </div>   
