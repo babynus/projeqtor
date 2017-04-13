@@ -188,7 +188,8 @@ function thumbFormatter($objectClass,$id,$size) {
 function formatLetterThumb($idUser,$size,$userName=null) {
   global $print;
 	if (!$userName) $userName=SqlList::getNameFromId('Affectable',$idUser);
-	$arrayColors=array('#3366FF','#FF9900','#99CC00');
+	$arrayColors=array('#1abc9c', '#2ecc71', '#3498db', '#9b59b6', '#34495e', '#16a085', '#27ae60', '#2980b9', '#8e44ad', '#2c3e50', '#f1c40f', '#e67e22', '#e74c3c', '#95a5a6', '#d35400', '#c0392b', '#bdc3c7', '#7f8c8d');
+	//'#3366FF','#FF9900','#99CC00', 
 	$ind=$idUser%count($arrayColors);
 	$bgColor=(isset($arrayColors[$ind]))?$arrayColors[$ind]:'#000000';
 	$fontSize=($size==32)?24:(($size==16)?10:15);
