@@ -229,8 +229,12 @@ function formatUserThumb($userId,$userName,$title,$size=22,$float='right',$alway
 	} else if ($userName) {
 	  $title=htmlEncode($userName,'quotes');
 	}
-	if ($file=='letter') {
-		$res='<span style="position:relative;color:#545381;float:right;padding:4px;padding-bottom:0px;padding-top:1px;margin-right:6px;margin-top:2px;font-size:25px;background-color:#ffffff;border-radius:50%;font-weight:bold;" ';
+	if (substr($file,0,6)=='letter') {
+		$arrayColors=array('#3366FF','#FF9900','#99CC00');
+		$ind=$userId%count($arrayColors);
+		$bgColor=(isset($arrayColors[$ind]))?$arrayColors[$ind]:'#000000';
+		$fontSize=($size==32)?24:(($size==16)?10:15);
+		$res='<span style="position:relative;color:#ffffff;background-color:'.$bgColor.';float:left;font-size:'.$fontSize.'px;border-radius:50%;font-weight:300;text-shadow:none;text-align:center;border:1px solid #eeeeee;height:'.($size-2).'px;width:'.($size-2).'px; top:1px;" ';
 	} else {
 	  $res='<img '.($idTicket!=-1 ? 'id="responsible'.$idTicket.'"' : '').' valueuser="'.$title.'" style="border: 1px solid #AAA;width:'.$size.'px;height:'.($size).'px;float:'.$float.';border-radius:'.$radius.'px"';
 	  $res.=' src="'.$file.'" ';
@@ -244,7 +248,8 @@ function formatUserThumb($userId,$userName,$title,$size=22,$float='right',$alway
 	}
 	//
 	
-	if ($file=='letter') {
+	if (substr($file,0,6)=='letter') {
+		if (!$userName) $userName=SqlList::getNameFromId('Affectable',$userId);
 		$res.='>'.ucfirst(substr($userName, 0,1));
 	  $res.='</span>';
 	} else {

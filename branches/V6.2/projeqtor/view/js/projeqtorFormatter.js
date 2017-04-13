@@ -455,6 +455,7 @@ function thumbName64(value) {
   return thumb(value, 64);
 }
 function thumb(value, size) {
+  console.log(value,size);
   if (value == "##" || value == "####")
     return "";
   if (!size)
@@ -479,18 +480,29 @@ function thumb(value, size) {
   var radius=Math.round(size/2);
   var result = '';
   if (filePath) {
-    result+= '<div style="'+((thumbName)?'text-align:left;':'text-align:center;')+'">';    
-    result+='<img style="border-radius:'+radius+'px;height:' + size + 'px;'+((thumbName)?'float:left;':'')+'" src="' + filePath + '"';
-    if (filePath.substr(0,23) != '../view/img/Affectable/') {
-      result+=' onMouseOver="showBigImage(\''+thumbObjectClass+'\',\''+thumbObjectId+'\',this,null,null,\''+nocache+'\');"';
-      result+=' onMouseOut="hideBigImage();"';
+    if (filePath=='letter') {
+      var arrayColors=new Array('#3366FF','#FF9900','#99CC00');
+      var ind=tab[1]%arrayColors.length;
+      var bgColor=arrayColors[ind]; // TODO : test if is set
+      var fontSize=(size==32)?24:((size==16)?10:15);
+      result+='<span style="position:relative;color:#ffffff;background-color:'+bgColor+';float:right;font-size:'+fontSize+'px;border-radius:50%;font-weight:300;text-shadow:none;text-align:center;border:1px solid #eeeeee;height:'+(size-2)+'px;width:'+(size-2)+'px; top:1px;" >';
+      result+=tab[2].substr(0,1);
+      result+='</span>';
+      result+=tab[2];
+    } else {
+      result+= '<div style="'+((thumbName)?'text-align:left;':'text-align:center;')+'">';    
+      result+='<img style="border-radius:'+radius+'px;height:' + size + 'px;'+((thumbName)?'float:left;':'')+'" src="' + filePath + '"';
+      if (filePath.substr(0,23) != '../view/img/Affectable/') {
+        result+=' onMouseOver="showBigImage(\''+thumbObjectClass+'\',\''+thumbObjectId+'\',this,null,null,\''+nocache+'\');"';
+        result+=' onMouseOut="hideBigImage();"';
+      }
+      result+='/>';
+      if (thumbName) {
+        // text-shadow:1px 1px #FFFFFF; Can ease view when test is over thumb, but is ugly when line is selected (when text color is white)
+        result+='<div style="margin-left:'+(size+2)+'px;">'+thumbName+'</div>';
+      }
+      result+='</div>';
     }
-    result+='/>';
-    if (thumbName) {
-      // text-shadow:1px 1px #FFFFFF; Can ease view when test is over thumb, but is ugly when line is selected (when text color is white)
-      result+='<div style="margin-left:'+(size+2)+'px;">'+thumbName+'</div>';
-    }
-    result+='</div>';
   } else {
     result=thumbName;
   }
