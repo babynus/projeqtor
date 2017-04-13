@@ -3813,8 +3813,8 @@ function setDefaultPriority(typeValue) {
     handleAs : "text",
     load : function(data) {
       var objClass = dojo.byId('objectClass').value;
-      var planningMode = objClass + "PlanningElement_priority" ;
-      dijit.byId(planningMode).set('value', data);
+      var planningPriority = objClass + "PlanningElement_priority" ;
+      dijit.byId(planningPriority).set('value', data);
     }
   });
 }
