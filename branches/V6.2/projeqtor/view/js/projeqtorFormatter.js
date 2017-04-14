@@ -493,15 +493,16 @@ function thumb(value, size) {
       } else {
         result+= '<div style="text-align:center">';   
       }
-      result+='<span style="position:relative;color:#ffffff;background-color:'+bgColor+';display:inline-block;';
+      result+='<table style="width:100%;height:100%;"><tr style="height:100%">';
+      result+='<td style="width:10px;vertical-align:middle;"><span style="position:relative;color:#ffffff;background-color:'+bgColor+';display:inline-block;';
       if (name) result+='float:left;';
       result+='font-size:'+fontSize+'px;border-radius:50%;font-weight:300;text-shadow:none;text-align:center;border:1px solid #eeeeee;height:'+(size-2)+'px;width:'+(size-2)+'px; top:1px;" >';
       result+=initial;
-      result+='</span>';
-      result+='<table style="width:100%;height:100%;"><tr style="height:100%">';
-      result+='<td>&nbsp;</td><td style="vertical-align:middle;">';
+      result+='</span></td>';
+      result+='<td style="width:1px">&nbsp;</td><td style="vertical-align:middle;">';
       result+=name;
       result+='</td></tr></table>';
+      result+='</div>';
     } else {
       result+= '<div style="'+((thumbName)?'text-align:left;':'text-align:center;')+'">';    
       result+='<table style="width:100%;height:100%;"><tr style="height:100%">';
@@ -513,10 +514,9 @@ function thumb(value, size) {
       result+=' /></td>';
       if (thumbName) {
         // text-shadow:1px 1px #FFFFFF; Can ease view when test is over thumb, but is ugly when line is selected (when text color is white)
-        result+='<td>&nbsp;</td><td style="vertical-align:middle;">'+thumbName+'</td>';
+        result+='<td style="width:1px">&nbsp;</td><td style="vertical-align:middle;">'+thumbName+'</td>';
       } 
       result+='</tr></table>';
-      result+='</div>';
       result+='</div>';
     }
   } else {
