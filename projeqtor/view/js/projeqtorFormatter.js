@@ -499,16 +499,18 @@ function thumb(value, size) {
       result+=name;
     } else {
       result+= '<div style="'+((thumbName)?'text-align:left;':'text-align:center;')+'">';    
-      result+='<img style="border-radius:'+radius+'px;height:' + size + 'px;'+((thumbName)?'float:left;':'')+'" src="' + filePath + '"';
+      result+='<table style="width:100%;height:100%;"><tr style="height:100%">';
+      result+='<td style="width:10px;vertical-align:middle;"><img style="border-radius:'+radius+'px;height:' + size + 'px;'+((thumbName)?'float:left;':'')+'" src="' + filePath + '"';
       if (filePath.substr(0,23) != '../view/img/Affectable/') {
         result+=' onMouseOver="showBigImage(\''+thumbObjectClass+'\',\''+thumbObjectId+'\',this,null,null,\''+nocache+'\');"';
         result+=' onMouseOut="hideBigImage();"';
       }
-      result+='/>';
+      result+=' /></td>';
       if (thumbName) {
         // text-shadow:1px 1px #FFFFFF; Can ease view when test is over thumb, but is ugly when line is selected (when text color is white)
-        result+='<div style="margin-left:'+(size+2)+'px;line-height:20px;">'+thumbName+'</div>';
+        result+='<td>&nbsp;</td><td style="vertical-align:middle;">'+thumbName+'</td>';
       }
+      result+='</tr></table>';
       result+='</div>';
       result+='</div>';
     }
