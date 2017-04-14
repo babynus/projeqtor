@@ -499,9 +499,12 @@ function thumb(value, size) {
       result+='font-size:'+fontSize+'px;border-radius:50%;font-weight:300;text-shadow:none;text-align:center;border:1px solid #eeeeee;height:'+(size-2)+'px;width:'+(size-2)+'px; top:1px;" >';
       result+=initial;
       result+='</span></td>';
-      result+='<td style="width:1px">&nbsp;</td><td style="vertical-align:middle;">';
-      result+=name;
-      result+='</td></tr></table>';
+      if (name){
+        result+='<td style="width:1px">&nbsp;</td><td style="vertical-align:middle;">';
+        result+=name;
+        result+='</td>';
+      }
+      result+='</tr></table>';
       result+='</div>';
     } else {
       result+= '<div style="'+((thumbName)?'text-align:left;':'text-align:center;')+'">';    
