@@ -489,8 +489,9 @@ function thumb(value, size) {
       var initial=tab[2].substr(0,1).toUpperCase();
       if (tab.length>=4) initial=tab[3].toUpperCase();
       
-      result+='<div style="line-height:24px;">';
-      result+='<span style="position:relative;line-height:20px;color:#ffffff;background-color:'+bgColor+';display:block;';
+      //result+='<div style="line-height:24px;">';
+      result+= '<div style="'+((thumbName)?'text-align:left;':'text-align:center;')+'">';   
+      result+='<span style="position:relative;color:#ffffff;background-color:'+bgColor+';display:inline-block;';
       if (name) result+='float:left;';
       result+='font-size:'+fontSize+'px;border-radius:50%;font-weight:300;text-shadow:none;text-align:center;border:1px solid #eeeeee;height:'+(size-2)+'px;width:'+(size-2)+'px; top:1px;" >';
       result+=initial;

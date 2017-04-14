@@ -3814,7 +3814,9 @@ function setDefaultPriority(typeValue) {
     load : function(data) {
       var objClass = dojo.byId('objectClass').value;
       var planningPriority = objClass + "PlanningElement_priority" ;
-      dijit.byId(planningPriority).set('value', data);
+      if(data){
+        dijit.byId(planningPriority).set('value', data);
+      }
     }
   });
 }
