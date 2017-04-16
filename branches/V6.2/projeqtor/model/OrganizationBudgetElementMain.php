@@ -787,23 +787,23 @@ function periodChanged(theId) {
       $this->_byMet_daughtersBudgetExpenseAmount = $this->expenseBudgetAmount;
       $this->_byMet_daughtersBudgetTotalCost = $this->totalBudgetCost;
       if ($this->budgetWork==0) {
-          $this->_byMet_projectProgressWorkPct=99999;
+          $this->_byMet_projectProgressWorkPct=null;
       } else {
           $this->_byMet_projectProgressWorkPct=round(($this->realWork/$this->budgetWork)*100);                
       }
       if ($this->budgetCost==0) {
-          $this->_byMet_projectProgressCostPct=99999;
+          $this->_byMet_projectProgressCostPct=null;
       } else {
           $this->_byMet_projectProgressCostPct=round(($this->realCost/$this->budgetCost)*100);                
       }
       if ($this->expenseBudgetAmount==0) {
-          $this->_byMet_projectProgressExpensePct=99999;
+          $this->_byMet_projectProgressExpensePct=null;
       } else {
           $this->_byMet_projectProgressExpensePct=round(($this->expenseRealAmount/$this->expenseBudgetAmount)*100);                
       }
       if ($this->totalBudgetCost==0) {
-          $this->_byMet_projectProgressTotalCostPct=99999;
-          $this->_byMet_projectProgressPlannedPct=99999;
+          $this->_byMet_projectProgressTotalCostPct=null;
+          $this->_byMet_projectProgressPlannedPct=null;
       } else {
           $this->_byMet_projectProgressTotalCostPct=round(($this->totalRealCost/$this->totalBudgetCost)*100);                
           $this->_byMet_projectProgressPlannedPct=round(($this->plannedCost/$this->totalBudgetCost)*100);                

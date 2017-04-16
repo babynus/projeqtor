@@ -1476,15 +1476,14 @@ public function saveOrganizationBudgetElement($idle=null,$idleDateTime=null,$nam
     if($obj==null) {$obj = $this;}  
     $objects=array();
     // Retrieve organization et suborganization in an array ('id'=>array('name','idle')
-    $listOrgaAndSubOrga = $obj->getRecursiveSubOrganizationsIdNameIdleList(false,true);
-
+    $listOrgaAndSubOrga = $obj->getRecursiveSubOrganizationsIdNameIdleList(false,($this->id)?true:false);
     // construct in() string for getSqlElementFromCriteria
     $inString = '';
     foreach($listOrgaAndSubOrga as $orgaAndSubOrga=>$nameIdle) {
-        $inString .= $orgaAndSubOrga.',';
+        if ($orgaAndSubOrga) $inString.= ','.$orgaAndSubOrga;
     }
     if ($inString!='' and $inString!=',') {
-        $inString = '(' . substr($inString,0,-1) . ')';
+        $inString = '(0'.$inString.')';
         // Retrieve the projects of this organization and its suborganizations
         $whereClose = 'idOrganization in '.$inString;
         $prj = new Project();
