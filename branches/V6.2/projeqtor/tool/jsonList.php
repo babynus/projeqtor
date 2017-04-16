@@ -261,7 +261,6 @@
       }
       /*if ($dataType=='idResource') {
         $scope=Affectable::getVisibilityScope();
-        debugLog($scope);
         if ($scope!="all") {
           $list=array();
           $res=new Resource();

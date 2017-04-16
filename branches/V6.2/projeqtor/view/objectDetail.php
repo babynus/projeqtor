@@ -2473,6 +2473,7 @@ function drawOrigin($list,$refType, $refId, $obj, $col, $print) {
     }
     echo '</td><td width="5%" xclass="noteData" xvalign="top" style="white-space:nowrap">';
     echo '&nbsp;&nbsp;' . i18n($refType) . '&nbsp;#' . $refId . '&nbsp;:&nbsp;';
+
     foreach ( $list as $origin ) {
       //$origObj=null;
       $origObjClass=null;
@@ -2489,9 +2490,9 @@ function drawOrigin($list,$refType, $refId, $obj, $col, $print) {
       $gotoE=' onClick="gotoElement(' . "'" . $origObjClass . "','" . htmlEncode($origObjId) . "'" . ');" style="cursor: pointer;" ';
       echo '</td><td xclass="noteData" '.$gotoE.' style="height: 15px">';
     }
-      $orig=new $refType($refId);
-      echo htmlEncode($orig->name);
-      echo '</td></tr></table>';      
+    $orig=new $refType($refId,true);
+    echo htmlEncode($orig->name);
+    echo '</td></tr></table>';      
   } else {
     echo '<table><tr height="20px"><td>';
     if ($obj->id and !$print and $canUpdate) {
