@@ -259,12 +259,15 @@
         }
         // ADD BY Marc TABARY - 2017-02-22 - RESOURCE VISIBILITY (list teamOrga)
       }
-      if ($dataType=='idResource') {
+      /*if ($dataType=='idResource') {
         $scope=Affectable::getVisibilityScope();
+        debugLog($scope);
         if ($scope!="all") {
           $list=array();
           $res=new Resource();
           if ($scope=='orga') {
+            $crit="idOrganization in (". Organization::getUserOrganisationList().")";
+          } else if  ($scope=='orga') {
             $crit="idOrganization in (". Organization::getUserOrganisationList().")";
           } else if ($scope=='team') {
             $aff=new Affectable(getSessionUser()->id,true);
@@ -279,7 +282,8 @@
           }
           asort($list);
         }
-      }
+        $list = getUserVisibleResourcesList(true); // Try ?
+      }*/
       if ($selected) {
       	$name=SqlList::getNameFromId($class, $selected);
       	if ($name==$selected and ($class=='Resource' or $class=='User' or $class=='Contact')) {
