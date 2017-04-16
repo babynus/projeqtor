@@ -457,6 +457,7 @@ class BillMain extends SqlElement {
       $payList=array();
     }
     if (count($payList)==0 or $this->id==null) {
+      $this->paymentsCount=0;
       if ($save) {
         $this->simpleSave();
       }
