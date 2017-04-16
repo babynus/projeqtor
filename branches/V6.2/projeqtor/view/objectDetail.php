@@ -2474,13 +2474,19 @@ function drawOrigin($list,$refType, $refId, $obj, $col, $print) {
     echo '</td><td width="5%" xclass="noteData" xvalign="top" style="white-space:nowrap">';
     echo '&nbsp;&nbsp;' . i18n($refType) . '&nbsp;#' . $refId . '&nbsp;:&nbsp;';
     foreach ( $list as $origin ) {
-      $origObj=null;
+      //$origObj=null;
+      $origObjClass=null;
+      $origObjId=null;
       if ($list->originType == get_class($obj) and $list->originId == $obj->id) {
-        $origObj=new $list->refType($list->refId);
+        //$origObj=new $list->refType($list->refId);
+        $origObjClass=$list->refType;
+        $origObjId=$list->refId;
       } else {
-        $origObj=new $list->originType($list->originId);
+        //$origObj=new $list->originType($list->originId);
+        $origObjClass=$list->originType;
+        $origObjId=$list->originId;
       }
-      $gotoE=' onClick="gotoElement(' . "'" . get_class($origObj) . "','" . htmlEncode($origObj->id) . "'" . ');" style="cursor: pointer;" ';
+      $gotoE=' onClick="gotoElement(' . "'" . $origObjClass . "','" . htmlEncode($origObjId) . "'" . ');" style="cursor: pointer;" ';
       echo '</td><td xclass="noteData" '.$gotoE.' style="height: 15px">';
     }
       $orig=new $refType($refId);
