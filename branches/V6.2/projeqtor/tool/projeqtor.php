@@ -362,7 +362,7 @@ function getUserVisibleResourcesList($limitToActiveResources=false, $listScreen=
             $crit.="idTeam='$aff->idTeam'";
             break;
         default :
-            traceLog("Error on getUserVisibleResourcesList() : Resource::getVisibilityScope returned something different from 'all', 'team', 'orga'");
+            traceLog("Error on getUserVisibleResourcesList() : Resource::getVisibilityScope returned something different from 'all', 'team', 'orga', 'subOrga'");
             $crit=array('id'=>'0');
             break;
     }

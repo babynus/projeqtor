@@ -299,7 +299,7 @@ class Affectable extends SqlElement {
     return $orga;
   }
 // END ADD BY Marc TABARY - 2017-02-20 - ORGANIZATION VISIBILITY
-    public static function  getVisibilityScope($scope='List') {
+  public static function  getVisibilityScope($scope='List') {
     if (self::$_visibilityScope) return self::$_visibilityScope;
     $res='all';
     $crit=array('idProfile'=>getSessionUser()->idProfile, 'scope'=>'resVisibility'.$scope);
