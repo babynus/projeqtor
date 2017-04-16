@@ -2358,12 +2358,12 @@ abstract class SqlElement {
 	private function getDependantSqlElement($objClass) {		
 		$curId=$this->id;
 		if (! trim($curId)) {$curId=null;}
-		$obj = new $objClass();
+		$obj = new $objClass(null,true);
 		$obj->refId=$this->id;
 		$obj->refType=get_class($this);
 		// If id is set, get the elements from Database
 		if ( ($curId!=null) and ($obj instanceof SqlElement) ) {
-			$obj->getSqlElement();
+			$obj->getSqlElement(true);
 			// set the reference data
 			// build query
 			$query = "select id from " . $obj->getDatabaseTableName()
@@ -2380,7 +2380,7 @@ abstract class SqlElement {
 				$line = Sql::fetchLine($result);
 				// get all data fetched for the dependant element
 				$obj->id=$line['id'];
-				$obj->getSqlElement();				
+				$obj->getSqlElement(true);				
 			}
 		}
 		// set the dependant element	
