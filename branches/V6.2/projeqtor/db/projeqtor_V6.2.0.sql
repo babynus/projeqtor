@@ -107,22 +107,22 @@ INSERT INTO `${prefix}mailable` (`id`, `name`, `idle`) VALUES
 INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES
 (62, 'showIdle', 'boolean', 70, '0');
 
---- ADD BY HIM - 2017-03-03 - SET VALUE OF XXX, YYY, ZZZ IN 'alertOverXXXwarningOverYYYokUnderYYY'
+--- ADD BY Marc TABARY - 2017-03-03 - SET VALUE OF XXX, YYY, ZZZ IN 'alertOverXXXwarningOverYYYokUnderYYY'
 ALTER TABLE `${prefix}organization` ADD COLUMN `alertOverPct` INT(3) unsigned NOT NULL DEFAULT '0';
 ALTER TABLE `${prefix}organization` ADD COLUMN `warningOverPct` INT(3) unsigned NOT NULL DEFAULT '0';
 ALTER TABLE `${prefix}organization` ADD COLUMN `okUnderPct` INT(3) unsigned NOT NULL DEFAULT '0';
---- END ADD BY HIM - 2017-03-03 - SET VALUE OF XXX, YYY, ZZZ IN 'alertOverXXXwarningOverYYYokUnderYYY'
+--- END ADD BY Marc TABARY - 2017-03-03 - SET VALUE OF XXX, YYY, ZZZ IN 'alertOverXXXwarningOverYYYokUnderYYY'
 
---- ADD BY HIM - 2017-03-08 - PERIODIC YEAR BUDGET ELEMENT
+--- ADD BY Marc TABARY - 2017-03-08 - PERIODIC YEAR BUDGET ELEMENT
 ALTER TABLE `${prefix}organization` ADD COLUMN `idleDateTime` DATETIME DEFAULT NULL;
 ALTER TABLE `${prefix}budgetElement` ADD COLUMN `idleDateTime` DATETIME DEFAULT NULL;
---- END ADD BY HIM - 2017-03-08 - PERIODIC YEAR BUDGET ELEMENT
+--- END ADD BY Marc TABARY - 2017-03-08 - PERIODIC YEAR BUDGET ELEMENT
 
--- ADD BY HIM - 2017-03-21 - IMPORT ORGANIZATION AND BUDGET ELEMENT
+-- ADD BY Marc TABARY - 2017-03-21 - IMPORT ORGANIZATION AND BUDGET ELEMENT
 INSERT INTO `${prefix}importable` ( `name`,`idle`) VALUES ('Organization',0);
--- END ADD BY HIM - 2017-03-21 - IMPORT ORGANIZATION AND BUDGET ELEMENT
+-- END ADD BY Marc TABARY - 2017-03-21 - IMPORT ORGANIZATION AND BUDGET ELEMENT
 
---- ADD BY HIM - 2017-02-21 - ORGANIZATION & RESOURCE VISIBILITY
+--- ADD BY Marc TABARY - 2017-02-21 - ORGANIZATION & RESOURCE VISIBILITY
 INSERT INTO `${prefix}list` (`id`, `list`, `name`, `code`, `sortOrder`, `idle`) VALUES
 (1001, 'orgaSubOrga', 'displayAll', 'all', 10, 0),
 (1002, 'orgaSubOrga', 'displaySubOrga', 'subOrga', 20, 0),
@@ -131,7 +131,7 @@ INSERT INTO `${prefix}list` (`id`, `list`, `name`, `code`, `sortOrder`, `idle`) 
 
  UPDATE `${prefix}list` SET `sortOrder`=30 WHERE `id`=102;
  UPDATE `${prefix}list` SET `sortOrder`=40 WHERE `id`=103;
---- END ADD BY HIM - 2017-02-21 - ORGANIZATION & RESOURCE VISIBILITY
+--- END ADD BY Marc TABARY - 2017-02-21 - ORGANIZATION & RESOURCE VISIBILITY
 
 ALTER TABLE `${prefix}assignment` ADD `optional` int(1) unsigned DEFAULT '0';
 
