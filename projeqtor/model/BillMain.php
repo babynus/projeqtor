@@ -130,6 +130,7 @@ class BillMain extends SqlElement {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
+    if ($withoutDependentObjects) return;
     if (! $this->id) {
       $this->commandAmountPct=100;
     }
