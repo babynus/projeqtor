@@ -100,6 +100,14 @@ CREATE TABLE `${prefix}extrareadonlyfield` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
+CREATE TABLE `${prefix}extrarequiredfield` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `scope` varchar(100),
+  `idType` int(12) unsigned DEFAULT NULL,
+  `field` varchar(100),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
 INSERT INTO `${prefix}mailable` (`id`, `name`, `idle`) VALUES 
 (27,'Incoming', '0'), 
 (28,'Deliverable', '0');
