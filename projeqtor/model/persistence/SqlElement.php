@@ -2612,7 +2612,7 @@ abstract class SqlElement {
 	 * Return the default value for a given field
 	 * @return string the name of the data table
 	 */
-	public function getDefaultValue($fieldName) {
+	public function getDefaultValue($fieldName,$onSave=false) {
 	  $defaultValues=$this->getStaticDefaultValues();
 	  if (array_key_exists($fieldName,$defaultValues)) {
 	    if (substr($defaultValues[$fieldName],0,strlen(self::$_evaluationString))==self::$_evaluationString) {
@@ -2621,7 +2621,7 @@ abstract class SqlElement {
 	      $eval='$value='. str_replace('\$','$',$eval) .';';
 	      eval($eval);
 	      return $value;
-	    } else {
+	    } else if (! $onSave) {
 	      return $defaultValues[$fieldName];
 	    }
 	  } else {
@@ -2659,7 +2659,8 @@ abstract class SqlElement {
 	  foreach ($defaultValues as $field=>$value) {
 	    if ($onSave) {
 	      if ($this->isAttributeSetToField($field, 'readonly')) {
-	        $this->$field=$this->getDefaultValue($field);
+	        $def=$this->getDefaultValue($field,$onSave);
+	        if ($def!==null) $this->$field=$def;
 	      }
 	    } else {
   	    if (! $this->id) {
