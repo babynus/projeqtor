@@ -1895,14 +1895,15 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
           $isDuration=true;
           $fieldWidth=$smallWidth;
         }
-        if (($isCost or $isWork or $isDuration) and $internalTable != 0 and $displayWidth < 1600) {
-          $fieldWidth-=12;
-        }
+        
         if (strtolower(substr($col, -8, 8)) == 'progress' or substr($col, -3, 3) == 'Pct') {
           $isPercent=true; 
 // ADD BY Marc TABARY - 2017-03-01 - DIM CORRECT Pct
           if (substr($col,-3,3)=='Pct') {$fieldWidth=$smallWidth;}
 // END ADD BY Marc TABARY - 2017-03-01 - DIM CORRECT Pct
+        }
+        if (($isCost or $isWork or $isDuration or $isPercent) and $internalTable != 0 and $displayWidth < 1600) {
+          $fieldWidth-=12;
         }
         $spl=explode(',', $dataLength);
         $dec=0;
