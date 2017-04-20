@@ -53,7 +53,7 @@ class Catalog extends SqlElement {
     <th field="name" width="20%">${name}</th>
     <th field="description" width="30%" >${description}</th>
     <th field="unitCost" width="20%" formatter="costFormatter">${unitPrice}</th>
-    <th field="idMeasureUnit" width="20%" >${idMeasureUnit}</th>
+    <th field="nameMeasureUnit" width="20%" formatter="nameFormatter">${idMeasureUnit}</th>
     ';
   
   //required and hidden attribute
