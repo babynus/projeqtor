@@ -2969,7 +2969,8 @@ function drawBillLinesFromObject($obj, $refresh=false) {
     if ($obj->id != null and !$print and !$lock) {
       echo '<a onClick="addBillLine(\'M\');" title="' . i18n('addLine') . '" > '.formatSmallButton('Add').'</a>';
       if ($billingType!='M') {
-        echo '<a onClick="addBillLine(\''.$billingType.'\');" title="' . i18n('addLine') . '" style="cursor: pointer;display: inline-block;margin-left:5px;" class="roundedButtonSmall"> '.formatIcon('Bill',16).'</a>';
+        //echo '<a onClick="addBillLine(\''.$billingType.'\');" title="' . i18n('addFormattedBillLine') . '" style="cursor: pointer;display: inline-block;margin-left:5px;" class="roundedButtonSmall"> '.formatIcon('Bill',16).'</a>';
+        echo '<a onClick="addBillLine(\''.$billingType.'\');" title="' . i18n('addFormattedBillLine') . '" > '.formatSmallButton('Bill',true).'</a>';
       }
     }
     echo '</td>';
