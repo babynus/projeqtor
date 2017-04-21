@@ -2766,18 +2766,16 @@ abstract class SqlElement {
 
 	public function getFieldsArray($limitToExportableFields=false) {
 		$arrayFields=array();
+		$extraHiddenFields=$this->getExtraHiddenFields( null, null, getSessionUser()->getProfile() );
 		foreach ($this as $fld=>$fldVal) {
 			if (is_object($this->$fld)) {
 				$arrayFields=array_merge($arrayFields,$this->$fld->getFieldsArray($limitToExportableFields));
 			} else {
 			  if ($limitToExportableFields) {
 // CHANGE BY Marc TABARY - 2017-03-20 - FORCE HIDDEN OR READONLY                              
-			    if ((
-                                 $this->isAttributeSetToField($fld,'hidden') or 
-                                 $this->isAttributeSetToField($fld,'hiddenforce') 
-                                )
-                                 and ! $this->isAttributeSetToField($fld,'forceExport')) {
-                            //Old    
+			    if ( ( $this->isAttributeSetToField($fld,'hidden') or $this->isAttributeSetToField($fld,'hiddenforce') or in_array($fld,$extraHiddenFields) )
+               and ! $this->isAttributeSetToField($fld,'forceExport') ) {
+//Old    
 //			    if ($this->isAttributeSetToField($fld,'hidden') and ! $this->isAttributeSetToField($fld,'forceExport')) {
 // END CHANGE BY Marc TABARY - 2017-03-20 - FORCE HIDDEN OR READONLY                              
 			      continue;
