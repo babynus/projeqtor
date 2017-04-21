@@ -3401,6 +3401,8 @@ abstract class SqlElement {
 	public function control(){
 		//traceLog('control (for ' . get_class($this) . ' #' . $this->id . ')');
 		global $cronnedScript, $loginSave;
+		$user=getSessionUser();
+		$arrayExtraRequired=$this->getExtraRequiredFields();
 		$result="";
 		$right="";
 	  // Manage Exceptions
@@ -3463,10 +3465,12 @@ abstract class SqlElement {
 					}
 				} else {
 					// check if required
-					if (strpos($this->getFieldAttributes($col), 'required')!==false and !$isCopy) {
-						if (!$val and $val!==0) {
-							$result.='<br/>' . i18n('messageMandatory',array($this->getColCaption($col)));
-						} else if (trim($val)==''){
+					if ( (strpos($this->getFieldAttributes($col), 'required')!==false or array_key_exists($col, $arrayExtraRequired)) and !$isCopy) {
+						if ($col=='idResource' and ! trim($this->idResource) and $user->isResource and Parameter::getGlobalParameter('setResponsibleIfNeeded')!='NO') {
+							$this->idResource=$user->id;
+							$val=$this->idResource;
+						} 
+						if ((!$val and $val!==0) or trim($val)=='') {
 							$result.='<br/>' . i18n('messageMandatory',array($this->getColCaption($col)));
 						}
 					}
@@ -3517,7 +3521,6 @@ abstract class SqlElement {
 			and property_exists($this, 'idResource')
 			and property_exists($this, 'handled')) {
 				if ($this->handled and ! trim($this->idResource)) {
-					$user=getSessionUser();
 					if ($user->isResource and Parameter::getGlobalParameter('setResponsibleIfNeeded')!='NO') {
 						$this->idResource=$user->id;
 					} else {
