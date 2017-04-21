@@ -3325,7 +3325,7 @@ abstract class SqlElement {
 		}
     
 		// Krowry
-		if(substr($colName, -9)=="StartDate" or substr($colName, -7)=="EisDate"){ // If change start date
+			if(substr($colName, -9)=="StartDate" or substr($colName, -7)=="EisDate"){ // If change start date
 		  $end = str_replace(array('EisDate','StartDate'), array('EndDate','EndDate'), $colName);
 		  $start=$colName;
 		  if (property_exists($this, $end)){
@@ -3338,16 +3338,17 @@ abstract class SqlElement {
 		    $colScript .= "if(this.value){";
 		    $colScript .= "  var end = dijit.byId('$end');"; // $end will be replaced by value as enclosed by "
 		    $colScript .= "  if(end){";
-		    $colScript .= "    var dtStart = dijit.byId('$start').get('value'); "; // => rÃ©cupÃ©rer la date de this, qui est en string, au format Date javascrpit
-		    $colScript .= "    end.constraints.min=dtStart;";
-		    $colScript .= "    if (! end.get('value') ) {";
-		    if (!substr($colName, -7)=="EisDate") $colScript .= "      end.set('value',dtStart);";
-        if(isset($duration)){
-		    $colScript .= "      if (dijit.byId('$duration')) {";
-		    $colScript .= "        dijit.byId('$duration').set('value',1);";
-		    $colScript .= "      }";
-        }
-		    $colScript .= "    }";
+		    $colScript .= "    var dtStart = dijit.byId('$start').get('value'); "; // => retrieve date for startDate
+		    $colScript .= "    end.constraints.min=dtStart;"; // Set constraint
+		    $colScript .= "    end.set('dropDownDefaultValue',dtStart);";
+		    //$colScript .= "    if (! end.get('value') ) {";
+		    //if (!substr($colName, -7)=="EisDate") $colScript .= "      end.set('value',dtStart);";
+        //if(isset($duration)){
+		    //$colScript .= "      if (dijit.byId('$duration')) {";
+		    //$colScript .= "        dijit.byId('$duration').set('value',1);";
+		    //$colScript .= "      }";
+        //}
+		    //$colScript .= "    }";
 		    $colScript .= " }";
 		    $colScript .= "}";
 		    $colScript .= '</script>';
