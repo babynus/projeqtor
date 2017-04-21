@@ -4001,16 +4001,20 @@ function hideDirectChangeStatus() {
 
 function drawGraphStatus() {
   var callBack = function(){
-    console.log(dojo.byId('graphStatusContentDiv'));
     dojo.byId('graphStatusContentDiv');
   };
   graphIdStatus=dijit.byId("idStatus").get('value');
-  var url = '../tool/dynamicDialogGraphStatus.php?idStatus='+graphIdStatus;
+  graphIdProject=dijit.byId("idProject").get('value');
+  objectClass=dojo.byId('objectClass').value;
+  graphIdType=dijit.byId("id"+objectClass+"Type").get('value');
+  var url = '../tool/dynamicDialogGraphStatus.php?idStatus='+graphIdStatus + '&idProject='+graphIdProject + '&idType='+graphIdType;
   loadContent(url,"graphStatusDiv",null,null,null,null,null,callBack);
   
 }
 
 function hideGraphStatus(){
   var divNode=dojo.byId("graphStatusContentDiv");
-  divNode.style.display="none";
+  if (divNode){
+    divNode.style.display="none";
+  }
 }
