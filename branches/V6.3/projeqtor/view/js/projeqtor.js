@@ -3998,3 +3998,19 @@ function hideDirectChangeStatus() {
     divNode.style.display='none';
   }
 }
+
+function drawGraphStatus() {
+  var callBack = function(){
+    console.log(dojo.byId('graphStatusContentDiv'));
+    dojo.byId('graphStatusContentDiv');
+  };
+  graphIdStatus=dijit.byId("idStatus").get('value');
+  var url = '../tool/dynamicDialogGraphStatus.php?idStatus='+graphIdStatus;
+  loadContent(url,"graphStatusDiv",null,null,null,null,null,callBack);
+  
+}
+
+function hideGraphStatus(){
+  var divNode=dojo.byId("graphStatusContentDiv");
+  divNode.style.display="none";
+}
