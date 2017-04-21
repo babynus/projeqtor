@@ -197,7 +197,7 @@ class PlanningElement extends SqlElement {
       //$colScript .= '    if (duration) dijit.byId("' . get_class($this) . '_' . $rubr . 'Duration").set("value",duration);';
       $colScript .= '    var duration=dijit.byId("' . get_class($this) . '_' . $rubr . 'Duration").get("value");';
       $colScript .= '    var endDate=addWorkDaysToDate(startDate,duration);';
-      $colScript .= '    if (duration && endDate) dijit.byId("' . get_class($this) . '_' . $rubr . 'EndDate").set("value",endDate);';
+      $colScript .= '    if ((duration || duration===0) && endDate) dijit.byId("' . get_class($this) . '_' . $rubr . 'EndDate").set("value",endDate);';
       //$colScript .= '    if (!duration) dijit.byId("' . get_class($this) . '_' . $rubr . 'Duration").set("value",1);';
       $colScript .= '    terminateChange();';
       $colScript .= '    formChanged();';
