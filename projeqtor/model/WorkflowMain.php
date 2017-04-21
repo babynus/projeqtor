@@ -249,6 +249,7 @@ class WorkflowMain extends SqlElement {
       
     // WORKFLOW DIAGRAM  
     } else if ($item=='workflowDiagram') {
+      $statusId=RequestHandler::getId('idStatus',false,null);
       $statusList=$this->getStatusList();
       //debugLog($statusList); // List of all status
       $statusColorList=SqlList::getList('Status', 'color');
@@ -380,9 +381,6 @@ class WorkflowMain extends SqlElement {
             $colorI="#000000";
           }
           if ($idL==$idC) {
-            $statusId=RequestHandler::getId('idStatus',true,null);
-            debugLog("mon id status ");
-            debugLog($statusId);
             if($idL==$statusId){
               $result.='<td style="border:6px solid ' . $colorI . ';">';
               $result.='<div style="text-align:center; width:' . $width . 'px;height: ' . $height . 'px;">' . $nameL . '</div>';
