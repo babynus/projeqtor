@@ -312,7 +312,7 @@ class WorkflowMain extends SqlElement {
         }
       }
       if ($limitToProfile!=null) {
-      	$statusList=$statusListUsed;
+      	$statusList=array_intersect($statusList,$statusListUsed);
       }
       $i=0;
       $max=array();
