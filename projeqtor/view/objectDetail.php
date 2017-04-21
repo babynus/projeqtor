@@ -228,7 +228,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
         </script>
       <div style="width: 100%; height: 100%;">
         <div id="detailFormDiv" dojoType="dijit.layout.ContentPane"
-          region="top" style="width: 100%; height: 100%;" onclick="hideGraphStatus();"><?php
+          region="top" style="width: 100%; height: 100%;" onmouseout="hideGraphStatus();"><?php
   }
   $noData=htmlGetNoDataMessage($objClass);
   $canRead=securityGetAccessRightYesNo('menu' . get_class($obj), 'read', $obj) == "YES";
@@ -998,7 +998,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
             if ($thumb) {
               //echo $formatedThumb;
               if($col=='idStatus'){
-                echo '<a onClick="drawGraphStatus();">';
+                echo '<a onmouseover="drawGraphStatus();">';
               }
               echo $formatedThumb;
               if($col=='idStatus'){
@@ -1789,7 +1789,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
         echo ' >';
         if ($classObj=='IndividualExpense' and $col=='idResource' and securityGetAccessRight('menuIndividualExpense', 'read', $obj, $user )=='OWN') {
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, 'id', $user->id);
-          debugLog($next);
         } else {
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
         }
