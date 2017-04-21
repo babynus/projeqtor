@@ -2795,7 +2795,7 @@ function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target) {
       cleanContent("detailDiv");
     }
     if (!dojo.byId('objectClass') || dojo.byId('objectClass').value != eltClass
-        || forceListRefresh) {
+        || forceListRefresh || dojo.byId('titleKanban')) {
       loadContent("objectMain.php?objectClass=" + eltClass, "centerDiv", false,
           false, false, eltId);
     } else {
