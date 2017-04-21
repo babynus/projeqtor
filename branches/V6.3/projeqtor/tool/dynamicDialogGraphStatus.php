@@ -25,11 +25,16 @@
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 require_once "../tool/projeqtor.php";
 $statusId=RequestHandler::getId('idStatus',false,null);
+$idProject=RequestHandler::getId('idProject',false,null);
+$idType=RequestHandler::getId('idType',false,null);
 ?>
  
-<div class="graphStatusContentDiv" id="graphStatusContentDiv" oncontextmenu="return false;" style="width:100%;height:auto;z-index:9999;position:fixed;margin-left:-85px;margin-top:23px;">
+<div class="graphStatusContentDiv" id="graphStatusContentDiv" oncontextmenu="return false;" style="height:auto;z-index:9999;position:fixed;margin-left:-85px;margin-top:23px;">
     <?php 
-    $wf=new Workflow();
-    echo $wf->drawSpecificItem('workflowDiagram');
+    $type=new Type($idType);
+    $idWorkflow=$type->idWorkflow;
+    $wf=new Workflow($idWorkflow);
+    $profile=getSessionUser()->getProfile($idProject);
+    echo $wf->drawSpecificItem('workflowDiagram',$profile);
     ?>
 </div>

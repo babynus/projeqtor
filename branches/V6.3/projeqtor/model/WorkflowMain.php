@@ -400,8 +400,8 @@ class WorkflowMain extends SqlElement {
           }
           if ($idL==$idC) {
             if($idL==$statusId){
-              $result.='<td style="border:6px solid ' . $colorI . ';">';
-              $result.='<div style="text-align:center; width:' . $width . 'px;height: ' . $height . 'px;">' . $nameL . '</div>';
+              $result.='<td style="border:2px solid ' . $colorI . ';">';
+              $result.='<div style="text-align:center;color:' . getForeColor($colorI) . ';background-color:' . $colorI . '; width:' . $width . 'px;height: ' . $height . 'px;">' . $nameL . '</div>';
             } else {
               $result.='<td style="border:2px solid ' . $colorI . ';">';
               $result.='<div style="text-align:center; width:' . $width . 'px;height: ' . $height . 'px;">' . $nameL . '</div>';
