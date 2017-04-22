@@ -61,7 +61,8 @@ if (isset($_REQUEST[$pmName])) {
 }
 
 $result=$obj->getExtraRequiredFields($type,$status,$planningMode,null);
-
+debugLog("getExtraRequiredFields($type,$status,$planningMode,null)");
+debugLog($result);
 $peName=$objectClass.'PlanningElement';
 if (property_exists($obj, $peName)) {
   $pe=$obj->$peName;

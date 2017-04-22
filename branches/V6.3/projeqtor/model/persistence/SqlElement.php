@@ -3513,6 +3513,7 @@ abstract class SqlElement {
 			if (property_exists($objType, 'mandatoryDescription') and $objType->mandatoryDescription
 			and property_exists($this, 'description')) {
 				if (! $this->description) {
+					$result=str_replace('<br/>' . i18n('messageMandatory',array($this->getColCaption('description'))),'',$result);
 					$result.='<br/>' . i18n('messageMandatory',array($this->getColCaption('description')));
 				}
 			}
@@ -3523,6 +3524,7 @@ abstract class SqlElement {
 					if ($user->isResource and Parameter::getGlobalParameter('setResponsibleIfNeeded')!='NO') {
 						$this->idResource=$user->id;
 					} else {
+						$result=str_replace('<br/>' . i18n('messageMandatory',array($this->getColCaption('idResource'))),'',$result);
 						$result.='<br/>' . i18n('messageMandatory',array($this->getColCaption('idResource')));
 					}
 				}
@@ -3531,6 +3533,7 @@ abstract class SqlElement {
 			and property_exists($this, 'result')
 			and property_exists($this, 'done')) {
 				if ($this->done and ! $this->result) {
+					$result=str_replace('<br/>' . i18n('messageMandatory',array($this->getColCaption('result'))),'',$result);
 					$result.='<br/>' . i18n('messageMandatory',array($this->getColCaption('result')));
 				}
 			}
