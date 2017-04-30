@@ -72,17 +72,12 @@
   	$lastDayOfMonth=date('t',strtotime($year.'-'.$month.'-01'));
     $week=weekNumber($firstDay);
   	$lastWeek=weekNumber($year.'-'.$month.'-'.$lastDayOfMonth);
-  	debugLog($year.'-'.$month.'-'.intval(date("t",$month)));
-  	debugLog("mont=$month, last day=".date("t",$month).' / '.intval(date("t",$month)));
   	//$lastWeek=weekNumber('2017-04-30');
 	  if ($lastWeek>$week) {
 		  $trHeight=floor(($totalHeight-20)/($lastWeek-$week+1));
 	  } else {
 		  $trHeight=floor(($totalHeight-20)/($lastWeek+1));
 	  }
-	  debugLog("totalHeight=$totalHeight");
-	  debugLog("trHeight=$trHeight");
-	  debugLog("lastWeek=$lastWeek, firstWeek=$week");
   } else if ($period=="week") {
     $trHeight=$totalHeight-10;
   } else if ($period=="day") {
