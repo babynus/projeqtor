@@ -68,13 +68,21 @@
   $totalHeight=$destinationHeight;
   $trHeight=$totalHeight;
   if ($period=="month") {
-  	$week=weekNumber($year.'-'.$month.'-01');
-  	$lastWeek=weekNumber($year.'-'.$month.'-'.intval(date("t",$month)));
+  	$firstDay=$year.'-'.$month.'-01';
+  	$lastDayOfMonth=date('t',strtotime($year.'-'.$month.'-01'));
+    $week=weekNumber($firstDay);
+  	$lastWeek=weekNumber($year.'-'.$month.'-'.$lastDayOfMonth);
+  	debugLog($year.'-'.$month.'-'.intval(date("t",$month)));
+  	debugLog("mont=$month, last day=".date("t",$month).' / '.intval(date("t",$month)));
+  	//$lastWeek=weekNumber('2017-04-30');
 	  if ($lastWeek>$week) {
-		  $trHeight=floor(($totalHeight-10)/($lastWeek-$week+1))-1;
+		  $trHeight=floor(($totalHeight-20)/($lastWeek-$week+1));
 	  } else {
-		  $trHeight=floor(($totalHeight-10)/($lastWeek+1))-1;
+		  $trHeight=floor(($totalHeight-20)/($lastWeek+1));
 	  }
+	  debugLog("totalHeight=$totalHeight");
+	  debugLog("trHeight=$trHeight");
+	  debugLog("lastWeek=$lastWeek, firstWeek=$week");
   } else if ($period=="week") {
     $trHeight=$totalHeight-10;
   } else if ($period=="day") {
@@ -87,7 +95,7 @@
   	  $currentDay=date('Y-m-d',firstDayofWeek($week,$year));
     }
   	$lastDayOfMonth=date('t',strtotime($year.'-'.$month.'-01'));
-	$weekOfLastDayOfMonth=date('W',strtotime($year.'-'.$month.'-'.$lastDayOfMonth));
+	  $weekOfLastDayOfMonth=date('W',strtotime($year.'-'.$month.'-'.$lastDayOfMonth));
   	$firstDayOfLastWeek=date('Y-m-d',firstDayofWeek($weekOfLastDayOfMonth, $year ));
   	$endDay=addDaysToDate($firstDayOfLastWeek, 6);
   	$inScopeDay=false;	
@@ -156,7 +164,7 @@ function drawDay($date,$ress,$inScopeDay,$period,$calendar=1) {
 	}
 	
 	echo '<td style="vertical-align:top;background-color:'.$bgColor.';">';
-	echo '<div style="overflow-y: auto; overflow-x:hidden; height:'.$dayHeight.'px;max-height:">';
+	echo '<div style="overflow-y: auto; overflow-x:hidden; height:'.$dayHeight.'px;">';
 	echo '<table style="width:100%;">';
 	$lst=getActivity($date);
 	foreach ($lst as $item) {
