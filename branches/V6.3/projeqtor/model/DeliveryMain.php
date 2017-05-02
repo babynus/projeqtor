@@ -57,7 +57,7 @@ class DeliveryMain extends SqlElement {
   public $_Note=array();
   public $_sec_LinkDeliverable;
   public $_Link_Deliverable=array();
-  
+
   public $_nbColMax=3;
   
   // Define the layout that will be used for lists
@@ -221,6 +221,19 @@ class DeliveryMain extends SqlElement {
         if ($mile->idResource!=$this->idResource) {
           $mile->idResource=$this->idResource;
           $mile->save();
+        }
+      }
+    }
+    if ($this->idDeliverableStatus){ // if idDeliverableStatus exist
+      $link=new Link(); 
+      $crit=array("ref1Type"=>"Deliverable");
+      $list2=$link->getSqlElementsFromCriteria($crit);
+      foreach ($list2 as $link2) {
+        if($link2->ref1Type=='Deliverable'){
+         $deliverable = new Deliverable($link2->ref1Id);
+         $deliverable->idDeliverableStatus=$this->idDeliverableStatus;
+         $test=$deliverable->save();
+         debugLog($test);
         }
       }
     }

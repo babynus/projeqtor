@@ -1334,7 +1334,8 @@ function refreshLinkList(selected) {
 function saveLink() {
   if (dojo.byId("linkRef2Id").value == "")
     return;
-  loadContent("../tool/saveLink.php", "resultDiv", "linkForm", true, 'link');
+  var fixedClass = (dojo.byId('linkFixedClass'))?dojo.byId('linkFixedClass').value:'';
+  loadContent("../tool/saveLink.php", "resultDiv", "linkForm", true, 'link'+fixedClass);
   dijit.byId('dialogLink').hide();
 }
 
@@ -1347,10 +1348,17 @@ function removeLink(linkId, refType, refId, refTypeName) {
     showAlert(i18n('alertOngoingChange'));
     return;
   }
+  var fixedClass = refTypeName;
   actionOK=function() {
-    loadContent("../tool/removeLink.php?linkId="+linkId+"&linkRef1Type="+dojo.byId("objectClass").value
-        +"&linkRef1Id="+dojo.byId("objectId").value+"&linkRef2Type="+refType
-        +"&linkRef2Id="+refId, "resultDiv", null, true, 'link');
+    if(fixedClass=='Deliverable' && refType=='Deliverable'){
+      loadContent("../tool/removeLink.php?linkId="+linkId+"&linkRef1Type="+dojo.byId("objectClass").value
+          +"&linkRef1Id="+dojo.byId("objectId").value+"&linkRef2Type="+refType
+          +"&linkRef2Id="+refId, "resultDiv", null, true, 'link'+fixedClass);
+    } else {
+      loadContent("../tool/removeLink.php?linkId="+linkId+"&linkRef1Type="+dojo.byId("objectClass").value
+          +"&linkRef1Id="+dojo.byId("objectId").value+"&linkRef2Type="+refType
+          +"&linkRef2Id="+refId, "resultDiv", null, true, 'link');
+    }
   };
   if (!refTypeName) {
     refTypeName=i18n(refType);
@@ -6527,13 +6535,13 @@ function executeExport(obj, idUser) {
     }
   }
   if (dijit.byId('documentVersionLastOnly') && dijit.byId('documentVersionLastOnly').get('checked')) {
-	  toExport+='documentVersionAll';
+    toExport+='documentVersionAll';
   }
   if (verif == 1) {
     if (ExportType == 'csv') {
       showPrint("../tool/jsonQuery.php?exportHtml="+exportHtml
-    		  +"&exportReferencesAs="+ exportReferencesAs + "&hiddenFields=" + toExport
-    		  , 'list', null,
+          +"&exportReferencesAs="+ exportReferencesAs + "&hiddenFields=" + toExport
+          , 'list', null,
           'csv');
     }
     saveCheckboxExport(obj, idUser);
