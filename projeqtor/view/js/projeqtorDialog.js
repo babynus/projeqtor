@@ -4095,6 +4095,20 @@ function saveTestCaseRun() {
   }
 }
 
+//gautier #1716
+function saveTcrData(id,textZone) {
+  var value=dijit.byId("tcr"+textZone+"_"+id).get("value");
+  var url = '../tool/saveTcrData.php?idTcr='+id +'&zone='+textZone +'&valueZone='+value;
+  dojo.xhrPut({
+    url : url,
+    form : 'objectForm',
+    handleAs : "text",
+    load : function(data) {
+     // write a litle message if error
+      }
+  });
+}
+
 // ADD BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT - ADD-EDIT-REMOVE
 // =============================================================================
 // = Add-Edit-Remove an organization's Budget Element
