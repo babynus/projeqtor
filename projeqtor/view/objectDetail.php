@@ -113,8 +113,11 @@ if ($noselect) {
     exit();
   }
   if (array_key_exists('refreshLinks', $_REQUEST)) {
-    if (property_exists($obj, '_Link')) {
+    $refreshLinks=$_REQUEST ['refreshLinks'];
+    if (property_exists($obj, '_Link') && $refreshLinks =='true') {
       drawLinksFromObject($obj->_Link, $obj, null, true);
+    } else {
+      drawLinksFromObject($obj->_Link_Deliverable, $obj, "Deliverable", true);
     }
     exit();
   }
