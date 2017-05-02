@@ -51,12 +51,13 @@ class DeliveryMain extends SqlElement {
   public $validationDate;
   public $idle;
   public $result;
+  public $_sec_LinkDeliverable;
+  public $_Link_Deliverable=array();
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
   public $_Note=array();
-  public $_sec_LinkDeliverable;
-  public $_Link_Deliverable=array();
+
 
   public $_nbColMax=3;
   
