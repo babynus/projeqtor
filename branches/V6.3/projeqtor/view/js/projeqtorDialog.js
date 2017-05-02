@@ -1219,6 +1219,9 @@ function addLink(classLink, defaultLink) {
     showAlert(i18n('alertOngoingChange'));
     return;
   }*/
+  if (!classLink) {
+    var params="&objectClass="+dojo.byId("objectClass").value+"&objectId="+dojo.byId("objectId").value;
+  }
   loadDialog('dialogLink',function(){
     noRefreshLink=true;
     var objectClass=dojo.byId("objectClass").value;
@@ -1262,7 +1265,7 @@ function addLink(classLink, defaultLink) {
     dijit.byId("linkComment").set('value', '');
     dijit.byId("dialogLink").show();
     disableWidget('dialogLinkSubmit');
-  }, true, "", true);
+  }, true, params, true);
 }
 
 function selectLinkItem() {
