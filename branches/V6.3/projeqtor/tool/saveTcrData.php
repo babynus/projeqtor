@@ -33,10 +33,8 @@ $id=RequestHandler::getId('idTcr');
 $zone=RequestHandler::getValue('zone');
 $value=RequestHandler::getValue('valueZone');
 $tcr = new TestCaseRun($id);
-debugLog($zone);
-debugLog($tcr->comment);
 
-if($zone == 'Comments'){
+if($zone == 'Comment'){
   $tcr->comment = $value;
 }
 if($zone == 'Result'){
