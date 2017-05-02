@@ -46,3 +46,8 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 (1, 176, 1),
 (2, 176, 1),
 (3, 176, 1);
+
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES 
+(1,176,8),
+(2,176,2),
+(3,176,7);
