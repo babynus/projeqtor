@@ -4259,11 +4259,15 @@ function drawTestCaseRunFromObject($list, $obj, $refresh=false) {
     // also count colDetail size
     $nameWidth-=10;
   }
-  echo '<td class="assignHeader" colspan="4" style="width:' . ($nameWidth + 15) . '%">' . i18n('col' . $otherClass) . '</td>';
+  echo '<td class="assignHeader" colspan="4" style="width:' . ($nameWidth) . '%">' . i18n('col' . $otherClass) . '</td>';
+  //gautier #1716
+  echo '<td class="assignHeader" colspan="1" style="width:15%">' . i18n('colResult') . '</td>';
+  echo '<td class="assignHeader" colspan="1" style="width:15%">' . i18n('colComment') . '</td>';
+  //
   if (!$print and $class == 'TestSession') {
-    echo '<td class="assignHeader" style="width:10%">' . i18n('colDetail') . '</td>';
+    echo '<td class="assignHeader" style="width:7%">' . i18n('colDetail') . '</td>';
   }
-  echo '<td class="assignHeader" colspan="2" style="width:15%">' . i18n('colIdStatus') . '</td>'; 
+  echo '<td class="assignHeader" colspan="2" style="width:10%">' . i18n('colIdStatus') . '</td>'; 
   echo '</tr>';
   foreach ( $list as $tcr ) {
     if ($otherClass == 'TestCase') {
@@ -4312,9 +4316,33 @@ function drawTestCaseRunFromObject($list, $obj, $refresh=false) {
     echo '<td class="assignData" align="center" style="width:10%">' . htmlEncode(SqlList::getNameFromId($otherClass . 'Type', $tc->$typeClass)) . '</td>';    
     echo '<td class="assignData" align="center" style="width:5%">#' . htmlEncode($tc->id) . '</td>';
     echo '<td class="assignData" align="left"' . $goto . ' style="width:' . $nameWidth . '%" >' . htmlEncode($tc->name);
-    if ($tcr->comment and !$print) {
-      echo formatCommentThumb($tcr->comment);
+    //gautier #1716
+    echo '<td class="assignData">' ;
+    if (! $print or $tcr->result) {
+      if (! $print) {
+        echo '<textarea dojoType="dijit.form.Textarea" id="tcrResult_'.$tcr->id.'" name="tcrResult_'.$tcr->id.'"
+                style="float:right;width: 150px;min-height: 25px;font-size: 90%;" maxlength="4000" class="input" onchange="saveTcrData('.$tcr->id.',\'Result\');">';
+        echo $tcr->result;
+        echo '</textarea>';
+      }else {
+        echo htmlEncode($tcr->result);
+      }
     }
+    echo '</td>';
+    
+    echo '<td class="assignData">' ;
+    if (! $print or $tcr->comment) {
+      if (! $print) {
+        echo '<textarea dojoType="dijit.form.Textarea" id="tcrComments_'.$tcr->id.'" name="tcrComments_'.$tcr->id.'"
+                style="float:right;width: 150px;min-height: 25px;font-size: 90%;" maxlength="4000" class="input" onchange="saveTcrData('.$tcr->id.',\'Comments\');">';
+        echo $tcr->comment;
+        echo '</textarea>';
+      }else {
+        echo htmlEncode($tcr->comment);
+      }
+    }
+    echo '</td>';
+    //
     echo '</td>';
     if (!$print and $class == 'TestSession') {
       echo '<td class="assignData" style="width:10%" align="center">';
