@@ -1855,7 +1855,6 @@ function addAssignment(unit, rawUnit, hoursPerDay) {
   }else{
     dojo.byId('optionalAssignmentDiv').style.display='none';
   } 
-  //dojo.byId("assignmentRefId").value=dojo.byId("objectId").value;
   dijit.byId("assignmentIdRole").reset();
   dijit.byId("assignmentDailyCost").reset();
   dijit.byId("assignmentRate").set('value', '100');
@@ -1893,7 +1892,6 @@ function addAssignment(unit, rawUnit, hoursPerDay) {
       dijit.byId("assignmentPlannedWork").set('value', delay);
       dijit.byId("assignmentLeftWork").set('value', delay);
     }
-
   }
   dijit.byId("dialogAssign").show();
   };
@@ -1902,9 +1900,6 @@ function addAssignment(unit, rawUnit, hoursPerDay) {
   params+="&idProject="+dijit.byId('idProject').get('value');
   loadDialog('dialogAssignment',callBack,false,params);
 }
-
-
-
 
 /**
  * Display a edit Assignment Box
@@ -1920,20 +1915,9 @@ function editAssignment(assignmentId, idResource, idRole, cost, rate,
   }
   var callBack = function () {
   editAssignmentLoading=true;
-  //var prj=dijit.byId('idProject').get('value');
-  /*
-   * var datastore =new dojo.data.ItemFileReadStore({ query: {id:'*'}, url:
-   * '../tool/jsonList.php?listType=listResourceProject&idProject='+prj
-   * +'&selected=' + idResource, clearOnClose: true }); var store = new
-   * dojo.store.DataStore({store: datastore}); //store.query({id:"*"});
-   * dijit.byId('assignmentIdResource').set('store',store);
-   */
-//  refreshListSpecific('listResourceProject', 'assignmentIdResource','idProject', prj, idResource);
   dijit.byId("assignmentIdResource").reset();
   dijit.byId("assignmentIdResource").set("value", idResource);
   dijit.byId("assignmentIdRole").set("value", idRole);
-  //dojo.byId("assignmentId").value=assignmentId;
- //dojo.byId("assignmentRefType").value=dojo.byId("objectClass").value;
   if(dojo.byId("objectClass").value=='Meeting' || dojo.byId("objectClass").value=='PeriodicMeeting' ){
     dojo.byId('optionalAssignmentDiv').style.display='block';
     dijit.byId('attendantIsOptional').set('checked',(optional==1)?true:false);
@@ -1952,12 +1936,6 @@ function editAssignment(assignmentId, idResource, idRole, cost, rate,
       dojo.number.format(realWork / 100));
   dijit.byId("assignmentLeftWork").set('value',
       dojo.number.format(leftWork / 100));
-  /*var comment=dojo.byId('comment_assignment_' + assignmentId);
-  if (comment) {
-    dijit.byId("assignmentComment").set('value', comment.innerHTML);
-  } else {
-    dijit.byId("assignmentComment").set('value', '');
-  }*/
   disableWidget('assignmentComment');
   dojo.xhrGet({
     url : '../tool/getSingleData.php?dataType=assignmentDescription&idAssignment='+assignmentId,
@@ -1995,7 +1973,6 @@ params+="&idProject="+dijit.byId('idProject').get('value');
 loadDialog('dialogAssignment',callBack,false,params);
 }
 
-
 /**
  * Display a divide assignment box 
  * 
@@ -2003,7 +1980,7 @@ loadDialog('dialogAssignment',callBack,false,params);
  * @return
  */
 
-function divideAssignment(assignedWork,unit, rawUnit, hoursPerDay) {
+function divideAssignment(assignedIdOrigin,assignedWorkOrigin,unit, rawUnit, hoursPerDay) {
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
     return;
@@ -2018,7 +1995,7 @@ function divideAssignment(assignedWork,unit, rawUnit, hoursPerDay) {
   dijit.byId("assignmentIdRole").reset();
   dijit.byId("assignmentDailyCost").reset();
   dijit.byId("assignmentRate").set('value', '100');
-  dijit.byId("assignmentAssignedWork").set('value', assignedWork/2);
+  dijit.byId("assignmentAssignedWork").set('value', assignedWorkOrigin/2);
   if (dijit.byId("assignmentAssignedWork").get('value')< 0 ){
     dijit.byId("assignmentAssignedWork").set('value','0');
   }
@@ -2052,17 +2029,16 @@ function divideAssignment(assignedWork,unit, rawUnit, hoursPerDay) {
       dijit.byId("assignmentPlannedWork").set('value', delay);
       dijit.byId("assignmentLeftWork").set('value', delay);
     }
-
   }
   dijit.byId("dialogAssign").show();
   };
   var params="&refType="+dojo.byId("objectClass").value;
   params+="&refId="+dojo.byId("objectId").value;
   params+="&idProject="+dijit.byId('idProject').get('value');
-  params+="&assignedWork="+assignedWork;
+  params+="&assignedIdOrigin="+assignedIdOrigin;
+  params+="&assignedWorkOrigin="+assignedWorkOrigin;
   loadDialog('dialogAssignment',callBack,false,params);
 }
-
 
 /**
  * Update the left work on assignment update
