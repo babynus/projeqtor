@@ -31,7 +31,8 @@ $idProject=RequestHandler::getId('idProject',false,null);
 $refType=RequestHandler::getValue('refType',false,null);
 $refId=RequestHandler::getId('refId',false,null);
 $idAssignment=RequestHandler::getId('idAssignment',false,null);
-$assignedWork=RequestHandler::getNumeric('assignedWork',false,null);
+$assignedIdOrigin=RequestHandler::getNumeric('assignedIdOrigin',false,null);
+$assignedWorkOrigin=RequestHandler::getNumeric('assignedWorkOrigin',false,null);
 ?>
 <div id="dialogAssign" dojoType="dijit.Dialog" title="<?php echo i18n("dialogAssignment");?>">
   <table>
@@ -41,7 +42,8 @@ $assignedWork=RequestHandler::getNumeric('assignedWork',false,null);
          <input id="assignmentId" name="assignmentId" type="hidden" value="<?php echo $idAssignment ;?>" />
          <input id="assignmentRefType" name="assignmentRefType" type="hidden" value="<?php echo $refType ;?>" />
          <input id="assignmentRefId" name="assignmentRefId" type="hidden" value="<?php echo $refId ;?>" />
-         <input id="assignedWork" name="assignedWork" type="hidden" value="<?php echo $assignedWork ;?>" />
+         <input id="assignedIdOrigin" name="assignedIdOrigin" type="hidden" value="<?php echo $assignedIdOrigin ;?>" />
+         <input id="assignedWorkOrigin" name="assignedWorkOrigin" type="hidden" value="<?php echo $assignedWorkOrigin ;?>" />
          <table>
            <tr>
              <td class="dialogLabel" >
