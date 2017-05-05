@@ -181,10 +181,8 @@ if ($refType=='Meeting' or $refType=='PeriodicMeeting') {
 
 if ($idOrigin){
   $assignmentOrigin = new Assignment($idOrigin);
-  if($assignedWork != ($assignmentOrigin->assignedWork)/2){
     $assignmentOrigin->assignedWork=$assignmentOrigin->assignedWork-$assignedWork;
     $assignmentOrigin->save();
-  }
 }
   
 // Message of correct saving
