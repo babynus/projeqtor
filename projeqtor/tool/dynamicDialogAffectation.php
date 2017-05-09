@@ -28,6 +28,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 $idProject=RequestHandler::getId('idProject',false,null);
 $class=RequestHandler::getClass('objectClass');
 $idResource=RequestHandler::getId('idResource',false,null);
+$affectationIdTeam=RequestHandler::getId('affectationIdTeam',false,null);
 // $mode="";
 // if ( array_key_exists('id',$_REQUEST) ) {
 //   $idAffectation=RequestHandler::getId('id',false,null);
@@ -42,7 +43,7 @@ $idResource=RequestHandler::getId('idResource',false,null);
       <td>
        <form dojoType="dijit.form.Form" id='affectationForm' name='affectationForm' onSubmit="return false;">
          <input id="affectationId" name="affectationId" type="hidden" value="" />
-         <input id="affectationIdTeam" name="affectationIdTeam" type="hidden" value="" />
+         <input id="affectationIdTeam" name="affectationIdTeam" type="hidden" value="<?php echo $affectationIdTeam ;?>" />
          <table>
            <tr>
              <td class="dialogLabel"  >
