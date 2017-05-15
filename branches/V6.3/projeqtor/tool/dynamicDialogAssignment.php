@@ -41,7 +41,7 @@ $assignedWorkPe = str_replace(',', '.', $assignedWorkPeOld);
 $hoursPerDay=Work::getHoursPerDay();
 $delay=null;
 if($refType=="Meeting" || $refType=="PeriodicMeeting") {
-  $rawUnit = RequestHandler::getValue('rawUnit',false,null);
+  /*$rawUnit = RequestHandler::getValue('rawUnit',false,null);
   $obj=new $refType($refId);
   $meetingStartTime=$obj->meetingStartTime;
   $meetingEndTime=$obj->meetingEndTime;
@@ -55,7 +55,9 @@ if($refType=="Meeting" || $refType=="PeriodicMeeting") {
     } else {
       $delay = ($diffHours+$diffMinutes)/$hoursPerDay;
     }
-  }
+  }*/
+	$obj=new $refType($refId);
+	$delay=Work::displayWork(workTimeDiffDateTime('2000-01-01T'.$obj->meetingStartTime,'2000-01-01T'.$obj->meetingEndTime));
 }
 
 ?>
