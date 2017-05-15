@@ -31,17 +31,13 @@ $idProject=RequestHandler::getId('idProject',false,null);
 $refType=RequestHandler::getValue('refType',false,null);
 $refId=RequestHandler::getId('refId',false,null);
 $idRole=RequestHandler::getId('idRole',false,null);
-$optional=RequestHandler::getValue('optional',false,null);
 $idResource = RequestHandler::getId('idResource',false,null);
-$rate = RequestHandler::getNumeric('rate',false,null);
 $idAssignment=RequestHandler::getId('idAssignment',false,null);
-$cost=RequestHandler::getValue('cost',false,null);
 $assignedIdOrigin=RequestHandler::getNumeric('assignedIdOrigin',false,null);
 $assignedWorkOrigin=RequestHandler::getNumeric('assignedWorkOrigin',false,null);
 $unit=RequestHandler::getValue('unit',false,null);
 $validatedWorkPeOld = RequestHandler::getValue('validatedWorkPe',false,null);
 $assignedWorkPeOld = RequestHandler::getValue('assignedWorkPe',false,null);
-$assignedWork = RequestHandler::getNumeric('assignedWork',false,true);
 $realWork = RequestHandler::getNumeric('realWork',false,true);
 $assignmentObj = new Assignment($idAssignment);
 $validatedWorkPe = str_replace(',', '.', $validatedWorkPeOld);
@@ -102,7 +98,7 @@ $mode = RequestHandler::getValue('mode',false,true);
              </td>
              <td>
                <?php echo ($currencyPosition=='before')?$currency:''; ?>
-               <div id="assignmentDailyCost" name="assignmentDailyCost" value="<?php echo ($mode=='edit')?$cost/100:'';?>" 
+               <div id="assignmentDailyCost" name="assignmentDailyCost" value="<?php echo ($mode=='edit')?$assignmentObj->dailyCost:'';?>" 
                  dojoType="dijit.form.NumberTextBox" 
                  constraints="{min:0}" 
                  style="width:97px"            
@@ -119,7 +115,7 @@ $mode = RequestHandler::getValue('mode',false,true);
                <label for="assignmentRate" ><?php echo i18n("colRate");?>&nbsp;:&nbsp;</label>
              </td>
              <td>
-               <div id="assignmentRate" name="assignmentRate" value="<?php echo ($mode=='edit')?$rate:"100";?>" 
+               <div id="assignmentRate" name="assignmentRate" value="<?php echo ($mode=='edit')?$assignmentObj->rate:"100";?>" 
                  dojoType="dijit.form.NumberTextBox" 
                  constraints="{min:0,max:999}" 
                  style="width:97px" 
@@ -159,7 +155,7 @@ $mode = RequestHandler::getValue('mode',false,true);
                <input id="assignmentAssignedUnit" name="assignmentAssignedUnit" value="<?php echo $unit ;?>" readonly tabindex="-1"
                  xdojoType="dijit.form.TextBox" 
                  class="display" style="width:15px; background-color:white; color:#000000; border:0px;"/>
-               <input type="hidden" id="assignmentAssignedWorkInit" name="assignmentAssignedWorkInit" value="<?php echo($mode=="edit")?$assignedWork/100:"";?>" 
+               <input type="hidden" id="assignmentAssignedWorkInit" name="assignmentAssignedWorkInit" value="<?php echo($mode=="edit")?$assignmentObj->assignedWork/100:"";?>" 
                  style="width:97px"/>  
              </td>    
            </tr>
@@ -257,7 +253,7 @@ $mode = RequestHandler::getValue('mode',false,true);
           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
             <td class="dialogLabel">&nbsp;</td>     
             <td>
-              <input dojoType="dijit.form.CheckBox" name="attendantIsOptional" id="attendantIsOptional" <?php echo ($mode=="edit" && $optional==1)?"checked=checked":"";?> />
+              <input dojoType="dijit.form.CheckBox" name="attendantIsOptional" id="attendantIsOptional" <?php echo ($mode=="edit" && $assignmentObj->optional==1)?"checked=checked":"";?> />
               <label style="float:none" for="attendantIsOptional" ><?php echo i18n("attendantIsOptional"); ?></label>
             </td>
            <tr>
