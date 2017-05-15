@@ -43,7 +43,7 @@ $validatedWorkPeOld = RequestHandler::getValue('validatedWorkPe',false,null);
 $assignedWorkPeOld = RequestHandler::getValue('assignedWorkPe',false,null);
 $assignedWork = RequestHandler::getNumeric('assignedWork',false,true);
 $realWork = RequestHandler::getNumeric('realWork',false,true);
-$leftWork = RequestHandler::getNumeric('leftWork',false,true);
+$assignmentObj = new Assignment($idAssignment);
 $validatedWorkPe = str_replace(',', '.', $validatedWorkPeOld);
 $assignedWorkPe = str_replace(',', '.', $assignedWorkPeOld);
 $hoursPerDay=Work::getHoursPerDay();
@@ -138,7 +138,7 @@ $mode = RequestHandler::getValue('mode',false,true);
                  value="<?php if($refType=='Meeting' || $refType=='PeriodicMeeting'){ 
                                   echo $delay;
                               } else if ($mode=="edit"){
-                                  echo $assignedWork/100;
+                                  echo $assignmentObj->leftWork;
                               } 
                                 else { 
                                   $assignedWork = $validatedWorkPe-$assignedWorkPe;
@@ -168,7 +168,7 @@ $mode = RequestHandler::getValue('mode',false,true);
                <label for="assignmentRealWork" ><?php echo i18n("colRealWork");?>&nbsp;:&nbsp;</label>
              </td>
              <td>
-               <div id="assignmentRealWork" name="assignmentRealWork" value="<?php echo ($mode=="edit")?$realWork/100:"0";?>"  
+               <div id="assignmentRealWork" name="assignmentRealWork" value="<?php echo ($mode=="edit")?$assignmentObj->leftWork:"0";?>"  
                  dojoType="dijit.form.NumberTextBox" 
                  constraints="{min:0,max:9999999.99}" 
                  style="width:97px" readonly >
@@ -188,7 +188,7 @@ $mode = RequestHandler::getValue('mode',false,true);
                  value="<?php if($refType=='Meeting' || $refType=='PeriodicMeeting'){ 
                                   echo $delay;
                               } else if($mode=="edit"){
-                                  echo $leftWork/100;
+                                  echo $assignmentObj->leftWork;
                                 } else { 
                                   $assignedWork = $validatedWorkPe-$assignedWorkPe;
                                     if($assignedWork < 0){
@@ -208,7 +208,7 @@ $mode = RequestHandler::getValue('mode',false,true);
                <input id="assignmentLeftUnit" name="assignmentLeftUnit" value="<?php echo $unit ;?>" readonly tabindex="-1"
                  xdojoType="dijit.form.TextBox" 
                  class="display" style="width:15px;background-color:#FFFFFF; color:#000000; border:0px;"/>
-               <input type="hidden" id="assignmentLeftWorkInit" name="assignmentLeftWorkInit" value="<?php echo ($mode=="edit")?$leftWork/100:"0";?>" 
+               <input type="hidden" id="assignmentLeftWorkInit" name="assignmentLeftWorkInit" value="<?php echo ($mode=="edit")?$assignmentObj->leftWork/100:"0";?>" 
                  style="width:97px"/>  
              </td>
            </tr>
