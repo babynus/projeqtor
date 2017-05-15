@@ -69,10 +69,14 @@ $mode = RequestHandler::getValue('mode',false,true);
               <select dojoType="dijit.form.FilteringSelect"
               <?php echo autoOpenFilteringSelect();?>
                 id="assignmentIdResource" name="assignmentIdResource"
-                class="input" value="<?php if($mode=='edit'){echo $idResource;}?>" 
+                class="input" 
                 onChange="assignmentChangeResource();"
                 missingMessage="<?php echo i18n('messageMandatory',array(i18n('colIdResource')));?>" <?php echo ($realWork!=0 && $mode=='edit')?"readonly=readonly":"";?>>
-                <?php htmlDrawOptionForReference('idResource', null,null,true,'idProject',$idProject);?>
+                <?php if($mode=='add'){
+                          htmlDrawOptionForReference('idResource', null,null,false,'idProject',$idProject);
+                }else{
+                          htmlDrawOptionForReference('idResource', $idResource,null,true,'idProject',$idProject);
+                }?>
                </select>  
              </td>
            </tr>
@@ -84,9 +88,13 @@ $mode = RequestHandler::getValue('mode',false,true);
               <select dojoType="dijit.form.FilteringSelect" 
               <?php echo autoOpenFilteringSelect();?>
                 id="assignmentIdRole" name="assignmentIdRole"
-                class="input" value="<?php if($mode=='edit'){echo $idRole;}?>" 
+                class="input" 
                 onChange="assignmentChangeRole();" <?php echo ($realWork!=0 && $idRole)?"readonly=readonly":"";?>>                
-                 <?php htmlDrawOptionForReference('idRole', null, null, true);?>            
+                 <?php if($mode=='add'){
+                          htmlDrawOptionForReference('idRole', null, null, false);
+                 } else {
+                          htmlDrawOptionForReference('idRole', $idRole, null, true);
+                 }?>            
                </select>  
              </td>
            </tr>
