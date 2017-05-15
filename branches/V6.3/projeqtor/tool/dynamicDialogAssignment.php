@@ -30,38 +30,31 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 $idProject=RequestHandler::getId('idProject',false,null);
 $refType=RequestHandler::getValue('refType',false,null);
 $refId=RequestHandler::getId('refId',false,null);
+$idRole=RequestHandler::getId('idRole',false,null);
+$optional=RequestHandler::getValue('optional',false,null);
+$idResource = RequestHandler::getId('idResource',false,null);
+$rate = RequestHandler::getNumeric('rate',false,null);
 $idAssignment=RequestHandler::getId('idAssignment',false,null);
+$cost=RequestHandler::getValue('cost',false,null);
 $assignedIdOrigin=RequestHandler::getNumeric('assignedIdOrigin',false,null);
 $assignedWorkOrigin=RequestHandler::getNumeric('assignedWorkOrigin',false,null);
 $unit=RequestHandler::getValue('unit',false,null);
 $validatedWorkPeOld = RequestHandler::getValue('validatedWorkPe',false,null);
 $assignedWorkPeOld = RequestHandler::getValue('assignedWorkPe',false,null);
+$assignedWork = RequestHandler::getNumeric('assignedWork',false,true);
+$realWork = RequestHandler::getNumeric('realWork',false,true);
+$leftWork = RequestHandler::getNumeric('leftWork',false,true);
 $validatedWorkPe = str_replace(',', '.', $validatedWorkPeOld);
 $assignedWorkPe = str_replace(',', '.', $assignedWorkPeOld);
 $hoursPerDay=Work::getHoursPerDay();
 $delay=null;
 if($refType=="Meeting" || $refType=="PeriodicMeeting") {
-  /*$rawUnit = RequestHandler::getValue('rawUnit',false,null);
-  $obj=new $refType($refId);
-  $meetingStartTime=$obj->meetingStartTime;
-  $meetingEndTime=$obj->meetingEndTime;
-  if($meetingStartTime && $meetingEndTime){
-    $expStart = explode(':', $meetingStartTime);
-    $expEnd = explode(':', $meetingEndTime);
-    $diffHours = $expEnd[0]-$expStart[0];
-    $diffMinutes = ($expEnd[1]-$expStart[1])/60;
-    if ($rawUnit=='hours'){
-      $delay = $diffHours+$diffMinutes;
-    } else {
-      $delay = ($diffHours+$diffMinutes)/$hoursPerDay;
-    }
-  }*/
 	$obj=new $refType($refId);
 	$delay=Work::displayWork(workTimeDiffDateTime('2000-01-01T'.$obj->meetingStartTime,'2000-01-01T'.$obj->meetingEndTime));
 }
-
+$mode = RequestHandler::getValue('mode',false,true);
 ?>
-<div id="dialogAssign" dojoType="dijit.Dialog" title="<?php echo i18n("dialogAssignment");?>">
+<div id="dialogAssign" dojoType="dijit.Dialog" title="<?php echo($mode=="add")?i18n("dialogAssignment"):i18n("dialogAssignment")."#".$idAssignment;?>">
   <table>
     <tr>
       <td>
@@ -80,10 +73,10 @@ if($refType=="Meeting" || $refType=="PeriodicMeeting") {
               <select dojoType="dijit.form.FilteringSelect"
               <?php echo autoOpenFilteringSelect();?>
                 id="assignmentIdResource" name="assignmentIdResource"
-                class="input" value="" 
+                class="input" value="<?php if($mode=='edit'){echo $idResource;}?>" 
                 onChange="assignmentChangeResource();"
-                missingMessage="<?php echo i18n('messageMandatory',array(i18n('colIdResource')));?>" >
-                 <?php htmlDrawOptionForReference('idResource', null,null,true,'idProject',$idProject);?>
+                missingMessage="<?php echo i18n('messageMandatory',array(i18n('colIdResource')));?>" <?php echo ($realWork!=0 && $mode=='edit')?"readonly=readonly":"";?>>
+                <?php htmlDrawOptionForReference('idResource', null,null,true,'idProject',$idProject);?>
                </select>  
              </td>
            </tr>
@@ -95,8 +88,8 @@ if($refType=="Meeting" || $refType=="PeriodicMeeting") {
               <select dojoType="dijit.form.FilteringSelect" 
               <?php echo autoOpenFilteringSelect();?>
                 id="assignmentIdRole" name="assignmentIdRole"
-                class="input" value="" 
-                onChange="assignmentChangeRole();" >                
+                class="input" value="<?php if($mode=='edit'){echo $idRole;}?>" 
+                onChange="assignmentChangeRole();" <?php echo ($realWork!=0 && $idRole)?"readonly=readonly":"";?>>                
                  <?php htmlDrawOptionForReference('idRole', null, null, true);?>            
                </select>  
              </td>
@@ -109,7 +102,7 @@ if($refType=="Meeting" || $refType=="PeriodicMeeting") {
              </td>
              <td>
                <?php echo ($currencyPosition=='before')?$currency:''; ?>
-               <div id="assignmentDailyCost" name="assignmentDailyCost" value="" 
+               <div id="assignmentDailyCost" name="assignmentDailyCost" value="<?php echo ($mode=='edit')?$cost/100:'';?>" 
                  dojoType="dijit.form.NumberTextBox" 
                  constraints="{min:0}" 
                  style="width:97px"            
@@ -126,7 +119,7 @@ if($refType=="Meeting" || $refType=="PeriodicMeeting") {
                <label for="assignmentRate" ><?php echo i18n("colRate");?>&nbsp;:&nbsp;</label>
              </td>
              <td>
-               <div id="assignmentRate" name="assignmentRate" value="100" 
+               <div id="assignmentRate" name="assignmentRate" value="<?php echo ($mode=='edit')?$rate:"100";?>" 
                  dojoType="dijit.form.NumberTextBox" 
                  constraints="{min:0,max:999}" 
                  style="width:97px" 
@@ -144,13 +137,16 @@ if($refType=="Meeting" || $refType=="PeriodicMeeting") {
                <div id="assignmentAssignedWork" name="assignmentAssignedWork" 
                  value="<?php if($refType=='Meeting' || $refType=='PeriodicMeeting'){ 
                                   echo $delay;
-                              } else { 
+                              } else if ($mode=="edit"){
+                                  echo $assignedWork/100;
+                              } 
+                                else { 
                                   $assignedWork = $validatedWorkPe-$assignedWorkPe;
                                   if($assignedWork < 0){
                                     echo "0";
                                   } else {
                                     echo $assignedWork ;
-                                  }
+                                  }                             
                               } 
                  ?>" 
                  dojoType="dijit.form.NumberTextBox" 
@@ -163,7 +159,7 @@ if($refType=="Meeting" || $refType=="PeriodicMeeting") {
                <input id="assignmentAssignedUnit" name="assignmentAssignedUnit" value="<?php echo $unit ;?>" readonly tabindex="-1"
                  xdojoType="dijit.form.TextBox" 
                  class="display" style="width:15px; background-color:white; color:#000000; border:0px;"/>
-               <input type="hidden" id="assignmentAssignedWorkInit" name="assignmentAssignedWorkInit" value="" 
+               <input type="hidden" id="assignmentAssignedWorkInit" name="assignmentAssignedWorkInit" value="<?php echo($mode=="edit")?$assignedWork/100:"";?>" 
                  style="width:97px"/>  
              </td>    
            </tr>
@@ -172,7 +168,7 @@ if($refType=="Meeting" || $refType=="PeriodicMeeting") {
                <label for="assignmentRealWork" ><?php echo i18n("colRealWork");?>&nbsp;:&nbsp;</label>
              </td>
              <td>
-               <div id="assignmentRealWork" name="assignmentRealWork" value="0"  
+               <div id="assignmentRealWork" name="assignmentRealWork" value="<?php echo ($mode=="edit")?$realWork/100:"0";?>"  
                  dojoType="dijit.form.NumberTextBox" 
                  constraints="{min:0,max:9999999.99}" 
                  style="width:97px" readonly >
@@ -191,12 +187,14 @@ if($refType=="Meeting" || $refType=="PeriodicMeeting") {
                <div id="assignmentLeftWork" name="assignmentLeftWork"                  
                  value="<?php if($refType=='Meeting' || $refType=='PeriodicMeeting'){ 
                                   echo $delay;
-                              } else { 
+                              } else if($mode=="edit"){
+                                  echo $leftWork/100;
+                                } else { 
                                   $assignedWork = $validatedWorkPe-$assignedWorkPe;
-                                  if($assignedWork < 0){
-                                    echo "0";
-                                  } else {
-                                    echo $assignedWork ;
+                                    if($assignedWork < 0){
+                                      echo "0";
+                                    } else {
+                                      echo $assignedWork ;
                                   }
                               } 
                  ?>" 
@@ -210,7 +208,7 @@ if($refType=="Meeting" || $refType=="PeriodicMeeting") {
                <input id="assignmentLeftUnit" name="assignmentLeftUnit" value="<?php echo $unit ;?>" readonly tabindex="-1"
                  xdojoType="dijit.form.TextBox" 
                  class="display" style="width:15px;background-color:#FFFFFF; color:#000000; border:0px;"/>
-               <input type="hidden" id="assignmentLeftWorkInit" name="assignmentLeftWorkInit" value="0" 
+               <input type="hidden" id="assignmentLeftWorkInit" name="assignmentLeftWorkInit" value="<?php echo ($mode=="edit")?$leftWork/100:"0";?>" 
                  style="width:97px"/>  
              </td>
            </tr>
@@ -259,7 +257,7 @@ if($refType=="Meeting" || $refType=="PeriodicMeeting") {
           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
             <td class="dialogLabel">&nbsp;</td>     
             <td>
-              <input dojoType="dijit.form.CheckBox" name="attendantIsOptional" id="attendantIsOptional" checked=false />
+              <input dojoType="dijit.form.CheckBox" name="attendantIsOptional" id="attendantIsOptional" <?php echo ($mode=="edit" && $optional==1)?"checked=checked":"";?> />
               <label style="float:none" for="attendantIsOptional" ><?php echo i18n("attendantIsOptional"); ?></label>
             </td>
            <tr>
