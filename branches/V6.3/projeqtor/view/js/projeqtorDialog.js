@@ -1902,12 +1902,7 @@ params+="&idResource="+idResource;
 params+="&idRole="+idRole;
 params+="&mode=edit";
 params+="&unit="+unit;
-params+="&optional="+optional;
-params+="&cost="+cost;
-params+="&rate="+rate;
-params+="&assignedWork="+assignedWork;
 params+="&realWork="+realWork;
-params+="&leftWork="+leftWork;
 loadDialog('dialogAssignment',callBack,false,params);
 }
 
