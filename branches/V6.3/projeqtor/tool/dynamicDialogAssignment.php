@@ -149,7 +149,8 @@ debugLog($mode);
                  value="<?php if(($refType=='Meeting' || $refType=='PeriodicMeeting') && $mode=="add"){ 
                                   echo $delay;
                               } else if ($mode=="edit"){
-                                  echo $assignmentObj->leftWork;
+                                  echo $assignmentObj->assignedWork;
+                                  debugLog($assignmentObj->assignedWork);
                               } 
                                 else if($mode=="add") { 
                                   $assignedWork = $validatedWorkPe-$assignedWorkPe;
