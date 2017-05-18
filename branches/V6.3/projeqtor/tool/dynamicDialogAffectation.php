@@ -26,11 +26,11 @@
 include_once ("../tool/projeqtor.php");
 $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 $idProject=RequestHandler::getId('idProject',false,null);
-$class=RequestHandler::getClass('objectClass');
+$class=RequestHandler::getClass('objectClass',false,null);
 $idResource=RequestHandler::getId('idResource',false,null);
 $affectationIdTeam=RequestHandler::getId('affectationIdTeam',false,null);
 $type=RequestHandler::getValue('type',false,null);
-$mode = RequestHandler::getValue('mode',false,true);
+$mode = RequestHandler::getValue('mode',false,null);
 $idAffectation = RequestHandler::getId('id',false,null);
 $resource = new Resource($idResource);
 $affectation = new Affectation($idAffectation);
@@ -38,11 +38,12 @@ $project = new Project();
 $proj=null;
 if (sessionValueExists('project')){
   $proj=getSessionValue('project');
-  debugLog($proj);
 }
 if ($proj=="*" or !$proj){
   $proj=null;
 }
+$contact = new Contact($idResource);
+$user = new User($idResource);
 ?>
 <div id="dialogAff" dojoType="dijit.Dialog" title="<?php echo i18n("dialogAffectation");?>">
   <table>
@@ -60,7 +61,7 @@ if ($proj=="*" or !$proj){
                <select dojoType="dijit.form.FilteringSelect" 
                <?php echo autoOpenFilteringSelect();?>
                 id="affectationProject" name="affectationProject" 
-                value="<?php echo ($class=="Project")?$idProject:$proj;?>" class="input" required="required" <?php echo ($class=="Project")?"readonly=readonly":"";?>>
+                value="<?php if($class=="Project"){echo $idProject;}else if($class!="Project" && $mode=="edit"){echo $affectation->idProject;}else{echo $proj;}?>" class="input" required="required" <?php echo ($class=="Project")?"readonly=readonly":"";?>>
                  <?php 
                  if($class=="Project"){
                    htmlDrawOptionForReference('idProject', $idProject, null, true);
@@ -80,7 +81,8 @@ if ($proj=="*" or !$proj){
                <?php echo autoOpenFilteringSelect();?>
                 id="affectationResource" name="affectationResource" 
                 onChange="affectationChangeResource();"
-                class="input" value="<?php echo ($class=="Project")?$affectation->idResource:$resource->id;?>" required="required" <?php echo ($class=="Resource")?"readonly=readonly":"";?>>
+                class="input" value="<?php if($class=="Project" && $type=="Resource"){ echo $affectation->idResource;}else if($class=="Project" && $type=="Contact"){ echo $affectation->idContact;}else{ echo $idResource;}?>" 
+                required="required" <?php echo ($class!="Project")?"readonly=readonly":"";?>>
                  <?php ($type=="Contact")?htmlDrawOptionForReference('idContact', $idResource, null, false):htmlDrawOptionForReference('idResource', $idResource, null, false);?>
                </select> 
              </td><td style="vertical-align: top">
@@ -102,7 +104,7 @@ if ($proj=="*" or !$proj){
                <select dojoType="dijit.form.FilteringSelect" 
                <?php echo autoOpenFilteringSelect();?>
                 id="affectationProfile" name="affectationProfile" 
-                class="input" value="<?php echo ($mode=="edit")?$affectation->idProfile:"";?>" required="required">
+                class="input" value="<?php if($mode=="edit"){ echo $affectation->idProfile;}else if($mode=="add" && $class=="Resource"){echo $resource->idProfile;}else if($mode=="add" && $class=="Contact"){echo $contact->idProfile;}else if($mode=="add" && $class=="User"){echo $user->idProfile;}?>" required="required">
                  <?php htmlDrawOptionForReference('idProfile', null, null, true);?>
                </select>
                </div>
