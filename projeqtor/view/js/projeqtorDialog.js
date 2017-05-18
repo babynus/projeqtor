@@ -4342,6 +4342,7 @@ function addAffectation(objectClass, type, idResource, idProject) {
   params+="&objectClass="+objectClass;
   params+="&idResource="+idResource;
   params+="&type="+type;
+  params+="&mode=add";
   loadDialog('dialogAffectation',callBack,false,params);
 }
 
