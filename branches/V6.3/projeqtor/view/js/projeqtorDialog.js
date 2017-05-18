@@ -4434,18 +4434,6 @@ function affectTeamMembers(idTeam) {
     return;
   }
   var callBack = function () {
-    dojo.byId("affectationId").value="";
-    dijit.byId("affectationResource").set('readOnly', true);
-    dijit.byId("affectationResource").set('required', false);
-    dijit.byId("affectationResource").reset();
-    dijit.byId("affectationProfile").set('readOnly', true);
-    dijit.byId("affectationProfile").set('required', false);
-    dijit.byId("affectationProfile").reset();
-    dijit.byId("affectationProject").set('readOnly', false);
-    dijit.byId("affectationRate").set('value', '100');
-    dijit.byId("affectationIdle").reset();
-    dijit.byId("affectationDescription").reset();
-    dijit.byId("affectationIdle").set('readOnly', true);
     dijit.byId("dialogAff").show();
   };
   var params="&affectationIdTeam="+idTeam;

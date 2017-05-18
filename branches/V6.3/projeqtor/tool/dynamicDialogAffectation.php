@@ -44,6 +44,8 @@ if ($proj=="*" or !$proj){
 }
 $contact = new Contact($idResource);
 $user = new User($idResource);
+$obj=SqlElement::getCurrentObject(null,null,true,false) ;
+$objTeam=get_class($obj);
 ?>
 <div id="dialogAff" dojoType="dijit.Dialog" title="<?php echo i18n("dialogAffectation");?>">
   <table>
@@ -104,7 +106,8 @@ $user = new User($idResource);
                <select dojoType="dijit.form.FilteringSelect" 
                <?php echo autoOpenFilteringSelect();?>
                 id="affectationProfile" name="affectationProfile" 
-                class="input" value="<?php if($mode=="edit"){ echo $affectation->idProfile;}else if($mode=="add" && $class=="Resource"){echo $resource->idProfile;}else if($mode=="add" && $class=="Contact"){echo $contact->idProfile;}else if($mode=="add" && $class=="User"){echo $user->idProfile;}?>" required="required">
+                class="input" value="<?php if($mode=="edit"){ echo $affectation->idProfile;}else if($mode=="add" && $class=="Resource"){echo $resource->idProfile;}else if($mode=="add" && $class=="Contact"){echo $contact->idProfile;}else if($mode=="add" && $class=="User"){echo $user->idProfile;}?>" 
+                <?php echo ($objTeam!="Team")?"required=required":"";?> <?php echo ($objTeam=="Team")?"readonly=readonly":"";?>>
                  <?php htmlDrawOptionForReference('idProfile', null, null, true);?>
                </select>
                </div>
@@ -170,7 +173,7 @@ $user = new User($idResource);
              </td>
              <td>
                <div id="affectationIdle" name="affectationIdle"
-                 dojoType="dijit.form.CheckBox" type="checkbox" >
+                 dojoType="dijit.form.CheckBox" type="checkbox" <?php echo ($objTeam=="Team")?"readonly=readonly":"";?>>
                </div>
              </td>    
            </tr>
