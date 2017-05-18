@@ -3779,7 +3779,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
         echo '  <a onClick="removeAssignment(' . "'" . htmlEncode($assignment->id) . "','" . Work::displayWork($assignment->realWork) * 100 . "','" . htmlEncode($resName, 'quotes') . "'" . ');" ' . 
         'title="' . i18n('removeAssignment') . '" > '.formatSmallButton('Remove').'</a>';
       }
-      echo '  <a onClick="divideAssignment(' . htmlEncode($assignment->id) . ',\'' . Work::displayShortWorkUnit() . '\');" ' . 'title="' . i18n('divideAssignment') . '" > '.formatSmallButton('SwitchUser').'</a>';
+      echo '  <a onClick="divideAssignment(' . htmlEncode($assignment->id) . ',' . htmlEncode($assignment->assignedWork) . ',\'' . Work::displayShortWorkUnit() . '\',\'' . Work::getWorkUnit() . '\',\'' . Work::getHoursPerDay() . '\');" ' . 'title="' . i18n('divideAssignment') . '" > '.formatSmallButton('SwitchUser').'</a>';
       echo '</td>';
     }
     echo '<td class="assignData">';
@@ -3814,7 +3814,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
     	$keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       echo '<td class="assignData" align="right">' . $fmt->format(Work::displayWork($assignment->assignedWork)) . '</td>';
       echo '<td class="assignData" align="right">' . $fmt->format(Work::displayWork($assignment->realWork)) . '</td>';
-      echo '<td class="assignData" align="right">' . $fmt->format(Work::displayWork($assignment->leftWork)) . '</td>';
+      echo '<td class="assignData" align="right">';
       	//mehdi======================ticket#1776
       	echo '<div id="LeftWork_'.$assignment->id.'" name="LeftWork_'.$assignment->id.'"  
       		  		dojoType="dijit.form.NumberTextBox" onchange="saveLeftWork('.$assignment->id.');"
