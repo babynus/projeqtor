@@ -2525,22 +2525,6 @@ body .ProjeQtOrFlatRed {
   color: #FEFEFE !important;
   border-radius: 0px;
   text-shadow: none;
-  background: #b07878 !important; 
-}
-
- 
-.ProjeQtOrFlatRed .iconHighlight  {
-  background: rgba(255,255,255,0.7) ;
-}
-
-.ProjeQtOrFlatRed .gridRowCount {
-  color:#e97b2c;
-  font-weight: bold;
-  -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease; {
-  color: #FEFEFE !important;
-  border-radius: 0px;
-  text-shadow: none;
   background: #779a84 !important; 
 }
 
