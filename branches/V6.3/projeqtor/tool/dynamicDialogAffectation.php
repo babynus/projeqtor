@@ -35,6 +35,14 @@ $idAffectation = RequestHandler::getId('id',false,null);
 $resource = new Resource($idResource);
 $affectation = new Affectation($idAffectation);
 $project = new Project();
+$proj=null;
+if (sessionValueExists('project')){
+  $proj=getSessionValue('project');
+  debugLog($proj);
+}
+if ($proj=="*" or !$proj){
+  $proj=null;
+}
 ?>
 <div id="dialogAff" dojoType="dijit.Dialog" title="<?php echo i18n("dialogAffectation");?>">
   <table>
@@ -52,18 +60,11 @@ $project = new Project();
                <select dojoType="dijit.form.FilteringSelect" 
                <?php echo autoOpenFilteringSelect();?>
                 id="affectationProject" name="affectationProject" 
-                value="<?php echo $idProject;?>" class="input" required="required" <?php echo ($class=="Project")?"readonly=readonly":"";?>>
+                value="<?php echo ($class=="Project")?$idProject:$proj;?>" class="input" required="required" <?php echo ($class=="Project")?"readonly=readonly":"";?>>
                  <?php 
                  if($class=="Project"){
                    htmlDrawOptionForReference('idProject', $idProject, null, true);
                  } else {
-                   $proj=null;
-                   if (sessionValueExists('project')){
-                    $proj= getSessionValue('project');
-                   }
-                   if ($proj=="*" or ! $proj){
-                     $proj=null;
-                  }
                    htmlDrawOptionForReference('idProject', $proj,null,false);
                  }
                  ?>
