@@ -3811,10 +3811,18 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
     echo '</td>';
     echo '<td class="assignData" align="center">' . htmlEncode($assignment->rate) . '</td>';
     if ($workVisible) {
+    	$keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       echo '<td class="assignData" align="right">' . $fmt->format(Work::displayWork($assignment->assignedWork)) . '</td>';
       echo '<td class="assignData" align="right">' . $fmt->format(Work::displayWork($assignment->realWork)) . '</td>';
       echo '<td class="assignData" align="right">' . $fmt->format(Work::displayWork($assignment->leftWork)) . '</td>';
-    }
+      	//mehdi======================ticket#1776
+      	echo '<div id="LeftWork_'.$assignment->id.'" name="LeftWork_'.$assignment->id.'"  
+      		  		dojoType="dijit.form.NumberTextBox" onchange="saveLeftWork('.$assignment->id.');"
+  							constraints="{min:0,max:9999999.99}" class="dijitReset dijitInputInner dijitNumberTextBox "
+      					value="'.Work::displayWork($assignment->leftWork).'" style="padding:0;"> ';
+      		echo $keyDownEventScript;
+      	echo' </div>';   		
+      echo '</td>';    }
     echo '</tr>';
   }
   echo '</table></td></tr>';
