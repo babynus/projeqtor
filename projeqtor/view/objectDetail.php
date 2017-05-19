@@ -3819,7 +3819,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
       	echo '<div id="LeftWork_'.$assignment->id.'" name="LeftWork_'.$assignment->id.'"  
       		  		dojoType="dijit.form.NumberTextBox" onchange="saveLeftWork('.$assignment->id.');"
   							constraints="{min:0,max:9999999.99}" class="dijitReset dijitInputInner dijitNumberTextBox "
-      					value="'.Work::displayWork($assignment->leftWork).'" style="padding:5px;background:none;max-width:100%; box-sizing:border-box;">';
+      					value="'.Work::displayWork($assignment->leftWork).'" style="padding:5px;background:none;max-width:100%; box-sizing:border-box;">' .$fmt->format(Work::displayWork($assignment->leftWork)). '</div>' ;
       		echo $keyDownEventScript;
       	echo' </div>';   		
       echo '</td>';    }
