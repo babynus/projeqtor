@@ -3815,7 +3815,8 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
       // echo '<td class="assignData" align="right" style="vertical-align:middle">'
       //mehdi======================ticket#1776
     	echo '<td class="assignData" align="right" style="vertical-align:middle;">';   	
-    			echo '<img  id="idImageAssignedWork'.$assignment->id.'" src="img/savedOk.png" style="display: none; 
+    			echo '<img  id="idImageAssignedWork'.$assignment->id.'" src="img/savedOk.png" 
+      style="display: none; 
   										position:relative;top:2px;left:5px; height:16px;float:left;"/>';
     			echo '<div dojoType="dijit.form.NumberTextBox" id="assAssignedWork_'.$assignment->id.'" name="assAssignedWork_'.$assignment->id.'"
     						class="dijitReset dijitInputInner dijitNumberTextBox"
@@ -4345,26 +4346,26 @@ function drawTestCaseRunFromObject($list, $obj, $refresh=false) {
     echo '<td class="assignData" align="left"' . $goto . ' style="width:' . $nameWidth . '%" >' . htmlEncode($tc->name);
     //gautier #1716
     $checkImg='savedOk.png';
-    echo '<td class="assignData" style="position:relative">' ;
+    echo '<td class="assignData" >' ;
     if (! $print or $tcr->result) {
       if (! $print) {
-        echo '<img  id="idImageResult'.$tcr->id.'" src="img/' . $checkImg . '" style="display: none; position:absolute;top:2px;right:5px; height:16px;"/>';
         echo '<textarea dojoType="dijit.form.Textarea" id="tcrResult_'.$tcr->id.'" name="tcrResult_'.$tcr->id.'"
-                style="float:right;width: 150px;min-height: 25px;font-size: 90%;" maxlength="4000" class="input" onchange="saveTcrData('.$tcr->id.',\'Result\');">';
+                style="float:left;width: 125px;min-height: 25px;font-size: 90%; background:none;display:block;border:none;" maxlength="4000" onchange="saveTcrData('.$tcr->id.',\'Result\');">';
         echo $tcr->result;
         echo '</textarea>';
+        echo '<img  id="idImageResult'.$tcr->id.'" src="img/' . $checkImg . '" style="display: none; float:right; top:2px;right:5px; height:16px;"/>';
       }else {
         echo htmlEncode($tcr->result);
       }
     }
     echo '</td>';
     
-    echo '<td class="assignData" style="position:relative">' ;   
+    echo '<td class="assignData" >' ;   
      if (! $print or $tcr->comment) {
       if (! $print) {
-        echo '<img  id="idImageComment'.$tcr->id.'" src="img/' . $checkImg . '" style="display: none; position:absolute;top:2px;right:5px; height:16px;"/>';
+        echo '<img  id="idImageComment'.$tcr->id.'" src="img/' . $checkImg . '" style="display: none; float:right; top:2px;right:5px; height:16px;"/>';
         echo '<textarea dojoType="dijit.form.Textarea" id="tcrComment_'.$tcr->id.'" name="tcrComment_'.$tcr->id.'"
-                style="float:right;width: 150px;min-height: 25px;font-size: 90%;" maxlength="4000" class="input" onchange="saveTcrData('.$tcr->id.',\'Comment\');">';
+                style="float:left;width: 125px;min-height: 25px;font-size: 90%; background:none;display:block;border:none;" maxlength="4000" onchange="saveTcrData('.$tcr->id.',\'Comment\');">';
         echo $tcr->comment;
         echo '</textarea>';
       }else {
