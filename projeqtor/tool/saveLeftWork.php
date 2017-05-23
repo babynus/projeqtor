@@ -30,8 +30,16 @@
 require_once "../tool/projeqtor.php";
 
 $id=RequestHandler::getId('idAssign');
+$zone=RequestHandler::getValue('zone');
 $value = RequestHandler::getNumeric('valueTextZone');
 $ass = new Assignment($id);
-$ass->leftWork = $value;
-$res = $ass->save();
+
+if($zone == 'PlannedWork'){
+	$ass->plannedWork = $value;
+}
+if($zone == 'LeftWork'){
+	$ass->leftWork = $value;
+}
+
+$ass->save();
 ?>
