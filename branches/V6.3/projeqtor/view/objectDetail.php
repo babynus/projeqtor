@@ -3809,34 +3809,34 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
     }
     echo '</tr></table>';
     echo '</td>';
-    if(!$print && $outMode != 'pdf'){
-      echo '<td class="assignData" align="center" style="vertical-align:middle">' . htmlEncode($assignment->rate) . '</td>';
-    }else if($print || $outMode == 'pdf'){
-      echo '<td class="assignData" align="center">' . htmlEncode($assignment->rate) . '</td>';
-    }
-    if ($workVisible) {  
-      if(!$print && $outMode != 'pdf'){
-        echo '<td class="assignData" align="right" style="vertical-align:middle">' . $fmt->format(Work::displayWork($assignment->assignedWork)) . '</td>';
-        echo '<td class="assignData" align="right" style="vertical-align:middle">' . $fmt->format(Work::displayWork($assignment->realWork)) . '</td>';
-      }
-      if($print || $outMode == 'pdf'){
-        echo '<td class="assignData" align="right">' . $fmt->format(Work::displayWork($assignment->assignedWork)) . '</td>';
-        echo '<td class="assignData" align="right">' . $fmt->format(Work::displayWork($assignment->realWork)) . '</td>';
-        echo '<td class="assignData" align="right">' . $fmt->format(Work::displayWork($assignment->leftWork)) . '</td>';
-      }else{
-      echo '<td class="assignData" align="right" style="vertical-align:middle">';
-      	//mehdi======================ticket#1776
-      	echo '<div id="LeftWork_'.$assignment->id.'" name="LeftWork_'.$assignment->id.'"  
-      		  		dojoType="dijit.form.NumberTextBox" onchange="saveLeftWork('.$assignment->id.');"
-  							constraints="{min:0,max:9999999.99}" class="dijitReset dijitInputInner dijitNumberTextBox "
-      					value="'.Work::displayWork($assignment->leftWork).'" style="padding:5px;background:none;max-width:100%; box-sizing:border-box;">';
-      		//echo Work::displayWork($assignment->leftWork);
-      	$keyDownEventScript=NumberFormatter52::getKeyDownEvent();
-      	echo $keyDownEventScript;
-      	echo' </div>';   		
-      echo '</td>';    }
-    }
-    echo '</tr>';
+    echo '<td class="assignData" align="center" style="vertical-align:middle">' . htmlEncode($assignment->rate) . '</td>';
+    if ($workVisible) {
+    	$keyDownEventScript=NumberFormatter52::getKeyDownEvent();
+      // echo '<td class="assignData" align="right" style="vertical-align:middle">'
+      //mehdi======================ticket#1776
+    	echo '<td class="assignData" align="right" style="vertical-align:middle; position:relative">';   	
+    			echo '<img  id="idImagePlannedWork'.$assignment->id.'" src="img/savedOk.png" style="display: none; 
+  										position:absolute;top:2px;left:5px; height:16px;"/>';
+    			echo '<div dojoType="dijit.form.NumberTextBox" id="assPlannedWork_'.$assignment->id.'" name="assPlannedWork_'.$assignment->id.'"
+    						class="dijitReset dijitInputInner dijitNumberTextBox"
+      					value="'.Work::displayWork($assignment->plannedWork).'"
+                style="padding:5px;background:none;max-width:100%; box-sizing:border-box;" 
+      					onchange="saveLeftWork('.$assignment->id.',\'PlannedWork\');">';
+    			echo '</div>';
+    	echo '</td>';
+   
+    	echo '<td class="assignData" align="right" style="vertical-align:middle">' . $fmt->format(Work::displayWork($assignment->realWork)) . '</td>';
+     
+      echo '<td class="assignData" align="right" style="vertical-align:middle; position:relative">' ;    
+       		echo '<img  id="idImageLeftWork'.$assignment->id.'" src="img/savedOk.png" style="display: none; position:absolute;top:2px;left:5px; height:16px;"/>';
+      	 echo '<div dojoType="dijit.form.NumberTextBox" id="assLeftWork_'.$assignment->id.'" name="assLeftWork_'.$assignment->id.'"
+        				class="dijitReset dijitInputInner dijitNumberTextBox"
+        				value="'.Work::displayWork($assignment->leftWork).'"
+                style="padding:5px;background:none;max-width:100%; box-sizing:border-box;" onchange="saveLeftWork('.$assignment->id.',\'LeftWork\');">';
+      	 echo $keyDownEventScript;
+      	 echo '</div>';
+         echo '</td>'; }
+     echo '</tr>';
   }
   echo '</table></td></tr>';
 }
