@@ -3814,25 +3814,26 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
     	$keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       // echo '<td class="assignData" align="right" style="vertical-align:middle">'
       //mehdi======================ticket#1776
-    	echo '<td class="assignData" align="right" style="vertical-align:middle; position:relative">';   	
-    			echo '<img  id="idImagePlannedWork'.$assignment->id.'" src="img/savedOk.png" style="display: none; 
-  										position:absolute;top:2px;left:5px; height:16px;"/>';
-    			echo '<div dojoType="dijit.form.NumberTextBox" id="assPlannedWork_'.$assignment->id.'" name="assPlannedWork_'.$assignment->id.'"
+    	echo '<td class="assignData" align="right" style="vertical-align:middle;">';   	
+    			echo '<img  id="idImageAssignedWork'.$assignment->id.'" src="img/savedOk.png" style="display: none; 
+  										position:relative;top:2px;left:5px; height:16px;float:left;"/>';
+    			echo '<div dojoType="dijit.form.NumberTextBox" id="assAssignedWork_'.$assignment->id.'" name="assAssignedWork_'.$assignment->id.'"
     						class="dijitReset dijitInputInner dijitNumberTextBox"
-      					value="'.Work::displayWork($assignment->plannedWork).'"
-                style="padding:5px;background:none;max-width:100%; box-sizing:border-box;" 
-      					onchange="saveLeftWork('.$assignment->id.',\'PlannedWork\');">';
+      					value="'.Work::displayWork($assignment->assignedWork).'"
+                style="padding:1px;background:none;max-width:100%; box-sizing:border-box;display:block;" 
+      					onchange="saveLeftWork('.$assignment->id.',\'AssignedWork\');">';
+    			
     			echo '</div>';
     	echo '</td>';
    
     	echo '<td class="assignData" align="right" style="vertical-align:middle">' . $fmt->format(Work::displayWork($assignment->realWork)) . '</td>';
      
-      echo '<td class="assignData" align="right" style="vertical-align:middle; position:relative">' ;    
-       		echo '<img  id="idImageLeftWork'.$assignment->id.'" src="img/savedOk.png" style="display: none; position:absolute;top:2px;left:5px; height:16px;"/>';
+      echo '<td class="assignData" align="right" style="vertical-align:middle; ">' ;    
+       		echo '<img  id="idImageLeftWork'.$assignment->id.'" src="img/savedOk.png" style="display: none; position:relative;top:2px;left:5px; height:16px;float:left;"/>';
       	 echo '<div dojoType="dijit.form.NumberTextBox" id="assLeftWork_'.$assignment->id.'" name="assLeftWork_'.$assignment->id.'"
         				class="dijitReset dijitInputInner dijitNumberTextBox"
         				value="'.Work::displayWork($assignment->leftWork).'"
-                style="padding:5px;background:none;max-width:100%; box-sizing:border-box;" onchange="saveLeftWork('.$assignment->id.',\'LeftWork\');">';
+                style="padding:1px;max-width:100%; background:none;box-sizing:border-box;display:block;" onchange="saveLeftWork('.$assignment->id.',\'LeftWork\');">';
       	 echo $keyDownEventScript;
       	 echo '</div>';
          echo '</td>'; }
