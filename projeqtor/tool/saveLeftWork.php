@@ -34,8 +34,8 @@ $zone=RequestHandler::getValue('zone');
 $value = RequestHandler::getNumeric('valueTextZone');
 $ass = new Assignment($id);
 
-if($zone == 'PlannedWork'){
-	$ass->plannedWork = $value;
+if($zone == 'AssignedWork'){
+	$ass->assignedWork = $value;
 }
 if($zone == 'LeftWork'){
 	$ass->leftWork = $value;
