@@ -189,7 +189,7 @@ function drawDay($date,$ress,$inScopeDay,$period,$calendar=1) {
 			echo '<i>'.$item['name'].'</i>';
 		}
 		if ($period=='week' or $period=='day') {
-		  echo '<table style="vertical-align:top;height:40px;display:block;">';
+		  echo '<table style="vertical-align:top;display:block;">';
 		  if ($item['projectName']) echo '<tr><td style="text-align:right;font-weight:bold;vertical-align:top;">'.i18n('colIdProject').'&nbsp;:&nbsp;</td><td>'.$item['projectName'].'</td></tr>';
 		  if ($item['typeName']) echo '<tr><td style="text-align:right;font-weight:bold;vertical-align:top;">'.i18n('colType').'&nbsp;:&nbsp;</td><td>'.$item['typeName'].'</td></tr>';
 		  if ($item['priorityName'])echo '<tr><td style="text-align:right;font-weight:bold;vertical-align:top;">'.i18n('colIdPriority').'&nbsp;:&nbsp;</td><td>'.$item['priorityName'].'</td></tr>';
@@ -207,7 +207,9 @@ function drawDay($date,$ress,$inScopeDay,$period,$calendar=1) {
 		echo '</td></tr></table>';
 		echo '</div>';
 		// To display a tooltip in replacement of Hint
-		echo '<div dojoType="dijit.Tooltip" connectId="item_'.$cpt.'" position="above">';
+		if ($period!='day') {
+		  echo '<div dojoType="dijit.Tooltip" connectId="item_'.$cpt.'" position="above">';
+		}
 		echo $hintHtml;
 		echo '</div>';
 		echo '</td>';
