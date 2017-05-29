@@ -1468,7 +1468,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                <label for="idProjectPlan" ><?php echo i18n("colIdProject") ?>&nbsp;:&nbsp;</label>
              </td>
              <td>
-               <select dojoType="dijit.form.FilteringSelect" 
+               <select dojoType="dojox.form.CheckedMultiSelect"  multiple="true" style="width:initial;"
                <?php echo autoOpenFilteringSelect();?>
                 id="idProjectPlan" name="idProjectPlan" 
                 class="input" value=" " >
