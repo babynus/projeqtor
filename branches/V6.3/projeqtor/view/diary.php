@@ -181,7 +181,7 @@ function drawDay($date,$ress,$inScopeDay,$period,$calendar=1) {
 		echo '<td style="color:#555555">';
 		//Modification ici , typename ne marche pas...
 		
-		echo '<div style="cursor:pointer;height:85px;word-wrap:break-word;margin-left:27px;" onClick="gotoElement(\''.$item['class'].'\', '.$item['id'].', false);" >';
+		echo '<div style="cursor:pointer;height:100%;word-wrap:break-word;margin-left:27px;" onClick="gotoElement(\''.$item['class'].'\', '.$item['id'].', false);" >';
 		echo '<div style="float:right;width:22px;height:22px;position:relative;margin-right:10px;" id="userThumb'.$item['id'].'">'.formatUserThumb($item['responsibleId'],$item['responsibleName'], "", 22, 'left', false).'</div>';
 		if ($item['real']) {
 		  echo $item['name'];
@@ -196,9 +196,9 @@ function drawDay($date,$ress,$inScopeDay,$period,$calendar=1) {
 		  echo '</table>';
 		}
 		if ($period=='day') {
-		  echo '<div style="padding:5px;max-height:200px;width:100%;border:1px solid #A0A0A0;margin-top:5px;margin-bottom:5px;">'.$item['description'].'</div>';
+		  echo '<div style="padding:5px;width:100%;border:1px solid #A0A0A0;margin-top:5px;margin-bottom:5px;">'.$item['description'].'</div>';
 		}
-		echo '<div style="width:100%;height:24px;float:left;position:relative;left:-18px;padding-top:2px">';
+		echo '<div style="width:100%;float:left;position:relative;left:-18px;padding-top:2px">';
 		echo '   <div style="float:right;min-width:22px;height:22px;position:relative;margin-top:5px;margin-right:-13px;">#'.$item['id'].'</div>';
 		echo '   <div style="float:left;width:22px;height:22px;position:relative;top:1px;">'.formatColorThumb("idPriority",$item['priorityId'], 22, 'left', i18n('colIdPriority').' : '.$item['priorityName']).'</div>';
 		echo '   <div style="max-width:100px;position:relative;margin-left:47px;">'.colorNameFormatter($item['statusName'].'#split#'.SqlList::getFieldFromId('Status', $item['statusId'], 'color')).'</div>';
