@@ -1470,8 +1470,9 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
              <td>
                <select dojoType="dojox.form.CheckedMultiSelect"  multiple="true" style="width:initial;"
                <?php echo autoOpenFilteringSelect();?>
-                id="idProjectPlan" name="idProjectPlan" 
+                id="idProjectPlan" name="idProjectPlan[]" 
                 class="input" value=" " >
+                 <option value=" "><strong><?php echo i18n("allProjects");?></strong></option>
                  <?php 
                     $proj=null; 
                     if (sessionValueExists('project')) {
