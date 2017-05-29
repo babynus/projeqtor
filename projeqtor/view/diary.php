@@ -210,7 +210,7 @@ function drawDay($date,$ress,$inScopeDay,$period,$calendar=1) {
 		if ($period!='day') {
 		  echo '<div dojoType="dijit.Tooltip" connectId="item_'.$cpt.'" position="above">';
 		}
-		echo $hintHtml;
+		//echo $hintHtml;
 		echo '</div>';
 		echo '</td>';
 		echo '</tr>';
