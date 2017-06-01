@@ -82,7 +82,7 @@
 	    <?php foreach ( $notes as $note ) { 
 	      $userId=$note->idUser;
         $userName=SqlList::getNameFromId('User', $userId);
-        $userNameFormatted = '<span style="color:blue">'.$userName.'</span>';
+        $userNameFormatted = '<span style="color:blue"><strong>'.$userName.'</strong></span>';
         $idNote = '<span style="color:blue">'.$note->id.'</span>';
         $ticketName = '<span style="color:blue">'.$note->refType.' #'.$note->refId.'</span>';
         $colCommentStream = i18n ( 'addComment', array (
