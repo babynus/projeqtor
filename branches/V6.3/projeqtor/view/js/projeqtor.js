@@ -4067,3 +4067,27 @@ function hideGraphStatus(){
     divNode.style.display="none";
   }
 }
+
+function saveNoteStream(){
+  var editorType=dojo.byId("noteEditorTypeStream").value;
+  if (editorType=="CK" || editorType=="CKInline") {
+    noteEditor = dojo.byId("noteNoteStream").innerHTML;
+    console.log("stream notre editioor = "+noteEditor);
+    if (noteEditor.trim()=="") {
+      var msg=i18n('messageMandatory', new Array(i18n('Note')));
+      noteEditor.focus();
+      showAlert(msg);
+      return;
+    }
+  } else if (dijit.byId("streamNoteEditor")) {
+    if (dijit.byId("noteNoteStream").getValue() == '') {
+      dijit.byId("streamNoteEditor").set("class", "input required");
+      var msg=i18n('messageMandatory', new Array(i18n('Note')));
+      dijit.byId("streamNoteEditor").focus();
+      dojo.byId("streamNoteEditor").focus();
+      showAlert(msg);
+      return;
+    }
+  }
+  loadContent("../tool/saveNoteStream.php", "resultDiv", "noteFormStream", true, 'note');
+}
