@@ -1072,7 +1072,7 @@ function finalizeMessageDisplay(destination, validationType) {
     if (validationType) {
       if (validationType == 'note') {
         loadContent("objectDetail.php?refreshNotes=true", dojo.byId('objectClass').value+ '_Note', 'listForm');
-        loadContent("objectStream.php", "detailRightDiv", "listForm");
+        loadContent("objectStream.php?onlyCenter=true", "activityStreamCenter", "listForm");
         if (dojo.byId('buttonDivCreationInfo')) {
           var url = '../tool/getObjectCreationInfo.php?objectClass='+ dojo.byId('objectClass').value +'&objectId='+dojo.byId('objectId').value;
           loadDiv(url, 'buttonDivCreationInfo', null);
@@ -4069,25 +4069,18 @@ function hideGraphStatus(){
 }
 
 function saveNoteStream(){
-  var editorType=dojo.byId("noteEditorTypeStream").value;
-  if (editorType=="CK" || editorType=="CKInline") {
-    noteEditor = dojo.byId("noteNoteStream").innerHTML;
-    console.log("stream notre editioor = "+noteEditor);
-    if (noteEditor.trim()=="") {
-      var msg=i18n('messageMandatory', new Array(i18n('Note')));
-      noteEditor.focus();
-      showAlert(msg);
-      return;
-    }
-  } else if (dijit.byId("streamNoteEditor")) {
-    if (dijit.byId("noteNoteStream").getValue() == '') {
-      dijit.byId("streamNoteEditor").set("class", "input required");
-      var msg=i18n('messageMandatory', new Array(i18n('Note')));
-      dijit.byId("streamNoteEditor").focus();
-      dojo.byId("streamNoteEditor").focus();
-      showAlert(msg);
-      return;
-    }
+  var noteEditor = dijit.byId("noteNoteStream");
+  console.log(noteEditor);
+  var noteEditorContent=noteEditor.get("value");
+  console.log("stream notre editior = "+noteEditor);
+  if (noteEditorContent.trim()=="") {
+    //var msg=i18n('messageMandatory', new Array(i18n('Note')));
+    noteEditor.focus();
+    //showAlert(msg);
+    return;
   }
+
   loadContent("../tool/saveNoteStream.php", "resultDiv", "noteFormStream", true, 'note');
+  noteEditor.set("value",null);
+  
 }
