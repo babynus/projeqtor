@@ -57,7 +57,8 @@
   $detailHeight=600;
   $detailWidth=1010;
   //// A CHANGER ////
-  $achanger = "a commenté dans";
+  
+
   
   if (!$objectId) {echo $noData; exit;}
   $onlyCenter=(RequestHandler::getValue('onlyCenter')=='true')?true:false;
@@ -69,17 +70,25 @@
 	<div id="activityStreamTop" dojoType="dijit.layout.ContentPane" region="top" style="height:32px">
 	  <span style="color:black;" class="title" ><?php echo i18n("titleStream");?></span>
 	</div>
-	<div id="activityStreamCenter" dojoType="dijit.layout.ContentPane" region="center" >
+	<div id="activityStreamCenter" dojoType="dijit.layout.ContentPane" region="center">
 <?php }?>	
 	  <script type="dojo/connect" event="onLoad" args="evt">
-      console.log("test on load");
+        alert("ok");
+        var elmnt = document.getElementById("activityStreamCenter");
+        console.log(elmnt);
+        elmnt.scrollIntoView(false); 
 	  </script>
 	  <table id="objectStream"> 
 	    <?php foreach ( $notes as $note ) { 
 	      $userId=$note->idUser;
         $userName=SqlList::getNameFromId('User', $userId);
         $userNameFormatted = '<span style="color:blue">'.$userName.'</span>';
+        $idNote = '<span style="color:blue">'.$note->id.'</span>';
         $ticketName = '<span style="color:blue">'.$note->refType.' #'.$note->refId.'</span>';
+        $colCommentStream = i18n ( 'addComment', array (
+            $idNote,
+            $ticketName
+        ) );
         ?>
 	      <?php if ($user->id == $note->idUser or $note->idPrivacy == 1 or ($note->idPrivacy == 2 and $ress->idTeam == $note->idTeam)) {?>
 	        <tr style="height:50px;">
@@ -90,6 +99,11 @@
 	                echo formatPrivacyThumb($note->idPrivacy, $note->idTeam);
 	              ?>
 	            </div>
+	            <div>
+      	        <?php
+      	         if ($canUpdate) echo  '<div style="float:right;" ><a onClick="removeNote(' . htmlEncode($note->id) . ');" title="' . i18n('removeNote') . '" > '.formatSmallButton('Remove').'</a></div>';
+      	        ?>
+	            </div>
 	      <div style="overflow-x:auto;" >
 	      <?php 
 	        $strDataHTML=$note->note;
@@ -98,18 +112,12 @@
 		      } else {
 		      	$strDataHTML=preg_replace('@(https?://([-\w\.]<+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" target="_blank">$1</a>', $strDataHTML);
 		      }
-		    echo '<div>'.$userNameFormatted.'&nbsp'.$achanger.'&nbsp'.$ticketName.'</div>';
+		    echo '<div>'.$userNameFormatted.'&nbsp'.$colCommentStream.'</div>';
 	      echo '<div style="color:black;background-color:#DFF2FF;height:20px;margin-top:2px;">'.$strDataHTML.'</div>&nbsp';
 	      echo '<div>'.$note->creationDate.'</div>';
 	      ?>
 	      </div>
-	      </td>
-	      <td class="noteData" style="width:10%;">
-	        <?php
-	          if ($canUpdate) echo  '<div style="margin-top:17px;" ><a onClick="removeNote(' . htmlEncode($note->id) . ');" title="' . i18n('removeNote') . '" > '.formatSmallButton('Remove').'</a></div>';
-	        ?>
-	        
-	      </td>        
+	      </td>       
 	        </tr>      
 	     <?php };?>
 	    <?php };?>
@@ -117,7 +125,7 @@
 <?php if (!$onlyCenter) {?>   	  
 	</div>
 
-	<div id="activityStreamBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:100px">
+	<div id="activityStreamBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:70px">
 	  <form id='noteFormStream' name='noteFormStream' onSubmit="return false;" >
          <input id="noteId" name="noteId" type="hidden" value="<?php echo $note->id;?>" />
          <input id="noteRefType" name="noteRefType" type="hidden" value="<?php echo $note->refType;?>" />
@@ -128,26 +136,6 @@
            <input placeHolder="<?php echo i18n("textareaEnterText");?>" rows="4"  name="noteNoteStream" id="noteNoteStream" dojoType="dijit.form.TextBox"
             onKeyPress="if(event.keyCode==13) return saveNoteStream();" style="width:100%;height:50px;overflow-x:hidden;overflow-y:auto;" />
          </div>
-         
-        <?php if($canUpdate){?>
-         <table width="100%"><tr height="25px">
-            <td width="33%" class="smallTabLabel" >
-              <label class="smallTabLabelRight" for="notePrivacyPublic"><?php echo i18n('public');?>&nbsp;</label>
-              <input type="radio" data-dojo-type="dijit/form/RadioButton" name="notePrivacy" id="notePrivacyPublic" value="1" <?php if ($note->idPrivacy==1) echo "checked";?> />
-            </td>
-            <td width="34%" class="smallTabLabel" >
-              <label class="smallTabLabelRight" for="notePrivacyTeam"><?php echo i18n('team');?>&nbsp;</label>
-              <?php $res=new Resource(getSessionUser()->id);
-                    $hasTeam=($res->id and $res->idTeam)?true:false;
-              ?>
-              <input type="radio" data-dojo-type="dijit/form/RadioButton" name="notePrivacy" id="notePrivacyTeam" value="2" <?php if ($note->idPrivacy==2) echo "checked"; if (!$hasTeam) echo ' disabled ';?> />
-            </td>
-            <td width="33%" class="smallTabLabel" >
-              <label class="smallTabLabelRight" for="notePrivacyPrivate"><?php echo i18n('private');?>&nbsp;</label>
-              <input type="radio" data-dojo-type="dijit/form/RadioButton" name="notePrivacy" id="notePrivacyPrivate" value="3" <?php if ($note->idPrivacy==3) echo "checked";?> />
-            </td>
-          </tr></table>
-        <?php }?>
        </form>
     
    </div>
