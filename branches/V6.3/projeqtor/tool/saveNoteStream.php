@@ -32,35 +32,25 @@
 require_once "../tool/projeqtor.php";
 
 // Get the note info
-if (! array_key_exists('noteRefType',$_REQUEST)) {
-  throwError('noteRefType parameter not found in REQUEST');
-}
-$refType=$_REQUEST['noteRefType'];
-Security::checkValidClass($refType);
+$refType=RequestHandler::getValue("noteRefType",false);
 debugLog("reftype : ".$refType);
 
 if ($refType=='TicketSimple') {
   $refType='Ticket';    
 }
-if (! array_key_exists('noteRefId',$_REQUEST)) {
-  throwError('noteRefId parameter not found in REQUEST');
-}
-$refId=$_REQUEST['noteRefId'];
+
+$refId=RequestHandler::getId("noteRefId",false);
 debugLog("refId : ".$refId);
-if (! array_key_exists('noteNoteStream',$_REQUEST)) {
-  throwError('noteNoteStream parameter not found in REQUEST');
-}
-$noteNote=$_REQUEST['noteNoteStream'];
+
+$noteNote=RequestHandler::getValue("noteNoteStream",false);
 debugLog("notenote : ".$noteNote);
+
 $notePrivacy=null;
-if (array_key_exists('notePrivacy',$_REQUEST)) {
-  $notePrivacy=$_REQUEST['notePrivacy'];
-}
+$notePrivacy=RequestHandler::getValue("notePrivacy",false);
+debugLog("notePrivacy : ".$notePrivacy);
 
 $noteId=null;
-if (array_key_exists('noteId',$_REQUEST)) {
-  $noteId=$_REQUEST['noteId'];
-}
+$noteId=RequestHandler::getId("noteId",false);
 $noteId=trim($noteId);
 if ($noteId=='') {
   $noteId=null;
