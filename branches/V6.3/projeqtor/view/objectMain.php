@@ -43,7 +43,7 @@
   		$topDetailDivHeight=$screenHeight-300;
   	}
   	$listHeight=($topDetailDivHeight)?$topDetailDivHeight.'px':$listHeight;
-  	$rightWidth=Parameter::getUserParameter('contentPaneRightDetailDivWitdh'.$objectClass).'px"';
+  	$rightWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass).'px"';
   	if (!$rightWidth) $rightWidth="20%";
   }
 ?>
@@ -70,10 +70,13 @@
     <script type="dojo/connect" event="resize" args="evt">
              dojo.xhrPost({
                url : "../tool/saveDataToSession.php?saveUserParam=true"
-                  +"&idData=contentPaneRightDetailDivWitdh<?php echo $objectClass;?>"
+                  +"&idData=contentPaneRightDetailDivWidth<?php echo $objectClass;?>"
                   +"&value="+dojo.byId("detailRightDiv").offsetWidth
              });;
        </script>
+    <script type="dojo/connect" event="onLoad" args="evt">
+        scrollInto();
+	  </script>
       <?php include 'objectStream.php'?>
   </div>
   

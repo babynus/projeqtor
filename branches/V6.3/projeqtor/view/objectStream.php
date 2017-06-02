@@ -39,6 +39,7 @@
     $canUpdate=false;
   }
   $noData=htmlGetNoDataMessage($objectClass);
+  $enterTextHere = '<p style="color:red;">'.i18n("textareaEnterText").'</p>';
   // get the modifications (from request)
   $note=new Note();
   $notes=$note->getSqlElementsFromCriteria(array('refType'=>$objectClass,'refId'=>$objectId));
@@ -89,7 +90,7 @@
         ?>
 	      <?php if ($user->id == $note->idUser or $note->idPrivacy == 1 or ($note->idPrivacy == 2 and $ress->idTeam == $note->idTeam)) {?>
 	        <tr style="height:50px;">
-	          <td class="noteData" style="width:100%">
+	          <td class="noteData" style="width:100%;">
 	            <div style="float:left;">
 	              <?php
 	                echo formatUserThumb($note->idUser, $userName, 'Creator',32);
@@ -101,7 +102,7 @@
       	         if ($canUpdate) echo  '<div style="float:right;" ><a onClick="removeNote(' . htmlEncode($note->id) . ');" title="' . i18n('removeNote') . '" > '.formatSmallButton('Remove').'</a></div>';
       	        ?>
 	            </div>
-	      <div style="overflow-x:auto;" >
+	      <div style="overflow-x:auto;padding-left:4px;" >
 	      <?php 
 	        $strDataHTML=$note->note;
 		      if (! isTextFieldHtmlFormatted($strDataHTML)) {
@@ -119,20 +120,20 @@
 	     <?php };?>
 	    <?php };?>
 	  </table>
-	   <div id="scrollHere">xxx</div>
+	   <div id="scrollToBottom" type="hidden"></div>
 <?php if (!$onlyCenter) {?>   	  
 	</div>
 
-	<div id="activityStreamBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:70px">
+	<div id="activityStreamBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:70px;overflow-x:hidden;">
 	  <form id='noteFormStream' name='noteFormStream' onSubmit="return false;" >
          <input id="noteId" name="noteId" type="hidden" value="<?php echo $note->id;?>" />
          <input id="noteRefType" name="noteRefType" type="hidden" value="<?php echo $note->refType;?>" />
          <input id="noteRefId" name="noteRefId" type="hidden" value="<?php echo $note->refId;?>" />
          <input id="noteEditorTypeStream" name="noteEditorTypeStream" type="hidden" value="<?php echo getEditorType();?>" />
         
-         <div style="width:100%;">
-           <input placeHolder="<?php echo i18n("textareaEnterText");?>" rows="4"  name="noteNoteStream" id="noteNoteStream" dojoType="dijit.form.TextBox"
-            onKeyPress="if(event.keyCode==13) return saveNoteStream();" style="width:100%;height:50px;overflow-x:hidden;overflow-y:auto;" />
+         <div style="width:99%;">
+           <textarea rows="4"  name="noteNoteStream" id="noteNoteStream" dojoType="dijit.form.Textarea"
+            onKeyPress="saveNoteStream(event);return false;" style="font-family:pink;font-size:12px;width:100%;height:66px;overflow-x:hidden;overflow-y:auto;border:2px solid;" onmousedown="mouseDownStream()"><?php echo i18n("textareaEnterText");?></textarea>
          </div>
        </form>
     
