@@ -201,9 +201,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
 }
 ?>
 <div <?php echo ($print)?'x':'';?>dojoType="dijit.layout.BorderContainer">
-  <div id="hideMenuBottom" style="cursor:pointer;position:absolute; right:-2px; bottom:5%;z-index:999999">
-    <a onClick="hideStreamMode();" id="buttonSwitchedStream" title="" ><span style='top:0px;display:inline-block;width:32px;height:"32px;'><div class='iconHideStream32' style='' >&nbsp;</div></span></a>
-  </div><?php
+  <?php
   if (!$refresh and !$print) {
     ?>
   <div id="buttonDiv" dojoType="dijit.layout.ContentPane" region="top"
