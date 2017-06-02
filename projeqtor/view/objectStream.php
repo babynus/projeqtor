@@ -73,12 +73,9 @@
 	<div id="activityStreamCenter" dojoType="dijit.layout.ContentPane" region="center">
 <?php }?>	
 	  <script type="dojo/connect" event="onLoad" args="evt">
-        alert("ok");
-        var elmnt = document.getElementById("activityStreamCenter");
-        console.log(elmnt);
-        elmnt.scrollIntoView(false); 
+        scrollInto();
 	  </script>
-	  <table id="objectStream"> 
+	  <table id="objectStream" style="width:100%;"> 
 	    <?php foreach ( $notes as $note ) { 
 	      $userId=$note->idUser;
         $userName=SqlList::getNameFromId('User', $userId);
@@ -122,6 +119,7 @@
 	     <?php };?>
 	    <?php };?>
 	  </table>
+	   <div id="scrollHere">xxx</div>
 <?php if (!$onlyCenter) {?>   	  
 	</div>
 
