@@ -200,7 +200,10 @@ if (array_key_exists('refresh', $_REQUEST)) {
   exit();
 }
 ?>
-<div <?php echo ($print)?'x':'';?>dojoType="dijit.layout.BorderContainer"><?php
+<div <?php echo ($print)?'x':'';?>dojoType="dijit.layout.BorderContainer">
+  <div id="hideMenuBottom" style="cursor:pointer;position:absolute; right:-2px; bottom:5%;z-index:999999">
+    <a onClick="hideStreamMode();" id="buttonSwitchedStream" title="" ><span style='top:0px;display:inline-block;width:32px;height:"32px;'><div class='iconButtonBack32' style='' >&nbsp;</div></span></a>
+  </div><?php
   if (!$refresh and !$print) {
     ?>
   <div id="buttonDiv" dojoType="dijit.layout.ContentPane" region="top"
@@ -214,9 +217,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
     </div>
 	</div>
   <div id="formDiv" dojoType="dijit.layout.ContentPane" region="center">
-  <div id="hideMenuBottom">
-    <a onClick="hideStreamMode();" id="buttonSwitchedStream" title="" class="roundedButtonSmall" style="float: right;"><?php echo formatBigButton('Back')?></a>
-  </div>
+
 	<?php
   }
   if (!$print) {
