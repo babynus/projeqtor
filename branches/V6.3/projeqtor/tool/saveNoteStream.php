@@ -40,7 +40,6 @@ if ($refType=='TicketSimple') {
 }
 
 $refId=RequestHandler::getId("noteRefId",false);
-debugLog("refId : ".$refId);
 
 $noteNote=RequestHandler::getValue("noteNoteStream",false);
 debugLog("notenote : ".$noteNote);
