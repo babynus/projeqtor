@@ -4086,11 +4086,9 @@ function hideGraphStatus(){
 
 function saveNoteStream(event){
   var key = event.keyCode;
-  console.log(key);
   if (key == 13 && !event.shiftKey) {
     var noteEditor = dijit.byId("noteNoteStream");
     var noteEditorContent=noteEditor.get("value");
-    console.log("stream notre editior = "+noteEditor);
     if (noteEditorContent.trim()=="") {
       noteEditor.focus();
       return;
@@ -4108,13 +4106,11 @@ function scrollInto(){
 function hideStreamMode(){
   if(dijit.byId("detailRightDiv").w != '0'){
     menuRightDivSize=dojo.byId("detailRightDiv").offsetWidth;
-    console.log("cas 1");
     dijit.byId("detailRightDiv").resize({
       w : 0
     });
     dijit.byId("centerDiv").resize();
   } else {
-    console.log("cas 2");
     dijit.byId("detailRightDiv").resize({
       w : menuRightDivSize
     });

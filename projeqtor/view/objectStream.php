@@ -98,7 +98,7 @@
       	         if ($canUpdate) echo  '<div style="float:right;" ><a onClick="removeNote(' . htmlEncode($note->id) . ');" title="' . i18n('removeNote') . '" > '.formatSmallButton('Remove').'</a></div>';
       	        ?>
 	            </div>
-	      <div style="overflow-x:auto;padding-left:4px;" >
+	      <div style="overflow-x:auto;padding-left:4px;max-height:200px;" >
 	      <?php 
 	        $strDataHTML=$note->note;
 		      if (! isTextFieldHtmlFormatted($strDataHTML)) {
@@ -107,7 +107,7 @@
 		      	$strDataHTML=preg_replace('@(https?://([-\w\.]<+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" target="_blank">$1</a>', $strDataHTML);
 		      }
 		    echo '<div>'.$userNameFormatted.'&nbsp'.$colCommentStream.'</div>';
-	      echo '<div style="color:black;background-color:#DFF2FF;height:20px;margin-top:2px;">'.$strDataHTML.'</div>&nbsp';
+	      echo '<div style="color:black;background-color:#DFF2FF;margin-top:2px;word-break:break-all;">'.$strDataHTML.'</div>&nbsp';
 	      echo '<div>'.$note->creationDate.'</div>';
 	      ?>
 	      </div>
@@ -128,8 +128,8 @@
          <input id="noteEditorTypeStream" name="noteEditorTypeStream" type="hidden" value="<?php echo getEditorType();?>" />
         
          <div style="width:99%;">
-           <textarea rows="4"  name="noteNoteStream" id="noteNoteStream" dojoType="dijit.form.Textarea"
-            onKeyPress="saveNoteStream(event);return false;" style="font-family:pink;font-size:12px;width:100%;height:66px;overflow-x:hidden;overflow-y:auto;border:2px solid;" onmousedown="mouseDownStream()"><?php echo i18n("textareaEnterText");?></textarea>
+           <textarea rows="4"  name="noteNoteStream" id="noteNoteStream" dojoType="dijit.form.SimpleTextarea"
+            onKeyPress="saveNoteStream(event);return false;" style="width:98%;height:60px;overflow-x:hidden;overflow-y:auto;border:2px solid;" onmousedown="mouseDownStream()"><?php echo i18n("textareaEnterText");?></textarea>
          </div>
        </form>
     
