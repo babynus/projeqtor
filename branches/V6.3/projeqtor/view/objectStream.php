@@ -46,12 +46,8 @@
   $ress=new Resource($user->id);
   $userId=$note->idUser;
   $userName=SqlList::getNameFromId('User', $userId);
-  debugLog("voici le userid de objstream".$userId);
-  debugLog("voici le username de objstream".$userName);
   $creationDate=$note->creationDate;
   $updateDate=$note->updateDate;
-  debugLog("voici le creationdate de objstream".$creationDate);
-  debugLog("voici le updateDate de objstream".$updateDate);
   if ($updateDate == null) {
     $updateDate='';
   }
