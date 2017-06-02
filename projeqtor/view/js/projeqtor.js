@@ -4068,24 +4068,25 @@ function hideGraphStatus(){
   }
 }
 
-function saveNoteStream(){
-  var noteEditor = dijit.byId("noteNoteStream");
-  var noteEditorContent=noteEditor.get("value");
-  console.log("stream notre editior = "+noteEditor);
-  if (noteEditorContent.trim()=="") {
-    //var msg=i18n('messageMandatory', new Array(i18n('Note')));
-    noteEditor.focus();
-    //showAlert(msg);
-    return;
-  }
-  loadContent("../tool/saveNoteStream.php", "resultDiv", "noteFormStream", true, 'note');
-  noteEditor.set("value",null);
+function saveNoteStream(event){
+  var key = event.keyCode;
+  console.log(key);
+  if (key == 13 && !event.shiftKey) {
+    var noteEditor = dijit.byId("noteNoteStream");
+    var noteEditorContent=noteEditor.get("value");
+    console.log("stream notre editior = "+noteEditor);
+    if (noteEditorContent.trim()=="") {
+      noteEditor.focus();
+      return;
+    }
+    loadContent("../tool/saveNoteStream.php", "resultDiv", "noteFormStream", true, 'note');
+    noteEditor.set("value",null);
+  } 
 }
 
 function scrollInto(){
-  var elmnt = dijit.byId("activityStreamCenter");
-  var scrollElmnt = dojo.byId("scrollHere");
-  elmnt.scrollIntoView(scrollElmnt); 
+  var scrollElmnt = dojo.byId("scrollToBottom");
+  scrollElmnt.scrollIntoView(); 
 }
 
 function hideStreamMode(){
@@ -4102,5 +4103,11 @@ function hideStreamMode(){
       w : menuRightDivSize
     });
     dijit.byId("centerDiv").resize();
+  }
+}
+
+function mouseDownStream() {
+  if(dijit.byId("noteNoteStream").get('value')==i18n("textareaEnterText")){
+    dijit.byId("noteNoteStream").set('value',"");
   }
 }
