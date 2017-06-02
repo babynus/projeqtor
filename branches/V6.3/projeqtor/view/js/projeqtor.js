@@ -1185,9 +1185,8 @@ function finalizeMessageDisplay(destination, validationType) {
         if (validationType == 'assignment'
             || validationType == 'documentVersion') {
           refreshGrid();
-        } else if (validationType == 'dependency'
-            && (dojo.byId(destination) == "planResultDiv" || dojo
-                .byId("GanttChartDIV"))) {
+        } else if ( (validationType == 'dependency' || validationType == 'affectation')
+            && (dojo.byId(destination) == "planResultDiv" || dojo.byId("GanttChartDIV"))) {
           noHideWait = true;
           refreshGrid(); // Will call refreshJsonPlanning() if needed and
                           // plan() if required
