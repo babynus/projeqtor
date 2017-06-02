@@ -1266,7 +1266,23 @@ function finalizeMessageDisplay(destination, validationType) {
             var url = '../tool/getObjectCreationInfo.php' + '?objectClass='
                 + dojo.byId('objectClass').value + '&objectId='
                 + lastSaveId.value;
-            loadDiv(url, 'buttonDivCreationInfo', null);
+            var callback=null;
+            if (dojo.byId('objectClass').value=='ProductVersion' || dojo.byId('objectClass').value=='ComponentVersion' ) {
+              callback=function() {
+                if (! dojo.byId('isCurrentUserSubscription')) return;
+                var subs=dojo.byId('isCurrentUserSubscription').value;
+                if(subs == '1'){
+                  dijit.byId('subscribeButton').set('iconClass','dijitButtonIcon dijitButtonIconSubscribeValid');
+                  enableWidget('subscribeButtonUnsubscribe');
+                  disableWidget('subscribeButtonSubscribe');
+                }else{
+                  dijit.byId('subscribeButton').set('iconClass','dijitButtonIcon dijitButtonIconSubscribe');
+                  disableWidget('subscribeButtonUnsubscribe');
+                  enableWidget('subscribeButtonSubscribe');
+                }
+              };
+            }
+            loadDiv(url, 'buttonDivCreationInfo',null, callback);
           }
         }
         forceRefreshCreationInfo = false;
