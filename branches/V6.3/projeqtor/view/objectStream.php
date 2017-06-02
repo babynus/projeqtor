@@ -126,9 +126,9 @@
 
 	<div id="activityStreamBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:70px;overflow-x:hidden;">
 	  <form id='noteFormStream' name='noteFormStream' onSubmit="return false;" >
-         <input id="noteId" name="noteId" type="hidden" value="<?php echo $note->id;?>" />
-         <input id="noteRefType" name="noteRefType" type="hidden" value="<?php echo $note->refType;?>" />
-         <input id="noteRefId" name="noteRefId" type="hidden" value="<?php echo $note->refId;?>" />
+         <input id="noteId" name="noteId" type="hidden" value="" />
+         <input id="noteRefType" name="noteRefType" type="hidden" value="<?php echo $objectClass;?>" />
+         <input id="noteRefId" name="noteRefId" type="hidden" value="<?php echo $objectId;?>" />
          <input id="noteEditorTypeStream" name="noteEditorTypeStream" type="hidden" value="<?php echo getEditorType();?>" />
         
          <div style="width:99%;">
