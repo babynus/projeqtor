@@ -4070,7 +4070,6 @@ function hideGraphStatus(){
 
 function saveNoteStream(){
   var noteEditor = dijit.byId("noteNoteStream");
-  console.log(noteEditor);
   var noteEditorContent=noteEditor.get("value");
   console.log("stream notre editior = "+noteEditor);
   if (noteEditorContent.trim()=="") {
@@ -4079,8 +4078,29 @@ function saveNoteStream(){
     //showAlert(msg);
     return;
   }
-
   loadContent("../tool/saveNoteStream.php", "resultDiv", "noteFormStream", true, 'note');
   noteEditor.set("value",null);
-  
+}
+
+function scrollInto(){
+  var elmnt = dijit.byId("activityStreamCenter");
+  var scrollElmnt = dojo.byId("scrollHere");
+  elmnt.scrollIntoView(scrollElmnt); 
+}
+
+function hideStreamMode(){
+  if(dijit.byId("detailRightDiv").w != '0'){
+    menuRightDivSize=dojo.byId("detailRightDiv").offsetWidth;
+    console.log("cas 1");
+    dijit.byId("detailRightDiv").resize({
+      w : 0
+    });
+    dijit.byId("centerDiv").resize();
+  } else {
+    console.log("cas 2");
+    dijit.byId("detailRightDiv").resize({
+      w : menuRightDivSize
+    });
+    dijit.byId("centerDiv").resize();
+  }
 }
