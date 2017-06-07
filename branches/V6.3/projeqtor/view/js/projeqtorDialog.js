@@ -989,6 +989,7 @@ function saveNote() {
     }
   } 
   loadContent("../tool/saveNote.php", "resultDiv", "noteForm", true, 'note');
+  loadContent("objectStream.php", "detailRightDiv", "listForm");
   dijit.byId('dialogNote').hide();
 }
 
