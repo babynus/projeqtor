@@ -27,19 +27,15 @@
 /** ===========================================================================
  * Get the list of objects, in Json format, to display the grid list
  */
-require_once "../tool/projeqtor.php";
+require_once "../tool/projeqtor.php"; 
 
-$id=RequestHandler::getId('idAssign');
-$zone=RequestHandler::getValue('zone');
-$value = RequestHandler::getNumeric('valueTextZone');
-$ass = new Assignment($id);
+$id=RequestHandler::getId('idStream');
+$value=RequestHandler::getValue('valueZone');
+$note = new Note($id);
 
-if($zone == 'AssignedWork'){
-	$ass->assignedWork = $value;
-}
-if($zone == 'LeftWork'){
-	$ass->leftWork = $value;
-}
 
-$ass->save();
+$note->note = $value;
+
+
+$note->save();
 ?>
