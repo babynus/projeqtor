@@ -93,12 +93,13 @@ CREATE TABLE `${prefix}noteflux` (
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`, `menuClass`) VALUES 
-(177,'menuNoteFlux',0,'object',19,NULL,1,'EnvironmentalParameter');
+(177,'menuNoteFlux',0,'item',19,NULL,0,'Work Risk RequirementTest Financial Meeting');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1, 177, 1),
 (2, 177, 1),
 (3, 177, 1),
 (4, 177, 1),
-(6, 177, 1),
-(7, 177, 1);
+(5, 177, 0),
+(6, 177, 0),
+(7, 177, 0);
