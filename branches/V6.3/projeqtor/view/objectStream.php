@@ -104,9 +104,8 @@
 	        $checkImg='savedOk.png';
   	      $strDataHTML=nl2br($note->note);
   		    echo '<div>'.$userNameFormatted.'&nbsp'.$colCommentStream.'</div>';
-  	      echo '<div dojoType="dijit.form.Textarea" id="streamNote_'.$note->id.'" name="streamNote_'.$note->id.'"
-                onchange="saveStreamData('.$note->id.');" style="color:white;margin-top:4px;word-break:break-all;min-width:188px;position:relative;" class="dijitSplitter">'.$strDataHTML.'</div>&nbsp';
-  	      echo '<img  id="idImage'.$note->id.'" src="img/' . $checkImg . '" style="display: none; float:right; top:2px;right:5px; height:16px;"/>';
+  	      echo '<div style="color:white;margin-top:4px;word-break:break-all;min-width:188px;position:relative;" class="dijitSplitter">'.$strDataHTML.'</div>&nbsp';
+  	      echo '<img id="idImage'.$note->id.'" src="img/' . $checkImg . '" style="display: none; float:right; top:2px;right:5px; height:16px;"/>';
   	      echo '<div style="margin-top:6px;">'.formatDateThumb($note->creationDate,null,"left").'</div>';
   	      echo '<div style="margin-top:11px;">'.$note->creationDate.'</div>';
 	      ?>
