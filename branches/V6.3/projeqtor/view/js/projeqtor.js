@@ -4087,6 +4087,7 @@ function saveNoteStream(event){
   var key = event.keyCode;
   if (key == 13 && !event.shiftKey) {
     var noteEditor = dijit.byId("noteNoteStream");
+    console.log(noteEditor);
     var noteEditorContent=noteEditor.get("value");
     if (noteEditorContent.trim()=="") {
       noteEditor.focus();
@@ -4121,4 +4122,22 @@ function mouseDownStream() {
   if(dijit.byId("noteNoteStream").get('value')==i18n("textareaEnterText")){
     dijit.byId("noteNoteStream").set('value',"");
   }
+}
+
+function saveStreamData(id) {
+  var value=dijit.byId("streamNote_"+id).get('value');
+  var url = '../tool/saveNoteData.php?idStream='+id +'&valueZone='+value;
+  dojo.xhrPut({
+    url : url,
+    form : 'objectForm',
+    handleAs : "text",
+    load : function(data) {
+     //Display saved message
+      addMessage(i18n("resultSave"));
+      document.getElementById('idImage'+id).style.display="block";
+      setTimeout("dojo.byId('idImage"+id+"').style.display='none';", 1000);
+      }
+  });
+  // Si je modifie le text , alors je fais le LOADCONTENT. A FAIRE
+  //loadContent("objectDetail.php", "detailDiv", "listForm");
 }
