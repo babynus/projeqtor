@@ -51,13 +51,9 @@
   if ($updateDate == null) {
     $updateDate='';
   }
-  $detailHeight=600;
-  $detailWidth=1010;
-  //// A CHANGER ////
-  
-
-  
   if (!$objectId) {echo $noData; exit;}
+  $countIdNote=count($notes);
+  if($countIdNote==0){echo i18n("noNote");exit;}
   $onlyCenter=(RequestHandler::getValue('onlyCenter')=='true')?true:false;
 ?>
 <!-- Titre et listes de notes -->
@@ -69,12 +65,8 @@
 	</div>
 	<div id="activityStreamCenter" dojoType="dijit.layout.ContentPane" region="center">
 <?php }?>	
-	  <script type="dojo/connect" event="onLoad" args="evt">
-        scrollInto();
-	  </script>
 	  <table id="objectStream" style="width:100%;"> 
-	    <?php foreach ( $notes as $note ) { 
-	      $notee=$note->note;
+	    <?php foreach ( $notes as $note ) {
 	      $userId=$note->idUser;
         $userName=SqlList::getNameFromId('User', $userId);
         $userNameFormatted = '<span style="color:blue"><strong>'.$userName.'</strong></span>';
@@ -101,11 +93,9 @@
 	            </div>
 	      <div style="overflow-x:hidden;padding-left:4px;max-height:200px;" >
 	      <?php 
-	        $checkImg='savedOk.png';
-  	      $strDataHTML=nl2br($note->note);
+  	      $strDataHTML=nl2br($note->note); 	    
   		    echo '<div>'.$userNameFormatted.'&nbsp'.$colCommentStream.'</div>';
   	      echo '<div style="color:white;margin-top:4px;word-break:break-all;min-width:188px;position:relative;" class="dijitSplitter">'.$strDataHTML.'</div>&nbsp';
-  	      echo '<img id="idImage'.$note->id.'" src="img/' . $checkImg . '" style="display: none; float:right; top:2px;right:5px; height:16px;"/>';
   	      echo '<div style="margin-top:6px;">'.formatDateThumb($note->creationDate,null,"left").'</div>';
   	      echo '<div style="margin-top:11px;">'.$note->creationDate.'</div>';
 	      ?>
