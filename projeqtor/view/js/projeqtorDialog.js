@@ -5059,6 +5059,8 @@ function getTargetFromCurrentScreen(currentScreen){
     target="importData.php";
   } else if (currentScreen=="DashboardTicket") {
     target="dashboardTicketMain.php";
+  } else if (currentScreen=="NoteFlux") {
+    target="noteFlux.php";
   } else if (currentScreen=="Plugin"){ 
     target="pluginManagement.php";
   } else if (currentScreen=="Today"){ 
@@ -5111,6 +5113,7 @@ function redoItemButton() {
     disableWidget('menuBarRedoButton');
   }
   getTargetFromCurrentScreen(currentScreen);
+  console.log(currentScreen);
 }
 
 // Stock id and name, to
@@ -5293,6 +5296,8 @@ function loadMenuBarItem(item, itemName, from) {
     loadContent("imputationMain.php", "centerDiv");
   } else if (item == 'Diary') {
     loadContent("diaryMain.php", "centerDiv");
+  } else if (item == 'NoteFlux') {
+    loadContent("noteFlux.php", "centerDiv");
   } else if (item == 'ImportData') {
     loadContent("importData.php", "centerDiv");
   } else if (item == 'Reports') {
