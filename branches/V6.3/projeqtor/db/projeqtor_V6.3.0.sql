@@ -86,7 +86,7 @@ UPDATE `${prefix}reportparameter` SET defaultValue='currentProject' WHERE idRepo
 ALTER TABLE `${prefix}subscription` ADD `isAutoSub` int(1) DEFAULT '0';
 
 # ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
-INSERT INTO `${prefix}parameter` (`parameterCode`, `value`) VALUES ('useOrganizationBudgetElement', 'NO');
+INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('useOrganizationBudgetElement', 'NO');
 DELETE FROM `${prefix}columnselector` WHERE `objectClass` = 'Organization';
 DELETE FROM `${prefix}filter` WHERE `refType` = 'Organization';
 # END ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
