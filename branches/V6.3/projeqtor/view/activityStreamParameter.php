@@ -42,39 +42,37 @@ $user = getSessionUser ();
 
 <div style="width: 100%; margin: 0 auto; height: 90px; padding-bottom: 15px; border-bottom: 1px solid #CCC;background-color:#FFFFFF">
   <form id="activityStreamForm" name="activityStreamForm">
-		<table width="100%" class="dashboardTicketMain" style="">
+		<table width="100%" class="activityStream">
 			<tr>
 				<td valign="top" width="10%">
 					<table>
 					  <input type="hidden" id="activityStreamAllItems" name="activityStreamAllItems" value="<?php echo Parameter::getUserParameter("activityStreamAllItems");?>" />
 						<tr>
 							<td align="left" >
-							  <a onclick="console.log('test');dojo.byId('activityStreamAllItems').value=0;refreshActivityStreamList();" href="#">
-							    <?php echo i18n("activityStreamAllItems").addSelected("activityStreamAllItems",0);?>
+							  <a onclick="dojo.byId('activityStreamAllItems').value=0;refreshActivityStreamList();" href="#">
+							    <?php echo i18n("activityStreamAllItems");?>
 							  </a>
 							</td>
 						</tr>
 						<tr>
 							<td align="left">
 							  <a onClick="dojo.byId('activityStreamAllItems').value=1;refreshActivityStreamList();" href="#">
-							    <?php echo i18n("activityStreamNotDone").addSelected("activityStreamAllItems",1);?>
+							    <?php echo i18n("activityStreamNotDone");?>
 							  </a>
 							</td>
 						</tr>
 						<tr>
 							<td align="left"><a
 								onClick="dojo.byId('activityStreamAllItems').value=2;refreshActivityStreamList();"
-								href="#"><?php echo i18n("activityStreamNotClosed").addSelected("activityStreamAllItems",2);?></a></td>
+								href="#"><?php echo i18n("activityStreamNotClosed");?></a></td>
 						</tr>
 					</table>
 				</td>
-				<td valign="top" width="10%">
-					<table>
-						<tr>
-							<td align="left">xxx<?php echo i18n('filterOnAuthor');?></td>
-						</tr>
+				<td valign="top" width="20%">
+					<table class="activityStream">
 						<tr>
 							<td align="left">
+							 <?php echo i18n('filterOnAuthor');?>
 							  <select title="<?php echo i18n('filterOnAuthor')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
                 <?php echo autoOpenFilteringSelect();?> 
                 id="activityStreamAuthorFilter" name="activityStreamAuthorFilter" style="width:200px">
@@ -87,20 +85,48 @@ $user = getSessionUser ();
                 </select>
 							</td>
 						</tr>
+						<tr>
+							<td align="left">
+							 <?php echo i18n('filterOnTypeNote');?>
+							  <select title="<?php echo i18n('filterOnAuthor')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
+                <?php echo autoOpenFilteringSelect();?> 
+                id="activityStreamTypeNote" name="activityStreamTypeNote" style="width:200px;margin-left:16px;">
+                  <?php 
+                    $selectedAuthor=Parameter::getUserParameter('activityStreamParameter');
+                    htmlDrawOptionForReference('idType', null, null, false); ?>
+                  <script type="dojo/method" event="onChange" >
+                    refreshActivityStreamList();
+                  </script>
+                </select>
+							</td>
+						</tr>
 					</table>
         </td>
-        <td width="80%">&nbsp;
+       <td valign="top" width="50%">
+        <table>
+					<tr>
+						<td align="left" >
+							 <a onclick="dojo.byId('activityStreamAllItems').value=3;refreshActivityStreamList();" href="#">
+							   <?php echo i18n("dashboardTicketMainAddedRecently");?>
+							 </a>
+						</td>
+					</tr>
+					<tr>
+						<td align="left">
+							 <a onClick="dojo.byId('activityStreamAllItems').value=1;refreshActivityStreamList();" href="#">
+							   <?php echo i18n("activityStreamNotDone");?>
+							 </a>
+						</td>
+					</tr>
+					<tr>
+						<td align="left"><?php echo i18n("limitDisplayActivityStream");?>&nbsp;:&nbsp;
+						<input type="text" name="activityStreamNumberElement" id="activityStreamNumberElement" style="width: 30px"		
+							  onChange="dojo.byId('activityStreamAllItems').value=5;refreshActivityStreamList();"			
+				    ></div></td>
+					</tr>
+				 </table>
         </td>
 			</tr>
 		</table>
 	</form>
 </div>
-<?php 
-function addSelected($param,$value){
-  if(Parameter::getUserParameter($param)!=null){
-    if(Parameter::getUserParameter($param)==$value){
-      return "&nbsp;&nbsp;<img src=\"css/images/iconSelect.png\"/>";
-    }
-  }
-}
-?>

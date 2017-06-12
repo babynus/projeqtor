@@ -39,6 +39,9 @@ Parameter::storeUserParameter("activityStreamAllItems", $paramAllItems);
 $paramAuthorFilter=RequestHandler::getId("activityStreamAuthorFilter");
 Parameter::storeUserParameter("activityStreamAuthorFilter", $paramAuthorFilter);
 
+$limitElement = RequestHandler::getNumeric("activityStreamNumberElement");
+debugLog("limitelement : ".$limitElement); 
+
 $paramProject=getSessionValue('project');
 
 $note = new Note ();
@@ -51,6 +54,18 @@ if ($paramProject!='*') {
 	$critWhere.=" and idProject in ".getVisibleProjectsList(true);
 } else {
 	$critWhere.=" and idProject in ".getVisibleProjectsList($paramProject);
+}
+
+if($paramAllItems=="3"){
+  $critWhere.=" ORDER BY creationDate DESC";
+}
+
+if($paramAllItems=="0"){
+  $critWhere.=" and refId=1";
+}
+
+if($paramAllItems=="5"){
+  $critWhere.=" LIMIT ". $limitElement;
 }
 
 var_dump($critWhere);
