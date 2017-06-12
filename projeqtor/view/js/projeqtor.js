@@ -2198,6 +2198,8 @@ function setSelectedProject(idProject, nameProject, selectionField) {
         } else if (dojo.byId('objectClassManual')
             && dojo.byId('objectClassManual').value == 'Today') {
           loadContent("../view/today.php", "centerDiv");
+        } else if (dojo.byId('objectClassManual') && dojo.byId('objectClassManual').value == 'ActivityStream') {
+          loadContent("../view/activityStreamList.php", "activityStreamListDiv", "activityStreamForm");      
         } else if (dojo.byId('objectClassManual')
             && dojo.byId('objectClassManual').value == 'DashboardTicket') {
           loadContent("../view/dashboardTicketMain.php", "centerDiv");
@@ -4123,6 +4125,6 @@ function mouseDownStream() {
   }
 }
 
-function changeParamNoteFlux(paramToSend){
-  loadContent('noteFlux.php?'+paramToSend, 'centerDiv');
+function refreshActivityStreamList(){
+  loadContent('activityStreamList.php', 'activityStreamListDiv','activityStreamForm');
 }
