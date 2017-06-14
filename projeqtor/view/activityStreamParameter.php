@@ -45,7 +45,7 @@ $user = getSessionUser ();
 		<table width="100%" class="activityStream">
 			<tr>
 				<td valign="top" width="10%">
-					<table>
+					<table style="margin-left:20px;margin-top:10px;">
 					  <input type="hidden" id="activityStreamAllItems" name="activityStreamAllItems" value="<?php echo Parameter::getUserParameter("activityStreamAllItems");?>" />
 						<tr>
 							<td align="left" >
@@ -65,7 +65,7 @@ $user = getSessionUser ();
 					</table>
 				</td>
 				<td valign="top" width="20%">
-					<table class="activityStream">
+					<table class="activityStreamFilter" style="margin-top:10px;">
 						<tr>
 							<td align="left">
 							 <?php echo i18n('filterOnAuthor');?>
@@ -98,7 +98,7 @@ $user = getSessionUser ();
 					</table>
         </td>
        <td valign="top" width="50%">
-        <table>
+        <table style="margin-top: 10px;">
 					<tr>
 						<td align="left" >
 							 <a onclick="dojo.byId('activityStreamAllItems').value=3;refreshActivityStreamList();" href="#">
