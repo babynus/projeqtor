@@ -55,17 +55,13 @@ $user = getSessionUser ();
 							</td>
 						</tr>
 						<tr>
-							<td align="left">
-							  <a onClick="dojo.byId('activityStreamAllItems').value=10;refreshActivityStreamList();" href="#">
-							    <?php echo i18n("activityStreamNotDone");?>
-							  </a>
-							</td>
-						</tr>
-						<tr>
-							<td align="left"><a
-								onClick="dojo.byId('activityStreamAllItems').value=12;refreshActivityStreamList();"
-								href="#"><?php echo i18n("activityStreamNotClosed");?></a></td>
-						</tr>
+					  <td style="width:5px;display:inline;">
+					   <?php echo i18n('colId');?>
+              <div style="width:15px;" class="filterField rounded" dojoType="dijit.form.TextBox" 
+               type="text" id="listIdFilterStream" name="listIdFilterStream" onChange="dojo.byId('activityStreamAllItems').value=1;refreshActivityStreamList();">
+              </div>
+            </td>
+           </tr>
 					</table>
 				</td>
 				<td valign="top" width="20%">
