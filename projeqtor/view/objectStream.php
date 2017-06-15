@@ -91,11 +91,12 @@
       	         if ($note->idUser == $user->id and !$print and $canUpdate) echo  '<div style="float:right;" ><a onClick="removeNote(' . htmlEncode($note->id) . ');" title="' . i18n('removeNote') . '" > '.formatSmallButton('Remove').'</a></div>';
       	        ?>
 	            </div>
-	      <div style="padding-left:4px;max-height:200px;" >
+	       <?php $rightWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-30).'px"';?>
+	      <div style="padding-left:4px;max-width:<?php echo $rightWidth;?>px" >
 	      <?php 
   	      $strDataHTML=nl2br($note->note); 	    
   		    echo '<div>'.$userNameFormatted.'&nbsp'.$colCommentStream.'</div>';
-  	      echo '<div style="color:black;margin-top:4px;word-break:break-all;min-width:188px;position:relative;">'.$strDataHTML.'</div>&nbsp';
+  	      echo '<div style="color:black;margin-top:4px;word-break:break-all;min-width:188px;max-width:100%;width:100%;overflow-x:auto;overflow-y:hidden;position:relative;">'.$strDataHTML.'</div>&nbsp';
   	      echo '<div style="margin-top:6px;">'.formatDateThumb($note->creationDate,null,"left").'</div>';
   	      echo '<div style="margin-top:11px;">'.$note->creationDate.'</div>';
 	      ?>
