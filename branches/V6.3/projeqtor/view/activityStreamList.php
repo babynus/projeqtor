@@ -82,7 +82,7 @@ if($paramAllItems=="4" && trim($paramTypeNote)!=""){
   $critWhere.=" and refType='$typeNote'";
 }
 
-//var_dump($critWhere);
+var_dump($critWhere);
 $notes=$note->getSqlElementsFromCriteria(null,false,$critWhere);
 
 $countIdNote = count ( $notes );
@@ -95,7 +95,7 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
 <div dojo-type="dijit.layout.BorderContainer" class="container" style="overflow-y:auto;">
 	
 
-<?php //var_dump($_REQUEST);?>
+<?php var_dump($_REQUEST);?>
 	<!-- Titre et listes de notes -->
 	<table id="objectStream" style="width: 100%;"> 
 	   <?php foreach ($notes as $note) {?>
