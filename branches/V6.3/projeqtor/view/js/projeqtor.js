@@ -4130,3 +4130,23 @@ function mouseDownStream() {
 function refreshActivityStreamList(){
   loadContent('activityStreamList.php', 'activityStreamListDiv','activityStreamForm');
 }
+
+function resetActivityStreamListParameters() {
+  dojo.byId('activityStreamShowClosed').value=1;
+  switchActivityStreamListShowClosed();
+  dijit.byId("activityStreamAuthorFilter").set('value',null);
+  dijit.byId("activityStreamTypeNote").reset();
+  dijit.byId("listIdFilterStream").set('value',null);
+  
+}
+function switchActivityStreamListShowClosed() {
+  var oldValue=dojo.byId('activityStreamShowClosed').value;
+  if (oldValue==1) {
+    dojo.byId('activityStreamShowClosed').value=0;
+    dojo.byId('activityStreamShowClosedCheck').style.display='none';
+  } else {
+    dojo.byId('activityStreamShowClosed').value=1;
+    dojo.byId('activityStreamShowClosedCheck').style.display='block';
+  }
+  
+}
