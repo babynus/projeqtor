@@ -4101,7 +4101,9 @@ function saveNoteStream(event){
 
 function scrollInto(){
   var scrollElmnt = dojo.byId("scrollToBottom");
-  scrollElmnt.scrollIntoView(); 
+  if(scrollElmnt){
+    scrollElmnt.scrollIntoView();
+  }
 }
 
 function hideStreamMode(){

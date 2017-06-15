@@ -49,7 +49,7 @@ $user = getSessionUser ();
 					  <input type="hidden" id="activityStreamAllItems" name="activityStreamAllItems" value="<?php echo Parameter::getUserParameter("activityStreamAllItems");?>" />
 						<tr>
 							<td align="left" >
-							  <a onclick="dojo.byId('activityStreamAllItems').value=0;refreshActivityStreamList();" href="#">
+							  <a onclick="dojo.byId('activityStreamAllItems').value=0;refreshActivityStreamList();" href="#" style="cursor: pointer;">
 							    <?php echo i18n("activityStreamAllItems");?>
 							  </a>
 							</td>
@@ -101,14 +101,14 @@ $user = getSessionUser ();
         <table style="margin-top: 10px;">
 					<tr>
 						<td align="left" >
-							 <a onclick="dojo.byId('activityStreamAllItems').value=3;refreshActivityStreamList();" href="#">
+							 <a onclick="dojo.byId('activityStreamAllItems').value=3;refreshActivityStreamList();" href="#" style="cursor: pointer;">
 							   <?php echo i18n("dashboardTicketMainAddedRecently");?>
 							 </a>
 						</td>
 					</tr>
 					<tr>
 						<td align="left">
-							 <a onClick="dojo.byId('activityStreamAllItems').value=2;refreshActivityStreamList();" href="#">
+							 <a onClick="dojo.byId('activityStreamAllItems').value=2;refreshActivityStreamList();" href="#" style="cursor: pointer;">
 							   <?php echo i18n("Old Added");?>
 							 </a>
 						</td>
