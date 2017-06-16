@@ -48,6 +48,7 @@ if($valueCopy == 'lastVersionRef'){
   $crit=array('idDocument'=>$obj->id);
   $list=$vd->getSqlElementsFromCriteria($crit);
   foreach ($list as $vd) {
+    //duplicate isRef version
     if($vd->isRef){
       $vd->idDocument=$newObj->id;
       $vd->id=null;
@@ -60,6 +61,7 @@ if($valueCopy == 'lastVersionRef'){
 if($valueCopy == 'lastVersion'){
   $vd=new DocumentVersion();
   $crit=array('idDocument'=>$obj->id);
+  //get the last id version
   $list=$vd->getSqlElementsFromCriteria($crit,null,false,'id DESC',null,false,1);
   foreach ($list as $vd) {
     $vd->idDocument=$newObj->id;
