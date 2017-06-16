@@ -434,3 +434,39 @@ function privateFormatter($value) {
     return '<div style="width:100%;text-align:center"><img style="height:16px" src="img/private.png" /></div>';
   }
 }
+
+function activityStreamView ($notes){
+   foreach ($notes as $note) {
+    // TODO : desactivate when idle added in Notes
+//     if ($activityStreamShowClosed!='1') {
+//       $objType=$note->refType;
+//       $obj=new $objType($note->refId);
+//       if (property_exists($objType, 'idle') and $obj->idle==1) {
+//         continue;
+//       }
+//     }
+    $userId = $note->idUser;
+    $userName = SqlList::getNameFromId ( 'User', $userId );
+    $userNameFormatted = '<span style="color:blue"><strong>' . $userName . '</strong></span>';
+    $idNote = '<span style="color:blue">' . $note->id . '</span>';
+    $ticketName = '<span style="color:blue">' . $note->refType . ' #' . $note->refId . '</span>';
+    $colCommentStream = i18n ( 'addComment', array (
+        $idNote,
+        $ticketName
+    ) );
+  	$result= '<tr style="height: 100%;">';
+  	$result.=	'<td class="noteData" style="width: 100%;">';
+  	$result.=	 '<div style="float: left;">';
+        echo formatUserThumb ( $note->idUser, $userName, 'Creator', 32 );
+        echo formatPrivacyThumb ( $note->idPrivacy, $note->idTeam );
+  	$result.= '     </div>
+  		  <div style="overflow-x: hidden; padding-left: 4px;">';
+        $strDataHTML = nl2br ( $note->note );
+        echo '<div>' . $userNameFormatted . '&nbsp' . $colCommentStream . '</div>';
+        echo '<div style="color:black;margin-top:4px;word-break:break-all;min-width:188px;position:relative;">' . $strDataHTML . '</div>';
+        echo '<div style="margin-top:6px;">' . formatDateThumb ( $note->creationDate, null, "left" ) . '</div>';
+        echo '<div style="margin-top:11px;">' . $note->creationDate . '</div>';
+    };
+  	$result.='</div></td></tr>';
+  	return $result; 
+}
