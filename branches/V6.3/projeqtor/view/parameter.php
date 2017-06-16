@@ -157,8 +157,8 @@ function drawTableFromObjectList($objectList) {
 				echo ' name="' . $code . '" id="' . $code . '"';
 				echo ' title="' . i18n('help' . ucfirst($code)) . '"';
 				echo ' type="text" maxlength="5" ';
-				if (sessionValueExists('browserLocaleTimeFormatJs')) {
-				  echo ' constraints="{timePattern:\'' . getSessionValue('browserLocaleTimeFormatJs') . '\'}" ';
+				if (sessionValueExists('browserLocaleTimeFormat')) {
+				  echo ' constraints="{timePattern:\'' . getSessionValue('browserLocaleTimeFormat') . '\'}" ';
 				}
 				echo ' style="width:50px; text-align: center;" class="input" ';
 				echo ' value="T' . htmlEncode($obj->parameterValue) . '" ';
