@@ -435,16 +435,7 @@ function privateFormatter($value) {
   }
 }
 
-function activityStreamView ($notes){
-   foreach ($notes as $note) {
-    // TODO : desactivate when idle added in Notes
-//     if ($activityStreamShowClosed!='1') {
-//       $objType=$note->refType;
-//       $obj=new $objType($note->refId);
-//       if (property_exists($objType, 'idle') and $obj->idle==1) {
-//         continue;
-//       }
-//     }
+function activityStreamDisplayNote ($note,$origin){
     $userId = $note->idUser;
     $userName = SqlList::getNameFromId ( 'User', $userId );
     $userNameFormatted = '<span style="color:blue"><strong>' . $userName . '</strong></span>';
@@ -454,19 +445,39 @@ function activityStreamView ($notes){
         $idNote,
         $ticketName
     ) );
-  	$result= '<tr style="height: 100%;">';
-  	$result.=	'<td class="noteData" style="width: 100%;">';
-  	$result.=	 '<div style="float: left;">';
-        echo formatUserThumb ( $note->idUser, $userName, 'Creator', 32 );
+    if($origin=="objectStream") {
+      global $print,$user;
+      if (! isset($objectClass) ) $objectClass=RequestHandler::getClass('objectClass');
+      if (! isset($objectId)) $objectId=RequestHandler::getId('objectId');
+      $obj=new $objectClass($objectId);
+      $canUpdate=securityGetAccessRightYesNo('menu' . $objectClass, 'update', $obj) == "YES";
+      if ($user->id == $note->idUser or $note->idPrivacy == 1 or ($note->idPrivacy == 2 and $ress->idTeam == $note->idTeam)) {
+        $result='<tr style="height:100%;"><td class="noteData" style="width:100%;"><div style="float:left;">';
+              echo formatUserThumb($note->idUser, $userName, 'Creator',32,'left');
+              echo formatPrivacyThumb($note->idPrivacy, $note->idTeam);
+        $result.= '</div><div>';
+              if ($note->idUser == $user->id and !$print and $canUpdate) echo  '<div style="float:right;" ><a onClick="removeNote(' . htmlEncode($note->id) . ');" title="' . i18n('removeNote') . '" > '.formatSmallButton('Remove').'</a></div>';
+        $result.= '</div>';
+        $rightWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-30).'px"';
+        $result.= '
+            <div style="padding-left:4px;max-width:'.$rightWidth.'px" >';
+      	      $strDataHTML=nl2br($note->note); 	    
+      		    echo '<div>'.$userNameFormatted.'&nbsp'.$colCommentStream.'</div>';
+      	      echo '<div style="color:black;margin-top:4px;word-break:break-all;min-width:188px;max-width:100%;width:100%;overflow-x:auto;overflow-y:hidden;position:relative;">'.$strDataHTML.'</div>&nbsp';
+      	      echo '<div style="margin-top:6px;">'.formatDateThumb($note->creationDate,null,"left").'</div>';
+      	      echo '<div style="margin-top:11px;">'.$note->creationDate.'</div></div></td></tr>';
+      }
+    } else {
+  	$result = '<tr style="height: 100%;"><td class="noteData" style="width: 100%;"><div style="float: left;">';
+        echo formatUserThumb ( $note->idUser, $userName, 'Creator', 32,"left" );
         echo formatPrivacyThumb ( $note->idPrivacy, $note->idTeam );
-  	$result.= '     </div>
-  		  <div style="overflow-x: hidden; padding-left: 4px;">';
+  	$result.= '</div><div style="overflow-x: hidden; padding-left: 4px;">';
         $strDataHTML = nl2br ( $note->note );
         echo '<div>' . $userNameFormatted . '&nbsp' . $colCommentStream . '</div>';
         echo '<div style="color:black;margin-top:4px;word-break:break-all;min-width:188px;position:relative;">' . $strDataHTML . '</div>';
         echo '<div style="margin-top:6px;">' . formatDateThumb ( $note->creationDate, null, "left" ) . '</div>';
-        echo '<div style="margin-top:11px;">' . $note->creationDate . '</div>';
-    };
-  	$result.='</div></td></tr>';
+        echo '<div style="margin-top:11px;">' . $note->creationDate . '</div></div></td></tr>'; 
+    }
   	return $result; 
 }
+?>
