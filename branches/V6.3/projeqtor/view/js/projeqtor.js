@@ -4139,8 +4139,7 @@ function resetActivityStreamListParameters() {
   switchActivityStreamListShowClosed();
   dijit.byId("activityStreamAuthorFilter").set('value',null);
   dijit.byId("activityStreamTypeNote").reset();
-  dijit.byId("listIdFilterStream").set('value',null);
-  
+  dijit.byId("activityStreamIdNote").set('value',null);
 }
 function switchActivityStreamListShowClosed() {
   var oldValue=dojo.byId('activityStreamShowClosed').value;
@@ -4151,5 +4150,14 @@ function switchActivityStreamListShowClosed() {
     dojo.byId('activityStreamShowClosed').value=1;
     dojo.byId('activityStreamShowClosedCheck').style.display='block';
   }
-  
+}
+
+function activityStreamTypeRead(){
+  var typeNote = dijit.byId("activityStreamTypeNote").get('value');
+  if(trim(typeNote) == ""){
+    dijit.byId("activityStreamIdNote").set('value',null);
+    dijit.byId("activityStreamIdNote").set('readOnly', true);
+  } else {
+    dijit.byId("activityStreamIdNote").set('readOnly', false);
+  }
 }
