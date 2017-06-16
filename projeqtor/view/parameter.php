@@ -245,7 +245,7 @@ function drawTableFromObjectList($objectList) {
 			  	$res=new Resource($usr->id);
 			  	$team=new Team($res->idTeam);
 			  	echo $team->name;
-			  } else if ($code=='oraganization') {
+			  } else if ($code=='organization') {
 			  	$usr=getSessionUser();
 			  	$res=new Resource($usr->id);
 			  	$orga=new Organization($res->idOrganization);
