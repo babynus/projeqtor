@@ -2892,6 +2892,9 @@ function globalSave() {
     var button = dijit.byId('dialogOriginSubmit');
   } else if (dijit.byId('dialogCopy') && dijit.byId('dialogCopy').open) {
     var button = dijit.byId('dialogCopySubmit');
+    //gautier #2522
+  } else if (dijit.byId('dialogCopyDocument') && dijit.byId('dialogCopyDocument').open) {
+    var button = dijit.byId('dialogCopyDocumentSubmit');
   } else if (dijit.byId('dialogCopyProject')
       && dijit.byId('dialogCopyProject').open) {
     var button = dijit.byId('dialogProjectCopySubmit');
