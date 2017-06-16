@@ -160,10 +160,12 @@ if ($countIdNote == 0) {
   exit ();
 }
 $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : false;
+var_dump($_REQUEST);
 ?>
 <div dojo-type="dijit.layout.BorderContainer" class="container" style="overflow-y:auto;">
 	<table id="objectStream" style="width: 100%;"> 
-	   <?php foreach ($notes as $note) {
+	<?php 
+	  foreach ($notes as $note) {
 	   	// TODO : desactivate when idle added in Notes
       if ($activityStreamShowClosed!='1') {
       	$objType=$note->refType;
@@ -172,8 +174,8 @@ $onlyCenter = (RequestHandler::getValue ( 'onlyCenter' ) == 'true') ? true : fal
       		continue;
       	}
       }
-      echo activityStreamDisplayNote ($note,"activityStream");
-	    };?>
+      activityStreamDisplayNote($note,"activityStream");
+	  }?>
 	</table>
 	<div id="scrollToBottom" type="hidden"></div>
 </div>
