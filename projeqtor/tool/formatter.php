@@ -455,7 +455,9 @@ function activityStreamDisplayNote ($note,$origin){
       echo formatUserThumb($note->idUser, $userName, 'Creator',32,'left');
       echo formatPrivacyThumb($note->idPrivacy, $note->idTeam);
       echo '</div><div>';
+      if($origin=="objectStream") {
             if ($note->idUser == $user->id and !$print and $canUpdate) echo  '<div style="float:right;" ><a onClick="removeNote(' . htmlEncode($note->id) . ');" title="' . i18n('removeNote') . '" > '.formatSmallButton('Remove').'</a></div>';
+      }
       echo '</div>';
       if ($origin=='objectStream') {
       	$rightWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-30).'px"';
@@ -468,10 +470,10 @@ function activityStreamDisplayNote ($note,$origin){
       }
       echo '<div style="padding-left:4px;max-width:'.$rightWidth.'" >';
       $strDataHTML=nl2br($note->note); 	    
-      echo '<div>'.$userNameFormatted.'&nbsp'.$colCommentStream.'</div>';
-      	echo '<div style="color:black;margin-top:4px;word-break:break-all;min-width:188px;max-width:100%;width:100%;overflow-x:auto;overflow-y:hidden;position:relative;">'.$strDataHTML.'</div>&nbsp';
+      echo '<div style="margin-top:10px;margin-left:37px;">'.$userNameFormatted.'&nbsp'.$colCommentStream.'</div>';
+      	echo '<div style="color:black;margin-top:20px;word-break:break-all;min-width:188px;max-width:100%;width:100%;overflow-x:auto;overflow-y:hidden;position:relative;">'.$strDataHTML.'</div>&nbsp';
       	echo '<div style="margin-top:6px;">'.formatDateThumb($note->creationDate,null,"left").'</div>';
-      	echo '<div style="margin-top:11px;">'.$note->creationDate.'</div></div></td></tr>';
+      	echo '<div style="margin-top:11px;">'.htmlFormatTime($note->creationDate,true).'</div></div></td></tr>';
       }
 
 }
