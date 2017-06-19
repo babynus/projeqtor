@@ -87,7 +87,7 @@
        <input id="noteEditorTypeStream" name="noteEditorTypeStream" type="hidden" value="<?php echo getEditorType();?>" />
        <div style="width:99%;">
          <textarea rows="4"  name="noteNoteStream" id="noteNoteStream" dojoType="dijit.form.SimpleTextarea"
-         style="width:98%;height:60px;overflow-x:hidden;overflow-y:auto;border:2px solid;" onfocus="focusStream()"><?php echo i18n("textareaEnterText");?></textarea>
+         style="width:98%;height:60px;overflow-x:hidden;overflow-y:auto;border:1px solid grey;margin-top:2px;" onfocus="focusStream()"><?php echo i18n("textareaEnterText");?></textarea>
        </div>
      </form>
     
