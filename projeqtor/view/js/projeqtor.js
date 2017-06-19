@@ -4089,6 +4089,8 @@ function hideGraphStatus(){
 }
 
 function saveNoteStream(event){
+  console.log("saveNoteStream");
+  console.log(event);
   var key = event.keyCode;
   if (key == 13 && !event.shiftKey) {
     var noteEditor = dijit.byId("noteNoteStream");
