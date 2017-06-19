@@ -4088,9 +4088,16 @@ function hideGraphStatus(){
   }
 }
 
+
+function scrollInto(){
+  var scrollElmnt = dojo.byId("scrollToBottom");
+  if(scrollElmnt){
+    console.log("scrollInto");
+    scrollElmnt.scrollIntoView();
+  }
+}
+
 function saveNoteStream(event){
-  console.log("saveNoteStream");
-  console.log(event);
   var key = event.keyCode;
   if (key == 13 && !event.shiftKey) {
     var noteEditor = dijit.byId("noteNoteStream");
@@ -4099,16 +4106,10 @@ function saveNoteStream(event){
       noteEditor.focus();
       return;
     }
-    loadContent("../tool/saveNoteStream.php", "resultDiv", "noteFormStream", true, 'note');
+    loadContent("../tool/saveNoteStream.php", "resultDiv", "noteFormStream", true, 'note',null,null);
     noteEditor.set("value",null);
   }
-}
-
-function scrollInto(){
-  var scrollElmnt = dojo.byId("scrollToBottom");
-  if(scrollElmnt){
-    scrollElmnt.scrollIntoView();
-  }
+  scrollInto();
 }
 
 function hideStreamMode(){
@@ -4126,7 +4127,7 @@ function hideStreamMode(){
   }
 }
 
-function mouseDownStream() {
+function focusStream() {
   if(dijit.byId("noteNoteStream").get('value')==i18n("textareaEnterText")){
     dijit.byId("noteNoteStream").set('value',"");
   }
