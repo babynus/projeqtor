@@ -82,7 +82,7 @@ class Note extends SqlElement {
     } else if (property_exists($class, 'idProject') ) {
     	$this->idProject=$obj->idProject;
     }
-    if (property_exists($obj,'idle') $this->idle=$obj->idle;
+    if (property_exists($obj,'idle')) $this->idle=$obj->idle;
     $result = parent::save ();
     if ($this->idPrivacy != 3) {
       if ($obj and $obj->id and property_exists ( $class, 'lastUpdateDateTime' )) {
