@@ -59,10 +59,10 @@ $activityStreamNumberDays=Parameter::getUserParameter("activityStreamNumberDays"
 							</td>
 						</tr>
 						<tr>
-						<td align="left" style="white-space:nowrap;padding-right:20px">
+						<td align="left" style="white-space:nowrap;padding-right:20px;display:flex;">
 							  <a onclick="switchActivityStreamListShowClosed();refreshActivityStreamList();" href="#" style="cursor: pointer;">
 							    <?php echo ucfirst(i18n("labelShowIdle"));?>
-							  </a><?php $displayShowClosedCheck=($showClosed)?'block':'none';?><span id="activityStreamShowClosedCheck" style="display:<?php echo $displayShowClosedCheck;?>";><img src="css/images/iconSelect.png"/></span>
+							  </a><?php $displayShowClosedCheck=($showClosed)?'block':'none';?><span id="activityStreamShowClosedCheck" style="display:<?php echo $displayShowClosedCheck;?>;margin-left:10px;";><img src="css/images/iconSelect.png"/></span>
 							</td>
 						</tr>
 						<tr>
