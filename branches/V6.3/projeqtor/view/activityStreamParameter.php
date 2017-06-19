@@ -34,6 +34,9 @@ $showClosed=Parameter::getUserParameter("activityStreamShowClosed");
 $activityStreamNumberElement=Parameter::getUserParameter("activityStreamNumberElement");
 $activityStreamIdNote=Parameter::getUserParameter("activityStreamIdNote");
 $activityStreamNumberDays=Parameter::getUserParameter("activityStreamNumberDays");
+if(!$activityStreamNumberDays){
+  $activityStreamNumberDays="7";
+}
 ?>
 <div id="resultDiv" style="padding: 5px; padding-bottom: 20px; max-height: 100px; padding-left: 300px; z-index: 999">
 </div>
@@ -83,7 +86,7 @@ $activityStreamNumberDays=Parameter::getUserParameter("activityStreamNumberDays"
 				</td>
 				<td valign="top" width="25%">
 					<table class="activityStreamFilter" style="margin-top:10px;">
-						<tr><div><?php echo i18n('filterOnAuthor')?></div>						  
+						<tr><div><strong><?php echo i18n('filterOnAuthor')?></strong></div>						  
 							<td align="left">
 							 <?php echo ucfirst(i18n('colIdAuthor'));?>&nbsp;:&nbsp;
 							  <select title="<?php echo i18n('filterOnAuthor')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
@@ -102,7 +105,7 @@ $activityStreamNumberDays=Parameter::getUserParameter("activityStreamNumberDays"
 				</td>
 				<td valign="top" width="20%">
 					<table class="activityStreamFilter" style="margin-top:10px;">		
-						<tr><div><?php echo i18n('filterOnElement')?></div>
+						<tr><div><strong><?php echo i18n('filterOnElement')?></strong></div>
 							<td align="left">
 							 <?php echo ucfirst(i18n('colType'));?>&nbsp;:&nbsp;
 							  <select title="<?php echo i18n('filterOnElement')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
@@ -132,7 +135,7 @@ $activityStreamNumberDays=Parameter::getUserParameter("activityStreamNumberDays"
         <table style="margin-top: 10px;">
         <input type="hidden" id="activityStreamRecently" name="activityStreamRecently" value="<?php echo Parameter::getUserParameter("activityStreamRecently");?>" />
 						
-					<tr><div><?php echo i18n('filterOnDate')?></div>
+					<tr><div><strong><?php echo i18n('filterOnDate')?></strong></div>
 						<td align="left" >
 							 <a onclick="dojo.byId('activityStreamRecently').value='added';refreshActivityStreamList();" href="#" style="cursor: pointer;">
 							   <?php echo i18n("dashboardTicketMainAddedRecently");?>
