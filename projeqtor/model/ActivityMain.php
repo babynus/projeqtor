@@ -383,65 +383,74 @@ class ActivityMain extends SqlElement {
 	    	}
 	    }
     
-	    //mehdi
-	    if ($this->idActivity){
-	    	if(Parameter::getGlobalParameter('autoUpdateActivityStatus')=='YES'){
-	    		$parentActivity = new Activity($this->idActivity);
-	    		$parent = $parentActivity->getSqlElementsFromCriteria(array('id'=>$this->idActivity));
-	    		if ($this->handled){
-	    			foreach ($parent as $parents){
-	    				$parents->handled = $this->handled;
-	    				$status=new Status();
-		         	$results=Sql::query("select * from `status` where `setHandledStatus` = 1 order by `sortOrder` asc LIMIT 1");
-		         	$row=Sql::fetchLine($results);
-		         	$idR=$row['id'];
-		         	$parents->idStatus = $idR;    
-		         	$parents->save();    
-		    		}
+	    //mehdi 
+	    #ticket 2822
+	   if(Parameter::getGlobalParameter('autoUpdateActivityStatus')=='YES'){
+	   	if ($this->idActivity){
+	    	$parentActivity = new Activity($this->idActivity);
+	    	$parent = $parentActivity->getSqlElementsFromCriteria(array('id'=>$this->idActivity));
+	    	if ($this->handled){ 
+	    		foreach ($parent as $parents){
+	    			$parents->handled = $this->handled;
+	    			$status=new Status();
+	    			$critWhere = "setHandledStatus = 1 ";
+	    			$results = $status->getSqlElementsFromCriteria(null, false, $critWhere,'sortOrder ASC',false,null,1);
+	    			foreach ($results as $res){
+	    				$idH=$res->id;
+	    			}
+		        $parents->idStatus = $idH;    
+		        $parents->save();    
 		    	}
-		    	if ($this->done){
-		    		$parentActivity = new Activity($this->idActivity);    	
-		    		$child = new Activity();
-		    		$children = $child->getSqlElementsFromCriteria(array('idActivity'=>$parentActivity->id));
-		    		$isDone = true;
-		    		$isClosed = true;
-		    		$isCancelled = true;
-		    		foreach ($children as $childAct){
-		    			if ($childAct->done == 0){
-		    				$isDone = false;
-		    			}
-		    			if ($childAct->idle == 0){
-		    				$isClosed = false;
-		    			}
-		    			if ($childAct->cancelled == 0){
-		    				$isCancelled = false;
-		    			}
-		    		}
-			    	if ($isDone){
-			    		$results=Sql::query("select * from `status` where `setDoneStatus` = 1 order by `sortOrder` asc LIMIT 1");
-			    		$row=Sql::fetchLine($results);
-			    		$idD=$row['id'];
-			    		$parentActivity->idStatus = $idD;	
-			    		$parentActivity->saveForced();  	
-			    	}
-			    	if ($isClosed){
-			    		$res=Sql::query("select * from `status` where `setIdleStatus` = 1 order by `sortOrder` asc LIMIT 1");
-			    		$row=Sql::fetchLine($res);
-			    		$isIdle=$row['id'];
-			    		$parentActivity->idStatus = $isIdle;
-			    		$parentActivity->saveForced();
-			    	}
-			    	if ($isCancelled){
-			    		$res=Sql::query("select * from `status` where `setCancelledStatus` = 1 order by `sortOrder` asc LIMIT 1");
-			    		$row=Sql::fetchLine($res);
-			    		$isCanc=$row['id'];
-			    		$parentActivity->idStatus = $isCanc;
-			    		$parentActivity->saveForced();
-			    	}
+		    }
+	    	$idStat = $this->idStatus;
+	    	$idParent = $this->idActivity;
+	    	$status = new Status($idStat);
+	    	$isStat = '';
+	    	if($status->setDoneStatus){
+	    		$isStat = 'setDoneStatus';
+	    	}
+	    	if($status->setIdleStatus){
+	    		$isStat = 'setIdleStatus';
+	    	}
+	    	if($status->setCancelledStatus){
+	    		$isStat = 'setCancelledStatus';
+	    	}
+	    	if($isStat){	
+		    	$critWhere = $isStat." = 1";
+		    	$rest = $status->getSqlElementsFromCriteria(null, false, $critWhere,'sortOrder ASC',false,null,1);
+		    	foreach ($rest as $rest2){
+		    		$resultat = $rest2->id;
+		    		debugLog($rest2->id);
 		    	}
+	    	$leave = false;
+	    	while ($idStat == $resultat){
+	    		if ($idParent){
+	    			$parent = new Activity($idParent);
+	    			$critWhere = 'idActivity = '.$parent->id;		
+		   	//get all objects with idActivity == parentId
+	    			$brothers = $parent->getSqlElementsFromCriteria(null, false, $critWhere,null,false,null);
+	    			foreach ($brothers as $bro){
+	    				if($bro->idStatus != $resultat){
+	    					$leave = true;
+	    					break;
+	    				}
+	    			}
+	    			if(!$leave){
+	    				$parent->idStatus = $resultat;
+	    				$idStat = $parent->idStatus;
+	    				$idParent = $parent->idActivity;
+	    			}else{
+	    				break;
+	    			}
+	    		}else{
+	    			break;
+	    		}
+	    		$parent->saveForced();
 	    	}
 	    }
-    	return $result;  
+	   } 
+	  } 	
+    	return $result; 
   }
 }
 ?>
