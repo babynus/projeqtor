@@ -1159,7 +1159,10 @@ function finalizeMessageDisplay(destination, validationType) {
           loadDiv(url, 'buttonDivCreationInfo', null);  
         }
         refreshGrid();
-      }else if(validationType =='link' || validationType.substr(0,4)=='link'){
+      } else if ( validationType=='linkObject') {
+        loadContent("objectDetail.php?refresh=true", "detailFormDiv",'listForm');
+      }else if( (validationType =='link' || validationType.substr(0,4)=='link') && validationType !='linkObject'){
+        
         var refTypeName=validationType.substr(4);     
         if (dojo.byId('buttonDivCreationInfo')) {
           var url = '../tool/getObjectCreationInfo.php?objectClass='+ dojo.byId('objectClass').value +'&objectId='+dojo.byId('objectId').value;
