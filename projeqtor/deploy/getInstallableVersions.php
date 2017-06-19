@@ -68,7 +68,6 @@ while (($file = readdir($handle)) !== false) {
 	  }
 	}
 }
-echo $lastStable;
 closedir($handle);
 uksort ($arrayVersion,'sortVersion');
 $cpt=0;
@@ -81,7 +80,7 @@ foreach ($arrayVersion as $key=>$vers) {
     }
 	$split=explode('.',substr($key,1));
 	$curVers=$split[0].'.'.$split[1];
-	if ($curVers!=$stVers and $stVers!='') $vers['stable']='Y';
+	if ($curVers!=$stVers and $stVers!='' and version_compare('V'.$stVers,$lastStableMajor)<=0 ) $vers['stable']='Y';
 	$cpt++;
 	$stVers=$curVers;
 	$arrayVersion[$key]=$vers;
