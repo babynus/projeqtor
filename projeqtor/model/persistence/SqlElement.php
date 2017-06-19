@@ -1192,9 +1192,19 @@ abstract class SqlElement {
       $query .= " where refType='" . get_class ( $this ) . "' ";
       $query .= " and refId=" . $this->id;
       $result = Sql::query ( $query );
-      if ($returnStatus == "ERROR") {
-        $returnValue = Sql::$lastQueryErrorMessage;
-        $returnStatus = 'ERROR';
+      if (!$result) {
+        $returnValue=Sql::$lastQueryErrorMessage;
+        $returnStatus='ERROR';
+      }
+      $note=new Note();
+      $query="update " . $note->getDatabaseTableName();
+      $query.=" set idle='" . $this->idle . "'";
+      $query.=" where refType='" . get_class($this) . "' ";
+      $query.=" and refId=" . $this->id;
+      $result = Sql::query($query);
+      if (!$result) {
+        $returnValue=Sql::$lastQueryErrorMessage;
+        $returnStatus='ERROR';
       }
     }
     
