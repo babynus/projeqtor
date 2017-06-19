@@ -4142,7 +4142,7 @@ function resetActivityStreamListParameters() {
   dijit.byId("activityStreamAuthorFilter").set('value',null);
   dijit.byId("activityStreamTypeNote").reset();
   dijit.byId("activityStreamIdNote").set('value',null);
-  dijit.byId("activityStreamNumberDays").set('value',null); 
+  dijit.byId("activityStreamNumberDays").set('value','7'); 
 }
 function switchActivityStreamListShowClosed() {
   var oldValue=dojo.byId('activityStreamShowClosed').value;
