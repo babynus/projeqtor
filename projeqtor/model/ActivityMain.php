@@ -418,6 +418,7 @@ class ActivityMain extends SqlElement {
           if ( ! $parentActivity->handled ) {
             debugLog("OK, parent not handled");
             $parentActivity->handled = $this->handled;
+            $parentActivity->handledDate=date('Y-m-d');
             $allowedStatusList=Workflow::getAllowedStatusListForObject($parentActivity);
             debugLog($allowedStatusList);
             foreach ( $allowedStatusList as $st ) {
@@ -448,16 +449,21 @@ class ActivityMain extends SqlElement {
           debugLog("allCancelled=$allCancelled");
           $newStat=($allCancelled)?'setCancelledStatus':(($allIdle)?'setIdleStatus':(($allDone)?'setDoneStatus':''));
           if ($newStat) {
-            $parentActivity = new Activity ($this->idActivity);
-            
-            $allowedStatusList=Workflow::getAllowedStatusListForObject($parentActivity);
-            foreach ( $allowedStatusList as $st ) {
-              if ($st->$newStat) {
-                $parentActivity->idStatus=$st->id;
-                $parentActivity->save();
-                break;
+            $currentParentStatus=new Status($parentActivity->idStatus);
+            if ( $currentParentStatus->$newStat ) {
+              // Nothing to do, alread in a status corresponsding to target
+            } else {
+              $parentActivity = new Activity ($this->idActivity);
+              
+              $allowedStatusList=Workflow::getAllowedStatusListForObject($parentActivity);
+              foreach ( $allowedStatusList as $st ) {
+                if ($st->$newStat) {
+                  $parentActivity->idStatus=$st->id;
+                  $parentActivity->save();
+                  break;
+                }
               }
-            }
+          }
           }
         }
       }
