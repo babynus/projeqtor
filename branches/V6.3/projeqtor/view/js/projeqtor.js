@@ -577,7 +577,7 @@ var formDivPosition = null; // to replace scrolling of detail after save.
 var editorArray = new Array();
 var loadContentRetryArray=new Array();
 function loadContent(page, destination, formName, isResultMessage,
-    validationType, directAccess, silent, callBackFunction) {
+    validationType, directAccess, silent, callBackFunction, noFading) {
   var debugStart = (new Date()).getTime();
   // Test validity of destination : must be a node and a widget
   var contentNode = dojo.byId(destination);
@@ -597,14 +597,16 @@ function loadContent(page, destination, formName, isResultMessage,
   }
   if (page.substr(0, 16) == 'objectDetail.php') {
     // if item = current => refresh without fading
-    if (dojo.byId('objectClassName') && dojo.byId('objectId')
-        && dojo.byId('objectClassName') && dojo.byId('id')) {
+    if (dojo.byId('objectClassName') && dojo.byId('objectId') && dojo.byId('objectClass') && dojo.byId('id')) {
       if (dojo.byId('objectClass').value == dojo.byId('objectClassName').value
           && dojo.byId('objectId').value == dojo.byId('id').value) {
         fadingMode = false;
       }
     }
   }
+  if (noFading) fadingMode = false;
+  if (page.substr(0, 16) == 'objectStream.php') fadingMode = false;
+  
   if (!(contentNode && contentWidget)) {
     consoleTraceLog(i18n("errorLoadContent", new Array(page, destination,
         formName, isResultMessage, destination)));
