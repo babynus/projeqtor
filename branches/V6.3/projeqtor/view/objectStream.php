@@ -66,11 +66,11 @@
 	  <span class="title" ><?php echo i18n("titleStream");?></span>
 	</div>
 	<div id="activityStreamCenter" dojoType="dijit.layout.ContentPane" region="center">
-<?php }?>	
-	  <table id="objectStream" style="width:100%;"> 
-	      <script type="dojo/connect" event="onLoad" args="evt">
+	  <script type="dojo/connect" event="onLoad" args="evt">
         scrollInto();
 	  </script>
+<?php }?>	
+	  <table id="objectStream" style="width:100%;"> 
 	    <?php foreach ( $notes as $note ) {
 	      echo activityStreamDisplayNote ($note,"objectStream");
 	    };?>

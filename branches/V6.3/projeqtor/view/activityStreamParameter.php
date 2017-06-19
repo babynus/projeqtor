@@ -35,7 +35,8 @@ $activityStreamNumberElement=Parameter::getUserParameter("activityStreamNumberEl
 $activityStreamIdNote=Parameter::getUserParameter("activityStreamIdNote");
 $activityStreamNumberDays=Parameter::getUserParameter("activityStreamNumberDays");
 ?>
-<div id="resultDiv" style="padding: 5px; padding-bottom: 20px; max-height: 100px; padding-left: 300px; z-index: 999"></div>
+<div id="resultDiv" style="padding: 5px; padding-bottom: 20px; max-height: 100px; padding-left: 300px; z-index: 999">
+</div>
 <table width="100%">
 	<tr height="32px">
 		<td width="50px" align="center"><?php echo formatIcon('ActivityStream', 32, null, true);?></td>

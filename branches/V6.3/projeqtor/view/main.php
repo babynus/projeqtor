@@ -305,8 +305,6 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
         window.onhelp = function() { return (false); };
       }
       var onKeyDownFunc = function(event) {
-        console.log("onKeyDownFunc for key "+event.keyCode);
-        console.log(event.target.id);
         if (event.keyCode == 83 && (navigator.platform.match("Mac") ? event.metaKey : event.ctrlKey) && ! event.altKey) { // CTRL + S (save)
           event.preventDefault();
           if (dojo.isFF) stopDef();
