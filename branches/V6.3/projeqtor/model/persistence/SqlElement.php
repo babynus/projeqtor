@@ -996,6 +996,7 @@ abstract class SqlElement {
   }
 
   public static function setCurrentObject($obj, $isComboDetail = false) {
+    $obj=self::setCurrentObjectTimestamp($obj);
     if (isset ( $_REQUEST ['directAccessIndex'] )) {
       if (! sessionValueExists ( 'directAccessIndex' )) {
         setSessionValue ( 'directAccessIndex', array() );
@@ -1012,6 +1013,25 @@ abstract class SqlElement {
         setSessionValue ( 'currentObject', $obj );
       }
     }
+  }
+  
+  public static function setCurrentObjectTimestamp($obj) {
+    if (!$obj or ! is_object($obj)) return;
+    $obj->_storageDateTime=date('Y-m-d H:i:s');
+    return $obj;
+  }
+  public static function getCurrentObjectTimestamp($obj) {
+    if (!$obj) $obj=self::getCurrentObject();
+    if (!$obj or ! is_object($obj)) return;
+    return $obj->_storageDateTime;
+  }
+  
+  public static function resetCurrentObjectTimestamp($obj=null) {
+    if (!$obj) $obj=self::getCurrentObject();
+    if (!$obj or ! is_object($obj)) return;
+    $obj->_storageDateTime=self::setCurrentObjectTimestamp($obj);
+    self::setCurrentObject($obj);
+    return $obj->_storageDateTime;
   }
 
   public static function unsetCurrentObject() {
