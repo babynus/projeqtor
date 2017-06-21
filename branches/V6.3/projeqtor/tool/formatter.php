@@ -441,7 +441,6 @@ function activityStreamDisplayNote ($note,$origin){
   $userNameFormatted = '<span style="color:blue"><strong>' . $userName . '</strong></span>';
   $idNote = '<span style="color:blue">' . $note->id . '</span>';
   $ticketName = '<span style="color:blue;cursor:pointer;" onClick="gotoElement(\''.htmlEncode($note->refType).'\',\''.htmlEncode($note->id).'\')">' . $note->refType . ' #' . $note->refId . '</span>';
-  debugLog($ticketName);
   $colCommentStream = i18n ( 'addComment', array ($idNote,
         $ticketName
     ) );

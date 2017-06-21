@@ -35,13 +35,6 @@ $user = getSessionUser ();
 
 //var_dump($_REQUEST);
 
-if (RequestHandler::isCodeSet('activityStreamShowClosed')) {
-  $activityStreamShowClosed=RequestHandler::getValue("activityStreamShowClosed");
-  Parameter::storeUserParameter("activityStreamShowClosed", $activityStreamShowClosed);
-} else {
-	$activityStreamShowClosed=Parameter::getUserParameter("activityStreamShowClosed");
-}
-
 if (RequestHandler::isCodeSet('activityStreamNumberElement')) {
 	$activityStreamNumberElement=RequestHandler::getValue("activityStreamNumberElement");
 	Parameter::storeUserParameter("activityStreamNumberElement", $activityStreamNumberElement);
@@ -58,7 +51,6 @@ if (RequestHandler::isCodeSet('activityStreamAuthorFilter')) {
 
 if (RequestHandler::isCodeSet('activityStreamTypeNote')) {
   $paramTypeNote=RequestHandler::getId("activityStreamTypeNote");
-  debugLog($paramTypeNote);
   Parameter::storeUserParameter("activityStreamElementType", $paramTypeNote);
 } else {
   $paramTypeNote=Parameter::getUserParameter("activityStreamElementType");
@@ -79,11 +71,21 @@ if (RequestHandler::isCodeSet('activityStreamNumberDays')) {
   $activityStreamNumberDays=Parameter::getUserParameter("activityStreamNumberDays");
 }
 
-if (RequestHandler::isCodeSet('activityStreamRecently')) {
-  $activityStreamRecently=RequestHandler::getValue("activityStreamRecently");
-  Parameter::storeUserParameter("activityStreamRecently", $activityStreamRecently);
+if (RequestHandler::isCodeSet('activityStreamShowClosed')) {
+  $activityStreamShowClosed=RequestHandler::getValue("activityStreamShowClosed");
+  Parameter::storeUserParameter("activityStreamShowClosed", $activityStreamShowClosed);
 } else {
-  $activityStreamRecently=Parameter::getUserParameter("activityStreamRecently");
+  $activityStreamShowClosed=Parameter::getUserParameter("activityStreamShowClosed");
+}
+
+$activityStreamRecently=null;
+if($activityStreamNumberDays){
+  if (RequestHandler::isCodeSet('activityStreamRecently')) {
+    $activityStreamRecently=RequestHandler::getValue("activityStreamRecently");
+    Parameter::storeUserParameter("activityStreamRecently", $activityStreamRecently);
+  } else {
+    $activityStreamRecently=Parameter::getUserParameter("activityStreamRecently");
+  }
 }
 
 $paramProject=getSessionValue('project');
@@ -112,7 +114,7 @@ if ($activityStreamRecently=="added" && trim($activityStreamNumberDays)!=""){
   $critWhere.=" and creationDate>=ADDDATE(NOW(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
 }
 
-if ($activityStreamRecently=="updated" && trim($activityStreamNumberDays)!=""){
+if ($activityStreamRecently=="updated"){
   $critWhere.=" and updateDate>=ADDDATE(NOW(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
 }
 
