@@ -31,7 +31,7 @@ require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
 $user = getSessionUser ();
 $showClosed=Parameter::getUserParameter("activityStreamShowClosed");
-$addedRecently=Parameter::getUserParameter("activityStreamRecently");
+$addedRecently=Parameter::getUserParameter("activityStreamAddedRecently");
 debugLog("add recently param : ".$addedRecently);
 $activityStreamNumberElement=Parameter::getUserParameter("activityStreamNumberElement");
 $activityStreamIdNote=Parameter::getUserParameter("activityStreamIdNote");
@@ -135,10 +135,10 @@ if(!$activityStreamNumberDays){
         </td>
        <td valign="top" width="30%">
         <table style="margin-top: 10px;">
-          <input type="hidden" id="activityStreamRecently" name="activityStreamRecently" value="<?php echo $addedRecently;?>" />                      
+          <input type="hidden" id="activityStreamAddedRecently" name="activityStreamAddedRecently" value="<?php echo $addedRecently;?>" />                      
           <tr><div><strong><?php echo i18n('filterOnDate')?></strong></div>
               <td align="left"  >
-                   <a onclick="refreshActivityStreamList();switchActivityStreamListAddedRecently();" href="#" style="cursor: pointer;display:flex;">
+                   <a onclick="switchActivityStreamListAddedRecently();refreshActivityStreamList();" href="#" style="cursor: pointer;display:flex;">
                      <?php echo i18n("dashboardTicketMainAddedRecently");?>
                      <?php $displayAddedRecentlyCheck=($addedRecently)?'block':'none';?>
                      <span id="activityStreamAddedRecentlyCheck" style="display:<?php echo $displayAddedRecentlyCheck;?>;margin-left:10px;";><img src="css/images/iconSelect.png"/></span>
