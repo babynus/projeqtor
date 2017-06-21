@@ -409,7 +409,7 @@ class ActivityMain extends SqlElement {
     // mehdi
     // ticket 2822
     
-    if (Parameter::getGlobalParameter ( 'autoUpdateActivityStatus' ) == 'YES') {
+    if (Parameter::getGlobalParameter ( 'autoUpdateActivityStatus' ) == 'YES' and isset($old)) {
       if ($this->idActivity) {
         debugLog("OK, has parent");
         if ($this->handled and $this->handled!=$old->handled) {
