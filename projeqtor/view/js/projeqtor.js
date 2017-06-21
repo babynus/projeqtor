@@ -4164,16 +4164,16 @@ function switchActivityStreamListShowClosed() {
 }
 
 function switchActivityStreamListAddedRecently() {
-  var oldValue=dojo.byId('activityStreamRecently').value;
+  var oldValue=dojo.byId('activityStreamAddedRecently').value;
   console.log("oldValue : "+oldValue);
   if (oldValue=="added") {
-    dojo.byId('activityStreamRecently').value=0;
+    dojo.byId('activityStreamAddedRecently').value=0;
     dojo.byId('activityStreamAddedRecentlyCheck').style.display='none';
   } else {
-    dojo.byId('activityStreamRecently').value="added";
+    dojo.byId('activityStreamAddedRecently').value="added";
     dojo.byId('activityStreamAddedRecentlyCheck').style.display='block';
   }
-  console.log("new value : "+dojo.byId('activityStreamRecently').value);
+  console.log("new value : "+dojo.byId('activityStreamAddedRecently').value);
 }
 
 function activityStreamTypeRead(){

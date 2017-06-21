@@ -78,15 +78,16 @@ if (RequestHandler::isCodeSet('activityStreamShowClosed')) {
   $activityStreamShowClosed=Parameter::getUserParameter("activityStreamShowClosed");
 }
 
-$activityStreamRecently=null;
-if($activityStreamNumberDays){
-  if (RequestHandler::isCodeSet('activityStreamRecently')) {
-    $activityStreamRecently=RequestHandler::getValue("activityStreamRecently");
-    Parameter::storeUserParameter("activityStreamRecently", $activityStreamRecently);
+$activityStreamAddedRecently=null;
+  if (RequestHandler::isCodeSet('activityStreamAddedRecently')) {
+    $activityStreamAddedRecently=RequestHandler::getValue("activityStreamAddedRecently");
+    Parameter::storeUserParameter("activityStreamAddedRecently", $activityStreamAddedRecently);
   } else {
-    $activityStreamRecently=Parameter::getUserParameter("activityStreamRecently");
+    $activityStreamAddedRecently=Parameter::getUserParameter("activityStreamAddedRecently");
   }
-}
+
+$activityStreamUpdatedRecently=null;
+// TODO : $activityStreamUpdatedRecently
 
 $paramProject=getSessionValue('project');
 
@@ -110,12 +111,15 @@ if ($paramProject!='*') {
 	$critWhere.=" and idProject in ".getVisibleProjectsList($paramProject);
 }
 
-if ($activityStreamRecently=="added" && trim($activityStreamNumberDays)!=""){
-  $critWhere.=" and creationDate>=ADDDATE(NOW(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
-}
-
-if ($activityStreamRecently=="updated"){
-  $critWhere.=" and updateDate>=ADDDATE(NOW(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
+if ($activityStreamNumberDays){
+  if ($activityStreamAddedRecently and $activityStreamUpdatedRecently) {
+    $critWhere.=" and ( creationDate>=ADDDATE(NOW(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
+    $critWhere.=" or updateDate>=ADDDATE(NOW(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) )";
+  } else if ($activityStreamAddedRecently=="added" && trim($activityStreamNumberDays)!=""){
+    $critWhere.=" and creationDate>=ADDDATE(NOW(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
+  } else if ($activityStreamNumberDays=="updated"){
+    $critWhere.=" and updateDate>=ADDDATE(NOW(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
+  }
 }
 
 //SELECT * FROM `note` WHERE `creationDate`>=ADDDATE(NOW(), INTERVAL (-5) DAY)
