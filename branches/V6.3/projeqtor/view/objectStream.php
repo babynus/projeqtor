@@ -43,6 +43,7 @@
   // get the modifications (from request)
   $note=new Note();
   $notes=$note->getSqlElementsFromCriteria(array('refType'=>$objectClass,'refId'=>$objectId));
+  SqlElement::resetCurrentObjectTimestamp();
   $ress=new Resource($user->id);
   $userId=$note->idUser;
   $userName=SqlList::getNameFromId('User', $userId);
