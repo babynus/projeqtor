@@ -50,12 +50,7 @@ $showPlanned=Parameter::getUserParameter('imputationShowPlannedWork');
 $hideDone=Parameter::getUserParameter('imputationHideDone');
 $displayHandledGlobal=Parameter::getGlobalParameter('displayOnlyHandled');
 $hideNotHandled=Parameter::getUserParameter('imputationHideNotHandled');
-$limitResourceByProj=false;
-if(Parameter::getUserParameter("limitResByProj")!=null && Parameter::getUserParameter("limitResByProj")==1)$limitResourceByProj=true;
-$test=Parameter::storeUserParameter("limitResByProj", Parameter::getUserParameter("limitResByProj"));
-debugLog("le store : ".$test);
-debugLog("limitResourceByProj : ".$limitResourceByProj);
-
+$limitResourceByProj=Parameter::getUserParameter("limitResourceByProject");
 if ($displayHandledGlobal=="YES") {
 	$hideNotHandled=1;
 }
@@ -132,9 +127,10 @@ if(Parameter::getUserParameter("showId")!=null && Parameter::getUserParameter("s
               </td>
               <td style="width:10px;text-align: left; align: left;white-space:nowrap;">&nbsp;
 				        <div title="<?php echo i18n('labelLimitResourceByProject')?>" dojoType="dijit.form.CheckBox" type="checkbox" 
-				        class="whiteCheck" id="limitResByProj" name="limitResByProj" <?php if ($limitResourceByProj) { echo 'checked';}?>> 
+				        class="whiteCheck" id="limitResByProj" name="limitResByProj" <?php if ($limitResourceByProj=='on') { echo 'checked';}?>> 
 				      <script type="dojo/method" event="onChange" >
-                 saveDataToSession("limitResByProj",((this.checked)? "on":"off"),true); 
+                 saveDataToSession("limitResourceByProject",((this.checked)? "on":"off"),true); 
+                 refreshList('imputationResource', null, null, dijit.byId('userName').get('value'), 'userName', true);
               </script>
 				        </div>&nbsp;
 				      </td>
