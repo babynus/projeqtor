@@ -115,14 +115,25 @@ if ($paramProject!='*') {
 	$critWhere.=" and idProject in ".getVisibleProjectsList($paramProject);
 }
 
-if ($activityStreamNumberDays){
-  if ($activityStreamAddedRecently and $activityStreamUpdatedRecently) {
-    $critWhere.=" and ( creationDate>=ADDDATE(NOW(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
-    $critWhere.=" or updateDate>=ADDDATE(NOW(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) )";
+if ($activityStreamNumberDays!==""){
+  if (Sql::isPgsql()) {
+    if ($activityStreamAddedRecently and $activityStreamUpdatedRecently) {
+      $critWhere.=" AND creationDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day' ";
+      $critWhere.=" or updateDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
+    } else if ($activityStreamAddedRecently=="added" && trim($activityStreamNumberDays)!=""){
+      $critWhere.=" and creationDate>=CURRENT_DATE -INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
+    } else if ($activityStreamUpdatedRecently=="updated"){
+      $critWhere.=" and updateDate>=CURRENT_DATE - INTERVAL '" . intval($activityStreamNumberDays) . " day ' ";
+    }   
+  } else {
+  if ($activityStreamAddedRecently and $activityStreamUpdatedRecently) {   
+    $critWhere.=" and ( creationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
+    $critWhere.=" or updateDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) )";
   } else if ($activityStreamAddedRecently=="added" && trim($activityStreamNumberDays)!=""){
-    $critWhere.=" and creationDate>=ADDDATE(NOW(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
+    $critWhere.=" and creationDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
   } else if ($activityStreamUpdatedRecently=="updated"){
-    $critWhere.=" and updateDate>=ADDDATE(NOW(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
+    $critWhere.=" and updateDate>=ADDDATE(CURDATE(), INTERVAL (-" . intval($activityStreamNumberDays) . ") DAY) ";
+  }
   }
 }
 

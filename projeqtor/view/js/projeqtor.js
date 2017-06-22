@@ -2212,7 +2212,7 @@ function setSelectedProject(idProject, nameProject, selectionField) {
             && dojo.byId('currentPhpPage').value) {
           loadContent("../view/dashboardTicketMain.php", "centerDiv");
         } else if (dijit.byId('limitResByProj').get('value')=="on"){
-          loadContent("../view/imputationList.php", "centerDiv");
+          refreshList('imputationResource', null, null, dijit.byId('userName').get('value'), 'userName', true);
         } else if (currentPluginPage) {
           loadContent(currentPluginPage, "centerDiv");
         }
