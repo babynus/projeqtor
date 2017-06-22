@@ -5124,7 +5124,6 @@ function redoItemButton() {
     disableWidget('menuBarRedoButton');
   }
   getTargetFromCurrentScreen(currentScreen);
-  console.log(currentScreen);
 }
 
 // Stock id and name, to
@@ -5422,7 +5421,6 @@ function customMenuRemoveItem() {
 // var alertDisplayed=false;
 var checkAlertDisplayQuick=false;
 function checkAlert() {
-  console.log("checkAlert");
   // if (alertDisplayed) return;
   dojo.xhrGet({
     url : "../tool/checkAlertToDisplay.php",
