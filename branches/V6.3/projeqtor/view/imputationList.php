@@ -50,6 +50,11 @@ $showPlanned=Parameter::getUserParameter('imputationShowPlannedWork');
 $hideDone=Parameter::getUserParameter('imputationHideDone');
 $displayHandledGlobal=Parameter::getGlobalParameter('displayOnlyHandled');
 $hideNotHandled=Parameter::getUserParameter('imputationHideNotHandled');
+$limitResourceByProj=false;
+if(Parameter::getUserParameter("limitResByProj")!=null && Parameter::getUserParameter("limitResByProj")==1)$limitResourceByProj=true;
+$test=Parameter::storeUserParameter("limitResByProj", Parameter::getUserParameter("limitResByProj"));
+debugLog("le store : ".$test);
+debugLog("limitResourceByProj : ".$limitResourceByProj);
 
 if ($displayHandledGlobal=="YES") {
 	$hideNotHandled=1;
@@ -58,6 +63,7 @@ $displayOnlyCurrentWeekMeetings=Parameter::getUserParameter('imputationDisplayOn
 
 $showId=false;
 if(Parameter::getUserParameter("showId")!=null && Parameter::getUserParameter("showId")==1)$showId=true;
+
 ?>
 
 <div dojoType="dijit.layout.BorderContainer">
@@ -120,7 +126,19 @@ if(Parameter::getUserParameter("showId")!=null && Parameter::getUserParameter("s
               </td>
             </tr>
             <tr height="32px">
-              <td style=""></td>
+<!--              // Krowry -->
+              <td style="width:200px;text-align: right; align: right;min-width:150px" >
+      	        &nbsp;&nbsp;<?php echo i18n("labelLimitResourceByProject");?>
+              </td>
+              <td style="width:10px;text-align: left; align: left;white-space:nowrap;">&nbsp;
+				        <div title="<?php echo i18n('labelLimitResourceByProject')?>" dojoType="dijit.form.CheckBox" type="checkbox" 
+				        class="whiteCheck" id="limitResByProj" name="limitResByProj" <?php if ($limitResourceByProj) { echo 'checked';}?>> 
+				      <script type="dojo/method" event="onChange" >
+                 saveDataToSession("limitResByProj",((this.checked)? "on":"off"),true); 
+              </script>
+				        </div>&nbsp;
+				      </td>
+<!-- 				      ----- -->
               <td style="width: 200px;text-align: right; align: left;" nowrap="nowrap" colspan="2">
                 <?php echo i18n("colFirstDay");?> 
                 <div dojoType="dijit.form.DateTextBox"
