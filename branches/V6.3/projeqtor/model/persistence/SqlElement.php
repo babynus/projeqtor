@@ -3679,6 +3679,7 @@ abstract class SqlElement {
             }
             if ((! $val and $val !== 0) or trim ( $val ) == '') {
               $result .= '<br/>' . i18n ( 'messageMandatory', array($this->getColCaption ( $col )) );
+              traceLog("TRC01 - field $col mandatory for ".get_class($this)." #".$this->id);
             }
           }
           if ($dataType == 'datetime') {
@@ -3725,6 +3726,7 @@ abstract class SqlElement {
         if (! $this->description) {
           $result = str_replace ( '<br/>' . i18n ( 'messageMandatory', array($this->getColCaption ( 'description' )) ), '', $result );
           $result .= '<br/>' . i18n ( 'messageMandatory', array($this->getColCaption ( 'description' )) );
+          traceLog("TRC01 - field $col mandatory for ".get_class($this)." #".$this->id);
         }
       }
       if (property_exists ( $objType, 'mandatoryResourceOnHandled' ) and $objType->mandatoryResourceOnHandled and property_exists ( $this, 'idResource' ) and property_exists ( $this, 'handled' )) {
