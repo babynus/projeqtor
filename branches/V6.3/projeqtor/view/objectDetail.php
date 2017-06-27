@@ -3926,7 +3926,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
         				class="dijitReset dijitInputInner dijitNumberTextBox"
         				value="'.Work::convertWork($assignment->leftWork).'"
                 style="padding:1px;max-width:100%; background:none;box-sizing:border-box;display:block;" 
-                onchange="saveLeftWork('.$assignment->id.',\'LeftWork\');assUpdateLeftWork(\'ass\', '.$assignment->id.');"';      
+                onchange="saveLeftWork('.$assignment->id.',\'LeftWork\');"';      
       	  echo $keyDownEventScript;
       	  echo '</div>';
       echo '</td>'; }
