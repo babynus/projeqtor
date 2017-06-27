@@ -1445,7 +1445,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
         echo ' type="text" maxlength="' . $dataLength . '" ';
         if (sessionValueExists('browserLocaleDateFormatJs')) { 
         	$min='';
-          if (substr($col,-7)=="EndDate"){    
+          if (substr($col,-7)=="EndDate" and !$readOnly){    
             $start=str_replace("EndDate", "StartDate", $col);
             if (property_exists($obj, $start) && property_exists($obj, 'refType') && $obj->refType!="Milestone")  {
               $min=$obj->$start;      
@@ -1455,6 +1455,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
                 $min=$obj->$start;
               }
             }
+            // Babynus - For test purpose
+            if ($val<$min) $val=$min;
             if ($min) echo ' dropDownDefaultValue="'.$min.'" ';
           }
           echo ' constraints="{datePattern:\'' . getSessionValue('browserLocaleDateFormatJs') . '\', min:\'' .$min. '\' }" ';
