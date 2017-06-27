@@ -4130,16 +4130,15 @@ function assUpdateLeftWork(prefix, id) {
   var initAss = dojo.byId('initAss_'+id).value;
   var initLeft=dojo.byId('initLeft_'+id).value;
   var assign=dijit.byId(prefix+"AssignedWork_"+id).get('value');
-  var newAss = dojo.number.parse(assign.value);
+  var newAss = dojo.number.parse(assign);
   if (newAss == null || isNaN(newAss)) {
-	newAssigned=0;
+	newAss=0;
 	assign.value=dojo.number.format(newAss);
   }
   var leftWork = dojo.byId('assLeftWork_'+id);
   diff = assign-initAss;
   newLeft=parseFloat(initLeft) + diff;
   if (newLeft < 0 || isNaN(newLeft)) {
-	alert("on passe ici");
     newLeft=0;
   }
   leftWork.value=dojo.number.format(newLeft); 
