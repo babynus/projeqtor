@@ -3052,7 +3052,6 @@ function showPlanParam(selectedProject) {
   }
   dijit.byId("dialogPlan").show();
   oldSelectedProjectsToPlan=dijit.byId("idProjectPlan").get("value");
-  console.log("STOCKE");
 }
 
 function changedIdProjectPlan(value) {
