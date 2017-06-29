@@ -1947,7 +1947,7 @@ NoLeftOnDone: "Недовешена робота не є нульовой&#44; �
 noMailSent: "Не вдалося надіслати пошту '${1} '. ${2}",
 noneVersion: "[no versions]",
 noNote: "[No notes in this element]",
-noNoteToDisplay: "[No Note to display]",
+noNoteToDisplay: "[No note to display]",
 noPluginAvailable: "немає доступного плагіна",
 noStoredFilter: "фільтр не збережено",
 notAbleToStopCron: "Не можжу зупинити cron-процес. Спробуйте ще раз або усунути /файл/cron/файл який виконується.",
