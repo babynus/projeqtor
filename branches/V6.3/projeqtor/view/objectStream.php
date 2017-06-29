@@ -67,7 +67,7 @@
 	<div id="activityStreamTop" dojoType="dijit.layout.ContentPane" region="top" style="text-align:center" class="dijitAccordionTitle">
 	  <span class="title" ><?php echo i18n("titleStream");?></span>
 	</div>
-	<div id="activityStreamCenter" dojoType="dijit.layout.ContentPane" region="center">
+	<div id="activityStreamCenter" dojoType="dijit.layout.ContentPane" region="center" style="overflow-x:hidden;">
 	  <script type="dojo/connect" event="onLoad" args="evt">
         scrollInto();
 	  </script>
