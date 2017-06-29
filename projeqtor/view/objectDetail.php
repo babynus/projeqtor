@@ -1456,7 +1456,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
               }
             }
             // Babynus - For test purpose
-            if ($val<$min) $val=$min;
+            if ($val and $val<$min) $val=$min;
             if ($min) echo ' dropDownDefaultValue="'.$min.'" ';
           }
           echo ' constraints="{datePattern:\'' . getSessionValue('browserLocaleDateFormatJs') . '\', min:\'' .$min. '\' }" ';
