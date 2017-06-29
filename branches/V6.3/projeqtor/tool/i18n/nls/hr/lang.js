@@ -1947,7 +1947,7 @@ NoLeftOnDone: "Ostatak rada na tom elementu nije nula&#44; uklonite ostatke rada
 noMailSent: "Ne možete poslati '${1}'. ${2}",
 noneVersion: "[no versions]",
 noNote: "[No notes in this element]",
-noNoteToDisplay: "[No Note to display]",
+noNoteToDisplay: "[No note to display]",
 noPluginAvailable: "proširenje nije dostupan",
 noStoredFilter: "nema pohranjenih filtera",
 notAbleToStopCron: "Cron proces ne može zaustaviti. Molimo pokušajte ponovno ili brisanje '/ file / cron / izvođenje datoteku'",
