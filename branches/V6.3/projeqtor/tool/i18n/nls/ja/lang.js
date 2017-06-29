@@ -1947,6 +1947,7 @@ NoLeftOnDone: "[Left work is not null&#44; delete left work  before passing this
 noMailSent: "メールを'${1}'. ${2}に送信できません",
 noneVersion: "[no versions]",
 noNote: "[No notes in this element]",
+noNoteToDisplay: "[No Note to display]",
 noPluginAvailable: "プラグインは利用不可",
 noStoredFilter: "フィルタが存在しません",
 notAbleToStopCron: "cron処理を停止できません。再実施するか/file/cron/RUNNINGファイルを削除してください。",

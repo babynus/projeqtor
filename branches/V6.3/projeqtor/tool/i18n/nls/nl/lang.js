@@ -1947,6 +1947,7 @@ NoLeftOnDone: "[Left work is not null&#44; delete left work  before passing this
 noMailSent: "Niet in staat om e-mail te sturen naar '${1}'. ${2}",
 noneVersion: "[no versions]",
 noNote: "[No notes in this element]",
+noNoteToDisplay: "[No Note to display]",
 noPluginAvailable: "geen plug-in beschikbaar",
 noStoredFilter: "geen opgeslagen filter",
 notAbleToStopCron: "Niet in staat om het cron proces te stoppen. Probeer het opnieuw of verwijder het  / file / cron / RUNNING bestand.",

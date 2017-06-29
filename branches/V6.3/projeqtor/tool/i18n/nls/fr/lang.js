@@ -1947,6 +1947,7 @@ NoLeftOnDone: "Le reste à faire sur cet élément n'est pas nul&#44; supprimer 
 noMailSent: "Impossible d'envoyer un mail à '${1}'. ${2}",
 noneVersion: "aucune versions",
 noNote: "Pas de notes dans cet élément",
+noNoteToDisplay: "Pas de note à afficher",
 noPluginAvailable: "aucun plug-in disponible",
 noStoredFilter: "aucun filtre enregistré",
 notAbleToStopCron: "Impossible d'arrêter le processus. Essayez à nouveau ou supprimez le fichier /file/cron/RUNNING",
