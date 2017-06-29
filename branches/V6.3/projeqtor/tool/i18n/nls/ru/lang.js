@@ -1486,6 +1486,7 @@ helpParamPasswordMinLength: "минимальное число символов 
 helpParamReportTempDirectory: "временная директория для отчетов (должна быть в корне веб-документов для получения изображений)",
 helpParamShowThumb: "отображать малые фото выбранных ресурсов",
 helpParamShowThumbList: "отображать малые фото ресурсов в списках",
+helpParamSubscriptionAuto: "[subscription automatic to versions products or components when you subscribe to product or component.]",
 helpParamTopIconSize: "размер иконок&#44; отображаемых в верхнем меню",
 helpPassword: "[change your password]",
 helpPasswordValidityDays: "время жизни пароля (в днях) до выдачи запроса на смену пароля; 0 — нет ограничений",

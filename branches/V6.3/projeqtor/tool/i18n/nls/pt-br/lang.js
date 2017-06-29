@@ -1486,6 +1486,7 @@ helpParamPasswordMinLength: "número mínimo de caracteres que uma senha deve po
 helpParamReportTempDirectory: "diretório temporário para os relatórios (precisa estar na raiz dos documentos web para realizar a visualização das imagens)",
 helpParamShowThumb: "exibir foto do recurso selecionado",
 helpParamShowThumbList: "exibir foto dos recursos na lista",
+helpParamSubscriptionAuto: "[subscription automatic to versions products or components when you subscribe to product or component.]",
 helpParamTopIconSize: "tamanho dos ícones exibidos na barra de menus no topo",
 helpPassword: "[change your password]",
 helpPasswordValidityDays: "validade da senha (em dias) antes que seja solicitada alteração da senha - usar 0 para validade ilimitada",

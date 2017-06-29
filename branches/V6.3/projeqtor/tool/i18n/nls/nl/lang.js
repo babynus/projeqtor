@@ -1486,6 +1486,7 @@ helpParamPasswordMinLength: "minimum aantal tekens dan een nieuw wachtwoord moet
 helpParamReportTempDirectory: "tijdelijke map voor rapporten (moet in de web documenten hoofdmap staan om afbeeldingen te verkrijgen)",
 helpParamShowThumb: "toon miniatuur afbeeldingen van fotos voor de geselecteerde resource",
 helpParamShowThumbList: "toon miniatuur afbeeldingen van fotos voor de geselecteerde resources in de lijsten",
+helpParamSubscriptionAuto: "[subscription automatic to versions products or components when you subscribe to product or component.]",
 helpParamTopIconSize: "grootte van de pictogrammen weergegeven in de bovenste menubalk",
 helpPassword: "[change your password]",
 helpPasswordValidityDays: "password geldigheid (in dagen) voordat verzocht wordt om het wachtwoord te wijzigen&#44; 0 voor onbeperkt geldig",
