@@ -1947,6 +1947,7 @@ NoLeftOnDone: "[Left work is not null&#44; delete left work  before passing this
 noMailSent: "Δεν ήταν δυνατό να σταλεί mail σε  '${1}'. ${2}",
 noneVersion: "[no versions]",
 noNote: "[No notes in this element]",
+noNoteToDisplay: "[No Note to display]",
 noPluginAvailable: "[no plugin available]",
 noStoredFilter: "κανένα αποθηκευμένο φίλτρο",
 notAbleToStopCron: "Not able to stop cron process. Try again or remove /file/cron/RUNNING file.",

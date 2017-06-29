@@ -1947,6 +1947,7 @@ NoLeftOnDone: "[Left work is not null&#44; delete left work  before passing this
 noMailSent: "Não foi possível enviar email para '${1}'. ${2}",
 noneVersion: "[no versions]",
 noNote: "[No notes in this element]",
+noNoteToDisplay: "[No Note to display]",
 noPluginAvailable: "[no plugin available]",
 noStoredFilter: "nenhum filtro armazenado",
 notAbleToStopCron: "Não foi possível terminar o processo cron. Tente de novo ou apague o arquivo /file/cron/RUNNING.",

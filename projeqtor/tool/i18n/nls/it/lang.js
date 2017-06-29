@@ -1947,6 +1947,7 @@ NoLeftOnDone: "Esiste lavoro rimanente. Cancellare tale lavoro prima di assegnar
 noMailSent: "Not able to send mail to  '${1}'. ${2}",
 noneVersion: "[no versions]",
 noNote: "[No notes in this element]",
+noNoteToDisplay: "[No Note to display]",
 noPluginAvailable: "nessun plugin disponibile",
 noStoredFilter: "Nessun filtro memorizzato",
 notAbleToStopCron: "Impossibe fermare il processo cron. Prova di nuovo o rimuovi il file /file/cron/RUNNING.",
