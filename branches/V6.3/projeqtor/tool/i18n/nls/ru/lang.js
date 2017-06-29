@@ -1947,6 +1947,7 @@ NoLeftOnDone: "[Left work is not null&#44; delete left work  before passing this
 noMailSent: "Не удается отправить почту для '${1}'. ${2}",
 noneVersion: "[no versions]",
 noNote: "[No notes in this element]",
+noNoteToDisplay: "[No Note to display]",
 noPluginAvailable: "плагин недоступен",
 noStoredFilter: "Не сохранять фильтр",
 notAbleToStopCron: "Уже невозможно остановить начатый процесс крон. Попробуйте еще раз или удалите файл /file/cron/RUNNING.",

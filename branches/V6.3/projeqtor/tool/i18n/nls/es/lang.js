@@ -1947,6 +1947,7 @@ NoLeftOnDone: "El trabajo pendiente no es nulo&#44; elimina el trabajo pendiente
 noMailSent: "No se pudo enviar e-mail a '${1}'. ${2}",
 noneVersion: "[no versions]",
 noNote: "[No notes in this element]",
+noNoteToDisplay: "[No Note to display]",
 noPluginAvailable: "plug-in no disponible",
 noStoredFilter: "No hay filtros guardados",
 notAbleToStopCron: "No se puede detener el proceso de cron. Inténtelo de nuevo o elimine el fichero /file/cron/RUNNING",
