@@ -3059,7 +3059,7 @@ function changedIdProjectPlan(value) {
   if (oldSelectedProjectsToPlan==value) return;
   if (oldSelectedProjectsToPlan.indexOf(" ")>=0 && value.length>1 ) {
     //value=value.splice(0,1);
-    value[0]=[" "];
+    value[0]=null;
     oldSelectedProjectsToPlan=value;
     dijit.byId("idProjectPlan").set("value",value);
   } else if (value.indexOf(" ")>=0 && oldSelectedProjectsToPlan.indexOf(" ")===-1) {
