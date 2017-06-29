@@ -1486,6 +1486,7 @@ helpParamPasswordMinLength: "numero minimo di caratteri che una nuova password d
 helpParamReportTempDirectory: "directory temporanea per i reports (deve essere nella root del documento web per ottenere le immagini)",
 helpParamShowThumb: "mostrare piccoli insiemi di foto per la risorsa selezionata",
 helpParamShowThumbList: "mostrare piccoli insiemi di foto per le risorse in liste",
+helpParamSubscriptionAuto: "[subscription automatic to versions products or components when you subscribe to product or component.]",
 helpParamTopIconSize: "dimensione delle icone visualizzate nel menu della barra superiore",
 helpPassword: "cambiare la password",
 helpPasswordValidityDays: "validità della password (in giorni) prima di richiedere il cambio della password&#44; 0 per una validità illimitata",

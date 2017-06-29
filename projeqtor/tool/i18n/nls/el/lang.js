@@ -1486,6 +1486,7 @@ helpParamPasswordMinLength: "minimum number of characters than a new password mu
 helpParamReportTempDirectory: "temporary directory for reports (must be in the web document root to get images)",
 helpParamShowThumb: "εμφάνιση μικρογραφιών των φωτογραφιών για τον επιλεγμένο πόρο",
 helpParamShowThumbList: "εμφάνιση μικρογραφιών των φωτογραφιών για τους πόρους στην λίστα",
+helpParamSubscriptionAuto: "[subscription automatic to versions products or components when you subscribe to product or component.]",
 helpParamTopIconSize: "size of the icons displayed in the top menu bar",
 helpPassword: "[change your password]",
 helpPasswordValidityDays: "password validity (in days) before requesting to change password&#44; 0 for unlimited validity",
