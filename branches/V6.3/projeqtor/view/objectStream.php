@@ -76,8 +76,10 @@
 	    <?php foreach ( $notes as $note ) {
 	      echo activityStreamDisplayNote ($note,"objectStream");
 	    };?>
+	    
+	    <tr><td><div id="scrollToBottom" style="display:block"></div></td></tr>
 	  </table>
-	   <div id="scrollToBottom" type="hidden"></div>
+	   
 <?php if (!$onlyCenter) {?>   
 <?php if($countIdNote==0){echo i18n("noNote");}	?>  
 	</div>

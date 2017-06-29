@@ -4097,10 +4097,11 @@ function hideGraphStatus(){
 
 
 function scrollInto(){
-  var scrollElmnt = dojo.byId("scrollToBottom");
-  if(scrollElmnt){
-    scrollElmnt.scrollIntoView();
-  }
+  //var scrollElmnt = dojo.byId("scrollToBottom");
+  //if(scrollElmnt){
+  //  scrollElmnt.scrollIntoView();
+  //}
+  dojo.window.scrollIntoView('scrollToBottom');
 }
 
 function saveNoteStream(event){
