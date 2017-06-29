@@ -1947,7 +1947,7 @@ NoLeftOnDone: "Die offene Arbeit ist nicht null&#44; löschen Sie die offene Arb
 noMailSent: "Kann Mail nicht an '${1}'. ${2} senden.",
 noneVersion: "[no versions]",
 noNote: "[No notes in this element]",
-noNoteToDisplay: "[No Note to display]",
+noNoteToDisplay: "[No note to display]",
 noPluginAvailable: "Erweiterung nicht verfügbar",
 noStoredFilter: "Keine gespeicherten Filter",
 notAbleToStopCron: "Cron Prozess kann nicht gestoppt werden. Bitte nochmals versuchen oder löschen Sie '/file/cron/RUNNING file'",
