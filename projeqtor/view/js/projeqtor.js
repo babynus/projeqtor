@@ -4125,6 +4125,7 @@ function hideStreamMode(){
       w : 0
     });
     dijit.byId("centerDiv").resize();
+
   } else {
     dijit.byId("detailRightDiv").resize({
       w : menuRightDivSize
