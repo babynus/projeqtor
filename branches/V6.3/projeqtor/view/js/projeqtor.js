@@ -1325,7 +1325,9 @@ function finalizeMessageDisplay(destination, validationType) {
           loadContent("objectDetail.php?", "detailDiv", 'listForm');
         } else {
           loadContent("objectDetail.php?refresh=true", "detailFormDiv", 'listForm');
-          loadContent("objectStream.php", "detailRightDiv", "listForm");         
+          if(dojo.byId('detailRightDiv')){
+            loadContent("objectStream.php", "detailRightDiv", "listForm");  
+          }
           // Need also to refresh History
           if (dojo.byId(dojo.byId('objectClass').value + '_history')) {
             loadContent("objectDetail.php?refreshHistory=true", dojo
