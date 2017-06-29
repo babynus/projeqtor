@@ -560,12 +560,9 @@ abstract class SqlElement {
       //$parentPe=new PlanningElement($pe->topId);
       $parentType=$pe->topRefType;
       $parent=new $parentType($pe->topRefId);
-      debugLog("=> Parent is $parentType #$pe->topRefId");
       if (! property_exists($parent,'idStatus') or ! property_exists($parent,'handled') or ! property_exists($parent,'handledDate')) return $result;
-      debugLog("=> has expected properties");
       if ($this->handled and $this->handled!=$old->handled) {
         if ( ! $parent->handled ) {
-          debugLog("=> must set parent to handled");
           $parent->handled = $this->handled;
           $parent->handledDate=date('Y-m-d');
           $allowedStatusList=Workflow::getAllowedStatusListForObject($parent);
