@@ -3918,7 +3918,8 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
                     assUpdateLeftWork(\'ass\', '.$assignment->id.'); 
                     saveLeftWork('.$assignment->id.',\'AssignedWork\'); 
                     //saveLeftWork('.$assignment->id.',\'LeftWork\');
-                   </script>';  			      
+                   </script>';
+    			echo $keyDownEventScript;
     			echo '</div>';
     	echo '</td>';
     	
