@@ -4147,14 +4147,14 @@ function assUpdateLeftWork(prefix, id) {
   var initAss =dojo.byId('initAss_'+id).value;
   //var initLeft=dojo.byId('initLeft_'+id).value;
   var assign=dijit.byId(prefix+"AssignedWork_"+id).get('value');
-  var newAss = dojo.number.parse(assign);
+  var newAss = assign;
   if (newAss == null || isNaN(newAss)) {
 	  newAss=0;
 	  dijit.byId(prefix+"AssignedWork_"+id).set('value',0);
   }
   var leftWork = dijit.byId('assLeftWork_'+id).get("value");
   diff = newAss-initAss;
-  var newLeft=parseFloat(leftWork) + diff;
+  var newLeft=leftWork + diff;
   if (newLeft < 0 || isNaN(newLeft)) {
     newLeft=0;
   }
