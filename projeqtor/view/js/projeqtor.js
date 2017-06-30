@@ -1296,9 +1296,13 @@ function finalizeMessageDisplay(destination, validationType) {
       }
       if (lastOperation.value == "delete") {
         var zone = dijit.byId("formDiv");
+        var zoneRight = dijit.byId("detailRightDiv");
         var msg = dojo.byId("noDataMessage");
         if (zone && msg) {
           zone.set('content', msg.value);
+        }
+        if (zoneRight && msg) {
+          zoneRight.set('content', msg.value);
         }
         if (dojo.byId('objectClass')
             && dojo.byId('objectClass').value == "Project") {
@@ -4097,11 +4101,10 @@ function hideGraphStatus(){
 
 
 function scrollInto(){
-  //var scrollElmnt = dojo.byId("scrollToBottom");
-  //if(scrollElmnt){
-  //  scrollElmnt.scrollIntoView();
-  //}
-  dojo.window.scrollIntoView('scrollToBottom');
+  var scrollElmnt = dojo.byId("scrollToBottom");
+  if(scrollElmnt){
+    dojo.window.scrollIntoView('scrollToBottom');
+  }
 }
 
 function saveNoteStream(event){
