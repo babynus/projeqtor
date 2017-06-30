@@ -198,7 +198,7 @@ $mode = RequestHandler::getValue('mode',false,true);
              <td>
                <div id="assignmentLeftWork" name="assignmentLeftWork"                  
                  value="<?php if(($refType=='Meeting' || $refType=='PeriodicMeeting') && $mode=="add" && $obj->meetingStartTime && $obj->meetingEndTime){ 
-                                  echo Work::displayWork($delay);
+                                  echo $delay;
                               } else if($mode=="edit"){
                                   echo Work::displayWork($assignmentObj->leftWork);
                               } else if($mode=="divide"){
@@ -233,7 +233,7 @@ $mode = RequestHandler::getValue('mode',false,true);
              <td>
                <div id="assignmentPlannedWork" name="assignmentPlannedWork"                  
                  value="<?php if(($refType=='Meeting' || $refType=='PeriodicMeeting') && $mode=="add" && $obj->meetingStartTime && $obj->meetingEndTime){ 
-                                  echo Work::displayWork($delay);
+                                  echo $delay;
                               } else { 
                                   $assignedWork = $validatedWorkPe-$assignedWorkPe;
                                   if($assignedWork < 0){
