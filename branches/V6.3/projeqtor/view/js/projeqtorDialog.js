@@ -4159,7 +4159,7 @@ function assUpdateLeftWork(prefix, id) {
     newLeft=0;
   }
   leftWork.value=dojo.number.format(newLeft); 
-  initAss.value = newAss;
+  initAss = assign;
   diff = 0;
 }
   
