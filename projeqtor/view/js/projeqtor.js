@@ -1074,7 +1074,7 @@ function finalizeMessageDisplay(destination, validationType) {
     if (validationType) {
       if (validationType == 'note') {
         loadContent("objectDetail.php?refreshNotes=true", dojo.byId('objectClass').value+ '_Note', 'listForm');
-        loadContent("objectStream.php?onlyCenter=true", "activityStreamCenter", "listForm");
+        loadContent("objectStream.php", "detailRightDiv", "listForm");
         if (dojo.byId('buttonDivCreationInfo')) {
           var url = '../tool/getObjectCreationInfo.php?objectClass='+ dojo.byId('objectClass').value +'&objectId='+dojo.byId('objectId').value;
           loadDiv(url, 'buttonDivCreationInfo', null);
