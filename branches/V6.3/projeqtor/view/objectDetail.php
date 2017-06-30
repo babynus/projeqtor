@@ -3913,8 +3913,12 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
     			echo '<div dojoType="dijit.form.NumberTextBox" id="assAssignedWork_'.$assignment->id.'" name="assAssignedWork_'.$assignment->id.'"
     						  class="dijitReset dijitInputInner dijitNumberTextBox"
       					  value="'.Work::displayWork($assignment->assignedWork).'"
-                  style="padding:1px;background:none;max-width:100%; box-sizing:border-box;display:block;" 
-      					  onchange="assUpdateLeftWork(\'ass\', '.$assignment->id.'); saveLeftWork('.$assignment->id.',\'AssignedWork\')">';  			      
+                  style="padding:1px;background:none;max-width:100%; box-sizing:border-box;display:block;" >
+                   <script type="dojo/method" event="onChange">
+                    assUpdateLeftWork(\'ass\', '.$assignment->id.'); 
+                    saveLeftWork('.$assignment->id.',\'AssignedWork\'); 
+                    //saveLeftWork('.$assignment->id.',\'LeftWork\');
+                   </script>';  			      
     			echo '</div>';
     	echo '</td>';
     	
@@ -3927,8 +3931,10 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
       	  echo '<div dojoType="dijit.form.NumberTextBox" id="assLeftWork_'.$assignment->id.'" name="assLeftWork_'.$assignment->id.'"
         				class="dijitReset dijitInputInner dijitNumberTextBox"
         				value="'.Work::displayWork($assignment->leftWork).'"
-                style="padding:1px;max-width:100%; background:none;box-sizing:border-box;display:block;" 
-                onchange="saveLeftWork('.$assignment->id.',\'LeftWork\');"';      
+                style="padding:1px;max-width:100%; background:none;box-sizing:border-box;display:block;"  >
+                <script type="dojo/method" event="onChange">
+                    saveLeftWork('.$assignment->id.',\'LeftWork\');
+                </script>';      
       	  echo $keyDownEventScript;
       	  echo '</div>';
       echo '</td>'; }
