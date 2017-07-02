@@ -38,7 +38,6 @@ CKEDITOR.editorConfig = function( config ) {
   //config.pasteFromWordRemoveStyles = false; // Removed in 4.6.0
   //config.pasteFromWordRemoveFontStyles = false; // Deprecated in 4.6.0, defaults to false
   config.scayt_sLang = getLocalLocation();
-  console.log(getLocalLocation());
   config.scayt_autoStartup = getLocalScaytAutoStartup();
   
 };
