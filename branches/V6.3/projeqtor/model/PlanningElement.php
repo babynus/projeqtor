@@ -571,7 +571,7 @@ class PlanningElement extends SqlElement {
   	//
   	$this->_noHistory=true;
   	$this->wbsSortable=formatSortableWbs($this->wbs);
-  	$this->saveForced();
+  	$resTmp=$this->saveForced();
   	if ($this->refType=='Project') {
   		$proj=new Project($this->refId); 
   		$proj->sortOrder=$this->wbsSortable;
