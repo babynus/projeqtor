@@ -449,6 +449,7 @@ function activityStreamDisplayNote ($note,$origin){
   $obj=new $objectClass($objectId,true);
   $canUpdate=securityGetAccessRightYesNo('menu' . $objectClass, 'update', $obj) == "YES";
   $isNoteClosed=getSessionTableValue("closedNotes", $note->id);
+  debugLog($isNoteClosed);
   if ($user->id == $note->idUser or $note->idPrivacy == 1 or ($note->idPrivacy == 2 and $ress->idTeam == $note->idTeam)) {
     echo '<tr style="height:100%;"><td class="noteData" style="width:100%;"><div style="float:left;margin-top:6px;">';
     echo formatUserThumb($note->idUser, $userName, 'Creator',32,'left');
@@ -457,7 +458,7 @@ function activityStreamDisplayNote ($note,$origin){
     if($origin=="objectStream") {
           if ($note->idUser == $user->id and !$print and $canUpdate) echo  '<div style="float:right;" ><a onClick="removeNote(' . htmlEncode($note->id) . ');" title="' . i18n('removeNote') . '" > '.formatSmallButton('Remove').'</a></div>';
     }
-    echo '<div "style=float:right" onclick="switchNoteStatus('.$note->id.');">X</div>';
+    echo '<div "style=float:right"><a  id="imgCollapse_'.$note->id.'" style="float:right;margin-top:'.(($origin=="objectStream")?'20px':'').';margin-right:'.(($origin=="objectStream")?'-18px':'').'" onclick="switchNoteStatus('.$note->id.');">'.formatSmallButton('Collapse'.(($isNoteClosed)?'Open':'Hide')).'</a></div>';
     echo '</div>';
     if ($origin=='objectStream') {
     	$rightWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-30).'px"';
