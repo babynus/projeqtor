@@ -5703,6 +5703,14 @@ abstract class SqlElement {
     $result = new ResultHdl ( ResultHdl::TYPE_CONTROL, $status, null, $control, null, $this->id );
     return $result;
   }
+  //ADD qCazelles - Filter by status
+  public function getExistingStatus() {
+  	$where = 'id in (select distinct idStatus from '.$this->getDatabaseTableName().')';
+  	$status=new Status();
+  	$list=$status->getSqlElementsFromCriteria(null,null,$where,'sortOrder asc');
+  	return $list;
+  }
+  //END ADD qCazelles - Filter by status
 
 }
 

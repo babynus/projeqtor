@@ -249,9 +249,9 @@ if ($displayWidthList<1400) {
               	<td style="vertical-align: middle;" width="5px">
                 	<span class="nobr">&nbsp;&nbsp;&nbsp;&nbsp;</span>
                 </td>
-                <td width="5px">
+                <td width="5px" style="postion:relative">
 					        <button dojoType="dijit.form.Button" showlabel="false"
-			             title="<?php echo i18n('filterByStatus');?>" style="height:20px;"
+			             title="<?php echo i18n('filterByStatus');?>" style="height:18px;position:absolute;top:3px;"
 			             iconClass="iconStatus16" xclass="detailButton">
 			             <script type="dojo/connect" event="onClick" args="evt">
 						         if (dijit.byId('barFilterByStatus').domNode.style.display == 'none') {
@@ -260,6 +260,7 @@ if ($displayWidthList<1400) {
 							         dijit.byId('barFilterByStatus').domNode.style.display = 'none';
 						         }
 						         dijit.byId('barFilterByStatus').getParent().resize();
+                     saveDataToSession("displayByStatusList_<?php echo $objectClass;?>", dijit.byId('barFilterByStatus').domNode.style.display, true);
           				 </script>
 			            </button>
                 </td>              
@@ -516,9 +517,11 @@ if ($displayWidthList<1400) {
 
 <!-- ADD by qCazelles - Filter by Status -->
 <?php if ( property_exists($obj, 'idStatus') and Parameter::getGlobalParameter('filterByStatus') == 'YES') {
+  $displayStatus=Parameter::getUserParameter("displayByStatusList_$objectClass");
+  if (!$displayStatus) $displayStatus='none';
 ?>
-<div class="listTitle" id="barFilterByStatus" dojoType="dijit.layout.ContentPane" region="top" style="display: block;">
-	<table>
+<div class="listTitle" id="barFilterByStatus" dojoType="dijit.layout.ContentPane" region="top" style="display: <?php echo $displayStatus;?>;height:16px">
+	<table style="position:absolute;top:-2px">
 		<tr>
 			<td style="font-weight:bold;padding-left:135px;">Status&nbsp;:&nbsp;</td>
 <?php
