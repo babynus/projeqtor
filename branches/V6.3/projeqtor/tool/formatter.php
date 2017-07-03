@@ -469,7 +469,7 @@ function activityStreamDisplayNote ($note,$origin){
     		$rightWidth="100%";
     	}
     }
-    echo '<div style="padding-left:4px;max-width:'.$rightWidth.'">';
+    echo '<div class="activityStreamNoteContainer" style="padding-left:4px;max-width:'.$rightWidth.'">';
     $strDataHTML=$note->note;
     echo '<div><div style="margin-top:2px;margin-left:37px;">'.$userNameFormatted.'&nbsp'.$colCommentStream.'</div>'; 
   	echo '<div style="margin-top:3px;margin-left:37px;">'.formatDateThumb($note->creationDate,$note->updateDate,"left").'</div>';
@@ -478,7 +478,7 @@ function activityStreamDisplayNote ($note,$origin){
     } else {
      echo '<div style="margin-top:8px;">'.htmlFormatDateTime($note->creationDate,true).'</div></div>';
     }
-    echo '<div class="activityStreamNoteContent" id="activityStreamNoteContent_'.$note->id.'" style="display:'.(($isNoteClosed)?'none':'block').';">'.$strDataHTML.'</div></div></td></tr>&nbsp';
+    echo '<div class="activityStreamNoteContent" id="activityStreamNoteContent_'.$note->id.'" style="display:block;height:'.(($isNoteClosed)?'0px':'100%').';margin-bottom:'.(($isNoteClosed)?'0px':'10px').';">'.$strDataHTML.'</div></div></td></tr>&nbsp';
   }
 }
 ?>
