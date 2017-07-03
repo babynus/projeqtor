@@ -4223,23 +4223,40 @@ function activityStreamTypeRead(){
   }
 }
 
+var notesHeight=[];
 function switchNoteStatus(idNote) {
   var noteDiv=dojo.byId("activityStreamNoteContent_"+idNote);
   var status="closed";
   var img=dojo.byId('imgCollapse_'+idNote);
-  console.log(noteDiv);
-  console.log(noteDiv.style);
+  if (!noteDiv.style.transition) {
+    noteDiv.style.transition="all 0.5s ease";
+    if (noteDiv.offsetHeight==0) {
+      noteDiv.style.height="100px";
+      noteDiv.style.maxHeight="100px";
+      noteDiv.style.maxHeight="0px";
+      noteDiv.style.height="0px";
+      setTimeout("switchNoteStatus("+idNote+")",10);
+      return;
+    } else {
+      noteDiv.style.maxHeight=(noteDiv.offsetHeight)+"px";
+    }
+  }
   if (noteDiv.style.height=='0px') {
+    var newHeight=(idNote in notesHeight)?notesHeight[idNote]:"1000";
+    noteDiv.style.maxHeight=newHeight+"px";
     noteDiv.style.height="100%";
-    noteDiv.style.opacity="1";
+    noteDiv.style.marginBottom="10px";
     status="open";
     dojo.query('#imgCollapse_'+idNote+' div').forEach(function(node, index, arr){
       node.className="iconButtonCollapseHide16";
     });
   } else {
+    console.log(noteDiv.style.height);
+    console.log(noteDiv.offsetHeight);
+    if (noteDiv.offsetHeight) notesHeight[idNote]=noteDiv.offsetHeight;
+    noteDiv.style.maxHeight="0px";
     noteDiv.style.height="0px";
-    noteDiv.style.transition="all 1s ease";
-    noteDiv.style.opacity="0";
+    noteDiv.style.marginBottom="0px";
     status="closed";
     dojo.query('#imgCollapse_'+idNote+' div').forEach(function(node, index, arr){
       node.className="iconButtonCollapseOpen16";
