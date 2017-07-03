@@ -4226,6 +4226,7 @@ function activityStreamTypeRead(){
 function switchNoteStatus(idNote) {
   var noteDiv=dojo.byId("activityStreamNoteContent_"+idNote);
   var status="closed";
+  var img=dojo.byId('imgCollapse_'+idNote);
   if (noteDiv.style.height=='0px') {
     noteDiv.style.height="100%";
     status="open";
