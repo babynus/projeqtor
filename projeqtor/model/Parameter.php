@@ -509,7 +509,12 @@ class Parameter extends SqlElement {
         'YESW'=>i18n('displayYesWithWork'),
         'REQ'=>i18n('displayOnRequest') );
         break;
-        
+      //ADD by qCazelles - Filter by Status
+      case 'filterByStatus':
+      	$list=array('NO'=>i18n('displayNo'),
+      	'YES'=>i18n('displayYes'));
+      	break;
+      	//END ADD qCazelles
       case 'imputationAlertGenerationDay': 
         $list=array(
           'NEVER'=>i18n('never'),
@@ -694,6 +699,9 @@ class Parameter extends SqlElement {
       	                       'startPage'=>'list',
       	                       'maxItemsInTodayLists'=>'number',
       	                       'displayHistory'=>'list',
+     	                       //ADD by qCazelles - Filter by Status
+      	                       'filterByStatus'=>'list',
+     	                       //END ADD qCazelles
       	                     //ADD by qCazelles - Business features
       	                     'sectionProductAndComponent'=>'section',
       	                        'displayBusinessFeature'=>'list',
