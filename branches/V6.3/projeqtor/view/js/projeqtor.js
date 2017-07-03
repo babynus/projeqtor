@@ -114,6 +114,20 @@ function refreshJsonList(className, keepUrl) {
             + dijit.byId('listElementableFilter').get("value");
       }
     }
+    //ADD qCazelles - Filter by status
+    if (dojo.byId('countStatus')) {
+    	var filteringByStatus = false;
+    	for (var i = 1; i <= dojo.byId('countStatus').value; i++) {
+    		if (dijit.byId('showStatus' + i).checked) {
+    			url = url + "&objectStatus" + i + "=" + dijit.byId('showStatus' + i).value;
+    			filteringByStatus = true;
+    		}
+    	}
+    	if (filteringByStatus) {
+    		url = url + "&countStatus=" + dojo.byId('countStatus').value;
+    	}
+    }
+    //END ADD qCazelles - Filter by status
     if (dijit.byId('quickSearchValue')) {
       if (dijit.byId('quickSearchValue').get("value") != '') {
         // url = url + "&quickSearch=" +
