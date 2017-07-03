@@ -4110,6 +4110,10 @@ function scrollInto(){
   }
 }
 
+// *************************************************************************
+// Activity Stream 
+// *************************************************************************
+
 function saveNoteStream(event){
   var key = event.keyCode;
   if (key == 13 && !event.shiftKey) {
@@ -4203,4 +4207,26 @@ function activityStreamTypeRead(){
   } else {
     dijit.byId("activityStreamIdNote").set('readOnly', false);
   }
+}
+
+function switchNoteStatus(idNote) {
+  var noteDiv=dojo.byId("activityStreamNoteContent_"+idNote);
+  var status="closed";
+  if (noteDiv.style.height=='0px') {
+    noteDiv.style.height="100%";
+    status="open";
+  } else {
+    noteDiv.style.height="0px";
+    status="closed";
+  }
+  url="../tool/saveClosedNote.php?idNote="+idNote+"&statusNote="+status;
+  dojo.xhrPost({
+    url : url,
+    load : function(data, args) {
+    },
+    error : function () {
+      consoleTraceLog("error saving note status : "+url);
+    }
+ });
+  
 }
