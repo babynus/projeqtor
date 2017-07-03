@@ -448,6 +448,7 @@ function activityStreamDisplayNote ($note,$origin){
   $objectId=$note->refId;
   $obj=new $objectClass($objectId,true);
   $canUpdate=securityGetAccessRightYesNo('menu' . $objectClass, 'update', $obj) == "YES";
+  $isNoteClosed=getSessionTableValue("closedNotes", $note->id);
   if ($user->id == $note->idUser or $note->idPrivacy == 1 or ($note->idPrivacy == 2 and $ress->idTeam == $note->idTeam)) {
     echo '<tr style="height:100%;"><td class="noteData" style="width:100%;"><div style="float:left;margin-top:6px;">';
     echo formatUserThumb($note->idUser, $userName, 'Creator',32,'left');
@@ -456,6 +457,7 @@ function activityStreamDisplayNote ($note,$origin){
     if($origin=="objectStream") {
           if ($note->idUser == $user->id and !$print and $canUpdate) echo  '<div style="float:right;" ><a onClick="removeNote(' . htmlEncode($note->id) . ');" title="' . i18n('removeNote') . '" > '.formatSmallButton('Remove').'</a></div>';
     }
+    echo '<div "style=float:right" onclick="switchNoteStatus('.$note->id.');">X</div>';
     echo '</div>';
     if ($origin=='objectStream') {
     	$rightWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-30).'px"';
@@ -475,7 +477,7 @@ function activityStreamDisplayNote ($note,$origin){
     } else {
      echo '<div style="margin-top:8px;">'.htmlFormatDateTime($note->creationDate,true).'</div></div>';
     }
-    echo '<div style="color:black;margin-top:15px;margin-bottom:10px;word-break:break-all;max-width:100%;width:100%;overflow-x:auto;overflow-y:hidden;position:relative;">'.$strDataHTML.'</div></div></td></tr>&nbsp';
+    echo '<div class="activityStreamNoteContent" id="activityStreamNoteContent_'.$note->id.'" style="height:'.(($isNoteClosed)?'0px':'100%').';">'.$strDataHTML.'</div></div></td></tr>&nbsp';
   }
 }
 ?>
