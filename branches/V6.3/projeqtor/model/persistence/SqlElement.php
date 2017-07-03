@@ -5216,7 +5216,7 @@ abstract class SqlElement {
         $status = 1; // first status always 1 (recorded)
       $planningModeName = 'id' . str_replace ( 'PlanningElement', '', get_class ( $this ) ) . 'PlanningMode';
       $typeElt = null;
-      if (! $type and SqlElement::class_exists ( $typeClassName ) and $typeClassName!="ExpenseDetailType") {
+      if (! $type and SqlElement::class_exists ($typeClassName) and $typeClassName!="ExpenseDetailType") {
         $typeList = SqlList::getList ( $typeClassName );
         $typeElt = reset ( $typeList );
         $type = ($typeElt) ? key ( $typeList ) : null;
