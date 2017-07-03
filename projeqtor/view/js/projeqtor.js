@@ -4227,19 +4227,21 @@ function switchNoteStatus(idNote) {
   var noteDiv=dojo.byId("activityStreamNoteContent_"+idNote);
   var status="closed";
   var img=dojo.byId('imgCollapse_'+idNote);
-  
+  console.log(noteDiv);
+  console.log(noteDiv.style);
   if (noteDiv.style.height=='0px') {
     noteDiv.style.height="100%";
+    noteDiv.style.opacity="1";
     status="open";
     dojo.query('#imgCollapse_'+idNote+' div').forEach(function(node, index, arr){
-      console.log(node);
       node.className="iconButtonCollapseHide16";
     });
   } else {
     noteDiv.style.height="0px";
+    noteDiv.style.transition="all 1s ease";
+    noteDiv.style.opacity="0";
     status="closed";
     dojo.query('#imgCollapse_'+idNote+' div').forEach(function(node, index, arr){
-      console.log(node);
       node.className="iconButtonCollapseOpen16";
     });
   }

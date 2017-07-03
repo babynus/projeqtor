@@ -478,7 +478,7 @@ function activityStreamDisplayNote ($note,$origin){
     } else {
      echo '<div style="margin-top:8px;">'.htmlFormatDateTime($note->creationDate,true).'</div></div>';
     }
-    echo '<div class="activityStreamNoteContent" id="activityStreamNoteContent_'.$note->id.'" style="height:'.(($isNoteClosed)?'0px':'100%').';">'.$strDataHTML.'</div></div></td></tr>&nbsp';
+    echo '<div class="activityStreamNoteContent" id="activityStreamNoteContent_'.$note->id.'" style="display:'.(($isNoteClosed)?'none':'block').';">'.$strDataHTML.'</div></div></td></tr>&nbsp';
   }
 }
 ?>
