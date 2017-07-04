@@ -613,6 +613,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
       $decomp=explode("_", $col);
       $internalTableCols=$decomp [2];
       $internalTableRows=$decomp [3];
+      //ADD qCazelles - dateComposition
+      if (count($val) == 8 and $val[4]=='startDate' and $val[5]=='deliveryDate' and Parameter::getGlobalParameter('displayMilestonesStartDelivery') != 'YES') $internalTableRows -= 2;
+      //END ADD qCazelles - dateComposition
       $internalTableSpecial='';
       if (count($decomp) > 4) {
         $internalTableSpecial=$decomp [4];
@@ -636,6 +639,12 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
       }
       // 
       $internalTable=$internalTableCols * $internalTableRows;
+      //ADD qCazelles - dateComposition
+      if (count($val) == 8 and $val[4]=='startDate' and $val[5]=='deliveryDate' and Parameter::getGlobalParameter('displayMilestonesStartDelivery') != 'YES') {
+      	unset($val[4]);
+      	unset($val[5]);
+      }
+      //END ADD qCazelles - dateComposition
       $internalTableRowsCaptions=array_slice($val, $internalTableCols);
       $internalTableCurrentRow=0;
       $colWidth=($detailWidth) / $nbCol;
@@ -670,7 +679,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
           } else if ($val [$i] and $val[$i]!='empty') {
           // old
 //          } else if ($val [$i]) {
-// END CHANGE BY Marc TABARY - 2017-03-31 - COLEMPTY              
+// END CHANGE BY Marc TABARY - 2017-03-31 - COLEMPTY       	
           echo '<div class="tabLabel" style="text-align:left;white-space:nowrap;">' . htmlEncode($obj->getColCaption($val [$i])) . '</div>';
         } else {
           echo '<div class="tabLabel" style="text-align:left;white-space:nowrap;"></div>';
@@ -963,6 +972,11 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
       if ($col=='idBusinessFeature' and Parameter::getGlobalParameter('displayBusinessFeature') != 'YES') {
         $hide=true;
       }
+      //ADD qCazelles - dateComposition
+      if (Parameter::getGlobalParameter('displayMilestonesStartDelivery') != 'YES' and ($col=='initialStartDate' or $col=='plannedStartDate' or $col=='realStartDate' or $col=='isStarted' or $col=='initialDeliveryDate' or $col=='plannedDeliveryDate' or $col=='realDeliveryDate' or $col=='isDelivered')) {
+      	$hide=true; continue;
+      }
+      //END ADD qCazelles - dateComposition
       if (($col == 'idUser' or $col == 'creationDate' or $col == 'creationDateTime' or $col=='lastUpdateDateTime') and !$print) {
         $hide=true;
       }
@@ -3783,6 +3797,38 @@ function drawVersionStructureFromObject($obj, $refresh=false,$way,$item) {
     echo formatUserThumb($userId, $userName, 'Creator');
     echo formatDateThumb($creationDate, null);
     echo formatCommentThumb($comp->comment);
+    //ADD qCazelles - dateComposition
+    
+    if (Parameter::getGlobalParameter('displayMilestonesStartDelivery') == 'YES' and property_exists($compObj,'realDeliveryDate')) {
+      if ($compObj->realDeliveryDate) {
+        $deliveryDate = $compObj->realDeliveryDate;
+      }
+      elseif ($compObj->plannedDeliveryDate) {
+        $deliveryDate = $compObj->plannedDeliveryDate;
+      }
+      elseif ($compObj->initialDeliveryDate) {
+        $deliveryDate = $compObj->initialDeliveryDate;
+      }
+       
+      $errorDatesDelivery = false;
+      if ($way=='composition') {
+        if (isset($deliveryDate) and $obj->plannedDeliveryDate and $obj->plannedDeliveryDate < $deliveryDate) {
+          $errorDatesDelivery = true;
+        }
+      }
+      elseif ($way=='structure') {
+        if (isset($deliveryDate) and $obj->plannedDeliveryDate and $obj->plannedDeliveryDate > $deliveryDate) {
+          $errorDatesDelivery = true;
+        }
+      }
+       
+      if (isset($deliveryDate)) {
+        echo '<br />'.(($errorDatesDelivery) ? '<span style="color: red;">' : '').htmlFormatDate($deliveryDate).(($errorDatesDelivery) ? '</span>' : '').' ';
+      }
+    }
+     
+    //END ADD qCazelles - dateComposition
+
     echo '</td>';
     echo '</tr>';
   }
