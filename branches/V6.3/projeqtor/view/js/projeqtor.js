@@ -4296,8 +4296,6 @@ function switchNoteStatus(idNote) {
       node.className="iconButtonCollapseHide16";
     });
   } else {
-    console.log(noteDiv.style.height);
-    console.log(noteDiv.offsetHeight);
     if (noteDiv.offsetHeight) notesHeight[idNote]=noteDiv.offsetHeight;
     noteDiv.style.maxHeight="0px";
     noteDiv.style.height="0px";
