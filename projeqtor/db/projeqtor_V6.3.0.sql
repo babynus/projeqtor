@@ -168,9 +168,14 @@ ALTER TABLE `${prefix}version` ADD `plannedDeliveryDate` DATE NULL DEFAULT NULL 
 ALTER TABLE `${prefix}version` ADD `initialDeliveryDate` DATE NULL DEFAULT NULL AFTER `isStarted`;
 --END ADD qCazelles - dateComposition
 
+-- =======================================================================================================================
+-- Babynus : feature disabled do to regressions  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+-- =======================================================================================================================
+
 --ADD qCazelles - GANTT
-INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES 
-(179, 'menuVersionsPlanning', 173, 'item', 390, NULL, 0, 'Work');
+-- Babynus : feature disabled do to regressions on standard planning !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES 
+--(179, 'menuVersionsPlanning', 173, 'item', 390, NULL, 0, 'Work');
 
 -- Babynus : feature disabled do to regressions on standard planning !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 --INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES 
