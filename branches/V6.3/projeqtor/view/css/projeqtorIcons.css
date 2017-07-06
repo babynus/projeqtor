@@ -853,10 +853,13 @@
 
 .iconLoginPassword { background-image: url(images/iconPassword.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px}
 
-
 .iconUserParameter32 { background-image: url(images/iconUserParameter32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconUserParameter22 { background-image: url(images/iconUserParameter22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconUserParameter16 { background-image: url(images/iconUserParameter16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+
+.iconVersionsPlanning32 { background-image: url(images/iconVersionsPlanning32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.iconVersionsPlanning22 { background-image: url(images/iconVersionsPlanning22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
+.iconVersionsPlanning16 { background-image: url(images/iconVersionsPlanning16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
 .iconWork32 { background-image: url(images/iconWork32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconWork22 { background-image: url(images/iconWork22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
