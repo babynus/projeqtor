@@ -667,7 +667,7 @@ foreach ($listParam as $param) {
 					    	<option value="NO"><?php echo i18n('displayNo'); ?></option>
 					    </select>
 					-->
-					<div dojoType="dijit.form.CheckBox" type="checkbox" checked
+					<div dojoType="dijit.form.CheckBox" type="checkbox" 
 						name="priorities[undefined]" style="">
 					</div>
 					</td>
