@@ -498,6 +498,14 @@
 .iconKpiDefinition22 { background-image: url(images/iconKpiDefinition32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .iconKpiDefinition16 { background-image: url(images/iconKpiDefinition32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
+/*ADD qCazelles - lang-Context*/
+
+.iconLanguage32 { background-image: url(images/iconLanguage32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.iconLanguage22 { background-image: url(images/iconLanguage22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
+.iconLanguage16 { background-image: url(images/iconLanguage16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+
+/*END ADD qCazelles - lang-Context*/
+
 .iconLikelihood32 { background-image: url(images/iconLikelihood32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconLikelihood22 { background-image: url(images/iconLikelihood22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconLikelihood16 { background-image: url(images/iconLikelihood16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
