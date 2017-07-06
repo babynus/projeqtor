@@ -282,6 +282,7 @@ class Parameter extends SqlElement {
       case 'displayContext' :
      	case 'displayMilestonesStartDelivery' :
       case 'filterTicketReportPriority' :
+      case 'projectRestriction' :
       //END ADD qCazelles
         $list=array('NO'=>i18n('displayNo'),
             'YES'=>i18n('displayYes')); 
@@ -683,6 +684,8 @@ class Parameter extends SqlElement {
       	                       'displayHistory'=>'list',
      	                       //ADD by qCazelles - Filter by Status
       	                       'filterByStatus'=>'list',
+// Babynus : feature disabled do to regressions
+//      	                       'projectRestriction'=>'list',
      	                       //END ADD qCazelles
       	                     //ADD by qCazelles 
       	                     'sectionProductAndComponent'=>'section',
@@ -696,8 +699,7 @@ class Parameter extends SqlElement {
                             	//'sectionVersionNameFormat'=>'section',
                               	'versionNameAutoformat'=>'list',
                               	'versionNameAutoformatSeparator'=>'text',
-                              	'subscriptionAuto'=>'list',
-      	
+                              	'subscriptionAuto'=>'list',     	
       	                     'sectionFiles'=>'section',
       	                       'paramAttachmentDirectory'=>'text',
       	                       'paramAttachmentMaxSize'=>'longnumber',
