@@ -281,6 +281,7 @@ class Parameter extends SqlElement {
       case 'displayLanguage' :
       case 'displayContext' :
      	case 'displayMilestonesStartDelivery' :
+      case 'filterTicketReportPriority' :
       //END ADD qCazelles
         $list=array('NO'=>i18n('displayNo'),
             'YES'=>i18n('displayYes')); 
@@ -667,9 +668,9 @@ class Parameter extends SqlElement {
       	                       'fontForPDF'=>'list',
       	                       "editor"=>'list',
       	                       "scaytAutoStartup"=>'list',
-      	                       'allowTypeRestrictionOnProject'=>'list',
-      	                       
+      	                       'allowTypeRestrictionOnProject'=>'list',                
       	                       'limitPlanningActivity'=>'list',
+      	                       'filterTicketReportPriority'=>'list',
       	                   //'newColumn'=>'newColumn',
       	                     'sectionDisplay'=>'section',
       	                       'paramDbDisplayName'=>'text',  
