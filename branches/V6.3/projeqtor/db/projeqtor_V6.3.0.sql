@@ -172,57 +172,67 @@ ALTER TABLE `${prefix}version` ADD `initialDeliveryDate` DATE NULL DEFAULT NULL 
 INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES 
 (179, 'menuVersionsPlanning', 173, 'item', 390, NULL, 0, 'Work');
 
-INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES 
-(1, 179, 1);
+-- Babynus : feature disabled do to regressions on standard planning !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES 
+--(1, 179, 1),
+--(2, 179, 1),
+--(3, 179, 1);
 --END ADD qCazelles - GANTT
 
 --ADD qCazelles - graphTickets
 
-INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `idle`, `defaultValue`, `multiple`) VALUES 
-(9, 'priority', 'priorityList', 60, 0, NULL, 0),
-(10, 'priority', 'priorityList', 60, 0, NULL, 0),
-(11, 'priority', 'priorityList', 50, 0, NULL, 0),
-(12, 'priority', 'priorityList', 50, 0, NULL, 0),
-(13, 'priority', 'priorityList', 50, 0, NULL, 0),
-(14, 'priority', 'priorityList', 50, 0, NULL, 0),
-(15, 'priority', 'priorityList', 50, 0, NULL, 0),
-(16, 'priority', 'priorityList', 50, 0, NULL, 0),
-(17, 'priority', 'priorityList', 40, 0, NULL, 0),
-(18, 'priority', 'priorityList', 40, 0, NULL, 0);
+-- Babynus : feature disabled do to regressions on standard reports !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `idle`, `defaultValue`, `multiple`) VALUES 
+--(9, 'priority', 'priorityList', 60, 0, NULL, 0),
+--(10, 'priority', 'priorityList', 60, 0, NULL, 0),
+--(11, 'priority', 'priorityList', 50, 0, NULL, 0),
+--(12, 'priority', 'priorityList', 50, 0, NULL, 0),
+--(13, 'priority', 'priorityList', 50, 0, NULL, 0),
+--(14, 'priority', 'priorityList', 50, 0, NULL, 0),
+--(15, 'priority', 'priorityList', 50, 0, NULL, 0),
+--(16, 'priority', 'priorityList', 50, 0, NULL, 0),
+--(17, 'priority', 'priorityList', 40, 0, NULL, 0),
+--(18, 'priority', 'priorityList', 40, 0, NULL, 0);
 
-INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `idle`, `orientation`, `hasCsv`) VALUES 
-(73, 'reportTicketOpenedClosed', 3, 'ticketOpenedClosedReport.php', 392, 0, 'L', 0); 
+-- Babynus : feature disabled do to regressions on standard reports !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `idle`, `orientation`, `hasCsv`) VALUES 
+--(73, 'reportTicketOpenedClosed', 3, 'ticketOpenedClosedReport.php', 392, 0, 'L', 0); 
 
-INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
-(1, 73, 1),
-(2, 73, 1),
-(3, 73, 1);
+-- Babynus : feature disabled do to regressions on standard reports !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
+--(1, 73, 1),
+--(2, 73, 1),
+--(3, 73, 1);
 
-INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `idle`, `defaultValue`, `multiple`) VALUES 
-(73, 'idProject', 'projectList', 10, 0, 'currentProject', 0),
-(73, 'idTicketType', 'ticketType', 20, 0, NULL, 0),
-(73, 'idProduct', 'productList', 30, 0, NULL, 0),
-(73, 'nbOfDays', 'intInput', 40, 0, 30, 0),
-(73, 'priority', 'priorityList', 50, 0, NULL, 0);
+-- Babynus : feature disabled do to regressions on standard reports !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `idle`, `defaultValue`, `multiple`) VALUES 
+--(73, 'idProject', 'projectList', 10, 0, 'currentProject', 0),
+--(73, 'idTicketType', 'ticketType', 20, 0, NULL, 0),
+--(73, 'idProduct', 'productList', 30, 0, NULL, 0),
+--(73, 'nbOfDays', 'intInput', 40, 0, 30, 0),
+--(73, 'priority', 'priorityList', 50, 0, NULL, 0);
 
 --REPORT FOR PRODUCT (Version)
 
-INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `idle`, `orientation`, `hasCsv`) VALUES 
-(74, 'reportTicketYearlyByProduct', 3, 'ticketYearlyReportByProduct.php', 395, 0, 'L', 0);
+-- Babynus : feature disabled do to regressions on standard reports !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `idle`, `orientation`, `hasCsv`) VALUES 
+--(74, 'reportTicketYearlyByProduct', 3, 'ticketYearlyReportByProduct.php', 395, 0, 'L', 0);
 
-INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
-(1, 74, 1),
-(2, 74, 1),
-(3, 74, 1);
+-- Babynus : feature disabled do to regressions on standard reports !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
+--(1, 74, 1),
+--(2, 74, 1),
+--(3, 74, 1);
 
-INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `idle`, `defaultValue`, `multiple`) VALUES 
-(74, 'idProduct', 'productList', 10, 0, NULL, 0),
-(74, 'idVersion', 'versionList', 20, 0, NULL, 0),
-(74, 'year', 'year', 30, 0, 'currentYear', 0),
-(74, 'idTicketType', 'ticketType', 40, 0, NULL, 0),
-(74, 'requestor', 'requestorList', 40, 0, NULL, 0),
-(74, 'issuer', 'userList', 60, 0, NULL, 0),
-(74, 'responsible', 'resourceList', 70, 0, NULL, 0),
-(74, 'priority', 'priorityList', 80, 0, NULL, 0);
+-- Babynus : feature disabled do to regressions on standard reports !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+--INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `idle`, `defaultValue`, `multiple`) VALUES 
+--(74, 'idProduct', 'productList', 10, 0, NULL, 0),
+--(74, 'idVersion', 'versionList', 20, 0, NULL, 0),
+--(74, 'year', 'year', 30, 0, 'currentYear', 0),
+--(74, 'idTicketType', 'ticketType', 40, 0, NULL, 0),
+--(74, 'requestor', 'requestorList', 40, 0, NULL, 0),
+--(74, 'issuer', 'userList', 60, 0, NULL, 0),
+--(74, 'responsible', 'resourceList', 70, 0, NULL, 0),
+--(74, 'priority', 'priorityList', 80, 0, NULL, 0);
 
 --END ADD qCazelles - graphTickets
