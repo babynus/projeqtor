@@ -176,7 +176,7 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 (1, 179, 1),
 (2, 179, 1),
 (3, 179, 1);
-END ADD qCazelles - GANTT
+--END ADD qCazelles - GANTT
 
 --ADD qCazelles - graphTickets
 
