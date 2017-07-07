@@ -4381,6 +4381,10 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconFinancial22 { background-image: url(customIcons/grey/iconFinancial.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGrey .iconFinancial16 { background-image: url(customIcons/grey/iconFinancial.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatGrey .iconFollowup32 { background-image: url(customIcons/grey/iconFollowup.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGrey .iconFollowup22 { background-image: url(customIcons/grey/iconFollowup.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGrey .iconFollowup16 { background-image: url(customIcons/grey/iconFollowup.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
 .ProjeQtOrFlatGrey .iconFullScreen32 { background-image: url(customIcons/grey/iconFullScreen.png);  background-repeat: no-repeat; width: 28px; height: 28px; background-size: 28px 28px;}
 .ProjeQtOrFlatGrey .iconFullScreen22 { background-image: url(customIcons/grey/iconFullScreen.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGrey .iconFullScreen16 { background-image: url(customIcons/grey/iconFullScreen.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
