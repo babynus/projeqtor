@@ -8376,7 +8376,7 @@ function showDialogConfirmMobile() {
     };
   require(["dojo/has", "dojo/sniff"], function(has){
     if(xhr.status != "404" && (has("android") || has("ios"))){
-      showConfirm("coucou",mobileRedirectFunction);
+      showConfirm(i18n("msgConfirmRedirectMobile"),mobileRedirectFunction);
     }
   });
 }
