@@ -2202,7 +2202,7 @@ paramUpdateDeliverableResponsibleFromMilestone: "atualizar entregável a partir 
 paramUpdateIncomingResponsibleFromMilestone: "atualizar entrada a partir do marco",
 paramUpdateMilestoneResponsibleFromDeliverable: "atualizar marco a partir do entregável",
 paramUpdateMilestoneResponsibleFromIncoming: "atualizar marco a partir da entrada",
-paramUseOrganizationBudgetElement: "[use budget feature for Oraganizations]",
+paramUseOrganizationBudgetElement: "[use budget feature for Organizations]",
 paramVersionNameAutoformat: "Formatação automática do nome da versão",
 paramVersionNameAutoformatSeparator: "Separador entre nome e número",
 paramVersionReferenceSuffix: "referência da versão",
