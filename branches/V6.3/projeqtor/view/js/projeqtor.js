@@ -3181,7 +3181,12 @@ function indentTask(way) {
   loadContent(url, "planResultDiv", null, true, null);
 }
 
+var arrayCollapsed=[];
 function saveCollapsed(scope) {
+  if (arrayCollapsed[scope] && arrayCollapsed[scope]=='true') {
+    return;
+  }
+  saveCollapsed[scope]='true';
   if (waitingForReply == true)
     return;
   if (!scope) {
@@ -3200,6 +3205,10 @@ function saveCollapsed(scope) {
 }
 
 function saveExpanded(scope) {
+  if (arrayCollapsed[scope] && arrayCollapsed[scope]=='false') {
+    return;
+  }
+  saveCollapsed[scope]='false';
   if (waitingForReply == true)
     return;
   if (!scope) {
