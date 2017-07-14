@@ -45,6 +45,6 @@ ALTER TABLE `${prefix}version` ADD `plannedStartDate` DATE NULL DEFAULT NULL;
 ALTER TABLE `${prefix}version` ADD `initialStartDate` DATE NULL DEFAULT NULL;
 
 ALTER TABLE `${prefix}version` ADD `isDelivered` INT(1) UNSIGNED NULL DEFAULT '0';
-ALTER TABLE `${prefix}version` ADD `realDeliveryDate` DATE NULL DEFAULT NULL AFTER;
+ALTER TABLE `${prefix}version` ADD `realDeliveryDate` DATE NULL DEFAULT NULL;
 ALTER TABLE `${prefix}version` ADD `plannedDeliveryDate` DATE NULL DEFAULT NULL;
 ALTER TABLE `${prefix}version` ADD `initialDeliveryDate` DATE NULL DEFAULT NULL;
