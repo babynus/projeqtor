@@ -4386,3 +4386,31 @@ function switchNoteStatus(idNote) {
  });
   
 }
+function switchNotesPrivacyStream() {
+  if (! dojo.byId("notePrivacyStream") || !dojo.byId("notePrivacyStreamUserTeam") || !dojo.byId("notePrivacyStreamDiv") ) {
+    return;
+  }
+  var privacy=dojo.byId("notePrivacyStream").value;
+  var team=dojo.byId("notePrivacyStreamUserTeam").value;
+  if (privacy=="2") {
+    dojo.byId("notePrivacyStream").value="3";
+    dojo.byId("notePrivacyStreamDiv").className="iconFixed16";
+    dojo.byId("notePrivacyStreamDiv").title=i18n("colIdPrivacy")+" : "+i18n("private");
+  } else if (privacy=="3") {
+    dojo.byId("notePrivacyStream").value="1";
+    dojo.byId("notePrivacyStreamDiv").className="";
+    dojo.byId("notePrivacyStreamDiv").title=i18n("colIdPrivacy")+" : "+i18n("public");
+  } else {
+    if (team) {
+      dojo.byId("notePrivacyStream").value="2";
+      dojo.byId("notePrivacyStreamDiv").className="iconTeam16";
+      dojo.byId("notePrivacyStreamDiv").title=i18n("colIdPrivacy")+" : "+i18n("team");
+    } else {
+      dojo.byId("notePrivacyStream").value="3";
+      dojo.byId("notePrivacyStreamDiv").className="iconFixed16";
+      dojo.byId("notePrivacyStreamDiv").title=i18n("colIdPrivacy")+" : "+i18n("private");
+    }
+  }
+  var currentClass=(dojo.byId('objectClass'))?dojo.byId('objectClass').value:'';
+  saveDataToSession("privacyNotes"+currentClass,dojo.byId("notePrivacyStream").value,true);
+}
