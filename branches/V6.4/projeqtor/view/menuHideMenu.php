@@ -108,17 +108,17 @@
      }else{
        //echo  "$level$indent<div id='Menu$idMenu' name='$icon' parent='$idMenuParent'>"."\n";
        if ($type=='item') {
-        echo $indent.'<div  onclick="loadMenuBarItem(\'' . $menu .  '\',\'' . htmlEncode(i18n($menuName),'quotes') . '\',\'bar\');" data-dojo-attach-point="rowNode" class="dijitTreeRow2" role="presentation" title="" style="padding-left: 5px; margin-top:5px; margin-bottom:5px;">
+        echo $indent.'<div  onclick="loadMenuBarItem(\'' . $menu .  '\',\'' . htmlEncode(i18n($menuName),'quotes') . '\',\'bar\');" data-dojo-attach-point="rowNode" class="dijitTreeRow2" role="presentation" title="" style="padding-left: 5px; margin-top:0px; margin-bottom:0px;">
               <span  style="min-width:210px;  margin-top:3px; height:auto;" role="presentation" class="dijitInline dijitIcon dijitTreeIcon icon'.$icon.$paramIconSize.'" data-dojo-attach-point="iconNode"> <div style="float:left; max-width:210px; margin-left:20px;"> '.$menuNameI18n.' </div>   </span>';
        }elseif ($type=='object'){
-         echo $indent.'<div  onclick="loadMenuBarObject(\'' . $menu .  '\',\'' . htmlEncode(i18n($menuName),'bar') . '\',\'bar\');" data-dojo-attach-point="rowNode" class="dijitTreeRow2" role="presentation" title="" style="padding-left: 5px; margin-top:5px;margin-bottom:5px;">
+         echo $indent.'<div  onclick="loadMenuBarObject(\'' . $menu .  '\',\'' . htmlEncode(i18n($menuName),'bar') . '\',\'bar\');" data-dojo-attach-point="rowNode" class="dijitTreeRow2" role="presentation" title="" style="padding-left: 5px; margin-top:0px;margin-bottom:0px;">
               <span style="min-width:210px; margin-top:3px; height:auto;" role="presentation" class="dijitInline dijitIcon dijitTreeIcon icon'.$icon.$paramIconSize.'" data-dojo-attach-point="iconNode"><div style="float:left; max-width:210px; margin-left:20px;"> '.$menuNameI18n.' </div>  </span>';       
        }elseif($type=='plugin'){
-         echo $indent.'<div  onclick="loadMenuBarPlugin(\'' . $menu .  '\',\'' . htmlEncode(i18n($menuName),'quotes') . '\',\'bar\');" data-dojo-attach-point="rowNode" class="dijitTreeRow2" role="presentation" title="" style="padding-left: 5px; margin-top:5px;margin-bottom:5px;">
+         echo $indent.'<div  onclick="loadMenuBarPlugin(\'' . $menu .  '\',\'' . htmlEncode(i18n($menuName),'quotes') . '\',\'bar\');" data-dojo-attach-point="rowNode" class="dijitTreeRow2" role="presentation" title="" style="padding-left: 5px; margin-top:0px;margin-bottom:0px;">
               <span style="min-width:210px;  margin-top:3px; height:auto;" role="presentation" class="dijitInline dijitIcon dijitTreeIcon icon'.$icon.$paramIconSize.'" data-dojo-attach-point="iconNode"><div style="float:left; max-width:210px; margin-left:20px;"> '.$menuNameI18n.' </div> </span>';
        }else{
          //Under menu case
-         echo $indent.'<div onmouseover="displayUnderMenu(\''.$idMenu.'\',\''.$idMenuParent.'\')"; onmouseout="hideUnderMenu(\''.$idMenu.'\')";  data-dojo-attach-point="rowNode" class="dijitTreeRow2" role="presentation" title="" style="padding-left: 5px; margin-top:5px; margin-bottom:5px;">
+         echo $indent.'<div onmouseover="displayUnderMenu(\''.$idMenu.'\',\''.$idMenuParent.'\')"; onmouseout="hideUnderMenu(\''.$idMenu.'\')";  data-dojo-attach-point="rowNode" class="dijitTreeRow2" role="presentation" title="" style="padding-left: 5px; margin-top:0px; margin-bottom:0px;">
               <span style="min-width:210px; margin-top:3px; height:auto;" role="presentation" class="dijitInline dijitIcon dijitTreeIcon icon'.$icon.$paramIconSize.'" data-dojo-attach-point="iconNode"> <div style="float:left; max-width:210px; margin-left:20px;"> '.$menuNameI18n.' </div> </span>';
          echo' <a style="float:right; margin-right:'.$paramIconSize3.'px; margin-top:'.$paramIconSize4.'px;"> '.formatIcon('ArrowShowHideMenu',16).'  </a>';
          $isUnderMenu = true;
