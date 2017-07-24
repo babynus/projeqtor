@@ -4875,6 +4875,7 @@ var hideShowTries=0;
  * Hide or show the Menu (left part of the screen
  */
 function hideShowMenu(noRefresh) {
+  var disableSlide=true;
   if (!dijit.byId("leftDiv")) {
     return;
   }
@@ -4892,7 +4893,7 @@ function hideShowMenu(noRefresh) {
     if (menuDivSize < 2) {
       menuDivSize=dojo.byId("mainDiv").offsetWidth * .2;
     }
-    if (!isHtml5()) {
+    if (disableSlide || !isHtml5()) {
       duration=0;
       dijit.byId("leftDiv").resize({
         w : 31
@@ -4936,7 +4937,7 @@ function hideShowMenu(noRefresh) {
     if (menuDivSize < 20) {
       menuDivSize=dojo.byId("mainDiv").offsetWidth * .2;
     }
-    if (!isHtml5()) {
+    if (disableSlide || !isHtml5()) {
       duration=0;
       dijit.byId("leftDiv").resize({
         w : menuDivSize
