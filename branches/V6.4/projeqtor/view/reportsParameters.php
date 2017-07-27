@@ -710,6 +710,7 @@ foreach ($listParam as $param) {
     }
     $class=(substr($param->paramType,-4,4)=='List')?substr($param->paramType,0,strlen($param->paramType)-4):$param->paramType;
     $class=ucfirst($class);
+    if (! class_exists($class)) continue;
 ?>
     <tr>
     <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
@@ -723,7 +724,6 @@ foreach ($listParam as $param) {
      </select>     
     </td>
     </tr>
-
 <?php 
   }
 }
@@ -779,6 +779,7 @@ foreach ($listParam as $param) {
          iconClass="dijitButtonIcon dijitButtonIconToday" class="detailButton whiteBackground" showLabel="false"
          onclick="saveReportInToday();">
       </button>
+      <?php }?>
       <?php if (isHtml5() and $report->hasFavorite) {?>
       <button title="<?php echo i18n('defineAsFavorite')?>"   
          dojoType="dijit.form.Button" type="button" 
@@ -799,7 +800,7 @@ foreach ($listParam as $param) {
            </script>
       </button>
 		  <?php }?>
-		  <?php if($report->hasWord) { ?>
+		  <?php if ($report->hasWord) { ?>
       <button title="<?php echo i18n('reportPrintWord')?>"
          dojoType="dijit.form.Button" type="button"
          id="reportPrintWord" name="reportPrintWord"
@@ -810,7 +811,6 @@ foreach ($listParam as $param) {
              showPrint("../report/"+ fileName, 'report',null,'word','X');
            </script>
       </button>
-		  <?php }?>
 		  <?php }?>
 		  <?php if($report->hasExcel) { ?>
       <button title="<?php echo i18n('reportPrintExcel')?>"
