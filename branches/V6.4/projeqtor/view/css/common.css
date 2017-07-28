@@ -2070,6 +2070,8 @@ table.dijitCalendarContainer {
 .dijitButtonIconStatusChange { background-position: -801px;}
 .dijitButtonIconSubscribe { background-position: -826px;}
 .dijitButtonIconSubscribeValid { background-position: -851px;}
+.dijitButtonIconWord { background-position: -876px;}
+.dijitButtonIconExcel { background-position: -901px;}
 
 .dijitColorPalette {
   border: 1px solid #7eabcd;
