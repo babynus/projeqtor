@@ -1271,6 +1271,10 @@ div.imputation input.dijitInputInner {
   color: #ffffff;
 }
 
+.dijitTreeRow3 {
+  color: #656565;
+  padding-bottom: 7px;
+}
 .dijitTreeContent {
   min-height: 18px;
   min-width: 18px;
