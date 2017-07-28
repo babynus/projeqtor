@@ -4980,6 +4980,7 @@ function hideShowMenu(noRefresh) {
   }
   setTimeout("hideShowMenuInProgress=false;",duration+50);
   // dojo.byId('menuBarShow').style.top='50px';
+  dojo.byId("hideMenuBarShowButton2").style.left=dojo.byId("leftDiv").offsetWidth+3+"px";
 }
 
 // gautier #2672
@@ -6613,8 +6614,8 @@ function openExportDialog(Type) {
     showAlert(i18n('alertOngoingChange'));
     return;
   }
-  loadDialog("dialogExport", null, true, '&objectClass='
-      + dojo.byId('objectClass').value);
+   loadDialog("dialogExport", null, true, '&objectClass='
+       + dojo.byId('objectClass').value);
 }
 
 // close the dialog with checkboxes
