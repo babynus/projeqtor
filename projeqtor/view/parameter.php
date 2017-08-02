@@ -288,10 +288,16 @@ function drawTableFromObjectList($objectList) {
 			    echo ' title="' . $title . '" style="vertical-align: middle;">';
 			    echo '<span>' . i18n('paramMailerTest') . '</span>';
 			    echo '<script type="dojo/connect" event="onClick" args="evt">';
-			    echo '  testEmail();';
+			    echo '  var sendTo=dijit.byId("mailerTestDest").get("value");';
+			    echo '  sendTo=encodeURIComponent(sendTo);';
+			    echo '  var sendTitle=dijit.byId("mailerTestTitle").get("value");';
+			    echo '  sendTitle=encodeURIComponent(sendTitle);';
+			    echo '  var sendMessage=dijit.byId("mailerTestMessage").get("value");';
+			    echo '  sendMessage=encodeURIComponent(sendMessage);';
+			    echo '  loadDiv("../tool/sendMailTest.php?sendTo="+sendTo+"&sendTitle="+sendTitle+"&sendMessage="+sendMessage,"testEmailResult");';
 			    echo '</script>';
-			    echo ' ';
 			    echo '</button>';
+			    echo '<div id="testEmailResult" style="display:inline-block;margin-left:20px;margin-top:5px;float:right;min-height:20px;min-width:20px;border:1px solid red;"></div>';
 			  }
 			}
 			//if ($format!='photo') {
