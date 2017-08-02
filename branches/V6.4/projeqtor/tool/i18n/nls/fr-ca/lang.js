@@ -1460,7 +1460,7 @@ helpLimitPlanningActivity: "Pour les billets&#44; la liste des activités planif
 helpLogFile: "Emplacement et nom du fichier du journal qui peut contenir ${date} pour avoir 1 fichier par jour (à placer hors de la portée web pour des raisons de sécurité)",
 helpLogfile: "Voir ce fichier de log",
 helpLogLevel: "Niveau de détail dans les journaux",
-helpMailerTest: "Envoyer le test",
+helpMailerTest: "Envoyer un courriel de test pour vérifier la configuration du serveur SMTP.&#13;ATTENTION &#58; cette opération sauvegarde les paramètres globaux.",
 helpMailerTestDest: "Destinataire du courriel",
 helpMailerTestMessage: "Message du courriel",
 helpMailerTestTitle: "Titre du courriel",

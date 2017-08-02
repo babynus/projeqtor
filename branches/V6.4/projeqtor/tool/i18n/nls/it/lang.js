@@ -1460,7 +1460,7 @@ helpLimitPlanningActivity: "Limitare la lista delle attività da pianificare per
 helpLogFile: "Nome del file log che può contenere il parametro $ {data} per avere 1 file per giorno (spostarlo al di fuori dell'accesso web per motivi di sicurezza)",
 helpLogfile: "Mostrare questo file registro",
 helpLogLevel: "log level",
-helpMailerTest: "[sent test]",
+helpMailerTest: "[sent test email to check sptm configuration. &#13;ATTENTION&#58; this operation saves global parameters.]",
 helpMailerTestDest: "[send email to]",
 helpMailerTestMessage: "[message of the email]",
 helpMailerTestTitle: "[title of the email]",

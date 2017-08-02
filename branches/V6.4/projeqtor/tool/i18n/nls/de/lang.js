@@ -1460,7 +1460,7 @@ helpLimitPlanningActivity: "Begrenze die Liste von geplanten Aktivitäten bei Ti
 helpLogFile: "Log Dateiname (kann den Parameter ${date} enhalten&#44; um 1 Datei pro Tage zu haben)",
 helpLogfile: "Logbuch Datei anzeigen",
 helpLogLevel: "Log Stufe",
-helpMailerTest: "[sent test]",
+helpMailerTest: "[sent test email to check sptm configuration. &#13;ATTENTION&#58; this operation saves global parameters.]",
 helpMailerTestDest: "[send email to]",
 helpMailerTestMessage: "[message of the email]",
 helpMailerTestTitle: "[title of the email]",
