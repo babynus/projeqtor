@@ -29,7 +29,7 @@ $idProject=RequestHandler::getId('idProject',false,null);
 $idType=RequestHandler::getId('idType',false,null);
 ?>
  
-<div class="graphStatusContentDiv" id="graphStatusContentDiv" oncontextmenu="return false;" style="height:auto;z-index:9999;position:fixed;margin-left:-85px;margin-top:23px;">
+<div class="graphStatusContentDiv" id="graphStatusContentDiv" oncontextmenu="return false;" style="">
     <?php 
     $type=new Type($idType);
     $idWorkflow=$type->idWorkflow;
