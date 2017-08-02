@@ -81,6 +81,7 @@ function drawTableFromObjectList($objectList) {
 	    $arrayReadOnly['dayTime']=true;
 	  }
 	}
+	$paramSelectedTab=($type=='globalParameter')?Parameter::getUserParameter('globalParameterSelectedTab'):null;
 	if (array_key_exists('destinationWidth',$_REQUEST)) {
 	  $width=$_REQUEST['destinationWidth'];
 	  $width-=30;
@@ -128,7 +129,7 @@ function drawTableFromObjectList($objectList) {
 		  } else {
 		    echo '<div dojoType="dijit/layout/TabContainer" style="width: 100%; height: 100%;">'; // Start the tabContanier Level
 		  }
-		  echo '<div dojoType="dijit/layout/ContentPane" title="'.i18n($code).'" data-dojo-props="selected:true">'; // New tab level
+		  echo '<div onShow="saveDataToSession(\'globalParameterSelectedTab\',\''.$code.'\',true);" dojoType="dijit/layout/ContentPane" title="'.i18n($code).'" '.(($paramSelectedTab==$code)?'selected="true"':'').'>'; // New tab level
 		  $hasTab=true;
 		  $hasColumn=false;
 		  $hasSection=false;
@@ -163,13 +164,10 @@ function drawTableFromObjectList($objectList) {
 			echo '<table>';
 			$hasSection=true;
 	  } else {
-			//if ($format!='photo') {
 		  echo '<tr>'; // open the line level (must end with  a </td></tr>)
-		  echo '<td class="crossTableLine">
-		          <label class="label largeLabel" for="' . $code . '" title="' . i18n('help' . ucfirst($code)) . '">' . i18n('param' . ucfirst($code) ) . ' :&nbsp;</label>
-		        </td>
-		        <td style="position:relative">';
-			//}
+		  echo '<td class="crossTableLine"><label class="label largeLabel" for="' . $code . '" title="' . i18n('help' . ucfirst($code)) . '">' 
+		              . (($format!='photo')?i18n('param' . ucfirst($code) ) . ' :&nbsp;':'')
+		         .'</label></td><td style="position:relative">';
 			if ($format=='list') {
 				$listValues=Parameter::getList($code);
 				echo '<select dojoType="dijit.form.FilteringSelect" class="input" name="' . $code . '" id="' . $code . '" ';
@@ -234,12 +232,13 @@ function drawTableFromObjectList($objectList) {
 			} else if ($format=='photo') { // for user photo 
 			  //echo "</td></tr>";
 			  $user=getSessionUser();
-			  echo $user->drawSpecificItem('image');
 			  echo '<input type="hidden" id="objectId" value="'.htmlEncode($user->id).'"/>';
 			  echo '<input type="hidden" id="objectClass" value="User"/>';
 			  echo '<input type="hidden" id="parameter" value="true"/>';
-			  echo "<tr><td></td><td>";
-			  echo '<div style="position:absolute;top:0px;left:0px;height:85px;">&nbsp;</div>';
+			  echo '<div style="position:relative;height:100px;width:120px;top:-20px;xleft:50px;">';
+			    $imageHtml=$user->drawSpecificItem('image');
+			    echo $imageHtml;
+			  echo '</div>';
 			} else if ($format=='specific') {
 			  if ($code=='password') {
 			    $title=i18n('changePassword');
