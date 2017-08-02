@@ -1460,7 +1460,7 @@ helpLimitPlanningActivity: "Limitar la lista de actividades de planificación de
 helpLogFile: "Nombre del fichero de registro (puede contener el parámetro ${date} para tener un fichero por fecha)",
 helpLogfile: "Mostrar fichero de Log",
 helpLogLevel: "Nivel de Log",
-helpMailerTest: "[sent test]",
+helpMailerTest: "[sent test email to check sptm configuration. &#13;ATTENTION&#58; this operation saves global parameters.]",
 helpMailerTestDest: "[send email to]",
 helpMailerTestMessage: "[message of the email]",
 helpMailerTestTitle: "[title of the email]",

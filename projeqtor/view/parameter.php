@@ -283,21 +283,21 @@ function drawTableFromObjectList($objectList) {
 			  	echo $orga->name;
 			  } else if ($code=='mailerTest') {
 			    $title=i18n('helpMailerTest');
-			    echo '<button id="testMail" dojoType="dijit.form.Button" showlabel="true"';
+			    echo '<div style="vertical-align:top">';
+			    echo '<button id="testMail" dojoType="dijit.form.Button" showlabel="false"';
 			    echo 'iconClass="dijitButtonIcon dijitButtonIconEmail" ';
 			    echo ' title="' . $title . '" style="vertical-align: middle;">';
-			    echo '<span>' . i18n('paramMailerTest') . '</span>';
+			    //echo '<span>' . i18n('paramMailerTest') . '</span>';
 			    echo '<script type="dojo/connect" event="onClick" args="evt">';
-			    echo '  var sendTo=dijit.byId("mailerTestDest").get("value");';
-			    echo '  sendTo=encodeURIComponent(sendTo);';
-			    echo '  var sendTitle=dijit.byId("mailerTestTitle").get("value");';
-			    echo '  sendTitle=encodeURIComponent(sendTitle);';
-			    echo '  var sendMessage=dijit.byId("mailerTestMessage").get("value");';
-			    echo '  sendMessage=encodeURIComponent(sendMessage);';
-			    echo '  loadDiv("../tool/sendMailTest.php?sendTo="+sendTo+"&sendTitle="+sendTitle+"&sendMessage="+sendMessage,"testEmailResult");';
+			    echo '  showWait();';
+			    echo '  dojo.byId("testEmailResult").innerHTML="";';
+			    echo '  var callbackAfterSave=function(){var hide=function(){hideWait();};loadDiv("../tool/sendMailTest.php","testEmailResult",null,hide);};';
+			    echo '  loadDiv("../tool/saveParameter.php","testEmailSaveResult", "parameterForm", callbackAfterSave);';
 			    echo '</script>';
 			    echo '</button>';
-			    echo '<div id="testEmailResult" style="display:inline-block;margin-left:20px;margin-top:5px;float:right;min-height:20px;min-width:20px;border:1px solid red;"></div>';
+			    echo '<div id="testEmailResult" style="padding-left:10px;display:inline-block;"></div>';
+			    echo '<div id="testEmailSaveResult" style="display:none;"></div>';
+			    echo '</div>';
 			  }
 			}
 			//if ($format!='photo') {

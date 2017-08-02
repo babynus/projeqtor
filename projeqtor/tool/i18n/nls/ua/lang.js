@@ -1460,7 +1460,7 @@ helpLimitPlanningActivity: "Обмежити список планування �
 helpLogFile: "ім'я файлу протоколу (log)&#44; який може містити параметр ${date}&#44; щоб мати 1 файл в день (переміщено з веб-доступу з міркувань безпеки)",
 helpLogfile: "Показати лог-файл",
 helpLogLevel: "рівень протоколу",
-helpMailerTest: "[sent test]",
+helpMailerTest: "[sent test email to check sptm configuration. &#13;ATTENTION&#58; this operation saves global parameters.]",
 helpMailerTestDest: "[send email to]",
 helpMailerTestMessage: "[message of the email]",
 helpMailerTestTitle: "[title of the email]",
