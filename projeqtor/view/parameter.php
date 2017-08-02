@@ -85,7 +85,7 @@ function drawTableFromObjectList($objectList) {
 	  $width=$_REQUEST['destinationWidth'];
 	  $width-=30;
 	  $displayWidth=$width.'px';
-	  $longTextWidth=($width-30-300).'px';
+	  $longTextWidth=($width-348).'px';
 	} else {
 	  if (sessionValueExists('screenWidth')) {
 	    $detailWidth = round((getSessionValue('screenWidth') * 0.8) - 15) ; // 80% of screen - split barr - padding (x2)
@@ -93,9 +93,9 @@ function drawTableFromObjectList($objectList) {
 	    $displayWidth='98%';
 	  }
 	}
-	echo '<table style="width:99%"><tr><td style="width:50%;vertical-align:top;">';
-	echo '<div>';
-	echo '<table>';
+	$hasTab=false;
+	$hasColumn=false;
+	$hasSection=false;
 	foreach($objectList as $code => $format) {
 		$criteria=$criteriaRoot;
 		$criteria['parameterCode']=$code;
@@ -116,28 +116,60 @@ function drawTableFromObjectList($objectList) {
 				$obj->parameterValue=getSessionValue($code);
 			}
 		}
-		if ($format=='newColumn') {
-			echo '</table></div></td><td style="width:50%;vertical-align:top;"><div><table>';
-		} else if ($format=='newColumnFull') {
-      echo '</table></div></td></tr><tr><td colspan="2" style="width:50%;vertical-align:top;"><div><table>';
-    } else {
-			if ($format!="section") {
-			  if ($format!='photo') {
-				  echo '<tr>';
-				  echo '<td class="crossTableLine"><label class="label largeLabel" for="' . $code . '" title="' . i18n('help' . ucfirst($code)) . '">' . i18n('param' . ucfirst($code) ) . ' :&nbsp;</label></td><td>';
-			  }
-			} else {
-				echo '</table></div><br/>';
-				$divName=$type.'_'.$code;
-				echo '<div id="' . $divName . '" dojoType="dijit.TitlePane"';
-				echo ' open="' . (array_key_exists($divName, $collapsedList)?'false':'true') . '"';
-				echo ' onHide="saveCollapsed(\'' . $divName . '\');"';
-				echo ' onShow="saveExpanded(\'' . $divName . '\');"';
-				echo ' title="' . i18n($code) . '" style="width:98%; position:relative;"';
-				echo '>';
-				echo '<table>';
-				echo '<tr>';
-			}
+		if ($format=='tab') {
+		  if ($hasSection) {
+		    echo '</table></div><br/>'; // close the section level
+		  }
+		  if ($hasColumn) { // close the column  level
+		    echo '</td></tr></table>';
+		  }
+		  if ($hasTab) {
+		    echo '</div>'; // close the tab level
+		  } else {
+		    echo '<div dojoType="dijit/layout/TabContainer" style="width: 100%; height: 100%;">'; // Start the tabContanier Level
+		  }
+		  echo '<div dojoType="dijit/layout/ContentPane" title="'.i18n($code).'" data-dojo-props="selected:true">'; // New tab level
+		  $hasTab=true;
+		  $hasColumn=false;
+		  $hasSection=false;
+		} else if ($format=='newColumn' or $format=='newColumnFull') {
+		  if ($hasSection) {
+		    echo '</table></div><br/>'; // close the section level
+		  }
+		  if ($hasColumn) { // close the column level
+		    echo '</td>';
+		  } else {
+		    echo '<table style="width:99%; margin-left:1%;vertical-align:top;"><tr style="height:100%">'; // Open the table column container
+		  }
+		  if ($format=='newColumn') {
+		    echo '<td style="width:50%;vertical-align:top;">';
+		  } else { // $format=='newColumnFull'
+		    echo '</tr><tr><td colspan="2" style="width:50%;vertical-align:top;">';
+		  }
+		  $hasColumn=true;
+		  $hasSection=false;
+		} else if ($format=="section") { // New section
+		  if ($hasSection) {
+		    echo '</table></div>'; // close the section level
+		  }
+			echo '<br/>';
+			$divName=$type.'_'.$code;
+			echo '<div id="' . $divName . '" dojoType="dijit.TitlePane"';
+			echo ' open="' . (array_key_exists($divName, $collapsedList)?'false':'true') . '"';
+			echo ' onHide="saveCollapsed(\'' . $divName . '\');"';
+			echo ' onShow="saveExpanded(\'' . $divName . '\');"';
+			echo ' title="' . i18n($code) . '" style="width:98%; position:relative;"';
+			echo '>';
+			echo '<table>';
+			$hasSection=true;
+	  } else {
+			//if ($format!='photo') {
+		  echo '<tr>'; // open the line level (must end with  a </td></tr>)
+		  echo '<td class="crossTableLine">
+		          <label class="label largeLabel" for="' . $code . '" title="' . i18n('help' . ucfirst($code)) . '">' . i18n('param' . ucfirst($code) ) . ' :&nbsp;</label>
+		        </td>
+		        <td style="position:relative">';
+			//}
 			if ($format=='list') {
 				$listValues=Parameter::getList($code);
 				echo '<select dojoType="dijit.form.FilteringSelect" class="input" name="' . $code . '" id="' . $code . '" ';
@@ -200,14 +232,14 @@ function drawTableFromObjectList($objectList) {
 				//echo $obj->getValidationScript($code);
 				echo '</textarea>';
 			} else if ($format=='photo') { // for user photo 
-			  echo "</td></tr>";
+			  //echo "</td></tr>";
 			  $user=getSessionUser();
 			  echo $user->drawSpecificItem('image');
 			  echo '<input type="hidden" id="objectId" value="'.htmlEncode($user->id).'"/>';
 			  echo '<input type="hidden" id="objectClass" value="User"/>';
 			  echo '<input type="hidden" id="parameter" value="true"/>';
 			  echo "<tr><td></td><td>";
-			  echo '<div style="position:relative;top:0px;left:0px;height:85px;">&nbsp;</div>';
+			  echo '<div style="position:absolute;top:0px;left:0px;height:85px;">&nbsp;</div>';
 			} else if ($format=='specific') {
 			  if ($code=='password') {
 			    $title=i18n('changePassword');
@@ -250,13 +282,29 @@ function drawTableFromObjectList($objectList) {
 			  	$res=new Resource($usr->id);
 			  	$orga=new Organization($res->idOrganization);
 			  	echo $orga->name;
+			  } else if ($code=='mailerTest') {
+			    $title=i18n('helpMailerTest');
+			    echo '<button id="testMail" dojoType="dijit.form.Button" showlabel="true"';
+			    echo 'iconClass="dijitButtonIcon dijitButtonIconEmail" ';
+			    echo ' title="' . $title . '" style="vertical-align: middle;">';
+			    echo '<span>' . i18n('paramMailerTest') . '</span>';
+			    echo '<script type="dojo/connect" event="onClick" args="evt">';
+			    echo '  testEmail();';
+			    echo '</script>';
+			    echo ' ';
+			    echo '</button>';
 			  }
 			}
-			echo '</td></tr>';
+			//if ($format!='photo') {
+			echo '</td></tr>'; // close the line level
+			//}
 		}
 	}
-	echo '</table>';
-	echo '</td></tr></table>';
+	
+	if ($hasSection) echo '</table><br/></div><br/>'; // Close the Section level
+	if ($hasColumn) echo '</td></tr></table>'; // Close the column level
+	if ($hasTab) echo '</div></div>'; // Close the tab level and the tab container level
+	echo '</div>'; // Tab container level
 }
 ?>
 <input
