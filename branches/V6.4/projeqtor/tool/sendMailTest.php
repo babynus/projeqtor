@@ -27,13 +27,23 @@
 /** =========================================================================== 
  * Chek login/password entered in connection screen
  */
-  require_once "../tool/projeqtor.php"; 
+  require_once "../tool/projeqtor.php";
+  require_once "../tool/formatter.php";
   scriptLog('   ->/tool/sendMailTest.php');  
-  $title=RequestHandler::getValue("sendTitle");
-  $msg=RequestHandler::getValue("sendMessage");
-  $dest=RequestHandler::getValue("sendTo");;
-  
+  $title=Parameter::getGlobalParameter('mailerTestTitle');
+  $msg=Parameter::getGlobalParameter('mailerTestMessage');
+  $dest=Parameter::getGlobalParameter('mailerTestDest');
+  $dbName=Parameter::getGlobalParameter('paramDbDisplayName');
+  $arrayFrom=array('${dbName}','${date}');
+  $arrayTo=array($dbName,htmlFormatDateTime(date('Y-m-d H:i:s')));
+  $title=str_replace($arrayFrom, $arrayTo, $title);
+  $msg=str_replace($arrayFrom, $arrayTo, $msg);
   $result="";
   $result=sendMail($dest,$title,$msg);
-  echo "OK =>".$result;
+  if ($result) {
+    echo "<span style='color:green; font-weight:bold'>".i18n("mailSentTo",array($dest))."</span>";
+  } else {
+    $error=nl2br(Mail::getLastErrorMessage());
+    echo "<div style='color:red; font-weight:bold;'>$error</div>";
+  }
 ?>

@@ -1460,7 +1460,7 @@ helpLimitPlanningActivity: "Limiter la liste des activités de planning sur les 
 helpLogFile: "emplacement et nom du fichier de log qui peut contenir ${date} pour avoir 1 fichier par jour (à placer hors de la portée web pour des raisons de sécurité)",
 helpLogfile: "Voir ce fichier de log",
 helpLogLevel: "niveau de log",
-helpMailerTest: "envoyer le test",
+helpMailerTest: "Envoyer un email de test pour vérifier la configuration du serveur SMTP.&#13;ATTENTION &#58; cette opération sauvegarde les paramètres globaux.",
 helpMailerTestDest: "destinataire du mail",
 helpMailerTestMessage: "message de l'email",
 helpMailerTestTitle: "titre de l'email",

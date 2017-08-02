@@ -1460,7 +1460,7 @@ helpLimitPlanningActivity: "[Limit the list of planning activities on tickets to
 helpLogFile: "nome do arquivo de log - pode conter ${date} para ter um arquivo diário (por razões de segurança&#44; selecione um diretório não acessível pela web)",
 helpLogfile: "Exibir este arquivo de log",
 helpLogLevel: "nível de log",
-helpMailerTest: "[sent test]",
+helpMailerTest: "[sent test email to check sptm configuration. &#13;ATTENTION&#58; this operation saves global parameters.]",
 helpMailerTestDest: "[send email to]",
 helpMailerTestMessage: "[message of the email]",
 helpMailerTestTitle: "[title of the email]",

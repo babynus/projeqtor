@@ -1021,7 +1021,6 @@ function submitForm(page, destination, formName) {
     if (formName == 'passwordForm') {
       isResultDiv = false;
     }
-    ;
     loadContent(page, destination, formName, isResultDiv);
   } else {
     showAlert(i18n("alertInvalidForm"));

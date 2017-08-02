@@ -1460,7 +1460,7 @@ helpLimitPlanningActivity: "[Limit the list of planning activities on tickets to
 helpLogFile: "log bestandsnaam die parameter ${date} kan bevatten&#44; tot 1 bestand per dag (om veiligheidsredenen verplaatsen buiten bereik via het web)",
 helpLogfile: "Toon dit log bestand",
 helpLogLevel: "log nivo",
-helpMailerTest: "[sent test]",
+helpMailerTest: "[sent test email to check sptm configuration. &#13;ATTENTION&#58; this operation saves global parameters.]",
 helpMailerTestDest: "[send email to]",
 helpMailerTestMessage: "[message of the email]",
 helpMailerTestTitle: "[title of the email]",

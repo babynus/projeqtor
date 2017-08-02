@@ -1460,7 +1460,7 @@ helpLimitPlanningActivity: "[Limit the list of planning activities on tickets to
 helpLogFile: "log file name that can contain parameter ${date} to have 1 file per day (move it out of web access for security reasons)",
 helpLogfile: "Εμφάνιση του αρχείου καταγραφής",
 helpLogLevel: "επίπεδο καταγραφής",
-helpMailerTest: "[sent test]",
+helpMailerTest: "[sent test email to check sptm configuration. &#13;ATTENTION&#58; this operation saves global parameters.]",
 helpMailerTestDest: "[send email to]",
 helpMailerTestMessage: "[message of the email]",
 helpMailerTestTitle: "[title of the email]",

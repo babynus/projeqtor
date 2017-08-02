@@ -1460,7 +1460,7 @@ helpLimitPlanningActivity: "[Limit the list of planning activities on tickets to
 helpLogFile: "имя лог-файла&#44; может содержать параметр ${date} для создания файла по дням (по соображениям безопасности уберите из веб-доступа)",
 helpLogfile: "Показать данный лог-файл",
 helpLogLevel: "уровень логирования",
-helpMailerTest: "[sent test]",
+helpMailerTest: "[sent test email to check sptm configuration. &#13;ATTENTION&#58; this operation saves global parameters.]",
 helpMailerTestDest: "[send email to]",
 helpMailerTestMessage: "[message of the email]",
 helpMailerTestTitle: "[title of the email]",

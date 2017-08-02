@@ -1460,7 +1460,7 @@ helpLimitPlanningActivity: "[Limit the list of planning activities on tickets to
 helpLogFile: "日次ログファイルの名称に${date}を含ませる (セキュリティ上の理由のためWebアクセスからは取り除かれます)",
 helpLogfile: "ログファイルを表示",
 helpLogLevel: "ログレベル",
-helpMailerTest: "[sent test]",
+helpMailerTest: "[sent test email to check sptm configuration. &#13;ATTENTION&#58; this operation saves global parameters.]",
 helpMailerTestDest: "[send email to]",
 helpMailerTestMessage: "[message of the email]",
 helpMailerTestTitle: "[title of the email]",

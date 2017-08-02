@@ -1460,7 +1460,7 @@ helpLimitPlanningActivity: "Ograničite popis aktivnosti planiranja na tikete za
 helpLogFile: "pokaži log datoteku",
 helpLogfile: "Prijava naziv LOG datoteke (sadrže zadnji parametar ${date} u 1 datoteci imati po danu)",
 helpLogLevel: "prijavite LOG razinu",
-helpMailerTest: "[sent test]",
+helpMailerTest: "[sent test email to check sptm configuration. &#13;ATTENTION&#58; this operation saves global parameters.]",
 helpMailerTestDest: "[send email to]",
 helpMailerTestMessage: "[message of the email]",
 helpMailerTestTitle: "[title of the email]",
