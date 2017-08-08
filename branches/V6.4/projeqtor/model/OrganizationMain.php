@@ -115,9 +115,9 @@ class OrganizationMain extends SqlElement {
   // Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
-    <th field="nameOrganizationType" width="15%" >${type}</th>
-    <th field="name" width="30%" >${organizationName}</th>
-    <th field="nameResource" width="10%" >${responsible}</th>
+    <th field="nameOrganizationType" width="15%" >${idOrganizationType}</th>
+    <th field="name" width="30%" >${name}</th>
+    <th field="nameResource" width="10%" >${manager}</th>
     <th field="idle" formatter="booleanFormatter" width="5%" >${idle}</th>  
     ';
   
@@ -162,8 +162,7 @@ class OrganizationMain extends SqlElement {
       'idUser'=>'issuer',
       'idOrganization'=>'parentOrganization',
       '_byMet_hierarchicName'=>'hierarchicString',      
-    'idleDateTime'=>'idleDate',
-  
+      'idleDateTime'=>'idleDate',
   );
 
   // Spinner for drawing et inputing the alertOverPct, warningOverPct, okUnderPct

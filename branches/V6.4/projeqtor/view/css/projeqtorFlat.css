@@ -320,8 +320,9 @@
 .ProjeQtOrFlatBlue .hyperlink:hover {
   color: #545381;
 }
-
-
+.ProjeQtOrFlatBlue #menuBarShow {
+  border-right:1px solid #545381;
+}
 .ProjeQtOrFlatBlue .menuBarItem  {
   -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -335,7 +336,15 @@
     transform: rotate(-7deg);
     /* height:170px; */
 }
-
+#menuBarShow {
+  display: none; 
+  height: calc(100% -31px);
+  height: -moz-calc(100% -31px);
+  float: left;
+  top: 0px; left: 0px;
+  z-index: 900;
+  border-right:1px solid #505050;
+}
 .ProjeQtOrFlatBlue .dijitButtonNode, .ProjeQtOrFlatBlue .dijitReset.dijitInline.dijitButtonNode {
   background: #cdcadb;
   -webkit-transition: all 0.5s ease;
@@ -1598,7 +1607,9 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatRed .hyperlink:hover {
   color: #833e3e;
 }
-
+.ProjeQtOrFlatRed #menuBarShow {
+  border-right:1px solid #833e3e;
+}
 
 .ProjeQtOrFlatRed .menuBarItem  {
   -webkit-transition: all 0.5s ease;
@@ -2834,7 +2845,9 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatGreen .hyperlink:hover {
   color: #537665;
 }
-
+.ProjeQtOrFlatGreen #menuBarShow {
+  border-right:1px solid #537665;
+}
 
 .ProjeQtOrFlatGreen .menuBarItem  {
   -webkit-transition: all 0.5s ease;
@@ -4072,7 +4085,9 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGrey .hyperlink:hover {
   color: #656565;
 }
-
+.ProjeQtOrFlatGrey #menuBarShow {
+  border-right:1px solid #656565;
+}
 
 .ProjeQtOrFlatGrey .menuBarItem  {
   -webkit-transition: all 0.5s ease;
