@@ -1110,8 +1110,9 @@ function finalizeMessageDisplay(destination, validationType) {
     // alert('validationType='+validationType);
     if (validationType) {
       if (validationType == 'note') {
-        loadContent("objectDetail.php?refreshNotes=true", dojo.byId('objectClass').value+ '_Note', 'listForm');
+        if(!dijit.byId('dialogKanbanGetObjectStream')) loadContent("objectDetail.php?refreshNotes=true", dojo.byId('objectClass').value+ '_Note', 'listForm');
         if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
+        if (dijit.byId('dialogKanbanGetObjectStream')) loadContent("../tool/dynamicDialogKanbanGetObjectStream.php","dialogKanbanGetObjectStream","noteFormStreamKanban");   	
         if (dojo.byId('buttonDivCreationInfo')) {
           var url = '../tool/getObjectCreationInfo.php?objectClass='+ dojo.byId('objectClass').value +'&objectId='+dojo.byId('objectId').value;
           loadDiv(url, 'buttonDivCreationInfo', null);
@@ -1368,7 +1369,9 @@ function finalizeMessageDisplay(destination, validationType) {
           loadContent("objectDetail.php?refresh=true", "detailFormDiv", 'listForm');
           if(dojo.byId('detailRightDiv')){
             loadContent("objectStream.php", "detailRightDiv", "listForm");  
-          }
+          } else if (validationType == 'noteKanban' ){
+          	loadContent("../tool/dynamicDialogKanbanGetObjectStream.php","dialogKanbanGetObjectStream","noteFormStreamKanban");   	
+          } 
           // Need also to refresh History
           if (dojo.byId(dojo.byId('objectClass').value + '_history')) {
             loadContent("objectDetail.php?refreshHistory=true", dojo
@@ -4209,33 +4212,15 @@ function hideDirectChangeStatus() {
 
 function drawGraphStatus() {
   var callBack = function(){
-    var contentDiv=dojo.byId('graphStatusContentDiv');
-    var detailDiv=dojo.byId('detailDiv');
-    var leftDiv=dojo.byId('leftDiv');
-    contentDiv.style.left='';
-    if (!contentDiv || ! detailDiv || !leftDiv) return;
-    var leftWidth=leftDiv.offsetWidth;
-    var contentWidth=(contentDiv.offsetWidth);
-    var contentLeft=contentDiv.offsetLeft;
-    var detailWidth=detailDiv.offsetWidth;
-    console.log("current left="+contentLeft);
-    if (contentLeft-85+contentWidth>leftWidth+detailWidth) {
-      console.log("A"+contentLeft+"+"+contentWidth+"="+(contentLeft+contentWidth));
-      console.log("B"+leftWidth+"+"+detailWidth+"="+(leftWidth+detailWidth));
-      var newLeft=leftWidth+detailWidth-contentWidth+55;
-      if (newLeft-85<leftWidth) newLeft=leftWidth+85+10;
-      contentDiv.style.left=newLeft+"px";
-    } 
-    
-    console.log()
+    dojo.byId('graphStatusContentDiv');
   };
   graphIdStatus=dijit.byId("idStatus").get('value');
   graphIdProject=dijit.byId("idProject").get('value');
   objectClass=dojo.byId('objectClass').value;
   graphIdType=dijit.byId("id"+objectClass+"Type").get('value');
   var url = '../tool/dynamicDialogGraphStatus.php?idStatus='+graphIdStatus + '&idProject='+graphIdProject + '&idType='+graphIdType;
-  //loadContent(url,"graphStatusDiv",null,null,null,null,null,callBack);
-  loadDiv(url,"graphStatusDiv",null,callBack);
+  loadContent(url,"graphStatusDiv",null,null,null,null,null,callBack);
+  
 }
 
 function hideGraphStatus(){
@@ -4292,8 +4277,11 @@ function hideStreamMode(){
 }
 
 function focusStream() {
-  if(dijit.byId("noteNoteStream").get('value')==trim(i18n("textareaEnterText"))){
+  if(dijit.byId("noteNoteStream") && dijit.byId("noteNoteStream").get('value')==trim(i18n("textareaEnterText"))){
     dijit.byId("noteNoteStream").set('value',"");
+  }
+  if(dijit.byId("noteStreamKanban") && dijit.byId("noteStreamKanban").get('value')==trim(i18n("textareaEnterText"))){
+	dijit.byId("noteStreamKanban").set('value',"");
   }
 }
 
