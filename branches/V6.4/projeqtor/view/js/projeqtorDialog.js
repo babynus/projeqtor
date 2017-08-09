@@ -1586,7 +1586,42 @@ function removeProductContext(productContextId, refType) {
 	showConfirm(msg, actionOK);
 }
 //END ADD qCazelles - Lang-Context
+//ADD qCazelles - Version compatibility
+//=============================================================================
+//= Product Version Compatibility
+//=============================================================================
+function addVersionCompatibility() {
+if (checkFormChangeInProgress()) {
+	showAlert(i18n('alertOngoingChange'));
+	return;
+}
+var objectClass=dojo.byId("objectClass").value;
+var objectId=dojo.byId("objectId").value;
+var param="&objectClass="+objectClass+"&objectId="+objectId;
+loadDialog('dialogVersionCompatibility', null, true, param, false);
+}
 
+function saveVersionCompatibility() {
+if (dojo.byId('versionCompatibilityListId').value=='') return;
+loadContent("../tool/saveVersionCompatibility.php", "resultDiv", "versionCompatibilityForm", true, 'VersionCompatibility');
+dijit.byId('dialogVersionCompatibility').hide();
+}
+
+function removeVersionCompatibility(versionCompatibilityId, refType, refId, refTypeName) {
+if (checkFormChangeInProgress()) {
+	showAlert(i18n('alertOngoingChange'));
+	return;
+}
+actionOK=function() {
+	loadContent("../tool/removeVersionCompatibility.php?versionCompatibilityId="+versionCompatibilityId, "resultDiv", null, true, 'VersionCompatibility');
+};
+if (!refTypeName) {
+	refTypeName=i18n(refType);
+}
+msg=i18n('confirmDeleteVersionCompatibility', new Array(refType, versionCompatibilityId));
+showConfirm(msg, actionOK);
+}
+//END ADD qCazelles - Version compatibility
 
 //=============================================================================
 //= Product Version Composition
