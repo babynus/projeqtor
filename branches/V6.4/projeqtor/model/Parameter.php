@@ -284,6 +284,7 @@ class Parameter extends SqlElement {
       case 'filterTicketReportPriority' :
       case 'projectRestriction' :
       case 'enablePredefinedActions' :
+      case 'versionCompatibility' :
       case 'paramMailerSendAsCurrentUser' :
       //END ADD qCazelles
         $list=array('NO'=>i18n('displayNo'),
@@ -682,6 +683,7 @@ class Parameter extends SqlElement {
                              	'directAccessToComponentList'=>'list',
                             	'versionNameAutoformat'=>'list',
                              	'versionNameAutoformatSeparator'=>'text',
+                             	'versionCompatibility'=>'list',
                              	'subscriptionAuto'=>'list',     	
                         'tabMail'=>"tab",   
                           'newColumnMailLeft'=>'newColumn',
