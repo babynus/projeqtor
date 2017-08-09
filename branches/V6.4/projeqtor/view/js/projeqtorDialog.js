@@ -4934,7 +4934,7 @@ function hideShowMenu(noRefresh) {
     if (disableSlide || !isHtml5()) {
       duration=0;
       dijit.byId("leftDiv").resize({
-        w : 31
+        w : 34
       });
       setTimeout("dojo.byId('menuBarShow').style.display='block';", 10);
       // dojo.byId('menuBarShow').style.display='block';
@@ -4943,7 +4943,7 @@ function hideShowMenu(noRefresh) {
       dojox.fx.combine([ dojox.fx.animateProperty({
         node : "leftDiv",
         properties : {
-          width : 31
+          width : 34
         },
         duration : duration
       }), dojox.fx.animateProperty({
