@@ -3604,8 +3604,23 @@ function drawBusinessFeatures($obj, $refresh=false) {
 		if (!$print) {
 			echo '<td class="linkData" style="text-align:center;width:5%;white-space:nowrap;">';
 			if ($canUpdate) {
-				echo '  <a onClick="removeBusinessFeature(' . "'" . htmlEncode($bf->id) . "','" . get_class($bf) . "'" . ');" '
-      		.'title="' . i18n('removeBusinessFeature') . '" > '.formatSmallButton('Remove').'</a>';
+			  //ADD qCazelles - Business Feature (Correction) - Ticket #96
+			  echo '  <a onClick="editBusinessFeature(' . htmlEncode($bf->id). ');" '
+          .'title="' . i18n('editBusinessFeature') . '" > '.formatSmallButton('Edit').'</a>';
+        //END ADD qCazelles - Business Feature (Correction) - Ticket #96
+          //CHANGE qCazelles - Business Feature (Correction) - Ticket #96
+        //Old
+				//echo '  <a onClick="removeBusinessFeature(' . "'" . htmlEncode($bf->id) . "','" . get_class($bf) . "'" . ');" '
+      		//.'title="' . i18n('removeBusinessFeature') . '" > '.formatSmallButton('Remove').'</a>';
+      	//New
+      	$crit=array('idBusinessFeature'=>$bf->id);
+      	$ticket=new Ticket();
+      	$listBfTicket=$ticket->getSqlElementsFromCriteria($crit);
+      	if (count($listBfTicket)==0) {
+          echo '  <a onClick="removeBusinessFeature(' . "'" . htmlEncode($bf->id) . "','" . get_class($bf) . "'" . ');" '
+          .'title="' . i18n('removeBusinessFeature') . '" > '.formatSmallButton('Remove').'</a>';
+      	}
+      	//END CHANGE qCazelles - Business Feature (Correction) - Ticket #96
 			}
 			echo '</td>';
 		}
