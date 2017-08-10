@@ -3759,7 +3759,9 @@ function editorInFullScreen() {
     var numEditor = 1;
     while (dojo.byId('ckeditor' + numEditor)) {
       if(typeof editorArray[numEditor] != 'undefined'){
-        if(editorArray[numEditor].toolbar && editorArray[numEditor].toolbar[3].items[1]._.state==1){
+        if(editorArray[numEditor].toolbar && editorArray[numEditor].toolbar[3] 
+        && editorArray[numEditor].toolbar[3].items[1] && editorArray[numEditor].toolbar[3].items[1]._
+        && editorArray[numEditor].toolbar[3].items[1]._.state==1){
           fullScreenTest=true;
           whichFullScreen=numEditor;
         }
