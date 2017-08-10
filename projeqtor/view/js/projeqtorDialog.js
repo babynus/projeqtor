@@ -4939,6 +4939,7 @@ function hideShowMenu(noRefresh) {
   hideShowMenuInProgress=true;
   duration=300;
   if (menuActualStatus == 'visible' || !menuHidden) {
+    saveDataToSession("hideMenu","CLICK",true);
     menuDivSize=dojo.byId("leftDiv").offsetWidth;
     fullWidth=dojo.byId("mainDiv").offsetWidth;
     if (menuDivSize < 2) {
@@ -4982,6 +4983,7 @@ function hideShowMenu(noRefresh) {
     menuActualStatus='hidden'; 
     dojo.byId('hideMenuBarShowButton2').style.display='none';
   } else {
+    saveDataToSession("hideMenu","NO",true);
     dojo.byId('menuBarShow').style.display='none';
     dojo.byId('leftDiv_splitter').style.left='20px';
     dojo.byId('leftDiv_splitter').style.display='block';
