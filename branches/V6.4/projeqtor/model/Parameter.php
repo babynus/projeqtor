@@ -552,7 +552,7 @@ class Parameter extends SqlElement {
                          'sectionIHM'=>'section',
                            "displayHistory"=>"list",
                            "displayChecklist"=>"list",  
-                           "hideMenu"=>"list",
+                           //"hideMenu"=>"list",
                            "switchedMode"=>"list",
                            "paramConfirmQuit"=>"list",
                            "startPage"=>"list",
