@@ -1482,6 +1482,19 @@ function addBusinessFeature() {
 	loadDialog('dialogBusinessFeature', null, true, param, false);
 }
 
+//ADD qCazelles - Business Feature (Correction)
+function editBusinessFeature(businessFeatureId) {
+	if (checkFormChangeInProgress()) {
+		showAlert(i18n('alertOngoingChange'));
+		return;
+	}
+	var objectClass=dojo.byId("objectClass").value;
+	var objectId=dojo.byId("objectId").value;
+	var param="&objectClass="+objectClass+"&objectId="+objectId+"&businessFeatureId="+businessFeatureId;
+	loadDialog('dialogBusinessFeature', null, true, param, false);
+}
+//END ADD qCazelles - Business Feature (Correction)
+
 function saveBusinessFeature() {
 	if (dojo.byId("businessFeatureName").value == "") return;
 	loadContent("../tool/saveBusinessFeature.php", "resultDiv", "businessFeatureForm", true, 'BusinessFeature');
