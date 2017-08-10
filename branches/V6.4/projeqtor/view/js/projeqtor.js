@@ -3865,9 +3865,10 @@ function getExtraRequiredFields() {
         } else if (dojo.byId('cke_' + key)) {
           var ckeKey = 'cke_' + key;
           if (obj[key] == 'required') {
-            dojo.addClass(ckeKey, 'input required');
+            dojo.query('#'+ckeKey).addClass('input required');
+            console.log("Required for "+ckeKey);
           } else if (obj[key] == 'optional') {
-            dojo.removeClass(ckeKey, 'input required');
+            dojo.query('#'+ckeKey).removeClass('input required');  
           }
         }
       }
