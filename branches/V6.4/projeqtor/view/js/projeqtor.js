@@ -3863,12 +3863,11 @@ function getExtraRequiredFields() {
             dojo.removeClass(dijit.byId(keyEditor).domNode, 'required');
           }
         } else if (dojo.byId('cke_' + key)) {
-          var ckeKey = 'cke_' + key;
+          var ckeKey = 'cke_editor_' + key;
           if (obj[key] == 'required') {
-            dojo.query('#'+ckeKey).addClass('input required');
-            console.log("Required for "+ckeKey);
+            dojo.query('.'+ckeKey).addClass('input required','');
           } else if (obj[key] == 'optional') {
-            dojo.query('#'+ckeKey).removeClass('input required');  
+            dojo.query('.'+ckeKey).removeClass('input required','');
           }
         }
       }
@@ -4017,7 +4016,7 @@ function ckEditorReplaceEditor(editorName, numEditor) {
   });
   editorArray[numEditor].on('instanceReady', function(evt) {
     if (dojo.hasClass(evt.editor.name, 'input required')) {
-      dojo.addClass('cke_' + evt.editor.name, 'input required');
+      dojo.query('.cke_editor_'+evt.editor.name).addClass('input required');
     }
   });
   doNotTriggerResize=false;
