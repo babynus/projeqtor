@@ -394,7 +394,8 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       }
       $hideMenu=false;
       if (Parameter::getUserParameter('hideMenu') and Parameter::getUserParameter('hideMenu')!='NO'){
-        echo 'setTimeout("hideShowMenu(true,true);",1);';
+        //echo 'setTimeout("hideShowMenu(true,true);",1);';
+        echo 'hideShowMenu(true,true);';
         $hideMenu=true;
       }
       echo "menuDivSize='".Parameter::getUserParameter('contentPaneLeftDivWidth')."';";
