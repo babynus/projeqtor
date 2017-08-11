@@ -532,8 +532,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
       }
     }
   }
-  debugLog("for extra required fields");
-  debugLog($objType);
   $extraHiddenFields=$obj->getExtraHiddenFields( ($objType)?$objType->id:null );
   $extraReadonlyFields=$obj->getExtraReadonlyFields( ($objType)?$objType->id:null );
   if (!$included) $section='';
@@ -1831,7 +1829,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
         
         if (SqlElement::is_a($obj,'PlanningElement')) {
           $planningModeName='id'.$obj->refType.'PlanningMode';
-          debugLog($objType);
           if ($col==$planningModeName and !$obj->id and $objType) {      
             if (property_exists($objType,$planningModeName)) {
               $obj->$planningModeName=$objType->$planningModeName;
