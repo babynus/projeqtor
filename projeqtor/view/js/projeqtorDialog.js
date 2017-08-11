@@ -6238,11 +6238,11 @@ function assignTeamForMeeting() {
     showAlert(i18n('alertOngoingChange'));
     return;
   }
-  dojo.byId("assignmentId").value=null;
-  dojo.byId("assignmentRefType").value=dojo.byId("objectClass").value;
-  dojo.byId("assignmentRefId").value=dojo.byId("objectId").value;
+  //dojo.byId("assignmentId").value=null;
+  //dojo.byId("assignmentRefType").value=dojo.byId("objectClass").value;
+  //dojo.byId("assignmentRefId").value=dojo.byId("objectId").value;
   actionOK=function() {
-    loadContent("../tool/assignTeamForMeeting.php","resultDiv", "assignmentForm",
+    loadContent("../tool/assignTeamForMeeting.php?assignmentId=&assignmentRefType="+dojo.byId("objectClass").value+"&assignmentRefId="+dojo.byId("objectId").value,"resultDiv", null,
         true, 'assignment');
   };
   msg=i18n('confirmAssignWholeTeam');
