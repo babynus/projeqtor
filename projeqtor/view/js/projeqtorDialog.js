@@ -4925,7 +4925,7 @@ var hideShowTries=0;
 /**
  * Hide or show the Menu (left part of the screen
  */
-function hideShowMenu(noRefresh) {
+function hideShowMenu(noRefresh,noStore) {
   var disableSlide=true;
   if (!dijit.byId("leftDiv")) {
     return;
@@ -4937,10 +4937,10 @@ function hideShowMenu(noRefresh) {
   }
   hideShowTries=0;
   hideShowMenuInProgress=true;
-  duration=300;
+  duration=1;
   if (menuActualStatus == 'visible' || !menuHidden) {
-    saveDataToSession("hideMenu","CLICK",true);
-    menuDivSize=dojo.byId("leftDiv").offsetWidth;
+    saveDataToSession("hideMenu","YES",true);
+    if (!noStore) menuDivSize=dojo.byId("leftDiv").offsetWidth;
     fullWidth=dojo.byId("mainDiv").offsetWidth;
     if (menuDivSize < 2) {
       menuDivSize=dojo.byId("mainDiv").offsetWidth * .2;
@@ -4975,8 +4975,7 @@ function hideShowMenu(noRefresh) {
         duration : duration
       }) ]).play();
       setTimeout("dojo.byId('menuBarShow').style.display='block'", duration);
-      setTimeout("dojo.byId('leftDiv_splitter').style.display='none';",
-          duration);
+      setTimeout("dojo.byId('leftDiv_splitter').style.display='none';",duration);
     }
     dojo.byId("buttonHideMenuLabel").innerHTML=i18n('buttonShowMenu');
     menuHidden=true;
