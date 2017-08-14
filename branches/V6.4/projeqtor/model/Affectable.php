@@ -58,11 +58,11 @@ class Affectable extends SqlElement {
   // Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%"># ${id}</th>
-    <th field="name" width="30%">${realName}</th>
-    <th field="userName" width="30%">${userName}</th>
-    <th field="photo" formatter="thumb32" width="5%">${photo}</th>
-    <th field="isUser" width="5%" formatter="booleanFormatter">${isUser}</th>
-    <th field="isResource" width="5%" formatter="booleanFormatter">${isResource}</th>
+    <th field="name" width="35%">${realName}</th>
+    <th field="userName" width="35%">${userName}</th>
+    <th field="photo" formatter="thumb32" width="15%">${photo}</th>
+    <th field="isUser" width="10%" formatter="booleanFormatter">${isUser}</th>
+    <th field="isResource" width="10%" formatter="booleanFormatter">${isResource}</th>
     ';
   
   
