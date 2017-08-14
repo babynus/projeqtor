@@ -55,6 +55,17 @@ class Affectable extends SqlElement {
   private static $_organizationVisibilityScope;
 // END ADD BY Marc TABARY - 2017-02-20 - ORGANIZATION VISIBILITY  
 
+  // Define the layout that will be used for lists
+  private static $_layout='
+    <th field="id" formatter="numericFormatter" width="5%"># ${id}</th>
+    <th field="name" width="30%">${realName}</th>
+    <th field="userName" width="30%">${userName}</th>
+    <th field="photo" formatter="thumb32" width="5%">${photo}</th>
+    <th field="isUser" width="5%" formatter="booleanFormatter">${isUser}</th>
+    <th field="isResource" width="5%" formatter="booleanFormatter">${isResource}</th>
+    ';
+  
+  
   /**
    * ==========================================================================
    * Constructor
@@ -83,6 +94,14 @@ class Affectable extends SqlElement {
   // ============================================================================**********
   // GET STATIC DATA FUNCTIONS
   // ============================================================================**********
+  
+  /** ==========================================================================
+   * Return the specific layout
+   * @return the layout
+   */
+  protected function getStaticLayout() {
+    return self::$_layout;
+  }
   
   /**
    * ========================================================================
