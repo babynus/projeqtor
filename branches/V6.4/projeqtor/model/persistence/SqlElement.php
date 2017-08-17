@@ -2955,7 +2955,7 @@ abstract class SqlElement {
     }
     
   }
-  private static function getStaticDisplayStyling() {
+  protected function getStaticDisplayStyling() {
     return array();
   }
   /**
