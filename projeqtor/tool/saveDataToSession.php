@@ -29,8 +29,23 @@
  */
 require_once "../tool/projeqtor.php";
 
+$idTest=RequestHandler::getValue('idData');
+debugLog("idData is : " .$idTest);
+
+$val=RequestHandler::getValue('value');
+debugLog("value is : " .$val);
+
+$saveParam=RequestHandler::getValue('saveUserParameter');
+debugLog("saveParam is : " .$saveParam);
+
+$callBack=RequestHandler::getValue('callBack');
+debugLog("callBack is : " .$callBack);
+
+debugLog("url is : saveDataToSession.php?idData=".$idTest."&value=".$val);
+
 if (isset($_REQUEST['idData'])) {
   $id=$_REQUEST['idData'];
+  debugLog('idData = '.$id);
 } else if (isset($_REQUEST['id'])) {
   $id=$_REQUEST['id'];
 } else {
@@ -57,6 +72,7 @@ if (preg_match('/^'.$ValidSessionIDs.'$/', trim($id)) != True){
   }
 }
 if ($id=='disconnect') {
+  debugLog($id ." disconnect is true");
   // can retreive (for debigging purpose) in $_REQUEST['origin'] the source of disconnection : disconnect or quit
   if (isset($_REQUEST['cleanCookieHash']) and $_REQUEST['cleanCookieHash']=='true' and getSessionUser()->id ) {
 		 $user=new User(getSessionUser()->id);
@@ -75,6 +91,7 @@ if ($id=='browserLocaleDateFormat') {
 }
 //gautier
  if ($id=='browserLocaleTimeFormat') {
+   debugLog("browser locale time format = ".$value);
    setSessionValue('browserLocaleTimeFormatJs', $value);
  }
 
@@ -83,7 +100,10 @@ if (sessionValueExists('userParamatersArray')) {
   setSessionTableValue('userParamatersArray', $id, $value);
 }
 
+debugLog("2eme saveDataToSession.php?idData=".$id."&value=".$value);
+
 if (isset($_REQUEST['saveUserParam']) && $_REQUEST['saveUserParam']=='true') {
+  debugLog("saveUserParam : ".$_REQUEST['saveUserParam']);
 	Parameter::storeUserParameter($id, $value);
 }
 ?>
