@@ -495,7 +495,6 @@ function thumb(value, size) {
       var name=tab[2];
       var initial=tab[2].substr(0,1).toUpperCase();
       if (tab.length>=4 && tab[3]!="") initial=tab[3].toUpperCase();
-      console.log(tab);
       if (name){
         result+= '<div style="text-align:left">';
       } else {
