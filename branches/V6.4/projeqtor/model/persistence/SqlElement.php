@@ -5165,11 +5165,31 @@ abstract class SqlElement {
     $this->reference = $prefix . $num . $suffix;
     if (get_class ( $this ) == 'Document' and property_exists ( $this, 'documentReference' )) {
       $fmtDocument = Parameter::getGlobalParameter ( 'documentReferenceFormat' );
-      $docRef = str_replace ( array('{PROJ}', '{TYPE}', '{NUM}', '{NAME}'), array(
-          $projObj->projectCode, 
-          $typeObj->code, 
-          $num, 
-          $this->name), $fmtDocument );
+      $fmtDocumentArray=explode("-", $fmtDocument);
+      $prod = new Product($this->idProduct);
+      $varPrefix = $fmtDocumentArray[0];
+      if ($fmtDocumentArray[0] == "{PROJ}") { 
+        $valueObj =  $projObj->projectCode;
+      } else if ($fmtDocumentArray[0] == "{PROD}"){
+        $valueObj =  $prod->designation;
+      } else if ($fmtDocumentArray[0] == "{PROJ/PROD}"){
+        if($this->idProject){
+          $valueObj = $projObj->projectCode;
+        } else if (!$this->idProject and $this->idProduct){
+          $valueObj = $prod->designation;
+        }
+      } else if ($fmtDocumentArray[0] == "{PROD//PROJ}"){
+        if($this->idProduct){
+          $valueObj = $prod->designation;
+        } else if (!$this->idProduct and $this->idProject){
+          $valueObj = $projObj->projectCode;
+        }
+      }      
+      $docRef = str_replace ( array($varPrefix, '{TYPE}', '{NUM}', '{NAME}'), array(
+            $valueObj, 
+            $typeObj->code, 
+            $num, 
+            $this->name), $fmtDocument ); 
       $this->documentReference = $docRef;
     }
     if ($force) {
