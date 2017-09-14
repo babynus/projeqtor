@@ -48,7 +48,7 @@ if (! isset($comboDetail)) {
 }
 $updateRight=securityGetAccessRightYesNo('menu' . $objectClass, 'update', $obj);
 $canUpdateCreationInfo=false;
-if ($obj->id and $updateRight and (property_exists($obj, 'idle') and $obj->idle==0)) {
+if ($obj->id and $updateRight and (!property_exists($obj, 'idle') or $obj->idle==0)) {
   $user=getSessionUser();
   $habil=SqlElement::getSingleSqlElementFromCriteria('habilitationOther', array('idProfile' => $user->getProfile($obj),'scope' => 'canUpdateCreation'));
   if ($habil) {
