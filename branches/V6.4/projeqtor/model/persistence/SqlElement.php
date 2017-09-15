@@ -4922,6 +4922,33 @@ abstract class SqlElement {
           $msg .= $fieldEnd . $rowEnd;
         }
       }
+    } 
+    if (isset ( $this->_Link ) and is_array ( $this->_Link )) {
+      $msg .= $rowStart . $sectionStart . i18n ( 'sectionLink' ) . $sectionEnd . $rowEnd;
+      $link=$this->_Link;
+      foreach ( $link as $links ) {
+          //debugLog($links);
+          if($links->ref1Id == $this->id and $links->ref1Type == get_class($this)){
+            $refLinkType = $links->ref2Type;
+            $refLinkId = $links->ref2Id;
+          } else if ($links->ref2Id == $this->id and $links->ref2Type == get_class($this)) {
+            $refLinkType = $links->ref1Type;
+            $refLinkId = $links->ref1Id;
+          }
+          $creationDate = $links->creationDate;
+          $msg .= $rowStart . $labelStart;
+          $msg .= $refLinkType;
+          $msg .= '&nbsp'.$refLinkId;
+          $msg .= '<br/>';
+          $msg .= htmlFormatDateTime ( $creationDate );
+          $msg .= $labelEnd . $fieldStart;
+          $nameLink = new $refLinkType($refLinkId);
+          $msg.=htmlEncode($nameLink->name,'print');
+          $text = new Html2Text ( $nameLink->name );
+          $plainText = $text->getText ();
+          $msg .= $plainText;
+          $msg .= $fieldEnd . $rowEnd;
+      }
     }
     $msg .= $tableEnd;
     return $msg;
