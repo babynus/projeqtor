@@ -109,7 +109,7 @@ class StatusMail extends SqlElement {
     if ($this->id) {
       self::$_fieldsAttributes["idMailable"]='readonly';
       $mailable=SqlList::getNameFromId('Mailable', $this->idMailable,false);
-      if ($mailable!="Activity" and $mailable!="TestSesion" and $mailable!="Meeting" and $mailable!="PeriodicMeeting") {
+      if ($mailable!="Activity" and $mailable!="TestSession" and $mailable!="Meeting" and $mailable!="PeriodicMeeting") {
         self::$_fieldsAttributes["mailToAssigned"]='readonly';
       }
     } 
@@ -239,7 +239,7 @@ class StatusMail extends SqlElement {
       $colScript .= '  refreshList("idType","scope", mailable);';
       $colScript .= '  dijit.byId("idEvent").reset();';
       $colScript .= '  refreshList("idEvent","scope", mailable, null);';
-      $colScript .= '  if (mailable=="Activity" || mailable=="TestSesion" || mailable=="Meeting" || mailable=="PeriodicMeeting") {';
+      $colScript .= '  if (mailable=="Activity" || mailable=="TestSession" || mailable=="Meeting" || mailable=="PeriodicMeeting") {';
       $colScript .= '    dijit.byId("mailToAssigned").set("disabled",false);';
       $colScript .= '  } else {';
       $colScript .= '    dijit.byId("mailToAssigned").set("checked",false);';
