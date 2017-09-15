@@ -608,6 +608,12 @@ abstract class SqlElement {
         require $script; // execute code
       }
     }
+    if(property_exists($this,'idProduct') and property_exists($this,'idTargetProductVersion')){
+      if($this->idTargetProductVersion and !$this->idProduct){
+        $getVersion = new Version($this->idTargetProductVersion);
+        $this->idProduct = $getVersion->idProduct;
+      }
+    }
     $result = $this->saveSqlElement ();
     if (! property_exists ( $this, '_onlyCallSpecificSaveFunction' ) or ! $this->_onlyCallSpecificSaveFunction) {
       // PlugIn Management
