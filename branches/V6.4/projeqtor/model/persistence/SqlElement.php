@@ -5226,7 +5226,7 @@ abstract class SqlElement {
     if (count ( $result ) > 0) {
       $line = Sql::fetchLine ( $result );
       $refMax = $line ['ref'];
-      $numMax = substr ( $refMax, strlen ( $prefix ) );
+      $numMax = intval(substr ( $refMax, strlen ( $prefix ) ));
     }
     $numMax += 1;
     if ($fmtNumber and $fmtNumber - strlen ( $numMax ) > 0) {
