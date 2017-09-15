@@ -4925,19 +4925,18 @@ abstract class SqlElement {
     } 
     if (isset ( $this->_Link ) and is_array ( $this->_Link )) {
       $msg .= $rowStart . $sectionStart . i18n ( 'sectionLink' ) . $sectionEnd . $rowEnd;
-      $link=$this->_Link;
-      foreach ( $link as $links ) {
-          //debugLog($links);
-          if($links->ref1Id == $this->id and $links->ref1Type == get_class($this)){
-            $refLinkType = $links->ref2Type;
-            $refLinkId = $links->ref2Id;
-          } else if ($links->ref2Id == $this->id and $links->ref2Type == get_class($this)) {
-            $refLinkType = $links->ref1Type;
-            $refLinkId = $links->ref1Id;
+      $links=$this->_Link;
+      foreach ( $links as $link ) {
+          if($link->ref1Id == $this->id and $link->ref1Type == get_class($this)){
+            $refLinkType = $link->ref2Type;
+            $refLinkId = $link->ref2Id;
+          } else if ($link->ref2Id == $this->id and $link->ref2Type == get_class($this)) {
+            $refLinkType = $link->ref1Type;
+            $refLinkId = $link->ref1Id;
           }
-          $creationDate = $links->creationDate;
+          $creationDate = $link->creationDate;
           $msg .= $rowStart . $labelStart;
-          $userId = $links->idUser;
+          $userId = $link->idUser;
           $userName = SqlList::getNameFromId ( 'User', $userId );
           $msg .= $userName;
           $msg .= '<br/>';
@@ -4947,9 +4946,6 @@ abstract class SqlElement {
           $msg .= '&nbsp;#'.$refLinkId.'</b>&nbsp;-&nbsp;';
           $nameLink = SqlList::getNameFromId($refLinkType,$refLinkId);
           $msg.=htmlEncode($nameLink,'print');
-          //$text = new Html2Text ( $nameLink->name );
-          //$plainText = $text->getText ();
-          //$msg .= $plainText;
           $msg .= $fieldEnd . $rowEnd;
       }
     }
