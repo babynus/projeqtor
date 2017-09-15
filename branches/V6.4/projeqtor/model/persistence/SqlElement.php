@@ -5137,8 +5137,14 @@ abstract class SqlElement {
       if (! $old) {
         $old = new $class ( $this->id );
       }
-      if ($this->$type == $old->$type and $this->idProject == $old->idProject) {
-        return;
+      if (!property_exists($this, 'idProduct')) {
+        if ($this->$type == $old->$type and $this->idProject == $old->idProject) {
+          return;
+        }
+      } else {
+        if ($this->$type == $old->$type and $this->idProject == $old->idProject and $this->idProduct == $old->idProduct) {
+          return;
+        }
       }
       if (in_array ( get_class ( $this ), $objectsWithFixedReference )) {
         return;
@@ -5414,7 +5420,7 @@ abstract class SqlElement {
         $typeElt = reset ( $typeList );
         $type = ($typeElt) ? key ( $typeList ) : null;
       }
-      if (! $planningMode and $type and property_exists ( $typeClassName, $planningModeName )) {
+      if (! $planningMode and $type and SqlElement::class_exists($typeClassName) and property_exists ( $typeClassName, $planningModeName )) {
         $typeObj = new $typeClassName ( $type );
         $planningMode = $typeObj->$planningModeName;
       }
