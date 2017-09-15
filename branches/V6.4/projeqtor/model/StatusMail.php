@@ -229,6 +229,7 @@ class StatusMail extends SqlElement {
       $colScript .= '<script type="dojo/connect" event="onChange" args="evt">';
       $colScript .= '  dijit.byId("idType").set("value",null);';
       $colScript .= '  refreshList("idType","scope", mailableArray[this.value]);';
+      $colScript .= '  refreshList("idEvent","scope", mailableArray[this.value], dijit.byId("idEvent").get("value"));';
       $colScript .= '</script>';
     }
     return $colScript;
