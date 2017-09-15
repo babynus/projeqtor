@@ -4937,16 +4937,19 @@ abstract class SqlElement {
           }
           $creationDate = $links->creationDate;
           $msg .= $rowStart . $labelStart;
-          $msg .= $refLinkType;
-          $msg .= '&nbsp'.$refLinkId;
+          $userId = $links->idUser;
+          $userName = SqlList::getNameFromId ( 'User', $userId );
+          $msg .= $userName;
           $msg .= '<br/>';
           $msg .= htmlFormatDateTime ( $creationDate );
           $msg .= $labelEnd . $fieldStart;
-          $nameLink = new $refLinkType($refLinkId);
-          $msg.=htmlEncode($nameLink->name,'print');
-          $text = new Html2Text ( $nameLink->name );
-          $plainText = $text->getText ();
-          $msg .= $plainText;
+          $msg .= '<b>'.i18n($refLinkType);
+          $msg .= '&nbsp;#'.$refLinkId.'</b>&nbsp;-&nbsp;';
+          $nameLink = SqlList::getNameFromId($refLinkType,$refLinkId);
+          $msg.=htmlEncode($nameLink,'print');
+          //$text = new Html2Text ( $nameLink->name );
+          //$plainText = $text->getText ();
+          //$msg .= $plainText;
           $msg .= $fieldEnd . $rowEnd;
       }
     }
