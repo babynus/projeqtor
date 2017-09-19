@@ -83,6 +83,9 @@
     <copy todir="${deploy.dir}/external/promise">
        <fileset dir="${src.dir}/external/promise"/>
     </copy>
+    <copy todir="${deploy.dir}/external/tbs">
+       <fileset dir="${src.dir}/external/tbs"/>
+    </copy>
   </target>
   
   <target name="copyFiles">
