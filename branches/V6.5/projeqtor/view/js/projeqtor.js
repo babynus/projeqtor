@@ -442,7 +442,7 @@ function saveBrowserLocaleToSession() {
   if (thousandSep == '0') {
     thousandSep = '';
   }
-  saveDataToSession('browserLocaleDecimalPoint', thousandSep);
+  saveDataToSession('browserLocaleThousandSeparator', thousandSep);
   // #2887
 //  dojo
 //      .xhrPost({
