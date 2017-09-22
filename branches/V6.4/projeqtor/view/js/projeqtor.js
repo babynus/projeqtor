@@ -1594,6 +1594,7 @@ function finalizeMessageDisplay(destination, validationType) {
           && dojo.byId(objClass+'PlanningElement_assignedCost').style.textDecoration=="line-through") {
         // No change but assignment changed so that refresh is required
         loadContent("objectDetail.php?", "detailDiv", 'listForm');
+        refreshGrid();
       }
     }
     if (validationType != 'note' && validationType != 'attachment') {
