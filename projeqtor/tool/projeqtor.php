@@ -2134,11 +2134,11 @@ function workTimeDiffDateTime($start, $end) {
   $time = substr ( $start, 11, 5 );
   $hh = substr ( $time, 0, 2 );
   $mn = substr ( $time, 3, 2 );
-  $mnStart = $hh * 60 + $mn;
+  $mnStart = intval($hh) * 60 + intval($mn);
   $time = substr ( $end, 11, 5 );
   $hh = substr ( $time, 0, 2 );
   $mn = substr ( $time, 3, 2 );
-  $mnStop = $hh * 60 + $mn;
+  $mnStop = intval($hh) * 60 + intval($mn);
   $mnFullDay=60*24;
   if ($startDay==$endDay) {
     $days=0;
