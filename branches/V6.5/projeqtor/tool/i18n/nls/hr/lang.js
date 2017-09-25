@@ -2985,5 +2985,7 @@ workValidate: "Stvarni rad odobriti",
 wrongMaintenanceUser: "Nadogradnja se obavlja. <br/> Samo administrator može povezati.",
 xlsxFile: "xlsx datoteku (Excel 2010)",
 year: "godine",
+yearAndmonth: "[year and month]",
+yearAndweek: "[year and week]",
 currentLocaleOfFile: "hr"
 }

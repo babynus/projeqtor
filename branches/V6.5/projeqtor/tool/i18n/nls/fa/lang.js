@@ -2985,5 +2985,7 @@ workValidate: " اعتبار کارهای واقعی",
 wrongMaintenanceUser: "[Upgrade in progress<br/>Only admin user can connect.]",
 xlsxFile: "فایل های اکسل",
 year: "سال",
+yearAndmonth: "[year and month]",
+yearAndweek: "[year and week]",
 currentLocaleOfFile: "fa"
 }

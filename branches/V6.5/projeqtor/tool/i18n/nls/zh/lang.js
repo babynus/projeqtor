@@ -2985,5 +2985,7 @@ workValidate: "[Validate real work]",
 wrongMaintenanceUser: "升级中<br/>只允许管理员连接.",
 xlsxFile: "[xlsx file (Excel 2010)]",
 year: "年份",
+yearAndmonth: "[year and month]",
+yearAndweek: "[year and week]",
 currentLocaleOfFile: "zh"
 }
