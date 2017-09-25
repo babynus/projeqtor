@@ -2985,5 +2985,7 @@ workValidate: "проверить реальную работу",
 wrongMaintenanceUser: "Обновление продолжается<br/>Только администратор может подключиться к системе.",
 xlsxFile: "xlsx файл (Excel 2010)",
 year: "год",
+yearAndmonth: "[year and month]",
+yearAndweek: "[year and week]",
 currentLocaleOfFile: "ru"
 }

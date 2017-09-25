@@ -2985,5 +2985,7 @@ workValidate: "Ist-Arbeit gutheißen",
 wrongMaintenanceUser: "Upgrade wird gerade durchgeführt.<br/>Nur der Administrator kann sich verbinden.",
 xlsxFile: "xlsx Datei (Excel 2010)",
 year: "Jahr",
+yearAndmonth: "[year and month]",
+yearAndweek: "[year and week]",
 currentLocaleOfFile: "de"
 }
