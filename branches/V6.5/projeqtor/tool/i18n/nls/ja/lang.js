@@ -2985,5 +2985,7 @@ workValidate: "実績作業の承認",
 wrongMaintenanceUser: "アップグレードが進行中です<br/>システム管理者ユーザーのみログインできます。",
 xlsxFile: "xlsxファイル(Excel 2010)",
 year: "年",
+yearAndmonth: "[year and month]",
+yearAndweek: "[year and week]",
 currentLocaleOfFile: "ja"
 }

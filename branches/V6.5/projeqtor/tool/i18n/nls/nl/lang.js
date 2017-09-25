@@ -2985,5 +2985,7 @@ workValidate: "Onderhanden werk",
 wrongMaintenanceUser: "Upgrade is actief<br/>Alleen admin gebruikers hebben toegang.",
 xlsxFile: "xlsx bestand (Excel 2010)",
 year: "jaar",
+yearAndmonth: "[year and month]",
+yearAndweek: "[year and week]",
 currentLocaleOfFile: "nl"
 }

@@ -2985,5 +2985,7 @@ workValidate: "Επικύρωση πραγμ. Χρόνου εργασίας",
 wrongMaintenanceUser: "Γίνεται αναβάθμιση<br/>μόνο ο διαχειριστής μπορεί να συνδεθεί.",
 xlsxFile: "αρχείο xlsx (Excel 2010)",
 year: "έτος",
+yearAndmonth: "[year and month]",
+yearAndweek: "[year and week]",
 currentLocaleOfFile: "el"
 }

@@ -2985,5 +2985,7 @@ workValidate: "Затрвердження дійсної роботи",
 wrongMaintenanceUser: "Оновлення в процесі<br/>Тільки користувач з правами адміністратора може підключитися.",
 xlsxFile: "XLSX файл (Excel 2010)",
 year: "рік",
+yearAndmonth: "[year and month]",
+yearAndweek: "[year and week]",
 currentLocaleOfFile: "ua"
 }

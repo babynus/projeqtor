@@ -2985,5 +2985,7 @@ workValidate: "Validare il lavoro reale",
 wrongMaintenanceUser: "Aggiornamento in corso<br/>Solo l'utente admin può connettersi",
 xlsxFile: "xlsx file (Excel 2010)",
 year: "anno",
+yearAndmonth: "[year and month]",
+yearAndweek: "[year and week]",
 currentLocaleOfFile: "it"
 }
