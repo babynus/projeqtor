@@ -4230,13 +4230,9 @@ function saveDataToSession(param, value, saveUserParameter, callBack) {
   var url="../tool/saveDataToSession.php";
   url+="?idData="+param;
   url+="&value="+value;
-  console.log(param);
-  console.log(value);
   if (saveUserParameter && (saveUserParameter==true || saveUserParameter=='true' || saveUserParameter==1)) { 
     url+="&saveUserParam=true";
   }
-  
-  console.log(url);
   dojo.xhrPost({
     url : url,
     load : function(data, args) {
