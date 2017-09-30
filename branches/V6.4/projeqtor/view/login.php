@@ -89,8 +89,7 @@
     dojo.require("dijit.form.FilteringSelect");
     require(["dojo/sniff"], function(sniff) {
       var mobileExists=<?php echo (file_exists("../mobile"))?'true':'false';?>;
-      console.log("mobileExists="+mobileExists);
-      if(mobileExists && (sniff("android") || sniff("ios") || sniff("bb") ) ) {  /// missed : if /mobile file exist
+      if(mobileExists && (sniff("android") || sniff("ios") || sniff("bb") ) ) { 
         dojo.addOnLoad(function(){
           redirectMobile();
         });
