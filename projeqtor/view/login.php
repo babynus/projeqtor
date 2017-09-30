@@ -87,6 +87,15 @@
     dojo.require("dijit.form.Button");
     dojo.require("dijit.form.Form");
     dojo.require("dijit.form.FilteringSelect");
+    require(["dojo/sniff"], function(sniff) {
+      var mobileExists=<?php echo (file_exists("../mobile"))?'true':'false';?>;
+      console.log("mobileExists="+mobileExists);
+      if(mobileExists && (sniff("android") || sniff("ios") || sniff("bb") ) ) {  /// missed : if /mobile file exist
+        dojo.addOnLoad(function(){
+          redirectMobile();
+        });
+      }
+    });
     var fadeLoading=<?php echo getBooleanValueAsString(Parameter::getGlobalParameter('paramFadeLoadingMode'));?>;
     var aesLoginHash="<?php echo md5(session_id());?>";
     var browserLocaleDateFormat="";
