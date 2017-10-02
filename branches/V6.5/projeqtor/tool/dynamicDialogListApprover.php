@@ -32,7 +32,6 @@ $objectId=$_REQUEST['objectId'];
 $approver = new Approver();
 $crit = array('refType'=>"DocumentVersion",'refId'=>$objectId);
 $lstApp = $approver->getSqlElementsFromCriteria($crit,false);
-debugLog($lstApp);
 echo '<table style="width:100%;">';
 echo '<tr>';
 echo '<td class="historyHeader" style="width:25%">' . i18n('colId') . '</td>';
