@@ -1031,7 +1031,7 @@ class PlanningElementBaseline extends PlanningElement {
     }
     return self::$staticWorkVisibility[$profile];
   }
-  public static function getCostVisibiliy($profile) {
+  public static function getCostVisibility($profile) {
     if (! self::$staticCostVisibility or ! isset(self::$staticCostVisibility[$profile]) ) {
       $pe=new PlanningElementBaseline();
       $pe->setVisibility($profile);
