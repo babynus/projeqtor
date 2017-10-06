@@ -1221,14 +1221,14 @@ class PlanningElement extends SqlElement {
   	}
   }
   
-  public static function getWorkVisibiliy($profile) {
+  public static function getWorkVisibility($profile) {
     if (! self::$staticWorkVisibility or ! isset(self::$staticWorkVisibility[$profile]) ) {
       $pe=new PlanningElement();
       $pe->setVisibility($profile);
     }
     return self::$staticWorkVisibility[$profile];
   }
-  public static function getCostVisibiliy($profile) {
+  public static function getCostVisibility($profile) {
     if (! self::$staticCostVisibility or ! isset(self::$staticCostVisibility[$profile]) ) {
       $pe=new PlanningElement();
       $pe->setVisibility($profile);
