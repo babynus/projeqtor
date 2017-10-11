@@ -327,8 +327,7 @@ foreach ($listParam as $param) {
     <?php echo autoOpenFilteringSelect();?>
        style="width: 200px;"
        id="<?php echo $param->name;?>" name="<?php echo $param->name;?>"
-     >
-     
+     >  
        <?php htmlDrawOptionForReference('idProject', $defaultValue, null, false,null,null,$limitToActiveProjects); ?>
        <script type="dojo/connect" event="onChange" args="evt">
           if (dijit.byId('idVersion')) {
