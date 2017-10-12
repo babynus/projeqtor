@@ -1516,7 +1516,6 @@ class PlanningElement extends SqlElement {
       $res=self::copyStructure($item, $newItem, $copyToOrigin,
                           $copyToWithNotes, $copyToWithAttachments, $copyToWithLinks,
                           $copyAssignments, $copyAffectations, ($pe->refType=='Project')?$newItem->id:$toProject,$copySubProjects);
-      debugLog($res);
       if ($res!='OK') {
         return $res;
       }
