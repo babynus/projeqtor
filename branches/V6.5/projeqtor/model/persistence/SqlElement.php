@@ -4440,7 +4440,6 @@ abstract class SqlElement {
                 if ($resource->email and strpos ( $dest, $newDest ) === false) {
                   $dest .= ($dest) ? ', ' : '';
                   $dest .= $newDest;
-                  debugLog($dest);
                 }
               }
             }
