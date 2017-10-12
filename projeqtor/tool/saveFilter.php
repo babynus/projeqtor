@@ -104,8 +104,8 @@ if (! $name) {
     }
     //ADD qCazelles - Dynamic filter - Ticket #78
     $criteria->orOperator=(isset($filterCriteria["orOperator"]))?$filterCriteria["orOperator"]:0;
-    $criteria->isDynamic=isset($filterCriteria["isDynamic"])?$filterCriteria["isDynamic"]:0;
-    if ($filterCriteria["isDynamic"] and $filterCriteria["isDynamic"]=="1") {
+    $criteria->isDynamic=(isset($filterCriteria["isDynamic"]))?$filterCriteria["isDynamic"]:0;
+    if (isset($filterCriteria["isDynamic"]) and $filterCriteria["isDynamic"]=="1") {
 		  $dynamicFilter=1;
     }
     //END ADD qCazelles - Dynamic filter - Ticket #78
