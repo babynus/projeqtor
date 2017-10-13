@@ -353,6 +353,7 @@ class MeetingMain extends SqlElement {
   }
   
   public function save() {
+    $meetingType = new MeetingType($this->idMeetingType);
   	$old=$this->getOld();
   	if (! $this->name) {
       $this->name=SqlList::getNameFromId('MeetingType',$this->idMeetingType) . " " . $this->meetingDate;
@@ -421,6 +422,9 @@ class MeetingMain extends SqlElement {
     or trim($this->idPeriodicMeeting)!=trim($old->idPeriodicMeeting)) {
       $this->MeetingPlanningElement->wbs=null;
       $this->MeetingPlanningElement->wbsSortable=null;
+    }
+    if($this->description==""){
+      $this->description=$meetingType->description;
     }
     return parent::save();
   }
