@@ -1935,7 +1935,7 @@ messageAlerteDeleteTender: "Attention : Ceci va supprimmer l'offre du fournisseu
 messageAlertImputationByOtherBody: "Des imputations ont été saisies pour vous par ${1} pour la semaine ${2}",
 messageAlertImputationByOtherTitle: "Des imputations ont été saisies pour vous",
 messageAlertImputationProjectLeader: "Certaines de vos ressources n'ont pas saisi leur suivi correctement jusqu'au ${1}",
-messageAlertImputationResource: "Vous n'avez pas complètement saisi votre suivi jusqu'au ${1}",
+messageAlertImputationResource: "Vous n'avez pas correctement saisi votre suivi jusqu'au ${1}",
 messageConfirmationNeeded: "Cette opération doit être confirmée",
 messageDateMandatoryWithTime: "Le champ '${1}' doit contenir une date avec l'heure",
 messageDeleted: "Il semble que cet élément ${1} vienne juste d'être supprimé. Veuillez rafraîchir la liste.",
