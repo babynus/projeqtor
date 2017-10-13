@@ -1230,11 +1230,11 @@ class PlanningElement extends SqlElement {
   
   // Preserved old syntax for compatibility with plugins
   public static function getWorkVisibiliy($profile) {
-    return $this->getWorkVisibility($profile);
+    return self::getWorkVisibility($profile);
   }
   // Preserved old syntax for compatibility with plugins
   public static function getCostVisibiliy($profile) {
-    return $this->getCostVisibility($profile);
+    return self::getCostVisibility($profile);
   }
   
   public static function getWorkVisibility($profile) {
