@@ -1,7 +1,7 @@
 <?php
 
 require_once('_securityCheck.php');
-class BusinessFeatureMain extends SqlElement {
+class BusinessFeature extends SqlElement {
 	
 	public $id;
 	public $name;
