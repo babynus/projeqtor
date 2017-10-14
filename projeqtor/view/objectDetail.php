@@ -868,7 +868,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false) {
     	drawBusinessFeatures($obj);
     //END ADD
     //ADD qCazelles - Manage ticket at customer level - Ticket #87
- 	  } else if ($col == '_tickets' and Parameter::getGlobalParameter('manageTicketCustomer') == 'YES') {
+ 	  } else if ($col == '_spe_tickets' and Parameter::getGlobalParameter('manageTicketCustomer') == 'YES') {
  	    drawTicketsList($obj);
  	  //END ADD qCazelles - Manage ticket at customer level - Ticket #87
    	//ADD qCazelles - Version compatibility
