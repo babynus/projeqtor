@@ -56,6 +56,7 @@ class TicketMain extends SqlElement {
   public $idActivity;
   public $idStatus;
   public $idResolution;
+  public $isAregression;
   public $idResource;
   public $idCriticality;
   public $idPriority;
