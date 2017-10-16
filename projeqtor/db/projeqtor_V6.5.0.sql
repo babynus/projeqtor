@@ -45,3 +45,5 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (76, 'month', 'month', 30, 'currentMonth');
 
 ALTER TABLE `${prefix}billline` ADD COLUMN `numberDays` DECIMAL(9,2) UNSIGNED;
+
+ALTER TABLE `${prefix}ticket` ADD COLUMN `isAregression` int(1) unsigned DEFAULT '0';
