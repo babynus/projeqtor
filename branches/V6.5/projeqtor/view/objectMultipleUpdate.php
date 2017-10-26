@@ -312,7 +312,7 @@
               </td>
             </tr>
             <?php }
-      // Responsable
+      // Resolution
             if (isDisplayable($obj,'idResolution')) {?>
             <tr class="detail">
               <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeResolution');?>&nbsp;:&nbsp;</td>
