@@ -5942,10 +5942,13 @@ abstract class SqlElement {
           $sub=SqlElement::toArrayList($value);
           $result[strtolower($subClass)]=$sub;
           if ($subClass=='Link') {
+            foreach (SqlList::getListNotTranslated('Linkable') as $linkable) {
+              $result["link_$linkable"]=array();
+            }
             foreach ($sub as $link) {
               $lnkClass=$link['refType'];
-              if (!isset($result[$lnkClass])) $result[$lnkClass]=array();
-              $result[$lnkClass][]=$link;
+              if (!isset($result["link_$lnkClass"])) $result["link_$lnkClass"]=array();
+              $result["link_$lnkClass"][]=$link;
             }
           }
         }
