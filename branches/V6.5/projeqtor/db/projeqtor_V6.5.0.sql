@@ -78,3 +78,10 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (77, 'idProject', 'projectList', 10, 'currentProject');
 
 ALTER TABLE `${prefix}statusmail` ADD `mailToProjectIncludingParentProject` int(1) unsigned DEFAULT 0;
+
+-- ticket #2906
+INSERT INTO `${prefix}importable` (`id`,`name`,`idle`) VALUES 
+(50,'Checklist',0);
+
+INSERT INTO `${prefix}importable` (`id`,`name`,`idle`) VALUES 
+(51,'Joblist',0);
