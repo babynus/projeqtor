@@ -246,9 +246,7 @@ if(isset($tabDate) ){
   }
 }
 if($element == "both"){
-  
   $tabResource2 = ticket($resource,$idProject,$startDateReport,$endDateReport,$today);
-  
   foreach ($tabResource2 as $idResource=>$valResourceTab){
     $i = 0;
     foreach ($valResourceTab as $idAct=>$value){
@@ -469,7 +467,7 @@ if ($scale=='day' or $scale=='week') {
 }
 $MyData->addPoints($datesResource[$dateIdResource],"myDates");
 $MyData->setAbscissa("myDates");
-$MyData->setAxisName(0,"Indice");
+$MyData->setAxisName(0,i18n("indicatorValue"));
 
 $myPicture = new pImage($graphWidth,$graphHeight,$MyData);
 
@@ -490,7 +488,7 @@ $myPicture->drawLegend(10,10,array("Mode"=>LEGEND_HORIZONTAL, "Family"=>LEGEND_F
     "R"=>255,"G"=>255,"B"=>255,"Alpha"=>100,
     "FontR"=>55,"FontG"=>55,"FontB"=>55,
     "Margin"=>5));
-$myPicture->drawText($graphWidth/2,50,i18n("reportPerformanceIndicator"),array("FontSize"=>14,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
+$myPicture->drawText($graphWidth/2,50,i18n("reportPerformanceIndicatorValue"),array("FontSize"=>14,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
 /* Draw the scale */
 $myPicture->setGraphArea(60,30,$graphWidth-20,$graphHeight-(($scale=='month')?75:75));
 $myPicture->drawFilledRectangle(60,30,$graphWidth-20,$graphHeight-(($scale=='month')?75:75),array("R"=>255,"G"=>255,"B"=>255,"Surrounding"=>-200,"Alpha"=>230));
@@ -535,7 +533,7 @@ foreach ($nb2 as $id=>$val){
 }
 $MyData->addPoints($datesResource[$dateIdResource],"myDates");
 $MyData->setAbscissa("myDates");
-$MyData->setAxisName(0,"Number");
+$MyData->setAxisName(0,i18n("colWorkElementCount"));
 
 /* Je crée l'image qui contiendra mon graphique précédemment crée */
 $myPicture = new pImage($graphWidth,$graphHeight,$MyData);
