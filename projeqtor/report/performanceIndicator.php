@@ -496,7 +496,7 @@ $formatGrid=array("LabelSkip"=>$modulo, "SkippedAxisAlpha"=>(($modulo>9)?0:20), 
     "Mode"=>SCALE_MODE_START0, "GridTicks"=>0,
     "DrawYLines"=>(0), "DrawXLines"=>true,"Pos"=>SCALE_POS_LEFTRIGHT,
     "LabelRotation"=>60, "GridR"=>200,"GridG"=>200,"GridB"=>200);
-$myPicture->drawText($graphWidth/2,20,i18n("reportPerformanceIndice"),array("FontSize"=>14,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
+$myPicture->drawText($graphWidth/2,20,i18n("reportPerformanceIndicatorValue"),array("FontSize"=>14,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
 $myPicture->drawScale($formatGrid);
 $myPicture->Antialias = TRUE;
 
