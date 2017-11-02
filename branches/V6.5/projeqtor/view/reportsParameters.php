@@ -289,8 +289,8 @@ foreach ($listParam as $param) {
        id="<?php echo $param->name;?>" name="<?php echo $param->name;?>"
      >
        <option value="both" <?php echo ($defaultValue=='both')?'SELECTED':'';?> ><?php echo i18n('Ticket&Activity'); ?> </option>
-       <option value="activities" <?php echo ($defaultValue=='activities')?'SELECTED':'';?> ><?php echo i18n('activities'); ?> </option>
-       <option value="tickets" <?php echo ($defaultValue=='tickets')?'SELECTED':'';?> ><?php echo i18n('tickets'); ?> </option>
+       <option value="activities" <?php echo ($defaultValue=='activities')?'SELECTED':'';?> ><?php echo i18n('Activity'); ?> </option>
+       <option value="tickets" <?php echo ($defaultValue=='tickets')?'SELECTED':'';?> ><?php echo i18n('menuTicket'); ?> </option>
      </select>
     </td>
     </tr>
