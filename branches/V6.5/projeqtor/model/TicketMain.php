@@ -354,6 +354,10 @@ class TicketMain extends SqlElement {
   	 or $this->creationDateTime != $old->creationDateTime) {
   	 	$crit=array('idTicketType'=>$this->idTicketType, 'idUrgency'=>$this->idUrgency, 'idle'=>'0','idProject'=>$this->idProject);
   		$delay=SqlElement::getSingleSqlElementFromCriteria('TicketDelay', $crit);
+  		if ($delay and !$delay->id) {
+  		  $crit=array('idTicketType'=>$this->idTicketType, 'idUrgency'=>$this->idUrgency, 'idle'=>'0','idProject'=>'');
+  		  $delay=SqlElement::getSingleSqlElementFromCriteria('TicketDelay', $crit);
+  		}
   		if ($delay and $delay->id) {
   			$unit=new DelayUnit($delay->idDelayUnit);
   			$this->initialDueDateTime=addDelayToDatetime($this->creationDateTime,$delay->value, $unit->code);
