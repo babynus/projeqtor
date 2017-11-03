@@ -448,7 +448,28 @@ if($scale!='day'){
 }
 
 $maxPlotted=30; // max number of point to get plotted lines. If over lines are not plotted/
-  
+ 
+if ($team != ' ') {
+  foreach ($indice2 as $idR=>$ress) {
+    $res=new Resource($idR);
+    if ($res->idTeam!=$team) {
+      unset($indice2[$idR]);
+    }
+  }
+  foreach ($nb2 as $idR=>$ress) {
+    $res=new Resource($idR);
+    if ($res->idTeam!=$team) {
+      unset($nb2[$idR]);
+    }
+  }
+  if (count($nb2) == 0) {
+    echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
+    echo i18n('reportNoData');
+    echo '</div>';
+    exit;
+  }
+}
+
 // GRAPH INDICE
 $MyData = new pData();
 $dateId = "";
@@ -615,8 +636,6 @@ function ticket($resource,$idProject,$startDateReport,$endDateReport,$today){
   }else{
     $queryWhere .= " AND ticket.idResource <> 'NULL' ";
   }
-  //  $queryWhere .= " AND workelement.plannedwork > 0 ";
-  
   if($startDateReport != null ){
     if($endDateReport != null && $endDateReport >= $today ){
       $queryWhere .=  "  AND   (ticket.doneDateTime >= '$startDateReport'";
