@@ -431,7 +431,6 @@ class TicketMain extends SqlElement {
   public function setAttributes() {
     if ($this->delayReadOnly == "1") {
       self::$_fieldsAttributes['initialDueDateTime']='readonly';     
-      self::$_fieldsAttributes['actualDueDateTime']='readonly';
     }  
   }
 }
