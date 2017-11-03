@@ -34,19 +34,28 @@ $crit = array('refType'=>"DocumentVersion",'refId'=>$objectId);
 $lstApp = $approver->getSqlElementsFromCriteria($crit,false);
 echo '<table style="width:100%;">';
 echo '<tr>';
-echo '<td class="historyHeader" style="width:25%">' . i18n('colId') . '</td>';
 echo '<td class="historyHeader" style="width:25%">' . i18n('colName') . '</td>';
 echo '<td class="historyHeader" style="width:25%">' . i18n('colApproved') . '</td>';
 echo '<td class="historyHeader" style="width:25%">' . i18n('colDateApproved') . '</td>';
 echo '</tr>';
 
 foreach ($lstApp as $lstApps){
-  $user = SqlList::getNameFromId('Affectable', $lstApps->idAffectable);
-  echo '<tr><td class="historyData" width="10%">' . $lstApps->id . '</td>';    
-  echo '<td class="historyData" width="14%">' . $user . '</td>';    
-  echo '<td class="historyData" width="23%">' . $lstApps->approved . '</td>';    
+  $user = SqlList::getNameFromId('Affectable', $lstApps->idAffectable); 
+  echo '<td class="historyData" width="14%">' . $user . '</td>';
+  if($lstApps->approved=="1"){
+    echo '<td class="historyData" width="23%" style="text-align:center;"><img src="../view/img/check.png" width="12" height="12" /></td>';  
+  } else {
+    echo '<td class="historyData" width="23%"></td>';
+  }
   echo '<td class="historyData" width="10%">' . $lstApps->approvedDate . '</td></tr>';    
 }
+
+// <td class="reportTableData">'.htmlEncode($bill->name).'</td>';
+//                 if($bill->id){
+//                     echo'<td class="reportTableData"><img src="./img/checkedOK.png" width="12" height="12" /></td>';
+//                 }else{
+//                     echo'<td class="reportTableData"><img src="./img/checkedKO.png" width="12" height="12" /></td>';
+
 
 
 ?>
