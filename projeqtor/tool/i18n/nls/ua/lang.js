@@ -2919,7 +2919,7 @@ thumbCreatorTitle: "створено(ким) '${1}'                             
 thumbUpdateTitle: "оновлюється на '${1}'                                                                                                                       ",
 Thursday: "Четвер",
 Ticket: "Виправлення (Ticket)",
-ticket&Activity: "[Ticket and Activity]",
+ticketAndActivity: "[Ticket and Activity]",
 TicketDelay: "Затримка на виправлення (tickets)",
 TicketSimple: "Виправлення (Ticket)",
 TicketType: "тип Виправлень (Tickets)",
