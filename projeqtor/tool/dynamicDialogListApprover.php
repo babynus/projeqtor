@@ -50,14 +50,6 @@ foreach ($lstApp as $lstApps){
   echo '<td class="historyData" width="10%">' . $lstApps->approvedDate . '</td></tr>';    
 }
 
-// <td class="reportTableData">'.htmlEncode($bill->name).'</td>';
-//                 if($bill->id){
-//                     echo'<td class="reportTableData"><img src="./img/checkedOK.png" width="12" height="12" /></td>';
-//                 }else{
-//                     echo'<td class="reportTableData"><img src="./img/checkedKO.png" width="12" height="12" /></td>';
-
-
-
 ?>
 <table style="margin:auto">
   <tr>
