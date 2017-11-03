@@ -34,7 +34,7 @@ $crit = array('refType'=>"DocumentVersion",'refId'=>$objectId);
 $lstApp = $approver->getSqlElementsFromCriteria($crit,false);
 echo '<table style="width:100%;">';
 echo '<tr>';
-echo '<td class="historyHeader" style="width:25%">' . i18n('colName') . '</td>';
+echo '<td class="historyHeader" style="width:50%">' . i18n('colName') . '</td>';
 echo '<td class="historyHeader" style="width:25%">' . i18n('colApproved') . '</td>';
 echo '<td class="historyHeader" style="width:25%">' . i18n('colDateApproved') . '</td>';
 echo '</tr>';
@@ -59,4 +59,12 @@ foreach ($lstApp as $lstApps){
 
 
 ?>
-
+<table style="margin:auto">
+  <tr>
+    <td>
+      <button class="mediumTextButton" dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogListApprover').hide();">
+        <?php echo ucfirst(i18n("closed"));?>
+      </button>
+    </td>
+  </tr>
+</table>
