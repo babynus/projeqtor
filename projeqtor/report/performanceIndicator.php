@@ -61,7 +61,7 @@ if ($resource!="") {
   $headerParameters.= i18n("Resource") . ' : ' . htmlEncode(SqlList::getNameFromId('Resource',$resource)) . '<br/>';
 }
 include "header.php";
-// Graph
+
 if (! testGraphEnabled()) { return;}
 
 if($idProject == ' ' ){
@@ -103,42 +103,39 @@ $end="";
 if($element == 'activities' or $element =='both'){
   
   $querySelect = " SELECT DISTINCT  assignment.idResource,
-                          assignment.refId as idActivite,
-			                    assignment.plannedWork,
-                          assignment.assignedWork,
-                          assignment.realEndDate ";
+                                    assignment.refId as idActivite,
+          			                    assignment.plannedWork,
+                                    assignment.assignedWork,
+                                    assignment.realEndDate ";
   
   $queryFrom = "   FROM assignment ";
   
   $queryWhere = "  WHERE assignment.refType = 'Activity'";
-  $queryWhere .=  " AND assignment.idProject = ".$idProject;
-  
+  $queryWhere .= " AND  assignment.idProject = ".$idProject;
   if($resource != ' '){
     $queryWhere .= " AND assignment.idResource = ".$resource;
   }else{
     $queryWhere .= " AND assignment.idResource <> 'NULL' ";
   }
-   
   if($startDateReport != null ){
     if($endDateReport != null && $endDateReport >= $today ){
-    $queryWhere .=  "  AND   (assignment.realEndDate >= '$startDateReport'";
-      $queryWhere .= " OR assignment.realEndDate IS NULL )";
+      $queryWhere .=  " AND   (assignment.realEndDate >= '$startDateReport'";
+      $queryWhere .= "         OR assignment.realEndDate IS NULL )";
     }else{
-      $queryWhere .=  "  AND assignment.realEndDate >= '$startDateReport'";
+      $queryWhere .= "  AND assignment.realEndDate >= '$startDateReport'";
     }
   }
-  
   if($endDateReport != null ){
     $queryWhere .=  "  AND ( assignment.realStartDate <= '$endDateReport'";
-    $queryWhere .= " OR assignment.realStartDate IS NULL )";
+    $queryWhere .= "      OR assignment.realStartDate IS NULL )";
  }
 
   $queryOrder = " order by idResource, idActivite ;";
 
   $query=$querySelect.$queryFrom.$queryWhere.$queryOrder;
   $result=Sql::query($query);
+  
   $tabResource = array();
-
   while ($line = Sql::fetchLine($result)) {
      $idResource = $line['idResource'];
      if($line['realEndDate'] == null){
