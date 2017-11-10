@@ -68,6 +68,7 @@ class IndicatorDefinitionPerProject extends SqlElement {
   public $alertToManager;
   public $alertToAssigned;
   public $alertToSubscribers;
+  public $isProject;
   
   public $_isNameTranslatable = true;
 
@@ -99,7 +100,8 @@ class IndicatorDefinitionPerProject extends SqlElement {
                                   "codeWarningDelayUnit"=>"hidden",
                                   "codeAlertDelayUnit"=>"hidden",
                                   "mailToOther"=>"nobr",
-                                  "otherMail"=>""
+                                  "otherMail"=>"",
+                                  "isProject"=>"hidden"
   );  
   
     private static $_colCaptionTransposition = array('idIndicatorable'=>'element',
@@ -309,8 +311,6 @@ class IndicatorDefinitionPerProject extends SqlElement {
     } else {
       $crit.=  " and idProject is null";
     }
-    debugLog($crit);
-    //$elt=SqlElement::getSingleSqlElementFromCriteria('IndicatorDefinition', $crit);
     $elt=$this->getSqlElementsFromCriteria(null, false, $crit);
     if ($elt and $elt->id and $elt->id!=$this->id) {
       $result.='<br/>' . i18n('errorDuplicateIndicator');

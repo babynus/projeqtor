@@ -28,19 +28,11 @@
  * RiskType defines the type of a risk.
  */ 
 require_once('_securityCheck.php');
-class TicketDelayPerProject extends SqlElement {
+class TicketDelayPerProject extends TicketDelay {
 
   // Define the layout that will be used for lists
     
-  public $_sec_Description;
-  public $id;    // redefine $id to specify its visible place
-  public $idTicketType;
-  public $idUrgency;
-  public $idProject;
-  public $value;
-  public $idDelayUnit;
-  public $idle;
-  public $_sec_void;
+
   
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%"># ${id}</th>
@@ -58,7 +50,9 @@ class TicketDelayPerProject extends SqlElement {
                                           "idProject"=>"required",
                                           "value"=>"required, nobr",
                                           "idDelayUnit"=>"required",
-                                          "scope"=>"hidden");
+                                          "scope"=>"hidden",
+                                          "isProject"=>"hidden"
+  );
   
   private static $_databaseCriteria = array('scope'=>'Ticket','isProject'=>'1');
   
@@ -96,34 +90,7 @@ class TicketDelayPerProject extends SqlElement {
     parent::__destruct();
   }
 
-  public function control() {
-    //debugLog($this->idProject);
-    $result="";
-    if (! trim($this->idProject)) {
-      $result.='<br/>' . i18n('messageMandatory',array(i18n('colIdProject')));
-    }
-    //$crit="scope='Ticket' and idType='" . Sql::fmtId($this->idTicketType) . "' and idUrgency='" . Sql::fmtId($this->idUrgency) . "' and id<>'" . Sql::fmtId($this->id) . "'";
-    //debugLog($this->idProject);
-    $crit="scope='Ticket' and idType='" . Sql::fmtId($this->idTicketType) . "' and idUrgency='" . Sql::fmtId($this->idUrgency) . "' and id<>'" . Sql::fmtId($this->id) . "'";     
-    if(property_exists($this, 'idProject') and $this->idProject){
-      $crit.=  " and idProject='" . Sql::fmtId($this->idProject) . "'";
-    } else {
-      $crit.=  " and idProject is null";
-    }
-    //debugLog($crit);
-    $list=$this->getSqlElementsFromCriteria(null, false, $crit);
-    if (count($list)>0) {
-      $result.="<br/>" . i18n('errorDuplicateTicketDelay',null);
-    }
-    $defaultControl=parent::control();
-    if ($defaultControl!='OK') {
-      $result.=$defaultControl;
-    }
-    if ($result=="") {
-      $result='OK';
-    }
-    return $result;    
-  }
+
 // ============================================================================**********
 // GET STATIC DATA FUNCTIONS
 // ============================================================================**********
