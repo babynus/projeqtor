@@ -41,6 +41,7 @@ class TicketDelay extends Delay {
   public $idDelayUnit;
   public $idle;
   public $_sec_void;
+  public $isProject;
   
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%"># ${id}</th>
@@ -57,9 +58,12 @@ class TicketDelay extends Delay {
                                           "idUrgency"=>"required",
                                           "value"=>"required, nobr",
                                           "idDelayUnit"=>"required",
-                                          "scope"=>"hidden");
+                                          "scope"=>"hidden",
+                                          "isProject"=>"hidden",
+                                          "idProject"=>"hidden"
+  );
   
-  private static $_databaseCriteria = array('scope'=>'Ticket','isProject'=>'0');
+  private static $_databaseCriteria = array('scope'=>'Ticket');
   
   private static $_databaseColumnName = array("idTicketType"=>"idType");
   
@@ -83,31 +87,6 @@ class TicketDelay extends Delay {
     parent::__destruct();
   }
 
-  public function control() {
-    //debugLog($this->idProject);
-    $result="";
-    //$crit="scope='Ticket' and idType='" . Sql::fmtId($this->idTicketType) . "' and idUrgency='" . Sql::fmtId($this->idUrgency) . "' and id<>'" . Sql::fmtId($this->id) . "'";
-    //debugLog($this->idProject);
-    $crit="scope='Ticket' and idType='" . Sql::fmtId($this->idTicketType) . "' and idUrgency='" . Sql::fmtId($this->idUrgency) . "' and id<>'" . Sql::fmtId($this->id) . "'";     
-    if(property_exists($this, 'idProject') and $this->idProject){
-      $crit.=  " and idProject='" . Sql::fmtId($this->idProject) . "'";
-    } else {
-      $crit.=  " and idProject is null";
-    }
-    //debugLog($crit);
-    $list=$this->getSqlElementsFromCriteria(null, false, $crit);
-    if (count($list)>0) {
-      $result.="<br/>" . i18n('errorDuplicateTicketDelay',null);
-    }
-    $defaultControl=parent::control();
-    if ($defaultControl!='OK') {
-      $result.=$defaultControl;
-    }
-    if ($result=="") {
-      $result='OK';
-    }
-    return $result;    
-  }
 // ============================================================================**********
 // GET STATIC DATA FUNCTIONS
 // ============================================================================**********

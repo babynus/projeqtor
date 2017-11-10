@@ -68,6 +68,7 @@ class IndicatorDefinition extends SqlElement {
   public $alertToManager;
   public $alertToAssigned;
   public $alertToSubscribers;
+  public $isProject;
   
   public $_isNameTranslatable = true;
 
@@ -98,9 +99,10 @@ class IndicatorDefinition extends SqlElement {
                                   "codeWarningDelayUnit"=>"hidden",
                                   "codeAlertDelayUnit"=>"hidden",
                                   "mailToOther"=>"nobr",
-                                  "otherMail"=>""
+                                  "otherMail"=>"",
+                                  "idProject"=>"hidden",
+                                  "isProject"=>"hidden"
   );  
-    private static $_databaseCriteria = array('isProject'=>'0');
     
     private static $_colCaptionTransposition = array('idIndicatorable'=>'element',
                                                      'idType'=>'type',
@@ -162,15 +164,6 @@ class IndicatorDefinition extends SqlElement {
   protected function getStaticColCaptionTransposition($fld=null) {
     return self::$_colCaptionTransposition;
   }
-  
-  /** ========================================================================
-   * Return the specific database criteria
-   * @return the databaseTableName
-   */
-  protected function getStaticDatabaseCriteria() {
-    return self::$_databaseCriteria;
-  }
-  
   
 // ============================================================================**********
 // MISCELLANOUS FUNCTIONS
@@ -282,20 +275,12 @@ class IndicatorDefinition extends SqlElement {
     if ($this->warningValue!="" and ! trim($this->idWarningDelayUnit) ) {
       $result.='<br/>' . i18n('messageMandatory',array(i18n('colUnit')));
     }    
-    //if (! trim($this->idType)) {
-    //  $result.='<br/>' . i18n('messageMandatory',array(i18n('colType')));
-    //}
     $crit="idIndicatorable='" . trim($this->idIndicatorable) . "' and idIndicator='" . trim($this->idIndicator) . "' and idType='" . trim($this->idType) . "'";
-//     $crit=array('idIndicatorable'=>trim($this->idIndicatorable),
-//                 'idIndicator'=>trim($this->idIndicator),
-//                 'idType'=>trim($this->idType));
     if(property_exists($this, 'idProject') and $this->idProject){
       $crit.=  " and idProject='" . Sql::fmtId($this->idProject) . "'";
     } else {
       $crit.=  " and idProject is null";
     }
-    debugLog($crit);
-    //$elt=SqlElement::getSingleSqlElementFromCriteria('IndicatorDefinition', $crit);
     $elt=$this->getSqlElementsFromCriteria(null, false, $crit);
     if ($elt and $elt->id and $elt->id!=$this->id) {
       $result.='<br/>' . i18n('errorDuplicateIndicator');

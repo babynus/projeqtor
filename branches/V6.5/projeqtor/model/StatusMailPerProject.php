@@ -28,7 +28,7 @@
  * Menu defines list of items to present to users.
  */ 
 require_once('_securityCheck.php');
-class StatusMailPerProject extends  StatusMail {
+class StatusMailPerProject extends StatusMail {
 
   // extends SqlElement, so has $id
   public $_sec_Description;
@@ -52,6 +52,7 @@ class StatusMailPerProject extends  StatusMail {
   public $mailToSubscribers;
   public $mailToOther;
   public $otherMail;
+  public $isProject;
   
   public $_noCopy;
   
@@ -75,12 +76,13 @@ class StatusMailPerProject extends  StatusMail {
     <th field="idle" width="5%" formatter="booleanFormatter" >${idle}</th>
     ';
 
-  private static $_fieldsAttributes=array("idMailable"=>"", 
+    private static $_fieldsAttributes=array("idMailable"=>"", 
                                   "mailToOther"=>"nobr",
                                   "otherMail"=>"",
                                   "idType"=>"nocombo", 
+  		                            "mailToSponsor"=>"hidden,calculated",
                                   "idProject"=>"required",
-  		                            "mailToSponsor"=>"hidden,calculated"
+                                  "isProject"=>"hidden"
   );  
   
   private static $_colCaptionTransposition = array('idStatus'=>'newStatus',
@@ -132,9 +134,6 @@ class StatusMailPerProject extends  StatusMail {
     if (trim($this->idStatus)) {
     	$crit.=" and idStatus='" . Sql::fmtId($this->idStatus) . "'";
     }
-    if (! trim($this->idProject)) {
-      $result.='<br/>' . i18n('messageMandatory',array(i18n('colIdProject')));
-    }
     if (trim($this->idEvent)) {
       $crit.=" and idEvent='" . Sql::fmtId($this->idEvent) . "'";
     }
@@ -143,8 +142,10 @@ class StatusMailPerProject extends  StatusMail {
     } else {
       $crit.=" and idType is null";	
     }
-    if(trim($this->idProject)){
+    if(property_exists($this, 'idProject') and $this->idProject){
       $crit.=  " and idProject='" . Sql::fmtId($this->idProject) . "'";
+    } else {
+      $crit.=  " and idProject is null";
     }
     $crit.=" and id<>'" . Sql::fmtId($this->id) . "'";
     $list=$this->getSqlElementsFromCriteria(null, false, $crit);
@@ -154,7 +155,6 @@ class StatusMailPerProject extends  StatusMail {
     if (!trim($this->idStatus) and !trim($this->idEvent)) {
     	$result.="<br/>" . i18n('messageMandatory',array(i18n('colNewStatus')." ".i18n('colOrOtherEvent')));
     }
-    debugLog($crit);
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
       $result.=$defaultControl;

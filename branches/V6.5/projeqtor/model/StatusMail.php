@@ -52,6 +52,7 @@ class StatusMail extends SqlElement {
   public $mailToSubscribers;
   public $mailToOther;
   public $otherMail;
+  public $isProject;
   
   public $_noCopy;
   
@@ -79,7 +80,9 @@ class StatusMail extends SqlElement {
                                   "mailToOther"=>"nobr",
                                   "otherMail"=>"",
                                   "idType"=>"nocombo", 
-  		                            "mailToSponsor"=>"hidden,calculated"
+  		                            "mailToSponsor"=>"hidden,calculated",
+                                  "idProject"=>"hidden",
+                                  "isProject"=>"hidden"
   );  
   
   private static $_colCaptionTransposition = array('idStatus'=>'newStatus',
@@ -90,8 +93,8 @@ class StatusMail extends SqlElement {
   //private static $_databaseColumnName = array('idResource'=>'idUser');
   private static $_databaseColumnName = array();
   
-  private static $_databaseCriteria = array('isProject'=>'0');
-    
+  private static $_databaseTableName = 'statusmail';
+
    /** ==========================================================================
    * Constructor
    * @param $id the id of the object in the database (null if not stored yet)
@@ -196,11 +199,12 @@ class StatusMail extends SqlElement {
   }
   
   /** ========================================================================
-   * Return the specific database criteria
+   * Return the specific databaseTableName
    * @return the databaseTableName
    */
-  protected function getStaticDatabaseCriteria() {
-    return self::$_databaseCriteria;
+  protected function getStaticDatabaseTableName() {
+    $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
+    return $paramDbPrefix . self::$_databaseTableName;
   }
   
   /** ==========================================================================
