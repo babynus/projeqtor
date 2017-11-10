@@ -28,7 +28,7 @@
  * Menu defines list of items to present to users.
  */ 
 require_once('_securityCheck.php');
-class StatusMail extends SqlElement {
+class StatusMailPerProject extends  StatusMail {
 
   // extends SqlElement, so has $id
   public $_sec_Description;
@@ -79,6 +79,7 @@ class StatusMail extends SqlElement {
                                   "mailToOther"=>"nobr",
                                   "otherMail"=>"",
                                   "idType"=>"nocombo", 
+                                  "idProject"=>"required",
   		                            "mailToSponsor"=>"hidden,calculated"
   );  
   
@@ -90,7 +91,9 @@ class StatusMail extends SqlElement {
   //private static $_databaseColumnName = array('idResource'=>'idUser');
   private static $_databaseColumnName = array();
   
-  private static $_databaseCriteria = array('isProject'=>'0');
+  private static $_databaseTableName = 'statusmail';
+  
+  private static $_databaseCriteria = array('isProject'=>'1');
     
    /** ==========================================================================
    * Constructor
@@ -129,6 +132,9 @@ class StatusMail extends SqlElement {
     if (trim($this->idStatus)) {
     	$crit.=" and idStatus='" . Sql::fmtId($this->idStatus) . "'";
     }
+    if (! trim($this->idProject)) {
+      $result.='<br/>' . i18n('messageMandatory',array(i18n('colIdProject')));
+    }
     if (trim($this->idEvent)) {
       $crit.=" and idEvent='" . Sql::fmtId($this->idEvent) . "'";
     }
@@ -137,10 +143,8 @@ class StatusMail extends SqlElement {
     } else {
       $crit.=" and idType is null";	
     }
-    if(property_exists($this, 'idProject') and $this->idProject){
+    if(trim($this->idProject)){
       $crit.=  " and idProject='" . Sql::fmtId($this->idProject) . "'";
-    } else {
-      $crit.=  " and idProject is null";
     }
     $crit.=" and id<>'" . Sql::fmtId($this->id) . "'";
     $list=$this->getSqlElementsFromCriteria(null, false, $crit);
@@ -150,6 +154,7 @@ class StatusMail extends SqlElement {
     if (!trim($this->idStatus) and !trim($this->idEvent)) {
     	$result.="<br/>" . i18n('messageMandatory',array(i18n('colNewStatus')." ".i18n('colOrOtherEvent')));
     }
+    debugLog($crit);
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
       $result.=$defaultControl;
@@ -201,6 +206,15 @@ class StatusMail extends SqlElement {
    */
   protected function getStaticDatabaseCriteria() {
     return self::$_databaseCriteria;
+  }
+  
+  /** ========================================================================
+   * Return the specific databaseTableName
+   * @return the databaseTableName
+   */
+  protected function getStaticDatabaseTableName() {
+    $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
+    return $paramDbPrefix . self::$_databaseTableName;
   }
   
   /** ==========================================================================
