@@ -28,7 +28,7 @@
  * RiskType defines the type of a risk.
  */ 
 require_once('_securityCheck.php');
-class TicketDelay extends Delay {
+class TicketDelayPerProject extends SqlElement {
 
   // Define the layout that will be used for lists
     
@@ -55,15 +55,28 @@ class TicketDelay extends Delay {
   private static $_fieldsAttributes=array("idTicketType"=>"required",
                                           "idType"=>"hidden", 
                                           "idUrgency"=>"required",
+                                          "idProject"=>"required",
                                           "value"=>"required, nobr",
                                           "idDelayUnit"=>"required",
                                           "scope"=>"hidden");
   
-  private static $_databaseCriteria = array('scope'=>'Ticket','isProject'=>'0');
+  private static $_databaseCriteria = array('scope'=>'Ticket','isProject'=>'1');
   
   private static $_databaseColumnName = array("idTicketType"=>"idType");
   
   private static $_colCaptionTransposition = array('idDelayUnit'=>'unit');
+  
+  private static $_databaseTableName = 'delay';
+  
+  
+  /** ========================================================================
+   * Return the specific databaseTableName
+   * @return the databaseTableName
+   */
+  protected function getStaticDatabaseTableName() {
+    $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
+    return $paramDbPrefix . self::$_databaseTableName;
+  }
   
    /** ==========================================================================
    * Constructor
@@ -86,6 +99,9 @@ class TicketDelay extends Delay {
   public function control() {
     //debugLog($this->idProject);
     $result="";
+    if (! trim($this->idProject)) {
+      $result.='<br/>' . i18n('messageMandatory',array(i18n('colIdProject')));
+    }
     //$crit="scope='Ticket' and idType='" . Sql::fmtId($this->idTicketType) . "' and idUrgency='" . Sql::fmtId($this->idUrgency) . "' and id<>'" . Sql::fmtId($this->id) . "'";
     //debugLog($this->idProject);
     $crit="scope='Ticket' and idType='" . Sql::fmtId($this->idTicketType) . "' and idUrgency='" . Sql::fmtId($this->idUrgency) . "' and id<>'" . Sql::fmtId($this->id) . "'";     
@@ -146,7 +162,6 @@ class TicketDelay extends Delay {
    */
   protected function getStaticColCaptionTransposition($fld=null) {
     return self::$_colCaptionTransposition;
-  }  
-
+  }   
 }
 ?>
