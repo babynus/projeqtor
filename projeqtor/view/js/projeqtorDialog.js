@@ -6341,10 +6341,38 @@ function dialogMailToOtherChange() {
   var show=dijit.byId('dialogMailToOther').get('checked');
   if (show) {
     showField('dialogOtherMail');
+    showField('otherMailDetailButton');
   } else {
     hideField('dialogOtherMail');
+    hideField('otherMailDetailButton');
   }
 }
+
+//gautier #2935
+function findAutoEmail(){
+  var adress=dijit.byId('dialogOtherMail').get('value');
+  dojo.xhrGet({
+    url: '../tool/saveFindEmail.php?&isId=false&adress='+adress ,
+    load: function(data,args) { 
+      var email = data;
+      dijit.byId('dialogOtherMail').set('value', email);
+    }
+  });
+}
+
+function dialogMailIdEmailChange(){
+  var value = dijit.byId('dialogOtherMail').get('value');
+  var id=dijit.byId('dialogMailObjectIdEmail').get('value');
+  id = id+','+value;
+  dojo.xhrGet({
+    url: '../tool/saveFindEmail.php?&isId=true&id='+id,
+    load: function(data,args) { 
+      var email = data;
+      dijit.byId('dialogOtherMail').set('value', email);
+    }
+  });
+}
+//end
 
 function extractEmails(str) {
   var current='';
