@@ -8684,5 +8684,5 @@ function hideUnderMenu(id){
 
 function displayListOfApprover(id){
   var params="&objectId=" + id;
-  loadDialog('dialogListApprover', null, true,params,null,true,"dialogApproverByVersion");
+  loadDialog('dialogListApprover', null, true,params,null,true);
 }
