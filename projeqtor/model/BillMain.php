@@ -429,6 +429,7 @@ class BillMain extends SqlElement {
 	    $result .= '</td></tr></table>';
       return $result;     
     } else if ($item=='paymentsList') {
+      if (!$this->id) return '';
       $pay=new Payment();
       $payList=$pay->getSqlElementsFromCriteria(array('idBill'=>$this->id));
       //$result.='</td><td>';
