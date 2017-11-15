@@ -4021,7 +4021,6 @@ function selectDynamicFilter() {
     selectDynamicFilterContinue();
   };
   loadContent("../tool/addDynamicFilterClause.php" + compUrl, "listDynamicFilterClauses","dialogDynamicFilterForm", false,null,null,null,callBack);
-  setTimeout("selectDynamicFilterContinue();", 1000);
 }
 
 function selectDynamicFilterContinue() {
