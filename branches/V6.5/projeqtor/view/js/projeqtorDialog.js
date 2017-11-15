@@ -4017,11 +4017,9 @@ function selectDynamicFilter() {
 	}
 	
 	var compUrl=(top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
-	var callBack=function(){
-	  selectDynamicFilterContinue();
-	};
-	loadContent("../tool/addDynamicFilterClause.php" + compUrl, "listDynamicFilterClauses","dialogDynamicFilterForm", false,null,null,null,callBack);
-	setTimeout("selectDynamicFilterContinue();", 1000);
+	var callBack=function() {selectDynamicFilterContinue();}
+	loadContent("../tool/addDynamicFilterClause.php" + compUrl, "listDynamicFilterClauses",
+		      "dialogDynamicFilterForm", false,null,null,null,callBack);
 }
 
 function selectDynamicFilterContinue() {
