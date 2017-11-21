@@ -1985,7 +1985,7 @@ messageResourceDouble: "Ви не можете додати&#44; ресурс в
 messageSelectedNotAvailable: "Ви обрали '${1}'.<br/> Ця функція недоступна для цієї версії ProjeQtOr.<br/>Пробачте .:",
 messageTextTooLong: "довжина поля ${1} перевищує ${2} символів",
 MessageType: "Тип Повідомлення",
-messageUpgradeMigration: "[Upgrade in currently running&#44; wait until it ends]",
+messageUpgradeMigration: "[Upgrade in currently running.<br/> Wait until it ends]",
 Milestone: "Репер (віха&#44;етап)",
 MilestoneType: "тип Реперів (віх&#44;етапів)",
 min: "min",
