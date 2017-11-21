@@ -1985,7 +1985,7 @@ messageResourceDouble: "Sie können keine Ressource hinzufügen&#44; die schon v
 messageSelectedNotAvailable: "Sie wählten '${1}'.<br/>Die Funktionalität ist nicht verfügbar in dieser Version von ProjeQtOr.<br/>Tut uns leid …",
 messageTextTooLong: "Länge für ${1} überschreitet ${2} Zeichen",
 MessageType: "Meldungstyp",
-messageUpgradeMigration: "[Upgrade in currently running&#44; wait until it ends]",
+messageUpgradeMigration: "[Upgrade in currently running.<br/> Wait until it ends]",
 Milestone: "Meilenstein",
 MilestoneType: "Meilensteintyp",
 min: "min",
