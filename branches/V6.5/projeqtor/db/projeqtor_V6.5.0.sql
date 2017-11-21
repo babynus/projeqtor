@@ -132,6 +132,8 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('au
 
 ALTER TABLE `${prefix}subscription` ADD `idProject` int(12) unsigned;
 
-UPDATE `${prefix}report` SET `sortOrder`=483 WHERE `id`=4;
+ALTER TABLE `${prefix}projecthistory` ADD COLUMN `validatedWork` DECIMAL(9,5) UNSIGNED;
+ALTER TABLE `${prefix}projecthistory` ADD COLUMN `validatedCost` DECIMAL(11,2) UNSIGNED;
 
+UPDATE `${prefix}report` SET `sortOrder`=483 WHERE `id`=4;
 UPDATE `${prefix}report` SET `sortOrder`=484 WHERE `id`=60;
