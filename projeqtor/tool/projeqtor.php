@@ -1167,7 +1167,11 @@ function sendMail_phpmailer($to, $title, $message, $object = null, $headers = nu
       $heads = explode ( "\r\n", $headers );
       //PHPMailer
       $phpmailer->Body = $message;
-    }
+    }  else {
+      $phpmailer->Body = $message; //
+      $text=new Html2Text($message);
+      $phpmailer->AltBody = $text->getText();
+  }
     if ($references) {
       $phpmailer->addCustomHeader('References', '<' . $references . '.' . $paramMailSender . '>');
     }
