@@ -131,4 +131,4 @@ ALTER TABLE `${prefix}projecthistory` ADD COLUMN `validatedCost` DECIMAL(11,2) U
 UPDATE `${prefix}report` SET `sortOrder`=483 WHERE `id`=4;
 UPDATE `${prefix}report` SET `sortOrder`=484 WHERE `id`=60;
 
-UPDATE `${prefix}reportparameter` SET `defaultValue`=null WHERE `id`=60;
+UPDATE `${prefix}reportparameter` SET `defaultValue`=null WHERE idReport=60 and name='month';
