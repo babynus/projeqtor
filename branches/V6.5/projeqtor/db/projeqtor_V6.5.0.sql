@@ -77,13 +77,6 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 
 ALTER TABLE `${prefix}statusmail` ADD `mailToProjectIncludingParentProject` int(1) unsigned DEFAULT 0;
 
--- ticket #2906
-INSERT INTO `${prefix}importable` (`id`,`name`,`idle`) VALUES 
-(52,'Checklist',0);
-
-INSERT INTO `${prefix}importable` (`id`,`name`,`idle`) VALUES 
-(53,'Joblist',0);
-
 INSERT INTO `${prefix}today` (`idUser`,`scope`,`staticSection`,`idReport`,`sortOrder`,`idle`)
 SELECT id, 'static','Documents',null,6,0 FROM `${prefix}resource` where isUser=1 and idle=0;
 
