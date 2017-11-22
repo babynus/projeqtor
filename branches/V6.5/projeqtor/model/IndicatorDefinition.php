@@ -169,8 +169,10 @@ class IndicatorDefinition extends SqlElement {
 // ============================================================================**********
   
   public function save() {
-    $old=$this->getOld();
-  	$indicatorable=new Indicatorable($this->idIndicatorable);
+    $old=$this->getOld();  
+    if ($this->idProject) $this->isProject=1;
+    else $this->isProject=0;
+    	$indicatorable=new Indicatorable($this->idIndicatorable);
   	$this->nameIndicatorable=$indicatorable->name;
   	$delayUnit=new DelayUnit($this->idWarningDelayUnit);
   	$this->codeWarningDelayUnit=$delayUnit->code;
