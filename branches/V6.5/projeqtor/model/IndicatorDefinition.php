@@ -172,7 +172,7 @@ class IndicatorDefinition extends SqlElement {
     $old=$this->getOld();  
     if ($this->idProject) $this->isProject=1;
     else $this->isProject=0;
-    	$indicatorable=new Indicatorable($this->idIndicatorable);
+    $indicatorable=new Indicatorable($this->idIndicatorable);
   	$this->nameIndicatorable=$indicatorable->name;
   	$delayUnit=new DelayUnit($this->idWarningDelayUnit);
   	$this->codeWarningDelayUnit=$delayUnit->code;
@@ -276,7 +276,12 @@ class IndicatorDefinition extends SqlElement {
     if ($this->warningValue!="" and ! trim($this->idWarningDelayUnit) ) {
       $result.='<br/>' . i18n('messageMandatory',array(i18n('colUnit')));
     }    
-    $crit="idIndicatorable='" . trim($this->idIndicatorable) . "' and idIndicator='" . trim($this->idIndicator) . "' and idType='" . trim($this->idType) . "'";
+    $crit="idIndicatorable='" . trim($this->idIndicatorable) . "' and idIndicator='" . trim($this->idIndicator) . "'";
+    if (trim($this->idType)) {
+      $crit.=" and idType='" . Sql::fmtId($this->idType) . "'";
+    } else {
+      $crit.=" and idType is null";
+    }
     if(property_exists($this, 'idProject') and $this->idProject){
       $crit.=  " and idProject='" . Sql::fmtId($this->idProject) . "'";
     } else {
