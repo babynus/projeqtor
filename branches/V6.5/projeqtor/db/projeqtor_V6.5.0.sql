@@ -30,7 +30,7 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (75, 'endDate', 'date', 50, null),
 (75, 'activityOrTicket', 'element', 60, null),
 (75, 'idTeam', 'teamList', 70, null),
-(75, 'idResource', 'resourceList', 80, 'currentResource');
+(75, 'idResource', 'resourceList', 80, 'null');
 
 INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `idle`, `orientation`, `hasCsv`) VALUES 
 (76, 'reportGlobalWorkPlanningPerResourceWeekly', 2, 'globalWorkPlanningPerResource.php?scale=week', 276, 0, 'L', 0),
