@@ -287,8 +287,9 @@ class IndicatorDefinition extends SqlElement {
     } else {
       $crit.=  " and idProject is null";
     }
-    $elt=$this->getSqlElementsFromCriteria(null, false, $crit);
-    if ($elt and $elt->id and $elt->id!=$this->id) {
+    $crit.=" and id<>'" . Sql::fmtId($this->id) . "'";
+    $list=$this->getSqlElementsFromCriteria(null, false, $crit);
+    if (count($list)>0) {
       $result.='<br/>' . i18n('errorDuplicateIndicator');
     }
     $defaultControl=parent::control();
