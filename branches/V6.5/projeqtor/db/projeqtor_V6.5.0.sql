@@ -25,7 +25,7 @@ INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess
 
 INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES 
 (75, 'idProject', 'projectList', 10, 'currentProject'),
-(75, 'format', 'periodScale', 30, 'day'),
+(75, 'format', 'periodScale', 30, 'week'),
 (75, 'startDate', 'date', 40, null),
 (75, 'endDate', 'date', 50, null),
 (75, 'activityOrTicket', 'element', 60, null),
