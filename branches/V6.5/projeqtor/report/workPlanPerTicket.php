@@ -136,7 +136,10 @@
     $plannedWork = $resultt["plannedWork"];
     $realWork = $resultt['realWork'];
     $leftWork = $resultt['leftWork'];
-    $progress = $realWork / ($realWork + $leftWork) * 100;
+    $progress = 0;
+    if ($plannedWork>0) {
+      $progress = $realWork / ($realWork + $leftWork) * 100;
+    }
     for ($i=1;$i<$resultt["level"];$i++) {
       $tab.='<span class="ganttSep">&nbsp;&nbsp;&nbsp;&nbsp;</span>';
     }
