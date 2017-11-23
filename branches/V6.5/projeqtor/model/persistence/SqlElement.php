@@ -4510,11 +4510,7 @@ abstract class SqlElement {
               } else {
                 $usr = new User ( $aff->idResource );
               }
-              $canRead = false;
-              if ($usr and $usr->id) {
-                $canRead = (securityGetAccessRightYesNo ( 'menu' . get_class ( $this ), 'read', $this, $usr ) == 'YES');
-              }
-              if ($canRead and ! $resource->dontReceiveTeamMails) {
+              if (! $resource->dontReceiveTeamMails) {
                 $newDest = "###" . $resource->email . "###";
                 if ($resource->email and strpos ( $dest, $newDest ) === false) {
                   $dest .= ($dest) ? ', ' : '';
