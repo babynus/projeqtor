@@ -155,7 +155,7 @@
     echo '  <TD class="reportTableData" style="' . $compStyle . '">' . Work::displayWorkWithUnit($plannedWork)  . '</TD>' ;
     echo '  <TD class="reportTableData" style="' . $compStyle . '">' . Work::displayWorkWithUnit($realWork) . '</TD>' ;
     echo '  <TD class="reportTableData" style="' . $compStyle . '">' . Work::displayWorkWithUnit($leftWork) . '</TD>' ;
-    echo '  <TD class="reportTableData" style="' . $compStyle . '">'  . round(percentFormatter($progress)) . '</TD>' ;
+    echo '  <TD class="reportTableData" style="' . $compStyle . '">'  . percentFormatter(round($progress)) . '</TD>' ;
     echo '</TR>';
   }
   echo "</table>";
