@@ -97,10 +97,11 @@ if (array_key_exists("objectClass", $_REQUEST)) {
             </tr>
             <tr>
               <td class="dialogLabel">
-                <label for="dialogMailToProjectIncludingParentProject"><?php echo i18n("colMailToProjectIncludingParentProject") ?>&nbsp;:&nbsp;</label>
+                <label for="dialogMailToProjectIncludingParentProject"><?php echo i18n("globalProjectTeam") ?>&nbsp;:&nbsp;</label>
               </td>
               <td>
-                <div id="dialogMailToProjectIncludingParentProject" name="dialogMailToProjectIncludingParentProject" dojoType="dijit.form.CheckBox" type="checkbox" style="margin-top:14px;"></div>
+                <div id="dialogMailToProjectIncludingParentProject" name="dialogMailToProjectIncludingParentProject" dojoType="dijit.form.CheckBox" type="checkbox"></div>
+                 <?php echo i18n('colMailToProjectIncludingParentProject');?>
               </td>
             </tr>
             <tr>
