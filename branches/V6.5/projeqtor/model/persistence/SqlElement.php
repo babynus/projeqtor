@@ -1906,14 +1906,15 @@ abstract class SqlElement {
   private function copySqlElementTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = null, $toActivity = null, $copyToWithResult = false) {
     $newObj = new $newClass ();
     $newObj->id = null;
-    $typeName = 'id' . $newClass . 'Type';
+    //$typeName = 'id' . $newClass . 'Type';
+    ($newClass=='PeriodicMeeting')?$typeName='idMeetingType':$typeName = 'id' . $newClass . 'Type';
     $newObj->$typeName = $newType;
     if ($setOrigin and property_exists ( $newObj, 'Origin' )) {
       $newObj->Origin->originType = get_class ( $this );
       $newObj->Origin->originId = $this->id;
       $newObj->Origin->refType = $newClass;
     }
-    foreach ( $newObj as $col_name => $col_value ) {
+    foreach ($newObj as $col_name => $col_value ) {
       if (ucfirst ( $col_name ) == $col_name) {
         if ($newObj->$col_name instanceof PlanningElement) {
           $sub = substr ( $col_name, 0, strlen ( $col_name ) - 15 );
@@ -2169,7 +2170,7 @@ abstract class SqlElement {
         $line->refId = $newObj->id;
         $line->save ();
       }
-    }
+    }    
     $newObj->_copyResult = $returnValue;
     return $newObj;
   }
