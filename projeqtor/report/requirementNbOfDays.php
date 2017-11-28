@@ -171,9 +171,11 @@ debugLog($arrDays);
 foreach ( $lstReqNew as $t ) {
   if (strtotime ( $t->creationDateTime ) > $prevDate) {
     $i = ceil ( (strtotime ( $t->creationDateTime ) - $prevDate) / (24 * 60 * 60) );
-    $created [$i] += 1;
-    for($j = $i + 1; $j <= $paramNbOfDays; $j ++) {
-      $created [$j] += 1;
+    if (isset($created [$i])) {
+      $created [$i] += 1;
+      for($j = $i + 1; $j <= $paramNbOfDays; $j ++) {
+        $created [$j] += 1;
+      }
     }
   }
 }
@@ -181,9 +183,11 @@ foreach ( $lstReqNew as $t ) {
 foreach ( $lstReqclosed as $t ) {
   if (strtotime ( $t->idleDate ) > $prevDate) {
     $i = ceil ( (strtotime ( $t->idleDate ) - $prevDate) / (24 * 60 * 60) );
-    $closed [$i] += 1;
-    for($j = $i + 1; $j <= $paramNbOfDays; $j ++) {
-      $closed [$j] += 1;
+    if (isset($created [$i])) {
+      $closed [$i] += 1;
+      for($j = $i + 1; $j <= $paramNbOfDays; $j ++) {
+        $closed [$j] += 1;
+      }
     }
   }
 }
@@ -191,9 +195,11 @@ debugLog($lstReqDone);
 foreach ( $lstReqDone as $t ) {
   if (strtotime ( $t->doneDate ) > $prevDate) {
     $i = ceil ( (strtotime ( $t->doneDate ) - $prevDate) / (24 * 60 * 60) );
-    $done [$i] += 1;
-    for($j = $i + 1; $j <= $paramNbOfDays; $j ++) {
-      $done [$j] += 1;
+    if (isset($created [$i])) {
+      $done [$i] += 1;
+      for($j = $i + 1; $j <= $paramNbOfDays; $j ++) {
+        $done [$j] += 1;
+      }
     }
   }
 }
