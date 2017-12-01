@@ -215,14 +215,19 @@ function drawTableFromObjectList($objectList) {
 				echo ' style="width: 200px;" ';
 				echo ' class="input" ';
 				if ($format=='password') echo ' type="password" ';
-				echo ' value="' .  strip_tags(html_entity_decode($obj->parameterValue)) . '" ';
+				if ($code=='mailerTestMessage') echo 'readonly';
+				echo ' value="' .  htmlEncode($obj->parameterValue) . '" ';
 				echo ' >';
-				echo $obj->getValidationScript($code);
+				if ($code=='mailerTestMessage'){
+				  echo Parameter::getGlobalParameter("mailerTestMessage");
+				} else {
+				  echo $obj->getValidationScript($code);
+				}
 				echo '</div>';
 				//if 
 				if ($code=='mailerTestMessage'){
-				  echo '<div style="float:right;display:block">';
-				  echo '<a onclick="mailerTextEditor();" id="mailerTextEditor">'.formatSmallButton('Add').'</a>';
+				  echo '<div style="float:right;display:inline-block;position:fixed">';
+				  echo '<a onclick="mailerTextEditor();" id="mailerTextEditor" title="' . i18n('helpMailerTestMessageIcon') . '">'.formatSmallButton('Edit').'</a>';
 				  echo '</div>';
 				}
 			}else if ($format=='longtext') {
