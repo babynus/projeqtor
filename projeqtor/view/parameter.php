@@ -215,30 +215,21 @@ function drawTableFromObjectList($objectList) {
 				echo ' style="width: 200px;" ';
 				echo ' class="input" ';
 				if ($format=='password') echo ' type="password" ';
-				if ($code=='mailerTestMessage') echo 'readonly';
 				echo ' value="' .  htmlEncode($obj->parameterValue) . '" ';
 				echo ' >';
-				if ($code=='mailerTestMessage'){
-				  echo Parameter::getGlobalParameter("mailerTestMessage");
-				} else {
-				  echo $obj->getValidationScript($code);
-				}
+				echo $obj->getValidationScript($code);
 				echo '</div>';
-				//if 
-				if ($code=='mailerTestMessage'){
-				  echo '<div style="float:right;display:inline-block;position:fixed">';
-				  echo '<a onclick="mailerTextEditor();" id="mailerTextEditor" title="' . i18n('helpMailerTestMessageIcon') . '">'.formatSmallButton('Edit').'</a>';
+		  }else if ($format=='display') {
+		      echo '<div class="input" style="width:200px;position:relative">';
+				  echo '<input type="hidden" name="'.$code.'" id="'.$code.'" value="'.htmlEncode($obj->parameterValue).'"/>';
+				  echo '<div id="iconMessageMail" name="iconMessageMail" style="display:none;right:0;position:absolute">';
+				  echo '<a onclick="mailerTextEditor();" id="mailerTextEditor" title="' . i18n('editMailerTestMessageIcon') . '">'.formatSmallButton('Edit').'</a>';
 				  echo '</div>';
-				}
-		  }else if ($format=='display' ) { 
-				  echo "<input type='hidden' name='$code' id='$code' value='".htmlEncode($obj->parameterValue)."' onChange=''/>";
-				  echo '<div name="'.$code.'_display" id="'.$code.'_display" >';
+				  echo '<div name="'.$code.'_display" id="'.$code.'_display" onmouseover="displayImageEditMessageMail()" onmouseout="hideImageEditMessageMail()" onclick="mailerTextEditor();" style="word-wrap:break-word;width:200px;display:inline-block"';
+				  echo '</div>';
 				  echo $obj->parameterValue;
-				  //echo $obj->getValidationScript($code);
 				  echo '</div>';
-			    echo '<div style="float:right;display:inline-block;position:fixed">';
-			    echo '<a onclick="mailerTextEditor();" id="mailerTextEditor" title="' . i18n('edit') . '">'.formatSmallButton('Edit').'</a>';
-			    echo '</div>';
+				  echo '</div>';
 			}else if ($format=='longtext') {
 				echo '<textarea dojoType="dijit.form.Textarea" ';
 				echo ' name="' . $code . '" id="' . $code . '"';
