@@ -4567,9 +4567,12 @@ abstract class SqlElement {
         }
       }
       if ($statusMail->mailToSubscribers) {
-        $crit = array('refType' => get_class ( $this ), 'refId' => $this->id);
+        $crit ="(refType='".get_class($this)."' and refId=".Sql::fmtId($this->id).")";
+        if (property_exists($this, 'idProject')) {
+          $crit.=" or (refType='Project' and refId=".Sql::fmtId($this->idProject).")";
+        }
         $sub = new Subscription ();
-        $lstSub = $sub->getSqlElementsFromCriteria ( $crit );
+        $lstSub = $sub->getSqlElementsFromCriteria ( null, null,$crit );
         foreach ( $lstSub as $sub ) {
           $resource = new Affectable ( $sub->idAffectable );
           $newDest = "###" . $resource->email . "###";
