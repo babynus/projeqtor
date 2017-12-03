@@ -161,6 +161,14 @@ INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES 
 (1, 183, 1);
 
+ALTER TABLE `${prefix}ticket` ADD `idAccountable` int(12) DEFAULT NULL;
+UPDATE `${prefix}ticket` SET `idAccountable`=`idResource`;
+
+ALTER TABLE `${prefix}statusmail` ADD `mailToAccountable` int(1) unsigned DEFAULT 0;
+
+ALTER TABLE `${prefix}indicatordefinition` ADD `mailToAccountable` int(1) unsigned DEFAULT 0;
+ALTER TABLE `${prefix}indicatordefinition` ADD `alertToAccountable` int(1) unsigned DEFAULT 0;
+
 -- ============= IGE START ===================
 
 --atrancoso -- ticket #84 curve of requirement open vs closed
