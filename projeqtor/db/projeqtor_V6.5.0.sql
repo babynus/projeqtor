@@ -214,7 +214,7 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (81, 'idProject', 'projectList', 10, 0, 'currentProject', 0), 
 (81, 'idProduct', 'productList', 20, 0, NULL, 0), 
 (81, 'idVersion', 'versionList', 30, 0, NULL, 0), 
-(81, 'month', 'month', 40, 0, 'currentMonth', 0), 
+(81, 'year', 'year', 40, 0, 'currentYear', 0), 
 (81, 'idPriority', 'priorityList', 50, 0, NULL, 0);
 
 -- ticket #84  Report requirement nb of days
