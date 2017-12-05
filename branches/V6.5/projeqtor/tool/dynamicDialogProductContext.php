@@ -59,7 +59,7 @@ $object=new $objectClass($objectId);
             </td>
             <td>
 				<select size="14" id="productContextListId" name="productContextListId[]"
-                <?php if (!$contextId) echo 'multiple'; ?> class="selectList" onchange="enableWidget('dialogProductContextSubmit');"  ondblclick="saveProductContext();" value="">
+                <?php if (!$contextId) echo 'multiple'; ?> class="selectList" onchange="enableWidget('dialogProductContextSubmit');"  ondblclick="if (this.value) saveProductContext();" value="">
                   <?php htmlDrawOptionForReference('id'.$listClass, $listId, $object, true);?>
               </select>
             </td>
