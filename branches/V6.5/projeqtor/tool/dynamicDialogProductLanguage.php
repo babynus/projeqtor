@@ -73,7 +73,7 @@ if ($objectClass == 'ProductVersion' or $objectClass == 'ComponentVersion') {
             </td>
             <td>
 				<select size="14" id="productLanguageListId" name="productLanguageListId[]"
-                <?php if (!$languageId) echo 'multiple'; ?> class="selectList" onchange="enableWidget('dialogProductLanguageSubmit');"  ondblclick="saveProductLanguage();" value="">
+                <?php if (!$languageId) echo 'multiple'; ?> class="selectList" onchange="enableWidget('dialogProductLanguageSubmit');"  ondblclick="if (this.value) saveProductLanguage();" value="">
                   <?php htmlDrawOptionForReference('id'.$listClass, $listId, $object, true, $critFld, $critVals);?>
               </select>
             </td>
