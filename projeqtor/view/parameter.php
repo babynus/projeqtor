@@ -226,10 +226,10 @@ function drawTableFromObjectList($objectList) {
 		        echo '<div class="input" style="width:'.$longTextWidth.';position:relative">';
 		      }
 				  echo '<input type="hidden" name="'.$code.'" id="'.$code.'" value="'.htmlEncode($obj->parameterValue).'"/>';
-				  echo '<div id="iconMessageMail" name="iconMessageMail" style="display:none;right:0;position:absolute;pointer-events:none">';
+				  echo '<div id="'.$code.'_iconMessageMail" name="'.$code.'_iconMessageMail" style="display:none;right:0;position:absolute;pointer-events:none">';
 				  echo '<a onclick="mailerTextEditor('.$code.');" id="mailerTextEditor" title="' . i18n('editMailerTestMessageIcon') . '">'.formatSmallButton('Edit').'</a>';
 				  echo '</div>';
-				  echo '<div name="'.$code.'_display" id="'.$code.'_display" onmouseover="displayImageEditMessageMail()" onmouseout="hideImageEditMessageMail()" onclick="mailerTextEditor('.$code.');"';
+				  echo '<div name="'.$code.'_display" id="'.$code.'_display" onmouseover="displayImageEditMessageMail('.$code.')" onmouseout="hideImageEditMessageMail('.$code.')" onclick="mailerTextEditor('.$code.');"';
 				  if($code=="mailerTestMessage"){
 				   	echo ' style="word-wrap:break-word;width:200px;display:inline-block" ';
 				  } else {
