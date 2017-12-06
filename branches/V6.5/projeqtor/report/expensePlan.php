@@ -260,8 +260,13 @@ foreach($sumProj as $id=>$vals) {
   $projCol = $proje->color;
   $projectColor=$proje->getColor();
   $colorProj=hex2rgb($projectColor);
-  $serieSettings = array("R"=>$colorProj['R'],"G"=>$colorProj['G'],"B"=>$colorProj['B']);
-  $dataSet->setPalette($proj,$serieSettings);
+  if($projCol){
+    $serieSettings = array("R"=>$colorProj['R'],"G"=>$colorProj['G'],"B"=>$colorProj['B']);
+    $dataSet->setPalette($proj,$serieSettings);
+  } else {
+    $serieSettings = array("R"=>$rgbPalette[($nbItem % 12)]['R'],"G"=>$rgbPalette[($nbItem % 12)]['G'],"B"=>$rgbPalette[($nbItem % 12)]['B']);
+    $dataSet->setPalette($proj,$serieSettings);
+  }
   $nbItem++;
 }
 $arrLabel=array();
