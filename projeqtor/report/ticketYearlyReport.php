@@ -402,55 +402,37 @@ $dataSet=new pData;
 $dataSet->addPoints($created,"created");
 $dataSet->setSerieDescription("created",i18n("created"));
 $dataSet->setSerieOnAxis("created",0);
+$serieSettings = array("R"=>200,"G"=>100,"B"=>100);
+$dataSet->setPalette("created",$serieSettings);
 $dataSet->addPoints($done,"done");
 $dataSet->setSerieDescription("done",i18n("done"));
 $dataSet->setSerieOnAxis("done",0);
+$serieSettings = array("R"=>100,"G"=>200,"B"=>100);
+$dataSet->setPalette("done",$serieSettings);
 $dataSet->addPoints($closed,"closed");
 $dataSet->setSerieDescription("closed",i18n("closed"));
 $dataSet->setSerieOnAxis("closed",0);
+$serieSettings = array("R"=>100,"G"=>100,"B"=>200);
+$dataSet->setPalette("closed",$serieSettings);
 
-$dataSet->addPoints($createdSum,"createdSum");
-$dataSet->setSerieOnAxis("createdSum",1);
-$dataSet->addPoints($doneSum,"doneSum");
-$dataSet->setSerieOnAxis("doneSum",1);
-$dataSet->addPoints($closedSum,"closedSum");
-$dataSet->setSerieOnAxis("closedSum",1);
 
 $dataSet->addPoints($arrMonth,"month");
 $dataSet->setAbscissa("month");
-
-// $createdSum=array('','','','','','','','','','','','',$created[13]);
-// $created[13]="";
-// $doneSum=array('','','','','','','','','','','','',$done[13]);
-// $done[13]="";
-// $closedSum=array('','','','','','','','','','','','',$closed[13]);
-// $closed[13]="";
-// $rightScale=array('','','','','','','','','','','','',i18n('sum'));
-// $dataSet->AddPoint($created,"created");
-// $dataSet->SetSerieName(i18n("created"),"created");  
-// $dataSet->AddSerie("created");
-// $dataSet->AddPoint($done,"done");
-// $dataSet->SetSerieName(i18n("done"),"done");  
-// $dataSet->AddSerie("done");
-// $dataSet->AddPoint($closed,"closed");
-// $dataSet->SetSerieName(i18n("closed"),"closed");  
-// $dataSet->AddSerie("closed");
-// $arrMonth[13]="";
-// $dataSet->AddPoint($arrMonth,"months");  
-// $dataSet->SetAbsciseLabelSerie("months"); 
   
 // Initialise the graph  
-$width=700;
-$graphHeight=600;
-$graph = new pImage($width+400, $graphHeight/2,$dataSet);
+$width=1000;
+$legendWidth=100;
+$height=400;
+$legendHeight=100;
+$graph = new pImage($width+$legendWidth, $height,$dataSet);
 
 /* Draw the background */
 $graph->Antialias = FALSE;
 
 /* Add a border to the picture */
 $settings = array("R"=>240, "G"=>240, "B"=>240, "Dash"=>0, "DashR"=>0, "DashG"=>0, "DashB"=>0);
-$graph->drawRoundedRectangle(5,5,$width+400,$graphHeight,5,$settings);
-$graph->drawRectangle(0,0,$width+399,$graphHeight,array("R"=>150,"G"=>150,"B"=>150));
+$graph->drawRoundedRectangle(5,5,$width+$legendWidth-8,$height-5,5,$settings);
+$graph->drawRectangle(0,0,$width+$legendWidth-1,$height-1,array("R"=>150,"G"=>150,"B"=>150));
 
 /* Set the default font */
 $graph->setFontProperties(array("FontName"=>"../external/pChart2/fonts/verdana.ttf","FontSize"=>8));
@@ -463,20 +445,22 @@ $graph->drawLegend($width+30,17,array("Mode"=>LEGEND_VERTICAL, "Family"=>LEGEND_
     "Margin"=>5));
 
 /* Draw the scale */
-$graph->setGraphArea(60,30,$width-20,200);
+$graph->setGraphArea(60,50,$width-20,$height-$legendHeight);
 $formatGrid=array("Mode"=>SCALE_MODE_ADDALL_START0, "GridTicks"=>0,
-    "DrawYLines"=>array(0), "DrawXLines"=>true,"Pos"=>SCALE_POS_LEFTRIGHT,
+    "DrawYLines"=>array(0), "DrawXLines"=>false,"Pos"=>SCALE_POS_LEFTRIGHT,
     "LabelRotation"=>90, "GridR"=>200,"GridG"=>200,"GridB"=>200);
 $graph->drawScale($formatGrid);
 $graph->Antialias = TRUE;
 
-// $dataSet->RemoveSerie("created");
-// $dataSet->RemoveSerie("done");
-// $dataSet->RemoveSerie("closed");
+$dataSet->setAxisPosition(0,AXIS_POSITION_RIGHT);
 
-
-//$dataSet->setAxisPosition(0,AXIS_POSITION_LEFT);
-$dataSet->setAxisPosition(1,AXIS_POSITION_RIGHT);
+$dataSet->addPoints($createdSum,"createdSum");
+$dataSet->setSerieOnAxis("createdSum",0);
+$dataSet->addPoints($doneSum,"doneSum");
+$dataSet->setSerieOnAxis("doneSum",0);
+$dataSet->addPoints($closedSum,"closedSum");
+$dataSet->setSerieOnAxis("closedSum",0);
+$dataSet->setAxisName(0,i18n("sum"));
 
 $formatGrid=array("LabelRotation"=>90,"GridTicks"=>0 ,"AutoAxisLabels"=>FALSE,"Mode"=>SCALE_MODE_ADDALL_START0);
 $graph->drawScale($formatGrid);
@@ -499,55 +483,8 @@ $dataSet->setSerieDrawable("closedSum",true);
 
 $graph->drawBarChart();
 
-//$graph->drawFilledRoundedRectangle(7,7,$width-7,223,5,240,240,240);  
-// $graph->drawRoundedRectangle(5,5,$width-5,225,5,230,230,230);  
-
-// $graph->setColorPalette(0,200,100,100);
-// $graph->setColorPalette(1,100,200,100);
-// $graph->setColorPalette(2,100,100,200);
-// $graph->setColorPalette(3,200,100,100);
-// $graph->setColorPalette(4,100,200,100);
-// $graph->setColorPalette(5,100,100,200);
-// $graph->setGraphArea(40,30,$width-140,200);  
-// $graph->drawGraphArea(252,252,252);  
-// $graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",8);  
-// $graph->drawScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_START0,0,0,0,TRUE,0,1, true);  
-// $graph->drawGrid(5,TRUE,230,230,230,255);  
-  
-// // Draw the line graph  
-// $graph->drawFilledLineGraph($dataSet->GetData(),$dataSet->GetDataDescription(),30,true);
-// $graph->drawLineGraph($dataSet->GetData(),$dataSet->GetDataDescription());  
-// $graph->drawPlotGraph($dataSet->GetData(),$dataSet->GetDataDescription(),3,2,255,255,255);  
-  
-// // Finish the graph  
-// $graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",8);  
-// $graph->drawLegend($width-100,35,$dataSet->GetDataDescription(),240,240,240);  
-// //$graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",10);  
-// //$graph->drawTitle(60,22,"graph",50,50,50,585);
-
-// $graph->clearScale();  
-// $dataSet->RemoveSerie("created");
-// $dataSet->RemoveSerie("done");
-// $dataSet->RemoveSerie("closed"); 
-// $dataSet->RemoveSerie("month"); 
-// $dataSet->AddPoint($createdSum,"createdSum");
-// $dataSet->SetSerieName(i18n("created"),"createdSum");  
-// $dataSet->AddSerie("createdSum");
-// $dataSet->AddPoint($doneSum,"doneSum");
-// $dataSet->SetSerieName(i18n("done"),"doneSum");  
-// $dataSet->AddSerie("doneSum");
-// $dataSet->AddPoint($closedSum,"closedSum");
-// $dataSet->SetSerieName(i18n("closed"),"closedSum");  
-// $dataSet->AddSerie("closedSum");
-// $dataSet->SetYAxisName(i18n("sum"));
-// $graph->setFontProperties("../external/pChart/Fonts/tahoma.ttf",8);
-// $dataSet->AddPoint($rightScale,"scale");  
-// $dataSet->SetAbsciseLabelSerie("scale");  
-// $graph->drawRightScale($dataSet->GetData(),$dataSet->GetDataDescription(),SCALE_START0,0,0,0,true,0,1, true);
-// $graph->drawBarGraph($dataSet->GetData(),$dataSet->GetDataDescription(),true);  
-
 $imgName=getGraphImgName("ticketYearlyReport");
 $graph->render($imgName);
-echo '<table width="95%" align="center"><tr><td align="center">';
+echo '<table width="95%" style="margin-top:20px;" align="center"><tr><td align="center">';
 echo '<img src="' . $imgName . '" />'; 
 echo '</td></tr></table>';

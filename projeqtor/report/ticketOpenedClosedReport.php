@@ -224,8 +224,6 @@ $width=1000;
 $legendWidth=100;
 $height=400;
 $legendHeight=100;
-
-//$graph = new pChart($width,230);
 $graph = new pImage($width+$legendWidth, $height,$dataSet);
 
 /* Draw the background */
@@ -252,7 +250,7 @@ $formatGrid=array("Mode"=>SCALE_MODE_START0, "GridTicks"=>0,
     "DrawYLines"=>array(0), "DrawXLines"=>true,"Pos"=>SCALE_POS_LEFTRIGHT,
     "LabelRotation"=>90, "GridR"=>200,"GridG"=>200,"GridB"=>200);
 $graph->drawScale($formatGrid);
-$graph->drawZoneChart("created", "closed");
+$graph->drawAreaChart();
 $graph->Antialias = TRUE;
 $graph->drawLineChart();
 $graph->drawPlotChart();
