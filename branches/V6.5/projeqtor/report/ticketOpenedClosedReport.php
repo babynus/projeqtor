@@ -206,6 +206,8 @@ for ($i = 1; $i <= $paramNbOfDays; $i++) {
 // pGrapg standard inclusions
 if (! testGraphEnabled()) { return;}
 
+if (checkNoData(array_merge($created,$closed)))  exit;
+
 $dataSet=new pData;
 
 $dataSet->addPoints($created,"created");
@@ -219,17 +221,20 @@ $dataSet->setAbscissa("days");
 
 // Initialise the graph
 $width=1000;
+$legendWidth=100;
+$height=400;
+$legendHeight=100;
 
 //$graph = new pChart($width,230);
-$graph = new pImage($width+100, 280,$dataSet);
+$graph = new pImage($width+$legendWidth, $height,$dataSet);
 
 /* Draw the background */
 $graph->Antialias = FALSE;
 
 /* Add a border to the picture */
 $settings = array("R"=>240, "G"=>240, "B"=>240, "Dash"=>0, "DashR"=>0, "DashG"=>0, "DashB"=>0);
-$graph->drawRoundedRectangle(5,5,$width+400,280,5,$settings);
-$graph->drawRectangle(0,0,$width+400,279,array("R"=>150,"G"=>150,"B"=>150));
+$graph->drawRoundedRectangle(5,5,$width+$legendWidth-8,$height-5,5,$settings);
+$graph->drawRectangle(0,0,$width+$legendWidth-1,$height-1,array("R"=>150,"G"=>150,"B"=>150));
 
 /* Set the default font */
 $graph->setFontProperties(array("FontName"=>"../external/pChart2/fonts/verdana.ttf","FontSize"=>10));
@@ -242,7 +247,7 @@ $graph->drawLegend($width-10,17,array("Mode"=>LEGEND_VERTICAL, "Family"=>LEGEND_
     "Margin"=>5));
 
 /* Draw the scale */
-$graph->setGraphArea(60,50,$width-20,180);
+$graph->setGraphArea(60,50,$width-20,$height-$legendHeight);
 $formatGrid=array("Mode"=>SCALE_MODE_START0, "GridTicks"=>0,
     "DrawYLines"=>array(0), "DrawXLines"=>true,"Pos"=>SCALE_POS_LEFTRIGHT,
     "LabelRotation"=>90, "GridR"=>200,"GridG"=>200,"GridB"=>200);
