@@ -270,6 +270,7 @@ for ($i=1; $i<=13; $i++) {
   $done[$i]=0;
   $closed[$i]=0;
 }
+
 $sumProj=array();
 foreach ($lstTicket as $t) {
   
@@ -315,13 +316,20 @@ foreach ($lstTicket as $t) {
   else if (substr($t->idleDateTime,0,4)==$endYear) {
     $month=intval(substr($t->idleDateTime,5,2));
     $closed[12 - $paramMonth + $month + 1]+=1;
-    $closed[13];
+    $closed[13]+=1;
   }
   //END ADD qCazelles
   //END CHANGE qCazelles - Report fiscal year - Ticket #128
 }
 
 if (checkNoData($lstTicket)) return;
+
+$createdSum=array(VOID,VOID,VOID,VOID,VOID,VOID,VOID,VOID,VOID,VOID,VOID,VOID,$created[13]);
+$created[13]=VOID;
+$doneSum=array(VOID,VOID,VOID,VOID,VOID,VOID,VOID,VOID,VOID,VOID,VOID,VOID,$done[13]);
+$done[13]=VOID;
+$closedSum=array(VOID,VOID,VOID,VOID,VOID,VOID,VOID,VOID,VOID,VOID,VOID,VOID,$closed[13]);
+$closed[13]=VOID;
 
 // title
 echo '<table width="95%" align="center">';
@@ -401,6 +409,13 @@ $dataSet->addPoints($closed,"closed");
 $dataSet->setSerieDescription("closed",i18n("closed"));
 $dataSet->setSerieOnAxis("closed",0);
 
+$dataSet->addPoints($createdSum,"createdSum");
+$dataSet->setSerieOnAxis("createdSum",1);
+$dataSet->addPoints($doneSum,"doneSum");
+$dataSet->setSerieOnAxis("doneSum",1);
+$dataSet->addPoints($closedSum,"closedSum");
+$dataSet->setSerieOnAxis("closedSum",1);
+
 $dataSet->addPoints($arrMonth,"month");
 $dataSet->setAbscissa("month");
 
@@ -454,23 +469,33 @@ $formatGrid=array("Mode"=>SCALE_MODE_ADDALL_START0, "GridTicks"=>0,
     "LabelRotation"=>90, "GridR"=>200,"GridG"=>200,"GridB"=>200);
 $graph->drawScale($formatGrid);
 $graph->Antialias = TRUE;
-$graph->drawZoneChart("created", "closed");
-$graph->drawLineChart();
-$graph->drawPlotChart();
 
 // $dataSet->RemoveSerie("created");
 // $dataSet->RemoveSerie("done");
 // $dataSet->RemoveSerie("closed");
 
 
-$dataSet->setAxisPosition(0,AXIS_POSITION_RIGHT);
-$dataSet->addPoints($sum,"sum");
-$dataSet->setSerieDescription(i18n("sum"),"sum");
-$dataSet->setSerieOnAxis("sum",0);
-$dataSet->setAxisName(0,i18n("sum"));
+//$dataSet->setAxisPosition(0,AXIS_POSITION_LEFT);
+$dataSet->setAxisPosition(1,AXIS_POSITION_RIGHT);
 
 $formatGrid=array("LabelRotation"=>90,"GridTicks"=>0 ,"AutoAxisLabels"=>FALSE,"Mode"=>SCALE_MODE_ADDALL_START0);
 $graph->drawScale($formatGrid);
+
+$dataSet->setSerieDrawable("created",true);
+$dataSet->setSerieDrawable("done",true);
+$dataSet->setSerieDrawable("closed",true);
+$dataSet->setSerieDrawable("createdSum",false);
+$dataSet->setSerieDrawable("doneSum",false);
+$dataSet->setSerieDrawable("closedSum",false);
+//$graph->drawZoneChart("created", "done");
+$graph->drawAreaChart();
+$graph->drawPlotChart();
+$dataSet->setSerieDrawable("created",false);
+$dataSet->setSerieDrawable("done",false);
+$dataSet->setSerieDrawable("closed",false);
+$dataSet->setSerieDrawable("createdSum",true);
+$dataSet->setSerieDrawable("doneSum",true);
+$dataSet->setSerieDrawable("closedSum",true);
 
 $graph->drawBarChart();
 
