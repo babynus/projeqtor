@@ -342,7 +342,7 @@ $graph->drawLegend($width+30,17,array("Mode"=>LEGEND_VERTICAL, "Family"=>LEGEND_
     "Margin"=>5));
 
 /* Draw the scale */
-$graph->setGraphArea(60,50,$width-20,250);
+$graph->setGraphArea(60,30,$width-20,200);
 $formatGrid=array("Mode"=>SCALE_MODE_ADDALL_START0, "GridTicks"=>0,
     "DrawYLines"=>array(0), "DrawXLines"=>true,"Pos"=>SCALE_POS_LEFTRIGHT,
     "LabelRotation"=>90, "GridR"=>200,"GridG"=>200,"GridB"=>200);
