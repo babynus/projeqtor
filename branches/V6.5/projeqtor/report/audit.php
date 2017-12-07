@@ -141,7 +141,7 @@ $graph->drawPlotChart();
 
 $imgName=getGraphImgName("auditNb");
 $graph->render($imgName);
-echo '<table width="95%" align="center"><tr><td align="center">';
+echo '<table width="95%" style="margin-top:35px" align="center"><tr><td align="center">';
 echo '<img src="' . $imgName . '" />';
 echo '</td></tr></table>';
 echo '<br/>';
@@ -174,6 +174,9 @@ $graph2->drawRectangle(0,0,$width+399,$graphHeight,array("R"=>150,"G"=>150,"B"=>
 $graph2->setFontProperties(array("FontName"=>"../external/pChart2/fonts/verdana.ttf","FontSize"=>10));
 
 /* title */
+// A FAIRE 
+$graph2->drawText(500,22,i18n('connectionsDurationPerDay'),array("FontSize"=>10,"Align"=>TEXT_ALIGN_BOTTOMMIDDLE));
+//////////
 $graph2->setFontProperties(array("FontName"=>"../external/pChart2/fonts/verdana.ttf","FontSize"=>8,"R"=>100,"G"=>100,"B"=>100));
 $graph2->drawLegend($width-10,17,array("Mode"=>LEGEND_VERTICAL, "Family"=>LEGEND_FAMILY_BOX ,
     "R"=>255,"G"=>255,"B"=>255,"Alpha"=>100,
@@ -193,7 +196,7 @@ $graph2->drawPlotChart();
 $imgName=getGraphImgName("auditNb");
 $graph2->render($imgName);
 
-echo '<table width="95%" align="center"><tr><td align="center">';
+echo '<table width="95%" style="margin-top:35px" align="center"><tr><td align="center">';
 echo '<img src="' . $imgName . '" />'; 
 echo '</td></tr></table>';
 echo '<br/>';
