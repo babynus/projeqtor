@@ -159,6 +159,8 @@ $dataSet2->setSerieOnAxis('mean',0);
 $dataSet2->addPoints($min,'min');
 $dataSet2->setSerieDescription(i18n("min"),"min");
 $dataSet2->setSerieOnAxis('min',0);
+$dataSet2->setAxisName(0, "");
+$dataSet2->setAxisDisplay(0,AXIS_FORMAT_TIME);
 $dataSet2->addPoints($days,'SerieX');
 $dataSet2->setAbscissa("SerieX");
 
@@ -190,7 +192,7 @@ $graph2->drawLegend($width+30,17,array("Mode"=>LEGEND_VERTICAL, "Family"=>LEGEND
     "Margin"=>5));
 
 /* Draw the scale */
-$graph2->setGraphArea(60,50,$width-20,$height-$legendHeight);
+$graph2->setGraphArea(70,50,$width-20,$height-$legendHeight);
 $formatGrid=array("Mode"=>SCALE_MODE_ADDALL_START0, "GridTicks"=>0,
     "DrawYLines"=>array(0), "DrawXLines"=>false,"Pos"=>SCALE_POS_LEFTRIGHT,
     "LabelRotation"=>90, "GridR"=>200,"GridG"=>200,"GridB"=>200);
