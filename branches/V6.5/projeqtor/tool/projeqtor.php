@@ -1795,8 +1795,9 @@ function securityGetAccessRightYesNo($menuName, $accessType, $obj = null, $user 
   $class=substr ( $menuName, 4 );
   global $remoteDb;
   if (isset($remoteDb) and $remoteDb==true) {
-    debugLog("securityGetAccessRightYesNo ( menuName=$menuName, accessType=$accessType, obj=".debugDisplayObj($obj).", user=".debugDisplayObj($user).")");
-    return "YES"; // debugLog("To remove");
+    if ($class=='Parameter' or $class=='History' or $class=='TranslationCode' or $class=='TranslationValue') {
+      return "YES";
+    }
   }
   if (! SqlElement::class_exists ($class ) and $obj) {
     $class=get_class($obj);
