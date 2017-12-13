@@ -3684,7 +3684,7 @@ function drawBusinessFeatures($obj, $refresh=false) {
 	$crit=array();
 	$crit['idProduct']=$obj->id;
 	$pcs=new BusinessFeature();
-	$list=$pcs->getSqlElementsFromCriteria($crit);
+	$list=$pcs->getSqlElementsFromCriteria($crit, null, null, 'name asc');
 	global $cr, $print, $user, $comboDetail;
 	if ($comboDetail) {
 		return;
