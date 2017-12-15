@@ -990,12 +990,13 @@ abstract class SqlElement {
   }
 
   private function dispatchClose() {
+    global $mode;
     if (property_exists ( $this, 'idle' ) and $this->idle) {
       $relationShip = self::$_closeRelationShip;
       if (array_key_exists ( get_class ( $this ), $relationShip )) {
         $objects = '';
         $error = false;
-        foreach ( $relationShip [get_class ( $this )] as $object => $mode ) {
+        foreach ( $relationShip [get_class ( $this )] as $object=>$val ) {
           if (($mode == 'cascade' or $mode == 'confirm') and property_exists ( $object, 'idle' )) {
             $where = null;
             $obj = new $object ();
@@ -1017,6 +1018,8 @@ abstract class SqlElement {
               $where = "idle=0 and ((ref1Type='" . get_class ( $this ) . "' and ref1Id=" . Sql::fmtId ( $this->id ) . ")" . " or (ref2Type='" . get_class ( $this ) . "' and ref2Id=" . Sql::fmtId ( $this->id ) . "))";
             }
             $list = $obj->getSqlElementsFromCriteria ( $crit, false, $where );
+            //debugLog($list);
+            //debugLog("===================");
             foreach ( $list as $o ) {
               $o->idle = 1;
               if (property_exists ( $o, 'idleDate' ) and ! trim ( $o->idleDate )) {
@@ -3904,7 +3907,7 @@ abstract class SqlElement {
    */
   public function control() {
     // traceLog('control (for ' . get_class($this) . ' #' . $this->id . ')');
-    global $cronnedScript, $loginSave;
+    global $cronnedScript, $loginSave, $mode, $canForceClose;
     $user = getSessionUser ();
     $arrayExtraRequired = $this->getExtraRequiredFields ();
     $result = "";
@@ -4099,7 +4102,21 @@ abstract class SqlElement {
       if (array_key_exists ( get_class ( $this ), $relationShip )) {
         $objects = '';
         $error = false;
-        foreach ( $relationShip [get_class ( $this )] as $object => $mode ) {
+        
+        //ajout de mehdi
+        //ticket #1754
+        $canForceClose = false;
+        $user = getSessionUser ();
+        $crit = array('idProfile' => $user->getProfile ( $this ), 'scope' => 'canForceClose');
+        $habil = SqlElement::getSingleSqlElementFromCriteria ( 'HabilitationOther', $crit );
+        if ($habil and $habil->id and $habil->rightAccess == '1') {
+        	$canForceClose = true;
+        }
+        //end
+        foreach($relationShip[get_class($this)] as $object => $mode) {
+          if($canForceClose){
+            $mode = "confirm";
+          }
           if (($mode == 'control' or $mode == 'confirm') and property_exists ( $object, 'idle' )) {
             $where = null;
             $obj = new $object ();
@@ -4124,8 +4141,11 @@ abstract class SqlElement {
             if ($nb > 0) {
               if ($mode == "control")
                 $error = true;
-              if ($mode == "confirm" and self::isSaveConfirmed ()) {
+              if ($mode == "confirm" and self::isSaveConfirmed()) {
                 // If mode confirm and message of confirmation occured : OK
+                //$mode = "cascade";
+                //debugLog($mode);
+                //$this->dispatchClose();
               } else {
                 $objects .= "<br/>&nbsp;-&nbsp;" . i18n ( $object ) . " (" . $nb . ")";
                 if ($nb < 10) {
