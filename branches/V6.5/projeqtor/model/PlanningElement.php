@@ -252,6 +252,7 @@ class PlanningElement extends SqlElement {
    * @return the result of parent::save() function
    */
   public function save() {
+    global $canForceClose;
   	// Get old element (stored in database) : must be fetched before saving
     $old=new PlanningElement($this->id);
     if (! $this->idProject) {
