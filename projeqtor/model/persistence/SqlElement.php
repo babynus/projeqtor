@@ -1018,8 +1018,6 @@ abstract class SqlElement {
               $where = "idle=0 and ((ref1Type='" . get_class ( $this ) . "' and ref1Id=" . Sql::fmtId ( $this->id ) . ")" . " or (ref2Type='" . get_class ( $this ) . "' and ref2Id=" . Sql::fmtId ( $this->id ) . "))";
             }
             $list = $obj->getSqlElementsFromCriteria ( $crit, false, $where );
-            //debugLog($list);
-            //debugLog("===================");
             foreach ( $list as $o ) {
               $o->idle = 1;
               if (property_exists ( $o, 'idleDate' ) and ! trim ( $o->idleDate )) {
@@ -4102,7 +4100,6 @@ abstract class SqlElement {
       if (array_key_exists ( get_class ( $this ), $relationShip )) {
         $objects = '';
         $error = false;
-        
         //ajout de mehdi
         //ticket #1754
         $canForceClose = false;
@@ -4143,9 +4140,6 @@ abstract class SqlElement {
                 $error = true;
               if ($mode == "confirm" and self::isSaveConfirmed()) {
                 // If mode confirm and message of confirmation occured : OK
-                //$mode = "cascade";
-                //debugLog($mode);
-                //$this->dispatchClose();
               } else {
                 $objects .= "<br/>&nbsp;-&nbsp;" . i18n ( $object ) . " (" . $nb . ")";
                 if ($nb < 10) {
