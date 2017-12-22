@@ -27,7 +27,7 @@ $pdfNamePrefix="ProjeQtOr - ";
 $debugQuery=false;                 // Debug all queries : trace Query and running time for each query
 $debugJsonQuery=false;             // Trace only JsonQuery queries  (retrieving lists)
 $debugPerf=true;                   // Add some timestamps and execution time at all debug lines
-$debugTraceUpdates=true;           // Will add trace on each save() or delete(), except for History and Audit
+$debugTraceUpdates=false;           // Will add trace on each save() or delete(), except for History and Audit
 $debugTraceHistory=false;           // Will add trace on each save() or delete() of History and Audit (only if $debugTraceUpdates=true;)
 $debugReport=true;                 // Displays report file name on report header
 $i18nNocache=true;                 // Will not cache i18n table, so that new values are automatically displayed without needing disconnection
