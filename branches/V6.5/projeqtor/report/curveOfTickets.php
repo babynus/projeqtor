@@ -67,7 +67,7 @@ if ($paramProduct != "") {
   $where .= " and idProduct=" . Sql::fmtId ( $paramProduct );
 }
 if ($paramVersion != "") {
-  $where .= " and idVersion=" . Sql::fmtId ( $paramVersion ) ;
+  $where .= " and idTargetProductVersion=" . Sql::fmtId ( $paramVersion ) ;
 }
 if ($paramPriority != "") {
   $where .= " and idPriority=" . Sql::fmtId ( $paramPriority );
@@ -78,18 +78,46 @@ $endDate = '';
 if ($paramVersion != '') {
   $pe = new Version ();
   $pe = SqlElement::getSingleSqlElementFromCriteria ( 'Version', array('id' => $paramVersion) );
-  if ((($pe->initialStartDate != '') or ($pe->plannedStartDate != '')) and (($pe->initialEndDate != '') or ($pe->plannedEndDate != ''))) {
+  if ( $pe->initialStartDate != '' or $pe->plannedStartDate != '' or $pe->realStartDate != '' ) {
     if ($pe->initialStartDate != '') {
       $startDate = $pe->initialStartDate;
-    } else {
+    } else if ($pe->plannedStartDate != '') {
       $startDate = $pe->plannedStartDate;
+    } else {
+      $startDate = $pe->realStartDate;
     }
+  } 
+  if ( $pe->initialEndDate != '' or $pe->plannedEndDate != '' or $pe->realEndDate
+    or $pe->initialEisDate != '' or $pe->plannedEisDate != '' or $pe->realEisDate ) {
     if ($pe->initialEndDate != '') {
       $endDate = $pe->initialEndDate;
-    } else {
+    } else if ($pe->plannedEndDate != ''){
       $endDate = $pe->plannedEndDate;
+    } else if ($pe->realEndDate != ''){
+      $endDate = $pe->realEndDate;
+    } else if ($pe->initialEisDate != ''){
+      $endDate = $pe->initialEisDate;
+    } else if ($pe->plannedEisDate != ''){
+      $endDate = $pe->plannedEisDate;
+    } else if ($pe->realEisDate != ''){
+      $endDate = $pe->realEisDate;
+    } 
+  } 
+  if (!$startDate) {
+    $tkt=new Ticket();
+    $min=$tkt->getMinValueFromCriteria('doneDateTime',array('idTargetProductVersion'=>$paramVersion),null,true);
+    if ($min) {
+      $startDate=addDaysToDate(substr($min,0,10),-1);
     }
-  } else {
+  }
+  if (!$endDate) {
+    $tkt=new Ticket();
+    $min=$tkt->getMaxValueFromCriteria('doneDateTime',array('idTargetProductVersion'=>$paramVersion),null);
+    if ($min) {
+      $endDate=substr($min,0,10);
+    }
+  }
+  if (!$startDate or !$endDate) {
     echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
     echo i18n ( 'wrongDate' );
     echo '</div>';
@@ -223,14 +251,7 @@ $graph = new pImage ( $width, $height ,$dataSet);
 $graph->Antialias = FALSE;
 
 $graph->setFontProperties(array("FontName"=>"../external/pChart2/fonts/verdana.ttf","FontSize"=>8,"R"=>100,"G"=>100,"B"=>100));
-//$graph->setColorPalette ( 0, 200, 100, 100 );
-//$graph->setColorPalette ( 1, 100, 200, 100 );
-//$graph->setColorPalette ( 2, 100, 100, 200 );
-//$graph->setColorPalette ( 3, 200, 100, 100 );
-//$graph->setColorPalette ( 4, 100, 200, 100 );
-//$graph->setColorPalette ( 5, 100, 100, 200 );
 $graph->setGraphArea ( 40, 30, $width - 140, $height-80 );
-//$graph->drawGraphArea ( 252, 252, 252 );
 $graph->setFontProperties(array("FontName"=>"../external/pChart2/fonts/verdana.ttf","FontSize"=>8,"R"=>100,"G"=>100,"B"=>100));
 
 $formatGrid=array("Mode"=>SCALE_MODE_START0, "GridTicks"=>0,
@@ -238,15 +259,14 @@ $formatGrid=array("Mode"=>SCALE_MODE_START0, "GridTicks"=>0,
     "LabelRotation"=>60, "GridR"=>200,"GridG"=>200,"GridB"=>200);
 
 $graph->drawScale ( $formatGrid );
-//$graph->drawGrid ( 0, TRUE, 230, 230, 230, 255 );
 
 // Draw the line graph
 $graph->drawLineChart ( );
 if ($nbDay < 30){
-  $graph->drawPlotGraph ();
+  $graph->drawPlotChart ();
 }
-$dataSet->setSerieDrawable("perfect",true);
-// Draw the area between points
+
+
 $graph->drawAreaChart ();
 
 // Finish the graph
