@@ -40,7 +40,7 @@ if (isset($_REQUEST['idData'])) {
 $ValidSessionIDs = '(param(ConfirmQuit|(Top)?IconSize)|lang|hideMenu'
     .'|browserLocale(DateFormat|DecimalPoint|ThousandSeparator)?|currentLocale'
     .'|defaultProject|disconnect|(switched|multiple)Mode|project(Selector(DisplayMode|ShowIdle)?)?'
-    .'|screen(Width|Height)?|showWorkHistory|theme|hideInService'
+    .'|screen(Width|Height)?|showWorkHistory|theme|hideInService|translationParamLang'
     .'|isCheckedProjectStructureProject|isCheckedOtherProjectStructureProject|'
     .'|defaultProject|(print|pdf)InNewWindow|accordionPane(Top|Bottom)'
     .'|contentPane(Left(DivWidth|BottomDivHeight)|Top(DetailDivHeight(.*)?|(Portfolio|Resource)?PlanningDivHeight))'
@@ -78,7 +78,7 @@ if ($id=='browserLocaleDateFormat') {
  if ($id=='browserLocaleTimeFormat') {
    setSessionValue('browserLocaleTimeFormatJs', $value);
  }
-
+ 
 //$userParamArray=getSessionValue('userParamatersArray');
 if (sessionValueExists('userParamatersArray')) {
   setSessionTableValue('userParamatersArray', $id, $value);
