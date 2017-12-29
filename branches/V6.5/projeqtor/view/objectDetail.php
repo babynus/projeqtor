@@ -3910,7 +3910,6 @@ function drawContextSection($obj, $refresh=false) {
 
 //ADD qCazelles - Manage ticket at customer level - Ticket #87
 function drawTicketsList($obj, $refresh=false) {  
-  debugLog("drawTicketsList");
   global $cr, $print, $user, $comboDetail;
   if ($comboDetail) {
     return;
