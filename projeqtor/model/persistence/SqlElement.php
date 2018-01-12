@@ -5178,8 +5178,8 @@ public function getLastChangeTabForObject($obj) {
   $order=' operationDate desc, id asc';
   $hist=new History();
   $historyList=$hist->getSqlElementsFromCriteria(null, false, $where, $order, false, false);
-  $style = 'border-top: 0px solid #a6a0bc; border-bottom: 1px solid #7b769c;
-            background-color:#a6a0bc; padding:4px;';
+  $style = 'border-top: 0px solid #a6a0bc; border-bottom: 1px solid #7b7b7b;
+            background-color:#dddddd; padding:4px;';
   $historyTabHtml =  '<table style="width:100%;border-style:inset; border-collapse:collapse;">
                       <tr>' .
                      '<td style="' . $style . '" width="10%"></td>
@@ -5207,7 +5207,7 @@ public function getLastChangeTabForObject($obj) {
   foreach ( $historyList as $hist ) {
     $date = new DateTime($hist->operationDate);
     if ($date != $dateCmp)
-      return $historyTabHtml;
+      return $historyTabHtml .'</table>';
     if (substr($hist->colName, 0, 24) == 'subDirectory|Attachment|' or substr($hist->colName, 0, 18) == 'idTeam|Attachment|'
         or substr($hist->colName, 0, 25) == 'subDirectory|Attachement|' or substr($hist->colName, 0, 19) == 'idTeam|Attachement|') {
           continue;
@@ -5284,15 +5284,15 @@ public function getLastChangeTabForObject($obj) {
         if (!$hide) {
           $historyTabHtml .=  '<tr>';
           $historyTabHtml .=  '<td class="historyData' . $class .
-                              '" style=" padding:4px; width:10%; border: 1px solid #7b769c;">' .
+                              '" style=" padding:4px; width:10%; border: 1px solid #7b7b7b;">' .
                               $oper . '</td>';
-          $historyTabHtml .=  '<td class="historyData" style=" padding:4px; width:14%; border: 1px solid #7b769c;">' .
+          $historyTabHtml .=  '<td class="historyData" style=" padding:4px; width:14%; border: 1px solid #7b7b7b;">' .
                               $colCaption . '</td>';
           $oldValue=$hist->oldValue;
           $newValue=$hist->newValue;
           if ($dataType == 'int' and $dataLength == 1) { // boolean
-            $oldValue=htmlDisplayCheckbox($oldValue);
-            $newValue=htmlDisplayCheckbox($newValue);
+            $oldValue=htmlDisplayCheckbox($oldValue,true);
+            $newValue=htmlDisplayCheckbox($newValue,true);
           } else if (substr($colName, 0, 2) == 'id' and strlen($colName) > 2 and strtoupper(substr($colName, 2, 1)) == substr($colName, 2, 1)) {
             if ($oldValue != null and $oldValue != '') {
               if ($oldValue == 0 and $colName == 'idStatus') {
@@ -5330,16 +5330,20 @@ public function getLastChangeTabForObject($obj) {
             if ($oldValue) $oldValue=substr($oldValue,0,5).$allstars.substr($oldValue,-5);
             if ($newValue) $newValue=substr($newValue,0,5).$allstars.substr($newValue,-5);
           } else {
-            $oldValue = htmlEncode($oldValue, 'print');
-            $newValue = htmlEncode($newValue, 'print');
-            $oldValue=wordwrap($oldValue, 20, '<wbr>', false);
-            $newValue=wordwrap($newValue, 20, '<wbr>', false);
+            if (! isTextFieldHtmlFormatted($oldValue)) {
+              $oldValue = htmlEncode($oldValue, 'print');
+              $oldValue=wordwrap($oldValue, 30, '<wbr>', false);
+            }
+            if (! isTextFieldHtmlFormatted($newValue)) {
+              $newValue = htmlEncode($newValue, 'print');        
+              $newValue=wordwrap($newValue, 30, '<wbr>', false);
+            }
           }
-          $historyTabHtml .=  '<td class="historyData" style=" padding:4px; width:23%; border: 1px solid #7b769c;">' .
+          $historyTabHtml .=  '<td class="historyData" style=" padding:4px; width:23%; border: 1px solid #7b7b7b;">' .
                               $oldValue . '</td>';
-          $historyTabHtml .=  '<td class="historyData" style=" padding:4px; width:23%; border: 1px solid #7b769c;">' .
+          $historyTabHtml .=  '<td class="historyData" style=" padding:4px; width:23%; border: 1px solid #7b7b7b;">' .
                               $newValue . '</td>';
-          $historyTabHtml .=  '<td class="historyData' . $class . '" style="width:15%; border: 1px solid #7b769c;">';
+          $historyTabHtml .=  '<td class="historyData' . $class . '" style="width:15%; border: 1px solid #7b7b7b;">';
           $historyTabHtml .=   $date . '</td>';
           $historyTabHtml .=  '<td class="historyData' . $class .
                               '" style=" padding:4px; width:15%; border-right: 1px solid #AAAAAA;" >';
@@ -5361,8 +5365,8 @@ function getLinksHtmlTab() {
   $link = new Link;
   $critArray = array('ref1Type' => get_class($this), 'ref1Id' => $this->id);
   $linkList = $link->getSqlElementsFromCriteria($critArray);
-  $style = 'border-top: 0px solid #a6a0bc; border-bottom: 1px solid #7b769c;
-            background-color:#a6a0bc; padding:4px;';
+  $style = 'border-top: 0px solid #a6a0bc; border-bottom: 1px solid #7b7b7b;
+            background-color:#dddddd; padding:4px;';
   $html = '<table style="width:100%;border-style:inset; border-collapse:collapse;">
           <tr>' .
           '<td style="' . $style . '" width="12%"></td>
@@ -5379,13 +5383,13 @@ function getLinksHtmlTab() {
   foreach ($linkList as $link) {
     $obj = new $link->ref2Type($link->ref2Id);
     $goto = $obj->getReferenceUrl ();
-    $html .= '<tr><td style="border: 1px solid #7b769c; padding:4px;"><a href="' . $goto . '">' .
+    $html .= '<tr><td style="border: 1px solid #7b7b7b; padding:4px;"><a href="' . $goto . '">' .
               $link->ref2Type . ' #' . $link->ref2Id . '</a></td>' .
-              '<td style="border: 1px solid #7b769c; padding:4px;">' . $obj->name . '</td>';
+              '<td style="border: 1px solid #7b7b7b; padding:4px;">' . $obj->name . '</td>';
     if (property_exists($obj, 'idStatus'))
       $status = colorNameFormatter(SqlList::getNameFromId('Status', $obj->idStatus) . "#split#" .
           SqlList::getFieldFromId('Status', $obj->idStatus, 'color'));
-    $html .=  '<td style="border: 1px solid #7b769c; padding:4px;">' . $status . '</td></tr>';
+    $html .=  '<td style="border: 1px solid #7b7b7b; padding:4px;">' . $status . '</td></tr>';
     $status = '';
   }
   return $html . '</table>';
@@ -5396,8 +5400,8 @@ function getNotesHtmlTab() {
   $note = new Note;
   $critArray = array('refType' => get_class($this), 'refId' => $this->id);
   $noteList = $note->getSqlElementsFromCriteria($critArray);
-  $style = 'border-top: 0px solid #a6a0bc; border-bottom: 1px solid #7b769c;
-            background-color:#a6a0bc; padding:4px;';
+  $style = 'border-top: 0px solid #a6a0bc; border-bottom: 1px solid #7b7b7b;
+            background-color:#dddddd; padding:4px;';
   $html = '<table style="width:100%;border-style:inset; border-collapse:collapse;">
           <tr>' .
           '<td style="' . $style . '" width="12%"></td>
@@ -5411,14 +5415,14 @@ function getNotesHtmlTab() {
           </tr>';
   $status = '';
   foreach ($noteList as $note) {
-    $html .= '<tr><td style="border: 1px solid #7b769c; padding:4px;">' .
-            $note->id . '</td>' . '<td style="border: 1px solid #7b769c; padding:4px;">' .
+    $html .= '<tr><td style="border: 1px solid #7b7b7b; padding:4px;">' .
+            $note->id . '</td>' . '<td style="border: 1px solid #7b7b7b; padding:4px;">' .
             wordwrap($note->note, 50, '<wbr>', false) . '</td>';
     if (property_exists($note, 'updateDate') and $note->updateDate != '')
       $date = $note->updateDate;
     else if (property_exists($note, 'creationDate') and isset($note->creationDate))
       $date = $note->creationDate;
-    $html .= '<td style="border: 1px solid #7b769c; padding:4px;">' . $date . '</td></tr>';
+    $html .= '<td style="border: 1px solid #7b7b7b; padding:4px;">' . $date . '</td></tr>';
   }
   return $html . '</table>';
 }
