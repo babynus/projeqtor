@@ -5178,17 +5178,10 @@ public function getLastChangeTabForObject($obj) {
   $order=' operationDate desc, id asc';
   $hist=new History();
   $historyList=$hist->getSqlElementsFromCriteria(null, false, $where, $order, false, false);
-  $style = 'border-top: 0px solid #a6a0bc; border-bottom: 1px solid #7b7b7b;
+  $style = 'border-top: 1px solid #7b7b7b ; border-bottom: 1px solid #7b7b7b;
             background-color:#dddddd; padding:4px;';
-  $historyTabHtml =  '<table style="width:100%;border-style:inset; border-collapse:collapse;">
-                      <tr>' .
-                     '<td style="' . $style . '" width="10%"></td>
-                      <td style="' . $style . '" width="14%"></td>
-                      <td style="' . $style . '" width="23%"></td>
-                      <td style="' . $style . '" width="23%"></td>
-                      <td style="' . $style . '" width="15%"></td>
-                      <td style="' . $style . '" width="15%"></td>
-                      </tr>';
+  $historyTabHtml =  '<table style="width:95%; border-collapse:collapse; border:1px solid #7b7b7b;">';
+
   $historyTabHtml .=  '<tr><td style="'. $style . 'text-align:center;"colspan="6">Last Changes</td></tr>' .//
                       '<tr><td style="' . $style . '" width="10%">' . i18n('colOperation') . '</td>
                       <td style="' . $style . '" width="14%">' . i18n('colColumn') . '</td>
@@ -5365,9 +5358,9 @@ function getLinksHtmlTab() {
   $link = new Link;
   $critArray = array('ref1Type' => get_class($this), 'ref1Id' => $this->id);
   $linkList = $link->getSqlElementsFromCriteria($critArray);
-  $style = 'border-top: 0px solid #a6a0bc; border-bottom: 1px solid #7b7b7b;
+  $style = 'border-top: 1px solid #7b7b7b ; border-bottom: 1px solid #7b7b7b;
             background-color:#dddddd; padding:4px;';
-  $html = '<table style="width:100%;border-style:inset; border-collapse:collapse;">
+  $html = '<table style="width:95%; border-collapse:collapse;border:1px solid #7b7b7b;">
           <tr>' .
           '<td style="' . $style . '" width="12%"></td>
           <td  style="' . $style . ' text-align:center;" width="76%">Linked Items</td>
@@ -5400,9 +5393,9 @@ function getNotesHtmlTab() {
   $note = new Note;
   $critArray = array('refType' => get_class($this), 'refId' => $this->id);
   $noteList = $note->getSqlElementsFromCriteria($critArray);
-  $style = 'border-top: 0px solid #a6a0bc; border-bottom: 1px solid #7b7b7b;
+  $style = 'border-top: 1px solid #7b7b7b ; border-bottom: 1px solid #7b7b7b;
             background-color:#dddddd; padding:4px;';
-  $html = '<table style="width:100%;border-style:inset; border-collapse:collapse;">
+  $html = '<table style="width:95%; border-collapse:collapse;border:1px solid #7b7b7b;">
           <tr>' .
           '<td style="' . $style . '" width="12%"></td>
           <td  style="' . $style . ' text-align:center;" width="76%">Notes</td>
@@ -5416,8 +5409,10 @@ function getNotesHtmlTab() {
   $status = '';
   foreach ($noteList as $note) {
     $html .= '<tr><td style="border: 1px solid #7b7b7b; padding:4px;">' .
-            $note->id . '</td>' . '<td style="border: 1px solid #7b7b7b; padding:4px;">' .
-            wordwrap($note->note, 50, '<wbr>', false) . '</td>';
+            $note->id . '</td>' . '<td style="border: 1px solid #7b7b7b; padding:4px;">'
+            //. wordwrap($note->note, 50, '<wbr>', false)
+            . $note->note
+            . '</td>';
     if (property_exists($note, 'updateDate') and $note->updateDate != '')
       $date = $note->updateDate;
     else if (property_exists($note, 'creationDate') and isset($note->creationDate))
