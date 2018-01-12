@@ -1312,12 +1312,13 @@ function htmlDisplaySharedFilter($filterArray,$filterObjectClass,$currentFilter=
   }
 }
 
-function htmlDisplayCheckbox ($value) {
+function htmlDisplayCheckbox ($value, $remote=false) {
   $checkImg="checkedKO.png";
-  if ($value!='0' and ! $value==null) { 
+  if ($value!='0' and ! $value==null) {
     $checkImg= 'checkedOK.png';
   } 
-  return '<img src="img/' . $checkImg . '" />';
+  $baseUrl=($remote)?SqlElement::getBaseUrl().'/view/':'';
+  return '<img src="'.$baseUrl.'img/' . $checkImg . '" />';
 }
 
 function htmlDisplayColored($value,$color) {
