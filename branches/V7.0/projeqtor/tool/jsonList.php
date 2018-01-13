@@ -301,8 +301,6 @@ if ($type == 'empty') {} else if ($type == 'object') { // ======================
     } else {
       // END ADD qCazelles
       $list = SqlList::getListWithCrit ( $class, $crit, 'name', null, $showIdle );
-      debugLog("LIST INIT FOR $dataType");
-      debugLog($list);
       // Begin add gmartin /handle emailTemplates Ticket #157 - FIXED PBE
       if ($dataType=='idEmailTemplate' and isset ( $_REQUEST ['critField'] ) and isset ( $_REQUEST ['critValue'] ) ) {
         $list = array_merge_preserve_keys ( $list, SqlList::getListWithCrit ( $class, array($_REQUEST ['critField']=>null), 'name', null, false ) );
