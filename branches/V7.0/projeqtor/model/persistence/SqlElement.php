@@ -5951,17 +5951,6 @@ public function getMailDetailFromTemplate($templateToReplace) {
     } else {
       $typeName = 'id' . str_replace ( 'PlanningElement', '', get_class ( $this ) ) . 'Type';
       $typeClassName = str_replace ( 'PlanningElement', '', get_class ( $this ) ) . 'Type';
-      /*
-       * if (!$type and property_exists($this,$typeName) and self::class_exists($typeClassName)) {
-       * $table=SqlList::getList($typeClassName, 'name', null);
-       * if (count($table) > 0) {
-       * foreach ( $table as $idTable => $valTable ) {
-       * $type=$idTable;
-       * break;
-       * }
-       * }
-       * }
-       */
       if (! $status) {
         $status=$this->getFirstStatus($type);
       }
@@ -6112,6 +6101,9 @@ public function getMailDetailFromTemplate($templateToReplace) {
     }
     if (property_exists ( $testObj, 'idStatus' ) and $newStatus != '*') {
       $status = ($newStatus) ? $newStatus : $testObj->idStatus;
+      if (! $status) {
+        $status=$this->getFirstStatus($newType);
+      }
       if (isset ( $list ['Status'] ) and isset ( $list ['Status'] [$class] ) and isset ( $list ['Status'] [$class] [$status] )) {
         $listStatus = $list ['Status'] [$class] [$status];
       }
@@ -6234,6 +6226,9 @@ public function getMailDetailFromTemplate($templateToReplace) {
     }
     if (property_exists ( $testObj, 'idStatus' ) and $newStatus != '*') {
       $status = ($newStatus) ? $newStatus : $testObj->idStatus;
+      if (! $status) {
+        $status=$this->getFirstStatus($newType);
+      }
       if (isset ( $list ['Status'] ) and isset ( $list ['Status'] [$class] ) and isset ( $list ['Status'] [$class] [$status] )) {
         $listStatus = $list ['Status'] [$class] [$status];
       }
@@ -6578,8 +6573,9 @@ public function getMailDetailFromTemplate($templateToReplace) {
   public function getFirstStatus($type) {
     // Up to V6.5, first status is always first in the list, whatever the workflow
     $stList=SqlList::getList('Status');
-    $statusObj=reset($stList);
-    $status = $statusObj->id; // first status always first in the list
+    $first=reset($stList);
+    $status = key($stList); // first status always first in the list
+    return $status;
   }
 }
 
