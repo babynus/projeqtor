@@ -5962,8 +5962,9 @@ public function getMailDetailFromTemplate($templateToReplace) {
        * }
        * }
        */
-      if (! $status)
-        $status = 1; // first status always 1 (recorded)
+      if (! $status) {
+        $status=$this->getFirstStatus($type);
+      }
       $planningModeName = 'id' . str_replace ( 'PlanningElement', '', get_class ( $this ) ) . 'PlanningMode';
       $typeElt = null;
       if (! $type and SqlElement::class_exists ($typeClassName) and $typeClassName!="ExpenseDetailType") {
@@ -6574,6 +6575,12 @@ public function getMailDetailFromTemplate($templateToReplace) {
   //public function setAttributes() {
   //  DO NOT SET GLOBAL DEFINITION AS SIGNATURE DEPENDS ON ITEM
   //}
+  public function getFirstStatus($type) {
+    // Up to V6.5, first status is always first in the list, whatever the workflow
+    $stList=SqlList::getList('Status');
+    $statusObj=reset($stList);
+    $status = $statusObj->id; // first status always first in the list
+  }
 }
 
 ?>
