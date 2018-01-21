@@ -454,8 +454,6 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     // Must restrict to products visible to user
     $restrictArray=getSessionUser()->getVisibleProducts();
   }
-    
-    
   if ($col=='idOrganization' and Affectable::getOrganizationVisibilityScope()!="all") {
     // Restrict list of Organizations
     $restrictArray=array();
