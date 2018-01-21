@@ -1379,6 +1379,14 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       // }
       $specificStyleWithoutCustom = $specificStyle;
       $specificStyle .= ";" . $fieldStyle;
+      if (strpos ( $obj->getFieldAttributes ( $col ), 'size1/3' ) !== false) {
+        $fieldWidth = $fieldWidth / 3 - 3;
+      } else if (strpos ( $obj->getFieldAttributes ( $col ), 'size1/2' ) !== false) {
+        $fieldWidth = $fieldWidth / 2 - 2;
+      } else if (($nobr_before or $nobr) and $fieldWidth > $mediumWidth) {
+        $fieldWidth = $fieldWidth / 2 - 2;
+      }
+      debugLog("$col=>$fieldWidth");
       if (is_object( $val )) {
         //if (!$obj->isAttributeSetToField($col, 'hidden') and !in_array($col,$extraHiddenFields)) {
 // BEGIN - ADD BY TABARY - DRAW FIELD LIKE ANOTHER FIELD
@@ -1688,7 +1696,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
 //        echo ' class="display generalColClass '.$col.'Class" ';
         echo ' class="display generalColClass '.$dLcol.'Class" ';
 // END - ADD BY TABARY - DRAW FIELD LIKE ANOTHER FIELD
-        echo ' readonly tabindex="-1" style="' . $specificStyle . ';width: ' . ($largeWidth - $smallWidth - 40) . 'px;" ';
+        $refWidth=$largeWidth - $smallWidth - 40;
+        if ($fieldWidth<$refWidth) $refWidth=$fieldWidth;
+        echo ' readonly tabindex="-1" style="' . $specificStyle . ';width: ' . $refWidth . 'px;" ';
         echo ' value="' . htmlEncode ( $val ) . '" ></span>';
       } else if ($col == 'password') {
         $paramDefaultPassword = Parameter::getGlobalParameter ( 'paramDefaultPassword' );
@@ -2323,14 +2333,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             }
           }
         }
-        
-        if (strpos ( $obj->getFieldAttributes ( $col ), 'size1/3' ) !== false) {
-          $fieldWidth = $fieldWidth / 3 - 3;
-        } else if (strpos ( $obj->getFieldAttributes ( $col ), 'size1/2' ) !== false) {
-          $fieldWidth = $fieldWidth / 2 - 2;
-        } else if (($nobr_before or $nobr) and $fieldWidth > $mediumWidth) {
-          $fieldWidth = $fieldWidth / 2 - 2;
-        }
         if ($displayComboButtonCol) {
           $fieldWidth -= 50;
         } else if ($displayDirectAccessButton) {
@@ -2506,7 +2508,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo '<div ';
 // BEGIN - ADD BY TABARY - DRAW FIELD LIKE ANOTHER FIELD
 //        echo ' class="display generalColClass '.$col.'Class" style="'.$specificStyle.'"';
-        echo ' class="display generalColClass '.$dLcol.'Class" style="'.$specificStyle.'"';
+        echo ' class="display generalColClass input'.$dLcol.'Class" style="text-align:right;'.$specificStyle.';width:'.$fieldWidth.'px;display:inline-block;position:relative;top:1px"';
 // END - ADD BY TABARY - DRAW FIELD LIKE ANOTHER FIELD
         echo ' >';
         if (strpos ( $obj->getFieldAttributes ( $col ), 'html' ) !== false) {
