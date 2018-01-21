@@ -184,7 +184,7 @@
             $row .= ', name:"'. str_replace('"', "''",i18n($type["type"])) . ' ('.$type['count'].')"';
             $row .= ', objClass:""';
             $row .= ', objId:""';
-            $row .= ', iconClass:"icon' .$type["type"].$paramIconSize. '"';
+            $row .= ', iconClass:"icon' .ucfirst(strtolower($type["type"])).$paramIconSize. '"';
             $row .= ', count:"'.$type['count'].'"';
             $row .= ', isTotal:"NO"';
             $row .= ', type:"folder"';
