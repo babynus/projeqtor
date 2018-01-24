@@ -1084,6 +1084,40 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $readOnly = true;
         }
       }
+      //ADD qCazelles - Ticket #53
+      if (($col == "realStartDate" or $col == "isStarted") and $objType) {
+        $lock='lockHandled';
+        if (!$obj->id or (property_exists($objType, $lock) and $objType->$lock)) {
+          $attributes.=' readonly tabindex="-1"';
+          $notReadonlyClass="";
+          $readOnly=true;
+        }
+      }
+      if (($col == "realDeliveryDate" or $col == "isDelivered") and $objType) {
+        $lock='lockDone';
+        if (!$obj->id or (property_exists($objType, $lock) and $objType->$lock)) {
+          $attributes.=' readonly tabindex="-1"';
+          $notReadonlyClass="";
+          $readOnly=true;
+        }
+      }
+      if (($col == "realEisDate" or $col == "isEis") and $objType) {
+        $lock='lockIntoservice';
+        if (!$obj->id or (property_exists($objType, $lock) and $objType->$lock)) {
+          $attributes.=' readonly tabindex="-1"';
+          $notReadonlyClass="";
+          $readOnly=true;
+        }
+      }
+      if (($col == "realEndDate" or $col == "idle") and $objType) {
+        $lock='lockIdle';
+        if (!$obj->id or (property_exists($objType, $lock) and $objType->$lock)) {
+          $attributes.=' readonly tabindex="-1"';
+          $notReadonlyClass="";
+          $readOnly=true;
+        }
+      }
+      //END ADD qCazelles - Ticket #53
       if (strpos ( $obj->getFieldAttributes ( $col ), 'required' ) !== false) {
         // $attributes.=' required="true" missingMessage="' . i18n('messageMandatory', array($obj->getColCaption($col))) . '" invalidMessage="' . i18n('messageMandatory', array($obj->getColCaption($col))) . '"';
         $isRequired = true;
