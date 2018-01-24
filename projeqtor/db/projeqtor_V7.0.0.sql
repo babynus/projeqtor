@@ -231,3 +231,34 @@ INSERT INTO `${prefix}type` (`name`, `scope`, `color`, `sortOrder`) VALUES
  ('ALERT', 'Notification', '#ff0000', '10'),
  ('WARNING', 'Notification', '#ffa500', '20'),
  ('INFO', 'Notification', '#0000ff', '30');
+
+ 
+--ADD qCazelles - Ticket #53
+ALTER TABLE `${prefix}product` ADD `idStatus` int(12) UNSIGNED DEFAULT NULL;
+ALTER TABLE `${prefix}version` ADD `idStatus` int(12) UNSIGNED DEFAULT NULL;
+ALTER TABLE `${prefix}status` ADD `setIntoserviceStatus` int(1) UNSIGNED DEFAULT 0;
+ALTER TABLE `${prefix}type` ADD `lockIntoservice` int(1) UNSIGNED DEFAULT 0;
+--END ADD qCazelles - Ticket #53
+
+-- ADD PBE complement to Ticket #53
+
+-- define workflow for Product Type, Product Version Type, Component Type, Component Version Type
+UPDATE `${prefix}type` set idWorkflow=(SELECT id FROM `${prefix}workflow` order by sortOrder, id LIMIT 1)
+WHERE idWorkflow is null and `scope` in ('Product','ProductVersion','Component','ComponentVersion');
+
+-- define status for Product, Product Version, Component, Component Version
+UPDATE `${prefix}product` set idStatus=(SELECT id FROM `${prefix}status` ORDER BY sortOrder, id LIMIT 1)
+WHERE idStatus is null;
+UPDATE `${prefix}version` set idStatus=(SELECT id FROM `${prefix}status` ORDER BY sortOrder, id LIMIT 1)
+WHERE idStatus is null;
+
+-- define type for Product, Product Version, Component, Component Version
+UPDATE `${prefix}product` set idProductType=(SELECT id FROM `${prefix}type` WHERE scope='Product' ORDER BY sortOrder, id LIMIT 1)
+WHERE idProductType is null and scope='Product';
+UPDATE `${prefix}product` set idComponentType=(SELECT id FROM `${prefix}type` WHERE scope='Component' ORDER BY sortOrder, id LIMIT 1)
+WHERE idComponentType is null and scope='Component';
+UPDATE `${prefix}version` set idVersionType=(SELECT id FROM `${prefix}type` WHERE scope='ProductVersion' ORDER BY sortOrder, id LIMIT 1)
+WHERE idVersionType is null and scope='Product';
+UPDATE `${prefix}version` set idVersionType=(SELECT id FROM `${prefix}type` WHERE scope='ComponentVersion' ORDER BY sortOrder, id LIMIT 1)
+WHERE idVersionType is null and scope='Component';
+
