@@ -5,7 +5,10 @@
 -- // Date : 2017-12-22                                     //
 -- ///////////////////////////////////////////////////////////
 
--- begin add gmartin /handle email Template
+
+-- ===========================================================
+-- Email Template
+-- ===========================================================
  
 CREATE TABLE `${prefix}emailtemplate` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
@@ -31,27 +34,24 @@ ADD `idEmailTemplate` int(12) UNSIGNED DEFAULT NULL;
 
 -- end add gmartin 
 
+-- ======================================================== --
+-- Notification System                                      --
+-- ======================================================== --
 
--- ======================================================== --
---                      PARAMETERS                          --
--- ======================================================== --
 -- -------------------------------------------------------- --
 --                   notificationSystemActiv                --
 -- Indicates if the notification system is activ or not     --
 -- -------------------------------------------------------- --
 INSERT INTO `${prefix}parameter` (`idUser`,`idProject`,`parameterCode`,`parameterValue`) 
 VALUES (NULL,NULL,'notificationSystemActiv','NO');
+
 -- -------------------------------------------------------- --
 --                   cronCheckNotification                  --
 -- Interval in hours of notifications generation            --
 -- -------------------------------------------------------- --
 INSERT INTO `${prefix}parameter` (`idUser`,`idProject`,`parameterCode`,`parameterValue`)
 VALUES (NULL,NULL,'cronCheckNotifications',3600);
--- ======================================================== --
 
-
--- ======================================================== --
---                      NEW TABLES                          --
 -- -------------------------------------------------------- --
 --                   NOTIFICATIONSTATUS                     --
 -- This table contents the status for the notifications     --
@@ -64,6 +64,7 @@ CREATE TABLE `${prefix}statusnotification` (
 ENGINE = INNODB DEFAULT CHARSET=utf8;
 INSERT INTO `${prefix}statusnotification` (`id`, `name`, `color`) VALUES(1, 'unread', '#ff7f50');
 INSERT INTO `${prefix}statusnotification` (`id`, `name`, `color`) VALUES(2, 'read',   '#32CD32');
+
 -- -------------------------------------------------------- --
 --                   NOTIFICATION                           --
 -- This table contents the notifications generated          --
@@ -161,23 +162,20 @@ INSERT INTO `${prefix}notifiable` (`notifiableItem`,`name`) VALUES
  ('Term','Term'),
  ('Delivery','Delivery');
 
--- ======================================================== --
---                         MENU                             --
--- ======================================================== --
 -- -------------------------------------------------------- --
---                       For notification                   --
+-- MENU                  For notification                   --
 -- -------------------------------------------------------- --
 INSERT INTO `${prefix}menu` (`id`, `name`,           `idMenu`,`type`,  `sortOrder`,`level`,  `idle`,`menuClass`) 
                       VALUES(301, 'menuNotification', 11,     'object', 431,       'Project', 0,    'Admin Notification');
 -- -------------------------------------------------------- --
---                    For notificationDefinition            --
+-- MENU               For notificationDefinition            --
 -- -------------------------------------------------------- --
 INSERT INTO `${prefix}menu` (`id`,`name`,                     `idMenu`,`type`,  `sortOrder`,`level`,               `idle`,`menuClass`) 
                       VALUES(302, 'menuNotificationDefinition',88,    'object', 672,       'ReadWriteEnvironment', 0,     'Automation Notification');
 
--- ======================================================== --
+-- -------------------------------------------------------- --
 --                     HABILITATION                         --
--- ======================================================== --
+-- -------------------------------------------------------- --
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`,`allowAccess`) 
                              VALUES( 1,           301,    1);
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`,`allowAccess`) 
@@ -195,9 +193,9 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`,`allowAccess`)
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`,`allowAccess`) 
                              VALUES( 7,           301,    1);
 
--- ======================================================== --
+-- -------------------------------------------------------- --
 --                     ACCESS RIGHT                         --
--- ======================================================== --
+-- -------------------------------------------------------- --
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`,`idAccessProfile`) 
                              VALUES( 1,           301,    8);
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`,`idAccessProfile`) 
@@ -227,21 +225,27 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`,`idAccessProfile`)
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`,`idAccessProfile`) 
                              VALUES( 7,           302,    1000002);
 
+-- ===========================================================
+-- LifeCycle on Products, Components, Versions
+-- ===========================================================
+
 INSERT INTO `${prefix}type` (`name`, `scope`, `color`, `sortOrder`) VALUES 
  ('ALERT', 'Notification', '#ff0000', '10'),
  ('WARNING', 'Notification', '#ffa500', '20'),
  ('INFO', 'Notification', '#0000ff', '30');
 
- 
+-- --------------------------------------------------------
 --ADD qCazelles - Ticket #53
+-- --------------------------------------------------------
 ALTER TABLE `${prefix}product` ADD `idStatus` int(12) UNSIGNED DEFAULT NULL;
 ALTER TABLE `${prefix}version` ADD `idStatus` int(12) UNSIGNED DEFAULT NULL;
 ALTER TABLE `${prefix}status` ADD `setIntoserviceStatus` int(1) UNSIGNED DEFAULT 0;
 ALTER TABLE `${prefix}type` ADD `lockIntoservice` int(1) UNSIGNED DEFAULT 0;
 --END ADD qCazelles - Ticket #53
 
+-- --------------------------------------------------------
 -- ADD PBE complement to Ticket #53
-
+-- --------------------------------------------------------
 -- define workflow for Product Type, Product Version Type, Component Type, Component Version Type
 UPDATE `${prefix}type` set idWorkflow=(SELECT id FROM `${prefix}workflow` order by sortOrder, id LIMIT 1)
 WHERE idWorkflow is null and `scope` in ('Product','ProductVersion','Component','ComponentVersion');
@@ -262,3 +266,75 @@ WHERE idVersionType is null and scope='Product';
 UPDATE `${prefix}version` set idVersionType=(SELECT id FROM `${prefix}type` WHERE scope='ComponentVersion' ORDER BY sortOrder, id LIMIT 1)
 WHERE idVersionType is null and scope='Component';
 
+-- ===========================================================
+-- FIXINGS
+-- ===========================================================
+
+--ADD qCazelles - bug scope Delivery
+ALTER TABLE `${prefix}delivery` DROP COLUMN `scope`;
+
+-- ADD PBE : missing items in linkable, mailable, copyable, importable, referencable, textable
+INSERT INTO `${prefix}checklistable` (`id`,`name`, `idle`) VALUES 
+(24,'Bill', '0'),
+(25,'CallForTender', '0'),
+(26,'Client', '0'),
+(27,'Contact', '0'),
+(28,'IndividualExpense', '0'),
+(29,'Payment', '0'),
+(30,'ProjectExpense', '0'),
+(31,'Provider', '0'),
+(32,'Quotation', '0'),
+(33,'Tender', '0');
+INSERT INTO `${prefix}copyable` (`id`,`name`, `idle`, `sortOrder`) VALUES 
+(20,'Delivery', '0', '800'),
+(21,'Deliverable', '0', '800'),
+(22,'Incoming', '0', '800');
+INSERT INTO `${prefix}importable` (`id`,`name`, `idle`) VALUES 
+(52,'ActivityPrice', '0'),
+(53,'Term', '0');
+INSERT INTO `${prefix}linkable` (`id`,`name`, `idle`, `idDefaultLinkable`) VALUES 
+(29,'Delivery', null,0),
+(30,'Tender', null,0);
+INSERT INTO `${prefix}mailable` (`id`,`name`, `idle`) VALUES 
+(30,'Delivery', '0'),
+(31,'Client', '0'),
+(32,'Payment', '0'),
+(33,'Provider', '0'),
+(34,'Team', '0'),
+(35,'Tender', '0');
+INSERT INTO `${prefix}referencable` (`id`,`name`, `idle`) VALUES 
+(20,'CallForTender', '0'),
+(21,'Deliverable', '0'),
+(22,'Delivery', '0'),
+(23,'Incoming', '0'),
+(24,'Payment', '0'),
+(25,'Tender', '0');
+INSERT INTO `${prefix}originable` (`id`,`name`, `idle`) VALUES 
+(19,'Bill', '0'),
+(20,'Deliverable', '0'),
+(21,'Delivery', '0'),
+(22,'Incoming', '0'),
+(23,'Opportunity', '0'),
+(24,'Tender', '0');
+INSERT INTO `${prefix}textable` (`id`,`name`, `idle`) VALUES
+(39,'ActivityPrice', '0'),
+(21,'CallForTender', '0'),
+(22,'Client', '0'),
+(23,'Command', '0'),
+(24,'Component', '0'),
+(25,'ComponentVersion', '0'),
+(26,'Deliverable', '0'),
+(27,'Delivery', '0'),
+(28,'Document', '0'),
+(29,'Incoming', '0'),
+(30,'Notification', '0'),
+(31,'Opportunity', '0'),
+(32,'Organization', '0'),
+(33,'Payment', '0'),
+(34,'Periodic Meeting', '0'),
+(35,'ProductVersion', '0'),
+(36,'Provider', '0'),
+(37,'Team', '0'),
+(38,'Tender', '0');
+DELETE FROM `${prefix}linkable` WHERE `name` IN ('Organization');
+DELETE FROM `${prefix}textable` WHERE `name` IN ('Version');
