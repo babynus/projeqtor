@@ -1693,8 +1693,6 @@ class PlanningElement extends SqlElement {
     } else {
       $list=Self::getMilestonableList();
     }
-    debugLog("MilestonePlanningElement::save() for $this->refType, $this->refId");
-    debugLog($list);
     $critMilestone=array('idMilestone'=>$this->refId,'idle'=>'0');
     if ($restrictType && $restrictId) {
       $critMilestone=array('id'=>$restrictId);
@@ -1710,12 +1708,24 @@ class PlanningElement extends SqlElement {
         }
       }
       if ($dt) {
-        debugLog("update $class for $dt");
         $ref=new $class();
         $refList=$ref->getSqlElementsFromCriteria($critMilestone);
         foreach ($refList as $ref) {
           $ref->$dt=$this->plannedStartDate;
           $ref->save();
+          if (Parameter::getGlobalParameter('autoLinkMilestone')=='YES') { // Add a link to milestone
+            if ($class<'Milestone') {
+              $crit=array('ref1Type'=>$class, 'ref1Id'=>$ref->id,'ref2Type'=>'Milestone','ref2Id'=>$this->refId);
+            } else {
+              $crit=array('ref2Type'=>$class, 'ref2Id'=>$ref->id,'ref1Type'=>'Milestone','ref1Id'=>$this->refId);
+            }
+            $link=SqlElement::getSingleSqlElementFromCriteria('Link', $crit);
+            if (!$link->id) {
+              $link->creationDate=date('Y-m-d');
+              $resLn=$link->save();
+              debugLog($resLn);
+            }
+          }
         }
       }
     }
