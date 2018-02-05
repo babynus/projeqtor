@@ -295,6 +295,18 @@ ALTER TABLE `${prefix}requirement` CHANGE `idTargetVersion` `idTargetProductVers
 ALTER TABLE `${prefix}requirement`
 ADD `idMilestone` int(12) UNSIGNED DEFAULT NULL;
 
+ALTER TABLE `${prefix}ticket`
+ADD `idMilestone` int(12) UNSIGNED DEFAULT NULL;
+
+ALTER TABLE `${prefix}version`
+ADD `idMilestone` int(12) UNSIGNED DEFAULT NULL;
+
+ALTER TABLE `${prefix}deliverable`
+ADD `idMilestone` int(12) UNSIGNED DEFAULT NULL;
+
+ALTER TABLE `${prefix}delivery`
+ADD `idMilestone` int(12) UNSIGNED DEFAULT NULL;
+
 -- ===========================================================
 -- FIXINGS
 -- ===========================================================

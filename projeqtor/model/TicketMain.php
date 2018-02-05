@@ -61,6 +61,7 @@ class TicketMain extends SqlElement {
   public $idResource;
   public $idCriticality;
   public $idPriority;
+  public $idMilestone;
   public $_tab_2_1 = array('initial', 'actual','dueDate');
   public $initialDueDateTime; // is an object
   public $actualDueDateTime;
@@ -437,6 +438,9 @@ class TicketMain extends SqlElement {
     }  
     if (Parameter::getGlobalParameter('manageAccountable')!='YES') {
       self::$_fieldsAttributes['idAccountable']='hidden';
+    }
+    if (Parameter::getGlobalParameter('manageMilestoneOnItems') != 'YES') {
+      self::$_fieldsAttributes["idMilestone"]='hidden';
     }
   }
 }
