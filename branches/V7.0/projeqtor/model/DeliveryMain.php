@@ -52,6 +52,7 @@ class DeliveryMain extends SqlElement {
   //END ADD qCazelles
   //public $idDeliverableWeight;
   public $idResource;
+  public $idMilestone;
   public $plannedDate;
   //public $realDate;
   //public $validationDate;
@@ -299,6 +300,9 @@ class DeliveryMain extends SqlElement {
   	if (Parameter::getGlobalParameter('productVersionOnDelivery') != 'YES') {
   		self::$_fieldsAttributes['idProductVersion']='hidden';
   	} 
+  	if (Parameter::getGlobalParameter('manageMilestoneOnItems') != 'YES') {
+  	  self::$_fieldsAttributes["idMilestone"]='hidden';
+  	}
   }
 }
 ?>
