@@ -151,6 +151,7 @@ class MilestonePlanningElementMain extends PlanningElement {
    * @return the return message of persistence/SqlElement#save() method
    */
   public function save() {
+    $old=$this->getOld();
     $this->initialStartDate=$this->initialEndDate;
     $this->validatedStartDate=$this->validatedEndDate;
     $this->plannedStartDate=$this->plannedEndDate;
@@ -165,7 +166,52 @@ class MilestonePlanningElementMain extends PlanningElement {
     $this->notPlannedWork=0;
     $this->realWork=0;
     $this->elementary=1;
-    return parent::save();
+    $result = parent::save();
+    if ($this->plannedStartDate==$old->plannedStartDate) {
+      return $result;
+    }
+    $list=$this->getMilestonableList();
+    debugLog($list);
+    $critMilestone=array('idMilestone'=>$this->refId,'idle'=>'0');
+    foreach ($list as $class) {
+      $dt="";
+      $arrayDate=array('actualDueDate');
+      foreach($arrayDate as $date) {
+        if (property_exists($class, $date)) {
+          $dt=$date;
+          break;
+        }
+      }
+      if ($dt) {
+        $ref=new $class();
+        $refList=$ref->getSqlElementsFromCriteria($critMilestone);
+        foreach ($refList as $ref) {
+          $ref->$dt=$this->plannedStartDate;
+          $ref->save();
+        }
+      }
+    }
+    return $result;
+  }
+  public function getMilestonableList() {
+      $dir='../model/';
+    $handle = opendir($dir);
+    $result=array();
+    while ( ($file = readdir($handle)) !== false) {
+      if ($file == '.' || $file == '..' || $file=='index.php' // exclude ., .. and index.php
+        || substr($file,-4)!='.php'                           // exclude non php files 
+        || substr($file,-8)=='Main.php') {                    // exclude the *Main.php
+        continue;
+      }
+      $class=pathinfo($file,PATHINFO_FILENAME);
+      $ext=pathinfo($file,PATHINFO_EXTENSION);
+      if (file_exists($dir.$class.'Main.php')) {
+        if (property_exists($class, 'idMilestone') and property_exists($class, 'idle')) $result[$class]=i18n($class);
+      }
+    }
+    closedir($handle);
+    asort($result);
+    return $result;
   }
   
 }
