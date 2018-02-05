@@ -61,6 +61,7 @@ class RequirementMain extends SqlElement {
   public $plannedWork;
   public $idTargetProductVersion;
   public $idTargetComponentVersion;  //ADD qCazelles - Add Component to Requirement - Ticket 171
+  public $idMilestone;
   public $handled;
   public $handledDate;
   public $done;
