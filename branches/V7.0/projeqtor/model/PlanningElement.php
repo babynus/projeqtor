@@ -1660,5 +1660,65 @@ class PlanningElement extends SqlElement {
     }
     $result="OK";
   }
+  
+  public static function getMilestonableList() {
+    $dir='../model/';
+    $handle = opendir($dir);
+    $result=array();
+    while ( ($file = readdir($handle)) !== false) {
+      if ($file == '.' || $file == '..' || $file=='index.php' // exclude ., .. and index.php
+          || substr($file,-4)!='.php'                           // exclude non php files
+          || substr($file,-8)=='Main.php') {                    // exclude the *Main.php
+        continue;
+      }
+      $class=pathinfo($file,PATHINFO_FILENAME);
+      $ext=pathinfo($file,PATHINFO_EXTENSION);
+      if (file_exists($dir.$class.'Main.php')) {
+        if (property_exists($class, 'idMilestone') and property_exists($class, 'idle')) $result[$class]=i18n($class);
+      }
+    }
+    closedir($handle);
+    asort($result);
+    return $result;
+  }
+  
+  /**
+   * Will update all items referencing the milstone to set planned date to new Milstone planned date
+   * @param string $restrictType => if set will restrict to items of this class
+   * @param string $restrictId => if setand $restricType also set) will restrict to single item 
+   */
+  public function updateMilestonableItems($restrictType=null,$restrictId=null) {
+    if ($restrictType) {
+      $list=array($restrictType);
+    } else {
+      $list=Self::getMilestonableList();
+    }
+    debugLog("MilestonePlanningElement::save() for $this->refType, $this->refId");
+    debugLog($list);
+    $critMilestone=array('idMilestone'=>$this->refId,'idle'=>'0');
+    if ($restrictType && $restrictId) {
+      $critMilestone=array('id'=>$restrictId);
+    }
+    foreach ($list as $class) {
+      $dt="";
+      $arrayDate=array('actualDueDate', 'actualDueDateTime','actualEndDate','plannedDate','plannedDeliveryDate','plannedEisDate','expectedTenderDateTime','expensePlannedDate');
+      foreach($arrayDate as $date) {
+        if (property_exists($class, $date)) {
+          if ($date=='plannedDeliveryDate' and substr($class,-7)=='Version' and Parameter::getGlobalParameter('displayMilestonesStartDelivery')!='YES') continue;
+          $dt=$date;
+          break;
+        }
+      }
+      if ($dt) {
+        debugLog("update $class for $dt");
+        $ref=new $class();
+        $refList=$ref->getSqlElementsFromCriteria($critMilestone);
+        foreach ($refList as $ref) {
+          $ref->$dt=$this->plannedStartDate;
+          $ref->save();
+        }
+      }
+    }
+  }
 }
 ?>
