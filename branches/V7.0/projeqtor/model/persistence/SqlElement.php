@@ -3579,6 +3579,9 @@ abstract class SqlElement {
         if ($colName == 'idProject' and property_exists ( $this, 'id' . get_class ( $this ) . 'Type' )) {
           $colScript .= '   refreshList("id' . get_class ( $this ) . 'Type","idProject", this.value, dijit.byId("id' . get_class ( $this ) . 'Type").get("value"),null,true);';
         }
+        if ($colName == 'idProject' and property_exists ( $this, 'idMilestone' )) {
+          $colScript .= '   refreshList("idMilestone","idProject", this.value);';
+        }
         $arrVers = array(
             'idVersion', 
             'idProductVersion', 
@@ -5910,7 +5913,7 @@ public function getMailDetailFromTemplate($templateToReplace) {
 
   public function getOld() {
     $class = get_class ( $this );
-    return new $class ( $this->id );
+    return new $class ( $this->id, true);
   }
 
   public function splitLongFields() {

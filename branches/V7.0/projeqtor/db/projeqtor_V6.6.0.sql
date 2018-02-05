@@ -289,6 +289,13 @@ ALTER TABLE `${prefix}requirement` ADD `idTargetComponentVersion` INT(12) UNSIGN
 ALTER TABLE `${prefix}requirement` CHANGE `idTargetVersion` `idTargetProductVersion` INT(12) UNSIGNED DEFAULT NULL;
 
 -- ===========================================================
+-- Manage milestone on Requirement
+-- ===========================================================
+
+ALTER TABLE `${prefix}requirement`
+ADD `idMilestone` int(12) UNSIGNED DEFAULT NULL;
+
+-- ===========================================================
 -- FIXINGS
 -- ===========================================================
 
