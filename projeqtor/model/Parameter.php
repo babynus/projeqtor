@@ -313,6 +313,7 @@ class Parameter extends SqlElement {
       case 'manageComponentOnRequirement' :   //ADD qCazelles - Add Component to Requirement - Ticket 171
       case 'manageMilestoneOnItems' :
       case 'autoLinkMilestone' :
+      case 'milestoneFromVersion' :
         $list=array('NO'=>i18n('displayNo'),
                     'YES'=>i18n('displayYes')); 
         break;
@@ -669,6 +670,7 @@ class Parameter extends SqlElement {
       	                    'menuMilestone'=>'section',
       	                      'manageMilestoneOnItems'=>'list',
       	                      'autoLinkMilestone'=>'list',
+      	                      'milestoneFromVersion'=>'list',
       	                    'sectionPlanningControl'=>'section',
       	                      'allowTypeRestrictionOnProject'=>'list',
       	                'tabDisplay'=>"tab",
