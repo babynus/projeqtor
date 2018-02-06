@@ -636,7 +636,15 @@ abstract class SqlElement {
         $this->idProduct = $getVersion->idProduct;
       }
     }
-    
+    if (property_exists($this,'idMilestone') and Parameter::getGlobalParameter('milestoneFromVersion')=='YES' 
+    and (   ( property_exists($this,'idTargetProductVersion') and $this->idTargetProductVersion) 
+         or ( property_exists($this,'idProductVersion') and $this->idProductVersion) 
+        ) ) {
+      $pv=new ProductVersion((property_exists($this,'idTargetProductVersion'))?$this->idTargetProductVersion:$this->idProductVersion);
+      if ($pv->idMilestone) {
+        $this->idMilestone=$pv->idMilestone;
+      }
+    }
     $result = $this->saveSqlElement ();
     if (! property_exists ( $this, '_onlyCallSpecificSaveFunction' ) or ! $this->_onlyCallSpecificSaveFunction) {
       // PlugIn Management
@@ -650,7 +658,6 @@ abstract class SqlElement {
       if ($pe and $pe->id) {
         $pe->updateMilestonableItems(get_class($this),$this->id);
       }
-      
     }
     // ticket #2822 - mehdi
     //$arrayStatusable("Project","Activity","Milestone","Meeting","TestSession");
