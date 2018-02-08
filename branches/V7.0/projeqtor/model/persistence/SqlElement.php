@@ -4518,6 +4518,7 @@ abstract class SqlElement {
     $sender = Parameter::getGlobalParameter ( 'paramMailSender' );
     if ($directStatusMail) { // Direct Send Mail
       $statusMailList = array($directStatusMail->id => $directStatusMail);
+      $statusMailListOrganized=$statusMailList;
       if (getSessionUser ()->email)
         $sender = getSessionUser ()->email;
     } else if ($canBeSend) {
@@ -4872,9 +4873,9 @@ abstract class SqlElement {
     //END add gmartin 
     if ($directStatusMail) {
       if ($resultMail) {
-        return array('result' => 'OK', 'dest' => $destTab['basic']);
+        return array('result' => 'OK', 'dest' => $destTab[0]);
       } else {
-        return array('result' => '', 'dest' => $destTab['basic']);
+        return array('result' => '', 'dest' => $destTab[0]);
       }
     }
     return $resultMail;
