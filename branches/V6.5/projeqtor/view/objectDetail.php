@@ -3435,152 +3435,153 @@ function drawAttachmentsFromObject($obj, $refresh=false) {
   }
 }
 
-function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
-  if ($obj->isAttributeSetToField("_Link", "hidden")) {
+function drawLinksFromObject($list, $obj, $classLink, $refresh = false) {
+  if ($obj->isAttributeSetToField ( "_Link", "hidden" )) {
     return;
   }
   global $cr, $print, $user, $comboDetail;
   if ($comboDetail) {
     return;
   }
-  if (get_class($obj) == 'Document') {
-    $dv=new DocumentVersion();
-    $lstVers=$dv->getSqlElementsFromCriteria(array('idDocument' => $obj->id));
+  if (get_class ( $obj ) == 'Document') {
+    $dv = new DocumentVersion ();
+    $lstVers = $dv->getSqlElementsFromCriteria ( array('idDocument' => $obj->id) );
     foreach ( $lstVers as $dv ) {
-      $crit="(ref1Type='DocumentVersion' and ref1Id=" . htmlEncode($dv->id) . ")";
-      $crit.="or (ref2Type='DocumentVersion' and ref2Id=" . htmlEncode($dv->id) . ")";
-      $lnk=new Link();
-      $lstLnk=$lnk->getSqlElementsFromCriteria(null, null, $crit);
+      $crit = "(ref1Type='DocumentVersion' and ref1Id=" . htmlEncode ( $dv->id ) . ")";
+      $crit .= "or (ref2Type='DocumentVersion' and ref2Id=" . htmlEncode ( $dv->id ) . ")";
+      $lnk = new Link ();
+      $lstLnk = $lnk->getSqlElementsFromCriteria ( null, null, $crit );
       foreach ( $lstLnk as $lnk ) {
         if ($lnk->ref1Type == 'DocumentVersion') {
-          $lnk->ref1Type='Document';
-          $lnk->ref1Id=$obj->id;
+          $lnk->ref1Type = 'Document';
+          $lnk->ref1Id = $obj->id;
         } else {
-          $lnk->ref2Type='Document';
-          $lnk->ref2Id=$obj->id;
+          $lnk->ref2Type = 'Document';
+          $lnk->ref2Id = $obj->id;
         }
-        $list []=$lnk;
+        $list [] = $lnk;
       }
     }
   }
-  $canUpdate=securityGetAccessRightYesNo('menu' . get_class($obj), 'update', $obj) == "YES";
+  $canUpdate = securityGetAccessRightYesNo ( 'menu' . get_class ( $obj ), 'update', $obj ) == "YES";
   if ($obj->idle == 1) {
-    $canUpdate=false;
+    $canUpdate = false;
   }
-  if (!$refresh) echo '<tr><td colspan="2">';
+  if (! $refresh)
+    echo '<tr><td colspan="2">';
   echo '<table style="width:100%;">';
   echo '<tr>';
-  if (!$print) {
+  if (! $print) {
     echo '<td class="linkHeader" style="width:5%">';
-    if ($obj->id != null and !$print and $canUpdate) {
-      $linkable=SqlElement::getSingleSqlElementFromCriteria('Linkable', array('name' => get_class($obj)));
-      $default=$linkable->idDefaultLinkable;
-      echo '<a onClick="addLink(' . "'" . $classLink . "','" . $default . "'" . ');" title="' . i18n('addLink') . '" class="roundedButtonSmall">'.formatSmallButton('Add').'</a>';
+    if ($obj->id != null and ! $print and $canUpdate) {
+      $linkable = SqlElement::getSingleSqlElementFromCriteria ( 'Linkable', array('name' => get_class ( $obj )) );
+      $default = $linkable->idDefaultLinkable;
+      echo '<a onClick="addLink(' . "'" . $classLink . "','" . $default . "'" . ');" title="' . i18n ( 'addLink' ) . '" class="roundedButtonSmall">' . formatSmallButton ( 'Add' ) . '</a>';
     }
     echo '</td>';
   }
-  if (!$classLink) {
-    echo '<td class="linkHeader" style="width:' . (($print)?'20':'15') . '%">' . i18n('colElement') . '</td>';
+  if (! $classLink) {
+    echo '<td class="linkHeader" style="width:' . (($print) ? '20' : '15') . '%">' . i18n ( 'colElement' ) . '</td>';
   } else {
-    echo '<td class="linkHeader" style="width:' . (($print)?'10':'5') . '%">' . i18n('colId') . '</td>';
+    echo '<td class="linkHeader" style="width:' . (($print) ? '10' : '5') . '%">' . i18n ( 'colId' ) . '</td>';
   }
   
-  echo '<td class="linkHeader" style="width:' . (($classLink)?'70':'60') . '%">' . i18n('colName') . '</td>';
+  echo '<td class="linkHeader" style="width:' . (($classLink) ? '65' : '55') . '%">' . i18n ( 'colName' ) . '</td>';
   // if ($classLink and property_exists($classLink, 'idStatus')) {
-  echo '<td class="linkHeader" style="width:10%">' . i18n('colIdStatus') . '</td>';
-  echo '<td class="linkHeader" style="width:10%">' . i18n('colResponsibleShort') . '</td>';
+  echo '<td class="linkHeader" style="width:15%">' . i18n ( 'colIdStatus' ) . '</td>';
+  echo '<td class="linkHeader" style="width:10%">' . i18n ( 'colResponsibleShort' ) . '</td>';
   // }
-  //echo '<td class="linkHeader" style="width:15%">' . i18n('colDate') . '</td>';
-  //echo '<td class="linkHeader" style="width:15%">' . i18n('colUser') . '</td>';
+  // echo '<td class="linkHeader" style="width:15%">' . i18n('colDate') . '</td>';
+  // echo '<td class="linkHeader" style="width:15%">' . i18n('colUser') . '</td>';
   echo '</tr>';
   foreach ( $list as $link ) {
-    $linkObj=null;
-    if ($link->ref1Type == get_class($obj) and $link->ref1Id == $obj->id) {
-      $linkObj=new $link->ref2Type($link->ref2Id);
+    $linkObj = null;
+    if ($link->ref1Type == get_class ( $obj ) and $link->ref1Id == $obj->id) {
+      $linkObj = new $link->ref2Type ( $link->ref2Id );
     } else {
-      $linkObj=new $link->ref1Type($link->ref1Id);
+      $linkObj = new $link->ref1Type ( $link->ref1Id );
     }
-    $userId=$link->idUser;
-    $userName=SqlList::getNameFromId('User', $userId);
-    $creationDate=$link->creationDate;
-    $prop='_Link_' . get_class($linkObj);
-    if ($classLink or !property_exists($obj, $prop)) {
-      $gotoObj=(get_class($linkObj) == 'DocumentVersion')?new Document($linkObj->idDocument):$linkObj;
-      $canGoto=(securityCheckDisplayMenu(null, get_class($gotoObj)) and securityGetAccessRightYesNo('menu' . get_class($gotoObj), 'read', $gotoObj) == "YES")?true:false;
+    $userId = $link->idUser;
+    $userName = SqlList::getNameFromId ( 'User', $userId );
+    $creationDate = $link->creationDate;
+    $prop = '_Link_' . get_class ( $linkObj );
+    if ($classLink or ! property_exists ( $obj, $prop )) {
+      $gotoObj = (get_class ( $linkObj ) == 'DocumentVersion') ? new Document ( $linkObj->idDocument ) : $linkObj;
+      $canGoto = (securityCheckDisplayMenu ( null, get_class ( $gotoObj ) ) and securityGetAccessRightYesNo ( 'menu' . get_class ( $gotoObj ), 'read', $gotoObj ) == "YES") ? true : false;
       echo '<tr>';
-      if (substr(get_class($linkObj), 0, 7) == 'Context') {
-        $classLinkName=SqlList::getNameFromId('ContextType', substr(get_class($linkObj), 7, 1));
+      if (substr ( get_class ( $linkObj ), 0, 7 ) == 'Context') {
+        $classLinkName = SqlList::getNameFromId ( 'ContextType', substr ( get_class ( $linkObj ), 7, 1 ) );
       } else {
-        $classLinkName=i18n(get_class($linkObj));
+        $classLinkName = i18n ( get_class ( $linkObj ) );
       }
-      if (!$print) {
+      if (! $print) {
         echo '<td class="linkData" style="text-align:center;width:5%;white-space:nowrap;">';
-        if ($canGoto and (get_class($linkObj) == 'DocumentVersion' or get_class($linkObj) == 'Document') and isset($gotoObj->idDocumentVersion) and $gotoObj->idDocumentVersion) {
-          echo '<a href="../tool/download.php?class=' . get_class($linkObj) . '&id=' . htmlEncode($linkObj->id) . '"';
-          echo ' target="printFrame" title="' . i18n('helpDownload') . '">'
-               .formatSmallButton('Download')
-               .'</a>';
+        if ($canGoto and (get_class ( $linkObj ) == 'DocumentVersion' or get_class ( $linkObj ) == 'Document') and isset ( $gotoObj->idDocumentVersion ) and $gotoObj->idDocumentVersion) {
+          echo '<a href="../tool/download.php?class=' . get_class ( $linkObj ) . '&id=' . htmlEncode ( $linkObj->id ) . '"';
+          echo ' target="printFrame" title="' . i18n ( 'helpDownload' ) . '">' . formatSmallButton ( 'Download' ) . '</a>';
         }
         if ($canUpdate) {
           echo '  <a onClick="removeLink(' . "'" . htmlEncode ( $link->id ) . "','" . get_class ( $linkObj ) . "','" . htmlEncode ( $linkObj->id ) . "','" . $classLinkName . "','" . $classLink. "'".');" title="' . i18n ( 'removeLink' ) . '" > ' . formatSmallButton ( 'Remove' ) . '</a>';
         }
         echo '</td>';
       }
-      $goto="";
-      if (!$print and $canGoto) {
-      	$goto=' onClick="gotoElement(' . "'" . get_class($gotoObj) . "','" . htmlEncode($gotoObj->id) . "'" . ');" style="cursor: pointer;" ';
+      $goto = "";
+      if (! $print and $canGoto) {
+        $goto = ' onClick="gotoElement(' . "'" . get_class ( $gotoObj ) . "','" . htmlEncode ( $gotoObj->id ) . "'" . ');" style="cursor: pointer;" ';
       }
-      if (!$classLink) {
-        echo '<td class="linkData" style="white-space:nowrap;width:' . (($print)?'20':'15') . '%"> <table><tr><td>';
+      if (! $classLink) {
+        echo '<td class="linkData" style="white-space:nowrap;width:' . (($print) ? '20' : '15') . '%"> <table><tr><td>';
         
-        if (get_class($linkObj) == 'DocumentVersion' or get_class($linkObj) == 'Document') {
-          if (get_class($linkObj) == 'DocumentVersion') $version=$linkObj;
-          else $version=new DocumentVersion($linkObj->idDocumentVersion);
-          if ($version->isThumbable()) {
-            $ext = pathinfo($version->fileName, PATHINFO_EXTENSION);
-            if (file_exists("../view/img/mime/$ext.png")) {
-              $img="../view/img/mime/$ext.png";
+        if (get_class ( $linkObj ) == 'DocumentVersion' or get_class ( $linkObj ) == 'Document') {
+          if (get_class ( $linkObj ) == 'DocumentVersion')
+            $version = $linkObj;
+          else
+            $version = new DocumentVersion ( $linkObj->idDocumentVersion );
+          if ($version->isThumbable ()) {
+            $ext = pathinfo ( $version->fileName, PATHINFO_EXTENSION );
+            if (file_exists ( "../view/img/mime/$ext.png" )) {
+              $img = "../view/img/mime/$ext.png";
             } else {
-              $img= "../view/img/mime/unknown.png";
+              $img = "../view/img/mime/unknown.png";
             }
-            echo '<img src="' . $img . '" ' . ' title="' . htmlEncode($version->fileName) . '" style="float:left;cursor:pointer"' . ' onClick="showImage(\'DocumentVersion\',\'' . htmlEncode($version->id) . '\',\'' . htmlEncode($version->fileName,'protectQuotes') . '\');" />';
+            echo '<img src="' . $img . '" ' . ' title="' . htmlEncode ( $version->fileName ) . '" style="float:left;cursor:pointer"' . ' onClick="showImage(\'DocumentVersion\',\'' . htmlEncode ( $version->id ) . '\',\'' . htmlEncode ( $version->fileName, 'protectQuotes' ) . '\');" />';
           } else {
-            echo htmlGetMimeType($version->mimeType, $version->fileName , $version->id,'DocumentVersion');
+            echo htmlGetMimeType ( $version->mimeType, $version->fileName, $version->id, 'DocumentVersion' );
           }
         } else {
-          echo formatIcon(get_class($linkObj),16);
+          echo formatIcon ( get_class ( $linkObj ), 16 );
         }
-        echo '</td><td ' . $goto . ' style="vertical-align:top">&nbsp;'.$classLinkName .' #' . $linkObj->id.'</td></tr></table>';
+        echo '</td><td ' . $goto . ' style="vertical-align:top">&nbsp;' . $classLinkName . ' #' . $linkObj->id . '</td></tr></table>';
       } else {
-        echo '<td ' . $goto . ' class="linkData" style="white-space:nowrap;width:' . (($print)?'10':'5') . '%">#' . $linkObj->id;
+        echo '<td ' . $goto . ' class="linkData" style="white-space:nowrap;width:' . (($print) ? '10' : '5') . '%">#' . $linkObj->id;
       }
       echo '</td>';
-      echo '<td class="linkData" ' . $goto . ' style="position:relative;width:' . (($classLink)?'45':'35') . '%">';
-     
-      echo (get_class($linkObj) == 'DocumentVersion')?htmlEncode($linkObj->fullName):htmlEncode($linkObj->name);
+      echo '<td class="linkData" ' . $goto . ' style="position:relative;width:' . (($classLink) ? '65' : '55') . '%">';
       
-      echo formatUserThumb($userId, $userName, 'Creator');
-      echo formatDateThumb($creationDate, null);
-      echo formatCommentThumb($link->comment);
+      echo (get_class ( $linkObj ) == 'DocumentVersion') ? htmlEncode ( $linkObj->fullName ) : htmlEncode ( $linkObj->name );
+      
+      echo formatUserThumb ( $userId, $userName, 'Creator' );
+      echo formatDateThumb ( $creationDate, null );
+      echo formatCommentThumb ( $link->comment );
       
       echo '</td>';
-      $idStatus='idStatus';
-      $statusClass='Status';
-      if (! property_exists($linkObj, $idStatus) and property_exists($linkObj, 'id'.get_class($linkObj).'Status')) {
-        $idStatus='id'.get_class($linkObj).'Status';
-        $statusClass=get_class($linkObj).'Status';
+      $idStatus = 'idStatus';
+      $statusClass = 'Status';
+      if (! property_exists ( $linkObj, $idStatus ) and property_exists ( $linkObj, 'id' . get_class ( $linkObj ) . 'Status' )) {
+        $idStatus = 'id' . get_class ( $linkObj ) . 'Status';
+        $statusClass = get_class ( $linkObj ) . 'Status';
       }
-      if (property_exists($linkObj, $idStatus)) {
-        $objStatus=new $statusClass($linkObj->$idStatus);
-        echo '<td class="dependencyData"  style="width:15%">' . colorNameFormatter($objStatus->name . "#split#" . $objStatus->color) . '</td>';
+      if (property_exists ( $linkObj, $idStatus )) {
+        $objStatus = new $statusClass ( $linkObj->$idStatus );
+        echo '<td class="dependencyData"  style="width:15%">' . colorNameFormatter ( $objStatus->name . "#split#" . $objStatus->color ) . '</td>';
       } else {
         echo '<td class="dependencyData"  style="width:15%">&nbsp;</td>';
       }
-      ////KROWRY
-      if (property_exists($linkObj, 'idResource') && $linkObj->idResource != null) {
-        $objR = get_class($linkObj);
-        $objResp=new $objR($linkObj->id);
-        echo '<td class="dependencyData"  style="width:10%">' . formatLetterThumb($objResp->idResource, 22) . '</td>';
+      // //KROWRY
+      if (property_exists ( $linkObj, 'idResource' ) && $linkObj->idResource != null) {
+        $objR = get_class ( $linkObj );
+        $objResp = new $objR ( $linkObj->id );
+        echo '<td class="dependencyData"  style="width:10%">' . formatLetterThumb ( $objResp->idResource, 22 ) . '</td>';
       } else {
         echo '<td class="dependencyData"  style="width:10%">&nbsp;</td>';
       }
@@ -3588,9 +3589,10 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
     }
   }
   echo '</table>';
-  if (!$refresh) echo '</td></tr>';
+  if (! $refresh)
+    echo '</td></tr>';
   if (! $print) {
-    echo '<input id="LinkSectionCount" type="hidden" value="'.count($list).'" />';
+    echo '<input id="LinkSectionCount" type="hidden" value="' . count ( $list ) . '" />';
   }
 }
 
