@@ -3814,9 +3814,9 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh = false) {
     echo '<td class="linkHeader" style="width:' . (($print) ? '10' : '5') . '%">' . i18n ( 'colId' ) . '</td>';
   }
   
-  echo '<td class="linkHeader" style="width:' . (($classLink) ? '70' : '60') . '%">' . i18n ( 'colName' ) . '</td>';
+  echo '<td class="linkHeader" style="width:' . (($classLink) ? '65' : '55') . '%">' . i18n ( 'colName' ) . '</td>';
   // if ($classLink and property_exists($classLink, 'idStatus')) {
-  echo '<td class="linkHeader" style="width:10%">' . i18n ( 'colIdStatus' ) . '</td>';
+  echo '<td class="linkHeader" style="width:15%">' . i18n ( 'colIdStatus' ) . '</td>';
   echo '<td class="linkHeader" style="width:10%">' . i18n ( 'colResponsibleShort' ) . '</td>';
   // }
   // echo '<td class="linkHeader" style="width:15%">' . i18n('colDate') . '</td>';
@@ -3884,7 +3884,7 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh = false) {
         echo '<td ' . $goto . ' class="linkData" style="white-space:nowrap;width:' . (($print) ? '10' : '5') . '%">#' . $linkObj->id;
       }
       echo '</td>';
-      echo '<td class="linkData" ' . $goto . ' style="position:relative;width:' . (($classLink) ? '45' : '35') . '%">';
+      echo '<td class="linkData" ' . $goto . ' style="position:relative;width:' . (($classLink) ? '65' : '55') . '%">';
       
       echo (get_class ( $linkObj ) == 'DocumentVersion') ? htmlEncode ( $linkObj->fullName ) : htmlEncode ( $linkObj->name );
       
