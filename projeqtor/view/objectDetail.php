@@ -4404,156 +4404,158 @@ function drawDependenciesFromObject($list, $obj, $depType, $refresh=false) {
   }
 }
 
-function drawAssignmentsFromObject($list, $obj, $refresh=false) {
+function drawAssignmentsFromObject($list, $obj, $refresh = false) {
   global $cr, $print, $user, $browserLocale, $comboDetail, $section, $collapsedList, $widthPct, $outMode, $profile;
   if ($comboDetail) {
     return;
   }
-  $pluginObjectClass='Assignment';
-  $tableObject=$list;
-  $lstPluginEvt=Plugin::getEventScripts('list',$pluginObjectClass);
-  foreach ($lstPluginEvt as $script) {
+  $pluginObjectClass = 'Assignment';
+  $tableObject = $list;
+  $lstPluginEvt = Plugin::getEventScripts ( 'list', $pluginObjectClass );
+  foreach ( $lstPluginEvt as $script ) {
     require $script; // execute code
   }
-  $list=$tableObject;
-  $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile' => $profile,'scope' => 'assignmentView'));
+  $list = $tableObject;
+  $habil = SqlElement::getSingleSqlElementFromCriteria ( 'HabilitationOther', array(
+      'idProfile' => $profile, 
+      'scope' => 'assignmentView') );
   if ($habil and $habil->rightAccess != 1) {
     return;
   }
   // $section='Assignment';
   // startTitlePane(get_class ( $obj ), $section, $collapsedList, $widthPct, $print, $outMode, "yes", $nbCol);
-  $canUpdate=securityGetAccessRightYesNo('menu' . get_class($obj), 'update', $obj) == "YES";
-  $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile' => $profile,'scope' => 'assignmentEdit'));
+  $canUpdate = securityGetAccessRightYesNo ( 'menu' . get_class ( $obj ), 'update', $obj ) == "YES";
+  $habil = SqlElement::getSingleSqlElementFromCriteria ( 'HabilitationOther', array(
+      'idProfile' => $profile, 
+      'scope' => 'assignmentEdit') );
   if ($habil and $habil->rightAccess != 1) {
-    $canUpdate=false;
+    $canUpdate = false;
   }
-  $pe=new PlanningElement();
-  $pe->setVisibility();
-  $workVisible=($pe->_workVisibility == 'ALL')?true:false;
+  $pe = new PlanningElement ();
+  $pe->setVisibility ();
+  $workVisible = ($pe->_workVisibility == 'ALL') ? true : false;
   if ($obj->idle == 1) {
-    $canUpdate=false;
+    $canUpdate = false;
   }
   echo '<tr><td colspan=2 style="width:100%;"><table style="width:100%;">';
   echo '<tr>';
-  if (!$print and $canUpdate) {
+  if (! $print and $canUpdate) {
     echo '<td class="assignHeader" style="width:10%;vertical-align:middle;">';
-    if ($obj->id != null and !$print and $canUpdate and !$obj->idle and $workVisible) {
-      echo '<a onClick="addAssignment(\'' . Work::displayShortWorkUnit() . '\',\'' . Work::getWorkUnit() . '\',\'' . Work::getHoursPerDay() . '\');" ';
-      echo ' title="' . i18n('addAssignment') . '" > '.formatSmallButton('Add').'</a>';
+    if ($obj->id != null and ! $print and $canUpdate and ! $obj->idle and $workVisible) {
+      echo '<a onClick="addAssignment(\'' . Work::displayShortWorkUnit () . '\',\'' . Work::getWorkUnit () . '\',\'' . Work::getHoursPerDay () . '\');" ';
+      echo ' title="' . i18n ( 'addAssignment' ) . '" > ' . formatSmallButton ( 'Add' ) . '</a>';
     }
     echo '</td>';
   }
-  echo '<td class="assignHeader" style="width:' . (($print)?'40':'30') . '%">' . i18n('colIdResource') . '</td>';
-  echo '<td class="assignHeader" style="width:15%" >' . i18n('colRate') . '</td>';
+  echo '<td class="assignHeader" style="width:' . (($print) ? '40' : '30') . '%">' . i18n ( 'colIdResource' ) . '</td>';
+  echo '<td class="assignHeader" style="width:15%" >' . i18n ( 'colRate' ) . '</td>';
   if ($workVisible) {
-    echo '<td class="assignHeader" style="width:15%">' . i18n('colAssigned') . ' (' . Work::displayShortWorkUnit() . ')' . '</td>';
-    echo '<td class="assignHeader"style="width:15%">' . i18n('colReal') . ' (' . Work::displayShortWorkUnit() . ')' . '</td>';
-    echo '<td class="assignHeader" style="width:15%">' . i18n('colLeft') . ' (' . Work::displayShortWorkUnit() . ')' . '</td>';
+    echo '<td class="assignHeader" style="width:15%">' . i18n ( 'colAssigned' ) . ' (' . Work::displayShortWorkUnit () . ')' . '</td>';
+    echo '<td class="assignHeader"style="width:15%">' . i18n ( 'colReal' ) . ' (' . Work::displayShortWorkUnit () . ')' . '</td>';
+    echo '<td class="assignHeader" style="width:15%">' . i18n ( 'colLeft' ) . ' (' . Work::displayShortWorkUnit () . ')' . '</td>';
   }
   echo '</tr>';
-  $fmt=new NumberFormatter52($browserLocale, NumberFormatter52::DECIMAL);
+  $fmt = new NumberFormatter52 ( $browserLocale, NumberFormatter52::DECIMAL );
   foreach ( $list as $assignment ) {
     echo '<tr>';
-    $isResource=true;
-    $resName=SqlList::getNameFromId('Resource', $assignment->idResource);
+    $isResource = true;
+    $resName = SqlList::getNameFromId ( 'Resource', $assignment->idResource );
     if ($resName == $assignment->idResource) {
-      $affName=SqlList::getNameFromId('Affectable', $assignment->idResource);
+      $affName = SqlList::getNameFromId ( 'Affectable', $assignment->idResource );
       if ($affName != $resName) {
-        $isResource=false;
-        $resName=$affName;
+        $isResource = false;
+        $resName = $affName;
       }
     }
-    if (!$print and $canUpdate) {
-      echo '<td class="assignData" style="text-align:center;white-space:nowrap;vertical-align:middle">';
-      if ($canUpdate and !$print and $workVisible) {
-        echo '  <a onClick="editAssignment(' . "'" . htmlEncode($assignment->id) . "'" . ",'" . htmlEncode($assignment->idResource) . "'" . ",'" . htmlEncode($assignment->idRole) . "'" . ",'" . ($assignment->dailyCost * 100) . "'" . ",'" . htmlEncode($assignment->rate) . "'" . ",'" .
-             Work::displayWork($assignment->assignedWork) * 100 . "'" . ",'" . Work::displayWork($assignment->realWork) * 100 . "'" . ",'" . Work::displayWork($assignment->leftWork) * 100 . "'" . ",'" . Work::displayShortWorkUnit() . "'" . ",".$assignment->optional.');" ' . 'title="' . i18n('editAssignment') .
-             '" > '.formatSmallButton('Edit').'</a>';
-        echo '<textarea style="display:none" id="comment_assignment_' . htmlEncode($assignment->id) . '" >'.htmlEncode($assignment->comment)."</textarea>";
+    if (! $print and $canUpdate) {
+      echo '<td class="assignData" style="width:10%;text-align:center;white-space:nowrap;vertical-align:middle">';
+      if ($canUpdate and ! $print and $workVisible) {
+        echo '  <a onClick="editAssignment(' . "'" . htmlEncode ( $assignment->id ) . "'" . ",'" . htmlEncode ( $assignment->idResource ) . "'" . ",'" . htmlEncode ( $assignment->idRole ) . "'" . ",'" . ($assignment->dailyCost * 100) . "'" . ",'" . htmlEncode ( $assignment->rate ) . "'" . ",'" . Work::displayWork ( $assignment->assignedWork ) * 100 . "'" . ",'" . Work::displayWork ( $assignment->realWork ) * 100 . "'" . ",'" . Work::displayWork ( $assignment->leftWork ) * 100 . "'" . ",'" . Work::displayShortWorkUnit () . "'" . "," . $assignment->optional . ');" ' . 'title="' . i18n ( 'editAssignment' ) . '" > ' . formatSmallButton ( 'Edit' ) . '</a>';
+        echo '<textarea style="display:none" id="comment_assignment_' . htmlEncode ( $assignment->id ) . '" >' . htmlEncode ( $assignment->comment ) . "</textarea>";
       }
-      if ($assignment->realWork == 0 and $canUpdate and !$print and $workVisible) {
-        echo '  <a onClick="removeAssignment(' . "'" . htmlEncode($assignment->id) . "','" . Work::displayWork($assignment->realWork) * 100 . "','" . htmlEncode($resName, 'quotes') . "'" . ');" ' . 
-        'title="' . i18n('removeAssignment') . '" > '.formatSmallButton('Remove').'</a>';
+      if ($assignment->realWork == 0 and $canUpdate and ! $print and $workVisible) {
+        echo '  <a onClick="removeAssignment(' . "'" . htmlEncode ( $assignment->id ) . "','" . Work::displayWork ( $assignment->realWork ) * 100 . "','" . htmlEncode ( $resName, 'quotes' ) . "'" . ');" ' . 'title="' . i18n ( 'removeAssignment' ) . '" > ' . formatSmallButton ( 'Remove' ) . '</a>';
       }
-      if ($canUpdate and !$print and $workVisible) {
-        echo '  <a onClick="divideAssignment(' . htmlEncode($assignment->id) . ',\'' . Work::displayShortWorkUnit() . '\');" ' . 'title="' . i18n('divideAssignment') . '" > '.formatSmallButton('Split').'</a>';
+      if ($canUpdate and ! $print and $workVisible) {
+        echo '  <a onClick="divideAssignment(' . htmlEncode ( $assignment->id ) . ',\'' . Work::displayShortWorkUnit () . '\');" ' . 'title="' . i18n ( 'divideAssignment' ) . '" > ' . formatSmallButton ( 'Split' ) . '</a>';
         echo '</td>';
       }
     }
-    echo '<td class="assignData" style="vertical-align:middle">';
+    echo '<td class="assignData" style="width:' . (($print) ? '40' : '30') . '%;vertical-align:middle">';
     echo '<table width="100%"><tr>';
-    $goto="";
-    if (!$print and $isResource and securityCheckDisplayMenu(null, 'Resource') and securityGetAccessRightYesNo('menuResource', 'read', '') == "YES") {
-      $goto=' onClick="gotoElement(\'Resource\',\'' . htmlEncode($assignment->idResource) . '\');" style="cursor: pointer;" ';
+    $goto = "";
+    if (! $print and $isResource and securityCheckDisplayMenu ( null, 'Resource' ) and securityGetAccessRightYesNo ( 'menuResource', 'read', '' ) == "YES") {
+      $goto = ' onClick="gotoElement(\'Resource\',\'' . htmlEncode ( $assignment->idResource ) . '\');" style="cursor: pointer;" ';
     }
     echo '<td ' . $goto . '>' . $resName;
-    echo ($assignment->idRole)?' (' . SqlList::getNameFromId('Role', $assignment->idRole) . ')':'';
+    echo ($assignment->idRole) ? ' (' . SqlList::getNameFromId ( 'Role', $assignment->idRole ) . ')' : '';
     echo '</td>';
-    if ($assignment->notPlannedWork> 0) {
+    if ($assignment->notPlannedWork > 0) {
       echo '<td>';
-      echo '&nbsp;<span style="float:right;background-color:#FFAAAA; color:#696969; border:1px solid #A9A9A9;" title="' . i18n("colNotPlannedWork") . '">&nbsp;' . Work::displayWorkWithUnit($assignment->notPlannedWork). '&nbsp;</span>';
+      echo '&nbsp;<span style="float:right;background-color:#FFAAAA; color:#696969; border:1px solid #A9A9A9;" title="' . i18n ( "colNotPlannedWork" ) . '">&nbsp;' . Work::displayWorkWithUnit ( $assignment->notPlannedWork ) . '&nbsp;</span>';
       echo '</td>';
     }
-    if ($assignment->comment and !$print) {
+    if ($assignment->comment and ! $print) {
       echo '<td>';
-      echo formatCommentThumb($assignment->comment);
+      echo formatCommentThumb ( $assignment->comment );
       echo '</td>';
     }
-    //gautier #1702
-    if (! $assignment->optional and (get_class($obj)== 'Meeting' or get_class($obj)== 'PeriodicMeeting' ) ) {
+    // gautier #1702
+    if (! $assignment->optional and (get_class ( $obj ) == 'Meeting' or get_class ( $obj ) == 'PeriodicMeeting')) {
       echo '<td>';
-      echo '<a style="float:right; vertical-align:middle;"> '.formatIcon('Favorite',16,i18n('mandatoryAttendant')).'</a>';
+      echo '<a style="float:right; vertical-align:middle;"> ' . formatIcon ( 'Favorite', 16, i18n ( 'mandatoryAttendant' ) ) . '</a>';
       echo '</td>';
     }
     echo '</tr></table>';
     echo '</td>';
-    echo '<td class="assignData" align="center" style="vertical-align:middle">' . htmlEncode($assignment->rate) . '</td>';
+    echo '<td class="assignData" align="center" style="width:15%;vertical-align:middle;text-align:center;">' . htmlEncode ( $assignment->rate ) . '</td>';
     if ($workVisible) {
-    	$keyDownEventScript=NumberFormatter52::getKeyDownEvent();
+      $keyDownEventScript = NumberFormatter52::getKeyDownEvent ();
       // echo '<td class="assignData" align="right" style="vertical-align:middle">'
-      //mehdi======================ticket#1776
-    	echo '<input type="hidden" id="initAss_'.$assignment->id.'" value="' . Work::displayWork($assignment->assignedWork) . '"/>';
-    	echo '<td class="assignData" align="right" style="vertical-align:middle;">';  
-    	if ($canUpdate and get_class($obj)!='PeriodicMeeting' ) { 	
-    			echo '<img  id="idImageAssignedWork'.$assignment->id.'" src="img/savedOk.png" 
+      // mehdi======================ticket#1776
+      if (!$print) echo '<input type="hidden" id="initAss_' . $assignment->id . '" value="' . Work::displayWork ( $assignment->assignedWork ) . '"/>';
+      echo '<td class="assignData" align="right" style="width:15%;vertical-align:middle;">';
+      if ($canUpdate and get_class ( $obj ) != 'PeriodicMeeting' and !$print) {
+        echo '<img  id="idImageAssignedWork' . $assignment->id . '" src="img/savedOk.png" 
                 style="display: none; position:relative;top:2px;left:5px; height:16px;float:left;"/>';
-    			echo '<div dojoType="dijit.form.NumberTextBox" id="assAssignedWork_'.$assignment->id.'" name="assAssignedWork_'.$assignment->id.'"
+        echo '<div dojoType="dijit.form.NumberTextBox" id="assAssignedWork_' . $assignment->id . '" name="assAssignedWork_' . $assignment->id . '"
     						  class="dijitReset dijitInputInner dijitNumberTextBox"
-      					  value="'.Work::displayWork($assignment->assignedWork).'"
+      					  value="' . Work::displayWork ( $assignment->assignedWork ) . '"
                   style="padding:1px;background:none;max-width:100%; box-sizing:border-box;display:block;border:1px solid #A0A0A0 !important;margin:2px 0px" >
                    <script type="dojo/method" event="onChange">
-                    assUpdateLeftWork('.$assignment->id.'); 
-                    saveLeftWork('.$assignment->id.',\'AssignedWork\'); 
-                    //saveLeftWork('.$assignment->id.',\'LeftWork\');
+                    assUpdateLeftWork(' . $assignment->id . '); 
+                    saveLeftWork(' . $assignment->id . ',\'AssignedWork\'); 
+                    //saveLeftWork(' . $assignment->id . ',\'LeftWork\');
                    </script>';
-    			echo $keyDownEventScript;
-    			echo '</div>';
-    	} else {
-    	  echo $fmt->format(Work::displayWork($assignment->assignedWork));
-    	}
-    	echo '</td>';
-    	
-    	echo '<input type="hidden" id="RealWork_'.$assignment->id.'" value="' . Work::displayWork($assignment->realWork) . '"/>';
-    	echo '<td class="assignData" align="right" style="vertical-align:middle">' . $fmt->format(Work::displayWork($assignment->realWork)) . '</td>';
-     
-    	echo '<input type="hidden" id="initLeft_'.$assignment->id.'" value="' . Work::displayWork($assignment->leftWork) . '"/>';
-      echo '<td class="assignData" align="right" style="vertical-align:middle; ">' ;    
-      if ($canUpdate and get_class($obj)!='PeriodicMeeting' ) {
-       	echo '<img  id="idImageLeftWork'.$assignment->id.'" src="img/savedOk.png" style="display: none; position:relative;top:2px;left:5px; height:16px;float:left;"/>';
-      	  echo '<div dojoType="dijit.form.NumberTextBox" id="assLeftWork_'.$assignment->id.'" name="assLeftWork_'.$assignment->id.'"
+        echo $keyDownEventScript;
+        echo '</div>';
+      } else {
+        echo $fmt->format ( Work::displayWork ( $assignment->assignedWork ) );
+      }
+      echo '</td>';
+      
+      echo '<input type="hidden" id="RealWork_' . $assignment->id . '" value="' . Work::displayWork ( $assignment->realWork ) . '"/>';
+      echo '<td class="assignData" align="right" style="width:15%;vertical-align:middle;">' . $fmt->format ( Work::displayWork ( $assignment->realWork ) ) . '</td>';
+      
+      if (!$print) echo '<input type="hidden" id="initLeft_' . $assignment->id . '" value="' . Work::displayWork ( $assignment->leftWork ) . '"/>';
+      echo '<td class="assignData" align="right" style="width:15%;vertical-align:middle;">';
+      if ($canUpdate and get_class ( $obj ) != 'PeriodicMeeting' and !$print) {
+        echo '<img  id="idImageLeftWork' . $assignment->id . '" src="img/savedOk.png" style="display: none; position:relative;top:2px;left:5px; height:16px;float:left;"/>';
+        echo '<div dojoType="dijit.form.NumberTextBox" id="assLeftWork_' . $assignment->id . '" name="assLeftWork_' . $assignment->id . '"
         				class="dijitReset dijitInputInner dijitNumberTextBox"
-        				value="'.Work::displayWork($assignment->leftWork).'"
+        				value="' . Work::displayWork ( $assignment->leftWork ) . '"
                 style="padding:1px;max-width:100%; background:none;box-sizing:border-box;display:block;border:1px solid #A0A0A0 !important;margin:2px 0px"  >
                 <script type="dojo/method" event="onChange">
-                    saveLeftWork('.$assignment->id.',\'LeftWork\');
-                </script>';      
-      	  echo $keyDownEventScript;
-      	  echo '</div>';
+                    saveLeftWork(' . $assignment->id . ',\'LeftWork\');
+                </script>';
+        echo $keyDownEventScript;
+        echo '</div>';
       } else {
-         echo $fmt->format(Work::displayWork($assignment->leftWork));
-      }	   
-      echo '</td>'; }
-     echo '</tr>';
+        echo $fmt->format ( Work::displayWork ( $assignment->leftWork ) );
+      }
+      echo '</td>';
+    }
+    echo '</tr>';
   }
   echo '</table></td></tr>';
 }
