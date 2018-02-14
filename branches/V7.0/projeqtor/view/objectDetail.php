@@ -3494,7 +3494,7 @@ function drawNotesFromObject($obj, $refresh=false) {
   if (! $refresh and ! $print)
     echo '</td></tr>';
   if (! $print) {
-    echo '<input id="NoteSectionCount" type="hidden" value="' . count ( $nbNotes ++ ) . '" />';
+    echo '<input id="NoteSectionCount" type="hidden" value="' . count ( $notes ) . '" />';
   }
 }
 
