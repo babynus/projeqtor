@@ -923,7 +923,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo '&nbsp;';
       }
       
-      if (! $nobr) {
+      if (! $nobr and (!$hide or !$print)) {
         echo "</td></tr>";
       }
     } else if (substr ( $col, 0, 5 ) == '_Link' and ! $comboDetail) { // Display links to other objects
