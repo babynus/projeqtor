@@ -1052,19 +1052,19 @@ class PlanningElement extends SqlElement {
     
     $dest=new PlanningElement($destId);
     if ($dest->topRefType!=$this->topRefType
-    or $dest->topRefId!=$this->topRefId) {
+    or $dest->topRefId!=$this->topRefId) {    // Change parent
       $objectClass=$this->refType;
       $objectId=$this->refId;
-      $task=new $objectClass($objectId);
-      if ($dest->topRefType=="Project") {
+      $task=new $objectClass($objectId);     // Object to move
+      if ($dest->topRefType=="Project") {    // Move directly under project
       	$task->idProject=$dest->topRefId;
       	if (property_exists($task, 'idActivity')) {
       		$task->idActivity=null;
       	}
       	$status="OK";
-      } else if ($dest->topRefType=="Activity" and property_exists($task, 'idActivity')) {
-      	$task->idProject=$dest->idProject;
-      	$task->idActivity=$dest->topRefId;
+      } else if ($dest->topRefType=="Activity" and property_exists($task, 'idActivity')) {  // Move under (new) activity
+      	$task->idProject=$dest->idProject;   // Move to same project
+      	$task->idActivity=$dest->topRefId;   // Move under same activity
       	$status="OK";
       } else if (! $dest->topRefType and $objectClass=='Project') {
       	$task->idProject=null;
@@ -1077,7 +1077,7 @@ class PlanningElement extends SqlElement {
   		} else {
   			$returnValue=i18n('moveCancelled');
   		}
-    } 
+    }
     if (! $returnValue) {
       if ($this->topRefType) {
         $where="topRefType='" . $this->topRefType . "' and topRefId=" . Sql::fmtId($this->topRefId) ;
