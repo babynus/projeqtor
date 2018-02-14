@@ -3164,7 +3164,7 @@ function drawNotesFromObject($obj, $refresh=false) {
   }
   if (!$refresh and !$print) echo '</td></tr>'; 
   if (!$print) {
-    echo '<input id="NoteSectionCount" type="hidden" value="'.count($nbNotes++).'" />';
+    echo '<input id="NoteSectionCount" type="hidden" value="'.count($notes).'" />';
   }
 }
 
@@ -3525,7 +3525,7 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh = false) {
         }
         echo '</td>';
       }
-      $goto = "";
+      $goto = ""; 
       if (! $print and $canGoto) {
         $goto = ' onClick="gotoElement(' . "'" . get_class ( $gotoObj ) . "','" . htmlEncode ( $gotoObj->id ) . "'" . ');" style="cursor: pointer;" ';
       }
