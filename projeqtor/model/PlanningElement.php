@@ -1080,7 +1080,7 @@ class PlanningElement extends SqlElement {
   		if (!$this->idle and $dest->idle) {
   		  $destParent=new PlanningElement($dest->topId);
   		  if ($destParent->idle) { // Move non closed item under closed item : forbidden
-  		    $returnValue=i18n('moveCancelled');
+  		    $returnValue=i18n('moveCancelledIdle');
   		    $status="WARNING";
   		  }
   		}
