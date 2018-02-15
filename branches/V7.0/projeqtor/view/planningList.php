@@ -410,7 +410,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
           ?>
 		</div>
 	</div>
-	<div dojoType="dijit.layout.ContentPane" region="center" id="gridContainerDiv">
+	<div dojoType="dijit.layout.ContentPane" region="center" id="gridContainerDiv" style="border-left:1px solid #A0A0A0;margin-left:10px;">
    <div id="submainPlanningDivContainer" dojoType="dijit.layout.BorderContainer"
     style="border-top:1px solid #ffffff;">
     <?php $leftPartSize=Parameter::getUserParameter('planningLeftSize');
