@@ -1032,7 +1032,7 @@ class PlanningElement extends SqlElement {
   }
 
   public function moveTo($destId,$mode,$recursive=false) {
-    $status="ERROR";
+    $status="WARNING";
     $result="";
     $returnValue="";
     $task=null;
@@ -1076,6 +1076,13 @@ class PlanningElement extends SqlElement {
   		  //$result=i18n('moveDone');
   		} else {
   			$returnValue=i18n('moveCancelled');
+  		}
+  		if (!$this->idle and $dest->idle) {
+  		  $destParent=new PlanningElement($dest->topId);
+  		  if ($destParent->idle) { // Move non closed item under closed item : forbidden
+  		    $returnValue=i18n('moveCancelled');
+  		    $status="WARNING";
+  		  }
   		}
     }
     if (! $returnValue) {
