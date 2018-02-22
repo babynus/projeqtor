@@ -68,6 +68,7 @@
     if($paramIconSize==16){
       $marginTopUnderMenu = -20;
       $marginRight = -1 ;
+      $marginRight2 = -1 ;
       $marginLeft = 20;
       $marginTop = 3;
       $height = 16;
@@ -75,6 +76,7 @@
     elseif($paramIconSize == 22) {
       $marginTopUnderMenu = -26;
       $marginRight = -10 ;
+      $marginRight2 = -10 ;
       $marginLeft = 28;
       $marginTop = 9;
       $height = 22;
@@ -82,6 +84,7 @@
     } elseif($paramIconSize == 32){
       $marginTopUnderMenu = -36;
       $marginRight = -18 ;
+      $marginRight2 = 5 ;
       $marginLeft = 35;
       $marginTop = -22;
       $height = 32;
@@ -131,7 +134,7 @@
          //Under menu case
          echo $indent.'<div onMouseEnter="displayUnderMenu(\''.$idMenu.'\',\''.$idMenuParent.'\')"; onMouseLeave="hideMenu(\''.$idMenu.'\',800)";   data-dojo-attach-point="rowNode" class="dijitTreeRow2" role="presentation" title="" style="padding-left: 5px; margin-top:0px; margin-bottom:0px;">
               <span style="min-width:210px; margin-top:3px; height:'.$height.'px;" role="presentation" class="dijitInline dijitIcon dijitTreeIcon icon'.$icon.$paramIconSize.'" data-dojo-attach-point="iconNode"> <div style="float:left; max-width:210px; margin-left:'.$marginLeft.'px;"> '.$menuNameI18n.' </div> </span>';
-         echo' <a style="float:right; margin-right:'.$marginRight.'px; margin-top:'.$marginTop.'px;"> '.formatIcon('ArrowShowHideMenu',16).'  </a>';
+         echo' <a style="float:right; margin-right:'.$marginRight2.'px; margin-top:'.$marginTop.'px;"> '.formatIcon('ArrowShowHideMenu',16).'  </a>';
          $isUnderMenu = true;
        }
      }
