@@ -795,7 +795,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     <div id="centerDiv" dojoType="dijit.layout.ContentPane" region="center">
     </div>
     
-    <div id="statusBarDivBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:0px; position:absolute; bottom:0px;">
+    <div id="statusBarDivBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="overflow:visible;display:block;height:0px; position:absolute; bottom:0px;">
        <div id="dialogReminder" >
          <div id="reminderDiv" style="width:100%;height: 150px"></div>
           <div style="width:100%; height:15%; text-align:right">
