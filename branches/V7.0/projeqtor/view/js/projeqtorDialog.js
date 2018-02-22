@@ -5267,7 +5267,7 @@ function hideShowMenu(noRefresh,noStore) {
       dojo.byId('menuBarShow').style.display='block';
       dojo.byId('leftDiv_splitter').style.display='none';
       dijit.byId("leftDiv").resize({
-        w : 34
+        w : dojo.byId("menuBarShow").offsetWidth
       });
     } else {
       dojox.fx.combine([ dojox.fx.animateProperty({
@@ -8902,7 +8902,7 @@ function repositionMenuDiv(id,idParent) {
   var currentDiv=dojo.byId('UnderMenu'+id);
   var top = parentDiv.offsetTop;
   var totalHeight = dojo.byId('centerDiv').offsetHeight;
-  currentDiv.style.maxHeight=(totalHeight-30)+'px';
+  currentDiv.style.maxHeight=(totalHeight-50)+'px';
   var height = currentDiv.offsetHeight;
   if (top + height > totalHeight + 10){
     newTop = totalHeight - (top + height) - 10 ; 
@@ -8953,5 +8953,4 @@ function readNotification (id){
     }
   });
 }
-
 //end

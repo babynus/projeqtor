@@ -165,8 +165,8 @@
     //echo '<td>&nbsp;</td>';
   }
 ?>
-  <table width="100%"><tr height="<?php echo $iconSize+8; ?>px">  
-    
+  <table width="100%">
+  <tr height="<?php echo $iconSize+8; ?>px">  
     <td width="40%">
      <button id="menuBarUndoButton" dojoType="dijit.form.Button" showlabel="false"
        title="<?php echo i18n('buttonUndoItem');?>"
@@ -341,8 +341,9 @@
       </td>
       </tr>
       </table>    
-    </td>
-  </tr></table>
+      </td>
+    </tr>
+  </table>
   <div class="customMenuAddRemove"  id="customMenuAdd" onClick="customMenuAddItem();"><?php echo i18n('customMenuAdd');?></div>
   <div class="customMenuAddRemove"  id="customMenuRemove" onClick="customMenuRemoveItem();"><?php echo i18n('customMenuRemove');?></div>
       
