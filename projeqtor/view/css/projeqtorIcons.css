@@ -556,6 +556,10 @@
 .iconMail22 { background-image: url(images/iconMail22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconMail16 { background-image: url(images/iconMail16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
+.iconMailToSend32 { background-image: url(images/iconMailToSend32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.iconMailToSend22 { background-image: url(images/iconMailToSend22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
+.iconMailToSend16 { background-image: url(images/iconMailToSend16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+
 .iconMeasureUnit32 { background-image: url(images/iconMeasureUnit32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconMeasureUnit22 { background-image: url(images/iconMeasureUnit22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconMeasureUnit16 { background-image: url(images/iconMeasureUnit16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
