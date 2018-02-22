@@ -568,8 +568,8 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
      if ($hideMenu){
        $leftWidth="32px";
      }
-    //$IconSizeMenuHide=Parameter::getUserParameter('paramIconSize');
-    $IconSizeMenuHide = 16;
+     //$IconSizeMenuHide = 16;
+    $IconSizeMenuHide=Parameter::getUserParameter('paramIconSize');
     $IconSizeMenuHide2 = $IconSizeMenuHide+5;
    ?>
   <div id="menuBarShow" class="dijitAccordionTitle2 reportTableColumnHeader2 largeReportHeader2"  style="position:absolute;left:0px; top:81px; bottom:0px; width:<?php echo $IconSizeMenuHide2;?>px;">

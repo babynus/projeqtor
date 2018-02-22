@@ -59,10 +59,9 @@
   global  $menuNextIsFirst, $level, $menuLevel;
   $menuNameI18n = i18n($menuName);
   $menuName2 = addslashes(i18n($menuName));
-  //$paramIconSize=Parameter::getUserParameter('paramIconSize');
+  $paramIconSize=Parameter::getUserParameter('paramIconSize');
   $isUnderMenu = false;
-  // a enlever  
-  $paramIconSize = 16;
+ // $paramIconSize = 16;
     $paramIconSize2 = $paramIconSize+13;
     $paramIconSize3 = 182-$paramIconSize;
     
