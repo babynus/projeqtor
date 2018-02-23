@@ -115,7 +115,7 @@
          echo  $indent.'<div title="'.$menuNameI18n.'" onclick="loadMenuBarObject(\'' . $menu .  '\',\'' . htmlEncode($menuName2,'bar') . '\',\'bar\');"   id="Menu'.$idMenu.'" data-dojo-attach-point="rowNode" class="" role="presentation" title="" style="margin-left: -4px; margin-top:5px; margin-bottom:5px;">
                <span role="presentation" class="dijitInline dijitIcon dijitTreeIcon icon'.$icon.$paramIconSize.'" data-dojo-attach-point="iconNode"> </span>'."\n";
        } else {
-         echo  $indent.'<div id="Menu'.$idMenu.'" data-dojo-attach-point="rowNode" class="" role="presentation" title="" style="margin-left: -4px; margin-top:5px; margin-bottom:5px; position:relative;width:34px" onMouseEnter="displayMenu(\''.$idMenu.'\')";  onMouseLeave="hideMenu(\''.$idMenu.'\',800)";  >
+         echo  $indent.'<div id="Menu'.$idMenu.'" data-dojo-attach-point="rowNode" class="" role="presentation" title="" style="margin-left: -4px; margin-top:5px; margin-bottom:5px; position:relative;width:34px" onMouseEnter="displayMenu(\''.$idMenu.'\')";  onMouseLeave="hideMenu(\''.$idMenu.'\',300)";  >
                <span role="presentation" class="dijitInline dijitIcon dijitTreeIcon icon'.$icon.$paramIconSize.'" data-dojo-attach-point="iconNode">  </span>'."\n";
                echo' <a style="float:right; margin-right:'.$marginRight.'px; margin-top:'.$marginTop.'px;"> '.formatIcon('ArrowShowHideMenu',16).'  </a>';
        }
@@ -132,7 +132,7 @@
               <span style="min-width:210px;  margin-top:3px; height:'.$height.'px;" role="presentation" class="dijitInline dijitIcon dijitTreeIcon icon'.$icon.$paramIconSize.'" data-dojo-attach-point="iconNode"><div style="float:left; max-width:210px; margin-left:'.$marginLeft.'px;"> '.$menuNameI18n.' </div> </span>';
        }else{
          //Under menu case
-         echo $indent.'<div onMouseEnter="displayUnderMenu(\''.$idMenu.'\',\''.$idMenuParent.'\')"; onMouseLeave="hideMenu(\''.$idMenu.'\',800)";   data-dojo-attach-point="rowNode" class="dijitTreeRow2" role="presentation" title="" style="padding-left: 5px; margin-top:0px; margin-bottom:0px;">
+         echo $indent.'<div onMouseEnter="displayUnderMenu(\''.$idMenu.'\',\''.$idMenuParent.'\')"; onMouseLeave="hideMenu(\''.$idMenu.'\',300)";   data-dojo-attach-point="rowNode" class="dijitTreeRow2" role="presentation" title="" style="padding-left: 5px; margin-top:0px; margin-bottom:0px;">
               <span style="min-width:210px; margin-top:3px; height:'.$height.'px;" role="presentation" class="dijitInline dijitIcon dijitTreeIcon icon'.$icon.$paramIconSize.'" data-dojo-attach-point="iconNode"> <div style="float:left; max-width:210px; margin-left:'.$marginLeft.'px;"> '.$menuNameI18n.' </div> </span>';
          echo' <a style="float:right; margin-right:'.$marginRight2.'px; margin-top:'.$marginTop.'px;"> '.formatIcon('ArrowShowHideMenu',16).'  </a>';
          $isUnderMenu = true;
