@@ -34,3 +34,12 @@ INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`, `sortOrder`,`level`,`i
 (187, 'menuMailToSend',11,'object',402,'', 0,'Admin');
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`,`allowAccess`) VALUES
 ( 1, 187, 1);
+
+-- ======================================================== --
+-- Critical Path                                            --
+-- ======================================================== --
+
+ALTER TABLE `${prefix}planningelement`
+ADD `latestStartDate` date DEFAULT NULL,
+ADD `latestEndDate` date DEFAULT NULL,
+ADD `isOnCriticalPath` int(1) UNSIGNED DEFAULT 0;
