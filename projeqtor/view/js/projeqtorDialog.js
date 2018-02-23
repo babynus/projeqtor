@@ -6525,7 +6525,7 @@ function dialogMailToOtherChange() {
 function mailerTextEditor(code){
   var callBack= function() {
   var codeParam = dojo.byId("codeParam");
-  codeParam.value = code.name;
+  codeParam.value = code;
 	var editorType=dojo.byId("mailEditorType").value;
 	if (editorType=="CK" || editorType=="CKInline") { // CKeditor type
       ckEditorReplaceEditor("mailEditor",999);
@@ -6539,7 +6539,7 @@ function mailerTextEditor(code){
       dijit.byId("mailMessageEditor").set("height", (screen.height*0.6)+'px'); // Works on first time
       dojo.byId("mailMessageEditor_iframe").style.height=(screen.height*0.6)+'px'; // Works after first time
     }
-	  dojo.byId("mailEditor").innerHTML=dojo.byId(code.name).value;
+	  dojo.byId("mailEditor").innerHTML=dojo.byId(code).value;
   };
   loadDialog('dialogMailEditor', callBack, true, null, true, true);
 }
