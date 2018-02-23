@@ -8876,6 +8876,7 @@ function displayMenu(id){
   if(hideUnderMenuId){
     if (hideUnderMenuId == id ){
       clearTimeout(hideUnderMenuTimeout);
+      hideUnderMenuId=null;
     }else{
       hideUnderMenu(hideUnderMenuId);
     }
