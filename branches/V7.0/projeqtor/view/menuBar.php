@@ -254,23 +254,29 @@
       $menu=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>'menuUserParameter'));
       $buttonUserParameter=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
       if ($buttonUserParameter) {?>
-      <div class="pseudoButton" style="position:absolute;min-width:100px;top:1px;right:105px;" title="<?php echo i18n('menuUserParameter');?>" onClick="loadMenuBarItem('UserParameter','UserParameter','bar');">
-        <table style="width:100%">
-          <tr>
-          <?php $user=getSessionUser();
-                 $imgUrl=Affectable::getThumbUrl('User',$user->id, 22,true);
-            if ($imgUrl) {?>  
-            <td style="width:24px;vertical-align:middle;position:relative;">          
-              <img style="border-radius:13px;height:26px" src="<?php echo $imgUrl; ?>" />
-            </td>
-          <?php } else {?>
-            <td style="width:24px;padding-top:2px;">
-              <div class="iconUserParameter22">&nbsp;</div> 
-            </td>
-          <?php }?>
-            <td style="vertical-align:middle;">&nbsp;<?php echo $user->name; ?>&nbsp;&nbsp;</td>
-          </tr>
-        </table>      
+     <div dojoType="dijit.layout.ContentPane"  class="pseudoButton" style="position:absolute;overflow:hidden; height:29px; min-width:100px;top:0px;right:105px;" title="<?php echo i18n('menuUserParameter');?>">
+        <div dojoType="dijit.form.DropDownButton"  id="" style="display: table-cell;background-color: #D3D3D3;vertical-align: middle;" >
+			<table style="width:100%">
+			  <tr>
+			  <?php $user=getSessionUser();
+					 $imgUrl=Affectable::getThumbUrl('User',$user->id, 22,true);
+				if ($imgUrl) {?>  
+				<td style="width:24px;vertical-align:middle;position:relative;">          
+				  <img style="border-radius:13px;height:26px" src="<?php echo $imgUrl; ?>" />
+				</td>
+			  <?php } else {?>
+				  <td style="width:24px;padding-top:2px;">
+				  <div class="iconUserParameter22">&nbsp;</div> 
+				  </td>
+			   <?php }?>
+				  <td style="vertical-align:middle;">&nbsp;<?php echo $user->name; ?>&nbsp;&nbsp;</td>
+			   </tr>
+			   </table>
+			     <div id="drawMenuUser" dojoType="dijit.TooltipDialog"
+                 style="  max-width:360px; overflow-x:hidden; height:300px;  max-height:500px;  width:300px;">
+                 <?php include "menuUserTop.php" ?>          
+            </div> 
+		    </div>
       </div>
       <?php } else {?>
       <table >
@@ -282,10 +288,11 @@
         </tr>
       </table>    
     <?php }?>
+    
     </td> 
       
      <td width="10%" > 
-     <div class="pseudoButton" onclick="switchMode();" style="height:28px; position:absolute;right:68px; top:0px; z-index:30; width:28px">
+     <div class="pseudoButton" onclick="switchMode();" style="height:28px; position:absolute;right:68px; top:1px; z-index:30; width:30px">
         <table >
           <tr>
             <td style="width:28x">
