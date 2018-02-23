@@ -4870,6 +4870,9 @@ abstract class SqlElement {
       } else { 
         if ($emailTemplateTab[$j]->name == 'basic') {
           $emailTemplateTab[$j]->template = $this->getMailDetail();
+          if ($directStatusMail and isset ( $directStatusMail->message )) {
+            $emailTemplateTab[$j]->template = $this->parseMailMessage ( $directStatusMail->message ) . '<br/><br/>' . $emailTemplateTab[$j]->template;
+          }
           $emailTemplateTab[$j]->title = $title;
           $emailTemplateTab[$j]->template = '<html><head><title>' . $title .
               '</title></head><body style="font-family: Verdana, Arial, Helvetica, sans-serif;">' .
