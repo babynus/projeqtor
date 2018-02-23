@@ -450,10 +450,11 @@ function saveDataToSessionAndReload(param, value, saveUserParameter) {
   saveDataToSession(param, value, saveUserParameter, callBack);
 }
 
-function changeLocale(locale) {
+function changeLocale(locale, saveAsUserParam) {
   if (locale != "") {
     currentLocale = locale;
-    saveDataToSessionAndReload('currentLocale', locale, null);
+    if (saveAsUserParam) saveDataToSession('lang', locale, true);
+    saveDataToSessionAndReload('currentLocale', locale);
   }
 }
 
