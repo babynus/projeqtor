@@ -109,10 +109,10 @@
      if($idMenuParent == 0){
        //echo  "$level$indent<div id='Menu$idMenu' name='$icon' parent='$idMenuParent'>"."\n";
        if (! $hasChildren and $type=='item') {
-        echo  $indent.'<div onclick="loadMenuBarItem(\'' . $menu .  '\',\'' . htmlEncode($menuName2,'quotes') . '\',\'bar\');"   id="Menu'.$idMenu.'" data-dojo-attach-point="rowNode" class="" role="presentation" title="" style="margin-left: -4px; margin-top:5px; margin-bottom:5px;">
+        echo  $indent.'<div title="'.$menuNameI18n.'" onclick="loadMenuBarItem(\'' . $menu .  '\',\'' . htmlEncode($menuName2,'quotes') . '\',\'bar\');"   id="Menu'.$idMenu.'" data-dojo-attach-point="rowNode" class="" role="presentation" title="" style="margin-left: -4px; margin-top:5px; margin-bottom:5px;">
                <span role="presentation" class="dijitInline dijitIcon dijitTreeIcon icon'.$icon.$paramIconSize.'" data-dojo-attach-point="iconNode"> </span>'."\n";
        }elseif (! $hasChildren and $type=='object'){
-         echo  $indent.'<div onclick="loadMenuBarObject(\'' . $menu .  '\',\'' . htmlEncode($menuName2,'bar') . '\',\'bar\');"   id="Menu'.$idMenu.'" data-dojo-attach-point="rowNode" class="" role="presentation" title="" style="margin-left: -4px; margin-top:5px; margin-bottom:5px;">
+         echo  $indent.'<div title="'.$menuNameI18n.'" onclick="loadMenuBarObject(\'' . $menu .  '\',\'' . htmlEncode($menuName2,'bar') . '\',\'bar\');"   id="Menu'.$idMenu.'" data-dojo-attach-point="rowNode" class="" role="presentation" title="" style="margin-left: -4px; margin-top:5px; margin-bottom:5px;">
                <span role="presentation" class="dijitInline dijitIcon dijitTreeIcon icon'.$icon.$paramIconSize.'" data-dojo-attach-point="iconNode"> </span>'."\n";
        } else {
          echo  $indent.'<div id="Menu'.$idMenu.'" data-dojo-attach-point="rowNode" class="" role="presentation" title="" style="margin-left: -4px; margin-top:5px; margin-bottom:5px; position:relative;width:34px" onMouseEnter="displayMenu(\''.$idMenu.'\')";  onMouseLeave="hideMenu(\''.$idMenu.'\',800)";  >
