@@ -4899,13 +4899,13 @@ function redirectMobile(){
 }
 
 function displayImageEditMessageMail(code){
-  var codeParam = code.name;
-  var iconMessageMail = dojo.byId(codeParam+'_iconMessageMail');
+  //var codeParam = code.name;
+  var iconMessageMail = dojo.byId(code+'_iconMessageMail');
   iconMessageMail.style.display = "inline-block";
 }
 
 function hideImageEditMessageMail(code){
-  var codeParam = code.name;
-  var iconMessageMail = dojo.byId(codeParam+'_iconMessageMail');
+  //var codeParam = code.name;
+  var iconMessageMail = dojo.byId(code+'_iconMessageMail');
   iconMessageMail.style.display = "none";
 }
