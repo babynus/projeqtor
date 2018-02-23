@@ -8912,6 +8912,7 @@ function repositionMenuDiv(id,idParent) {
 }
 
 function hideMenu(id,delay){
+  if (! delay) delay=300;
   if(hideUnderMenuTimeout){
     clearTimeout(hideUnderMenuTimeout);
   }
