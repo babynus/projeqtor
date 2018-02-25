@@ -5886,7 +5886,7 @@ public function getMailDetailFromTemplate($templateToReplace) {
     $mutex->reserve ();
     $result = Sql::query ( $query );
     $numMax = '0';
-    if (count ( $result ) > 0) {
+    if ($result) {
       $line = Sql::fetchLine ( $result );
       $refMax = $line ['ref'];
       $numMax = intval(substr ( $refMax, strlen ( $prefix ) ));
