@@ -5369,6 +5369,7 @@ function hideMenuBarShowModeTop(){
     dojo.byId('menuBarShow').style.top='82px';
     var height=parseInt(dojo.byId('mainDiv').offsetHeight)-82;
     dijit.byId('centerDiv').resize({h:height});
+    dijit.byId('leftDiv').resize({h:height});
   }else{
     //dojo.byId('statusBarDiv').style.display='none';
     dojo.byId('statusBarDiv').style.height="0px";
@@ -5378,6 +5379,7 @@ function hideMenuBarShowModeTop(){
     dojo.byId('menuBarShow').style.top='30px';
     var height=parseInt(dojo.byId('mainDiv').offsetHeight)-30;
     dijit.byId('centerDiv').resize({h:height});
+    dijit.byId('leftDiv').resize({h:height});
   }
 }
 
