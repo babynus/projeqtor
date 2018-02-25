@@ -74,7 +74,7 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
 
 <table style="width:99%;" id="userMenuPopup">
   <tr style="height:40px">
-    <td rowspan="2" style="vertical-align:middle;text-align:center;position:relative;"><?php if ($imgUrl) { echo '<img style="border-radius:40px;height:80px" src="'.$imgUrl.'" />'; }?></td>
+    <td rowspan="2" style="white-space:nowrap;vertical-align:middle;text-align:center;position:relative;"><?php if ($imgUrl) { echo '<img style="border-radius:40px;height:80px" src="'.$imgUrl.'" />'; }?></td>
     <td>
       <div class="pseudoButton disconnectTextClass" style="width:120px;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnect(true);">
         <table style="width:122px;">
@@ -89,7 +89,7 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
 <?php
 if ($showUserParameters) { // Do not give access to user parameters if locked ?>
   <tr style="height:40px">
-    <td>
+    <td style="white-space:nowrap;">
       <div class="pseudoButton"  title="<?php echo i18n('menuUserParameter');?>" onClick="loadMenuBarItem('UserParameter','UserParameter','bar');">
         <table style="width:100%">
           <tr>
@@ -103,11 +103,11 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
     </td>
   </tr>
   <tr style="height:40px">
-    <td width="125px" style="text-align:right"><?php echo i18n("paramLang");?>&nbsp;:&nbsp;</td>
+    <td width="120px" style="text-align:right"><?php echo i18n("paramLang");?>&nbsp;:&nbsp;</td>
     <td>  
       <select dojoType="dijit.form.FilteringSelect" class="input" name="langMenuUserTop" id="langMenuUserTop" 
         <?php echo autoOpenFilteringSelect();?>
-        title="'<?php echo i18n('helpLang');?>" style="width:200px">
+        title="<?php echo i18n('helpLang');?>" style="width:225px">
         <script type="dojo/connect" event="onChange" >
           changeLocale(this.value,true);
         </script>
@@ -121,11 +121,11 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
     </td>
   </tr>
   <tr style="height:40px">
-    <td width="125px" style="text-align:right"><?php echo i18n("paramTheme");?>&nbsp;:&nbsp;</td>
+    <td width="120px" style="text-align:right"><?php echo i18n("paramTheme");?>&nbsp;:&nbsp;</td>
     <td>
       <select dojoType="dijit.form.FilteringSelect" class="input" name="themeMenuUserTop" id="themeMenuUserTop"
         <?php echo autoOpenFilteringSelect();?>
-        title="<?php i18n('helpTheme');?>" style="width:200px">
+        title="<?php echo i18n('helpTheme');?>" style="width:225px">
 <?php   echo $obj->getValidationScript('theme');
         $listValues=$listTheme;
         foreach ($listValues as $value => $valueLabel ) {
