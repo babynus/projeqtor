@@ -531,12 +531,12 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
       y += dy;
     };
   };
-  this.drawDependency =function(x1,y1,x2,y2,color,temp,keyDep,dependencyKey,vType) { // For compatibility
-    if (vType=='S-S') {
-      this.drawDependencySS(x1,y1,x2,y2,color,temp,keyDep,dependencyKey);
-    } else if (vType=='E-E') {
+  this.drawDependency =function(x1,y1,x2,y2,color,temp,keyDep,dependencyKey) { // For compatibility
+    if (vType=='E-E') {
       this.drawDependencyEE(x1,y1,x2,y2,color,temp,keyDep,dependencyKey);
-    } else {
+    } else if (vType=='S-S') {
+      this.drawDependencySS(x1,y1,x2,y2,color,temp,keyDep,dependencyKey);
+    } else  {
       this.drawDependencyES(x1,y1,x2,y2,color,temp,keyDep,dependencyKey);
     }
   }
@@ -634,13 +634,13 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           console.log(vType);
           if(vTask!=null && vList[vTask].getVisible()==1 && vList[i].getVisible()==1) {
             if (g.getEndDateView() && vList[vTask].getEnd()>g.getEndDateView() && vList[i].getStart()>g.getEndDateView()) continue;
-            if (vType=='E-S') {
-              this.drawDependencyES(vList[vTask].getEndX(),vList[vTask].getEndY(),vList[i].getStartX()-1,
-                            vList[i].getStartY(),"#"+vList[vTask].getColor(),null,'_'+i+'_'+k,dependencyKey);
-            } else if (vType=='S-S') {
+            if (vType=='S-S' || vList[vTask].getMile()) {
               this.drawDependencySS(vList[vTask].getStartX()-1,vList[vTask].getStartY(),vList[i].getStartX()-1,
                   vList[i].getStartY(),"#"+vList[vTask].getColor(),null,'_'+i+'_'+k,dependencyKey);
-            } else if (vType=='E-E') {
+            } else if (vType=='E-S') {
+              this.drawDependencyES(vList[vTask].getEndX(),vList[vTask].getEndY(),vList[i].getStartX()-1,
+                            vList[i].getStartY(),"#"+vList[vTask].getColor(),null,'_'+i+'_'+k,dependencyKey);
+            } else  if (vType=='E-E') {
               this.drawDependencyEE(vList[vTask].getEndX(),vList[vTask].getEndY(),vList[i].getEndX()-1,
                   vList[i].getEndY(),"#"+vList[vTask].getColor(),null,'_'+i+'_'+k,dependencyKey);
             }
