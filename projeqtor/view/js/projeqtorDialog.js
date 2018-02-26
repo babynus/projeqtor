@@ -8966,3 +8966,20 @@ function readNotification (id){
   });
 }
 //end
+
+// CRON
+
+function cronActivation(idCronExec){
+  showWait();
+  dojo.xhrGet({
+    url : "../tool/cronActivation.php?idCronExec="+idCronExec,
+    load : function(data) {
+      loadContent("../view/parameter.php?type=globalParameter", "centerDiv");
+      adminLaunchScript("cronStop",false);
+      plgCronCheckStop();
+    },
+    error : function(data) {
+      hideWait();
+    }
+  });
+}
