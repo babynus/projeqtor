@@ -1518,7 +1518,7 @@ class PlanningElement extends SqlElement {
   	if (array_key_exists($id, $directFullList)) {
       $result=$directFullList[$id];
   	  foreach ($directFullList[$id] as $idPrec=>$prec) {
-  	    if ($prec['type']=='E-E') continue;
+  	    if ($prec['type']=='E-E' or $prec['type']=='S-S') continue;
   	  	if(array_key_exists($idPrec,$visited)) continue;
   	  	$visited[$idPrec]=1;
         $result=array_merge(self::getRecursivePredecessor($directFullList,$idPrec,$result,$scope,$visited),$result);
