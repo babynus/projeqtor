@@ -585,6 +585,7 @@ class PlanningElement extends SqlElement {
     if ($this->refType=='Project') {
       KpiValue::calculateKpi($this);
     }
+    return $result;
   }
 
   public function wbsSave() {
@@ -1458,7 +1459,7 @@ class PlanningElement extends SqlElement {
       }
       $lstPrec=$directPredecessors["#".$dep->successorId];
       //$lstPrec["#".$dep->predecessorId]=$dep->predecessorId;
-      $lstPrec["#".$dep->predecessorId]=$dep->dependencyDelay;  // #77 : store delay of dependency
+      $lstPrec["#".$dep->predecessorId]=array("delay"=>$dep->dependencyDelay, "type"=>$dep->dependencyType);  // #77 : store delay of dependency
       if (! array_key_exists("#".$dep->predecessorId, $result)) {
       	$parent=new PlanningElement($dep->predecessorId,true);
         $parent->_parentList=array();
@@ -1470,7 +1471,7 @@ class PlanningElement extends SqlElement {
       }
       $parentChilds=$result["#".$dep->predecessorId]->_childList;
       foreach ($parentChilds as $tmpIdChild=>$tempValChild) {
-      	$parentChilds[$tmpIdChild]=$dep->dependencyDelay;
+      	$parentChilds[$tmpIdChild]=array("delay"=>$dep->dependencyDelay, "type"=>$dep->dependencyType);
       }
       if (isset($parentChilds["#".$dep->successorId])) { unset($parentChilds["#".$dep->successorId]); } // Self cannot be it own predecessor
       $directPredecessors["#".$dep->successorId]=array_merge_preserve_keys($lstPrec,$parentChilds);
@@ -1489,7 +1490,10 @@ class PlanningElement extends SqlElement {
       	$visited=array();
       	$parentPrecListTmp=self::getRecursivePredecessor($directPredecessors,$idParent,$result,'parent', $visited);
       	foreach ($parentPrecListTmp as $idPrec=>$valPrec) {
-      	  if (!isset($pe->_predecessorListWithParent[$idPrec]) or $valPrec>$pe->_predecessorListWithParent[$idPrec]) {
+      	  // If relation does not exist yet, 
+      	  if (    !isset($pe->_predecessorListWithParent[$idPrec]) 
+      	      or ($valPrec['type']=='E-S' and $pe->_predecessorListWithParent[$idPrec]['type']=='E-S' and $valPrec['delay']>$pe->_predecessorListWithParent[$idPrec]['delay']) 
+      	      or ($valPrec['type']=='E-S' and $pe->_predecessorListWithParent[$idPrec]['type']!='E-S')) {
       	    $pe->_predecessorListWithParent[$idPrec]=$valPrec;
       	  }
       	}
@@ -1514,6 +1518,7 @@ class PlanningElement extends SqlElement {
   	if (array_key_exists($id, $directFullList)) {
       $result=$directFullList[$id];
   	  foreach ($directFullList[$id] as $idPrec=>$prec) {
+  	    if ($prec['type']=='E-E') continue;
   	  	if(array_key_exists($idPrec,$visited)) continue;
   	  	$visited[$idPrec]=1;
         $result=array_merge(self::getRecursivePredecessor($directFullList,$idPrec,$result,$scope,$visited),$result);
