@@ -1013,7 +1013,12 @@ abstract class SqlElement {
       // indicators
       if (SqlList::getIdFromTranslatableName ( 'Indicatorable', get_class ( $this ) )) {
         $indDef = new IndicatorDefinition ();
-        $crit = array('nameIndicatorable' => get_class ( $this ), 'idle' => '0','idProject' => $this->idProject);
+        if(property_exists($this, 'idProject')) {
+          $idP=(get_class($this)=='Project')?$this->id:$this->idProject;
+          $crit = array('nameIndicatorable' => get_class ( $this ), 'idle' => '0','idProject' => $idP);
+        } else {
+          $crit = array('nameIndicatorable' => get_class ( $this ), 'idle' => '0');
+        }
         $lstInd = $indDef->getSqlElementsFromCriteria ( $crit, false );
         if(!$lstInd){
           $crit = array('nameIndicatorable' => get_class ( $this ), 'idle' => '0','idProject' =>"");
