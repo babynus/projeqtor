@@ -855,13 +855,17 @@ class PlannedWork extends GeneralWork {
       $ass->simpleSave();
     }
     
+    $arrayProj=array();
     foreach ($fullListPlan as $pe) {
+      $arrayProj[$pe->idProject]=$pe->idProject;
    	  $pe->simpleSave();
    	  if ($pe->refType=='Milestone') {
    	    $pe->updateMilestonableItems();
    	  }
      }
-    
+    foreach ($arrayProj as $idP) {
+      Project::unsetNeedReplan($idP);
+    }
     $messageOn = false;
     $endTime=time();
     $endMicroTime=microtime(true);

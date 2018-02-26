@@ -482,7 +482,17 @@ class PlanningElement extends SqlElement {
     	$pe=new PlanningElement($old->topId);
     	$pe->renumberWbs();
     }
-   
+    $pm=new PlanningMode($this->idPlanningMode);
+    if ($this->idPlanningMode!=$old->idPlanningMode      // Change Planning Mode
+     or $this->topId!=$old->topId                        // Change Top
+     or $this->priority!=$old->priority                  // Change priority
+     or ( ($pm->code=='REGUL' or $pm->code=='FULL' or $pm->code=='HALF' or $pm->code=='QUART') and ($this->validatedStartDate!=$old->validatedStartDate or $this->validatedEndDate!=$old->validatedEndDate) )
+     or ( $pm->code=='ALAP' and $this->validatedEndDate!=$old->validatedEndDate)
+     or ( $pm->code=='FIXED' and $this->validatedEndDate!=$old->validatedEndDate)    
+     or ( $pm->code=='START' and $this->validatedStartDate!=$old->validatedStartDate)        
+        ) {
+      Project::setNeedReplan($this->idProject);
+    }
     return $result;
   }
   public function setHandledOnRealWork ($action='check') {
