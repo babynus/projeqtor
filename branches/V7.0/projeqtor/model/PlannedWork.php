@@ -292,7 +292,7 @@ class PlannedWork extends GeneralWork {
         $precTyp=$precValArray['type'];
       	$prec=$fullListPlan[$precId];
         $precEnd=$prec->plannedEndDate;
-        $precStart=$prec->plannedEndDate;
+        $precStart=$prec->plannedStartDate;
         $precFraction=$prec->plannedEndFraction;       
         if ($prec->realEndDate) {
         	$precEnd=$prec->realEndDate;
@@ -318,18 +318,28 @@ class PlannedWork extends GeneralWork {
           $startPossibleFraction=$precFraction;
         }
         if ($precTyp=='S-S') {
-          if ($prec->refType=='Milestone') {
-            $startPossible=$precStart;
+          if ($precVal>0) {
+            $startPossible=addWorkDaysToDate($precStart,$precVal+1);
+          } else if ($precVal<0) {
+            $startPossible=addWorkDaysToDate($precStart,$precVal);
           } else {
-            $startPossible=addWorkDaysToDate($precStart,-1);
+            $startPossible=$precStart;
           }
           $startPossibleFraction=0;
         }
-        if ($precTyp=='E-E' and $profile=="ASAP") {
-          $profile="ALAP";
+        if ($precTyp=='E-E' and $profile=="FDUR" ) {
+          $startPlan=addWorkDaysToDate($precEnd, $plan->validatedDuration *(-1) + 1 + $precVal);
+        } else if ($precTyp=='E-E' and ($profile=="ASAP" or $profile=="GROUP") ) {
+          //$profile="ALAP";
           $step=-1;
           $endPlan=$startPlan;
-          $startPlan=$precEnd;        
+          if ($precVal>0) {
+            $startPlan=addWorkDaysToDate($precEnd,$precVal+1);
+          } else if ($precVal<0) {
+            $startPlan=addWorkDaysToDate($precEnd,$precVal);
+          } else {
+            $startPlan=$precEnd;
+          }
         } else if ($profile=="ALAP") {
           if ($startPossible>=$endPlan) {
             $endPlan=$startPossible;
