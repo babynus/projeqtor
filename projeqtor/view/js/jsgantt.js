@@ -531,7 +531,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
       y += dy;
     };
   };
-  this.drawDependency =function(x1,y1,x2,y2,color,temp,keyDep,dependencyKey) { // For compatibility
+  this.drawDependency =function(x1,y1,x2,y2,color,temp,keyDep,dependencyKey,vType) { // For compatibility
     if (vType=='E-E') {
       this.drawDependencyEE(x1,y1,x2,y2,color,temp,keyDep,dependencyKey);
     } else if (vType=='S-S') {
