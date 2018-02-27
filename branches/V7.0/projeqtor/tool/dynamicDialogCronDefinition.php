@@ -152,7 +152,7 @@ function htmlReturnOptionForMinutesHoursCron($selection, $isHours=false, $isDayO
   }
   $result="";
   if (! $required) {
-    $result.='<option value="*" >'.i18n('all').'</option>';
+    $result.='<option value="*" '.(($selection=='*')?'selected':'').'>'.i18n('all').'</option>';
   }
   foreach($arrayWeekDay as $key=>$line) {
     $result.= '<option value="' . $key . '"';
