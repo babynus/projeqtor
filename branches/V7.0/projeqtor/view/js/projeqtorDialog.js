@@ -8967,18 +8967,37 @@ function readNotification (id){
 }
 //end
 
-// CRON
+// ====================================
+// CRON FEATURES
+// ====================================
 
-function cronActivation(idCronExec){
+function cronActivation(scope){
   showWait();
   dojo.xhrGet({
-    url : "../tool/cronActivation.php?idCronExec="+idCronExec,
+    url : "../tool/cronExecutionStandard.php?operation=activate&cronExecutionScope="+scope,
     load : function(data) {
       loadContent("../view/parameter.php?type=globalParameter", "centerDiv");
-      adminLaunchScript("cronStop",false);
-      plgCronCheckStop();
+      adminCronRelaunch();
     },
     error : function(data) {
+      hideWait();
+    }
+  });
+}
+
+function cronExecutionDefinitionSave(){
+  var finish=false;
+  showWait();
+  dojo.xhrPost({
+    url : "../tool/cronExecutionStandard.php?operation=saveDefinition",
+    form: "cronDefiniton",
+    handleAs : "text",
+    load : function(data, args) {
+      dijit.byId('dialogCronDefinition').hide();
+      loadContent("../view/parameter.php?type=globalParameter", "centerDiv");
+      hideWait();
+    },
+    error : function() {
       hideWait();
     }
   });
