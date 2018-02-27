@@ -32,7 +32,7 @@ if ($operation=='saveDefinition') {
   cronActivate();
 }
 
-function cronPlanningDifferentrial(){
+function cronPlanningDifferential(){
   debugLog("cronPlanningDifferentrial");
 }
 function cronPlanningComplete(){
@@ -63,6 +63,7 @@ function cronActivate() {
   $scope=RequestHandler::getValue('cronExecutionScope');
   $cronExecution=CronExecution::getObjectFromScope($scope);
   $cronExecution->idle=($cronExecution->idle==0)?1:0;
+  $cronExecution->nextTime=null;
   $result=$cronExecution->save();
 }
 ?>
