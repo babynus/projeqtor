@@ -58,6 +58,7 @@ $dayOfWeek=$cron[4];
   <td class="dialogLabel"><label><?php echo i18n("minute");?>&nbsp;:&nbsp;</label></td>
   <td>
     <select dojoType="dijit.form.FilteringSelect" class="input required" required="true"
+    <?php echo autoOpenFilteringSelect();?>
     style="width: 98%;" name="cronDefinitonMinutes" id="cronDefinitonMinutes">
     <?php 
       echo htmlReturnOptionForMinutesHoursCron($minutes);
@@ -69,6 +70,7 @@ $dayOfWeek=$cron[4];
   <td class="dialogLabel"><label><?php echo i18n("hour");?>&nbsp;:&nbsp;</label></td>
   <td>
     <select dojoType="dijit.form.FilteringSelect" class="input required" required="true"
+    <?php echo autoOpenFilteringSelect();?>
     style="width: 98%;" name="cronDefinitonHours" id="cronDefinitonHours">
     <?php 
       echo htmlReturnOptionForMinutesHoursCron($hours,true);
@@ -80,6 +82,7 @@ $dayOfWeek=$cron[4];
   <td class="dialogLabel"><label><?php echo i18n("colFixedDay");?>&nbsp;:&nbsp;</label></td>
   <td>
     <select dojoType="dijit.form.FilteringSelect" class="input required" required="true"
+    <?php echo autoOpenFilteringSelect();?>
     style="width: 98%;" name="cronDefinitonDayOfMonth" id="cronDefinitonDayOfMonth">
     <?php 
       echo htmlReturnOptionForMinutesHoursCron($dayOfMonth,false,true);
@@ -91,6 +94,7 @@ $dayOfWeek=$cron[4];
   <td class="dialogLabel"><label><?php echo i18n("month");?>&nbsp;:&nbsp;</label></td>
   <td>
     <select dojoType="dijit.form.FilteringSelect" class="input required" required="true"
+    <?php echo autoOpenFilteringSelect();?>
     style="width: 98%;" name="cronDefinitonMonth" id="cronDefinitonMonth">
     <?php 
     echo '<option value="*" >'.i18n('all').'</option>';
@@ -104,6 +108,7 @@ $dayOfWeek=$cron[4];
   <td class="dialogLabel"><label><?php echo i18n("colFixedDayOfWeek");?>&nbsp;:&nbsp;</label></td>
   <td>
     <select dojoType="dijit.form.FilteringSelect" class="input required" required="true"
+    <?php echo autoOpenFilteringSelect();?>
     style="width: 98%;" name="cronDefinitonDayOfWeek" id="cronDefinitonDayOfWeek">
     <?php 
       echo '<option value="*" >'.i18n('all').'</option>';
