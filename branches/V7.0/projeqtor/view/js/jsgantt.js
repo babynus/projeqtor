@@ -632,7 +632,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           }
           if(vTask!=null && vList[vTask].getVisible()==1 && vList[i].getVisible()==1) {
             if (g.getEndDateView() && vList[vTask].getEnd()>g.getEndDateView() && vList[i].getStart()>g.getEndDateView()) continue;
-            if (vType=='S-S' || vList[vTask].getMile()) {
+            if (vType=='S-S' || (vList[vTask].getMile() && vType!='E-E')) {
               this.drawDependencySS(vList[vTask].getStartX()-1,vList[vTask].getStartY(),vList[i].getStartX()-1,
                   vList[i].getStartY(),"#"+vList[vTask].getColor(),null,'_'+i+'_'+k,dependencyKey);
             } else if (vType=='E-S') {

@@ -1494,14 +1494,14 @@ class PlanningElement extends SqlElement {
         $pe->_directPredecessorList=array();
       } 
       $visited=array();
-      $pe->_predecessorList=self::getRecursivePredecessor($directPredecessors,$id,$result,'main', $visited);
+      $pe->_predecessorList=self::getRecursivePredecessor($directPredecessors,$id,$result,'main', $visited, 1);
       $pe->_predecessorListWithParent=$pe->_predecessorList;
       foreach ($pe->_parentList as $idParent=>$parent) {
       	$visited=array();
-      	$parentPrecListTmp=self::getRecursivePredecessor($directPredecessors,$idParent,$result,'parent', $visited);
+      	$parentPrecListTmp=self::getRecursivePredecessor($directPredecessors,$idParent,$result,'parent', $visited, 1);
       	foreach ($parentPrecListTmp as $idPrec=>$valPrec) {
       	  // If relation does not exist yet, 
-      	  if (    !isset($pe->_predecessorListWithParent[$idPrec]) 
+      	  if (!isset($pe->_predecessorListWithParent[$idPrec]) 
       	      or ($valPrec['type']=='E-S' and $pe->_predecessorListWithParent[$idPrec]['type']=='E-S' and $valPrec['delay']>$pe->_predecessorListWithParent[$idPrec]['delay']) 
       	      or ($valPrec['type']=='E-S' and $pe->_predecessorListWithParent[$idPrec]['type']!='E-S')) {
       	    $pe->_predecessorListWithParent[$idPrec]=$valPrec;
@@ -1521,17 +1521,27 @@ class PlanningElement extends SqlElement {
   }
   
   
-  private static function getRecursivePredecessor($directFullList, $id, $result,$scope,$visited) {
+  private static function getRecursivePredecessor($directFullList, $id, $result,$scope,$visited,$level) {
   	if (isset($result[$id]->_predecessorList)) {
   		return $result[$id]->_predecessorList;
   	}
   	if (array_key_exists($id, $directFullList)) {
-      $result=$directFullList[$id];
+  	  if ($level==1) {
+        $result=$directFullList[$id];
+  	  } else {
+  	    $dfl=array(); // For level > 1, only include E-S
+  	    foreach ($directFullList[$id] as $dflId=>$dflItem) {
+  	      if ($dflItem['type']=='E-S') {
+  	        $dfl[$dflId]=$dflItem;
+  	      }
+  	    }
+  	    $result=$dfl;
+  	  }
   	  foreach ($directFullList[$id] as $idPrec=>$prec) {
-  	    if ($prec['type']=='E-E' or $prec['type']=='S-S') continue;
+  	    if ($prec['type']=='E-E' or $prec['type']=='S-S') continue; // If current is not E-S, do not retreive recursive predecessors
   	  	if(array_key_exists($idPrec,$visited)) continue;
   	  	$visited[$idPrec]=1;
-        $result=array_merge(self::getRecursivePredecessor($directFullList,$idPrec,$result,$scope,$visited),$result);
+        $result=array_merge(self::getRecursivePredecessor($directFullList,$idPrec,$result,$scope,$visited,$level+1),$result);
       }
     } else {
       $result=array();

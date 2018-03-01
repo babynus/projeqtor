@@ -313,9 +313,10 @@
         	}
         	if ($proj->fixPlanning) {
         	  $line['reftype']='Fixed';
-        	}
-        	if ( ! isset($plannableProjectsList[$line["refid"]]) ) {
+        	} else if ( ! isset($plannableProjectsList[$line["refid"]]) ) {
         	  $line['reftype']='Fixed';
+        	} else if ($line["needreplan"]) {
+        	  $line['reftype']='Replan';
         	}
         } else if ($portfolio and $line["reftype"]=="Milestone" and $line["topreftype"]!='Project') {
           $line["topid"]=$topProjectArray[$line['idproject']];
@@ -348,7 +349,7 @@
           echo ',"baseBottomStart":"'.$arrayBase['bottom'][$refItem]['start'].'"';
           echo ',"baseBottomEnd":"'.$arrayBase['bottom'][$refItem]['end'].'"';
         }
-        if ($line['reftype']!='Project' and $line['reftype']!='Fixed' and $line['reftype']!='Construction') {
+        if ($line['reftype']!='Project' and $line['reftype']!='Fixed' and $line['reftype']!='Construction' and $line['reftype']!='Replan') {
           $arrayResource=array();
           // if ($showResource) { //
           if (1) { // Must always retreive resource to display value in column, even if not displayed 
