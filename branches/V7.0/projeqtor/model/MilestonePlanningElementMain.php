@@ -30,7 +30,7 @@
 require_once('_securityCheck.php');
 class MilestonePlanningElementMain extends PlanningElement {
 
-    public $id;
+  public $id;
   public $idProject;
   public $refType;
   public $refId;
@@ -125,7 +125,7 @@ class MilestonePlanningElementMain extends PlanningElement {
    * Return the specific fieldsAttributes
    * @return the fieldsAttributes
    */
-  protected function getStaticFieldsAttributes() {
+  protected function getStaticFieldsAttributes() {  
     return array_merge(parent::getStaticFieldsAttributes(),self::$_fieldsAttributes);
   }
 
