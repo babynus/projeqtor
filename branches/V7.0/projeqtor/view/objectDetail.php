@@ -589,7 +589,6 @@ $cr, $print, $treatedObjects, $displayWidth, $outMode, $comboDetail, $collapsedL
   
   // Loop on each property of the object
   foreach ($obj as $col=>$val) {
-    debugLog("$col : ".$obj->getFieldAttributes($col));
     if ($detailWidth) {
       $colWidth=round((intval($displayWidth))/$nbCol); // 3 columns should be displayable
       $maxWidth=$colWidth-$labelWidth; // subtract label width
