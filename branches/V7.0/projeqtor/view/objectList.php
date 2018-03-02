@@ -249,7 +249,7 @@ if ($displayWidthList<1400) {
                 if($comboDetail && $proj != '*'){
                ?> 
             <td style="width:200px;text-align: right; align: right;min-width:150px" >
-                &nbsp;&nbsp;<?php echo i18n("showAllProject");?>
+                &nbsp;&nbsp;<?php echo i18n("showAllProjects");?>
               </td>
               <td style="width:10px;text-align: center; align: center;white-space:nowrap;">&nbsp;
                 <div title="<?php echo i18n('showAllProjects')?>" dojoType="dijit.form.CheckBox" type="checkbox" class="whiteCheck"
