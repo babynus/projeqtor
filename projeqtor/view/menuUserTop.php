@@ -111,7 +111,7 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
 if ($showUserParameters) { // Do not give access to user parameters if locked ?>
   <tr style="height:40px">
     <td style="white-space:nowrap;">
-      <div class="pseudoButton"  title="<?php echo i18n('menuUserParameter');?>" onClick="loadMenuBarItem('UserParameter','UserParameter','bar');">
+      <div class="pseudoButton"  title="<?php echo i18n('menuUserParameter');?>" onClick="loadMenuBarItem('UserParameter','UserParameter','bar');dijit.byId('iconMenuUserPhoto').closeDropDown();">
         <table style="width:100%">
           <tr>
             <td style="width:24px;padding-top:2px;">
