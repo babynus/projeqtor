@@ -370,7 +370,7 @@ function changeTheme(newTheme) {
     var callBack = function() { 
       addMessage("Theme=" + newTheme); 
     };
-    saveDataToSession('theme',newTheme, null, callBack);
+    saveDataToSession('theme',newTheme, true, callBack);
   }
 }
 
