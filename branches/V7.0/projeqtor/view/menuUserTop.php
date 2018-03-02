@@ -67,6 +67,7 @@ $listTheme=array('ProjeQtOrFlatBlue'=>i18n('themeProjeQtOrFlatBlue'),
     'random'=>i18n('themeRandom')); // keep 'random' as last value to assure it is not selected via getTheme()
 $userLang = getSessionValue('currentLocale');
 $userTheme = getSessionValue('theme');
+$startPage = getSessionValue('startPage');
 $listStartPage=array();
 if (securityCheckDisplayMenu(null,'Today')) {$listStartPage['today.php']=i18n('menuToday');}
 if (securityCheckDisplayMenu(null,'DashboardTicket')) {$listStartPage['dashboardTicketMain.php']=i18n('menuDashboardTicket');}
@@ -158,15 +159,15 @@ if ($showUserParameters) { // Do not give access to user parameters if locked ?>
     </td>
   </tr>
   <tr style="height:40px">
-    <td width="120px" style="text-align:right"><?php echo i18n("paramStartPage");?>&nbsp;:&nbsp;</td>
+    <td width="120px" style="text-align:right"><?php echo i18n("menuUserStartPage");?>&nbsp;:&nbsp;</td>
     <td>  
       <select dojoType="dijit.form.FilteringSelect" class="input" name="firstPageMenuUserTop" id="firstPageMenuUserTop" 
         <?php echo autoOpenFilteringSelect();?>
-        title="<?php echo i18n('helpStartPage');?>" style="width:225px">
+        title="<?php echo i18n('menuUserStartPage');?>" style="width:225px">
 <?php   echo $obj->getValidationScript('startPage');
         $listValues=$listStartPage;
         foreach ($listValues as $value => $valueLabel ) {
-          $selected = ($userLang==$value)?'selected':'';
+          $selected = ($startPage==$value)?'selected':'';
           $value=str_replace(',','#comma#',$value); // Comma sets an isse (not selected) when in value
           echo '<option value="' . $value . '" ' . $selected . '>' . $valueLabel . '</option>';
         }?>
