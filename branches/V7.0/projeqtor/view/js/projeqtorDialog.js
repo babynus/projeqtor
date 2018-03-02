@@ -1187,6 +1187,8 @@ function saveAttachmentAck(dataArray) {
   dojo.byId('resultAck').value=result.message;
   loadContent("../tool/ack.php", "resultDiv", "attachmentAckForm", true,
       'attachment');
+//gautier #menuUserTop
+  loadContent("../view/menuUserTop.php", "drawMenuUser");
 }
 
 function saveAttachmentProgress(data) {
@@ -1225,6 +1227,8 @@ function removeAttachment(attachmentId) {
   actionOK=function() {
     loadContent("../tool/removeAttachment.php", "resultDiv", "attachmentForm",
         true, 'attachment');
+    loadContent("../view/menuUserTop.php", "drawMenuUser");
+    //loadContent("../view/menuBar.php", "iconMenuUserPhoto");
   };
   msg=i18n('confirmDelete', new Array(i18n('Attachment'), attachmentId));
   showConfirm(msg, actionOK);
@@ -5102,7 +5106,7 @@ function showHelpOld() {
 }
 var manualWindow=null;
 var helpTimer=false;
-function showHelp() {
+function showHelp(link) {
   if (helpTimer) return; // avoid double open
   helpTimer=true;
   if (manualWindow) manualWindow.close();
@@ -5113,6 +5117,9 @@ function showHelp() {
     section=objectClassManual.value;
   } else if (objectClass) {
     section=objectClass.value;
+  }
+  if(link == 'ShortCut'){
+    section = link;
   }
   dojo.xhrGet({
     url : "../tool/getManualUrl.php?section=" + section,
@@ -5363,9 +5370,12 @@ function hideMenuBarShowMode() {
 function hideMenuBarShowMode2() {
   hideShowMenu(true);
 }
+
 //gautier menu top
 function hideMenuBarShowModeTop(){ 
   if(dojo.byId('statusBarDiv').style.height == '0px'){
+    console.log('test3');
+    saveDataToSession("hideMenuTop","NO",true);
     //dojo.byId('statusBarDiv').style.display='block';
     dojo.byId('statusBarDiv').style.height="48px";
     dojo.byId('statusBarDiv').style.padding="1px";
@@ -5376,6 +5386,8 @@ function hideMenuBarShowModeTop(){
     dijit.byId('centerDiv').resize({h:height});
     dijit.byId('leftDiv').resize({h:height});
   }else{
+    console.log('test4');
+    saveDataToSession("hideMenuTop","YES",true);
     //dojo.byId('statusBarDiv').style.display='none';
     dojo.byId('statusBarDiv').style.height="0px";
     dojo.byId('statusBarDiv').style.padding="0px";

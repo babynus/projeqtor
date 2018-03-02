@@ -823,7 +823,6 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
         </div>
        
     </div>
-    
     <div id="statusBarDiv" dojoType="dijit.layout.ContentPane" region="top" style="height:48px; position:absolute; top:30px;">
       <table width="100%">
       
@@ -899,7 +898,6 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 </td>
 </table>
 </div>
-
     <div id="dialogAlert" dojoType="dijit.Dialog" title="<?php echo i18n("dialogAlert");?>">
       <table>
         <tr>
