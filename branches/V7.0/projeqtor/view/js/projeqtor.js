@@ -2520,7 +2520,7 @@ function drawGantt() {
       // pGroup : is the task a group one ?
       var pGroup = (item.elementary == '0') ? 1 : 0;
       //MODIF qCazelles - GANTT
-      if (item.reftype=='Project' || item.reftype=='Fixed' || item.reftype=='Construction' || item.reftype=='ProductVersionhasChild' || item.reftype=='ComponentVersionhasChild' ) pGroup=1;
+      if (item.reftype=='Project' || item.reftype=='Fixed' || item.reftype=='Replan' || item.reftype=='Construction' || item.reftype=='ProductVersionhasChild' || item.reftype=='ComponentVersionhasChild' ) pGroup=1;
      //END MODIF qCazelles - GANTT
       // runScript : JavaScript to run when click on task (to display the
       // detail of the task)
@@ -2616,7 +2616,7 @@ function drawGantt() {
 }
 
 function runScript(refType, refId, id) {
-  if (refType == 'Fixed' || refType=='Construction') {
+  if (refType == 'Fixed' || refType=='Construction' || refType=='Replan') {
     refType = 'Project';
   }
   //ADD by qCazelles - GANTT

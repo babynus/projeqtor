@@ -80,6 +80,9 @@ class PlanningElement extends SqlElement {
   public $idBill;
   public $validatedCalculated;
   public $validatedExpenseCalculated;
+  public $latestStartDate;
+  public $latestEndDate;
+  public $isOnCriticalPath;
   public $notPlannedWork;
   
   private static $_fieldsAttributes=array(

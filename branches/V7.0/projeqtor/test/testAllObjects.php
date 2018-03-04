@@ -115,6 +115,13 @@ function fillObj($obj) {
 			} else {
 			  $obj->$fld='Project';
 			}
+	  } else if ($fld=='refId') {
+			$obj->$fld=9;  
+		} else if ($fld=='topId') {
+		  $obj->$fld="";
+	  } else if ($fld=='idProject' or $fld=='topRefId') {
+			  $obj->$fld=1;
+			  PlanningElement::$_noDispatch=true;
 		} else if (isset($dbCrit[$fld])) {
 			// Nothing : field is a database criteria : will be set automatically	
 		} else if (SqlElement::is_a($obj,'Bill') and $fld=='done') {
@@ -128,13 +135,14 @@ function fillObj($obj) {
 		} else if ($fld=='idStatus') {
 		    $obj->$fld=1;
 		} else if ($fld=='notifiableItem') {
-		  $obj->$fld='Action';
+		  $obj->$fld=($obj->id)?'Action':'Ticket';
+		} else if ($fld=='notificationReceivers') {
+		  $obj->$fld='idResource';
 		} else if ($fld=='targetDateNotifiableField') {
-		  $obj->$fld='initialDueDate';
+		  $_REQUEST['_spe_targetDateNotifiableField']='creationDateTime';
+		  $obj->$fld='doneDate';
 		} else if ($fld=='idProductVersion' and get_class($obj)=='Delivery') {     
 		  $obj->$fld=null;
-		} else if ($fld=='refId') {
-			$obj->$fld='9999';
 	  } else if ($fld=='idProject' and get_class($obj)!='Project') {
 			  $obj->$fld=1;
 		} else if ($fld=='id' or $fld=='topRefType' or $fld=='topId') {
