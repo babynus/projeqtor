@@ -515,7 +515,7 @@
             $line['statuscolor'] = '';
           }
         }
-        if ($line['reftype']!='Project' and $line['reftype']!='Fixed' and $line['reftype']!='Construction') { // 'Fixed' and 'Construction' are projects !!!!
+        if ($line['reftype']!='Project' and $line['reftype']!='Fixed' and $line['reftype']!='Construction' and $line['reftype']!='Replan') { // 'Fixed' and 'Construction' are projects !!!!
           $arrayResource=array();
           if (isset($columnsDescription['Resource']) and $columnsDescription['Resource']['show']==1) { // Must always retreive resource to display value in column, even if not displayed
             $crit=array('refType'=>$line['reftype'], 'refId'=>$line['refid']);
@@ -764,6 +764,7 @@
         // pGroup : is the task a group one ?
         $pGroup=($line['elementary']=='0')?1:0;
         if ($line['reftype']=='Fixed') $pGroup=1;
+        if ($line['reftype']=='Replan') $pGroup=1;
         if ($closedWbs and strlen($line['wbssortable'])<=strlen($closedWbs)) {
           $closedWbs="";
         }
