@@ -899,6 +899,7 @@ class PlannedWork extends GeneralWork {
 // ================================================================================================================================
   
   private static function calculateCriticalPath($idProject,$fullListPlan) {
+    if (!trim($idProject) or $idProject=='*') return $fullListPlan;
     $start=null;
     $end=null;
     $arrayStep=array('early'=>null,'late'=>null,'before'=>array(),'after'=>array());
