@@ -2440,6 +2440,7 @@ function drawGantt() {
   }
   g.setStartDateView(startDateView);
   g.setEndDateView(endDateView);
+  g.setShowCriticalPath(dijit.byId('criticalPathPlanning').get('checked'));
   var contentNode = dojo.byId('gridContainerDiv');
   if (contentNode) {
     g.setWidth(dojo.style(contentNode, "width"));
@@ -2546,25 +2547,13 @@ function drawGantt() {
         pColor = 'aec5ae';
       }
       
-      //CHANGE by qCazelles - Correction GANTT - Ticket #100
-      //Old
-//      if (item.ownDate == '1') {
-//    	  pColor = 'BB5050';
-//      }
-//      else if(item.ownDate == '0') {
-//    	  pColor = '50BB50';
-//      }
-      //New
       if (item.redElement == '1') {
     	  pColor = 'BB5050';
       }
       else if(item.redElement == '0') {
     	  pColor = '50BB50';
-      }
-      //END CHANGE qCazelles - Correction GANTT - Ticket #100
+      }      
       
-      
-      // pColor = '9099BB';
       // pMile : is it a milestone ?      
       var pMile = (item.reftype == 'Milestone') ? 1 : 0;
       if (pMile) {
@@ -2595,6 +2584,7 @@ function drawGantt() {
       if (keys.indexOf(topKey) == -1) {
         topId = '';
       }
+      console.log(item);
       keys += "#" + curKey + "#";
       g.AddTaskItem(new JSGantt.TaskItem(item.id, pName, pStart, pEnd, pColor,
           runScript, contextMenu, pMile, pResource, progress, pGroup, 
@@ -2604,7 +2594,7 @@ function drawGantt() {
           item.priority, item.planningmode, 
           item.status, item.type, 
           item.validatedcostdisplay, item.assignedcostdisplay, item.realcostdisplay, item.leftcostdisplay, item.plannedcostdisplay,
-          item.baseTopStart, item.baseTopEnd, item.baseBottomStart, item.baseBottomEnd));
+          item.baseTopStart, item.baseTopEnd, item.baseBottomStart, item.baseBottomEnd, item.isoncriticalpath));
     }
     g.Draw();
     g.DrawDependencies();

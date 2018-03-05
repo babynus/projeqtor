@@ -220,13 +220,12 @@
     . ' where ' . str_replace('planningelement','planningelementbaseline',$queryWhere) . ' and idBaseline='.Sql::fmtId($id)
     . ' order by ' . str_replace('planningelement','planningelementbaseline',$queryOrderBy);
     $resBase=Sql::query($query);
-     while ($base = Sql::fetchLine($resBase)) {
-       if ($base['startdate'] and $base['enddate'] and $base['itemtype'] and $base['itemid']) {
-         $arrayBase[$pos][$base['itemtype'].'_'.$base['itemid']]=array('start'=>$base['startdate'],'end'=>$base['enddate']);
-       }
+   while ($base = Sql::fetchLine($resBase)) {
+     if ($base['startdate'] and $base['enddate'] and $base['itemtype'] and $base['itemid']) {
+       $arrayBase[$pos][$base['itemtype'].'_'.$base['itemid']]=array('start'=>$base['startdate'],'end'=>$base['enddate']);
      }
+   }
   }
-  
   // constitute query and execute
   $queryWhere=($queryWhere=='')?' 1=1':$queryWhere;
   $query='select ' . $querySelect
