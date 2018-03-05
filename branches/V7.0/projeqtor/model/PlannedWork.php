@@ -117,7 +117,7 @@ class PlannedWork extends GeneralWork {
 // PLAN
 // ================================================================================================================================
 
-  public static function plan($projectIdArray, $startDate,$withCriticalPath=false) {
+  public static function plan($projectIdArray, $startDate,$withCriticalPath=true) {
   	projeqtor_set_time_limit(300);
   	projeqtor_set_memory_limit('512M');
   	
@@ -856,14 +856,19 @@ class PlannedWork extends GeneralWork {
       $ass->simpleSave();
     }
     
-    $arrayProj=array();
-    $withCriticalPath=true; debugLog("call critical patch calculation");
+    
     if ($withCriticalPath) {
+      if ($allProjects) {
+        $proj=new Project(' ',true);
+        $projectIdArray=array_keys($proj->getRecursiveSubProjectsFlatList(true, true));
+      }
       foreach ($projectIdArray as $idP) {
         $fullListPlan=self::calculateCriticalPath($idP,$fullListPlan);
       }
     }
+    $arrayProj=array();
     foreach ($fullListPlan as $pe) {
+      if (!$pe->refType) continue;
       $arrayProj[$pe->idProject]=$pe->idProject;
    	  $pe->simpleSave();
    	  if ($pe->refType=='Milestone') {
@@ -899,6 +904,7 @@ class PlannedWork extends GeneralWork {
 // ================================================================================================================================
   
   private static function calculateCriticalPath($idProject,$fullListPlan) {
+    debugLog("calculateCriticalPath($idProject)");
     if (!trim($idProject) or $idProject=='*') return $fullListPlan;
     $start=null;
     $end=null;
@@ -928,7 +934,7 @@ class PlannedWork extends GeneralWork {
       } 
       // TODO : get predecessors
     }
-    $cp=array();
+    $cp=array('node'=>array(),'task'=>array());
     $cp['node']['S']=$arrayStep; 
     $cp['node']['S']['early']=$start;
     $cp['node']['E']=$arrayStep;
