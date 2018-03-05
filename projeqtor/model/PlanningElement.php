@@ -128,7 +128,10 @@ class PlanningElement extends SqlElement {
                                   "plannedStartFraction"=>"hidden",
                                   "plannedEndFraction"=>"hidden",
                                   "validatedStartFraction"=>"hidden",
-                                  "validatedEndFraction"=>"hidden"
+                                  "validatedEndFraction"=>"hidden",
+                                  "latestStartDate"=>"hidden",
+                                  "latestEndDate"=>"hidden",
+                                  "isOnCriticalPath"=>"hidden"
   );   
   
   private static $predecessorItemsArray = array();
