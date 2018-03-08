@@ -1500,7 +1500,8 @@ class PlanningElement extends SqlElement {
         $pe->_directPredecessorList=array();
       } 
       $visited=array();
-      $pe->_predecessorList=self::getRecursivePredecessor($directPredecessors,$id,$result,'main', $visited, 1);
+      //$pe->_predecessorList=self::getRecursivePredecessor($directPredecessors,$id,$result,'main', $visited, 1); // #3212
+      $pe->_predecessorList=$pe->_directPredecessorList;  // #3212 : do not get recursive predecessors, only direct
       $pe->_predecessorListWithParent=$pe->_predecessorList;
       foreach ($pe->_parentList as $idParent=>$parent) {
       	$visited=array();
