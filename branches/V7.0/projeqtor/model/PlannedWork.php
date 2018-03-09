@@ -428,6 +428,22 @@ class PlannedWork extends GeneralWork {
           $fullListPlan=self::storeListPlan($fullListPlan,$plan);
           //$plan->save();
         }
+        if ($profile=="ASAP" and $plan->assignedWork==0 and $plan->realWork==0 and $plan->leftWork==0 and $plan->validatedWork>0) {
+          if (! $plan->realStartDate) {
+            if ($plan->elementary) {
+              $plan->plannedStartDate=$startPlan;
+              $endPlan=addWorkDaysToDate($startPlan,$plan->validatedWork);
+            }
+          } else {
+            $endPlan=addWorkDaysToDate($plan->realStartDate,$plan->validatedWork);
+          }
+          if (! $plan->realEndDate) {
+            $plan->plannedEndDate=$endPlan;
+          }
+          $fullListPlan=self::storeListPlan($fullListPlan,$plan);
+          //$plan->save();
+        }
+        
         // get list of top project to chek limit on each project
         if ($withProjectRepartition) {
           $proj = new Project($plan->idProject,true);
