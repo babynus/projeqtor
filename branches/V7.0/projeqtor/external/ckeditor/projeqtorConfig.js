@@ -26,7 +26,7 @@ CKEDITOR.editorConfig = function( config ) {
   config.pasteFilter='span(*){*};div(*){*};p(*){*};table(*){*};tr(*){*};td(*){*};pre(*){*};blockquote(*){*};br[clear];style';
   config.resize_minHeight = 150;
   config.extraPlugins = 'openlink';
-  config.extraPlugins = 'sourcearea';
+  config.extraPlugins += ',sourcearea';
   //gautier
   if (dojo.byId('ckeditorType')){
     var cktype=dojo.byId('ckeditorType').value;
