@@ -869,7 +869,7 @@ class PlannedWork extends GeneralWork {
     $arrayProj=array();
     foreach ($fullListPlan as $pe) {
       if (!$pe->refType) continue;
-      $arrayProj[$pe->idProject]=$pe->idProject;
+      if ($pe->refType!='Project') $arrayProj[$pe->idProject]=$pe->idProject;
    	  $pe->simpleSave();
    	  if ($pe->refType=='Milestone') {
    	    $pe->updateMilestonableItems();
@@ -1025,7 +1025,7 @@ class PlannedWork extends GeneralWork {
     $cp['TEST']='OK';
     foreach ($cp['node'][$nodeId]['before'] as $taskId) {
       $task=$cp['task'][$taskId];
-      $diff=($task['duration'])*(-1);
+      $diff=($task['duration'])?($task['duration'])*(-1):0;
       if ($nodeId=='E' or $nodeId=='S') {
         $diff==0;
       } else if ($task['type']=='task' and $diff!=0) {
