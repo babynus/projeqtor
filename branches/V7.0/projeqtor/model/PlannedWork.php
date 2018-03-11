@@ -209,52 +209,55 @@ class PlannedWork extends GeneralWork {
     $topList=array();
     $reserved=array();
     // Will constitute an array $reserved to be sure to reserve to availability of tasks as RECW that will be planned "after" predecessors to get start and end
-    // $reserved[idResource][type='W'][idPE][day]=value                   // sum of work to reserve for resource on week day for a given task
-    // $reserved[idResource][type='W'][idPE]['start']=date                // start date, that will be set when known
-    // $reserved[idResource][type='W'][idPE]['end']=date                  // end date, that will be set when known
-    // $reserved[idResource][type='W'][idPE]['pred'][idPE]['id']=idPE     // id of precedessor PlanningElement
-    // $reserved[idResource][type='W'][idPE]['pred'][idPE]['delay']=delay // Delay of dependency
-    // $reserved[idResource][type='W'][idPE]['pred'][idPE]['type']=type   // type of dependency (E-E, E-S, S-S)
-    // $reserved[idResource][type='W'][idPE]['succ'][idPE]['id']=idPE     // id of successor PlanningElement
-    // $reserved[idResource][type='W'][idPE]['succ'][idPE]['delay']=delay // Delay of dependency
-    // $reserved[idResource][type='W'][idPE]['succ'][idPE]['type']=type   // type of dependency (E-E, E-S, S-S)
-    // $reserved[idResource][type='W']['sum'][day]+=value                 // sum of work to reserve for resource on week day
-    // $reserved['allPreds'][idPE]=idPE                                   // List of all PE who are predecessors of RECW task
-    // $reserved['allSuccs'][idPE]=idPE                                   // List of all PE who are successors of RECW task
+    // $reserved[type='W'][idPE][idResource][day]=value         // sum of work to reserve for resource on week day for a given task
+    // $reserved[type='W'][idPE]['start']=date                  // start date, that will be set when known
+    // $reserved[type='W'][idPE]['end']=date                    // end date, that will be set when known
+    // $reserved[type='W'][idPE]['pred'][idPE]['id']=idPE       // id of precedessor PlanningElement
+    // $reserved[type='W'][idPE]['pred'][idPE]['delay']=delay   // Delay of dependency
+    // $reserved[type='W'][idPE]['pred'][idPE]['type']=type     // type of dependency (E-E, E-S, S-S)
+    // $reserved[type='W'][idPE]['succ'][idPE]['id']=idPE       // id of successor PlanningElement
+    // $reserved[type='W'][idPE]['succ'][idPE]['delay']=delay   // Delay of dependency
+    // $reserved[type='W'][idPE]['succ'][idPE]['type']=type     // type of dependency (E-E, E-S, S-S)
+    // $reserved[type='W']['sum'][idResource][day]+=value       // sum of work to reserve for resource on week day
+    // $reserved['allPreds'][idPE]=idPE                         // List of all PE who are predecessors of RECW task
+    // $reserved['allSuccs'][idPE]=idPE                         // List of all PE who are successors of RECW task
     foreach ($listPlan as $plan) { // Store RECW to reserve avaialbility
       if ($plan->_profile=='RECW') {
         $ar=new AssignmentRecurring();
         $arList=$ar->getSqlElementsFromCriteria(array('refType'=>$plan->refType, 'refId'=>$plan->refId));
         foreach ($arList as $ar) {
-          if (!isset($reserved[$ar->idResource])) $reserved[$ar->idResource]=array();
-          if (!isset($reserved[$ar->idResource][$ar->type])) $reserved[$ar->idResource][$ar->type]=array();
-          if (!isset($reserved[$ar->idResource][$ar->type][$plan->id])) $reserved[$ar->idResource][$ar->type][$plan->id]=array();
-          if (!isset($reserved[$ar->idResource][$ar->type]['sum'])) $reserved[$ar->idResource][$ar->type]['sum']=array();
-          $reserved[$ar->idResource][$ar->type][$plan->id][$ar->day]=$ar->value;
-          if (!isset($reseved[$ar->idResource][$ar->type]['sum'][$ar->day])) $reserved[$ar->idResource][$ar->type]['sum'][$ar->day]=0;
-          $reserved[$ar->idResource][$ar->type]['sum'][$ar->day]+=$ar->value;
-          if (! isset($reserved[$ar->idResource][$ar->type][$plan->id]['start']) and !isset($reserved[$ar->idResource][$ar->type][$plan->id]['end'])) {
-            $reserved[$ar->idResource][$ar->type][$plan->id]['start']=null;
-            $reserved[$ar->idResource][$ar->type][$plan->id]['end']=null;
-            $reserved[$ar->idResource][$ar->type][$plan->id]['pred']=array();
-            $reserved[$ar->idResource][$ar->type][$plan->id]['succ']=array();
-            $crit="successorId=$plan->id or predecessorId=$plan->id";
-            $dep=new Dependency();
-            $depList=$dep->getSqlElementsFromCriteria(null, false, $crit);
-            foreach ($depList as $dep ) {
-              if ($dep->successorId==$plan->id) 
-                $reserved[$ar->idResource][$ar->type][$plan->id]['pred'][$dep->predecessorId]=array('id'=>$dep->predecessorId,'delay'=>$dep->dependencyDelay, 'type'=>$dep->dependencyType);
-                $reserved['allPreds'][$dep->predecessorId]=$dep->predecessorId;
-              if ($dep->predecessorId==$plan->id) 
-                $reserved[$ar->idResource][$ar->type][$$plan->id]['succ'][$dep->successorId]=array('id'=>$dep->successorId,'delay'=>$dep->dependencyDelay, 'type'=>$dep->dependencyType);
-              $reserved['allSuccs'][$dep->successorId]=$dep->successorId;
-            }
-            if (count($reserved[$ar->idResource][$ar->type][$plan->id]['pred'])==0 and $plan->validatedStartDate) {
-              $reserved[$ar->idResource][$ar->type][$plan->id]['start']=$plan->validatedStartDate;
-            }
-            if (count($reserved[$ar->idResource][$ar->type][$plan->id]['succ'])==0 and $plan->validatedEndDate) {
-              $reserved[$ar->idResource][$ar->type][$plan->id]['end']=$plan->validatedEndDate;
-            } 
+          if (!isset($reserved[$ar->type])) $reserved[$ar->type]=array();
+          if (!isset($reserved[$ar->type][$plan->id])) $reserved[$ar->type][$plan->id]=array();
+          if (!isset($reserved[$ar->type][$plan->id][$ar->idResource])) $reserved[$ar->type][$plan->id][$ar->idResource]=array();
+          if (!isset($reserved[$ar->type]['sum'])) $reserved[$ar->type]['sum']=array();
+          if (!isset($reserved[$ar->type]['sum'][$ar->idResource])) $reserved[$ar->type]['sum'][$ar->idResource]=array();
+          $reserved[$ar->type][$plan->id][$ar->idResource][$ar->day]=$ar->value;
+          if (!isset($reseved[$ar->type]['sum'][$ar->idResource][$ar->day])) $reserved[$ar->type]['sum'][$ar->idResource][$ar->day]=0;
+          $reserved[$ar->type]['sum'][$ar->idResource][$ar->day]+=$ar->value;
+          //if (! isset($reserved[$ar->type][$plan->id]['start']) and !isset($reserved[$ar->type][$plan->id]['end'])) {
+          $reserved[$ar->type][$plan->id]['start']=null;
+          $reserved[$ar->type][$plan->id]['end']=null;
+          $reserved[$ar->type][$plan->id]['pred']=array();
+          $reserved[$ar->type][$plan->id]['succ']=array();
+          $crit="successorId=$plan->id or predecessorId=$plan->id";
+          $dep=new Dependency();
+          $depList=$dep->getSqlElementsFromCriteria(null, false, $crit);
+          foreach ($depList as $dep ) {
+            if ($dep->successorId==$plan->id) 
+              $reserved[$ar->type][$plan->id]['pred'][$dep->predecessorId]=array('id'=>$dep->predecessorId,'delay'=>$dep->dependencyDelay, 'type'=>$dep->dependencyType);
+              $reserved['allPreds'][$dep->predecessorId]=$dep->predecessorId;
+            if ($dep->predecessorId==$plan->id) 
+              $reserved[$ar->type][$$plan->id]['succ'][$dep->successorId]=array('id'=>$dep->successorId,'delay'=>$dep->dependencyDelay, 'type'=>$dep->dependencyType);
+            $reserved['allSuccs'][$dep->successorId]=$dep->successorId;
+          }          
+          //}
+        }
+        foreach ($reserved as $artype=>$array)
+          if (count($reserved[$artype][$plan->id]['pred'])==0 and $plan->validatedStartDate) {
+            $reserved[$artype][$plan->id]['start']=$plan->validatedStartDate;
+          }
+          if (count($reserved[$artype][$plan->id]['succ'])==0 and $plan->validatedEndDate) {
+            $reserved[$artype][$plan->id]['end']=$plan->validatedEndDate;
           }
         }
       }
@@ -328,6 +331,9 @@ class PlannedWork extends GeneralWork {
       	$endPlan=null;
         $step=1;
         $profile='ASAP'; // Once start is set, treat as ASAP mode (as soon as possible)
+      } else if ($profile=="RECW") {
+        //$startPlan
+        //$endPlan
       } else {
         $profile=="ASAP"; // Default is ASAP
         $startPlan=$startDate;
@@ -661,9 +667,9 @@ class PlannedWork extends GeneralWork {
               }
               // Specific reservaction for RECW that are not planned yet but will be when start and end are known
               $dow=date('N',strtotime($currentDate));  
-              if (isset($reserved[$ass->idResource]['W']['sum'][$dow]) ) {
-                debugLog("to reserve for ".$dow." up to ".$reserved[$ass->idResource]['W']['sum'][$dow]);
-                foreach($reserved[$ass->idResource]['W'] as $idPe=>$resW) {
+              if (isset($reserved['W']['sum'][$ass->idResource][$dow]) ) {
+                debugLog("to reserve for ".$dow." up to ".$reserved['W']['sum'][$ass->idResource][$dow]);
+                foreach($reserved['W'] as $idPe=>$resW) {
                   if ($idPe=='sum') continue;
                   if ($idPe==$plan->id) continue; // we are treating the one we reserved for
                   debugLog("start=".$resW['start']."  end=".$resW['end']." current=".$currentDate);
@@ -897,19 +903,16 @@ class PlannedWork extends GeneralWork {
       }
       $fullListPlan=self::storeListPlan($fullListPlan,$plan);
       if (isset($reserved['allPreds'][$plan->id]) ) {
-        foreach($reserved as $idResource=>$res) {
-          if ($idResource=='allPreds' or $idResource=='allSuccs') continue;
-          foreach ($res['W'] as $idPe=>$pred) {
-            if (isset($pred['pred'][$plan->id])) {
-              $typePred=$pred['pred'][$plan->id]['type'];
-              $delayPred=$pred['pred'][$plan->id]['delay'];
-              if ($typePred=='E-S') { // TODO : check existing start / end
-                $reserved[$idResource]['W'][$idPe]['start']=$plan->plannedEndDate;
-              } else if ($typePred=='S-S') {
-                $reserved[$idResource]['W'][$idPe]['start']=$plan->plannedStartDate;
-              } else if ($typePred=='E-E') {
-                $reserved[$idResource]['W'][$idPe]['end']=$plan->plannedEndDate;
-              }
+        foreach($reserved['W'] as $idPe=>$pe) {
+          if (isset($pe['pred'][$plan->id])) {
+            $typePred=$pe['pred'][$plan->id]['type'];
+            $delayPred=$pe['pred'][$plan->id]['delay'];
+            if ($typePred=='E-S') { // TODO : check existing start / end
+              $reserved['W'][$idPe]['start']=$plan->plannedEndDate;
+            } else if ($typePred=='S-S') {
+              $reserved['W'][$idPe]['start']=$plan->plannedStartDate;
+            } else if ($typePred=='E-E') {
+              $reserved['W'][$idPe]['end']=$plan->plannedEndDate;
             }
           }
         }
