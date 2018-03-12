@@ -263,7 +263,7 @@ class PlannedWork extends GeneralWork {
         }
       }
     }
-    debugLog($reserved);
+    //debugLog($reserved);
     $arrayNotPlanned=array();
 //-- Treat each PlanningElement ---------------------------------------------------------------------------------------------------
     foreach ($listPlan as $plan) {
@@ -280,7 +280,7 @@ class PlannedWork extends GeneralWork {
       }
       if (isset($plan->_noPlan) and $plan->_noPlan) {
       	continue;
-      } 
+      }
       $startPlan=$startDate;
       $startFraction=0;
       $endPlan=null;
@@ -335,6 +335,9 @@ class PlannedWork extends GeneralWork {
       } else if ($profile=="RECW") {
         //$startPlan=$plan->validatedStartDate;
         //$endPlan=$plan->validatedEndDate;
+        $plan->assignedWork=$plan->realWork;
+        $plan->leftWork=0;
+        $plan->plannedWork=$plan->realWork;
         if (isset($reserved['W'][$plan->id]['start']) and $reserved['W'][$plan->id]['start'] ) {
           $startPlan=$reserved['W'][$plan->id]['start'];
         } 
@@ -378,7 +381,7 @@ class PlannedWork extends GeneralWork {
           $precStart=$prec->realStartDate;
         }
         if ($strictDependency or $precVal!=0 or $precFraction==1) {
-          if ( ( $prec->refType!='Milestone' and $plan->refType!='Milestone') or $precFraction==1) {
+          if ( ( $prec->refType!='Milestone' and $plan->refType!='Milestone') or $precFraction==1 or ($strictDependency and $plan->refType=='Milestone') ) {
           //if ($prec->refType!='Milestone') {
             $startPossible=addWorkDaysToDate($precEnd,($precVal>=0)?2+$precVal:1+$precVal); // #77
           } else {
@@ -702,20 +705,17 @@ class PlannedWork extends GeneralWork {
               // Specific reservaction for RECW that are not planned yet but will be when start and end are known
               $dow=date('N',strtotime($currentDate));  
               if (isset($reserved['W']['sum'][$ass->idResource][$dow]) ) {
-                debugLog("  to reserve for ".$dow." up to ".$reserved['W']['sum'][$ass->idResource][$dow]);
+//                debugLog("  to reserve for ".$dow." up to ".$reserved['W']['sum'][$ass->idResource][$dow]);
                 foreach($reserved['W'] as $idPe=>$arPeW) {
                   if ($idPe=='sum') continue;
                   if ($idPe==$plan->id) continue; // we are treating the one we reserved for
-                  debugLog("  start=".$arPeW['start'].",  end=".$arPeW['end'].",  current=".$currentDate);
+//                  debugLog("  start=".$arPeW['start'].",  end=".$arPeW['end'].",  current=".$currentDate);
                   if ( ($arPeW['start'] and $arPeW['start']<=$currentDate) and (!$arPeW['end'] or $arPeW['end']>=$currentDate) and isset($arPeW[$ass->idResource][$dow])) {
-                    debugLog("  reserved ".$arPeW[$ass->idResource][$dow]." for $dow");
+//                    debugLog("  reserved ".$arPeW[$ass->idResource][$dow]." for $dow");
                     $planned+=$arPeW[$ass->idResource][$dow];
                   }
                 }
-              }
-              
-              // TODO : plan RECW and remove $reserved when planned 
-                
+              } 
               if ($regul) {
               	if (! isset($ress['real'][$keyElt][$currentDate])) {
                   $interval+=$step;
@@ -730,6 +730,9 @@ class PlannedWork extends GeneralWork {
                     $ass->assignedWork+=$value;
                     $ass->leftWork+=$value;
                     $ass->plannedWork+=$value;
+                    $plan->assignedWork+=$value;
+                    $plan->leftWork+=$value;
+                    $plan->plannedWork+=$value;
                     debugLog("  RECW to plan = $value");
                   } else {
                     $value=0; 
@@ -776,6 +779,7 @@ class PlannedWork extends GeneralWork {
                   }
                 }
                 $value=($value>$left)?$left:$value;
+                debugLog("  $currentDate : left=$left, value=$value");
                 if ($currentDate==$startPlan and $value>((1-$startFraction)*$capacity)) {
                   $value=((1-$startFraction)*$capacity);
                 }
@@ -963,7 +967,17 @@ class PlannedWork extends GeneralWork {
           }
         }
       }
-      // TODO : remove $reserved when planned for RECW
+      if (isset($reserved['W'][$plan->id]) ) { // remove $reserved when planned for RECW
+        foreach ($reserved['W'][$plan->id] as $idRes=>$resRes) {
+          if (!is_numeric($idRes)) continue;
+          foreach ($resRes as $day=>$val) {
+            if (isset($reserved['W']['sum'][$idRes][$day])) {
+              $reserved['W']['sum'][$idRes][$day]-=$val;
+            }
+          }
+        }
+        unset($reserved['W'][$plan->id]);
+      }
       if (isset($reserved['allSuccs'])) {
         // TODO : take into acount E-S dependency to determine end
       }
@@ -1020,7 +1034,14 @@ class PlannedWork extends GeneralWork {
     foreach ($fullListPlan as $pe) {
       if (!$pe->refType) continue;
       if ($pe->refType!='Project') $arrayProj[$pe->idProject]=$pe->idProject;
-   	  $pe->simpleSave();
+      if ($pe->_profile=='RECW') { 
+        PlanningElement::updateSynthesis($pe->refType, $pe->refId);
+        $resPe=$pe->save();
+        debugLog($pe);
+      } else {
+   	    $resPe=$pe->simpleSave();
+      }
+   	  debugLog($resPe);
    	  if ($pe->refType=='Milestone') {
    	    $pe->updateMilestonableItems();
    	  }
@@ -1033,7 +1054,6 @@ class PlannedWork extends GeneralWork {
     $endMicroTime=microtime(true);
     $duration = round(($endMicroTime - $startMicroTime)*1000)/1000;
     if (count($arrayNotPlanned)>0) {
-    	//$result='<div class="messageWARNING">'
     	$result=i18n('planDoneWithLimits', array($duration));
     	$result.='<br/><br/><table style="width:100%">';
     	$result .='<tr style="color:#888888;font-weight:bold;border:1px solid #aaaaaa"><td style="width:50%">'.i18n('colElement').'</td><td style="width:30%">'.i18n('colCause').'</td><td style="width:20%">'.i18n('colIdResource').'</td></tr>';
@@ -1045,7 +1065,6 @@ class PlannedWork extends GeneralWork {
     		$result .='<tr style="border:1px solid #aaaaaa;"><td style="padding:1px 10px;">'.i18n($ass->refType).' #'.htmlEncode($ass->refId).' : '.$oName. '</td><td style="padding:1px 10px;">'.$msg.'</td><td style="padding:1px 10px;">'.$rName.'</td></tr>'; 
     	}	
     	$result.='</table>';
-    	//$result.='</div>';
     	$result .= '<input type="hidden" id="lastPlanStatus" value="INCOMPLETE" />';
     } else {
     	$result=i18n('planDone', array($duration));

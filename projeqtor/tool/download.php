@@ -131,9 +131,7 @@ if (($file != "") && (file_exists($file))) {
     $Parser = new PhpMimeMailParser\Parser();
     $Parser->setPath($fileName);
      $to = $Parser->getHeader('to');
-    debugLog($to);
      //$text = $Parser->getMessageBody('text');
-    //debugLog($text);
   }
   readfile($file);  
 } else {
