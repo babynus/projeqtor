@@ -243,16 +243,18 @@ class PlannedWork extends GeneralWork {
           $dep=new Dependency();
           $depList=$dep->getSqlElementsFromCriteria(null, false, $crit);
           foreach ($depList as $dep ) {
-            if ($dep->successorId==$plan->id) 
+            if ($dep->successorId==$plan->id) {
               $reserved[$ar->type][$plan->id]['pred'][$dep->predecessorId]=array('id'=>$dep->predecessorId,'delay'=>$dep->dependencyDelay, 'type'=>$dep->dependencyType);
-              $reserved['allPreds'][$dep->predecessorId]=$dep->predecessorId;
-            if ($dep->predecessorId==$plan->id) 
+            }
+            $reserved['allPreds'][$dep->predecessorId]=$dep->predecessorId;
+            if ($dep->predecessorId==$plan->id) { 
               $reserved[$ar->type][$$plan->id]['succ'][$dep->successorId]=array('id'=>$dep->successorId,'delay'=>$dep->dependencyDelay, 'type'=>$dep->dependencyType);
+            }
             $reserved['allSuccs'][$dep->successorId]=$dep->successorId;
           }          
           //}
         }
-        foreach ($reserved as $artype=>$array)
+        foreach ($reserved as $artype=>$array) {
           if (count($reserved[$artype][$plan->id]['pred'])==0 and $plan->validatedStartDate) {
             $reserved[$artype][$plan->id]['start']=$plan->validatedStartDate;
           }
