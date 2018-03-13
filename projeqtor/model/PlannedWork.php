@@ -670,9 +670,10 @@ class PlannedWork extends GeneralWork {
             $ass->leftWork=0;
             $ass->plannedWork=$ass->realWork;
           }
-          debugLog("  $startPlan => $endPlan");
+          debugLog("  Plan from $startPlan to $endPlan");
           while (1) {           
             if ($profile=='RECW') {
+              debugLog ("  OK, treat RECW for date=$currentDate");
               if ($currentDate<=$endPlan) {
                 $left=$capacity;
               } else {
@@ -696,23 +697,28 @@ class PlannedWork extends GeneralWork {
             if ($currentDate==$globalMaxDate) { break; }         
             if ($currentDate==$globalMinDate) { break; } 
             if ($ress['Project#' . $plan->idProject]['rate']==0) { break ; } // Resource allocated to project with rate = 0, cannot be planned
-            if (isOpenDay($currentDate, $r->idCalendarDefinition)) {
+            if (isOpenDay($currentDate, $r->idCalendarDefinition)) {              
               $planned=0;
+              $plannedReserved=0;
               $week=weekFormat($currentDate);
               if (array_key_exists($currentDate, $ress)) {
                 $planned=$ress[$currentDate];
               }
               // Specific reservaction for RECW that are not planned yet but will be when start and end are known
               $dow=date('N',strtotime($currentDate));  
+              debugLog("  OK, $dow is an open day, already planned=$planned");
               if (isset($reserved['W']['sum'][$ass->idResource][$dow]) ) {
-//                debugLog("  to reserve for ".$dow." up to ".$reserved['W']['sum'][$ass->idResource][$dow]);
+// debugLog("  to reserve for ".$dow." up to ".$reserved['W']['sum'][$ass->idResource][$dow]);
                 foreach($reserved['W'] as $idPe=>$arPeW) {
                   if ($idPe=='sum') continue;
                   if ($idPe==$plan->id) continue; // we are treating the one we reserved for
-//                  debugLog("  start=".$arPeW['start'].",  end=".$arPeW['end'].",  current=".$currentDate);
-                  if ( ($arPeW['start'] and $arPeW['start']<=$currentDate) and (!$arPeW['end'] or $arPeW['end']>=$currentDate) and isset($arPeW[$ass->idResource][$dow])) {
-//                    debugLog("  reserved ".$arPeW[$ass->idResource][$dow]." for $dow");
+// debugLog("  start=".$arPeW['start'].",  end=".$arPeW['end'].",  current=".$currentDate);
+                  // Test if current is predecessor of 
+                  $willFixStart=(isset($reserved['W'][$idPe]['pred'][$plan->id]) and $reserved['W'][$idPe]['pred'][$plan->id]['type']=='S-S')?true:false;
+                  if ( ( $willFixStart or ($arPeW['start'] and $arPeW['start']<=$currentDate) ) and (!$arPeW['end'] or $arPeW['end']>=$currentDate) and isset($arPeW[$ass->idResource][$dow])) {
+// debugLog("  reserved ".$arPeW[$ass->idResource][$dow]." for $dow");
                     $planned+=$arPeW[$ass->idResource][$dow];
+                    $plannedReserved+=$arPeW[$ass->idResource][$dow];
                   }
                 }
               } 
@@ -723,8 +729,9 @@ class PlannedWork extends GeneralWork {
               }
               if ($planned < $capacity)  {
                 $value=$capacity-$planned; 
-                if ($profile=='RECW') {
+                if ($profile=='RECW') {                 
                   $dow=date('N',strtotime($currentDate));  
+                  debugLog ("   profile RECW for day $dow");
                   if (isset($reserved['W'][$plan->id][$ass->idResource][$dow]) ) {
                     $value=$reserved['W'][$plan->id][$ass->idResource][$dow];
                     $ass->assignedWork+=$value;
@@ -923,7 +930,7 @@ class PlannedWork extends GeneralWork {
                   }
                   $changedAss=true;
                   $left-=$value;
-                  $ress[$currentDate]=$value+$planned;
+                  $ress[$currentDate]=$value+$planned-$plannedReserved;
                   // Set value on each project (from current to top)
                   if ($withProjectRepartition and $value >= 0.01) {
                     foreach ($listTopProjects as $idProject) {
@@ -953,16 +960,21 @@ class PlannedWork extends GeneralWork {
       }
       $fullListPlan=self::storeListPlan($fullListPlan,$plan);
       if (isset($reserved['allPreds'][$plan->id]) ) {
+        debugLog("  $plan->id is a predecessor");
         foreach($reserved['W'] as $idPe=>$pe) {
           if (isset($pe['pred'][$plan->id])) {
+            debugLog("    predecessor or $idPe");
             $typePred=$pe['pred'][$plan->id]['type'];
             $delayPred=$pe['pred'][$plan->id]['delay'];
             if ($typePred=='E-S') { // TODO : check existing start / end
               $reserved['W'][$idPe]['start']=$plan->plannedEndDate;
+              debugLog("    1) new start for $idPe is $plan->plannedEndDate");
             } else if ($typePred=='S-S') {
               $reserved['W'][$idPe]['start']=$plan->plannedStartDate;
+              debugLog("    2) new start for $idPe is $plan->plannedStartDate");
             } else if ($typePred=='E-E') {
               $reserved['W'][$idPe]['end']=$plan->plannedEndDate;
+              debugLog("    3) new end for $idPe is $plan->plannedEndDate");
             }
           }
         }
@@ -1037,11 +1049,9 @@ class PlannedWork extends GeneralWork {
       if ($pe->_profile=='RECW') { 
         PlanningElement::updateSynthesis($pe->refType, $pe->refId);
         $resPe=$pe->save();
-        debugLog($pe);
       } else {
    	    $resPe=$pe->simpleSave();
       }
-   	  debugLog($resPe);
    	  if ($pe->refType=='Milestone') {
    	    $pe->updateMilestonableItems();
    	  }
