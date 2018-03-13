@@ -333,8 +333,6 @@ class PlannedWork extends GeneralWork {
         $step=1;
         $profile='ASAP'; // Once start is set, treat as ASAP mode (as soon as possible)
       } else if ($profile=="RECW") {
-        //$startPlan=$plan->validatedStartDate;
-        //$endPlan=$plan->validatedEndDate;
         $plan->assignedWork=$plan->realWork;
         $plan->leftWork=0;
         $plan->plannedWork=$plan->realWork;
@@ -358,6 +356,7 @@ class PlannedWork extends GeneralWork {
           }   
           $fullListPlan=self::storeListPlan($fullListPlan,$plan);
         }
+        debugLog("xxx $startPlan $endPlan");
       } else {
         $profile=="ASAP"; // Default is ASAP
         $startPlan=$startDate;
@@ -419,6 +418,8 @@ class PlannedWork extends GeneralWork {
           } else {
             $startPlan=$precEnd;
           }
+        } else if ($precTyp=='E-E' and $profile=="RECW") {
+          // Nothing, start / End already set
         } else if ($profile=="ALAP") {
           if ($startPossible>=$endPlan) {
             $endPlan=$startPossible;
@@ -669,6 +670,13 @@ class PlannedWork extends GeneralWork {
             $ass->assignedWork=$ass->realWork;
             $ass->leftWork=0;
             $ass->plannedWork=$ass->realWork;
+            /*if (isset($reserved['W'][$plan->id]['start']) and $reserved['W'][$plan->id]['start']) {
+              $startPlan=$reserved['W'][$plan->id]['start'];
+              $currentDate=$startPlan;
+            }
+            if (isset($reserved['W'][$plan->id]['end']) and $reserved['W'][$plan->id]['end']) {
+              $endPlan=$reserved['W'][$plan->id]['end'];
+            }*/
           }
           debugLog("  Plan from $startPlan to $endPlan");
           while (1) {           
