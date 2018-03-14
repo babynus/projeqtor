@@ -730,12 +730,25 @@ class PlannedWork extends GeneralWork {
               $dow=date('N',strtotime($currentDate));  
               if (isset($reserved['W']['sum'][$ass->idResource][$dow]) ) {
                 foreach($reserved['W'] as $idPe=>$arPeW) {
+                  
                   if ($idPe=='sum') continue;
                   if ($idPe==$plan->id) continue; // we are treating the one we reserved for 
+                  debugLog ("Reserve ".$arPeW['start']. ' '.$arPeW['end']);
                   $startReserving=(isset($reserved['W'][$idPe]['pred'][$plan->id]) and ($reserved['W'][$idPe]['pred'][$plan->id]['type']=='S-S'))?true:false; // If current is predecessor and S-S
-                  if (count($reserved['W'][$idPe]['pred'])==0) $startReserving=true; // No predecessor, so start is start of project
-                  if ($arPeW['start'] and $arPeW['start']<=$currentDate)  $startReserving=true; // Start is defined (from predecessor) and passed
-                  if ( $startReserving and (!$arPeW['end'] or $arPeW['end']>=$currentDate) and isset($arPeW[$ass->idResource][$dow]) ) {
+                  if ($arPeW['start'] ) {
+                    if ($arPeW['start']<=$currentDate) $startReserving=true; // Start is defined (from predecessor) and passed
+                  } else if (count($reserved['W'][$idPe]['pred'])==0) {
+                    $startReserving=true; // No predecessor, so start is start of project
+                  } else { // Start Date not Set, some predecessor : do not count E-E
+                    $cpt=0;
+                    foreach ($reserved['W'][$idPe]['pred'] as $idPredTmp=>$predTmp) {
+                      if ($predTmp['type']!='E-E') $cpt++;
+                    }
+                    if ($cpt==0) $startReserving=true;
+                  }
+                  $endReserving=($arPeW['end'] and $arPeW['end']<$currentDate)?true:false;
+                  debugLog("startReserving=$startReserving, endReserving=$endReserving");
+                  if ( $startReserving and ! $endReserving and isset($arPeW[$ass->idResource][$dow]) ) {
                     $planned+=$arPeW[$ass->idResource][$dow];
                     $plannedReserved+=$arPeW[$ass->idResource][$dow];
                   }
