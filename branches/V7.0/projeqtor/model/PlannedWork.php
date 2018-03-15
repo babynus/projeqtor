@@ -260,7 +260,6 @@ class PlannedWork extends GeneralWork {
     $arrayNotPlanned=array();
 //-- Treat each PlanningElement ---------------------------------------------------------------------------------------------------
     foreach ($listPlan as $plan) {
-      debugLog($plan->refName);
       if (! $plan->id) {
         continue;
       }
@@ -375,7 +374,6 @@ class PlannedWork extends GeneralWork {
           }   
           $fullListPlan=self::storeListPlan($fullListPlan,$plan);
         }
-        debugLog("  RECW : start=$startPlan end=$endPlan");
       } else {
         $profile=="ASAP"; // Default is ASAP
         $startPlan=$startDate;
@@ -488,15 +486,12 @@ class PlannedWork extends GeneralWork {
         	if ($plan->plannedWork==0 and $plan->elementary==1) {
 	        	if ($plan->validatedStartDate and $plan->validatedStartDate>$startPlan) {
 	            $plan->plannedStartDate=$plan->validatedStartDate;
-	            debugLog("SET 1");
 	          } else if ($plan->initialStartDate and $plan->initialStartDate>$startPlan) {
 	            $plan->plannedStartDate=$plan->initialStartDate;
-	            debugLog("SET 2");
 	          } else {
 	            // V5.1.0 : should never start before startplan
 	            //$plan->plannedStartDate=date('Y-m-d');
 	            $plan->plannedStartDate=$startPlan;
-	            debugLog("SET 3");
 	          }
         	}
         }
@@ -693,7 +688,6 @@ class PlannedWork extends GeneralWork {
             $ass->leftWork=0;
             $ass->plannedWork=$ass->realWork;
           }
-          debugLog("  Plan from $startPlan to $endPlan");
           while (1) {           
             if ($profile=='RECW') {
               if ($currentDate<=$endPlan) {
@@ -733,7 +727,6 @@ class PlannedWork extends GeneralWork {
                   
                   if ($idPe=='sum') continue;
                   if ($idPe==$plan->id) continue; // we are treating the one we reserved for 
-                  debugLog ("Reserve ".$arPeW['start']. ' '.$arPeW['end']);
                   $startReserving=(isset($reserved['W'][$idPe]['pred'][$plan->id]) and ($reserved['W'][$idPe]['pred'][$plan->id]['type']=='S-S'))?true:false; // If current is predecessor and S-S
                   if ($arPeW['start'] ) {
                     if ($arPeW['start']<=$currentDate) $startReserving=true; // Start is defined (from predecessor) and passed
@@ -747,7 +740,6 @@ class PlannedWork extends GeneralWork {
                     if ($cpt==0) $startReserving=true;
                   }
                   $endReserving=($arPeW['end'] and $arPeW['end']<$currentDate)?true:false;
-                  debugLog("startReserving=$startReserving, endReserving=$endReserving");
                   if ( $startReserving and ! $endReserving and isset($arPeW[$ass->idResource][$dow]) ) {
                     $planned+=$arPeW[$ass->idResource][$dow];
                     $plannedReserved+=$arPeW[$ass->idResource][$dow];
@@ -816,7 +808,6 @@ class PlannedWork extends GeneralWork {
                   }
                 }
                 $value=($value>$left)?$left:$value;
-                debugLog("  $currentDate : left=$left, value=$value");
                 if ($currentDate==$startPlan and $value>((1-$startFraction)*$capacity)) {
                   $value=((1-$startFraction)*$capacity);
                 }
@@ -990,7 +981,6 @@ class PlannedWork extends GeneralWork {
       }
       $fullListPlan=self::storeListPlan($fullListPlan,$plan);
       if (isset($reserved['allPreds'][$plan->id]) ) {
-        debugLog("  $plan->id is a predecessor");
         foreach($reserved['W'] as $idPe=>$pe) {
           if (isset($pe['pred'][$plan->id])) {
             $typePred=$pe['pred'][$plan->id]['type'];
