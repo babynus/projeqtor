@@ -723,11 +723,19 @@ class PlannedWork extends GeneralWork {
               // Specific reservation for RECW that are not planned yet but will be when start and end are known
               $dow=date('N',strtotime($currentDate));  
               if (isset($reserved['W']['sum'][$ass->idResource][$dow]) ) {
-                foreach($reserved['W'] as $idPe=>$arPeW) {
-                  
+                foreach($reserved['W'] as $idPe=>$arPeW) {                  
                   if ($idPe=='sum') continue;
-                  if ($idPe==$plan->id) continue; // we are treating the one we reserved for 
-                  $startReserving=(isset($reserved['W'][$idPe]['pred'][$plan->id]) and ($reserved['W'][$idPe]['pred'][$plan->id]['type']=='S-S'))?true:false; // If current is predecessor and S-S
+                  if ($idPe==$plan->id) continue; // we are treating the one we reserved for
+                  $startReserving=false;
+                  if (isset($reserved['W'][$idPe]['pred'][$plan->id]) and ($reserved['W'][$idPe]['pred'][$plan->id]['type']=='S-S')) {
+                    $delayPred=$reserved['W'][$idPe]['pred'][$plan->id]['delay'];
+                    debugLog("startplan=$startPlan");
+                    debugLog("testdate=".addWorkDaysToDate($startPlan,$delayPred+1));
+                    debugLog("currentDate=$currentDate");
+                    if ($delayPred<=0 or addWorkDaysToDate($startPlan,$delayPred+1)<=$currentDate) { 
+                      $startReserving=true; // If current is predecessor and S-S
+                    } 
+                  }
                   if ($arPeW['start'] ) {
                     if ($arPeW['start']<=$currentDate) $startReserving=true; // Start is defined (from predecessor) and passed
                   } else if (count($reserved['W'][$idPe]['pred'])==0) {
@@ -993,7 +1001,12 @@ class PlannedWork extends GeneralWork {
                 $reserved['W'][$idPe]['start']=addWorkDaysToDate($plan->plannedEndDate,2);
               }
             } else if ($typePred=='S-S') {
-              $reserved['W'][$idPe]['start']=$plan->plannedStartDate;
+              if ($delayPred>0) {
+                $reserved['W'][$idPe]['start']=addWorkDaysToDate($plan->plannedStartDate,$delayPred+1);
+              } else {
+                $reserved['W'][$idPe]['start']=addWorkDaysToDate($plan->plannedStartDate,$delayPred);
+              }
+              
             } else if ($typePred=='E-E') {
               $reserved['W'][$idPe]['end']=$plan->plannedEndDate;
             }
