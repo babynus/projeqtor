@@ -83,4 +83,3 @@ UPDATE `${prefix}planningmode` set sortOrder=730 where code='QUART';
 INSERT INTO `${prefix}planningmode` (`id`, `applyTo`, `name`, `code`, `sortOrder`, `idle`, `mandatoryStartDate`, `mandatoryEndDate`) VALUES
 (22, 'Activity', 'PlanningModeRECW', 'RECW', 800, 0 , 0, 0);
   
-  
