@@ -1003,12 +1003,15 @@ class PlannedWork extends GeneralWork {
             } else if ($typePred=='S-S') {
               if ($delayPred>0) {
                 $reserved['W'][$idPe]['start']=addWorkDaysToDate($plan->plannedStartDate,$delayPred+1);
-              } else {
+              } else { // delay <= 0 
                 $reserved['W'][$idPe]['start']=addWorkDaysToDate($plan->plannedStartDate,$delayPred);
-              }
-              
+              }              
             } else if ($typePred=='E-E') {
-              $reserved['W'][$idPe]['end']=$plan->plannedEndDate;
+              if ($delayPred>0) {
+                $reserved['W'][$idPe]['end']=addWorkDaysToDate($plan->plannedEndDate,$delayPred+1);
+              } else { // delay <= 0
+                $reserved['W'][$idPe]['end']=addWorkDaysToDate($plan->plannedEndDate,$delayPred);
+              }
             }
           }
         }
