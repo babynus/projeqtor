@@ -34,7 +34,7 @@
     echo ' "items":[';
     
     $arrayDir=getSubdirectories(null);
-    debugLog($arrayDir);
+    $arrayDir=updateParents($arrayDir);
     displayDirectories($arrayDir,0);
     echo ' ] }';
     
@@ -43,25 +43,36 @@
     	$dirParent=new DocumentDirectory($id);
     	$dirList=$dirParent->getSqlElementsFromCriteria(array('idDocumentDirectory'=>$id),false,null,'location asc');
     	$id=($id)?$id:0;
-    	$show=false;
+    	
+    	$result[$id]=array('name'=>$dirParent->name,'show'=>false,'children'=>array(),'parent'=>$dirParent->idDocumentDirectory);
+    	
     	if ($dirParent->idProject==null) {
-    	  $show=true;
+    	 $result[$id]['show']=true;
     	} else {
     	  $doc=new Document();
     	  $doc->id=1;
     	  $doc->idProject=$dirParent->idProject;
     	  $right=securityGetAccessRightYesNo('menuDocument','read',$doc);
     	  if ($right=='YES') {
-    	    $show=true;
-    	    if ($dirParent->idDocumentDirectory) setParentVisibility($result,$dirParent->idDocumentDirectory,true);
+    	    $result[$id]['show']=true;
     	  }
     	}
-      $result[$id]=array('name'=>$dirParent->name,'show'=>$show,'children'=>array(),'parent'=>$dirParent->idDocumentDirectory);
       foreach ($dirList as $dir) {
         $result[$id]['children'][]=$dir->id;
         $result=array_merge_preserve_keys($result,getSubdirectories($dir->id));
       }   
       return $result;
+    }
+    
+    function updateParents($arrayDir) {
+      $arrayDir=array_reverse($arrayDir,true);
+      foreach ($arrayDir as $id=>$dir) {
+        if ($dir['show'] and $dir['parent']) {
+          $arrayDir[$dir['parent']]['show']=true;
+        }
+      }
+      $arrayDir=array_reverse($arrayDir,true);
+      return $arrayDir;
     }
     
     function displayDirectories($arrayDir,$indice) {
@@ -76,14 +87,6 @@
         echo ' ]';
         echo '}' ;
         $nbRows+=1;
-      }
-    }
-    
-    function setParentVisibility(&$arrayDir,$id,$show) {
-      if (!isset($arrayDir[$id])) return;
-      $arrayDir[$id]['show']=$show;
-      if ($arrayDir[$id]['parent']) {
-        setParentVisibility($arrayDir[$id]['parent'],$show);
       }
     }
 ?>
