@@ -135,11 +135,13 @@ class DocumentDirectory extends SqlElement {
     if($this->idDocumentDirectory != ""){
       $dir=new DocumentDirectory($this->idDocumentDirectory);
       $proj = new Project($dir->idProject);
-      $subProjList= $proj->getSubProjectsList(false);
-      $subProjList = array_flip($subProjList);
-      array_push($subProjList, $dir->idProject);
-      if(!in_array($this->idProject, $subProjList)){
-        $result.="<br/>" . i18n('repertoryIsNotValid',null);
+      if($dir->idProject != ""){
+        $subProjList= $proj->getSubProjectsList(false);
+        $subProjList = array_flip($subProjList);
+        array_push($subProjList, $dir->idProject);
+        if(!in_array($this->idProject, $subProjList)){
+          $result.="<br/>" . i18n('repertoryIsNotValid',null);
+        }
       }
     }
     $defaultControl=parent::control();
