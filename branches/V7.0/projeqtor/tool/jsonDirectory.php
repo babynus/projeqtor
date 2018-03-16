@@ -33,23 +33,57 @@
     echo 'label: "name",';
     echo ' "items":[';
     
-    getSubdirectories(null);
-    
+    $arrayDir=getSubdirectories(null);
+    debugLog($arrayDir);
+    displayDirectories($arrayDir,0);
     echo ' ] }';
     
     function getSubdirectories($id) {
-    	$dir=new DocumentDirectory();
-    	$dirList=$dir->getSqlElementsFromCriteria(array('idDocumentDirectory'=>$id),false,null,'location asc');
-      $nbRows=0;
+      $result=array();
+    	$dirParent=new DocumentDirectory($id);
+    	$dirList=$dirParent->getSqlElementsFromCriteria(array('idDocumentDirectory'=>$id),false,null,'location asc');
+    	$id=($id)?$id:0;
+    	$show=false;
+    	if ($dirParent->idProject==null) {
+    	  $show=true;
+    	} else {
+    	  $doc=new Document();
+    	  $doc->id=1;
+    	  $doc->idProject=$dirParent->idProject;
+    	  $right=securityGetAccessRightYesNo('menuDocument','read',$doc);
+    	  if ($right=='YES') {
+    	    $show=true;
+    	    if ($dirParent->idDocumentDirectory) setParentVisibility($result,$dirParent->idDocumentDirectory,true);
+    	  }
+    	}
+      $result[$id]=array('name'=>$dirParent->name,'show'=>$show,'children'=>array(),'parent'=>$dirParent->idDocumentDirectory);
       foreach ($dirList as $dir) {
+        $result[$id]['children'][]=$dir->id;
+        $result=array_merge_preserve_keys($result,getSubdirectories($dir->id));
+      }   
+      return $result;
+    }
+    
+    function displayDirectories($arrayDir,$indice) {
+      $nbRows=0;
+      foreach ($arrayDir[$indice]['children'] as $id) {
+        $dir=$arrayDir[$id];
+        if ($dir['show']==false) continue;
         if ($nbRows>0) echo ', ';
-        echo '{id:"' . $dir->id . '", name:"'. str_replace('"', "''",$dir->name) . '", type:"folder"';
+        echo '{id:"' . $id . '", name:"'. str_replace('"', "''",$dir['name']). '", type:"folder"';
         echo ', children : [';
-        getSubdirectories($dir->id);
+        displayDirectories($arrayDir,$id);
         echo ' ]';
         echo '}' ;
         $nbRows+=1;
-      }   
+      }
     }
     
+    function setParentVisibility(&$arrayDir,$id,$show) {
+      if (!isset($arrayDir[$id])) return;
+      $arrayDir[$id]['show']=$show;
+      if ($arrayDir[$id]['parent']) {
+        setParentVisibility($arrayDir[$id]['parent'],$show);
+      }
+    }
 ?>
