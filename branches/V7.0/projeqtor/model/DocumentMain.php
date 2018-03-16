@@ -265,7 +265,7 @@ class DocumentMain extends SqlElement {
   	}
   	if($this->idProject == "" and $this->idDocumentDirectory != ""){
   	  $dir = new DocumentDirectory($this->idDocumentDirectory);
-  	  $proj = new Project($dir->idProject);
+  	  $proj = new Project($dir->idProject,true);
   	  //sqlList getnamefromId
   	  $result.="<br/>" . i18n("projectMustBeIn", array($proj->name));
   	}
