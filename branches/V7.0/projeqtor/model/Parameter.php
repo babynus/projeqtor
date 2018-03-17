@@ -283,6 +283,7 @@ class Parameter extends SqlElement {
       case 'manageMilestoneOnItems' :
       case 'autoLinkMilestone' :
       case 'milestoneFromVersion' :
+      case 'dontAddClosedDeliveredVersionToProject' : //ADD qCazelles - Dont add closed and delivered versions to Project - Ticket 181 
       case 'mailGroupActive' :
         $list=array('NO'=>i18n('displayNo'),
                     'YES'=>i18n('displayYes')); 
@@ -725,6 +726,7 @@ class Parameter extends SqlElement {
                               //'sectionDelivery'=>'section', //ADD qCazelles
                               'productVersionOnDelivery'=>'list',
                               'manageComponentOnRequirement'=>'list',   //ADD qCazelles - Add Component to Requirement - Ticket 171
+							  'dontAddClosedDeliveredVersionToProject'=>'list', //ADD qCazelles - Dont add closed and delivered versions to Project - Ticket 181
                         'tabMail'=>"tab",   
                           'newColumnMailLeft'=>'newColumn',
                             'sectionMail'=>'section',
