@@ -280,6 +280,7 @@ class Parameter extends SqlElement {
       case 'productVersionOnDelivery' :
       case 'manageAccountable':
       case 'manageComponentOnRequirement' :   //ADD qCazelles - Add Component to Requirement - Ticket 171
+      case 'sortVersionComboboxNameDesc' : //ADD qCazelles - Sort versions in combobox - Ticket 89
       case 'manageMilestoneOnItems' :
       case 'autoLinkMilestone' :
       case 'milestoneFromVersion' :
@@ -725,8 +726,9 @@ class Parameter extends SqlElement {
                              	'versionCompatibility'=>'list',
                               //'sectionDelivery'=>'section', //ADD qCazelles
                               'productVersionOnDelivery'=>'list',
+                              'sortVersionComboboxNameDesc'=>'list', //ADD qCazelles - Sort versions in combobox - Ticket 89
                               'manageComponentOnRequirement'=>'list',   //ADD qCazelles - Add Component to Requirement - Ticket 171
-							  'dontAddClosedDeliveredVersionToProject'=>'list', //ADD qCazelles - Dont add closed and delivered versions to Project - Ticket 181
+                              'dontAddClosedDeliveredVersionToProject'=>'list', //ADD qCazelles - Dont add closed and delivered versions to Project - Ticket 181
                         'tabMail'=>"tab",   
                           'newColumnMailLeft'=>'newColumn',
                             'sectionMail'=>'section',
