@@ -77,11 +77,11 @@ class ProductProject extends SqlElement {
     //Old
     //$versList=$vers->getSqlElementsFromCriteria(array('idProduct'=>$this->idProduct,'scope'=>'product'),null,null,null,null,true);
     //New
-	if (Parameter::getGlobalParameter('dontAddClosedDeliveredVersionToProject') == 'YES') {
-		$versList=$vers->getSqlElementsFromCriteria(array('idProduct'=>$this->idProduct,'scope'=>'product','isDelivered'=>'0','idle'=>'0'),null,null,null,null,true);
-	} else {
-		$versList=$vers->getSqlElementsFromCriteria(array('idProduct'=>$this->idProduct,'scope'=>'product'),null,null,null,null,true);
-	}
+  	if (Parameter::getGlobalParameter('dontAddClosedDeliveredVersionToProject') == 'YES') {
+  		$versList=$vers->getSqlElementsFromCriteria(array('idProduct'=>$this->idProduct,'scope'=>'product','isDelivered'=>'0','idle'=>'0'),null,null,null,null,true);
+  	} else {
+  		$versList=$vers->getSqlElementsFromCriteria(array('idProduct'=>$this->idProduct,'scope'=>'product'),null,null,null,null,true);
+  	}
     //END CHANGE qCazelles - Dont add closed and delivered versions to Project - Ticket 181
     foreach ($versList as $vers) {
       $vp=SqlElement::getSingleSqlElementFromCriteria('VersionProject', array('idProject'=>$this->idProject, 'idVersion'=>$vers->id));
