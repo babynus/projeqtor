@@ -110,7 +110,8 @@ class ProductVersionMain extends Version {
       "idProduct"=>"required",
       "scope"=>"hidden",
       "idStatus"=>"required", //ADD qCazelles - Ticket #53
-      "idProductVersionType"=>"required" // ADD PBE - Ticket #53
+      "idProductVersionType"=>"required", // ADD PBE - Ticket #53
+      "idVersionType"=>"hidden"
   );   
 
   //CHANGE qCazelles - dateComposition
