@@ -111,6 +111,7 @@ class ComponentVersionMain extends Version {
       "idProduct"=>"hidden",
       "idStatus"=>"required", //ADD qCazelles - Ticket #53
       "idComponentVersionType"=>"required", //ADD PBE - Ticket #53
+      "idVersionType"=>"hidden"
   );   
 
   //CHANGE qCazelles - dateComposition

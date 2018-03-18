@@ -2370,7 +2370,7 @@ else if ($col=='idEmailTemplate') {
         if ($isWork or $isDuration or $isPercent) {
           echo '</span>';
         }
-      } else if ($dataLength>100 and ($dataLength<=4000 or getEditorType()=='text')) {
+      } else if ($dataLength>200 and ($dataLength<=4000 or getEditorType()=='text')) {
         // Draw a long text (as a textarea) =================================== TEXTAREA
         // BEGIN - ADD BY TABARY - TOOLTIP
         echo htmlDisplayTooltip($toolTip, $col, $print, $outMode);

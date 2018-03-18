@@ -5945,6 +5945,8 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
   }
 
   public function getTitle($col) {
+    if ($this->getFieldTooltip($col)) return ''; // If field has hint, don't show title
+    
     $arrayTest = array('title', 'col', '');
     foreach ( $arrayTest as $testPrefix ) {
       $test = $testPrefix . ucfirst ( $col );
