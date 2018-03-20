@@ -251,7 +251,7 @@ class PlannedWork extends GeneralWork {
             $reserved['allPreds'][$dep->predecessorId]=$dep->predecessorId;
           }
           if ($dep->predecessorId==$plan->id) {
-            $reserved[$artype][$$plan->id]['succ'][$dep->successorId]=array('id'=>$dep->successorId,'delay'=>$dep->dependencyDelay, 'type'=>$dep->dependencyType);
+            $reserved[$artype][$plan->id]['succ'][$dep->successorId]=array('id'=>$dep->successorId,'delay'=>$dep->dependencyDelay, 'type'=>$dep->dependencyType);
             $reserved['allSuccs'][$dep->successorId]=$dep->successorId;
           }
         }
