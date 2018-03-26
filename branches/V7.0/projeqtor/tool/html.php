@@ -84,7 +84,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
   }
   if ($col=='idProfile'){
     // Limit list of profiles to profiles with sortOrder >= sortOrder of user profile
-    $idPrj = $obj->id;
+    $idPrj = ($obj)?$obj->id:null;
     $user=new User();
     $prf = new Profile(getSessionUser()->getProfile($idPrj));
     $lstPrf=$prf->getSqlElementsFromCriteria(null,false,"idle=0 and ".(($prf->sortOrder)?'sortOrder>='.$prf->sortOrder:'1=1'),"sortOrder asc");
