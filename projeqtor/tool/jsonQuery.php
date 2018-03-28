@@ -208,8 +208,10 @@
              $queryWhere.="1=1";
           } else if ($objectClass=='Document') {
           	$queryWhere.= "(" . $table . ".idProject in " . getVisibleProjectsList(! $showIdleProjects) . " or " . $table . ".idProject is null)";
-          } else {
+          } else if ($obj->isAttributeSetToField('idProject','required') ){
             $queryWhere.= $table . ".idProject in " . getVisibleProjectsList(! $showIdleProjects) ;
+          } else {
+            $queryWhere.= "($table.idProject in " . getVisibleProjectsList(! $showIdleProjects). " or $table.idProject is null)" ;
           }
         }
     }
