@@ -213,7 +213,6 @@
           }
         }
     }
-
     // --- Take into account restriction visibility clause depending on profile
     if ( ($objectClass=='Version' or $objectClass=='Resource') and $comboDetail) {
     	// No limit, although idProject exists
