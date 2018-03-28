@@ -195,9 +195,7 @@
         $accessRightRead='ALL';
         $queryWhere.= ($queryWhere=='')?'':' and ';
         $queryWhere.=  '(' . $table . ".id in " . transformListIntoInClause(getSessionUser()->getVisibleProjects(! $showIdle)) ;
-        //if ($objectClass=='Project') {
-          $queryWhere.= " or $table.codeType='TMP' "; // Templates projects are always visible in projects list
-        //}
+        $queryWhere.= " or $table.codeType='TMP' "; // Templates projects are always visible in projects list
         $queryWhere.= ')';
     }  
     // --- Restrict to allowed project taking into account selected project : for all list that are project dependant
