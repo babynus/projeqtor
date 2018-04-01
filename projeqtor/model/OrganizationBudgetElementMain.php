@@ -568,7 +568,7 @@ function periodChanged(theId) {
    */
   public function save() {
     $old=$this->getOld();
-    
+    debugLog("id=$this->id, type=$this->refType, refId=$this->refId, year=$this->year");
     if ($this->id== NULL or trim($this->id)=='') {
         // Initialize year of the new organization's budget element to current year
         $this->year = date('Y');
@@ -594,6 +594,7 @@ function periodChanged(theId) {
                 }
                 return $result;
             }
+            debugLog("$this->year != $old->year");
             // Not Found => Create it
             $this->id = null;
             $theYear=$this->year;
