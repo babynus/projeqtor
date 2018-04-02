@@ -4158,7 +4158,9 @@ function drawTicketsList($obj, $refresh=false) {
   echo '<td class="linkHeader" style="width:60%">'.i18n('colName').'</td>';
   echo '<td class="linkHeader" style="width:40%">'.i18n('colIdStatus').'</td>';
   echo '</tr>';
-  if (get_class($obj)=='Contact') {
+  if (!$obj->id) {
+    $list=array();
+  } else if (get_class($obj)=='Contact') {
     $crit=array('idContact'=>$obj->id, 'idle'=>'0');
     $ticket=new Ticket();
     $list=$ticket->getSqlElementsFromCriteria($crit);
