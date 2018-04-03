@@ -3205,7 +3205,7 @@ function drawObjectLinkedByIdToObject($obj, $objLinkedByIdObject='', $refresh=fa
   }
   if (!$refresh and !$print) echo '</td></tr>';
   if (!$print) {
-    echo '<input id="ObjectSectionCount" type="hidden" value="'.count($nbObjects++).'" />';
+    echo '<input id="ObjectSectionCount" type="hidden" value="'.$nbObjects.'" />';
   }
 }
 // END ADD BY Marc TABARY - 2017-02-23 - DRAW LIST OF OBJECTS LINKED BY ID TO MAIN OBJECT
