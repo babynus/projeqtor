@@ -575,7 +575,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       }
 
 // ADD BY Marc TABARY - 2017-02-12 - ORGANIZATIONS COMBOBOX LIST
-      if ($col=="idOrganization" and $sepChar!='no') {   
+      if ($col=="idOrganization" and $sepChar!='no' and isset($orgaList[$key])) {   
         $orgOrder=$orgaList[$key];
         $orgTest=$orgOrder;
         $level=1;
