@@ -51,7 +51,7 @@
 
         $n=new Notification();
         $nTable=$n->getDatabaseTableName();
-        $nd=new NotificationDefinition(;)
+        $nd=new NotificationDefinition();
         $ndTable=$nd->getDatabaseTableName();
         $t=new Type();
         $tTable=$t->getDatabaseTableName();
@@ -80,10 +80,12 @@
         $where  = " WHERE $nTable.idle=0";
         $where .= " AND $nTable.idStatusNotification=$idStatusNotification";
         $where .= " AND $nTable.idUser=$userId";
-        $where .= " AND $nTable.notificationDate<='".$theCurrentDate."' ";
-        $where .= " AND IF(ISNULL($nTable.notificationTime) OR $nTable.notificationDate<DATE(NOW()),(1=1),$nTable.notificationTime<TIME(NOW()))";
+        //$where .= " AND $nTable.notificationDate<='".$theCurrentDate."' ";
         //$where .= " AND IF(ISNULL($nTable.notificationTime) OR $nTable.notificationDate<DATE(NOW()),(1=1),$nTable.notificationTime<TIME(NOW()))";
-        
+        $where .= " AND (      $nTable.notificationDate<'$theCurrentDate'";
+        $where .= "       OR ( $nTable.notificationDate='$theCurrentDate' AND $nTable.notificationTime IS NULL )";
+        $where .= "       OR ( $nTable.notificationDate='$theCurrentDate' AND $nTable.notificationTime IS NOT NULL AND $nTable.notificationTime<TIME(NOW()) )";
+        $where .= "     )";
         // Order By party of SqlQuery
         $orderBy = "ORDER BY typeId asc, objectClassName asc, definition asc";
         
