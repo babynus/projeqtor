@@ -504,7 +504,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
   // Sort array of classes
   if ($listType=='Linkable' or $listType=='Copyable' or $listType=='Importable' or $listType=='Mailable'
    or $listType=='Indicatorable' or $listType=='Checklistable' or $listType=='Dependable' or $listType=='Originable'
-   or $listType=='Referencable') {
+   or $listType=='Referencable' or $listType == 'Notifiable') {
     asort($table);
   }
   // Retreive the char to indent projects structure
