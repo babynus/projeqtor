@@ -681,15 +681,33 @@ class Cron {
   			continue;
   		}
   		// Search end of Message (this is valid for text only, treatment of html messages would require other code)  		
-  		$posEndMsg=strpos($body,"\r\n>");
+  		$posEndMsg=strpos($body,"\r\n>"); // Search for Thunderbird and Gmail
   		if ($posEndMsg) {
-  		  $posEndMsg=strrpos(substr($body,0,$posEndMsg-2), "\r\n");
-  		  //$posEndMsg=strrpos(substr($body,0,$posEndMsg-2), "\r\n");
+  		  $posEndMsg=strrpos(substr($body,0,$posEndMsg-20), "\r\n");
+  		  /*if ($posEndMsg) {
+  		    $posEndMsg=strrpos(substr($body,0,$posEndMsg-20), "\r\n");
+  		    $previousLine=strrpos(substr($body,0,$posEndMsg-20), "\r\n");
+  		    if ($previousLine and preg_match('/<.*?@.*?>/',substr($body,$previousLine,$posEndMsg-$previousLine+1)) ) {
+  		      $posEndMsgNew=strrpos(substr($body,0,$posEndMsg-2), "\r\n");
+  		      if ($posEndMsgNew) $posEndMsg=$posEndMsgNew;
+  		    }
+  		  }*/
   		} else {
   		  $posEndMsg=strpos($body,"\n>");
-  		  if ($posEndMsg) {
-  		    $posEndMsg=strrpos(substr($body,0,$posEndMsg-2), "\n");
-  		    //$posEndMsg=strrpos(substr($body,0,$posEndMsg-2), "\n");
+  		  /*if ($posEndMsg) {
+  		    $posEndMsg=strrpos(substr($body,0,$posEndMsg-20), "\n");
+  		    $previousLine=strrpos(substr($body,0,$posEndMsg-20), "\n");
+  		    if ($previousLine and preg_match('/<.*?@.*?>/',substr($body,$previousLine,$posEndMsg-$previousLine+1)) ) {
+  		      $posEndMsgNew=strrpos(substr($body,0,$posEndMsg-2), "\n");
+  		      if ($posEndMsgNew) $posEndMsg=$posEndMsgNew;
+  		    }
+  		  }*/ 
+  		}
+  		if (!$posEndMsg) { // Search for outlook
+  		  preg_match('/<.*?@.*?> [\r\n]/',$body, $matches);
+  		  if (count($matches)>0) {
+  		    $posEndMsg=strpos($body, $matches[0]);
+  		    $posEndMsg=strrpos(substr($body,0,$posEndMsg-2), "\r\n");
   		  }
   		}
   		if (!$posEndMsg) {
