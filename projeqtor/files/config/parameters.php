@@ -9,6 +9,7 @@ $paramDbName='projeqtor_v70';$paramDbPrefix='';
 // --- PostgreSql Default
 //$paramDbType='pgsql'; $paramDbPort='5432'; $paramDbName='projeqtor'; $paramDbUser='projeqtor'; $paramDbPassword='projeqtor';
 //$paramDbName='support_ige';$paramDbPrefix=''; 
+//$paramDbName='support_cg91_anonym';$paramDbPrefix='';
 $paramDbHost='127.0.0.1';         // With MySql on Windows, better use "127.0.0.1" rather than "localhost"
 
 // ========== Log file configuration =====================================================
