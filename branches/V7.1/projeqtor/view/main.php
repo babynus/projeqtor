@@ -303,13 +303,15 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       saveBrowserLocaleToSession();
       aboutMessage="<?php echo $aboutMessage;?>";
       aboutMessage+='<br/><b>'+i18n('externalLibrary')+'</b><br/>';
-      aboutMessage+='&nbsp;&nbsp;&nbsp;Dojo '+dojo.version+'<br/>';
       aboutMessage+='&nbsp;&nbsp;&nbsp;CK Editor 4.8 '+'<br/>';
-      aboutMessage+='&nbsp;&nbsp;&nbsp;phpMailer 6.0.3 '+'<br/>';
-      aboutMessage+='&nbsp;&nbsp;&nbsp;pdfMake 0.1.36 '+'<br/>';
+      aboutMessage+='&nbsp;&nbsp;&nbsp;CryptoJS 3.1.2 '+'<br/>';
+      aboutMessage+='&nbsp;&nbsp;&nbsp;Dojo '+dojo.version+'<br/>';
       aboutMessage+='&nbsp;&nbsp;&nbsp;html2canvas 1.0.0 '+'<br/>';
+      aboutMessage+='&nbsp;&nbsp;&nbsp;html2pdf 5.1.0 '+'<br/>';
       aboutMessage+='&nbsp;&nbsp;&nbsp;pChart2 2.0 '+'<br/>';
-      aboutMessage+='&nbsp;&nbsp;&nbsp;html2pdf 5.1.0 '+'<br/><br/>';
+      aboutMessage+='&nbsp;&nbsp;&nbsp;pdfMake 0.1.36 '+'<br/>';
+      aboutMessage+='&nbsp;&nbsp;&nbsp;phpAES '+'<br/>';
+      aboutMessage+='&nbsp;&nbsp;&nbsp;phpMailer 6.0.3 '+'<br/><br/>';
       // Relaunch Cron (if stopped, any connexion will restart it)
       adminCronRelaunch();
 //       var onKeyPressFunc = function(event) {
