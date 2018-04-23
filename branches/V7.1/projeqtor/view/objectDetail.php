@@ -70,6 +70,11 @@ if ($noselect) {
   $objId=$_REQUEST['objectId'];
   $obj=new $objClass($objId);
   $profile=getSessionUser()->getProfile($obj);
+  //gautier   
+  if ($objClass=='Resource' and $obj->isResourceTeam) {
+    $objClass='ResourceTeam';
+    $obj=new ResourceTeam($objId);
+  }
   if (array_key_exists('refreshNotes', $_REQUEST)) {
     drawNotesFromObject($obj, true);
     exit();
