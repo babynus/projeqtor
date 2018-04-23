@@ -34,7 +34,6 @@ $refType=$_REQUEST['otherClientRefType'];
 Security::checkValidClass($refType);
 
 $refId=$_REQUEST['otherClientRefId'];
-Security::checkValidClass($clientType);
 
 //otherClientId
 $selected=null;

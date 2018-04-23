@@ -5552,18 +5552,18 @@ function drawOtherClientFromObject($otherClient, $obj) {
   }
   if (!$otherClient or count($otherClient)==0) return;
   echo '<table>';
-  foreach ($otherClient as $vers) {
-    if ($vers->id) {
+  foreach ($otherClient as $client) {
+    if ($client->id) {
       echo '<tr>';
       if ($obj->id and $canUpdate and !$print) {
         echo '<td style="width:20px">';
-        echo '<a onClick="removeOtherClient('."'".htmlEncode($vers->id)."'".', \''.SqlList::getNameFromId('Client', $vers->idClient).'\''.', \''.htmlEncode($vers->scope).'\''.');" '.'title="'.i18n('otherClientDelete').'" > '.formatSmallButton('Remove').'</a>';
+        echo '<a onClick="removeOtherClient('."'".htmlEncode($client->id)."'".', \''.SqlList::getNameFromId('Client', $client->idClient).'\');" '.'title="'.i18n('otherClientDelete').'" > '.formatSmallButton('Remove').'</a>';
         echo '</td>';
         echo '<td style="width:20px">';
-        echo '<a onClick="swicthOtherClientToMain('."'".htmlEncode($vers->id)."'".', \''.SqlList::getNameFromId('Client', $vers->idClient).'\''.', \''.htmlEncode($vers->scope).'\''.');" '.'title="'.i18n('otherClientSetMain').'" > '.formatSmallButton('Switch').'</a>';
+        echo '<a onClick="swicthOtherClientToMain('."'".htmlEncode($client->id)."'".', \''.SqlList::getNameFromId('Client', $client->idClient).'\');" '.'title="'.i18n('otherClientSetMain').'" > '.formatSmallButton('Switch').'</a>';
         echo '</td>';
       }
-      echo '<td>'.htmlEncode(SqlList::getNameFromId('Client', $vers->idClient)).'</td>';
+      echo '<td>'.htmlEncode(SqlList::getNameFromId('Client', $client->idClient)).'</td>';
       echo '</tr>';
     }
   }
