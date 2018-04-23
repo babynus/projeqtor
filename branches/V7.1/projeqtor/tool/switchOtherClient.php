@@ -45,8 +45,7 @@ Sql::beginTransaction();
 $cli=new OtherClient($id);
 $refType=$cli->refType;
 $refId=$cli->refId;
-$scope=$cli->scope;
-$fld='id'.$cli->scope;
+$fld='idClient';
 $fldArray='_OtherClient';
 $obj=new $refType($refId);
 $mainClient=$obj->$fld;
@@ -54,11 +53,11 @@ $otherClient=$cli->idClient;
 // save new main
 $obj->$fld=$otherClient;
 $result=$obj->save();
+$cli->delete();
 // save new other
 $cli=new OtherClient();
 $cli->refType=$refType;
 $cli->refId=$refId;
-$cli->scope=$scope;
 $cli->creationDate=date('Y-m-d H:i:s');
 $user=getSessionUser();
 $cli->idUser=$user->id;

@@ -655,9 +655,9 @@
 		      	  ." where VERS.refType=".Sql::str($objectClass)." and VERS.refId=".$table.".id and scope=".Sql::str($scope)
 		      	  ." and VERS.idVersion IN ".$critSqlValue
 		      	  .")";
-		      } else if ($crit['sql']['attribute'])=='idClient' and $crit['sql']['operator']=='IN' and property_exists($objectClass, '_OtherClient')) {
-		      	$client=new OtherClient();
-		      	$queryWhereTmp.=" or exists (select 'x' from ".$client->getDatabaseTableName()." other "
+		      } else if ($crit['sql']['attribute']=='idClient' and $crit['sql']['operator']=='IN' and property_exists($objectClass, 'idClient') and property_exists($objectClass, '_OtherClient')) {
+		      	$otherclient=new OtherClient();
+		      	$queryWhereTmp.=" or exists (select 'x' from ".$otherclient->getDatabaseTableName()." other "
 		      	  ." where other.refType=".Sql::str($objectClass)." and other.refId=".$table.".id and other.idClient IN ".$critSqlValue
 		      	  .")";
 		      }
