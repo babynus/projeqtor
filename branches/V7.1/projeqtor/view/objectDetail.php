@@ -2073,6 +2073,15 @@ else if ($col=='idEmailTemplate') {
             $fieldWidth-=28;
           }
         }
+        $hasOtherClient=false;
+        $otherClient='';
+        if ( $col=='idClient' ) {
+          $otherClient='_OtherClient';
+          if (isset($obj->$otherClient) and !$obj->isAttributeSetToField($col, 'hidden') and !$obj->isAttributeSetToField($col, 'readonly') and !$readOnly and !$hide and $canUpdate and !$obj->idle) {
+            $hasOtherClient=true;
+            $fieldWidth-=28;
+          }
+        }
         $showExtraButton=false;
         if ($col=='idStatus' or $col=='idResource' or $col=='idAccountable' or $col=='idResponsible') {
           if ((($col=='idStatus') or (($col=='idResource' or $col=='idAccountable' or $col=='idResponsible') and $user->isResource and $user->id!=$val and $obj->id and $classObj!='Affectation')) and $classObj!='Document' and $classObj!='StatusMail' and $classObj!="TicketSimple" and $canUpdate) {
@@ -2148,6 +2157,18 @@ else if ($col=='idEmailTemplate') {
           }
           if (count($obj->$otherVersion)>0) {
             drawOtherVersionFromObject($obj->$otherVersion, $obj, $versionType);
+          }
+        }
+        if ($hasOtherClient) {
+          if ($obj->id and $canUpdate) {
+            echo '<a class="generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" style="float:right;margin-right:5px;'.$specificStyleWithoutCustom.'" ';
+            echo ' onClick="addOtherClient();" ';
+            echo ' title="'.i18n('otherClientAdd').'">';
+            echo formatSmallButton('Add');
+            echo '</a>';
+          }
+          if (count($obj->$otherClient)>0) {
+            drawOtherClientFromObject($obj->$otherClient, $obj);
           }
         }
         if ($col=='idStatus' and $next and $showExtraButton) {
@@ -5516,6 +5537,33 @@ function drawOtherVersionFromObject($otherVersion, $obj, $type) {
         echo '</td>';
       }
       echo '<td>'.htmlEncode(SqlList::getNameFromId('Version', $vers->idVersion)).'</td>';
+      echo '</tr>';
+    }
+  }
+  echo '</table>';
+}
+
+function drawOtherClientFromObject($otherClient, $obj) {
+  global $print;
+  usort($otherClient, "OtherClient::sort");
+  $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
+  if ($obj->idle==1) {
+    $canUpdate=false;
+  }
+  if (!$otherClient or count($otherClient)==0) return;
+  echo '<table>';
+  foreach ($otherClient as $vers) {
+    if ($vers->id) {
+      echo '<tr>';
+      if ($obj->id and $canUpdate and !$print) {
+        echo '<td style="width:20px">';
+        echo '<a onClick="removeOtherClient('."'".htmlEncode($vers->id)."'".', \''.SqlList::getNameFromId('Client', $vers->idClient).'\''.', \''.htmlEncode($vers->scope).'\''.');" '.'title="'.i18n('otherClientDelete').'" > '.formatSmallButton('Remove').'</a>';
+        echo '</td>';
+        echo '<td style="width:20px">';
+        echo '<a onClick="swicthOtherClientToMain('."'".htmlEncode($vers->id)."'".', \''.SqlList::getNameFromId('Client', $vers->idClient).'\''.', \''.htmlEncode($vers->scope).'\''.');" '.'title="'.i18n('otherClientSetMain').'" > '.formatSmallButton('Switch').'</a>';
+        echo '</td>';
+      }
+      echo '<td>'.htmlEncode(SqlList::getNameFromId('Client', $vers->idClient)).'</td>';
       echo '</tr>';
     }
   }
