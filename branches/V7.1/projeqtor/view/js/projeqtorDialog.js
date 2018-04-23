@@ -673,6 +673,10 @@ function selectDetailItem(selectedValue, lastSavedName) {
         refreshOtherVersionList(idFldVal);
         setTimeout("dojo.byId('otherVersionIdVersion').focus()", 1000);
         enableWidget('dialogOtherVersionSubmit');
+      } else if (comboName == 'otherClientIdClient') {
+        refreshOtherClientList(idFldVal);
+        setTimeout("dojo.byId('otherClientIdClient').focus()", 1000);
+        enableWidget('dialogOtherClientSubmit');
       } else if (comboName == 'approverId') {
         refreshApproverList(idFldVal);
         setTimeout("dojo.byId('approverId').focus()", 1000);
@@ -1883,6 +1887,95 @@ function showDetailOtherVersion() {
     else if (typeValue.substr(-14)=='ProductVersion') versionType='ProductVersion';
   }
   showDetail('otherVersionIdVersion', canCreate, versionType, true);
+}
+
+//=============================================================================
+//= OtherClients
+//=============================================================================
+function addOtherClient() {
+  if (checkFormChangeInProgress()) {
+   showAlert(i18n('alertOngoingChange'));
+   return;
+  }
+  var objectClass=dojo.byId("objectClass").value;
+  var objectId=dojo.byId("objectId").value;
+  dojo.byId("otherClientRefType").value=objectClass;
+  dojo.byId("otherClientRefId").value=objectId;
+  refreshOtherClientList(null);
+  dijit.byId("dialogOtherClient").show();
+  disableWidget('dialogOtherClientSubmit');
+}
+
+/**
+* Refresh the link list (after update)
+*/
+function refreshOtherClientList(selected) {
+  disableWidget('dialogOtherClientSubmit');
+  var url='../tool/dynamicListOtherClient.php';
+  if (selected) {
+   url+='?selected=' + selected;
+  }
+  if (!selected) {
+   selectOtherClientItem();
+  }
+  loadContent(url, 'dialogOtherClientList', 'otherClientForm', false);
+}
+
+function selectOtherClientItem() {
+  var nbSelected=0;
+  list=dojo.byId('otherClientIdClient');
+  if (list.options) {
+   for (var i=0; i < list.options.length; i++) {
+     if (list.options[i].selected) {
+       nbSelected++;
+     }
+   }
+  }
+  if (nbSelected > 0) {
+   enableWidget('dialogOtherClientSubmit');
+  } else {
+   disableWidget('dialogOtherClientSubmit');
+  }
+}
+
+function saveOtherClient() {
+  if (dojo.byId("otherClientIdClient").value == "")
+   return;
+  loadContent("../tool/saveOtherClient.php", "resultDiv", "otherClientForm",
+     true, 'otherClient');
+  dijit.byId('dialogOtherClient').hide();
+}
+
+function removeOtherClient(id, name, type) {
+  if (checkFormChangeInProgress()) {
+   showAlert(i18n('alertOngoingChange'));
+   return;
+  }
+  dojo.byId("otherClientId").value=id;
+  actionOK=function() {
+   loadContent("../tool/removeOtherClient.php", "resultDiv",
+       "otherClientForm", true, 'otherClient');
+  };
+  msg=i18n('confirmDeleteOtherClient', new Array(name, i18n('colId' + type)));
+  showConfirm(msg, actionOK);
+}
+
+function swicthOtherClientToMain(id, name, type) {
+  if (checkFormChangeInProgress()) {
+   showAlert(i18n('alertOngoingChange'));
+   return;
+  }
+  dojo.byId("otherClientId").value=id;
+  loadContent("../tool/switchOtherClient.php", "resultDiv",
+     "otherClientForm", true, 'otherClient');
+}
+
+function showDetailOtherClient() {
+  var canCreate=0;
+  if (canCreateArray['Client'] == "YES") {
+   canCreate=1;
+  }
+  showDetail('otherVersionIdVersion', canCreate, 'Client', true);
 }
 // =============================================================================
 // = Approvers
