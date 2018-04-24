@@ -131,7 +131,8 @@ class TicketMain extends SqlElement {
                                   "doneDateTime"=>"nobr",
                                   "solved"=>"nobr",
                                   "idActivity"=>"title",
-                                  "delayReadOnly"=>"hidden"
+                                  "delayReadOnly"=>"hidden",
+                                  "_OtherClient"=>"hidden"
   );  
   
   private static $_colCaptionTransposition = array('idUser'=>'issuer', 
