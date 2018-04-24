@@ -42,8 +42,14 @@ if ($paramProduct) {
     $crit.=' and idProduct='.Sql::fmtId($paramProduct);
 }
 if ($paramProductVersion) {
+    $other=new OtherTargetProductVersion();
+    $otherTable=$other->getDatabaseTableName();
+    $ticket = new Ticket();
+    $ticketTable=$ticket->getDatabaseTableName();
     $headerParameters.= i18n("colIdProductVersion") . ' : ' . htmlEncode(SqlList::getNameFromId('ProductVersion', $paramProductVersion)) . '<br/>';
-    $crit.=' and idTagetProductVersion='.Sql::fmtId($paramProductVersion);
+    $crit.=' and (idTargetProductVersion='.Sql::fmtId($paramProductVersion);
+    $crit.=" or exists (select 'x' from $otherTable other where other.refType='Ticket' and other.refId=$ticketTable.id and other.scope='TargetProductVersion' )";
+    $crit.=')';
 }
 if ($paramListTickets) {
   $headerParameters.= i18n("colListTickets"). '<br/>';
@@ -100,199 +106,96 @@ foreach($lstTicket as $ticket) {
   }
 }
 
+if ($outMode == 'csv') {
+  exportCsv();
+} else {
+  printResult();
+}
 
 function addClient($idClient,$ticket) {
   global $arrayClient;
-  if (!$idTicket) return;
-  
+  if (!$idClient) return;
+  if (!isset($arrayClient[$idClient])) {
+    $client=new Client($idClient);
+    $arrayClient[$idClient]=array('name'=>$client->name,'city'=>$client->city,'country'=>$client->country, 'tickets'=>array());
+  }
+  $arrayClient[$idClient]['tickets'][$ticket->id]=array('id'=>$ticket->id,'name'=>$ticket->name,'description'=>$ticket->description,'status'=>$ticket->idStatus);
 }
 
-
-
-
-exit;
-// Job definition
-$where = getAccesRestrictionClause('JobDefinition', false);
-//$where .= "and idJoblistDefinition = " . $joblist[0]->id;
-$orderBy = " idJoblistDefinition ASC, sortOrder ASC";
-$newjobDef = new JobDefinition();
-$jobDefinitions = $newjobDef->getSqlElementsFromCriteria(null, false, $where, $orderBy);
-
-$aDefLines = array();
-$aDefLinesCount =array();
-foreach ($jobDefinitions as $jobDef) {
-    if (!array_key_exists($jobDef->id, $aDefLines)) {
-        $aDefLines[$jobDef->id] = array('name' => $jobDef->name,
-            'title' => $jobDef->title,
-            'daysBeforeWarning' => $jobDef->daysBeforeWarning,
-            'nbcheck' => 0,
-        		'jobListId' => $jobDef->idJoblistDefinition
-        );
-    }
-    if (!array_key_exists($jobDef->idJoblistDefinition, $aDefLinesCount)) {
-    	$aDefLinesCount[$jobDef->idJoblistDefinition]=1;
-    } else {
-    	$aDefLinesCount[$jobDef->idJoblistDefinition]+=1;
-    }
-}
-// Get list of checkboxes of activities
-$where = getAccesRestrictionClause('Job', false);
-$where .= " and refType = 'Activity' ";
-//$where .= " and idJoblistDefinition = " . $joblist[0]->id;
-$newJob = new Job();
-$lstJobs = $newJob ->getSqlElementsFromCriteria(null, false, $where, null);
-$result = array(); // Preparation of result lines
-foreach ($lstJobs as $oJob) {
-    $result[$oJob->refId][$oJob->idJobDefinition] = $oJob;
-}
-// title
-if ($outMode == 'csv') {
-    echo chr(239) . chr(187) . chr(191); // Microsoft Excel requirement
-    echo i18n('colIdActivity') . ';';
-    foreach ($aDefLines as $aLine) {
-        echo htmlencode($aLine['name']) . ';';
-    }
-    echo i18n('sum') . ';';
-    echo i18n('colComment');
-    echo "\n";
-} else {
-    echo '<table align="center" style="width: 95%">';
-    echo '<tr>';
-    echo '<td class="reportTableHeader">' . i18n('Activity') . '</td>';
-    foreach ($aDefLines as $aLine) {
-        echo '<th class="reportTableHeader" style="width: 60px" title="' . htmlencode($aLine['title']) . '"><span>' . htmlencode($aLine['name']) . '</span></th>';
-    }
-    echo '<td class="reportTableHeader">' . i18n('sum') . '</td>';
-    echo '<td class="reportTableHeader">' . i18n('colComment') . '</td>';
-    echo '</tr>';
-}
-
-usort($lstActivity, 'compareWbs');
-$status = array('done' => '#a5eda5',
-    'warning' => '#edb584',
-    'alert' => '#eda5a5',
-    'blank' => '#FFFFFF');
-$totalChecked = 0;
-$nbActivitiesDone = 0;
-$dToday = new DateTime();
-foreach ($lstActivity as $activity) {
-    if ($outMode == 'csv') {
-        echo $activity->name . ';';
-    } else {
-        echo '<tr style="height: 30px">';
-        echo '<td class="reportTableLineHeader pointer" onclick="gotoElement(\'Activity\',' . $activity->id . ');">' . htmlencode($activity->name) . '</td>';
-    }
-    // If there are checked boxes
-    if (array_key_exists($activity->id, $result)) {
-        $iCount = 0;
-        foreach ($aDefLines as $sKey => $aLine) {
-            if ($outMode == 'csv') {
-                if (isset($result[$activity->id][$sKey])) {
-                    if ($result[$activity->id][$sKey]->value) {
-                        echo 'X';
-                        
-                        ++$iCount;
-                        ++$aDefLines[$sKey]['nbcheck'];
-                    } elseif (!is_null($result[$activity->id][$sKey]->creationDate)) {
-                        echo htmlFormatDate(substr($result[$activity->id][$sKey]->creationDate, 0, 10));
-                    }
-                    echo ';';
-                } else {
-                    echo ';';
-                }
-            } else {
-                $color = $status['blank'];
-                $title = '';
-                if (isset($result[$activity->id][$sKey])) {
-                    if ($result[$activity->id][$sKey]->value) {
-                        $color = $status['done'];
-                        ++$iCount;
-                        ++$aDefLines[$sKey]['nbcheck'];
-                    } else {
-                        if ($result[$activity->id][$sKey]->value) {
-                            $color = $status['done'];
-                        } elseif (!is_null($result[$activity->id][$sKey]->creationDate) && $result[$activity->id][$sKey]->creationDate < $dToday->format('Y-m-d')) {
-                            $color = $status['alert'];
-                        } elseif (!is_null($result[$activity->id][$sKey]->creationDate) && $aLine['daysBeforeWarning'] > 0) {
-                            $warningDate = new DateTime($result[$activity->id][$sKey]->creationDate);
-                            $warningDate->modify('-' . $aLine['daysBeforeWarning'] . ' days');
-                            if ($warningDate < $dToday) {
-                                $color = $status['warning'];
-                            }
-                        }
-                    }
-                    if (!is_null($result[$activity->id][$sKey]->idUser)) {
-                        $title .= 'By ' . SqlList::getNameFromId('User', $result[$activity->id][$sKey]->idUser) . "\n";
-                    }
-                    if (isset($result[$activity->id][$sKey]) && $result[$activity->id][$sKey]->value && !is_null($result[$activity->id][$sKey]->checkTime)) {
-                        $title .= 'On ' . htmlFormatDate($result[$activity->id][$sKey]->checkTime) . "\n";
-                    }
-                    if (!is_null($result[$activity->id][$sKey]->creationDate)) {
-                        $title .= 'Due for ' . htmlFormatDate(substr($result[$activity->id][$sKey]->creationDate, 0, 10)) . "\n";
-                    }
-                    if (!is_null($result[$activity->id][$sKey]->comment) && !empty($result[$activity->id][$sKey]->comment)) {
-                        $title .= "————————\n" . $result[$activity->id][$sKey]->comment;
-                    }
-                }
-                echo '<td class="reportTableData" style="background-color: ' . $color . '" title="' . $title . '">' . ((isset($result[$activity->id][$sKey]) && !is_null($result[$activity->id][$sKey]->comment) && !empty($result[$activity->id][$sKey]->comment)) ? '<big>*</big>' : '&nbsp;') . '</td>';
-            }
-        }
-        if ($outMode == 'csv') {
-            echo round((($iCount / count($aDefLines)) * 100), 2) . ';';
-        } else {
-            echo '<td class="reportTableLineHeader" style="text-align: right">' . round((($iCount / count($aDefLines)) * 100), 2) . ' %</td>';
-        }
-        $totalChecked += $iCount;
-        if ($iCount == count($aDefLines)) {
-            ++$nbActivitiesDone;
-        }
-    } else {
-        for ($i = 0; $i < count($aDefLines); ++$i) {
-            if ($outMode == 'csv') {
-                echo ';';
-            } else {
-                echo '<td class="reportTableData">&nbsp;</td>';
-            }
-        }
-        if ($outMode == 'csv') {
-            echo '0;';
-        } else {
-            echo '<td class="reportTableLineHeader" style="text-align: right">0 %</td>';
-        }
-    }
-    if ($outMode == 'csv') {
-        //echo mb_strtoupper(str_replace("\n", " / ", htmlTransformRichtextToPlaintext($activity->description, 'UTF-8')));
-        echo formatAnyTextToPlainText(html_entity_decode($activity->description));
+function exportCsv() {
+  global $arrayClient,$paramListTickets;
+  echo chr(239) . chr(187) . chr(191); // Microsoft Excel requirement
+  echo i18n('colClientName') . ';';
+  echo i18n('colCity') . ';';
+  echo i18n('colCountry');
+  if ($paramListTickets) {
+    echo ';';
+    echo i18n('Ticket') . ';';
+    echo i18n('colName') . ';';
+    echo i18n('colDescription') . ';';
+    echo i18n('colIdStatus');
+  }
+  echo "\n";
+  foreach($arrayClient as $client) {
+    if ($paramListTickets) {
+      foreach ($client['tickets'] as $ticket) {
+        echo '"'.htmlencode($client['name'],'none').'";';
+        echo '"'.htmlencode($client['city'],'none').'";';
+        echo '"'.htmlencode($client['country'],'none').'";';
+        echo $ticket['id'].';';
+        echo '"'.htmlencode($ticket['name'],'none').'";';
+        echo '"'.formatAnyTextToPlainText(htmlencode($ticket['description'],'quotes'),true).'";';
+        echo '"'.htmlencode(SqlList::getNameFromId('Status',$ticket['status'],'none')).'";';
         echo "\n";
+      }
     } else {
-        //echo '<td class="reportTableLineHeader">' . mb_strtoupper($activity->description, 'UTF-8') . '</td>';
-      echo '<td class="reportTableLineHeader">' . $activity->description . '</td>';
-        echo '</tr>';
+      echo '"'.htmlencode($client['name'],'none').'";';
+      echo '"'.htmlencode($client['city'],'none').'";';
+      echo '"'.htmlencode($client['country'],'none').'";';
+      echo "\n";
     }
+  }
 }
-if ($outMode == 'csv') {
-    echo i18n('sum') . ';';
-    foreach ($aDefLines as $aLine) {
-        echo round((($aLine['nbcheck'] / count($lstActivity)) * 100), 2) . ';';
+function printResult() {
+  global $arrayClient,$paramListTickets;
+  $clientCss='border: 1px solid #A0A0A0;padding:5px 10px;';
+  $ticketCss='border: 1px solid #A0A0A0;padding:2px 5px;vertical-align:top;';
+  echo "<table style='width:90%; margin-left: auto; margin-right: auto;'>";
+  echo "  <tr class='reportTableHeader'>";
+  echo "    <td style='width:70%' class='reportTableHeader'>".i18n('colClientName')."</td>";
+  echo "    <td style='width:15%' class='reportTableHeader'>".i18n('colCity')."</td>";
+  echo "    <td style='width:15%' class='reportTableHeader'>".i18n('colCountry')."</td>";
+  echo "  </tr>";
+  foreach($arrayClient as $client) {
+    echo "  <tr class='reportData'>";
+    echo "    <td style='width:70%;text-align:left;$clientCss' class='reportData'>".$client['name']."</td>";
+    echo "    <td style='width:15%;text-align:center;$clientCss' class='reportData'>".$client['city']."</td>";
+    echo "    <td style='width:15%;text-align:center;$clientCss' class='reportData'>".$client['country']."</td>";
+    echo "  </tr>";
+    if ($paramListTickets) {
+      echo "  <tr class='reportData'>";
+      echo "    <td colspan='3' style='width:100%;' class='reportData'>";
+      echo "      <table style='width:100%'>";
+      echo "        <tr class=''>";
+      echo "          <td style='width:10%;text-align:right' >".i18n('menuTicket')."&nbsp;&nbsp;&nbsp;</td>";
+      echo "          <td style='width:5%;text-align:center' class='reportTableLineHeader'>".i18n('colId')."</td>";
+      echo "          <td style='width:25%;text-align:center' class='reportTableLineHeader'>".i18n('colName')."</td>";
+      echo "          <td style='width:45%;text-align:center' class='reportTableLineHeader'>".i18n('colDescription')."</td>";
+      echo "          <td style='width:15%;text-align:center' class='reportTableLineHeader'>".i18n('colIdStatus')."</td>";
+      echo "        </tr>";
+      foreach ($client['tickets'] as $ticket) {
+        echo "        <tr class=''>";
+        echo "          <td style='width:10%;text-align:right' >&nbsp;</td>";
+        echo "          <td style='width:5%;text-align:center;$ticketCss' class=''>".$ticket['id']."</td>";
+        echo "          <td style='width:25%;text-align:left;$ticketCss' class=''>".$ticket['name']."</td>";
+        echo "          <td style='width:45%;text-align:left;font-size:80%;$ticketCss' class=''>".$ticket['description']."</td>";
+        echo "          <td style='width:15%;text-align:center;$ticketCss' class=''>".SqlList::getNameFromId('Status',$ticket['status'])."</td>";
+        echo "        </tr>";
+      }
+      echo "      </table>";
+      echo "    </td>";
+      echo "  </tr>";
     }
-    echo round((($totalChecked / (count($aDefLines) * count($lstActivity))) * 100), 2) . ';';
-    echo $nbActivitiesDone . ' / ' . count($lstActivity) . ' done';
-} else {
-    echo '<tr><td class="reportTableHeader">' . i18n('sum') . '</td>';
-    foreach ($aDefLines as $aLine) {
-        echo '<td class="reportTableHeader">' . round((($aLine['nbcheck'] / count($lstActivity)) * 100), 2) . ' %</td>';
-    }
-    if (count($aDefLines) and count($lstActivity)) {
-      $tot=round((($totalChecked / (count($aDefLines) * count($lstActivity))) * 100), 2);
-    } else {
-    	$tot='';
-    }
-    echo '<td class="reportTableHeader">' . $tot . ' %</td>';
-    echo '<td class="reportTableHeader">' . $nbActivitiesDone . ' / ' . count($lstActivity) . ' done</td></tr>';
-    echo '</table>';
-}
-
-// FUNCTIONS
-function compareWbs($a, $b) {
-	return version_compare($a->ActivityPlanningElement->wbs, $b->ActivityPlanningElement->wbs);
+  }
+  echo "</table>";
 }
