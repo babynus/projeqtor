@@ -1684,11 +1684,12 @@ function addProductVersionStructure(way) {
   var callBackFunc=function() {
 	  if (dojo.byId('directAccessToList') && dojo.byId('directAccessToList').value=='true') {
 		  showDetail('productVersionStructureListId', 0, 'ComponentVersion', true);
-		  dijit.byId('dialogDetail').on('hide', function(evt) {
+		  handle=dijit.byId('dialogDetail').on('hide', function(evt) {
 			  dojo.xhrGet({
 				  url : "../tool/removeHiddenFilterDetail.php?objectClass=ComponentVersion"
 			  });
-			  dijit.byId('dialogDetail').on('hide', null);
+			  //dijit.byId('dialogDetail').on('hide', null);
+			  handle.remove();
 		  });
 	  } else {
 		  dijit.byId('dialogProductVersionStructure').show();
@@ -1892,6 +1893,7 @@ function showDetailOtherVersion() {
 //=============================================================================
 //= OtherClients
 //=============================================================================
+var handle=null;
 function addOtherClient() {
   if (checkFormChangeInProgress()) {
    showAlert(i18n('alertOngoingChange'));
@@ -1901,9 +1903,23 @@ function addOtherClient() {
   var objectId=dojo.byId("objectId").value;
   dojo.byId("otherClientRefType").value=objectClass;
   dojo.byId("otherClientRefId").value=objectId;
-  refreshOtherClientList(null);
-  dijit.byId("dialogOtherClient").show();
-  disableWidget('dialogOtherClientSubmit');
+  //refreshOtherClientList(null);
+  //dijit.byId("dialogOtherClient").show();
+  //disableWidget('dialogOtherClientSubmit');
+  if (1) { // direct Access To List
+    dojo.byId('otherClientIdClient').value=null;
+    showDetail('otherClientIdClient', 0, 'Client', true);
+    console.log(dijit.byId('dialogDetail'));
+    handle=dijit.byId('dialogDetail').on('hide', function(evt) {
+      saveOtherClient();
+      handle.remove();
+      //dijit.byId('dialogDetail').on('hide', function() {console.log("HIDE");});
+    });
+  } else {
+    //refreshOtherClientList(null);
+    //dijit.byId("dialogOtherClient").show();
+    //disableWidget('dialogOtherClientSubmit');
+  }
 }
 
 /**

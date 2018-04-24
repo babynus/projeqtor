@@ -4225,10 +4225,17 @@ function drawTicketsList($obj, $refresh=false) {
     } else {
       $clauseWhere='1=0';
     }
-    if (property_exists('Ticket','idClient')) {
-      $clauseWhere='idClient='.Sql::fmtId($obj->id).' and idle=0';
-    }
     $ticket=new Ticket();
+    if (property_exists('Ticket','idClient')) {      
+      $clauseWhere='idle=0 and (idClient='.Sql::fmtId($obj->id).' ';
+      if (property_exists('Ticket','_OtherClient')) {
+        $otherclient=new OtherClient();
+        $clauseWhere.=" or exists (select 'x' from ".$otherclient->getDatabaseTableName()." other "
+            ." where other.refType='Ticket' and other.refId=".$ticket->getDatabaseTableName().".id and other.idClient=".Sql::fmtId($obj->id)
+            .")";
+      }
+      $clauseWhere.=')';
+    }
     $list=$ticket->getSqlElementsFromCriteria(null, false, $clauseWhere);
   } else if (get_class($obj)=='Product' or get_class($obj)=='Component') {
     $crit=array('id'.get_class($obj)=>$obj->id);

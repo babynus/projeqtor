@@ -55,14 +55,16 @@ $obj->$fld=$otherClient;
 $result=$obj->save();
 $cli->delete();
 // save new other
-$cli=new OtherClient();
-$cli->refType=$refType;
-$cli->refId=$refId;
-$cli->creationDate=date('Y-m-d H:i:s');
-$user=getSessionUser();
-$cli->idUser=$user->id;
-$cli->idClient=$mainClient;
-$res=$cli->save();
+if ($mainClient) {
+  $cli=new OtherClient();
+  $cli->refType=$refType;
+  $cli->refId=$refId;
+  $cli->creationDate=date('Y-m-d H:i:s');
+  $user=getSessionUser();
+  $cli->idUser=$user->id;
+  $cli->idClient=$mainClient;
+  $res=$cli->save();
+}
 // Message of correct saving
 displayLastOperationStatus($result);
 ?>
