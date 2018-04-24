@@ -1266,7 +1266,11 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
              <td>
                <table><tr><td>
                <div id="dialogOtherClientList" dojoType="dijit.layout.ContentPane" region="center">
-                 <input id="otherClientIdClient" name="otherClientIdClient" type="hidden" value="" />
+                 
+                 <select id="otherClientIdClient" size="14"" name="otherClientIdClient[]" multiple
+                  onchange="selectOtherClientItem();"  ondblclick="saveOtherClient();"
+                  class="selectList" >
+                 </select>
                </div>
                </td><td style="vertical-align: top">
                <button id="otherClientDetailButton" dojoType="dijit.form.Button" showlabel="false"

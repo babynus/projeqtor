@@ -55,15 +55,17 @@ $otherVers=$vers->idVersion;
 $obj->$fld=$otherVers;
 $result=$obj->save();
 // save new other
-$vers=new OtherVersion();
-$vers->refType=$refType;
-$vers->refId=$refId;
-$vers->scope=$scope;
-$vers->creationDate=date('Y-m-d H:i:s');
-$user=getSessionUser();
-$vers->idUser=$user->id;
-$vers->idVersion=$mainVers;
-$res=$vers->save();
+if ($mainVers) {
+  $vers=new OtherVersion();
+  $vers->refType=$refType;
+  $vers->refId=$refId;
+  $vers->scope=$scope;
+  $vers->creationDate=date('Y-m-d H:i:s');
+  $user=getSessionUser();
+  $vers->idUser=$user->id;
+  $vers->idVersion=$mainVers;
+  $res=$vers->save();
+}
 // Message of correct saving
 displayLastOperationStatus($result);
 ?>

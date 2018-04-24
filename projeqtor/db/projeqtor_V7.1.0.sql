@@ -28,8 +28,8 @@ CREATE INDEX otherclientUser ON `${prefix}otherclient` (idUser);
 -- #3344 - New Report : Ticket by Customer
 -- ===========================================================
 
-INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`) VALUES 
-(83, 'clientsForVersion', 3, 'clientsForVersion.php', 399);
+INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`,`hasCsv`) VALUES 
+(83, 'clientsForVersion', 3, 'clientsForVersion.php', 399, 1);
 
 INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `idle`, `defaultValue`, `multiple`) VALUES
 (83,'idProduct','productList',10,0,null,0),
