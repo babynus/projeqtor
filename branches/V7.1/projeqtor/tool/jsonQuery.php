@@ -154,7 +154,14 @@
     if ( array_key_exists('objectClient',$_REQUEST)  and ! $quickSearch) {
       if (trim($_REQUEST['objectClient'])!='' and property_exists($obj, 'idClient')) {
         $queryWhere.= ($queryWhere=='')?'':' and ';
-        $queryWhere.= $table . "." . $obj->getDatabaseColumnName('idClient') . "=" . Sql::str($_REQUEST['objectClient']);
+        $queryWhere.= "(" . $table . "." . $obj->getDatabaseColumnName('idClient') . "=" . Sql::str($_REQUEST['objectClient']);
+        if (property_exists($obj, '_OtherClient')) {
+          $otherclient=new OtherClient();
+          $queryWhere.=" or exists (select 'x' from ".$otherclient->getDatabaseTableName()." other "
+              ." where other.refType=".Sql::str($objectClass)." and other.refId=".$table.".id and other.idClient=".Sql::fmtId(RequestHandler::getId('objectClient'))
+              .")";
+        }
+        $queryWhere.=")";
       }
     }
     // --- Direct filter on elementable
