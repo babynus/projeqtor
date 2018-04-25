@@ -123,6 +123,7 @@ function addClient($idClient,$ticket) {
 }
 
 function exportCsv() {
+  $nl="\r\n";
   global $arrayClient,$paramListTickets;
   echo chr(239) . chr(187) . chr(191); // Microsoft Excel requirement
   echo i18n('colClientName') . ';';
@@ -133,28 +134,39 @@ function exportCsv() {
     echo i18n('Ticket') . ';';
     echo i18n('colName') . ';';
     echo i18n('colDescription') . ';';
-    echo i18n('colIdStatus');
+    echo i18n('colIdStatus'); // ! no ; before nl
   }
-  echo "\n";
+  echo $nl;
   foreach($arrayClient as $client) {
     if ($paramListTickets) {
       foreach ($client['tickets'] as $ticket) {
-        echo '"'.htmlencode($client['name'],'none').'";';
-        echo '"'.htmlencode($client['city'],'none').'";';
-        echo '"'.htmlencode($client['country'],'none').'";';
-        echo $ticket['id'].';';
-        echo '"'.htmlencode($ticket['name'],'none').'";';
-        echo '"'.formatAnyTextToPlainText(htmlencode($ticket['description'],'quotes'),true).'";';
-        echo '"'.htmlencode(SqlList::getNameFromId('Status',$ticket['status'],'none')).'";';
-        echo "\n";
+        echo formatText($client['name']) . ';';
+        echo formatText($client['city']) . ';';
+        echo formatText($client['country']) . ';';
+        echo $ticket['id'] . ';';
+        echo formatText($ticket['name']) . ';';
+        echo formatText($ticket['description']) . ';';
+        echo formatText(SqlList::getNameFromId('Status',$ticket['status'])); // ! no ; before nl
+        echo $nl;
       }
     } else {
-      echo '"'.htmlencode($client['name'],'none').'";';
-      echo '"'.htmlencode($client['city'],'none').'";';
-      echo '"'.htmlencode($client['country'],'none').'";';
-      echo "\n";
+      echo formatText($client['name']) . ';';
+      echo formatText($client['city']) . ';';
+      echo formatText($client['country']); // ! no ; before nl
+      echo $nl;
     }
   }
+}
+function formatText($val) {
+  //$val=encodeCSV($val);
+  if (isTextFieldHtmlFormatted($val)) {
+    $text=new Html2Text($val);
+    $val=$text->getText();
+  } else {
+    $val=br2nl($val);
+  }
+  $val=str_replace('"','""',$val);
+  return '"'.$val.'"';
 }
 function printResult() {
   global $arrayClient,$paramListTickets;
