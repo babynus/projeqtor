@@ -106,6 +106,8 @@ foreach($lstTicket as $ticket) {
   }
 }
 
+uasort($arrayClient, function($a,$b) {return strnatcmp($a['name'], $b['name']);} );
+
 if ($outMode == 'csv') {
   exportCsv();
 } else {
