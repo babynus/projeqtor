@@ -169,10 +169,18 @@ function formatText($val) {
   return '"'.$val.'"';
 }
 function printResult() {
-  global $arrayClient,$paramListTickets;
+  global $arrayClient,$paramListTickets,$paramProduct,$paramProductVersion;
   $clientCss='border: 1px solid #A0A0A0;padding:5px 10px;';
   $ticketCss='border: 1px solid #A0A0A0;padding:2px 5px;vertical-align:top;';
+  $title="";
+  if ($paramProductVersion) {
+    $title=i18n('ProductVersion').' #'.$paramProductVersion.' - '.SqlList::getNameFromId('ProductVersion', $paramProductVersion);
+  } else {
+    $title=i18n('Product').' #'.$paramProduct.' - '.SqlList::getNameFromId('Product', $paramProduct);
+  }
   echo "<table style='width:90%; margin-left: auto; margin-right: auto;'>";
+  echo " <tr><td colspan='3' class='reportTableHeader' style='font-size: 150%; font-weight: bold;'>".$title."</td></tr>";
+  echo " <tr><td colspan='3'>&nbsp;</td></tr>";
   echo "  <tr class='reportTableHeader'>";
   echo "    <td style='width:70%' class='reportTableHeader'>".i18n('colClientName')."</td>";
   echo "    <td style='width:15%' class='reportTableHeader'>".i18n('colCity')."</td>";
