@@ -3478,10 +3478,6 @@ function removeBaseline(baselineId) {
 var filterStartInput=false;
 var filterFromDetail=false;
 function showFilterDialog() {
-  /*
-   * if (checkFormChangeInProgress()) { showAlert(i18n('alertOngoingChange'));
-   * return; }
-   */
   function callBack(){
     filterStartInput=false;
     top.filterFromDetail=false;
@@ -3509,9 +3505,7 @@ function showFilterDialog() {
     dojo.style(dijit.byId('filterSortValueList').domNode, {
       display : 'none'
     });
-    //ADD qCazelles - Dynamic filter - Ticket #78
     dojo.byId('filterDynamicParameterPane').style.display='none';
-    //END ADD qCazelles - Dynamic filter - Ticket #78
     dijit.byId('idFilterAttribute').reset();
     dojo.byId('filterObjectClass').value=dojo.byId('objectClass').value;
     filterType="";
@@ -3524,29 +3518,18 @@ function showFilterDialog() {
       }
     });
     compUrl=(top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
-    //CHANGE qCazelles - Dynamic filter - Ticket #78
-    //Old
-//    loadContent("../tool/displayFilterClause.php" + compUrl,
-//        "listFilterClauses", "dialogFilterForm", false);
-    //New
     loadContent("../tool/displayFilterClause.php" + compUrl,
     		"listFilterClauses", "dialogFilterForm", false, null, null, null, displayOrOperator);
-    //END CHANGE qCazelles - Dynamic filter - Ticket #78
     loadContent("../tool/displayFilterList.php" + compUrl,
         "listStoredFilters", "dialogFilterForm", false);
     loadContent("../tool/displayFilterSharedList.php" + compUrl,
         "listSharedFilters", "dialogFilterForm", false);
-    /*
-     * var datastore = new dojo.data.ItemFileReadStore({url:
-     * '../tool/jsonList.php?listType=object&objectClass=' +
-     * dojo.byId("objectClass").value}); var store = new
-     * dojo.store.DataStore({store: datastore}); store.query({id:"*"});
-     * dijit.byId('idFilterAttribute').set('store',store);
-     */
-    refreshListSpecific('object', 'idFilterAttribute', 'objectClass', dojo.byId("objectClass").value);
+    var objectClass='';
+    if (dojo.byId("objectClass") && dojo.byId("objectClass").value) objectClass=dojo.byId("objectClass").value;
+    else if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value && dojo.byId("objectClassManual").value=='Planning') objectClass='Activity';
+    refreshListSpecific('object', 'idFilterAttribute', 'objectClass', objectClass);
     dijit.byId("dialogFilter").show();
   }
-  
   loadDialog('dialogFilter', callBack, true, "", true);
 }
 
@@ -4098,23 +4081,23 @@ function selectStoredFilter(idFilter, context, contentLoad, container) {
     }
     //END ADD qCazelles - Ticket 165
     //ADD qCazelles - Dynamic filter - Ticket #78 //Moved here to correct dynamic filter in comboDetail - qCazelles - Ticket 165
-  	if (dojo.byId('dynamicFilterId'+idFilter)) {
-  		
+  	if (dojo.byId('dynamicFilterId'+idFilter)) {  		
   		var param="&idFilter="+idFilter;
   		loadDialog('dialogDynamicFilter', null, true, param, true);
   	}
   	//END ADD qCazelles - Dynamic filter - Ticket #78
-
+    if (dojo.byId("objectClass") && dojo.byId("objectClass").value) objectClass=dojo.byId("objectClass").value;
+    else if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value) objectClass=dojo.byId("objectClassManual").value;
     if(typeof contentLoad != 'undefined' && typeof container != 'undefined'){
       loadContent("../tool/selectStoredFilter.php?idFilter=" + idFilter
           + "&context=" + context + "&contentLoad="+contentLoad+"&container="+container+"&filterObjectClass="
-          + dojo.byId('objectClass').value + compUrl, "directFilterList", null,
+          + objectClass + compUrl, "directFilterList", null,
           false);
       loadContent(contentLoad, container);
     }else{
       loadContent("../tool/selectStoredFilter.php?idFilter=" + idFilter
           + "&context=" + context + "&filterObjectClass="
-          + dojo.byId('objectClass').value + compUrl, "directFilterList", null,
+          + objectClass + compUrl, "directFilterList", null,
           false);
     }
   } else {
