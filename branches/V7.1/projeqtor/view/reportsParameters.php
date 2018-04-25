@@ -932,7 +932,8 @@ foreach ($listParam as $param) {
       $reportName=$report->name;
       $reportName=str_replace(array('report','Macro'),array('',''),$reportName);
       ?>
-      <input type="hidden" id="objectClass" name="objectClass" value="<?php echo $reportName;?>" />
+      <input type="hidden" id="objectClass" name="objectClass" value="" />
+      <input type="hidden" id="reportCodeName" name="reportCodeName" value="<?php echo $reportName;?>" />
       <?php if($report->hasView) { ?>
       <button title="<?php echo i18n('reportShow')?>"   
          dojoType="dijit.form.Button" type="submit" 
