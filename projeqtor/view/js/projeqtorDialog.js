@@ -1248,10 +1248,10 @@ function removeAttachment(attachmentId) {
  */
 var noRefreshLink=false;
 function addLink(classLink, defaultLink) {
-  /*if (checkFormChangeInProgress()) {
+  if (dojo.byId("objectClass") && dojo.byId("objectClass").value=='Requirement' && classLink=='TestCase' &&checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
     return;
-  }*/
+  }
   if (!classLink) {
     var params="&objectClass="+dojo.byId("objectClass").value+"&objectId="+dojo.byId("objectId").value;
   }
@@ -1371,7 +1371,7 @@ function saveLink() {
   if (dojo.byId("linkRef2Id").value == "")
     return;
   var fixedClass = (dojo.byId('linkFixedClass'))?dojo.byId('linkFixedClass').value:'';
-  loadContent("../tool/saveLink.php", "resultDiv", "linkForm", true, 'link');
+  loadContent("../tool/saveLink.php", "resultDiv", "linkForm", true, 'link'+fixedClass);
   dijit.byId('dialogLink').hide();
 }
 
@@ -1380,7 +1380,7 @@ function saveLink() {
  * 
  */
 function removeLink(linkId, refType, refId, refTypeName, fixedClass) {
-  if (checkFormChangeInProgress()) {
+  if (dojo.byId("objectClass") && dojo.byId("objectClass").value=='Requirement' && fixedClass=='TestCase' && checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
     return;
   }
@@ -1388,7 +1388,7 @@ function removeLink(linkId, refType, refId, refTypeName, fixedClass) {
     if(fixedClass && fixedClass==refType){
       loadContent("../tool/removeLink.php?linkId="+linkId+"&linkRef1Type="+dojo.byId("objectClass").value
           +"&linkRef1Id="+dojo.byId("objectId").value+"&linkRef2Type="+refType
-          +"&linkRef2Id="+refId, "resultDiv", null, true, 'link');
+          +"&linkRef2Id="+refId, "resultDiv", null, true, 'link'+fixedClass);
     } else {
       loadContent("../tool/removeLink.php?linkId="+linkId+"&linkRef1Type="+dojo.byId("objectClass").value
           +"&linkRef1Id="+dojo.byId("objectId").value+"&linkRef2Type="+refType
