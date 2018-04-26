@@ -43,7 +43,7 @@ $filter=new Filter($idFilter);
              	<input readOnly class="dijit dijitInline input dijitTextBox" value="<?php echo $filterCriteria->dispOperator;?>" style="width: 100px;text-align:center" />
              	<input type="hidden" id="idFilterOperator<?php echo $cpt;?>" name="idFilterOperator<?php echo $cpt;?>" value="<?php echo $filterCriteria->sqlOperator;?>" />
              </td>
-             <td style="width:330px;vertical-align:middle;border:1px solid red">
+             <td style="width:330px;vertical-align:middle;">
                  <?php 
                  if (in_array($filterCriteria->sqlOperator, array('IN', 'NOT IN'))) {
                  	?>
