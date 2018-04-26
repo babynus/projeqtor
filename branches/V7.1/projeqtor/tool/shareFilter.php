@@ -32,16 +32,12 @@
 require_once "../tool/projeqtor.php";
 
 // Get the filter info
-if (! array_key_exists('filterObjectClass',$_REQUEST)) {
-  throwError('filterObjectClass parameter not found in REQUEST');
-}
-$filterObjectClass=$_REQUEST['filterObjectClass'];
-Security::checkValidClass($filterObjectClass, 'filterObjectClass');
+$filterObjectClass=RequestHandler::getValue('filterObjectClass',true);
+if (!isset($objectClass) or !$objectClass) $objectClass=$filterObjectClass;
+if ($objectClass=='Planning') $objectClass='Activity';
+Security::checkValidClass($objectClass);
 
-if (! array_key_exists('idFilter',$_REQUEST)) {
-  throwError('idFilter parameter not found in REQUEST');
-}
-$idFilter=$_REQUEST['idFilter']; // validated to be numeric value in SqlElement base constructor.
+$idFilter=RequestHandler::getId('idFilter',true); // validated to be numeric value in SqlElement base constructor.
 Sql::beginTransaction();
 $filter=new Filter($idFilter);
 $name=$filter->name;
@@ -58,7 +54,7 @@ echo '<span class="messageOK" style="z-index:999;position:relative;top:7px" >' .
 echo '</td></tr></table>';
 
 $flt=new Filter();
-$crit=array('idUser'=> $user->id, 'refType'=>$filterObjectClass );
+$crit=array('idUser'=> $user->id, 'refType'=>$objectClass );
 $filterList=$flt->getSqlElementsFromCriteria($crit, false);
 htmlDisplayStoredFilter($filterList,$filterObjectClass);
 Sql::commitTransaction();
