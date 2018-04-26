@@ -2730,6 +2730,10 @@ function workDayDiffDates(paramStartDate, paramEndDate) {
     return '';
   currentDate.setFullYear(paramStartDate.getFullYear(), paramStartDate
       .getMonth(), paramStartDate.getDate());
+  currentDate.setHours(paramStartDate.getHours());
+  currentDate.setMinutes(paramStartDate.getMinutes());
+  currentDate.setSeconds(paramStartDate.getSeconds());
+  currentDate.setMilliseconds(paramStartDate.getMilliseconds());
   var endDate = paramEndDate;
   if (paramEndDate < paramStartDate) {
     return 0;
