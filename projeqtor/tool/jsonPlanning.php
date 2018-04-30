@@ -242,7 +242,7 @@
   $arrayFilter=jsonGetFilterArray('Planning', false);
   $arrayRestrictWbs=array();
   $cpt=0;
-  if (count($arrayFilter)>0) {
+  if (count($arrayFilter)>0 and ! $portfolio) {
     $applyFilter=true;
     jsonBuildWhereCriteria($querySelectAct,$queryFromAct,$queryWhereAct,$queryOrderByAct,$cpt,$arrayFilter,$act);
     $queryAct='select ' . $querySelectAct
