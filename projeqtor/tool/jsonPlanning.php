@@ -265,7 +265,6 @@
     }
     ksort($arrayRestrictWbs);
   }
-  //debugLog($arrayRestrictWbs);
   
   // constitute query and execute
   $queryWhere=($queryWhere=='')?' 1=1':$queryWhere;
