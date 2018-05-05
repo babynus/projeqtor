@@ -29,9 +29,26 @@ td {
 	padding: 10px;
 }
 #buttonDiv  {
-	height:30px;
+	height:35px;
 	width:100%;
-	background: #777777;
+	text-align:left;
+}
+.button {
+	width:60px; height:24px;
+	border:1px solid #ffffff;
+	display: inline-block;
+	margin: 0px 5px;
+	color: #ffffff;
+	text-align:center;
+	cursor:pointer;
+	padding-top:8px;
+}
+.button:hover {
+	background-color:#a6a0bc; 
+}
+#resultMsg{
+	color:#e97b2c;
+	font-size:150%;
 }
 #errorDiv {
 	height:0px;
@@ -59,4 +76,17 @@ td {
 	font-size:12pt;
 	/*padding:5px;*/
 }
-
+figcaption, figcaption p {
+	text-align:center;
+}
+.caption-text, .caption-text p {
+	text-align:center !important;
+}
+div.blockquote {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 40px;
+    -webkit-margin-end: 40px;
+    margin-left:40px !important;
+}

@@ -12,4 +12,7 @@ switch ($action) {
     $fileDir=File::getDir();
     echo File::convert($_REQUEST['editor']);
     break;
+  case "save":
+    echo "OK";
+    break;
 }

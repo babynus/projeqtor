@@ -66,6 +66,8 @@ class File {
 	  //foreach (self::getRstList() as $file) {
 	  //  $data=".. include:: ".self::$dir.$file."\n".$data;
 	  //}
+	  $data=str_replace(array('  .. compound::',   ' .. compound::',    '  .. note::',   ' .. note::'),
+	                    array('.. compoundblock::','.. compoundblock::','.. noteblock::','.. noteblock::'),$data);
 	  $doc=$parser->parse($data);
 	  $doc=str_replace('images/', self::$dir.'images/', $doc);
 	  return $doc;
