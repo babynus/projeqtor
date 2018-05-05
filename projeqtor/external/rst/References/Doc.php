@@ -29,7 +29,7 @@ class Doc extends Reference
             $entry['url'] = $environment->relativeUrl('/'.$entry['url']);
         } else {
             $entry = array(
-                'title' => '(unresolved)',
+                'title' => $data,
                 'url' => '#'
             );
         }
