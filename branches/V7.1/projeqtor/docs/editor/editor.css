@@ -1,0 +1,62 @@
+html, body {
+  background-color: #545281; 
+  height: 100%; width: 100%; overflow: hidden;
+  border: 0; margin: 0px; padding: 0px;
+  font-family: sans-serif,Verdana, Arial, Tahoma; 
+  font-size: 100%;
+  text-decoration: none;
+  text-align: left;
+  border-collapse:collapse;
+}
+
+div.body #preview {
+	padding: 0px;
+	max-width:800px;
+}
+
+table {
+	border-collapse: collapse;
+}
+td {
+	text-align:center;
+	vertical-align:top;
+	border: 0px solid #eeeeee;
+}
+
+.title {
+	font-size:200%;
+	color:#ffffff;
+	padding: 10px;
+}
+#buttonDiv  {
+	height:30px;
+	width:100%;
+	background: #777777;
+}
+#errorDiv {
+	height:0px;
+  width:790px;
+  background: #F0F0F0;
+  border-bottom:1px solid #777777;
+  color: #ff0000;
+  text-align:left;
+  overflow-y:auto;
+}
+#preview {
+	height:95%;
+	background: #FFFFFF;
+	text-align:left;
+	overflow:auto;
+	font-family: sans-serif,Verdana, Arial, Tahoma; 
+	font-size: 12pt;
+}
+
+#editor {
+	background:#ffffff;
+	width:98%;
+	text-align:left;
+	font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+	font-size:12pt;
+	/*padding:5px;*/
+}
+
