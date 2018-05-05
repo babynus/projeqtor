@@ -30,6 +30,9 @@ class Kernel extends Base
             new Directives\Wrap('topic'),
             new Directives\Wrap('rubric'),
             new Directives\Wrap('sidebar'),
+            new Directives\Wrap("glossary"),
+            new Directives\Wrap("contents"),
+            new Directives\Wrap("describe"),
         ));
 
         return $directives;

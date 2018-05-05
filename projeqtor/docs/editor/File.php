@@ -66,8 +66,11 @@ class File {
 	  //foreach (self::getRstList() as $file) {
 	  //  $data=".. include:: ".self::$dir.$file."\n".$data;
 	  //}
-	  $data=str_replace(array('  .. compound::',   ' .. compound::',    '  .. note::',   ' .. note::'),
-	                    array('.. compoundblock::','.. compoundblock::','.. noteblock::','.. noteblock::'),$data);
+	  //$data=str_replace(array('  .. compound::',   ' .. compound::',    '  .. xnote::',   ' .. xnote::'),
+	  //                  array('.. compoundblock::','.. compoundblock::','.. noteblock::','.. noteblock::'),$data);
+	  $data=preg_replace('/ {1,2}\.\. note::/i','.. noteblock::',$data);
+	  $data=preg_replace('/ {1,2}\.\. compound::/i','.. compoundblock::',$data);
+	  
 	  $doc=$parser->parse($data);
 	  $doc=str_replace('images/', self::$dir.'images/', $doc);
 	  return $doc;
@@ -75,8 +78,20 @@ class File {
 	public static function getDir() {
 	  return self::$dir;
 	}
+	public static function saveFile($fileName,$data,$withBackup=true) {
+	  $filepath=self::$dir.$fileName;
+	  if ($withBackup) {
+	    if (file_exists($filepath.'.bak')) {
+	      unlink($filepath.'.bak');
+	    }
+	    rename($filepath,$filepath.'.bak');
+	  }
+	  $res=file_put_contents($filepath,$data);
+	  if ($res===false) {
+	    return "An error occured - File not saved";
+	  } else {
+	    return "file $fileName saved";
+	  }
+	}
+	
 }
-?>
-
-<?php
-

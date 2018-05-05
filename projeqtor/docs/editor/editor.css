@@ -48,7 +48,14 @@ td {
 }
 #resultMsg{
 	color:#e97b2c;
-	font-size:150%;
+	font-size:130%;
+	height:auto;
+	width:100%;
+	position:absolute;
+	z-index:100;
+	text-align: center;
+	margin-top:5px;
+	background-color: #545281; 
 }
 #errorDiv {
 	height:0px;
@@ -89,4 +96,8 @@ div.blockquote {
     -webkit-margin-start: 40px;
     -webkit-margin-end: 40px;
     margin-left:40px !important;
+}
+div.glossary {
+    font-weight: bold;
+    font-size: 1.1em;
 }
