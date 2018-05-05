@@ -13,6 +13,9 @@ switch ($action) {
     echo File::convert($_REQUEST['editor']);
     break;
   case "save":
-    echo "OK";
+    $data=$_REQUEST['editor'];
+    $fileName=$_REQUEST['file'];
+    $result=File::saveFile($fileName,$data);
+    echo $result;
     break;
 }

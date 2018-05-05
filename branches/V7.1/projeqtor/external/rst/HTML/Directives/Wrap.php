@@ -44,6 +44,12 @@ class Wrap extends SubDirective
           $class='admonition note';
           $title='<p class="first admonition-title">Note</p>';
           if ($data) $title.='<p>'.$data.'</p>';
+        } else if ($class=='contents') {
+          $class='admonition note';
+          $title='<p class="first admonition-title">'.$data.'</p><ul><li><a>(unresolved)</a></li></ul>';
+        } else if ($class=='describe') { 
+          $title='<code class="descname">'.$data.'</code>';
+          $wrapAs='dd';
         } else if ($data) {
           $title='<p class="first admonition-title">'.$data.'</p>';
         }
