@@ -46,3 +46,24 @@ function convertEditor() {
     }
   });
 }
+
+function saveFile() {
+  $("#action").val("save");
+  $.ajax({
+    type: "POST",
+    url: "controller.php",
+    data: $("#editorForm").serialize(), 
+    success: function(result){
+      $("#resultMsg").html(result);
+      setTimeout('$("#resultMsg").html("");',2000);
+    }
+  });
+}
+function undoFile() {
+  if (!$("#file").val()) {
+    $("#editor").val("");
+    convertEditor();
+  } else {
+    selectFile($("#file").val());
+  }
+}

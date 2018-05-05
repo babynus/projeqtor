@@ -35,11 +35,17 @@ class Wrap extends SubDirective
         }
         $title="";
         $wrapAs=($class=='rubric')?'p':'div';
-        if ($data) {
-          $title='<p class="first admonition-title">'.$data.'</p>';
+        if ($class=='noteblock') {
+          $wrapAs='div';
+          $class=' admonition note blockquote';
+          $title='<p class="first admonition-title">Note</p>';
+          if ($data) $title.='<p>'.$data.'</p>';
         } else if ($class=='note') {
           $class='admonition note';
           $title='<p class="first admonition-title">Note</p>';
+          if ($data) $title.='<p>'.$data.'</p>';
+        } else if ($data) {
+          $title='<p class="first admonition-title">'.$data.'</p>';
         }
         
         return new WrapperNode($document, '<'.$wrapAs.' class="'.$class.'"'.$id.'>'.$title, '</'.$wrapAs.'>');

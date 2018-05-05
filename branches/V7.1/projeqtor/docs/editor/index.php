@@ -62,8 +62,14 @@ $dir=File::getDir();
        <?php }?>
        </select>
      </td>
-     <td style="padding:0px 3px;width:90%">
-       <div id="buttonDiv" >buttons</div>
+     <td style="width:90%">
+       <div id="buttonDiv" >
+         <table style="width:100%;"><tr>
+         <td style="width:5%"><div class="button" id="saveButton" onClick="saveFile();">Save</div></td>
+         <td style="width:90%"><div class="result" id="resultMsg" ></div></td>
+         <td style="width:5%"><div class="button" id="undoButton" onClick="undoFile();">Undo</div></td>
+         </tr></table>
+       </div>
        <form id="editorForm" name="editorForm">
        <input type="hidden" id="action" name="action" value=""/>
        <input type="hidden" id="file" name="file" value=""/>
