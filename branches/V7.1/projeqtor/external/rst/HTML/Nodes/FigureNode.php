@@ -8,15 +8,15 @@ class FigureNode extends Base
 {
     public function render()
     {
-        $html = '<figure>';
+        $html = '<div class="figure align-center">';
         $html .= $this->image->render();
         if ($this->document) {
             $caption = trim($this->document->render());
             if ($caption) {
-                $html .= '<figcaption>'.$caption.'</figcaption>';
+                $html .= '<span class="caption-text">'.$caption.'</span>';
             }
         }
-        $html .= '</figure>';
+        $html .= '</div>';
 
         return $html;
     }

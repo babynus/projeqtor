@@ -10,7 +10,11 @@ class ImageNode extends Base
     {
         $attributes = '';
         foreach ($this->options as $key => $value) {
+          if ($key=='scale') {
+            $attributes .= ' style="zoom:'.(intval($value)/100).'"';
+          } else {
             $attributes .= ' '.$key . '="'.htmlspecialchars($value).'"';
+          }
         }
 
         return '<img src="'.$this->url.'" '.$attributes.' />';
