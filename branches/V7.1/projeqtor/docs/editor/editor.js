@@ -60,6 +60,9 @@ function convertEditor() {
         $("#errorDiv").height(0);
       }
       $("#preview").html(result);
+      $("li:contains('Field')").addClass('tableHeader');
+      $("li:contains('Description')").addClass('tableHeader');
+      $("li:has('a')").removeClass('tableHeader');
     }
   });
 }

@@ -28,6 +28,9 @@ class Wrap extends SubDirective
     public function processSub(Parser $parser, $document, $variable, $data, array $options)
     {
         $class = $this->class;
+        if ($class=='tabularcolumns' or $class=='only') {
+          return;
+        }
         if ($this->uniqid) {
             $id = ' id="'.uniqid($this->class).'"';
         } else {
@@ -44,12 +47,22 @@ class Wrap extends SubDirective
           $class='admonition note';
           $title='<p class="first admonition-title">Note</p>';
           if ($data) $title.='<p>'.$data.'</p>';
+        } else if ($class=='warning' or $class=='attention' or $class=='important') {
+          $title='<p class="first admonition-title">'.ucfirst($class).'</p>';
+          $class='admonition '.$class;
+          if ($data) $title.='<p>'.$data.'</p>';
+        } else if ($class=='hint') {
+            //$class='admonition note';
+            $title='<p class="first admonition-title">Hint</p>';
+            if ($data) $title.='<p>'.$data.'</p>';
         } else if ($class=='contents') {
           $class='admonition note';
-          $title='<p class="first admonition-title">'.$data.'</p><ul><li><a>(unresolved)</a></li></ul>';
+          $title=(($data)?'<p class="first admonition-title">'.$data.'</p>':'').'<ul><li><a>(unresolved)</a></li></ul>';
         } else if ($class=='describe') { 
           $title='<code class="descname">'.$data.'</code>';
           $wrapAs='dd';
+        } else if ($class=='list-table') {
+          $title='<div style="width:100%;text-align:center">'.$data.'</div>';
         } else if ($data) {
           $title='<p class="first admonition-title">'.$data.'</p>';
         }
