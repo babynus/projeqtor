@@ -68,6 +68,7 @@ class File {
 	  //}
 	  //$data=str_replace(array('  .. compound::',   ' .. compound::',    '  .. xnote::',   ' .. xnote::'),
 	  //                  array('.. compoundblock::','.. compoundblock::','.. noteblock::','.. noteblock::'),$data);
+	  $data=str_replace(array(':term:','* - ','**\*',':kbd:'),array(':ref:','* ','** *',':ref:'),$data);
 	  $data=preg_replace('/ {1,2}\.\. note::/i','.. noteblock::',$data);
 	  $data=preg_replace('/ {1,2}\.\. compound::/i','.. compoundblock::',$data);
 	  

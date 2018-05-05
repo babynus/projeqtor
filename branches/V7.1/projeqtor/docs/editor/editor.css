@@ -101,3 +101,24 @@ div.glossary {
     font-weight: bold;
     font-size: 1.1em;
 }
+div.list-table ul {
+	list-style: none;
+}
+div.list-table ul li {
+	display:inline-block;
+	border-bottom:1px solid #A0A0A0;
+	width:100px;
+	float:left;
+	clear:left;
+	
+}
+div.list-table ul ul li {
+  display:inline-block;
+  border-bottom:1px solid #A0A0A0;
+  width:400px;
+  float:none;
+}
+.tableHeader {
+	background-color:#ede;
+  font-weight: bold;
+}
