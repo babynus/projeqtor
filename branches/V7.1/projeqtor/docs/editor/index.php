@@ -56,7 +56,7 @@ $dir=File::getDir();
    </tr>
      <tr style="height:100%">
      <td style="width:200px">
-       <select multiple style="height:100%;width:200px" onClick="selectFile(this.value);">
+       <select id="selectedFile" multiple style="height:100%;width:200px" onClick="selectFile(this.value);">
        <?php foreach (File::getRstList() as $file) {?>
          <option value="<?php echo $file?>"><?php echo $file?></option>
        <?php }?>
@@ -66,14 +66,14 @@ $dir=File::getDir();
        <div id="buttonDiv" >
          <table style="width:100%;"><tr>
          <td style="width:5%"><div class="button" id="saveButton" onClick="saveFile();">Save</div></td>
-         <td style="width:90%"><div class="result" id="resultMsg" ></div></td>
+         <td style="width:90%;position:relative;"><div class="result" id="resultMsg" ></div></td>
          <td style="width:5%"><div class="button" id="undoButton" onClick="undoFile();">Undo</div></td>
          </tr></table>
        </div>
        <form id="editorForm" name="editorForm">
        <input type="hidden" id="action" name="action" value=""/>
        <input type="hidden" id="file" name="file" value=""/>
-       <textarea id="editor" style="" name="editor" class="editor" placeholder="select a file" onKeyup="convertEditor();"></textarea>
+       <textarea id="editor" style="" name="editor" class="editor" placeholder="select a file" onKeyup="convertEditor();" onKeydown="detectKey(event);"></textarea>
        </form>
      </td>
      <td style="width:750px">

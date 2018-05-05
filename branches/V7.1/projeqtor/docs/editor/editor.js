@@ -4,8 +4,14 @@ $( document ).ready(function() {
   //$("#preview").width($("#errorDiv").width());
 });
 $("#editor").on("change", convertEditor);
+var changeInProgress=false;
 
 function selectFile(file) {
+  if (changeInProgress) {
+    $("#resultMsg").html(errorMsg("save or cancell before selecting new file"));
+    $("#selectedFile").val($("#file").val());
+    return;
+  }
   $("#file").val(file);
   $.ajax({
     url: "controller.php",
@@ -16,10 +22,21 @@ function selectFile(file) {
     success: function( result ) {
       $("#editor").val(result);
       convertEditor();
+      $("#resultMsg").html("");
     }
   });
   
 }
+function detectKey(event) {
+  if (event.keyCode == 83 && (navigator.platform.match("Mac") ? event.metaKey : event.ctrlKey) && ! event.altKey) { // CTRL + S (save)
+    event.preventDefault();
+    saveFile();
+    changeInProgress=false;
+  } else {
+    changeInProgress=true;
+  }
+}
+
 function convertEditor() {
   $("#action").val("convert");
   $.ajax({
@@ -49,17 +66,32 @@ function convertEditor() {
 
 function saveFile() {
   $("#action").val("save");
+  if (!$("#file").val()) {
+    $("#resultMsg").html(errorMsg("no file to save"));
+    return;
+  }
   $.ajax({
     type: "POST",
     url: "controller.php",
     data: $("#editorForm").serialize(), 
     success: function(result){
-      $("#resultMsg").html(result);
-      setTimeout('$("#resultMsg").html("");',2000);
+      if (result.indexOf('Fatal')==-1 && result.indexOf('Error')==-1 && result.indexOf('Notice')==-1 && result.indexOf('Warning')==-1) {
+        $("#resultMsg").html(result);
+        setTimeout('$("#resultMsg").html("");',2000);
+        changeInProgress=false;
+      } else {
+        $("#resultMsg").html(errorMsg(result));
+      }
     }
   });
 }
+function errorMsg(msg) {
+  return '<span style="color:red">'+msg+'</span>';
+}
+
 function undoFile() {
+  changeInProgress=false;
+  $("#resultMsg").html("");
   if (!$("#file").val()) {
     $("#editor").val("");
     convertEditor();
