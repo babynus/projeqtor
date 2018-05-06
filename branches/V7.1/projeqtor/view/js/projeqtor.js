@@ -1794,8 +1794,10 @@ function formChanged(specificWidgetArray) {
   disableWidget('printButtonPdf');
   disableWidget('copyButton');
   enableWidget('undoButton');
+  showWidget('undoButton');
   disableWidget('deleteButton');
   disableWidget('refreshButton');
+  hideWidget('refreshButton');
   disableWidget('mailButton');
   disableWidget('multiUpdateButton');
   disableWidget('indentDecreaseButton');
@@ -1868,8 +1870,10 @@ function formInitialize(specificWidgetArray) {
   enableWidget('printButtonPdf');
   enableWidget('copyButton');
   disableWidget('undoButton');
+  hideWidget('undoButton');
   enableWidget('deleteButton');
   enableWidget('refreshButton');
+  showWidget('refreshButton');
   enableWidget('mailButton');
   if ( (dojo.byId("id") && dojo.byId("id").value != "") || (dojo.byId("lastSaveId") && dojo.byId("lastSaveId")!= "") ) {
     enableWidget('changeStatusButton');
@@ -1903,8 +1907,10 @@ function formLock() {
   disableWidget('printButtonPdf');
   disableWidget('copyButton');
   disableWidget('undoButton');
+  hideWidget('undoButton');
   disableWidget('deleteButton');
   disableWidget('refreshButton');
+  showWidget('refreshButton');
   disableWidget('mailButton');
   disableWidget('multiUpdateButton');
   disableWidget('indentDecreaseButton');
@@ -1969,6 +1975,32 @@ function enableWidget(widgetName) {
   }
 }
 
+/**
+ * ============================================================================
+ * Hide a widget, testing it exists before to avoid error
+ * 
+ * @return void
+ */
+function hideWidget(widgetName) {
+  if (dojo.byId(widgetName)) {
+    dojo.style(dijit.byId(widgetName).domNode, {
+      display : 'none'
+    });
+  }
+}
+/**
+ * ============================================================================
+ * Show a widget, testing it exists before to avoid error
+ * 
+ * @return void
+ */
+function showWidget(widgetName) {
+  if (dojo.byId(widgetName)) {
+    dojo.style(dijit.byId(widgetName).domNode, {
+      display : 'inline-block'
+    });
+  }
+}
 /**
  * ============================================================================
  * Loack a widget, testing it exists before to avoid error
