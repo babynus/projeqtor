@@ -2371,7 +2371,8 @@ function assignmentChangeResource() {
     url : '../tool/getSingleData.php?dataType=resourceRole&idResource='+idResource,
     handleAs : "text",
     load : function(data) {
-      if (data) dijit.byId('assignmentCapacity').set('value', parseInt(data));
+      //if (data) dijit.byId('assignmentCapacity').set('value', parseInt(data)); // Error fixed by PBER : we retreive an idRole (and must)
+      if (data) dijit.byId('assignmentIdRole').set('value', parseInt(data));
     }
   });
 }
