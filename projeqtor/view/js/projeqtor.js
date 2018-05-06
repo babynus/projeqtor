@@ -4769,7 +4769,7 @@ function saveNoteStream(event){
 }
 
 var menuRightDivSize=null;
-function hideStreamMode(){
+function hideStreamMode(noRefresh){
   if (! dijit.byId('detailRightDiv')) return;
   if(dijit.byId("detailRightDiv").w != '0'){
     menuRightDivSize=dojo.byId("detailRightDiv").offsetWidth;
@@ -4784,6 +4784,11 @@ function hideStreamMode(){
       w : menuRightDivSize
     });
     dijit.byId("centerDiv").resize();
+  }
+  var detailHidden=false;
+  if (dojo.byId('detailBarShow') && dojo.byId('detailBarShow').style.display=='block') detailHidden=true;
+  if (!noRefresh && !formChangeInProgress && dojo.byId('id') && dojo.byId('id').value && !detailHidden) {
+    setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50);
   }
 }
 
