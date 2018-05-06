@@ -2740,11 +2740,9 @@ function workDayDiffDates(paramStartDate, paramEndDate) {
   }
   var duration = 0;
   if (isOffDay(currentDate) && currentDate.valueOf()!=endDate.valueOf()) duration++;
-  console.log(currentDate+" => "+endDate);
   while (currentDate <= endDate) {
     if (!isOffDay(currentDate) || currentDate.valueOf()==endDate.valueOf()) {
       duration++;
-      console.log("   +1, "+currentDate+" duration="+duration);
     }
     currentDate = addDaysToDate(currentDate, 1);
   }
