@@ -5573,9 +5573,6 @@ function hideShowMenu(noRefresh,noStore) {
 function hideMenuBarShowMode() {
   hideShowMenu(false);
 }
-function hideMenuBarShowMode2() {
-  hideShowMenu(true);
-}
 
 //gautier menu top
 function hideMenuBarShowModeTop(){ 

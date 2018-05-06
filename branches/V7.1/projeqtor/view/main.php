@@ -597,7 +597,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   </div> 
   
   <div id="hideMenuBarShowButton2" style="cursor:pointer;position:absolute; display:block; left:<?php echo $IconSizeMenuHide2 ?>; bottom:2px;z-index:999998">
-	  <a onClick="hideMenuBarShowMode2();" id="buttonSwitchedMenuBarShow" title="" >
+	  <a onClick="hideMenuBarShowMode();" id="buttonSwitchedMenuBarShow" title="" >
 	    <span style='top:0px;display:inline-block;width:22px;height:22px;'>
 	      <div class='iconHideStream22' style='' >&nbsp;</div>
 	    </span>
