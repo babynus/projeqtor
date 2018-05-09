@@ -912,11 +912,20 @@ function planningPDFBox(copyType) {
  * Display a add note Box
  * 
  */
+// Hack to remove on.focus on body, to be able to interact with ck_editor popups
+// NEEDS TO CHANGE projeqtorDojo.js the 
+//                 var fih=on(body,'focus'...
+//              to 
+//                 var fih=null; //(external to main line) 
+//                 fih=on.pausable(body,'focus'...
+function pauseBodyFocus() {if (fih) { fih.pause(); }}      
+function resumeBodyFocus() {if (fih) { fih.resume(); }}   
 function addNote() {
   if (dijit.byId("noteToolTip")) {
     dijit.byId("noteToolTip").destroy();
     dijit.byId("noteNote").set("class", "");
   }
+  pauseBodyFocus();
   var callBack=function() {
     var editorType=dojo.byId("noteEditorType").value;
     if (editorType=="CK" || editorType=="CKInline") { // CKeditor type
@@ -967,6 +976,7 @@ function editNote(noteId, privacy) {
     dijit.byId("noteToolTip").destroy();
     dijit.byId("noteNote").set("class", "");
   }
+  pauseBodyFocus();
   var callBack=function() {
     //dijit.byId('notePrivacyPublic').set('checked', 'true');
     var editorType=dojo.byId("noteEditorType").value;
@@ -6980,10 +6990,12 @@ function loadDialog(dialogDiv, callBack, autoShow, params, clearOnHide, closable
 // END CHANGE BY Marc TABARY - 2017-03-13 - PERIODIC YEAR BUDGET ELEMENT
   if(typeof closable =='undefined')closable=true;
   var hideCallback=function() {
+    if (dialogDiv=='dialogNote') resumeBodyFocus();
   };
   if (clearOnHide) {
     hideCallback=function() {
       dijit.byId(dialogDiv).set('content', null);
+      if (dialogDiv=='dialogNote') resumeBodyFocus();
     };
   }
   

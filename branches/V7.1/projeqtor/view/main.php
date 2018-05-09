@@ -75,7 +75,6 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon" />
   <link rel="stylesheet" type="text/css" href="../external/dojox/form/resources/CheckedMultiSelect.css" />
   <link rel="icon" href="img/logo.ico" type="image/x-icon" />
-  
   <script type="text/javascript" src="../external/html2canvas/html2canvas.js?version=<?php echo $version.'.'.$build;?>"></script>
   <?php if (isHtml5()) {?>
   <script type="text/javascript" src="../external/pdfmake/pdfmake.min.js?version=<?php echo $version.'.'.$build;?>"></script>
