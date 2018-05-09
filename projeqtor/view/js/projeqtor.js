@@ -1305,10 +1305,9 @@ function finalizeMessageDisplay(destination, validationType) {
         }
         // loadContent("planningList.php", "listDiv", 'listForm');
       }
-      // last operations depending on the executed operatoin (insert, delete,
-      // ...)
-      if (dojo.byId('id') && (lastOperation.value == "insert" || forceRefreshCreationInfo)) {
-        dojo.byId('id').value = lastSaveId.value;
+      // last operations depending on the executed operatoin (insert, delete, ...)
+      if (dojo.byId('id') && lastOperation && (lastOperation.value == "insert" || forceRefreshCreationInfo)) {
+        dojo.byId('id').value = (lastSaveId)?lastSaveId.value:null;
         if (dojo.byId('objectClass')
             && dojo.byId('objectClass').value == "Project") {
           needProjectListRefresh = true;
@@ -2764,17 +2763,16 @@ function workDayDiffDates(paramStartDate, paramEndDate) {
     return '';
   if (!isDate(paramEndDate))
     return '';
-  currentDate.setFullYear(paramStartDate.getFullYear(), paramStartDate
-      .getMonth(), paramStartDate.getDate());
+  currentDate.setFullYear(paramStartDate.getFullYear(), paramStartDate.getMonth(), paramStartDate.getDate());
   currentDate.setHours(0,0,0,0);
-  var endDate = paramEndDate;
+  var endDate = new Date();
+  endDate.setFullYear(paramEndDate.getFullYear(), paramEndDate.getMonth(), paramEndDate.getDate());
   endDate.setHours(0,0,0,0);
   if (endDate < currentDate) {
     return 0;
   }
   var duration = 0;
   if (isOffDay(currentDate) && currentDate.valueOf()!=endDate.valueOf()) duration++;
-  console.log(currentDate+" => "+endDate);
   while (currentDate <= endDate) {
     if (!isOffDay(currentDate) || currentDate.valueOf()==endDate.valueOf()) {
       duration++;
