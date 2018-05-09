@@ -790,6 +790,7 @@ function loadContent(page, destination, formName, isResultMessage,
                   }).play();
                   hideWait();
                   formInitialize();
+                  if (whichFullScreen>=0 && editorArray[whichFullScreen]) editorArray[whichFullScreen].focus();
                 }
               }
             }).play();
