@@ -258,8 +258,6 @@ class WorkElementMain extends SqlElement {
 				$work->idAssignment=($ass)?$ass->id:null;
 				$work->idWorkElement=$this->id;
 				$resWork=$work->save ();
-				debugLog("save work : $resWork");
-				debugLog($work);
 				if (getLastOperationStatus($resWork)!='OK') {
 				  return $resWork;
 				}
