@@ -2361,10 +2361,10 @@ function assignmentChangeResourceTeamForCapacity() {
     handleAs : "text",
     load : function(data) {
       if(data == 'isResourceTeam'){
-        dojo.byId('assignmentRate2').style.display="none";
+        dojo.byId('assignmentRateRow').style.display="none";
         dojo.byId('assignmentCapacityResourceTeam').style.display="table-row";
       }else{
-        dojo.byId('assignmentRate2').style.display="table-row";
+        dojo.byId('assignmentRateRow').style.display="table-row";
         dojo.byId('assignmentCapacityResourceTeam').style.display="none";
       }
     }

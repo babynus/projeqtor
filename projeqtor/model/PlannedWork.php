@@ -615,8 +615,12 @@ class PlannedWork extends GeneralWork {
           $changedAss=true;
           $ass->plannedStartDate=null;
           $ass->plannedEndDate=null;
-          $r=new Resource($ass->idResource,true);
+          $r=new ResourceAll($ass->idResource,true);
           $capacity=($r->capacity)?$r->capacity:1;
+          if ($r->isResourceTeam) {
+            $capacity=$ass->capacity;
+            $ass->rate=100;
+          }
           if (array_key_exists($ass->idResource,$resources)) {
             $ress=$resources[$ass->idResource];
           } else {
