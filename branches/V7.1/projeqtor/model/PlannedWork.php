@@ -617,15 +617,31 @@ class PlannedWork extends GeneralWork {
           $ass->plannedEndDate=null;
           $r=new ResourceAll($ass->idResource,true);
           $capacity=($r->capacity)?$r->capacity:1;
-          if ($r->isResourceTeam) {
-            $capacity=$ass->capacity;
-            $ass->rate=100;
-          }
           if (array_key_exists($ass->idResource,$resources)) {
             $ress=$resources[$ass->idResource];
           } else {
-            $ress=$r->getWork($startDate, $withProjectRepartition);        
+            $ress=$r->getWork($startDate, $withProjectRepartition);
+            $ress['team']=$r->isResourceTeam; 
+            if ($ress['team']) {
+              $ress['members']=array();
+              $rta=new ResourceTeamAffectation();
+              $rtaList=$rta->getSqlElementsFromCriteria(array('idResourceTeam'=>$ass->idResource));
+              $ress['periods']=ResourceTeamAffectation::buildResourcePeriods($ass->idResource);
+              foreach ($rtaList as $rta) {
+                $rr=new Resource($rta->idResource);
+                $ress['members'][$rr->id]=$rr->getWork($startDate, $withProjectRepartition);
+                foreach($ress['members'][$rr->id] as $keyM=>$valM) {
+                  if ($keyM=='real' or substr($keyM,0,7)=='Project') continue;
+                  if (!isset($ress[$keyM])) $ress[$keyM]=0;
+                  $ress[$keyM]+=$valM;
+                }
+              }
+              
+            }
           }
+          
+          debuglog("\n\n RESS ".$r->name);
+          debugLog($ress);
           if ($startPlan>$startDate) {
             $currentDate=$startPlan;
           } else {
@@ -656,7 +672,11 @@ class PlannedWork extends GeneralWork {
             }
           }
           //$projRate=$ress['Project#' . $ass->idProject]['rate'];
-          $capacityRate=round($assRate*$capacity,2);
+          if ($ress['team']) {
+            $capacityRate=$ass->capacity;
+          } else {
+            $capacityRate=round($assRate*$capacity,2);
+          }
           $keyElt=$ass->refType.'#'.$ass->refId;
           $left=$ass->leftWork;
           $regul=false;
@@ -693,6 +713,13 @@ class PlannedWork extends GeneralWork {
             $ass->plannedWork=$ass->realWork;
           }
           while (1) {           
+            if ($ress['team']) {
+              $period=ResourceTeamAffectation::findPeriod($currentDate,$ress['periods']);
+              
+              if ($period===null) $capacity=0;
+              else $capacity=$ress['periods'][$period]['rate'];
+              debugLog("Period for $currentDate is $period then capacity is $capacity");
+            }
             if ($profile=='RECW') {
               if ($currentDate<=$endPlan) {
                 $left=$capacity;
