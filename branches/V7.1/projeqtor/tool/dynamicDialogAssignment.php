@@ -106,7 +106,7 @@ if ($planningMode=='RECW') {
                 <?php if($mode=='edit'){                      
                           htmlDrawOptionForReference('idResource', $idResource,null,true,'idProject',$idProject);
                 }else{
-                          htmlDrawOptionForReference('idResourceAll', null,false);
+                          htmlDrawOptionForReference('idResourceAll', null,null,true,'idProject',$idProject);
                 }?>
                </select>  
              </td>
@@ -182,7 +182,7 @@ if ($planningMode=='RECW') {
                  <label for="assignmentCapacity" ><?php echo i18n("colCapacity");?>&nbsp;:&nbsp;</label>
                </td>
                <td>
-                 <div id="assignmentCapacity" name="assignmentCapacity" value=""
+                 <div id="assignmentCapacity" name="assignmentCapacity" value="1"
                    dojoType="dijit.form.NumberTextBox" 
                    style="width:97px" 
                    <?php if ($planningMode=='RECW') echo ' readonly';?>

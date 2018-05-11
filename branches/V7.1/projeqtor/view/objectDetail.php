@@ -5824,7 +5824,7 @@ function endBuffering($prevSection, $included) {
       'notificationcontent'=>array('2'=>'left', '3'=>'right'), 
       'progress'=>array('2'=>'right', '3'=>'extra'), 
       'progress_left'=>array('2'=>'left', '3'=>'extra'), 
-      'requirementlist'=>array('2'=>'bottom', '3'=>'extra'),
+      'linkrequirement'=>array('2'=>'bottom', '3'=>'extra'),
       'resourcecost'=>array('2'=>'right', '3'=>'extra'), 
       'submissions'=>array('2'=>'right', '3'=>'extra'), 
       'testcaselist'=>array('2'=>'bottom', '3'=>'extra'), 

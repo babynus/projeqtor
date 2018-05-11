@@ -1221,13 +1221,12 @@ function finalizeMessageDisplay(destination, validationType) {
       } else if ( validationType=='linkObject') {
         loadContent("objectDetail.php?refresh=true", "detailFormDiv",'listForm');
       }else if( (validationType =='link' || validationType.substr(0,4)=='link') && validationType !='linkObject'){
-        
         var refTypeName=validationType.substr(4);     
         if (dojo.byId('buttonDivCreationInfo')) {
           var url = '../tool/getObjectCreationInfo.php?objectClass='+ dojo.byId('objectClass').value +'&objectId='+dojo.byId('objectId').value;
           loadDiv(url, 'buttonDivCreationInfo', null);  
         }
-        if(refTypeName && dojo.byId('objectClass').value+ '_Link'+refTypeName){
+        if(refTypeName && dijit.byId(dojo.byId('objectClass').value+'_Link'+refTypeName)){
           var url = "objectDetail.php?refreshLinks="+refTypeName;
           loadContent("objectDetail.php?refreshLinks="+refTypeName,dojo.byId('objectClass').value+ '_Link'+refTypeName,'listForm');        
         }else{
@@ -2777,7 +2776,6 @@ function workDayDiffDates(paramStartDate, paramEndDate) {
   while (currentDate <= endDate) {
     if (!isOffDay(currentDate) || currentDate.valueOf()==endDate.valueOf()) {
       duration++;
-      console.log("   +1, "+currentDate+" duration="+duration);
     }
     currentDate = addDaysToDate(currentDate, 1);
   }
