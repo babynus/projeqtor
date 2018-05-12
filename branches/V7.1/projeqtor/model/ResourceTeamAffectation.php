@@ -339,6 +339,7 @@ class ResourceTeamAffectation extends SqlElement {
   public static function findPeriod($date,$list) {
     foreach ($list as $key=>$val) {
       if ($date>=$val['start'] and $date<=$val['end']) return $key;
+      else if ($date<$val['start']) return null;
     }
     return null;
   }
