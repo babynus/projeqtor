@@ -621,27 +621,9 @@ class PlannedWork extends GeneralWork {
             $ress=$resources[$ass->idResource];
           } else {
             $ress=$r->getWork($startDate, $withProjectRepartition);
-            $ress['team']=$r->isResourceTeam; 
-            if ($ress['team']) {
-              $ress['members']=array();
-              $rta=new ResourceTeamAffectation();
-              $rtaList=$rta->getSqlElementsFromCriteria(array('idResourceTeam'=>$ass->idResource));
-              $ress['periods']=ResourceTeamAffectation::buildResourcePeriods($ass->idResource);
-              foreach ($rtaList as $rta) {
-                $rr=new Resource($rta->idResource);
-                $ress['members'][$rr->id]=$rr->getWork($startDate, $withProjectRepartition);
-                foreach($ress['members'][$rr->id] as $keyM=>$valM) {
-                  if ($keyM=='real' or substr($keyM,0,7)=='Project') continue;
-                  if (!isset($ress[$keyM])) $ress[$keyM]=0;
-                  $ress[$keyM]+=$valM;
-                }
-              }
-              
-            }
           }
-          
-          debuglog("\n\n RESS ".$r->name);
-          debugLog($ress);
+//          debuglog("\n\n RESS ".$r->name);
+//          debugLog($ress);
           if ($startPlan>$startDate) {
             $currentDate=$startPlan;
           } else {
@@ -718,7 +700,7 @@ class PlannedWork extends GeneralWork {
               
               if ($period===null) $capacity=0;
               else $capacity=$ress['periods'][$period]['rate'];
-              debugLog("Period for $currentDate is $period then capacity is $capacity");
+//              debugLog("Period for $currentDate is $period then capacity is $capacity");
             }
             if ($profile=='RECW') {
               if ($currentDate<=$endPlan) {
@@ -1026,6 +1008,25 @@ class PlannedWork extends GeneralWork {
                         $plannedProj=$ress[$projectKey][$week];
                       }
                       $ress[$projectKey][$week]=$value+$plannedProj;               
+                    }
+                  }
+                  // Store value on Resource Team if current resource belongs to
+                  debugLog("idR:$ass->idResource for date $currentDate");
+                  if (!$ress['team'] and isset($ress['isMemberOf']) and count($ress['isMemberOf'])>0) {
+                    foreach($ress['isMemberOf'] as $idRT=>$rt) {
+                      if (!isset($resources[$idRT]) ) {
+                        $r=new ResourceAll($idRT,true);
+                        $resources[$r->id]=$r->getWork($startDate, $withProjectRepartition);
+                      }
+                      $period=ResourceTeamAffectation::findPeriod($currentDate, $resources[$idRT]['periods']);
+                      debugLog("idR:$ass->idResource for date $currentDate period=$period");
+                      debugLog($resources[$idRT]['periods']);
+                      if ($period and isset($resources[$idRT]['periods'][$period]['idResource'][$ass->idResource])) {
+                        if (! isset($resources[$idRT][$currentDate])) $resources[$idRT][$currentDate]=0;
+                        $resources[$idRT][$currentDate]+=$value; // TODO : limit with capacity
+                        debugLog("idR:$ass->idResource for date $currentDate");
+                        debugLog($resources[$idRT]);
+                      }
                     }
                   }
                 }
