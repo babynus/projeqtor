@@ -622,6 +622,7 @@ class PlannedWork extends GeneralWork {
           } else {
             $ress=$r->getWork($startDate, $withProjectRepartition);
           }
+          $ress['capacity']=$capacity;
 //          debuglog("\n\n RESS ".$r->name);
 //          debugLog($ress);
           if ($startPlan>$startDate) {
@@ -694,13 +695,40 @@ class PlannedWork extends GeneralWork {
             $ass->leftWork=0;
             $ass->plannedWork=$ass->realWork;
           }
+          if ($ress['team']) {
+            debugLog($ress);
+          }
           while (1) {           
             if ($ress['team']) {
-              $period=ResourceTeamAffectation::findPeriod($currentDate,$ress['periods']);
-              
-              if ($period===null) $capacity=0;
-              else $capacity=$ress['periods'][$period]['rate'];
-//              debugLog("Period for $currentDate is $period then capacity is $capacity");
+              $period=ResourceTeamAffectation::findPeriod($currentDate,$ress['periods']);              
+              if ($period===null) {
+                $capacity=0;
+              } else {
+                $capacity=0;
+                foreach ($ress['members'] as $idMember=>$member) {
+                  debugLog("test for $currentDate for resource $idMember");
+                  if (isset($ress['periods'][$period]['idResource'][$idMember])) {
+                    $tmpCapa=$ress['periods'][$period]['idResource'][$idMember];
+                    debugLog("   found period $period and tmpCapa=$tmpCapa");
+                    if (isset($member[$currentDate])) {
+                      debugLog("   already planned=".$member[$currentDate]);
+                      if (isset($resources[$idMember]) and isset($resources[$idMember]['capacity'])) {
+                        debugLog("   from capacity".$resources[$idMember]['capacity']);
+                        if ($resources[$idMember]['capacity']-$member[$currentDate]>=$tmpCapa) {
+                          // tmpCapa preserved : enough left 
+                        } else {
+                          $tmpCapa=$resources[$idMember]['capacity']-$member[$currentDate];
+                        }
+                      } else {
+                        $tmpCapa-=$member[$currentDate]; // Should not be used as previous should be true if upper condition is true (just for security)
+                      }
+                    }
+                    debugLog("   add $tmpCapa to capacity for $idMember");
+                    if ($tmpCapa>0) $capacity+=$tmpCapa;
+                  }
+                }
+              }
+              debugLog("Period for $currentDate is $period then capacity is $capacity");
             }
             if ($profile=='RECW') {
               if ($currentDate<=$endPlan) {
@@ -955,6 +983,26 @@ class PlannedWork extends GeneralWork {
 	                  }
                 	}
                 }
+                if ($value>=0.01) { // Store value on Resource Team if current resource belongs to a Resource Team
+                  debugLog("idR:$ass->idResource for date $currentDate");
+                  if (!$ress['team'] and isset($ress['isMemberOf']) and count($ress['isMemberOf'])>0) {
+                    foreach($ress['isMemberOf'] as $idRT=>$rt) {
+                      if (!isset($resources[$idRT]) ) {
+                        $r=new ResourceAll($idRT,true);
+                        $resources[$r->id]=$r->getWork($startDate, $withProjectRepartition);
+                      }
+                      $period=ResourceTeamAffectation::findPeriod($currentDate, $resources[$idRT]['periods']);
+                      debugLog("   Period found = $period");
+                      if ($period and isset($resources[$idRT]['periods'][$period]['idResource'][$ass->idResource])) {
+                        //if (! isset($resources[$idRT][$currentDate])) $resources[$idRT][$currentDate]=0;
+                        //$resources[$idRT][$currentDate]+=$value;
+                        if (! isset($resources[$idRT]['members'][$ass->idResource][$currentDate])) $resources[$idRT]['members'][$ass->idResource][$currentDate]=0;
+                        $resources[$idRT]['members'][$ass->idResource][$currentDate]+=$value;
+                        debugLog("   OK, subtract $value");
+                      }
+                    }
+                  }
+                }
                 if ($value>=0.01) {
                   if ($profile=='FIXED' and $currentDate==$plan->validatedStartDate) {
                     $fractionStart=$plan->validatedStartFraction;
@@ -1010,25 +1058,7 @@ class PlannedWork extends GeneralWork {
                       $ress[$projectKey][$week]=$value+$plannedProj;               
                     }
                   }
-                  // Store value on Resource Team if current resource belongs to
-                  debugLog("idR:$ass->idResource for date $currentDate");
-                  if (!$ress['team'] and isset($ress['isMemberOf']) and count($ress['isMemberOf'])>0) {
-                    foreach($ress['isMemberOf'] as $idRT=>$rt) {
-                      if (!isset($resources[$idRT]) ) {
-                        $r=new ResourceAll($idRT,true);
-                        $resources[$r->id]=$r->getWork($startDate, $withProjectRepartition);
-                      }
-                      $period=ResourceTeamAffectation::findPeriod($currentDate, $resources[$idRT]['periods']);
-                      debugLog("idR:$ass->idResource for date $currentDate period=$period");
-                      debugLog($resources[$idRT]['periods']);
-                      if ($period and isset($resources[$idRT]['periods'][$period]['idResource'][$ass->idResource])) {
-                        if (! isset($resources[$idRT][$currentDate])) $resources[$idRT][$currentDate]=0;
-                        $resources[$idRT][$currentDate]+=$value; // TODO : limit with capacity
-                        debugLog("idR:$ass->idResource for date $currentDate");
-                        debugLog($resources[$idRT]);
-                      }
-                    }
-                  }
+
                 }
               }            
             }
