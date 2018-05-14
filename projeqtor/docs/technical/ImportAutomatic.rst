@@ -1,5 +1,7 @@
 .. raw:: latex
 
+    \newpage
+
 .. title:: ImportAutomatic
 
 Import Automatique

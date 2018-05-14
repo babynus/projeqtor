@@ -1,5 +1,7 @@
 .. raw:: latex
 
+    \newpage
+
 .. title:: CreateIcon
 
 .. index:: ! CreateIcon
