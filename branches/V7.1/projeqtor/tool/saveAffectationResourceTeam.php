@@ -40,11 +40,10 @@ $description = RequestHandler::getValue('affectationDescriptionResourceTeam');
 $idle = RequestHandler::getBoolean('affectationIdleResourceTeam');
 $mode = RequestHandler::getValue('mode');
 Sql::beginTransaction();
-
 $result = "";
 $status="NO_CHANGE";
 
-if($mode = 'edit'){
+if($mode == 'edit'){
   $idAffectation = RequestHandler::getId('idAffectation');
   $resourceTeam=new ResourceTeamAffectation($idAffectation);
   $resourceTeam->idResource = $resource;

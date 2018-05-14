@@ -67,7 +67,7 @@ $idAffectation=RequestHandler::getValue('id',false,null);
                <label for="affectationRate" ><?php echo i18n("colRate");?>&nbsp;:&nbsp;</label>
              </td>
              <td>
-               <div id="affectationRateResourceTeam" name="affectationRateResourceTeam" value="<?php echo '100'; //$affectation->rate; ?>" 
+               <div id="affectationRateResourceTeam" name="affectationRateResourceTeam" value="<?php echo '100'; ?>" 
                  dojoType="dijit.form.NumberTextBox"
                  constraints="{min:0,max:100}" 
                  style="width:100px" class="input"

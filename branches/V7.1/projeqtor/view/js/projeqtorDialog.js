@@ -5107,6 +5107,9 @@ function editAffectationResourceTeam(id, objectClass, type, idResource, rate, id
   if(idResource){
     dijit.byId("affectationResourceTeam").set('value', idResource);
   }
+  if (rate) {
+    dijit.byId("affectationRateResourceTeam").set('value', rate);
+  }
   if (startDate) {
     dijit.byId("affectationStartDateResourceTeam").set('value', startDate);
   } else {
