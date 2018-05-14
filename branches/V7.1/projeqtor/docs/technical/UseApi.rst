@@ -1,5 +1,7 @@
 .. raw:: latex
 
+    \newpage
+
 .. title:: UseApi
 
 Utilisation de l'API

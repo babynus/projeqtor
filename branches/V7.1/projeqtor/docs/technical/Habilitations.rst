@@ -1,5 +1,7 @@
 .. raw:: latex
 
+    \newpage
+
 .. title:: Habilitations
 
 Habilitations
@@ -123,4 +125,5 @@ Il existe cependant une manière détournée de réinitilaiser un mot de passe e
 Dans la table "resource" accéder à la ligne de l'utilisateur concerné (l'administrateur créé par défaut a l'id=1), et modifier :
  * password => entrer le mot de passe en clair
  * crypto => mettre ce champ à Null (la valeur Null, pas une chaîne contenant "Null")
+
 Le mot de passe devra alors être modifié à la première connexion pour être encodé. 
