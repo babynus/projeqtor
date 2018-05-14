@@ -25,29 +25,29 @@ C'est le sujet du présent document.
 
 Nous allons présenter dans ce document :
 
-- La structure du code qui montre comment sont organisées les valeurs source de ProjeQtOr.
+- La structure du code qui montre comment sont organisées principaux composants de de ProjeQtOr.
 
-- La partie technique qui évoque la facilité d'installation et de paramétrage de ProjeQtOr.
+- La partie technique qui évoque la procédure d'installation et de paramétrage de ProjeQtOr.
 
 - Une partie installation puis une partie configuration qui est indispensable pour réaliser une bonne installation et un bon paramétrage de l'application.
 
-- Le développement Object et les règles de base de la programmation.
+- Le modèle Object et les règles de base de la programmation dans ProjeQtOr.
 
-- L'internationalisation de ProjeQtOr qui permet d'avoir l'application en plusieurs langages et de ne rien stocker en dur dans ProjeQtOr.
+- L'internationalisation des libellés et messages dans ProjeQtOr qui permet d'afficher l'application en plusieurs langues et de n'avoir aucun libellé en dur dans le code de ProjeQtOr.
 
 - La gestion des paramètres...
 
 - La customisation d'une classe...
 
-- Le moyen de créer un nouvel écran dans ProjeQtOr très facilement.
+- Le moyen de créer un nouvel écran dans ProjeQtOr.
 
 - Les différentes fonctions pour créer vos propres icônes.
 
-- La partie "Habilitation" qui va gérer l'affichage et les différents droits dans l'application.
+- La partie "Habilitation" qui gère les droits d'accès dans l'application.
 
 - L'utilisation de l'API, les différentes méthodes qui peuvent être utilisées, les descriptions et des exemples.
 
-- Le développement de plugins, leur déploiement et quelques conseils pour coder.
+- Le développement de plugins, leur déploiement et quelques conseils pour les développer.
 
 - Le déploiement et la migration vers une nouvelle version de ProjeQtOr.
 
@@ -69,21 +69,19 @@ Les nouveautés
 
 Ceci est la première version du document.
 
+
 .. raw:: latex
 
     \newpage
     
-Modèle Vue Contrôleur(MVC)
-==========================
- 
+Structure du code
+=================
+
 .. toctree::
    :maxdepth: 1
    
    Mvc
-   
-Structure du code
-=================
- 
+
 .. toctree::
    :maxdepth: 1
    
