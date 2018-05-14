@@ -38,6 +38,11 @@ $start = RequestHandler::getValue('affectationStartDateResourceTeam');
 $end = RequestHandler::getValue('affectationEndDateResourceTeam');
 $description = RequestHandler::getValue('affectationDescriptionResourceTeam');
 $idle = RequestHandler::getBoolean('affectationIdleResourceTeam');
+if($idle){
+  $idle = 1;
+}else{
+  $idle = 0;
+}
 $mode = RequestHandler::getValue('mode');
 Sql::beginTransaction();
 $result = "";
