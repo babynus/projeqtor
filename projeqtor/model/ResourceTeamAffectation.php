@@ -61,6 +61,7 @@ class ResourceTeamAffectation extends SqlElement {
   
   public static $maxAffectationDate='2029-12-31';
   public static $minAffectationDate='1970-01-01';
+  private static $_resourcePeriods=array();
   
   private static function formatDate($date) {
     if ($date==self::$minAffectationDate) {
