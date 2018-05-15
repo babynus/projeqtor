@@ -5299,7 +5299,7 @@ function drawAffectationsResourceTeamFromObject($list, $obj, $type, $refresh=fal
     echo '</td>';
   }
   echo '<td class="assignHeader" style="width:8%">'.i18n('colId').'</td>';
-  echo '<td class="assignHeader" style="width:'.(($print)?'35':'20').'%">'.i18n('colName').'</td>';
+  echo '<td class="assignHeader" style="width:39%">'.i18n('colName').'</td>';
   echo '<td class="assignHeader" style="width:13%">'.i18n('colStartDate').'</td>';
   echo '<td class="assignHeader" style="width:13%">'.i18n('colEndDate').'</td>';
   echo '<td class="assignHeader" style="width:12%">'.i18n('colRate').'</td>';
