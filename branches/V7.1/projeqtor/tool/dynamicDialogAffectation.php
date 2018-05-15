@@ -32,7 +32,7 @@ $affectationIdTeam=RequestHandler::getId('affectationIdTeam',false,null);
 $type=RequestHandler::getValue('type',false,null);
 $mode = RequestHandler::getValue('mode',false,null);
 $idAffectation = RequestHandler::getId('id',false,null);
-$resource = new Resource($idResource);
+$resource = new ResourceAll($idResource);
 $affectation = new Affectation($idAffectation);
 $project = new Project();
 $proj=null;
@@ -117,7 +117,7 @@ $objTeam=($obj)?get_class($obj):'';
                </td>  
              <?php };?>           
            </tr>
-           <tr>
+           <tr id="affectationToProfile" name="affectationToProfile" <?php if ($resource->isResourceTeam) echo 'style="display:none"';?> >
              <td class="dialogLabel" >
                <label for="affectationProfile" ><?php echo i18n("colIdProfile");?>&nbsp;:&nbsp;</label>
              </td>
@@ -126,7 +126,7 @@ $objTeam=($obj)?get_class($obj):'';
                <?php echo autoOpenFilteringSelect();?>
                 id="affectationProfile" name="affectationProfile" 
                 class="input" value="<?php if($mode=="edit"){ echo $affectation->idProfile;}else if($mode=="add" && $class=="Resource"){echo $resource->idProfile;}else if($mode=="add" && $class=="Contact"){echo $contact->idProfile;}else if($mode=="add" && $class=="User"){echo $user->idProfile;}?>" 
-               <?php echo ($objTeam=="Team")?"required=false":"";?> <?php echo ($objTeam=="Team")?"readonly=readonly":"";?>>
+               <?php echo ($objTeam=="Team")?"required=false":"";?> <?php echo ($objTeam=="ResourceTeam")?"required=false":"";?> <?php echo ($objTeam=="Team")?"readonly=readonly":"";?>>
                  <?php htmlDrawOptionForReference('idProfile', null, $obj);?>
                </select>
                </div>
