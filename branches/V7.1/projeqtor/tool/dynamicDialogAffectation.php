@@ -107,7 +107,7 @@ $objTeam=($obj)?get_class($obj):'';
                    iconClass="iconView">
                    <script type="dojo/connect" event="onClick" args="evt">
                     var canCreate=("<?php echo securityGetAccessRightYesNo('menuResource','create');?>"=="YES")?1:0;
-                    <?php if ($type=="Resource"){?>
+                    <?php if ($type=="ResourceAll"){?>
                       showDetail('affectationResource', canCreate , 'Resource', false);
                     <?php } else if ($type=="Contact"){?>
                       showDetail('affectationResource', canCreate , 'Contact', false);
