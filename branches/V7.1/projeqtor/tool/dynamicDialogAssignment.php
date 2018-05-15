@@ -172,7 +172,7 @@ $resource=new ResourceAll($idResource);
                  style="width:97px" 
                  <?php if ($planningMode=='RECW') echo ' readonly';?>
                  missingMessage="<?php echo i18n('messageMandatory',array(i18n('colRate')));?>" 
-                 required="true" >
+              <?php if (!$resource->isResourceTeam) { ?>  required="true" <?php } ?> >
                  <?php echo $keyDownEventScript;?>
                  </div>
              </td>
