@@ -996,6 +996,7 @@ class PlannedWork extends GeneralWork {
                         $resources[$idRT]=$r->getWork($startDate, $withProjectRepartition);
                       }
                       $period=ResourceTeamAffectation::findPeriod($currentDate, $resources[$idRT]['periods']);
+                      $alreadyPlannedOnTeam=0;
 //                      debugLog("   Period found = $period");
                       if ($period and isset($resources[$idRT][$currentDate])) {
                         $leftOnDate=$resources[$idRT]['periods'][$period]['rate']-$resources[$idRT][$currentDate]; // = team capacity - already planned
