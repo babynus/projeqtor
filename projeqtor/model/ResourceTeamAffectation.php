@@ -221,7 +221,7 @@ class ResourceTeamAffectation extends SqlElement {
     
    return $res;
   }
-
+  
   public static function drawResourceTeamAffectation($idResourceAff, $showIdle=false) {
   global $print;
   	$periods=self::buildResourcePeriods($idResourceAff,$showIdle);
