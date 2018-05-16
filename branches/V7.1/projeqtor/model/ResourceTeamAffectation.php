@@ -205,6 +205,20 @@ class ResourceTeamAffectation extends SqlElement {
     }
     ksort($res);
     $_resourcePeriods[$idResourceAff][$showIdle]=$res;
+    
+    $maxCapacity = 0;
+    $today=date('Y-m-d');
+    foreach ($res as $val){
+        if($val['start'] >= $today or $val['start'] <= $today and $val['end'] >= $today ){
+          if($val['rate'] > $maxCapacity){
+            $maxCapacity = $val['rate'];
+          }
+        }
+    }
+    $resTeam = new ResourceTeam($idResourceAff);
+    $resTeam->capacity = $maxCapacity;
+    $resTeam->save();
+    
    return $res;
   }
 
