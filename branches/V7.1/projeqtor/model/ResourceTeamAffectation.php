@@ -63,6 +63,7 @@ class ResourceTeamAffectation extends SqlElement {
     if($this->idle==0){
       $idResource = $this->idResource;
       $rate = $this->rate;
+      debugLog($rate);
       $start=($this->startDate)?$this->startDate:self::$minAffectationDate;
       $end=($this->endDate)?$this->endDate:self::$maxAffectationDate;
       $aff=new ResourceTeamAffectation();
@@ -72,11 +73,15 @@ class ResourceTeamAffectation extends SqlElement {
       foreach ($list as $val){
         $startVal=($val->startDate)?$val->startDate:self::$minAffectationDate;
         $endVal=($val->endDate)?$val->endDate:self::$maxAffectationDate;
-        if($val->idle == 0 and $val->id != $this->id ){
+        if($val->idle == 0 ){
           if($start=="1970-01-01" and $end == '2099-12-31'){
-            $rate += $val->rate;
+            if( $val->id != $this->id ){
+              $rate += $val->rate;
+            }
           }else if( $end >= $startVal and $endVal >= $end or $start >= $startVal and $start <= $endVal){
-            $rate += $val->rate;
+            if( $val->id != $this->id ){
+              $rate += $val->rate;
+            }
           }
         }
       }
