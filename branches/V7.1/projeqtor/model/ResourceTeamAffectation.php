@@ -63,7 +63,6 @@ class ResourceTeamAffectation extends SqlElement {
     if($this->idle==0){
       $idResource = $this->idResource;
       $rate = $this->rate;
-      debugLog($rate);
       $start=($this->startDate)?$this->startDate:self::$minAffectationDate;
       $end=($this->endDate)?$this->endDate:self::$maxAffectationDate;
       $aff=new ResourceTeamAffectation();
@@ -86,7 +85,7 @@ class ResourceTeamAffectation extends SqlElement {
         }
       }
       if($rate > 100){
-        $result.='<br/>' . i18n('error rate > 100');
+        $result.='<br/>' . i18n('impossibleRateAffectationResourcePool', array($period->validatedDate,SqlList::getNameFromId('Resource', $idResource)));
       }
     }
     if ($result=="") {
