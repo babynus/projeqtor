@@ -821,7 +821,7 @@ $cr, $print, $treatedObjects, $displayWidth, $outMode, $comboDetail, $collapsedL
         }
         $aff=new Affectation();
         $cpt=$aff->countSqlElementsFromCriteria($crit);
-      } else if ($section == 'ffectationsResourceTeam') {
+      } else if ($section == 'affectationsResourceTeam') {
         $crit=array('idResourceTeam'=>$obj->id);
         $aff=new ResourceTeamAffectation();
         $cpt=$aff->countSqlElementsFromCriteria($crit);
