@@ -261,38 +261,36 @@ A pool can not be a user and does not have a profile as it may not connect to th
 
 .. rubric:: Capacity
 
-* A pool does not have a specific capacity. It's capacity is calculated from capacity and rate of assigned resources.
+   * A pool does not have a specific capacity. It's capacity is calculated from capacity and rate of assigned resources.
 
 .. rubric:: Limits
-
-* A pool can not be a user and does not have a profile as it may not connect to the application.
-* A pool can not be a contact
-* A pool cannot be the responsible of an item
+  * A pool can not be a user and does not have a profile as it may not connect to the application.
+  * A pool can not be a contact
+  * A pool cannot be the responsible of an item
 
 
 .. rubric:: Real work input
 
-* When a pool is assigned to an activity, any resource of the pool can input real work on the activity
-* This possibility is restricted to the period of assignment of the resource to the pool
+  * When a pool is assigned to an activity, any resource of the pool can input real work on the activity
+  * This possibility is restricted to the period of assignment of the resource to the pool
 
 
 .. rubric:: Automatic decrement for assigned work
 
-* When you assign a pool to an activity, and then assign a resource of the pool to the same activity, then assigned work on the resource is automatically subtracted from assignment of the pool
-* The same way, when you assign a pool to an activity, and then assign a resource of the pool to a sub-activity of this activity, then assigned work on the resource is automatically subtracted from assignment of the pool
-* When you assign a pool to an activity, and then assign the same pool to a sub-activity of this activity, then assigned work on the pool on the sub-activity is automatically subtracted from assignment of the pool on the parent activity
+  * When you assign a pool to an activity, and then assign a resource of the pool to the same activity, then assigned work on the resource is automatically subtracted from assignment of the pool
+  * The same way, when you assign a pool to an activity, and then assign a resource of the pool to a sub-activity of this activity, then assigned work on the resource is automatically subtracted from assignment of the pool
+  * When you assign a pool to an activity, and then assign the same pool to a sub-activity of this activity, then assigned work on the pool on the sub-activity is automatically subtracted from assignment of the pool on the parent activity
 
 
 .. rubric:: Planning
-
-* When planning a pool, availability of unitary resources already booked on other tasks is taken into account
-* When planning an unitary resource, availability already booked through the pool on other tasks is also taken into account (globally for all the resources of the pool)
+  * When planning a pool, availability of unitary resources already booked on other tasks is taken into account
+  * When planning an unitary resource, availability already booked through the pool on other tasks is also taken into account (globally for all the resources of the pool)
 
 
 .. rubric:: Possible use cases for pool
 
-* When you have a group of resources that may work on same tasks, but you don't know in advance who will work. For instance a maintenance team that may work on maintenance tasks and other project tasks
-* For macro planning
+  * When you have a group of resources that may work on same tasks, but you don't know in advance who will work. For instance a maintenance team that may work on maintenance tasks and other project tasks
+  * For macro planning
     * Define a poll for each group of resources (depending for instance on competencies)
     * On first step, assign fake resources to the pools, and plan your project with the pools : you get a first draft of your project, even before knowing who will work on the project, and without needing to go to a very detailed level of tasks (it's macro planning, you just have macro tasks)
     * Then when you know who will work on the project : just replace the fake resource with real resources : you immediately get a realistic planning taking into account availability of real resources already booked on other projects. It's still a macro planning, but realistic.
