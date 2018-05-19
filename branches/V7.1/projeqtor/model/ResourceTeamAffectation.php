@@ -71,7 +71,6 @@ class ResourceTeamAffectation extends SqlElement {
       $maxExitingRate=0;
       foreach ($periods as $period){
         if ($start<=$period['end'] and $end>=$period['start'] and $capacity>0) {
-          debugLog($period);
           $ratePeriod=floatval($period['idResource'][$this->idResource])*100/$capacity;
           if ($ratePeriod>$maxExitingRate) {
             $maxExitingRate=$ratePeriod;
