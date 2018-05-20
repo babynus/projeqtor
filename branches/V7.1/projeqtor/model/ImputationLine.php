@@ -135,6 +135,7 @@ class ImputationLine {
     $rta=new ResourceTeamAffectation();
     $rtaList=$rta->getSqlElementsFromCriteria(array('idResource'=>$resourceId));
     foreach ($rtaList as $rta) {
+      if ($rta->idle) continue;
       if (($rta->startDate==null or $rta->startDate<=$endDate) and ($rta->endDate==null or $rta->endDate>=$startDate)) {
         $ressList.=','.Sql::fmtId($rta->idResourceTeam);
       }
