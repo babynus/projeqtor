@@ -915,11 +915,17 @@ function getObjectClassFieldsListWithDateType($objectClassName='', $withoutCreat
  * --------------------------------------------------------------------------------------------------------------
  */
 function isNotifiable($className) {
-    $crit = array("idle" => '0',
-                  "notifiableItem" => $className
-                 );
+    $crit = array("idle" => '0', "notifiableItem" => $className);
     $obj = SqlElement::getSingleSqlElementFromCriteria ( 'Notifiable', $crit );
-    return isset($obj->id);
+    if ($obj->id) {
+      $nd=new NotificationDefinition();
+      $cpt=$nd->countSqlElementsFromCriteria(array('idNotifiable'=>$obj->id));
+      if ($cpt>0) return true;
+      else return false;
+    } else {
+      return false;
+    }
+    return false;
 }
 
 /** =============================================================================================================
