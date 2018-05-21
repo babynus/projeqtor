@@ -454,7 +454,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     $resourcesOfThisOrga = $obj->getResourcesOfOrganizationsListAsArray();
     $restrictArray = array_intersect_key($restrictArray, $resourcesOfThisOrga);
   }    
-  if ($col=='idTargetProductVersion' or $col=='idProductVersion' or $col=='idOriginProductVersion') {
+  if ($col=='idTargetProductVersion' or $col=='idOriginProductVersion') { //or $col=='idProductVersion'
     // Must restrict to versions visible to user
     $restrictArrayVersion=getSessionUser()->getVisibleVersions();
     if (isset($restrictArray) && count($restrictArray)>0) {
