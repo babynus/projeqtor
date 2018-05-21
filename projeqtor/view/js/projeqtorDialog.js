@@ -3707,19 +3707,58 @@ function filterSelectAtribute(value) {
           var mySelect=dojo.byId("filterValueList");
           mySelect.options.length=0;
           var nbVal=0;
-          tmpStore.fetch({
-            query : {
-              id : "*"
-            },
-            onItem : function(item) {
-              mySelect.options[mySelect.length]=new Option(tmpStore.getValue(
-                  item, "name", ""), tmpStore.getValue(item, "id", ""));
-              nbVal++;
-            },
-            onError : function(err) {
-              console.info(err.message);
-            }
-          });
+        //ADD aGaye - Ticket 196
+          if(dijit.byId('idFilterAttribute').getValue()=="idBusinessFeature"){
+	          var listId = "";
+	          tmpStore.fetch({
+	              query : {
+	                id : "*"
+	              },
+	              onItem : function(item) {
+	            	  listId += (listId != "") ? '_' : '';
+	                  listId += parseInt(tmpStore.getValue(item, "id", ""), 10) + '';
+	                  nbVal++;
+	              },
+	              onError : function(err) {
+	                console.info(err.message);
+	              },
+	              onComplete : function() { 
+	            	  dojo.xhrGet({
+	    	        	url : '../tool/getProductNameFromBusinessFeature.php?listId=' + listId,
+	    			    handleAs : "text",
+	    			    load: function(data){
+	    			    	var listName = JSON.parse(data);
+	    			    	tmpStore.fetch({
+	    			              query : {
+	    			                id : "*"
+	    			              },
+	    			              onItem : function(item) {
+	    			                mySelect.options[mySelect.length]=new Option(tmpStore.getValue(item, "name", "") + " (" + listName[tmpStore.getValue(item, "id", "")] + ")", tmpStore.getValue(item, "id", ""));
+	    			              },
+	    			              onError : function(err) {
+	    			                console.info(err.message);
+	    			              }
+	    			            });
+	    			    }
+	    	          });
+	               }
+	            });
+          }else{
+        	  tmpStore.fetch({
+                  query : {
+                    id : "*"
+                  },
+                  onItem : function(item) {
+                    mySelect.options[mySelect.length]=new Option(tmpStore.getValue(
+                        item, "name", ""), tmpStore.getValue(item, "id", ""));
+                    nbVal++;
+                  },
+                  onError : function(err) {
+                    console.info(err.message);
+                  }
+                });
+          }
+          //END aGaye - Ticket 196
           mySelect.size=(nbVal > 10) ? 10 : nbVal;
           dojo.style(dijit.byId('filterValue').domNode, {
             display : 'none'
