@@ -519,8 +519,11 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     if (!$sepChar) $sepChar='__';
     $orgaLevelArray=array();      
   }
+  
+  //class where language will be filtered if already selected ones, in others class, all languages will be proposed
+  $classMultiLanguage =array("Component","Product","ProductVersion","ComponentVersion");
   // Exclude in list of languages and contexts the already selected ones
-  if ( ($col=='idLanguage' or $col=='idContext') and $obj) {
+  if ( ($col=='idLanguage' or $col=='idContext') and $obj and in_array(get_class($obj),$classMultiLanguage)) {
     $crtProd='idProduct';
     if ($col=='idLanguage'){
       $productContext = new ProductLanguage();
