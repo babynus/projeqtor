@@ -484,6 +484,7 @@ class ComponentVersionMain extends Version {
     foreach($listLang as $lang){
       $lang->id = NULL;
       $lang->idVersion = $result->id;
+      $lang->scope = $result->scope; //Add mOlives - bugLanguage - 19/04/2018
       $lang->save();
     }
     //add atrancoso ticket#160
