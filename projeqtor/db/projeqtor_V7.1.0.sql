@@ -83,3 +83,9 @@ UPDATE `${prefix}copyable` SET idDefaultCopyable=5 WHERE id=16;
 -- ==============================================================
 update ${prefix}productlanguage set scope = 'Component' where idProduct in (select id from ${prefix}product where scope = 'Component');
 update ${prefix}productlanguage set scope = 'Product' where idProduct in (select id from ${prefix}product where scope = 'Product');
+
+--- ================================================================
+--  FIX
+--- ================================================================
+UPDATE `${prefix}dependency` SET predecessorRefType='Project' where predecessorRefType='Replan';
+UPDATE `${prefix}dependency` SET successorRefType='Project' where successorRefType='Replan';
