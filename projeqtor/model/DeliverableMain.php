@@ -47,7 +47,7 @@ class DeliverableMain extends SqlElement {
   public $idDeliverableWeight;
   public $idResource;
   public $idMilestone;
-  public $_tab_4_1=array('initial','planned','real','validated','duration');
+  public $_tab_4_1=array('initial','planned','real','ValidationDate','dueDate');
   public $initialDate;
   public $plannedDate;
   public $realDate;
