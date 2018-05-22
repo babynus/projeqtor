@@ -513,14 +513,14 @@ class WorkflowMain extends SqlElement {
       $result.=' <tr>';
       $scopeName = "";
       foreach ($tab as $scope=>$val){
-        $result.='  <td style="vertical-align:top;">';
+        $result.='  <td style="vertical-align:top;padding-right:5px;">';
         $result.='  <table>';
         foreach ($val as $name=>$value){
           if($scopeName != $scope){
-            $result.='    <td style="padding:2px 5px;"class="workflowHeader">'. $scope .'</td> ';
+            $result.='    <tr style="border-bottom:1px solid #aaaaaa;"  ><td style="padding:2px 5px;"class="workflowHeader" style="padding:2px 5px;">'. $scope .'</td> </tr>';
           }
           $scopeName = $scope;
-          $result.='    <tr style="border-bottom:1px solid #000000;"  ><td  style="padding:2px 5px;border-right:1px solid #000000;border-left:1px solid #000000;">'. $name .'</td> </tr>';
+          $result.='    <tr style="border-bottom:1px solid #aaaaaa;"  ><td  class="workflowData" style="padding:2px 5px;">'. $name .'</td> </tr>';
         } 
         $result.='  </table>';
         $result.='  </td>';
