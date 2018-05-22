@@ -39,7 +39,8 @@ class WorkflowMain extends SqlElement {
   public $idle;
   public $workflowUpdate;
   public $description;
-  public $_sec_void;
+  public $_sec_listTypeUsingWorkflow;
+  public $_spe_listTypeUsingWorkflow;
   public $_sec_WorkflowDiagram;
   public $_workflowDiagram_colSpan="2";
   public $_spe_workflowDiagram;
@@ -48,6 +49,7 @@ class WorkflowMain extends SqlElement {
   public $_workflowStatus_colSpan="2";
   public $_spe_workflowStatus;
   public $_workflowStatus;
+
   
   public $_statusList;
   
@@ -496,7 +498,37 @@ class WorkflowMain extends SqlElement {
         $result.=' </script>';
         $result.='</button>';
       }
-    }  
+      //gautier tableauWorkflow
+    }  else if ($item=='listTypeUsingWorkflow') {
+      $maxWidth=preg_replace('/[^0-9]/','', $detailWidth);
+      $maxWidth= $maxWidth/2;
+      $type=new Type();
+      $typeList=$type->getSqlElementsFromCriteria(array('idWorkflow'=>$this->id),null,null,'scope asc',null,true);
+      $tab = array();
+      foreach ($typeList as $val){
+        $tab[$val->scope][$val->name]=$this->id;
+      }
+      $result.=' <div style="width:'.$maxWidth.'px; overflow:auto;">';
+      $result.='  <table>';
+      $result.=' <tr>';
+      $scopeName = "";
+      foreach ($tab as $scope=>$val){
+        $result.='  <td style="vertical-align:top;">';
+        $result.='  <table>';
+        foreach ($val as $name=>$value){
+          if($scopeName != $scope){
+            $result.='    <td style="padding:2px 5px;"class="workflowHeader">'. $scope .'</td> ';
+          }
+          $scopeName = $scope;
+          $result.='    <tr style="border-bottom:1px solid #000000;"  ><td  style="padding:2px 5px;border-right:1px solid #000000;border-left:1px solid #000000;">'. $name .'</td> </tr>';
+        } 
+        $result.='  </table>';
+        $result.='  </td>';
+      }
+      $result.= ' </tr>';
+      $result.='  </table>';
+      $result.=' </div>';
+    }
     return $result;
   }
   /** =========================================================================
