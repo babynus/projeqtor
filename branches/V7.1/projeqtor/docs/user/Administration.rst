@@ -241,6 +241,9 @@ Global parameters screen allows configuration of application settings.
 .. rubric:: Section: Emailing
 .. rubric:: Section: Mail titles
 .. rubric:: Section: Automatic emails grouping
+
+E-mail sending delay: possibility not to send emails in a row, but to delay them to send only one message if several changes generating an emails send are made in a short time.
+
 .. rubric:: Section: Test email configuration
 
 .. rubric:: GENERAL SECTION 6 : Authentication

@@ -613,6 +613,10 @@ A JobList is built from JobList lines.
 
    * Looking like CheckLists with no choice.
 
+.. index:: ! Notification
+
+.. _notification-system :
+
 Notification system
 ---------
 
@@ -627,8 +631,7 @@ In order to automatically generate notifications based on certain field values o
 This notification system, whose purpose is to automatically generate notifications, is based on notification generation definitions.
 
 
-A) Creation
-____________________
+A) Creation_________________
 
 
 The definition of notification generation is based on the following:
@@ -806,7 +809,7 @@ For the definition of the notification rules (notificationDefinition), the right
 'read only' for other profiles
 
 
- C) THE IHMs ____________________
+ C) The IHMs ____________________
 
 
 After logging in, a message generated after "Login accepted" that tells you that you have unread notifications:
