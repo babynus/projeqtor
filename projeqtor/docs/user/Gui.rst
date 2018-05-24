@@ -455,8 +455,9 @@ The advanced filter allows to define clause to filter and sort.
       operator AND is applies before OR. Example :  A or B and C is equivalent to A or(B(+)C)
       
     * Operator "starts with" to select sort clauses without displaying this list. 
-      
-    * **Dynamic filters** (the value of the critera is entered when the filter is activated).
+
+     
+    **Dynamic filters** (the value of the critera is entered when the filter is activated).
       So Click on Dynamic value creating this filter.
       Dynamics filters are available for all users in them session.
 
