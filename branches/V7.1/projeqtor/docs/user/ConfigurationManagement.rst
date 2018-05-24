@@ -115,6 +115,8 @@ Allows to link a component version to product version.
 
 Allows to link the product version to a project.
 
+Ability to define the compatibility between product versions (feature activated through a global parameter)
+
 .. rubric:: Automatic formatting of version name
 
 * Possibility to define if the version name is automatically produced from the product name and version number.
