@@ -64,7 +64,6 @@ foreach($wkLst as $wk) {
   }
   $work[$wk->idAssignment][$wk->workDate]=array('work'=>$wk->work,'type'=>'real');
 }
-
 $wk=new PlannedWork();
 $wkLst=$wk->getSqlElementsFromCriteria($crit);
 foreach($wkLst as $wk) {
@@ -96,7 +95,13 @@ if (!$start or !$end) {
 	echo '<div style="background-color:#FFF0F0;padding:3px;border:1px solid #E0E0E0;">'.i18n('noDataToDisplay').'<br/>'.i18n('planningCalculationRequired')."</div>";
 	return;
 }
-if ($pe->plannedStartDate && $pe->plannedStartDate<$start) $start=$pe->plannedStartDate;
+
+if($objectClassManual != 'ResourcePlanning' ){
+  if ($pe->plannedStartDate && $pe->plannedStartDate<$start){
+    $start=$pe->plannedStartDate;
+  }
+}
+
 $dt=$start;
 while ($dt<=$end) {
   if (!isset($dates[$dt])) {
