@@ -2680,10 +2680,11 @@ function runScript(refType, refId, id) {
 }
 ongoingRunScriptContextMenu=false;
 function runScriptContextMenu(refType, refId, id) {
+  var objectClassManual = dojo.byId('objectClassManual').value;
   showWait();
   setTimeout("document.body.style.cursor='default';",100);
   dojo.xhrGet({
-    url : "../view/planningBarDetail.php?class="+refType+"&id="+refId+"&scale="+ganttPlanningScale,
+    url : "../view/planningBarDetail.php?class="+refType+"&id="+refId+"&scale="+ganttPlanningScale+"&objectClassManual="+objectClassManual+"&idAssignment="+id,
     load : function(data, args) {
       ongoingRunScriptContextMenu=true;
       setTimeout("document.body.style.cursor='default';",100);

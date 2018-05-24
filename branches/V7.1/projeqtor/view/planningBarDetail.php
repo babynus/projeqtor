@@ -21,6 +21,11 @@ if ($scale!='day' and $scale!='week') {
   return;
 }
 
+$objectClassManual = RequestHandler::getValue('objectClassManual');
+if($objectClassManual == 'ResourcePlanning' ){
+  $idAssignment = RequestHandler::getId('idAssignment');
+}
+
 $dates=array();
 $work=array();
 $start=null;
@@ -32,6 +37,10 @@ $pe=SqlElement::getSingleSqlElementFromCriteria($class.'PlanningElement', $crit)
 if ($pe->assignedWork==0 and $pe->leftWork==0 and $pe->realWork==0) {
   echo '<div style="background-color:#FFF0F0;padding:3px;border:1px solid #E0E0E0;">'.i18n('noDataToDisplay')."</div>";
   return;
+}
+
+if($objectClassManual == 'ResourcePlanning' ){
+  $crit=array('refType'=>$class,'refId'=>$id,'idAssignment'=>$idAssignment);
 }
 
 $wk=new Work();
