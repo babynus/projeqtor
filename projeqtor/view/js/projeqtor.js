@@ -1113,7 +1113,6 @@ function finalizeMessageDisplay(destination, validationType) {
   if (!contentWidget) {
     return;
   }
-  ;
   // fetch last message type
   var message = contentWidget.get('content');
   posdeb = message.indexOf('class="message') + 7;
@@ -1567,11 +1566,13 @@ function finalizeMessageDisplay(destination, validationType) {
       && lastOperationStatus.value != "INVALID"
       && lastOperationStatus.value != "CONFIRM" && lastOperationStatus.value != "INCOMPLETE")) {
     if (destination == 'planResultDiv') {
+      console.log("lastOperationStatus="+lastOperationStatus.value);
       planningResultDivFadingOut = dojo.fadeOut({
         node : contentNode,
         duration : 3000,
         onEnd : function() {
           contentNode.style.display = "none";
+          contentWidget.set("content",null);
         }
       }).play();
     } else {
@@ -1580,6 +1581,7 @@ function finalizeMessageDisplay(destination, validationType) {
         duration : 3000,
         onEnd : function() {
           contentNode.style.display = "none";
+          contentWidget.set("content",null);
         }
       }).play();
     }
@@ -1588,6 +1590,7 @@ function finalizeMessageDisplay(destination, validationType) {
       showError(message);
       addCloseBoxToMessage(destination);
     } else {
+      console.log("lastOperationStatus="+lastOperationStatus.value);
       if (lastOperationStatus.value == "CONFIRM") {
         if (message.indexOf('id="confirmControl" value="delete"') > 0 || message.indexOf('id="confirmControl" type="hidden" value="delete"') > 0) {
           confirm = function() {
