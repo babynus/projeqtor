@@ -6802,5 +6802,4 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
     return $status;
   }
 }
-
 ?>
