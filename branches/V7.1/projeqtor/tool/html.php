@@ -41,7 +41,6 @@ require_once "../tool/projeqtor.php";
 // CHANGE BY Marc TABARY - 2017-02-17
 function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false, $critFld=null, $critVal=null, $limitToActiveProjects=true, $limitToActiveOrganizations=true) {
 	scriptLog("      =>htmlDrawOptionForReference(col=$col,selection=$selection,object=" .debugDisplayObj($obj).",required=$required,critFld=".debugDisplayObj($critFld).",critVal=".debugDisplayObj($critVal).")");
-	debugLog("      =>htmlDrawOptionForReference(col=$col,selection=$selection,object=" .debugDisplayObj($obj).",required=$required,critFld=".debugDisplayObj($critFld).",critVal=".debugDisplayObj($critVal).")");
   // Take into account array of $critFld // TODO : check where it is used 
 
 // BEGIN - ADD BY TABARY - POSSIBILITY TO HAVE AT X TIMES SAME idXXXX IN THE SAME OBJECT
@@ -303,7 +302,6 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
           $restrictArray[0]=0;
         }
       }
-      debugLog("param=".Parameter::getUserParameter("restrictProjectList")." selectedProject=".getSessionValue("project"));
       if(Parameter::getUserParameter("restrictProjectList")=="true" and getSessionValue("project") and getSessionValue("project")!='*') {
         $class=get_class($obj);
         $proj = new Project(getSessionValue("project"));
