@@ -4282,7 +4282,7 @@ abstract class SqlElement {
         }
         //end
         foreach($relationShip[get_class($this)] as $object => $mode) {
-          if($canForceClose){
+          if($canForceClose and $mode=='control'){
             $mode = "confirm";
           }
           if (($mode == 'control' or $mode == 'confirm') and property_exists ( $object, 'idle' )) {
