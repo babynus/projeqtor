@@ -26,7 +26,7 @@
 
 class File {
 
-  private static $dir='../user/';
+  private static $dir='../technical/';
 	/** ==========================================================================
 	 * Constructor
 	 * @param $id the id of the object in the database (null if not stored yet)

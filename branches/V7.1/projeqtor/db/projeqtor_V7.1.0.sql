@@ -126,3 +126,5 @@ INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess
 (1, 84, 1),
 (2, 84, 1),
 (3, 84, 1);
+
+ALTER TABLE `${prefix}type` ADD `lockUseOnlyForCC` int(1) unsigned default '0';
