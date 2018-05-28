@@ -126,12 +126,3 @@ INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess
 (1, 84, 1),
 (2, 84, 1),
 (3, 84, 1);
-
---BEGIN - ADD qCazelles - Details on report for resource work - Ticket 166
-INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`) VALUES
-(28, 'idResource', 'resourceList', 7);
-INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`) VALUES
-(29, 'idResource', 'resourceList', 7);
-INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`) VALUES
-(30, 'idResource', 'resourceList', 7);
---END - ADD qCazelles - Details on report for resource work - Ticket 166
