@@ -52,6 +52,23 @@ if (array_key_exists('weekSpinner',$_REQUEST)) {
 	$paramWeek=$_REQUEST['weekSpinner'];
 	$paramWeek=Security::checkValidWeek($paramWeek);
 };
+//BEGIN - ADD qCazelles - Details on report for resource work - Ticket 166
+$paramResource='';
+if (array_key_exists('idResource',$_REQUEST)) {
+  $paramResource=trim($_REQUEST['idResource']);
+  $paramResource = preg_replace('/[^0-9]/', '', $paramResource); // only allow digits
+  $canChangeResource=false;
+  $crit=array('idProfile'=>$user->idProfile, 'scope'=>'reportResourceAll');
+  $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', $crit);
+  if ($habil and $habil->id and $habil->rightAccess=='1') {
+    $canChangeResource=true;
+  }
+  if (!$canChangeResource and $paramResource!=$user->id) {
+    echo i18n('messageNoAccess',array(i18n('colReport')));
+    exit;
+  }
+}
+//END - ADD qCazelles - Details on report for resource work - Ticket 166
 $user=getSessionUser();
 
 $periodType=$_REQUEST['periodType']; // not filtering as data as data is only compared against fixed strings
@@ -90,6 +107,11 @@ if ($periodType=='month') {
 if ( $periodType=='week') {
   $headerParameters.= i18n("week") . ' : ' . $paramWeek . '<br/>';
 }
+//BEGIN - ADD qCazelles - Details on report for resource work - Ticket 166
+if ($paramResource!='') {
+  $headerParameters.= i18n("colIdResource") . ' : ' . htmlEncode(SqlList::getNameFromId('Resource', $paramResource)) . '<br/>';
+}
+//END - ADD qCazelles - Details on report for resource work - Ticket 166
 include "header.php";
 
 $where=getAccesRestrictionClause('Activity',false,false,true,true);
@@ -109,6 +131,20 @@ if ($periodType=='year') {
 if ($paramProject!='') {
   $where.=  "and idProject in " . getVisibleProjectsList(true, $paramProject) ;
 }
+
+//BEGIN -ADD qCazelles - Ticket 166
+if ($paramTeam and !$paramResource) {
+  $resource = new Resource();
+  $resources = $resource->getSqlElementsFromCriteria(array('idTeam' => $paramTeam));
+  $listResources = '';
+  foreach ($resources as $resource) {
+    $listResources .= ($listResources == '') ? $resource->id : ', ' . $resource->id;
+  }
+  $where .= "and idResource in (" . $listResources . ")";
+} elseif (!$paramTeam and $paramResource) {
+  $where .= "and idResource = " . $paramResource;
+}
+//END - ADD - qCazelles - Ticket 166
 $order="";
 //echo $where;
 $work=new Work();
@@ -173,11 +209,21 @@ echo '</tr>';
 
 $sum=0;
 asort($resources);
+
+
 foreach ($resources as $idR=>$nameR) {
-	if ($paramTeam) {
+  //CHANGE qCazelles - Details on report for resource work - Ticket 166
+	//Old
+  //if ($paramTeam) {
+  //  $res=new Resource($idR);
+  //}
+  //if (!$paramTeam or $res->idTeam==$paramTeam) {
+  //New
+  if ($paramTeam or $paramResource) {
     $res=new Resource($idR);
   }
-  if (!$paramTeam or $res->idTeam==$paramTeam) {
+  if (!$paramTeam and !$paramResource or ($paramTeam and !$paramResource and $paramTeam == $res->idTeam) or ($paramResource and $res->id == $paramResource)) {
+  //END CHANGE qCazelles - Details on report for resource work - Ticket 166
 	  $sumRes=0;
 	  echo '<tr>';
 	  echo '<td class="reportTableLineHeader" style="width:20%" rowspan="' . (count($result[$idR]) +1) . '">' . htmlEncode($nameR) . '</td>';
