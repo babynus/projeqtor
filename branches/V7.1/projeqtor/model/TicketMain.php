@@ -101,7 +101,7 @@ class TicketMain extends SqlElement {
     <th field="id" formatter="numericFormatter" width="4%" ># ${id}</th>
     <th field="nameProject" width="7%">${idProject}</th>
     <th field="nameTicketType" width="7%" >${idTicketType}</th>
-    <th field="name" width="17%">${name}</th>
+    <th field="name" width="17%">${ticketName}</th>
     <th field="nameUser" formatter="thumbName22" width="10%">${issuer}</th>
     <th field="colorNameUrgency" width="7%" formatter="colorNameFormatter">${idUrgency}</th>
     <th field="colorNamePriority" width="7%" formatter="colorNameFormatter">${idPriority}</th>
@@ -134,7 +134,8 @@ class TicketMain extends SqlElement {
                                   "delayReadOnly"=>"hidden"
   );  
   
-  private static $_colCaptionTransposition = array('idUser'=>'issuer', 
+  private static $_colCaptionTransposition = array('name'=>'ticketName',
+                                                   'idUser'=>'issuer', 
                                                    'idResource'=> 'responsible',
                                                    'idActivity' => 'planningActivity',
                                                    'idContact' => 'requestor',
