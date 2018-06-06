@@ -2924,6 +2924,10 @@ function addDelayToDatetime($dateTime, $delay, $unit) {
   } else if ($unit == 'HH') {
     $hh = substr ( $time, 0, 2 );
     $mn = substr ( $time, 3, 2 );
+    if(!$hh and !$mn){
+      $hh = 00;
+      $mn = 00;
+    }
     $res = minutesToTime ( $hh * 60 + $mn + $delay * 60 );
     $newDate = addDaysToDate ( $date, $res ['d'] );
     return $newDate . " " . padto2 ( $res ['h'] ) . ":" . padto2 ( $res ['m'] ) . ':00';
