@@ -1304,9 +1304,8 @@ function finalizeMessageDisplay(destination, validationType) {
           refreshGrid();
         }
         // loadContent("planningList.php", "listDiv", 'listForm');
-      }
-      // last operations depending on the executed operatoin (insert, delete, ...)
-      if (dojo.byId('id') && lastOperation && (lastOperation.value == "insert" || forceRefreshCreationInfo)) {
+      } else if (dojo.byId('id') && lastOperation && (lastOperation.value == "insert" || forceRefreshCreationInfo)) {
+     // last operations depending on the executed operatoin (insert, delete, ...)
         if (lastSaveId) dojo.byId('id').value=lastSaveId.value;
         if (dojo.byId('objectClass')
             && dojo.byId('objectClass').value == "Project") {
@@ -1314,7 +1313,7 @@ function finalizeMessageDisplay(destination, validationType) {
         }
         if (dojo.byId("buttonDivObjectId")
             && (dojo.byId("buttonDivObjectId").innerHTML == "" || forceRefreshCreationInfo)
-            && lastSaveId.value) {
+            && lastSaveId && lastSaveId.value) {
           dojo.byId("buttonDivObjectId").innerHTML = "&nbsp;#"
               + lastSaveId.value;
           //gautier
