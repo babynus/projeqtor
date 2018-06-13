@@ -484,7 +484,6 @@ class ImputationLine {
     $lowRes=0;
     if (array_key_exists('destinationWidth', $_REQUEST)) {
       $width=$_REQUEST['destinationWidth'];
-      debugLog($width);
       if ($width<1150) $lowRes=3; // $lowRes will contain colSpan value ;)
       if ($width<1000) $lowRes=1;
     }
