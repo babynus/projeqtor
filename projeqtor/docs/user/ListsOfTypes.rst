@@ -50,7 +50,7 @@ If no element type is selected, by default all values of the row will be display
 
 .. _project-type:
 
- Reminder : It means too, no restriction for remainding element types.
+ Reminder : It means too, no restriction for remainding element types on each dedicated screen.
 
 Projects types
 --------------
