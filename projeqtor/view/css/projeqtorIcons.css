@@ -639,9 +639,9 @@
 .iconParameter22 { background-image: url(images/iconParameter22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconParameter16 { background-image: url(images/iconParameter16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
-.iconPayment32 { background-image: url(images/iconPayment32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconPayment22 { background-image: url(images/iconPayment22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconPayment16 { background-image: url(images/iconPayment16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+.iconPayment32 { background-image: url(images/iconClientPayment32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconPayment22 { background-image: url(images/iconClientPayment32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconPayment16 { background-image: url(images/iconClientPayment32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
 .iconPaymentDelay32 { background-image: url(images/iconPaymentDelay32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconPaymentDelay22 { background-image: url(images/iconPaymentDelay22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
@@ -651,13 +651,9 @@
 .iconPaymentMode22 { background-image: url(images/iconPaymentMode22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconPaymentMode16 { background-image: url(images/iconPaymentMode16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
-.iconPaymentType32 { background-image: url(images/iconPaymentType32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconPaymentType22 { background-image: url(images/iconPaymentType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconPaymentType16 { background-image: url(images/iconPaymentType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
-
-.iconPaymentType32 { background-image: url(images/iconPaymentType32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconPaymentType22 { background-image: url(images/iconPaymentType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconPaymentType16 { background-image: url(images/iconPaymentType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+.iconPaymentType32 { background-image: url(images/iconClientPaymentType32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconPaymentType22 { background-image: url(images/iconClientPaymentType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconPaymentType16 { background-image: url(images/iconClientPaymentType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
 .iconPeriodicMeeting32 { background-image: url(images/iconPeriodicMeeting32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconPeriodicMeeting22 { background-image: url(images/iconPeriodicMeeting22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
@@ -765,13 +761,13 @@
 .iconQuestionType22 { background-image: url(images/iconQuestionType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconQuestionType16 { background-image: url(images/iconQuestionType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
-.iconQuotation32 { background-image: url(images/iconQuotation32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconQuotation22 { background-image: url(images/iconQuotation22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconQuotation16 { background-image: url(images/iconQuotation16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+.iconQuotation32 { background-image: url(images/iconClientQuotation32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconQuotation22 { background-image: url(images/iconClientQuotation32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconQuotation16 { background-image: url(images/iconClientQuotation32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
-.iconQuotationType32 { background-image: url(images/iconQuotationType32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconQuotationType22 { background-image: url(images/iconQuotationType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconQuotationType16 { background-image: url(images/iconQuotationType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+.iconQuotationType32 { background-image: url(images/iconClientQuotationType32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconQuotationType22 { background-image: url(images/iconClientQuotationType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconQuotationType16 { background-image: url(images/iconClientQuotationType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
 .iconRecipient32 { background-image: url(images/iconRecipient32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconRecipient22 { background-image: url(images/iconRecipient22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
@@ -874,9 +870,9 @@
 .iconTenderType22 { background-image: url(images/iconTenderType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconTenderType16 { background-image: url(images/iconTenderType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
-.iconTerm32 { background-image: url(images/iconTerm32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconTerm22 { background-image: url(images/iconTerm22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconTerm16 { background-image: url(images/iconTerm16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+.iconTerm32 { background-image: url(images/iconClientTerm32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconTerm22 { background-image: url(images/iconClientTerm32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconTerm16 { background-image: url(images/iconClientTerm32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
 .iconTestCase32 { background-image: url(images/iconTestCase32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconTestCase22 { background-image: url(images/iconTestCase22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
