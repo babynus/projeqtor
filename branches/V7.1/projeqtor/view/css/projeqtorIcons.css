@@ -799,9 +799,9 @@
 .iconRequirementType22 { background-image: url(images/iconRequirementType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconRequirementType16 { background-image: url(images/iconRequirementType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
-.iconResource32 { background-image: url(images/iconResource32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconResource22 { background-image: url(images/iconResource22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconResource16 { background-image: url(images/iconResource16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+.iconResource32 { background-image: url(images/iconResource32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconResource22 { background-image: url(images/iconResource22.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconResource16 { background-image: url(images/iconResource16.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
 .iconResourceTeam32 { background-image: url(images/iconResourceTeam.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconResourceTeam22 { background-image: url(images/iconResourceTeam.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
