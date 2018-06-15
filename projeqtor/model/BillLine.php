@@ -226,6 +226,12 @@ class BillLine extends SqlElement {
     
 // Fin Code Marc
     
+    //gautier #devisTender
+    if (property_exists($bill, 'initialAmount')){
+      $bill->initialAmount=$bill->initialAmount-$this->amount;
+      $bill->simpleSave();
+    }
+    
     return parent::delete();
   }
   
