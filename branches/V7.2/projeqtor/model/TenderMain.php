@@ -300,6 +300,7 @@ class TenderMain extends SqlElement {
       }
       $this->initialAmount=$amount;
     }
+    $this->initialFullAmount=$this->initialAmount*(1+$this->taxPct/100);
     $result = parent::save();
     return $result;
   }
