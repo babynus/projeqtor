@@ -231,8 +231,9 @@ class BillLine extends SqlElement {
 // Fin Code Marc
     
     //gautier #devisTender
-    if (property_exists($bill, 'initialAmount')){
+    if (property_exists($bill, 'initialAmount') and property_exists($bill, 'initialFullAmount') ){
       $bill->initialAmount=$bill->initialAmount-$this->amount;
+      $bill->initialFullAmount=$bill->initialAmount*(1+$bill->taxPct*0.01);
       $billToSave=true;
     }
     
