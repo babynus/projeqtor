@@ -211,7 +211,7 @@ class BillLine extends SqlElement {
             $ass->save();
           }
         }
-      }       
+      }   
     }
 //Debut Code Marc
     // Update Bill to get total of amount
@@ -225,13 +225,10 @@ class BillLine extends SqlElement {
     // Only save without calculate the amount
     
 // Fin Code Marc
-    
-    //gautier #devisTender
-    if (property_exists($bill, 'initialAmount')){
-      $bill->initialAmount=$bill->initialAmount-$this->amount;
-      $bill->simpleSave();
-    }
-    
+    // UPdate bill to update amount
+    $bill=new $this->refType($this->refId);
+    $bill->save();
+
     return parent::delete();
   }
   
