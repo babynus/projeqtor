@@ -34,7 +34,7 @@ class ProviderOrderMain extends SqlElement {
   public $id; 
   public $reference;
   public $name;
-  public $idProviderOderType;
+  public $idProviderOrderType;
   public $idProject;
   public $idUser;
   public $creationDate;
@@ -60,7 +60,7 @@ class ProviderOrderMain extends SqlElement {
   public $plannedFullAmount;
   public $paymentCondition;
   public $deliveryDelay;
-  public $_tab_3_1 = array('expected','done','validated','dateDelivery');
+  public $_tab_3_1 = array('expectedDate','doneDate','validatedDate','dateDelivery');
   public $deliveryExpectedDate;
   public $deliveryDoneDate;
   public $deliveryValitedDate;
@@ -87,7 +87,7 @@ class ProviderOrderMain extends SqlElement {
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="4%" ># ${id}</th>
     <th field="nameProject" width="10%" >${idProject}</th>
-    <th field="nameProviderOrderType" width="10%" >${type}</th>
+    <th field="nameProviderOrderType" width="10%" >${idProviderOrderType}</th>
     <th field="name" width="30%" >${name}</th>
     <th field="colorNameStatus" width="9%" formatter="colorNameFormatter">${idStatus}</th>
     <th field="nameResource" formatter="thumbName22" width="8%" >${responsible}</th>
