@@ -76,6 +76,9 @@ class TenderMain extends SqlElement {
   public $_lib_cancelled;
   public $result;
   
+  public $_BillLine=array();
+  public $_BillLine_colSpan="2";
+  
   public $_sec_evaluation;
   public $_spe_evaluation;
   public $evaluationValue;
@@ -86,8 +89,7 @@ class TenderMain extends SqlElement {
   public $_Attachment=array();
   public $_Note=array();
   
-  public $_BillLine=array();
-  public $_BillLine_colSpan="2";
+ 
 
   public $_nbColMax=3;  
   // Define the layout that will be used for lists
