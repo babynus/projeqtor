@@ -1,9 +1,13 @@
 -- ///////////////////////////////////////////////////////////
 -- // PROJECTOR                                             //
 -- //-------------------------------------------------------//
--- // Version : 7.1.0                                       //
--- // Date : 2018-04-23                                     //
+-- // Version : 7.2.0                                       //
+-- // Date : 2018-06-18                                     //
 -- ///////////////////////////////////////////////////////////
+
+-- ==================================================================
+-- Financial evolutions
+-- ==================================================================
 
 CREATE TABLE `${prefix}providerOrder` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
@@ -63,3 +67,20 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,190,8),
 (1,191,8);
+
+-- ==================================================================
+-- Global views
+-- ==================================================================
+
+INSERT INTO `${prefix}menu` (`id`,`name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
+(192,'menuGlobalView', 2, 'object', 95, 'Project', 0, 'Work');
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES 
+(1,192,1),
+(2,192,1),
+(3,192,1),
+(4,192,1);
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES 
+(1,192, 8),
+(2,192, 2),
+(3,192, 7),
+(4,192, 7);
