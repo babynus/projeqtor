@@ -1525,7 +1525,7 @@ ganttDetailScaleError: "Cambiar a una escala más pequeña <br/> (día o semana)
 getAll: "obtener todos",
 globalProjectTeam: "equipo del proyecto incluyendo los proyectos padres",
 globalProjectTeamAlert: "equipo del proyecto incluyendo los proyectos padres",
-GlobalView: "no item selected",
+GlobalView: "",
 greaterOrEqual: "MAYOR O IGUAL",
 greaterThan: "MAYOR QUE",
 Health: "Nivel de salud",
