@@ -239,6 +239,11 @@ Backup / Restore
    
    Backup   
 
+Manuel utilisateur
+==================
+
+ TODO (mise à jour de la doc utilisateur, traduction)
+
 Glossaire
 =========
 
