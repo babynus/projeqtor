@@ -672,7 +672,7 @@ $height = ((floor((count($listStatus)-0.1)/10))+1)  * 20;
   </thead>
   <script type="dojo/connect" event="onSelected" args="evt">
     if (gridReposition) {return;}
-    if (multiSelection) {updateSelectedCountMultiple();return;}
+    if (multiSelection) {updateSelectedCountMultiple();return;} 
 	  if ( dojo.byId('comboDetail') ) {
       rows=objectGrid.selection.getSelected();
       row=rows[0]; 
@@ -685,7 +685,11 @@ $height = ((floor((count($listStatus)-0.1)/10))+1)  * 20;
       rows=objectGrid.selection.getSelected();
       row=rows[0]; 
       var id = row.id;
-	  dojo.byId('objectId').value=id;
+	    dojo.byId('objectId').value=id;
+<?php if (get_class($obj)=='GlobalView') {?>
+      dojo.byId('objectId').value=row.objectId;
+      dojo.byId('objectClass').value=row.objectClass;
+<?php }?>
 	  //cleanContent("detailDiv");
       formChangeInProgress=false; 
       listClick();
