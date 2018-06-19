@@ -1525,7 +1525,7 @@ ganttDetailScaleError: "Basculer vers une échelle plus petite<br/>(jour ou sema
 getAll: "exporter tout",
 globalProjectTeam: "équipe projet avec projets parents",
 globalProjectTeamAlert: "équipe de projet globale",
-GlobalView: "no item selected",
+GlobalView: "",
 greaterOrEqual: "SUPERIEUR OU EGAL",
 greaterThan: "STRICTEMENT SUPERIEUR",
 Health: "Situation",
