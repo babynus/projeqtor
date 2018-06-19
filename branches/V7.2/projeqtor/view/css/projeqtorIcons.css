@@ -749,6 +749,14 @@
 .iconProviderType22 { background-image: url(images/iconProviderType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconProviderType16 { background-image: url(images/iconProviderType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
+.iconProviderOrder32 { background-image: url(images/iconProviderOrder32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconProviderOrder22 { background-image: url(images/iconProviderOrder32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconProviderOrder16 { background-image: url(images/iconProviderOrder32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
+.iconProviderOrderType32 { background-image: url(images/iconProviderOrderType32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconProviderOrderType22 { background-image: url(images/iconProviderOrderType32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconProviderOrderType16 { background-image: url(images/iconProviderOrderType32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
 .iconQuality32 { background-image: url(images/iconQuality32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconQuality22 { background-image: url(images/iconQuality22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconQuality16 { background-image: url(images/iconQuality16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
