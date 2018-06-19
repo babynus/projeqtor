@@ -50,11 +50,11 @@ CREATE TABLE `${prefix}providerOrder` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE INDEX providerOrderProject ON `${prefix}providerCommand` (idProject);
-CREATE INDEX providerOrderUser ON `${prefix}providerCommand` (idUser);
-CREATE INDEX providerOrderResource ON `${prefix}providerCommand` (idResource);
-CREATE INDEX providerOrderStatus ON `${prefix}providerCommand` (idStatus);
-CREATE INDEX providerOrderType ON `${prefix}providerCommand` (idProviderOrderType);
+CREATE INDEX providerOrderProject ON `${prefix}providerOrder` (idProject);
+CREATE INDEX providerOrderUser ON `${prefix}providerOrder` (idUser);
+CREATE INDEX providerOrderResource ON `${prefix}providerOrder` (idResource);
+CREATE INDEX providerOrderStatus ON `${prefix}providerOrder` (idStatus);
+CREATE INDEX providerOrderType ON `${prefix}providerOrder` (idProviderOrderType);
 
 INSERT INTO `${prefix}menu` (`id`,`name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
 (190,'menuProviderOrderType', 79, 'object', 826, 'Project', 0, 'Type '),
