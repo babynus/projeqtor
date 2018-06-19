@@ -2227,7 +2227,7 @@ else if ($col=='idEmailTemplate') {
         }
       } else if (strpos($obj->getFieldAttributes($col), 'display')!==false) {
         echo '<div ';
-        echo ' class="display generalColClass input'.$col.'Class" style="'.$specificStyle.'"';
+        echo ' class="display generalColClass input'.$col.'Class" style="'.$specificStyle.'width: '.$fieldWidth.'px;"';
         echo ' >';
         if (strpos($obj->getFieldAttributes($col), 'html')!==false) {
           echo $val;
