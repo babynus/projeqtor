@@ -247,7 +247,7 @@ CkEditorInline: "CK Editor - &#34;вбудований&#34; редагувач (
 clickToEditRichText: "клацніть на полі&#44; щоб долучитись до повного редактора ",
 clickToView: "натисніть&#44; щоб подивитися",
 Client: "Замовник",
-clientsForVersion: "customers impacted by tickets",
+clientsForVersion: "clients impacted by tickets",
 ClientType: "тип Замовників",
 close: "закрити",
 closeAlerts: "закрити застереження (alerts)",
