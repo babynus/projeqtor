@@ -123,6 +123,7 @@ if ($displayWidthList<1400) {
     }
   }
 }
+$iconClassName=((SqlElement::is_subclass_of($objectClass, 'PlgCustomList'))?'ListOfValues':$objectClass);
 ?>
 <div dojoType="dojo.data.ItemFileReadStore" id="objectStore" jsId="objectStore" clearOnClose="true"
   url="../tool/jsonQuery.php?objectClass=<?php echo $objectClass;?><?php echo ($comboDetail)?'&comboDetail=true':'';?><?php echo ($showIdle)?'&idle=true':'';?>" >
@@ -138,8 +139,8 @@ if ($displayWidthList<1400) {
      style="display:none; height:100%; width: 100%; position: absolute;">
     <table >
       <tr height="100%" style="vertical-align: middle;">
-        <td width="50px" align="center">
-         <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo ((SqlElement::is_subclass_of($objectClass, 'PlgCustomList'))?'ListOfValues':$objectClass);?>32" style="margin-left:9px;width:32px;height:32px" /></div>    
+        <td width="50px" align="center">        
+         <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" style="margin-left:9px;width:32px;height:32px" /></div>    
         </td>
         <td><span class="title" ><?php echo i18n("menu" . $objectClass);?></span></td>
         <td style="text-align:right;" width="200px">
@@ -182,7 +183,7 @@ if ($displayWidthList<1400) {
   <tr >
     <td width="50px" align="center">
        <div style="position:absolute;left:0px;width:43px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>
-       <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo ((SqlElement::is_subclass_of($objectClass, 'PlgCustomList'))?'ListOfValues':$objectClass);?>32" style="margin-left:9px;width:32px;height:32px" /></div>
+       <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" style="margin-left:9px;width:32px;height:32px" /></div>
     </td>
     <td><span class="title"><?php echo i18n("menu" . $objectClass);?></span></td>
     <td>   
