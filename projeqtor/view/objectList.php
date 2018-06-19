@@ -190,9 +190,10 @@ $iconClassName=((SqlElement::is_subclass_of($objectClass, 'PlgCustomList'))?'Lis
       <form dojoType="dijit.form.Form" id="listForm" action="" method="" >
         <script type="dojo/method" event="onSubmit" >
           return false;        
-        </script>
-        <input type="hidden" id="objectClass" name="objectClass" value="<?php echo $objectClass;?>" /> 
+        </script>  
+        <input type="hidden" id="objectClass" name="objectClass" value="<?php echo $objectClass;?>" />  
         <input type="hidden" id="objectId" name="objectId" value="<?php if (isset($_REQUEST['objectId']))  { echo htmlEncode($_REQUEST['objectId']);}?>" />
+        <input type="hidden" id="objectClassList" name="objectClassList" value="<?php echo $objectClass;?>" />
         <table style="width: 100%; height: 27px;">
           <tr>
           <?php if ( ! $hideIdSearch ) { ?>
