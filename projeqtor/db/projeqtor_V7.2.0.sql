@@ -84,3 +84,11 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (2,192, 2),
 (3,192, 7),
 (4,192, 7);
+
+CREATE OR REPLACE VIEW `${prefix}globalview` (id, objectClass, objectId, idProject, idType,  name,  idStatus,  idResource,  idUser,  description, result, reference, handled, done, idle, cancelled ) AS 
+SELECT concat('Project',id), 'Project', id, id, idProjectType, name, idStatus, idResource, idUser, description, null, null, handled, done, idle, cancelled from `{prefix}project`
+UNION SELECT concat('Ticket',id), 'Ticket', id, idProject, idTicketType, name, idStatus, idResource, idUser, description, result, reference, handled, done, idle, cancelled from `{prefix}ticket`
+UNION SELECT concat('Activity',id), 'Activity', id, idProject, idActivityType, name, idStatus, idResource, idUser, description, result, reference, handled, done, idle, cancelled from `{prefix}activity`;
+
+
+
