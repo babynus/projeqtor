@@ -3471,6 +3471,42 @@ function updateCommandTotal() {
 
   cancelRecursiveChange_OnGoingChange = false;
 }
+//gautier
+function updateFinancialTotal() {
+  if (cancelRecursiveChange_OnGoingChange)
+    return;
+  cancelRecursiveChange_OnGoingChange = true;
+  // Retrieve values used for calculation
+  var untaxedAmount = dijit.byId("untaxedAmount").get("value");
+  if (!untaxedAmount)
+    untaxedAmount = 0;
+  var taxPct = dijit.byId("taxPct").get("value");
+  if (!taxPct)
+    taxPct = 0;
+    
+  var discount=dijit.byId("discountAmount").get("value");
+  if (!isNaN(discount)) {
+    var rate=Math.round(100*discount)/untaxedAmount;
+    dijit.byId("discountRate").set("value",rate);
+  }
+  if (!discount){
+    discount=0;
+  }
+  // Calculated values
+  var taxAmount = Math.round(untaxedAmount * taxPct) / 100;
+  var fullAmount = taxAmount + untaxedAmount;
+  var totalUntaxedAmount = untaxedAmount - discount;
+  var totalTaxAmount = Math.round(totalUntaxedAmount * taxPct) / 100;
+  var totalFullAmount = totalUntaxedAmount + totalTaxAmount;
+  // Set values to fields
+  dijit.byId("taxAmount").set('value', taxAmount);
+  dijit.byId("fullAmount").set('value', fullAmount);
+  dijit.byId("totalUntaxedAmount").set('value', totalUntaxedAmount);
+  dijit.byId("totalTaxAmount").set('value', totalTaxAmount);
+  dijit.byId("totalFullAmount").set('value', totalFullAmount);
+  cancelRecursiveChange_OnGoingChange = false;
+}
+//end
 function updateBillTotal() { // Also used for Qutation !!!
   if (cancelRecursiveChange_OnGoingChange)
     return;
