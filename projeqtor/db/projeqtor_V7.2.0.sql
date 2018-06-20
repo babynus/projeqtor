@@ -68,6 +68,17 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (1,190,8),
 (1,191,8);
 
+
+ALTER TABLE `${prefix}tender`
+CHANGE `initialAmount` `untaxedAmount` DECIMAL(11,2) UNSIGNED NULL DEFAULT NULL,
+CHANGE `initialTaxAmount` `taxAmount` DECIMAL(11,2) UNSIGNED NULL DEFAULT NULL,
+CHANGE `initialFullAmount` `fullAmount` DECIMAL(11,2) UNSIGNED NULL DEFAULT NULL,
+CHANGE `plannedAmount` `totalUntaxedAmount` DECIMAL(11,2) UNSIGNED NULL DEFAULT NULL,
+CHANGE `plannedTaxAmount` `totalTaxAmount` DECIMAL(11,2) UNSIGNED NULL DEFAULT NULL,
+CHANGE `plannedFullAmount` `totalFullAmount` DECIMAL(11,2) UNSIGNED NULL DEFAULT NULL,
+ADD `discountAmount` DECIMAL(11,2),
+ADD `discountRate`   DECIMAL(5,2);
+
 -- ==================================================================
 -- Global views
 -- ==================================================================
