@@ -5413,26 +5413,6 @@ function replaceAffectationChangeResource() {
 // = Misceallanous
 // =============================================================================
 
-// var manualWindow=null;
-function showHelpOld() {
-  var objectClass=dojo.byId('objectClass');
-  var objectClassManual=dojo.byId('objectClassManual');
-  var section='';
-  if (objectClassManual) {
-    section=objectClassManual.value;
-  } else if (objectClass) {
-    section=objectClass.value;
-  }
-  var url='../manual/manual.php?section=' + section;
-  var name="Manual";
-  var attributes='toolbar=no, titlebar=no, menubar=no, status=no, scrollbars=yes, directories=no, location=no, resizable=yes,'
-      + 'height=650, width=1024, top=0, left=0';
-  manualWindow=window.open(url, name, attributes);
-  manualWindow.focus();
-  // manualWindow.window.focus();
-
-  return false;
-}
 var manualWindow=null;
 var helpTimer=false;
 function showHelp(link) {
