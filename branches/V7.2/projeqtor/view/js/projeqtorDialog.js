@@ -4105,7 +4105,7 @@ function selectFilterContinue() {
     if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Planning' && ! top.dijit.byId('dialogDetail').open) {
       refreshJsonPlanning();
     } else {
-      doc.refreshJsonList(dojo.byId('objectClass').value);
+      doc.refreshJsonList(objectClass);
     }
   }
   dijit.byId("dialogFilter").hide();
