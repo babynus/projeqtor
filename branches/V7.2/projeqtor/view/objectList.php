@@ -258,7 +258,6 @@ $iconClassName=((SqlElement::is_subclass_of($objectClass, 'PlgCustomList'))?'Lis
   							    style="position: absolute; top: 50px; right: 40%">   
                     <script type="dojo/connect" event="onShow" args="evt">
                       oldSelectedItems=dijit.byId('globalViewSelectItems').get('value');
-                      console.log(oldSelectedItems);
                     </script>                 
                     <div style="text-align: center;position: relative;"> 
                       <button title="" dojoType="dijit.form.Button" 

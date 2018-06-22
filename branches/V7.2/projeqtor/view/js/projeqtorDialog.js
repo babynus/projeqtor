@@ -6869,7 +6869,6 @@ function recalculateColumnSelectorName() {
 // =========================================================
 var oldSelectedItems=null;
 function globalViewSelectItems(value) {
-  console.log("new value");console.log(value);
   if (!oldSelectedItems || oldSelectedItems==value) return;
   if (oldSelectedItems.indexOf(" ")>=0 && value.length>1 ) {
     value[0]=null;
