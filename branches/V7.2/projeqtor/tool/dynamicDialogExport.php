@@ -224,7 +224,7 @@ $htmlresult.="<br/>";
   </table>
 <table style="width: 100%;">
   <tr>
-  <?php  echo $htmlresult; debugLog($htmlresult);?>
+  <?php  echo $htmlresult;?>
   </tr>
 </table>
 <div style="height:10px;"></div>    
