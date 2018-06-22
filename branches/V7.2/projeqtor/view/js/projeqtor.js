@@ -2167,6 +2167,9 @@ function selectRowById(gridName, id, tryCount) {
   if (dojo.isIE && parseInt(dojo.isIE, 10) <= '8') {
     return;
   }
+  if (dojo.byId('objectClassList') && dojo.byId('objectClassList').value=='GlobalView' && dojo.byId('objectClass')) {
+    id=dojo.byId('objectClass').value+id;
+  }
   var nbRow = grid.rowCount;
   gridReposition = true;
   var j = -1;

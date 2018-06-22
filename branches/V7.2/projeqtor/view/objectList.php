@@ -581,6 +581,39 @@ $iconClassName=((SqlElement::is_subclass_of($objectClass, 'PlgCustomList'))?'Lis
               </button>              
             </td>
             <td width="36px">
+              <?php if ($objectClass=='GlobalView') {?>
+              <div dojoType="dijit.form.DropDownButton"
+                             class="comboButton"   
+                             id="planningNewItem" jsId="planningNewItem" name="planningNewItem" 
+                             showlabel="false" class="" iconClass="dijitButtonIcon dijitButtonIconNew"
+                             title="<?php echo i18n('comboNewButton');?>">
+                          <span>title</span>
+                          <div dojoType="dijit.TooltipDialog" class="white" style="width:200px;">   
+                            <div style="font-weight:bold; height:25px;text-align:center">
+                            <?php echo i18n('comboNewButton');?>
+                            </div>
+                            <?php $arrayItems=GlobalView::getGlobalizables();
+                            foreach($arrayItems as $item=>$itemName) {
+                              $canCreate=securityGetAccessRightYesNo('menu' . $item,'create');
+                              if ($canCreate=='YES') {
+                                if (! securityCheckDisplayMenu(null,$item) ) {
+                                  $canCreate='NO';
+                                }
+                              }
+                              if ($canCreate=='YES') {?>
+                              <div style="vertical-align:top;cursor:pointer;" class="dijitTreeRow"
+                               onClick="addNewItem('<?php echo $item;?>');" >
+                                <table width:"100%"><tr style="height:22px" >
+                                <td style="vertical-align:top; width: 30px;padding-left:5px"><?php echo formatIcon($item, 22, null, false);;?></td>    
+                                <td style="vertical-align:top;padding-top:2px"><?php echo i18n($item)?></td>
+                                </tr></table>   
+                              </div>
+                              <div style="height:5px;"></div>
+                              <?php } 
+                              }?>
+                          </div>
+                        </div>
+              <?php } else {?>
               <button id="newButtonList" dojoType="dijit.form.Button" showlabel="false"
                 title="<?php echo i18n('buttonNew', array(i18n($_REQUEST['objectClass'])));?>"
                 iconClass="dijitButtonIcon dijitButtonIconNew" class="detailButton">
@@ -600,6 +633,7 @@ $iconClassName=((SqlElement::is_subclass_of($objectClass, 'PlgCustomList'))?'Lis
 	                }
                 </script>
               </button>
+              <?php }?>
             </td>
 <?php }?>   
       <td width="36px">
