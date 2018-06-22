@@ -234,6 +234,8 @@ class GlobalView extends SqlElement {
       if ($itemsToDisplay and $itemsToDisplay!=' ' and !in_array($class,$itemsToDisplayArray)) {
         continue;
       }
+      $clsObj=new $class();
+      $table=$clsObj->getDatabaseTableName();
       $convert=self::$_globalizables[$class];
       if ($query!='(') $query.=' UNION ';
       $query.="SELECT concat('$class',id) as id";
@@ -247,8 +249,18 @@ class GlobalView extends SqlElement {
         else $query.=$fld;
         $query.=" as $fld";
       }
-      $clsObj=new $class();
-      $query.=" FROM ".$clsObj->getDatabaseTableName();
+      $query.=" FROM ".$table;
+      // Add control rights
+      // $accessRightRead=securityGetAccessRight($obj->getMenuClass(), 'read');  
+      // if ($objectClass=='Project' and $accessRightRead!='ALL') {
+      //For project : $queryWhere.=  '(' . $table . ".id in " . transformListIntoInClause(getSessionUser()->getVisibleProjects(! $showIdle)) ;
+      //              $queryWhere.= " or $table.codeType='TMP' ";
+      $clause=getAccesRestrictionClause($class,$table, false);
+      if ($class=='Project') {
+         $query.=" WHERE (".$clause." or ".$table.".codeType='TMP' )"; // Templates projects are always visible in projects list
+      } else {
+        $query.=" WHERE ".$clause;
+      }
     }
     $query.=')';
     return $query;
@@ -257,7 +269,9 @@ class GlobalView extends SqlElement {
   public static function getGlobalizables() {
     $result=array();
     foreach (self::$_globalizables as $key=>$val) {
-      $result[i18n($key)]=$key;
+      if (securityCheckDisplayMenu(null,$key)) {
+        $result[i18n($key)]=$key;
+      }
     }
     ksort($result);
     $result=array_flip($result);
