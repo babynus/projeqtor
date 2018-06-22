@@ -41,7 +41,7 @@ class GlobalView extends SqlElement {
   public $idProject;
   public $idUser;
   public $description;
-  public $_sec_result;
+  public $_sec_treatment;
   public $idStatus;
   public $idResource;
   public $result;
@@ -50,13 +50,10 @@ class GlobalView extends SqlElement {
   public $idle;
   public $cancelled;
   public $_lib_cancelled;
-  //public $_sec_linkMeeting;
-  //public $_Link_Meeting=array();
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
   public $_Note=array();
-
   public $_nbColMax=3;
   
   // Define the layout that will be used for lists

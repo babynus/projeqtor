@@ -741,8 +741,10 @@ function loadContent(page, destination, formName, isResultMessage,
               }
               if (dojo.byId('objectClassManual') && dojo.byId('objectClassManual').value=='Planning') {
                 refreshJsonPlanning();
-              } else {
+              } else if (dojo.byId('objectClassList')) {
                 refreshJsonList(dojo.byId('objectClassList').value);
+              } else {
+                refreshJsonList(dojo.byId('objectClass').value);
               }
             }
           }
@@ -2312,8 +2314,6 @@ function setSelectedProject(idProject, nameProject, selectionField) {
           } else {
             loadContent("planningList.php", "listDiv", 'listForm');
           }
-        } else if (dijit.byId("listForm") && dojo.byId('objectClassList') && dojo.byId('listShowIdle')) {
-          refreshJsonList(dojo.byId('objectClassList').value);
         } else if (dijit.byId("listForm") && dojo.byId('objectClassList') && dojo.byId('listShowIdle')) {
           refreshJsonList(dojo.byId('objectClassList').value);
         } else if (dijit.byId("listForm") && dojo.byId('objectClass') && dojo.byId('listShowIdle')) {
