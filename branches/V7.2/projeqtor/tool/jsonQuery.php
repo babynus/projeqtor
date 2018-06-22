@@ -235,7 +235,7 @@
     } else {
       $clause=getAccesRestrictionClause($objectClass,$table, $showIdleProjects);
       //gautier #1700
-      if (trim($clause) and $objectClass!="Work") {
+      if (trim($clause) and $objectClass!="Work" and $objectClass!='GlobalView') {
         $queryWhere.= ($queryWhere=='')?'(':' and (';
         $queryWhere.= $clause;
         if ($objectClass=='Project') {
@@ -591,8 +591,7 @@
     		while ($line = Sql::fetchLine($result)) {
     		  if ($first) {
 	    			foreach ($line as $id => $val) {
-	    			  if ($objectClass=='GlobalView' and $id=='id') continue;
-	    			     
+	    			  if ($objectClass=='GlobalView' and $id=='id') continue;   
 	    				$colId=$id;
 	    				if (Sql::isPgsql() and isset($arrayFields[$id])) {
 	    					$colId=$arrayFields[$id];
@@ -636,8 +635,8 @@
 	          echo "\r\n";
     			}
     			$refType=null;
-    			foreach ($line as $id => $val) 
-    			  if ($objectClass=='GlobalView' and $id=='id') continue;{
+    			foreach ($line as $id => $val) {
+    			  if ($objectClass=='GlobalView' and $id=='id') continue;
     			  if ($id=='refType') $refType=$val;
     				$foreign=false;
     				if (substr($id, 0,2)=='id' and strlen($id)>2) {
