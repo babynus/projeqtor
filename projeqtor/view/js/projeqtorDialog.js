@@ -6863,6 +6863,30 @@ function recalculateColumnSelectorName() {
 }
 
 // =========================================================
+// Items selector
+// =========================================================
+var oldSelectedItems=null;
+function globalViewSelectItems(value) {
+  console.log("new value");console.log(value);
+  if (!oldSelectedItems || oldSelectedItems==value) return;
+  if (oldSelectedItems.indexOf(" ")>=0 && value.length>1 ) {
+    value[0]=null;
+    oldSelectedItems=value;
+    dijit.byId("globalViewSelectItems").set("value",value);
+  } else if (value.indexOf(" ")>=0 && oldSelectedItems.indexOf(" ")===-1) {
+    value=[" "];
+    oldSelectedItems=value;
+    dijit.byId("globalViewSelectItems").set("value",value);
+  }
+  var finish=function() {
+    refreshJsonList("GlobalView");
+  };
+  if (value.length==0) value='none';
+  saveDataToSession('globalViewSelectedItems', value, true, finish);
+  oldSelectedItems=value;
+}
+
+// =========================================================
 // Other
 // =========================================================
 function showMailOptions() {

@@ -51,6 +51,11 @@ function colorNameFormatter($value,$idTicket=-1) {
     return ''; 
   }
 }
+function classNameFormatter($value) {
+  $classId=$value;
+  $className=i18n($value);
+  return '<div><table><tr><td><div class="icon'.$classId.'16 icon'.$classId.' iconSize16"></div></td><td>&nbsp;</td><td>'.$className.'</td></tr></table></div>';
+}
 function colorTranslateNameFormatter($value) {
 	global $print;
 	if ($value) {
