@@ -3472,11 +3472,17 @@ function updateFinancialTotal() {
   var taxPct = dijit.byId("taxPct").get("value");
   if (!taxPct)
     taxPct = 0;
-    
   var discount=dijit.byId("discountAmount").get("value");
+  var rate=dijit.byId("discountRate").get("value");
   if (!isNaN(discount)) {
-    var rate=Math.round(100*discount)/untaxedAmount;
-    dijit.byId("discountRate").set("value",rate);
+    var rateNew=Math.round(100*discount)/untaxedAmount;
+    if (!isNaN(rate)) {
+      if(Math.round(rate)!= Math.round(rateNew)){
+        dijit.byId("discountRate").set("value",rateNew);
+      }
+    }else{
+      dijit.byId("discountRate").set("value",rateNew);
+    }
   }
   if (!discount){
     discount=0;
