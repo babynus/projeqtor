@@ -246,10 +246,45 @@ $iconClassName=((SqlElement::is_subclass_of($objectClass, 'PlgCustomList'))?'Lis
               <?php if ( $objectClass=='GlobalView') { ?>
               <td style="vertical-align: middle; text-align:right;" width="5px">
                  <span class="nobr">&nbsp;&nbsp;&nbsp;
-                <?php echo i18n("colClass");?>
+                <?php echo i18n("listTodayItems");?>&nbsp;
               </td>
               <td width="5px">
-                <?php GlobalView::drawGlobalizableList();?>
+                <div dojoType="dijit.form.DropDownButton"							    
+  							  id="listItemsSelector" jsId="listItemsSelector" name="listItemsSelector" 
+  							  showlabel="false" class="comboButton" iconClass="dijitButtonIcon iconGlobalView32" 
+  							  title="<?php echo i18n('itemSelector');?>">
+                  <span>title</span>
+  							  <div dojoType="dijit.TooltipDialog" class="white" id="listItemsSelectorDialog"
+  							    style="position: absolute; top: 50px; right: 40%">   
+                    <script type="dojo/connect" event="onShow" args="evt">
+                      oldSelectedItems=dijit.byId('globalViewSelectItems').get('value');
+                      console.log(oldSelectedItems);
+                    </script>                 
+                    <div style="text-align: center;position: relative;"> 
+                      <button title="" dojoType="dijit.form.Button" 
+                        class="mediumTextButton" id="" name="" showLabel="true"><?php echo i18n('buttonOK');?>
+                        <script type="dojo/connect" event="onClick" args="evt">
+                          dijit.byId('listItemsSelector').closeDropDown();
+                        </script>
+                      </button>
+                      <div style="position: absolute;top: 34px; right:42px;"></div>
+                    </div>   
+                    <div style="height:5px;border-bottom:1px solid #AAAAAA"></div>    
+  							    <div>                       
+  							      <?php GlobalView::drawGlobalizableList();?>
+  							    </div>
+                    <div style="height:5px;border-top:1px solid #AAAAAA"></div>    
+                    <div style="text-align: center;position: relative;">
+                      <button title="" dojoType="dijit.form.Button" 
+                         class="mediumTextButton" id="" name="" showLabel="true"><?php echo i18n('buttonOK');?>
+                        <script type="dojo/connect" event="onClick" args="evt">
+                          dijit.byId('listItemsSelector').closeDropDown();
+                        </script>
+                      </button>
+                      <div style="position: absolute;bottom: 33px; right:42px;" ></div>
+                    </div>   
+  							  </div>
+  							</div>                   
               </td>
               <?php }?>
              <?php  if (sessionValueExists('project')){
