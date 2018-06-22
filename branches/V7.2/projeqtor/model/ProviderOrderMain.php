@@ -217,7 +217,7 @@ class ProviderOrderMain extends SqlElement {
     $result=parent::save();
     
     $billLine=new BillLine();
-    $crit = array("refType"=> "Tender", "refId"=>$this->id);
+    $crit = array("refType"=> "ProviderOrder", "refId"=>$this->id);
     $billLineList = $billLine->getSqlElementsFromCriteria($crit,false);
     if (count($billLineList)>0) {
       $amount=0;
@@ -228,10 +228,31 @@ class ProviderOrderMain extends SqlElement {
     }
     $this->fullAmount=$this->untaxedAmount*(1+$this->taxPct/100);
     $this->taxAmount=$this->fullAmount-$this->untaxedAmount;
+    $this->totalUntaxedAmount=$this->untaxedAmount-$this->discountAmount;
+    $this->totalFullAmount=$this->totalUntaxedAmount*(1+$this->taxPct/100);
+    $this->totalTaxAmount=$this->totalFullAmount-$this->totalUntaxedAmount;
+    
     parent::simpleSave();
     return $result;
   }
   
+   public function control(){
+    $result="";
+    
+    $defaultControl=parent::control();
+    if ($defaultControl!='OK') {
+      $result.=$defaultControl;
+    }
+    if ($result=="") {
+      $result='OK';
+    }
+    return $result;
+  }
+  
+  public function copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = NULL, $toActivity = NULL, $copyToWithResult = false,$copyToWithVersionProjects=false) {
+
+    return parent::copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks);
+  }
   // ============================================================================**********
   // GET VALIDATION SCRIPT
   // ============================================================================**********
