@@ -4303,8 +4303,10 @@ function selectDynamicFilterContinue() {
 	      false, 'returnFromFilter', false);
 	  if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Planning' && ! top.dijit.byId('dialogDetail').open) {
       refreshJsonPlanning();
-    } else {
-	    doc.refreshJsonList(dojo.byId('objectClass').value);
+	  } else if (doc.dojo.byId('objectClassList')) {
+      doc.refreshJsonList(doc.dojo.byId('objectClassList').value);
+	  } else {
+	    doc.refreshJsonList(doc.dojo.byId('objectClass').value);
     }
 	  dijit.byId("dialogDynamicFilter").hide();
 }
@@ -7581,8 +7583,7 @@ function checkExportColumns(scope) {
   if (scope == 'aslist') {
     showWait();
     dojo.xhrGet({
-      url : "../tool/getColumnsList.php?objectClass="
-          + (dojo.byId('objectClassList'))?dojo.byId('objectClassList').value:dojo.byId('objectClass').value,
+      url : "../tool/getColumnsList.php?objectClass="+((dojo.byId('objectClassList'))?dojo.byId('objectClassList').value:dojo.byId('objectClass').value),
       load : function(data) {
         var list=";" + data;
         var val=dojo.byId('column0').value;
