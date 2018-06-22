@@ -251,7 +251,7 @@ $iconClassName=((SqlElement::is_subclass_of($objectClass, 'PlgCustomList'))?'Lis
               <td width="5px">
                 <div dojoType="dijit.form.DropDownButton"							    
   							  id="listItemsSelector" jsId="listItemsSelector" name="listItemsSelector" 
-  							  showlabel="false" class="comboButton" iconClass="dijitButtonIcon iconGlobalView32" 
+  							  showlabel="false" class="comboButton" iconClass="iconGlobalView iconSize22" 
   							  title="<?php echo i18n('itemSelector');?>">
                   <span>title</span>
   							  <div dojoType="dijit.TooltipDialog" class="white" id="listItemsSelectorDialog"

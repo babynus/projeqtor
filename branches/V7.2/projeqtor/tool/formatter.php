@@ -52,9 +52,11 @@ function colorNameFormatter($value,$idTicket=-1) {
   }
 }
 function classNameFormatter($value) {
+  global $outMode;
   $classId=$value;
   $className=i18n($value);
-  return '<div><table><tr><td><div class="icon'.$classId.'16 icon'.$classId.' iconSize16"></div></td><td>&nbsp;</td><td>'.$className.'</td></tr></table></div>';
+  if ($outMode=='pdf') return '<div><table><tr><td><img src="../view/css/customIcons/grey/icon'.$value.'.png" style="width:16px;height:16px"/>&nbsp;</td><td>'.$className.'</td></tr></table></div>';
+  else return '<div><table><tr><td><div class="icon'.$classId.'16 icon'.$classId.' iconSize16">&nbsp;</div></td><td>&nbsp;</td><td>'.$className.'</td></tr></table></div>';
 }
 function colorTranslateNameFormatter($value) {
 	global $print;

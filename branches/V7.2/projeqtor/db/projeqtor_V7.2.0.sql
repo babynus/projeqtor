@@ -149,10 +149,32 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (3,192, 7),
 (4,192, 7);
 
-CREATE OR REPLACE VIEW `${prefix}globalview` (id, objectClass, objectId, idProject, idType,  name,  idStatus,  idResource,  idUser,  description, result, reference, handled, done, idle, cancelled ) AS 
-SELECT concat('Project',id), 'Project', id, id, idProjectType, name, idStatus, idResource, idUser, description, null, null, handled, done, idle, cancelled from `{prefix}project`
-UNION SELECT concat('Ticket',id), 'Ticket', id, idProject, idTicketType, name, idStatus, idResource, idUser, description, result, reference, handled, done, idle, cancelled from `{prefix}ticket`
-UNION SELECT concat('Activity',id), 'Activity', id, idProject, idActivityType, name, idStatus, idResource, idUser, description, result, reference, handled, done, idle, cancelled from `{prefix}activity`;
+-- Table Global View : created only to get correct formatting for fields on list : this table will always be empty
+CREATE TABLE `${prefix}globalview` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `objectClass` VARCHAR(100) DEFAULT NULL,
+  `objectId` int(12) unsigned,
+  `idProject` int(12) unsigned DEFAULT NULL,
+  `idType` int(12) unsigned DEFAULT NULL,
+  `name` varchar(200) DEFAULT NULL,
+  `idStatus` int(12) unsigned DEFAULT NULL,
+  `idResource` int(12) unsigned DEFAULT NULL,
+  `idUser` int(12) unsigned DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `result` mediumtext DEFAULT NULL,
+  `reference` varchar(100) DEFAULT NULL,
+  `handled` int(1) unsigned DEFAULT '0',
+  `done` int(1) unsigned DEFAULT '0',
+  `idle` int(1) unsigned DEFAULT '0',
+  `cancelled` int(1) unsigned DEFAULT '0',
+  `handledDate` date DEFAULT NULL,
+  `doneDate` date DEFAULT NULL,
+  `idleDate` date DEFAULT NULL,
+  `validateDate` date DEFAULT NULL,
+  `plannedDate`  date DEFAULT NULL,
+  `realDate`  date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 UPDATE `${prefix}menu`set menuClass=REPLACE(menuClass,'Meeting','Review') WHERE menuClass LIKE '%Meeting%';
 
