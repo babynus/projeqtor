@@ -154,5 +154,5 @@ SELECT concat('Project',id), 'Project', id, id, idProjectType, name, idStatus, i
 UNION SELECT concat('Ticket',id), 'Ticket', id, idProject, idTicketType, name, idStatus, idResource, idUser, description, result, reference, handled, done, idle, cancelled from `{prefix}ticket`
 UNION SELECT concat('Activity',id), 'Activity', id, idProject, idActivityType, name, idStatus, idResource, idUser, description, result, reference, handled, done, idle, cancelled from `{prefix}activity`;
 
-
+UPDATE `${prefix}menu`set menuClass=REPLACE(menuClass,'Meeting','Review') WHERE menuClass LIKE '%Meeting%';
 
