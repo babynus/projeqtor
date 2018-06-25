@@ -170,9 +170,9 @@ CREATE TABLE `${prefix}globalview` (
   `handledDate` date DEFAULT NULL,
   `doneDate` date DEFAULT NULL,
   `idleDate` date DEFAULT NULL,
-  `validateDate` date DEFAULT NULL,
-  `plannedDate`  date DEFAULT NULL,
-  `realDate`  date DEFAULT NULL,
+  `validatedEndDate` date DEFAULT NULL,
+  `plannedEndDate`  date DEFAULT NULL,
+  `realEndDate`  date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
