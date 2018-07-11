@@ -1882,7 +1882,7 @@ class PlanningElement extends SqlElement {
           if ($correct) {
             $prj->sortOrder=$pe->wbsSortable;
             $res=$prj->save();
-            debugLog("FIX PROJECT ORDER FOR PROJECT #$pe->refId : $res");
+            debugLog("FIX sortOrder on Project #$pe->refId : $res");
             if (getLastOperationStatus($res)=='OK'  or getLastOperationStatus($res)=='NO_CHANGE') displayOK(i18n("checkFixed"),true);
             else displayError($res,true);
           }
@@ -1899,7 +1899,7 @@ class PlanningElement extends SqlElement {
       displayOK(i18n("checkNoError"));
     }
   }
-  private function fixOrder($issue,&$peList,$idx) {
+  private function fixOrder($issue,$peList,$idx) {
     $actual=new PlanningElement($this->id);
     if ($this->wbsSortable!=$actual->wbsSortable) {
       displayOK(i18n("checkFixed"),true);
@@ -1909,16 +1909,18 @@ class PlanningElement extends SqlElement {
     $peNext=null;
     $pePrec=null;
     if ($issue=="duplicate" or $issue=="parent") { // Duplicate or inconsistent with Parent => just get a good one (order is sure incorrect)
-      $action="recalcultate";
+      $action="recalculate";
     } else if ($issue=="first") {
-      $action="recalcultateLevel";
+      $action="recalculateLevel";
     } else if ($issue=="order") {
-      $action="recalcultate";
+      $action="recalculate";
       $cur=$idx-1;
-      while ($action=="recalcultate" and $cur>0) {
+      while ($action=="recalculate" and $cur>=0) {
         $pePrec=$peList[$cur];
-        if (substr($this->wbsSortable,0,strlen($this->wbsSortable)-4)!=substr($pePrec->wbsSortable,0,strlen($this->wbsSortable)-4)) {
-          $cur=0;
+        debugLog(substr($this->wbsSortable,0,strlen($this->wbsSortable)-3).' != '.substr($pePrec->wbsSortable,0,strlen($this->wbsSortable)-3).' ?');
+        if (substr($this->wbsSortable,0,strlen($this->wbsSortable)-3)!=substr($pePrec->wbsSortable,0,strlen($this->wbsSortable)-3)) {
+          debugLog(" ok, break");
+          $cur=-1;
           break;
         }
         if (strlen($this->wbsSortable)==strlen($pePrec->wbsSortable)) {
@@ -1929,26 +1931,26 @@ class PlanningElement extends SqlElement {
     } else {
       displayError(i18n("checkCannotFix"),true);
     }
-    if ($action=="recalcultate") {
+    if ($action=="recalculate") {
       $this->wbs=null;
       $this->wbsSortable=null;
       $res=$this->save();
-      debugLog("FIX recalcultate FOR $this->refType #$this->refId : $res");
+      debugLog("FIX $action for issue $issue on $this->refType #$this->refId : $res");
       if (getLastOperationStatus($res)=='OK' or getLastOperationStatus($res)=='NO_CHANGE') displayOK(i18n("checkFixed"),true);
       else displayError($res,true);
     } else if ($action=='moveFromPrec' and $pePrec) {
       $res=$this->moveTo($pePrec->id,'after');
-      debugLog("FIX moveFromPrec FOR $this->refType #$this->refId : $res");
+      debugLog("FIX $action for issue $issue on $this->refType #$this->refId : $res");
       if (getLastOperationStatus($res)=='OK' or getLastOperationStatus($res)=='NO_CHANGE') displayOK(i18n("checkFixed"),true);
       else displayError($res,true);
-    } else if ($action=="recalcultateLevel") {
+    } else if ($action=="recalculateLevel") {
       $where="topId=$this->topId";
       $levelList=$this->getSqlElementsFromCriteria(null,null,$where,'wbsSortable');
       if (count($levelList)==1) {
         $this->wbs=null;
         $this->wbsSortable=null;
         $res=$this->save();
-        debugLog("FIX recalcultateLevel (1 only) FOR $this->refType #$this->refId : $res");
+        debugLog("FIX $action (1 only) for issue $issue on $this->refType #$this->refId : $res");
         if (getLastOperationStatus($res)=='OK' or getLastOperationStatus($res)=='NO_CHANGE') displayOK(i18n("checkFixed"),true);
         else displayError($res,true);
       } else {
@@ -1958,7 +1960,7 @@ class PlanningElement extends SqlElement {
         $first=new PlanningElement($first->id);
         $second=new PlanningElement($second->id);
         $res=$first->moveTo($second->id,'before');
-        debugLog("FIX recalcultateLevel FOR $this->refType #$this->refId : $res");
+        debugLog("FIX $action for issue $issue on $this->refType #$this->refId : $res");
         if (getLastOperationStatus($res)=='OK' or getLastOperationStatus($res)=='NO_CHANGE') displayOK(i18n("checkFixed"),true);
         else displayError($res,true);
       } 
@@ -1966,12 +1968,6 @@ class PlanningElement extends SqlElement {
       if ($issue!='') {
         displayError(i18n("checkCannotFix"),true);
       }
-    }
-    // Refresh $peList : has changed due to fix
-    $peList=$pe->getSqlElementsFromCriteria(null,null,null,'wbsSortable asc');
-    $cur=reset($peList);
-    while ($cur->id!=$actual->id) {
-      $cur=next($peList);
     }
   }
  
