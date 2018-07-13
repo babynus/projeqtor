@@ -108,12 +108,14 @@ class ImputationLine {
     
     // Get All assignments, including the ones from pools
     $ressList=Sql::fmtId($resourceId);
-    $rta=new ResourceTeamAffectation();
-    $rtaList=$rta->getSqlElementsFromCriteria(array('idResource'=>$resourceId));
-    foreach ($rtaList as $rta) {
-      if ($rta->idle) continue;
-      if (($rta->startDate==null or $rta->startDate<=$endDate) and ($rta->endDate==null or $rta->endDate>=$startDate)) {
-        $ressList.=','.Sql::fmtId($rta->idResourceTeam);
+    if (Parameter::getGlobalParameter('displayPoolsOnImputation')!='NO') {
+      $rta=new ResourceTeamAffectation();
+      $rtaList=$rta->getSqlElementsFromCriteria(array('idResource'=>$resourceId));
+      foreach ($rtaList as $rta) {
+        if ($rta->idle) continue;
+        if (($rta->startDate==null or $rta->startDate<=$endDate) and ($rta->endDate==null or $rta->endDate>=$startDate)) {
+          $ressList.=','.Sql::fmtId($rta->idResourceTeam);
+        }
       }
     }
     $critWhere="idResource in ($ressList)";
