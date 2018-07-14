@@ -123,6 +123,9 @@ if ($type == 'empty') {
   $critField = RequestHandler::getValue ( 'critField' );
   $critValue = RequestHandler::getValue ( 'critValue' );
   $selected = "";
+  if (strpos($dataType, "__id")>0) {
+    $dataType=foreignKeyWithoutAlias($dataType);
+  }
   if (array_key_exists ( 'selected', $_REQUEST )) {
     $selected = $_REQUEST ['selected'];
   }
@@ -689,7 +692,7 @@ function listFieldsForFilter($obj, $nbRows, $included = false) {
     if (get_class($obj)=='GlobalView' and $col=='id') continue;
     if ($col=='_Assignment') {
       if ($nbRows > 0) echo ', ';
-      echo '{id:"' . ($included ? get_class ( $obj ) . '_' : '') . 'assignment_idResource' . '", name:"' . i18n("assignedResource") . '", dataType:"list"}';
+      echo '{id:"' . ($included ? get_class ( $obj ) . '_' : '') . 'assignedResource__idResourceAll' . '", name:"' . i18n("assignedResource") . '", dataType:"list"}';
       continue;
     }
     if (substr ( $col, 0, 1 ) != "_" and substr ( $col, 0, 1 ) != ucfirst ( substr ( $col, 0, 1 ) ) and ! $obj->isAttributeSetToField ( $col, 'hidden' ) and ! $obj->isAttributeSetToField ( $col, 'calculated' ) and 
