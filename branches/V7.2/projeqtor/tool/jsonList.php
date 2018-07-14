@@ -687,6 +687,11 @@ function listFieldsForFilter($obj, $nbRows, $included = false) {
   // return result in json format
   foreach ( $obj as $col => $val ) {
     if (get_class($obj)=='GlobalView' and $col=='id') continue;
+    if ($col=='_Assignment') {
+      if ($nbRows > 0) echo ', ';
+      echo '{id:"' . ($included ? get_class ( $obj ) . '_' : '') . 'assignment_idResource' . '", name:"' . i18n("assignedResource") . '", dataType:"list"}';
+      continue;
+    }
     if (substr ( $col, 0, 1 ) != "_" and substr ( $col, 0, 1 ) != ucfirst ( substr ( $col, 0, 1 ) ) and ! $obj->isAttributeSetToField ( $col, 'hidden' ) and ! $obj->isAttributeSetToField ( $col, 'calculated' ) and 
     // ADD BY Marc TABARY - 2017-03-20 - FIELD NOT PRESENT FOR FILTER
     ! $obj->isAttributeSetToField ( $col, 'notInFilter' ) and 
