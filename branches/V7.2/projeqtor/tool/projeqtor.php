@@ -992,6 +992,7 @@ function getUserVisibleResourcesList($limitToActiveResources=false, $listScreen=
     }
     $resourcesList = array();
     $res=new Resource();
+    if ($includePool) $res=new ResourceAll();
     $scope=Affectable::getVisibilityScope($listScreen);
     switch($scope) {
         case 'all' :
