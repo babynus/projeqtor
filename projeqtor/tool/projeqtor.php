@@ -982,7 +982,7 @@ function isNotificationSystemActiv() {
  * @param boolean $idLinkObjectName = '' if not restrict on idLinkObjectName - true if restrict to resource with idLinkObject null 
  * @return list of visible resources
  */
-function getUserVisibleResourcesList($limitToActiveResources=false, $listScreen="List", $idLinkObjectName='') {
+function getUserVisibleResourcesList($limitToActiveResources=false, $listScreen="List", $idLinkObjectName='',$includePool=false) {
     $crit="";
     if ($limitToActiveResources) {
         $crit = "idle=0 and "; 
