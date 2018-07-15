@@ -250,7 +250,6 @@
               selectedName=previousSelectedProjectName;
             }
             if (selected) {
-console.log("select project #"+selected+" - "+selectedName);
               if (dijit.byId("projectSelectorFiletering")) {
                 if (!previousSelectedProject || previousSelectedProject!=selected) {
                   previousSelectedProject=dijit.byId("projectSelectorFiletering").get("value");
