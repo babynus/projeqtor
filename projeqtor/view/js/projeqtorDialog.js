@@ -3593,8 +3593,8 @@ function showFilterDialog() {
     dojo.byId('filterDynamicParameterPane').style.display='none';
     dijit.byId('idFilterAttribute').reset();
     if (dojo.byId('objectClassList') && dojo.byId('objectClassList').value) dojo.byId('filterObjectClass').value=dojo.byId('objectClassList').value;
-    else if (dojo.byId('objectClass') && dojo.byId('objectClass').value) dojo.byId('filterObjectClass').value=dojo.byId('objectClass').value;
     else if (dojo.byId('objectClassManual') && dojo.byId('objectClassManual').value) dojo.byId('filterObjectClass').value=dojo.byId('objectClassManual').value;
+    else if (dojo.byId('objectClass') && dojo.byId('objectClass').value) dojo.byId('filterObjectClass').value=dojo.byId('objectClass').value;
     else dojo.byId('filterObjectClass').value=null;
     filterType="";
     var compUrl=(top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
