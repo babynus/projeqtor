@@ -356,7 +356,15 @@
       <arg line="/c make.bat html en"/>
     </exec>
   </target>
-  
+
+  <target name="_sphinxBuildUserManual_HTML_windows_fr">
+    <echo>Build HTML User Manual For Translations.</echo>
+    <exec dir="../docs/user" executable="cmd" >
+      <env key="SPHINXOPTS" value="-D language=fr" />
+      <arg line="/c make.bat html fr"/>
+    </exec>
+  </target>
+    
   <target name="_sphinxBuildUserManual_HTML_windows_de">
     <echo>Build HTML User Manual For Translations.</echo>
     <exec dir="../docs/user" executable="cmd" >
