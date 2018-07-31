@@ -161,11 +161,11 @@ if "%1" == "latexpdf" (
 	pdflatex.exe %PROJECT%.tex
 	cd ../..
 	echo.
-	echo.Build finished to %BUILDDIR%/latex.
+	echo.Build finished to %BUILDDIR%\latex.
 	echo.Copy generated .pdf file to pdf directory
   del /S /Q html_%2 > %BUILDDIR%/html/result.txt
-  copy %BUILDDIR%/latex/%PROJECT%.pdf  ./pdf/%PROJECT%_%2.pdf > %BUILDDIR%/html/result.txt
-  echo.Files copied to pdf/%PROJECT%_%2.pdf.
+  copy %BUILDDIR%\latex\%PROJECT%.pdf  pdf\%PROJECT%_%2.pdf
+  echo.Files copied to pdf\%PROJECT%_%2.pdf.
 	goto end
 )
 
