@@ -155,6 +155,7 @@ if "%1" == "latex" (
 
 if "%1" == "latexpdf" (
   echo.Generating %2 html manual
+  del /Q %BUILDDIR%\latex\%PROJECT%.aux > %BUILDDIR%/html/result.txt
 	%SPHINXBUILD% -b latex %ALLSPHINXOPTS% %BUILDDIR%/latex
 	cd %BUILDDIR%/latex
 	REM make all-pdf
