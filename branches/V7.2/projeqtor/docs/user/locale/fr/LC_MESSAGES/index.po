@@ -17,7 +17,7 @@ msgstr "Accueil"
 
 #: ../../index.rst:9
 msgid "ProjeQtOr is a Quality based Project Organizer, as a web application."
-msgstr ""
+msgstr "ProjeQtOr est un outil de gestion de projet oreinté qualité."
 
 #: ../../index.rst:11
 msgid ""
