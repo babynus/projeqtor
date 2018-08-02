@@ -335,7 +335,6 @@
         $nbFields=0;
         $idPe="";
         // NEW
-        debugLog($line['reftype'].' #'.$line['refid']);
         if (isset($line['isglobal']) and $line['isglobal']==1 and trim($line['realstartdate']) and $line['progress']==$na) {
           $pStart="";
           $pStart=(trim($line['initialstartdate'])!="" and $line['initialstartdate']!=$na)?$line['initialstartdate']:$pStart;
@@ -358,24 +357,19 @@
           }
           $pStart=substr($pStart,0,10);
           $pEnd=substr($pEnd,0,10);
-          //debugLog($line);
-          debugLog(" $pStart -> $pEnd" );
           if (trim($line['realenddate'])!="" and $line['realenddate']!=$na) {
             $line['progress']='100';
           } else if ($pStart==$pEnd) {
             $line['progress']='50';
           } else {
-            debugLog($pStart,$pEnd);
             $taskLength=dayDiffDates($pStart,$pEnd)+1;
             if ($taskLength>0) {
               $progressLength=dayDiffDates($pStart,date('Y-m-d'))+1;
-              debugLog($progressLength." / ".$taskLength);
               $line['progress']=round($progressLength/$taskLength*100,0);
             } else {
               $line['progress']='50';
             }
           }
-          debugLog(" progress=".$line['progress']);
         }
         if ($line["plannedwork"]>0 and $line["leftwork"]==0 and $line["elementary"]==1) {
         	$line["plannedstartdate"]='';
