@@ -822,7 +822,7 @@
             } else if ($formatter[$nbFields]=='numericFormatter') {
             	$numericLength=9;
             	if ($val<0) $numericLength=0;
-            }
+            } 
             if ($id=='colorNameRunStatus') {
             	$split=explode('#',$val);
             	foreach ($split as $ix=>$sp) {
