@@ -637,7 +637,9 @@
     					$colId=$arrayFields[$id];
     				}
     				if (!isset($arrayFieldsWithCase[$colId])) continue;
-    				if (substr($id, 0,2)=='id' and strlen($id)>2) {
+    				//if (substr($id, 0,2)=='id' and strlen($id)>2) {
+    				if (isForeignKey($arrayFields[strtolower($id)], $obj)) { // #3522 : Fix issue to export custom foreign items xxxx__idYyyyy 
+    				    $class=substr(foreignKeyWithoutAlias($arrayFields[strtolower($id)]), 2);
     					$class=substr($arrayFields[strtolower($id)], 2);
     					if (ucfirst($class)==$class) {
     						$foreign=true;
