@@ -799,7 +799,7 @@
     				$foreign=false;
     				//if (substr($id, 0,2)=='id' and strlen($id)>2) {
     				if (isForeignKey($arrayFields[strtolower($id)], $obj)) { // #3522
-    					$class=substr($arrayFields[strtolower($id)], 2);
+    					$class=substr(foreignKeyWithoutAlias($arrayFields[strtolower($id)]), 2);
     					if (ucfirst($class)==$class) {
     						$foreign=true;
     						if ($class=="TargetVersion" or $class=="TargetProductVersion" or $class=="TargetComponentVersion"
