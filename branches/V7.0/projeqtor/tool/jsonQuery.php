@@ -797,7 +797,8 @@
     			foreach ($line as $id => $val) {
     			  if ($id=='refType') $refType=$val;
     				$foreign=false;
-    				if (substr($id, 0,2)=='id' and strlen($id)>2) {
+    				//if (substr($id, 0,2)=='id' and strlen($id)>2) {
+    				if (isForeignKey($arrayFields[strtolower($id)], $obj)) { // #3522
     					$class=substr($arrayFields[strtolower($id)], 2);
     					if (ucfirst($class)==$class) {
     						$foreign=true;
