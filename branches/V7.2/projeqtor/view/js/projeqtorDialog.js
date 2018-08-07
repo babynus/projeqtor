@@ -5343,7 +5343,7 @@ params+="&mode=add";
 loadDialog('dialogAffectationResourceTeam',callBack,false,params);
 }
 
-function removeAffectation(id,own) {
+function removeAffectation(id,own,affectedClass,affectedId) {
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
     return;
@@ -5355,13 +5355,13 @@ function removeAffectation(id,own) {
   if (own) {
     msg='<span style="color:red;font-weight:bold;">'+i18n('confirmDeleteOwnAffectation', new Array(id))+'</span>';
   } else {
-    msg=i18n('confirmDeleteAffectation', new Array(id));
+    msg=i18n('confirmDeleteAffectation', new Array(id,i18n(affectedClass),affectedId));
   }
   showConfirm(msg, actionOK);
 }
 
 // gautier #resourceTeam
-function removeAffectationResourceTeam(id,own) {
+function removeAffectationResourceTeam(id,idResource) {
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
     return;
@@ -5370,11 +5370,7 @@ function removeAffectationResourceTeam(id,own) {
     loadContent("../tool/removeAffectationResourceTeam.php?affectaionId="+id, "resultDiv",
         null, true, 'affectation');
   };
-  if (own) {
-    msg='<span style="color:red;font-weight:bold;">'+i18n('confirmDeleteOwnAffectation', new Array(id))+'</span>';
-  } else {
-    msg=i18n('confirmDeleteAffectation', new Array(id));
-  }
+  msg=i18n('confirmDeleteAffectation', new Array(id,i18n('Resource'),idResource));
   showConfirm(msg, actionOK);
 }
 
