@@ -242,6 +242,9 @@ CREATE INDEX planningelementextensionReference ON `${prefix}planningelementexten
 CREATE INDEX planningelementextensionTopReference ON `${prefix}planningelementextension` (topRefType,topRefId);
 CREATE INDEX planningelementextensionWbsSortable ON `${prefix}planningelementextension` (wbsSortable);
 
+ALTER TABLE `${prefix}project`
+ADD `excludeFromGlobalPlanning` int(1) UNSIGNED DEFAULT 0;
+
 -- ==================================================================
 -- Misc
 -- ==================================================================
