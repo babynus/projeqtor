@@ -856,9 +856,7 @@ scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursi
       $where=" idProject=$this->id and exists (select 'x' from $depTable dep "
           ." where (dep.predecessorId=$peTable.id and dep.successorId>$pexStart) or (dep.predecessorId>$pexStart and dep.successorId=$peTable.id)"
           .")";
-      debugLog ($where);
       $cpt=$pe->countSqlElementsFromCriteria(null,$where);
-      debugLog("cpt=$cpt");
       if ($cpt>0) {
         $result.='<br/>' .i18n('cannotExclureFromGlobalPlanning',array($cpt));
       }

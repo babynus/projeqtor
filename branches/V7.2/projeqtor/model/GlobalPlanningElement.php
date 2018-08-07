@@ -218,6 +218,7 @@ class GlobalPlanningElement extends SqlElement {
     $itemsToDisplay=Parameter::getUserParameter('globalPlanningSelectedItems');
     $itemsToDisplayArray=explode(',', $itemsToDisplay);
     if (count($itemsToDisplayArray)==0 or (count($itemsToDisplayArray)==1 and $itemsToDisplayArray[0]=='none')) return $pe->getDatabaseTableName();
+    $excludedProjectsListClause="idProject not in ".transformValueListIntoInClause(SqlList::getListWithCrit("Project", array('excludeFromGlobalPlanning'=>'1'),"id"));
     $query="\n  ( SELECT id,idProject,refType,refId,refName,topId,topRefType,topRefId,
       priority,elementary,idle,done,cancelled,idPlanningMode,idBill,
       initialStartDate,validatedStartDate,plannedStartDate,realStartDate,
@@ -278,6 +279,7 @@ class GlobalPlanningElement extends SqlElement {
       foreach ($crit as $col => $val) {
         $query.= " and $table.".$clsObj->getDatabaseColumnName($col)."=".Sql::str($val);
       }
+      $query.="and $table.$excludedProjectsListClause";
     }
     $query.=')';
     return $query;
