@@ -520,7 +520,7 @@ function showDetailOrigin() {
   }
 }
 
-function showDetail(comboName, canCreate, objectClass, multiSelect, objectId) {
+function showDetail(comboName, canCreate, objectClass, multiSelect, objectId, forceSearch) {
   var contentWidget=dijit.byId("comboDetailResult");
   
   dojo.byId("canCreateDetail").value=canCreate;
@@ -540,6 +540,7 @@ function showDetail(comboName, canCreate, objectClass, multiSelect, objectId) {
   } else if(dojo.byId(comboName)) {
     val=dojo.byId(comboName).value;
   }
+  if (forceSearch) val=null; // will force search
   if (objectId) {
     if (objectId=='new') {
       cl=objectClass;
@@ -559,7 +560,7 @@ function showDetail(comboName, canCreate, objectClass, multiSelect, objectId) {
       gotoDetailItem(objectClass,objectId);
     }
     
-  } else if (!val || val == "" || val == " ") {
+  } else if (!val || val == "" || val == " " || val == "*") {
     cl=objectClass;
     window.frames['comboDetailFrame'].document.body.innerHTML='<i>'
         + i18n("messagePreview") + '</i>';
