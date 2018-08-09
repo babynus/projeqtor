@@ -205,6 +205,7 @@ class PlannedWork extends GeneralWork {
     $fullListPlan=PlanningElement::initializeFullList($list);
     $listProjectsPriority=$fullListPlan['_listProjectsPriority'];
     unset($fullListPlan['_listProjectsPriority']);
+    foreach($fullListPlan as $id=>$pl) debugLog("PLAN : $id for $pl->refType #$pl->refId");
     $listPlan=self::sortPlanningElements($fullListPlan, $listProjectsPriority);
     $resources=array();
     $a=new Assignment();
