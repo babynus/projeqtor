@@ -1458,7 +1458,6 @@ class PlanningElement extends SqlElement {
     }
     // In the end and GlobalItems that have dependencies on Project
     $where="topRefType='Project' and topRefId IN ".transformListIntoInClause($listProjectsPriority);
-    debugLog($where);
     $pex=new PlanningElementExtension();
     $pexList=$pex->getSqlElementsFromCriteria(null,null,$where);
     foreach ($pexList as $pex) {
@@ -1468,11 +1467,17 @@ class PlanningElement extends SqlElement {
         $gpe->_parentList=array();
         $gpe->_predecessorList=array();
         $gpe->_predecessorListWithParent=array();
-        $gpe->_noPlan=true;
+        $gpe->_noPlan=false;
         $gpe->_childList=array();
+        $gpe->_profile='FDUR';
         $gpe->id=$pex->getFakeId();
         $result[$id]=$gpe;
         $idList[$gpe->id]=$gpe->id;
+      } else {
+        $gpe=$result[$id];
+        $gpe->_noPlan=false;
+        $gpe->_profile='FDUR';
+        $result[$id]=$gpe;
       }
     }
     

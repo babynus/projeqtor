@@ -648,12 +648,7 @@ function selectDetailItem(selectedValue, lastSavedName) {
       critVal=prj.get("value");
     }
   }
-  //CHANGE qCazelles - Correction GANTT - Ticket #100
-  //Old
-  //if (comboName != 'idStatus' && comboName != 'idProject') { 
-  //New
-  if (comboName != 'idStatus' && comboName != 'idProject' && comboName != 'versionsPlanningDetail') { 
-  //END CHANGE qCazelles - Correction GANTT - Ticket #100
+  if (comboName != 'idStatus'  && comboName != 'versionsPlanningDetail') { 
     if (combo) {
       refreshList('id' + comboClass, crit, critVal, idFldVal, comboName);
     } else {
