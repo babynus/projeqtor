@@ -6521,6 +6521,10 @@ function checkAlert() {
 }
 function checkAlertRetour(data) {
   if (data) {
+    console.log("checkAlertToDisplay returns "+data);
+    if (data.indexOf('name="lastOperation" value="testConnection"')>0 && data.indexOf('name="lastOperationStatus" value="ERROR"')>0) {
+      showDisconnectedMessage(data);
+    }
     var reminderDiv=dojo.byId('reminderDiv');
     var dialogReminder=dojo.byId('dialogReminder');
     reminderDiv.innerHTML=data;
@@ -6577,6 +6581,10 @@ function checkAlertRetour(data) {
       checkAlertDisplayQuick=true;
     }
   }
+}
+function showDisconnectedMessage(data) {
+  dojo.byId('disconnectionMessageText').innerHTML=data;
+  dojo.byId('disconnectionMessage').style.display='block';
 }
 function setAlertReadMessage() {
   // alertDisplayed=false;
