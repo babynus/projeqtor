@@ -2892,6 +2892,7 @@ savePlanningBaseline: "Sauvegarder une version de référence de la planificatio
 screenCustomizationErrorExist: "Certaines customisations d'écran ne sont pas cohérentes",
 screenCustomizationErrorFixed: "Les customisations ont été corrigées automatiquement",
 screenCustomizationErrorRemaining: "Veuillez accéder à chacun de ces écrans sur le plugin de customisation (la version 5.0 ou supérieure est requise)",
+searchProject: "rechercher un projet",
 second: "seconde",
 sectionAbacus: "Abaque",
 sectionAction: "Actions",

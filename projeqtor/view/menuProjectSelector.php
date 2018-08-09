@@ -86,6 +86,14 @@ if ($proj=='*') {
    <option value="*"><i><?php echo i18n("allProjects");?></i></option>
    <?php htmlDrawOptionForReference("idProject", $proj, null, true,null, null, $limitToActiveProjects);?>
 </select>
+   <div style="text-align:left;position:absolute; top:1px; left:201px; padding:0px;">
+      <button id="projectButton" dojoType="dijit.form.Button" showlabel="false " style="position: relative; left:26px; top:-1px; height: 20px"
+         title="<?php echo i18n('searchProject');?>" iconClass="iconView">
+         <script type="dojo/connect" event="onClick" args="evt">        
+            showDetail('projectSelectorFiletering', false , 'Project',false,null,true);    
+         </script>
+       </button>
+	</div>
 <?php } else if($displayMode=="search") {?>
 <select id="projectSelectorFiletering" data-dojo-type="dijit.form.FilteringSelect" class="input" style="position: absolute; left:4px; top:1px; width: 165px;height:22px;"  
 <?php echo autoOpenFilteringSelect();?>
@@ -99,9 +107,17 @@ name="projectSelectorFiletering"
     }
   </script>
    <option value="*"><i><?php echo i18n("allProjects");?></i></option>
-   <?php htmlDrawOptionForReference("idProject", $proj, null, true,null, null, $limitToActiveProjects);?>
+   <?php htmlDrawOptionForReference("idProject", $proj, null, true,null, null, $limitToActiveProjects);?>  
 </select>
-
+		   
+   <div style="text-align:left;position:absolute; top:1px; left:201px; padding:0px;">
+      <button id="projectButton" dojoType="dijit.form.Button" showlabel="false " style="position: relative; left:26px; top:-1px; height: 20px"
+         title="<?php echo i18n('searchProject');?>" iconClass="iconView">
+         <script type="dojo/connect" event="onClick" args="evt">        
+            showDetail('projectSelectorFiletering', false , 'Project',false,null,true);    
+         </script>
+       </button>
+	</div>
 <?php } else  {
   ?>
 
