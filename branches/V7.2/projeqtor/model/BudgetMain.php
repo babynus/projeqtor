@@ -444,8 +444,8 @@ scriptLog("Budget($this->id)->drawSubBudgets(selectField=$selectField, recursive
     $this->usedFullAmount=0;
     $this->billedAmount=0;
     $this->billedFullAmount=0;
-    $this->subAmount=0;
-    $this->subFullAmount=0;
+    $this->actualSubAmount=0;
+    $this->actualSubFullAmount=0;
     if ($this->elementary) {
       $exp=new Expense();
       $expList=$exp->getSqlElementsFromCriteria(array('idBudgetItem'=>$this->id));
@@ -459,8 +459,8 @@ scriptLog("Budget($this->id)->drawSubBudgets(selectField=$selectField, recursive
       $bud=new Budget();
       $budList=$bud->getSqlElementsFromCriteria(array('idBudget'=>$this->id));
       foreach ($budList as $bud) {
-        $this->subAmount+=$bud->actualAmount;
-        $this->subFullAmount+=$bud->actualFullAmount;
+        $this->actualSubAmount+=$bud->actualAmount;
+        $this->actualSubFullAmount+=$bud->actualFullAmount;
         $this->usedAmount+=$bud->usedAmount;
         $this->usedFullAmount+=$bud->usedFullAmount;
         $this->billedAmount+=$bud->billedAmount;
