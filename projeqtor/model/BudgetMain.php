@@ -159,7 +159,7 @@ class BudgetMain extends SqlElement {
   function __construct($id = NULL, $withoutDependentObjects=false) {
   	parent::__construct($id,$withoutDependentObjects);
   	if (!$this->id) {
-  	  $year=(date(md)<'0701')?date('Y'):date('Y')+1;
+  	  $year=(date('md')<'0701')?date('Y'):date('Y')+1;
   	  $this->budgetStartDate=$year.'-01-01';
   	  $this->budgetEndDate=$year.'-12-31';
   	}
@@ -404,7 +404,7 @@ scriptLog("Budget($this->id)->drawSubBudgets(selectField=$selectField, recursive
 //       }
 //     }
 //     $result .='</table>';
-    return $result;
+//    return $result;
   }
 
   public function drawBudgetsList($critArray) {
@@ -430,12 +430,12 @@ scriptLog("Budget($this->id)->drawSubBudgets(selectField=$selectField, recursive
     if(SqlList::getFieldFromId("Status", $this->idStatus, "setHandledStatus")!=0) {
       $this->isUnderConstruction=0;
     } 
-    $this->actualAmount=$this->initialV1Amount
+    $this->actualAmount=$this->initialAmount
                            +$this->update1Amount
                            +$this->update2Amount
                            +$this->update3Amount
                            +$this->update4Amount;
-    $this->actualFullAmount=$this->initialAmount
+    $this->actualFullAmount=$this->initialFullAmount
                             +$this->update1FullAmount
                             +$this->update2FullAmount
                             +$this->update3FullAmount
@@ -468,9 +468,9 @@ scriptLog("Budget($this->id)->drawSubBudgets(selectField=$selectField, recursive
       }
     }
     $this->availableAmount=$this->actualAmount-$this->usedAmount;
-    $this->availableFullAmount=$this->actualFllAmount-$this->usedFullAmount;
-    $this->leftAmount=$this->actualAmount-$this->realAmount;
-    $this->leftFullAmount=$this->actualFllAmount-$this->realFullAmount;
+    $this->availableFullAmount=$this->actualFullAmount-$this->usedFullAmount;
+    $this->leftAmount=$this->actualAmount-$this->billedAmount;
+    $this->leftFullAmount=$this->actualFullAmount-$this->billedFullAmount;
     
     // CALCULATE WBS
     $result = parent::save();
