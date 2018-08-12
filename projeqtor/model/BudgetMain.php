@@ -68,7 +68,7 @@ class BudgetMain extends SqlElement {
   public $budgetEndDate;
   public $bbs;
   public $bbsSortable;
-  public $_tab_2_11=array('HT','TTC','planned','initial','update1','update2','update3','transfered','actual','sub','engaged','available','billed','left');
+  public $_tab_2_12=array('HT','TTC','planned','initial','update1','update2','update3','transfered','actual','sub','engaged','available','billed','left');
   public $plannedAmount;
   public $plannedFullAmount;
   public $initialAmount;
