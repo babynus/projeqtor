@@ -36,7 +36,6 @@ class ProjectExpenseMain extends Expense {
   public $reference; 
   public $name;
   public $idProjectExpenseType;
-  public $idBudgetItem;
   public $idProject;
   public $idUser;
   public $idProvider;
@@ -57,7 +56,7 @@ class ProjectExpenseMain extends Expense {
   public $idle;
   public $cancelled;
   public $_lib_cancelled;
-  public $_tab_5_2_smallLabel = array('untaxedAmountShort', 'tax', '', 'fullAmountShort','paymentDateShort', 'planned', 'real');
+  public $_tab_5_2_smallLabel = array('untaxedAmount', 'tax', '', 'fullAmount','paymentDateShort', 'planned', 'real');
   public $plannedAmount;
   public $taxPct;
   public $plannedTaxAmount;
@@ -68,6 +67,7 @@ class ProjectExpenseMain extends Expense {
   public $realTaxAmount;
   public $realFullAmount;
   public $expenseRealDate;
+  public $idBudgetItem;
   public $paymentDone;
   public $result;
   public $_sec_ExpenseDetail;
