@@ -52,6 +52,7 @@ class BudgetMain extends SqlElement {
   public $description;
   public $_sec_Treatment;
   public $idStatus;
+  public $elementary;
   public $isUnderConstruction=1;
   public $handled;
   public $handledDate;
@@ -94,7 +95,6 @@ class BudgetMain extends SqlElement {
   public $billedFullAmount;
   public $leftAmount;
   public $leftFullAmount;
-  public $elementary;
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
@@ -132,7 +132,7 @@ class BudgetMain extends SqlElement {
                                   "lastUpdateDateTime"=>"hidden",
                                   "bbs"=>"display,noImport", 
                                   "bbsSortable"=>"hidden,noImport",
-                                  "elementary"=>"hidden",
+                                  "elementary"=>"readonly",
       "actualAmount"=>"readonly,noimport",
       "actualFullAmount"=>"readonly,noimport",
       "actualSubAmount"=>"readonly,noimport",
@@ -153,7 +153,12 @@ class BudgetMain extends SqlElement {
    'doneDate'=>'dateApproved',
    'idUser'=>'issuer',
   		'plannedAmount'=>'estimateAmount',
-  		'plannedFullAmount'=>'estimateFullAmount'
+  		'plannedFullAmount'=>'estimateFullAmount',
+      'actualAmount'=>'updatedAmount',
+      'actualFullAmount'=>'updatedFullAmount',
+      'usedAmount'=>'engagedAmount',
+      'usedFullAmount'=>'engagedFullAmount',
+      'elementary'=>'isBudgetItem'
   );
   
    /** ==========================================================================
@@ -264,7 +269,10 @@ class BudgetMain extends SqlElement {
     $result="";
     if ($item=='subBudgets') {
       $result .="<table><tr><td class='label' valign='top'><label>" . i18n('subBudgets') . "&nbsp;:&nbsp;</label>";
-      $result .="</td><td style='padding-top:7px;'>";
+      $result .="</td><td style='padding-top:5px;'>";
+      if ($this->elementary) {
+        $result .=i18n('isBudgetItemMsg');
+      }
       if ($this->id) {
         $result .= $this->drawSubBudgets();
       }
@@ -306,6 +314,27 @@ class BudgetMain extends SqlElement {
    return $result;
   }
   
+  public function getSubBudgetFlatList() {
+    if (!$this->id) return array();
+    $sub=SqlList::getListWithCrit('Budget',array('idBudget'=>$this->id));
+    foreach ($sub as $budId=>$budName) {
+      $bud=new Budget($budId,true);
+      $subList=$bud->getSubBudgetFlatList();
+      $sub=array_merge_preserve_keys($sub,$subList);
+    }
+    return $sub;
+  }
+  public function getParentsFlatList() {
+    $res=array();
+    if ($this->idBudget) {
+      $parent=new Budget($this->idBudget);
+      $res[$parent->id]=$parent->name;
+      if ($parent->idBudget) {
+        $res=array_merge_preserve_keys($res,$parent->getParentsFlatList());
+      }
+    }
+    return $res;
+  }
    /**=========================================================================
    * Overrides SqlElement::save() function to add specific treatments
    * @see persistence/SqlElement#save()
@@ -333,7 +362,7 @@ class BudgetMain extends SqlElement {
     $this->actualSubAmount=0;
     $this->actualSubFullAmount=0;
     $bud=new Budget();
-    $budList=$bud->getSqlElementsFromCriteria(array('idBudget'=>$this->id));
+    $budList=($this->id)?$bud->getSqlElementsFromCriteria(array('idBudget'=>$this->id)):array();
     foreach ($budList as $bud) {
       $this->actualSubAmount+=$bud->actualAmount;
       $this->actualSubFullAmount+=$bud->actualFullAmount;
@@ -345,7 +374,7 @@ class BudgetMain extends SqlElement {
     $this->elementary=(count($budList)==0)?1:0;
     if ($this->elementary) {
       $exp=new Expense();
-      $expList=$exp->getSqlElementsFromCriteria(array('idBudgetItem'=>$this->id));
+      $expList=($this->id)?$exp->getSqlElementsFromCriteria(array('idBudgetItem'=>$this->id)):array();
       foreach ($expList as $exp) {
         $this->usedAmount+=$exp->plannedAmount;
         $this->usedFullAmount+=$exp->plannedFullAmount;
@@ -366,6 +395,10 @@ class BudgetMain extends SqlElement {
     // UPDATE PARENTS (recursively)
     if ($this->idBudget) {
       $parent=new Budget($this->idBudget);
+      $parent->save();
+    }
+    if ($old->idBudget and $old->idBudget!=$this->idBudget) {
+      $parent=new Budget($old->idBudget);
       $parent->save();
     }
     
@@ -389,6 +422,26 @@ class BudgetMain extends SqlElement {
     $old=$this->getOld();
     if ($this->id and $this->id==$this->idBudget) {
       $result.='<br/>' . i18n('errorHierarchicLoop');
+    }
+    if ($this->idBudget) {
+      // Parent must not have expenses linked
+      $exp=new Expense();
+      $cpt=$exp->countSqlElementsFromCriteria(array('idBudgetItem'=>$this->idBudget));
+      if ($cpt>0) {
+        $result.='<br/>' . i18n('errorBudgetWithExpense');
+      }
+      $parents=$this->getParentsFlatList();
+      $sons=$this->getSubBudgetFlatList();
+      debugLog("Parents");
+      debugLog($parents);
+      debugLog("Sons");
+      debugLog($sons);
+      foreach ($parents as $idParent=>$nameParent) {
+        if (isset($sons[$idParent])) {
+          $result.='<br/>' . i18n('errorHierarchicLoop');
+          break;
+        }
+      }
     }
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
