@@ -170,7 +170,7 @@ The list displays the assigned tasks for the resource.
     
     .. note:: Click on icon |Note|
       
-      * to open windows view comments
+* to open windows view comments
       
 .. figure:: /images/GUI/left_click_note.png
 
