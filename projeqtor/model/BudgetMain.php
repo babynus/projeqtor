@@ -288,12 +288,10 @@ class BudgetMain extends SqlElement {
    *  must be redefined in the inherited class
    */  
   public function drawSubBudgets($recursiveCall=false) {
-  	debugLog("sub budget for #$this->id");
     global $outMode;
     $result="";
     
  	  $subList=SqlList::getListWithCrit('Budget',array('idBudget'=>$this->id));
- 	  debugLog($subList);
     $result .='<table style="width: 100%;" >';
     if (count($subList)>0) {
       foreach ($subList as $idBdg=>$nameBdg) {
@@ -401,15 +399,42 @@ class BudgetMain extends SqlElement {
       $parent=new Budget($old->idBudget);
       $parent->save();
     }
-    
+    debugLog("current bbs is '$this->bbs' parent from $old->idBudget to $this->idBudget");
+    if (!$this->bbs or !$old->id or $old->idBudget!=$this->idBudget) {
+      debugLog("CALCULATE BBS");
+      $parent=new Budget($this->idBudget);
+      $parent->regenerateBbsLevel();
+      $parent=new Budget($old->idBudget);
+      $parent->regenerateBbsLevel();
+    }
     return $result; 
-
+  }
+  public function simpleSave() {
+    return parent::save();
   }
   public function delete() {
   	$result = parent::delete();
     return $result;
   }
-  
+
+  public function regenerateBbsLevel() {
+    debugLog("REGENERATE BBS FOR LEVEL OF PARENT $this->id");
+    $bbs=$this->bbs;
+    if ($bbs) $bbs.='.';
+    else $bbs='';
+    $items=$this->getSqlElementsFromCriteria(array('idBudget'=>$this->id),null,null,'id asc');
+    $cpt=0;
+    foreach($items as $item) {
+      $cpt++;
+      if ($bbs.$cpt!=$item->bbs) {
+        $item->bbs=$bbs.$cpt;
+        $item->bbsSortable=formatSortableWbs($item->bbs);
+        $item->simpleSave();
+        $item->regenerateBbsLevel();
+      }
+    }
+    
+  }
 
 /** =========================================================================
    * control data corresponding to Model constraints
@@ -432,10 +457,6 @@ class BudgetMain extends SqlElement {
       }
       $parents=$this->getParentsFlatList();
       $sons=$this->getSubBudgetFlatList();
-      debugLog("Parents");
-      debugLog($parents);
-      debugLog("Sons");
-      debugLog($sons);
       foreach ($parents as $idParent=>$nameParent) {
         if (isset($sons[$idParent])) {
           $result.='<br/>' . i18n('errorHierarchicLoop');

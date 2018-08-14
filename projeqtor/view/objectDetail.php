@@ -2391,7 +2391,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo '<div dojoType="dijit.form.NumberTextBox" ';
         echo $name;
         echo $attributes;
-        debugLog("$col => $negative => $specificStyle");
         // echo ' style="text-align:right; width: ' . $fieldWidth . 'px;' . $specificStyle . '" ';
         echo ' style="'.$negative.'width: '.$fieldWidth.'px;'.$specificStyle.'" ';
         // ADD BY Marc TABARY - 2017-03-06 - PATTERN FOR YEAR
