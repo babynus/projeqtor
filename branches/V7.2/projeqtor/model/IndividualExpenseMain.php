@@ -87,7 +87,8 @@ class IndividualExpenseMain extends Expense {
                                   "month"=>"hidden",
                                   "year"=>"hidden",
                                   "idle"=>"nobr",
-                                  "cancelled"=>"nobr"
+                                  "cancelled"=>"nobr",
+                                  "idBudgetItem"=>"canSearchForAll"
   );  
   
   private static $_colCaptionTransposition = array('idIndividualExpenseType'=>'type',
