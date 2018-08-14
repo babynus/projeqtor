@@ -105,7 +105,8 @@ class ProjectExpenseMain extends Expense {
                                   "idle"=>"nobr",
                                   "cancelled"=>"nobr",
                                   "plannedTaxAmount"=>"calculated,readonly",
-                                  "realTaxAmount"=>"calculated,readonly"
+                                  "realTaxAmount"=>"calculated,readonly",
+                                  "idBudgetItem"=>"canSearchForAll"
   );  
   
   private static $_colCaptionTransposition = array('idProjectExpenseType'=>'type',
