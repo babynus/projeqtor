@@ -50,7 +50,7 @@ class BudgetMain extends SqlElement {
   public $idResource;
   public $color;
   public $description;
-  public $_sec_Treatment;
+  public $_sec_Treatment_right;
   public $idStatus;
   public $elementary;
   public $isUnderConstruction=1;
@@ -64,7 +64,7 @@ class BudgetMain extends SqlElement {
   public $_lib_cancelled;
   public $_sec_subBudgets;
   public $_spe_subBudgets;
-  public $_sec_Progress;
+  public $_sec_Progress_center;
   public $_tab_2_1=array('startDate','endDate','budgetDates');
   public $budgetStartDate;
   public $budgetEndDate;
