@@ -351,12 +351,31 @@ Global parameters screen allows configuration of application settings.
 * Suffix : can contain {VERS} for version name.
     
 .. rubric:: Section: Bill reference format
+
 .. rubric:: Section: Product and Component
 
-.. rubric:: GENERAL SECTION 5 : Mailing
+.. rubric:: GENERAL SECTION 5 : Configuration
+
+.. rubric:: GENERAL SECTION 6 : Mailing
 
 .. rubric:: Section: Emailing
+
+Parameters to allow the application to send emails.
+
 .. rubric:: Section: Mail titles
+
+* Parameters to define title of email depending on event (1).
+
+(see: :ref:`administration-special-field-label`)
+
+.. raw:: latex
+
+    \newpage
+
+.. index:: ! Special fields
+
+.. _administration-special-field-label:
+
 .. rubric:: Section: Automatic emails grouping
 
 E-mail sending delay: possibility not to send emails in a row, but to delay them to send only one message if several changes generating an emails send are made in a short time.
@@ -451,8 +470,8 @@ Parameters for the “Cron” process.
       * Select how send alert to team manager
 .. rubric:: Section: Automatic planning calculation
 
-
 .. rubric:: GENERAL SECTION 8 : System
+
 .. rubric:: Section: Files and directories
 Definition of directories and other parameters used for Files management.
 
