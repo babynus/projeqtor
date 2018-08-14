@@ -175,8 +175,6 @@ The list displays the assigned tasks for the resource.
 .. figure:: /images/GUI/left_click_note.png
 
 
-.. compound:: **D - Progress data**
-
     * **Planned dates**: Planned start and end dates.
     * **Assigned**: Planned work assigned to the resource.
     * **Real**: Sum of work done by the resource.
@@ -185,9 +183,8 @@ The list displays the assigned tasks for the resource.
 
 .. note:: Total of days
 
-.. figure:: /images/GUI/screenshot126.png
-   :alt: The last column is the sum for all days.
- 
+  .. figure:: /images/GUI/screenshot126.png
+       :alt: The last column is the sum for all days.
         
       On the last column is the sum for all days of the week. It is a synthesis displayed for each project and globally for the whole week.
       
