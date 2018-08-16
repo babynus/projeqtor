@@ -316,6 +316,9 @@ class GlobalPlanningElement extends SqlElement {
     return $query;
   }
   
+  public function getDatabaseTableName() {
+     return self::getTableNameQuery();
+  }
   public static function getGlobalizables() {
     $result=array();
     foreach (self::$_globalizables as $key=>$val) {
