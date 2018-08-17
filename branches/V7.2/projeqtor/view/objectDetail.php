@@ -5626,7 +5626,11 @@ function drawProviderTermFromObject($list, $obj, $type, $refresh=false) {
       echo  '<td class="assignData'.$idleClass.'" align="center"'.$goto.'>#'.htmlEncode($term->id).'</td>';
       echo  '<td class="assignData'.$idleClass.'" align="center" style="white-space: nowrap;">'.htmlFormatDate($term->date).'</td>';
       echo  '<td class="assignData'.$idleClass.'" align="center" style="white-space: nowrap;">'.htmlDisplayCurrency($term->fullAmount).'</td>';
-      echo  '<td class="assignData'.$idleClass.'" align="center"'.$goto2.' style="white-space: nowrap;">#'.htmlFormatDate($term->idProviderBill).'</td>';
+      if($term->idProviderBill){
+        echo  '<td class="assignData'.$idleClass.'" align="center"'.$goto2.' style="white-space: nowrap;">#'.htmlEncode($term->idProviderBill).'</td>';
+      }else{
+        echo  '<td class="assignData'.$idleClass.'" align="center"'.$goto2.' style="white-space: nowrap;"></td>';
+      }
       echo '</tr>';
     
   }
@@ -6068,7 +6072,6 @@ function drawProviderTermFromProviderBill($list, $obj, $refresh=false) {
   if (!$print and $class=='ProviderBill') {
     echo '<td class="assignHeader" style="width:10%;">';
     if ($obj->id!=null and !$print and $canCreate and !$obj->idle) {
-      //echo '<a onClick="addProviderTerm();" title="'.i18n('addProviderTerm').'" > '.formatSmallButton('Add').'</a>';
       $depType = 'ProviderTerm';
       echo '<a onClick="addProviderTermFromProviderBill();" title="'.i18n('addDependency'.$depType).'"> '.formatSmallButton('Add').'</a>';
     }
@@ -6099,7 +6102,11 @@ function drawProviderTermFromProviderBill($list, $obj, $refresh=false) {
     echo '  <td class="assignData" align="center"'.$goto2.' style="width:5%">#'.htmlEncode($prT->id).'</td>';
     echo '  <td class="assignData" align="center" style="width:20%">'.htmlFormatDate($prT->date).'</td>';
     echo '  <td class="assignData" align="center" style="width:40%">'.htmlDisplayCurrency($prT->fullAmount,true).'</td>';
-    echo '  <td class="assignData" align="center"'.$goto.' style="width:20%">#'.htmlEncode($prT->idProviderOrder).'</td>';
+    if($prT->idProviderOrder){
+      echo '  <td class="assignData" align="center"'.$goto.' style="width:20%">#'.htmlEncode($prT->idProviderOrder).'</td>';
+    }else{
+      echo '  <td class="assignData" align="center"'.$goto.' style="width:20%"></td>';
+    }
     echo '</tr>';
   }
   
