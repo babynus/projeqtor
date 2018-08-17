@@ -98,15 +98,19 @@ class PlanningElementExtension   extends SqlElement {
    * @param unknown $type
    * @param unknown $id
    */
-  public static function checkInsert($type, $id, $wbs=null) {
+  public static function checkInsert($type, $id, $wbs=null, $wbsSortable=null) {
     debugLog("checkInsert($type, $id, $wbs)");
     $peName=$type.'PlanningElement';
     if (property_exists($type, $peName)) return null; // Nothing to do if PlanningElement exists
     $pex=SqlElement::getSingleSqlElementFromCriteria('PlanningElementExtension',array('refType'=>$type,'refId'=>$id));
     if ($pex->id) { // Exists : just check is $wbs if different 
       debugLog("  ok, exists with id $pex->id");
-      if ($wbs and $wbs!=$pex->wbs) {
-        // continue
+      if (($wbs and $wbs!=$pex->wbs) or ($wbsSortable and $wbsSortable!=$pex->wbsSortable)) {
+        $pex->wbs=$wbs;
+        if ($wbsSortable) $pex->wbsSortable=$wbsSortable;
+        else $pex->wbsSortable=formatSortableWbs($wbs);
+        $pex->save();
+        return $pex;
       } else {
         return $pex;
       }
@@ -115,8 +119,10 @@ class PlanningElementExtension   extends SqlElement {
     $pex->refId=$id;
     if ($wbs) {
       $pex->wbs=$wbs;
-      $pex->wbsSortable=formatSortableWbs($wbs);
+      if ($wbsSortable) $pex->wbsSortable=$wbsSortable;
+      else $pex->wbsSortable=formatSortableWbs($wbs);
     }
+    debugLog($pex);
     $pex->save();
     return $pex;
   }

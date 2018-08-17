@@ -127,8 +127,8 @@ class GlobalPlanningElement extends SqlElement {
         return;
       }
     }
-    $id-=PlanningElementExtension::$_startId;
     if ($id) {
+      $id-=PlanningElementExtension::$_startId;
       $pex=new PlanningElementExtension($id,true);
       if ($pex->id) {
         $gpe=self::getSingleGlobalPlanningElement($pex->refType, $pex->refId);
@@ -226,7 +226,7 @@ class GlobalPlanningElement extends SqlElement {
       $pe=new PlanningElement($this->id);
       $pe->save();
     } else {
-      $pex=PlanningElementExtension::checkInsert($this->refType, $this->refId,$this->wbs);      
+      $pex=PlanningElementExtension::checkInsert($this->refType, $this->refId,$this->wbs,$this->wbsSortable);      
     }
   }
     
@@ -278,7 +278,7 @@ class GlobalPlanningElement extends SqlElement {
       $table=$clsObj->getDatabaseTableName();
       $convert=self::$_globalizables[$class];
       if (!$limitToClass) {$query.="\n  UNION ";}
-      $query.="\n    SELECT coalesce(pex.id+$pexRef,concat('$class',$table.id)) as id";
+      $query.="\n    SELECT coalesce(pex.id+$pexRef,concat('$class','_',$table.id)) as id";
       foreach ($obj as $fld=>$val) {
         if (substr($fld,0,1)=='_' or $fld=='id') continue;        
         $query.=", ";
@@ -346,12 +346,12 @@ class GlobalPlanningElement extends SqlElement {
     $task=null;
     $changeParent=false;
     
-    if ($this->id < PlanningElementExtension::$_startId) {
+    if (is_numeric($this->id) and $this->id < PlanningElementExtension::$_startId) {
       $pe=new PlanningElement($this->id);
       return $pe->moveTo($destId,$mode,$recursive);
     }
   
-    // Here we are on Global that is not PE
+    // Here we are on GlobalPE that is not PE
     $checkClass=get_class($this);
     if (SqlElement::is_a($this, 'GlobalPlanningElement')) {
       $checkClass=$this->refType;
@@ -361,122 +361,32 @@ class GlobalPlanningElement extends SqlElement {
       $returnValue=i18n('errorUpdateRights');
       $returnValue .= '<input type="hidden" id="lastOperation" value="move" />';
       $returnValue .= '<input type="hidden" id="lastOperationStatus" value="INVALID" />';
-      $returnValue .= '<input type="hidden" id="lastPlanStatus" value="INVALID" />';
+      $returnValue .= '<input type="hidden" id="lastPlanStatus" value="OK" />';
       return $returnValue;
-    }
-  
-    // TEMP : refuse all moves
-//     $returnValue=i18n('moveCancelled');
-//     $returnValue .= '<input type="hidden" id="lastOperation" value="move" />';
-//     $returnValue .= '<input type="hidden" id="lastOperationStatus" value="INVALID" />';
-//     $returnValue .= '<input type="hidden" id="lastPlanStatus" value="INVALID" />';
-//     return $returnValue;
-    
-    
-    $dest=new GlobalPlanningElement($destId);
+    }    
+    debugLog ("get task id $destId");
+    $dest=self::getTaskFromPlanningId($destId);
+     
     $targetWbs=$dest->wbs;
-    debugLog($targetWbs);
-    $wbs=$targetWbs;
-    if ($mode=='before') {
-      $targetWbs.="-0";
+    $targetWbsSortable=$dest->wbsSortable;
+    debugLog("move $mode $targetWbs");
+    if (substr($targetWbs,-3)=='._#') {
+      // Move before or after another non planable item
+      $returnValue=i18n('moveCancelled'); // TODO : move
     } else {
-      $targetWbs.="-1";
+      $rootWbs=substr($targetWbs,0,strrpos($targetWbs, '.'));
+      $this->wbs=$rootWbs.'._#';
+      if ($mode=='before') {
+        $index=intval(substr($targetWbsSortable,-3)); // Get indice of predecessor       
+        debugLog("index=$index");
+        $this->wbsSortable=substr($targetWbsSortable,0,-3).formatSortableWbs($index-1).'.999.500';
+      } else {
+        $this->wbsSortable=$targetWbsSortable.'.999.500';
+      }
+      $this->saveWbs();
+      $returnValue=i18n('moveDone');
+      $status="OK";
     }
-    $this->wbs=$targetWbs;
-    $this->saveWbs();
-    $returnValue=i18n('moveDone');
-    $status="OK";
-    
-//     if ($dest->topRefType!=$this->topRefType
-//         or $dest->topRefId!=$this->topRefId) {    // Change parent
-//       $objectClass=$this->refType;
-//       $objectId=$this->refId;
-//       $task=new $objectClass($objectId);     // Object to move
-//       if ($dest->topRefType=="Project") {    // Move directly under project
-//         $task->idProject=$dest->topRefId;
-//         if (property_exists($task, 'idActivity')) {
-//         		$task->idActivity=null;
-//         }
-//         $changeParent='projet';
-//         $status="OK";
-//       } else if ($dest->topRefType=="Activity" and property_exists($task, 'idActivity')) {  // Move under (new) activity
-//         $task->idProject=$dest->idProject;   // Move to same project
-//         $task->idActivity=$dest->topRefId;   // Move under same activity
-//         $changeParent='activity';
-//         $status="OK";
-//       } else if (! $dest->topRefType and $objectClass=='Project') { // Moving a project to root
-//         $task->idProject=null;
-//         $changeParent='root';
-//         $status="OK";
-//       }
-//     		if ($status!="OK") {
-//     		  $returnValue=i18n('moveCancelled');
-//     		}
-//     		if (!$this->idle and $dest->idle) { // Move non idle after/before idle : check if new parent is idle
-//     		  $destParent=new PlanningElement($dest->topId);
-//     		  if ($destParent->idle) { // Move non closed item under closed item : forbidden
-//     		    $returnValue=i18n('moveCancelledIdle');
-//     		    $status="WARNING";
-//     		  }
-//     		}
-//     } else { // Don't change parent => just reorder at same level
-//       $status="OK";
-//       $changeParent=false;
-//     }
-//     $parent=new PlanningElement($dest->topId);
-  
-//     if ($status=="OK" and $task and !$recursive) { // Change parent, then will recursively call moveTo to reorder correctly
-//       $peName=get_Class($task).'PlanningElement';
-//       $task->$peName->topRefType=$dest->topRefType;
-//       $task->$peName->topRefId=$dest->topRefId;
-//       $task->$peName->topId=$dest->topId;
-//       $resultTask=$task->save();
-//       if (stripos($resultTask,'id="lastOperationStatus" value="OK"')>0 ) {
-//       		$pe=new PlanningElement($this->id);
-//       		$pe->moveTo($destId,$mode,true);
-//       		$returnValue=i18n('moveDone');
-//       } else {
-//         $returnValue=$resultTask;//i18n('moveCancelled');
-//         //$status="ERROR";
-//         $status=getLastOperationStatus($resultTask);
-//       }
-//     } else if ($status=="OK") { // Just reorder on same level
-//       if ($this->topRefType) {
-//         $where="topRefType='" . $this->topRefType . "' and topRefId=" . Sql::fmtId($this->topRefId) ;
-//       } else {
-//         $where="topRefType is null and topRefId is null";
-//       }
-//       $order="wbsSortable asc";
-//       $list=$this->getSqlElementsFromCriteria(null,false,$where,$order);
-//       $idx=0;
-//       $currentIdx=0;
-//       foreach ($list as $pe) {
-//         if ($pe->id==$this->id) {
-//           // met the one we are moving => skip
-//         } else {
-//           if ($pe->id==$destId and $mode=="before") {
-//             $idx++;
-//             $currentIdx=$idx;
-//           }
-//           $idx++;
-//           $root=substr($pe->wbs,0,strrpos($pe->wbs,'.'));
-//           //$root=$parent->wbs;
-//           $pe->wbs=($root=='')?$idx:$root.'.'.$idx;
-//           if ($pe->refType) {
-//             $pe->save();
-//           }
-//           if ($pe->id==$destId and $mode=="after") {
-//             $idx++;
-//             $currentIdx=$idx;
-//           }
-//         }
-//       }
-//       $root=substr($this->wbs,0,strrpos($this->wbs,'.'));
-//       $this->wbs=($root=='')?$currentIdx:$root.'.'.$currentIdx;
-//       $this->save();
-//       $returnValue=i18n('moveDone');
-//       $status="OK";
-//     }
   
     $returnValue .= '<input type="hidden" id="lastOperation" value="move" />';
     $returnValue .= '<input type="hidden" id="lastOperationStatus" value="' . $status . '" />';
@@ -548,7 +458,23 @@ class GlobalPlanningElement extends SqlElement {
       }
     }
     return $gpe;
-    
+  }
+  public static function getTaskFromPlanningId($id) {
+    debugLog("getTaskFromPlanningId($id)");
+    if (! is_numeric($id) or $id>PlanningElementExtension::$_startId) {
+      if (is_numeric($id)) {
+        $task=new GlobalPlanningElement($id);
+      } else {
+        $split=explode('_',$id);
+        $refId=intval($split[1]);
+        $refType=$split[0];
+        debugLog("  ok get task from not numeric id as $refType #$refId");
+        $task=GlobalPlanningElement::getSingleGlobalPlanningElement($refType, $refId);
+      }
+    } else {
+      $task=new PlanningElement($id);
+    }
+    return $task;
   }
   
   // For dep
