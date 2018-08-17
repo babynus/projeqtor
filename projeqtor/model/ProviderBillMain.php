@@ -226,11 +226,6 @@ class ProviderBillMain extends SqlElement {
       }
       $this->untaxedAmount=$amount;
     }
-//     $this->fullAmount=$this->untaxedAmount*(1+$this->taxPct/100);
-//     $this->taxAmount=$this->fullAmount-$this->untaxedAmount;
-//     $this->totalUntaxedAmount=$this->untaxedAmount-$this->discountAmount;
-//     $this->totalFullAmount=$this->totalUntaxedAmount*(1+$this->taxPct/100);
-//     $this->totalTaxAmount=$this->totalFullAmount-$this->totalUntaxedAmount;
     
     $providerTerm=new ProviderTerm();
     $crit = array("idProviderBill"=> $this->id);
@@ -249,9 +244,6 @@ class ProviderBillMain extends SqlElement {
     $this->totalUntaxedAmount=$this->untaxedAmount-$this->discountAmount;
     $this->totalFullAmount=$this->totalUntaxedAmount*(1+$this->taxPct/100);
     $this->totalTaxAmount=$this->totalFullAmount-$this->totalUntaxedAmount;
-    
-    parent::simpleSave();
-    
     
     parent::simpleSave();
     return $result;
@@ -306,6 +298,9 @@ class ProviderBillMain extends SqlElement {
   public function setAttributes() {
     if (count($this->_BillLine)) {
       self::$_fieldsAttributes['untaxedAmount']='readonly';
+    }
+    if (count($this->_ProviderTerm)) {
+      self::$_fieldsAttributes['taxPct']='readonly';
     }
   }
 }
