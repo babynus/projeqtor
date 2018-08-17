@@ -3542,12 +3542,9 @@ function savePlanningBaseline() {
     refreshList('idBaselineSelect',null,null,null,'selectBaselineTop');
     refreshList('idBaselineSelect',null,null,null,'selectBaselineBottom');
   };
-  console.log("test isGlobalPlanning");
   if (dojo.byId('isGlobalPlanning')) {
-    console.log("  OK isGlobalPlanning exists");
     if (dojo.byId('globalPlanning') && dojo.byId('globalPlanning').value=='true') {
       dojo.byId('isGlobalPlanning').value='true';
-      console.log("  OK isGlobalPlanning set to true");
     }
   }
   var formVar=dijit.byId('dialogPlanBaselineForm');

@@ -56,7 +56,6 @@ if ($mode=='after') {
 $needRefreshInserted=false;
 Sql::beginTransaction();
 foreach ($arrayFrom as $from) {
-  debugLog("move $from $mode $to");
   $idFrom=substr($from, 6); // validated to be numeric value in SqlElement base constructor
   $idTo=substr($to, 6); // validated to be numeric value in SqlElement base constructor
   if (! is_numeric($idTo) or $idTo>PlanningElementExtension::$_startId) {
@@ -67,7 +66,6 @@ foreach ($arrayFrom as $from) {
     $result=$returnValue;
   } else {
     $task=GlobalPlanningElement::getTaskFromPlanningId($idFrom);
-    debugLog("  found GPE #$task->id for $task->refType #$task->refId");
     $result=$task->moveTo($idTo,$mode);
   }
   if (getLastOperationStatus($result)!='OK') break; // Stop loop of moves
