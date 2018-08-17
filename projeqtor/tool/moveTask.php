@@ -53,21 +53,27 @@ if ($mode=='after') {
   $arrayFrom=array_reverse($arrayFrom);
 }
   
+$needRefreshInserted=false;
 Sql::beginTransaction();
-debugLog($_REQUEST);
 foreach ($arrayFrom as $from) {
+  debugLog("move $from $mode $to");
   $idFrom=substr($from, 6); // validated to be numeric value in SqlElement base constructor
   $idTo=substr($to, 6); // validated to be numeric value in SqlElement base constructor
-  if ($idFrom>PlanningElementExtension::$_startId) {
-    $task=new GlobalPlanningElement($idFrom);
+  if (! is_numeric($idTo) or $idTo>PlanningElementExtension::$_startId) {
+    $returnValue=i18n('moveCancelledNotPlanned');
+    $returnValue .= '<input type="hidden" id="lastOperation" value="move" />';
+    $returnValue .= '<input type="hidden" id="lastOperationStatus" value="INVALID" />';
+    $returnValue .= '<input type="hidden" id="lastPlanStatus" value="OK" />';
+    $result=$returnValue;
   } else {
-    $task=new PlanningElement($idFrom);
+    $task=GlobalPlanningElement::getTaskFromPlanningId($idFrom);
+    debugLog("  found GPE #$task->id for $task->refType #$task->refId");
+    $result=$task->moveTo($idTo,$mode);
   }
-  $result=$task->moveTo($idTo,$mode);
-  if (getLastOperationStatus($result)!='OK') break;
-  //$result.=" " . $idFrom . '->' . $idTo .'(' . $mode . ')';
-  if ($task->refType=='Project') {
+  if (getLastOperationStatus($result)!='OK') break; // Stop loop of moves
+  if ($task->refType=='Project' and ! $needRefreshInserted) {
     echo '<input type="hidden" id="needProjectListRefresh" value="true" />';
+    $needRefreshInserted=true;
   }
 }
 displayLastOperationStatus($result);
