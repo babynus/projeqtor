@@ -371,12 +371,10 @@ class GlobalPlanningElement extends SqlElement {
       $returnValue .= '<input type="hidden" id="lastPlanStatus" value="OK" />';
       return $returnValue;
     }    
-    debugLog ("get task id $destId");
     $dest=self::getTaskFromPlanningId($destId);
      
     $targetWbs=$dest->wbs;
     $targetWbsSortable=$dest->wbsSortable;
-    debugLog("move $mode $targetWbs");
     if (substr($targetWbs,-3)=='._#') {
       // Move before or after another non planable item
       $returnValue=i18n('moveCancelled'); // TODO : move
@@ -385,7 +383,6 @@ class GlobalPlanningElement extends SqlElement {
       $this->wbs=$rootWbs.'._#';
       if ($mode=='before') {
         $index=intval(substr($targetWbsSortable,-3)); // Get indice of predecessor       
-        debugLog("index=$index");
         $this->wbsSortable=substr($targetWbsSortable,0,-3).formatSortableWbs($index-1).'.999.500';
       } else {
         $this->wbsSortable=$targetWbsSortable.'.999.500';
@@ -467,7 +464,6 @@ class GlobalPlanningElement extends SqlElement {
     return $gpe;
   }
   public static function getTaskFromPlanningId($id) {
-    debugLog("getTaskFromPlanningId($id)");
     if (! is_numeric($id) or $id>PlanningElementExtension::$_startId) {
       if (is_numeric($id)) {
         $task=new GlobalPlanningElement($id);
@@ -475,7 +471,6 @@ class GlobalPlanningElement extends SqlElement {
         $split=explode('_',$id);
         $refId=intval($split[1]);
         $refType=$split[0];
-        debugLog("  ok get task from not numeric id as $refType #$refId");
         $task=GlobalPlanningElement::getSingleGlobalPlanningElement($refType, $refId);
       }
     } else {
