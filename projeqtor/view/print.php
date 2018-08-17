@@ -129,12 +129,16 @@ use Spipu\Html2Pdf\Html2Pdf;
         }
       ?>
       var printInNewWindow=<?php echo (getPrintInNewWindow())?'true':'false';?>;
+      console.log("printInNewWindow="+printInNewWindow);
       if (printInNewWindow) {
-        objTop=window.opener;
+        var objTop=window.opener;
+        console.log("OK");
       } else {
-    	  objTop=top;
+    	  var objTop=top;
       }
+      console.log(objTop);
       objTop.hideWait();
+      console.log("after hidewait");
       objTop.window.document.title="<?php echo getPrintTitle();?>";
       window.document.title="<?php echo getPrintTitle();?>";
       <?php if ($_REQUEST['page']=='planningPrint.php') {?>

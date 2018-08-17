@@ -338,6 +338,13 @@ class GlobalPlanningElement extends SqlElement {
     $result=array_flip($result);
     return $result;
   }
+  public static function isGlobalizable($class) {
+    if (isset(self::$_globalizables[$class])) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   
   public function moveTo($destId,$mode,$recursive=false) {
     $status="WARNING";
