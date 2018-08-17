@@ -956,8 +956,7 @@ function checkDestination(destination) {
   if (dojo.byId('indentButtonDiv')) {
     if (dijit.byId('objectGrid')) {
       dojo.byId('indentButtonDiv').style.display = 'none';
-    } else if (dojo.byId('objectClassManual')
-        && dojo.byId('objectClassManual').value != 'Planning') {
+    } else if (dojo.byId('objectClassManual') && (dojo.byId('objectClassManual').value != 'Planning' && dojo.byId('objectClassManual').value != 'GlobalPlanning')) {
       dojo.byId('indentButtonDiv').style.display = 'none';
     }
   }
