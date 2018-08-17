@@ -54,11 +54,15 @@ if ($mode=='after') {
 }
   
 Sql::beginTransaction();
-
+debugLog($_REQUEST);
 foreach ($arrayFrom as $from) {
   $idFrom=substr($from, 6); // validated to be numeric value in SqlElement base constructor
   $idTo=substr($to, 6); // validated to be numeric value in SqlElement base constructor
-  $task=new PlanningElement($idFrom);
+  if ($idFrom>PlanningElementExtension::$_startId) {
+    $task=new GlobalPlanningElement($idFrom);
+  } else {
+    $task=new PlanningElement($idFrom);
+  }
   $result=$task->moveTo($idTo,$mode);
   if (getLastOperationStatus($result)!='OK') break;
   //$result.=" " . $idFrom . '->' . $idTo .'(' . $mode . ')';
