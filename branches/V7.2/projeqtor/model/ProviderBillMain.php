@@ -85,10 +85,10 @@ class ProviderBillMain extends SqlElement {
   public $_Link=array();
   public $_Attachment=array();
   public $_Note=array();
-  
   public $_BillLine=array();
   public $_BillLine_colSpan="2";
-  
+  public $_BillLineTerm=array();
+  public $_BillLineTerm_colSpan="2";
   public $_nbColMax=3;
  
   private static $_layout='
@@ -301,6 +301,7 @@ class ProviderBillMain extends SqlElement {
     }
     if (count($this->_ProviderTerm)) {
       self::$_fieldsAttributes['taxPct']='readonly';
+      self::$_fieldsAttributes['untaxedAmount']='readonly';
     }
   }
 }
