@@ -409,7 +409,7 @@
             }
             $rootWbsArray[$rootWbs]['val']+=1;
             $wbsVal=$rootWbsArray[$rootWbs]['val'];
-            $line['wbs']=$rootWbs.'.'.$wbsVal;
+            $line['wbs']="";//$rootWbs.'.'.$wbsVal;
             $line['wbssortable']=formatSortableWbs($line['wbs']);
             $line['topid']= $rootWbsArray[$rootWbs]['topId'];
           }

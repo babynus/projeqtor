@@ -283,7 +283,7 @@ function showPrint(page, context, comboName, outMode, orientation) {
   if (outMode == "word" || outMode == "excel" || outMode == "download") {
     printInNewWin=true;
   }
-  if (context=='favorite') {
+  if (context=='favorite' || context=='admin') {
     printInNewWin=false;
   }
   if (!printInNewWin) {
@@ -3542,6 +3542,14 @@ function savePlanningBaseline() {
     refreshList('idBaselineSelect',null,null,null,'selectBaselineTop');
     refreshList('idBaselineSelect',null,null,null,'selectBaselineBottom');
   };
+  console.log("test isGlobalPlanning");
+  if (dojo.byId('isGlobalPlanning')) {
+    console.log("  OK isGlobalPlanning exists");
+    if (dojo.byId('globalPlanning') && dojo.byId('globalPlanning').value=='true') {
+      dojo.byId('isGlobalPlanning').value='true';
+      console.log("  OK isGlobalPlanning set to true");
+    }
+  }
   var formVar=dijit.byId('dialogPlanBaselineForm');
   if (formVar.validate()) {
     loadContent("../tool/savePlanningBaseline.php", "planResultDiv", "dialogPlanBaselineForm", true, null,null,null,callback);
@@ -6570,7 +6578,6 @@ function checkAlert() {
 }
 function checkAlertRetour(data) {
   if (data) {
-    console.log("checkAlertToDisplay returns "+data);
     if (data.indexOf('name="lastOperation" value="testConnection"')>0 && data.indexOf('name="lastOperationStatus" value="ERROR"')>0) {
       showDisconnectedMessage(data);
     }
@@ -7670,11 +7677,9 @@ function showBigImage(objectClass, objectId, node, title, hideImage, nocache) {
     centerThumb80.style.display="block";
     var titleDivRect=dojo.byId('centerThumb80TitleContainer').getBoundingClientRect();
     var globalDivRect=document.documentElement.getBoundingClientRect();
-    console.log("top="+titleDivRect.top+" height="+titleDivRect.height);
     if (titleDivRect.top+titleDivRect.height+50>globalDivRect.height) {
       var newTop=globalDivRect.height-titleDivRect.height-50;
       if (newTop<0) newTop=0;
-      console.log("newTop="+newTop);
       centerThumb80.style.top=newTop+'px';
     }
   }

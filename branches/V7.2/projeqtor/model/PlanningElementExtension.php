@@ -99,15 +99,24 @@ class PlanningElementExtension   extends SqlElement {
    * @param unknown $id
    */
   public static function checkInsert($type, $id, $wbs=null) {
+    debugLog("checkInsert($type, $id, $wbs)");
     $peName=$type.'PlanningElement';
     if (property_exists($type, $peName)) return null; // Nothing to do if PlanningElement exists
     $pex=SqlElement::getSingleSqlElementFromCriteria('PlanningElementExtension',array('refType'=>$type,'refId'=>$id));
     if ($pex->id) { // Exists : just check is $wbs if different 
-      // TODO
-      return $pex;
+      debugLog("  ok, exists with id $pex->id");
+      if ($wbs and $wbs!=$pex->wbs) {
+        // continue
+      } else {
+        return $pex;
+      }
     }
     $pex->refType=$type;
     $pex->refId=$id;
+    if ($wbs) {
+      $pex->wbs=$wbs;
+      $pex->wbsSortable=formatSortableWbs($wbs);
+    }
     $pex->save();
     return $pex;
   }
@@ -136,6 +145,11 @@ class PlanningElementExtension   extends SqlElement {
   public function getFakeId() {
     if (! $this->id) return null;
     return self::$_startId + $this->id;
+  }
+  
+  public function getFromGlobalPlanningElement($id) {
+    $id-=self::$_startId;
+    return new PlanningElementExtension($id);
   }
   
 }
