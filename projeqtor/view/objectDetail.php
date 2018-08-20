@@ -978,15 +978,24 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     } else if ($col=='_ResourceCost') { // Display ResourceCost
       drawResourceCostFromObject($val, $obj, false);
     } else if ($col=='_BillLineTerm') {
-      $prevSection=$section;
-      $section="BillLineTerm";
-      $colSpanSection='_'.lcfirst($section).'_colSpan';
-      if (property_exists($obj, $colSpanSection)) {
-        $colSpan=$obj->$colSpanSection;
+        $providerTerm = new ProviderTerm();
+        $listProvTerm = $providerTerm->getSqlElementsFromCriteria(array("idProviderBill"=>$obj->id));
+        $lines=array();
+        foreach ($listProvTerm as $term){
+          $providerTerm = new ProviderTerm($term->id);
+          array_push($lines,$providerTerm->_BillLineTerm);
+        }
+      if(!count($obj->_BillLine) and $lines){
+        $prevSection=$section;
+        $section="BillLineTerm";
+        $colSpanSection='_'.lcfirst($section).'_colSpan';
+        if (property_exists($obj, $colSpanSection)) {
+          $colSpan=$obj->$colSpanSection;
+        }
+        $widthPct=setWidthPct($displayWidth, $print, $printWidth, $obj, "2");
+        startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, $outMode, $prevSection, $nbCol, count($val), $included, $obj);
+        drawBillLinesProviderTerms($obj, false);
       }
-      $widthPct=setWidthPct($displayWidth, $print, $printWidth, $obj, "2");
-      startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, $outMode, $prevSection, $nbCol, count($val), $included, $obj);
-      drawBillLinesProviderTerms($obj, false);
     } else if ($col=='_DocumentVersion') { // Display 
       drawDocumentVersionFromObject($val, $obj, false);
     } else if ($col=='_ExpenseDetail') { // Display ExpenseDetail
@@ -1036,16 +1045,36 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, $outMode, $prevSection, $nbCol, $cpt, $included, $obj);
       drawNotesFromObject($obj, false);
     } else if ($col=='_BillLine') {
-      $prevSection=$section;
-      $section="BillLine";
-      $colSpanSection='_'.lcfirst($section).'_colSpan';
-      if (property_exists($obj, $colSpanSection)) {
-        $colSpan=$obj->$colSpanSection;
+      if(get_class($obj)=='ProviderBill'){
+        $providerTerm = new ProviderTerm();
+        $listProvTerm = $providerTerm->getSqlElementsFromCriteria(array("idProviderBill"=>$obj->id));
+        $lines=array();
+        foreach ($listProvTerm as $term){
+          $providerTerm = new ProviderTerm($term->id);
+          array_push($lines,$providerTerm->_BillLineTerm);
+        }
+        if(!$lines){
+          $prevSection=$section;
+          $section="BillLine";
+          $colSpanSection='_'.lcfirst($section).'_colSpan';
+          if (property_exists($obj, $colSpanSection)) {
+            $colSpan=$obj->$colSpanSection;
+          }
+          $widthPct=setWidthPct($displayWidth, $print, $printWidth, $obj, "2");
+          startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, $outMode, $prevSection, $nbCol, count($val), $included, $obj);
+          drawBillLinesFromObject($obj, false);
+        }
+      }else{
+        $prevSection=$section;
+        $section="BillLine";
+        $colSpanSection='_'.lcfirst($section).'_colSpan';
+        if (property_exists($obj, $colSpanSection)) {
+          $colSpan=$obj->$colSpanSection;
+        }
+        $widthPct=setWidthPct($displayWidth, $print, $printWidth, $obj, "2");
+        startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, $outMode, $prevSection, $nbCol, count($val), $included, $obj);
+        drawBillLinesFromObject($obj, false);
       }
-      $widthPct=setWidthPct($displayWidth, $print, $printWidth, $obj, "2");
-      startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, $outMode, $prevSection, $nbCol, count($val), $included, $obj);
-      drawBillLinesFromObject($obj, false);
-      
       // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM
     } else if ($col==='_Notification') {
       drawNotificationsLinkedToObject($obj);
