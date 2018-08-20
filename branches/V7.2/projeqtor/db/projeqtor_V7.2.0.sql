@@ -361,6 +361,7 @@ ADD `isGlobal` int(1) UNSIGNED DEFAULT 0,
 ADD `idType` int(12) unsigned DEFAULT NULL,
 ADD `idStatus` int(12) unsigned DEFAULT NULL,
 ADD `idResource` int(12) unsigned DEFAULT NULL;
+
 -- ==================================================================
 -- Misc
 -- ==================================================================
@@ -378,6 +379,9 @@ UPDATE `${prefix}menu` SET menuClass='Work Configuration EnvironmentalParameter'
 -- remove dojo editor
 UPDATE `${prefix}parameter` set parameterValue='CK' where parameterValue='Dojo';
 UPDATE `${prefix}parameter` set parameterValue='CKInline' where parameterValue='DojoInline';
+
+-- Event for any status change 
+INSERT INTO `${prefix}event`(`id`, `name`, `idle`, `sortOrder`) VALUES (14,'statusChange',0,100);
 
 --- ==================================================================
 --- Fix
