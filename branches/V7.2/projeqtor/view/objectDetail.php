@@ -5680,6 +5680,11 @@ function drawProviderTermFromObject($list, $obj, $type, $refresh=false) {
       $canCreate=false;
       $canDelete=false;
     }
+    if($term->idProviderBill){
+      $canUpdate=false;
+      $canDelete=false;
+    }
+    
     $idleClass=($term->idle)?' affectationIdleClass':'';
     $goto="";
     $typeAffectable='ProviderTerm';
