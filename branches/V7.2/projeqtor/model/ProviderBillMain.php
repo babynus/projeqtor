@@ -263,7 +263,6 @@ class ProviderBillMain extends SqlElement {
   }
   
   public function copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = NULL, $toActivity = NULL, $copyToWithResult = false,$copyToWithVersionProjects=false) {
-
     return parent::copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks);
   }
   // ============================================================================**********
@@ -304,5 +303,6 @@ class ProviderBillMain extends SqlElement {
       self::$_fieldsAttributes['untaxedAmount']='readonly';
     }
   }
+
 }
 ?>
