@@ -985,7 +985,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $providerTerm = new ProviderTerm($term->id);
           array_push($lines,$providerTerm->_BillLineTerm);
         }
-      if(!count($obj->_BillLine) and $lines){
+      if($lines){
         $prevSection=$section;
         $section="BillLineTerm";
         $colSpanSection='_'.lcfirst($section).'_colSpan';
