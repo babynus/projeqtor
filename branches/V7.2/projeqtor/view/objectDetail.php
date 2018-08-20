@@ -978,6 +978,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     } else if ($col=='_ResourceCost') { // Display ResourceCost
       drawResourceCostFromObject($val, $obj, false);
     } else if ($col=='_BillLineTerm') {
+      if(get_class($obj)=='ProviderBill'){
         $providerTerm = new ProviderTerm();
         $listProvTerm = $providerTerm->getSqlElementsFromCriteria(array("idProviderBill"=>$obj->id));
         $lines=array();
@@ -996,6 +997,17 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, $outMode, $prevSection, $nbCol, count($val), $included, $obj);
         drawBillLinesProviderTerms($obj, false);
       }
+     }else{
+       $prevSection=$section;
+       $section="BillLineTerm";
+       $colSpanSection='_'.lcfirst($section).'_colSpan';
+       if (property_exists($obj, $colSpanSection)) {
+         $colSpan=$obj->$colSpanSection;
+       }
+       $widthPct=setWidthPct($displayWidth, $print, $printWidth, $obj, "2");
+       startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, $outMode, $prevSection, $nbCol, count($val), $included, $obj);
+       drawBillLinesProviderTerms($obj, false);
+     }
     } else if ($col=='_DocumentVersion') { // Display 
       drawDocumentVersionFromObject($val, $obj, false);
     } else if ($col=='_ExpenseDetail') { // Display ExpenseDetail
@@ -3671,6 +3683,9 @@ function drawBillLinesProviderTerms($obj, $refresh=false) {
       foreach ($line as $linee){
       $billLine = new BillLine($linee->idBillLine);
       $unit=new MeasureUnit($linee->idMeasureUnit);
+      if($linee->rate == 0){
+        continue;
+      }
       echo '<tr>';
       echo '<td class="noteData" style="width:5%">#'.htmlEncode($linee->id).'</td>';
       echo '<td class="noteData" style="width:5%">'.htmlEncode($billLine->line).'</td>';
@@ -3687,17 +3702,9 @@ function drawBillLinesProviderTerms($obj, $refresh=false) {
       echo '<td class="noteData" style="width:10%">'.htmlDisplayCurrency($billLine->amount).'</td>';
       echo '<td class="noteData" style="width:8%">'.htmlDisplayPct($linee->rate).'</td>';
       echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency($linee->price).'</td>';
-      if(get_class($obj)=='ProviderBill'){
-        echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency($linee->price*$discountRate[$i]/100).'</td>';
-      }else{
-        echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency($linee->price*$discountRate/100).'</td>';
-      }
-      echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency($linee->price*$obj->taxPct/100).'</td>';
-      if(get_class($obj)=='ProviderBill'){
-        echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency(($linee->price)-($linee->price*$discountRate[$i]/100)+($linee->price*$obj->taxPct/100)).'</td>';
-      }else{
-        echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency(($linee->price)-($linee->price*$discountRate/100)+($linee->price*$obj->taxPct/100)).'</td>';
-      }
+      echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency($linee->price*$discountRate[$i]/100).'</td>';
+      echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency((($linee->price)-($linee->price*$discountRate[$i]/100))*$obj->taxPct/100).'</td>';
+      echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency((($linee->price)-($linee->price*$discountRate[$i]/100))*$obj->taxPct/100+($linee->price-($linee->price*$discountRate[$i]/100))).'</td>';
       echo '</tr>';
       }
     $i++;
@@ -3723,8 +3730,8 @@ function drawBillLinesProviderTerms($obj, $refresh=false) {
       echo '<td class="noteData" style="width:8%">'.htmlDisplayPct($linee->rate).'</td>';
       echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency($linee->price).'</td>';
       echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency($linee->price*$discountRate/100).'</td>';
-      echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency($linee->price*$obj->taxPct/100).'</td>';
-      echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency(($linee->price)-($linee->price*$discountRate/100)+($linee->price*$obj->taxPct/100)).'</td>';
+      echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency((($linee->price)-($linee->price*$discountRate/100))*$obj->taxPct/100).'</td>';
+      echo '<td class="noteData" style="width:8%">'.htmlDisplayCurrency((($linee->price)-($linee->price*$discountRate/100))*$obj->taxPct/100+($linee->price-($linee->price*$discountRate/100))).'</td>';
       echo '</tr>';
       $newRefId=$linee->refId;
     }
