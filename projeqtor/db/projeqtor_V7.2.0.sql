@@ -39,7 +39,7 @@ CREATE TABLE `${prefix}providerOrder` (
   `deliveryDelay` varchar(100) DEFAULT NULL,
   `deliveryExpectedDate` date DEFAULT NULL,
   `deliveryDoneDate` date DEFAULT NULL,
-  `deliveryValitedDate` date DEFAULT NULL,
+  `deliveryValidationDate` date DEFAULT NULL,
   `paymentCondition` varchar(100) DEFAULT NULL,
   `comment` mediumtext DEFAULT NULL,
   `handled` int(1) unsigned DEFAULT '0',
@@ -180,9 +180,9 @@ CHANGE `plannedFullAmount` `totalFullAmount` DECIMAL(11,2) UNSIGNED NULL DEFAULT
 ADD `discountAmount` DECIMAL(11,2),
 ADD `discountRate`   DECIMAL(5,2);
 
-INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idle`, `color`, idWorkflow) VALUES
-('ProviderOrder', 'Product', 10, 0, NULL, 1),
-('ProviderOrder', 'Service', 20, 0, NULL, 1);
+INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idle`, `color`, idWorkflow, isHandledStatus, isDoneStatus, isIdleStatus, isCancelledStatus) VALUES
+('ProviderOrder', 'Product', 10, 0, NULL, 1, 1, 1, 1, 1),
+('ProviderOrder', 'Service', 20, 0, NULL, 1, 1, 1, 1, 1);
 
 INSERT INTO `${prefix}copyable` (`id`,`name`, `idle`, `sortOrder`,`idDefaultCopyable`) VALUES 
 (23,'ProviderOrder', '0', '121','24'),
