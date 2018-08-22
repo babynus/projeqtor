@@ -3562,9 +3562,9 @@ function updateFinancialTotal() {
   var discount=dijit.byId("discountAmount").get("value");
   var rate=dijit.byId("discountRate").get("value");
   if (!isNaN(discount)) {
-    var rateNew=Math.round(100*discount)/untaxedAmount;
+    var rateNew=Math.round(10000*discount/untaxedAmount)/100;
     if (!isNaN(rate)) {
-      if(Math.round(rate)!= Math.round(rateNew)){
+      if(Math.round(rate*100)!= Math.round(rateNew*100)){
         dijit.byId("discountRate").set("value",rateNew);
       }
     }else{

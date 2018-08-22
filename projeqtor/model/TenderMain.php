@@ -64,7 +64,7 @@ class TenderMain extends SqlElement {
   public $discountAmount;
   public $_label_rate;
   public $discountRate;
-  public $_void_1;
+  public $discountFrom;
   //total
   public $totalUntaxedAmount;
   public $_void_2;
@@ -114,7 +114,7 @@ class TenderMain extends SqlElement {
     ';
 
   private static $_fieldsAttributes=array("id"=>"nobr", "reference"=>"readonly",
-                                  "idProject"=>"",
+                                  "idProject"=>"required",
                                   "name"=>"required",
                                   "idTenderType"=>"required",
                                   "handled"=>"nobr",
@@ -132,7 +132,8 @@ class TenderMain extends SqlElement {
                                   "idTenderStatus"=>"",
                                   "evaluationValue"=>"readonly",
                                   "evaluationRank"=>"hidden,readonly",
-                                  "idProvider"=>"required"
+                                  "idProvider"=>"required",
+                                  "discountFrom"=>"hidden"
   );  
   
   private static $_colCaptionTransposition = array('idTenderType'=>'type', 'requestDateTime'=>'requestDate', 'expectedTenderDateTime'=>'expectedTenderDate',
@@ -389,6 +390,12 @@ class TenderMain extends SqlElement {
       $colScript .= '</script>';
     }else if ($colName=="untaxedAmount" or $colName=="taxPct" or $colName=="discountAmount") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
+      if ($colName=="discountAmount") {
+        $colScript .= '   if (avoidRecursiveRefresh) return;';
+        $colScript .= '   avoidRecursiveRefresh=true;';
+        $colScript .= '   setTimeout(\'avoidRecursiveRefresh=false;\',100);';
+        $colScript .= '   dijit.byId("discountFrom").set("value","amount");';
+      }
       $colScript .= '  updateFinancialTotal();';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
@@ -397,8 +404,12 @@ class TenderMain extends SqlElement {
       $colScript .= '   var rate=dijit.byId("discountRate").get("value");';
       $colScript .= '   var untaxedAmount=dijit.byId("untaxedAmount").get("value");';
       $colScript .= '  if (!isNaN(rate)) {';
+      $colScript .= '   if (avoidRecursiveRefresh) return;';
+      $colScript .= '   avoidRecursiveRefresh=true;';
+      $colScript .= '   setTimeout(\'avoidRecursiveRefresh=false;\',100);';
+      $colScript .= '   dijit.byId("discountFrom").set("value","rate");';
       $colScript .= '   var discount=Math.round(untaxedAmount*rate)/100;';
-      $colScript .= '    dijit.byId("discountAmount").set("value",discount);';
+      $colScript .= '   dijit.byId("discountAmount").set("value",discount);';
       $colScript .= '  }';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
