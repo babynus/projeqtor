@@ -158,11 +158,11 @@ CREATE INDEX providerpaymentProvider ON `${prefix}providerpayment` (idProvider);
 
 INSERT INTO `${prefix}menu` (`id`,`name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
 (190,'menuProviderOrderType', 79, 'object', 826, 'Project', 0, 'Type '),
-(191,'menuProviderOrder', 151, 'object', 207, 'Project', 0, 'Financial '),
+(191,'menuProviderOrder', 151, 'object', 206, 'Project', 0, 'Financial '),
 (193,'menuProviderBillType', 79, 'object', 826, 'Project', 0, 'Type '),
-(194,'menuProviderBill', 151, 'object', 209, 'Project', 0, 'Financial '),
-(195,'menuProviderTerm', 151, 'object', 208, 'Project', 0, 'Financial '),
-(201,'menuProviderPayment', 151, 'object', 210, 'Project', 0, 'Financial ');
+(194,'menuProviderBill', 151, 'object', 208, 'Project', 0, 'Financial '),
+(195,'menuProviderTerm', 151, 'object', 207, 'Project', 0, 'Financial '),
+(201,'menuProviderPayment', 151, 'object', 209, 'Project', 0, 'Financial ');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1, 190, 1),

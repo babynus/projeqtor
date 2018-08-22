@@ -104,8 +104,8 @@ class ProviderBillMain extends SqlElement {
     <th field="colorNameStatus" width="9%" formatter="colorNameFormatter">${idStatus}</th>
     <th field="nameResource" formatter="thumbName22" width="8%" >${responsible}</th>
     <th field="expectedPaymentDate" width="8%" formatter="dateFormatter" >${expectedPaymentDate}</th>
-    <th field="untaxedAmount" width="7%" formatter="amountFormatter">${untaxedAmount}</th>
-    <th field="totalUntaxedAmount" width="7%" formatter="amountFormatter">${totalUntaxedAmount}</th>
+    <th field="untaxedAmount" width="7%" formatter="costFormatter">${untaxedAmount}</th>
+    <th field="totalUntaxedAmount" width="7%" formatter="costFormatter">${totalUntaxedAmount}</th>
     <th field="handled" width="4%" formatter="booleanFormatter" >${handled}</th>
     <th field="done" width="4%" formatter="booleanFormatter" >${done}</th>
     <th field="idle" width="4%" formatter="booleanFormatter" >${idle}</th>   ';
@@ -252,6 +252,10 @@ class ProviderBillMain extends SqlElement {
     $this->totalFullAmount=$this->totalUntaxedAmount*(1+$this->taxPct/100);
     $this->totalTaxAmount=$this->totalFullAmount-$this->totalUntaxedAmount;
     
+    if ($this->paymentAmount==$this->totalFullAmount and $this->totalFullAmount>0) {
+      $this->paymentDone=1;
+    }
+    
     parent::simpleSave();
     return $result;
   }
@@ -317,7 +321,7 @@ class ProviderBillMain extends SqlElement {
       foreach ($payList as $pay) {
         $result.='<tr class="noteHeader pointer" onClick="gotoElement(\'ProviderPayment\','.htmlEncode($pay->id).');">';
         $result.='<td style="padding:0px 5px">';
-        $result.= formatSmallButton('Payment');
+        $result.= formatSmallButton('ProviderPayment');
         $result.='</td>';
         $result.='<td >#'.htmlEncode($pay->id).'</td><td>&nbsp;&nbsp;&nbsp;</td>';
         $result.='<td style="padding:0px 5px;text-align:left">'.htmlEncode($pay->name).'</td></tr>';
@@ -335,6 +339,15 @@ class ProviderBillMain extends SqlElement {
     if (count($this->_ProviderTerm)) {
       self::$_fieldsAttributes['taxPct']='readonly';
       self::$_fieldsAttributes['untaxedAmount']='readonly';
+    }
+    if ($this->paymentDone) {
+      self::$_fieldsAttributes['paymentDate']='readonly';
+      self::$_fieldsAttributes['paymentAmount']='readonly';
+    }
+    if ($this->paymentsCount>0) {
+      self::$_fieldsAttributes['paymentDate']='readonly';
+      self::$_fieldsAttributes['paymentAmount']='readonly';
+      self::$_fieldsAttributes['paymentDone']='readonly';
     }
   }
   
