@@ -9,7 +9,7 @@
 -- Financial evolutions
 -- ==================================================================
 
-CREATE TABLE `${prefix}providerOrder` (
+CREATE TABLE `${prefix}providerorder` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `reference` VARCHAR(100) DEFAULT NULL,
   `name` varchar(200) DEFAULT NULL,
@@ -36,6 +36,7 @@ CREATE TABLE `${prefix}providerOrder` (
   `fullAmount` decimal(11,2) UNSIGNED,
   `discountAmount` DECIMAL(11,2),
   `discountRate`   DECIMAL(5,2),
+  `discountFrom`   varchar(10),
   `deliveryDelay` varchar(100) DEFAULT NULL,
   `deliveryExpectedDate` date DEFAULT NULL,
   `deliveryDoneDate` date DEFAULT NULL,
@@ -52,13 +53,13 @@ CREATE TABLE `${prefix}providerOrder` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE INDEX providerOrderProject ON `${prefix}providerOrder` (idProject);
-CREATE INDEX providerOrderUser ON `${prefix}providerOrder` (idUser);
-CREATE INDEX providerOrderResource ON `${prefix}providerOrder` (idResource);
-CREATE INDEX providerOrderStatus ON `${prefix}providerOrder` (idStatus);
-CREATE INDEX providerOrderType ON `${prefix}providerOrder` (idProviderOrderType);
+CREATE INDEX providerorderProject ON `${prefix}providerorder` (idProject);
+CREATE INDEX providerorderUser ON `${prefix}providerorder` (idUser);
+CREATE INDEX providerorderResource ON `${prefix}providerorder` (idResource);
+CREATE INDEX providerorderStatus ON `${prefix}providerorder` (idStatus);
+CREATE INDEX providerorderType ON `${prefix}providerorder` (idProviderOrderType);
 
-CREATE TABLE `${prefix}providerBill` (
+CREATE TABLE `${prefix}providerbill` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `reference` VARCHAR(100) DEFAULT NULL,
   `name` varchar(200) DEFAULT NULL,
@@ -85,10 +86,16 @@ CREATE TABLE `${prefix}providerBill` (
   `fullAmount` decimal(11,2) UNSIGNED,
   `discountAmount` DECIMAL(11,2),
   `discountRate`   DECIMAL(5,2),
+  `discountFrom`   varchar(10),
   `lastPaymentDate` date DEFAULT NULL,
   `expectedPaymentDate` date DEFAULT NULL,
   `paymentAmount` DECIMAL(11,2),
   `paymentCondition` varchar(100) DEFAULT NULL,
+  `paymentDate` date DEFAULT NULL,
+  `idPaymentDelay` int(12) unsigned DEFAULT NULL,
+  `paymentDueDate` date DEFAULT NULL,
+  `paymentsCount` int(3) default 0,
+  `paymentDone` int(1) unsigned DEFAULT 0,
   `comment` mediumtext DEFAULT NULL,
   `handled` int(1) unsigned DEFAULT '0',
   `done` int(1) unsigned DEFAULT '0',
@@ -97,19 +104,20 @@ CREATE TABLE `${prefix}providerBill` (
   `handledDate` date DEFAULT NULL,
   `doneDate` date DEFAULT NULL,
   `idleDate` date DEFAULT NULL,
-  `paymentDone` int(1) unsigned DEFAULT 0,
-  `paymentDate` date DEFAULT NULL,
-  `paymentAmount` DECIMAL(11,2) UNSIGNED,
-  `idPaymentDelay` int(12) unsigned DEFAULT NULL,
-  `paymentDueDate` date DEFAULT NULL,
-  `paymentsCount` int(3) default 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `${prefix}providerTerm` (
+CREATE INDEX providerbillProject ON `${prefix}providerbill` (idProject);
+CREATE INDEX providerbillUser ON `${prefix}providerbill` (idUser);
+CREATE INDEX providerbillResource ON `${prefix}providerbill` (idResource);
+CREATE INDEX providerbillStatus ON `${prefix}providerbill` (idStatus);
+CREATE INDEX providerbillType ON `${prefix}providerbill` (idProviderBillType);
+
+CREATE TABLE `${prefix}providerterm` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `idProject` int(12) unsigned DEFAULT NULL,
+  `done` int(1) unsigned DEFAULT NULL,
   `idle` int(1) unsigned DEFAULT NULL,
   `idProviderOrder` int(12) unsigned DEFAULT NULL,
   `idProviderBill` int(12) unsigned DEFAULT NULL,
@@ -121,12 +129,11 @@ CREATE TABLE `${prefix}providerTerm` (
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
-CREATE INDEX providerTermProject ON `${prefix}providerTerm` (idProject);
-CREATE INDEX providerTermOrder ON `${prefix}providerTerm` (idProviderOrder);
-CREATE INDEX providerTermBill ON `${prefix}providerTerm` (idProviderBill);
+CREATE INDEX providertermProject ON `${prefix}providerterm` (idProject);
+CREATE INDEX providertermOrder ON `${prefix}providerterm` (idProviderOrder);
+CREATE INDEX providertermBill ON `${prefix}providerterm` (idProviderBill);
 
-
-CREATE TABLE `${prefix}providerPayment` (
+CREATE TABLE `${prefix}providerpayment` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100),
   `idProviderBill` int(12) unsigned DEFAULT NULL,
@@ -145,6 +152,9 @@ CREATE TABLE `${prefix}providerPayment` (
   `providerBillAmount` DECIMAL(11,2) UNSIGNED,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+CREATE INDEX providerpaymentBill ON `${prefix}providerpayment` (idProviderBill);
+CREATE INDEX providerpaymentProvider ON `${prefix}providerpayment` (idProvider);
 
 INSERT INTO `${prefix}menu` (`id`,`name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
 (190,'menuProviderOrderType', 79, 'object', 826, 'Project', 0, 'Type '),
@@ -176,11 +186,13 @@ CHANGE `initialTaxAmount` `taxAmount` DECIMAL(11,2) UNSIGNED NULL DEFAULT NULL,
 CHANGE `initialFullAmount` `fullAmount` DECIMAL(11,2) UNSIGNED NULL DEFAULT NULL,
 CHANGE `plannedAmount` `totalUntaxedAmount` DECIMAL(11,2) UNSIGNED NULL DEFAULT NULL,
 CHANGE `plannedTaxAmount` `totalTaxAmount` DECIMAL(11,2) UNSIGNED NULL DEFAULT NULL,
-CHANGE `plannedFullAmount` `totalFullAmount` DECIMAL(11,2) UNSIGNED NULL DEFAULT NULL,
+CHANGE `plannedFullAmount` `totalFullAmount` DECIMAL(11,2) UNSIGNED NULL DEFAULT NULL;
+ALTER TABLE `${prefix}tender`
 ADD `discountAmount` DECIMAL(11,2),
-ADD `discountRate`   DECIMAL(5,2);
+ADD `discountRate`   DECIMAL(5,2),
+ADD `discountFrom`   varchar(10);
 
-INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idle`, `color`, idWorkflow, isHandledStatus, isDoneStatus, isIdleStatus, isCancelledStatus) VALUES
+INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idle`, `color`, idWorkflow, lockHandled, lockDone, lockIdle, lockCancelled) VALUES
 ('ProviderOrder', 'Product', 10, 0, NULL, 1, 1, 1, 1, 1),
 ('ProviderOrder', 'Service', 20, 0, NULL, 1, 1, 1, 1, 1);
 
