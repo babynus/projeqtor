@@ -71,6 +71,7 @@ class TenderMain extends SqlElement {
   public $totalTaxAmount;
   public $totalFullAmount;
   //
+  public $idProjectExpense;
   public $paymentCondition;
   public $deliveryDelay;
   public $deliveryDate;
