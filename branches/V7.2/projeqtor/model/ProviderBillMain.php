@@ -65,6 +65,7 @@ class ProviderBillMain extends SqlElement {
   public $_void_2;
   public $totalTaxAmount;
   public $totalFullAmount;
+  public $idProjectExpense;
   public $paymentCondition;
   public $expectedPaymentDate;
   public $lastPaymentDate;
