@@ -42,7 +42,6 @@ if($idProviderTerm){
   $line=new ProviderTerm($idProviderTerm);
 }
 
-debugLog("order=$idProviderOrder");
 $providerOrder = new ProviderOrder($idProviderOrder);
 
 $isLine = RequestHandler::getValue('isLine');
