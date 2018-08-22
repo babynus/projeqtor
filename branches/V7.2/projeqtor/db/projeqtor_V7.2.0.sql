@@ -50,6 +50,7 @@ CREATE TABLE `${prefix}providerorder` (
   `handledDate` date DEFAULT NULL,
   `doneDate` date DEFAULT NULL,
   `idleDate` date DEFAULT NULL,
+  `idProjectExpense` int(12) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -104,6 +105,7 @@ CREATE TABLE `${prefix}providerbill` (
   `handledDate` date DEFAULT NULL,
   `doneDate` date DEFAULT NULL,
   `idleDate` date DEFAULT NULL,
+  `idProjectExpense` int(12) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -126,6 +128,7 @@ CREATE TABLE `${prefix}providerterm` (
   `taxAmount` decimal(11,2) UNSIGNED,
   `fullAmount` decimal(11,2) UNSIGNED,
   `date` date DEFAULT NULL,
+  `idProjectExpense` int(12) UNSIGNED DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
@@ -140,7 +143,7 @@ CREATE TABLE `${prefix}providerpayment` (
   `paymentDate` date,
   `idPaymentMode` int(12) unsigned DEFAULT NULL,
   `idle` int(1) DEFAULT 0,
-  `idPaymentType` int(12) unsigned DEFAULT NULL,
+  `idProviderPaymentType` int(12) unsigned DEFAULT NULL,
   `paymentAmount`  DECIMAL(11,2) UNSIGNED,
   `paymentFeeAmount`  DECIMAL(11,2) UNSIGNED,
   `paymentCreditAmount` DECIMAL(11,2) UNSIGNED,
@@ -157,12 +160,13 @@ CREATE INDEX providerpaymentBill ON `${prefix}providerpayment` (idProviderBill);
 CREATE INDEX providerpaymentProvider ON `${prefix}providerpayment` (idProvider);
 
 INSERT INTO `${prefix}menu` (`id`,`name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
-(190,'menuProviderOrderType', 79, 'object', 826, 'Project', 0, 'Type '),
+(190,'menuProviderOrderType', 79, 'object', 830, 'Project', 0, 'Type '),
 (191,'menuProviderOrder', 151, 'object', 206, 'Project', 0, 'Financial '),
-(193,'menuProviderBillType', 79, 'object', 826, 'Project', 0, 'Type '),
+(193,'menuProviderBillType', 79, 'object', 831, 'Project', 0, 'Type '),
 (194,'menuProviderBill', 151, 'object', 208, 'Project', 0, 'Financial '),
 (195,'menuProviderTerm', 151, 'object', 207, 'Project', 0, 'Financial '),
-(201,'menuProviderPayment', 151, 'object', 209, 'Project', 0, 'Financial ');
+(201,'menuProviderPayment', 151, 'object', 209, 'Project', 0, 'Financial '),
+(202,'menuProviderPaymentType',79, 'object',832 , 'Project', 0, 'Type ');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1, 190, 1),
@@ -170,7 +174,8 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 (1, 193, 1),
 (1, 194, 1),
 (1, 195, 1),
-(1, 201, 1);
+(1, 201, 1),
+(1, 202, 1);
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,190,8),
@@ -178,7 +183,8 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (1,193,8),
 (1,194,8),
 (1,195,8),
-(1,201,8);
+(1,201,8),
+(1,202,8);
 
 ALTER TABLE `${prefix}tender`
 CHANGE `initialAmount` `untaxedAmount` DECIMAL(11,2) UNSIGNED NULL DEFAULT NULL,
@@ -190,11 +196,19 @@ CHANGE `plannedFullAmount` `totalFullAmount` DECIMAL(11,2) UNSIGNED NULL DEFAULT
 ALTER TABLE `${prefix}tender`
 ADD `discountAmount` DECIMAL(11,2),
 ADD `discountRate`   DECIMAL(5,2),
+ADD `idProjectExpense` int(12) UNSIGNED DEFAULT NULL,
 ADD `discountFrom`   varchar(10);
 
 INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idle`, `color`, idWorkflow, lockHandled, lockDone, lockIdle, lockCancelled) VALUES
 ('ProviderOrder', 'Product', 10, 0, NULL, 1, 1, 1, 1, 1),
-('ProviderOrder', 'Service', 20, 0, NULL, 1, 1, 1, 1, 1);
+('ProviderOrder', 'Service', 20, 0, NULL, 1, 1, 1, 1, 1),
+('ProviderBill','Partial bill',10,1,100, 1, 1, 1, 1, 1),
+('ProviderBill','Final bill',20,1,200, 1, 1, 1, 1, 1),
+('ProviderBill','Complete bill',30,1,300, 1, 1, 1, 1, 1),
+('ProviderPayment', 'event payment', 10, 0, NULL, 8, 1, 1, 1, 1),
+('ProviderPayment', 'partial payment', 20, 0, NULL, 8, 1, 1, 1, 1),
+('ProviderPayment', 'final payment', 30, 0, NULL, 8, 1, 1, 1, 1);
+
 
 INSERT INTO `${prefix}copyable` (`id`,`name`, `idle`, `sortOrder`,`idDefaultCopyable`) VALUES 
 (23,'ProviderOrder', '0', '121','24'),
