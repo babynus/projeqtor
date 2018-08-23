@@ -56,7 +56,7 @@ class ProjectExpenseMain extends Expense {
   public $idle;
   public $cancelled;
   public $_lib_cancelled;
-  public $_tab_5_2_smallLabel = array('untaxedAmount', 'tax', '', 'fullAmount','paymentDateShort', 'planned', 'real');
+  public $_tab_5_2_smallLabel = array('untaxedAmountShort', 'taxPct', 'tax', 'fullAmountShort','date', 'planned', 'real');
   public $plannedAmount;
   public $taxPct;
   public $plannedTaxAmount;
