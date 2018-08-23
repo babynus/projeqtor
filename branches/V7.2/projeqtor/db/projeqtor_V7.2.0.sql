@@ -465,7 +465,7 @@ UPDATE `${prefix}parameter` set parameterValue='CK' where parameterValue='Dojo';
 UPDATE `${prefix}parameter` set parameterValue='CKInline' where parameterValue='DojoInline';
 
 -- Event for any status change 
-INSERT INTO `${prefix}event`(`id`, `name`, `idle`, `sortOrder`) VALUES (14,'statusChange',0,100);
+INSERT INTO `${prefix}event` (`id`, `name`, `idle`, `sortOrder`) VALUES (14,'statusChange',0,100);
 
 --- ==================================================================
 --- Fix
