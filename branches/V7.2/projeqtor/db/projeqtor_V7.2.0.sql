@@ -202,9 +202,9 @@ ADD `discountFrom`   varchar(10);
 INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idle`, `color`, idWorkflow, lockHandled, lockDone, lockIdle, lockCancelled) VALUES
 ('ProviderOrder', 'Product', 10, 0, NULL, 1, 1, 1, 1, 1),
 ('ProviderOrder', 'Service', 20, 0, NULL, 1, 1, 1, 1, 1),
-('ProviderBill','Partial bill',10,1,100, 1, 1, 1, 1, 1),
-('ProviderBill','Final bill',20,1,200, 1, 1, 1, 1, 1),
-('ProviderBill','Complete bill',30,1,300, 1, 1, 1, 1, 1),
+('ProviderBill','Partial bill',10,0,NULL, 1, 1, 1, 1, 1),
+('ProviderBill','Final bill',20,0,NULL, 1, 1, 1, 1, 1),
+('ProviderBill','Complete bill',30,0,NULL, 1, 1, 1, 1, 1),
 ('ProviderPayment', 'event payment', 10, 0, NULL, 8, 1, 1, 1, 1),
 ('ProviderPayment', 'partial payment', 20, 0, NULL, 8, 1, 1, 1, 1),
 ('ProviderPayment', 'final payment', 30, 0, NULL, 8, 1, 1, 1, 1);
