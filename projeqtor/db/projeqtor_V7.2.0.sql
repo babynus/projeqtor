@@ -221,6 +221,14 @@ ALTER TABLE `${prefix}billLine`
 ADD `idBillLine` int(12)  DEFAULT NULL,
 ADD `rate` DECIMAL(5,2)  DEFAULT NULL;
 
+ALTER TABLE `${prefix}expense`
+ADD `plannedTaxAmount` DECIMAL(11,2) UNSIGNED NULL DEFAULT NULL,
+ADD `realTaxAmount` DECIMAL(11,2) UNSIGNED NULL DEFAULT NULL;
+
+UPDATE `${prefix}expense` SET 
+plannedTaxAmount=plannedFullAmount-plannedAmount,
+realTaxAmount=realFullAmount-realAmount;
+
 -- ==================================================================
 -- Budget
 -- ==================================================================
