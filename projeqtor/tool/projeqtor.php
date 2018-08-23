@@ -2681,7 +2681,7 @@ function transformValueListIntoInClause($list) {
     return '(0)';
   $result = '(';
   foreach ( $list as $id => $name ) {
-    if ($name) {
+    if (trim($name)) {
       $result .= ($result == '(') ? '' : ', ';
       if (is_numeric ( $name )) {
         $result .= $name;
