@@ -73,7 +73,7 @@ if(isset ($isLineMulti)){
 	          style="width: 400px;"
 	          maxlength="100"
 	          <?php $name=($line and $line->name)?$line->name:$providerOrder->name;?>
-	          class="input" value="<?php echo $name;?>" />
+	          class="input required" value="<?php echo $name;?>" />
 	         </td>
 	        </tr>
 	        
@@ -86,7 +86,7 @@ if(isset ($isLineMulti)){
                 dojoType="dijit.form.DateTextBox" required="true" hasDownArrow="false"   
                 constraints="{datePattern:browserLocaleDateFormatJs}"
                 <?php if (isset($readOnly['startDate'])) echo " readonly ";?>
-                type="text" maxlength="10"  style="width:100px; text-align: center;" class="input"
+                type="text" maxlength="10"  style="width:100px; text-align: center;" class="input required"
                 missingMessage="<?php echo i18n('messageMandatory',array('colDate'));?>" 
                 invalidMessage="<?php echo i18n('messageMandatory',array('colDate'));?>" 
                 value="">
@@ -107,7 +107,7 @@ if(isset ($isLineMulti)){
                 class="input">
                </input> 
                <?php  echo '%';?>
-               <?php  echo ' ('.i18n('labelFromOrder').')';?>
+               <?php  echo ' ('.i18n("colTaxPct")." ".i18n('labelFromOrder').')';?>
            </td>
          <tr>
          </tr>
@@ -123,7 +123,7 @@ if(isset ($isLineMulti)){
                 class="input">
                </input> 
                <?php  echo '%';?>
-               <?php  echo ' ('.i18n('labelFromOrder').')';?>
+               <?php  echo ' ('.i18n("colDiscountRate")." ".i18n('labelFromOrder').')';?>
            </td>
            
           </tr>
@@ -222,6 +222,7 @@ if(isset ($isLineMulti)){
 	           $billLineList=$billLine->getSqlElementsFromCriteria(array("refType"=>"ProviderOrder","refId"=>$providerOrder->id));
 	           $i = 1;
 	         ?> 
+	          <br/>
 	          <table>
 	           <tr>
 	             <td class="assignHeader" colspan="4"><?php echo i18n('labelBillLinesFromOrder');?></td>
@@ -408,6 +409,7 @@ if(isset ($isLineMulti)){
         </form>
       </td>
     </tr>
+    <tr><td>&nbsp;</td></tr>
     <tr>
       <td align="center">
         <input type="hidden" id="providerTermAction">
