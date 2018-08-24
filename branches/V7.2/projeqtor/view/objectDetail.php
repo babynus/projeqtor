@@ -3671,6 +3671,7 @@ function drawBillLinesProviderTerms($obj, $refresh=false) {
 
   $fmt=new NumberFormatter52($browserLocale, NumberFormatter52::INTEGER);
   $fmtd=new NumberFormatter52($browserLocale, NumberFormatter52::DECIMAL);
+  $discountRate=null;
   if(get_class($obj)!='ProviderBill'){
     $lines=array_reverse($lines);
     if(isset($obj->idProviderOrder)){
@@ -5725,7 +5726,15 @@ function drawProviderTermFromObject($list, $obj, $type, $refresh=false) {
       echo  '<td class="assignData'.$idleClass.'" align="right" '.$goto.' style="white-space: nowrap;">'.htmlDisplayCurrency($term->fullAmount).'</td>';
       $sumTermAmount+=$term->fullAmount;
       if($term->idProviderBill){
-        echo  '<td class="assignData'.$idleClass.'" align="center"'.$goto2.' style="white-space: nowrap;">#'.htmlEncode($term->idProviderBill).'</td>';
+        $bill=new ProviderBill($term->idProviderBill);
+        $objStatus=new Status($bill->idStatus);
+        echo  '<td class="assignData'.$idleClass.'" align="center" '.$goto2.' style="white-space:nowrap; padding:0px !important;" >';
+        echo '<table style="width:100%;padding:0;marin:0;"><tr>';
+        echo '<td class="" style="width:10%">#'.htmlEncode($term->idProviderBill).'</td>';
+        echo '<td class="" style="width:40%">'.htmlEncode($bill->externalReference).'</td>';
+        echo '<td class="" style="width:50%">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</td>';
+        echo '</tr></table>';
+        echo '</td>';
       }else{
         echo  '<td class="assignData'.$idleClass.'" align="center"'.$goto2.' style="white-space: nowrap;"></td>';
       }
