@@ -188,6 +188,18 @@ class ProviderOrderMain extends SqlElement {
     return self::$_databaseColumnName;
   }
   
+  public function delete() {
+    $result=parent::delete();
+    if (getLastOperationStatus($result)=='OK') {
+      $term=new ProviderTerm();
+      $termList=$term->getSqlElementsFromCriteria(array("idProviderOrder"=>$this->id));
+      foreach($termList as $term) {
+        $term->idProviderOrder=null;
+        $term->save();
+      }
+    }
+    return ($result);
+  }
   public function save() {
    if (trim($this->idProvider)) {
       $provider=new Provider($this->idProvider);
