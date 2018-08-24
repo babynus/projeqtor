@@ -5263,7 +5263,7 @@ function providerTermLine(totalUntaxedAmount){
   // Calculated values
   var taxAmount = Math.round(untaxedAmount * taxPct) / 100;
   var fullAmount = taxAmount + untaxedAmount;
-  var percent = Math.round(untaxedAmount*100/totalUntaxedAmountValue);
+  var percent = Math.round(untaxedAmount*1000/totalUntaxedAmountValue)/10;
   // Set values to fields
   dijit.byId("providerTermPercent").set('value', percent);
   dijit.byId("providerTermTaxAmount").set('value', taxAmount);
@@ -5358,6 +5358,35 @@ function saveProviderTermFromProviderBill() {
   }
 }
 
+function providerTermLineChangeNumber(){
+  if (!dijit.byId('providerTermNumberOfTerms')) return;
+  var number=dijit.byId('providerTermNumberOfTerms').get("value");
+  if (! number || number<=0) return;
+  //dijit.byId('providerTermPercent').set('value',100/number);
+  
+  if (number>1) {
+    dijit.byId('providerTermUntaxedAmount').set('value',dijit.byId('providerTermOrderUntaxedAmount').get('value')/number);
+    lockWidget('providerTermPercent');
+    lockWidget('providerTermUntaxedAmount');
+    var termDate=dijit.byId('providerTermDate').get('value');
+    if (! termDate) {
+      dojo.byId('labelRegularTerms').innerHTML='<br/>'+'<span style="color:red">'+i18n('messageMandatory',new Array(i18n('colDate')))+'</span>';
+    } else {
+      var termDay=termDate.getDate();
+      var lastDayOfMonth = (new Date(termDate.getFullYear(), termDate.getMonth()+1, 0)).getDate();
+      if (termDay==lastDayOfMonth ) {
+        termDay=i18n('colLastDay');
+      }
+      var startDate=dateFormatter(formatDate(termDate));
+      dojo.byId('labelRegularTerms').innerHTML='<br/>'+i18n('labelRegularTerms',new Array(number,termDay,startDate));
+    }
+  } else {
+    dijit.byId('providerTermPercent').set('value',100);
+    unlockWidget('providerTermPercent');
+    unlockWidget('providerTermUntaxedAmount');
+    dojo.byId('labelRegularTerms').innerHTML="";
+  }
+}
 // =============================================================================
 // = Affectation
 // =============================================================================
