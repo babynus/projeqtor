@@ -177,50 +177,76 @@ if(isset ($isLineMulti)){
                    <?php  echo ' ('.i18n("colTotalFullAmount")." ".i18n('labelFromOrder').')';?>
             </td>
           </tr>
+          <?php 
+          $maxValue = $providerOrder->totalUntaxedAmount;
+          $alreadyOnTerms=0;
+          $alreadyOnTermsHT=0;
+          $providerTerm = new ProviderTerm();
+          $termList=$providerTerm->getSqlElementsFromCriteria(array("idProviderOrder"=>$providerOrder->id));
+          foreach ($termList as $term) {
+            $maxValue -= $term->untaxedAmount ;
+            $alreadyOnTerms+=$term->fullAmount;
+            $alreadyOnTermsHT+=$term->untaxedAmount;
+          }
+          if($mode == 'edit'){
+            $providerTermEdit = new ProviderTerm($idProviderTerm);    
+            $NewMaxValue = $maxValue+$providerTermEdit->untaxedAmount;
+          }
+          $percent = (100*$maxValue/$providerOrder->totalUntaxedAmount);
+          $taxAmount = ($maxValue*$providerOrder->taxPct)/100;
+          $totalFullAmount = $maxValue+$taxAmount;
+          if($mode == 'edit'){
+            $MaxPercent = $percent;
+            $percent = (100*$providerTermEdit->untaxedAmount/$providerOrder->totalUntaxedAmount);
+            $MaxPercent += $percent;
+            $taxAmount = $providerTermEdit->taxAmount;
+            $totalFullAmount = $providerTermEdit->untaxedAmount+$taxAmount;
+          }?>
+          <?php if ($mode!='edit') {?>
+             <tr>
+              <td class="dialogLabel" >
+                <label for="providerTermSum" ><?php echo i18n("fullAmountOfTerms");?>&nbsp;:&nbsp;</label>
+              </td>
+              <td>
+                <?php if ($currencyPosition=='before') echo $currency;?>
+                <input dojoType="dijit.form.NumberTextBox" 
+                      id="" name=""
+                      readonly  constraints="{places:2}"
+                      style="width:100px;"
+                      value="<?php echo $alreadyOnTerms?>"
+                      class="input">
+                </input> 
+                <?php if ($currencyPosition=='after') echo $currency;?>
+                <?php  echo ' ('.i18n("labelFullAmountOfTerms").')';?>
+              </td>
+            </tr>
+          <?php }?>
           </table>
-          <?php if($isLine=='false'){ 
-              $maxValue = $providerOrder->totalUntaxedAmount;
-              $providerTerm = new ProviderTerm();
-              $termList=$providerTerm->getSqlElementsFromCriteria(array("idProviderOrder"=>$providerOrder->id));
-              foreach ($termList as $term) {
-                $maxValue -= $term->untaxedAmount ;
-              }
-              if($mode == 'edit'){
-                $providerTermEdit = new ProviderTerm($idProviderTerm);    
-                $NewMaxValue = $maxValue+$providerTermEdit->untaxedAmount;
-              }
-              $percent = (100*$maxValue/$providerOrder->totalUntaxedAmount);
-              $taxAmount = ($maxValue*$providerOrder->taxPct)/100;
-              $totalFullAmount = $maxValue+$taxAmount;
-              if($mode == 'edit'){
-                $MaxPercent = $percent;
-                $percent = (100*$providerTermEdit->untaxedAmount/$providerOrder->totalUntaxedAmount);
-                $MaxPercent += $percent;
-                $taxAmount = ($providerTermEdit->untaxedAmount*$providerOrder->taxPct)/100;
-                $totalFullAmount = $providerTermEdit->untaxedAmount+$taxAmount;
-              }
+          <?php 
+          if($isLine=='false'){
           ?> 
           <br/>
-          <table>
+          <table style="<?php if ($alreadyOnTerms>=$totalFullAmount or $alreadyOnTermsHT>=$providerOrder->totalUntaxedAmount) echo 'display:none;';?>">
           <tr>
             <td colspan="5" class="assignHeader"><?php echo i18n("colTermDetail");?></td>
           
           </tr>
           <tr>
-            <td class="assignHeader"><?php echo i18n("colNumberOfTerms");?></td>
+            <td class="assignHeader" style="<?php if ($mode=='edit') echo 'display:none;';?>"><?php echo i18n("colNumberOfTerms");?></td>
             <td class="assignHeader"><?php echo i18n("colUntaxedAmount");?></td>
             <td class="assignHeader" ><?php echo i18n("colRate");?></td>
             <td class="assignHeader" ><?php echo i18n("colTaxAmount");?></td>
             <td class="assignHeader" ><?php echo i18n("colFullAmount");?></td>
           </tr>
           <tr>
-           <td class="assignData" style="text-align:center"> 
+           <td class="assignData" style="text-align:center;<?php if ($mode=='edit') echo 'display:none;';?>"> 
              <div dojoType="dijit.form.NumberTextBox" 
                 id="providerTermNumberOfTerms" name="providerTermNumberOfTerms"
                 constraints="{min:0,max:999,places:0}"
-                style="width:50px;"
+                style="width:50px;<?php if ($mode=='edit') echo 'display:none;';?>"
                 value="1" 
-                onChange="providerTermLineChangeNumber();"
+                <?php if ($alreadyOnTerms>0) echo 'readonly';?>
+                <?php if ($mode!='edit') echo 'onChange="providerTermLineChangeNumber();"';?>
                 class="input">
                </div> 
            </td>
@@ -241,7 +267,7 @@ if(isset ($isLineMulti)){
             <div dojoType="dijit.form.NumberTextBox" 
               id="providerTermPercent" name="providerTermPercent"
               style="width: 100px;"
-              constraints="{max:<?php if($mode=='edit'){echo $MaxPercent;}else{echo $percent;}?>}"
+              constraints="{max:<?php if($mode=='edit'){echo $MaxPercent+0.01;}else{echo $percent+0.01;}?>}"
               onChange="providerTermLinePercent(<?php echo $providerOrder->totalUntaxedAmount; ?>);"
               value="<?php echo $percent;?>" 
               class="input"
