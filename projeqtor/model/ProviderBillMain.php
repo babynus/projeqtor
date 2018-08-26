@@ -114,7 +114,8 @@ class ProviderBillMain extends SqlElement {
   
   private static $_fieldsAttributes=array("id"=>"nobr", "reference"=>"readonly",
       "name"=>"required",
-      "idCommandType"=>"required",
+      "idProviderBillType"=>"required",
+      "idStatus"=>"required",
       "handled"=>"nobr",
       "done"=>"nobr",
       "idle"=>"nobr",
@@ -138,7 +139,7 @@ class ProviderBillMain extends SqlElement {
  
   
   private static $_colCaptionTransposition = array('idResource'=> 'responsible');
-  public $_calculateForColumn=array("name"=>"concat(coalesce(reference,''),' - ',name,' (',coalesce(totalFullAmount,0),')')");
+  public $_calculateForColumn=array("name"=>"concat(coalesce(externalReference,''),' - ',name,' (',coalesce(totalFullAmount,0),')')");
   private static $_databaseColumnName = array();
   /** ==========================================================================
    * Constructor
@@ -326,7 +327,8 @@ class ProviderBillMain extends SqlElement {
   }
   
   public function copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = NULL, $toActivity = NULL, $copyToWithResult = false,$copyToWithVersionProjects=false) {
-    return parent::copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks);
+    $result=parent::copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks); 
+    return $result;
   }
   // ============================================================================**********
   // GET VALIDATION SCRIPT
@@ -379,15 +381,15 @@ class ProviderBillMain extends SqlElement {
       $pay=new ProviderPayment();
       $payList=$pay->getSqlElementsFromCriteria(array('idProviderBill'=>$this->id));
       //$result.='</td><td>';
-      $result.='<div style="position:relative;top:-22px;left:317px;">';
-      $result.='<table>';
+      $result.='<div style="position:relative;top:0px;left:80px;width:350px; ">';
+      $result.='<table style="width:100%">';
       foreach ($payList as $pay) {
-        $result.='<tr class="noteHeader pointer" onClick="gotoElement(\'ProviderPayment\','.htmlEncode($pay->id).');">';
-        $result.='<td style="padding:0px 5px">';
+        $result.='<tr class="noteHeader pointer" onClick="gotoElement(\'Payment\','.htmlEncode($pay->id).');">';
+        $result.='<td style="padding:0px 5px; width:20px;">';
         $result.= formatSmallButton('ProviderPayment');
         $result.='</td>';
-        $result.='<td >#'.htmlEncode($pay->id).'</td><td>&nbsp;&nbsp;&nbsp;</td>';
-        $result.='<td style="padding:0px 5px;text-align:left">'.htmlEncode($pay->name).'</td></tr>';
+        $result.='<td style="width:30px">#'.htmlEncode($pay->id).'</td><td>&nbsp;&nbsp;&nbsp;</td>';
+        $result.='<td style="padding:0px 5px;text-align:left;width:300px">'.htmlEncode($pay->name).'</td></tr>';
       }
       $result.='</table>';
       $result.='</div>';
@@ -404,10 +406,10 @@ class ProviderBillMain extends SqlElement {
     if (count($this->_BillLine)) {
       self::$_fieldsAttributes['untaxedAmount']='readonly';
     }
-    if (count($this->_ProviderTerm)) {
-      self::$_fieldsAttributes['taxPct']='readonly';
-      self::$_fieldsAttributes['untaxedAmount']='readonly';
-    }
+//     if (count($this->_ProviderTerm)) {
+//       self::$_fieldsAttributes['taxPct']='readonly';
+//       self::$_fieldsAttributes['untaxedAmount']='readonly';
+//     }
     if ($this->paymentDone) {
       self::$_fieldsAttributes['paymentDate']='readonly';
       self::$_fieldsAttributes['paymentAmount']='readonly';
@@ -420,6 +422,7 @@ class ProviderBillMain extends SqlElement {
     if($this->idProjectExpense){
       self::$_fieldsAttributes['_button_generateProjectExpense']='hidden';
     }
+    
   }
   
   public function retreivePayments($save=true) {
