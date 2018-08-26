@@ -33,6 +33,7 @@ require_once "../tool/projeqtor.php";
 scriptLog('   ->/tool/saveProviderTerm.php');
 
 $mode=RequestHandler::getValue('mode');
+$objectClass=RequestHandler::getValue('providerTermObjectClass',false,'ProviderOrder');
 $idProviderOrder=RequestHandler::getId('providerOrderId');
 $idProject=RequestHandler::getId('providerOrderProject');
 $isLine=RequestHandler::getValue('providerOrderIsLine');
@@ -43,7 +44,6 @@ $taxPct=RequestHandler::getNumeric('providerTermTax');
 Sql::beginTransaction();
 $result="";
 
-debugLog("isLine=$isLine");
 if ($mode=='edit') {
   if ($isLine==1) {
     debugLog("in isLine==1");
@@ -110,7 +110,7 @@ if ($mode=='edit') {
   }
 } else {
   if ($isLine=='false') {
-    $order=new ProviderOrder($idProviderOrder);
+    $order=new $objectClass($idProviderOrder);
     $totalUntaxedAmount=$order->totalUntaxedAmount;
     $totalFullAmount=$order->totalFullAmount;
     $numberOfTerms=RequestHandler::getValue('providerTermNumberOfTerms');
@@ -128,7 +128,11 @@ if ($mode=='edit') {
     for ($nb=1;$nb<=$numberOfTerms;$nb++) {
       $providerTerm=new ProviderTerm();
       $providerTerm->idProject=$idProject;
-      $providerTerm->idProviderOrder=$idProviderOrder;
+      if ($objectClass=='ProviderBill') {
+        $providerTerm->idProviderBill=$idProviderOrder;
+      } else {
+        $providerTerm->idProviderOrder=$idProviderOrder;
+      }
       $providerTerm->date=$date;  
       $providerTerm->name=$name.' '.$date;
       if ($nb==$numberOfTerms and $numberOfTerms>1) {

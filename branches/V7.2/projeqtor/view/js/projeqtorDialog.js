@@ -5222,6 +5222,7 @@ function addProviderTerm(objectClass, type, idProviderOrder, isLine) {
   params+="&type="+type;
   params+="&isLine="+isLine;
   params+="&mode=add";
+  params+="&objectClass="+objectClass;
   loadDialog('dialogProviderTerm',callBack,false,params);
 }
 

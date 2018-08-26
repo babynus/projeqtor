@@ -49,6 +49,17 @@ class ProviderBillMain extends SqlElement {
   public $idStatus;
   public $idResource;
   public $idContact;
+  public $paymentCondition;
+  public $expectedPaymentDate;
+  public $lastPaymentDate;
+  public $handled;
+  public $handledDate;
+  public $done;
+  public $doneDate;
+  public $idle;
+  public $idleDate;
+  public $cancelled;
+  public $_lib_cancelled;
    public $_tab_4_3_smallLabel = array('untaxedAmountShort', 'tax', '', 'fullAmountShort','initial','discount', 'countTotal');
   //init
   public $untaxedAmount;
@@ -67,17 +78,6 @@ class ProviderBillMain extends SqlElement {
   public $totalFullAmount;
   public $idProjectExpense;
   public $_button_generateProjectExpense;
-  public $paymentCondition;
-  public $expectedPaymentDate;
-  public $lastPaymentDate;
-  public $handled;
-  public $handledDate;
-  public $done;
-  public $doneDate;
-  public $idle;
-  public $idleDate;
-  public $cancelled;
-  public $_lib_cancelled;
   public $_tab_3_1_smallLabel = array('date', 'amount', 'paymentComplete', 'payment');
   public $paymentDate;
   public $paymentAmount;
@@ -135,6 +135,8 @@ class ProviderBillMain extends SqlElement {
       "validatedPricePerDayAmount"=>"hidden",
       'paymentDueDate'=>'readonly',
       'paymentsCount'=>'hidden',
+      'expectedPaymentDate'=>'hidden',
+      'lastPaymentDate'=>'hidden',
       "idProject"=>"required");
  
   
@@ -224,13 +226,18 @@ class ProviderBillMain extends SqlElement {
       $this->totalTaxAmount=null;
       $this->totalFullAmount=null;
     }
-    $result=parent::save();
     
     //generate project expense
     if(RequestHandler::getBoolean('generateProjectExpenseButton')){
       $canCreate=securityGetAccessRightYesNo('menuProjectExpense', 'create')=="YES";
       if($canCreate){
         $projExpense = new ProjectExpense();
+        $lstType=SqlList::getList('ProjectExpenseType');
+        reset($lstType);
+        $projExpense->idProjectExpenseType=key($lstType);
+        $lstStatus=SqlList::getList('Status');
+        reset($lstStatus);
+        $projExpense->idStatus=key($lstStatus);
         $projExpense->name = $this->name;
         $projExpense->idProject = $this->idProject;
         $projExpense->taxPct = $this->taxPct;
@@ -248,6 +255,8 @@ class ProviderBillMain extends SqlElement {
         $this->idProjectExpense = $projExpense->id;
       }
     }
+    $result=parent::save();
+    
     //convert project expense  to bill lines
     if($this->idProjectExpense){
       $billLine = new BillLine();

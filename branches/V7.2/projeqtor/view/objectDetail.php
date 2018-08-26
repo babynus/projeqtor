@@ -6177,9 +6177,35 @@ function drawProviderTermFromProviderBill($list, $obj, $refresh=false) {
   echo '<table style="width:100%;">';
   echo '<tr>';
   if (!$print and $class=='ProviderBill') {
+    $provTerm=new ProviderTerm();
+    $billLine=new BillLine();
+    $critArray=array("idProviderBill"=>$obj->id);
+    $listProvTerm=$provTerm->getSqlElementsFromCriteria($critArray);
+    $test=false;
+    $y=0;
+    foreach ($listProvTerm as $prov) {
+      $y=1;
+      $critArray2=array("refType"=>"ProviderTerm", "refId"=>$prov->id);
+      $cpt=$billLine->countSqlElementsFromCriteria($critArray2);
+      if ($cpt!=0) {
+        $test=true;
+      }
+    }
+    if (get_class($obj)=='ProviderBill') {
+      $idProviderBill=$obj->id;
+    } else {
+      $idProviderBill=null;
+    }
+    $isLineProviderTerm='test';
     echo '<td class="assignHeader" style="width:10%;">';
     if ($obj->id!=null and !$print and $canCreate and !$obj->idle) {
       $depType='ProviderTerm';
+      if ($obj->totalUntaxedAmount!=0) {
+        if ($test!=true or $y==0) {
+          $isLineProviderTerm=false;
+          echo '<a onClick="addProviderTerm(\''.get_class($obj).'\',\'\',\''.$idProviderBill.'\',\'false\');" title="'.i18n('addProviderTerm').'" > '.formatSmallButton('Add').'</a>';
+        }
+      }
       echo '<a onClick="addProviderTermFromProviderBill();" title="'.i18n('addDependency'.$depType).'"> '.formatSmallButton('List').'</a>';
     }
     echo '</td>';
