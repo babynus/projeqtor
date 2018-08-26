@@ -134,11 +134,11 @@ if ($mode=='edit') {
       if ($nb==$numberOfTerms and $numberOfTerms>1) {
         $untaxedAmount=round($totalUntaxedAmount,2);// avoid roundings
         //To get Full amount correct
-        //$fullAmount=$totalFullAmount; 
-        //$taxAmount=$fullAmount-$untaxedAmount; 
+        $fullAmount=$totalFullAmount; 
+        $taxAmount=$fullAmount-$untaxedAmount; 
         //To get untaxed and tax amount correct
-        $taxAmount=round($untaxedAmount*$taxPct/100,2); 
-        $fullAmount=$untaxedAmount+$taxAmount;
+        //$taxAmount=round($untaxedAmount*$taxPct/100,2); 
+        //$fullAmount=$untaxedAmount+$taxAmount;
       }
       $providerTerm->untaxedAmount=$untaxedAmount;
       $providerTerm->taxPct=$taxPct;

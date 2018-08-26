@@ -496,21 +496,6 @@ function showDetailLink() {
     showInfo(i18n('messageMandatory', new Array(i18n('linkType'))));
   }
 }
-//gautier #providerTerm
-function showDetailProviderTerm() {
-  var linkType=dijit.byId('linkRef2TypeProviderTerm').get("value");
-  if (linkType) {
-    var linkable=linkableArray[linkType];
-    var canCreate=0;
-    if (canCreateArray[linkable] == "YES") {
-      canCreate=1;
-    }
-    showDetail('linkRef2IdProviderTerm', canCreate, ProviderTerm, true);
-
-  } else {
-    showInfo(i18n('messageMandatory', new Array(i18n('linkTypeProviderTerm'))));
-  }
-}
 
 function showDetailApprover() {
   var canCreate=0;
@@ -713,9 +698,11 @@ function selectDetailItem(selectedValue, lastSavedName) {
       } else if (comboName == 'linkedObjectId') {
         refreshLinkObjectList(idFldVal);
         setTimeout("dojo.byId('linkedObjectId').focus()", 1000);
-        enableWidget('dialogObjectSubmit');          
-      }
+        enableWidget('dialogObjectSubmit');
 // END ADD BY Marc TABARY - 2017-02-23 - ADD OBJECTS LINKED BY ID TO MAIN OBJECT
+      } else if (comboName == 'linkProviderTerm') {
+        refreshLinkProviderTerm(idFldVal);
+      }    
     }
   }
   
@@ -5221,7 +5208,7 @@ function removeProviderTermFromBill(id,idProviderBill) {
     loadContent("../tool/removeProviderTerm.php?providerTermId="+id+"&isProviderBill=true", "resultDiv",
         null, true, 'providerTerm');
   };
-    msg=i18n('confirmDeleteProviderTerm', new Array(id));
+    msg=i18n('confirmRemoveProviderTermFromBill', new Array(id));
     showConfirm(msg, actionOK);
 }
 
@@ -5352,7 +5339,7 @@ function addProviderTermFromProviderBill() {
 
 function saveProviderTermFromProviderBill() {
   var formVar=dijit.byId('providerTermFromProviderBillForm');
-  if (formVar.validate()) {
+  if (formVar.validate() && dojo.byId('linkProviderTerm') && dojo.byId('linkProviderTerm').value ) {
     loadContent("../tool/saveProviderTermFromProviderBill.php", "resultDiv", "providerTermFromProviderBillForm", true,'ProviderTerm');
     dijit.byId('dialogProviderTermFromProviderBill').hide();
   } else {
@@ -5392,6 +5379,19 @@ function providerTermLineChangeNumber(){
     unlockWidget('providerTermPercent');
     unlockWidget('providerTermUntaxedAmount');
     dojo.byId('labelRegularTerms').innerHTML="";
+  }
+}
+function refreshLinkProviderTerm(selected) {
+  var url='../tool/dynamicListLinkProviderTerm.php';
+  if (selected) {
+    url+='?selected=' + selected;
+    if (dojo.byId("ProviderBillId")) {
+      url+="&providerBillId="+dojo.byId("ProviderBillId").value;
+    }
+    var callback=function() {
+      dojo.byId('linkProviderTerm').focus();
+    };
+    loadDiv(url, 'linkProviderTermDiv', null, callback);
   }
 }
 // =============================================================================

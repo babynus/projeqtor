@@ -317,7 +317,19 @@ class ProviderOrderMain extends SqlElement {
   }
   
   public function copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = NULL, $toActivity = NULL, $copyToWithResult = false,$copyToWithVersionProjects=false) {
-    return parent::copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks);
+    $result=parent::copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks);
+    if ($newClass=='ProviderBill') {
+      $term=new ProviderTerm();
+      $termList=$term->getSqlElementsFromCriteria(array('idProviderOrder'=>$this->id));
+      foreach($termList as $term) {
+        if (! $term->isBilled) {
+          $term->idProviderBill=$result->id;
+          $term->isBilled=1;
+          $term->save();
+        }
+      }
+    }
+    return $result;
   }
   
   /** =========================================================================
@@ -395,6 +407,12 @@ class ProviderOrderMain extends SqlElement {
     $critArray=array('idProviderOrder'=>$this->id);
     $cpt=$term->countSqlElementsFromCriteria($critArray, false);
     if ($cpt > 0 ) {
+      self::$_fieldsAttributes['discountAmount']='readonly';
+      self::$_fieldsAttributes['discountRate']='readonly';
+    }
+    if ($this->done) {
+      self::$_fieldsAttributes['untaxedAmount']='readonly';
+      self::$_fieldsAttributes['taxPct']='readonly';
       self::$_fieldsAttributes['discountAmount']='readonly';
       self::$_fieldsAttributes['discountRate']='readonly';
     }
