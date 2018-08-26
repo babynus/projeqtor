@@ -5140,7 +5140,7 @@ function changeStatusNotification(objId, objStatusId) {
 //=============================================================================
 
 //gautier #providerTerm
-function editProviderTerm(idProviderOrder,isLine,id,name,date,tax,discount,untaxed,taxAmount,fullAmount,totalUntaxed) {
+function editProviderTerm(objectClass,idProviderOrder,isLine,id,name,date,tax,discount,untaxed,taxAmount,fullAmount,totalUntaxed) {
   affectationLoad=true;
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
@@ -5149,8 +5149,6 @@ function editProviderTerm(idProviderOrder,isLine,id,name,date,tax,discount,untax
   //var percent = Math.round(untaxed*100000/totalUntaxed)/1000;
   var percent = untaxed*100/totalUntaxed;
   var callBack = function () {
-    
-    
     if(name){
       dijit.byId("providerTermName").set('value', name);
     }
@@ -5179,20 +5177,23 @@ function editProviderTerm(idProviderOrder,isLine,id,name,date,tax,discount,untax
     dijit.byId("dialogProviderTerm").show();
     setTimeout("affectationLoad=false", 500);
   };
-  var params="&id="+id;
-      params+="&idProviderOrderEdit="+idProviderOrder;
-      params+="&isLineMulti="+isLine;
-      params+="&mode=edit";
+  var params="&objectClass="+objectClass;
+  params+="&id="+id;
+  params+="&idProviderOrderEdit="+idProviderOrder;
+  params+="&isLineMulti="+isLine;
+  params+="&mode=edit";
   loadDialog('dialogProviderTerm',callBack,false,params);
 }
 
-function removeProviderTerm(id) {
+function removeProviderTerm(id, fromBill) {
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
     return;
   }
   actionOK=function() {
-    loadContent("../tool/removeProviderTerm.php?providerTermId="+id, "resultDiv",
+    var url="../tool/removeProviderTerm.php?providerTermId="+id;
+    if (fromBill) url+="&fromBill=true";
+    loadContent(url, "resultDiv",
         null, true, 'providerTerm');
   };
     msg=i18n('confirmDeleteProviderTerm', new Array(id));

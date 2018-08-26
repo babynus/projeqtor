@@ -136,9 +136,12 @@ class ProviderTermMain extends SqlElement {
   
   public function deleteControl() {
   	$result = "";
-  	if ($this->idProviderBill){
+  	if ($this->isPaid){
+  	  $result .= "<br/>" . i18n("cannotDeletePaidTerm");
+  	} else if ($this->idProviderBill){
   		$result .= "<br/>" . i18n("cannotDeleteBilledTerm");
   	}
+
   	if (! $result) {  
       $result=parent::deleteControl();
     }
