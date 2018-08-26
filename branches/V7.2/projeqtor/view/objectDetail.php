@@ -5700,7 +5700,7 @@ function drawProviderTermFromObject($list, $obj, $type, $refresh=false) {
     if (!$print) {
       echo '<td class="assignData'.$idleClass.'" style="text-align:center;white-space: nowrap;">';
       if ($canUpdate and !$print) {
-        echo '  <a onClick="editProviderTerm(\''.$obj->id.'\',\''.$isLineProviderTerm.'\',\''.$term->id.'\',\''.$term->name.'\',\''.$term->date.'\',\''.htmlDisplayNumericWithoutTrailingZeros($term->taxPct).'\',\''.htmlDisplayNumericWithoutTrailingZeros($obj->discountRate).'\',\''.$term->untaxedAmount.'\',\''.$term->taxAmount.'\',\''.$term->fullAmount.'\',\''.$obj->totalUntaxedAmount.'\');" '.'title="'.i18n('editProviderTerm').'" > '.formatSmallButton('Edit').'</a>';
+        echo '  <a onClick="editProviderTerm(\''.get_class($obj).'\',\''.$obj->id.'\',\''.$isLineProviderTerm.'\',\''.$term->id.'\',\''.$term->name.'\',\''.$term->date.'\',\''.htmlDisplayNumericWithoutTrailingZeros($term->taxPct).'\',\''.htmlDisplayNumericWithoutTrailingZeros($obj->discountRate).'\',\''.$term->untaxedAmount.'\',\''.$term->taxAmount.'\',\''.$term->fullAmount.'\',\''.$obj->totalUntaxedAmount.'\');" '.'title="'.i18n('editProviderTerm').'" > '.formatSmallButton('Edit').'</a>';
       }
       if ($canDelete and !$print) {
         echo '  <a onClick="removeProviderTerm('."'".htmlEncode($term->id)."'".');" '.'title="'.i18n('removeProviderTerm').'" > '.formatSmallButton('Remove').'</a>';
@@ -6169,9 +6169,11 @@ function drawProviderTermFromProviderBill($list, $obj, $refresh=false) {
   
   $canCreate=securityGetAccessRightYesNo('menu'.$class, 'update', $obj)=="YES";
   $canDelete=$canCreate;
+  $canUpdate=$canCreate;
   if ($obj->idle==1) {
     $canCreate=false;
     $canDelete=false;
+    $canUpdate=false;
   }
   echo '<tr><td colspan="2" style="width:100%;">';
   echo '<table style="width:100%;">';
@@ -6215,6 +6217,7 @@ function drawProviderTermFromProviderBill($list, $obj, $refresh=false) {
   echo '<td class="assignHeader" colspan="1" style="width:20%">'.i18n('colAmount').'</td>';
   echo '<td class="assignHeader" colspan="1" style="width:45%">'.i18n('colIdProviderOrder').'</td>';
   echo '</tr>';
+  $sumTermAmount=0;
   foreach ($list as $prT) {
     $goto="";
     $typeAffectable='ProviderOrder';
@@ -6227,9 +6230,16 @@ function drawProviderTermFromProviderBill($list, $obj, $refresh=false) {
       $goto2=' onClick="gotoElement(\''.$typeAffectable2.'\',\''.htmlEncode($prT->id).'\');" style="cursor: pointer;" ';
     }
     echo '<tr>';
-    echo '  <td class="assignData" align="center" style="width:10%">';
-    if ($canDelete) {
-      echo '    <a onClick="removeProviderTermFromBill('."'".htmlEncode($prT->id)."'".');" '.'title="'.i18n('removeProviderTermFromBill').'" > '.formatSmallButton('Remove').'</a>';
+    echo '  <td class="assignData" align="center" style="width:10%;white-space:nowrap">';
+    if ($obj->id!=null and $canUpdate and !$print and !$obj->idle and !$prT->idProviderOrder) {
+      echo '  <a onClick="editProviderTerm(\''.get_class($obj).'\',\''.$obj->id.'\',\''.$isLineProviderTerm.'\',\''.$prT->id.'\',\''.$prT->name.'\',\''.$prT->date.'\',\''.htmlDisplayNumericWithoutTrailingZeros($prT->taxPct).'\',\''.htmlDisplayNumericWithoutTrailingZeros($obj->discountRate).'\',\''.$prT->untaxedAmount.'\',\''.$prT->taxAmount.'\',\''.$prT->fullAmount.'\',\''.$obj->totalUntaxedAmount.'\');" '.'title="'.i18n('editProviderTerm').'" > '.formatSmallButton('Edit').'</a>';
+    }
+    if ($canDelete and !$print) {
+      if ($prT->idProviderOrder) {
+        echo '  <a onClick="removeProviderTermFromBill('."'".htmlEncode($prT->id)."'".');" '.'title="'.i18n('removeProviderTermFromBill').'" > '.formatSmallButton('Mark').'</a>';
+      } else { 
+        echo '  <a onClick="removeProviderTerm('."'".htmlEncode($prT->id)."'".',true);" '.'title="'.i18n('removeProviderTerm').'" > '.formatSmallButton('Remove').'</a>';
+      }
     }
     if ($prT->isPaid) {
       echo i18n('colIsPaid');
@@ -6237,7 +6247,8 @@ function drawProviderTermFromProviderBill($list, $obj, $refresh=false) {
     echo '   </td>';
     echo '  <td class="assignData" align="center" '.$goto2.' style="width:10%">#'.htmlEncode($prT->id).'</td>';
     echo '  <td class="assignData" align="center" '.$goto2.' style="width:15%">'.htmlFormatDate($prT->date).'</td>';
-    echo '  <td class="assignData" align="right" '.$goto2.' style="width:20%;text-align:right;">'.htmlDisplayCurrency($prT->fullAmount, true).'</td>';
+    echo '  <td class="assignData" align="right" '.$goto2.' style="width:20%;text-align:right;">'.htmlDisplayCurrency($prT->fullAmount).'</td>';
+    $sumTermAmount+=$prT->fullAmount;
     if ($prT->idProviderOrder) {
       //echo '  <td class="assignData" align="center"'.$goto.' style="width:45%">#'.htmlEncode($prT->idProviderOrder).'</td>';
       $order=new ProviderOrder($prT->idProviderOrder);
@@ -6254,7 +6265,13 @@ function drawProviderTermFromProviderBill($list, $obj, $refresh=false) {
     }
     echo '</tr>';
   }
-  
+  if (count($list)>0) {
+    echo '<tr>';
+    echo '<td colspan="'.(($print)?'2':'3').'" class="assignHeader" style="text-align:right">'.i18n('sum').'&nbsp;</td>';
+    echo '<td class="assignData" style="font-weight:bold;vertical-align:middle;" align="right">'.htmlDisplayCurrency($sumTermAmount).'</td>';
+    echo '<td class="assignHeader" >&nbsp;</td>';
+    echo '</tr>';
+  }
   echo '</table>';
   echo '</td></tr>';
 }
