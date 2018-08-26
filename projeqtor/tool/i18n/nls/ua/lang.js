@@ -1937,6 +1937,7 @@ KpiDefinition: "визначення КПЕ (ключ.показн.ефекти�
 kpiProgress: "Прогрес КПЕ",
 labelBillLinesFromOrder: "Lines from order",
 labelDisplayOnlyCurrentWeekMeetings: "показ.тільки поточні тижневі обговорення",
+labelFromBill: "from bill",
 labelFromOrder: "from order",
 labelFullAmountOfTerms: "sum of full amounts of terms alreay booked",
 labelHideDone: "приховати виконані елементи",
