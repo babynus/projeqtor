@@ -46,13 +46,13 @@ $result="";
 
 if ($mode=='edit') {
   if ($isLine==1) {
-    debugLog("in isLine==1");
     $untaxedAmount=RequestHandler::getNumeric('providerTermUntaxedAmount');
     $taxAmount=RequestHandler::getNumeric('providerTermTaxAmount');
     $fullAmount=RequestHandler::getNumeric('providerTermFullAmount');
     $providerTerm=new ProviderTerm($idProviderTerm);
     $providerTerm->idProject=$idProject;
-    $providerTerm->idProviderOrder=$idProviderOrder;
+    if ($objectClass=='ProviderOrder')  $providerTerm->idProviderOrder=$idProviderOrder;
+    else if ($objectClass=='ProviderBill')  $providerTerm->idProviderBill=$idProviderOrder;
     $providerTerm->date=$date;
     $providerTerm->name=$name;
     $providerTerm->untaxedAmount=$untaxedAmount;

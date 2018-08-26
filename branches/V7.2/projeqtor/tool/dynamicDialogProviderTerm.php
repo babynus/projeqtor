@@ -234,7 +234,7 @@ if(isset ($isLineMulti)){
           if($isLine=='false'){
           ?> 
           <br/>
-          <table style="<?php if ($alreadyOnTerms>=$totalFullAmount or $alreadyOnTermsHT>=$providerOrder->totalUntaxedAmount) echo 'display:none;';?>">
+          <table style="<?php if ($mode!='edit' and ($alreadyOnTerms>=$totalFullAmount or $alreadyOnTermsHT>=$providerOrder->totalUntaxedAmount)) echo 'display:none;';?>">
           <tr>
             <td colspan="5" class="assignHeader"><?php echo i18n("colTermDetail");?></td>
           
