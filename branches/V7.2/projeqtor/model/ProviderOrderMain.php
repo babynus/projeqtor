@@ -380,7 +380,6 @@ class ProviderOrderMain extends SqlElement {
     }else if ($colName=="discountRate") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  if (cancelRecursiveChange_OnGoingChange) return;';
-      $colScript .= '  cancelRecursiveChange_OnGoingChange = true;';
       $colScript .= '  var rate=dijit.byId("discountRate").get("value");';
       $colScript .= '  var untaxedAmount=dijit.byId("untaxedAmount").get("value");';
       $colScript .= '  if (!isNaN(rate)) {';
@@ -388,7 +387,6 @@ class ProviderOrderMain extends SqlElement {
       $colScript .= '    dijit.byId("discountAmount").set("value",discount);';
       $colScript .= '  }';
       $colScript .= '  formChanged();';
-      $colScript .= '  setTimeout("cancelRecursiveChange_OnGoingChange = false;",50);';
       $colScript .= '</script>';
     } else if ($colName=="idProject") {
     	$colScript .= '<script type="dojo/connect" event="onChange" >';
