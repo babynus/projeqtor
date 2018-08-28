@@ -272,10 +272,15 @@ class ProviderBillMain extends SqlElement {
           $listExpD = $expD->getSqlElementsFromCriteria($critArray);
           $number = 1;
           foreach ($listExpD as $exp){
+            $detail =  SqlList::getNameFromId('ExpenseDetailType', $exp->idExpenseDetailType)."\n". $exp->getFormatedDetail();
+            $detail = str_replace('<b>', '', $detail) ;
+            $detail = str_replace('</b>', '', $detail) ;
             $billLine = new BillLine();
             $billLine->line = $number;
             $billLine->refType = 'ProviderBill';
             $billLine->refId = $this->id;
+            $billLine->description = $exp->name;
+            $billLine->detail = $detail;
             $billLine->price = $exp->amount;
             $billLine->quantity = 1;
             $billLine->save();
@@ -340,8 +345,6 @@ class ProviderBillMain extends SqlElement {
     if (getLastOperationStatus($result)=='OK') {
       if($this->idProjectExpense){
         $projExpense = new ProjectExpense($this->idProjectExpense);
-        $this->idProjectExpense = null;
-        $this->save();
         $projExpense->save();
       }
     }
@@ -407,7 +410,7 @@ class ProviderBillMain extends SqlElement {
       $result.='<div style="position:relative;top:0px;left:80px;width:350px; ">';
       $result.='<table style="width:100%">';
       foreach ($payList as $pay) {
-        $result.='<tr class="noteHeader pointer" onClick="gotoElement(\'Payment\','.htmlEncode($pay->id).');">';
+        $result.='<tr class="noteHeader pointer" onClick="gotoElement(\'ProviderPayment\','.htmlEncode($pay->id).');">';
         $result.='<td style="padding:0px 5px; width:20px;">';
         $result.= formatSmallButton('ProviderPayment');
         $result.='</td>';
