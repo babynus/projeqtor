@@ -50,7 +50,7 @@ class ProviderBillMain extends SqlElement {
   public $idResource;
   public $idContact;
   public $paymentCondition;
-  public $expectedPaymentDate;
+  public $paymentDueDate;
   public $lastPaymentDate;
   public $handled;
   public $handledDate;
@@ -105,7 +105,7 @@ class ProviderBillMain extends SqlElement {
     <th field="name" width="27%" >${name}</th>
     <th field="colorNameStatus" width="9%" formatter="colorNameFormatter">${idStatus}</th>
     <th field="nameResource" formatter="thumbName22" width="8%" >${responsible}</th>
-    <th field="expectedPaymentDate" width="8%" formatter="dateFormatter" >${expectedPaymentDate}</th>
+    <th field="paymentDueDate" width="8%" formatter="dateFormatter" >${paymentDueDate}</th>
     <th field="untaxedAmount" width="7%" formatter="costFormatter">${untaxedAmount}</th>
     <th field="totalUntaxedAmount" width="7%" formatter="costFormatter">${totalUntaxedAmount}</th>
     <th field="handled" width="4%" formatter="booleanFormatter" >${handled}</th>
@@ -133,9 +133,8 @@ class ProviderBillMain extends SqlElement {
       "initialPricePerDayAmount"=>"hidden",
       "addPricePerDayAmount"=>"hidden",
       "validatedPricePerDayAmount"=>"hidden",
-      'paymentDueDate'=>'readonly',
+      //'paymentDueDate'=>'readonly',
       'paymentsCount'=>'hidden',
-      'expectedPaymentDate'=>'hidden',
       'lastPaymentDate'=>'hidden',
       "idProject"=>"required");
  
