@@ -209,32 +209,35 @@ class ProjectExpenseMain extends Expense {
    * @return the return message of persistence/SqlElement#save() method
    */
   public function save() {
-    $this->isCalculated = 0;
     $provOrder = new ProviderOrder();
     $listProvOrd=$provOrder->getSqlElementsFromCriteria(array("idProjectExpense"=>$this->id));
-    $getProv = false;
+    $hasProvOrder=false;
+    if($this->isCalculated or count($listProvOrd)>0){
+      $this->realAmount = 0;
+      $this->realTaxAmount = 0;
+      $this->realFullAmount =0;
+    }
     foreach ($listProvOrd as $prov){
-      if($getProv == false){
-        $this->realAmount = 0;
-        $this->realTaxAmount = 0;
-        $this->realFullAmount =0;
-      }
-      $getProv = true;
+      $hasProvOrder = true;
       $this->realAmount += $prov->totalUntaxedAmount;
       $this->realTaxAmount += $prov->totalTaxAmount;
       $this->realFullAmount += $prov->totalFullAmount;
       $this->isCalculated = 1;
     }
-    if($getProv == false){
+    if (count($listProvOrd)==0) {
+      $this->isCalculated = 0;
+    }
+    if($hasProvOrder == false){
       $provBill = new ProviderBill();
+      $hasProvBill=false;
       $listProvBill=$provBill->getSqlElementsFromCriteria(array("idProjectExpense"=>$this->id));
       foreach ($listProvBill as $prov){
-        if($getProv == false){
+        if($hasProvBill == false){
           $this->realAmount = 0;
           $this->realTaxAmount = 0;
           $this->realFullAmount =0;
         }
-        $getProv = true;
+        $hasProvBill = true;
         $this->realAmount += $prov->totalUntaxedAmount;
         $this->realTaxAmount += $prov->totalTaxAmount;
         $this->realFullAmount += $prov->totalFullAmount;
