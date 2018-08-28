@@ -199,9 +199,6 @@ class ProviderOrderMain extends SqlElement {
       }
       if($this->idProjectExpense){
         $projExpense = new ProjectExpense($this->idProjectExpense);
-        $projExpense->realAmount -= $this->totalUntaxedAmount;
-        $projExpense->realTaxAmount -= $this->totalTaxAmount;
-        $projExpense->realFullAmount -= $this->totalFullAmount;
         $projExpense->save();
       }
     }
