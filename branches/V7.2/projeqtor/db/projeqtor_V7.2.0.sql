@@ -525,3 +525,5 @@ UPDATE `${prefix}planningelement` SET realEndDate=(select meetingDate from `${pr
 
 UPDATE `${prefix}assignment` SET plannedStartDate=(select meetingDate from `${prefix}meeting` as meet where meet.id=refId) where refType = "Meeting";
 UPDATE `${prefix}assignment` SET plannedEndDate=(select meetingDate from `${prefix}meeting` as meet where meet.id=refId) where refType = "Meeting";
+
+DELETE FROM `${prefix}notifiable` WHERE notifiableItem='Activity' or notifiableItem='Milestone';
