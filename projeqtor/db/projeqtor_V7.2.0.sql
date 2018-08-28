@@ -227,6 +227,7 @@ ADD `rate` DECIMAL(5,2)  DEFAULT NULL;
 
 ALTER TABLE `${prefix}expense`
 ADD `plannedTaxAmount` DECIMAL(11,2) UNSIGNED NULL DEFAULT NULL,
+ADD `isCalculated` int(1) unsigned DEFAULT '0';
 ADD `realTaxAmount` DECIMAL(11,2) UNSIGNED NULL DEFAULT NULL;
 
 UPDATE `${prefix}expense` SET 
