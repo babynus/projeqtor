@@ -73,6 +73,8 @@ class ProjectExpenseMain extends Expense {
   public $_sec_ExpenseDetail;
   public $_ExpenseDetail=array();
   public $_expenseDetail_colSpan="2";
+  public $_sec_totalFinancialSynthesis;
+  public $_spe_totalFinancialSynthesis;
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
@@ -135,10 +137,6 @@ class ProjectExpenseMain extends Expense {
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
     if ($withoutDependentObjects) return; // No real use yet, but no to forget as item has $Origin
-    if (count($this->getExpenseDetail())>0) {
-      self::$_fieldsAttributes['realAmount']="readonly";
-      self::$_fieldsAttributes['realFullAmount']="readonly";
-    }
   }
 
    /** ==========================================================================
@@ -209,6 +207,7 @@ class ProjectExpenseMain extends Expense {
    * @return the return message of persistence/SqlElement#save() method
    */
   public function save() {
+    $old=$this->getOld();
     $provOrder = new ProviderOrder();
     $listProvOrd=$provOrder->getSqlElementsFromCriteria(array("idProjectExpense"=>$this->id));
     $hasProvOrder=false;
@@ -229,19 +228,27 @@ class ProjectExpenseMain extends Expense {
     }
     if($hasProvOrder == false){
       $provBill = new ProviderBill();
-      $hasProvBill=false;
       $listProvBill=$provBill->getSqlElementsFromCriteria(array("idProjectExpense"=>$this->id));
+      if($this->isCalculated or count($listProvBill)>0){
+        $this->realAmount = 0;
+        $this->realTaxAmount = 0;
+        $this->realFullAmount =0;
+      }
       foreach ($listProvBill as $prov){
-        if($hasProvBill == false){
-          $this->realAmount = 0;
-          $this->realTaxAmount = 0;
-          $this->realFullAmount =0;
-        }
-        $hasProvBill = true;
         $this->realAmount += $prov->totalUntaxedAmount;
         $this->realTaxAmount += $prov->totalTaxAmount;
         $this->realFullAmount += $prov->totalFullAmount;
         $this->isCalculated = 1;
+      }
+      if (count($listProvBill)==0) {
+        $this->isCalculated = 0;
+        if (count($this->getExpenseDetail())>0) {
+          if($old->isCalculated==1){
+            foreach ($this->getExpenseDetail() as $expenseD){
+              $this->realAmount += $expenseD->amount;
+            }
+          }
+        }
       }
     }
     
@@ -270,23 +277,38 @@ class ProjectExpenseMain extends Expense {
       $this->plannedTaxAmount=null;
       $this->plannedFullAmount=null;
     }
+    
+    if($this->realAmount == 0 and $this->realTaxAmount == 0 and $this->realFullAmount == 0 and $this->id){
+      if($this->expenseRealDate){
+        $this->expenseRealDate = null;
+      }
+    }
+    
     return parent::save(); 
   }
     
   public function delete() {
-    $provOrder = new ProviderOrder();
-    $listProvOrd=$provOrder->getSqlElementsFromCriteria(array("idProjectExpense"=>$this->id));
-    foreach ($listProvOrd as $prov){
-      $prov->idProjectExpense = null;
-      $prov->save();
-    }
-    $provBill = new ProviderBill();
-    $listProvBill=$provBill->getSqlElementsFromCriteria(array("idProjectExpense"=>$this->id));
-    foreach ($listProvBill as $prov){
-      $prov->idProjectExpense = null;
-      $prov->save();
-    }
-    $result = parent::delete();
+    $result=parent::delete();
+    if (getLastOperationStatus($result)=='OK') {
+      $provOrder = new ProviderOrder();
+      $listProvOrd=$provOrder->getSqlElementsFromCriteria(array("idProjectExpense"=>$this->id));
+      foreach ($listProvOrd as $prov){
+        $prov->idProjectExpense = null;
+        $prov->save();
+      }
+      $provBill = new ProviderBill();
+      $listProvBill=$provBill->getSqlElementsFromCriteria(array("idProjectExpense"=>$this->id));
+      foreach ($listProvBill as $prov){
+        $prov->idProjectExpense = null;
+        $prov->save();
+      }
+      $provTender = new Tender();
+      $listProvTender=$provTender->getSqlElementsFromCriteria(array("idProjectExpense"=>$this->id));
+      foreach ($listProvTender as $tender){
+        $tender->idProjectExpense = null;
+        $tender->save();
+      }
+   }
     return $result;
   }
   // ============================================================================**********
@@ -353,6 +375,28 @@ class ProjectExpenseMain extends Expense {
       $colScript .= '</script>';
     }
     return $colScript;
+  }
+  
+  
+  public function drawSpecificItem($item){
+    global $comboDetail, $print, $outMode, $largeWidth;
+    $result="";
+    if ($item=='totalFinancialSynthesis') {
+      if($this->id){
+        drawTabExpense($this, false);
+      }
+      return $result;
+    }
+  }
+  
+  public function setAttributes() {
+    if (count($this->getExpenseDetail())>0) {
+      self::$_fieldsAttributes['realAmount']="readonly";
+      self::$_fieldsAttributes['realFullAmount']="readonly";
+    }
+    if($this->isCalculated == 1){
+      self::$_fieldsAttributes["realAmount"]='readonly';
+    }
   }
   
 }

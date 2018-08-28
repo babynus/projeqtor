@@ -257,8 +257,13 @@ class ProviderOrderMain extends SqlElement {
           $listExpD = $expD->getSqlElementsFromCriteria($critArray);
           $number = 1;
           foreach ($listExpD as $exp){
+            $detail =  SqlList::getNameFromId('ExpenseDetailType', $exp->idExpenseDetailType)."\n". $exp->getFormatedDetail();
+            $detail = str_replace('<b>', '', $detail) ;
+            $detail = str_replace('</b>', '', $detail) ;
             $billLine = new BillLine();
             $billLine->line = $number;
+            $billLine->description = $exp->name;
+            $billLine->detail = $detail;
             $billLine->refType = 'ProviderOrder';
             $billLine->refId = $this->id;
             $billLine->price = $exp->amount;
