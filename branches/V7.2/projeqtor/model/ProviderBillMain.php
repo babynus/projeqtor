@@ -37,7 +37,7 @@ class ProviderBillMain extends SqlElement {
   public $idProviderBillType;
   public $idProject;
   public $idUser;
- // public $creationDate;
+  public $creationDate;
   public $date;
   public $Origin;
   public $idProvider;
