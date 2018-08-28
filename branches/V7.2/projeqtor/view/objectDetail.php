@@ -5735,7 +5735,7 @@ function drawProviderTermFromObject($list, $obj, $type, $refresh=false) {
       echo '</tr></table>';
       echo '</td>';
     } else {
-      echo '<td class="assignData'.$idleClass.'" align="center"'.$goto2.' style="white-space: nowrap;"></td>';
+      echo '<td class="assignData'.$idleClass.'" align="center" style="white-space: nowrap;"></td>';
     }
     echo '</tr>';
   }
@@ -6264,7 +6264,7 @@ function drawProviderTermFromProviderBill($list, $obj, $refresh=false) {
       echo '</tr></table>';
       echo '</td>';
     } else {
-      echo '  <td class="assignData" align="center"'.$goto.' style="width:45%"></td>';
+      echo '  <td class="assignData" align="center" style="width:45%"></td>';
     }
     echo '</tr>';
   }

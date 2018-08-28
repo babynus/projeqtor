@@ -335,6 +335,19 @@ class ProviderBillMain extends SqlElement {
     return $result;
   }
   
+  public function delete() {
+    $result=parent::delete();
+    if (getLastOperationStatus($result)=='OK') {
+      if($this->idProjectExpense){
+        $projExpense = new ProjectExpense($this->idProjectExpense);
+        $this->idProjectExpense = null;
+        $this->save();
+        $projExpense->save();
+      }
+    }
+    return $result;
+  }
+  
   public function copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = NULL, $toActivity = NULL, $copyToWithResult = false,$copyToWithVersionProjects=false) {
     $result=parent::copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks); 
     return $result;
@@ -408,6 +421,7 @@ class ProviderBillMain extends SqlElement {
         echo ' title="' . i18n('generateProjectExpense') . '" class="greyCheck generalColClass _button_generateProjectExpenseClass" ';
         echo ' dojoType="dijit.form.CheckBox"  type="checkbox" >';
         echo '</div> ';
+        echo ' ('.i18n("generateProjectExpenseFrom").')';
     } 
     return $result;
   }

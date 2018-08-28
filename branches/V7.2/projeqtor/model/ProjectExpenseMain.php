@@ -77,6 +77,7 @@ class ProjectExpenseMain extends Expense {
   public $_Link=array();
   public $_Attachment=array();
   public $_Note=array();
+  public $isCalculated;
 
   public $_nbColMax=3;  
   // Define the layout that will be used for lists
@@ -106,6 +107,7 @@ class ProjectExpenseMain extends Expense {
                                   "cancelled"=>"nobr",
                                   "plannedTaxAmount"=>"readonly",
                                   "realTaxAmount"=>"readonly",
+                                  "isCalculated"=>"hidden",
                                   "idBudgetItem"=>"canSearchForAll"
   );  
   
@@ -207,18 +209,53 @@ class ProjectExpenseMain extends Expense {
    * @return the return message of persistence/SqlElement#save() method
    */
   public function save() {
-      // Update amounts
-    if ($this->realAmount!=null) {
-      if ($this->taxPct!=null) {
-        $this->realTaxAmount=round(($this->realAmount*$this->taxPct/100),2);
+    $this->isCalculated = 0;
+    $provOrder = new ProviderOrder();
+    $listProvOrd=$provOrder->getSqlElementsFromCriteria(array("idProjectExpense"=>$this->id));
+    $getProv = false;
+    foreach ($listProvOrd as $prov){
+      if($getProv == false){
+        $this->realAmount = 0;
+        $this->realTaxAmount = 0;
+        $this->realFullAmount =0;
+      }
+      $getProv = true;
+      $this->realAmount += $prov->totalUntaxedAmount;
+      $this->realTaxAmount += $prov->totalTaxAmount;
+      $this->realFullAmount += $prov->totalFullAmount;
+      $this->isCalculated = 1;
+    }
+    if($getProv == false){
+      $provBill = new ProviderBill();
+      $listProvBill=$provBill->getSqlElementsFromCriteria(array("idProjectExpense"=>$this->id));
+      foreach ($listProvBill as $prov){
+        if($getProv == false){
+          $this->realAmount = 0;
+          $this->realTaxAmount = 0;
+          $this->realFullAmount =0;
+        }
+        $getProv = true;
+        $this->realAmount += $prov->totalUntaxedAmount;
+        $this->realTaxAmount += $prov->totalTaxAmount;
+        $this->realFullAmount += $prov->totalFullAmount;
+        $this->isCalculated = 1;
+      }
+    }
+    
+    if($this->isCalculated != 1){
+        // Update amounts
+      if ($this->realAmount!=null) {
+        if ($this->taxPct!=null) {
+          $this->realTaxAmount=round(($this->realAmount*$this->taxPct/100),2);
+        } else {
+          $this->realTaxAmount=null;
+        } 
+        $this->realFullAmount=$this->realAmount+$this->realTaxAmount;
       } else {
         $this->realTaxAmount=null;
-      } 
-      $this->realFullAmount=$this->realAmount+$this->realTaxAmount;
-    } else {
-      $this->realTaxAmount=null;
-      $this->realFullAmount=null;
-    }  
+        $this->realFullAmount=null;
+      }  
+    }
     if ($this->plannedAmount!=null) {
       if ($this->taxPct!=null) {
         $this->plannedTaxAmount=round(($this->plannedAmount*$this->taxPct/100),2);
@@ -230,10 +267,25 @@ class ProjectExpenseMain extends Expense {
       $this->plannedTaxAmount=null;
       $this->plannedFullAmount=null;
     }
-    
     return parent::save(); 
   }
-
+    
+  public function delete() {
+    $provOrder = new ProviderOrder();
+    $listProvOrd=$provOrder->getSqlElementsFromCriteria(array("idProjectExpense"=>$this->id));
+    foreach ($listProvOrd as $prov){
+      $prov->idProjectExpense = null;
+      $prov->save();
+    }
+    $provBill = new ProviderBill();
+    $listProvBill=$provBill->getSqlElementsFromCriteria(array("idProjectExpense"=>$this->id));
+    foreach ($listProvBill as $prov){
+      $prov->idProjectExpense = null;
+      $prov->save();
+    }
+    $result = parent::delete();
+    return $result;
+  }
   // ============================================================================**********
   // GET VALIDATION SCRIPT
   // ============================================================================**********
@@ -284,8 +336,10 @@ class ProjectExpenseMain extends Expense {
       $colScript .= '      planFull=plan;';
       $colScript .= '    }';
       $colScript .= '  }';
-      $colScript .= '  dijit.byId("realTaxAmount").set("value",initTax);';
-      $colScript .= '  dijit.byId("realFullAmount").set("value",initFull);';
+      if($this->isCalculated == 0){
+        $colScript .= '  dijit.byId("realTaxAmount").set("value",initTax);';
+        $colScript .= '  dijit.byId("realFullAmount").set("value",initFull);';
+      }
       $colScript .= '  dijit.byId("plannedTaxAmount").set("value",planTax);';
       $colScript .= '  dijit.byId("plannedFullAmount").set("value",planFull);';
       $colScript .= '  formChanged();';
