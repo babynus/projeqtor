@@ -475,6 +475,7 @@ class TenderMain extends SqlElement {
       echo ' title="' . i18n('generateProjectExpense') . '" class="greyCheck generalColClass _button_generateProjectExpenseClass" ';
       echo ' dojoType="dijit.form.CheckBox"  type="checkbox" >';
       echo '</div> ';
+      echo ' ('.i18n("generateProjectExpenseFrom").')';
     } 
     return $result;
   }
