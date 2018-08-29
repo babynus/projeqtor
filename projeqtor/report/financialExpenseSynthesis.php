@@ -127,7 +127,6 @@ $untaxedAmount = 0;
 $fullAmount = 0;
 $fullAmountPayment =0;
 $nbPayment = 0;
-debugLog($nbTerm);
 foreach ($listProviderBill as $bill ){
   $untaxedAmount += $bill->totalUntaxedAmount;
   $fullAmount += $bill->totalFullAmount;
