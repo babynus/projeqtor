@@ -55,30 +55,39 @@ $queryWhereOrder=getAccesRestrictionClause('ProviderOrder',false);
 $queryWhereBill=getAccesRestrictionClause('ProviderBill',false);
 $queryWhereTerm=getAccesRestrictionClause('ProviderTerm',false);
 
-$clauseOrderByTender=" actualEndDate asc";
-$clauseOrderByOrder=" actualEndDate asc";
-$clauseOrderByBill=" actualEndDate asc";
-$clauseOrderByTerm=" actualEndDate asc";
+$clauseOrderByTender=" expectedTenderDateTime asc";
+$clauseOrderByOrder=" deliveryExpectedDate asc";
+$clauseOrderByBill=" date asc";
+$clauseOrderByTerm=" date asc";
 
 $queryWherePlus="";
 if ($paramProject!="") {
   $queryWherePlus.=" and idProject in " . getVisibleProjectsList(true, $paramProject);
 }
+if ($paramProjectType!="") {
+  $proj=new Project();
+  $projTable=$proj->getDatabaseTableName();
+  $queryWherePlus.=" and idProject in (select id from $projTable where idProjectType=$paramProjectType)";
+}
+if ($paramOrganization!="") {
+  $proj=new Project();
+  $projTable=$proj->getDatabaseTableName();
+  $queryWherePlus.=" and idProject in (select id from $projTable where idOrganization=$paramOrganization)";
+}
 if(!$paramClosedItems){
   $queryWherePlus.=" and idle=0";
 }
 
-
-$tabAction = array();
+$tabTender = array();
 
 echo '<table  width="95%" align="center"><tr><td style="width: 100%" class="section">';
-echo i18n('Risk');
+echo i18n('Tender');
 echo '</td></tr>';
 echo '<tr><td>&nbsp;</td></tr>';
 echo '</table>';
 
-$obj=new Risk();
-$lst=$obj->getSqlElementsFromCriteria(null, false, $queryWhereRisk . $queryWherePlus, $clauseOrderBy);
+$obj=new Tender();
+$lst=$obj->getSqlElementsFromCriteria(null, false, $queryWhereTender . $queryWherePlus, $clauseOrderByTender);
 echo '<table  width="95%" align="center">';
 echo '<tr>';
 echo '<td class="largeReportHeader" style="width:3%">' . i18n('colId') . '</td>';
@@ -134,14 +143,14 @@ unset($risk);
 echo '</table><br/><br/>';
 echo '</page><page>';
 
+
 echo '<table  width="95%" align="center"><tr><td style="width: 100%" class="section">';
-echo i18n('Opportunity');
+echo i18n('ProviderOrder');
 echo '</td></tr>';
 echo '<tr><td>&nbsp;</td></tr>';
 echo '</table>';
-
-$obj=new Opportunity();
-$lst=$obj->getSqlElementsFromCriteria(null, false, $queryWhereOpportunity . $queryWherePlus, $clauseOrderBy);
+$obj=new ProviderOrder();
+$lst=$obj->getSqlElementsFromCriteria(null, false, $queryWhereOrder . $queryWherePlus, $clauseOrderByOrder);
 echo '<table  width="95%" align="center">';
 echo '<tr>';
 echo '<td class="largeReportHeader" style="width:3%">' . i18n('colId') . '</td>';
@@ -194,14 +203,15 @@ foreach ($lst as $opportunity) {
 unset($opportunity);
 echo '</table><br/><br/>';
 echo '</page><page>';
+
+
 echo '<table  width="95%" align="center"><tr><td style="width: 100%" class="section">';
-echo i18n('Issue');
+echo i18n('ProviderBill');
 echo '</td></tr>';
 echo '<tr><td>&nbsp;</td></tr>';
 echo '</table>';
-
-$obj=new Issue();
-$lst=$obj->getSqlElementsFromCriteria(null, false, $queryWhereIssue . $queryWherePlus, $clauseOrderBy);
+$obj=new ProviderBill();
+$lst=$obj->getSqlElementsFromCriteria(null, false, $queryWhereBill . $queryWherePlus, $clauseOrderByBill);
 echo '<table  width="95%" align="center">';
 echo '<tr>';
 echo '<td class="largeReportHeader" style="width:3%">' . i18n('colId') . '</td>';
@@ -249,14 +259,14 @@ echo '</table><br/><br/>';
 unset ($issue);
 echo '</page><page>';
 
+
 echo '<table  width="95%" align="center"><tr><td style="width: 100%" class="section">';
-echo i18n('Action');
+echo i18n('ProviderTerm');
 echo '</td></tr>';
 echo '<tr><td>&nbsp;</td></tr>';
 echo '</table>';
-$obj=new Action();
-$clauseOrderBy=" actualDueDate asc";
-$lst=$obj->getSqlElementsFromCriteria(null, false, $queryWhereAction . $queryWherePlus, $clauseOrderBy);
+$obj=new ProviderTerm();
+$lst=$obj->getSqlElementsFromCriteria(null, false, $queryWhereTerm . $queryWherePlus, $clauseOrderByTerm);
 echo '<table  width="95%" align="center">';
 echo '<tr>';
 echo '<td class="largeReportHeader" style="width:3%">' . i18n('colId') . '</td>';
@@ -270,8 +280,6 @@ echo '<td class="largeReportHeader" style="width:5%">' . i18n('colIdStatus') . '
 echo '<td class="largeReportHeader" style="width:3%">' . i18n('colLink') . '</td>';
 echo '<td class="largeReportHeader" style="width:15%">' . i18n('colResult') . '</td>';
 echo '</tr>';
-
-
 foreach ($lst as $action) {
   //gautier #2576
    $bool = false;
