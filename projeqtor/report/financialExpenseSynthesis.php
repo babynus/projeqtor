@@ -43,9 +43,6 @@ if ($paramProjectType!="") {
 if ($paramOrganization!="") {
   $headerParameters.= i18n("colIdOrganization") . ' : ' . htmlEncode(SqlList::getNameFromId('Organization', $paramOrganization)) . '<br/>';
 }
-if ($paramClosedItems!="") {
-  $headerParameters.= i18n("colShowClosedItems") . ' : ' . i18n('displayYes') . '<br/>';
-}  
 
 include "header.php";
 
