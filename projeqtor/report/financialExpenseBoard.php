@@ -28,20 +28,21 @@
 include_once '../tool/projeqtor.php';
 include_once('../tool/formatter.php');
 
-$paramProject='';
-if (array_key_exists('idProject',$_REQUEST)) {
-  $paramProject=trim($_REQUEST['idProject']);
-  $paramProject=Security::checkValidId($paramProject); // only allow digits
-};
+$paramProject=trim(RequestHandler::getId('idProject',false));
+$paramProjectType=trim(RequestHandler::getId('idProjectType',false));
+$paramOrganization=trim(RequestHandler::getId('idOrganization',false));
+$paramClosedItems=RequestHandler::getBoolean('showClosedItems');;
 
-$paramClosedItems=false;
-if (array_key_exists('showClosedItems',$_REQUEST)) {
-  $paramClosedItems=true;
-};
-  // Header
+// Header
 $headerParameters="";
 if ($paramProject!="") {
   $headerParameters.= i18n("colIdProject") . ' : ' . htmlEncode(SqlList::getNameFromId('Project', $paramProject)) . '<br/>';
+}
+if ($paramProjectType!="") {
+  $headerParameters.= i18n("colIdProjectType") . ' : ' . htmlEncode(SqlList::getNameFromId('ProjectType', $paramProjectType)) . '<br/>';
+}
+if ($paramOrganization!="") {
+  $headerParameters.= i18n("colIdOrganization") . ' : ' . htmlEncode(SqlList::getNameFromId('Organization', $paramOrganization)) . '<br/>';
 }
 if ($paramClosedItems!="") {
   $headerParameters.= i18n("colShowClosedItems") . ' : ' . i18n('displayYes') . '<br/>';
@@ -49,10 +50,15 @@ if ($paramClosedItems!="") {
 
 include "header.php";
 
-$queryWhereAction=getAccesRestrictionClause('Action',false);
-$queryWhereRisk=getAccesRestrictionClause('Risk',false);
-$queryWhereIssue=getAccesRestrictionClause('Issue',false);
-$queryWhereOpportunity=getAccesRestrictionClause('Opportunity',false);
+$queryWhereTender=getAccesRestrictionClause('Tender',false);
+$queryWhereOrder=getAccesRestrictionClause('ProviderOrder',false);
+$queryWhereBill=getAccesRestrictionClause('ProviderBill',false);
+$queryWhereTerm=getAccesRestrictionClause('ProviderTerm',false);
+
+$clauseOrderByTender=" actualEndDate asc";
+$clauseOrderByOrder=" actualEndDate asc";
+$clauseOrderByBill=" actualEndDate asc";
+$clauseOrderByTerm=" actualEndDate asc";
 
 $queryWherePlus="";
 if ($paramProject!="") {
@@ -62,7 +68,7 @@ if(!$paramClosedItems){
   $queryWherePlus.=" and idle=0";
 }
 
-$clauseOrderBy=" actualEndDate asc";
+
 $tabAction = array();
 
 echo '<table  width="95%" align="center"><tr><td style="width: 100%" class="section">';
