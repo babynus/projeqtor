@@ -107,7 +107,7 @@ foreach ($listProviderOrder as $order ){
   $fullAmount += $order->totalFullAmount;
   //TERM idProviderBill=>null
   $providerTerm = new ProviderTerm();
-  $listProviderTerm = $providerTerm->getSqlElementsFromCriteria(null, false, $queryWhereTerm . $queryWherePlus .' and idProviderOrder='.$order->id.' and idProviderBill=null');
+  $listProviderTerm = $providerTerm->getSqlElementsFromCriteria(null, false, $queryWhereTerm . $queryWherePlus .' and idProviderOrder='.$order->id.' and idProviderBill is null');
   foreach ($listProviderTerm as $term){
     $nbTerm++;
     $untaxedAmountTerm += $term->untaxedAmount;
@@ -127,6 +127,7 @@ $untaxedAmount = 0;
 $fullAmount = 0;
 $fullAmountPayment =0;
 $nbPayment = 0;
+debugLog($nbTerm);
 foreach ($listProviderBill as $bill ){
   $untaxedAmount += $bill->totalUntaxedAmount;
   $fullAmount += $bill->totalFullAmount;
