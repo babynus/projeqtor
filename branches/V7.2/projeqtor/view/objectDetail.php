@@ -6321,15 +6321,14 @@ function drawTabExpense($obj, $refresh=false) {
   $untaxedAmount = 0;
   $fullAmount = 0;
   $clauseProviderBill=transformListIntoInClause(SqlList::getListWithCrit('providerBill', array('idProvider'=>$obj->id)));
+  $arrayTerm=array();
   foreach ($listProviderOrder as $order ){
     $untaxedAmount += $order->totalUntaxedAmount;
     $fullAmount += $order->totalFullAmount;
     $providerTerm = new ProviderTerm();
-    $listProviderTerm = $providerTerm->getSqlElementsFromCriteria(null, false,'idProviderOrder='.$order->id.' and idProviderBill not in'.$clauseProviderBill);
+    $listProviderTerm = $providerTerm->getSqlElementsFromCriteria(null, false,'idProviderOrder='.$order->id);
     foreach ($listProviderTerm as $term){
-      $nbTerm++;
-      $untaxedAmountTerm += $term->untaxedAmount;
-      $fullAmountTerm += $term->fullAmount;
+    	$arrayTerm[$term->id]=$term;
     }
   }
   echo '  <tr>';
@@ -6356,10 +6355,14 @@ function drawTabExpense($obj, $refresh=false) {
     $providerTerm = new ProviderTerm();
     $listProviderTerm = $providerTerm->getSqlElementsFromCriteria(array("idProviderBill"=>$bill->id));
     foreach ($listProviderTerm as $term){
-      $nbTerm++;
-      $untaxedAmountTerm += $term->untaxedAmount;
-      $fullAmountTerm += $term->fullAmount;
+      $arrayTerm[$term->id]=$term;
     }
+  }
+  
+  foreach ($arrayTerm as $term){
+    $nbTerm++;
+    $untaxedAmountTerm += $term->untaxedAmount;
+    $fullAmountTerm += $term->fullAmount;
   }
   echo '  <tr>';
   echo '    <td class="assignHeader" colspan="1" style="width:25%">'.i18n('menuProviderBill').'</td>';
