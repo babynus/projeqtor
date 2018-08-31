@@ -234,7 +234,6 @@ class TenderMain extends SqlElement {
         }else{
           $projExpense->expensePlannedDate = date('Y-m-d');
         }
-        debugLog($projExpense->expensePlannedDate);
         $projExpense->save();
         $this->idProjectExpense = $projExpense->id;
       }
