@@ -6320,11 +6320,12 @@ function drawTabExpense($obj, $refresh=false) {
   $listProviderOrder = $providerOrder->getSqlElementsFromCriteria(array("idProjectExpense"=>$obj->id));
   $untaxedAmount = 0;
   $fullAmount = 0;
+  $clauseProviderBill=transformListIntoInClause(SqlList::getListWithCrit('providerBill', array('idProvider'=>$obj->id)));
   foreach ($listProviderOrder as $order ){
     $untaxedAmount += $order->totalUntaxedAmount;
     $fullAmount += $order->totalFullAmount;
     $providerTerm = new ProviderTerm();
-    $listProviderTerm = $providerTerm->getSqlElementsFromCriteria(array("idProviderOrder"=>$order->id,"idProviderBill"=>null));
+    $listProviderTerm = $providerTerm->getSqlElementsFromCriteria(null, false,'idProviderOrder='.$order->id.' and idProviderBill not in'.$clauseProviderBill);
     foreach ($listProviderTerm as $term){
       $nbTerm++;
       $untaxedAmountTerm += $term->untaxedAmount;
@@ -6374,7 +6375,7 @@ function drawTabExpense($obj, $refresh=false) {
   echo '  </tr>';
   echo '  <tr>';
   echo '    <td class="assignHeader" colspan="1" style="width:25%">'.i18n('menuProviderPayment').'</td>';
-  echo '    <td class="assignData" align="right" colspan="1" style="width:30%"></td>';
+  echo '    <td class="assignHeader" align="right" colspan="1" style="width:30%"></td>';
   echo '    <td class="assignData" align="right" colspan="1" style="width:30%">'.htmlDisplayCurrency($fullAmountPayment).'</td>';
   echo '    <td class="assignData" align="center" colspan="1" style="width:15%">'.$nbPayment.'</td>';
   echo '  </tr>';
