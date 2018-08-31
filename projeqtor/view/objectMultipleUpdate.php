@@ -156,7 +156,7 @@
                  id="idProject" name="idProject">
                  <?php htmlDrawOptionForReference('idProject', null, null, false);?>
                 </select>
-                <button id="projectButton" dojoType="dijit.form.Button" showlabel="false"
+                <button id="projectButton_multiple" dojoType="dijit.form.Button" showlabel="false"
                   title="<?php echo i18n('showDetail');?>" iconClass="iconView">
                   <script type="dojo/connect" event="onClick" args="evt">
                     showDetail("idProject",0); 
