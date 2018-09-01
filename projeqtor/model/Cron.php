@@ -789,6 +789,12 @@ class Cron {
   		  $mailbox->markMailAsUnread($mailId);
   		}
     }
+    // Clean $emailAttachmentsDir for php files
+    foreach(glob($emailAttachmentsDir.'/*') as $v) {
+      if (! is_file($v)) continue;
+      if (substr(strtolower($v),-4)=='.php' or substr(strtolower($v),-5,4)=='.php') unlink($v);
+      //if (is_file($v)) unlink($v);
+    }
   }
   
   public static function checkMailGroup() {
