@@ -649,7 +649,17 @@ class Cron {
 		// IMAP must be enabled in Google Mail Settings
 		$emailEmail=Parameter::getGlobalParameter('cronCheckEmailsUser');
 		$emailPassword=Parameter::getGlobalParameter('cronCheckEmailsPassword');
-		$emailAttachmentsDir=dirname(__FILE__) . '/../files/attach';
+		//$emailAttachmentsDir=dirname(__FILE__) . '/../files/attach';
+		$paramAttachDir=Parameter::getGlobalParameter('paramAttachmentDirectory');
+		$pathSeparator=Parameter::getGlobalParameter('paramPathSeparator');
+		if (substr($paramAttachDir,0,2)=='..') {
+		  $curdir=dirname(__FILE__);
+		  $paramAttachDir=str_replace(array('/model','\model'),array('',''),$curdir).substr($paramAttachDir,2);
+		}
+		$emailAttachmentsDir=((substr($paramAttachDir,-1)=='\\' or substr($paramAttachDir,-1)=="/")?$paramAttachDir:$paramAttachDir.$pathSeparator).'emails';
+		if (! file_exists($emailAttachmentsDir)) {
+		  mkdir($emailAttachmentsDir,0777,true);
+		}
 		$emailHost=Parameter::getGlobalParameter('cronCheckEmailsHost'); // {imap.gmail.com:993/imap/ssl}INBOX';
 		if (! $emailHost) {
 			traceLog("IMAP connection string not defined");
