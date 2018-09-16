@@ -8549,22 +8549,35 @@ function planningToCanvasToPDF(){
   var repeatIconTask=document.getElementById("printRepeat").checked; // If true this will repeat on each page the icon
   loadContent("../tool/submitPlanningPdf.php", "planResultDiv", 'planningPdfForm', false,null,null,null,function(){showWait();});
   var sizeElements=[];
-  var marge=0;
+  var marge=30;
   var widthIconTask=0; // the width that icon+task represent
-  var heightColumn=parseInt(document.getElementById('leftsideTop').offsetHeight)*ratio;
+  //var heightColumn=parseInt(document.getElementById('leftsideTop').offsetHeight)*ratio;
+  var heightColumn=parseInt(document.getElementById('leftsideTop').offsetHeight);
   //var heightRow=21*ratio;
-  var heightRow=21*ratio;
-  var widthRow=(parseInt(dojo.query('.ganttRightTitle')[0].offsetWidth)-1)*ratio;
+  var heightRow=21;
+  //var widthRow=(parseInt(dojo.query('.ganttRightTitle')[0].offsetWidth)-1)*ratio;
+  var widthRow=(parseInt(dojo.query('.ganttRightTitle')[0].offsetWidth)-1);
   var nbRowTotal=0;
   var nbColTotal=0;
   // init max width/height by orientation
-  var maxWidth=(540-marge)*1.25;
-  var maxHeight=(842-marge)*1.25;
-  if(orientation=="landscape"){
-    maxWidth=(850-marge)*1.25;
-    maxHeight=(570-marge)*1.25;
+  var pageFormat='A4';
+  if(document.getElementById("printFormatA3").checked)pageFormat="A3";
+  var imageZoomIn=1.3/ratio;
+  var imageZoomOut=1/imageZoomIn;
+  ratio=1;
+  var maxWidth=(596-(2*marge))*imageZoomIn;
+  var maxHeight=(842-(2*marge))*imageZoomIn;
+  if (pageFormat=='A3') {
+    var maxTemp=maxWidth;
+    maxWidth=maxHeight;
+    maxHeight=2*maxTemp;
   }
-  
+  if(orientation=="landscape"){
+    var maxTemp=maxWidth;
+    maxWidth=maxHeight;
+    maxHeight=maxTemp;
+  }
+
   //We create an iframe will which contain the planning to transform it in image
   var frameContent=document.getElementById("iframeTmpPlanning");
   
@@ -8842,7 +8855,7 @@ function planningToCanvasToPDF(){
               mapImage["image"+(i+baseIterateur)]=canvasList[i].toDataURL();
               
               //Add to tabImage an array wich contain parameters to put an image into a pdf page with a pagebreak if necessary
-              ArrayToPut={image: "image"+(i+baseIterateur),width: canvasList[i].width*0.75,height:canvasList[i].height*0.75};
+              ArrayToPut={image: "image"+(i+baseIterateur),width: canvasList[i].width*imageZoomOut,height:canvasList[i].height*imageZoomOut};
               if(!(canvasList2.length==0 && i==canvasList.length-1)){
                 ArrayToPut['pageBreak']='after';
               }
@@ -8855,7 +8868,7 @@ function planningToCanvasToPDF(){
                 mapImage["image"+(i+canvasList.length+baseIterateur)]=canvasList2[i].toDataURL();
                 
                 //Add to tabImage an array wich contain parameters to put an image into a pdf page with a pagebreak if necessary
-                ArrayToPut={image: "image"+(i+canvasList.length+baseIterateur),width: canvasList2[i].width*0.75,height:canvasList2[i].height*0.75};
+                ArrayToPut={image: "image"+(i+canvasList.length+baseIterateur),width: canvasList2[i].width*imageZoomOut,height:canvasList2[i].height*imageZoomOut};
                 if(i!=canvasList2.length-1){
                   ArrayToPut['pageBreak']='after';
                 }
@@ -8869,9 +8882,12 @@ function planningToCanvasToPDF(){
           }
           console.log("planningToCanvasToPDF - end of picture calculation");
           var dd = {
+             pageMargins: [ marge, marge, marge, marge ],
              pageOrientation: orientation,
              content: tabImage,
-             images: mapImage
+             images: mapImage,
+             footer: function(currentPage, pageCount) {  return { fontSize : 8, text: currentPage.toString() + ' / ' + pageCount , alignment: 'center' };},
+             pageSize: pageFormat
           };
           if( !dojo.isIE ) {
             var userAgent = navigator.userAgent.toLowerCase(); 
