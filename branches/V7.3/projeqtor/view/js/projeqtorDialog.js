@@ -8842,7 +8842,7 @@ function planningToCanvasToPDF(){
                                         false));
                 }
               }
-              if(nbColTotal==0 || countIteration>1000){
+              if(nbColTotal==0 || countIteration>100){
                 ERightWidth=0;
               }
               firstEnterWidth=false;
