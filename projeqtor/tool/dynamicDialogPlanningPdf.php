@@ -34,19 +34,6 @@ if($printOrientation=="landscape" || $printOrientation==""){
 }
 
 $printZoom=Parameter::getUserParameter("printZoom");
-$select100="";
-$select90="";
-$select75="";
-$select50="";
-if($printZoom=="100" && $printZoom==""){
-  $select100='selected="selected"';
-}else if($printZoom=="90"){
-  $select90='selected="selected"';
-}else if($printZoom=="75"){
-  $select75='selected="selected"';
-}else if($printZoom=="50"){
-  $select50='selected="selected"';
-}
 
 $printRepeat=Parameter::getUserParameter("printRepeat");
 if($printRepeat=="repeat" || $printRepeat==""){
@@ -92,10 +79,9 @@ if($printRepeat=="repeat" || $printRepeat==""){
                <select dojoType="dijit.form.FilteringSelect" 
                <?php echo autoOpenFilteringSelect();?>
                 id="printZoom" name="printZoom" style="width:65px;" required class="input">
-                <option <?php echo $select100;?> value="100">100%</option>
-                <option <?php echo $select90;?> value="90">90%</option>
-                <option <?php echo $select75;?> value="75">75%</option>
-                <option <?php echo $select50;?> value="50">50%</option>
+                 <?php for ($i=100;$i>=50;$i-=10) {?>
+                <option <?php if ($printZoom==$i) { echo 'selected="selected"';}?> value="<?php echo $i;?>"><?php echo $i;?>%</option>
+                <?php }?>
                </select>
              </td>
            </tr>
