@@ -8624,6 +8624,7 @@ function planningToCanvasToPDF(){
   }
   
   widthIconTask=sizeElements[0]+sizeElements[1];
+  if (widthIconTask>parseInt(document.getElementById('leftGanttChartDIV').style.width)) widthIconTask=parseInt(document.getElementById('leftGanttChartDIV').style.width);
   
   sizeColumn=parseInt(dojo.query(".ganttRightTitle")[0].style.width)*ratio;
   
@@ -8693,8 +8694,8 @@ function planningToCanvasToPDF(){
             var imageRepeat=null;
             if(repeatIconTask){
               imageRepeat=combineCanvasIntoOne(
-                              cropCanvas(leftColumn,0,0,sizeElements[0]+sizeElements[1],heightColumn),
-                              cropCanvas(leftElement,0,EHeightValue,sizeElements[0]+sizeElements[1],heightElement),
+                              cropCanvas(leftColumn,0,0,widthIconTask,heightColumn),
+                              cropCanvas(leftElement,0,EHeightValue,widthIconTask,heightElement),
                               true);
             }
             var canvasList=[];
@@ -8758,8 +8759,8 @@ function planningToCanvasToPDF(){
             firstEnterWidth=true;
             if(repeatIconTask && leftColumn.width>widthIconTask){
               imageRepeat=combineCanvasIntoOne(combineCanvasIntoOne(
-                                                    cropCanvas(leftColumn,0,0,sizeElements[0]+sizeElements[1],heightColumn),
-                                                    cropCanvas(leftElement,0,EHeightValue,sizeElements[0]+sizeElements[1],heightElement),
+                                                    cropCanvas(leftColumn,0,0,widthIconTask,heightColumn),
+                                                    cropCanvas(leftElement,0,EHeightValue,widthIconTask,heightElement),
                                                     true),
                                                combineCanvasIntoOne(
                                                     cropCanvas(leftColumn,leftColumn.width-4,0,4,heightColumn),
