@@ -73,13 +73,37 @@ if($printRepeat=="repeat" || $printRepeat==""){
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
              <td class="dialogLabel"  >
+               <label for="printFormat" ><?php echo i18n("printFormat") ?>&nbsp;:&nbsp;</label>
+             </td>
+             <td>
+               <table><tr>
+                <td style="text-align:right; width:5%">
+                  <input type="radio" dojoType="dijit.form.RadioButton" 
+                   name="printFormat" id="printFormatA4" <?php echo $printLandscape;?>
+                   value="A4" style="background-color:white;float:right;"/>
+                </td><td style="text-align:left;">    
+                  <label style="text-align: left;" class="smallRadioLabel" for="printFormatA4">A4&nbsp;</label>
+                </td>
+                <td style="text-align:right; width:5%;">
+                  <input type="radio" dojoType="dijit.form.RadioButton" 
+                   name="printFormat" id="printFormatA3" <?php echo $printPortrait;?>
+                   value="A3" style="background-color:white;"/>
+                </td><td style="text-align:left;"> 
+                  <label style="text-align: left;" class="smallRadioLabel" for="printFormatA3">A3&nbsp;</label>
+                </td>
+              </tr></table>
+             </td>
+           </tr>
+           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+           <tr>
+             <td class="dialogLabel"  >
                <label for="printZoom" ><?php echo i18n("printZoom") ?>&nbsp;:&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect" 
                <?php echo autoOpenFilteringSelect();?>
                 id="printZoom" name="printZoom" style="width:65px;" required class="input">
-                 <?php for ($i=100;$i>=50;$i-=10) {?>
+                 <?php for ($i=100;$i>=10;$i-=10) {?>
                 <option <?php if ($printZoom==$i) { echo 'selected="selected"';}?> value="<?php echo $i;?>"><?php echo $i;?>%</option>
                 <?php }?>
                </select>
