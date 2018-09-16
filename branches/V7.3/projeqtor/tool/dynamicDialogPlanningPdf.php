@@ -41,6 +41,15 @@ if($printRepeat=="repeat" || $printRepeat==""){
 }else{
   $printRepeat="";
 }
+
+$printFormat=Parameter::getUserParameter("printFormat");
+$printFormatA4="";
+$printFormatA3="";
+if ($printFormat=="A3") {
+  $printFormatA3='checked="checked"';
+} else {
+  $printFormatA4='checked="checked"';
+}
 ?>
   <table>
     <tr>
@@ -79,14 +88,14 @@ if($printRepeat=="repeat" || $printRepeat==""){
                <table><tr>
                 <td style="text-align:right; width:5%">
                   <input type="radio" dojoType="dijit.form.RadioButton" 
-                   name="printFormat" id="printFormatA4" <?php echo $printLandscape;?>
+                   name="printFormat" id="printFormatA4" <?php echo $printFormatA4;?>
                    value="A4" style="background-color:white;float:right;"/>
                 </td><td style="text-align:left;">    
                   <label style="text-align: left;" class="smallRadioLabel" for="printFormatA4">A4&nbsp;</label>
                 </td>
                 <td style="text-align:right; width:5%;">
                   <input type="radio" dojoType="dijit.form.RadioButton" 
-                   name="printFormat" id="printFormatA3" <?php echo $printPortrait;?>
+                   name="printFormat" id="printFormatA3" <?php echo $printFormatA3;?>
                    value="A3" style="background-color:white;"/>
                 </td><td style="text-align:left;"> 
                   <label style="text-align: left;" class="smallRadioLabel" for="printFormatA3">A3&nbsp;</label>
