@@ -4202,10 +4202,10 @@ function getExtraHiddenFields(idType,idStatus,idProfile) {
     handleAs : "text",
     load : function(data) {
       var obj = JSON.parse(data);
-      dojo.query(".generalRowClass").style("display", "table-row");
-      dojo.query(".generalColClass").style("display", "inline-block");
+      dojo.query(".generalRowClass:not(.dijitTooltipData)").style("display", "table-row");
+      dojo.query(".generalColClass:not(.dijitTooltipData)").style("display", "inline-block");
       for (key in obj) {
-        dojo.query("." + obj[key] + "Class").style("display", "none");
+        dojo.query("." + obj[key] + "Class:not(.dijitTooltipData)").style("display", "none");
       }
     }
   });
