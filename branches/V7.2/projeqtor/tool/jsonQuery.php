@@ -32,7 +32,6 @@
     scriptLog('   ->/tool/jsonQuery.php'); 
     $objectClass=$_REQUEST['objectClass'];
 	  Security::checkValidClass($objectClass);
-	
     $showThumb=Parameter::getUserParameter('paramShowThumbList');
     if ($showThumb=='NO') {
       $showThumb=false;
@@ -68,7 +67,8 @@
       $quickSearch=Sql::fmtStr($_REQUEST['quickSearch']);
     }
     if (! isset($outMode)) { $outMode=""; } 
-       
+    if (! isset($csvExportAll)) $csvExportAll=false;
+    
     $obj=new $objectClass();
     $table=$obj->getDatabaseTableName();
     $accessRightRead=securityGetAccessRight($obj->getMenuClass(), 'read');  
@@ -584,8 +584,16 @@
     		if (isset($_REQUEST['exportHtml']) and $_REQUEST['exportHtml']=='1') {
     		  $exportHtml=true;
     		}
+    		$headers='caption';
     		$csvSep=Parameter::getGlobalParameter('csvSeparator');
     		$csvQuotedText=true;
+    		if ($csvExportAll) {
+    		  $exportReferencesAs='id';
+    		  if (isset($csvSepExportAll)) $csvSep=$csvSepExportAll; // test should qlzyqs be true
+    		  $exportHtml=true;
+    		  $headers='id';
+    		  $csvQuotedText=false;
+    		}
     		$obj=new $objectClass();
     		$first=true;
     		$arrayFields=array();
@@ -612,6 +620,7 @@
 	    				} else {
 	    				  $val=encodeCSV($obj->getColCaption($colId)); // well, in the end, get default.
 	    				}
+	    				if ($headers=='id') $val=$colId;
 	    				if (strpos($colId,'_')!==null and isset($arrayDependantObjects[$objectClass])) {
 	    				  $split=explode('_',$colId);
 	    				  foreach ($arrayDependantObjects[$objectClass] as $incKey=>$incVal) {
