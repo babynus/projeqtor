@@ -94,7 +94,7 @@
     	foreach($obj as $fld=>$val) {
     	  if ($fld=='id' or $fld=='objectId' or $fld=='objectClass' or $fld=='refType' or $fld=='refId') continue;
     	  if ($obj->getDataType($fld)=='varchar') {    				
-            $queryWhere.=' or '.$table.".".$fld." ".((Sql::isMysql())?'LIKE':'ILIKE')." '%".$quickSearch."%'";
+            $queryWhere.=' or '.$table.".".$obj->getDatabaseColumnName($fld)." ".((Sql::isMysql())?'LIKE':'ILIKE')." '%".$quickSearch."%'";
     	  }
     	}
     	if (is_numeric($quickSearch)) {
