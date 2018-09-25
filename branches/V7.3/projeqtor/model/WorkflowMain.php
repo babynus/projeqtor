@@ -505,7 +505,7 @@ class WorkflowMain extends SqlElement {
         $maxWidth= $maxWidth/2;
         $maxWidth =  $maxWidth.'px';
       } else {
-        $maxWidth =  '980px';
+        $maxWidth =  '978px';
       }
       if($this->id){
       $type=new Type();
