@@ -179,7 +179,10 @@
         showPrint("<?php echo $printPage;?>", null, null, null, 'P');
         </script>
       </button>  
-<?php if ($_REQUEST['objectClass']!='Workflow' and $_REQUEST['objectClass']!='Mail') {?>    
+<?php if ($_REQUEST['objectClass']!='Workflow' and $_REQUEST['objectClass']!='Mail') {
+     // Disable PDF Export for :
+     //    - Wokflow : too complex and systematically fails in timeout
+     //    - Mail : description is content of email possibly truncated, so tags may be not closed?>    
      <?php organizeButtons();?>
      <button id="printButtonPdf" dojoType="dijit.form.Button" showlabel="false"
        title="<?php echo i18n('reportPrintPdf');?>"
