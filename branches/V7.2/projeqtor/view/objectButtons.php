@@ -64,6 +64,10 @@
       } else if ($tmpMode=='multi') {
         $modePdf='download multi';
         $printPage="objectDetail.php";
+      } else if ($tmpMode=='revert') {
+        // detected some inconsistent custom report
+        $printPage="objectDetail.php";
+        $printPagePdf="objectDetail.php";
       } // else : keep default behavior
     }
   }
