@@ -813,7 +813,13 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       }
       $cpt=null;
       if (property_exists($obj, $sectionField)&&isset($obj->$sectionField)&&is_array($obj->$sectionField)) {
+        if(substr($sectionField, 0, 6)=="_Link_"){
+          $cptLink=count($obj->$sectionField);
+        }
         $cpt=count($obj->$sectionField);
+        if($sectionField == "_Link" and isset($cptLink)){
+          $cpt = $cpt-$cptLink;
+        }
       } else if (property_exists($obj, $sectionFieldDep)&&is_array($obj->$sectionFieldDep)) {
         $cpt=count($obj->$sectionFieldDep);
       } else if (property_exists($obj, $sectionFieldDoc)&&is_array($obj->$sectionFieldDoc)) {
@@ -2760,6 +2766,9 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
   }
   endBuffering($prevSection, $included);
   $sectionName=$section;
+  if($sectionName=="Link_TestCase"){
+    $sectionName="LinkTestCase";
+  }
   if (strpos($sectionName, '_')!=0) {
     $split=explode('_', $sectionName);
     $sectionName=$split[0];
@@ -6584,7 +6593,7 @@ function endBuffering($prevSection, $included) {
       'successor'=>array('2'=>'bottom', '3'=>'bottom'), 
       'target'=>array('2'=>'bottom', '3'=>'extra'), 
       'treatment_right'=>array('2'=>'right', '3'=>'extra'), 
-      'testcaselist'=>array('2'=>'bottom', '3'=>'extra'), 
+      'link_testcase'=>array('2'=>'bottom', '3'=>'extra'), 
       'testcaserun'=>array('2'=>'bottom', '3'=>'bottom'), 
       'testcaserunsummary'=>array('2'=>'left', '3'=>'extra'), 
       'testcasesummary'=>array('2'=>'right', '3'=>'extra'),
