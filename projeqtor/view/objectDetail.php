@@ -813,13 +813,20 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       }
       $cpt=null;
       if (property_exists($obj, $sectionField)&&isset($obj->$sectionField)&&is_array($obj->$sectionField)) {
-        if(substr($sectionField, 0, 6)=="_Link_"){
-          $cptLink=count($obj->$sectionField);
+        $cptt = 0;
+        if($sectionField == "_Link"){
+          $cptt = 0;
+          $findme   = '_Link_';
+          foreach ($obj as $idVal=>$listVal){
+            $finded = strstr($idVal, $findme);
+            if($finded){
+              if(is_array($listVal)){
+                $cptt+= count($listVal);
+              }
+            }
+          }
         }
-        $cpt=count($obj->$sectionField);
-        if($sectionField == "_Link" and isset($cptLink)){
-          $cpt = $cpt-$cptLink;
-        }
+        $cpt=count($obj->$sectionField)-$cptt;
       } else if (property_exists($obj, $sectionFieldDep)&&is_array($obj->$sectionFieldDep)) {
         $cpt=count($obj->$sectionFieldDep);
       } else if (property_exists($obj, $sectionFieldDoc)&&is_array($obj->$sectionFieldDoc)) {
@@ -2766,8 +2773,9 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
   }
   endBuffering($prevSection, $included);
   $sectionName=$section;
-  if($sectionName=="Link_TestCase"){
-    $sectionName="LinkTestCase";
+  if(strstr($sectionName,'Link_')){
+    $split=explode('_', $sectionName);
+    $sectionName=$split[0].$split[1];
   }
   if (strpos($sectionName, '_')!=0) {
     $split=explode('_', $sectionName);
@@ -3946,6 +3954,20 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
   if ($comboDetail) {
     return;
   }
+  
+  $cptt = 0;
+  if($classLink==""){
+    $findme   = '_Link_';
+    foreach ($obj as $idVal=>$listVal){
+      $finded = strstr($idVal, $findme);
+      if($finded){
+        if(is_array($listVal)){
+          $cptt+= count($listVal);
+        }
+      }
+    }
+  }
+  
   if (get_class($obj)=='Document') {
     $dv=new DocumentVersion();
     $lstVers=$dv->getSqlElementsFromCriteria(array('idDocument'=>$obj->id));
@@ -4091,7 +4113,8 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
   echo '</table>';
   if (!$refresh) echo '</td></tr>';
   if (!$print) {
-    echo '<input id="LinkSectionCount" type="hidden" value="'.count($list).'" />';
+  $valueTotal = count($list)-$cptt;
+    echo '<input id="'.$classLink.'LinkSectionCount" type="hidden" value="'.$valueTotal.'" />';
   }
 }
 
@@ -6567,8 +6590,9 @@ function endBuffering($prevSection, $included) {
       'iban'=>array('2'=>'right', '3'=>'extra'), 
       'internalalert'=>array('2'=>'right', '3'=>'extra'), 
       'link'=>array('2'=>'bottom', '3'=>'extra'), 
-      'linkrequirement'=>array('2'=>'bottom', '3'=>'extra'), 
-      'linkdeliverable'=>array('2'=>'left', '3'=>'extra'), 
+      'link_requirement'=>array('2'=>'bottom', '3'=>'extra'), 
+      'link_deliverable'=>array('2'=>'left', '3'=>'extra'), 
+      'link_activity'=>array('2'=>'left', '3'=>'extra'),
       'listtypeusingworkflow'=>array('2'=>'right', '3'=>'extra'), 
       'lock'=>array('2'=>'left', '3'=>'left'), 
       'mailtext'=>array('2'=>'bottom', '3'=>'bottom'), 
