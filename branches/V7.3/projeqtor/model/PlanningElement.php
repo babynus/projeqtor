@@ -1750,6 +1750,8 @@ class PlanningElement extends SqlElement {
     $dep=New dependency();
     $deps=$dep->getSqlElementsFromCriteria(null, false, $clauseWhere);
     foreach ($deps as $dep) {      
+      // Do not copy link with globalizable items as they are not copied
+      if (GlobalPlanningElement::isGlobalizable($dep->predecessorRefType) or GlobalPlanningElement::isGlobalizable($dep->successorRefType)) continue; 
       if (array_key_exists($dep->predecessorRefType . "#" . $dep->predecessorRefId, self::$_copiedItems) ) {
         $to=self::$_copiedItems[$dep->predecessorRefType . "#" . $dep->predecessorRefId]['to'];
         $dep->predecessorRefType=get_class($to);
