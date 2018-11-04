@@ -4096,7 +4096,7 @@ function selectFilterContinue() {
   var compUrl=(top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
   dojo.xhrPost({
     url : "../tool/backupFilter.php?valid=true" + compUrl,
-    form : dojo.byId('dialogFilterForm'),
+    form : 'dialogFilterForm',
     handleAs : "text",
     load : function(data, args) {
     }
@@ -4137,7 +4137,7 @@ function cancelFilter() {
   var compUrl=(top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
   dojo.xhrPost({
     url : "../tool/backupFilter.php?cancel=true" + compUrl,
-    form : dojo.byId('dialogFilterForm'),
+    form : 'dialogFilterForm',
     handleAs : "text",
     load : function(data, args) {
     }
