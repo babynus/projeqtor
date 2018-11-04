@@ -4202,6 +4202,7 @@ function saveFilter() {
  * 
  */
 function selectStoredFilter(idFilter, context, contentLoad, container) {  
+  console.log("selectStoredFilter("+idFilter+", "+context+", "+contentLoad+", "+container+")");
   var compUrl=(top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
   if (context == 'directFilterList') {
     if (dojo.byId('noFilterSelected')) {
@@ -4235,6 +4236,10 @@ function selectStoredFilter(idFilter, context, contentLoad, container) {
           + "&context=" + context + "&filterObjectClass="
           + objectClass + compUrl, "directFilterList", null,
           false);
+      if (dojo.byId("objectClassList") && dojo.byId("objectClassList").value.substr(0,7)=='Report_') {
+        dojo.byId('outMode').value='';
+        runReport();
+      }
     }
   } else {
 	  if (dojo.byId('filterLogicalOperator') && dojo.byId('filterLogicalOperator').style.display=='none') {
