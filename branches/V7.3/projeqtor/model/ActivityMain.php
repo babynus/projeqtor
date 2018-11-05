@@ -368,8 +368,7 @@ class ActivityMain extends SqlElement {
       foreach ( $assList as $ass ) {
         $ass->idle = $this->idle;
         $ass->idProject = $this->idProject;
-        $ass->save ();
-        
+        $resAssSave=$ass->save();
         // Change idProject value => update idProject for work
         // update not done to PlannedWork : new planning must be calculated
         if ($this->idProject != $oldIdProject) {

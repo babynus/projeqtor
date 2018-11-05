@@ -3483,6 +3483,8 @@ abstract class SqlElement {
       $to [] = 'varchar(4294967295)';
       $from [] = 'text';
       $to [] = 'varchar(65535)';
+      $from [] = 'bigint';
+      $to [] = 'int';
       
       $type = str_ireplace ( $from, $to, $type );
       $formatList [strtolower ( $fieldName )] = $type;
