@@ -318,7 +318,7 @@ class Consistency {
     $pe=new PlanningElement();
     $peTable=$pe->getDatabaseTableName();
     $query="SELECT pe.refType as reftype, pe.refId as refid, pe.realWork as realwork, "
-          ."  (select sum(work) from $workTable w where w.refType=pe.refType and w.refId=pe.refId)+(select pesum.sum(realWork) from $peTable pesum where pesum.topId=pe.id) as sumwork "
+          ."  (select sum(work) from $workTable w where w.refType=pe.refType and w.refId=pe.refId)+(select sum(pesum.realWork) from $peTable pesum where pesum.topId=pe.id) as sumwork "
           ."FROM $peTable pe where realwork!=(select sum(work) from $workTable w where w.refType=pe.refType and w.refId=pe.refId) ";
     $result=Sql::query($query);
     while ($line = Sql::fetchLine($result)) {
