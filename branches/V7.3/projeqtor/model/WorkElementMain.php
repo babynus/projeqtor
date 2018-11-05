@@ -379,7 +379,12 @@ class WorkElementMain extends SqlElement {
     }
     return $result;
   }
-	
+  // Save without extra save() feature and without controls
+  public function simpleSave() {
+    $result = parent::saveForced();
+    return $result;
+  }
+  
 	public static function updateAssignment($work, $diff) {
 		if ($work->refType != 'Activity') {
 			return null;

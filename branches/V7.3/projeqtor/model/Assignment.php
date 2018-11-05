@@ -318,6 +318,7 @@ class Assignment extends SqlElement {
   // Save without extra save() feature and without controls
   public function simpleSave() {
   	$result = parent::saveForced();
+  	return $result;
   }
   /**
    * Delete object and dispatch updates to top 
