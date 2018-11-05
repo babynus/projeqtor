@@ -317,16 +317,21 @@ class Consistency {
     $workTable=$work->getDatabaseTableName();
     $pe=new PlanningElement();
     $peTable=$pe->getDatabaseTableName();
-    $query="SELECT pe.refType as reftype, pe.refId as refid, pe.realWork as realwork, "
+    $query="SELECT pe.refType as reftype, pe.refId as refid, pe.realWork as realwork, pe.leftWork as leftwork, pe.plannedWork as plannedwork,"
           ."  (select sum(work) from $workTable w where w.refType=pe.refType and w.refId=pe.refId)+(select sum(pesum.realWork) from $peTable pesum where pesum.topId=pe.id) as sumwork "
-          ."FROM $peTable pe where realwork!=(select sum(work) from $workTable w where w.refType=pe.refType and w.refId=pe.refId) ";
+          ."FROM $peTable pe "
+          ."WHERE realwork!=(select sum(work) from $workTable w where w.refType=pe.refType and w.refId=pe.refId)+(select sum(pesum.realWork) from $peTable pesum where pesum.topId=pe.id) "
+          ."   OR (pe.realWork+pe.leftWork)!=pe.plannedWork ";
     $result=Sql::query($query);
     while ($line = Sql::fetchLine($result)) {
       $refType=$line['reftype'];
       $refId=$line['refid'];
       $realWork=$line['realwork'];
+      $leftWork=$line['leftwork'];
+      $plannedWork=$line['plannedwork'];
       $sumWork=$line['sumwork'];
-      displayError(i18n("checkIncorrectWork",array(i18n($refType),$refId,Work::displayWorkWithUnit($realWork),Work::displayWorkWithUnit($sumWork))));
+      if ($realWork!=$sumWork) displayError(i18n("checkIncorrectWork",array(i18n($refType),$refId,Work::displayWorkWithUnit($realWork),Work::displayWorkWithUnit($sumWork))));
+      if ($realWork+$leftWork!=$plannedWork) displayError(i18n("checkIncorrectSumWork",array(i18n($refType),$refId,Work::displayWorkWithUnit($realWork),Work::displayWorkWithUnit($leftWork),Work::displayWorkWithUnit($plannedWork))));
       $errors++;
       if ($correct) {
         $res=PlanningElement::updateSynthesis($refType,$refId);
@@ -339,6 +344,8 @@ class Consistency {
             $sumWork=$lineRes['sumwork'];
             displayMsg('&nbsp;-&nbsp;'.SqlList::getNameFromId('Affectable', $idRes).' : '.Work::displayWorkWithUnit($sumWork),true);
           }
+        } else {
+          displayOK(i18n("checkFixed"),true);
         }
       }
     }
