@@ -337,7 +337,7 @@ if (RequestHandler::getValue('objectClass')=='Project' and RequestHandler::getVa
 		    			id.value="";
 		     			unselectAllRows("objectGrid");
 					}
-					loadContent("objectDetail.php", "detailDiv", dojo.byId('listForm'));
+					loadContent("objectDetail.php", "detailDiv", 'listForm');
 					setTimeout(loadPredefinedAction, 100, "<?php echo getEditorType(); ?>");
                   </script>
                 </select>
