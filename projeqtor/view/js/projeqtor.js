@@ -746,6 +746,7 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
                                                   + "&xhrPostValidationType="+((validationType)?validationType:'');
     // add a Timestamp to url
     page += '&xhrPostTimestamp='+Date.now();
+    if (formName && formName!=undefined && formName.id) formName=formName.id;
     dojo.xhrPost({
         url : page,
         form : formName,
