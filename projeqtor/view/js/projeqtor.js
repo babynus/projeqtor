@@ -3829,7 +3829,7 @@ function addNewItem(item) {
   if (switchedMode) {
     setTimeout("hideList(null,true);", 1);
   }
-  loadContent("objectDetail.php", "detailDiv", dojo.byId('listForm'));
+  loadContent("objectDetail.php", "detailDiv", 'listForm');
   dijit.byId('planningNewItem').closeDropDown();
 }
 
