@@ -659,6 +659,7 @@ function warnLoadContentError(page, destination, formName, isResultMessage, vali
   console.warn("  => noFading='"+noFading+"'");
 }
 function loadContent(page, destination, formName, isResultMessage, validationType, directAccess, silent, callBackFunction, noFading) {
+  if (formName && formName!=undefined && formName.id) formName=formName.id;
   var debugStart = (new Date()).getTime();
   // Test validity of destination : must be a node and a widget
   var contentNode = dojo.byId(destination);
@@ -746,7 +747,6 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
                                                   + "&xhrPostValidationType="+((validationType)?validationType:'');
     // add a Timestamp to url
     page += '&xhrPostTimestamp='+Date.now();
-    if (formName && formName!=undefined && formName.id) formName=formName.id;
     dojo.xhrPost({
         url : page,
         form : formName,
