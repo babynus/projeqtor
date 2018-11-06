@@ -432,7 +432,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       dojo.byId("mainDiv").style.visibility="visible"; 
       setTimeout('checkAlert();',5000); //first check at 5 seco 
       <?php if ($firstPage=="welcome.php") {?>
-          setTimeout("runWelcomeAnimation();",2000);
+          //setTimeout("runWelcomeAnimation();",2000);
       <?php } ?>
       <?php // check for ongoing work on Ticket 
       if (getSessionUser()->id) {
