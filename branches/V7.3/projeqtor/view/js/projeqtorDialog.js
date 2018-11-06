@@ -3491,17 +3491,16 @@ function showPlanSaveDates() {
   }
   callBack=function() {
     var proj=dijit.byId('idProjectPlan');
-    if (proj) {
+    if (proj && proj.get('value') && proj.get('value')!='*') {
       dijit.byId('idProjectPlanSaveDates').set('value', proj.get('value'));
     }
   };
-  if (dijit.byId("dialogPlanSaveDates")) {
+  /*if (dijit.byId("dialogPlanSaveDates")) {
     callBack();
     dijit.byId("dialogPlanSaveDates").show();
     return;
-  }
-
-  loadDialog('dialogPlanSaveDates', callBack, true);
+  }*/
+  loadDialog('dialogPlanSaveDates', callBack, true,null,true);
 }
 function planSaveDates() {
   if (!dijit.byId('idProjectPlanSaveDates').get('value')) {
