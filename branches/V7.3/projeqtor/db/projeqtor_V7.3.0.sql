@@ -17,3 +17,14 @@ UPDATE `${prefix}report` set `filterClass`='Ticket' WHERE id in (9,10,11,12,13,1
 
 ALTER TABLE `${prefix}attachment` CHANGE `fileSize` `fileSize` BIGINT(12) UNSIGNED;
 ALTER TABLE `${prefix}documentversion` CHANGE `fileSize` `fileSize` BIGINT(12) UNSIGNED;
+
+-- FINANCIAL TTC 
+
+ALTER TABLE `${prefix}tender`
+ADD `discountFullAmount` decimal(11,2) UNSIGNED;
+
+ALTER TABLE `${prefix}providerbill`
+ADD `discountFullAmount` decimal(11,2) UNSIGNED;
+
+ALTER TABLE `${prefix}providerorder`
+ADD `discountFullAmount` decimal(11,2) UNSIGNED;
