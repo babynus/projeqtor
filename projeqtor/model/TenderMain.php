@@ -64,12 +64,13 @@ class TenderMain extends SqlElement {
   public $discountAmount;
   public $_label_rate;
   public $discountRate;
-  public $discountFrom;
+  public $discountFullAmount;
   //total
   public $totalUntaxedAmount;
-  public $_void_2;
+  public $discountFrom;
   public $totalTaxAmount;
   public $totalFullAmount;
+  
   public $idProjectExpense;
   public $_button_generateProjectExpense;
   public $paymentCondition;
@@ -125,7 +126,6 @@ class TenderMain extends SqlElement {
                                   "cancelled"=>"nobr",
                                   "totalTaxAmount"=>"readonly",
                                   "taxAmount"=>"readonly",
-                                  "fullAmount"=>"readonly",
                                   "totalUntaxedAmount"=>"readonly",
                                   "totalTaxAmount"=>"readonly",
                                   "totalFullAmount"=>"readonly",
@@ -345,6 +345,7 @@ class TenderMain extends SqlElement {
       return str_replace(array(getLastOperationMessage($result),'NO_CHANGE','#'.$resultEvalId),array(getLastOperationMessage($resultEval),"OK",'#'.$this->id),$result);
     }
     
+    $paramImputOfBillLineProvider = Parameter::getGlobalParameter('ImputOfBillLineProvider');
     $billLine=new BillLine();
     $crit = array("refType"=> "Tender", "refId"=>$this->id);
     $billLineList = $billLine->getSqlElementsFromCriteria($crit,false);
@@ -353,13 +354,25 @@ class TenderMain extends SqlElement {
       foreach ($billLineList as $line) {
         $amount+=$line->amount;
       }
-      $this->untaxedAmount=$amount;
+      if($paramImputOfBillLineProvider == 'HT'){
+        $this->untaxedAmount=$amount;
+      }else{
+        $this->fullAmount=$amount;
+      }
     }
-    $this->fullAmount=$this->untaxedAmount*(1+$this->taxPct/100);
-    $this->taxAmount=$this->fullAmount-$this->untaxedAmount;
-    $this->totalUntaxedAmount=$this->untaxedAmount-$this->discountAmount;
-    $this->totalFullAmount=$this->totalUntaxedAmount*(1+$this->taxPct/100);
-    $this->totalTaxAmount=$this->totalFullAmount-$this->totalUntaxedAmount;
+    if($paramImputOfBillLineProvider == 'HT'){
+      $this->fullAmount=$this->untaxedAmount*(1+$this->taxPct/100);
+      $this->taxAmount=$this->fullAmount-$this->untaxedAmount;
+      $this->totalUntaxedAmount=$this->untaxedAmount-$this->discountAmount;
+      $this->totalFullAmount=$this->totalUntaxedAmount*(1+$this->taxPct/100);
+      $this->totalTaxAmount=$this->totalFullAmount-$this->totalUntaxedAmount;
+    }else{
+      $this->untaxedAmount=$this->fullAmount / (1+($this->taxPct/100));
+      $this->taxAmount=$this->fullAmount-$this->untaxedAmount;
+      $this->totalFullAmount=$this->fullAmount - $this->discountFullAmount;
+      $this->totalUntaxedAmount= $this->totalFullAmount / (1 + ( $this->taxPct / 100 ) );
+      $this->totalTaxAmount=$this->totalFullAmount-$this->totalUntaxedAmount;
+    }
     parent::simpleSave();
     return $result;
   }
@@ -423,31 +436,47 @@ class TenderMain extends SqlElement {
       $colScript .= '  refreshList("idContact", "idProvider", dijit.byId("idProvider").get("value"), dijit.byId("idContact").get("value"),null, false);';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
-    }else if ($colName=="untaxedAmount" or $colName=="taxPct" or $colName=="discountAmount") {
+    }else if ($colName=="untaxedAmount" or $colName=="taxPct" or $colName=="discountAmount" or $colName=="discountFullAmount" or $colName=="fullAmount") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      if ($colName=="discountAmount") {
-        $colScript .= '   if (avoidRecursiveRefresh) {';
-        $colScript .= '     updateFinancialTotal();';
-        $colScript .= '     return;';
-        $colScript .= '   }';
+      $colScript .= ' if (avoidRecursiveRefresh) { return;}';
+      if ($colName=="discountAmount" or $colName=="discountFullAmount") {
         $colScript .= '   avoidRecursiveRefresh=true;';
         $colScript .= '   setTimeout(\'avoidRecursiveRefresh=false;\',100);';
         $colScript .= '   dijit.byId("discountFrom").set("value","amount");';
       }
-      $colScript .= '  updateFinancialTotal();';
+      $paramImputOfAmountProvider = Parameter::getGlobalParameter('ImputOfAmountProvider');
+      if (count($this->_BillLine)) {
+        $paramImputOfAmountProvider = Parameter::getGlobalParameter('ImputOfBillLineProvider');
+      }
+      $colScript .= '     updateFinancialTotal("'.$paramImputOfAmountProvider.'","'.$colName.'");';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
     }else if ($colName=="discountRate") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  if (avoidRecursiveRefresh) return;';
       $colScript .= '  var rate=dijit.byId("discountRate").get("value");';
       $colScript .= '  var untaxedAmount=dijit.byId("untaxedAmount").get("value");';
+      $colScript .= '  var fullAmount=dijit.byId("fullAmount").get("value");';
       $colScript .= '  if (!isNaN(rate)) {';
-      $colScript .= '    if (avoidRecursiveRefresh) return;';
       $colScript .= '    avoidRecursiveRefresh=true;';
-      $colScript .= '    setTimeout(\'avoidRecursiveRefresh=false;\',100);';
+      $colScript .= '    setTimeout(\'avoidRecursiveRefresh=false;\',500);';
       $colScript .= '    dijit.byId("discountFrom").set("value","rate");';
-      $colScript .= '    var discount=Math.round(untaxedAmount*rate)/100;';
-      $colScript .= '    dijit.byId("discountAmount").set("value",discount);';
+      $paramImputOfAmountProvider = Parameter::getGlobalParameter('ImputOfAmountProvider');
+      if (count($this->_BillLine)) {
+        $paramImputOfAmountProvider = Parameter::getGlobalParameter('ImputOfBillLineProvider');
+      }
+      if($paramImputOfAmountProvider == 'HT'){
+        $colScript .= '    var discount=Math.round(untaxedAmount*rate)/100;';
+        $colScript .= '    dijit.byId("discountAmount").set("value",discount);';
+        $colScript .= '    var discountFull=Math.round(fullAmount*rate)/100;';
+        $colScript .= '    dijit.byId("discountFullAmount").set("value",discountFull);';
+      }else{
+        $colScript .= '    var discountFull=Math.round(fullAmount*rate)/100;';
+        $colScript .= '    dijit.byId("discountFullAmount").set("value",discountFull);';
+        $colScript .= '    var discount=Math.round(untaxedAmount*rate)/100;';
+        $colScript .= '    dijit.byId("discountAmount").set("value",discount);';
+      }
+      $colScript .= '     updateFinancialTotal("'.$paramImputOfAmountProvider.'","'.$colName.'");';
       $colScript .= '  }';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
@@ -614,9 +643,19 @@ class TenderMain extends SqlElement {
     }
     if (count($this->_BillLine)) {
       self::$_fieldsAttributes['untaxedAmount']='readonly';
+      self::$_fieldsAttributes['fullAmount']='readonly';
     }
     if($this->idProjectExpense){
       self::$_fieldsAttributes['_button_generateProjectExpense']='hidden';
+    }
+    
+    $paramImputOfAmountProvider = Parameter::getGlobalParameter('ImputOfAmountProvider');
+    if($paramImputOfAmountProvider == 'HT'){
+      self::$_fieldsAttributes['fullAmount']="readonly";
+      self::$_fieldsAttributes['discountFullAmount']="readonly";
+    }else{
+      self::$_fieldsAttributes['untaxedAmount']="readonly";
+      self::$_fieldsAttributes['discountAmount']="readonly";
     }
   }
   

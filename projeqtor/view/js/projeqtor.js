@@ -3621,6 +3621,45 @@ function updateCommandTotal() {
 
   cancelRecursiveChange_OnGoingChange = false;
 }
+
+function updateCommandTotalTTC() {
+  if (cancelRecursiveChange_OnGoingChange)
+    return;
+  cancelRecursiveChange_OnGoingChange = true;
+  // Retrieve values used for calculation
+  var fullAmount = dijit.byId("fullAmount").get("value");
+  if (!fullAmount)
+    fullAmount = 0;
+  var taxPct = dijit.byId("taxPct").get("value");
+  if (!taxPct)
+    taxPct = 0;
+  var addFullAmount = dijit.byId("addFullAmount").get("value");
+  if (!addFullAmount)
+    addFullAmount = 0;
+  var initialWork = dijit.byId("initialWork").get("value");
+  var addWork = dijit.byId("addWork").get("value");
+  // Calculated values
+  var untaxedAmount = Math.round( fullAmount / ( 1 + ( taxPct / 100 )));
+  var taxAmount = fullAmount - untaxedAmount;
+  var addUntaxedAmount = Math.round( addFullAmount / ( 1 + ( taxPct / 100 )));
+  var addTaxAmount =  addFullAmount - addUntaxedAmount;
+  var totalUntaxedAmount = untaxedAmount + addUntaxedAmount;
+  var totalTaxAmount = taxAmount + addTaxAmount;
+  var totalFullAmount = fullAmount + addFullAmount;
+  var validatedWork = initialWork + addWork;
+  // Set values to fields
+  dijit.byId("taxAmount").set('value', taxAmount);
+  dijit.byId("untaxedAmount").set('value', untaxedAmount);
+  dijit.byId("addTaxAmount").set('value', addTaxAmount);
+  dijit.byId("addUntaxedAmount").set('value', addUntaxedAmount);
+  dijit.byId("totalUntaxedAmount").set('value', totalUntaxedAmount);
+  dijit.byId("totalTaxAmount").set('value', totalTaxAmount);
+  dijit.byId("totalFullAmount").set('value', totalFullAmount);
+  dijit.byId("validatedWork").set('value', validatedWork);
+
+  cancelRecursiveChange_OnGoingChange = false;
+}
+
 //gautier
 function providerPaymentIdProviderBill() {
   var idBill=dijit.byId("idProviderBill").get("value");
@@ -3651,48 +3690,85 @@ function providerPaymentIdProviderTerm() {
   });
 }
 
-function updateFinancialTotal() {
-  if (cancelRecursiveChange_OnGoingChange)
+function updateFinancialTotal(mode, col) {
+  if (cancelRecursiveChange_OnGoingChange){
     return;
+  }
   cancelRecursiveChange_OnGoingChange = true;
-  // Retrieve values used for calculation
-  var untaxedAmount = dijit.byId("untaxedAmount").get("value");
-  if (!untaxedAmount)
-    untaxedAmount = 0;
-  var taxPct = dijit.byId("taxPct").get("value");
-  if (!taxPct)
-    taxPct = 0;
-  var discount=dijit.byId("discountAmount").get("value");
-  var rate=dijit.byId("discountRate").get("value");
-  if (!isNaN(discount)) {
-    var rateNew=Math.round(10000*discount/untaxedAmount)/100;
-    if (!isNaN(rate)) {
-      if(Math.round(rate*100)!= Math.round(rateNew*100)){
+  if(mode == 'HT'){
+    // Retrieve values used for calculation
+    var untaxedAmount = dijit.byId("untaxedAmount").get("value");
+    var fullAmount = dijit.byId("fullAmount").get("value");
+    if (!untaxedAmount)
+      untaxedAmount = 0;
+    var taxPct = dijit.byId("taxPct").get("value");
+    if (!taxPct)
+      taxPct = 0;
+    var discount=dijit.byId("discountAmount").get("value");
+    if (!isNaN(discount)) {
+      if (col!='discountRate') {
+        var rateNew=Math.round(10000*discount/untaxedAmount)/100;
         dijit.byId("discountRate").set("value",rateNew);
+        var discountFull= Math.round(fullAmount*rateNew)/100;
+        dijit.byId("discountFullAmount").set("value",discountFull);
       }
-    }else{
-      dijit.byId("discountRate").set("value",rateNew);
     }
+    if (!discount){
+      discount=0;
+    }
+    // Calculated values
+    var taxAmount = Math.round(untaxedAmount * taxPct) / 100;
+    var fullAmount = taxAmount + untaxedAmount;
+    var totalUntaxedAmount = untaxedAmount - discount;
+    var totalTaxAmount = Math.round(totalUntaxedAmount * taxPct) / 100;
+    var totalFullAmount = totalUntaxedAmount + totalTaxAmount;
+    // Set values to fields
+    dijit.byId("taxAmount").set('value', taxAmount);
+    dijit.byId("fullAmount").set('value', fullAmount);
+    dijit.byId("totalUntaxedAmount").set('value', totalUntaxedAmount);
+    dijit.byId("totalTaxAmount").set('value', totalTaxAmount);
+    dijit.byId("totalFullAmount").set('value', totalFullAmount);
+  }else{
+    var fullAmount = dijit.byId("fullAmount").get("value");
+    var untaxedAmount = dijit.byId("untaxedAmount").get("value");
+    if (!fullAmount)
+      fullAmount = 0;
+    var taxPct = dijit.byId("taxPct").get("value");
+    if (!taxPct)
+      taxPct = 0;
+    var discountFull=dijit.byId("discountFullAmount").get("value");
+    if (!isNaN(discountFull)) {
+      if (col!='discountRate') {
+        var rateNew=Math.round(10000*discountFull/fullAmount)/100;
+        dijit.byId("discountRate").set("value",rateNew);
+        var discount= Math.round(untaxedAmount*rateNew)/100;
+        dijit.byId("discountAmount").set("value",discount);
+      }
+    }
+    if (!discountFull){
+      discountFull=0;
+    }
+    discountAmount = dijit.byId("discountAmount").get("value");
+    if (!discountAmount){
+      discountAmount=0;
+    }
+    // Calculated values
+    var untaxedAmount =  fullAmount / ( 1 + ( taxPct / 100 ));
+    var taxAmount = fullAmount - untaxedAmount;
+    var totalFullAmount = fullAmount - discountFull;
+    var totalUntaxedAmount = untaxedAmount - discountAmount ;
+    var totalTaxAmount = totalFullAmount - totalUntaxedAmount;
+    // Set values to fields
+    dijit.byId("taxAmount").set('value', taxAmount);
+    dijit.byId("untaxedAmount").set('value', untaxedAmount);
+    dijit.byId("totalUntaxedAmount").set('value', totalUntaxedAmount);
+    dijit.byId("totalTaxAmount").set('value', totalTaxAmount);
+    dijit.byId("totalFullAmount").set('value', totalFullAmount);
   }
-  if (!discount){
-    discount=0;
-  }
-  // Calculated values
-  var taxAmount = Math.round(untaxedAmount * taxPct) / 100;
-  var fullAmount = taxAmount + untaxedAmount;
-  var totalUntaxedAmount = untaxedAmount - discount;
-  var totalTaxAmount = Math.round(totalUntaxedAmount * taxPct) / 100;
-  var totalFullAmount = totalUntaxedAmount + totalTaxAmount;
-  // Set values to fields
-  dijit.byId("taxAmount").set('value', taxAmount);
-  dijit.byId("fullAmount").set('value', fullAmount);
-  dijit.byId("totalUntaxedAmount").set('value', totalUntaxedAmount);
-  dijit.byId("totalTaxAmount").set('value', totalTaxAmount);
-  dijit.byId("totalFullAmount").set('value', totalFullAmount);
-  setTimeout("cancelRecursiveChange_OnGoingChange = false;",50);
+  setTimeout("cancelRecursiveChange_OnGoingChange = false;",5);
 }
 //end
-function updateBillTotal() { // Also used for Qutation !!!
+function updateBillTotal() { // Also used for Quotation !!!
   if (cancelRecursiveChange_OnGoingChange)
     return;
   cancelRecursiveChange_OnGoingChange = true;
@@ -3709,6 +3785,28 @@ function updateBillTotal() { // Also used for Qutation !!!
   // Set values to fields
   dijit.byId("taxAmount").set('value', taxAmount);
   dijit.byId("fullAmount").set('value', fullAmount);
+  cancelRecursiveChange_OnGoingChange = false;
+}
+
+function updateBillTotalTTC() { // Also used for Quotation !!!
+  if (cancelRecursiveChange_OnGoingChange)
+    return;
+  cancelRecursiveChange_OnGoingChange = true;
+  // Retrieve values used for calculation
+  var fullAmount = dijit.byId("fullAmount").get("value");
+  if (!fullAmount)
+    fullAmount = 0;
+  var taxPct = dijit.byId("taxPct").get("value");
+  if (!taxPct)
+    taxPct = 0;
+  // Calculated values
+  var untaxedAmount = Math.round( fullAmount / ( 1 + ( taxPct / 100 )));
+  var taxAmount = fullAmount - untaxedAmount;
+  
+  // Set values to fields
+  dijit.byId("taxAmount").set('value', taxAmount);
+  dijit.byId("untaxedAmount").set('value', untaxedAmount);
+  
   cancelRecursiveChange_OnGoingChange = false;
 }
 
