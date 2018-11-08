@@ -238,6 +238,7 @@ class ProviderTermMain extends SqlElement {
         $cpt=$billLine->countSqlElementsFromCriteria(array('refType'=>'ProviderTerm','refId'=>$this->id));
         if ($cpt>0) { 
           self::$_fieldsAttributes['untaxedAmount']='readonly';
+          self::$_fieldsAttributes['fullAmount']="readonly";
         }
       }
     }
