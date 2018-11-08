@@ -368,6 +368,7 @@ class BillMain extends SqlElement {
 		}
 		
 		// calculate amounts for bill lines
+		$paramImputOfAmountClient = Parameter::getGlobalParameter('ImputOfBillLineClient');
 		$billLine=new BillLine();
 		$crit = array("refType"=> "Bill", "refId"=>$this->id);
     $billLineList = $billLine->getSqlElementsFromCriteria($crit,false);
@@ -375,8 +376,13 @@ class BillMain extends SqlElement {
     foreach ($billLineList as $line) {
     	$amount+=$line->amount;
     }
-    $this->untaxedAmount=$amount;
-    $this->fullAmount=$amount*(1+$this->taxPct/100);
+    if($paramImputOfAmountClient == "HT"){
+      $this->untaxedAmount=$amount;
+      $this->fullAmount=$amount*(1+$this->taxPct/100);
+    }else{
+      $this->fullAmount=$amount;
+      $this->untaxedAmount=$this->fullAmount/(1+$this->taxPct/100);
+    }
     $this->retreivePayments(false);
 		$result=parent::save();
 		return $result;
@@ -389,9 +395,14 @@ class BillMain extends SqlElement {
 	public function getValidationScript($colName) {
 	
 		$colScript = parent::getValidationScript($colName);
-		if ($colName=="untaxedAmount" || $colName=="taxPct") {
+		if ($colName=="untaxedAmount" || $colName=="taxPct" || $colName=="fullAmount") {
+		  $paramImputOfAmountClient = Parameter::getGlobalParameter('ImputOfBillLineClient');
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  updateBillTotal();';
+      if($paramImputOfAmountClient == "HT"){
+        $colScript .= '  updateBillTotal();';
+      }else{
+        $colScript .= '  updateBillTotalTTC();';
+      }
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
     } else if ($colName=="idProject") {
