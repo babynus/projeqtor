@@ -4204,7 +4204,6 @@ function saveFilter() {
  * 
  */
 function selectStoredFilter(idFilter, context, contentLoad, container) {  
-  console.log("selectStoredFilter("+idFilter+", "+context+", "+contentLoad+", "+container+")");
   var compUrl=(top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
   if (context == 'directFilterList') {
     if (dojo.byId('noFilterSelected')) {
@@ -8559,8 +8558,6 @@ function getMaxHeight(document){
 }
 
 function planningToCanvasToPDF(){
-
-  console.log("planningToCanvasToPDF - START");
   var iframe = document.createElement('iframe');
   
   //this onload is for firefox but also work on others browsers
@@ -8681,18 +8678,13 @@ function planningToCanvasToPDF(){
   
   //Start the 4 prints function
   //Print image activities and projects
-  console.log("planningToCanvasToPDF - BEFORE html2Canvas");
   html2canvas(frameContent.contentWindow.document.getElementById('leftside')).then(function(leftElement) {
-    console.log("planningToCanvasToPDF - html2Canvas - Step 1 - leftside");
     //Print image column left side
     html2canvas(frameContent.contentWindow.document.getElementById('leftsideTop')).then(function(leftColumn) { 
-      console.log("planningToCanvasToPDF - html2Canvas - Step 2 - leftsideTop");
       //Print right Line
       html2canvas(frameContent.contentWindow.document.getElementById('rightGanttChartDIV')).then(function(rightElement) {
-        console.log("planningToCanvasToPDF - html2Canvas - Step 3 - rightGanttChartDIV");
         //Print right column
         html2canvas(frameContent.contentWindow.document.getElementById('rightside')).then(function(rightColumn) {
-          console.log("planningToCanvasToPDF - html2Canvas - Step 4 - rightside");
           if(ratio!=1){
             leftElement=cropCanvas(leftElement,0,0,leftElement.width,leftElement.height,ratio);
             leftColumn=cropCanvas(leftColumn,0,0,leftColumn.width,leftColumn.height,ratio);
@@ -8702,14 +8694,11 @@ function planningToCanvasToPDF(){
           //Init number of total rows
           nbRowTotal=Math.round(leftElement.height/heightRow); 
           //frameContent.parentNode.removeChild(frameContent);
-          console.log("planningToCanvasToPDF - start picture calculation");
           //Start pictures's calcul
           firstEnterHeight=true;
           var EHeightValue=0; //Height pointer cursor
           var EHeight=leftElement.height; //total height
-          console.log("step 1");
           while((Math.ceil(EHeight/maxHeight)>=1 || firstEnterHeight) && EHeight>heightRow){
-            console.log("planningToCanvasToPDF - EHeight="+EHeight+", maxHeight"+maxHeight+", EHeight/maxHeight="+Math.ceil(EHeight/maxHeight));
             var calculHeight=maxHeight;
             var ELeftWidth=leftElement.width; //total width
             var ERightWidth=rightElement.width; //total width
@@ -8734,9 +8723,7 @@ function planningToCanvasToPDF(){
                               true);
             }
             var canvasList=[];
-            console.log("step 2");
             while(ELeftWidth/maxWidth>=1 || (!firstEnterWidth && ELeftWidth>0)){
-              console.log("planningToCanvasToPDF - ELeftWidth="+ELeftWidth+", maxWidth"+maxWidth+", ELeftWidth/maxWidth="+Math.ceil(ELeftWidth/maxWidth));
               firstEnterWidth2=true;
               oldWidthElement=widthElement;
               while(iterateurColumnLeft<sizeElements.length && ELeftWidth>=sizeElements[iterateurColumnLeft]){
@@ -8780,7 +8767,6 @@ function planningToCanvasToPDF(){
               }
               firstEnterWidth=false;
             }
-            console.log("step 3");
             if(canvasList.length==0){
               if(firstEnterHeight || repeatIconTask){
                 canvasList.push(combineCanvasIntoOne(
@@ -8808,12 +8794,9 @@ function planningToCanvasToPDF(){
             var canvasList2=[];
             //Init number of total cols
             nbColTotal=Math.round(rightElement.width/widthRow); 
-            console.log("step 4");
             var countIteration=0;
             while((Math.ceil(ERightWidth/maxWidth)>=1 || (!firstEnterWidth && ERightWidth>0)) && nbColTotal>0){
               countIteration++;
-              console.log("planningToCanvasToPDF - ERightWidth="+ERightWidth+", maxWidth"+maxWidth+", ERightWidth/maxWidth="+Math.ceil(ERightWidth/maxWidth));
-              console.log("nbColTotal="+nbColTotal);
               firstEnterWidth2=true;
               oldWidthElement=widthElement;
               limit=0;
@@ -8828,7 +8811,6 @@ function planningToCanvasToPDF(){
                 nbColTotal--;
               }
               if(!firstEnterWidth){
-                console.log("! firstEnterWidth");
                 if(currentWidthElm!=0 && widthElement!=oldWidthElement)
                   if(repeatIconTask){
                     canvasList2.push(combineCanvasIntoOne(imageRepeat,
@@ -8848,7 +8830,6 @@ function planningToCanvasToPDF(){
                   }
                 }
               }else{
-                console.log("firstEnterWidth");
                 if(widthElement==0){
                   canvasList2.push(canvasList[canvasList.length-1]);
                 }else if(firstEnterHeight || repeatIconTask){
@@ -8869,7 +8850,6 @@ function planningToCanvasToPDF(){
               }
               firstEnterWidth=false;
             }
-            console.log("step 5");
             var baseIterateur=tabImage.length;
             for(var i=0;i<canvasList.length-1;i++){
               
@@ -8883,7 +8863,6 @@ function planningToCanvasToPDF(){
               }
               tabImage.push(ArrayToPut);
             }
-            console.log("step 6");
             for(var i=0;i<canvasList2.length;i++){
               if(canvasList2[i].width-widthIconTask>4){
                 //Add image to mapImage in base64 format
@@ -8897,12 +8876,10 @@ function planningToCanvasToPDF(){
                 tabImage.push(ArrayToPut);
               }
             }
-            console.log("step 7");
             EHeight-=maxHeight-calculHeight;
             EHeightValue+=maxHeight-calculHeight;
             firstEnterHeight=false;
           }
-          console.log("planningToCanvasToPDF - end of picture calculation");
           var dd = {
              pageMargins: [ marge, marge, marge, marge ],
              pageOrientation: orientation,
@@ -8929,7 +8906,6 @@ function planningToCanvasToPDF(){
           }else{
             pdfMake.createPdf(dd).download(pdfFileName);
           }
-          console.log("planningToCanvasToPDF - almost finished");
           // open the PDF in a new window
           //pdfMake.createPdf(dd).open();
           // print the PDF (temporarily Chrome-only)
@@ -8938,13 +8914,11 @@ function planningToCanvasToPDF(){
           dijit.byId('dialogPlanningPdf').hide();
           iframe.parentNode.removeChild(iframe);
           setTimeout('hideWait();',100);
-          console.log("planningToCanvasToPDF - after hidewait");
         });
       });
     });
   });
   };
-  console.log("planningToCanvasToPDF - OK");
   iframe.id="iframeTmpPlanning";
   document.body.appendChild(iframe);
 }
