@@ -296,7 +296,6 @@ class Consistency {
         if ($we->id) {
           $we->realWork=$sumWork;
           $resWe=$we->simpleSave();
-          debugLog("====== $resWe");
         }
         if (getLastOperationStatus($res)=='OK' or (isset($resWe) and getLastOperationStatus($resWe)=='OK') ) {
           displayOK(i18n("checkFixed"),true);
