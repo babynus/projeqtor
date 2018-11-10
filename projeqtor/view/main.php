@@ -402,7 +402,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
         	  $directAccessIndex=array();
           }
           $index=count($directAccessIndex)+1;
-          if ($class) $directAccessIndex[$index]=new $class($id);
+          if ($class) $directAccessIndex[$index]=$directObj;
           else $directAccessIndex[$index]='';
           setSessionValue('directAccessIndex', $directAccessIndex);
         	echo "directAccessIndex=$index;";

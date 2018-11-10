@@ -3141,9 +3141,7 @@ function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target) {
         || forceListRefresh || dojo.byId('titleKanban')) {
       var callBack=null;
       if (dijit.byId("detailRightDiv")) callBack=function(){loadContent("objectStream.php", "detailRightDiv", "listForm");};
-      
-      loadContent("objectMain.php?objectClass=" + eltClass, "centerDiv", false,
-          false, false, eltId,false,callBack);
+      loadContent("objectMain.php?objectClass=" + eltClass, "centerDiv", null,false, null, eltId,false,callBack);      
     } else {
       if (eltClass=='GlobalView') {
         var explode=eltId.split('|');
