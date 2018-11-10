@@ -4438,18 +4438,21 @@ function editResourceCost(id, idResource, idRole, cost, startDate, endDate) {
     showAlert(i18n('alertOngoingChange'));
     return;
   }
-  dojo.byId("resourceCostId").value=id;
-  dojo.byId("resourceCostIdResource").value=idResource;
-  dijit.byId("resourceCostIdRole").set('readOnly', true);
-  dijit.byId("resourceCostValue").set('value', dojo.number.format(cost / 100));
-  var dateStartDate=getDate(startDate);
-  dijit.byId("resourceCostStartDate").set('value', dateStartDate);
-  dijit.byId("resourceCostStartDate").set('disabled', true);
-  dijit.byId("resourceCostStartDate").set('required', 'false');
-  reourceCostLoad=true;
-  dijit.byId("resourceCostIdRole").set('value', idRole);
-  setTimeout('reourceCostLoad=false;', 300);
-  dijit.byId("dialogResourceCost").show();
+  var callBack=function() {
+    dojo.byId("resourceCostId").value=id;
+    dojo.byId("resourceCostIdResource").value=idResource;
+    dijit.byId("resourceCostIdRole").set('readOnly', true);
+    dijit.byId("resourceCostValue").set('value', dojo.number.format(cost / 100));
+    var dateStartDate=getDate(startDate);
+    dijit.byId("resourceCostStartDate").set('value', dateStartDate);
+    dijit.byId("resourceCostStartDate").set('disabled', true);
+    dijit.byId("resourceCostStartDate").set('required', 'false');
+    reourceCostLoad=true;
+    dijit.byId("resourceCostIdRole").set('value', idRole);
+    setTimeout('reourceCostLoad=false;', 300);
+    dijit.byId("dialogResourceCost").show();
+  };
+  loadDialog('dialogResourceCost',callBack,true,null);
 }
 
 function saveResourceCost() {
