@@ -82,9 +82,19 @@ if(Parameter::getUserParameter("showId")!=null && Parameter::getUserParameter("s
                   style="width: 150px;"
                   name="userName" id="userName"
                   <?php echo autoOpenFilteringSelect();?>
-                  value="<?php echo ($user->isResource)?$user->id:'0';?>" 
-                  >
+                  value="<?php if(sessionValueExists('userName')){
+                                $userName =  getSessionValue('userName');
+                                echo $userName;
+                               }else{
+                                if($user->isResource){
+                                  $userName = $user->id;
+                                }else{
+                                  $userName = 0;
+                                }
+                                echo $userName;
+                               }?>">
                   <script type="dojo/method" event="onChange" >
+                    saveDataToSession("userName",dijit.byId('userName').get('value'),false);
                     refreshImputationList();
                   </script>
                   <?php 
@@ -99,9 +109,20 @@ if(Parameter::getUserParameter("showId")!=null && Parameter::getUserParameter("s
                   constraints="{min:2000,max:2100,places:0,pattern:'###0'}"
                   intermediateChanges="true"
                   maxlength="4" class="roundedLeft"
-                  value="<?php echo $currentYear;?>" smallDelta="1"
+                  value="<?php if(sessionValueExists('yearSpinner')){
+                                echo getSessionValue('yearSpinner') ;
+                                if(sessionValueExists('weekSpinner')){
+                                  $rangeValue = getSessionValue('yearSpinner').getSessionValue('weekSpinner');
+                                }else{
+                                  $rangeValue = getSessionValue('yearSpinner').$currentWeek;
+                                }
+                               }else{
+                                echo $currentYear;    
+                               }?>" 
+                  smallDelta="1"
                   id="yearSpinner" name="yearSpinner" >
                   <script type="dojo/method" event="onChange" >
+                   saveDataToSession("yearSpinner",dijit.byId('yearSpinner').get('value'),false);
                    return refreshImputationPeriod();
                   </script>
                 </div>
@@ -113,9 +134,20 @@ if(Parameter::getUserParameter("showId")!=null && Parameter::getUserParameter("s
                   constraints="{min:0,max:55,places:0,pattern:'00'}"
                   intermediateChanges="true"
                   maxlength="2" class="roundedLeft"
-                  value="<?php echo $currentWeek;?>" smallDelta="1"
+                  value="<?php if(sessionValueExists('weekSpinner')){
+                                echo getSessionValue('weekSpinner') ;
+                                if(sessionValueExists('yearSpinner')){
+                                  $rangeValue = getSessionValue('yearSpinner').getSessionValue('weekSpinner');
+                                }else{
+                                  $rangeValue = $currentYear.getSessionValue('weekSpinner');
+                                }
+                               }else{
+                                echo $currentWeek;   
+                               } ?>" 
+                  smallDelta="1"
                   id="weekSpinner" name="weekSpinner" >
                   <script type="dojo/method" event="onChange" >
+                   saveDataToSession("weekSpinner",dijit.byId('weekSpinner').get('value'),false);
                    return refreshImputationPeriod();
                   </script>
                 </div>
@@ -142,13 +174,22 @@ if(Parameter::getUserParameter("showId")!=null && Parameter::getUserParameter("s
                 	<?php if (sessionValueExists('browserLocaleDateFormatJs')) {
 										echo ' constraints="{datePattern:\''.getSessionValue('browserLocaleDateFormatJs').'\'}" ';
 									}?>
-                  id="dateSelector" name=""dateSelector""
+                  id="dateSelector" name="dateSelector" dateSelector""
                   invalidMessage="<?php echo i18n('messageInvalidDate')?>"
                   type="text" maxlength="10" 
                   style="width:100px; text-align: center;" class="input roundedLeft"
                   hasDownArrow="true"
-                  value="<?php echo $currentDay;?>" >
+                  value="<?php if(sessionValueExists('dateSelector')){
+                                if(sessionValueExists('weekSpinner') and sessionValueExists('yearSpinner')){
+                                  echo date('Y-m-d',firstDayofWeek(getSessionValue('weekSpinner'),getSessionValue('yearSpinner')));
+                                }else{
+                                  echo $currentDay;
+                                }
+                               }else{
+                                echo $currentDay;   
+                               } ?>" >
                   <script type="dojo/method" event="onChange">
+                    saveDataToSession("dateSelector",dijit.byId('dateSelector').get('value'),false);
                     return refreshImputationPeriod(this.value);
                   </script>
                 </div>
@@ -323,7 +364,7 @@ if(Parameter::getUserParameter("showId")!=null && Parameter::getUserParameter("s
        <input type="hidden" name="dateMonth" id="dateMonth" value="<?php echo $currentYear.$currentMonth; ?>"/>
        
       <?php if (! isset($print) ) {$print=false;}
-      ImputationLine::drawLines($user->id, $rangeType, $rangeValue, false, $showPlanned, $print, $hideDone, $hideNotHandled, $displayOnlyCurrentWeekMeetings,$currentWeek,$currentYear, $showId);?>
+      ImputationLine::drawLines($userName, $rangeType, $rangeValue, false, $showPlanned, $print, $hideDone, $hideNotHandled, $displayOnlyCurrentWeekMeetings,$currentWeek,$currentYear, $showId);?>
      </form>
   </div>
 </div>

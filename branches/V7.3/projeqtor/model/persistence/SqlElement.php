@@ -6683,7 +6683,18 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
   }
   //ADD qCazelles - Filter by status
   public function getExistingStatus() {
+    $clsName=get_class($this);
+    $arraySessionStatus=array();
+    foreach (getAllSessionValues() as $codeSess=>$valSess) {
+      if ($valSess=='true' and substr($codeSess,0,10)=='showStatus' and substr($codeSess,strlen($clsName)*(-1))==$clsName) {
+        $idx=str_replace(array('showStatus',$clsName),array('',''),$codeSess);
+        $arraySessionStatus[$idx]=$idx;
+      }
+    }
   	$where = 'id in (select distinct idStatus from '.$this->getDatabaseTableName().')';
+  	if (count($arraySessionStatus)>0) {
+  	  $where.=' or id in '.transformListIntoInClause($arraySessionStatus);
+  	}
   	$status=new Status();
   	$list=$status->getSqlElementsFromCriteria(null,null,$where,'sortOrder asc');
   	return $list;

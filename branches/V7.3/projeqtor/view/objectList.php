@@ -137,9 +137,60 @@ if (RequestHandler::getValue('objectClass')=='Project' and RequestHandler::getVa
   $allProjectsChecked=true;
 }
 
+//Gautier saveParam
+if(sessionValueExists('listTypeFilter'.$objectClass)){
+  $listTypeFilter = getSessionValue('listTypeFilter'.$objectClass);
+}else{
+  $listTypeFilter = '';
+}
+if(sessionValueExists('listClientFilter'.$objectClass)){
+  $listClientFilter = getSessionValue('listClientFilter'.$objectClass);
+}else{
+  $listClientFilter = '';
+}
+if(sessionValueExists('listElementableFilter'.$objectClass)){
+  $listElementableFilter = getSessionValue('listElementableFilter'.$objectClass);
+}else{
+  $listElementableFilter = '';
+}
+if(sessionValueExists('listShowIdle'.$objectClass)){
+  $listShowIdle = getSessionValue('listShowIdle'.$objectClass);
+  if($listShowIdle == "on"){
+    $listShowIdle = true;
+  }else{
+    $listShowIdle = '';
+  }
+}else{
+  $listShowIdle = '';
+}
+
+//objectStatus
+$object = new $objectClass();
+$listStatus = $object->getExistingStatus();
+$cptStatus=0;
+$objectStatus = array();
+$filteringByStatus = false;
+foreach ($listStatus as $status) {
+  $cptStatus += 1;
+  if(sessionValueExists('showStatus'.$status->id.$objectClass)){
+    if(getSessionValue('showStatus'.$status->id.$objectClass)=='true'){
+      $filteringByStatus = true;
+      $objectStatus[$cptStatus] = $status->id;
+    }
+  }
+}
 ?>
 <div dojoType="dojo.data.ItemFileReadStore" id="objectStore" jsId="objectStore" clearOnClose="true"
-  url="../tool/jsonQuery.php?objectClass=<?php echo $objectClass;?><?php echo ($comboDetail)?'&comboDetail=true':'';?><?php echo ($showIdle)?'&idle=true':'';?><?php echo ($allProjectsChecked)?'&showAllProjects=on':'';?>" >
+  url="../tool/jsonQuery.php?objectClass=<?php echo $objectClass;?>&objectType=<?php echo $listTypeFilter; ?>
+                                          &objectClient=<?php echo $listClientFilter; ?>
+                                          &objectElementable=<?php echo $listElementableFilter; ?>
+                                          <?php if($filteringByStatus){ foreach ($objectStatus as $id=>$statVal){ ?>
+                                          &objectStatus<?php echo $id;?>= <?php echo $statVal; } ?>
+                                          &countStatus=<?php echo $cptStatus; }?>
+                                          <?php if ($listShowIdle == true ) { ?> &idle=<?php echo $listShowIdle; }?>
+                                          <?php echo ($comboDetail)?'&comboDetail=true':'';?>
+                                          <?php echo ($showIdle)?'&idle=true':'';?>
+                                          <?php echo ($allProjectsChecked)?'&showAllProjects=on':'';?>" >
 </div>
 <div dojoType="dijit.layout.BorderContainer">
 <div dojoType="dijit.layout.ContentPane" region="top" id="listHeaderDiv">
@@ -217,9 +268,9 @@ if (RequestHandler::getValue('objectClass')=='Project' and RequestHandler::getVa
             </td>
             <td width="5px">
               <div title="<?php echo i18n('filterOnId')?>" style="width:<?php echo $referenceWidth;?>px" class="filterField rounded" dojoType="dijit.form.TextBox" 
-               type="text" id="listIdFilter" name="listIdFilter">
+               type="text" id="listIdFilter" name="listIdFilter" value="<?php if(sessionValueExists('listIdFilter'.$objectClass)){ echo getSessionValue('listIdFilter'.$objectClass); }?>">
                 <script type="dojo/method" event="onKeyUp" >
-					        setTimeout("filterJsonList()",10);
+                  setTimeout("filterJsonList('<?php echo $objectClass;?>');",10);
                 </script>
               </div>
             </td>
@@ -232,9 +283,9 @@ if (RequestHandler::getValue('objectClass')=='Project' and RequestHandler::getVa
               </td>
               <td width="5px">
                 <div title="<?php echo i18n('filterOnName')?>" type="text" class="filterField rounded" dojoType="dijit.form.TextBox" 
-                id="listNameFilter" name="listNameFilter" style="width:<?php echo $referenceWidth*2;?>px">
+                id="listNameFilter" name="listNameFilter" style="width:<?php echo $referenceWidth*2;?>px" value="<?php if(sessionValueExists('listNameFilter'.$objectClass)){ echo getSessionValue('listNameFilter'.$objectClass); }?>">
                   <script type="dojo/method" event="onKeyUp" >
-                  	setTimeout("filterJsonList()",10);
+                  	setTimeout("filterJsonList('<?php echo $objectClass;?>');",10);
                 </script>
                 </div>
               </td>
@@ -248,7 +299,7 @@ if (RequestHandler::getValue('objectClass')=='Project' and RequestHandler::getVa
               <td width="5px">
                 <select title="<?php echo i18n('filterOnType')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
                 <?php echo autoOpenFilteringSelect();?> 
-                id="listTypeFilter" name="listTypeFilter" style="width:<?php echo $referenceWidth*4;?>px">
+                id="listTypeFilter" name="listTypeFilter" style="width:<?php echo $referenceWidth*4;?>px" value="<?php if(sessionValueExists('listTypeFilter'.$objectClass)){ echo getSessionValue('listTypeFilter'.$objectClass); }?>">
                   <?php htmlDrawOptionForReference('id' . $objectClass . 'Type', $objectType, $obj, false); ?>
                   <script type="dojo/method" event="onChange" >
                     refreshJsonList('<?php echo $objectClass;?>');
@@ -355,7 +406,7 @@ if (RequestHandler::getValue('objectClass')=='Project' and RequestHandler::getVa
                 <select title="<?php echo i18n('filterOnClient')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
                 <?php echo autoOpenFilteringSelect();?> 
                 data-dojo-props="queryExpr: '*${0}*',autoComplete:false"
-                id="listClientFilter" name="listClientFilter" style="width:<?php echo $referenceWidth*4;?>px">
+                id="listClientFilter" name="listClientFilter" style="width:<?php echo $referenceWidth*4;?>px" value="<?php if(sessionValueExists('listClientFilter'.$objectClass)){ echo getSessionValue('listClientFilter'.$objectClass); }?>" >
                   <?php htmlDrawOptionForReference('idClient', $objectClient, $obj, false); ?>
                   <script type="dojo/method" event="onChange" >
                     refreshJsonList('<?php echo $objectClass;?>');
@@ -378,7 +429,7 @@ if (RequestHandler::getValue('objectClass')=='Project' and RequestHandler::getVa
               <td width="5px">
                 <select title="<?php echo i18n('filterOnElement')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
                 <?php echo autoOpenFilteringSelect();?> 
-                id="listElementableFilter" name="listElementableFilter" style="width:140px">
+                id="listElementableFilter" name="listElementableFilter" style="width:140px" value="<?php if(sessionValueExists('listElementableFilter'.$objectClass)){ echo getSessionValue('listElementableFilter'.$objectClass); }?>">
                   <?php htmlDrawOptionForReference($elementable, $objectElementable, $obj, false); ?>
                   <script type="dojo/method" event="onChange" >
                     refreshJsonList('<?php echo $objectClass;?>');
@@ -689,7 +740,7 @@ if (RequestHandler::getValue('objectClass')=='Project' and RequestHandler::getVa
             <td style="width: 10px;text-align: center; align: center;white-space:nowrap;">&nbsp;
               <div title="<?php echo i18n('labelShowIdle')?>" dojoType="dijit.form.CheckBox" 
                 class="whiteCheck" <?php if ($showIdle) echo " checked ";?>
-                type="checkbox" id="listShowIdle" name="listShowIdle">
+                type="checkbox" id="listShowIdle" name="listShowIdle" <?php if(sessionValueExists('listShowIdle'.$objectClass)){   if(getSessionValue('listShowIdle'.$objectClass)== "on"){ ?>checked="checked" <?php }}?>>
                 <script type="dojo/method" event="onChange" >
                   refreshJsonList('<?php echo $objectClass;?>');
                 </script>
@@ -732,7 +783,7 @@ $height = ((floor((count($listStatus)-0.1)/10))+1)  * 20;
 		$cptStatus += 1;
 ?>		
 			<td>
-				<div id="showStatus<?php echo $cptStatus; ?>" title="<?php echo $status->name; ?>" dojoType="dijit.form.CheckBox" type="checkbox" value="<?php echo $status->id; ?>">
+				<div id="showStatus<?php echo $cptStatus; ?>" title="<?php echo $status->name; ?>" dojoType="dijit.form.CheckBox" type="checkbox" value="<?php echo $status->id; ?>" <?php if(sessionValueExists('showStatus'.$status->id.$objectClass)){if(getSessionValue('showStatus'.$status->id.$objectClass)== 'true'){ ?>	checked=" checked "<?php } }?> >
 					<script type="dojo/method" event="onChange">
 						refreshJsonList('<?php echo $objectClass; ?>');
 					</script>
