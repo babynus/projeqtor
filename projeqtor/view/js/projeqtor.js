@@ -101,22 +101,26 @@ function refreshJsonList(className, keepUrl) {
       }
     }
     if (dojo.byId('listShowIdle')) {
+      saveDataToSession('listShowIdle'+className, dijit.byId('listShowIdle').get("value"), false);
       if (dojo.byId('listShowIdle').checked) {
         url = url + "&idle=true";
       }
     }
     if (dijit.byId('listTypeFilter')) {
+      saveDataToSession('listTypeFilter'+className, dijit.byId('listTypeFilter').get("value"), false);
       if (dijit.byId('listTypeFilter').get("value") != '') {
         url = url + "&objectType=" + dijit.byId('listTypeFilter').get("value");
       }
     }
     if (dijit.byId('listClientFilter')) {
+      saveDataToSession('listClientFilter'+className, dijit.byId('listClientFilter').get("value"), false);
       if (dijit.byId('listClientFilter').get("value") != '') {
         url = url + "&objectClient="
             + dijit.byId('listClientFilter').get("value");
       }
     }
     if (dijit.byId('listElementableFilter')) {
+      saveDataToSession('listElementableFilter'+className, dijit.byId('listElementableFilter').get("value"), false);
       if (dijit.byId('listElementableFilter').get("value") != '') {
         url = url + "&objectElementable="
             + dijit.byId('listElementableFilter').get("value");
@@ -126,6 +130,7 @@ function refreshJsonList(className, keepUrl) {
     if (dojo.byId('countStatus')) {
       var filteringByStatus = false;
       for (var i = 1; i <= dojo.byId('countStatus').value; i++) {
+        saveDataToSession('showStatus'+dijit.byId('showStatus' + i).value+className, dijit.byId('showStatus'+i).checked, false);
         if (dijit.byId('showStatus' + i).checked) {
           url = url + "&objectStatus" + i + "=" + dijit.byId('showStatus' + i).value;
           filteringByStatus = true;
@@ -167,7 +172,7 @@ function refreshJsonList(className, keepUrl) {
             setTimeout('selectRowById("objectGrid", '
                 + parseInt(objectId.value) + ');', 30);
             setTimeout('hideWait();', 40);
-            filterJsonList();
+            filterJsonList(className);
           }
         });
   }
@@ -263,7 +268,7 @@ function refreshJsonPlanning() {
  * 
  * @return void
  */
-function filterJsonList() {
+function filterJsonList(myObjectClass) {
   var filterId = dojo.byId('listIdFilter');
   var filterName = dojo.byId('listNameFilter');
   var grid = dijit.byId("objectGrid");
@@ -272,11 +277,13 @@ function filterJsonList() {
     unselectAllRows("objectGrid");
     filter.id = '*'; // delfault
     if (filterId) {
+      saveDataToSession('listIdFilter'+myObjectClass, dojo.byId('listIdFilter').value, false);
       if (filterId.value && filterId.value != '') {
         filter.id = '*' + filterId.value + '*';
       }
     }
     if (filterName) {
+      saveDataToSession('listNameFilter'+myObjectClass, dojo.byId('listNameFilter').value, false);
       if (filterName.value && filterName.value != '') {
         filter.name = '*' + filterName.value + '*';
       }
@@ -628,8 +635,10 @@ function storeLoadContentStack(page, destination, formName, isResultMessage, val
 }
 function cleanLoadContentStack(page, destination, formName, isResultMessage, validationType, directAccess, silent, callBackFunction, noFading) {
   var callKey=getLoadContentStackKey(page, destination, formName, isResultMessage, validationType, directAccess, silent, callBackFunction, noFading);
+//  console.log("cleanLoadContentStack("+callKey+")");
   if (loadContentStack[callKey]!==undefined) {
     //loadContentStack.splice(callKey,1);
+//    console.log("  => OK, delete");
     delete loadContentStack[callKey];
   }
   if (loadContentCallSequential==true) {
@@ -664,6 +673,7 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
   var contentWidget = dijit.byId(destination);
   var fadingMode = top.fadeLoading;
   var callKey=getLoadContentStackKey(page, destination, formName, isResultMessage, validationType, directAccess, silent, callBackFunction, noFading);
+//  console.log("loadContentStack("+callKey+")");
   //if (loadContentRetryArray[callKey]===undefined) {
   //  loadContentRetryArray[callKey]=1;
   //} else {
@@ -678,6 +688,7 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
   } else {
     // already calling same request for same target with same parameters.
     // avoid double call
+//    console.log(" => loadContentStack["+callKey+"] already exists : exit");
     return;
   }
   
@@ -847,6 +858,9 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
           }
           if (destination == "centerDiv" && switchedMode && !directAccess) {
             showList();
+          }
+          if (destination == "centerDiv" && dijit.byId('objectGrid')) {
+            setTimeout("filterJsonList(dojo.byId('objectClass').value);",50);
           }
           if (destination == "dialogLinkList") {
             selectLinkItem();
@@ -3141,7 +3155,9 @@ function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target) {
         || forceListRefresh || dojo.byId('titleKanban')) {
       var callBack=null;
       if (dijit.byId("detailRightDiv")) callBack=function(){loadContent("objectStream.php", "detailRightDiv", "listForm");};
-      loadContent("objectMain.php?objectClass=" + eltClass, "centerDiv", null,false, null, eltId,false,callBack);      
+      
+      loadContent("objectMain.php?objectClass=" + eltClass, "centerDiv", false,
+          false, false, eltId,false,callBack);
     } else {
       if (eltClass=='GlobalView') {
         var explode=eltId.split('|');
