@@ -3681,6 +3681,20 @@ function getSessionValue($code, $default=null, $global=false) {
   }
   return $_SESSION[$projeqtorSession][$code];
 }
+function getAllSessionValues($global=false) {
+  // Global parameter is forced when "whatever the databse" is required
+  // it is mostly used to cases "also when database is not set yet" ;)
+  global $paramDbName, $paramDbPrefix;
+  if ($global) {
+    $projeqtorSession='ProjeQtOr';
+  } else {
+    $projeqtorSession='ProjeQtOr_'.$paramDbName.(($paramDbPrefix)?'_'.$paramDbPrefix:'');
+  }
+  if (!isset($_SESSION[$projeqtorSession])) {
+    return array();
+  }
+  return $_SESSION[$projeqtorSession];
+}
 
 // Gautier #2512
 function sessionValueExists($code, $global=false) {
