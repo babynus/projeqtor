@@ -1,19 +1,15 @@
-.. ProjeQtOr user guide documentation master file, created by
-   sphinx-quickstart on Fri May 29 11:17:53 2015.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+.. ProjeQtOr Technical Guide master file, created by PROJEQTOR
+   Copyright SAS PROJEQTOR
 
+.. image:: /images/GUI/projeqtor.png
+   :align: right
 
 Bienvenue
 =========
 
 ProjeQtOr est un organisateur de projets orienté qualité, sous la forme d'une application web.
 
-ProjeQtOr est devenu très populaire grâce à sa complétude du périmètre de la gestion de projet 
-et sa grande paramétrabilité.
-
-.. image:: /images/GUI/projeqtor.png
-   :align: right
+ProjeQtOr est devenu très populaire grâce à sa complétude du périmètre de la gestion de projet et sa grande paramétrabilité.
 
 Les fonctionnalités sont largement explicitées dans le Manuel Utilisateur en ligne.
 
@@ -25,39 +21,37 @@ C'est le sujet du présent document.
 
 Nous allons présenter dans ce document :
 
-- La structure du code qui montre comment sont organisées principaux composants de de ProjeQtOr.
+- Les éléments techniques qui évoquent les prérequis à la procédure d'installation et de paramétrage de ProjeQtOr.
 
-- La partie technique qui évoque la procédure d'installation et de paramétrage de ProjeQtOr.
+- La procédure d'installation et de configuration pour réaliser une bonne installation et un bon paramétrage de l'application.
 
-- Une partie installation puis une partie configuration qui est indispensable pour réaliser une bonne installation et un bon paramétrage de l'application.
+- La procédure de migration recommandée pour migrer vers une nouvelle version de ProjeQtOr.
 
-- Le modèle Object et les règles de base de la programmation dans ProjeQtOr.
+- La structure du code qui montre comment sont organisés les principaux composants de ProjeQtOr.
 
-- L'internationalisation des libellés et messages dans ProjeQtOr qui permet d'afficher l'application en plusieurs langues et de n'avoir aucun libellé en dur dans le code de ProjeQtOr.
+- Le modèle Objet et les règles de base de la programmation dans ProjeQtOr.
 
-- La gestion des paramètres...
+- Les fonctions utilitaires qui permettent par exemple l'internationalisation des libellés et la gestion des traces de log.
 
-- La customisation d'une classe...
+- La procédure pour customiser une classe.
 
 - Le moyen de créer un nouvel écran dans ProjeQtOr.
 
-- Les différentes fonctions pour créer vos propres icônes.
+- Les différentes étapes pour créer ses propres icônes.
 
-- La partie "Habilitation" qui gère les droits d'accès dans l'application.
+- La gestion des "Habilitation" qui explicite les droits d'accès dans l'application.
 
-- L'utilisation de l'API, les différentes méthodes qui peuvent être utilisées, les descriptions et des exemples.
+- L'utilisation de l'API, avec les différentes méthodes qui peuvent être utilisées et des exemples.
 
 - Le développement de plugins, leur déploiement et quelques conseils pour les développer.
 
-- Le déploiement et la migration vers une nouvelle version de ProjeQtOr.
+- La gestion des exports et des import.
 
-- Une partie dédiée à l'installation d'une nouvelle version qui montre comment mettre à jour sa version.
+- Les gestion des paramètres globaux.
 
-- Une partie qui décrit entièrement l'importation à partir de fichiers CSV ou XLSX et le moyen pour automatiser les importations.
+- Les conseils sur la sauvegarde des données.
 
-- Les paramètres globaux et leur utilité.
-
-- Le moyen de sauvegarder ses données et le moment de sauvegarder ses données.
+- Quelques points techniques dans des cas particuliers (verrous en base de données, ...)
 
 
 .. raw:: latex
@@ -74,18 +68,6 @@ Ceci est la première version du document.
 
     \newpage
     
-Structure du code
-=================
-
-.. toctree::
-   :maxdepth: 1
-   
-   Mvc
-
-.. toctree::
-   :maxdepth: 1
-   
-   Structure
    
 Technique
 =========
@@ -111,6 +93,14 @@ Configuration
    
    Configuration
 
+Procédure de déploiement
+========================
+
+.. toctree::
+   :maxdepth: 1
+   
+   Deployment
+
 Sécurisation
 ============
 
@@ -119,6 +109,25 @@ Sécurisation
    
    Security
    
+Structure du code
+=================
+
+.. toctree::
+   :maxdepth: 1
+   
+   Mvc
+
+.. toctree::
+   :maxdepth: 1
+   
+   Structure
+
+===
+TODO
+===
+   Strucutre des écrans 
+
+
 Développement objet
 ===================
 
@@ -127,21 +136,14 @@ Développement objet
    
    Development
    
-Internationalisation
-====================
+Fonctions utilitaires
+=====================
  
 .. toctree::
    :maxdepth: 1
    
-   Internationalization
+   Tools
    
-Gestion des paramètres
-======================
-  
-.. toctree::
-   :maxdepth: 1
-   
-   ParametersManagement
    
 Customisation
 =============
@@ -191,22 +193,6 @@ Développement de plugins
    
    Plugins
 
-Procédure de déploiement
-========================
-
-.. toctree::
-   :maxdepth: 1
-   
-   Deployment
-
-Installer nouvelle version
-==========================
-
-.. toctree::
-   :maxdepth: 1
-   
-   NewVersion
-
 Import
 ======
 
@@ -223,15 +209,16 @@ Automatique Import
    
    ImportAutomatic
 
-Paramètres Globaux
-==================
+Gestion des Paramètres Globaux
+==============================
  
 .. toctree::
    :maxdepth: 1
    
    GlobalParameters
 
-Backup / Restore
+
+Sauvegarde des données
 ================
 
 .. toctree::
@@ -240,18 +227,14 @@ Backup / Restore
    Backup   
 
 
-Opérations Syustème
-===================
+Points techniques particuliers
+==============================
 
 .. toctree::
    :maxdepth: 1
    
    System
 
-Manuel utilisateur
-==================
-
- TODO (mise à jour de la doc utilisateur, traduction)
 
 Glossaire
 =========

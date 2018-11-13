@@ -14,13 +14,21 @@ Développement Objet
 
 Il existe plusieurs méthodes génériques de persistance, les plus utiles et les plus utilisés sont :
 
-  - La méthode Save : Utilisée pour sauvegarder des données en base de données. Peut-être réutilisée dans d'autres classes en faisant un : 
+  - La méthode save() : Utilisée pour sauvegarder des données en base de données. Peut-être réutilisée dans d'autres classes en faisant un : 
     *$result=parent::save();* 
   
   - La méthode Control : 
   
   - La methode Delete : Utilisée pour supprimer des données en base de données. Peut-être réutilisée dans d'autres classes en faisant un : 
     *$result=parent::delete();*
+
+  - La méthode controlDelete() :
+ 
+
+====
+TODO
+====
+$old = $this->getOld ();
 
 .. warning :: Ces trois méthodes sont définies dans SqlElement.php en privé, il faut donc les étendre avec la notion d'héritage si on veut les réutiliser dans d'autres classes. 
 
