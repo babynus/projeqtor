@@ -4,8 +4,9 @@
 
 .. title:: Configuration
 
-Configuration
------------------
+Configuration Initiale
+----------------------
+
 .. rubric:: Configuration
 
 Lorsque vous ouvrez une session, le processus normal doit être:
