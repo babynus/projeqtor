@@ -9,7 +9,7 @@
 .. _internationalization :
 
 Internationalisation
---------------------------
+--------------------
 **L'internationalisation** aussi appelé **i18n** [#f1]_ dans ProjeQtOr comprend plusieurs fonctionnalités :
 
     - i18n est utilisé pour ne pas écrire en dur dans le code de ProjeQtOr. Par exemple, dès qu'un titre doit être écrit on va utiliser la fonction i18n().
@@ -60,3 +60,6 @@ Voici un exemple d'ajout d'un nouveau profil :
 .. warning:: n'oubliez pas de sauvegarder votre fichier lang.xls et d'identifier vos modifications car vous devrez les rappliquer après chaque nouvelle version.
 
 .. [#f1] i18n = Internationalisation = i + 18 caractères + n
+
+Gestion des traces de log
+-------------------------
