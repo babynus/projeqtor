@@ -82,13 +82,21 @@ if (array_key_exists('startDatePlanView',$_REQUEST) and array_key_exists('endDat
 		}
 	}
 }
+
 $selectResource=null;
 if (array_key_exists('selectResourceName',$_REQUEST)) {
   $selectResource=trim($_REQUEST['selectResourceName']);
 }
+if(!$selectResource and sessionValueExists('selectResourceName')){ 
+  $selectResource =trim(getSessionValue('selectResourceName'));
+}
+ 
 $selectTeam=null;
 if (array_key_exists('teamName',$_REQUEST)) {
   $selectTeam=trim($_REQUEST['teamName']);
+}
+if(!$selectTeam and sessionValueExists('teamName')){
+  $selectTeam =trim(getSessionValue('teamName'));
 }
 
 // Header
