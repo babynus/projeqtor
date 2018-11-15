@@ -2355,6 +2355,7 @@ msgMandatoryFields: "Деякі обов'язкові поля не заповн
 msgNoCallForTender: "не вибрано запрошення на тендер",
 msgNotaFile: "Помилка для ${1} <br /> Файл '${2}' не існує",
 msgNotGranted: "Ви не дозволено робити цю операцію",
+msgOnlyZipFilesAllowed: "only zip files allowed",
 msgParentActivityInSameProject: "Батько справ (activity) мусить бути в одному проекті",
 msgParentRequirementInSameProjectProduct: "батько вимоги (requirement) мусить належати до того ж продукту або проекту",
 msgParentTestCaseInSameProjectProduct: "батько тестового сценарію мусить належати до того ж продукту або проекту",
