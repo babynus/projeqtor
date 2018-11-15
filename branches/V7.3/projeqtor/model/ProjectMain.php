@@ -973,8 +973,9 @@ scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursi
   } 
   
   public static function setNeedReplan($id) {
-    if (! $id) return;
+    if (PlanningElement::$_noDispatch) return;
     $proj=SqlElement::getSingleSqlElementFromCriteria("ProjectPlanningElement",array('refType'=>'Project','refId'=>$id),true);
+    if ($proj->needReplan==true) return;
     $proj->needReplan=true;
     $proj->simpleSave();
   }
