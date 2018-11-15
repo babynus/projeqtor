@@ -4992,7 +4992,11 @@ function drawDependenciesFromObject($list, $obj, $depType, $refresh=false) {
       }else{
         $endDate = null;
       }
-      $datePredecessor[$planningObj->id]=addWorkDaysToDate($endDate,$dep->dependencyDelay);
+      if($dep->dependencyDelay>1){
+        $datePredecessor[$planningObj->id]=addWorkDaysToDate($endDate,$dep->dependencyDelay+1);
+      }else{
+        $datePredecessor[$planningObj->id]=addWorkDaysToDate($endDate,$dep->dependencyDelay);
+      }
       $endDateObj[$dep->id.get_class($depObj)]= $endDate;
     }
     usort($datePredecessor, "compareByTimeStamp");
@@ -5058,10 +5062,10 @@ function drawDependenciesFromObject($list, $obj, $depType, $refresh=false) {
     // echo '<td class="dependencyData" style="background-color: ' . htmlEncode($objStatus->color) . '; color:' . $foreColor . ';">' . htmlEncode($objStatus->name) . '</td>';
     echo '<td class="dependencyData" style="width:15%">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</td>';
     if($depType=="Predecessor"){    
-      if($allTabSameDate==true and $datePredecessor and count($datePredecessor)>1 and $datePredecessor[0]== addWorkDaysToDate($endDateObj[$dep->id.get_class($depObj)],$dep->dependencyDelay)){
-        echo '<td class="dependencyData" style="width:15%; color:red">'.htmlFormatDate($endDateObj[$dep->id.get_class($depObj)]).'</td>';
+      if($allTabSameDate==true and $datePredecessor and count($datePredecessor)>1 and $datePredecessor[0]== addWorkDaysToDate($endDateObj[$dep->id.get_class($depObj)],($dep->dependencyDelay>1)?$dep->dependencyDelay+1:$dep->dependencyDelay)){
+        echo '<td class="dependencyData" style="text-align:center; width:15%; color:red">'.htmlFormatDate($endDateObj[$dep->id.get_class($depObj)]).'</td>';
       }else{
-        echo '<td class="dependencyData" style="width:15%">'.htmlFormatDate($endDateObj[$dep->id.get_class($depObj)]).'</td>';
+        echo '<td class="dependencyData" style="text-align:center; width:15%">'.htmlFormatDate($endDateObj[$dep->id.get_class($depObj)]).'</td>';
       }
     }
     echo '</tr>';
