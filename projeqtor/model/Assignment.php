@@ -228,8 +228,12 @@ class Assignment extends SqlElement {
         $resAss=$ass->save();
       }
     }
-    
-    PlanningElement::updateSynthesis($this->refType, $this->refId);
+    if (! PlanningElement::$_noDispatch) {
+      PlanningElement::updateSynthesis($this->refType, $this->refId);
+    } else {
+      PlanningElement::updateSynthesisNoDispatch($this->refType, $this->refId);
+    }
+
     // Recalculate indicators
     if (SqlList::getIdFromTranslatableName('Indicatorable',$this->refType)) {
       $indDef=new IndicatorDefinition();

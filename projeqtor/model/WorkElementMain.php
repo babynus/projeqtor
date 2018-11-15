@@ -529,5 +529,35 @@ class WorkElementMain extends SqlElement {
 		}
 		return $result;
 	}
+	// ============================================================================**********
+	// GET VALIDATION SCRIPT
+	// ============================================================================**********
+	
+	/** ==========================================================================
+	 * Return the validation sript for some fields
+	 * @return the validation javascript (for dojo framework)
+	 */
+	public function getValidationScript($colName) {
+	  $colScript = parent::getValidationScript($colName);
+	
+	  if ($colName=="plannedWork" or $colName=="realWork") {
+	    $colScript .= '<script type="dojo/connect" event="onChange" >';
+	    $colScript .= '  var done=dijit.byId("done").get("checked");';
+	    $colScript .= '  var real=dijit.byId("WorkElement_realWork").get("value");';
+	    $colScript .= '  var planned=dijit.byId("WorkElement_plannedWork").get("value");';
+	    $colScript .= '  console.log(real+" / "+planned);';
+	    $colScript .= '  if (done) {';
+	    $colScript .= '    dijit.byId("WorkElement_leftWork").set("value", 0);';
+	    $colScript .= '  } else {';
+	    $colScript .= '    var left=planned-real;';
+	    $colScript .= '    if (left<0) left=0;';
+	    $colScript .= '    dijit.byId("WorkElement_leftWork").set("value", left);';
+	    $colScript .= '  } ';
+	    $colScript .= '  formChanged();';
+	    $colScript .= '</script>';
+	  }
+	  return $colScript;
+	
+	}
 }
 ?>
