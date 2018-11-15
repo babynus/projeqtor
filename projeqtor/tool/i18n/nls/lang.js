@@ -2351,6 +2351,7 @@ msgErrorSelectedBaseline: "The selected baseline does not fit the selected proje
 msgEvalutationMaxValue: "Max evaluation value set to",
 msgFirstStatusMandatoryInWorkflow: "you must include the first status '${1}' in the workflow",
 msgIncorrectReceiver: "this receiver cannot be selected for this element",
+msgInvalidFileFormat: "Invalid file format<br/>Allowed formats&#58 ${1}",
 msgMandatoryFields: "Some mandatory fields were not filled",
 msgNoCallForTender: "no call for tender is selected",
 msgNotaFile: "Error for ${1} <br /> The file '${2}' does not exist",
