@@ -294,7 +294,12 @@ if (Sql::$lastQueryNbRows == 0) {
 			$arrayResource[$idResource]=array();;
 			$resAr=array();
 			$resAr["refname"]=$line['name'];
-			$resAr["reftype"]='Resource';
+			$res=new ResourceAll($idResource);
+			if ($res->isResourceTeam) {
+			  $resAr["reftype"]='ResourceTeam';
+			} else {
+			  $resAr["reftype"]='Resource';
+			}
 			$resAr["refid"]=$idResource;
 			$resAr["elementary"]='0';
 			$idRes=$idResource*1000000;
@@ -522,7 +527,7 @@ if (Sql::$lastQueryNbRows == 0) {
 				if ($id=='idPe') {$idPe=$val;}
 			}
 			//add expanded status
-			if (($line['reftype']=='Resource' or $line['reftype']=='Project') and array_key_exists('Planning_'.$line['reftype'].'_'.$line['refid'], $collapsedList)) {
+			if (($line['reftype']=='Resource' or $line['reftype']=='ResourceTeam' or $line['reftype']=='Project') and array_key_exists('Planning_'.$line['reftype'].'_'.$line['refid'], $collapsedList)) {
 				echo ',"collapsed":"1"';
 			} else {
 				echo ',"collapsed":"0"';
@@ -774,7 +779,7 @@ function displayGantt($list) {
 			$plannedWork=$line['plannedwork'];
 			$progress=$line['progress'];
 			// pGroup : is the tack a group one ?
-			$pGroup=($line['reftype']=='Resource' or $line['reftype']=='Project')?1:0;
+			$pGroup=($line['reftype']=='Resource' or $line['reftype']=='ResourceTeam' or $line['reftype']=='Project')?1:0;
 			$scope='Planning_'.$line['reftype'].'_'.$line['refid'];
 			$compStyle="";
 			$bgColor="";
@@ -788,7 +793,7 @@ function displayGantt($list) {
 				$rowType  = "row";
 			}
 			$wbs=$line['wbssortable'];
-			if ($line['reftype']=='Resource') {
+			if ($line['reftype']=='Resource' or $line['reftype']=='ResourceTeam') {
 				$level=1;
 			} else if ($line['reftype']=='Project') {
 				$level=2;
