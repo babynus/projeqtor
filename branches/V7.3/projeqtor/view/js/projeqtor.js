@@ -667,6 +667,7 @@ function warnLoadContentError(page, destination, formName, isResultMessage, vali
 }
 function loadContent(page, destination, formName, isResultMessage, validationType, directAccess, silent, callBackFunction, noFading) {
   if (formName && formName!=undefined && formName.id) formName=formName.id;
+  if (!dojo.byId(formName)) formName=null;
   var debugStart = (new Date()).getTime();
   // Test validity of destination : must be a node and a widget
   var contentNode = dojo.byId(destination);
@@ -1042,6 +1043,8 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
  */
 
 function loadDiv(page, destinationDiv, formName, callback) {
+  if (formName && formName!=undefined && formName.id) formName=formName.id;
+  if (!dojo.byId(formName)) formName=null;
   var contentNode = dojo.byId(destinationDiv);
   if (page.indexOf('getObjectCreationInfo')>=0 && dijit.byId('detailDiv') && page.indexOf('destinationWidth')<0) {
     var destinationWidth = dojo.style(dojo.byId('detailDiv'), "width");
@@ -1052,7 +1055,7 @@ function loadDiv(page, destinationDiv, formName, callback) {
     url : page,
     form : formName,
     handleAs : "text",
-    load : function(data, args) {
+    load : function(data) {
       contentNode.innerHTML = data;
       if (callback)
         setTimeout(callback, 10);
