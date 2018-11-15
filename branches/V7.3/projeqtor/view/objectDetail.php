@@ -2384,8 +2384,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $ent=intval($spl[0])-$dec;
         $max=substr('99999999999999999999', 0, $ent);
         if ($isCost and $currencyPosition=='before') {
-            echo '<span class="generalColClass '.$col.'Class" style="display:inline-block;'.$specificStyleWithoutCustom.$labelStyle.'">'.$currency.'</span>';
-          }
+        	echo '<span class="generalColClass '.$col.'Class" style="display:inline-block;'.$specificStyleWithoutCustom.$labelStyle.'">'.$currency.'</span>';
+        }
         // ADD BY Marc TABARY - 2017-03-01 - COLOR PERCENT WITH ATTRIBUTE 'alertOverXXXwarningOverXXXokUnderXXX'
         if ($isPercent and (strpos($obj->getFieldAttributes($col), 'alertOver')!==false or strpos($obj->getFieldAttributes($col), 'warningOver')!==false or strpos($obj->getFieldAttributes($col), 'okUnder')!==false)) {
           // Note : reuse $negative (it's pratical)
@@ -4935,6 +4935,15 @@ function drawApproverFromObject($list, $obj, $refresh=false) {
   echo '</table></td></tr>';
 }
 
+function compareByTimeStamp($time1, $time2){
+  if (strtotime($time1) < strtotime($time2))
+    return 1;
+  else if (strtotime($time1) > strtotime($time2))
+    return -1;
+  else
+    return 0;
+}
+
 function drawDependenciesFromObject($list, $obj, $depType, $refresh=false) {
   global $cr, $print, $user, $comboDetail;
   if ($comboDetail) {
@@ -4962,8 +4971,39 @@ function drawDependenciesFromObject($list, $obj, $depType, $refresh=false) {
     echo '</td>';
   }
   echo '<td class="dependencyHeader" style="width:'.(($print)?'30':'20').'%">'.i18n('colElement').'</td>';
-  echo '<td class="dependencyHeader" style="width:55%">'.i18n('colName').'</td>';
+  echo '<td class="dependencyHeader" style="width:40%">'.i18n('colName').'</td>';
   echo '<td class="dependencyHeader" style="width:15%">'.i18n('colIdStatus').'</td>';
+  //gautier #3562
+  if($depType=="Predecessor"){
+    echo '<td class="dependencyHeader" style="width:15%">'.i18n('colEndDate').'</td>';
+    $datePredecessor = array();
+    $allTabSameDate = false;
+    $endDateObj = array();
+    $endDateDelay = null;
+    foreach ($list as $dep) {
+      $depObj=new $dep->predecessorRefType($dep->predecessorRefId);
+      $planningObj=SqlElement::getSingleSqlElementFromCriteria('PlanningElement', array('refId'=>$depObj->id, 'refType'=>get_class($depObj),'idProject'=>$depObj->idProject));
+      if($planningObj->realEndDate){
+        $endDate = $planningObj->realEndDate;
+      }elseif ($planningObj->plannedEndDate){
+        $endDate = $planningObj->plannedEndDate;
+      }elseif ($planningObj->validatedEndDate){
+        $endDate = $planningObj->validatedEndDate;
+      }else{
+        $endDate = null;
+      }
+      $datePredecessor[$planningObj->id]=addWorkDaysToDate($endDate,$dep->dependencyDelay);
+      $endDateObj[$dep->id.get_class($depObj)]= $endDate;
+    }
+    usort($datePredecessor, "compareByTimeStamp");
+    if(count($datePredecessor)>1){
+      foreach ($datePredecessor as $val){
+        if($val != $datePredecessor[0]){
+          $allTabSameDate = true;
+        }
+      }
+    }
+  }
   echo '</tr>';
   foreach ($list as $dep) {
     $depObj=null;
@@ -5017,6 +5057,13 @@ function drawDependenciesFromObject($list, $obj, $depType, $refresh=false) {
     // echo '<td class="dependencyData"><table><tr><td style="background-color: ' . htmlEncode($objStatus->color) . '; color:' . $foreColor . ';">' . htmlEncode($objStatus->name) . '</td></tr></table></td>';
     // echo '<td class="dependencyData" style="background-color: ' . htmlEncode($objStatus->color) . '; color:' . $foreColor . ';">' . htmlEncode($objStatus->name) . '</td>';
     echo '<td class="dependencyData" style="width:15%">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</td>';
+    if($depType=="Predecessor"){    
+      if($allTabSameDate==true and $datePredecessor and count($datePredecessor)>1 and $datePredecessor[0]== addWorkDaysToDate($endDateObj[$dep->id.get_class($depObj)],$dep->dependencyDelay)){
+        echo '<td class="dependencyData" style="width:15%; color:red">'.htmlFormatDate($endDateObj[$dep->id.get_class($depObj)]).'</td>';
+      }else{
+        echo '<td class="dependencyData" style="width:15%">'.htmlFormatDate($endDateObj[$dep->id.get_class($depObj)]).'</td>';
+      }
+    }
     echo '</tr>';
   }
   echo '</table>';
