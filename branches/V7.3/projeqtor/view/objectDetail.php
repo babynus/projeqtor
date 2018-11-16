@@ -2363,7 +2363,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         if ($isCost) {
           $possibleWidth=intval($widthPct)-80;
           if ($internalTable) {
-            $possibleWidth=round($possibleWidth/$internalTableCols, 0)-12;
+            $possibleWidth=round($possibleWidth/$internalTableCols, 0)-($internalTableCols*3);
           }
           $expected=100;
           if ($isAmount) $expected+=20;
@@ -2384,7 +2384,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $ent=intval($spl[0])-$dec;
         $max=substr('99999999999999999999', 0, $ent);
         if ($isCost and $currencyPosition=='before') {
-         	echo '<span class="generalColClass '.$col.'Class" style="display:inline-block;'.$specificStyleWithoutCustom.$labelStyle.'">'.$currency.'</span>';
+         	echo '<span class="generalColClass '.$col.'Class" style="display:inline-block;'.$specificStyleWithoutCustom.$labelStyle.';position:relative;top:2px">&nbsp'.$currency.'</span>';
         }
         // ADD BY Marc TABARY - 2017-03-01 - COLOR PERCENT WITH ATTRIBUTE 'alertOverXXXwarningOverXXXokUnderXXX'
         if ($isPercent and (strpos($obj->getFieldAttributes($col), 'alertOver')!==false or strpos($obj->getFieldAttributes($col), 'warningOver')!==false or strpos($obj->getFieldAttributes($col), 'okUnder')!==false)) {
@@ -2479,10 +2479,10 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo $colScript;
         echo '</div>';
         if ($isCost and $currencyPosition=='after') {
-          echo '<span class="generalColClass '.$col.'Class" style="'.$specificStyleWithoutCustom.'">'.$currency.'&nbsp'.'</span>';
+          echo '<span class="generalColClass '.$col.'Class" style="'.$specificStyleWithoutCustom.';position:relative;top:2px">'.$currency.'&nbsp'.'</span>';
         }
         if ($isWork or $isDuration or $isPercent) {
-          echo '<span class="generalColClass '.$col.'Class" style="'.$specificStyleWithoutCustom.'">';
+          echo '<span class="generalColClass '.$col.'Class" style="'.$specificStyleWithoutCustom.';position:relative;top:2px">';
         }
         if ($isWork) {
           if ($classObj=='WorkElement') {
@@ -2495,11 +2495,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo i18n("shortDay");
         }
         if ($isPercent) {
-          if ($currencyPosition=='after'){
-            echo '%'.'&nbsp';
-          } else {
-            echo '%';
-          }
+            echo '%&nbsp;';
         }
         if ($isWork or $isDuration or $isPercent) {
           echo '</span>';
