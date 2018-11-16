@@ -1721,7 +1721,7 @@ class PlanningElement extends SqlElement {
   
   static function copyStructureFinalize() {
     //debugLog("copyStructureFinalize()");
-    self::$_noDispatch=false;
+    self::$_noDispatch=true;
     // Update synthesys for non elementary item (will just be done once ;)
     foreach (array_reverse(PlanningElement::$_noDispatchArray) as $pe) {
       $res=PlanningElement::updateSynthesis($pe['refType'], $pe['refId']);
