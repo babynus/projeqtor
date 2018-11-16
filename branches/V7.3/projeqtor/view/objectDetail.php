@@ -2384,7 +2384,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $ent=intval($spl[0])-$dec;
         $max=substr('99999999999999999999', 0, $ent);
         if ($isCost and $currencyPosition=='before') {
-        	echo '<span class="generalColClass '.$col.'Class" style="display:inline-block;'.$specificStyleWithoutCustom.$labelStyle.'">'.$currency.'</span>';
+         	echo '<span class="generalColClass '.$col.'Class" style="display:inline-block;'.$specificStyleWithoutCustom.$labelStyle.'">'.$currency.'</span>';
         }
         // ADD BY Marc TABARY - 2017-03-01 - COLOR PERCENT WITH ATTRIBUTE 'alertOverXXXwarningOverXXXokUnderXXX'
         if ($isPercent and (strpos($obj->getFieldAttributes($col), 'alertOver')!==false or strpos($obj->getFieldAttributes($col), 'warningOver')!==false or strpos($obj->getFieldAttributes($col), 'okUnder')!==false)) {
@@ -2479,7 +2479,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo $colScript;
         echo '</div>';
         if ($isCost and $currencyPosition=='after') {
-          echo '<span class="generalColClass '.$col.'Class" style="'.$specificStyleWithoutCustom.'">'.$currency.'</span>';
+          echo '<span class="generalColClass '.$col.'Class" style="'.$specificStyleWithoutCustom.'">'.$currency.'&nbsp'.'</span>';
         }
         if ($isWork or $isDuration or $isPercent) {
           echo '<span class="generalColClass '.$col.'Class" style="'.$specificStyleWithoutCustom.'">';
@@ -2495,7 +2495,11 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo i18n("shortDay");
         }
         if ($isPercent) {
-          echo '%';
+          if ($currencyPosition=='after'){
+            echo '%'.'&nbsp';
+          } else {
+            echo '%';
+          }
         }
         if ($isWork or $isDuration or $isPercent) {
           echo '</span>';
