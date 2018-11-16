@@ -125,6 +125,7 @@ class BillMain extends SqlElement {
   
   private static $_databaseColumnName = array('taxPct'=>'tax');
   public $_calculateForColumn=array("name"=>"concat(coalesce(reference,''),' - ',name,' (',coalesce(fullAmount,0),')')");
+  public $_sortCriteriaForList="fullAmount, id";
     
    /** ==========================================================================
    * Constructor
