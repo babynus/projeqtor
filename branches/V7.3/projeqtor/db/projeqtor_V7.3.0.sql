@@ -28,3 +28,9 @@ ADD `discountFullAmount` decimal(11,2) UNSIGNED;
 
 ALTER TABLE `${prefix}providerorder`
 ADD `discountFullAmount` decimal(11,2) UNSIGNED;
+
+INSERT INTO `${prefix}parameter` (`idUser`,`idProject`,`parameterCode`,`parameterValue`) VALUES 
+(NULL,NULL,'ImputOfAmountProvider','HT'),
+(NULL,NULL,'ImputOfBillLineProvider','HT'),
+(NULL,NULL,'ImputOfAmountClient','HT'),
+(NULL,NULL,'ImputOfBillLineClient','HT');
