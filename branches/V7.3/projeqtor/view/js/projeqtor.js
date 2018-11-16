@@ -58,6 +58,8 @@ var pluginMenuPage = new Array();
 
 var previousSelectedProject=null;
 var previousSelectedProjectName=null;
+
+var mustApplyFilter=false;
 // =============================================================================
 // = Functions
 // =============================================================================
@@ -159,8 +161,7 @@ function refreshJsonList(className, keepUrl) {
     }
     store = grid.store;
     store.close();
-    store
-        .fetch({
+    store.fetch({
           onComplete : function() {
             grid._refresh();
             hideBigImage(); // Will avoid resident pop-up always displayed
@@ -861,7 +862,7 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
             showList();
           }
           if (destination == "centerDiv" && dijit.byId('objectGrid')) {
-            setTimeout("filterJsonList(dojo.byId('objectClass').value);",50);
+            mustApplyFilter=true;
           }
           if (destination == "dialogLinkList") {
             selectLinkItem();

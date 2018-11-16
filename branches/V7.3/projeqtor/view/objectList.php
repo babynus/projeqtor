@@ -181,16 +181,17 @@ foreach ($listStatus as $status) {
 }
 ?>
 <div dojoType="dojo.data.ItemFileReadStore" id="objectStore" jsId="objectStore" clearOnClose="true"
-  url="../tool/jsonQuery.php?objectClass=<?php echo $objectClass;?>&objectType=<?php echo $listTypeFilter; ?>
-                                          &objectClient=<?php echo $listClientFilter; ?>
-                                          &objectElementable=<?php echo $listElementableFilter; ?>
-                                          <?php if($filteringByStatus){ foreach ($objectStatus as $id=>$statVal){ ?>
-                                          &objectStatus<?php echo $id;?>= <?php echo $statVal; } ?>
-                                          &countStatus=<?php echo $cptStatus; }?>
-                                          <?php if ($listShowIdle == true ) { ?> &idle=<?php echo $listShowIdle; }?>
-                                          <?php echo ($comboDetail)?'&comboDetail=true':'';?>
-                                          <?php echo ($showIdle)?'&idle=true':'';?>
-                                          <?php echo ($allProjectsChecked)?'&showAllProjects=on':'';?>" >
+  url="../tool/jsonQuery.php?objectClass=<?php echo $objectClass;?>
+&objectType=<?php echo $listTypeFilter; ?>
+&objectClient=<?php echo $listClientFilter; ?>
+&objectElementable=<?php echo $listElementableFilter; ?>
+<?php if($filteringByStatus){ foreach ($objectStatus as $id=>$statVal){ ?>
+&objectStatus<?php echo $id;?>= <?php echo $statVal; } ?>
+&countStatus=<?php echo $cptStatus; }?>
+<?php if ($listShowIdle == true ) { ?> &idle=<?php echo $listShowIdle; }?>
+<?php echo ($comboDetail)?'&comboDetail=true':'';?>
+<?php echo ($showIdle)?'&idle=true':'';?>
+<?php echo ($allProjectsChecked)?'&showAllProjects=on':'';?>" >
 </div>
 <div dojoType="dijit.layout.BorderContainer">
 <div dojoType="dijit.layout.ContentPane" region="top" id="listHeaderDiv">
@@ -869,7 +870,12 @@ $height = ((floor((count($listStatus)-0.1)/10))+1)  * 20;
     }
   </script>
   <script type="dojo/connect" event="_onFetchComplete" args="items, req">
-     refreshGridCount();
+     if (mustApplyFilter) {
+       mustApplyFilter=false;
+       filterJsonList(dojo.byId('objectClass').value);
+     } else {
+       refreshGridCount();
+     }
   </script>
 </table>
 </div>
