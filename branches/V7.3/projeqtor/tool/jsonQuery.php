@@ -371,6 +371,10 @@
     	$querySelect .= $clause['select'];
     	//$queryFrom .= ($queryFrom=='')?'':', ';
     	$queryFrom .= $clause['from'];
+    	if (!isset($hiddenFields['hyperlink'])) {
+    	  $querySelect .= ($querySelect=='')?'':', ';
+    	  $querySelect .= $obj->getDatabaseTableName() . '.id as hyperlink';
+    	}
     } else {
 	    foreach ($array as $val) {
 	      //$sp=preg_split('field=', $val);
@@ -600,6 +604,8 @@
     		$arrayFields=array();
         $arrayFields=$obj->getLowercaseFieldsArray(true);
         $arrayFieldsWithCase=$obj->getFieldsArray(true);
+        $arrayFields['hyperlink'] = 'hyperlink';
+        $arrayFieldsWithCase['hyperlink'] = 'Hyperlink';
         foreach($arrayFieldsWithCase as $key => $val) {
           if (!SqlElement::isVisibleField($val)) {
             unset($arrayFields[strtolower($key)]);
@@ -704,9 +710,11 @@
               echo '"' . $val . '"'.$csvSep;
             } else if ( ($dataType[$id]=='decimal')) {
             	echo formatNumericOutput($val).$csvSep;
+            } else if ($id == 'hyperlink') {
+              echo $obj->getReferenceUrl().$val.$csvSep;
             } else {
-              $val=str_replace($csvSep,' ',$val);
-            	echo $val.$csvSep;
+                $val=str_replace($csvSep,' ',$val);
+                echo $val.$csvSep;
             }
             if ($id=='refId' and ! property_exists($objectClass,'refName') and $exportReferencesAs=='name' and $refType) {
               echo encodeCSV(SqlList::getNameFromId($refType, $val)).$csvSep;
