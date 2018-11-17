@@ -3900,7 +3900,7 @@ function connect(resetPassword) {
     urlCompl = '?resetPassword=true';
   }
   if (!dojo.byId('isLoginPage')) {
-    urlCompl = ((urlCompl == "") ? '?' : '&') + 'isLoginPage=true'; // Patch
+    urlCompl += ((urlCompl == "") ? '?' : '&') + 'isLoginPage=true'; // Patch
                                                                     // (try) for
                                                                     // looping
                                                                     // connections
