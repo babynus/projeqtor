@@ -598,17 +598,27 @@
     		$obj=new $objectClass();
     		$first=true;
     		$arrayFields=array();
-        $arrayFields=$obj->getLowercaseFieldsArray();
-   	    $arrayFieldsWithCase=$obj->getFieldsArray();        
+        $arrayFields=$obj->getLowercaseFieldsArray(true);
+        $arrayFieldsWithCase=$obj->getFieldsArray(true);
+        foreach($arrayFieldsWithCase as $key => $val) {
+          if (!SqlElement::isVisibleField($val)) {
+            unset($arrayFields[strtolower($key)]);
+            continue;
+          }
+          $arrayFieldsWithCase[$key]=$obj->getColCaption($val);
+          if(isset($arrayFieldsWithCase[$key]) and substr($arrayFieldsWithCase[$key], 0, 1) == "["){
+            unset($arrayFields[strtolower($key)]);
+            continue;
+          }
+        }
     		while ($line = Sql::fetchLine($result)) {
     		  if ($first) {
 	    			foreach ($line as $id => $val) {
-	    			  if ($objectClass=='GlobalView' and $id=='id') continue;   
+	    			  if (!isset($arrayFields[strtolower($id)]) || ($objectClass=='GlobalView' and $id=='id')) continue;   
 	    				$colId=$id;
 	    				if (Sql::isPgsql() and isset($arrayFields[$id])) {
 	    					$colId=$arrayFields[$id];
 	    				}
-	    				if (!isset($arrayFieldsWithCase[$colId])) continue;
 	    				if (property_exists($obj, $colId)) {
 	    				  $val=encodeCSV($obj->getColCaption($colId));
 	    				} else if (property_exists($obj, 'WorkElement') and property_exists('WorkElement', $colId)) {
@@ -650,7 +660,7 @@
     			}
     			$refType=null;
     			foreach ($line as $id => $val) {
-    			  if ($objectClass=='GlobalView' and $id=='id') continue;
+    			  if (!isset($arrayFields[strtolower($id)]) || ($objectClass=='GlobalView' and $id=='id')) continue;
     			  if ($id=='refType') $refType=$val;
     				$foreign=false;
     				$colId=$id;
