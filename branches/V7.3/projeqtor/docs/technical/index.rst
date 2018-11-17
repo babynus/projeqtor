@@ -23,7 +23,7 @@ Nous allons présenter dans ce document :
 
 - Les éléments techniques qui évoquent les prérequis à la procédure d'installation et de paramétrage de ProjeQtOr.
 
-- La procédure d'installation et de configuration pour réaliser une bonne installation et un bon paramétrage de l'application.
+- La procédure d'installation et de configuration de l'application.
 
 - La procédure de migration recommandée pour migrer vers une nouvelle version de ProjeQtOr.
 
@@ -85,16 +85,10 @@ Installation
    
    Installation
    
-Configuration
-=============
-
 .. toctree::
    :maxdepth: 1
    
    Configuration
-
-Procédure de déploiement
-========================
 
 .. toctree::
    :maxdepth: 1
