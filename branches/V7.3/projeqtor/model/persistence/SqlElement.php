@@ -3389,12 +3389,16 @@ abstract class SqlElement {
     return i18n ( 'col' . ucfirst ( $fldName ) );
   }
 
-  public function getLowercaseFieldsArray() {
+  public function getLowercaseFieldsArray($limitToExportableFields = false) {
     $arrayFields = array();
+    $extraHiddenFields = $this->getExtraHiddenFields(null, null, getSessionUser()->getProfile(), $limitToExportableFields);
     foreach ( $this as $fld => $fldVal ) {
       if (is_object ( $this->$fld )) {
-        $arrayFields = array_merge ( $arrayFields, $this->$fld->getLowercaseFieldsArray () );
+        $arrayFields = array_merge ( $arrayFields, $this->$fld->getLowercaseFieldsArray ( $limitToExportableFields ) );
       } else {
+        if ($limitToExportableFields) {
+          if (($this->isAttributeSetToField($fld, 'hidden') or $this->isAttributeSetToField($fld, 'hiddenforce') or in_array($fld, $extraHiddenFields)) and ! $this->isAttributeSetToField($fld, 'forceExport')) continue;
+        }
         $arrayFields [strtolower ( $fld )] = $fld;
       }
     }
