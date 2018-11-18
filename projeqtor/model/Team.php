@@ -103,7 +103,7 @@ class Team extends SqlElement {
       $result .="</td></tr><tr>";
       $result.='<td style="white-space:nowrap;padding-right:10px;">';
       $result.='<div style="position:absolute;top:2px;right:5px" >';
-      $result.='<label for="showClosedResources" class="dijitTitlePaneTitle" style="height:10px;width:250px">'.i18n('labelShowIdle').'&nbsp;</label>';
+      $result.='<label for="showClosedResources" class="dijitTitlePaneTitle" style="font-weight:normal !important;height:10px;width:250px">'.i18n('labelShowIdle').'&nbsp;</label>';
       $result.='<div class="whiteCheck" id="showClosedResources" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedResources)?'checked':'').' >';
       $result.='<script type="dojo/connect" event="onChange" args="evt">';
       $result.=' saveUserParameter("showClosedResources",((this.checked)?"1":"0"));';
