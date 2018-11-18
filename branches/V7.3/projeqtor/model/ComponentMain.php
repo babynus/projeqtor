@@ -196,7 +196,7 @@ class ComponentMain extends ProductOrComponent {
       // $resultSC is here to store the "Show Closed" part, it allows to move the checkbox more easily
       if (!$print) {
         $resultSC='<div style="position:absolute;right:5px;top:2px;">';
-        $resultSC.='<label for="showClosedVersions"  class="dijitTitlePaneTitle" style="height:10px;width:250px">'.i18n('labelShowIdle').'&nbsp;</label>';
+        $resultSC.='<label for="showClosedVersions"  class="dijitTitlePaneTitle" style="font-weight:normal !important;height:10px;width:250px">'.i18n('labelShowIdle').'&nbsp;</label>';
         $resultSC.='<div class="whiteCheck" id="showClosedVersions" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedVersions)?'checked':'').' >';
         $resultSC.='<script type="dojo/connect" event="onChange" args="evt">';
         $resultSC.=' saveUserParameter("showClosedVersions",((this.checked)?"1":"0"));';
