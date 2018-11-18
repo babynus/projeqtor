@@ -4609,9 +4609,13 @@ function drawVersionStructureFromObject($obj, $refresh=false, $way, $item) {
   if (!$print) {
     echo '<td class="linkHeader" style="width:5%">';
     if ($obj->id!=null and !$print and $canUpdate) {
-      echo '<a onClick="addProductVersionStructure(\''.$way.'\');" title="'.i18n('addProductVersionStructure').'" > '.formatSmallButton('Add').'</a>';
-      if ($way=='composition' and count($list)>0) {
-        echo '<a onClick="upgradeProductVersionStructure(null,false);" title="'.i18n('upgradeProductVersionStructure').'" > '.formatSmallButton('Switch').'</a>';
+      $critStatus = array('id' => $obj->idStatus);
+      $actualStatus = SqlElement::getSingleSqlElementFromCriteria ( 'status', $critStatus);
+      if ( ( (get_class($obj)!='ComponentVersion' && get_class($obj)!='ProductVersion') || $actualStatus->setIntoserviceStatus!=1) || ($way!='composition')) {
+        echo '<a onClick="addProductVersionStructure(\''.$way.'\');" title="'.i18n('addProductVersionStructure').'" > '.formatSmallButton('Add').'</a>';
+        if ($way=='composition' and count($list)>0) {
+          echo '<a onClick="upgradeProductVersionStructure(null,false);" title="'.i18n('upgradeProductVersionStructure').'" > '.formatSmallButton('Switch').'</a>';
+        }
       }
     }
     echo '</td>';
@@ -4637,9 +4641,8 @@ function drawVersionStructureFromObject($obj, $refresh=false, $way, $item) {
     $classCompName=i18n(get_class($compObj));
     if (!$print) {
       echo '<td class="linkData" style="text-align:center;width:5%;white-space:nowrap;">';
-      if ($canUpdate) {
+      if ($canUpdate&&(((get_class($obj)!='ComponentVersion'&&get_class($obj)!='ProductVersion')||$actualStatus->setIntoserviceStatus!=1)||($way!='composition'))) {
         echo '  <a onClick="editProductVersionStructure(\''.$way.'\','.htmlEncode($comp->id).');" '.'title="'.i18n('editProductStructure').'" > '.formatSmallButton('Edit').'</a>';
-        
         echo '  <a onClick="removeProductVersionStructure('."'".htmlEncode($comp->id)."','".get_class($compObj)."','".htmlEncode($compObj->id)."','".$classCompName."'".');" '.'title="'.i18n('removeProductStructure').'" > '.formatSmallButton('Remove').'</a>';
         if ($way=='composition') {
           echo '<a onClick="upgradeProductVersionStructure(\''.$comp->id.'\',false);" title="'.i18n('upgradeProductVersionStructureSingle').'" > '.formatSmallButton('Switch').'</a>';
