@@ -402,19 +402,19 @@ class Version extends SqlElement {
   }
   
   public function drawVersionsList($critArray,$withProjects=false) {
-    $result="<table>";
     $versList=$this->getSqlElementsFromCriteria($critArray,false,null,'name asc',false,true);
+    $result='';
     foreach ($versList as $vers) {
-      $result.= '<tr>';
-      $result.= '<td style="padding-left:15px;">&nbsp;&nbsp;</td>';
-      $result.= '<td valign="top" style="padding-left:5px;width:20px;height:16px;	" class="icon'.$vers->scope.'Version16" >&nbsp;</td>';
+      $result.= '<tr><td class="linkData" style="white-space:nowrap;width:15%"><table><tr>';
+      $result.= '<td>'.formatIcon(get_class($vers), 16).'</td><td style="vertical-align:top">&nbsp;'.'#'.$vers->id.'</td></tr></table>';
+      $result.= '</td>';
+      //      $result.= '<td valign="top" style="padding-left:12px;width:20px;height:16px;	" class="icon'.$vers->scope.'Version16" >&nbsp;#'.$vers->id.'</td>';
       $style="";
       if ($vers->idle) {$style='color#5555;text-decoration: line-through;';}
       else if ($vers->isEis) {$style='font-weight: bold;';}
-      $result.= '<td style="vertical-align:top;'.$style.'">';
-      $result.="#$vers->id - ".htmlDrawLink($vers);
+      $result.= '<td class="linkData"><p style="display:inline;'.$style.'">';
+      $result.= htmlDrawLink($vers).'</p>';
       if ($withProjects) {
-        //$result.='<td>';
         $vp=new VersionProject();
         $vpList=$vp->getSqlElementsFromCriteria(array('idVersion'=>$vers->id),false,null,null,false,true);
         $result.= '<table>';
@@ -428,9 +428,17 @@ class Version extends SqlElement {
         $result.= '</table>';
         //$result.='</td>';
       }
+      $result.= formatUserThumb($vers->idUser, SqlList::getNameFromId('User', $vers->idUser), 'Creator');
+      $result.= formatDateThumb($vers->creationDate, null);
+      $query="SELECT * FROM status WHERE id = '".$vers->idStatus."'";
+      $queryResult = Sql::query($query);
+      $line = Sql::fetchLine($queryResult);
+      $result.= '</td><td class="linkData">';
+      if ($line && array_key_exists("name", $line)) {
+        $result.= colorNameFormatter($line["name"]."#split#".$line["color"]);
+      }      
       $result.= '</td></tr>';
     }
-    $result .="</table>";
     return $result;
   }
   
