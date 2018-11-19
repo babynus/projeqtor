@@ -376,7 +376,37 @@ class ProjectExpenseMain extends Expense {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  var tax=dijit.byId("taxPct").get("value");';
       $paramImputOfAmountProvider = Parameter::getGlobalParameter('ImputOfAmountProvider');
-      if($paramImputOfAmountProvider == 'HT'){
+      $paramImputOfAmountProviderBillLine = Parameter::getGlobalParameter('ImputOfBillLineProvider');
+      if (count($this->getExpenseDetail())>0 and $paramImputOfAmountProvider == 'HT' and $paramImputOfAmountProviderBillLine== 'TTC') {
+          $colScript .= '  var plan=dijit.byId("plannedAmount").get("value");';
+          $colScript .= '  var planTax=null;';
+          $colScript .= '  var planFull=null;';
+          $colScript .= '  if (!isNaN(plan)) {';
+          $colScript .= '    if (!isNaN(tax)) {';
+          $colScript .= '      planTax=Math.round(plan*tax)/100;';
+          $colScript .= '      planFull=plan+planTax;';
+          $colScript .= '    } else {';
+          $colScript .= '      planFull=plan;';
+          $colScript .= '    }';
+          $colScript .= '  }';
+          $colScript .= '  var initFull=dijit.byId("realFullAmount").get("value");';
+          $colScript .= '  var initTax=null;';
+          $colScript .= '  var init=null;';
+          $colScript .= '  if (!isNaN(initFull)) {';
+          $colScript .= '    if (!isNaN(tax)) {';
+          $colScript .= '      init = initFull / (1 +( tax / 100 ) );';
+          $colScript .= '      initTax=initFull-init;';
+          $colScript .= '    } else {';
+          $colScript .= '      init=initFull;';
+          $colScript .= '    }';
+          $colScript .= '  }';
+          if($this->isCalculated == 0){
+            $colScript .= '  dijit.byId("realTaxAmount").set("value",initTax);';
+            $colScript .= '  dijit.byId("realAmount").set("value",init);';
+          }
+          $colScript .= '  dijit.byId("plannedTaxAmount").set("value",planTax);';
+          $colScript .= '  dijit.byId("plannedFullAmount").set("value",planFull);';
+      }elseif($paramImputOfAmountProvider == 'HT' and $paramImputOfAmountProviderBillLine == 'HT' or $paramImputOfAmountProvider == 'HT' and count($this->getExpenseDetail())==0 ){
         $colScript .= '  var init=dijit.byId("realAmount").get("value");';
         $colScript .= '  var plan=dijit.byId("plannedAmount").get("value");';
         $colScript .= '  var initTax=null;';
