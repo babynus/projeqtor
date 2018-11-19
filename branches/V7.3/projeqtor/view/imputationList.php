@@ -59,7 +59,10 @@ $displayOnlyCurrentWeekMeetings=Parameter::getUserParameter('imputationDisplayOn
 
 $showId=false;
 if(Parameter::getUserParameter("showId")!=null && Parameter::getUserParameter("showId")==1)$showId=true;
-
+$showIdle = false;
+if(sessionValueExists('listShowIdleTimesheet')and getSessionValue('listShowIdleTimesheet')=='on'){
+  $showIdle = true;
+}
 ?>
 
 <div dojoType="dijit.layout.BorderContainer">
@@ -216,8 +219,9 @@ if(Parameter::getUserParameter("showId")!=null && Parameter::getUserParameter("s
               </td>
               <td style="width:10px;text-align: center; align: center;white-space:nowrap;">&nbsp;
                 <div title="<?php echo i18n('showIdleElements')?>" dojoType="dijit.form.CheckBox" type="checkbox" class="whiteCheck"
-                  id="listShowIdle" name="listShowIdle">
+                  id="listShowIdle" name="listShowIdle"  <?php if (sessionValueExists('listShowIdleTimesheet')){ if(getSessionValue('listShowIdleTimesheet')=='on'){ echo ' checked="checked" '; }}?> >      >
                   <script type="dojo/method" event="onChange" >
+                    saveDataToSession("listShowIdleTimesheet",dijit.byId('listShowIdle').get('value'),false);
                     return refreshImputationList();
                   </script>
                 </div>&nbsp;
@@ -347,7 +351,7 @@ if(Parameter::getUserParameter("showId")!=null && Parameter::getUserParameter("s
        <input type="hidden" name="userId" id="userId" value="<?php echo $user->id;?>"/>
        <input type="hidden" name="rangeType" id="rangeType" value="<?php echo $rangeType;?>"/>
        <input type="hidden" name="rangeValue" id="rangeValue" value="<?php echo $rangeValue;?>"/>
-       <input type="checkbox" name="idle" id="idle" style="display: none;" />     
+       <input type="checkbox" name="idle" id="idle" style="display: none;"/>     
        <input type="checkbox" name="showPlannedWork" id="showPlannedWork" style="display: none;" />
        <input type="checkbox" name="showIdT" id="showIdT" style="display: none;" />
        <input type="checkbox" name="hideDone" id="hideDone" style="display: none;" />
@@ -364,7 +368,7 @@ if(Parameter::getUserParameter("showId")!=null && Parameter::getUserParameter("s
        <input type="hidden" name="dateMonth" id="dateMonth" value="<?php echo $currentYear.$currentMonth; ?>"/>
        
       <?php if (! isset($print) ) {$print=false;}
-      ImputationLine::drawLines($userName, $rangeType, $rangeValue, false, $showPlanned, $print, $hideDone, $hideNotHandled, $displayOnlyCurrentWeekMeetings,$currentWeek,$currentYear, $showId);?>
+      ImputationLine::drawLines($userName, $rangeType, $rangeValue,$showIdle, $showPlanned, $print, $hideDone, $hideNotHandled, $displayOnlyCurrentWeekMeetings,$currentWeek,$currentYear, $showId);?>
      </form>
   </div>
 </div>
