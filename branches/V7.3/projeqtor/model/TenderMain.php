@@ -265,23 +265,13 @@ class TenderMain extends SqlElement {
     
     // Update amounts
     if ($this->untaxedAmount!=null) {
-      if ($this->taxPct!=null) {
-        $this->taxAmount=round(($this->untaxedAmount*$this->taxPct/100),2);
-      } else {
-        $this->taxAmount=null;
-      } 
-      $this->fullAmount=$this->untaxedAmount+$this->taxAmount;
+    	
     } else {
       $this->taxAmount=null;
       $this->fullAmount=null;
     }  
     if ($this->totalUntaxedAmount!=null) {
-      if ($this->taxPct!=null) {
-        $this->totalTaxAmount=round(($this->totalUntaxedAmount*$this->taxPct/100),2);
-      } else {
-        $this->totalTaxAmount=null;
-      }
-      $this->totalFullAmount=$this->totalUntaxedAmount+$this->totalTaxAmount;
+     
     } else {
       $this->totalTaxAmount=null;
       $this->totalFullAmount=null;
