@@ -413,7 +413,7 @@ class CommandMain extends SqlElement {
       self::$_fieldsAttributes['initialWork']='readonly';
       self::$_fieldsAttributes['addWork']='readonly';
     }
-    $paramImputOfAmountClient = Parameter::getGlobalParameter('$paramImputOfAmountClient');
+    $paramImputOfAmountClient = Parameter::getGlobalParameter('ImputOfAmountClient');
     if($paramImputOfAmountClient == 'HT'){
       self::$_fieldsAttributes['fullAmount']="readonly";
       self::$_fieldsAttributes['addFullAmount']="readonly";
