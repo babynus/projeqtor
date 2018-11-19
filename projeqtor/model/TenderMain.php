@@ -639,7 +639,12 @@ class TenderMain extends SqlElement {
       self::$_fieldsAttributes['_button_generateProjectExpense']='hidden';
     }
     
-    $paramImputOfAmountProvider = Parameter::getGlobalParameter('ImputOfAmountProvider');
+    if (count($this->_BillLine)) {
+      $paramImputOfAmountProvider = Parameter::getGlobalParameter('ImputOfBillLineProvider');
+    }else{
+      $paramImputOfAmountProvider = Parameter::getGlobalParameter('ImputOfAmountProvider');
+    }
+    
     if($paramImputOfAmountProvider == 'HT'){
       self::$_fieldsAttributes['fullAmount']="readonly";
       self::$_fieldsAttributes['discountFullAmount']="readonly";
