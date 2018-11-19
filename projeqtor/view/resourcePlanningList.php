@@ -273,7 +273,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                       <td>
                       <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
                         style="width:  <?php echo ($displayWidthPlan>1030)?150:100;?>px;"
-                        name="teamName" id="teamName" value="<?php if(sessionValueExists('teamName')){ echo getSessionValue('selectResourceName'); }?>"
+                        name="teamName" id="teamName" value="<?php if(sessionValueExists('teamName')){ echo getSessionValue('teamName'); }?>"
                         <?php echo autoOpenFilteringSelect();?>
                         >
                         <script type="dojo/method" event="onChange" > 
