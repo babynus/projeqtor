@@ -302,7 +302,6 @@ class TicketMain extends SqlElement {
       $colScript .= '  var done=dijit.byId("done").get("checked");';
       $colScript .= '  var real=dijit.byId("WorkElement_realWork").get("value");';
       $colScript .= '  var planned=dijit.byId("WorkElement_plannedWork").get("value");';
-      $colScript .= '  console.log(real+" / "+planned);';
       $colScript .= '  if (done) {';
       $colScript .= '    dijit.byId("WorkElement_leftWork").set("value", 0);';
       $colScript .= '  } else {';
