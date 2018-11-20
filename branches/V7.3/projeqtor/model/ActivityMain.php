@@ -360,7 +360,6 @@ class ActivityMain extends SqlElement {
    * @return the return message of persistence/SqlElement#save() method
    */
   public function save() {
-    //debugLog("save for Activity #$this->id");
     $oldResource = null;
     $oldIdle = null;
     $oldIdProject = null;

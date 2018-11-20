@@ -636,10 +636,8 @@ function storeLoadContentStack(page, destination, formName, isResultMessage, val
 }
 function cleanLoadContentStack(page, destination, formName, isResultMessage, validationType, directAccess, silent, callBackFunction, noFading) {
   var callKey=getLoadContentStackKey(page, destination, formName, isResultMessage, validationType, directAccess, silent, callBackFunction, noFading);
-//  console.log("cleanLoadContentStack("+callKey+")");
   if (loadContentStack[callKey]!==undefined) {
     //loadContentStack.splice(callKey,1);
-//    console.log("  => OK, delete");
     delete loadContentStack[callKey];
   }
   if (loadContentCallSequential==true) {
@@ -675,7 +673,6 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
   var contentWidget = dijit.byId(destination);
   var fadingMode = top.fadeLoading;
   var callKey=getLoadContentStackKey(page, destination, formName, isResultMessage, validationType, directAccess, silent, callBackFunction, noFading);
-//  console.log("loadContentStack("+callKey+")");
   //if (loadContentRetryArray[callKey]===undefined) {
   //  loadContentRetryArray[callKey]=1;
   //} else {
@@ -690,7 +687,6 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
   } else {
     // already calling same request for same target with same parameters.
     // avoid double call
-//    console.log(" => loadContentStack["+callKey+"] already exists : exit");
     return;
   }
   
