@@ -259,7 +259,6 @@ class PlanningElement extends SqlElement {
    */
   public function save() {
     global $canForceClose;
-    //debugLog("save for pe #$this->id - $this->wbs - $this->refType #$this->refId - $this->refName");
   	// Get old element (stored in database) : must be fetched before saving
     $old=new PlanningElement($this->id);
     if (! $this->idProject) {
@@ -596,7 +595,6 @@ class PlanningElement extends SqlElement {
   
   // Save without extra save() feature and without controls
   public function simpleSave() {
-    //debugLog("simpleSave for pe #$this->id - $this->wbs - $this->refType #$this->refId - $this->refName");
     if ($this->plannedStartDate>$this->plannedEndDate) $this->plannedEndDate=$this->plannedStartDate;
     $this->plannedDuration=workDayDiffDates($this->plannedStartDate, $this->plannedEndDate);
     if ($this->validatedStartDate and $this->validatedEndDate) {
@@ -613,7 +611,6 @@ class PlanningElement extends SqlElement {
   }
 
   public function wbsSave() {
-    //debugLog("wbsSave for pe #$this->id - $this->wbs - $this->refType #$this->refId - $this->refName");
   	$this->_noHistory=true;
   	$this->wbsSortable=formatSortableWbs($this->wbs);
   	$resTmp=$this->saveForced();
@@ -649,7 +646,6 @@ class PlanningElement extends SqlElement {
    * @return a boolean 
    */
   protected function updateSynthesisObj ($doNotSave=false) {
-  	//debugLog("updateSynthesisObj for $this->refType #$this->refId");
     $consolidateValidated=Parameter::getGlobalParameter('consolidateValidated');
   	$this->validatedCalculated=0;
   	$this->validatedExpenseCalculated=0;
@@ -797,7 +793,6 @@ class PlanningElement extends SqlElement {
    * @return a boolean 
    */
   public static function updateSynthesis ($refType, $refId) { 
-    //debugLog("updateSynthesis for $refType #$refId");
   	if (!$refType or !$refId) return;
     $crit=array("refType"=>$refType, "refId"=>$refId);
     $obj=SqlElement::getSingleSqlElementFromCriteria($refType.'PlanningElement', $crit);
@@ -1287,7 +1282,6 @@ class PlanningElement extends SqlElement {
   }
   
   public function renumberWbs() {
-    //debugLog("renumberWbs() for pe #$this->id - $this->refType #$this->refId");
     return;
   	if ($this->id) {
   		$where="topRefType='" . $this->refType . "' and topRefId=" . Sql::fmtId($this->refId) ;
@@ -1720,7 +1714,6 @@ class PlanningElement extends SqlElement {
   }
   
   static function copyStructureFinalize() {
-    //debugLog("copyStructureFinalize()");
     self::$_noDispatch=true;
     // Update synthesys for non elementary item (will just be done once ;)
     foreach (array_reverse(PlanningElement::$_noDispatchArray) as $pe) {
@@ -1820,7 +1813,6 @@ class PlanningElement extends SqlElement {
    * @param string $restrictId => if setand $restricType also set) will restrict to single item 
    */
   public function updateMilestonableItems($restrictType=null,$restrictId=null) {
-    //debugLog("updateMilestonableItems()");
     if ($restrictType) {
       $list=array($restrictType);
     } else {
