@@ -165,17 +165,19 @@ if(sessionValueExists('listShowIdle'.$objectClass)){
 }
 
 //objectStatus
-$object = new $objectClass();
-$listStatus = $object->getExistingStatus();
-$cptStatus=0;
 $objectStatus = array();
+$object = new $objectClass();
+$cptStatus=0;
 $filteringByStatus = false;
-foreach ($listStatus as $status) {
-  $cptStatus += 1;
-  if(sessionValueExists('showStatus'.$status->id.$objectClass)){
-    if(getSessionValue('showStatus'.$status->id.$objectClass)=='true'){
-      $filteringByStatus = true;
-      $objectStatus[$cptStatus] = $status->id;
+if (property_exists($objectClass,'idStatus')) {
+  $listStatus = $object->getExistingStatus();
+  foreach ($listStatus as $status) {
+    $cptStatus += 1;
+    if(sessionValueExists('showStatus'.$status->id.$objectClass)){
+      if(getSessionValue('showStatus'.$status->id.$objectClass)=='true'){
+        $filteringByStatus = true;
+        $objectStatus[$cptStatus] = $status->id;
+      }
     }
   }
 }
