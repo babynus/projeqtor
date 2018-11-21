@@ -2366,7 +2366,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             $possibleWidth=round($possibleWidth/$internalTableCols, 0)-($internalTableCols*3);
           }
           $expected=100;
-          if ($isAmount) $expected+=20;
+          //if ($isAmount) $expected+=20;
           if ($possibleWidth>$expected) {
             $fieldWidth=$expected;
           } else {
