@@ -428,5 +428,26 @@ class Sql {
     self::$dbPassword = NULL;
     self::$dbName = NULL;
   }
+  
+  public static function getDbCollation() {
+   	$value=getSessionTableValue('globalParametersArray', 'paramDbCollation');
+   	if ($value) return $value;
+  
+   	// Not retreived, get from db
+   	if (Sql::isMysql()) {
+   		$value="utf8_general_ci"; // default
+     	$dbName=Parameter::getGlobalParameter('paramDbName');
+     	$query="SELECT DEFAULT_CHARACTER_SET_NAME as dbcharset, DEFAULT_COLLATION_NAME as dbcollation FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = '$dbName';";
+      $result=Sql::query($query);
+     	if (Sql::$lastQueryNbRows > 0) {
+     	  $line = Sql::fetchLine($result);
+     	  debugLog("charset='".$line['dbcharset']."'  collation='".$line['dbcollation']."'");
+     	  $value=$line['dbcollation'];
+     	}
+     	setSessionTableValue('globalParametersArray', 'paramDbCollation', $value);
+   	}
+    return $value;
+  
+  }
 }
 ?>
