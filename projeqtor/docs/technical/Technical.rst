@@ -6,17 +6,19 @@
 
 Principes Techniques
 --------------------
-.. rubric:: Utilisation
+.. rubric:: Principes techniques pour l'utilisation
 
-Voici la facilité d'installation et de paramétrage de ProjeQtOr : 
+ProjeQtOr est une application web dotée d'une interface graphique riche. 
 
-- ProjeQtOr propose une interface conviviale.
+- ProjeQtOr propose une interface conviviale centrée sur l'utilisabilité au quotidien.
 
-- C'est une application internet riche qui s'exécute comme un client léger, dans un navigateur simple.
+- ProjeQtOr une application web riche qui s'exécute comme un client léger, dans un navigateur simple. Une fois que ProjeQtOr est installée sur le serveur, les utilisateurs peuvent y accéder via leur navigateur sans rien avoir à installer sur leur poste de travail. 
 
-- Elle est compatible avec de multiples navigateurs (validé sur Internet Explorer >8, Firefox et Chrome).
+- ProjeQtOr est compatible avec de multiples navigateurs (validé sur Internet Explorer >8, Edge, Firefox et Chrome).
 
-- Interface conviviale. 
+- Aucun module complémentaire n'est à installer sur le poste client.
+
+- L'interface de ProjeQtOr se veut conviviale et pratique à utiliser au quotidien. 
   En utilisant AJAX, l'actualisation de la page est toujours limitée à la zone cible, évitant les pages blanches et le scintillement.
   L'interface utilisateur générale est conçue pour se conformer à de nombreux outils habituellement utilisés (tels que WebMail) :
     - Menu à gauche
