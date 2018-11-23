@@ -969,6 +969,17 @@ scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursi
             $ap->save();
         }
     }
+    if($withAffectations==true){
+      $aff = new Affectation();
+      $crit=array('idProject'=>$this->id);
+      $list=$aff->getSqlElementsFromCriteria($crit);
+      foreach ($list as $aff) {
+        $aff->idProject=$result->id;
+        $aff->id=null;
+        $aff->save();
+      }
+    }
+    
     return $result;
   } 
   
