@@ -7134,15 +7134,15 @@ function recalculateColumnSelectorName() {
     }
     cpt++;
   }
-  name="checkListColumnSelectorWidthId"
-      + dojo.byId('columnSelectorNameFieldId').value;
+  if (!dojo.byId('columnSelectorNameFieldId')) return;
+  name="checkListColumnSelectorWidthId"+dojo.byId('columnSelectorNameFieldId').value;
   nameWidth=100 - tot;
   color="";
   if (nameWidth < 10) {
     nameWidth=10;
     color="#FFAAAA";
   }
-  dijit.byId(name).set('value', nameWidth);
+  if (dijit.byId(name)) dijit.byId(name).set('value', nameWidth);
   totWidth=tot + nameWidth;
   totWidthDisplay="";
   if (color) {
