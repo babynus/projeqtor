@@ -198,7 +198,7 @@ class Consistency {
       $res=$pe->moveTo($pePrec->id,'after');
       if (getLastOperationStatus($res)=='OK' or getLastOperationStatus($res)=='NO_CHANGE') displayOK(i18n("checkFixed"),true);
       else displayError($res,true);
-    } else if ($action=="recalculateLevel") {
+    } else if ($action=="recalculateLevel" and $pe->topId) {
       $where="topId=$pe->topId";
       $levelList=$pe->getSqlElementsFromCriteria(null,null,$where,'wbsSortable');
       if (count($levelList)==1) {
@@ -207,7 +207,7 @@ class Consistency {
         $res=$pe->save();
         if (getLastOperationStatus($res)=='OK' or getLastOperationStatus($res)=='NO_CHANGE') displayOK(i18n("checkFixed"),true);
         else displayError($res,true);
-      } else {
+      } else if (count($levelList)>1) {
         $first=$levelList[0];
         $second=$levelList[1];
         $res=$second->moveTo($first->id,'before');
