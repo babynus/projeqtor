@@ -572,12 +572,7 @@ class TenderMain extends SqlElement {
     if (strpos($param,'#'.substr($crit,2).'#')==null) return;
     $titlePane='sectionTender_'.$crit;
     // Finish previous section
-    echo '</table>';
-    if (!$print) {
-      echo '</div>';
-    } else {
-      echo '<br/>';
-    }
+    
     // Start section
     if (!$print) {
       echo '<div dojoType="dijit.TitlePane" title="' . i18n('menuCallForTender') . '"';
@@ -588,8 +583,9 @@ class TenderMain extends SqlElement {
       echo ' onShow="saveExpanded(\'' . $titlePane . '\');">';
       echo '<table class="detail"  style="width: 100%;" >';
     } else {
+      echo '<br/>';
       echo '<table class="detail" style="width:'.$widthPct.';" >';
-      echo '<tr><td class="section">' . i18n('sectionTender') . '</td></tr>';
+      echo '<tr><td class="section">' . i18n('menuCallForTender') . '</td></tr>';
       echo '<tr class="detail" style="height:2px;font-size:2px;">';
       echo '<td class="detail" >&nbsp;</td>';
       echo '</tr>';
@@ -611,7 +607,10 @@ class TenderMain extends SqlElement {
       $cft->drawTenderSubmissionsFromObject(true);
       echo "</td></tr>";
     } 
-    
+    echo '</table>';
+    if (!$print) {
+      echo '</div>';
+    }
   }
   
   public function setAttributes() {

@@ -193,6 +193,7 @@ class ProductMain extends ProductOrComponent {
       }
       $result.='</table>';
       // $resultSC is here to store the "Show Closed" part, it allows to move the checkbox more easily
+      $resultSC='';
       if (!$print) {
         $resultSC='<div style="position:absolute;right:5px;top:2px;">';
         $resultSC.='<label for="showClosedVersions"  class="dijitTitlePaneTitle" style="font-weight:normal !important;height:10px;width:250px">'.i18n('labelShowIdle').'&nbsp;</label>';
