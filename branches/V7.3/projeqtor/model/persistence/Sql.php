@@ -441,7 +441,6 @@ class Sql {
       $result=Sql::query($query);
      	if (Sql::$lastQueryNbRows > 0) {
      	  $line = Sql::fetchLine($result);
-     	  debugLog("charset='".$line['dbcharset']."'  collation='".$line['dbcollation']."'");
      	  $value=$line['dbcollation'];
      	}
      	setSessionTableValue('globalParametersArray', 'paramDbCollation', $value);

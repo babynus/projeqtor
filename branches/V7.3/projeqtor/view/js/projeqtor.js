@@ -3709,71 +3709,71 @@ function updateFinancialTotal(mode, col) {
     // Retrieve values used for calculation
     var untaxedAmount = dijit.byId("untaxedAmount").get("value");
     var fullAmount = dijit.byId("fullAmount").get("value");
-    if (!untaxedAmount)
-      untaxedAmount = 0;
+    if (!untaxedAmount) untaxedAmount = 0;
     var taxPct = dijit.byId("taxPct").get("value");
-    if (!taxPct)
-      taxPct = 0;
+    if (!taxPct) taxPct = 0;
     var discount=dijit.byId("discountAmount").get("value");
-    if (!isNaN(discount)) {
+    var discountRate=dijit.byId("discountRate").get("value");
+    if (!isNaN(discount) && (!dijit.byId('discountFrom') || dijit.byId('discountFrom').get('value')=='amount') ) {
       if (col!='discountRate') {
-        var rateNew=Math.round(10000*discount/untaxedAmount)/100;
-        dijit.byId("discountRate").set("value",rateNew);
-        var discountFull= Math.round(fullAmount*rateNew)/100;
-        dijit.byId("discountFullAmount").set("value",discountFull);
+        discountRate=Math.round(10000*discount/untaxedAmount)/100;
+        dijit.byId("discountRate").set("value",discountRate);
+      }
+    } else if (!isNaN(discountRate) ) {
+      if (col!='discountAmount') {
+        discount=Math.round(discountRate*untaxedAmount)/100;
+        dijit.byId("discountAmount").set("value",discount);
       }
     }
-    if (!discount){
-      discount=0;
-    }
+    if (!discount) discount=0;
     // Calculated values
     var taxAmount = Math.round(untaxedAmount * taxPct) / 100;
     var fullAmount = taxAmount + untaxedAmount;
     var totalUntaxedAmount = untaxedAmount - discount;
     var totalTaxAmount = Math.round(totalUntaxedAmount * taxPct) / 100;
     var totalFullAmount = totalUntaxedAmount + totalTaxAmount;
+    var discountFull= fullAmount-totalFullAmount;
     // Set values to fields
     dijit.byId("taxAmount").set('value', taxAmount);
     dijit.byId("fullAmount").set('value', fullAmount);
     dijit.byId("totalUntaxedAmount").set('value', totalUntaxedAmount);
     dijit.byId("totalTaxAmount").set('value', totalTaxAmount);
     dijit.byId("totalFullAmount").set('value', totalFullAmount);
-  }else{
+    dijit.byId("discountFullAmount").set("value",discountFull);
+  }else{ // TTC
     var fullAmount = dijit.byId("fullAmount").get("value");
     var untaxedAmount = dijit.byId("untaxedAmount").get("value");
-    if (!fullAmount)
-      fullAmount = 0;
+    if (!fullAmount) fullAmount = 0;
     var taxPct = dijit.byId("taxPct").get("value");
-    if (!taxPct)
-      taxPct = 0;
+    if (!taxPct) taxPct = 0;
     var discountFull=dijit.byId("discountFullAmount").get("value");
-    if (!isNaN(discountFull)) {
+    var discountRate=dijit.byId("discountRate").get("value");
+    if (!isNaN(discountFull) && (!dijit.byId('discountFrom') || dijit.byId('discountFrom').get('value')=='amount') ) {  
       if (col!='discountRate') {
-        var rateNew=Math.round(10000*discountFull/fullAmount)/100;
-        dijit.byId("discountRate").set("value",rateNew);
-        var discount= Math.round(untaxedAmount*rateNew)/100;
-        dijit.byId("discountAmount").set("value",discount);
+        discountRate=Math.round(10000*discountFull/fullAmount)/100;
+        dijit.byId("discountRate").set("value",discountRate);
+      }
+    } else if (!isNaN(discountRate) ) {
+      if (col!='discountFullAmount') {
+        discountFull=Math.round(discountRate*fullAmount)/100;
+        dijit.byId("discountFullAmount").set("value",discountFull);
       }
     }
-    if (!discountFull){
-      discountFull=0;
-    }
-    discountAmount = dijit.byId("discountAmount").get("value");
-    if (!discountAmount){
-      discountAmount=0;
-    }
+    if (!discountFull) discountFull=0;
     // Calculated values
-    var untaxedAmount =  fullAmount / ( 1 + ( taxPct / 100 ));
+    var untaxedAmount =  Math.round(fullAmount / ( 1 + ( taxPct / 100 ))*100)/100;
     var taxAmount = fullAmount - untaxedAmount;
     var totalFullAmount = fullAmount - discountFull;
-    var totalUntaxedAmount = untaxedAmount - discountAmount ;
+    var totalUntaxedAmount = Math.round(totalFullAmount / ( 1 + ( taxPct / 100 ))*100)/100;
     var totalTaxAmount = totalFullAmount - totalUntaxedAmount;
+    var discount= untaxedAmount-totalUntaxedAmount;
     // Set values to fields
     dijit.byId("taxAmount").set('value', taxAmount);
     dijit.byId("untaxedAmount").set('value', untaxedAmount);
     dijit.byId("totalUntaxedAmount").set('value', totalUntaxedAmount);
     dijit.byId("totalTaxAmount").set('value', totalTaxAmount);
     dijit.byId("totalFullAmount").set('value', totalFullAmount);
+    dijit.byId("discountAmount").set("value",discount);
   }
   setTimeout("cancelRecursiveChange_OnGoingChange = false;",5);
 }
