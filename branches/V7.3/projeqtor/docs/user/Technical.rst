@@ -24,34 +24,30 @@ Principes Techniques
 
 - L'interface utilise la technologie Ajax. De ce fait, l'actualisation de la page est toujours limitée à la zone cible, évitant les pages blanches et le scintillement.
   
-- L'interface utilisateur générale est conçue pour se conformer à de nombreux outils habituellement utilisés (tels que WebMail) :
-    - Menu à gauche
-    - Données à droite, divisé en haut comme liste d'articles et en bas comme détail pour l'élément sélectionné.
-      La sélection d'un élément dans la liste affiche directement son détail.
-- La possibilité d'accéder à l'historique des changements est offerte sur chaque élément.
-- La gestion des notes permet de joindre des commentaires à n'importe quel élément.
-- La gestion de fichiers attachés permet d'ajouter des pièces jointes sur  n'importe quel élément.
-- ProjeQtOr est nativement Multi-Langue : chaque utilsateur peut choisir sa langue pour l'affichage de l'interface.
+- L'interface utilisateur est conçue pour se conformer à ce que les utilisateurs on l'habitude de manipuler sur leurs outils bureautiques (comme par exemple un client de messagerie) :
+    - Menu supérieur ou à gauche
+    - Données à droite, avec l'écran divisé en haut par une liste d'éléments et en bas par le détail de  l'élément sélectionné dans la liste.
+    - La sélection d'un élément dans la liste affiche directement son détail.
+- ProjeQtOr propose la possibilité d'accéder à l'historique des mises à jour sur chaque élément : toutes les modifications sont historisées.
+- ProjeQtOr propose sur chaque élément une gestion de notes qui permet d'ajouter des commentaires.
+- ProjeQtOr propose sur chaque élément une gestion de fichiers attachés qui permet d'ajouter des pièces jointe.
+- ProjeQtOr est Multi-Langue : chaque utilisateur peut affiche l'interface dans sa langue.
 
 
-.. rubric:: Pré-requis techniques d'installation
+.. rubric:: Installation
 
-- ProjeQtOr utilise des technologies très connues : PHP/ MySQL (ou PostgreSql)/ AJAX
+- L'installation de ProjeQtOr requiert sur le serveur uniquement la trilogie largement utilisée : 
+  - Apache, 
+  - MySQL (PostgreSql ou MariaDB peuvent aussi être utilisés)
+  - PHP.
 
-- La configuration requiert uniquement la trilogie habituelle: Apache, MySQL (ou PostgreSql), PHP.
-  Il suffit d'utiliser votre paquet préféré: XAMPP, LAMP, WAMP, EasyPhP, Serveur ZEND...
+- Pour installer ces briques logicielles vous pouvez utiliser votre paquet préféré: XAMPP, LAMP, WAMP, EasyPhP, Serveur ZEND... ou installer ces composants un a un (ce qui est généralement le cas sous Linux)
 
-- Versions requises:
-  - Apache : Toutes versions, V2 ou supérieure est recommandée
-  - MySql : Toutes versions, V5 ou supérieure est recommandée
-    or PostgreSql : Toutes versions au dessus de V8.4, la V9.1 ou supérieure est recommandée
-  - PHP : 5.2 ou supérieur est recommandée
-    Pour information, ProjeQtOr à été développé successivement avec:
-  - Easy PHP2.0.0.0 [Apache V2.2.11, MySQL 5.1.30, PHP V5.2.8]
-  - Easy PHP 5.3.8.1 [Apache V2.2.21, MySQL 5.5.16, PHP V5.3.8]
-  - ZEND Server 4.0.5 Community Edition [Apache V2.2.12, MySQL 5.1.35, PHP V5.2.10]
-  - XAMPP 1.7.7 [Apache V2.2.21, MySQL 5.5.16, PHP V5.3.8]
-  
+- Les versions requises des composants sot :
+  - Apache : V2 ou supérieure
+  - MySql : V5 ou supérieure
+  -  PostgreSql : V8.4 ou supérieure. V9.1 ou supérieure recommandée.
+  - PHP : V5.2 ou supérieure. V7.1 recommandée
  
 - La gestion automatique des versions déclenche la mise à jour de la structure de la base de données lors de la première exécution pour toute nouvelle version.
 - L'écran de configuration lors de la première exécution pour définir les paramètres internes (accès à la base de données, paramètres par défaut,...).
