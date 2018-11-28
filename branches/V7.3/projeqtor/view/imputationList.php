@@ -186,7 +186,7 @@ if(sessionValueExists('listShowIdleTimesheet')and getSessionValue('listShowIdleT
                                 if(sessionValueExists('weekSpinner') and sessionValueExists('yearSpinner')){
                                   echo date('Y-m-d',firstDayofWeek(getSessionValue('weekSpinner'),getSessionValue('yearSpinner')));
                                 }else{
-                                  echo $currentDay;
+                                  echo date('Y-m-d',firstDayofWeek(getSessionValue('weekSpinner'),$currentYear));
                                 }
                                }else{
                                 echo $currentDay;   
