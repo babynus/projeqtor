@@ -3115,7 +3115,7 @@ function formatSortableWbs($wbs) {
   $result="";
   foreach ($exp as $node) {
     $result.=($result!='')?'.':'';
-    $result.=substr('000', 0, 3-strlen($node)).$node;
+    $result.=substr('00000', 0, 5-strlen($node)).$node;
   }
   return $result;
 }
