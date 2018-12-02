@@ -386,9 +386,9 @@ class GlobalPlanningElement extends SqlElement {
       $this->wbs=$rootWbs.'._#';
       if ($mode=='before') {
         $index=intval(substr($targetWbsSortable,-3)); // Get indice of predecessor       
-        $this->wbsSortable=substr($targetWbsSortable,0,-3).formatSortableWbs($index-1).'.999.500';
+        $this->wbsSortable=substr($targetWbsSortable,0,-3).formatSortableWbs($index-1).'.99999.50000';
       } else {
-        $this->wbsSortable=$targetWbsSortable.'.999.500';
+        $this->wbsSortable=$targetWbsSortable.'.99999.50000';
       }
       $this->saveWbs();
       $returnValue=i18n('moveDone');
