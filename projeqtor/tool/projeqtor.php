@@ -3814,7 +3814,7 @@ function sessionUserExists() {
 }
 
 /**
- * Get list of resources depending on access rights visibility : restricted on team or or organization or without rtestriction depending on spÃ©cific access rights
+ * Get list of resources depending on access rights visibility : restricted on team or or organization or without rtestriction depending on specific access rights
  * 
  * @param string $specific
  *          : type or scope of the list. Possible values are : 'imputation', 'diary', 'planning'
