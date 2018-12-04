@@ -57,10 +57,10 @@ INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess
 (3, 88, 1);
 
 INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`,`hasCsv`) VALUES
-(89, 'reportRequirementWeeklySynthesis', 8, 'RequirementOpenedSynthesis.php', 860, 0),
-(90, 'reportRequirementMonthlySynthesis', 8, 'RequirementOpenedSynthesis.php', 870, 0),
-(91, 'reportRequirementYearlySynthesis', 8, 'RequirementOpenedSynthesis.php', 880, 0),
-(92, 'reportRequirementGlobalSynthesis', 8, 'RequirementOpenedSynthesis.php', 890, 0);
+(89, 'reportRequirementWeeklySynthesis', 8, 'RequirementOpenedSynthesis.php', 885, 0),
+(90, 'reportRequirementMonthlySynthesis', 8, 'RequirementOpenedSynthesis.php', 886, 0),
+(91, 'reportRequirementYearlySynthesis', 8, 'RequirementOpenedSynthesis.php', 887, 0),
+(92, 'reportRequirementGlobalSynthesis', 8, 'RequirementOpenedSynthesis.php', 888   , 0);
 
 INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `idle`, `defaultValue`, `multiple`) VALUES
 (89, 'idProject', 'projectList', 10, 0, 'currentProject', 0),
@@ -80,7 +80,7 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (91,'requestor','requestorList',50,0,NULL,0),
 (92, 'idProject', 'projectList', 10, 0, 'currentProject', 0),
 (92, 'issuer', 'userList', 20, 0, null, 0),
-(92, 'responsible', 'resourceList', 30, 0, null, 0)
+(92, 'responsible', 'resourceList', 30, 0, null, 0),
 (92,'requestor','requestorList',40,0,NULL,0);
 
 INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
