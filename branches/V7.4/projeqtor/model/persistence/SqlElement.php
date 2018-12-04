@@ -4986,14 +4986,26 @@ abstract class SqlElement {
   }
 
   public static function getBaseUrl() {
-    // FIX FOR IIS
-    if (! isset ( $_SERVER ['REQUEST_URI'] )) {
-      $_SERVER ['REQUEST_URI'] = substr ( $_SERVER ['PHP_SELF'], 1 );
-      if (isset ( $_SERVER ['QUERY_STRING'] )) {
-        $_SERVER ['REQUEST_URI'] .= '?' . $_SERVER ['QUERY_STRING'];
+    if (isset ( $_SERVER ['REQUEST_URI'] )) {
+      $uri=$_SERVER ['REQUEST_URI'];
+    } else { // FIX FOR IIS
+      if (isset($_SERVER ['PHP_SELF'])) {
+        $uri = substr ( $_SERVER ['PHP_SELF'], 1 );
+        if (isset ( $_SERVER ['QUERY_STRING'] )) {
+          $uri .= '?' . $_SERVER ['QUERY_STRING'];
+        }
+      } else {
+        $uri='/view/main.php';
       }
     }
-    $url = (((isset ( $_SERVER ['HTTPS'] ) and strtolower ( $_SERVER ['HTTPS'] ) == 'on') or $_SERVER ['SERVER_PORT'] == '443') ? 'https://' : 'http://') . $_SERVER ['SERVER_NAME'] . (($_SERVER ['SERVER_PORT'] != '80' and $_SERVER ['SERVER_PORT'] != '443') ? ':' . $_SERVER ['SERVER_PORT'] : '') . $_SERVER ['REQUEST_URI'];
+    $port=(isset($_SERVER['SERVER_PORT']))?$_SERVER ['SERVER_PORT']:'80';
+    $https=(isset($_SERVER['HTTPS']))?$_SERVER ['HTTPS']:'off';
+    $serverName=(isset($_SERVER['SERVER_NAME']))?$_SERVER['SERVER_NAME']:'';
+    if ( (!$serverName or strlen($serverName)<=3) and isset($_SERVER['SERVER_ADDR'])) $serverName=$_SERVER['SERVER_ADDR'];
+    $url = ( ($https and strtolower($https)=='on') or $port=='443')?'https://':'http://'; 
+    $url.= $serverName;
+    $url.= ($port!='80' and $port!='443')?':'.$port:'';
+    $url.= $uri;
     $ref = "";
     if (strpos ( $url, '/tool/' )) {
       $ref .= substr ( $url, 0, strpos ( $url, '/tool/' ) );
