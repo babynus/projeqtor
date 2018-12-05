@@ -336,12 +336,9 @@
               if (property_exists($obj, $fld)) {
                 $queryOrderBy .= " " . $obj->getDatabaseTableName().".".$fld . " " . $sortWay;
               } else if (property_exists($obj,$objectClass.'PlanningElement') and property_exists($objectClass.'PlanningElement',$fld) ) {
-                $peClass=$objectClass.'PlanningElement';
-                $pe=new $peClass();
-                $queryOrderBy .= " ".$pe->getDatabaseTableName().".".$fld . " " . $sortWay;
+                $queryOrderBy .= " ".strtolower($objectClass)."planningelement.".$fld . " " . $sortWay;
               } else if (property_exists($obj,'WorkElement') and property_exists('WorkElement',$fld)) {
-                $we=new WorkElement();
-                $queryOrderBy .= " ".$we->getDatabaseTableName().".".$fld . " " . $sortWay;
+                $queryOrderBy .= " workelement.".$fld . " " . $sortWay;
               } else {
                 $queryOrderBy .= " " . $fld . " " . $sortWay;
               }
