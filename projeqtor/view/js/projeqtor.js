@@ -5371,7 +5371,11 @@ function refreshAbsenceCalendar(tabColor) {
 	    return false;
 	  }
 	  formInitialize();
-	  loadDiv('../view/refreshAbsenceCalendar.php', 'calendarDiv', 'listForm', false);
+	  showWait();
+	  var callback=function() {
+	    hideWait();
+	  };
+	  loadDiv('../view/refreshAbsenceCalendar.php', 'calendarDiv', 'listForm', callback);
 	  return true;
 }
 
@@ -5397,12 +5401,14 @@ function selectAbsenceDay(dateId, day, workDay, month, year, week, userId){
 	if(actId == ""){
 		dojo.byId('warningNoActivity').style.display = 'block';
 	}else {
+	  showWait();
 		dojo.byId('warningNoActivity').style.display = 'none';
 		var url='../tool/saveAbsence.php?day='+day+'&workDay='+workDay+'&month='+month+'&year='+year+'&week='+week+'&userId='+userId+'&workVal='+workVal+'&actId='+actId+'&idProject='+idProject+'&assId='+assId;
 		  dojo.xhrGet({
 		    url : url,
 		    handleAs : "text",
 		    load : function(data){
+		      hideWait();
 		    	refreshAbsenceCalendar();
 		    	if(data == 'warning'){
 		    		dojo.byId('warningExceedWork').style.display = 'block';
