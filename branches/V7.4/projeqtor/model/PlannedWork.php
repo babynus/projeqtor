@@ -1452,9 +1452,9 @@ scriptLog("storeListPlan(listPlan,$plan->id)");
   
   private static function sortPlanningElements($list,$listProjectsPriority) {
   	// first sort on simple criterias
-    $mainPriority="priority"; // Mey be set to "endDate"
+    $mainPriority="priority"; // May be set to "endDate" // TODO : finalize
     $str01=($mainPriority=='endDate')?'.00000000':'';
-    $str02=($mainPriority=='priority')?'.00000000':'';
+    //$str02=($mainPriority=='priority')?'.00000000':'';
     foreach ($list as $id=>$elt) {    
     	if ($elt->idPlanningMode=='16' or $elt->idPlanningMode=='6') { // FIXED
     		$crit='1'.$str01;
@@ -1479,21 +1479,21 @@ scriptLog("storeListPlan(listPlan,$plan->id)");
       }
       if (! $elt->leftWork or $elt->leftWork==0) {$prio=0;}
       $crit.=str_pad($projPrio,5,'0',STR_PAD_LEFT).'.'.str_pad($prio,5,'0',STR_PAD_LEFT);
-      if ($elt->idPlanningMode=='4' and $elt->validatedEndDate and $mainPriority=='priority') {
-        $crit.='.'.str_replace('-','',$elt->validatedEndDate);
-      } else {
-        $crit.=$str02;
-      }
+      //if (0 and $elt->idPlanningMode=='4' and $elt->validatedEndDate and $mainPriority=='priority') {
+      //  $crit.='.'.str_replace('-','',$elt->validatedEndDate);
+      //} else {
+      //  $crit.=$str02;
+      //}
       $crit.='.'.$elt->wbsSortable;
       $elt->_sortCriteria=$crit;
       $list[$id]=$elt;
     }
     //self::traceArray($list);
     $bool = uasort($list,array(new PlanningElement(), "comparePlanningElementSimple"));
-    //self::traceArray($list);
+    self::traceArray($list);
     // then sort on predecessors
     $result=self::specificSort($list);
-    //self::traceArray($result);
+    self::traceArray($result);
     return $result;
   }
   
