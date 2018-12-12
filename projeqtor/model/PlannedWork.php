@@ -1490,10 +1490,10 @@ scriptLog("storeListPlan(listPlan,$plan->id)");
     }
     //self::traceArray($list);
     $bool = uasort($list,array(new PlanningElement(), "comparePlanningElementSimple"));
-    self::traceArray($list);
+    //self::traceArray($list);
     // then sort on predecessors
     $result=self::specificSort($list);
-    self::traceArray($result);
+    //self::traceArray($result);
     return $result;
   }
   
