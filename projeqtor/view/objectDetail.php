@@ -650,6 +650,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     // - the x column headers
     // - the y line headers
     
+    //Doris #3687
     if (substr($col, 0, 10)=='_separator') {
       $decomp=explode("_", $col);
       $name = i18n($decomp[2]);
