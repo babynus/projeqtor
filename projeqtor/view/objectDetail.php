@@ -409,7 +409,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   scriptLog("drawTableFromObject(obj, included=$included, parentReadOnly=$parentReadOnly)");
   global $toolTip, $cr, $print, $treatedObjects, $displayWidth, $outMode, $comboDetail, $collapsedList, $printWidth, $profile, $detailWidth, $readOnly, $largeWidth, $widthPct, $nbColMax, $preseveHtmlFormatingForPDF, $reorg, $leftPane, $rightPane, $extraPane, $bottomPane, $nbColMax, $section, $beforeAllPanes, $colWidth;
   $ckEditorNumber=0; // Will be used only if getEditor=="CK" for CKEditor
-  
+
   if (property_exists($obj, '_sec_Assignment')) {
     $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$profile, 'scope'=>'assignmentView'));
     if ($habil and $habil->rightAccess!=1) {
@@ -906,8 +906,12 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     } else if ($col=='_spe_tickets' and !$obj->isAttributeSetTofield($col, 'hidden')) {
       drawTicketsList($obj);
       // END ADD qCazelles - Manage ticket at customer level - Ticket #87
-    }     // Add mOlives - ticket 215 - 09/05/2018
-    else if ($col=='_spe_activity' and !$obj->isAttributeSetTofield($col, 'hidden')) {
+      // Add mOlives - ticket 215 - 09/05/2018
+    } else if ($col == '_spe_subscriptions') {
+      $limitToActive = true;
+      if (isset($_REQUEST['showClosedSub']) and $_REQUEST['showClosedSub'] == true) $limitToActive = false;
+      drawSubscriptionsList($obj, false, $limitToActive);
+    } else if ($col=='_spe_activity' and !$obj->isAttributeSetTofield($col, 'hidden')) {
       drawActivityList($obj);
       // End mOlives - ticket 215 - 09/05/2018
     } else if (substr($col, 0, 5)=='_spe_') { // if field is _spe_xxxx, draw the specific item xxx
@@ -4450,6 +4454,66 @@ function drawContextSection($obj, $refresh=false) {
   }
 }
 // END qCazelles - Lang-Context
+
+function drawSubscriptionsList($obj, $refresh=false, $limitToActive) {
+  global $cr, $print, $user, $comboDetail;
+  if ($comboDetail) {
+    return;
+  }
+  $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
+  if ($obj->idle==1) {
+    $canUpdate=false;
+  }
+ 	$checked = '';
+ 	if (isset($_REQUEST['showClosedSub']) and $_REQUEST['showClosedSub'] == true) $checked = ' checked ';
+ 	echo '<div style="position:absolute;right:5px;top:2px;">';
+ 	echo '<label for="showClosedSub" class="dijitTitlePaneTitle" style="font-weight:normal !important;height:10px;width:250px">' . i18n('labelShowIdle') . '</label>';
+ 	echo '<div class="whiteCheck" title="'.i18n('labelShowIdle') .'" type="checkbox" id="showClosedSub" name="showClosedSub" value="showClosedSub" style="position:relative;left:5px" dojoType="dijit.form.CheckBox"'.$checked.'>';
+ 	echo '<script type="dojo/method" event="onChange"> loadContent("objectDetail.php?&showClosedSub='.(($checked=='')?true:false).'", "detailDiv", "listForm"); </script>';
+ 	echo '</div>';
+ 	echo '</div>';
+  
+  if (!$refresh) echo '<tr><td colspan="4">';
+  echo '<table style="width:100%;">';
+  echo '<tr>';
+  echo '<td class="linkHeader" style="width:25%">'.i18n('colType').'</td>';
+  echo '<td class="linkHeader" style="width:15%">'.i18n('colId').'</td>';
+  echo '<td class="linkHeader" style="width:60%">'.i18n('colName').'</td>';
+  echo '</tr>';
+  if (!$obj->id) {
+    $list=array();
+  } else if (get_class($obj)=='Contact') {
+    $where = 'idAffectable = ' . $obj->id;
+    $orderBy = 'refType, refId';
+    $sub=new Subscription();
+    $list=$sub->getSqlElementsFromCriteria(null, false, $where, $orderBy);
+  }
+  if (!isset($list)) $list=array();
+  
+  foreach ($list as $subscription) {
+    $item = new $subscription->refType($subscription->refId);
+    if (!$item or !$item->id or ($limitToActive and $item->idle == 1)) continue;
+    $canGoto=(securityCheckDisplayMenu(null, $subscription->refType) and securityGetAccessRightYesNo('menu'. $subscription->refType, 'read', $subscription)=="YES")?true:false;
+    echo '<tr>';
+    echo '<td class="linkData" style="white-space:nowrap;width:25%"><table><tr><td>' . htmlEncode(i18n($subscription->refType)) . '</td></tr></table>';
+    echo '</td><td class="linkData" style="white-space:nowrap;width:15%"><table><tr><td>' . formatIcon($subscription->refType, 16) . '</td><td style="vertical-align:top">&nbsp;'.'#' . $item->id . '</td></tr></table>';
+    echo '</td>';
+    $goto="";
+    if (!$print and $canGoto) {
+      $goto=' onClick="gotoElement('."'" . $subscription->refType ."','" . htmlEncode($item->id) . "'".');" style="cursor: pointer;" ';
+    }
+    echo '<td class="linkData" ' . $goto . ' style="position:relative">'; 
+    echo htmlEncode($item->name);
+    echo '</td>';
+    echo '</tr>';
+  }
+  
+  echo '</table>';
+  if (!$refresh) echo '</td></tr>';
+  if (!$print) {
+    echo '<input id="SubscriptionSectionCount" type="hidden" value="'.count($list).'" />';
+  }
+}
 
 // ADD qCazelles - Manage ticket at customer level - Ticket #87
 function drawTicketsList($obj, $refresh=false) {
