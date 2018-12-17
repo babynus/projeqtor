@@ -2898,12 +2898,14 @@ function drawDocumentVersionFromObject($list, $obj, $refresh=false) {
       //damian
       $canDownload = false;
       if ($obj->locked){
-        $download = Parameter::getGlobalParameter('lockDocumentDownload');
-        if($download == "YES" and $obj->idLocker == $user->id){
+        $forbidDownload = Parameter::getGlobalParameter('lockDocumentDownload');
+        if(($forbidDownload == "YES" and $obj->idLocker == $user->id) or $forbidDownload == "NO"){
           $canDownload = true;
         }
+      }else {
+        $canDownload = true;
       }
-      if (!$print and !$canDownload) {
+      if (!$print and $canDownload) {
         echo '<a href="../tool/download.php?class=DocumentVersion&id='.htmlEncode($version->id).'"';
         echo ' target="printFrame" title="'.i18n('helpDownload')."\n".(($preserveFileName=='YES')?$version->fileName:$version->fullName).'">'.formatSmallButton('Download').'</a>';
       }
