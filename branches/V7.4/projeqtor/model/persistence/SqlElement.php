@@ -5330,6 +5330,33 @@ abstract class SqlElement {
         }
       }
     }
+    // ADDITION BY papjul - Document Version details
+    if (isset ( $this->_DocumentVersion ) and is_array ( $this->_DocumentVersion )) {
+      $msg .= $rowStart . $sectionStart . i18n ( 'sectionDocumentVersion' ) . $sectionEnd . $rowEnd;
+      $documentVersion = new DocumentVersion ();
+      $documentVersions = $documentVersion->getSqlElementsFromCriteria ( array('idDocument' => $this->id), false, null, 'name desc' );
+      foreach ( $documentVersions as $documentVersion ) {
+        $name = $documentVersion->name;
+        $versionDate = $documentVersion->versionDate;
+        $msg .= $rowStart . $labelStart;
+        $msg .= $name;
+        $msg .= '<br />';
+        $msg .= htmlFormatDateTime ( $versionDate );
+        $msg .= $labelEnd . $fieldStart;
+        $msg .= $documentVersion->fileName;
+        $msg .= '<br />';
+        $text = new Html2Text ( $documentVersion->description );
+        $plainText = $text->getText ();
+        if (mb_strlen ( $plainText ) > 10000) { // Should not send too long email
+          $descriptionTruncated = nl2br ( mb_substr ( $plainText, 0, 10000 ) );
+          $msg .= $descriptionTruncated;
+        } else {
+          $msg .= $documentVersion->description;
+        }
+        $msg .= $fieldEnd . $rowEnd;
+      }
+    }
+    // End of ADDITION BY papjul - Document Version details
     if (isset ( $this->_Note ) and is_array ( $this->_Note )) {
       $msg .= $rowStart . $sectionStart . i18n ( 'sectionNote' ) . $sectionEnd . $rowEnd;
       $note = new Note ();
