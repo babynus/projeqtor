@@ -2890,7 +2890,15 @@ function drawDocumentVersionFromObject($list, $obj, $refresh=false) {
     echo '<tr>';
     if (!$print) {
       echo '<td class="assignData" style="text-align:center; white-space: nowrap;vertical-align:top;">';
-      if (!$print) {
+      //damian
+      $canDownload = false;
+      if ($obj->locked){
+        $download = Parameter::getGlobalParameter('lockDocumentDownload');
+        if($download == "YES"){
+          $canDownload = true;
+        }
+      }
+      if (!$print and !$canDownload) {
         echo '<a href="../tool/download.php?class=DocumentVersion&id='.htmlEncode($version->id).'"';
         echo ' target="printFrame" title="'.i18n('helpDownload')."\n".(($preserveFileName=='YES')?$version->fileName:$version->fullName).'">'.formatSmallButton('Download').'</a>';
       }

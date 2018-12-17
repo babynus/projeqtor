@@ -263,6 +263,7 @@ class Parameter extends SqlElement {
       case 'displayOnlyHandled': case 'setHandledOnRealWork': case 'setDoneOnNoLeftWork':
       case 'limitPlanningActivity' :
       case 'autoUpdateActivityStatus':
+      case 'lockDocumentDownload':
       case 'subscriptionAuto':
       case 'displayBusinessFeature':
       case 'displayListOfActivity':
@@ -720,6 +721,7 @@ class Parameter extends SqlElement {
       	                      'updateDeliverableResponsibleFromMilestone'=>'list',
       	                      'updateIncomingResponsibleFromMilestone'=>'list',
       	                      'autoUpdateActivityStatus'=>'list',
+      	                      'lockDocumentDownload'=>'list',
       	                    'menuMilestone'=>'section',
       	                      'manageMilestoneOnItems'=>'list',
       	                      'autoLinkMilestone'=>'list',
