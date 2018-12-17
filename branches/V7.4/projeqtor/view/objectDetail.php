@@ -2873,6 +2873,11 @@ function drawDocumentVersionFromObject($list, $obj, $refresh=false) {
       echo ' title="'.i18n('addDocumentVersion').'" > ';
       echo formatSmallButton('Add');
       echo '</a>';
+    }else if(!$canUpdate and $obj->idLocker == $user->id){
+      echo '<a onClick="addDocumentVersion('."'".key($statusTable)."'".",'".$typeEvo."'".",'".$num."'".",'".htmlEncode($vers->name)."'".",'".htmlEncode($vers->name)."'".');" ';
+      echo ' title="'.i18n('addDocumentVersion').'" > ';
+      echo formatSmallButton('Add');
+      echo '</a>';
     }
     echo '</td>';
   }
@@ -2894,7 +2899,7 @@ function drawDocumentVersionFromObject($list, $obj, $refresh=false) {
       $canDownload = false;
       if ($obj->locked){
         $download = Parameter::getGlobalParameter('lockDocumentDownload');
-        if($download == "YES"){
+        if($download == "YES" and $obj->idLocker == $user->id){
           $canDownload = true;
         }
       }
