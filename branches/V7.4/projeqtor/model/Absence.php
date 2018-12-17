@@ -73,7 +73,6 @@ class Absence{
     $max = 1;
     $assId = "";
     $idColor = 0;
-    global $tabColor;
     $tabColor = array();
     //Activity Table view
     
@@ -84,7 +83,6 @@ class Absence{
     $result .='     <td class="reportHeader" style="border-right: 1px solid grey; height:30px; width: 10%;">'.i18n('activityId').'</td>';
     $result .='     <td class="reportHeader" style="height:30px;">'.i18n('activityName').'</td>';
     $result .='   </tr>';
-
     
     $listActId="(";
     foreach ($listAct as $id=>$val){
@@ -119,17 +117,17 @@ class Absence{
       	}
     	  $actRowId = "actRow".$actId;
     	  if(!$idle){
-    	    $result .=' <tr class="absActivityRow dojoxGridRow" id="'.$actRowId.'" align="center" style="height:20px; border: 1px solid grey; cursor:pointer;" onClick="selectActivity('.$actRowId.','.$actId.','.$idProject.','.$assId.')">';
+    	  	$result .=' <tr class="absActivityRow dojoxGridRow" id="'.$actRowId.'" align="center" style="height:20px; border: 1px solid grey; cursor:pointer;" onClick="selectActivity('.$actRowId.','.$actId.','.$idProject.','.$assId.')">';
     	  }else{
-    	    $workClose = new Work();
-    	    $where3 = " refType = 'Activity' and refId = ".$actId." and idResource =".$userID." and year = ".$currentYear;
-    	    $listWorkClose = $workClose->getSqlElementsFromCriteria(null,false,$where3);
-    	    if($listWorkClose){
-    	      $result .=' <tr class="absActivityRow dojoxGridRow" id="'.$actRowId.'" align="center" style="background: #DDDDDD; height:20px; border: 1px solid grey;">';
-  	      }else {
-  	        continue;
-  	      }
-  	    }
+    	  	$workClose = new Work();
+    	  	$where3 = " refType = 'Activity' and refId = ".$actId." and idResource =".$userID." and year = ".$currentYear;
+    	  	$listWorkClose = $workClose->getSqlElementsFromCriteria(null,false,$where3);
+    	  	if($listWorkClose){
+    	  		$result .=' <tr class="absActivityRow dojoxGridRow" id="'.$actRowId.'" align="center" style="background: #DDDDDD; height:20px; border: 1px solid grey;">';
+    	  	}else {
+    	  		continue;
+    	  	}
+    	  }
     	  $result .= '   <input type="hidden" name="inputActId" id="inputActId" value=""/>';
     	  $result .= '   <input type="hidden" name="inputIdProject" id="inputIdProject" value=""/>';
     	  $result .= '   <input type="hidden" name="inputAssId" id="inputAssId" value=""/>';
@@ -141,7 +139,9 @@ class Absence{
     	  $idColor++;
     	}
     }
-    $tabColor = json_encode($tabColor);
+    if(!$idColor){
+      $result .='<div style="background:#FFDDDD;position:absolute;margin-left:20px;z-index:99;font-size:150%;color:#808080;text-align:center;padding:15px 0px;width:50%;top:6.5%;">'.i18n('noDataFound').'</div>';
+    }
     $listActId = substr($listActId, 0, -1);
     $listActId .= ')';
     $result .='</table>';
@@ -157,7 +157,7 @@ class Absence{
     }
     $result .='   <td>';
     $result .='   <div id="absenceInput" name="absenceInput" value="'.$max.'"
-                  		dojoType="dijit.form.NumberTextBox" constraints="{min:0.00,max:'.$max.'}"  required="true"
+                  		dojoType="dijit.form.NumberTextBox" constraints="{min:0,max:'.$max.'}"  required="true"
                   		style="width:50px; margin-top:4px; height:20px;">';
     $result .= $keyDownEventScript;
     $result .='   </div> ';
@@ -168,7 +168,7 @@ class Absence{
             . '   </span>&nbsp;';
     $result .='   <span id="absButton_0_5" style="width:40px; height:18px !important;" type="button" dojoType="dijit.form.Button" showlabel="true">'.($max/2)
             . '     <script type="dojo/method" event="onClick" >'
-            . '       dijit.byId("absenceInput").setAttribute("value" ,'.($max/2).');'
+            . '       dijit.byId("absenceInput").setAttribute("value" , '.($max/2).');'
             . '     </script>'
             . '    </span>&nbsp;';
     $result .='   <span id="absButton_0" style="width:40px; height:18px;" type="button" dojoType="dijit.form.Button" showlabel="true">0'
@@ -204,7 +204,7 @@ class Absence{
     $result="";
     $idColor = 0;
     $tabColor = array();
-    $colorTab= array('#f08080','#ffc266', '#ffff66','#84e184', '#87ceeb', '#ff66ff', '#c68c53', '#ff99cc');
+    $colorTab= array('#f08080','#ffc266', '#ffff66','#84e184', '#87ceeb', '#ff66ff', '#c68c53', '#ff99cc', '#ffeecc');
     
     $listActId="(";
     foreach ($listAct as $id=>$val){
@@ -294,6 +294,7 @@ class Absence{
     				    if($tabColor){
     				    $idColor = $tabColor[$idActWork];
     				    $background = $colorTab[$idColor];
+    				    debugLog($tabColor);
     				    $result.='<div style="background:'.$background.'; height:'.(($workV/1)*100).'%"> </div>';
     				  }
     				  }
@@ -327,7 +328,7 @@ class Absence{
 }
 
 function formatAbsenceColor($idColor, $size=20, $float='right') {
-	$color= array('#f08080','#ffc266', '#ffff66','#84e184', '#87ceeb', '#ff66ff', '#c68c53', '#ff99cc');
+	$color= array('#f08080','#ffc266', '#ffff66','#84e184', '#87ceeb', '#ff66ff', '#c68c53', '#ff99cc', '#ffeecc');
 	$radius=round($size/2,0);
 	$res='<div style="margin-left:2px; border: 1px solid #AAAAAA;background:'.$color[$idColor].';';
 	$res.='width:'.($size-2).'px;height:'.($size-2).'px;float:'.$float.';border-radius:'.$radius.'px"';
