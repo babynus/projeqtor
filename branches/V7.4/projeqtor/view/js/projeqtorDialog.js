@@ -8588,6 +8588,19 @@ function saveRestrictTypes() {
   dijit.byId('dialogRestrictTypes').hide();
 }
 
+/*************************************************************************************
+ * 				START FUNCTION RESTRICTION LIST
+ ************************************************************************************/
+
+function saveRestrictProductList() {
+	loadContent("../tool/saveRestrictProductList.php" , "resultDiv", "dialogRestrictProductListForm", true);
+	dijit.byId('dialogRestrictProductList').hide();
+}
+
+/*************************************************************************************
+ * 				END FUNCTION RESTRICTION LIST
+ ************************************************************************************/
+
 function getMaxWidth(document){
   return Math.max( document.scrollWidth, document.offsetWidth, 
       document.clientWidth);

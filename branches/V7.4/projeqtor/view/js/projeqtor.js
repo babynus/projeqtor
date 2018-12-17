@@ -3282,6 +3282,9 @@ function globalSave() {
   } else if (dijit.byId('dialogRestrictTypes')
       && dijit.byId('dialogRestrictTypes').open) {
     var button = dijit.byId('dialogRestrictTypesSubmit');
+  } else if (dijit.byId('dialogRestrictProductList')
+	  && dijit.byId('dialogRestrictProductList').open) {
+	var button = dijit.byId('dialogRestrictProductListSubmit');
   } else if (dojo.byId("editDependencyDiv") && dojo.byId("editDependencyDiv").style.display=="block") {
     dojo.byId("dependencyRightClickSave").click();
     return;
