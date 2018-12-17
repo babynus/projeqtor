@@ -86,7 +86,7 @@ abstract class SqlElement {
   public static $_doNotSaveLastUpdateDateTime=false;
   
   // Management of cache for queries : cache is only valid during current script
-  public static $_cachedQuery = array('Habilitation' => array(), 'Menu' => array(), 'PluginTriggeredEvent' => array(), 'Plugin' => array());
+  public static $_cachedQuery = array('Habilitation' => array(), 'Menu' => array(), 'PluginTriggeredEvent' => array(), 'Plugin' => array(), 'RestrictList'=>array());
   
   // Management of extraHiddenFileds per type, status or profile
   private static $_extraHiddenFields = null;

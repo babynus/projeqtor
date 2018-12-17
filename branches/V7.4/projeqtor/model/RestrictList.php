@@ -24,16 +24,19 @@
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
-/** ============================================================================
- * Project is the main object of the project managmement.
- * Almost all other objects are linked to a given project.
+/* ============================================================================
+ * List of orginable items
  */ 
 require_once('_securityCheck.php');
-class OriginalProductVersion extends OriginalVersion {
+class RestrictList extends SqlElement {
 
-    private static $_databaseTableName = 'version';
-    private static $_databaseCriteria = array('scope'=>'Product');
-    public $_constructForName;
+  // extends SqlElement, so has $id
+  public $id;    // redefine $id to specify its visible place 
+  public $idProfile;
+  public $showAll;
+  public $showStarted;
+  public $showDelivered;
+  public $showInService;
   
    /** ==========================================================================
    * Constructor
@@ -44,6 +47,7 @@ class OriginalProductVersion extends OriginalVersion {
     parent::__construct($id,$withoutDependentObjects);
   }
 
+  
    /** ==========================================================================
    * Destructor
    * @return void
@@ -52,32 +56,22 @@ class OriginalProductVersion extends OriginalVersion {
     parent::__destruct();
   }
 
-   /** ========================================================================
-   * Return the specific databaseTableName
-   * @return the databaseTableName
-   */
-  protected function getStaticDatabaseTableName() {
-    $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
-    return $paramDbPrefix . self::$_databaseTableName;
-  }
-  /** ========================================================================
-   * Return the specific database criteria
-   * @return the databaseTableName
-   */
-  protected function getStaticDatabaseCriteria() {
-    $prof= getSessionUser()->getProfile();
-    $rl = new RestrictList();
-    $crit = array("idProfile"=>$prof);
-    $result = $rl->getSingleSqlElementFromCriteria(get_class($rl), $crit);
-    $arrayToMerge = array();
-    if ($result->showInService == "1") {
-      $arrayToMerge["isEis"] = "1";
-    } else if ($result->showDelivered == "1") {
-      $arrayToMerge["isDelivered"] = "1";
-    } else if ($result->showStarted == "1") {
-      $arrayToMerge["isStarted"] = "1";
+// ============================================================================**********
+// MISCELLANOUS FUNCTIONS
+// ============================================================================**********
+  
+  function createSqlRow() {
+    $cpt=$this->countSqlElementsFromCriteria(null,"idProfile='$this->idProfile'");
+    if ($cpt == 0) {
+      $query = "INSERT INTO restrictlist (idProfile, showAll, showStarted, showDelivered, showInService) VALUES ($this->idProfile, 1, 0, 0, 0)";
+      Sql::query($query);
     }
-    return array_merge(self::$_databaseCriteria, $arrayToMerge);
+  }
+  
+  function getCheckedInfo() {
+    $arr = array("idProfile" => $this->idProfile);
+    $obj = $this->getSingleSqlElementFromCriteria(get_class($this), $arr);
+    return (array("showAll"=>$obj->showAll, "showStarted"=>$obj->showStarted, "showDelivered"=>$obj->showDelivered, "showInService"=>$obj->showInService));
   }
 }
 ?>

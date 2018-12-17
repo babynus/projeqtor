@@ -104,3 +104,13 @@ CREATE TABLE `${prefix}workflowprofile` (
   `checked` int(1) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `${prefix}restrictlist` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `idProfile` int(12) unsigned DEFAULT NULL,
+  `showAll` int(1),
+  `showStarted` int(1),
+  `showDelivered` int(1),
+  `showInService` int(1),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
