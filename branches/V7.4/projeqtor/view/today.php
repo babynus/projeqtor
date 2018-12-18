@@ -409,18 +409,28 @@
   }
   
   function showAssignedTasks() {
-  	$user=getSessionUser();
-  	$ass=new Assignment();
+    $user=getSessionUser();
+    $ass=new Assignment();
     $act=new Activity();
     $meet=new Meeting();
-  	$where="1=0";
-  	$whereTicket=$where;
-  	$whereDocument=$where;
+    $where="1=0";
+    $whereTicket=$where;
+    $whereDocument=$where;
     $whereActivity=" (exists (select 'x' from " . $ass->getDatabaseTableName() . " x " .
-      "where x.refType='Activity' and x.refId=" . $act->getDatabaseTableName() . ".id and x.idResource='" . Sql::fmtId($user->id) . "')" .
-      ") and idle=0 and done=0";
+        "where x.refType='Activity' and x.refId=" . $act->getDatabaseTableName() . ".id and x.idResource='" . Sql::fmtId($user->id) . "')" .
+        ") and idle=0 and done=0";
     $whereMeeting=str_replace(array('Activity',$act->getDatabaseTableName()), array('Meeting',$meet->getDatabaseTableName()), $whereActivity);
     showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting,$whereDocument, 'Today_WorkDiv', 'todayAssignedTasks');
+  }
+  
+  function showAccountableTasks() {
+    $user=getSessionUser();
+    $where="1=0";
+    $whereTicket="idAccountable='" . Sql::fmtId($user->id) . "' and idle=0 and done=0";
+    $whereActivity=$where;
+    $whereMeeting=$whereActivity;
+    $whereDocument=$whereMeeting;
+    showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting,$whereDocument, 'Today_AccDiv', 'todayAccountableTasks');
   }
   
   function showResponsibleTasks() {
@@ -428,7 +438,7 @@
     $ass=new Assignment();
     $act=new Activity();
     $where="(idResource='" . Sql::fmtId($user->id) . "'" .
-      ") and idle=0 and done=0";
+        ") and idle=0 and done=0";
     $whereTicket=$where;
     $whereActivity=$where;
     $whereMeeting=$whereActivity;
@@ -437,12 +447,12 @@
   }
   
   function showIssuerRequestorTasks() {
-  	$user=getSessionUser();
-  	$where="(idUser='" . Sql::fmtId($user->id) . "'" . 
-       ") and idle=0 and done=0";
-  	$whereTicket="(idUser='" . Sql::fmtId($user->id) . "'" . 
-       " or idContact='" . Sql::fmtId($user->id) . "'" .
-       ") and idle=0 and done=0";
+    $user=getSessionUser();
+    $where="(idUser='" . Sql::fmtId($user->id) . "'" .
+        ") and idle=0 and done=0";
+    $whereTicket="(idUser='" . Sql::fmtId($user->id) . "'" .
+        " or idContact='" . Sql::fmtId($user->id) . "'" .
+        ") and idle=0 and done=0";
     $whereActivity=$whereTicket;
     $whereMeeting=$where;
     $whereDocument="1=0";
@@ -554,8 +564,9 @@
            '  <td class="messageHeader" width="40%">' . ucfirst(i18n('colName')) . '</td>' . 
            '  <td class="messageHeader" width="8%">' . ucfirst(i18n('colDueDate')) . '</td>' . 
            '  <td class="messageHeader" width="12%">' . ucfirst(i18n('colIdStatus')) . '</td>' . 
-           '  <td class="messageHeader" width="5%" title="'. i18n('isIssuerOf') . '">' . ucfirst(i18n('colIssuerShort')) . '</td>' . 
-           '  <td class="messageHeader" width="5%" title="'. i18n('isResponsibleOf') . '">' . ucfirst(i18n('colResponsibleShort')) . '</td>' . 
+           '  <td class="messageHeader" width="3%" title="'. i18n('isIssuerOf') . '">' . ucfirst(i18n('colIssuerShort')) . '</td>' .
+           '  <td class="messageHeader" width="3%" title="'. i18n('isAccountableOf') . '">' . ucfirst(i18n('colAccountableShort')) . '</td>' . 
+           '  <td class="messageHeader" width="3%" title="'. i18n('isResponsibleOf') . '">' . ucfirst(i18n('colResponsibleShort')) . '</td>' . 
            '</tr>';     
     $cpt=0;
     $listEcheance=array();
@@ -639,6 +650,10 @@
              '  <td class="messageDataValue" style="'.$color.'" NOWRAP>' . htmlFormatDate($echeance) . '</td>' .
              '  <td class="messageData" style="'.$color.'">' . htmlDisplayColored($status,$statusColor) . '</td>' .
              '  <td class="messageDataValue" style="'.$color.'">' . htmlDisplayCheckbox($user->id==$elt->idUser) . '</td>' ;
+             if (property_exists($elt, 'idAccountable'))
+               echo  '  <td class="messageDataValue" style="'.$color.'">' . htmlDisplayCheckbox($user->id==$elt->idAccountable) . '</td>' ;
+             else
+               echo  '  <td class="messageDataValue" style="'.$color.'">' . htmlDisplayCheckbox(null) . '</td>' ;
              if(property_exists($elt, 'idAuthor')) {
                echo '  <td class="messageDataValue" style="'.$color.'">' . htmlDisplayCheckbox($user->id==$elt->idAuthor) . '</td>' ;
              } else {
@@ -844,7 +859,9 @@ foreach ($todayList as $todayItem) {
   }  else if ($todayItem->scope=='static' and $todayItem->staticSection=='AssignedTasks') {
     showAssignedTasks();
   } else if ($todayItem->scope=='static' and $todayItem->staticSection=='ResponsibleTasks') {
-    showResponsibleTasks();
+    showResponsibleTasks();  
+  } else if ($todayItem->scope=='static' and $todayItem->staticSection=='AccountableTasks') {
+    showAccountableTasks();
   } else if ($todayItem->scope=='static' and $todayItem->staticSection=='IssuerRequestorTasks') {
     showIssuerRequestorTasks();
   } else if ($todayItem->scope=='static' and $todayItem->staticSection=='Documents') { 
