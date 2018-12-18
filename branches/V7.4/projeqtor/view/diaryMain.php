@@ -127,7 +127,8 @@
             <td>
               <div title="<?php echo i18n('showIdleElements')?>" dojoType="dijit.form.CheckBox" 
                 class="whiteCheck" type="checkbox" id="showIdle" name="showIdle"
-                <?php if (sessionValueExists('showIdleDiary')){  if(getSessionValue('showIdleDiary')=='on'){ echo 'checked';}}?> >
+                <?php if (sessionValueExists('showIdleDiary')){  if(getSessionValue('showIdleDiary')=='on'){ echo 'checked';}}
+                else if (Parameter::getUserParameter('showIdleDefault')=='true'){ echo 'checked';}?> >
                 <script type="dojo/method" event="onChange" >
                   saveDataToSession('showIdleDiary',dijit.byId('showIdle').get("value"), false);
                   loadContent("../view/diary.php","detailDiv","diaryForm");
