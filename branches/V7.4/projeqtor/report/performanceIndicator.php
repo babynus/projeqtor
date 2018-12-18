@@ -116,9 +116,9 @@ if($element == 'activities' or $element =='both'){
   $queryWhere = "  WHERE $assTable.refType = 'Activity'";
   $queryWhere.= " AND $assTable.idProject in " . transformListIntoInClause($proj->getRecursiveSubProjectsFlatList(false, true));
   if($resource != ' '){
-    $queryWhere .= " AND $assTable.idResource = ".$resource;
+    $queryWhere .= " AND $assTable.idresource = ".$resource;
   }else{
-    $queryWhere .= " AND $assTable.idResource is not null ";
+    $queryWhere .= " AND $assTable.idresource is not null ";
   }
   if($startDateReport != null ){
     if($endDateReport != null && $endDateReport >= $today ){
