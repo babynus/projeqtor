@@ -394,7 +394,7 @@ class Parameter extends SqlElement {
         $list=array('false'=>i18n('displayNo'),
                     'true'=>i18n('displayYes'));
         break;
-      case 'restrictProjectList';
+      case 'restrictProjectList':case 'showIdleDefault';
         $list=array('false'=>i18n('displayNo'),
                     'true'=>i18n('displayYes'));
         break;
@@ -637,6 +637,7 @@ class Parameter extends SqlElement {
                            "maxColumns"=>'list',
                            "directAccessToComponentList"=>'list',
                            "restrictProjectList"=>'list',
+                           "showIdleDefault"=>'list',
                          'sectionPrintExport'=>'section',
                            'printHistory'=>'list',  
                            "printInNewWindow"=>"list",
