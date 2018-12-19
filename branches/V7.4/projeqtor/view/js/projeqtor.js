@@ -51,7 +51,7 @@ var quitConfirmed = false;
 var noDisconnect = false;
 var forceRefreshMenu = false;
 var directAccessIndex = null;
-
+	
 var debugPerf = new Array();
 
 var pluginMenuPage = new Array();
@@ -724,6 +724,7 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
     cleanLoadContentStack(page, destination, formName, isResultMessage, validationType, directAccess, silent, callBackFunction, noFading);
     return;
   }
+  filterStatus = document.getElementById('barFilterByStatus');
   if (contentNode && page.indexOf("destinationWidth=")<0) {
     destinationWidth = dojo.style(contentNode, "width");
     destinationHeight = dojo.style(contentNode, "height");
@@ -733,6 +734,13 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
         destinationWidth = dojo.style(widthNode, "width");
         destinationHeight = dojo.style(widthNode, "height");
       }
+    }
+    if (page.indexOf('diary.php') != -1) {
+		detailTop = dojo.byId('listDiv').offsetHeight;
+		detail = dojo.byId('detailDiv');
+        destinationHeight = dojo.byId('centerDiv').offsetHeight - detailTop;
+        detail.style.height = destinationHeight + "px";
+    	dojo.byId('detailDiv').style.top = detailTop + "px";
     }
     if (page.indexOf("?") > 0) {
       page += "&destinationWidth=" + destinationWidth + "&destinationHeight="
@@ -751,6 +759,21 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
   }
   if (page.indexOf("isIE=")<0) {
     page += ((page.indexOf("?") > 0) ? "&" : "?") + "isIE=" + ((dojo.isIE) ? dojo.isIE : '');
+  }
+  if (page.indexOf('diary.php') != -1) {
+	  page+="&diarySelectItems="+dijit.byId('diarySelectItems').value;
+	  if (dojo.byId('countStatus')) {
+	    	var filteringByStatus = false;
+	    	for (var i = 1; i <= dojo.byId('countStatus').value; i++) {
+	    		if (dijit.byId('showStatus' + i).checked) {
+	    			page += "&objectStatus" + i + "=" + dijit.byId('showStatus' + i).value;
+	    			filteringByStatus = true;
+	    		}
+	    	}
+	    	if (filteringByStatus) {
+	    		page += "&countStatus=" + dojo.byId('countStatus').value;
+	    	}
+	    }
   }
   if (!silent) showWait();
   // NB : IE Issue (<IE8) must not fade load
