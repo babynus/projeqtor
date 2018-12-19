@@ -1095,6 +1095,7 @@ class Parameter extends SqlElement {
   static public function getPlanningColumnDescription() {
     if (count(self::$planningColumnDescription)) return self::$planningColumnDescription;
     $arrayFields=array(
+        'Id'=>50,
         'Name'=>300,
         'StartDate'=>80,
         'EndDate'=>80,
@@ -1182,7 +1183,7 @@ class Parameter extends SqlElement {
   	}
   	$i=1;  	
   	foreach($arrayFieldsSorted as $order=>$column) {
-  	  $res[$i]=(!strpos($hidden,$column)>0)?$column:'Hidden'.$column;
+  	  $res[$i]=(!strpos($hidden,'|'.$column.'|')>0)?$column:'Hidden'.$column;
   	  $resAll[$i]=$column;
   		$i++;
   	}
