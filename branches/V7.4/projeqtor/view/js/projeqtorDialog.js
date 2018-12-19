@@ -7168,6 +7168,27 @@ function recalculateColumnSelectorName() {
 // Items selector
 // =========================================================
 var oldSelectedItems=null;
+
+function diarySelectItems(value) {
+	console.log(value);
+	  if (!oldSelectedItems || oldSelectedItems==value) return;
+	  if (oldSelectedItems.indexOf("All")>=0 && value.length>1 ) {
+	    value[0]=null;
+	    oldSelectedItems=value;
+	    dijit.byId("diarySelectItems").set("value",value);
+	  } else if (value.indexOf("All")>=0 && oldSelectedItems.indexOf("All")===-1) {
+	    value=["All"];
+	    oldSelectedItems=value;
+	    dijit.byId("diarySelectItems").set("value",value);
+	  }
+	  var finish=function() {
+          loadContent("../view/diary.php","detailDiv","diaryForm");
+	  };
+	  if (value.length==0) value='none';
+	  saveDataToSession('diarySelectedItems', value, true, finish);
+	  oldSelectedItems=value;
+}
+
 function globalViewSelectItems(value) {
   if (!oldSelectedItems || oldSelectedItems==value) return;
   if (oldSelectedItems.indexOf(" ")>=0 && value.length>1 ) {
