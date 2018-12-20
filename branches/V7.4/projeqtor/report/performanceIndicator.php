@@ -116,9 +116,9 @@ if($element == 'activities' or $element =='both'){
   $queryWhere = "  WHERE $assTable.refType = 'Activity'";
   $queryWhere.= " AND $assTable.idProject in " . transformListIntoInClause($proj->getRecursiveSubProjectsFlatList(false, true));
   if($resource != ' '){
-    $queryWhere .= " AND $assTable.idresource = ".$resource;
+    $queryWhere .= " AND $assTable.idResource = ".$resource;
   }else{
-    $queryWhere .= " AND $assTable.idresource is not null ";
+    $queryWhere .= " AND $assTable.idResource is not null ";
   }
   if($startDateReport != null ){
     if($endDateReport != null && $endDateReport >= $today ){
@@ -133,7 +133,7 @@ if($element == 'activities' or $element =='both'){
     $queryWhere .= "      OR $assTable.realStartDate IS NULL )";
  }
 
-  $queryOrder = " order by idresource, idactivity ;";
+  $queryOrder = " order by $assTable.idResource, $assTable.refId ;";
 
   $query=$querySelect.$queryFrom.$queryWhere.$queryOrder;
   $result=Sql::query($query);
@@ -706,7 +706,7 @@ function ticket($resource,$idProject,$startDateReport,$endDateReport,$today){
     $queryWhere .= " OR $tkTable.doneDateTime IS NULL )";
   }
   
-  $queryOrder = " order by idResource, idTicket, date ;";
+  $queryOrder = " order by $tkTable.idResource, $weTable.refId, $tkTable.doneDateTime ;";
   
   $query=$querySelect.$queryFrom.$queryWhere.$queryOrder;
   $result=Sql::query($query);
@@ -726,7 +726,6 @@ function ticket($resource,$idProject,$startDateReport,$endDateReport,$today){
       $tabResource[$idResource][$line['idticket']][1] = date('Y-m-d',strtotime($line['date']));
       $tabResource[$idResource][$line['idticket']][2] = ($line['realwork'] + $line['leftwork'] ) / ($line['plannedwork']) ;
   }
-  
   return $tabResource;
 }
 ?>
