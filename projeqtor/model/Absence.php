@@ -140,27 +140,32 @@ class Absence{
     	}
     }
     if(!$idColor){
-      $result .='<div style="background:#FFDDDD;position:absolute;margin-left:20px;z-index:99;font-size:150%;color:#808080;text-align:center;padding:15px 0px;width:50%;top:6.5%;">'.i18n('noDataFound').'</div>';
+      $result .='<div style="background:#FFDDDD;position:absolute;margin-left:20px;z-index:99;font-size:150%;color:#808080;text-align:center;padding:15px 0px;width:50%;top:6.5%;">'.i18n('noActivityOnAdmProjectFound').'</div>';
     }
     $listActId = substr($listActId, 0, -1);
     $listActId .= ')';
     $result .='</table>';
     
-    $result .='<table align="left" style="margin-top:50px; margin-left:100px;">';
+    $result .='<table align="left" style="margin-top:40px; margin-left:100px;">';
     $result .=' <tr>';
     $unitAbs = Parameter::getGlobalParameter('imputationUnit');
-    if($unitAbs == 'days'){
-      $result .=' <td style="margin-top:30px; height:20px;">'.i18n('numberOfDays').'&nbsp;</td>';
-    }else{
-      $result .=' <td style="margin-top:30px; height:20px;">'.i18n('numberOfHours').'&nbsp;</td>';
-      $max = Parameter::getGlobalParameter('dayTime');
-    }
-    $result .='   <td>';
-    $result .='   <div id="absenceInput" name="absenceInput" value="'.$max.'"
-                  		dojoType="dijit.form.NumberTextBox" constraints="{min:0,max:'.$max.'}"  required="true"
-                  		style="width:50px; margin-top:4px; height:20px;">';
+    $result .='   <td style="margin-top:30px; height:20px;">'.i18n('dailyAbsenceDuration');
+    $result .='     <div id="absenceInput" name="absenceInput" value="'.$max.'"
+                  		  dojoType="dijit.form.NumberTextBox" constraints="{min:0,max:'.$max.'}"  required="true"
+                  		      style="width:50px; margin-top:4px; height:20px;">';
     $result .= $keyDownEventScript;
-    $result .='   </div> ';
+    $result .='     </div> ';
+    $result .='   </td>';
+    if($unitAbs == 'days'){
+    	$result .=' <td style="margin-top:30px; height:20px;">&nbsp;'.i18n('day').'</td>';
+    }else{
+    	$result .=' <td style="margin-top:30px; height:20px;">&nbsp;'.i18n('hours').'</td>';
+    	$max = Parameter::getGlobalParameter('dayTime');
+    }
+    $result .=' </tr>';
+    $result .=' <tr><td>&nbsp;</td></tr>';
+    $result .=' <tr>';
+    $result .='   <td>';
     $result .='   <span id="absButton_1" style="width:40px; height:18px !important;" type="button" dojoType="dijit.form.Button" showlabel="true">'.$max
             . '     <script type="dojo/method" event="onClick" >'
             . '        dijit.byId("absenceInput").setAttribute("value" ,'.$max.');'
