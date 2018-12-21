@@ -114,3 +114,6 @@ CREATE TABLE `${prefix}restrictlist` (
   `showInService` int(1),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
+
+INSERT INTO `${prefix}parameter` (`id`, `idUser`, `idProject`, `parameterCode`, `parameterValue`) VALUES
+(NULL, NULL, NULL, 'authorizeActivityOnDeliveredProduct', 'YES');
