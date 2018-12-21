@@ -301,6 +301,7 @@ class Parameter extends SqlElement {
       case 'changeReferenceOnTypeChange': case 'rememberMe':
       case 'getVersion':
       case 'displayPoolsOnImputation':
+      case 'authorizeActivityOnDeliveredProduct' :
         $list=array('YES'=>i18n('displayYes'),
       	            'NO'=>i18n('displayNo'));
       	break;
@@ -788,6 +789,7 @@ class Parameter extends SqlElement {
                             'sortCompositionStructure'=>'list', //ADD qCazelles - Sort version composition-structure - Ticket 142
                             'manageComponentOnRequirement'=>'list',   //ADD qCazelles - Add Component to Requirement - Ticket 171
                             'dontAddClosedDeliveredVersionToProject'=>'list', //ADD qCazelles - Dont add closed and delivered versions to Project - Ticket 181
+                            'authorizeActivityOnDeliveredProduct'=>'list',
                           'columnConfigurationRight'=>'newColumn',
                         'tabFinancial'=>"tab",
                           'newColumnbFinancialLeft'=>'newColumn',

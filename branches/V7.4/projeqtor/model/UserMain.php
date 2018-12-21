@@ -128,6 +128,8 @@ class UserMain extends SqlElement {
   public $_visibleVersions;
   private $_visibleProductsIncludingClosed;
   private $_visibleVersionsIncludingClosed;
+  private $_visibleVersionsOnlyDelivered;
+  private $_visibleVersionsIncludingClosedOnlyDelivered;
   
   
    /** ==========================================================================
@@ -748,12 +750,13 @@ class UserMain extends SqlElement {
    * and their sub projects
    * @return a list of projects id
    */
-  public function getVisibleVersions($limitToActiveProjects=true) {
-    if ($limitToActiveProjects and $this->_visibleVersions) {
-      return $this->_visibleVersions;
-    }
-    if (! $limitToActiveProjects and $this->_visibleVersionsIncludingClosed) {
-      return $this->_visibleVersionsIncludingClosed;
+  public function getVisibleVersions($limitToActiveProjects=true, $limitToNotDeliveredProducts=false) {
+    if (!$limitToNotDeliveredProducts) {
+      if ($limitToActiveProjects and $this->_visibleVersions) return $this->_visibleVersions;
+      if (!$limitToActiveProjects and $this->_visibleVersionsIncludingClosed) return $this->_visibleVersionsIncludingClosed;
+    } else {
+    	if ($limitToActiveProjects and $this->_visibleVersionsOnlyDelivered) return $this->_visibleVersionsOnlyDelivered;
+    	if (!$limitToActiveProjects and $this->_visibleVersionsIncludingClosedOnlyDelivered) return $this->_visibleVersionsIncludingClosedOnlyDelivered;
     }
     $result=array();
     $prjList=$this->getVisibleProjects($limitToActiveProjects);
@@ -764,14 +767,17 @@ class UserMain extends SqlElement {
             ."where existV.id=existVP.idVersion and existVP.idProject in ".transformListIntoInClause($prjList)
             .")";
     if (securityGetAccessRight('menuProject', 'read')=='ALL') $clauseWhere="1=1"; // Can see all projects, so can see all versions
+    if ($limitToNotDeliveredProducts) $clauseWhere.=' and isDelivered = 0';
     $versList=$v->getSqlElementsFromCriteria(null,false,$clauseWhere);
     foreach ($versList as $vers) {
       $result[$vers->id]=$vers->name;
     }
-    if ($limitToActiveProjects) {
-      $this->_visibleVersions=$result;
+    if (!$limitToNotDeliveredProducts) {
+      if ($limitToActiveProjects) $this->_visibleVersions=$result;
+      else $this->_visibleVersionsIncludingClosed=$result;
     } else {
-      $this->_visibleVersionsIncludingClosed=$result;
+    	if ($limitToActiveProjects) $this->_visibleVersionsOnlyDelivered=$result;
+    	else $this->_visibleVersionsIncludingClosedOnlyDelivered=$result;
     }
     return $result;
   }
