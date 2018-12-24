@@ -2873,12 +2873,12 @@ function drawDocumentVersionFromObject($list, $obj, $refresh=false) {
     reset($statusTable);
     echo '<td class="assignHeader" style="width:10%">';
     if ($obj->id!=null and !$print and $canUpdate and !$obj->idle) {
-      echo '<a onClick="addDocumentVersion('."'".key($statusTable)."'".",'".$typeEvo."'".",'".$num."'".",'".htmlEncode($vers->name)."'".",'".htmlEncode($vers->name)."'".');" ';
+      echo '<a onClick="addDocumentVersion('."'".key($statusTable)."'".",'".$typeEvo."'".",'".$num."'".",'".htmlEncode($vers->name)."'".",'".htmlEncode($vers->name)."',".$obj->locked.');" ';
       echo ' title="'.i18n('addDocumentVersion').'" > ';
       echo formatSmallButton('Add');
       echo '</a>';
     }else if(!$canUpdate and $obj->idLocker == $user->id){
-      echo '<a onClick="addDocumentVersion('."'".key($statusTable)."'".",'".$typeEvo."'".",'".$num."'".",'".htmlEncode($vers->name)."'".",'".htmlEncode($vers->name)."'".');" ';
+      echo '<a onClick="addDocumentVersion('."'".key($statusTable)."'".",'".$typeEvo."'".",'".$num."'".",'".htmlEncode($vers->name)."'".",'".htmlEncode($vers->name)."',".$obj->locked.');" ';
       echo ' title="'.i18n('addDocumentVersion').'" > ';
       echo formatSmallButton('Add');
       echo '</a>';
