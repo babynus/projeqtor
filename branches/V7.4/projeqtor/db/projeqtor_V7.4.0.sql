@@ -117,3 +117,6 @@ CREATE TABLE `${prefix}restrictlist` (
 
 INSERT INTO `${prefix}parameter` (`id`, `idUser`, `idProject`, `parameterCode`, `parameterValue`) VALUES
 (NULL, NULL, NULL, 'authorizeActivityOnDeliveredProduct', 'YES');
+
+INSERT INTO `${prefix}linkable` (`id`,`name`, `idle`, `idDefaultLinkable`) VALUES 
+(31,'CallForTender', null,0);
