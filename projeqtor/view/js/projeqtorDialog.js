@@ -2649,7 +2649,7 @@ function expenseDetailRecalculate() {
  * Display a add Document Version Box
  * 
  */
-function addDocumentVersion(defaultStatus, typeEvo, numVers, dateVers, nameVers) {
+function addDocumentVersion(defaultStatus, typeEvo, numVers, dateVers, nameVers, lockStatus) {
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
     return;
@@ -2665,7 +2665,7 @@ function addDocumentVersion(defaultStatus, typeEvo, numVers, dateVers, nameVers)
           data) {
         saveDocumentVersionProgress(data);
       });
-      addDocumentVersion(defaultStatus, typeEvo, numVers, dateVers, nameVers);
+      addDocumentVersion(defaultStatus, typeEvo, numVers, dateVers, nameVers, lockStatus);
     };
     loadDialog('dialogDocumentVersion', callBack);
     return;
@@ -2714,6 +2714,11 @@ function addDocumentVersion(defaultStatus, typeEvo, numVers, dateVers, nameVers)
   dojo.byId('documentVersionMode').value="add";
   calculateNewVersion();
   setDisplayIsRefDocumentVersion();
+  if(lockStatus==1){
+	dojo.byId("lockedMsg").style.display = 'block';
+  }else{
+    dojo.byId("lockedMsg").style.display = 'none';  
+  }
   dijit.byId("dialogDocumentVersion").show();
 }
 
