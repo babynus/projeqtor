@@ -6478,7 +6478,7 @@ function drawTabExpense($obj, $refresh=false) {
   
   $clauseStatus=transformListIntoInClause(SqlList::getListWithCrit('tenderStatus', array('isSelected'=>'1')));
   $providerTender = new Tender();
-  $listTender = $providerTender->getSqlElementsFromCriteria(null,false,"idTenderStatus in $clauseStatus and idProjectExpense=$obj->id ");
+  $listTender = $providerTender->getSqlElementsFromCriteria(null,false,"idProjectExpense=$obj->id ");
   $untaxedAmount = 0;
   $fullAmount = 0;
   foreach ($listTender as $tender ){
