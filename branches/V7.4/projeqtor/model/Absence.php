@@ -53,9 +53,8 @@ class Absence{
     Assignment::insertAdministrativeLines($userID);
     //Get administrative project list 
     $proj = new Project();
-    $listIdProjAdm = $proj->getAdminitrativeProjectList(true);
     $act = new Activity();
-    $where = "idProject in " . Project::getAdminitrativeProjectList() ;
+    $where = "idProject in " . Project::getAdminitrativeProjectList(false,false);    
     //$where .= "and idle = 0 ";
     $listAct = $act->getSqlElementsFromCriteria(null,false,$where,"idProject asc");
     $ass = new Assignment();
@@ -193,9 +192,8 @@ class Absence{
   static function drawCalandarDiv($userID, $currentYear){
     // Activity calendar view
     $proj = new Project();
-    $listIdProjAdm = $proj->getAdminitrativeProjectList(true);
     $act = new Activity();
-    $where = "idProject in " . Project::getAdminitrativeProjectList() ;
+    $where = "idProject in " . Project::getAdminitrativeProjectList(false,false) ;
     //$where .= "and idle = 0 ";
     $listAct = $act->getSqlElementsFromCriteria(null,false,$where,"idProject asc");
     $ass = new Assignment();
@@ -212,33 +210,37 @@ class Absence{
     $colorTab= array('#f08080','#ffc266', '#ffff66','#84e184', '#87ceeb', '#ff66ff', '#c68c53', '#ff99cc', '#ffeecc');
     
     $listActId="(";
-    foreach ($listAct as $id=>$val){
-    	foreach ($listAct[$id] as $id2=>$val2){
-    		if ($id2 == 'id') {
-    			$listActId.= $val2 .',';
-    			$actId = htmlEncode($val2);
-    		}
-    		if ($id2 == 'idProject') {
-    			$idProject = $val2;
-    		}
-    	}
-    	if($actId != null and $userID != null ){
-    		$where2 = "refType = 'Activity' and refId = ".$actId." and idResource =".$userID;
-    		$listAss = $ass->getSqlElementsFromCriteria(null,false,$where2);
-    	}else{
-    		continue;
-    	}
-    	foreach ($listAss as $id3=>$val3){
-    		foreach ($listAss[$id3] as $id4=>$val4){
-    			if ($id4 == 'id') {
-    				$assId = htmlEncode($val4);
-    			}
-    		}
-    		$tabColor[$actId]=$idColor;
-    		$idColor++;
-    	}
+    if (count($listAct)>0) {
+      foreach ($listAct as $id=>$val){
+      	foreach ($listAct[$id] as $id2=>$val2){
+      		if ($id2 == 'id') {
+      			$listActId.= $val2 .',';
+      			$actId = htmlEncode($val2);
+      		}
+      		if ($id2 == 'idProject') {
+      			$idProject = $val2;
+      		}
+      	}
+      	if($actId != null and $userID != null ){
+      		$where2 = "refType = 'Activity' and refId = ".$actId." and idResource =".$userID;
+      		$listAss = $ass->getSqlElementsFromCriteria(null,false,$where2);
+      	}else{
+      		continue;
+      	}
+      	foreach ($listAss as $id3=>$val3){
+      		foreach ($listAss[$id3] as $id4=>$val4){
+      			if ($id4 == 'id') {
+      				$assId = htmlEncode($val4);
+      			}
+      		}
+      		$tabColor[$actId]=$idColor;
+      		$idColor++;
+      	}
+      }
+      $listActId = substr($listActId, 0, -1);
+    } else {
+        $listActId .= 0;
     }
-    $listActId = substr($listActId, 0, -1);
     $listActId .= ')';
     
     $today=date('Y-m-d');
@@ -279,8 +281,12 @@ class Absence{
     		$result.= '<td id="'.$dateId.'" class="calendar" style="'.$style.'">';
     		$transHeight = 100;
     		$workHeigth = 0;
-    		$onClick = 'onClick="selectAbsenceDay(\''.$dateId.'\',\''.$dateDay.'\',\''.$workDay.'\',\''.$month.'\',\''.$year.'\',\''.$week.'\',\''.$userID.'\')"';
-    		if($isOpen){
+        if ($listActId<>"(0)") {
+    		  $onClick = 'onClick="selectAbsenceDay(\''.$dateId.'\',\''.$dateDay.'\',\''.$workDay.'\',\''.$month.'\',\''.$year.'\',\''.$week.'\',\''.$userID.'\')"';
+        } else {
+          $onClick="";
+        }    		
+        if($isOpen){
     		  $result.= '<div style="position:relative; width:30px; height:30px;"'.$onClick.'>';
     		}else{
     			$result.= '<div style="position:relative; width:30px; height:30px;">';
