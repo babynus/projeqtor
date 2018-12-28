@@ -2452,7 +2452,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo ' constraints="{min:2000,max:2100,pattern:\'###0\'}" ';
         } else if ($max) {
           //gautier min amount
-          $arrayPossibleNegativeAmounts=array('update3Amount','update3FullAmount','update4Amount','update4FullAmount',
+          $arrayPossibleNegativeAmounts=array('update1Amount','update1FullAmount','update2Amount','update2FullAmount',
+          		                                'update3Amount','update3FullAmount','update4Amount','update4FullAmount',
                                               'addUntaxedAmount','addFullAmount','availableAmount','availableFullAmount',
                                               'leftAmount','leftFullAmount','reserveAmount','totalLeftCost', 'totalPlannedCost',
           		                                'marginCost'
