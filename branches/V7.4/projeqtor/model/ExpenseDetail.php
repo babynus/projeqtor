@@ -1,4 +1,5 @@
 <?php 
+use Spipu\Html2Pdf\Tests\ExamplesTest;
 /*** COPYRIGHT NOTICE *********************************************************
  *
  * Copyright 2009-2017 ProjeQtOr - Pascal BERNARD - support@projeqtor.org
@@ -130,5 +131,6 @@ class ExpenseDetail extends SqlElement {
     }
     return $result;
   }
+
 }
 ?>
