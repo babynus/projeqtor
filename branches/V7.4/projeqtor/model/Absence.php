@@ -306,7 +306,6 @@ class Absence{
     				    if($tabColor){
     				    $idColor = $tabColor[$idActWork];
     				    $background = $colorTab[$idColor];
-    				    debugLog($tabColor);
     				    $result.='<div style="background:'.$background.'; height:'.(($workV/1)*100).'%"> </div>';
     				  }
     				  }
