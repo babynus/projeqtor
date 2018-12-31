@@ -139,43 +139,44 @@ class Absence{
     	}
     }
     if(!$idColor){
-      $result .='<div style="background:#FFDDDD;position:absolute;margin-left:20px;z-index:99;font-size:150%;color:#808080;text-align:center;padding:15px 0px;width:50%;top:6.5%;">'.i18n('noActivityOnAdmProjectFound').'</div>';
+      $result .='<tr><td colspan="3">'; 
+      $result .='<div style="background:#FFDDDD;font-size:150%;color:#808080;text-align:center;padding:15px 0px;width:100%;">'.i18n('noActivityOnAdmProjectFound').'</div>';
+      $result .='</td></tr>';
     }
     $listActId = substr($listActId, 0, -1);
     $listActId .= ')';
     $result .='</table>';
     
-    $result .='<table align="left" style="margin-top:40px; margin-left:100px;">';
+    $result .='<table align="left" style="margin-top:20px; margin-left:100px;">';
     $result .=' <tr>';
     $unitAbs = Parameter::getGlobalParameter('imputationUnit');
-    $result .='   <td style="margin-top:30px; height:20px;">'.i18n('dailyAbsenceDuration');
+    $result .='   <td style="margin-top:10px; height:20px;">'.i18n('dailyAbsenceDuration');
     $result .='     <div id="absenceInput" name="absenceInput" value="'.$max.'"
                   		  dojoType="dijit.form.NumberTextBox" constraints="{min:0,max:'.$max.'}"  required="true"
-                  		      style="width:50px; margin-top:4px; height:20px;">';
+                  		      style="width:30px; margin-top:4px; height:20px;">';
     $result .= $keyDownEventScript;
     $result .='     </div> ';
     $result .='   </td>';
     if($unitAbs == 'days'){
-    	$result .=' <td style="margin-top:30px; height:20px;">&nbsp;'.i18n('day').'</td>';
+    	$result .=' <td style="margin-top:30px; height:20px;width:55px">&nbsp;'.i18n('day').'</td>';
     }else{
-    	$result .=' <td style="margin-top:30px; height:20px;">&nbsp;'.i18n('hours').'</td>';
+    	$result .=' <td style="margin-top:30px; height:20px;width:40px">&nbsp;'.i18n('hours').'</td>';
     	$max = Parameter::getGlobalParameter('dayTime');
     }
     $result .=' </tr>';
-    $result .=' <tr><td>&nbsp;</td></tr>';
-    $result .=' <tr>';
-    $result .='   <td>';
-    $result .='   <span id="absButton_1" style="width:40px; height:18px !important;" type="button" dojoType="dijit.form.Button" showlabel="true">'.$max
+    $result .=' <tr style="height:20px">';
+    $result .='   <td colspan="3" style="padding-top:5px;text-align:right">';
+    $result .='   <span id="absButton_1" style="width:40px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.$max
             . '     <script type="dojo/method" event="onClick" >'
             . '        dijit.byId("absenceInput").setAttribute("value" ,'.$max.');'
             . '     </script>'
             . '   </span>&nbsp;';
-    $result .='   <span id="absButton_0_5" style="width:40px; height:18px !important;" type="button" dojoType="dijit.form.Button" showlabel="true">'.($max/2)
+    $result .='   <span id="absButton_0_5" style="width:40px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.($max/2)
             . '     <script type="dojo/method" event="onClick" >'
             . '       dijit.byId("absenceInput").setAttribute("value" , '.($max/2).');'
             . '     </script>'
             . '    </span>&nbsp;';
-    $result .='   <span id="absButton_0" style="width:40px; height:18px;" type="button" dojoType="dijit.form.Button" showlabel="true">0'
+    $result .='   <span id="absButton_0" style="width:40px;" type="button" dojoType="dijit.form.Button" showlabel="true">0'
             . '     <script type="dojo/method" event="onClick" >'
             . '       dijit.byId("absenceInput").setAttribute("value" ,0);'
             . '     </script>'
@@ -184,8 +185,8 @@ class Absence{
     $result .=' </tr>';
     $result .='</table>';
     $result .='</div>';
-    $result .='<div id="warningExceedWork" class="messageWARNING" style="z-index:99;display: none; text-align: center; position:absolute; top:45%;margin-left: 32%; height:20px; width: 35%;">'.i18n('exceedWork').'</div></br>';
-    $result .='<div id="warningNoActivity" class="messageWARNING" style="z-index:99;display: none; text-align: center; position:absolute; top:45%;margin-left: 32%; height:20px; width: 35%;">'.i18n('noActivitySelected').'</div></br>';
+    $result .='<div id="warningExceedWork" class="messageWARNING" style="z-index:99;display: none; text-align: center; position:absolute; top:45%;margin-left: 32%; height:20px; width: 35%;padding-top:12px">'.i18n('exceedWork').'</div></br>';
+    $result .='<div id="warningNoActivity" class="messageWARNING" style="z-index:99;display: none; text-align: center; position:absolute; top:45%;margin-left: 32%; height:20px; width: 35%;padding-top:12px">'.i18n('noActivitySelected').'</div></br>';
     echo $result;
   }
   

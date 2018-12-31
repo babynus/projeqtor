@@ -74,11 +74,12 @@ if ($workVal == 0){
     //put parameter in work object
     $work->refType = 'Activity';
     $work->refId = $actId;
-    $work->day = $day;
-    $work->workDate = $workDay;
-    $work->month = $month;
-    $work->year = $year;
-    $work->week = $week;
+    $work->setDates($workDay);
+    //$work->workDate = $workDay;
+    //$work->day = $day;
+    //$work->month = $month;
+    //$work->year = $year;
+    //$work->week = $week;
     $work->idResource = $userId;
     if($unitAbs != 'days'){
     	$workVal = $workVal/$maxHour;
