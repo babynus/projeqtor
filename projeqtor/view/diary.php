@@ -450,7 +450,6 @@ function getAllActivities($startDate, $endDate, $ress, $selectedTypes, $showDone
 	  $selectedTypes = str_replace(",", "','", $selectedTypes);
 	  $critWhere.=" AND refType IN ('$selectedTypes')";
 	}
-	debugLog($critWhere);
 	$pwList=$pw->getSqlElementsFromCriteria(null,false,$critWhere);
 	$wList=$w->getSqlElementsFromCriteria(null,false,$critWhere);
 	$workList=array_merge($pwList,$wList);

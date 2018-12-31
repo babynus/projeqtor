@@ -153,7 +153,6 @@ class EmailTemplate extends SqlElement {
         }
       }
       $arrayFields = $newArrayFields;
-      debugLog($arrayFields);
       $fieldAttributes=$this->getFieldAttributes($item);
       if(strpos($fieldAttributes,'required')!==false) {
       	$isRequired = true;
