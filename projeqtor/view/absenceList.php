@@ -89,8 +89,8 @@ $yearSpinner = $currentYear;
               constraints="{min:2000,max:2100,places:0,pattern:'###0'}"
               intermediateChanges="true"
               maxlength="4" class="roundedLeft"
-              value="<?php if(sessionValueExists('yearSpinner')){
-                              $yearSpinner = getSessionValue('yearSpinner') ;
+              value="<?php if(sessionValueExists('yearSpinnerAbsence')){
+                              $yearSpinner = getSessionValue('yearSpinnerAbsence') ;
                             echo $yearSpinner;
                            }else{
                             echo $currentYear;    
@@ -98,7 +98,7 @@ $yearSpinner = $currentYear;
               smallDelta="1"
               id="yearSpinner" name="yearSpinner" >
               <script type="dojo/method" event="onChange" >
-                   saveDataToSession("yearSpinner",dijit.byId('yearSpinner').get('value'),false);
+                   saveDataToSession("yearSpinner",dijit.byId('yearSpinnerAbsence').get('value'),false);
                    refreshAbsenceList();
               </script>
             </div>
