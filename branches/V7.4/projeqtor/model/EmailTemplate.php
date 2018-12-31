@@ -39,6 +39,7 @@ class EmailTemplate extends SqlElement {
     public $idType;
     public $title;
     public $idle;
+    public $_sec_message;
     public $template;
     public $_sec_void;
     //Damian
@@ -173,10 +174,10 @@ class EmailTemplate extends SqlElement {
       
       //$colScript  = '';
       
-      $result  = '<tr class="detail generalRowClass">';
-      $result .= '<td class="label" style="font-weight:normal;">' . i18n("col".ucfirst($itemLab));
-      $result .= '&nbsp;:&nbsp;</td>';
-      $result .= '<td>';
+      $result  = '<table><tr class="detail generalRowClass">';
+      $result .= '<td class="label" style="font-weight:normal;"><label>' . i18n("col".ucfirst($itemLab));
+      $result .= '&nbsp;:&nbsp;</label></td>';
+      $result .= '<td style="border:1px solid red">';
       $result .= '<select dojoType="dijit.form.Select" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$item.'Class"';
       $result .= '  style="width: ' . ($fieldWidth-150) . 'px;' . $fieldStyle . '; "';
       $result .= $name;
@@ -195,18 +196,19 @@ class EmailTemplate extends SqlElement {
       }
       //$result .=$colScript;
       $result .="</select></td>";
-      $result .= '</tr>';
+      $result .= '</tr></table>';
       return $result;
     }
     
     public function drawButtonInsertField($item) {
     	global $largeWidth, $toolTip, $print, $outMode;
-    
+      if ($print) return '';
+      
     	$itemEnd = str_replace("buttonAddIn","", $item);
     	$editor = getEditorType();
     	$textBox = strtolower($itemEnd);;
-    	$result  = '<div style="position:relative;width:'.($largeWidth+145).'px;">';
-    	$result .= '<button id="_spe_'.$item.'" dojoType="dijit.form.Button" showlabel="true" style="position:absolute;top:-24px;right:0px;width:90px;height:17px">';
+    	$result  = '<div style="position:relative;left:155px;top:-2px">';
+    	$result .= '<button id="_spe_'.$item.'" dojoType="dijit.form.Button" showlabel="true" style="position:absolute;top:-24px;right:0px;width:145px;height:17px">';
     	$result .= i18n('operationInsert');
     	$result .= '<script type="dojo/connect" event="onClick" args="evt">';
     	$result .= '  addFieldInTextBoxForEmailTemplateItem("'.$editor.'");';

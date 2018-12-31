@@ -4776,59 +4776,48 @@ function addFieldInTextBoxForNotificationItem(context, textBox, editor) {
 //Damian
 function addFieldInTextBoxForEmailTemplateItem(editor) {
 	
-    var selectedItem = dijit.byId('_spe_listItemTemplate').get("value");
-    var idTextBox = dojo.byId('template').value;
-    var element = document.getElementById('template');
-    var context = '_spe_listItemTemplate';
-    var textBox = 'template';
-    
-    if (editor==='text' || textBox!=='template') {
-        var val = element.value;
-        cursPos = val.slice(0, element.selectionStart).length;
-      } else if (editor==='CK' || editor==='CKInline') {
-        var val = CKEDITOR.instances[textBox].getData();
-        cursPos = val.length;
-      } else if (editor==='Dojo' || editor==='DojoInline') {
-        var val = dijit.byId(textBox+'Editor').getValue();
-        cursPos = val.length;
-      }
+  var selectedItem = dijit.byId('_spe_listItemTemplate').get("value");
+  var idTextBox = dojo.byId('template').value;
+  var element = document.getElementById('template');
+  var context = '_spe_listItemTemplate';
+  var textBox = 'template';
+  
+  if (editor==='text' || textBox!=='template') {
+    var val = element.value;
+    cursPos = val.slice(0, element.selectionStart).length;
+  } else if (editor==='CK' || editor==='CKInline') {
+    var val = CKEDITOR.instances[textBox].getData();
+    console.log(val);
+    cursPos = val.length;
+  } else if (editor==='Dojo' || editor==='DojoInline') {
+    var val = dijit.byId(textBox+'Editor').getValue();
+    cursPos = val.length;
+  }
 
-      if (editor=='text' && textBox!=='template') {
-          oldText = idTextBox.getValue();
-      } else {
-          oldText = val;
-      }
-      
-      if (context === 'Receiver') {
-        if (oldText.length>0) {
-          textToAdd=';';            
-        } else {
-          textToAdd='';
-        }    
-      } else {
-          textToAdd = '${';
-      }    
-      if (selectedItem.search('name') != 0 && selectedItem.search('id') != 0) {
-          textToAdd=textToAdd + 'id' + selectedItem.charAt(0).toUpperCase() + selectedItem.substring(1);
-      }else{
-    	  textToAdd=textToAdd + selectedItem;
-      }
-      if (context !== 'Receiver') {
-          textToAdd=textToAdd + "}";            
-      }
-      if (context==="Receiver") {
-          newText = oldText + textToAdd;
-      } else {
-          newText = oldText.substr(0, cursPos) + textToAdd + oldText.substr(cursPos);        
-      }
-      
-      if (editor==='text' || textBox!=='template') {
-          idTextBox.setValue(newText);
-      } else if (editor==='CK' || editor==='CKInline') {
-         CKEDITOR.instances[textBox].setData(newText);
-      } else if (editor==='Dojo' || editor==='DojoInline') {    
-         dijit.byId(textBox+'Editor').setValue(newText)
-      }
+  if (editor=='text' && textBox!=='template') {
+      oldText = idTextBox.getValue();
+  } else {
+      oldText = val;
+  }
+  
+  textToAdd = '${';
+    
+  if (selectedItem.search('name') != 0 && selectedItem.search('id') != 0) {
+      textToAdd=textToAdd + 'id' + selectedItem.charAt(0).toUpperCase() + selectedItem.substring(1);
+  }else{
+	  textToAdd=textToAdd + selectedItem;
+  }
+  textToAdd=textToAdd + "}";            
+  newText = oldText.substr(0, cursPos) + textToAdd + oldText.substr(cursPos);        
+  
+  if (editor==='text' || textBox!=='template') {
+      idTextBox.setValue(newText);
+  } else if (editor==='CK' || editor==='CKInline') {
+    CKEDITOR.instances[textBox].insertText(textToAdd);
+    //CKEDITOR.instances[textBox].setData(newText);
+  } else if (editor==='Dojo' || editor==='DojoInline') {    
+     dijit.byId(textBox+'Editor').setValue(newText)
+  }
 }
 
 function addOperatorOrFunctionInTextBoxForNotificationItem(textBox) {                
