@@ -483,8 +483,8 @@ class MeetingMain extends SqlElement {
     $user=getSessionUser();
     $vcal .= "ORGANIZER;CN=".(($user->resourceName)?$user->resourceName:$user->name);
     //$vcal .= ';SENT-BY="MAILTO:'.$paramMailSender.'"';
-    //$vcal .= ":MAILTO:$user->email\r\n";
-    $vcal .= ":MAILTO:$paramMailSender\r\n";
+    $vcal .= ":MAILTO:$user->email\r\n";
+    //$vcal .= ":MAILTO:$paramMailSender\r\n";
     foreach($lstMail as $name=>$to) {
       //$vcal .= "ATTENDEE;CN=\"$name\";ROLE=REQ-PARTICIPANT;RSVP=FALSE:MAILTO:$to\r\n";
       //$vcal .= "ATTENDEE;ROLE=REQ-PARTICIPANT;CN=\"$name\":MAILTO:$to\r\n";
@@ -526,7 +526,7 @@ class MeetingMain extends SqlElement {
       $vcal.=$textDesc;
       //$vcal .="X-ALT-DESC;FMTTYPE=3Dtext/html:".$this->description;
     } else {
-      $vcal .= "DESCRIPTION:REMINDER\r\n";
+      $vcal .= "DESCRIPTION: \r\n";
     }
     $vcal .= "TRANSP:OPAQUE\r\n";
 	  $vcal .= "X-MICROSOFT-CDO-BUSYSTATUS:TENTATIVE\r\n";
