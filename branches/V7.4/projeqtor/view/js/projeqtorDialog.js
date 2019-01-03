@@ -7246,7 +7246,7 @@ function showMailOptions() {
       dialogMailToOtherChange();
     }
     dijit.byId("dialogMail").set('title', title);
-    refreshListSpecific('emailTemplate', 'selectEmailTemplate','objectIdClass',dojo.byId('objectId').value+'_'+dojo.byId('objectClass').value, null,false );
+    refreshListSpecific('emailTemplate', 'selectEmailTemplate','objectIdClass',dojo.byId('objectId').value+'_'+dojo.byId('objectClass').value);
     dijit.byId("dialogMail").show();
   }
   if (dijit.byId("dialogMail")
@@ -7254,7 +7254,7 @@ function showMailOptions() {
       && dojo.byId('dialogMailObjectClass').value == dojo.byId('objectClass').value) {
     dojo.byId('mailRefType').value=dojo.byId('objectClass').value;
     dojo.byId('mailRefId').value=dojo.byId('objectId').value;
-    refreshListSpecific('emailTemplate', 'selectEmailTemplate','objectIdClass',dojo.byId('objectId').value+'_'+dojo.byId('objectClass').value, null,false );
+    refreshListSpecific('emailTemplate', 'selectEmailTemplate','objectIdClass',dojo.byId('objectId').value+'_'+dojo.byId('objectClass').value);
     dijit.byId("dialogMail").show();
   } else {
     var param="&objectClass=" + dojo.byId('objectClass').value+"&objectId=" + dojo.byId('objectId').value;
