@@ -29,15 +29,14 @@ $isIE=false;
 if (array_key_exists('isIE',$_REQUEST)) {
 	$isIE=$_REQUEST['isIE'];
 } 
-$objectClass="";
-//$obj=new SqlElement();
-if (array_key_exists("objectClass", $_REQUEST)) {
-	$objectClass=$_REQUEST['objectClass'];
-	Security::checkValidClass($objectClass);
-
-	$obj=new $objectClass();
-	if (method_exists($obj, 'setAttributes')) $obj->setAttributes();
-}
+$objectClass=RequestHandler::getClass('objectClass');
+$objectId = RequestHandler::getId('objectId');
+$obj=new $objectClass($objectId);
+$emTp = new EmailTemplate();
+$idObjectType = 'id'.$objectClass.'Type';
+$idMailable = SqlList::getIdFromTranslatableName('Mailable', $objectClass);
+$where = "idMailable = ".$idMailable." and (idType = '".$obj->$idObjectType."' or idType IS NULL)";
+$listEmailTemplate = $emTp->getSqlElementsFromCriteria(null,false,$where);
 ?>
 <input type="hidden" name="dialogMailObjectClass" id="dialogMailObjectClass" value="<?php echo htmlEncode($objectClass);?>" />
   <table>
@@ -46,6 +45,7 @@ if (array_key_exists("objectClass", $_REQUEST)) {
         <form dojoType="dijit.form.Form" id='mailForm' name='mailForm' onSubmit="return false;">
           <input id="mailRefType" name="mailRefType" type="hidden" value="" />
           <input id="mailRefId" name="mailRefId" type="hidden" value="" />
+          <input id="idEmailTemplate" name="idEmailTemplate" type="hidden" value="" />
           <table style="white-space:nowrap">
           <?php if (property_exists($objectClass, 'idContact')) { ?>
             <tr>
@@ -207,6 +207,28 @@ if (array_key_exists("objectClass", $_REQUEST)) {
               </td>
             </tr>
             <?php }?>
+            <tr>
+              <td class="dialogLabel">
+                <label for="dialogMailEmailTemplate" class="generalColClass idEmailTemplateClass"><?php echo htmlEncode($obj->getColCaption("idEmailTemplate")); ?>&nbsp;:&nbsp;</label>
+              </td>
+              <td>
+                <select dojoType="dijit.form.FilteringSelect" 
+                id="selectEmailTemplate" name="selectEmailTemplate" class="input"
+                <?php echo autoOpenFilteringSelect();?>>
+                <?php foreach ($listEmailTemplate as $key => $value){?>
+                <option value="<?php echo $value->id;?>"><span> <?php echo htmlEncode($value->name);?></span></option>
+                <?php }?>
+                <script type="dojo/connect" event="onChange" args="evt">
+                  dojo.byId('idEmailTemplate').value = this.value;
+                  console.log(dojo.byId('idEmailTemplate').value);
+                </script>
+                <script type="dojo/connect" event="" args="evt">
+                  dojo.byId('idEmailTemplate').value = this.value;
+                  console.log(dojo.byId('idEmailTemplate').value);
+                </script>
+               </select>
+              </td>
+            </tr>
           </table>
        </form>
      </td>

@@ -34,7 +34,6 @@ if ($idItemMailable == ""){
   $idItemMailable = 1;
 }
 $name = SqlList::getFieldFromId('Mailable', $idItemMailable, 'name',false);
-
 $arrayFields = getObjectClassTranslatedFieldsList(trim($name));
 foreach ($arrayFields as $elmt=>$val){
 	$newArrayFields[$elmt]=$val;

@@ -32,7 +32,7 @@
   $title="";
   $msg="";
   $dest="";
-  $typeSendMail=""; 
+  $typeSendMail="";
   if (array_key_exists('className',$_REQUEST)) {
     $typeSendMail=$_REQUEST['className'];
   } else if (array_key_exists('objectClassName',$_REQUEST)) {
@@ -80,6 +80,7 @@
     $otherMail=str_replace('"','',$otherMail);
     $message=(array_key_exists('dialogMailMessage', $_REQUEST))?$_REQUEST['dialogMailMessage']:'';  
     $saveAsNote=(array_key_exists('dialogMailSaveAsNote', $_REQUEST))?true:false;
+    $idEmailTemplate = RequestHandler::getId('idEmailTemplate');//damian
     $obj=new $class($id);
     $directStatusMail=new StatusMail();
     $directStatusMail->mailToContact=$mailToContact;
@@ -96,6 +97,7 @@
     $directStatusMail->mailToAssigned=$mailToAssigned;
     $directStatusMail->otherMail=$otherMail;
     $directStatusMail->message=htmlEncode($message,'html'); // Attention, do not save this status mail
+    $directStatusMail->idEmailTemplate=$idEmailTemplate;//damian
     $resultMail=$obj->sendMailIfMailable(false,false,$directStatusMail,false,false,false,false,false,false,false,false,false);
     if (! $resultMail or ! is_array($resultMail)) {
     	$result="NO";
