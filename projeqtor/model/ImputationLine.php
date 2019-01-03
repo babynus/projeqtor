@@ -931,7 +931,11 @@ class ImputationLine {
               echo ' id="workValue_'.$nbLine.'_'.$i.'"';
               echo ' name="workValue_'.$i.'[]"';
               echo ' value="'.Work::displayImputation($valWork).'" ';
-              if ($line->idle or $line->locked) {
+              //gautier #3384
+              if($idWork){
+                $work = new Work($idWork,true);
+              }
+              if ($line->idle or $line->locked or isset($work->idBill)) {
                 echo ' readOnly="true" ';
               }
               echo ' >';
