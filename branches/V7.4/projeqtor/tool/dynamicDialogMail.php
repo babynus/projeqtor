@@ -30,6 +30,9 @@ if (array_key_exists('isIE',$_REQUEST)) {
 	$isIE=$_REQUEST['isIE'];
 } 
 $objectClass=RequestHandler::getClass('objectClass');
+if($objectClass == 'TicketSimple'){
+    $objectClass = 'Ticket';
+}
 $objectId = RequestHandler::getId('objectId');
 $obj=new $objectClass($objectId);
 $emTp = new EmailTemplate();
@@ -220,7 +223,6 @@ $listEmailTemplate = $emTp->getSqlElementsFromCriteria(null,false,$where);
                 <?php }?>
                 <script type="dojo/connect" event="onChange" args="evt">
                   dojo.byId('idEmailTemplate').value = this.value;
-                  console.log(dojo.byId('idEmailTemplate').value);
                 </script>
                 <script type="dojo/connect" event="" args="evt">
                   dojo.byId('idEmailTemplate').value = this.value;

@@ -83,7 +83,9 @@ if ($type == 'empty') {
   $split=explode('_',$objIdClass);
   $objectId = $split[0];
   $objectClass = $split[1];
-  
+  if($objectClass == 'TicketSimple'){
+    $objectClass = 'Ticket';
+  }
   $obj=new $objectClass($objectId);
   $emTp = new EmailTemplate();
   $idObjectType = 'id'.$objectClass.'Type';
