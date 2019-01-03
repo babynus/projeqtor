@@ -2904,7 +2904,7 @@ function drawDocumentVersionFromObject($list, $obj, $refresh=false) {
       $canDownload = false;
       if ($obj->locked){
         $forbidDownload = Parameter::getGlobalParameter('lockDocumentDownload');
-        if(($forbidDownload == "YES" and $obj->idLocker == $user->id) or $forbidDownload == "NO"){
+        if(($forbidDownload == "YES" and $obj->idLocker == $user->id) or $forbidDownload == "NO" or $forbidDownload == ""){
           $canDownload = true;
         }
       }else {
