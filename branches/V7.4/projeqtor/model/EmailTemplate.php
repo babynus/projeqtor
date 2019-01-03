@@ -176,7 +176,7 @@ class EmailTemplate extends SqlElement {
       $result  = '<table><tr class="detail generalRowClass">';
       $result .= '<td class="label" style="font-weight:normal;"><label>' . i18n("col".ucfirst($itemLab));
       $result .= '&nbsp;:&nbsp;</label></td>';
-      $result .= '<td style="border:1px solid red">';
+      $result .= '<td>';
       $result .= '<select dojoType="dijit.form.Select" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$item.'Class"';
       $result .= '  style="width: ' . ($fieldWidth-150) . 'px;' . $fieldStyle . '; "';
       $result .= $name;

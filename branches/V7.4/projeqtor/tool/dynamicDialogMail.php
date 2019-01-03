@@ -224,7 +224,6 @@ $listEmailTemplate = $emTp->getSqlElementsFromCriteria(null,false,$where);
                 </script>
                 <script type="dojo/connect" event="" args="evt">
                   dojo.byId('idEmailTemplate').value = this.value;
-                  console.log(dojo.byId('idEmailTemplate').value);
                 </script>
                </select>
               </td>
