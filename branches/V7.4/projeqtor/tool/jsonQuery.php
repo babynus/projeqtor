@@ -906,8 +906,14 @@
 	              }
             	}
             	
-            }            
-            echo '"' . htmlEncode($id) . '":"' . htmlEncodeJson($val, $numericLength) . '"';
+            }       
+            if ($id=='name') {
+              $val=htmlEncodeJson($val);
+              $val.='#!#!#!#!#!#'.mb_strtoupper($val);
+              echo '"' . htmlEncode($id) . '":"' . $val . '"';
+            } else {
+              echo '"' . htmlEncode($id) . '":"' . htmlEncodeJson($val, $numericLength) . '"';
+            }
           }
           echo '}';
         }   
