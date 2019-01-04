@@ -926,16 +926,20 @@ class ImputationLine {
               else if ($valWork>0) $colorClass="imputationHasValue";
               echo '<div type="text" idProject="'.$line->idProject.'" dojoType="dijit.form.NumberTextBox" ';
               echo ' constraints="{min:0}"';
+              //gautier #3384
+              if($idWork){
+                $work = new Work($idWork,true);
+                if($work->idBill){
+                  echo ' readOnly="true" ';
+                  $colorClass = "";
+                }
+              }
               echo '  style="width: 45px; text-align: center;'.$colorStyle.'" ';
               echo ' trim="true" maxlength="4" class="input imputation '.$colorClass.'" ';
               echo ' id="workValue_'.$nbLine.'_'.$i.'"';
               echo ' name="workValue_'.$i.'[]"';
               echo ' value="'.Work::displayImputation($valWork).'" ';
-              //gautier #3384
-              if($idWork){
-                $work = new Work($idWork,true);
-              }
-              if ($line->idle or $line->locked or isset($work->idBill)) {
+              if ($line->idle or $line->locked) {
                 echo ' readOnly="true" ';
               }
               echo ' >';
