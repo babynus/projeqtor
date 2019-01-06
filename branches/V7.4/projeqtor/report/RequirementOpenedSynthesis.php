@@ -180,6 +180,8 @@ if ($periodType) {
     $start=date('Y-m-d', firstDayofWeek($paramWeek, $paramYear));
     $end=addDaysToDate($start,6);
   }
+  $start.=' 00:00:00';
+  $end.=' 23:59:59';
   $where.=" and (  creationDateTime>= '" . $start . "'";
   $where.="        and creationDateTime<='" . $end . "' )";
 }//End of Isset
