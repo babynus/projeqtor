@@ -1357,7 +1357,6 @@ class PlanningElement extends SqlElement {
       self::$_fieldsAttributes['validatedDuration']='readonly';
       self::$_fieldsAttributes['validatedCost']='readonly';
       self::$_fieldsAttributes['expenseValidatedAmount']='readonly';
-      self::$_fieldsAttributes['priority']='readonly';
     } else {
       self::$_fieldsAttributes['validatedStartDate']='';
       self::$_fieldsAttributes['validatedEndDate']='';
@@ -1365,8 +1364,16 @@ class PlanningElement extends SqlElement {
       self::$_fieldsAttributes['validatedDuration']='';
       self::$_fieldsAttributes['validatedCost']='';
       self::$_fieldsAttributes['expenseValidatedAmount']='';
-      self::$_fieldsAttributes['priority']='';
     }
+    
+    //damian
+    $priority=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$profile,'scope'=>'changePriority'));
+    if ($priority and ($priority->rightAccess == 2 or ! $priority->id ) ) { // If selected NO or not set (default is NO)
+    	self::$_fieldsAttributes['priority']='readonly';
+    } else {
+    	self::$_fieldsAttributes['priority']='';
+    }
+    
     if (self::$staticCostVisibility and isset(self::$staticCostVisibility[$profile]) 
     and self::$staticWorkVisibility and isset(self::$staticWorkVisibility[$profile]) ) {
       $this->_costVisibility=self::$staticCostVisibility[$profile];
