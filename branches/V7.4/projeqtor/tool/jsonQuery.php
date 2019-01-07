@@ -28,6 +28,7 @@
  * Get the list of objects, in Json format, to display the grid list
  */
     require_once "../tool/projeqtor.php";
+    require_once "../tool/formatter.php";
     require_once "../tool/jsonFunctions.php";
     scriptLog('   ->/tool/jsonQuery.php'); 
     $objectClass=$_REQUEST['objectClass'];
@@ -909,7 +910,7 @@
             }       
             if ($id=='name') {
               $val=htmlEncodeJson($val);
-              $val.='#!#!#!#!#!#'.mb_strtoupper($val);
+              $val.='#!#!#!#!#!#'.mb_strtoupper(suppr_accents($val));
               echo '"' . htmlEncode($id) . '":"' . $val . '"';
             } else {
               echo '"' . htmlEncode($id) . '":"' . htmlEncodeJson($val, $numericLength) . '"';
@@ -922,5 +923,4 @@
       //echo ', "numberOfRow":"' . $nbRows . '"' ;
       echo ' }';
     }
-    
 ?>
