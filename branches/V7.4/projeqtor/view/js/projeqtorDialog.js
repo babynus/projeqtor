@@ -41,6 +41,7 @@ var openMenuListTimeout=null;
 var menuListAutoshow=false;
 var hideUnderMenuTimeout;
 var hideUnderMenuId;
+var stockEmailHistory = new Array();
 // =============================================================================
 // = Wait spinner
 // =============================================================================
@@ -7181,7 +7182,7 @@ function recalculateColumnSelectorName() {
 var oldSelectedItems=null;
 
 function diarySelectItems(value) {
-	console.log(value);
+	//console.log(value);
 	  if (!oldSelectedItems || oldSelectedItems==value) return;
 	  if (oldSelectedItems.indexOf("All")>=0 && value.length>1 ) {
 	    value[0]=null;
@@ -7361,11 +7362,81 @@ function dialogMailIdEmailChange(){
 }
 //end
 
+//damian #2936
+function stockEmailCurrent(){
+	var adress=dijit.byId('dialogOtherMail').get('value');
+	var adressSplit = adress.split(',');
+	adressSplit.forEach(function(emailSplit) {
+		if(stockEmailHistory.indexOf(emailSplit) == -1){
+			stockEmailHistory.push(emailSplit);
+		}
+	});
+}
+
+function compareEmailCurrent(){
+	if(stockEmailHistory.length > 0){
+		dojo.byId('dialogOtherMailHistorical').style.display = 'block';
+		var inputEmail=dijit.byId('dialogOtherMail').get('value');
+		var split = inputEmail.split(',');
+		inputEmail = split[split.length - 1];
+		var count = 0;
+		var email = "";
+		var divCount = 0;
+		stockEmailHistory.forEach(function(element){
+			count++;
+			if(split.indexOf(element) <= -1){
+				divCount++;
+				if(element.search(inputEmail) > -1){
+					email += '<div class="emailHistorical" id="email'+count+'" style="cursor:pointer;"'
+							+'onclick="selectEmailHistorical(\''+element+'\')">'
+							+element+'</div>';
+					dojo.byId('dialogOtherMailHistorical').innerHTML = email;
+				}
+			}else{
+				divCount--;
+			}
+			if(divCount > 7){
+				dojo.byId('dialogOtherMailHistorical').style.height = '100px';
+			}else{
+				dojo.byId('dialogOtherMailHistorical').style.height = 'auto';
+			}
+		});
+	}else{
+		dojo.byId('dialogOtherMailHistorical').style.display = 'none';
+	}
+}
+
+function hideEmailHistorical(){
+	setTimeout(function(){dojo.byId('dialogOtherMailHistorical').style.display = 'none';},200); 
+}
+
+function selectEmailHistorical(email){
+	var currentValue = dijit.byId('dialogOtherMail').get("value");
+	var tab = currentValue.split(',');
+	var tabLength = tab.length;
+	var newValue = "";
+	if(currentValue != ""){
+		if(tabLength>1){
+			for(var i = 0; i<tabLength-1; i++){
+				if(tab[i].search('@') > -1){
+					newValue += tab[i]+',';
+				}
+			}
+		}
+		newValue += email+',';
+		dijit.byId('dialogOtherMail').set("value", newValue);
+	}else{
+		dijit.byId('dialogOtherMail').set("value", email+',');
+	}
+	dojo.byId('dialogOtherMailHistorical').style.display = 'none';
+}
+//end #2936
+
 function extractEmails(str) {
   var current='';
   var result='';
   var name=false;
-  for (i=0; i < str.length; i++) {
+  for (var i=0; i < str.length; i++) {
     car=str.charAt(i);
     if (car == '"') {
       if (name == true) {
@@ -8058,7 +8129,7 @@ function diarySelectDate(directDate) {
     dojo.byId("diaryWeek").value=week;
     dojo.byId("diaryYear").value=year;
     dojo.byId("diaryMonth").value=month;
-    console.log(week, month, year);
+    //console.log(week, month, year);
     diaryDisplayWeek(week, year);
   } else if (period == "day") {
     day=formatDate(directDate);

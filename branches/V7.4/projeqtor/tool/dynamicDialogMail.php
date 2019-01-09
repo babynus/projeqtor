@@ -49,6 +49,7 @@ $listEmailTemplate = $emTp->getSqlElementsFromCriteria(null,false,$where);
           <input id="mailRefType" name="mailRefType" type="hidden" value="" />
           <input id="mailRefId" name="mailRefId" type="hidden" value="" />
           <input id="idEmailTemplate" name="idEmailTemplate" type="hidden" value="" />
+          <input id="previousEmail" name="previousEmail" type="hidden" value="" />
           <table style="white-space:nowrap">
           <?php if (property_exists($objectClass, 'idContact')) { ?>
             <tr>
@@ -172,11 +173,12 @@ $listEmailTemplate = $emTp->getSqlElementsFromCriteria(null,false,$where);
   				          id="dialogOtherMail" name="dialogOtherMail"
   				          style="width: 500px; display:none"
   				          maxlength="4000"
-  				          class="input" onblur="findAutoEmail()"></textarea>
+  				          class="input" onblur="findAutoEmail();hideEmailHistorical();" oninput="compareEmailCurrent();" onclick="compareEmailCurrent()">
+  				      </textarea>
   				      <textarea dojoType="dijit.form.Textarea" 
       					          id="dialogMailObjectIdEmail" name="dialogMailObjectIdEmail"
       					          style="width: 500px; display:none"
-      					          class="input" onchange="dialogMailIdEmailChange()"></textarea>
+      					          class="input" autocomplete="on" onchange="dialogMailIdEmailChange()"></textarea>
   					    <td style="vertical-align: top">
                  <button id="otherMailDetailButton" dojoType="dijit.form.Button" showlabel="false"
                          style="display:none" title="<?php echo i18n('showDetail')?>"iconClass="iconView">
@@ -185,9 +187,22 @@ $listEmailTemplate = $emTp->getSqlElementsFromCriteria(null,false,$where);
                       showDetail('dialogMailObjectIdEmail', 0, 'Resource', true);
                    </script>
                  </button>
-                </td> 
-               </td>
+                </td>
+              </td>
             </tr>
+            
+            <tr>
+              <td class="dialogLabel">
+                <label for="dialogOtherMailHistorical"></label>
+              </td>
+              <td>
+                <div id="dialogOtherMailHistorical" name="dialogOtherMailHistorical"
+                     style="height:auto; margin-top:-1.9px; margin-left:0.5px; overflow-y:auto; position:relative; z-index: 999999999; 
+                     display:none; width: 498px;  background-color:white; border:1px solid grey;">
+                </div>
+              </td>
+            </tr>
+            
             <tr>
               <td class="dialogLabel">
                 <label for="dialogMailMessage"><?php echo i18n("colMailMessage") ?>&nbsp;:&nbsp;</label>
@@ -239,7 +254,7 @@ $listEmailTemplate = $emTp->getSqlElementsFromCriteria(null,false,$where);
         <button dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogMail').hide();">
           <?php echo i18n("buttonCancel");?>
         </button>
-        <button dojoType="dijit.form.Button" type="submit" id="dialogMailSubmit" onclick="protectDblClick(this);sendMail();return false;">
+        <button dojoType="dijit.form.Button" type="submit" id="dialogMailSubmit" onclick="stockEmailCurrent();protectDblClick(this);sendMail();return false;">
           <?php echo i18n("buttonOK");?>
         </button>
       </td>
