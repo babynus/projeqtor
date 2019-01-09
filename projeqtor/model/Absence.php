@@ -339,6 +339,10 @@ class Absence{
 }
 
 function formatAbsenceColor($idColor, $size=20, $float='right') {
+  //Si plus de 9 activité attribut la couleur de la 9eme
+  if($idColor > 8){
+    $idColor = 8;
+  }
 	$color= array('#f08080','#ffc266', '#ffff66','#84e184', '#87ceeb', '#ff66ff', '#c68c53', '#ff99cc', '#ffeecc');
 	$radius=round($size/2,0);
 	$res='<div style="margin-left:2px; border: 1px solid #AAAAAA;background:'.$color[$idColor].';';
