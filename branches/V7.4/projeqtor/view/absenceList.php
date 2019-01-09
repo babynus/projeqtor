@@ -98,7 +98,7 @@ $yearSpinner = $currentYear;
               smallDelta="1"
               id="yearSpinner" name="yearSpinner" >
               <script type="dojo/method" event="onChange" >
-                   saveDataToSession("yearSpinner",dijit.byId('yearSpinnerAbsence').get('value'),false);
+                   saveDataToSession("yearSpinner",dijit.byId('yearSpinner').get('value'),false);
                    refreshAbsenceList();
               </script>
             </div>

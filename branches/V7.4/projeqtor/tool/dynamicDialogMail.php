@@ -190,7 +190,6 @@ $listEmailTemplate = $emTp->getSqlElementsFromCriteria(null,false,$where);
                 </td>
               </td>
             </tr>
-            
             <tr>
               <td class="dialogLabel">
                 <label for="dialogOtherMailHistorical"></label>
@@ -202,7 +201,6 @@ $listEmailTemplate = $emTp->getSqlElementsFromCriteria(null,false,$where);
                 </div>
               </td>
             </tr>
-            
             <tr>
               <td class="dialogLabel">
                 <label for="dialogMailMessage"><?php echo i18n("colMailMessage") ?>&nbsp;:&nbsp;</label>
