@@ -208,7 +208,7 @@ class Absence{
     $result="";
     $idColor = 0;
     $tabColor = array();
-    $colorTab= array('#f08080','#ffc266', '#ffff66','#84e184', '#87ceeb', '#ff66ff', '#c68c53', '#ff99cc', '#ffeecc');
+    $colorTab= array('#f08080','#ffc266', '#ffff66','#84e184', '#87ceeb', '#ff66ff', '#c68c53', '#ff99cc', '#ffeecc', '#99e6e6');
     
     $listActId="(";
     if (count($listAct)>0) {
@@ -221,6 +221,9 @@ class Absence{
       		if ($id2 == 'idProject') {
       			$idProject = $val2;
       		}
+      		if($id2 == 'idle'){
+      			$idle = $val2;
+      		}
       	}
       	if($actId != null and $userID != null ){
       		$where2 = "refType = 'Activity' and refId = ".$actId." and idResource =".$userID;
@@ -232,6 +235,14 @@ class Absence{
       		foreach ($listAss[$id3] as $id4=>$val4){
       			if ($id4 == 'id') {
       				$assId = htmlEncode($val4);
+      			}
+      		}
+      		if($idle){
+      			$workClose = new Work();
+      			$where3 = " refType = 'Activity' and refId = ".$actId." and idResource =".$userID." and year = ".$currentYear;
+      			$listWorkClose = $workClose->getSqlElementsFromCriteria(null,false,$where3);
+      			if(!$listWorkClose){
+      				continue;
       			}
       		}
       		$tabColor[$actId]=$idColor;
@@ -305,6 +316,7 @@ class Absence{
     				  if($workHeigth <= 100){
     				    if($tabColor){
     				    $idColor = $tabColor[$idActWork];
+    				    $idColor = $idColor%10;
     				    $background = $colorTab[$idColor];
     				    $result.='<div style="background:'.$background.'; height:'.(($workV/1)*100).'%"> </div>';
     				  }
@@ -339,11 +351,8 @@ class Absence{
 }
 
 function formatAbsenceColor($idColor, $size=20, $float='right') {
-  //Si plus de 9 activité attribut la couleur de la 9eme
-  if($idColor > 8){
-    $idColor = 8;
-  }
-	$color= array('#f08080','#ffc266', '#ffff66','#84e184', '#87ceeb', '#ff66ff', '#c68c53', '#ff99cc', '#ffeecc');
+  $idColor = $idColor%10;
+	$color= array('#f08080','#ffc266', '#ffff66','#84e184', '#87ceeb', '#ff66ff', '#c68c53', '#ff99cc', '#ffeecc', '#99e6e6');
 	$radius=round($size/2,0);
 	$res='<div style="margin-left:2px; border: 1px solid #AAAAAA;background:'.$color[$idColor].';';
 	$res.='width:'.($size-2).'px;height:'.($size-2).'px;float:'.$float.';border-radius:'.$radius.'px"';
