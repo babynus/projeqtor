@@ -41,6 +41,7 @@ $month = RequestHandler::getValue('month');
 $year = RequestHandler::getYear('year');
 $week = RequestHandler::getValue('week');
 $userId = RequestHandler::getId('userId');
+$editWork = false;
 
 //open transaction bdd
 Sql::beginTransaction();
@@ -68,32 +69,33 @@ if ($workVal == 0){
   }
   foreach ($listWork as $isWork){
     $somWork += $isWork->work;
-  }
-
-  if($somWork <= 1){
-    //put parameter in work object
-    $work->refType = 'Activity';
-    $work->refId = $actId;
-    $work->setDates($workDay);
-    //$work->workDate = $workDay;
-    //$work->day = $day;
-    //$work->month = $month;
-    //$work->year = $year;
-    //$work->week = $week;
-    $work->idResource = $userId;
-    if($unitAbs != 'days'){
-    	$workVal = $workVal/$maxHour;
+    if($isWork->refId == $actId and $somWork <= 1){
+      $isWork->work += $workVal;
+      $editWork = true;
+      $isWork->save();
     }
-    $work->work = $workVal;
-    $work->idProject = $idProject;
-    $work->idAssignment = $assId;
-    
-    //save work
-    $work->save();
-  }else {
-    $result = 'warning';
-    echo $result;
-    //dojo.byId('warningDiv').style.display = 'block';
+  }
+  if(!$editWork){
+    if($somWork <= 1){
+      //put parameter in work object
+      $work->refType = 'Activity';
+      $work->refId = $actId;
+      $work->setDates($workDay);
+      $work->idResource = $userId;
+      if($unitAbs != 'days'){
+      	$workVal = $workVal/$maxHour;
+      }
+      $work->work = $workVal;
+      $work->idProject = $idProject;
+      $work->idAssignment = $assId;
+      
+      //save work
+      $work->save();
+    }else {
+      $result = 'warning';
+      echo $result;
+      //dojo.byId('warningDiv').style.display = 'block';
+    }
   }
 }
 // commit work
