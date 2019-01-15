@@ -1135,6 +1135,8 @@ class NotificationDefinition extends SqlElement {
     // The Object Class
     $notificationItem = new Notifiable($this->idNotifiable);
     $className = $notificationItem->notifiableItem;
+    $obj=new $className();
+    $tableName=$obj->getDatabaseTableName();
     
     // Contents the leftJoin
     $leftJoin = "";
@@ -1180,12 +1182,14 @@ class NotificationDefinition extends SqlElement {
     
     foreach($listFields as $classAndField) {
         $class = substr($classAndField,0,strpos($classAndField,'_'));
+        $obj=new $class();
+        $table=$obj->getDatabaseTableName();
         
         $field = substr($classAndField,strpos($classAndField,'_')+1);
-        $fieldsInSelect .= ($fieldsInSelect===""?"":",")."$listTables[$class].$field AS $class"."_$field";
+        $fieldsInSelect .= ($fieldsInSelect===""?"":",")."$table.$field AS $class"."_$field";
 
-        if ($class!== $className and strpos($leftJoin, "LEFT JOIN $listTables[$class] ON")=== false) {
-            $leftJoin .= " LEFT JOIN $listTables[$class] ON $listTables[$class].id=$listTables[$className].id$class";            
+        if ($class!== $className and strpos($leftJoin, "LEFT JOIN $table ON")=== false) {
+            $leftJoin .= " LEFT JOIN $table ON $table.id=$tableName.id$class";            
         }
     }
     
