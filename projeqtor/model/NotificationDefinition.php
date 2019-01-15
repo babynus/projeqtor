@@ -1135,8 +1135,6 @@ class NotificationDefinition extends SqlElement {
     // The Object Class
     $notificationItem = new Notifiable($this->idNotifiable);
     $className = $notificationItem->notifiableItem;
-    $obj=new $className();
-    $tableName=$obj->getDatabaseTableName();
     
     // Contents the leftJoin
     $leftJoin = "";
@@ -1176,20 +1174,18 @@ class NotificationDefinition extends SqlElement {
     
     foreach($listClasses as $class) {
         $obj = new $class();
-        $databaseTableName = $obj->getStaticDatabaseTableName();
+        $databaseTableName = $obj->getDatabaseTableName();
         $listTables[$class] = $databaseTableName;
     }
     
     foreach($listFields as $classAndField) {
         $class = substr($classAndField,0,strpos($classAndField,'_'));
-        $obj=new $class();
-        $table=$obj->getDatabaseTableName();
         
         $field = substr($classAndField,strpos($classAndField,'_')+1);
-        $fieldsInSelect .= ($fieldsInSelect===""?"":",")."$table.$field AS $class"."_$field";
+        $fieldsInSelect .= ($fieldsInSelect===""?"":",")."$listTables[$class].$field AS $class"."_$field";
 
-        if ($class!== $className and strpos($leftJoin, "LEFT JOIN $table ON")=== false) {
-            $leftJoin .= " LEFT JOIN $table ON $table.id=$tableName.id$class";            
+        if ($class!== $className and strpos($leftJoin, "LEFT JOIN $listTables[$class] ON")=== false) {
+            $leftJoin .= " LEFT JOIN $listTables[$class] ON $listTables[$class].id=$listTables[$className].id$class";            
         }
     }
     
@@ -1303,7 +1299,7 @@ class NotificationDefinition extends SqlElement {
     if (trim($where)=="WHERE") {
         $where="";
     }
-    $query = "SELECT $fieldsInSelect FROM $className $leftJoin $where";
+    $query = "SELECT $fieldsInSelect FROM $listTables[$className] $leftJoin $where";
     $listObjClasses = $this->getLines($query);
     // Error in query => Provide from $where and then from rule
     if (in_array("KO", $listObjClasses)) {
