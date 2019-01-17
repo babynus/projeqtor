@@ -117,3 +117,10 @@ CREATE TABLE `${prefix}restrictlist` (
 
 INSERT INTO `${prefix}parameter` (`id`, `idUser`, `idProject`, `parameterCode`, `parameterValue`) VALUES
 (NULL, NULL, NULL, 'authorizeActivityOnDeliveredProduct', 'YES');
+
+--//référence la note d’origine
+ALTER TABLE `${prefix}note` 
+ADD `idNote` int(12),
+ADD `replyLevel` int(12) DEFAULT '0';
+
+UPDATE `${prefix}parameter` SET `parameterValue` = 'YES' WHERE `parameterCode` = 'globalNoteDiscussionMode';

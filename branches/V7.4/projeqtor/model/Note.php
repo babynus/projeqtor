@@ -42,6 +42,8 @@ class Note extends SqlElement {
   public $idTeam;
   public $fromEmail;
   public $idle;
+  public $idNote;//id ParentNote
+  public $replyLevel;//reply indention Level
     
   /** ==========================================================================
    * Constructor
@@ -76,7 +78,7 @@ class Note extends SqlElement {
   public function save() {
     $class = $this->refType;
     $id = $this->refId;
-    $obj = new $class( $id );
+    $obj = new $class($id);
     if ($class=='Project') {
     	$this->idProject=$obj->id;
     } else if (property_exists($class, 'idProject') ) {

@@ -1083,3 +1083,15 @@
 .ProjeQtOrFlatRed .iconAbsence { background-image: url(customIcons/red/iconAbsence.png); }
 .ProjeQtOrFlatGreen .iconAbsence { background-image: url(customIcons/green/iconAbsence.png); }
 .ProjeQtOrFlatGrey .iconAbsence { background-image: url(customIcons/grey/iconAbsence.png); }
+
+.iconButtonReply16 { background-image: url(images/smallButtonReply.png);  background-size: 16px 16px;}
+.ProjeQtOrFlatBlue .iconButtonReply16 { background-image: url(customIcons/blue/smallButtonReply.png); width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrFlatRed .iconButtonReply16 { background-image: url(customIcons/red/smallButtonReply.png); width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrFlatGreen .iconButtonReply16 { background-image: url(customIcons/green/smallButtonReply.png);width: 16px; height: 16px; background-size: 16px 16px; }
+.ProjeQtOrFlatGrey .iconButtonReply16 { background-image: url(customIcons/grey/smallButtonReply.png); width: 16px; height: 16px; background-size: 16px 16px;}
+
+.iconReply16 { background-image: url(images/smallButtonReply.png);  background-size: 16px 16px;}
+.ProjeQtOrFlatBlue .iconReply16 { background-image: url(customIcons/blue/smallButtonReply.png); width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrFlatRed .iconReply16 { background-image: url(customIcons/red/smallButtonReply.png); width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrFlatGreen .iconReply16 { background-image: url(customIcons/green/smallButtonReply.png);width: 16px; height: 16px; background-size: 16px 16px; }
+.ProjeQtOrFlatGrey .iconReply16 { background-image: url(customIcons/grey/smallButtonReply.png); width: 16px; height: 16px; background-size: 16px 16px;}
