@@ -3470,7 +3470,7 @@ function drawNotesFromObject($obj, $refresh=false) {
   if (!$refresh and !$print) echo '<tr><td colspan="2">';
   echo '<input type="hidden" id="noteIdle" value="'.htmlEncode($obj->idle).'" />';
   if (!$print) {
-    echo '<table width="99.9%">';
+    echo '<table width="100%">';
   }
   echo '<tr>';
   if (!$print) {
@@ -3481,12 +3481,33 @@ function drawNotesFromObject($obj, $refresh=false) {
     echo '</td>';
   }
   echo '<td class="noteHeader" style="width:5%">'.i18n('colId').'</td>';
-  echo '<td class="noteHeader" style="width:'.(($print)?'95':'85').'%">'.i18n('colNote').'</td>';
+  echo '<td colspan="6" class="noteHeader" style="width:'.(($print)?'95':'85').'%">'.i18n('colNote').'</td>';
   // echo '<td class="noteHeader" style="width:15%">' . i18n ( 'colDate' ) . '</td>';
   // echo '<td class="noteHeader" style="width:15%">' . i18n ( 'colUser' ) . '</td>';
   echo '</tr>';
   $nbNotes=0;
   $ress=new Resource($user->id);
+  //damian
+  $noteDiscussionMode = Parameter::getUserParameter('userNoteDiscussionMode');
+  if($noteDiscussionMode == null){
+  	$noteDiscussionMode = Parameter::getGlobalParameter('globalNoteDiscussionMode');
+  }
+  
+  function sortNotes(&$listNotes, &$result, $parent){
+    foreach ($listNotes as $note){
+      if($note->idNote == $parent){
+        $result[] = $note;
+        sortNotes($listNotes, $result, $note->id); 
+      }
+    }
+  }
+  
+  if($noteDiscussionMode == 'YES'){
+    $result = array();
+    sortNotes($notes, $result, null);
+    $notes = $result;
+  }
+  
   foreach ($notes as $note) {
     if ($user->id==$note->idUser or $note->idPrivacy==1 or ($note->idPrivacy==2 and $ress->idTeam==$note->idTeam)) {
       $nbNotes++;
@@ -3499,51 +3520,51 @@ function drawNotesFromObject($obj, $refresh=false) {
       }
       echo '<tr>';
       if (!$print) {
-        echo '<td class="noteData smallButtonsGroup">';
-        if ($note->idUser==$user->id and !$print and $canUpdate) {
-          echo ' <a onClick="editNote('.htmlEncode($note->id).','.htmlEncode($note->idPrivacy).');" title="'.i18n('editNote').'" > '.formatSmallButton('Edit').'</a>';
-          echo ' <a onClick="removeNote('.htmlEncode($note->id).');" title="'.i18n('removeNote').'" > '.formatSmallButton('Remove').'</a>';
-        }
-        echo '</td>';
+      	echo '<td class="noteData smallButtonsGroup">';
+      	if ($note->idUser==$user->id and !$print and $canUpdate) {
+      		echo ' <a onClick="addNote(true,'.htmlEncode($note->id).');" title="'.i18n('replyToThisNote').'" > '.formatSmallButton('Reply').'</a>';
+      		echo ' <a onClick="editNote('.htmlEncode($note->id).','.htmlEncode($note->idPrivacy).');" title="'.i18n('editNote').'" > '.formatSmallButton('Edit').'</a>';
+      		echo ' <a onClick="removeNote('.htmlEncode($note->id).');" title="'.i18n('removeNote').'" > '.formatSmallButton('Remove').'</a>';
+      	}
+      	echo '</td>';
       }
-      echo '<td class="noteData" style="width:5%">#'.htmlEncode($note->id).'</td>';
-      echo '<td class="noteData" style="width:'.(($print)?'95':'85').'%">';
-      /*
-       * if (!$print) {
-       * echo '<div style="display:none" type="hidden" id="note_' . htmlEncode($note->id) . '">';
-       * echo $note->note;
-       * echo '</div>';
-       * }
-       */
+      echo '<td class="noteData" style="width:5%; text-align: center;">#'.htmlEncode($note->id).'</td>';
+      if($noteDiscussionMode == 'YES'){
+        for($i=0; $i<$note->replyLevel; $i++){
+        	if($i >= 5){
+        		break;
+        	}
+        	echo '<td class="noteData" colspan="1" style="width:2%;"></td>';
+        }
+        echo '<td colspan="'.(6-$note->replyLevel).'" class="noteData" style="width:'.(($print)?'95':'85').'%">';
+      }else{
+        echo '<td colspan="6" class="noteData" style="width:'.(($print)?'95':'85').'%">';
+      }
       echo formatUserThumb($userId, $userName, 'Creator');
       echo formatDateThumb($creationDate, $updateDate);
       echo formatPrivacyThumb($note->idPrivacy, $note->idTeam);
-      // ADDED BRW
-      // $strDataHTML=htmlEncode($note->note, ''); // context = '' => only htmlspecialchar, not htmlentities
+      if($noteDiscussionMode != 'YES'){
+        if($note->idNote != null){
+        	echo '<span style="position:relative;float:right;padding-right:3px">'.formatIcon('Reply', 16, i18n('replyToNote').' #'.$note->idNote).'</span>';
+        }
+      }
       if (!$print) echo '<div style="max-width:'.$widthPctNote.';overflow-x:auto;" >';
       $strDataHTML=$note->note;
-      // $strDataHTML=preg_replace('@(https?://([-\w\.]<+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" target="_blank">$1</a>', $strDataHTML);
-      // $strDataHTML=nl2br($strDataHTML); // then convert line breaks : must be after preg_replace of url
-      if ($print and $outMode=="pdf") { // Must purge data, otherwise will never be generated
-        if ($preseveHtmlFormatingForPDF) {
-          // $strDataHTML='<div>'.$strDataHTML.'</div>';
-        } else {
-          $strDataHTML=htmlEncode($strDataHTML, 'pdf'); // remove all tags but line breaks
-        }
+      if ($print and $outMode=="pdf") {
+      	if ($preseveHtmlFormatingForPDF) {
+      	} else {
+      		$strDataHTML=htmlEncode($strDataHTML, 'pdf');
+      	}
       } else {
-        if (!isTextFieldHtmlFormatted($strDataHTML)) {
-          $strDataHTML=htmlEncode($strDataHTML, 'plainText');
-        } else {
-          $strDataHTML=preg_replace('@(https?://([-\w\.]<+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" target="_blank">$1</a>', $strDataHTML);
-        }
+      	if (!isTextFieldHtmlFormatted($strDataHTML)) {
+      		$strDataHTML=htmlEncode($strDataHTML, 'plainText');
+      	} else {
+      		$strDataHTML=preg_replace('@(https?://([-\w\.]<+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" target="_blank">$1</a>', $strDataHTML);
+      	}
       }
       echo $strDataHTML;
       if (!$print) echo '</div>';
-      // END ADDED BRW
       echo '</td>';
-      /*
-       * echo '<td class="noteData">' . htmlFormatDateTime ( $creationDate ) . '<br/>'; if ($note->fromEmail) { echo '<b>' . i18n ( 'noteFromEmail' ) . '</b>'; } echo '<i>' . htmlFormatDateTime ( $updateDate ) . '</i></td>'; echo '<td class="noteData">' . $userName . '</td>';
-       */
       echo '</tr>';
     }
   }

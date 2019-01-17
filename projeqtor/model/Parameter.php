@@ -269,6 +269,7 @@ class Parameter extends SqlElement {
       case 'displayBusinessFeature':
       case 'displayListOfActivity':
       case 'filterByStatus':
+      case 'globalNoteDiscussionMode'://damian
       case 'displayLanguage' :
       case 'displayContext' :
      	case 'displayMilestonesStartDelivery' :
@@ -399,6 +400,10 @@ class Parameter extends SqlElement {
       case 'restrictProjectList':case 'showIdleDefault';
         $list=array('false'=>i18n('displayNo'),
                     'true'=>i18n('displayYes'));
+        break;
+      case 'userNoteDiscussionMode':
+        $list = array('NO'=>i18n('displayNo'),
+                      'YES'=>i18n('displayYes'));
         break;
       case 'paramLdap_version':
         $list=array('2'=>'2',
@@ -640,6 +645,7 @@ class Parameter extends SqlElement {
                            "directAccessToComponentList"=>'list',
                            "restrictProjectList"=>'list',
                            "showIdleDefault"=>'list',
+                           "userNoteDiscussionMode"=>'list',
                          'sectionPrintExport'=>'section',
                            'printHistory'=>'list',  
                            "printInNewWindow"=>"list",
@@ -754,6 +760,7 @@ class Parameter extends SqlElement {
       	                      "scaytAutoStartup"=>'list',
       	                      "notApplicableValue"=>"list",
       	                      'restrictProjectList'=>'list',
+      	                      "globalNoteDiscussionMode"=>'list',
       	                'tabMiscellaneous'=>"tab",
       	                  'columnMiscellanousLeft'=>'newColumn',
       	                     'sectionReferenceFormat'=>'section',

@@ -929,7 +929,7 @@ function planningPDFBox(copyType) {
 // 7.3.0 Not usefull anymore with dojo 1.14 and 2 lines below
 function pauseBodyFocus() { dojo.query(".cke_dialog_body").addClass("dijitPopup");}      
 function resumeBodyFocus() { dojo.query(".cke_dialog_body").removeClass("dijitPopup");}   
-function addNote() {
+function addNote(reply=false, idParentNote) {
   if (dijit.byId("noteToolTip")) {
     dijit.byId("noteToolTip").destroy();
     dijit.byId("noteNote").set("class", "");
@@ -952,9 +952,12 @@ function addNote() {
   };
   var params="&objectClass="+dojo.byId('objectClass').value;
   params+="&objectId="+dojo.byId("objectId").value;
-  params+="&noteId="; // Null    
+  params+="&noteId="; // Null
+  params+="&reply="+reply;
+  if(reply){
+	  params+="&idParentNote="+idParentNote;
+  }
   loadDialog('dialogNote', callBack, true, params, true);
-
 }
 
 function noteSelectPredefinedText(idPrefefinedText) {
