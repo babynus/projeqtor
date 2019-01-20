@@ -8140,8 +8140,8 @@ function diarySelectDate(directDate) {
     dojo.byId("diaryYear").value=year;
     diaryDisplayDay(day);
   }
-  setTimeout("noRefreshDiaryPeriod=false;", 100);
-  loadContent("../view/diary.php", "detailDiv", "diaryForm");
+  setTimeout("noRefreshDiaryPeriod=false;", 10);
+  setTimeout('loadContent("../view/diary.php", "detailDiv", "diaryForm");',200);
   return true;
 }
 
