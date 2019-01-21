@@ -3534,7 +3534,7 @@ function drawNotesFromObject($obj, $refresh=false) {
         	if($i >= 5){
         		break;
         	}
-        	echo '<td class="noteData" colspan="1" style="width:2%;"></td>';
+        	echo '<td class="noteData" colspan="1" style="width:3%;border-bottom:0px;border-top:0px;border-right:solid 2px;!important;"></td>';//border-bottom:0px;border-top:0px;!important
         }
         echo '<td colspan="'.(6-$note->replyLevel).'" class="noteData" style="width:'.(($print)?'95':'85').'%">';
       }else{
@@ -3570,7 +3570,7 @@ function drawNotesFromObject($obj, $refresh=false) {
   }
   echo '<tr>';
   if (!$print) {
-    echo '<td class="noteDataClosetable">&nbsp;</td>';
+    echo '<td colspan = "6" class="noteDataClosetable">&nbsp;</td>';
   }
   echo '<td colspan="'.(($print)?'2':'3').'" class="noteDataClosetable">&nbsp;</td>';
   echo '</tr>';
