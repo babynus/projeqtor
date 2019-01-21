@@ -537,7 +537,7 @@ function activityStreamDisplayNote ($note,$origin){
       	if($i >= 5){
       		break;
       	}
-      	echo '<td class="noteData" colspan="1" style="width:2%;"></td>';
+      	echo '<td class="noteData" colspan="1" style="width:3%;border-bottom:0px;border-top:0px;border-right:solid 2px;!important;"></td>';
       }
       echo '<td colspan="'.(6-$note->replyLevel).'" class="noteData" style="width:100%;"><div style="float:left;margin-top:6px;">';
     }else{
