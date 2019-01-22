@@ -449,9 +449,22 @@ function submitWorkPeriod(action) {
   dojo.xhrGet({
   url: '../tool/submitWorkPeriod.php?action='+action+'&rangeType='+rangeType+'&rangeValue='+rangeValue+'&resource='+resource,
     handleAs: "text",
-    load: function(data,args) { refreshImputationList();},
+    load: function(data,args) { refreshImputationList();sendAlertOnSubmitWork(action, rangeType, rangeValue, resource);},
     error: function() { }
-  });   
+  });
+}
+
+function sendAlertOnSubmitWork(action, rangeType, rangeValue, resource){
+	console.log('Action : '+action);
+	console.log('RangeType : '+rangeType);
+	console.log('RangeValue : '+rangeValue);
+	console.log('Resource : '+resource);
+	dojo.xhrGet({
+		  url: '../tool/sendMail.php?className=Imputation&action='+action+'&rangeType='+rangeType+'&rangeValue='+rangeValue+'&resource='+resource,
+		    handleAs: "text",
+		    load: function(data,args) {},
+		    error: function() { }
+		  });
 }
 
 function enterRealAsPlanned(nbDays){   

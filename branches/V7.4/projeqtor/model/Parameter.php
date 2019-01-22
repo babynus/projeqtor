@@ -307,6 +307,13 @@ class Parameter extends SqlElement {
         $list=array('YES'=>i18n('displayYes'),
       	            'NO'=>i18n('displayNo'));
       	break;
+      case 'submitAlertSendToProjectLeader': case 'submitAlertSendToTeamManager': 
+      case 'submitAlertSendToOrganismManager':
+        $list=array('NONE'=>i18n('displayNone'),
+            'ALERT'=>i18n('displayAlert'),
+        		'MAIL'=>i18n('displayMail'),
+        		'ALERT&MAIL'=>i18n('displayAlertAndMail'));
+        break;
       case 'displayNote':
         $list=array('YES_OPENED'=>i18n('displayYesOpened'),
                     'YES_CLOSED'=>i18n('displayYesClosed'));
@@ -700,6 +707,9 @@ class Parameter extends SqlElement {
             	                'maxDaysToBookWorkBlocking'=>'number',
             	                'imputationAlertInputByOther'=>'list',
             	                'displayPoolsOnImputation'=>'list',
+            	                'submitAlertSendToProjectLeader'=>'list',
+            	                'submitAlertSendToTeamManager'=>'list',
+            	                'submitAlertSendToOrganismManager'=>'list',
       	                'tabPlanning'=>"tab",
       	                  'columnPlanningLeft'=>'newColumn',
         	                  'sectionPlanning'=>'section',

@@ -47,6 +47,191 @@
     $msg=$userMail->parseMailMessage(Parameter::getGlobalParameter('paramMailBodyUser'));
     // Format title and message
     $result=(sendMail($dest,$title,$msg))?'OK':'';
+    
+    //Damian
+  }else if($typeSendMail=="Imputation"){
+    $action = RequestHandler::getValue('action');
+    if($action == 'submit'){
+      $ProjectLeaderParam = Parameter::getGlobalParameter('submitAlertSendToProjectLeader');
+      $TeamManagerParam = Parameter::getGlobalParameter('submitAlertSendToTeamManager');
+      $OrganismManagerParam = Parameter::getGlobalParameter('submitAlertSendToOrganismManager');
+      $rangeType = RequestHandler::getValue('rangeType');
+      $rangeValue = RequestHandler::getValue('rangeValue');
+      $resource = new Resource(RequestHandler::getId('resource'));
+      $message= i18n('messageAlertSubmitedWork',array($resource->name,i18n($rangeType),$rangeValue));
+      $title = '['.Parameter::getGlobalParameter('paramDbDisplayName').']'.i18n('ImputationSubmit');
+      
+      //Project Leader
+      switch ($ProjectLeaderParam) {
+      	case 'ALERT' :
+    			$proj = array();
+    			$destination = array();
+    			$object = array(new Work(), new PlannedWork());
+    			foreach ($object as $work){
+    				$res = $work->getSqlElementsFromCriteria(array('week'=>$rangeValue));
+    				foreach ($res as $elt){
+    					if(!isset($proj[$elt->idProject])){
+    						$proj[$elt->idProject] = $elt->idProject;
+    					}
+    				}
+    			}
+    			foreach ($proj as $idProject){
+    				$project = SqlElement::getSingleSqlElementFromCriteria('Project', array('id'=>$idProject));
+    				$projectLeader = SqlElement::getSingleSqlElementFromCriteria('User', array('id'=>$project->idResource));
+    				if(!isset($destination[$project->idResource])){
+    					$destination[$project->idResource] = $projectLeader->email;
+    				}
+    			}
+    			foreach ($destination as $id=>$mail){
+    				$alert = new Alert();
+    				$alert->idUser=$id;
+    				$alert->alertInitialDateTime = date('Y-m-d H:i:s');
+    				$alert->alertDateTime = date('Y-m-d H:i:s');
+    				$alert->message = $message;
+    				$alert->title = $title;
+    				$alert->alertType = 'INFO';
+    				$result = $alert->save();
+    			}
+      		break;
+      	case 'MAIL' :
+    			$proj = array();
+    			$destination = array();
+    			$object = array(new Work(), new PlannedWork());
+    			foreach ($object as $work){
+    				$res = $work->getSqlElementsFromCriteria(array('week'=>$rangeValue));
+    				foreach ($res as $elt){
+    					if(!isset($proj[$elt->idProject])){
+    						$proj[$elt->idProject] = $elt->idProject;
+    					}
+    				}
+    			}
+    			foreach ($proj as $idProject){
+    				$project = SqlElement::getSingleSqlElementFromCriteria('Project', array('id'=>$idProject));
+    				$projectLeader = SqlElement::getSingleSqlElementFromCriteria('User', array('id'=>$project->idResource));
+    				if(!isset($destination[$project->idResource])){
+    					$destination[$project->idResource] = $projectLeader->email;
+    				}
+    			}
+    			foreach ($destination as $id=>$mail){
+    				$result = sendMail($mail, $title, $message);
+    			}
+      		break;
+      	case 'ALERT&MAIL' :
+    			$proj = array();
+    			$destination = array();
+    			$mailToProjectLeader = "";
+    			$object = array(new Work(), new PlannedWork());
+    			foreach ($object as $work){
+    				$res = $work->getSqlElementsFromCriteria(array('week'=>$rangeValue));
+    				foreach ($res as $elt){
+    					if(!isset($proj[$elt->idProject])){
+    						$proj[$elt->idProject] = $elt->idProject;
+    					}
+    				}
+    			}
+    			foreach ($proj as $idProject){
+    				$project = SqlElement::getSingleSqlElementFromCriteria('Project', array('id'=>$idProject));
+    				$projectLeader = SqlElement::getSingleSqlElementFromCriteria('User', array('id'=>$project->idResource));
+    				if(!isset($destination[$project->idResource])){
+    					$destination[$project->idResource] = $projectLeader->email;
+    				}
+    			}
+    			foreach ($destination as $id=>$mail){
+    				$alert = new Alert();
+    				$alert->idUser=$id;
+    				$alert->alertInitialDateTime = date('Y-m-d H:i:s');
+    				$alert->alertDateTime = date('Y-m-d H:i:s');
+    				$alert->message = $message;
+    				$alert->title = $title;
+    				$alert->alertType = 'INFO';
+    				$result = $alert->save();
+    				$result = sendMail($mail, $title, $message);
+    			}
+      		break;
+      	case 'NONE' :
+      		break;
+      }
+      
+      //Team Manager
+      switch ($TeamManagerParam) {
+      	case 'ALERT' :
+    			$idTeam = $resource->idTeam;
+    			$team = new Team($idTeam);
+    			$alert = new Alert();
+    			$alert->idUser=$team->idResource;
+    			$alert->alertInitialDateTime = date('Y-m-d H:i:s');
+    			$alert->alertDateTime = date('Y-m-d H:i:s');
+    			$alert->message = $message;
+    			$alert->title = $title;
+    			$alert->alertType = 'INFO';
+    			$result = $alert->save();
+      		break;
+      	case 'MAIL' :
+    			$idTeam = $resource->idTeam;
+    			$team = new Team($idTeam);
+    			$manager = new User($team->idResource);
+    			$mailToManager = $manager->email;
+    			$result = sendMail($mailToManager, $title, $message);
+      		break;
+      	case 'ALERT&MAIL' :
+    			$idTeam = $resource->idTeam;
+    			$team = new Team($idTeam);
+    			$alert = new Alert();
+    			$alert->idUser=$team->idResource;
+    			$alert->alertInitialDateTime = date('Y-m-d H:i:s');
+    			$alert->alertDateTime = date('Y-m-d H:i:s');
+    			$alert->message = $message;
+    			$alert->title = $title;
+    			$alert->alertType = 'INFO';
+    			$result = $alert->save();
+    			$manager = new User($team->idResource);
+    			$mailToManager = $manager->email;
+    			$result = sendMail($mailToManager, $title, $message);
+      		break;
+      	case 'NONE' :
+      		break;
+      }
+      
+      //Organism Manager
+      switch ($OrganismManagerParam) {
+      	case 'ALERT' :
+    			$idOrganization = $resource->idOrganization;
+    			$organization = new Organization($idOrganization);
+    			$alert = new Alert();
+    			$alert->idUser=$organization->idResource;
+    			$alert->alertInitialDateTime = date('Y-m-d H:i:s');
+    			$alert->alertDateTime = date('Y-m-d H:i:s');
+    			$alert->message = $message;
+    			$alert->title = $title;
+    			$alert->alertType = 'INFO';
+    			$result = $alert->save();
+      		break;
+      	case 'MAIL' :
+    			$idOrganization = $resource->idOrganization;
+    			$organization = new Organization($idOrganization);
+    			$organisManager = new User($organization->idResource);
+    			$mailToOrganismManager = $organisManager->email;
+    			$result = sendMail($mailToOrganismManager, $title, $message);
+      		break;
+      	case 'ALERT&MAIL' :
+    			$idOrganization = $resource->idOrganization;
+    			$organization = new Organization($idOrganization);
+    			$alert = new Alert();
+    			$alert->idUser=$organization->idResource;
+    			$alert->alertInitialDateTime = date('Y-m-d H:i:s');
+    			$alert->alertDateTime = date('Y-m-d H:i:s');
+    			$alert->message = $message;
+    			$alert->title = $title;
+    			$alert->alertType = 'INFO';
+    			$result = $alert->save();
+    			$organisManager = new User($organization->idResource);
+    			$mailToOrganismManager = $organisManager->email;
+    			$result = sendMail($mailToOrganismManager, $title, $message);
+      		break;
+      	case 'NONE' :
+      		break;
+      }
+    }
   } else if ($typeSendMail=="Meeting") {
     if (array_key_exists('id',$_REQUEST)) {
       $id=$_REQUEST['id'];
