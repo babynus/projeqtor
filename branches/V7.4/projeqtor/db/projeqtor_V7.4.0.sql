@@ -118,9 +118,15 @@ CREATE TABLE `${prefix}restrictlist` (
 INSERT INTO `${prefix}parameter` (`id`, `idUser`, `idProject`, `parameterCode`, `parameterValue`) VALUES
 (NULL, NULL, NULL, 'authorizeActivityOnDeliveredProduct', 'YES');
 
---//référence la note d’origine
 ALTER TABLE `${prefix}note` 
 ADD `idNote` int(12),
 ADD `replyLevel` int(12) DEFAULT '0';
 
 UPDATE `${prefix}parameter` SET `parameterValue` = 'YES' WHERE `parameterCode` = 'globalNoteDiscussionMode';
+ 
+ALTER TABLE `${prefix}planningelement`
+ADD `isManualProgress` int(1) unsigned DEFAULT '0';
+
+UPDATE `${prefix}habilitationother` set `rightAccess`='1' WHERE `idprofile`='1' and `scope`='changeManualProgress';
+UPDATE `${prefix}habilitationother` set `rightAccess`='1' WHERE `idprofile`='3' and `scope`='changeManualProgress';
+

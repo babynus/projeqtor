@@ -89,7 +89,6 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $topRefType;
   public $topRefId;
   public $idle;
-
   
   private static $_fieldsAttributes=array(
     "plannedStartDate"=>"readonly,noImport",
@@ -117,6 +116,7 @@ class ActivityPlanningElementMain extends PlanningElement {
     "latestStartDate"=>"hidden",
     "latestEndDate"=>"hidden",
     "isOnCriticalPath"=>"hidden",
+    "isManualProgress"=>"hidden",
     "_spe_isOnCriticalPath"=>""
   );   
   
@@ -162,6 +162,12 @@ class ActivityPlanningElementMain extends PlanningElement {
     if ($showLatest) {
       self::$_fieldsAttributes['latestStartDate']="readonly";
       self::$_fieldsAttributes['latestEndDate']="readonly";
+    }
+    
+    if($this->isManualProgress){
+      self::$_fieldsAttributes["progress"]='';
+    }else{
+      self::$_fieldsAttributes["progress"]='display';
     }
   }
   /** ==========================================================================
@@ -211,6 +217,9 @@ class ActivityPlanningElementMain extends PlanningElement {
    */
   public function save() {
     if (! PlanningElement::$_noDispatch) $this->updateWorkElementSummary(true);
+    if($this->idActivityPlanningMode){
+      $this->idPlanningMode = $this->idActivityPlanningMode;
+    }
     return parent::save();
   }
   
@@ -299,7 +308,6 @@ class ActivityPlanningElementMain extends PlanningElement {
         echo '<div style="position:relative;"><div style="color:#AA0000;margin:0px 10px;text-align:center;position:absolute;top:-55px;height:60px;">'.i18n('colIsOnCriticalPath').'</div></div>';
       }
     }
-    
   }
 }
 ?>
