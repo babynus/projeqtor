@@ -84,6 +84,7 @@ class PlanningElement extends SqlElement {
   public $latestEndDate;
   public $isOnCriticalPath;
   public $notPlannedWork;
+  public $isManualProgress;
   
   private static $_fieldsAttributes=array(
                                   "id"=>"hidden",
@@ -258,6 +259,10 @@ class PlanningElement extends SqlElement {
    * @return the result of parent::save() function
    */
   public function save() {
+    $pmName='id'.$this->refType.'PlanningMode';
+    if( property_exists($this,$pmName)){
+     $this->idPlanningMode = $this->$pmName;
+    }
     global $canForceClose;
   	// Get old element (stored in database) : must be fetched before saving
     $old=new PlanningElement($this->id);
@@ -283,7 +288,9 @@ class PlanningElement extends SqlElement {
           $this->expectedProgress=100;
         } else {
           $this->realEndDate=null;
-          $this->progress=0;
+          if(!$this->isManualProgress){
+            $this->progress=0;
+          }
           $this->expectedProgress=0;
         }
         if (property_exists($refObj, 'handled') and property_exists($refObj, 'handledDate')) {
@@ -302,8 +309,10 @@ class PlanningElement extends SqlElement {
         $this->realEndDate=$ass->getMaxValueFromCriteria('realEndDate', $critArray);
       } else if ($this->leftWork>0 and $this->realEndDate and !$canForceClose) {
         $this->realEndDate=null;
-      } 
-    	$this->progress = round($this->realWork / ($this->realWork + $this->leftWork) * 100);
+      }
+      if(!$this->isManualProgress){
+    	 $this->progress = round($this->realWork / ($this->realWork + $this->leftWork) * 100);
+      }
     }
     if ($this->validatedWork!=0) {
       $this->expectedProgress=round($this->realWork / ($this->validatedWork) *100);
@@ -410,6 +419,35 @@ class PlanningElement extends SqlElement {
     	if ($this->plannedStartDate>$this->plannedEndDate) $this->plannedEndDate=$this->plannedStartDate;
     	$this->plannedDuration=workDayDiffDates($this->plannedStartDate, $this->plannedEndDate);
     }
+    
+    //gautier
+    if($this->refType == "Activity"){
+      $paramManualProgress=Parameter::getGlobalParameter('isManualProgress');
+      if($paramManualProgress=='YES'){
+        if($this->refId){
+          $lstPlMode = SqlList::getListWithCrit('PlanningMode', array("code" => "FDUR"));
+          $ass = new Assignment();
+          $crit = array("refType"=>$this->refType,"refId"=>$this->refId);
+          $cptAss = $ass->countSqlElementsFromCriteria($crit);
+          if( array_key_exists($this->idPlanningMode,$lstPlMode) and $this->elementary == 1 and $cptAss==0){
+            $this->isManualProgress = 1;
+          }
+        }
+      }
+    }
+    if($this->isManualProgress){
+      $this->realWork = $this->progress * $this->validatedWork / 100;
+      $this->leftWork = $this->validatedWork - $this->realWork;
+      $this->plannedWork = $this->realWork+$this->leftWork;
+    }
+    if($old->isManualProgress and $old->idPlanningMode!= $this->idPlanningMode or $this->assignedWork>0){
+      $this->isManualProgress = 0;
+      $this->realWork = 0;
+      $this->leftWork = $this->validatedWork;
+      $this->progress = 0;
+      $this->expectedProgress = 0;
+    }
+    //end
     $result=parent::save();
     if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
       return $result;     
@@ -426,7 +464,6 @@ class PlanningElement extends SqlElement {
         }
       }
     }
-    
     // update topObject
     if ($topElt) {
       if ($topElt->refId and $topElt->refType) {
@@ -439,7 +476,6 @@ class PlanningElement extends SqlElement {
       	}
       }
     }
-    
     // save old parent (for synthesis update) if parent has changed
     if ($old->topId!='' and $old->topId!=$this->topId) {
       if (! self::$_noDispatch) {
@@ -476,7 +512,6 @@ class PlanningElement extends SqlElement {
         self::updateSynthesisNoDispatch($this->topRefType, $this->topRefId);
       }
     }
-    
     if ($this->wbsSortable!=$old->wbsSortable) {
     	$refType=$this->refType;
       if ($refType=='Project') {
@@ -493,7 +528,6 @@ class PlanningElement extends SqlElement {
        $crit="refType=".Sql::str($this->refType)." and refId=".$this->refId;
        $pw->purge($crit);
     }
-    
     // set to first handled status on first work input
     //if ($old->realWork==0 and $this->realWork!=0 and $this->refType) {
     if ($old->realWork==0 and $this->realWork!=0 and $this->refType) {

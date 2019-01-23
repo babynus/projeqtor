@@ -704,6 +704,15 @@ class ImputationLine {
     }
     $listLienProject=ImputationLine::addProjectToListLienProject($listLienProject, $listAllProject);
     foreach ($tab as $key=>$line) {
+// gautier hide activity with planning element isManualProgress = 1
+//       $isManualProgress = false;
+//       if($line->refType=='Activity'){
+//         $actPe = SqlElement::getSingleSqlElementFromCriteria('ActivityPlanningElement', array('refId'=>$line->refId),true);
+//         $isManualProgress = $actPe->isManualProgress;
+//         if($isManualProgress){
+//           continue;
+//         }
+//       }
       if (($line->refType=='Activity'&&!SqlList::getFieldFromId("Project", SqlList::getFieldFromId("Activity", $line->refId, "idProject"), 'isUnderConstruction'))||($line->refType!='Project'&&$line->refType!='Activity'&&!SqlList::getFieldFromId("Project", $line->idProject, "isUnderConstruction"))||($line->refType=='Project'&&!SqlList::getFieldFromId("Project", $line->refId, "isUnderConstruction"))) if (($line->refType=='Activity'&&SqlList::getFieldFromId("ProjectType", SqlList::getFieldFromId("Project", SqlList::getFieldFromId("Activity", $line->refId, "idProject"), "idProjectType"), 'code')!='TMP')||($line->refType!='Project'&&$line->refType!='Activity'&&SqlList::getFieldFromId("ProjectType", SqlList::getFieldFromId("Project", $line->idProject, "idProjectType"), 'code')!='TMP')||($line->refType=='Project'&&SqlList::getFieldFromId("ProjectType", SqlList::getFieldFromId("Project", $line->refId, "idProjectType"), 'code')!='TMP')) {
         if ($locked) $line->locked=true;
         $nbLine++;

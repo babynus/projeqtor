@@ -1440,7 +1440,7 @@ abstract class SqlElement {
           if ( !$col_new_value and !$col_old_value and (substr($col_name,-4)=='Cost' or substr($col_name,-4)=='Work' or substr($col_name,-6)=='Amount') ) {
             continue; // do not save 0 to null or null to zero for Cost, Work and Amount
           }
-          if (SqlElement::is_a($this, 'PlanningElement')) {
+          if (SqlElement::is_a($this, 'PlanningElement') and !$this->isManualProgress) {
             if (! isset($this->_workHistory) and ($col_name=='assignedWork' or $col_name=='leftWork'  or $col_name=='plannedWork' 
                                                or $col_name=='assignedCost' or $col_name=='leftCost'  or $col_name=='plannedCost')) {
               continue; // Do not update calculated fields if not coming from function updateSynthesisObj()                              
