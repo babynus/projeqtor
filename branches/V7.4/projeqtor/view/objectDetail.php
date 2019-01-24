@@ -2463,6 +2463,12 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // echo ' style="text-align:right; width: ' . $fieldWidth . 'px;' . $specificStyle . '" ';
         echo ' style="'.$negative.'width: '.$fieldWidth.'px;'.$specificStyle.'" ';
         // ADD BY Marc TABARY - 2017-03-06 - PATTERN FOR YEAR
+        //gautier manualProgress
+        if($isPercent){
+          if (strtolower(substr($col, -8, 8))=='progress'){
+            echo ' constraints="{min:0,max:100}")';
+          }
+        }
         if (strpos(strtolower($col), 'year')!==false) {
           echo ' constraints="{min:2000,max:2100,pattern:\'###0\'}" ';
         } else if ($max) {
