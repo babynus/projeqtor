@@ -964,11 +964,16 @@ class PlanningElement extends SqlElement {
   	//Damian
     $oldElement = $this->getOld();
     $projOld = new Project($oldElement->idProject,true);
+    $proj = new Project($this->idProject,true);
+    $parentProj = new Project($proj->idProject);
+    $oldParentProj = $parentProj->getOld();
+    
     if($projOld->fixPerimeter and $projOld->id!=$this->idProject){
       $result .= i18n('msgUnableToMoveOutToFixPerimeter');
     }
-    
-  	$proj = new Project($this->idProject,true);
+    if($parentProj->fixPerimeter and $parentProj->id!=$this->idProject){
+    	$result .= i18n('MessageDiff');
+    }
   	if($proj->fixPerimeter){
   	  if(!$this->id){
   	    $result .= i18n('msgUnableToAddToFixPerimeter');
