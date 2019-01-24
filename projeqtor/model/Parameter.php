@@ -741,6 +741,7 @@ class Parameter extends SqlElement {
       	                      'updateDeliverableResponsibleFromMilestone'=>'list',
       	                      'updateIncomingResponsibleFromMilestone'=>'list',
       	                      'autoUpdateActivityStatus'=>'list',
+      	                      'isManualProgress'=>'list',
       	                    'menuMilestone'=>'section',
       	                      'manageMilestoneOnItems'=>'list',
       	                      'autoLinkMilestone'=>'list',
