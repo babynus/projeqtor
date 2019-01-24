@@ -422,14 +422,15 @@ class PlanningElement extends SqlElement {
     }
     
     //gautier
+    $ass = new Assignment();
+    $crit = array("refType"=>$this->refType,"refId"=>$this->refId);
+    $cptAss = $ass->countSqlElementsFromCriteria($crit);
+    
     if($this->refType == "Activity"){
       $paramManualProgress=Parameter::getGlobalParameter('isManualProgress');
       if($paramManualProgress=='YES'){
         if($this->refId){
           $lstPlMode = SqlList::getListWithCrit('PlanningMode', array("code" => "FDUR"));
-          $ass = new Assignment();
-          $crit = array("refType"=>$this->refType,"refId"=>$this->refId);
-          $cptAss = $ass->countSqlElementsFromCriteria($crit);
           if( array_key_exists($this->idPlanningMode,$lstPlMode) and $this->elementary == 1 and $cptAss==0){
             $this->isManualProgress = 1;
           }
@@ -441,7 +442,7 @@ class PlanningElement extends SqlElement {
       $this->leftWork = $this->validatedWork - $this->realWork;
       $this->plannedWork = $this->realWork+$this->leftWork;
     }
-    if($old->isManualProgress and $old->idPlanningMode!= $this->idPlanningMode or $this->assignedWork>0){
+    if($old->isManualProgress and $old->idPlanningMode!= $this->idPlanningMode or $old->isManualProgress and $cptAss!=0){
       $this->isManualProgress = 0;
       $this->realWork = 0;
       $this->leftWork = $this->validatedWork;
