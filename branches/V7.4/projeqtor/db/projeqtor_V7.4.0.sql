@@ -130,3 +130,6 @@ ADD `isManualProgress` int(1) unsigned DEFAULT '0';
 UPDATE `${prefix}habilitationother` set `rightAccess`='1' WHERE `idprofile`='1' and `scope`='changeManualProgress';
 UPDATE `${prefix}habilitationother` set `rightAccess`='1' WHERE `idprofile`='3' and `scope`='changeManualProgress';
 
+UPDATE `${prefix}habilitationother` set `rightAccess`='1' WHERE `idprofile`='1' and `scope`='changePriority';
+UPDATE `${prefix}habilitationother` set `rightAccess`='1' WHERE `idprofile`='2' and `scope`='changePriority';
+UPDATE `${prefix}habilitationother` set `rightAccess`='1' WHERE `idprofile`='3' and `scope`='changePriority';
