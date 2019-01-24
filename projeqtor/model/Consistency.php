@@ -352,7 +352,6 @@ class Consistency {
           ."   OR (pe.realWork+pe.leftWork)!=pe.plannedWork ";
     $result=Sql::query($query);
     while ($line = Sql::fetchLine($result)) {
-      debugLog($line);
       $refType=$line['reftype'];
       $refId=$line['refid'];
       $realWork=$line['realwork'];
