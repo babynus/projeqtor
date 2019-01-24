@@ -164,11 +164,14 @@ class ActivityPlanningElementMain extends PlanningElement {
       self::$_fieldsAttributes['latestEndDate']="readonly";
     }
     
-    if($this->isManualProgress){
-      self::$_fieldsAttributes["progress"]='';
-    }else{
+    $user=getSessionUser();
+    $priority=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$user->idProfile,'scope'=>'changeManualProgress'));
+    if(!$this->isManualProgress or $priority and ($priority->rightAccess == 2 or ! $priority->id ) ){
       self::$_fieldsAttributes["progress"]='display';
+    }else{
+      self::$_fieldsAttributes["progress"]='';
     }
+    
   }
   /** ==========================================================================
    * Destructor
