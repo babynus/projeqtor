@@ -949,6 +949,34 @@ class PlanningElement extends SqlElement {
         }
       }
     }
+    
+//     if($this->id){
+//   	  if($this->refType="Project"){
+//   	  	$proj = new Project($this->refId);
+//   	  	if($proj->fixPerimeter == 1){
+//   	  		$result .= "<br/>" . i18n("msgUnableToUpdateOnFixPerimeter");
+//   	  	}
+//   	  }
+//   	}
+    
+  	//Damian
+    $oldElement = $this->getOld();
+    $projOld = new Project($oldElement->idProject,true);
+    if($projOld->fixPerimeter and $projOld->id!=$this->idProject){
+      $result .= i18n('msgUnableToMoveOutToFixPerimeter');
+    }
+    
+  	$proj = new Project($this->idProject,true);
+  	if($proj->fixPerimeter){
+  	  if(!$this->id){
+  	    $result .= i18n('msgUnableToAddToFixPerimeter');
+  	  }else{
+  	    if(!$projOld->fixPerimeter){
+  	      $result .= i18n('msgUnableToMoveOnFixPerimeter');
+  	    }
+  	  }
+  	}
+  	
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
       $result.=$defaultControl;
@@ -965,9 +993,24 @@ class PlanningElement extends SqlElement {
   	 
   	// Cannot delete item with real work
   	if ($this->id and $this->realWork and $this->realWork>0)	{
-  		$result .= "<br/>" . i18n("msgUnableToDeleteRealWork");
+  	  if($result==""){
+  	    $result .= i18n("msgUnableToDeleteRealWork");
+  	  }else{
+  	    $result .= "<br/>" . i18n("msgUnableToDeleteRealWork");
+  	  }
   	}
-  	 
+
+
+  	//damian
+  	$proj = new Project($this->idProject,true);
+  	if($proj->fixPerimeter){
+  	  if($result==""){
+  	    $result .= i18n("msgUnableToDeleteOfFixPerimeter");
+  	  }else{
+  	    $result .= "<br/>" . i18n("msgUnableToDeleteOfFixPerimeter");
+  	  }
+  	}
+  	
   	if (! $result) {
   		$result=parent::deleteControl();
   	}
