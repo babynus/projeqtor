@@ -263,8 +263,8 @@
               </td>
             </tr>
              <?php }}
-       // fix planning, under construction
-             $arrayCheckbox=array("fixPlanning","isUnderConstruction");
+       // fix planning, fixPerimeter, under construction
+             $arrayCheckbox=array("fixPlanning","fixPerimeter","isUnderConstruction");
              foreach($arrayCheckbox as $checkField) {
              if (isDisplayable($obj,$checkField)) {?>
             <tr class="detail">
