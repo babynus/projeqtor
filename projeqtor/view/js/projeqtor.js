@@ -97,14 +97,14 @@ function refreshJsonList(className, keepUrl) {
         dojo.byId('comboDetailId').value = '';
       }
     }
-    if (dojo.byId('showAllProjects')) {
-      if (dojo.byId('showAllProjects').checked) {
+    if (dijit.byId('showAllProjects')) {
+      if (dijit.byId('showAllProjects').get("value") != '') {
         url = url + "&showAllProjects=true";
       }
     }
-    if (dojo.byId('listShowIdle')) {
+    if (dijit.byId('listShowIdle')) {
       saveDataToSession('listShowIdle'+className, dijit.byId('listShowIdle').get("value"), false);
-      if (dojo.byId('listShowIdle').checked) {
+      if (dijit.byId('listShowIdle').get("value") != '') {
         url = url + "&idle=true";
       }
     }
@@ -114,6 +114,7 @@ function refreshJsonList(className, keepUrl) {
         url = url + "&objectType=" + dijit.byId('listTypeFilter').get("value");
       }
     }
+    
     if (dijit.byId('listClientFilter')) {
       saveDataToSession('listClientFilter'+className, dijit.byId('listClientFilter').get("value"), false);
       if (dijit.byId('listClientFilter').get("value") != '') {
@@ -121,7 +122,6 @@ function refreshJsonList(className, keepUrl) {
             + dijit.byId('listClientFilter').get("value");
       }
     }
-    
     if (dijit.byId('listBudgetParentFilter')) {
       saveDataToSession('listBudgetParentFilter', dijit.byId('listBudgetParentFilter').get("value"), false);
       if (dijit.byId('listBudgetParentFilter').get("value") != '') {
@@ -129,7 +129,6 @@ function refreshJsonList(className, keepUrl) {
             + dijit.byId('listBudgetParentFilter').get("value");
       }
     }
-    
     if (dijit.byId('listElementableFilter')) {
       saveDataToSession('listElementableFilter'+className, dijit.byId('listElementableFilter').get("value"), false);
       if (dijit.byId('listElementableFilter').get("value") != '') {
@@ -151,6 +150,7 @@ function refreshJsonList(className, keepUrl) {
         url = url + "&countStatus=" + dojo.byId('countStatus').value;
       }
     }
+    
     //END ADD qCazelles - Filter by status
     if (dijit.byId('quickSearchValue')) {
       if (dijit.byId('quickSearchValue').get("value") != '') {
@@ -160,7 +160,6 @@ function refreshJsonList(className, keepUrl) {
             + encodeURIComponent(dijit.byId('quickSearchValue').get("value"));
       }
     }
-
     // store.fetch();
     if (!keepUrl) {
       grid.setStore(new dojo.data.ItemFileReadStore({
