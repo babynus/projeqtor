@@ -2974,7 +2974,6 @@ abstract class SqlElement {
     if (($curId != NULL) and ($obj instanceof SqlElement)) {
       // set the reference data
       // build query
-      debugLog(get_class($this)." | ".$objClass);
       $query = "select id from " . $obj->getDatabaseTableName ();
       if (property_exists ( $objClass, 'id' . get_class ( $this ) ) and $objClass != 'Note' and $objClass != 'Attachment' and $objClass != 'Link') {
         $query .= " where " . $obj->getDatabaseColumnName ( 'id' . get_class ( $this ) ) . "= " . Sql::str ( $curId ) . " ";
