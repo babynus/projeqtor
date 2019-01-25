@@ -2864,7 +2864,7 @@ abstract class SqlElement {
               }
             }
           } else if (ucfirst ( $col_name ) == $col_name) {
-            if (! $withoutDependentObjects) {
+            if (! $withoutDependentObjects and substr(get_class($this),-4)!='Main') {
               $this->{$col_name} = $this->getDependantSqlElement ( $col_name );
             }
           } else if (strpos ( $this->getFieldAttributes ( $col_name ), 'calculated' ) !== false) {} else {
@@ -2974,6 +2974,7 @@ abstract class SqlElement {
     if (($curId != NULL) and ($obj instanceof SqlElement)) {
       // set the reference data
       // build query
+      debugLog(get_class($this)." | ".$objClass);
       $query = "select id from " . $obj->getDatabaseTableName ();
       if (property_exists ( $objClass, 'id' . get_class ( $this ) ) and $objClass != 'Note' and $objClass != 'Attachment' and $objClass != 'Link') {
         $query .= " where " . $obj->getDatabaseColumnName ( 'id' . get_class ( $this ) ) . "= " . Sql::str ( $curId ) . " ";
