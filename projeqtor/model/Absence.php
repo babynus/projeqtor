@@ -48,6 +48,7 @@ class Absence{
   function __destruct() {}
   
   static function drawActivityDiv($userID, $currentYear){
+    global $print;
     $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     // Insert new lines for admin projects
     Assignment::insertAdministrativeLines($userID);
@@ -146,44 +147,50 @@ class Absence{
     $listActId = substr($listActId, 0, -1);
     $listActId .= ')';
     $result .='</table>';
-    
-    $result .='<table align="left" style="margin-top:20px; margin-left:100px;">';
-    $result .=' <tr>';
-    $unitAbs = Parameter::getGlobalParameter('imputationUnit');
-    $result .='   <td style="margin-top:10px; height:20px;">'.i18n('dailyAbsenceDuration');
-    $result .='     <div id="absenceInput" name="absenceInput" value="'.$max.'"
-                  		  dojoType="dijit.form.NumberTextBox" constraints="{min:0,max:'.$max.'}"  required="true"
-                  		      style="width:30px; margin-top:4px; height:20px;">';
-    $result .= $keyDownEventScript;
-    $result .='     </div> ';
-    $result .='   </td>';
-    if($unitAbs == 'days'){
-    	$result .=' <td style="margin-top:30px; height:20px;width:55px">&nbsp;'.i18n('day').'</td>';
-    }else{
-    	$result .=' <td style="margin-top:30px; height:20px;width:40px">&nbsp;'.i18n('hours').'</td>';
-    	$max = Parameter::getGlobalParameter('dayTime');
+    if (isset($print) and $print==true) {
+      $result .='<table align="left" style="margin-top:20px; margin-left:100px;">';
+      $result .='<tr><td class="label">'.i18n('colIdResource').'&nbsp;:&nbsp;</td><td>'.SqlList::getNameFromId('Resource', $userID).'</td></tr>';
+      $result .='<tr><td class="label">'.i18n('year').'&nbsp;:&nbsp;</td><td>'.$currentYear.'</td></tr>';
+      $result.='</table>';
+    } else {
+      $result .='<table align="left" style="margin-top:20px; margin-left:100px;">';
+      $result .=' <tr>';
+      $unitAbs = Parameter::getGlobalParameter('imputationUnit');
+      $result .='   <td style="margin-top:10px; height:20px;">'.i18n('dailyAbsenceDuration');
+      $result .='     <div id="absenceInput" name="absenceInput" value="'.$max.'"
+                    		  dojoType="dijit.form.NumberTextBox" constraints="{min:0,max:'.$max.'}"  required="true"
+                    		      style="width:30px; margin-top:4px; height:20px;">';
+      $result .= $keyDownEventScript;
+      $result .='     </div> ';
+      $result .='   </td>';
+      if($unitAbs == 'days'){
+      	$result .=' <td style="margin-top:30px; height:20px;width:55px">&nbsp;'.i18n('day').'</td>';
+      }else{
+      	$result .=' <td style="margin-top:30px; height:20px;width:40px">&nbsp;'.i18n('hours').'</td>';
+      	$max = Parameter::getGlobalParameter('dayTime');
+      }
+      $result .=' </tr>';
+      $result .=' <tr style="height:20px">';
+      $result .='   <td colspan="3" style="padding-top:5px;text-align:right">';
+      $result .='   <span id="absButton_1" style="width:40px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.$max
+              . '     <script type="dojo/method" event="onClick" >'
+              . '        dijit.byId("absenceInput").setAttribute("value" ,'.$max.');'
+              . '     </script>'
+              . '   </span>&nbsp;';
+      $result .='   <span id="absButton_0_5" style="width:40px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.($max/2)
+              . '     <script type="dojo/method" event="onClick" >'
+              . '       dijit.byId("absenceInput").setAttribute("value" , '.($max/2).');'
+              . '     </script>'
+              . '    </span>&nbsp;';
+      $result .='   <span id="absButton_0" style="width:40px;" type="button" dojoType="dijit.form.Button" showlabel="true">0'
+              . '     <script type="dojo/method" event="onClick" >'
+              . '       dijit.byId("absenceInput").setAttribute("value" ,0);'
+              . '     </script>'
+              . '   </span>';
+      $result .='   </td>';
+      $result .=' </tr>';
+      $result .='</table>';
     }
-    $result .=' </tr>';
-    $result .=' <tr style="height:20px">';
-    $result .='   <td colspan="3" style="padding-top:5px;text-align:right">';
-    $result .='   <span id="absButton_1" style="width:40px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.$max
-            . '     <script type="dojo/method" event="onClick" >'
-            . '        dijit.byId("absenceInput").setAttribute("value" ,'.$max.');'
-            . '     </script>'
-            . '   </span>&nbsp;';
-    $result .='   <span id="absButton_0_5" style="width:40px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.($max/2)
-            . '     <script type="dojo/method" event="onClick" >'
-            . '       dijit.byId("absenceInput").setAttribute("value" , '.($max/2).');'
-            . '     </script>'
-            . '    </span>&nbsp;';
-    $result .='   <span id="absButton_0" style="width:40px;" type="button" dojoType="dijit.form.Button" showlabel="true">0'
-            . '     <script type="dojo/method" event="onClick" >'
-            . '       dijit.byId("absenceInput").setAttribute("value" ,0);'
-            . '     </script>'
-            . '   </span>';
-    $result .='   </td>';
-    $result .=' </tr>';
-    $result .='</table>';
     $result .='</div>';
     $result .='<div id="warningExceedWork" class="messageWARNING" style="z-index:99;display: none; text-align: center; position:absolute; top:45%;margin-left: 32%; height:20px; width: 35%;padding-top:12px">'.i18n('exceedWork').'</div></br>';
     $result .='<div id="warningNoActivity" class="messageWARNING" style="z-index:99;display: none; text-align: center; position:absolute; top:45%;margin-left: 32%; height:20px; width: 35%;padding-top:12px">'.i18n('noActivitySelected').'</div></br>';
