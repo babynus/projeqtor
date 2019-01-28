@@ -533,7 +533,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
   if ($col=='idTargetProductVersion' or $col=='idOriginProductVersion') { //or $col=='idProductVersion'
     // Must restrict to versions visible to user
     $limitToNotDeliveredProject = false;
-    if (get_class($obj) == 'Activity' and $col == 'idTargetProductVersion' and Parameter::getGlobalParameter('authorizeActivityOnDeliveredProduct') == 'NO')
+    if ($obj and get_class($obj) == 'Activity' and $col == 'idTargetProductVersion' and Parameter::getGlobalParameter('authorizeActivityOnDeliveredProduct') == 'NO')
       $limitToNotDeliveredProject = true;
     $restrictArrayVersion=getSessionUser()->getVisibleVersions(true, $limitToNotDeliveredProject);
     if (isset($restrictArray) && count($restrictArray)>0) {
