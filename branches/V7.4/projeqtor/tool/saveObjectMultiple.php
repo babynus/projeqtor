@@ -105,6 +105,10 @@ $idProduct="";
 if (array_key_exists('idProduct',$_REQUEST)) {
   $idProduct=trim($_REQUEST['idProduct']);
 }
+$idMilestone="";
+if (array_key_exists('idMilestone',$_REQUEST)) {
+  $idMilestone=trim($_REQUEST['idMilestone']);
+}
 $idComponent="";
 if (array_key_exists('idComponent',$_REQUEST)) {
   $idComponent=trim($_REQUEST['idComponent']);
@@ -265,6 +269,9 @@ foreach ($selectList as $id) {
   }
   if ($idProduct and property_exists($item,'idProduct')) {
     $item->idProduct=$idProduct;
+  }
+  if ($idMilestone and property_exists($item,'idMilestone')) {
+    $item->idMilestone=$idMilestone;
   }
   if ($idComponent and property_exists($item,'idComponent')) {
     $item->idComponent=$idComponent;
