@@ -554,6 +554,24 @@ class PlanningElement extends SqlElement {
         ) {
       Project::setNeedReplan($this->idProject);
     }
+    
+    //gautier Proj
+    if(isset($this->_moveToAfterCreate)){
+      $idPlanningElementOrigin= $this->_moveToAfterCreate;
+      $peOrigin = new PlanningElement($idPlanningElementOrigin);
+        if($this->idProject == $peOrigin->idProject){
+          if(property_exists($this->refType, 'idActivity')){
+            $objOrigin= new $peOrigin->refType($peOrigin->refId,true);
+            $currentObj = new $this->refType($this->refId,true);
+            if($objOrigin->idActivity == $currentObj->idActivity){
+              $this->moveTo($idPlanningElementOrigin, 'after');
+            }
+          }else{
+            $this->moveTo($idPlanningElementOrigin, 'after');
+          }
+        }
+    }
+    
     return $result;
   }
   public function setHandledOnRealWork ($action='check') {
