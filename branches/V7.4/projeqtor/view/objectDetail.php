@@ -591,6 +591,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   // END - ADD BY TABARY - NOTIFICATION SYSTEM
   
   // Loop on each property of the object
+  echo "<input type='hidden' name='moveToAfterCreate' value='10' />";
   foreach ($obj as $col=>$val) {
     if ($detailWidth) {
       $colWidth=round((intval($displayWidth))/$nbCol); // 3 columns should be displayable
