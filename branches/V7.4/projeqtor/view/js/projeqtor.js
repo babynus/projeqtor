@@ -3997,7 +3997,20 @@ function addNewItem(item) {
   if (switchedMode) {
     setTimeout("hideList(null,true);", 1);
   }
-  loadContent("objectDetail.php", "detailDiv", 'listForm');
+    var currentItem=historyTable[historyPosition];
+    var currentScreen=currentItem[2];
+    if (currentScreen=="Planning" || currentScreen=="GlobalPlanning"){
+      var currentItemParent = currentItem[1];
+      var originClass = currentItem[0];
+      var url = 'objectDetail.php?insertItem=true&currentItemParent='+currentItemParent+'&originClass='+originClass;
+      if(currentItemParent){
+        loadContent(url, "detailDiv", 'listForm');
+      }else{
+        loadContent("objectDetail.php", "detailDiv", 'listForm');
+      }
+    }else{
+      loadContent("objectDetail.php", "detailDiv", 'listForm');
+    }
   dijit.byId('planningNewItem').closeDropDown();
 }
 
