@@ -423,7 +423,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   //gautier
   if($objInsert){
     $obj->idProject = $objInsert->idProject;
-    if (property_exists($obj, 'idActivity')) {
+    if (property_exists($obj, 'idActivity') and property_exists($objInsert, 'idActivity')) {
       $obj->idActivity = $objInsert->idActivity;
     }
     $planningElementClass = get_class($objInsert).'PlanningElement';
