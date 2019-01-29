@@ -2782,6 +2782,9 @@ abstract class SqlElement {
         }
       }
     }
+    if (RequestHandler::isCodeSet('moveToAfterCreate')) {
+      $this->_moveToAfterCreate=RequestHandler::getId('moveToAfterCreate');
+    }
   }
 
   /**
