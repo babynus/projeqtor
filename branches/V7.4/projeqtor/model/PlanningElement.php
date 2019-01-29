@@ -560,7 +560,7 @@ class PlanningElement extends SqlElement {
       $idPlanningElementOrigin= $this->_moveToAfterCreate;
       $peOrigin = new PlanningElement($idPlanningElementOrigin);
         if($this->idProject == $peOrigin->idProject){
-          if(property_exists($this->refType, 'idActivity')){
+          if(property_exists($this->refType, 'idActivity') and property_exists($peOrigin->refType, 'idActivity')){
             $objOrigin= new $peOrigin->refType($peOrigin->refId,true);
             $currentObj = new $this->refType($this->refId,true);
             if($objOrigin->idActivity == $currentObj->idActivity){
