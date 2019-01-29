@@ -192,8 +192,8 @@ class Absence{
       $result .='</table>';
     }
     $result .='</div>';
-    $result .='<div id="warningExceedWork" class="messageWARNING" style="z-index:99;display: none; text-align: center; position:absolute; top:45%;margin-left: 32%; height:20px; width: 35%;padding-top:12px">'.i18n('exceedWork').'</div></br>';
-    $result .='<div id="warningNoActivity" class="messageWARNING" style="z-index:99;display: none; text-align: center; position:absolute; top:45%;margin-left: 32%; height:20px; width: 35%;padding-top:12px">'.i18n('noActivitySelected').'</div></br>';
+    $result .='<div id="warningExceedWork" class="messageWARNING" style="z-index:99;display: none; text-align: center; position:absolute; top:45%;margin-left: 32%; height:20px; width: 35%;padding-top:12px">'.i18n('exceedWork').'</div>';
+    $result .='<div id="warningNoActivity" class="messageWARNING" style="z-index:99;display: none; text-align: center; position:absolute; top:45%;margin-left: 32%; height:20px; width: 35%;padding-top:12px">'.i18n('noActivitySelected').'</div>';
     echo $result;
   }
   
