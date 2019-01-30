@@ -377,6 +377,13 @@ class PlanningElement extends SqlElement {
     $lstElt=$this->getSqlElementsFromCriteria(null, null, $crit ,'wbsSortable asc');
     if ($lstElt and count($lstElt)>0) {
       $this->elementary=0;
+      if($this->isManualProgress = 1){
+        $this->isManualProgress = 0;
+        $this->realWork = 0;
+        $this->leftWork = $this->validatedWork;
+        $this->progress = 0;
+        $this->expectedProgress = 0;
+      }
     } else {
       $this->elementary=1;
       $this->validatedCalculated=0;
