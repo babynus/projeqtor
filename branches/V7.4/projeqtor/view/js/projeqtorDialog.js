@@ -929,7 +929,7 @@ function planningPDFBox(copyType) {
 // 7.3.0 Not usefull anymore with dojo 1.14 and 2 lines below
 function pauseBodyFocus() { dojo.query(".cke_dialog_body").addClass("dijitPopup");}      
 function resumeBodyFocus() { dojo.query(".cke_dialog_body").removeClass("dijitPopup");}   
-function addNote(reply=false, idParentNote) {
+function addNote(reply, idParentNote) {
   if (dijit.byId("noteToolTip")) {
     dijit.byId("noteToolTip").destroy();
     dijit.byId("noteNote").set("class", "");
