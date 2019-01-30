@@ -68,11 +68,14 @@ if ($workVal == 0){
     $somWork = $workVal;
   }
   foreach ($listWork as $isWork){
-    $somWork += $isWork->work;
+    
     if($isWork->refId == $actId and $somWork <= 1){
-      $isWork->work += $workVal;
+      $isWork->work = $workVal;
       $editWork = true;
       $isWork->save();
+      $somWork += $workVal;
+    } else {
+      $somWork += $isWork->work;
     }
   }
   if(!$editWork){
