@@ -62,6 +62,16 @@ if (isset($_REQUEST['noselect'])) {
 if (!isset($noselect)) {
   $noselect=false;
 }
+
+//gautier
+$objInsert = false;
+$insertPlanningItem = RequestHandler::getValue('insertItem');
+if($insertPlanningItem){
+  $currentItemParent = RequestHandler::getId('currentItemParent');
+  $classItemParent = RequestHandler::getClass('originClass');
+  $objInsert = new $classItemParent($currentItemParent);
+}
+
 if ($noselect) {
   $objId="";
   $obj=null;
@@ -407,8 +417,27 @@ if (array_key_exists('refresh', $_REQUEST)) {
  */
 function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $parentHidden=false) {
   scriptLog("drawTableFromObject(obj, included=$included, parentReadOnly=$parentReadOnly)");
-  global $toolTip, $cr, $print, $treatedObjects, $displayWidth, $outMode, $comboDetail, $collapsedList, $printWidth, $profile, $detailWidth, $readOnly, $largeWidth, $widthPct, $nbColMax, $preseveHtmlFormatingForPDF, $reorg, $leftPane, $rightPane, $extraPane, $bottomPane, $nbColMax, $section, $beforeAllPanes, $colWidth;
+  global $toolTip, $cr, $print, $treatedObjects, $displayWidth, $outMode, $comboDetail, $collapsedList, $printWidth, $profile, $detailWidth, $readOnly, $largeWidth, $widthPct, $nbColMax, $preseveHtmlFormatingForPDF, $reorg, $leftPane, $rightPane, $extraPane, $bottomPane, $nbColMax, $section, $beforeAllPanes, $colWidth,$objInsert;
   $ckEditorNumber=0; // Will be used only if getEditor=="CK" for CKEditor
+
+  //gautier
+  if($objInsert){
+    if(get_class($objInsert)=='Project'){
+      if(substr(get_class($obj), 0, 7)== 'Project'){
+        $obj->idProject = $objInsert->idProject;
+      }else{
+        $obj->idProject = $objInsert->id;
+      }
+    }else{
+      $obj->idProject = $objInsert->idProject;
+    }
+    if (property_exists($obj, 'idActivity') and property_exists($objInsert, 'idActivity')) {
+      $obj->idActivity = $objInsert->idActivity;
+    }
+    $planningElementClass = get_class($objInsert).'PlanningElement';
+    $idPlanningElementOrigin = $objInsert->$planningElementClass->id;
+    echo "<input type='hidden' name='moveToAfterCreate' value='$idPlanningElementOrigin' />";
+  }
 
   if (property_exists($obj, '_sec_Assignment')) {
     $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$profile, 'scope'=>'assignmentView'));
@@ -499,6 +528,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
       }
       $defaultProject=$firstId;
+      if($objInsert){
+        $defaultProject = $obj->idProject;
+      }
     }
   }
   if (property_exists($obj, $idType)) {
@@ -591,7 +623,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   // END - ADD BY TABARY - NOTIFICATION SYSTEM
   
   // Loop on each property of the object
-  echo "<input type='hidden' name='moveToAfterCreate' value='10' />";
   foreach ($obj as $col=>$val) {
     if ($detailWidth) {
       $colWidth=round((intval($displayWidth))/$nbCol); // 3 columns should be displayable
