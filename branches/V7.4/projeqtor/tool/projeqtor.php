@@ -2776,6 +2776,25 @@ function workDayDiffDates($start, $end) {
   return $duration;
 }
 
+function countDayDiffDates($start, $end, $idCalendarDefinition) {
+	if (!$start or !$end) {
+		return "";
+	}
+	$currentDate=$start;
+	$endDate=$end;
+	if ($end<$start) {
+		return 0;
+	}
+	$duration=0;
+	while ($currentDate<=$endDate) {
+		if (!isOffDay($currentDate, $idCalendarDefinition)) {
+			$duration++;
+		}
+		$currentDate=addDaysToDate($currentDate, 1);
+	}
+	return $duration;
+}
+
 /**
  * ============================================================================
  * Calculate difference between 2 dates
@@ -3193,6 +3212,16 @@ function firstDayofWeek($week=null, $year=null) {
   return $desiredMonday;
 }
 
+function lastDayofWeek($week=null, $year=null) {
+	if (!$week or !$year) {
+		$now=date('Y-m-d');
+		return firstDayofWeek(weekNumber($now), substr($now, 0, 4));
+	}
+	$date = new DateTime();
+	$date->setISODate($year, $week, 7);
+	$lastDay = substr($date->format('Y-m-d'), 0, 10);
+	return $lastDay;
+}
 /*
  * Calculate number of days between 2 dates
  */
