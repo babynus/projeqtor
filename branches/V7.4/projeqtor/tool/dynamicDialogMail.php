@@ -38,7 +38,7 @@ $obj=new $objectClass($objectId);
 $emTp = new EmailTemplate();
 $idObjectType = 'id'.$objectClass.'Type';
 $idMailable = SqlList::getIdFromTranslatableName('Mailable', $objectClass);
-$where = "idMailable = ".$idMailable." and (idType = '".$obj->$idObjectType."' or idType IS NULL)";
+$where = "(idMailable = ".$idMailable." or idMailable IS NULL) and (idType = '".$obj->$idObjectType."' or idType IS NULL)";
 $listEmailTemplate = $emTp->getSqlElementsFromCriteria(null,false,$where);
 ?>
 <input type="hidden" name="dialogMailObjectClass" id="dialogMailObjectClass" value="<?php echo htmlEncode($objectClass);?>" />
@@ -230,7 +230,7 @@ $listEmailTemplate = $emTp->getSqlElementsFromCriteria(null,false,$where);
                 <select dojoType="dijit.form.FilteringSelect" 
                 id="selectEmailTemplate" name="selectEmailTemplate" class="input"
                 <?php echo autoOpenFilteringSelect();?>>
-                <?php foreach ($listEmailTemplate as $key => $value){?>
+                <?php foreach ($listEmailTemplate as $key => $value){ debugLog($value->id);?>
                 <option value="<?php echo $value->id;?>"><span> <?php echo htmlEncode($value->name);?></span></option>
                 <?php }?>
                 <script type="dojo/connect" event="onChange" args="evt">
