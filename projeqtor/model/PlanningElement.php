@@ -555,7 +555,7 @@ class PlanningElement extends SqlElement {
       Project::setNeedReplan($this->idProject);
     }
     
-    //gautier Proj
+    //gautier
     if(isset($this->_moveToAfterCreate)){
       $idPlanningElementOrigin= $this->_moveToAfterCreate;
       $peOrigin = new PlanningElement($idPlanningElementOrigin);
@@ -567,7 +567,9 @@ class PlanningElement extends SqlElement {
               $this->moveTo($idPlanningElementOrigin, 'after');
             }
           }else{
-            $this->moveTo($idPlanningElementOrigin, 'after');
+            if($peOrigin->refType != 'Project'){
+              $this->moveTo($idPlanningElementOrigin, 'after');
+            }
           }
         }
     }
