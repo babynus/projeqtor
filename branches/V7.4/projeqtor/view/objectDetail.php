@@ -423,7 +423,11 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   //gautier
   if($objInsert){
     if(get_class($objInsert)=='Project'){
-      $obj->idProject = $objInsert->id;
+      if(substr(get_class($obj), 0, 7)== 'Project'){
+        $obj->idProject = $objInsert->idProject;
+      }else{
+        $obj->idProject = $objInsert->id;
+      }
     }else{
       $obj->idProject = $objInsert->idProject;
     }
