@@ -130,9 +130,9 @@ ADD `isManualProgress` int(1) unsigned DEFAULT '0';
 ALTER TABLE `${prefix}Project`
 ADD `fixPerimeter` int(1) unsigned DEFAULT '0';
 
-UPDATE `${prefix}habilitationother` set `rightAccess`='1' WHERE `idprofile`='1' and `scope`='changeManualProgress';
-UPDATE `${prefix}habilitationother` set `rightAccess`='1' WHERE `idprofile`='3' and `scope`='changeManualProgress';
+INSERT INTO `${prefix}habilitationother` (idProfile, rightAccess, scope) VALUES
+(1,1,'changeManualProgress'),
+(3,1,'changeManualProgress');
 
-UPDATE `${prefix}habilitationother` set `rightAccess`='1' WHERE `idprofile`='1' and `scope`='changePriority';
-UPDATE `${prefix}habilitationother` set `rightAccess`='1' WHERE `idprofile`='2' and `scope`='changePriority';
-UPDATE `${prefix}habilitationother` set `rightAccess`='1' WHERE `idprofile`='3' and `scope`='changePriority';
+INSERT INTO `${prefix}habilitationother` (idProfile, rightAccess, scope)
+  SELECT idProfile, rightAccess, 'changePriority' FROM `${prefix}habilitationother` WHERE `scope`='changeValidatedData';
