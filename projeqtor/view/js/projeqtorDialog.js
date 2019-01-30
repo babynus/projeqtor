@@ -6522,7 +6522,8 @@ function loadMenuBarItem(item, itemName, from) {
     loadContent("reportsMain.php", "centerDiv");
   } else if (item == 'Absence') {
 	    loadContent("absenceMain.php", "centerDiv");
-    
+  } else if (item == 'ImputationValidation') {
+	    loadContent("imputationValidationMain.php", "centerDiv");  
     //ADD qCazelles - GANTT
   } else if (item == 'VersionsPlanning') {
 	//CHANGE qCazelles - Correction GANTT - Ticket #100

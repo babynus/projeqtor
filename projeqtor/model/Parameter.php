@@ -490,6 +490,7 @@ class Parameter extends SqlElement {
       	if (securityCheckDisplayMenu(null,'DashboardTicket')) {$list['dashboardTicketMain.php']=i18n('menuDashboardTicket');}
       	if (securityCheckDisplayMenu(null,'Diary')) {$list['diaryMain.php']=i18n('menuDiary');}
       	if (securityCheckDisplayMenu(null,'Imputation')) {$list['imputationMain.php']=i18n('menuImputation');}
+      	if (securityCheckDisplayMenu(null,'ImputationValidation')) {$list['ImputationValidation.php']=i18n('menuImputationValidation');}//damian
       	if (securityCheckDisplayMenu(null,'Absence')) {$list['Absence.php']=i18n('menuAbsence');}
       	if (securityCheckDisplayMenu(null,'Planning')) {$list['planningMain.php']=i18n('menuPlanning');}
       	if (securityCheckDisplayMenu(null,'PortfolioPlanning')) {$list['portfolioPlanningMain.php']=i18n('menuPortfolioPlanning');}

@@ -5550,3 +5550,18 @@ function selectAbsenceDay(dateId, day, workDay, month, year, week, userId){
 		  });
 	}
 }
+
+//Imputation Validation refresh function
+function refreshImputationValidation() {
+	if (checkFormChangeInProgress()) {
+		showAlert(i18n('alertOngoingChange'));
+		return false;
+	}
+	formInitialize();
+	showWait();
+	var callback=function() {
+		hideWait();
+	};
+	loadDiv('../view/refreshImputationValidation.php', 'imputationValidationWorkDiv', 'listForm', callback);
+	return true;
+}
