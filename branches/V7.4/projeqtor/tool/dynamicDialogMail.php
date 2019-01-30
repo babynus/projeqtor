@@ -230,7 +230,7 @@ $listEmailTemplate = $emTp->getSqlElementsFromCriteria(null,false,$where);
                 <select dojoType="dijit.form.FilteringSelect" 
                 id="selectEmailTemplate" name="selectEmailTemplate" class="input"
                 <?php echo autoOpenFilteringSelect();?>>
-                <?php foreach ($listEmailTemplate as $key => $value){ debugLog($value->id);?>
+                <?php foreach ($listEmailTemplate as $key => $value){?>
                 <option value="<?php echo $value->id;?>"><span> <?php echo htmlEncode($value->name);?></span></option>
                 <?php }?>
                 <script type="dojo/connect" event="onChange" args="evt">
