@@ -380,7 +380,7 @@ class PlanningElement extends SqlElement {
       if($this->isManualProgress = 1){
         $this->isManualProgress = 0;
         $this->realWork = 0;
-        $this->leftWork = $this->validatedWork;
+        $this->leftWork = 0;
         $this->progress = 0;
         $this->expectedProgress = 0;
       }
@@ -452,7 +452,7 @@ class PlanningElement extends SqlElement {
     if($old->isManualProgress and $old->idPlanningMode!= $this->idPlanningMode or $old->isManualProgress and $cptAss!=0){
       $this->isManualProgress = 0;
       $this->realWork = 0;
-      $this->leftWork = $this->validatedWork;
+      $this->leftWork = 0;
       $this->progress = 0;
       $this->expectedProgress = 0;
     }
