@@ -4839,12 +4839,12 @@ function addFieldInTextBoxForEmailTemplateItem(editor) {
   
   textToAdd = '${';
     
-  if (selectedItem.search('name') != 0 && selectedItem.search('id') != 0) {
-      textToAdd=textToAdd + 'id' + selectedItem.charAt(0).toUpperCase() + selectedItem.substring(1);
+  if(selectedItem.search('_') == 0){
+	  textToAdd=textToAdd + selectedItem.substring(1);
   }else{
 	  textToAdd=textToAdd + selectedItem;
   }
-  textToAdd=textToAdd + "}";            
+  textToAdd=textToAdd + "}";
   newText = oldText.substr(0, cursPos) + textToAdd + oldText.substr(cursPos);        
   
   if (editor==='text' || textBox!=='template') {
