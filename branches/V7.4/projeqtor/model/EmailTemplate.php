@@ -141,7 +141,6 @@ class EmailTemplate extends SqlElement {
       
       $arrayFields = array();
       $newArrayFields = array();
-      debugLog($this->getMailableItem());
       if($this->getMailableItem() != null){
         $mailableItem=$this->getMailableItem();
         if ($mailableItem->id != null) {
@@ -153,53 +152,53 @@ class EmailTemplate extends SqlElement {
         			$newArrayFields['name'.ucfirst(substr($elmt, 2))]=$val.' ('.i18n('colName').')';
         		}
         	}
-        	$newArrayFields['_item'] = 'class of the item';
-        	$newArrayFields['_dbName'] = 'display name of current instance';
-        	$newArrayFields['_responsible'] = 'synonym for ${nameResource}';
-        	$newArrayFields['_sender'] = 'name of user sending the email';
-        	$newArrayFields['_project'] = 'synonym for ${nameProject}';
-        	$newArrayFields['_url'] = 'url to get the direct link to the item';
-        	$newArrayFields['_goto'] = 'display Class and Id of item, clickable to have direct link to the item';
-        	$newArrayFields['_HISTORY'] = 'displays the last changes of an object';
-        	$newArrayFields['_LINK'] = 'list linked elements to the item';
-        	$newArrayFields['_NOTE'] = 'lists the notes of the item';
+        	$newArrayFields['_item'] = i18n('mailableItem');
+          $newArrayFields['_dbName'] = i18n('mailableDbName');
+          $newArrayFields['_responsible'] = i18n('colResponsible').', '.i18n('synonymResponsible');
+          $newArrayFields['_sender'] = i18n('mailableSender');
+          $newArrayFields['_project'] = i18n('colIdProject').', '.i18n('synonymProject');
+          $newArrayFields['_url'] = i18n('mailableUrl');
+          $newArrayFields['_goto'] = i18n('mailableGoto');
+          $newArrayFields['_HISTORY'] = i18n('mailableHistory');
+          $newArrayFields['_LINK'] = i18n('mailableLink');
+          $newArrayFields['_NOTE'] = i18n('mailableNote');
         	$arrayFields = $newArrayFields;
         }else{
           $newArrayFields['_id'] = 'id';
-          $newArrayFields['_name'] = 'name';
-          $newArrayFields['_idProject'] = 'idProject';
-          $newArrayFields['_nameProject'] = 'project ('.i18n('colName').')';
-          $newArrayFields['_description'] = 'description';
-          $newArrayFields['_item'] = 'class of the item';
-          $newArrayFields['_dbName'] = 'display name of current instance';
-          $newArrayFields['_responsible'] = 'synonym for ${nameResource}';
-          $newArrayFields['_sender'] = 'name of user sending the email';
-          $newArrayFields['_project'] = 'synonym for ${nameProject}';
-          $newArrayFields['_url'] = 'url to get the direct link to the item';
-          $newArrayFields['_goto'] = 'display Class and Id of item, clickable to have direct link to the item';
-          $newArrayFields['_HISTORY'] = 'displays the last changes of an object';
-          $newArrayFields['_LINK'] = 'list linked elements to the item';
-          $newArrayFields['_NOTE'] = 'lists the notes of the item';
+          $newArrayFields['_name'] = i18n('colName');
+          $newArrayFields['_idProject'] = 'id'.i18n('colIdProject');
+          $newArrayFields['_nameProject'] = i18n('colIdProject').' ('.i18n('colName').')';
+          $newArrayFields['_description'] = 'colDescription';
+          $newArrayFields['_item'] = i18n('mailableItem');
+          $newArrayFields['_dbName'] = i18n('mailableDbName');
+          $newArrayFields['_responsible'] = i18n('colResponsible').', '.i18n('synonymResponsible');
+          $newArrayFields['_sender'] = i18n('mailableSender');
+          $newArrayFields['_project'] = i18n('colIdProject').', '.i18n('synonymProject');
+          $newArrayFields['_url'] = i18n('mailableUrl');
+          $newArrayFields['_goto'] = i18n('mailableGoto');
+          $newArrayFields['_HISTORY'] = i18n('mailableHistory');
+          $newArrayFields['_LINK'] = i18n('mailableLink');
+          $newArrayFields['_NOTE'] = i18n('mailableNote');
           $arrayFields = $newArrayFields;
         }
       }else{
-        $arrayFields['_id'] = 'id';
-        $arrayFields['_name'] = 'name';
-        $arrayFields['_idProject'] = 'idProject';
-        $arrayFields['_nameProject'] = 'project ('.i18n('colName').')';
-        $arrayFields['_description'] = 'description';
-        $arrayFields['_item'] = 'class of the item';
-        $arrayFields['_dbName'] = 'display name of current instance';
-        $arrayFields['_responsible'] = 'synonym for ${nameResource}';
-        $arrayFields['_sender'] = 'name of user sending the email';
-        $arrayFields['_project'] = 'synonym for ${nameProject}';
-        $arrayFields['_url'] = 'url to get the direct link to the item';
-        $arrayFields['_goto'] = 'display Class and Id of item, clickable to have direct link to the item';
-        $arrayFields['_HISTORY'] = 'displays the last changes of an object';
-        $arrayFields['_LINK'] = 'list linked elements to the item';
-        $arrayFields['_NOTE'] = 'lists the notes of the item';
+        $newArrayFields['_id'] = 'id';
+        $newArrayFields['_name'] = i18n('colName');
+        $newArrayFields['_idProject'] = 'id'.i18n('colIdProject');
+        $newArrayFields['_nameProject'] = i18n('colIdProject').' ('.i18n('colName').')';
+        $newArrayFields['_description'] = 'colDescription';
+        $newArrayFields['_item'] = i18n('mailableItem');
+        $newArrayFields['_dbName'] = i18n('mailableDbName');
+        $newArrayFields['_responsible'] = i18n('colResponsible').', '.i18n('synonymResponsible');
+        $newArrayFields['_sender'] = i18n('mailableSender');
+        $newArrayFields['_project'] = i18n('colIdProject').', '.i18n('synonymProject');
+        $newArrayFields['_url'] = i18n('mailableUrl');
+        $newArrayFields['_goto'] = i18n('mailableGoto');
+        $newArrayFields['_HISTORY'] = i18n('mailableHistory');
+        $newArrayFields['_LINK'] = i18n('mailableLink');
+        $newArrayFields['_NOTE'] = i18n('mailableNote');
+        $arrayFields = $newArrayFields;
       }
-      debugLog($arrayFields);
       $fieldAttributes=$this->getFieldAttributes($item);
       if(strpos($fieldAttributes,'required')!==false) {
       	$isRequired = true;
