@@ -1769,7 +1769,7 @@ helpImputOfAmountProvider: "Defined for expenses items if the amounts must be en
 helpImputOfBillLineClient: "Defined for incomes items if the total bill lines feed the total with or without taxes. The parameter is priority if there are bill lines.",
 helpImputOfBillLineProvider: "Defined for expenses items if the total bill lines feed the total with or without taxes. The parameter is priority if there are bill lines.",
 helpInitializePassword: "автоматично ініціювати значення паролю за замовчуванням для нових користувачів   ",
-helpIsManualProgress: "",
+helpIsManualProgress: "To manually enter progress of fixed-duration activities without assignment. If set to yes&#44 the real work will be calculated&#58 [real work] = [validated work] x [progress]",
 helpLang: "Оберіть мову програми",
 helpLdapCreationAction: "на LDAP створення користувачів також створити користувача в якості ресурсу та/або в якості контакту",
 helpLdapDefaultProfile: "Типовий режим для нових користувачів - LDAP аутентифікація",

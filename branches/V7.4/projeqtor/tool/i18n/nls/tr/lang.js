@@ -1769,7 +1769,7 @@ helpImputOfAmountProvider: "Defined for expenses items if the amounts must be en
 helpImputOfBillLineClient: "Defined for incomes items if the total bill lines feed the total with or without taxes. The parameter is priority if there are bill lines.",
 helpImputOfBillLineProvider: "Defined for expenses items if the total bill lines feed the total with or without taxes. The parameter is priority if there are bill lines.",
 helpInitializePassword: "yeni kullanıcılar için şifreyi varsayılan değere otomatik olarak başlat",
-helpIsManualProgress: "",
+helpIsManualProgress: "To manually enter progress of fixed-duration activities without assignment. If set to yes&#44 the real work will be calculated&#58 [real work] = [validated work] x [progress]",
 helpLang: "Uygulamanın dilini seçin",
 helpLdapCreationAction: "LDAP kullanıcı oluşturma üzerinde ayrıca kullanıcı kaynağı olarak ve / veya kişi olarak",
 helpLdapDefaultProfile: "Ldap kimlik doğrulamasından eklenen yeni kullanıcılar için varsayılan profil",
