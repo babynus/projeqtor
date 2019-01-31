@@ -989,27 +989,26 @@ class PlanningElement extends SqlElement {
 //   	}
     
   	//Damian
-    $oldElement = $this->getOld();
-    $projOld = new Project($oldElement->idProject,true);
-    $proj = new Project($this->idProject,true);
-    $parentProj = new Project($proj->idProject);
-    $oldParentProj = $parentProj->getOld();
-    
-    if($projOld->fixPerimeter and $projOld->id!=$this->idProject){
-      $result .= i18n('msgUnableToMoveOutToFixPerimeter');
+    $old = $this->getOld();
+    if($old->idProject!=$this->idProject or ($this->refType=='Project' and $old->topRefId!=$this->topRefId)){
+      if($this->refType=='Project') {
+        $projOld = new Project($old->topRefId,true);
+        $projNew = new Project($this->topRefId,true);
+      } else {
+        $projOld = new Project($old->idProject,true);
+        $projNew = new Project($this->idProject,true);
+      }
+      if ($projOld->fixPerimeter) {
+        $result .= "<br/>" .i18n('msgUnableToMoveOutToFixPerimeter');
+      }
+      if ($projNew->fixPerimeter) {
+        if(!$this->id){
+          $result .= "<br/>".i18n('msgUnableToAddToFixPerimeter');
+        } else {
+          $result .= "<br/>".i18n('msgUnableToMoveOnFixPerimeter');
+        }
+      }
     }
-    if($parentProj->fixPerimeter and $parentProj->id!=$this->idProject){
-    	$result .= i18n('MessageDiff');
-    }
-  	if($proj->fixPerimeter){
-  	  if(!$this->id){
-  	    $result .= i18n('msgUnableToAddToFixPerimeter');
-  	  }else{
-  	    if(!$projOld->fixPerimeter){
-  	      $result .= i18n('msgUnableToMoveOnFixPerimeter');
-  	    }
-  	  }
-  	}
   	
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
@@ -1027,22 +1026,17 @@ class PlanningElement extends SqlElement {
   	 
   	// Cannot delete item with real work
   	if ($this->id and $this->realWork and $this->realWork>0)	{
-  	  if($result==""){
-  	    $result .= i18n("msgUnableToDeleteRealWork");
-  	  }else{
-  	    $result .= "<br/>" . i18n("msgUnableToDeleteRealWork");
-  	  }
+ 	    $result .= "<br/>" . i18n("msgUnableToDeleteRealWork");
   	}
 
-
   	//damian
-  	$proj = new Project($this->idProject,true);
+  	if($this->refType=='Project') {
+  	  $proj = new Project($this->topRefId,true);
+  	} else {
+  	  $proj = new Project($this->idProject,true);
+  	}
   	if($proj->fixPerimeter){
-  	  if($result==""){
-  	    $result .= i18n("msgUnableToDeleteOfFixPerimeter");
-  	  }else{
-  	    $result .= "<br/>" . i18n("msgUnableToDeleteOfFixPerimeter");
-  	  }
+  	  $result .= "<br/>" . i18n("msgUnableToDeleteOfFixPerimeter");
   	}
   	
   	if (! $result) {
