@@ -7379,18 +7379,22 @@ function stockEmailCurrent(){
 
 function compareEmailCurrent(){
 	if(stockEmailHistory.length > 0){
-		dojo.byId('dialogOtherMailHistorical').style.display = 'block';
 		var inputEmail=dijit.byId('dialogOtherMail').get('value');
 		var split = inputEmail.split(',');
 		inputEmail = split[split.length - 1];
 		var count = 0;
 		var email = "";
 		var divCount = 0;
+		var display = '';
 		stockEmailHistory.forEach(function(element){
 			count++;
 			if(split.indexOf(element) <= -1){
 				divCount++;
+				if(divCount < 0){
+					dojo.byId('dialogOtherMailHistorical').style.display = 'none';
+				}
 				if(element.search(inputEmail) > -1){
+					dojo.byId('dialogOtherMailHistorical').style.display = 'block';
 					email += '<div class="emailHistorical" id="email'+count+'" style="cursor:pointer;"'
 							+'onclick="selectEmailHistorical(\''+element+'\')">'
 							+element+'</div>';

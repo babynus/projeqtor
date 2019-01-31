@@ -4824,7 +4824,6 @@ function addFieldInTextBoxForEmailTemplateItem(editor) {
     cursPos = val.slice(0, element.selectionStart).length;
   } else if (editor==='CK' || editor==='CKInline') {
     var val = CKEDITOR.instances[textBox].getData();
-    console.log(val);
     cursPos = val.length;
   } else if (editor==='Dojo' || editor==='DojoInline') {
     var val = dijit.byId(textBox+'Editor').getValue();
