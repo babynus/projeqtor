@@ -173,7 +173,7 @@ $listEmailTemplate = $emTp->getSqlElementsFromCriteria(null,false,$where);
   				          id="dialogOtherMail" name="dialogOtherMail"
   				          style="width: 500px; display:none"
   				          maxlength="4000"
-  				          class="input" onblur="findAutoEmail();hideEmailHistorical();" oninput="compareEmailCurrent();" onclick="compareEmailCurrent()"></textarea>
+  				          class="input" onblur="findAutoEmail();hideEmailHistorical();" oninput="compareEmailCurrent();" onclick="compareEmailCurrent();"></textarea>
   				      <textarea dojoType="dijit.form.Textarea" 
       					          id="dialogMailObjectIdEmail" name="dialogMailObjectIdEmail"
       					          style="width: 500px; display:none"
