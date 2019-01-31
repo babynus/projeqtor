@@ -1769,7 +1769,7 @@ helpImputOfAmountProvider: "Définis pour les éléments de dépenses si les mon
 helpImputOfBillLineClient: "Définis pour les éléments de revenus si les montants des lignes de factures alimentent le total  HT ou TTC. Le paramètre est prioritaire dès qu'il y a des lignes de détail.",
 helpImputOfBillLineProvider: "Définis pour les éléments de dépenses si les montants des lignes de factures alimentent le total  HT ou TTC. Le paramètre est prioritaire dès qu'il y a des lignes de détail.",
 helpInitializePassword: "Initialiser automatiquement le mot de passe pour les nouveaux utilisateurs créés",
-helpIsManualProgress: "",
+helpIsManualProgress: "Permettre de saisir manuellement l'avancement sur les activites à durée fixe sans assignation. Si positionné à oui&#44 le travail réel sera calculé &#58 [charge réelle] = [charge validée] x [avancement saisi]",
 helpLang: "Sélectionner la langue d'affichage de l'application",
 helpLdapCreationAction: "action à la création d'un utilisateur LDAP pour générer la ressource et/ou le contact qui correspond à l'utilisateur",
 helpLdapDefaultProfile: "Profil par défaut pour les nouveaux utilisateurs insérés suite à une première authentification LDAP",
