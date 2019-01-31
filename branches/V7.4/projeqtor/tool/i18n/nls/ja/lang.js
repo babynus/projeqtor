@@ -1769,7 +1769,7 @@ helpImputOfAmountProvider: "Defined for expenses items if the amounts must be en
 helpImputOfBillLineClient: "Defined for incomes items if the total bill lines feed the total with or without taxes. The parameter is priority if there are bill lines.",
 helpImputOfBillLineProvider: "Defined for expenses items if the total bill lines feed the total with or without taxes. The parameter is priority if there are bill lines.",
 helpInitializePassword: "新規ユーザーのパスワードを自動的に既定値に初期化",
-helpIsManualProgress: "",
+helpIsManualProgress: "To manually enter progress of fixed-duration activities without assignment. If set to yes&#44 the real work will be calculated&#58 [real work] = [validated work] x [progress]",
 helpLang: "アプリケーションの言語の選択",
 helpLdapCreationAction: "LDAPユーザを作成するとリソースおよび／またはコンタクトも設定されます",
 helpLdapDefaultProfile: "LDAPから追加された新規ユーザーのデフォルトアクセスロール",

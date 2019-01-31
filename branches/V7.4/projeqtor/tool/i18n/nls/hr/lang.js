@@ -1769,7 +1769,7 @@ helpImputOfAmountProvider: "Defined for expenses items if the amounts must be en
 helpImputOfBillLineClient: "Defined for incomes items if the total bill lines feed the total with or without taxes. The parameter is priority if there are bill lines.",
 helpImputOfBillLineProvider: "Defined for expenses items if the total bill lines feed the total with or without taxes. The parameter is priority if there are bill lines.",
 helpInitializePassword: "automatski inicijalizirati lozinku na zadane vrijednosti za nove korisnike",
-helpIsManualProgress: "",
+helpIsManualProgress: "To manually enter progress of fixed-duration activities without assignment. If set to yes&#44 the real work will be calculated&#58 [real work] = [validated work] x [progress]",
 helpLang: "Odaberite željeni jezik.",
 helpLdapCreationAction: "na LDAP stvaranje korisnika također stvori korisnika kao izvor i / ili kao kontakt",
 helpLdapDefaultProfile: "Standardni profil za nove korisnike koji su dodane kroz LDAP.",
