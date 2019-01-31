@@ -141,34 +141,65 @@ class EmailTemplate extends SqlElement {
       
       $arrayFields = array();
       $newArrayFields = array();
-      $mailableItem=$this->getMailableItem();
-      if ($mailableItem != null) {
-        $nameMailableItem = SqlList::getFieldFromId('Mailable', $mailableItem->id, 'name',false);
-        $arrayFields = getObjectClassTranslatedFieldsList(trim($nameMailableItem));
-      }else{
-        $newArrayFields['_id'] = 'id';
-        $newArrayFields['_name'] = 'name';
-        $newArrayFields['_idProject'] = 'idProject';
-        $newArrayFields['_nameProject'] = 'project ('.i18n('colName').')';
-        $newArrayFields['_description'] = 'description';
-      }
-      foreach ($arrayFields as $elmt=>$val){
-        $newArrayFields[$elmt]=$val;
-        if(substr($elmt, 0, 2) == "id" and substr($elmt, 2) != "" and $elmt != "idle" and $elmt != "idleDateTime"){
-          $newArrayFields['name'.ucfirst(substr($elmt, 2))]=$val.' ('.i18n('colName').')';
+      debugLog($this->getMailableItem());
+      if($this->getMailableItem() != null){
+        $mailableItem=$this->getMailableItem();
+        if ($mailableItem->id != null) {
+        	$nameMailableItem = SqlList::getFieldFromId('Mailable', $mailableItem->id, 'name',false);
+        	$arrayFields = getObjectClassTranslatedFieldsList(trim($nameMailableItem));
+        	foreach ($arrayFields as $elmt=>$val){
+        		$newArrayFields[$elmt]=$val;
+        		if(substr($elmt, 0, 2) == "id" and substr($elmt, 2) != "" and $elmt != "idle" and $elmt != "idleDateTime"){
+        			$newArrayFields['name'.ucfirst(substr($elmt, 2))]=$val.' ('.i18n('colName').')';
+        		}
+        	}
+        	$newArrayFields['_item'] = 'class of the item';
+        	$newArrayFields['_dbName'] = 'display name of current instance';
+        	$newArrayFields['_responsible'] = 'synonym for ${nameResource}';
+        	$newArrayFields['_sender'] = 'name of user sending the email';
+        	$newArrayFields['_project'] = 'synonym for ${nameProject}';
+        	$newArrayFields['_url'] = 'url to get the direct link to the item';
+        	$newArrayFields['_goto'] = 'display Class and Id of item, clickable to have direct link to the item';
+        	$newArrayFields['_HISTORY'] = 'displays the last changes of an object';
+        	$newArrayFields['_LINK'] = 'list linked elements to the item';
+        	$newArrayFields['_NOTE'] = 'lists the notes of the item';
+        	$arrayFields = $newArrayFields;
+        }else{
+          $newArrayFields['_id'] = 'id';
+          $newArrayFields['_name'] = 'name';
+          $newArrayFields['_idProject'] = 'idProject';
+          $newArrayFields['_nameProject'] = 'project ('.i18n('colName').')';
+          $newArrayFields['_description'] = 'description';
+          $newArrayFields['_item'] = 'class of the item';
+          $newArrayFields['_dbName'] = 'display name of current instance';
+          $newArrayFields['_responsible'] = 'synonym for ${nameResource}';
+          $newArrayFields['_sender'] = 'name of user sending the email';
+          $newArrayFields['_project'] = 'synonym for ${nameProject}';
+          $newArrayFields['_url'] = 'url to get the direct link to the item';
+          $newArrayFields['_goto'] = 'display Class and Id of item, clickable to have direct link to the item';
+          $newArrayFields['_HISTORY'] = 'displays the last changes of an object';
+          $newArrayFields['_LINK'] = 'list linked elements to the item';
+          $newArrayFields['_NOTE'] = 'lists the notes of the item';
+          $arrayFields = $newArrayFields;
         }
+      }else{
+        $arrayFields['_id'] = 'id';
+        $arrayFields['_name'] = 'name';
+        $arrayFields['_idProject'] = 'idProject';
+        $arrayFields['_nameProject'] = 'project ('.i18n('colName').')';
+        $arrayFields['_description'] = 'description';
+        $arrayFields['_item'] = 'class of the item';
+        $arrayFields['_dbName'] = 'display name of current instance';
+        $arrayFields['_responsible'] = 'synonym for ${nameResource}';
+        $arrayFields['_sender'] = 'name of user sending the email';
+        $arrayFields['_project'] = 'synonym for ${nameProject}';
+        $arrayFields['_url'] = 'url to get the direct link to the item';
+        $arrayFields['_goto'] = 'display Class and Id of item, clickable to have direct link to the item';
+        $arrayFields['_HISTORY'] = 'displays the last changes of an object';
+        $arrayFields['_LINK'] = 'list linked elements to the item';
+        $arrayFields['_NOTE'] = 'lists the notes of the item';
       }
-      $newArrayFields['_item'] = 'class of the item';
-      $newArrayFields['_dbName'] = 'display name of current instance';
-      $newArrayFields['_responsible'] = 'synonym for ${nameResource}';
-      $newArrayFields['_sender'] = 'name of user sending the email';
-      $newArrayFields['_project'] = 'synonym for ${nameProject}';
-      $newArrayFields['_url'] = 'url to get the direct link to the item';
-      $newArrayFields['_goto'] = 'display Class and Id of item, clickable to have direct link to the item';
-      $newArrayFields['_HISTORY'] = 'displays the last changes of an object';
-      $newArrayFields['_LINK'] = 'list linked elements to the item';
-      $newArrayFields['_NOTE'] = 'lists the notes of the item';
-      $arrayFields = $newArrayFields;
+      debugLog($arrayFields);
       $fieldAttributes=$this->getFieldAttributes($item);
       if(strpos($fieldAttributes,'required')!==false) {
       	$isRequired = true;

@@ -40,21 +40,31 @@ if($idItemMailable != null){
   		$newArrayFields['name'.ucfirst(substr($elmt, 2))]=$val.' ('.i18n('colName').')';
   	}
   }
+  $newArrayFields['_item'] = 'class of the item';
+  $newArrayFields['_dbName'] = 'display name of current instance';
+  $newArrayFields['_responsible'] = 'synonym for ${nameResource}';
+  $newArrayFields['_sender'] = 'name of user sending the email';
+  $newArrayFields['_project'] = 'synonym for ${nameProject}';
+  $newArrayFields['_url'] = 'url to get the direct link to the item';
+  $newArrayFields['_goto'] = 'display Class and Id of item, clickable to have direct link to the item';
+  $newArrayFields['_HISTORY'] = 'displays the last changes of an object';
+  $newArrayFields['_LINK'] = 'list linked elements to the item';
+  $newArrayFields['_NOTE'] = 'lists the notes of the item';
 }else{
   $newArrayFields['_id'] = 'id';
   $newArrayFields['_name'] = 'name';
   $newArrayFields['_idProject'] = 'idProject';
   $newArrayFields['_nameProject'] = 'project ('.i18n('colName').')';
   $newArrayFields['_description'] = 'description';
+  $newArrayFields['_item'] = 'class of the item';
+  $newArrayFields['_dbName'] = 'display name of current instance';
+  $newArrayFields['_responsible'] = 'synonym for ${nameResource}';
+  $newArrayFields['_sender'] = 'name of user sending the email';
+  $newArrayFields['_project'] = 'synonym for ${nameProject}';
+  $newArrayFields['_url'] = 'url to get the direct link to the item';
+  $newArrayFields['_goto'] = 'display Class and Id of item, clickable to have direct link to the item';
+  $newArrayFields['_HISTORY'] = 'displays the last changes of an object';
+  $newArrayFields['_LINK'] = 'list linked elements to the item';
+  $newArrayFields['_NOTE'] = 'lists the notes of the item';
 }
-$newArrayFields['_item'] = 'class of the item';
-$newArrayFields['_dbName'] = 'display name of current instance';
-$newArrayFields['_responsible'] = 'synonym for ${nameResource}';
-$newArrayFields['_sender'] = 'name of user sending the email';
-$newArrayFields['_project'] = 'synonym for ${nameProject}';
-$newArrayFields['_url'] = 'url to get the direct link to the item';
-$newArrayFields['_goto'] = 'display Class and Id of item, clickable to have direct link to the item';
-$newArrayFields['_HISTORY'] = 'displays the last changes of an object';
-$newArrayFields['_LINK'] = 'list linked elements to the item';
-$newArrayFields['_NOTE'] = 'lists the notes of the item';
 echo json_encode($newArrayFields);
