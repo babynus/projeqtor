@@ -7343,6 +7343,8 @@ function saveMailMessage() {
 //gautier #2935
 function findAutoEmail(){
   var adress=dijit.byId('dialogOtherMail').get('value');
+  var regex = /,[ ]*|;[ ]*/gi;
+  adress=adress.replace(regex,",");
   dojo.xhrGet({
     url: '../tool/saveFindEmail.php?&isId=false&adress='+adress ,
     load: function(data,args) { 
