@@ -5521,6 +5521,9 @@ function selectActivity(actRowId, actId, idProject, assId){
 		dojo.setAttr('inputAssId', 'value', assId);
 	}
 	dojo.byId('warningNoActivity').style.display = 'none';
+	saveDataToSession('selectAbsenceActivity', actId, true);
+	saveDataToSession('inputIdProject', idProject, true);
+	saveDataToSession('inputAssId', assId, true);
 }
 
 // Absence day selection fonction
@@ -5563,4 +5566,47 @@ function refreshImputationValidation() {
 	};
 	loadDiv('../view/refreshImputationValidation.php', 'imputationValidationWorkDiv', 'listForm', callback);
 	return true;
+}
+
+////Imputation Validation refresh function
+//function refreshImputationValidationDiv(idWorkPeriod, buttonAction) {
+//	if (checkFormChangeInProgress()) {
+//		showAlert(i18n('alertOngoingChange'));
+//		return false;
+//	}
+//	formInitialize();
+//	showWait();
+//	var callback=function() {
+//		hideWait();
+//	};
+//	switch (buttonAction){
+//		case 'cancelSubmit' :
+//			loadDiv('../view/refreshImputationValidation.php', 'divCancel'+idWorkPeriod, 'listForm', callback);
+//		  break;
+//		case 'cancelValidation' :
+//			loadDiv('../view/refreshImputationValidation.php', 'divCancelValidation'+idWorkPeriod, 'listForm', callback);
+//		  break;
+//		case 'validateWork' :
+//			loadDiv('../view/refreshImputationValidation.php', 'divValidation'+idWorkPeriod, 'listForm', callback);
+//		  break;
+//		case default:
+//	  break;
+//	}
+//	return true;
+//}
+//
+//Imputation Validation Save function
+function saveImputationValidation(idWorkPeriod, buttonAction){
+	if(idWorkPeriod != ''){
+		showWait();
+		var url='../tool/saveImputationValidation.php?idWorkPeriod='+idWorkPeriod+'&buttonAction='+buttonAction;
+		  dojo.xhrGet({
+		    url : url,
+		    handleAs : "text",
+		    load : function(data){
+		      hideWait();
+		      //refreshImputationValidationDiv(idWorkPeriod, buttonAction);
+		    }
+		  });
+	}
 }
