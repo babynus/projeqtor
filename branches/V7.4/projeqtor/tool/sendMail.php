@@ -28,6 +28,7 @@
  * Chek login/password entered in connection screen
  */
   require_once "../tool/projeqtor.php"; 
+  require_once "../tool/formatter.php";
   scriptLog('   ->/tool/sendMail.php');  
   $title="";
   $msg="";
