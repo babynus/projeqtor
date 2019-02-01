@@ -32,7 +32,8 @@ class Absence{
   public $name;
   public $idProject;
   public $idActivity;
-  
+  public static $_colorTab=array('#f08080','#87ceeb','#84e184','#ffc266','#ffff66',  
+                                 '#ff66ff','#99e6e6','#A0ffA0','#ffeecc','#c68c53');  
   /** ==========================================================================
    * Constructor
    * @param $id the id of the object in the database (null if not stored yet)
@@ -74,6 +75,7 @@ class Absence{
     $assId = "";
     $idColor = 0;
     $tabColor = array();
+    $inputActIdValue = '';
     //Activity Table view
     
     $result .='<div id="activityDiv" align="center" style="margin-top:20px; overflow-y:auto; width:100%;">';
@@ -116,8 +118,15 @@ class Absence{
       	  }
       	}
     	  $actRowId = "actRow".$actId;
+    	  $isSaveUserParam = Parameter::getUserParameter('selectAbsenceActivity');
+    	  $inputIdProject = Parameter::getUserParameter('inputIdProject');
+    	  $inputAssId = Parameter::getUserParameter('inputAssId');
     	  if(!$idle){
-    	  	$result .=' <tr class="absActivityRow dojoxGridRow" id="'.$actRowId.'" align="center" style="height:20px; border: 1px solid grey; cursor:pointer;" onClick="selectActivity('.$actRowId.','.$actId.','.$idProject.','.$assId.')">';
+    	    if("actRow".$isSaveUserParam == $actRowId){
+    	      $result .=' <tr class="absActivityRow dojoxGridRowSelected" id="'.$actRowId.'" align="center" style="height:20px; border: 1px solid grey; cursor:pointer;" onClick="selectActivity('.$actRowId.','.$actId.','.$idProject.','.$assId.')">';
+    	    }else{
+    	      $result .=' <tr class="absActivityRow dojoxGridRow" id="'.$actRowId.'" align="center" style="height:20px; border: 1px solid grey; cursor:pointer;" onClick="selectActivity('.$actRowId.','.$actId.','.$idProject.','.$assId.')">';
+    	    }
     	  }else{
     	  	$workClose = new Work();
     	  	$where3 = " refType = 'Activity' and refId = ".$actId." and idResource =".$userID." and year = ".$currentYear;
@@ -128,9 +137,9 @@ class Absence{
     	  		continue;
     	  	}
     	  }
-    	  $result .= '   <input type="hidden" name="inputActId" id="inputActId" value=""/>';
-    	  $result .= '   <input type="hidden" name="inputIdProject" id="inputIdProject" value=""/>';
-    	  $result .= '   <input type="hidden" name="inputAssId" id="inputAssId" value=""/>';
+    	  $result .= '   <input type="hidden" name="inputActId" id="inputActId" value="'.$isSaveUserParam.'"/>';
+    	  $result .= '   <input type="hidden" name="inputIdProject" id="inputIdProject" value="'.$inputIdProject.'"/>';
+    	  $result .= '   <input type="hidden" name="inputAssId" id="inputAssId" value="'.$inputAssId.'"/>';
     	  $result .='    <td align="left" style="border:1px solid grey;">&nbsp;'.$projName.'</td>';
     	  $result .='    <td align="center" style="border:1px solid grey;">#'.$actId.'</td>';
     	  $result .='    <td align="left" style="border:1px solid grey;">&nbsp;'.formatAbsenceColor($idColor, 15, 'left').$actName.'</td>';
@@ -216,7 +225,7 @@ class Absence{
     $result="";
     $idColor = 0;
     $tabColor = array();
-    $colorTab= array('#f08080','#ffc266', '#ffff66','#84e184', '#87ceeb', '#ff66ff', '#c68c53', '#ff99cc', '#ffeecc', '#99e6e6');
+    $colorTab= self::$_colorTab;
     
     $listActId="(";
     if (count($listAct)>0) {
@@ -270,6 +279,7 @@ class Absence{
     $result .='<tr><td class="calendarHeader" colspan="32">' .$currentYear. '</td></tr>';
     setlocale(LC_TIME, "en_US");
     setlocale(LC_TIME, "en_US");
+    $whereWork = "idProject not in " . Project::getAdminitrativeProjectList(false,false);
     for ($m=1; $m<=12; $m++) {
     	$mx=($m<10)?'0'.$m:''.$m;   	
     	$time=mktime(0, 0, 0, $m, 1, $currentYear);
@@ -314,23 +324,72 @@ class Absence{
     		$result.= '<div style="width:30px; height:15px;position:absolute; padding-top:10px; text-align:center; vertical-align:middle">';
     		$result.= mb_substr(i18n(date('l',$iDay)),0,1,"UTF-8").$d;
     		$result.= '</div>';
-    		if($isOpen){
-    			$listWork = self::getWorkAdmActList($listActId, $userID, $workDay);
-    			foreach ($listWork as $work){
-    				$workV = $work->work;
-    				$idActWork = $work->refId;
+    		if($isOpen){ 
+    		  $dayWork = new Work();
+    		  $whereWorkDay = " idResource=".$userID." AND workDate='".$workDay."' AND ".$whereWork;
+    		  $listWork = $dayWork->getSqlElementsFromCriteria(null,null,$whereWorkDay);
+    			$listADmWork = self::getWorkAdmActList($listActId, $userID, $workDay);
+    			$totalRemplissage = 0;
+    			$isValidate = false;
+    			//semaine si la semaine est validé
+    			$workPeriod = SqlElement::getSingleSqlElementFromCriteria('WorkPeriod', array('idResource'=>$userID,'periodValue'=>$week));
+    			if($workPeriod->validated){
+    			  $isValidate = true ;
+    			}
+    			//Work open day and ADM project
+    			foreach ($listADmWork as $admWork){
+    				$workV = $admWork->work;
+    				if($workV >1)$workV=1;
+    				$idActWork = $admWork->refId;
     				if($workV){
     				  $workHeigth = $workHeigth + (($workV/1)*100);
-    				  if($workHeigth <= 100){
+    				  $totalRemplissage += $workHeigth;
+    				  if($totalRemplissage > 100){
+    				  	$workHeigth = 100-($totalRemplissage-$workHeigth);
+    				  }
     				    if($tabColor){
     				    $idColor = $tabColor[$idActWork];
     				    $idColor = $idColor%10;
     				    $background = $colorTab[$idColor];
-    				    $result.='<div style="background:'.$background.'; height:'.(($workV/1)*100).'%"> </div>';
-    				  }
+    				    $result.='<div style="background:'.$background.'; height:'.$workHeigth.'%"> </div>';
     				  }
     				}
     			}
+    			//Work open day and not ADM project
+    			foreach ($listWork as $workNotAdm){
+    				$workVal = $workNotAdm->work;
+    				if($workVal > 1) $workVal = 1;
+    				$idActWork = $workNotAdm->refId;
+    				if($workVal){
+    				  if($totalRemplissage < 100){
+      					$workHeigth = $workHeigth + (($workVal/1)*100);
+      					$totalRemplissage += $workHeigth;
+      					if($totalRemplissage > 100){
+      					  $workHeigth = 100-($totalRemplissage-$workHeigth);
+      					}
+      						if($tabColor){
+      							$background = '#A0A0A0';
+      							$result.='<div style="background:'.$background.'; height:'.$workHeigth.'%"> </div>';
+      						}
+    				  }
+    				}
+    			}
+    			
+    			if($isValidate){
+    			 // if($totalRemplissage < 100){
+    			    //$workHeigth = 100 - $totalRemplissage;
+$positionGrid=($totalRemplissage<100)?$totalRemplissage:100;
+    			  $background = 'repeating-linear-gradient(
+  -45deg,
+  #505050,
+  #505050 2px,
+  transparent 2px,
+  transparent 8px
+);#00BFFF';
+    			    $result.='<div style="position:relative;top:-'.$positionGrid.'%;background:'.$background.'; height:100%"> </div>';
+    			  //}
+    			}
+    			
     			if($transHeight > 0){
     			  $transHeight = $transHeight-$workHeigth;
     			  $result.='<div style="background:transparent; height:'.$transHeight.'%"> </div>';
@@ -360,7 +419,7 @@ class Absence{
 
 function formatAbsenceColor($idColor, $size=20, $float='right') {
   $idColor = $idColor%10;
-	$color= array('#f08080','#ffc266', '#ffff66','#84e184', '#87ceeb', '#ff66ff', '#c68c53', '#ff99cc', '#ffeecc', '#99e6e6');
+	$color= Absence::$_colorTab;
 	$radius=round($size/2,0);
 	$res='<div style="margin-left:2px; border: 1px solid #AAAAAA;background:'.$color[$idColor].';';
 	$res.='width:'.($size-2).'px;height:'.($size-2).'px;float:'.$float.';border-radius:'.$radius.'px"';
