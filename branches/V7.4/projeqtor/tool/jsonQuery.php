@@ -567,7 +567,7 @@
     }
     //end gautier
     
-    if($objectClass = 'Budget'){
+    if($objectClass=='Budget'){
       $idSelectedBudget = RequestHandler::getValue('budgetParent');
       if($idSelectedBudget){
         $budg = new Budget($idSelectedBudget);
