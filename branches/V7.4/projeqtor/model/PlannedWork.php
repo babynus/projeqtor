@@ -1453,20 +1453,25 @@ scriptLog("storeListPlan(listPlan,$plan->id)");
   
   private static function sortPlanningElements($list,$listProjectsPriority) {
   	// first sort on simple criterias
-    $mainPriority="priority"; // May be set to "endDate" // TODO : finalize
+    $mainPriority="endDate"; // May be set to "endDate" or "priority"
     $str01=($mainPriority=='endDate')?'.00000000':'';
     //$str02=($mainPriority=='priority')?'.00000000':'';
-    foreach ($list as $id=>$elt) {    
-    	if ($elt->idPlanningMode=='16' or $elt->idPlanningMode=='6') { // FIXED
+    $pmList=SqlList::getList('PlanningMode','code',null,true);
+    foreach ($list as $id=>$elt) {
+      if (!isset($pmList[$elt->idPlanningMode])) {
+        traceLog("Error for planning mode $elt->idPlanningMode not found in Planning Mode table");
+        $pmList[$elt->idPlanningMode]='ASAP';
+      }    
+      $pm=$pmList[$elt->idPlanningMode];
+    	if ($pm=='FIXED') { // FIXED
     		$crit='1'.$str01;
-    	} else if ($elt->idPlanningMode=='2' or  $elt->idPlanningMode=='3' or  $elt->idPlanningMode=='7' or  $elt->idPlanningMode=='20'
-    	  or $elt->idPlanningMode=='10' or $elt->idPlanningMode=='11' or $elt->idPlanningMode=='13') { // REGUL or FULL or HALF or QUART)
+    	} else if ($pm=='REGUL' or $pm=='FULL' or $pm=='HALF' or $pm=='QUART') { // REGUL or FULL or HALF or QUART)
     	  $crit='2'.$str01;
-    	} else if ($elt->idPlanningMode=='8' or  $elt->idPlanningMode=='14') { // FDUR  
+    	} else if ($pm=='FDUR') { // FDUR  
     	  $crit='4'.$str01;
-    	} else if ($elt->idPlanningMode=='22') { // RECW
+    	} else if ($pm=='RECW') { // RECW
     	  $crit='6'.$str01; // Lower priority (availability will be reserved)
-    	} else if ($elt->idPlanningMode=='4' and $elt->validatedEndDate and $mainPriority=='endDate') {
+    	} else if ($pm=='ALAP' and $elt->validatedEndDate and $mainPriority=='endDate') {
     		$crit='5'.'.'.str_replace('-','',$elt->validatedEndDate);
     	} else { // Others (includes GROUP, wich is not a priority but a constraint)
         $crit='5'.$str01;
