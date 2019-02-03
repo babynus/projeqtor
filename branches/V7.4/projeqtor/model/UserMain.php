@@ -443,6 +443,7 @@ class UserMain extends SqlElement {
     $this->_accessControlRights[$profile]=$accessControlRights;
     if ($this->id==getSessionUser()->id and isset($this->_isRetreivedFromSession) and $this->_isRetreivedFromSession) {
       setSessionUser($this); // Store user to cache Data
+      
     }
     return $this->_accessControlRights[$profile];
   }
@@ -683,16 +684,16 @@ class UserMain extends SqlElement {
     $affPrjList=$this->getAffectedProjects($limitToActiveProjects);
     $profile=$this->idProfile;
     foreach($affPrjList as $idPrj=>$namePrj) {
-      if (isset($affProfile[$idPrj])) {	        
+      if (isset($affProfile[$idPrj])) {
         $profile=$affProfile[$idPrj];
         $resultAff[$idPrj]=$profile;
         $prj=new Project($idPrj,true);
         $lstSubPrj=$prj->getRecursiveSubProjectsFlatList($limitToActiveProjects);
         foreach ($lstSubPrj as $idSubPrj=>$nameSubPrj) {
-          $result[$idSubPrj]=$nameSubPrj;
+          if (!Profile::profileHasNoAccess($profile)) $result[$idSubPrj]=$nameSubPrj;
           $resultAff[$idSubPrj]=$profile;
         }
-        $result[$idPrj]=$namePrj;
+        if (!Profile::profileHasNoAccess($profile)) $result[$idPrj]=$namePrj;
       }
     }
     
