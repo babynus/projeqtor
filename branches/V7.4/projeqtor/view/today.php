@@ -65,7 +65,7 @@ foreach ($arrayCols as $col) {
 if (array_key_exists('refreshProjects', $_REQUEST)) {
   setSessionValue('todayCountScope', (array_key_exists('countScope', $_REQUEST))?$_REQUEST['countScope']:'todo');
   showProjects();
-  exit
+  exit;
 }
 
 function showMessages() {
