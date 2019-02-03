@@ -842,6 +842,13 @@
       echo ' "items":[';
       if (Sql::$lastQueryNbRows > 0) {               
         while ($line = Sql::fetchLine($result)) {
+          if ($objectClass=='Term') { // Attention, this part main reduce drastically performance
+            $term=new Term($line['id']);
+            $line['validatedAmount']=$term->validatedAmount;
+            $line['validatedDate']=$term->validatedDate;
+            $line['plannedAmount']=$term->plannedAmount;
+            $line['plannedDate']=$term->plannedDate;
+          }          
           echo (++$nbRows>1)?',':'';
           echo  '{';
           $nbFields=0;
