@@ -67,9 +67,7 @@ if ($workVal == 0){
   }else{
     $somWork = $workVal;
   }
-  debugLog($listWork);
   foreach ($listWork as $isWork){
-    debugLog($isWork);
     if($isWork->refId == $actId and $somWork <= 1){
       $isWork->work = $workVal;
       $editWork = true;
