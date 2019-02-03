@@ -50,7 +50,6 @@ if ($right) {
 }
 if (!$seeAllResource) {
   $prfLst=$user->getAllProfiles();
-  debugLog($prfLst);
   foreach ($prfLst as $prf) {
     $right=SqlElement::getSingleSqlElementFromCriteria('habilitationOther', array('idProfile'=>$prf, 'scope'=>'resourcePlanning'));
     if ($right) {
