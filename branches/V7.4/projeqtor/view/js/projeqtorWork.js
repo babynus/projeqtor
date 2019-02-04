@@ -455,10 +455,6 @@ function submitWorkPeriod(action) {
 }
 
 function sendAlertOnSubmitWork(action, rangeType, rangeValue, resource){
-	console.log('Action : '+action);
-	console.log('RangeType : '+rangeType);
-	console.log('RangeValue : '+rangeValue);
-	console.log('Resource : '+resource);
 	dojo.xhrGet({
 		  url: '../tool/sendMail.php?className=Imputation&action='+action+'&rangeType='+rangeType+'&rangeValue='+rangeValue+'&resource='+resource,
 		    handleAs: "text",
