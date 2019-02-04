@@ -127,7 +127,7 @@ UPDATE `${prefix}parameter` SET `parameterValue` = 'YES' WHERE `parameterCode` =
 ALTER TABLE `${prefix}planningelement`
 ADD `isManualProgress` int(1) unsigned DEFAULT '0';
 
-ALTER TABLE `${prefix}Project`
+ALTER TABLE `${prefix}project`
 ADD `fixPerimeter` int(1) unsigned DEFAULT '0';
 
 INSERT INTO `${prefix}habilitationother` (idProfile, rightAccess, scope) VALUES
