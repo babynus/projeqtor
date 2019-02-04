@@ -449,12 +449,11 @@ class PlanningElement extends SqlElement {
       $this->leftWork = $this->validatedWork - $this->realWork;
       $this->plannedWork = $this->realWork+$this->leftWork;
     }
-    if($old->isManualProgress and $old->idPlanningMode!= $this->idPlanningMode or $old->isManualProgress and $cptAss!=0){
+    if( $old->isManualProgress and ($old->idPlanningMode!=$this->idPlanningMode or $cptAss!=0) ){
       $this->isManualProgress = 0;
-      $this->realWork = 0;
-      $this->leftWork = 0;
       $this->progress = 0;
       $this->expectedProgress = 0;
+      $this->updateSynthesisObj(true);
     }
     //end
     $result=parent::save();
@@ -695,7 +694,7 @@ class PlanningElement extends SqlElement {
   		$proj->sortOrder=$this->wbsSortable;
   		$resSaveProj=$proj->saveForced();
   	} 
-  	if (self::$_noDispatch) return;
+  	//if (self::$_noDispatch) return;
   	$crit=" topId=" . Sql::fmtId($this->id);
   	$lstElt=$this->getSqlElementsFromCriteria(null, null, $crit ,'wbsSortable asc');
   	$cpt=0;
@@ -905,7 +904,7 @@ class PlanningElement extends SqlElement {
       	if ($topElt->refId) {
           $topElt->save();
       	}
-        self::updateSynthesis($refType, $refId);          
+        if (!PlanningElement::$_noDispatch) self::updateSynthesis($refType, $refId);          
       }
     }
     if ($this->topId) { // This renumbering is to avoid holes in numbering
@@ -1401,7 +1400,7 @@ class PlanningElement extends SqlElement {
   }
   
   public function renumberWbs() {
-    return;
+    if (PlanningElement::$_noDispatch) return;
   	if ($this->id) {
   		$where="topRefType='" . $this->refType . "' and topRefId=" . Sql::fmtId($this->refId) ;
   	} else {
@@ -1416,7 +1415,7 @@ class PlanningElement extends SqlElement {
   			$root=substr($pe->wbs,0,strrpos($pe->wbs,'.'));
   			$pe->wbs=($root=='')?$idx:$root.'.'.$idx;
   			if ($pe->refType) {
-  				$pe->save();
+  				$pe->wbsSave();
   			}
   	}
   }
@@ -1845,13 +1844,6 @@ class PlanningElement extends SqlElement {
     foreach (array_reverse(PlanningElement::$_noDispatchArray) as $pe) {
       $res=PlanningElement::updateSynthesis($pe['refType'], $pe['refId']);
     }
-    /*while (count(PlanningElement::$_noDispatchArray)>0) {
-      $list=PlanningElement::$_noDispatchArray;
-      PlanningElement::$_noDispatchArray=array();
-      foreach ($list as $pe) {
-        $res=PlanningElement::updateSynthesis($pe['refType'], $pe['refId']);
-      }
-    }*/
     self::$_noDispatch=false;
     // copy dependencies
     $critWhere="";
