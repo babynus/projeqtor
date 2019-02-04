@@ -38,11 +38,6 @@ $yearSpinner = $currentYear;
 ?>
 
 <div dojoType="dijit.layout.BorderContainer" id="paramDiv" name="paramDiv">
-  <script type="text/javascript">
-    window.onload = function() {
-    	console.log('oui');
-    }
-  </script>
   <div style="top:30px !important; left: 200px !important; width: 500px; margin: 0px 8px 4px 8px; padding: 5px;display:none;" 
        id="absenceResultDiv" dojoType="dijit.layout.ContentPane" region="none" >
   </div>   
