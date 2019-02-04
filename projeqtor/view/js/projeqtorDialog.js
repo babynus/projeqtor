@@ -7186,7 +7186,6 @@ function recalculateColumnSelectorName() {
 var oldSelectedItems=null;
 
 function diarySelectItems(value) {
-	//console.log(value);
 	  if (!oldSelectedItems || oldSelectedItems==value) return;
 	  if (oldSelectedItems.indexOf("All")>=0 && value.length>1 ) {
 	    value[0]=null;
@@ -8139,7 +8138,6 @@ function diarySelectDate(directDate) {
     dojo.byId("diaryWeek").value=week;
     dojo.byId("diaryYear").value=year;
     dojo.byId("diaryMonth").value=month;
-    //console.log(week, month, year);
     diaryDisplayWeek(week, year);
   } else if (period == "day") {
     day=formatDate(directDate);
