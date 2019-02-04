@@ -744,7 +744,27 @@
                 </button>
               </td>
             </tr>
-            <?php }?>
+            <?php }
+            // gautier #3802
+            if(get_class($obj)=='TicketSimple'){
+              $type='idTicketType';
+            }else{
+              $type='id'.get_class($obj).'Type';
+            }
+            if(!property_exists($obj, 'idProject') or !property_exists($obj,$type)){?>
+            <tr class="detail">
+              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeStatusIdle');?>&nbsp;:&nbsp;</td>
+              <td>
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <?php echo autoOpenFilteringSelect();?>
+                 id="changeStatusIdle" name="changeStatusIdle">
+                  <option value=""></option>
+                  <option value="true"><?php echo i18n('checkBox');?></option>
+                  <option value="false"><?php echo i18n('uncheckedBox');?></option>
+                </select>
+              </td>
+            </tr>
+            <?php  }?>
           </table>
           </div>
         </form>
