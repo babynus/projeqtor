@@ -196,6 +196,7 @@ if (array_key_exists($pe.'_priority',$_REQUEST)) {
 $profile = RequestHandler::getValue('idProfile_multiple');
 $rate= RequestHandler::getValue('rate_multiple');
 $team=RequestHandler::getValue('idTeam_multiple');
+$changeStatusIdle=RequestHandler::getValue('changeStatusIdle');
 
 SqlElement::unsetCurrentObject();
 
@@ -227,6 +228,14 @@ foreach ($selectList as $id) {
 	}
 	if($rate){
 	 $item->rate = $rate;
+	}
+	
+	if($changeStatusIdle){
+	 if($changeStatusIdle=='true'){
+	   $item->idle = 1;
+	 }else{
+	   $item->idle = 0;
+	 }
 	}
 	
 	if ($type and property_exists($item,$typeField)) {
