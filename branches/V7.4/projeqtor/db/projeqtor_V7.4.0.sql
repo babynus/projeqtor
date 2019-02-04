@@ -115,8 +115,8 @@ CREATE TABLE `${prefix}restrictlist` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ;
 
-INSERT INTO `${prefix}parameter` (`id`, `idUser`, `idProject`, `parameterCode`, `parameterValue`) VALUES
-(NULL, NULL, NULL, 'authorizeActivityOnDeliveredProduct', 'YES');
+INSERT INTO `${prefix}parameter` (`idUser`, `idProject`, `parameterCode`, `parameterValue`) VALUES
+(NULL, NULL, 'authorizeActivityOnDeliveredProduct', 'YES');
 
 ALTER TABLE `${prefix}note` 
 ADD `idNote` int(12),
