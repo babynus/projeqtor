@@ -377,7 +377,7 @@ class PlanningElement extends SqlElement {
     $lstElt=$this->getSqlElementsFromCriteria(null, null, $crit ,'wbsSortable asc');
     if ($lstElt and count($lstElt)>0) {
       $this->elementary=0;
-      if($this->isManualProgress = 1){
+      if($this->isManualProgress==1){
         $this->isManualProgress = 0;
         $this->realWork = 0;
         $this->leftWork = 0;
@@ -1212,7 +1212,7 @@ class PlanningElement extends SqlElement {
       	if (property_exists($task, 'idActivity')) {
       		$task->idActivity=null;
       	}
-      	$changeParent='projet';
+      	$changeParent='project';
       	$status="OK";
       } else if ($dest->topRefType=="Activity" and property_exists($task, 'idActivity')) {  // Move under (new) activity
       	$task->idProject=$dest->idProject;   // Move to same project
@@ -1242,6 +1242,7 @@ class PlanningElement extends SqlElement {
     
     if ($status=="OK" and $task and !$recursive) { // Change parent, then will recursively call moveTo to reorder correctly
       $peName=get_Class($task).'PlanningElement';
+      $oldParentId=$task->$peName->topId;
       $task->$peName->topRefType=$dest->topRefType;
       $task->$peName->topRefId=$dest->topRefId;
       $task->$peName->topId=$dest->topId;
@@ -1250,6 +1251,11 @@ class PlanningElement extends SqlElement {
     		$pe=new PlanningElement($this->id);
     		$pe->moveTo($destId,$mode,true);
     		$returnValue=i18n('moveDone');
+    		// Must renumber old parent...
+     		if ($changeParent=='project' and !$oldParentId) {
+     		  $oldParent=new PlanningElement();
+     		  $oldParent->renumberWbs(true);
+     		}
       } else {
       	$returnValue=$resultTask;//i18n('moveCancelled');
       	//$status="ERROR";
@@ -1399,12 +1405,12 @@ class PlanningElement extends SqlElement {
   	return $result;
   }
   
-  public function renumberWbs() {
-    if (PlanningElement::$_noDispatch) return;
+  public function renumberWbs($force=false) {
+    if (PlanningElement::$_noDispatch and !$force) return;
   	if ($this->id) {
   		$where="topRefType='" . $this->refType . "' and topRefId=" . Sql::fmtId($this->refId) ;
   	} else {
-  		$where="refType is null and refId is null";
+  		$where="topRefType is null and topRefId is null";
   	}
   	$order="wbsSortable asc";
   	$list=$this->getSqlElementsFromCriteria(null,false,$where,$order);
