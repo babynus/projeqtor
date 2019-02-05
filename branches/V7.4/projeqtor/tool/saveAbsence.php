@@ -48,7 +48,8 @@ Sql::beginTransaction();
 $result = "";
 if ($workVal == 0){
     $work = new Work();
-    $where = "refType = 'Activity' and refId =".$actId." and idResource =".$userId." and idProject=".$idProject." and idAssignment =".$assId." and day=".$day;
+    $where = "refType = 'Activity' and refId =".$actId." and idResource =".$userId." and idProject=".$idProject." and idAssignment =".$assId." and day='".$day."'";
+    debugLog($where);
     $listWork = $work->getSqlElementsFromCriteria(null,false,$where);
     
     //delete work
