@@ -59,7 +59,7 @@ if ($workVal == 0){
 }else {
   $work = new Work();
   $where = " idProject in " . Project::getAdminitrativeProjectList() ;
-  $where .= " and refType = 'Activity' and idResource =".$userId." and day=".$day;
+  $where .= " and refType = 'Activity' and idResource =".$userId." and day='".$day."'";
   $listWork = $work->getSqlElementsFromCriteria(null,false,$where);
   $unitAbs = Parameter::getGlobalParameter('imputationUnit');
   if($unitAbs != 'days'){
