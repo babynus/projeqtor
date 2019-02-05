@@ -24,18 +24,41 @@
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
-/* ============================================================================
- * Presents the list of objects of a given class.
- *
+/** ============================================================================
+ * Save imputation validation.
  */
+
 require_once "../tool/projeqtor.php";
-require_once "../tool/formatter.php";
-scriptLog('   ->/view/refreshImputationValidation.php'); 
 
-$idUser= RequestHandler::getId('userName');
-$idTeam = RequestHandler::getId('idTeam');
+//parameter
+$idWorkPeriod = RequestHandler::getId('idWorkPeriod');
+$buttonAction = RequestHandler::getValue('buttonAction');
 
+//open transaction bdd
+Sql::beginTransaction();
+
+$workPeriod = new WorkPeriod($idWorkPeriod);
+
+switch ($buttonAction){
+	case 'cancelSubmit' :
+	  $workPeriod->submitted = 0;
+	  $workPeriod->submittedDate = null;
+	  break;
+	case 'cancelValidation' :
+	  $workPeriod->validated = 0;
+	  $workPeriod->validatedDate = null;
+	  $workPeriod->idLocker = null;
+	  break;
+	case 'validateWork' :
+	  $workPeriod->validated = 1;
+	  $workPeriod->validatedDate = date('Y-m-d-H-i-s');
+	  $workPeriod->idLocker = getCurrentUserId();
+	  break;
+	default:
+	  break;
+}
+$workPeriod->save();
+
+// commit workPeriod
+Sql::commitTransaction();
 ?>
-<div id="listWorkDiv" name="listWorkDiv">
-  <?php ImputationValidation::drawUserWorkList($idUser, $idTeam); ?>
-</div>
