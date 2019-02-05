@@ -203,6 +203,7 @@ class Absence{
     $result .='</div>';
     $result .='<div id="warningExceedWork" class="messageWARNING" style="z-index:99;display: none; text-align: center; position:absolute; top:45%;margin-left: 32%; height:20px; width: 35%;padding-top:12px">'.i18n('exceedWork').'</div>';
     $result .='<div id="warningNoActivity" class="messageWARNING" style="z-index:99;display: none; text-align: center; position:absolute; top:45%;margin-left: 32%; height:20px; width: 35%;padding-top:12px">'.i18n('noActivitySelected').'</div>';
+    $result .='<div id="warningisValiadtedDay" class="messageWARNING" style="z-index:99;display: none; text-align: center; position:absolute; top:45%;margin-left: 32%; height:20px; width: 35%;padding-top:12px">'.i18n('isValidatedDay').'</div>';
     $result .='</br></br>';
     echo $result;
   }
@@ -309,10 +310,16 @@ class Absence{
     		$month = date('Ym', $iDay);
     		$year = date('Y', $iDay);
     		$result.= '<td id="'.$dateId.'" class="calendar" style="'.$style.'">';
-    		$transHeight = 100;
-    		$workHeigth = 0;
+    		$isValidate = false;
+    		if($isOpen){
+      		//semaine si la semaine est validé
+      		$workPeriod = SqlElement::getSingleSqlElementFromCriteria('WorkPeriod', array('idResource'=>$userID,'periodValue'=>$week));
+      		if($workPeriod->validated or $workPeriod->submitted){
+      			$isValidate = true;
+      		}
+    		}
         if ($listActId<>"(0)") {
-    		  $onClick = 'onClick="selectAbsenceDay(\''.$dateId.'\',\''.$dateDay.'\',\''.$workDay.'\',\''.$month.'\',\''.$year.'\',\''.$week.'\',\''.$userID.'\')"';
+    		  $onClick = 'onClick="selectAbsenceDay(\''.$dateId.'\',\''.$dateDay.'\',\''.$workDay.'\',\''.$month.'\',\''.$year.'\',\''.$week.'\',\''.$userID.'\',\''.$isValidate.'\')"';
         } else {
           $onClick="";
         }    		
@@ -330,12 +337,8 @@ class Absence{
     		  $listWork = $dayWork->getSqlElementsFromCriteria(null,null,$whereWorkDay);
     			$listADmWork = self::getWorkAdmActList($listActId, $userID, $workDay);
     			$totalRemplissage = 0;
-    			$isValidate = false;
-    			//semaine si la semaine est validé
-    			$workPeriod = SqlElement::getSingleSqlElementFromCriteria('WorkPeriod', array('idResource'=>$userID,'periodValue'=>$week));
-    			if($workPeriod->validated){
-    			  $isValidate = true ;
-    			}
+    			$transHeight = 100;
+    			$workHeigth = 0;
     			//Work open day and ADM project
     			foreach ($listADmWork as $admWork){
     				$workV = $admWork->work;
@@ -376,18 +379,9 @@ class Absence{
     			}
     			
     			if($isValidate){
-    			 // if($totalRemplissage < 100){
-    			    //$workHeigth = 100 - $totalRemplissage;
-$positionGrid=($totalRemplissage<100)?$totalRemplissage:100;
-    			  $background = 'repeating-linear-gradient(
-  -45deg,
-  #505050,
-  #505050 2px,
-  transparent 2px,
-  transparent 8px
-);#00BFFF';
+    			  $positionGrid=($totalRemplissage<100)?$totalRemplissage:100;
+    			  $background = 'repeating-linear-gradient(-45deg,#505050,#505050 2px,transparent 2px,transparent 8px);#00BFFF';
     			    $result.='<div style="position:relative;top:-'.$positionGrid.'%;background:'.$background.'; height:100%"> </div>';
-    			  //}
     			}
     			
     			if($transHeight > 0){

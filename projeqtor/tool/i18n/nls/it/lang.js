@@ -2004,6 +2004,7 @@ isOrganizationManager: "E' il manager dell'organizzazione. Non può essere disso
 isResponsibleOf: "è responsabile di",
 Issue: "Problemi",
 IssueType: "Tipo di problemi",
+isValidatedDay: "week submitted or validated",
 item: "elemento",
 itemSelector: "Selezionare gli elementi da visualizzare nella lista",
 January: "Gennaio",
