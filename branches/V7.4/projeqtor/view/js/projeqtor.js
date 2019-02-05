@@ -5527,29 +5527,35 @@ function selectActivity(actRowId, actId, idProject, assId){
 }
 
 // Absence day selection fonction
-function selectAbsenceDay(dateId, day, workDay, month, year, week, userId){
+function selectAbsenceDay(dateId, day, workDay, month, year, week, userId, isValidated){
 	var workVal = dijit.byId('absenceInput').get('value');
 	var actId = dojo.byId('inputActId').value;
 	var idProject = dojo.byId('inputIdProject').value;
 	var assId = dojo.byId('inputAssId').value;
-	if(actId == ""){
-		dojo.byId('warningNoActivity').style.display = 'block';
-	}else {
-	  showWait();
-		dojo.byId('warningNoActivity').style.display = 'none';
-		var url='../tool/saveAbsence.php?day='+day+'&workDay='+workDay+'&month='+month+'&year='+year+'&week='+week+'&userId='+userId+'&workVal='+workVal+'&actId='+actId+'&idProject='+idProject+'&assId='+assId;
-		  dojo.xhrGet({
-		    url : url,
-		    handleAs : "text",
-		    load : function(data){
-		      hideWait();
-		    	refreshAbsenceCalendar();
-		    	if(data == 'warning'){
-		    		dojo.byId('warningExceedWork').style.display = 'block';
-		    		setTimeout("dojo.byId('warningExceedWork').style.display = 'none'", 2000);
-		    	}
-		    }
-		  });
+	if(!isValidated){
+		dojo.byId('warningisValiadtedDay').style.display = 'none';
+		if(actId == ""){
+			dojo.byId('warningNoActivity').style.display = 'block';
+		}else {
+		  showWait();
+			dojo.byId('warningNoActivity').style.display = 'none';
+			var url='../tool/saveAbsence.php?day='+day+'&workDay='+workDay+'&month='+month+'&year='+year+'&week='+week+'&userId='+userId+'&workVal='+workVal+'&actId='+actId+'&idProject='+idProject+'&assId='+assId;
+			  dojo.xhrGet({
+			    url : url,
+			    handleAs : "text",
+			    load : function(data){
+			      hideWait();
+			    	refreshAbsenceCalendar();
+			    	if(data == 'warning'){
+			    		dojo.byId('warningExceedWork').style.display = 'block';
+			    		setTimeout("dojo.byId('warningExceedWork').style.display = 'none'", 2000);
+			    	}
+			    }
+			  });
+		}
+	}else{
+		dojo.byId('warningisValiadtedDay').style.display = 'block';
+		setTimeout("dojo.byId('warningisValiadtedDay').style.display = 'none'", 2000);
 	}
 }
 
@@ -5568,7 +5574,7 @@ function refreshImputationValidation() {
 	return true;
 }
 
-////Imputation Validation refresh function
+//Imputation Validation refresh function
 //function refreshImputationValidationDiv(idWorkPeriod, buttonAction) {
 //	if (checkFormChangeInProgress()) {
 //		showAlert(i18n('alertOngoingChange'));
@@ -5594,7 +5600,7 @@ function refreshImputationValidation() {
 //	}
 //	return true;
 //}
-//
+
 //Imputation Validation Save function
 function saveImputationValidation(idWorkPeriod, buttonAction){
 	if(idWorkPeriod != ''){

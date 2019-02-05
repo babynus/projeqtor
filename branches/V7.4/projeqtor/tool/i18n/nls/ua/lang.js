@@ -2004,6 +2004,7 @@ isOrganizationManager: "Менеджер організації. Не може �
 isResponsibleOf: "відповідальний за",
 Issue: "Проблеми (Issues)",
 IssueType: "Типи проблем (issue)",
+isValidatedDay: "week submitted or validated",
 item: "елемент",
 itemSelector: "Виберіть елементи&#44 щоб відобразити у списку",
 January: "Січень",
