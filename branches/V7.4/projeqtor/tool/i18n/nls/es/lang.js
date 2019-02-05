@@ -2004,6 +2004,7 @@ isOrganizationManager: "Es el gerente de la organización. No se puede disociar"
 isResponsibleOf: "Es responsable de",
 Issue: "Problema",
 IssueType: "Tipo de problema",
+isValidatedDay: "week submitted or validated",
 item: "ítem",
 itemSelector: "Seleccionar elementos para mostrar en la lista",
 January: "Enero",
