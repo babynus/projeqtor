@@ -95,6 +95,18 @@ class Note extends SqlElement {
     return $result;
   }
   
+  public function deleteControl(){
+    $result="";
+    $cptNote = $this->countSqlElementsFromCriteria(array('idNote'=>$this->id));
+    if($cptNote != 0){
+      $result .= "<br/>" . i18n("errorDeleteParentNote");
+    }
+    if (!$result) {
+      $result=parent::deleteControl();
+    }
+    return $result;
+  }
+  
   public function delete() {
     $result = parent::delete ();
     if ($this->idPrivacy != 3) {

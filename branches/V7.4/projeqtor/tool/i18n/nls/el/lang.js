@@ -1548,6 +1548,7 @@ errorCreateRights: "δεν έχετε δικαίωμα να δημιουργήσ
 errorDeleteCostStartDate: "New cost cannot start before previous one",
 errorDeleteDefaultCalendar: "Δεν μπορεί να διαγραφεί το προκαθορισμένο ημερολόγιο",
 errorDeleteDoneBill: "Δεν μπορεί να διαγραφεί ολοκληρωμένος λογαριασμός",
+errorDeleteParentNote: "Can't delete note with answers",
 errorDeleteRights: "δεν έχετε δικαίωμα να διαγράψετε αυτό το στοιχείο",
 errorDependencyHierarchy: "Can't create dependency with parent item",
 errorDependencyLoop: "Can't create loop dependency",
