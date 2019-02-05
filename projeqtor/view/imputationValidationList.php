@@ -150,6 +150,17 @@ $currentWeek=date('Y-m-d');
             </script>
             </div>&nbsp;
           </td>
+          <td style="width:80px;">
+          <?php echo i18n("colShowAll");?>
+          </td>
+          <td width="35px">
+            <div title="<?php echo i18n('colShowAll')?>" dojoType="dijit.form.CheckBox" 
+              type="checkbox" id="showAll" name="showAll" class="whiteCheck"
+              <script type="dojo/method" event="onChange" >
+              refreshImputationValidation();
+            </script>
+            </div>&nbsp;
+          </td>
           </tr>
           <tr>
             <td style="min-width:80px;"><?php echo i18n("colShowUnsubmitWork");?></td>
@@ -161,14 +172,14 @@ $currentWeek=date('Y-m-d');
                 </script>
               </div>&nbsp;
             </td>
-            <td width="80px"><?php echo i18n("colShowSubmitWork");?></td>
+            <td width="150px"><?php echo i18n("colShowSubmitWork");?></td>
             <td>
               <div title="<?php echo i18n('helpShowSubmitWork')?>" dojoType="dijit.form.CheckBox" 
                 type="checkbox" id="showSubmitWork" name="showSubmitWork" class="whiteCheck"
                 <script type="dojo/method" event="onChange" >
                   refreshImputationValidation();
                 </script>
-              </div>
+              </div>&nbsp;
             </td>
           </tr>
           </table>
@@ -178,7 +189,7 @@ $currentWeek=date('Y-m-d');
   </form>
   </div>
   <div id="imputationValidationWorkDiv" name="imputationValidationWorkDiv" dojoType="dijit.layout.ContentPane" region="center" >
-    <div id="ListWorkDiv" name="ListWorkDiv">
+    <div id="listWorkDiv" name="listWorkDiv">
       <?php ImputationValidation::drawUserWorkList($userName, $userTeam); ?>
     </div>
   </div>  
