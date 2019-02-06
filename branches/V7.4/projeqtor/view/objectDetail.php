@@ -3571,7 +3571,7 @@ function drawNotesFromObject($obj, $refresh=false) {
       echo '<tr>';
       if (!$print) {
       	echo '<td class="noteData smallButtonsGroup">';
-      	if(!$print){
+      	if($obj->id!=null and !$print and $canUpdate){
       	  echo ' <a onClick="addNote(true,'.htmlEncode($note->id).');" title="'.i18n('replyToThisNote').'" > '.formatSmallButton('Reply').'</a>';
       	}
       	if ($note->idUser==$user->id and !$print and $canUpdate) {
