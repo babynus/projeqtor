@@ -80,9 +80,6 @@ if ($workVal == 0){
     } else {
       $somWork += $isWork->work;
     }
-    if($unitAbs != 'days'){
-      $somWork = $somWork/$maxHour;
-    }
   }
   if(!$editWork){
     if($somWork <= 1){
