@@ -42,7 +42,6 @@ $year = RequestHandler::getYear('year');
 $week = RequestHandler::getValue('week');
 $userId = RequestHandler::getId('userId');
 $editWork = false;
-
 //open transaction bdd
 Sql::beginTransaction();
 $result = "";
@@ -69,7 +68,12 @@ if ($workVal == 0){
   }
   foreach ($listWork as $isWork){
     if($isWork->refId == $actId and $somWork <= 1){
-      $isWork->work = $workVal;
+      if($unitAbs != 'days'){
+        $somWork = $workVal/$maxHour;
+        $isWork->work = $somWork;
+      }else{
+        $isWork->work = $workVal;
+      }
       $editWork = true;
       $isWork->save();
       $somWork += $workVal;
@@ -93,7 +97,6 @@ if ($workVal == 0){
       $work->work = $workVal;
       $work->idProject = $idProject;
       $work->idAssignment = $assId;
-      
       //save work
       $work->save();
     }else {
