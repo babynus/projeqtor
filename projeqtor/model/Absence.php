@@ -71,7 +71,12 @@ class Absence{
     $listAss = "";
     $sltActId = "";
     $idle = "";
-    $max = 1;
+    $unitAbs = Parameter::getGlobalParameter('imputationUnit');
+    if($unitAbs != 'days'){
+      $max = Parameter::getGlobalParameter('dayTime');
+    }else{
+      $max = 1;
+    }
     $assId = "";
     $idColor = 0;
     $tabColor = array();
