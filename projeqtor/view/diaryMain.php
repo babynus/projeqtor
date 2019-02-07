@@ -257,7 +257,7 @@
       if (Parameter::getGlobalParameter('filterByStatus')=='YES') {
         $displayStatus=Parameter::getUserParameter("displayByStatusList_Diary");
         if (!$displayStatus) $displayStatus='none';
-        $arrObj=array(new Action(), new Ticket(), new MilestonePlanningElement(), new MeetingPlanningElement(), new Activity());
+        $arrObj=array(new Action(), new Ticket(), new Milestone(), new Meeting(), new Activity());
         $listStatus=array();
         foreach ($arrObj as $obj) {
           $listObjStatus=$obj->getExistingStatus();
