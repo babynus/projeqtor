@@ -63,13 +63,12 @@ if ($noteId=='') {
   $noteId=null;
 }
 $idParentNote=RequestHandler::getId('noteIdParent');
-$reply=RequestHandler::getValue('noteReply');
-
 Sql::beginTransaction();
 // get the modifications (from request)
 $note=new Note($noteId);
-$noteParent = SqlElement::getSingleSqlElementFromCriteria('Note', array('id'=>$idParentNote));
-
+if($idParentNote){
+  $noteParent = SqlElement::getSingleSqlElementFromCriteria('Note', array('id'=>$idParentNote));
+}
 $user=getSessionUser();
 if (! $note->id) {
   $note->idUser=$user->id;
@@ -79,7 +78,7 @@ if (! $note->id) {
 
 $note->refId=$refId;
 $note->refType=$refType;
-if($reply == true){
+if($idParentNote){
   $note->idNote=$idParentNote;
   $note->replyLevel = $noteParent->replyLevel + 1;
 }
