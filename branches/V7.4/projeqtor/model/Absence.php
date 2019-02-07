@@ -375,10 +375,8 @@ class Absence{
       					if($totalRemplissage > 100){
       					  $workHeigth = 100-($totalRemplissage-$workHeigth);
       					}
-      						if($tabColor){
-      							$background = '#A0A0A0';
-      							$result.='<div style="background:'.$background.'; height:'.$workHeigth.'%"> </div>';
-      						}
+  							$background = '#A0A0A0';
+  							$result.='<div style="background:'.$background.'; height:'.$workHeigth.'%"> </div>';
     				  }
     				}
     			}
