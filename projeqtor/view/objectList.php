@@ -526,6 +526,7 @@ if (property_exists($objectClass,'idStatus')) {
 			             id="iconStatusButton" name="iconStatusButton"
 			             iconClass="dijitButtonIcon dijitButtonIconStatusChange" class="detailButton" showLabel="false">
 			             <script type="dojo/connect" event="onClick" args="evt">
+                     protectDblClick(this);
 						         if (dijit.byId('barFilterByStatus').domNode.style.display == 'none') {
 							         dijit.byId('barFilterByStatus').domNode.style.display = 'block';
 						         } else {
