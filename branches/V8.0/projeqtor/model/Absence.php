@@ -71,6 +71,7 @@ class Absence{
     $listAss = "";
     $sltActId = "";
     $idle = "";
+    $unitAbs = Parameter::getGlobalParameter('imputationUnit');
     if($unitAbs != 'days'){
       $max = Parameter::getGlobalParameter('dayTime');
     }else{
@@ -168,7 +169,6 @@ class Absence{
     } else {
       $result .='<table align="left" style="margin-top:20px; margin-left:100px;">';
       $result .=' <tr>';
-      $unitAbs = Parameter::getGlobalParameter('imputationUnit');
       $result .='   <td style="margin-top:10px; height:20px;">'.i18n('dailyAbsenceDuration');
       $result .='     <div id="absenceInput" name="absenceInput" value="'.$max.'"
                     		  dojoType="dijit.form.NumberTextBox" constraints="{min:0,max:'.$max.'}"  required="true"
