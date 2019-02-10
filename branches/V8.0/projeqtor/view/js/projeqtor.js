@@ -2323,32 +2323,31 @@ function selectAllRows(gridName) {
   });
 }
 
-function countSelectedItem(gridName) {
+function countSelectedItem(gridName,selectedName) {
   grid = dijit.byId(gridName); // if the element is not a widget, exit.
-  if (!grid) {
-    return 0;
+  if (!grid || ! dojo.byId(selectedName)) {
+    return;
   }
+  dojo.byId(selectedName).value=0;
   var lstStore=new Array();
   grid.store.fetch({
     onComplete : function(items) {
       dojo.forEach(items, function(item, index) {
         lstStore[item.id]=item.id;
       });
+      var items=grid.selection.getSelected();
+      if (items.length) {
+        dojo.forEach(items, function(selectedItem) {
+          if (selectedItem !== null) {
+            if (lstStore.indexOf(selectedItem.id)=== -1) {
+              grid.selection.setSelected(selectedItem.id, false);
+            }
+          }
+        });
+      }
+      dojo.byId(selectedName).value=grid.selection.getSelectedCount();
     }
   });
-  var items=grid.selection.getSelected();
-  if (items.length) {
-    dojo.forEach(items, function(selectedItem) {
-      if (selectedItem !== null) {
-        if (lstStore.indexOf(selectedItem.id)=== -1) {
-          grid.selection.setSelected(selectedItem.id, false);
-        }
-      }
-    });
-  } else {
-    return 0;
-  }
-  return grid.selection.getSelectedCount();
 }
 /**
  * ============================================================================
