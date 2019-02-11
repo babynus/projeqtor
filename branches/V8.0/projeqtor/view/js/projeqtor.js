@@ -5559,32 +5559,54 @@ function selectAbsenceDay(dateId, day, workDay, month, year, week, userId, isVal
 }
 
 //Imputation Validation refresh function
-function refreshImputationValidation() {
-	if (checkFormChangeInProgress()) {
-		showAlert(i18n('alertOngoingChange'));
-		return false;
+function refreshImputationValidation(directDate) {
+	if (directDate) {
+	    var year=directDate.getFullYear();
+	    var week=getWeek(directDate.getDate(),directDate.getMonth()+1,directDate.getFullYear())+'';
+	    if (week==1 && directDate.getMonth()>10) {
+	      year+=1;
+	    }
+	    if (week.length==1 || parseInt(week,10)<10) {
+		    week='0' + week;
+		  }
+		  if (week=='00') {
+		    week=getWeek(31,12,year-1);
+		    if (week==1) {
+		      var day=getFirstDayOfWeek(1,year);
+		      //day=day-1;
+		      week=getWeek(day.getDate()-1,day.getMonth()+1,day.getFullYear());
+		    }
+		    year=year-1;
+		    dijit.byId('yearSpinner').set('value',year);
+		    dijit.byId('weekSpinner').set('value', week);
+		  } else if (parseInt(week,10)>53) {
+		      week='01';
+		      year+=1;
+		    dijit.byId('yearSpinner').set('value', year);
+		    dijit.byId('weekSpinner').set('value', week);
+		  } else if (parseInt(week,10)>52) {
+		    lastWeek=getWeek(31,12,year);
+		    if (lastWeek==1) {
+		      var day=getFirstDayOfWeek(1,year+1);
+		      //day=day-1;
+		      lastWeek=getWeek(day.getDate()-1,day.getMonth()+1,day.getFullYear());
+		    }
+		    if (parseInt(week,10)>parseInt(lastWeek,10)) {
+		      week='01';
+		        year+=1;
+		      dijit.byId('yearSpinner').set('value', year);
+		      dijit.byId('weekSpinner').set('value', week);
+		    }
+		  }
+		  var day=getFirstDayOfWeek(week,year);
+		  dijit.byId('weekImputationValidation').set('value',day);
 	}
 	formInitialize();
 	showWait();
 	var callback=function() {
 		hideWait();
 	};
-	loadDiv('../view/refreshImputationValidation.php', 'listWorkDiv', 'listForm', callback);
-	return true;
-}
-
-//Imputation Validation refresh function
-function refreshImputationValidationDiv() {
-	if (checkFormChangeInProgress()) {
-		showAlert(i18n('alertOngoingChange'));
-		return false;
-	}
-	formInitialize();
-	showWait();
-	var callback=function() {
-		hideWait();
-	};
-	//loadDiv('../view/refreshImputationValidation.php', '', 'listForm', callback);
+	loadContent('../view/refreshImputationValidation.php', 'imputationValidationWorkDiv', 'imputValidationForm', false,false,false,false,callback,false);
 	return true;
 }
 
