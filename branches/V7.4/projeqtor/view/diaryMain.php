@@ -292,6 +292,7 @@
 			</table>
 			<input type="hidden" id="countStatus"
 				value="<?php echo $cptStatus; ?>" />
+		</div>
 <?php } ?>
 		<div height="18px" vertical-align="middle" style="max-height: 18px;">
 				<table width="100%">
@@ -311,7 +312,7 @@
 				</table>
 			</div>
 		</div>
-  </div>
+  
   <?php
   $destinationHeight=intval($_REQUEST['destinationHeight'])-54;
   if (isset($displayStatus) and $displayStatus!='none') $destinationHeight-=16;
