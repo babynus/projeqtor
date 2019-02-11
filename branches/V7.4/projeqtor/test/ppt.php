@@ -23,7 +23,7 @@ use PhpOffice\PhpPresentation\Style\Bullet;
 use PhpOffice\PhpPresentation\Style\Color;
 use PhpOffice\PhpPresentation\Style\Fill;
 use PhpOffice\PhpPresentation\Style\Border;
-use PhpOffice\PhpPresentation\PhpOffice\PhpPresentation;
+//use PhpOffice\PhpPresentation\PhpOffice\PhpPresentation;
 
 define('CLI', (PHP_SAPI == 'cli') ? true : false);
 define('EOL', CLI ? PHP_EOL : '<br />');
@@ -63,6 +63,17 @@ foreach ($ppt->getAllSlides() as $slide) {
 
 $writer = IOFactory::createWriter($ppt, 'PowerPoint2007');
 $writer->save(__DIR__ . "/templateResult.pptx");
+
+header("Pragma: public");
+header("Content-Type: application/force-download; name=\"" . $name . "\"");
+header("Content-Transfer-Encoding: binary");
+//header("Content-Length: $size");
+header("Content-Disposition: inline; filename=\"result.ppt\"");
+header("Expires: 0");
+header("Cache-Control: no-cache, must-revalidate");
+header("Cache-Control: private",false);
+header("Pragma: no-cache");
+echo file_get_contents(__DIR__ . "/templateResult.pptx");
 
 echo "END<br/>";
 
