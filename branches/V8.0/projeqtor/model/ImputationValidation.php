@@ -184,7 +184,7 @@ class ImputationValidation{
   			$result .='      </table>';
   			$result .='     </td>';
   			$result .='   <td style="border: 1px solid grey;height:30px;width:23%;text-align:left;vertical-align:center;">';
-  			$result .='   <div id="sumittedDiv'.$week->id.'" name="sumittedDiv'.$week->id.'" width="100%">';
+  			$result .='   <div id="submittedDiv'.$week->id.'" name="submittedDiv'.$week->id.'" width="100%" dojoType="dijit.layout.ContentPane" region="center">';
   			if($week->submitted){
   				$result .='     <table width="100%"><tr><td style="height:30px;">'.formatIcon('Submitted', 32, i18n('submittedWork', array($name, htmlFormatDate($week->submittedDate)))).'</td>';
   				$result .='     <td style="width:73%;padding-left:5px;height:30px;">'.i18n('submittedWork', array($name, htmlFormatDate($week->submittedDate))).'</td>';
@@ -200,7 +200,7 @@ class ImputationValidation{
   				$result .='     <td style="height:30px;width:90%;">'.i18n('unsubmittedWork').'&nbsp'.htmlFormatDate($week->submittedDate).'</td></tr></table></div></td>';
   			}
   			$result .='   <td style="border: 1px solid grey;height:30px;width:23%;text-align:left;vertical-align:center;">';
-  			$result .='   <div id="validationDiv'.$week->id.'" name="validationDiv'.$week->id.'" width="100%">';
+  			$result .='   <div id="validatedDiv'.$week->id.'" name="validatedDiv'.$week->id.'" width="100%" dojoType="dijit.layout.ContentPane" region="center">';
   			$result .='     <table width="100%"><tr>';
   			if($week->validated){
   				$locker = SqlList::getNameFromId('Resource', $week->idLocker);

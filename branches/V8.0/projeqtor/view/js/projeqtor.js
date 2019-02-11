@@ -5610,9 +5610,23 @@ function refreshImputationValidation(directDate) {
 	return true;
 }
 
+function refreshSubmitValidateDiv(idWorkPeriod, buttonAction) {
+	formInitialize();
+	showWait();
+	var callback=function() {
+		hideWait();
+	};
+	if(buttonAction == 'validateWork' || buttonAction == 'cancelValidation'){
+		loadContent('../view/refreshSubmitValidateDiv.php','validatedDiv'+idWorkPeriod,false,false,false,false,false,callback,false);
+	}else{
+		loadContent('../view/refreshSubmitValidateDiv.php','submittedDiv'+idWorkPeriod,false,false,false,false,false,callback,false);
+	}
+}
+
 //Imputation Validation Save function
 function saveImputationValidation(idWorkPeriod, buttonAction){
-	saveDataToSession('idWorkPeriod', idWorkPeriod);
+	saveDataToSession('idWorkPeriod', idWorkPeriod, false);
+	saveDataToSession('buttonAction', buttonAction, false);
 	showWait();
 	var url='../tool/saveImputationValidation.php?idWorkPeriod='+idWorkPeriod+'&buttonAction='+buttonAction;
 	  dojo.xhrGet({
@@ -5620,7 +5634,7 @@ function saveImputationValidation(idWorkPeriod, buttonAction){
 	    handleAs : "text",
 	    load : function(data){
 	      hideWait();
-	      refreshImputationValidation();
+	      refreshSubmitValidateDiv(idWorkPeriod, buttonAction);
 	    }
 	  });
 }
