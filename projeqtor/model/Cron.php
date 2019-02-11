@@ -321,7 +321,7 @@ class Cron {
         self::run();
       }
 		} else {
-		  
+		  // relaunch for not running Cron. Nothing to do
 		}
 	}
 	
