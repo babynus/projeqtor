@@ -23,7 +23,7 @@ use PhpOffice\PhpPresentation\Style\Bullet;
 use PhpOffice\PhpPresentation\Style\Color;
 use PhpOffice\PhpPresentation\Style\Fill;
 use PhpOffice\PhpPresentation\Style\Border;
-//use PhpOffice\PhpPresentation\PhpOffice\PhpPresentation;
+use PhpOffice\PhpPresentation\PhpOffice\PhpPresentation;
 
 define('CLI', (PHP_SAPI == 'cli') ? true : false);
 define('EOL', CLI ? PHP_EOL : '<br />');
