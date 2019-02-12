@@ -776,7 +776,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       // $val[5]='';
       // }
       // }
-      echo '</table><table id="'.$col.'" class="detail" style="width:'.$widthPct.'">';
+      echo '</table><table id="'.$col.'" class="detail">';
       echo '<tr class="detail">';
       echo '<td class="detail"></td>'; // Empty label, to have column header in front of columns
                                        // $internalTableBorderTitle=($print)?'border:1px solid #A0A0A0;':'';
