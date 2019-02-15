@@ -136,7 +136,7 @@ class ColumnSelector extends SqlElement {
 			}
 			$cs->name=str_replace(array('# ','${','}'), array('','',''), $entry->nodeValue);
 			$cs->_displayName=i18n('col'.ucfirst($cs->name));
-			if ($field=='name') {
+			if ($field=='name' and (!property_exists($obj,'_isNameTranslatable') or !$obj->_isNameTranslatable)) {
 			  $cs->formatter='formatUpperName';
 			} else {
 			  $cs->formatter=$entry->getAttribute("formatter");
