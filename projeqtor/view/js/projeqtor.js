@@ -5635,6 +5635,25 @@ function saveImputationValidation(idWorkPeriod, buttonAction){
 	    load : function(data){
 	      hideWait();
 	      refreshSubmitValidateDiv(idWorkPeriod, buttonAction);
+	      if(buttonAction == 'cancelSubmit'){
+	  		cancelSubmitbyOther(idWorkPeriod);
+	  	  }
 	    }
 	  });
+}
+
+function cancelSubmitbyOther(idWorkPeriod) {
+  var url='../tool/sendMail.php?className=Imputation&action=cancelSubmitByOther&idWorkPeriod='+idWorkPeriod;
+	  dojo.xhrGet({
+	    url : url,
+	    handleAs : "text",
+	    load : function(){
+	    	
+	    }
+	  });
+}
+
+function imputationValidationSelection(isChecked, weekNumber){
+	console.log(isChecked);
+	console.log(weekNumber);
 }

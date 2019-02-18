@@ -47,7 +47,6 @@ class ImputationValidation{
 	function __destruct() {}
 	
 	static function drawUserWorkList($idUser, $idTeam, $week){
-	  $imputationUnitType = Parameter::getGlobalParameter('imputationUnit');
 	  $showSubmitted = RequestHandler::getValue('showSubmitWork');
 	  $showValidated = RequestHandler::getValue('showValidatedWork');
 	  $user=getCurrentUserId();
@@ -56,12 +55,8 @@ class ImputationValidation{
 	  $result="";
 	  $startWeek = $week;
 	  $endWeek = date('Y-m-d');
-	  $imputationUnit = substr(i18n(Parameter::getGlobalParameter('imputationUnit')),0, 1);
 	  $proj = new Project();
 	  $listAdmProj = $proj->getAdminitrativeProjectList(true);
-	  if($imputationUnitType == "hours"){
-	  	$dayTime = Parameter::getGlobalParameter('dayTime');
-	  }
 	  $userVisbileResourceList = getUserVisibleResourcesList(true);
 	  if(trim($idUser) != ''){
 	    unset($userVisbileResourceList);
@@ -96,6 +91,8 @@ class ImputationValidation{
   	  	$critWhere .= " and validated=".$showValidated;
   	  }
 	  }
+	  $isChecked = "refreshImputationValidation();";
+	  
 	  //Header
 	  $result .='<div id="imputationValidationDiv" align="center" style="margin-top:20px;margin-bottom:20px; overflow-y:auto; width:100%;">';
 	  $result .='<table width="98%" style="margin-left:20px;margin-right:20px;border: 1px solid grey;">';
@@ -110,7 +107,11 @@ class ImputationValidation{
 	  $result .='      <td style="border-top: 1px solid white;border-right: 1px solid white;width:33%;height:30px;text-align:center;vertical-align:center;">'.i18n('sum').'</td></tr></table>';
 	  $result .='     </td>';
 	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:23%;text-align:center;vertical-align:center;">'.i18n('ImputationSubmit').'</td>';
-	  $result .='     <td style="border: 1px solid grey;height:60px;width:23%;text-align:center;vertical-align:center;">'.i18n('menuImputationValidation').'</td>';
+	  $result .='     <td colspan="2" style="border: 1px solid grey;height:60px;width:23%;text-align:center;vertical-align:center;">';
+    $result .='       <table width="100%"><tr><td>'.i18n('menuImputationValidation').'</td>';
+	  $result.='        <td style="float:right;margin-right: 2px;">
+	                     <div title="'.i18n('selectionAll').'" dojoType="dijit.form.CheckBox" type="checkbox" 
+	                     class="whiteCheck" id="selectAll" name="selectAll" onChange="'.$isChecked.'"></div></td></table></td>';
 	  $result .='   </tr>';
 	  if(!isset($noResource)){
 	  $weekArray = array();
@@ -120,6 +121,7 @@ class ImputationValidation{
 	  }
 	  $weekArray = array_flip($weekArray);
 	  $weekList = transformListIntoInClause($weekArray);
+	  $idCheckBox = 0;
 	  foreach ($userVisbileResourceList as $idResource=>$name){
 	  	$periodValue = new WorkPeriod();
 	  	$where = "idResource=".$idResource;
@@ -128,7 +130,6 @@ class ImputationValidation{
 	  	}else{
 	  	  $where .= " and periodValue in ".$weekList;
 	  	}
-	  	//debugLog($where);
 	  	$periodValueList = $periodValue->getSqlElementsFromCriteria(null,null,$where);
 	  	if(!$periodValueList)continue;
 	  	$res = new Resource($idResource,true);
@@ -153,15 +154,19 @@ class ImputationValidation{
   					}
   				}
   			}
-  			if($imputationUnitType == "hours"){
-  			  $excepted *= $dayTime;
-  				$inputWork *= $dayTime;
-  				$inputAdm *= $dayTime;
-  			}
   			$inputTotal = $inputWork + $inputAdm;
+			  $excepted = Work::displayImputationWithUnit($excepted);
+				$inputWork = Work::displayImputationWithUnit($inputWork);
+				$inputAdm = Work::displayImputationWithUnit($inputAdm);
+  			$inputTotal = Work::displayImputationWithUnit($inputTotal);
   			$backgroundColor = "background-color:#ff7777;";
   			if($inputTotal == $excepted)$backgroundColor = "background-color:#a3d179;";
   			$weekValue = substr($week->periodValue, 0, 4).'-'.substr($week->periodValue, 4, 2);
+  			$goto="showWait();saveDataToSession('userName',$idResource,false, function() {
+  			       saveDataToSession('yearSpinner',".intval(substr($week->periodValue, 0, 4)).",false, function() {
+		           saveDataToSession('weekSpinner',".intval(substr($week->periodValue, 4, 2)).",false, function() {
+		           saveDataToSession('dateSelector','$firstDay',false, function() {
+	             loadContent('../view/imputationMain.php','centerDiv');}); }); }); });";
   			
   			//List body
 				$result .='   <tr>';
@@ -174,13 +179,14 @@ class ImputationValidation{
   			}else{
   				$result .='     <td style="border-left: 1px solid grey;border-rgiht: 1px solid grey;height:30px;width:16%;background-color:transparent;"></td>';
   			}
-  			$result .='     <td style="border: 1px solid grey;height:30px;width:10%;text-align:center;vertical-align:center;">'.$weekValue.'</td>';
-  			$result .='     <td style="border: 1px solid grey;height:30px;width:8%;text-align:center;vertical-align:center;">'.$excepted.$imputationUnit.'</td>';
-  			$result .='     <td style="width:23%;border: 1px solid grey;">';
+  			$displayWeek=$weekValue.'&nbsp;<span style="font-size:80%;font-style:italic;">('.htmlFormatDate($firstDay).' - '.htmlFormatDate($lastDay).')</span>';
+  			$result .='     <td onClick="'.$goto.'" style="cursor:pointer;border: 1px solid grey;height:30px;width:10%;text-align:center;vertical-align:center;">'.$displayWeek.'</td>';
+  			$result .='     <td onClick="'.$goto.'" style="cursor:pointer;border: 1px solid grey;height:30px;width:8%;text-align:center;vertical-align:center;">'.$excepted.'</td>';
+  			$result .='     <td onClick="'.$goto.'" style="cursor:pointer;width:23%;border: 1px solid grey;">';
   			$result .='      <table width="100%">';
-  			$result .='        <tr><td style="border-right: 1px solid grey;width:33%;height:30px;text-align:center;vertical-align:center;">'.$inputWork.$imputationUnit.'</td>';
-  			$result .='        <td style="border-right: 1px solid grey;width:33%;height:30px;text-align:center;vertical-align:center;">'.$inputAdm.$imputationUnit.'</td>';
-  			$result .='        <td style="'.$backgroundColor.'width:33%;height:30px;text-align:center;vertical-align:center;">'.$inputTotal.$imputationUnit.'</td></tr>';
+  			$result .='        <tr><td style="border-right: 1px solid grey;width:33%;height:30px;text-align:center;vertical-align:center;">'.$inputWork.'</td>';
+  			$result .='        <td style="border-right: 1px solid grey;width:33%;height:30px;text-align:center;vertical-align:center;">'.$inputAdm.'</td>';
+  			$result .='        <td style="'.$backgroundColor.'width:33%;height:30px;text-align:center;vertical-align:center;">'.$inputTotal.'</td></tr>';
   			$result .='      </table>';
   			$result .='     </td>';
   			$result .='   <td style="border: 1px solid grey;height:30px;width:23%;text-align:left;vertical-align:center;">';
@@ -222,11 +228,16 @@ class ImputationValidation{
   								. '       </script>'
 									. '     </span>';
   			}
-  			$result .='     </td></tr></table></div></td>';
+  			$idCheckBox++;
+  			$result .='     </td>';
+  			$result .='     <td style="padding-right:5px;"><div name="CheckBoxDiv'.$idCheckBox.'" id="CheckBoxDiv'.$idCheckBox.'">
+  			                 <input type="checkbox" name="validCheckBox'.$idCheckBox.'" id="validCheckBox'.$idCheckBox.'"/></div></td>';
+  			$result .='     </tr></table></div></td>';
   			$result .='   </tr>';
   			$countWeek++;
 	  	}
 	  }
+	  $isChecked = "imputationValidationSelection(this.checked, ".$idCheckBox.")";
 	  }
 	  if($noData==true or isset($noResource)){
 	    noData :
