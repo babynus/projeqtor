@@ -9919,3 +9919,18 @@ function cronExecutionDefinitionSave(){
     }
   });
 }
+
+function showDialogAutoSendMail(){
+	loadDialog('dialogAutoSendMail',null,true,null,true);
+}
+
+function saveAutoSendMail(sendFrequency, week, month, destination, otherDestination){
+	var url='../tool/saveAutoSendMail.php?sendFrequency='+sendFrequency+'&week='+week+'&month='+month+'&destination='+destination+'&otherDestination='+otherDestination;
+	  dojo.xhrGet({
+	    url : url,
+	    handleAs : "text",
+	    load : function(){
+	    	
+	    }
+	  });
+}

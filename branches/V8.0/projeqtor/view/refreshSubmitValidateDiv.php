@@ -34,8 +34,6 @@ scriptLog('   ->/view/refreshSubmitValidateDiv.php');
 
 $idWorkPeriod = getSessionValue('idWorkPeriod');
 $buttonAction = getSessionValue('buttonAction');
-debugLog($idWorkPeriod);
-debugLog($buttonAction);
 if($buttonAction and $idWorkPeriod){
   $week = new WorkPeriod($idWorkPeriod);
   $result = "";
@@ -61,7 +59,9 @@ if($buttonAction and $idWorkPeriod){
   						. '       </script>'
   								. '     </span>';
   	}
-  	$result .='     </td></tr></table>';
+  	$result .='     </td>';
+  	$result .='     <td style="padding-right:5px;"><div name="validCheckBox'.$week->id.'" id="validCheckBox'.$week->id.'"><input type="checkbox"/></div></td>';
+  	$result .='     </tr></table>';
   }else{
   	if($week->submitted){
   		$result .='     <table width="100%"><tr><td style="height:30px;">'.formatIcon('Submitted', 32, i18n('submittedWork', array($name, htmlFormatDate($week->submittedDate)))).'</td>';
