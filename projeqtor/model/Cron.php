@@ -131,6 +131,7 @@ class Cron {
   }
 
   public static function getCheckDates() {
+    //damian for update
   	self::init();
     if (self::$checkDates) {
       return self::$checkDates;
