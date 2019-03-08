@@ -59,7 +59,7 @@ class Consistency {
    */
   public static function checkWbs($correct=false,$trace=false) {
     $pe=new PlanningElement();
-    $peList=$pe->getSqlElementsFromCriteria(null,null,null,'wbsSortable asc');
+    $peList=$pe->getSqlElementsFromCriteria(null,null,"1=1",'wbsSortable asc');
     $lastWbs='';
     $lastPe=$pe;
     $errors=0;
@@ -93,6 +93,12 @@ class Consistency {
       if ($pe->topRefType and $pe->topRefId) {
         $key=$pe->topRefType.'#'.$pe->topRefId;
         $parentWbs=(isset($arrayWbs[$key]))?$arrayWbs[$key]:'';
+        if (!$parentWbs) { // Possibly just incorrect order
+          $parentPe=SqlElement::getSingleSqlElementFromCriteria('PlanningElement', array('refType'=>$pe->topRefType, 'refId'=>$pe->topRefId));
+          if ($parentPe and $parentPe->id) {
+            $parentWbs=$parentPe->wbsSortable;
+          }
+        }
         if ($parentWbs=='') {
           displayError(i18n("checkWbsParentNotFound",array($pe->topRefType,$pe->topRefId, i18n($pe->refType), $pe->refId)));
           $errors++;

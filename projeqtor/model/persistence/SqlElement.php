@@ -3101,7 +3101,7 @@ abstract class SqlElement {
       $result .= ' width="' . (($col->field == 'name') ? 'auto' : $col->widthPct . '%') . '"';
       $result .= ($col->formatter) ? ' formatter="' . htmlEncode ( $col->formatter ) . '"' : '';
       $result .= ($col->_from) ? ' from="' . $col->_from . '"' : '';
-      $result .= ($col->hidden) ? ' hidden="true"' : '';
+      $result .= ($col->hidden and $col->field!='id') ? ' hidden="true"' : '';
       $result .= '>' . $col->_displayName . '</th>' . "\n";
       $totWidth += ($col->field == 'name') ? 0 : $col->widthPct;
     }
