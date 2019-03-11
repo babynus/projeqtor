@@ -81,7 +81,6 @@ foreach ($param as $paramName=>$paramValue){
     $arrayParam['periodValue'] = $yearParam.'Year-'.$weekParam.'Week';
   }
 }
-debugLog($arrayParam);
 $param = json_encode($arrayParam);
 
 //open transaction bdd

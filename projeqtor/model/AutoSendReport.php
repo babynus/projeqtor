@@ -116,7 +116,6 @@ class AutoSendReport extends SqlElement{
 	  $parameter = json_decode($reportParameter);
 	  foreach ($parameter as $paramName=>$paramValue){
 	  	if($paramName != 'yearSpinner' and $paramName != 'monthSpinner' and $paramName != 'weekSpinner' and $paramName != 'startDate' and $paramName != 'periodValue'){
-	  		debugLog($paramName.' '.$paramValue);
 	  	  RequestHandler::setValue($paramName, $paramValue);
 	  	}
 	  }
@@ -155,36 +154,30 @@ class AutoSendReport extends SqlElement{
 	      if($value[0] == "currentYear"){
 	        $year = date('Y');
 	        RequestHandler::setValue($paramName, $year);
-	        debugLog('year : '.$year);
         }else if($value[0] == 'previousYear'){
 	        	$year = date('Y')-1;
 	        	RequestHandler::setValue($paramName, $year);
-	        	debugLog('year : '.$year);
 	      }
 	      if(count($value) > 1){
   	      if($value[1] == 'currentMonth'){
   	      	$month = date('m');
   	      	RequestHandler::setValue($paramName, $year.$month);
-  	      	debugLog('month : '.$year.$month);
   	      }else if($value[1] == 'previousMonth'){
   	      	$month = date('m')-1;
   	      	if($month < 10){
   	      		$month = '0'.$month;
   	      	}
   	      	RequestHandler::setValue($paramName, $year.$month);
-  	      	debugLog('month : '.$year.$month);
   	      }
   	      if($value[1] == 'currentWeek'){
   	      	$week = date('W');
   	      	RequestHandler::setValue($paramName, $year.$week);
-  	      	debugLog('week : '.$year.$week);
   	      }else if($value[1] == 'previousWeek'){
   	      	$week = date('W')-1;
   	      	if($week < 10){
   	      		$week = '0'.$week;
   	      	}
   	      	RequestHandler::setValue($paramName, $year.$week);
-  	      	debugLog('week : '.$year.$week);
   	      }
   	    }
   	  }
@@ -306,5 +299,36 @@ class AutoSendReport extends SqlElement{
 	  $result .='  </table>';
 	  $result .='</div>';
 	  echo $result;
+	}
+	public static function htmlReturnOptionForMinutesHoursCron($selection, $isHours=false, $isDayOfMonth=false, $required=false) {
+		$arrayWeekDay=array();
+		$max=59;
+		$start=0;
+		$modulo=5;
+		if($isHours){
+			$max=23;
+			$start=0;
+			$modulo=1;
+		}
+		if($isDayOfMonth){
+			$max=31;
+			$start=1;
+			$modulo=1;
+		}
+		for($i=$start;$i<=$max;$i++){
+			$key=$i;
+			//if($key<10)$key='0'.$key;
+			if ( $i % $modulo==0) $arrayWeekDay[$key]=$key;
+		}
+		$result="";
+		if (! $required) {
+			$result.='<option value="*" '.(($selection=='*')?'selected':'').'>'.i18n('all').'</option>';
+		}
+		foreach($arrayWeekDay as $key=>$line) {
+			$result.= '<option value="' . $key . '"';
+			if ($selection!==null and $key==$selection ) { $result.= ' SELECTED '; }
+			$result.= '>'.$line.'</option>';
+		}
+		return $result;
 	}
 }
