@@ -9942,9 +9942,6 @@ function saveAutoSendReport(sendFrequency, idReport){
 	if(dijit.byId('weekParam')){
 		var weekParam = dijit.byId('weekParam').get('value');
 	}
-	console.log(yearParam);
-	console.log(monthParam);
-	console.log(weekParam);
 	
 	if((destination != '' && otherDestination != '') || (destination != '' || otherDestination != '')){
 		var url='../tool/saveAutoSendReport.php?sendFrequency='+sendFrequency+'&idReport='+idReport+'&week='+week+'&month='+month+'&destination='+destination+
@@ -9957,4 +9954,8 @@ function saveAutoSendReport(sendFrequency, idReport){
 		    }
 		  });
 	}
+}
+
+function refreshRadioButtonDiv(){
+	loadContent("../tool/refreshButtonAutoSendReport.php", "radioButtonDiv", "autoSendReportForm");
 }
