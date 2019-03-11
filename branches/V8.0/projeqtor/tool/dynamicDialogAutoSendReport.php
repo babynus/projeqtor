@@ -25,7 +25,6 @@
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
 scriptLog('dynamicDialogAutoSendReport.php');
-
 $user = getSessionUser();
 $resourceProfile = new Profile($user->idProfile);
 
@@ -35,7 +34,41 @@ foreach (getUserVisibleResourcesList(true) as $id=>$name){
 	}
 }
 $currentDay = date('Y-m-d');
-$idReport = getSessionValue('idReport');
+
+if(sessionValueExists('reportParametersForDialog')){
+	$param = getSessionValue('reportParametersForDialog');
+}
+
+$idReport = '';
+$periodType = '';
+$periodValue = '';
+$yearSpinner = '';
+$monthSpinner = '';
+$weekSpinner = '';
+$startDate = '';
+$endDate = '';
+	
+foreach ($param as $name=>$value){
+	if($name == 'reportId'){
+		$idReport = $value;
+	}
+	if($name == 'periodType'){
+		$periodType = $value;
+	}
+	if($name == 'periodValue'){
+		$periodValue = $value;
+	}
+	if($name == 'yearSpinner'){
+		$yearSpinner = $value;
+	}
+	if($name == 'monthSpinner'){
+		$monthSpinner = $value;
+	}
+	if($name == 'weekSpinner'){
+		$weekSpinner = $value;
+	}
+}
+$report = new Report($idReport, true);
 
 if(sessionValueExists('sendFrequency')){
   $sendFrequency = getSessionValue('sendFrequency');
@@ -50,7 +83,7 @@ if(sessionValueExists('sendTime')){
 if(sessionValueExists('destination')){
 	$destination = getSessionValue('destination');
 }else{
-	$destination = $user->email;
+	$destination = $user->id;
 }
 if(sessionValueExists('otherDestination')){
 	$otherDestination = getSessionValue('otherDestination');
@@ -62,21 +95,6 @@ if(sessionValueExists('name')){
 }else{
 	$name = '';
 }
-if(sessionValueExists('yearParam')){
-	$yearParam = getSessionValue('yearParam');
-}else{
-	$yearParam = date('Y');
-}
-if(sessionValueExists('monthParam')){
-	$monthParam = getSessionValue('monthParam');
-}else{
-	$monthParam = date('m');
-}
-if(sessionValueExists('weekParam')){
-	$weekParam = getSessionValue('weekParam');
-}else{
-	$weekParam = date('W');
-}
 ?>
   <table>
     <tr>
@@ -86,78 +104,59 @@ if(sessionValueExists('weekParam')){
             <tr>
               <td class="assignHeader"><?php echo i18n('colParameters');?></td>
             </tr>
+             <?php if ($yearSpinner != '') {?>
             <tr>
               <td>
-                <label for="yearParam" class="dialogLabel" style="text-align:left;"><?php echo i18n('year');?> :</label>
-                <div dojoType="dijit.form.TextBox" 
-                  id="yearParam" name="yearParam" type="text" maxlength="10" readonly
-                  style="width:30px; text-align:center;margin-bottom:5px;margin-top:10px;"
-                  value="<?php echo $yearParam;?>"></div>
-                <button dojoType="dijit.form.Button"
-                  style="text-align:center;width:120px;height:16px;padding-bottom:5px;" 
-                  onclick="dijit.byId('yearParam').set('value','<?php echo date('Y');?>');saveDataToSession('yearParam', '<?php echo date('Y');?>', false);">
-                  <?php echo i18n('setToCurrentYear');?></button>
-                <button dojoType="dijit.form.Button"
-                  style="text-align:center;width:120px;height:16px;padding-bottom:5px;" 
-                  onclick="dijit.byId('yearParam').set('value','<?php echo (date('Y')-1);?>');saveDataToSession('yearParam', '<?php echo (date('Y')-1);?>', false);">
-                  <?php echo i18n('setToPreviousYear');?></button>
+                <label for="yearParam" class="dialogLabel" style="text-align:right;margin-top:10px;"><?php echo i18n('year');?> : </label>
+                <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft"
+                  style="width:120px;margin-top:10px;" name="yearParam" id="yearParam" <?php echo autoOpenFilteringSelect();?>
+                  value="<?php if($yearSpinner >= date('Y')){ echo "current";}else if($yearSpinner <= date('Y')-1){echo "previous";}?>">
+                  <option value="current"><?php echo i18n('setToCurrentYear');?></option>
+                  <option value="previous"><?php echo i18n('setToPreviousYear');?></option>
+                </select>
               </td>
             </tr>
+            <?php }?>
+            <?php if ($periodType == 'month') {?>
             <tr>
               <td>
-                <?php //ADD qCazelles - Report fiscal year - Ticket #128 
-                if (Parameter::getGlobalParameter("reportStartMonth")!='NO') {
-                ?>
-                <label for="monthParam" class="dialogLabel" style="text-align:left;"><?php echo i18n('startMonth');?> :</label>
-                <div style="width:30px; text-align: center; color: #000000;margin-bottom:5px;" 
+                <label for="monthParam" class="dialogLabel" style="text-align:right;"><?php echo i18n('month');?> : </label>
+                <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft"
+                  style="width:120px;" name="monthParam" id="monthParam" <?php echo autoOpenFilteringSelect();?>
+                  value="<?php if($monthSpinner >= date('m')){ echo "current";}else if($monthSpinner <= date('m')-1){echo "previous";}?>">
+                  <option value="current"><?php echo i18n('setToCurrentMonth');?></option>
+                  <option value="previous"><?php echo i18n('setToPreviousMonth');?></option>
+                </select>
+              </td>
+            </tr>
+             <?php }else if($periodType == 'year' and $monthSpinner != '') { ?>
+             <tr>
+              <td>
+                <label for="monthParam" class="dialogLabel" style="text-align:right;"><?php echo i18n('startMonth');?> : </label>
+                <div style="width:50px; text-align: center; color: #000000;" 
                    dojoType="dijit.form.NumberSpinner" 
                    constraints="{min:1,max:12,places:0,pattern:'00'}"
                    intermediateChanges="true"
                    maxlength="2"
-                   value="01" smallDelta="1"
+                   value="<?php echo $monthSpinner;?>" smallDelta="1" class="input roundedLeft"
                    id="monthParam" name="monthParam" >
                  </div>
-                 <button dojoType="dijit.form.Button"
-                  style="text-align:center;width:120px;height:16px;padding-bottom:5px;" 
-                  onclick="dijit.byId('monthParam').set('value','<?php echo date('m');?>');saveDataToSession('monthParam', '<?php echo date('m');?>', false);">
-                  <?php echo i18n('setToCurrentMonth');?></button>
-                <button dojoType="dijit.form.Button"
-                  style="text-align:center;width:120px;height:16px;padding-bottom:5px;" 
-                  onclick="dijit.byId('monthParam').set('value','<?php echo date('m',date('m')-1);?>');saveDataToSession('monthParam', '<?php echo date('m',date('m')-1);?>', false);">
-                  <?php echo i18n('setToPreviousMonth');?></button>
-               <?php }else{ ?>
-                <div dojoType="dijit.form.TextBox" 
-                  id="monthParam" name="monthParam" type="text" maxlength="10" readonly
-                  style="width:30px; text-align:center;margin-bottom:5px;"
-                  value="<?php echo $monthParam;?>"></div>
-                <button dojoType="dijit.form.Button"
-                  style="text-align:center;width:120px;height:16px;padding-bottom:5px;" 
-                  onclick="dijit.byId('monthParam').set('value','<?php echo date('m');?>');saveDataToSession('monthParam', '<?php echo date('m');?>', false);">
-                  <?php echo i18n('setToCurrentMonth');?></button>
-                <button dojoType="dijit.form.Button"
-                  style="text-align:center;width:120px;height:16px;padding-bottom:5px;" 
-                  onclick="dijit.byId('monthParam').set('value','<?php echo date('m',date('m')-1);?>');saveDataToSession('monthParam', '<?php echo date('m',date('m')-1);?>', false);">
-                  <?php echo i18n('setToPreviousMonth');?></button>
-                <?php }?>
               </td>
             </tr>
+            <?php }?>
+            <?php if ($periodType == 'week') {?>
             <tr>
               <td>
-                <label for="weekParam" class="dialogLabel" style="text-align:left;"><?php echo i18n('week');?> :</label>
-                <div dojoType="dijit.form.TextBox" 
-                  id="weekParam" name="weekParam" type="text" maxlength="10" readonly
-                  style="width:30px; text-align:center;"
-                  value="<?php echo $weekParam;?>"></div>
-                <button dojoType="dijit.form.Button"
-                  style="text-align:center;width:120px;height:16px;" 
-                  onclick="dijit.byId('weekParam').set('value','<?php echo date('W');?>');saveDataToSession('weekParam', '<?php echo date('W');?>', false);">
-                  <?php echo i18n('setToCurrentWeek');?></button>
-                <button dojoType="dijit.form.Button"
-                  style="text-align:center;width:120px;height:16px;" 
-                  onclick="dijit.byId('weekParam').set('value','<?php if(date('W')-1 <10){?>0<?php }echo date('W')-1; ?>');saveDataToSession('weekParam', '<?php if(date('W')-1 <10){?>0<?php }echo date('W')-1; ?>', false);">
-                  <?php echo i18n('setToPreviousWeek');?></button>
+                <label for="weekParam" class="dialogLabel" style="text-align:right;"><?php echo i18n('week');?> : </label>
+                <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft"
+                  style="width:120px;" name="weekParam" id="weekParam" <?php echo autoOpenFilteringSelect();?>
+                  value="<?php if($weekSpinner >= date('W')){ echo "current";}else if($weekSpinner <= date('W')-1){echo "previous";}?>">
+                  <option value="current"><?php echo i18n('setToCurrentWeek');?></option>
+                  <option value="previous"><?php echo i18n('setToPreviousWeek');?></option>
+                </select>
               </td>
             </tr>
+            <?php }?>
             <tr>
               <td></br></td>
             </tr>
@@ -172,7 +171,7 @@ if(sessionValueExists('weekParam')){
                 <input type="radio" data-dojo-type="dijit/form/RadioButton" 
                   id="everyDays" name="sendFrequency" value="0" <?php if($sendFrequency == 'everyDays'){echo 'checked';}?>
                   onchange="this.checked?saveDataToSession('sendFrequency', 'everyDays', false):'';showDialogAutoSendReport();"/>
-                <label for="everyDays" class="dialogLabel" style="text-align:left;"><?php echo i18n('showAllDays');?></label>
+                <label for="everyDays" class="dialogLabel" style="text-align:right;"><?php echo i18n('showAllDays');?> </label>
               </td>
             </tr>
             <tr>
@@ -180,7 +179,7 @@ if(sessionValueExists('weekParam')){
                 <input type="radio" data-dojo-type="dijit/form/RadioButton" 
                   id="everyOpenDays" name="sendFrequency" value="0" <?php if($sendFrequency == 'everyOpenDays'){echo 'checked';}?>
                   onchange="this.checked?saveDataToSession('sendFrequency', 'everyOpenDays', false):'';showDialogAutoSendReport();"/>
-                <label for="everyOpenDays" class="dialogLabel" style="text-align:left;"><?php echo i18n('showAllOpenDays');?></label>
+                <label for="everyOpenDays" class="dialogLabel" style="text-align:right;"><?php echo i18n('showAllOpenDays');?> </label>
               </td>
             </tr>
             <tr>
@@ -188,7 +187,7 @@ if(sessionValueExists('weekParam')){
                 <input type="radio" data-dojo-type="dijit/form/RadioButton" 
                   id="everyWeeks" name="sendFrequency" value="0" <?php if($sendFrequency == 'everyWeeks'){echo 'checked';}?>
                   onchange="this.checked?saveDataToSession('sendFrequency', 'everyWeeks', false):'';showDialogAutoSendReport();"/>&nbsp;&nbsp;
-                <label for="everyWeeks" class="dialogLabel" style="text-align:left;"><?php echo i18n('showAllWeeks');?> :</label>
+                <label for="everyWeeks" class="dialogLabel" style="text-align:right;"><?php echo i18n('showAllWeeks');?> : </label>
                 <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft"
                   style="width:100px;" name="weekFrequency" id="weekFrequency" <?php echo autoOpenFilteringSelect();?>
                   <?php if($sendFrequency != 'everyWeeks'){?> readonly <?php }?>>>
@@ -202,7 +201,7 @@ if(sessionValueExists('weekParam')){
                 <input type="radio" data-dojo-type="dijit/form/RadioButton" 
                   id="everyMonths" name="sendFrequency" value="0"  <?php if($sendFrequency == 'everyMonths'){echo 'checked';}?>
                   onchange="this.checked?saveDataToSession('sendFrequency', 'everyMonths', false):'';showDialogAutoSendReport();"/>&nbsp;&nbsp;
-                <label for="everyMonths" class="dialogLabel" style="text-align:left;"><?php echo i18n('showAllMonths');?> :</label>
+                <label for="everyMonths" class="dialogLabel" style="text-align:right;"><?php echo i18n('showAllMonths');?> : </label>
                 <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft"
                 style="width:100px;" name="monthFrequency" id="monthFrequency" <?php echo autoOpenFilteringSelect();?>
                 <?php if($sendFrequency != 'everyMonths'){?> readonly <?php }?>>
@@ -215,16 +214,29 @@ if(sessionValueExists('weekParam')){
             </tr>
             <tr>
               <td>
-                <label for="sendTime" class="dialogLabel" style="text-align:left;"><?php echo i18n('hours');?> :</label>
+                <label for="sendTime" class="dialogLabel" style="text-align:right;"><?php echo i18n('hours');?> : </label>
                 <div dojoType="dijit.form.TimeTextBox" name="sendTime" id="sendTime"
                     invalidMessage="<?php echo i18n('messageInvalidTime')?>" 
                     type="text" maxlength="5" required="true"
                     style="width:40px; text-align: center;" class="input rounded required" required="true"
                     value="T<?php if(sessionValueExists('sendTime')){echo getSessionValue('sendTime');}else{
                     echo date('H:i');}?>" hasDownArrow="false" 
-                    onchange="saveDataToSession('sendTime', dojo.byId('sendTime').value, false);showDialogAutoSendReport();">
+                    onchange="saveDataToSession('sendTime', dojo.byId('sendTime').value, false);">
                 </div>
               </td>
+            </tr>
+            <tr>
+              <td></br></td>
+            </tr>
+            <tr>
+              <td>
+                <label for="name" class="dialogLabel" style="text-align:right;"><?php echo i18n('colSendName');?> : </label>
+                <input data-dojo-type="dijit.form.TextBox"
+  				          id="name" name="name"
+  				          style="width: 300px;"
+  				          maxlength="4000" onChange="saveDataToSession('name', this.value, false);"
+  				          class="input" required="true" value="<?php if(sessionValueExists('name')){ echo $name;}?>"/>
+  				    </td>
             </tr>
             <tr>
               <td></br></td>
@@ -237,7 +249,7 @@ if(sessionValueExists('weekParam')){
             </tr>
             <tr>
               <td>
-                <label for="destinationInput" class="dialogLabel" style="text-align:left;"><?php echo i18n('sectionReceivers');?>  :</label>
+                <label for="destinationInput" class="dialogLabel" style="text-align:right;"><?php echo i18n('sectionReceivers');?> : </label>
                 <select dojoType="dijit.form.FilteringSelect" class="input" xlabelType="html"
                 style="width: 150px;" name="destinationInput" id="destinationInput" required="true"
                 <?php echo autoOpenFilteringSelect();
@@ -255,17 +267,7 @@ if(sessionValueExists('weekParam')){
             </tr>
             <tr>
               <td>
-                <label for="name" class="dialogLabel" style="text-align:left;"><?php echo i18n('colName');?>  :</label>
-                <input data-dojo-type="dijit.form.TextBox"
-  				          id="name" name="name"
-  				          style="width: 300px;"
-  				          maxlength="4000" onChange="saveDataToSession('name', this.value, false);"
-  				          class="input" required="true" value="<?php if(sessionValueExists('name')){ echo $name;}?>"/>
-  				    </td>
-            </tr>
-            <tr>
-              <td>
-                <label for="otherDestinationInput" class="dialogLabel" style="text-align:left;"><?php echo i18n('colOtherReceivers');?> :</label>
+                <label for="otherDestinationInput" class="dialogLabel" style="text-align:right;"><?php echo i18n('colOtherReceivers');?> : </label>
                 <textarea type="text" dojoType="dijit.form.Textarea" 
   				          id="otherDestinationInput" name="otherDestinationInput"
   				          style="width: 302px;" maxlength="4000" class="input" 
@@ -286,7 +288,7 @@ if(sessionValueExists('weekParam')){
         </button>
         <button dojoType="dijit.form.Button" type="submit" 
         <?php if($sendTime == '' or ($destination == '' and $otherDestination == '')){?>disabled <?php }?>
-          onclick="saveAutoSendReport('<?php echo $sendFrequency;?>');">
+          onclick="saveAutoSendReport('<?php echo $sendFrequency;?>',<?php echo $idReport;?>);">
           <?php echo i18n("buttonOK");?>
         </button>
       </td>
