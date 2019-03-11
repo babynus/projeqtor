@@ -24,24 +24,17 @@
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
-/** ============================================================================
- * Save real work allocation.
+/* ============================================================================
+ * Presents the list of objects of a given class.
+ *
  */
-
 require_once "../tool/projeqtor.php";
+require_once "../tool/formatter.php";
+scriptLog('   ->/view/refreshAutoSendReportList.php'); 
 
-//parameter
-$sendFrequency = RequestHandler::getValue('sendFrequency');
-$week = RequestHandler::getValue('week');
-$month = RequestHandler::getValue('month');
-$destination = RequestHandler::getValue('destination');
-$otherDestination = RequestHandler::getValue('otherDestination');
+$idUser= RequestHandler::getId('userName');
 
-//open transaction bdd
-Sql::beginTransaction();
-
-$result = "";
-
-// commit work
-Sql::commitTransaction();
 ?>
+<div id="autoSendReportListDiv" name="autoSendReportListDiv">
+  <?php AutoSendReport::drawAutoSendReportList($idUser);?>
+</div>
