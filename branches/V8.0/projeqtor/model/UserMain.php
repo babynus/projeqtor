@@ -1601,5 +1601,50 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
     }
     return $result;
   } 
+  
+  //gautier #itemTypeRestriction
+  public function getItemTypeRestriction($obj,$objectClass,$user,$showIdle) {
+    $table=$obj->getDatabaseTableName();
+    $resultOr = '';
+    $resultAnd = '';
+    $objType = $obj->getDatabaseColumnName($objectClass . 'Type');
+    $restrictType = new RestrictType();
+    $listRestrictType = $restrictType->getSqlElementsFromCriteria(array('className'=>$objType,'idProfile'=>$user->idProfile));
+    foreach ($listRestrictType as $typeRestrict){
+      $tabListIdRestrictType[] = $typeRestrict->idType;
+    }
+    if(isset($tabListIdRestrictType)){
+      $inTabListIdRestrictType = transformValueListIntoInClause($tabListIdRestrictType);
+      $resultAnd.= "  and ($table.id$objType in $inTabListIdRestrictType " ;
+    }else{
+      $resultAnd.= "  and ( 1=1" ;
+    }
+    
+    $listProjOtherProfile = $user->getSpecificAffectedProfiles($showIdle);
+    foreach ($listProjOtherProfile as $id=>$idProfile){
+      if($idProfile != $user->idProfile){
+        $tabProfileByProj[$id]=$idProfile;
+      }
+    }
+    if(isset($tabProfileByProj)){
+      foreach ($tabProfileByProj as $idProj=>$idProfile){
+        $listRestrictType = $restrictType->getSqlElementsFromCriteria(array('className'=>$objType,'idProfile'=>$idProfile));
+        $tabListIdRestrictTypeByProject = array();
+        foreach ($listRestrictType as $typeRestrict){
+          $tabListIdRestrictTypeByProject[] = $typeRestrict->idType;
+        }
+        if($tabListIdRestrictTypeByProject){
+          $tabListIdRestrictTypeByProject = transformValueListIntoInClause($tabListIdRestrictTypeByProject);
+          $resultOr.= " or ($table.idProject=$idProj and ( $table.id$objType in $tabListIdRestrictTypeByProject)) " ;
+        }else{
+          $resultOr.= " or ($table.idProject=$idProj ) " ;
+        }
+      }
+      $listIdProj = transformListIntoInClause($tabProfileByProj);
+      $resultAnd .= " and  $table.idProject not in $listIdProj ) ";
+    }
+    $result = $resultAnd.$resultOr;
+    return $result;
+  }
 }
 ?>
