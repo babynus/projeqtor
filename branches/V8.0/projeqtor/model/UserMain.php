@@ -1603,7 +1603,7 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
   } 
   
   //gautier #itemTypeRestriction
-  public function getItemTypeRestriction($obj,$objectClass,$user,$showIdle) {
+  public function getItemTypeRestriction($obj,$objectClass,$user,$showIdle,$showIdleProjects) {
     $table=$obj->getDatabaseTableName();
     $resultOr = '';
     $resultAnd = '';
@@ -1619,7 +1619,14 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
     }else{
       $resultAnd.= "  and ( 1=1" ;
     }
-    
+    if (getSessionValue('project')=='*'){
+      $resultAnd.= " and ($table.idProject in " . getVisibleProjectsList(! $showIdleProjects). " or $table.idProject is null)";
+    }
+      $monTab = getVisibleProjectsList(! $showIdleProjects);
+      $monTab = substr($monTab, 1);
+      $monTab = substr($monTab,0,-1);
+      $tabVisibleProjet = explode(', ', $monTab);
+      
     $listProjOtherProfile = $user->getSpecificAffectedProfiles($showIdle);
     foreach ($listProjOtherProfile as $id=>$idProfile){
       if($idProfile != $user->idProfile){
@@ -1628,16 +1635,18 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
     }
     if(isset($tabProfileByProj)){
       foreach ($tabProfileByProj as $idProj=>$idProfile){
-        $listRestrictType = $restrictType->getSqlElementsFromCriteria(array('className'=>$objType,'idProfile'=>$idProfile));
-        $tabListIdRestrictTypeByProject = array();
-        foreach ($listRestrictType as $typeRestrict){
-          $tabListIdRestrictTypeByProject[] = $typeRestrict->idType;
-        }
-        if($tabListIdRestrictTypeByProject){
-          $tabListIdRestrictTypeByProject = transformValueListIntoInClause($tabListIdRestrictTypeByProject);
-          $resultOr.= " or ($table.idProject=$idProj and ( $table.id$objType in $tabListIdRestrictTypeByProject)) " ;
-        }else{
-          $resultOr.= " or ($table.idProject=$idProj ) " ;
+        if(in_array($idProj,$tabVisibleProjet)){
+          $listRestrictType = $restrictType->getSqlElementsFromCriteria(array('className'=>$objType,'idProfile'=>$idProfile));
+          $tabListIdRestrictTypeByProject = array();
+          foreach ($listRestrictType as $typeRestrict){
+            $tabListIdRestrictTypeByProject[] = $typeRestrict->idType;
+          }
+          if($tabListIdRestrictTypeByProject){
+            $tabListIdRestrictTypeByProject = transformValueListIntoInClause($tabListIdRestrictTypeByProject);
+            $resultOr.= " or ($table.idProject=$idProj and ( $table.id$objType in $tabListIdRestrictTypeByProject)) " ;
+          }else{
+            $resultOr.= " or ($table.idProject=$idProj ) " ;
+          }
         }
       }
       $listIdProj = transformListIntoInClause($tabProfileByProj);
