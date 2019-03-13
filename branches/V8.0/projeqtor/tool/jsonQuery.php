@@ -229,6 +229,16 @@
           }
         }
     }
+    //Gautier #itemTypeRestriction
+    if(Parameter::getGlobalParameter('hideItemTypeRestrictionOnProject')=='YES'){
+      $lstGetClassList = Type::getClassList();
+      $objType = $obj->getDatabaseColumnName($objectClass . 'Type');
+      $lstGetClassList = array_flip($lstGetClassList);
+      if(in_array($objType,$lstGetClassList)){
+        $queryWhere.= $user->getItemTypeRestriction($obj,$objectClass,$user,$showIdle);
+      }
+    }
+    
     // --- Take into account restriction visibility clause depending on profile
     if ( ($objectClass=='Version' or $objectClass=='Resource') and $comboDetail) {
     	// No limit, although idProject exists
