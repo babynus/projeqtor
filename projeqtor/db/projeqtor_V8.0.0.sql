@@ -6,7 +6,7 @@
 -- ///////////////////////////////////////////////////////////
 
 INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
-(204, 'menuImputationValidation', 7, 'item', 118, Null, 0, 'Work')
+(204, 'menuImputationValidation', 7, 'item', 118, Null, 0, 'Work'),
 (205, 'menuAutoSendReport', 7, 'item', 175, Null, 0, 'Work');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
