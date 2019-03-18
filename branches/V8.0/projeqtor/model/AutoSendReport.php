@@ -295,7 +295,7 @@ class AutoSendReport extends SqlElement{
   			}
   			$result .='</td>';
   			$result .='<td style="border: 1px solid grey;height:40px;width:8%;text-align:center;vertical-align:center;">'.i18n($send->sendFrequency).'</td>';
-  			$result .='<td style="border: 1px solid grey;height:40px;width:6%;text-align:center;vertical-align:center;">'.htmlFormatDate(date('Y-m-d', $send->nextTime)).'</td>';
+  			$result .='<td style="border: 1px solid grey;height:40px;width:6%;text-align:center;vertical-align:center;font-style:italic;">'.htmlFormatDate(date('Y-m-d', $send->nextTime)).' '.date('H:i', $send->nextTime).'</td>';
   			$result .='<td style="border: 1px solid grey;height:40px;width:22%;text-align:center;vertical-align:center;">';
   			$param = json_decode($send->reportParameter);
   			$strParam = '';
