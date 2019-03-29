@@ -887,7 +887,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         $aff=new Affectation();
         $cpt=$aff->countSqlElementsFromCriteria($crit);
-      }else if($section == 'ExpenseBudgetDetal'){
+      }else if($section == 'ExpenseBudgetDetail'){
         $expense = new ProjectExpense();
         $cpt= $expense->countSqlElementsFromCriteria(array("idBudgetItem"=>$obj->id));
       } else if ($section=='affectationsResourceTeam') {
@@ -6843,12 +6843,12 @@ function drawExpenseBudgetDetail($obj) {
   echo '<tr><td colspan="2" style="width:100%;">';
   echo '<table style="width:100%;">';
   echo '  <tr>';
-  echo '    <td class="" colspan="1" style="width:10%"></td>';
   echo '    <td class="assignHeader" colspan="1" style="width:25%">'.i18n('colName').'</td>';
+  echo '    <td class="assignHeader" colspan="1" style="width:10%"></td>';
   echo '    <td class="assignHeader" colspan="1" style="width:10%">'.i18n('colDate').'</td>';
-  echo '    <td class="assignHeader" colspan="1" style="width:10%">'.i18n('colUntaxedAmount').'</td>';
-  echo '    <td class="assignHeader" colspan="1" style="width:10%">'.i18n('colFullAmount').'</td>';
-  echo '    <td class="assignHeader" colspan="1" style="width:10%">'.i18n('colTaxAmount').'</td>';
+  echo '    <td class="assignHeader" colspan="1" style="width:20%">'.i18n('colUntaxedAmount').'</td>';
+  echo '    <td class="assignHeader" colspan="1" style="width:15%">'.i18n('colTaxAmount').'</td>';
+  echo '    <td class="assignHeader" colspan="1" style="width:20%">'.i18n('colFullAmount').'</td>';
   echo '  </tr>';
   foreach ($listProjectExpense as $expense){
     drawBudgetExpenseDetailLine(get_class($expense), $expense->id);
@@ -6898,23 +6898,23 @@ function drawBudgetExpenseDetailLine($class,$id){
 	}
 	$idleClass = ($obj->idle)?' affectationIdleClass':'';
 	echo ' <tr>';
-	echo '    <td class="assignData'.$idleClass.'" align="center" style="width:10%;height:20px;">'.i18n('colPlanned').'</td>';
 	echo '    <td class="assignData'.$idleClass.'" align="center" rowspan="2"'.$goto.'style="width:25%;height:20px;cursor:pointer;vertical-align:middle">';
-	echo '      <table width="100%"><tr><td width="6%" float="right">'.formatIcon(get_class($obj), 16).'</td>';
-	echo '      <td width="94%"style="text-aglign:left;">'.$obj->name.'</td></tr></table>';
+	echo '      <table width="100%"><tr><td width="10%" float="right">'.formatIcon(get_class($obj), 16).'</td>';
+	echo '      <td width="90%"style="text-aglign:left;">&nbsp'.$obj->name.'</td></tr></table>';
 	echo '    </td>';
+	echo '    <td class="assignData'.$idleClass.'" align="center" style="width:10%;height:20px;">'.i18n('colPlanned').'</td>';
 	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:10%;height:20px;">'.$plannedDate.'</td>';
-	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:10%;height:20px;">'.$plannedAmount.'</td>';
-	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:10%;height:20px;">'.$plannedFullAmount.'</td>';
-	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:10%;height:20px;">'.$plannedTaxAmount.'</td>';
+	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:20%;height:20px;">'.$plannedAmount.'</td>';
+	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:15%;height:20px;">'.$plannedTaxAmount.'</td>';
+	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:20%;height:20px;">'.$plannedFullAmount.'</td>';
 	echo '</tr>';
 	
 	echo ' <tr>';
 	echo '    <td class="assignData'.$idleClass.'" align="center" style="width:10%;height:20px;">'.i18n('colReal').'</td>';
 	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:10%;height:20px;">'.$realDate.'</td>';
-	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:10%;height:20px;">'.$realAmount.'</td>';
-	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:10%;height:20px;">'.$realFullAmount.'</td>';
-	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:10%;height:20px;">'.$realTaxAmount.'</td>';
+	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:20%;height:20px;">'.$realAmount.'</td>';
+	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:15%;height:20px;">'.$realTaxAmount.'</td>';
+	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:20%;height:20px;">'.$realFullAmount.'</td>';
 	echo '</tr>';
 }
 
