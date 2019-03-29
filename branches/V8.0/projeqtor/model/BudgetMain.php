@@ -99,8 +99,8 @@ class BudgetMain extends SqlElement {
   public $leftFullAmount;
   public $availableTransferedAmount;
   public $availableTransferedFullAmount;
-  public $_sec_ExpenseBudgetDetal;
-  public $_spe_ExpenseBudgetDetal;
+  public $_sec_ExpenseBudgetDetail;
+  public $_spe_ExpenseBudgetDetail;
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
@@ -300,7 +300,7 @@ class BudgetMain extends SqlElement {
       $result .="</td></tr></table>";
       return $result;
     }
-    if($item == 'ExpenseBudgetDetal'){
+    if($item == 'ExpenseBudgetDetail'){
       drawExpenseBudgetDetail($this);
     }
   }
