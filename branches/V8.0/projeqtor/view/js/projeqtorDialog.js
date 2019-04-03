@@ -5469,7 +5469,7 @@ function addResourceCapacity(objectClass, type, idResource) {
   loadDialog('dialogResourceCapacity',callBack,false,params);
 }
 
-function saveResourceCapacity(){
+function saveResourceCapacity(capacity){
   var formVar=dijit.byId('resourceCapacityForm');
   if (dijit.byId('resourceCapacityStartDate') && dijit.byId('resourceCapacityEndDate')) {
     var start=dijit.byId('resourceCapacityStartDate').value;
@@ -5480,6 +5480,14 @@ function saveResourceCapacity(){
       return;
     }
   }
+  if (dijit.byId('resourceCapacity')){
+    var newCapacity = dijit.byId('resourceCapacity').value;
+    if(capacity === newCapacity){
+      showAlert(i18n("changeCapacity"));
+      return;
+    }
+  }
+  
   if (formVar.validate()) {
     loadContent("../tool/saveResourceCapacity.php", "resultDiv", "resourceCapacityForm",true,'affectation');
     dijit.byId('dialogResourceCapacity').hide();
