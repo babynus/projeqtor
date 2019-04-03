@@ -5494,7 +5494,7 @@ function removeResourceCapacity(id,idResource) {
     return;
   }
   actionOK=function() {
-    loadContent("../tool/removeResourceCapacity.php?idResourceCapacity="+id, "resultDiv",null, true, 'affectation');
+    loadContent("../tool/removeResourceCapacity.php?idResourceCapacity="+id+"&idResource="+idResource, "resultDiv",null, true, 'affectation');
   };
   msg=i18n('confirmDeleteResourceCapacity', new Array(id,i18n('Resource'),idResource));
   showConfirm(msg, actionOK);
