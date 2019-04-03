@@ -898,10 +898,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $crit=array('idResource'=>$obj->id);
         $resCap=new ResourceCapacity();
         $cpt=$resCap->countSqlElementsFromCriteria($crit);
-      } else if ($section=='capacityResource'){
-        $crit=array('idResource'=>$obj->id);
-        $resCap=new ResourceCapacity();
-        $cpt=$resCap->countSqlElementsFromCriteria($crit);
       } else if ($section=='affectationResourceTeamResource') {
         $crit=array('idResource'=>$obj->id);
         $aff=new ResourceTeamAffectation();
@@ -5877,7 +5873,9 @@ global $cr, $print, $user, $browserLocale, $comboDetail;
     require $script; // execute code
   }
  
-  $canCreate=securityGetAccessRightYesNo('menu'.get_class($obj), 'create')=="YES";
+  $canDelete=securityGetAccessRightYesNo('menu'.get_class($obj), 'delete', $obj)=="YES";
+  $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
+  $canCreate=securityGetAccessRightYesNo('menu'.get_class($obj), 'create', $obj)=="YES";
   if (!(securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES")) {
     $canCreate=false;
     $canUpdate=false;
@@ -5916,14 +5914,6 @@ global $cr, $print, $user, $browserLocale, $comboDetail;
   echo '</tr>';
   
   foreach ($list as $resCap) {
-    $canDelete=securityGetAccessRightYesNo('menu'.get_class($obj), 'delete', $obj)=="YES";
-    $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
-    $canCreate=securityGetAccessRightYesNo('menu'.get_class($obj), 'create', $obj)=="YES";
-    if (!(securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES")) {
-      $canCreate=false;
-      $canUpdate=false;
-      $canDelete=false;
-    }
     $idleClass=($resCap->idle or ($resCap->endDate and $resCap->endDate<$dateNow=date("Y-m-d")))?' affectationIdleClass':'';
       echo '<tr>';
       if (!$print) {
