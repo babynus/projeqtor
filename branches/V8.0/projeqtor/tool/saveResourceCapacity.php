@@ -66,13 +66,12 @@ if($mode == 'edit'){
   $resourceCapacity->startDate = $start;
   $resourceCapacity->endDate = $end;
   $res=$resourceCapacity->save();
-
-  if (!$result) {
-    $result=$res;
-    if(sessionTableValueExist('capacityPeriod', $idResource)){
-      unsetSessionTable('capacityPeriod', $idResource);
-    }
-  }
+}
+if (!$result) {
+	$result=$res;
+	if(sessionTableValueExist('capacityPeriod', $idResource)){
+		unsetSessionTable('capacityPeriod', $idResource);
+	}
 }
 // Message of correct saving
 displayLastOperationStatus($result);
