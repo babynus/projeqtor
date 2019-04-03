@@ -37,7 +37,6 @@ $start = RequestHandler::getValue('resourceCapacityStartDate');
 $end = RequestHandler::getValue('resourceCapacityEndDate');
 $description = RequestHandler::getValue('resourceCapacityDescription');
 $idle = RequestHandler::getBoolean('resourceCapacityIdle');
-
 if($idle){
   $idle = 1;
 }else{
@@ -67,8 +66,9 @@ if($mode == 'edit'){
   $resourceCapacity->endDate = $end;
   $res=$resourceCapacity->save();
 }
-
-$result = getLastOperationStatus($res);
+if($result == ""){
+  $result = getLastOperationStatus($res);
+}
 if ($result == "OK") {
 	if(sessionTableValueExist('capacityPeriod', $idResource)){
 		unsetSessionTable('capacityPeriod', $idResource);

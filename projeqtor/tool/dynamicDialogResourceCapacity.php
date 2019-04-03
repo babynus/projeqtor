@@ -123,7 +123,7 @@ if(isset($listRescap[0])){
         <button class="mediumTextButton" dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogResourceCapacity').hide();">
           <?php echo i18n("buttonCancel");?>
         </button>
-        <button class="mediumTextButton" dojoType="dijit.form.Button" type="submit" id="dialogResourceCapacitySubmit" onclick="protectDblClick(this);saveResourceCapacity();return false;">
+        <button class="mediumTextButton" dojoType="dijit.form.Button" type="submit" id="dialogResourceCapacitySubmit" onclick="protectDblClick(this);saveResourceCapacity(<?php echo $res->capacity;?>);return false;">
           <?php echo i18n("buttonOK");?>
         </button>
       </td>
