@@ -76,6 +76,6 @@ if ($result == "OK") {
 }
 
 // Message of correct saving
-displayLastOperationStatus($result);
+displayLastOperationStatus($res);
 
 ?>
