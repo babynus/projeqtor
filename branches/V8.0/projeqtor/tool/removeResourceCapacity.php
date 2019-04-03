@@ -31,6 +31,7 @@
 require_once "../tool/projeqtor.php";
 
 $idResourceCapacity = RequestHandler::getId('idResourceCapacity');
+$idResource=RequestHandler::getId('idResource');
 Sql::beginTransaction();
 $obj = new ResourceCapacity($idResourceCapacity);
 $result=$obj->delete();
