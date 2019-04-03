@@ -676,6 +676,9 @@ class ResourceMain extends SqlElement {
         $capacityPeriod[$this->id][$cap->startDate]['startDate']=$cap->startDate;
         $capacityPeriod[$this->id][$cap->startDate]['endDate']=$cap->endDate;
       }
+    }
+    if(!isset($capacityPeriod)){
+      $capacityPeriod = array();
     }   
     return $capacityPeriod;
   }
