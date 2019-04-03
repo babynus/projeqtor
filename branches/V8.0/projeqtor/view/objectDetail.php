@@ -894,6 +894,10 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $crit=array('idResourceTeam'=>$obj->id);
         $aff=new ResourceTeamAffectation();
         $cpt=$aff->countSqlElementsFromCriteria($crit);
+      } else if ($section=='resourceCapacity') {
+        $crit=array('idResource'=>$obj->id);
+        $resCap=new ResourceCapacity();
+        $cpt=$resCap->countSqlElementsFromCriteria($crit);
       } else if ($section=='capacityResource'){
         $crit=array('idResource'=>$obj->id);
         $resCap=new ResourceCapacity();
