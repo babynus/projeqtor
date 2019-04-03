@@ -68,8 +68,8 @@ if($mode == 'edit'){
   $res=$resourceCapacity->save();
 }
 
-if (!$result) {
-	$result=$res;
+$result = getLastOperationStatus($res);
+if ($result == "OK") {
 	if(sessionTableValueExist('capacityPeriod', $idResource)){
 		unsetSessionTable('capacityPeriod', $idResource);
 	}
