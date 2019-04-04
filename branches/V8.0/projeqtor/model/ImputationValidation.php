@@ -160,8 +160,6 @@ class ImputationValidation{
   			  }
   				$firstWeekDay=addDaysToDate($firstWeekDay, 1);
   			}
-  			//debugLog($weekDayArray);
-  			
   			$work = new Work();
   			$crit = array('idResource'=>$idResource, 'week'=>$week->periodValue);
   			$critWorkList = $work->getSqlElementsFromCriteria($crit);
