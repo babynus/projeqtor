@@ -6,7 +6,7 @@
 -- ///////////////////////////////////////////////////////////
 
 INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
-(204, 'menuImputationValidation', 7, 'item', 118, Null, 0, 'Work')
+(204, 'menuImputationValidation', 7, 'item', 118, Null, 0, 'Work'),
 (205, 'menuAutoSendReport', 7, 'item', 175, Null, 0, 'Work');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
@@ -540,7 +540,7 @@ INSERT INTO `${prefix}modulemenu` (`id`,`idModule`,`idMenu`,`hidden`,`active`) V
  (134,11,161,1,1),
  (135,7,166,1,1),
  (136,10,165,1,1),
- (137,10,183,1,1),
+ (137,10,183,1,1);
  
  
 INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
