@@ -7,7 +7,7 @@
 
 INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
 (204, 'menuImputationValidation', 7, 'item', 118, Null, 0, 'Work'),
-(205, 'menuAutoSendReport', 7, 'item', 175, Null, 0, 'Work');
+(205, 'menuAutoSendReport', 11, 'item', 505, Null, 0, 'Work');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1, 204, 1),
@@ -540,11 +540,23 @@ INSERT INTO `${prefix}modulemenu` (`id`,`idModule`,`idMenu`,`hidden`,`active`) V
  (135,7,166,1,1),
  (136,10,165,1,1),
  (137,10,183,1,1),
- (138,1,9,0,1);
+ (138,1,9,0,1),
+ (139,12,209,0,1),
+ (140,12,210,0,1),
+ (141,12,211,0,1),
+ (142,12,212,0,1),
+ (143,12,213,0,1),
+ (144,12,214,0,1),
+ (145,12,215,0,1),
+ (146,12,216,1,1),
+ (147,12,217,1,1),
+ (148,12,218,1,1),
+ (149,12,219,1,1),
+ (150,12,220,1,1);
  
  
 INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
-(221, 'menuModule', 37  , 'item', 1225, Null, 0, 'Admin');
+(221, 'menuModule', 37  , 'item', 1205, Null, 0, 'Admin');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1, 221, 1);
