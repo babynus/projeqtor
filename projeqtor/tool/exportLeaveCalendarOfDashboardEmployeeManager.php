@@ -38,6 +38,10 @@
 require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
 
+// MTY - EXPORT EXCEL OR ODS
+ require_once '../external/PHPExcel/Classes/PHPExcel.php';
+// MTY - EXPORT EXCEL OR ODS
+
 scriptLog('   ->/tool/exportLeaveCalendarOfDashboardEmployeeManager.php');
 
 $year = (new DateTime())->format("Y");
