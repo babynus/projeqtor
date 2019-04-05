@@ -90,6 +90,19 @@ class Parameter extends SqlElement {
     	$colScript .= '  saveDataToSessionAndReload("'.$colName.'", newValue, false);';
         $colScript .= '</script>'; 
 // END - ADD BY TABARY - NOTIFICATION SYSTEM        
+// MTY - LEAVE SYSTEM        
+    } else if ($colName=="leavesSystemActiv") {
+        $colScript .= '<script type="dojo/connect" event="onChange" >';
+    	$colScript .= '  newValue=this.value;';
+        $colScript .= '  oldValue = document.getElementById("leavesSystemActivOldValue").value;';
+    	$colScript .= '  saveDataToSessionAndReload("'.$colName.'", newValue, false);';
+        $colScript .= '</script>'; 
+    } else if ($colName=="leavesSystemAdmin") {
+        $colScript .= '<script type="dojo/connect" event="onChange" >';
+    	$colScript .= '  newValue=this.value;';
+    	$colScript .= '  saveDataToSessionAndReload("'.$colName.'", newValue, false);';
+        $colScript .= '</script>'; 
+// MTY - LEAVE SYSTEM        
     } else if ($colName=="defaultProject") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  newValue=this.value;';
@@ -247,14 +260,7 @@ class Parameter extends SqlElement {
         $list=array('YES'=>i18n('displayYes'),
                     'REQ'=>i18n('displayOnRequest'));
         break;
-      case 'typeOfCopyComponentVersion':
-            $list=array('free'=>i18n('free'),
-                        'A'=>i18n('copyToCopyVersionStructureCopy'),
-                        'B'=>i18n('copyToCopyVersionStructureNoCopy'),
-                        'C'=>i18n('copyToCopyVersionStructureReplace'));
-       break;
       case 'printHistory': 
-      case 'csvExportUTF8': 
       case 'allowTypeRestrictionOnProject' :
       case 'versionNameAutoformat' : 
       case 'directAccessToComponentList' :
@@ -296,6 +302,7 @@ class Parameter extends SqlElement {
       case 'milestoneFromVersion' :
       case 'dontAddClosedDeliveredVersionToProject' : //ADD qCazelles - Dont add closed and delivered versions to Project - Ticket 181 
       case 'mailGroupActive' :
+      case 'csvExportUTF8':  
       case 'isManualProgress':
       case 'hideItemTypeRestrictionOnProject' :
         $list=array('NO'=>i18n('displayNo'),
@@ -311,6 +318,9 @@ class Parameter extends SqlElement {
       case 'changeReferenceOnTypeChange': case 'rememberMe':
       case 'getVersion':
       case 'displayPoolsOnImputation':
+     	// ELIOTT - LEAVE SYSTEM
+     	case 'leavesSystemActiv'://For the addition of the parameter to activate/desactivate the leaves feature
+   		// ELIOTT - LEAVE SYSTEM
       case 'authorizeActivityOnDeliveredProduct' :
         $list=array('YES'=>i18n('displayYes'),
       	            'NO'=>i18n('displayNo'));
@@ -627,9 +637,38 @@ class Parameter extends SqlElement {
           "'N/A'"=>'N/A',
           "'-'"=>'-',
           "'[]'"=>'[]',
-          "'Ø'"=>'Ø'
+          "'Ø˜'"=>'Ø'
         );
         break;
+      // MTY - LEAVE SYSTEM
+      case 'leavesSystemAdmin':
+      	if (sessionUserExists()) {
+      		$user=getSessionUser();
+      		$listVisible= getUserVisibleResourcesList(true, "List",'',false, false,false,true,true);
+      	} else {
+      		$listVisible=SqlList::getList('User');
+       	}
+       	foreach ($listVisible as $key=>$val) {
+       		$list[$key]=$val;
+       	}
+       	// At least, one admin in the list
+       	if (empty($list)) {
+       		$crit = array("idProfile" => "1");
+       		$user = SqlElement::getFirstSqlElementFromCriteria("User", $crit);
+       		if (isset($user->id)) {
+       			$list[$user->id] = $user->name;
+       		}
+       	}
+       	break;
+     	// MTY - LEAVE SYSTEM
+     	// MTY - EXPORT EXCEL OR ODS
+      case 'typeExportXLSorODS' :
+       	$list=array(
+       	'Excel2007'=>i18n('Excel'),
+       	'OpenDocument'=>i18n('OpenDocument')
+       	);
+       	break;
+   	  // MTY - EXPORT EXCEL OR ODS
     } 
     return $list;
   }
@@ -675,6 +714,9 @@ class Parameter extends SqlElement {
                            'team'=>'specific',
                            'organization'=>'specific',
                            'profile'=>'specific',
+// MTY - EXPORT EXCEL OR ODS            
+                           'typeExportXLSorODS'=>'list',
+// MTY - EXPORT EXCEL OR ODS            
                          'sectionPhoto'=>'section',
                            'image'=>'photo'
         );
@@ -757,7 +799,11 @@ class Parameter extends SqlElement {
       	                      'milestoneFromVersion'=>'list',
       	                    'sectionPlanningControl'=>'section',
       	                      'allowTypeRestrictionOnProject'=>'list',
-      	                      'hideItemTypeRestrictionOnProject'=>'list',
+// ELIOTT - LEAVE SYSTEM            
+                            'sectionLeaves'=>'section',
+                              'leavesSystemActiv'=>'list',
+                              'leavesSystemAdmin'=>'list',
+// ELIOTT - LEAVE SYSTEM            
       	                'tabDisplay'=>"tab",
       	                  'columnDisplayLeft'=>'newColumn',
       	                    'sectionDisplay'=>'section',
@@ -782,6 +828,9 @@ class Parameter extends SqlElement {
       	                      "scaytAutoStartup"=>'list',
       	                      "notApplicableValue"=>"list",
       	                      'restrictProjectList'=>'list',
+      	                      // MTY - EXPORT XLS OR ODS
+      	                      "typeExportXLSorODS"=>'list',
+      	                      // MTY - EXPORT XLS OR ODS
       	                      "globalNoteDiscussionMode"=>'list',
       	                'tabMiscellaneous'=>"tab",
       	                  'columnMiscellanousLeft'=>'newColumn',
@@ -1001,6 +1050,7 @@ class Parameter extends SqlElement {
     	  unset($parameterList['cronDirectory']);
     	}
     }
+    Module::applyModuleRestrictionsOnParametersList($parameterList);
     $user=getSessionUser();
     $showChecklistAll=false;
     foreach ($user->getAllProfiles() as $prf) {
@@ -1118,6 +1168,26 @@ class Parameter extends SqlElement {
       setSessionValue('globalParametersArray', array());
     }
     setSessionTableValue('globalParametersArray', $code, $value);
+// MTY - GENERIC DAY OFF
+    if (substr($code,0,7)=="OpenDay") {
+        $weekDayNumWeekDayName = array("OpenDaySunday"=>"dayOfWeek0",
+                                       "OpenDayMonday"=>"dayOfWeek1",
+                                       "OpenDayTuesday"=>"dayOfWeek2",
+                                       "OpenDayWednesday"=>"dayOfWeek3",
+                                       "OpenDayThursday"=>"dayOfWeek4",
+                                       "OpenDayFriday"=>"dayOfWeek5",
+                                       "OpenDaySaturday"=>"dayOfWeek6");
+        $calDef = new CalendarDefinition();
+        $critCalDef = array("idle" => "0");
+        $calDefList = $calDef->getSqlElementsFromCriteria($critCalDef);
+        $field = $weekDayNumWeekDayName[$code];
+        foreach($calDefList as $calDef) {
+            $calDef->$field = ($value=="openDays"?0:1);
+            $calDef->save();
+  }
+    }
+// MTY - GENERIC DAY OFF
+  
   }
   
   static public function getPlanningColumnOrder($all=false) {
@@ -1858,4 +1928,5 @@ static public function getTimezoneList() {
    }
    return $result;
  }
+ 
 }
