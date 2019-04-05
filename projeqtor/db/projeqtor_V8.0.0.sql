@@ -418,7 +418,6 @@ INSERT INTO `${prefix}modulemenu` (`id`,`idModule`,`idMenu`,`hidden`,`active`) V
  (13,2,192,0,1),
  (14,3,8,0,1),
  (15,3,203,0,1),
- (15,1,9,0,1),
  (16,1,196,0,1),
  (17,1,123,0,1),
  (18,1,106,0,1),
@@ -540,7 +539,8 @@ INSERT INTO `${prefix}modulemenu` (`id`,`idModule`,`idMenu`,`hidden`,`active`) V
  (134,11,161,1,1),
  (135,7,166,1,1),
  (136,10,165,1,1),
- (137,10,183,1,1);
+ (137,10,183,1,1),
+ (138,1,9,0,1);
  
  
 INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
