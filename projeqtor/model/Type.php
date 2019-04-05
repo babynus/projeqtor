@@ -276,7 +276,7 @@ class Type extends SqlElement {
     if ($idProject ) {
       $result=SqlList::getListWithCrit('RestrictType', array('idProject'=>$idProject, 'className'=>$class),'idType');
       global $doNotRestrictLeave;
-      doNotRestrictLeave=true; // It is the only place where this is used... will have impact on ProjectMain::__construct()
+      $doNotRestrictLeave=true; // It is the only place where this is used... will have impact on ProjectMain::__construct()
                                // This way is done to avoid changing the signature of constructor
       $proj=new Project($idProject,true);
       $idProjectType=$proj->idProjectType;
