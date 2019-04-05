@@ -10137,6 +10137,22 @@ function refreshRadioButtonDiv(){
 }
 		  
 function saveModuleStatus(id,status) {
+  console.log(id+"/"+status);
+  if (id==12 && (status==false || status=='false')) {
+      actionOK = function () {
+        adminDisconnectAll(false);
+        saveModuleStatusContinue(id,status);
+      };
+      actionKO = function () {
+          dijit.byId("module_12").set("checked",true);
+      };
+      msg=i18n("thisActionWillDeleteAllsLeavesSystemElements")+"<br/><br/>"+i18n("AreYouSure")+" ?";
+      showQuestion(msg, actionOK, actionKO);
+  } else {
+    saveModuleStatusContinue(id,status);
+  }
+}   
+function saveModuleStatusContinue(id,status) {
   var url='../tool/saveModuleStatus.php?idModule='+id+'&status='+status;
   dojo.xhrGet({
     url : url,
