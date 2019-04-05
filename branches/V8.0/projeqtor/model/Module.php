@@ -59,6 +59,7 @@ class Module extends SqlElement {
   }
     
   public function save() {
+    $old=$this->getOld();
     $result=parent::save();
     $moduleMenu=new ModuleMenu();
     $moduleMenuList=$moduleMenu->getSqlElementsFromCriteria(array('idModule'=>$this->id));
@@ -66,6 +67,20 @@ class Module extends SqlElement {
       $moduleMenu->active=$this->active;
       $moduleMenu->save();
     }
+    // MTY - LEAVE SYSTEM
+      if ($this->id==12 and $old->active!=$this->active) { // HR Module
+        include_once '../tool/projeqtor-hr.php';
+        $result=initPurgeLeaveSystemElements(($this->active)?'YES':'NO');
+        $status = getLastOperationStatus($result);
+        if ($status=="OK") {
+          unsetSessionValue("visibleProjectsList");
+        } elseif ($status=="NO_CHANGE") {
+          $status="OK";
+        }
+        traceLog("Change LeaveSystemActiv to ".(($this->active)?'YES':'NO').' :'.$status);
+        if ($status!='OK') traceLog($result); 
+      }
+      // MTY - LEAVE SYSTEM
     unsetSessionValue('menuInactiveList',true);
     unsetSessionValue('moduleList',true);
     return $result;
@@ -146,6 +161,7 @@ class Module extends SqlElement {
       unset($list['authorizeActivityOnDeliveredProduct']);
       unset($list['autoSetUniqueComponentVersion']);
       unset($list['columnConfigurationRight']);
+      unset($list['typeOfCopyComponentVersion']);
     }
     if (! Module::isModuleActive('moduleFinancial')) {
       unset($list['tabFinancial']);
@@ -161,6 +177,15 @@ class Module extends SqlElement {
       unset($list['sectionFinancialClient']);
       unset($list['ImputOfAmountClient']);
       unset($list['ImputOfBillLineClient']);
+    }
+    if (! Module::isModuleActive('moduleHR')) {
+      unset($list['sectionLeaves']);
+      unset($list['leavesSystemActiv']);
+      unset($list['leavesSystemAdmin']);
+      unset($list['typeExportXLSorODS']);
+    }
+    if (! Module::isModuleActive('moduleNotification')) {
+      unset($list['cronCheckNotifications']);
     }
   }
   

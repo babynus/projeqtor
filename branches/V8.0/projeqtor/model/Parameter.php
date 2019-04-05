@@ -82,26 +82,17 @@ class Parameter extends SqlElement {
     	$colScript .= '<script type="dojo/connect" event="onChange" >';
     	$colScript .= '  newValue=this.value;';
     	$colScript .= '  saveDataToSessionAndReload("'.$colName.'", newValue, false);';
-    	$colScript .= '</script>';
-// BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM        
-    } else if ($colName=="notificationSystemActiv") {
-        $colScript .= '<script type="dojo/connect" event="onChange" >';
-    	$colScript .= '  newValue=this.value;';
-    	$colScript .= '  saveDataToSessionAndReload("'.$colName.'", newValue, false);';
-        $colScript .= '</script>'; 
-// END - ADD BY TABARY - NOTIFICATION SYSTEM        
+    	$colScript .= '</script>';      
 // MTY - LEAVE SYSTEM        
-    } else if ($colName=="leavesSystemActiv") {
-        $colScript .= '<script type="dojo/connect" event="onChange" >';
-    	$colScript .= '  newValue=this.value;';
-        $colScript .= '  oldValue = document.getElementById("leavesSystemActivOldValue").value;';
-    	$colScript .= '  saveDataToSessionAndReload("'.$colName.'", newValue, false);';
-        $colScript .= '</script>'; 
     } else if ($colName=="leavesSystemAdmin") {
-        $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
     	$colScript .= '  newValue=this.value;';
-    	$colScript .= '  saveDataToSessionAndReload("'.$colName.'", newValue, false);';
-        $colScript .= '</script>'; 
+    	$colScript .= '  if (newValue=='.getCurrentUserId().') {';
+    	$colScript .= '    saveDataToSessionAndReload("'.$colName.'", newValue, false);';
+    	$colScript .= '  } else {';
+    	$colScript .= '    saveDataToSession("'.$colName.'", newValue, false);';
+    	$colScript .= '  }';
+      $colScript .= '</script>'; 
 // MTY - LEAVE SYSTEM        
     } else if ($colName=="defaultProject") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
@@ -260,6 +251,12 @@ class Parameter extends SqlElement {
         $list=array('YES'=>i18n('displayYes'),
                     'REQ'=>i18n('displayOnRequest'));
         break;
+      case 'typeOfCopyComponentVersion':
+          $list=array('free'=>i18n('free'),
+          'A'=>i18n('copyToCopyVersionStructureCopy'),
+          'B'=>i18n('copyToCopyVersionStructureNoCopy'),
+          'C'=>i18n('copyToCopyVersionStructureReplace'));
+          break;
       case 'printHistory': 
       case 'allowTypeRestrictionOnProject' :
       case 'versionNameAutoformat' : 
@@ -799,6 +796,7 @@ class Parameter extends SqlElement {
       	                      'milestoneFromVersion'=>'list',
       	                    'sectionPlanningControl'=>'section',
       	                      'allowTypeRestrictionOnProject'=>'list',
+      	                      'hideItemTypeRestrictionOnProject'=>'list',
 // ELIOTT - LEAVE SYSTEM            
                             'sectionLeaves'=>'section',
                               'leavesSystemActiv'=>'list',
@@ -962,7 +960,7 @@ class Parameter extends SqlElement {
                 	            'cronCheckDates'=>'number',
                 	            'alertCheckTime'=>'number',                	            
 // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM
-                              'notificationSystemActiv'=>'list',
+                              //'notificationSystemActiv'=>'list', // Now managed through module
                               'cronCheckNotifications'=>'number',
 // END - ADD BY TABARY - NOTIFICATION SYSTEM                	          
                               'sectionCronImport'=>'section',
