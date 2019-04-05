@@ -2282,7 +2282,7 @@ function isLeaveMngConditionsKO() {
     
     // Activity and its Project is the leave management project => Depending on Leave System
     if (objClass == 'Activity' && typeof(document.getElementById('isLeaveMngActivity'))!='undefined') {
-        if (document.getElementById('isLeaveMngActivity').value == 1) { return true;}
+        if (document.getElementById('isLeaveMngActivity') && document.getElementById('isLeaveMngActivity').value == 1) { return true;}
     } 
     
     // Else return false
