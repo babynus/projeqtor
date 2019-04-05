@@ -170,6 +170,12 @@ function drawTableFromObjectList($objectList) {
 		         .'</label></td><td style="position:relative">';
 			if ($format=='list') {
 				$listValues=Parameter::getList($code);
+// MTY - LEAVE SYSTEM
+        // If code = "leavesSystemActiv" => Store the value in input hidden
+        if ($code=="leavesSystemActiv") {
+          echo '<input type="hidden" name="leavesSystemActivOldValue" id="leavesSystemActivOldValue" value="'.$obj->parameterValue.'" />';
+        }
+// MTY - LEAVE SYSTEM
 				echo '<select dojoType="dijit.form.FilteringSelect" class="input" name="' . $code . '" id="' . $code . '" ';
 				echo autoOpenFilteringSelect();
 				echo ' title="' . i18n('help' . ucfirst($code)) . '" style="width:200px">';
@@ -360,10 +366,31 @@ function drawTableFromObjectList($objectList) {
     <button id="saveParameterButton" dojoType="dijit.form.Button"
       showlabel="false"
       title="<?php echo i18n('buttonSaveParameters');?>"
-      iconClass="dijitButtonIcon dijitButtonIconSave" class="detailButton"><script
-      type="dojo/connect" event="onClick" args="evt">
+      iconClass="dijitButtonIcon dijitButtonIconSave" class="detailButton">
+        <script type="dojo/connect" event="onClick" args="evt">
+        <?php if ($type=="globalParameter") {?>    
+// MTY - LEAVE SYSTEM
+            oldLeavesSystemActiv = document.getElementById("leavesSystemActivOldValue").value;
+            newLeavesSystemActiv = document.getElementsByName("leavesSystemActiv")[0].value;
+            if (newLeavesSystemActiv=="NO" && oldLeavesSystemActiv=='YES') {
+                actionOK = function () {
+                    adminDisconnectAll(false);
         	submitForm("../tool/saveParameter.php","resultDiv", "parameterForm", true);
-          </script></button>
+                };
+                actionKO = function () {
+                    dijit.byId("leavesSystemActiv").attr("value",oldLeavesSystemActiv);
+                };
+                msg=i18n("thisActionWillDeleteAllsLeavesSystemElements")+"<br/><br/>"+i18n("AreYouSure")+" ?";
+                showQuestion(msg, actionOK, actionKO);
+            } else {                
+                submitForm("../tool/saveParameter.php","resultDiv", "parameterForm", true);                
+            }
+        <?php } else { ?>    
+// MTY - LEAVE SYSTEM                
+            submitForm("../tool/saveParameter.php","resultDiv", "parameterForm", true);
+        <?php } ?>    
+        </script>
+    </button>
     <div dojoType="dijit.Tooltip" connectId="saveButton"><?php echo i18n("buttonSaveParameter")?></div>
     </td>
     <td style="position:relative;">
@@ -375,8 +402,9 @@ function drawTableFromObjectList($objectList) {
 <div id="formDiv" dojoType="dijit.layout.ContentPane" region="center"
   style="overflow-y: auto; overflow-x: hidden;">
 <form dojoType="dijit.form.Form" id="parameterForm" jsId="parameterForm"
-  name="parameterForm" encType="multipart/form-data" action="" method=""><input
-  type="hidden" name="parameterType" value="<?php echo $type;?>" /> <?php 
+  name="parameterForm" encType="multipart/form-data" action="" method="">
+  <input type="hidden" name="parameterType" value="<?php echo $type;?>" />
+  <?php 
   if ($type=='habilitation') {
   	htmlDrawCrossTable('menu', 'idMenu', 'profile', 'idProfile', 'habilitation', 'allowAccess', 'check', null,'idMenu') ;
   } else if ($type=='accessRight') {
@@ -511,7 +539,6 @@ function drawTableFromObjectList($objectList) {
 // END ADD BY Marc TABARY - 2017-02-20 - ORGANIZATION VISIBILITY        
   } else {
   	drawTableFromObjectList($parameterList);
-    //var_dump($parameterList);
   }
   ?></form>
 </div>
