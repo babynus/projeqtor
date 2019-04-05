@@ -336,18 +336,6 @@ if ($type=='habilitation') {
       }      
 // MTY - GENERIC DAY OFF
       
-// MTY - LEAVE SYSTEM
-      if ($obj->parameterCode=="leavesSystemActiv" and $isSaveOK!==false) {
-          $result=initPurgeLeaveSystemElements($val);
-          $status = getLastOperationStatus($result);
-          if ($status=="OK") {
-              unsetSessionValue("visibleProjectsList");
-          } elseif ($status=="NO_CHANGE") {
-              $status="OK";
-          }
-      }
-// MTY - LEAVE SYSTEM
-      
     }/* else if  ($fld=='imputationAlertGenerationDay'  or $fld=='imputationAlertGenerationHour'
        or $fld=='imputationAlertControlDay'     or $fld=='imputationAlertControlNumberOfDays'
        or $fld=='imputationAlertSendToResource' or $fld=='imputationAlertSendToProjectLeader'
