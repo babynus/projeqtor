@@ -36,9 +36,6 @@ spl_autoload_register ( 'projeqtorAutoload', true );
  require_once('../tool/projeqtor-hr.php');
 //}
 // MTY - LEAVE SYSTEM
-// MTY - EXPORT EXCEL OR ODS
-// require_once '../external/PHPExcel/Classes/PHPExcel.php';
-// MTY - EXPORT EXCEL OR ODS
 //include_once ('../model/User.php');
 global $targetDirImageUpload;
 $targetDirImageUpload='../files/images/';
