@@ -32,9 +32,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 $projeqtor = 'loaded';
 spl_autoload_register ( 'projeqtorAutoload', true );
 // MTY - LEAVE SYSTEM
-if (isLeavesSystemActiv()) {
+//if (isLeavesSystemActiv()) {
  require_once('../tool/projeqtor-hr.php');
-}
+//}
 // MTY - LEAVE SYSTEM
 // MTY - EXPORT EXCEL OR ODS
 // require_once '../external/PHPExcel/Classes/PHPExcel.php';
