@@ -2036,7 +2036,7 @@ function finaliseButtonDisplay(specificWidgetArray) {
       enableWidget('printButtonPdf');
     }
     dojo.query(".pluginButton").forEach(function(node, index, nodelist) {
-      enableWidget(node.getAttribute('widgetid'));
+      disableWidget(node.getAttribute('widgetid'));
     });
   }
   buttonRightLock();
