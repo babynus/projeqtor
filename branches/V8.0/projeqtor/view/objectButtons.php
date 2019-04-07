@@ -551,12 +551,11 @@
             CKEDITOR.instances[name].updateElement();
           }
           dojo.byId("pluginButton<?php echo $bt->id;?>").blur();
-          submitForm("<?php echo $bt->scriptPHP;?>", "resultDiv", "objectForm", true);
+          submitForm("<?php echo $bt->scriptPHP;?>", "resultDiv", "listForm", true);
           <?php }?>
           hideExtraButtons('extraButtonsDetail');
         </script>
       </button>
-      <input type="hidden" id="buttonHistoryVisible" value="<?php echo $paramHistoryVisible;?>" />
     </span>
     <?php }?>
     
