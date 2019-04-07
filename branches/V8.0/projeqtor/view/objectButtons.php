@@ -537,6 +537,7 @@
     <span id="pluginButton<?php echo $bt->id;?>Div" style="display:inline;">
       <button id="pluginButton<?php echo $bt->id;?>" dojoType="dijit.form.Button" showlabel="false"
         title="<?php echo i18n($bt->buttonName);?>"
+        <?php if ($noselect) {echo "disabled";} ?>
         iconClass="<?php echo $bt->iconClass;?>" class="detailButton pluginButton">
         <script type="dojo/connect" event="onClick" args="evt">
           <?php if ($bt->scriptJS) {?>

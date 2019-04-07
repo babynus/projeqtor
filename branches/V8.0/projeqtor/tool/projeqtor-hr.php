@@ -222,74 +222,72 @@ function initPurgeLeaveSystemElements($leavesSystemActiv) {
                                             getLastOperationStatus($result));
             }            
         }
-        if (Project::getLeaveProjectId()) {
-          $clause = "idProject=". Project::getLeaveProjectId();
-          // Work corresponding to leaves
-          $wk = new Work();
-          $result = $wk->purge($clause);
-          if (getLastOperationStatus($result)!="OK") {
-              traceLog("InitLeaveSystemElement - Purge work where $clause");            
-              traceLog($result);
-              return htmlSetResultMessage(null, 
-                                          getResultMessage($result)."<br/>LEAVE SYSTEM ERASING ABORTED. Error on work's leave system delete", 
-                                          false,
-                                          "", 
-                                          "Works delete",
-                                          getLastOperationStatus($result));
-          }    
-          // PlannedWork corresponding to leaves
-          $wk = new PlannedWork();
-          $result = $wk->purge($clause);
-          if (getLastOperationStatus($result)!="OK") {
-              traceLog("InitLeaveSystemElement - Purge plannedwork where $clause");            
-              traceLog($result);
-              return htmlSetResultMessage(null, 
-                                          getResultMessage($result)."<br/>LEAVE SYSTEM ERASING ABORTED. Error on  planned work's leave system delete", 
-                                          false,
-                                          "", 
-                                          "Planned Works delete",
-                                          getLastOperationStatus($result));
-          }    
-          // Assignment corresponding to the project dedicated to the leave system
-          $ass = new Assignment();
-          $result = $ass->purge($clause);
-          if (getLastOperationStatus($result)!="OK") {
-              traceLog("InitLeaveSystemElement - Purge Assignment where $clause");
-              traceLog($result);
-              return htmlSetResultMessage(null, 
-                                          getResultMessage($result)."<br/>LEAVE SYSTEM ERASING ABORTED. Error on assignment's leave system delete", 
-                                          false,
-                                          "", 
-                                          "Assignments purge",
-                                          getLastOperationStatus($result));
-          }    
-          // Activities corresponding to the project dedicated to the leave system
-          $act = new Activity();
-          $result = $act->purge($clause);
-          if (getLastOperationStatus($result)!="OK") {
-              traceLog("InitLeaveSystemElement - Purge Activity where $clause");
-              traceLog($result);
-              return htmlSetResultMessage(null, 
-                                          getResultMessage($result)."<br/>LEAVE SYSTEM ERASING ABORTED. Error on activities leave system delete", 
-                                          false,
-                                          "", 
-                                          "Activities purge",
-                                          getLastOperationStatus($result));
-          }    
-          // Type of scope Activity and code = 'LEAVESYST'
-          $tp = new Type();
-          $where = 'scope="Activity" AND code="LEAVESYST"';
-          $result = $tp->purge($where);
-          if (getLastOperationStatus($result)!="OK") {
-              traceLog("InitLeaveSystemElement - Purge Type where $where");
-              traceLog($result);
-              return htmlSetResultMessage(null, 
-                                          getResultMessage($result)."<br/>LEAVE SYSTEM ERASING ABORTED. Error on type's leave system delete", 
-                                          false,
-                                          "", 
-                                          "Type purge",
-                                          getLastOperationStatus($result));
-          }
+        $clause = "idProject=". ((Project::getLeaveProjectId())?Project::getLeaveProjectId():0);
+        // Work corresponding to leaves
+        $wk = new Work();
+        $result = $wk->purge($clause);
+        if (getLastOperationStatus($result)!="OK") {
+            traceLog("InitLeaveSystemElement - Purge work where $clause");            
+            traceLog($result);
+            return htmlSetResultMessage(null, 
+                                        getResultMessage($result)."<br/>LEAVE SYSTEM ERASING ABORTED. Error on work's leave system delete", 
+                                        false,
+                                        "", 
+                                        "Works delete",
+                                        getLastOperationStatus($result));
+        }    
+        // PlannedWork corresponding to leaves
+        $wk = new PlannedWork();
+        $result = $wk->purge($clause);
+        if (getLastOperationStatus($result)!="OK") {
+            traceLog("InitLeaveSystemElement - Purge plannedwork where $clause");            
+            traceLog($result);
+            return htmlSetResultMessage(null, 
+                                        getResultMessage($result)."<br/>LEAVE SYSTEM ERASING ABORTED. Error on  planned work's leave system delete", 
+                                        false,
+                                        "", 
+                                        "Planned Works delete",
+                                        getLastOperationStatus($result));
+        }    
+        // Assignment corresponding to the project dedicated to the leave system
+        $ass = new Assignment();
+        $result = $ass->purge($clause);
+        if (getLastOperationStatus($result)!="OK") {
+            traceLog("InitLeaveSystemElement - Purge Assignment where $clause");
+            traceLog($result);
+            return htmlSetResultMessage(null, 
+                                        getResultMessage($result)."<br/>LEAVE SYSTEM ERASING ABORTED. Error on assignment's leave system delete", 
+                                        false,
+                                        "", 
+                                        "Assignments purge",
+                                        getLastOperationStatus($result));
+        }    
+        // Activities corresponding to the project dedicated to the leave system
+        $act = new Activity();
+        $result = $act->purge($clause);
+        if (getLastOperationStatus($result)!="OK") {
+            traceLog("InitLeaveSystemElement - Purge Activity where $clause");
+            traceLog($result);
+            return htmlSetResultMessage(null, 
+                                        getResultMessage($result)."<br/>LEAVE SYSTEM ERASING ABORTED. Error on activities leave system delete", 
+                                        false,
+                                        "", 
+                                        "Activities purge",
+                                        getLastOperationStatus($result));
+        }    
+        // Type of scope Activity and code = 'LEAVESYST'
+        $tp = new Type();
+        $where = 'scope="Activity" AND code="LEAVESYST"';
+        $result = $tp->purge($where);
+        if (getLastOperationStatus($result)!="OK") {
+            traceLog("InitLeaveSystemElement - Purge Type where $where");
+            traceLog($result);
+            return htmlSetResultMessage(null, 
+                                        getResultMessage($result)."<br/>LEAVE SYSTEM ERASING ABORTED. Error on type's leave system delete", 
+                                        false,
+                                        "", 
+                                        "Type purge",
+                                        getLastOperationStatus($result));
         }    
         // Project dedicated to leave system
         $prj = new Project();
