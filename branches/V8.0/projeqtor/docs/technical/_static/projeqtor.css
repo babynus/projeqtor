@@ -26,3 +26,9 @@ pre {
     border-left: none;
     border-right: none;
 }
+
+.first.last.line-block {
+    display: block;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
