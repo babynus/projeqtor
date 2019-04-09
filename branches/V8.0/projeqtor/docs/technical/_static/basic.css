@@ -363,10 +363,11 @@ table caption span.caption-text {
 
 table.docutils td, table.docutils th {
     padding: 1px 8px 1px 5px;
-    border-top: 0;
+    /*border-top: 0;
     border-left: 0;
     border-right: 0;
-    border-bottom: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;*/
+    border: 1px solid #aaa;
 }
 
 table.footnote td, table.footnote th {
