@@ -1741,7 +1741,7 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
   			$resultAnd .= " and  $table.idProject not in $listIdProj ";
   		}
   	}
-  	$result = ($resultOr)?" and ( ($resultAnd) $resultOr )":" and ( $resultAnd ) ";
+  	$result = ($resultOr)?" ( ($resultAnd) $resultOr ) ":" ( $resultAnd ) ";
   	return $result;
   }
 }
