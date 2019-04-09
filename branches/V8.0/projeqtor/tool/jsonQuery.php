@@ -260,7 +260,14 @@
       $objType = $obj->getDatabaseColumnName($objectClass . 'Type');
       $lstGetClassList = array_flip($lstGetClassList);
       if(in_array($objType,$lstGetClassList)){
+        $deleteAnd = false;
+        if($queryWhere == ""){
+          $deleteAnd = true;
+        }
         $queryWhere.= $user->getItemTypeRestriction($obj,$objectClass,$user,$showIdle,$showIdleProjects);
+        if($deleteAnd){
+          $queryWhere = substr($queryWhere,4);
+        }
       }
     }
     // --- Take into account restriction visibility clause depending on profile
