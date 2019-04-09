@@ -18,146 +18,120 @@ Pour être intégré, le fichier zip doit être placé dans le dossier / plugin 
 
 .. rubric:: Structure de l'archive de déploiement d'un plug-in
 
-.. list-table::
-   :widths: 40, 60
-   :header-rows: 1
 
-   * - | **Répertoire**
-     - | **Utilité**
+=======================================   =================================================================
 
-   * - | plugin
-     - | Répertoire racine des plug-ins
+**Répertoire**                            | **Utilité**
 
-   * - | __loadPlugin.php
-     - | Le script de gestion des plug-ins
+plugin                                    | Répertoire racine des plug-ins
 
-   * - | __nls
-     - | Répertoire racine pour les fichiers de traduction spécifiques
-       | utilisés par le plug-in "customizedTranslations"
+__loadPlugin.php                          | Le script de gestion des plug-ins
 
-   * - | __myPlugin
-     - | Répertoire principal du plugin
+__nls                                     | Répertoire racine pour les fichiers de traduction spécifiques
+                                          | utilisés par le plug-in "customizedTranslations"
 
-   * - | ____nls
-     - | Répertoire racine pour les fichiers de traduction spécifiques
-       | utilisés par le plug-in "myPlugin"
+__myPlugin                                | Répertoire principal du plugin
 
-   * - | ____*.php
-     - | Scripts utilisable par le plug-in
+____nls                                   | Répertoire racine pour les fichiers de traduction spécifiques
+                                          | utilisés par le plug-in "myPlugin"
 
-   * - | ____myPlugin.css
-     - | Fichier CSS utilisé par myPlugin
-       | (sera chargé automatiquement)
+____*.php                                 | Scripts utilisable par le plug-in
 
-   * - | ____myPlugin.js
-     - | Fonctions Javascript utilisé par myPlugin
-       | (sera chargé automatiquement)
+____myPlugin.css
+                                          | Fichier CSS utilisé par myPlugin
+                                          | (sera chargé automatiquement)
 
-   * - | ____pluginDescriptor.xml
-     - | Le fichier descripteur xml du plug-in.
-       | Obligatoire. 
-       | Contient des informations de déploiement. 
+____myPlugin.js                           | Fonctions Javascript utilisé par myPlugin
+                                          | (sera chargé automatiquement)
 
+____pluginDescriptor.xml                  | Le fichier descripteur xml du plug-in.
+                                          | Obligatoire. 
+                                          | Contient des informations de déploiement. 
+
+=======================================   =================================================================
 
 .. rubric:: Description du contenu du descripteur "pluginDescriptor.xml"
 
-.. list-table::
-   :widths: 40, 60
-   :header-rows: 1
 
-   * - | **Structure du descripteur XML**
-     - | **Utilité** 
+=======================================   =================================================================
 
-   * - | plugin 
-     - | Répertoire racine des plug-ins.
-       | L'attribut "nom" doit être égal au répertoire contenant le plug-in   
-       | et doit correspondre au nom du fichier zip.
+**Structure du descripteur XML**          **Utilité** 
 
-   * - | property name="description"
-     - | Une courte description du plug-in  
+ plugin 
+                                          | Répertoire racine des plug-ins.
+                                          | L'attribut "nom" doit être égal au répertoire contenant le    
+                                          | plug-in et doit correspondre au nom du fichier zip.
 
-   * - | property name="comment"  
-     - | Une description plus longue du plug-in
+property name="description"               | Une courte description du plug-in  
 
-   * - | property name="uniqueCode" 
-     - | Code unique du plug-in. 
-       | Les codes de 100000 à 199999 sont réservés aux plug-ins ProjeQtor.
-       | Des codes de 200000 à 899999 peuvent être demandés à ProjeQtOr pour vos plug-ins déployables.
-       | Si vous créez vos propres plug-ins, vous pouvez utiliser en toute sécurité des valeurs >900000.
-       | L'id inséré (par exemple pour le menu) doit commencer par ce code +3 chiffres.
+property name="comment"                   | Une description plus longue du plug-in
 
-   * - | property name="version"
-     - | Version du plug-in (doit correspondre à la version sur le nom du fichier zip)
+property name="uniqueCode"                | Code unique du plug-in. 
+                                          | Les codes de 100000 à 199999 sont réservés aux plug-ins 
+                                          | ProjeQtor.
+                                          | Des codes de 200000 à 899999 peuvent être demandés à ProjeQtOr
+                                          | pour vos plug-ins déployables.
+                                          | Si vous créez vos propres plug-ins, vous pouvez utiliser en 
+                                          | toute sécurité des valeurs >900000.
+                                          | L'id inséré (par exemple pour le menu) doit commencer par ce 
+                                          | code +3 chiffres.
 
-   * - | property name="compatibility"
-     - | Première version de ProjeQtOr compatible avec le plug-in  
+property name="version"                   | Version du plug-in (doit correspondre à la version sur le nom
+                                          | du fichier zip)
 
-   * - | property name="sql" version="x.y"
-     - | Le script SQL qui sera exécuté pendant le déploiement du plug-in pour modifier la base de données. 
-       | La version spécifie la version du plugin qui exécutera le script de sorte que  l'installation de la nouvelle version n'exécutera pas un script déjà exécuté lors de  l'installation de la version précédente.
+property name="compatibility"             | Première version de ProjeQtOr compatible avec le plug-in  
 
-   * - | property name="reload"
-     - | Définie sur "1" pour forcer la recharge de l'application après l'installation du plug-in (par exemple si un nouveau menu est créé). 
+property name="sql" version="x.y"         | Le script SQL qui sera exécuté pendant le déploiement du 
+                                          | plug-in pour modifier la base de données. 
+                                          | La version spécifie la version du plugin qui exécutera le 
+                                          | script de sorte que  l'installation de la nouvelle version 
+                                          | n'exécutera pas un script déjà exécuté lors de  l'installation
+                                          | de la version précédente.
 
-   * - | property name="postInstall"
-     - | Fichier qui va être exécuté aprés l'installation du plug-in
+property name="reload"                    | Définie sur "1" pour forcer la recharge de l'application après
+                                          | l'installation du plug-in (par exemple si un nouveau menu est créé). 
 
+property name="postInstall"               | Fichier qui va être exécuté aprés l'installation du plug-in
 
-.. list-table::
-   :widths: 40, 60
-   :header-rows: 1
-   
-   * - **files**
-     -  
+**files**                                 | ok 
 
-   * - | file name="x.y" target="z" 
-       | action="act"
-     - | Un noeud par fichier à copier ou à déplacer.
-       | "x.y": nom du fichier (doit exister dans le répertoire racine du plugin)
-       | "z": répertoire cible pour copier ou déplacer le fichier 
-       | "act": action à faire, peut-être "copy" pour copier le fichier ou "move" pour le déplacer 
+| file name="x.y" target="z"              | Un noeud par fichier à copier ou à déplacer.
+| action="act"                            | "x.y": nom du fichier (doit exister dans le répertoire racine
+                                          | du plugin)
+                                          | "z": répertoire cible pour copier ou déplacer le fichier 
+                                          | "act": action à faire, peut-être "copy" pour copier le fichier
+                                          | ou "move" pour le déplacer 
 
-.. list-table::
-   :widths: 40, 60
-   :header-rows: 1
-   
-   * - **triggers**
-     - 
+**triggers**                              | ok
 
-   * - | trigger event="evt" class="cls" 
-       | script="script"
-     - | Un noeud par événement déclenché. 
-       | "evt": événement à déclencher 
-       | "cls": classe d'objets pour laquelle l'événement sera déclenché 
-       | "script": nom du script (fichier php) à exécuter               
+| trigger event="evt" class="cls"         | Un noeud par événement déclenché.
+| script="script"                         | "evt": événement à déclencher 
+                                          | "cls": classe d'objets pour laquelle l'événement sera déclenché 
+                                          | "script": nom du script (fichier php) à exécuter               
 
-.. list-table::
-   :widths: 40, 60
-   :header-rows: 1
-   
-   * - **buttons** 
-     - 
+**buttons**                               | ok
 
-   * - | button buttonName="nom" class="cls"
-       | scriptJS="js()" **ou** scriptPHP="x.php"
-       | iconClass="iconCls" scope="scope"
-       | sortOrder="n"
-     - | Un noeud par bouton à générer.
-       | "nom": nom du bouton 
-       | "cls": classe d'objet concernée 
-       | "js()": nom de la fonction JavaScript à exécuter
-       | "x.php": nom du script PHP à appeler directement 
-       | "iconCls": classe css permettant d'afficher l'image du bouton
-       | "scope": place du bouton, peut être "detail" ou "list"
-       | "n": ordre des boutons de plugins
+| button buttonName="nom" class="cls"     | Un noeud par bouton à générer.
+| scriptJS="js()" ou scriptPHP="x.php"    | "nom": nom du bouton 
+| iconClass="iconCls" scope="scope"       | "cls": classe d'objet concernée 
+| sortOrder="n"                           | "js()": nom de la fonction JavaScript à exécuter
+                                          | "x.php": nom du script PHP à appeler directement 
+                                          | "iconCls": classe css permettant d'afficher l'image du bouton
+                                          | "scope": place du bouton, peut être "detail" ou "list"
+                                          | "n": ordre des boutons de plugins
 
-   * - | Règles
-     - | **buttonName** ("nom") doit correspondre à un nom traductible et sera affiché en info bulle sur le bouton. 
-       | **scriptJS** et **scriptPHP** sont exclusifs, un seul des deux doit être renseigné pour chaque bouton
-       | **scope** ne peut contenir que "detail" (pour afficher le bouton sur les boutons de détail de l'élément) ou "list" (pour afficher le bouton sur la liste des éléments de la classe)
-       | **sortOrder** doit être numérique. 
-       | Tous les boutons de plugins seront placés après les boutons standards, dans l'ordre précisé.
+Règles                                    | **buttonName** ("nom") doit correspondre à un nom traductible
+                                          | et sera affiché en info bulle sur le bouton. 
+                                          | **scriptJS** et **scriptPHP** sont exclusifs, un seul des deux
+                                          | doit être renseigné pour chaque bouton
+                                          | **scope** ne peut contenir que "detail" (pour afficher le 
+                                          | bouton sur les boutons de détail de l'élément) ou "list" (pour 
+                                          | afficher le bouton sur la liste des éléments de la classe)
+                                          | **sortOrder** doit être numérique. 
+                                          | Tous les boutons de plugins seront placés après les boutons 
+                                          | standards, dans l'ordre précisé.
 
+=======================================   =================================================================
 
 .. rubric:: Exemple
 
