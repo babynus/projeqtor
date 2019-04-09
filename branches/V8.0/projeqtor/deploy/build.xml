@@ -407,4 +407,11 @@
         </exec>
   </target>
   
+    <target name="_sphinxBuildTechnicalManual_PDF_direct">
+      <echo>Build PDF Technical Guide.</echo>
+        <exec dir="../docs/technical" executable="cmd" >
+          <arg line="/c make.bat pdf"/>
+        </exec>
+  </target>
+  
 </project>
