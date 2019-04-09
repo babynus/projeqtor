@@ -316,7 +316,7 @@ class Parameter extends SqlElement {
       case 'getVersion':
       case 'displayPoolsOnImputation':
      	// ELIOTT - LEAVE SYSTEM
-     	case 'leavesSystemActiv'://For the addition of the parameter to activate/desactivate the leaves feature
+     	//case 'leavesSystemActiv'://For the addition of the parameter to activate/desactivate the leaves feature
    		// ELIOTT - LEAVE SYSTEM
       case 'authorizeActivityOnDeliveredProduct' :
         $list=array('YES'=>i18n('displayYes'),
@@ -799,7 +799,7 @@ class Parameter extends SqlElement {
       	                      'hideItemTypeRestrictionOnProject'=>'list',
 // ELIOTT - LEAVE SYSTEM            
                             'sectionLeaves'=>'section',
-                              'leavesSystemActiv'=>'list',
+                            //  'leavesSystemActiv'=>'list',
                               'leavesSystemAdmin'=>'list',
 // ELIOTT - LEAVE SYSTEM            
       	                'tabDisplay'=>"tab",
