@@ -1701,9 +1701,9 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
   	}
   	if(isset($tabListIdRestrictType)){
   		$inTabListIdRestrictType = transformValueListIntoInClause($tabListIdRestrictType);
-  		$resultAnd.= "  and ($table.id$objType in $inTabListIdRestrictType " ;
+  		$resultAnd.= "  $table.id$objType in $inTabListIdRestrictType " ;
   	}else{
-  		$resultAnd.= "  and ( 1=1" ;
+  		$resultAnd.= "  1=1" ;
   	}
   
   	if (property_exists($obj,'idProject')) {
@@ -1738,12 +1738,10 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
   				}
   			}
   			$listIdProj = transformListIntoInClause($tabProfileByProj);
-  			$resultAnd .= " and  $table.idProject not in $listIdProj ) ";
+  			$resultAnd .= " and  $table.idProject not in $listIdProj ";
   		}
-  	}else{
-  		$resultOr = ')';
   	}
-  	$result = $resultAnd.$resultOr;
+  	$result = ($resultOr)?"and ( ($resultAnd) $resultOr )":" and ( $resultAnd ) ";
   	return $result;
   }
 }
