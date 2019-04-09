@@ -6794,8 +6794,8 @@ function drawTabExpense($obj, $refresh=false) {
     echo '    <td class="assignHeader" colspan="1" style="width:10%">'.i18n('colDate').'</td>';
     echo '    <td class="assignHeader" colspan="1" style="width:20%">'.i18n('colExternalReference').'</td>';
     echo '    <td class="assignHeader" colspan="1" style="width:10%">'.i18n('colUntaxedAmount').'</td>';
-    echo '    <td class="assignHeader" colspan="1" style="width:10%">'.i18n('colFullAmount').'</td>';
     echo '    <td class="assignHeader" colspan="1" style="width:10%">'.i18n('colTaxAmount').'</td>';
+    echo '    <td class="assignHeader" colspan="1" style="width:10%">'.i18n('colFullAmount').'</td>';
     echo '  </tr>';
    
    //TERM with payment
@@ -6916,20 +6916,27 @@ function drawProjectExpenseDetailLine($class,$id, $level){
 	$date = '';
 	if(isset($obj->date)){
 		$date = htmlFormatDate($obj->date);
-	}elseif(isset($obj->creationDate)){
-		$date = htmlFormatDate($obj->creationDate);
+	}
+	if($class == 'ProviderOrder'){
+	  $date = htmlFormatDate($obj->sendDate);
+	}
+	if($class == 'Tender'){
+  	$date = htmlFormatDate($obj->receptionDateTime);
+	}
+	if($class == 'ProviderPayment'){
+	  $date = htmlFormatDate($obj->paymentDate);
 	}
 	$ref = '';
 	if(isset($obj->externalReference)){
 		$ref = $obj->externalReference;
 	}
 	$untaxed = '';
-	if(isset($obj->untaxedAmout)){
+	if(isset($obj->untaxedAmount)){
 		$untaxed = htmlDisplayCurrency($obj->untaxedAmount);
 	}
-	$taxAmout = '';
-	if(isset($obj->taxAmout)){
-		$taxAmout = htmlDisplayCurrency($obj->taxAmout);
+	$taxAmount = '';
+	if(isset($obj->taxAmount)){
+		$taxAmount = htmlDisplayCurrency($obj->taxAmount);
 	}
 	$fullAmount = '';
 	if(isset($obj->fullAmount)){
@@ -6949,13 +6956,13 @@ function drawProjectExpenseDetailLine($class,$id, $level){
 	$width=40-(3*$level);
 	echo '    <td class="assignData" align="center" colspan="'.(5-$level).'"'.$goto.'style="width:'.$width.'%;height:20px;cursor:pointer;">';
 	echo '      <table width="100%"><tr><td width="6%" float="right">'.formatIcon(get_class($obj), 16).'</td>';
-	echo '      <td width="94%"style="text-aglign:left;">'.$obj->name.'</td></tr></table>';
+	echo '      <td width="94%"style="text-aglign:left;">'.i18n(get_class($obj)).' #'.$obj->id.' - '.$obj->name.'</td></tr></table>';
 	echo '    </td>';
 	echo '    <td class="assignData" align="center" colspan="1" style="width:10%;height:20px;">'.$date.'</td>';
 	echo '    <td class="assignData" align="center" colspan="1" style="width:20%;height:20px;">'.$ref.'</td>';
 	echo '    <td class="assignData" align="right" colspan="1" style="width:10%;height:20px;">'.$untaxed.'</td>';
+	echo '    <td class="assignData" align="right" colspan="1" style="width:10%;height:20px;">'.$taxAmount.'</td>';
 	echo '    <td class="assignData" align="right" colspan="1" style="width:10%;height:20px;">'.$fullAmount.'</td>';
-	echo '    <td class="assignData" align="right" colspan="1" style="width:10%;height:20px;">'.$taxAmout.'</td>';
 	echo '  </tr>';
 }
 
@@ -7024,13 +7031,13 @@ function drawBudgetExpenseDetailLine($class,$id){
 	echo ' <tr>';
 	echo '    <td class="assignData'.$idleClass.'" align="center" rowspan="2"'.$goto.'style="width:25%;height:20px;cursor:pointer;vertical-align:middle">';
 	echo '      <table width="100%"><tr><td width="10%" float="right">'.formatIcon(get_class($obj), 16).'</td>';
-	echo '      <td width="90%"style="text-aglign:left;">&nbsp'.$obj->name.'</td></tr></table>';
+	echo '      <td width="90%"style="text-aglign:left;padding-left:5px;">#'.$obj->id.' - '.$obj->name.'</td></tr></table>';
 	echo '    </td>';
-	echo '    <td class="assignData'.$idleClass.'" align="center" style="width:10%;height:20px;">'.i18n('colPlanned').'</td>';
-	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:10%;height:20px;">'.$plannedDate.'</td>';
-	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:20%;height:20px;">'.$plannedAmount.'</td>';
-	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:15%;height:20px;">'.$plannedTaxAmount.'</td>';
-	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:20%;height:20px;">'.$plannedFullAmount.'</td>';
+	echo '    <td class="assignData'.$idleClass.'" align="center" style="width:10%;height:20px;font-style:italic;">'.i18n('colPlanned').'</td>';
+	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:10%;height:20px;font-style:italic;">'.$plannedDate.'</td>';
+	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:20%;height:20px;font-style:italic;">'.$plannedAmount.'</td>';
+	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:15%;height:20px;font-style:italic;">'.$plannedTaxAmount.'</td>';
+	echo '    <td class="assignData'.$idleClass.'" align="right" style="width:20%;height:20px;font-style:italic;">'.$plannedFullAmount.'</td>';
 	echo '</tr>';
 
 	echo ' <tr>';
