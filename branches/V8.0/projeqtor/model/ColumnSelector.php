@@ -91,7 +91,7 @@ class ColumnSelector extends SqlElement {
 		  if (! SqlElement::isVisibleField($cs->attribute)) {
         continue;
       }
-      if ($obj->isAttributeSetToField($cs->attribute, 'hidden') and $cs->attribute!='id' and $cs->attribute!='name') {
+		  if ( ( $obj->isAttributeSetToField($cs->attribute, 'hidden') or in_array($cs->attribute,$extraHiddenFields) ) and $cs->attribute!='id' and $cs->attribute!='name') {
         continue;  
       }
       $cs->_name=$cs->attribute;
@@ -109,7 +109,7 @@ class ColumnSelector extends SqlElement {
       	}
       	$hidden=$$hiddenObj;
       }     
-      if (in_array($cs->attribute,$hidden) and $cs->attribute!='id' and $cs->attribute!='name') {
+		  if (in_array($cs->attribute,$hidden) and $cs->attribute!='id' and $cs->attribute!='name') {
         continue;
       }
       $cs->_displayName=$dispObj->getColCaption($cs->_name);
@@ -134,7 +134,10 @@ class ColumnSelector extends SqlElement {
 			$attribute=$field;
       if (substr($attribute,0,4)=="name" and $attribute!="name") {$attribute='id'.substr($attribute,4);}
       if (substr($attribute,0,9)=="colorName") {$attribute='id'.substr($attribute,9);}     
-      if (substr($attribute,-8)=="Sortable") {$attribute=substr($attribute,0,strlen($attribute)-8);}  
+      if (substr($attribute,-8)=="Sortable") {$attribute=substr($attribute,0,strlen($attribute)-8);} 
+      if (($obj->isAttributeSetToField($attribute, 'hidden') or in_array($attribute,$extraHiddenFields) ) and $attribute!='id' and $attribute!='name') {
+        continue;
+      }
 			$cpt++;
 			if (array_key_exists($attribute, $result)) {
 				$cs=$result[$attribute];
