@@ -57,6 +57,7 @@ $lastDay = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay
   </div>   
   <div dojoType="dijit.layout.ContentPane" region="top" id="autoSendReportButtonDiv" class="listTitle" >
   <form dojoType="dijit.form.Form" name="autoSendReportListForm" id="autoSendReportListForm" action="" method="post" >
+  <input type="hidden" id="idSendReport" name="idSendReport" value="" />
   <table width="100%" height="64px" class="listTitle">
     <tr height="32px">
     <td style="vertical-align:top; min-width:100px; width:15%;">

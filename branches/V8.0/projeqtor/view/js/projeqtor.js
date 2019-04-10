@@ -5857,6 +5857,7 @@ function refreshAutoSendReportList(idUser) {
 }
 
 function activeAutoSendReport(idSendReport){
+	dojo.byId("idSendReport").value = idSendReport;
 	var idle = dijit.byId('activeCheckBox'+idSendReport).get('checked');
 	showWait();
 	var url='../tool/saveAutoSendReport.php?action=changeStatus&idle='+idle+'&idSendReport='+idSendReport;
@@ -5871,14 +5872,18 @@ function activeAutoSendReport(idSendReport){
 }
 
 function removeAutoSendReport(idSendReport){
-	showWait();
-	var url='../tool/saveAutoSendReport.php?action=delete&idSendReport='+idSendReport;
-	  dojo.xhrGet({
-	    url : url,
-	    handleAs : "text",
-	    load : function(){
-	    	hideWait();
-	    	refreshAutoSendReportList(null);
-	    }
-	  });
+	dojo.byId("idSendReport").value = idSendReport;
+	action=function(){
+		showWait();
+		var url='../tool/saveAutoSendReport.php?action=delete&idSendReport='+idSendReport;
+		  dojo.xhrGet({
+		    url : url,
+		    handleAs : "text",
+		    load : function(){
+		    	hideWait();
+		    	refreshAutoSendReportList(null);
+		    }
+		  });
+	}
+  showConfirm(i18n('removeAutoSendReport') ,action);
 }
