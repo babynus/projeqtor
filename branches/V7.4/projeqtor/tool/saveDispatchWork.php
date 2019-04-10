@@ -115,7 +115,13 @@ foreach ($dateList as $idx=>$date) {
     $work->idWorkElement=$weId;
     $work->dailyCost=null; // set to null to force refresh 
     $work->cost=null;
-    $work->save();
+    $resWork=$work->save();
+    $status = getLastOperationStatus ( $resWork );
+    if ($status=='ERROR' or $status=='INVALID') {
+      $result=$resWork;
+      $error=true;
+      break;
+    }
     if ($work->idResource != $oldWork->idResource) {
       $oldAss=WorkElement::updateAssignment($oldWork, $oldWork->work*(-1));
       $diff=$newWork;
@@ -135,7 +141,7 @@ foreach ($dateList as $idx=>$date) {
       $status = getLastOperationStatus ( $resWork );
       if ($status=='OK') {
         $result=cleanResult($resWork);
-      } else if ($status=='ERROR') {
+      } else if ($status=='ERROR' or $status=='INVALID') {
         $result=$resWork;
         $error=true;
       }
