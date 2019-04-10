@@ -138,6 +138,7 @@ class ImputationValidation{
 	  	}else{
 	  	  $where .= " and periodValue in ".$weekList;
 	  	}
+	  	$where .= " Order by periodValue";
 	  	$periodValueList = $periodValue->getSqlElementsFromCriteria(null,null,$where);
 	  	if(!$periodValueList)continue;
 	  	$res = new Resource($idResource,true);
