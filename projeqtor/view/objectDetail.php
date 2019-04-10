@@ -6861,13 +6861,18 @@ function drawTabExpense($obj, $refresh=false) {
       	    $id = substr($id,1);
       	  }
       	  drawProjectExpenseDetailLine($object,$id, 2);
-      	  foreach ($objs as $idTerm=>$terms){
-    	      drawProjectExpenseDetailLine('ProviderTerm',substr($idTerm,1), 3);
-      	    unset($tabBill[$id]);
-      	    foreach ($terms as $idPayment=>$payment){
-      	      drawProjectExpenseDetailLine('ProviderPayment', $idPayment, 4);
-      	      unset($tabTerm[$idPayment]);
-      	    }
+      	  unset($tabBill[$id]);
+      	  if(is_array($objs) == 1){
+        	  foreach ($objs as $idTerm=>$terms){
+      	      drawProjectExpenseDetailLine('ProviderTerm',substr($idTerm,1), 3);
+        	    unset($tabBill[$id]);
+        	    if(is_array($terms) == 1){
+          	    foreach ($terms as $idPayment=>$payment){
+          	      drawProjectExpenseDetailLine('ProviderPayment', $idPayment, 4);
+          	      unset($tabTerm[$idPayment]);
+          	    }
+        	    }
+        	  }
       	  }
       	}
        }
