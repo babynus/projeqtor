@@ -6877,21 +6877,35 @@ function drawTabExpense($obj, $refresh=false) {
       	}
        }
     }
-    
+
     foreach ($tabOrder as $idOrder=>$orders){
       drawProjectExpenseDetailLine('ProviderOrder',$idOrder, 0);
       foreach ($orders as $id=>$bills){
-        $object = 'ProviderBill';
         if(substr($id, 0,1)== 't'){
         	$object = 'ProviderTerm';
         	$id = substr($id,1);
+        	unset($tabOrder[$id]);
         	drawProjectExpenseDetailLine($object,$id, 1);
         }else{
+          $object = 'ProviderBill';
           drawProjectExpenseDetailLine($object,$id, 1);
           unset($tabBill[$id]);
-          foreach ($bills as $idObj=>$obj){
-         	  drawProjectExpenseDetailLine('ProviderPayment', $idObj, 2);
-         	  unset($tabTerm[$idObj]);
+          foreach ($bills as $idObj=>$objs){
+            if(substr($idObj, 0,1)== 't'){
+            	$object = 'ProviderTerm';
+            	$id = substr($idObj,1);
+            	drawProjectExpenseDetailLine($object,$id, 2);
+            	unset($tabBill[$idObj]);
+            	if(is_array($objs) == 1){
+              	foreach ($objs as $idPayment=>$payment){
+              		drawProjectExpenseDetailLine('ProviderPayment',$idPayment, 3);
+              	}
+            	}
+            }else{
+              $object = 'ProviderPayment';
+              drawProjectExpenseDetailLine($object,$id, 2);
+              unset($tabBill[$idObj]);
+            }
          }
         }
       }
