@@ -4458,6 +4458,21 @@ function splitCssAttributes($attr) {
   }
   return $res;
 }
+
+function getWeekNumberFromDate($date) {
+  if (!$date) $date=date('Y-m-d');
+  $currentWeek=weekNumber($date) ;
+  $currentYear=substr($date,5,2);
+  $currentMonth=substr($date,8,2);
+  if ($currentWeek==1 and $currentMonth>10 ) {
+    $currentYear+=1;
+  }
+  if ($currentWeek>50 and $currentMonth==1 ) {
+    $currentYear-=1;
+  }
+  if (strlen($currentWeek)==1) $currentWeek='0'.$currentWeek;
+  return ($currentYear.$currentWeek);
+}
 // MTY - GENERIC DAY OFF
 /** Return the last day of the month - year
  * @param integer $month = The month to retrieve last day
