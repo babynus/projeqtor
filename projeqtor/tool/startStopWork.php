@@ -55,6 +55,17 @@ Sql::beginTransaction();
 // get the modifications (from request)
 $newObj=new $className();
 $newObj->fillFromRequest();
+
+
+$crit=array('periodValue'=>getWeekNumberFromDate(date('Y-m-d')),
+    'idResource'=>getCurrentUserId());
+$obj=SqlElement::getSingleSqlElementFromCriteria('WorkPeriod', $crit);
+if ($obj->validated=='1' or $obj->submitted=='1') {
+  $result=i18n('errorWeekValidated');
+  $result.='<input type="hidden" id="lastSaveId" value="' . htmlEncode($newObj->id) .'" /><input type="hidden" id="lastOperation" value="update" /><input type="hidden" id="lastOperationStatus" value="INVALID" />';
+  displayLastOperationStatus($result);
+  exit;
+}
 $result=$newObj->save();
 
 $action="";
@@ -67,7 +78,8 @@ if (! stripos($result,'id="lastOperationStatus" value="ERROR"')>0
   } else {
     $resultStartStop=$newObj->WorkElement->stop();
   }
-  if  (! stripos($result,'id="lastOperationStatus" value="ERROR"')>0 ) {
+  $status = getLastOperationStatus ( $result );
+  if  ($status !="ERROR" and $status!="INVALID") {
     $result='<input type="hidden" id="lastSaveId" value="' . htmlEncode($newObj->id) .'" /><input type="hidden" id="lastOperation" value="update" /><input type="hidden" id="lastOperationStatus" value="OK" />';
   } else {
     $result=$resultStartStop;
