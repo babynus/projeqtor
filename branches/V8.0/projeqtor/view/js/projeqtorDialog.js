@@ -10102,34 +10102,8 @@ function removeGenericBankOffDays(id, name) {
 function showDialogAutoSendReport(){
 	setTimeout(loadDialog('dialogAutoSendReport',null,true,null,true), 200);
 }
-function saveAutoSendReport(sendFrequency, idReport){
-	var month = dojo.byId('monthFrequency').value;
-	var week = dijit.byId('weekFrequency').get('value');
-	var destination = dijit.byId('destinationInput').get('value');
-	var otherDestination = dijit.byId('otherDestinationInput').get('value');
-	var name = dijit.byId('name').get('value');
-	var sendTime = dojo.byId('sendTime').value;
-	if(dijit.byId('yearParam')){
-		var yearParam = dijit.byId('yearParam').get('value');
-	}
-	if(dijit.byId('monthParam')){
-		var monthParam = dijit.byId('monthParam').get('value');
-	}
-	if(dijit.byId('weekParam')){
-		var weekParam = dijit.byId('weekParam').get('value');
-	}
-	
-	if((destination != '' && otherDestination != '') || (destination != '' || otherDestination != '')){
-		var url='../tool/saveAutoSendReport.php?sendFrequency='+sendFrequency+'&idReport='+idReport+'&week='+week+'&month='+month+'&destination='+destination+
-		'&otherDestination='+otherDestination+'&name='+name+'&sendTime='+sendTime+'&yearParam='+yearParam+'&monthParam='+monthParam+'&weekParam='+weekParam;
-		  dojo.xhrGet({
-		    url : url,
-		    handleAs : "text",
-		    load : function(){
-		    	
-		    }
-		  });
-	}
+function saveAutoSendReport(){
+	loadContent("../tool/saveAutoSendReport.php", "resultDiv", "autoSendReportForm", true, "report");
 }
 
 function refreshRadioButtonDiv(){
