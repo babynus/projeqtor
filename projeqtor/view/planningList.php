@@ -214,7 +214,6 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                            value="<?php if(sessionValueExists('endDatePlanView') and !$projectDate){ echo getSessionValue('endDatePlanView'); }else{ echo $endDate; } ?>" >
                            <script type="dojo/method" event="onChange" >
                             saveDataToSession('endDatePlanView',formatDate(dijit.byId('endDatePlanView').get("value")), false);
-													  (this.value != '')?dijit.byId('projectDate').set('checked', false):'';
                             refreshJsonPlanning();
                            </script>
                         </div>
