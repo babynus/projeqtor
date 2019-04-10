@@ -356,7 +356,7 @@ class AutoSendReport extends SqlElement{
   			$result .='<script type="dojo/method" event="onChange">activeAutoSendReport('.$send->id.')</script>';
     		$result .=' </div>';
     		$result .='</td><td width="50%">';
-  			$result .= '<a onClick="removeAutoSendReport('.htmlEncode($send->id).');" title="'.i18n('removeAutoSendReport').'" > '.formatMediumButton('Remove').'</a>';
+  			$result .= '<a onClick="removeAutoSendReport('.$send->id.');" title="'.i18n('removeAutoSendReport').'" > '.formatMediumButton('Remove').'</a>';
   			$result .='</td></tr></table>';
   			$result .= '</td>';
   			$result .='</tr>';

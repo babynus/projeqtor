@@ -32,22 +32,23 @@ require_once "../tool/projeqtor.php";
 
 //parameter
 $sendFrequency = RequestHandler::getValue('sendFrequency');
-$week = RequestHandler::getValue('week');
-$monthDay = RequestHandler::getValue('month');
-$destination = RequestHandler::getValue('destination');
-$otherDestination = RequestHandler::getValue('otherDestination');
+$week = RequestHandler::getValue('weekFrequency');
+$monthDay = RequestHandler::getValue('monthFrequency');
+$destination = RequestHandler::getValue('destinationInput');
+$otherDestination = RequestHandler::getValue('otherDestinationInput');
 $name = RequestHandler::getValue('name');
 $sendTime = RequestHandler::getValue('sendTime');
-$hours = substr($sendTime, 0, 2);
-$minutes = substr($sendTime, 3);
-$idReport = RequestHandler::getId('idReport');
+$hours = substr($sendTime, 1, 2);
+$minutes = substr($sendTime, 4, -3);
+$idReport = RequestHandler::getValue('idReport');
 $yearParam = RequestHandler::getValue('yearParam');
 $monthParam = RequestHandler::getValue('monthParam');
 $weekParam = RequestHandler::getValue('weekParam');
 $idle = RequestHandler::getValue('idle');
 $action = RequestHandler::getValue('action');
-$idSendReport = RequestHandler::getId('idSendReport');
+$idSendReport = RequestHandler::getValue('idSendReport');
 $param = array();
+$result='';
 
 //open transaction bdd
 Sql::beginTransaction();
@@ -66,7 +67,7 @@ if($action == "delete"){
   $autoSendReport = new AutoSendReport($idSendReport, true);
   $autoSendReport->delete();
 }
-if($action == ''){
+if($action == null){
   if(sessionValueExists('reportParametersForDialog')){
   	$param = getSessionValue('reportParametersForDialog');
   }
@@ -135,9 +136,8 @@ if($action == ''){
   $autoSendReport->cron = $cron;
   $autoSendReport->reportParameter = $param;
   // save
-  $autoSendReport->save();
+  $result=$autoSendReport->save();
 }
 
-// commit
-Sql::commitTransaction();
+displayLastOperationStatus($result);
 ?>
