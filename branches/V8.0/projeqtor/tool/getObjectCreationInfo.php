@@ -65,8 +65,9 @@ if (isset($obj)) {
   ?>
   <?php  if (property_exists($obj, 'idStatus') and $displayWidthButtonCI>=1000) {
 // Bug correction
-// Now take care of fieldAttribute      
-    $canUpdateStatus = (strpos('readonly',$obj->getFieldAttributes('idStatus'))===false?true:false);
+// Now take care of fieldAttribute
+  $extraReadonlyFields=$obj->getExtraReadonlyFields();      
+  $canUpdateStatus = ( ( $obj->isAttributeSetToField('idStatus','readonly') or in_array('idStatus',$extraReadonlyFields))?false:true);
   ?>
   <div style="float:left;display:table-cell ;width:130px;height:35px;vertical-align:middle;position:relative;z-index:99998;">
     <div style="width:133px;height:39px;display:table-cell;padding:0px 4px;vertical-align: middle;zoom:0.9;-moz-transform: scale(0.9);overflow:hidden;position:relative;<?php if ($updateRight and $canUpdateStatus) echo "cursor:pointer;";?>"
