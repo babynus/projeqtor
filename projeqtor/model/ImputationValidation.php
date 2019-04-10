@@ -123,20 +123,24 @@ class ImputationValidation{
 	  $result .='   </tr>';
 	  if(!isset($noResource)){
 	  $weekArray = array();
-	  while ($startWeek<=$endWeek){
-	    $startWeek=addDaysToDate($startWeek, 1);
-	    $weekArray[$startWeek]="'".date('YW', strtotime($startWeek))."'";
+	  if($startWeek !='' and $endWeek !=''){
+  	  while ($startWeek<=$endWeek){
+  	    $startWeek=addDaysToDate($startWeek, 1);
+  	    $weekArray[$startWeek]="'".date('YW', strtotime($startWeek))."'";
+  	  }
+  	  $weekArray = array_flip($weekArray);
+  	  $weekList = transformListIntoInClause($weekArray);
 	  }
-	  $weekArray = array_flip($weekArray);
-	  $weekList = transformListIntoInClause($weekArray);
 	  $idCheckBox = 0;
 	  foreach ($userVisbileResourceList as $idResource=>$name){
 	  	$periodValue = new WorkPeriod();
 	  	$where = "idResource=".$idResource;
-	  	if($critWhere){
-	  	  $where .= $critWhere." and periodValue in ".$weekList;
-	  	}else{
-	  	  $where .= " and periodValue in ".$weekList;
+	  	if($startWeek !='' and $endWeek !=''){
+  	  	if($critWhere){
+  	  	  $where .= $critWhere." and periodValue in ".$weekList;
+  	  	}else{
+  	  	  $where .= " and periodValue in ".$weekList;
+  	  	}
 	  	}
 	  	$where .= " Order by periodValue";
 	  	$periodValueList = $periodValue->getSqlElementsFromCriteria(null,null,$where);
