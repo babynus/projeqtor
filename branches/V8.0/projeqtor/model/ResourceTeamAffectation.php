@@ -425,7 +425,7 @@ class ResourceTeamAffectation extends SqlElement {
   		$lineHeight3 = ($lineHeight2-13) / 2;
   		if($lineHeight2 < 10 and $nbPeriods == 1){
   		  if($lineHeight2 < 5 ){
-  		  $top = ($MaxHeight-$lineHeight2)+5;
+  		    $top = ($MaxHeight-$lineHeight2)+5;
   		  }else{
   		    $top = ($MaxHeight-$lineHeight2)+8;
   		  }
@@ -447,7 +447,7 @@ class ResourceTeamAffectation extends SqlElement {
   		  $result.='<div style="z-index:1;margin-top:'.$lineHeight3.'px;white-space:nowrap;'
   		      .'width:100%;text-align:center;color:#AAAAEE'.';">';
   		}
-  		$result.=$p['rate'].'';
+  		$result.=htmlDisplayNumericWithoutTrailingZeros($p['rate']).'';
   		$result.= '</div>';
   		$result.='</div>';	
   	}
@@ -472,7 +472,7 @@ class ResourceTeamAffectation extends SqlElement {
   	    $result.='>';
   	    $result.='<div style="position: absolute; top:0px;left:0px;width:100%;height:'.$lineHeight.'px;overflow:visible;'
   	        .'color:'.htmlForeColorForBackgroundColor($color).';text-shadow:1px 1px '.$color.';white-space:nowrap;z-index:9999">';
-  	    $result.='['.$p['rate'].']&nbsp;'.SqlList::getNameFromId('Resource', $projects[$idP]['name']);
+  	    $result.='['.htmlDisplayNumericWithoutTrailingZeros($p['rate']).']&nbsp;'.SqlList::getNameFromId('Resource', $projects[$idP]['name']);
   	    $result.= '</div>';
   	    $result.='</div>';
   	  }
