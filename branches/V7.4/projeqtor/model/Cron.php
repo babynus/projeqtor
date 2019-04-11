@@ -712,9 +712,11 @@ class Cron {
   		$posClass=strpos($body,'directAccess=true&objectClass=');
   		if ($posClass) { // It is a ProjeQtor mail
   		  $posId=strpos($body,'&objectId=',$posClass);
-  		  $posEnd=strpos($body,'>',$posId);
+  		  $posEnd1=strpos($body,'>',$posId);
+  		  $posEnd2=strpos($body,']',$posId);
+  		  $posEnd=min($posEnd1,$posEnd2);
   		  $class=substr($body,$posClass+30,$posId-$posClass-30);
-  		  $id=substr($body,$posId+10,$posEnd-$posId-10);
+  		  $id=substr($body,$posId+10,$posEnd-$posId-10);		  
   		} else {	
   			debugTraceLog("Message not identified as response to Projeqtor email (no Projeqtor message is the body)");
   			continue;
