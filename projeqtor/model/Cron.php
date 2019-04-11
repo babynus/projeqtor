@@ -474,7 +474,7 @@ class Cron {
       		if($cronAutoSendReport->sendFrequency != 'everyOpenDays'){
       		  $cronAutoSendReport->sendReport($cronAutoSendReport->idReport, $cronAutoSendReport->reportParameter);
       		}else{
-      		  if(isOpenDay($date, $resource->idCalendarDefinition)){
+      		  if(isOpenDay(date('Y-m-d'), $resource->idCalendarDefinition)){
       		    $cronAutoSendReport->sendReport($cronAutoSendReport->idReport, $cronAutoSendReport->reportParameter);
       		  }
       		}
@@ -821,6 +821,7 @@ class Cron {
   		  $class=substr($body,$posClass+30,$posId-$posClass-30);
   		  $id=substr($body,$posId+10,$posEnd-$posId-10);
   		} else {	
+  			debugTraceLog("Message not identified as response to Projeqtor email (no Projeqtor message is the body)");
   			continue;
   		}
   		// Search end of Message (this is valid for text only, treatment of html messages would require other code)  		
@@ -859,7 +860,6 @@ class Cron {
   		    $posEndMsg=strpos($body,"\n\n\n");
   		  }
   		}
-
   		if ($posEndMsg) {
   		  $msg=substr($body,0,$posEndMsg);
   		}
