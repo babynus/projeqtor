@@ -36,4 +36,5 @@ $debugIEcompatibility=false;       // If set to true, will allow compatibility m
 $scaytAutoStartup='NO';
 //$filenameCharsetForImport="WINDOWS-1252";
 //$paramReorg=false;
+//$imapFilterCriteria='UNSEEN';
 //======= END
