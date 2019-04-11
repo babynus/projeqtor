@@ -792,16 +792,20 @@ class Cron {
 		$mails = array();
 		
 		// Get some mail
-		$mailsIds = $mailbox->searchMailBox('UNSEEN UNDELETED');
+		//$mailsIds = $mailbox->searchMailBox('UNSEEN UNDELETED');
+		$imapFilterCriteria=Parameter::getGlobalParameter('imapFilterCriteria');
+		if (! $imapFilterCriteria) { $imapFilterCriteria='UNSEEN UNDELETED'; }
+		$mailsIds = $mailbox->searchMailBox($imapFilterCriteria);
 		if(!$mailsIds) {
-		  debugTraceLog('Mailbox is empty'); // Will be a debug level trace
+		  debugTraceLog("Mailbox is empty (filter='$imapFilterCriteria')"); // Will be a debug level trace
 		  return;
 		}
 		
 	  foreach ($mailsIds as $mailId) {
   		$mail = $mailbox->getMail($mailId);
   		$mailbox->markMailAsUnread($mailId);
-  		
+  		debugTraceLog('===============================');
+  		debugTraceLog("Message read (id $$mailId), from $mail->fromAddress"); 
   		$body=$mail->textPlain;
   		$bodyHtml=$mail->textHtml;
   		if (!$body and $bodyHtml) {		
@@ -820,6 +824,7 @@ class Cron {
   		  $class=substr($body,$posClass+30,$posId-$posClass-30);
   		  $id=substr($body,$posId+10,$posEnd-$posId-10);
   		} else {	
+  			debugTraceLog("Message not identified as response to Projeqtor email (no Projeqtor message is the body)");
   			continue;
   		}
   		// Search end of Message (this is valid for text only, treatment of html messages would require other code)  		
@@ -858,7 +863,6 @@ class Cron {
   		    $posEndMsg=strpos($body,"\n\n\n");
   		  }
   		}
-
   		if ($posEndMsg) {
   		  $msg=substr($body,0,$posEndMsg);
   		}
@@ -883,6 +887,7 @@ class Cron {
   		if (count($usrList)) {
   		  $senderId=$usrList[0]->id;
   		}
+  		debugTraceLog("User corresponding to email address is #$senderId");
   		if (! $senderId) {
   			traceLog("Email message received from '$sender', not recognized as resource or user or contact : message not stored as note to avoid spamming");
   			$mailbox->markMailAsUnread($mailId);
@@ -895,6 +900,17 @@ class Cron {
       $obj=null;
       if (SqlElement::class_exists($class) and is_numeric($id)) {
         $obj=new $class($id);
+        debugTraceLog("Message identified as reply to message from $class #$id");
+      }
+      if (!$obj or !$obj->id) {
+      	traceLog("Message received from $mail->fromAddress with response to note on $class #$id that does not exist in this database");
+      	$mailbox->markMailAsRead($mailId);
+      	continue;
+      }
+      if (!trim($msg)) {
+      	traceLog("Could not retreive response (empty response) from '$sender' mail concerning $class #$id");
+      	$mailbox->markMailAsRead($mailId);
+      	continue;
       }
   		if ($obj and $obj->id and $senderId) {
   		  $note=new Note();
@@ -905,9 +921,14 @@ class Cron {
   		  $note->idUser=$senderId;
   		  $note->creationDate=date('Y-m-d H:i:s');
   		  $note->fromEmail=1;
-  		  $note->save();
+  		  $resSaveNote=$note->save();
   		  $mailbox->markMailAsRead($mailId);
-  		  debugTraceLog("Note from '$sender' added on $class #$id");
+  		  $status=getLastOperationStatus($resSaveNote);
+  		  if ($status=='OK') {
+  		    debugTraceLog("Note from '$sender' added on $class #$id");
+  		  } else {
+  		  	traceLog("ERROR saving note from '$sender' to item $class #$id : $resSaveNote");
+  		  }
   		} else {
   		  $mailbox->markMailAsUnread($mailId);
   		}
@@ -915,8 +936,8 @@ class Cron {
     // Clean $emailAttachmentsDir for php files
     foreach(glob($emailAttachmentsDir.'/*') as $v) {
       if (! is_file($v)) continue;
-      if (substr(strtolower($v),-4)=='.php' or substr(strtolower($v),-5,4)=='.php') unlink($v);
-      //if (is_file($v)) unlink($v);
+      if (substr(strtolower($v),-4)=='.php' or substr(strtolower($v),-5,4)=='.php') unlink($v); // Default, but not enough
+      if (is_file($v)) unlink($v); // delete all files (as of today, we don't retreive attachments)
     }
   }
   
