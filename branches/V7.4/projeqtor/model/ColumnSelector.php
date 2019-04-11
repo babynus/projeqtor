@@ -87,7 +87,6 @@ class ColumnSelector extends SqlElement {
 		$crit=array('scope'=>'list', 'objectClass'=>$classObj, 'idUser'=>$user->id);
 		$csList=$cs->getSqlElementsFromCriteria($crit, false, null, 'sortOrder asc');
 		$result=array();
-		debugLog($extraHiddenFields);
 		foreach ($csList as $cs) {
 		  if (! SqlElement::isVisibleField($cs->attribute)) {
         continue;
