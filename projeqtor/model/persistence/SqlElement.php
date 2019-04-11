@@ -5756,8 +5756,10 @@ public function getLastChangeTabForObject($obj,$lastChangeDate) {
   
 function getLinksHtmlTab() {
   $link = new Link;
-  $critArray = array('ref1Type' => get_class($this), 'ref1Id' => $this->id);
-  $linkList = $link->getSqlElementsFromCriteria($critArray);
+  $class=get_class($this);
+  $id=$this->id;
+  $crit = " (ref1Type='$class' and ref1Id=$id ) or (ref2Type='$class' and ref2Id=$id )";
+  $linkList = $link->getSqlElementsFromCriteria(null,null,$crit);
   $style = 'border-top: 1px solid #7b7b7b ; border-bottom: 1px solid #7b7b7b;
             background-color:#dddddd; padding:4px;';
   $html = '<table style="width:95%; border-collapse:collapse;border:1px solid #7b7b7b;">
@@ -5774,7 +5776,8 @@ function getLinksHtmlTab() {
   
   $status = '';
   foreach ($linkList as $link) {
-    $obj = new $link->ref2Type($link->ref2Id);
+    if ($class==$link->ref1Type and $id==$link->ref1Id) { $obj = new $link->ref2Type($link->ref2Id);}
+    else { $obj = new $link->ref1Type($link->ref1Id);}
     $goto = $obj->getReferenceUrl ();
     $html .= '<tr><td style="border: 1px solid #7b7b7b; padding:4px;"><a href="' . $goto . '">' .
               $link->ref2Type . ' #' . $link->ref2Id . '</a></td>' .
