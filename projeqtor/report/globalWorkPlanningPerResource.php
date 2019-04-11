@@ -235,7 +235,7 @@ foreach($tab as $res=>$lists) {
       }
       $val=null;
       if (array_key_exists($mode, $lists) and array_key_exists($date,$lists[$mode])) {
-        $val=$lists[$mode][$date];
+        $val=round($lists[$mode][$date],2);
       }
       echo '<td class="reportTableData" ' . $style . '>';
       echo ($ital)?'<i>':'';
