@@ -182,6 +182,7 @@ class AutoSendReport extends SqlElement{
   	  }
   	}
 	  $reportFile=explode('?', $report->file);
+	  $file = $reportFile[0];
 	  if (count($reportFile) > 1) {
 	    $reportFileParam = explode('&', $reportFile[1]);
 	    foreach ($reportFileParam as $value){
@@ -189,7 +190,6 @@ class AutoSendReport extends SqlElement{
 	    	RequestHandler::setValue($param[0], $param[1]);
 	    }
 	  }
-	  $file = $reportFile[0];
 	  if ($file == '../tool/jsonPlanning.php' or $file == '../tool/jsonResourcePlanning.php') {
 	  	$file = substr($file, 0, -4).'_pdf.php';
 	  }
@@ -204,7 +204,6 @@ class AutoSendReport extends SqlElement{
     echo '</body></html>';
     $result = ob_get_clean();
     ob_clean();
-    
     require_once '../external/html2pdf/vendor/autoload.php';
     $pdf = new Html2Pdf();
     $pdf->writeHTML($result);
@@ -215,10 +214,16 @@ class AutoSendReport extends SqlElement{
     $title = str_replace('${dbName}', Parameter::getGlobalParameter('paramDbDisplayName'), $title);
     $title = str_replace('${report}', $report->name, $title);
     $title = str_replace('${date}', date('Y-m-d'), $title);
+    if(!$title){
+      $title = 'No title';
+    }
     $message = Parameter::getGlobalParameter('paramMailBodyReport');
     $message = str_replace('${dbName}', Parameter::getGlobalParameter('paramDbDisplayName'), $message);
     $message = str_replace('${report}', $report->name, $message);
     $message = str_replace('${date}', date('Y-m-d'), $message);
+    if(!$message){
+      $message = 'No message';
+    }
     $resource = new Resource($this->idReceiver, true);
     sendMail($resource->email, $title, $message, null, null, null, array($fileName), null);
     $email = explode(',', $this->otherReceiver);
