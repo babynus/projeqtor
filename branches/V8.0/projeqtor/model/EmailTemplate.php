@@ -152,34 +152,12 @@ class EmailTemplate extends SqlElement {
         			$newArrayFields['name'.ucfirst(substr($elmt, 2))]=$val.' ('.i18n('colName').')';
         		}
         	}
-        	$newArrayFields['_item'] = i18n('mailableItem');
-          $newArrayFields['_dbName'] = i18n('mailableDbName');
-          $newArrayFields['_responsible'] = i18n('colResponsible').', '.i18n('synonymResponsible');
-          $newArrayFields['_sender'] = i18n('mailableSender');
-          $newArrayFields['_project'] = i18n('colIdProject').', '.i18n('synonymProject');
-          $newArrayFields['_url'] = i18n('mailableUrl');
-          $newArrayFields['_goto'] = i18n('mailableGoto');
-          $newArrayFields['_HISTORY'] = i18n('mailableHistory');
-          $newArrayFields['_LINK'] = i18n('mailableLink');
-          $newArrayFields['_NOTE'] = i18n('mailableNote');
-        	$arrayFields = $newArrayFields;
         }else{
           $newArrayFields['_id'] = 'id';
           $newArrayFields['_name'] = i18n('colName');
           $newArrayFields['_idProject'] = 'id'.i18n('colIdProject');
           $newArrayFields['_nameProject'] = i18n('colIdProject').' ('.i18n('colName').')';
           $newArrayFields['_description'] = 'colDescription';
-          $newArrayFields['_item'] = i18n('mailableItem');
-          $newArrayFields['_dbName'] = i18n('mailableDbName');
-          $newArrayFields['_responsible'] = i18n('colResponsible').', '.i18n('synonymResponsible');
-          $newArrayFields['_sender'] = i18n('mailableSender');
-          $newArrayFields['_project'] = i18n('colIdProject').', '.i18n('synonymProject');
-          $newArrayFields['_url'] = i18n('mailableUrl');
-          $newArrayFields['_goto'] = i18n('mailableGoto');
-          $newArrayFields['_HISTORY'] = i18n('mailableHistory');
-          $newArrayFields['_LINK'] = i18n('mailableLink');
-          $newArrayFields['_NOTE'] = i18n('mailableNote');
-          $arrayFields = $newArrayFields;
         }
       }else{
         $newArrayFields['_id'] = 'id';
@@ -187,18 +165,19 @@ class EmailTemplate extends SqlElement {
         $newArrayFields['_idProject'] = 'id'.i18n('colIdProject');
         $newArrayFields['_nameProject'] = i18n('colIdProject').' ('.i18n('colName').')';
         $newArrayFields['_description'] = 'colDescription';
-        $newArrayFields['_item'] = i18n('mailableItem');
-        $newArrayFields['_dbName'] = i18n('mailableDbName');
-        $newArrayFields['_responsible'] = i18n('colResponsible').', '.i18n('synonymResponsible');
-        $newArrayFields['_sender'] = i18n('mailableSender');
-        $newArrayFields['_project'] = i18n('colIdProject').', '.i18n('synonymProject');
-        $newArrayFields['_url'] = i18n('mailableUrl');
-        $newArrayFields['_goto'] = i18n('mailableGoto');
-        $newArrayFields['_HISTORY'] = i18n('mailableHistory');
-        $newArrayFields['_LINK'] = i18n('mailableLink');
-        $newArrayFields['_NOTE'] = i18n('mailableNote');
-        $arrayFields = $newArrayFields;
       }
+      $newArrayFields['_item'] = i18n('mailableItem');
+      $newArrayFields['_dbName'] = i18n('mailableDbName');
+      $newArrayFields['_responsible'] = i18n('colResponsible').', '.i18n('synonymResponsible');
+      $newArrayFields['_sender'] = i18n('mailableSender');
+      $newArrayFields['_project'] = i18n('colIdProject').', '.i18n('synonymProject');
+      $newArrayFields['_url'] = i18n('mailableUrl');
+      $newArrayFields['_goto'] = i18n('mailableGoto');
+      $newArrayFields['_HISTORY'] = i18n('mailableHistory');
+      $newArrayFields['_HISTORYFULL'] = i18n('mailableHistoryFull');
+      $newArrayFields['_LINK'] = i18n('mailableLink');
+      $newArrayFields['_NOTE'] = i18n('mailableNote');
+      $arrayFields = $newArrayFields;
       $fieldAttributes=$this->getFieldAttributes($item);
       if(strpos($fieldAttributes,'required')!==false) {
       	$isRequired = true;
