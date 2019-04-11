@@ -285,13 +285,13 @@ class AutoSendReport extends SqlElement{
   	    $report = new Report($send->idReport, true);
   	  	$result .='<tr>';
   	  	if($countLine == 0){
-    				$result .='<td style="border: 1px solid grey;height:40px;width:10%;text-align:left;vertical-align:center;background-color:white;">';
+    				$result .='<td style="border-left: 1px solid grey;border-right: 1px solid grey;height:40px;width:10%;text-align:left;vertical-align:center;">';
     				$result .=' <table width="100%">';
     				$result .='   <tr><td width="40%">'.formatUserThumb($resource->id, $resource->name, null, 22, 'right').'</td>';
     				$result .='       <td width="60%" float="left">&nbsp'.$resource->name.'</td></tr>';
     				$result .=' </table></td>';
   			}else{
-    				$result .='     <td style="border-left: 1px solid grey;border-right: 1px solid grey;height:40px;width:10%;background-color:transparent;"></td>';
+    				$result .='     <td style="border-left: 1px solid grey;border-right: 1px solid grey;height:40px;width:10%;"></td>';
   			}
   			$result .='<td style="border: 1px solid grey;height:40px;width:16%;text-align:center;vertical-align:center;">'.$send->name.'</td>';
   			$result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:center;vertical-align:center;">'.i18n($report->name).'</td>';
@@ -313,21 +313,26 @@ class AutoSendReport extends SqlElement{
     		    if($name == 'idProject'){
     		      $proj = new Project($value, true);
     		    	$strParam .= i18n('Project').' : '.$proj->name.' / ';
+    		    	continue;
     		    }
     		    if($name == 'idResource'){
     		      $res = new Resource($value, true);
     		    	$strParam .= i18n('colIdResource').' : '.$res->name.' / ';
+    		    	continue;
     		    }
     		    if($name == 'idTeam'){
     		      $team = new Team($value, true);
     		    	$strParam .= i18n('team').' : '.$team->name.' / ';
+    		    	continue;
     		    }
     		    if($name == 'idOrganization'){
     		      $org = new Organization($value, true);
     		    	$strParam .= i18n('organization').' : '.$org->name.' / ';
+    		    	continue;
     		    }
     		    if($name == 'yearSpinner'){
     		      $strParam .= i18n('setTo'.ucfirst($value).'Year').' / ';
+    		      continue;
     		    }
     		    if($name == 'monthSpinner'){
     		      if($value == 'current' or $value == 'previous'){
@@ -335,15 +340,39 @@ class AutoSendReport extends SqlElement{
     		      }else{
     		        $strParam .= i18n('startMonth').' : '.$value.' / ';
     		      }
+    		      continue;
     		    }
     		    if($name == 'weekSpinner'){
     		    	$strParam .= i18n('setTo'.ucfirst($value).'Week').' / ';
+    		    	continue;
     		    }
     		    if($name == 'startDate'){
     		      if($value == 'currentDate'){
     		        $strParam .= i18n('colStartDate').' : '.i18n($value).' / ';
     		      }else{
     		        $strParam .= i18n('colStartDate').' : '.$value.' / ';
+    		      }
+    		      continue;
+    		    }
+    		    if($name != 'reportFile' and $name != 'reportId' and $name != 'orientation' and $name != 'reportCodeName' and $name != 'page'
+    		    and $name != 'print' and $name != 'report' and $name != 'reportName' and $name != 'periodValue' and $name != 'periodType' and $name != 'objectClassList'){
+    		      debugLog($name);
+    		      if($name == 'periodScale'){
+    		        $strParam .= i18n($name).' : '.i18n($value).' / ';
+    		      }else{
+    		        if(substr($name, 0, 2) == 'id'){
+    		        	$idValue = SqlList::getNameFromId(substr($name, 2), $value);
+    		        	$strParam .= i18n('col'.ucfirst($name)).' : '.$idValue.' / ';
+    		        }else if($name == 'responsible' or $name == 'requestor' or $name == 'issuer' or $name == 'requestor'){
+    		          if($name == 'requestor'){
+    		            $idValue = SqlList::getNameFromId('Contact', $value);
+    		          }else{
+    		            $idValue = SqlList::getNameFromId('resource', $value);
+    		          }
+    		          $strParam .= i18n('col'.ucfirst($name)).' : '.$idValue.' / ';
+    		        }else {
+    		          $strParam .= i18n('col'.ucfirst($name)).' : '.$value.' / ';
+    		        }
     		      }
     		    }
   			  }
