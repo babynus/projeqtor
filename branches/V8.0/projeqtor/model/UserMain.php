@@ -390,7 +390,7 @@ class UserMain extends SqlElement {
     $allAccessArray=array( 'read' => 'ALL', 'create' => 'ALL', 'update' => 'ALL', 'delete' => 'ALL', 'report'=>'ALL');
     $readAccessArray=array( 'read' => 'ALL', 'create' => 'NO', 'update' => 'NO', 'delete' => 'NO', 'report'=>'ALL');
     // first time function is called for object, so go and fetch data
-    $this->_accessControlVisibility='PRO';
+    if (!$obj) $this->_accessControlVisibility='PRO';
     $accessControlRights=array();
     $accessScopeList=SqlList::getList('AccessScope', 'accessCode');
     $accessScopeRW=SqlList::getList('ListReadWrite', 'code');
@@ -427,7 +427,7 @@ class UserMain extends SqlElement {
                              'delete' => $accessScopeList[$accessProfile->idAccessScopeDelete],
                              'report' =>  $accessScopeList[$accessProfile->idAccessScopeRead], );
           if ($accessScopeList[$accessProfile->idAccessScopeRead]=='ALL') {
-            $this->_accessControlVisibility='ALL';
+            if (!$obj) $this->_accessControlVisibility='ALL';
           }
         } else {     
           if (isset($noAccessAllowed[$menuName]) and $noAccessAllowed[$menuName]) {
