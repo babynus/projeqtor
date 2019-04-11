@@ -8206,7 +8206,7 @@ function diaryPreviousNext(way) {
     dojo.byId("diaryYear").value=year;
     diaryDisplayDay(day);
   }
-  loadContent("../view/diary.php", "detailDiv", "diaryForm");
+  //loadContent("../view/diary.php", "detailDiv", "diaryForm");
 }
 
 function diaryWeek(week, year) {
