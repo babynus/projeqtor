@@ -113,9 +113,13 @@ class AutoSendReport extends SqlElement{
 	  ob_start();
 	  $report = new Report($idReport);
 	  $parameter = json_decode($reportParameter);
+	  $landscape = 'L';
 	  foreach ($parameter as $paramName=>$paramValue){
 	  	if($paramName != 'yearSpinner' and $paramName != 'monthSpinner' and $paramName != 'weekSpinner' and $paramName != 'startDate' and $paramName != 'periodValue'){
 	  	  RequestHandler::setValue($paramName, $paramValue);
+	  	  if($paramName == 'orientation'){
+	  	    $landscape = $paramValue;
+	  	  }
 	  	}
 	  }
   	foreach ($parameter as $paramName=>$paramValue){
@@ -205,7 +209,7 @@ class AutoSendReport extends SqlElement{
     $result = ob_get_clean();
     ob_clean();
     require_once '../external/html2pdf/vendor/autoload.php';
-    $pdf = new Html2Pdf();
+    $pdf = new Html2Pdf($landscape);
     $pdf->writeHTML($result);
     $path = Parameter::getGlobalParameter('paramReportTempDirectory');
     $fileName=__DIR__.'/'.$path.$this->name.'.pdf';
