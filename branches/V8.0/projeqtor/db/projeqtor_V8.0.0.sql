@@ -32,6 +32,10 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (6,205,3),
 (7,205,3);
 
+INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
+('paramMailBodyReport' ,'[${dbName}] Report ${report} - ${date}'),
+('paramMailTitleReport' ,'[${dbName}] Report ${report} - ${date}');
+
 -- ============================================================
 -- LEAVE SYSTEM
 -- ============================================================
