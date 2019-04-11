@@ -308,76 +308,78 @@ class AutoSendReport extends SqlElement{
   			$result .='<td style="border: 1px solid grey;height:40px;width:20%;text-align:center;vertical-align:center;">';
   			$param = json_decode($send->reportParameter);
   			$strParam = '';
+  			$separator=' | ';
   			foreach ($param as $name=>$value){
   			  if( trim($value) != ''){
     		    if($name == 'idProject'){
     		      $proj = new Project($value, true);
-    		    	$strParam .= i18n('Project').' : '.$proj->name.' / ';
+    		    	$strParam .= i18n('Project').' : '.$proj->name.$separator;
     		    	continue;
     		    }
     		    if($name == 'idResource'){
     		      $res = new Resource($value, true);
-    		    	$strParam .= i18n('colIdResource').' : '.$res->name.' / ';
+    		    	$strParam .= i18n('colIdResource').' : '.$res->name.$separator;
     		    	continue;
     		    }
     		    if($name == 'idTeam'){
     		      $team = new Team($value, true);
-    		    	$strParam .= i18n('team').' : '.$team->name.' / ';
+    		    	$strParam .= i18n('team').' : '.$team->name.$separator;
     		    	continue;
     		    }
     		    if($name == 'idOrganization'){
     		      $org = new Organization($value, true);
-    		    	$strParam .= i18n('organization').' : '.$org->name.' / ';
+    		    	$strParam .= i18n('organization').' : '.$org->name.$separator;
     		    	continue;
     		    }
     		    if($name == 'yearSpinner'){
-    		      $strParam .= i18n('setTo'.ucfirst($value).'Year').' / ';
+    		      $strParam .= i18n('setTo'.ucfirst($value).'Year').$separator;
     		      continue;
     		    }
     		    if($name == 'monthSpinner'){
     		      if($value == 'current' or $value == 'previous'){
-    		        $strParam .= i18n('setTo'.ucfirst($value).'Month').' / ';
+    		        $strParam .= i18n('setTo'.ucfirst($value).'Month').$separator;
     		      }else{
-    		        $strParam .= i18n('startMonth').' : '.$value.' / ';
+    		        $strParam .= i18n('startMonth').' : '.$value.$separator;
     		      }
     		      continue;
     		    }
     		    if($name == 'weekSpinner'){
-    		    	$strParam .= i18n('setTo'.ucfirst($value).'Week').' / ';
+    		    	$strParam .= i18n('setTo'.ucfirst($value).'Week').$separator;
     		    	continue;
     		    }
     		    if($name == 'startDate'){
     		      if($value == 'currentDate'){
-    		        $strParam .= i18n('colStartDate').' : '.i18n($value).' / ';
+    		        $strParam .= i18n('colStartDate').' : '.i18n($value).$separator;
     		      }else{
-    		        $strParam .= i18n('colStartDate').' : '.$value.' / ';
+    		        $strParam .= i18n('colStartDate').' : '.$value.$separator;
     		      }
     		      continue;
     		    }
     		    if($name != 'reportFile' and $name != 'reportId' and $name != 'orientation' and $name != 'reportCodeName' and $name != 'page'
     		    and $name != 'print' and $name != 'report' and $name != 'reportName' and $name != 'periodValue' and $name != 'periodType' and $name != 'objectClassList'){
-    		      debugLog($name);
     		      if($name == 'periodScale'){
-    		        $strParam .= i18n($name).' : '.i18n($value).' / ';
+    		        $strParam .= i18n($name).' : '.i18n($value).$separator;
     		      }else{
     		        if(substr($name, 0, 2) == 'id'){
     		        	$idValue = SqlList::getNameFromId(substr($name, 2), $value);
-    		        	$strParam .= i18n('col'.ucfirst($name)).' : '.$idValue.' / ';
+    		        	$strParam .= i18n('col'.ucfirst($name)).' : '.$idValue.$separator;
     		        }else if($name == 'responsible' or $name == 'requestor' or $name == 'issuer' or $name == 'requestor'){
     		          if($name == 'requestor'){
     		            $idValue = SqlList::getNameFromId('Contact', $value);
     		          }else{
     		            $idValue = SqlList::getNameFromId('resource', $value);
     		          }
-    		          $strParam .= i18n('col'.ucfirst($name)).' : '.$idValue.' / ';
+    		          $strParam .= i18n('col'.ucfirst($name)).' : '.$idValue.$separator;
     		        }else {
-    		          $strParam .= i18n('col'.ucfirst($name)).' : '.$value.' / ';
+    		          $strParam .= i18n('col'.ucfirst($name)).' : '.$value.$separator;
     		        }
     		      }
     		    }
   			  }
   			}
   			$strParam = substr($strParam, 0, -2);
+  			$strParam=str_replace(' ','&nbsp;',$strParam);
+  			$strParam=str_replace('&nbsp;|',' |',$strParam);
   			$result .= $strParam;
   			$result .='</td>';
   			$backgroud = '#a3d179';
