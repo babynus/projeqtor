@@ -595,6 +595,10 @@ class BudgetMain extends SqlElement {
       self::$_fieldsAttributes["update4Amount"]="readonly";
       self::$_fieldsAttributes["update4FullAmount"]="readonly";
     }
+    if (! $this->elementary) {
+    	self::$_fieldsAttributes["_sec_ExpenseBudgetDetail"]='hidden';
+    	unset($this->_spe_ExpenseBudgetDetail);
+    }
     if ($this->id and !$this->idBudget and $this->isUnderConstruction) {
       self::$_fieldsAttributes["targetFullAmount"]="";
       self::$_fieldsAttributes["targetAmount"]="";
