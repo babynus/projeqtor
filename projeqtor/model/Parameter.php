@@ -524,7 +524,8 @@ class Parameter extends SqlElement {
         break;
       case 'fontForPDF':
         $list=array('freesans'=>i18n('fontForPdfFreesans'),
-            'helvetica'=>i18n('fontForPdfHelvetica'));
+            'helvetica'=>i18n('fontForPdfHelvetica'),
+            'arial'=>'arial');//i18n('fontForPdfHelvetica'));
         break;
       case 'ldapCreationAction';
         $list=array('createNothing'=>i18n('createNothingFromLdapUser'),
