@@ -23,14 +23,7 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,204,8),
-(2,204,2),
-(1,205,8),
-(2,205,3),
-(3,205,3),
-(4,205,3),
-(5,205,3),
-(6,205,3),
-(7,205,3);
+(2,204,2);
 
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
 ('paramMailBodyReport' ,'[${dbName}] Report ${report} - ${date}'),

@@ -285,7 +285,7 @@ class AutoSendReport extends SqlElement{
   	    $report = new Report($send->idReport, true);
   	  	$result .='<tr>';
   	  	if($countLine == 0){
-    				$result .='<td style="border-left: 1px solid grey;border-right: 1px solid grey;height:40px;width:10%;text-align:left;vertical-align:center;">';
+    				$result .='<td style="border-top: 1px solid grey;border-left: 1px solid grey;border-right: 1px solid grey;height:40px;width:10%;text-align:left;vertical-align:center;">';
     				$result .=' <table width="100%">';
     				$result .='   <tr><td width="40%">'.formatUserThumb($resource->id, $resource->name, null, 22, 'right').'</td>';
     				$result .='       <td width="60%" float="left">&nbsp'.$resource->name.'</td></tr>';
