@@ -5588,7 +5588,7 @@ public function getLastChangeTabForObject($obj,$lastChangeDate) {
             background-color:#dddddd; padding:4px;';
   $historyTabHtml =  '<table style="width:95%; border-collapse:collapse; border:1px solid #7b7b7b;">';
 
-  $historyTabHtml .=  '<tr><td style="'. $style . 'text-align:center;"colspan="6">Last Changes</td></tr>' .//
+  $historyTabHtml .=  '<tr><td style="'. $style . 'text-align:center;"colspan="6">'.i18n('elementHistory'.(($lastChangeDate=='full')?'':'Last')).'</td></tr>' .//
                       '<tr><td style="' . $style . '" width="10%">' . i18n('colOperation') . '</td>
                       <td style="' . $style . '" width="14%">' . i18n('colColumn') . '</td>
                       <td style="' . $style . '" width="23%">' . i18n('colValueBefore') . '</td>
