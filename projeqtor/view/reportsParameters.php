@@ -41,6 +41,7 @@ scriptLog('   ->/view/reportsList.php');
   </tr>
 <?php 
 $user=getSessionUser();
+$autoSendReportAccess = securityCheckDisplayMenu(null, 'AutoSendReport');
 $currentWeek=weekNumber(date('Y-m-d'));
 if (strlen($currentWeek)==1) {
   $currentWeek='0' . $currentWeek;
@@ -1078,13 +1079,15 @@ foreach ($listParam as $param) {
                               </script>
           </div> 
         </button>
-		  <?php }?>
+		  <?php }
+		  if($autoSendReportAccess){?>
   		  <button title="<?php echo i18n('reportAutoSendReport')?>"   
            dojoType="dijit.form.Button" type="submit" 
            id="reportAutoSendReport" name="reportAutoSendReport" 
            iconClass="dijitButtonIcon dijitButtonIconEmail" class="detailButton whiteBackground" showLabel="false"
            onclick="saveReportParametersForDialog();">
         </button>
+        <?php }?>
         <input type="hidden" id="page" name="page" value="<?php echo ((substr($report->file,0,3)=='../')?'':'../report/') . $report->file;?>"/>
         <input type="hidden" id="print" name="print" value=true />
         <input type="hidden" id="report" name="report" value=true />
