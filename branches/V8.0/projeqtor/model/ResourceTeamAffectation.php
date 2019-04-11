@@ -160,11 +160,14 @@ class ResourceTeamAffectation extends SqlElement {
     $list=$aff->getSqlElementsFromCriteria($crit,false,null, 'startDate asc, endDate asc');
     $res=array();
     foreach ($list as $aff) {
+        $myResource = new Resource($aff->idResource);
+        $resource[$myResource->id] = $myResource;
     		$start=($aff->startDate)?$aff->startDate:self::$minAffectationDate;
     		$end=($aff->endDate)?$aff->endDate:self::$maxAffectationDate;
     		if ($aff->idle) $end=self::$minAffectationDate; // If affectation is closed : no work to plan
-    		$myResource = new Resource($aff->idResource);
     		$arrAffResource=array($aff->idResource=>($aff->rate/100*$myResource->capacity));
+    		
+    		
     		foreach($res as $r) {
     		  if (!$start or !$end) break;
     		  if ($start<=$r['start']) {
@@ -234,6 +237,7 @@ class ResourceTeamAffectation extends SqlElement {
     		    }
     		  }
     		} // End loop
+    		
     		if ($start and $end) {
     		  $res[$start]=array('start'=>$start,
     		      'end'=>$end,
@@ -241,6 +245,93 @@ class ResourceTeamAffectation extends SqlElement {
     		      'idResource'=>$arrAffResource);
     		}
     }
+    
+//Gautier #resCap
+  $tabDate = array();
+  $resourceCapacityExist = false;
+  foreach ($resource as $Myres){
+    $tabCapRes = $Myres->getCapacityPeriod($start);
+    if(sessionTableValueExist('capacityPeriod', $Myres->id)){
+      $tabResCap = getSessionTableValue('capacityPeriod', $Myres->id);
+      foreach ($tabResCap as $idTab){
+        $resourceCapacityExist = true;
+        foreach ($idTab as $valTabResCap){
+          $tabDate[$valTabResCap['startDate']]=$valTabResCap['startDate'];
+          $date = new DateTime($valTabResCap['endDate']);
+          $date->add(new DateInterval('P1D'));
+          $endDate1 = $date->format('Y-m-d');
+          $tabDate[$endDate1]=$endDate1;
+        }
+      }
+    }
+  }
+  if($resourceCapacityExist){
+    foreach ($res as $resVal){
+      $d1 = $resVal['start'];
+      $d2 = $resVal['end'];
+      $tabDate[$d1]= $d1;
+      $date = new DateTime($d2);
+      $date->add(new DateInterval('P1D'));
+      $endDate2 = $date->format('Y-m-d');
+      $tabDate[$endDate2]=$endDate2;
+    }
+    ksort($tabDate);
+    $last = null;
+    $nb = count($tabDate);
+    foreach ($tabDate as $key=>$valDate){
+      if(!$last){
+        $last = $key;
+        continue;
+      }else{
+        $endDate = new DateTime($valDate);
+        $endDate->sub(new DateInterval('P1D'));
+        $endDate =  $endDate->format('Y-m-d');
+        $tabDate[$last]=$endDate;
+        $last = $key;
+      }
+    }
+    $final=array();
+    array_pop($tabDate);
+    $newResTab = array();
+    foreach ($tabDate as $startDate=>$endDate){
+      $found=null;
+      foreach ($res as $key=>$period){
+        if($startDate >= $key){
+          if($startDate <= $period['end']){
+            $found=$key;
+          }else{
+            continue;
+          }
+        }else{
+          break;
+        }
+      }
+      $resTab=array();
+      $newResTab=array();
+      if($found) {
+        $poolValue=$res[$found];
+        $arrIdRes=array();
+        $sum = 0;
+        foreach ($poolValue['idResource'] as $idRes=>$capacity){
+          $NewRes = $resource[$idRes];
+          $defaultCap = $NewRes->capacity;
+          $cap = $NewRes->getCapacityPeriod($startDate);
+          if($defaultCap != $capacity){
+            $ratePool = ($capacity*100/$defaultCap);
+            $rateEtp = $cap*$ratePool/100;
+          }else{
+            $rateEtp = $cap;
+          }
+          $newResTab[$idRes]= $rateEtp;
+          $sum += $rateEtp;
+        }
+        $final[$startDate]=array('start'=>$startDate,'end'=>$endDate,'rate'=>$sum,'idResource'=>$newResTab);
+      }
+    }
+    $res = $final;
+  }
+  //end    
+    
     if (!isset($_resourcePeriods[$idResourceAff])) {
     		$_resourcePeriods[$idResourceAff]=array();
     }
@@ -259,7 +350,8 @@ class ResourceTeamAffectation extends SqlElement {
     $resTeam = new ResourceTeam($idResourceAff);
     $resTeam->capacity = $maxCapacity;
     $resTeam->save();
-    
+    if(!isset( self::$_resourcePeriods[$idResourceAff] )){  self::$_resourcePeriods[$idResourceAff]=array(); }
+    self::$_resourcePeriods[$idResourceAff][$showIdle] = $res;
    return $res;
   }
   
