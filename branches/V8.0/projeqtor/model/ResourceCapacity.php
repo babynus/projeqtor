@@ -65,10 +65,10 @@ class ResourceCapacity extends SqlElement {
     foreach ($listResCap as $cap){
       if($cap->id != $this->id){
         if($this->startDate >= $cap->startDate and $this->startDate <= $cap->endDate){
-          $result = "Error";
+          $result = i18n('errorPeriodCantOverlap');
         }
         if($this->endDate >= $cap->startDate and $this->endDate <= $cap->endDate){
-          $result = "Error";
+          $result = i18n('errorPeriodCantOverlap');
         }
       }
     }
