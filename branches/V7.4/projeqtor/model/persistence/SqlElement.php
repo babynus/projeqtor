@@ -5448,10 +5448,14 @@ abstract class SqlElement {
  */
 public function getLastChangeTabForObject($obj,$lastChangeDate) {
   global $cr, $print, $treatedObjects;
-  if (!$lastChangeDate) {
-    $lastChangeDate=date('Y-m-d H:i:s');
+  if ($lastChangeDate=='full') {
+    $lastChangeToShow='1970-01-01 00:00:00';
+  } else {
+    if (!$lastChangeDate) {
+      $lastChangeDate=date('Y-m-d H:i:s');
+    }
+    $lastChangeToShow=date('Y-m-d H:i:s',strtotime($lastChangeDate)-10); // Get last changes (including last 10 seconds, not only last change)
   }
-  $lastChangeToShow=date('Y-m-d H:i:s',strtotime($lastChangeDate)-10); // Get last changes (including last 10 seconds, not only last change)
   require_once "../tool/formatter.php";
   if ($obj->id) {
     $inList="( ('" . get_class($obj) . "', " . Sql::fmtId($obj->id) . ") )";
@@ -5755,6 +5759,8 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
         return $this->getReferenceUrl();
       } else if ($property == 'HISTORY') {
         return $this->getLastChangeTabForObject($this,$lastEmailChangeDate);
+      } else if ($property == 'HISTORYFULL') {
+      	return $this->getLastChangeTabForObject($this,'full');        
       } else if ($property == 'LINK') {
         return $this->getLinksHtmlTab();
       } else if ($property == 'NOTE') {
