@@ -6934,16 +6934,16 @@ function drawProjectExpenseDetailLine($class,$id, $level){
 	$obj = new $class($id);
 	$date = '';
 	if(isset($obj->date)){
-		$date = htmlFormatDate($obj->date);
+		$date = htmlFormatDate($obj->date,'Y-m-d');
 	}
 	if($class == 'ProviderOrder'){
-	  $date = htmlFormatDate($obj->sendDate);
+	  $date = htmlFormatDate($obj->sendDate,'Y-m-d');
 	}
 	if($class == 'Tender'){
-  	$date = htmlFormatDate($obj->receptionDateTime);
+  	$date = htmlFormatDate($obj->receptionDateTime,'Y-m-d');
 	}
 	if($class == 'ProviderPayment'){
-	  $date = htmlFormatDate($obj->paymentDate);
+	  $date = htmlFormatDate($obj->paymentDate,'Y-m-d');
 	}
 	$ref = '';
 	if(isset($obj->externalReference)){
