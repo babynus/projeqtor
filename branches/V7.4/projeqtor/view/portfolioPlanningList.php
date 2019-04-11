@@ -325,10 +325,8 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                             refreshJsonPlanning();
                           </script>
                             <option value=" " <?php echo (! $saveShowMilestone)?'SELECTED':'';?>><?php echo i18n("paramNone");?></option>                            
-                            <?php htmlDrawOptionForReference('idMilestoneType', $saveShowMilestone,null, true);?>
-                            <?php if ($saveShowMilestone!='all') {?>
-                            <option value="all"><?php echo i18n("all");?></option>
-                            <?php }?>
+                            <?php htmlDrawOptionForReference('idMilestoneType', (($saveShowMilestone and $saveShowMilestone!='all')?$saveShowMilestone:null) ,null, true);?>
+                            <option value="all" <?php echo ($saveShowMilestone=='all')?'SELECTED':'';?>><?php echo i18n("all");?></option>                            
 			                  </select>
                       </td>
                     </tr>
