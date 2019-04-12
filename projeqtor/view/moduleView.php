@@ -75,7 +75,7 @@ $user=getSessionUser();
        <?php echo i18n("applyChanges");?>
       </button>
     </div> 
-    <div style="overflow:auto;padding:10px" id="detailDiv" dojoType="dijit.layout.ContentPane" region="center" >
+    <div style="overflow-y:auto;overflow-x:hidden;padding:10px" id="detailDiv" dojoType="dijit.layout.ContentPane" region="center" >
     <table style="margin:20px; width:100%">
 
     <?php 
