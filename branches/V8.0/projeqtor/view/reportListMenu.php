@@ -11,6 +11,8 @@ $allowedCategory=array();
 $lst=$hr->getSqlElementsFromCriteria(array('idProfile'=>$user->idProfile, 'allowAccess'=>'1'), false);
 foreach ($lst as $h) {
   $report=$h->idReport;
+  $nameReport=SqlList::getNameFromId('Report', $report, false);
+  if (! Module::isReportActive($nameReport)) continue;
   $allowedReport[$report]=$report;
   $category=SqlList::getFieldFromId('Report', $report, 'idReportCategory',false);
   $allowedCategory[$category]=$category;
