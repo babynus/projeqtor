@@ -3444,9 +3444,10 @@ function isOffDay($dateValue, $idCalendarDefinition=null) {
  */
 $bankHolidays=array();
 $bankWorkdays=array();
+$bankOffDays=array();
 
 function isOpenDay($dateValue, $idCalendarDefinition='1') {
-  global $bankHolidays, $bankWorkdays;
+  global $bankHolidays, $bankWorkdays, $bankOffDays;
   $paramDefaultLocale=Parameter::getGlobalParameter('paramDefaultLocale');
   $iDate=strtotime($dateValue);
   $year=date('Y', $iDate);
@@ -3477,42 +3478,47 @@ function isOpenDay($dateValue, $idCalendarDefinition='1') {
   }
   
 // MTY - GENERIC DAY OFF
-  $calDef = new CalendarDefinition($idCalendarDefinition);
-  $arrayDefaultOffDays=array();
-  if (Parameter::getGlobalParameter('OpenDayMonday')=='offDays') {
-    $arrayDefaultOffDays[]=1;  
-  } elseif ($calDef->dayOfWeek1==1) {
-    $arrayDefaultOffDays[]=1;        
-  }
-  if (Parameter::getGlobalParameter('OpenDayTuesday')=='offDays') {
-      $arrayDefaultOffDays[]=2;
-  } elseif ($calDef->dayOfWeek2==1) {
-    $arrayDefaultOffDays[]=2;        
-  }
-  if (Parameter::getGlobalParameter('OpenDayWednesday')=='offDays') {
-      $arrayDefaultOffDays[]=3;
-  } elseif ($calDef->dayOfWeek3==1) {
-    $arrayDefaultOffDays[]=3;        
-  }
-  if (Parameter::getGlobalParameter('OpenDayThursday')=='offDays') {
-      $arrayDefaultOffDays[]=4;
-  } elseif ($calDef->dayOfWeek4==1) {
-    $arrayDefaultOffDays[]=4;        
-  }
-  if (Parameter::getGlobalParameter('OpenDayFriday')=='offDays') {
-      $arrayDefaultOffDays[]=5;
-  } elseif ($calDef->dayOfWeek5==1) {
-    $arrayDefaultOffDays[]=5;        
-  }
-  if (Parameter::getGlobalParameter('OpenDaySaturday')=='offDays') {
-      $arrayDefaultOffDays[]=6;
-  } elseif ($calDef->dayOfWeek6==1) {
-    $arrayDefaultOffDays[]=6;        
-  }
-  if (Parameter::getGlobalParameter('OpenDaySunday')=='offDays') {
-      $arrayDefaultOffDays[]=0;
-  } elseif ($calDef->dayOfWeek0==1) {
-    $arrayDefaultOffDays[]=0;        
+  if (isset($bankOffDays[$idCalendarDefinition])) {
+    $arrayDefaultOffDays=$bankOffDays[$idCalendarDefinition];
+  } else {
+    $calDef = new CalendarDefinition($idCalendarDefinition);
+    $arrayDefaultOffDays=array();
+    if (Parameter::getGlobalParameter('OpenDayMonday')=='offDays') {
+      $arrayDefaultOffDays[]=1;  
+    } elseif ($calDef->dayOfWeek1==1) {
+      $arrayDefaultOffDays[]=1;        
+    }
+    if (Parameter::getGlobalParameter('OpenDayTuesday')=='offDays') {
+        $arrayDefaultOffDays[]=2;
+    } elseif ($calDef->dayOfWeek2==1) {
+      $arrayDefaultOffDays[]=2;        
+    }
+    if (Parameter::getGlobalParameter('OpenDayWednesday')=='offDays') {
+        $arrayDefaultOffDays[]=3;
+    } elseif ($calDef->dayOfWeek3==1) {
+      $arrayDefaultOffDays[]=3;        
+    }
+    if (Parameter::getGlobalParameter('OpenDayThursday')=='offDays') {
+        $arrayDefaultOffDays[]=4;
+    } elseif ($calDef->dayOfWeek4==1) {
+      $arrayDefaultOffDays[]=4;        
+    }
+    if (Parameter::getGlobalParameter('OpenDayFriday')=='offDays') {
+        $arrayDefaultOffDays[]=5;
+    } elseif ($calDef->dayOfWeek5==1) {
+      $arrayDefaultOffDays[]=5;        
+    }
+    if (Parameter::getGlobalParameter('OpenDaySaturday')=='offDays') {
+        $arrayDefaultOffDays[]=6;
+    } elseif ($calDef->dayOfWeek6==1) {
+      $arrayDefaultOffDays[]=6;        
+    }
+    if (Parameter::getGlobalParameter('OpenDaySunday')=='offDays') {
+        $arrayDefaultOffDays[]=0;
+    } elseif ($calDef->dayOfWeek0==1) {
+      $arrayDefaultOffDays[]=0;        
+    }
+    $bankOffDays[$idCalendarDefinition]=$arrayDefaultOffDays;
   }
 // MTY - GENERIC DAY OFF  
   if (in_array (date('w', $iDate), $arrayDefaultOffDays)) {
