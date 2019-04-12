@@ -567,7 +567,8 @@ INSERT INTO `${prefix}modulemenu` (`id`,`idModule`,`idMenu`,`hidden`,`active`) V
  (147,12,217,1,1),
  (148,12,218,1,1),
  (149,12,219,1,1),
- (150,12,220,1,1);
+ (150,12,220,1,1),
+ (151,3,204,0,1);
  
 INSERT INTO `${prefix}modulereport` (`id`,`idModule`,`idReport`,`hidden`,`active`) VALUES
  (1,3,1,0,1),
