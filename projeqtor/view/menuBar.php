@@ -57,11 +57,12 @@
   $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
   
   if (! $defaultMenu) $defaultMenu='menuBarItem';
+  
+  $arrayGlobalMenus=array('menuProject','menuAlert','menuToday','menuParameter','menuUserParameter','menuActivityStream','menuKanban','menuReports');
   foreach ($menuList as $menu) {
 // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM  
     if (! $isNotificationSystemActiv and strpos($menu->name, "Notification")!==false) { continue; }
 // END - ADD BY TABARY - NOTIFICATION SYSTEM
-    
     if (! $isLanguageActive and $menu->name=="menuLanguage") { continue; }
     if (securityCheckDisplayMenu($menu->id,substr($menu->name,4))) {
       $menuClass=$menu->menuClass;
@@ -69,11 +70,12 @@
       if ($menu->type!='menu' and (strpos(' menuBarItem '.$menuClass, $defaultMenu)>0)) {
         $cptAllMenu+=1;
       }
-      if ($menu->type=='menu' or $menu->name=='menuAlert' or $menu->name=='menuToday' or $menu->name=='menuReports' or $menu->name=='menuParameter' or $menu->name=='menuUserParameter') {
+      if ($menu->type=='menu' or in_array($menu->name,$arrayGlobalMenus) ) {
         continue;
       }
       $sp=explode(" ", $menu->menuClass);
       foreach ($sp as $cl) {
+        if  ( Module::moduleExists('module'.$cl) and ! Module::isModuleActive('module'.$cl)) continue;
         if (trim($cl)) {
           $allMenuClass[$cl]=$cl;
         }
