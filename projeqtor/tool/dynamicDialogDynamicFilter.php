@@ -38,6 +38,10 @@ Security::checkValidClass($objectClass);
            $cpt=0;
            foreach ($filter->_FilterCriteriaArray as $filterCriteria) {
            	if ($filterCriteria->isDynamic!="1") continue;
+           	//gautier
+           	if(trim($filterCriteria->dispOperator) == "<= today" or trim($filterCriteria->dispOperator)== ">= today"){
+           	  $filterCriteria->dispOperator .= ' + ';
+           	}
            ?>
            
            <tr style="vertical-align: top;">
