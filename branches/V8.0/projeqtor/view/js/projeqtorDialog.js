@@ -10103,7 +10103,17 @@ function showDialogAutoSendReport(){
 	setTimeout(loadDialog('dialogAutoSendReport',null,true,null,true), 200);
 }
 function saveAutoSendReport(){
-	loadContent("../tool/saveAutoSendReport.php", "resultDiv", "autoSendReportForm", true, "report");
+	var formVar=dijit.byId('autoSendReportForm');
+	  if (dijit.byId('destinationInput').get('value') == '' && dijit.byId('otherDestinationInput').get('value') == '') {
+	      showAlert(i18n("errorNoReceivers"));
+	      return;
+	  }
+	  if (formVar.validate()) {
+		  loadContent("../tool/saveAutoSendReport.php", "resultDiv", "autoSendReportForm", true, "report");
+		  dijit.byId('dialogAutoSendReport').hide();
+	  } else {
+	    showAlert(i18n("alertInvalidForm"));
+	  }
 }
 
 function refreshRadioButtonDiv(){

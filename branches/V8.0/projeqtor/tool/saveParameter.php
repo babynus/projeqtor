@@ -117,6 +117,7 @@ if ($type=='habilitation') {
                                      'workValid'=>i18n('workValidate'),
   		                               'diary'=>i18n('diaryAccess'),
   		                               'subscription'=>i18n('canSubscribeForOthers'),
+                                     'scheduledReport'=>i18n('autoSendReportAccess'),
                                      //'expense'=>i18n('resourceExpenseAccess'),
                                      'work'=>i18n('workAccess'),
                                      'cost'=>i18n('costAccess'),
