@@ -723,7 +723,15 @@ class PlannedWork extends GeneralWork {
             $ass->leftWork=0;
             $ass->plannedWork=$ass->realWork;
           }
-          while (1) {           
+          while (1) {    
+            // Variable Capacity : retreive the capacity for the current date
+            $capacity=$r->getCapacityPeriod($currentDate);
+            if ($ress['team']) {
+              $capacityRate=$ass->capacity;
+            } else {
+              $capacityRate=round($assRate*$capacity,2);
+            }
+            // End Variable capacity
             if ($ress['team']) { // For team resource, check if unitary resources have enought availability
               $period=ResourceTeamAffectation::findPeriod($currentDate,$ress['periods']); 
               if ($period===null) {
