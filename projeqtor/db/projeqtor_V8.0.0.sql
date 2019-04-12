@@ -673,7 +673,7 @@ INSERT INTO `${prefix}modulereport` (`id`,`idModule`,`idReport`,`hidden`,`active
 
 
 INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
-(221, 'menuModule', 37  , 'item', 1205, Null, 0, 'Admin');
+(221, 'menuModule', 37  , 'item', 1205, Null, 0, 'Admin HabilitationParameter');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1, 221, 1);
