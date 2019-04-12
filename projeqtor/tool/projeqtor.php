@@ -4624,5 +4624,5 @@ function sendNotification($receivers=null,$obj=null,$typeNotif="INFO",$title="",
  */
 function isLeavesSystemActiv() {
 	//return ((Parameter::getGlobalParameter ( 'leavesSystemActiv' )=="NO"?false:true));
-	return Module::isModuleActive('moduleHR');
+	return Module::isModuleActive('moduleHumanResource');
 }
