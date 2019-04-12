@@ -405,17 +405,17 @@ INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active
  (3,'moduleImputation','300',null,0,1),
  (4,'moduleRequirement','400',null,0,1),
  (5,'moduleFinancial','500',null,0,1),
- (6,'moduleFinancialExpense','510',5,0,1),
- (7,'moduleFinancialIncome','520',5,0,1),
+ (6,'moduleExpenses','510',5,0,1),
+ (7,'moduleIncomes','520',5,0,1),
  (8,'moduleRisk','600',null,0,1),
  (9,'moduleMeeting','700',null,0,1),
- (10,'moduleSteering','710',null,0,1),
+ (10,'moduleReview','710',null,0,1),
  (11,'moduleConfiguration','800',null,0,1),
- (12,'moduleHR','900',null,0,1),
+ (12,'moduleHumanResource','900',null,0,1),
  (13,'moduleNotification','1600',null,0,1),
  (14,'moduleOrganization','1100',null,0,1),
  (15,'moduleDocument','1000',null,0,1),
- (16,'moduleStream','1500',null,0,1);
+ (16,'moduleActivityStream','1500',null,0,1);
  
 INSERT INTO `${prefix}modulemenu` (`id`,`idModule`,`idMenu`,`hidden`,`active`) VALUES
  (1,2,150,0,1),
@@ -610,7 +610,7 @@ INSERT INTO `${prefix}modulereport` (`id`,`idModule`,`idReport`,`hidden`,`active
  (38,2,73,0,1),
  (39,2,74,0,1),
  (40,2,80,0,1),
- (41,11,83,0,1),
+ (41,2,83,0,1),
  (42,2,21,0,1),
  (43,1,21,0,1),
  (44,2,22,0,1),
