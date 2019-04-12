@@ -32,13 +32,30 @@
   
   $obj=new Menu();
   $sortOrder = 'sortOrder asc';
-  $menuList=$obj->getSqlElementsFromCriteria(null, false,null,$sortOrder);
+  $menuList=$obj->getSqlElementsFromCriteria(null, false,null,$sortOrder,true);
   $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
+  // Clean empty parents
+  //debugLog($menuList);
+  foreach (array_reverse($menuList,true) as $idMenu=>$menu) {
+    if ($menu->type=='menu') {
+      $found=false;
+      foreach ($menuList as $child) {
+        if ($child->idMenu==$menu->id and Module::isMenuActive($child->name)) {
+          $found=true;
+          break;
+        } 
+      }
+      if (! $found) {
+        unset($menuList[$idMenu]);
+      }
+    }
+  }
   
   foreach ($menuList as $menu) {
     if (!isNotificationSystemActiv() and strpos($menu->name, "Notification")!==false) { continue; }
     if (!$isLanguageActive and $menu->name=="menuLanguage") { continue; }
-    if ($level>0 and securityCheckDisplayMenu($menu->id,substr($menu->name,4)) ) {
+    if (!Module::isMenuActive($menu->name)) {continue;}
+    if ($level>0 and securityCheckDisplayMenu($menu->id,substr($menu->name,4))) {
       while ($level>0 and $menu->idMenu!= $menuLevel[$level]) {
         drawMenuIconCloseChildren();
       }
