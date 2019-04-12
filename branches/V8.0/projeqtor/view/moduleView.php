@@ -85,6 +85,8 @@ $user=getSessionUser();
       <tr style="height:30px" >
         <td style="width:25%;padding:10px;vertical-align:top" class="hyperlink">
           <?php if ($mod->idModule) echo "<div style='width:40px;float:left'>&nbsp;</div>";?> 
+          <?php $moduleClass=substr($mod->name,6);?>
+          <div style='float:left;position:relative;top:-5px;margin-right:15px;' class='icon<?php echo $moduleClass?> iconSize32 icon<?php echo $moduleClass?>32'></div>
           <div id="module_<?php echo $mod->id;?>" style="float:left;zoom:125%" dojoType="dijit.form.CheckBox" 
            parent="<?php if ($mod->idModule) {echo $mod->idModule;}?>" type="checkbox" <?php echo ($mod->active)?'checked="checked"':'';?> 
            class="moduleClass <?php if ($mod->idModule) {echo 'parentModule'.$mod->idModule;}?>" 
