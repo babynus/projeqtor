@@ -38,5 +38,6 @@ Sql::beginTransaction();
 $module=new Module($id);
 $module->active=$status;
 $res=$module->save();
+
 Sql::commitTransaction();
 ?>

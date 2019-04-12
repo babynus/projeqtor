@@ -30,6 +30,7 @@
 require_once "../tool/projeqtor.php";
 
 unsetSessionValue('menuInactiveList',true);
+unsetSessionValue('reportInactiveList',true);
 unsetSessionValue('moduleList',true);
 
 ?>
