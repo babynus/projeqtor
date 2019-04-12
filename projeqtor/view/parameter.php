@@ -424,8 +424,8 @@ function drawTableFromObjectList($objectList) {
   	htmlDrawCrossTable(array('imputation'=>i18n('imputationAccess'), 
   	                         'workValid'=>i18n('workValidate'),
   	                         'diary'=>i18n('diaryAccess'),
-  			                     'subscription'=>i18n('canSubscribeForOthers')
-  	                         ), 
+  			                     'subscription'=>i18n('canSubscribeForOthers'),
+  	                         'scheduledReport'=>i18n('autoSendReportAccess')), 
   	    'scope', 'profile', 'idProfile', 'habilitationOther', 'rightAccess', 'list', 'accessScopeSpecific') ;
   	echo '</div><br/>';
   	$titlePane="habilitationOther_WorkCost";

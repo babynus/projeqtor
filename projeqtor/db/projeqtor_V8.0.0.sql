@@ -21,6 +21,15 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 (6, 205, 1),
 (7, 205, 1);
 
+INSERT INTO `${prefix}habilitationother` (idProfile, rightAccess, scope) VALUES
+(1,4,'scheduledReport'),
+(2,2,'scheduledReport'),
+(3,2,'scheduledReport'),
+(4,2,'scheduledReport'),
+(5,2,'scheduledReport'),
+(6,2,'scheduledReport'),
+(7,2,'scheduledReport');
+
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,204,8),
 (2,204,2);

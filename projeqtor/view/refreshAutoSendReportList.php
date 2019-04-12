@@ -33,8 +33,9 @@ require_once "../tool/formatter.php";
 scriptLog('   ->/view/refreshAutoSendReportList.php'); 
 
 $idUser= RequestHandler::getId('userName');
+$idReceiver = RequestHandler::getId('idReceiver');
 
 ?>
 <div id="autoSendReportListDiv" name="autoSendReportListDiv">
-  <?php AutoSendReport::drawAutoSendReportList($idUser);?>
+  <?php AutoSendReport::drawAutoSendReportList($idUser, $idReceiver);?>
 </div>
