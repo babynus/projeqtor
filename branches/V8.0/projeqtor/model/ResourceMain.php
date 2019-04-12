@@ -420,6 +420,7 @@ class ResourceMain extends SqlElement {
         $result['isMemberOf'][$rta->idResourceTeam]=$rta->idResourceTeam;
       }
     }
+    $result['variableCapacity']=$this->hasVariableCapacity();
     return $result;
   }
   
@@ -858,8 +859,20 @@ class ResourceMain extends SqlElement {
     	return $this->capacity;
     }
     
+    public function hasVariableCapacity() {
+      if(!sessionValueExists('capacityPeriod')){
+        setSessionValue('capacityPeriod', array());
+      }
+      if(!sessionTableValueExist('capacityPeriod', $this->id)){
+        setSessionTableValue('capacityPeriod',$this->id, $this->buildCapacityPeriod());
+      }
+      $capacityPeriod = getSessionTableValue('capacityPeriod', $this->id);
+      if (count($capacityPeriod)>0) return true;
+      else return false;
+    }
+    
     public function getSurbookingCapacity($date) {
-    	return getCapacityPeriod($date);
+    	return $this->getCapacityPeriod($date);
     }
 }
 ?>

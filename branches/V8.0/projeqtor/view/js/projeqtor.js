@@ -3042,6 +3042,7 @@ function runScript(refType, refId, id) {
 }
 ongoingRunScriptContextMenu=false;
 function runScriptContextMenu(refType, refId, id) {
+  console.Log("call runScriptContextMenu");
   var objectClassManual = dojo.byId('objectClassManual').value;
   showWait();
   setTimeout("document.body.style.cursor='default';",100);

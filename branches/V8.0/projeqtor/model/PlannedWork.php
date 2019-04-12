@@ -725,11 +725,13 @@ class PlannedWork extends GeneralWork {
           }
           while (1) {    
             // Variable Capacity : retreive the capacity for the current date
-            $capacity=$r->getCapacityPeriod($currentDate);
-            if ($ress['team']) {
-              $capacityRate=$ass->capacity;
-            } else {
-              $capacityRate=round($assRate*$capacity,2);
+            if ($ress['variableCapacity']) {
+              $capacity=$r->getSurbookingCapacity($currentDate);
+              if ($ress['team']) {
+                $capacityRate=$ass->capacity;
+              } else {
+                $capacityRate=round($assRate*$capacity,2);
+              }
             }
             // End Variable capacity
             if ($ress['team']) { // For team resource, check if unitary resources have enought availability
