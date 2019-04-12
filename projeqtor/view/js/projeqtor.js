@@ -3040,16 +3040,18 @@ function runScript(refType, refId, id) {
   if (dijit.byId("detailRightDiv")) loadContent("objectStream.php", "detailRightDiv", "listForm"); 
   highlightPlanningLine(id);
 }
-ongoingRunScriptContextMenu=false;
+var ongoingRunScriptContextMenu=false;
 function runScriptContextMenu(refType, refId, id) {
-  console.Log("call runScriptContextMenu");
+  if (ongoingRunScriptContextMenu) return;
+  ongoingRunScriptContextMenu=true;
+  console.log("call runScriptContextMenu");
   var objectClassManual = dojo.byId('objectClassManual').value;
   showWait();
   setTimeout("document.body.style.cursor='default';",100);
   dojo.xhrGet({
     url : "../view/planningBarDetail.php?class="+refType+"&id="+refId+"&scale="+ganttPlanningScale+"&objectClassManual="+objectClassManual+"&idAssignment="+id,
     load : function(data, args) {
-      ongoingRunScriptContextMenu=true;
+      //ongoingRunScriptContextMenu=true;
       setTimeout("document.body.style.cursor='default';",100);
       var bar = dojo.byId('bardiv_'+id);
       var line = dojo.byId('childgrid_'+id);
