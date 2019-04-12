@@ -1065,7 +1065,8 @@ function getUserVisibleObjectClassWithFieldDateType() {
  * @return boolean
  */
 function isNotificationSystemActiv() {
-  if (Parameter::getGlobalParameter('notificationSystemActiv')==="NO") {
+  //if (Parameter::getGlobalParameter('notificationSystemActiv')==="NO") {
+  if (! Module::isModuleActive('moduleNotification')) {
     return false;
   } else {
     $notifCheckDelay=Parameter::getGlobalParameter('cronCheckNotifications');
