@@ -39,7 +39,8 @@ Security::checkValidClass($objectClass);
            foreach ($filter->_FilterCriteriaArray as $filterCriteria) {
            	if ($filterCriteria->isDynamic!="1") continue;
            	//gautier
-           	if(trim($filterCriteria->dispOperator) == "<= today" or trim($filterCriteria->dispOperator)== ">= today"){
+           	$today = i18n('today');
+           	if(trim($filterCriteria->dispOperator) == "<= ".$today or trim($filterCriteria->dispOperator)== ">= ".$today){
            	  $filterCriteria->dispOperator .= ' + ';
            	}
            ?>
