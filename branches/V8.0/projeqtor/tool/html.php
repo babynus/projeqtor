@@ -202,7 +202,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       $crit=array('done'=>'1');
     }
     $table=SqlList::getListWithCrit($listType, $crit,$column,$selection, (! $obj)?!$limitToActiveProjects:false);
-  } else if ($col=='idLinkable' || $col=='idCopyable'){
+  } else if ($listType=='Linkable' or $listType=='Copyable' or $listType=='Dependable' or $listType=='Originable'){
     // Limit list of object to Link or to Copy to to objects visible to the user (depending on his access rights
     $typeRight='read';
     if($col=='idCopyable') $typeRight='create';
@@ -225,6 +225,21 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     	}
     }
     $table=SqlList::getList($listType,$column,$selection, (! $obj)?!$limitToActiveProjects:false );
+    foreach($arrayToDel as $key)unset($table[$key]);
+  } else if ($listType=='Mailable' or $listType=='Indicatorable' or $listType=='Textable' or $listType=='Checklistable' 
+          or $listType=='Importable' or $listType=='Notifiable'){
+    $table=SqlList::getListNotTranslated($listType,$column,$selection);
+    $arrayToDel=array();
+    foreach($table as $key => $val){
+      $checkMenu='menu'.$val;
+      if ($val=='Assignment') $checkMenu='menuActivity';
+      else if ($val=='TestCaseRun') $checkMenu='menuTestCase';
+      else if ($val=='ProductStructure') $checkMenu='menuProduct';
+      else if ($val=='Work') $checkMenu='menuImputation';
+      else if ($val=='DocumentVersion') $checkMenu='menuDocument';
+      if (! Module::isMenuActive($checkMenu)) $arrayToDel[]=$key;
+    }
+    $table=SqlList::getList($listType,$column,$selection );
     foreach($arrayToDel as $key)unset($table[$key]);
   } else if ($col=='idActivity' or $col=='idTicket') { 
     // List Activity or Ticket without a criteria // TODO : analyse effect of this... 

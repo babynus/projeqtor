@@ -715,3 +715,8 @@ CREATE TABLE `${prefix}pluginbutton` (
 
 CREATE INDEX pluginbuttonplugin ON `${prefix}pluginbutton` (idPlugin);
 CREATE INDEX pluginbuttonclassname ON `${prefix}pluginbutton` (className);
+
+-- ===========================
+-- FIX
+-- ===========================
+UPDATE `${prefix}textable` SET `name`='PeriodicMeeting' WHERE `name`='Periodic Meeting';
