@@ -124,10 +124,13 @@ $lastDay = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay
                     saveDataToSession("idReceiver",dijit.byId('idReceiver').get('value'),false);
                     refreshAutoSendReportList(null);
                   </script>
+                  <?php 
+                  $specific='scheduledReport';
+                  if ($user->allSpecificRightsForProfilesOneOnlyValue($specific, 'ALL')) {?>
                   <option value=""></option>
                   <?php
-                   $specific='scheduledReport';
-                   include '../tool/drawResourceListForSpecificAccess.php';?>  
+                  }
+                  include '../tool/drawResourceListForSpecificAccess.php';?>  
               </select>
            </td>
          </tr>

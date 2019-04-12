@@ -265,7 +265,7 @@ $sendFrequency = 'everyDays';
         <button dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogAutoSendReport').hide();">
           <?php echo i18n("buttonCancel");?>
         </button>
-        <button dojoType="dijit.form.Button" type="button" onclick="saveAutoSendReport();">
+        <button dojoType="dijit.form.Button" type="button" id="dialogAutoSendReportSubmit" type="submit" onclick="saveAutoSendReport();">
           <?php echo i18n("buttonOK");?>
         </button>
       </td>
