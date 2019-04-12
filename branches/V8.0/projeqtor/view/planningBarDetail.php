@@ -30,6 +30,9 @@ if($objectClassManual == 'ResourcePlanning' ){
 
 $dates=array();
 $work=array();
+$maxCapacity=array();
+$minCapacity=array();
+$ressAll=array();
 $start=null;
 $end=null;
 
@@ -58,8 +61,10 @@ foreach($wkLst as $wk) {
   if (! isset($work[$wk->idAssignment])) $work[$wk->idAssignment]=array();
   if (! isset($work[$wk->idAssignment]['resource'])) {
     $ress=new ResourceAll($wk->idResource);
+    $ressAll[$wk->idResource]=$ress;
     $work[$wk->idAssignment]['capacity']=($ress->capacity>1)?$ress->capacity:'1';
     $work[$wk->idAssignment]['resource']=$ress->name;
+    $work[$wk->idAssignment]['idResource']=$ress->id;
     if ($ress->isResourceTeam) {
       $ass=new Assignment($wk->idAssignment);
       $work[$wk->idAssignment]['capacity']=($ass->capacity>1)?$ass->capacity:'1';
@@ -69,6 +74,8 @@ foreach($wkLst as $wk) {
     }
   }
   $work[$wk->idAssignment][$wk->workDate]=array('work'=>$wk->work,'type'=>'real');
+  $maxCapacity[$wk->idResource]=$work[$wk->idAssignment]['capacity'];
+  $minCapacity[$wk->idResource]=$work[$wk->idAssignment]['capacity'];
 }
 $wk=new PlannedWork();
 $wkLst=$wk->getSqlElementsFromCriteria($crit);
@@ -79,8 +86,10 @@ foreach($wkLst as $wk) {
   if (! isset($work[$wk->idAssignment])) $work[$wk->idAssignment]=array();
   if (! isset($work[$wk->idAssignment]['resource'])) {
     $ress=new ResourceAll($wk->idResource);
+    $ressAll[$wk->idResource]=$ress;
     $work[$wk->idAssignment]['capacity']=($ress->capacity>1)?$ress->capacity:'1';
     $work[$wk->idAssignment]['resource']=$ress->name;
+    $work[$wk->idAssignment]['idResource']=$ress->id;
     if ($ress->isResourceTeam) {
       $ass=new Assignment($wk->idAssignment);
       $work[$wk->idAssignment]['capacity']=($ass->capacity>1)?$ass->capacity:'1';
@@ -92,6 +101,8 @@ foreach($wkLst as $wk) {
   if (! isset($work[$wk->idAssignment][$wk->workDate]) ) {
     $work[$wk->idAssignment][$wk->workDate]=array('work'=>$wk->work,'type'=>'planned');
   }
+  $maxCapacity[$wk->idResource]=$work[$wk->idAssignment]['capacity'];
+  $minCapacity[$wk->idResource]=$work[$wk->idAssignment]['capacity'];
 }
 if ($pe->idPlanningMode=='22') { // RECW
   $start=$pe->plannedStartDate;
@@ -114,6 +125,11 @@ while ($dt<=$end) {
   if (!isset($dates[$dt])) {
     $dates[$dt]=$dt;
   }
+  foreach ($ressAll as $ress) {
+    $capa=$ress->getSurbookingCapacity($dt);
+    if ($capa>$maxCapacity[$ress->id]) $maxCapacity[$ress->id]=$capa;
+    if ($capa<$minCapacity[$ress->id]) $minCapacity[$ress->id]=$capa;
+  }
   $dt=addDaysToDate($dt, 1);
 }
 ksort($dates);
@@ -121,12 +137,13 @@ ksort($dates);
 $width=20;
 echo '<table id="planningBarDetailTable" style="height:'.(count($work)*22).'px;background-color:#FFFFFF;border-collapse: collapse;marin:0;padding:0">';
 foreach ($work as $res) {
+  $resObj=$ressAll[$res['idResource']];
   echo '<tr style="height:20px;border:1px solid #505050;">';
   foreach ($dates as $dt) {
     $color="#ffffff";
     $height=0; $w=0;
-    $capacity=$res['capacity'];
-    if ($capacity==0) $capacity=1;
+    $capacityTop=$maxCapacity[$res['idResource']]; //$res['capacity'];
+    if ($capacityTop==0) $capacityTop=1;
     if (isset($res[$dt])) {
       $w=$res[$dt]['work'];       
       if (!$pe->validatedEndDate or $dt<=$pe->validatedEndDate) {
@@ -134,14 +151,24 @@ foreach ($work as $res) {
       } else {
         $color=($res[$dt]['type']=='real')?"#705050":"#BB5050";
       }
-      
-      $height=round($w*20/$capacity,0);
+      $height=round($w*20/$capacityTop,0);
+      $heightNormal=round(20*$res['capacity']/$capacityTop,0);
+      $heightCapacity=round(20*$resObj->getSurbookingCapacity($dt)/$capacityTop,0);
     }
-    echo '<td style="padding:0;width:'.$width.'px;border-right:1px solid #eeeeee;position:relative;">'
-        .'<div style="display:block;background-color:'.$color.';position:absolute;bottom:0px;left:0px;width:100%;height:'.$height.'px;"></div>'
-        .'</td>';
+    echo '<td style="padding:0;width:'.$width.'px;border-right:1px solid #eeeeee;position:relative;">';
+    echo '<div style="display:block;background-color:'.$color.';position:absolute;bottom:0px;left:0px;width:100%;height:'.$height.'px;"></div>';
+    if ($maxCapacity[$res['idResource']]!=$res['capacity'] or $minCapacity[$res['idResource']]!=$res['capacity']) {
+      echo '<div style="display:block;background-color:transparent;position:absolute;bottom:0px;left:0px;width:100%;border-top:1px solid grey;height:'.$heightNormal.'px;"></div>';
+    }
+    if ($heightNormal!=$heightCapacity) {
+      echo '<div style="display:block;background-color:transparent;position:absolute;bottom:0px;left:0px;width:100%;border-top:1px solid red;height:'.$heightCapacity.'px;"></div>';
+    }
+    echo '</td>';
   }
-  echo '<td style="border-left:1px solid #505050;"><div style="width:200px; max-width:200px;overflow:hidden; text-align:left">&nbsp;'.$res['resource'].'&nbsp;</div></td>';
+  echo '<td style="border-left:1px solid #505050;"><div style="width:200px; max-width:200px;overflow:hidden; text-align:left">&nbsp;'.$res['resource'];
+  if ($maxCapacity[$res['idResource']]>$res['capacity']) echo '&nbsp;<img style="width:10px" src="../view/img/arrowUp.png" />&nbsp;'.htmlDisplayNumericWithoutTrailingZeros($maxCapacity[$res['idResource']]);
+  if ($minCapacity[$res['idResource']]<$res['capacity']) echo '&nbsp;<img style="width:10px" src="../view/img/arrowDown.png" />&nbsp;'.htmlDisplayNumericWithoutTrailingZeros($minCapacity[$res['idResource']]);
+  echo '&nbsp;</div></td>';
   echo '</tr>';
 }
 echo '</table>';
