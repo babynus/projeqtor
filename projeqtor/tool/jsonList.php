@@ -481,6 +481,26 @@ if ($type == 'empty') {
     if (! $sepChar) $sepChar = '__';
     $wbsLevelArray = array();
   }
+  if ($class=='Mailable' or $class=='Indicatorable' or $class=='Textable' or $class=='Checklistable' 
+      or $class=='Linkable' or $class=='Copyable' or $class=='Dependable' or $class=='Originable'
+      or $class=='Importable' or $class=='Notifiable' or $class=='Dependable' or $class=='Originable'){
+    $temp=SqlList::getListNotTranslated($class,'name',$selected);
+    foreach($temp as $key => $val){
+      $checkMenu='menu'.$val;
+      if ($val=='Assignment') $checkMenu='menuActivity';
+      else if ($val=='TestCaseRun') $checkMenu='menuTestCase';
+      else if ($val=='ProductStructure') $checkMenu='menuProduct';
+      else if ($val=='Work') $checkMenu='menuImputation';
+      else if ($val=='DocumentVersion') $checkMenu='menuDocument';
+      if (! Module::isMenuActive($checkMenu)) unset($list[$key]);
+      if ($class=='Linkable' or $class=='Copyable' or $class=='Dependable' or $class=='Originable') {
+        $typeRight='read';
+        if($class=='Copyable') $typeRight='create';
+        $objTmp=new $val();
+        if(securityGetAccessRightYesNo('menu'.$val, $typeRight, $objTmp)=="NO" or !securityCheckDisplayMenu(null,$val)) unset($list[$key]);
+      }
+    }
+  }  
   if ($dataType == 'idLinkable' or $dataType == 'idCopyable' or $dataType == 'idImportable' or $dataType == 'idMailable' or $dataType == 'idIndicatorable' or $dataType == 'idChecklistable' or $dataType == 'idDependable' or $dataType == 'idOriginable' or $dataType == 'idReferencable' or $dataType == 'idNotifiable'  ) {
     asort ( $list );
   }
