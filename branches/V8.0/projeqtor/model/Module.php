@@ -108,6 +108,14 @@ class Module extends SqlElement {
     if (isset($list[$module]) and $list[$module]==1) return true;
     else return false;
   }
+  public static function moduleExists($module) {
+    if (! sessionValueExists('moduleList',true)) {
+      self::initializeModuleList();
+    }
+    $list=getSessionValue('moduleList',null,true);
+    if (isset($list[$module])) return true;
+    else return false;
+  }
   private static function initializeMenuInactiveList() {
     $moduleMenu=new ModuleMenu();
     $list=$moduleMenu->countGroupedSqlElementsFromCriteria(null, array('idMenu','active'),'1=1');
