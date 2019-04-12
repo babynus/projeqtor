@@ -67,21 +67,28 @@ class Module extends SqlElement {
       $moduleMenu->active=$this->active;
       $moduleMenu->save();
     }
+    $moduleReport=new ModuleReport();
+    $moduleReportList=$moduleReport->getSqlElementsFromCriteria(array('idModule'=>$this->id));
+    foreach ($moduleReportList as $moduleReport) {
+      $moduleReport->active=$this->active;
+      $moduleReport->save();
+    }
     // MTY - LEAVE SYSTEM
-      if ($this->id==12 and $old->active!=$this->active) { // HR Module
-        include_once '../tool/projeqtor-hr.php';
-        $result=initPurgeLeaveSystemElements(($this->active)?'YES':'NO');
-        $status = getLastOperationStatus($result);
-        if ($status=="OK") {
-          unsetSessionValue("visibleProjectsList");
-        } elseif ($status=="NO_CHANGE") {
-          $status="OK";
-        }
-        traceLog("Change LeaveSystemActiv to ".(($this->active)?'YES':'NO').' :'.$status);
-        if ($status!='OK') traceLog($result); 
+    if ($this->id==12 and $old->active!=$this->active) { // HR Module
+      include_once '../tool/projeqtor-hr.php';
+      $result=initPurgeLeaveSystemElements(($this->active)?'YES':'NO');
+      $status = getLastOperationStatus($result);
+      if ($status=="OK") {
+        unsetSessionValue("visibleProjectsList");
+      } elseif ($status=="NO_CHANGE") {
+        $status="OK";
       }
+      traceLog("Change LeaveSystemActiv to ".(($this->active)?'YES':'NO').' :'.$status);
+      if ($status!='OK') traceLog($result); 
+    }
       // MTY - LEAVE SYSTEM
     unsetSessionValue('menuInactiveList',true);
+    unsetSessionValue('reportInactiveList',true);
     unsetSessionValue('moduleList',true);
     return $result;
   }
@@ -123,6 +130,37 @@ class Module extends SqlElement {
     }
     setSessionValue('menuInactiveList', $result,true);
   }
+  
+  public static function isReportActive($report) {
+    if (! sessionValueExists('reportInactiveList',true)) {
+      self::initializeReportInactiveList();
+    }
+    $list=getSessionValue('reportInactiveList',null,true);
+    if (isset($list[$report])) return false;
+    else return true;
+  }
+  private static function initializeReportInactiveList() {
+    $moduleReport=new ModuleReport();
+    $list=$moduleReport->countGroupedSqlElementsFromCriteria(null, array('idReport','active'),'1=1');
+    $arrayCpt=array();
+    foreach ($list as $key=>$cpt) {
+      $split=explode('|',$key);
+      $report=SqlList::getNameFromId('Report', $split[0],false);
+      $active=$split[1];
+      if (!isset($arrayCpt[$report])) $arrayCpt[$report]=array('0'=>0,'1'=>0);
+      $arrayCpt[$report][$active]=$cpt;
+    }
+    $result=array();
+    foreach($arrayCpt as $report=>$tab) {
+      if ($tab['1']>0) {
+        // At least one active
+      } else {
+        $result[$report]=$report;
+      }
+    }
+    setSessionValue('reportInactiveList', $result,true);
+  }
+  
   private static function initializeModuleList() {
     $result=array();
     $module=new Module();
