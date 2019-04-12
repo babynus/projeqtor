@@ -238,34 +238,24 @@ class AutoSendReport extends SqlElement{
     }
 	}
 	
-	public static function drawAutoSendReportList($idUser){
+	public static function drawAutoSendReportList($idUser, $idReceiver){
 	  $noData = true;
 	  $autoSendReport = new AutoSendReport();
 	  $user = getSessionUser();
 	  $listUser = getUserVisibleResourcesList(true);
-	  $profile = new Profile($user->idProfile, true);
-	  if($profile->profileCode == 'ADM'){
-	    if($idUser != ''){
-	      unset($listUser);
-	      foreach (getUserVisibleResourcesList(true) as $id=>$name){
-	      	if($id == $idUser){
-	      		$listUser[$id]=$name;
-	      	}
-	      }
-	    }
-	  }else{
-	    unset($listUser);
-	    foreach (getUserVisibleResourcesList(true) as $id=>$name){
-	    	if($id == $user->id){
-	    		$listUser[$id]=$name;
-	    	}
-	    }
-	  }
+    if($idUser != ''){
+      unset($listUser);
+      foreach (getUserVisibleResourcesList(true) as $id=>$name){
+      	if($id == $idUser){
+      		$listUser[$id]=$name;
+      	}
+      }
+    }
 	  $result = "";
 	  $result .='<div id="autoSendReportDiv" align="center" style="margin-top:20px;margin-bottom:20px; overflow-y:auto; width:100%;">';
 	  $result .='  <table width="98%" style="margin-left:20px;margin-right:20px;border: 1px solid grey;">';
 	  $result .='   <tr class="reportHeader">';
-	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('colIdResource').'</td>';
+	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('colIdUser').'</td>';
 	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:16%;text-align:center;vertical-align:center;">'.i18n('colSendName').'</td>';
 	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:15%;text-align:center;vertical-align:center;">'.i18n('colReport').'</td>';
 	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:18%;text-align:center;vertical-align:center;">'.i18n('colReceiver').'</td>';
@@ -275,7 +265,11 @@ class AutoSendReport extends SqlElement{
 	  $result .='     <td style="border: 1px solid grey;height:60px;width:5%;text-align:center;vertical-align:center;">'.i18n('colActive').'</td>';
 	  $result .='   </tr>';
 	  foreach ($listUser as $id=>$name){
-	    $crit = array("idResource"=>$id);
+	    if($idReceiver){
+	      $crit = array("idResource"=>$id, "idReceiver"=>$idReceiver);
+	    }else{
+	      $crit = array("idResource"=>$id);
+	    }
 	    $listAutoSendReport = $autoSendReport->getSqlElementsFromCriteria($crit);
 	    $countLine = 0;
   	  foreach ($listAutoSendReport as $send){
@@ -286,22 +280,30 @@ class AutoSendReport extends SqlElement{
   	  	$result .='<tr>';
   	  	if($countLine == 0){
     				$result .='<td style="border-top: 1px solid grey;border-left: 1px solid grey;border-right: 1px solid grey;height:40px;width:10%;text-align:left;vertical-align:center;">';
-    				$result .=' <table width="100%">';
-    				$result .='   <tr><td width="40%">'.formatUserThumb($resource->id, $resource->name, null, 22, 'right').'</td>';
-    				$result .='       <td width="60%" float="left">&nbsp'.$resource->name.'</td></tr>';
+    				$result .='<table align="center"><tr>'
+    						    .'<td style="text-align:right">'.formatUserThumb($resource->id, $resource->name, null, 22, 'right').'</td>'
+    								.'<td style="white-space:nowrap;text-align:left">&nbsp'.$resource->name.'</td></tr>';
     				$result .=' </table></td>';
   			}else{
     				$result .='     <td style="border-left: 1px solid grey;border-right: 1px solid grey;height:40px;width:10%;"></td>';
   			}
   			$result .='<td style="border: 1px solid grey;height:40px;width:16%;text-align:center;vertical-align:center;">'.$send->name.'</td>';
   			$result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:center;vertical-align:center;">'.i18n($report->name).'</td>';
-  			$result .='<td style="border: 1px solid grey;height:40px;width:18%;text-align:center;vertical-align:center;">'.$receiver->name;
+  			$result .='<td style="border: 1px solid grey;height:40px;width:18%;text-align:center;vertical-align:center;">';
+  			$result .='<table align="center"><tr>'
+  			    .'<td style="text-align:right">'.formatUserThumb($receiver->id, $receiver->name, null, 22, 'right').'</td>'
+  			    .'<td style="white-space:nowrap;text-align:left">&nbsp'.$receiver->name.'</td></tr>';
   			if($send->otherReceiver != ''){
   			  $listOtherReceiver = explode(',', $send->otherReceiver);
   			  foreach ($listOtherReceiver as $otherReceiver){
-  			    $result .= ' / '.$otherReceiver;
+  			    if($otherReceiver != $receiver->email){
+    			    $result .='<tr><td colspan="2">';
+    			    $result .= $otherReceiver;
+    			    $result .='</td></tr>';
+  			    }
   			  }
   			}
+  			$result.='</table>';
   			$result .='</td>';
   			$result .='<td style="border: 1px solid grey;height:40px;width:8%;text-align:center;vertical-align:center;">'.i18n($send->sendFrequency).'</td>';
   			$result .='<td style="border: 1px solid grey;height:40px;width:8%;text-align:center;vertical-align:center;font-style:italic;">'.htmlFormatDateTime(date('Y-m-d H:i', $send->nextTime)).'</td>';

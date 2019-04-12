@@ -33,8 +33,8 @@ require_once "../tool/formatter.php";
 scriptLog('   ->/view/autoSendReportList.php');
 
 $user=getSessionUser();
-$userName="";
-$userTeam="";
+$userName=$user->id;
+$idReceiver=$user->id;
 $showValidated = '';
 $showSubmitted = '';
 $currentDay=date('Y-m-d');
@@ -49,6 +49,7 @@ if ($currentWeek>50 and $currentMonth==1 ) {
 }
 $firstDay = date('Y-m-d', firstDayofWeek($currentWeek, $currentYear));
 $lastDay = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay)));
+//style="padding-left:10px;"
 ?>
 
 <div dojoType="dijit.layout.BorderContainer" id="autoSendReportParamDiv" name="autoSendReportParamDiv">
@@ -60,13 +61,13 @@ $lastDay = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay
   <input type="hidden" id="idSendReport" name="idSendReport" value="" />
   <table width="100%" height="64px" class="listTitle">
     <tr height="32px">
-    <td style="vertical-align:top; min-width:100px; width:15%;">
+    <td style="vertical-align:top;min-width:100px;width:20%;">
       <table >
 		    <tr height="32px">
   		    <td width="50px" align="center">
             <?php echo formatIcon('AutoSendReport', 32, null, true);?>
           </td>
-          <td width="100px"><span class="title"><?php echo i18n('menuAutoSendReport');?></span></td>
+          <td width="200px"><span class="title"><?php echo i18n('menuAutoSendReport');?></span></td>
   		  </tr>
   		  <tr height="32px">
           <td>
@@ -84,7 +85,7 @@ $lastDay = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay
       <td>   
         <table>
          <tr>
-           <td nowrap="nowrap" style="text-align: right;padding-right:5px;"><?php echo i18n("colIdResource");?></td>
+           <td nowrap="nowrap" style="text-align: right;padding-right:5px;"><?php echo i18n("colIdUser");?></td>
            <td>
               <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
                 style="width: 150px;"
@@ -102,10 +103,34 @@ $lastDay = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay
                   </script>
                   <option value=""></option>
                   <?php
-                   $specific='imputation';
+                   $specific='scheduledReport';
                    include '../tool/drawResourceListForSpecificAccess.php';?>  
               </select>
            </td>
+           
+           <td nowrap="nowrap" style="text-align: right;padding-left:10px;padding-right:5px;"><?php echo i18n("colReceiver");?></td>
+           <td>
+              <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
+                style="width: 150px;"
+                name="idReceiver" id="idReceiver"
+                <?php echo autoOpenFilteringSelect();?>
+                value="<?php if(sessionValueExists('idReceiver')){
+                              $receiver =  getSessionValue('idReceiver');
+                              echo $idReceiver;
+                             }else{
+                              echo $idReceiver;
+                             }?>">
+                  <script type="dojo/method" event="onChange" >
+                    saveDataToSession("idReceiver",dijit.byId('idReceiver').get('value'),false);
+                    refreshAutoSendReportList(null);
+                  </script>
+                  <option value=""></option>
+                  <?php
+                   $specific='scheduledReport';
+                   include '../tool/drawResourceListForSpecificAccess.php';?>  
+              </select>
+           </td>
+         </tr>
         </table>
       </td>
     </table>
@@ -116,7 +141,7 @@ $lastDay = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay
   </div>
   <div id="autoSendReportWorkDiv" name="autoSendReportWorkDiv" dojoType="dijit.layout.ContentPane" region="center" >
     <div id="autoSendReportListDiv" name="autoSendReportListDiv">
-      <?php AutoSendReport::drawAutoSendReportList($userName);?>
+      <?php AutoSendReport::drawAutoSendReportList($userName, $idReceiver);?>
     </div>
   </div>  
 </div>

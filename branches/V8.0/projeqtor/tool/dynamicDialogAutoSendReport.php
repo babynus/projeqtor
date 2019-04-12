@@ -203,7 +203,7 @@ $sendFrequency = 'everyDays';
                 <div dojoType="dijit.form.TimeTextBox" name="sendTime" id="sendTime"
                     invalidMessage="<?php echo i18n('messageInvalidTime')?>" 
                     type="text" maxlength="5" required="true"
-                    style="width:40px; text-align: center;" class="input rounded required" required="true"
+                    style="width:40px; text-align: center;" class="input rounded required" required
                     value="T<?php if(sessionValueExists('sendTime')){echo getSessionValue('sendTime');}else{
                     echo date('H:i');}?>" hasDownArrow="false">
                 </div>
@@ -235,12 +235,11 @@ $sendFrequency = 'everyDays';
               <td>
                 <label for="destinationInput" class="dialogLabel" style="text-align:right;"><?php echo i18n('sectionReceivers');?> : </label>
                 <select dojoType="dijit.form.FilteringSelect" class="input" xlabelType="html"
-                style="width: 150px;" name="destinationInput" id="destinationInput" required="true"
-                <?php echo autoOpenFilteringSelect();
-                if($resourceProfile->profileCode != 'ADM'){ ?> readonly <?php }?>
+                style="width: 150px;" name="destinationInput" id="destinationInput" required
+                <?php echo autoOpenFilteringSelect();?>
                 value="<?php echo $user->id;?>">
                   <option value=""></option>
-                  <?php $specific='imputation';
+                  <?php $specific='scheduledReport';
                    include '../tool/drawResourceListForSpecificAccess.php';?>  
                  </select>
   				    </td>
@@ -266,7 +265,7 @@ $sendFrequency = 'everyDays';
         <button dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogAutoSendReport').hide();">
           <?php echo i18n("buttonCancel");?>
         </button>
-        <button dojoType="dijit.form.Button" type="submit" onclick="saveAutoSendReport();">
+        <button dojoType="dijit.form.Button" type="button" onclick="saveAutoSendReport();">
           <?php echo i18n("buttonOK");?>
         </button>
       </td>
