@@ -36,6 +36,10 @@ $idUser= RequestHandler::getId('userName');
 $idTeam = RequestHandler::getId('idTeam');
 $firstDay = RequestHandler::getDatetime('weekImputationValidation');
 
+$showSubmitted = RequestHandler::getValue('showSubmitWork');
+setSessionValue('showSubmitWork', $showSubmitted);
+$showValidated = RequestHandler::getValue('showValidatedWork');
+setSessionValue('showValidatedWork', $showValidated);
 ?>
 <div id="imputListDiv" name="imputListDiv">
   <?php ImputationValidation::drawUserWorkList($idUser, $idTeam, $firstDay);?>
