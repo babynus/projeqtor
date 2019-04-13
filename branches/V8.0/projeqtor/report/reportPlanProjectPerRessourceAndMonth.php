@@ -134,7 +134,7 @@ if ($paramTeam) {
 
 $querySelect= 'select t1.idResource, month, sum(work) as sumWork, ' . $scale . ' as scale , t1.idProject as idproject '; 
 
-$queryGroupBy = 't1.idresource,' .$scale . ', t1.idProject'; 
+$queryGroupBy = 't1.idResource,' .$scale . ', t1.idProject'; 
 // constitute query and execute
 
 $tab=array();
@@ -150,7 +150,7 @@ for ($i=1;$i<=2;$i++) {
      . ' from ' . $obj->getDatabaseTableName().' t1, '.$prjTable.' t2 '
      . ' where ' . $queryWhere." and t1.idProject=t2.id "
      . ' group by ' . $queryGroupBy
-     . ' order by t2.sortOrder asc, t1.idresource asc '; 
+     . ' order by t1.idResource asc '; 
   $result=Sql::query($query);
   //echo $query."<br><br>";
   
