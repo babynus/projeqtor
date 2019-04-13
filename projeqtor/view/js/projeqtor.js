@@ -2032,6 +2032,9 @@ function finaliseButtonDisplay(specificWidgetArray) {
       enableWidget('printButton');
       enableWidget('printButtonPdf');
     }
+    if (dojo.byId('objectClass') && dojo.byId('objectClass').value=='Work') {
+      enableWidget('refreshButton');
+    }
     dojo.query(".pluginButton").forEach(function(node, index, nodelist) {
       disableWidget(node.getAttribute('widgetid'));
     });
