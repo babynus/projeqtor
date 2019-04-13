@@ -433,14 +433,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
         } else {
 // MTY - LEAVE SYSTEM          
         securityCheckRequest();
-        $firstPage=$_REQUEST['directAccessPage'];
-        /* This part is obsolete in V6.4 and would lead to open the menu
-        if (array_key_exists("menuActualStatus",$_REQUEST)) {
-          $menuActualStatus=$_REQUEST['menuActualStatus'];
-          if ($menuActualStatus!='visible') {
-            echo 'setTimeout("hideShowMenu(true,true);",2000);';
-          }
-        } */        
+        $firstPage=$_REQUEST['directAccessPage'];      
         for ($i=1;$i<=9;$i++) {
           $pName='p'.$i.'name';
           $pValue='p'.$i.'value';
@@ -487,8 +480,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
         }
       }
       $hideMenu=false;
-      if (Parameter::getUserParameter('hideMenu') and Parameter::getUserParameter('hideMenu')!='NO'){
-        //echo 'setTimeout("hideShowMenu(true,true);",1);';
+      if (Parameter::getUserParameter('hideMenu') and Parameter::getUserParameter('hideMenu')!='NO' and ! getSessionValue('showModule')){
         echo 'hideShowMenu(true,true);';
         $hideMenu=true;
       }
@@ -663,6 +655,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   <?php
   // Module
   if (getSessionValue('showModule')) {
+    $showModuleScreen=true;
     include "../view/moduleView.php";
   }
   ?>
@@ -679,7 +672,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   <div id="menuBarShow" class="dijitAccordionTitle2 reportTableColumnHeader2 largeReportHeader2"  style="position:absolute;left:0px; top:81px; bottom:0px; width:<?php echo $IconSizeMenuHide2;?>px;">
     <?php include "menuHideMenu.php"; ?> 
     
-    <div id="hideMenuBarShowButton" style="cursor:pointer;position:absolute; right:-22px; bottom:2px;z-index:949">
+   <div id="hideMenuBarShowButton" style="cursor:pointer;position:absolute; right:-22px; bottom:2px;z-index:949;display:<?php echo (isset($showModuleScreen))?"none":"block";?>;">
 		  <a onClick="hideMenuBarShowMode();" id="buttonSwitchedMenuBarShow" title="" >
 		    <span style='top:0px;display:inline-block;width:22px;height:22px;'>
 		      <div class='iconHideStream22' style='' >&nbsp;</div>
@@ -688,12 +681,14 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 		</div>
   </div> 
   
-  <div id="hideMenuBarShowButton2" style="cursor:pointer;position:absolute; display:block; left:<?php echo $IconSizeMenuHide2 ?>; bottom:2px;z-index:999998">
+  <div id="hideMenuBarShowButton2" style="cursor:pointer;position:absolute;display:<?php echo (isset($showModuleScreen))?"none":"block";?>;left:<?php echo $IconSizeMenuHide2 ?>; bottom:2px;z-index:999998">
+	<?php if (! isset($showModuleScreen)) {?>
 	  <a onClick="hideMenuBarShowMode();" id="buttonSwitchedMenuBarShow" title="" >
 	    <span style='top:0px;display:inline-block;width:22px;height:22px;'>
 	      <div class='iconHideStream22' style='' >&nbsp;</div>
 	    </span>
 	  </a>
+	<?php }?>  
 	</div>
 	
   <div id="globalContainer" class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">    
@@ -1008,7 +1003,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       if (sessionValueExists('MenuBarLeft') and getSessionValue('MenuBarLeft')=='false'){
         $hideMenuLeftParam = 'true';
       }
-        if($hideMenuLeftParam == 'false') { ?>
+        if($hideMenuLeftParam == 'false' and ! isset($showModuleScreen)) { ?>
         <script type="text/javascript">
            hideShowMenu(true);
         </script>
