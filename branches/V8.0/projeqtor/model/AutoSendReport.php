@@ -204,7 +204,12 @@ class AutoSendReport extends SqlElement{
             	    <link rel="stylesheet" type="text/css" href="../view/css/projeqtorPrint.css" />
             	    <link rel="stylesheet" type="text/css" href="../view/css/projeqtorFlat.css" />
 	              </head><body>';
-    include '../report/'.$file;
+	  // Important : swicth user to the one who generated the report
+	  $cronUser=getSessionUser();
+	  setSessionUser(new User($this->idResource));
+	  include '../report/'.$file;
+	  // Important : swicth user back to Cron (admin)
+	  setSessionUser($cronUser);
     echo '</body></html>';
     $result = ob_get_clean();
     ob_clean();
