@@ -35,8 +35,8 @@ scriptLog('   ->/view/imputationValidationList.php');
 $user=getSessionUser();
 $userName="";
 $userTeam="";
-$showValidated = '';
-$showSubmitted = '';
+$showValidated = getSessionValue('showValidatedWork','');
+$showSubmitted = getSessionValue('showSubmitWork','');
 $currentDay=date('Y-m-d');
 
 if(sessionValueExists('weekImputationValidation')){
@@ -96,14 +96,14 @@ $lastDay = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay
                 style="width: 150px;"
                 name="userName" id="userName"
                 <?php echo autoOpenFilteringSelect();?>
-                value="<?php if(sessionValueExists('userName')){
-                              $userName =  getSessionValue('userName');
+                value="<?php if(sessionValueExists('userNameValidation')){
+                              $userName =  getSessionValue('userNameValidation');
                               echo $userName;
                              }else{
                               echo $userName;
                              }?>">
                   <script type="dojo/method" event="onChange" >
-                    saveDataToSession("userName",dijit.byId('userName').get('value'),false);
+                    saveDataToSession("userNameValidation",dijit.byId('userName').get('value'),false);
                     refreshImputationValidation(null);
                   </script>
                   <option value=""></option>
@@ -158,12 +158,12 @@ $lastDay = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay
                     style="width: 150px;"
                     name="idTeam" id="idTeam"
                     <?php echo autoOpenFilteringSelect();?>
-                    value="<?php if(sessionValueExists('idTeam')){
-                                  echo getSessionValue('idTeam');
+                    value="<?php if(sessionValueExists('idTeamValidation')){
+                                  echo getSessionValue('idTeamValidation');
                                   $userTeam = getSessionValue('idTeam');
                                  }?>">
                     <script type="dojo/method" event="onChange" >
-                      saveDataToSession("idTeam",dijit.byId('idTeam').get('value'),false);
+                      saveDataToSession("idTeamValidation",dijit.byId('idTeam').get('value'),false);
                       refreshImputationValidation(null);
                     </script>
                     <?php htmlDrawOptionForReference('idTeam', null)?>
@@ -178,17 +178,17 @@ $lastDay = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay
             <td>
               <label for="showUnvalidated" class="notLabel" style="text-shadow: 0px 0px;"><?php echo i18n('colShowUnvalidated');?></label>
               <input type="radio" data-dojo-type="dijit/form/RadioButton"
-              <?php if ($showValidated=='0') { echo "checked='checked'"; }?>
+              <?php if ($showValidated==='0') { echo "checked='checked'"; }?>
                 id="showUnvalidated" name="showValidatedWork" value="0" 
                 onchange="refreshImputationValidation(null);"/>
               <label for="showValidated" class="notLabel" style="text-shadow: 0px 0px;"><?php echo i18n('colShowValidated');?></label>
               <input type="radio" data-dojo-type="dijit/form/RadioButton"
-              <?php if ($showValidated=='1') { echo "checked='checked'"; }?>
+              <?php if ($showValidated==='1') { echo "checked='checked'"; }?>
                 id="showValidated" name="showValidatedWork" value="1"
                 onchange="refreshImputationValidation(null);"/>
               <label for="showAllValidated" class="notLabel" style="text-shadow: 0px 0px;"><?php echo i18n('colShowAll');?></label>
               <input type="radio" data-dojo-type="dijit/form/RadioButton"
-              <?php if ($showValidated=='') { echo "checked='checked'"; }?>
+              <?php if ($showValidated==='') { echo "checked='checked'"; }?>
                 id="showAllValidated" name="showValidatedWork" value=""
                 onchange="refreshImputationValidation(null);"/>
            </td>
@@ -197,17 +197,17 @@ $lastDay = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay
             <td>
               <label for="showUnsubmitWork" class="notLabel" style="text-shadow: 0px 0px;"><?php echo i18n('colShowUnsubmitWork');?></label>
               <input type="radio" data-dojo-type="dijit/form/RadioButton"
-              <?php if ($showSubmitted=='0') { echo "checked='checked'"; }?>
+              <?php if ($showSubmitted==='0') { echo "checked='checked'"; }?>
                 id="showUnsubmitWork" name="showSubmitWork" value="0" 
                 onchange="refreshImputationValidation(null);"/>
               <label for="showSubmitted" class="notLabel" style="text-shadow: 0px 0px;"><?php echo i18n('colShowSubmitWork');?></label>
               <input type="radio" data-dojo-type="dijit/form/RadioButton"
-              <?php if ($showSubmitted=='1') { echo "checked='checked'"; }?>
+              <?php if ($showSubmitted==='1') { echo "checked='checked'"; }?>
                 id="showSubmitted" name="showSubmitWork" value="1"
                 onchange="refreshImputationValidation(null);"/>
               <label for="showAllSubmitted" class="notLabel" style="text-shadow: 0px 0px;"><?php echo i18n('colShowAll');?></label>
               <input type="radio" data-dojo-type="dijit/form/RadioButton"
-              <?php if ($showSubmitted=='') { echo "checked='checked'"; }?>
+              <?php if ($showSubmitted==='') { echo "checked='checked'"; }?>
                 id="showAllSubmitted" name="showSubmitWork" value=""
                 onchange="refreshImputationValidation(null);"/>
             </td>
@@ -220,7 +220,10 @@ $lastDay = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay
   </div>
   <div id="imputationValidationWorkDiv" name="imputationValidationWorkDiv" dojoType="dijit.layout.ContentPane" region="center" >
     <div id="imputListDiv" name="imputListDiv">
-      <?php ImputationValidation::drawUserWorkList($userName, $userTeam, $firstDay);?>
+      <?php 
+      RequestHandler::setValue('showSubmitWork', $showSubmitted);
+      RequestHandler::setValue('showValidatedWork', $showValidated);
+      ImputationValidation::drawUserWorkList($userName, $userTeam, $firstDay);?>
     </div>
   </div>  
 </div>
