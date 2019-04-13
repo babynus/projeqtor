@@ -1904,6 +1904,9 @@ function finaliseButtonDisplay(specificWidgetArray) {
       enableWidget('printButton');
       enableWidget('printButtonPdf');
     }
+    if (dojo.byId('objectClass') && dojo.byId('objectClass').value=='Work') {
+      enableWidget('refreshButton');
+    }
   }
   buttonRightLock();
 }
