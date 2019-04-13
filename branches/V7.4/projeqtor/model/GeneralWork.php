@@ -250,11 +250,11 @@ class GeneralWork extends SqlElement {
     self::$workCoef=$coef;
   }
   
-  public static function displayWork($val) {
+  public static function displayWork($val,$rounding=2) {
     self::setWorkUnit();
     $coef=self::$workCoef;
     if (!$val) return 0;
-    return round(floatval($val)*$coef,3);
+    return round(floatval($val)*$coef,$rounding); // Rounding to 3 leads to rounding errors in Reports
   }
   
   public static function displayWorkWithUnit($val) {
