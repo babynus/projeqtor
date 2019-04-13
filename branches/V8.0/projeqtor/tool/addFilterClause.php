@@ -274,7 +274,7 @@ if ($idFilterAttribute and $idFilterOperator) {
     $arrayDisp["value"]=htmlEncode(i18n('sort' . ucfirst($filterSortValue) ));
     $arraySql["value"]=$filterSortValue;
   } else if ($idFilterOperator=="<=now+") {
-    $arrayDisp["operator"]="<= " . i18n('today') . (($filterValue>0)?' +':' ');
+    $arrayDisp["operator"]="<= " . i18n('today') . (($filterValue>0 or 1)?' +':' ');
     $arraySql["operator"]="<=";
     $arrayDisp["value"]=htmlEncode(intval($filterValue)) . ' ' . i18n('days');
     if (preg_match('/[^\-0-9]/', $filterValue) == true) {
@@ -286,7 +286,7 @@ if ($idFilterAttribute and $idFilterOperator) {
       $arraySql["value"]= "ADDDATE(NOW(), INTERVAL (" . intval($filterValue) . ") DAY)";
     }
   } else if ($idFilterOperator==">=now+") {  
-    $arrayDisp["operator"]=">= " . i18n('today') . (($filterValue>0)?' +':' ');
+    $arrayDisp["operator"]=">= " . i18n('today') . (($filterValue>0 or 1)?' +':' ');
     $arraySql["operator"]=">=";
     $arrayDisp["value"]=htmlEncode(intval($filterValue)) . ' ' . i18n('days');
     if (preg_match('/[^\-0-9]/', $filterValue) == true) {
