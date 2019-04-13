@@ -262,13 +262,13 @@ foreach($tab as $proj=>$projet) {
         $val=$tab[$proj][$resource][$date];
       }
       echo '<td class="reportTableData">';
-      echo Work::displayWork($val);
+      echo Work::displayWork($val,2);
       $sum+=$val;
       $arrSum[$date]+=$val;
       echo '</td>';
     } // fin du parcours des mois
     echo '<td class="reportTableColumnHeader">';
-    echo Work::displayWork($sum);
+    echo Work::displayWork($sum,2);
     echo '</td>';
    
     echo '</tr>';
