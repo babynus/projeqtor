@@ -159,7 +159,8 @@ for ($i=1;$i<=2;$i++) {
   	$line=array_change_key_case($line,CASE_LOWER);
     $date=$line['scale'];
     $proj=$line['idproject'];
-    $work=$line['sumwork'];     //$work=round($line['sumwork'],2);
+    $work=$line['sumwork'];     
+    //$work=round($line['sumwork'],2);
     $ress=$line['idresource'];	
 
 	$val = 0;
