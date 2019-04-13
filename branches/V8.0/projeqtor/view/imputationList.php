@@ -324,7 +324,6 @@ if(sessionValueExists('listShowIdleTimesheet')and getSessionValue('listShowIdleT
               </button>              
               <button id="undoButton" dojoType="dijit.form.Button" showlabel="false"
                title="<?php echo i18n('buttonUndoImputation');?>"
-               "disabled"
                iconClass="dijitButtonIcon dijitButtonIconUndo"  class="detailButton">
                 <script type="dojo/connect" event="onClick" args="evt">
                   formChangeInProgress=false;
