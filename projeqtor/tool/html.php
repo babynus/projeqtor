@@ -102,7 +102,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     $critVal=$listPrf;
     // Attention, this case will then use standard process$table is not retreived yet)
   }
-  if (($col=='idResource' or $col=='idResourceAll' or $col=='idAccountable' or $col=='idResponsible') and $critFld=='idProject') {
+  if (($col=='idResource' or $col=='idResourceAll' or $col=='idAccountable' or $col=='idResponsible' or $col=='idContact') and $critFld=='idProject') {
     // List of "affectable" with restriction to project : restrict on allocation to project (object Affectation)
   	$prj=new Project($critVal, true);
     $lstTopPrj=$prj->getTopProjectList(true);
