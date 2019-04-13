@@ -509,6 +509,83 @@ function initPurgeLeaveSystemElements($leavesSystemActiv) {
                                             getLastOperationStatus($result));
             }            
         }
+        // Create a workflow for the leave system
+        $wf=SqlElement::getSingleSqlElementFromCriteria('Workflow', array('name'=>i18n("colIsLeaveMngWorkflow")));
+        if (! $wf->id) {
+          $wf=new Workflow(); 
+          $wf->name=i18n("colIsLeaveMngWorkflow");
+          $wf->sortOrder=999;
+          $wf->save();
+          $prf=new Profile();
+          $prfListAll=SqlList::getList('Profile');
+          $prfAdmin=array();
+          $prfList=$prf->getSqlElementsFromCriteria(array('profileCode'=>'ADM'),null,null,'id asc');
+          foreach ($prfList as $prfTmp) {
+            $prfAdmin[$prfTmp->id]=$prfTmp->id;
+          }
+          $prfLeader=array();
+          $prfList=$prf->getSqlElementsFromCriteria(array('profileCode'=>'PL'),null,null,'id asc');
+          foreach ($prfList as $prfTmp) {
+            $prfLeader[$prfTmp->id]=$prfTmp->id;
+          }
+          $prfMember=array();
+          $prfList=$prf->getSqlElementsFromCriteria(array('profileCode'=>'TM'),null,null,'id asc');
+          foreach ($prfList as $prfTmp) {
+            $prfMember[$prfTmp->id]=$prfTmp->id;
+          }
+          $stList=SqlList::getList('Status');
+          foreach($stList as $keySt=>$nameSt) {
+            $stRecorded=$keySt;
+            break;
+          }
+          $st=new Status();
+          $st->name=i18n('colSubmitted');
+          $st->color='#0000ff';
+          $st->setSubmittedLeave=1;
+          $st->sortOrder=990;
+          $st->save();
+          $stSubmitted=$st->id;
+          $st=new Status();
+          $st->name=i18n('colAccepted');
+          $st->color='#00ff00';
+          $st->setAcceptedLeave=1;
+          $st->sortOrder=992;
+          $st->save();
+          $stAccepted=$st->id;
+          $st=new Status();
+          $st->name=i18n('colRejected');
+          $st->color='#ff0000';
+          $st->setRejectedLeave=1;
+          $st->sortOrder=994;
+          $st->save();
+          $stRejected=$st->id;
+          foreach($prfListAll as $idPrf=>$namePrf) {
+            $wfs=new WorkflowStatus();
+            $wfs->idWorkflow=$wf->id;
+            $wfs->idStatusFrom=$stRecorded;
+            $wfs->idStatusTo=$stSubmitted;
+            $wfs->idProfile=$idPrf;
+            $wfs->allowed=1;
+            $wfs->save();
+            if (isset($prfAdmin[$idPrf]) or isset($prfLeader[$idPrf])) {
+              $wfs=new WorkflowStatus();
+              $wfs->idWorkflow=$wf->id;
+              $wfs->idStatusFrom=$stSubmitted;
+              $wfs->idStatusTo=$stAccepted;
+              $wfs->idProfile=$idPrf;
+              $wfs->allowed=1;
+              $wfs->save();
+              $wfs=new WorkflowStatus();
+              $wfs->idWorkflow=$wf->id;
+              $wfs->idStatusFrom=$stSubmitted;
+              $wfs->idStatusTo=$stRejected;
+              $wfs->idProfile=$idPrf;
+              $wfs->allowed=1;
+              $wfs->save();
+            }
+          }
+        }
+        $theWorkFlowId=$wf->id;
         
         // Create the project dedicated to the leave System
         $critType = array("scope" => 'Project', "code" => 'ADM');
@@ -565,7 +642,7 @@ function initPurgeLeaveSystemElements($leavesSystemActiv) {
         $tp->name = i18n("colType"). " - ". i18n('leave');
         $tp->scope = 'Activity';
         $tp->sortOrder=100;
-        $tp->idWorkflow = 1; // $theWorkFlowId;
+        $tp->idWorkflow = $theWorkFlowId;
         $tp->code = 'LEAVESYST';
         $result = $tp->simpleSave();
         if (getLastOperationStatus($result)!="OK") {
@@ -584,7 +661,7 @@ function initPurgeLeaveSystemElements($leavesSystemActiv) {
         $tp->name = 'Administrativ';
         $tp->scope = 'Manager';
         $tp->sortOrder=100;
-        $tp->idWorkflow = 1; // $theWorkFlowId;
+        $tp->idWorkflow = $theWorkFlowId;
         $tp->code = 'LEAVESYST';
         $result = $tp->simpleSave();
         if (getLastOperationStatus($result)!="OK") {
@@ -602,7 +679,7 @@ function initPurgeLeaveSystemElements($leavesSystemActiv) {
         $tp->name = 'Hierarchical';
         $tp->scope = 'Manager';
         $tp->sortOrder=101;
-        $tp->idWorkflow = 1; // $theWorkFlowId;
+        $tp->idWorkflow = $theWorkFlowId;
         $tp->code = 'LEAVESYST';
         $result = $tp->simpleSave();
         if (getLastOperationStatus($result)!="OK") {
@@ -627,7 +704,7 @@ function initPurgeLeaveSystemElements($leavesSystemActiv) {
         $emplCntType->idle=0;
         $emplCntType->name = i18n("DefaultEmploymentContractType");
         $emplCntType->idRecipient= null;
-//        $emplCntType->idWorkflow = $theWorkFlowId;
+        $emplCntType->idWorkflow = $theWorkFlowId;
         $emplCntType->idWorkflow = null;
         $emplCntType->idManagementType = null;
         $emplCntType->isDefault = 1;
