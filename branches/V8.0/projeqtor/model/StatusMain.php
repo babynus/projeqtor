@@ -143,10 +143,10 @@ class StatusMain extends SqlElement {
         // UNSYNCHRONIZED => SYNCHRONIZED  
         // ==============================  
         // Update leaves that where unsynchronized and are synchronized now
-        $whereClause = "idStatus = ".$this->id." AND statusSetLeaveChange=1 AND statusOutOfWorkflow=0 AND (";
+        $whereClause = "idStatus = ".$this->id." AND statusSetLeaveChange=1 AND statusOutOfWorkflow=0 AND (1=1";
         // SUBMITTED
         if ($this->setSubmittedLeave != $old->setSubmittedLeave) {
-            $whereClause .= "submitted=".($this->setSubmittedLeave==1?1:0);            
+            $whereClause .= " AND submitted=".($this->setSubmittedLeave==1?1:0);            
 }
         // ACCEPTED
         if ($this->setAcceptedLeave != $old->setAcceptedLeave) {
@@ -166,10 +166,10 @@ class StatusMain extends SqlElement {
         // SYNCHRONIZED => UNSYNCHRONIZED  
         // ==============================          
         // Check if leaves with this status are unsynchronized with setXXXXLeave
-        $whereClause = "idStatus = ".$this->id." AND statusSetLeaveChange=0 AND statusOutOfWorkflow = 0 AND (";
+        $whereClause = "idStatus = ".$this->id." AND statusSetLeaveChange=0 AND statusOutOfWorkflow = 0 AND (1=0 ";
         // SUBMITTED
         if ($this->setSubmittedLeave != $old->setSubmittedLeave) {
-            $whereClause .= "submitted=".($this->setSubmittedLeave==1?0:1);            
+            $whereClause .= " OR submitted=".($this->setSubmittedLeave==1?0:1);            
         }
         // ACCEPTED
         if ($this->setAcceptedLeave != $old->setAcceptedLeave) {
