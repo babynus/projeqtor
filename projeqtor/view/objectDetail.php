@@ -2124,16 +2124,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             //gautier #2620
             if ($obj->id) {
               $critFld='idProject';
-              $projParent = new Project($obj->idProject,true);
-              $getParentProject = true;
-              while ($getParentProject == true){
-                if($projParent->idProject){
-                  $projParent = new Project($projParent->idProject);
-                }else{
-                  $getParentProject = false;
-                }
-              }
-              $critVal=$projParent->id;
+              $critVal=$obj->idProject;
             } else if ($obj->isAttributeSetToField('idProject', 'required') or (sessionValueExists('project') and getSessionValue('project')!='*')) {
               if ($defaultProject) {
                 $critFld='idProject';
