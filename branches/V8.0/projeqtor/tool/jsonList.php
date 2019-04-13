@@ -166,7 +166,31 @@ if ($type == 'empty') {
     $class = substr ( $dataType, 2 );
   }
   if ($dataType == 'idContact' and $critField == 'idProject') {
-    $list = SqlList::getListWithCrit ( 'Contact', array($critField => $critValue) );
+    //$list = SqlList::getListWithCrit ( 'Contact', array($critField => $critValue) );
+    $prj=new Project($critValue, true);
+    $lstTopPrj=$prj->getTopProjectList(true);
+    $in=transformValueListIntoInClause($lstTopPrj);
+    $today=date('Y-m-d');
+    $where="idProject in " . $in;
+    $where.=" and idle=0";
+    $where.=" and (endDate is null or endDate>='$today')";
+    $aff=new Affectation();
+    $listAff=$aff->getSqlElementsFromCriteria(null,null, $where);
+    $nbRows=0;
+    $list=array();
+    if ($selected) {
+      $list[$selected]=SqlList::getNameFromId('Affectable', $selected);
+    }
+    foreach ($listAff as $aff) {
+      if (! array_key_exists($aff->idResource, $list)) {
+        $id=$aff->idResource;
+        $name=SqlList::getNameFromId(substr($dataType, 2), $id);
+        if ($name!=$id) {
+          $list[$id]=$name;
+        }
+      }
+    }
+    asort($list);
   } else if ($dataType == 'idProject' and securityGetAccessRight ( 'menuProject', 'read' ) != 'ALL') {
     $user = getSessionUser ();
     $list = $user->getVisibleProjects ();
