@@ -1762,14 +1762,14 @@ class LeaveMain extends SqlElement {
         array_push($receivers, $manager);
         // requester = Employee
         $requester = $employee;
-        $who = i18n("employee");
+        $who = i18n("Employee");
     } elseif ($this->idUser == $manager->id) { // Creator = Manager
         // receiver = Employee
         $employee->__Ame = "E";
         array_push($receivers, $employee);
         // requester = Manager
         $requester = $manager;            
-        $who = i18n("manager");
+        $who = i18n("Manager");
     } elseif ($this->idUser == $leavesAdmin->id) { // Creator = Leaves Admin (that is'nt the actual employee's manager)
         // receivers = Employee - Manager
         $manager->__Ame = "M";

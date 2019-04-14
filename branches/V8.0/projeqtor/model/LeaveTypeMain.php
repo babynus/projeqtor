@@ -112,25 +112,6 @@ class LeaveTypeMain extends SqlElement {
     */ 
     function __construct($id = NULL, $withoutDependentObjects=false) {
         parent::__construct($id,$withoutDependentObjects);
-     
-        if ($this->id>0) {
-            unset($this->_sec_contractualValues);
-            unset($this->_spe_earnedPeriod);
-            unset($this->_spe_isAnticipated);
-            unset($this->_spe_isJustifiable);
-            unset($this->_spe_isUnpayedAllowed);
-            unset($this->_spe_isIntegerQuotity);
-            unset($this->_spe_nbDaysAfterNowLeaveDemandIsAllowed);
-            unset($this->_spe_nbDaysBeforeNowLeaveDemandIsAllowed);
-            unset($this->_spe_periodDuration);
-            unset($this->_spe_quantity);
-            unset($this->_spe_startDayPeriod);
-            unset($this->_spe_startMonthPeriod);
-            unset($this->_spe_validityDuration);
-            unset($this->_spe_onAllOrDefault);         
-            unset($this->_spe_explaination);
-        }
-     
     }
 
    /** ==========================================================================
@@ -711,7 +692,7 @@ class LeaveTypeMain extends SqlElement {
         }
         $result = '<table style="width:100%">';
         $result .= "    <tr>";
-        $result .= '        <th class="assignHeader" style="width:20%">'.i18n("by")."</th>";
+        $result .= '        <th class="assignHeader" style="width:20%">'.i18n("colNotificationReceivers")."</th>";
         $result .= '        <th class="assignHeader" style="width:20%">'.i18n("creation")."</th>";
         $result .= '        <th class="assignHeader" style="width:20%">'.i18n("updating")."</th>";
         $result .= '        <th class="assignHeader" style="width:20%">'.i18n("deleting")."</th>";
@@ -725,28 +706,28 @@ class LeaveTypeMain extends SqlElement {
             $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
             $result .=                   $clReadOnly;
             $result .=                   (strpos($this->notificationOnCreate,"M")===false?"":" checked").'>';
-            $result .= '            </div>&nbsp'.i18n("manager");
+            $result .= '            </div>&nbsp'.i18n("Manager");
             $result .= '        </td>';
             $result .= '        <td class="linkData">';
             $result .= '            <div id="_spe_notificationOnUpdateManager" name = "_spe_notificationOnUpdateManager" ';
             $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
             $result .=                   $clReadOnly;
             $result .=                   (strpos($this->notificationOnUpdate,"M")===false?"":" checked").'>';
-            $result .= '            </div>&nbsp'.i18n("manager");
+            $result .= '            </div>&nbsp'.i18n("Manager");
             $result .= '        </td>';
             $result .= '        <td class="linkData">';
             $result .= '            <div id="_spe_notificationOnDeleteManager" name = "_spe_notificationOnDeleteManager" ';
             $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
             $result .=                   $clReadOnly;
             $result .=                   (strpos($this->notificationOnDelete,"M")===false?"":" checked").'>';
-            $result .= '            </div>&nbsp'.i18n("manager");
+            $result .= '            </div>&nbsp'.i18n("Manager");
             $result .= '        </td>';
             $result .= '        <td class="linkData">';
             $result .= '            <div id="_spe_notificationOnTreatmentManager" name = "_spe_notificationOnTreatmentManager" ';
             $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
             $result .=                   $clReadOnly;
             $result .=                   (strpos($this->notificationOnTreatment,"M")===false?"":" checked").'>';
-            $result .= '            </div>&nbsp'.i18n("manager");
+            $result .= '            </div>&nbsp'.i18n("Manager");
             $result .= '        </td>';
             $result .= "    </tr>";
             $result .= "    <tr>";
@@ -755,61 +736,61 @@ class LeaveTypeMain extends SqlElement {
             $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
             $result .=                   $clReadOnly;
             $result .=                   (strpos($this->notificationOnCreate,"E")===false?"":" checked").'>';
-            $result .= '            </div>&nbsp'.i18n("employee");
+            $result .= '            </div>&nbsp'.i18n("Employee");
             $result .= '        </td>';
             $result .= '        <td class="linkData">';
             $result .= '            <div id="_spe_notificationOnUpdateEmployee" name = "_spe_notificationOnUpdateEmployee" ';
             $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
             $result .=                   $clReadOnly;
             $result .=                   (strpos($this->notificationOnUpdate,"E")===false?"":" checked").'>';
-            $result .= '            </div>&nbsp'.i18n("employee");
+            $result .= '            </div>&nbsp'.i18n("Employee");
             $result .= '        </td>';
             $result .= '        <td class="linkData">';
             $result .= '            <div id="_spe_notificationOnDeleteEmployee" name = "_spe_notificationOnDeleteEmployee" ';
             $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
             $result .=                   $clReadOnly;
             $result .=                   (strpos($this->notificationOnDelete,"E")===false?"":" checked").'>';
-            $result .= '            </div>&nbsp'.i18n("employee");
+            $result .= '            </div>&nbsp'.i18n("Employee");
             $result .= '        </td>';
             $result .= '        <td class="linkData">';
             $result .= '            <div id="_spe_notificationOnTreatmentEmployee" name = "_spe_notificationOnTreatmentEmployee" ';
             $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
             $result .=                   $clReadOnly;
             $result .=                   (strpos($this->notificationOnTreatment,"E")===false?"":" checked").'>';
-            $result .= '            </div>&nbsp'.i18n("employee");
+            $result .= '            </div>&nbsp'.i18n("Employee");
             $result .= '        </td>';
             $result .= "    </tr>";
         }
         
         $result .= "    <tr>";
-        $result .= '        <td rowspan="2" class="assignHeader" style="width:20%">'.i18n("alert")."</td>";
+        $result .= '        <td rowspan="2" class="assignHeader" style="width:20%">'.i18n("displayAlert")."</td>";
         $result .= '        <td class="linkData">';
         $result .= '            <div id="_spe_alertOnCreateManager" name = "_spe_alertOnCreateManager" ';
         $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
         $result .=                   $clReadOnly;
         $result .=                   (strpos($this->alertOnCreate,"M")===false?"":" checked").'>';
-        $result .= '            </div>&nbsp'.i18n("manager");
+        $result .= '            </div>&nbsp'.i18n("Manager");
         $result .= '        </td>';
         $result .= '        <td class="linkData">';
         $result .= '            <div id="_spe_alertOnUpdateManager" name = "_spe_alertOnUpdateManager" ';
         $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
         $result .=                   $clReadOnly;
         $result .=                   (strpos($this->alertOnUpdate,"M")===false?"":" checked").'>';
-        $result .= '            </div>&nbsp'.i18n("manager");
+        $result .= '            </div>&nbsp'.i18n("Manager");
         $result .= '        </td>';
         $result .= '        <td class="linkData">';
         $result .= '            <div id="_spe_alertOnDeleteManager" name = "_spe_alertOnDeleteManager" ';
         $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox" onChange="formChanged();"';
         $result .=                   $clReadOnly;
         $result .=                   (strpos($this->alertOnDelete,"M")===false?"":" checked").'>';
-        $result .= '            </div>&nbsp'.i18n("manager");
+        $result .= '            </div>&nbsp'.i18n("Manager");
         $result .= '        </td>';
         $result .= '        <td class="linkData">';
         $result .= '            <div id="_spe_alertOnTreatmentManager" name = "_spe_alertOnTreatmentManager" ';
         $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
         $result .=                   $clReadOnly;
         $result .=                   (strpos($this->alertOnTreatment,"M")===false?"":" checked").'>';
-        $result .= '            </div>&nbsp'.i18n("manager");
+        $result .= '            </div>&nbsp'.i18n("Manager");
         $result .= '        </td>';
         $result .= "    </tr>";
         $result .= "    <tr>";
@@ -818,60 +799,60 @@ class LeaveTypeMain extends SqlElement {
         $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
         $result .=                   $clReadOnly;
         $result .=                   (strpos($this->alertOnCreate,"E")===false?"":" checked").'>';
-        $result .= '            </div>&nbsp'.i18n("employee");
+        $result .= '            </div>&nbsp'.i18n("Employee");
         $result .= '        </td>';
         $result .= '        <td class="linkData">';
         $result .= '            <div id="_spe_alertOnUpdateEmployee" name = "_spe_alertOnUpdateEmployee" ';
         $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
         $result .=                   $clReadOnly;
         $result .=                   (strpos($this->alertOnUpdate,"E")===false?"":" checked").'>';
-        $result .= '            </div>&nbsp'.i18n("employee");
+        $result .= '            </div>&nbsp'.i18n("Employee");
         $result .= '        </td>';
         $result .= '        <td class="linkData">';
         $result .= '            <div id="_spe_alertOnDeleteEmployee" name = "_spe_alertOnDeleteEmployee" ';
         $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
         $result .=                   $clReadOnly;
         $result .=                   (strpos($this->alertOnDelete,"E")===false?"":" checked").'>';
-        $result .= '            </div>&nbsp'.i18n("employee");
+        $result .= '            </div>&nbsp'.i18n("Employee");
         $result .= '        </td>';
         $result .= '        <td class="linkData">';
         $result .= '            <div id="_spe_alertOnTreatmentEmployee" name = "_spe_alertOnTreatmentEmployee" ';
         $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
         $result .=                   $clReadOnly;
         $result .=                   (strpos($this->alertOnTreatment,"E")===false?"":" checked").'>';
-        $result .= '            </div>&nbsp'.i18n("employee");
+        $result .= '            </div>&nbsp'.i18n("Employee");
         $result .= '        </td>';
         $result .= "    </tr>";
         
         $result .= "    <tr>";
-        $result .= '        <td rowspan="2" class="assignHeader" style="width:20%">'.i18n("email")."</td>";
+        $result .= '        <td rowspan="2" class="assignHeader" style="width:20%">'.i18n("displayMail")."</td>";
         $result .= '        <td class="linkData">';
         $result .= '            <div id="_spe_emailOnCreateManager" name = "_spe_emailOnCreateManager" ';
         $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
         $result .=                   $clReadOnly;
         $result .=                   (strpos($this->emailOnCreate,"M")===false?"":" checked").'>';
-        $result .= '            </div>&nbsp'.i18n("manager");
+        $result .= '            </div>&nbsp'.i18n("Manager");
         $result .= '        </td>';
         $result .= '        <td class="linkData">';
         $result .= '            <div id="_spe_emailOnUpdateManager" name = "_spe_emailOnUpdateManager" ';
         $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
         $result .=                   $clReadOnly;
         $result .=                   (strpos($this->emailOnUpdate,"M")===false?"":" checked").'>';
-        $result .= '            </div>&nbsp'.i18n("manager");
+        $result .= '            </div>&nbsp'.i18n("Manager");
         $result .= '        </td>';
         $result .= '        <td class="linkData">';
         $result .= '            <div id="_spe_emailOnDeleteManager" name = "_spe_emailOnDeleteManager" ';
         $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
         $result .=                   $clReadOnly;
         $result .=                   (strpos($this->emailOnDelete,"M")===false?"":" checked").'>';
-        $result .= '            </div>&nbsp'.i18n("manager");
+        $result .= '            </div>&nbsp'.i18n("Manager");
         $result .= '        </td>';
         $result .= '        <td class="linkData">';
         $result .= '            <div id="_spe_emailOnTreatmentManager" name = "_spe_emailOnTreatmentManager" ';
         $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
         $result .=                   $clReadOnly;
         $result .=                   (strpos($this->emailOnTreatment,"M")===false?"":" checked").'>';
-        $result .= '            </div>&nbsp'.i18n("manager");
+        $result .= '            </div>&nbsp'.i18n("Manager");
         $result .= '        </td>';
         $result .= "    </tr>";
         $result .= "    <tr>";
@@ -880,28 +861,28 @@ class LeaveTypeMain extends SqlElement {
         $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
         $result .=                   $clReadOnly;
         $result .=                   (strpos($this->emailOnCreate,"E")===false?"":" checked").'>';
-        $result .= '            </div>&nbsp'.i18n("employee");
+        $result .= '            </div>&nbsp'.i18n("Employee");
         $result .= '        </td>';
         $result .= '        <td class="linkData">';
         $result .= '            <div id="_spe_emailOnUpdateEmployee" name = "_spe_emailOnUpdateEmployee" ';
         $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
         $result .=                   $clReadOnly;
         $result .=                   (strpos($this->emailOnUpdate,"E")===false?"":" checked").'>';
-        $result .= '            </div>&nbsp'.i18n("employee");
+        $result .= '            </div>&nbsp'.i18n("Employee");
         $result .= '        </td>';
         $result .= '        <td class="linkData">';
         $result .= '            <div id="_spe_emailOnDeleteEmployee" name = "_spe_emailOnDeleteEmployee" ';
         $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
         $result .=                   $clReadOnly;
         $result .=                   (strpos($this->emailOnDelete,"E")===false?"":" checked").'>';
-        $result .= '            </div>&nbsp'.i18n("employee");
+        $result .= '            </div>&nbsp'.i18n("Employee");
         $result .= '        </td>';
         $result .= '        <td class="linkData">';
         $result .= '            <div id="_spe_emailOnTreatmentEmployee" name = "_spe_emailOnTreatmentEmployee" ';
         $result .= '                 dojoType="dijit.form.CheckBox" type="checkbox"  onChange="formChanged();"';
         $result .=                   $clReadOnly;
         $result .=                   (strpos($this->emailOnTreatment,"E")===false?"":" checked").'>';
-        $result .= '            </div>&nbsp'.i18n("employee");
+        $result .= '            </div>&nbsp'.i18n("Employee");
         $result .= '        </td>';
         $result .= "    </tr>";
         $result .= "</table>";
@@ -957,15 +938,15 @@ class LeaveTypeMain extends SqlElement {
             break;
         case 'startMonthPeriod':
             $result = '<tr><td>';
-            $result .= '<label class="label" for="_spe_startMonthPeriod">'.i18n("startMonthPeriod").'&nbsp:</label>';
+            $result .= '<label class="label longLabel" for="_spe_startMonthPeriod">'.i18n("colStartMonthPeriod").'&nbsp:</label>';
             $result .= '</td><td>';
-            $result .= '<input class="input" data-dojo-type="dijit/form/NumberSpinner" id="_spe_startMonthPeriod" value="" ';
+            $result .= '<input class="input" data-dojo-type="dijit/form/NumberSpinner" id="_spe_startMonthPeriod" value="6" ';
             $result .= 'data-dojo-props="smallDelta:1, constraints:{min:1,max:12,places:0}" name="_spe_startMonthPeriod" style="width:100px"/>';
             $result .= '</td></tr>';
             break;
         case 'startDayPeriod':
             $result = '<tr><td>';
-            $result .= '<label class="label" for="_spe_startDayPeriod">'.i18n("startDayPeriod").'&nbsp:</label>';
+            $result .= '<label class="label longLabel" for="_spe_startDayPeriod">'.i18n("colStartDayPeriod").'&nbsp:</label>';
             $result .= '</td><td>';
             $result .= '<input class="input" data-dojo-type="dijit/form/NumberSpinner" id="_spe_startDayPeriod" value="1" ';
             $result .= 'data-dojo-props="smallDelta:1, constraints:{min:1,max:31,places:0}" name="_spe_startDayPeriod" style="width:100px"/>';
@@ -973,31 +954,31 @@ class LeaveTypeMain extends SqlElement {
             break;
         case 'periodDuration':
             $result = '<tr><td>';
-            $result .= '<label class="label" for="_spe_periodDuration">'.i18n("periodDuration").'&nbsp:</label>';
+            $result .= '<label class="label longLabel" for="_spe_periodDuration">'.i18n("colPeriodDuration").'&nbsp:</label>';
             $result .= '</td><td>';
-            $result .= '<input class="input" data-dojo-type="dijit/form/NumberSpinner" id="_spe_periodDuration" value="" ';
+            $result .= '<input class="input" data-dojo-type="dijit/form/NumberSpinner" id="_spe_periodDuration" value="12" ';
             $result .= 'data-dojo-props="smallDelta:1, constraints:{min:1,max:99999,places:0}" name="_spe_periodDuration" style="width:100px"/>';
             $result .= '</td></tr>';
             break;
         case 'quantity' :
             $result = '<tr><td>';
-            $result .= '<label class="label" for="_spe_quantity">'.i18n("quantity").'&nbsp:</label>';
+            $result .= '<label class="label longLabel" for="_spe_quantity">'.i18n("colQuantity").'&nbsp:</label>';
             $result .= '</td><td>';
-            $result .= '<input class="input" data-dojo-type="dijit/form/NumberSpinner" id="_spe_quantity" value="" ';
+            $result .= '<input class="input" data-dojo-type="dijit/form/NumberSpinner" id="_spe_quantity" value="25" ';
             $result .= 'data-dojo-props="smallDelta:0.5, largeDelta:1.0, constraints:{min:0.5,max:999.5,places:1}" name="_spe_quantity" style="width:100px"/>';
             $result .= '</td></tr>';
             break;
         case 'earnedPeriod' :
             $result = '<tr><td>';
-            $result .= '<label class="label" for="_spe_earnedPeriod">'.i18n("earnedPeriod").'&nbsp:</label>';
+            $result .= '<label class="label longLabel" for="_spe_earnedPeriod">'.i18n("colEarnedPeriod").'&nbsp:</label>';
             $result .= '</td><td>';
-            $result .= '<input class="input" data-dojo-type="dijit/form/NumberSpinner" id="_spe_earnedPeriod" value="" ';
+            $result .= '<input class="input" data-dojo-type="dijit/form/NumberSpinner" id="_spe_earnedPeriod" value="12" ';
             $result .= 'data-dojo-props="smallDelta:1, constraints:{min:1,max:99999,places:0}" name="_spe_earnedPeriod" style="width:100px"/>';
             $result .= '</td></tr>';
             break;
         case 'isIntegerQuotity':
             $result = '<tr><td>';
-            $result .= '<label class="label" for="_spe_isIntegerQuotity">'.i18n("isIntegerQuotity").'&nbsp:</label>';
+            $result .= '<label class="label longLabel" for="_spe_isIntegerQuotity">'.i18n("isIntegerQuotity").'&nbsp:</label>';
             $result .= '</td><td>';
             $result .= '<input data-dojo-type="dijit/form/CheckBox" type="checkbox" id="_spe_isIntegerQuotity" value="" ';
             $result .= 'name="_spe_isIntegerQuotity"  />';
@@ -1005,31 +986,31 @@ class LeaveTypeMain extends SqlElement {
             break;
         case 'validityDuration' :
             $result = '<tr><td>';
-            $result .= '<label class="label" for="_spe_validityDuration">'.i18n("validityDuration").'&nbsp:</label>';
+            $result .= '<label class="label longLabel" for="_spe_validityDuration">'.i18n("colValidityDuration").'&nbsp:</label>';
             $result .= '</td><td>';
-            $result .= '<input class="input" data-dojo-type="dijit/form/NumberSpinner" id="_spe_validityDuration" value="" ';
+            $result .= '<input class="input" data-dojo-type="dijit/form/NumberSpinner" id="_spe_validityDuration" value="24" ';
             $result .= 'data-dojo-props="smallDelta:1, constraints:{min:1,max:99999,places:0}" name="_spe_validityDuration" style="width:100px"/>';
             $result .= '</td></tr>';
             break;
         case 'nbDaysAfterNowLeaveDemandIsAllowed' :
             $result = '<tr><td>';
-            $result .= '<label class="label" for="_spe_nbDaysAfterNowLeaveDemandIsAllowed">'.i18n("nbDaysAfterNowLeaveDemandIsAllowed").'&nbsp:</label>';
+            $result .= '<label class="label longLabel" for="_spe_nbDaysAfterNowLeaveDemandIsAllowed">'.i18n("colNbDaysAfterNowLeaveDemandIsAllowed").'&nbsp:</label>';
             $result .= '</td><td>';
-            $result .= '<input class="input" data-dojo-type="dijit/form/NumberSpinner" id="_spe_nbDaysAfterNowLeaveDemandIsAllowed" value="" ';
+            $result .= '<input class="input" data-dojo-type="dijit/form/NumberSpinner" id="_spe_nbDaysAfterNowLeaveDemandIsAllowed" value="0" ';
             $result .= 'data-dojo-props="smallDelta:1, constraints:{min:1,max:99999,places:0}" name="_spe_nbDaysAfterNowLeaveDemandIsAllowed" style="width:100px"/>';
             $result .= '</td></tr>';
             break;
         case 'nbDaysBeforeNowLeaveDemandIsAllowed' :
             $result = '<tr><td>';
-            $result .= '<label class="label" for="_spe_nbDaysBeforeNowLeaveDemandIsAllowed">'.i18n("nbDaysBeforeNowLeaveDemandIsAllowed").'&nbsp:</label>';
+            $result .= '<label class="label longLabel" for="_spe_nbDaysBeforeNowLeaveDemandIsAllowed">'.i18n("colNbDaysBeforeNowLeaveDemandIsAllowed").'&nbsp:</label>';
             $result .= '</td><td>';
-            $result .= '<input class="input" data-dojo-type="dijit/form/NumberSpinner" id="_spe_nbDaysBeforeNowLeaveDemandIsAllowed" value="" ';
+            $result .= '<input class="input" data-dojo-type="dijit/form/NumberSpinner" id="_spe_nbDaysBeforeNowLeaveDemandIsAllowed" value="90" ';
             $result .= 'data-dojo-props="smallDelta:1, constraints:{min:1,max:99999,places:0}" name="_spe_nbDaysBeforeNowLeaveDemandIsAllowed" style="width:100px"/>';
             $result .= '</td></tr>';
             break;
         case 'isAnticipated' :
             $result = '<tr><td>';
-            $result .= '<label class="label" for="_spe_isAnticipated">'.i18n("isAnticipated").'&nbsp:</label>';
+            $result .= '<label class="label longLabel" for="_spe_isAnticipated">'.i18n("isAnticipated").'&nbsp:</label>';
             $result .= '</td><td>';
             $result .= '<input data-dojo-type="dijit/form/CheckBox" type="checkbox" id="_spe_isAnticipated" value="" ';
             $result .= 'name="_spe_isAnticipated"  />';
@@ -1038,7 +1019,7 @@ class LeaveTypeMain extends SqlElement {
             break;
         case 'isJustifiable':
             $result = '<tr><td>';
-            $result .= '<label class="label" for="_spe_isJustifiable">'.i18n("isJustifiable").'&nbsp:</label>';
+            $result .= '<label class="label longLabel" for="_spe_isJustifiable">'.i18n("isJustifiable").'&nbsp:</label>';
             $result .= '</td><td>';
             $result .= '<input data-dojo-type="dijit/form/CheckBox" type="checkbox" id="_spe_isJustifiable" value="" ';
             $result .= 'name="_spe_isJustifiable"  />';
@@ -1049,6 +1030,32 @@ class LeaveTypeMain extends SqlElement {
             break;
     }    
      return $result;
+  }
+  
+  public function setAttributes() {
+    if ($this->id>0) {
+      unset($this->_sec_contractualValues);
+      unset($this->_spe_earnedPeriod);
+      unset($this->_spe_isAnticipated);
+      unset($this->_spe_isJustifiable);
+      unset($this->_spe_isUnpayedAllowed);
+      unset($this->_spe_isIntegerQuotity);
+      unset($this->_spe_nbDaysAfterNowLeaveDemandIsAllowed);
+      unset($this->_spe_nbDaysBeforeNowLeaveDemandIsAllowed);
+      unset($this->_spe_periodDuration);
+      unset($this->_spe_quantity);
+      unset($this->_spe_startDayPeriod);
+      unset($this->_spe_startMonthPeriod);
+      unset($this->_spe_validityDuration);
+      unset($this->_spe_onAllOrDefault);
+      unset($this->_spe_explaination);
+    }
+    if (!$this->id) {
+      $wf=SqlElement::getSingleSqlElementFromCriteria('Workflow', array('isLeaveWorkflow'=>'1'));
+      if ($wf->id) {
+        $this->idWorkflow=$wf->id;
+      }
+    }
   }
       
 }

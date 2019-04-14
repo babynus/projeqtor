@@ -227,7 +227,7 @@ $months = array (
                     <table>
 			<tr>
                             <td>
-                                <label for="rightIdLeaveType"><?php echo i18n('LeaveType');?></label>
+                                <label class="dialogLabel longLabel" for="rightIdLeaveType"><?php echo i18n('LeaveType');?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
                                 <select id="rightIdLeaveType"  dojoType="dijit.form.FilteringSelect"
@@ -239,7 +239,7 @@ $months = array (
                         </tr>
                         <tr>
                             <td>
-                                <label for="rightStartMonthPeriod"><?php echo i18n('startMonthPeriod');?></label>
+                                <label class="dialogLabel longLabel" for="rightStartMonthPeriod"><?php echo i18n('colStartMonthPeriod');?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
 <!--
@@ -268,7 +268,7 @@ $months = array (
                         
                         <tr>
                             <td>
-                                <label for="rightStartDayPeriod"><?php echo i18n('startDayPeriod');?></label>
+                                <label class="dialogLabel longLabel" for="rightStartDayPeriod"><?php echo i18n('colStartDayPeriod');?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
                                 <input data-dojo-type="dijit/form/NumberSpinner" id="rightStartDayPeriod" value="1" readonly
@@ -278,7 +278,7 @@ $months = array (
                         
                         <tr>
                             <td>
-                                <label for="rightPeriodDuration"><?php echo i18n('periodDuration');?></label>
+                                <label class="dialogLabel longLabel" for="rightPeriodDuration"><?php echo i18n('colPeriodDuration');?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
                                 <input data-dojo-type="dijit/form/NumberSpinner" id="rightPeriodDuration" value="<?php echo $periodDuration;?>"
@@ -288,7 +288,7 @@ $months = array (
                         
                         <tr>
                             <td>
-                                <label for="rightQuantity"><?php echo i18n('quantity');?></label>
+                                <label class="dialogLabel longLabel" for="rightQuantity"><?php echo i18n('colQuantity');?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
                                 <input data-dojo-type="dijit/form/NumberSpinner" id="rightQuantity" value="<?php echo $quantity;?>"
@@ -298,7 +298,7 @@ $months = array (
                         
                         <tr>
                             <td>
-                                <label for="rightEarnedPeriod"><?php echo i18n('earnedPeriod');?></label>
+                                <label class="dialogLabel longLabel" for="rightEarnedPeriod"><?php echo i18n('colEarnedPeriod');?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
                                 <input data-dojo-type="dijit/form/NumberSpinner" id="rightEarnedPeriod" value="<?php echo $earnedPeriod;?>"
@@ -308,7 +308,7 @@ $months = array (
 
                         <tr>
                             <td>
-                                <label for="rightIsIntegerQuotity"><?php echo i18n('isIntegerQuotity');?></label>
+                                <label class="dialogLabel longLabel" for="rightIsIntegerQuotity"><?php echo i18n('isIntegerQuotity');?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
                                 <input data-dojo-type="dijit/form/CheckBox" type="checkbox" id="rightIsIntegerQuotity" value="1" <?php if($isIntegerQuotity==1) {echo 'checked="checked"';} ?>
@@ -318,7 +318,7 @@ $months = array (
                         
                         <tr>
                             <td>
-                                <label for="rightValidityDuration"><?php echo i18n('validityDuration');?></label>
+                                <label class="dialogLabel longLabel" for="rightValidityDuration"><?php echo i18n('colValidityDuration');?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
                                 <input data-dojo-type="dijit/form/NumberSpinner" id="rightValidityDuration" value="<?php echo $validityDuration;?>"
@@ -327,7 +327,7 @@ $months = array (
                         </tr>
                         <tr>
                             <td>
-                                <label for="rightNbDaysAfterNowLeaveDemandIsAllowed"><?php echo i18n('colNbDaysAfterNowLeaveDemandIsAllowed');?></label>
+                                <label class="dialogLabel longLabel" for="rightNbDaysAfterNowLeaveDemandIsAllowed"><?php echo i18n('colNbDaysAfterNowLeaveDemandIsAllowed');?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
                                 <input data-dojo-type="dijit/form/NumberSpinner" id="rightNbDaysAfterNowLeaveDemandIsAllowed" value="<?php echo $nbDaysAfterNowLeaveDemandIsAllowed;?>"
@@ -336,7 +336,7 @@ $months = array (
                         </tr>
                         <tr>
                             <td>
-                                <label for="rightNbDaysBeforeNowLeaveDemandIsAllowed"><?php echo i18n('colNbDaysBeforeNowLeaveDemandIsAllowed');?></label>
+                                <label class="dialogLabel longLabel" for="rightNbDaysBeforeNowLeaveDemandIsAllowed"><?php echo i18n('colNbDaysBeforeNowLeaveDemandIsAllowed');?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
                                 <input data-dojo-type="dijit/form/NumberSpinner" id="rightNbDaysBeforeNowLeaveDemandIsAllowed" value="<?php echo $nbDaysBeforeNowLeaveDemandIsAllowed;?>"
@@ -345,7 +345,7 @@ $months = array (
                         </tr>                        
                         <tr>
                             <td>
-                                <label for="rightIsJustifiable"><?php echo i18n('isJustifiable');?></label>
+                                <label class="dialogLabel longLabel" for="rightIsJustifiable"><?php echo i18n('isJustifiable');?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
                                 <input data-dojo-type="dijit/form/CheckBox" type="checkbox" id="rightIsJustifiable" value="1" <?php if($isJustifiable==1) {echo 'checked="checked"';} ?>
@@ -355,7 +355,7 @@ $months = array (
                                
                         <tr>
                             <td>
-                                <label for="rightIsAnticipated"><?php echo i18n('isAnticipated');?></label>
+                                <label class="dialogLabel longLabel" for="rightIsAnticipated"><?php echo i18n('isAnticipated');?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
                                 <input data-dojo-type="dijit/form/CheckBox" type="checkbox" id="rightIsAnticipated" value="1" <?php if($isAnticipated==1) {echo 'checked="checked"';} ?>
