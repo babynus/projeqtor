@@ -2354,7 +2354,7 @@ maintainStatusSetLeaveChange: "The status has been changed with changes on move 
 maintenanceDone: "${1} '${2}' ${3}",
 maintenanceOnLeavesRequired: "Manitenance on regulated leaves",
 manageConnections: "Gestión de conexiones",
-manager: "manager",
+Manager: "manager",
 managerOfEmployee: "Manager of employees",
 mandatoryAttendant: "asistencia obligatoria",
 mandatoryField: "Obligatorio rellenar campo",

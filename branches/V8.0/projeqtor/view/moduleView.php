@@ -83,7 +83,7 @@ $user=getSessionUser();
     $modList=$mod->getSqlElementsFromCriteria(null,null,null,'sortOrder asc');
     foreach ($modList as $mod) {?>
       <tr style="height:30px" >
-        <td style="width:25%;padding:10px;vertical-align:top" class="hyperlink">
+        <td style="width:25%;padding:10px;vertical-align:top" class="simpleText">
           <?php if ($mod->idModule) echo "<div style='width:40px;float:left'>&nbsp;</div>";?> 
           <?php $moduleClass=substr($mod->name,6);?>
           <div style='float:left;position:relative;top:-5px;margin-right:15px;' class='icon<?php echo $moduleClass?> iconSize32 icon<?php echo $moduleClass?>32'></div>
@@ -92,7 +92,7 @@ $user=getSessionUser();
            class="moduleClass <?php if ($mod->idModule) {echo 'parentModule'.$mod->idModule;}?>" 
            onclick="saveModuleStatus(<?php echo $mod->id?>,this.checked);"
            data-dojo-props="" ></div>&nbsp;
-          <label for="module_<?php echo $mod->id;?>" style="float:none;font-size:150%;font-weight:bold" class="hyperlink"><?php echo i18n($mod->name);?></label>
+          <label for="module_<?php echo $mod->id;?>" style="float:none;" class="simpleText bold big"><?php echo i18n($mod->name);?></label>
         </td>
         
         <td style="width:25%;padding:10px 10px;vertical-align:top">
@@ -104,11 +104,11 @@ $user=getSessionUser();
           $menuName=SqlList::getNameFromId('Menu', $modMenu->idMenu,false);
           $class=substr($menuName,4);
           echo "<div style='float:left;clear:left;padding-top:10px' class='icon$class iconSize22 icon".$class."22'></div>";
-          echo "<div style='float:left;padding-left:10px;padding-top:3px;font-weight:bold' class='hyperlink'>".i18n($menuName)."</div>"; 
+          echo "<div style='float:left;padding-left:10px;padding-top:3px;' class='simpleText bold'>".i18n($menuName)."</div>"; 
         }
         ?>
         </td>
-        <td style="width:50%;padding:10px 50px;vertical-align:top; text-align:justify;font-size:120%"><?php echo i18n($mod->name.'Comment');?></td>
+        <td class="simpleText" style="width:50%;padding:10px 50px;vertical-align:top; text-align:justify;"><?php echo i18n($mod->name.'Comment');?></td>
       </tr>
     <?php }?>
     </table>

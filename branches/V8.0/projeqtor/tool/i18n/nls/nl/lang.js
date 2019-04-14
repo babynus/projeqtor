@@ -2354,7 +2354,7 @@ maintainStatusSetLeaveChange: "The status has been changed with changes on move 
 maintenanceDone: "${1} &#34;${2}&#34; ${3}",
 maintenanceOnLeavesRequired: "Manitenance on regulated leaves",
 manageConnections: "Beheer ingelogde gebruikers",
-manager: "manager",
+Manager: "manager",
 managerOfEmployee: "Manager of employees",
 mandatoryAttendant: "mandatory attendant",
 mandatoryField: "verplicht bij gereed-status",
