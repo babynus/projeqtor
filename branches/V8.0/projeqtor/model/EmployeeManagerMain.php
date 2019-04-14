@@ -76,7 +76,7 @@ class EmployeeManagerMain extends SqlElement {
   private static $_fieldsAttributes=array("name"=>"required, truncatedWidth100",
                                           "idProfile" => "hidden",
                                           "isEmployee" => "hidden",
-                                          "isResource" => "readonly",
+                                          "isResource" => "",
                                           "isLeaveManager" => "hidden",
                                           "idTeam" => "readonly",
                                           "idle" => "readonly"
@@ -175,6 +175,21 @@ class EmployeeManagerMain extends SqlElement {
   }
 
   public function setAttributes() {
+    $crit=array("name"=>"menuResource");
+    $menu=SqlElement::getSingleSqlElementFromCriteria('Menu', $crit);
+    if (! $menu) {
+      return;
+    }
+    if (securityCheckDisplayMenu($menu->id)) {
+      $canUpdateResource=(securityGetAccessRightYesNo('menuResource', 'update', $this) == "YES");
+    } else {
+      $canUpdateResource=false;
+    }
+    if (!$canUpdateResource) {
+      self::$_fieldsAttributes["isResource"]="readonly";
+    } else {
+      self::$_fieldsAttributes["isResource"]="";
+    }
   }
   
 // ============================================================================**********
@@ -347,10 +362,10 @@ class EmployeeManagerMain extends SqlElement {
         case 'AllOfOrganizationAndSubOrganization' :
             if ($this->idle==1 or $this->id<1 or !$canUpdate) { return "";}
             $result  = '<tr class="detail">';
-            $result .= '    <td class="label" style="width:300px">';
-            $result .= '        <label for="allOfOrganizationAndSubOrganization" class="generalColClass" style="text-align:left;">'.i18n("allOfOrganizationAndSubOrganization").'&nbsp;:&nbsp;</label>';
+            $result .= '    <td class="label" >';
+            $result .= '        <label for="allOfOrganizationAndSubOrganization" class="label longLabel" >'.i18n("allOfOrganizationAndSubOrganization").'&nbsp;:&nbsp;</label>';
             $result .= '    </td>';
-            $result .= '    <td style="width:50px;">';
+            $result .= '    <td >';
             $result .= '        <div class="greyCheck generalColClass" ';
             $result .= '             dojoType="dijit.form.CheckBox" type="checkbox" ';
             $result .= '             style="display:inline-block;" ';
@@ -369,10 +384,10 @@ class EmployeeManagerMain extends SqlElement {
         case 'AllOfOrganization':
             if ($this->idle==1 or $this->id<1 or !$canUpdate) { return "";}
             $result  = '<tr class="detail">';
-            $result .= '    <td class="label" style="width:300px">';
-            $result .= '        <label for="allOfOrganization" class="generalColClass" style="text-align:left;">'.i18n("allOfOrganization").'&nbsp;:&nbsp;</label>';
+            $result .= '    <td class="label" style="width:10%">';
+            $result .= '        <label for="allOfOrganization" class="label longLabel" >'.i18n("allOfOrganization").'&nbsp;:&nbsp;</label>';
             $result .= '    </td>';
-            $result .= '    <td style="width:50px;">';
+            $result .= '    <td style="width:90%">';
             $result .= '        <div class="greyCheck generalColClass" ';
             $result .= '             dojoType="dijit.form.CheckBox" type="checkbox" ';
             $result .= '             style="display:inline-block;" ';
@@ -391,10 +406,10 @@ class EmployeeManagerMain extends SqlElement {
         case 'AllOfTeam':
             if ($this->idle==1 or $this->id<1 or !$canUpdate) { return "";}
             $result  = '<tr class="detail">';
-            $result .= '    <td class="label" style="width:300px">';
-            $result .= '        <label for="allOfTeam" class="generalColClass" style="text-align:left;">'.i18n("allOfTeam").'&nbsp;:&nbsp;</label>';
+            $result .= '    <td class="label" >';
+            $result .= '        <label for="allOfTeam" class="label longLabel" >'.i18n("allOfTeam").'&nbsp;:&nbsp;</label>';
             $result .= '    </td>';
-            $result .= '    <td style="width:50px;">';
+            $result .= '    <td >';
             $result .= '        <div class="greyCheck generalColClass" ';
             $result .= '             dojoType="dijit.form.CheckBox" type="checkbox" ';
             $result .= '             style="display:inline-block;" ';
@@ -412,10 +427,10 @@ class EmployeeManagerMain extends SqlElement {
             break;
         case 'itSelf':
             $result  = '<tr class="detail">';
-            $result .= '    <td class="label" style="width:300px">';
-            $result .= '        <label for="itSelf" class="generalColClass" style="text-align:left;">'.i18n("itSelfIncluded").'&nbsp;:&nbsp;</label>';
+            $result .= '    <td class="label" >';
+            $result .= '        <label for="itSelf" class="label longLabel">'.i18n("itSelfIncluded").'&nbsp;:&nbsp;</label>';
             $result .= '    </td>';
-            $result .= '    <td style="width:50px;">';
+            $result .= '    <td >';
             $result .= '        <div class="greyCheck generalColClass" ';
             $result .= '             dojoType="dijit.form.CheckBox" type="checkbox" ';
             $result .= '             style="display:inline-block;" ';
@@ -428,10 +443,10 @@ class EmployeeManagerMain extends SqlElement {
         case 'startDate':
             if ($this->idle==1 or $this->id<1 or !$canUpdate) { return "";}
             $result  = '<tr class="detail">';
-            $result .= '    <td class="label" style="width:300px">';
-            $result .= '        <label for="startDateBulk" class="generalColClass" style="text-align:left;">'.i18n("colStartDate").'&nbsp;:&nbsp;</label>';
+            $result .= '    <td class="label" >';
+            $result .= '        <label for="startDateBulk" class="label longLabel">'.i18n("colStartDate").'&nbsp;:&nbsp;</label>';
             $result .= '    </td>';
-            $result .= '    <td style="width:100px;">';
+            $result .= '    <td >';
             $result .= '        <input type="text" id="startDateBulk" data-dojo-type="dijit/form/DateTextBox" style="width:100px;"';
             $result .= '        />';
             $result .= '    </td>';
@@ -440,10 +455,10 @@ class EmployeeManagerMain extends SqlElement {
         case 'endDate' :
             if ($this->idle==1 or $this->id<1 or !$canUpdate) { return "";}
             $result  = '<tr class="detail">';
-            $result .= '    <td class="label" style="width:300px">';
-            $result .= '        <label for="endDateBulk" class="generalColClass" style="text-align:left;">'.i18n("colEndDate").'&nbsp;:&nbsp;</label>';
+            $result .= '    <td class="label" >';
+            $result .= '        <label for="endDateBulk" class="label longLabel">'.i18n("colEndDate").'&nbsp;:&nbsp;</label>';
             $result .= '    </td>';
-            $result .= '    <td style="width:100px;">';
+            $result .= '    <td >';
             $result .= '        <input type="text" id="endDateBulk" data-dojo-type="dijit/form/DateTextBox" style="width:100px;"';
             $result .= '        />';
             $result .= '    </td>';

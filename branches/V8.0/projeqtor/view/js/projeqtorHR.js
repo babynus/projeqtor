@@ -39,7 +39,7 @@
  * @param {string} msg
  * @return {void}
  */
-function showXhrErrorInErrorPopup(error,msg="") {
+function showXhrErrorInErrorPopup(error,msg) {
     hideWait();
     theError = new String();
     theError = i18n("unknow");
@@ -236,7 +236,7 @@ var theSelectedLeave = null;
  * @param {boolean} fromLeaveCalendar : true if from Leave Calendar - false if from LeaveMain
  * @returns {Element.value} : The id employee
  */
-function getIdEmployeeInLeaveCalMain(fromLeaveCalendar=false) {
+function getIdEmployeeInLeaveCalMain(fromLeaveCalendar) {
     if (!fromLeaveCalendar) {
         if (dijit.byId("idEmployee")) {
             return dijit.byId("idEmployee").value;
@@ -271,7 +271,7 @@ function getIdUserInLeaveCalendar() {
  * @param {string} endDate : end date for which initialize
  * @returns {void}
  */
-function initOffDayOfRes(idRes,startDate="",endDate="") {
+function initOffDayOfRes(idRes,startDate,endDate) {
     var url = "../tool/getOffDaysOfResource.php?idRes="+idRes;
     if (startDate!=="") {
         url += "&startDate="+startDate;
@@ -316,7 +316,7 @@ function initOffDayOfRes(idRes,startDate="",endDate="") {
  * @param {Integer} idUser : The connected user
  * @returns {Boolean} : true if day off
  */
-function isOffDayOfResource(vDate, idRes=null, idUser=null) {
+function isOffDayOfResource(vDate, idRes, idUser) {
     var cWorkDayList;
     var cOffDayList;
     
@@ -397,7 +397,7 @@ function isOffDayOfResource(vDate, idRes=null, idUser=null) {
  * @param {Integer} idUser The connected user's id
  * @returns {Number} : Number of open days between to dates
  */
-function openDayDiffDates(paramStartDate, paramEndDate, idRes=null, idUser=null) {
+function openDayDiffDates(paramStartDate, paramEndDate, idRes, idUser) {
     var currentDate = new Date();
     if (!isDate(paramStartDate))
       return '';
@@ -507,7 +507,7 @@ function calculateHalfDaysForLeave(idStartDate, idEndDate, idStartAM, idStartPM,
     
 }
 
-function calculateNbRemainingDays(from="", idRes=null, idUser=null, nbDays=null, idStatus=null, idLeaveType=null) {
+function calculateNbRemainingDays(from, idRes, idUser, nbDays, idStatus, idLeaveType) {
     if (from === "" || idRes === null || idUser === null) {return "";}
     var nbRemainingDays="";
     var theLeft = null;
@@ -626,7 +626,7 @@ function calculateNbRemainingDays(from="", idRes=null, idUser=null, nbDays=null,
  * @param {inter} idUser : The connected user's id
  * @returns {undefined}
  */
-function changesStartAM(idUser=null,nbDays=null,idStatus=null,idLeaveType=null) {
+function changesStartAM(idUser,nbDays,idStatus,idLeaveType) {
     var idRes = getIdEmployeeInLeaveCalMain();
     var input = dijit.byId("startAM");
     if(input.checked){
@@ -644,7 +644,7 @@ function changesStartAM(idUser=null,nbDays=null,idStatus=null,idLeaveType=null) 
  * @param {inter} idUser : The connected user's id
  * @returns {undefined}
  */
-function changesStartPM(idUser=null,nbDays=null,idStatus=null,idLeaveType=null) {
+function changesStartPM(idUser,nbDays,idStatus,idLeaveType) {
     var idRes = getIdEmployeeInLeaveCalMain();
     var input = dijit.byId("startPM");
     if(input.checked){
@@ -663,7 +663,7 @@ function changesStartPM(idUser=null,nbDays=null,idStatus=null,idLeaveType=null) 
  * @param {inter} idUser : The connected user's id
  * @returns {undefined}
  */
-function changesEndAM(idUser=null,nbDays=null,idStatus=null,idLeaveType=null) {
+function changesEndAM(idUser,nbDays,idStatus,idLeaveType) {
     var idRes = getIdEmployeeInLeaveCalMain();
     var input = dijit.byId("endAM");
     if(input.checked){
@@ -682,7 +682,7 @@ function changesEndAM(idUser=null,nbDays=null,idStatus=null,idLeaveType=null) {
  * @param {inter} idUser : The connected user's id
  * @returns {undefined}
  */
-function changesEndPM(idUser=null,nbDays=null,idStatus=null,idLeaveType=null) {
+function changesEndPM(idUser,nbDays,idStatus,idLeaveType) {
     var idRes = getIdEmployeeInLeaveCalMain();
     var input = dijit.byId("endPM");
     if(input.checked){
@@ -723,7 +723,7 @@ var popupTypeSelectOptions = [];
  * @param {integer} idStatus : the status
  * @returns {Status[]} An array of statuses
  */
-function getWorkflowStatusesOfLeaveType(from,idLeaveType,idRes=null,idUser=null,nbDays=null,idStatus=null) {
+function getWorkflowStatusesOfLeaveType(from,idLeaveType,idRes,idUser,nbDays,idStatus) {
     if (from=="fromLeaveCalendar") {
         idRes=document.getElementById('idEmployeeCalendar').value;
     }
@@ -782,7 +782,7 @@ function getWorkflowStatusesOfLeaveType(from,idLeaveType,idRes=null,idUser=null,
  * @param {integer} theLeaveType : The leave type for with enabled or disabled popupStatusOption.  
  * @returns {object} The popup status select option with enabled or disabled
  */
-function disabledEnabledPopupStatusOption(theStatus, thePopupStatusSelectOptions=null, theLeaveType=null) {
+function disabledEnabledPopupStatusOption(theStatus, thePopupStatusSelectOptions, theLeaveType) {
     var statusTo = [];
     var lS = thePopupStatusSelectOptions.length;
     var populatePopupStatus=false;
@@ -1252,7 +1252,7 @@ function refreshEmployeeLeavesSummary(){
  * @param {integer} idLeaveType : The leave type's id for which retrieve statuses assiociated to this
  * @returns {object} : Null if informations not found. Else, the Status object. 
  */
-function getFullStatusInfo(from="",idStatus=null, idLeaveType=null) {
+function getFullStatusInfo(from,idStatus, idLeaveType) {
     var theFullStatusInfo=null;
 
     if (idStatus===null || idLeaveType===null || from==="") {return null;}
@@ -1276,7 +1276,7 @@ function getFullStatusInfo(from="",idStatus=null, idLeaveType=null) {
  * @param {object} theFullStatusInfo : The object containing the status
  * @returns {Boolean} : True if the status as setSubmittedLeave = 0, setAcceptedLeave = 0, setCancelledLeave = 0
  */
-function isANeutralStatus(theFullStatusInfo=null) {
+function isANeutralStatus(theFullStatusInfo) {
     if (theFullStatusInfo===null) { return false;}
     return ((theFullStatusInfo.setSubmittedLeave==1 || theFullStatusInfo.setAcceptedLeave==1 || theFullStatusInfo.setRejectedLeave==1)?false:true);
 }
@@ -1589,7 +1589,7 @@ var calendar = null;
  */
 function leaveCalendarDisplay(){ 
     require(["dojo/ready", 
-             "dojox/calendar/projeqtorCalendar", 
+             "dojox/calendar/Calendar", 
              "dojo/dom-construct", 
              "dojo/store/Observable", 
              "dojo/store/Memory", 
@@ -1708,7 +1708,7 @@ function leaveCalendarDisplay(){
                     end = calendar.floorToDay(e.date);
                     
                     //can't create a leave if it's a dayOff
-                    for(let dayOff of daysOffCalendarData){
+                    for (let dayOff of daysOffCalendarData){
                         if(dayOff.startTime.getTime()===start.getTime()){
                             return;
                         }
@@ -2438,7 +2438,8 @@ function nextPrevMonthDashboardEmployeeManager(plusMinus) {
     dijit.byId("monthSelect").attr('value',month);    
 }
 
-function validOrCancelLeave(idLeave=0,motif="",context="CAL") {
+function validOrCancelLeave(idLeave,motif,context) {
+    if (!context) context="CAL";
     if (idLeave<1) {return;}
     dojo.setStyle(dijit.byId('leaveValidCancelPopup').closeButtonNode,{"display": "", "visibility": ""});
     dijit.byId('popupLeaveId').set("value", idLeave);
@@ -2508,7 +2509,7 @@ function saveValidOrCancelLeaveStatus() {
     
 }
 
-function getLeftByLeaveType(idEmployee=null) {
+function getLeftByLeaveType(idEmployee) {
     if (idEmployee === null) {return;}
 
     dojo.xhrGet({

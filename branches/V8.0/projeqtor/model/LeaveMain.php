@@ -1068,18 +1068,20 @@ class LeaveMain extends SqlElement {
         $inputPM.='<input data-dojo-type="dijit/form/CheckBox" id="startPM" name="startPM" '.$readOnly.' onchange='.$onChange.'"changesStartPM('.$idUser.','.$this->nbDays.','.$this->idStatus.','.$this->idLeaveType.')" ';
     }
     
-    if($this->id==NULL){
-        $inputAM.='checked>';
+    if(! $this->id){
+        $inputAM.=' checked>';
         $inputPM.='>';
     }else{
         $crit= array('id'=>$this->id);
-        $lvResp = $this -> getSqlElementsFromCriteria ( $crit );
-        if($lvResp[0]->startAMPM=='AM'){
-            $inputAM.='checked>';
+        //$lvResp = $this -> getSqlElementsFromCriteria ( $crit );
+        //if($lvResp[0]->startAMPM=='AM'){
+        if ($this->startAMPM=='AM') {
+            $inputAM.=' checked>';
             $inputPM.='>';
-        }else if($lvResp[0]->startAMPM=='PM'){
+        //}else if($lvResp[0]->startAMPM=='PM'){
+        }else if($this->startAMPM=='PM'){
             $inputAM.='>';
-            $inputPM.='checked>';
+            $inputPM.=' checked>';
         }
     }
     $result  = '<tr class="detail generalRowClass startAMPMClass"><td class="label" style="text-align:right;width:145px">'
@@ -1120,16 +1122,18 @@ class LeaveMain extends SqlElement {
     }
     if($this->id==NULL){
         $inputAM.= '>';
-        $inputPM.= 'checked>';
+        $inputPM.= ' checked>';
     }else{
         $crit= array('id'=>$this->id);
-        $lvResp = $this -> getSqlElementsFromCriteria ( $crit );
-        if($lvResp[0]->endAMPM=='AM'){
-            $inputAM.= 'checked>';
+        //$lvResp = $this -> getSqlElementsFromCriteria ( $crit );
+        //if($lvResp[0]->endAMPM=='AM'){
+        if($this->endAMPM=='AM'){  
+            $inputAM.= ' checked>';
             $inputPM.= '>';
-        }else if($lvResp[0]->endAMPM=='PM'){
+        //}else if($lvResp[0]->endAMPM=='PM'){
+        }else if($this->endAMPM=='PM'){
             $inputAM.= '>';
-            $inputPM.= 'checked>';
+            $inputPM.= ' checked>';
         }
     } 
     $result  = '<tr class="detail generalRowClass endAMPMClass"><td class="label" style="text-align:right;width:145px">'
