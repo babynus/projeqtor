@@ -3637,7 +3637,7 @@ function drawNotesFromObject($obj, $refresh=false) {
         	}
         	echo '<td class="noteData" colspan="1" style="width:3%;border-bottom:0px;border-top:0px;border-right:solid 2px;!important;"></td>';//border-bottom:0px;border-top:0px;!important
         }
-        echo '<td colspan="'.(6-$note->replyLevel).'" class="noteData" style="width:'.(($print)?'95':'85').'%">';
+        echo '<td colspan="'.(6-$note->replyLevel).'" class="noteData" style="width:'.(($print)?(95-(3*$note->replyLevel)):(85-(3*$note->replyLevel))).'%">';
       }else{
         echo '<td colspan="6" class="noteData" style="width:'.(($print)?'95':'85').'%">';
       }
@@ -3646,7 +3646,16 @@ function drawNotesFromObject($obj, $refresh=false) {
       echo formatPrivacyThumb($note->idPrivacy, $note->idTeam);
       if($noteDiscussionMode != 'YES'){
         if($note->idNote != null){
-        	echo '<span style="position:relative;float:right;padding-right:3px">'.formatIcon('Reply', 16, i18n('replyToNote').' #'.$note->idNote).'</span>';
+          if ($print) {
+        	  echo '<span style="position:relative;float:left;white-space:nowrap">'.formatIcon('Reply', 16, i18n('replyToNote').' #'.$note->idNote).'</span>';
+        	  if ($outMode=="pdf") {
+        	    echo '<span style="position:relative;height:18px;">&nbsp;'.i18n('replyToNote').' #'.$note->idNote.'</span><br/>';
+        	  } else {
+        	    echo '<div style="position:relative;height:18px;">&nbsp;'.i18n('replyToNote').' #'.$note->idNote.'</div>';
+        	  }
+          } else {
+            echo '<span style="position:relative;float:right;padding-right:3px">'.formatIcon('Reply', 16, i18n('replyToNote').' #'.$note->idNote).'</span>';
+          }
         }
       }
       if (!$print) echo '<div style="max-width:'.$widthPctNote.';overflow-x:auto;" >';

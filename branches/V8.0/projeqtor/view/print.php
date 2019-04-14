@@ -140,6 +140,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 <head>   
   <title><?php echo getPrintTitle();?></title>
   <link rel="stylesheet" type="text/css" href="css/jsgantt.css" />
+  <link rel="stylesheet" type="text/css" href="css/projeqtorIcons.css" />
   <link rel="stylesheet" type="text/css" href="css/projeqtorPrint.css" />
   <link rel="stylesheet" type="text/css" href="css/projeqtorFlat.css" />
   <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon" />

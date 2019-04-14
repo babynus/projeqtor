@@ -507,9 +507,19 @@ td {
 a {
  text-decoration: none;
 }
-.hyperlink {
- color: #333333;
 
+
+.hyperlink, .simpleText {
+  color: #333333;
+}
+.simpleText {
+  font-size:10pt;
+}
+.simpleText.bold {
+  font-weight:bold;
+}
+.simpleText.bold.big  {
+  font-size:150%;
 }
 .hyperlink:hover {
   font-weight: bold;
