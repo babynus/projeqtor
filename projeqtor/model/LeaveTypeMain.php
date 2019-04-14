@@ -931,9 +931,9 @@ class LeaveTypeMain extends SqlElement {
             $result  = '<tr class="detail generalRowClass">';
             $result .= '<td style="width: 200px;">';
             $result .=  $onDefault;
-            $result .= '<label for="onDefault">'. i18n("onDefault") .'</label></div></td><td>';
+            $result .= '<label for="onDefault">'. i18n("onDefault") .'&nbsp:&nbsp;</label></div></td><td>';
             $result .=  $onAll;
-            $result .= '<label  for="onAll">'. i18n("onAll") .'</label></div>';
+            $result .= '<label  for="onAll">'. i18n("onAll") .'&nbsp:&nbsp;</label></div>';
             $result .=  '</td></tr>';  
             break;
         case 'startMonthPeriod':
@@ -997,7 +997,7 @@ class LeaveTypeMain extends SqlElement {
             $result .= '<label class="label longLabel" for="_spe_nbDaysAfterNowLeaveDemandIsAllowed">'.i18n("colNbDaysAfterNowLeaveDemandIsAllowed").'&nbsp:</label>';
             $result .= '</td><td>';
             $result .= '<input class="input" data-dojo-type="dijit/form/NumberSpinner" id="_spe_nbDaysAfterNowLeaveDemandIsAllowed" value="0" ';
-            $result .= 'data-dojo-props="smallDelta:1, constraints:{min:1,max:99999,places:0}" name="_spe_nbDaysAfterNowLeaveDemandIsAllowed" style="width:100px"/>';
+            $result .= 'data-dojo-props="smallDelta:1, constraints:{min:0,max:99999,places:0}" name="_spe_nbDaysAfterNowLeaveDemandIsAllowed" style="width:100px"/>';
             $result .= '</td></tr>';
             break;
         case 'nbDaysBeforeNowLeaveDemandIsAllowed' :
@@ -1005,12 +1005,12 @@ class LeaveTypeMain extends SqlElement {
             $result .= '<label class="label longLabel" for="_spe_nbDaysBeforeNowLeaveDemandIsAllowed">'.i18n("colNbDaysBeforeNowLeaveDemandIsAllowed").'&nbsp:</label>';
             $result .= '</td><td>';
             $result .= '<input class="input" data-dojo-type="dijit/form/NumberSpinner" id="_spe_nbDaysBeforeNowLeaveDemandIsAllowed" value="90" ';
-            $result .= 'data-dojo-props="smallDelta:1, constraints:{min:1,max:99999,places:0}" name="_spe_nbDaysBeforeNowLeaveDemandIsAllowed" style="width:100px"/>';
+            $result .= 'data-dojo-props="smallDelta:1, constraints:{min:0,max:99999,places:0}" name="_spe_nbDaysBeforeNowLeaveDemandIsAllowed" style="width:100px"/>';
             $result .= '</td></tr>';
             break;
         case 'isAnticipated' :
             $result = '<tr><td>';
-            $result .= '<label class="label longLabel" for="_spe_isAnticipated">'.i18n("isAnticipated").'&nbsp:</label>';
+            $result .= '<label class="label longLabel" for="_spe_isAnticipated">'.i18n("colIsAnticipated").'&nbsp:</label>';
             $result .= '</td><td>';
             $result .= '<input data-dojo-type="dijit/form/CheckBox" type="checkbox" id="_spe_isAnticipated" value="" ';
             $result .= 'name="_spe_isAnticipated"  />';

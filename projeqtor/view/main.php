@@ -166,6 +166,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     dojo.require("dijit.Toolbar");
     dojo.require("dijit.Tooltip");
     dojo.require("dijit.Tree"); 
+    dojo.require("dojox.calendar.Calendar");
     dojo.require("dojox.form.FileInput");
     dojo.require("dojox.form.Uploader");
     dojo.require("dojox.form.uploader.FileList");
