@@ -50,6 +50,7 @@ class WorkflowMain extends SqlElement {
   public $_workflowStatus_colSpan="2";
   public $_spe_workflowStatus;
   public $_workflowStatus;
+  public $isLeaveWorkflow;
 
   
   public $_statusList;
@@ -62,7 +63,8 @@ class WorkflowMain extends SqlElement {
     ';
   
   private static $_fieldsAttributes=array(
-    "workflowUpdate"=>"hidden"
+    "workflowUpdate"=>"hidden",
+    "isLeaveWorkflow"=>"hidden"
   );
     
   /** ==========================================================================

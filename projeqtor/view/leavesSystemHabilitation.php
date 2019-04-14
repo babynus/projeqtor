@@ -178,7 +178,7 @@
                     </tr>
                         <!-- Employee Habilitation -->
                     <tr style="text-align:center;">
-                        <td><?php echo i18n("employee");?></td>
+                        <td><?php echo i18n("Employee");?></td>
                         <td><?php echo drawHabililitation($hab->menuName,"E",$hab,'viewAccess');?></td>
                         <td><?php echo drawHabililitation($hab->menuName,"E",$hab,'readAccess');?></td>
                         <td><?php echo drawHabililitation($hab->menuName,"E",$hab,'createAccess');?></td>
@@ -236,10 +236,10 @@
                 $habilitationType = i18n('leavesSystemAdmin');
                 break;
             case 'M' :
-                $habilitationType = i18n('manager');
+                $habilitationType = i18n("Manager");
                 break;
             case 'E' :
-                $habilitationType = i18n('employee');
+                $habilitationType = i18n("Employee");
                 break;
             case 'm' :
                 $habilitationType = i18n('managerOfEmployee');

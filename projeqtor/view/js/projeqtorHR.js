@@ -1216,7 +1216,7 @@ function refreshEmployeeLeavesSummary(){
             summaryContent += '<table style="width:96%; margin-left:2%; text-align:center; border: solid 1pt;">\n\
                                   <tr style="border: solid 1pt; height: 20px;">\n\
                                   <th style="text-align:center;"><b>'+ i18n('leaveType')+'</b></th>\n\
-                                  <th style="text-align:center;"><b>'+ i18n('periodDuration')+'</b></th>\n\
+                                  <th style="text-align:center;"><b>'+ i18n('colPeriodDuration')+'</b></th>\n\
                                   <th style="text-align:center;"><b>'+ i18n('leavePeriod')+'</b></th>\n\
                                   <th style="text-align:center;"><b>'+ i18n('quantity')+'</b></th>\n\
                                   <th style="text-align:center;"><b>'+ i18n('taken')+'</b></th>\n\

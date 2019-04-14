@@ -118,7 +118,7 @@ if($editMode==="true"){
                     <table>                        
                         <tr>
                             <td class="dialogLabel" >
-                                <label for="ruleName"><?php echo i18n('name');?>&nbsp;:&nbsp;</label>
+                                <label class="dialogLabel longLabel" for="ruleName"><?php echo i18n('name');?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
                                 <input data-dojo-type="dijit.form.ValidationTextBox" type="text" id="ruleName" name="ruleName" class="input required"
@@ -128,7 +128,7 @@ if($editMode==="true"){
 			
                         <tr>
                             <td class="dialogLabel" >
-                             <label for="ruleCustomEarnedRule" ><?php echo i18n("customEarnedRule");?>&nbsp;:&nbsp;</label>
+                             <label class="dialogLabel longLabel" for="ruleCustomEarnedRule" ><?php echo i18n("customEarnedRule");?>&nbsp;:&nbsp;</label>
                             </td>
                             <td> 
                                 <!--dijit.form.Textarea doesn't support the attribute required, so the hidden validationTextBox ijs here to force the required when clicking on the submit button -->
@@ -145,7 +145,7 @@ if($editMode==="true"){
                         </tr>
                         <tr>
                             <td class="dialogLabel" >
-                             <label for="whereClauseCustomEarnedRule" ><?php echo i18n("whereClause");?>&nbsp;:&nbsp;</label>
+                             <label class="dialogLabel longLabel" for="whereClauseCustomEarnedRule" ><?php echo i18n("whereClause");?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
                                 <textarea id="whereClauseCustomEarnedRuleTextArea" name="whereClauseCustomEarnedRuleTextArea" maxlength="4000" class="input" 
@@ -168,7 +168,7 @@ if($editMode==="true"){
                                 <div id="customEarnedRuleHelpTitle" data-dojo-type="dijit/TitlePane" data-dojo-props="open:false, title: '<?php echo i18n("customEarnedRuleHelpTitle");?>'">
                                     <table id="ruleCustomEarnedRuleHelpTable" name="ruleCustomEarnedRuleHelpTable">
                                         <tr class="detail generalRowClass">
-                                            <td class="label" style="font-weight:normal;width:100%; text-align:left;"><?php echo i18n("customEarnedRuleHelpListItems");?>&nbsp;:&nbsp;</td> 
+                                            <td><label class="label longLabel"><?php echo i18n("customEarnedRuleHelpListItems");?>&nbsp;:&nbsp;</label></td> 
                                             <td>
                                                 <select dojoType="dijit.form.Select" id="ruleCustomEarnedRuleHelpListItems" name="ruleCustomEarnedRuleHelpListItems" class="input" 
                                                     style="width:40em;" required onchange="refreshListFieldsInDialogCustomEarnedRules(this.value);">
@@ -190,7 +190,7 @@ if($editMode==="true"){
                                             </td>
                                         </tr>
                                         <tr class="detail generalRowClass">
-                                            <td class="label" style="font-weight:normal;"><?php echo i18n("customEarnedRuleHelpListFields");?>&nbsp;:&nbsp;</td>
+                                            <td class="label longLabel" style="font-weight:normal;"><?php echo i18n("customEarnedRuleHelpListFields");?>&nbsp;:&nbsp;</td>
                                             <td>
                                                 <select dojoType="dijit.form.Select" class="input  generalColClass" id="ruleCustomEarnedRuleHelpListFields" name="ruleCustomEarnedRuleHelpListFields" style="width: 40em;" required>
                                                     <?php 
@@ -211,7 +211,7 @@ if($editMode==="true"){
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="label" style="font-weight:normal;"><?php echo i18n("buttonInsertFieldIntoCustomEarnedRule");?>&nbsp;:&nbsp;</td>
+                                            <td class="label longLabel" style="font-weight:normal;"><?php echo i18n("buttonInsertFieldIntoCustomEarnedRule");?>&nbsp;:&nbsp;</td>
                                             <td>
                                                 <div>
                                                     <button id="ruleButtonInsertFieldIntoCustomEarnedRule" name="ruleButtonInsertFieldIntoCustomEarnedRule" dojoType="dijit.form.Button" showlabel="true">
@@ -225,7 +225,7 @@ if($editMode==="true"){
                                         </tr>
 
                                         <tr>
-                                            <td class="label" style="font-weight:normal;"><?php echo i18n("buttonInsertFieldIntoCustomEarnedWhereClause");?>&nbsp;:&nbsp;</td>
+                                            <td class="label longLabel" style="font-weight:normal;"><?php echo i18n("buttonInsertFieldIntoCustomEarnedWhereClause");?>&nbsp;:&nbsp;</td>
                                             <td>
                                                 <div>
                                                     <button id="whereClauseButtonInsertFieldIntoCustomEarnedRule" name="whereClauseButtonInsertFieldIntoCustomEarnedRule" dojoType="dijit.form.Button" showlabel="true">
@@ -239,7 +239,7 @@ if($editMode==="true"){
                                         </tr>
                                         
                                         <tr class="detail generalRowClass">
-                                            <td class="label" style="font-weight:normal;"><?php echo i18n("customEarnedRuleHelpOperators");?>&nbsp;:&nbsp;</td>
+                                            <td class="label longLabel" style="font-weight:normal;"><?php echo i18n("customEarnedRuleHelpOperators");?>&nbsp;:&nbsp;</td>
                                             <td>
                                                 <select dojoType="dijit.form.Select" class="input  generalColClass" id="ruleCustomEarnedRuleHelpOperators" name="ruleCustomEarnedRuleHelpOperators" style="width: 40em;" required>
                                                     <?php 
@@ -275,7 +275,7 @@ if($editMode==="true"){
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="label" style="font-weight:normal;"><?php echo i18n("buttonInsertOpIntoCustomEarnedRule");?>&nbsp;:&nbsp;</td>
+                                            <td class="label longLabel" style="font-weight:normal;"><?php echo i18n("buttonInsertOpIntoCustomEarnedRule");?>&nbsp;:&nbsp;</td>
                                             <td>
                                                 <div>
                                                     <button id="ruleButtonInsertOpIntoCustomEarnedRule" name="ruleButtonInsertOpIntoCustomEarnedRule" dojoType="dijit.form.Button" showlabel="true">
@@ -288,7 +288,7 @@ if($editMode==="true"){
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="label" style="font-weight:normal;"><?php echo i18n("buttonInsertOpIntoCustomEarnedWhereClause");?>&nbsp;:&nbsp;</td>
+                                            <td class="label longLabel" style="font-weight:normal;"><?php echo i18n("buttonInsertOpIntoCustomEarnedWhereClause");?>&nbsp;:&nbsp;</td>
                                             <td>
                                                 <div>
                                                     <button id="whereClauseButtonInsertOpIntoCustomEarnedRule" name="whereClauseButtonInsertOpIntoCustomEarnedRule" dojoType="dijit.form.Button" showlabel="true">
@@ -308,7 +308,7 @@ if($editMode==="true"){
                         
                         <tr>
                             <td class="dialogLabel" >
-                                <label for="ruleQuantity"><?php echo i18n('quantity');?>&nbsp;:&nbsp;</label>
+                                <label class="dialogLabel longLabel" for="ruleQuantity"><?php echo i18n('colQuantity');?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
                                 <input data-dojo-type="dijit/form/NumberSpinner" id="ruleQuantity" name="ruleQuantity" value="<?php echo $quantity;?>" class="input required"
@@ -318,7 +318,7 @@ if($editMode==="true"){
                         
                         <tr>
                             <td class="dialogLabel" >
-                                <label for="ruleIdLeaveType"><?php echo i18n('LeaveType');?></label>
+                                <label class="dialogLabel longLabel" for="ruleIdLeaveType"><?php echo i18n('colIdLeaveType');?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
                                 <select id="ruleIdLeaveType"  dojoType="dijit.form.Select"

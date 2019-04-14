@@ -302,7 +302,7 @@
                     $echo .= '    <tr style="border: solid 1pt; height: 20px;">';
                     $echo .= '        <th style="text-align:center;"><b>'.i18n('leaveType').'</b></th>';
                     $echo .= '        <th style="text-align:center;"><b>'.i18n('colName').'</b></th>';
-                    $echo .= '        <th style="text-align:center;"><b>'.i18n('quantity').'</b></th>';
+                    $echo .= '        <th style="text-align:center;"><b>'.i18n('colQuantity').'</b></th>';
                     $echo .= '    </tr>';
                     // The leave types
                     $find=false;
@@ -347,10 +347,10 @@
               <div id="summaryLeaveEarnedOfEmployee"><b><?php echo i18n("synthesisOfLeaveEarned"); ?></b>
                   <table style="width:96%; margin-left:2%; text-align:center; border: solid 1pt;">
                     <tr style="border: solid 1pt; height: 20px;">
-                        <th style="text-align:center;"><b><?php echo i18n('leaveType'); ?></b></th>
-                        <th style="text-align:center;"><b><?php echo i18n('periodDuration'); ?></b></th>
+                        <th style="text-align:center;"><b><?php echo i18n('colIdLeaveType'); ?></b></th>
+                        <th style="text-align:center;"><b><?php echo i18n('colPeriodDuration'); ?></b></th>
                         <th style="text-align:center;"><b><?php echo i18n('leavePeriod'); ?></b></th>
-                        <th style="text-align:center;"><b><?php echo i18n('quantity'); ?></b></th>
+                        <th style="text-align:center;"><b><?php echo i18n('colQuantity'); ?></b></th>
                         <th style="text-align:center;"><b><?php echo i18n('taken'); ?></b></th>
                         <th style="text-align:center;"><b><?php echo i18n('colLeft'); ?></b></th>
                         <th style="text-align:center;"><b><?php echo i18n('earnedPeriodPlusOne'); ?></b></th>
