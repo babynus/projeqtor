@@ -334,7 +334,7 @@
   color: #545381;
 }
 
-.ProjeQtOrFlatBlue .hyperlink {
+.ProjeQtOrFlatBlue .hyperlink, .ProjeQtOrFlatBlue .simpleText {
   color: #545381;
 }
 .ProjeQtOrFlatBlue .hyperlink:hover {
@@ -1763,7 +1763,7 @@ body .ProjeQtOrFlatBlue {
   color: #833e3e;
 }
 
-.ProjeQtOrFlatRed .hyperlink {
+.ProjeQtOrFlatRed .hyperlink, .ProjeQtOrFlatRed .simpleText {
   color: #833e3e;
 }
 .ProjeQtOrFlatRed .hyperlink:hover {
@@ -3142,7 +3142,7 @@ body .ProjeQtOrFlatRed {
   color: #537665;
 }
 
-.ProjeQtOrFlatGreen .hyperlink {
+.ProjeQtOrFlatGreen .hyperlink, .ProjeQtOrFlatGreen .simpleText {
   color: #537665;
 }
 .ProjeQtOrFlatGreen .hyperlink:hover {
@@ -4524,7 +4524,7 @@ body .ProjeQtOrFlatGreen {
   color: #656565;
 }
 
-.ProjeQtOrFlatGrey .hyperlink {
+.ProjeQtOrFlatGrey .hyperlink, .ProjeQtOrFlatGrey .simpleText {
   color: #656565;
 }
 .ProjeQtOrFlatGrey .hyperlink:hover {

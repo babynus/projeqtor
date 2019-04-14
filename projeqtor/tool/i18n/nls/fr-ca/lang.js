@@ -2354,7 +2354,7 @@ maintainStatusSetLeaveChange: "L'état a été modifié avec des changements sur
 maintenanceDone: "${1} &#34;${2}&#34; ${3}",
 maintenanceOnLeavesRequired: "Maintenance sur des absences réglementées requises",
 manageConnections: "Gestion des connexions",
-manager: "gestionnaire",
+Manager: "gestionnaire",
 managerOfEmployee: "Gestionnaire d'absences",
 mandatoryAttendant: "présence obligatoire",
 mandatoryField: "obligatoire",

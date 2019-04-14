@@ -1089,17 +1089,17 @@
 .ProjeQtOrFlatGreen .iconAbsence { background-image: url(customIcons/green/iconAbsence.png); }
 .ProjeQtOrFlatGrey .iconAbsence { background-image: url(customIcons/grey/iconAbsence.png); }
 
-.iconButtonReply16 { background-image: url(images/smallButtonReply.png);  background-size: 16px 16px;}
-.ProjeQtOrFlatBlue .iconButtonReply16 { background-image: url(customIcons/blue/smallButtonReply.png); width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrFlatRed .iconButtonReply16 { background-image: url(customIcons/red/smallButtonReply.png); width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrFlatGreen .iconButtonReply16 { background-image: url(customIcons/green/smallButtonReply.png);width: 16px; height: 16px; background-size: 16px 16px; }
-.ProjeQtOrFlatGrey .iconButtonReply16 { background-image: url(customIcons/grey/smallButtonReply.png); width: 16px; height: 16px; background-size: 16px 16px;}
+.iconButtonReply16 { background-image: url(images/iconReply.png);  background-size: 16px 16px;}
+.ProjeQtOrFlatBlue .iconButtonReply16 { background-image: url(customIcons/blue/iconReply.png); width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrFlatRed .iconButtonReply16 { background-image: url(customIcons/red/iconReply.png); width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrFlatGreen .iconButtonReply16 { background-image: url(customIcons/green/iconReply.png);width: 16px; height: 16px; background-size: 16px 16px; }
+.ProjeQtOrFlatGrey .iconButtonReply16 { background-image: url(customIcons/grey/iconReply.png); width: 16px; height: 16px; background-size: 16px 16px;}
 
-.iconReply16 { background-image: url(images/smallButtonReply.png);  background-size: 16px 16px;}
-.ProjeQtOrFlatBlue .iconReply16 { background-image: url(customIcons/blue/smallButtonReply.png); width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrFlatRed .iconReply16 { background-image: url(customIcons/red/smallButtonReply.png); width: 16px; height: 16px; background-size: 16px 16px;}
-.ProjeQtOrFlatGreen .iconReply16 { background-image: url(customIcons/green/smallButtonReply.png);width: 16px; height: 16px; background-size: 16px 16px; }
-.ProjeQtOrFlatGrey .iconReply16 { background-image: url(customIcons/grey/smallButtonReply.png); width: 16px; height: 16px; background-size: 16px 16px;}
+.iconReply16 { background-image: url(images/iconReply.png);  background-size: 16px 16px;}
+.ProjeQtOrFlatBlue .iconReply16 { background-image: url(customIcons/blue/iconReply.png); width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrFlatRed .iconReply16 { background-image: url(customIcons/red/iconReply.png); width: 16px; height: 16px; background-size: 16px 16px;}
+.ProjeQtOrFlatGreen .iconReply16 { background-image: url(customIcons/green/iconReply.png);width: 16px; height: 16px; background-size: 16px 16px; }
+.ProjeQtOrFlatGrey .iconReply16 { background-image: url(customIcons/grey/iconReply.png); width: 16px; height: 16px; background-size: 16px 16px;}
 
 .iconImputationValidation { background-image: url(images/iconImputationValidation32.png); }
 .ProjeQtOrFlatBlue .iconImputationValidation { background-image: url(customIcons/blue/iconImputationValidation.png); }
