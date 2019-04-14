@@ -165,7 +165,7 @@
                         <img id="yearPrev" name = "yearPrev" src="css/images/left.png"
                              onclick="nextPrevYearDashboardEmployeeManager(-1,<?php echo $firstYear; ?>,<?php echo $lastYear; ?>)"
                              title="<?php echo i18n("previous"); ?>"
-                             style="width:16px; height:16px; cursor:pointer;">
+                             style="width:16px; height:16px; cursor:pointer;position:relative;top:5px;">
                         <select id="yearSelect"
                                 name="yearSelect"
                                 dojoType="dijit.form.FilteringSelect" 
@@ -192,18 +192,18 @@
                         <img id="yearNext" name = "yearNext" src="css/images/right.png" 
                              onclick="nextPrevYearDashboardEmployeeManager(1,<?php echo $firstYear; ?>,<?php echo $lastYear; ?>)"
                              title="<?php echo i18n("next"); ?>"
-                             style="width:16px; height:16px; cursor:pointer;">
+                             style="width:16px; height:16px; cursor:pointer;position:relative;top:5px;">
                     </div>
                 </td>                    
                 <!------------------>
                 <!-- SELECT MONTH -->
                 <!------------------>
-                <td style="width:200px;">
-                    <div style="width:200px; margin:0 auto;">
+                <td style="width:150px;">
+                    <div style="width:150px; margin:0 auto;">
                         <img id="monthPrev" name = "monthPrev" src="css/images/left.png" 
                              onclick="nextPrevMonthDashboardEmployeeManager(-1)"
                              title="<?php echo i18n("previous"); ?>"
-                             style="width:16px; height:16px; cursor:pointer;">
+                             style="width:16px; height:16px; cursor:pointer;position:relative;top:5px;">
                         <select id="monthSelect"
                                 name="monthSelect"
                                 dojoType="dijit.form.FilteringSelect" 
@@ -231,16 +231,16 @@
                         <img id="monthNext" name = "monthNext" src="css/images/right.png" 
                              onclick="nextPrevMonthDashboardEmployeeManager(1)"
                              title="<?php echo i18n("next"); ?>"
-                             style="width:16px; height:16px; cursor:pointer;">
+                             style="width:16px; height:16px; cursor:pointer;position:relative;top:5px;">
                     </div>
                 </td>
                 <!--------------------->
                 <!-- SELECT EMPLOYEE -->
                 <!--------------------->
-                <td width="280px">
-                    <div style="width:280px; margin:0 auto;">
-                        <label style="text-shadow: none;width:100px;"
-                               for='employeeSelect'><?php echo ucfirst(i18n("Employee"));?> : 
+                <td width="200px">
+                    <div style="width:205px; margin:0 auto;">
+                        <label style="text-shadow: none;width:80px;"
+                               for='employeeSelect'><?php echo (i18n("colIdEmployee"));?> : 
                         </label>
                         <select id="employeeSelect"
                                 name="employeeSelect"
@@ -248,7 +248,7 @@
                                 data-dojo-id="employeeSelect"
                                 class="input generalColClass Class"
                                 xlabelType="html"
-                                style="width:150px;"
+                                style="width:120px;"
                         >
                         <?php 
                             echo '<option value="0"';
@@ -273,10 +273,10 @@
                 <!----------------------->
                 <!-- SELECT LEAVE TYPE -->
                 <!----------------------->
-                <td width="280px">
-                    <div style="width:280px; margin:0 auto;">
-                        <label style="text-shadow: none;width:100px;"
-                               for='leaveTypeSelect'><?php echo ucfirst(i18n("colType"));?> : 
+                <td width="200px">
+                    <div style="width:205px; margin:0 auto;">
+                        <label style="text-shadow: none;width:80px;"
+                               for='leaveTypeSelect'><?php echo (i18n("colType"));?> : 
                         </label>
                         <select id="leaveTypeSelect"
                                 name="leaveTypeSelect"
@@ -284,7 +284,7 @@
                                 data-dojo-id="leaveTypeSelect"
                                 class="input generalColClass Class"
                                 xlabelType="html"
-                                style="width:150px;"
+                                style="width:120px;"
                         >
                         <?php 
                             echo '<option value="0"';
@@ -309,10 +309,10 @@
                 <!------------------->
                 <!-- SELECT STATUS -->
                 <!------------------->
-                <td width="280px">
-                    <div style="width:280px; margin:0 auto;">
-                        <label style="text-shadow: none;width:100px;"
-                               for='leaveStatusSelect'><?php echo ucfirst(i18n("Status"));?> : 
+                <td width="200px">
+                    <div style="width:210px; margin:0 auto;">
+                        <label style="text-shadow: none;width:80px;"
+                               for='leaveStatusSelect'><?php echo (i18n("colIdStatus"));?> : 
                         </label>
                         <select id="leaveStatusSelect"
                                 name="leaveStatusSelect"
@@ -320,7 +320,7 @@
                                 data-dojo-id="leaveStatusSelect"
                                 class="input generalColClass Class"
                                 xlabelType="html"
-                                style="width:150px;"
+                                style="width:120px;"
                         >
                         <?php 
                             echo '<option value="0"';
@@ -350,7 +350,7 @@
         <!-- LIST OF EXISTING LEAVE TYPE -->
         <!--------------------------------->
         <table>
-            <th class="label"><b><?php echo ucfirst(i18n("colType")); ?> : </b></th>
+            <th class="label"><b><?php echo (i18n("colType")); ?> : </b></th>
             <?php
                 foreach($leaveTypes as $lvt) {
                     $textColor = oppositeColor($lvt->color);
@@ -367,7 +367,7 @@
         <!-- LIST OF STATUS OF WORKFLOW DEDICATED TO THE LEAVE -->
         <!------------------------------------------------------->                
         <table>
-            <th class="label"><b><?php echo ucfirst(i18n("Status")); ?> : </b></th>
+            <th class="label"><b><?php echo (i18n("colIdStatus")); ?> : </b></th>
             <td></td>
             <td>
                 <?php
@@ -404,7 +404,7 @@
                         <!-- TITLE -->
                         <!----------->
                         <td style="width:20%;">
-                            <b><?php echo strtoupper(i18n("leaveCalendar")); ?></b>
+                            <b><?php echo (i18n("leaveCalendar")); ?></b>
                         </td>
                         <td style="width:30%;">
                             <?php echo i18n("leaveRequestAfterLeaveDate");?>&nbsp;:&nbsp;
@@ -413,7 +413,7 @@
                         <!--------------------->
                         <!-- EXPORT TO EXCEL -->
                         <!--------------------->
-                        <td style="width:10%;"><b><?php echo strtoupper(i18n("dialogExport")); ?></b>
+                        <td style="width:10%;"><b><?php echo (i18n("dialogExport")); ?></b>
                             <div style="width:150px; margin:0 auto;">
                                 <button id="exportLeaveCalendar" dojoType="dijit.form.Button"
                                         showlabel="false"
@@ -434,7 +434,7 @@
                         <!-- HEADER -->
                         <!------------>
                         <tr style="height:15px;">
-                            <td rowspan="2" class="assignHeader"><?php echo strtoupper(i18n("Employee")); ?></td>
+                            <td rowspan="2" class="assignHeader"><?php echo (i18n("Employee")); ?></td>
                             <?php
                                 $extraStyleOffDay = "color:white; background-color:black !important;";
                                 for($i=1;$i<=31;$i++) {
@@ -653,10 +653,10 @@
                                 <!--------------------->
                                 <!-- SYNTHESIS TITLE -->
                                 <!--------------------->
-                                <b><?php echo strtoupper(i18n("synthesis")); ?></b>
+                                &nbsp;
                             </th>
                         </tr>
-                        <tr style="height:32px;"><td>&nbsp;</td></tr>
+                        <tr style="height:32px;"><td><b><?php echo (i18n("synthesis")); ?></b></td></tr>
                         <tr>
                             <td style="text-align:center;vertical-align:top;width:100%;">
                                 <!----------------------->
@@ -669,14 +669,14 @@
                                     <tr>
                                         <!-- Column EMPLOYEE -->
                                         <th rowspan="2" style="text-align:center;vertical-align:middle;" class="assignHeader">
-                                            <?php echo strtoupper(i18n("Employee")); ?>
+                                            <?php echo (i18n("Employee")); ?>
                                         </th>
                                         <!-- Column TOTAL -->
                                         <?php
                                             if ($idTypeRequest==0) {
                                         ?>
                                         <td colspan="2" style="text-align:center;vertical-align:middle;" class="assignHeader">
-                                            <?php echo strtoupper(i18n("sum")); ?>                                            
+                                            <?php echo (i18n("sum")); ?>                                            
                                         </td>
                                             <?php } ?>
                                         <!-- Columns LEAVE TYPE -->
@@ -715,10 +715,10 @@
                                             }    
                                             for ($i=0;$i<$iE;$i++) {
                                                 echo '<td style="text-align:center;vertical-align:middle;'.$colorStyleType[$i].'" class="assignHeader">';
-                                                echo lcfirst(i18n('taken'));
+                                                echo (i18n('taken'));
                                                 echo '</td>';
                                                 echo '<td style="text-align:center;vertical-align:middle;'.$colorStyleType[$i].'" class="assignHeader">';
-                                                echo lcfirst(i18n('colLeft'));
+                                                echo (i18n('colLeft'));
                                                 echo '</td>';
                                             }
                                         ?>
@@ -823,7 +823,7 @@
                                     <!-- TOTAL -->
                                     <!----------->
                                     <tr style="height:15px;">
-                                        <td class="assignHeader"><b><?php echo strtoupper(i18n("sum"));?></b></td>
+                                        <td class="assignHeader"><b><?php echo (i18n("sum"));?></b></td>
                                     <?php
                                         if ($idTypeRequest==0) {
                                     ?>
@@ -859,11 +859,11 @@
                         <!----------------------------->
                         <tr style="height:50%;">
                         <tr style="height:10px;"><td>&nbsp;</td></tr>                            
-                            <th style="text-align:center;vertical-align:top;width:100%;max-height:15px;">
+                            <th style="text-align:center;vertical-align:top;width:100%;height:20px;max-height:20px;">
                                 <!----------->
                                 <!-- TO PROCESSED - TITLE -->
                                 <!----------->
-                                <b><?php echo strtoupper(i18n("leavesToProcessed")); ?></b>
+                                <div style="height:20px"><b><?php echo (i18n("leavesToProcessed")); ?></b></div>
                                 <table style="width:100%;height:90%;border:1px solid">
                                     <!------------------------->
                                     <!-- TO PROCESSED HEADER -->
@@ -871,27 +871,27 @@
                                     <tr>
                                         <!-- Column EMPLOYEE -->
                                         <th colspan="2" style="text-align:center;vertical-align:middle;" class="assignHeader">
-                                            <?php echo strtoupper(i18n("Employee")); ?>
+                                            <?php echo (i18n("colIdEmployee")); ?>
                                         </th>
                                         <!-- Column TYPE -->
                                         <th style="text-align:center;vertical-align:middle;" class="assignHeader">
-                                            <?php echo strtoupper(i18n("colType")); ?>
+                                            <?php echo (i18n("colType")); ?>
                                         </th>
                                         <!-- Column StartDate & AMPM -->
                                         <th style="text-align:center;vertical-align:middle;" class="assignHeader">
-                                            <?php echo strtoupper(i18n("startDate")); ?>
+                                            <?php echo (i18n("startDate")); ?>
                                         </th>
                                         <!-- Column EndDate & AMPM -->
                                         <th style="text-align:center;vertical-align:middle;" class="assignHeader">
-                                            <?php echo strtoupper(i18n("endDate")); ?>
+                                            <?php echo (i18n("endDate")); ?>
                                         </th>
                                         <!-- Column Nb Days -->
                                         <th style="text-align:center;vertical-align:middle;" class="assignHeader">
-                                            <?php echo strtoupper(i18n("nbDays")); ?>
+                                            <?php echo (i18n("nbDays")); ?>
                                         </th>
                                         <!-- Column Request Date Time -->
                                         <th style="text-align:center;vertical-align:middle;" class="assignHeader">
-                                            <?php echo strtoupper(i18n("requestedDate")); ?>
+                                            <?php echo (i18n("requestedDate")); ?>
                                         </th>                                        
                                     </tr>
                                     <?php
@@ -972,11 +972,11 @@
                                                 echo '  </td>';                        
                                                 // Column StartDate & AMPM
                                                 echo '  <td style="text-align:center;vertical-align:middle;" class="linkData">';
-                                                echo $leave->startDate. " - ". ($leave->startAMPM=="AM"?i18n("morning"):i18n("afternoon"));
+                                                echo htmlFormatDate($leave->startDate). " ". ($leave->startAMPM=="AM"?i18n("morning"):i18n("afternoon"));
                                                 echo '  </td>';                                                    
                                                 // Column EndDate & AMPM
                                                 echo '  <td style="text-align:center;vertical-align:middle;" class="linkData">';
-                                                echo $leave->endDate. " - ". ($leave->endAMPM=="AM"?i18n("morning"):i18n("afternoon"));
+                                                echo htmlFormatDate($leave->endDate). " ". ($leave->endAMPM=="AM"?i18n("morning"):i18n("afternoon"));
                                                 echo '  </td>';                                                    
                                                 // Column Nb Days
                                                 echo '  <td style="text-align:center;vertical-align:middle;" class="linkData">';
@@ -984,7 +984,7 @@
                                                 echo '  </td>';                                                    
                                                 // Column Request Date Time
                                                 echo '  <td style="text-align:center;vertical-align:middle;" class="linkData">';
-                                                echo $leave->requestDateTime;
+                                                echo htmlFormatDate($leave->requestDateTime);
                                                 echo '  </td>';                                                    
                                                 echo '</tr>';
                                             }

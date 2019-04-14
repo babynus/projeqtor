@@ -355,7 +355,7 @@ $months = array (
                                
                         <tr>
                             <td>
-                                <label class="dialogLabel longLabel" for="rightIsAnticipated"><?php echo i18n('isAnticipated');?>&nbsp;:&nbsp;</label>
+                                <label class="dialogLabel longLabel" for="rightIsAnticipated"><?php echo i18n('colIsAnticipated');?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
                                 <input data-dojo-type="dijit/form/CheckBox" type="checkbox" id="rightIsAnticipated" value="1" <?php if($isAnticipated==1) {echo 'checked="checked"';} ?>

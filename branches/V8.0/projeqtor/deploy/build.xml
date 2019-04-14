@@ -342,6 +342,7 @@
         <exclude name="grid/*.js"/>
         <exclude name="calendar/*.js"/>
         <exclude name="calendar/*.css"/>
+        <exclude name="widget/*.js"/>
         <exclude name="mobile/*.*"/>
         <exclude name="mobile/**/*"/>
         <exclude name="fx/*.js"/>

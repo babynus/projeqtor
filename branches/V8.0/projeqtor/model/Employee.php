@@ -511,5 +511,26 @@ class Employee extends SqlElement {
        $leavesList = $leave->getSqlElementsFromCriteria(null, false, $clauseWhere, $orderBy);
        return $leavesList;
    }
+   
+   public function setAttributes() {
+     foreach (array('Resource','User','Contact','EmployeeManager') as $obj) {
+       $crit=array("name"=>"menu".$obj);
+       $menu=SqlElement::getSingleSqlElementFromCriteria('Menu', $crit);
+       if (! $menu) {
+         return;
+       }
+       if (securityCheckDisplayMenu($menu->id)) {
+         $canUpdateObj=(securityGetAccessRightYesNo('menu'.$obj, 'update', $this) == "YES");
+       } else {
+         $canUpdateObj=false;
+       }
+       $fld='is'.(($obj=='EmployeeManager')?'LeaveManager':$obj);
+       if (!$canUpdateObj) {
+         self::$_fieldsAttributes[$fld]="readonly";
+       } else {
+         self::$_fieldsAttributes[$fld]="";
+       }
+     }
+   }
 }
 ?>

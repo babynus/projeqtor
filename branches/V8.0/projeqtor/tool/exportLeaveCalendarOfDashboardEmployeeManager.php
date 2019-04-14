@@ -631,6 +631,7 @@ function exportSpreadsheet($context, $fileName, $preCalculateFormulas=false) {
     $typeOfExport = Parameter::getUserParameter("typeExportXLSorODS");
 
     $objWriter = NULL;
+    if ($typeOfExport == 'Excel') $typeOfExport="Excel2007";
     $format = ($typeOfExport=="Excel2007"?"xlsx":"ods");
     $fileName .= ".".$format;
     $contentType = ($typeOfExport=="Excel2007"?"Content-Type: application/vnd.ms-excel":"Content-Type: application/vnd.oasis.opendocument.spreadsheet");
@@ -644,7 +645,7 @@ function exportSpreadsheet($context, $fileName, $preCalculateFormulas=false) {
     header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
     header('Cache-Control: cache, must-revalidate'); // HTTP/1.1
     header('Pragma: public'); // HTTP/1.0
-    
+    debugLog($typeOfExport);
     $objWriter = PHPExcel_IOFactory::createWriter($context, $typeOfExport);
     
     if ($preCalculateFormulas) {
