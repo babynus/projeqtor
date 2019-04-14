@@ -240,7 +240,7 @@
                 <td width="280px">
                     <div style="width:280px; margin:0 auto;">
                         <label style="text-shadow: none;width:100px;"
-                               for='employeeSelect'><?php echo ucfirst(i18n("employee"));?> : 
+                               for='employeeSelect'><?php echo ucfirst(i18n("Employee"));?> : 
                         </label>
                         <select id="employeeSelect"
                                 name="employeeSelect"
@@ -434,7 +434,7 @@
                         <!-- HEADER -->
                         <!------------>
                         <tr style="height:15px;">
-                            <td rowspan="2" class="assignHeader"><?php echo strtoupper(i18n("employee")); ?></td>
+                            <td rowspan="2" class="assignHeader"><?php echo strtoupper(i18n("Employee")); ?></td>
                             <?php
                                 $extraStyleOffDay = "color:white; background-color:black !important;";
                                 for($i=1;$i<=31;$i++) {
@@ -669,7 +669,7 @@
                                     <tr>
                                         <!-- Column EMPLOYEE -->
                                         <th rowspan="2" style="text-align:center;vertical-align:middle;" class="assignHeader">
-                                            <?php echo strtoupper(i18n("employee")); ?>
+                                            <?php echo strtoupper(i18n("Employee")); ?>
                                         </th>
                                         <!-- Column TOTAL -->
                                         <?php
@@ -871,7 +871,7 @@
                                     <tr>
                                         <!-- Column EMPLOYEE -->
                                         <th colspan="2" style="text-align:center;vertical-align:middle;" class="assignHeader">
-                                            <?php echo strtoupper(i18n("employee")); ?>
+                                            <?php echo strtoupper(i18n("Employee")); ?>
                                         </th>
                                         <!-- Column TYPE -->
                                         <th style="text-align:center;vertical-align:middle;" class="assignHeader">

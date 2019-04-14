@@ -245,7 +245,7 @@ $objPHPExcel->getProperties()->setCreator(getSessionUser()->name)
 
 // File name
 $fileName = $year."-".($month<10?"0":"").$month."-".i18n("leavesCalendar");
-$fileName .= ($idEmployee==0?"":"-".i18n("employee")." ".$employeeName);
+$fileName .= ($idEmployee==0?"":"-".i18n("Employee")." ".$employeeName);
 $fileName .= ($idStatus==0?"":"-".i18n("colIdStatus")." ".$statusName);
 $fileName .= ($idLeaveType==0?"":"-".i18n("colType")." ".$leaveTypeName);
 
@@ -283,7 +283,7 @@ $sheet->setCellValue('A2', strtoupper(getMonthName($month))." - ".$year);
 
 // Line Employee - Type - Status
 $sheet->mergeCells('A3:BI3');
-$sheet->setCellValue('A3', (i18n("FOR")." ".i18n("employee")." = ".$employeeName." - ".i18n("colType")." = ".$leaveTypeName." - ".i18n("colIdStatus")." = ".$statusName));
+$sheet->setCellValue('A3', (i18n("FOR")." ".i18n("Employee")." = ".$employeeName." - ".i18n("colType")." = ".$leaveTypeName." - ".i18n("colIdStatus")." = ".$statusName));
 $sheet->getStyle('A1:A3')->getFont()->setSize(20);
 $sheet->getStyle('A1:A3')->getFont()->setBold(true);
 
@@ -330,7 +330,7 @@ foreach( $leaveTypes as $leaveType) {
 $sheet->getStyle('A10:A11')->getFont()->setSize(12);
 $sheet->getStyle('A10:A11')->getFont()->setBold(true);
 $sheet->mergeCells("A10:A11");
-$sheet->setCellValue("A10", strtoupper(i18n("employee")));
+$sheet->setCellValue("A10", strtoupper(i18n("Employee")));
 $sheet->getStyle("A10:A11")->applyFromArray($styleBoxBorderTopBottom);
 
 // Num day and days of month
@@ -502,7 +502,7 @@ $sheet2->mergeCells('A2:H2');
 $sheet2->setCellValue('A2', strtoupper(getMonthName($month))." - ".$year);
 // Line Employee - Type - Status
 $sheet2->mergeCells('A3:H3');
-$sheet2->setCellValue('A3', strtoupper(i18n("FOR")." ".i18n("employee")." = ".$employeeName." - ".i18n("colType")." = ".$leaveTypeName." - ".i18n("colIdStatus")." = ".$statusName));
+$sheet2->setCellValue('A3', strtoupper(i18n("FOR")." ".i18n("Employee")." = ".$employeeName." - ".i18n("colType")." = ".$leaveTypeName." - ".i18n("colIdStatus")." = ".$statusName));
 $sheet2->getStyle('A1:A3')->getFont()->setSize(20);
 $sheet2->getStyle('A1:A3')->getFont()->setBold(true);
 
@@ -510,7 +510,7 @@ $sheet2->getStyle('A1:A3')->getFont()->setBold(true);
 // Employees
 $sheet2->getStyle('A5')->getFont()->setSize(12);
 $sheet2->getStyle('A5')->getFont()->setBold(true);
-$sheet2->setCellValue("A5", strtoupper(i18n("employee")));
+$sheet2->setCellValue("A5", strtoupper(i18n("Employee")));
 $sheet2->getStyle("A5")->applyFromArray($styleBoxBorders);
 // Type
 $sheet2->getStyle('B5')->getFont()->setSize(12);

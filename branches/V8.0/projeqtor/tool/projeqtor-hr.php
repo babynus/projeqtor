@@ -510,11 +510,12 @@ function initPurgeLeaveSystemElements($leavesSystemActiv) {
             }            
         }
         // Create a workflow for the leave system
-        $wf=SqlElement::getSingleSqlElementFromCriteria('Workflow', array('name'=>i18n("colIsLeaveMngWorkflow")));
+        $wf=SqlElement::getSingleSqlElementFromCriteria('Workflow', array('isLeaveWorkflow'=>'1'));
         if (! $wf->id) {
           $wf=new Workflow(); 
           $wf->name=i18n("colIsLeaveMngWorkflow");
           $wf->sortOrder=999;
+          $wf->isLeaveWorkflow=1;
           $wf->save();
           $prf=new Profile();
           $prfListAll=SqlList::getList('Profile');
@@ -639,7 +640,7 @@ function initPurgeLeaveSystemElements($leavesSystemActiv) {
         
         // The new type of activity for the leaves
         $tp = new Type();
-        $tp->name = i18n("colType"). " - ". i18n('leave');
+        $tp->name = i18n('leave');
         $tp->scope = 'Activity';
         $tp->sortOrder=100;
         $tp->idWorkflow = $theWorkFlowId;
@@ -658,7 +659,7 @@ function initPurgeLeaveSystemElements($leavesSystemActiv) {
         
         // The new types of manager
         $tp = new Type();
-        $tp->name = 'Administrativ';
+        $tp->name = 'Administrative';
         $tp->scope = 'Manager';
         $tp->sortOrder=100;
         $tp->idWorkflow = $theWorkFlowId;

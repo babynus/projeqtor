@@ -356,6 +356,8 @@ INSERT INTO `${prefix}notifiable` (`notifiableItem`,`name`,`idle`) VALUES
     ('Status', 'Status',0),
     ('LeaveType', 'Leave Type',0);
     
+ALTER TABLE `${prefix}workflow` ADD `isLeaveWorkflow` int(1) UNSIGNED DEFAULT 0;
+
 -- ======================================================
 -- Shedule sending of report result by mail
 -- ======================================================

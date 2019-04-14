@@ -535,6 +535,9 @@ label, .label, .smallLabel {
   border: 1px;
   text-shadow: 1px 1px #FFFFFF;
 }
+.longLabel {
+	width: 245px;
+}
 div#reportParametersDiv .label, div#reportParametersDiv label {
 	width:180px;
 }
