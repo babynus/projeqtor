@@ -75,15 +75,17 @@ $sendFrequency = 'everyDays';
         <form dojoType="dijit.form.Form" id='autoSendReportForm' name='autoSendReportForm' onSubmit="return false;">
           <table width="100%" style="white-space:nowrap">
             <input type="hidden" id="idReport" name="idReport" value="<?php echo $idReport;?>"/>
+            <?php if($periodType != ''){?>
             <tr>
               <td class="assignHeader"><?php echo i18n('colParameters');?></td>
             </tr>
+            <?php }?>
              <?php if ($yearSpinner != '') {?>
             <tr>
               <td>
-                <label for="yearParam" class="dialogLabel" style="text-align:right;margin-top:10px;"><?php echo i18n('year');?> : </label>
+                <label for="yearParam" class="dialogLabel" style="margin-top:10px;text-align:right;"><?php echo i18n('year');?> : </label>
                 <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft"
-                  style="width:120px;margin-top:10px;" name="yearParam" id="yearParam" <?php echo autoOpenFilteringSelect();?>
+                  style="margin-top:10px;width:120px;" name="yearParam" id="yearParam" <?php echo autoOpenFilteringSelect();?>
                   value="<?php if($yearSpinner >= date('Y')){ echo "current";}else if($yearSpinner <= date('Y')-1){echo "previous";}?>">
                   <option value="current"><?php echo i18n('setToCurrentYear');?></option>
                   <option value="previous"><?php echo i18n('setToPreviousYear');?></option>
@@ -94,9 +96,9 @@ $sendFrequency = 'everyDays';
             <?php if ($periodType == 'month') {?>
             <tr>
               <td>
-                <label for="monthParam" class="dialogLabel" style="text-align:right;"><?php echo i18n('month');?> : </label>
+                <label for="monthParam" class="dialogLabel" style="margin-top:10px;text-align:right;"><?php echo i18n('month');?> : </label>
                 <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft"
-                  style="width:120px;" name="monthParam" id="monthParam" <?php echo autoOpenFilteringSelect();?>
+                  style="margin-top:10px;width:120px;" name="monthParam" id="monthParam" <?php echo autoOpenFilteringSelect();?>
                   value="<?php if($monthSpinner >= date('m')){ echo "current";}else if($monthSpinner <= date('m')-1){echo "previous";}?>">
                   <option value="current"><?php echo i18n('setToCurrentMonth');?></option>
                   <option value="previous"><?php echo i18n('setToPreviousMonth');?></option>
@@ -106,8 +108,8 @@ $sendFrequency = 'everyDays';
             <?php }else if($periodType == 'year' and $monthSpinner != '') { ?>
             <tr>
               <td>
-                <label for="monthParam" class="dialogLabel" style="text-align:right;"><?php echo i18n('startMonth');?> : </label>
-                <div style="width:50px; text-align: center; color: #000000;" 
+                <label for="monthParam" class="dialogLabel" style="margin-top:10px;text-align:right;"><?php echo i18n('startMonth');?> : </label>
+                <div style="margin-top:10px;width:50px; text-align: center; color: #000000;" 
                    dojoType="dijit.form.NumberSpinner" 
                    constraints="{min:1,max:12,places:0,pattern:'00'}"
                    intermediateChanges="true"
@@ -121,9 +123,9 @@ $sendFrequency = 'everyDays';
             <?php if ($periodType == 'week') {?>
             <tr>
               <td>
-                <label for="weekParam" class="dialogLabel" style="text-align:right;"><?php echo i18n('week');?> : </label>
+                <label for="weekParam" class="dialogLabel" style="margin-top:10px;text-align:right;"><?php echo i18n('week');?> : </label>
                 <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft"
-                  style="width:120px;" name="weekParam" id="weekParam" <?php echo autoOpenFilteringSelect();?>
+                  style="margin-top:10px;width:120px;" name="weekParam" id="weekParam" <?php echo autoOpenFilteringSelect();?>
                   value="<?php if($weekSpinner >= date('W')){ echo "current";}else if($weekSpinner <= date('W')-1){echo "previous";}?>">
                   <option value="current"><?php echo i18n('setToCurrentWeek');?></option>
                   <option value="previous"><?php echo i18n('setToPreviousWeek');?></option>
