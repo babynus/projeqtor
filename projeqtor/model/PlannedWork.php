@@ -248,6 +248,7 @@ class PlannedWork extends GeneralWork {
         $reserved[$artype][$plan->id]['end']=null;
         $reserved[$artype][$plan->id]['pred']=array();
         $reserved[$artype][$plan->id]['succ']=array();
+        $reserved[$artype][$plan->id]['idProj']=$plan->idProject;
         $crit="successorId=$plan->id or predecessorId=$plan->id";
         $dep=new Dependency();
         $depList=$dep->getSqlElementsFromCriteria(null, false, $crit);
@@ -261,6 +262,7 @@ class PlannedWork extends GeneralWork {
             $reserved['allSuccs'][$dep->successorId]=$dep->successorId;
           }
         }
+
       }
     }
     $arrayNotPlanned=array();
@@ -579,8 +581,7 @@ class PlannedWork extends GeneralWork {
                 $arrayWarning[$assTmp->id]=i18n("warningPlanningModePool",array(i18n("PlanningModeGROUP")));
                 break;
               }
-            }
-            
+            }           
           }
         }
         if ($profile=='GROUP') {
@@ -726,6 +727,28 @@ class PlannedWork extends GeneralWork {
             $ass->plannedWork=$ass->realWork;
           }
           while (1) {
+            if ($withProjectRepartition) {
+              //$reserved[type='W']['sum'][idResource][day]+=value
+              // $reserved[type='W'][idPE][idResource][day]=value
+              foreach($reserved['W'] as $idPe=>$arPeW) {
+                if ($idPe=='sum') continue;
+                if ($arPeW['idProj']!=$plan->idProject) continue;
+                if (! isset($arPeW[$ass->idResource]) ) continue;
+                $projectKey='Project#' . $plan->idProject;
+                $week=getWeekNumberFromDate($currentDate);
+                if (! isset($ress[$projectKey][$week])) {
+                  $weeklyReserved=0;
+                  $firstDay=date('Y-m-d',firstDayofWeek(substr($week,-2),substr($week,0,4)));
+                  foreach ($arPeW[$ass->idResource] as $dayOW=>$valReserved) {
+                    $dayToTest=($dayOW==1)?$firstDay:addDaysToDate($firstDay, $dayOW-1);
+                    if (isOpenDay($dayToTest,1))
+                      $weeklyReserved+=$valReserved;
+                  }
+                  $ress[$projectKey][$week]=$weeklyReserved;
+                  $resources[$ass->idResource][$projectKey][$week]=$weeklyReserved;
+                }
+              }        
+            }
             // Variable Capacity : retreive the capacity for the current date
             if ($ress['variableCapacity']) {
               $capacity=$r->getSurbookingCapacity($currentDate);
@@ -734,22 +757,14 @@ class PlannedWork extends GeneralWork {
               } else {
                 $capacityRate=round($assRate*$capacity,2);
               }
-              $week=getWeekNumberFromDate($currentDate);
-              if (! isset($ress['weekTotalCapacity'][$week])) {
-                $rTemp=new Resource($ass->idResource);
-                $weekDay=firstDayofWeek(substr($week,-2),substr($week,0,4));
-                $capaWeek=0;
-                for ($i=0;$i<7;$i++) {
-                  if (isOpenDay($currentDate,$rTemp->idCalendarDefinition)) {
-                    $capaWeek+=$rTemp->getSurbookingCapacity($weekDay);
-                  }
-                  $weekDay=addDaysToDate($weekDay,1);
-                }
-                $ress['weekTotalCapacity'][$week]=$capaWeek;
-                $resources[$ass->idResource]['weekTotalCapacity'][$week]=$capaWeek;
-              }
-              debugLog("capacity of resource $ass->idResource for week $week is $capaWeek");
             }
+            $week=getWeekNumberFromDate($currentDate);
+            if (! isset($ress['weekTotalCapacity'][$week])) {
+              $rTemp=new Resource($ass->idResource);
+              $capaWeek=$rTemp->getWeekCapacity($week);
+              $ress['weekTotalCapacity'][$week]=$capaWeek;
+              $resources[$ass->idResource]['weekTotalCapacity'][$week]=$capaWeek;
+            }            
             // End Variable capacity
             if ($ress['team']) { // For team resource, check if unitary resources have enought availability
               $period=ResourceTeamAffectation::findPeriod($currentDate,$ress['periods']); 
@@ -782,7 +797,7 @@ class PlannedWork extends GeneralWork {
                 $left=$capacity;
               } else {
                 $left=0;
-              } 
+              }
             }
             if ($left<0.01) {
               break;
@@ -804,7 +819,7 @@ class PlannedWork extends GeneralWork {
             if (isOpenDay($currentDate, $r->idCalendarDefinition)) {              
               $planned=0;
               $plannedReserved=0;
-              $week=weekFormat($currentDate);
+              $week=getWeekNumberFromDate($currentDate);
               if (array_key_exists($currentDate, $ress)) {
                 $planned=$ress[$currentDate];
               }
@@ -872,8 +887,13 @@ class PlannedWork extends GeneralWork {
                   $interval+=$step;
               	}
               }
-              if ($planned < $capacity)  {
+              if ($planned < $capacity or $profile=='RECW')  {
                 $value=$capacity-$planned; 
+                if (isset($ress['real'][$keyElt][$currentDate])) {
+                  //$value-=$ress['real'][$keyElt][$currentDate]; // Case 1 remove existing
+                  //if ($value<0) $value=0;
+                  $value=0; // Case 2 : if real is already defined for the given activity, no more work to plan
+                }
                 if ($profile=='RECW') {                 
                   $dow=date('N',strtotime($currentDate));  
                   if (isset($reserved['W'][$plan->id][$ass->idResource][$dow]) ) {
@@ -891,12 +911,7 @@ class PlannedWork extends GeneralWork {
                 if ($value>$capacityRate) {
                	  $value=$capacityRate;
                 }
-                if (isset($ress['real'][$keyElt][$currentDate])) {
-                  //$value-=$ress['real'][$keyElt][$currentDate]; // Case 1 remove existing
-                  //if ($value<0) $value=0;
-                  $value=0; // Case 2 : if real is already defined for the given activity, no more work to plan
-                }
-                if ($withProjectRepartition) {
+                if ($withProjectRepartition and $profile!='RECW') {
                   foreach ($listTopProjects as $idProject) {
                     $projectKey='Project#' . $idProject;
                     $plannedProj=0;
@@ -917,15 +932,15 @@ class PlannedWork extends GeneralWork {
                     	$arrayNotPlanned[$ass->id]=$left;
                     	$left=0;
                     }
-                    if ($ress['variableCapacity']) {
-                      $capaWeek=$ress['weekTotalCapacity'][getWeekNumberFromDate($currentDate)];
-                    } else {
-                      if ($rateProj==1) {
-                        $capaWeek=7*$capacity;
-                      } else {
-                        $capaWeek=$daysPerWeek*$capacity;
-                      }
-                    }
+                    //if ($ress['variableCapacity']) {
+                    $capaWeek=$ress['weekTotalCapacity'][getWeekNumberFromDate($currentDate)];
+                    //} else {
+                    //  if ($rateProj==1) {
+                    //    $capaWeek=7*$capacity;
+                    //  } else {
+                    //    $capaWeek=$daysPerWeek*$capacity;
+                    //  }
+                    //}
                     $leftProj=round($capaWeek*$rateProj,2)-$plannedProj; // capacity for a week
                     if ($value>$leftProj) {
                       $value=$leftProj;
@@ -1014,12 +1029,21 @@ class PlannedWork extends GeneralWork {
 	                      $plannedProj=$grp['ResourceWork'][$projectKey][$week];
 	                    }
 	                    $rateProj=Resource::findAffectationRate($grp['ResourceWork'][$projectKey]['rate'],$currentDate) / 100;
-	                    if ($rateProj==1) {
-	                      $leftProj=round(7*$grp['capacity']*$rateProj,2)-$plannedProj; // capacity for a full week
-	                      // => to be able to plan weekends
+	                    $week=getWeekNumberFromDate($currentDate);
+	                    if (! isset($resources[$id]['weekTotalCapacity'][$week])) {
+	                      $rTemp=new Resource($id);
+	                      $capaWeek=$rTemp->getWeekCapacity($week);	                      
+	                      $resources[$id]['weekTotalCapacity'][$week]=$capaWeek;
 	                    } else {
-	                      $leftProj=round($daysPerWeek*$grp['capacity']*$rateProj,2)-$plannedProj; // capacity for a week
+	                      $capaWeek=$resources[$id]['weekTotalCapacity'][$week];
 	                    }
+	                    //if ($rateProj==1) {
+	                    //  $leftProj=round(7*$grp['capacity']*$rateProj,2)-$plannedProj; // capacity for a full week
+	                      // => to be able to plan weekends
+	                    //} else {
+	                    //  $leftProj=round($daysPerWeek*$grp['capacity']*$rateProj,2)-$plannedProj; // capacity for a week
+	                    //}
+	                    $leftProj=round($capaWeek*$rateProj,2)-$plannedProj; // capacity for a week
 	                    if ($value>$leftProj) {
 	                      $value=$leftProj;
 	                    }
