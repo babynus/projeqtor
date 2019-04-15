@@ -598,6 +598,30 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       $obj->setAttributes();
     }
     // ADD BY Marc TABARY - 2017-02-16 - WORK AND COST VISIBILITY
+    if(property_exists($obj, '_separator_sectionCostWork_marginTop')){//#3897 Gautier damian
+      $isSeparatorWork = false;
+      $countCost = false;
+      $countWork = false;
+      foreach ($obj as $col=>$val) {
+        if($col == "_separator_sectionCostWork_marginTop"){
+          $isSeparatorWork = true;
+        }
+        if(!$isSeparatorWork)continue;
+        if(substr($col, -4) == 'Work'){
+          if(!$obj->isAttributeSetTofield($col, 'hidden')){
+            $countWork = true;
+          }
+        }
+        if(substr($col, -4) == 'Cost'){
+          if(!$obj->isAttributeSetTofield($col, 'hidden')){
+            $countCost = true;
+          }
+        }
+        if($col=="_separator_menuReview_marginTop"){
+          break;
+        }
+      }
+    }
   } else if (SqlElement::is_subclass_of($obj, 'BudgetElement')) {
     $obj->setVisibility();
     $workVisibility=$obj->_workVisibility;
@@ -963,6 +987,29 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     } else if (substr($col, 0, 10)=='_separator') {    //Doris #3687
       $decomp=explode("_", $col);
       $name = i18n($decomp[2]);
+      if($decomp[2] == 'sectionCostWork'){
+        $cptCost=0;
+        $cptWork=0;
+        foreach ($extraHiddenFields as $valHidden){
+          if(substr($valHidden, -4) == 'Work'){
+            $cptWork++;
+          }
+          if(substr($valHidden, -4) == 'Cost'){
+            $cptCost++;
+          }
+        }
+        if($cptCost == 5)$countCost=false;
+        if($cptWork == 5)$countWork=false;
+        if(!$countWork and !$countCost){
+          continue;
+        }
+        if($countWork and !$countCost){
+          $name = i18n('sectionWork');
+        }
+        if(!$countWork and $countCost){
+          $name = i18n('sectionCost');
+        }
+      }
       $margin = "";
       if(1 or isset($decomp[3])){
         $margin = "margin-top:5px;";
