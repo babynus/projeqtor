@@ -107,10 +107,10 @@ if($editMode==="true"){
 }
 
 $easterDayList = array(
+                    3 => "",
                     0 => i18n("easter"),
                     1 => i18n("ascension"),
-                    2 => i18n("pentecost"),
-                    3 => ""
+                    2 => i18n("pentecost")
                    );
 $months = array (
                     0 => "",
@@ -144,7 +144,7 @@ $months = array (
                     <table>                        
                         <tr>
                             <td class="dialogLabel" >
-                                <label for="genericBankOffDayName"><?php echo i18n('name');?>&nbsp;:&nbsp;</label>
+                                <label class="longLabel" for="genericBankOffDayName"><?php echo i18n('name');?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
                                 <input data-dojo-type="dijit.form.ValidationTextBox" type="text" id="genericBankOffDayName" name="genericBankOffDayName" class="input required"
@@ -154,10 +154,10 @@ $months = array (
 			                      
                         <tr>
                             <td class="dialogLabel" >
-                                <label for="genericBankOffDayMonth"><?php echo i18n('month');?>&nbsp;:&nbsp;</label>
+                                <label class="longLabel" for="genericBankOffDayMonth"><?php echo i18n('month');?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
-                                <select id="genericBankOffDayMonth"  dojoType="dijit.form.Select"
+                                <select id="genericBankOffDayMonth"  dojoType="dijit.form.FilteringSelect"
                                         name="genericBankOffDayMonth" 
                                         class="input required" 
                                         value="<?php 
@@ -179,26 +179,40 @@ $months = array (
                         
                         <tr>
                             <td class="dialogLabel" >
-                                <label for="genericBankOffDayDay"><?php echo i18n('day');?>&nbsp;:&nbsp;</label>
+                                <label class="longLabel" for="genericBankOffDayDay"><?php echo i18n('day');?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
-                                <input data-dojo-type="dijit/form/NumberSpinner" id="genericBankOffDayDay" name="genericBankOffDayDay" value="<?php echo $day;?>" class="input"
+                                <input data-dojo-type="dijit/form/NumberSpinner" id="genericBankOffDayDay" name="genericBankOffDayDay" value="<?php echo $day;?>" class="input required"
                                     data-dojo-props="smallDelta:1, largeDelta:1, constraints:{min:1,max:31}" name="day" style="width:100px"/>
                             </td>
                         </tr>
               
                         <tr>
                             <td class="dialogLabel" >
-                                <label for="genericBankOffDayEasterDay"><?php echo i18n('easterDay');?></label>
+                                <label class="longLabel" for="genericBankOffDayEasterDay"><?php echo i18n('easterDay');?>&nbsp;:&nbsp;</label>
                             </td>
                             <td>
                                 <select id="genericBankOffDayEasterDay"  dojoType="dijit.form.Select"
                                         name="genericBankOffDayEasterDay" 
-                                        class="input required" 
+                                        class="input" 
                                         value="<?php 
                                             $theEasterDay = ($easterDay==null?3:$easterDay);
                                             echo $theEasterDay;
                                                ?>">
+                                    <script type="dojo/method" event="onChange" >
+                                      if (this.value == 3) {
+                                        enableWidget("genericBankOffDayMonth");
+                                        enableWidget("genericBankOffDayDay");
+                                        dojo.addClass(dijit.byId("genericBankOffDayMonth").domNode, 'required');
+                                        dojo.addClass(dijit.byId("genericBankOffDayDay").domNode, 'required');
+                                      } else {
+                                        disableWidget("genericBankOffDayMonth");
+                                        disableWidget("genericBankOffDayDay");
+                                        dijit.byId("genericBankOffDayName").set("value",dijit.byId("genericBankOffDayEasterDay").get("displayedValue"));
+                                        dojo.removeClass(dijit.byId("genericBankOffDayMonth").domNode, 'required');
+                                        dojo.removeClass(dijit.byId("genericBankOffDayDay").domNode, 'required');
+                                      }
+                                    </script> 
                                     <?php
                                     foreach( $easterDayList as $key => $val) {
                                         echo '<option value="' . $key . '"';

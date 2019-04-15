@@ -60,12 +60,14 @@ abstract class RequestHandler {
   public static function getClass($code,$required=false,$default=null) {
     $val=self::getValue($code,$required,$default);
     if ($val==$default) return $val;
+    if (strtolower($val)=='null' or strtolower($val)=='undefined') return null; 
     return Security::checkValidClass($val);
   }
   
   public static function getId($code,$required=false,$default=null) {
     $val=self::getValue($code,$required,$default);
     if ($val==$default) return $val;
+    if (strtolower($val)=='null' or strtolower($val)=='undefined') return null;
     return Security::checkValidId($val);
   }
   

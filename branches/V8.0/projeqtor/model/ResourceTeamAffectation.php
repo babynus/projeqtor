@@ -146,6 +146,7 @@ class ResourceTeamAffectation extends SqlElement {
     if (isset(self::$_resourcePeriods[$idResourceAff][$showIdle])) {
       return self::$_resourcePeriods[$idResourceAff][$showIdle];
     }
+    $resource=array();
     $aff=new ResourceTeamAffectation();
     if ($target=='Team') {
       $crit=array('idResourceTeam'=>$idResourceAff);

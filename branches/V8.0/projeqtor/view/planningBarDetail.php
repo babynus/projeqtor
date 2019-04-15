@@ -120,6 +120,7 @@ if($objectClassManual != 'ResourcePlanning' ){
   }
 }
 
+
 $dt=$start;
 while ($dt<=$end) {
   if (!isset($dates[$dt])) {
@@ -127,6 +128,8 @@ while ($dt<=$end) {
   }
   foreach ($ressAll as $ress) {
     $capa=$ress->getSurbookingCapacity($dt);
+    $ress->
+    $ressAll[$ress->id]
     if ($capa>$maxCapacity[$ress->id]) $maxCapacity[$ress->id]=$capa;
     if ($capa<$minCapacity[$ress->id]) $minCapacity[$ress->id]=$capa;
   }
@@ -136,28 +139,30 @@ ksort($dates);
 
 $width=20;
 echo '<table id="planningBarDetailTable" style="height:'.(count($work)*22).'px;background-color:#FFFFFF;border-collapse: collapse;marin:0;padding:0">';
-foreach ($work as $res) {
-  $resObj=$ressAll[$res['idResource']];
+$heightNormal=20;
+$heightCapacity=20;
+foreach ($work as $resWork) {
+  $resObj=$ressAll[$resWork['idResource']];
   echo '<tr style="height:20px;border:1px solid #505050;">';
   foreach ($dates as $dt) {
     $color="#ffffff";
-    $height=0; $w=0;
-    $capacityTop=$maxCapacity[$res['idResource']]; //$res['capacity'];
+    $height=20; $w=0;
+    $capacityTop=$maxCapacity[$resWork['idResource']]; //$resWork['capacity'];
     if ($capacityTop==0) $capacityTop=1;
-    if (isset($res[$dt])) {
-      $w=$res[$dt]['work'];       
+    if (isset($resWork[$dt])) {
+      $w=$resWork[$dt]['work'];       
       if (!$pe->validatedEndDate or $dt<=$pe->validatedEndDate) {
-        $color=($res[$dt]['type']=='real')?"#507050":"#50BB50";  
+        $color=($resWork[$dt]['type']=='real')?"#507050":"#50BB50";  
       } else {
-        $color=($res[$dt]['type']=='real')?"#705050":"#BB5050";
+        $color=($resWork[$dt]['type']=='real')?"#705050":"#BB5050";
       }
       $height=round($w*20/$capacityTop,0);
-      $heightNormal=round(20*$res['capacity']/$capacityTop,0);
+      $heightNormal=round(20*$resWork['capacity']/$capacityTop,0);
       $heightCapacity=round(20*$resObj->getSurbookingCapacity($dt)/$capacityTop,0);
     }
     echo '<td style="padding:0;width:'.$width.'px;border-right:1px solid #eeeeee;position:relative;">';
     echo '<div style="display:block;background-color:'.$color.';position:absolute;bottom:0px;left:0px;width:100%;height:'.$height.'px;"></div>';
-    if ($maxCapacity[$res['idResource']]!=$res['capacity'] or $minCapacity[$res['idResource']]!=$res['capacity']) {
+    if ($maxCapacity[$resWork['idResource']]!=$resWork['capacity'] or $minCapacity[$resWork['idResource']]!=$resWork['capacity']) {
       echo '<div style="display:block;background-color:transparent;position:absolute;bottom:0px;left:0px;width:100%;border-top:1px solid grey;height:'.$heightNormal.'px;"></div>';
     }
     if ($heightNormal!=$heightCapacity) {
@@ -165,9 +170,9 @@ foreach ($work as $res) {
     }
     echo '</td>';
   }
-  echo '<td style="border-left:1px solid #505050;"><div style="width:200px; max-width:200px;overflow:hidden; text-align:left">&nbsp;'.$res['resource'];
-  if ($maxCapacity[$res['idResource']]>$res['capacity']) echo '&nbsp;<img style="width:10px" src="../view/img/arrowUp.png" />&nbsp;'.htmlDisplayNumericWithoutTrailingZeros($maxCapacity[$res['idResource']]);
-  if ($minCapacity[$res['idResource']]<$res['capacity']) echo '&nbsp;<img style="width:10px" src="../view/img/arrowDown.png" />&nbsp;'.htmlDisplayNumericWithoutTrailingZeros($minCapacity[$res['idResource']]);
+  echo '<td style="border-left:1px solid #505050;"><div style="width:200px; max-width:200px;overflow:hidden; text-align:left">&nbsp;'.$resWork['resource'];
+  if ($maxCapacity[$resWork['idResource']]>$resWork['capacity']) echo '&nbsp;<img style="width:10px" src="../view/img/arrowUp.png" />&nbsp;'.htmlDisplayNumericWithoutTrailingZeros($maxCapacity[$resWork['idResource']]);
+  if ($minCapacity[$resWork['idResource']]<$resWork['capacity']) echo '&nbsp;<img style="width:10px" src="../view/img/arrowDown.png" />&nbsp;'.htmlDisplayNumericWithoutTrailingZeros($minCapacity[$resWork['idResource']]);
   echo '&nbsp;</div></td>';
   echo '</tr>';
 }
