@@ -30,35 +30,12 @@
 require_once "../tool/projeqtor.php";
 scriptLog('   ->/tool/saveGenericBankOffDays.php');
 
-if (! array_key_exists('idGenericBankOffDays',$_REQUEST)) {
-  throwError('idGenericBankOffDays parameter not found in REQUEST');
-}
-$id = $_REQUEST['idGenericBankOffDays'];
-
-if (! array_key_exists('idGenCalendarDefinition',$_REQUEST)) {
-  throwError('idGenCalendarDefinition parameter not found in REQUEST');
-}
-$idCalendarDefinition = $_REQUEST['idGenCalendarDefinition'];
-
-if (! array_key_exists('genericBankOffDayName',$_REQUEST)) {
-  throwError('genericBankOffDayName parameter not found in REQUEST');
-}
-$name = $_REQUEST['genericBankOffDayName'];
-
-if (! array_key_exists('genericBankOffDayMonth',$_REQUEST)) {
-  throwError('genericBankOffDayMonth parameter not found in REQUEST');
-}
-$month = $_REQUEST['genericBankOffDayMonth'];
-
-if (! array_key_exists('genericBankOffDayDay',$_REQUEST)) {
-  throwError('genericBankOffDayDay parameter not found in REQUEST');
-}
-$day = $_REQUEST['genericBankOffDayDay'];
-
-if (! array_key_exists('genericBankOffDayEasterDay',$_REQUEST)) {
-  throwError('genericBankOffDayEasterDay parameter not found in REQUEST');
-}
-$easterDay = $_REQUEST['genericBankOffDayEasterDay'];
+$id = RequestHandler::getId('idGenericBankOffDays',false);
+$idCalendarDefinition = RequestHandler::getId('idGenCalendarDefinition',true);;
+$name = RequestHandler::getValue('genericBankOffDayName');;
+$month = RequestHandler::getNumeric('genericBankOffDayMonth',false);
+$day = RequestHandler::getNumeric('genericBankOffDayDay',false);
+$easterDay = RequestHandler::getNumeric('genericBankOffDayEasterDay',false);
 
 Sql::beginTransaction();
 $calendarBankOffDays = new CalendarBankOffDays();
