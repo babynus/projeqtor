@@ -875,5 +875,17 @@ class ResourceMain extends SqlElement {
     public function getSurbookingCapacity($date) {
     	return $this->getCapacityPeriod($date);
     }
+    
+    public function getWeekCapacity($week) {
+      $weekDay=date('Y-m-d',firstDayofWeek(substr($week,-2),substr($week,0,4)));
+      $capaWeek=0;
+      for ($i=0;$i<7;$i++) {
+        if (isOpenDay($weekDay,$this->idCalendarDefinition)) {
+          $capaWeek+=$this->getSurbookingCapacity($weekDay);
+        }
+        $weekDay=addDaysToDate($weekDay,1);
+      }
+      return $capaWeek;
+    }
 }
 ?>

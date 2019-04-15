@@ -4469,8 +4469,8 @@ function splitCssAttributes($attr) {
 function getWeekNumberFromDate($date) {
   if (!$date) $date=date('Y-m-d');
   $currentWeek=weekNumber($date) ;
-  $currentYear=substr($date,5,2);
-  $currentMonth=substr($date,8,2);
+  $currentYear=substr($date,0,4);
+  $currentMonth=substr($date,5,2);
   if ($currentWeek==1 and $currentMonth>10 ) {
     $currentYear+=1;
   }
