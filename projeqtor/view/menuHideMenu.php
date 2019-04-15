@@ -35,7 +35,6 @@
   $menuList=$obj->getSqlElementsFromCriteria(null, false,null,$sortOrder,true);
   $isLanguageActive=(Parameter::getGlobalParameter('displayLanguage')=='YES')?true:false;
   // Clean empty parents
-  //debugLog($menuList);
   foreach (array_reverse($menuList,true) as $idMenu=>$menu) {
     if ($menu->type=='menu') {
       $found=false;

@@ -421,6 +421,7 @@ class ResourceMain extends SqlElement {
       }
     }
     $result['variableCapacity']=$this->hasVariableCapacity();
+    $result['weekTotalCapacity']=array();
     return $result;
   }
   
