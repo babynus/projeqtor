@@ -2009,9 +2009,7 @@ function finaliseButtonDisplay(specificWidgetArray) {
         disableWidget('indentDecreaseButton');
         disableWidget('indentIncreaseButton');
       }
-      console.log("OK");
       dojo.query(".pluginButton").forEach(function(node, index, nodelist) {
-        console.log(node);
         disableWidget(node.getAttribute('widgetid'));
       });
     }
@@ -2167,9 +2165,7 @@ function formChanged(specificWidgetArray) {
         }
     }
 // END ADD BY Marc TABARY - 2017-03-06 -  - ALLOW DISABLED SPECIFIC WIDGET
-    console.log("OK formChanged");
     dojo.query(".pluginButton").forEach(function(node, index, nodelist) {
-      console.log(node);
       disableWidget(node.getAttribute('widgetid'));
     });
 }
@@ -3047,7 +3043,6 @@ var ongoingRunScriptContextMenu=false;
 function runScriptContextMenu(refType, refId, id) {
   if (ongoingRunScriptContextMenu) return;
   ongoingRunScriptContextMenu=true;
-  console.log("call runScriptContextMenu");
   var objectClassManual = dojo.byId('objectClassManual').value;
   showWait();
   setTimeout("document.body.style.cursor='default';",100);

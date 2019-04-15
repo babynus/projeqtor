@@ -63,9 +63,7 @@ function showXhrErrorInErrorPopup(error,msg) {
 
         // Show result
         contentNode.style.display = "block";
-    } else {
-        console.log(errorTitle+' - '+msg+' - '+theError);
-    }
+    } 
 }
 
 /**
@@ -118,8 +116,6 @@ function showSqlElementResultInPopup(msg) {
               }
             }).play();        
         }
-    } else {
-        console.log(i18n("result")+" - status = "+type+" - msg = "+theMsg);
     }    
 }
 
@@ -2389,7 +2385,7 @@ function refreshListFieldsInDialogCustomEarnedRules(table) {
 
 function checkLeavesEarned(userId) {
     if (typeof(userId)=='undefined' || userId<0) {
-        console.log("No check for Leaves Earned - Unknow UserId - " + userId);
+      consoleTraceLog("No check for Leaves Earned - Unknow UserId - " + userId);
     }
 
     var currentDate = new Date();
@@ -2402,15 +2398,13 @@ function checkLeavesEarned(userId) {
             if(data){
                 var result = JSON.parse(data);
                 if (result!='OK') {
-                    console.log('Error on checking Leaves Earned at ' + currentDate +' - result = '+result);
-                } else {
-                    console.log("Leave Earned checked at " + currentDate + ' for user id ' + userId);                        
+                  consoleTraceLog('Error on checking Leaves Earned at ' + currentDate +' - result = '+result);
                 }
             }
         },
         error: function(error){
-            console.log("checkLeavesEarned Error at " + currentDate);
-            console.log(error);
+          consoleTraceLog("checkLeavesEarned Error at " + currentDate);
+          consoleTraceLog(error);
         }
     });
     

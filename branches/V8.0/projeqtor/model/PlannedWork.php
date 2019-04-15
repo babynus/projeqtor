@@ -592,7 +592,7 @@ class PlannedWork extends GeneralWork {
 	          if (array_key_exists($ass->idResource,$resources)) {
 	            $ress=$resources[$ass->idResource];
 	          } else {
-	            $ress=$r->getWork($startDate, $withProjectRepartition);      
+	            $ress=$r->getWork($startDate, $withProjectRepartition);    
 	            $resources[$ass->idResource]=$ress;
 	          }
 	        	$assRate=1;
@@ -725,7 +725,7 @@ class PlannedWork extends GeneralWork {
             $ass->leftWork=0;
             $ass->plannedWork=$ass->realWork;
           }
-          while (1) {    
+          while (1) {
             // Variable Capacity : retreive the capacity for the current date
             if ($ress['variableCapacity']) {
               $capacity=$r->getSurbookingCapacity($currentDate);
@@ -734,6 +734,21 @@ class PlannedWork extends GeneralWork {
               } else {
                 $capacityRate=round($assRate*$capacity,2);
               }
+              $week=getWeekNumberFromDate($currentDate);
+              if (! isset($ress['weekTotalCapacity'][$week])) {
+                $rTemp=new Resource($ass->idResource);
+                $weekDay=firstDayofWeek(substr($week,-2),substr($week,0,4));
+                $capaWeek=0;
+                for ($i=0;$i<7;$i++) {
+                  if (isOpenDay($currentDate,$rTemp->idCalendarDefinition)) {
+                    $capaWeek+=$rTemp->getSurbookingCapacity($weekDay);
+                  }
+                  $weekDay=addDaysToDate($weekDay,1);
+                }
+                $ress['weekTotalCapacity'][$week]=$capaWeek;
+                $resources[$ass->idResource]['weekTotalCapacity'][$week]=$capaWeek;
+              }
+              debugLog("capacity of resource $ass->idResource for week $week is $capaWeek");
             }
             // End Variable capacity
             if ($ress['team']) { // For team resource, check if unitary resources have enought availability
@@ -902,12 +917,16 @@ class PlannedWork extends GeneralWork {
                     	$arrayNotPlanned[$ass->id]=$left;
                     	$left=0;
                     }
-                    if ($rateProj==1) {
-                    	$leftProj=round(7*$capacity*$rateProj,2)-$plannedProj; // capacity for a full week
-                    	// => to be able to plan weekends
+                    if ($ress['variableCapacity']) {
+                      $capaWeek=$ress['weekTotalCapacity'][getWeekNumberFromDate($currentDate)];
                     } else {
-                      $leftProj=round($daysPerWeek*$capacity*$rateProj,2)-$plannedProj; // capacity for a week
+                      if ($rateProj==1) {
+                        $capaWeek=7*$capacity;
+                      } else {
+                        $capaWeek=$daysPerWeek*$capacity;
+                      }
                     }
+                    $leftProj=round($capaWeek*$rateProj,2)-$plannedProj; // capacity for a week
                     if ($value>$leftProj) {
                       $value=$leftProj;
                     }
