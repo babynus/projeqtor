@@ -584,8 +584,10 @@ class PlannedWork extends GeneralWork {
           }
         }
         if ($profile=='GROUP') {
+          $resourceOfTheGroup=array();
         	foreach ($listAss as $ass) {
 	        	$r=new Resource($ass->idResource,true);
+	        	$resourceOfTheGroup[$ass->idResource]=array('resObj'=>$r,'capacity'=>array());
 	          $capacity=($r->capacity)?$r->capacity:1;
 	          if (array_key_exists($ass->idResource,$resources)) {
 	            $ress=$resources[$ass->idResource];
@@ -966,6 +968,13 @@ class PlannedWork extends GeneralWork {
                 		$grpCapacity=1;
                 		if ($grp['leftWorkTmp']>0) {
 	                		$grpCapacity=$grp['capacity']*$grp['assRate'];
+	                		if ($resources[$id]['variableCapacity']) {
+	                		  if (! isset($resourceOfTheGroup[$id]['capacity'][$currentDate])) {
+	                		    $rTemp=$resourceOfTheGroup[$id]['resObj'];
+	                		    $resourceOfTheGroup[$id]['capacity'][$currentDate]=$rTemp->getSurbookingCapacity($currentDate);
+	                		  } 
+	                		  $grpCapacity=$resourceOfTheGroup[$id]['capacity'][$currentDate]*$grp['assRate'];
+	                		}
 	                		if (isOffDay($currentDate,$grp['calendar'])) {
 	                		  $grpCapacity=0;
 	                		} else if (isset($grp['ResourceWork'][$currentDate])) {
@@ -1467,8 +1476,9 @@ scriptLog("storeListPlan(listPlan,$plan->id)");
   
   private static function sortPlanningElements($list,$listProjectsPriority) {
   	// first sort on simple criterias
-    $mainPriority="endDate"; // May be set to "endDate" or "priority"
-    $str01=($mainPriority=='endDate')?'.00000000':'';
+    $mainPriority="priority"; // May be set to "endDate" or "priority"
+    $str01='.00000000';
+    $str99='.99999999';
     //$str02=($mainPriority=='priority')?'.00000000':'';
     $pmList=SqlList::getList('PlanningMode','code',null,true);
     $pmList['']='';
@@ -1489,7 +1499,7 @@ scriptLog("storeListPlan(listPlan,$plan->id)");
     	} else if ($pm=='ALAP' and $elt->validatedEndDate and $mainPriority=='endDate') {
     		$crit='5'.'.'.str_replace('-','',$elt->validatedEndDate);
     	} else { // Others (includes GROUP, wich is not a priority but a constraint)
-        $crit='5'.$str01;
+        $crit='5'.$str99;
     	}
       $crit.='.';
       $prio=$elt->priority;
@@ -1500,11 +1510,11 @@ scriptLog("storeListPlan(listPlan,$plan->id)");
       }
       if (! $elt->leftWork or $elt->leftWork==0) {$prio=0;}
       $crit.=str_pad($projPrio,5,'0',STR_PAD_LEFT).'.'.str_pad($prio,5,'0',STR_PAD_LEFT);
-      //if (0 and $elt->idPlanningMode=='4' and $elt->validatedEndDate and $mainPriority=='priority') {
-      //  $crit.='.'.str_replace('-','',$elt->validatedEndDate);
-      //} else {
-      //  $crit.=$str02;
-      //}
+      if ($pm=='ALAP' and $elt->validatedEndDate and $mainPriority=='priority') {
+        $crit.='.'.str_replace('-','',$elt->validatedEndDate);
+      } else {
+        $crit.=$str99;
+      }
       $crit.='.'.$elt->wbsSortable;
       $elt->_sortCriteria=$crit;
       $list[$id]=$elt;
