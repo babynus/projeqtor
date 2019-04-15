@@ -120,16 +120,18 @@ if($objectClassManual != 'ResourcePlanning' ){
   }
 }
 
-
+$variableCapacity=array();
 $dt=$start;
 while ($dt<=$end) {
   if (!isset($dates[$dt])) {
     $dates[$dt]=$dt;
   }
   foreach ($ressAll as $ress) {
+    if (!isset($variableCapacity[$ress->id])) $variableCapacity[$ress->id]=array();
     $capa=$ress->getSurbookingCapacity($dt);
-    $ress->
-    $ressAll[$ress->id]
+    if ($capa!=$ress->capacity) {
+      $variableCapacity[$ress->id][$dt]=$capa;
+    }
     if ($capa>$maxCapacity[$ress->id]) $maxCapacity[$ress->id]=$capa;
     if ($capa<$minCapacity[$ress->id]) $minCapacity[$ress->id]=$capa;
   }
@@ -144,10 +146,29 @@ $heightCapacity=20;
 foreach ($work as $resWork) {
   $resObj=$ressAll[$resWork['idResource']];
   echo '<tr style="height:20px;border:1px solid #505050;">';
+  $overCapa=null;
+  $underCapa=null;
   foreach ($dates as $dt) {
     $color="#ffffff";
-    $height=20; $w=0;
+    $height=20; $w=0;    
     $capacityTop=$maxCapacity[$resWork['idResource']]; //$resWork['capacity'];
+    if (!isset($variableCapacity[$resWork['idResource']][$dt])) {
+      $heightNormal=20;
+      $heightCapacity=20;
+    } else {
+      $tmp=$ressAll[$resWork['idResource']];
+      if ($variableCapacity[$resWork['idResource']][$dt]>$tmp->capacity) {
+        if (!$overCapa or $variableCapacity[$resWork['idResource']][$dt]>$overCapa) {
+          $overCapa=$variableCapacity[$resWork['idResource']][$dt];
+        }
+      } else {
+        if (!$underCapa or $variableCapacity[$resWork['idResource']][$dt]<$underCapa) {
+          $underCapa=$variableCapacity[$resWork['idResource']][$dt];
+        }
+      }
+      $heightNormal=round(20*$resWork['capacity']/$capacityTop,0);
+      $heightCapacity=round(20*$variableCapacity[$resWork['idResource']][$dt]/$capacityTop,0);
+    }
     if ($capacityTop==0) $capacityTop=1;
     if (isset($resWork[$dt])) {
       $w=$resWork[$dt]['work'];       
@@ -157,22 +178,20 @@ foreach ($work as $resWork) {
         $color=($resWork[$dt]['type']=='real')?"#705050":"#BB5050";
       }
       $height=round($w*20/$capacityTop,0);
-      $heightNormal=round(20*$resWork['capacity']/$capacityTop,0);
-      $heightCapacity=round(20*$resObj->getSurbookingCapacity($dt)/$capacityTop,0);
     }
     echo '<td style="padding:0;width:'.$width.'px;border-right:1px solid #eeeeee;position:relative;">';
     echo '<div style="display:block;background-color:'.$color.';position:absolute;bottom:0px;left:0px;width:100%;height:'.$height.'px;"></div>';
     if ($maxCapacity[$resWork['idResource']]!=$resWork['capacity'] or $minCapacity[$resWork['idResource']]!=$resWork['capacity']) {
       echo '<div style="display:block;background-color:transparent;position:absolute;bottom:0px;left:0px;width:100%;border-top:1px solid grey;height:'.$heightNormal.'px;"></div>';
     }
-    if ($heightNormal!=$heightCapacity) {
+    if ($heightNormal!=$heightCapacity and isset($variableCapacity[$resWork['idResource']][$dt])) {
       echo '<div style="display:block;background-color:transparent;position:absolute;bottom:0px;left:0px;width:100%;border-top:1px solid red;height:'.$heightCapacity.'px;"></div>';
     }
     echo '</td>';
   }
   echo '<td style="border-left:1px solid #505050;"><div style="width:200px; max-width:200px;overflow:hidden; text-align:left">&nbsp;'.$resWork['resource'];
-  if ($maxCapacity[$resWork['idResource']]>$resWork['capacity']) echo '&nbsp;<img style="width:10px" src="../view/img/arrowUp.png" />&nbsp;'.htmlDisplayNumericWithoutTrailingZeros($maxCapacity[$resWork['idResource']]);
-  if ($minCapacity[$resWork['idResource']]<$resWork['capacity']) echo '&nbsp;<img style="width:10px" src="../view/img/arrowDown.png" />&nbsp;'.htmlDisplayNumericWithoutTrailingZeros($minCapacity[$resWork['idResource']]);
+  if ($overCapa) echo '&nbsp;<img style="width:10px" src="../view/img/arrowUp.png" />&nbsp;'.htmlDisplayNumericWithoutTrailingZeros($overCapa);
+  if ($underCapa) echo '&nbsp;<img style="width:10px" src="../view/img/arrowDown.png" />&nbsp;'.htmlDisplayNumericWithoutTrailingZeros($underCapa);
   echo '&nbsp;</div></td>';
   echo '</tr>';
 }
