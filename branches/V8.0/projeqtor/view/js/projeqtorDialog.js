@@ -8848,7 +8848,6 @@ function getMaxHeight(document){
 
 function planningToCanvasToPDF(){
 
-  console.log("planningToCanvasToPDF - START");
   var iframe = document.createElement('iframe');
   
   //this onload is for firefox but also work on others browsers
@@ -9154,7 +9153,6 @@ function planningToCanvasToPDF(){
               }
               tabImage.push(ArrayToPut);
             }
-            console.log("step 6");
             for(var i=0;i<canvasList2.length;i++){
               if(canvasList2[i].width-widthIconTask>4){
                 //Add image to mapImage in base64 format
@@ -10121,7 +10119,6 @@ function refreshRadioButtonDiv(){
 }
 		  
 function saveModuleStatus(id,status) {
-  console.log(id+"/"+status);
   if (id==12 && (status==false || status=='false')) {
       actionOK = function () {
         adminDisconnectAll(false);
@@ -10165,12 +10162,10 @@ function saveModuleStatusCheckParent(id) {
   var wdgt=dijit.byId('module_'+id);
   var parent=wdgt.get('parent');
   if (parent && dojo.byId('module_'+parent)) {
-    console.log("parent="+parent);
     var oneOn=false;
     var allOff=true;
     dojo.query(".moduleClass.parentModule"+parent).forEach(function(domNode){
       var name=domNode.getAttribute('widgetid');
-      console.log("  name="+name);
       var widget=dijit.byId(name);
       if (widget) {
         if (widget.get('checked')==true) {
