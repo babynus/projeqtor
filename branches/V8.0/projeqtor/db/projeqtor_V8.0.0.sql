@@ -422,7 +422,7 @@ INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active
  (9,'moduleMeeting','700',null,0,1),
  (10,'moduleReview','710',null,0,1),
  (11,'moduleConfiguration','800',null,0,1),
- (12,'moduleHumanResource','900',null,0,1),
+ (12,'moduleHumanResource','900',null,0,0),
  (13,'moduleNotification','1600',null,0,1),
  (14,'moduleOrganization','1100',null,0,1),
  (15,'moduleDocument','1000',null,0,1),
