@@ -321,7 +321,7 @@ class ResourceMain extends SqlElement {
       // store Data on a project level view
         foreach ($listTopProjects as $idProject) {
           $projectKey='Project#'. $idProject;
-          $week=weekFormat($date);
+          $week=getWeekNumberFromDate($date);
           if (array_key_exists($projectKey,$result)) {
             if (array_key_exists($week,$result[$projectKey])) {
               $valProj=$result[$projectKey][$week];
@@ -362,7 +362,7 @@ class ResourceMain extends SqlElement {
         // store Data on a project level view
         foreach ($listTopProjects as $idProject) {
           $projectKey='Project#' . $idProject;
-          $week=weekFormat($date);
+          $week=getWeekNumberFromDate($date);
           if (array_key_exists($projectKey,$result)) {
             if (array_key_exists($week,$result[$projectKey])) {
               $valProj=$result[$projectKey][$week];
@@ -422,6 +422,7 @@ class ResourceMain extends SqlElement {
     }
     $result['variableCapacity']=$this->hasVariableCapacity();
     $result['weekTotalCapacity']=array();
+    $result['calendar']=$this->idCalendarDefinition;
     return $result;
   }
   
