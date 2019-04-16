@@ -772,7 +772,23 @@ class Cron {
   		if ($posEndMsg) {
   		  $msg=substr($body,0,$posEndMsg);
   		}
-  		// Remove unexpected "tags" // Valid as lon as we treat emails as text
+  		
+  		if (!trim ($msg)) { // Message not received with previous methods, try another one
+  		  $posEndMsg=strrpos(substr($body,0,$posClass), "\n");
+  		  $posDe=strrpos(substr($body,0,$posEndMsg), "De : ");
+  		  if ($posDe>2) {
+  		    $posEndMsg=$posDe-1;
+  		  }
+  		  else {
+  		    $posDe=strrpos(substr($body,0,$posEndMsg), "From : ");
+  		    if ($posDe>2) {
+  		      $posEndMsg=$posDe-1;
+  		    }
+  		  }
+  		  $msg=substr($body,0,$posEndMsg);
+  		}
+
+  		// Remove unexpected "tags" // Valid as long as we treat emails as text
   		$msg=preg_replace('/<mailto.*?\>/','',$msg);
   		$msg=preg_replace('/<http.*?\>/','',$msg);
   		$msg=preg_replace('/<#[A-F0-9\-]*?\>/','',$msg);
