@@ -6581,12 +6581,12 @@ function loadMenuBarObject(menuClass, itemName, from) {
   if (from == 'bar') {
     selectTreeNodeById(dijit.byId('menuTree'), menuClass);
   }
-  selectIconMenuBar(menuClass);
   cleanContent("detailDiv");
   formChangeInProgress=false;
   var currentScreen=menuClass; 
-    loadContent("objectMain.php?objectClass=" + currentScreen, "centerDiv"); 
+  loadContent("objectMain.php?objectClass=" + currentScreen, "centerDiv"); 
   stockHistory(currentScreen,null,"object");
+  selectIconMenuBar(menuClass);
   return true;
 }
 
@@ -6598,7 +6598,6 @@ function loadMenuBarItem(item, itemName, from) {
   if (from == 'bar') {
     selectTreeNodeById(dijit.byId('menuTree'), item);
   }
-  selectIconMenuBar(item);
   cleanContent("detailDiv");
   formChangeInProgress=false;
   var currentScreen=item;
@@ -6691,7 +6690,7 @@ function loadMenuBarItem(item, itemName, from) {
     showInfo(i18n("messageSelectedNotAvailable", new Array(itemName)));
   }
   stockHistory(null,null,currentScreen);
-  
+  selectIconMenuBar(item);
   return true;
 }
 
