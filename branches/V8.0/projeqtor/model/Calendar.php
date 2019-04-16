@@ -354,7 +354,8 @@ class Calendar extends SqlElement {
         
 // MTY - MULTI CALENDAR
 //  	$crit=array('isOffDay'=>'1', 'idCalendarDefinition'=>'1');
-        $whereClause = "isOffDay=1 AND idCalendarDefinition=$idCalDef";
+        if (!trim($idCalDef)) $idCalDef='1';
+        $whereClause = "isOffDay=1 AND idCalendarDefinition=$idCalDef ";
         if ($startDate!=null) {
             $whereClause .= " AND calendarDate >= '$startDate'";
         }
@@ -363,13 +364,13 @@ class Calendar extends SqlElement {
         }
         if ($startDate==null and $endDate==null) {
             if ($year!=null) {
-                $whereClause .= " AND year=$year";
+                $whereClause .= " AND year=$year ";
             } elseif ($month!=null) {
-                $whereClause .= " AND month=$month";
+                $whereClause .= " AND month=$month ";
             } elseif ($week!=null) {
-                $whereClause .= " AND week=$week";
+                $whereClause .= " AND week=$week ";
             } elseif ($day!=null) {
-                $whereClause .= " AND day=$day";
+                $whereClause .= " AND day=$day ";
             }
             
         }
@@ -398,22 +399,23 @@ class Calendar extends SqlElement {
     $cal=New Calendar();
 // MTY - MULTI CALENDAR
 //  	$crit=array('isOffDay'=>'0', 'idCalendarDefinition'=>'1');
-        $whereClause = "isOffDay=0 AND idCalendarDefinition=$idCalDef";
+        if (!trim($idCalDef)) $idCalDef='1';
+        $whereClause = "isOffDay=0 AND idCalendarDefinition=$idCalDef ";
         if ($startDate!=null) {
-            $whereClause .= " AND calendarDate >= '$startDate'";
+            $whereClause .= " AND calendarDate >= '$startDate' ";
         }
         if ($endDate!=null) {
-            $whereClause .= " AND calendarDate <= '$endDate'";            
+            $whereClause .= " AND calendarDate <= '$endDate' ";            
         }
         if ($startDate==null and $endDate==null) {
             if ($year!=null) {
-                $whereClause .= " AND year=$year";
+                $whereClause .= " AND year=$year ";
             } elseif ($month!=null) {
-                $whereClause .= " AND month=$month";
+                $whereClause .= " AND month=$month ";
             } elseif ($week!=null) {
-                $whereClause .= " AND week=$week";
+                $whereClause .= " AND week=$week ";
             } elseif ($day!=null) {
-                $whereClause .= " AND day=$day";
+                $whereClause .= " AND day=$day ";
             }
             
         }
