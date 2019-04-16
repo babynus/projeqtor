@@ -761,8 +761,8 @@ class PlannedWork extends GeneralWork {
             }
             $week=getWeekNumberFromDate($currentDate);
             if (! isset($ress['weekTotalCapacity'][$week])) {
-              $rTemp=new Resource($ass->idResource);
-              $capaWeek=$rTemp->getWeekCapacity($week);
+              $rTemp=new ResourceAll($ass->idResource);
+              $capaWeek=$rTemp->getWeekCapacity($week,$capacityRate);
               $ress['weekTotalCapacity'][$week]=$capaWeek;
               $resources[$ass->idResource]['weekTotalCapacity'][$week]=$capaWeek;
             }            
@@ -1033,7 +1033,7 @@ class PlannedWork extends GeneralWork {
 	                    $week=getWeekNumberFromDate($currentDate);
 	                    if (! isset($resources[$id]['weekTotalCapacity'][$week])) {
 	                      $rTemp=new Resource($id);
-	                      $capaWeek=$rTemp->getWeekCapacity($week);	                      
+	                      $capaWeek=$rTemp->getWeekCapacity($week,$capacityRate);	                      
 	                      $resources[$id]['weekTotalCapacity'][$week]=$capaWeek;
 	                    } else {
 	                      $capaWeek=$resources[$id]['weekTotalCapacity'][$week];
