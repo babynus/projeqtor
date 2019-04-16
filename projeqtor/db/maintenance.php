@@ -784,11 +784,6 @@ if (beforeVersion($currVersion,"V8.0.0")) {
     $mod->active=false;
     $mod->save();
   }
-  if (Parameter::getGlobalParameter('notificationSystemActiv')!='YES') {
-    $mod=new Module(12);
-    $mod->active=false;
-    $mod->save();
-  }
 }
 // To be sure, after habilitations updates ...
 Habilitation::correctUpdates();
