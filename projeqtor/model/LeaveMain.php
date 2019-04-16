@@ -500,8 +500,8 @@ class LeaveMain extends SqlElement {
         }
         
         //to test if the leave overlap with other existing leave 
-        $thisStartDateRqFormat = (new DateTime($this->startDate))->format('Ymd');
-        $thisEndDateRqFormat = (new DateTime($this->endDate))->format('Ymd');  
+        $thisStartDateRqFormat = (new DateTime($this->startDate))->format('Y-m-d');
+        $thisEndDateRqFormat = (new DateTime($this->endDate))->format('Y-m-d');  
         //the request select all the leaves of the requester that overlap with the current one
         //for the overlap, the half-days are taken into account
 //        $clauseWhere="idEmployee=".$this->idEmployee." AND rejected <> 1 "//select the leaves of the requester which are not rejected
