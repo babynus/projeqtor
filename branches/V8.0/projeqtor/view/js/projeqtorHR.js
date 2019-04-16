@@ -157,7 +157,7 @@ function getCookieValue(cname) {
  * @returns {String} : The oppocite color
  */
 function oppositeColor(hex, bw) {
-    if (typeof(hex)=="undefined") {return '#FFFFFF';}
+    if (! hex || typeof(hex)=="undefined") {return '#000000';}
     if (hex.indexOf('#') === 0) {
         hex = hex.slice(1);
     }
@@ -166,7 +166,7 @@ function oppositeColor(hex, bw) {
         hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
     }
     if (hex.length !== 6) {
-        throw new Error('Invalid HEX color.');
+        throw new Error('Invalid HEX color "'+hex+'"');
     }
     var r = parseInt(hex.slice(0, 2), 16),
         g = parseInt(hex.slice(2, 4), 16),
@@ -2542,7 +2542,7 @@ function exportLeaveCalendarOfDashboardEmployeeManager() {
     window.onbeforeunload = function() {
         return;
     };
-    window.location.replace("../tool/exportLeaveCalendarOfDashboardEmployeeManager?"+params);
+    window.location.replace("../tool/exportLeaveCalendarOfDashboardEmployeeManager.php?"+params);
     
 }
 
