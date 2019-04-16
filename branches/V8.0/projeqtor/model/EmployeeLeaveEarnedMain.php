@@ -454,9 +454,9 @@ class EmployeeLeaveEarnedMain extends SqlElement {
     if($this->startDate!=null && $this->endDate!=null){
         $start=(new DateTime($this->startDate))->format('Ymd');
         $end=(new DateTime($this->endDate))->format('Ymd');
-        $clauseWhere="idLeaveType=".$this->idLeaveType." AND idEmployee=".$this->idEmployee." AND idle=0 AND ( (startDate>=".$start." AND ! (startDate>".$end.")) OR "
-                . "(endDate<=".$end." AND ! (endDate<".$start.")) OR "
-                . "(startDate<=$start AND endDate>=".$end.") )";
+        $clauseWhere="idLeaveType=".$this->idLeaveType." AND idEmployee=".$this->idEmployee." AND idle=0 AND ( (startDate>='$start' AND ! (startDate>'$end')) OR "
+                . "(endDate<='$end' AND ! (endDate<'$start')) OR "
+                . "(startDate<='$start' AND endDate>='$end') )";
         if($this->id!=null){
             $clauseWhere.="AND id <>".$this->id;
         }
