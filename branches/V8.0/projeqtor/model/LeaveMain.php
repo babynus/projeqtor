@@ -507,21 +507,21 @@ class LeaveMain extends SqlElement {
 //        $clauseWhere="idEmployee=".$this->idEmployee." AND rejected <> 1 "//select the leaves of the requester which are not rejected
         $clauseWhere="idEmployee=".$this->idEmployee." "//select the leaves of the requester
                 //and the leaves included between the dates of the new leave
-                . "AND ((startDate > ".$thisStartDateRqFormat." AND endDate < ".$thisEndDateRqFormat.") "
+                . "AND ((startDate >'$thisStartDateRqFormat' AND endDate <'$thisEndDateRqFormat') "
                 //and the leaves which include the dates of the new leaves
-                . "OR (startDate < ".$thisStartDateRqFormat." AND endDate > ".$thisEndDateRqFormat.") "
+                . "OR (startDate <'$thisStartDateRqFormat' AND endDate >'$thisEndDateRqFormat') "
                 //and the leaves which include the startDate of the new leave (and their endDate must be inferior or equal to the endDate of the new leave so the request doesn't include all the leaves after endDate
-                . "OR (startDate <= ".$thisStartDateRqFormat." AND endDate > ".$thisStartDateRqFormat."  AND endDate <= ".$thisEndDateRqFormat.") "
+                . "OR (startDate <='$thisStartDateRqFormat' AND endDate >'$thisStartDateRqFormat'  AND endDate <='$thisEndDateRqFormat') "
                 //and the leaves which include the endDate of the new leave 
-                . "OR (startDate < ".$thisEndDateRqFormat." AND endDate >= ".$thisEndDateRqFormat." AND startDate >= ".$thisStartDateRqFormat.") "
+                . "OR (startDate <'$thisEndDateRqFormat' AND endDate >='$thisEndDateRqFormat' AND startDate >= '$thisStartDateRqFormat') "
                 //and the leaves which does not respect a particular case (example: it's possible to take a leave which start the 14/06/18 PM and end the 16/06/18 AM with two leaves with the first ending the 14/06/18 AM and the second beginning the 16/06/18 PM)
-                . "OR (endDate=".$thisStartDateRqFormat." AND startDate=".$thisEndDateRqFormat." AND (NOT (endAMPM='AM' AND '".$this->startAMPM."'='PM')) AND (NOT ('".$this->endAMPM."'='AM' AND startAMPM='PM')) AND (NOT(".$thisStartDateRqFormat."=".$thisEndDateRqFormat.")) ) "
+                . "OR (endDate='$thisStartDateRqFormat' AND startDate='$thisEndDateRqFormat' AND (NOT (endAMPM='AM' AND '$this->startAMPM'='PM')) AND (NOT ('$this->endAMPM'='AM' AND startAMPM='PM')) AND (NOT('$thisStartDateRqFormat'='$thisEndDateRqFormat')) ) "
                 //...
-                . "OR (endDate=".$thisStartDateRqFormat." AND NOT (endAMPM='AM' AND '".$this->startAMPM."'='PM') AND (NOT(".$thisStartDateRqFormat."=".$thisEndDateRqFormat.")) ) "
+                . "OR (endDate='$thisStartDateRqFormat' AND NOT (endAMPM='AM' AND '$this->startAMPM'='PM') AND (NOT('$thisStartDateRqFormat'='$thisEndDateRqFormat')) ) "
                 
-                . "OR (startDate=".$thisEndDateRqFormat." AND NOT ('".$this->endAMPM."'='AM' AND startAMPM='PM') AND (NOT(".$thisStartDateRqFormat."=".$thisEndDateRqFormat.")) )  "
+                . "OR (startDate='$thisEndDateRqFormat' AND NOT ('$this->endAMPM'='AM' AND startAMPM='PM') AND (NOT('$thisStartDateRqFormat'='$thisEndDateRqFormat')) )  "
                 
-                . "OR (startDate=".$thisStartDateRqFormat." AND startDate=".$thisEndDateRqFormat." AND startDate=endDate AND ( NOT( (startAMPM='PM' AND endAMPM='PM' AND '".$this->startAMPM."'='AM' AND '".$this->endAMPM."'='AM') OR (startAMPM='AM' AND endAMPM='AM' AND '".$this->startAMPM."'='PM' AND '".$this->endAMPM."'='PM') ) ) ) "
+                . "OR (startDate='$thisStartDateRqFormat' AND startDate='$thisEndDateRqFormat' AND startDate=endDate AND ( NOT( (startAMPM='PM' AND endAMPM='PM' AND '$this->startAMPM'='AM' AND '$this->endAMPM'='AM') OR (startAMPM='AM' AND endAMPM='AM' AND '$this->startAMPM'='PM' AND '$this->endAMPM'='PM') ) ) ) "
                 . ")"; 
         if($this->id != NULL){//to exclude this leave of the request
             $clauseWhere.="AND id <> ".$this->id;
@@ -1432,7 +1432,7 @@ class LeaveMain extends SqlElement {
    * @return string a string containing the first open date available at the creation of a leave (id=null) 
    */
   public function getFirstOpenDateAtCreation(){
-    $today=(new DateTime())->format('Ymd'); 
+    $today=(new DateTime())->format('Y-m-d'); 
     
     //an array containing all the exceptionnal offdays of the current year
     $arrayOffDays=explode("#", Calendar::getOffDayList(getSessionUser()->idCalendarDefinition) );
@@ -1441,7 +1441,7 @@ class LeaveMain extends SqlElement {
     $arrayOffDaysOfTheWeek = $this -> arrayOfOffDaysOfTheWeek();
 
     //a request to get all the leaves the employee asking for a new leave has already taken with a date superior than the date the leave was created
-    $clauseWhereSelectLvs = "idEmployee= ".$this->idEmployee." AND (startDate >= ".$today." OR endDate >= ".$today.")";
+    $clauseWhereSelectLvs = "idEmployee= ".$this->idEmployee." AND (startDate >='$today' OR endDate >= '$today')";
     $clauseOrderByAscDates = "startDate, endDate ASC";
     $lvList=$this->getSqlElementsFromCriteria(null, false, $clauseWhereSelectLvs, $clauseOrderByAscDates);
     
