@@ -139,6 +139,15 @@ html, body {
     text-align:center;
   }
   
+    .menuBarItemSelected {
+    border-color: #a5a5a5;
+    border-bottom-color: #757575;
+    color: #3C3C3C;
+    background: #fcfdfd url(images/buttonHover.png) repeat-x bottom;    
+    background-color: #ffffff;
+    background: #ffffff url(images/buttonHover.png) repeat-x bottom left;
+  }
+  
   .bottomNotification {
     position:relative;
     cursor:pointer;

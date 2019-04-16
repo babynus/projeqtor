@@ -6565,6 +6565,14 @@ function copyProjectStructureChange() {
   }
 }
 
+function selectIconMenuBar(menuClass){
+	var icon = dojo.byId(menuClass);
+	if (dojo.hasClass(icon,'menuBarItem')){
+		dojo.query('.menuBarItem').removeClass('menuBarItemSelected', icon);
+		dojo.addClass(icon,'menuBarItemSelected');
+	}
+}
+
 function loadMenuBarObject(menuClass, itemName, from) {
   if (checkFormChangeInProgress()) {
     return false;
@@ -6573,6 +6581,7 @@ function loadMenuBarObject(menuClass, itemName, from) {
   if (from == 'bar') {
     selectTreeNodeById(dijit.byId('menuTree'), menuClass);
   }
+  selectIconMenuBar(menuClass);
   cleanContent("detailDiv");
   formChangeInProgress=false;
   var currentScreen=menuClass; 
@@ -6589,6 +6598,7 @@ function loadMenuBarItem(item, itemName, from) {
   if (from == 'bar') {
     selectTreeNodeById(dijit.byId('menuTree'), item);
   }
+  selectIconMenuBar(item);
   cleanContent("detailDiv");
   formChangeInProgress=false;
   var currentScreen=item;
