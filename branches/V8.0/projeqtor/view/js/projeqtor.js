@@ -3386,6 +3386,7 @@ function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target) {
   if (!noHistory) {
     stockHistory(eltClass, eltId);
   }
+  selectIconMenuBar(eltClass);
 }
 
 function runReport() {

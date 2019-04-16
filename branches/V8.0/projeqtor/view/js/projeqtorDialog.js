@@ -6566,7 +6566,7 @@ function copyProjectStructureChange() {
 }
 
 function selectIconMenuBar(menuClass){
-	var icon = dojo.byId(menuClass);
+	var icon = dojo.byId('iconMenuBar'+menuClass);
 	if (dojo.hasClass(icon,'menuBarItem')){
 		dojo.query('.menuBarItem').removeClass('menuBarItemSelected', icon);
 		dojo.addClass(icon,'menuBarItemSelected');
