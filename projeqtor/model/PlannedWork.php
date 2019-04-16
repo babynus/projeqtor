@@ -738,7 +738,6 @@ class PlannedWork extends GeneralWork {
                 $week=getWeekNumberFromDate($currentDate);
                 if (! isset($ress[$projectKey][$week])) {
                   $weeklyReserved=0;
-                  debugLog($ress);
                   $firstDay=date('Y-m-d',firstDayofWeek(substr($week,-2),substr($week,0,4)));
                   foreach ($arPeW[$ass->idResource] as $dayOW=>$valReserved) {
                     $dayToTest=($dayOW==1)?$firstDay:addDaysToDate($firstDay, $dayOW-1);
