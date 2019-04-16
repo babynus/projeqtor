@@ -52,8 +52,8 @@ CREATE TABLE `${prefix}leavessystemhabilitation` (
   `updateAccess` VARCHAR(10) DEFAULT NULL,
   `deleteAccess` VARCHAR(10) DEFAULT NULL,
   PRIMARY KEY (id)
-)
-ENGINE = InnoDB, DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+
 CREATE INDEX leavessystemhabilitationMenu ON `${prefix}leavessystemhabilitation` (menuName);
 
 -- to create the table leavetype
@@ -218,7 +218,7 @@ CREATE TABLE `${prefix}rulableforempcontracttype` (
 
 -- to create the table
 CREATE TABLE `${prefix}calendarbankoffdays` (
-    `id` INT(12) NOT NULL AUTO_INCREMENT,
+    `id` INT(12) UNSIGNED NOT NULL AUTO_INCREMENT,
     `idCalendarDefinition` INT(12) UNSIGNED DEFAULT NULL,
     `name` VARCHAR(100) DEFAULT NULL,
     `month` INT(2) DEFAULT NULL,
@@ -391,7 +391,7 @@ CREATE TABLE `${prefix}module` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `${prefix}modulemenu` (
-    `id` INT(12) NOT NULL AUTO_INCREMENT,
+    `id` INT(12) unsigned NOT NULL AUTO_INCREMENT,
     `idModule` int(12) unsigned DEFAULT NULL,
     `idMenu` int(12) unsigned DEFAULT NULL,
     `hidden` int(1) DEFAULT 1,
@@ -401,7 +401,7 @@ CREATE TABLE `${prefix}modulemenu` (
 CREATE INDEX moduleMenuMenu ON `${prefix}modulemenu` (idMenu);
 
 CREATE TABLE `${prefix}modulereport` (
-    `id` INT(12) NOT NULL AUTO_INCREMENT,
+    `id` INT(12) unsigned NOT NULL AUTO_INCREMENT,
     `idModule` int(12) unsigned DEFAULT NULL,
     `idReport` int(12) unsigned DEFAULT NULL,
     `hidden` int(1) DEFAULT 1,
@@ -703,8 +703,8 @@ CREATE TABLE `${prefix}resourcecapacity` (
   `startDate` date DEFAULT NULL,
   `endDate` date DEFAULT NULL,
   PRIMARY KEY (id)
-)
-ENGINE = InnoDB, DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
 CREATE INDEX `resourcevariablecapacity` ON `${prefix}resourcecapacity` (`idResource`);
 
 -- ===============================================================================
