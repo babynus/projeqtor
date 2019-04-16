@@ -47,7 +47,7 @@ class EmploymentContractEndReasonMain extends SqlElement {
   private static $_fieldsAttributes=array("name"=>"required"
       );    
   
-  private static $_databaseTableName = 'EmploymentContractEndReason';
+  private static $_databaseTableName = 'employmentcontractendreason';
       
     
     /** ==========================================================================
