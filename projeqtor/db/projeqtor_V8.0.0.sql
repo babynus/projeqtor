@@ -122,7 +122,7 @@ CREATE TABLE `${prefix}employeeleaveperiod` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 CREATE INDEX employeeleaveperiodEmployee ON `${prefix}employeeleaveperiod` (idEmployee);
 
--- to create the table employmentContractType
+-- to create the table employmentcontracttype
 CREATE TABLE `${prefix}employmentcontracttype` (
   `id` INT(12) UNSIGNED NOT NULL AUTO_INCREMENT,
   `idle` INT(1) UNSIGNED NOT NULL DEFAULT 0,
@@ -134,8 +134,8 @@ CREATE TABLE `${prefix}employmentcontracttype` (
   PRIMARY KEY (id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
--- to create the table leaveTypeOfEmploymentContractType
-CREATE TABLE `${prefix}leaveTypeOfEmploymentContractType` (
+-- to create the table leavetypeofemploymentcontracttype
+CREATE TABLE `${prefix}leavetypeofemploymentcontracttype` (
   `id` INT(12) UNSIGNED NOT NULL AUTO_INCREMENT,
   `idle` INT(1) UNSIGNED NOT NULL DEFAULT 0,
   `idEmploymentContractType` INT(12) UNSIGNED DEFAULT NULL,
@@ -194,7 +194,7 @@ CREATE TABLE `${prefix}employmentcontract` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 CREATE INDEX employmentcontractEmployee ON `${prefix}employmentcontract` (idEmployee);
 
---to create the table employeesManaged
+--to create the table employeesmanaged
 CREATE TABLE `${prefix}employeesmanaged` (
   `id` INT(12) UNSIGNED NOT NULL AUTO_INCREMENT,
   `idEmployeeManager` INT(12) UNSIGNED DEFAULT NULL,
@@ -204,10 +204,10 @@ CREATE TABLE `${prefix}employeesmanaged` (
   `idle` INT(1) UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
-CREATE INDEX employeesManagedEmployee ON `${prefix}employeesManaged` (idEmployee);
-CREATE INDEX employeesManagedEmployeeManager ON `${prefix}employeesManaged` (idEmployeeManager);
+CREATE INDEX employeesManagedEmployee ON `${prefix}employeesmanaged` (idEmployee);
+CREATE INDEX employeesManagedEmployeeManager ON `${prefix}employeesmanaged` (idEmployeeManager);
 
---to create the table RulableForEmpContractType
+--to create the table rulableforempcontracttype
 CREATE TABLE `${prefix}rulableforempcontracttype` (
     `id` INT(12) UNSIGNED NOT NULL AUTO_INCREMENT,
     `rulableItem` VARCHAR(100) DEFAULT NULL,
