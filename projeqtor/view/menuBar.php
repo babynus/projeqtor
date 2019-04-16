@@ -98,7 +98,7 @@
     	  $class=substr($menuName,4); 
         //echo '<td  title="' .(($menuName=='menuReports')?'':i18n($menu->name)) . '" >';
     	  echo '<td  title="' .i18n($menu->name) . '" >';
-        echo '<div class="'.$menuClass.'" style="position:relative;'.$style.'" id="'.$class.'" ';
+        echo '<div class="'.$menuClass.'" style="position:relative;'.$style.'" id="iconMenuBar'.$class.'" ';
         echo 'onClick="hideReportFavoriteTooltip(0);loadMenuBarItem(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" ';
         echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
         if ($menuName=='menuReports' and isHtml5() ) {
@@ -126,7 +126,7 @@
     } else if ($menu->type=='plugin') {
       $class=substr($menuName,4);
       echo '<td  title="' .i18n($menu->name) . '" >';
-      echo '<div class="'.$menuClass.'" style="'.$style.'" id="'.$class.'"';
+      echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'"';
       echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
       echo 'onClick="loadMenuBarPlugin(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');">';
       echo '<img src="../view/css/images/icon' . $class . $iconSize.'.png" />';
@@ -137,7 +137,7 @@
       $class=substr($menuName,4);
       if (securityCheckDisplayMenu($idMenu, $class)) {
       	echo '<td title="' .i18n('menu'.$class) . '" >';
-      	echo '<div class="'.$menuClass.'" style="'.$style.'" id="'.$class.'" ';
+      	echo '<div class="'.$menuClass.'" style="'.$style.'" id="iconMenuBar'.$class.'" ';
       	echo 'oncontextmenu="event.preventDefault();customMenuManagement(\''.$class.'\');" ';
       	echo 'onClick="loadMenuBarObject(\'' . $class .  '\',\'' . htmlEncode(i18n($menu->name),'quotes') . '\',\'bar\');" >';
       	echo '<div class="icon' . $class . $iconSize.' icon'.$class.' iconSize.'.$iconSize.'" style="margin-left:9px;width:'.$iconSize.'px;height:'.$iconSize.'px" ></div>';
