@@ -936,6 +936,7 @@ class Cron {
       }
       if (!trim($msg)) {
       	traceLog("Could not retreive response (empty response) from '$sender' mail concerning $class #$id");
+      	debugTraceLog($body);
       	$mailbox->markMailAsRead($mailId);
       	continue;
       }
