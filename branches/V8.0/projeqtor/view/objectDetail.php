@@ -388,7 +388,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
       ?>
 <table width="<?php echo $printWidth;?>px;">
       <tr>
-        <td class="section"><?php echo i18n('elementHistoty');?></td>
+        <td class="section"><?php echo i18n('elementHistory');?></td>
       </tr>
     </table>
 <?php drawHistoryFromObjects();?> <?php
@@ -396,7 +396,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
       $titlePane=$objClass."_history";
       ?>
 <div style="width: <?php echo $displayWidth;?>;" dojoType="dijit.TitlePane" 
-       title="<?php echo i18n('elementHistoty');?>"
+       title="<?php echo i18n('elementHistory');?>"
        open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
        id="<?php echo $titlePane;?>"         
        onHide="saveCollapsed('<?php echo $titlePane;?>');"
@@ -408,7 +408,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
     $titlePane=$objClass."_history";
     ?>
 <div style="display:none; width: <?php echo $displayWidth;?>;" dojoType="dijit.TitlePane" 
-       title="<?php echo i18n('elementHistoty');?>"
+       title="<?php echo i18n('elementHistory');?>"
        open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
        id="<?php echo $titlePane;?>"         
        onHide="saveCollapsed('<?php echo $titlePane;?>');"
