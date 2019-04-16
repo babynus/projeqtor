@@ -452,10 +452,10 @@ class EmployeeLeaveEarnedMain extends SqlElement {
     
     //control if there is already a leaveEarned with the same dates/idEmployee/idLeaveType
     if($this->startDate!=null && $this->endDate!=null){
-        $start=(new DateTime($this->startDate))->format('Ymd');
-        $end=(new DateTime($this->endDate))->format('Ymd');
-        $clauseWhere="idLeaveType=".$this->idLeaveType." AND idEmployee=".$this->idEmployee." AND idle=0 AND ( (startDate>='$start' AND ! (startDate>'$end')) OR "
-                . "(endDate<='$end' AND ! (endDate<'$start')) OR "
+        $start=(new DateTime($this->startDate))->format('Y-m-d');
+        $end=(new DateTime($this->endDate))->format('Y-m-d');
+        $clauseWhere="idLeaveType=".$this->idLeaveType." AND idEmployee=".$this->idEmployee." AND idle=0 AND ( (startDate>='$start' AND NOT (startDate>'$end')) OR "
+                . "(endDate<='$end' AND NOT (endDate<'$start')) OR "
                 . "(startDate<='$start' AND endDate>='$end') )";
         if($this->id!=null){
             $clauseWhere.="AND id <>".$this->id;
