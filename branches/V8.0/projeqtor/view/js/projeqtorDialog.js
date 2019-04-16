@@ -6680,7 +6680,7 @@ function loadMenuBarItem(item, itemName, from) {
   } else if(item == "LeaveCalendar"){
       loadContent("leaveCalendar.php", "centerDiv");
   } else if(item == "LeavesSystemHabilitation"){
-      loadContent("LeavesSystemHabilitation.php", "centerDiv");
+      loadContent("leavesSystemHabilitation.php", "centerDiv");
   } else if(item == "DashboardEmployeeManager"){
       loadContent("dashboardEmployeeManager.php", "centerDiv");
 // ELIOTT - LEAVE SYSTEM    
