@@ -315,7 +315,7 @@ INSERT INTO `${prefix}menu` (`id`,`name`, `idMenu`, `type`, `sortOrder`, `level`
 (220, 'menuLeavesSystemHabilitation', 216, 'item', 465, null, 0, 'HumanResource', 1);
 
 -- to insert default LeavesSystemHabilitation
-INSERT INTO `${prefix}leavessystemhabilitation`(`id`, `menuName`, `viewAccess`, `readAccess`, `createAccess`, `updateAccess`, `deleteAccess`) VALUES
+INSERT INTO `${prefix}leavessystemhabilitation` (`id`, `menuName`, `viewAccess`, `readAccess`, `createAccess`, `updateAccess`, `deleteAccess`) VALUES
 (1, 'menuHumanResource', 'AME', NULL, NULL, NULL, NULL),
 (2, 'menuHumanResourceParameters', 'AME', NULL, NULL, NULL, NULL),
 (3, 'menuLeavesSystemHabilitation', 'A', 'A', 'A', 'A', 'A'),
