@@ -727,7 +727,7 @@ class PlannedWork extends GeneralWork {
             $ass->plannedWork=$ass->realWork;
           }
           while (1) {
-            if ($withProjectRepartition) {
+            if ($withProjectRepartition and isset($reserved['W'])) {
               //$reserved[type='W']['sum'][idResource][day]+=value
               // $reserved[type='W'][idPE][idResource][day]=value
               foreach($reserved['W'] as $idPe=>$arPeW) {
@@ -1070,8 +1070,8 @@ class PlannedWork extends GeneralWork {
                     // For each Pool current resource is member of
                     foreach($ress['isMemberOf'] as $idRT=>$rt) {
                       if (!isset($resources[$idRT]) ) {
-                        $r=new ResourceAll($idRT,true);
-                        $resources[$idRT]=$r->getWork($startDate, $withProjectRepartition);
+                        $rTeam=new ResourceAll($idRT,true);
+                        $resources[$idRT]=$rTeam->getWork($startDate, $withProjectRepartition);
                       }
                       $period=ResourceTeamAffectation::findPeriod($currentDate, $resources[$idRT]['periods']);
                       // For current date : if 1) some work exists on Pool 2) current resource has not null capacity on Pool  

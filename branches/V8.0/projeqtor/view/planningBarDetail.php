@@ -129,11 +129,13 @@ while ($dt<=$end) {
   foreach ($ressAll as $ress) {
     if (!isset($variableCapacity[$ress->id])) $variableCapacity[$ress->id]=array();
     $capa=$ress->getSurbookingCapacity($dt);
-    if ($capa!=$ress->capacity) {
-      $variableCapacity[$ress->id][$dt]=$capa;
+    if (! $ress->isResourceTeam) {
+      if ($capa!=$ress->capacity) {
+        $variableCapacity[$ress->id][$dt]=$capa;
+      }
+      if ($capa>$maxCapacity[$ress->id]) $maxCapacity[$ress->id]=$capa;
+      if ($capa<$minCapacity[$ress->id]) $minCapacity[$ress->id]=$capa;
     }
-    if ($capa>$maxCapacity[$ress->id]) $maxCapacity[$ress->id]=$capa;
-    if ($capa<$minCapacity[$ress->id]) $minCapacity[$ress->id]=$capa;
   }
   $dt=addDaysToDate($dt, 1);
 }
