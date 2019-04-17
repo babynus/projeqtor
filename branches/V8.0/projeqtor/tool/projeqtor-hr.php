@@ -47,6 +47,8 @@ function getIsEmployee(){
  * @return Leave[]
  */
 function getUserLeaves($startDateGiven,$endDateGiven, $idEmp=null){
+  if (strlen($startDateGiven)==8) { $startDateGiven=substr($startDateGiven,0,4).'-'.substr($startDateGiven,4,2).'-'.substr($startDateGiven,6,2);  }
+  if (strlen($endDateGiven)===8) { $endDateGiven=substr($endDateGiven,0,4).'-'.substr($endDateGiven,4,2).'-'.substr($endDateGiven,6,2);  }
     if ($idEmp!=null) {
         if ($idEmp == getSessionUser()->id) {
             $emp = (getSessionUser()->isEmployee?getSessionUser():null);
