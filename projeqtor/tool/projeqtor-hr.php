@@ -209,7 +209,7 @@ function initPurgeLeaveSystemElements($leavesSystemActiv) {
         // Delete notifiable
         $notifiable = new Notifiable();
         foreach($leaveNotifiablesList as $item) {
-            $result = $notifiable->purge('notifiableItem = "'.$item.'"');
+            $result = $notifiable->purge("notifiableItem = '".$item."'");
             $lastStatus = getLastOperationStatus($result);
             if ($lastStatus!="OK" and $lastStatus!="NO_CHANGE") {
                 traceLog("InitLeaveSystemElement - Purge leave system item notifiable $item");            
