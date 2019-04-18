@@ -688,10 +688,11 @@ class ImputationLine {
     if ($lowRes!=1) echo '  <TD class="ganttLeftTitle" style="width: '.$workWidth.'px;max-width:'.$workWidth.'px;overflow:hidden;">'.i18n('colAssigned').'</TD>';
     if ($lowRes!=1) echo '  <TD class="ganttLeftTitle" style="width: '.$workWidth.'px;max-width:'.$workWidth.'px;overflow:hidden;">'.i18n('colReal').'</TD>';
     $curDate=$startDate;
+    $convertCapacity=work::getConvertedCapacity($resource->getCapacityPeriod($curDate));
     //$businessDay=0;
     $totalCapacity=0;
     for ($i=1; $i<=$nbDays; $i++) {
-      echo '<input type="hidden" id="resourceCapacity_'.$curDate.'" value="'.$resource->getCapacityPeriod($curDate).'" />';
+      echo '<input type="hidden" id="resourceCapacity_'.$curDate.'" value="'.$convertCapacity.'" />';
       echo '  <TD class="ganttLeftTitle" style="width: '.$inputWidth.'px;max-width:'.$inputWidth.'px;min-width:'.$inputWidth.'px;overflow:hidden;';
       if ($today==$curDate) {
         echo ' background-color:#'.$currentdayColor.'; color: #aaaaaa;';
@@ -699,7 +700,7 @@ class ImputationLine {
         echo ' background-color:#'.$weekendColor.'; color: #aaaaaa;';
       }
       //if (!isOffDay($curDate, $cal)) $businessDay++;
-      if (!isOffDay($curDate, $cal)) $totalCapacity+=$resource->getCapacityPeriod($curDate);
+      if (!isOffDay($curDate, $cal)) $totalCapacity+=$convertCapacity;
       echo '">';
       if ($rangeType=='week') {
         echo i18n('colWeekday'.$i)." ".date('d', strtotime($curDate)).'';
@@ -937,6 +938,7 @@ class ImputationLine {
           echo '<input type="hidden" id="realWork_'.$nbLine.'" value="'.htmlDisplayNumericWithoutTrailingZeros(Work::displayImputation($line->realWork)).'" />';
         }
         $curDate=$startDate;
+        $convertCapacity=work::getConvertedCapacity($resource->getCapacityPeriod($curDate));
         $listProject=Project::getAdminitrativeProjectList(true);
         for ($i=1; $i<=$nbDays; $i++) {
           echo '<td class="ganttDetail" align="center" width="'.$inputWidth.'px;"';
@@ -1109,6 +1111,7 @@ class ImputationLine {
     echo '</span></TD>';
     
     $curDate=$startDate;
+    $convertCapacity=work::getConvertedCapacity($resource->getCapacityPeriod($curDate));
     $nbFutureDays=Parameter::getGlobalParameter('maxDaysToBookWork');
     if ($nbFutureDays==null||$nbFutureDays=='') $nbFutureDays=-1;
     $nbFutureDaysBlocking=Parameter::getGlobalParameter('maxDaysToBookWorkBlocking');
@@ -1130,9 +1133,9 @@ class ImputationLine {
         echo '<div type="text" dojoType="dijit.form.NumberTextBox" ';
         // echo ' constraints="{pattern:\'###0.0#\'}"';
         echo ' trim="true" disabled="true" ';
-        if (round($colSum[$i], 2)> round($resource->getCapacityPeriod($curDate),2)) {
+        if (round($colSum[$i], 2)> round($convertCapacity,2)) {
           echo ' class="imputationInvalidCapacity imputation"';
-        } else if (round($colSum[$i], 2)<round($resource->getCapacityPeriod($curDate))) {
+        } else if (round($colSum[$i], 2)<round($convertCapacity,2)) {
           echo ' class="displayTransparent imputation"';
         } else {
           echo ' class="imputationValidCapacity imputation"';
