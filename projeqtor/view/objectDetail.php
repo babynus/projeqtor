@@ -451,8 +451,10 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       $obj->idActivity = $objInsert->idActivity;
     }
     $planningElementClass = get_class($objInsert).'PlanningElement';
-    $idPlanningElementOrigin = $objInsert->$planningElementClass->id;
-    echo "<input type='hidden' name='moveToAfterCreate' value='$idPlanningElementOrigin' />";
+    if (property_exists(get_class($objInsert), $planningElementClass)) {
+      $idPlanningElementOrigin = $objInsert->$planningElementClass->id;
+      echo "<input type='hidden' name='moveToAfterCreate' value='$idPlanningElementOrigin' />";
+    }
   }
 
   if (property_exists($obj, '_sec_Assignment')) {

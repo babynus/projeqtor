@@ -353,7 +353,7 @@ function refreshJsonPlanning() {
       param = true;
     }
   } 
-  if(dijit.byId('projectDate').get('checked')){
+  if(dijit.byId('projectDate') && dijit.byId('projectDate').get('checked')){
 	  dijit.byId('listSaveDates').set('checked', false);
 	  dojo.setAttr('startDatePlanView', 'value', null);
 	  dojo.setAttr('endDatePlanView', 'value', null);
