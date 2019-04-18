@@ -290,7 +290,7 @@ class Notification extends SqlElement {
       //$where .= " AND IF(ISNULL(notificationTime) OR notificationDate<DATE(NOW()),(1=1),notificationTime<TIME(NOW()))";
       $where .= " AND (      notificationDate<'$theCurrentDate'";
       $where .= "       OR ( notificationDate='$theCurrentDate' AND notificationTime IS NULL )";
-      $timeNow=(Sql::$dbType=='pgsql')?'CURRENT_TIME':'TIME(NOW())';
+      $timeNow=(Sql::isPgsql())?'CURRENT_TIME':'TIME(NOW())';
       $where .= "       OR ( notificationDate='$theCurrentDate' AND notificationTime IS NOT NULL AND notificationTime<$timeNow )";
       $where .= "     )";
       
