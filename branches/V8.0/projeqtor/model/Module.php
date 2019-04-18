@@ -210,17 +210,17 @@ class Module extends SqlElement {
       unset($list['newColumnbFinancialLeft']);
       unset($list['newColumnbFinancialRight']);
     }
-    if (! Module::isModuleActive('moduleFinancialExpense')) {
+    if (! Module::isModuleActive('moduleExpenses')) {
       unset($list['sectionFinancialProvider']);
       unset($list['ImputOfAmountProvider']);
       unset($list['ImputOfBillLineProvider']);
     }  
-    if (! Module::isModuleActive('moduleFinancialIncome')) {
+    if (! Module::isModuleActive('moduleIncomes')) {
       unset($list['sectionFinancialClient']);
       unset($list['ImputOfAmountClient']);
       unset($list['ImputOfBillLineClient']);
     }
-    if (! Module::isModuleActive('moduleHR')) {
+    if (! Module::isModuleActive('moduleHumanResource')) {
       unset($list['sectionLeaves']);
       unset($list['leavesSystemActiv']);
       unset($list['leavesSystemAdmin']);
@@ -228,6 +228,10 @@ class Module extends SqlElement {
     }
     if (! Module::isModuleActive('moduleNotification')) {
       unset($list['cronCheckNotifications']);
+    }
+    if (! Module::isModuleActive('moduleOrganization')) {
+      unset($list['useOrganizationBudgetElement']);
+      unset($list['sectionOrganization']);
     }
   }
   
