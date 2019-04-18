@@ -428,7 +428,7 @@ class NotificationDefinition extends SqlElement {
         $clause = "  idNotificationDefinition=".$this->id;
         $clause .= " AND (      notificationDate>'$theCurrentDateFmt'";
         $clause .= "       OR ( notificationDate='$theCurrentDateFmt' AND notificationTime IS NULL )";
-        $timeNow=(Sql::$dbType=='pgsql')?'CURRENT_TIME':'TIME(NOW())';
+        $timeNow=(Sql::isPgsql())?'CURRENT_TIME':'TIME(NOW())';
         $clause .= "       OR ( notificationDate='$theCurrentDateFmt' AND notificationTime IS NOT NULL AND notificationTime>$timeNow )";
         $clause .= "     )";
         $notif = new Notification();

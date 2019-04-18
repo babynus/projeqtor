@@ -84,7 +84,7 @@
         //$where .= " AND IF(ISNULL($nTable.notificationTime) OR $nTable.notificationDate<DATE(NOW()),(1=1),$nTable.notificationTime<TIME(NOW()))";
         $where .= " AND (      $nTable.notificationDate<'$theCurrentDate'";
         $where .= "       OR ( $nTable.notificationDate='$theCurrentDate' AND $nTable.notificationTime IS NULL )";
-        $timeNow=(Sql::$dbType=='pgsql')?'CURRENT_TIME':'TIME(NOW())';
+        $timeNow=(Sql::isPgsql())?'CURRENT_TIME':'TIME(NOW())';
         $where .= "       OR ( $nTable.notificationDate='$theCurrentDate' AND $nTable.notificationTime IS NOT NULL AND $nTable.notificationTime<$timeNow )";
         $where .= "     )";
         // Order By party of SqlQuery
