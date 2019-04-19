@@ -1156,9 +1156,9 @@ class ImputationLine {
       $curDate=date('Y-m-d', strtotime("+1 days", strtotime($curDate)));
     }
     $classTotalWork="imputationValidCapacity";
-    if (round($totalWork, 2)>$totalCapacity) {
+    if (round($totalWork, 2)>round($totalCapacity,2)) {
       $classTotalWork='imputationInvalidCapacity';
-    } else if (round($totalWork, 2)<$totalCapacity) {
+    } else if (round($totalWork, 2)<round($totalCapacity,2)) {
       $classTotalWork='displayTransparent';
     }
     $colSpanFooter=''; // No more need
