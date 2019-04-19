@@ -1012,7 +1012,7 @@ function fillLeavesCalendarDataArray(startDate,endDate){
                     var lvT="";
                     var lvtColor="";
                     for(var i in leaves["leaveTypes"]){
-                        if( leaves["leaveTypes"][i]["id"] === leaves['leaves'][it]["idLeaveType"]){
+                        if( leaves["leaveTypes"][i]["id"] == leaves['leaves'][it]["idLeaveType"]){
                             lvT=leaves["leaveTypes"][i]["name"];
                             lvtColor=leaves["leaveTypes"][i]["color"];
                             break;
@@ -1026,7 +1026,7 @@ function fillLeavesCalendarDataArray(startDate,endDate){
                     var statusColor="#000000";
                     if (leaves['leaves'][it]["statusOutOfWorkflow"]!="1") {
                         for(var i in leaves["status"]){
-                            if( leaves["status"][i]["id"] === leaves['leaves'][it]["idStatus"]){
+                            if( leaves["status"][i]["id"] == leaves['leaves'][it]["idStatus"]){
                                 statusColor=leaves["status"][i]["color"];
                                 break;
                             }
@@ -1044,12 +1044,12 @@ function fillLeavesCalendarDataArray(startDate,endDate){
                     var endDate = new Date(leaves['leaves'][it]["endDate"]);
                    
                     //to set the hours of the leave
-                    if(leaves['leaves'][it]["startAMPM"] === "AM"){ 
+                    if(leaves['leaves'][it]["startAMPM"] == "AM"){ 
                         startDate.setHours(9,0,0,0);
                     }else{
                         startDate.setHours(14,0,0,0);
                     }
-                    if(leaves['leaves'][it]["endAMPM"] === "AM"){ 
+                    if(leaves['leaves'][it]["endAMPM"] == "AM"){ 
                         endDate.setHours(12,0,0,0);
                     }else{
                         endDate.setHours(18,0,0,0);
