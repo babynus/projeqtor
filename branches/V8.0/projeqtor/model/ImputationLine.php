@@ -688,10 +688,10 @@ class ImputationLine {
     if ($lowRes!=1) echo '  <TD class="ganttLeftTitle" style="width: '.$workWidth.'px;max-width:'.$workWidth.'px;overflow:hidden;">'.i18n('colAssigned').'</TD>';
     if ($lowRes!=1) echo '  <TD class="ganttLeftTitle" style="width: '.$workWidth.'px;max-width:'.$workWidth.'px;overflow:hidden;">'.i18n('colReal').'</TD>';
     $curDate=$startDate;
-    $convertCapacity=work::getConvertedCapacity($resource->getCapacityPeriod($curDate));
     //$businessDay=0;
     $totalCapacity=0;
     for ($i=1; $i<=$nbDays; $i++) {
+      $convertCapacity=work::getConvertedCapacity($resource->getCapacityPeriod($curDate));
       echo '<input type="hidden" id="resourceCapacity_'.$curDate.'" value="'.$convertCapacity.'" />';
       echo '  <TD class="ganttLeftTitle" style="width: '.$inputWidth.'px;max-width:'.$inputWidth.'px;min-width:'.$inputWidth.'px;overflow:hidden;';
       if ($today==$curDate) {
@@ -938,9 +938,9 @@ class ImputationLine {
           echo '<input type="hidden" id="realWork_'.$nbLine.'" value="'.htmlDisplayNumericWithoutTrailingZeros(Work::displayImputation($line->realWork)).'" />';
         }
         $curDate=$startDate;
-        $convertCapacity=work::getConvertedCapacity($resource->getCapacityPeriod($curDate));
         $listProject=Project::getAdminitrativeProjectList(true);
         for ($i=1; $i<=$nbDays; $i++) {
+          $convertCapacity=work::getConvertedCapacity($resource->getCapacityPeriod($curDate));
           echo '<td class="ganttDetail" align="center" width="'.$inputWidth.'px;"';
           if ($today==$curDate) {
             echo ' style="background-color:#'.$currentdayColor.';"';
@@ -1111,7 +1111,6 @@ class ImputationLine {
     echo '</span></TD>';
     
     $curDate=$startDate;
-    $convertCapacity=work::getConvertedCapacity($resource->getCapacityPeriod($curDate));
     $nbFutureDays=Parameter::getGlobalParameter('maxDaysToBookWork');
     if ($nbFutureDays==null||$nbFutureDays=='') $nbFutureDays=-1;
     $nbFutureDaysBlocking=Parameter::getGlobalParameter('maxDaysToBookWorkBlocking');
@@ -1124,6 +1123,7 @@ class ImputationLine {
     if (!$print) echo '<input type="hidden" id="businessDay" value="'.($totalCapacity).'" />';
     $totalWork=0;
     for ($i=1; $i<=$nbDays; $i++) {
+      $convertCapacity=work::getConvertedCapacity($resource->getCapacityPeriod($curDate));
       echo '  <TD class="ganttLeftTitle" style="width: '.$inputWidth.'px;';
       if ($today==$curDate) {
         // echo ' background-color:#' . $currentdayColor . ';';
