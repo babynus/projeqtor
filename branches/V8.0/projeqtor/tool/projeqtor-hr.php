@@ -1907,7 +1907,7 @@ function checkValidity($idEmployee) {
                     $lvEarned->idle=1;
                     $lvEarned->leftQuantityBeforeClose = $lvEarned->leftQuantity;
                     $result = $lvEarned->simpleSave();
-                    if (getLastOperationStatus($result)!="OK" or getLastOperationStatus($result)!="NO_CHANGE") {
+                    if (getLastOperationStatus($result)!="OK" and getLastOperationStatus($result)!="NO_CHANGE") {
                         return "KO - checkValidity - Updating idle = 1 for Leave Earned Id = $lvEarned->id";
                     }
                 }
@@ -1923,28 +1923,32 @@ function checkValidity($idEmployee) {
  * @param Employee $idEmployee : Id of Employee for which test validaty of leaves Earned
  */
 function checkLeaveEarnedEnd($idEmployee) {
-    $currentDate = new DateTime();
-    $currentDateString = $currentDate->format("Y-m-d");
+    $currentDateString = date("Y-m-d");
     
     // Leave Earned of the employee
+    $arrayType=array(); // Check if Earned period already exists and active (avoid creation of dupplicates)
     $lvEarned = new EmployeeLeaveEarned();
     $crit = array("idle" => '0',
                   "idEmployee" => $idEmployee);
-    $emplLeavesEarned = $lvEarned->getSqlElementsFromCriteria($crit);
+    $emplLeavesEarned = $lvEarned->getSqlElementsFromCriteria($crit,null,null,'endDate desc');
     foreach($emplLeavesEarned as $lvEarned) {
-        if ($lvEarned->endDate==null) {continue;}
-        $endDate = new DateTime($lvEarned->endDate);
-        $endDateString = $endDate->format("Y-m-d");
-        if ($endDateString < $currentDateString) {
+        if ($lvEarned->endDate==null) {
+          $arrayType[$lvEarned->idLeaveType]="OK";
+          continue;
+        }
+        $endDateString = $lvEarned->endDate;
+        if ($endDateString < $currentDateString and ! isset($arrayType[$lvEarned->idLeaveType])) {
             $newLvEarned = new EmployeeLeaveEarned();
             $newLvEarned->idEmployee=$lvEarned->idEmployee;
             $newLvEarned->idLeaveType=$lvEarned->idLeaveType;
             $newLvEarned->idle=0;
             $newLvEarned->setLeavesRight(true);
             $result = $newLvEarned->simpleSave();
-            if (getLastOperationStatus($result)!="OK" or getLastOperationStatus($result)!="NO_CHANGE") {
-                return "KO - checkLeaveEarnedEnd - Creating new Leave Earned for employee Id = $idEmployee - Leave Type Id = $lvEarned->idLeaveType";
+            if (getLastOperationStatus($result)!="OK" and getLastOperationStatus($result)!="NO_CHANGE") {
+                return "KO - checkLeaveEarnedEnd - Creating new Leave Earned for employee Id = $idEmployee - Leave Type Id = $lvEarned->idLeaveType\n $result";
             }
+        } else {
+          $arrayType[$lvEarned->idLeaveType]="OK";
         }
     }
     return 'OK';
@@ -1985,7 +1989,7 @@ function checkEarnedPeriod($idEmployee) {
                     }
                     $lvEarned->lastUpdateDate = $currentDateString;
                     $result = $lvEarned->simpleSave();
-                    if (getLastOperationStatus($result)!="OK" or getLastOperationStatus($result)!="NO_CHANGE") {
+                    if (getLastOperationStatus($result)!="OK" and getLastOperationStatus($result)!="NO_CHANGE") {
                         return "KO - Updating Leave Earned $lvEarned->id with new quantity and left for employee Id = $idEmployee - Leave Type Id = $lvEarned->idLeaveType";
                     }
                 }
