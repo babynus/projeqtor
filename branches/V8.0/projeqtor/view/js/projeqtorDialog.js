@@ -8870,9 +8870,14 @@ function planningToCanvasToPDF(){
   var marge=30;
   var widthIconTask=0; // the width that icon+task represent
   //var heightColumn=parseInt(document.getElementById('leftsideTop').offsetHeight)*ratio;
-  var heightColumn=parseInt(document.getElementById('leftsideTop').offsetHeight);
+  //damian #exportPDF
+  var deviceRatio = window.devicePixelRatio;
+  if(!deviceRatio){
+	  deviceRatio = 1;
+  }
+  var heightColumn=parseInt(document.getElementById('leftsideTop').offsetHeight)*deviceRatio;
   //var heightRow=21*ratio;
-  var heightRow=21;
+  var heightRow=21*deviceRatio;
   //var widthRow=(parseInt(dojo.query('.ganttRightTitle')[0].offsetWidth)-1)*ratio;
   var widthRow=(parseInt(dojo.query('.ganttRightTitle')[0].offsetWidth)-1);
   var nbRowTotal=0;
@@ -8895,7 +8900,7 @@ function planningToCanvasToPDF(){
     maxWidth=maxHeight;
     maxHeight=maxTemp;
   }
-
+  
   //We create an iframe will which contain the planning to transform it in image
   var frameContent=document.getElementById("iframeTmpPlanning");
   
@@ -8954,7 +8959,7 @@ function planningToCanvasToPDF(){
     dojo.query("[class^='ganttDetail weekBackground']")[i].style.width=(parseInt(dojo.query("[class^='ganttDetail weekBackground']")[i].style.width)-1)+"px";
   }
   
-  widthIconTask=sizeElements[0]+sizeElements[1];
+  widthIconTask=(sizeElements[0]+sizeElements[1])*deviceRatio;
   if (widthIconTask>parseInt(document.getElementById('leftGanttChartDIV').style.width)) widthIconTask=parseInt(document.getElementById('leftGanttChartDIV').style.width);
   
   sizeColumn=parseInt(dojo.query(".ganttRightTitle")[0].style.width)*ratio;
@@ -9027,7 +9032,7 @@ function planningToCanvasToPDF(){
               oldWidthElement=widthElement;
               while(iterateurColumnLeft<sizeElements.length && ELeftWidth>=sizeElements[iterateurColumnLeft]){
                 ELeftWidth-=sizeElements[iterateurColumnLeft];
-                widthElement+=sizeElements[iterateurColumnLeft];
+                widthElement+=sizeElements[iterateurColumnLeft]*deviceRatio;
                 if(repeatIconTask && !firstEnterWidth && firstEnterWidth2)ELeftWidth+=widthIconTask;
                 iterateurColumnLeft++;
                 firstEnterWidth2=false;
