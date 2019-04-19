@@ -145,7 +145,7 @@ if (sessionValueExists('screenHeight')) {
     <tr>
       <td align="center">
         <input type="hidden" id="dialogNoteAction">
-        <button class="mediumTextButton"  dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogNote').hide();">
+        <button class="mediumTextButton"  dojoType="dijit.form.Button" type="button" onclick="alert(window.devicePixelRatio);dijit.byId('dialogNote').hide();">
           <?php echo i18n("buttonCancel");?>
         </button>
         <button class="mediumTextButton"  id="dialogNoteSubmit" dojoType="dijit.form.Button" type="submit" onclick="protectDblClick(this);saveNote();return false;">
