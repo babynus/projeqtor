@@ -1608,6 +1608,15 @@ function leaveCalendarDisplay(){
                     style: "position:relative;width:100%;height:100%"
                 }, "calendarNode");                                
                 
+                // Hidden unused buttons
+                dojo.byId(calendar.dayButton.id).style.display="none";
+                dojo.byId(calendar.todayButton.id).style.display="none";
+                dojo.byId(calendar.monthButton.id).style.display="none";
+                dojo.byId(calendar.weekButton.id).style.display="none";
+                dojo.byId(calendar.fourDaysButton.id).style.display="none";
+                dojo.byId(calendar._startupWidgets[3].id).style.display="none";
+                dojo.byId(calendar._startupWidgets[5].id).style.display="none";
+
             //function to fill the store of the calendar
                 var fillCalendarStore = function(){
                     var cY = calendar.date.getFullYear();

@@ -154,11 +154,13 @@ foreach($statusList as $status) {
         array_push($resStatus, $status);
     }
 } 
-usort($resStatus, function($a, $b)
-    {
-        return strcmp($a->sortOrder, $b->sortOrder);
-    }
-);
+if ($resStatus and count($resStatus)>0) {
+  usort($resStatus, function($a, $b)
+      {
+          return strcmp($a->sortOrder, $b->sortOrder);
+      }
+  );
+}
 
 if(! $lvList){
     $res=array(
