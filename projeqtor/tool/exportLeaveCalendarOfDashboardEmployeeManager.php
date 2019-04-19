@@ -626,7 +626,7 @@ exit;
 
 function exportSpreadsheet($context, $fileName, $preCalculateFormulas=false) {
     if (PHP_SAPI == 'cli') die('This example should only be run from a Web Browser');
-    if (Parameter::getGlobalParameter("paramDefaultTimezone") date_default_timezone_set(Parameter::getGlobalParameter("paramDefaultTimezone"));
+    if (Parameter::getGlobalParameter("paramDefaultTimezone")) date_default_timezone_set(Parameter::getGlobalParameter("paramDefaultTimezone"));
     else date_default_timezone_set(Parameter::getGlobalParameter("Europe/Paris"));
 
     $typeOfExport = Parameter::getUserParameter("typeExportXLSorODS");
