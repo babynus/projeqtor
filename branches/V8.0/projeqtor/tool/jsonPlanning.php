@@ -1240,6 +1240,7 @@
         $resourceList[$aff->idResource]=new Resource($aff->idResource,true);
       }
     } else {
+      $res=new Resource();
       $resourceList=$res->getSqlElementsFromCriteria(array(), false, false, " id asc");
     }
 
