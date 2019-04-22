@@ -785,7 +785,9 @@ class Cron {
 			traceLog("IMAP connection string not defined");
 			return;
 		}
-		$mailbox = new ImapMailbox($emailHost, $emailEmail, $emailPassword, $emailAttachmentsDir, 'utf-8');
+    $imapServerEncoding=Parameter::getGlobalParameter('imapFilterCriteria');
+    if (! $imapServerEncoding) { $imapServerEncoding='utf-8'; }
+		$mailbox = new ImapMailbox($emailHost, $emailEmail, $emailPassword, $emailAttachmentsDir, $imapServerEncoding);
 		$mails = array();
 		
 		// Get some mail
