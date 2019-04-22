@@ -294,7 +294,7 @@ class PlanningElement extends SqlElement {
           }
           $this->expectedProgress=0;
         }
-        if (property_exists($refObj, 'handled') and property_exists($refObj, 'handledDate')) {
+        if (property_exists($refObj, 'handled') and property_exists($refObj, 'handledDate') and $this->refType!='Milestone') {
         	if ($refObj->handled) {
         		$this->realStartDate=$refObj->handledDate;
         	} else {
