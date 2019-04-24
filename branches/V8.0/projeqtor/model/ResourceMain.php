@@ -534,31 +534,33 @@ class ResourceMain extends SqlElement {
 // MTY - LEAVE SYSTEM
 
   	$result=parent::save();
+  	
+  	// MTY - LEAVE SYSTEM
+  	if (isLeavesSystemActiv()) {
+  	  // isEmployee changes
+  	  if ($this->isEmployee != $oldResource->isEmployee) {
+  	    // => Init or purge elements of leave system for the resource
+  	    $result .= initPurgeLeaveSystemElementsOfResource($this);
+//   	    if (getLastOperationStatus($resultI)!="OK") {
+//   	      return $resultI;
+//   	    }
+  	  }
+  	  // isLeaveManager changes and become 0
+  	  if ($this->isLeaveManager == 0 and $oldResource->isLeaveManager==1) {
+  	    // Delete corresponding EmployeesManaged
+  	    $crit = "idEmployeeManager = $this->id";
+  	    $emplManaged = new EmployeesManaged();
+  	    $result .= $emplManaged->purge($crit);
+//   	    if (getLastOperationStatus($resultI)!="OK" and getLastOperationStatus($resultI)!="NO_CHANGE") {
+//   	      return $resultI;
+//   	    }
+  	  }
+  	}
+  	// MTY - LEAVE SYSTEM
+  	
     if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
       return $result;     
     }
-// MTY - LEAVE SYSTEM
-    if (isLeavesSystemActiv()) {
-        // isEmployee changes
-        if ($this->isEmployee != $oldResource->isEmployee) {
-            // => Init or purge elements of leave system for the resource
-            $resultI = initPurgeLeaveSystemElementsOfResource($this);
-            if (getLastOperationStatus($resultI)!="OK") {
-                return $resultI;
-            }
-        }
-        // isLeaveManager changes and become 0
-        if ($this->isLeaveManager == 0 and $oldResource->isLeaveManager==1) {
-            // Delete corresponding EmployeesManaged
-            $crit = array("idEmployeeManager" => $this->id);
-            $emplManaged = new EmployeesManaged();
-            $resultI = $emplManaged->purge($crit);
-            if (getLastOperationStatus($resultI)!="OK" and getLastOperationStatus($resultI)!="NO_CHANGE") {
-                return $resultI;
-            }
-        }
-    }
-// MTY - LEAVE SYSTEM
     
   	Affectation::updateAffectations($this->id);
   	if ($this->id==getSessionUser()->id) { //must refresh data
@@ -606,16 +608,13 @@ class ResourceMain extends SqlElement {
   
 // ELIOTT - LEAVE SYSTEM
   public function delete() {
-    if (isLeavesSystemActiv()) {
-        $theResource = clone $this;    
-        // On delete resource => purge elements of leave system for this resource
-        $theResource->isEmployee=0;
-        $result = initPurgeLeaveSystemElementsOfResource($theResource);
-        if (strpos($result,'id="lastOperationStatus" value="OK"')===false) {
-          return $result;     
-        }
-    }
     $result = parent::delete();
+    if (isLeavesSystemActiv()) {
+      $theResource = clone $this;
+      // On delete resource => purge elements of leave system for this resource
+      $theResource->isEmployee=0;
+      $result .= initPurgeLeaveSystemElementsOfResource($theResource);
+    }
     return $result;
   }
 // ELIOTT - LEAVE SYSTEM
