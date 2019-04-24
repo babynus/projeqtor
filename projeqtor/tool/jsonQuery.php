@@ -228,7 +228,7 @@
 // MTY - LEAVE SYSTEM
         // Don't take the Leave Project if it's not visible for the connected user
         if (isLeavesSystemActiv()) {
-            if ($objectClass!='Project' && !Project::isProjectLeaveVisible()) {
+            if ($objectClass!='Project' && !Project::isProjectLeaveVisible() && Project::getLeaveProjectId()!= '') {
                 $queryWhere.= ($queryWhere=='')?'':' and ';
                 $queryWhere.= $table . ".idProject <> " . Project::getLeaveProjectId() . " ";
             }

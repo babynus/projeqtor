@@ -1068,7 +1068,7 @@ class UserMain extends SqlElement {
     if (strpos($result,'id="lastOperationStatus" value="OK"')) {
         if (isLeavesSystemActiv()) {
             $old->isEmployee=0;
-            $result = initPurgeLeaveSystemElementsOfResource($old);
+            $result .= initPurgeLeaveSystemElementsOfResource($old);
         }
     }
     return $result;
@@ -1122,19 +1122,22 @@ class UserMain extends SqlElement {
       $this->password=hash('sha256',$paramDefaultPassword.$this->salt);
       $this->crypto='sha256';
     }
-// MTY - LEAVE SYSTEM
+
+    $result=parent::save();
+    
+    // MTY - LEAVE SYSTEM
     // If isResource become 0 => isEmployee become 0
     if (isLeavesSystemActiv()) {
-        if ($this->isResource==0 and $old->isResource==1 and $this->isEmployee==1) {
-            $this->isEmployee=0;
-            $result = initPurgeLeaveSystemElementsOfResource($this);
-            if (strpos($result,'id="lastOperationStatus" value="OK"')===false) {
-              return $result;     
-            }
-        }
+      if ($this->isResource==0 and $old->isResource==1 and $this->isEmployee==1) {
+        $this->isEmployee=0;
+        $result .= initPurgeLeaveSystemElementsOfResource($this);
+//         if (strpos($result,'id="lastOperationStatus" value="OK"')===false) {
+//           return $result;
+//         }
+      }
     }
-// MTY - LEAVE SYSTEM    
-    $result=parent::save();
+    // MTY - LEAVE SYSTEM
+    
     if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
       return $result;     
     }
