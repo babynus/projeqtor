@@ -1351,7 +1351,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
                 	//+ ' onMouseover=JSGantt.enterBarLink('+i+'); '
 	                //+ ' onMouseout=JSGantt.exitBarLink('+i+'); '
                   + ' onMouseover=JSGantt.exitBarLink('+i+'); '
-              	+ 'style="left:' + (Math.ceil((vTaskRight) * (vDayWidth) - 1) + 6) + 'px;">' + vCaptionStr + '</div>';
+              	+ 'style="left:' + (Math.ceil((vTaskRight) * (vDayWidth) - 1) + 6) + 'px;display:block;">' + vCaptionStr + '</div>';
               }
             }
             vRightTable += '</div>';
@@ -1472,7 +1472,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
                 	// + ' onMouseover=JSGantt.enterBarLink('+i+'); '
 	                // + ' onMouseout=JSGantt.exitBarLink('+i+'); '
                   + ' onMouseover=JSGantt.exitBarLink('+i+'); '
-                	+ 'style="left:' + (Math.ceil((vTaskRight) * (vDayWidth) - 1) + 6) + 'px;">' + vCaptionStr + '</div>';
+                	+ 'style="left:' + (Math.ceil((vTaskRight) * (vDayWidth) - 1) + 6) + 'px;display:block;">' + vCaptionStr + '</div>';
               }
 	          }
             vRightTable += '</div>' ;
