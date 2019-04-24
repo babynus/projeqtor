@@ -1066,10 +1066,13 @@ class UserMain extends SqlElement {
     $old=$this->getOld();
     $result = parent::delete();
     if (strpos($result,'id="lastOperationStatus" value="OK"')) {
-        if (isLeavesSystemActiv()) {
-            $old->isEmployee=0;
-            $result .= initPurgeLeaveSystemElementsOfResource($old);
+      if (isLeavesSystemActiv()) {
+        $old->isEmployee=0;
+        $resultI = initPurgeLeaveSystemElementsOfResource($old);
+        if(getLastOperationStatus($resultI)!="OK"){
+          return $resultI;
         }
+      }
     }
     return $result;
   }
@@ -1130,15 +1133,16 @@ class UserMain extends SqlElement {
     if (isLeavesSystemActiv()) {
       if ($this->isResource==0 and $old->isResource==1 and $this->isEmployee==1) {
         $this->isEmployee=0;
-        $result .= initPurgeLeaveSystemElementsOfResource($this);
-//         if (strpos($result,'id="lastOperationStatus" value="OK"')===false) {
-//           return $result;
-//         }
+        $resultI = initPurgeLeaveSystemElementsOfResource($this);
+        if(getLastOperationStatus($resultI)!="OK"){
+          return $resultI;
+        }
       }
     }
     // MTY - LEAVE SYSTEM
     
-    if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
+    if(getLastOperationStatus($result)!="OK" and getLastOperationStatus($result)!="NO_CHANGE"){
+    //if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
       return $result;     
     }
     Affectation::updateAffectations($this->id);
