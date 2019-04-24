@@ -145,7 +145,9 @@ class CronExecution extends SqlElement {
   }
   public static function getWeekDayName($day) {
     if ($day=='*' or $day=='all' or $day==i18n('all')) return i18n('all');
-    return i18n(jddayofweek($day-1,1));
+    $dayName=array(0=>'Sunday',   1=>'Monday', 2=>'Tuesday',  3=>'Wednesday',
+                   4=>'Thursday', 5=>'Friday', 6=>'Saturday', 7=>'Sunday');
+    return i18n($dayName[$day]);
   }
   public static function getMonthName($month) {
     if ($month=='*' or $month=='all' or $month==i18n('all')) return i18n('all');
