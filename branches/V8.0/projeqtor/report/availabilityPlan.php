@@ -216,15 +216,20 @@ echo '</tr>';
 
 foreach ($resources as $idR=>$nameR) {
 	//if ($paramTeam) {
-    $res=new Resource($idR);
+  $res=new ResourceAll($idR);
   //}
-  $maxCapa = 0;
-  for ($i=1; $i<=$nbDays;$i++) {
-    $day=$startDate+$i-1;
-    $weekDate = substr($day, 0,4).'-'.substr($day, 4, -2).'-'.substr($day, 6);
-  	if($res->getCapacityPeriod($weekDate) > $maxCapa){
-  		$maxCapa = round($res->getCapacityPeriod($weekDate), 2);
-  	}
+  if ($res->isResourceTeam) {
+    $maxCapa=$capacity[$idR];
+  } else {
+//    $maxCapa=$capacity[$idR];
+    $maxCapa = 0;
+    for ($i=1; $i<=$nbDays;$i++) {
+      $day=$startDate+$i-1;
+      $dayDate=substr($day,0,4) . "-" . substr($day,4,2) . "-" . substr($day,6,2);
+      if($res->getCapacityPeriod($dayDate) > $maxCapa){
+        $maxCapa = round($res->getCapacityPeriod($dayDate), 2);
+      }
+    }
   }
   if (!$paramTeam or $res->idTeam==$paramTeam) {
 		$sum=0;
@@ -270,9 +275,9 @@ foreach ($resources as $idR=>$nameR) {
 	    if ($style==$weekendStyle) {$val="";}
 	    echo '<td class="reportTableDataFull" ' . $style . ' valign="middle">';    
 	     if ($italic) {
-	     	 echo '<i>' . Work::displayWork($val) . '</i>';
+	     	 echo '<i>' . Work::displayWork($val,2) . '</i>';
 	     } else { 
-	     	 echo Work::displayWork($val);
+	     	 echo Work::displayWork($val,2);
 	     }
 	  	echo '</td>';
 	  	if ($val>0) {
