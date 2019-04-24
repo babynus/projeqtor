@@ -534,31 +534,31 @@ class ResourceMain extends SqlElement {
 // MTY - LEAVE SYSTEM
 
   	$result=parent::save();
-  	
   	// MTY - LEAVE SYSTEM
   	if (isLeavesSystemActiv()) {
   	  // isEmployee changes
   	  if ($this->isEmployee != $oldResource->isEmployee) {
   	    // => Init or purge elements of leave system for the resource
-  	    $result .= initPurgeLeaveSystemElementsOfResource($this);
-//   	    if (getLastOperationStatus($resultI)!="OK") {
-//   	      return $resultI;
-//   	    }
+  	    $resultI = initPurgeLeaveSystemElementsOfResource($this);
+  	    if (getLastOperationStatus($resultI)!="OK") {
+  	      return $resultI;
+  	    }
   	  }
   	  // isLeaveManager changes and become 0
   	  if ($this->isLeaveManager == 0 and $oldResource->isLeaveManager==1) {
   	    // Delete corresponding EmployeesManaged
   	    $crit = "idEmployeeManager = $this->id";
   	    $emplManaged = new EmployeesManaged();
-  	    $result .= $emplManaged->purge($crit);
-//   	    if (getLastOperationStatus($resultI)!="OK" and getLastOperationStatus($resultI)!="NO_CHANGE") {
-//   	      return $resultI;
-//   	    }
+  	    $resultI = $emplManaged->purge($crit);
+  	    if (getLastOperationStatus($resultI)!="OK" and getLastOperationStatus($resultI)!="NO_CHANGE") {
+  	      return $resultI;
+  	    }
   	  }
   	}
   	// MTY - LEAVE SYSTEM
   	
-    if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
+    //if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
+    if(getLastOperationStatus($result)!="OK" and getLastOperationStatus($result)!="NO_CHANGE"){
       return $result;     
     }
     
@@ -597,8 +597,8 @@ class ResourceMain extends SqlElement {
                 setSessionUser($user);
                 Parameter::clearGlobalParameters();// force refresh 
                 echo '<input type="hidden" id="forceRefreshMenu" value="'.$forceRefreshMenu.'_'.$this->id.'" />';
-                echo '<input type="hidden" id="lastOperation" name="lastOperation" value="save">';
-                echo '<input type="hidden" id="lastOperationStatus" name="lastOperationStatus" value="' . 'OK' .'">';
+                //echo '<input type="hidden" id="lastOperation" name="lastOperation" value="save">';
+                //echo '<input type="hidden" id="lastOperationStatus" name="lastOperationStatus" value="' . 'OK' .'">';
         }
     }
 // MTY - LEAVE SYSTEM
@@ -613,7 +613,10 @@ class ResourceMain extends SqlElement {
       $theResource = clone $this;
       // On delete resource => purge elements of leave system for this resource
       $theResource->isEmployee=0;
-      $result .= initPurgeLeaveSystemElementsOfResource($theResource);
+      $resultI = initPurgeLeaveSystemElementsOfResource($theResource);
+      if(getLastOperationStatus($resultI)!="OK"){
+        return $resultI;
+      }
     }
     return $result;
   }
