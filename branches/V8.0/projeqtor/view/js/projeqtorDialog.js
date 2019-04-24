@@ -8960,7 +8960,7 @@ function planningToCanvasToPDF(){
   }
   
   widthIconTask=(sizeElements[0]+sizeElements[1])*deviceRatio;
-  if (widthIconTask>parseInt(document.getElementById('leftGanttChartDIV').style.width)) widthIconTask=parseInt(document.getElementById('leftGanttChartDIV').style.width);
+  if (widthIconTask>parseInt(document.getElementById('leftGanttChartDIV').style.width)*deviceRatio) widthIconTask=parseInt(document.getElementById('leftGanttChartDIV').style.width)*deviceRatio;
   
   sizeColumn=parseInt(dojo.query(".ganttRightTitle")[0].style.width)*ratio;
   
