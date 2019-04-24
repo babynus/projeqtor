@@ -231,12 +231,17 @@ echo '<td class="reportTableHeader" style="width:5%">' . i18n('sum') . '</td>';
 echo '</tr>';
 foreach ($resources as $idR=>$nameR) {
 	//if ($paramTeam) {
-    $res=new Resource($idR);
+	
+  $res=new ResourceAll($idR);
   //}
-  $maxCapa = 0;
-  for($day=$start;$day<=$end;$day=addDaysToDate($day, 1)) {
-    if($res->getCapacityPeriod($day) > $maxCapa){
-      $maxCapa = round($res->getCapacityPeriod($day), 2);
+  if ($res->isResourceTeam) {
+    $maxCapa=$capacity[$idR];
+  } else {
+    $maxCapa = 0;
+    for($day=$start;$day<=$end;$day=addDaysToDate($day, 1)) {
+      if($res->getCapacityPeriod($day) > $maxCapa){
+        $maxCapa = round($res->getCapacityPeriod($day), 2);
+      }
     }
   }
   if (!$paramTeam or $res->idTeam==$paramTeam) {
