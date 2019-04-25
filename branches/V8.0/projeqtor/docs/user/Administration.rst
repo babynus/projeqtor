@@ -51,10 +51,10 @@ Administration console allows to execute administration tasks on application.
     * Allows to open and close application.
     * When the application is closed the message below will appear on login screen.
 
-.. rubric:: Section: Consistency check
+.. rubric:: Section Consistency check
 
-  * Consistency check on the WBS sequence (search for duplicates, sequence holes, incorrect order)
-  * This feature available on the administration screen also automatically corrects detected issues
+* Consistency check on the WBS sequence (search for duplicates, sequence holes, incorrect order)
+* This feature available on the administration screen also automatically corrects detected issues
 
 .. index:: ! Email (Maintenance of Data)
 .. index:: ! Internal alert (Maintenance of Data)
@@ -153,7 +153,7 @@ Global parameters screen allows configuration of application settings.
 
 .. rubric:: Section: Real work allocation
 
-    .. index:: ! Real work allocation (Behavior)
+.. index:: ! Real work allocation (Behavior)
 
 .. _realWorkAllocation-section:
 
@@ -217,36 +217,47 @@ Global parameters screen allows configuration of application settings.
     
 .. rubric:: Section: Tickets
 
- .. compound:: **Only responsible works on ticket**
+* Specific behavior for ticket management 
 
-    * Only responsible can enter some real work on the ticket.
+  .. compound:: **Only responsible works on ticket**
 
- .. compound:: **Ticket responsible from product Responsible**
+     * Only responsible can enter some real work on the ticket.
 
-    * Select if the product Responsible is displayed ( always, if empty, never) as Ticket Responsible on that screen
+  .. compound:: **Ticket responsible from product Responsible**
 
- .. compound:: **Limit planning activity to those whit flag**
-    * Display planning activity selected for the ticket
+     * Select if the product Responsible is displayed ( always, if empty, never) as Ticket Responsible on that screen
 
- .. compound:: **Enable to filter ticket reports by priority **
-    * Can display tickets on Report screen by level of priority
+  .. compound:: **Limit planning activity to those whit flag**
 
- .. compound:: **Display ticket at customer level**
-    * Display of tickets on the Customer screen and on the Contacts screen
+     * Display planning activity selected for the ticket
 
- .. compound:: **Display ticket at version level**
-    * Display of tickets on the version screen 
+  .. compound:: **Enable to filter ticket reports by priority**
+ 
+     * Can display tickets on Report screen by level of priority
 
- .. compound:: **Manage accontable on ticket**
-    * Display the coordinator as Accountable, so the Responsible is the current actor
+  .. compound:: **Display ticket at customer level**
+
+     * Display of tickets on the Customer screen and on the Contacts screen
+
+  .. compound:: **Display ticket at version level**
+
+     * Display of tickets on the version screen 
+
+  .. compound:: **Manage accontable on ticket**
+
+     * Display the coordinator as Accountable, so the Responsible is the current actor
     
 .. rubric:: Section: Organization
 
+* Specific parameter for Organization management 
+
  .. compound:: **Use budget feature for organizations**
 
-    *If yes, can display and work on budget for an organization.
+    * If yes, can display and work on budget for an organization.
 
 .. rubric:: Section: Automation
+
+* Parameters to manage automations
 
  .. compound:: **Consolidate validated work & cost**
 
@@ -258,49 +269,51 @@ Global parameters screen allows configuration of application settings.
 
 
  .. compound:: **Auto set Responsible if single resource** :  
-Behavior about management of responsible, including automatic initialization of responsible.
+  Behavior about management of responsible, including automatic initialization of responsible.
 
     * Automatically set Responsible if not set and by the only one resource allocated to the project 
 
  .. compound:: ** Auto allocated the Manager to the project**
- * Automatically create an allocation for the project Manager to the project. He should be a resource.
+    * Automatically create an allocation for the project Manager to the project. He should be a resource.
 
  .. compound:: ** Auto set a Responsible if needed**
- * Automatically set Responsible to current resource (as using the element) if not set and if a Responsible is required (respecting access rights)
+    * Automatically set Responsible to current resource (as using the element) if not set and if a Responsible is required (respecting access rights)
 
  .. compound:: ** Auto assign Responsible to activity**
- * Assign automatically the Responsible to activities
+    * Assign automatically the Responsible to activities
 
  .. compound:: ** Update milestone from deliverable** (Have to link elements)
- * Update milestone Responsible automatically when the Responsible of deliverable has changed.
+    * Update milestone Responsible automatically when the Responsible of deliverable has changed.
 
  .. compound:: ** Update milestone from incoming** (Have to link elements)
- * Update milestone Responsible automatically when the Responsible of deliverable has changed.
+    * Update milestone Responsible automatically when the Responsible of deliverable has changed.
 
  .. compound:: ** Update deliverable from milestone**(have to link elements)
- * Update deliverable Responsible automatically when the Responsible of mielstone has changed.
+    * Update deliverable Responsible automatically when the Responsible of mielstone has changed.
 
  .. compound:: ** Update incoming from milestone**(have to link elements)
- * Update incoming Responsible automatically when the Responsible of milestone has changed.
+    * Update incoming Responsible automatically when the Responsible of milestone has changed.
 
  .. compound:: ** Auto set parent activity status**
- * Auto set status of parent activity from the status of children activity. 
+    * Auto set status of parent activity from the status of children activity. 
 
 .. rubric:: Section: Milestones
 
+* Specific parameters for Miltones management 
+
  .. compound:: ** Manage target milestone**
- * It updates the target (planned) date of the element (on Requirements, Tickets, Product Versions, Incomings, Deliverables and Deliveries) from the planned date of the milestone.
+    * It updates the target (planned) date of the element (on Requirements, Tickets, Product Versions, Incomings, Deliverables and Deliveries) from the planned date of the milestone.
 
  .. compound:: ** Auto link the milestone**
- * It optionally allows you to display the element linked to the milestone (The option above should be on "yes" to have access to the selection of milestone targetted)
+    * It optionally allows you to display the element linked to the milestone (The option above should be on "yes" to have access to the selection of milestone targetted)
 
  .. compound:: ** Set milestone from product version**
- * It optionally allows you to automatically retrieve the milestone from the milestone of the Project Version.
+    * It optionally allows you to automatically retrieve the milestone from the milestone of the Project Version.
    
 .. rubric:: Section: Controls and restrictions
 
  .. compound:: ** Allow type restriction on project**
- * if yes : allow to define additional restrictions of types on each projet type additionally to restrictions defined eventually at each project type level by the Administrator.
+    * if yes : allow to define additional restrictions of types on each projet type additionally to restrictions defined eventually at each project type level by the Administrator.
  
 .. rubric:: GENERAL SECTION 3 : Display
 
