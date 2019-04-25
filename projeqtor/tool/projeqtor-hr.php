@@ -647,6 +647,7 @@ function initPurgeLeaveSystemElements($leavesSystemActiv) {
         $tp->sortOrder=100;
         $tp->idWorkflow = $theWorkFlowId;
         $tp->code = 'LEAVESYST';
+        $tp->idle=1;
         $result = $tp->simpleSave();
         if (getLastOperationStatus($result)!="OK") {
             traceLog("InitLeaveSystemElement - Create Activity Type dedicated to Leave System");
