@@ -1502,7 +1502,9 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
   }
   
   public function disconnect() {
-    purgeFiles(Parameter::getGlobalParameter('paramReportTempDirectory'),"user" . $this->id . "_");
+    if(Parameter::getGlobalParameter('paramReportTempDirectory') != ''){
+      purgeFiles(Parameter::getGlobalParameter('paramReportTempDirectory'),"user" . $this->id . "_");
+    }
     $this->stopAllWork();
     traceLog("DISCONNECTED USER '" . $this->name . "'");
     Parameter::clearGlobalParameters();
