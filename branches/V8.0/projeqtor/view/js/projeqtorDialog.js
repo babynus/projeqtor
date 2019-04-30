@@ -6712,7 +6712,7 @@ var customMenuAddRemoveTimeout=null;
 var customMenuAddRemoveTimeoutDelay=3000;
 var customMenuAddRemoveClass=null;
 function customMenuManagement(menuClass) {
-  var button=dojo.byId(menuClass);
+  var button=dojo.byId('iconMenuBar'+menuClass);
   offsetbutton=button.offsetLeft+dojo.byId('menuBarVisibleDiv').offsetLeft+dojo.byId('menubarContainer').offsetLeft;
   if ( dojo.hasClass(button,'menuBarCustom') ) {
     clearTimeout(customMenuAddRemoveTimeout);
@@ -6738,7 +6738,7 @@ function customMenuAddItem() {
     load : function(data, args) {
     },
   });
-  dojo.addClass(customMenuAddRemoveClass,'menuBarCustom');
+  dojo.addClass('iconMenuBar'+customMenuAddRemoveClass,'menuBarCustom');
   dojo.byId('customMenuAdd').style.display='none';
 }
 function customMenuRemoveItem() {
@@ -6748,11 +6748,11 @@ function customMenuRemoveItem() {
     handleAs : "text",
     load : function(data, args) {
       if (data=='menuBarCustom') {
-        dojo.byId(customMenuAddRemoveClass).style.display="none";
+        dojo.byId('iconMenuBar'+customMenuAddRemoveClass).style.display="none";
       }
     },
   });
-  dojo.removeClass(customMenuAddRemoveClass,'menuBarCustom');
+  dojo.removeClass('iconMenuBar'+customMenuAddRemoveClass,'menuBarCustom');
   dojo.byId('customMenuRemove').style.display='none';
 }
 // ====================================================================================
