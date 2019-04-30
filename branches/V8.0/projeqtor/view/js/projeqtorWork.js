@@ -332,7 +332,7 @@ function dispatchWorkValueChange(rowId, colId, date) {
   checkCapacity(date);
   dijit.byId('totalWork').set("value",parseFloat(dijit.byId('totalWork').get("value"))+diff);
   totalWork=parseFloat(dijit.byId('totalWork').get("value"));
-  businessDay=parseInt(dojo.byId('businessDay').value);
+  businessDay=dojo.byId('businessDay').value;
   classTotalWork="imputationValidCapacity imputation";
   if (totalWork>businessDay) {
     classTotalWork='imputationInvalidCapacity imputation';
