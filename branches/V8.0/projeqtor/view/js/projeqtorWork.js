@@ -331,8 +331,9 @@ function dispatchWorkValueChange(rowId, colId, date) {
   disableWidget("showId");
   checkCapacity(date);
   dijit.byId('totalWork').set("value",parseFloat(dijit.byId('totalWork').get("value"))+diff);
-  totalWork=parseFloat(dijit.byId('totalWork').get("value"));
-  businessDay=dojo.byId('businessDay').value;
+  totalWork=parseFloat(dijit.byId('totalWork').get("value")).toFixed(2);
+  businessDay=parseFloat(dojo.byId('businessDay').value).toFixed(2);
+  console.log(businessDay);
   classTotalWork="imputationValidCapacity imputation";
   if (totalWork>businessDay) {
     classTotalWork='imputationInvalidCapacity imputation';
