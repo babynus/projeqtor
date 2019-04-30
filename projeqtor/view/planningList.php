@@ -192,7 +192,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                            hasDownArrow="true"
                            value="<?php if(sessionValueExists('startDatePlanView') and !$projectDate){ echo getSessionValue('startDatePlanView'); }else{ echo $startDate; } ?>" >
                            <script type="dojo/method" event="onChange" >
-                            saveDataToSession('startDatePlanView',formatDate(dijit.byId('startDatePlanView').get("value")), false);
+                            saveDataToSession('startDatePlanView',formatDate(dijit.byId('startDatePlanView').get("value")), true);
                             refreshJsonPlanning();
                            </script>
                          </div>
