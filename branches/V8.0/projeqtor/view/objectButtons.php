@@ -37,6 +37,7 @@
   }
   $id=null;
   $class=$_REQUEST['objectClass'];
+  $objClassList = RequestHandler::getValue('objectClassList');
   Security::checkValidClass($class);
   if (array_key_exists('objectId',$_REQUEST)) {
   	$id=$_REQUEST['objectId'];
@@ -433,7 +434,7 @@
     $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$user->getProfile($obj),'scope'=>'multipleUpdate'));
     $list=new ListYesNo($habil->rightAccess);
     $buttonMultiple=($list->code=='NO')?false:true;
-    if ($buttonMultiple and ! array_key_exists('planning',$_REQUEST)) {?>
+    if ($buttonMultiple and ! array_key_exists('planning',$_REQUEST) and $objClassList != 'GlobalView') {?>
     <?php organizeButtons();?> 
     <span id="multiUpdateButtonDiv" >
     <button id="multiUpdateButton" dojoType="dijit.form.Button" showlabel="false"
