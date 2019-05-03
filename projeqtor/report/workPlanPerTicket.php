@@ -91,7 +91,9 @@
 	  $paramProject=trim($_REQUEST['idProject']);
 	  Security::checkValidId($paramProject);
     $queryWhere1.= ($queryWhere1=='')?'':' and ';
-    $queryWhere1.=  "project.id in " . getVisibleProjectsList(true, $paramProject) ;
+    $prj=new Project();
+    $prjTable=$prj->getDatabaseTableName();
+    $queryWhere1.=  "$prjTable.id in " . getVisibleProjectsList(true, $paramProject) ;
   }
   $order = "sortOrder asc";
   $prjLst = $prj->getSqlElementsFromCriteria(null,false,$queryWhere1,$order);
