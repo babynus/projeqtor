@@ -247,14 +247,12 @@ class AutoSendReport extends SqlElement{
 	  $noData = true;
 	  $autoSendReport = new AutoSendReport();
 	  $user = getSessionUser();
-	  $listUser = getUserVisibleResourcesList(true);
-    if($idUser != ''){
-      unset($listUser);
-      foreach (getUserVisibleResourcesList(true) as $id=>$name){
-      	if($id == $idUser){
-      		$listUser[$id]=$name;
-      	}
-      }
+	  $listUser=array();
+    if($idUser){
+      $af=new Affectable($idUser);
+      $listUser[$idUser]=($af->name)?$af->name:$af->userName;
+    } else {
+      $listUser = getUserVisibleResourcesList(true);
     }
 	  $result = "";
 	  $result .='<div id="autoSendReportDiv" align="center" style="margin-top:20px;margin-bottom:20px; overflow-y:auto; width:100%;">';
