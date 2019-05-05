@@ -281,9 +281,9 @@ if ($idFilterAttribute and $idFilterOperator) {
       $filterValue="";
     }
     if (Sql::isPgsql()) {
-      $arraySql["value"]= "NOW() + INTERVAL '" . intval($filterValue) . " day'";
+      $arraySql["value"]= "NOW() + INTERVAL '" . intval($filterValue) . " day 23 hours 59 minutes'";
     } else {
-      $arraySql["value"]= "ADDDATE(NOW(), INTERVAL (" . intval($filterValue) . ") DAY)";
+      $arraySql["value"]= "ADDDATE(addtime(DATE(NOW()), '23:59:59'), INTERVAL (" . intval($filterValue) . ") DAY)";
     }
   } else if ($idFilterOperator==">=now+") {  
     $arrayDisp["operator"]=">= " . i18n('today') . (($filterValue>0 or 1)?' +':' ');
@@ -293,9 +293,9 @@ if ($idFilterAttribute and $idFilterOperator) {
       $filterValue="";
     }
     if (Sql::isPgsql()) {
-      $arraySql["value"]= "NOW() + INTERVAL '" . intval($filterValue) . " day'";
+      $arraySql["value"]= "CURRENT_DATE + INTERVAL '" . intval($filterValue) . " day'";
     } else {
-      $arraySql["value"]= "ADDDATE(NOW(), INTERVAL (" . intval($filterValue) . ") DAY)";
+      $arraySql["value"]= "ADDDATE(DATE(NOW()), INTERVAL (" . intval($filterValue) . ") DAY)";
     }
     //ADD qCazelles - Dynamic filter - Ticket #78
   } else if ($idFilterOperator=="startBy") {

@@ -184,9 +184,9 @@ for ($i=0;$i<$nbDynamicFilterClauses;$i++) {
 			$filterValue="";
 		}
 		if (Sql::isPgsql()) {
-			$arraySql["value"]= "NOW() + INTERVAL '" . intval($filterValue) . " day'";
+			$arraySql["value"]= "CURRENT_DATE + INTERVAL '" . intval($filterValue) . " day 23 hours 59 minutes'";
 		} else {
-			$arraySql["value"]= "ADDDATE(NOW(), INTERVAL (" . intval($filterValue) . ") DAY)";
+			$arraySql["value"]= "ADDDATE(addtime(DATE(NOW()), '23:59:59'), INTERVAL (" . intval($filterValue) . ") DAY)";
 		}
 	} else if ($idFilterOperator==">=" and $filterDataType=="intDate") {
 		$arrayDisp["operator"]=">= " . i18n('today') . (($filterValue>0)?' +':' ');
@@ -198,7 +198,7 @@ for ($i=0;$i<$nbDynamicFilterClauses;$i++) {
 		if (Sql::isPgsql()) {
 			$arraySql["value"]= "NOW() + INTERVAL '" . intval($filterValue) . " day'";
 		} else {
-			$arraySql["value"]= "ADDDATE(NOW(), INTERVAL (" . intval($filterValue) . ") DAY)";
+			$arraySql["value"]= "ADDDATE(DATE(NOW()), INTERVAL (" . intval($filterValue) . ") DAY)";
 		}	
 	} else {
 		echo htmlGetErrorMessage(i18n('incorrectOperator'));
