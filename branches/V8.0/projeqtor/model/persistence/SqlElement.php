@@ -528,11 +528,14 @@ abstract class SqlElement {
           "AccessProfile" => "control"), 
       "Activity" => array(
           "Assignment" => "cascade",
-          "Activity" => "control",
-          "Meeting" => "control",
-          "Milestone" => "control",
-          "PeriodicMeeting" => "control",
-          "Ticket" => "control" 
+          "Activity" => "confirm",
+          "Meeting" => "confirm",
+          "Milestone" => "confirm",
+          "Note" => "cascade",
+          "PeriodicMeeting" => "confirm",
+          "TestSession"=>"confirm",
+          "Ticket" => "control",
+          "Link" => "cascade",          
       ), 
       "Document" => array(
           "DocumentVersion" => "cascade"), 

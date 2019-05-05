@@ -41,11 +41,12 @@ if (! array_key_exists('selection',$_REQUEST)) {
   throwError('selection parameter not found in REQUEST');
 }
 $selection=trim($_REQUEST['selection']);
+if ($selection=='NaN') $selection='';
 $selectList=explode(';',$selection);
 
-if (!$selection or count($selectList)==0) {
+if (! trim($selection) or count($selectList)==0) {
 	 $summary='<div class=\'messageWARNING\' >'.i18n('messageNoData',array(i18n($className)),ENT_QUOTES,'UTF-8').'</div >';
-	 echo '<input type="hidden" id="summaryResult" value="'.$summary.'" />';
+	 echo '<input type="hidden" id="summaryResult" value="'.$summary.'" />'.$summary;
 	 exit;
 }
 $cptOk=0;
