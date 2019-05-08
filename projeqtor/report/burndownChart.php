@@ -298,7 +298,7 @@ if (!$maxLeft and isset($resLeftPlanned[$startLabel])) $maxLeft=$resLeftPlanned[
 $minLeft=0;
 //$nbSteps=count($arrDates)-1;
 if (!$nbSteps) $nbSteps=count($arrDates);
-$stepValue=($nbSteps)?(($maxLeft-$minLeft)/($nbSteps-1)):0;
+$stepValue=($nbSteps>1)?(($maxLeft-$minLeft)/($nbSteps-1)):0;
 $val=$maxLeft;
 
 $graphWidth=1200;
