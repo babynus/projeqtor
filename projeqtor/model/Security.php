@@ -56,6 +56,7 @@ class Security
     if ($className=='') return ''; // Allow empty string
     //if ($className=='Planning') return $className; // Not a real class, but can be concidered as
     // not checking file existence using realpath() due to inconsistent behavior in different versions.
+    if ($className=='Replan' or $className=='Construction' or $className=='Fixed') $className='Project';
     if (!file_exists('../model/'.$className.'.php') || 
     $className != basename(realpath('../model/'.$className.'.php'), '.php')) {
       if (!file_exists('../model/custom/'.$className.'.php') ||
