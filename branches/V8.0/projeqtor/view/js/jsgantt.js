@@ -1770,7 +1770,7 @@ JSGantt.changeFormat = function(pFormat,ganttObj) {
 	  };
 	  setTimeout(func,10); // This is done to let the time to the browser to display the waiting spinner (showWait())
   } else {
-    alert('Chart undefined');
+    consoleTraceLog('Chart undefined');
   };
   saveUserParameter('planningScale',pFormat);
   ganttPlanningScale=pFormat;
@@ -2021,7 +2021,7 @@ Date.prototype.getWeek = function() {
 
 JSGantt.benchMark = function(pItem){
   var vEndTime=new Date().getTime();
-  alert(pItem + ': Elapsed time: '+((vEndTime-vBenchTime)/1000)+' seconds.');
+  consoleTraceLog(pItem + ': Elapsed time: '+((vEndTime-vBenchTime)/1000)+' seconds.');
   vBenchTime=new Date().getTime();
 };
 
