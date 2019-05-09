@@ -115,7 +115,7 @@ class SqlList {
     	$query.=' and '.getAccesRestrictionClause($listType,null,true);
     }
     $query .=')';
-    if ($selectedValue) {
+    if (trim($selectedValue)) {
     	if ($selectedValue!='*') {
         $query .= " or " . $obj->getDatabaseColumnName('id') .'= ' . Sql::str($selectedValue) ;
     	}
