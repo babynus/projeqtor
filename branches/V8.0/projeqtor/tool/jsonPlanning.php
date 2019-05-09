@@ -1469,12 +1469,17 @@
       $crit=array('successorId'=>$line['id']);
       $d=new Dependency();
       $depList=$d->getSqlElementsFromCriteria($crit,false);
+      $nbHour = Parameter::getGlobalParameter('dayTime');
       foreach ($depList as $dep) {
         echo '<PredecessorLink>' . $nl;
         echo '<PredecessorUID>' . htmlEncode($dep->predecessorId) . '</PredecessorUID>' . $nl;
         echo '<Type>1</Type>' . $nl;
         echo '<CrossProject>0</CrossProject>' . $nl;
-        echo '<LinkLag>0</LinkLag>' . $nl;
+        $delai = 0;
+        if($dep->dependencyDelay){
+          $delai = $nbHour*$dep->dependencyDelay*600;
+        }
+        echo '<LinkLag>'.$delai.'</LinkLag>' . $nl;
         echo '<LagFormat>7</LagFormat>' . $nl;
         echo '</PredecessorLink>' . $nl;
       }
