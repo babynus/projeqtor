@@ -339,6 +339,7 @@ class CalendarDefinition extends SqlElement {
 // MTY - GENERIC DAY OFF  
   
   public function drawSpecificItem($item){
+    global $print;
   	//scriptLog("Project($this->id)->drawSpecificItem($item)");
   	$result="";
   	$cal=new Calendar;
@@ -350,7 +351,7 @@ class CalendarDefinition extends SqlElement {
       $result= $cal->drawSpecificItem('calendarView');
       //$result.='</div>';
   		return $result;
-  	} else if ($item=='year') {
+  	} else if ($item=='year' and !$print) {
   		$result.='<div style="width:70px; text-align: center; color: #000000;" dojoType="dijit.form.NumberSpinner"'
   		 . ' constraints="{min:2000,max:2100,places:0,pattern:\'###0\'}" intermediateChanges="true" maxlength="4" '
        . ' value="'. $currentYear.'" smallDelta="1" id="calendartYearSpinner" name="calendarYearSpinner" >'
@@ -359,7 +360,7 @@ class CalendarDefinition extends SqlElement {
   		 . ' </script>'
   		 . '</div>';
   		 return $result;
-  	} else if ($item=='copyFromDefault') {
+  	} else if ($item=='copyFromDefault' and !$print) {
   		if ($this->id!=1) {
   		  $result.='<div type="button" dojoType="dijit.form.Button" showlabel="true">'
   			. i18n('copyFromCalendar')	
@@ -401,7 +402,7 @@ class CalendarDefinition extends SqlElement {
 				//Fin Modif
   		}		
 // MTY - GENERIC DAY OFF                
-  	} else if ($item=="dayOfWeek") {
+  	} else if ($item=="dayOfWeek" and !$print) {
             $result = $this->drawDayOffWeek();
         } else if ($item=="bankOffDays") {
             $result = $this->drawBankOffDays();
