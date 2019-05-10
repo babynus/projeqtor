@@ -2609,7 +2609,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
                                               'leftAmount','leftFullAmount','reserveAmount','totalLeftCost', 'totalPlannedCost',
           		                                'marginCost'
           );
-          if(($isAmount or $isCost) and ! in_array($col,$arrayPossibleNegativeAmounts) ){
+          if(($isAmount or $isCost) and !in_array($col,$arrayPossibleNegativeAmounts) and $classObj != 'Bill'){
               echo ' constraints="{min:0,max:'.$max.(($isAmount)?',places:2':'').'}" ';
           } else {
             echo ' constraints="{min:-'.$max.',max:'.$max.(($isAmount)?',places:2':'').'}" ';
