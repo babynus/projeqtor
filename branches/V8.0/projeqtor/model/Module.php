@@ -245,6 +245,10 @@ class Module extends SqlElement {
         }
       }
     }
+    if ($class=="Delivery" and ! Module::isModuleActive('modulePlanning')) {
+      $list['_sec_Link_Activity']='_sec_Link_Activity' ;
+      $list['_Link_Activity']='_Link_Activity';
+    }
     return $list;
   }
 }
