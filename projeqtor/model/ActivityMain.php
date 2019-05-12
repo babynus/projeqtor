@@ -353,7 +353,8 @@ class ActivityMain extends SqlElement {
     
     if ($this->id and $this->id == $this->idActivity) {
       $result .= '<br/>' . i18n ( 'errorHierarchicLoop' );
-    } else if ($this->ActivityPlanningElement and $this->ActivityPlanningElement->id) {
+    } else if ($this->ActivityPlanningElement and $this->ActivityPlanningElement->id
+      and ($this->idActivity!=$old->idActivity or $this->idProject!=$old->idProject)) {
       if (trim ( $this->idActivity )) {
         $parentType = 'Activity';
         $parentId = $this->idActivity;
