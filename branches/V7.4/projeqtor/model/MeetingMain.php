@@ -334,7 +334,9 @@ class MeetingMain extends SqlElement {
 
   public function control(){
     $result="";
-    if ($this->MeetingPlanningElement and $this->MeetingPlanningElement->id){
+    $old=$this->getOld();
+    if ($this->MeetingPlanningElement and $this->MeetingPlanningElement->id
+      and ($this->idActivity!=$old->idActivity or $this->idProject!=$old->idProject)){
       if (trim($this->idActivity)) {
         $parentType='Activity';
         $parentId=$this->idActivity;
