@@ -136,8 +136,9 @@ class PlanningElement extends SqlElement {
                                   "isManualProgress"=>"hidden"
   );   
   
-  private static $predecessorItemsArray = array();
-
+  private static $_predecessorItemsArray = array();
+  private static $_successorItemsArray = array();
+  
   protected static $staticCostVisibility=null;
   protected static $staticWorkVisibility=null;
   public static $_noDispatch=false;
@@ -1045,17 +1046,17 @@ class PlanningElement extends SqlElement {
   }
   
   public function controlHierarchicLoop($parentType, $parentId) {
-    $result="";
+    $result=""; 
     $parent=SqlElement::getSingleSqlElementFromCriteria('PlanningElement',array('refType'=>$parentType,'refId'=>$parentId));
-    $parentList=$parent->getParentItemsArray();
-    if (array_key_exists('#' . $this->id,$parentList)) {
+    $parentListObj=$parent->getParentItemsArray();
+    if (array_key_exists('#' . $this->id,$parentListObj)) {
       $result='<br/>' . i18n('errorHierarchicLoop');
       return $result;
     }
       
     $precListObj=$this->getPredecessorItemsArray();
     $succListObj=$this->getSuccessorItemsArray();
-    $parentListObj=$parent->getParentItemsArray();
+    //$parentListObj=$parent->getParentItemsArray(); // Commented => already done above
     $parentListObj['#'.$parent->id]=$parent;
     foreach ($parentListObj as $parentId=>$parentObj) {
       if (array_key_exists($parentId, $precListObj)) {
@@ -1097,24 +1098,24 @@ class PlanningElement extends SqlElement {
    * Retrieve the list of all Predecessors, recursively
    */
   public function getPredecessorItemsArray() {
-  	// Imporvement : get static stored value if already fetched 
-  	/*if (array_key_exists('#' . $this->id, self::$predecessorItemsArray)) {
-  		return self::$predecessorItemsArray['#' . $this->id]; 
-  	}*/
+  	// Improvement : get static stored value if already fetched 
+  	if (isset(self::$_predecessorItemsArray['#'.$this->id])) {
+  		return self::$_predecessorItemsArray['#'.$this->id]; 
+  	}
     $result=array();
     $crit=array("successorId"=>$this->id);
     $dep=new Dependency();
     $depList=$dep->getSqlElementsFromCriteria($crit, false);
     foreach ($depList as $dep) {
       $elt=new GlobalPlanningElement($dep->predecessorId);
-      if ($elt->id and ! array_key_exists('#' . $elt->id, $result)) {
+      if ($elt->id and ! array_key_exists('#' . $elt->id, $result) and !isset(self::$_predecessorItemsArray['#'.$elt->id])) {
         $result['#' . $elt->id]=$elt;
         $resultPredecessor=$elt->getPredecessorItemsArray();
-        $result=array_merge($result,$resultPredecessor);
+        $result=array_merge_preserve_keys($result,$resultPredecessor);
       }
     }
     // Imporvement : static store result to avoid multiple fetch
-    //self::$predecessorItemsArray['#' . $this->id]=$result;
+    self::$_predecessorItemsArray['#' . $this->id]=$result;
     return $result;
   }
   
@@ -1158,13 +1159,16 @@ class PlanningElement extends SqlElement {
    * Retrieve the list of all Successors, recursively
    */
   public function getSuccessorItemsArray() {
+    if (isset(self::$_successorItemsArray['#'.$this->id])) {
+      return self::$_successorItemsArray['#'.$this->id];
+    }
     $result=array();
     $crit=array("predecessorId"=>$this->id);
     $dep=new Dependency();
     $depList=$dep->getSqlElementsFromCriteria($crit, false);
     foreach ($depList as $dep) {
       $elt=new GlobalPlanningElement($dep->successorId);
-      if ($elt->id and ! array_key_exists('#' . $elt->id, $result)) {
+      if ($elt->id and ! array_key_exists('#' . $elt->id, $result) and !isset(self::$_successorItemsArray['#'.$elt->id])) {
         $result['#' . $elt->id]=$elt;
         $resultSuccessor=$elt->getSuccessorItemsArray();
         $result=array_merge($result,$resultSuccessor);
@@ -1178,6 +1182,7 @@ class PlanningElement extends SqlElement {
 //         }
 //       }
     }
+    self::$_successorItemsArray['#' . $this->id]=$result;
     return $result;
   }
 
@@ -1458,7 +1463,12 @@ class PlanningElement extends SqlElement {
       $user=getSessionUser();
       $profile=$user->getProfile($this->idProject);
     }
-    
+    if (self::$staticCostVisibility and isset(self::$staticCostVisibility[$profile])
+    and self::$staticWorkVisibility and isset(self::$staticWorkVisibility[$profile]) ) {
+      $this->_costVisibility=self::$staticCostVisibility[$profile];
+      $this->_workVisibility=self::$staticWorkVisibility[$profile];
+      return;
+    }
     $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$profile,'scope'=>'changeValidatedData'));
       if ($habil and ($habil->rightAccess == 2 or ! $habil->id ) ) { // If selected NO or not set (default is NO)
       self::$_fieldsAttributes['validatedStartDate']='readonly';
@@ -1482,13 +1492,6 @@ class PlanningElement extends SqlElement {
     	self::$_fieldsAttributes['priority']='readonly';
     } else {
     	self::$_fieldsAttributes['priority']='';
-    }
-    
-    if (self::$staticCostVisibility and isset(self::$staticCostVisibility[$profile]) 
-    and self::$staticWorkVisibility and isset(self::$staticWorkVisibility[$profile]) ) {
-      $this->_costVisibility=self::$staticCostVisibility[$profile];
-      $this->_workVisibility=self::$staticWorkVisibility[$profile];
-      return;
     }
     
     $user=getSessionUser();
