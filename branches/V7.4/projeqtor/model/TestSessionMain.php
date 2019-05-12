@@ -253,11 +253,12 @@ class TestSessionMain extends SqlElement {
    */
   public function control(){
     $result="";
-    
+    $old=$this->getOld();
     if (!trim($this->idProject) and !trim($this->idProduct)) {
       $result.="<br/>" . i18n('messageMandatory',array(i18n('colIdProject') . " " . i18n('colOrProduct')));
     }
-    if ($this->TestSessionPlanningElement and $this->TestSessionPlanningElement->id){
+    if ($this->TestSessionPlanningElement and $this->TestSessionPlanningElement->id
+      and ($this->idActivity!=$old->idActivity or $this->idProject!=$old->idProject)){
       if (trim($this->idActivity)) {
         $parentType='Activity';
         $parentId=$this->idActivity;
