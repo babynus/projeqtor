@@ -893,7 +893,13 @@ div.imputation input.dijitInputInner {
   {
   border: 1px solid transparent;
 }
-
+		/*
+           Ticket #3987-Timesheet : add button Today to get back to current week	
+           florent 
+        */  
+.dijitButton{
+	color:#686868;
+}
 .dijitButtonDisabled .dijitButtonNode,.dijitToggleButtonDisabled .dijitButtonNode,.dijitDropDownButtonDisabled .dijitButtonNode,.dijitComboButtonDisabled .dijitButtonNode,.dijitComboBoxDisabled,.dijitSpinnerDisabled,.dijitSpinnerDisabled .dijitButtonNode
   {
   border-color: #d5d5d5 #d5d5d5 #bdbdbd #d5d5d5;
