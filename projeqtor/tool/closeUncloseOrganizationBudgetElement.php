@@ -60,7 +60,8 @@ $bE->idleDateTime = ($idle=='0'?date('Y-m-d H:i:s'):null);
 $result= $bE->simpleSave();
 // To calculate synthesis
 if($bE->idle==0) {
-    $orga = new Organization($refId,false,$bE);
+    $orga = new Organization($refId,false);
+    $orga->updateBudgetElementSynthesis($bE);
 }
 
 $_REQUEST['objectClass']='Organization';
