@@ -52,7 +52,7 @@ class OrganizationBudgetElementMain extends BudgetElement {
   public $totalBudgetCost;
 
   public $_tab_5_3_smallLabel = array('work','cost','expense','totalCost','reassessed',
-                                      'colIdBudget','daughters','projects');
+                                      'idBudget','daughters','projects');
   // Fields of Budget Element issued of database fields
   // Budget Elements Row
   public $_byMet_budgetWork;
@@ -230,35 +230,13 @@ class OrganizationBudgetElementMain extends BudgetElement {
    * @return void
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
-      // It's not a very good practice, but it's an 'effective' solution
-      if (array_key_exists ( 'OrganizationBudgetPeriod', $_REQUEST )) {
-            $this->_byMet_periodYear = $_REQUEST['OrganizationBudgetPeriod'];
-        } else {                        
-            $this->_byMet_periodYear = date('Y');
-        }
-      $this->setYearPeriod($this->_byMet_periodYear);
-      $this->hideOrganizationBudgetElementMsg();
-      
-// ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
-    if(Parameter::getGlobalParameter('useOrganizationBudgetElement')!="YES") {
-        self::$_fieldsAttributes["_sec_synthesis"] = "hidden,noPrint";         
-        self::$_fieldsAttributes["_byMet_periodYear"] = "hidden,noList,notInFilter";
+    // It's not a very good practice, but it's an 'effective' solution
+    if (RequestHandler::isCodeSet('OrganizationBudgetPeriod')) {
+      $this->_byMet_periodYear = RequestHandler::getValue('OrganizationBudgetPeriod');
+    } else {                        
+      $this->_byMet_periodYear = date('Y');
     }
-// END ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
-
-      
-            
-    if ($id!= NULL and trim($id)!='') {
-        $this->setDaughtersBudgetElementAndPlanningElement();
-        $this->setWorkCostExpenseTotalCostBudgetElement();
-        // A solution for showing something when BudgetElement
-        $this->_tab_3_1_smallLabel = array('idle','idleDate','empty','idStatus');
-    } else {
-        $this->hideSynthesisBudgetAndProjectElement(true);
-        // A solution for showing nothing when no BudgetElement
-        $this->_tab_3_1_smallLabel = array('empty','empty','empty','empty');
-  }
-  
+    $this->setYearPeriod($this->_byMet_periodYear);  
   }
   
   /** ==========================================================================
@@ -602,7 +580,8 @@ function periodChanged(theId) {
             $this->simpleSave();
             // Force calculation of BudgetElement's project informations
             $bE = new BudgetElement($this->id);
-            new Organization($this->refId,true,$bE);
+            $orga=new Organization($this->refId,true);
+            $orga->updateBudgetElementSynthesis($bE);
             return $result;
         }
     }        
@@ -1532,6 +1511,23 @@ function periodChanged(theId) {
   }
 
   public function setAttributes($workVisibility, $costVisibility) {
+    
+    // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
+    if(Parameter::getGlobalParameter('useOrganizationBudgetElement')!="YES") {
+      self::$_fieldsAttributes["_sec_synthesis"] = "hidden,noPrint";
+      self::$_fieldsAttributes["_byMet_periodYear"] = "hidden,noList,notInFilter";
+    }
+    // END ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
+    if (trim($this->id)) {
+      $this->setDaughtersBudgetElementAndPlanningElement();
+      $this->setWorkCostExpenseTotalCostBudgetElement();
+      // A solution for showing something when BudgetElement
+      $this->_tab_3_1_smallLabel = array('idle','idleDate','empty','idStatus');
+    } else {
+      $this->hideSynthesisBudgetAndProjectElement(true);
+      // A solution for showing nothing when no BudgetElement
+      $this->_tab_3_1_smallLabel = array('empty','empty','empty','empty');
+    }
     $wcVisibility = $workVisibility.$costVisibility;
     switch ($wcVisibility) {
         case "NONO" :
@@ -1565,5 +1561,6 @@ function periodChanged(theId) {
             $this->hideWorkCost();
             break;
     }
+    $this->hideOrganizationBudgetElementMsg(($this->id)?true:false);
   }
 }?>
