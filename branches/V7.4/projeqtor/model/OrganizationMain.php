@@ -169,17 +169,8 @@ class OrganizationMain extends SqlElement {
     *                                         - null = Normal construct 
    * @return void
    */ 
-  function __construct($id = NULL, $withoutDependentObjects=false, $budgetElement=null) {
-      
+  function __construct($id = NULL, $withoutDependentObjects=false) {      
   	parent::__construct($id,$withoutDependentObjects);
-  	$currentDetailObj=SqlElement::getCurrentObject(null,null,true,false);
-  	if (!$withoutDependentObjects and $currentDetailObj and get_class($currentDetailObj)==get_class($this) and $currentDetailObj->id==$this->id) $this->setAttributesForBudget();
-  	if (!$this->id) $this->setAttributesForBudget();
-  	if($budgetElement!=null and $id!=null and trim($id)!='') {
-  	  $this->updateBudgetElementSynthesis($budgetElement);
-  	  return;
-  	}
-
   }
   
   public function setAttributesForBudget() {
@@ -222,7 +213,7 @@ class OrganizationMain extends SqlElement {
       unset($this->_byMet_totalPlannedCost);
     }
 // END ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
-    if ($id != NULL and trim($id)!='') {
+    if (trim($id)) {
       if (is_object($this->OrganizationBudgetElementCurrent)) {
         $this->setHierarchicString();
         if ($this->OrganizationBudgetElementCurrent->id) {
@@ -1652,41 +1643,46 @@ function calculatePlanningElement() {
    * @return Nothing
    */
     public function setAttributes() {
-        if(Parameter::getGlobalParameter('useOrganizationBudgetElement')==="YES") {return;}
-        $this->setVisibility();
-        $wcVisibility = $this->_workVisibility.$this->_costVisibility;
-        switch ($wcVisibility) {
-            case "NONO" :
-                $this->hideWorkCost();
-                break;
-            case "NOALL" :
-                $this->showOnlyCost();
-                break;
-            case "NOVAL" :
-                $this->hideWorkAndShowValidatedCost();
-                break;
-            case "ALLALL" :
-                $this->showWorkCost();
-                break;
-            case "ALLNO" :
-                $this->showOnlyWork();
-                break;
-            case "ALLVAL" :
-                $this->showAllWorkAndValidatedCost();
-                break;
-            case "VALVAL" :
-                $this->showValidated();
-                break;
-            case "VALALL" :
-                $this->showOnlyValidatedWorkAndAllCost();
-                break;
-            case "VALNO" :
-                $this->showOnlyValidatedWorkAndHideCost();
-                break;
-            default:
-                $this->hideWorkCost();
-                break;
-        }
+      //$currentDetailObj=SqlElement::getCurrentObject(null,null,true,false);
+      //if (($currentDetailObj and get_class($currentDetailObj)==get_class($this) and $currentDetailObj->id==$this->id)
+      //or !$this->id) { 
+      $this->setAttributesForBudget();
+      //}
+      if(Parameter::getGlobalParameter('useOrganizationBudgetElement')==="YES") {return;}
+      $this->setVisibility();
+      $wcVisibility = $this->_workVisibility.$this->_costVisibility;
+      switch ($wcVisibility) {
+          case "NONO" :
+              $this->hideWorkCost();
+              break;
+          case "NOALL" :
+              $this->showOnlyCost();
+              break;
+          case "NOVAL" :
+              $this->hideWorkAndShowValidatedCost();
+              break;
+          case "ALLALL" :
+              $this->showWorkCost();
+              break;
+          case "ALLNO" :
+              $this->showOnlyWork();
+              break;
+          case "ALLVAL" :
+              $this->showAllWorkAndValidatedCost();
+              break;
+          case "VALVAL" :
+              $this->showValidated();
+              break;
+          case "VALALL" :
+              $this->showOnlyValidatedWorkAndAllCost();
+              break;
+          case "VALNO" :
+              $this->showOnlyValidatedWorkAndHideCost();
+              break;
+          default:
+              $this->hideWorkCost();
+              break;
+      }
     }
     
   /** =========================================================
