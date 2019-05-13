@@ -100,6 +100,7 @@ if($action=='ADD') {
     $result = $bE->simpleSave();
     // To calculate synthesis
     $orga = new Organization($refId,false,$bE);
+    $orga->updateBudgetElementSynthesis($bE);
 } else {
     $bE=new BudgetElement($id,true);
     if ($bE->budgetWork!=$budgetWork or $bE->budgetCost!=$budgetCost or $bE->expenseBudgetAmount!=$budgetExpenseAmount) {
