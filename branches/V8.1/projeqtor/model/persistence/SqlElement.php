@@ -4754,47 +4754,47 @@ abstract class SqlElement {
       $crit = "idle='0'";
       $crit .= " and idMailable='" . $mailable->id . "' and ( false ";
       if ($statusChange and property_exists ( $this, 'idStatus' ) and trim ( $this->idStatus )) {
-        $any = SqlElement::getSingleSqlElementFromCriteria('Event', array('name'=>'statusChange'));
-        $crit .= "  or idStatus='" . $this->idStatus . "' or idEvent='".$any->id."' ";
+        $any = SqlElement::getSingleSqlElementFromCriteria('EventForMail', array('name'=>'statusChange'));
+        $crit .= "  or idStatus='" . $this->idStatus . "' or idEventForMail='".$any->id."' ";
       }
       if ($responsibleChange) {
-        $crit .= " or idEvent='1' ";
+        $crit .= " or idEventForMail='1' ";
       }
       if ($noteAdd) {
-        $crit .= " or idEvent='2' ";
+        $crit .= " or idEventForMail='2' ";
       }
       if ($attachmentAdd) {
-        $crit .= " or idEvent='3' ";
+        $crit .= " or idEventForMail='3' ";
       }
       if ($noteChange) {
-        $crit .= " or idEvent='4' ";
+        $crit .= " or idEventForMail='4' ";
       }
       if ($descriptionChange) {
-        $crit .= " or idEvent='5' ";
+        $crit .= " or idEventForMail='5' ";
       }
       if ($resultChange) {
-        $crit .= " or idEvent='6' ";
+        $crit .= " or idEventForMail='6' ";
       }
       if ($assignmentAdd) {
-        $crit .= " or idEvent='7' ";
+        $crit .= " or idEventForMail='7' ";
       }
       if ($assignmentChange) {
-        $crit .= " or idEvent='8' ";
+        $crit .= " or idEventForMail='8' ";
       }
       if ($anyChange) {
-        $crit .= " or idEvent='9' ";
+        $crit .= " or idEventForMail='9' ";
       }
       if ($affectationAdd) {
-        $crit .= " or idEvent='10' ";
+        $crit .= " or idEventForMail='10' ";
       }
       if ($affectationChange) {
-        $crit .= " or idEvent='11' ";
+        $crit .= " or idEventForMail='11' ";
       }
       if ($linkAdd) {
-        $crit .= " or idEvent='12' ";
+        $crit .= " or idEventForMail='12' ";
       }
       if ($linkDelete) {
-        $crit .= " or idEvent='13' ";
+        $crit .= " or idEventForMail='13' ";
       }
       $crit .= ")";
       $statusMailList = $statusMail->getSqlElementsFromCriteria ( null, false, $crit );
@@ -4816,23 +4816,23 @@ abstract class SqlElement {
         if ($type and $stm->idType and $stm->idType!=$type) { // Does not concern current type, must not apply
           continue;
         }
-        if (! isset($statusMailListOrganized[$stm->idEvent])) { // No other already selected : OK
-          $statusMailListOrganized[$stm->idEvent]=$stm;
+        if (! isset($statusMailListOrganized[$stm->idEventForMail])) { // No other already selected : OK
+          $statusMailListOrganized[$stm->idEventForMail]=$stm;
           continue;
         }
         // Now we are treating duplicates (already exists for event, we have another one that may fit, so we must select on Project and / or Type
         if ($proj and $stm->idProject and $stm->idProject==$proj) { // OK, dedicated to correct project
           if ($type and $stm->idType and $stm->idType==$type) { // Same project and same type : this is this one !!!!
-            $statusMailListOrganized[$stm->idEvent]=$stm;
+            $statusMailListOrganized[$stm->idEventForMail]=$stm;
           } else { // Same project but not same type, replace if previous not on same project
-            if (!$statusMailListOrganized[$stm->idEvent]->idProject) {
-              $statusMailListOrganized[$stm->idEvent]=$stm;
+            if (!$statusMailListOrganized[$stm->idEventForMail]->idProject) {
+              $statusMailListOrganized[$stm->idEventForMail]=$stm;
             }
           }
         } else { // Not same project, will check on type
           if ($type and $stm->idType and $stm->idType==$type) { // Same type but not same project, replace if previous not on same project
-            if (!$statusMailListOrganized[$stm->idEvent]->idProject) {
-              $statusMailListOrganized[$stm->idEvent]=$stm;
+            if (!$statusMailListOrganized[$stm->idEventForMail]->idProject) {
+              $statusMailListOrganized[$stm->idEventForMail]=$stm;
             }
           }
         }
