@@ -839,7 +839,7 @@ if (property_exists($objectClass,'idStatus')) {
                    florent
               -->
               <td>
-                <button dojoType="dijit.form.Button" type="button" style="margin-right:15%;">
+                <button dojoType="dijit.form.Button" type="button" style="margin-left:20%;">
                     <?php echo i18n('resetColor');?>
                   <script type="dojo/method" event="onClick">
                      resetFilter();
