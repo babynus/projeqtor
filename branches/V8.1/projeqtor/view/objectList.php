@@ -833,6 +833,20 @@ if (property_exists($objectClass,'idStatus')) {
         </table>    
       </form>
     </td>
+                  </td>
+                </td>
+              <!-- Ticket #3988	- Object list : boutton reset parameters  
+                   florent
+              -->
+              <td>
+                <button dojoType="dijit.form.Button" type="button" style="margin-right:15%;">
+                    <?php echo i18n('resetColor');?>
+                  <script type="dojo/method" event="onClick">
+                     resetFilter();
+                  </script>
+                  
+                </button>
+              </td>
   </tr>
 </table>
 <div id="listBarShow" class="dijitAccordionTitle" onMouseover="showList('mouse')" onClick="showList('click');">

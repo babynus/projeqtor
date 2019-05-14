@@ -388,6 +388,54 @@ String.prototype.toUpperCaseWithoutAccent = function(){
   return str.toUpperCase();
 }
 
+     /*
+        Ticket #3988  - Object list : boutton reset parameters  
+         florent
+     */
+function resetFilter(){
+ var grid = dijit.byId("objectGrid");
+  
+  if(grid){
+    if(dijit.byId('listTypeFilter')){
+      dijit.byId('listTypeFilter').set('value','');
+    }
+    if(dijit.byId('listClientFilter')){
+      dijit.byId('listClientFilter').set('value','');
+    }
+    if(dijit.byId('listItemSelector')){
+      dijit.byId('listItemSelector').set('value','');
+    }
+    if(dijit.byId('showAllProjects')){
+      dijit.byId('showAllProjects').set('value','');
+    }
+    if(dijit.byId('ListPredefinedActions')){
+      dijit.byId('ListPredefinedActions').set('value','');
+    }
+    if(dijit.byId('ListBudgetParentFilter')){
+      dijit.byId('ListBudgetParentFilter').set('value','');
+    }
+    if(dijit.byId('ListBudgetParentFilter')){
+      dijit.byId('ListBudgetParentFilter').set('value','');
+    }
+    if(dijit.byId('ListShowIdle')){
+      dijit.byId('ListShowIdle').set('value','');
+    }
+    if(dijit.byId('hideInService')){
+      dijit.byId('hideInService').set('value','');
+    }
+    if(dijit.byId('listIdFilter') || dijit.byId('listNameFilter') || dijit.byId('listNameFilter') && dijit.byId('listIdFilter') ) {
+      dijit.byId('listIdFilter').set('value','');
+      dijit.byId('listNameFilter').set('value','');
+      filter={};
+      grid.query=filter;
+      grid._refresh();
+    }
+    refreshGridCount();
+    selectGridRow();
+  }
+ 
+}
+
 function filterJsonList(myObjectClass) {
   var filterId = dojo.byId('listIdFilter');
   var filterName = dojo.byId('listNameFilter');
