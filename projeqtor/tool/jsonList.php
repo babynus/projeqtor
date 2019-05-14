@@ -405,7 +405,7 @@ if ($type == 'empty') {
     }
 // MTY - LEAVE SYSTEM
   }
-  if ($critField == 'scope' and $dataType = 'idEvent') {
+  if ($critField == 'scope' and $dataType = 'idEventForMail') {
     if (SqlElement::class_exists ( $critValue )) {
       // $objVal=new $critVal();
       if (! property_exists ( $critValue, 'idResource' )) {
