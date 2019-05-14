@@ -37,7 +37,7 @@ class StatusMail extends SqlElement {
   public $idType;
   public $idProject;
   public $idStatus;
-  public $idEvent;
+  public $idEventForMail;
   public $idEmailTemplate; //add Gmartin Ticket #157
   public $idle;
   public $_sec_SendMail;
@@ -66,7 +66,7 @@ class StatusMail extends SqlElement {
     <th field="nameType" formatter="nameFormatter" width="9%" >${type}</th>
     <th field="nameProject" width="7%">${idProject}</th>
     <th field="colorNameStatus" width="6%" formatter="colorNameFormatter">${newStatus}</th>
-    <th field="nameEvent" formatter="translateFormatter" width="10%" >${orOtherEvent}</th>
+    <th field="nameEventForMail" formatter="translateFormatter" width="10%" >${orOtherEvent}</th>
     <th field="mailToContact" width="5%" formatter="booleanFormatter" >${mailToContact}</th>    
     <th field="mailToUser" width="5%" formatter="booleanFormatter" >${mailToUser}</th>
     <th field="mailToResource" width="5%" formatter="booleanFormatter" >${mailToResource}</th>
@@ -93,7 +93,7 @@ class StatusMail extends SqlElement {
   
   private static $_colCaptionTransposition = array('idStatus'=>'newStatus',
   'otherMail'=>'email',
-  'idEvent'=>'orOtherEvent',
+  'idEventForMail'=>'orOtherEvent',
   "mailToAccountable"=>"idAccountable",
   'idType'=>'type');
   
@@ -154,8 +154,8 @@ class StatusMail extends SqlElement {
     if (trim($this->idStatus)) {
     	$crit.=" and idStatus='" . Sql::fmtId($this->idStatus) . "'";
     }
-    if (trim($this->idEvent)) {
-      $crit.=" and idEvent='" . Sql::fmtId($this->idEvent) . "'";
+    if (trim($this->idEventForMail)) {
+      $crit.=" and idEventForMail='" . Sql::fmtId($this->idEventForMail) . "'";
     }
     if (trim($this->idType)) {
       $crit.=" and idType='" . Sql::fmtId($this->idType) . "'";
@@ -172,7 +172,7 @@ class StatusMail extends SqlElement {
     if (count($list)>0) {
       $result.="<br/>" . i18n('errorDuplicateStatusMail',null);
     }
-    if (!trim($this->idStatus) and !trim($this->idEvent)) {
+    if (!trim($this->idStatus) and !trim($this->idEventForMail)) {
     	$result.="<br/>" . i18n('messageMandatory',array(i18n('colNewStatus')." ".i18n('colOrOtherEvent')));
     }
     $defaultControl=parent::control();
@@ -259,11 +259,11 @@ class StatusMail extends SqlElement {
     } else if ($colName=="idStatus") {   
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  if (this.value!=" ") { ';
-      $colScript .= '    dijit.byId("idEvent").set("value"," ");';
+      $colScript .= '    dijit.byId("idEventForMail").set("value"," ");';
       $colScript .= '  } '; 
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
-    } else if ($colName=="idEvent") {   
+    } else if ($colName=="idEventForMail") {   
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  if (this.value!=" ") { ';
       $colScript .= '    dijit.byId("idStatus").set("value"," ");';
@@ -293,8 +293,8 @@ class StatusMail extends SqlElement {
       }
       $colScript .= '  dijit.byId("idType").set("value",null);';
       $colScript .= '  refreshList("idType","scope", mailable);';
-      $colScript .= '  dijit.byId("idEvent").reset();';
-      $colScript .= '  refreshList("idEvent","scope", mailable, null);';
+      $colScript .= '  dijit.byId("idEventForMail").reset();';
+      $colScript .= '  refreshList("idEventForMail","scope", mailable, null);';
       //gmartin begin Ticket #157 - Fixed PBE
       $colScript .= '  dijit.byId("idEmailTemplate").set("value", null);';
       $colScript .= '  if (this.value) {';

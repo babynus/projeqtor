@@ -37,7 +37,7 @@ class StatusMailPerProject extends StatusMail {
   public $idType;
   public $idProject;
   public $idStatus;
-  public $idEvent;
+  public $idEventForMail;
   public $idle;
   public $_sec_SendMail;
   public $mailToContact;
@@ -65,7 +65,7 @@ class StatusMailPerProject extends StatusMail {
     <th field="nameType" formatter="nameFormatter" width="9%" >${type}</th>
     <th field="nameProject" width="7%">${idProject}</th>
     <th field="colorNameStatus" width="6%" formatter="colorNameFormatter">${newStatus}</th>
-    <th field="nameEvent" formatter="translateFormatter" width="10%" >${orOtherEvent}</th>
+    <th field="nameEventForMail" formatter="translateFormatter" width="10%" >${orOtherEvent}</th>
     <th field="mailToContact" width="6%" formatter="booleanFormatter" >${mailToContact}</th>    
     <th field="mailToUser" width="6%" formatter="booleanFormatter" >${mailToUser}</th>
     <th field="mailToResource" width="6%" formatter="booleanFormatter" >${mailToResource}</th>
@@ -92,7 +92,7 @@ class StatusMailPerProject extends StatusMail {
   
   private static $_colCaptionTransposition = array('idStatus'=>'newStatus',
   'otherMail'=>'email',
-  'idEvent'=>'orOtherEvent',
+  'idEventForMail'=>'orOtherEvent',
   "mailToAccountable"=>"idAccountable",
   'idType'=>'type');
   

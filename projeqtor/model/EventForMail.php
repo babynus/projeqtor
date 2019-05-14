@@ -28,7 +28,7 @@
  * List of orginable items
  */ 
 require_once('_securityCheck.php');
-class Event extends SqlElement {
+class EventForMail extends SqlElement {
 
   // extends SqlElement, so has $id
   public $id;    // redefine $id to specify its visible place 
