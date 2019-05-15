@@ -507,10 +507,10 @@ class ResourceMain extends SqlElement {
   }
   public function getActualResourceCost($idRole=null) {
     if (! $this->id) return null;
-    if (! $idRole) $idRole=$this->idRole;
-    $where="idResource='" . Sql::fmtId($this->id) . "'";
+    if (! $idRole or $idRole<=0) $idRole=$this->idRole;
+    $where="idResource=" . Sql::fmtId($this->id) ;
     if ($idRole) {
-      $where.= " and idRole='" . Sql::fmtId($idRole) . "'";
+      $where.= " and idRole=" . Sql::fmtId($idRole);
     }
     $where.= " and (startDate is null or startDate<='".date('Y-m-d')."')";
     $rc=new ResourceCost();
