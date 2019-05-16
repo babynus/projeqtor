@@ -559,7 +559,21 @@ if (property_exists($objectClass,'idStatus')) {
 			        </button>
 			      </td>
 			      <?php } ?>
-<?php if (! $comboDetail or 1) {?>            
+<?php if (! $comboDetail or 1) {?> 
+          </td>
+                </td>
+              <!-- Ticket #3988	- Object list : boutton reset parameters  
+                   florent
+              -->
+              <td width="51px">
+                <button dojoType="dijit.form.Button" type="button" >
+                    <?php echo i18n('resetColor');?>
+                  <script type="dojo/method" event="onClick">
+                     resetFilter();
+                  </script>
+                  
+                </button>
+              </td>           
             <td width="36px">
               <button title="<?php echo i18n('quickSearch')?>"  
                dojoType="dijit.form.Button" 
@@ -833,20 +847,7 @@ if (property_exists($objectClass,'idStatus')) {
         </table>    
       </form>
     </td>
-                  </td>
-                </td>
-              <!-- Ticket #3988	- Object list : boutton reset parameters  
-                   florent
-              -->
-              <td>
-                <button dojoType="dijit.form.Button" type="button" style="margin-left:20%;">
-                    <?php echo i18n('resetColor');?>
-                  <script type="dojo/method" event="onClick">
-                     resetFilter();
-                  </script>
-                  
-                </button>
-              </td>
+        
   </tr>
 </table>
 <div id="listBarShow" class="dijitAccordionTitle" onMouseover="showList('mouse')" onClick="showList('click');">
