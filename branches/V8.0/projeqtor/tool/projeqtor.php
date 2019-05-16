@@ -4220,7 +4220,7 @@ function calculateFractionFromTime($time, $subtractMidDay=true) {
   $paramEndAm=Parameter::getGlobalParameter('endAM');
   $paramStartPm=Parameter::getGlobalParameter('startPM');
   $paramEndPm=Parameter::getGlobalParameter('endPM');
-  $minutesPerDay=60*$paramHoursPerDay;
+  $minutesPerDay=60*floatval($paramHoursPerDay);
   if (!$minutesPerDay) return 0;
   $minutesTime=round(strtotime("1970-01-01 $time UTC")/60, 0);
   $minutesStartAM=round(strtotime("1970-01-01 $paramStartAm UTC")/60, 0);
