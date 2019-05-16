@@ -825,6 +825,10 @@ scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursi
     }
     
     // Organization
+    if ( (!$this->id or $this->idProject!=$old->idProject) and ! trim($this->idOrganization) and $this->idProject ) {
+      $topProj=new Project($this->idProject,true);
+      $this->idOrganization=$topProj->idOrganization;
+    }
     $subProj=$this->getSubProjects(false,false);
     $this->organizationElementary=(count($subProj)==0)?0:1;
     $this->ProjectPlanningElement->idOrganization=$this->idOrganization;
