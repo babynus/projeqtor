@@ -63,6 +63,7 @@ if ($noteId=='') {
   $noteId=null;
 }
 $idParentNote=RequestHandler::getId('noteIdParent');
+$reply=RequestHandler::getValue('noteReply');
 Sql::beginTransaction();
 // get the modifications (from request)
 $note=new Note($noteId);
@@ -77,7 +78,7 @@ if (! $note->id) {
 
 $note->refId=$refId;
 $note->refType=$refType;
-if($idParentNote){
+if($reply){
   $note->idNote=$idParentNote;
   $note->replyLevel = $noteParent->replyLevel + 1;
 }
