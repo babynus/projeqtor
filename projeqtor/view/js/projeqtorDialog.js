@@ -4109,24 +4109,32 @@ function selectFilterContinue() {
     url : "../tool/backupFilter.php?valid=true" + compUrl,
     form : 'dialogFilterForm',
     handleAs : "text",
-    load : function(data, args) {
-    }
+    load : function(data, args) {}
   });
-  if (dojo.byId("nbFilterCriteria").value > 0 && !dijit.byId('filterDynamicParameter').get("checked") && dojo.byId('nbDynamicFilterCriteria').value==0) {
-    doc.dijit.byId("listFilterFilter").set("iconClass", "iconActiveFilter");
-  } else {
-    doc.dijit.byId("listFilterFilter").set("iconClass", "iconFilter");
-  }
-  if (dojo.byId('objectClassList') && dojo.byId('objectClassList').value) objectClass=dojo.byId('objectClassList').value;
-  else if (! top.dijit.byId('dialogDetail').open && dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value) objectClass=dojo.byId("objectClassManual").value;
-  else if (dojo.byId('objectClass') && dojo.byId('objectClass').value) objectClass=dojo.byId('objectClass').value;
+  if (dojo.byId('objectClassList') && dojo.byId('objectClassList').value){
+    objectClass=dojo.byId('objectClassList').value;
+  }else if (! top.dijit.byId('dialogDetail').open && dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value){ 
+    objectClass=dojo.byId("objectClassManual").value;
+  }else if (dojo.byId('objectClass') && dojo.byId('objectClass').value){
+    objectClass=dojo.byId('objectClass').value;
+  } 
   doc.loadContent(
-      "../tool/displayFilterList.php?context=directFilterList&filterObjectClass="
-          + objectClass + compUrl, "directFilterList", null,
-      false, 'returnFromFilter', false);
+     "../tool/displayFilterList.php?context=directFilterList&filterObjectClass="
+         + objectClass + compUrl, "directFilterList", null,
+    false, 'returnFromFilter', false);
+  /*
+   * florent 
+   *  Ticket #4010  
+   * When adding filter (not stored), icon has not the "on" flag
+   */
+   if(dojo.byId("nbFilterCriteria").value > 0 && !dijit.byId('filterDynamicParameter').get("checked") && dojo.byId('nbDynamicFilterCriteria').value==0) {
+     setTimeout("dijit.byId('listFilterFilter').set('iconClass', 'iconActiveFilter')",100);
+   } else {
+     setTimeout("dijit.byId('listFilterFilter').set('iconClass', 'iconFilter')",100);
+   }
   if(! top.dijit.byId('dialogDetail').open && dojo.byId('objectClassManual') && (dojo.byId('objectClassManual').value=='Plugin_kanban' || dojo.byId('objectClassManual').value=='Plugin_liveMeeting')){
     loadContent("../plugin/kanban/kanbanView.php?idKanban="+dojo.byId('idKanban').value, "divKanbanContainer");
-  } else if (!dijit.byId('filterDynamicParameter').get("checked")) {
+  }else if (!dijit.byId('filterDynamicParameter').get("checked")) {
     if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Planning' && ! top.dijit.byId('dialogDetail').open) {
       refreshJsonPlanning();
     } else if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Report') {
