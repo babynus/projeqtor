@@ -1,5 +1,6 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
+require_once '../external/simpleSAML/lib/_autoload.php';
 /**
  * * COPYRIGHT NOTICE *********************************************************
  *
@@ -196,6 +197,39 @@ if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMo
     }
   } else {
     $user=null;
+    //damian #3980
+    debugLog('SAMlsession : '.getSessionTableValue('globalParametersArray', 'paramSAML_allow_login'));
+    $SAMLenabled = Parameter::getGlobalParameter('paramSAML_allow_login'); // If SAML is enabled, look for username.
+    debugLog('SAMLenabled : '.$SAMLenabled);
+    if (strtolower($SAMLenabled)=='true') {
+      $auth = new SimpleSAML\Auth\Simple('projeqtor-sp');
+      $auth->requireAuth();
+      $authName = $auth->getAttributes();
+      $login = $authName['username'][0];
+      $user=new User();
+      $critWhere="lower(name)='".strtolower($login)."'";
+      $users=$user->getSqlElementsFromCriteria(null,true,$critWhere);
+      debugLog('isAuthenticated : '.$auth->isAuthenticated());
+      if ( count($users)==1 ) {
+        $user=$users[0];
+        User::resetAllVisibleProjects();
+        //damian #3724
+        if(Parameter::getGlobalParameter('applicationStatus')=='Closed'){
+        	$prf=new Profile($user->idProfile);
+        	if ($prf->profileCode!='ADM') {
+        		$user=null;
+        	}else{
+        		$user->finalizeSuccessfullConnection(true);
+        		setSessionUser($user);
+        	}
+        }else{
+        	$user->finalizeSuccessfullConnection(true);
+        	setSessionUser($user);
+        }
+      } else {
+        $user=null;
+      }
+    }
   }
   $pos=strrpos($page, "/");
   if ($pos) {

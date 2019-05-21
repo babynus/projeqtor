@@ -415,7 +415,7 @@ class Parameter extends SqlElement {
         $list=array('days'=>i18n('days'),
                     'hours'=>i18n('hours'));
         break;
-      case 'paramLdap_allow_login':case 'paramFadeLoadingMode';
+      case 'paramLdap_allow_login':case 'paramSAML_allow_login':case 'paramFadeLoadingMode';
         $list=array('false'=>i18n('displayNo'),
                     'true'=>i18n('displayYes'));
         break;
@@ -931,6 +931,8 @@ class Parameter extends SqlElement {
       	                      'paramMailBodyReport'=>'longtext',
       	                'tabAuthent'=>"tab",
       	                  'newColumnAuthentLeft'=>'newColumn',
+    	                     'sectionSAML'=>'section',
+      	                     'paramSAML_allow_login'=>'list',
         	                  'sectionLdap'=>'section',
           	                  'paramLdap_allow_login'=>'list',
           	                  'paramLdap_base_dn'=>'text',
