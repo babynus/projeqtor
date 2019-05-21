@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="ProjeQtOr V8.0" default="buildFull">
+<project name="ProjeQtOr V8.1" default="buildFull">
 
   <property name="drive"       value="D:" />
   <property name="version"       value="V8.0.2" />
