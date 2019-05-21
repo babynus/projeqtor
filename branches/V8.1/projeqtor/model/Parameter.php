@@ -415,7 +415,7 @@ class Parameter extends SqlElement {
         $list=array('days'=>i18n('days'),
                     'hours'=>i18n('hours'));
         break;
-      case 'paramLdap_allow_login':case 'paramSAML_allow_login':case 'paramFadeLoadingMode';
+      case 'paramLdap_allow_login':case 'SAML_allow_login':case 'paramFadeLoadingMode';
         $list=array('false'=>i18n('displayNo'),
                     'true'=>i18n('displayYes'));
         break;
@@ -932,7 +932,14 @@ class Parameter extends SqlElement {
       	                'tabAuthent'=>"tab",
       	                  'newColumnAuthentLeft'=>'newColumn',
     	                     'sectionSAML'=>'section',
-      	                     'paramSAML_allow_login'=>'list',
+      	                     'SAML_allow_login'=>'list',
+      	                     'SAML_idp'=>'text',
+      	                     'SAML_baseurlpath'=>'text',
+      	                     'SAML_baseURL'=>'text',
+      	                     'SAML_timezone'=>'text',
+      	                     'SAML_technicalContact_name'=>'text',
+      	                     'SAML_technicalContact_email'=>'text',
+      	                     'SAML_adminpassword'=>'text',
         	                  'sectionLdap'=>'section',
           	                  'paramLdap_allow_login'=>'list',
           	                  'paramLdap_base_dn'=>'text',
