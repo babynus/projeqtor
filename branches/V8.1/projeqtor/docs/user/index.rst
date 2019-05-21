@@ -46,7 +46,7 @@ This section summarizes significant changes made in the user guide document for 
 
 To see complete list of changes made to software, visit the ProjeQtOr web site.
 
-Current version is V7.2
+Current version is V8.0
 
 **Main evolutions**
 .. rubric:: Expenses

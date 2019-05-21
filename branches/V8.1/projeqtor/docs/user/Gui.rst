@@ -6,8 +6,11 @@
 
     \newpage
 
+Graphical User Interface
+************************
+
 Global view
-===========
+-----------
 
 ProjeQtOr interface is divided into several areas.
 
@@ -24,10 +27,6 @@ Those areas are :
 .. figure:: /images/GUI/globalview0.png
    :alt: Global view
    :align: center
-
-   Global view
-
-
 
 .. raw:: latex
 
@@ -91,7 +90,7 @@ Top bar
 
 * Click on |buttonIconParameter| to display the project selector parameters dialog box, you can select :
 
-  * View closed projects.
+  * View closed projects (Enter the Archive Mode).
   * Change the project list display mode.
   * Refresh the list.
 
@@ -276,7 +275,7 @@ Logo area
 .. _message-link-window:
 
 «External shortcuts»,«Console messages» windows and «Shortcuts»
----------------------------------------------------
+---------------------------------------------------------------
 
 .. figure:: /images/GUI/ZONE_ShortcutMessage.png
    :alt: External shortcuts and Console messages windows
@@ -372,7 +371,8 @@ List window
 * Click on |buttonIconPrint| to get a printable version of the list.
 * Click on |buttonIconPdf| to export it to PDF format.
 * Click on |buttonIconCsv| to export data of the selected items in a CSV format file. (See: :ref:`export-csv-format`)
-* Click on |buttonIconNew| to create a new item of the element.
+* Click on |buttonIconNew| to create a new item of the element.*
+* Click on |buttonIconRefresh| to refresh the list
 
 .. rubric:: 4 - Extra buttons
 
@@ -690,7 +690,7 @@ Detail window
 .. rubric:: 3 - Buttons
 
 * Click on |buttonIconNew| to create a new item.        
-* Click on |buttonIconSave| or use shortcut key :kbd:`Control-s` to save the changes. 
+* Click on |buttonIconSave| or use shortcut key :kbd:`Control-s` to save the changes on the current item. 
 * Click on |buttonIconPrint| to get a printable version of the details.
 * Click on |buttonIconPdf|  to get a printable version of the details in PDF format.
 * Click on |buttonIconCopy| to copy the current item. (See: :ref:`copy-item`)        
@@ -700,6 +700,7 @@ Detail window
 * Click on |buttonIconEmail| to send details of item by email. (See: :ref:`email-detail`)
 * Click on |ButtonIconSubscribe| to susbcribe of item. (See: :ref:`subscribe-detail`)
 * Click on |buttonIconMultipleUpdate| to update several items in one operation. (See: :ref:`multiple-update`)
+* Click on |buttonIconRefresh| to refresh the list.
 
  .. note::
 
@@ -772,7 +773,7 @@ Detail window
 Copy item
 ^^^^^^^^^
 
-* Allows copied an item of the element.
+* allows you to copy an entire element or to select only some information such as project structure, meetings, links or attached files.
 * The options displayed in dialog box depends on whether the element is simple or complex.
 
 .. figure:: /images/GUI/copyitem.png 

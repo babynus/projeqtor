@@ -1,28 +1,25 @@
 .. include:: ImageReplacement.txt
 
-
 .. raw:: latex
 
     \newpage
-
 
 .. title:: Common sections
 
 .. _common-sections:
 
 Common sections
-===============
+***************
 
-Some sections are displayed on almost all screens.
-
+Some sections are displayed on almost all screens in the detail area.
 Those sections allows to set information or add information to an item of the element.
+
+.. figure:: /images/GUI/common_section.png
 
 .. contents::
    :depth: 1
    :local: 
    :backlinks: top
-
-
 
 Description section
 -------------------
