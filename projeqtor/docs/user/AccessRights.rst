@@ -6,7 +6,22 @@
 
 .. index:: ! Access rights (Profile)
 
+Acces Rights
+************
+
 .. _profile:
+
+Module Management
+-----------------
+
+module management allows to choose the module or modules that will appear in the interface.
+
+.. figure:: /images/modulemanagement.png
+
+.. compound:: **first column:** The module's name
+.. compound:: **second column:** The list of screens that will be displayed if the module is installed.
+.. compound:: **third column:** The module's description
+
 
 Profiles
 --------
@@ -19,20 +34,15 @@ The profile is an entitlement group, each with specific access rights to the dat
 
 So, each user is linked to a profile which defines the data he can see and possibly manage. 
 
-
 .. rubric:: Display format
 
 * In the next screens, the name of profiles is displayed in columns.
 * Access rights and options are displayed in rows.
 * This display format allows to manage easily authorizations for each profile.  
 
-
 .. figure:: /images/GUI/PROFILISTE.png 
    :alt: Access to forms screen
-   :align: center 
- 
-
------------------------
+   :align: center
 
 .. rubric:: Value of Field "Name"
 
@@ -45,19 +55,11 @@ So, each user is linked to a profile which defines the data he can see and possi
    * The value of field "Name" must be a significant name and must not contain spaces or special characters.
    * Ideally, the value of the field should start with "profile" (to be easily identified in the translation table).
 
-
------------------------
-
-.. raw:: latex
-
-    \newpage
-
 .. sidebar:: Other sections
 
    * :ref:`Types restrictions<type-restriction-section>`
 
-
-.. rubric:: Section: Description
+.. rubric:: Description
 
 .. tabularcolumns:: |l|l|
 
@@ -70,7 +72,7 @@ So, each user is linked to a profile which defines the data he can see and possi
    * - :term:`Id`
      - Unique Id for the profile.
    * - Name
-     - Name of the profile.
+     - Name of the profile\*.
    * - Profile code
      - A code that may be internally used when generating emails and alerts.
    * - Sort order
@@ -80,16 +82,12 @@ So, each user is linked to a profile which defines the data he can see and possi
    * - Description
      - Complete description of the profile.
 
+**\* Required field**
+
 .. topic:: Field: Profile code
 
-   * ADM:  will designate administrator.
+   * ADM: will designate administrator.
    * PL: will designate project leader. 
-
-
-.. raw:: latex
-
-    \newpage
-
 
 .. index:: ! Access rights (Access mode)
 
@@ -108,9 +106,7 @@ Each access is defined as scope of visible and/or updatable, that can be, by kin
 * **Elements of own project:** Only the elements of the projects the user/resource is allocated to.
 * **All elements on all projects:** All elements, whatever the project.
 
------------------------
-
-.. figure:: /images/GUI/screenshot198.png 
+.. figure:: /images/GUI/SCR_AccessMode_List.png 
    :alt: Access to forms screen
    :align: center 
 
@@ -125,10 +121,7 @@ Each access is defined as scope of visible and/or updatable, that can be, by kin
    * The value of field "Name" must be a significant name and must not contain spaces or special characters.
    * Ideally, the value of the field should start with "accessProfile" (to be easily identified in the translation table).
 
------------------------
-
-
-.. rubric:: Section: Description
+.. rubric:: Description
 
 .. tabularcolumns:: |l|l|
 
@@ -141,7 +134,7 @@ Each access is defined as scope of visible and/or updatable, that can be, by kin
    * - :term:`Id`
      - Unique Id for the access mode.
    * - **Name**
-     - Name of the access mode.
+     - Name of the access mode\*.
    * - **Read rights**
      - Scope of visible items
    * - **Create rights**
@@ -164,7 +157,6 @@ Each access is defined as scope of visible and/or updatable, that can be, by kin
 
     \newpage
 
-
 .. index:: ! Access rights (Access to forms)
 
 .. _access-to-forms:
@@ -173,19 +165,13 @@ Access to forms
 ---------------
 
 This table is used to define the access to the selected screen for each profile.
-
 Users belonging to one profile can see the corresponding screen if authorized or not. 
 
-.. rubric:: How to do
-
-* Screens are grouped as seen therefore in the menu.
 * Click on checkbox to permit or revoke access to the screen for a profile.
 
 .. figure:: /images/GUI/ACCESTOFORM1.png
    :alt: Access to forms scREEN
    :align: center
-
-   Access to forms screen
 
 .. index:: ! Access rights (Access to reports)
 
@@ -195,19 +181,14 @@ Access to reports
 -----------------
 
 This screen allows to define report access for each profile.
-
 Users belonging to a profile can see the corresponding report in the report list.
+Reports are grouped by report categories
 
-.. rubric:: How to do
-
-* Reports are grouped by report categories.
 * Click on checkbox to permit or revoke access to the report  for a profile.
 
 .. figure:: /images/GUI/SCR_AccessToReports.png
    :alt: Access to reports screen
    :align: center
-
-   Access to reports screen
 
 .. index:: ! Access rights (Access to data - Project dependant)
 
@@ -217,20 +198,14 @@ Access to data (project dependant)
 ----------------------------------
 
 This screen allows to set element access mode for each profile.
-
 Allows to define scope of visibility  and/or updating of data in elements for users and resources.
-
 This screen is only for the elements reliant on a project.
-
-.. rubric:: How to do
 
 * For each element, selected the access mode granted to a profile.
 
 .. figure:: /images/GUI/SCR_AccessToDataProjectDependant.png
    :alt: Access to data (Project dependant) screen
    :align: center
-
-   Access to data (Project dependant) screen
 
 .. index:: ! Access rights (Access to data - Not project dependant)
 
@@ -240,12 +215,8 @@ Access to data (not project dependant)
 --------------------------------------
 
 This screen allows to set for each profile, elements access rights.
-
 Allows to grant access rights (read only or write) to users, to data on specific elements.
-
 This screen is only for the elements not reliant on a project.
-
-.. rubric:: How to do
 
 * For each element, select the access rights granted to a profile.
 
@@ -263,12 +234,8 @@ Specific access
 ---------------
 
 This screen groups specific functionalities options.
-
 Users belonging to a profile can have access to the application specific functions.
-
 Depending on options of functionality, allows to grant access rights, to define data visibility  or to enable or disable option.
-
-.. rubric:: How to do
 
 * For each option, select the access granted to a profile.
 
@@ -276,12 +243,10 @@ Depending on options of functionality, allows to grant access rights, to define 
    :alt: Specific access screen
    :align: center
 
-   Specific access screen
+Sections
+========
 
-
-------------------------
-
-.. rubric:: Section: Access to resource data
+.. rubric:: Access to resource data
 
 This section allows to:
 
@@ -294,65 +259,44 @@ This section allows to:
 
    * In most cases, it is devoted to project leader.
 
-.. rubric:: Section: Work and Cost visibility
+.. rubric:: Work and Cost visibility
 
 * This section defines for each profile the scope of visibility of work and cost data.
 
-.. rubric:: Section: Assignment management
+.. rubric:: Assignment management
 
 * This section defines the visibility and the possibility to edit assignments (on activities or else).
 
 .. index:: ! Checklist (Access rights)
 
-.. rubric:: Section: Display specific buttons
+.. rubric:: Display specific buttons
 
-* This section defines whether some button will be displayed or not.
+* This section defines whether some button, checklist, job list will be displayed or not (if defined).
 
- .. compound:: **Display of combo detail button**
+   .. compound:: **Display of combo detail button**
 
     * This option defines for each profile whether the button |buttonIconSearch| will be displayed or not, facing every combo list box.
     * Through this button, it is possible to select an item and create a new item.
     * This button may also be hidden depending on access rights (if the user has no read access to corresponding elements).
 
- .. compound:: **Access to checklist**
+   .. compound:: **Multiple update**
 
-    * Defines visibility or not to the checklist (if defined).
+    * Defines the possibility or not to change one or more criteria for one or more selected rows at a time
 
- .. compound:: **Access to jobs lists**
+.. rubric:: Planning access rights
 
-    * Defines visibility or not to the jobs lists (if defined).
+* This section defines access for each profile to planning functionality.
 
- .. compound:: **Multiple update**
-
-    * Defines the possibility or not  to change one or more criteria for one or more selected rows at a time
-
-
-.. rubric:: Section: Planning access rights
-
-* This section defines access to planning functionality.
-
- .. compound:: **Calculate planning**
-
-    * This option defines for each profile the ability to calculate planning or not.
-
- .. compound:: **Access to resource planning of others**
-
-    * This option defines for each profile the ability to see the resource planning of others.
-
- .. compound:: **Change validated data**
-
-* This option defines for each profile the ability to change the validated data or not on details area.
-
-.. rubric:: Section: Unlock items
+.. rubric:: Unlock items
 
 * This section defines for each profile the ability to unlock any document or requirement.
 * Otherwise, each user can only unlock the documents and requirements locked by himself.
 
-.. rubric:: Section: Reports
+.. rubric:: Reports
 
 * This section defines for each profile the ability to change the resource parameter in reports.
 
-.. rubric:: Section: Specific update rights
+.. rubric:: Specific update rights
 
 * Defines for each profile the ability to force delete items.
 * Defines for each profile the ability to force close items.
@@ -360,12 +304,12 @@ This section allows to:
 * Defines for each profile the ability to mention or not the components on a ticket.
 
 
-.. rubric:: Section: Limit visibilty to resources
+.. rubric:: Limit visibilty to resources
 
 * By profil, allows to restrict or not the number of resources displayed, by organizations or own team, on resource lists.
 * By profil, allows to restrict or not the number of resources displayed, by organizations or own team, on resource screen.
 
-.. rubric:: Section: Limit visibility to organizations
+.. rubric:: Limit visibility to organizations
 
 * By profil, allows to restrict or not the number of organizations displayed, by organizations or own organization, on organization lists.
 * By profil, allows to restrict or not the number of organizations displayed, by organizations or own organization, on organization screen.
@@ -390,7 +334,7 @@ The translated name depends on user language selected in :ref:`User parameters<d
 
 .. note::
 
-   * If translated name is displayed between [], then the value of field "Name" is not found in the translation table.
+   * If translated name is displayed between [ ], then the value of field "Name" is not found in the translation table.
 
 .. rubric:: Translation table files
 

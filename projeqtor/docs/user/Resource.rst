@@ -3,13 +3,7 @@
 .. raw:: latex
 
     \newpage
-
-
-.. contents::
-   :depth: 1
-   :backlinks: top
-
-
+  
 .. title:: Resource
 
 .. index:: ! Resource (Definition) 
@@ -29,14 +23,11 @@ Resources
    * :ref:`photo`
 
 
-Human and material resource are involved in the project.
-
-Project allocation defines its availability.
-
-.. rubric:: As group of person
+The resources of a project can be human or material.
+Resource availability is defined by assigning it to the project.
 
 * A resource can be a group of person.
-* Useful in initial project planning.
+* Informing the resource is useful for project planning.
 * You create the fictitious resource with capacity > 1.
 
 .. admonition:: Example

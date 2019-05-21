@@ -5,7 +5,7 @@
 .. title:: Plugins
 
 Développement de Plugins
-----------------------------
+------------------------
 .. rubric:: Déploiement et structure d'un plugin
 
 Les plug-ins doivent être compressés sous forme de fichier zip incluant le nom du plugin et sa version.
@@ -130,8 +130,6 @@ Pour être intégré, le fichier zip doit être placé dans le dossier / plugin 
 |                                        | **sortOrder** doit être numérique. 
 +----------------------------------------+-------------------------------------------------+                                                                                                                                                                                                                                                              
 |                                        | Tous les boutons de plugins seront placés après les boutons standards, dans l'ordre précisé. 
-
-
 
 
 **Exemple : **
