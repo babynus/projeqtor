@@ -1,9 +1,9 @@
 <?php
-
+$idp = Parameter::getGlobalParameter('SAML_idp');
 $config = [
 	'projeqtor-sp' => [
 		'saml:SP',
 		'entityID' => 'projeqtor-sp',
-		'idp' => 'http://localhost/simplesamlphp/www/saml2/idp/metadata.php'
+		'idp' => $idp,
 	],
 ];
