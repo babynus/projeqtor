@@ -44,12 +44,13 @@ if (! array_key_exists('assignmentRefType',$_REQUEST)) {
 $assignmentRefType = $_REQUEST['assignmentRefType'];
 Security::checkValidClass($assignmentRefType);
 
-
 $meet = new $assignmentRefType($assignmentRefId);
-$crit = array('idProject'=> $meet->idProject);
+//$crit = array('idProject'=> $meet->idProject,'idle'=>'0');
 $aff = new Affectation();
-$list=$aff->getSqlElementsFromCriteria($crit);
-
+//Flo #4020
+$critWhere="idle=0 AND idProject= $meet->idProject AND ( endDate > '$meet->meetingDate' OR endDate IS NULL ) ";
+$list=$aff->getSqlElementsFromCriteria(null,false,$critWhere);
+//end flo
 $canUpdate=securityGetAccessRightYesNo('menuMeeting', 'update', $meet) == "YES";
 if (!$canUpdate) {
   $list=array(); // Empty list for reader only (no update right)
@@ -64,17 +65,23 @@ $result .= '<input type="hidden" id="lastSaveId" value="" />';
 $result .= '<input type="hidden" id="lastOperation" value="insert" />';
 $result .= '<input type="hidden" id="lastOperationStatus" value="NO_CHANGE" />';
 Sql::beginTransaction();
-foreach ($list as $aff) {
-    $crt=array('idResource'=>$aff->idResource, 'refType'=>$assignmentRefType, 'refId'=>$assignmentRefId);
+foreach ($list as $affRes) {
+    //Flo #4020
+    $res= new Resource($affRes->idResource,true);
+    if($res->idle){
+        continue;
+    }
+    //end Flo
+    $crt=array('idResource'=>$affRes->idResource, 'refType'=>$assignmentRefType, 'refId'=>$assignmentRefId);
     $ass = new Assignment();
     $assCpt=$ass->countSqlElementsFromCriteria($crt);
     if ($assCpt>0) continue;
-    $ass->idResource= $aff->idResource;
+    $ass->idResource= $affRes->idResource;
     $ass->refId = $assignmentRefId;
     $ass->refType = $assignmentRefType;
-    $ass->idProject = $aff->idProject;
+    $ass->idProject = $affRes->idProject;
     $ass->assignedWork = $hourMeeting/$hoursPerDay;
-    //$ass->idRole=(isset($costArray[$aff->idRole]))?$aff->idRole:$defaultRole;
+    //$ass->idRole=(isset($costArray[$affRes->idRole]))?$affRes->idRole:$defaultRole;
     $ass->realWork = 0;
     $ass->leftWork = $ass->assignedWork;
     $ass->plannedWork =  $ass->leftWork  + $ass->realWork  ;
