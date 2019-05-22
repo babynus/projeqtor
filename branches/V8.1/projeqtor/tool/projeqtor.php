@@ -200,6 +200,7 @@ if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMo
     //damian #3980
     debugLog('SAMlsession : '.getSessionTableValue('globalParametersArray', 'SAML_allow_login'));
     $SAMLenabled = Parameter::getGlobalParameter('SAML_allow_login'); // If SAML is enabled, look for username.
+    Parameter::refreshParameters();
     debugLog('SAMLenabled : '.$SAMLenabled);
     if (strtolower($SAMLenabled)=='true') {
       $auth = new SimpleSAML\Auth\Simple('projeqtor-sp');

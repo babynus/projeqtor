@@ -4,6 +4,10 @@
  *
  */
 
+$baseurlpath = Parameter::getGlobalParameter('SAML_baseurlpath');
+$baseURL = Parameter::getGlobalParameter('SAML_baseURL');
+$timezone = Parameter::getGlobalParameter('paramDefaultTimezone');
+
 $config = [
 
     /*******************************
@@ -27,7 +31,7 @@ $config = [
      * external url, no matter where you come from (direct access or via the
      * reverse proxy).
      */
-    'baseurlpath' => 'simplesamlphp/www/',
+    'baseurlpath' => $baseurlpath,
     
     /*
      * The 'application' configuration array groups a set configuration options
@@ -48,7 +52,7 @@ $config = [
          * need to compute the right URLs yourself and pass them dynamically
          * to SimpleSAMLphp's API.
          */
-        'baseURL' => 'http://localhost/simplesamlphp/www/',
+        'baseURL' => $baseURL,
     ],
 
     /*
@@ -73,7 +77,7 @@ $config = [
      * also as the technical contact in generated metadata.
      */
     'technicalcontact_name' => 'admin',
-    'technicalcontact_email' => 'admin@example.org',
+    'technicalcontact_email' => 'damian.sanchez@projeqtor.net',
 
     /*
      * The envelope from address for outgoing emails.
@@ -89,7 +93,7 @@ $config = [
      *
      * See this page for a list of valid timezones: http://php.net/manual/en/timezones.php
      */
-    'timezone' => 'Europe/Paris',
+    'timezone' => $timezone,
 
 
 
