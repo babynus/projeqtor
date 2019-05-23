@@ -21,6 +21,10 @@ Resources
    * :ref:`resource-function-cost`
    * :ref:`resource-calendar`
    * :ref:`photo`
+   
+   **Other section**
+   
+   * :ref:`Allocations<allocation-section>`
 
 
 The resources of a project can be human or material.
@@ -30,15 +34,9 @@ Resource availability is defined by assigning it to the project.
 * Informing the resource is useful for project planning.
 * You create the fictitious resource with capacity > 1.
 
-.. admonition:: Example
+.. topic:: Example
 
    * If you want a group of three peoples then resource capacity must be set to 3.
-
-.. sidebar:: Other sections
-   
-   * :ref:`Allocations<allocation-section>`
-
-.. rubric:: Section: Description
 
 .. tabularcolumns:: |l|l|
 
@@ -63,7 +61,7 @@ Resource availability is defined by assigning it to the project.
    * - Profile
      - Profile of the user.
    * - Capacity (FTE)
-     - Capacity of the resource, in Full Time Equivalent.
+     - Capacity of the resource in Full Time Equivalent.
    * - **Calendar**
      - :ref:`Calendar<calendar>` defines the availability of the resource.
    * - :ref:`Team<team>`
@@ -85,18 +83,18 @@ Resource availability is defined by assigning it to the project.
 
 **\* Required field** 
 
-.. topic:: Field: Capacity (FTE)
+.. topic:: Field is Capacity (FTE)
 
    * 1 (full time).     
    * < 1 (for part time working resource).
    * > 1 (for virtual resource or teams, to use for instance to initialize a planning).
 
-.. topic:: Field: Is a contact
+.. topic:: Field is a contact
    
    * Check this if the resource must also be a contact.
    * The resource will then also appear in the “Contacts” list. 
 
-.. topic:: Field: Is a user
+.. topic:: Field is a user
 
    * Check this if the resource must connect to the application.
    * You must then define the **User name** and **Profile** fields.
@@ -110,20 +108,23 @@ Resource availability is defined by assigning it to the project.
 
 .. index:: ! Resource (Function & Cost definition)
 
-.. rubric:: Section: Function and cost
+.. compound:: Function and cost
 
 This section allows to define functions and cost of the resource.
 
- .. compound:: **Main function**
 
-    * Main function allows to define the default function.
+.. compound:: **Main function**
 
- .. compound:: **Resource cost definition**
+  * The main function allows you to enter the default functions that will be used in the assignments of the activities.
+  * a resource can have several functions and different costs depending on the function
 
-    * Allows to define the daily cost, according to the functions of the resource. 
-    * The daily cost is defined for a specific period.
+.. compound:: **Resource cost definition**
 
-.. list-table:: Function and cost section fields
+  * Allows to define the daily cost according to the functions of the resource. 
+  * The daily cost can be defined for a specific period.
+       
+    
+.. list-table:: **Function and cost section fields**
    :widths: 20, 80
    :header-rows: 1
 
@@ -138,7 +139,7 @@ This section allows to define functions and cost of the resource.
    * - End date
      - End date for the cost of the resource, for the selected function.
 
-.. topic:: Field: End date
+.. topic:: Field **End date**
 
    * The end date is set when a new resource cost is defined in the same function.
    * The end date is the day before the start date in the new resource cost entry. 
@@ -173,19 +174,17 @@ This section allows to define functions and cost of the resource.
    * - Start date
      - Start date for the cost of the resource, for the selected function.
 
-.. topic:: Field: Function
+.. topic:: Field Function
 
    * The default value will be the main function. 
 
-.. topic:: Field: Start date
+.. topic:: Field Start date
 
    * Start date must be set when a new resource cost is created for the same function.
 
 
-.. rubric:: Section: Miscellanous
-
 .. list-table:: Miscellanous section fields
-   :widths: 20, 80
+   :widths: 40, 80
    :header-rows: 1
 
    * - Field
@@ -203,33 +202,25 @@ This section allows to define functions and cost of the resource.
 Pool of Resources
 -----------------
 
-A pool is a group of resources that can work as any of the assigned resources.
-
 .. figure:: /images/GUI/pool.png
    :alt: Resource cost dialog box
-   :align: center
-
-   Resources in a pool 
+   :align: left
+   
+.. sidebar:: Other sections
+   
+   * :ref:`Allocations<allocation-section>`
+   
+A pool is a group of resources that can work as any of the assigned resources.
 
 You assign resources to the pool at a given rate for a given period.
 
 .. note:: 
    * a resource cannot be assigned on pools for more than 100% on a given period 
 
-.. sidebar:: Other sections
-   
-   * :ref:`Allocations<allocation-section>`
-
-A pool can be allocated to projects like any resource.
-
-
-A pool can be assigned to activities like resources. The difference is that when you assign a pool, you don't specify the rate but the FTE (Full Time Equivalent) assigned to the activity. It means the number of resources that can work at the same time on the activity.
-
-A pool does not have a specific capacity. It's capacity is calculated from capacity and rate of assigned resources.
-
-A pool can not be a user and does not have a profile as it may not connect to the application.
-
-.. rubric:: Section: Description
+* A pool can be allocated to projects like any resource.
+* A pool can be assigned to activities like resources. The difference is that when you assign a pool, you don't specify the rate but the FTE (Full Time Equivalent) assigned to the activity. It means the number of resources that can work at the same time on the activity.
+* A pool does not have a specific capacity. It's capacity is calculated from capacity and rate of assigned resources.
+* A pool can not be a user and does not have a profile as it may not connect to the application.
 
 .. tabularcolumns:: |l|l|
 
@@ -256,33 +247,33 @@ A pool can not be a user and does not have a profile as it may not connect to th
 
 **\* Required field**
 
-.. rubric:: Capacity
+.. compound:: **Capacity**
 
-   * A pool does not have a specific capacity. It's capacity is calculated from capacity and rate of assigned resources.
+  * A pool does not have a specific capacity. It's capacity is calculated from capacity and rate of assigned resources.
 
-.. rubric:: Limits
+.. warning:: **Limits**
 
   * A pool can not be a user and does not have a profile as it may not connect to the application.
   * A pool can not be a contact
   * A pool cannot be the responsible of an item
 
-.. rubric:: Real work input
+.. compound:: **Real work input**
 
   * When a pool is assigned to an activity, any resource of the pool can input real work on the activity
   * This possibility is restricted to the period of assignment of the resource to the pool
 
-.. rubric:: Automatic decrement for assigned work
+.. compound:: **Automatic decrement for assigned work**
 
   * When you assign a pool to an activity, and then assign a resource of the pool to the same activity, then assigned work on the resource is automatically subtracted from assignment of the pool
   * The same way, when you assign a pool to an activity, and then assign a resource of the pool to a sub-activity of this activity, then assigned work on the resource is automatically subtracted from assignment of the pool
   * When you assign a pool to an activity, and then assign the same pool to a sub-activity of this activity, then assigned work on the pool on the sub-activity is automatically subtracted from assignment of the pool on the parent activity
 
+.. compound:: **Planning**
 
-.. rubric:: Planning
   * When planning a pool, availability of unitary resources already booked on other tasks is taken into account
   * When planning an unitary resource, availability already booked through the pool on other tasks is also taken into account (globally for all the resources of the pool)
 
-.. rubric:: Possible use cases for pool
+.. compound:: **Possible use cases for pool**
 
   * When you have a group of resources that may work on same tasks, but you don't know in advance who will work. For instance a maintenance team that may work on maintenance tasks and other project tasks
   * For macro planning
@@ -304,25 +295,22 @@ A pool can not be a user and does not have a profile as it may not connect to th
 Teams
 -----
 
-The team is a group of resources gathered on any criteria.
+.. figure:: /images/teams.png
+   :alt: Team
+   :align: left
+   
+| The team is a group of resources gathered on any criteria.
+| A resource can belong to only one team.
 
-.. note::
+.. topic:: **Use for**
 
-   * A resource can belong to only one team.
-
-
-.. rubric:: Use for
-
-* To allocate all team members to a project.
-* To filter resource data in work, cost and planning reports.
-* To set attachment, note and document visibility to the team.
-
-
-.. rubric:: Section: Description
+   * To allocate all team members to a project.
+   * To filter resource data in work, cost and planning reports.
+   * To set attachment, note and document visibility to the team.
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Description section fields
+.. list-table:: **Description section fields**
    :widths: 20, 80
    :header-rows: 1
 
@@ -336,10 +324,12 @@ The team is a group of resources gathered on any criteria.
      - Flag to indicate that team is archived.
    * - Description
      - Complete description of the team.
- 
-.. rubric:: Section: Team members
 
-* List of the resources members of the team.
+.. _team-member:
+
+.. compound:: **Team members**
+
+List of the resources members of the team.
 
 .. topic:: Button: Allocate all team members of a project
 
@@ -364,16 +354,17 @@ Calendar
 
 This tool allows to define calendars.
 
-.. rubric:: How it works
-
-* It allows to define exceptions to the default definition.
-* In default definition, week days are days work and weekend days are days off.
+.. figure:: /images/calendar_presentation.png
+   :alt: calendar
+   :align: left
+   
+| * It allows to define exceptions to the default definition.
+| * In default definition, week days are days work 
+|   and weekend days are days off.
 
 .. note::
 
    * Exceptions can be defined for the current year and the next years.
-
-
 
 .. rubric:: Default calendar
 
@@ -401,9 +392,6 @@ This tool allows to define calendars.
 
     \newpage
 
-
-.. rubric:: Section: Description
-
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Description section fields
@@ -416,33 +404,43 @@ This tool allows to define calendars.
      - Unique Id for the calendar.
    * - Name
      - Name of the calendar.
- 
-.. rubric:: Section: Year
+   * - :term:`Closed`
+     - Flag to indicate that team is archived.
+       the calendar will no longer appear in the lists.
+   * - Description
+     - Complete description of the team.
 
-.. topic:: Field : Year field
+.. compound:: **Week days off**
 
-   * Select year of displayed calendar.
+  * Check the boxes corresponding to the non-working days
+  * By default, Saturday and Sunday are non-working days
 
-.. topic:: Button : Import this year from calendar 
+.. compound:: **Year**
 
-   * Copy exceptions of the selected year of the selected calendar into current calendar.
+  * Select the calendar year to create.
+   
+.. compound:: **Year field**
 
-.. rubric:: Section: Calendar days
+  * Create the calendar from the specified year with all the features of the calendar called.
+   
+.. compound:: **Button Import this year from calendar**
+
+  * Copy exceptions of the selected year of the selected calendar into current calendar.
+
+.. compound:: **Calendar days**
 
 .. figure:: /images/GUI/SEC_YearCalendar.png
    :alt: Year calendar
    :align: center
 
-   Year calendar
-
 
 A calendar of selected year is displayed to give a global overview of the exceptions existing.
 
-* In white, days work.
-* In gray, days off.
-* In red, exception days work. 
-* In blue, exception days off. 
-* In bold, current day. 
+* In white: days work.
+* In gray: days off.
+* In red: exception days work. 
+* In blue: exception days off. 
+* In bold: current day. 
 
 Just click on one day in the calendar to switch between off and work day.
 
