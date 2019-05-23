@@ -1713,7 +1713,7 @@ function leaveCalendarDisplay(){
                     end = calendar.floorToDay(e.date);
                     
                     //can't create a leave if it's a dayOff
-                    for (let dayOff of daysOffCalendarData){
+                    for (var dayOff in daysOffCalendarData){
                         if(dayOff.startTime.getTime()===start.getTime()){
                             return;
                         }
