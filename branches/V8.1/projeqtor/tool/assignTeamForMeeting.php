@@ -48,7 +48,7 @@ $meet = new $assignmentRefType($assignmentRefId);
 //$crit = array('idProject'=> $meet->idProject,'idle'=>'0');
 $aff = new Affectation();
 //Flo #4020
-$critWhere="idle=0 AND idProject= $meet->idProject AND ( endDate > '$meet->meetingDate' OR endDate IS NULL ) ";
+$critWhere="idle=0 AND idProject= $meet->idProject AND ( endDate >= '$meet->meetingDate' OR endDate IS NULL ) ";
 $list=$aff->getSqlElementsFromCriteria(null,false,$critWhere);
 //end flo
 $canUpdate=securityGetAccessRightYesNo('menuMeeting', 'update', $meet) == "YES";
