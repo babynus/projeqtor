@@ -1439,7 +1439,7 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
    * @param $user the user object containing login information
    * @return void
    */
-  public function finalizeSuccessfullConnection($rememberMe) {
+  public function finalizeSuccessfullConnection($rememberMe=false,$sso=false) {
     setSessionUser($this);
     setSessionValue('appRoot', getAppRoot());
     $crit=array();
@@ -1486,7 +1486,7 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
         setSessionValue($obj->parameterCode, $obj->parameterValue);
       }
     }
-    traceLog("NEW CONNECTED USER '" . $this->name . "'".(($rememberMe)?' (using remember me feature)':''));
+    traceLog("NEW CONNECTED USER '" . $this->name . "'".(($rememberMe)?' (using remember me feature)':(($sso)?' (using sso authentication)':'')));
     Audit::updateAudit();
   }
   public static function refreshUserInSession() {
