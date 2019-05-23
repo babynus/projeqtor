@@ -352,7 +352,7 @@ class Assignment extends SqlElement {
     
     //gautier #3646
     // If Resource is part of Resource Team (Pool) and Pool is assigned, add work from Pool
-    if($this->refType='Activity'){
+    if($this->refType=='Activity'){
       $resAffPool = new ResourceTeamAffectation();
       $lstResAffPool = $resAffPool->getSqlElementsFromCriteria(array('idResource'=>$this->idResource));
       if($lstResAffPool){
