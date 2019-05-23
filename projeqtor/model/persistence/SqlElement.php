@@ -6980,9 +6980,13 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
       } else if ($dataType=='datetime') {
         $result[$fld]=htmlFormatDateTime($value);
       } else if (substr($fld, -4, 4)=='Cost' or substr($fld, -6, 6)=='Amount' or $fld=='amount' or $fld=='price') {
-        $result[$fld]=htmlDisplayCurrency($value);
+        $tmpVal=htmlDisplayCurrency($value);
+        if (!$outputHtml) $tmpVal=str_replace('&nbsp;', ' ', $tmpVal);
+        $result[$fld]=$tmpVal;
       } else if ($dataType=="numeric" or $dataType=="decimal") {
-        $result[$fld]=htmlDisplayNumericWithoutTrailingZeros($value);
+        $tmpVal=htmlDisplayNumericWithoutTrailingZeros($value);
+        if (!$outputHtml) $tmpVal=str_replace('&nbsp;', ' ', $tmpVal);
+        $result[$fld]=$tmpVal;
       } else if ($outputHtml) {
         $result[$fld]=htmlEncode($value,'html');
       } 
