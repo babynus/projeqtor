@@ -7,29 +7,28 @@
     \newpage
 
 Gantt charts
-============
+************
 
 .. contents:: Gantt charts
    :depth: 1
    :local: 
    :backlinks: top
-
+   
 .. index:: ! Gantt chart (Planning)
 
 .. _gantt-planning:
 
 Planning global
---------
+---------------
 
-Project planning and activity planning calculation can be done in the Gantt.
+The global planning allows to visualize any type of object (project, activity, milestones, risk, meeting ...)
 
-.. rubric:: - Add and Show any item on Gantt chart.
-
-* Allows to create a new planning element.
+* Add and Show any new planning element on Gantt chart
 * The created item is added in the Gantt and detail window is opened.
 * The detail window allows to complete entry
+* Project planning and activity planning calculation can be done in the Gantt.
 
-.. figure:: /images/GUI/screenshot.463.png
+.. figure:: /images/GUI/PlanningElement.png
    :alt: Popup menu - Create a new item
    :align: center
 
@@ -39,22 +38,22 @@ Planning
 
 This screen allows to define project planning and follow progress.
 
-It is composed with two areas:
-
-* :ref:`task-list-area` |one| 
-* :ref:`gantt-chart-view` |two|
-
-.. note::
-
-   * This screen offers many features that will be described in the next sections.
-
 .. figure:: /images/GUI/PLANNING1.png 
    :alt: Gantt (Planning)
    :align: center
 
    Gantt (Planning)
+   
+.. note:: This screen offers many features that will be described in the next sections.
+   
+the Gantt Chart is composed of two main areas:
 
-.. rubric:: 3 - Activity planning calculation
+* :ref:`task-list-area` |one| 
+* :ref:`gantt-chart-view` |two|
+
+---------------------------------------------------
+
+.. rubric:: |three| Activity planning calculation
 
 * Click on  |calculatePlanning| to start the activity planning calculation.  (See: :ref:`project-planning`)
 
@@ -63,12 +62,12 @@ It is composed with two areas:
     \newpage
 
 .. note::
-    
-   * All modifications about assignement (rate, name or numbers of resources, dates...) done from an  **activity**  are not displayed on the planning screen (with the new recalculated mode) until having for this purpose activited the planning calculation, either in an automatic run plan or not.
+   * Any changes to an assignment (rate, resource name, number, dates, etc.) made from an activity are not displayed on the planning screen with the new recalculated mode. 
+   * Click |calculatePlanning|to start the new planning calculation
+   * The automatic schedule calculation only works when you are in the Gantt schedule view and you are editing an item from this screen.
 
 
-
-.. rubric:: 4 - Buttons
+.. rubric:: |four| Buttons
 
 * Click on |iconEnableCalendar| to validate planning.
 * Click on |storePlannedDates| to save baseline of planning. (See: :ref:`project-planning`)
@@ -79,9 +78,16 @@ It is composed with two areas:
 * Click on |createNewItem| to create a new item. (See: :ref:`project-planning`)
 
 * Click on |buttonIconFilter| to filter the list.
-* **Check the box** "save date" to keep registered displayed date of the overview planning, otherwise dates removing to general mode, after navigating away from this page.  
 
-.. rubric:: 5 - Show Baseline
+.. figure:: /images/GUI/AdvancedFilter_Gantt.png
+   :alt: schedule filter
+   :align: center
+
+   schedule filter
+
+.. warning:: Check the box **"save date"** to keep registered displayed date of the overview planning, otherwise dates removing to general mode, after navigating away from this page.  
+
+.. rubric:: |five| Show Baseline
 
 * Allows to display one baseline on top and one on bottom of the Gantt chart. 
 
@@ -91,7 +97,7 @@ It is composed with two areas:
    * Baseline can be saved with |storePlannedDates|.
 
 
-.. rubric:: 6 - Show Critical path
+.. rubric:: |six| Show Critical path
 
 Activating the box, calculated and displayed in red color into the Gantt planning.
 
@@ -102,7 +108,7 @@ Activating the box, calculated and displayed in red color into the Gantt plannin
 .. _task-list-area:
 
 Task list area
-^^^^^^^^^^^^^^
+--------------
 
 The task list area is composed with:
 
@@ -132,7 +138,7 @@ The splitter is used to show or hide the progress data view.
 .. _task-list:
 
 Task list
-"""""""""
+=========
 
 The task list displayed planning elements in hierarchical form.
 
@@ -179,17 +185,16 @@ Tasks are regrouped by project and activity.
 
     \newpage
 
-.. note::
+.. topic::
 
-   * Filter on the planning: possibility to filter the activities to be displayed on the Gantt Planning view
-     
-   * The "parents" of the selected activities are also displayed to maintain the WBS structure.. 
+   - Filter on the planning: possibility to filter the activities to be displayed on the Gantt Planning view
+   - The "parents" of the selected activities are also displayed to maintain the WBS structure.. 
 
 
 .. _progress-data-view:
 
 Progress data view
-""""""""""""""""""
+==================
 
 The progress data view allows to show progress on project elements.
 
