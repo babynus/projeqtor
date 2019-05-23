@@ -1,6 +1,5 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
-require_once '../external/simpleSAML/lib/_autoload.php';
 /**
  * * COPYRIGHT NOTICE *********************************************************
  *
@@ -197,51 +196,55 @@ if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMo
     }
   } else {
     $user=null;
-    //damian #3980
-    debugLog('SAMlsession : '.getSessionTableValue('globalParametersArray', 'SAML_allow_login'));
-    $SAMLenabled = Parameter::getGlobalParameter('SAML_allow_login'); // If SAML is enabled, look for username.
-    Parameter::refreshParameters();
-    debugLog('SAMLenabled : '.$SAMLenabled);
-    if (strtolower($SAMLenabled)=='true') {
-      $auth = new SimpleSAML\Auth\Simple('projeqtor-sp');
-      $auth->requireAuth();
-      $authName = $auth->getAttributes();
-      $login = $authName['username'][0];
-      $user=new User();
-      $critWhere="lower(name)='".strtolower($login)."'";
-      $users=$user->getSqlElementsFromCriteria(null,true,$critWhere);
-      debugLog('isAuthenticated : '.$auth->isAuthenticated());
-      if ( count($users)==1 ) {
-        $user=$users[0];
-        User::resetAllVisibleProjects();
-        //damian #3724
-        if(Parameter::getGlobalParameter('applicationStatus')=='Closed'){
-        	$prf=new Profile($user->idProfile);
-        	if ($prf->profileCode!='ADM') {
-        		$user=null;
-        	}else{
-        		$user->finalizeSuccessfullConnection(true);
-        		setSessionUser($user);
-        	}
-        }else{
-        	$user->finalizeSuccessfullConnection(true);
-        	setSessionUser($user);
-        }
-      } else {
-        $user=null;
-      }
-    }
   }
   $pos=strrpos($page, "/");
   if ($pos) {
     $page=substr($page, $pos+1);
   }
   scriptLog("Page=".$page);
+  
+  //damian #3980
+  Parameter::refreshParameters();
+  $SAMLenabled = Parameter::getGlobalParameter('SAML_allow_login'); // If SAML is enabled, look for username.
+  $paramLdap_allow_login=Parameter::getGlobalParameter('paramLdap_allow_login');
+  
+  if (!$user and $page!='loginCheck.php' and $page!='getHash.php' and $page!='saveDataToSession.php' and strtolower($SAMLenabled)=='true' and !sessionValueExists('avoidSAMLAuth') and strtolower($paramLdap_allow_login)=='false') {
+  	require_once '../external/simpleSAML/lib/_autoload.php';
+  	$hideAutoloadError=true;
+  	$auth = new SimpleSAML\Auth\Simple('projeqtor-sp');
+  	$auth->requireAuth();
+  	$authName = $auth->getAttributes();
+  	$login = $authName['username'][0];
+  	$user=new User();
+  	$user=SqlElement::getSingleSqlElementFromCriteria('User', array('name'=>strtolower($login)));
+  	if ($user->id) {
+  		User::resetAllVisibleProjects();
+  		//damian #3724
+  		if(Parameter::getGlobalParameter('applicationStatus')=='Closed'){
+  			$prf=new Profile($user->idProfile);
+  			if ($prf->profileCode!='ADM') {
+  				$user=null;
+  			}else{
+  				if (substr($_SERVER['PHP_SELF'],-9)=='/main.php'){
+  					$user->finalizeSuccessfullConnection(false,true);
+  				}
+  			}
+  		}else{
+  			if (substr($_SERVER['PHP_SELF'],-9)=='/main.php'){
+  				$user->finalizeSuccessfullConnection(false,true);
+  			}
+  		}
+  	} else {
+  		$user=null;
+  	}
+  	unsetSessionValue('avoidSAMLAuth');
+  }
+  
   if (!$user and $page!='loginCheck.php' and $page!='getHash.php' and $page!='saveDataToSession.php') {
     $cookieHash=User::getRememberMeCookie();
     if (!empty($cookieHash)) {
       $cookieUser=SqlElement::getSingleSqlElementFromCriteria('User', array('cookieHash'=>$cookieHash));
-      if ($cookieUser and $cookieUser->id) {
+      if ($cookieUser and $cookieUser->id and strtolower($enalbeSAMLAuth) == 'false') {
         $user=$cookieUser;
         $loginSave=true;
         $user->setCookieHash();
@@ -1569,14 +1572,15 @@ function throwError($message, $noEncode=false) {
  * @return void
  */
 $hideAutoloadError=false;
-
 function projeqtorAutoload($className) {
   global $hideAutoloadError;
   if (preg_match('/\.\./', trim($className))==true) {
     traceHack("Directory traversal in className = $className");
     exit();
   }
-  
+  if(strpos(strtolower($className), 'saml')){
+    $hideAutoloadError=true;
+  }
   $localfile=ucfirst($className).'.php'; // locally
   $customfile='../model/custom/'.$localfile; // Custom directory
   $modelfile='../model/'.$localfile; // in the model directory

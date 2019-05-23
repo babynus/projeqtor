@@ -933,7 +933,6 @@ class Parameter extends SqlElement {
       	                  'newColumnAuthentLeft'=>'newColumn',
     	                     'sectionSAML'=>'section',
       	                     'SAML_allow_login'=>'list',
-      	                     'SAML_idp'=>'text',
       	                     'SAML_baseurlpath'=>'text',
       	                     'SAML_baseURL'=>'text',
       	                     'SAML_SingleSignOnService'=>'text',

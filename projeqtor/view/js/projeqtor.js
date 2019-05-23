@@ -2778,6 +2778,7 @@ function disconnect(cleanCookieHash) {
     }
     //#2887
     var callBack = function(){
+      saveDataToSession("avoidSAMLAuth", 'true');
       window.location = "../index.php";
     }
     saveDataToSession("disconnect", extUrl, null, callBack);

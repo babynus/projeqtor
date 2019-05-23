@@ -6,12 +6,11 @@
  *
  * See: https://simplesamlphp.org/docs/stable/simplesamlphp-reference-idp-remote
  */
-$idp = Parameter::getGlobalParameter('SAML_idp');
 $SingleSignOnService = Parameter::getGlobalParameter('SAML_SingleSignOnService');
 $SingleLogoutService = Parameter::getGlobalParameter('SAML_SingleLogoutService');
-$metadata[$idp] = [
+$metadata['projeqtor-ipd'] = [
   'metadata-set' => 'saml20-idp-remote',
-  'entityid' => $idp,
+  'entityid' => 'projeqtor-ipd',
   'SingleSignOnService' => 
   [
     0 => 
