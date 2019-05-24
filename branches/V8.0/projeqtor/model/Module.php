@@ -238,7 +238,10 @@ class Module extends SqlElement {
   public static function getListOfFieldsToHide($class) {
     $list=array();
     if (! Module::isModuleActive('moduleConfiguration')) {
-      $tstFld=array( '_sec_productComponent', 'idProduct', 'idComponent', 'idProductVersion','idOriginalProductVersion','idTargetProductVersion', 'idComponentVersion', 'idOriginalComponentVersion', 'idTargetComponentVersion');
+      $tstFld=array( '_sec_productComponent', 'idProduct', 'idComponent', 'idProductVersion','idOriginalProductVersion','idTargetProductVersion', 
+                     'idComponentVersion', 'idOriginalComponentVersion', 'idTargetComponentVersion',
+                      '_sec_ProductprojectProducts','_ProductProject','_sec_VersionprojectVersions','_VersionProject'
+      );
       foreach ($tstFld as $fld) {
         if (property_exists($class,$fld)) {
           $list[$fld]=$fld;
