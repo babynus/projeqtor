@@ -5783,11 +5783,14 @@ function getLinksHtmlTab() {
   
   $status = '';
   foreach ($linkList as $link) {
-    if ($class==$link->ref1Type and $id==$link->ref1Id) { $obj = new $link->ref2Type($link->ref2Id);}
-    else { $obj = new $link->ref1Type($link->ref1Id);}
+    if ($class==$link->ref1Type and $id==$link->ref1Id) { 
+      $obj = new $link->ref2Type($link->ref2Id);
+    } else { 
+      $obj = new $link->ref1Type($link->ref1Id);
+    }
     $goto = $obj->getReferenceUrl ();
     $html .= '<tr><td style="border: 1px solid #7b7b7b; padding:4px;"><a href="' . $goto . '">' .
-              $link->ref2Type . ' #' . $link->ref2Id . '</a></td>' .
+              i18n(get_class($obj)) . ' #' . $obj->id . '</a></td>' .
               '<td style="border: 1px solid #7b7b7b; padding:4px;">' . $obj->name . '</td>';
     if (property_exists($obj, 'idStatus'))
       $status = colorNameFormatter(SqlList::getNameFromId('Status', $obj->idStatus) . "#split#" .
