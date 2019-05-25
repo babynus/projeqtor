@@ -785,6 +785,14 @@ if (beforeVersion($currVersion,"V8.0.0")) {
     $mod->save();
   }
 }
+if (beforeVersion($currVersion,"V8.0.4")) {
+  $crit="id in ".Project::getAdminitrativeProjectList(false);
+  $prj=new Project();
+  $prjList=$prj->getSqlElementsFromCriteria(null,null,$crit);
+  foreach ($prjList as $prj) {
+    Project::unsetNeedReplan($prj->id);
+  }
+}
 // To be sure, after habilitations updates ...
 Habilitation::correctUpdates();
 Habilitation::correctUpdates();

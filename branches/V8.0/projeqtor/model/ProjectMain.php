@@ -114,6 +114,8 @@ class ProjectMain extends SqlElement {
   public $isLeaveMngProject=0;//Indicate that if it's the project dedicated to store the leave as work
 // ELIOTT - LEAVE SYSTEM  
   public $_nbColMax=3;
+  
+  private static $_administrativeProjectList=null;
   // Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
@@ -1079,27 +1081,32 @@ scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursi
   }
   
   public static function getAdminitrativeProjectList($returnResultAsArray=false, $withLeaveProject=true) {
-  	$arrayProj=array();
-  	$arrayProj[]=0;
-  	$type=new ProjectType();
-  	$critType=array('code'=>'ADM');
-  	$listType=$type->getSqlElementsFromCriteria($critType, false);
-  	foreach ($listType as $type) {
-  	  $proj=new Project(); 
-  		$critProj=array('idProjectType'=>$type->id);
-      $listProj=$proj->getSqlElementsFromCriteria($critProj, false);
-      foreach ($listProj as $proj) {
-// MTY - LEAVE SYSTEM
-                if (isLeavesSystemActiv()) {
-                    $isLvePrjt = self::isTheLeaveProject($proj->id);
-                    if ($isLvePrjt and $withLeaveProject==false) {continue;}
-                    if (self::isTheLeaveProject($proj->id) && !self::isProjectLeaveVisible()) {continue;}
-                }  
-// MTY - LEAVE SYSTEM
-          
-      	$arrayProj[$proj->id]=$proj->id;
-      }
-  	}
+    if (self::$_administrativeProjectList!==null) {
+      $arrayProj=self::$_administrativeProjectList;
+    } else {
+    	$arrayProj=array();
+    	$arrayProj[]=0;
+    	$type=new ProjectType();
+    	$critType=array('code'=>'ADM');
+    	$listType=$type->getSqlElementsFromCriteria($critType, false);
+    	foreach ($listType as $type) {
+    	  $proj=new Project(); 
+    		$critProj=array('idProjectType'=>$type->id);
+        $listProj=$proj->getSqlElementsFromCriteria($critProj, false);
+        foreach ($listProj as $proj) {
+  // MTY - LEAVE SYSTEM
+                  if (isLeavesSystemActiv()) {
+                      $isLvePrjt = self::isTheLeaveProject($proj->id);
+                      if ($isLvePrjt and $withLeaveProject==false) {continue;}
+                      if (self::isTheLeaveProject($proj->id) && !self::isProjectLeaveVisible()) {continue;}
+                  }  
+  // MTY - LEAVE SYSTEM
+            
+        	$arrayProj[$proj->id]=$proj->id;
+        }
+    	}
+    }
+    self::$_administrativeProjectList=$arrayProj;
   	if ($returnResultAsArray) return $arrayProj;
   	return '(' . implode(', ',$arrayProj) . ')';
   }
@@ -1227,6 +1234,8 @@ scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursi
   
   public static function setNeedReplan($id) {
     if (PlanningElement::$_noDispatch) return;
+    $adminProjects=Project::getAdminitrativeProjectList(true);
+    if (isset($adminProjects[$id])) return;
     $proj=SqlElement::getSingleSqlElementFromCriteria("ProjectPlanningElement",array('refType'=>'Project','refId'=>$id),true);
     if (!$proj->id or $proj->needReplan==true) return;
     $proj->needReplan=true;
