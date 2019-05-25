@@ -130,7 +130,7 @@ for ($i=1;$i<=2;$i++) {
   $query=$querySelect 
      . ' from ' . $obj->getDatabaseTableName().' t1, '.$prjTable.' t2 '
      . ' where ' . $queryWhere." and t1.idProject=t2.id "
-     . ' group by ' . $queryGroupBy
+     . ' group by ' . $queryGroupBy. ', t2.sortOrder '
      . ' order by t2.sortOrder asc '; 
   $result=Sql::query($query);
   while ($line = Sql::fetchLine($result)) {
