@@ -1942,6 +1942,7 @@ helpFontForPDF: "te gebruiken lettertype voor PDF-export. 'Freesans' biedt een g
 helpGanttPlanningPrintOldStyle: "afdrukken Gantt in oude stijl als je fouten krijgt in Gantt printen - u zult een aantal mooie schermpresentaties verliezen zoals afhankelijkheden&#44; maar zal de stabiliteit verhogen",
 helpGetVersion: "Controleer of een nieuwe ProjeQtOr beschikbaar is.",
 helpGlobalNoteDiscussionMode: "display of notes in discussion mode with indentation for answers",
+helpHideItemTypeRestrictionOnProject: "The restriction on types by profile hides items&#10; - if set to YES&#44 users with such profiles won't see items of unselected types&#10; - if set to NO&#44 users will just not have possibility to create new items with such types",
 helpHideMenu: "Verberg of toon het linker menu",
 helpImport: "Toon veldnamen",
 helpImputationAlertCancelByOther: "send an alert or mail when timesheet is cancelled by another resource",
