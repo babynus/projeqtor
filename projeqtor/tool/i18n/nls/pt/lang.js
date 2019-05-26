@@ -1942,6 +1942,7 @@ helpFontForPDF: "fonte a usar na exportação para PDF&#10;'freesans' dá força
 helpGanttPlanningPrintOldStyle: "imprimir o Gantt no estilo antigo caso encontre problemas na impressão do Gantt - irá perder alguma das funcionalidades avançadas mas ganhará na estabilidade",
 helpGetVersion: "Verificar que existe uma nova versão do ProjeQtOr disponível.",
 helpGlobalNoteDiscussionMode: "display of notes in discussion mode with indentation for answers",
+helpHideItemTypeRestrictionOnProject: "The restriction on types by profile hides items&#10; - if set to YES&#44 users with such profiles won't see items of unselected types&#10; - if set to NO&#44 users will just not have possibility to create new items with such types",
 helpHideMenu: "Esconder ou mostrar o menu &#34;árvore&#34; da esquerda",
 helpImport: "mostrar os nomes dos campos",
 helpImputationAlertCancelByOther: "send an alert or mail when timesheet is cancelled by another resource",

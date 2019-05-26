@@ -1942,6 +1942,7 @@ helpFontForPDF: "Fuente a utilizar para la exportación de PDF &#10;'freesans' d
 helpGanttPlanningPrintOldStyle: "Imprima la gráfica Gantt con el estilo antiguo si tiene errores durante la impresión de gráficas Gantt - perderá algunos efectos como las depencias pero ganará en estabilidad",
 helpGetVersion: "Revisar si una nueva versión de Porject'Or RIA está disponible",
 helpGlobalNoteDiscussionMode: "display of notes in discussion mode with indentation for answers",
+helpHideItemTypeRestrictionOnProject: "The restriction on types by profile hides items&#10; - if set to YES&#44 users with such profiles won't see items of unselected types&#10; - if set to NO&#44 users will just not have possibility to create new items with such types",
 helpHideMenu: "Esconder o mostrar el menú de “árbol” lateral",
 helpImport: "Mostrar los nombres de campos",
 helpImputationAlertCancelByOther: "send an alert or mail when timesheet is cancelled by another resource",

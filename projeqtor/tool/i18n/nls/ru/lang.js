@@ -1942,6 +1942,7 @@ helpFontForPDF: "шрифт&#44; используемый для PDF&#10;&#34;fr
 helpGanttPlanningPrintOldStyle: "распечатать диаграмму Ганта в старом стиле при обнаружении ошибок — вы потеряете некоторые детали&#44; например зависимости&#44; но получите стабильность",
 helpGetVersion: "Проверьте доступность новой версии ProjeQtOr.",
 helpGlobalNoteDiscussionMode: "display of notes in discussion mode with indentation for answers",
+helpHideItemTypeRestrictionOnProject: "The restriction on types by profile hides items&#10; - if set to YES&#44 users with such profiles won't see items of unselected types&#10; - if set to NO&#44 users will just not have possibility to create new items with such types",
 helpHideMenu: "Скрыть или показать левое меню 'дерево'",
 helpImport: "Показывать названия полей",
 helpImputationAlertCancelByOther: "send an alert or mail when timesheet is cancelled by another resource",

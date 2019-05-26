@@ -1942,6 +1942,7 @@ helpFontForPDF: "Schrift für PDF Export&#10;'Freesans' für gute Portabilität 
 helpGanttPlanningPrintOldStyle: "Drucke Gantt im alten Format - sofern Fehler beim Druck auftraten - Sie verlieren zwar Besonderheiten im Layout&#44; gewinnen aber Stabilität",
 helpGetVersion: "Aktivitätstypen",
 helpGlobalNoteDiscussionMode: "Anzeige von Notizen im Diskussionsmodus mit Einrückung für Antworten",
+helpHideItemTypeRestrictionOnProject: "The restriction on types by profile hides items&#10; - if set to YES&#44 users with such profiles won't see items of unselected types&#10; - if set to NO&#44 users will just not have possibility to create new items with such types",
 helpHideMenu: "Verdecke / zeige linkes Menü",
 helpImport: "Anzeige der Feldnamen",
 helpImputationAlertCancelByOther: "Senden einer Benachrichtigung oder eine E-Mail&#44 wenn die Arbeitszeittabelle von einer anderen Ressource storniert wurde",

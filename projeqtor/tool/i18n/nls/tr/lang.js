@@ -1942,6 +1942,7 @@ helpFontForPDF: "PDF dışa aktarma için kullanılacak yazı tipi 'freesans' AN
 helpGanttPlanningPrintOldStyle: "print Gantt in old style if you face errors in Gantt printing - you will loose some fancy display such as dependencies but will gain stability",
 helpGetVersion: "ProjeQtOr'in yeni versiyonunun mevcut olup olmadığını kontrol edin.",
 helpGlobalNoteDiscussionMode: "display of notes in discussion mode with indentation for answers",
+helpHideItemTypeRestrictionOnProject: "The restriction on types by profile hides items&#10; - if set to YES&#44 users with such profiles won't see items of unselected types&#10; - if set to NO&#44 users will just not have possibility to create new items with such types",
 helpHideMenu: "Sol &#34ağaç&#34 menüsünü gizle veya göster",
 helpImport: "Görüntülü alan adları",
 helpImputationAlertCancelByOther: "send an alert or mail when timesheet is cancelled by another resource",

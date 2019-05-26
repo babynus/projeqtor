@@ -1942,6 +1942,7 @@ helpFontForPDF: "font to use for PDF export&#10;'freesans' give great portabilit
 helpGanttPlanningPrintOldStyle: "print Gantt in old style if you face errors in Gantt printing - you will loose some fancy display such as dependencies but will gain stability",
 helpGetVersion: "Check if new version of ProjeQtOr is available.",
 helpGlobalNoteDiscussionMode: "display of notes in discussion mode with indentation for answers",
+helpHideItemTypeRestrictionOnProject: "The restriction on types by profile hides items&#10; - if set to YES&#44 users with such profiles won't see items of unselected types&#10; - if set to NO&#44 users will just not have possibility to create new items with such types",
 helpHideMenu: "Hide or show the left &#34;tree&#34; menu",
 helpImport: "Display fields names",
 helpImputationAlertCancelByOther: "send an alert or mail when timesheet is cancelled by another resource",

@@ -1942,6 +1942,7 @@ helpFontForPDF: "PDF出力に利用するフォント&#10;「Free Sans」は非A
 helpGanttPlanningPrintOldStyle: "ガントチャート印刷時に不具合が発生した場合、古いスタイルで印刷する - 印刷できる可能性は増えますが、見栄えが損なわれます",
 helpGetVersion: "新しいProjeQtOrが利用可能かチェック",
 helpGlobalNoteDiscussionMode: "display of notes in discussion mode with indentation for answers",
+helpHideItemTypeRestrictionOnProject: "The restriction on types by profile hides items&#10; - if set to YES&#44 users with such profiles won't see items of unselected types&#10; - if set to NO&#44 users will just not have possibility to create new items with such types",
 helpHideMenu: "左のツリーメニューの表示・非表示",
 helpImport: "フィールド名の表示",
 helpImputationAlertCancelByOther: "send an alert or mail when timesheet is cancelled by another resource",
