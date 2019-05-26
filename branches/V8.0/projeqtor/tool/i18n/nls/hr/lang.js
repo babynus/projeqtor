@@ -1942,6 +1942,7 @@ helpFontForPDF: "font koristiti za PDF izvoz&#10;'freesans' daje portabilitet za
 helpGanttPlanningPrintOldStyle: "otisci Gantt u starom formatu - ako pogreška u tiskanju dogodila - iako ćete izgubiti posebnosti u izgledu&#44; ali steći stabilnost",
 helpGetVersion: "Vrste aktivnosti",
 helpGlobalNoteDiscussionMode: "prikaz bilješki u načinu rasprave s uvlačenjem za odgovore",
+helpHideItemTypeRestrictionOnProject: "The restriction on types by profile hides items&#10; - if set to YES&#44 users with such profiles won't see items of unselected types&#10; - if set to NO&#44 users will just not have possibility to create new items with such types",
 helpHideMenu: "Nadstrešnice ili prikaz napustio &#34;Baum&#34; izbornik",
 helpImport: "Prikaz naziva polja",
 helpImputationAlertCancelByOther: "send an alert or mail when timesheet is cancelled by another resource",
