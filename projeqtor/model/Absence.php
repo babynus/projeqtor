@@ -56,7 +56,7 @@ class Absence{
     //Get administrative project list 
     $proj = new Project();
     $act = new Activity();
-    $where = "idProject in " . Project::getAdminitrativeProjectList(false);    
+    $where = "idProject in " . Project::getAdminitrativeProjectList(false, false);    
     $where .= " and idle = 0 ";
     $countExiting=$act->countSqlElementsFromCriteria(null,$where);
     $user=getSessionUser();
