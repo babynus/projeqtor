@@ -49,7 +49,7 @@ $meet = new $assignmentRefType($assignmentRefId);
 $aff = new Affectation();
 //Flo #4020
 if($assignmentRefType == 'PeriodicMeeting'){
-  $critWhere="idle=0 AND idProject= $meet->idProject AND ( endDate >= '$meet->periodicityEndDate' OR endDate IS NULL ) ";
+  $critWhere="idle=0 AND idProject= $meet->idProject AND ( endDate >= '$meet->periodicityStartDate' OR endDate IS NULL ) ";
 }else{
   $critWhere="idle=0 AND idProject= $meet->idProject AND ( endDate >= '$meet->meetingDate' OR endDate IS NULL ) ";
 }
