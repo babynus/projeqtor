@@ -6907,6 +6907,7 @@ function closeAlertBox() {
     duration : duration,
     onEnd : function() {
       if (dojo.byId('dialogReminder')) {
+        dialogReminder=dojo.byId('dialogReminder');
         dojo.style(dialogReminder, {
           visibility : 'hidden',
           display : 'none',
