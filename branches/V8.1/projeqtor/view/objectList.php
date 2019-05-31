@@ -435,6 +435,25 @@ if (property_exists($objectClass,'idStatus')) {
               <?php } ?>
               <!-- END ADD qCazelles -->
               
+             <!-- Ticket #3988	- Object list : boutton reset parameters  
+                   florent
+              -->
+              <?php if (!$hideTypeSearch) { ?>
+                <?php if ( $objectClass == 'Budget'  || property_exists($obj,'idClient') || property_exists($obj,'idMailable') || property_exists($obj,'idIndicatorable')|| property_exists($obj,'idTextable')|| property_exists($obj,'idChecklistable')) {
+                }else {  
+                  ?>
+                      <td width="6px">
+                        <button dojoType="dijit.form.Button" type="button" >
+                            <?php echo i18n('resetColor');?>
+                            <script type="dojo/method" event="onClick">
+                             resetFilter();
+                             </script>
+                          
+                        </button>
+
+                <?php } ?>      
+              <?php } ?> 
+              
               <!-- gautier #budgetParent  -->
               <?php if ( !$hideParentBudgetSearch and  $objectClass == 'Budget' ) { ?>
                <td style="vertical-align: middle; text-align:right;" width="5px">
@@ -453,6 +472,20 @@ if (property_exists($objectClass,'idStatus')) {
                   </script>
                 </select>
               </td>
+              <!-- Ticket #3988	- Object list : boutton reset parameters  
+                   florent
+              -->
+              <?php if ($hideClientSearch) { ?>
+              <td width="6px">
+                <button dojoType="dijit.form.Button" type="button" >
+                    <?php echo i18n('resetColor');?>
+                  <script type="dojo/method" event="onClick">
+                     resetFilter();
+                  </script>
+                  
+                </button>
+              </td>      
+              <?php } ?>     
               <?php } ?>
               <!-- end  -->
               
@@ -473,6 +506,18 @@ if (property_exists($objectClass,'idStatus')) {
                   </script>
                 </select>
               </td>
+              <!-- Ticket #3988	- Object list : boutton reset parameters  
+                   florent
+              -->
+              <td width="6px">
+                <button dojoType="dijit.form.Button" type="button" >
+                    <?php echo i18n('resetColor');?>
+                  <script type="dojo/method" event="onClick">
+                     resetFilter();
+                  </script>
+                  
+                </button>
+              </td>           
               <?php } 
                  $elementable=null;
                  if ( property_exists($obj,'idMailable') ) $elementable='idMailable';
@@ -496,6 +541,17 @@ if (property_exists($objectClass,'idStatus')) {
                   </script>
                 </select>
               </td>
+     
+              <td width="6px ">
+                <button dojoType="dijit.form.Button" type="button" >
+                    <?php echo i18n('resetColor');?>
+                  <script type="dojo/method" event="onClick">
+                     resetFilter();
+                  </script>
+                  
+                </button>
+              </td>      
+              
               <?php }?>                     
               <?php $activeFilter=false;
                  if (! $comboDetail and is_array(getSessionUser()->_arrayFilters)) {
@@ -562,18 +618,6 @@ if (property_exists($objectClass,'idStatus')) {
 <?php if (! $comboDetail or 1) {?> 
           </td>
                 </td>
-              <!-- Ticket #3988	- Object list : boutton reset parameters  
-                   florent
-              -->
-              <td width="51px">
-                <button dojoType="dijit.form.Button" type="button" >
-                    <?php echo i18n('resetColor');?>
-                  <script type="dojo/method" event="onClick">
-                     resetFilter();
-                  </script>
-                  
-                </button>
-              </td>           
             <td width="36px">
               <button title="<?php echo i18n('quickSearch')?>"  
                dojoType="dijit.form.Button" 
