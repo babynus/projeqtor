@@ -27,10 +27,10 @@ Resources
    * :ref:`Allocations<allocation-section>`
 
 
-The resources of a project can be human or material.
-Resource availability is defined by assigning it to the project.
+The resources of a project can be human or material 
+Resource availability is defined by assigning it to a project.
 
-* A resource can be a group of person.
+* A resource can be a group of person ((See: :ref:`pool`).
 * Informing the resource is useful for project planning.
 * You create the fictitious resource with capacity > 1.
 
@@ -108,7 +108,7 @@ Resource availability is defined by assigning it to the project.
 
 .. index:: ! Resource (Function & Cost definition)
 
-.. compound:: Function and cost
+.. compound:: **Function and cost**
 
 This section allows to define functions and cost of the resource.
 

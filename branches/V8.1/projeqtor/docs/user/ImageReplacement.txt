@@ -42,7 +42,25 @@
 
 .. |iconSwitch| image:: images/smallButtonSwitch.png
    :alt: Button small button switch 
+   
+.. |iconProject16| image:: images/iconProjet16.png
+   :alt: Projet icon 
 
+.. |iconReplan16| image:: images/iconReplan16.png
+   :alt: Replanning schedule icon
+   
+.. |iconActivity16| image:: images/iconActivity16.png
+   :alt: Activity icon 
+   
+.. |iconMeeting16| image:: images/iconMeeting16.png
+   :alt: Meeting icon 
+   
+.. |iconTestSession16| image:: images/iconTestSession16.png
+   :alt: Projet icon 
+
+.. |iconMilestone16| image:: images/iconMilestone16.png
+   :alt: Projet icon 
+     
 .. |buttonIconHelp| image:: images/iconHelp.png
    :alt: Button icon help
 
@@ -81,6 +99,9 @@
 
 .. |buttonIconDrag| image:: images/iconDrag.png
    :alt: Button icon drag
+
+.. |IconDragBLC| image:: images/IconDragBLC.png
+   :alt: icon drag
 
 .. |buttonIconFilter| image:: images/iconActiveFilter.png
    :alt: button icon filter
@@ -266,6 +287,10 @@
    :scale: 30
 
 .. |nine| image:: images/nine.png
+   :alt: Nine
+   :scale: 30
+
+.. |ten| image:: images/ten.png
    :alt: Nine
    :scale: 30
 

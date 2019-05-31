@@ -81,6 +81,8 @@ Glossary
        * The element type screens allow to set this parameter to several elements. 
        * More detail, see: :ref:`behavior-section`. 
 
+.. _wbs:
+
    WBS
 
     * Work Breakdown Structure.
