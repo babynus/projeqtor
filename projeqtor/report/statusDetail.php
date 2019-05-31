@@ -94,7 +94,7 @@ if ($paramIssuer!="") {
  $query .= " and idUser=" . Sql::fmtId($paramIssuer);
 }
 if ($paramResponsible!="") {
- $query .= " and idResource='" . $paramResponsible; 
+ $query .= " and idResource=" . $paramResponsible; 
 }
 $query .= " group by id" . $refType . "Type, idStatus";
 
