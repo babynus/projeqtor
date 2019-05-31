@@ -6893,7 +6893,7 @@ function setAlertRead(id, remind) {
 function closeAlertBox() {
   var dialogReminder=dojo.byId('dialogReminder');
   var duration=900;
-  if (checkAlertDisplayQuick) duration=90;
+  if (checkAlertDisplayQuick && dialogReminder) duration=90;
   dojo.animateProperty({
     node : dialogReminder,
     properties : {
@@ -6904,11 +6904,13 @@ function closeAlertBox() {
     },
     duration : duration,
     onEnd : function() {
-      dojo.style(dialogReminder, {
-        visibility : 'hidden',
-        display : 'none',
-        bottom : '-200px'
-      });
+      if (dojo.byId('dialogReminder')) {
+        dojo.style(dialogReminder, {
+          visibility : 'hidden',
+          display : 'none',
+          bottom : '-200px'
+        });
+      }
     }
   }).play();
 }
