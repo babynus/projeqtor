@@ -6,7 +6,7 @@
 .. index:: ! Project (Expense)
 
 Expenses (under construction)
-========
+*****************************
 
 The expenses incurred for the project are monitored.
 
@@ -19,7 +19,15 @@ The expenses incurred for the project are monitored.
 .. _call-for-tenders:
 
 Budget
-----------------
+======
+
+.. figure:: /images/Budget1.png 
+   :alt: Gantt (Planning)
+   :align: center
+
+   Gantt (Planning)
+
+
 
 Call for tenders
 ----------------
@@ -111,7 +119,7 @@ You have the possibility to create some different evaluation criterias. Thereaft
 .. _tenders:
 
 Provider Tenders
--------
+----------------
 
 Tenders store information about the responses to the call for tenders that you have submitted.
 
@@ -200,13 +208,13 @@ Global rating will then be displayed on the call for tender for all concerned te
 
 
 Orders to provider
-----------------
+------------------
 Terms of payements to providers
-----------------
+-------------------------------
 Provider bills
-----------------
+--------------
 Payements to provider
-----------------
+---------------------
 .. index:: ! Expense (Individual)
 
 
