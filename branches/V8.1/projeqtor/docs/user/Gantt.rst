@@ -16,25 +16,8 @@ Gantt charts
    
 .. index:: ! Gantt chart (Planning)
 
-.. _gantt-planning:
-
-Planning global
----------------
-
-The global planning allows to visualize any type of object (project, activity, milestones, risk, meeting ...)
-
-* Add and Show any new planning element on Gantt chart
-* The created item is added in the Gantt and detail window is opened.
-* The detail window allows to complete entry
-* Project planning and activity planning calculation can be done in the Gantt.
-
-.. figure:: /images/GUI/PlanningElement.png
-   :alt: Popup menu - Create a new item
-   :align: center
-
-
 Planning
---------
+========
 
 This screen allows to define project planning and follow progress.
 
@@ -74,32 +57,41 @@ the Gantt Chart is composed of two main areas:
 * Click on |buttonIconPrint| to get a printable version of the Gantt chart.
 * Click on |buttonIconPdf| to export Gantt chart in PDF format. (See: :ref:`export-Gantt-PDF`) 
 * Click on |msProject| to export planning to MS-Project xml format.
-* Click on |buttonIconColumn| to define the columns of progress data that will be displayed. (See: :ref:`progress-data-view`)
 * Click on |createNewItem| to create a new item. (See: :ref:`project-planning`)
+* Click on |buttonIconFilter| to filter the list. see the picture below. 
+* Click on |buttonIconColumn| to define the columns of progress data that will be displayed. (See: :ref:`progress-data-view`)
 
-* Click on |buttonIconFilter| to filter the list.
 
 .. figure:: /images/GUI/AdvancedFilter_Gantt.png
-   :alt: schedule filter
+   :alt: Advanced filters
    :align: center
 
-   schedule filter
+   Advanced filters of the Gantt chart
+
+.. note:: 
+  * Filter the schedule: possibility to filter the activities to display on the Gantt Planning view
+  * The "parents" of the selected activities are also displayed to maintain the :ref:`wbs` structure
+    
 
 .. warning:: Check the box **"save date"** to keep registered displayed date of the overview planning, otherwise dates removing to general mode, after navigating away from this page.  
 
 .. rubric:: |five| Show Baseline
 
-* Allows to display one baseline on top and one on bottom of the Gantt chart. 
+* The baseline is a record of the planning state at a time T.
+* This option displays this line at the top and / or bottom of your current Gantt chart for comparison.. 
 
 .. note::
-    
-   * Ability to display two baselines on the Gantt chart.
-   * Baseline can be saved with |storePlannedDates|.
 
+  * Ability to display two baselines on the Gantt chart.
+  * You can recording only one baseline every day
+  * Baseline can be saved with |storePlannedDates|.
 
 .. rubric:: |six| Show Critical path
 
-Activating the box, calculated and displayed in red color into the Gantt planning.
+The critical path is used to determine the total duration of your project. 
+The critical path of your project is the longest sequence of tasks that must be completed for the project to be completed by the due date.
+
+* click on the **"critical path"** check box to calculate and display the red path in the Gantt schedule.
 
 .. raw:: latex
 
@@ -122,7 +114,135 @@ The task list area is composed with:
    Task list & progress data view
 
 
-.. rubric:: 3 - Area splitter
+
+.. _task-list:
+
+Task List
+_________
+
+The task list displays the planning elements in hierarchical form by dividing the WBS. (See: :ref:`wbs`).
+
+Tasks are regrouped by projects and activities.
+
+.. rubric:: Projects displayed
+
+* The projects displayed depend on the selection made with **the project selector** (See: :ref:`top-bar`)
+
+
+.. figure:: /images/GUI/ZONE_GanttTaskList1.png
+   :alt: Task list & progress data view
+   :align: center
+
+   Task list & progress data view
+
+.. rubric:: |one| Hide all activities
+
+show or hide project activities
+
+* Click on |minusButton| or |plusButton| to enlarge or reduce all groups of projects at the same time
+
+.. rubric:: |two| Icon of element
+
+A specific icon appears to the left of each item type for faster identification.
+
+* |iconProject16| Projet Icon
+* |iconReplan16| project to recalculate (the Gant diagramm to display with the latest settings) 
+* |iconActivity16| Activity
+* |iconMilestone16| Milestone
+* |iconMeeting16| Meeting
+* |iconTestSession16| Test session
+
+Other items can be displayed in the :ref:`gantt-planning` (action, decision, delivery...)
+
+.. rubric:: |three| Hide activities
+
+* Click on |minusButton| or |plusButton| on the group line to enlarge or reduce the group only.
+
+
+.. rubric:: |four| Show WBS
+
+* Click on "Show WBS" to display the WBS number before the names. (see: :ref:`wbs`)
+
+.. figure:: /images/GUI/TaskWBS-With.png
+   :alt: Task list with WBS display
+   :align: left
+   
+   Task list with WBS Display
+
+.. figure:: /images/GUI/TaskWBS-Without.png
+   :alt: Task list without WBS display
+   :align: center
+   
+   Task list without WBS Display
+
+.. rubric:: |five| Item name 
+
+* Click on a line to display the detail of the item in the detail area.
+
+.. rubric:: |six| Checkbox "Show closed items"
+
+* Flag on "Show closed items" allows to list closed items.
+
+
+.. raw:: latex
+
+    \newpage
+
+
+.. _progress-data-view:
+
+Progress data view
+__________________
+
+The progress data view allows to show progress on project elements.
+to display the progress columns, pull the splitter to the right.
+
+For each planning element, the progress data are displayed at them right.
+
+
+.. figure:: /images/GUI/Zone_ProjectDATAView.PNG
+   :alt: Progress data view
+   :align: center
+
+   Progress data view
+
+.. rubric:: |one| Group row
+
+* The group row has a gray background.
+* Used to display consolidated progress data by tasks.
+
+.. rubric:: |two| Task row
+
+* The task row has a white background.
+* Used to display task progress data.
+
+.. note:: **create a new item**
+
+   * Each new element |createNewItem| will be placed below the selected line in the "task" column after it is created.
+   
+   * If this item is "new project" and you have selected a line activity. The new element will automatically be a project subproject of the activity in question
+   
+   * If no line is selected, the new item will move to the end of the task list
+
+.. rubric:: |three| Define the columns of progress data that will be displayed
+
+* Click on |buttonIconColumn| to define the columns displayed.
+
+* Use checkboxes to select or unselect columns to display.
+
+* Use the |IconDragBLC| to reorder columns with drag & drop feature.
+   
+* Click on **OK** button to apply changes.
+   
+
+.. figure:: /images/GUI/TIP_GanttSelectColunmsToDisplay.png
+   :alt: Popup list - Select columns
+   :align: center
+
+   Popup list - Select columns
+   
+ 
+.. rubric:: |three| Area splitter
 
 The splitter is used to show or hide the progress data view.
 
@@ -135,193 +255,133 @@ The splitter is used to show or hide the progress data view.
 
     \newpage
 
-.. _task-list:
-
-Task list
-=========
-
-The task list displayed planning elements in hierarchical form.
-
-Tasks are regrouped by project and activity.
-
-.. rubric:: Projects displayed
-
-* Projects displayed depends on selection done with the project selector.
-* See: :ref:`top-bar`
-
-
-.. figure:: /images/GUI/ZONE_GanttTaskList1.png
-   :alt: Task list & progress data view
-   :align: center
-
-   Task list & progress data view
-
-.. rubric:: 1 - Hierarchical level
-
-* Click on |minusButton| or |plusButton| to adjust the hierarchical level displayed.
-
-.. rubric:: 2 - Icon of element
-
-* An icon is displayed on the left of the corresponding element.
-
-.. rubric:: 3 - Group row
-
-* Click on |minusButton| or |plusButton| on the group row to expand or shrink the group.
-
-
-.. rubric:: 4 - Show WBS
-
-* Click on "Show WBS" to display the WBS number before the names.
-
-.. rubric:: 5 - Item name 
-
-* Click on a row will display the detail of the item in the detail window.
-
-.. rubric:: 6 - Checkbox «Show closed items»
-
-* Flag on «Show closed items» allows to list also closed items.
-
-.. raw:: latex
-
-    \newpage
-
-.. topic::
-
-   - Filter on the planning: possibility to filter the activities to be displayed on the Gantt Planning view
-   - The "parents" of the selected activities are also displayed to maintain the WBS structure.. 
-
-
-.. _progress-data-view:
-
-Progress data view
-==================
-
-The progress data view allows to show progress on project elements.
-
-For each planning element, the progress data are displayed at them right.
-
-
-.. figure:: /images/GUI/screenshot164.png 
-   :alt: Progress data view
-   :align: center
-
-   Progress data view
-
-.. rubric:: 1 - Group row
-
-* The group row has a gray background.
-* Used to display consolidated progress data for tasks.
-
-.. rubric:: 2 - Task row
-
-* The task row has a white background.
-* Used to display task progress data.
-
-.. raw:: latex
-
-    \newpage
-
-.. rubric:: 3 -  Define the columns of progress data that will be displayed
-
-* Click on |buttonIconColumn| to define the columns displayed.
-* Click on **OK** button to apply changes.
-
- .. compound:: **Column selection**
-
-    * Use checkboxes to select or unselect columns to display.
-
- .. compound:: **Columns order**
-
-    * Use the |buttonIconDrag| to reorder columns with drag & drop feature.
-   
-
-.. figure:: /images/GUI/TIP_GanttSelectColunmsToDisplay.png
-   :alt: Popup list - Select columns
-   :align: center
-
-   Popup list - Select columns
-
-.. raw:: latex
-
-    \newpage
 
 .. _gantt-chart-view:
 
 Gantt chart view
-^^^^^^^^^^^^^^^^
+----------------
 
-The Gantt chart view is a graphic representation of progress data.
+The Gantt chart view is a graphical representation of the progress data of a project. 
+For each planning element, a bar is associated with it
 
-For each planning element, a Gantt bar is displayed at them right.
-
-.. figure:: /images/GUI/screenshot167.png 
+.. figure:: /images/GUI/ZONE_GanttChartView1.png 
    :alt: Gantt chart view
    :align: center
 
    Gantt chart view
 
-.. rubric:: 1 - Scale
+.. rubric:: |one| Scale
 
-* Scale available: daily, weekly, monthly or quarter
+* Scale available: daily, weekly, monthly and quarter
 * The Gantt chart view will be adjusted according to scale selected.
 
-.. rubric:: 2 - Start and end dates 
+.. rubric:: |two| Display from... to... 
 
-* Change the starting or ending date to limit the display of Gantt chart view.
+* Change the start and / or end date to limit or extend the display of a Gantt Chart.
 
-.. rubric:: 3 - Saving dates
+.. rubric:: |three| Saving dates and All the projet
 
-* Save previous dates to retrieve them on every connection.
+* Save your dates to retrieve them on every connection.
+* Check **"All the project"** for the gantt chart to show all project tasks when possible.
+* If the display is truncated because the project is too long, think to change the display scale.
 
 .. raw:: latex
 
     \newpage
 
-.. rubric:: 4- Gantt bars
+.. rubric:: |four| Gantt bars
 
-* Overdue tasks appear in red, others in green.
+* The bars displayed in the gantt chart can appear with different colors. Each color has a meaning.
 
- .. compound:: **Red bar**
+.. compound:: **LIGHTER BAR**
 
-   .. describe:: Condition
+.. figure:: /images/GanttBar_PaleGreen.png 
+   :alt: Without assigned work
+   :align: left
+   :height: 20px
+   :width: 80 px
 
-      Planned end date or (Real end date if completed task)  > Validated end date
+.. describe:: Condition
+   Activities without assigned work
+   pale red or pale green as appropriate
 
- .. compound:: **Purple bar** 
+.. compound:: **GREEN BAR : all is well**
 
-    * The planning calculator tries to plan, the remaining work on the task assigned to a resource within the allocation to project period.
-    * If remaining work on the task can't be planned, a purple bar appears in the Gantt view.
+.. figure:: /images/GanttBar_Green.png 
+   :alt: all is well
+   :align: left
+   :height: 20px
+   :width: 80 px
 
+.. describe:: Condition
+   Assigned resources are available and meet workload, validated or scheduled dates do not conflict with other items.
 
- .. compound:: **Consolidation bar**
+.. compound:: **RED BAR : Overdue tasks**
+
+.. figure:: /images/GanttBar_Red.png 
+   :alt: Overdue tasks
+   :align: left
+   :height: 20px
+   :width: 80 px
+
+.. describe:: Condition
+   Planned end date > Validated end date
+   Real end date if completed task > Valited end date
+
+.. compound:: **PURPLE BAR : impossible to calculate the remaining work** 
+
+.. figure:: /images/GanttBar_Purple.png 
+   :alt: Impossible to calculate
+   :align: left
+   :height: 20px
+   :width: 80 px
+
+.. describe:: Condition
+   the remaining work on the task can't be planned.
+   
+.. note:: example 
+
+   When a resource is assigned to a task over a defined period of time, and the task requests a higher workload than the resource can provide,
+   or if the resource is unavailable for the assigned task then the bar becomes purple.
+
+.. compound:: **REAL WORK IN PROGRESS**
+
+.. figure:: /images/GanttBar_GreenWork.png 
+   :alt: Work in progress
+   :align: left
+   :height: 20px
+   :width: 80 px
+
+.. describe:: Condition
+   The line appears in the bar when real work is filled   
+   it shows the percentage of actual progress
+   
+.. note:: its length represents the percentage of completion based on the actual progress versus the length of the Gantt bar.
+
+.. compound:: **CONSOLIDATION BAR**
 
     .. image:: /images/ganttConsolidationBar.png
        :alt: consolidation bar
+       :align: left
+       :height: 20 px
+       :width: 160 px
+ 
+.. describe:: Condition
+   Graphic display of consolidated dates for planning elements group
+     
+.. note:: Displayed at group row level.
+   Start with the smallest start date and end with the biggest end date, either with planned or real dates.
 
-    * Displayed at group row level.
-    * Graphic display of consolidated dates for planning elements group.
-    * Start with the smallest start date and end with the biggest end date, either with planned or real dates.
+
+.. note:: 
+   .. figure:: /images/Gantt_DisplayDates.png 
+      :alt: View the item name and scheduled dates on the selected bar
+      :align: center
+      
+   Move the cursor over the bar to display item name and planned dates.   
 
 
-  .. compound:: **Real work progress**
-
-    .. image:: /images/ganttGreenBar.png
-       :alt: green bar
-
-    * The line that cross a Gantt bar displays the percentage of actual progress.
-    * The length of the line represents the percentage of completion, based on the percentage of actual progress against the length of Gantt bar.
-
- .. note:: Lighter bar
-
-     * Activities without assigned work are lighter bar, pale red or pale green as appropriate.
-  
-  .. figure:: /images/GUI/lighter_bar.png
-
- .. note:: 
-
-    * Move the cursor over the bar to display item name and planned dates.
-
-.. rubric:: 5 - Dependency links
+.. rubric:: |five| Dependency links
 
 * Dependencies between planning elements are displayed with an arrow.
 
@@ -329,19 +389,18 @@ For each planning element, a Gantt bar is displayed at them right.
 
 .. figure:: /images/GUI/dependencies.png
    :alt: update dependency pop-up
-   update dependency pop-up
 
-3 dependency types are managed: 
+**3 dependency types are managed:**
 
-* End-Start. The second activity can not start before the end of the first activity.
-* Start-Start: the successor can not begin before the beginning of the predecessor. Anyway, the successor can begin after the beginning of the predecessor.
-* End-End: The successor should not end after the end of the predecessor, which leads to planning "as late as possible". Anyway, the successor can end before the predecessor. Note that the successor "should" not end after the end of predecessor, but in some cases this will not be respected:
+* **End-Start:** The second activity can not start before the end of the first activity.
+* **Start-Start:** the successor can not begin before the beginning of the predecessor. Anyway, the successor can begin after the beginning of the predecessor.
+* **End-End:** The successor should not end after the end of the predecessor, which leads to planning "as late as possible". Anyway, the successor can end before the predecessor. Note that the successor "should" not end after the end of predecessor, but in some cases this will not be respected:
 
   * if the resource is already 100% used until the end of the successor
   * if the successor has another predecessor of type "End-Start" or "Start-Start" and the remaining time is not enough to complete the task
   * if the delay from the planning start date does not allow to complete the task
  
-.. note:: Pop-up
+.. note:: Update Pop-up 
 
      * Right click on a dependency link (when its color is orange) will show update pop-up
      * You can modify the delay, add a comment or remove the dependency.
@@ -356,56 +415,66 @@ For each planning element, a Gantt bar is displayed at them right.
 
     \newpage
 
-.. rubric:: 6 - Milestone
+.. rubric:: |six| Milestone
 
-* Milestones appear as diamonds, filled if completed, empty if not.
+* Milestones appear as small diamonds. Filled if completed, empty otherwise.
 * Color of  diamond depends on milestone progress.
 
-  .. compound:: **Ongoing milestone and in times**
+.. compound:: **Ongoing milestone and in times**
 
    .. image:: /images/ganttGreenMilestone.png
       :alt: ongoing milestone and in times
 
-  .. compound:: **Completed milestone and in times**
+.. compound:: **Completed milestone and in times**
 
    .. image:: /images/ganttFilledGreenMilestone.png
       :alt: completed milestone and in times
 
-  .. compound:: **Ongoing milestone and delayed**
+.. compound:: **Ongoing milestone and delayed**
+Planned end date > Validate end date
 
-   .. image:: /images/ganttRedMilestone.png
+.. image:: /images/ganttRedMilestone.png
       :alt: ongoing milestone and delayed
 
-   .. describe:: Condition
+.. compound:: **Completed milestone and delayed**
+Real end date > Validated end date
 
-      Planned end date > Validate end date
-
-  .. compound:: **Completed milestone and delayed**
-
-   .. image:: /images/ganttFilledRedMilestone.png
+.. image:: /images/ganttFilledRedMilestone.png
       :alt: completed milestone and delayed
 
-   .. describe:: Condition
 
-      Real end date > Validated end date
-
-
-
-
-.. rubric:: 7 - Show resources 
+.. rubric:: |seven| Show resources 
 
 * Click on “Show resources” to display resources assigned to tasks.
 
-.. topic:: Global parameter “Show resource in Gantt”
+.. figure:: /images/Gantt_Initiales.png
+   :alt: Show the ressources with initials
+   :align: left
+   :height: 110px
+   
+   Display with initials 
+   
+.. figure:: /images/Gantt_Name.png
+   :alt: Show the ressources with name
+   :align: center
+   :height: 110px
+   
+   Display with name
 
-   * This parameter defines the option availability and whether the resource name or initial is displayed.
+.. topic:: Global parameter > Work Tab >Planning Section > "Show resource on the Gantt"
+   This parameter defines the option availability and whether the resource name or initial is displayed.
+   
+   
+.. rubric:: |eight| Current date
 
-.. rubric:: 8 - Current date
-
+.. figure:: /images/Gantt_YellowBar.png
+   :align: left
+   :height: 40px
+   
 * Yellow column indicates the current day, week, month or quarter, according to scale selected.
-* Red bar in yellow collumn display the current day and time.
+* The red line in yellow collumn display the current day and time.
 
-.. rubric:: 9 - Detail of the work
+.. rubric:: |nine| Detail of the work
 
 * Right click on a bar to displays the detail of the work for this bar.
 
@@ -413,10 +482,11 @@ For each planning element, a Gantt bar is displayed at them right.
    :alt: Popup menu - Create a new item
    :align: center 
 
-Warning: You have to selected week or day scale to display detail or a message 
-will ask you to switch to smaller scale.
+.. Warning:: 
 
-.. rubric:: 10 - Miscellaneous
+   You have to selected week or day scale to display detail or a message will ask you to switch to smaller scale.
+
+.. rubric:: |ten| Miscellaneous
 
 * On "floating" elements (floating milestone, fixed duration activity) without predecessor, set the planned start date to the validated start date
 
@@ -429,19 +499,19 @@ will ask you to switch to smaller scale.
 .. _project-planning:
 
 Project planning
-^^^^^^^^^^^^^^^^
+----------------
 
 Project planning and activity planning calculation can be done in the Gantt.
 
 
 
-.. figure:: /images/GUI/screenshot168.png 
+.. figure:: /images/GUI/Gantt_ProjectPlanning.png 
    :alt: Project planning
    :align: center
 
    Project planning 
 
-.. rubric:: 1 - Add a new planning element
+.. rubric:: |one| Add a new planning element
 
 * Allows to create a new planning element.
 * The created element is added in the Gantt and detail window is opened.
@@ -536,10 +606,28 @@ The calculations are programmed according to a frequency of CRON type (every min
     \newpage
 
 
+.. _gantt-planning:
+
+Planning global
+===============
+
+The global planning allows to visualize any type of object (project, activity, milestones, risk, meeting ...)
+
+* Add and Show any new planning element on Gantt chart
+* The created item is added in the Gantt and detail window is opened.
+* The detail window allows to complete entry
+* Project planning and activity planning calculation can be done in the Gantt.
+
+.. figure:: /images/GUI/PlanningElement.png
+   :alt: Popup menu - Create a new item
+   :align: center
+
+
+
 .. index:: ! Gantt chart (Projects portfolio)
 
 Projects portfolio
-------------------
+==================
 
 This screen displays Gantt chart from projects portfolio point of view.
 
@@ -571,7 +659,7 @@ It displays projects synthesis and project's dependencies, without project activ
 .. index:: ! Gantt chart (Resource planning)
 
 Resource Planning
------------------
+=================
 
 This screen displays Gantt chart from the resources point of view.
 
@@ -638,7 +726,7 @@ On resource planning, group periodic meetings is under its parent
 .. _export-Gantt-PDF:
 
 Export planning to PDF
-----------------------
+======================
 
 Allows to export planning to PDF format.
 
