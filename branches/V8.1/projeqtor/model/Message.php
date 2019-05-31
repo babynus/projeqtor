@@ -35,6 +35,12 @@ class Message extends SqlElement {
   public $id;    // redefine $id to specify its visiblez place 
   public $name;
   public $idMessageType;
+  
+  //Florent  ticket #4030
+  //public $startDate;
+  //public $endDate;
+  
+  
   public $description;
   public $_sec_treatment;
   public $idProfile;
@@ -50,7 +56,9 @@ class Message extends SqlElement {
     <th field="nameProject" width="10%">${idProject}</th>
     <th field="nameAffectable" formatter="thumbName22" width="15%">${idUser}</th>
     <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
-    ';
+    '/*<th field="startDate" width="10%" formatter="dateFormatter" >${startDate}</th>
+    <th field="endDate" width="10%" formatter="dateFormatter" >${endDate}</th>*/
+    ;
   
   private static $_colCaptionTransposition = array('name'=> 'title', 'description'=>'message','idAffectable'=>'idUser');
   

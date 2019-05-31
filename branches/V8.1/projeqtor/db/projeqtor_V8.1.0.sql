@@ -11,3 +11,8 @@ RENAME TABLE `${prefix}event` TO `${prefix}eventformail`;
 
 UPDATE `${prefix}columnselector` set field='nameEventForMail', attribute='idEventForMail' where attribute='idEvent';
 UPDATE `${prefix}history` set colName='idEventForMail' where colName='idEvent';
+
+-- /Flo
+INSERT INTO `${prefix}originable`( `name`, `idle`) VALUES ('DocumentVersion', 0);
+
+
