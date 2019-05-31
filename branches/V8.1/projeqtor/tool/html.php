@@ -173,13 +173,26 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       }  
       $critArray['idVersionType'] = array_values($arrayType);        
     }
-    
     $table=SqlList::getListWithCrit($listType,$critArray,$column,$selection);
-    
+    /*Florent 
+     * Ticket 3868
+     */
+    if($col=='idActivity'or $col=='idTicket'){
+      foreach ($table as $idTable=>$val){
+        $table[$idTable]= '#'.$idTable.' - '.$val;
+      }
+    }
     if ($selection) {
       $refTable=substr($col,2);
-      if (substr($listType,-7)=='Version' and SqlElement::is_a($refTable, 'Version')) $refTable='Version';
-      $table[$selection]=SqlList::getFieldFromId($refTable, $selection,$column);
+      if (substr($listType,-7)=='Version' and SqlElement::is_a($refTable, 'Version')) $refTable='Version';  
+      /*Florent
+       * Ticket 3868
+      */
+      if($col=='idActivity'or $col=='idTicket'){
+        $table[$selection]='#'.$selection.' - '.SqlList::getFieldFromId($refTable, $selection,$column);
+      } else {
+        $table[$selection]=SqlList::getFieldFromId($refTable, $selection,$column);
+      }
     }
     if ($col=="idProject" or $col=="planning") { 
     	$wbsList=SqlList::getListWithCrit($listType,$critArray,'sortOrder',$selection);
@@ -214,7 +227,9 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       if(property_exists($objTmp, "idProject") && $obj && property_exists($obj, "idProject")){
         $objTmp->idProject=$obj->idProject;
       }
-      if(securityGetAccessRightYesNo('menu'.$val, $typeRight, $objTmp)=="NO" or !securityCheckDisplayMenu(null,$val))$arrayToDel[]=$key;
+      // Florent #2948	
+      $testval=($val=='DocumentVersion')?'Document':$val;
+      if(securityGetAccessRightYesNo('menu'.$testval, $typeRight, $objTmp)=="NO" or !securityCheckDisplayMenu(null,$testval))$arrayToDel[]=$key;
     }
     if ($col=='idLinkable' and $obj) {
     	foreach ($obj as $objFld=>$objVal) {
