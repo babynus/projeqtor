@@ -166,6 +166,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       $type = new Type();
       $componentVersionTypeDisplay = $type->getSqlElementsFromCriteria(array('lockUseOnlyForCC'=>'0','scope'=>'ComponentVersion'));
       $cpt=0;
+      $arrayType=array();
       foreach ($componentVersionTypeDisplay as $cvtd){     
         $arrayType[$cpt] = $cvtd->id;
         $cpt+=1;
