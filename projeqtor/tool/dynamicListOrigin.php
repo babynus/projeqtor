@@ -46,7 +46,20 @@ if ($originType) {
   $obj=new $refType($refId);
   $crit = array ( 'idle'=>'0', 'idProject'=>$obj->idProject);
 	$objList=new $originType();
-  $list=$objList->getSqlElementsFromCriteria($crit,false,null);
+	/*
+	 * Florent ticket #2948 
+	 */
+	if($originType=='DocumentVersion'){
+	  $listDoc=SqlList::getListWithCrit ('Document',$crit);
+	  $where='idDocument in '.transformListIntoInClause($listDoc);
+	  $list=$objList->getSqlElementsFromCriteria(null,false,$where);
+	}
+	else{
+	    $list=$objList->getSqlElementsFromCriteria($crit,false,null);
+	}
+	/*
+	 * Florent ticket #2948
+	*/
 } else {
 	$list=array();
 }

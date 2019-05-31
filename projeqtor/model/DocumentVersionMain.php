@@ -55,6 +55,23 @@ class DocumentVersionMain extends SqlElement {
   public $target;
   public $idle;
   
+  // Flo #2948
+  // Define the layout that will be used for lists
+  private static $_layout='
+    <th field="id" formatter="numericFormatter" width="4%"># ${id}</th>
+    <th field="name" width="8%">${name}</th>
+    <th field="version" width="6%">${version}</th>
+    <th field="revision" width="6%">${revision}</th>
+    <th field="fileSize" width="6%">${fileSize}</th>
+    <th field="versionDate" width="10%">${versionDate}</th>
+    <th field="nameAuthor" width="10%">${idAuthor}</th>
+    <th field="nameDocument" width="14%" >${idDocument}</th>
+    <th field="colorNameStatus" width="14%" formatter="colorNameFormatter">${idStatus}</th>
+    <th field="approved" width="6%" formatter="booleanFormatter">${approved}</th>
+    <th field="idle" width="6%" formatter="booleanFormatter">${idle}</th>
+   
+    ';
+  
   private static $_colCaptionTransposition = array('name'=>'nextDocumentVersion', 
       'fullName'=>'name');
   private static $_fieldsAttributes=array(
@@ -82,7 +99,14 @@ class DocumentVersionMain extends SqlElement {
 // ============================================================================**********
 // GET STATIC DATA FUNCTIONS
 // ============================================================================**********
-  
+  // Flo #2948
+  /** ==========================================================================
+   * Return the specific layout
+   * @return the layout
+   */
+  protected function getStaticLayout() {
+    return self::$_layout;
+  }
     /** ============================================================================
    * Return the specific colCaptionTransposition
    * @return the colCaptionTransposition
