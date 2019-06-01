@@ -1577,7 +1577,7 @@
 	      echo "<UID>" . htmlEncode($ass->id) . "</UID>" . $nl;
 	      echo "<TaskUID>" . $arrayTask[$ass->refType . '#' . $ass->refId]['id'] . "</TaskUID>" . $nl;
 	      echo "<ResourceUID>" . htmlEncode($ass->idResource) . "</ResourceUID>" . $nl;
-	      $pct=($ass->plannedWork)?round($ass->realWork/$ass->plannedWork*100,0):0;
+	      $pct=(floatval($ass->plannedWork))?round($ass->realWork/$ass->plannedWork*100,0):0;
 	      $pct=$task['pct'];
 	      echo "<PercentWorkComplete>".($pct)."</PercentWorkComplete>" . $nl;
 	      //echo "<ActualCost>0</ActualCost>" . $nl;
