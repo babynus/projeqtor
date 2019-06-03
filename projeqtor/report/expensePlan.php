@@ -84,7 +84,7 @@ if ($scope) {
 	$queryWhere2 .= $scopeWhere;
 }
 if ($idResource) {
-	$resWhere = " and idResource='" . $idResource . "' ";
+	$resWhere = " and exp.idResource='" . $idResource . "' ";
   $queryWhere1 .= $resWhere;
   $queryWhere2 .= $resWhere;
 }
