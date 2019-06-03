@@ -116,7 +116,7 @@ class SqlList {
     }
     $query .=')';
     if (trim($selectedValue)) {
-    	if ($selectedValue!='*') {
+    	if ($selectedValue!='*' and $selectedValue!='all' and intval($selectedValue) ) {
         $query .= " or " . $obj->getDatabaseColumnName('id') .'= ' . Sql::str($selectedValue) ;
     	}
     }
