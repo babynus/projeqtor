@@ -236,6 +236,10 @@ class UserMain extends SqlElement {
       self::$_fieldsAttributes["password"]="hidden";
     }
    
+    //gautier #4040
+    if ($this->id==getSessionUser()->id){
+      self::$_fieldsAttributes["password"]="hidden";
+    }
   }
   
   /** ============================================================================
