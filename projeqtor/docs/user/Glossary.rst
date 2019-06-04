@@ -1,5 +1,7 @@
 .. include:: ImageReplacement.txt
 
+.. _Glossary:
+
 Glossary
 --------
 
@@ -78,10 +80,7 @@ Glossary
     .. seealso:: GUI behavior
 
        * It is possible to define that result field is mandatory on done status.
-       * The element type screens allow to set this parameter to several elements. 
-       * More detail, see: :ref:`behavior-section`. 
-
-.. _wbs:
+       * The element type screens allow to set this parameter to several elements.
 
    WBS
 

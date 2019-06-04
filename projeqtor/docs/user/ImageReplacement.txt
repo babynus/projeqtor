@@ -43,8 +43,8 @@
 .. |iconSwitch| image:: images/smallButtonSwitch.png
    :alt: Button small button switch 
    
-.. |iconProject16| image:: images/iconProjet16.png
-   :alt: Projet icon 
+.. |iconProject16| image:: images/iconProject16.png
+   :alt: Icon Project
 
 .. |iconReplan16| image:: images/iconReplan16.png
    :alt: Replanning schedule icon
@@ -208,10 +208,8 @@
 .. |plusButton| image:: images/plusButton.png
    :alt: plus button
 
-
 .. |calculatePlanning| image:: images/plan.png
    :alt: calculate planning button
-
 
 .. |storePlannedDates| image:: images/buttonStorePlannedDates.png
    :alt: store planned dates button
@@ -291,8 +289,12 @@
    :scale: 30
 
 .. |ten| image:: images/ten.png
-   :alt: Nine
+   :alt: Ten
    :scale: 30
+   
+.. |ButtonADD| image:: images/ButtonADD.png
+   :alt: Add
+   :scale: 30  
 
 .. |A| image:: images/A.png
    :alt: A letter

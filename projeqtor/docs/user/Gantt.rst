@@ -19,16 +19,16 @@ Gantt charts
 Planning
 ========
 
-This screen allows to define project planning and follow progress.
+This screen allows to define projects planning and follow progress.
+
+.. note:: This screen offers many features that will be described in the next sections.
 
 .. figure:: /images/GUI/PLANNING1.png 
    :alt: Gantt (Planning)
    :align: center
 
    Gantt (Planning)
-   
-.. note:: This screen offers many features that will be described in the next sections.
-   
+
 the Gantt Chart is composed of two main areas:
 
 * :ref:`task-list-area` |one| 
@@ -38,7 +38,7 @@ the Gantt Chart is composed of two main areas:
 
 .. rubric:: |three| Activity planning calculation
 
-* Click on  |calculatePlanning| to start the activity planning calculation.  (See: :ref:`project-planning`)
+* Click on |calculatePlanning| to start the activity planning calculation.  (See: :ref:`project-planning`)
 
 .. raw:: latex
 
@@ -46,18 +46,18 @@ the Gantt Chart is composed of two main areas:
 
 .. note::
    * Any changes to an assignment (rate, resource name, number, dates, etc.) made from an activity are not displayed on the planning screen with the new recalculated mode. 
-   * Click |calculatePlanning|to start the new planning calculation
+   * Click |calculatePlanning| to start the new planning calculation
    * The automatic schedule calculation only works when you are in the Gantt schedule view and you are editing an item from this screen.
 
 
 .. rubric:: |four| Buttons
 
-* Click on |iconEnableCalendar| to validate planning.
-* Click on |storePlannedDates| to save baseline of planning. (See: :ref:`project-planning`)
+* Click on |iconEnableCalendar| to validate planning. (see: :ref:`Planning validation<planning-validation>`)
+* Click on |storePlannedDates| to save baseline of planning. (See: :ref:`Save Baseline<save-baseline>`)
 * Click on |buttonIconPrint| to get a printable version of the Gantt chart.
 * Click on |buttonIconPdf| to export Gantt chart in PDF format. (See: :ref:`export-Gantt-PDF`) 
 * Click on |msProject| to export planning to MS-Project xml format.
-* Click on |createNewItem| to create a new item. (See: :ref:`project-planning`)
+* Click on |createNewItem| to create a new item. (See: :ref:`Add a new planning element<add-new-planningelement>`)
 * Click on |buttonIconFilter| to filter the list. see the picture below. 
 * Click on |buttonIconColumn| to define the columns of progress data that will be displayed. (See: :ref:`progress-data-view`)
 
@@ -70,12 +70,14 @@ the Gantt Chart is composed of two main areas:
 
 .. note:: 
   * Filter the schedule: possibility to filter the activities to display on the Gantt Planning view
-  * The "parents" of the selected activities are also displayed to maintain the :ref:`wbs` structure
+  * The "parents" of the selected activities are also displayed to maintain the :term:`WBS` structure
     
 
 .. warning:: Check the box **"save date"** to keep registered displayed date of the overview planning, otherwise dates removing to general mode, after navigating away from this page.  
 
-.. rubric:: |five| Show Baseline
+.. _display-baseline:
+
+.. rubric:: |five| Display Baseline
 
 * The baseline is a record of the planning state at a time T.
 * This option displays this line at the top and / or bottom of your current Gantt chart for comparison.. 
@@ -92,6 +94,15 @@ The critical path is used to determine the total duration of your project.
 The critical path of your project is the longest sequence of tasks that must be completed for the project to be completed by the due date.
 
 * click on the **"critical path"** check box to calculate and display the red path in the Gantt schedule.
+
+.. warning:: Project tasks that are not traversed by the critical path are elements that will not affect the duration of the project and, 
+   even if modified, will not result in a modification of this duration on the entire project 
+
+.. figure:: /images/GUI/Gantt_CriticalPath.png
+   :alt: Critical Path
+   :align: center
+   
+   the red net represents the critical path of the project. 
 
 .. raw:: latex
 
@@ -113,6 +124,15 @@ The task list area is composed with:
 
    Task list & progress data view
 
+.. rubric:: |three| Area splitter
+
+The splitter is used to show or hide the progress data view.
+
+.. note:: 
+
+   * The progress data view is hidden by default.
+   * Move the splitter on your right to display them.
+
 
 
 .. _task-list:
@@ -120,7 +140,7 @@ The task list area is composed with:
 Task List
 _________
 
-The task list displays the planning elements in hierarchical form by dividing the WBS. (See: :ref:`wbs`).
+The task list displays the planning elements in hierarchical form by dividing the :term:`WBS`.
 
 Tasks are regrouped by projects and activities.
 
@@ -145,7 +165,7 @@ show or hide project activities
 
 A specific icon appears to the left of each item type for faster identification.
 
-* |iconProject16| Projet Icon
+* |iconProject16| Project
 * |iconReplan16| project to recalculate (the Gant diagramm to display with the latest settings) 
 * |iconActivity16| Activity
 * |iconMilestone16| Milestone
@@ -161,7 +181,7 @@ Other items can be displayed in the :ref:`gantt-planning` (action, decision, del
 
 .. rubric:: |four| Show WBS
 
-* Click on "Show WBS" to display the WBS number before the names. (see: :ref:`wbs`)
+* Click on "Show WBS" to display the :term:`WBS` number before the names.
 
 .. figure:: /images/GUI/TaskWBS-With.png
    :alt: Task list with WBS display
@@ -240,21 +260,6 @@ For each planning element, the progress data are displayed at them right.
    :align: center
 
    Popup list - Select columns
-   
- 
-.. rubric:: |three| Area splitter
-
-The splitter is used to show or hide the progress data view.
-
-.. note::
-
-   * The progress data view is hidden by default.
-   * Move the splitter on your right to display them.
-
-.. raw:: latex
-
-    \newpage
-
 
 .. _gantt-chart-view:
 
@@ -288,6 +293,8 @@ For each planning element, a bar is associated with it
 .. raw:: latex
 
     \newpage
+
+.. _gantt-bars:
 
 .. rubric:: |four| Gantt bars
 
@@ -339,7 +346,7 @@ For each planning element, a bar is associated with it
 .. describe:: Condition
    the remaining work on the task can't be planned.
    
-.. note:: example 
+.. note:: **example**
 
    When a resource is assigned to a task over a defined period of time, and the task requests a higher workload than the resource can provide,
    or if the resource is unavailable for the assigned task then the bar becomes purple.
@@ -499,11 +506,9 @@ Real end date > Validated end date
 .. _project-planning:
 
 Project planning
-----------------
+================
 
 Project planning and activity planning calculation can be done in the Gantt.
-
-
 
 .. figure:: /images/GUI/Gantt_ProjectPlanning.png 
    :alt: Project planning
@@ -511,6 +516,7 @@ Project planning and activity planning calculation can be done in the Gantt.
 
    Project planning 
 
+.. _add-new-planningelement:
 .. rubric:: |one| Add a new planning element
 
 * Allows to create a new planning element.
@@ -521,85 +527,111 @@ Project planning and activity planning calculation can be done in the Gantt.
    :alt: Popup menu - Create a new item
    :align: center
 
-
    Popup menu - Create a new item
 
-.. note:: Planning elements management
+.. note:: **Planning elements management**
   
+   * Click on an element, the detail window will be displayed.
    * Planning elements can be managed with their own dedicated screen.
    * Test session and Meeting elements can be added to the planning with their own dedicated screen.  
 
-.. rubric:: 2 - Reorder planning elements
+.. rubric:: |two| Reorder planning elements
 
 * The selector |buttonIconDrag| allows to reorder the planning elements.
- Ability to move multiple tasks at one time from one location to another using the key control to select the lines and then dragging and dropping them.
+
+.. note:: Important ! 
+
+   Ability to move multiple tasks at one time from one location to another using the key control to select the lines and then dragging and dropping them.
 
 
-.. rubric:: 3 - Indenting element
+.. rubric:: |three| Hierarchical level
 
-* Click on an element, the detail window will be displayed.
-* Two new buttons are displayed in the header, they allow to increase or decrease indent of an element.
+show or hide project activities
 
- .. compound:: **Increase indent**
-
-    * The element will become the child of the previous element.
-
- .. compound:: **Decrease indent**
-
-    * The element will be moved at the same level than the previous element.
+* Click on |minusButton| or |plusButton| to enlarge or reduce all groups of projects at the same time.
 
 
-.. rubric:: 4 - Dependency links
+.. rubric:: |four| Dependency links
 
-* To create a dependency link, clicked and hold on a graphic element, the mouse cursor changes to |dndLink|.
-* Move mouse cursor on graphic element that will be linked and release the button.
+* To create a dependency, click on a graphic element and keep it clicked, the mouse cursor changes to |dndLink|.
+* Move the mouse cursor over the graphic element that will be linked and release the button.
 
- .. note:: Dependency links management
+
+.. note:: **Dependency links management**
   
-    * Dependency links can be managed in element screen. 
+    * In addition to being directly clickable in the Gantt schedule, you can manage dependencies in the detail screen of each element in the predecessor and successor section.
     * See: :ref:`predSuces-element-section`.
+    
+    .. figure:: /images/GUI/Gantt_SectionDependencies.png
+      :alt: predecessor and successor section.
+      
+      click on the Add button |ButtonADD| to add or remove a dependency on the selected item
+    
+    .. figure:: /images/GUI/Gantt_SectionDependencies_ADD.png
+      :alt: Pop up dependency management   
 
-
-.. rubric:: 5 - Activity planning calculation
+.. rubric:: |five| Activity planning calculation
 
 * Click on |calculatePlanning| to start the activity planning calculation.
 
  .. compound:: **Automatic run plan**
 
     * Check the box to activate automatic calculation on each change.
-
-.. raw:: latex
-
-    \newpage
     
+    .. Warning:: Only works on the Gantt Planning view. If the modification of an element is carried out on the dedicated screen of the element, then it is necessary to click again on BUTTON to restart the computation
 
-.. note::
-    
-   * All modifications about assignement (rate, name or numbers of resources, dates...) done are not displayed on the new planning screen until having, for this purpose, activited the planning calculation, either in an automatic run plan or not.
-     On the contrary, the screen planning will not change even if modifications have been loaded yet.
+    .. note:: All modifications about assignement (rate, name or numbers of resources, dates...) done are not displayed on the new planning screen until having, for this purpose, activited the planning calculation, either in an automatic run plan or not.
+      On the contrary, the screen planning will not change even if modifications have been loaded yet.
 
- .. compound:: **Automatic calculation **
 
-  *  Differential calculation = calculation of projects that require a recalculation.
+ .. compound:: **Automatic calculation**
+
+  * Differential calculation = calculation of projects that require a recalculation.
   * Complete calculation = calculation of all projects
 
-The calculations are programmed according to a frequency of CRON type (every minute, every hour, at a given hour every day, at a given time on a given week day, ...)
+   The calculations are programmed according to a frequency of CRON type (every minute, every hour, at a given hour every day, at a given time on a given week day, ...)
 
-.. rubric:: 6 - Store planned dates
+.. _planning-validation:
 
-* Allows to store planned dates into requested and validated dates.
-* In other words, this feature allows to set baseline dates and preliminary dates from calculated planning.
+.. rubric:: |six| Planning validation
 
- .. compound:: **Action available**
+* allows to modify the dates validated by the planned dates.
+* This feature allows you to set all reference dates from the calculated schedule.
 
-    * **Always:** Always overwrite existing values.
-    * **If empty:** Store only if the value is empty.
-    * **Never:** Values are not stored.
-  
+.. compound:: **Action available**
+
+    * **Always:** will overwrite existing values.
+    * **If empty:** will not overwrite existing values.  
 
 .. figure:: /images/GUI/BOX_StorePlannedDates.png
    :alt: Dialog box - Store planned dates
    :align: center
+
+.. _save-baseline:
+
+.. rubric:: |seven| Save baseline
+
+* The baseline is a record of the planning state at a time T.
+* See: :ref:`display-baseline`
+
+.. warning:: Your can recording only one baseline every day
+
+.. figure:: /images/GUI/Gantt_PopupBaseline.png
+   :alt: Record baseline
+   :align: center
+   :scale: 90%
+
+.. rubric:: |eight| Increase and decrease indent
+
+.. figure:: /images/Gantt_ButtonIndent.png
+
+.. compound:: **Increase indent**
+
+* The element will become the child of the previous element.
+
+.. compound:: **Decrease indent**
+
+* The element will be moved at the same level than the previous element.
 
 .. raw:: latex
 
@@ -611,7 +643,9 @@ The calculations are programmed according to a frequency of CRON type (every min
 Planning global
 ===============
 
-The global planning allows to visualize any type of object (project, activity, milestones, risk, meeting ...)
+.. figure:: /images/GUI/Gantt_PlanningGlobal.png
+
+The global planning allows to create and visualize any type of element (project, activity, milestones, risk, meeting, action ...)
 
 * Add and Show any new planning element on Gantt chart
 * The created item is added in the Gantt and detail window is opened.
@@ -629,9 +663,9 @@ The global planning allows to visualize any type of object (project, activity, m
 Projects portfolio
 ==================
 
-This screen displays Gantt chart from projects portfolio point of view.
+This screen displays only the projects on the diagram. The activities and other elements that make up the schedule are hidden.
 
-It displays projects synthesis and project's dependencies, without project activities.
+It displays summary and project dependencies only.
 
 .. note::
 
@@ -639,16 +673,17 @@ It displays projects synthesis and project's dependencies, without project activ
    * All others behaviors are similar to :ref:`gantt-planning` screen.
 
 
-.. figure:: /images/GUI/screenshot169.png 
+.. figure:: /images/GUI/Gantt_PortfolioPlanning.png 
    :alt: Gantt (Projects portfolio)
    :align: center
 
    Gantt (Projects portfolio) 
 
-.. rubric:: 1 - Show milestones
+.. rubric:: Show milestones
 
-* It is possible to define whether milestones are displayed or not.
-* If they are displayed, then It is possible to define the type of milestone to be displayed or displayed all. 
+* Ability to display milestones or not. 
+* If they are displayed, it is possible to define the type of milestone to display or to display them all. 
+* All milestones are available: deliverable, incoming, key date...
 
 
 
@@ -661,6 +696,12 @@ It displays projects synthesis and project's dependencies, without project activ
 Resource Planning
 =================
 
+.. figure:: /images/GUI/Gantt_ResourcesPlanning_Explanation.png 
+   :alt: Gantt (Resource planning) 
+   :align: center
+
+   Gantt (Resource planning)  
+    
 This screen displays Gantt chart from the resources point of view.
 
 Assigned tasks are grouped under resource level.
@@ -671,12 +712,17 @@ On resource planning, group periodic meetings is under its parent
 
 * For activities, the Gantt bar is split in two: 
 
-  * Real work in grey.
-  * Reassessed work in green.
+.. figure:: /images/GUI/Gantt_ResourcePlanning_WorkBar.png
+   :alt: Work Bar
+   :align: center
 
- .. hint::
+* Real work in grey.
+* Left work in green or in red. (see: :ref:`Gantt Bars<gantt-bars>`)
+* the gray bar in the middle graphically represents the actual percentage progress relative to the total duration of the activity 
 
-    * This makes appear some planning gap between started work and reassessed work.
+.. note:: 
+
+   This makes appear some planning gap between started work and reassessed work.
 
 .. rubric:: Dependencies behavior
 
@@ -688,33 +734,35 @@ On resource planning, group periodic meetings is under its parent
    * This section describes specific behavior for this screen.
    * All others behaviors are similar to :ref:`gantt-planning` screen.
 
+.. rubric:: |one| Show project level  
 
-.. figure:: /images/GUI/screenshot171.png 
-   :alt: Gantt (Resource planning) 
+* Tasks are grouped by project.
+* Click "View Project Level" to view the projects on which resource activities depend.
+
+Below the two views with and without "View Project Level" 
+
+.. figure:: /images/GUI/Gantt_ResourcesPlanning_withProjectLevel.png 
+   :alt: view with project levels (Resource planning) 
+   :align: left
+   
+.. figure:: /images/GUI/Gantt_ResourcesPlanning_withoutProjectLevel.png 
+   :alt: view without project levels (Resource planning) 
    :align: center
 
-   Gantt (Resource planning)
+.. rubric:: |two| Show left work 
 
+* The remaining work can be displayed to the right of the Gantt bar..
+* click "Show left work" to display or not the duration of the rest to be done. .
 
-.. rubric:: |one| - Show project level  
-
-* Tasks can be grouped by project.
-* Click on “Show project level” to display project level.
-
-.. rubric:: |added| - show activities without work
-* Ability to display assigned activities with zero work 
-
-
-.. rubric:: |two| - Show left work 
-
-* Left work can be displayed at right from Gantt bar.
-* Click on “Show left work” to display left work for each item.
-
-.. rubric:: |three| - Limit display to selected ressource or team 
+.. rubric:: |three| Limit display to selected ressource or team 
 
 * Click and select one ressource to display only his data.
 * Click and select one team to display only data of resources of this team.
 
+.. rubric:: |four| show activities without work
+
+* Ability to display assigned activities with zero work 
+* The names of the activities appear in the task area but no gantt bar will be displayed
 
 
 
@@ -736,10 +784,11 @@ Export contains all details and links between tasks.
    :alt: Dialog box - Export planning to PDF
    :align: center
 
+   Export planning to PDF
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Fields - Export planning to PDF dialog box
+.. list-table:: **Fields - Export planning to PDF dialog box**
    :widths: 20, 80
    :header-rows: 1
 
@@ -747,6 +796,8 @@ Export contains all details and links between tasks.
      - Description
    * - Orientation
      - Page orientation.
+   * - Format
+     - Page format.  
    * - Zoom
      - Allows to fit planning on page.
    * - Repeat headers
@@ -754,20 +805,20 @@ Export contains all details and links between tasks.
 
 .. note:: Technical points
 
-   * This new feature will execute export on client side, in your browser.
-   * Thus the server will not be *heavy loaded* like *standard* PDF export does.
+   * This feature will execute export on client side, in your browser. Thus the server will not be *heavy loaded* like *standard* PDF export does.
    * It is highly faster than *standard* PDF export.
-   * Therefore, this feature is hightly dependant to browser compatibility.
+
+.. warning:: This feature is hightly dependant to browser compatibility
    
 .. note:: Browser compatibility
 
    * This new feature is technically complex and it is not compatible with all browsers.
-   * Compatible with IE11, Firefox, Edge and Chrome.
+   * Compatible with the latest versions of IE (v11), Firefox, Edge and Chrome.
    * Else, the old export feature will be used.
 
-.. note:: Forced feature activation (deactivation)
+.. seealso:: Forced feature activation (deactivation)
 
    * To enable this feature for all browsers, add the parameter **$pdfPlanningBeta='true';** in parameters.php file.
-   * To disable if for all brosers (including Chrome), add the parameter **$pdfPlanningBeta='false';**
+   * To disable if for all browsers (including Chrome), add the parameter **$pdfPlanningBeta='false';**
    * Default (when **$pdfPlanningBeta** parameter is not set) is *enabled with Chrome, disabled with other browsers* 
 
