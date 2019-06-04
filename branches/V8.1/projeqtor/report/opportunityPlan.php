@@ -81,10 +81,10 @@ foreach ($lst as $opportunity) {
   $done=($opportunity->idle)?'Done':'';
   echo '<td class="largeReportData' . $done . '" style="width:2%;">' . '#' . htmlEncode($opportunity->id) . '</td>';
   echo '<td class="largeReportData' . $done . '" style="width:15%;">' . htmlEncode($opportunity->name); 
-  if ($opportunity->description and $opportunity->name!=$opportunity->description) { echo ':<br/><i>' . htmlEncode($opportunity->description).'</i>'; }
+  if ($opportunity->description and $opportunity->name!=$opportunity->description) { echo ':<br/><i>' . ($opportunity->description).'</i>'; }
   echo '</td>';
-  echo '<td class="largeReportData' . $done . '" style="width:10%;">' . htmlEncode($opportunity->cause) . '</td>';
-  echo '<td class="largeReportData' . $done . '" style="width:15%;">' . htmlEncode($opportunity->impact) . '</td>';  
+  echo '<td class="largeReportData' . $done . '" style="width:10%;">' . ($opportunity->cause) . '</td>';
+  echo '<td class="largeReportData' . $done . '" style="width:15%;">' . ($opportunity->impact) . '</td>';  
   echo '<td align="center" class="largeReportData' . $done . '" style="width:5%;">' . formatColor('Severity', $opportunity->idSeverity) . '</td>';
   echo '<td align="center" class="largeReportData' . $done . '" style="width:5%;">' . formatColor('Likelihood', $opportunity->idLikelihood) . '</td>';
   echo '<td align="center" class="largeReportData' . $done . '" style="width:5%;">' . formatColor('Criticality', $opportunity->idCriticality) . '</td>';

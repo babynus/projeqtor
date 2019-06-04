@@ -880,6 +880,95 @@ public function saveOrganizationBudgetElement($idle=null,$idleDateTime=null,$nam
    * @param boolean $updateName : If true, Update the BudgetElement's name
    */
   public function updateSynthesis($updateIdle=true, $updateName=true) {
+debugLog("updateSynthesis($updateIdle, $updateName) for Organization #$this->id - $this->name");
+    if(Parameter::getGlobalParameter('useOrganizationBudgetElement')!="YES") {return;}
+debugLog("   updateSynthesis for #$this->id STEP 1");
+    // Retrieve organization's projects (idle=0 and 1)
+    $prjOrgaList = $this->getRecursiveOrganizationProjects(true,false); /** TODO : Improve this function */
+debugLog($prjOrgaList);
+debugLog("   updateSynthesis for #$this->id STEP 2");
+    // Retrieve each BudgetElement of this organization
+    $budgetElement = new BudgetElement();
+    // No update for closed BudgetElement
+    $scritBe = array('idle'=>'0', 'refType'=>'Organization', 'refId'=>$this->id);
+    $budgetElementList=$budgetElement->getSqlElementsFromCriteria($scritBe,FALSE,NULL,NULL,TRUE,TRUE,NULL);
+    foreach($budgetElementList as $bE) {
+      // Update the idle et idleDateTime of BudgetElement
+      if ($updateIdle) {
+        $bE->idle = $this->idle;
+        $bE->idleDateTime = $this->idleDateTime;
+      }
+      // Update the BudgetElement's name
+      if ($updateName) {
+        $bE->refName = $this->name;
+      }
+      $periodValue = $bE->year;
+      $pe=new ProjectPlanningElement();
+      $whereClause='(refId in '.transformListIntoInClause($prjOrgaList).' and refType=\'Project\') and ';
+      $whereClause .= "( ".Sql::getYearFunction('coalesce(validatedStartDate,realStartDate,plannedStartDate,initialStartDate)')."=$periodValue )";
+      $arrayFields=array('validatedWork','assignedWork','realWork','leftWork','plannedWork',
+          'validatedCost','assignedCost','realCost','leftCost','plannedCost',
+          'expenseValidatedAmount','expenseAssignedAmount','expenseRealAmount','expenseLeftAmount','expensePlannedAmount',
+          'reserveAmount',
+          'totalValidatedCost','totalAssignedCost','totalRealCost','totalLeftCost','totalPlannedCost'
+      );
+debugLog("   updateSynthesis for #$this->id STEP 3");
+      $peSum = $pe->sumSqlElementsFromCriteria($arrayFields, null,$whereClause);
+debugLog("   updateSynthesis for #$this->id STEP 4");
+      $bE->validatedWork=$peSum['sumvalidatedwork'];
+      $bE->assignedWork=$peSum['sumassignedwork'];
+      $bE->realWork=$peSum['sumrealwork'];
+      $bE->leftWork=$peSum['sumleftwork'];
+      $bE->plannedWork=$peSum['sumplannedwork'];
+      $bE->validatedCost=$peSum['sumvalidatedcost'];
+      $bE->assignedCost=$peSum['sumassignedcost'];
+      $bE->realCost=$peSum['sumrealcost'];
+      $bE->leftCost=$peSum['sumleftcost'];
+      $bE->plannedCost=$peSum['sumplannedcost'];
+      $bE->expenseValidatedAmount=$peSum['sumexpensevalidatedamount'];
+      $bE->expenseAssignedAmount=$peSum['sumexpenseassignedamount'];
+      $bE->expenseRealAmount=$peSum['sumexpenserealamount'];
+      $bE->expenseLeftAmount=$peSum['sumexpenseleftamount'];
+      $bE->expensePlannedAmount=$peSum['sumexpenseplannedamount'];
+      $bE->reserveAmount=$peSum['sumreserveamount'];
+      $bE->totalValidatedCost=$peSum['sumtotalvalidatedcost'];
+      $bE->totalAssignedCost=$peSum['sumtotalassignedcost'];
+      $bE->totalRealCost=$peSum['sumtotalrealcost'];
+      $bE->totalLeftCost=$peSum['sumtotalleftcost'];
+      $bE->totalPlannedCost=$peSum['sumtotalplannedcost'];
+      if(1 or $periodValue<date('Y')) {
+        // For Real => based on Work
+        $work = new Work();
+        $whereClause = 'year=\''.$periodValue.'\' and idProject in '.transformListIntoInClause($prjOrgaList);
+        $workSum = $work->sumSqlElementsFromCriteria(array('work','cost'),null,$whereClause);
+debugLog("   updateSynthesis for #$this->id STEP 5");        
+        $bE->realWork=$workSum['sumwork'];
+        $bE->realCost=$workSum['sumcost'];
+        $bE->totalRealCost=$workSum['sumcost'];
+        // For Expense => based on Expense (real - planned - left=if(planned-real>0 THEN planned-real ELSE 0) - Assigned=planned
+        $expense = new Expense();
+        $whereClause = 'year=\''.$periodValue.'\' and idProject in '.transformListIntoInClause($prjOrgaList);
+        $expenseSum=$expense->sumSqlElementsFromCriteria(array('plannedAmount','realAmount'), null, $whereClause);
+debugLog("   updateSynthesis for #$this->id STEP 6");        
+        //$bE->expenseAssignedAmount=$expenseSum['sumplannedamount']; // Keep assigne as sum for project
+        $bE->expenseRealAmount=$expenseSum['sumrealamount'];
+        $bE->expensePlannedAmount=$expenseSum['sumplannedamount'];
+        $expenseLeftSum=$expense->sumSqlElementsFromCriteria(array('plannedAmount'), null, $whereClause.' and realAmount is null');
+        $bE->expenseLeftAmount=$expenseLeftSum['sumplannedamount'];
+      }
+      $bE->save();
+debugLog("   updateSynthesis for #$this->id STEP 7");
+    }
+debugLog("   updateSynthesis for #$this->id STEP 8");
+    // Repeat for parent organization
+    if ($this->idOrganization and trim($this->idOrganization)!='') {
+      $orga = new Organization($this->idOrganization);
+      // Don't update idle or name for the parent organizations
+      $orga->updateSynthesis(false, false);
+    }
+debugLog("   updateSynthesis for #$this->id STEP 9");
+  }
+  public function updateSynthesisOld($updateIdle=true, $updateName=true) {
 // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
     if(Parameter::getGlobalParameter('useOrganizationBudgetElement')!="YES") {return;}
 // END ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
@@ -1482,6 +1571,9 @@ public function saveOrganizationBudgetElement($idle=null,$idleDateTime=null,$nam
    */
     public function getRecursiveOrganizationProjects($limitToActiveOrganizations=false,$limitToActiveProjects=true) {  
 
+    $limitToActiveOrganizations=($limitToActiveOrganizations)?1:0;
+    $limitToActiveProjects=($limitToActiveProjects)?1:0;
+    
     if ($limitToActiveOrganizations and $this->idle === 0) {
         return array();
     }
