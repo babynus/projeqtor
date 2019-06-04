@@ -15,4 +15,5 @@ UPDATE `${prefix}history` set colName='idEventForMail' where colName='idEvent';
 -- /Flo
 INSERT INTO `${prefix}originable`( `name`, `idle`) VALUES ('DocumentVersion', 0);
 
-
+ALTER TABLE `${prefix}message` ADD COLUMN `startDate` datetime DEFAULT NULL,
+ADD COLUMN `endDate` datetime DEFAULT NULL;
