@@ -183,13 +183,18 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
   <div class="loginMessageContainer">
   	<?php 
   	$cpt=0;
-  	foreach ($msgList as $msg) { 
+  	foreach ($msgList as $msg) {
+     #Florent ticket 4030
+     $startDate=$msg->startDate;
+     $endDate=$msg->endDate;
+     $today=date('Y-m-d H:i:s');
+     if( $startDate <= $today && $endDate >= $today){ 
       $cpt++;?>  
     <div class="loginMessage" id="loginMessage_<?php echo $cpt;?>">
     <div class="loginMessageTitle" style="color:<?php echo $msgTypeList[$msg->idMessageType];?>;"><?php echo htmlEncode($msg->name);?></div>
     <br/><?php echo $msg->description;?>
     </div>
-    <?php }?>
+    <?php }}?>
   </div>
   <table align="center" width="100%" height="100%" class="loginBackground">
     <tr height="100%">
