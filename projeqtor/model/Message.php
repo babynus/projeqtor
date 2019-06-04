@@ -37,8 +37,8 @@ class Message extends SqlElement {
   public $idMessageType;
   
   //Florent  ticket #4030
-  //public $startDate;
-  //public $endDate;
+  public $startDate;
+  public $endDate;
   
   
   public $description;
@@ -56,8 +56,8 @@ class Message extends SqlElement {
     <th field="nameProject" width="10%">${idProject}</th>
     <th field="nameAffectable" formatter="thumbName22" width="15%">${idUser}</th>
     <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
-    '/*<th field="startDate" width="10%" formatter="dateFormatter" >${startDate}</th>
-    <th field="endDate" width="10%" formatter="dateFormatter" >${endDate}</th>*/
+    <th field="startDate" width="10%" formatter="dateFormatter" >${startDate}</th>
+    <th field="endDate" width="10%" formatter="dateFormatter" >${endDate}</th>'
     ;
   
   private static $_colCaptionTransposition = array('name'=> 'title', 'description'=>'message','idAffectable'=>'idUser');
@@ -83,6 +83,63 @@ class Message extends SqlElement {
   function __destruct() {
     parent::__destruct();
   }
+// ============================================================================**********
+// GET VALIDATION SCRIPT
+// ============================================================================**********
+
+/** ==========================================================================
+ * Return the validation sript for some fields
+ * @return the validation javascript (for dojo frameword)
+ */
+  // Florent ticket #4030
+public function getValidationScript($colName) {
+   $colScript = parent::getValidationScript($colName);
+  if ($colName=="startDate" ) {
+    $colScript .= '<script type="dojo/connect" event="onChange" >';
+    $colScript .="var end=dijit.byId('endDate');";
+    $colScript .="var start=dijit.byId('startDate').get('value');";
+    $colScript .="end.set('dropDownDefaultValue',this.value);";
+    $colScript .="end.constraints.min=start;"; 
+    $colScript .= 'formChanged();';
+    $colScript .= '</script>';
+  }else if ($colName=="endDate"  ) {
+    $colScript .= '<script type="dojo/connect" event="onChange" >';
+    $colScript .="var end=dijit.byId('endDate').get('value');";
+    $colScript .="var start=dijit.byId('startDate');";
+    $colScript .="start.set('dropDownDefaultValue',this.value);";
+    $colScript .="start.constraints.max=end;";
+    $colScript .= 'formChanged();';
+    $colScript .= '</script>';
+  }else if ($colName=="startDateBis" ) {
+    $colScript .= '<script type="dojo/connect" event="onChange" >';
+    $colScript .="var start =dojo.byId('startDate').value;";
+    $colScript .="var end =dojo.byId('endDate').value;";
+    $colScript .= "console.log(start);";
+    $colScript .= "console.log(end);";
+    $colScript .= "if (start == end) {";
+    $colScript .="      var endBis=dijit.byId('endDateBis');";
+    $colScript .="      var startBis=dijit.byId('startDateBis').get('value');";
+    $colScript .= "     endBis.set('dropDownDefaultValue',this.value);";
+    $colScript .= "     endBis.constraints.min=startBis;";
+    $colScript .= "}";
+    $colScript .= 'formChanged();';
+    $colScript .= '</script>';
+  }else if ($colName=="endDateBis" ) {
+    $colScript .= '<script type="dojo/connect" event="onChange" >';
+    $colScript .="var start =dojo.byId('startDate').value;";
+    $colScript .="var end =dojo.byId('endDate').value;";
+    $colScript .= "if (start == end) {";
+    $colScript .="    var endBis=dijit.byId('endDateBis').get('value');";
+    $colScript .="    var startBis=dijit.byId('startDateBis');";
+    $colScript .="    startBis.set('dropDownDefaultValue',this.value);";
+    $colScript .="    startBis.constraints.max=endBis;";
+    $colScript .= "}";
+    $colScript .= 'formChanged();';
+    $colScript .= '</script>';
+  }
+  
+  return $colScript;
+}
 
 // ============================================================================**********
 // GET STATIC DATA FUNCTIONS

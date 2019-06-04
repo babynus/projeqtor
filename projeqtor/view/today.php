@@ -83,15 +83,25 @@ function showMessages() {
     $cpt=0;
     echo '<table align="center" style="width:100%">';
     foreach ($listMsg as $msg) {
-      $cpt++;
-      if ($cpt>$cptMax) {
-        echo '<tr><td colspan="2" class="messageData">'.i18n('limitedDisplay', array($cptMax)).'</td></tr>';
-        break;
+      #Florent ticket 4030
+      $startDate=$msg->startDate;
+      $endDate=$msg->endDate;
+      $today=date('Y-m-d H:i:s');
+      if( $startDate <= $today && $endDate >= $today){
+          $cpt++;
+          if ($cpt>$cptMax) {
+            echo '<tr><td colspan="2" class="messageData">'.i18n('limitedDisplay', array($cptMax)).'</td></tr>';
+            break;
+          }
+          $type=new MessageType($msg->idMessageType);
+          echo '<tr><td class="messageHeader" style="color:'.htmlEncode($type->color).';">'.htmlEncode($msg->name).'</td></tr>';
+          echo '<tr><td class="messageData" >'.htmlEncode($msg->description, 'formatted').'</td></tr>';
+          }
+        else{
+          
+        } 
       }
-      $type=new MessageType($msg->idMessageType);
-      echo '<tr><td class="messageHeader" style="color:'.htmlEncode($type->color).';">'.htmlEncode($msg->name).'</td></tr>';
-      echo '<tr><td class="messageData" >'.htmlEncode($msg->description, 'formatted').'</td></tr>';
-    }
+     
     echo '</table>';
   }
 }
