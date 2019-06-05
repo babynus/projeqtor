@@ -395,7 +395,6 @@ String.prototype.toUpperCaseWithoutAccent = function(){
 function resetFilter(){
  var grid = dijit.byId("objectGrid");
  var notDef;
-console.log(dijit.byId("listFilterFilter"));
  if (dijit.byId("listFilterFilter").iconClass == "iconActiveFilter"){
    selectStoredFilter('0','directFilterList',notDef,notDef);
   }    
