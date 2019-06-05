@@ -5258,7 +5258,7 @@ abstract class SqlElement {
     
     // password
     $arrayFrom [] = '${password}';
-    $arrayTo [] = ($objectClass == 'User') ? Parameter::getGlobalParameter ( 'paramDefaultPassword' ) : '';
+    $arrayTo [] = ($objectClass=='User' && $this->crypto==null)?$this->password:'';
     
     // admin mail
     $arrayFrom [] = '${adminMail}';
