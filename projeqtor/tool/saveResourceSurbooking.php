@@ -32,10 +32,7 @@ require_once "../tool/projeqtor.php";
 scriptLog('   ->/tool/saveResourceCapacity.php');
 
 $idResource= RequestHandler::getId('idResource');
-
 $resourceTest = new Resource($idResource);
-$lol = $resourceTest->getSurbookingCapacity('2019-06-03');
-debugLog($lol);
 $capacity = RequestHandler::getValue('resourceSurbooking');
 $start = RequestHandler::getValue('resourceSurbookingStartDate');
 $end = RequestHandler::getValue('resourceSurbookingEndDate');
