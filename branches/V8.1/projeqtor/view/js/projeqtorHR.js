@@ -1714,7 +1714,7 @@ function leaveCalendarDisplay(){
                     
                     //can't create a leave if it's a dayOff
                     for (var dayOff in daysOffCalendarData){
-                        if(dayOff.startTime.getTime()===start.getTime()){
+                        if(dayOff && dayOff.startTime && dayOff.startTime.getTime()===start.getTime()){
                             return;
                         }
                     }
