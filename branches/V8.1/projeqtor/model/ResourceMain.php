@@ -75,6 +75,8 @@ class ResourceMain extends SqlElement {
   public $_spe_affectationResourceTeamResource;
   public $_sec_resourceCapacity;
   public $_spe_resourceCapacity;
+  public $_sec_resourceSurbooking;
+  public $_spe_resourceSurbooking;
   public $_sec_Miscellaneous;
   public $isLdap;
   public $dontReceiveTeamMails;
@@ -710,6 +712,12 @@ class ResourceMain extends SqlElement {
       $capacityList=$resourceCapacity->getSqlElementsFromCriteria($critArray, false);
       drawResourceCapacity($capacityList,$this,'ResourceCapacity',false);
       return $result;
+    }else if ($item=='resourceSurbooking'){
+      $resourceSurbooking = new ResourceSurbooking();
+      $critArray=array('idResource'=>(($this->id)?$this->id:'0'));
+      $capacityList=$resourceSurbooking->getSqlElementsFromCriteria($critArray, false);
+      drawResourceSurbooking($capacityList,$this,'ResourceSurbooking',false);
+      return $result;
     }
   }
   
@@ -875,10 +883,6 @@ class ResourceMain extends SqlElement {
       else return false;
     }
     
-    public function getSurbookingCapacity($date) {
-    	return $this->getCapacityPeriod($date);
-    }
-    
     public function getWeekCapacity($week, $capacityRate=1) {
       $weekDay=date('Y-m-d',firstDayofWeek(substr($week,-2),substr($week,0,4)));
       $capaWeek=0;
@@ -894,5 +898,42 @@ class ResourceMain extends SqlElement {
       }
       return $capaWeek;
     }
+    
+    //Surbooking
+    public function getSurbookingCapacity($date) {
+      if(!sessionValueExists('surbookingPeriod')){
+        setSessionValue('surbookingPeriod', array());
+      }
+      if(!sessionTableValueExist('surbookingPeriod', $this->id)){
+        setSessionTableValue('surbookingPeriod',$this->id, $this->buildSurbookedPeriod());
+      }
+      $surbookingPeriod = getSessionTableValue('surbookingPeriod', $this->id);
+      foreach ($surbookingPeriod as $val) {
+        foreach ($val as $value){
+          if ($date>=$value['startDate'] and $date<=$value['endDate']){
+            return $value['capacity']+$this->getCapacityPeriod($date);
+          }
+        }
+      }
+      return $this->getCapacityPeriod($date);
+    }
+    
+    public function buildSurbookedPeriod(){
+      $resSur = new ResourceSurbooking();
+      $listResSur = $resSur->getSqlElementsFromCriteria(array('idResource'=>$this->id),null,null,'startDate desc');
+      foreach ($listResSur as $sur){
+        if($sur->idle == 0){
+          $surbookedPeriod[$this->id][$sur->startDate]['capacity']=$sur->capacity;
+          $surbookedPeriod[$this->id][$sur->startDate]['startDate']=$sur->startDate;
+          $surbookedPeriod[$this->id][$sur->startDate]['endDate']=$sur->endDate;
+        }
+      }
+      if(!isset($surbookedPeriod)){
+        $surbookedPeriod = array();
+      }
+      return $surbookedPeriod;
+    }
+    
+    
 }
 ?>

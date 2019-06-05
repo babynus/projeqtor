@@ -940,6 +940,10 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $crit=array('idResource'=>$obj->id);
         $resCap=new ResourceCapacity();
         $cpt=$resCap->countSqlElementsFromCriteria($crit);
+      } else if ($section=='resourceSurbooking') {
+        $crit=array('idResource'=>$obj->id);
+        $resSur=new ResourceSurbooking();
+        $cpt=$resSur->countSqlElementsFromCriteria($crit);
       } else if ($section=='affectationResourceTeamResource') {
         $crit=array('idResource'=>$obj->id);
         $aff=new ResourceTeamAffectation();
@@ -6029,6 +6033,81 @@ function drawResourceCapacity($list, $obj, $type, $refresh=false) {
 	}
 	echo '</table></td></tr>';
 	echo '</table>';
+}
+
+function drawResourceSurbooking($list, $obj, $type, $refresh=false) {
+  global $cr, $print, $user, $browserLocale, $comboDetail;
+  $pluginObjectClass='Affectation';
+  //$tableObject=$list;
+  $lstPluginEvt=Plugin::getEventScripts('list', $pluginObjectClass);
+  foreach ($lstPluginEvt as $script) {
+    require $script; // execute code
+  }
+
+  $canDelete=securityGetAccessRightYesNo('menu'.get_class($obj), 'delete', $obj)=="YES";
+  $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
+  $canCreate=securityGetAccessRightYesNo('menu'.get_class($obj), 'create', $obj)=="YES";
+  if (!(securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES")) {
+    $canCreate=false;
+    $canUpdate=false;
+    $canDelete=false;
+  }
+  if ($obj->idle==1) {
+    $canUpdate=false;
+    $canCreate=false;
+    $canDelete=false;
+  }
+  if (get_class($obj)=='GlobalView') {
+    $canUpdate=false;
+    $canCreate=false;
+    $canDelete=false;
+  }
+
+  echo '<table style="width:100%">';
+  echo '<tr><td colspan=2 style="width:100%;"><table style="width:100%;">';
+  echo '<tr>';
+  if (get_class($obj)=='Resource' or get_class($obj)=='ResourceTeam') {
+    $idRess=$obj->id;
+  } else {
+    $idRess=null;
+  }
+  if (!$print) {
+    echo '<td class="assignHeader" style="width:15%">';
+    if ($obj->id!=null and !$print and $canCreate and !$obj->idle) {
+      echo '<a onClick="addResourceSurbooking(\''.get_class($obj).'\',\''.$type.'\',\''.$idRess.'\');" title="'.i18n('addResourceSurbooking').'" /> '.formatSmallButton('Add').'</a>';
+    }
+    echo '</td>';
+  }
+  echo '<td class="assignHeader" style="width:12%">'.i18n('colId').'</td>';
+  echo '<td class="assignHeader" style="width:35%">'.i18n('colSurbooking').'</td>';
+  echo '<td class="assignHeader" style="width:19%">'.i18n('colStartDate').'</td>';
+  echo '<td class="assignHeader" style="width:19%">'.i18n('colEndDate').'</td>';
+  echo '</tr>';
+
+  foreach ($list as $resSur) {
+    $idleClass=($resSur->idle or ($resSur->endDate and $resSur->endDate<$dateNow=date("Y-m-d")))?' affectationIdleClass':'';
+    echo '<tr>';
+    if (!$print) {
+      echo '<td class="assignData'.$idleClass.'" style="text-align:center;white-space: nowrap;">';
+      if ($canUpdate) {
+        echo '  <a onClick="editResourceSurbooking(\''.$resSur->id.'\',\''.$obj->id.'\',\''.$resSur->capacity.'\',\''.$resSur->idle.'\',\''.$resSur->startDate.'\',\''.$resSur->endDate.'\');" '.'title="'.i18n('editResourceCapacity').'" > '.formatSmallButton('Edit').'</a>';
+      }
+      if ($canDelete) {
+        echo '  <a onClick="removeResourceSurbooking(\''.$resSur->id.'\',\''.$resSur->idResource.'\');" '.'title="'.i18n('removeResourceCapacity').'" > '.formatSmallButton('Remove').'</a>';
+      }
+      if ($resSur->description) {
+        echo '<div style="float:right">'.formatCommentThumb($resSur->description).'</div>';
+      }
+    }
+    echo '</td>';
+    echo ' <td class="assignData'.$idleClass.'" align="center" style="white-space: nowrap;">'.$resSur->id.'</td>';
+    echo ' <td class="assignData'.$idleClass.'" align="center" style="white-space: nowrap;">'.htmlDisplayNumericWithoutTrailingZeros($resSur->capacity).'</td>';
+    echo ' <td class="assignData'.$idleClass.'" align="center" style="white-space: nowrap;">'.htmlFormatDate($resSur->startDate).'</td>';
+    echo ' <td class="assignData'.$idleClass.'" align="center" style="white-space: nowrap;">'.htmlFormatDate($resSur->endDate).'</td>';
+    echo '</tr>';
+  }
+  echo '</table></td></tr>';
+  echo '</table>';
 }
 
 // gautier #ProviderTerm
