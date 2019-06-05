@@ -68,6 +68,7 @@ class ContactMain extends SqlElement {
   public $_spe_tickets;
   //END ADD qCazelles - Manage ticket at customer level - Ticket #87
   public $password;
+  public $crypto;
   public $_nbColMax=3;
   
   private static $_layout='
@@ -89,7 +90,8 @@ class ContactMain extends SqlElement {
                                           "idProfile"=>"",
                                           "isUser"=>"",
                                           "isResource"=>"",
-                                          "password"=>"hidden" 
+                                          "password"=>"hidden",
+                                          "crypto"=>"hidden"
   );    
   
   private static $_databaseTableName = 'resource';
@@ -298,8 +300,8 @@ class ContactMain extends SqlElement {
 
   public function save() {
     if ($this->isUser and !$this->password and Parameter::getGlobalParameter('initializePassword')=="YES") {
-      $paramDefaultPassword=Parameter::getGlobalParameter('paramDefaultPassword');
-      $this->password=md5($paramDefaultPassword);
+      $this->crypto=null;
+  		$this->password=User::getRandomPassword();
     }
   	$result=parent::save();
     if (! strpos($result,'id="lastOperationStatus" value="OK"')) {

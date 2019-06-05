@@ -152,12 +152,13 @@ class UserMain extends SqlElement {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
     global $objClass;
-    $paramDefaultPassword=Parameter::getGlobalParameter('paramDefaultPassword');
+    //$paramDefaultPassword=Parameter::getGlobalParameter('paramDefaultPassword');
   	parent::__construct($id,$withoutDependentObjects);
     
   	if (! $this->id and Parameter::getGlobalParameter('initializePassword')=="YES") {
-  		$tmpSalt=hash('sha256',"projeqtor".date('YmdHis'));
-  		$this->password=hash('sha256',$paramDefaultPassword.$tmpSalt);
+  		//$this->salt=hash('sha256',"projeqtor".date('YmdHis'));
+  		$this->crypto=null;
+  		$this->password=User::getRandomPassword();
   	}
     if (! $this->id) {
       $this->idProfile=Parameter::getGlobalParameter('defaultProfile');
@@ -336,7 +337,7 @@ class UserMain extends SqlElement {
     $result="";
     if ($item=='buttonSendMail') {
       $canUpdate=(securityGetAccessRightYesNo('menuUser', 'update', $this) == "YES");
-      if ($print or !$canUpdate) {
+      if ($print or !$canUpdate or $this->crypto!=null or ! $this->id or !$this->password) {
         return "";
       } 
       $result .= '<tr><td valign="top" class="label"><label></label></td><td>';
@@ -1123,11 +1124,13 @@ class UserMain extends SqlElement {
   	if ($old->locked and ! $this->locked) {
   		$this->loginTry=0;
   	}
-  	$paramDefaultPassword=Parameter::getGlobalParameter('paramDefaultPassword');
-    if (! $this->id and Parameter::getGlobalParameter('initializePassword')=="YES") {
-      $this->salt=hash('sha256',"projeqtor".date('YmdHis'));
-      $this->password=hash('sha256',$paramDefaultPassword.$this->salt);
-      $this->crypto='sha256';
+  	//$paramDefaultPassword=Parameter::getGlobalParameter('paramDefaultPassword');
+    if (! $this->id and !$this->password and Parameter::getGlobalParameter('initializePassword')=="YES") {
+      //$this->salt=hash('sha256',"projeqtor".date('YmdHis'));
+      //$this->password=hash('sha256',$paramDefaultPassword.$this->salt);
+      //$this->crypto=null;
+      $this->crypto='NULL';
+      $this->password=User::getRandomPassword();
     }
 
     $result=parent::save();
@@ -1756,6 +1759,13 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
   	}
   	$result = ($resultOr)?" ( ($resultAnd) $resultOr ) ":" ( $resultAnd ) ";
   	return $result;
+  }
+  
+  public static function getRandomPassword($length=12) {
+    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    $chars.=$chars;
+    $newPwd = substr( str_shuffle( $chars ), 0, $length);
+    return $newPwd;
   }
 }
 ?>

@@ -81,6 +81,7 @@ class ResourceMain extends SqlElement {
   public $isLdap;
   public $dontReceiveTeamMails;
   public $password;
+  public $crypto;
   public $isResourceTeam;
 
   
@@ -109,7 +110,8 @@ class ResourceMain extends SqlElement {
                                           "userName"=>"truncatedWidth100",
                                           "idRole"=>"required",
                                           "idCalendarDefinition"=>"required",
-                                          "isLdap"=>"hidden"
+                                          "isLdap"=>"hidden",
+                                          "crypto"=>"hidden"
   );    
   
   private static $_databaseTableName = 'resource';
@@ -520,8 +522,8 @@ class ResourceMain extends SqlElement {
   
   public function save() {
     if ($this->isUser and !$this->password and Parameter::getGlobalParameter('initializePassword')=="YES") {
-      $paramDefaultPassword=Parameter::getGlobalParameter('paramDefaultPassword');
-      $this->password=md5($paramDefaultPassword);
+      $this->crypto=null;
+  		$this->password=User::getRandomPassword();
     }
 
 // MTY - LEAVE SYSTEM
