@@ -103,7 +103,7 @@ foreach ($lst as $opportunity) {
   echo   '<tr><td align="center" style="font-weight: bold">' . htmlFormatDate($opportunity->doneDate) . '</td></tr>';  
   echo '</table></td>';
   echo '<td align="center" class="largeReportData' . $done . '" style="width:5%;">' . formatColor('Status', $opportunity->idStatus) . '</td>';
-  echo '<td class="largeReportData' . $done . '" style="width:15%;">' . htmlEncode($opportunity->result) . '</td>';
+  echo '<td class="largeReportData' . $done . '" style="width:15%;">' . ($opportunity->result) . '</td>';
   echo '</tr>';
 }
 echo "</table>";
