@@ -114,8 +114,6 @@ public function getValidationScript($colName) {
     $colScript .= '<script type="dojo/connect" event="onChange" >';
     $colScript .="var start =dojo.byId('startDate').value;";
     $colScript .="var end =dojo.byId('endDate').value;";
-    $colScript .= "console.log(start);";
-    $colScript .= "console.log(end);";
     $colScript .= "if (start == end) {";
     $colScript .="      var endBis=dijit.byId('endDateBis');";
     $colScript .="      var startBis=dijit.byId('startDateBis').get('value');";

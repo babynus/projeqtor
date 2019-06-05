@@ -6482,6 +6482,8 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
       }
     }
     if ($aff->idResource!=$name and trim($name)) {
+      // Florent ticket 4009
+      if ($aff->idle != '1'){
       echo '<tr>';
       if (!$print) {
         echo '<td class="assignData'.$idleClass.'" style="text-align:center;white-space: nowrap;">';
@@ -6531,6 +6533,7 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
       // echo '<td class="assignData" align="center"><img src="../view/img/checked' . (($aff->idle)?'OK':'KO') . '.png" /></td>';
       echo '</tr>';
     }
+  }
   }
   echo '</table></td></tr>';
   echo '</table>';
