@@ -1811,21 +1811,24 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo ' readonly tabindex="-1" style="'.$specificStyle.';width: '.$refWidth.'px;" ';
         echo ' value="'.htmlEncode($val).'" ></span>';
       } else if ($col=='password') {
-        $paramDefaultPassword=Parameter::getGlobalParameter('paramDefaultPassword');
+        //$paramDefaultPassword=Parameter::getGlobalParameter('paramDefaultPassword');
         // Password specificity ============================================= PASSWORD
         if ($canUpdate) {
           echo '<button id="resetPassword" dojoType="dijit.form.Button" showlabel="true"';
           echo ' class="generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" style="'.$specificStyleWithoutCustom.'"';
           echo $attributes;
           $salt=hash('sha256', "projeqtor".date('YmdHis'));
+          $newPwd = User::getRandomPassword();
           echo ' title="'.i18n('helpResetPassword').'" >';
           echo '<span>'.i18n('resetPassword').'</span>';
           echo '<script type="dojo/connect" event="onClick" args="evt">';
           echo '  dijit.byId("salt").set("value","'.$salt.'");';
-          echo '  dijit.byId("crypto").set("value","sha256");';
-          echo '  dojo.byId("password").value="'.hash('sha256', $paramDefaultPassword.$salt).'";';
+          //echo '  dijit.byId("crypto").set("value","sha256");';
+          echo '  dijit.byId("crypto").set("value",null);';
+          //echo '  dojo.byId("password").value="'.hash('sha256', $paramDefaultPassword.$salt).'";';
+          echo '  dojo.byId("password").value="'.$newPwd.'";';
           echo '  formChanged();';
-          echo '  showInfo("'.i18n('passwordReset', array($paramDefaultPassword)).'");';
+          echo '  showInfo("'.i18n('passwordReset', array($newPwd)).'");';
           echo '</script>';
           echo '</button>';
         }
