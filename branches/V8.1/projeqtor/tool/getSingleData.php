@@ -100,6 +100,10 @@
       $idResourceCapacity=RequestHandler::getId('idResourceCapacity');
       $resCap=new ResourceCapacity($idResourceCapacity);
       echo formatAnyTextToPlainText($resCap->description,false);
+    } else if ($type=='resourceSurbookingDescription') {
+      $idResourceSurbooking=RequestHandler::getId('idResourceSurbooking');
+      $resSur=new ResourceSurbooking($idResourceSurbooking);
+      echo formatAnyTextToPlainText($resSur->description,false);
     } else if ($type=='assignmentDescription') {
       $idAssignment=RequestHandler::getId('idAssignment');
       $ass=new Assignment($idAssignment);
