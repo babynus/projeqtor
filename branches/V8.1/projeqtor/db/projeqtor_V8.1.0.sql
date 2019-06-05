@@ -30,3 +30,6 @@ INSERT INTO `${prefix}originable`( `name`, `idle`) VALUES ('DocumentVersion', 0)
 
 ALTER TABLE `${prefix}message` ADD COLUMN `startDate` datetime DEFAULT NULL,
 ADD COLUMN `endDate` datetime DEFAULT NULL;
+
+-- Password
+ALTER TABLE `${prefix}resource` CHANGE `crypto` `crypto` VARCHAR(100) DEFAULT NULL;
