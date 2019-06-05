@@ -48,7 +48,11 @@ $meet = new $assignmentRefType($assignmentRefId);
 //$crit = array('idProject'=> $meet->idProject,'idle'=>'0');
 $aff = new Affectation();
 //Flo #4020
-$critWhere="idle=0 AND idProject= $meet->idProject AND ( endDate >= '$meet->meetingDate' OR endDate IS NULL ) ";
+if($assignmentRefType == 'PeriodicMeeting'){
+  $critWhere="idle=0 AND idProject= $meet->idProject AND ( endDate >= '$meet->periodicityEndDate' OR endDate IS NULL ) ";
+}else{
+  $critWhere="idle=0 AND idProject= $meet->idProject AND ( endDate >= '$meet->meetingDate' OR endDate IS NULL ) ";
+}
 $list=$aff->getSqlElementsFromCriteria(null,false,$critWhere);
 //end flo
 $canUpdate=securityGetAccessRightYesNo('menuMeeting', 'update', $meet) == "YES";
@@ -80,7 +84,9 @@ foreach ($list as $affRes) {
     $ass->refId = $assignmentRefId;
     $ass->refType = $assignmentRefType;
     $ass->idProject = $affRes->idProject;
-    $ass->assignedWork = $hourMeeting/$hoursPerDay;
+    if($hourMeeting){
+      $ass->assignedWork = $hourMeeting/$hoursPerDay;
+    }
     //$ass->idRole=(isset($costArray[$affRes->idRole]))?$affRes->idRole:$defaultRole;
     $ass->realWork = 0;
     $ass->leftWork = $ass->assignedWork;
