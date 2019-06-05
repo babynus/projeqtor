@@ -35,7 +35,6 @@ class ResourceTeamMain extends ResourceMain {
   public $_spe_affectationsResourceTeam;
   public $_spe_affectationResourceTeamGraph;
   
-  
 	  private static $_layout='
       <th field="id" formatter="numericFormatter" width="5%"># ${id}</th>
       <th field="name" width="20%">${realName}</th>

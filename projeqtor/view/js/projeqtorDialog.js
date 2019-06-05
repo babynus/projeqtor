@@ -5560,7 +5560,98 @@ function editResourceCapacity(id,idResource,capacity, idle, startDate, endDate) 
   loadDialog('dialogResourceCapacity',callBack,false,params);
 }
 
-//
+//gautier resourceSurbooking
+function addResourceSurbooking(objectClass, type, idResource) {
+  var callBack = function () {
+    affectationLoad=true;
+    dijit.byId("dialogResourceSurbooking").show();
+    setTimeout("affectationLoad=false", 500);
+  };
+  var params="&idResource="+idResource;
+  params+="&type="+type;
+  params+="&mode=add";
+  loadDialog('dialogResourceSurbooking',callBack,false,params);
+}
+
+function saveResourceSurbooking(capacity){
+  var formVar=dijit.byId('resourceSurbookingForm');
+  if (dijit.byId('resourceSurbookingStartDate') && dijit.byId('resourceSurbookingEndDate')) {
+    var start=dijit.byId('resourceSurbookingStartDate').value;
+    var end=dijit.byId('resourceSurbookingEndDate').value;
+    if (start && end && dayDiffDates(start, end) < 0) {
+      showAlert(i18n("errorStartEndDates", new Array(i18n("colStartDate"),
+          i18n("colEndDate"))));
+      return;
+    }
+  }
+  if (dijit.byId('resourceSurbooking')){
+    var newCapacity = dijit.byId('resourceSurbooking').value;
+    if(newCapacity === 0){
+      showAlert(i18n("changeSurbooking"));
+      return;
+    }
+  }
+  if (formVar.validate()) {
+    loadContent("../tool/saveResourceSurbooking.php", "resultDiv", "resourceSurbookingForm",true,'affectation');
+    dijit.byId('dialogResourceSurbooking').hide();
+  } else {
+    showAlert(i18n("alertInvalidForm"));
+  }
+}
+
+function removeResourceSurbooking(id,idResource) {
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  actionOK=function() {
+    loadContent("../tool/removeResourceSurbooking.php?idResourceSurbooking="+id+"&idResource="+idResource, "resultDiv",null, true, 'affectation');
+  };
+  msg=i18n('confirmDeleteResourceSurbooking', new Array(id,i18n('Resource'),idResource));
+  showConfirm(msg, actionOK);
+}
+
+function editResourceSurbooking(id,idResource,capacity, idle, startDate, endDate) {
+  affectationLoad=true;
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  var callBack = function () {
+    dojo.xhrGet({
+      url : '../tool/getSingleData.php?dataType=resourceSurbookingDescription&idResourceSurbooking='+id,
+      handleAs : "text",
+      load : function(data) {
+        dijit.byId('resourceSurbookingDescription').set('value', data);
+        enableWidget("resourceSurbookingDescription");
+      }
+      });
+    if (capacity) {
+      dijit.byId("resourceSurbooking").set('value', parseFloat(capacity));
+    }
+    if (startDate) {
+      dijit.byId("resourceSurbookingStartDate").set('value', startDate);
+    } else {
+      dijit.byId("resourceSurbookingStartDate").reset();
+    }
+    if (endDate) {
+      dijit.byId("resourceSurbookingEndDate").set('value', endDate);
+    } else {
+      dijit.byId("resourceSurbookingEndDate").reset();
+    }
+    if (idle == 1) {
+      dijit.byId("resourceSurbookingIdle").set('value', idle);
+    } else {
+      dijit.byId("resourceSurbookingIdle").reset();
+    }
+    dijit.byId("dialogResourceSurbooking").show();
+    setTimeout("affectationLoad=false", 500);
+  };
+  var params="&id="+id;
+  params+="&idResource="+idResource;
+  params+="&mode=edit";
+  loadDialog('dialogResourceSurbooking',callBack,false,params);
+}
 
 //gautier #resourceTeam
 function addAffectationResourceTeam(objectClass, type, idResource) {
