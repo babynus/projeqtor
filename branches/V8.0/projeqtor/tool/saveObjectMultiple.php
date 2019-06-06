@@ -193,10 +193,10 @@ if (array_key_exists($pe.'_priority',$_REQUEST)) {
   $pe_priority=trim($_REQUEST[$pe.'_priority']);
 }
 
-$profile = RequestHandler::getValue('idProfile_multiple');
-$rate= RequestHandler::getValue('rate_multiple');
-$team=RequestHandler::getValue('idTeam_multiple');
-$changeStatusIdle=RequestHandler::getValue('changeStatusIdle');
+$profile = trim(RequestHandler::getValue('idProfile_multiple'));
+$rate= trim(RequestHandler::getValue('rate_multiple'));
+$team=trim(RequestHandler::getValue('idTeam_multiple'));
+$changeStatusIdle=trim(RequestHandler::getValue('changeStatusIdle'));
 
 // MTY - LEAVE SYSTEM
 $startDate = "";
