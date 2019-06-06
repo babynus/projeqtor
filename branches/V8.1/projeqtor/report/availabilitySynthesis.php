@@ -28,8 +28,7 @@
 
 include_once '../tool/projeqtor.php';
 $paramPeriodValue='';
-if (array_key_exists('periodValue',$_REQUEST))
-{
+if (array_key_exists('periodValue',$_REQUEST)){
 	$paramPeriodValue=$_REQUEST['periodValue'];
 	$paramPeriodValue = preg_replace('/[^0-9]/', '', $paramPeriodValue); // only allow digits
 }
@@ -69,7 +68,6 @@ foreach($affLst as $aff){
 	}
 }
 asort($resources);
-
 $where="1=1"; // Ticket #2532 : must show availability whatever the project
 if ($paramPeriodScale=="month") {
 	$start=date('Y-m-').'01';
@@ -161,6 +159,7 @@ $plannedStyle=' style="text-align:center;background-color:' . $plannedBGColor . 
 // Group data corresponding to periodscale
 $resultPeriod=array();
 $resultPeriodFmt=array();
+$totalPeriod=array();
 for($day=$start;$day<=$end;$day=addDaysToDate($day, 1)) {
 	if ($paramPeriodScale=="month") {
 		$period=substr($day,0,7);
@@ -184,7 +183,9 @@ for($day=$start;$day<=$end;$day=addDaysToDate($day, 1)) {
 	    $resultPeriod[$period][$idR]=0;
 	    $resultPeriodFmt[$period][$idR]='none';
 		}
-		$resultPeriod[$period][$idR]+=$capaDay;
+		if ($res->isResourceTeam != '') {
+		  $resultPeriod[$period][$idR]+=$capaDay;
+		}
 		$dayFmt=str_replace('-', '', $day);
 		if (isset($result[$idR][$dayFmt])) {
 			$resultPeriod[$period][$idR]-=$result[$idR][$dayFmt];
@@ -247,7 +248,11 @@ foreach ($resources as $idR=>$nameR) {
   if (!$paramTeam or $res->idTeam==$paramTeam) {
 		$sum=0;
 	  echo '<tr height="20px">';
-	  echo '<td class="reportTableLineHeader" style="width:20%">' . $nameR . '</td>';
+	  if ($res->isResourceTeam) {
+	   echo '<td class="reportTableLineHeader" style="width:20%"> <a style="float:right; vertical-align:middle;"> '.formatIcon('Team', 16, i18n('ResourceTeam')).'</a>' . $nameR . '</td>';
+	  }else{
+	   echo '<td class="reportTableLineHeader" style="width:20%">' . $nameR . '</td>';
+	  }
 	  echo '<td class="reportTableLineHeader" style="width:5%;text-align:center;">';
 	  if($capacity[$idR]*1 != $maxCapa){
   	  echo '<table width="100%"><tr><td style="width:50%;text-align:right;padding-right:10px;">'.($capacity[$idR]*1).'</td>';
@@ -256,7 +261,7 @@ foreach ($resources as $idR=>$nameR) {
 	    echo ($capacity[$idR]*1);
 	  }
 	  echo '</td>';
-	  foreach($resultPeriod as $idP=>$period) {	    
+	  foreach($resultPeriod as $idP=>$period) {	 
 	    $style="";
 	    $italic=false;
       $style=' style="text-align:center;';
@@ -280,12 +285,25 @@ foreach ($resources as $idR=>$nameR) {
 	  	if ($val>0) {
 	  		$sum+=$val;
 	  	}
+	  	if(!isset($totalPeriod[$idP])){
+	  	  $totalPeriod[$idP]=$val;
+	  	}else{
+	  	  $totalPeriod[$idP]+=$val;
+	  	}
+	  }
+	  if(!isset($totalPeriod['sum'])){
+	    $totalPeriod['sum']=$sum;
+	  }else{
+	    $totalPeriod['sum']+=$sum;
 	  }
 	  echo '<td class="reportTableColumnHeader" style="width:5%">' . Work::displayWork($sum) . '</td>';
 	  echo '</tr>';
   }
 }
-
-echo '</table>';
-
+echo'<tr>';
+echo '<td class="reportTableHeader" colspan="2">' . i18n('sum') . '</td>';
+foreach ($totalPeriod as $date=>$val){
+  echo '<td class="reportTableColumnHeader" >' . Work::displayWork($val) . '</td>';
+}
+echo' </tr></table>';
 echo '</td></tr></table>';
