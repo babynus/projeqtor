@@ -285,6 +285,9 @@ foreach ($resources as $idR=>$nameR) {
 	  	if ($val>0) {
 	  		$sum+=$val;
 	  	}
+	  	if($res->isResourceTeam and $val<0){
+	  	  $sum+=$val;
+	  	}
 	  	if(!isset($totalPeriod[$idP])){
 	  	  $totalPeriod[$idP]=$val;
 	  	}else{
