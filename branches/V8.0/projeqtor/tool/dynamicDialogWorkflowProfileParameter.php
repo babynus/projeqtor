@@ -43,11 +43,14 @@ foreach ($profileList as $idProfile=>$profile) {
     $canUpdate=false;
   }
 
-  $wp=new WorkflowProfile();
-  $wp->checked=1;
-  $wp->idWorkflow=$id;
-  $wp->idProfile=$idProfile;
-  $wp->createSqlRow();
+  $wp=SqlElement::getSingleSqlElementFromCriteria('WorkflowProfile', array('idWorkflow'=>$id, 'idProfile'=>$idProfile));
+  if (!$wp->id) {
+    $wp->checked=1;
+    $wp->idWorkflow=$id;
+    $wp->idProfile=$idProfile;
+//  $wp->createSqlRow(); // Direct Query banned
+    $wp->save();
+  }
   $checked=$wp->getCheckedInfo();
   ?>
 <tr style="height: 10px;">
