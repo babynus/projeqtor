@@ -37,7 +37,6 @@ $objectId=$_REQUEST['objectId'];
 Security::checkValidId($objectId);
 
 $reply=RequestHandler::getBoolean('reply');
-debugLog($reply);
 $idParentNote=RequestHandler::getId('idParentNote');
 
 $noteId=null;
