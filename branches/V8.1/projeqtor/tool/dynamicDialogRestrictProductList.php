@@ -35,9 +35,16 @@ $canUpdate=(securityGetAccessRightYesNo('menuProfile', 'update', new Profile($id
 <table width="100%;">
 <table>
 <?php
-$rl=new RestrictList();
-$rl->idProfile=$id;
-$rl->createSqlRow();
+$rl=SqlElement::getSingleSqlElementFromCriteria('RestrictList', array('idProfile'=>$id));
+if (!$rl->id) {
+  $rl->idProfile=$id;
+  $rl->showAll=1;
+  $rl->showStarted=0; 
+  $rl->showDelivered=0; 
+  $rl->showInService=0;
+  // $rl->createSqlRow(); // Direct Sql banned
+  $rl->save();
+}
 $checkedArr=$rl->getCheckedInfo();
 
 echo "<br>".i18n("instructionsRestrictList")."<br>"."<br>";
