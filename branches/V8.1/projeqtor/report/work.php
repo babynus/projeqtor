@@ -118,8 +118,9 @@ if ( $paramResource=='') {
 include "header.php";
 
 
-
-$where="(".getAccesRestrictionClause('Activity',false,false,true,true) ." or idResource=". getSessionUser()->id . " or idProject in ".Project::getAdminitrativeProjectList().")"; 
+#florent ticket #4049
+#$where="(".getAccesRestrictionClause('Activity',false,false,true,true) ." or idResource=". getSessionUser()->id . " or idProject in ".Project::getAdminitrativeProjectList().")";
+$where="(".getAccesRestrictionClause('Activity',false,true,true,true) ." or idResource=". getSessionUser()->id . " or idProject in ".Project::getAdminitrativeProjectList().")"; 
 //$where="1=1 ";
 $where.=($periodType=='week')?" and week='" . $periodValue . "'":'';
 $where.=($periodType=='month')?" and month='" . $periodValue . "'":'';
@@ -142,7 +143,9 @@ if ($periodType=='year') {
 //END CHANGE qCazelles - Report start month - Ticket #128
 
 if ($paramProject!='') {
-  $where.=  " and idProject in " . getVisibleProjectsList(true, $paramProject); 
+  #florent ticket #4049
+  #$where.=  " and idProject in " . getVisibleProjectsList(true, $paramProject); 
+  $where.=  " and idProject in " . getVisibleProjectsList(false, $paramProject); 
 }
 $where.=($paramResource!='')?" and idResource='" . $paramResource . "'":'';
 $order="";
