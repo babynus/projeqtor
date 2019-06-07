@@ -6967,10 +6967,11 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
         $result[$fld]=$value;
       } else if (isForeignKey ($fld, $this)) { // idXxx : also add nameXxx
         $class = substr(foreignKeyWithoutAlias($fld),2);
+        $fldName='name'.substr($fld,2);
         if ($class=='Resource' or $class=='User' or $class=='Contact') {
-          $result['name'.$class]=SqlList::getFieldFromId('Affectable', $value, 'fullName');
+          $result[$fldName]=SqlList::getFieldFromId('Affectable', $value, 'fullName');
         } else if (SqlElement::class_exists($class)) {
-          $result['name'.$class]=SqlList::getNameFromId($class, $value);
+          $result[$fldName]=SqlList::getNameFromId($class, $value);
         }
         if ($fld=='id'.get_class($this).'Type') {
           $result['idType']=$value;
