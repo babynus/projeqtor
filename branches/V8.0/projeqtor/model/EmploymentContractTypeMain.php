@@ -74,7 +74,7 @@ class EmploymentContractTypeMain extends SqlElement {
     
     private static $_fieldsAttributes=array(
         "name"=>"required", 
-        "idWorkflow"=>"hidden",
+//      "idWorkflow"=>"hidden",
 //        "idRecipient"=>"hidden",
         "idManagementType" => "hidden" // TO MODIFY when full MANAGEMENT SYSTEM will be ready : "required"
         );

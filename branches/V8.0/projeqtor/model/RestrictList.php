@@ -59,14 +59,15 @@ class RestrictList extends SqlElement {
 // ============================================================================**********
 // MISCELLANOUS FUNCTIONS
 // ============================================================================**********
-  
-  function createSqlRow() {
-    $cpt=$this->countSqlElementsFromCriteria(null,"idProfile='$this->idProfile'");
-    if ($cpt == 0) {
-      $query = "INSERT INTO restrictlist (idProfile, showAll, showStarted, showDelivered, showInService) VALUES ($this->idProfile, 1, 0, 0, 0)";
-      Sql::query($query);
-    }
-  }
+
+// PBE : Direct SQL must be banned !!! (the query won't work if paramDbPrefix is set)  
+//   function createSqlRow() {
+//     $cpt=$this->countSqlElementsFromCriteria(null,"idProfile='$this->idProfile'");
+//     if ($cpt == 0) {
+//       $query = "INSERT INTO restrictlist (idProfile, showAll, showStarted, showDelivered, showInService) VALUES ($this->idProfile, 1, 0, 0, 0)";
+//       Sql::query($query);
+//     }
+//   }
   
   function getCheckedInfo() {
     $arr = array("idProfile" => $this->idProfile);

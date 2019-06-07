@@ -52,10 +52,11 @@ class WorkflowProfile extends SqlElement {
     parent::__destruct();
   }
   
-  function createSqlRow() {
-    $query = "INSERT INTO workflowprofile(idWorkflow, idProfile, checked) SELECT ".$this->idWorkflow.", ".$this->idProfile.", ".$this->checked." FROM dual WHERE NOT EXISTS (SELECT * FROM workflowprofile WHERE idWorkflow = ".$this->idWorkflow." AND idProfile = ".$this->idProfile.")";
-    Sql::query($query);
-  }
+// PBE : Direct SQL must be banned !!! (the query won't work if paramDbPrefix is set)   
+//  function createSqlRow() {
+//    $query = "INSERT INTO workflowprofile(idWorkflow, idProfile, checked) SELECT ".$this->idWorkflow.", ".$this->idProfile.", ".$this->checked." FROM dual WHERE NOT EXISTS (SELECT * FROM workflowprofile WHERE idWorkflow = ".$this->idWorkflow." AND idProfile = ".$this->idProfile.")";
+//    Sql::query($query);
+//  }
   
   function getCheckedInfo() {
     $arr = array("idWorkflow" => $this->idWorkflow, "idProfile" => $this->idProfile);
