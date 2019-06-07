@@ -793,6 +793,32 @@ if (beforeVersion($currVersion,"V8.0.4")) {
     Project::unsetNeedReplan($prj->id);
   }
 }
+if (beforeVersion($currVersion,"V8.0.5")) {
+  $crit="validatedCost is not null and validatedCost>0";
+  $m=new MilestonePlanningElement();
+  $mList=$m->getSqlElementsFromCriteria(null,null,$crit);
+  if (count($mList)>0) {
+    traceLog("Set validatedCost to zero for Milestones");
+    $cpt=0;
+    $cptCommit=100;
+    Sql::beginTransaction();
+    traceLog("   => ".count($mList)." to save");
+    projeqtor_set_time_limit(1500);
+    foreach ($mList as $m) {
+      $m->validatedCost=0;
+      $m->save();
+      $cpt++;
+      if ( ($cpt % $cptCommit) == 0) {
+        Sql::commitTransaction();
+        traceLog("   => $cpt saved...");
+        projeqtor_set_time_limit(1500);
+        Sql::beginTransaction();
+      }
+    }
+    Sql::commitTransaction();
+    traceLog("   => $cpt saved");
+  }
+}
 // To be sure, after habilitations updates ...
 Habilitation::correctUpdates();
 Habilitation::correctUpdates();
