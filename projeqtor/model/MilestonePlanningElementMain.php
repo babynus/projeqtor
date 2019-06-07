@@ -160,11 +160,20 @@ class MilestonePlanningElementMain extends PlanningElement {
     $this->validatedDuration=0;
     $this->plannedDuration=0;
     $this->realDuration=0;
+    #florent ticket 4039
     $this->initialWork=0;
     $this->validatedWork=0;
     $this->plannedWork=0;
-    $this->notPlannedWork=0;
+  	$this->notPlannedWork=0;
     $this->realWork=0;
+    $this->plannedEndDate=0;
+    $this->assignedWork=0;
+    $this->leftWork=0;
+    $this->validatedCost=0;
+    $this->plannedCost=0;
+    $this->realCost=0;
+    $this->assignedCost=0;
+    $this->leftCost=0;
     $this->elementary=1;
     $result = parent::save();
     if ($this->plannedStartDate!=$old->plannedStartDate) {
