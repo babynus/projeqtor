@@ -347,10 +347,20 @@ if (property_exists($objectClass,'idStatus')) {
               </td>
               <?php }?>
               <?php if ( $objectClass=='GlobalView') { ?>
+                <td width="56px">
+                    <button dojoType="dijit.form.Button" type="button" >
+                            <?php echo i18n('resetColor');?>
+                            <script type="dojo/method" event="onClick">
+                             resetFilter();
+                             </script>
+                          
+                    </button>
+               </td>
               <td style="vertical-align: middle; text-align:right;" width="5px">
                  <span class="nobr">&nbsp;&nbsp;&nbsp;
                 <?php echo i18n("listTodayItems");?>&nbsp;
               </td>
+              
               <td width="5px">
                 <div dojoType="dijit.form.DropDownButton"							    
   							  id="listItemsSelector" jsId="listItemsSelector" name="listItemsSelector" 
@@ -388,6 +398,8 @@ if (property_exists($objectClass,'idStatus')) {
   							  </div>
   							</div>                   
               </td>
+              
+            
               <?php }?>
              <?php  if (sessionValueExists('project')){
                  $proj=getSessionValue('project');
@@ -438,7 +450,7 @@ if (property_exists($objectClass,'idStatus')) {
              <!-- Ticket #3988	- Object list : boutton reset parameters  
                    florent
               -->
-              <?php if (!$hideTypeSearch) { ?>
+              <?php if (!$hideTypeSearch and $objectClass !='GlobalView') { ?>
                 <?php if ( $objectClass == 'Budget'  || property_exists($obj,'idClient') || property_exists($obj,'idMailable') || property_exists($obj,'idIndicatorable')|| property_exists($obj,'idTextable')|| property_exists($obj,'idChecklistable')) {
                 }else {  
                   ?>
@@ -475,7 +487,7 @@ if (property_exists($objectClass,'idStatus')) {
               <!-- Ticket #3988	- Object list : boutton reset parameters  
                    florent
               -->
-              <?php if ($hideClientSearch) { ?>
+              <?php if ($hideClientSearch and $objectClass !='GlobalView') { ?>
               <td width="6px">
                 <button dojoType="dijit.form.Button" type="button" >
                     <?php echo i18n('resetColor');?>
@@ -541,7 +553,7 @@ if (property_exists($objectClass,'idStatus')) {
                   </script>
                 </select>
               </td>
-     
+              <?php if($objectClass !='GlobalView'){?>
               <td width="6px ">
                 <button dojoType="dijit.form.Button" type="button" >
                     <?php echo i18n('resetColor');?>
@@ -552,7 +564,7 @@ if (property_exists($objectClass,'idStatus')) {
                 </button>
               </td>      
               
-              <?php }?>                     
+              <?php }}?>                     
               <?php $activeFilter=false;
                  if (! $comboDetail and is_array(getSessionUser()->_arrayFilters)) {
                    if (array_key_exists($objectClass, getSessionUser()->_arrayFilters)) {
