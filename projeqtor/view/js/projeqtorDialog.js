@@ -3050,12 +3050,11 @@ function addDependency(depType) {
       dojo.byId("dependencyTypeDiv").style.display="block";
     }
   }
-  refreshDependencyList();
+  dojo.byId("dependencyRefType").value=objectClass;
+  dojo.byId("dependencyRefId").value=objectId;
   refreshList('idActivity', 'idProject', '0', null, 'dependencyRefIdDepEdit',false);
   dijit.byId('dependencyRefIdDepEdit').reset();
   dojo.byId("dependencyId").value="";
-  dojo.byId("dependencyRefType").value=objectClass;
-  dojo.byId("dependencyRefId").value=objectId;
   dijit.byId("dialogDependency").set('title', message);
   dijit.byId("dialogDependency").show();
   dojo.byId('dependencyAddDiv').style.display='block';
@@ -3063,6 +3062,7 @@ function addDependency(depType) {
   dijit.byId("dependencyRefTypeDep").set('readOnly', false);
   dijit.byId("dependencyComment").set('value',null);
   disableWidget('dialogDependencySubmit');
+  refreshDependencyList();
 }
 
 function editDependency(depType, id, refType, refTypeName, refId, delay, typeOfDependency) {
