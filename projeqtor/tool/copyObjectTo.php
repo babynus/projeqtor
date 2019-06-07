@@ -119,12 +119,6 @@ if ($className=='ComponentVersion') {
 	$obj->idComponentVersionType=$toType;
 	$newObj=$obj->copy();
 } else {
-  #florent ticket 4039
-  $reftype=$obj->Origin->refType;
-  if($toClassName=='Milestone' and $reftype == 'Activity'){
-         $PlannigEl=$obj->Origin->refType.'PlanningElement';
-         $obj->$PlannigEl->validatedCost=null;
-  }    
   $newObj=$obj->copyTo($toClassName,$toType, $toName, $copyToOrigin, $copyToWithNotes, $copyToWithAttachments,$copyToWithLinks, $copyAssignments,false,null,null,$copyToWithResult);
 }
 $result=$newObj->_copyResult;
