@@ -33,3 +33,17 @@ ADD COLUMN `endDate` datetime DEFAULT NULL;
 
 -- Password
 ALTER TABLE `${prefix}resource` CHANGE `crypto` `crypto` VARCHAR(100) DEFAULT NULL;
+
+-- Issue with workflow 
+DELETE FROM `${prefix}tempupdate`;
+INSERT INTO `${prefix}tempupdate` (id) SELECT max(id) FROM `${prefix}workflowstatus` group by idWorkFlow, idStatusFrom, idStatusTo, idProfile having count(*)>1;
+DELETE FROM `${prefix}workflowstatus` where id in (SELECT id FROM `${prefix}tempupdate`);
+DELETE FROM `${prefix}tempupdate`;
+INSERT INTO `${prefix}tempupdate` (id) SELECT max(id) FROM `${prefix}workflowstatus` group by idWorkFlow, idStatusFrom, idStatusTo, idProfile having count(*)>1;
+DELETE FROM `${prefix}workflowstatus` where id in (SELECT id FROM `${prefix}tempupdate`);
+DELETE FROM `${prefix}tempupdate`;
+INSERT INTO `${prefix}tempupdate` (id) SELECT max(id) FROM `${prefix}workflowstatus` group by idWorkFlow, idStatusFrom, idStatusTo, idProfile having count(*)>1;
+DELETE FROM `${prefix}workflowstatus` where id in (SELECT id FROM `${prefix}tempupdate`);
+DELETE FROM `${prefix}tempupdate`;
+
+CREATE UNIQUE INDEX `workflowstatusReference` ON `${prefix}workflowstatus` (idWorkFlow,idStatusFrom,idStatusTo,idProfile);
