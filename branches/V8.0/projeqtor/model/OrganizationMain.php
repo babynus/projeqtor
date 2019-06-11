@@ -1547,54 +1547,52 @@ function calculatePlanningElement() {
   
     // Get list of projets of the organization and sub-organizations
     $lstProjects = $this->getRecursiveOrganizationProjects(true,false);
-    
-    foreach($lstProjects as $keyPrjOrga=>$name) {
-        $pe=new ProjectPlanningElement();
-        $whereClause='(refId='.$keyPrjOrga.' and refType=\'Project\')';
-        $arrayFields=array('validatedWork',
-                           'assignedWork',
-                           'realWork',
-                           'leftWork',
-                           'plannedWork',
-                           'validatedCost',
-                           'assignedCost',
-                           'realCost',
-                           'leftCost',
-                           'plannedCost',
-                           'expenseValidatedAmount',
-                           'expenseAssignedAmount',
-                           'expenseRealAmount',
-                           'expenseLeftAmount',
-                           'expensePlannedAmount',
-                           'totalValidatedCost',
-                           'totalAssignedCost',
-                           'totalRealCost',
-                           'totalLeftCost',
-                           'totalPlannedCost'
-                          );
-        $peSum = $pe->sumSqlElementsFromCriteria($arrayFields, null,$whereClause);
-
-        $this->_byMet_validatedWork+=$peSum['sumvalidatedwork'];
-        $this->_byMet_assignedWork+=$peSum['sumassignedwork'];
-        $this->_byMet_realWork+=$peSum['sumrealwork'];
-        $this->_byMet_leftWork+=$peSum['sumleftwork'];
-        $this->_byMet_plannedWork+=$peSum['sumplannedwork'];
-        $this->_byMet_validatedCost+=$peSum['sumvalidatedcost'];
-        $this->_byMet_assignedCost+=$peSum['sumassignedcost'];
-        $this->_byMet_realCost+=$peSum['sumrealcost'];
-        $this->_byMet_leftCost+=$peSum['sumleftcost'];
-        $this->_byMet_plannedCost+=$peSum['sumplannedcost'];
-        $this->_byMet_expenseValidatedAmount+=$peSum['sumexpensevalidatedamount'];
-        $this->_byMet_expenseAssignedAmount+=$peSum['sumexpenseassignedamount'];
-        $this->_byMet_expenseRealAmount+=$peSum['sumexpenserealamount'];
-        $this->_byMet_expenseLeftAmount+=$peSum['sumexpenseleftamount'];
-        $this->_byMet_expensePlannedAmount+=$peSum['sumexpenseplannedamount'];
-        $this->_byMet_totalValidatedCost+=$peSum['sumtotalvalidatedcost'];
-        $this->_byMet_totalAssignedCost+=$peSum['sumtotalassignedcost'];
-        $this->_byMet_totalRealCost+=$peSum['sumtotalrealcost'];
-        $this->_byMet_totalLeftCost+=$peSum['sumtotalleftcost'];
-        $this->_byMet_totalPlannedCost+=$peSum['sumtotalplannedcost'];        
-    }
+    //foreach($lstProjects as $keyPrjOrga=>$name) {
+    $pe=new ProjectPlanningElement();
+    $whereClause='(refId in '.transformListIntoInClause($lstProjects).' and refType=\'Project\')';
+    $arrayFields=array('validatedWork',
+                       'assignedWork',
+                       'realWork',
+                       'leftWork',
+                       'plannedWork',
+                       'validatedCost',
+                       'assignedCost',
+                       'realCost',
+                       'leftCost',
+                       'plannedCost',
+                       'expenseValidatedAmount',
+                       'expenseAssignedAmount',
+                       'expenseRealAmount',
+                       'expenseLeftAmount',
+                       'expensePlannedAmount',
+                       'totalValidatedCost',
+                       'totalAssignedCost',
+                       'totalRealCost',
+                       'totalLeftCost',
+                       'totalPlannedCost'
+                      );
+    $peSum = $pe->sumSqlElementsFromCriteria($arrayFields, null,$whereClause);
+    $this->_byMet_validatedWork+=$peSum['sumvalidatedwork'];
+    $this->_byMet_assignedWork+=$peSum['sumassignedwork'];
+    $this->_byMet_realWork+=$peSum['sumrealwork'];
+    $this->_byMet_leftWork+=$peSum['sumleftwork'];
+    $this->_byMet_plannedWork+=$peSum['sumplannedwork'];
+    $this->_byMet_validatedCost+=$peSum['sumvalidatedcost'];
+    $this->_byMet_assignedCost+=$peSum['sumassignedcost'];
+    $this->_byMet_realCost+=$peSum['sumrealcost'];
+    $this->_byMet_leftCost+=$peSum['sumleftcost'];
+    $this->_byMet_plannedCost+=$peSum['sumplannedcost'];
+    $this->_byMet_expenseValidatedAmount+=$peSum['sumexpensevalidatedamount'];
+    $this->_byMet_expenseAssignedAmount+=$peSum['sumexpenseassignedamount'];
+    $this->_byMet_expenseRealAmount+=$peSum['sumexpenserealamount'];
+    $this->_byMet_expenseLeftAmount+=$peSum['sumexpenseleftamount'];
+    $this->_byMet_expensePlannedAmount+=$peSum['sumexpenseplannedamount'];
+    $this->_byMet_totalValidatedCost+=$peSum['sumtotalvalidatedcost'];
+    $this->_byMet_totalAssignedCost+=$peSum['sumtotalassignedcost'];
+    $this->_byMet_totalRealCost+=$peSum['sumtotalrealcost'];
+    $this->_byMet_totalLeftCost+=$peSum['sumtotalleftcost'];
+    $this->_byMet_totalPlannedCost+=$peSum['sumtotalplannedcost'];   
+    //}
     
 }
 
@@ -1646,7 +1644,6 @@ function calculatePlanningElement() {
       //$currentDetailObj=SqlElement::getCurrentObject(null,null,true,false);
       //if (($currentDetailObj and get_class($currentDetailObj)==get_class($this) and $currentDetailObj->id==$this->id)
       //or !$this->id) { 
-      $this->setAttributesForBudget();
       //}
       if(Parameter::getGlobalParameter('useOrganizationBudgetElement')==="YES") {return;}
       $this->setVisibility();
