@@ -9,6 +9,8 @@
 Graphical User Interface
 ************************
 
+.. _global_view:
+
 Global view
 -----------
 
@@ -70,20 +72,23 @@ Top bar
 
 .. rubric:: 1 - Project selector
 
+.. figure:: /images/GUI/ProjectSelector.png
+   :alt: Top bar
+   :align: center
+   
+
 * Allows to select the project to work on.
 * Restricted the visibility of all objects of the selected project, including sub-projects if any.
 * Defined the “default” project for new items.
 
-.. note:: User parameter: Default project
+.. topic:: **User parameter: "Default project"**
 
-   * Defines the project that will be selected by default.
+   * Defines the project that will be selected and display by default into the project selector .
 
 
-*  Button (next to the project selector setup button) to select current project in the project selector. Click twice to set up "all project" or just one time to select the project relates to this element.
-
-.. figure:: /images/GUI/screenshot.461.png
-   :alt: Top bar
-   :align: center
+* Button |iconProject16| to select current project in the project selector. 
+* Click twice to set up "all project" 
+* Click one time to select the project relates to this element.
 
 
 .. rubric:: 1.1 - Project selector parameters
@@ -131,6 +136,12 @@ Top bar
    :alt: Example - Filtering select (with search)
    :align: center
 
+
+.. rubric:: 1.2 - Project selector search
+
+Click on |buttonIconSearch| to search projects and subprojects from any screen with the same search functions as on the projects screen
+
+.. figure:: /images/GUI/BOX_ProjectSelectorSearch.png
 
 .. raw:: latex
 
@@ -402,9 +413,16 @@ List window
 
    * If the sorted column is linked to a reference list with sort order value, the sorting is executed on this sort value.
 
-   .. admonition:: For instance    
-     
-      * Sorting on the «Status» allows to sort values such as defined in the workflow. 
+
+.. admonition:: For instance
+    
+   * Sorting on the «Status» allows to sort values such as defined in the workflow. 
+
+
+
+
+
+
 
 .. rubric:: 7 - Items list
 

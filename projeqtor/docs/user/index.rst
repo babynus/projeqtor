@@ -5,7 +5,7 @@
 
 
 Welcome
-=======
+-------
 
 ProjeQtOr is a Quality based Project Organizer, as a web application.
 
@@ -40,142 +40,41 @@ Whatever your choice of the method, you can use ProjeQtOr.
     \newpage
 
 What's New in this user guide version?
-======================================
+--------------------------------------
 
 This section summarizes significant changes made in the user guide document for this version.
 
 To see complete list of changes made to software, visit the ProjeQtOr web site.
 
-Current version is V8.0
+**Current version V8.0 : Mains evolutions**
 
-**Main evolutions**
-.. rubric:: Expenses
+.. topic:: **Modules Management**
 
-Extension of the Expenses part to put it at the same level as the Recipes
+   Allows to activate or no the modules wich include a coherent group of features.
 
- * See: :ref:`Expenses`  (still under construction)
+      * see: :ref:`Module_Management`
 
-.. rubric:: Planning
+.. topic:: **Humans Resources Management**
 
-Global planning can show any item on Gantt chart
+   Allows to manage the society's humans resources
 
- * See: :ref:`Global planning`
+      * see: :ref:`humans_resources` (under construction)
 
-.. rubric:: Ergonomics and interface
+--------------------------------------------------------------------
 
-A new "Global List" screen that lists all the main project objects in the same list.The "Global List" view allows you to search among all the types of elements available in a single query
+**Reminder of the latest evolutions from V7.2**
 
- * See: :ref:`Global list`
+**Expenses:** Extension of the Expenses part to put it at the same level as the Recipes
 
+ * See: :ref:`Expenses`
 
-
-
-.. rubric:: Prévious version was V7.1
-
-.. rubric:: Planning
-
--	Managements of pool of resource
-
-A pool is a resource that contains several resources and can therefore be allocated to projects and assigned to activities.
-The pool has a capacity deducted from the resources that are assigned to it.
-It is planned taking into account the individual assignment of each resource.
-Conversely, each resource is assigned taking into account its participation in resource pools.
-A resource assigned to a pool can automatically enter real work on activities assigned to the pool.
-
- * See: :ref:`pool`
-
--	Filter on the planning
-
-Possibility to filter the activities to be displayed on the Gantt Planning view. The "parents" of the selected activities are also displayed to maintain the WBS structure.
+**Planning:** Global planning can show any item on Gantt chart
 
  * See: :ref:`gantt-planning`
 
-.. rubric:: Steering
+**Ergonomics and interface:** A new "Global List" screen that lists all the main project objects in the same list.
 
-Add dates on incomings, deliverables and deliveries to follow dates : initial, planned, real, validation
-
-.. rubric:: Requirements and tests
-
-Add new Requirements dashboard, similar to existing Ticket Dashboard
-
- * See: :ref:`requirements-dashboard`
- 
-.. rubric:: Configuration management (Products et Versions)
-     
-Possibility to define component types and component versions that will only be used for definition of structure (not for Version Planning or Tickets)
-
-.. rubric:: Controls et Automation
-    
-On workflows, view the list of types that use this workflow
-
- * See: :ref:`workflow`
-
-Define a project to be assigned by default to new users coming from LDAP
-
- * See: :ref:`global-parameters`
-
-.. rubric:: Miscellaneous
-
-Management of multiple customers.
-
-Define the default copy class.
-
-
-.. rubric:: Reports
-     
-New report "Customer impacted by tickets" for a given product or a given product version
-
-.. rubric:: Technical
-
-Display external libraries (and their version) on the pop-up "About"
-
-.. rubric:: Prévious version was V7.0
-
-  
-.. rubric:: Activity Stream.
-
-* Activity Stream
-    
- * Display of notes on right part of screen.
-    
- * Possibility to quickly add note, in chat like mode.
-    
- * See: :ref:`AS`
-
-.. rubric:: Configuration Management.
-
-* Versions planning
-
-  * New screen "version planning" to display versions in a Gantt chart according to their delivery dates.
-
-  * See: :ref:`versions-planning`
-
-.. rubric:: Review logs.
-
-* Deliverys
-
-  * Added list of deliverables integrated in delivery.
-  
-  * Automatic dispatch of delivery status to deliverables.
-
-  * See: :ref:`deliveries`
-
-
-.. rubric:: List of values.
-
-* Consolidation of status changes.
-
-  * See: :ref:`status`
-
-.. raw:: latex
-
-    \newpage
-
-
-.. rubric:: Notification system.
-
-* To generate notifications manually or according to some very "powerful" rules (defined as "where" clauses)
-  * See: :ref:`ControlAutomation`
+ * See: :ref:`global_view`
 
 
 .. raw:: latex
@@ -183,7 +82,7 @@ Display external libraries (and their version) on the pop-up "About"
     \newpage
 
 Features
-========
+--------
 
 ProjeQtOr  is a "Quality based Project Organizer".
 
@@ -197,7 +96,7 @@ It offers all the features needed to different Project Management actors under a
    Features
 
 Concepts
-========
+--------
 
 This chapter defines the concepts of ProjeQtOr.
 
@@ -210,7 +109,7 @@ They can be referred in the following chapters.
 
 
 Graphical user interface
-========================
+------------------------
 
 ProjeQtOr provides a very rich user interface.
 
@@ -228,7 +127,7 @@ as all screens have the same frames and sections always have simular structure a
 
 
 Planning and Follow-up
-======================
+----------------------
 
 ProjeQtOr provides all the elements needed to build a planning from workload, 
 constraints between tasks and resources availability.
@@ -247,7 +146,7 @@ In order to ease his work, ProjeQtOr provides several reporting tools, from the 
 
 
 Real work allocation
-====================
+--------------------
 
 As ProjeQtOr implements Effort Driven planning (work drives planning calcuation), 
 one of the key to manage project progress is to enter the real work 
@@ -261,7 +160,7 @@ ProjeQtOr provides a dedicate screen for this feature, to ease this input so tha
    RealWorkAllocation
 
 Document management
-===================
+-------------------
 
 ProjeQtOr integrates an easy to use Document Management feature.
 
@@ -271,7 +170,7 @@ ProjeQtOr integrates an easy to use Document Management feature.
    Document
 
 Ticket management
-=================
+-----------------
 
 .. toctree::
    :maxdepth: 1
@@ -281,7 +180,7 @@ Ticket management
 
   
 Requirements & Tests
-====================
+--------------------
 
 .. toctree::
    :maxdepth: 1
@@ -290,7 +189,7 @@ Requirements & Tests
    RequirementsDashBoard
 
 Financial
-=========
+---------
 
 .. toctree::
    :maxdepth: 1
@@ -301,7 +200,7 @@ Financial
    FinancialGallery
    
 Configuration Management
-========================
+------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -309,7 +208,7 @@ Configuration Management
    ConfigurationManagement
 
 Risk & Issue Management
-=======================
+-----------------------
 
 .. toctree::
    :maxdepth: 1
@@ -317,7 +216,7 @@ Risk & Issue Management
    RiskIssueManagement
 
 Review logs
-===========
+-----------
 
 .. toctree::
    :maxdepth: 1
@@ -325,7 +224,7 @@ Review logs
    ReviewLogs
 
 Environmental parameters
-========================
+------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -340,7 +239,7 @@ Environmental parameters
    DocumentDirectory 
 
 Tools
-=====
+-----
 
 .. toctree::
    :maxdepth: 1
@@ -348,7 +247,7 @@ Tools
    Tools
 
 Controls & Automation
-=====================
+---------------------
 
 .. toctree::
    :maxdepth: 1
@@ -356,7 +255,7 @@ Controls & Automation
    ControlAutomation
 
 Access rights
-=============
+-------------
 
 .. toctree::
    :maxdepth: 1
@@ -364,7 +263,7 @@ Access rights
    AccessRights
 
 Lists of values
-===============
+---------------
 
 .. toctree::
    :maxdepth: 1
@@ -375,7 +274,7 @@ Lists of values
 .. _index-element-types-label:
 
 Lists of types
-==============
+--------------
 
 Every element is linked to a type, defining some mandatory data or other GUI behavior.
 
@@ -385,7 +284,7 @@ Every element is linked to a type, defining some mandatory data or other GUI beh
    ListsOfTypes
 
 Plug-ins
-========
+--------
 
 .. toctree::
    :maxdepth: 1
@@ -393,7 +292,7 @@ Plug-ins
    Plugin
 
 Organizations
-=============
+-------------
 
 .. toctree::
    :maxdepth: 1
@@ -401,7 +300,7 @@ Organizations
    Organization
 
 Administration
-==============
+--------------
 
 .. toctree::
    :maxdepth: 1
@@ -409,7 +308,7 @@ Administration
    Administration
 
 Activity Stream
-===============
+---------------
 
 .. toctree::
    :maxdepth: 1
@@ -417,7 +316,7 @@ Activity Stream
    ActivityStream   
 
 Glossary
-========
+--------
 
 .. toctree::
    :maxdepth: 1

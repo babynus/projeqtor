@@ -4,6 +4,8 @@
 
 .. index:: ! Workflow
 
+.. _control_automation:
+
 .. _workflow:
 
 Workflows
@@ -150,7 +152,8 @@ Just define your templates, and select it on the "Mail on Events"
      - ${goto} : display Class and Id of item, clickable to have direct link to the item
    * 3 other tags are available except in the mail title because they display a table.
    
-     - ${HISTORY} : displays the last changes of an object.
+     - ${HISTORY} : displays the last change of an object.
+     - ${
      - ${LINK} : list linked elements to the item
      - ${NOTE} : lists the notes of the item 
     

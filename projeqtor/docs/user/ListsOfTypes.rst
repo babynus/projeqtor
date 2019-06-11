@@ -4,10 +4,6 @@
 
 .. title:: Lists of types
 
-.. raw:: latex
-
-    \newpage
-
 .. _type-restriction-section:
 
 Types restrictions

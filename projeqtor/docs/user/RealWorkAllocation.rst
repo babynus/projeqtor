@@ -4,8 +4,6 @@
 
     \newpage
 
-
-
 .. title:: Real work allocation
 
 .. index:: ! Real work allocation 
@@ -13,7 +11,7 @@
 .. _RWA:
 
 Real work allocation
---------------------
+********************
 
 This screen is devoted to input of real work.
 
@@ -25,7 +23,7 @@ Data entry for one resource, on a weekly base.
 
    * The corresponding cost to the real work is automatically updated to the assignment, activity and project.
 
-.. important:: **Global parameter: Number of hours per day**
+.. warning:: **Global parameter:** Number of hours per **day**
 
    * In global parameters screen, you can define wether work will be entered in hours or in days.
    * If you enter work in hours, you must define  the parameter **number of hours per day** before some real work has been entered.
@@ -37,12 +35,12 @@ Data entry for one resource, on a weekly base.
 
    Timesheet zone screen
 
-.. rubric:: 1- Selection timesheet
+.. rubric:: |one| Selection timesheet
 
 * Allows to select a timesheet for a resource and for a period.
 * More detail about selection timesheet, see : :ref:`selectionTimesheet-section`.
 
-.. rubric:: 2 - Show planned work
+.. rubric:: |two| Show planned work
 
 * Check this box to display the planned work.
 * Planned work is indicated over each input cell, on top left corner, in light blue color.
@@ -58,9 +56,9 @@ Data entry for one resource, on a weekly base.
 
    * The planned work will be deleted if the real work is entered instead of planned work (to avoid duplication of work in reports) to see it you have to refresh the screen.
 
-.. rubric:: 3 - Filters
+.. rubric:: |three| Filters
 
-* Filters allow to define the list of assigned tasks displayed.
+Filters allow to define the list of assigned tasks displayed.
 
  .. compound:: **Show only current week meeting**
 
@@ -78,16 +76,16 @@ Data entry for one resource, on a weekly base.
 
     * Check this box to show closed tasks.
 
- .. compound:: **Show ID**
+   .. compound:: **Show ID**
 
 * Show ID to identify all single task.
 
-.. note:: Global parameter "Display only handled tasks"
+.. note:: **Global parameter** "Display only handled tasks"
 
    * If the value of the parameter is set to "Yes", only tasks taken over (status "handled") will be displayed.
    * The checkbox "Hide not handled items" will be hidden.
 
-.. rubric:: 4 - Buttons
+.. rubric:: |four| Buttons
 
 Buttons of the timesheet:
 
@@ -97,39 +95,35 @@ Buttons of the timesheet:
 * Click on |buttonIconCsv| to export timesheet in CSV format.
 * Click on |buttonIconUndo| to undo modification on the timesheet.
 
-.. rubric:: 5 - Data entry validation
+.. rubric:: |five| Data entry validation
 
 Buttons allow to send and validate real work.
 
- .. compound:: **Button: Submit work**  (Displayed if mandatory )
+.. image:: /images/GUI/Button_Timesheet_SubmitWork.png 
 
-    * Users can send works to project leader.
+* Displayed if mandatory
+* Users can send works to project leader.
 
- .. compound:: **Button: Validate work**
+.. image:: /images/GUI/Button_Timesheet_ValidateWork.png 
 
-    * Project leaders can validate works.
+* Project leaders can validate works.
 
- .. compound:: **Button: Enter real as planned**
+.. image:: /images/GUI/Button_Timesheet_EnterRealWork.png 
 
-    * To enter automatically  the work as it is planned
+* To enter automatically  the work as it is planned
 
-.. rubric:: 6 - Scroll bar
+.. rubric:: |six| Scroll bar
 
 * Scroll bar allows the scrolling on imputation lines.
 * The header of table stays visible.
 * The footer of the table (with the sum of inputs) remains visible, fixed, as soon as the number of lines is greater than 20.
 
-.. rubric:: 7 - Input fields
+.. rubric:: |seven| Input fields
 
 * Input fields in timesheet.
 * More detail about, see : :ref:`inputFields-section`
 
-
-.. raw:: latex
-
-    \newpage
-
-.. rubric:: 8 - Tasks list
+.. rubric:: |eight| Tasks list
 
 .. figure:: /images/GUI/IMPUTATION2.png
    :alt: Task list zone
@@ -137,42 +131,50 @@ Buttons allow to send and validate real work.
 
    Task list zone
 
-The list displays the assigned tasks for the resource.
+
+.. rubric:: |A| **Tasks**
+ 
+.. compound:: **The list displays the assigned tasks for the resource.**
 
 * Only assigned tasks that meet the next criteria will be displayed.
    
   * Assigned tasks planned during this period.
   * Assigned tasks that meet the criteria of selected filters.
 
-  .. note::
+.. note::
 
      * Assigned tasks with real work are always displayed, even if closed.
      * The goal is to show all lines of the sum for each column, to be able to check that the week is completely entered.
 
 
- .. compound:: **A - Tasks**
 
-    * Assigned tasks are grouped by project and displayed according the project structure.  
-    * Click on the name of the activity to access it.  
-    * Click on |minusButton| or |plusButton| on the line will expand-shrink the group.
-    * Click on the icon of the activity to display it detail without leaving the current screen.  
+* Assigned tasks are grouped by project and displayed according the project structure.  
+* Click on the name of the activity to access it.  
+* Click on |minusButton| or |plusButton| on the line will expand-shrink the group.
+* Click on the icon of the activity to display it detail without leaving the current screen.  
  
 
- .. compound:: **B - Assigned task function**
+.. rubric:: |B| **Assigned task function**
 
     * The assigned task function is displayed in blue after the name of the activity.  
 
- .. compound:: **C - Assigned task comments**
+.. _assignedtask-comment:
+
+.. rubric:: |C| **Assigned task comments**
     
     * The icon |iconNoteAdd| allows to add a comment.
     * The icon |Note| indicates there is a comment on assigned task. 
     * Just move the mouse over the icon to see the last comment.
-    
-    .. note:: Click on icon |Note|
+
+.. note:: The comments |Note|
+
+   * fly over the icon with the mouse to see the comment
+   
+   .. figure:: /images/GUI/BOX_Timesheet_ViewComment.png
+   
+   * Click on the icon to open windows view comments
       
-* to open windows view comments
-      
-.. figure:: /images/GUI/left_click_note.png
+   .. figure:: /images/GUI/left_click_note.png
 
 
     * **Planned dates**: Planned start and end dates.
@@ -180,14 +182,27 @@ The list displays the assigned tasks for the resource.
     * **Real**: Sum of work done by the resource.
     * **Left**: The remaining planned work. 
     * **Reassessed**: The work needed to complete the task.
-
-.. note:: Total of days
-
-  .. figure:: /images/GUI/screenshot126.png
-       :alt: The last column is the sum for all days.
         
-      On the last column is the sum for all days of the week. It is a synthesis displayed for each project and globally for the whole week.
-      
+.. compound:: |D| **Imput fields**
+    
+Each day, for each task, a field of entered allows you to inform your real work.
+
+see: :ref:`inputFields-section`
+    
+**Total of days**
+
+On the last column is the sum for all days of the week. 
+
+It is a synthesis displayed for each project and globally for the whole week.
+    
+.. figure:: /images/GUI/Zone_TimesheetTotalDay.png
+   :alt: Total of the day
+   
+   Total of the day Zone  
+
+    
+    
+    
 .. raw:: latex
 
     \newpage
@@ -195,34 +210,38 @@ The list displays the assigned tasks for the resource.
 .. _selectionTimesheet-section:
 
 Selection timesheet
-^^^^^^^^^^^^^^^^^^^
+-------------------
 
-.. figure:: /images/GUI/127.png
+.. figure:: /images/GUI/ZONE_TimeSheetSelector.png
    :alt: Timesheet selector zone
    :align: center
 
    Timesheet selector zone
 
-.. rubric:: 1 - Selection of the resource 
+.. rubric:: |one| Selection of the resource 
 
-* Users can only select themselves as a resource.
+* By default, users can only select themselves as a resource.
 
+* Access to other resources timesheet depending on :ref:`specific-access-mode`, then user can select other resources timesheets. 
 
-* | Access to other resources timesheet depending on access rights, then user can select other resources timesheets. 
-  | Clicking on the checkbox below allows to select only resources allocated to the selected project on the list roll displayed. 
+* Clicking on the checkbox below allows to select only resources allocated to the selected project on the list roll displayed. 
 
-.. figure:: /images/GUI/screenshot.128.png
-
-
-.. rubric:: Selection period
+.. figure:: /images/GUI/Timesheet_LimitList.png
+   :alt: Limit list of resources
+   :align: center
+   
+   
+.. rubric:: |two| |three| Selection period
 
 * By default, the period is determined depending on the current day.
+
 * It is possible to change the period of two ways:
 
-  * Select year and week. |two|
-  * Or select the first day of the week. |three| 
+  * Select year and week |two| 
+  
+  * Or select the first day of the week |three| 
 
-.. rubric:: Displayed timesheet
+.. rubric:: |four| |five| |six| Displayed timesheet
 
 * A timesheet is displayed depends on the resource and period selection.
 * The name of the resource and the week are displayed. |four|
@@ -238,44 +257,46 @@ Selection timesheet
 .. _inputFields-section:
 
 Input fields
-^^^^^^^^^^^^
+------------
 
-.. figure:: /images/GUI/ZONE_InputTimeSheet.png
+.. figure:: /images/GUI/ZONE_InputTimesheet.png
    :alt: Input timesheet zone
    :align: center
 
    Input timesheet zone
 
-.. rubric:: 1 - Comments
+.. rubric:: |one| Comments
 
 * A global comment can be added on the weekly follow-up.
+* Possibility to extend the main comment area.
+* Can enter a comment on each line of real work allocation screen.
 
-.. note::
-  * Possibility to extend the main comment area.
-  * Can enter a comment on each line of real work allocation screen.
+.. rubric:: |two| Real work entry
 
-.. rubric:: 2 - Real work entry
-
-* Area allows to entry real work.
+* Area to enter real work.
 * Week is displayed from monday to sunday.
 * It possible put real work in off days.
 
- .. compound:: **Unit time of real work data entry**
+.. topic:: **Unit time of real work data entry**
 
-    * The global parameter "Unit for real work allocation" allows to set the unit time.
-    * Unit time available are in "Days" or "Hours".
+    * The global parameter **Unit for real work allocation** into Work Time tab allows to set the unit time.
+    
+    .. figure:: /images/GUI/GlobalParameters_WorkTime_UnitsWorks.png
+    
+    * unit for Timesheet (real work) : available are in "Days" or "Hours".
     * Selected unit time is displayed on left at bottom window. |four|      
 
- .. compound:: **Current day**
+
+.. compound:: **Current day**
 
     * Columns of current day is displayed in yellow.
 
- .. compound:: **Days off**
+.. compound:: **Days off**
 
     * Columns of days off is displayed in grey.
-    * Days off is determine in resource calendar definition, see: :ref:`calendar` screen.
+    * Days off is determine in resource calendar definition, see: :ref:`calendar`.
 
-.. rubric:: 3 - Left work
+.. rubric:: |three| Left work
 
 * Left work is automatically decreased on input of real work.
 * Resources can adjust this value to estimate the work needed to complete the task.
@@ -288,17 +309,16 @@ Input fields
 
 
 Input entry validation
-^^^^^^^^^^^^^^^^^^^^^^
+----------------------
 
 This section explains controls done on data entries.
 
-These controls are not blocking.
+* These controls are not blocking.
 
-Enhancement of data entered (yellow background)
+* yellow background : Enhancement of data entered
 
 
 .. rubric:: Resource capacity validation
-
 
 * The total of the day is green whether entries respects the resource capacity of days.
 * The total of the day is red whether entries is more than the resource capacity of days.
@@ -306,9 +326,10 @@ Enhancement of data entered (yellow background)
 .. topic:: Resource capacity of days
 
    * The resource capacity is defined by the number of hours per day and the resource capacity.
-   * The number of hours per day is defined in :ref:`Global parameters<unitForWork-section>` screen.
-   * The capacity of the resource is defined :ref:`resource` screen.
-
+   
+   * The number of hours per day is defined on :ref:`Global parameters<unitForWork-section>` screen.
+   
+   * The capacity of the resource is defined on :ref:`resource` screen.
 
 .. figure:: /images/GUI/ZONE_RealWorkAllocationWithColumnsValidation.png
    :alt: Columns validation zone
@@ -319,22 +340,23 @@ Enhancement of data entered (yellow background)
 
 .. rubric:: Entering real work is in excess of the number of days specified 
 
-* This alert box appears when the real work to a resource is entering  ahead of time.
-* The number of days in advance, resource can enter his real work is defined in "max days to book work" parameter in :ref:`Global parameters<unitForWork-section>` screen.
+* This alert box appears when the real work to a resource is entering ahead of time.
 
-.. figure:: /images/GUI/ALERT_RealWorkOverExpectedDays.png
+.. figure:: /images/GUI/ALERT_RealWork_Blocked.png
+
+* Resource can enter his real work is defined in "max days to book work" parameter in :ref:`Global parameters<unitForWork-section>` screen.
+    
+.. figure:: /images/GUI/GlobalParameters_WorkTime_Timesheet.png
    :alt: Real work over expected days alert
    :align: center
 
-   Real work over expected days alert
-
-
+   
 .. raw:: latex
 
     \newpage
 
-Automatically changing the status of tasks
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The status of tasks
+-------------------
 
 The task status can be changed automatically according to data entries on real work and left work.
 
@@ -365,3 +387,13 @@ The task status can be changed automatically according to data entries on real w
 
     * If a :term:`responsible` or a :term:`result` are set as mandatory in element type definition for the task. It's impossible to set those values by real work allocation screen.
     * The change status must be done in treatment section on the task definition screen.
+
+    
+Timesheet Validation
+--------------------
+
+under construction 
+
+.. figure:: /images/GUI/Zone_TimesheetValidation.png
+
+
