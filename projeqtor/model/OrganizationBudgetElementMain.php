@@ -1510,8 +1510,10 @@ function periodChanged(theId) {
     self::$_fieldsAttributes['reserveAmount'] = 'hidden';
   }
 
-  public function setAttributes($workVisibility, $costVisibility) {
-    
+  public function setAttributes() {
+    if (!$this->_workVisibility or !$this->_costVisibility) $this->setVisibility();
+    $workVisibility=$this->_workVisibility;
+    $costVisibility=$this->_costVisibility;
     // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
     if(Parameter::getGlobalParameter('useOrganizationBudgetElement')!="YES") {
       self::$_fieldsAttributes["_sec_synthesis"] = "hidden,noPrint";
