@@ -1,12 +1,8 @@
 .. include:: ImageReplacement.txt
 
-.. raw:: latex
+.. title:: Transverse Features
 
-    \newpage
-
-.. title:: Activity Stream
-
-.. index:: ! Activity Stream
+.. index:: ! Transverse Features
 
 .. _AS:
 
@@ -33,6 +29,28 @@ There are filters to refine the search.
 
     \newpage
 
+.. _Global-View:
+
+Global view
+-----------
+
+.. figure:: /images/GUI/GlobalView.png
+   :alt: Global View Screen
+   :align: center
+   
+   Global view screen
+   
+The "Global view" screen lists all the main objects created during a project. This allows you to quickly search through all types of items available.
+
+You can also choose to display only certain items through the list to display
+
+.. figure:: /images/GUI/GlobalView_DisplayItems.png
+   :alt: display items
+   :align: center 
+   
+   Display one or more items
+   
+   
 Chat
 ----
 

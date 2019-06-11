@@ -17,7 +17,9 @@ Planning management
 
 ProjeQtOr  provides all the elements needed to build a planning from workload, constraints between tasks and resources availability.
 
-* Multiple Access: People can edit the same item (if they get the right to do it) at the same time, without disturbing each other, as long as they do not change the same fields.
+.. topic:: **Multiple Access:** 
+
+   People can edit the same item (if they get the right to do it) at the same time, without disturbing each other, as long as they do not change the same fields.
 
 .. index:: Planning management (Project)
 
@@ -27,7 +29,7 @@ The project is the main element of ProjeQtOr.
 
 It is also the highest level of visibility and definition of access rights based on profiles.
 
-You can define profiles , some have visibility on all projects, others only on the projects they are assigned to.
+You can define profiles, some have visibility on all projects, others only on the projects they are assigned to.
 
 You can also define sub-projects of a project and sub-project of sub-projects without limit to this hierarchical organization.
 
@@ -97,6 +99,25 @@ The planning is displayed as a Gantt chart.
  
 The planning can also be viewed as a Project Portfolio, which is a Gantt planning view restricted to one line per project, plus optionally selected milestones.
 
+.. index:: Planning management (Global Planning)
+.. rubric:: Global Planning
+ 
+The Global Planning allows you to display many more elements on the gantt chart in addition to the usual projects, activities, and milestones.
+
+In this diagram view, you can view decisions, test sessions, deliveries, risks, tickets or opportunities ... 
+
+All of which can be linked to an activity or any other element of the diagram. 
+
+.. index:: Planning management (Resources Planning)
+.. rubric:: Resources Planning
+ 
+You can display the planning for each resource, but also by team, by pool or you can display all the resources whatever their assignments or assignments.
+
+.. topic:: **More details**
+
+   * :ref:`planning_element`
+   * :ref:`Gantt_chart`
+   
 .. raw:: latex
 
     \newpage
@@ -111,7 +132,7 @@ ProjeQtOr  manages the availability of resources that can be allocated to multip
 .. index:: Resource management (Resource)
 .. rubric:: Resources
 
-Resources are the persons working on the project activities.
+A resource can be a person working on the activities of one or more projects. Or material assigned to a particular task..
 
 A resource can also be a group of persons (team) for which you do not want to manage individual detail.
 
@@ -134,15 +155,13 @@ Only the resources allocated to the project of the activity can be assigned to t
 .. index:: Resource management (Calendar)
 .. rubric:: Calendars
  
-To manage off days, you have a global calendar.
+To manage the days off, you have a default general calendar based on the French calendar.
 
-This calendar can be split into multiple calendars, to manage distinct availability types :
+* You can create multiple calendars to manage different types of availability: you can create a '80% 'calendar with every Wednesday closing day, for example.
 
-* you can create a calendar "80% " with every Wednesday as off day
+* you can manage separate vacations when working with international teams.
 
-* you can manage distinct holidays when working with international teams.
-
-Each resource is then assigned to a calendar.
+* Each resource is then assigned to a calendar.
 
 .. index:: Resource management (Real work allocation)
 .. rubric:: Real work allocation
@@ -151,6 +170,12 @@ Resources enter their time spent on the Real work allocation screen. This allows
 
 Moreover, updating the left work allows to recalculate the planning taking into account the actual progress on each task.
 
+.. topic:: **more details**
+
+   * :ref:`resource`
+   * :ref:`pool`
+   * :ref:`CommonSections<allocation>`
+   
 
 .. raw:: latex
 
@@ -159,9 +184,11 @@ Moreover, updating the left work allows to recalculate the planning taking into 
 .. index:: ! Tickets management
 
 Tickets management
------------------- 
+------------------
 
-ProjeQtOr includes a Bug Tracker to monitor incidents on your projects, with possibility to include work on planned tasks of your projects.
+ProjeQtOr offers a Ticketing environment. 
+
+With its bug tracking to monitor incidents on your projects, you with the ability to include work on scheduled tasks of your projects.
 
 .. index:: Tickets management (Ticket)
 .. rubric:: Ticket
@@ -172,8 +199,10 @@ It is generally a short activity for which you want to follow advancement to des
  
 For example, bugs or problems can be managed through Tickets:
  
-* You can not schedule the bugs before they are identified and registered 
-* You must be able to give a solution to a bug (workaround or fix).
+* You can not program bugs before they are identified and saved
+* You must be able to give a solution to a bug (workaround or solution).
+* You can schedule deadlines, estimate the load, assign coordinators and / or manager.
+* It is possible to attach external documents, to link other elements (requirements, test sessions, actions...), to leave notes
 
 .. index:: Tickets management (Ticket simple)
 
@@ -183,6 +212,10 @@ Simple tickets are just simplified representations of Tickets for users that wil
  
 Elements created as simple tickets are also visible as Tickets, and vice versa.
 
+.. topic:: **more details**
+
+   * :ref:`ticket`
+   * :ref:`ticket-dashboard`
 
 .. raw:: latex
 
@@ -232,6 +265,12 @@ Individual expenses can record expenses generated by a given resource.
  
 ProjeQtOr  can manage various financial elements found on a project: Quotation (proposals), Orders (received from customers), the invoicing Terms and Bills.
 
+.. topic:: **more details**
+
+   * :ref:`Expenses`
+   * :ref:`orders`
+   * :ref:`bill`
+   * :ref:`finacial_gallery`
 
 .. raw:: latex
 
@@ -286,9 +325,16 @@ Many Reports are available to track activity on projects, some displayed as grap
  
 Finally, thanks to ProjeQtOr , everything is traced.
 
-You can follow-up, in a centralized and collaborative way, the various elements you used to follow-up (or not) in many Excel sheets : list of Questions & Answers, recording Decisions impacting the project, management of documents configuration, follow-up of meetings ...
+Thanks to ProjeQtOr, everything is drawn.
 
-In addition, all updates are tracked on each item to keep (and display) an history of the life of the item.
+You can follow, in a centralized and collaborative way, all the elements created: list of questions and answers, recording decisions affecting the project, managing the configuration of documents, follow-up meetings ...
+
+In addition, all updates are tracked on each item to retain (and display) a history of the item's life.
+
+.. topic:: **more details**
+
+   * :ref:`control_automation`
+   * :ref:`report`
 
 .. raw:: latex
 
@@ -335,7 +381,11 @@ Actions shall be defined to avoid risks, not miss the opportunities and solve is
 
 It is also appropriate to provide mitigation actions for identified risks that did not occur yet.
 
+.. topic:: **More details**
 
+   * :ref:`risk`
+   
+   
 .. raw:: latex
 
     \newpage
@@ -385,8 +435,12 @@ This allows you to link your activities to target version.
 
 This also allows to know, in the case of Bug Tracking, the version on which a problem is identified and the version on which it is (or will be) fixed.
 
+.. topic:: **More details**
 
-
+   * :ref:`concept<concept_meeting>`
+   * :ref:`common-sections<progress-section-meeting>`
+   * :ref:`type-restriction-section<meeting-type>`
+   * :ref:`meeting`
 
 .. raw:: latex
 
@@ -397,27 +451,36 @@ This also allows to know, in the case of Bug Tracking, the version on which a pr
 Documents management
 --------------------
  
-ProjeQtOr offers integrated **Document Management**.
+ProjeQtOr offers integrated Document Management.
 
 This tool is simple and efficient to manage your project and product documents.
 
-ProjeQtOr supported only digital document. Document file will be stored in the tool as versions.
+ProjeQtOr support only digital document. 
+
+A document will be stored in the tool as versions.
 
 Document can be versioning and an approver process can be defined.
 
 .. rubric:: Directories structure management
 
 * Allows to define a structure for document storage.
-* Directories structure is defined in :ref:`document-directory` screen.
+* Directories structure is defined in document directory screen.
 
 .. rubric:: Document management
   
-* :ref:`document` screen allows to manage documents.
+* Document screen allows to manage documents.
 
 .. rubric:: Document access
 
 * Global definition of directories is directly displayed in the document menu, to give direct access to documents depending on the defined structure.
-* See: :ref:`menu-document-window`.
+
+.. topic:: **More details**
+
+   * :ref:`document`
+   * :ref:`menu-document-window`
+   * :ref:`document-directory`
+
+
 
 .. raw:: latex
 
@@ -426,7 +489,7 @@ Document can be versioning and an approver process can be defined.
 .. index:: ! Commitments management
 
 Commitments management
----------------------- 
+----------------------
 
 ProjeQtOr  allows you to follow the requirements on your projects and measure at any time coverage progress, making it easy to reach your commitments.
 
@@ -449,13 +512,61 @@ The definition of Test cases is used to describe how you will test that a given 
  
 Test sessions group test cases to be executed for a particular purpose.
 
+.. topic:: **More details**
+
+   * :ref:`requirement`
+   * :ref:`requirements-dashboard`   
+   
+
+.. index:: ! Humans Resources
+
+.. _feat_humans_resources:
+
+Humans Resources
+----------------
+
+**[UNDER CONSTRUCTION]**
+
+This section allows to manage the society's Humans Resources 
+This system comes in addition to the standards of the management of absences
+
+* You can define the employees, contract types, the contract for the employees
+* You can choose the leave entitlement standard for each type of contract
+* The employee may reserve periods of leave of absence according to his rights.
+* The system also includes a validation process of the requests during the leave period.
+
+.. index:: Human Resources (Sections)
+.. rubric:: **Humans Resources Sections**
+
+   * Leaves Calendar
+   * Leaves Period
+   * Leaves rights earned
+   * Employees
+   * Employment Contract
+   * Employee Managers
+   * Leaves Dashboard
+   * Regulated leaves parameters
+
+
+.. index:: Human Resources (variable capacity)
+.. rubric:: **Variable capacity**
+   
+   The resources may have a capacity that varies over time. 
+   This allows you to reserve and enter additional time (for periods of overtime) 
+   or less than the standard capacity (for some periods of 'rest
+
+
+.. topic:: **More details**
+
+   * :ref:`human_resources` en construction
+   
 
 .. raw:: latex
 
     \newpage
 
 .. index:: ! Tools
- 
+
 Tools
 -----
 
@@ -501,3 +612,9 @@ ProjeQtOr provides administrative features to manage connections, send special a
 .. rubric:: CRON
 
 Moreover, the tool features its own CRON system, independent of the operating system and able to handle the PHP stop and restart.
+
+.. topic:: **More details**
+
+   * :ref:`toolspage`
+   * :ref:`administration`
+   

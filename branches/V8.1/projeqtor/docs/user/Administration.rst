@@ -5,8 +5,14 @@
 
 .. _admin-console:
 
-ADMINISTRATION CONSOLE
+Administration Console
 **********************
+
+.. figure:: /images/GUI/SCR_Administration.png
+   :alt: Administration screen
+   :align: center
+   
+   Administration screen
 
 .. note::
 
@@ -89,7 +95,7 @@ Log files maintenance
 
 .. _audit-connections:
 
-AUDIT CONNECTIONS
+Audit connections
 *****************
 
 Audit connection proposes a view of “who is online”.
@@ -106,7 +112,7 @@ Audit connection proposes a view of “who is online”.
 
 .. _global-parameters:
 
-GLOBAL PARAMETERS
+Global Parameters
 *****************
 
 Global parameters screen allows configuration of application settings.
@@ -654,9 +660,9 @@ Mail titles
 
 .. raw:: latex
 
-.. index:: special fields
-
     \newpage
+    
+.. index:: special fields
 
 .. _administration-emailing-group-label:
 

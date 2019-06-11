@@ -7,15 +7,18 @@
 .. _Organizations:
 
 Organizations
--------------------
+-------------
 
 .. rubric:: Management of organizations
 
-* Management of organizations allows to  edit the structure of the company in the frame of organizations (Departments, Units, Location, ...)
+* Management of organizations allows to edit the structure of the company in the frame of organizations (Departments, Units, Location, ...)
 * The organization summarizes the data of the projects in progress for the organization.
 
 Depending on the profile, you can limit the visibility of resources to people in the same organization or team as the current user.
 
+.. note:: test
+   
+   je veux une note ici
 
 .. sidebar:: Other sections
 

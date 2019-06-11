@@ -6,22 +6,48 @@
 
 .. index:: ! Access rights (Profile)
 
-Acces Rights
-************
+
 
 .. _profile:
+
+.. _Module_Management:
 
 Module Management
 -----------------
 
-module management allows to choose the module or modules that will appear in the interface.
+| The Module Management allows to choose the module(s) that will appear in the interface.
+| This enables or disables a consistent group of features.
+| This screen is then accessible via a dedicated menu in the :ref:`Acces Right`
+
 
 .. figure:: /images/modulemanagement.png
 
-.. compound:: **first column:** The module's name
-.. compound:: **second column:** The list of screens that will be displayed if the module is installed.
-.. compound:: **third column:** The module's description
+.. topic:: **columns descriptions**
 
+   .. compound:: **first column:** The module's name
+   .. compound:: **second column:** The list of screens that will be displayed if the module is installed.
+   .. compound:: **third column:** The module's description
+
+**you can choose to install or not :**
+
+* the planning section 
+* the tickets
+* the time tracking
+* the requirements
+* the financial section with expenses and / or billing
+* the risks
+* The meetings
+* The steering 
+* the products configuration (versions, components...)
+* The humans resources
+* The external documents management 
+* The Organizations (level society) management 
+* The activity stream
+* and the notifications.
+
+.. note:: 
+   * Each module can be installed independently.
+   * each module is described and explained on ProjeQtor
 
 Profiles
 --------

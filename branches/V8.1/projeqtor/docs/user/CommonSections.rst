@@ -271,18 +271,6 @@ This section allows to manage assignment of resources to tasks.
 
    Assignment section with incomplete planned work
 
-
-
-
-
-
-
-
-.. raw:: latex
-
-    \newpage
-
-
 .. rubric:: Assignment list
 
 .. list-table:: Fields of assignment list
