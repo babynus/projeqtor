@@ -5,6 +5,8 @@
 .. index:: ! Expense
 .. index:: ! Project (Expense)
 
+.. _Expenses:
+
 Expenses (under construction)
 *****************************
 

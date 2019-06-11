@@ -7,6 +7,7 @@
 
     \newpage
 
+.. _concept:
 
 Project
 =======
@@ -19,7 +20,7 @@ Project element is more than a :ref:`planning-element`, it is also used to:
 
 * Allows to gather all data depend on project:
 
-  * Planning elements
+  * Planning element
   * Risk assessment, Risk mitigation, Reserve
   * Ticket, Issue, Bug tracking, Change request, Support
   * Review logs, Meeting, Decision, Action plan
@@ -368,7 +369,6 @@ An activity can grouped other activities or be a task.
     * Dates, works and costs of activities (child) are summarized in the activity (parent).
 
  .. compound:: **Task**
-
     * An activity is a task when it's not a parent of activities.
     * A task is assigned to resources for to be performed.
 
@@ -409,6 +409,8 @@ May be a transition point between phases, deliveries.
 ProjeQtOr offers two types of milestone floating and fixed.
 
 More detail, see: :ref:`milestone` screen.
+
+.. _concept_meeting:
 
 .. rubric:: Meeting
 

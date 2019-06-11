@@ -8,6 +8,7 @@
 
 .. index:: ! Financial Gallery 
 
+.. _finacial_gallery:
 
 Financial Gallery
 -----------------

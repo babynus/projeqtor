@@ -1,23 +1,21 @@
 .. include:: ImageReplacement.txt
 
-
 .. title:: Planning elements
-
 
 .. raw:: latex
 
     \newpage
 
+.. _planning_element:
+    
 Planning elements
 =================
-
 
 .. contents:: Planning elements
    :local: 
    :backlinks: top
 
 The planning elements :ref:`test-session` and :ref:`meeting` are described in their topics.
-
 
 .. index:: ! Project 
 
@@ -36,19 +34,22 @@ It is also the top-level of visibility, depending on profiles.
 .. rubric:: Sub-projects 
 
 * You can also define sub-projects on a project.
-* Then, the project may not be real projects, but just organizational breakdown corresponding to the organization.
+* Then, the projects may not be real projects, but just organizational breakdown corresponding to the organization.
 
 
 .. rubric:: Fix planning 
 
 * When box “fix planning” is checked, the project scheduling won’t be remade.
 * This will avoid change on planned values.
+* The planning will always be the same whatever you do on other projects.
+
+.. warning:: This may lead to dependencies unconsistancies
 
 .. rubric:: Under construction
 
-* When a project is under construction, no automatic email is sent for the elements of the project.
-* A project can be under construction as long as it isn’t stated (set to *handled* status).
-
+* When a project is under construction, no automatic emails will be sent, no alerts will be generated for the project elements.
+* A project can be under construction as long as it isn’t stated (set to **handled** status).
+* The resources don't see it on timesheet
 
 .. rubric:: Manual indicators
 

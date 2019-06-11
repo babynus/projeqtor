@@ -6,6 +6,8 @@
 
     \newpage
 
+.. _Gantt_chart:
+
 Gantt charts
 ************
 
@@ -96,7 +98,7 @@ The critical path of your project is the longest sequence of tasks that must be 
 * click on the **"critical path"** check box to calculate and display the red path in the Gantt schedule.
 
 .. warning:: Project tasks that are not traversed by the critical path are elements that will not affect the duration of the project and, 
-   even if modified, will not result in a modification of this duration on the entire project 
+   even if modified, will not result in a modification of this duration on the entire project
 
 .. figure:: /images/GUI/Gantt_CriticalPath.png
    :alt: Critical Path
@@ -469,6 +471,7 @@ Real end date > Validated end date
    Display with name
 
 .. topic:: Global parameter > Work Tab >Planning Section > "Show resource on the Gantt"
+
    This parameter defines the option availability and whether the resource name or initial is displayed.
    
    
