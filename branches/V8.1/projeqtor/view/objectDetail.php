@@ -594,9 +594,10 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     $obj->setVisibility();
     $workVisibility=$obj->_workVisibility;
     $costVisibility=$obj->_costVisibility;
-    if (get_class($obj)=="MeetingPlanningElement" or get_class($obj)=="PeriodicMeetingPlanningElement") {
-      $obj->setAttributes($workVisibility, $costVisibility);
-    } else if (method_exists($obj, 'setAttributes')) {
+    //if (get_class($obj)=="MeetingPlanningElement" or get_class($obj)=="PeriodicMeetingPlanningElement") {
+    //  $obj->setAttributes($workVisibility, $costVisibility);
+    //} else 
+    if (method_exists($obj, 'setAttributes')) {
       $obj->setAttributes();
     }
     // ADD BY Marc TABARY - 2017-02-16 - WORK AND COST VISIBILITY
@@ -629,7 +630,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     $workVisibility=$obj->_workVisibility;
     $costVisibility=$obj->_costVisibility;
     if (get_class($obj)=="OrganizationBudgetElement" or get_class($obj)=="OrganizationBudgetElementCurrent") {
-      $obj->setAttributes($workVisibility, $costVisibility);
+      $obj->setAttributes();
     }
     // END ADD BY Marc TABARY - 2017-02-16 - WORK AND COST VISIBILITY
   } else if (method_exists($obj, 'setAttributes')) {
