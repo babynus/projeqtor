@@ -636,6 +636,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   } else if (method_exists($obj, 'setAttributes')) {
     $obj->setAttributes();
   }
+  if (method_exists($obj, 'setAttributesForBudget')) {
+    $obj->setAttributesForBudget();
+  }
   $nobr=false;
   if (!$obj->id) {
     $canUpdate=(securityGetAccessRightYesNo('menu'.$classObj, 'create', $obj)=='YES');
