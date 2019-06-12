@@ -40,6 +40,16 @@ $idObjectType = 'id'.$objectClass.'Type';
 $idMailable = SqlList::getIdFromTranslatableName('Mailable', $objectClass);
 $where = "(idMailable = ".$idMailable." or idMailable IS NULL) and (idType = '".$obj->$idObjectType."' or idType IS NULL)";
 $listEmailTemplate = $emTp->getSqlElementsFromCriteria(null,false,$where);
+$displayComboButton=false;
+$user=getSessionUser();
+$profile=$user->getProfile();
+$habil=SqlElement::getSingleSqlElementFromCriteria('habilitationOther', array('idProfile'=>$profile, 'scope'=>'combo'));
+if ($habil) {
+  $list=new ListYesNo($habil->rightAccess);
+  if ($list->code=='YES') {
+    $displayComboButton=true;
+  }
+}
 ?>
 <input type="hidden" name="dialogMailObjectClass" id="dialogMailObjectClass" value="<?php echo htmlEncode($objectClass);?>" />
   <table>
@@ -183,6 +193,7 @@ $listEmailTemplate = $emTp->getSqlElementsFromCriteria(null,false,$where);
       					          style="width: 500px; display:none"
       					          class="input" onchange="dialogMailIdEmailChange()"></textarea>
   					    <td style="vertical-align: top">
+  					    <?php if ($displayComboButton) {?>
                  <button id="otherMailDetailButton" dojoType="dijit.form.Button" showlabel="false"
                          style="display:none" title="<?php echo i18n('showDetail')?>"iconClass="iconView">
                    <script type="dojo/connect" event="onClick" args="evt">
@@ -190,6 +201,7 @@ $listEmailTemplate = $emTp->getSqlElementsFromCriteria(null,false,$where);
                       showDetail('dialogMailObjectIdEmail', 0, 'Resource', true);
                    </script>
                  </button>
+                 <?php }?>
                 </td>
               </td>
             </tr>
