@@ -64,6 +64,8 @@ class Baseline extends SqlElement {
 // ============================================================================**********
     
   public function saveWithPlanning() {
+    global $saveBaselineInProgress;
+    $saveBaselineInProgress=true;
     // Remove existing for same date : only one baseline a day
     $crit=array('idProject'=>$this->idProject,'baselineDate'=>$this->baselineDate);
     $list=$this->getSqlElementsFromCriteria($crit);
@@ -87,6 +89,7 @@ class Baseline extends SqlElement {
   }
   
   public function copyItem($itemFrom) {
+    global $saveBaselineInProgress;
     if ($itemFrom=='PlanningElement' and RequestHandler::getBoolean('isGlobalPlanning')) {
       $objFrom=new GlobalPlanningElement();
     } else {
@@ -109,6 +112,7 @@ class Baseline extends SqlElement {
     $query="INSERT INTO $tableTo ($colList idBaseline)\n"
         ."SELECT $colList $idBaseline FROM $tableFrom as $itemFrom \n"
         ." where idProject in ".transformListIntoInClause($proj->getRecursiveSubProjectsFlatList(true, true));
+    debugLog($query);
     $res=SqlDirectElement::execute($query);
     if ($itemFrom=='PlannedWork') { // Also include existing real work
       $objFrom=new Work();
