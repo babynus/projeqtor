@@ -7031,6 +7031,12 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
         $result['refDate']=self::getRefDate($this->ref1Type, $this->ref1Id);
       }
     }
+    if (get_class($this)=='Project' and !$parent) {
+      $aff=new Affectation();
+      $affList=$aff->getSqlElementsFromCriteria(array('idProject'=>$this->id,'idle'=>'0'));
+      $sub=SqlElement::toArrayList($affList,$this,$outputHtml);
+      $result['affectation']=$sub;
+    }
     return $result;
   }
 
