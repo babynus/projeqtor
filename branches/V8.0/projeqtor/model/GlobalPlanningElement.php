@@ -235,11 +235,11 @@ class GlobalPlanningElement extends SqlElement {
    * @return the databaseTableName
    */
   public static function getTableNameQuery($limitToClass=null) {
-    global $showIdleProjects;
+    global $showIdleProjects, $saveBaselineInProgress;
     $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
     $obj=new GlobalPlanningElement();
     $na=Parameter::getUserParameter('notApplicableValue');
-    if (!$na) $na='null';
+    if (!$na or $saveBaselineInProgress) $na='null';
     $pe=new PlanningElement();
     $peTable=$pe->getDatabaseTableName();
     $pex=new PlanningElementExtension();

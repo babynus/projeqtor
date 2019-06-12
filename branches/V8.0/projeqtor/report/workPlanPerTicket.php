@@ -139,7 +139,7 @@
     $realWork = $resultt['realWork'];
     $leftWork = $resultt['leftWork'];
     $progress = 0;
-    if ($plannedWork>0) {
+    if ( ($realWork + $leftWork) > 0) {
       $progress = $realWork / ($realWork + $leftWork) * 100;
     }
     for ($i=1;$i<$resultt["level"];$i++) {
