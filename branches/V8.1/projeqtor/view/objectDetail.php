@@ -3139,6 +3139,13 @@ function drawOrigin($list, $refType, $refId, $obj, $col, $print) {
         $origObjClass=$list->originType;
         $origObjId=$list->originId;
       }
+      //florent ticket#2948
+      if($origObjClass == 'DocumentVersion'){
+        $origObjClass = 'Document';
+        $doc = new DocumentVersion($origObjId,true);
+        $origObjId = $doc->idDocument;
+      }
+      
       $gotoE=' onClick="gotoElement('."'".$origObjClass."','".htmlEncode($origObjId)."'".');" style="cursor: pointer;" ';
       echo '</td><td xclass="noteData" '.$gotoE.' style="height: 15px">';
     }
