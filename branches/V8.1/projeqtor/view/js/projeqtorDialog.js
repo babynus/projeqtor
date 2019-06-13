@@ -3603,6 +3603,9 @@ function showFilterDialog() {
     dojo.style(dijit.byId('filterValueList').domNode, {
       display : 'none'
     });
+    dojo.style(dijit.byId('showDetailInFilter').domNode, {
+      display : 'none'
+    });
     dojo.style(dijit.byId('filterValueCheckbox').domNode, {
       display : 'none'
     });
@@ -3806,6 +3809,10 @@ function filterSelectAtribute(value) {
           dojo.style(dijit.byId('filterValueList').domNode, {
             display : 'block'
           });
+          dojo.style(dijit.byId('showDetailInFilter').domNode, {
+            display : 'block'
+          });
+          dijit.byId('showDetailInFilter').set('value', item.id);
           dijit.byId('filterValueList').reset();
           dojo.style(dijit.byId('filterValueCheckbox').domNode, {
             display : 'none'
@@ -3819,6 +3826,9 @@ function filterSelectAtribute(value) {
             display : 'none'
           });
           dojo.style(dijit.byId('filterValueList').domNode, {
+            display : 'none'
+          });
+          dojo.style(dijit.byId('showDetailInFilter').domNode, {
             display : 'none'
           });
           dojo.style(dijit.byId('filterValueCheckbox').domNode, {
@@ -3837,6 +3847,9 @@ function filterSelectAtribute(value) {
           dojo.style(dijit.byId('filterValueList').domNode, {
             display : 'none'
           });
+          dojo.style(dijit.byId('showDetailInFilter').domNode, {
+            display : 'none'
+          });
           dojo.style(dijit.byId('filterValueCheckbox').domNode, {
             display : 'none'
           });
@@ -3853,6 +3866,9 @@ function filterSelectAtribute(value) {
           display : 'none'
         });
         dojo.style(dijit.byId('filterValueList').domNode, {
+          display : 'none'
+        });
+        dojo.style(dijit.byId('showDetailInFilter').domNode, {
           display : 'none'
         });
         dojo.style(dijit.byId('filterValueCheckbox').domNode, {
@@ -3879,6 +3895,9 @@ function filterSelectAtribute(value) {
     dojo.style(dijit.byId('filterValueList').domNode, {
       display : 'none'
     });
+    dojo.style(dijit.byId('showDetailInFilter').domNode, {
+      display : 'none'
+    });
     dojo.style(dijit.byId('filterValueCheckbox').domNode, {
       display : 'none'
     });
@@ -3896,6 +3915,9 @@ function filterSelectOperator(operator) {
       display : 'none'
     });
     dojo.style(dijit.byId('filterValueList').domNode, {
+      display : 'none'
+    });
+    dojo.style(dijit.byId('showDetailInFilter').domNode, {
       display : 'none'
     });
     dojo.style(dijit.byId('filterValueCheckbox').domNode, {
@@ -3919,6 +3941,9 @@ function filterSelectOperator(operator) {
     dojo.style(dijit.byId('filterValueList').domNode, {
       display : 'none'
     });
+    dojo.style(dijit.byId('showDetailInFilter').domNode, {
+      display : 'none'
+    });
     dojo.style(dijit.byId('filterValueCheckbox').domNode, {
       display : 'none'
     });
@@ -3935,6 +3960,9 @@ function filterSelectOperator(operator) {
       display : 'none'
     });
     dojo.style(dijit.byId('filterValueList').domNode, {
+      display : 'none'
+    });
+    dojo.style(dijit.byId('showDetailInFilter').domNode, {
       display : 'none'
     });
     dojo.style(dijit.byId('filterValueCheckbox').domNode, {
@@ -3966,6 +3994,9 @@ function filterSelectOperator(operator) {
     } else if (dataType == "list") {
       filterType="list";
       dojo.style(dijit.byId('filterValueList').domNode, {
+        display : 'block'
+      });
+      dojo.style(dijit.byId('showDetailInFilter').domNode, {
         display : 'block'
       });
       //ADD qCazelles - Dynamic filter - Ticket #78
