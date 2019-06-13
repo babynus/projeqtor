@@ -87,7 +87,7 @@ function showMessages() {
       $startDate=$msg->startDate;
       $endDate=$msg->endDate;
       $today=date('Y-m-d H:i:s');
-      if( $startDate <= $today && $endDate >= $today){
+      if( $startDate <= $today && $endDate >= $today or $startDate=='' && $endDate=='' or $startDate<= $today && $endDate==''){
           $cpt++;
           if ($cpt>$cptMax) {
             echo '<tr><td colspan="2" class="messageData">'.i18n('limitedDisplay', array($cptMax)).'</td></tr>';
