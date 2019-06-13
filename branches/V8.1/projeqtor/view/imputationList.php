@@ -203,7 +203,7 @@ if(sessionValueExists('listShowIdleTimesheet')and getSessionValue('listShowIdleT
                 -->
               </td>
               <td>
-              <button dojoType="dijit.form.Button" type="button" style="margin-left:50%;">
+              <button dojoType="dijit.form.Button" type="button" style="">
               <?php echo i18n('today');?>
                 <script type="dojo/method" event="onClick">
                      dijit.byId('dateSelector').set('value','<?php echo $currentDay ;?>');
