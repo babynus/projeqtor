@@ -350,8 +350,10 @@ if (property_exists($objectClass,'idStatus')) {
                 <td width="56px">
                     <button dojoType="dijit.form.Button" type="button" >
                             <?php echo i18n('resetColor');?>
+                            <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
                             <script type="dojo/method" event="onClick">
-                             resetFilter();
+                             var lstStat = <?php echo json_encode($lstStat); ?>;
+                             resetFilter(lstStat);
                              </script>
                           
                     </button>
@@ -457,8 +459,10 @@ if (property_exists($objectClass,'idStatus')) {
                       <td width="6px">
                         <button dojoType="dijit.form.Button" type="button" >
                             <?php echo i18n('resetColor');?>
+                            <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
                             <script type="dojo/method" event="onClick">
-                             resetFilter();
+                             var lstStat = <?php echo json_encode($lstStat); ?>;
+                             resetFilter(lstStat);
                              </script>
                           
                         </button>
@@ -491,8 +495,10 @@ if (property_exists($objectClass,'idStatus')) {
               <td width="6px">
                 <button dojoType="dijit.form.Button" type="button" >
                     <?php echo i18n('resetColor');?>
+                    <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
                   <script type="dojo/method" event="onClick">
-                     resetFilter();
+                     var lstStat = <?php echo json_encode($lstStat); ?>;
+                     resetFilter(lstStat);
                   </script>
                   
                 </button>
@@ -523,9 +529,11 @@ if (property_exists($objectClass,'idStatus')) {
               -->
               <td width="6px">
                 <button dojoType="dijit.form.Button" type="button" >
-                    <?php echo i18n('resetColor');?>
+                    <?php echo i18n('resetColor'); ?>
+                    <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
                   <script type="dojo/method" event="onClick">
-                     resetFilter();
+                     var lstStat = <?php echo json_encode($lstStat); ?>;
+                     resetFilter(lstStat);
                   </script>
                   
                 </button>
@@ -557,8 +565,10 @@ if (property_exists($objectClass,'idStatus')) {
               <td width="6px ">
                 <button dojoType="dijit.form.Button" type="button" >
                     <?php echo i18n('resetColor');?>
+                    <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
                   <script type="dojo/method" event="onClick">
-                     resetFilter();
+                     var lstStat = <?php echo json_encode($lstStat); ?>;
+                     resetFilter(lstStat);
                   </script>
                   
                 </button>
