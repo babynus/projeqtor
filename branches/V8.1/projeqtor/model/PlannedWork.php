@@ -1286,7 +1286,7 @@ class PlannedWork extends GeneralWork {
     }
     // save Assignment
     foreach ($arrayAssignment as $ass) {
-      $ass->simpleSave();
+      $ass->simpleSave(); // Attention ! simpleSave for Assignment will execute direct query
     }
     
     if ($withCriticalPath) {
@@ -1306,7 +1306,7 @@ class PlannedWork extends GeneralWork {
         $resPe=$pe->simpleSave();
         PlanningElement::updateSynthesis($pe->refType, $pe->refId);
       } else {
-   	    $resPe=$pe->simpleSave();
+   	    $resPe=$pe->simpleSave(); // Attention ! simpleSave for PlanningElement will execute direct query
       }
    	  if ($pe->refType=='Milestone' and SqlElement::is_a($pe,'MilestonePlanningElement')) {
    	    $pe->updateMilestonableItems();
