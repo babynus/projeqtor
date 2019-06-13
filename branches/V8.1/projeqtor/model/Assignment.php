@@ -323,7 +323,46 @@ class Assignment extends SqlElement {
   
   // Save without extra save() feature and without controls
   public function simpleSave() {
-  	$result = parent::saveForced();
+    if (PlannedWork::$_planningInProgress and $this->id) {
+      // Attention, we'll execute direct query to avoid concurrency issues for long duration planning
+      // Otherwise, saving planned data may overwrite real work entered on Timesheet for corresponding items.
+      $old=$this->getOld();
+      $change=false;
+      $fields=array('plannedStartDate','plannedStartFraction','plannedEndDate','plannedEndFraction','notPlannedWork');
+      if ($this->assignedWork!=$old->assignedWork) {
+        $extraFields=array('assignedWork','assignedCost','leftWork','leftCost','plannedWork','plannedCost');
+        $fields=array_merge($fields,$extraFields);
+        $this->plannedWork=$this->leftWork+$old->realWork;
+        $this->plannedCost=$this->leftCost+$old->realCost;
+      }
+      $query="UPDATE ".$this->getDatabaseTableName(). " SET ";
+      foreach($fields as $field) {
+        if (substr($field,-4)!='Date') {
+          $newVal=floatval($this->$field);
+          $oldVal=floatval($old->$field);
+        } else {
+          $newVal=$this->$field;
+          $oldVal=$old->$field;
+        }
+        if ( strval($newVal) != strval($oldVal) ) {
+          if ($change) $query.=',';
+          if (substr($field,-4)=='Date') {
+            $query.=" $field='".$newVal."' ";
+          } else {
+            $query.=" $field=".$newVal;
+          }
+          $change=true;
+          //History::store($this, $this->refType, $this->refId, 'update', $field, $oldVal, $newVal);
+        }
+      }
+      $query.=" WHERE id=$this->id";
+      if ($change) {
+        Sql::query($query);
+      }
+      $result="OK";
+    } else {
+  	  $result = parent::saveForced();
+    }
   	return $result;
   }
   /**

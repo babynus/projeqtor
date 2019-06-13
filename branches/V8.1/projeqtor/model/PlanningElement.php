@@ -682,7 +682,48 @@ class PlanningElement extends SqlElement {
     if ($this->initialStartDate and $this->initialEndDate) {
       $this->initialDuration=workDayDiffDates($this->initialStartDate, $this->initialEndDate);
     }
-    $result = parent::saveForced();
+    if (PlannedWork::$_planningInProgress and $this->id) {
+      //debugLog ("simpleSave for $this->id, $this->refType #$this->refId - $this->refName");
+      // Attention, we'll execute direct query to avoid concurrency issues for long duration planning
+      // Otherwise, saving planned data may overwrite real work entered on Timesheet for corresponding items.
+      $old=$this->getOld();
+      $change=false;
+      $fields=array('plannedStartDate','plannedStartFraction','plannedEndDate','plannedEndFraction','latestStartDate','latestEndDate','isOnCriticalPath','notPlannedWork');
+      if (property_exists($this,'_profile') and $this->_profile=='RECW' and $this->assignedWork!=$old->assignedWork) {
+        $extraFields=array('assignedWork','assignedCost','leftWork','leftCost','plannedWork','plannedCost','progress');
+        $fields=array_merge($fields,$extraFields);
+        $this->plannedWork=$this->leftWork+$old->realWork;
+        $this->plannedCost=$this->leftCost+$old->realCost;
+        $this->progress=(($this->plannedWork)?round($old->realWork/($this->plannedWork)*100):0);
+      }
+      $query="UPDATE ".$this->getDatabaseTableName(). " SET ";
+      foreach($fields as $field) {
+        if (substr($field,-4)!='Date') {
+          $newVal=floatval($this->$field);
+          $oldVal=floatval($old->$field);
+        } else {
+          $newVal=$this->$field;
+          $oldVal=$old->$field;
+        }
+        if ( strval($newVal) != strval($oldVal) ) {
+          if ($change) $query.=',';
+          if (substr($field,-4)=='Date') {
+            $query.=" $field='".$newVal."' ";
+          } else {
+            $query.=" $field=".$newVal;
+          }
+          $change=true;
+          History::store($this, $this->refType, $this->refId, 'update', $field, $oldVal, $newVal);
+        }
+      }
+      $query.=" WHERE id=$this->id";
+      if ($change) {
+        Sql::query($query);
+      }
+      $result="OK";
+    } else {
+      $result = parent::saveForced();
+    }
     if ($this->refType=='Project') {
       KpiValue::calculateKpi($this);
     }
