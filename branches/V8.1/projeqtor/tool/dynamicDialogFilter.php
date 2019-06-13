@@ -126,11 +126,36 @@ require_once "../tool/projeqtor.php";
                   <option value="desc"><?php echo i18n('sortDesc');?></option>
                </select> 
              </td>
-             <td style="width:25px; text-align: center;vertical-align:middle;" align="center">
-               <a src="css/images/smallButtonAdd.png" style="margin-top:3px" onClick="addfilterClause();" title="<?php echo i18n('addFilterClause');?>" class="smallButton">
-               <?php echo formatSmallButton('Add');?>
-               </a> 
+             
+             <td style="width:25px; text-align: center;vertical-align:middle;" align="center"> 
+               <table>
+                 <tr>
+                  <td style="position: absolute;margin-top:-60px;margin-left:-2px;">
+                    <button style="display:none;" id="showDetailInFilter" dojoType="dijit.form.Button" showlabel="false"
+                            title="<?php echo i18n('showDetail')?>"
+                            iconClass="iconView">
+                      <script type="dojo/connect" event="onClick" args="evt">
+                        var objectName = dijit.byId('showDetailInFilter').get('value');
+                        if( objectName ){   
+                          showDetail(objectName[0],0);
+                        }
+                      </script>
+                    </button>
+                  </td>
+                 </tr>
+                 <tr>
+                   <td>
+                     <a src="css/images/smallButtonAdd.png" style="margin-top:3px" onClick="addfilterClause();" title="<?php echo i18n('addFilterClause');?>" class="smallButton">
+                     <?php echo formatSmallButton('Add');?>
+                     </a> 
+                   </td>
+                  </tr>
+               </table> 
              </td>
+             
+             
+             
+             
            </tr>
          </table>
         </form>
