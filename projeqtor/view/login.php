@@ -189,7 +189,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
      $endDate=$msg->endDate;
      $today=date('Y-m-d H:i:s');
      if( $startDate <= $today && $endDate >= $today || $startDate=='' && $endDate=='' || $startDate<= $today && $endDate=='' ){ 
-      $cpt++;debugLog('yo');?>  
+      $cpt++;?>  
     <div class="loginMessage" id="loginMessage_<?php echo $cpt;?>">
     <div class="loginMessageTitle" style="color:<?php echo $msgTypeList[$msg->idMessageType];?>;"><?php echo htmlEncode($msg->name);?></div>
     <br/><?php echo $msg->description;?>
