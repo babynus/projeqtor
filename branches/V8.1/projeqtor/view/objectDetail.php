@@ -6497,7 +6497,7 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
     }
     if ($aff->idResource!=$name and trim($name)) {
       // Florent ticket 4009
-      if ($aff->idle != '1'){
+      if ( $aff->idle != '1'and get_class($obj)=='Resource'){
       echo '<tr>';
       if (!$print) {
         echo '<td class="assignData'.$idleClass.'" style="text-align:center;white-space: nowrap;">';
@@ -6546,6 +6546,56 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
       echo '<td class="assignData'.$idleClass.'" align="center" style="white-space: nowrap;">'.htmlEncode($aff->rate).'</td>';
       // echo '<td class="assignData" align="center"><img src="../view/img/checked' . (($aff->idle)?'OK':'KO') . '.png" /></td>';
       echo '</tr>';
+    }elseif(get_class($obj)!='Resource'){
+      echo '<tr>';
+      if (!$print) {
+        echo '<td class="assignData'.$idleClass.'" style="text-align:center;white-space: nowrap;">';
+        if ($canUpdate and !$print) {
+          echo '  <a onClick="editAffectation('."'".htmlEncode($aff->id)."'".",'".get_class($obj)."'".",'".$type."'".",'".htmlEncode($aff->idResource)."'".",'".htmlEncode($aff->idProject)."'".",'".htmlEncode($aff->rate)."'".",'".htmlEncode($aff->idle)."'".",'".$aff->startDate."'".",'".htmlEncode($aff->endDate)."'".','.htmlEncode($aff->idProfile).');" '.'title="'.i18n('editAffectation').'" > '.formatSmallButton('Edit').'</a>';
+        }
+        if ($canDelete and !$print) {
+          echo '  <a onClick="removeAffectation(\''.htmlEncode($aff->id).'\','.(($aff->idResource==getSessionUser()->id)?'1':'0').',\''.$classToShow.'\',\''.$idToShow.'\');" '.'title="'.i18n('removeAffectation').'" > '.formatSmallButton('Remove').'</a>';
+        }
+        if ($canUpdate and !$print and $isResource and !$aff->idle) {
+          echo '  <a onClick="replaceAffectation('."'".htmlEncode($aff->id)."'".",'".get_class($obj)."'".",'".$type."'".",'".htmlEncode($aff->idResource)."'".",'".htmlEncode($aff->idProject)."'".",'".htmlEncode($aff->rate)."'".",'".htmlEncode($aff->idle)."'".",'".$aff->startDate."'".",'".htmlEncode($aff->endDate)."'".','.htmlEncode($aff->idProfile).');" '.'title="'.i18n('replaceAffectation').'" > '.formatSmallButton('SwitchUser').'</a>';
+        } else {
+          if ($aff->idle) {
+            echo '<a><div style="display:table-cell;width:20px;"><img style="position:relative;top:4px;left:2px" src="css/images/tabClose.gif" '.'title="'.i18n('colIdle').'"/></div></a>';
+          } else {
+            echo '<a><div style="display:table-cell;width:20px;">&nbsp;</div></a>';
+          }
+        }
+      
+        echo '</td>';
+      }
+      echo '<td class="assignData'.$idleClass.'" align="center">'.htmlEncode($idToShow).'</td>';
+      /*
+       * if ($idProj) {
+      * echo '<td class="assignData' . $idleClass . '" align="left"' . $goto . '>' . htmlEncode($name) . '</td>';
+      * } else {
+      * echo '<td class="assignData' . $idleClass . '" align="left"' . $goto . '>' . htmlEncode($name) . '</td>';
+      * }
+      */
+      echo '<td class="assignData'.$idleClass.'" align="left"'.$goto.'>';
+      // resourceTeam
+      if (isset($typeAffectable)=='ResourceAll') {
+        $resource=new ResourceAll($aff->idResource);
+        if ($resource->isResourceTeam) {
+          echo '<div style="float:right; vertical-align:middle;"> '.formatIcon('Team', 16, i18n('ResourceTeam')).'</div>';
+        }
+      }
+      if ($aff->description and !$print) {
+        echo '<div style="float:right">'.formatCommentThumb($aff->description).'</div>';
+      }
+      echo htmlEncode($name);
+      echo '</td>';
+      echo '<td class="assignData'.$idleClass.'" align="center" >'.SqlList::getNameFromId('Profile', $aff->idProfile, true).'</td>';
+      echo '<td class="assignData'.$idleClass.'" align="center" style="white-space: nowrap;">'.htmlFormatDate($aff->startDate).'</td>';
+      echo '<td class="assignData'.$idleClass.'" align="center" style="white-space: nowrap;">'.htmlFormatDate($aff->endDate).'</td>';
+      echo '<td class="assignData'.$idleClass.'" align="center" style="white-space: nowrap;">'.htmlEncode($aff->rate).'</td>';
+      // echo '<td class="assignData" align="center"><img src="../view/img/checked' . (($aff->idle)?'OK':'KO') . '.png" /></td>';
+      echo '</tr>';
+      
     }
   }
   }
