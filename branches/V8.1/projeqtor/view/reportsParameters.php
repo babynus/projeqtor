@@ -569,6 +569,16 @@ foreach ($listParam as $param) {
     </td>
     </tr>       
 <?php 
+  } else if ($param->paramType=='isEmployee') {
+    $defaultValue='';
+    ?>
+  <tr>
+  <td class="label"><label><?php echo i18n('col' . ucfirst($param->name));?>&nbsp;:&nbsp;</label></td>
+  <td>
+    <input dojoType="dijit.form.CheckBox" id="<?php echo $param->name;?>" name="<?php echo $param->name;?>" />
+  </td>
+  </tr>       
+<?php 
   } else if ($param->paramType=='ticketType') {
     $defaultValue='';
     if ($param->defaultValue) {
@@ -742,7 +752,19 @@ foreach ($listParam as $param) {
 	</td>
 	</tr>
 <?php
-
+    } else if ($param->paramType=='intMonthInput') {
+      $defaultValue='';
+      if ($param->defaultValue) {
+        $defaultValue=$param->defaultValue;	
+      }
+  ?>
+    <tr>
+    <td class="label"><label><?php echo i18n('numberOfMonths');?>&nbsp;:&nbsp;</label></td>
+    <td>
+    <div dojoType="dijit.form.NumberSpinner" type="text" class="input" style="width: 55px" id="<?php echo $param->name;?>" name="<?php echo $param->name;?>" value="<?php echo $defaultValue;?>" />
+    </td>
+    </tr>
+  <?php
   	//END ADD qCazelles - graphTickets
     //add atrancoso
       } else if ($param->paramType=='urgencyList') {
@@ -820,7 +842,19 @@ foreach ($listParam as $param) {
 	</td>
 	</tr>
 <?php
-
+  } else if ($param->paramType=='intMonthInput') {
+  	$defaultValue='';
+  	if ($param->defaultValue) {
+  		$defaultValue=$param->defaultValue;	
+  	}
+?>
+	<tr>
+	<td class="label"><label><?php echo i18n('numberOfMonths');?>&nbsp;:&nbsp;</label></td>
+	<td>
+	<div dojoType="dijit.form.NumberSpinner" type="text" class="input" style="width: 55px" id="<?php echo $param->name;?>" name="<?php echo $param->name;?>" value="<?php echo $defaultValue;?>" />
+	</td>
+	</tr>
+<?php
   	//END ADD atrancoso
   //add atrancoso
 } else if ($param->paramType=='criticalityList') {
@@ -895,6 +929,19 @@ foreach ($listParam as $param) {
 	<td class="label"><label><?php echo i18n('numberOfDays');?>&nbsp;:&nbsp;</label></td>
 	<td>
 	<div dojoType="dijit.form.TextBox" type="text" class="input" style="width: 150px" id="<?php echo $param->name;?>" name="<?php echo $param->name;?>" value="<?php echo $defaultValue;?>" />
+	</td>
+	</tr>
+<?php
+  } else if ($param->paramType=='intMonthInput') {
+  	$defaultValue='';
+  	if ($param->defaultValue) {
+  		$defaultValue=$param->defaultValue;	
+  	}
+?>
+	<tr>
+	<td class="label"><label><?php echo i18n('numberOfMonths');?>&nbsp;:&nbsp;</label></td>
+	<td>
+	<div dojoType="dijit.form.NumberSpinner" type="text" class="input" style="width: 55px" id="<?php echo $param->name;?>" name="<?php echo $param->name;?>" value="<?php echo $defaultValue;?>" />
 	</td>
 	</tr>
 <?php
