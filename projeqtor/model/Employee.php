@@ -42,12 +42,19 @@ class Employee extends SqlElement {
     public $phone;
     public $mobile;
     public $fax;
+    // ADD tLaguerie ticket #396
+    public $startDate;
+    public $_lib_colAsResource;
+    // END tLaguerie ticket #396
     public $isContact;
     public $isUser;
     public $isResource;
     public $isEmployee;
     public $isLeaveManager;
     public $idle;
+    // ADD tLaguerie ticket #396
+    public $endDate;
+    // END tLaguerie ticket #396
     public $description;
     public $idRole;
   public $_sec_EmploymentContracts;
@@ -78,9 +85,14 @@ class Employee extends SqlElement {
                                           "idOrganization"=>"readonly",
                                           "idTeam"=>"readonly",
                                           "idRole"=>"readonly",
-                                          "idle"=>"readonly",
+                                          // UPDATE tLaguerie ticket #396
+                                          "idle"=>"nobr, readonly",
+                                          // ADD tLaguerie ticket #396
+                                          "startDate"=>"nobr, readonly",
+                                          "endDate"=>"readonly",
+                                          // END tLaguerie ticket #396
                                           "isEmployee"=>"hidden",
-                                          "isLeaveManager"=>"readonly"
+                                          "isLeaveManager"=>""
   );    
 
   private static $_databaseTableName = 'resource';
@@ -88,7 +100,7 @@ class Employee extends SqlElement {
 
   private static $_databaseColumnName = array('name'=>'fullName',
                                               'userName'=>'name');
-  private static $_colCaptionTransposition = array('name'=>'realName');
+  private static $_colCaptionTransposition = array('name'=>'realName', 'startDate'=>'entryDate', 'endDate'=>'exitDate');
   
    /** ==========================================================================
    * Constructor

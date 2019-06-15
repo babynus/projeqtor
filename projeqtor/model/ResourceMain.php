@@ -57,13 +57,22 @@ class ResourceMain extends SqlElement {
   public $phone;
   public $mobile;
   public $fax;
+  // ADD tLaguerie Ticket #396
+  public $startDate;
+  // END tLaguerie Ticket #396
   public $isContact;
   public $isUser;
 // MTY - LEAVE SYSTEM  
   public $isEmployee;
+  public $student;
+  public $subcontractor;
   public $isLeaveManager;
-// MTY - LEAVE SYSTEM  
+  // MTY - LEAVE SYSTEM
   public $idle;
+  // ADD tLaguerie Ticket #396
+  public $endDate;
+  // END tLaguerie Ticket #396
+
   public $description;
   public $_sec_ResourceCost;
   public $idRole;
@@ -111,7 +120,10 @@ class ResourceMain extends SqlElement {
                                           "idRole"=>"required",
                                           "idCalendarDefinition"=>"required",
                                           "isLdap"=>"hidden",
-                                          "crypto"=>"hidden"
+                                          "crypto"=>"hidden",
+                                          "idle"=>"nobr",
+                                          "endDate"=>"readonly",
+                                          "startDate"=>""
   );    
   
   private static $_databaseTableName = 'resource';
@@ -121,7 +133,7 @@ class ResourceMain extends SqlElement {
 
   private static $_databaseCriteria = array('isResource'=>'1','isResourceTeam'=>'0');
   
-  private static $_colCaptionTransposition = array('idRole'=>'mainRole', 'name'=>'realName'
+  private static $_colCaptionTransposition = array('idRole'=>'mainRole', 'name'=>'realName', 'startDate'=>'entryDate', 'endDate'=>'exitDate'
   );
   
   /** ==========================================================================
@@ -255,7 +267,7 @@ class ResourceMain extends SqlElement {
    * Return the validation sript for some fields
    * @return the validation javascript (for dojo framework)
    */
-  public function getValidationScript($colName) {
+  public function getValidationScript($colName, $date=null) {
     $colScript = parent::getValidationScript($colName);
 
     if ($colName=="isUser") {   
@@ -287,14 +299,33 @@ class ResourceMain extends SqlElement {
       $colScript .= '  if (this.checked==false && dijit.byId("isLeaveManager").checked) { ';
       $colScript .= '    dijit.byId("isLeaveManager").set("checked", false);';
       $colScript .= '  } '; 
+      $colScript .= '  if (this.checked==true) {';  
+      $colScript .= '    dijit.byId("student").set("checked", false);';
+      $colScript .= '    dijit.byId("subcontractor").set("checked", false);';
+      $colScript .= '  } '; 
       $colScript .= '  formChanged();';
       $colScript .= '</script>';                
 // MTY - LEAVE SYSTEM      
-    }
+     }  else if($colName=="student") {
+        $colScript .= '<script type="dojo/connect" event="onChange" >';
+        $colScript .= '  if (this.checked==true) {';  
+        $colScript .= '    dijit.byId("isEmployee").set("checked", false);';
+        $colScript .= '    dijit.byId("subcontractor").set("checked", false);';
+        $colScript .= '  } '; 
+        $colScript .= '  formChanged();';
+        $colScript .= '</script>';
+     }  else if($colName=="subcontractor") {
+        $colScript .= '<script type="dojo/connect" event="onChange" >';
+        $colScript .= '  if (this.checked==true) {';  
+        $colScript .= '    dijit.byId("isEmployee").set("checked", false);';
+        $colScript .= '    dijit.byId("student").set("checked", false);';
+        $colScript .= '  } '; 
+        $colScript .= '  formChanged();';
+        $colScript .= '</script>';
+     }
     return $colScript;
 
   } 
-
   public function getWork($startDate, $withProjectRepartition=false) {
     $result=array();
     $real=array();
@@ -638,7 +669,7 @@ class ResourceMain extends SqlElement {
     if (! $idRole or $idRole<=0) $idRole=$this->idRole;
     $where="idResource=" . Sql::fmtId($this->id) ;
     if ($idRole) {
-      $where.= " and idRole=" . Sql::fmtId($idRole);
+      $where.= " and idRole='" . Sql::fmtId($idRole);
     }
     $where.= " and (startDate is null or startDate<='".date('Y-m-d')."')";
     $rc=new ResourceCost();

@@ -46,6 +46,10 @@ class ContactMain extends SqlElement {
   public $mobile;
   public $fax;
   public $isResource;
+// ADD tLaguerie #Ticket 396
+  public $startDate; // start date as a resource, is hidden on display
+  public $_lib_colAsResource;
+// END tLaguerie #Ticket 396
   public $isUser;
   public $idle;
   public $description;
@@ -80,7 +84,7 @@ class ContactMain extends SqlElement {
     <th field="nameProfile" width="10%" formatter="translateFormatter">${idProfile}</th>
     <th field="userName" width="15%">${userName}</th>
     <th field="isUser" width="5%" formatter="booleanFormatter">${isUser}</th>
-    <th field="isResource" width="5%" formatter="booleanFormatter">${isResource}</th>    
+    <th field="isResource" width="5%" formatter="booleanFormatter">${isResource}</th>
     <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
     ';
 
@@ -91,7 +95,10 @@ class ContactMain extends SqlElement {
                                           "isUser"=>"",
                                           "isResource"=>"",
                                           "password"=>"hidden",
-                                          "crypto"=>"hidden"
+                                          "crypto"=>"hidden",
+                                          // ADD tLaguerie ticket #396
+                                          "startDate"=>"nobr",
+                                          // END tLaguerie ticket #396
   );    
   
   private static $_databaseTableName = 'resource';
