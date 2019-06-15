@@ -208,6 +208,14 @@ class ProductVersionStructure extends SqlElement {
     }
     return $result;
   }
+
+  public static function sortCompositionComponentVersionListOnId($pvs1, $pvs2) {
+    return strnatcmp($pvs2->idComponentVersion, $pvs1->idComponentVersion);
+  }
+
+  public static function sortStructureComponentVersionListOnId($pvs1, $pvs2) {
+    return strnatcmp($pvs2->idProductVersion, $pvs1->idProductVersion);
+  }
   
   public static function sortComponentVersionListOnType($pvs1, $pvs2) {
     $v1 = new ComponentVersion($pvs1->idComponentVersion, true);

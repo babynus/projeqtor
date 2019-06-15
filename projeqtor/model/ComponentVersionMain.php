@@ -70,8 +70,14 @@ class ComponentVersionMain extends Version {
   public $description;
   public $_sec_ComponentVersionStructure;
   public $_componentVersionStructure=array();
+  //ADD dFayolle
+  public $_spe_hideClosedStructure;
+  //END dFayolle
   public $_sec_ComponentVersionComposition;
   public $_componentVersionComposition=array();
+  //ADD dFayolle
+  public $_spe_hideClosedComposition;
+  //END dFayolle
   //ADD qCazelles - dateComposition
   public $_spe_flatStructure;
   //END ADD qCazelles - dateComposition
@@ -349,16 +355,20 @@ class ComponentVersionMain extends Version {
   public function drawSpecificItem($item){
     $result="";
     $showClosedActivity=(Parameter::getUserParameter('showClosedActivity')!='0')?true:false;
-  
+    // ADD dFayolle
+    // Checked or not
+    $showClosedItemComposition=(Parameter::getUserParameter('showClosedItemComposition')!='0')?true:false;
+    $showClosedItemStructure=(Parameter::getUserParameter('showClosedItemStructure')!='0')?true:false;
+    // END dFayolle
     if ($item=='tenders') {
        Tender::drawListFromCriteria('id'.get_class($this),$this->id);
     }
     //ADD qCazelles - dateComposition
   	global $print;
-  	if ($item=='flatStructure' and !$print and $this->id) {
+    if ($item=='flatStructure' and !$print and $this->id) {
   		$result=parent::drawFlatStructureButton('ComponentVersion', $this->id);
   		return $result;
-  	}
+    }
   	if ($item=='hideClosedActivity' and !$print and $this->id){
   	  $result.='<td for="showClosedActivity" style="color:white;position:absolute;right:25px;top:3px;">'.i18n('labelShowIdleActivities').'</td>';
   	  $result.='<div id="hideClosedActivity" style="position:absolute;right:3px;top:3px;" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedActivity)?'checked':'').'>';  	  
@@ -369,7 +379,32 @@ class ComponentVersionMain extends Version {
   	  $result.=' loadContent("objectDetail.php", "detailDiv", "listForm");';
   	  $result.=' </script>';
   	  $result.='</div>';
-  	}
+    }
+    
+    // ADD tlaguerie & dFayolle ticket 366 and 367
+  	if ($item=='hideClosedComposition' and !$print and $this->id){
+      $result.='<td for="showClosedItemComposition" style="color:white;position:absolute;right:25px;top:3px;">'.i18n('labelShowIdle').'</td>';
+      $result.='<div id="hideClosedComposition" style="position:absolute;right:3px;top:3px;" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedItemComposition)?'checked':'').'>';
+      $result.='title="'.i18n('labelShowIdle').'"';
+      $result.='<script type="dojo/connect" event="onChange" args="evt">';
+      $result.=' saveUserParameter("showClosedItemComposition",((this.checked)?"1":"0"));';
+      $result.=' if (checkFormChangeInProgress()) {return false;}';
+      $result.=' loadContent("objectDetail.php", "detailDiv", "listForm");';
+      $result.=' </script>';
+      $result.='</div>';
+    }
+    if ($item=='hideClosedStructure' and !$print and $this->id){
+        $result.='<td for="showClosedItemStructure" style="color:white;position:absolute;right:25px;top:3px;">'.i18n('labelShowIdle').'</td>';
+        $result.='<div id="hideClosedStructure" style="position:absolute;right:3px;top:3px;" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedItemStructure)?'checked':'').'>';
+        $result.='title="'.i18n('labelShowIdle').'"';
+        $result.='<script type="dojo/connect" event="onChange" args="evt">';
+        $result.=' saveUserParameter("showClosedItemStructure",((this.checked)?"1":"0"));';
+        $result.=' if (checkFormChangeInProgress()) {return false;}';
+        $result.=' loadContent("objectDetail.php", "detailDiv", "listForm");';
+        $result.=' </script>';
+        $result.='</div>';
+    }
+    // END tlaguerie & dFayolle ticket 366 and 367
   	return $result;
   	//END ADD qCazelles - dateComposition
   }

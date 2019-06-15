@@ -4881,11 +4881,13 @@ function drawVersionStructureFromObject($obj, $refresh=false, $way, $item) {
     if ($way=='composition') {
       SqlElement::$_cachedQuery['ComponentVersion']=array(); // PBE : performance improvments
       SqlElement::$_cachedQuery['ComponentVersionType']=array(); // PBE : performance improvments
-      usort($list, "ProductVersionStructure::sortComponentVersionListOnType");
+      // UPDATE tLaguerie ticket 366 and 367
+      usort($list, "ProductVersionStructure::sortCompositionComponentVersionListOnId");
     } else if ($way=='structure') {
       SqlElement::$_cachedQuery['Version']=array(); // PBE : performance improvments
       SqlElement::$_cachedQuery['Type']=array(); // PBE : performance improvments
-      usort($list, "ProductVersionStructure::sortVersionListOnType");
+      // UPDATE tLaguerie ticket 366 and 367
+      usort($list, "ProductVersionStructure::sortStructureComponentVersionListOnId");
     }
   }
   // END ADD qCazelles - Sort version composition-structure - Ticket 142
@@ -4900,6 +4902,9 @@ function drawVersionStructureFromObject($obj, $refresh=false, $way, $item) {
   if (!$refresh) echo '<tr><td colspan="2">';
   echo '<table style="width:100%;">';
   echo '<tr>';
+  // ADD dFayolle ticket 366 and 367
+  $actualStatus = '';
+  // END dFayolle ticket 366 and 367
   if (!$print) {
     echo '<td class="linkHeader" style="width:5%">';
     if ($obj->id!=null and !$print and $canUpdate) {
@@ -4915,91 +4920,44 @@ function drawVersionStructureFromObject($obj, $refresh=false, $way, $item) {
     echo '</td>';
   }
   $listClass=($item=='ProductVersion')?'ComponentVersion':(($way=='structure')?'Version':'ComponentVersion');
-  echo '<td class="linkHeader" style="width:'.(($print)?'20':'15').'%">'.i18n($listClass).'</td>';
-  echo '<td class="linkHeader" style="width:80%">'.i18n('colName').'</td>';
+  echo '<td class="linkHeader" style="width:5%">'.i18n($listClass).'</td>';
+  echo '<td class="linkHeader" style="width:40%">'.i18n('colName').'</td>';
+  // ADD tLAGUERIE AND dFAYOLLE ticket 366 and 367
+  echo '<td class="linkHeader" style="width:10%">' . i18n('colIdStatus') . '</td>';
+  echo '<td class="linkHeader" style="width:10%">' . i18n('colType') . '</td>';
+  echo '<td class="linkHeader" style="width:10%">' . i18n('colPlannedDeliveryDate') . '</td>';
+  echo '<td class="linkHeader" style="width:15">' . i18n('colVersionDeliveryDate') . '</td>';
+  // END tLAGUERIE AND dFAYOLLE ticket 366 and 367
   echo '</tr>';
+  // ADD tlaguerie & dFayolle ticket 366 and 367
+  $showClosedItemComposition = Parameter::getUserParameter('showClosedItemComposition'); // Show closed items of composition of ComponentVersion
+  $showClosedItemStructure = Parameter::getUserParameter('showClosedItemStructure'); // Show closed items of structure of Component Version
+  $showClosedItemCompositionProduct = Parameter::getUserParameter('showClosedItemCompositionProduct'); // Show closed items of composition of ProductVersion
+  // END tlaguerie & dFayolle ticket 366 and 367
   foreach ($list as $comp) {
+    // UPDATE ADD tLaguerie & dFayolle ticket 366 and 367
+    $critVersionType = array('id' => $obj->idVersionType);
+    $typeVersion = SqlElement::getSingleSqlElementFromCriteria('type',$critVersionType);
+    
     $compObj=null;
     if ($way=='structure') {
       $compObj=new Version($comp->idProductVersion);
+      $paramItem = $showClosedItemStructure;
     } else {
       $compObj=new Version($comp->idComponentVersion);
+      if($typeVersion->scope=='ComponentVersion') {
+        $paramItem = $showClosedItemComposition;
+      } else if ($typeVersion->scope=='ProductVersion') {
+        $paramItem = $showClosedItemCompositionProduct;
+      }
     }
     if ($compObj->scope=='Product') $compObj=new ProductVersion($compObj->id);
     else $compObj=new ComponentVersion($compObj->id);
-    $userId=$comp->idUser;
-    $userName=SqlList::getNameFromId('User', $userId);
-    $creationDate=$comp->creationDate;
-    $canGoto=(securityCheckDisplayMenu(null, get_class($compObj)) and securityGetAccessRightYesNo('menu'.get_class($compObj), 'read', $compObj)=="YES")?true:false;
-    echo '<tr>';
-    $classCompName=i18n(get_class($compObj));
-    if (!$print) {
-      echo '<td class="linkData" style="text-align:center;width:5%;white-space:nowrap;">';
-      if ($canUpdate&&(((get_class($obj)!='ComponentVersion'&&get_class($obj)!='ProductVersion')||$actualStatus->setIntoserviceStatus!=1)||($way!='composition'))) {
-        echo '  <a onClick="editProductVersionStructure(\''.$way.'\','.htmlEncode($comp->id).');" '.'title="'.i18n('editProductStructure').'" > '.formatSmallButton('Edit').'</a>';
-        echo '  <a onClick="removeProductVersionStructure('."'".htmlEncode($comp->id)."','".get_class($compObj)."','".htmlEncode($compObj->id)."','".$classCompName."'".');" '.'title="'.i18n('removeProductStructure').'" > '.formatSmallButton('Remove').'</a>';
-        if ($way=='composition') {
-          echo '<a onClick="upgradeProductVersionStructure(\''.$comp->id.'\',false);" title="'.i18n('upgradeProductVersionStructureSingle').'" > '.formatSmallButton('Switch').'</a>';
-        }
-      }
-      echo '</td>';
+    debugLog("paramItem=$paramItem, idle=$compObj->idle");
+    if($paramItem==1 or !$compObj->idle) {
+      drawElementIntoVersionStructureFromObject($comp, $compObj, $print, $canUpdate, $obj, $way, $actualStatus);
     }
-    // echo '<td class="linkData" style="white-space:nowrap;width:' . (($print)?'20':'15') . '%"><img src="css/images/icon'.get_class($compObj).'16.png" />&nbsp;'.$classCompName .' #' . $compObj->id;
-    echo '<td class="linkData" style="white-space:nowrap;width:'.(($print)?'20':'15').'%"><table><tr><td>'.formatIcon(get_class($compObj), 16).'</td><td style="vertical-align:top">&nbsp;'.'#'.$compObj->id.'</td></tr></table>';
-    echo '</td>';
-    $goto="";
-    if (!$print and $canGoto) {
-      $goto=' onClick="gotoElement('."'".get_class($compObj)."','".htmlEncode($compObj->id)."'".');" style="cursor: pointer;" ';
-    }
-    echo '<td class="linkData" '.$goto.' style="position:relative;">';
-    echo htmlEncode($compObj->name);
-    echo formatUserThumb($userId, $userName, 'Creator');
-    echo formatDateThumb($creationDate, null);
-    echo formatCommentThumb($comp->comment);
-    // ADD qCazelles - dateComposition
-    
-    if (Parameter::getGlobalParameter('displayMilestonesStartDelivery')=='YES' and property_exists($compObj, 'realDeliveryDate')) {
-      if ($compObj->realDeliveryDate) {
-        $deliveryDate=$compObj->realDeliveryDate;
-      } elseif ($compObj->plannedDeliveryDate) {
-        $deliveryDate=$compObj->plannedDeliveryDate;
-      } elseif ($compObj->initialDeliveryDate) {
-        $deliveryDate=$compObj->initialDeliveryDate;
-      }
-      
-      $errorDatesDelivery=false;
-      if ($way=='composition') {
-        // CHANGE qCazelles - Correction red dates - Ticket 186
-        // Old
-        // if (isset ( $deliveryDate ) and $obj->plannedDeliveryDate and $obj->plannedDeliveryDate < $deliveryDate) {
-        // New
-        if (isset($deliveryDate) and (($obj->isDelivered and $obj->realDeliveryDate<$deliveryDate) or (!$obj->isDelivered and $obj->plannedDeliveryDate and $obj->plannedDeliveryDate<$deliveryDate))) {
-          // END CHANGE qCazelles - Correction red dates - Ticket 186
-          $errorDatesDelivery=true;
-        }
-      } elseif ($way=='structure') {
-        // CHANGE qCazelles - Correction red dates - Ticket 186
-        // Old
-        // if (isset ( $deliveryDate ) and $obj->plannedDeliveryDate and $obj->plannedDeliveryDate > $deliveryDate) {
-        // New
-        if (isset($deliveryDate) and (($obj->isDelivered and $obj->realDeliveryDate>$deliveryDate) or (!$obj->isDelivered and $obj->plannedDeliveryDate and $obj->plannedDeliveryDate>$deliveryDate))) {
-          // END CHANGE qCazelles - Correction red dates - Ticket 186
-          $errorDatesDelivery=true;
-        }
-      }
-      
-      if (isset($deliveryDate)) {
-        echo '<br />'.(($errorDatesDelivery)?'<span style="color: red;">':'').htmlFormatDate($deliveryDate).(($errorDatesDelivery)?'</span>':'').' ';
-        // ADD qCazelles - DeliveryDateXLS - Ticket #126
-        unset($deliveryDate);
-        // END ADD qCazelles - DeliveryDateXLS - Ticket #126
-      }
-    }
-    
-    // END ADD qCazelles - dateComposition
-    
-    echo '</td>';
-    echo '</tr>';
+    // UPDATE END tLaguerie & dFayolle ticket 366 and 367
   }
   echo '</table>';
   if (!$refresh) echo '</td></tr>';
@@ -5007,6 +4965,107 @@ function drawVersionStructureFromObject($obj, $refresh=false, $way, $item) {
     echo '<input id="ProductVersionStructureSectionCount" type="hidden" value="'.count($list).'" />';
   }
 }
+
+// UPDATE tLaguerie & dFayolle
+// Used in function drawVersionStructureFromObject above.
+// Draw an element into section Structure and Composition of ComponentVersion and Composition of ProductVersion
+function drawElementIntoVersionStructureFromObject($comp, $compObj, $print, $canUpdate, $obj, $way, $actualStatus) {
+  $userId = $comp->idUser;
+  $userName = SqlList::getNameFromId('User', $userId);
+  $creationDate = $comp->creationDate;
+  $canGoto = (securityCheckDisplayMenu(null, get_class($compObj)) and securityGetAccessRightYesNo('menu' . get_class($compObj), 'read', $compObj) == "YES") ? true : false;
+  echo '<tr>';
+  $classCompName = i18n(get_class($compObj));
+  
+  if (! $print) {
+    echo '<td class="linkData" style="text-align:center;width:5%;white-space:nowrap;">';
+    if ($canUpdate && (((get_class($obj) != 'ComponentVersion' && get_class($obj) != 'ProductVersion') || $actualStatus->setIntoserviceStatus != 1) || ($way != 'composition'))) {
+      echo '  <a onClick="editProductVersionStructure(\'' . $way . '\',' . htmlEncode($comp->id) . ');" ' . 'title="' . i18n('editProductStructure') . '" > ' . formatSmallButton('Edit') . '</a>';
+      echo '  <a onClick="removeProductVersionStructure(' . "'" . htmlEncode($comp->id) . "','" . get_class($compObj) . "','" . htmlEncode($compObj->id) . "','" . $classCompName . "'" . ');" ' . 'title="' . i18n('removeProductStructure') . '" > ' . formatSmallButton('Remove') . '</a>';
+      if ($way == 'composition') {
+        echo '<a onClick="upgradeProductVersionStructure(\'' . $comp->id . '\',false);" title="' . i18n('upgradeProductVersionStructureSingle') . '" > ' . formatSmallButton('Switch') . '</a>';
+      }
+    }
+    echo '</td>';
+  }
+  // echo '<td class="linkData" style="white-space:nowrap;width:' . (($print)?'20':'15') . '%"><img src="css/images/icon'.get_class($compObj).'16.png" />&nbsp;'.$classCompName .' #' . $compObj->id;
+  echo '<td class="linkData" style="white-space:nowrap;width:' . (($print) ? '20' : '15') . '%"><table><tr><td>' . formatIcon(get_class($compObj), 16) . '</td><td style="vertical-align:top">&nbsp;' . '#' . $compObj->id . '</td></tr></table>';
+  echo '</td>';
+  $goto = "";
+  if (! $print and $canGoto) {
+    $goto = ' onClick="gotoElement(' . "'" . get_class($compObj) . "','" . htmlEncode($compObj->id) . "'" . ');" style="cursor: pointer;" ';
+  }
+  echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
+  echo htmlEncode($compObj->name);
+  echo formatUserThumb($userId, $userName, 'Creator');
+  echo formatDateThumb($creationDate, null);
+  echo formatCommentThumb($comp->comment);
+  // ADD tLAGUERIE AND dFAYOLLE
+  $sts = new Status();
+  $listStatus = $sts->getSqlElementsFromCriteria(array(
+      'id' => $compObj->idStatus
+  ));
+  $nameStatus = $listStatus[0]->name;
+  $colorStatus = $listStatus[0]->color;
+  echo '<td class="dependencyData"  style="width:10%">' . colorNameFormatter($nameStatus . "#split#" . $colorStatus) . '</td>';
+  echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
+  $type = new Type();
+  $listType = $type->getSqlElementsFromCriteria(array(
+      'id' => $compObj->idVersionType
+  ));
+  $nameType = $listType[0]->name;
+  echo htmlEncode($nameType);
+  echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
+  echo htmlFormatDate($compObj->plannedDeliveryDate);
+  echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
+  
+  // END tLAGUERIE AND dFAYOLLE
+  // ADD qCazelles - dateComposition
+  
+  if (Parameter::getGlobalParameter('displayMilestonesStartDelivery') == 'YES' and property_exists($compObj, 'realDeliveryDate')) {
+    if ($compObj->realDeliveryDate) {
+      $deliveryDate = $compObj->realDeliveryDate;
+    } elseif ($compObj->plannedDeliveryDate) {
+      $deliveryDate = $compObj->plannedDeliveryDate;
+    } elseif ($compObj->initialDeliveryDate) {
+      $deliveryDate = $compObj->initialDeliveryDate;
+    }
+    
+    $errorDatesDelivery = false;
+    if ($way == 'composition') {
+      // CHANGE qCazelles - Correction red dates - Ticket 186
+      // Old
+      // if (isset ( $deliveryDate ) and $obj->plannedDeliveryDate and $obj->plannedDeliveryDate < $deliveryDate) {
+      // New
+      if (isset($deliveryDate) and (($obj->isDelivered and $obj->realDeliveryDate < $deliveryDate) or (! $obj->isDelivered and $obj->plannedDeliveryDate and $obj->plannedDeliveryDate < $deliveryDate))) {
+        // END CHANGE qCazelles - Correction red dates - Ticket 186
+        $errorDatesDelivery = true;
+      }
+    } elseif ($way == 'structure') {
+      // CHANGE qCazelles - Correction red dates - Ticket 186
+      // Old
+      // if (isset ( $deliveryDate ) and $obj->plannedDeliveryDate and $obj->plannedDeliveryDate > $deliveryDate) {
+      // New
+      if (isset($deliveryDate) and (($obj->isDelivered and $obj->realDeliveryDate > $deliveryDate) or (! $obj->isDelivered and $obj->plannedDeliveryDate and $obj->plannedDeliveryDate > $deliveryDate))) {
+        // END CHANGE qCazelles - Correction red dates - Ticket 186
+        $errorDatesDelivery = true;
+      }
+    }
+    
+    if (isset($deliveryDate)) {
+      echo (($errorDatesDelivery) ? '<span style="color: red;">' : '') . htmlFormatDate($deliveryDate) . (($errorDatesDelivery) ? '</span>' : '') . ' ';
+      // ADD qCazelles - DeliveryDateXLS - Ticket #126
+      unset($deliveryDate);
+      // END ADD qCazelles - DeliveryDateXLS - Ticket #126
+    }
+  }
+  
+  // END ADD qCazelles - dateComposition
+  
+  echo '</td>';
+  echo '</tr>';
+}
+//END UPDATE tLaguerie & dFayolle
 
 // ADD qCazelles - Version compatibility
 function drawVersionCompatibility($obj, $refresh=false) {
