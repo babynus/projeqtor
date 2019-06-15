@@ -67,6 +67,9 @@ class ProductVersionMain extends Version {
   public $_VersionProject=array();
   public $_sec_ProductVersionComposition;
   public $_productVersionComposition=array();
+  //ADD dFayolle
+  public $_spe_hideClosedComposition;
+  //END dFayolle
   public $_spe_flatStructure;
   //ADD qCazelles - Version compatibility
   public $_sec_ProductVersionCompatibility;
@@ -357,6 +360,21 @@ class ProductVersionMain extends Version {
       $result=parent::drawFlatStructureButton('ProductVersion',$this->id);
       return $result;
     } 
+    // ADD tLaguerie & dFayolle
+    $showClosedItemCompositionProduct=(Parameter::getUserParameter('showClosedItemCompositionProduct')!='0')?true:false;
+    if ($item=='hideClosedComposition' and !$print and $this->id){
+      $result.='<td for="showClosedItemCompositionProduct" style="color:white;position:absolute;right:25px;top:3px;">'.i18n('labelShowIdle').'</td>';
+      $result.='<div id="hideClosedComposition" style="position:absolute;right:3px;top:3px;" dojoType="dijit.form.CheckBox" type="checkbox" '.(($showClosedItemCompositionProduct)?'checked':'').'>';
+      $result.='title="'.i18n('labelShowIdle').'"';
+      $result.='<script type="dojo/connect" event="onChange" args="evt">';
+      $result.=' saveUserParameter("showClosedItemCompositionProduct",((this.checked)?"1":"0"));';
+      $result.=' if (checkFormChangeInProgress()) {return false;}';
+      $result.=' loadContent("objectDetail.php", "detailDiv", "listForm");';
+      $result.=' </script>';
+      $result.='</div>';
+    }
+    // END tLaguerie & dFayolle
+    return $result;
   }
   
   /* START ADD molives 11/04/2018 Ticket 105 */
