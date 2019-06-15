@@ -597,5 +597,32 @@ class ComponentVersionMain extends Version {
     $comp->updateAllVersionProject();
     return $result;
   }
+
+  //ADD aDaspe ticket #368
+  public function buildTreeProductWhereComponentIsUsed($obj, &$arrayProduct = array())
+  {
+      //If the item we catch is a product, we put it in the array and return this array
+      if (isset($obj->scope) && $obj->scope == 'Product') {
+          $arrayProduct[] = $obj;
+
+      } else if (isset($obj->scope) && $obj->scope == 'Component') {
+
+          //Otherwise
+          $pvs = new ProductVersionStructure();
+          $version = new Version();
+          //We fetch all the ID's of items that use the component we clicked on
+          $listIdProductVersion = $pvs->getSqlElementsFromCriteria(array(
+              "idComponentVersion" => $obj->id
+          ));
+          //for every item gathered, recursive call on the function
+          foreach ($listIdProductVersion as $pv) {
+              $v=new Version($pv->idProductVersion);
+              self::buildTreeProductWhereComponentIsUsed($v, $arrayProduct);
+          }
+      }
+      return $arrayProduct;
+  }
+  //END aDaspe
+
 }
 ?>

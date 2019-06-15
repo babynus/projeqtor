@@ -503,9 +503,44 @@ class Version extends SqlElement {
     $result.='</script>';
     $result.='</button>';
     $result.='</td>';
-    $result.='</tr></table>';
-    return $result;
+    //ADD aDaspe ticket #368
+    if ($class == 'ComponentVersion') {
+      $result .= self::drawProductUsingComponentVersion($class, $id);
+  } else {
+      $result .= '</tr></table>';
   }
+  return $result;
+}
+
+static protected function drawProductUsingComponentVersion($class, $id)
+{
+  global $print;
+  if ($print) return "";
+  $result = '<td>';
+  $result .= '<button id="showFlatStructureButtonAscending" dojoType="dijit.form.Button" showlabel="true"';
+  $result .= ' title="' . i18n('showFlatStructureAscenfing') . '" style="vertical-align: middle;">';
+  $result .= '<span>' . i18n('showFlatStructureAscending') . '</span>';
+  $result .= '<script type="dojo/connect" event="onClick" args="evt">';
+  $page = "../report/productUsingComponentVersion.php?objectClass=$class&objectId=$id";
+  $result .= "var url='$page';";
+  $result .= 'url+="&format=print";';
+  $result .= 'showPrint(url, null, null, "html", "P");';
+  $result .= '</script>';
+  $result .= '</button>';
+  $result .= '<button id="showFlatStructureButtonCsvAcending" dojoType="dijit.form.Button" showlabel="false" ';
+  $result .= ' title="' . i18n('showFlatStructureAscending') . '" iconClass="dijitButtonIcon dijitButtonIconCsv" class="roundedButtonSmall">';
+  $result .= '<script type="dojo/connect" event="onClick" args="evt">';
+  $page = "../report/productUsingComponentVersion.php?objectClass=$class&objectId=$id";
+  $result .= "var url='$page';";
+  $result .= 'url+="&format=csv";';
+  $result .= 'showPrint(url, null, null, "csv", "P");';
+  $result .= '</script>';
+  $result .= '</button>';
+  $result .= '</td>';
+  $result .= '</tr></table>';
+  return $result;
+}
+//END aDaspe ticket #368
   
   //gautier #subscription
   public function changeVersionOfProduct(){
