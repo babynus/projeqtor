@@ -4019,6 +4019,14 @@ abstract class SqlElement {
         $colScript .= '      dijit.byId("idleDate").set("value", curDate); ';
         $colScript .= '    }';
       }
+      // ADD tLaguerie ticket #396
+      if (property_exists ( $this, 'endDate' )) {
+        $colScript .= '    if(! dijit.byId("endDate").get("value")) {';
+        $colScript .= '       var curDate = new Date();';
+        $colScript .= '       dijit.byId("endDate").set("value", curDate);';
+        $colScript .= '    } ';
+      }
+      // END tLaguerie ticket #396
       /*
        * if (property_exists($this, 'done')) { // Removed : this is now driven by status
        * $colScript .= ' if (! dijit.byId("done").get("checked")) {';
@@ -4034,6 +4042,11 @@ abstract class SqlElement {
        * }
        */
       $colScript .= '  } else {';
+        // ADD tLaguerie ticket #396
+      if (property_exists ( $this, 'endDate' )) {
+        $colScript .= '    dijit.byId("endDate").set("value", null); ';
+      }
+      // END tLaguerie ticket #396
       if (property_exists ( $this, 'idleDateTime' )) {
         $colScript .= '    dijit.byId("idleDateTime").set("value", null); ';
         $colScript .= '    dijit.byId("idleDateTimeBis").set("value", null); ';
@@ -4048,6 +4061,24 @@ abstract class SqlElement {
       // $colScript .= ' formChanged();';
       // END CHANGE BY Marc TABARY - 2017-03-06 - ALLOW DISABLED SPECIFIC WIDGET
       $colScript .= '</script>';
+      // ADD tLaguerie ticket #396
+     }  else if ($colName == "isResource") {
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  if (this.checked) { ';
+
+      if (property_exists ( $this, 'startDate' )) {
+        $colScript .= '    if(! dijit.byId("startDate").get("value")) {';
+        $colScript .= '       var curDate = new Date();';
+        $colScript .= '       dijit.byId("startDate").set("value", curDate);';
+        $colScript .= '    } ';
+      }
+      $colScript .= '} else {';
+        if (property_exists ( $this, 'startDate' )) {
+          $colScript .= '    dijit.byId("startDate").set("value", null); ';
+        }
+      $colScript .= '    } ';
+      $colScript .= '</script>';
+      // END tLaguerie ticket #396
     } else if ($colName == "done") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  if (this.checked) { ';

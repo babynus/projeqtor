@@ -50,7 +50,10 @@ class UserMain extends SqlElement {
   public $isEmployee=0;
 // MTY - LEAVE SYSTEM
   public $isResource=0;
-  
+  // ADD tLaguerie #Ticket 396
+  public $startDate; // start date as a resource, is hidden on display
+  public $_lib_colAsResource;
+// END tLaguerie #Ticket 396
 // MTY - MULTI CALENDAR
   public $idCalendarDefinition;
 // MTY - MULTI CALENDAR
@@ -106,9 +109,12 @@ class UserMain extends SqlElement {
 // MTY - LEAVE SYSTEM
                                           'isEmployee'=>'hidden',
 // MTY - LEAVE SYSTEM
+// ADD tLaguerie Ticket #396
+                                          'startDate'=>"nobr",
+// END tLaguerie Ticket #396 
 // MTY - MULTI CALENDAR
                                           'idCalendarDefinition'=> "hidden",
-// MTY - MULTI CALENDAR      
+// MTY - MULTI CALENDAR   
   );  
   
   public $_calculateForColumn=array("name"=>"coalesce(fullName,concat(name,' #'))");

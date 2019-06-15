@@ -47,3 +47,41 @@ DELETE FROM `${prefix}workflowstatus` where id in (SELECT id FROM `${prefix}temp
 DELETE FROM `${prefix}tempupdate`;
 
 CREATE UNIQUE INDEX `workflowstatusReference` ON `${prefix}workflowstatus` (idWorkFlow,idStatusFrom,idStatusTo,idProfile);
+
+-- ADD tLaguerie and dFayolle ticket #396
+
+INSERT INTO `${prefix}reportCategory` (`id`,`name`, `sortOrder`, `idle`) VALUES 
+(20, 'reportCategoryResources', 90, 0);
+
+INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `idle`, `orientation`, `hasCsv`, `hasView`, `hasPrint`, `hasPdf`, `hasToday`, `hasFavorite`, `hasWord`, `hasExcel`, `filterClass`) VALUES 
+(102, 'reportResourceInputOutput', 20, 'resourceReportInputOutput.php', 1210, 0, 'L', 0, 1, 1, 1, 1, 1, 0, 0, NULL ),
+(103, 'reportResourceWorkload', 20, 'resourceReportWorkload.php', 1220, 0, 'L', 0, 1, 1, 1, 1, 1, 0, 0, NULL ),
+(104, 'reportResourceSeniority', 20, 'resourceReportSeniority.php', 1230, 0, 'L', 0, 1, 1, 1, 1, 1, 0, 0, NULL );
+
+INSERT INTO `${prefix}reportParameter` (`idReport`, `name`, `paramType`, `sortOrder`, `idle`, `defaultValue`, `multiple`) VALUES 
+(102, 'idOrganization', 'organizationList', 10, 0, 'currentOrganization', 0),
+(102, 'year', 'year', 20, 0, 'currentYear', 0),
+(102, 'isEmployee', 'isEmployee', 35, 0, NULL, 0), 
+(102, 'idProfile', 'profileList', 40, 0, NULL, 1),
+(103, 'idOrganization', 'organizationList', 10, 0, 'currentOrganization', 0),
+(103 , 'year', 'year', 20, 0, 'currentYear', 0),
+(103, 'isEmployee', 'isEmployee', 35, 0, NULL, 0),
+(103 , 'idProfile', 'profileList', 40, 0, NULL, 1),
+(104, 'idOrganization', 'organizationList', 10, 0, 'currentOrganization', 0),
+(104, 'year', 'year', 20, 0, 'currentYear', 0),
+(104, 'nbOfMonths', 'intMonthInput', 30, 0, 12, 0),
+(104, 'isEmployee', 'isEmployee', 35, 0, NULL, 0),
+(104, 'idProfile', 'profileList', 40, 0, NULL, 1);
+
+INSERT INTO `${prefix}habilitationReport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
+(1, 102, 1),
+(1, 103, 1),
+(1, 104, 1);
+       
+ALTER TABLE `${prefix}resource` ADD startDate DATE DEFAULT NULL,
+ADD endDate DATE DEFAULT NULL,
+ADD subcontractor INT(1) DEFAULT 0,
+ADD student INT(1) DEFAULT 0;
+
+-- END tLaguerie and dFayolle ticket #396
+
