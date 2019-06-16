@@ -49,7 +49,7 @@ if(isset($listRescap[0])){
          <table>
            <tr>
              <td class="dialogLabel" >
-               <label for="resourceSurbooking" ><?php echo i18n("colSurbooking");?>&nbsp;:&nbsp;</label>
+               <label for="resourceSurbooking" style="white-space:nowrap;width:200px;"><?php echo i18n("colSurbooking");?>&nbsp;:&nbsp;</label>
              </td>
              <td>
                <div id="resourceSurbooking" name="resourceSurbooking" value="" 
@@ -67,7 +67,7 @@ if(isset($listRescap[0])){
                <table>
                  <tr>
                    <td class="dialogLabel" >
-                     <label for="resourceSurbookingStartDate" ><?php echo i18n("colStartDate");?>&nbsp;:&nbsp;</label>
+                     <label for="resourceSurbookingStartDate" style="white-space:nowrap;width:200px;"><?php echo i18n("colStartDate");?>&nbsp;:&nbsp;</label>
                    </td>
                    <td>
                      <input id="resourceSurbookingStartDate" name="resourceSurbookingStartDate" value="<?php if(isset($date)){ echo $date;} ?>"  
@@ -92,7 +92,7 @@ if(isset($listRescap[0])){
            </tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="resourceSurbookingDescription" ><?php echo i18n("colDescription");?>&nbsp;:&nbsp;</label>
+               <label for="resourceSurbookingDescription" style="white-space:nowrap;width:200px;"><?php echo i18n("colDescription");?>&nbsp;:&nbsp;</label>
              </td>
              <td> 
                <textarea dojoType="dijit.form.Textarea" 
@@ -104,7 +104,7 @@ if(isset($listRescap[0])){
            </tr>
            <tr>
              <td class="dialogLabel" >
-               <label for="resourceSurbookingIdle" ><?php echo i18n("colIdle");?>&nbsp;:&nbsp;</label>
+               <label for="resourceSurbookingIdle" style="white-space:nowrap;width:200px;"><?php echo i18n("colIdle");?>&nbsp;:&nbsp;</label>
              </td>
              <td>
                <div id="resourceSurbookingIdle" name="resourceSurbookingIdle"
