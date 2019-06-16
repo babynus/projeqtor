@@ -455,7 +455,7 @@ class ResourceMain extends SqlElement {
         $result['isMemberOf'][$rta->idResourceTeam]=$rta->idResourceTeam;
       }
     }
-    $result['variableCapacity']=$this->hasVariableCapacity();
+    $result['variableCapacity']=($this->hasVariableCapacity() or $this->hasSurbookedCapacity());
     $result['weekTotalCapacity']=array();
     $result['calendar']=$this->idCalendarDefinition;
     return $result;
@@ -669,7 +669,7 @@ class ResourceMain extends SqlElement {
     if (! $idRole or $idRole<=0) $idRole=$this->idRole;
     $where="idResource=" . Sql::fmtId($this->id) ;
     if ($idRole) {
-      $where.= " and idRole='" . Sql::fmtId($idRole);
+      $where.= " and idRole=" . Sql::fmtId($idRole);
     }
     $where.= " and (startDate is null or startDate<='".date('Y-m-d')."')";
     $rc=new ResourceCost();
@@ -950,7 +950,17 @@ class ResourceMain extends SqlElement {
       }
       return $this->getCapacityPeriod($date);
     }
-    
+    public function hasSurbookedCapacity() {
+    if(!sessionValueExists('surbookingPeriod')){
+        setSessionValue('surbookingPeriod', array());
+      }
+      if(!sessionTableValueExist('surbookingPeriod', $this->id)){
+        setSessionTableValue('surbookingPeriod',$this->id, $this->buildSurbookedPeriod());
+      }
+      $surbookingPeriod = getSessionTableValue('surbookingPeriod', $this->id);
+      if (count($surbookingPeriod)>0) return true;
+      else return false;
+    }
     public function buildSurbookedPeriod(){
       $resSur = new ResourceSurbooking();
       $listResSur = $resSur->getSqlElementsFromCriteria(array('idResource'=>$this->id),null,null,'startDate desc');
