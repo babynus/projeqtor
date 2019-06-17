@@ -75,10 +75,7 @@ Security::checkValidClass($objectClass);
                  }
                  ?>
                </select>
-                 	<?php
-                 }
-                 else if (in_array($filterCriteria->sqlOperator, array('LIKE', 'NOT LIKE')) or $filterCriteria->sqlValue == 'int') {
-                 	?>
+                 	<?php } else if (in_array($filterCriteria->sqlOperator, array('LIKE', 'NOT LIKE')) or $filterCriteria->sqlValue == 'int') { ?>
                <input id="filterValue<?php echo $cpt;?>" name="filterValue<?php echo $cpt;?>" value=""  
                  dojoType="dijit.form.TextBox" 
                  style="width:400px" />
@@ -90,8 +87,7 @@ Security::checkValidClass($objectClass);
                     else { ?>
                  <input type="hidden" name="filterDataType<?php echo $cpt;?>" id="filterDataType<?php echo $cpt;?>" value="varchar<?php echo ($filterCriteria->sqlValue=='startBy' ? 'StartBy' : '');?>" />  
                  <?php }
-                 }
-                 else if ($filterCriteria->sqlValue == 'date') {
+                 }else if ($filterCriteria->sqlValue == 'date') {
                  	?>
                <input id="filterValueDate<?php echo $cpt;?>" name="filterValueDate<?php echo $cpt;?>" value=""  
                  dojoType="dijit.form.DateTextBox" 
@@ -117,6 +113,19 @@ Security::checkValidClass($objectClass);
                  }
                  ?>
                  <input type="hidden" name="orOperator<?php echo $cpt;?>" id="orOperator<?php echo $cpt;?>" value="<?php echo $filterCriteria->orOperator;?>" />
+             </td>
+             <td style="width: 25px;">
+             <?php  if (in_array($filterCriteria->sqlOperator, array('IN', 'NOT IN'))) { ?>
+                    <button style="display:block;margin-left:-3px; padding-right:3px;" id="test<?php echo $cpt;?>" dojoType="dijit.form.Button" showlabel="false"
+                            title="<?php echo i18n('showDetail')?>"
+                            iconClass="iconView">
+                      <script type="dojo/connect" event="onClick" args="evt">
+                         var nb = <?php echo $cpt;?>;
+                         var fieldTarget = 'filterValueList'+nb;
+                          showDetail(fieldTarget,0,'<?php echo substr($filterCriteria->sqlAttribute,2); ?>',true);
+                      </script>
+                    </button>  
+             <?php } ?> 
              </td>
            </tr>
            <?php 
