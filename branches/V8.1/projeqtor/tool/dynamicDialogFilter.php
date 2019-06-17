@@ -137,7 +137,8 @@ require_once "../tool/projeqtor.php";
                       <script type="dojo/connect" event="onClick" args="evt">
                         var objectName = dijit.byId('showDetailInFilter').get('value');
                         if( objectName ){   
-                          showDetail(objectName[0],0);
+                          dijit.byId('filterValueList').reset();
+                          showDetail('filterValueList',0,objectName[0].substr(2),true);
                         }
                       </script>
                     </button>
