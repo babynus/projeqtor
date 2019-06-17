@@ -126,7 +126,6 @@ require_once "../tool/projeqtor.php";
                   <option value="desc"><?php echo i18n('sortDesc');?></option>
                </select> 
              </td>
-             
              <td style="width:25px; text-align: center;vertical-align:middle;" align="center"> 
                <table>
                  <tr>
@@ -153,10 +152,6 @@ require_once "../tool/projeqtor.php";
                   </tr>
                </table> 
              </td>
-             
-             
-             
-             
            </tr>
          </table>
         </form>
