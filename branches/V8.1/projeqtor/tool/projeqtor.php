@@ -244,7 +244,7 @@ if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMo
     $cookieHash=User::getRememberMeCookie();
     if (!empty($cookieHash)) {
       $cookieUser=SqlElement::getSingleSqlElementFromCriteria('User', array('cookieHash'=>$cookieHash));
-      if ($cookieUser and $cookieUser->id and strtolower($enalbeSAMLAuth) == 'false') {
+      if ($cookieUser and $cookieUser->id and strtolower($SAMLenabled) == 'false') {
         $user=$cookieUser;
         $loginSave=true;
         $user->setCookieHash();
