@@ -486,7 +486,12 @@ if ($type == 'empty') {
     if ($name == $selected and substr ( $class, - 7 ) == 'Version' and SqlElement::is_a ( $class, 'Version' )) {
       $name = SqlList::getNameFromId ( 'Version', $selected );
     }
-    $list [$selected] = $name;
+    // Florent ticket 3868
+    if ($class=='Activity' or $class=='Ticket') {
+      $list [$selected] = '#'.$selected.' - '.$name;
+    } else {
+      $list [$selected] = $name;
+    }
   }
   if ($dataType == "idProject" or $dataType == 'planning') {
     $wbsList = SqlList::getList ( 'Project', 'sortOrder', $selected, true );
