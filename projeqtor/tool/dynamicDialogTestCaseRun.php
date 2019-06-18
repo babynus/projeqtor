@@ -84,6 +84,9 @@ if (count($listTcr)) {
 }
 
 $selectedProject=getSessionValue('project');
+if(strpos($selectedProject, ",")){
+	$selectedProject="*";
+}
 ?>
 
   <table>

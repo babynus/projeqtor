@@ -26,11 +26,26 @@
 
 require_once "../tool/projeqtor.php";
 $proj='';
+$arrayProj = '';
 if (sessionValueExists('project')) {
   $proj=getSessionValue('project');
+  if(strpos($proj, ",")){
+  	$arrayProj = explode(",", $proj);
+  }
 }
-$prj=new Project($proj);
-$lstProjSelect=$prj->getRecursiveSubProjectsFlatList(true,true);
+if($arrayProj){
+  $lstProjSelect = array();
+  foreach ($arrayProj as $idProject){
+    $prj=new Project($idProject, true);
+    $lstprj = $prj->getRecursiveSubProjectsFlatList(true,true);
+    foreach ($lstprj as $id=>$name){
+      $lstProjSelect[$id]=$name; 
+    }
+  }
+}else{
+  $prj=new Project($proj);
+  $lstProjSelect=$prj->getRecursiveSubProjectsFlatList(true,true);
+}
 $lstProjVisible=getSessionUser()->getVisibleProjects(); 
 $lstProj=array_intersect_assoc($lstProjSelect,$lstProjVisible);
 echo '<table style="width: 100%;">';

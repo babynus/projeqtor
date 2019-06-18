@@ -325,6 +325,9 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       <?php 
       if (sessionValueExists('project')) {
         $proj=getSessionValue('project');
+        if(strpos($proj, ",") != null){
+        	$proj="*";
+        }
       } else {
         $proj="*";
       }
@@ -1803,6 +1806,9 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                     $proj=null; 
                     if (sessionValueExists('project')) {
                         $proj=getSessionValue('project');
+                        if(strpos($proj, ",")){
+                        	$proj="*";
+                        }
                     }
                     if ($proj=="*" or ! $proj) $proj=null;
                     $user=getSessionUser();

@@ -98,7 +98,10 @@
   }
   
   $accessRightRead=securityGetAccessRight('menuActivity', 'read');
-  if ( ! ( $accessRightRead!='ALL' or (sessionValueExists('project') and getSessionValue('project')!='*'))
+  if(strpos($proj, ",")){
+  	$proj="*";
+  }
+  if ( ! ( $accessRightRead!='ALL' or (sessionValueExists('project') and getSessionValue('project')!='*') and strpos(getSessionValue('project'), ",") === null)
    and ( ! array_key_exists('idProject',$_REQUEST) or trim($_REQUEST['idProject'])=="")) {
       $listProj=explode(',',getVisibleProjectsList(! $showIdleProjects));
       if (count($listProj)-1 > Parameter::getGlobalParameter('maxProjectsToDisplay')) {

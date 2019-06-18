@@ -45,6 +45,9 @@
                     $proj=null; 
                     if (sessionValueExists('project')){
                         $proj= getSessionValue('project');
+                        if(strpos($proj, ",")){
+                        	$proj="*";
+                        }
                     }
                     if ($proj=="*" or ! $proj) $proj=null;
                     htmlDrawOptionForReference('idProject', $proj, null, false);

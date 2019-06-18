@@ -28,6 +28,9 @@ include_once("../tool/projeqtor.php");
 $proj='*'; 
 if(sessionValueExists('project')){
   $proj=getSessionValue('project');
+  if(strpos($proj, ",")){
+  	$proj="*";
+  }
 } else {
   setSessionValue('project', "*");
 }
@@ -65,18 +68,29 @@ if ($proj=='*') {
     ?>
     </div>
   </span>
-  <span dojoType="dijit.TooltipDialog" class="white" <?php echo ($cpt>25)?'style="max-width:900px;"':'';?>>   
-    <div <?php echo ($cpt>25)?'style="height: 500px; overflow-x: hidden; overflow-y: scroll;"':'';?>>    
+  <span dojoType="dijit.TooltipDialog" class="white" <?php echo ($cpt>25)?'style="max-width:900px;"':'';?>> 
+     <button id="multiProjectSelectButton" dojoType="dijit.form.Button" style="right:10px;position:absolute;"><?php echo i18n('buttonOK')?>
+       <script type="dojo/connect" event="onClick" args="evt">
+          selectedMultiProject(null, null, true);
+       </script>
+     </button>  
+    <div <?php echo ($cpt>25)?'style="height: 500px; overflow-x: hidden; overflow-y: scroll;"':'';?>>
     <?php 
       echo $subProjectsToDraw;
     ?>
     </div>       
   </span>
 </span>
+    <div id="multiProjectSelector"  dojoType="dijit.form.TextBox" style="display:none" value="">
+     <script type="dojo/connect" event="onChange" args="evt">
+       setSelectedProject(this.value, '<i>'+i18n('selectedProject')+'</i>', 'selectedProject',true);
+     </script>
+   </div>
    <div id="projectSelectorFiletering" style="display:none" dojoType="dijit.form.FilteringSelect" >
      <script type="dojo/connect" event="onChange" args="evt">
        setSelectedProject(this.value, this.displayedValue, 'selectedProject',true);
      </script>
+     <option value=""></option>
      <?php htmlDrawOptionForReference("idProject", $proj, null, true,null, null, $limitToActiveProjects);?>
    </div>
    <input type="hidden" id="projectSelectorMode" value="Standard" />
@@ -84,7 +98,7 @@ if ($proj=='*') {
       <button id="projectSelectorComboButton" dojoType="dijit.form.Button" showlabel="false " style="position: relative; left:26px; top:-1px; height: 20px"
          title="<?php echo i18n('searchProject');?>" iconClass="iconView">
          <script type="dojo/connect" event="onClick" args="evt">        
-            showDetail('projectSelectorFiletering', false , 'Project',false,null,true);    
+            showDetail('projectSelectorFiletering', false , 'Project',true,null,true);    
          </script>
        </button>
 	</div>
