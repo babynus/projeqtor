@@ -389,6 +389,7 @@ For each planning element, a bar is associated with it
       
    Move the cursor over the bar to display item name and planned dates.   
 
+.. _Gantt_DependencyLink_Milestone:
 
 .. rubric:: |five| Dependency links
 
@@ -409,12 +410,12 @@ For each planning element, a bar is associated with it
   * if the successor has another predecessor of type "End-Start" or "Start-Start" and the remaining time is not enough to complete the task
   * if the delay from the planning start date does not allow to complete the task
  
-.. note:: Update Pop-up 
+.. note:: **Update Pop-up**
 
      * Right click on a dependency link (when its color is orange) will show update pop-up
      * You can modify the delay, add a comment or remove the dependency.
 
-.. note:: Graphical add dependency
+.. note:: **Graphical add dependency**
 
      * You can easily add a dependency with drag and drop from predecessor bar to successor bar
      * These dependencies are always End-Start, but you can change their type afterwards

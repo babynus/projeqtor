@@ -10,7 +10,7 @@
 .. _report:
 
 Reports
--------
+*******
 
 A list of reports is available in different categories.
 
@@ -43,7 +43,7 @@ A list of reports is available in different categories.
 .. index:: ! Report (Favorite)
 
 Favorite reports
-""""""""""""""""
+----------------
 
 Move your cursor over the reports menu icon (in the top bar) to show the popup menu that contains your favorite reports.
 
