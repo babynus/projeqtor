@@ -203,48 +203,55 @@ if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMo
   }
   scriptLog("Page=".$page);
   
+  // SSO Athentication using SAML2
   //damian #3980
   Parameter::refreshParameters();
-  $SAMLenabled = Parameter::getGlobalParameter('SAML_allow_login'); // If SAML is enabled, look for username.
-  $paramLdap_allow_login=Parameter::getGlobalParameter('paramLdap_allow_login');
-  
-  if (!$user and $page!='loginCheck.php' and $page!='getHash.php' and $page!='saveDataToSession.php' and strtolower($SAMLenabled)=='true' and !sessionValueExists('avoidSAMLAuth') and strtolower($paramLdap_allow_login)=='false') {
-  	require_once '../external/simpleSAML/lib/_autoload.php';
-  	$hideAutoloadError=true;
-  	$auth = new SimpleSAML\Auth\Simple('projeqtor-sp');
-  	$auth->requireAuth();
-  	$authName = $auth->getAttributes();
-  	$login = $authName['username'][0];
-  	$user=new User();
-  	$user=SqlElement::getSingleSqlElementFromCriteria('User', array('name'=>strtolower($login)));
-  	if ($user->id) {
-  		User::resetAllVisibleProjects();
-  		//damian #3724
-  		if(Parameter::getGlobalParameter('applicationStatus')=='Closed'){
-  			$prf=new Profile($user->idProfile);
-  			if ($prf->profileCode!='ADM') {
-  				$user=null;
-  			}else{
-  				if (substr($_SERVER['PHP_SELF'],-9)=='/main.php'){
-  					$user->finalizeSuccessfullConnection(false,true);
-  				}
-  			}
-  		}else{
-  			if (substr($_SERVER['PHP_SELF'],-9)=='/main.php'){
-  				$user->finalizeSuccessfullConnection(false,true);
-  			}
-  		}
-  	} else {
-  		$user=null;
-  	}
-  	unsetSessionValue('avoidSAMLAuth');
+  if (!$user and SSO::isSamlEnabled() and $page!='loginCheck.php' and $page!='getHash.php' and $page!='saveDataToSession.php' ) {
+    SSO::addTry();
+    require_once dirname(__DIR__).'/sso/_toolkit_loader.php';
+    require_once dirname(__DIR__).'/sso/projeqtor/settings.php'; // defines $settingsInfo
+    if (isset($_SESSION['samlUserdata'])) {
+      $auth = new OneLogin_Saml2_Auth($settingsInfo);
+      SSO::resetTry();
+      debugLog("CONECTED");
+      $authAttr = $_SESSION['samlUserdata'];
+      $login = $authAttr['uid'][0];
+      $user=new User();
+      $user=SqlElement::getSingleSqlElementFromCriteria('User', array('name'=>strtolower($login)));
+      if ($user->id) {
+        User::resetAllVisibleProjects();
+        //damian #3724
+        if(Parameter::getGlobalParameter('applicationStatus')=='Closed'){
+          $prf=new Profile($user->idProfile);
+          if ($prf->profileCode!='ADM') {
+            $user=null;
+          }else{
+            if (substr($_SERVER['PHP_SELF'],-9)=='/main.php'){
+              $user->finalizeSuccessfullConnection(false,true);
+            }
+          }
+        }else{
+          if (substr($_SERVER['PHP_SELF'],-9)=='/main.php'){
+            $user->finalizeSuccessfullConnection(false,true);
+          }
+        }
+      }
+    } else if (SSO::isFirstTry()) { // Only 1 try to connect, then return to standard connection    
+      $auth = new OneLogin_Saml2_Auth($settingsInfo);
+      $auth->login();
+    } else { // Too many tries, get to ProjeQtOr Login screen
+      $user=null;
+      $errorSSO=i18n("ssoConnectionFailed");
+      SSO::resetTry();
+    }
+  	SSO::unsetAvoidSSO();
   }
   
   if (!$user and $page!='loginCheck.php' and $page!='getHash.php' and $page!='saveDataToSession.php') {
     $cookieHash=User::getRememberMeCookie();
     if (!empty($cookieHash)) {
       $cookieUser=SqlElement::getSingleSqlElementFromCriteria('User', array('cookieHash'=>$cookieHash));
-      if ($cookieUser and $cookieUser->id and strtolower($SAMLenabled) == 'false') {
+      if ($cookieUser and $cookieUser->id and ! SSO::isEnabled()) {
         $user=$cookieUser;
         $loginSave=true;
         $user->setCookieHash();
@@ -1519,7 +1526,9 @@ function securityCheckPage($page) {
       realpath("../view/"), 
       realpath("../report/"), 
       realpath("../report/object/"), 
-      realpath("../plugin/templateReport"));
+      realpath("../plugin/templateReport"),
+      realpath("../sso/projeqtor/")
+  );
   if (!in_array(dirname(realpath($path)), $allowed_folders)) {
     traceHack("securityCheckPage($page) - '".dirname(realpath($path))."' is not in allowed folders list");
     exit(); // Not required : traceHack already exits script
