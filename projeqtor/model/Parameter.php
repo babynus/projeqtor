@@ -153,6 +153,17 @@ class Parameter extends SqlElement {
       $colScript .= '  }';
       $colScript .= ' saveDataToSession(\''.$colName.'\', newValue);';
       $colScript .= '</script>';
+    } else if ($colName=='SAML_allow_login') {
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  newValue=this.value;';
+      $colScript .= '  if (newValue=="YES" || newValue=="true") {';
+      $colScript .= '    dojo.addClass(dojo.byId("SAML_idpId"), "required");';
+      $colScript .= '    dojo.addClass(dojo.byId("SAML_idpCert"), "required");';
+      $colScript .= '    dojo.addClass(dojo.byId("SAML_SingleSingOnService"), "required");';
+      $colScript .= '    dojo.addClass(dojo.byId("SAML_SingleLogoutService"), "required");';
+      $colScript .= '    dojo.addClass(dojo.byId("SAML_attributeUserId"), "required");';
+      $colScript .= '  } ';
+      $colScript .= '</script>';
     } else {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  newValue=this.value;';
@@ -431,10 +442,10 @@ class Parameter extends SqlElement {
         $list=array('2'=>'2',
                     '3'=>'3');
         break;
-      case 'ldapDefaultProfile': case 'defaultProfile':
+      case 'ldapDefaultProfile': case 'defaultProfile': case 'SAML_defaultProfile' :
       	$list=SqlList::getList('Profile');
       	break;
-      case 'ldapMsgOnUserCreation': case 'imputationAlertSendToResource': 
+      case 'ldapMsgOnUserCreation': case 'imputationAlertSendToResource': case 'SAML_msgOnUserCreation' :
       case 'imputationAlertSendToProjectLeader': case 'imputationAlertSendToTeamManager': 
       case 'imputationAlertSendToOrganismManager': case 'imputationAlertInputByOther': case 'imputationAlertCancelByOther':
         $list=array('ALERT'=>i18n('displayAlert'),
@@ -541,13 +552,13 @@ class Parameter extends SqlElement {
             'helvetica'=>i18n('fontForPdfHelvetica'),
             'arial'=>i18n('fontForPdfArial'));
         break;
-      case 'ldapCreationAction';
+      case 'ldapCreationAction' : case 'SAML_creationAction' :
         $list=array('createNothing'=>i18n('createNothingFromLdapUser'),
           'createResource'=>i18n('createResourceFromLdapUser'),
           'createContact'=>i18n('createContactFromLdapUser'),
           'createResourceAndContact'=>i18n('createResourceAndContactFromLdapUser'));
         break;
-      case 'ldapDefaultProject':
+      case 'ldapDefaultProject': case 'SAML_defaultProject' :
         $list['']=' ';
         if (sessionUserExists()) {
           $user=getSessionUser();
@@ -931,14 +942,14 @@ class Parameter extends SqlElement {
       	                      'paramMailBodyReport'=>'longtext',
       	                'tabAuthent'=>"tab",
       	                  'newColumnAuthentLeft'=>'newColumn',
-      	                  'sectionUserAndPassword'=>'section',
-        	                  'defaultProfile'=>'list',
-        	                  'paramDefaultPassword'=>'text',
-        	                  'paramPasswordMinLength'=>'number',
-        	                  'paramLockAfterWrongTries'=>'number',
-        	                  'passwordValidityDays'=>'number',
-        	                  'rememberMe'=>'list',
-        	                  'initializePassword'=>'list', 	                     
+        	                  'sectionUserAndPassword'=>'section',
+          	                  'defaultProfile'=>'list',
+          	                  'paramDefaultPassword'=>'text',
+          	                  'paramPasswordMinLength'=>'number',
+          	                  'paramLockAfterWrongTries'=>'number',
+          	                  'passwordValidityDays'=>'number',
+          	                  'rememberMe'=>'list',
+          	                  'initializePassword'=>'list', 	                     
         	                  'sectionLdap'=>'section',
           	                  'paramLdap_allow_login'=>'list',
           	                  'paramLdap_base_dn'=>'text',
@@ -952,15 +963,23 @@ class Parameter extends SqlElement {
           	                  'ldapMsgOnUserCreation'=>'list',
           	                  'ldapCreationAction'=>'list',
           	                  'ldapDefaultProject'=>'list',
-      	                  'newColumnAuthentRight'=>'newColumn',
-      	                  'sectionSAML'=>'section',
-      	                  'SAML_allow_login'=>'list',
-      	                  'SAML_idpId'=>'text',
-      	                  'SAML_idpCert'=>'text',
-      	                  'SAML_SingleSignOnService'=>'text',
-      	                  'SAML_SingleLogoutService'=>'text',
-      	                  'SAML_isADFS'=>'list',
-      	                  'SAML_metadata'=>'specific',
+        	                'newColumnAuthentRight'=>'newColumn',
+        	                  'sectionSAML'=>'section',
+          	                  'SAML_allow_login'=>'list',
+          	                  'SAML_idpId'=>'text',
+          	                  'SAML_idpCert'=>'text',
+          	                  'SAML_SingleSignOnService'=>'text',
+          	                  'SAML_SingleLogoutService'=>'text',
+          	                  'SAML_isADFS'=>'list',
+          	                  'SAML_attributeUserId'=>'text',
+          	                  'SAML_attributeMail'=>'text',
+          	                  'SAML_attributeCommonName'=>'text',
+          	                  'SAML_defaultProfile'=>'list',
+          	                  'SAML_msgOnUserCreation'=>'list',
+          	                  'SAML_creationAction'=>'list',
+          	                  'SAML_defaultProject'=>'list',
+          	                  'SAML_metadata'=>'specific',
+          	                  'SAML_spCertMessage'=>'specific',
           	            'tabAutomation'=>"tab",
           	              'newColumnbAutomationLeft'=>'newColumn',
               	            'sectionCron'=>'section',

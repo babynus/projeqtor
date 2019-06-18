@@ -41,7 +41,7 @@ class ContactMain extends SqlElement {
   public $idProfile;
   public $idClient;
   public $idProvider;
-  public $function;
+  public $contactFunction;
   public $phone;
   public $mobile;
   public $fax;
@@ -108,7 +108,7 @@ class ContactMain extends SqlElement {
 
   private static $_databaseCriteria = array('isContact'=>'1');
   
-  private static $_colCaptionTransposition = array('name'=>'realName');
+  private static $_colCaptionTransposition = array('name'=>'realName','contactFunction'=>'function');
   
   /** ==========================================================================
    * Constructor

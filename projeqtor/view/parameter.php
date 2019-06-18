@@ -173,7 +173,7 @@ function drawTableFromObjectList($objectList) {
 				echo '<select dojoType="dijit.form.FilteringSelect" class="input" name="' . $code . '" id="' . $code . '" ';
 				echo autoOpenFilteringSelect();
 				echo ' title="' . i18n('help' . ucfirst($code)) . '" style="width:200px">';
-				if ($type=='userParameter' or $code=='versionNameAutoformat') {
+				if ($type=='userParameter' or $code=='versionNameAutoformat' or $code=='SAML_allow_login') {
 					echo $obj->getValidationScript($code);
 				}
 				foreach ($listValues as $value => $valueLabel ) {
@@ -339,7 +339,10 @@ function drawTableFromObjectList($objectList) {
 			    echo " window.open('".SSO::getSettingValue('entityId')."','projeqtorMetadata');";
 			    echo '</script>';
 			    echo '</button>';
-			    echo '<br/>'.i18n('SAML_spCertMessage');
+			    echo '</div>';
+			  } else if ($code=='SAML_spCertMessage') {
+			    echo '<div style="vertical-align:top">';
+			    echo i18n('SAML_spCertMessage');
 			    echo '</div>';
 			  }
 			}
