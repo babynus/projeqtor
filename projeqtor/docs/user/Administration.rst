@@ -118,8 +118,8 @@ Global Parameters
 Global parameters screen allows configuration of application settings.
 
 .. note:: Tooltip
-
-* Moving the mouse over the caption of a parameter will display a tooltip with more description about the parameter.
+   
+   * Moving the mouse over the caption of a parameter will display a tooltip with more description about the parameter.
 
 Tab Work time
 -------------

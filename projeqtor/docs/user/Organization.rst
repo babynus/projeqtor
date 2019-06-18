@@ -16,10 +16,6 @@ Organizations
 
 Depending on the profile, you can limit the visibility of resources to people in the same organization or team as the current user.
 
-.. note:: test
-   
-   je veux une note ici
-
 .. sidebar:: Other sections
 
    * :ref:`Current project<progress-section-activity>`
@@ -52,5 +48,3 @@ Depending on the profile, you can limit the visibility of resources to people in
      - parent organization.
    * - Closed 
      - Box checked indicates the organization is archived.
-
-**\* Required field**
