@@ -31,6 +31,35 @@
   scriptLog('   ->/view/dashboardTicketMain.php'); 
   $user=getSessionUser();
   $nbDay=7;
+ //FLORENT
+ $valFil = RequestHandler::getValue('filterSynthesis');
+  if(isset($valFil)){
+    if($valFil!=Parameter::getUserParameter("filterSynthesis") ){
+      if(Parameter::getUserParameter("filterSynthesis")!=null){
+        $valFil="1";
+      }
+        Parameter::storeUserParameter("filterSynthesis", $valFil);
+        $valFil="0";
+      if(Parameter::getUserParameter("dashboardTicketMainTabPosition")){
+        $tabPosition=Parameter::getUserParameter("dashboardTicketMainTabPosition");
+        $tabPosition=json_decode($tabPosition,true);
+        $tabPosition['Status']['withParam']=$valFil;
+        Parameter::storeUserParameter("dashboardTicketMainTabPosition", json_encode($tabPosition));
+      }
+    }else{
+        $valFil="0";
+        Parameter::storeUserParameter("filterSynthesis", $valFil);
+        $valFil="1";
+        if(Parameter::getUserParameter("dashboardTicketMainTabPosition")){
+          $tabPosition=Parameter::getUserParameter("dashboardTicketMainTabPosition");
+          $tabPosition=json_decode($tabPosition,true);
+          $tabPosition['Status']['withParam']=$valFil;
+          Parameter::storeUserParameter("dashboardTicketMainTabPosition", json_encode($tabPosition));
+        }
+      }
+  }
+  //END
+  
   if(isset($_REQUEST['dashboardTicketMainNumberDay'])){
     $nbDay=$_REQUEST['dashboardTicketMainNumberDay'];
     if(!is_numeric($nbDay))$nbDay=7;
@@ -41,27 +70,27 @@
   }else{
     Parameter::storeUserParameter("dashboardTicketMainNumberDay", $nbDay);
   }
-  if(Parameter::getUserParameter("dashboardTicketMainTabPosition")){
-    $tabPosition=Parameter::getUserParameter("dashboardTicketMainTabPosition");
-  }else{
-    $tabPosition='
-    {
-    "orderListLeft":["TicketType","Priority","Product","Component"],
-    "orderListRight":["OriginalProductVersion","TargetProductVersion","Contact","Resource","Status"],
-    "TicketType":{"title":"dashboardTicketMainTitleType","withParam":true,"idle":true},
-    "Priority":{"title":"dashboardTicketMainTitlePriority","withParam":true,"idle":true},
-    "Product":{"title":"dashboardTicketMainTitleProduct","withParam":true,"idle":true},
-    "Component":{"title":"dashboardTicketMainTitleCompoment","withParam":true,"idle":true},
-    "OriginalProductVersion":{"title":"dashboardTicketMainTitleOriginVersion","withParam":true,"idle":true},
-    "TargetProductVersion":{"title":"dashboardTicketMainTitleTargetVersion","withParam":true,"idle":true},
-    "Contact":{"title":"dashboardTicketMainTitleUser","withParam":true,"idle":true},
-    "Resource":{"title":"dashboardTicketMainTitleResponsible","withParam":true,"idle":true},
-    "Status":{"title":"dashboardTicketMainTitleStatus","withParam":false,"idle":true}
+  
+    if(Parameter::getUserParameter("dashboardTicketMainTabPosition")){
+      $tabPosition=Parameter::getUserParameter("dashboardTicketMainTabPosition");
+    }else{
+      $tabPosition='
+      {
+      "orderListLeft":["TicketType","Priority","Product","Component"],
+      "orderListRight":["OriginalProductVersion","TargetProductVersion","Contact","Resource","Status"],
+      "TicketType":{"title":"dashboardTicketMainTitleType","withParam":true,"idle":true},
+      "Priority":{"title":"dashboardTicketMainTitlePriority","withParam":true,"idle":true},
+      "Product":{"title":"dashboardTicketMainTitleProduct","withParam":true,"idle":true},
+      "Component":{"title":"dashboardTicketMainTitleCompoment","withParam":true,"idle":true},
+      "OriginalProductVersion":{"title":"dashboardTicketMainTitleOriginVersion","withParam":true,"idle":true},
+      "TargetProductVersion":{"title":"dashboardTicketMainTitleTargetVersion","withParam":true,"idle":true},
+      "Contact":{"title":"dashboardTicketMainTitleUser","withParam":true,"idle":true},
+      "Resource":{"title":"dashboardTicketMainTitleResponsible","withParam":true,"idle":true},
+      "Status":{"title":"dashboardTicketMainTitleStatus","withParam":true,"idle":true}
+      }
+      ';
+      Parameter::storeUserParameter("dashboardTicketMainTabPosition", $tabPosition);
     }
-    ';
-    Parameter::storeUserParameter("dashboardTicketMainTabPosition", $tabPosition);
-  }
-
   $addParam=addParametersDashboardTicketMain();
   if($addParam!=""){
     $addParam=', "paramAdd":"'.$addParam.'"';
@@ -248,6 +277,7 @@
 									href="#"><?php echo i18n("dashboardTicketMainUnclosed").addSelected("dashboardTicketMainAllTicket",2);?></a></td>
 							</tr>
 							<tr>
+							
 								<td align="left"><a style="cursor:pointer"
 									onClick="changeParamDashboardTicket('dashboardTicketMainAllTicket=1')"
 									href="#"><?php echo i18n("dashboardTicketMainUnresolved").addSelected("dashboardTicketMainAllTicket",1);?></a></td>
@@ -296,23 +326,28 @@
 							</tr>
 						</table>
 					</td>
-					<td valign="top" style="width:20%">
+					<td valign="top" style="width:25%">
 						<table>
 							<tr>
 								<td align="left"><a style="cursor:pointer"
 									onClick="changeParamDashboardTicket('dashboardTicketMainUnresolved=1')"
 									href="#"><?php echo i18n("dashboardTicketMainUnscheduled").addSelected("dashboardTicketMainUnresolved",1);?></a></td>
 							</tr>
+							<tr>
+								<td align="left"><a style="cursor:pointer"
+									onClick="changeParamDashboardTicket('filterSynthesis=1')"
+									href="#"><?php echo i18n("filterSynthesis").addSelected("filterSynthesis",1);?></a></td>
+							</tr>
 						</table>
 					</td>
-					<td valign="top" style="width:25%">
+					<td valign="top" >
 						<button id="updateTabDashboardTicketMain"
 							dojoType="dijit.form.Button" showlabel="false"
 							title="<?php echo i18n('menuParameter');?>"
 							iconClass="iconParameter16">
 							<script type="dojo/connect" event="onClick" args="evt">
-                  dijit.byId('popUpdatePositionTab').show();
-              </script>
+                               dijit.byId('popUpdatePositionTab').show();
+                            </script>
 						</button>
 					</td>
 				</tr>
@@ -568,19 +603,25 @@ function addParametersDashboardTicketMain($prefix="t"){
   if($toMe=="1")$result.=" AND $prefix.idResource=".$user->id." ";
   if($toMe=="2")$result.=" AND $prefix.idUser=".$user->id." ";
   $unresolved="";
-
+  
   if(isset($_REQUEST['dashboardTicketMainUnresolved'])){
     if(Parameter::getUserParameter("dashboardTicketMainUnresolved")!=null){
       if($_REQUEST['dashboardTicketMainUnresolved']==Parameter::getUserParameter("dashboardTicketMainUnresolved"))$_REQUEST['dashboardTicketMainUnresolved']="0";
     }
     Parameter::storeUserParameter("dashboardTicketMainUnresolved", $_REQUEST['dashboardTicketMainUnresolved']);
   }
-
   if(Parameter::getUserParameter("dashboardTicketMainUnresolved")!=null){
     $unresolved=Parameter::getUserParameter("dashboardTicketMainUnresolved");
   }
   if($unresolved=="1")$result.=" AND $prefix.idTargetProductVersion is null ";
-  
+  //Florent
+  if(Parameter::getUserParameter("filterSynthesis")== null){
+    if(RequestHandler::getValue('filterSynthesis')== null){
+      $valFil='1';
+      Parameter::storeUserParameter("filterSynthesis", $valFil);
+    }
+  }
+  // end
   //BEGIN - ADD qCazelles - Dashboard : filter by type - Ticket 154
   $filterTypes = '';
   if (Parameter::getUserParameter("dashboardTicketMainTypes")) {
@@ -606,7 +647,6 @@ function addParametersDashboardTicketMain($prefix="t"){
   }
   if ($filterTypes != '') $result .= " AND $prefix.idTicketType in (" . $filterTypes . ")";
   //END - ADD qCazelles - Dashboard : filter by type - Ticket 154
-
   return $result;
 }
 
