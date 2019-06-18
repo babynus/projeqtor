@@ -4953,7 +4953,6 @@ function drawVersionStructureFromObject($obj, $refresh=false, $way, $item) {
     }
     if ($compObj->scope=='Product') $compObj=new ProductVersion($compObj->id);
     else $compObj=new ComponentVersion($compObj->id);
-    debugLog("paramItem=$paramItem, idle=$compObj->idle");
     if($paramItem==1 or !$compObj->idle) {
       drawElementIntoVersionStructureFromObject($comp, $compObj, $print, $canUpdate, $obj, $way, $actualStatus);
     }

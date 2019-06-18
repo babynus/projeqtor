@@ -625,7 +625,15 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 	    		          else echo 'img/titleSmall.png';?>" />
     	          </div>
   	            <div style="width: 470px; height:130px;position:absolute;top:160px;overflow:hidden;text-align:center;">
-                  Loading ...                               
+                  <?php 
+                  if (SSO::isEnabled() and ! SSO::issetAccessFromLoginScreen()) { 
+                    echo '<div style="font-size:125%;font-weight:bold">'.i18n("ssoRedirectionMessage").'</div>';
+                  } else {
+                    echo  "Loading ..."; 
+                    SSO::unsetAccessFromLoginScreen();
+                  }
+                  ?>
+                       
                 </div>
               </div>
             </td>

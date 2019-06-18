@@ -1466,7 +1466,7 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
         setSessionValue('currentLocale', $obj->parameterValue);
         $i18nMessages=null;
       } else if ($obj->parameterCode=='defaultProject') {
-        $prj=new Project($obj->parameterValue);
+        $prj=new Project ($obj->parameterValue);
         if ($prj->name!=null and $prj->name!='') {
           setSessionValue('project', $obj->parameterValue);
         } else {
