@@ -328,6 +328,19 @@ function drawTableFromObjectList($objectList) {
 			      }else{
 			          CronExecution::drawCronExecutionDefintion(substr($code,9));
 			      }
+			  } else if ($code=='SAML_metadata') {         
+			    echo '<div style="vertical-align:top">';
+			    echo '<button id="getSpMetadata" dojoType="dijit.form.Button" showlabel="true"';
+			    echo 'iconClass="dijitButtonIcon dijitButtonIconDisplay" ';
+			    echo ' title="'.i18n("helpSAML_metadata").'" ';
+			    echo ' style="vertical-align: middle;">'.i18n("SAML_getSpMetadata");
+			    //echo '<span>' . i18n('paramMailerTest') . '</span>';
+			    echo '<script type="dojo/connect" event="onClick" args="evt">';
+			    echo " window.open('".SSO::getSettingValue('entityId')."','projeqtorMetadata');";
+			    echo '</script>';
+			    echo '</button>';
+			    echo '<br/>'.i18n('SAML_spCertMessage');
+			    echo '</div>';
 			  }
 			}
 			//if ($format!='photo') {

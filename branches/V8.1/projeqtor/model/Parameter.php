@@ -301,7 +301,7 @@ class Parameter extends SqlElement {
       case 'mailGroupActive' :
       case 'csvExportUTF8':  
       case 'isManualProgress':
-      case 'hideItemTypeRestrictionOnProject' :
+      case 'hideItemTypeRestrictionOnProject' : case 'SAML_isADFS' :
         $list=array('NO'=>i18n('displayNo'),
                     'YES'=>i18n('displayYes')); 
         break;
@@ -931,12 +931,14 @@ class Parameter extends SqlElement {
       	                      'paramMailBodyReport'=>'longtext',
       	                'tabAuthent'=>"tab",
       	                  'newColumnAuthentLeft'=>'newColumn',
-    	                     'sectionSAML'=>'section',
-      	                     'SAML_allow_login'=>'list',
-      	                     'SAML_baseurlpath'=>'text',
-      	                     'SAML_baseURL'=>'text',
-      	                     'SAML_SingleSignOnService'=>'text',
-      	                     'SAML_SingleLogoutService'=>'text',
+      	                  'sectionUserAndPassword'=>'section',
+        	                  'defaultProfile'=>'list',
+        	                  'paramDefaultPassword'=>'text',
+        	                  'paramPasswordMinLength'=>'number',
+        	                  'paramLockAfterWrongTries'=>'number',
+        	                  'passwordValidityDays'=>'number',
+        	                  'rememberMe'=>'list',
+        	                  'initializePassword'=>'list', 	                     
         	                  'sectionLdap'=>'section',
           	                  'paramLdap_allow_login'=>'list',
           	                  'paramLdap_base_dn'=>'text',
@@ -951,14 +953,14 @@ class Parameter extends SqlElement {
           	                  'ldapCreationAction'=>'list',
           	                  'ldapDefaultProject'=>'list',
       	                  'newColumnAuthentRight'=>'newColumn',
-      	                    'sectionUserAndPassword'=>'section',
-          	                  'defaultProfile'=>'list',
-          	                  'paramDefaultPassword'=>'text',
-          	                  'paramPasswordMinLength'=>'number',
-          	                  'paramLockAfterWrongTries'=>'number',
-          	                  'passwordValidityDays'=>'number',
-          	                  'rememberMe'=>'list',
-          	                  'initializePassword'=>'list',
+      	                  'sectionSAML'=>'section',
+      	                  'SAML_allow_login'=>'list',
+      	                  'SAML_idpId'=>'text',
+      	                  'SAML_idpCert'=>'text',
+      	                  'SAML_SingleSignOnService'=>'text',
+      	                  'SAML_SingleLogoutService'=>'text',
+      	                  'SAML_isADFS'=>'list',
+      	                  'SAML_metadata'=>'specific',
           	            'tabAutomation'=>"tab",
           	              'newColumnbAutomationLeft'=>'newColumn',
               	            'sectionCron'=>'section',

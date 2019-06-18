@@ -32,6 +32,8 @@
      include_once "../view/locked.php";
      exit;
    }
+   SSO::unsetAvoidSSO();
+   SSO::setAccessFromLoginScreen();
    header ('Content-Type: text/html; charset=UTF-8');
    scriptLog('   ->/view/login.php');
    setSessionValue('application', "PROJEQTOR");
@@ -316,7 +318,11 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			                            echo '<div class="messageWARNING">';
 			                            //echo '<br/>';
 			                            echo i18n("errorConnection").'</div>';
-			                          } 
+			                          } else if (isset($errorSSO)) {
+			                            echo '<div class="messageERROR" >';
+			                            echo $errorSSO;
+			                            echo '</div>';
+			                          }
 			                     ?>
 			                  </div>
 			                </td>

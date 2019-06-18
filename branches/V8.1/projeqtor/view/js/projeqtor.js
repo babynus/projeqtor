@@ -2785,8 +2785,9 @@ function disconnect(cleanCookieHash) {
     }
     //#2887
     var callBack = function(){
-      saveDataToSession("avoidSAMLAuth", 'true');
-      window.location = "../index.php";
+      showWait();
+      saveDataToSession("avoidSSOAuth",true);
+      setTimeout('window.location = "../index.php"',100);
     }
     saveDataToSession("disconnect", extUrl, null, callBack);
   };

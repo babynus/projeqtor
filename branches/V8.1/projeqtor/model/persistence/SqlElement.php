@@ -5182,6 +5182,10 @@ abstract class SqlElement {
       $ref .= substr ( $url, 0, strpos ( $url, '/view/' ) );
     } else if (strpos ( $url, '/report/' )) {
       $ref .= substr ( $url, 0, strpos ( $url, '/report/' ) );
+    } else if (strpos ( $url, '/sso/projeqtor/' )) {
+      $ref .= substr ( $url, 0, strpos ( $url, '/sso/projeqtor/' ) );
+    } else if (strpos ( $url, '/sso/' )) {
+      $ref .= substr ( $url, 0, strpos ( $url, '/sso/' ) );
     }
     return $ref;
   }

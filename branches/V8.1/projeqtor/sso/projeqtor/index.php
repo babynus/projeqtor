@@ -3,7 +3,6 @@
  *  SAML Handler
  */
 //session_start();
-
 // For PROJEQTOR compatibility
 chdir('..');
 $maintenance=true; // For projeqtor to avoid connection on 
@@ -15,7 +14,9 @@ require_once 'settings.php';
 $auth = new OneLogin_Saml2_Auth($settingsInfo);
 
 if (isset($_GET['slo'])) { // Request SingleLogOut to IDP
-    $returnTo = null;
+    $returnTo = SSO::getSettingValue('sloReturnUrl');
+    SSO::setAvoidSSO();
+    SSO::resetTry();
     $parameters = array();
     $nameId = null;
     $sessionIndex = null;
@@ -26,6 +27,7 @@ if (isset($_GET['slo'])) { // Request SingleLogOut to IDP
     if (isset($_SESSION['samlNameIdFormat'])) {
         $nameIdFormat = $_SESSION['samlNameIdFormat'];
     }
+    $nameIdNameQualifier=null;
     if (isset($_SESSION['samlNameIdNameQualifier'])) {
         $nameIdNameQualifier = $_SESSION['samlNameIdNameQualifier'];
     }
@@ -49,20 +51,15 @@ if (isset($_GET['slo'])) { // Request SingleLogOut to IDP
     } else {
         $requestID = null;
     }
-
     $auth->processResponse($requestID);
-
     $errors = $auth->getErrors();
-
     if (!empty($errors)) {
         echo '<p>',implode(', ', $errors),'</p>';
     }
-
     if (!$auth->isAuthenticated()) {
         echo "<p>Not authenticated</p>";
         exit();
     }
-
     $_SESSION['samlUserdata'] = $auth->getAttributes();
     $_SESSION['samlNameId'] = $auth->getNameId();
     $_SESSION['samlNameIdFormat'] = $auth->getNameIdFormat();
@@ -79,11 +76,13 @@ if (isset($_GET['slo'])) { // Request SingleLogOut to IDP
     } else {
         $requestID = null;
     }
-
     $auth->processSLO(false, $requestID);
     $errors = $auth->getErrors();
     if (empty($errors)) {
         echo '<p>Sucessfully logged out</p>';
+        SSO::setAvoidSSO();
+        SSO::resetTry();
+        $auth->redirectTo(SSO::getSettingValue('sloReturnUrl'));
     } else {
         echo '<p>', implode(', ', $errors), '</p>';
     }
@@ -105,9 +104,5 @@ if (isset($_SESSION['samlUserdata'])) {
     } else {
         echo "<p>You don't have any attribute</p>";
     }
-
     echo '<p><a href="?slo" >Logout</a></p>';
-} else {
-    echo '<p><a href="?sso" >Login</a></p>';
-    echo '<p><a href="?sso2" >Login and access to attrs.php page</a></p>';
-}
+} 

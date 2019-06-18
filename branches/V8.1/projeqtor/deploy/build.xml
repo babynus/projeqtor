@@ -198,6 +198,15 @@
   <target name="copyView">
     <copy todir="${deploy.dir}/view">
       <fileset dir="${src.dir}/view">
+        <exclude name="**/certs/sp.crt"/>
+        <exclude name="**/certs/sp.key"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="copySSO">
+    <copy todir="${deploy.dir}/sso">
+      <fileset dir="${src.dir}/sso">
         <exclude name="**/css/**/*Kanban*.*"/>
       </fileset>
     </copy>

@@ -683,7 +683,6 @@ class PlanningElement extends SqlElement {
       $this->initialDuration=workDayDiffDates($this->initialStartDate, $this->initialEndDate);
     }
     if (PlannedWork::$_planningInProgress and $this->id) {
-      //debugLog ("simpleSave for $this->id, $this->refType #$this->refId - $this->refName");
       // Attention, we'll execute direct query to avoid concurrency issues for long duration planning
       // Otherwise, saving planned data may overwrite real work entered on Timesheet for corresponding items.
       $old=$this->getOld();
