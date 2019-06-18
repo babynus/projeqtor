@@ -85,3 +85,11 @@ ADD student INT(1) DEFAULT 0;
 
 -- END tLaguerie and dFayolle ticket #396
 
+-- Ticket #4073
+ALTER TABLE `${prefix}resource` CHANGE `function` `contactFunction` VARCHAR(100) DEFAULT NULL;
+
+-- SSO
+INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
+('SAML_attributeUserId' ,'uid'),
+('SAML_attributeMail' ,'mail'),
+('SAML_defaultProfile','5');

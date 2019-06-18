@@ -213,11 +213,13 @@ if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMo
     if (isset($_SESSION['samlUserdata'])) {
       $auth = new OneLogin_Saml2_Auth($settingsInfo);
       SSO::resetTry();
-      debugLog("CONECTED");
       $authAttr = $_SESSION['samlUserdata'];
-      $login = $authAttr['uid'][0];
+      $login = $authAttr[SSO::getAttributeName('userId')][0];
       $user=new User();
       $user=SqlElement::getSingleSqlElementFromCriteria('User', array('name'=>strtolower($login)));
+      if (!$user->id) {
+        $user=SSO::createNewUser($authAttr);
+      }
       if ($user->id) {
         User::resetAllVisibleProjects();
         //damian #3724

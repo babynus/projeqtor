@@ -66,10 +66,13 @@ class SSO
       else if ($setting=='idpEntityId') return Parameter::getGlobalParameter('SAML_idpId');
       else if ($setting=='idpCert') return Parameter::getGlobalParameter('SAML_idpCert');
       else if ($setting=='isADFS') return (Parameter::getGlobalParameter('SAML_isADFS')=='YES')?true:false;      
-      else if ($setting=='technicalContactName') return 'ProjeQtOr Support';
-      else if ($setting=='technicalContactEmail') return 'support@projeqtor.org';
+      else if ($setting=='technicalContactName') return 'ProjeQtOr';
+      else if ($setting=='technicalContactEmail') return Parameter::getGlobalParameter('paramAdminMail');
       else if ($setting=='sloReturnUrl') return SqlElement::getBaseUrl().'/view/welcome.php';
       return null;
+    }
+    public static function getAttributeName($attribute) {
+      return Parameter::getGlobalParameter('SAML_attribute'.ucfirst($attribute));
     }
     
     public static function addTry() {
@@ -84,5 +87,68 @@ class SSO
       $try=getSessionValue('SamlCnxTry',0,true);
       if (intval($try) <= 1) return true;
       else return false;
+    }
+    
+    public static function createNewUser($authAttr) {
+      global $loginSave;
+      $user=new User();
+      $loginAttr=SSO::getAttributeName('userId');
+      $mailAttr=SSO::getAttributeName('mail');
+      $fullNameAttr=SSO::getAttributeName('commonName');
+      $user->name=$authAttr[$loginAttr][0];
+      if ($mailAttr and isset($authAttr[$mailAttr]) and isset($authAttr[$mailAttr][0]) ) {
+        $user->email=$authAttr[$mailAttr][0];
+      }
+      if ($fullNameAttr and isset($authAttr[$fullNameAttr]) and isset($authAttr[$fullNameAttr][0]) ) {
+        $user->resourceName=$authAttr[$fullNameAttr][0];
+      }
+      $user->idProfile=Parameter::getGlobalParameter('SAML_defaultProfile');
+      $createAction=Parameter::getGlobalParameter('SAML_creationAction');
+      if ($createAction=='createResource' or $createAction=='createResourceAndContact') {
+        $user->isResource=1;
+      }
+      if ($createAction=='createContact' or $createAction=='createResourceAndContact') {
+        $user->isContact=1;
+      }
+      if (! $user->resourceName and ($user->isResource or $user->isContact)) {
+        $user->resourceName=$this->name;
+      }
+      $loginSave = true;
+      $resultSaveUser=$user->save();
+      $idProject = Parameter::getGlobalParameter('SAML_defaultProject');
+      $aff = new Affectation();
+      $aff->idProject = $idProject;
+      $aff->idResource = $user->id;
+      $resultSaveAffectation=$aff->save();
+      $loginSave = false;
+      $sendAlert=Parameter::getGlobalParameter('SAML_msgOnUserCreation');
+      if ($sendAlert!='NO') {
+        $title="ProjeQtOr - " . i18n('newUser');
+        $message=i18n("newUserMessage",array($user->name));
+        if ($sendAlert=='MAIL' or $sendAlert=='ALERT&MAIL') {
+          $paramAdminMail=Parameter::getGlobalParameter('paramAdminMail');
+          sendMail($paramAdminMail, $title, $message);
+        }
+        if ($sendAlert=='ALERT' or $sendAlert=='ALERT&MAIL') {
+          $prof=new Profile();
+          $crit=array('profileCode'=>'ADM');
+          $lstProf=$prof->getSqlElementsFromCriteria($crit,false);
+          foreach ($lstProf as $prof) {
+            $crit=array('idProfile'=>$prof->id);
+            $lstUsr=$this->getSqlElementsFromCriteria($crit,false);
+            foreach($lstUsr as $usr) {
+              $alert=new Alert();
+              $alert->idUser=$usr->id;
+              $alert->alertType='INFO';
+              $alert->alertInitialDateTime=date('Y-m-d H:i:s');
+              $alert->message=$message;
+              $alert->title=$title;
+              $alert->alertDateTime=date('Y-m-d H:i:s');
+              $alert->save();
+            }
+          }
+        }
+      }
+      return $user;
     }
 }
