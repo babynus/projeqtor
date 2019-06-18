@@ -405,6 +405,9 @@ if (property_exists($objectClass,'idStatus')) {
               <?php }?>
              <?php  if (sessionValueExists('project')){
                  $proj=getSessionValue('project');
+                 if(strpos($proj, ",") != null){
+                 	$proj="*";
+                 }
                }else{
                   $proj = '*';
                }

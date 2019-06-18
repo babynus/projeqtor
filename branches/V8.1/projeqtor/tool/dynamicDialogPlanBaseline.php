@@ -28,7 +28,10 @@ $base=new Baseline();
 $crit=array("idUser"=>getSessionUser()->id);
 $proj=null;
 if(sessionValueExists('project')){
-  $proj=getSessionValue('project');;
+  $proj=getSessionValue('project');
+  if(strpos($proj, ",")  != null){
+  	$proj="*";
+  }
 }
 $mode="add";
 $idBaseline=null;

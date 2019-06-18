@@ -1750,10 +1750,14 @@ function getVisibleProjectsList($limitToActiveProjects=true, $idProject=null) {
   if (!sessionValueExists('project')) {
     return '( 0 )';
   }
+  $arrayProj = array();
   if ($idProject) {
     $project=$idProject;
   } else {
     $project=getSessionValue('project');
+    if(strpos($project, ",") != null){
+    	$arrayProj = explode(",", $project);
+    }
   }
   $keyVPL=(($limitToActiveProjects)?'TRUE':'FALSE').'_'.(($project)?$project:'*');
   if (!sessionValueExists('visibleProjectsList')) {
@@ -1767,11 +1771,22 @@ function getVisibleProjectsList($limitToActiveProjects=true, $idProject=null) {
     setSessionTableValue('visibleProjectsList', $keyVPL, transformListIntoInClause($user->getVisibleProjects($limitToActiveProjects)));
     return getSessionTableValue('visibleProjectsList', $keyVPL);
   }
-  $prj=new Project($project);
-  $subProjectsList=$prj->getRecursiveSubProjectsFlatList($limitToActiveProjects);
+  //damian
   $result='(0';
-  if ($project!='*') {
-    $result.=', '.$project;
+  if($arrayProj){
+  	foreach($arrayProj as $idProj){
+  	  $prj=new Project($idProj);
+  	  $lstSubProj=$prj->getRecursiveSubProjectsFlatList($limitToActiveProjects, true);
+  	  foreach($lstSubProj as $id=>$name){
+  	    $subProjectsList[$id]=[$name];
+  	  }
+  	}
+  }else{
+    $prj=new Project($project);
+    $subProjectsList=$prj->getRecursiveSubProjectsFlatList($limitToActiveProjects);
+    if ($project!='*') {
+    	$result.=', '.$project;
+    }
   }
   foreach ($subProjectsList as $id=>$name) {
     $result.=', '.$id;

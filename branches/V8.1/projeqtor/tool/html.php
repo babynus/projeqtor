@@ -42,7 +42,7 @@ require_once "../tool/projeqtor.php";
 function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false, $critFld=null, $critVal=null, $limitToActiveProjects=true, $limitToActiveOrganizations=true) { 
 	scriptLog("      =>htmlDrawOptionForReference(col=$col,selection=$selection,object=" .debugDisplayObj($obj).",required=$required,critFld=".debugDisplayObj($critFld).",critVal=".debugDisplayObj($critVal).")");
   // Take into account array of $critFld // TODO : check where it is used 
-
+	  
 // BEGIN - ADD BY TABARY - POSSIBILITY TO HAVE AT X TIMES SAME idXXXX IN THE SAME OBJECT
     $col = foreignKeyWithoutAlias($col);
 // END - ADD BY TABARY - POSSIBILITY TO HAVE AT X TIMES SAME idXXXX IN THE SAME OBJECT
@@ -359,8 +359,23 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       }
       if(Parameter::getUserParameter("restrictProjectList")=="true" and getSessionValue("project") and getSessionValue("project")!='*') {
         $class=get_class($obj);
-        $proj = new Project(getSessionValue("project"));
-        $lstChild = $proj->getRecursiveSubProjectsFlatList(true,true);
+        $selectedProj = getSessionValue("project");
+        $arrayProj = array();
+        if(strpos($selectedProj, ',') != -1){
+          $arrayProj = explode(',', $selectedProj);
+        }
+        if($arrayProj){
+          foreach ($arrayProj as $idProj){
+            $proj = new Project($idProj);
+            $lstProjChild = $proj->getRecursiveSubProjectsFlatList(true,true);
+            foreach ($lstProjChild as $id=>$name){
+              $lstChild[$id]=$name;
+            }
+          }
+        }else{
+          $proj = new Project($idProj);
+          $lstChild = $proj->getRecursiveSubProjectsFlatList(true,true);
+        }
         if (count($restrictArray)>0) {
           $restrictArray=array_intersect_assoc($restrictArray,$lstChild);
         } else {

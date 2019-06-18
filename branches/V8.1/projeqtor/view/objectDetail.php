@@ -529,6 +529,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   $defaultProject=null;
   if (sessionValueExists('project') and getSessionValue('project')!='*') {
     $defaultProject=getSessionValue('project');
+    if(strpos($defaultProject, ",") != null){
+    	$defaultProject='*';
+    }
   } else {
     $table=SqlList::getList('Project', 'name', null);
     $restrictArray=array();
@@ -1330,9 +1333,23 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       // ADD qCazelles - Project restriction
       if ($col=='idProject') {
         $uniqueProjectRestriction=false;
+        $lstIdProject = array();
+        if(strpos(getSessionValue('project'), ",") != null){
+          $lstIdProject = explode(',', getSessionValue('project'));
+        }
         if (getSessionValue('project')!="" and getSessionValue('project')!="*" and Parameter::getGlobalParameter('projectRestriction')=='YES') {
-          $proj=new Project(getSessionValue('project'));
-          $subProjs=$proj->getSubProjects();
+          if(strpos(getSessionValue('project'), ",") != -1){
+            foreach ($lstIdProject as $idProj){
+              $proj=new Project($idProj, true);
+              $lstSubProjs=$proj->getSubProjects();
+              foreach ($lstSubProjs as $id=>$val){
+                $subProjs[$id]=$val;
+              }
+            }
+          }else{
+            $proj=new Project(getSessionValue('project'));
+            $subProjs=$proj->getSubProjects();
+          }
           if (count($subProjs)==0) {
             $uniqueProjectRestriction=true;
             $hide=true;
@@ -2153,9 +2170,17 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         if ($col=='idProject') {
           if ($obj->id==null) {
-            $projSelected=new Project(getSessionValue('project'));
+            if(strpos(getSessionValue('project'), ",") != null){
+            	$projSelected=new Project();
+            }else{
+              $projSelected=new Project(getSessionValue('project'));
+            }
             if ((sessionValueExists('project') and !$obj->$col) and $projSelected->idle!='1') {
-              $val=getSessionValue('project');
+              if(strpos(getSessionValue('project'), ",") != null){
+              	$val='*';
+              }else{
+                $val=getSessionValue('project');
+              }
             }
             $accessRight=securityGetAccessRight('menu'.$classObj, 'create'); // TODO : study use of this variable...
           } else {

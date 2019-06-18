@@ -275,7 +275,7 @@
         $queryWhere.= $clause;
         if ($objectClass=='Project') {
           $queryWhere.= " or $table.codeType='TMP' "; // Templates projects are always visible in projects list
-        } else if ($objectClass=='Document' and getSessionValue('project')=='*' or $showAllProjects) {
+        } else if ($objectClass=='Document' and getSessionValue('project')=='*' or $showAllProjects and strpos(getSessionValue('project'), ",") === null) {
           $app=new Approver();
           $appTable=$app->getDatabaseTableName();
           $queryWhere.= "or exists (select 'x' from $appTable app where app.refType='Document' and app.refId=$table.id and app.idAffectable=$user->id )";

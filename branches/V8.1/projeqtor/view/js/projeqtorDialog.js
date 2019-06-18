@@ -653,7 +653,7 @@ function selectDetailItem(selectedValue, lastSavedName) {
       critVal=prj.get("value");
     }
   }
-  if (comboName != 'idStatus'  && comboName != 'versionsPlanningDetail') { 
+  if (comboName != 'idStatus'  && comboName != 'versionsPlanningDetail' && comboName != 'projectSelectorFiletering') { 
     if (combo) {
       refreshList('id' + comboClass, crit, critVal, idFldVal, comboName);
     } else {
@@ -720,7 +720,16 @@ function selectDetailItem(selectedValue, lastSavedName) {
   //END ADD qCazelles - Correction GANTT - Ticket #100
   
   if (combo) {
-    combo.set("value", idFldVal);
+	if(comboName == 'projectSelectorFiletering'){
+		var pos = idFldVal.indexOf('_');
+		if(pos != -1){
+			dijit.byId('multiProjectSelector').set("value", idFldVal);
+		}else{
+			combo.set("value", idFldVal);
+		}
+	}else{
+		combo.set("value", idFldVal);
+	}
   }
   hideDetail();
   if (dojo.byId('directAccessToList') && dojo.byId('directAccessToList').value=='true' && dojo.byId('directAccessToListButton')) {
