@@ -108,6 +108,9 @@ if (! $canPlan) {
 $proj=null;
 if (sessionValueExists('project')) {
   $proj=getSessionValue('project');
+  if(strpos($proj, ",")){
+  	$proj="*";
+  }
 }
 if ($proj=='*' or !$proj) {
   $proj=null;

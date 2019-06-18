@@ -60,6 +60,8 @@ var previousSelectedProject=null;
 var previousSelectedProjectName=null;
 
 var mustApplyFilter=false;
+
+var arraySelectedProject = new Array();
 // =============================================================================
 // = Functions
 // =============================================================================
@@ -396,7 +398,6 @@ function resetFilter(lstStat){
  var grid = dijit.byId("objectGrid");
  var notDef;
  var i=0;
- console.log(lstStat);
  for(i=1;i<=lstStat;i++){
    console.log('la'+i);
    if(dijit.byId('showStatus'+i)){
@@ -2713,6 +2714,29 @@ function i18n(str, vars) {
  * @return void
  */
 function setSelectedProject(idProject, nameProject, selectionField,resetPrevious) {
+	var pos = idProject.indexOf('_');
+	if(pos != -1){
+		idProject = idProject.split('_');
+		idProject = idProject.flat();
+	}
+	if(!Array.isArray(idProject)){
+		arraySelectedProject.forEach(function(element){
+			dijit.byId('checkBoxProj'+element).set('checked', false);
+		});
+		arraySelectedProject.splice(0);
+	}else{
+		arraySelectedProject.forEach(function(element){
+			dijit.byId('checkBoxProj'+element).set('checked', false);
+		});
+		arraySelectedProject.splice(0);
+		idProject.forEach(function(element){
+			selectedMultiProject(element, true, false);
+		});
+		arraySelectedProject.forEach(function(element){
+			dijit.byId('checkBoxProj'+element).set('checked', true);
+		});
+	}
+	
   if (selectionField) {
     dijit.byId(selectionField).set(
         "label",
@@ -5947,4 +5971,32 @@ function removeAutoSendReport(idSendReport){
 		  });
 	}
   showConfirm(i18n('removeAutoSendReport') ,action);
+}
+
+function selectedMultiProject(idProject, checked, submit){
+	var nameProject = '<i>'+i18n('selectedProject')+'</i>';
+	if(idProject != null){
+		if(checked == true){
+			var pos = arraySelectedProject.indexOf('*');
+			if(pos != -1){
+				arraySelectedProject.splice(pos,1);
+			}
+			arraySelectedProject.push(idProject);
+		}else{
+			var pos = arraySelectedProject.indexOf(idProject);
+			if(pos != -1){
+				arraySelectedProject.splice(pos,1);
+			}
+			if(arraySelectedProject.length == 0){
+				arraySelectedProject.push('*');
+			}
+		}
+	}
+	if(arraySelectedProject[0] == '*'){
+		nameProject = '<i>'+i18n('allProjects')+'</i>';
+	}
+	if(submit){
+		saveDataToSession('project', arraySelectedProject.flat(), null);
+		setSelectedProject(arraySelectedProject.flat(), nameProject, 'selectedProject');
+	}
 }

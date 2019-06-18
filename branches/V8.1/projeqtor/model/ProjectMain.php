@@ -719,7 +719,7 @@ scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursi
       $result .= '<i>' . i18n('allProjects') . '</i>';
       $result .= '</div></td></tr></table>';
     }
-    $result .='<table style="width: 100%;" >';
+    $result .='<table style="width:100%;">';
     if (count($subList)>0) {
       foreach ($subList as $idPrj=>$namePrj) {
         $showLine=true;
@@ -739,7 +739,13 @@ scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursi
         }
         if ($showLine) {
         	$prj=new Project($idPrj);
-          $result .='<tr><td valign="top" width="20px"><img src="css/images/iconList16.png" height="16px" /></td>';
+          $result .='<tr>';
+          $result .='<td valign="top" width="20px"><div dojoType="dijit.form.CheckBox" type="checkbox" class="whitecheck" style="float:left;position:absolute;left:7px" id="checkBoxProj'.$idPrj.'" value="'.$idPrj.'">';
+          $result .='<script type="dojo/method" event="onClick" args="evt">
+                        selectedMultiProject(this.value, this.checked, false);
+                      </script>';
+          $result .='</div></td>';
+          $result .='<td valign="top" width="20px"><img src="css/images/iconList16.png" height="16px" /></td>';
           if ($selectField==null) {
             $result .= '<td class="'.(($outMode=='html' or $outMode=='pdf')?'':'display').'"  NOWRAP>' . (($outMode=='html' or $outMode=='pdf')?htmlEncode($prj->name):htmlDrawLink($prj));
           } else if (! $reachLine) {
@@ -747,9 +753,10 @@ scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursi
           } else {
             $clickEvent=' onClick=\'setSelectedProject("' . htmlEncode($prj->id) . '", "' . htmlEncode($prj->name,'parameter') . '", "' . $selectField . '");\' ';
             if ($outMode=='html' or $outMode=='pdf') $clickEvent='';
-            $result .= '<td><div ' . $clickEvent . ' class="'.(($outMode=='html' or $outMode=='pdf')?'':'menuTree').'" style="width:100%;color:black">';
+            $result .='<td>';
+            $result .='<div ' . $clickEvent . ' class="'.(($outMode=='html' or $outMode=='pdf')?'':'menuTree').'" style="width:100%;color:black;">';
             $result .= htmlEncode($prj->name);
-            $result .= '</div>';
+            $result .='</div>';
           }
           $result .= $prj->drawSubProjects($selectField,true,$limitToUserProjects,$limitToActiveProjects);
           $result .= '</td></tr>';

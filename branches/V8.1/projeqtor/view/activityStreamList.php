@@ -101,6 +101,9 @@ $activityStreamUpdatedRecently=null;
   }
     
 $paramProject=getSessionValue('project');
+if(strpos($paramProject, ",")){
+	$paramProject="*";
+}
 
 $note = new Note ();
 $critWhere="1=1";
