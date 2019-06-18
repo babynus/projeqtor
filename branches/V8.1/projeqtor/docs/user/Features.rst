@@ -57,6 +57,12 @@ They can also be used to highlight the transition from one phase to the next one
 
 Unlike activities , milestones have no duration and no work.
 
+But on Projeqtor, you can specify deadlines (positive or negative) to apply to your milestones 
+
+.. topic:: **More details**
+   
+   * See: :ref:`gantt-chart-view<Gantt_DependencyLink_Milestone>`
+
 .. index:: Planning management (Resource)
 .. rubric:: Resources
  
@@ -155,13 +161,21 @@ Only the resources allocated to the project of the activity can be assigned to t
 .. index:: Resource management (Calendar)
 .. rubric:: Calendars
  
-To manage the days off, you have a default general calendar based on the French calendar.
+To manage working and non-working days, for resources with reduced working hours or with a different rhythm from the French calendar, 
+for public holidays or holidays, you have configurable calendars.
 
-* You can create multiple calendars to manage different types of availability: you can create a '80% 'calendar with every Wednesday closing day, for example.
+You can create multiple calendars to manage different types of availability.
+
+* you can create a '80% 'calendar with every Wednesday closing day, for example.
 
 * you can manage separate vacations when working with international teams.
 
 * Each resource is then assigned to a calendar.
+
+.. topic:: **more details**
+
+   * :ref:`resource<calendar>` section calendar
+   
 
 .. index:: Resource management (Real work allocation)
 .. rubric:: Real work allocation
@@ -520,7 +534,7 @@ Test sessions group test cases to be executed for a particular purpose.
 
 .. index:: ! Humans Resources
 
-.. _feat_humans_resources:
+.. _Humans_resources:
 
 Humans Resources
 ----------------
@@ -558,7 +572,8 @@ This system comes in addition to the standards of the management of absences
 
 .. topic:: **More details**
 
-   * :ref:`human_resources` en construction
+   * :ref:`humans_resources` en construction
+   * :ref:`regulated_absences`
    
 
 .. raw:: latex

@@ -6,27 +6,64 @@ Glossary
 --------
 
 .. glossary::
+
+   Action
+   
+      Stocks are used in anticipation of risk. They serve to reduce the risks.
+
+      The analysis of these risks consists in defining actions. There are two types of actions:
+
+       * Preventive action aimed at removing the risk or
+       * Corrective action that has been earned on the occurrence of a risk
+
+   Acivity
+   
+      An Activity can be likened to the key stages of the project: it is the skeleton of your project that organizes the main phases of a project
+         
+         * They have a start and end date
+         * They designed for the planning phases of a project 
+         * They serve to organize the milestones and tasks of a project
+         * They can allocated to a or many resources
+         * They can be prioritized and have sub-activities
+         
+   AGILE
+   
+      Agile methods are groups of practices of piloting and realization of projects.
+      They originate from the Agile manifesto, written in 2001, which uses the term 'agile' to refer to multiple existing methods
    
    Closed
 
-     * Flag to indicate that item is archived.
-     * Item will not appear in lists any more, unless “show closed” is checked.
+      Closed is a micro state in ProjeQtOr
+   
+      * Flag to indicate that item is archived.
+      * Item will not appear in lists any more, unless “show closed” is checked.
 
+   Decision
+   
+      A good decision helps move towards the end goal. 
+      It is in the general interest, the interest of the greatest number as well as in the interest of the project
+      
+      a good decision is a suitable solution, put in place with the tools and resources available at a given moment.
+      
    Description
 
     * This field allows to define a description on an item.  
     * Depending on the element type, name of field can be different.
 
-    .. seealso:: GUI behavior
+    .. seealso:: **GUI behavior**
 
        * It is possible to define that description field is mandatory.
        * The element type screens allow to set this parameter to several elements. 
        * More detail, see: :ref:`behavior-section`. 
 
-   Done
+   Done Status
 
-    * Flag to indicate that item has been done.
-    * Date of done is saved.
+      Done is a micro state in ProjeQtOr 
+      
+      * Flag to indicate that item has been done.
+      * Date of done is saved.
+      * A result can be specify.
+      * It is possible to require a result when the status change to “done”.
 
    External reference
 
@@ -34,8 +71,16 @@ Glossary
     * It uses to refer information from an external source.
     * External reference value can be put in email message with **externalReference** special field.
 
-    * More detail, see: **Administration guide**. 
+    * More detail, see: :ref:`Administration<administration-special-fields>`  
   
+   Gantt chart
+   
+      Description  The Gantt chart is a tool used in scheduling and project management 
+      and allowing to visualize in time the various tasks composing a project. 
+      
+      It is a representation of a connected graph, evaluated and oriented, 
+      which makes it possible to graphically represent the progress of the project 
+   
    Handled
 
     * Flag to indicate that item has been taken into account.
@@ -48,23 +93,66 @@ Glossary
     * Id is chronologically allocated, for all kind of items (Activity, Ticket).
     * Id is shared for all projects and all types (i.e. incident) of the same kind items (i.e. Ticket).
 
+   Incident
+   
+      Any event that is not part of the standard operation of a service and that causes, 
+      or may cause, an interruption or decrease in the quality of that service   
+   
+   Key Performance Indicator (KPI)
+   
+      Indispensable to the project manager, an indicator makes it possible to evaluate a situation and to make an adapted decision. 
+      Key performance indicators (or Key Performance Indicators) measure the performance of your projects. 
+      You choose them together with your team. They must be simple, reliable, easily understandable by all and relevant
+   
+      If the indicator is green, all is well, you will need to continue the actions in progress to maintain this good result.  
+      If the indicator is red, then you must take the necessary corrective action.   
+      If the indicator is orange, it should be monitored.   
+            
+         * Each indicator is associated with a specific goal.  
+         * An indicator necessarily implies a decision.
+         * An indicator is never silent.  
+         * A relevant indicator must be simple
+         
+   Objective
+   
+      An objective is a goal to achieve by carrying out different tasks. For example, building a new plant in order to produce more and meet the growing demand. It is essential to precisely define the goal (s) to reach so that you and your team know where you are going. 
+      A good goal must be :term:`SMART`.   
+ 
    Origin
 
     * Determines the element of origin.
     * The origin is used to keep track of events (ex.: order from quote, action from meeting).
     * More detail, see : :ref:`Origin field<origin-field>`.
 
-   Status
+   Owner builder 
+   
+      The client is the person on whose behalf the work is carried out. It is the sponsor and the one who bears the financial cost. 
+      The client is a natural or legal person, public law or private law
 
-    * The status determines the life cycle of items.
-    * It defines the progress of the treatment of the item.
-    * Item is linked to a element type, element type is linked to a workflow.
-    * A workflow defines the possibility to go from one status to another one, more detail, see: :ref:`workflow`.
-
-    .. seealso:: Accelerator button
-
-       * This button allows to skip to the next status.
-       * More detail, see: :ref:`Move to next status button<moveToNextStatus-button>`.    
+   PERT chart (Program Evaluation and Review Technique)
+   
+      provides a practical method and means to describe, represent, analyze and logically follow the tasks and the network of tasks to be carried out as part of an action to be undertaken or to be followed.
+      The PERT diagram represents the work schedule by a dependency graph. 
+      His network formalism focuses on the interconnection of the tasks to be performed and the calculation of critical paths. 
+      
+      An important difference with the Gantt chart is the conventional time scale of the PERT chart which represents a sequence of tasks 
+      and not durations or a calendar
+   
+   Project
+   
+      A project is defined as a finite set of activities and actions undertaken in order to meet a defined need within a set timeframe 
+      and within the limits of an allocated budget envelope
+   
+   Project Leader
+      
+      person responsible for leading a project and managing its smooth running. 
+      In general, he leads a team during the duration of the various projects for which he is responsible
+   
+   Quotity
+   
+   A quota is the amount of a quota. 
+   This term of right refers to the fraction of a whole, a proportional sum in a share.
+   A quota can be to pay or to collect.
    
    Reference
     
@@ -77,14 +165,77 @@ Glossary
     * A result is a description of the treatment of an item.
     * Usually, the result is set when the status of the item is :term:`done<Done status>`.  
 
-    .. seealso:: GUI behavior
+    .. seealso:: **GUI behavior**
 
        * It is possible to define that result field is mandatory on done status.
        * The element type screens allow to set this parameter to several elements.
+   
+   Risks
+   
+      The risk is a hazard, an undesirable event whose appearance is not certain, 
+      resulting in the possibility that the project does not achieve the objectives of: 
+      
+         * Completion date
+         * Costs
+         * Specifications (techniques, quality, performance , reliability ...) 
+         * Others: Image of the company, environment, legal, social ...
 
+      The risk can put in danger the project, deviations from forecasts the making it unacceptable or totally unacceptable.
+      We distinguished the risks exogenous (external at now ; suppliers, evolution regulation, political, social, meteorology...)
+   
+   Quality 
+   
+      The Quality approach consists in finding the match between the answer to the needs of the project, 
+      the correct expression of these needs by adequate specifications which go through a careful listening of the customer, 
+      and a realization answering the expression of the needs.
+   
+   SMART
+   
+       it is an acronym or mnemonic device that stands for 'Specific, Measurable, Acceptable, Realistic and Temporally Defined'.
+       These terms apply mainly to the determination of the most suitable objectives in order to complete a given project. 
+       Setting appropriate targets will help accelerate project completion and improve its chances of success.
+   
+   Status
+
+    * The status determines the life cycle of items.
+    * It defines the progress of the treatment of the item.
+    * Item is linked to a element type, element type is linked to a workflow.
+    * A workflow defines the possibility to go from one status to another one, more detail, see: :ref:`workflow`.
+
+    .. seealso:: **Accelerator button**
+
+       * This button allows to skip to the next status.
+       * More detail, see: :ref:`Move to next status button<moveToNextStatus-button>`.    
+   
+   Ticketing
+   
+      Ticketing is an anomaly tracking system : bugs, incidents, problems, requests...
+      
+   
    WBS
 
     * Work Breakdown Structure.
     * Hierarchical position of the element in the global planning.
     * WBS also defines the index of an item in the WBS structure. This index is calculated like paragraphs in a word document.
-       
+   
+   
+   
+   Work 
+   
+      * Assigned : The work initially planned for this resource to the task.
+
+      * Left:  [Left work] = [Assigned Work] – [Real Work]
+               Project leaders can adjust this value to estimate the work needed to complete the task by the resource.
+               
+      * Planned: Date defined by ProjeQtOr
+            
+      * Real: Sum of work done by this resource to the task. 
+
+      * reassessed: [Reassessed work] = [Real Work] + [Left Work]
+
+      * Requested: Initially requested by the customer
+         
+      * Validated: Initial planning, on which we committed each other. Baseline.
+      
+   .. warning:: the planning does not take into account the validated charge but the assigned one
+   
