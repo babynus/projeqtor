@@ -79,8 +79,12 @@ if (! $name) {
     $filter->idUser=$user->id;
     $filter->isShared=0;
     //ADD qCazelles - Dynamic filter - Ticket #78
-     $filter->isDynamic="0";
-     //END ADD qCazelles - Dynamic filter - Ticket #78
+    $filter->isDynamic="0";
+    //END ADD qCazelles - Dynamic filter - Ticket #78
+    $filt = new Filter();
+    $crit2 = $crit=array("refType"=>$objectClass, "idUser"=>$user->id);
+    $sortOrder = ($filt->getMaxValueFromCriteria('sortOrder', $crit2))+1;
+    $filter->sortOrder = $sortOrder;
   }
   $filter->save();
   $criteria=new FilterCriteria();
@@ -127,7 +131,8 @@ echo '</td></tr></table>';
 
 $flt=new Filter();
 $crit=array('idUser'=> $user->id, 'refType'=>$objectClass );
-$filterList=$flt->getSqlElementsFromCriteria($crit, false);
+$orderBy = "sortOrder ASC";
+$filterList=$flt->getSqlElementsFromCriteria($crit,false,null,$orderBy);;
 htmlDisplayStoredFilter($filterList,$filterObjectClass);
 Sql::commitTransaction();
 ?>

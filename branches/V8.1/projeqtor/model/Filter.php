@@ -40,6 +40,7 @@ class Filter extends SqlElement {
   //ADD qCazelles - Dynamic filter - Ticket #78
   public $isDynamic;
   //END ADD qCazelles - Dynamic filter - Ticket #78
+  public $sortOrder;
   public $_FilterCriteriaArray;
     
    /** ==========================================================================
