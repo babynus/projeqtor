@@ -85,6 +85,10 @@ ADD student INT(1) DEFAULT 0;
 
 -- END tLaguerie and dFayolle ticket #396
 
+ALTER TABLE `${prefix}filter` ADD sortOrder int(12) DEFAULT NULL;
+
+UPDATE `${prefix}filter` set sortOrder=id;
+
 -- Ticket #4073
 ALTER TABLE `${prefix}resource` CHANGE `function` `contactFunction` VARCHAR(100) DEFAULT NULL;
 

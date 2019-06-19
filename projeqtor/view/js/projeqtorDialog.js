@@ -7409,6 +7409,24 @@ function moveListColumn(source, destination) {
   // hideWait();
 }
 
+function moveFilterListColumn() {
+  var mode='';
+  var list='';
+  var nodeList=dndListFilterSelector.getAllNodes();
+  listColumnOrder=new Array();
+  for (i=0; i < nodeList.length; i++) {
+    var itemSelected=nodeList[i].id.substr(6);
+    list+=itemSelected + "|";
+  }  
+  var url='../tool/moveFilterColumn.php?orderedList=' + list;
+  dojo.xhrPost({
+    url : url,
+    handleAs : "text",
+    load : function(data, args) {
+    }
+  });
+}
+
 function recalculateColumnSelectorName() {
   cpt=0;
   tot=0;

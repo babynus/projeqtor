@@ -210,6 +210,8 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
              setTimeout('reorderTodayItems()',100);  
            } else if (target.id=='dndFavoriteReports') {
           	 setTimeout('reorderFavoriteReportItems()',100);  
+           } else if (target.id=='dndListFilterSelector') {
+             setTimeout('moveFilterListColumn()',100);  
            } 
         });
         if (moveTasks) {

@@ -1566,7 +1566,7 @@ function htmlDisplayStoredFilter($filterArray,$filterObjectClass,$currentFilter=
   $param=SqlElement::getSingleSqlElementFromCriteria('Parameter', 
        array('idUser'=>getSessionUser()->id, 'parameterCode'=>'Filter'.$filterObjectClass));
   $defaultFilter=($param)?$param->parameterValue:'';
-  echo "<table width='100%'>";
+  echo "<table id='dndListFilterSelector' jsId='dndListFilterSelector' width='100%' dojotype='dojo.dnd.Source' withhandles='true' data-dojo-props='accept: [ \"tableauBordLeft\",\"tableauBordRight\" ]' >";
   echo "<tr style='height:22px;'>";
   if ($context!='directFilterList') {
   	echo "<td class='filterHeader' style='width:699px;'>" . i18n("storedFilters") . "</td>";
@@ -1589,8 +1589,13 @@ function htmlDisplayStoredFilter($filterArray,$filterObjectClass,$currentFilter=
     echo "</tr>";
   }
   if (count($filterArray)>0) {
+    //gautier #filter
     foreach ($filterArray as $filter) {
-      echo "<tr>";
+      if ($context!='directFilterList') {
+        echo "<tr class='dojoDndItem' dndType='tableauBordLeft'  id='filter$filter->id' >";
+      }else{
+        echo "<tr class='dojoDndItem' dndType='tableauBordRight'  id='retlif$filter->id' >";
+      }
       //ADD qCazelles - Dynamic filter - Ticket #78
       echo ($filter->isDynamic=="1" ? '<input type="hidden" id="dynamicFilterId'.$filter->id.'" />' : ''); //Used for selection of stored filter, to enable the prompt of dynamic value(s)
       //END ADD qCazelles - Dynamic filter - Ticket #78
@@ -1598,8 +1603,10 @@ function htmlDisplayStoredFilter($filterArray,$filterObjectClass,$currentFilter=
            . ' class="filterData" '
            //. ($filter->name==$currentFilter)?'':'onClick="selectStoredFilter('. "'" . htmlEncode($filter->id) . "'" . ');" ')
            . 'onClick="selectStoredFilter(\'' . htmlEncode($filter->id) . '\',\'' . htmlEncode($context) . '\''.(array_key_exists("contentLoad", $_REQUEST) && array_key_exists("container", $_REQUEST) ? ',\''.$_REQUEST['contentLoad'].'\',\''.$_REQUEST['container'].'\'' : '').');" ' 
-           . ' title="' . i18n("selectStoredFilter") . '" >'
-           . htmlEncode($filter->name)
+           . ' title="' . i18n("selectStoredFilter") . '" >' ;
+      //Gautier #filter
+      echo '<span class="dojoDndHandle handleCursor"><img style="width:6px" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
+      echo  htmlEncode($filter->name)
            . ( ($defaultFilter==$filter->id and $context!='directFilterList')?' (' . i18n('defaultValue') . ')':'')
            . "</td>";
       if ($context!='directFilterList') {
@@ -1616,6 +1623,7 @@ function htmlDisplayStoredFilter($filterArray,$filterObjectClass,$currentFilter=
       
       echo "</tr>";
     }
+    //gautier #filter
   } else {
   	if ($context!='directFilterList') {
       echo "<tr><td class='filterData' colspan='3'><i>" . i18n("noStoredFilter") . "</i></td></tr>";
