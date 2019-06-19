@@ -971,7 +971,7 @@ class Parameter extends SqlElement {
           	                  'SAML_SingleSignOnService'=>'text',
           	                  'SAML_SingleLogoutService'=>'text',
           	                  'SAML_isADFS'=>'list',
-          	                  'SAML_attributeUserId'=>'text',
+          	                  'SAML_attributeUid'=>'text',
           	                  'SAML_attributeMail'=>'text',
           	                  'SAML_attributeCommonName'=>'text',
           	                  'SAML_defaultProfile'=>'list',
