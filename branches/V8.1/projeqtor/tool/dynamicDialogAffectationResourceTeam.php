@@ -45,7 +45,7 @@ $idAffectation=RequestHandler::getValue('id',false,null);
                <select dojoType="dijit.form.FilteringSelect" 
                <?php echo autoOpenFilteringSelect();?>
                 id="affectationResourceTeam" name="affectationResourceTeam" 
-                class="input"
+                class="input">
                 <?php 
                       htmlDrawOptionForReference('idResource',null, null,false);
                 ?>
