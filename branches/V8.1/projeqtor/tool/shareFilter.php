@@ -56,7 +56,8 @@ echo '</td></tr></table>';
 
 $flt=new Filter();
 $crit=array('idUser'=> $user->id, 'refType'=>$objectClass );
-$filterList=$flt->getSqlElementsFromCriteria($crit, false);
+$orderBy = "sortOrder ASC";
+$filterList=$flt->getSqlElementsFromCriteria($crit,false,null,$orderBy);;
 htmlDisplayStoredFilter($filterList,$filterObjectClass);
 Sql::commitTransaction();
 ?>
