@@ -72,7 +72,9 @@ class SSO
       return null;
     }
     public static function getAttributeName($attribute) {
-      return Parameter::getGlobalParameter('SAML_attribute'.ucfirst($attribute));
+      $attr=Parameter::getGlobalParameter('SAML_attribute'.ucfirst($attribute));
+      if ($attr) return $attr; 
+      else return $attribute;
     }
     
     public static function addTry() {
@@ -92,7 +94,7 @@ class SSO
     public static function createNewUser($authAttr) {
       global $loginSave;
       $user=new User();
-      $loginAttr=SSO::getAttributeName('userId');
+      $loginAttr=SSO::getAttributeName('uid');
       $mailAttr=SSO::getAttributeName('mail');
       $fullNameAttr=SSO::getAttributeName('commonName');
       $user->name=$authAttr[$loginAttr][0];

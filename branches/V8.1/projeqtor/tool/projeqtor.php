@@ -214,7 +214,7 @@ if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMo
       $auth = new OneLogin_Saml2_Auth($settingsInfo);
       SSO::resetTry();
       $authAttr = $_SESSION['samlUserdata'];
-      $login = $authAttr[SSO::getAttributeName('userId')][0];
+      $login = $authAttr[SSO::getAttributeName('uid')][0];
       $user=new User();
       $user=SqlElement::getSingleSqlElementFromCriteria('User', array('name'=>strtolower($login)));
       if (!$user->id) {
