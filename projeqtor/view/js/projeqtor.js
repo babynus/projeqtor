@@ -2834,16 +2834,20 @@ function disconnectSSO(target) {
     quitConfirmed = true;
     extUrl="origin==disconnect&cleanCookieHash=true";
     //#2887
-    var callBack = function(){
-      showWait();
-      if (target=='welcome') {
-        setTimeout('window.location = "../view/welcome.php"',100);
-      } else {
-        saveDataToSession("avoidSSOAuth",true);
-        setTimeout('window.location = "../index.php"',100);
+    if (target=='SSO') {
+      setTimeout('window.location = "../sso/projeqtor/index.php?slo"',100);
+    } else {
+      var callBack = function(){
+        showWait();
+        if (target=='welcome') {
+          setTimeout('window.location = "../view/welcome.php"',100);
+        } else {
+          saveDataToSession("avoidSSOAuth",true);
+          setTimeout('window.location = "../index.php"',100);
+        }
       }
+      saveDataToSession("disconnect", extUrl, null, callBack);
     }
-    saveDataToSession("disconnect", extUrl, null, callBack);
   };
   if (!checkFormChangeInProgress()) {
     if ( (paramConfirmQuit != "NO"  || target=='SSO') && target!='welcome') {

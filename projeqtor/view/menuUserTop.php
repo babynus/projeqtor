@@ -109,7 +109,7 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
           </tr>
         </table>
       </div>
-     <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;" title="<?php echo i18n('ssoDisconnectMessageLogin');?>" onclick="disconnectSSO('login');">
+     <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;" title="<?php echo i18n('ssoDisconnectLoginMessage');?>" onclick="disconnectSSO('login');">
         <table style="width:122px;">
           <tr>
             <td> <div class="disconnectClass">&nbsp;</div> </td>
@@ -117,15 +117,16 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
           </tr>
         </table>
       </div>
-      <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;display:none;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnectSSO('SSO');">
+      <?php if (isset($_SESSION['samlNameId'])) {?>
+      <div class="pseudoButton disconnectTextClass" style="width:120px;height:30px;" title="<?php echo i18n('ssoDisconnectSSOMessage');?>" onclick="disconnectSSO('SSO');">
         <table style="width:122px;">
           <tr>
             <td> <div class="disconnectClass">&nbsp;</div> </td>
-            <td>&nbsp;&nbsp;<?php echo i18n('disconnectSSO_SSO');?></td>
+            <td style="white-space:nowrap">&nbsp;&nbsp;<?php echo i18n('ssoDisconnectSSO');?></td>
           </tr>
         </table>
       </div>
-
+      <?php }?>
     <?php } else { ?>
           <div class="pseudoButton disconnectTextClass" style="width:120px;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnect(true);">
         <table style="width:122px;">
