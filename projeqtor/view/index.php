@@ -53,7 +53,8 @@ if (is_file ( "../tool/parametersLocation.php" )) {
   <script type="text/javascript">             
      dojo.addOnLoad(function(){
        //dojo.byId("currentLocale").value=dojo.locale;
-       window.setTimeout('dojo.byId("indexForm").submit();',10);
+       var tempo=<?php echo (SSO::isEnabled())?1000:10;?>;
+       window.setTimeout('dojo.byId("indexForm").submit();',tempo);
      });
   </script>
 </head>
@@ -81,11 +82,19 @@ if (is_file ( "../tool/parametersLocation.php" )) {
             </td>
           </tr>
           <tr style="height:100%" height="100%">
-            <td style="height:99%" align="left" valign="middle">
+            <td style="height:99%;position:relative" align="left" valign="middle">
               <div  id="formDiv" dojoType="dijit.layout.ContentPane" region="center" style="width: 470px; height:210px;overflow:hidden">
   <form id="indexForm" name="indexForm" action="main.php" method="post" target="_top">
     <input type="hidden" id="xcurrentLocale" name="xcurrentLocale" value="en" />
   </form>
+              </div>
+              <div style="width: 470px; height:130px;position:absolute;top:160px;overflow:hidden;text-align:center;">
+                  <?php    if (SSO::isEnabled() and ! SSO::issetAccessFromLoginScreen()) { 
+                    echo '<div style="font-size:125%;font-weight:bold">'.i18n("ssoRedirectionMessage").'</div>';
+                  } else {
+                    echo  "Loading ..."; 
+                    SSO::unsetAccessFromLoginScreen();
+                  }?>    
               </div>
             </td>
           </tr>
