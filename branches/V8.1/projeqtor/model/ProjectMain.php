@@ -595,7 +595,6 @@ static function isTheLeaveProject($id=null) {
         $result .= $this->drawSubProjects();
       }
       $result .="</td></tr></table>";
-      debugLog('test'.$drawCheckBox);
       return $result;
     /*} else if ($item=='affectations') {
       $aff=new Affectation();
@@ -684,7 +683,6 @@ static function isTheLeaveProject($id=null) {
   public function drawSubProjects($selectField=null, $recursiveCall=false, $limitToUserProjects=false, $limitToActiveProjects=false) {
 scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursiveCall=$recursiveCall, limitToUserProjects=$limitToUserProjects, limitToActiveProjects=$limitToActiveProjects)");
     global $outMode, $drawCheckBox;
-    debugLog('je suis labas'.$drawCheckBox);
   	self::$_drawSubProjectsDone[$this->id]=$this->name;
     if ($limitToUserProjects) {
       $user=getSessionUser();
