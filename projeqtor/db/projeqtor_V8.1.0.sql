@@ -50,7 +50,7 @@ CREATE UNIQUE INDEX `workflowstatusReference` ON `${prefix}workflowstatus` (idWo
 
 -- ADD tLaguerie and dFayolle ticket #396
 
-INSERT INTO `${prefix}reportCategory` (`id`,`name`, `sortOrder`, `idle`) VALUES 
+INSERT INTO `${prefix}reportcategory` (`id`,`name`, `sortOrder`, `idle`) VALUES 
 (20, 'reportCategoryResources', 90, 0);
 
 INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `idle`, `orientation`, `hasCsv`, `hasView`, `hasPrint`, `hasPdf`, `hasToday`, `hasFavorite`, `hasWord`, `hasExcel`, `filterClass`) VALUES 
@@ -58,7 +58,7 @@ INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOr
 (103, 'reportResourceWorkload', 20, 'resourceReportWorkload.php', 1220, 0, 'L', 0, 1, 1, 1, 1, 1, 0, 0, NULL ),
 (104, 'reportResourceSeniority', 20, 'resourceReportSeniority.php', 1230, 0, 'L', 0, 1, 1, 1, 1, 1, 0, 0, NULL );
 
-INSERT INTO `${prefix}reportParameter` (`idReport`, `name`, `paramType`, `sortOrder`, `idle`, `defaultValue`, `multiple`) VALUES 
+INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `idle`, `defaultValue`, `multiple`) VALUES 
 (102, 'idOrganization', 'organizationList', 10, 0, 'currentOrganization', 0),
 (102, 'year', 'year', 20, 0, 'currentYear', 0),
 (102, 'isEmployee', 'isEmployee', 35, 0, NULL, 0), 
@@ -73,7 +73,7 @@ INSERT INTO `${prefix}reportParameter` (`idReport`, `name`, `paramType`, `sortOr
 (104, 'isEmployee', 'isEmployee', 35, 0, NULL, 0),
 (104, 'idProfile', 'profileList', 40, 0, NULL, 1);
 
-INSERT INTO `${prefix}habilitationReport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
+INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
 (1, 102, 1),
 (1, 103, 1),
 (1, 104, 1);
