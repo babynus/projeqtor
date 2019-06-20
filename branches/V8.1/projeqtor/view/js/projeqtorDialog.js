@@ -653,7 +653,9 @@ function selectDetailItem(selectedValue, lastSavedName) {
       critVal=prj.get("value");
     }
   }
-  if (comboName != 'idStatus'  && comboName != 'versionsPlanningDetail' && comboName != 'projectSelectorFiletering') { 
+  console.log(comboName);
+  console.log(idFldVal);
+  if (comboName != 'idStatus'  && comboName != 'versionsPlanningDetail' && comboName != 'projectSelectorFiletering' && comboName != 'filterValueList0') { 
     if (combo) {
       refreshList('id' + comboClass, crit, critVal, idFldVal, comboName);
     } else {
@@ -727,7 +729,14 @@ function selectDetailItem(selectedValue, lastSavedName) {
 		}else{
 			combo.set("value", idFldVal);
 		}
-	}else{
+	}else if(comboName == 'filterValueList0'){
+		var pos = idFldVal.indexOf('_');
+		if(pos != -1){
+			dijit.byId('filterValueList0').set("value", idFldVal);
+		}else{
+			combo.set("value", idFldVal);
+		}
+  	}else{
 		combo.set("value", idFldVal);
 	}
   }

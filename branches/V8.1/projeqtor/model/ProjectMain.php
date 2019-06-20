@@ -585,14 +585,17 @@ static function isTheLeaveProject($id=null) {
    */
   public function drawSpecificItem($item){
 //scriptLog("Project($this->id)->drawSpecificItem($item)");
+    global $drawCheckBox;
     $result="";
     if ($item=='subprojects') {
       $result .="<table><tr><td class='label' valign='top'><label>" . i18n('subProjects') . "&nbsp;:&nbsp;</label>";
       $result .="</td><td>";
       if ($this->id) {
+        $drawCheckBox = 'false';
         $result .= $this->drawSubProjects();
       }
       $result .="</td></tr></table>";
+      debugLog('test'.$drawCheckBox);
       return $result;
     /*} else if ($item=='affectations') {
       $aff=new Affectation();
@@ -680,7 +683,8 @@ static function isTheLeaveProject($id=null) {
    */  
   public function drawSubProjects($selectField=null, $recursiveCall=false, $limitToUserProjects=false, $limitToActiveProjects=false) {
 scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursiveCall=$recursiveCall, limitToUserProjects=$limitToUserProjects, limitToActiveProjects=$limitToActiveProjects)");
-    global $outMode;
+    global $outMode, $drawCheckBox;
+    debugLog('je suis labas'.$drawCheckBox);
   	self::$_drawSubProjectsDone[$this->id]=$this->name;
     if ($limitToUserProjects) {
       $user=getSessionUser();
@@ -740,11 +744,13 @@ scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursi
         if ($showLine) {
         	$prj=new Project($idPrj);
           $result .='<tr>';
-          $result .='<td valign="top" width="20px"><div dojoType="dijit.form.CheckBox" type="checkbox" class="whitecheck" style="float:left;position:absolute;left:7px" id="checkBoxProj'.$idPrj.'" value="'.$idPrj.'">';
-          $result .='<script type="dojo/method" event="onClick" args="evt">
+          if(!$drawCheckBox){
+            $result .='<td valign="top" width="20px"><div dojoType="dijit.form.CheckBox" type="checkbox" class="whitecheck" style="float:left;position:absolute;left:7px" id="checkBoxProj'.$idPrj.'" value="'.$idPrj.'">';
+            $result .='<script type="dojo/method" event="onClick" args="evt">
                         selectedMultiProject(this.value, this.checked, false);
                       </script>';
-          $result .='</div></td>';
+            $result .='</div></td>';
+          }
           $result .='<td valign="top" width="20px"><img src="css/images/iconList16.png" height="16px" /></td>';
           if ($selectField==null) {
             $result .= '<td class="'.(($outMode=='html' or $outMode=='pdf')?'':'display').'"  NOWRAP>' . (($outMode=='html' or $outMode=='pdf')?htmlEncode($prj->name):htmlDrawLink($prj));

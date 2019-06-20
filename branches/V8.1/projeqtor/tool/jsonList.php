@@ -143,6 +143,9 @@ if ($type == 'empty') {
   $dataType = RequestHandler::getValue ( 'dataType' );
   $critField = RequestHandler::getValue ( 'critField' );
   $critValue = RequestHandler::getValue ( 'critValue' );
+  if(strpos($critValue, '_') != null){
+  	$critValue = explode('_', $critValue);
+  }
   $selected = "";
   if (strpos($dataType, "__id")>0) {
     $dataType=foreignKeyWithoutAlias($dataType);
@@ -167,8 +170,18 @@ if ($type == 'empty') {
   }
   if ($dataType == 'idContact' and $critField == 'idProject') {
     //$list = SqlList::getListWithCrit ( 'Contact', array($critField => $critValue) );
-    $prj=new Project($critValue, true);
-    $lstTopPrj=$prj->getTopProjectList(true);
+    if(is_array($critValue)){
+      foreach ($critValue as $idProj){
+        $prj=new Project($idProj, true);
+        $lstTopSelectedPrj=$prj->getTopProjectList(true);
+        foreach ($lstTopSelectedPrj as $idProject){
+          $lstTopPrj[$idProject]=$idProject;
+        }
+      }
+    }else{
+      $prj=new Project($critValue, true);
+      $lstTopPrj=$prj->getTopProjectList(true);
+    }
     $in=transformValueListIntoInClause($lstTopPrj);
     $today=date('Y-m-d');
     $where="idProject in " . $in;
@@ -199,12 +212,25 @@ if ($type == 'empty') {
     $specific = 'imputation';
     $list = getListForSpecificRights ( $specific );
     $selectedProject = getSessionValue ( 'project' );
+    if(strpos($selectedProject, '_') != null){
+      $selectedProject = explode('_', $selectedProject);
+    }
     $limitResourceByProj = Parameter::getUserParameter ( "limitResourceByProject" );
     if ($selectedProject and $selectedProject != '*' and $limitResourceByProj == 'on') {
       $restrictTableProjectSelected = array();
-      $prj = new Project ( $selectedProject, true );
-      $lstTopPrj = $prj->getTopProjectList ( true );
-      $sub = $prj->getRecursiveSubProjectsFlatList ();
+      if(is_array($selectedProject)){
+        foreach ($selectedProject as $idProj){
+          $prj = new Project ( $idProj, true );
+          $lstTopSelectedPrj = $prj->getTopProjectList ( true );
+          foreach ($lstTopSelectedPrj as $idProject){
+            $lstTopPrj[$idProject]=$idProject;
+          }
+          $subProj = $prj->getRecursiveSubProjectsFlatList ();
+          foreach ($subProj as $id=>$name){
+            $sub[$id]=$name;
+          }
+        }
+      }
       $in = transformValueListIntoInClause ( array_merge ( $lstTopPrj, array_keys ( $sub ) ) );
       $crit = 'idProject in ' . $in;
       $aff = new Affectation ();
