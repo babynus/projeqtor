@@ -2113,7 +2113,7 @@ helpRestrictTypesProjectTypeInline: "Türleri kısıtlarken&#44 bu tür projeler
 helpSAML_allow_login: "Use SSO connection through SAML2 protocol.&#13Be sure to validate metadata before enabling this feature",
 helpSAML_attributeCommonName: "SAML attribute for user full name",
 helpSAML_attributeMail: "SAML attribute for user email",
-helpSAML_attributeUserId: "SAML attribute for user login name&#13Required",
+helpSAML_attributeUid: "SAML attribute for user login name&#13Required",
 helpSAML_creationAction: "on SAML user creation also create user as a resource and/or as a contact",
 helpSAML_defaultProfile: "Default profile for new users inserted from SAML authentification",
 helpSAML_defaultProject: "Project that will be automatically allocated to new user created throught first SAML connection",
