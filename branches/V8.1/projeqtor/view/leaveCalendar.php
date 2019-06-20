@@ -246,7 +246,7 @@
                                 <td>
                                     <span class="leaveStatus" style="background-color:#000000; color:#FFFFFF;">
                                         &nbsp;U
-                                    </span>:'.i18n("unknow").'
+                                    </span>:'.i18n("unknown").'
                                 </td>
                             ';
                             

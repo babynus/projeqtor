@@ -375,7 +375,7 @@
                     echo '<td>
                             <span class="leaveStatus" style="background-color:'.$leaveStatusColor[0].'; color:'.$textColor.';">
                                 &nbsp;'.$statusListFirstLetter[0].'
-                            </span>:'.i18n("unknow").'
+                            </span>:'.i18n("unknown").'
                         </td>
                     ';
                 ?>
