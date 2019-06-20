@@ -264,8 +264,9 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 (6, 91, 1),
 (7, 91, 1);
 
-INSERT INTO `${prefix}accessprofile` (`id`,`name`,`description`,`idAccessScopeRead`,`idAccessScopeCreate`,`idAccessScopeUpdate`,`idAccessScopeDelete`,`sortOrder`,`idle`) values 
-(10,'accessReadOwnOnly',null,2,1,1,1,900,0);
+-- V8.1 : remove this accessprofile which is no used
+--INSERT INTO `${prefix}accessprofile` (`id`,`name`,`description`,`idAccessScopeRead`,`idAccessScopeCreate`,`idAccessScopeUpdate`,`idAccessScopeDelete`,`sortOrder`,`idle`) values 
+--(10,'accessReadOwnOnly',null,2,1,1,1,900,0);
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1, 91, 1),
