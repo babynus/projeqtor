@@ -97,7 +97,14 @@ function drawTableFromObjectList($objectList) {
 	$hasTab=false;
 	$hasColumn=false;
 	$hasSection=false;
+	$requiredFields=array();
+	//if (SSO::isSamlEnabled()) {
+	  $requiredFields=array('SAML_idpId','SAML_idpCert','SAML_SingleSignOnService','SAML_SingleLogoutService','SAML_attributeUid');
+	//}
 	foreach($objectList as $code => $format) {
+		debugLog($code);
+    $requiredClass='';
+    if (in_array($code,$requiredFields)) $requiredClass= 'required';
 		$criteria=$criteriaRoot;
 		$criteria['parameterCode']=$code;
 		// fetch the parameter saved in Database
@@ -170,7 +177,7 @@ function drawTableFromObjectList($objectList) {
 		         .'</label></td><td style="position:relative">';
 			if ($format=='list') {
 				$listValues=Parameter::getList($code);
-				echo '<select dojoType="dijit.form.FilteringSelect" class="input" name="' . $code . '" id="' . $code . '" ';
+				echo '<select dojoType="dijit.form.FilteringSelect" class="input '.$requiredClass.'" name="' . $code . '" id="' . $code . '" ';
 				echo autoOpenFilteringSelect();
 				echo ' title="' . i18n('help' . ucfirst($code)) . '" style="width:200px">';
 				if ($type=='userParameter' or $code=='versionNameAutoformat' or $code=='SAML_allow_login') {
@@ -213,7 +220,7 @@ function drawTableFromObjectList($objectList) {
 				echo ' name="' . $code . '" id="' . $code . '"';
 				echo ' title="' . i18n('help' . ucfirst($code)) . '"';
 				echo ' style="width: 200px;" ';
-				echo ' class="input" ';
+				echo ' class="input '.$requiredClass.'" ';
 				if ($format=='password') echo ' type="password" ';
 				echo ' value="' .  htmlEncode($obj->parameterValue) . '" ';
 				echo ' >';

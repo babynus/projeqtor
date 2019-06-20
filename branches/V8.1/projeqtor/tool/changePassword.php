@@ -35,28 +35,28 @@ scriptLog("changePassword.php");
   }    
   $userSalt=$_POST['userSalt'];
   if ($password=="") {
-    passwordError();
+    passwordError(i18n("isEmpty"));
   }
   if ($password==hash('sha256',Parameter::getGlobalParameter('paramDefaultPassword').$userSalt)) {
-    passwordError();
+    passwordError(i18n("isDefault"));
   }
   $user=getSessionUser();
   if ( ! $user ) {
-   passwordError();
+   passwordError(i18n("colUser").' '.i18n("undefinedValue"),true);
   } 
   if ( ! $user->id) {
-    passwordError();
+    passwordError(i18n("colUser").' '.i18n("unknown"),true);
   } 
   if ( $user->idle!=0) {
-    passwordError();
+    passwordError(i18n("colUser").' '.i18n("colLocked"),true);
   } 
   $paramLdap_allow_login=Parameter::getGlobalParameter('paramLdap_allow_login');
   if ($user->isLdap<>0 and isset($paramLdap_allow_login) and strtolower($paramLdap_allow_login)=='true') {
-    passwordError();
+    passwordError(i18n("colUser").' '.i18n("colIsLdap"));
   } 
   $passwordLength=$_POST['passwordLength'];
   if ($passwordLength<Parameter::getGlobalParameter('paramPasswordMinLength')) {
-    passwordError();
+    passwordError(i18n("paramParamPasswordMinLength"));
   }
   
   changePassword($user, $password, $userSalt, 'sha256');
@@ -65,10 +65,14 @@ scriptLog("changePassword.php");
    * Display an error message because of invalid login
    * @return void
    */
-  function passwordError() {
+  function passwordError($cause=null,$userIssue=false) {
     echo '<div class="messageERROR">';
     echo i18n('invalidPasswordChange', array(Parameter::getGlobalParameter('paramPasswordMinLength')));
+    if (1) echo '<br/><span style="color:#ffaaaa">('.$cause.')</span>';
     echo '</div>';
+    if ($userIssue and SSO::isSamlEnabled()) {
+    	SSO::addTry();
+    }
     exit;
   }
   

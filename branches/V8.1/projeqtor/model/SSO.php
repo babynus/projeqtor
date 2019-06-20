@@ -113,44 +113,54 @@ class SSO
         $user->isContact=1;
       }
       if (! $user->resourceName and ($user->isResource or $user->isContact)) {
-        $user->resourceName=$this->name;
+        $user->resourceName=$user->name;
       }
+      $user->description=htmlFormatDate(date('Y-m-d')).'<br/>'.i18n('newUserMessage',array($user->name));
       $loginSave = true;
       $resultSaveUser=$user->save();
-      $idProject = Parameter::getGlobalParameter('SAML_defaultProject');
-      $aff = new Affectation();
-      $aff->idProject = $idProject;
-      $aff->idResource = $user->id;
-      $resultSaveAffectation=$aff->save();
-      $loginSave = false;
-      $sendAlert=Parameter::getGlobalParameter('SAML_msgOnUserCreation');
-      if ($sendAlert!='NO') {
-        $title="ProjeQtOr - " . i18n('newUser');
-        $message=i18n("newUserMessage",array($user->name));
-        if ($sendAlert=='MAIL' or $sendAlert=='ALERT&MAIL') {
-          $paramAdminMail=Parameter::getGlobalParameter('paramAdminMail');
-          sendMail($paramAdminMail, $title, $message);
-        }
-        if ($sendAlert=='ALERT' or $sendAlert=='ALERT&MAIL') {
-          $prof=new Profile();
-          $crit=array('profileCode'=>'ADM');
-          $lstProf=$prof->getSqlElementsFromCriteria($crit,false);
-          foreach ($lstProf as $prof) {
-            $crit=array('idProfile'=>$prof->id);
-            $lstUsr=$this->getSqlElementsFromCriteria($crit,false);
-            foreach($lstUsr as $usr) {
-              $alert=new Alert();
-              $alert->idUser=$usr->id;
-              $alert->alertType='INFO';
-              $alert->alertInitialDateTime=date('Y-m-d H:i:s');
-              $alert->message=$message;
-              $alert->title=$title;
-              $alert->alertDateTime=date('Y-m-d H:i:s');
-              $alert->save();
+      $resSave=getLastOperationStatus($resultSaveUser);
+      if ($resSave=='OK') {
+        $idProject = Parameter::getGlobalParameter('SAML_defaultProject');
+        $aff = new Affectation();
+        $aff->idProject = $idProject;
+        $aff->idResource = $user->id;
+        $resultSaveAffectation=$aff->save();
+        $loginSave = false;
+        $sendAlert=Parameter::getGlobalParameter('SAML_msgOnUserCreation');
+        if ($sendAlert!='NO') {
+          $title="ProjeQtOr - " . i18n('newUser');
+          $message=i18n("newUserMessage",array($user->name));
+          if ($sendAlert=='MAIL' or $sendAlert=='ALERT&MAIL') {
+            $paramAdminMail=Parameter::getGlobalParameter('paramAdminMail');
+            $resMail=sendMail($paramAdminMail, $title, $message);
+            debugLog("send mail to $paramAdminMail : $resMail");
+          }
+          if ($sendAlert=='ALERT' or $sendAlert=='ALERT&MAIL') {
+            $prof=new Profile();
+            $crit=array('profileCode'=>'ADM');
+            $lstProf=$prof->getSqlElementsFromCriteria($crit,false);
+            foreach ($lstProf as $prof) {
+              $crit=array('idProfile'=>$prof->id);
+              $lstUsr=$user->getSqlElementsFromCriteria($crit,false);
+              foreach($lstUsr as $usr) {
+                $alert=new Alert();
+                $alert->idUser=$usr->id;
+                $alert->alertType='INFO';
+                $alert->alertInitialDateTime=date('Y-m-d H:i:s');
+                $alert->message=$message;
+                $alert->title=$title;
+                $alert->alertDateTime=date('Y-m-d H:i:s');
+                $resAlert=$alert->save();
+                debugLog("save alert : $resAlert");
+              }
             }
           }
         }
+        return $user;
+      } else {
+      	errorLog("Could not create user : ".$resultSaveUser);
+      	return null;
       }
-      return $user;
+      
     }
 }

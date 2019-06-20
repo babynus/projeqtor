@@ -206,6 +206,7 @@ if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMo
   // SSO Athentication using SAML2
   //damian #3980
   Parameter::refreshParameters();
+  $ssoUserCreated=false;
   if (!$user and SSO::isSamlEnabled() and $page!='loginCheck.php' and $page!='getHash.php' and $page!='saveDataToSession.php' ) {
     SSO::addTry();
     require_once dirname(__DIR__).'/sso/_toolkit_loader.php';
@@ -219,8 +220,10 @@ if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMo
       $user=SqlElement::getSingleSqlElementFromCriteria('User', array('name'=>strtolower($login)));
       if (!$user->id) {
         $user=SSO::createNewUser($authAttr);
+        if (!$user->id) $user=null;
+        else $ssoUserCreated=true;
       }
-      if ($user->id) {
+      if ($user and $user->id) {
         User::resetAllVisibleProjects();
         //damian #3724
         if(Parameter::getGlobalParameter('applicationStatus')=='Closed'){
@@ -249,7 +252,7 @@ if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMo
   	SSO::unsetAvoidSSO();
   }
   
-  if (!$user and $page!='loginCheck.php' and $page!='getHash.php' and $page!='saveDataToSession.php') {
+  if ((!$user or !$user->id) and $page!='loginCheck.php' and $page!='getHash.php' and $page!='saveDataToSession.php') {
     $cookieHash=User::getRememberMeCookie();
     if (!empty($cookieHash)) {
       $cookieUser=SqlElement::getSingleSqlElementFromCriteria('User', array('cookieHash'=>$cookieHash));
@@ -274,7 +277,7 @@ if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMo
         }
       }
     }
-    if (!$user) {
+    if (!$user or !$user->id) {
       if (is_file("login.php")) {
         include "login.php";
       } else {
@@ -286,8 +289,8 @@ if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMo
     }
   }
   $paramLdap_allow_login=Parameter::getGlobalParameter('paramLdap_allow_login');
-  if (isset($user)) {
-    if ($user->isLdap==0 or !isset($paramLdap_allow_login) or strtolower($paramLdap_allow_login)!='true') {
+  if (isset($user) and $user and $user->id) {
+    if ( ($user->isLdap==0 or !isset($paramLdap_allow_login) or strtolower($paramLdap_allow_login)!='true')  ) {
       if ($user and $page!='loginCheck.php' and $page!="changePassword.php") {
         $changePassword=false;
         if (array_key_exists('changePassword', $_REQUEST)) {
