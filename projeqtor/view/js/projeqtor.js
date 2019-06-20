@@ -2714,29 +2714,29 @@ function i18n(str, vars) {
  * @return void
  */
 function setSelectedProject(idProject, nameProject, selectionField,resetPrevious) {
-	var pos = idProject.indexOf('_');
-	if(pos != -1){
-		idProject = idProject.split('_');
-		idProject = idProject.flat();
-	}
-	if(!Array.isArray(idProject)){
+	if(idProject != '*'){
+		var pos = idProject.indexOf('_');
+		if(pos != -1){
+			idProject = idProject.split('_');
+			idProject = idProject.flat();
+		}
 		arraySelectedProject.forEach(function(element){
 			dijit.byId('checkBoxProj'+element).set('checked', false);
 		});
 		arraySelectedProject.splice(0);
-	}else{
-		arraySelectedProject.forEach(function(element){
-			dijit.byId('checkBoxProj'+element).set('checked', false);
-		});
-		arraySelectedProject.splice(0);
-		idProject.forEach(function(element){
-			selectedMultiProject(element, true, false);
-		});
-		arraySelectedProject.forEach(function(element){
-			dijit.byId('checkBoxProj'+element).set('checked', true);
-		});
+		if(Array.isArray(idProject)){
+			arraySelectedProject.forEach(function(element){
+				dijit.byId('checkBoxProj'+element).set('checked', false);
+			});
+			arraySelectedProject.splice(0);
+			idProject.forEach(function(element){
+				selectedMultiProject(element, true, false);
+			});
+			arraySelectedProject.forEach(function(element){
+				dijit.byId('checkBoxProj'+element).set('checked', true);
+			});
+		}
 	}
-	
   if (selectionField) {
     dijit.byId(selectionField).set(
         "label",
@@ -5995,8 +5995,11 @@ function selectedMultiProject(idProject, checked, submit){
 	if(arraySelectedProject[0] == '*'){
 		nameProject = '<i>'+i18n('allProjects')+'</i>';
 	}
+	console.log(arraySelectedProject);
 	if(submit){
-		saveDataToSession('project', arraySelectedProject.flat(), null);
-		setSelectedProject(arraySelectedProject.flat(), nameProject, 'selectedProject');
+		if(arraySelectedProject != null){
+			saveDataToSession('project', arraySelectedProject.flat(), null);
+			setSelectedProject(arraySelectedProject.flat(), nameProject, 'selectedProject');
+		}
 	}
 }
