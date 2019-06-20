@@ -261,7 +261,14 @@ if ($type=='habilitation') {
 // MTY - LEAVE SYSTEM
   $changeLeavesSystemActiv = false;  
 // MTY - LEAVE SYSTEM  
-  
+  $samlEnable=(strtolower(RequestHandler::getValue('SAML_allow_login'))=='true')?true:false;
+  if ($samlEnable and (   ! RequestHandler::getValue('SAML_idpCert') or ! RequestHandler::getValue('SAML_idpId')
+  		                 or ! RequestHandler::getValue('SAML_SingleSignOnService') or ! RequestHandler::getValue('SAML_SingleLogoutService')
+  		                 or ! RequestHandler::getValue('SAML_attributeUid') )) {
+    $status='CONTROL';
+    $errors=i18n('invalidSAMLdefinition');
+    $parameterList=array();
+  }
   foreach($_REQUEST as $fld => $val) { // TODO (SECURITY) : forbit writting of db and prefix params
     if (array_key_exists($fld, $parameterList)) {
       $crit['parameterCode']=$fld;
@@ -399,6 +406,10 @@ if ($status=='ERROR') {
 } else if ($status=='WARNING'){ 
 	Sql::commitTransaction();
   echo '<div class="messageWARNING" >' . i18n('messageParametersSaved') . ' - ' .$errors .'</div>';
+  $status='INVALID';
+} else if ($status=='CONTROL'){ 
+	Sql::commitTransaction();
+  echo '<div class="messageWARNING" >' .$errors .'</div>';
   $status='INVALID';
 } else if ($status=='OK'){ 
 	Sql::commitTransaction();

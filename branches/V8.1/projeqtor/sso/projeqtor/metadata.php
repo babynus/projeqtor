@@ -13,7 +13,9 @@ require_once 'projeqtor/settings.php' ;
 
 try {
     $settings = new OneLogin_Saml2_Settings($settingsInfo, true);
-    $metadata = $settings->getSPMetadata();
+    $metadataValidityDuration=86400*365.25*10; // 10 years
+    $validUntil =  time() + $metadataValidityDuration;
+    $metadata = $settings->getSPMetadata(false,$validUntil);
     $errors = $settings->validateMetadata($metadata);
     if (empty($errors)) {
         header('Content-Type: text/xml');
