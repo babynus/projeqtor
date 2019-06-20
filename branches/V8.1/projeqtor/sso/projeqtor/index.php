@@ -37,6 +37,9 @@ if (isset($_GET['slo'])) { // Request SingleLogOut to IDP
     if (isset($_SESSION['samlSessionIndex'])) {
         $sessionIndex = $_SESSION['samlSessionIndex'];
     }
+    $user=new User(getSessionUser()->id);
+    $user->cleanCookieHash();
+    if (getSessionUser()->id) Audit::finishSession();
     $auth->logout($returnTo, $parameters, $nameId, $sessionIndex, false, $nameIdFormat, $nameIdNameQualifier, $nameIdSPNameQualifier);
     # If LogoutRequest ID need to be saved in order to later validate it, do instead
     # $sloBuiltUrl = $auth->logout(null, $paramters, $nameId, $sessionIndex, true);
