@@ -2824,6 +2824,37 @@ function disconnect(cleanCookieHash) {
   }
 }
 
+//Disconnect when SSO is enabled
+// targets are : 
+// login : standard, get back to projeqtor login screen
+// SSO : disconnect from SSO
+// welcome : just quit projeqtor
+function disconnectSSO(target) {
+  disconnectFunction = function() {
+    quitConfirmed = true;
+    extUrl="origin==disconnect&cleanCookieHash=true";
+    //#2887
+    var callBack = function(){
+      showWait();
+      if (target=='welcome') {
+        setTimeout('window.location = "../view/welcome.php"',100);
+      } else {
+        saveDataToSession("avoidSSOAuth",true);
+        setTimeout('window.location = "../index.php"',100);
+      }
+    }
+    saveDataToSession("disconnect", extUrl, null, callBack);
+  };
+  if (!checkFormChangeInProgress()) {
+    if ( (paramConfirmQuit != "NO"  || target=='SSO') && target!='welcome') {
+      var msg=i18n('confirmDisconnection');
+      if (target=='SSO') msg=i18n('confirmDisconnectionSSO')
+      showConfirm(msg, disconnectFunction);
+    } else {
+      disconnectFunction();
+    }
+  }
+}
 /**
  * Disconnect (kill current session)
  * 

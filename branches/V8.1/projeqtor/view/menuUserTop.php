@@ -100,7 +100,8 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
               onClick="addAttachment('file');" title="<?php echo i18n('addPhoto');?> "><div style="font-size:80%;position:relative;top:32px"><?php echo i18n('addPhoto');?></div></div> 
    <?php } ?></td>
     <td>
-      <div class="pseudoButton disconnectTextClass" style="width:120px;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnect(true);">
+    <?php if (SSO::isEnabled()) {?>
+     <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnectSSO('welcome')">
         <table style="width:122px;">
           <tr>
             <td> <div class="disconnectClass">&nbsp;</div> </td>
@@ -108,6 +109,33 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
           </tr>
         </table>
       </div>
+     <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;" title="<?php echo i18n('ssoDisconnectMessageLogin');?>" onclick="disconnectSSO('login');">
+        <table style="width:122px;">
+          <tr>
+            <td> <div class="disconnectClass">&nbsp;</div> </td>
+            <td style="white-space:nowrap">&nbsp;&nbsp;<?php echo i18n('ssoDisconnectLogin');?></td>
+          </tr>
+        </table>
+      </div>
+      <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;display:none;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnectSSO('SSO');">
+        <table style="width:122px;">
+          <tr>
+            <td> <div class="disconnectClass">&nbsp;</div> </td>
+            <td>&nbsp;&nbsp;<?php echo i18n('disconnectSSO_SSO');?></td>
+          </tr>
+        </table>
+      </div>
+
+    <?php } else { ?>
+          <div class="pseudoButton disconnectTextClass" style="width:120px;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnect(true);">
+        <table style="width:122px;">
+          <tr>
+            <td> <div class="disconnectClass">&nbsp;</div> </td>
+            <td>&nbsp;&nbsp;<?php echo i18n('disconnect');?></td>
+          </tr>
+        </table>
+      </div>
+     <?php } ?>
     </td>
   </tr>
 <?php
