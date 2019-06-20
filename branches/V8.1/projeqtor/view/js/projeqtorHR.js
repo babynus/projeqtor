@@ -42,7 +42,7 @@
 function showXhrErrorInErrorPopup(error,msg) {
     hideWait();
     theError = new String();
-    theError = i18n("unknow");
+    theError = i18n("unknown");
     errorTitle= i18n("network")+" "+i18n("ERROR");
     errorTitle = errorTitle.toUpperCase();
     
@@ -140,7 +140,7 @@ function getCookieValue(cname) {
             return c.substring(name.length, c.length);
         }
     }
-    return "unknow";
+    return "unknown";
 }
 // *********************
 // END FUNCTIONS FOR COOKIES
@@ -320,12 +320,12 @@ function isOffDayOfResource(vDate, idRes, idUser) {
         // Use datas of the default calendar
         cWorkDayList = getCookieValue("workDayList");
         cOffDayList = getCookieValue("offDayList");
-        if (cWorkDayList!="unknow") {
+        if (cWorkDayList!="unknown") {
             workDayList = cWorkDayList;
         } else {
             cWorkDayList = workDayList;
         }
-        if (cOffDayList!="unknow") {
+        if (cOffDayList!="unknown") {
             offDayList = cOffDayList;
         } else {
             cOffDayList = offDayList;
@@ -335,12 +335,12 @@ function isOffDayOfResource(vDate, idRes, idUser) {
             // Use datas of the user calendar
             cWorkDayList = getCookieValue("uWorkDayList");
             cOffDayList = getCookieValue("uOffDayList");        
-            if (cWorkDayList!="unknow") {
+            if (cWorkDayList!="unknown") {
                 uWorkDayList = cWorkDayList;
             } else {
                 cWorkDayList = uWorkDayList;
             }
-            if (cOffDayList!="unknow") {
+            if (cOffDayList!="unknown") {
                 uOffDayList = cOffDayList;
             } else {
                 cOffDayList = uOffDayList;
@@ -896,8 +896,8 @@ function refreshStatusesSelect(theStatusArray, theSelectString, idLeaveType) {
         // If the leave's status don't exist
         if (!selectedStatusExist) {
             // Add popup option to popup status = Unknow
-            popupStatusSelectOptions.push({value:0, label:i18n('unknow'), selected:true, disabled:true});
-            linkIdNameStatus[0]= i18n('unknow');            
+            popupStatusSelectOptions.push({value:0, label:i18n('unknown'), selected:true, disabled:true});
+            linkIdNameStatus[0]= i18n('unknown');            
             // Disabled popup status
             dijit.byId('popupStatus').set('disabled', true);
             // Disabled validateButtonCalendarPopup et deleteButtonCalendarPopup
@@ -1067,7 +1067,7 @@ function fillLeavesCalendarDataArray(startDate,endDate){
                     } else if (leaves['leaves'][it]["rejected"]=="1") {
                         theTransition = i18n("colRejected");
                     } else {
-                        theTransition = i18n("unknow");
+                        theTransition = i18n("unknown");
                     }
                     var event={
                         id: parseInt(it),
@@ -1307,7 +1307,7 @@ function showModifPopup(idLeave, leaveType, status, startDate, endDate, startAMP
     if (theFullStatus===null || statusUnknow=="1") {
     // Unknow status
         // Add popup option to popup status = Unknow
-        popupStatusSelectOptions.push({value:0, label:i18n('unknow'), selected:true, disabled:true});
+        popupStatusSelectOptions.push({value:0, label:i18n('unknown'), selected:true, disabled:true});
         dijit.byId('popupStatus').set('value', 0);
         // Disabled popup status
         dijit.byId('popupStatus').set('disabled', true);
@@ -1896,7 +1896,7 @@ function leaveCalendarDisplay(){
                     
                     // Status and explaination
                     if (typeof(linkIdNameStatus[e.item.status])=="undefined" || e.item.statusUnknow=="1") {
-                        theStatusName = i18n('unknow');
+                        theStatusName = i18n('unknown');
                         theExplainStatusNone = i18n("cantBeUpdatedUntilStatusIsUnknown");
                     } else if (e.item.statusOK=="1") {
                         theExplainStatusNone = i18n("cantBeUpdatedUntilStatusIsUnsynchronized");                        
