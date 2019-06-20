@@ -198,8 +198,7 @@
   <target name="copyView">
     <copy todir="${deploy.dir}/view">
       <fileset dir="${src.dir}/view">
-        <exclude name="**/certs/sp.crt"/>
-        <exclude name="**/certs/sp.key"/>
+        <exclude name="**/css/**/*Kanban*.*"/>
       </fileset>
     </copy>
   </target>
@@ -207,7 +206,8 @@
   <target name="copySSO">
     <copy todir="${deploy.dir}/sso">
       <fileset dir="${src.dir}/sso">
-        <exclude name="**/css/**/*Kanban*.*"/>
+        <exclude name="**/certs/sp.crt"/>
+        <exclude name="**/certs/sp.key"/>
       </fileset>
     </copy>
   </target>
@@ -244,6 +244,7 @@
     <antcall target="copyTop"/>
     <antcall target="copyMisc"/>
     <antcall target="copyApi"/>
+    <antcall target="copySSO"/>
     <antcall target="zipVersion"/>                  
   </target>
   
@@ -259,6 +260,7 @@
     <antcall target="copyTop"/>
     <antcall target="copyMisc"/>
     <antcall target="copyApi"/>
+    <antcall target="copySSO"/>
     <antcall target="zipVersion"/>                             
   </target>
 
