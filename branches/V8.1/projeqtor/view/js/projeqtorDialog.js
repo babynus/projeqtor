@@ -654,8 +654,9 @@ function selectDetailItem(selectedValue, lastSavedName) {
     }
   }
   console.log(comboName);
+  console.log(comboClass);
   console.log(idFldVal);
-  if (comboName != 'idStatus'  && comboName != 'versionsPlanningDetail' && comboName != 'projectSelectorFiletering' && comboName != 'filterValueList0') { 
+  if (comboName != 'idStatus'  && comboName != 'versionsPlanningDetail' && comboName != 'projectSelectorFiletering' && (comboName != 'filterValueList' && comboClass !='Project')) { 
     if (combo) {
       refreshList('id' + comboClass, crit, critVal, idFldVal, comboName);
     } else {
@@ -729,10 +730,10 @@ function selectDetailItem(selectedValue, lastSavedName) {
 		}else{
 			combo.set("value", idFldVal);
 		}
-	}else if(comboName == 'filterValueList0'){
+	}else if(comboName == 'filterValueList' && comboClass=='Project'){
 		var pos = idFldVal.indexOf('_');
 		if(pos != -1){
-			dijit.byId('filterValueList0').set("value", idFldVal);
+			dijit.byId('filterValueList').set("value", idFldVal);
 		}else{
 			combo.set("value", idFldVal);
 		}
