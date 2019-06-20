@@ -5995,7 +5995,6 @@ function selectedMultiProject(idProject, checked, submit){
 	if(arraySelectedProject[0] == '*'){
 		nameProject = '<i>'+i18n('allProjects')+'</i>';
 	}
-	console.log(arraySelectedProject);
 	if(submit){
 		if(arraySelectedProject != null){
 			saveDataToSession('project', arraySelectedProject.flat(), null);
