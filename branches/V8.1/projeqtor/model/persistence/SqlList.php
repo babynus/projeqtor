@@ -398,6 +398,10 @@ class SqlList {
     reset($list);
     return key($list);
   }
+  public static function formatValWithId($id,$val) {
+  	//return "#$id - $val";
+  	return "$val [#$id]";
+  }
 }
 
 ?>
