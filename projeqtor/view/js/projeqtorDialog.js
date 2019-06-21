@@ -653,7 +653,7 @@ function selectDetailItem(selectedValue, lastSavedName) {
       critVal=prj.get("value");
     }
   }
-  if (comboName != 'idStatus'  && comboName != 'versionsPlanningDetail' && comboName != 'projectSelectorFiletering' && (comboName != 'filterValueList' && comboClass !='Project')) { 
+  if (comboName != 'idStatus'  && comboName != 'versionsPlanningDetail' && comboName != 'projectSelectorFiletering' && (comboName != 'filterValueList' || comboClass !='Project')) { 
     if (combo) {
       refreshList('id' + comboClass, crit, critVal, idFldVal, comboName);
     } else {
@@ -720,23 +720,24 @@ function selectDetailItem(selectedValue, lastSavedName) {
   //END ADD qCazelles - Correction GANTT - Ticket #100
   
   if (combo) {
-	if(comboName == 'projectSelectorFiletering'){
-		var pos = idFldVal.indexOf('_');
-		if(pos != -1){
-			dijit.byId('multiProjectSelector').set("value", idFldVal);
-		}else{
-			combo.set("value", idFldVal);
-		}
-	}else if(comboName == 'filterValueList' && comboClass=='Project'){
-		var pos = idFldVal.indexOf('_');
-		if(pos != -1){
-			dijit.byId('filterValueList').set("value", idFldVal);
-		}else{
-			combo.set("value", idFldVal);
-		}
-  	}else{
-		combo.set("value", idFldVal);
-	}
+  	if(comboName == 'projectSelectorFiletering'){
+  		var pos = idFldVal.indexOf('_');
+  		if(pos != -1){
+  			dijit.byId('multiProjectSelector').set("value", idFldVal);
+  		}else{
+  			combo.set("value", idFldVal);
+  		}
+  	}else if(comboName == 'filterValueList' && comboClass=='Project'){
+  		var pos = idFldVal.indexOf('_');
+  		if(pos != -1){
+  			dijit.byId('filterValueList').set("value", idFldVal);
+  		}else{
+  			combo.set("value", idFldVal);
+  		}
+    }else{
+      if(idFldVal.indexOf('_')>=0) idFldVal=idFldVal.split('_');
+  		combo.set("value", idFldVal);
+  	}
   }
   hideDetail();
   if (dojo.byId('directAccessToList') && dojo.byId('directAccessToList').value=='true' && dojo.byId('directAccessToListButton')) {
