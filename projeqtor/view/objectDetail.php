@@ -4965,6 +4965,7 @@ function drawVersionStructureFromObject($obj, $refresh=false, $way, $item) {
     $typeVersion = SqlElement::getSingleSqlElementFromCriteria('type',$critVersionType);
     
     $compObj=null;
+    $paramItem=null;
     if ($way=='structure') {
       $compObj=new Version($comp->idProductVersion);
       $paramItem = $showClosedItemStructure;

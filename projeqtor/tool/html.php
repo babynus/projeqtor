@@ -179,7 +179,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
      */
     if($col=='idActivity'or $col=='idTicket'){
       foreach ($table as $idTable=>$val){
-        $table[$idTable]= '#'.$idTable.' - '.$val;
+        $table[$idTable]= SqlList::formatValWithId($idTable,$val);
       }
     }
     if ($selection) {
@@ -189,7 +189,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
        * Ticket 3868
       */
       if($col=='idActivity'or $col=='idTicket'){
-        $table[$selection]='#'.$selection.' - '.SqlList::getFieldFromId($refTable, $selection,$column);
+        $table[$selection]=SqlList::formatValWithId($selection,SqlList::getFieldFromId($refTable, $selection,$column));
       } else {
         $table[$selection]=SqlList::getFieldFromId($refTable, $selection,$column);
       }
@@ -266,9 +266,6 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     $table=SqlList::getList($listType,$column,$selection, (! $obj)?!$limitToActiveProjects:false,true );
   } else {
     // None of the previous cases : no criteria and not of the expected above cases
-    if($col=='idTargetProductVersion'){
-      $listType = 'ProductVersion';
-    }
     $table=SqlList::getList($listType,$column,$selection, (! $obj)?!$limitToActiveProjects:false );
     if ($col=="idProject" or $col=="planning") { 
       // $wbsList will able to order list depending on WBS
@@ -641,13 +638,13 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     // Get resources linked by id to organization
     $resourcesOfThisOrga = $obj->getResourcesOfOrganizationsListAsArray();
     $restrictArray = array_intersect_key($restrictArray, $resourcesOfThisOrga);
-  }  
+  }    
   if ($col=='idTargetProductVersion' or $col=='idOriginProductVersion') { //or $col=='idProductVersion'
     // Must restrict to versions visible to user
     $limitToNotDeliveredProject = false;
-    if ($obj and get_class($obj) == 'Activity' and $col == 'idTargetProductVersion' and Parameter::getGlobalParameter('authorizeActivityOnDeliveredProduct') == 'No')
-      $limitToNotDeliveredProject = false;
-    $restrictArrayVersion=getSessionUser()->getVisibleVersions(true,$limitToNotDeliveredProject);
+    if ($obj and get_class($obj) == 'Activity' and $col == 'idTargetProductVersion' and Parameter::getGlobalParameter('authorizeActivityOnDeliveredProduct') == 'NO')
+      $limitToNotDeliveredProject = true;
+    $restrictArrayVersion=getSessionUser()->getVisibleVersions(true, $limitToNotDeliveredProject);
     if (isset($restrictArray) && count($restrictArray)>0) {
       $restrictArray=array_intersect_key($restrictArray, $restrictArrayVersion);
     } else {
@@ -783,7 +780,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       }
 
 // ADD BY Marc TABARY - 2017-02-12 - ORGANIZATIONS COMBOBOX LIST
-      if ($col=="idOrganization" and $sepChar!='no' and isset($orgaList[$key])) {  
+      if ($col=="idOrganization" and $sepChar!='no' and isset($orgaList[$key])) {   
         $orgOrder=$orgaList[$key];
         $orgTest=$orgOrder;
         $level=1;

@@ -135,9 +135,11 @@ require_once "../tool/projeqtor.php";
                             iconClass="iconView">
                       <script type="dojo/connect" event="onClick" args="evt">
                         var objectName = dijit.byId('showDetailInFilter').get('value');
-                        if( objectName ){   
+                        if( objectName ){
+                          var objectClass=objectName[0].substr(2);  
+                          if (objectClass=='TargetProductVersion' || objectClass=='OriginalProductVersion') objectClass='ProductVersion';
                           dijit.byId('filterValueList').reset();
-                          showDetail('filterValueList',0,objectName[0].substr(2),true);
+                          showDetail('filterValueList',0,objectClass,true);
                         }
                       </script>
                     </button>
