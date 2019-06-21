@@ -55,6 +55,9 @@ if (isset ( $_REQUEST ['critField'] )) {
   return;
 }
 
+debugLog("jsonList");
+debugLog($_REQUEST);
+
 echo '{"identifier":"id",';
 echo 'label: "name",';
 echo ' "items":[';
@@ -409,7 +412,11 @@ if ($type == 'empty') {
           $list = array_merge_preserve_keys ( $list, SqlList::getListWithCrit ( $class, array($_REQUEST ['critField']=>$_REQUEST ['critValue'],$_REQUEST ['critField1']=>null), 'name', null, false ) );
         }
       }
-         
+      if ($class=='Activity' or $class=='Ticket') {
+      	foreach ($list as $idL=>$valL) {
+      		$list[$idL]=SqlList::formatValWithId($idL,$valL);
+      	}
+      }
       // end add gmartin - FIXED PBE
     }
   } else {
@@ -514,7 +521,7 @@ if ($type == 'empty') {
     }
     // Florent ticket 3868
     if ($class=='Activity' or $class=='Ticket') {
-      $list [$selected] = '#'.$selected.' - '.$name;
+      $list [$selected] = SqlList::formatValWithId($selected,$name);
     } else {
       $list [$selected] = $name;
     }
