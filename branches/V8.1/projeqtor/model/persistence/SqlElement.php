@@ -6939,6 +6939,7 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
   }
   //ADD qCazelles - Filter by status
   public function getExistingStatus() {
+  	if (!property_exists($this, 'idStatus')) return array();
     $clsName=get_class($this);
     $arraySessionStatus=array();
     foreach (getAllSessionValues() as $codeSess=>$valSess) {
