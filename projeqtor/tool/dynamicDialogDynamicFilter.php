@@ -71,7 +71,9 @@ Security::checkValidClass($objectClass);
                      echo '<option value ="'.$bf->id.'">'.$bf->name.' ('.$product->name.')</option>';
                    }
                  }else{
-                   htmlDrawOptionForReference($filterCriteria->sqlAttribute, null, null, true);
+                 	 $listField=$filterCriteria->sqlAttribute;
+                 	 if ($listField=='idTargetProductVersion' or $listField=='idOriginalProductVersion') $listField='idProductVersion';
+                   htmlDrawOptionForReference($listField, null, null, true,null,null,null,null,true);
                  }
                  ?>
                </select>
@@ -116,13 +118,17 @@ Security::checkValidClass($objectClass);
              </td>
              <td style="width: 25px;">
              <?php  if (in_array($filterCriteria->sqlOperator, array('IN', 'NOT IN'))) { ?>
-                    <button style="display:block;margin-left:-3px; padding-right:3px;" id="test<?php echo $cpt;?>" dojoType="dijit.form.Button" showlabel="false"
+                    <button style="display:block;margin-left:-1px; padding-right:2px;position:relative;top:-2px;" id="idButtonCombo<?php echo $cpt;?>" dojoType="dijit.form.Button" showlabel="false"
                             title="<?php echo i18n('showDetail')?>"
                             iconClass="iconView">
                       <script type="dojo/connect" event="onClick" args="evt">
                          var nb = <?php echo $cpt;?>;
                          var fieldTarget = 'filterValueList'+nb;
-                          showDetail(fieldTarget,0,'<?php echo substr($filterCriteria->sqlAttribute,2); ?>',true);
+                          <?php 
+                          $objectClassSelect=substr($filterCriteria->sqlAttribute,2);
+                          if ($objectClassSelect=='TargetProductVersion' || $objectClassSelect=='OriginalProductVersion') $objectClassSelect='ProductVersion';
+                          ?>
+                          showDetail(fieldTarget,0,'<?php echo $objectClassSelect; ?>',true);
                       </script>
                     </button>  
              <?php } ?> 

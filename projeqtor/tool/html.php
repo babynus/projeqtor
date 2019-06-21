@@ -39,7 +39,7 @@ require_once "../tool/projeqtor.php";
  * @return void
  */
 // CHANGE BY Marc TABARY - 2017-02-17
-function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false, $critFld=null, $critVal=null, $limitToActiveProjects=true, $limitToActiveOrganizations=true) { 
+function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false, $critFld=null, $critVal=null, $limitToActiveProjects=true, $limitToActiveOrganizations=true,$showIdle=false) { 
 	scriptLog("      =>htmlDrawOptionForReference(col=$col,selection=$selection,object=" .debugDisplayObj($obj).",required=$required,critFld=".debugDisplayObj($critFld).",critVal=".debugDisplayObj($critVal).")");
   // Take into account array of $critFld // TODO : check where it is used 
 	  
@@ -138,7 +138,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     $versionField=str_replace('Version', '', $critFld);
     $version=new Version($critVal,true);
     $critArray=array($versionField=>$version->idProduct);
-    $list=SqlList::getListWithCrit('ProductStructure',$critArray,str_replace('Version', '',$col),$selection);
+    $list=SqlList::getListWithCrit('ProductStructure',$critArray,str_replace('Version', '',$col),$selection,$showIdle);
     $table=array();
     foreach ($list as $id) {
       $crit=array('idProduct'=>$id);
