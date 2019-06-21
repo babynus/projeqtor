@@ -266,6 +266,9 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     $table=SqlList::getList($listType,$column,$selection, (! $obj)?!$limitToActiveProjects:false,true );
   } else {
     // None of the previous cases : no criteria and not of the expected above cases
+    if($col=='idTargetProductVersion'){
+      $listType = 'ProductVersion';
+    }
     $table=SqlList::getList($listType,$column,$selection, (! $obj)?!$limitToActiveProjects:false );
     if ($col=="idProject" or $col=="planning") { 
       // $wbsList will able to order list depending on WBS
@@ -638,15 +641,16 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     // Get resources linked by id to organization
     $resourcesOfThisOrga = $obj->getResourcesOfOrganizationsListAsArray();
     $restrictArray = array_intersect_key($restrictArray, $resourcesOfThisOrga);
-  }    
+  }  
   if ($col=='idTargetProductVersion' or $col=='idOriginProductVersion') { //or $col=='idProductVersion'
     // Must restrict to versions visible to user
     $limitToNotDeliveredProject = false;
-    if ($obj and get_class($obj) == 'Activity' and $col == 'idTargetProductVersion' and Parameter::getGlobalParameter('authorizeActivityOnDeliveredProduct') == 'NO')
-      $limitToNotDeliveredProject = true;
-    $restrictArrayVersion=getSessionUser()->getVisibleVersions(true, $limitToNotDeliveredProject);
+    if ($obj and get_class($obj) == 'Activity' and $col == 'idTargetProductVersion' and Parameter::getGlobalParameter('authorizeActivityOnDeliveredProduct') == 'No')
+      $limitToNotDeliveredProject = false;
+    $restrictArrayVersion=getSessionUser()->getVisibleVersions(true,$limitToNotDeliveredProject);
     if (isset($restrictArray) && count($restrictArray)>0) {
       $restrictArray=array_intersect_key($restrictArray, $restrictArrayVersion);
+      
     } else {
       $restrictArray=$restrictArrayVersion;
     }
@@ -657,7 +661,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     if (isset($restrictArray) && count($restrictArray)>0) {
       $restrictArray=array_intersect_key($restrictArray, $restrictArrayProduct);
     } else { 
-      $restrictArray=$restrictArrayProduct;
+      $restrictArray=$restrictArra;yProduct;
     }
   }
   if ($col=='idOrganization' and Affectable::getOrganizationVisibilityScope()!="all") {
@@ -780,7 +784,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       }
 
 // ADD BY Marc TABARY - 2017-02-12 - ORGANIZATIONS COMBOBOX LIST
-      if ($col=="idOrganization" and $sepChar!='no' and isset($orgaList[$key])) {   
+      if ($col=="idOrganization" and $sepChar!='no' and isset($orgaList[$key])) {  
         $orgOrder=$orgaList[$key];
         $orgTest=$orgOrder;
         $level=1;
@@ -807,29 +811,29 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
 
 // MTY - LEAVE SYSTEM      
 //      if ($col=='idResource' or $col=='idResourceAll' or $col=='idAccountable' or $col=='idResponsible') {
-      if ($col=='idResource' or $col=='idResourceAll' or $col=='idAccountable' or $col=='idResponsible' or $col=="idEmployee") {
+      if ($col=='idResource' or $col=='idResourceAll' or $col=='idAccountable' or $col=='idResponsible' or $col=="idEmployee") { 
 // MTY - LEAVE SYSTEM      
       	if ($key==$user->id) {
       		$next=$key;
       	}
-      } else if ($selectedFound) {
+      } else if ($selectedFound) { 
       	$selectedFound=false;
       	$next=$key;
       }
       echo '<option value="' . $key . '"';
-      if ( $selection and $key==$selection ) { 
+      if ( $selection and $key==$selection ) {  
       	echo ' SELECTED ';
       	$selectedFound=true; 
       }
 // BEGIN - CHANGE BY TABARY - NOTIFICATION SYSTEM
 // MTY - LEAVE SYSTEM      
 //      if ($col=="idNotificationType" or $col=="idStatusNotification") {          
-      if ($col=="idNotificationType" or $col=="idStatusNotification" or $col=="idManagmentType") {          
+      if ($col=="idNotificationType" or $col=="idStatusNotification" or $col=="idManagmentType") {   
           echo '><span >'. htmlEncode(i18n($val)) . '</span></option>';
           if ($col=="idStatusNotification") {
               if ($selection==1) { $next=2; } else { $next=1;}
           }
-      } else {
+      } else { 
         echo '><span >'. htmlEncode($val) . '</span></option>';
       }
 // END - CHANGE BY TABARY - NOTIFICATION SYSTEM      
