@@ -464,7 +464,7 @@ function initPurgeLeaveSystemElements($leavesSystemActiv) {
         
         // Type : scope Manager
         $typeM = new Type();
-        $result = $typeM->purge('scope = "Manager"');
+        $result = $typeM->purge("scope = 'Manager'");
         if (getLastOperationStatus($result)!="OK") {
             traceLog("InitLeaveSystemElement - Purge Type for Manager Scope");
             traceLog($result);
