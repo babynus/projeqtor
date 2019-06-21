@@ -1,15 +1,6 @@
 
 .. include:: ImageReplacement.txt
 
-.. raw:: latex
-
-    \newpage
-
-.. contents:: Bill
-   :depth: 2
-   :backlinks: top
-   :local:
-
 .. title:: Bill
 
 .. index:: ! Bill
@@ -17,53 +8,55 @@
 .. _bill:
 
 Bills
------
-
+*****
+   
 A bill is a request for payment for delivered work.
 
 Billing will depend on billing type defined for the project through project type.
 
----------------
+.. figure:: /images/GUI/BILL_SCR_BillsClient.png
+   :alt: Clients Bills
+   :align: center
 
-.. raw:: latex
+.. rubric:: **Billing Type**
 
-    \newpage
 
-.. glossary::
+   .. note::
 
-   Billing types
+      .. figure:: /images/GUI/BILL_CAPT_SchemaBill.png
+         :align: center
 
-----------------
-
-    Each bill is linked to project, a project has a project type, and a project type is linked to a billing type.
+      * Each bill is linked to project, a project has a project type, and a project type is linked to a billing type.
     
-    So the billing type is automatically defined for the selected project. 
-    
-    Billing type will influence bill line format.
+      * So the billing type is automatically defined for the selected project. 
 
-----------------
+      * Billing type will influence bill line format.
 
-    **At terms**
+
+
+.. compound:: **At terms**
 
     * A :ref:`term <term>` must be defined to generate the bill, generally following a billing calendar.
     * Used for instance for: **Fixed price projects**.
 
-    **On produced work**
+.. compound:: **On produced work**
 
     * No term is needed.
-    * The billing will be calculated based on produced work for resources on selected :ref:`activities <activity-price>`, on a selected period.
+    * The billing will be calculated based on produced work for resources 
+      on selected :ref:`activities <activity-price>`, on a selected period.
     * Used, for instance for: **Time & Materials projects**.
 
-    **On capped produced work**
+.. compound:: **On capped produced work**
 
     * No term is needed.
-    * The billing will be calculated based on produced work for resources on selected :ref:`activities <activity-price>`, on a selected period. 
+    * The billing will be calculated based on produced work for resources  
+      on selected :ref:`activities <activity-price>`, on a selected period. 
 
     * Used, for instance for: **Capped Time & Materials projects**.
 
     .. note::
 
-       * Taking into account that total billing cannot be more than project validated work.
+       Taking into account that total billing cannot be more than project validated work.
 
     **Manual**
  
@@ -75,24 +68,22 @@ Billing will depend on billing type defined for the project through project type
     * No billing is possible for these kinds of projects.
     * Used, for instance for: **Internal projects & Administrative projects**.
 
----------------
-
-.. note:: Billing report
+.. important:: Billing report
 
    * Only bill with at least status "done" will be available for reporting.
    * Before this status, they are considered as a draft.
 
-.. raw:: latex
+.. compound:: **Description Zone**
 
-    \newpage
-
+.. figure:: /images/GUI/BILL_ZONE_BillDescription.png
+   :alt: Description fields
+   :align: center
+   
 .. sidebar:: Other sections
 
    * :ref:`Linked element<linkElement-section>`   
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
-
-.. rubric:: Section: Description
 
 .. tabularcolumns:: |l|l|
 
@@ -141,8 +132,13 @@ Billing will depend on billing type defined for the project through project type
 
     \newpage
 
-.. rubric:: Section: Treatment
+.. compound:: **Treatment Zone**
 
+.. figure:: /images/GUI/BILL_ZONE_BillTreatment.png
+   :alt: Treatment
+   :align: center
+   
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table::
@@ -177,9 +173,7 @@ Billing will depend on billing type defined for the project through project type
 
 **\* Required field**
 
-.. topic:: Fields: Amount
-
-   Columns:
+.. topic:: Fields Amount
 
    * **Ex VAT**: Amount without taxes.
      
@@ -191,22 +185,19 @@ Billing will depend on billing type defined for the project through project type
 
    * **Full**: Amount with taxes.
 
-.. topic:: Fields: Payment
-
-   Columns:
+.. topic:: Fields Payment
 
    * **Date**: Date of payment.
    * **Amount**: Payment amount.   
    * **Complete**: Flag to indicate that complete payment. 
 
 
+.. compound:: **Bill lines**
 
-.. raw:: latex
-
-    \newpage
-
-.. rubric:: Section: Bill lines
-
+.. figure:: /images/GUI/BILL_ZONE_BillLines.png
+   :alt: Treatment
+   :align: center
+   
 Input for each bill line depends on billing type.
 
 .. tabularcolumns:: |l|l|
@@ -234,7 +225,8 @@ Input for each bill line depends on billing type.
  
 .. rubric:: Bill lines management
 
-* Click on |buttonAdd| to add a bill line. A different “Bill line” dialog box will be displayed depends on billing type. 
+* Click on |buttonAdd| to add a bill line. A different “Bill line” dialog box will be displayed depends on billing type.
+* Click on |buttonClientBill|  to add a formated line depending on billing mode
 * Click on |buttonEdit| to modify an existing bill line.
 * Click on |buttonIconDelete| to delete the bill line.
 
@@ -245,7 +237,7 @@ Input for each bill line depends on billing type.
 
 .. rubric:: Bill line: At terms
 
-.. figure:: /images/GUI/BOX_BillLineAtTerms.png
+.. figure:: /images/GUI/BILL_BOX_BillLineAtTerms.png
    :alt: Dialog box - Bill line - At terms 
    :align: center
 
@@ -272,24 +264,18 @@ Input for each bill line depends on billing type.
 
 **\* Required field**
 
-.. topic:: Field: Description
+.. topic:: Field Description
  
    * Automatically set with the term name.
    * Can be modified on update.
 
-.. topic:: Field: Detail
+.. topic:: Field Detail
 
    * Can be set on update.
 
-
-.. raw:: latex
-
-    \newpage
-
-
 .. rubric:: Bill line: On produced work & On capped produced work
 
-.. figure:: /images/GUI/BOX_BillLineOnProduceWork.png
+.. figure:: /images/GUI/BILL_BOX_BillLine-ProduceWork.png
    :alt: Dialog box - Bill line - On produced work & On capped produced work
    :align: center
 
@@ -322,11 +308,9 @@ Input for each bill line depends on billing type.
    * - Amount
      - Amount for the line (Price x Quantity).
  
-
-
 **\* Required field**
 
-.. topic:: Field: Description
+.. topic:: Field Description
  
    * Automatically set with selected resource, activity price name and dates.
    * Can be modified on update.
@@ -335,16 +319,11 @@ Input for each bill line depends on billing type.
 
    * Can be set on update.
 
-
-.. raw:: latex
-
-    \newpage
-
 .. _manual-billing:
 
 .. rubric:: Bill line: Manual billing
 
-.. figure:: /images/GUI/BOX_BillLineManual.png
+.. figure:: /images/GUI/BILL_BOX_BillLineManual.png
    :alt: Dialog box - Bill line - Manual billing 
    :align: center
 
@@ -386,8 +365,8 @@ Input for each bill line depends on billing type.
 
 .. _term:
 
-Terms
------
+Client Billing Terms
+--------------------
 
 A term is a planned trigger for billing.
 
@@ -406,11 +385,15 @@ You can define as many terms as you wish, to define the billing calendar.
 * You can use these values to set real amount and date.
 
 
+.. figure:: /images/GUI/BILL_ZONE_ClientBillingDescription.png
+   :alt: Description zone
+   :align: center
+
 .. sidebar:: Other sections
 
    * :ref:`Notes<note-section>`   
 
-.. rubric:: Section: Description
+.. rubric:: Description
 
 .. tabularcolumns:: |l|l|
 
@@ -422,18 +405,21 @@ You can define as many terms as you wish, to define the billing calendar.
      - Description
    * - :term:`Id`
      - Unique Id for the term.
-   * - **Name**
+   * - Name
      - Short description of the term.
-   * - **Project**
+   * - Project
      - The project concerned with the term.
    * - Bill
      - Bill name that uses this term.
    * - :term:`Closed`
      - Flag to indicate that term is archived
 
-**\* Required field**
+\* Required field
 
-.. rubric:: Section: Fixed price for term
+.. rubric:: Fixed price for term
+
+.. figure:: /images/GUI/BILL_ZONE_FixedPrice.png
+   :align: center
 
 .. tabularcolumns:: |l|l|
 
@@ -456,20 +442,25 @@ You can define as many terms as you wish, to define the billing calendar.
    * - Planned date
      - Max of validated end dates of activities defined as triggers **(Read only)**.
 
-.. topic:: Fields: Amount and Date (Planned & Validated)
+.. topic:: Fields Amount and Date (Planned & Validated)
 
    * When a trigger is entered, the values of planned and validated are automatically updated with the sum and the max of triggered amounts.
 
-.. rubric:: Section: Trigger elements for the term
+.. rubric:: Trigger elements for the term
 
 This section allows to manage element trigger.
 
+
+.. figure:: /images/GUI/BILL_ZONE_Trigger.png
+   :align: center
+   
+   
 .. rubric:: Trigger element management
 
 * Click on |buttonAdd| to add an element trigger. 
 * Click on |buttonIconDelete| to delete an element trigger.
 
-.. figure:: /images/GUI/BOX_AddTriggerElementToTerm.png
+.. figure:: /images/GUI/BILL_BOX_AddTriggerElementToTerm.png
    :alt: Dialog box - Add a trigger element to term 
    :align: center
 
@@ -500,7 +491,7 @@ Activity price defines daily price for activities of a given **activity type** a
 
 This is used to calculate a billing amount for billing type **On produced work** and **On capped produced work**.
 
-.. rubric:: Section: Description
+.. rubric:: Description
 
 .. tabularcolumns:: |l|l|
 
@@ -543,7 +534,10 @@ Allow to define payment of bills.
 
 The bill keeps track of payment.
 
-.. rubric:: Section: Description
+.. figure:: /images/GUI/BILL_SCR_PaymentClient.png
+   :align: center
+
+.. rubric:: Description
 
 .. tabularcolumns:: |l|l|
 
@@ -565,7 +559,7 @@ The bill keeps track of payment.
 **\* Required field**
 
 
-.. rubric:: Section: Treatment
+.. rubric:: Treatment
 
 .. tabularcolumns:: |l|l|
 
@@ -603,7 +597,6 @@ The bill keeps track of payment.
 
 .. raw:: latex
 
-
     \newpage
     
 .. index:: ! Bill (Catalog)
@@ -616,7 +609,9 @@ Catalog
 
 Catalog defines items (products or services) that can be obects of a quotation, an order or a bill.
 
-This is used on the quotation lines, order lines and invoice lines. See: :ref:`Bill lines<manual-billing>`.
+This is used on the quotation lines, order lines and invoice lines. 
+
+See: :ref:`Bill lines<manual-billing>`.
 
 .. rubric:: Section: Description
 
@@ -645,7 +640,7 @@ This is used on the quotation lines, order lines and invoice lines. See: :ref:`B
 
 **\* Required field**
 
-.. rubric:: Section: Treatment
+.. rubric:: Treatment
 
 .. list-table::
    :widths: 20, 80

@@ -65,6 +65,8 @@ Glossary
       * A result can be specify.
       * It is possible to require a result when the status change to “done”.
 
+   Entrant
+
    External reference
 
     * This field allows fill free input.
@@ -73,6 +75,12 @@ Glossary
 
     * More detail, see: :ref:`Administration<administration-special-fields>`  
   
+   FTE
+   
+      Full Time Equivalent
+      The full-time equivalent (FTE) or full-time equivalent (FTE) is a unit of measurement: 
+      a workload; or more often, a capacity for work or production.
+
    Gantt chart
    
       Description  The Gantt chart is a tool used in scheduling and project management 

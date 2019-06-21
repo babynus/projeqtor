@@ -2,18 +2,12 @@
 
     \newpage
 
-
-.. contents:: Features
-   :depth: 2
-   :backlinks: top
-   :local:
-
 .. title:: Features
 
 .. index:: ! Planning management
 
 Planning management
--------------------
+*******************
 
 ProjeQtOr  provides all the elements needed to build a planning from workload, constraints between tasks and resources availability.
 
@@ -131,7 +125,7 @@ You can display the planning for each resource, but also by team, by pool or you
 .. index:: ! Resource management
 
 Resource management
--------------------
+*******************
 
 ProjeQtOr  manages the availability of resources that can be allocated to multiple projects. Tool calculates a reliable, optimized and realistic planning.
 
@@ -198,7 +192,7 @@ Moreover, updating the left work allows to recalculate the planning taking into 
 .. index:: ! Tickets management
 
 Tickets management
-------------------
+******************
 
 ProjeQtOr offers a Ticketing environment. 
 
@@ -238,7 +232,7 @@ Elements created as simple tickets are also visible as Tickets, and vice versa.
 .. index:: ! Costs management
 
 Costs management
-----------------
+****************
 
 All elements related to delays can also be followed as costs (from resources work) and managing other expenses all costs of the project are monitored and can generate invoices.
 
@@ -293,7 +287,7 @@ ProjeQtOr  can manage various financial elements found on a project: Quotation (
 .. index:: ! Quality management
 
 Quality management
-------------------
+******************
 
 The specificity of ProjeQtOr  is that it is Quality Oriented : it integrates the best practices that can help you meet the quality requirements on your projects.
 
@@ -350,14 +344,10 @@ In addition, all updates are tracked on each item to retain (and display) a hist
    * :ref:`control_automation`
    * :ref:`report`
 
-.. raw:: latex
-
-    \newpage
-
 .. index:: ! Risks management
 
 Risks management
-----------------
+****************
 
 ProjeQtOr  includes a comprehensive risks and opportunities management, including the action plan necessary to mitigate or treat them and monitoring occurring problems.
 
@@ -407,7 +397,7 @@ It is also appropriate to provide mitigation actions for identified risks that d
 .. index:: ! Perimeter management
 
 Perimeter management
---------------------
+********************
 
 ProjeQtOr allows you to monitor and record all events on your projects and helps you in managing of deviations, to control the perimeter of projects.
 
@@ -463,7 +453,7 @@ This also allows to know, in the case of Bug Tracking, the version on which a pr
 .. index:: ! Document management
 
 Documents management
---------------------
+********************
  
 ProjeQtOr offers integrated Document Management.
 
@@ -503,7 +493,7 @@ Document can be versioning and an approver process can be defined.
 .. index:: ! Commitments management
 
 Commitments management
-----------------------
+**********************
 
 ProjeQtOr  allows you to follow the requirements on your projects and measure at any time coverage progress, making it easy to reach your commitments.
 
@@ -534,10 +524,16 @@ Test sessions group test cases to be executed for a particular purpose.
 
 .. index:: ! Humans Resources
 
+.. title:: Humans Resources
+
+.. raw:: latex
+
+    \newpage
+
 .. _Humans_resources:
 
 Humans Resources
-----------------
+****************
 
 **[UNDER CONSTRUCTION]**
 
@@ -572,18 +568,13 @@ This system comes in addition to the standards of the management of absences
 
 .. topic:: **More details**
 
-   * :ref:`humans_resources` en construction
-   * :ref:`regulated_absences`
-   
-
-.. raw:: latex
-
-    \newpage
+   * :ref:`humans resources<humans_resources` en construction
+   * :ref:`Regulated Absences<regulated_absences>`
 
 .. index:: ! Tools
 
 Tools
------
+*****
 
 ProjeQtOr includes some tools to generate alerts, automatically send emails on chosen events, import or export data in various formats.
 
