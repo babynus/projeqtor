@@ -8,7 +8,7 @@
 Administration Console
 **********************
 
-.. figure:: /images/GUI/SCR_Administration.png
+.. figure:: /images/GUI/ADMIN_SCR_Console.PNG
    :alt: Administration screen
    :align: center
    
@@ -85,11 +85,15 @@ Maintenance of Data
 Log files maintenance
 ---------------------
 
-.. note:: The administrator has the possibility to:
+The administrator has the possibility to:
   
   * Delete old log files.
   * Show the list and specific log file.
 
+.. raw:: latex
+
+    \newpage
+    
 .. index:: ! Audit connections
 .. index:: ! Connection (Audit)
 
@@ -100,9 +104,9 @@ Audit connections
 
 Audit connection proposes a view of “who is online”.
 
-.. note::
-
-   * The administrator has the possibility to force the disconnection of any user (except his own current connection, see: :ref:`admin-console`.
+   * The administrator has the possibility to force the disconnection of any user (except his own current connection,
+   
+   see: :ref:`admin-console`.
 
 .. raw:: latex
 
@@ -119,6 +123,8 @@ Global parameters screen allows configuration of application settings.
 
 .. note:: Tooltip
    
+   .. figure:: /images/GUI/GLOBALPARAM_ZONE_Tooltip.png
+   
    * Moving the mouse over the caption of a parameter will display a tooltip with more description about the parameter.
 
 Tab Work time
@@ -129,18 +135,23 @@ Tab Work time
 Daily work hours
 ================
 
-* Definition of regular “work hours”.
+* Definition of the hours of work applied in your company.
 
 * Used to calculate delays based on “open hours”.
 
 Open days
 =========
 
-* Possibility to define the working days in the company. For each day of the week, you can choose between open days or off days.
+* Possibility to define the working days in the company. 
 
-.. note::
-  
-  * This parameter are taken into account in : working days on calendars, the working days on the calculation and the display ,the working days on the display of real work allocation.
+* For each day of the week, you can choose between open days or off days.
+
+* See: :ref:`Resource<calendars>` section Calendars
+
+.. note:: 
+   
+   This parameter are taken into account in : **working days on calendars**, 
+   the working days on the calculation and the display, the working days on the display of real work allocation.
 
 .. index:: ! Real work allocation (Unit for work)
 .. index:: ! Workload (Unit form work)
@@ -150,9 +161,7 @@ Open days
 Units for work
 ==============
 
-.. compound:: **unit for Timesheet (real work)**
-
-.. compound:: **Unit for Workload**
+.. compound:: **Unit for Timesheet (real work)** & Unit for Workload
 
   * Parameters to real work allocation and workload.
   * Fields: Unit for real work allocation and for all work data
@@ -341,6 +350,10 @@ Parameters to manage automations
 .. compound:: **Auto set parent activity status:**
  
   * Auto set status of parent activity from the status of children activity. 
+  
+.. compound:: **manual progress of fixed-duration activities:**
+   
+  * allows you to manually enter a value in% in the progress field in the "steering" detail area on all the elements that proposes a duration  
 
 Milestones
 ==========
@@ -366,15 +379,17 @@ Controls and restrictions
   * allow to define additional restriction's type on each project additionally to restrictions defined at project type level. 
   * if so, a Restrict Types button appears in the detail area and allows you to define the type restriction .
 
-.. figure:: /images/GUI/BOX_RestrictType.png
+.. figure:: /images/GUI/GLOBALPARAM_ZONE_RestrictType.png
 
 .. compound:: **restriction on types by profil hides items**
 
-  * allows the administrator to restrict the display of certain item types on profiles in the topic Acces Right / profiles
+  * If set to yes, users with profiles won't see items of unselected types
+  * If set to no, users will just not have possibility to create new items with such types
 
-.. figure:: /images/GUI/BOX_RestrictTypeForProject.png
-
- 
+.. figure:: /images/GUI/GLOBALPARAM_BOX_RestrictType.png
+   :alt: Restrict type box
+   :align: center
+    
 Tab Display
 -----------
 
@@ -404,11 +419,11 @@ Localization
 
 .. compound:: **Currency**
 
-* Choose your symbol displayed on each monetary boxe
+* Choose your symbol displayed on each monetary box
 
 .. compound:: **Currency position for cost display**
 
-* Symbol sets  before or after each monetary boxe
+* Symbol sets  before or after each monetary box
 
 Default values for user parameters
 ==================================
@@ -440,8 +455,8 @@ Default values for user parameters
 .. compound:: **Display history**
 
  * no
- * yes, yes with work indicated ( on the bottom of the page )
- * on request ( through a specific button )  
+ * yes, yes with work indicated on the bottom of the page
+ * on request with a specific button |buttonIconShowHistory|  
  
 .. compound:: **Editor for rich text**
 
@@ -459,10 +474,6 @@ Default values for user parameters
 .. compound:: **Restric project list**
  
  * When creating an element, name of the project stays like than the one selected at the selector or on contrary offers choice on global list of projects
-
-.. compound:: **Export in XLS or ODS**
-
- * choice between proprietary or free application 
  
 .. compound:: **displaying notes in discussion mode**
 
@@ -651,6 +662,13 @@ Emailing
 
 Parameters to allow the application to send emails.
 
+you define the administrator's email with the possibility of choosing a different address for "from" and "reply to" and the name to display
+
+You configure the SMTP serveur and port - the login name and password 
+
+You can also define the sendmail path or the send method
+
+
 Mail titles
 ===========
 
@@ -658,10 +676,7 @@ Mail titles
 
 * it is possible to use special fields to call a function or data of the project. (see: :ref:`administration-special-fields`)
 
-.. raw:: latex
 
-    \newpage
-    
 .. index:: special fields
 
 .. _administration-emailing-group-label:
@@ -671,11 +686,12 @@ Automatic emails grouping
 
 .. compound:: **activate email grouping**
 
-* When emailing grouping is activated, automatic emails sent during the defined period are grouped into a **single mail**
+* When emailing grouping is activated, automatic emails sent during the defined period are grouped into a single mail
 
 .. compound:: **grouping period (in seconds)**
 
-* Defines the period (in seconds) during which if an email is send after another on same item, then emails **are grouped into single one**
+* Defines the period (in seconds) during which if an email is send after another on same item, 
+  then emails are grouped into single one
 
 .. compound:: **how to treat different formats**
 
@@ -698,15 +714,48 @@ Test email configuration
 Tab Authentication
 ------------------
 
-Ldap management parameters
-==========================
-
-* Information about LDAP connection and behavior on creation of new user from LDAP connection.
-
 User and password
 =================
 
-* Security constraints about users and passwords.
+.. rubric:: Security constraints about users and passwords:
+
+* You can choose the default profile and password 
+
+* You can choose to block the user after x connection attempts
+
+* You can define the behavior's password with the min length ord the validy period
+
+* You can display or no the check box on the login screen "remember me" 
+
+* You can initialize password on user creation
+
+LDAP Management Parameters
+==========================
+
+ All the necessary parameters for connecting your projeqtor instances with your corporate LDAP 
+
+.. figure:: /images/GUI/GLOBALPARAM_ZONE_LDAP.png
+   :alt: Global parameters : LDAP
+   :align: center
+   
+* Set the base dn, host, port, version...
+* Default profile for Ldap users, message on creation new user from Ldap,  
+* Actions on LDAP user creation   
+* Project to allocate automatically...
+
+Single Sign On SAML2
+====================
+
+Use SSO connection through SAML2 protocol
+
+.. figure:: /images/GUI/GLOBALPARAM_ZONE_SSO.png
+   :alt: Global parameters : LDAP
+   :align: center
+
+* Set the Entity ID, the IDP certificate, the single sign on and logout...
+* Default profile for users, message on creation new user from SAML,
+* And some parameters for users  
+
 
 Tab Automation
 --------------
@@ -720,13 +769,13 @@ Parameters for the Cron process.
 
 .. topic:: **Defined frequency for these automatic functions**
 
-  * It will manage :
+It will manage :
 
-     * Alert generation : Frequency for recalculation of indicators values.
+* **Alert generation:** Frequency for recalculation of indicators values.
 
-     * Check alert : Frequency for client side browser to check if alert has to be displayed.
+* **Check alert:** Frequency for client side browser to check if alert has to be displayed.
 
-     * Import : Automatic import parameters as below.
+* **Import:** Automatic import parameters as below.
      
 .. warning:: **Cron working directory** Should be set out of the path web..
 
@@ -773,9 +822,14 @@ Automatic planning calculation
 
 .. note:: Select the frequency of the calendar by clicking on the button **defined parameters** and choose the schedule, day, month.
    
-   .. figure:: /images/definedparameters.png
+   .. figure:: /images/GUI/GLOBALPARAM_BOX_DefineParameters.png
+
 
 .. note:: **Start date for...**
+
+   .. image:: /images/GUI/GLOBALPARAM_ZONE_StardDateFor.png
+      :align: center
+   
    Select when you want to recalculate project(s)according the date of today's date 
 
 
@@ -790,14 +844,17 @@ An email is sent on the agreed date. Click on the button **Defined Parameters** 
 * select the frequency of the calendar with which the emails will be generated and sent to the profile 
 
 
-.. note:: **Control input up to** Select when you want to be controlled. Current day, previous day or next days.
+.. topic:: 
 
-.. note:: **Number of days to control** Choose how many days will be controled
+          **Control input up to** Select when you want to be controlled. Current day, previous day or next days.
+
+          **Number of days to control** Choose how many days will be controled
       
-.. note:: **Select how to send alert to each profil** chose how alerts will be sent, Internal alert, email, both or none
+          **Select how to send alert to each profil** chose how alerts will be sent, Internal alert, email, both or none
 
 
 .. warning::
+
    * All days of the week, open or off days are taken into account.
    * Off days in real work allocation will not send you an alert.
  
@@ -809,9 +866,12 @@ Files and directories
 
 Definition of directories and other parameters used for Files and documents management.
 
-.. warning:: **Attachments Directory** and **Root directory for documents** Should be set out of web reach.
+.. warning:: 
 
-.. warning:: **Temporary directory for reports** Must be kept in web reach.
+   **Attachments Directory** and **Root directory for documents** Should be set out of web reach.
+
+   **Temporary directory for reports** Must be kept in web reach.
+   
 
 .. _document-section:
 
@@ -851,28 +911,36 @@ PDF export
 * Freesans give great portability for non ANSI characters - Helvetica give smaller PDF files.
 
 
+index 
+
 SSL connection to database
 ==========================
 
 Allows to set up a secure SSL connection
 
-.. compound:: **SSL Key
+* SSL Key
 
-.. compound:: **SSL Certification
+* SSL Certification
 
-.. compound:: **SSL Certificate Authority
+* SSL Certificate Authority
 
 * Enter patch to corresponding files to enable SSL connection to the database.
 
-.. warning:: Take care that these files must exist and be valid SSL files.
- 
-     If values are incorrect, the application will not work any more, and you'll have to manually fix parameters in the database.  
+.. warning:: 
+
+   Take care that these files must exist and be valid SSL files.
+   
+   If values are incorrect, the application will not work any more, 
+   
+   and you'll have to manually fix parameters in the database.  
     
+
+.. index:: ! Special Fields
 
 .. _administration-special-fields:
 
 Special Fields
---------------
+**************
 
 Special fields can be used in the title and body mail to be replaced by item values :
 

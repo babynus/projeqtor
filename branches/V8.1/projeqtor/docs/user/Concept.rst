@@ -43,30 +43,30 @@ Project element is more than a :ref:`planning-element`, it is also used to:
     * See: :ref:`top-bar`
 
 
-.. raw:: latex
-
-    \newpage
-
 .. rubric:: Define the project type
 
-Three project types can be defined:
+.. rubric:: Three project types can be defined:
 
- .. compound:: **Operational project**
+   **Operational project**
 
-    * Most common project to follow activity.
+      * Most common project to follow activity.
+      * Manual Billed, Fixed price, Capped time, Time & materials, Internal are operationals projects
 
- .. compound:: **Administrative project**
+   .. image:: /images/GUI/CONCEPT_ZONE_ProjectType.png
 
-    * Allows to follow the non productive work as holidays, sickness, training, …
+   **Administrative project**
 
-    .. note::
-       
-       * All resource will be able to enter some real work on such project, without having to be allocated to the project, nor assigned to project activities.
+   * Allows to follow the non productive work as holidays, sickness, training, …
+   * All resource will be able to enter some real work on such project, without having to be allocated to the project, nor assigned to project activities.
 
- .. compound:: **Template project**
+   **Template project**
 
-    * Designed to define templates, to be copied as operational project. (See: :ref:`copy-item`)
-    * Any project leaders can copy such projects, without having to be allocated to them.
+   * Designed to define templates, to be copied as operational project. (See: :ref:`copy-item`)
+   * Any project leaders can copy such projects, without having to be allocated to them.
+
+
+
+
 
 .. note:: 
 

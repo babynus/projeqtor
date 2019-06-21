@@ -1,18 +1,25 @@
-.. include:: ImageReplacement.txt
-
 .. raw:: latex
 
     \newpage
-  
-.. title:: Resource
+    
+    
+.. include:: ImageReplacement.txt
 
+.. title:: Resource
+ 
 .. index:: ! Resource (Definition) 
 
 .. _resource:
 
 Resources
----------
+*********
 
+.. figure:: /images/GUI/RESOURCE_SCR_CreateResource.png
+   :alt: create a resource
+   :align: center
+   
+    Area of details on the screen for
+    
 .. sidebar:: Concepts 
 
    * :ref:`projeqtor-roles`
@@ -25,18 +32,28 @@ Resources
    **Other section**
    
    * :ref:`Allocations<allocation-section>`
+   * :ref:`Assignment<assignment-section>`
 
+
+Description zone
+----------------
 
 The resources of a project can be human or material 
 Resource availability is defined by assigning it to a project.
 
-* A resource can be a group of person ((See: :ref:`pool`).
-* Informing the resource is useful for project planning.
-* You create the fictitious resource with capacity > 1.
+* Resources are needed for project planning (see: :ref:`assignment-section`)
 
-.. topic:: Example
+* A resource can be a group of people with a FTE> 1. (See: :ref:`pool`).
 
-   * If you want a group of three peoples then resource capacity must be set to 3.
+* You can create a fictitious resource with capacity > 1 FTE.
+
+
+.. figure:: /images/GUI/RESOURCE_ZONE_DescriptionResource.png
+   :alt: Description zone
+   :align: center
+   
+   Description field for creating a resource
+
 
 .. tabularcolumns:: |l|l|
 
@@ -50,9 +67,9 @@ Resource availability is defined by assigning it to a project.
      - Unique Id for the resource.
    * - Photo
      - Photo of the resource.
-   * - **Real name**
+   * - Real name
      - Name of the resource.
-   * - User name
+   * - :ref:`user` name
      - Name of user.
    * - Initials
      - Initials of the resource.
@@ -61,9 +78,9 @@ Resource availability is defined by assigning it to a project.
    * - Profile
      - Profile of the user.
    * - Capacity (FTE)
-     - Capacity of the resource in Full Time Equivalent.
-   * - **Calendar**
-     - :ref:`Calendar<calendar>` defines the availability of the resource.
+     - Capacity of the resource in Full Time Equivalent. [#f1]_
+   * - :ref:`Calendar<calendar>`
+     - Calendar defines the availability of the resource.
    * - :ref:`Team<team>`
      - The team to which the resource belongs.
    * - Phone
@@ -73,28 +90,38 @@ Resource availability is defined by assigning it to a project.
    * - Fax
      - Fax number of the resource.
    * - Is a contact
-     - Is this resource also a contact?
+     - Is this resource also a contact? [#f2]_
    * - Is a user
-     - Is this resource also a user?
+     - Is this resource also a user? [#f3]_
+   * - Is an employee
+     - used for the humans resources module
+   * - is a student
+       The resource is a student
+   * - is outsourced
+     - The resource is an outsourced
+   * - is manager of leaves 
+     - Allow absence management. Used for the humans resources          
    * - :term:`Closed`
      - Flag to indicate that the resource is archived.
    * - Description
      - Complete description of the resource.
 
-**\* Required field** 
 
-.. topic:: Field is Capacity (FTE)
+.. rubric:: **Footnote**
 
-   * 1 (full time).     
+.. [#f1] **Field is Capacity (FTE)** 
+
+   * 1 FTE (full time equivalent).     
    * < 1 (for part time working resource).
    * > 1 (for virtual resource or teams, to use for instance to initialize a planning).
+   * If you want a resource pool of three people, the ETP capacity must be set to 3.
 
-.. topic:: Field is a contact
+.. [#f2] **Field is a contact**
    
-   * Check this if the resource must also be a contact.
+   * Check this if the resource must also be a :ref:`contact`.
    * The resource will then also appear in the “Contacts” list. 
 
-.. topic:: Field is a user
+.. [#f3] **Field is a user**
 
    * Check this if the resource must connect to the application.
    * You must then define the **User name** and **Profile** fields.
@@ -106,12 +133,20 @@ Resource availability is defined by assigning it to a project.
 
     \newpage
 
-.. index:: ! Resource (Function & Cost definition)
-
-.. compound:: **Function and cost**
+.. index:: ! Resource (Function & Cost definition)   
+   
+Function and cost zone
+----------------------
 
 This section allows to define functions and cost of the resource.
 
+
+.. figure:: /images/GUI/RESOURCE_ZONE_CostResource.png
+   :alt: Function and Cost
+   :align: center
+   
+   Function and cost zone
+  
 
 .. compound:: **Main function**
 
@@ -192,7 +227,50 @@ This section allows to define functions and cost of the resource.
    * - Don't receive team mails
      - Box checked indicating that the resource doesn't want to receive mails sent to the team.
 
- 
+treatment zone
+--------------
+
+.. sidebar:: Concepts 
+  
+   * :ref:`Allocations<allocation-section>`
+   * :ref:`Assignment<assignment-section>`
+   
+.. compound:: **Allocations to projects**
+   
+This Zone allows to allocated the ressources to the project
+
+.. figure:: /images/GUI/RESOURCE_ZONE_Allocation.png
+   :alt: Allocation Zone
+   :align: center
+   
+   Allocation Zone
+   
+* Click on |buttonAdd| to allocate a new resource to the project. 
+* Click on |buttonEdit| to update an existing resource cost.
+* Click on |buttonIconDelete| to delete the resource cost.   
+   
+.. figure:: /images/GUI/RESOURCE_ZONE_AllocationOK.png
+   :alt: Resource allocation
+   :align: center
+   
+   Resource assigned to the project   
+   
+.. compound:: **Pools including the ressources**
+
+You can select resource pools
+resource pools must be created before
+
+.. compound:: **Variations in resource capacity**
+
+The resource assigned to the project may not be available throughout the project period.
+Here you can record dates (beginning and end) to indicate that your resource will have a variation of capacity over that time.   
+
+.. compound:: **Managment of surbooking periods**
+
+Also in this section you can add dates or the resource will have a FTE> 1
+
+
+
 .. title:: Pool of Resource
 
 .. index:: ! Pool of Resource (Definition) 
@@ -200,7 +278,7 @@ This section allows to define functions and cost of the resource.
 .. _pool:
 
 Pool of Resources
------------------
+*****************
 
 .. figure:: /images/GUI/pool.png
    :alt: Resource cost dialog box
@@ -245,7 +323,7 @@ You assign resources to the pool at a given rate for a given period.
    * - Description
      - Complete description of the resource.
 
-**\* Required field**
+**Required field**
 
 .. compound:: **Capacity**
 
@@ -293,7 +371,7 @@ You assign resources to the pool at a given rate for a given period.
 .. _team:
 
 Teams
------
+*****
 
 .. figure:: /images/teams.png
    :alt: Team
@@ -343,10 +421,10 @@ List of the resources members of the team.
 .. index:: ! Calendar definition
 .. index:: ! Resource (Calendar definition)  
 
-.. _calendar:
+.. _calendars:
 
-Calendar
---------
+Calendars
+*********
 
 .. sidebar:: Concepts 
 

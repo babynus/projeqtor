@@ -20,7 +20,7 @@ Module Management
 | This screen is then accessible via a dedicated menu in the :ref:`Acces Right`
 
 
-.. figure:: /images/modulemanagement.png
+.. figure:: /images/GUI/ACCESRIGHT_ManagementModule.png
 
 .. topic:: **columns descriptions**
 
@@ -38,7 +38,7 @@ Module Management
 * the risks
 * The meetings
 * The steering 
-* the products configuration (versions, components...)
+* The products configuration (versions, components...)
 * The humans resources
 * The external documents management 
 * The Organizations (level society) management 
@@ -58,15 +58,9 @@ Profiles
 
 The profile is an entitlement group, each with specific access rights to the database.
 
-So, each user is linked to a profile which defines the data he can see and possibly manage. 
+So, each user is linked to a profile which defines the data they can see and possibly manage. 
 
-.. rubric:: Display format
-
-* In the next screens, the name of profiles is displayed in columns.
-* Access rights and options are displayed in rows.
-* This display format allows to manage easily authorizations for each profile.  
-
-.. figure:: /images/GUI/PROFILISTE.png 
+.. figure:: /images/GUI/ACCESRIGHT_SCR_Profiles.png 
    :alt: Access to forms screen
    :align: center
 
@@ -74,18 +68,31 @@ So, each user is linked to a profile which defines the data he can see and possi
 
 * The value of field "Name" is not the name displayed, but it is a code in the translation table. 
 * The name displayed at right of the field is the translated name.
-* See: :ref:`translatable-name`.
 
+when the new profile is created, it appears in the list of existing profiles in the list box.
+It remains between square brackets because it does not exist in :ref:`translatable-name`. 
+
+.. figure:: /images/GUI/ACCESRIGHT_ZONE_ProfilesDescription.png
+   :alt: Profile description
+   :align: center
+   
 .. topic:: New profile
 
+   .. figure:: /images/GUI/ACCESRIGHT_ZONE_NewProfil.png
+      :alt: New profil details zone
+      :align: center
+      
    * The value of field "Name" must be a significant name and must not contain spaces or special characters.
    * Ideally, the value of the field should start with "profile" (to be easily identified in the translation table).
+
+The restriction zone offers two types of restriction.
+One by type based on ProjeQtOr elements (actions, activities, invoices, catalog ...) 
+and the other based on the restriction of product versions
+
 
 .. sidebar:: Other sections
 
    * :ref:`Types restrictions<type-restriction-section>`
-
-.. rubric:: Description
 
 .. tabularcolumns:: |l|l|
 
@@ -101,14 +108,14 @@ So, each user is linked to a profile which defines the data he can see and possi
      - Name of the profile\*.
    * - Profile code
      - A code that may be internally used when generating emails and alerts.
-   * - Sort order
+   * - Sort order\*
      - Number to define order of display in lists.
    * - :term:`Closed`
      - Flag to indicate that profile is archived.
    * - Description
      - Complete description of the profile.
 
-**\* Required field**
+\* Required field
 
 .. topic:: Field: Profile code
 
@@ -132,7 +139,7 @@ Each access is defined as scope of visible and/or updatable, that can be, by kin
 * **Elements of own project:** Only the elements of the projects the user/resource is allocated to.
 * **All elements on all projects:** All elements, whatever the project.
 
-.. figure:: /images/GUI/SCR_AccessMode_List.png 
+.. figure:: /images/GUI/ACCESRIGHT_ZONE_AccessModeList.png 
    :alt: Access to forms screen
    :align: center 
 
@@ -146,8 +153,6 @@ Each access is defined as scope of visible and/or updatable, that can be, by kin
 
    * The value of field "Name" must be a significant name and must not contain spaces or special characters.
    * Ideally, the value of the field should start with "accessProfile" (to be easily identified in the translation table).
-
-.. rubric:: Description
 
 .. tabularcolumns:: |l|l|
 
@@ -176,7 +181,7 @@ Each access is defined as scope of visible and/or updatable, that can be, by kin
    * - Description
      - Complete description of the access mode.
 
-**\* Required field**
+\* Required field
 
 
 .. raw:: latex
@@ -195,7 +200,7 @@ Users belonging to one profile can see the corresponding screen if authorized or
 
 * Click on checkbox to permit or revoke access to the screen for a profile.
 
-.. figure:: /images/GUI/ACCESTOFORM1.png
+.. figure:: /images/GUI/ACCESRIGHT_SCR_AccesTOforms.png
    :alt: Access to forms scREEN
    :align: center
 
@@ -212,7 +217,7 @@ Reports are grouped by report categories
 
 * Click on checkbox to permit or revoke access to the report  for a profile.
 
-.. figure:: /images/GUI/SCR_AccessToReports.png
+.. figure:: /images/GUI/ACCESRIGHT_ZONE_AccessToReports.png
    :alt: Access to reports screen
    :align: center
 
@@ -229,7 +234,7 @@ This screen is only for the elements reliant on a project.
 
 * For each element, selected the access mode granted to a profile.
 
-.. figure:: /images/GUI/SCR_AccessToDataProjectDependant.png
+.. figure:: /images/GUI/ACCESRIGHT_ZONE_AccessToDataProjectDependant.png
    :alt: Access to data (Project dependant) screen
    :align: center
 
@@ -246,7 +251,7 @@ This screen is only for the elements not reliant on a project.
 
 * For each element, select the access rights granted to a profile.
 
-.. figure:: /images/GUI/SCR_AccessToDataNotProjectDependant.png
+.. figure:: /images/GUI/ACCESRIGHT_ZONE_AccessToDataNotProjectDependant.png
    :alt: Access to data (Not project dependant) screen
    :align: center
 
@@ -265,7 +270,7 @@ Depending on options of functionality, allows to grant access rights, to define 
 
 * For each option, select the access granted to a profile.
 
-.. figure:: /images/GUI/specificaccessscreen.png 
+.. figure:: /images/GUI/ACCESRIGHT_SCR_SpecificAccess.png 
    :alt: Specific access screen
    :align: center
 
@@ -360,7 +365,8 @@ The translated name depends on user language selected in :ref:`User parameters<d
 
 .. note::
 
-   * If translated name is displayed between [ ], then the value of field "Name" is not found in the translation table.
+   * If translated name is displayed between suqare brackets [ ], 
+   then the value of field "Name" is not found in the translation table.
 
 .. rubric:: Translation table files
 

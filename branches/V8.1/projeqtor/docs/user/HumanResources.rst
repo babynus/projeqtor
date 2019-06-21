@@ -2,12 +2,6 @@
 
     \newpage
 
-
-.. contents:: Features
-   :depth: 2
-   :backlinks: top
-   :local:
-
 .. title:: Humans Resources
 
 .. index:: ! Humans resources
@@ -16,23 +10,41 @@
 
 Humans Resources
 ****************
+
 **[06/2019 - UNDER CONSTRUCTION]**
 
+.. note:: **Documentation**
+
+   `Documentation <https://www.projeqtor.org/files/ProjeQtOr%20-%20Documentation%20-%20Absences%20r%C3%A9glement%C3%A9es.pdf/>`_ on the implementation of regulated absences by Salto consulting 
+   is online on the `download page <https://www.projeqtor.org/fr/product-fr/downloads-fr/>`_
+
 This section allows to manage the society's Humans Resources 
+
 This system comes in addition to the standards of the management of absences
 
-* You can define the employees, contract types, the contract for the employees
+* You must define the employees [#f1]_, contract types and leaves types contract 
+
 * You can choose the leave entitlement standard for each type of contract
+
 * The employee may reserve periods of leave of absence according to his rights.
+
 * The system also includes a validation process of the requests during the leave period.
 
-.. warning:: absence administrator
+.. warning:: **Absence Administrator**
+
    In order to be able to manage and parameterize the human resources module after its installation, 
    you must go to global parameters in the Work tab.
    A new parameter is displayed: Leaves System
+   
+
+   .. figure:: /images/GUI/RH_ZONE_ParamGlob_LeavesAdmin.png
+      :alt: Global Parameters - Leaves System
+      :align: center
+   
    You can choose here who will be the administrator of this module
 
-   ..figure:: /images/GUI/RH_ZONE_ParamGlob_LeavesAdmin.png
+
+
 
 .. index:: Humans Resources (Sections)
 .. rubric:: **Humans Resources Sections**
@@ -61,6 +73,17 @@ This system comes in addition to the standards of the management of absences
 
 .. _regulated_absences:
 
+-----------------------------
+
+.. rubric:: **Footnote**
+
+.. [#f1] an employee is a resource whose property 'is an employee' is checked.
+      
+      This property is visible only when the REGULATED ABSENCE module is enabled.
+ 
+   
+.. _regulated_absences:
+   
 Regulated absence
 -----------------
 
@@ -82,11 +105,76 @@ Thanks to this module, it is thus possible to manage the paid holidays, the RTT,
 Leaves Calendar
 ===============
 
+Regulated absences are done either by the employees or by their manager
+
+Absences can be recorded from the leaves calendar 
+
+.. figure:: /images/GUI/RH_SCR_LeavesCalendar.png
+   :alt: Leaves calendar
+   :align: center
+
+To record or change your absences, double clicking on an existing date or absence
+
+a pop up opens to display the properties of an absence (date and type of absence ...)
+
+.. figure:: /images/GUI/RH_POPUP_LeavesAttributs.png
+   :alt: Leaves attributs
+   :align: center
+   
+.. rubric:: Leaves States   
+
+Regulated absences have 3 states:
+
+* **recorded:** 
+Creation status. In this state all the data of the absence can be modified
+
+* **validated:** 
+State that only the manager and the administrator of the module can be enabled.
+In this state, only the state of absence can be changed by the manager or administrator
+
+* **canceled:** 
+State that only the manager and the administrator of the module can be enabled.
+In this state, only the state of absence can be modified by the manager or administrator
+and the number of days the absence represents are not taken
+
+.. note:: 
+
+   The calculation of the number of days represented by absence is done on the basis of working days
+   Global setting of projeqtor and schedule associated with employee: holidays, non-working days
+
 Leaves Periods
 ==============
 
+Regulated absences are done either by the employees or by their manager
+
+Absences can be recorded from the leaves Periods screen 
+
+.. figure:: /images/GUI/RH_SCR_LeavesPeriods.png
+   :alt: Leaves periods
+   :align: center
+
+On this screen, you can save, edit, delete a holiday request as on the absence schedule.
+
+The employee manager and the administrator can change the status of a holiday (see reports)
+
+
+
 Leave Rights earned
 ===================
+
+On this screen, you can see your leaves rights earned since your contratc's beginning.
+
+.. figure:: /images/GUI/RH_SCR_LeavesRightsearned.png
+   :alt: Leaves rights earned
+   :align: center
+
+* the start and end dates correspond to the period on which the days of leave are calculated
+
+* The numbers of the days acquired and remaining 
+
+* If your holidays over the reference period and according to the type of leave, 
+  then the checkbox "closed" is validated.
+  You no longer have this type of holiday available and can not ask any more
 
 Employees
 =========
