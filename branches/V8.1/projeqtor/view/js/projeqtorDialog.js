@@ -7417,14 +7417,57 @@ function moveListColumn(source, destination) {
 }
 
 function moveFilterListColumn() {
+    var mode='';
+    var list='';
+    var nodeList=dndListFilterSelector.getAllNodes();
+    listColumnOrder=new Array();
+    for (i=0; i < nodeList.length; i++) {
+      var itemSelected=nodeList[i].id.substr(6);
+      list+=itemSelected + "|";
+    }  
+    
+    var callback=function() {
+        if (top.dijit.byId('dialogDetail').open) {
+          var doc=top.window.frames['comboDetailFrame'];
+        } else {
+          var doc=top;
+        }
+        if (dojo.byId('objectClassList') && dojo.byId('objectClassList').value){
+          var objectClass=dojo.byId('objectClassList').value;
+        }else if (! top.dijit.byId('dialogDetail').open && dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value){ 
+          var objectClass=dojo.byId("objectClassManual").value;
+        }else if (dojo.byId('objectClass') && dojo.byId('objectClass').value){
+          var objectClass=dojo.byId('objectClass').value;
+        } 
+        var compUrl=(top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
+        
+        doc.loadContent(
+            "../tool/displayFilterList.php?context=directFilterList&filterObjectClass="
+                + objectClass + compUrl, "directFilterList", null,
+           false, 'returnFromFilter', false);
+      };
+    
+    var url='../tool/moveFilterColumn.php?orderedList=' + list;
+    dojo.xhrPost({
+      url : url,
+      handleAs : "text",
+      load : function(data, args) {
+        if (callback)
+          setTimeout(callback, 10);
+      }
+    });
+}
+
+function moveFilterListColumn2() {
   var mode='';
   var list='';
-  var nodeList=dndListFilterSelector.getAllNodes();
+  var nodeList=dndListFilterSelector2.getAllNodes();
   listColumnOrder=new Array();
   for (i=0; i < nodeList.length; i++) {
     var itemSelected=nodeList[i].id.substr(6);
     list+=itemSelected + "|";
   }  
+  
   var url='../tool/moveFilterColumn.php?orderedList=' + list;
   dojo.xhrPost({
     url : url,

@@ -211,8 +211,10 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
            } else if (target.id=='dndFavoriteReports') {
           	 setTimeout('reorderFavoriteReportItems()',100);  
            } else if (target.id=='dndListFilterSelector') {
-             setTimeout('moveFilterListColumn()',100);  
-           } 
+             setTimeout('moveFilterListColumn()',100); 
+           } else if( target.id=='dndListFilterSelector2') {
+             setTimeout('moveFilterListColumn2()',100); 
+           }
         });
         if (moveTasks) {
         //setTimeout('moveTask("' + idFrom + '", "' + idTo + '")',100);
