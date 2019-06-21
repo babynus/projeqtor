@@ -102,7 +102,6 @@ function drawTableFromObjectList($objectList) {
 	  $requiredFields=array('SAML_idpId','SAML_idpCert','SAML_SingleSignOnService','SAML_SingleLogoutService','SAML_attributeUid');
 	//}
 	foreach($objectList as $code => $format) {
-		debugLog($code);
     $requiredClass='';
     if (in_array($code,$requiredFields)) $requiredClass= 'required';
 		$criteria=$criteriaRoot;

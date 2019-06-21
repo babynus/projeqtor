@@ -139,7 +139,6 @@ class SSO
           if ($sendAlert=='MAIL' or $sendAlert=='ALERT&MAIL') {
             $paramAdminMail=Parameter::getGlobalParameter('paramAdminMail');
             $resMail=sendMail($paramAdminMail, $title, $message);
-            debugLog("send mail to $paramAdminMail : $resMail");
           }
           if ($sendAlert=='ALERT' or $sendAlert=='ALERT&MAIL') {
             $prof=new Profile();
@@ -157,7 +156,6 @@ class SSO
                 $alert->title=$title;
                 $alert->alertDateTime=date('Y-m-d H:i:s');
                 $resAlert=$alert->save();
-                debugLog("save alert : $resAlert");
               }
             }
           }
