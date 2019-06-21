@@ -55,9 +55,6 @@ if (isset ( $_REQUEST ['critField'] )) {
   return;
 }
 
-debugLog("jsonList");
-debugLog($_REQUEST);
-
 echo '{"identifier":"id",';
 echo 'label: "name",';
 echo ' "items":[';
