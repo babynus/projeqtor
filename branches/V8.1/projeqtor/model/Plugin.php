@@ -40,7 +40,9 @@ class Plugin extends SqlElement {
     private static $_triggeredEventList;
     private static $_pluginButtonList;
     private static $pluginRequiredVersion=array(
-        "V6.0.6"=>array("screenCustomization"=>"3.1")
+        "V6.0.6"=>array("screenCustomization"=>"3.1",
+        "V8.1.0"=>array("templateReport"=>"2.1")
+        )
     );
     
     function __construct() {
