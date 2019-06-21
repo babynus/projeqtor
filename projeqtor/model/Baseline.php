@@ -112,7 +112,6 @@ class Baseline extends SqlElement {
     $query="INSERT INTO $tableTo ($colList idBaseline)\n"
         ."SELECT $colList $idBaseline FROM $tableFrom as $itemFrom \n"
         ." where idProject in ".transformListIntoInClause($proj->getRecursiveSubProjectsFlatList(true, true));
-    debugLog($query);
     $res=SqlDirectElement::execute($query);
     if ($itemFrom=='PlannedWork') { // Also include existing real work
       $objFrom=new Work();
