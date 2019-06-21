@@ -1502,6 +1502,9 @@ function traceHack($msg="Unidentified source code") {
   errorLog(" QUERY_STRING = ".$_SERVER['QUERY_STRING']);
   errorLog(" REMOTE_ADDR = ".$_SERVER['REMOTE_ADDR']);
   errorLog(" SCRIPT_FILENAME = ".$_SERVER['SCRIPT_FILENAME']);
+  if (intval(Parameter::getGlobalParameter('logLevel'))>=3) {
+  	debugPrintTraceStack();
+  }
   // FIX FOR IIS
   if (!isset($_SERVER['REQUEST_URI'])) {
     $_SERVER['REQUEST_URI']=substr($_SERVER['PHP_SELF'], 1);
