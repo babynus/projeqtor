@@ -96,4 +96,5 @@ ALTER TABLE `${prefix}resource` CHANGE `function` `contactFunction` VARCHAR(100)
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
 ('SAML_attributeUid' ,'uid'),
 ('SAML_attributeMail' ,'mail'),
-('SAML_defaultProfile','5');
+('SAML_defaultProfile','5'),
+('SAML_ssoCommonName','SSO');

@@ -2829,7 +2829,8 @@ function disconnect(cleanCookieHash) {
 // login : standard, get back to projeqtor login screen
 // SSO : disconnect from SSO
 // welcome : just quit projeqtor
-function disconnectSSO(target) {
+function disconnectSSO(target,ssoCommonName) {
+  if (!ssoCommonName) ssoCommonName='SSO';
   disconnectFunction = function() {
     quitConfirmed = true;
     extUrl="origin==disconnect&cleanCookieHash=true";
@@ -2852,7 +2853,7 @@ function disconnectSSO(target) {
   if (!checkFormChangeInProgress()) {
     if ( (paramConfirmQuit != "NO"  || target=='SSO') && target!='welcome') {
       var msg=i18n('confirmDisconnection');
-      if (target=='SSO') msg=i18n('confirmDisconnectionSSO')
+      if (target=='SSO') msg=i18n('confirmDisconnectionSSO',new Array(ssoCommonName));
       showConfirm(msg, disconnectFunction);
     } else {
       disconnectFunction();

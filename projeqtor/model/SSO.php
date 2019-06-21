@@ -76,6 +76,12 @@ class SSO
       if ($attr) return $attr; 
       else return $attribute;
     }
+    public static function getCommonName($removeQuotes=false) {
+    	$ssoCommonName=Parameter::getGlobalParameter('SAML_ssoCommonName');
+    	if ($ssoCommonName and $removeQuotes) return str_replace("'"," ",$ssoCommonName);
+    	else if ($ssoCommonName) return $ssoCommonName;
+    	else return 'SSO';
+    }
     
     public static function addTry() {
       $try=getSessionValue('SamlCnxTry',0,true);

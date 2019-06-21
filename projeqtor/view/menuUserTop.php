@@ -101,7 +101,7 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
    <?php } ?></td>
     <td>
     <?php if (SSO::isEnabled()) {?>
-     <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnectSSO('welcome')">
+     <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnectSSO('welcome','<?php echo SSO::getCommonName(true);?>')">
         <table style="width:122px;">
           <tr>
             <td> <div class="disconnectClass">&nbsp;</div> </td>
@@ -109,7 +109,7 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
           </tr>
         </table>
       </div>
-     <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;" title="<?php echo i18n('ssoDisconnectLoginMessage');?>" onclick="disconnectSSO('login');">
+     <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;" title="<?php echo i18n('ssoDisconnectLoginMessage',array(SSO::getCommonName()));?>" onclick="disconnectSSO('login','<?php echo SSO::getCommonName(true);?>');">
         <table style="width:122px;">
           <tr>
             <td> <div class="disconnectClass">&nbsp;</div> </td>
@@ -118,11 +118,11 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
         </table>
       </div>
       <?php if (isset($_SESSION['samlNameId'])) {?>
-      <div class="pseudoButton disconnectTextClass" style="width:120px;height:30px;" title="<?php echo i18n('ssoDisconnectSSOMessage');?>" onclick="disconnectSSO('SSO');">
+      <div class="pseudoButton disconnectTextClass" style="width:120px;height:30px;" title="<?php echo i18n('ssoDisconnectSSOMessage',array(SSO::getCommonName()));?>" onclick="disconnectSSO('SSO','<?php echo SSO::getCommonName(true);?>');">
         <table style="width:122px;">
           <tr>
             <td> <div class="disconnectClass">&nbsp;</div> </td>
-            <td style="white-space:nowrap">&nbsp;&nbsp;<?php echo i18n('ssoDisconnectSSO');?></td>
+            <td style="white-space:nowrap">&nbsp;&nbsp;<?php echo i18n('ssoDisconnectSSO',array(SSO::getCommonName()));?></td>
           </tr>
         </table>
       </div>
