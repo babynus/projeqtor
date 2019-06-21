@@ -680,8 +680,8 @@ static function isTheLeaveProject($id=null) {
    * @return string the html table for the given level of subprojects
    *  must be redefined in the inherited class
    */  
-  public function drawSubProjects($selectField=null, $recursiveCall=false, $limitToUserProjects=false, $limitToActiveProjects=false) {
-scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursiveCall=$recursiveCall, limitToUserProjects=$limitToUserProjects, limitToActiveProjects=$limitToActiveProjects)");
+  public function drawSubProjects($selectField=null, $recursiveCall=false, $limitToUserProjects=false, $limitToActiveProjects=false, $level=0) {
+    scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursiveCall=$recursiveCall, limitToUserProjects=$limitToUserProjects, limitToActiveProjects=$limitToActiveProjects)");
     global $outMode, $drawCheckBox;
   	self::$_drawSubProjectsDone[$this->id]=$this->name;
     if ($limitToUserProjects) {
@@ -723,6 +723,7 @@ scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursi
     }
     $result .='<table style="width:100%;">';
     if (count($subList)>0) {
+      $level++;
       foreach ($subList as $idPrj=>$namePrj) {
         $showLine=true;
         $reachLine=true;
@@ -741,9 +742,16 @@ scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursi
         }
         if ($showLine) {
         	$prj=new Project($idPrj);
+        	$left = 0;
+        	if($level > 1){
+        	  $left = -(20*$level);
+        	  if($level >= 2){
+        	  	$left -= ($level-2)*20;
+        	  }
+        	}
           $result .='<tr>';
           if(!$drawCheckBox){
-            $result .='<td valign="top" width="20px"><div dojoType="dijit.form.CheckBox" type="checkbox" class="whitecheck" style="float:left;position:absolute;left:7px" id="checkBoxProj'.$idPrj.'" value="'.$idPrj.'">';
+            $result .='<td valign="top" width="20px"><div dojoType="dijit.form.CheckBox" type="checkbox" class="whitecheck" style="float:left;position:relative;left:'.$left.'px" id="checkBoxProj'.$idPrj.'" value="'.$idPrj.'">';
             $result .='<script type="dojo/method" event="onClick" args="evt">
                         selectedMultiProject(this.value, this.checked, false);
                       </script>';
@@ -762,7 +770,7 @@ scriptLog("Project($this->id)->drawSubProjects(selectField=$selectField, recursi
             $result .= htmlEncode($prj->name);
             $result .='</div>';
           }
-          $result .= $prj->drawSubProjects($selectField,true,$limitToUserProjects,$limitToActiveProjects);
+          $result .= $prj->drawSubProjects($selectField,true,$limitToUserProjects,$limitToActiveProjects, $level);
           $result .= '</td></tr>';
         }
       }
