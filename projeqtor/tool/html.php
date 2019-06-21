@@ -650,7 +650,6 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     $restrictArrayVersion=getSessionUser()->getVisibleVersions(true,$limitToNotDeliveredProject);
     if (isset($restrictArray) && count($restrictArray)>0) {
       $restrictArray=array_intersect_key($restrictArray, $restrictArrayVersion);
-      
     } else {
       $restrictArray=$restrictArrayVersion;
     }
@@ -661,7 +660,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     if (isset($restrictArray) && count($restrictArray)>0) {
       $restrictArray=array_intersect_key($restrictArray, $restrictArrayProduct);
     } else { 
-      $restrictArray=$restrictArra;yProduct;
+      $restrictArray=$restrictArrayProduct;
     }
   }
   if ($col=='idOrganization' and Affectable::getOrganizationVisibilityScope()!="all") {
@@ -811,29 +810,29 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
 
 // MTY - LEAVE SYSTEM      
 //      if ($col=='idResource' or $col=='idResourceAll' or $col=='idAccountable' or $col=='idResponsible') {
-      if ($col=='idResource' or $col=='idResourceAll' or $col=='idAccountable' or $col=='idResponsible' or $col=="idEmployee") { 
+      if ($col=='idResource' or $col=='idResourceAll' or $col=='idAccountable' or $col=='idResponsible' or $col=="idEmployee") {
 // MTY - LEAVE SYSTEM      
       	if ($key==$user->id) {
       		$next=$key;
       	}
-      } else if ($selectedFound) { 
+      } else if ($selectedFound) {
       	$selectedFound=false;
       	$next=$key;
       }
       echo '<option value="' . $key . '"';
-      if ( $selection and $key==$selection ) {  
+      if ( $selection and $key==$selection ) { 
       	echo ' SELECTED ';
       	$selectedFound=true; 
       }
 // BEGIN - CHANGE BY TABARY - NOTIFICATION SYSTEM
 // MTY - LEAVE SYSTEM      
 //      if ($col=="idNotificationType" or $col=="idStatusNotification") {          
-      if ($col=="idNotificationType" or $col=="idStatusNotification" or $col=="idManagmentType") {   
+      if ($col=="idNotificationType" or $col=="idStatusNotification" or $col=="idManagmentType") {          
           echo '><span >'. htmlEncode(i18n($val)) . '</span></option>';
           if ($col=="idStatusNotification") {
               if ($selection==1) { $next=2; } else { $next=1;}
           }
-      } else { 
+      } else {
         echo '><span >'. htmlEncode($val) . '</span></option>';
       }
 // END - CHANGE BY TABARY - NOTIFICATION SYSTEM      
@@ -1570,7 +1569,11 @@ function htmlDisplayStoredFilter($filterArray,$filterObjectClass,$currentFilter=
   $param=SqlElement::getSingleSqlElementFromCriteria('Parameter', 
        array('idUser'=>getSessionUser()->id, 'parameterCode'=>'Filter'.$filterObjectClass));
   $defaultFilter=($param)?$param->parameterValue:'';
-  echo "<table id='dndListFilterSelector' jsId='dndListFilterSelector' width='100%' dojotype='dojo.dnd.Source' withhandles='true' data-dojo-props='accept: [ \"tableauBordLeft\",\"tableauBordRight\" ]' >";
+   if ($context!='directFilterList') {
+    echo "<table id='dndListFilterSelector' jsId='dndListFilterSelector' width='100%' dojotype='dojo.dnd.Source' withhandles='true' data-dojo-props='accept: [ \"tableauBordLeft\",\"tableauBordRight\" ]' >";
+   }else{
+    echo "<table id='dndListFilterSelector2' jsId='dndListFilterSelector2' width='100%' dojotype='dojo.dnd.Source' withhandles='true' data-dojo-props='accept: [ \"tableauBordLeft\",\"tableauBordRight\" ]' >";
+   }
   echo "<tr style='height:22px;'>";
   if ($context!='directFilterList') {
   	echo "<td class='filterHeader' style='width:699px;'>" . i18n("storedFilters") . "</td>";
