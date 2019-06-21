@@ -203,7 +203,7 @@ abstract class SqlElement {
           "Ticket" => "control"), 
       "Contact" => array(
           "Activity" => "controlStrict", 
-          "Affectation" => "control", 
+          "Affectation" => "confirm", 
           "Bill" => "controlStrict", 
           "Product" => "controlStrict", 
           "Project" => "controlStrict", 
@@ -378,7 +378,7 @@ abstract class SqlElement {
       "Resource" => array(
           "Action" => "controlStrict", 
           "Activity" => "controlStrict", 
-          "Affectation" => "control", 
+          "Affectation" => "confirm", 
           "Assignment" => "control", 
           "CallForTender" => "controlStrict", 
           "Decision" => "controlStrict", 
@@ -465,7 +465,7 @@ abstract class SqlElement {
       "User" => array(
           "Action" => "controlStrict", 
           "Activity" => "controlStrict", 
-          "Affectation" => "control", 
+          "Affectation" => "confirm", 
           "Attachment" => "control", 
           "Command" => "controlStrict", 
           "Decision" => "controlStrict", 
