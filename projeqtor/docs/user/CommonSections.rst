@@ -12,17 +12,14 @@ Common sections
 ***************
 
 Some sections are displayed on almost all screens in the detail area.
+
 Those sections allows to set information or add information to an item of the element.
 
-.. figure:: /images/GUI/common_section.png
+.. figure:: /images/GUI/COMMON_SCR_CommonSection.png
 
-.. contents::
-   :depth: 1
-   :local: 
-   :backlinks: top
+-------------------------------
 
-Description section
--------------------
+.. rubric:: Description section
 
 This section allows to identify items of the element.
 
@@ -43,8 +40,7 @@ This section allows to identify items of the element.
 
     \newpage
 
-Treatment section
------------------
+.. rubric:: Treatment section
 
 This section contains information about item treatment.
 
@@ -70,8 +66,7 @@ Depending on the element, this section  may have a different name.
 
 .. _allocation-section:
 
-Allocations section
--------------------
+.. rubric:: Allocations section
 
 .. sidebar:: Concepts 
 
@@ -119,7 +114,7 @@ This section allows to manage resource allocation to projects.
 
 .. _allocation-box:
 
-.. figure:: /images/GUI/BOX_Affectation.png
+.. figure:: /images/GUI/COMMON_BOX_Affectation.png
    :alt: Dialog box - Allocation
    :align: center
 
@@ -150,20 +145,20 @@ This section allows to manage resource allocation to projects.
 
 **\* Required field**
 
-.. topic:: Fields: Project & Resource
+.. topic:: Fields Project & Resource
  
    * If the allocation is done on the screen «Projects», the field «resource» will be selectable.
    * If the allocation is done on the screens «Resources», «Contacts» or «Users», the field «project» will be selectable.
 
-.. topic:: Field: Resource
+.. topic:: Field Resource
 
    * This field can contain a list of users, resources or contacts according to which screen comes from project allocation.
 
-.. topic:: Field: Profile
+.. topic:: Field Profile
 
    * The user profile defined will be displayed first. 
 
-.. topic:: Field: Rate
+.. topic:: Field Rate
 
    * 100% means a full time allocation.
 
@@ -187,7 +182,7 @@ This section allows to manage resource allocation to projects.
 
    * Work done on tasks belongs to always the old resource.
 
-.. figure:: /images/GUI/BOX_ReplaceAffectation.png
+.. figure:: /images/GUI/COMMON_BOX_ReplaceAffectation.png
    :alt: Dialog box - Replace allocation 
    :align: center
 
@@ -265,7 +260,7 @@ This section allows to manage assignment of resources to tasks.
 * The scheduling process tries to schedule, the remaining work on the assigned task within the allocation to project period.
 * The remaining work that can't be planned is displayed on the right of the resource name.
 
-.. figure:: /images/GUI/ZONE_AssignmentSectionWithNotPlannedWork.png
+.. figure:: /images/GUI/COMMON_ZONE_AssSection-NotPlannedWork.png
    :alt: Assignment section with incomplete planned work
    :align: center
 
@@ -304,7 +299,7 @@ This section allows to manage assignment of resources to tasks.
 
    * If real work exists for an assignment, it can not be deleted.
 
-.. figure:: /images/GUI/BOX_Assignment.png
+.. figure:: /images/GUI/COMMON_BOX_Assignment.png
    :alt: Dialog box - Assignment 
    :align: center
 
@@ -1072,7 +1067,7 @@ Allows tracking of tickets attached to the activity throught the "planning activ
 * Click on |buttonIconSearch| to show ticket list attached to the activity.
 * Click on a ticket name to directly move to it.
 
-.. figure:: /images/GUI/BOX_ListOfTicket.png
+.. figure:: /images/GUI/COMMON_BOX_ListOfTicket.png
    :alt: Dialog box - List of tickets 
    :align: center
 
@@ -1232,7 +1227,7 @@ A dependency link can be created from a planning element (Predecessor) and to a 
 * Click on |buttonEdit| to edit the dependency link.
 * Click on |buttonIconDelete| to delete the corresponding dependency link. 
 
-.. figure:: /images/GUI/BOX_PredecessorSuccessorElement.png
+.. figure:: /images/GUI/COMMON_BOX_PredSuccess.png
    :alt: Dialog box - Predecessor or Successor element
    :align: center
 
@@ -1317,7 +1312,7 @@ This section allows to manage link between items of elements.
 * Click |buttonAdd| to create a new link.
 * Click on |buttonIconDelete| to delete the corresponding link.
 
-.. figure:: /images/GUI/BOX_AddLink.png
+.. figure:: /images/GUI/COMMON_BOX_AddLink.png
    :alt: Dialog box - Add a link with element 
    :align: center
 
@@ -1418,7 +1413,7 @@ This section allows to attach files or hyperlinks to items of elements.
         * Attached files are stored on server side.
         * Attachments directory is defined in :ref:`Global parameters <file-directory-section>` screen.
 
-    .. figure:: /images/GUI/BOX_attachmentFile.png
+    .. figure:: /images/GUI/COMMON_BOX_attachmentFile.png
        :alt: Dialog box - Attachment for file
        :align: center
 
@@ -1433,7 +1428,7 @@ This section allows to attach files or hyperlinks to items of elements.
 
 
 
-    .. figure:: /images/GUI/BOX_attachmentHyperLink.png
+    .. figure:: /images/GUI/COMMON_BOX_attachmentHyperLink.png
        :alt: Dialog box - Attachment for hyperlink 	
        :align: center
 
@@ -1514,6 +1509,6 @@ Notes are comments, that can be shared to track some information or progress.
 * Click on |buttonEdit| to edit the note.
 * Click on |buttonIconDelete| to delete the note.
 
-.. figure:: /images/GUI/BOX_Note.png
+.. figure:: /images/GUI/COMMON_BOX_Note.png
    :alt: Dialog box - Note 
    :align: center

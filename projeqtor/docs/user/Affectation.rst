@@ -4,30 +4,27 @@
 
 .. title:: Allocations
 
-.. index:: ! Allocation
+.. index:: ! Allocations
 
-.. _allocation:
+.. _ allocation:
 
 Allocations
-------------
+***********
 
 
 .. sidebar:: Concepts 
 
+   * :ref:`allocation-to-project`
    * :ref:`profiles-definition`
    * :ref:`user-ress-contact-demystify`
-   * :ref:`allocation-to-project`
-
 
 Allows to manage allocations to project.
 
 Offers a global view of allocation.
 
-.. hint::
- 
-   * You can use filters. 
-
-.. rubric:: Section: Description
+.. figure:: /images/GUI/ENVPARAM_SCR_AllocationProject.png
+   :alt: Allocation to project
+   :align: center
 
 
 .. tabularcolumns:: |l|l|
@@ -59,9 +56,9 @@ Offers a global view of allocation.
    * - :term:`Description`
      - Complete description of the allocation.
 
-**\* Required field**
+\* Required field
 
-.. topic:: Fields: Resource & Contact
+.. topic:: Fields Resource & Contact
 
    * You can select resource or contact.
    * If none is selected then the user connected is used to define the allocation.
