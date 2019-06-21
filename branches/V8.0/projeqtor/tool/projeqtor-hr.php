@@ -447,7 +447,9 @@ function initPurgeLeaveSystemElements($leavesSystemActiv) {
                                         getLastOperationStatus($result));
         }    
         // Update : Resource = set isEmployee = 0 if isEmployee = 1
-        $update = "UPDATE Resource SET isEmployee=0 WHERE isEmployee=1";
+        $res=new Resource();
+        $resTable=$res->getDatabaseTableName();
+        $update = "UPDATE $resTable SET isEmployee=0 WHERE isEmployee=1";
         $res = Sql::query($update);
         if (!$res) {
             traceLog("InitLeaveSystemElement - ERROR on QUERY = ".$update);
