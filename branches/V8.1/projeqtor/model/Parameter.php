@@ -157,11 +157,17 @@ class Parameter extends SqlElement {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  newValue=this.value;';
       $colScript .= '  if (newValue=="YES" || newValue=="true") {';
-      $colScript .= '    dojo.addClass(dojo.byId("SAML_idpId"), "required");';
-      $colScript .= '    dojo.addClass(dojo.byId("SAML_idpCert"), "required");';
-      $colScript .= '    dojo.addClass(dojo.byId("SAML_SingleSingOnService"), "required");';
-      $colScript .= '    dojo.addClass(dojo.byId("SAML_SingleLogoutService"), "required");';
-      $colScript .= '    dojo.addClass(dojo.byId("SAML_attributeUserId"), "required");';
+      $colScript .= '    dojo.addClass(dijit.byId("SAML_idpId").domNode, "required");';
+      $colScript .= '    dojo.addClass(dijit.byId("SAML_idpCert").domNode, "required");';
+      $colScript .= '    dojo.addClass(dijit.byId("SAML_SingleSignOnService").domNode, "required");';
+      $colScript .= '    dojo.addClass(dijit.byId("SAML_SingleLogoutService").domNode, "required");';
+      $colScript .= '    dojo.addClass(dijit.byId("SAML_attributeUid").domNode, "required");';
+      $colScript .= '  } else {';
+      $colScript .= '    dojo.removeClass(dijit.byId("SAML_idpId").domNode, "required");';
+      $colScript .= '    dojo.removeClass(dijit.byId("SAML_idpCert").domNode, "required");';
+      $colScript .= '    dojo.removeClass(dijit.byId("SAML_SingleSignOnService").domNode, "required");';
+      $colScript .= '    dojo.removeClass(dijit.byId("SAML_SingleLogoutService").domNode, "required");';
+      $colScript .= '    dojo.removeClass(dijit.byId("SAML_attributeUid").domNode, "required");';
       $colScript .= '  } ';
       $colScript .= '</script>';
     } else {
