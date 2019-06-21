@@ -246,7 +246,7 @@ if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMo
       $auth->login();
     } else { // Too many tries, get to ProjeQtOr Login screen
       $user=null;
-      $errorSSO=i18n("ssoConnectionFailed");
+      $errorSSO=i18n("ssoConnectionFailed",array(SSO::getCommonName()));
       SSO::resetTry();
     }
   	SSO::unsetAvoidSSO();
