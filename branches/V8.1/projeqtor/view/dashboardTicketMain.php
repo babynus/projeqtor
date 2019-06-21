@@ -32,14 +32,14 @@
   $user=getSessionUser();
   $nbDay=7;
  //FLORENT
- $valFil = RequestHandler::getValue('filterSynthesis');
+  $valFil = RequestHandler::getValue('filterSynthesis');
   if(isset($valFil)){
     if($valFil!=Parameter::getUserParameter("filterSynthesis") ){
       if(Parameter::getUserParameter("filterSynthesis")!=null){
         $valFil="1";
       }
-        Parameter::storeUserParameter("filterSynthesis", $valFil);
-        $valFil="0";
+      Parameter::storeUserParameter("filterSynthesis", $valFil);
+      $valFil="0";
       if(Parameter::getUserParameter("dashboardTicketMainTabPosition")){
         $tabPosition=Parameter::getUserParameter("dashboardTicketMainTabPosition");
         $tabPosition=json_decode($tabPosition,true);
@@ -47,16 +47,16 @@
         Parameter::storeUserParameter("dashboardTicketMainTabPosition", json_encode($tabPosition));
       }
     }else{
-        $valFil="0";
-        Parameter::storeUserParameter("filterSynthesis", $valFil);
-        $valFil="1";
-        if(Parameter::getUserParameter("dashboardTicketMainTabPosition")){
-          $tabPosition=Parameter::getUserParameter("dashboardTicketMainTabPosition");
-          $tabPosition=json_decode($tabPosition,true);
-          $tabPosition['Status']['withParam']=$valFil;
-          Parameter::storeUserParameter("dashboardTicketMainTabPosition", json_encode($tabPosition));
-        }
+      $valFil="0";
+      Parameter::storeUserParameter("filterSynthesis", $valFil);
+      $valFil="1";
+      if(Parameter::getUserParameter("dashboardTicketMainTabPosition")){
+        $tabPosition=Parameter::getUserParameter("dashboardTicketMainTabPosition");
+        $tabPosition=json_decode($tabPosition,true);
+        $tabPosition['Status']['withParam']=$valFil;
+        Parameter::storeUserParameter("dashboardTicketMainTabPosition", json_encode($tabPosition));
       }
+    }
   }
   //END
   
@@ -86,7 +86,7 @@
       "TargetProductVersion":{"title":"dashboardTicketMainTitleTargetVersion","withParam":true,"idle":true},
       "Contact":{"title":"dashboardTicketMainTitleUser","withParam":true,"idle":true},
       "Resource":{"title":"dashboardTicketMainTitleResponsible","withParam":true,"idle":true},
-      "Status":{"title":"dashboardTicketMainTitleStatus","withParam":true,"idle":true}
+      "Status":{"title":"dashboardTicketMainTitleStatus","withParam":false,"idle":true}
       }
       ';
       Parameter::storeUserParameter("dashboardTicketMainTabPosition", $tabPosition);
