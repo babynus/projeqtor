@@ -279,7 +279,7 @@ function initPurgeLeaveSystemElements($leavesSystemActiv) {
         }    
         // Type of scope Activity and code = 'LEAVESYST'
         $tp = new Type();
-        $where = 'scope="Activity" AND code="LEAVESYST"';
+        $where = "scope='Activity' AND code='LEAVESYST'";
         $result = $tp->purge($where);
         if (getLastOperationStatus($result)!="OK") {
             traceLog("InitLeaveSystemElement - Purge Type where $where");
