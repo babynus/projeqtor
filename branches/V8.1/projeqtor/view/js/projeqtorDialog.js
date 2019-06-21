@@ -653,9 +653,6 @@ function selectDetailItem(selectedValue, lastSavedName) {
       critVal=prj.get("value");
     }
   }
-  console.log(comboName);
-  console.log(comboClass);
-  console.log(idFldVal);
   if (comboName != 'idStatus'  && comboName != 'versionsPlanningDetail' && comboName != 'projectSelectorFiletering' && (comboName != 'filterValueList' && comboClass !='Project')) { 
     if (combo) {
       refreshList('id' + comboClass, crit, critVal, idFldVal, comboName);

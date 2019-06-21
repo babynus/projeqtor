@@ -399,7 +399,6 @@ function resetFilter(lstStat){
  var notDef;
  var i=0;
  for(i=1;i<=lstStat;i++){
-   console.log('la'+i);
    if(dijit.byId('showStatus'+i)){
      dijit.byId('showStatus'+i).set('checked',false);
    }
