@@ -118,7 +118,7 @@
             	$topMsg+=20;
             }
             if (SSO::isEnabled()) {
-            	echo i18n('ssoChangePasswordMessage').'<br/>';
+            	echo i18n('ssoChangePasswordMessage',array(SSO::getCommonName())).'<br/>';
             	$topMsg+=40;
             }
             ?> 
