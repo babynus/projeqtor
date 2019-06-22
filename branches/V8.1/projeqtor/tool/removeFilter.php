@@ -53,8 +53,8 @@ echo '</td></tr></table>';
 
 $flt=new Filter();
 $crit=array('idUser'=> $user->id, 'refType'=>$filterObjectClass );
-$orderBy = "sortOrder ASC";
-$filterList=$flt->getSqlElementsFromCriteria($crit,false,null,$orderBy);;
+$orderByFilter = "sortOrder ASC";
+$filterList=$flt->getSqlElementsFromCriteria($crit,false,null,$orderByFilter);;
 htmlDisplayStoredFilter($filterList,$filterObjectClass);
 Sql::commitTransaction();
 ?>

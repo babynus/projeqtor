@@ -900,9 +900,9 @@ function getFieldsOfFirstRulableItem(){
 function getLeavesSystemMenu() {
     if (!sessionValueExists("leavesSystemMenus")) {
         $crit = array ("isLeavesSystemMenu" => '1');
-        $orderBy = "sortOrder ASC";
+        $orderByLeaves = "sortOrder ASC";
         $menu = new Menu();
-        $menusList = $menu->getSqlElementsFromCriteria($crit,false,null,$orderBy,false,true);
+        $menusList = $menu->getSqlElementsFromCriteria($crit,false,null,$orderByLeaves,false,true);
         setSessionValue('leavesSystemMenus', $menusList);
     } else {    
         $menusList = getSessionValue("leavesSystemMenus");
