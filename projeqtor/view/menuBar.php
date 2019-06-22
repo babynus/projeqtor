@@ -221,7 +221,7 @@
       <span class="titleProject" style="position: relative; left:20px; top:-6px; text-align:right;">
         &nbsp;<?php echo (i18n("projectSelector"));?>&nbsp;:&nbsp;
       </span>
-      <span style="display:inline-block;width:170px; position:relative;left : 10px; top:-6px" title="<?php echo i18n("projectSelectorHelp");?>" >
+      <span style="display:inline-block;width:250px; position:relative;left : 10px; top:-6px" title="<?php echo i18n("projectSelectorHelp");?>" >
         <span style="postion:absolute;height:16px;" dojoType="dijit.layout.ContentPane" region="center"   id="projectSelectorDiv">
           &nbsp;<?php include "menuProjectSelector.php"?>
         </span>

@@ -357,25 +357,25 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
           $restrictArray[0]=0;
         }
       }
-      if(Parameter::getUserParameter("restrictProjectList")=="true" and getSessionValue("project") and getSessionValue("project")!='*') {
+      if(Parameter::getUserParameter("restrictProjectList")=="true" and Project::getSelectedProject(true,false)) {
         $class=get_class($obj);
-        $selectedProj = getSessionValue("project");
-        $arrayProj = array();
-        if(strpos($selectedProj, ',') != -1){
-          $arrayProj = explode(',', $selectedProj);
-        }
-        if($arrayProj){
-          foreach ($arrayProj as $idProj){
-            $proj = new Project($idProj);
-            $lstProjChild = $proj->getRecursiveSubProjectsFlatList(true,true);
-            foreach ($lstProjChild as $id=>$name){
-              $lstChild[$id]=$name;
-            }
-          }
-        }else{
+        //$selectedProj = getSessionValue("project");
+        $arrayProj = Project::getSelectedProjectList();
+        //if(strpos($selectedProj, ',') != -1){
+        //  $arrayProj = explode(',', $selectedProj);
+        //}
+        //if($arrayProj){
+        foreach ($arrayProj as $idProj){
           $proj = new Project($idProj);
-          $lstChild = $proj->getRecursiveSubProjectsFlatList(true,true);
+          $lstProjChild = $proj->getRecursiveSubProjectsFlatList(true,true);
+          foreach ($lstProjChild as $id=>$name){
+            $lstChild[$id]=$name;
+          }
         }
+        //}else{
+        //  $proj = new Project($idProj);
+        //  $lstChild = $proj->getRecursiveSubProjectsFlatList(true,true);
+        //}
         if (count($restrictArray)>0) {
           $restrictArray=array_intersect_assoc($restrictArray,$lstChild);
         } else {
