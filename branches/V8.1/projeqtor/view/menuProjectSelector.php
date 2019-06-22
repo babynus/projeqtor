@@ -53,11 +53,11 @@ if (sessionValueExists('projectSelectorDisplayMode')) {
 }
 ?>
 <?php if ($displayMode=='standard') {?>
-<span maxsize="160px" style="position: absolute; left:0px; top:0px; height: 20px; width: 165px; color:#202020;" 
+<span maxsize="160px" style="position: absolute; left:0px; top:0px; height: 20px; width: 241px; color:#202020;" 
   dojoType="dijit.form.DropDownButton" 
   id="selectedProject" jsId="selectedProject" name="selectedProject" showlabel="true" class="">
-  <span style="width:140px; text-align: left;">
-    <div style="width:140px; overflow: hidden; text-align: left;" >
+  <span style="width:220px; text-align: left;">
+    <div style="width:220px; overflow: hidden; text-align: left;" >
     <?php
 if ($proj=='*') {
   echo '<i>' . i18n('allProjects') . '</i>';
@@ -94,7 +94,7 @@ if ($proj=='*') {
      <?php htmlDrawOptionForReference("idProject", $proj, null, true,null, null, $limitToActiveProjects);?>
    </div>
    <input type="hidden" id="projectSelectorMode" value="Standard" />
-   <div style="text-align:left;position:absolute; top:1px; left:201px; padding:0px;">
+   <div style="text-align:left;position:absolute; top:1px; left:281px; padding:0px;">
       <button id="projectSelectorComboButton" dojoType="dijit.form.Button" showlabel="false " style="position: relative; left:26px; top:-1px; height: 20px"
          title="<?php echo i18n('searchProject');?>" iconClass="iconView">
          <script type="dojo/connect" event="onClick" args="evt">        
@@ -104,7 +104,7 @@ if ($proj=='*') {
 	</div>
 <?php } else if ($displayMode=='select') {?>
 <select dojoType="dijit.form.FilteringSelect" class="input" 
-   style="position: absolute; left:4px; top:1px; width: 165px;height:22px;" 
+   style="position: absolute; left:4px; top:1px; width: 241px;height:22px;" 
    <?php echo autoOpenFilteringSelect();?>
    name="projectSelectorFiletering" id="projectSelectorFiletering" >
    <script type="dojo/connect" event="onChange" args="evt">
@@ -116,7 +116,7 @@ if ($proj=='*') {
    <?php htmlDrawOptionForReference("idProject", $proj, null, true,null, null, $limitToActiveProjects);?>
 </select>
 <input type="hidden" id="projectSelectorMode" value="Filtering" />
-   <div style="text-align:left;position:absolute; top:1px; left:201px; padding:0px;">
+   <div style="text-align:left;position:absolute; top:1px; left:281px; padding:0px;">
       <button id="projectSelectorComboButton" dojoType="dijit.form.Button" showlabel="false " style="position: relative; left:26px; top:-1px; height: 20px"
          title="<?php echo i18n('searchProject');?>" iconClass="iconView">
          <script type="dojo/connect" event="onClick" args="evt">        
@@ -125,7 +125,7 @@ if ($proj=='*') {
        </button>
 	</div>
 <?php } else if($displayMode=="search") {?>
-<select id="projectSelectorFiletering" data-dojo-type="dijit.form.FilteringSelect" class="input" style="position: absolute; left:4px; top:1px; width: 165px;height:22px;"  
+<select id="projectSelectorFiletering" data-dojo-type="dijit.form.FilteringSelect" class="input" style="position: absolute; left:4px; top:1px; width: 241px;height:22px;"  
 <?php echo autoOpenFilteringSelect();?>
 name="projectSelectorFiletering" 
     data-dojo-props="
@@ -140,7 +140,7 @@ name="projectSelectorFiletering"
    <?php htmlDrawOptionForReference("idProject", $proj, null, true,null, null, $limitToActiveProjects);?>  
 </select>
 	<input type="hidden" id="projectSelectorMode" value="Filtering" />
-   <div style="text-align:left;position:absolute; top:1px; left:201px; padding:0px;">
+   <div style="text-align:left;position:absolute; top:1px; left:281px; padding:0px;">
       <button id="projectSelectorComboButton" dojoType="dijit.form.Button" showlabel="false " style="position: relative; left:26px; top:-1px; height: 20px"
          title="<?php echo i18n('searchProject');?>" iconClass="iconView">
          <script type="dojo/connect" event="onClick" args="evt">        

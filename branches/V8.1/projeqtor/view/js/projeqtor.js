@@ -2735,11 +2735,15 @@ function setSelectedProject(idProject, nameProject, selectionField,resetPrevious
 				dijit.byId('checkBoxProj'+element).set('checked', true);
 			});
 		}
+	} else {
+	  arraySelectedProject.forEach(function(element){
+      dijit.byId('checkBoxProj'+element).set('checked', false);
+    });
 	}
   if (selectionField) {
     dijit.byId(selectionField).set(
         "label",
-        '<div style="width:140px; overflow: hidden;text-align: left;" >'
+        '<div style="width:220px; overflow: hidden;text-align: left;" >'
             + nameProject + '</div>');
   }
   if (resetPrevious) {
@@ -2783,8 +2787,10 @@ function setSelectedProject(idProject, nameProject, selectionField,resetPrevious
     };
     saveDataToSession('project', idProject, null, callBack);
   }
-  if (idProject != "" && idProject != "*" && dijit.byId("idProjectPlan")) {
-    dijit.byId("idProjectPlan").set("value", idProject);
+  console.log(idProject);
+  if (idProject != "" && dijit.byId("idProjectPlan")) {
+    if (idProject == "*" ) dijit.byId("idProjectPlan").set("value", 0);
+    else dijit.byId("idProjectPlan").set("value", idProject);
   }
   if (selectionField) {
     dijit.byId(selectionField).closeDropDown();

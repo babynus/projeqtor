@@ -1317,9 +1317,9 @@ static function isTheLeaveProject($id=null) {
     }
   }
   public static function getSelectedProjectList() {
-    $proj=getSelectedProject(true,false);
+    $proj=self::getSelectedProject(true,false);
     $projList=explode(',',$proj);
-    return $proj;
+    return $projList;
   }
 }
 ?>
