@@ -1468,9 +1468,9 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
       } else if ($obj->parameterCode=='defaultProject') {
         $prj=new Project ($obj->parameterValue);
         if ($prj->name!=null and $prj->name!='') {
-          setSessionValue('project', $obj->parameterValue);
+          Project::setSelectedProject($obj->parameterValue);
         } else {
-          setSessionValue('project', '*');
+          Project::setSelectedProject('*');
         }
       } else if (substr($obj->parameterCode,0,6)=='Filter') {
         if (! $this->_arrayFilters) {
@@ -1729,7 +1729,7 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
   	}
   
   	if (property_exists($obj,'idProject')) {
-  		if (getSessionValue('project')=='*'){
+  		if (Project::getSelectedProject(false,false)=='*'){
   			$resultAnd.= " and ($table.idProject in " . getVisibleProjectsList(! $showIdleProjects). " or $table.idProject is null)";
   		}
   		$monTab = getVisibleProjectsList(! $showIdleProjects);

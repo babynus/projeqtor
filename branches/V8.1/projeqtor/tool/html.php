@@ -359,12 +359,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       }
       if(Parameter::getUserParameter("restrictProjectList")=="true" and Project::getSelectedProject(true,false)) {
         $class=get_class($obj);
-        //$selectedProj = getSessionValue("project");
         $arrayProj = Project::getSelectedProjectList();
-        //if(strpos($selectedProj, ',') != -1){
-        //  $arrayProj = explode(',', $selectedProj);
-        //}
-        //if($arrayProj){
         foreach ($arrayProj as $idProj){
           $proj = new Project($idProj);
           $lstProjChild = $proj->getRecursiveSubProjectsFlatList(true,true);
@@ -372,10 +367,6 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
             $lstChild[$id]=$name;
           }
         }
-        //}else{
-        //  $proj = new Project($idProj);
-        //  $lstChild = $proj->getRecursiveSubProjectsFlatList(true,true);
-        //}
         if (count($restrictArray)>0) {
           $restrictArray=array_intersect_assoc($restrictArray,$lstChild);
         } else {

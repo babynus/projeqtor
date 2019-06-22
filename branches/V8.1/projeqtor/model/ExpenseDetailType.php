@@ -74,7 +74,7 @@ class ExpenseDetailType extends SqlElement {
                                                    'unit01'=>'unit', 
                                                    'unit02'=>'unit',
                                                    'unit03'=>'unit',
-                                                   'project'=>'projectExpense',
+                                                   "project"=>'projectExpense',
                                                    'individual'=>'individualExpense');
    /** ==========================================================================
    * Constructor
