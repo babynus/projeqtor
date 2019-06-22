@@ -5182,11 +5182,11 @@ abstract class SqlElement {
     $url.= ($port!='80' and $port!='443')?':'.$port:'';
     $url.= $uri;
     $ref = "";
-    if (strpos ( $url, '/tool/' )) {
-      $ref .= substr ( $url, 0, strpos ( $url, '/tool/' ) );
-    } else if (strpos ( $url, '/view/' )) {
+    if (strpos ( $url, '/view/' )) { // Attention, to give correct url for csv export, view must be first
       $ref .= substr ( $url, 0, strpos ( $url, '/view/' ) );
-    } else if (strpos ( $url, '/report/' )) {
+    } else if (strpos ( $url, '/tool/' )) {
+      $ref .= substr ( $url, 0, strpos ( $url, '/tool/' ) );
+    } else  if (strpos ( $url, '/report/' )) {
       $ref .= substr ( $url, 0, strpos ( $url, '/report/' ) );
     } else if (strpos ( $url, '/sso/projeqtor/' )) {
       $ref .= substr ( $url, 0, strpos ( $url, '/sso/projeqtor/' ) );
