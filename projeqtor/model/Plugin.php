@@ -40,10 +40,12 @@ class Plugin extends SqlElement {
     private static $_triggeredEventList;
     private static $_pluginButtonList;
     private static $pluginRequiredVersion=array(
-        "V6.0.6"=>array("screenCustomization"=>"3.1",
-        "V8.1.0"=>array("templateReport"=>"2.1")
-        )
+        "V6.0.6"=>array("screenCustomization"=>"3.1"),
+        "V8.1.0"=>array("templateReport"=>"2.1",
+                        "kanban"=>"4.1")
     );
+    private static $_activePluginList;
+    private static $_lastVersionPluginList;
     
     function __construct() {
     }
@@ -389,10 +391,30 @@ class Plugin extends SqlElement {
     }
     
     public static function getActivePluginList() {
+      if (self::$_activePluginList) return self::$_activePluginList;
       // Retreive list from database
       $plugin=new Plugin();
       $pluginList=$plugin->getSqlElementsFromCriteria(array('idle'=>'0'),false,null,null,true);
+      self::$_activePluginList=$pluginList;
       return $pluginList;
+    }
+    public static function getLastVersionPluginList() {
+       if (self::$_lastVersionPluginList) return self::$_lastVersionPluginList;
+       $result=array();
+       $plugin=new Plugin();
+       $pluginList=$plugin->getSqlElementsFromCriteria(null,false,null,'id asc',true);
+       foreach ($pluginList as $plg) {
+         $result[$plg->name]=$plg;
+       }
+       self::$_lastVersionPluginList=$result;
+       return $result;
+    }
+    public static function isPluginEnabled($pluginName) {
+      $listPlugin=self::getLastVersionPluginList();
+      if (!isset($listPlugin[$pluginName])) return false;
+      $plg=$listPlugin[$pluginName];
+      if ($plg->idle) return false;
+      return true;
     }
     
     public static function getInstalledPluginNames() {
@@ -596,7 +618,7 @@ class Plugin extends SqlElement {
               $plg->save();
               echo '<div class="messageWARNING">';
               traceLog("=== PLUGIN COMPATIBILITY ISSUE =====================================");
-              echo "Plugin $namePlg version $plg->pluginVersion<br/>is not compatible with ProjeQtOr $version.<br/>";
+              echo "Plugin <b>$namePlg</b> version $plg->pluginVersion<br/>is not compatible with ProjeQtOr $version.<br/>";
               traceLog("Plugin $namePlg version $plg->pluginVersion is not compatible with ProjeQtOr $version.");
               echo "It has been desactivated.<br/>Please install version $versPlgRequired or over.";
               traceLog("It has been desactivated. Please install version $versPlgRequired or over.");
@@ -611,17 +633,20 @@ class Plugin extends SqlElement {
       $version=Sql::getDbVersion();
       $plgName=$this->name;
       $plgVersion=$this->pluginVersion;
+      $result="";
       foreach (self::$pluginRequiredVersion as $versTest=>$plugins) {
         if (self::afterVersion($version,$versTest)) {
           foreach ($plugins as $compPlgName=>$compPlgVersion) {
             if ($compPlgName==$plgName) {
               if (beforeVersion($plgVersion, $compPlgVersion)) {
-                return i18n("pluginNotCompatibleWithCurrentVersion",array($plgName,$plgVersion,$version,$compPlgVersion));
+                //$result.=($result!="")?'<br/>':''; // Will display only lkast version to install
+                $result=i18n("pluginNotCompatibleWithCurrentVersion",array("<b>$plgName</b>",$plgVersion,$version,$compPlgVersion));
               }
             }
           }
         }
       }
+      if ($result) return $result;
       return "OK";
     }
     
