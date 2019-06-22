@@ -1321,5 +1321,8 @@ static function isTheLeaveProject($id=null) {
     $projList=explode(',',$proj);
     return $projList;
   }
+  public static function setSelectedProject($proj){
+    setSessionValue('project', $proje);
+  }
 }
 ?>
