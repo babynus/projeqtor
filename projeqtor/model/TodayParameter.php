@@ -108,11 +108,6 @@ class TodayParameter extends SqlElement {
       } else if ($param->paramType=='projectList') {
         $defaultValue='';
         if ($param->defaultValue=='currentProject') {       
-//           if (sessionValueExists('project')) {
-//             if (getSessionValue('project')!='*') {
-//               $defaultValue=getSessionValue('project');
-//             }
-//           }
           $defaultValue=Project::getSelectedProject(true,true);
         } else if ($param->defaultValue) {
           $defaultValue=$param->defaultValue; 
@@ -144,7 +139,7 @@ class TodayParameter extends SqlElement {
       } else if ($param->paramType=='resourceList') {
         $defaultValue='';
         if ($param->defaultValue=='currentResource') {
-          if (sessionValueExists('project')) {
+          if (Project::isSelectedProject) {
             $user=getSessionUser();
             $defaultValue=$user->id;
           }

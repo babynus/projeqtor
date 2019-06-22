@@ -1258,7 +1258,7 @@ class PlanningElement extends SqlElement {
       	if (property_exists($task, 'idActivity')) {
       		$task->idActivity=null;
       	}
-      	$changeParent='project';
+      	$changeParent="project";
       	$status="OK";
       } else if ($dest->topRefType=="Activity" and property_exists($task, 'idActivity')) {  // Move under (new) activity
       	$task->idProject=$dest->idProject;   // Move to same project
@@ -1298,7 +1298,7 @@ class PlanningElement extends SqlElement {
     		$pe->moveTo($destId,$mode,true);
     		$returnValue=i18n('moveDone');
     		// Must renumber old parent...
-     		if ($changeParent=='project' and !$oldParentId) {
+     		if ($changeParent=="project" and !$oldParentId) {
      		  $oldParent=new PlanningElement();
      		  $oldParent->renumberWbs(true);
      		}

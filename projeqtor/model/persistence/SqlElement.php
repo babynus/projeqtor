@@ -5911,7 +5911,7 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
       } else if ($property == 'goto') {
         $goto = $this->getReferenceUrl ();
         return '<a href="' . $goto . '">'.i18n(get_class($this)) . ' #' . $this->id . '</a>';
-      } else if ($property == 'project') {
+      } else if ($property == "project") {
         if (property_exists($this, 'idProject')) {
           return SqlList::getNameFromId('Project', $this->idProject);
         } else {
