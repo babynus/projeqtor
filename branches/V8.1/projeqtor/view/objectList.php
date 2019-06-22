@@ -763,7 +763,7 @@ if (property_exists($objectClass,'idStatus')) {
 <?php }?>            
 <?php if (! $comboDetail) {?> 
 <?php   $modePdf='Pdf';
-        if (SqlElement::class_exists('TemplateReport')) {
+        if (SqlElement::class_exists('TemplateReport') and Plugin::isPluginEnabled('templateReport')) {
           $tmpMode=TemplateReport::getMode($objectClass,null,'list');
           if ($tmpMode=='multi') {$modePdf='download multi';}
           else if ($tmpMode=='download' or $tmpMode=='show') {$modePdf='download';}

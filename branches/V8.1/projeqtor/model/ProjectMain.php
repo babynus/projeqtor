@@ -1288,5 +1288,38 @@ static function isTheLeaveProject($id=null) {
       unset($this->_spe_restrictTypes);
     }
   }
+  
+  public static function getSelectedProject($clearStarForAll=false,$clearMultiSelection=false) {
+    $proj=null;
+    if (sessionValueExists('project')) {
+      $proj=getSessionValue('project');
+    }
+    if ($clearStarForAll and $proj=='*') $proj=null; // Selected = all
+    if ($clearMultiSelection and strpos($proj,',')!==null) $proj=null; // Selected = multi
+    return $proj;
+  }
+  public static function isSelectedProject() {
+    if (sessionValueExists('project')) {
+      $proj=getSessionValue('project');
+      if ($proj=='*' or !$proj) return false;
+      else return true;
+    } else {
+      return false;
+    }
+  }
+  public static function isSelectedProjectMultiple() {
+    if (sessionValueExists('project')) {
+      $proj=getSessionValue('project');
+      if (strpos($proj,',')!==null) return true;
+      else return false;
+    } else {
+      return false;
+    }
+  }
+  public static function getSelectedProjectList() {
+    $proj=getSelectedProject(true,false);
+    $projList=explode(',',$proj);
+    return $proj;
+  }
 }
 ?>

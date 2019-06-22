@@ -52,6 +52,7 @@
   
   foreach ($menuList as $menu) {
     if (!isNotificationSystemActiv() and strpos($menu->name, "Notification")!==false) { continue; }
+    if (! $menu->canDisplay() ) { continue;}
     if (!$isLanguageActive and $menu->name=="menuLanguage") { continue; }
     if (!Module::isMenuActive($menu->name)) {continue;}
     if ($level>0 and securityCheckDisplayMenu($menu->id,substr($menu->name,4))) {
