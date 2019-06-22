@@ -132,6 +132,7 @@ var menuData = {
   foreach ($menuList as $menu) {
 // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM  
     if (!$isNotificationSystemActiv and strpos($menu->name, "Notification")!==false) { continue; }
+    if (! $menu->canDisplay() ) { continue;}
 // END - ADD BY TABARY - NOTIFICATION SYSTEM          //echo "id=" . htmlEncode($menu->id) . "     idMenu=" . htmlEncode($menu->idMenu) . "     level=" . $level . "\n";
     if (!$isLanguageActive and $menu->name=="menuLanguage") { continue; }
     if ($level>0 and securityCheckDisplayMenu($menu->id,substr($menu->name,4)) ) {

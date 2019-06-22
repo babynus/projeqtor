@@ -60,5 +60,17 @@ class Menu extends SqlElement {
     parent::__destruct();
   }
     
+  // Will hide menu for disabled plugins
+  public static function canDisplayMenu($menu) {
+    $plgName=lcfirst(substr($menu,4));
+    $listPlugin=Plugin::getLastVersionPluginList();
+    if (!isset($listPlugin[$plgName])) return true;
+    $plg=$listPlugin[$plgName];
+    if ($plg->idle) return false;
+    return true;
+  }
+  public function canDisplay() {
+    return self::canDisplayMenu($this->name);
+  }
 }
 ?>
