@@ -1039,14 +1039,16 @@
           //$pBackground='background:#505050 url(../view/img/grey.png) repeat-x;';
           $pBackground='background-color:#505050;';
         } else {
-        	if ($line['notplannedwork']>0) {        		
+        	if ($line['notplannedwork']>0) {
         		$pColor='#9933CC';
         		$pBackground='background-color:#9933CC;';
         	} else if (trim($line['validatedenddate'])!="" && $line['validatedenddate'] < $pEnd) {
             $pColor='#BB5050';
             //$pBackground='background:#BB5050 url(../view/img/red.png) repeat-x;';
             $pBackground='background-color:#BB5050;';
-          } else  {
+        	} if ($line['surbooked']==1) {
+        	  $pColor="#f4bf42";
+        	} else  {
             $pColor="#50BB50";
             //$pBackground='background:#50BB50 url(../view/img/green.png) repeat-x;';
             $pBackground='background-color:#50BB50;';
