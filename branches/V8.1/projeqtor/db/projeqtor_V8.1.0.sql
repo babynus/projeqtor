@@ -25,6 +25,11 @@ CREATE TABLE `${prefix}resourcesurbooking` (
 
 CREATE INDEX `resourcevariablesurbooking` ON `${prefix}resourcesurbooking` (`idResource`);
 
+ALTER TABLE `${prefix}planningelement` ADD surbooked int(1) DEFAULT 0;
+ALTER TABLE `${prefix}planningelementbaseline` ADD surbooked int(1) DEFAULT 0;
+ALTER TABLE `${prefix}plannedwork` ADD surbooked int(1) DEFAULT 0;
+ALTER TABLE `${prefix}plannedworkbaseline` ADD surbooked int(1) DEFAULT 0;
+
 -- /Flo
 INSERT INTO `${prefix}originable`( `name`, `idle`) VALUES ('DocumentVersion', 0);
 

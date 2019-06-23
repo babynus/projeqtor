@@ -85,6 +85,7 @@ class PlanningElement extends SqlElement {
   public $isOnCriticalPath;
   public $notPlannedWork;
   public $isManualProgress;
+  public $surbooked;
   
   private static $_fieldsAttributes=array(
                                   "id"=>"hidden",
@@ -687,7 +688,7 @@ class PlanningElement extends SqlElement {
       // Otherwise, saving planned data may overwrite real work entered on Timesheet for corresponding items.
       $old=$this->getOld();
       $change=false;
-      $fields=array('plannedStartDate','plannedStartFraction','plannedEndDate','plannedEndFraction','latestStartDate','latestEndDate','isOnCriticalPath','notPlannedWork');
+      $fields=array('plannedStartDate','plannedStartFraction','plannedEndDate','plannedEndFraction','latestStartDate','latestEndDate','isOnCriticalPath','notPlannedWork','surbooked');
       if (property_exists($this,'_profile') and $this->_profile=='RECW' and $this->assignedWork!=$old->assignedWork) {
         $extraFields=array('assignedWork','assignedCost','leftWork','leftCost','plannedWork','plannedCost','progress');
         $fields=array_merge($fields,$extraFields);
