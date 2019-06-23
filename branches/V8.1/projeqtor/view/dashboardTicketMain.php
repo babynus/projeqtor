@@ -113,8 +113,8 @@
     $filterTypesArray = explode(', ', $filterTypes);
   }
   $defaultProject = null;
-  if (sessionValueExists ( 'project' ) and getSessionValue ( 'project' ) != '*') {
-    $defaultProject = getSessionValue ( 'project' );
+  if (Project::getSelectedProject(true,true)) {
+    $defaultProject = Project::getSelectedProject(true,true);
   } else {
     $table = SqlList::getList ( 'Project', 'name', null );
     $restrictArray = array();
