@@ -31,6 +31,7 @@
 require_once('_securityCheck.php');
 class PlannedWork extends GeneralWork {
 
+  public $surbooked;
   public $_noHistory;
   public static $_planningInProgress;
     
@@ -632,6 +633,7 @@ class PlannedWork extends GeneralWork {
         	}
         }
         $plan->notPlannedWork=0;
+        $plan->surbooked=0;
         foreach ($listAss as $ass) {
           if ($ass->notPlannedWork>0) {
             $ass->notPlannedWork=0;
@@ -727,6 +729,7 @@ class PlannedWork extends GeneralWork {
             $ass->plannedWork=$ass->realWork;
           }
           while (1) {
+            $surbooked=0;
             if ($withProjectRepartition and isset($reserved['W'])) {
               //$reserved[type='W']['sum'][idResource][day]+=value
               // $reserved[type='W'][idPE][idResource][day]=value
@@ -754,8 +757,8 @@ class PlannedWork extends GeneralWork {
               $capacity=$r->getSurbookingCapacity($currentDate);
               if ($ress['team']) {
                 $capacityRate=$ass->capacity;
-              } else {
-                $capacityRate=round($assRate*$capacity,2);
+              } else {              
+                $capacityRate=round($assRate*$r->getCapacityPeriod($currentDate),2);
               }
             }
             $week=getWeekNumberFromDate($currentDate);
@@ -1125,6 +1128,7 @@ class PlannedWork extends GeneralWork {
                   }
                 }
                 if ($value>=0.01) {
+                  if ($value+$planned > $r->getCapacityPeriod($currentDate)) $surbooked=1;
                   if ($profile=='FIXED' and $currentDate==$plan->validatedStartDate) {
                     $fractionStart=$plan->validatedStartFraction;
                   } else {
@@ -1138,6 +1142,7 @@ class PlannedWork extends GeneralWork {
                   $plannedWork->refId=$ass->refId;
                   $plannedWork->idAssignment=$ass->id;
                   $plannedWork->work=$value;
+                  if ($surbooked) $plannedWork->surbooked=1;
                   $plannedWork->setDates($currentDate);
                   $arrayPlannedWork[]=$plannedWork;
                   if (! $ass->plannedStartDate or $ass->plannedStartDate>$currentDate) {
@@ -1154,6 +1159,7 @@ class PlannedWork extends GeneralWork {
                   } else if ($plan->plannedStartDate==$currentDate and $plan->plannedStartFraction<$fractionStart) {
                     $plan->plannedStartFraction=$fractionStart;
                   }
+                  if ($surbooked) $plan->surbooked=1;
                   if (! $plan->plannedEndDate or $plan->plannedEndDate<$currentDate) {
                     if ($ass->realEndDate && $ass->realEndDate>$currentDate) {
                   		$plan->plannedEndDate=$ass->realEndDate;

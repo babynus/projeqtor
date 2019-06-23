@@ -128,7 +128,7 @@ while ($dt<=$end) {
   }
   foreach ($ressAll as $ress) {
     if (!isset($variableCapacity[$ress->id])) $variableCapacity[$ress->id]=array();
-    $capa=$ress->getSurbookingCapacity($dt);
+    $capa=$ress->getCapacityPeriod($dt);
     if (! $ress->isResourceTeam) {
       if ($capa!=$ress->capacity) {
         $variableCapacity[$ress->id][$dt]=$capa;
