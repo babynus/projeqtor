@@ -647,13 +647,17 @@ function selectDetailItem(selectedValue, lastSavedName) {
   critVal=null;
   if (comboClass == 'Activity' || comboClass == 'Resource'
       || comboClass == 'Ticket') {
-    prj=dijit.byId('idProject');
-    if (prj) {
-      crit='idProject';
-      critVal=prj.get("value");
-    }
+    if (comboName=='filterValueList') {
+      // Do not set current project (would be project of selected item), will apply restriction to selected project
+    } else {
+      prj=dijit.byId('idProject');
+      if (prj) {
+        crit='idProject';
+        critVal=prj.get("value");
+      }
+    }  
   }
-  if (comboName != 'idStatus'  && comboName != 'versionsPlanningDetail' && comboName != 'projectSelectorFiletering' && (comboName != 'filterValueList' || comboClass !='Project')) { 
+  if (comboName != 'idStatus'  && comboName != 'versionsPlanningDetail' && comboName != 'projectSelectorFiletering') { 
     if (combo) {
       refreshList('id' + comboClass, crit, critVal, idFldVal, comboName);
     } else {
@@ -727,15 +731,17 @@ function selectDetailItem(selectedValue, lastSavedName) {
   		}else{
   			combo.set("value", idFldVal);
   		}
-  	}else if(comboName == 'filterValueList' && comboClass=='Project'){
-  		var pos = idFldVal.indexOf('_');
-  		if(pos != -1){
-  			dijit.byId('filterValueList').set("value", idFldVal);
-  		}else{
-  			combo.set("value", idFldVal);
-  		}
+  	}else if(comboName == 'filterValueList'){
+  		//var pos = idFldVal.indexOf('_');
+  		//if(pos != -1){
+  		//	dijit.byId('filterValueList').set("value", idFldVal);
+  		//}else{
+  		idFldVal=idFldVal.split('_');
+  		combo.set("value", idFldVal);
+  		//}
     }else{
-      if(idFldVal.indexOf('_')>=0) idFldVal=idFldVal.split('_');
+      if(idFldVal.indexOf('_')>=0) 
+        idFldVal=idFldVal.split('_');
   		combo.set("value", idFldVal);
   	}
   }
@@ -6050,6 +6056,27 @@ function refreshList(field, param, paramVal, selected, destination, required, pa
     }
     if (field=='planning') {
       mySelect.set("value",selected); 
+    }
+    if(destination=='filterValueList') {
+      var list=dojo.byId('filterValueList');
+      selectionList=selected.split('_');
+      //while (list.options.length) {list.remove(0);} // Clean combo
+      items.forEach(function(item) {
+        if (!item.name || item.id==' ' || item.name==selected) {
+        } else {
+          if (selectionList.indexOf(item.id)>=0 && 1) {
+            var found=false;
+            for (var i=0;i<list.options.length;i++) { if (list.options[i].value==item.id) found=true; }
+            if (!found) {
+              var option = document.createElement("option");
+              option.text = item.name;
+              option.value = item.id;
+              option.selected=true;
+              list.add(option);
+            }
+          }
+        }
+      });
     }
   });
 }

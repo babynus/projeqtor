@@ -2787,7 +2787,6 @@ function setSelectedProject(idProject, nameProject, selectionField,resetPrevious
     };
     saveDataToSession('project', idProject, null, callBack);
   }
-  console.log(idProject);
   if (idProject != "" && dijit.byId("idProjectPlan")) {
     if (idProject == "*" ) dijit.byId("idProjectPlan").set("value", 0);
     else dijit.byId("idProjectPlan").set("value", idProject);
