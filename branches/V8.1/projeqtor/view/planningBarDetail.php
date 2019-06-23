@@ -153,6 +153,7 @@ foreach ($work as $resWork) {
   foreach ($dates as $dt) {
     $color="#ffffff";
     $height=20; $w=0;    
+    $heightSurbooked=0;
     $capacityTop=$maxCapacity[$resWork['idResource']]; //$resWork['capacity'];
     if (!isset($variableCapacity[$resWork['idResource']][$dt])) {
       $heightNormal=20;
@@ -179,11 +180,17 @@ foreach ($work as $resWork) {
       } else {
         $color=($resWork[$dt]['type']=='real')?"#705050":"#BB5050";
       }
-      if ($resWork[$dt]['surbooked']==1) $color='#f4bf42';
-      $height=round($w*20/$capacityTop,0);
+      if ($resWork[$dt]['surbooked']==1) {
+        $sb=$resWork[$dt]['surbookedWork'];
+        $height=round(($w-$sb)*20/$capacityTop,0);
+        $heightSurbooked=round($sb*20/$capacityTop,0);
+      } else {
+        $height=round($w*20/$capacityTop,0);
+      }
     }
     echo '<td style="padding:0;width:'.$width.'px;border-right:1px solid #eeeeee;position:relative;">';
     echo '<div style="display:block;background-color:'.$color.';position:absolute;bottom:0px;left:0px;width:100%;height:'.$height.'px;"></div>';
+    if ($heightSurbooked>0) echo '<div style="display:block;background-color:#f4bf42;position:absolute;bottom:'.$height.'px;left:0px;width:100%;height:'.$heightSurbooked.'px;"></div>';
     if ($maxCapacity[$resWork['idResource']]!=$resWork['capacity'] or $minCapacity[$resWork['idResource']]!=$resWork['capacity']) {
       echo '<div style="display:block;background-color:transparent;position:absolute;bottom:0px;left:0px;width:100%;border-top:1px solid grey;height:'.$heightNormal.'px;"></div>';
     }
