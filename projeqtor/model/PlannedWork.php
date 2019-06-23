@@ -32,6 +32,7 @@ require_once('_securityCheck.php');
 class PlannedWork extends GeneralWork {
 
   public $surbooked;
+  public $surbookedWork;
   public $_noHistory;
   public static $_planningInProgress;
     
@@ -730,6 +731,7 @@ class PlannedWork extends GeneralWork {
           }
           while (1) {
             $surbooked=0;
+            $surbookedWork=0;
             if ($withProjectRepartition and isset($reserved['W'])) {
               //$reserved[type='W']['sum'][idResource][day]+=value
               // $reserved[type='W'][idPE][idResource][day]=value
@@ -1128,7 +1130,10 @@ class PlannedWork extends GeneralWork {
                   }
                 }
                 if ($value>=0.01) {
-                  if ($value+$planned > $r->getCapacityPeriod($currentDate)) $surbooked=1;
+                  if ( $value+$planned > $r->getCapacityPeriod($currentDate)) {
+                    $surbooked=1;
+                    $surbookedWork=$value+$planned-$r->getCapacityPeriod($currentDate);
+                  }
                   if ($profile=='FIXED' and $currentDate==$plan->validatedStartDate) {
                     $fractionStart=$plan->validatedStartFraction;
                   } else {
@@ -1142,7 +1147,8 @@ class PlannedWork extends GeneralWork {
                   $plannedWork->refId=$ass->refId;
                   $plannedWork->idAssignment=$ass->id;
                   $plannedWork->work=$value;
-                  if ($surbooked) $plannedWork->surbooked=1;
+                  $plannedWork->surbooked=$surbooked;
+                  $plannedWork->surbookedWork=$surbookedWork;
                   $plannedWork->setDates($currentDate);
                   $arrayPlannedWork[]=$plannedWork;
                   if (! $ass->plannedStartDate or $ass->plannedStartDate>$currentDate) {
@@ -1261,7 +1267,7 @@ class PlannedWork extends GeneralWork {
     foreach ($arrayPlannedWork as $pw) {
       if ($cpt==0) {
         $query='INSERT into ' . $pw->getDatabaseTableName() 
-          . ' (idResource,idProject,refType,refId,idAssignment,work,workDate,day,week,month,year)'
+          . ' (idResource,idProject,refType,refId,idAssignment,work,workDate,day,week,month,year,surbooked,surbookedWork)'
           . ' VALUES ';
       } else {
         $query.=', ';
@@ -1277,7 +1283,9 @@ class PlannedWork extends GeneralWork {
         . "'" . $pw->day . "',"
         . "'" . $pw->week . "',"
         . "'" . $pw->month . "',"
-        . "'" . $pw->year . "')";
+        . "'" . $pw->year . "',"
+        . "'" . $pw->surbooked . "',"
+        . "'" . $pw->surbookedWork . "')";
       $cpt++; 
       if ($cpt>=100) {
         $query.=';';

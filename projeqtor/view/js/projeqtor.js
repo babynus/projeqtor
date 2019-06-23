@@ -3077,6 +3077,7 @@ function drawGantt() {
       } else if (! pGroup && item.reftype!='Milestone' && ( ! item.assignedwork || item.assignedwork==0 ) && ( ! item.leftwork || item.leftwork==0 ) && ( ! item.realwork || item.realwork==0 ) ) { // No workassigned : greyed green
         pColor = 'aec5ae';
       }
+      if (item.surbooked==1) pColor='f4bf42';
       
       if (item.redElement == '1') {
         pColor = 'BB5050';
