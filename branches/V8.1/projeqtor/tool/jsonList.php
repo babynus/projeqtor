@@ -47,7 +47,14 @@ if (isset ( $_REQUEST ['critField'] )) {
         Security::checkValidId ( $v );
       }
     } else {
-      Security::checkValidId ( $_REQUEST ['critValue'] );
+      if ($field=='idProject') {
+        $idList=explode(',',$_REQUEST ['critValue']);
+        foreach($idList as $idP) {
+          Security::checkValidId ( $idP);
+        }
+      } else {
+        Security::checkValidId ( $_REQUEST ['critValue'] );
+      }
     }
   }
 } else if (isset ( $_REQUEST ['critValue'] )) {
@@ -192,7 +199,9 @@ if ($type == 'empty') {
     $nbRows=0;
     $list=array();
     if ($selected) {
-      $list[$selected]=SqlList::getNameFromId('Affectable', $selected);
+      $selectList=explode('_',$selected);
+      foreach($selectList as $sel)
+        $list[$sel]=SqlList::getNameFromId('Affectable', $sel);
     }
     foreach ($listAff as $aff) {
       if (! array_key_exists($aff->idResource, $list)) {
@@ -509,18 +518,20 @@ if ($type == 'empty') {
     $list=array_intersect_key($list, $restrictArray);
   }
   if ($selected) {
-    $name = SqlList::getNameFromId ( $class, $selected );
-    if ($name == $selected and ($class == 'Resource' or $class == 'User' or $class == 'Contact')) {
-      $name = SqlList::getNameFromId ( 'Affectable', $selected );
-    }
-    if ($name == $selected and substr ( $class, - 7 ) == 'Version' and SqlElement::is_a ( $class, 'Version' )) {
-      $name = SqlList::getNameFromId ( 'Version', $selected );
-    }
-    // Florent ticket 3868
-    if ($class=='Activity' or $class=='Ticket') {
-      $list [$selected] = SqlList::formatValWithId($selected,$name);
-    } else {
-      $list [$selected] = $name;
+    $selectList=explode('_',$selected);
+    foreach($selectList as $sel) {
+      $name = SqlList::getNameFromId ( $class, $sel );
+      if ($name == $sel and ($class == 'Resource' or $class == 'User' or $class == 'Contact')) {
+        $name = SqlList::getNameFromId ( 'Affectable', $sel );
+      }
+      if ($name == $sel and substr ( $class, - 7 ) == 'Version' and SqlElement::is_a ( $class, 'Version' )) {
+        $name = SqlList::getNameFromId ( 'Version', $sel );
+      }
+      if ($class=='Activity' or $class=='Ticket') {
+        $list [$sel] = SqlList::formatValWithId($sel,$name);
+      } else {
+        $list [$sel] = $name;
+      }
     }
   }
   if ($dataType == "idProject" or $dataType == 'planning') {
@@ -602,8 +613,12 @@ if ($type == 'empty') {
   }
 } else if ($type == 'listResourceProject') { // ====================================================== LISTRESOURCEPROJECT ===================================================
   $idPrj = $_REQUEST ['idProject'];
-  $prj = new Project ( $idPrj );
-  $lstTopPrj = $prj->getTopProjectList ( true );
+  $arrayPrj=explode(',',$idPrj);
+  $lstTopPrj=array();
+  foreach($arrayPrj as $idPrj) {
+    $prj = new Project ( $idPrj );
+    $lstTopPrj = array_merge($lstTopPrj,$prj->getTopProjectList ( true ));
+  }
   $today = date ( 'Y-m-d' );
   $in = transformValueListIntoInClause ( $lstTopPrj );
   $where = "idle=0 and idProject in " . $in;
@@ -622,7 +637,7 @@ if ($type == 'empty') {
     $lstRes [$_REQUEST ['selected']] = SqlList::getNameFromId ( 'Affectable', $_REQUEST ['selected'] );
   }
   // CHANGE BY Marc TABARY - 2017-02-21 - GENERIC FUNCTION IN PROJEQTOR.PHP
-  $restrictArray = getUserVisibleResourcesList ( TRUE );
+  $restrictArray = getUserVisibleResourcesList (true);
   // Old
   // $restrictArray=array();
   // END CHANGE BY Marc TABARY - 2017-02-21 - GENERIC FUNCTION IN PROJEQTOR.PHP
