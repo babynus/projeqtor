@@ -1322,7 +1322,7 @@ static function isTheLeaveProject($id=null) {
     return $projList;
   }
   public static function setSelectedProject($proj){
-    setSessionValue('project', $proje);
+    setSessionValue('project', $proj);
   }
 }
 ?>
