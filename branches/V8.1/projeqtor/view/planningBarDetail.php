@@ -99,7 +99,7 @@ foreach($wkLst as $wk) {
     }
   }
   if (! isset($work[$wk->idAssignment][$wk->workDate]) ) {
-    $work[$wk->idAssignment][$wk->workDate]=array('work'=>$wk->work,'type'=>'planned','surbooked'=>$wk->surbooked);
+    $work[$wk->idAssignment][$wk->workDate]=array('work'=>$wk->work,'type'=>'planned','surbooked'=>$wk->surbooked, 'surbookedWork'=>$wk->surbookedWork);
   }
   $maxCapacity[$wk->idResource]=$work[$wk->idAssignment]['capacity'];
   $minCapacity[$wk->idResource]=$work[$wk->idAssignment]['capacity'];
@@ -180,7 +180,7 @@ foreach ($work as $resWork) {
       } else {
         $color=($resWork[$dt]['type']=='real')?"#705050":"#BB5050";
       }
-      if ($resWork[$dt]['surbooked']==1) {
+      if (isset($resWork[$dt]['surbooked']) and isset($resWork[$dt]['surbookedWork']) and $resWork[$dt]['surbooked']==1) {
         $sb=$resWork[$dt]['surbookedWork'];
         $height=round(($w-$sb)*20/$capacityTop,0);
         $heightSurbooked=round($sb*20/$capacityTop,0);
