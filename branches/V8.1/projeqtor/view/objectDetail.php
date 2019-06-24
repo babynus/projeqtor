@@ -3666,7 +3666,7 @@ function drawNotesFromObject($obj, $refresh=false) {
   if (!$print) {
     echo '<td class="noteHeader smallButtonsGroup" style="width:10%">';
     if ($obj->id!=null and !$print and $canUpdate) {
-      echo '<a onClick="addNote();" title="'.i18n('addNote').'" >'.formatSmallButton('Add').'</a>';
+      echo '<a onClick="addNote(false);" title="'.i18n('addNote').'" >'.formatSmallButton('Add').'</a>';
     }
     echo '</td>';
   }
@@ -3697,7 +3697,6 @@ function drawNotesFromObject($obj, $refresh=false) {
     sortNotes($notes, $result, null);
     $notes = $result;
   }
-  
   foreach ($notes as $note) {
     if ($user->id==$note->idUser or $note->idPrivacy==1 or ($note->idPrivacy==2 and $ress->idTeam==$note->idTeam)) {
       $nbNotes++;
@@ -3729,6 +3728,12 @@ function drawNotesFromObject($obj, $refresh=false) {
             $updateReply++;
             $parentNote = new Note($parentNote->idNote);
           }
+          if($note->replyLevel-$updateReply <= 1){
+          	setSessionValue('updateNoteLevel', $updateReply);
+          }
+        }
+        if(sessionValueExists('updateNoteLevel') and getSessionValue('updateNoteLevel') <= 1){
+        	$updateReply = getSessionValue('updateNoteLevel');
         }
         for($i=0; $i<$note->replyLevel-$updateReply; $i++){
         	if($i >= 5){
@@ -3736,7 +3741,7 @@ function drawNotesFromObject($obj, $refresh=false) {
         	}
         	echo '<td class="noteData" colspan="1" style="width:3%;border-bottom:0px;border-top:0px;border-right:solid 2px;!important;"></td>';//border-bottom:0px;border-top:0px;!important
         }
-        echo '<td colspan="'.(6-$note->replyLevel).'" class="noteData" style="width:'.(($print)?(95-(3*$note->replyLevel)):(85-(3*$note->replyLevel))).'%">';
+        echo '<td colspan="'.(6-$note->replyLevel+$updateReply).'" class="noteData" style="width:'.(($print)?(95-(3*$note->replyLevel-$updateReply)):(85-(3*$note->replyLevel-$updateReply))).'%">';
       }else{
         echo '<td colspan="6" class="noteData" style="width:'.(($print)?'95':'85').'%">';
       }
