@@ -780,7 +780,7 @@ class PlannedWork extends GeneralWork {
               if ($period===null) {
                 $capacity=0;
               } else {
-                $capacity=0;
+                $capacity=0;                
                 foreach ($ress['members'] as $idMember=>$member) {
                   if (isset($ress['periods'][$period]['idResource'][$idMember])) {
                     $tmpCapa=$ress['periods'][$period]['idResource'][$idMember];
@@ -801,7 +801,7 @@ class PlannedWork extends GeneralWork {
                 }
                 $capacityNormal=$capacity;
                 $capacity+=$r->getSurbookingCapacity($currentDate,true);
-                if ($capacityNormal=$capacity) unset($capacityNormal);
+                if ($capacityNormal==$capacity) unset($capacityNormal);
               }
             }
             if ($profile=='RECW') {
@@ -1140,6 +1140,11 @@ class PlannedWork extends GeneralWork {
                   if ( $value+$planned > $r->getCapacityPeriod($currentDate)) {
                     $surbooked=1;
                     $surbookedWork=$value+$planned-$r->getCapacityPeriod($currentDate);
+                  }else if (isset($capacityNormal)) { // For Pools
+                    if ($value>$capacityNormal) {
+                      $surbooked=1;
+                      $surbookedWork=$value-$capacityNormal;
+                    }
                   }
                   if ($profile=='FIXED' and $currentDate==$plan->validatedStartDate) {
                     $fractionStart=$plan->validatedStartFraction;
