@@ -533,13 +533,27 @@ function activityStreamDisplayNote ($note,$origin){
       $noteDiscussionMode = Parameter::getGlobalParameter('globalNoteDiscussionMode');
     }
     if($noteDiscussionMode == 'YES'){
-      for($i=0; $i<$note->replyLevel; $i++){
+      $updateReply = 0;
+      if($note->idNote){
+      	$parentNote = new Note($note->idNote);
+      	while ($user->id != $parentNote->idUser and ($parentNote->idPrivacy == 3 or $parentNote->idPrivacy == 2)){
+      		$updateReply++;
+      		$parentNote = new Note($parentNote->idNote);
+      	}
+      	if($note->replyLevel-$updateReply <= 1){
+      		setSessionValue('updateNoteLevel', $updateReply);
+      	}
+      }
+      if(sessionValueExists('updateNoteLevel') and getSessionValue('updateNoteLevel') <= 1){
+      	$updateReply = getSessionValue('updateNoteLevel');
+      }
+      for($i=0; $i<$note->replyLevel-$updateReply; $i++){
       	if($i >= 5){
       		break;
       	}
       	echo '<td class="noteData" colspan="1" style="width:3%;border-bottom:0px;border-top:0px;border-right:solid 2px;!important;"></td>';
       }
-      echo '<td colspan="'.(6-$note->replyLevel).'" class="noteData" style="width:100%;"><div style="float:left;margin-top:6px;">';
+      echo '<td colspan="'.(6-$note->replyLevel+$updateReply).'" class="noteData" style="width:100%;"><div style="float:left;margin-top:6px;">';
     }else{
       echo '<td colspan="6" class="noteData" style="width:100%;"><div style="float:left;margin-top:6px;">';
     }
