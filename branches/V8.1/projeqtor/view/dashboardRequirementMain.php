@@ -59,6 +59,9 @@
   $defaultProject = null;
   if (sessionValueExists ( 'project' ) and getSessionValue ( 'project' ) != '*') {
     $defaultProject = getSessionValue ( 'project' );
+    if(strpos($defaultProject, ',') !== null){
+      $defaultProject = '*';
+    }
   } else {
     $table = SqlList::getList ( 'Project', 'name', null );
     $restrictArray = array();
