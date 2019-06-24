@@ -3732,7 +3732,7 @@ function drawNotesFromObject($obj, $refresh=false) {
           	setSessionValue('updateNoteLevel', $updateReply);
           }
         }
-        if(sessionValueExists('updateNoteLevel') and getSessionValue('updateNoteLevel') <= 1){
+        if(sessionValueExists('updateNoteLevel') and getSessionValue('updateNoteLevel')){
         	$updateReply = getSessionValue('updateNoteLevel');
         }
         for($i=0; $i<$note->replyLevel-$updateReply; $i++){
