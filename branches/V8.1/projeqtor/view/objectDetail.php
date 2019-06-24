@@ -3691,7 +3691,6 @@ function drawNotesFromObject($obj, $refresh=false) {
       }
     }
   }
-  
   if($noteDiscussionMode == 'YES'){
     $result = array();
     $notes=array_reverse($notes,true);
@@ -3723,7 +3722,15 @@ function drawNotesFromObject($obj, $refresh=false) {
       }
       echo '<td class="noteData" style="width:5%; text-align: center;">#'.htmlEncode($note->id).'</td>';
       if($noteDiscussionMode == 'YES'){
-        for($i=0; $i<$note->replyLevel; $i++){
+        $updateReply = 0;
+        if($note->idNote){
+          $parentNote = new Note($note->idNote);
+          while ($user->id != $parentNote->idUser and ($parentNote->idPrivacy == 3 or $parentNote->idPrivacy == 2)){
+            $updateReply++;
+            $parentNote = new Note($parentNote->idNote);
+          }
+        }
+        for($i=0; $i<$note->replyLevel-$updateReply; $i++){
         	if($i >= 5){
         		break;
         	}
