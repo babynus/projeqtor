@@ -32,6 +32,8 @@ $dates=array();
 $work=array();
 $maxCapacity=array();
 $minCapacity=array();
+$maxSurbooking=array();
+$minSurbooking=array();
 $ressAll=array();
 $start=null;
 $end=null;
@@ -76,6 +78,8 @@ foreach($wkLst as $wk) {
   $work[$wk->idAssignment][$wk->workDate]=array('work'=>$wk->work,'type'=>'real');
   $maxCapacity[$wk->idResource]=$work[$wk->idAssignment]['capacity'];
   $minCapacity[$wk->idResource]=$work[$wk->idAssignment]['capacity'];
+  $maxSurbooking[$wk->idResource]=0;
+  $minSurbooking[$wk->idResource]=0;
 }
 $wk=new PlannedWork();
 $wkLst=$wk->getSqlElementsFromCriteria($crit);
@@ -99,10 +103,12 @@ foreach($wkLst as $wk) {
     }
   }
   if (! isset($work[$wk->idAssignment][$wk->workDate]) ) {
-    $work[$wk->idAssignment][$wk->workDate]=array('work'=>$wk->work,'type'=>'planned','surbooked'=>$wk->surbooked, 'surbookedWork'=>$wk->surbookedWork);
+    $work[$wk->idAssignment][$wk->workDate]=array('work'=>$wk->work,'type'=>'planned','surbooked'=>$wk->surbooked,'surbookedWork'=>$wk->surbookedWork);
   }
   $maxCapacity[$wk->idResource]=$work[$wk->idAssignment]['capacity'];
   $minCapacity[$wk->idResource]=$work[$wk->idAssignment]['capacity'];
+  $maxSurbooking[$wk->idResource]=0;
+  $minSurbooking[$wk->idResource]=0;
 }
 if ($pe->idPlanningMode=='22') { // RECW
   $start=$pe->plannedStartDate;
@@ -121,6 +127,7 @@ if($objectClassManual != 'ResourcePlanning' ){
 }
 
 $variableCapacity=array();
+$surbooking=array();
 $dt=$start;
 while ($dt<=$end) {
   if (!isset($dates[$dt])) {
@@ -128,7 +135,9 @@ while ($dt<=$end) {
   }
   foreach ($ressAll as $ress) {
     if (!isset($variableCapacity[$ress->id])) $variableCapacity[$ress->id]=array();
+    if (!isset($surbooking[$ress->id])) $surbooking[$ress->id]=array();
     $capa=$ress->getCapacityPeriod($dt);
+    $surbook=$ress->getSurbookingCapacity($dt,true);
     if (! $ress->isResourceTeam) {
       if ($capa!=$ress->capacity) {
         $variableCapacity[$ress->id][$dt]=$capa;
@@ -136,13 +145,17 @@ while ($dt<=$end) {
       if ($capa>$maxCapacity[$ress->id]) $maxCapacity[$ress->id]=$capa;
       if ($capa<$minCapacity[$ress->id]) $minCapacity[$ress->id]=$capa;
     }
+    if (!isset($maxSurbooking[$ress->id])) $maxSurbooking[$ress->id]=0;
+    if (!isset($minSurbooking[$ress->id])) $minSurbooking[$ress->id]=0;
+    if ($surbook>$maxSurbooking[$ress->id]) $maxSurbooking[$ress->id]=$surbook;
+    if ($surbook<$minSurbooking[$ress->id]) $minSurbooking[$ress->id]=$surbook;
   }
   $dt=addDaysToDate($dt, 1);
 }
 ksort($dates);
 
 $width=20;
-echo '<table id="planningBarDetailTable" style="height:'.(count($work)*22).'px;background-color:#FFFFFF;border-collapse: collapse;marin:0;padding:0">';
+echo '<table id="planningBarDetailTable" style="height:'.(count($work)*22).'px;background-color:#FFFFFF;border-collapse: collapse;marin:0;padding:0;width:100%">';
 $heightNormal=20;
 $heightCapacity=20;
 foreach ($work as $resWork) {
@@ -150,6 +163,7 @@ foreach ($work as $resWork) {
   echo '<tr style="height:20px;border:1px solid #505050;">';
   $overCapa=null;
   $underCapa=null;
+  $surbooked=null;
   foreach ($dates as $dt) {
     $color="#ffffff";
     $height=20; $w=0;    
@@ -180,7 +194,7 @@ foreach ($work as $resWork) {
       } else {
         $color=($resWork[$dt]['type']=='real')?"#705050":"#BB5050";
       }
-      if (isset($resWork[$dt]['surbooked']) and isset($resWork[$dt]['surbookedWork']) and $resWork[$dt]['surbooked']==1) {
+      if ($resWork[$dt]['surbooked']==1) {
         $sb=$resWork[$dt]['surbookedWork'];
         $height=round(($w-$sb)*20/$capacityTop,0);
         $heightSurbooked=round($sb*20/$capacityTop,0);
@@ -199,10 +213,15 @@ foreach ($work as $resWork) {
     }
     echo '</td>';
   }
-  echo '<td style="border-left:1px solid #505050;"><div style="width:200px; max-width:200px;overflow:hidden; text-align:left">&nbsp;'.$resWork['resource'];
-  if ($overCapa) echo '&nbsp;<img style="width:10px" src="../view/img/arrowUp.png" />&nbsp;'.htmlDisplayNumericWithoutTrailingZeros($overCapa);
-  if ($underCapa) echo '&nbsp;<img style="width:10px" src="../view/img/arrowDown.png" />&nbsp;'.htmlDisplayNumericWithoutTrailingZeros($underCapa);
-  echo '&nbsp;</div></td>';
+  //debugLog($resWork['resource']." max=".$maxSurbooking[$resWork['idResource']." min=".$minSurbooking[$resWork['idResource']);
+  echo '<td style="border-left:1px solid #505050;"><div style="width:200px; max-width:200px;overflow:hidden; text-align:left;max-height:20px;">&nbsp;';
+  if ($overCapa) echo '<div style="float:right;padding-right:3px">&nbsp;<img style="width:10px" src="../view/img/arrowUp.png" />&nbsp;'.htmlDisplayNumericWithoutTrailingZeros($overCapa).'</div>';
+  if ($underCapa) echo '<div style="float:right">&nbsp;<img style="width:10px" src="../view/img/arrowDown.png" />&nbsp;'.htmlDisplayNumericWithoutTrailingZeros($underCapa).'</div>';
+  if ($maxSurbooking[$resWork['idResource']]!=0 or $minSurbooking[$resWork['idResource']]!=0) { 
+    if ($maxSurbooking[$resWork['idResource']]) echo '<div style="float:right;padding-right:3px;">&nbsp;<span style="color:#f4bf42;font-weight:bold">+</span>&nbsp;'.htmlDisplayNumericWithoutTrailingZeros($maxSurbooking[$resWork['idResource']]).'</div>';
+    else if ($minSurbooking[$resWork['idResource']]) echo '<div style="float:right;padding-right:3px;">&nbsp;<span style="color:#f4bf42;font-weight:bold">-</span>&nbsp;'.htmlDisplayNumericWithoutTrailingZeros((-1)*$minSurbooking[$resWork['idResource']]).'</div>';
+  }
+  echo $resWork['resource'].'&nbsp;</div></td>';
   echo '</tr>';
 }
 echo '</table>';

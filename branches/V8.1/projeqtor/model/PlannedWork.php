@@ -640,6 +640,10 @@ class PlannedWork extends GeneralWork {
             $ass->notPlannedWork=0;
             $changedAss=true;
           }
+          if ($ass->surbooked!=0) {
+            $ass->surbooked=0;
+            $changedAss=true;
+          }
           if ($profile=='GROUP' and $withProjectRepartition) {
           	foreach ($listAss as $asstmp) {
 	            foreach ($listTopProjects as $idProject) {
@@ -1165,7 +1169,11 @@ class PlannedWork extends GeneralWork {
                   } else if ($plan->plannedStartDate==$currentDate and $plan->plannedStartFraction<$fractionStart) {
                     $plan->plannedStartFraction=$fractionStart;
                   }
-                  if ($surbooked) $plan->surbooked=1;
+                  if ($surbooked) {
+                    $plan->surbooked=1;
+                    $ass->surbooked=1;
+                    $changedAss=true;
+                  }                  
                   if (! $plan->plannedEndDate or $plan->plannedEndDate<$currentDate) {
                     if ($ass->realEndDate && $ass->realEndDate>$currentDate) {
                   		$plan->plannedEndDate=$ass->realEndDate;
