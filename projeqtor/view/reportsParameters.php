@@ -334,8 +334,8 @@ foreach ($listParam as $param) {
       if (sessionValueExists('project')) {
         if (getSessionValue('project')!='*') {
           $defaultValue=getSessionValue('project');
-          if(strpos($defaultValue, ",") != null){
-            $defaultValue="";
+          if(strpos($defaultValue, ",") !== null){
+            $defaultValue="*";
           }
         }
       }
