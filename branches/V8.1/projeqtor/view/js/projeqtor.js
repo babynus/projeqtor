@@ -2737,7 +2737,7 @@ function setSelectedProject(idProject, nameProject, selectionField,resetPrevious
 		}
 	} else {
 	  arraySelectedProject.forEach(function(element){
-      dijit.byId('checkBoxProj'+element).set('checked', false);
+	    if (dijit.byId('checkBoxProj'+element)) dijit.byId('checkBoxProj'+element).set('checked', false);
     });
 	}
   if (selectionField) {
