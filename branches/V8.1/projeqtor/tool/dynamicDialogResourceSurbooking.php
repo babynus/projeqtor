@@ -29,6 +29,7 @@ $mode = RequestHandler::getValue('mode',false,null);
 $idResource=RequestHandler::getValue('idResource',false,null);
 $idSurbooking=RequestHandler::getValue('id',false,null);
 $res = new Resource($idResource,true);
+$myCapacity = -($res->capacity);
 $resCap = new ResourceSurbooking();
 $listRescap = $resCap->getSqlElementsFromCriteria(array('idResource'=>$idResource),null,null,'endDate desc');
 if(isset($listRescap[0])){
@@ -54,7 +55,7 @@ if(isset($listRescap[0])){
              <td>
                <div id="resourceSurbooking" name="resourceSurbooking" value="" 
                  dojoType="dijit.form.NumberTextBox"
-                 constraints="{min:-999,max:999}" 
+                 constraints="{min:<?php echo $myCapacity;?>,max:999}" 
                  style="width:100px" class="input"
                  hasDownArrow="true" required
                >
