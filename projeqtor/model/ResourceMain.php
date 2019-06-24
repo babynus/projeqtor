@@ -933,7 +933,7 @@ class ResourceMain extends SqlElement {
     }
     
     //Surbooking
-    public function getSurbookingCapacity($date) {
+    public function getSurbookingCapacity($date,$onlySurbooking=false) {
       if(!sessionValueExists('surbookingPeriod')){
         setSessionValue('surbookingPeriod', array());
       }
@@ -944,10 +944,12 @@ class ResourceMain extends SqlElement {
       foreach ($surbookingPeriod as $val) {
         foreach ($val as $value){
           if ($date>=$value['startDate'] and $date<=$value['endDate']){
-            return $value['capacity']+$this->getCapacityPeriod($date);
+            if ($onlySurbooking) return $value['capacity'];
+            else return $value['capacity']+$this->getCapacityPeriod($date);
           }
         }
       }
+      if ($onlySurbooking) return 0;
       return $this->getCapacityPeriod($date);
     }
     public function hasSurbookedCapacity() {

@@ -62,6 +62,7 @@ class Assignment extends SqlElement {
   public $optional;
   public $capacity;
   public $isResourceTeam;
+  public $surbooked;
   
   private static $_fieldsAttributes=array("idProject"=>"required", 
     "idResource"=>"required", 
@@ -328,7 +329,7 @@ class Assignment extends SqlElement {
       // Otherwise, saving planned data may overwrite real work entered on Timesheet for corresponding items.
       $old=$this->getOld();
       $change=false;
-      $fields=array('plannedStartDate','plannedStartFraction','plannedEndDate','plannedEndFraction','notPlannedWork');
+      $fields=array('plannedStartDate','plannedStartFraction','plannedEndDate','plannedEndFraction','notPlannedWork','surbooked');
       if ($this->assignedWork!=$old->assignedWork) {
         $extraFields=array('assignedWork','assignedCost','leftWork','leftCost','plannedWork','plannedCost');
         $fields=array_merge($fields,$extraFields);
