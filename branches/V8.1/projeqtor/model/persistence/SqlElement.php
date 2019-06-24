@@ -881,6 +881,7 @@ abstract class SqlElement {
   
   // Save without controls and without extra save() feature defined in local save() method (for corresponding class)
   public function simpleSave() {
+    debugLog("simpleSave(".get_class($this)." #$this->id)");
     return $this->saveForced();
   }
 

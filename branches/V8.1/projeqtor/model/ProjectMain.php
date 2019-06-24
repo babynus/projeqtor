@@ -804,6 +804,7 @@ static function isTheLeaveProject($id=null) {
    * @return the return message of persistence/SqlElement#save() method
    */
   public function save() {
+    debugLog("save Project #$this->id");
     // #305 : need to recalculate before dispatching to PE
     $old=$this->getOld();
     $this->recalculateCheckboxes();
@@ -1266,8 +1267,17 @@ static function isTheLeaveProject($id=null) {
   }
   public static function unsetNeedReplan($id) {
     $proj=SqlElement::getSingleSqlElementFromCriteria("ProjectPlanningElement",array('refType'=>'Project','refId'=>$id),true);
-    $proj->needReplan=false;
-    $proj->simpleSave();
+    if (PlannedWork::$_planningInProgress and $id) {
+      // Attention, we'll execute direct query to avoid concurrency issues for long duration planning
+      // Otherwise, saving planned data may overwrite real work entered on Timesheet for corresponding items.
+      $ppe=new ProjectPlanningElement();
+      $ppeTable=$ppe->getDatabaseTableName();
+      $query="UPDATE $ppeTable SET needReplan=0 WHERE refType='Project' and refId=$id";
+      Sql::query($query); 
+    } else {
+      $proj->needReplan=false;
+      $proj->simpleSave();
+    }
     if ($proj->topId) {
       $top=new ProjectPlanningElement($proj->topId);
       if ($top->needReplan) {

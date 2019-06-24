@@ -799,6 +799,9 @@ class PlannedWork extends GeneralWork {
                     if ($tmpCapa>0) $capacity+=$tmpCapa;
                   }                
                 }
+                $capacityNormal=$capacity;
+                $capacity+=$r->getSurbookingCapacity($currentDate,true);
+                if ($capacityNormal=$capacity) unset($capacityNormal);
               }
             }
             if ($profile=='RECW') {
