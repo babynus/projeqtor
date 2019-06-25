@@ -755,9 +755,6 @@ static function isTheLeaveProject($id=null) {
           $result .='<tr>';
           if(!$drawCheckBox){
             $result .='<td valign="top" width="20px"><div dojoType="dijit.form.CheckBox" type="checkbox" class="whitecheck" style="float:left;position:relative;left:'.$left.'px" id="checkBoxProj'.$idPrj.'" value="'.$idPrj.'"'.$checked.'>';
-            $result .='<script type="dojo/method" event="onClick" args="evt">
-                        selectedMultiProject(this.value, this.checked, false);
-                      </script>';
             $result .='</div></td>';
           }
           $result .='<td valign="top" width="20px"><img src="css/images/iconList16.png" height="16px" /></td>';
@@ -970,6 +967,19 @@ static function isTheLeaveProject($id=null) {
 
   }
   public function delete() {
+    if($this->isSelectedProjectMultiple()){
+      $selectedProj = explode(',', getSessionValue('project'));
+      if(in_array($this->id, $selectedProj)){
+        $pos = array_search($this->id, $selectedProj);
+        unset($selectedProj[$pos]);
+        if(count($selectedProj) > 0){
+          setSessionValue('project', implode(',', $selectedProj));
+        }else{
+          setSessionValue('project', '*');
+        }
+      }
+    }
+    
     // MTY - LEAVE SYSTEM
     if (isLeavesSystemActiv()) {
     	if ($this->isLeaveMngProject) {
