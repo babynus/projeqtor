@@ -41,6 +41,7 @@ var openMenuListTimeout=null;
 var menuListAutoshow=false;
 var hideUnderMenuTimeout;
 var hideUnderMenuId;
+var previewhideUnderMenuId;
 var stockEmailHistory = new Array();
 // =============================================================================
 // = Wait spinner
@@ -10185,17 +10186,22 @@ function displayMenu(id){
   dojo.byId('UnderMenu'+id).style.display="block";
   setTimeout("repositionMenuDiv("+id+","+id+");",10);
 }
+//Florent 
 function displayUnderMenu(id,idParent){
-  if(hideUnderMenuId){
-    if (hideUnderMenuId == id ){
-      dojo.byId('UnderMenu'+id).style.display="none";
-      clearTimeout(hideUnderMenuTimeout);
-    }else{
-      hideUnderMenu(hideUnderMenuId);
-    }
+  if (hideUnderMenuId==null && previewhideUnderMenuId!=null){
+    hideUnderMenu(previewhideUnderMenuId,0);
   }
-  dojo.byId('UnderMenu'+id).style.display="block";
-  setTimeout("repositionMenuDiv("+id+","+idParent+");",10);
+  else if(hideUnderMenuId){
+      if (hideUnderMenuId == id ){
+        dojo.byId('UnderMenu'+id).style.display="none";
+        clearTimeout(hideUnderMenuTimeout);
+      }else{
+        hideUnderMenu(hideUnderMenuId);
+      }
+    }
+    dojo.byId('UnderMenu'+id).style.display="block";
+    setTimeout("repositionMenuDiv("+id+","+idParent+");",10);
+    previewhideUnderMenuId=id;
 }
 
 function repositionMenuDiv(id,idParent) {
@@ -10210,12 +10216,14 @@ function repositionMenuDiv(id,idParent) {
     currentDiv.style.top = newTop+'px';
   };
 }
-
+//end
 function hideMenu(id,delay){
-  if (! delay) delay=300;
+  if(! delay){ 
+    delay=300;
+  }
   if(hideUnderMenuTimeout){
     clearTimeout(hideUnderMenuTimeout);
-  }
+  }  
   hideUnderMenuId = id;
   hideUnderMenuTimeout=setTimeout("hideUnderMenu("+id+")",delay);
 }
@@ -10226,6 +10234,12 @@ function hideUnderMenu(id){
    });
   dojo.byId('UnderMenu'+id).style.display="none";
   hideUnderMenuId = null;
+}
+//Florent 
+function hidePreviewUnderMenu(id){
+  if(previewhideUnderMenuId!=id && previewhideUnderMenuId!=null){
+    hideUnderMenu(previewhideUnderMenuId);
+  }
 }
 //end
 function displayListOfApprover(id){
