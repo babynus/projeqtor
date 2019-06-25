@@ -741,6 +741,9 @@ static function isTheLeaveProject($id=null) {
           }  
         }
         if ($showLine) {
+          $checked = '';
+          $arrayProj = explode(',', getSessionValue('project'));
+          if(in_array($idPrj, $arrayProj))$checked='checked';
         	$prj=new Project($idPrj);
         	$left = 0;
         	if($level > 1){
@@ -751,7 +754,7 @@ static function isTheLeaveProject($id=null) {
         	}
           $result .='<tr>';
           if(!$drawCheckBox){
-            $result .='<td valign="top" width="20px"><div dojoType="dijit.form.CheckBox" type="checkbox" class="whitecheck" style="float:left;position:relative;left:'.$left.'px" id="checkBoxProj'.$idPrj.'" value="'.$idPrj.'">';
+            $result .='<td valign="top" width="20px"><div dojoType="dijit.form.CheckBox" type="checkbox" class="whitecheck" style="float:left;position:relative;left:'.$left.'px" id="checkBoxProj'.$idPrj.'" value="'.$idPrj.'"'.$checked.'>';
             $result .='<script type="dojo/method" event="onClick" args="evt">
                         selectedMultiProject(this.value, this.checked, false);
                       </script>';
