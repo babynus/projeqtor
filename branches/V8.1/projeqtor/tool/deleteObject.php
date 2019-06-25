@@ -69,6 +69,7 @@ if ($className=='Project') {
     $pe->renumberWbs();
   }
 }
+BudgetElement::dispatchFinalize();
 
 // Message of correct saving
 if (stripos($result,'id="lastOperationStatus" value="ERROR"')>0 ) {
