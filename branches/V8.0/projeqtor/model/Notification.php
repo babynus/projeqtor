@@ -85,7 +85,8 @@ class Notification extends SqlElement {
                                             "creationDateTime"          => "hidden",
                                             "sendEmail"                 => "hidden",
                                             "emailSent"                 => "hidden",
-                                            "idle"                      => "nobr"
+                                            "idle"                      => "nobr",
+                                            "idUser"                    => "required"
                                         );  
   
   private static $_colCaptionTransposition = array(
