@@ -218,7 +218,7 @@ class BudgetElement extends SqlElement {
           $topElt->save();   
       	} else {
       	  if ($this->elementary) { // noDispatch (for copy) and elementary : store top in array for updateSynthesis
-            self::$_noDispatchArrayBudget[$topElt->id]=$topElt; // TO DO : treat this
+            self::$_noDispatchArrayBudget[$topElt->id]=$topElt->id; 
       	  }
       	}
       }
@@ -296,6 +296,13 @@ class BudgetElement extends SqlElement {
     }
     return parent::getFieldAttributes($fieldName);
   }  
+  public static function dispatchFinalize() {
+    foreach (BudgetElement::$_noDispatchArrayBudget as $idOrg=>$notUsed) {
+      unset(BudgetElement::$_noDispatchArrayBudget[$idOrg]);
+      $org=new Organization($idOrg,false);
+      $org->updateSynthesis();
+    }
+  }
 
 }
 ?>

@@ -804,7 +804,6 @@ static function isTheLeaveProject($id=null) {
    * @return the return message of persistence/SqlElement#save() method
    */
   public function save() {
-    debugLog("save Project #$this->id");
     // #305 : need to recalculate before dispatching to PE
     $old=$this->getOld();
     $this->recalculateCheckboxes();
