@@ -199,8 +199,12 @@ class ProjectPlanningElementMain extends PlanningElement {
   	
   	// Update BudgetElement (for organization summary)
   	if ($this->idOrganization and $this->refType and $this->refId) {
-  	  $org=new Organization($this->idOrganization,false);
-  	  $org->updateSynthesis();
+  	  if (self::$_noDispatch) {
+  	    BudgetElement::$_noDispatchArrayBudget[$this->idOrganization]=$this->idOrganization;
+  	  } else {
+    	  $org=new Organization($this->idOrganization,false);
+    	  $org->updateSynthesis();
+  	  }
   	} 
   	if ($old->idOrganization and $this->refType and $this->refId and $this->idOrganization!=$old->idOrganization) {
   	  $org=new Organization($old->idOrganization,false);
