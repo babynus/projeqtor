@@ -58,6 +58,7 @@ if ($noteId) {
     $note->idNote=$idParentNote;
   }
 }
+$parentNote = new Note($idParentNote);
 $detailHeight=600;
 $detailWidth=1010;
 if (sessionValueExists('screenWidth') and getSessionValue('screenWidth')) {
@@ -125,18 +126,18 @@ if (sessionValueExists('screenHeight')) {
           <table width="100%"><tr height="25px">
             <td width="33%" class="smallTabLabel" >
               <label class="smallTabLabelRight" for="notePrivacyPublic"><?php echo i18n('public');?>&nbsp;</label>
-              <input type="radio" data-dojo-type="dijit/form/RadioButton" name="notePrivacy" id="notePrivacyPublic" value="1" <?php if ($note->idPrivacy==1) echo "checked";?> />
+              <input type="radio" data-dojo-type="dijit/form/RadioButton" name="notePrivacy" id="notePrivacyPublic" value="1" <?php if ($parentNote->idPrivacy==1) echo "checked"; if ($parentNote->idPrivacy >= 2) echo ' disabled ';?> />
             </td>
             <td width="34%" class="smallTabLabel" >
               <label class="smallTabLabelRight" for="notePrivacyTeam"><?php echo i18n('team');?>&nbsp;</label>
               <?php $res=new Resource(getSessionUser()->id);
                     $hasTeam=($res->id and $res->idTeam)?true:false;
               ?>
-              <input type="radio" data-dojo-type="dijit/form/RadioButton" name="notePrivacy" id="notePrivacyTeam" value="2" <?php if ($note->idPrivacy==2) echo "checked"; if (!$hasTeam) echo ' disabled ';?> />
+              <input type="radio" data-dojo-type="dijit/form/RadioButton" name="notePrivacy" id="notePrivacyTeam" value="2" <?php if ($parentNote->idPrivacy==2) echo "checked"; if (!$hasTeam or $parentNote->idPrivacy == 3) echo ' disabled ';?> />
             </td>
             <td width="33%" class="smallTabLabel" >
               <label class="smallTabLabelRight" for="notePrivacyPrivate"><?php echo i18n('private');?>&nbsp;</label>
-              <input type="radio" data-dojo-type="dijit/form/RadioButton" name="notePrivacy" id="notePrivacyPrivate" value="3" <?php if ($note->idPrivacy==3) echo "checked";?> />
+              <input type="radio" data-dojo-type="dijit/form/RadioButton" name="notePrivacy" id="notePrivacyPrivate" value="3" <?php if ($parentNote->idPrivacy==3) echo "checked";?> />
             </td>
           </tr></table>
 

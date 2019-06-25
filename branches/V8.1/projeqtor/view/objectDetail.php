@@ -3721,27 +3721,13 @@ function drawNotesFromObject($obj, $refresh=false) {
       }
       echo '<td class="noteData" style="width:5%; text-align: center;">#'.htmlEncode($note->id).'</td>';
       if($noteDiscussionMode == 'YES'){
-        $updateReply = 0;
-        if($note->idNote){
-          $parentNote = new Note($note->idNote);
-          while ($user->id != $parentNote->idUser and ($parentNote->idPrivacy == 3 or $parentNote->idPrivacy == 2)){
-            $updateReply++;
-            $parentNote = new Note($parentNote->idNote);
-          }
-          if($note->replyLevel-$updateReply <= 1){
-          	setSessionValue('updateNoteLevel', $updateReply);
-          }
-        }
-        if(sessionValueExists('updateNoteLevel') and getSessionValue('updateNoteLevel')){
-        	$updateReply = getSessionValue('updateNoteLevel');
-        }
-        for($i=0; $i<$note->replyLevel-$updateReply; $i++){
+        for($i=0; $i<$note->replyLevel; $i++){
         	if($i >= 5){
         		break;
         	}
         	echo '<td class="noteData" colspan="1" style="width:3%;border-bottom:0px;border-top:0px;border-right:solid 2px;!important;"></td>';//border-bottom:0px;border-top:0px;!important
         }
-        echo '<td colspan="'.(6-$note->replyLevel+$updateReply).'" class="noteData" style="width:'.(($print)?(95-(3*$note->replyLevel-$updateReply)):(85-(3*$note->replyLevel-$updateReply))).'%">';
+        echo '<td colspan="'.(6-$note->replyLevel).'" class="noteData" style="width:'.(($print)?(95-(3*$note->replyLevel)):(85-(3*$note->replyLevel))).'%">';
       }else{
         echo '<td colspan="6" class="noteData" style="width:'.(($print)?'95':'85').'%">';
       }
