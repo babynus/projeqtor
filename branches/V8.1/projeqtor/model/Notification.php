@@ -140,7 +140,7 @@ class Notification extends SqlElement {
         self::$_fieldsAttributes['idStatusNotification'] = 'hidden';
         $this->idStatusNotification = 1;
         self::$_colCaptionTransposition['idResource'] = 'receiver';
-        self::$_fieldsAttributes['idResource'] = '';        
+        self::$_fieldsAttributes['idResource'] = 'required';        
     }
   }
 
