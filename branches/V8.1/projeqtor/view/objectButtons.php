@@ -61,7 +61,7 @@
   if (file_exists('../report/object/'.$class.'.php')) {
     $printPage='../report/object/'.$class.'.php';
     $printPagePdf='../report/object/'.$class.'.php';
-    if (SqlElement::class_exists('TemplateReport')) {
+    if (SqlElement::class_exists('TemplateReport') and Plugin::isPluginEnabled('templateReport')) {
       $tmpMode=TemplateReport::getMode($class);
       if ($tmpMode=='download') {
         $modePdf='download';
