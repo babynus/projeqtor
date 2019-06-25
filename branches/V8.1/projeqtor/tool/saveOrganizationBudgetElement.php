@@ -107,7 +107,7 @@ if($action=='ADD') {
         $bE->budgetWork = $budgetWork;
         $bE->budgetCost = $budgetCost;
         $bE->expenseBudgetAmount = $budgetExpenseAmount;
-        $bE->totalBudgetCost = $budgetCost + $budgetExpenseAmount;
+        $bE->totalBudgetCost = floatval($budgetCost) + floatval($budgetExpenseAmount);
         $result = $bE->simpleSave();
     }
 }
