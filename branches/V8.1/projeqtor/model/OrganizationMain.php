@@ -700,7 +700,7 @@ public function saveOrganizationBudgetElement($idle=null,$idleDateTime=null,$nam
    * @param boolean $updateIdle : If true, Updade the BudgetElement's idle
    * @param boolean $updateName : If true, Update the BudgetElement's name
    */
-  public function updateSynthesis($budget) {
+  public function updateSynthesis($budget=null) {
     if(Parameter::getGlobalParameter('useOrganizationBudgetElement')!="YES") {return;}
     if (isset(BudgetElement::$_noDispatchArrayBudget[$this->id])) {return;}
     BudgetElement::$_noDispatchArrayBudget[$this->id]=$this->id; // Will avoid double update for save change
