@@ -1936,6 +1936,7 @@ class PlanningElement extends SqlElement {
         errorLog("for predecessor $dep->predecessorRefType #$dep->predecessorRefId, successor $dep->successorRefType #$dep->successorRefId");
       }
     }
+    BudgetElement::dispatchFinalize();
     $result="OK";
   }
   
@@ -1950,6 +1951,7 @@ class PlanningElement extends SqlElement {
     if (count(PlanningElement::$_noDispatchArray)>0) {
       self::moveTaskFinalize();
     }
+    BudgetElement::dispatchFinalize();
   }
     
   public static function getMilestonableList() {
