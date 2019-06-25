@@ -881,7 +881,6 @@ abstract class SqlElement {
   
   // Save without controls and without extra save() feature defined in local save() method (for corresponding class)
   public function simpleSave() {
-    debugLog("simpleSave(".get_class($this)." #$this->id)");
     return $this->saveForced();
   }
 
@@ -2200,6 +2199,10 @@ abstract class SqlElement {
     if (property_exists ( $newObj, "idActivity" ) and $toActivity) {
       $newObj->idActivity = $toActivity;
     }
+    if (property_exists ( $newObj, "fixPerimeter" )) {
+      $newObj->fixPerimeter = 0;
+    }
+    
     if (get_class ( $newObj ) == 'Bill') {
       $newObj->paymentDate = null;
       $newObj->paymentAmount = null;
