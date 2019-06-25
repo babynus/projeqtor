@@ -28,9 +28,6 @@ include_once("../tool/projeqtor.php");
 $proj='*'; 
 if(sessionValueExists('project')){
   $proj=getSessionValue('project');
-  if(strpos($proj, ",")){
-  	$proj="*";
-  }
 } else {
   setSessionValue('project', "*");
 }
@@ -61,6 +58,8 @@ if (sessionValueExists('projectSelectorDisplayMode')) {
     <?php
 if ($proj=='*') {
   echo '<i>' . i18n('allProjects') . '</i>';
+} else if(strpos($proj, ",") !== null){
+  echo '<i>'.i18n('selectedProject').'</i>';
 } else {
   $projObject=new Project($proj);
   echo htmlEncode($projObject->name);
