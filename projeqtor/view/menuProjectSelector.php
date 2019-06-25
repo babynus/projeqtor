@@ -70,7 +70,7 @@ if ($proj=='*') {
   <span dojoType="dijit.TooltipDialog" class="white" <?php echo ($cpt>25)?'style="max-width:900px;"':'';?>> 
      <button id="multiProjectSelectButton" dojoType="dijit.form.Button" style="right:25px;position:absolute;"><?php echo i18n('buttonOK')?>
        <script type="dojo/connect" event="onClick" args="evt">
-          selectedMultiProject(null, null, true);
+          selectedMultiProject();
        </script>
      </button>  
     <div <?php echo ($cpt>25)?'style="height: 500px; overflow-x: hidden; overflow-y: scroll;"':'';?>>
