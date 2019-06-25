@@ -213,7 +213,6 @@ foreach ($work as $resWork) {
     }
     echo '</td>';
   }
-  //debugLog($resWork['resource']." max=".$maxSurbooking[$resWork['idResource']." min=".$minSurbooking[$resWork['idResource']);
   echo '<td style="border-left:1px solid #505050;"><div style="width:200px; max-width:200px;overflow:hidden; text-align:left;max-height:20px;">&nbsp;';
   if ($overCapa) echo '<div style="float:right;padding-right:3px">&nbsp;<img style="width:10px" src="../view/img/arrowUp.png" />&nbsp;'.htmlDisplayNumericWithoutTrailingZeros($overCapa).'</div>';
   if ($underCapa) echo '<div style="float:right">&nbsp;<img style="width:10px" src="../view/img/arrowDown.png" />&nbsp;'.htmlDisplayNumericWithoutTrailingZeros($underCapa).'</div>';
