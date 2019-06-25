@@ -73,7 +73,7 @@ $insertPlanningItem = RequestHandler::getValue('insertItem');
 if($insertPlanningItem){
   $currentItemParent = RequestHandler::getId('currentItemParent');
   $classItemParent = RequestHandler::getClass('originClass');
-  $objInsert = new $classItemParent($currentItemParent);
+  if (SqlElement::class_exists($classItemParent)) $objInsert = new $classItemParent($currentItemParent);
 }
 
 if ($noselect) {
