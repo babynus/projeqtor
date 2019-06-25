@@ -2719,25 +2719,25 @@ function setSelectedProject(idProject, nameProject, selectionField,resetPrevious
 			idProject = idProject.split('_');
 			idProject = idProject.flat();
 		}
-		arraySelectedProject.forEach(function(element){
-			dijit.byId('checkBoxProj'+element).set('checked', false);
-		});
-		arraySelectedProject.splice(0);
 		if(Array.isArray(idProject)){
 			arraySelectedProject.forEach(function(element){
-				dijit.byId('checkBoxProj'+element).set('checked', false);
+				if(dijit.byId('checkBoxProj'+element)){
+					dijit.byId('checkBoxProj'+element).set('checked', false);
+				}
 			});
 			arraySelectedProject.splice(0);
 			idProject.forEach(function(element){
-				selectedMultiProject(element, true, false);
-			});
-			arraySelectedProject.forEach(function(element){
-				dijit.byId('checkBoxProj'+element).set('checked', true);
+				if(dijit.byId('checkBoxProj'+element)){
+					dijit.byId('checkBoxProj'+element).set('checked', true);
+					arraySelectedProject.push(element);
+				}
 			});
 		}
 	} else {
 	  arraySelectedProject.forEach(function(element){
-	    if (dijit.byId('checkBoxProj'+element)) dijit.byId('checkBoxProj'+element).set('checked', false);
+	    if (dijit.byId('checkBoxProj'+element)){
+	    	dijit.byId('checkBoxProj'+element).set('checked', false);
+	    }
     });
 	}
   if (selectionField) {
@@ -6014,32 +6014,19 @@ function removeAutoSendReport(idSendReport){
   showConfirm(i18n('removeAutoSendReport') ,action);
 }
 
-function selectedMultiProject(idProject, checked, submit){
+function selectedMultiProject(){
 	var nameProject = '<i>'+i18n('selectedProject')+'</i>';
-	if(idProject != null){
-		if(checked == true){
-			var pos = arraySelectedProject.indexOf('*');
-			if(pos != -1){
-				arraySelectedProject.splice(pos,1);
-			}
-			arraySelectedProject.push(idProject);
-		}else{
-			var pos = arraySelectedProject.indexOf(idProject);
-			if(pos != -1){
-				arraySelectedProject.splice(pos,1);
-			}
-			if(arraySelectedProject.length == 0){
-				arraySelectedProject.push('*');
-			}
-		}
-	}
-	if(arraySelectedProject[0] == '*'){
+	arraySelectedProject.splice(0);
+	dojo.query(".whitecheck").forEach(function(node, index, nodelist) {
+	    if(dijit.byId(node.getAttribute('widgetid')).get('checked')){
+	    	arraySelectedProject.push(dijit.byId(node.getAttribute('widgetid')).get('value'));
+	    }
+	  });
+	if(arraySelectedProject.length == 0){
+		arraySelectedProject.push('*');
 		nameProject = '<i>'+i18n('allProjects')+'</i>';
 	}
-	if(submit){
-		if(arraySelectedProject != null){
-			saveDataToSession('project', arraySelectedProject.flat(), null);
-			setSelectedProject(arraySelectedProject.flat(), nameProject, 'selectedProject');
-		}
+	if(arraySelectedProject != null){
+		setSelectedProject(arraySelectedProject.flat(), nameProject, 'selectedProject');
 	}
 }
