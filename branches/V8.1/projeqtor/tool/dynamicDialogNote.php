@@ -126,7 +126,7 @@ if (sessionValueExists('screenHeight')) {
           <table width="100%"><tr height="25px">
             <td width="33%" class="smallTabLabel" >
               <label class="smallTabLabelRight" for="notePrivacyPublic"><?php echo i18n('public');?>&nbsp;</label>
-              <input type="radio" data-dojo-type="dijit/form/RadioButton" name="notePrivacy" id="notePrivacyPublic" value="1" <?php if ($parentNote->idPrivacy==1) echo "checked"; if ($parentNote->idPrivacy >= 2) echo ' disabled ';?> />
+              <input type="radio" data-dojo-type="dijit/form/RadioButton" name="notePrivacy" id="notePrivacyPublic" value="1" <?php if ($parentNote->idPrivacy==1 or $parentNote->id == null) echo "checked"; if ($parentNote->idPrivacy >= 2) echo ' disabled ';?> />
             </td>
             <td width="34%" class="smallTabLabel" >
               <label class="smallTabLabelRight" for="notePrivacyTeam"><?php echo i18n('team');?>&nbsp;</label>
