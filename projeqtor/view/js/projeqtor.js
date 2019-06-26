@@ -2733,17 +2733,17 @@ function setSelectedProject(idProject, nameProject, selectionField,resetPrevious
 				}
 			});
 		}else{
-			dojo.query(".whitecheck").forEach(function(node, index, nodelist) {
+			dojo.query(".projectSelectorCheckbox").forEach(function(node, index, nodelist) {
 			    if(dijit.byId(node.getAttribute('widgetid')).get('checked')){
-			    	dijit.byId(node.getAttribute('widgetid')).set('checked', false)
+			    	dijit.byId(node.getAttribute('widgetid')).set('checked', false);
 			    }
 			  });
 			arraySelectedProject.splice(0);
 		}
 	} else {
-		dojo.query(".whitecheck").forEach(function(node, index, nodelist) {
+		dojo.query(".projectSelectorCheckbox").forEach(function(node, index, nodelist) {
 		    if(dijit.byId(node.getAttribute('widgetid')).get('checked')){
-		    	dijit.byId(node.getAttribute('widgetid')).set('checked', false)
+		    	dijit.byId(node.getAttribute('widgetid')).set('checked', false);
 		    }
 		  });
 		arraySelectedProject.splice(0);
@@ -6025,7 +6025,7 @@ function removeAutoSendReport(idSendReport){
 function selectedMultiProject(){
 	var nameProject = '<i>'+i18n('selectedProject')+'</i>';
 	arraySelectedProject.splice(0);
-	dojo.query(".whitecheck").forEach(function(node, index, nodelist) {
+	dojo.query(".projectSelectorCheckbox").forEach(function(node, index, nodelist) {
 	    if(dijit.byId(node.getAttribute('widgetid')).get('checked')){
 	    	arraySelectedProject.push(dijit.byId(node.getAttribute('widgetid')).get('value'));
 	    }
