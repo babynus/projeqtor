@@ -286,7 +286,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 // MTY - GENERIC DAY OFF
     ?>
 // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM
-    var paramNotificationSystemActiv=<?php echo Module::isModuleActive('moduleNotification'); ?>;
+    var paramNotificationSystemActiv=<?php echo (Module::isModuleActive('moduleNotification'))?'true':'false'; ?>;
     var totalUnreadNotificationsCount=0;
 // END - ADD BY TABARY - NOTIFICATION SYSTEM
 // MTY - LEAVE SYSTEM
