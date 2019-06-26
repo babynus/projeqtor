@@ -2733,18 +2733,20 @@ function setSelectedProject(idProject, nameProject, selectionField,resetPrevious
 				}
 			});
 		}else{
-			arraySelectedProject.forEach(function(element){
-			    if (dijit.byId('checkBoxProj'+element)){
-			    	dijit.byId('checkBoxProj'+element).set('checked', false);
+			dojo.query(".whitecheck").forEach(function(node, index, nodelist) {
+			    if(dijit.byId(node.getAttribute('widgetid')).get('checked')){
+			    	dijit.byId(node.getAttribute('widgetid')).set('checked', false)
 			    }
-		    });
+			  });
+			arraySelectedProject.splice(0);
 		}
 	} else {
-	  arraySelectedProject.forEach(function(element){
-	    if (dijit.byId('checkBoxProj'+element)){
-	    	dijit.byId('checkBoxProj'+element).set('checked', false);
-	    }
-    });
+		dojo.query(".whitecheck").forEach(function(node, index, nodelist) {
+		    if(dijit.byId(node.getAttribute('widgetid')).get('checked')){
+		    	dijit.byId(node.getAttribute('widgetid')).set('checked', false)
+		    }
+		  });
+		arraySelectedProject.splice(0);
 	}
   if (selectionField) {
     dijit.byId(selectionField).set(
