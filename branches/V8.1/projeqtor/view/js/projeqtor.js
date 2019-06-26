@@ -2732,6 +2732,12 @@ function setSelectedProject(idProject, nameProject, selectionField,resetPrevious
 					arraySelectedProject.push(element);
 				}
 			});
+		}else{
+			arraySelectedProject.forEach(function(element){
+			    if (dijit.byId('checkBoxProj'+element)){
+			    	dijit.byId('checkBoxProj'+element).set('checked', false);
+			    }
+		    });
 		}
 	} else {
 	  arraySelectedProject.forEach(function(element){
