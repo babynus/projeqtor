@@ -75,6 +75,7 @@ class Security
       Security::checkValidId($val);
       return $id;
     }
+    if ($id=='null' or $id=='undefined') $id=null;
     if (! is_numeric($id) and $id!='*' and trim($id)!='') {
       if($activeTraceHack)traceHack("Id '$id' is not numeric");
       $id=null;
