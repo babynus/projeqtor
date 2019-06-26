@@ -41,7 +41,7 @@ var openMenuListTimeout=null;
 var menuListAutoshow=false;
 var hideUnderMenuTimeout;
 var hideUnderMenuId;
-var previewhideUnderMenuId;
+//var previewhideUnderMenuId;
 var stockEmailHistory = new Array();
 // =============================================================================
 // = Wait spinner
@@ -10188,10 +10188,11 @@ function displayMenu(id){
 }
 //Florent 
 function displayUnderMenu(id,idParent){
-  if (hideUnderMenuId==null && previewhideUnderMenuId!=null){
-    hideUnderMenu(previewhideUnderMenuId,0);
-  }
-  else if(hideUnderMenuId){
+//  if (hideUnderMenuId==null && previewhideUnderMenuId!=null){
+//    hideUnderMenu(previewhideUnderMenuId,0);
+//  }
+//  else 
+    if(hideUnderMenuId){
       if (hideUnderMenuId == id ){
         dojo.byId('UnderMenu'+id).style.display="none";
         clearTimeout(hideUnderMenuTimeout);
@@ -10201,7 +10202,7 @@ function displayUnderMenu(id,idParent){
     }
     dojo.byId('UnderMenu'+id).style.display="block";
     setTimeout("repositionMenuDiv("+id+","+idParent+");",10);
-    previewhideUnderMenuId=id;
+    //previewhideUnderMenuId=id;
 }
 
 function repositionMenuDiv(id,idParent) {
@@ -10236,11 +10237,11 @@ function hideUnderMenu(id){
   hideUnderMenuId = null;
 }
 //Florent 
-function hidePreviewUnderMenu(id){
-  if(previewhideUnderMenuId!=id && previewhideUnderMenuId!=null){
-    hideUnderMenu(previewhideUnderMenuId);
-  }
-}
+//function hidePreviewUnderMenu(id){
+//  if(previewhideUnderMenuId!=id && previewhideUnderMenuId!=null){
+//    hideUnderMenu(previewhideUnderMenuId);
+//  }
+//}
 //end
 function displayListOfApprover(id){
   var params="&objectId=" + id;
