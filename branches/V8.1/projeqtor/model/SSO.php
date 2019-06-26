@@ -123,14 +123,17 @@ class SSO
       }
       $user->description=htmlFormatDate(date('Y-m-d')).'<br/>'.i18n('newUserMessage',array($user->name));
       $loginSave = true;
+      setSessionUser($user);
       $resultSaveUser=$user->save();
       $resSave=getLastOperationStatus($resultSaveUser);
       if ($resSave=='OK') {
         $idProject = Parameter::getGlobalParameter('SAML_defaultProject');
-        $aff = new Affectation();
-        $aff->idProject = $idProject;
-        $aff->idResource = $user->id;
-        $resultSaveAffectation=$aff->save();
+        if (trim($idProject)) {
+          $aff = new Affectation();
+          $aff->idProject = $idProject;
+          $aff->idResource = $user->id;
+          $resultSaveAffectation=$aff->save();
+        }
         $loginSave = false;
         $sendAlert=Parameter::getGlobalParameter('SAML_msgOnUserCreation');
         if ($sendAlert!='NO') {
