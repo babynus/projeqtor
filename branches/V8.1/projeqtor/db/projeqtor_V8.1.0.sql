@@ -34,25 +34,26 @@ ALTER TABLE `${prefix}plannedworkbaseline` ADD surbookedWork decimal(8,5) unsign
 ALTER TABLE `${prefix}assignment` ADD surbooked int(1) DEFAULT 0;
 
 -- /Flo
-INSERT INTO `${prefix}originable`( `name`, `idle`) VALUES ('DocumentVersion', 0);
+INSERT INTO `${prefix}originable` ( `name`, `idle`) VALUES ('DocumentVersion', 0);
 
 ALTER TABLE `${prefix}message` ADD COLUMN `startDate` datetime DEFAULT NULL,
 ADD COLUMN `endDate` datetime DEFAULT NULL;
 
 -- Password
-ALTER TABLE `${prefix}resource` CHANGE `crypto` `crypto` VARCHAR(100) DEFAULT NULL;
+ALTER TABLE `${prefix}resource` CHANGE `crypto` `cryptotemp` VARCHAR(100) DEFAULT NULL;
+ALTER TABLE `${prefix}resource` CHANGE `cryptotemp` `crypto` VARCHAR(100) DEFAULT NULL;
 
 -- Issue with workflow 
-DELETE FROM `${prefix}tempupdate`;
+DELETE FROM `${prefix}tempupdate` WHERE 1=1;
 INSERT INTO `${prefix}tempupdate` (id) SELECT max(id) FROM `${prefix}workflowstatus` group by idWorkFlow, idStatusFrom, idStatusTo, idProfile having count(*)>1;
 DELETE FROM `${prefix}workflowstatus` where id in (SELECT id FROM `${prefix}tempupdate`);
-DELETE FROM `${prefix}tempupdate`;
+DELETE FROM `${prefix}tempupdate` WHERE 1=1;
 INSERT INTO `${prefix}tempupdate` (id) SELECT max(id) FROM `${prefix}workflowstatus` group by idWorkFlow, idStatusFrom, idStatusTo, idProfile having count(*)>1;
 DELETE FROM `${prefix}workflowstatus` where id in (SELECT id FROM `${prefix}tempupdate`);
-DELETE FROM `${prefix}tempupdate`;
+DELETE FROM `${prefix}tempupdate` WHERE 1=1;
 INSERT INTO `${prefix}tempupdate` (id) SELECT max(id) FROM `${prefix}workflowstatus` group by idWorkFlow, idStatusFrom, idStatusTo, idProfile having count(*)>1;
 DELETE FROM `${prefix}workflowstatus` where id in (SELECT id FROM `${prefix}tempupdate`);
-DELETE FROM `${prefix}tempupdate`;
+DELETE FROM `${prefix}tempupdate` WHERE 1=1;
 
 CREATE UNIQUE INDEX `workflowstatusReference` ON `${prefix}workflowstatus` (idWorkFlow,idStatusFrom,idStatusTo,idProfile);
 
