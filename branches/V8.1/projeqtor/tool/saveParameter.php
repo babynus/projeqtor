@@ -292,9 +292,9 @@ if ($type=='habilitation') {
         }
       }*/
 // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM
-      if ($obj->parameterValue!=$val and $obj->parameterCode=="notificationSystemActiv") {
-          $changeNotificationSystemActiv = true;
-      }
+//       if ($obj->parameterValue!=$val and $obj->parameterCode=="notificationSystemActiv") {
+//           $changeNotificationSystemActiv = true;
+//       }
 // END - ADD BY TABARY - NOTIFICATION SYSTEM      
 // MTY - LEAVE SYSTEM
       if ($obj->parameterValue!=$val and $obj->parameterCode=="leavesSystemActiv") {
