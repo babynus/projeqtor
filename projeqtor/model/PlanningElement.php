@@ -134,7 +134,8 @@ class PlanningElement extends SqlElement {
                                   "latestStartDate"=>"hidden",
                                   "latestEndDate"=>"hidden",
                                   "isOnCriticalPath"=>"hidden",
-                                  "isManualProgress"=>"hidden"
+                                  "isManualProgress"=>"hidden",
+                                  "surbooked"=>"hidden"
   );   
   
   private static $_predecessorItemsArray = array();

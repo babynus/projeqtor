@@ -1373,7 +1373,7 @@ function submitForm(page, destination, formName) {
  * @return void
  */
 function refreshNotificationTree(bCheckFormChangeInProgress) {
-    if (paramNotificationSystemActiv == "NO") {
+    if (paramNotificationSystemActiv == false) {
         return;
     }
     if (bCheckFormChangeInProgress && waitingForReply) {
