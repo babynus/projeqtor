@@ -315,9 +315,6 @@
                  <?php 
                  $critFld=null;
                  $critVal=null;
-                 if(strpos($proj, ",")){
-                 	$proj="*";
-                 }
                  if (sessionValueExists('project') and getSessionValue('project') and getSessionValue('project')!='*' and strpos(getSessionValue('project'), ",") === null) {
                  	$critFld='idProject';
                  	$critVal=getSessionValue('project');
