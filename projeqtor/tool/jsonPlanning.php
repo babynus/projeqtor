@@ -1229,9 +1229,6 @@
         $maxDate=$endDate;
       }
     }
-    if(strpos($proj, ",")){
-    	$proj="*";
-    }
     if (getSessionValue('project') and getSessionValue('project')!='*' and strpos(getSessionValue('project'), ",") === null) {
       $prj=new Project(getSessionValue('project'), true);
       $lstTopPrj=$prj->getTopProjectList(true);
