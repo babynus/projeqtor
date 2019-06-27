@@ -96,9 +96,6 @@ if (! isset($outMode)) { $outMode=""; }
 $showIdleProjects=(sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle')==1)?1:0;
   
 $accessRightRead=securityGetAccessRight('menuActivity', 'read');
-if(strpos($proj, ",")){
-	$proj="*";
-}
 if ( ! ( $accessRightRead!='ALL' or (sessionValueExists('project') and getSessionValue('project')!='*') and strpos(getSessionValue('project'), ",") === null)
 and ( ! array_key_exists('idProject',$_REQUEST) or trim($_REQUEST['idProject'])=="")) {
 	$listProj=explode(',',getVisibleProjectsList(! $showIdleProjects));
