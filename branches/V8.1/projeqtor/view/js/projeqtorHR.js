@@ -2404,7 +2404,7 @@ function checkLeavesEarned(userId) {
         url : url,
         handleAs : "text",
         load : function(data) {
-            if(data){
+            if(data && data.indexOf('name="lastOperationStatus" value="ERROR">')<0){            	
                 var result = JSON.parse(data);
                 if (result!='OK') {
                   consoleTraceLog('Error on checking Leaves Earned at ' + currentDate +' - result = '+result);
