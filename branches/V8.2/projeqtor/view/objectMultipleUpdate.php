@@ -41,8 +41,6 @@
   $objectClass=$_REQUEST['objectClass'];
   Security::checkValidClass($objectClass);
   $obj=new $objectClass();
-  debugLog($objectClass);
-  debugLog($obj);
 ?>
 <div dojoType="dijit.layout.BorderContainer" class="background">
   <div id="buttonDiv" dojoType="dijit.layout.ContentPane" region="top">
