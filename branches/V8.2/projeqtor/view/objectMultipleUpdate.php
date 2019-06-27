@@ -41,7 +41,8 @@
   $objectClass=$_REQUEST['objectClass'];
   Security::checkValidClass($objectClass);
   $obj=new $objectClass();
-  
+  debugLog($objectClass);
+  debugLog($obj);
 ?>
 <div dojoType="dijit.layout.BorderContainer" class="background">
   <div id="buttonDiv" dojoType="dijit.layout.ContentPane" region="top">
@@ -835,6 +836,20 @@
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
                  id="changeStatusIdle" name="changeStatusIdle">
+                  <option value=""></option>
+                  <option value="true"><?php echo i18n('checkBox');?></option>
+                  <option value="false"><?php echo i18n('uncheckedBox');?></option>
+                </select>
+              </td>
+            </tr>
+            <?php  }?>
+            <?php if(get_class($obj)=='User'){?>
+            <tr class="detail">
+              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeIsLDAP');?>&nbsp;:&nbsp;</td>
+              <td>
+                <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                <?php echo autoOpenFilteringSelect();?>
+                 id="changeIsLDAP" name="changeIsLDAP">
                   <option value=""></option>
                   <option value="true"><?php echo i18n('checkBox');?></option>
                   <option value="false"><?php echo i18n('uncheckedBox');?></option>
