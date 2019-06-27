@@ -197,6 +197,7 @@ $profile = trim(RequestHandler::getValue('idProfile_multiple'));
 $rate= trim(RequestHandler::getValue('rate_multiple'));
 $team=trim(RequestHandler::getValue('idTeam_multiple'));
 $changeStatusIdle=trim(RequestHandler::getValue('changeStatusIdle'));
+$changeIsLDAP=trim(RequestHandler::getValue('changeIsLDAP'));
 
 // MTY - LEAVE SYSTEM
 $startDate = "";
@@ -255,6 +256,14 @@ foreach ($selectList as $id) {
 	 }else{
 	   $item->idle = 0;
 	 }
+	}
+	
+	if($changeIsLDAP){
+		if($changeIsLDAP=='true'){
+			$item->isLdap = 1;
+		}else{
+			$item->isLdap = 0;
+		}
 	}
 	
 	if ($type and property_exists($item,$typeField)) {
