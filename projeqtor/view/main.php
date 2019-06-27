@@ -510,7 +510,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 
 // MTY - LEAVE SYSTEM
       <?php
-        if (isLeavesSystemActiv() and getSessionUser()->isEmployee or isLeavesAdmin(getSessionUser()->id)) {
+        if (isLeavesSystemActiv() and (getSessionUser()->isEmployee or isLeavesAdmin(getSessionUser()->id))) {
       ?>
             checkLeavesEarned(<?php echo getSessionUser()->id?>);
       <?php
