@@ -159,7 +159,7 @@ class ImputationValidation{
   			$excepted = 0;
   			$weekDayArray =array();
   			while ($firstWeekDay<=$lastWeekDay){
-  			  if(isOpenDay($firstWeekDay)){
+  			  if(isOpenDay($firstWeekDay, $idCalendar)){
   			    $excepted += round($res->getCapacityPeriod($firstWeekDay),2);
   			    $weekDayArray[$week->idResource][$week->periodValue][$firstWeekDay]=round($res->getCapacityPeriod($firstWeekDay),2);
   			  }
