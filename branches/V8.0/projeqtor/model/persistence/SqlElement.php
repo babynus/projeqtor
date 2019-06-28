@@ -7058,6 +7058,8 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
       return htmlFormatDate($refObj->initialDueDate);
     } else if (property_exists($refObj, 'initialDueDateTime')) {
       return htmlFormatDate($refObj->initialDueDateTime,true);
+    } else if (property_exists($refObj, 'initialEndDate')) {
+      return htmlFormatDate($refObj->initialEndDate,true);  
     } else {
       return '';
     }
@@ -7068,6 +7070,9 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
       return htmlFormatDate($refObj->actualDueDate);
     } else if (property_exists($refObj, 'actualDueDateTime')) {
       return htmlFormatDate($refObj->actualDueDateTime,true);
+    } else if (property_exists($refObj, 'actualEndDate')) {
+        return htmlFormatDate($refObj->actualEndDate,true);
+      
     } else {
       return '';
     }
