@@ -194,7 +194,7 @@ foreach ($work as $resWork) {
       } else {
         $color=($resWork[$dt]['type']=='real')?"#705050":"#BB5050";
       }
-      if ($resWork[$dt]['surbooked']==1) {
+      if (isset($resWork[$dt]['surbooked']) and $resWork[$dt]['surbooked']==1) {
         $sb=$resWork[$dt]['surbookedWork'];
         $height=round(($w-$sb)*20/$capacityTop,0);
         $heightSurbooked=round($sb*20/$capacityTop,0);
