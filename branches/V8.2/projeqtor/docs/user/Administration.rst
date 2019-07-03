@@ -1,4 +1,5 @@
 
+
 .. title:: Administration
 
 .. index:: ! Administration console
@@ -312,6 +313,10 @@ Parameters to manage automations
       * **Always**: Values are replaced on activities and project.(erase parents)
       * **Only is set**: Replaces values ( excepted if set by null or stay not indicated,do not erase parents)
 
+.. figure:: /images/GUI/COMMON_ZONE_ParamConsolidation.png
+      :alt: Consolidation work
+      :align: center
+   
 
 .. compound:: **Auto set Responsible if single resource:**
 

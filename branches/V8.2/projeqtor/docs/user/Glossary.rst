@@ -56,7 +56,7 @@ Glossary
        * The element type screens allow to set this parameter to several elements. 
        * More detail, see: :ref:`behavior-section`. 
 
-   Done Status
+   Done
 
       Done is a micro state in ProjeQtOr 
       

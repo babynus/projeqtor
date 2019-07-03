@@ -10,7 +10,7 @@
 .. _concept:
 
 Project
-=======
+*******
 
 A project is the main entity of ProjeQtOr.
 
@@ -39,13 +39,19 @@ Project element is more than a :ref:`planning-element`, it is also used to:
 
  .. compound:: **Project selector**
 
-    * It is a filter that allows restricting the data visible to a dedicated project.
-    * See: :ref:`top-bar`
-
+    * The project selector works as a filter.
+    * By default, the selector displays "all projects", you can change this view in the user-miscelleanous settings and choose the project to display by default
+    * You can restrict data for one or more dedicated projects without necessarily being bound
+    
+    .. seealso:: 
+      
+      * See: :ref:`top-bar`
+      * see: :ref:`user-parameters`
+    
 
 .. rubric:: Define the project type
 
-.. rubric:: Three project types can be defined:
+.. compound:: Three project types can be defined:
 
    **Operational project**
 
@@ -98,7 +104,7 @@ A project can be billable or not.
 .. _organization-concept:
 
 Organization
-============
+************
 
 The notion of organization introduces a way to consolidate projects on a different hiererchic structure, apart from projects / sub-projects structure.
 
@@ -131,7 +137,7 @@ The notion of organization introduces a way to consolidate projects on a differe
 .. _product-concept:
 
 Product
-=======
+*******
 
 A product is a material object or for IT/IS projects is a software application.
 
@@ -233,7 +239,7 @@ The rules defining a product structure are:
 
 
 Planning
-========
+********
 
 ProjeQtOr implements work-driven planning method.
 
@@ -558,12 +564,8 @@ Breakdown can be done with sub-projects, activities and test sessions.
 * All other elements are numbered depending on their level and sequence.
 * WBS numbering is automatically adjusted.
 
-.. raw:: latex
-
-    \newpage
-
 Project scheduling calculation
------------------------------- 
+------------------------------
 
 The project schedule is calculated on the full project plan that includes parents and predecessor elements (dependencies).
 
@@ -604,7 +606,7 @@ The remaining work (left) on tasks will be distributed on the following days fro
 .. _projeqtor-roles:
 
 ProjeQtOr roles
-===============
+***************
 
 A stakeholder can play many roles in ProjeQtOr.
 
@@ -724,7 +726,7 @@ Specific roles are defined to allow:
 .. _profiles-definition:
 
 Profiles definition
-===================
+*******************
 
 The profile is a group used to define application authorization and access rights to the data.
 
@@ -804,7 +806,7 @@ A user linked to a profile belongs to this group who share same application beha
 .. _user-ress-contact-demystify:
 
 Stakeholder definition
-======================
+**********************
 
 ProjeQtOr allows to define roles of stakeholders.
 
@@ -955,7 +957,7 @@ Allocation to project and user profile are also shared.
 .. _allocation-to-project:
 
 Allocation to project
-=====================
+*********************
 
 Allocation to project is used to:
 
@@ -1074,7 +1076,7 @@ Allocation to project can be defined in :ref:`project` and :ref:`contact` screen
 .. _assignment:
 
 Assignment
-==========
+**********
 
 The assignment is used to assign resources to project tasks (activity, test session, meeting).
 
@@ -1102,7 +1104,7 @@ A resource assignment contains data about work on task (planned,  real, left and
 .. _resource-function-cost:
 
 Resource function and cost
-==========================
+**************************
 
 .. rubric:: Function
 
@@ -1140,7 +1142,7 @@ Resource function and cost
 .. _resource-calendar:
 
 Resource calendar
-=================
+*****************
 
 A calendar defines the working days in a the year.
 
@@ -1159,8 +1161,6 @@ A calendar is defined for a type of resources and each resource is attached to a
 
 * Working days defined in a calendar allows to show availability of resources.
 
----------------
-
 .. rubric:: Default calendar
 
 * The default calendar is used to define the working days in the year.
@@ -1170,20 +1170,10 @@ A calendar is defined for a type of resources and each resource is attached to a
 
 * A specific calendar can be created to define working days for a type of resource.
 
-
-------------------
-
 .. note::
 
    * A calendar is set in :ref:`resource` screen. 
    * The calendar is defined in :ref:`calendar` screen.
-
-
-------------------------
-
-.. raw:: latex
-
-    \newpage
 
 .. rubric:: Use case
 
@@ -1211,7 +1201,7 @@ A calendar is defined for a type of resources and each resource is attached to a
 .. _photo:
 
 Photo
-=====
+*****
 
 A photo can be defined for a user, a resource and a contact.
 
