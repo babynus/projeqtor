@@ -66,7 +66,7 @@ To see complete list of changes made to software, visit the ProjeQtOr web site.
 
 **Expenses:** Extension of the Expenses part to put it at the same level as the Recipes
 
- * See: :ref:`Expenses`
+ * See: :ref:`Expenses` and :ref:`Incomes`
 
 **Planning:** Global planning can show any item on Gantt chart
 
@@ -192,12 +192,10 @@ Financial
 ---------
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
-   Expense
-   Order   
-   Bill
-   FinancialGallery
+   Expenses
+   Incomes
    
 Configuration Management
 ------------------------
