@@ -227,17 +227,18 @@ if ($type == 'empty') {
     $limitResourceByProj = Parameter::getUserParameter ( "limitResourceByProject" );
     if ($selectedProject and $selectedProject != '*' and $limitResourceByProj == 'on') {
       $restrictTableProjectSelected = array();
-      if(is_array($selectedProject)){
-        foreach ($selectedProject as $idProj){
-          $prj = new Project ( $idProj, true );
-          $lstTopSelectedPrj = $prj->getTopProjectList ( true );
-          foreach ($lstTopSelectedPrj as $idProject){
-            $lstTopPrj[$idProject]=$idProject;
-          }
-          $subProj = $prj->getRecursiveSubProjectsFlatList ();
-          foreach ($subProj as $id=>$name){
-            $sub[$id]=$name;
-          }
+      $lstTopPrj=array();
+      $sub=array();   
+      if(! is_array($selectedProject)) $selectedProject=explode(',',$selectedProject);
+      foreach ($selectedProject as $idProj){
+        $prj = new Project ( $idProj, true );
+        $lstTopSelectedPrj = $prj->getTopProjectList ( true );
+        foreach ($lstTopSelectedPrj as $idProject){
+          $lstTopPrj[$idProject]=$idProject;
+        }
+        $subProj = $prj->getRecursiveSubProjectsFlatList ();
+        foreach ($subProj as $id=>$name){
+          $sub[$id]=$name;
         }
       }
       $in = transformValueListIntoInClause ( array_merge ( $lstTopPrj, array_keys ( $sub ) ) );
