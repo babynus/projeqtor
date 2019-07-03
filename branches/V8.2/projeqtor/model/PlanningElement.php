@@ -708,7 +708,9 @@ class PlanningElement extends SqlElement {
         }
         if ( strval($newVal) != strval($oldVal) ) {
           if ($change) $query.=',';
-          if (substr($field,-4)=='Date') {
+          if ($newVal===null or $newVal==='') {
+            $query.=" $field=null ";
+          } else if (substr($field,-4)=='Date') {
             $query.=" $field='".$newVal."' ";
           } else {
             $query.=" $field=".$newVal;
