@@ -41,14 +41,22 @@ if (! $user->isResource) {
 if (!isset($includePool)) $includePool=false;
 $table = getListForSpecificRights($specific,$includePool);
 $selectedProject=getSessionValue('project');
-if(strpos($selectedProject, ",") != -1){
-	$selectedProject="*";
-}
 if ($selectedProject and $selectedProject!='*' and (isset($limitResourceByProj) and $limitResourceByProj=='on') ) {
+  $lstTopPrj=array();
+  $sub=array();
+  if(! is_array($selectedProject)) $selectedProject=explode(',',$selectedProject);
   $restrictTableProjectSelected=array();
-	$prj=new Project( $selectedProject , true);
-	$lstTopPrj=$prj->getTopProjectList(true);
-	$sub=$prj->getRecursiveSubProjectsFlatList();
+  foreach ($selectedProject as $idProj){
+    $prj = new Project ( $idProj, true );
+    $lstTopSelectedPrj = $prj->getTopProjectList ( true );
+    foreach ($lstTopSelectedPrj as $idProject){
+      $lstTopPrj[$idProject]=$idProject;
+    }
+    $subProj = $prj->getRecursiveSubProjectsFlatList ();
+    foreach ($subProj as $id=>$name){
+      $sub[$id]=$name;
+    }
+  }
 	$in=transformValueListIntoInClause(array_merge($lstTopPrj,array_keys($sub)));
 	$crit='idProject in ' . $in;
 	$aff=new Affectation();
