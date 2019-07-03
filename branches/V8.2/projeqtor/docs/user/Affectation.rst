@@ -6,7 +6,7 @@
 
 .. index:: ! Allocations
 
-.. _ allocation:
+.. _allocation:
 
 Allocations
 ***********
@@ -29,7 +29,7 @@ Offers a global view of allocation.
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: |ReqFieldLegend| Required Field
    :widths: 20, 80
    :header-rows: 1
 
@@ -41,9 +41,9 @@ Offers a global view of allocation.
      - Name of the allocated resource.
    * - Or contact
      - Name of the allocated contact.
-   * - **Profile**
+   * - |RequiredField| Profile
      - Selected profile.
-   * - **Project**
+   * - |RequiredField| Project
      - Project allocated to.
    * - Rate
      - Allocation rate for the project (%).
@@ -55,8 +55,6 @@ Offers a global view of allocation.
      - Flag to indicate that the allocation is archived.
    * - :term:`Description`
      - Complete description of the allocation.
-
-\* Required field
 
 .. topic:: Fields Resource & Contact
 
