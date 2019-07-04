@@ -252,7 +252,7 @@ class AutoSendReport extends SqlElement{
       $af=new Affectable($idUser);
       $listUser[$idUser]=($af->name)?$af->name:$af->userName;
     } else {
-      $listUser = getUserVisibleResourcesList(true);
+      $listUser = getListForSpecificRights('imputation');
     }
 	  $result = "";
 	  $result .='<div id="autoSendReportDiv" align="center" style="margin-top:20px;margin-bottom:20px; overflow-y:auto; width:100%;">';
