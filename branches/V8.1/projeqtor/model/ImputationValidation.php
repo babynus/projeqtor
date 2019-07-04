@@ -58,7 +58,7 @@ class ImputationValidation{
 	  $endWeek = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay)));
 	  $proj = new Project();
 	  $listAdmProj = $proj->getAdminitrativeProjectList(true);
-	  $userVisbileResourceList = getUserVisibleResourcesList(true);
+	  $userVisbileResourceList = getListForSpecificRights('imputation');
 	  if(trim($idUser) != ''){
 	    unset($userVisbileResourceList);
 	    foreach (getUserVisibleResourcesList(true) as $id=>$name){
