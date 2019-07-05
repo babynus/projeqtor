@@ -6,7 +6,10 @@
 
 .. index:: ! Access rights (Profile)
 
+.. _Acces_Right:
 
+Acces Right
+***********
 
 .. _profile:
 
@@ -17,7 +20,7 @@ Module Management
 
 | The Module Management allows to choose the module(s) that will appear in the interface.
 | This enables or disables a consistent group of features.
-| This screen is then accessible via a dedicated menu in the :ref:`Acces Right`
+| This screen is then accessible via a dedicated menu in the :ref:`Acces_Right<Module_Management>`
 
 
 .. figure:: /images/GUI/ACCESRIGHT_ManagementModule.png
@@ -96,7 +99,7 @@ and the other based on the restriction of product versions
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: 
+.. list-table:: |ReqFieldLegend| Required Field
    :widths: 20, 80
    :header-rows: 1
 
@@ -104,18 +107,17 @@ and the other based on the restriction of product versions
      - Description
    * - :term:`Id`
      - Unique Id for the profile.
-   * - Name
-     - Name of the profile\*.
+   * - |RequiredField| Name
+     - Name of the profile.
    * - Profile code
      - A code that may be internally used when generating emails and alerts.
-   * - Sort order\*
+   * - |RequiredField| Sort order
      - Number to define order of display in lists.
    * - :term:`Closed`
      - Flag to indicate that profile is archived.
    * - Description
      - Complete description of the profile.
 
-\* Required field
 
 .. topic:: Field: Profile code
 
@@ -156,7 +158,7 @@ Each access is defined as scope of visible and/or updatable, that can be, by kin
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: 
+.. list-table:: |ReqFieldLegend| Required Field 
    :widths: 20, 80
    :header-rows: 1
 
@@ -164,15 +166,15 @@ Each access is defined as scope of visible and/or updatable, that can be, by kin
      - Description
    * - :term:`Id`
      - Unique Id for the access mode.
-   * - **Name**
-     - Name of the access mode\*.
-   * - **Read rights**
+   * - |RequiredField| Name
+     - Name of the access mode.
+   * - |RequiredField| Read rights
      - Scope of visible items
-   * - **Create rights**
+   * - |RequiredField| Create rights
      - Scope of possibility to create items.
-   * - **Update rights**
+   * - |RequiredField| Update rights**
      - Scope of updatable items.
-   * - **Delete rights**
+   * - |RequiredField| Delete rights
      - Scope of deletable items.
    * - Sort order
      - Number to define order of display in lists
@@ -180,8 +182,6 @@ Each access is defined as scope of visible and/or updatable, that can be, by kin
      - Flag to indicate that access mode is archived.
    * - Description
      - Complete description of the access mode.
-
-\* Required field
 
 
 .. raw:: latex
@@ -365,8 +365,7 @@ The translated name depends on user language selected in :ref:`User parameters<d
 
 .. note::
 
-   * If translated name is displayed between suqare brackets [ ], 
-   then the value of field "Name" is not found in the translation table.
+   * If translated name is displayed between suqare brackets [ ], then the value of field "Name" is not found in the translation table.
 
 .. rubric:: Translation table files
 

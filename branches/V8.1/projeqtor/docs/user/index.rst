@@ -39,8 +39,8 @@ Whatever your choice of the method, you can use ProjeQtOr.
 
     \newpage
 
-What's New in this user guide version?
---------------------------------------
+What's New in this guide version?
+---------------------------------
 
 This section summarizes significant changes made in the user guide document for this version.
 
@@ -66,13 +66,13 @@ To see complete list of changes made to software, visit the ProjeQtOr web site.
 
 **Expenses:** Extension of the Expenses part to put it at the same level as the Recipes
 
- * See: :ref:`Expenses`
+ * See: :ref:`Expenses` and :ref:`Incomes`
 
 **Planning:** Global planning can show any item on Gantt chart
 
  * See: :ref:`gantt-planning`
 
-**Ergonomics and interface:** A new "Global List" screen that lists all the main project objects in the same list.
+**Ergonomics and interface:** A new "Global View" screen that lists all the main project objects in the same list.
 
  * See: :ref:`global_view`
 
@@ -188,16 +188,22 @@ Requirements & Tests
    RequirementsTest
    RequirementsDashBoard
 
+Humans Resources
+----------------
+
+.. toctree::
+   :maxdepth: 2
+   
+   HumanResources
+   
 Financial
 ---------
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
-   Expense
-   Order   
-   Bill
-   FinancialGallery
+   Expenses
+   Incomes
    
 Configuration Management
 ------------------------
@@ -307,13 +313,13 @@ Administration
 
    Administration
 
-Activity Stream
----------------
+Transverses Features
+--------------------
 
 .. toctree::
    :maxdepth: 1
 
-   ActivityStream   
+   TransverseFeatures   
 
 Glossary
 --------

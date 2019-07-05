@@ -10,7 +10,7 @@
 .. _concept:
 
 Project
-=======
+*******
 
 A project is the main entity of ProjeQtOr.
 
@@ -39,13 +39,19 @@ Project element is more than a :ref:`planning-element`, it is also used to:
 
  .. compound:: **Project selector**
 
-    * It is a filter that allows restricting the data visible to a dedicated project.
-    * See: :ref:`top-bar`
-
+    * The project selector works as a filter.
+    * By default, the selector displays "all projects", you can change this view in the user-miscelleanous settings and choose the project to display by default
+    * You can restrict data for one or more dedicated projects without necessarily being bound
+    
+    .. seealso:: 
+      
+      * See: :ref:`top-bar`
+      * see: :ref:`user-parameters`
+    
 
 .. rubric:: Define the project type
 
-.. rubric:: Three project types can be defined:
+.. compound:: Three project types can be defined:
 
    **Operational project**
 
@@ -70,8 +76,8 @@ Project element is more than a :ref:`planning-element`, it is also used to:
 
 .. note:: 
 
-   * The project type is defined in a project type (See: :ref:`project-type` screen).
-   * Which is associated to a project (See: :ref:`project` screen).	
+   * The project type is defined in a project type (See: :ref:`project-type`).
+   * Which is associated to a project (See: :ref:`project`).	
 
 .. rubric:: Define billable project
 
@@ -87,8 +93,8 @@ A project can be billable or not.
 
 .. note:: 
 
-   * The project billing type is defined in a project type (See: :ref:`project-type` screen).
-   * Which is associated to a project (See: :ref:`project` screen). 
+   * The project billing type is defined in a project type (See: :ref:`project-type`).
+   * Which is associated to a project (See: :ref:`project`). 
 
 
 .. raw:: latex
@@ -98,7 +104,7 @@ A project can be billable or not.
 .. _organization-concept:
 
 Organization
-============
+************
 
 The notion of organization introduces a way to consolidate projects on a different hiererchic structure, apart from projects / sub-projects structure.
 
@@ -131,7 +137,7 @@ The notion of organization introduces a way to consolidate projects on a differe
 .. _product-concept:
 
 Product
-=======
+*******
 
 A product is a material object or for IT/IS projects is a software application.
 
@@ -233,7 +239,7 @@ The rules defining a product structure are:
 
 
 Planning
-========
+********
 
 ProjeQtOr implements work-driven planning method.
 
@@ -350,11 +356,6 @@ This planning element defines the project.
            :align: center
 
            Separation of duties
-
-.. raw:: latex
-
-    \newpage
-
 
 .. rubric:: Activity
 
@@ -558,12 +559,8 @@ Breakdown can be done with sub-projects, activities and test sessions.
 * All other elements are numbered depending on their level and sequence.
 * WBS numbering is automatically adjusted.
 
-.. raw:: latex
-
-    \newpage
-
 Project scheduling calculation
------------------------------- 
+------------------------------
 
 The project schedule is calculated on the full project plan that includes parents and predecessor elements (dependencies).
 
@@ -604,7 +601,7 @@ The remaining work (left) on tasks will be distributed on the following days fro
 .. _projeqtor-roles:
 
 ProjeQtOr roles
-===============
+***************
 
 A stakeholder can play many roles in ProjeQtOr.
 
@@ -623,80 +620,81 @@ Specific roles are defined to allow:
 * As reports parameters.
 * As recipients list to mailing and alert.
 
---------------------------
+Glossary
+--------
 
 .. glossary::
 
    Administrator
 
-    * An administrator is a :term:`user` with "Administrator" profile.
-    * Has a visibility over all the projects.
+    An administrator is a :term:`user` with "Administrator" profile.
+    Has a visibility over all the projects.
 
    Contact
 
-    * A contact is a person in a business relationship.
-    * A contact can be a person in the customer organization.
-    * Used as contact person for contracts, sales and billing.
-    * Contacts management is performed on :ref:`contact` screen.
+    A contact is a person in a business relationship.
+    A contact can be a person in the customer organization.
+    Used as contact person for contracts, sales and billing.
+    Contacts management is performed on :ref:`contact` screen.
 
    Issuer
 
-    * An issuer is a :term:`user` who created the item.
+    An issuer is a :term:`user` who created the item.
 
-    .. seealso:: Creation information
+    .. seealso:: **Creation information**
 
-       * The issuer name and creation date of an item are displayed in the :ref:`Creation information zone<detail-window>`.
+       The issuer name and creation date of an item are displayed in the :ref:`Creation information zone<detail-window>`.
 
    Project leader
 
-    * A project leader is a :term:`resource` allocated to a project with a “Project Leader” profile.
+    A project leader is a :term:`resource` allocated to a project with a “Project Leader” profile.
 
    Project manager
 
-    * A project manager is a :term:`resource` defined as the manager on a project.
+    A project manager is a :term:`resource` defined as the manager on a project.
 
-    .. seealso:: Accelerator button
+    .. seealso:: **Accelerator button**
 
-       * This button allows to set current user is the project manager.
-       * More detail, see: :ref:`Assign to me button<assignToMe-button>`.  
+       This button allows to set current user is the project manager.
+       More detail, see: :ref:`Assign to me button<assignToMe-button>`.  
 
    Project team
 
-    * All :term:`resources<resource>` allocated to a project.
+    All :term:`resources<resource>` allocated to a project.
 
 
    Requestor
 
-    * A requestor is a :term:`contact`.
-    * Used to specify the requestor for ticket, activity and requirement.
-    * Only contacts allocated to the selected project can be a requestor.  
+    A requestor is a :term:`contact`.
+    Used to specify the requestor for ticket, activity and requirement.
+    Only contacts allocated to the selected project can be a requestor.  
  
    Responsible
 
-    * A responsible is a :term:`resource` in charge of item treatment. 
-    * Usually, the responsible is set when the status of the item is :term:`handled<Handled status>`.
-    * Only resources allocated to the selected project can be a responsible.  
+    A responsible is a :term:`resource` in charge of item treatment. 
+    Usually, the responsible is set when the status of the item is :term:`handled<Handled status>`.
+    Only resources allocated to the selected project can be a responsible.  
 
-    .. seealso:: GUI behavior
+    .. seealso:: **GUI behavior**
 
-       * It is possible to define that responsible field is mandatory on handled status.
-       * The element type screens allow to set this parameter to several elements. 
-       * More detail, see: :ref:`behavior-section`. 
+       It is possible to define that responsible field is mandatory on handled status.
+       The element type screens allow to set this parameter to several elements. 
+       More detail, see: :ref:`behavior-section`. 
 
-    .. seealso:: Set automatically the responsible
+    .. seealso:: **Set automatically the responsible**
 
-       * It is possible to set automatically the responsible.
-       * More detail, see: :ref:`Global parameters<responsible-section>`. 	
+       It is possible to set automatically the responsible.
+       More detail, see: :ref:`Global parameters<auto-responsible>`	
 
-    .. seealso:: Accelerator button
+    .. seealso:: **Accelerator button**
 
-       * This button allows to set current user is the responsible.
-       * More detail, see: :ref:`Assign to me button<assignToMe-button>`.
+       This button allows to set current user is the responsible.
+       More detail, see: :ref:`Assign to me button<assignToMe-button>`.
 
-    .. seealso:: Access rights
+    .. seealso:: **Access rights**
 
-       * It is possible to define a combination of rights to permit access for elements the user is responsible for.
-       * More detail, see: :ref:`access-mode` screen.
+       It is possible to define a combination of rights to permit access for elements the user is responsible for.
+       More detail, see: :ref:`access-mode` screen.
 
    Resource
 
@@ -724,7 +722,7 @@ Specific roles are defined to allow:
 .. _profiles-definition:
 
 Profiles definition
-===================
+*******************
 
 The profile is a group used to define application authorization and access rights to the data.
 
@@ -804,7 +802,7 @@ A user linked to a profile belongs to this group who share same application beha
 .. _user-ress-contact-demystify:
 
 Stakeholder definition
-======================
+**********************
 
 ProjeQtOr allows to define roles of stakeholders.
 
@@ -955,7 +953,7 @@ Allocation to project and user profile are also shared.
 .. _allocation-to-project:
 
 Allocation to project
-=====================
+*********************
 
 Allocation to project is used to:
 
@@ -1074,7 +1072,7 @@ Allocation to project can be defined in :ref:`project` and :ref:`contact` screen
 .. _assignment:
 
 Assignment
-==========
+**********
 
 The assignment is used to assign resources to project tasks (activity, test session, meeting).
 
@@ -1102,7 +1100,7 @@ A resource assignment contains data about work on task (planned,  real, left and
 .. _resource-function-cost:
 
 Resource function and cost
-==========================
+**************************
 
 .. rubric:: Function
 
@@ -1140,7 +1138,7 @@ Resource function and cost
 .. _resource-calendar:
 
 Resource calendar
-=================
+*****************
 
 A calendar defines the working days in a the year.
 
@@ -1159,8 +1157,6 @@ A calendar is defined for a type of resources and each resource is attached to a
 
 * Working days defined in a calendar allows to show availability of resources.
 
----------------
-
 .. rubric:: Default calendar
 
 * The default calendar is used to define the working days in the year.
@@ -1170,20 +1166,10 @@ A calendar is defined for a type of resources and each resource is attached to a
 
 * A specific calendar can be created to define working days for a type of resource.
 
-
-------------------
-
 .. note::
 
    * A calendar is set in :ref:`resource` screen. 
-   * The calendar is defined in :ref:`calendar` screen.
-
-
-------------------------
-
-.. raw:: latex
-
-    \newpage
+   * The calendar is defined in :ref:`calendars` screen.
 
 .. rubric:: Use case
 
@@ -1211,7 +1197,7 @@ A calendar is defined for a type of resources and each resource is attached to a
 .. _photo:
 
 Photo
-=====
+*****
 
 A photo can be defined for a user, a resource and a contact.
 

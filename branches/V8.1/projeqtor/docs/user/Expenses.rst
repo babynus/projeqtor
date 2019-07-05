@@ -30,8 +30,8 @@ it allows to anticipate the resources that the company will have at a specific m
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::  required field |ReqFieldLegend|
-   :widths: 20, 80
+.. list-table:: required field |ReqFieldLegend|  
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -58,12 +58,18 @@ it allows to anticipate the resources that the company will have at a specific m
      - from the budget.
        If your budget comes from grant for example
        
+       
+       
+       
+       
+       
+       
 .. rubric:: Treatment
 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: required field |ReqFieldLegend|
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -115,7 +121,7 @@ You have the possibility to create some different evaluation criterias. Thereaft
 .. tabularcolumns:: |l|l|
 
 .. list-table:: required field |ReqFieldLegend|
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -138,7 +144,7 @@ You have the possibility to create some different evaluation criterias. Thereaft
 .. tabularcolumns:: |l|l|
 
 .. list-table:: required field |ReqFieldLegend|
-   :widths: 20, 70
+   :widths: 30, 70
    :header-rows: 1
    
    * - Field
@@ -213,7 +219,7 @@ Provider Tenders
 .. tabularcolumns:: |l|l|
 
 .. list-table:: required field |ReqFieldLegend|
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -240,7 +246,7 @@ Provider Tenders
 .. tabularcolumns:: |l|l|
 
 .. list-table::  required field |ReqFieldLegend|
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
    
    * - Field
@@ -294,7 +300,7 @@ Orders to provider
 .. tabularcolumns:: |l|l|
 
 .. list-table:: required field |ReqFieldLegend|
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -325,7 +331,7 @@ Orders to provider
 .. tabularcolumns:: |l|l|
 
 .. list-table:: required field |ReqFieldLegend|
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -399,7 +405,7 @@ In this screen, you can save, organize, track and edit your payment dates to you
 .. tabularcolumns:: |l|l|
 
 .. list-table::  required field |ReqFieldLegend|
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -422,7 +428,7 @@ In this screen, you can save, organize, track and edit your payment dates to you
 .. tabularcolumns:: |l|l|
 
 .. list-table::  required field |ReqFieldLegend|
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -469,7 +475,7 @@ Provider bills
 .. tabularcolumns:: |l|l|
 
 .. list-table::  required field |ReqFieldLegend|
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -498,7 +504,7 @@ Provider bills
 .. tabularcolumns:: |l|l|
 
 .. list-table::  required field |ReqFieldLegend|
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -544,7 +550,7 @@ Follow the payment of your supplier invoices to better organize your general cas
 .. tabularcolumns:: |l|l|
 
 .. list-table::  required field |ReqFieldLegend|
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -564,7 +570,7 @@ Follow the payment of your supplier invoices to better organize your general cas
 .. tabularcolumns:: |l|l|
 
 .. list-table::  required field |ReqFieldLegend|
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -626,7 +632,7 @@ Planned amount will help to have an overview of project total costs, even before
 .. tabularcolumns:: |l|l|
 
 .. list-table:: required field |ReqFieldLegend|
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -649,7 +655,7 @@ Planned amount will help to have an overview of project total costs, even before
 .. tabularcolumns:: |l|l|
 
 .. list-table:: required field |ReqFieldLegend|
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -725,7 +731,7 @@ Planned amount will help to have an overview of project total costs, even before
 .. tabularcolumns:: |l|l|
 
 .. list-table:: required field |ReqFieldLegend|
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -757,7 +763,7 @@ Planned amount will help to have an overview of project total costs, even before
 .. tabularcolumns:: |l|l|
 
 .. list-table:: required field |ReqFieldLegend|
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -829,7 +835,7 @@ It allows to enter detail on expense line.
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -860,7 +866,7 @@ It allows to enter detail on expense line.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Fields - Expense detail dialog box | required field |ReqFieldLegend| 
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field

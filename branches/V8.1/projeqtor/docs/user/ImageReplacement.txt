@@ -1,5 +1,15 @@
 .. |iconNotPlanned| image:: images/iconNotPlanned.png
    :alt: Icon not planned
+
+.. |buttonIconSubscribe| image:: images/buttonIconSubscribe.png
+   :alt: Suscribe Button
+   
+.. |RequiredField| image:: images/RequiredFILE.png
+   :alt: Required File 
+
+.. |ReqFieldLegend| image:: images/RequiredFILE.png
+   :alt: Required File
+   :scale: 40 
    
 .. |buttonClientBill| image:: images/iconClientBill16.png
    :alt: Add formated line 

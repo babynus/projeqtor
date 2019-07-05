@@ -19,13 +19,15 @@ In fact, you should keep track of every meeting where decisions are taken, or qu
 
 This will provide an easy way to find back when, where and why a decision has been taken.
 
+Each meeting is displayed in the agenda
+
 .. contents:: Meeting features
    :local: 
    :backlinks: top
 
 .. rubric:: Project task
 
-* Meeting is a task.
+* Meeting is a task. they appear in the imputation sheets with the date fixed. 
 * You can assign project resources (named attendees).
 * You have progress section that allows for followed resources work and cost. 
 
@@ -515,6 +517,8 @@ Deliverables links with Milestones.
    * See: :ref:`kpi-definitions`
   
 .. raw:: latex
+
+    \newpage
 
 .. rubric:: Section: Validation
 

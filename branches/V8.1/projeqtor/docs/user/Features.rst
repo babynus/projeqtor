@@ -168,7 +168,7 @@ You can create multiple calendars to manage different types of availability.
 
 .. topic:: **more details**
 
-   * :ref:`resource<calendar>` section calendar
+   * :ref:`resource<calendars>` section calendar
    
 
 .. index:: Resource management (Real work allocation)
@@ -276,9 +276,9 @@ ProjeQtOr  can manage various financial elements found on a project: Quotation (
 .. topic:: **more details**
 
    * :ref:`Expenses`
-   * :ref:`orders`
+   * :ref:`Incomes<client_orders>`
    * :ref:`bill`
-   * :ref:`finacial_gallery`
+   * :ref:`financial_gallery`
 
 .. raw:: latex
 
@@ -530,12 +530,10 @@ Test sessions group test cases to be executed for a particular purpose.
 
     \newpage
 
-.. _Humans_resources:
+.. _Feature_HumansResources:
 
 Humans Resources
 ****************
-
-**[UNDER CONSTRUCTION]**
 
 This section allows to manage the society's Humans Resources 
 This system comes in addition to the standards of the management of absences
@@ -545,31 +543,33 @@ This system comes in addition to the standards of the management of absences
 * The employee may reserve periods of leave of absence according to his rights.
 * The system also includes a validation process of the requests during the leave period.
 
-.. index:: Human Resources (Sections)
-.. rubric:: **Humans Resources Sections**
+.. rubric:: Humans Resources Sections
 
-   * Leaves Calendar
-   * Leaves Period
-   * Leaves rights earned
-   * Employees
-   * Employment Contract
-   * Employee Managers
-   * Leaves Dashboard
-   * Regulated leaves parameters
+* Leaves Calendar
+* Leaves Period
+* Leaves rights earned
+* Employees
+* Employment Contract
+* Employee Managers
+* Leaves Dashboard
+* Regulated leaves parameters
 
 
 .. index:: Human Resources (variable capacity)
-.. rubric:: **Variable capacity**
+
+.. rubric:: Variable capacity
    
-   The resources may have a capacity that varies over time. 
-   This allows you to reserve and enter additional time (for periods of overtime) 
-   or less than the standard capacity (for some periods of 'rest
+* The resources may have a capacity that varies over time. 
+* This allows you to reserve and enter additional time (for periods of overtime) 
+* or less than the standard capacity (for some periods of 'rest
 
 
 .. topic:: **More details**
 
-   * :ref:`humans resources<humans_resources` en construction
+   * :ref:`humans resources<humans_resources>`
    * :ref:`Regulated Absences<regulated_absences>`
+
+
 
 .. index:: ! Tools
 
@@ -622,5 +622,5 @@ Moreover, the tool features its own CRON system, independent of the operating sy
 .. topic:: **More details**
 
    * :ref:`toolspage`
-   * :ref:`administration`
+   * :ref:`Administration<admin-console>`
    
