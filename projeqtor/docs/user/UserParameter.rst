@@ -17,6 +17,7 @@ User parameters
 
    * :ref:`photo`
 
+.. figure:: /images/GUI/USERPARAM_SCR_Parameters.png
 
 User parameters screen allows configuration of personal settings.
 
@@ -41,6 +42,8 @@ User parameters screen allows configuration of personal settings.
 
 * Selection of printing history for detailed items and destination for printing and PDF export.
 
+.. _userparam_miscelleaneous:
+
 .. rubric:: Section: Miscellaneous
 
 * Default selected project and choice of character used to indent lists of projects, to represent the WBS structure of projects and sub-project.
@@ -52,6 +55,8 @@ User parameters screen allows configuration of personal settings.
 .. rubric:: Section: Photo
 
 * Photo of the user.
+
+.. _user-password-section:
 
 .. rubric:: Section: Password
 

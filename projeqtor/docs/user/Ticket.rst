@@ -48,7 +48,7 @@ For instance, bugs should be managed through tickets :
 .. rubric:: Restrict the entry of real work in the ticket.
 
 * Possibility to define that only the responsible of ticket can enter real work.
-* This behavior can be set in  :ref:`Global parameters<responsible-section>` screen.
+* This behavior can be set in  :ref:`Global parameters<auto-responsible>` screen.
 
 -----------
 

@@ -29,7 +29,7 @@ Data entry for one resource, on a weekly base.
    * If you enter work in hours, you must define  the parameter **number of hours per day** before some real work has been entered.
    * After first work is entered, this parameter will be locked.
 
-.. figure:: /images/GUI/SCR_TimeSheetZone2.png
+.. figure:: /images/GUI/REALWORK_SCR_TimeSheetZone2.png
    :alt: Timesheet zone screen
    :align: center
 
@@ -46,7 +46,7 @@ Data entry for one resource, on a weekly base.
 * Planned work is indicated over each input cell, on top left corner, in light blue color.
 * Allows to display the planned working time by day, for the resource assigned to the task.
 
-.. figure:: /images/GUI/ZONE_RealWorkAllocationWithPlannedWork2.png
+.. figure:: /images/GUI/REALWORK_ZONE_WithPlannedWork2.png
    :alt: Planned work displayed zone
    :align: center
 
@@ -97,10 +97,13 @@ Buttons of the timesheet:
 
 .. rubric:: |five| Data entry validation
 
-Buttons allow to send and validate real work.
+.. image:: /images/GUI/Button_Timesheet_EnterRealWork.png 
+
+* To enter automatically  the work as it is planned
 
 .. image:: /images/GUI/Button_Timesheet_SubmitWork.png 
 
+* Buttons allow to send and validate real work.
 * Displayed if mandatory
 * Users can send works to project leader.
 
@@ -108,9 +111,7 @@ Buttons allow to send and validate real work.
 
 * Project leaders can validate works.
 
-.. image:: /images/GUI/Button_Timesheet_EnterRealWork.png 
 
-* To enter automatically  the work as it is planned
 
 .. rubric:: |six| Scroll bar
 
@@ -125,7 +126,7 @@ Buttons allow to send and validate real work.
 
 .. rubric:: |eight| Tasks list
 
-.. figure:: /images/GUI/IMPUTATION2.png
+.. figure:: /images/GUI/REALWORK_ZONE_IMPUTATION2.png
    :alt: Task list zone
    :align: center
 
@@ -170,11 +171,11 @@ Buttons allow to send and validate real work.
 
    * fly over the icon with the mouse to see the comment
    
-   .. figure:: /images/GUI/BOX_Timesheet_ViewComment.png
+   .. figure:: /images/GUI/REALWORK_BOX_Timesheet_ViewComment.PNG
    
    * Click on the icon to open windows view comments
       
-   .. figure:: /images/GUI/left_click_note.png
+   .. figure:: /images/GUI/REALWORK_BOX_leftclickNote.png
 
 
     * **Planned dates**: Planned start and end dates.
@@ -195,12 +196,16 @@ On the last column is the sum for all days of the week.
 
 It is a synthesis displayed for each project and globally for the whole week.
     
-.. figure:: /images/GUI/Zone_TimesheetTotalDay.png
+.. figure:: /images/GUI/REALWORK_ZONE_TimesheetTotalDay.PNG
    :alt: Total of the day
    
    Total of the day Zone  
+   
+.. note:: Start and end Dates  
 
+   .. figure:: /images/GUI/REALWORK_ZONE_Dates.png
     
+    You can see at a glance the start and end dates for each item in the list
     
     
 .. raw:: latex
@@ -212,7 +217,7 @@ It is a synthesis displayed for each project and globally for the whole week.
 Selection timesheet
 -------------------
 
-.. figure:: /images/GUI/ZONE_TimeSheetSelector.png
+.. figure:: /images/GUI/REALWORK_ZONE_TimeSheetSelector.png
    :alt: Timesheet selector zone
    :align: center
 
@@ -226,7 +231,7 @@ Selection timesheet
 
 * Clicking on the checkbox below allows to select only resources allocated to the selected project on the list roll displayed. 
 
-.. figure:: /images/GUI/Timesheet_LimitList.png
+.. figure:: /images/GUI/REALWORK_ZONE_Timesheet_LimitList.PNG
    :alt: Limit list of resources
    :align: center
    
@@ -259,7 +264,7 @@ Selection timesheet
 Input fields
 ------------
 
-.. figure:: /images/GUI/ZONE_InputTimesheet.png
+.. figure:: /images/GUI/REALWORK_ZONE_InputTimesheet.png
    :alt: Input timesheet zone
    :align: center
 
@@ -281,7 +286,7 @@ Input fields
 
     * The global parameter **Unit for real work allocation** into Work Time tab allows to set the unit time.
     
-    .. figure:: /images/GUI/GlobalParameters_WorkTime_UnitsWorks.png
+    .. figure:: /images/GUI/GLOBALPARAM_WorkTime_UnitsWorks.png
     
     * unit for Timesheet (real work) : available are in "Days" or "Hours".
     * Selected unit time is displayed on left at bottom window. |four|      
@@ -294,7 +299,7 @@ Input fields
 .. compound:: **Days off**
 
     * Columns of days off is displayed in grey.
-    * Days off is determine in resource calendar definition, see: :ref:`calendar`.
+    * Days off is determine in resource calendar definition, see: :ref:`calendars`.
 
 .. rubric:: |three| Left work
 
@@ -331,7 +336,7 @@ This section explains controls done on data entries.
    
    * The capacity of the resource is defined on :ref:`resource` screen.
 
-.. figure:: /images/GUI/ZONE_RealWorkAllocationWithColumnsValidation.png
+.. figure:: /images/GUI/REALWORK_ZONE_WithColumnsValidation.png
    :alt: Columns validation zone
    :align: center
 
@@ -342,11 +347,11 @@ This section explains controls done on data entries.
 
 * This alert box appears when the real work to a resource is entering ahead of time.
 
-.. figure:: /images/GUI/ALERT_RealWork_Blocked.png
+.. figure:: /images/GUI/REALWORK_ALERT_RealWorkBlocked.png
 
 * Resource can enter his real work is defined in "max days to book work" parameter in :ref:`Global parameters<unitForWork-section>` screen.
     
-.. figure:: /images/GUI/GlobalParameters_WorkTime_Timesheet.png
+.. figure:: /images/GUI/GLOBALPARAM_WorkTime_Timesheet.png
    :alt: Real work over expected days alert
    :align: center
 
@@ -392,8 +397,45 @@ The task status can be changed automatically according to data entries on real w
 Timesheet Validation
 --------------------
 
-under construction 
+The timesheet validation screen allows the project leader to receive, 
 
-.. figure:: /images/GUI/Zone_TimesheetValidation.png
+check and validate the time charged by the resources on an activity.
 
+.. figure:: /images/GUI/REALWORK_ZONE_TimesheetValidation.png
+
+
+.. list-table:: Fields - Timesheet validation
+   :widths: 30, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - Resource
+     - resource name, owner of the posting sheet
+   * - Week
+     - dates of the imputed period - One shipment per week
+   * - Expected
+     - Expected work for the resource
+   * - Operational work
+     - work actually done for the resource
+   * - Administrative work
+     - period of leave/sickness/absence
+   * - Sum
+     - total days of resources over the period indicated
+   * - Timesheet submitted
+     - Date the timesheet was sent by the resource 
+   * - Timesheet validation
+     - project learder placeholder to validate or invalidate timesheet
+
+.. note:: **Color code**
+
+   According to the work completed by the resource, and according to the expected workload for this resource, 
+   
+   the PL receives the timesheet with a precise color code
+
+      * **Green:** The completed job is the same as the expected one
+
+      * **Red:** The filled workload is shorter. It does not match the expected work
+
+      * **Orange:** the job is not the same as the expected job but the load is the same
 

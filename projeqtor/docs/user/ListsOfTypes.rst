@@ -44,9 +44,9 @@ If no element type is selected, by default all values of the row will be display
 
 .. index:: ! Project (Type)
 
-.. _project-type:
-
  Reminder : It means too, no restriction for remainding element types on each dedicated screen.
+
+.. _project-type:
 
 Projects types
 --------------
@@ -106,7 +106,7 @@ Project type is a way to define common behavior on group of projects.
    * - Sort order
      - Number to define order of display in lists.
    * - Billing type
-     - Will define billing behavior (see: :term:`Billing types`).
+     - Will define billing behavior (see: :ref:`Incomes<Billing_types>`).
    * - :term:`Closed`
      - Box checked indicates the type is archived.
    * - Description
@@ -252,7 +252,45 @@ Milestone type is a way to define common behavior on group of milestones.
 
 **\* Required field**
 
-  
+.. index:: ! Budget (Type)
+
+.. _budget-type:
+
+Budget types
+------------
+Budget types are a way to define the best budget for each project/ ctivity. 
+Estimated budget, cash, investment, sale ...
+
+.. rubric:: Section: Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table::
+   :widths: 20, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for the type.
+   * - **Name**
+     - Name of the type.
+   * - Code
+     - Code of the type.
+   * - **Workflow**
+     - Defined the workflow ruling status change for items of this type (see: :ref:`workflow`).
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Box checked indicates the type is archived.
+   * - Description
+     - Description of the type.
+
+**\* Required field**
+
+
+
+
 
 
 .. index:: ! Quotation (Type)

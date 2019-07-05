@@ -5,6 +5,8 @@
 
 .. index:: ! Incomes
 
+.. _Incomes:
+
 Incomes
 *******
 
@@ -123,7 +125,7 @@ On the quotation form, you can record all the information about the sent proposa
 
 .. _orders:
 
-.. _client_orders
+.. _client_orders:
 
 Client Orders
 -------------
@@ -397,6 +399,8 @@ Billing will depend on billing type defined for the project through project type
 .. figure:: /images/GUI/BILL_SCR_BillsClient.png
    :alt: Clients Bills
    :align: center
+
+.. _Billing_types:
 
 Billing Type
 ============
@@ -832,7 +836,7 @@ The bill keeps track of payment.
     
 .. index:: ! Financial Galery
 
-.. _financial_galery:
+.. _financial_gallery:
 
 Financial Gallery
 -----------------
@@ -841,9 +845,53 @@ the financial gallery allows you to display in list form and by elements,
 the different client quotation, invoices and orders recorded in ProjeQtOr, 
 per date, client or per type, partial, final and complete bill.
 
+Attachments are displayed grouped by element.
+
+Click on |buttonIconDisplay| to display attachment list.
+
 .. figure:: /images/GUI/INCOMES_ZONE_FinancialGallery.PNG
    :alt: financial gallery
    :align: center
+
+
+.. rubric:: Filters
+
+Filters can be applied to the list.
+
+
+.. compound:: **Element**
+
+* Displays attachments for this element.
+
+.. compound:: **Start and end date**
+
+* Displays attachments for this period.
+* Attachments will be displayed according a date defined in the element.
+
+     .. compound:: **Quotation**
+
+        * Done date
+
+     .. compound:: **Order**
+
+        * Validated start date
+
+     .. compound:: **Bill**
+
+        * Bill date
+
+
+.. compound:: **Customer**
+
+* Displays attachments for this customer name.
+
+.. compound:: **Type**
+
+* Displays attachments for this element type.
+
+
+
+
 
 .. raw:: latex
 

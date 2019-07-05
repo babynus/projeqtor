@@ -17,7 +17,6 @@ Those sections allows to set information or add information to an item of the el
 
 .. figure:: /images/GUI/COMMON_SCR_CommonSection.png
 
--------------------------------
 
 .. rubric:: Description section
 
@@ -68,6 +67,8 @@ Depending on the element, this section  may have a different name.
 
 .. rubric:: Allocations section
 
+.. figure:: /images/GUI/COMMON_ZONE_AllocationSection.png
+
 .. sidebar:: Concepts 
 
    * :ref:`profiles-definition`
@@ -85,8 +86,6 @@ This section allows to manage resource allocation to projects.
      - Description
    * - :term:`Id`
      - Unique Id for the allocation.
-   * - Project
-     - Project allocated to.
    * - Resource
      - Name of the allocated resource.
    * - Profile
@@ -120,17 +119,17 @@ This section allows to manage resource allocation to projects.
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Fields - Allocation dialog box
+.. list-table:: Allocation dialog box -- |ReqFieldLegend| Required Field
    :widths: 20, 80
    :header-rows: 1
 
    * - Field
      - Description
-   * - **Project**
+   * - |RequiredField| Project
      - Project list.
-   * - **Resource**
+   * - |RequiredField| Resource
      - Resource list.
-   * - **Profile**
+   * - |RequiredField| Profile
      - Profile list.
    * - Rate
      - Rate (in %) of the allocation to the project.
@@ -142,29 +141,29 @@ This section allows to manage resource allocation to projects.
      - Complete description of the allocation.
    * - Closed
      - Flag to indicate that allocation in not active anymore, without deleting it.
-
-**\* Required field**
-
-.. topic:: Fields Project & Resource
  
+
+.. topic:: FIELS BEHAVIOR
+
+   .. compound:: **Fields Project & Resource**
+   
    * If the allocation is done on the screen «Projects», the field «resource» will be selectable.
    * If the allocation is done on the screens «Resources», «Contacts» or «Users», the field «project» will be selectable.
-
-.. topic:: Field Resource
+   
+   .. compound:: **Field Resource**
 
    * This field can contain a list of users, resources or contacts according to which screen comes from project allocation.
 
-.. topic:: Field Profile
+   .. compound:: **Field Profile**
 
    * The user profile defined will be displayed first. 
 
-.. topic:: Field Rate
+   .. compound:: **Field Rate**
 
    * 100% means a full time allocation.
-
-.. note::
  
-   * Depending on which screen is used to manage project allocations, the behavior of fields will change. 
+ 
+   Depending on which screen is used to manage project allocations, the behavior of fields will change. 
 
 
 .. raw:: latex
@@ -188,33 +187,31 @@ This section allows to manage resource allocation to projects.
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Fields - Replace allocation dialog box
+.. list-table:: Replace allocation dialog box -- |ReqFieldLegend| Required Field
    :widths: 20, 80
    :header-rows: 1
 
    * - Field
      - Description
-   * - **Resource**
+   * - |RequiredField| Resource
      - Resource list.
    * - Capacity (FTE)
      - The capacity of the resource selected
-   * - **Profile**
+   * - |RequiredField| Profile
      - Profile list.
-   * - **Rate**
-     - Rate (in %) of the allocation to the project.
+   * - |RequiredField| Rate
+     - Rate (in %) of the allocation to the project
    * - Start date
-     - Start date of allocation.
+     - Start date of allocation
    * - End date
-     - End date of allocation.
- 
-**\* Required field**
+     - End date of allocation
 
 
-.. topic:: Field: Profile
+.. topic:: Field Profile
 
    * The user profile defined will be displayed first. 
 
-.. topic:: Field: Rate
+.. topic:: Field Rate
 
    * 100% means a full time allocation.
 
@@ -295,7 +292,7 @@ This section allows to manage assignment of resources to tasks.
 * Click on |buttonEdit| to modify the assignment.
 * Click on |buttonIconDelete| to delete the assignment.
 
-.. note::
+.. warning::
 
    * If real work exists for an assignment, it can not be deleted.
 
@@ -313,38 +310,40 @@ This section allows to manage assignment of resources to tasks.
    * - Field
      - Description
    * - Resource
-     - Resource list.
+     - Resource list
    * - Function
-     - Function list.
+     - Function list
    * - Cost
-     -  Daily cost defined for the resource and its function.
+     - Daily cost defined for the resource and its function
    * - Rate
-     - The max rate (%) to schedule the resource on the task by day.
+     - The max rate (%) to schedule the resource on the task by day
    * - Assigned work
-     - The work initially planned for this resource to the task.
+     - The work initially planned for this resource to the task
    * - Real work
-     - Sum of work done by this resource to the task.
+     - Sum of work done by this resource to the task
    * - Left work
-     - Remaining work to this resource to complete the task.
+     - Remaining work to this resource to complete the task
    * - Reassessed work
-     - The new total work planned to complete the task.
+     - The new total work planned to complete the task
    * - Comments
-     - Any comment on the allocation.
+     - Any comment on the allocation
 
-.. topic:: Field: Function
+.. topic:: FIELDS BEHAVIOR
+
+   .. compound:: **Function**
 
    * The main function defined for the resource is the default function selected.
 
-.. topic:: Field: Left work
+   .. compound:: **Field Left work**
 
    * [Left work] = [Assigned Work] – [Real Work]
    * Project leaders can adjust this value to estimate the work needed to complete the task by the resource.
 
-.. topic:: Field: Reassessed work
+   .. compound:: **Field Reassessed work**
 
    * [Reassessed work] = [Real Work] + [Left Work]
 
-.. topic:: Field: Comments
+   .. compound:: **Field Comments**
 
    * When a comment exists, |note| will appear on the assignment list, and on the description of the activity on the “real work allocation” screen.
    * Moving the mouse over the icon will display the comment.  
@@ -409,14 +408,10 @@ Columns definition
 * Planned dates are the estimated time to complete tasks or the estimated end date of milestones.
 * Planned dates can be used to initialize validated and requested dates. (See: :ref:`project-planning`)
 
-.. topic:: Columns: "planned" and "assigned"
+.. topic:: Columns "planned" and "assigned"
 
    * Assigned work is the planned work assigned to resources for completing tasks.
    * Planned dates are the estimated duration to complete tasks by resources according to assigned work.
-
-.. raw:: latex
-
-    \newpage
  
 .. rubric:: Column "Assigned"
 
@@ -467,7 +462,7 @@ Columns definition
 .. rubric:: Column "Reassessed"
 
 * This column displays the resources work reassess and the spending projection.
-* Always calculated as : [Reassessed] = [Real] + [Left] 
+* Always calculated as [Reassessed] = [Real] + [Left] 
 
 .. raw:: latex
 
@@ -488,28 +483,32 @@ Allows to follow-up progress on grouped tasks like phase, delivery, test group, 
 * Allows to calculate the scheduled work and budgeted cost from lower planning elements.
 * The calculation depends on consolidation method selected and on which level the validated values are entered.
 
- .. compound:: **Consolidation method "Never"**
 
-    * Values are not consolidated.
+.. note::   
 
- .. compound:: **Consolidation method "Always"**
+         .. compound:: **Consolidation method "Never"**
 
-    * Values on the lower levels are consolidate up to project level.
+            * Values are not consolidated.
 
- .. compound:: **Consolidation method "Only if set"**
+         .. compound:: **Consolidation method "Always"**
 
-    * Zero values at lower levels do not overwrite values on upper level, but non-zero values on the lower level are consolidated up to project level.
+            * Values on the lower levels are consolidate up to project level.
+            * Will overwrite existing values
+
+         .. compound:: **Consolidation method "Only if set"**
+
+            * Zero values at lower levels do not overwrite values on upper level
+            * non-zero values on the lower level are consolidated up to project level.
  
-.. note:: Selection of consolidation method
-
-  * The parameter "Consolidated validated cost & work" in global parameters screen allows to select consolidation method.
-
-
-
-
-.. raw:: latex
-
-    \newpage
+         
+            .. figure:: /images/GUI/COMMON_ZONE_ParamConsolidation.png
+               :alt: Consolidation work
+               :align: center
+           
+               The parameter "Consolidated validated cost & work" 
+               in global parameters screen allows to select consolidation method.
+           
+            see: :ref:`global-parameters`
 
 .. _progress-section-monitor-indicator:
 
@@ -520,39 +519,41 @@ The indicators can be defined on the progress data.
 
 .. rubric:: Project, Activity and Test session.
 
-* Next indicators defined for Project, Activity and Test session
+Next indicators defined for Project, Activity and Test session
 
- .. compound:: **Respect of start or end date for the requested, validated and planned values**
+   .. compound:: **Respect of start or end date for the requested, validated and planned values**
 
-    * These indicators can be programmed as a reminder and an alert, according to the number of days or hours before the start or end date.
+      * These indicators can be programmed as a reminder and an alert, 
+        according to the number of days or hours before the start or end date.
 
- .. compound:: **On resource work and cost**
+   .. compound:: **On resource work and cost**
 
-    * These indicators can be programmed as a reminder and an alert, according to percentage of progress on monitored value compared to the target value.
+      * These indicators can be programmed as a reminder and an alert, 
+        according to percentage of progress on monitored value compared to the target value.
 
-     .. describe:: Reassessed cost compared to validated cost
+         .. describe:: Reassessed cost compared to validated cost
 
-        * The reassessed cost compared to budgeted (validated) cost.
+            * The reassessed cost compared to budgeted (validated) cost.
 
-     .. describe:: Reassessed cost compared to assigned cost
+         .. describe:: Reassessed cost compared to assigned cost
 
-        * The reassessed cost compared to cost calculated from assigned work for resources.
+            * The reassessed cost compared to cost calculated from assigned work for resources.
 
-     .. describe:: Reassessed work compared to validated work
+         .. describe:: Reassessed work compared to validated work
 
-        * The reassessed work compared to scheduled (validated) work.
+            * The reassessed work compared to scheduled (validated) work.
 
-     .. describe:: Reassessed work compared to assigned work
+         .. describe:: Reassessed work compared to assigned work
 
-        * The reassessed work compared to work assigned to resources.
+            * The reassessed work compared to work assigned to resources.
 
-     .. describe:: Real work compared to validated work
+         .. describe:: Real work compared to validated work
 
-        * The work really done by resources compared to scheduled (validated) work.
+            * The work really done by resources compared to scheduled (validated) work.
 
-     .. describe:: Real work compared to assigned work
+         .. describe:: Real work compared to assigned work
 
-        * The work really done by resources compared to work assigned to resources.
+            * The work really done by resources compared to work assigned to resources.
 
 .. rubric:: Milestone
 
@@ -605,7 +606,7 @@ Parts used by planning elements are:
 .. _progress-section-date-duration:
 
 Dates and duration
-"""""""""""""""""" 
+""""""""""""""""""
 
 .. only:: html
 
@@ -626,11 +627,6 @@ Validated dates are used to:
 * Define initial planned dates, as a baseline.
 * Fix a due date at which the work must be completed.
 
-.. raw:: latex
-
-    \newpage
-
-
 .. rubric:: Planned
 
 Planned dates can be defined with:
@@ -646,16 +642,13 @@ Planned dates can be defined with:
 
     .. note:: Planning mode "Fixed duration"
 
-       * The planned dates of tasks will be calculated depending on their predecessors and their specified duration.
+      The planned dates of tasks will be calculated depending on their predecessors and their specified duration.
 
-.. topic:: Planned dates of parent element 
+    .. attention:: Planned dates of parent element 
+      
+      * At parent element level, dates are adjusted with the first planned start date and the last planned end date from all sub-elements.
 
-   * At parent element level, dates are adjusted with the first planned start date and the last planned end date from all sub-elements.
-
-
-.. note::
-
-   * The planned start date is adjusted to the real start date when work began.
+      * The planned start date is adjusted to the real start date when work began.
 
 .. rubric:: Real
 
@@ -667,14 +660,10 @@ Planned dates can be defined with:
    * The real start date will be propagated to parent elements up to project.
    * The real end date for parent element will be initialized, when all sub-element have been completed.
 
-.. raw:: latex
-
-    \newpage
-
 .. _progress-section-resource:
 
 Resources (Work & Cost)
-""""""""""""""""""""""" 
+"""""""""""""""""""""""
 
 .. only:: html
 
@@ -702,7 +691,7 @@ Work of resources are calculated by the work assigned to each resource for tasks
 .. note:: **Project**
 
    * The values of work and cost can be initialized with the sum of total work and amount of all project orders.
-   * See: :ref:`order`
+   * See: :ref:`Incomes<orders>`
 
 .. rubric:: Assigned
 
@@ -745,7 +734,7 @@ Expense, Reserve and Total
     * :ref:`Project reserve<project-reserve>`
 
 
-.. rubric:: > Used by: Project
+.. rubric:: Used by Project
 
 .. rubric:: Validated (Expense)
 
@@ -822,27 +811,26 @@ Progress, Expected, WBS & Priority
 Planning mode
 """""""""""""
 
-.. rubric:: > Used by: Activity & Test session
+Used by Activity & Test session
 
 .. rubric:: As soon as possible
 
-* The task is planned to finish as soon as possible.
+The task is planned to finish as soon as possible.
 
-.. note::
-
-    * For tasks "as soon as possible", if no assignment is created but the validated work is defined, take the validated work as the default duration (instead of 1 days)
+.. note:: For tasks "as soon as possible", if no assignment is created but the validated work is defined, take the validated work as the default duration (instead of 1 days)
 
 
 .. rubric:: Work together
 
-* When two or more resources are assigned to the same task, planning tries to find periods where all resources are available to work together.
+When two or more resources are assigned to the same task, planning tries to find periods where all resources are available to work together.
+
 * Periods are searched "as soon as possible".
 * If only one resource is assigned, this planning mode is exactly the same as "As soon as possible".
 * If one resource is assigned more work than the other, the extra work is planned after working together periods.
 
 .. rubric:: Constraint by date
 
-** The validated start or end date field must be set.
+The validated start or end date field must be set.
 
   .. compound:: **Must not start before validated date**
 
@@ -853,10 +841,6 @@ Planning mode
      * The task is planned backward from end to start.
      * "Floating" backward planning is not possible, validated end date must be defined. 
 
-.. raw:: latex
-
-    \newpage
-
 
 .. rubric:: Recurrent activities
 
@@ -864,26 +848,26 @@ Planning mode
 * Used for management recurrent activities.
 * The validated dates fields must be set.
 
- .. note::
+
+
+.. Warning::
 
     * Examples of the planning modes upcoming are based on 2 work days to plan on 10 days.
 
 
- .. compound:: **Regular between dates**
+.. compound:: **Regular between dates**
  
-    * Work will be evenly divided between on working days.
-    * For instance, 0.2 days during 10 days.
+Work will be evenly divided between on working days. For instance, 0.2 days during 10 days.
 
-
-
- .. compound:: **Regular in full days**
+.. compound:: **Regular in full days**
  
-    * Work will be distributed on full day between on working days.
+Work will be distributed on full day between on working days.
 
-        .. list-table::
-           :widths: 10,9,9,9,9,9,9,9,9,9,9
+.. list-table::
+           :widths: 30,9,9,9,9,9,9,9,9,9,9
            :header-rows: 1
            :stub-columns: 1
+           :align: left
 
            * - Day
              - 1
@@ -908,14 +892,18 @@ Planning mode
              - 0
              - 1
 
- .. compound:: **Regular in half days**
+       
 
-    * Work will be distributed on half of the day between on working days.
+.. compound:: **Regular in half days**
 
-        .. list-table:: 
-           :widths: 10,9,9,9,9,9,9,9,9,9,9
+Work will be distributed on half of the day between on working days.
+
+
+.. list-table::
+           :widths: 30,9,9,9,9,9,9,9,9,9,9
            :header-rows: 1
            :stub-columns: 1
+           :align: left
 
            * - Day
              - 1
@@ -940,15 +928,15 @@ Planning mode
              - 0
              - 0.5
 
-
- .. compound:: **Regular in quarter days**
+.. compound:: **Regular in quarter days**
  
-    * Work will be distributed on one quarter of the day between on working days.
+Work will be distributed on one quarter of the day between on working days.
 
-        .. list-table:: 
-           :widths: 10,9,9,9,9,9,9,9,9,9,9
+.. list-table::
+           :widths: 30,9,9,9,9,9,9,9,9,9,9
            :header-rows: 1
            :stub-columns: 1
+           :align: left
 
            * - Day
              - 1
@@ -973,11 +961,9 @@ Planning mode
              - 0.25
              - 0.25
 
-
-  .. compound:: **Recurring (on a weekly basis)**
+.. compound:: **Recurring (on a weekly basis)**
   
-  * | 
-    | This new mode allows reserving availability on recurring tasks on a weekly basis, for example 1/2 day every Monday, 1h every day, ... 
+This new mode allows reserving availability on recurring tasks on a weekly basis, for example 1/2 day every Monday, 1h every day, ... 
     
     Activities in this mode dynamically assign the work based on the start and end bounds:
     
@@ -1006,7 +992,7 @@ Planning mode
 Margin
 """"""
 
-.. rubric:: > Used by: Project
+.. rubric:: Used by Project
 
 Displays remaining margin.
 
@@ -1032,7 +1018,7 @@ Displays remaining margin.
 Ticket
 """"""
 
-.. rubric:: > Used by: Activity
+.. rubric:: Used by Activity
 
 Allows tracking of tickets attached to the activity throught the "planning activity" field of tickets. 
 
@@ -1053,13 +1039,13 @@ Allows tracking of tickets attached to the activity throught the "planning activ
    * - Left
      - Sum of remaining work for tickets attached to the activity. 
 
-.. topic:: Field: Estimated
+.. topic:: Field Estimated
 
-   * This field will be highlighted when the sum of estimated work on the tickets is higher than the planned work on the activity.
+   This field will be highlighted when the sum of estimated work on the tickets is higher than the planned work on the activity.
 
-.. topic:: Field: Left
+.. topic:: Field Left
 
-   * This field will be highlighted when the sum of remaining work on the tickets is higher than the remaining planned work on the activity.
+   This field will be highlighted when the sum of remaining work on the tickets is higher than the remaining planned work on the activity.
 
 
 .. rubric:: Show tickets attached
@@ -1309,7 +1295,7 @@ This section allows to manage link between items of elements.
 
 .. rubric:: Linked elements list buttons
 
-* Click |buttonAdd| to create a new link.
+* Click on |buttonAdd| to create a new link.
 * Click on |buttonIconDelete| to delete the corresponding link.
 
 .. figure:: /images/GUI/COMMON_BOX_AddLink.png
@@ -1321,17 +1307,10 @@ This section allows to manage link between items of elements.
    * By default, the list of values shows items of the same project. But, it is possible to link items from different projects.
    * Click on |buttonIconSearch| to get the list of elements of all projects. 	
 
-
-
-
-.. raw:: latex
-
-    \newpage
-
 .. rubric:: Link with Document
 
-* When a link to a document is selected. The document version can be selected. (See options below)
-* Linked documents are available directly in linked elements list.
+When a link to a document is selected. The document version can be selected. (See options below)
+Linked documents are available directly in linked elements list.
 
  .. compound:: **Specified version**
 
@@ -1354,6 +1333,28 @@ Attachments section
 
 This section allows to attach files or hyperlinks to items of elements.
 
+.. rubric:: Document viewer available
+
+* image
+* text
+* PDF
+* Hyperlinks
+
+.. figure:: /images/GUI/COMMON_ZONE_AttachmentSection.PNG
+   :alt: Attachment Section
+   :align: center
+   
+   Attachment section
+
+
+.. note:: 
+   
+   If you do not fill in the description then the exact name of the document will be displayed
+   see the ID#9 document in the table.
+   
+   If the desciption field is filled then this text will be displayed 
+   see the ID#11 document in the table
+
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Fields of attachments list
@@ -1372,46 +1373,23 @@ This section allows to attach files or hyperlinks to items of elements.
      - User who created the attachment.
 
 
-.. rubric:: Select an attachment
+.. rubric:: the attachment
 
 * Select an attachment depends on whether is a file or a hyperlink.
 
+  * Click on |buttonAdd| to add an attachment file to an item. See: :ref:`To upload a file<attachment-file>`
+  * Click on |buttonIconDelete| to delete an attachment.
+  * Click on |iconLink| to add hyperlink to an item.
   * Click on |iconDownload| to download attachment file.
   * Click on |iconLink| to access to hyperlink.
 
-.. rubric:: Document viewer
-
-* Document viewer available for files: image, text, PDF and hyperlinks.
-* Click on the icon.
-
-.. rubric:: Delete an attachment
-
-* Click on |buttonIconDelete| to delete an attachment.
-
-
-.. raw:: latex
-
-    \newpage
-
-.. rubric:: Add an attachment
-
-* Click on |buttonAdd| to add an attachment file to an item.
-
-  * Dialog box "Attachment file" will be displayed.
- 
-* Click on |iconLink| to add hyperlink to an item.
-
-  * Dialog box "Hyperlink" will be displayed. 
-
 .. _attachment-file:
 
- .. compound:: **Attachment file**
+.. note:: **To upload a file**
 
-     .. note:: To upload a file
- 
-        * Select file with "Browse" button or drop the file in "drop files here" area.
-        * Attached files are stored on server side.
-        * Attachments directory is defined in :ref:`Global parameters <file-directory-section>` screen.
+   * Select file with "Browse" button or drop the file in "drop files here" area.
+   * Attached files are stored on server side.
+   * Attachments directory is defined in :ref:`Global parameters<file-directory-section>` screen.
 
     .. figure:: /images/GUI/COMMON_BOX_attachmentFile.png
        :alt: Dialog box - Attachment for file
@@ -1420,19 +1398,16 @@ This section allows to attach files or hyperlinks to items of elements.
        Dialog box - Attachment for file
    
 
- .. compound:: **Hyperlink**
+.. note:: **To attach a Hyperlink
 
-     .. note:: Hyperlink
-
-        * Enter hyperlink in «Hyperlink» field.
-
-
+   * Enter hyperlink in «Hyperlink» field.
 
     .. figure:: /images/GUI/COMMON_BOX_attachmentHyperLink.png
        :alt: Dialog box - Attachment for hyperlink 	
        :align: center
 
        Dialog box - Attachment for hyperlink
+
 
 
 .. tabularcolumns:: |l|l|
@@ -1498,10 +1473,6 @@ Notes are comments, that can be shared to track some information or progress.
      - Date of creation or modification of the note.
    * - User
      - Name of the user who created the note.
-
-.. raw:: latex
-
-    \newpage
 
 .. rubric:: Notes list buttons
 
