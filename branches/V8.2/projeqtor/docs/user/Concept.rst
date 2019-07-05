@@ -76,8 +76,8 @@ Project element is more than a :ref:`planning-element`, it is also used to:
 
 .. note:: 
 
-   * The project type is defined in a project type (See: :ref:`project-type` screen).
-   * Which is associated to a project (See: :ref:`project` screen).	
+   * The project type is defined in a project type (See: :ref:`project-type`).
+   * Which is associated to a project (See: :ref:`project`).	
 
 .. rubric:: Define billable project
 
@@ -93,8 +93,8 @@ A project can be billable or not.
 
 .. note:: 
 
-   * The project billing type is defined in a project type (See: :ref:`project-type` screen).
-   * Which is associated to a project (See: :ref:`project` screen). 
+   * The project billing type is defined in a project type (See: :ref:`project-type`).
+   * Which is associated to a project (See: :ref:`project`). 
 
 
 .. raw:: latex
@@ -356,11 +356,6 @@ This planning element defines the project.
            :align: center
 
            Separation of duties
-
-.. raw:: latex
-
-    \newpage
-
 
 .. rubric:: Activity
 

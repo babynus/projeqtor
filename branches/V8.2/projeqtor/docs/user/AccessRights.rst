@@ -6,7 +6,10 @@
 
 .. index:: ! Access rights (Profile)
 
+.. _Acces_Right:
 
+Acces Right
+***********
 
 .. _profile:
 
@@ -17,7 +20,7 @@ Module Management
 
 | The Module Management allows to choose the module(s) that will appear in the interface.
 | This enables or disables a consistent group of features.
-| This screen is then accessible via a dedicated menu in the :ref:`Acces Right`
+| This screen is then accessible via a dedicated menu in the :ref:`Acces_Right<Module_Management>`
 
 
 .. figure:: /images/GUI/ACCESRIGHT_ManagementModule.png
@@ -362,8 +365,7 @@ The translated name depends on user language selected in :ref:`User parameters<d
 
 .. note::
 
-   * If translated name is displayed between suqare brackets [ ], 
-   then the value of field "Name" is not found in the translation table.
+   * If translated name is displayed between suqare brackets [ ], then the value of field "Name" is not found in the translation table.
 
 .. rubric:: Translation table files
 

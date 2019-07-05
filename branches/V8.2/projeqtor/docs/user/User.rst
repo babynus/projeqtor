@@ -27,6 +27,8 @@ The user is a person that will be able to connect to the application.
 
    * To be able to connect, the user must have a password and a user profile defined.
 
+.. _ldap_users:
+
 .. rubric:: ProjeQtOr and LDAP users
 
 * ProjeQtOr offers two modes of authentication.
@@ -45,7 +47,9 @@ The user is a person that will be able to connect to the application.
 
     * Allows users defined in an external directory to login at ProjeQtOr by the LDAP protocol.
     * Users' information and password policy are managed in the external directory.
-
+    * for each user from an LDAP, the word "comes from Ldap" will be displayed next to the user's name
+      with possibility of modification according to the rights of the connected user
+      
 .. rubric:: Default user profile
 
 * A default user profile is set during creation of the user.

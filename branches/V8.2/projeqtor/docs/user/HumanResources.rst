@@ -11,8 +11,6 @@
 Humans Resources
 ****************
 
-**[06/2019 - UNDER CONSTRUCTION]**
-
 .. note:: **Documentation**
 
    `Documentation <https://www.projeqtor.org/files/ProjeQtOr%20-%20Documentation%20-%20Absences%20r%C3%A9glement%C3%A9es.pdf/>`_ on the implementation of regulated absences by Salto consulting 
@@ -70,10 +68,6 @@ This system comes in addition to the standards of the management of absences
    but it can be fully parameterized according to the rights of any country
    
 .. index:: ! Regulated absence
-
-.. _regulated_absences:
-
------------------------------
 
 .. rubric:: **Footnote**
 

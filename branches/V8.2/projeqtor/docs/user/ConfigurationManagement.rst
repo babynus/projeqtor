@@ -415,4 +415,5 @@ Graphically, you can see any delay or incompatibility.
 
 .. figure:: /images/GUI/planningVersion.png
    :alt: Planning version
+   :align: center   :alt: Planning version
    :align: center
