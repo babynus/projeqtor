@@ -2,8 +2,40 @@
 -- // PROJECTOR                                             //
 -- //-------------------------------------------------------//
 -- // Version : 8.2.0                                       //
--- // Date : 2019-06-24                                     //
+-- // Date : 2019-07-01                                     //
 -- ///////////////////////////////////////////////////////////
+
+CREATE TABLE `${prefix}messagelegal` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `description` mediumtext,
+  `idUser` int(12) unsigned DEFAULT NULL,
+  `startDate` datetime DEFAULT NULL,
+  `endDate` datetime DEFAULT NULL,
+  `idle` int(1) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+
+INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
+(223, 'menuMessageLegal', 11, 'object', 521, Null, 0, 'Admin');
+
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
+(1,223,1);
+
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
+(1,223,8);
+
+CREATE TABLE `${prefix}messagelegalFollowup` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `idMessageLegal` INT(12) NOT NULL,
+  `idUser` INT(12) NOT NULL,
+  `firstViewDate` datetime DEFAULT NULL,
+  `lastViewDate` datetime DEFAULT NULL,
+  `acceptedDate` datetime DEFAULT NULL,
+  `accepted` int(1) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
 INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
 (222, 'menuDataCloning', 11, 'item', 530, Null, 0, 'Admin');
