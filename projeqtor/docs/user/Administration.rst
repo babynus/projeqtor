@@ -1,5 +1,6 @@
 
 
+
 .. title:: Administration
 
 .. index:: ! Administration console
@@ -400,6 +401,8 @@ Tab Display
 
 Graphic interface behavior and generic display parameters.
 
+.. _global-display-section:
+
 Display
 =======
 
@@ -488,8 +491,13 @@ Default values for user parameters
 Tab References
 --------------
 
+.. _format_reference_number:
+
 Format for reference numbering
 ==============================
+
+.. figure:: /images/GUI/GLOBALPARAM_ZONE_ReferenceName.png
+
 
 .. compound:: **prefix format for reference**
 
@@ -504,6 +512,8 @@ Format for reference numbering
 .. compound:: **change reference on type or project change**
 
 * Change the reference on type change of element will generate missing numbers in reference
+
+.. _format_reference_doc:
 
 Document reference format
 =========================
@@ -536,6 +546,7 @@ Document reference format
 
 * forbid document download if yes is checked
       
+.. _format_reference_bill:
     
 Bill reference format
 =====================
@@ -554,6 +565,14 @@ Tab Configuration
 Product and Component
 =====================
 
+New menu context in product and component configuration
+
+.. figure:: /images/GUI/GLOBALPARAM_ZONE_configuration.PNG
+   :alt: Configuration zone
+   :align: center
+   :scale: 80%
+   
+   
 .. compound:: **display Business features**
 
 * Filter on date
@@ -673,9 +692,12 @@ You configure the SMTP serveur and port - the login name and password
 
 You can also define the sendmail path or the send method
 
+.. _mail-titles:
 
 Mail titles
 ===========
+
+.. figure:: /images/GUI/GLOBALPARAM_ZONE_MailsTitles.png
 
 * Parameters to define title of email depending on event.(see: :ref:`administration-emailing-group-label`)
 
@@ -761,6 +783,7 @@ Use SSO connection through SAML2 protocol
 * Default profile for users, message on creation new user from SAML,
 * And some parameters for users  
 
+.. _glabalparama_automation:
 
 Tab Automation
 --------------
@@ -865,6 +888,8 @@ An email is sent on the agreed date. Click on the button **Defined Parameters** 
  
 Tab System
 ----------
+
+.. _file-directory-section:
 
 Files and directories
 =====================

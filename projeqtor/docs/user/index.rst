@@ -39,8 +39,8 @@ Whatever your choice of the method, you can use ProjeQtOr.
 
     \newpage
 
-What's New in this user guide version?
---------------------------------------
+What's New in this guide version?
+---------------------------------
 
 This section summarizes significant changes made in the user guide document for this version.
 
@@ -305,13 +305,13 @@ Administration
 
    Administration
 
-Activity Stream
----------------
+Transverses Features
+--------------------
 
 .. toctree::
    :maxdepth: 1
 
-   ActivityStream   
+   TransverseFeatures   
 
 Glossary
 --------

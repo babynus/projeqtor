@@ -712,6 +712,8 @@ Assigned tasks are grouped under resource level.
 
 On resource planning, group periodic meetings is under its parent
 
+Ability to display assigned activities with zero load
+
 .. rubric:: Gantt bars
 
 * For activities, the Gantt bar is split in two: 

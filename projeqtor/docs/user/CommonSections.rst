@@ -689,7 +689,7 @@ Work of resources are calculated by the work assigned to each resource for tasks
 .. note:: **Project**
 
    * The values of work and cost can be initialized with the sum of total work and amount of all project orders.
-   * See: :ref:`order`
+   * See: :ref:`Incomes<orders>`
 
 .. rubric:: Assigned
 
@@ -1331,6 +1331,28 @@ Attachments section
 
 This section allows to attach files or hyperlinks to items of elements.
 
+.. rubric:: Document viewer available
+
+* image
+* text
+* PDF
+* Hyperlinks
+
+.. figure:: /images/GUI/COMMON_ZONE_AttachmentSection.PNG
+   :alt: Attachment Section
+   :align: center
+   
+   Attachment section
+
+
+.. note:: 
+   
+   If you do not fill in the description then the exact name of the document will be displayed
+   see the ID#9 document in the table.
+   
+   If the desciption field is filled then this text will be displayed 
+   see the ID#11 document in the table
+
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Fields of attachments list
@@ -1349,46 +1371,23 @@ This section allows to attach files or hyperlinks to items of elements.
      - User who created the attachment.
 
 
-.. rubric:: Select an attachment
+.. rubric:: the attachment
 
 * Select an attachment depends on whether is a file or a hyperlink.
 
+  * Click on |buttonAdd| to add an attachment file to an item. See: :ref:`To upload a file<attachment-file>`
+  * Click on |buttonIconDelete| to delete an attachment.
+  * Click on |iconLink| to add hyperlink to an item.
   * Click on |iconDownload| to download attachment file.
   * Click on |iconLink| to access to hyperlink.
 
-.. rubric:: Document viewer
-
-* Document viewer available for files: image, text, PDF and hyperlinks.
-* Click on the icon.
-
-.. rubric:: Delete an attachment
-
-* Click on |buttonIconDelete| to delete an attachment.
-
-
-.. raw:: latex
-
-    \newpage
-
-.. rubric:: Add an attachment
-
-* Click on |buttonAdd| to add an attachment file to an item.
-
-  * Dialog box "Attachment file" will be displayed.
- 
-* Click on |iconLink| to add hyperlink to an item.
-
-  * Dialog box "Hyperlink" will be displayed. 
-
 .. _attachment-file:
 
- .. compound:: **Attachment file**
+.. note:: **To upload a file**
 
-     .. note:: To upload a file
- 
-        * Select file with "Browse" button or drop the file in "drop files here" area.
-        * Attached files are stored on server side.
-        * Attachments directory is defined in :ref:`Global parameters <file-directory-section>` screen.
+   * Select file with "Browse" button or drop the file in "drop files here" area.
+   * Attached files are stored on server side.
+   * Attachments directory is defined in :ref:`Global parameters<file-directory-section>` screen.
 
     .. figure:: /images/GUI/COMMON_BOX_attachmentFile.png
        :alt: Dialog box - Attachment for file
@@ -1410,6 +1409,7 @@ This section allows to attach files or hyperlinks to items of elements.
        :align: center
 
        Dialog box - Attachment for hyperlink
+
 
 
 .. tabularcolumns:: |l|l|

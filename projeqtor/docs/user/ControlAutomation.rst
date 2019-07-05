@@ -665,7 +665,7 @@ The definition of notification generation is based on the following:
 
    * - Field
      - Description
-   * - :term:`Name`
+   * - Name
      - appears on level 3 of the unread notification tree.
    * - Notif. item
      - Type of the element the list applies to .
@@ -683,7 +683,7 @@ The definition of notification generation is based on the following:
 
    * - Field
      - Description
-   * - :term:`Title`
+   * - Title
      - Can add dynamics fields.
 
    

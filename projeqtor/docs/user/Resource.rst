@@ -317,7 +317,7 @@ You assign resources to the pool at a given rate for a given period.
    * - Initials
      - Initials of the resource.
    * - **Calendar**
-     - :ref:`Calendar<calendar>` defines the availability of the resource.
+     - :ref:`Calendar<calendars>` defines the availability of the resource.
    * - :term:`Closed`
      - Flag to indicate that the resource is archived.
    * - Description
