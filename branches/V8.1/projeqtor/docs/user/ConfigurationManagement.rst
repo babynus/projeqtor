@@ -2,18 +2,12 @@
 
 .. raw:: latex
 
-    \newpage
-
 .. title:: Configuration Management
 
 .. _ConfigurationManagement:
 
 Configuration Management
-------------------------
-
-.. sidebar:: Configuration Management 
-
-   * :ref:`ConfigurationManagement`
+************************
 
 The product and component is done on screens:
 
@@ -23,16 +17,12 @@ The product and component is done on screens:
 * :ref:`component-version`
 * :ref:`versions-planning`
 
-.. raw:: latex
-
-    \newpage
-
 .. index:: ! Product
 
 .. _product:
 
 Products
-^^^^^^^^
+--------
 
 Allows to define product and sub-product.
 
@@ -43,19 +33,19 @@ Allows to link components to product.
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: 
-   :widths: 20, 80
+.. list-table:: Required field |ReqFieldLegend|
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
      - Unique Id for the product.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of the product.
    * - Product type
      - Type of product.
@@ -76,38 +66,31 @@ Allows to link components to product.
    * - Description :
      - Box checked indicates the product is archived.
 
-**\* Required field**
-
-.. rubric:: Section: Product versions
+.. rubric:: Section Product versions
 
 * List of versions defined for the product.
 * Product versions are defined in :ref:`product-version` screen.
 
-.. rubric:: Section: Composition - List of sub-products used by this product
+.. rubric:: Section Composition - List of sub-products used by this product
 
 * List of sub-products for the product.
 
-.. rubric:: Section: Composition - List of components used by this product
+.. rubric:: Section Composition - List of components used by this product
 
 * See: :ref:`relationship-product-component`.
 
-.. topic:: Button: Display structure
+.. topic:: Button Display structure
 
    * Displays the structure of the product.
    * Box checked "Show versions for all structure" allows to display versions of sub-products and components.
    * Box checked "Show projects linked to versions" allows to display projects linked.
-
-
-.. raw:: latex
-
-    \newpage
 
 .. index:: ! Product (Version)
 
 .. _product-version:
 
 Product Versions
-^^^^^^^^^^^^^^^^
+----------------
 
 Allows to define versions of a product.
 
@@ -131,59 +114,55 @@ Ability to define the compatibility between product versions (feature activated 
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: Required field |ReqFieldLegend|
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
-     - Unique Id for the version.
-   * - **Product**
-     - The product on which the version applies.
-   * - **Version number**
-     - Version number of the product.
-   * - **Name**
-     - Name of the version.
+     - Unique Id for the version
+   * - |RequiredField| Product
+     - The product on which the version applies
+   * - |RequiredField| Version number
+     - Version number of the product
+   * - |RequiredField| Name
+     - Name of the version
    * - Prime contractor
-     - The contact, into customer organization, who will be responsible for the version delivery.
+     - The contact, into customer organization, who will be responsible for the version delivery
    * - Responsible
      - Resource responsible of the version.
    * - Entry into service
-     - Initial, planned and real entry into service date of the version. 
+     - Initial, planned and real entry into service date of the version
    * - End date
-     - Initial, planned and real end dates of the version.
+     - Initial, planned and real end dates of the version
    * - Status 
      - State to be registered
    * - Description
-     - Complete description of the version.
+     - Complete description of the version
 
-**\* Required field**
-
-
-.. topic:: Fields: Version number & Name
+.. topic:: Fields "Version number & Name"
 
    * The field "Version number" appears only if the global parameter "Automatic format of version name" is set to Yes.
    * The field "Name" will be read only.
 
-.. topic:: Field: Prime contractor
+.. topic:: Field "Prime contractor"
      
    * Can be different from product prime contractor.
 
-.. topic:: Field: Entry into service (Real)
+.. topic:: Field "Entry into service" (Real)
 
    * Specify the date of entry into service.
    * The box "Done" is checked when the real date field is set.
 
-.. topic:: Field: End date (Real)
+.. topic:: Field "End date" (Real)
 
    * Specify the date end-of-service.
    * The box "Done" is checked when the real date field is set.
-
 
 .. raw:: latex
 
@@ -194,7 +173,7 @@ Ability to define the compatibility between product versions (feature activated 
 .. _component:
 
 Components
-^^^^^^^^^^
+----------
 
 Allows to define product components.
 
@@ -203,43 +182,41 @@ Allows to define products using the component.
 Possibility to define component types and component versions that will only be used for definition of structure (not for Version Planning or Tickets)
 
 
-.. sidebar:: Other sections
+.. sidebar:: **Other sections**
    
-   * :ref:`Structure - List of products or components using this component<relationship-product-component>`   
-   * :ref:`Composition - List of components used by this component<relationship-product-component>`   
+   * :ref:`Structure...<relationship-product-component>`   
+   * :ref:`Composition...<relationship-product-component>`   
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: 
-   :widths: 20, 80
+.. list-table:: Required field |ReqFieldLegend|
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
-     - Unique Id for the component.
-   * - **Name**
-     - Name of the component.
+     - Unique Id for the component
+   * - |RequiredField| Name
+     - Name of the component
    * - Component type
      - Type of component
    * - Identifier
-     - Another name to identify the component.
+     - Another name to identify the component
    * - Responsible
-     - Person responsible for the component.
+     - Person responsible for the component
    * - Statut 
      - State to be registered
    * - :term:`Closed`
-     - Box checked indicates the component is archived.
+     - Box checked indicates the component is archived
    * - Description
-     - Complete description of the component.
+     - Complete description of the component
 
-**\* Required field**
-
-.. rubric:: Section: Component versions
+.. rubric:: Section Component versions
 
 * List of versions defined for the component.
 * Component versions are defined in :ref:`component-version` screen.
@@ -254,7 +231,7 @@ Possibility to define component types and component versions that will only be u
 .. _component-version:
 
 Component Versions
-^^^^^^^^^^^^^^^^^^
+------------------
 
 Allows to define versions of a component.
 
@@ -274,52 +251,49 @@ Allows to link a product version to component version.
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
 
-.. rubric:: Section: Description
+.. rubric:: Section "Description"
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: Required field |ReqFieldLegend|
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
-     - Unique Id for the version.
-   * - **Component**
-     - The component on which the version applies.
-   * - **Version number**
-     - Version number of the component.
-   * - **Name**
+     - Unique Id for the version
+   * - |RequiredField| Component
+     - The component on which the version applies
+   * - |RequiredField| Version number
+     - Version number of the component
+   * - |RequiredField| Name
      - Name of the version.
    * - Entry into service
-     - Initial, planned and real entry into service date of the version. 
+     - Initial, planned and real entry into service date of the version 
    * - End date
-     - Initial, planned and real end dates of the version.
+     - Initial, planned and real end dates of the version
    * - Statut 
      - State to be registered
    * - Description
-     - Complete description of the version.
+     - Complete description of the version
 
-**\* Required field**
-
-.. topic:: Fields: Version number & Name
+.. topic:: Fields "Version number & Name"
 
    * The field "Version number" appears only if the global parameter "Automatic format of version name" is set to Yes.
    * The field "Name" will be read only.
 
 
-.. topic:: Field: Entry into service (Real)
+.. topic:: Field "Entry into service" (Real)
 
    * Specify the date of entry into service.
    * The box "Done" is checked when the real date field is set.
 
-.. topic:: Field: End date (Real)
+.. topic:: Field "End date (Real)"
 
    * Specify the date end-of-service.
    * The box "Done" is checked when the real date field is set.
-
-
+   
 .. raw:: latex
 
     \newpage
@@ -327,7 +301,7 @@ Allows to link a product version to component version.
 .. _relationship-product-component:
 
 Relationships between product and component elements
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------------------------
 
 Allows to manage relationships between products and components to define product structure.
 
@@ -342,15 +316,10 @@ See possible relationships:  :ref:`product-structure`
    :alt: Dialog box - Structure 
    :align: center
 
-
-.. raw:: latex
-
-    \newpage
-
 .. _version-product-component:
 
 Link between versions of products and components
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------------------------------
 
 Allows to define links between versions of products and components.
 
@@ -367,9 +336,6 @@ Allows to define links between versions of products and components.
    :alt: Dialog box - Version structure 
    :align: center
 
-
-
-
 .. raw:: latex
 
     \newpage
@@ -377,7 +343,7 @@ Allows to define links between versions of products and components.
 .. _Link-version-project-section:
 
 Link version to projects
-^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------
 
 This section allows to manage links between projects and versions of products.
 
@@ -393,8 +359,8 @@ This section allows to manage links between projects and versions of products.
    :align: center
 
 
-.. list-table:: Fields - Project-Version link dialog box
-   :widths: 20, 80
+.. list-table:: Project-Version link dialog box
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -414,20 +380,15 @@ This section allows to manage links between projects and versions of products.
    * - Closed
      - Box checked indicates the link is not active anymore, without deleting it.
 
-.. topic:: Fields: Project, Product and Version
+.. topic:: Fields "Project, Product and Version"
  
    * From the screen «Projects», the fields «product and version» will be selectable.
    * From the screen «Product versions», the field «project» will be selectable.
-
-
-.. raw:: latex
-
-    \newpage
-
+   
 .. _versions-planning:
 
 Versions planning
-^^^^^^^^^^^^^^^^^
+-----------------
 
 Select one or more product versions and the planning version is displayed.
 
@@ -436,7 +397,9 @@ This planning displays each version of selected product versions and their compo
 To use it define your start and delivery date in Product Version and Component Version.
 
 .. figure:: /images/GUI/deliveryDateComponent.png
-
+   :alt: Delivery date component 
+   :align: center
+   
 .. note::
 
  * To insert values you have to Actives 'display the start and delivery milestones' in  global parameters otherwise these fields are hidden.
@@ -446,3 +409,5 @@ This screen allows to see if the delivery date of Component versions is more lat
 Graphically, you can see any delay or incompatibility.
 
 .. figure:: /images/GUI/planningVersion.png
+   :alt: Planning version
+   :align: center

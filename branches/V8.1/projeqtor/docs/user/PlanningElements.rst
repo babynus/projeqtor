@@ -60,7 +60,7 @@ It is also the top-level of visibility, depending on profiles.
 .. rubric:: Special fields
 
 * The value of the fields the Project name, Sponsor, Project code and Contract code can be used as the substitute value of special fields.
-* See: :ref:`administration-special-field-label`
+* See: :ref:`administration-special-fields`
 
 .. rubric:: Monitoring indicator
 

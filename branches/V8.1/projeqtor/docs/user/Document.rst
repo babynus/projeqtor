@@ -129,7 +129,7 @@ The file document will be stored in the tool as versions.
 
 .. topic:: Field: Document reference
 
-   * Document reference name is calculated from format defined in the :ref:`Global parameters <format-reference-numbering-section>` screen.
+   * Document reference name is calculated from format defined in the :ref:`Global parameters<format_reference_doc>` screen.
 
 .. topic:: Field: Author
 
@@ -181,8 +181,7 @@ This section allows to manage version list of document.
  .. note:: Name of download file
 
     * The name of download file will be the document reference name displayed in **description** section.
-    * If you want to preserve the uploaded file name, set the parameter in  the :ref:`Global parameters <format-reference-numbering-section>` screen. 
-
+    * If you want to preserve the uploaded file name, set the parameter in  the :ref:`Global parameters <format_reference_doc>`
 
 .. figure:: /images/GUI/BOX_DocumentVersion.png
    :alt: Dialog box - Document version 

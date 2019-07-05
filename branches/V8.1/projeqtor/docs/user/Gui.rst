@@ -9,10 +9,10 @@
 Graphical User Interface
 ************************
 
-.. _global_view:
+.. _overview:
 
-Global view
------------
+Overview
+--------
 
 ProjeQtOr interface is divided into several areas.
 
@@ -61,7 +61,7 @@ Those areas are :
 Top bar
 -------
 
-.. figure:: /images/GUI/topbar1.png
+.. figure:: /images/GUI/GUI_ZONE_TopBar.png
    :alt: Top bar
    :align: center
 
@@ -70,74 +70,72 @@ Top bar
 
 .. index:: ! Project (Selector)
 
-.. rubric:: 1 - Project selector
+.. rubric:: |one| Project selector
 
-.. figure:: /images/GUI/ProjectSelector.png
+.. figure:: /images/GUI/GUI_ZONE_ProjectSelector.png
    :alt: Top bar
    :align: center
    
-
 * Allows to select the project to work on.
 * Restricted the visibility of all objects of the selected project, including sub-projects if any.
 * Defined the “default” project for new items.
 
-.. topic:: **User parameter: "Default project"**
+.. note:: **User parameter: "Default project"**
 
-   * Defines the project that will be selected and display by default into the project selector .
-
-
-* Button |iconProject16| to select current project in the project selector. 
-* Click twice to set up "all project" 
-* Click one time to select the project relates to this element.
+   * Defines the project that will be selected and display by default into the project selector
+   * see: :ref:`User parameters - section miscelleanous<userparam_miscelleaneous>`
 
 
 .. rubric:: 1.1 - Project selector parameters
 
-* Click on |buttonIconParameter| to display the project selector parameters dialog box, you can select :
+Click on |buttonIconParameter| to display the project selector parameters dialog box, you can select :
 
-  * View closed projects (Enter the Archive Mode).
-  * Change the project list display mode.
-  * Refresh the list.
+   * View closed projects (Enter the Archive Mode).
+   * Change the project list display mode.
+   * Refresh the list.
 
 .. figure:: /images/GUI/BOX_ProjectSelectorParameters.png
    :alt: Dialog box - Project selector parameters
    :align: center
+   
+.. note:: **Display mode**    
 
-.. rubric:: 1.1.a - Standard (reflecting WBS structure)
+   .. compound:: **1.1.a - Standard (reflecting WBS structure)**
+   
+      * List of project and sub-project are displayed according to WBS structure.
 
-* List of project and sub-project are displayed according to WBS structure.
+   .. figure:: /images/GUI/ZONE_ProjectSelectorStandardMode.png
+      :alt: Example - Project list display mode standard
+      :align: center
 
-.. figure:: /images/GUI/ZONE_ProjectSelectorStandardMode.png
-   :alt: Example - Project list display mode standard
-   :align: center
+   .. compound:: **1.1.b - Filtering select (with autocomplete)**
+   
+   * List of project and sub-project are displayed according to entered text.
+   * Search criteria works in a "starts with" mode
+   * Autocompletion is active
 
-.. raw:: latex
+   .. figure:: /images/GUI/ZONE_ProjectSelectorAutoCompleteMode.png
+      :alt: Example - Filtering select (with autocomplete)
+      :align: center
 
-   \newpage
+   .. compound:: **1.1.c - Filtering select (with search)**
+   
+   * List of project and sub-project are displayed according to search criteria.
+   * Search criteria works in a "contains" mode
+   * Autocompletion is **not** active
 
-
-.. rubric:: 1.1.b - Filtering select (with autocomplete)
- 
-* List of project and sub-project are displayed according to entered text.
-* Search criteria works in a "starts with" mode
-* Autocompletion is active
-
-.. figure:: /images/GUI/ZONE_ProjectSelectorAutoCompleteMode.png
-   :alt: Example - Filtering select (with autocomplete)
-   :align: center
-
-.. rubric:: 1.1.c - Filtering select (with search)
-
-* List of project and sub-project are displayed according to search criteria.
-* Search criteria works in a "contains" mode
-* Autocompletion is **not** active
-
-.. figure:: /images/GUI/ZONE_ProjectSelectorSearchMode.png
-   :alt: Example - Filtering select (with search)
-   :align: center
+   .. figure:: /images/GUI/ZONE_ProjectSelectorSearchMode.png
+      :alt: Example - Filtering select (with search)
+      :align: center
 
 
-.. rubric:: 1.2 - Project selector search
+.. rubric:: 1.2 - Selector of the current item
+
+* Button |iconProject16| to select current project in the project selector. 
+* Click once, from any element to display in the selector the project linked to the element.
+* Double click to display all projects again
+
+.. rubric:: 1.3 - Project selector search
 
 Click on |buttonIconSearch| to search projects and subprojects from any screen with the same search functions as on the projects screen
 
@@ -226,20 +224,16 @@ Logo area
 
 * Click on «Logo Area» will display the software information box.
 
-.. figure:: /images/GUI/logoinfo.png
+.. figure:: /images/GUI/GUI_BOX_LogoInfos.png
    :alt: Box - Software information
    :align: center
 
+   Software information
 
- .. note:: 
+.. note:: 
 
-     * You can change logo with your own.
-     * Refer to administration guide to replace the logo.
-
-
-.. raw:: latex
-
-    \newpage
+   * You can change logo with your own.
+   * Refer to administration guide to replace the logo.
 
 
 .. _menu-document-window:
@@ -434,17 +428,20 @@ List window
     \newpage
 
 .. _quick-search:
+.. _global_view:
 
-Global list
-^^^^^^^^^^^
-"Global List" screen that lists all the main project objects in the same list. The "Global List" view allows you to search among all the types of elements available in a single query. Just select what must be dispayed.
+Global View
+===========
+the "Overview" screen lists all the main objects of a project in the same list. 
+The "global view" allows you to search among all the types of items available in the same query. 
+Just select what should be displayed.
 
-.. figure:: /images/GUI/screenshot.460.png
-   :alt: Zone - Quick search
+.. figure:: /images/GUI/GUI_SCR_GlobalView.png
+   :alt: Global View Screen
    :align: center
 
 Quick search
-^^^^^^^^^^^^
+============
 
 The quick search allows to execute a textual search.
 
@@ -462,7 +459,7 @@ The quick search allows to execute a textual search.
 .. _advanced-filter:
 
 Advanced filter
-^^^^^^^^^^^^^^^
+===============
 
 The advanced filter allows to define clause to filter and sort.
 
@@ -561,13 +558,10 @@ Shared filters are available for all users in them session.
 * Click on the filter name to apply. |buttonIconActiveFilter|
 * Click on **«no filter clause»** to reset the filter. |buttonIconFilter|
 
-
-.. raw:: latex
-
 .. _displayed-columns:
 
 Displayed columns
-^^^^^^^^^^^^^^^^^
+=================
 
 This functionality allows to define columns displayed in the list  for this element.
 
@@ -630,7 +624,7 @@ This functionality allows to define columns displayed in the list  for this elem
 .. _export-csv-format:
 
 Export to CSV format
-^^^^^^^^^^^^^^^^^^^^
+====================
 
 This functionality allows to export data of list in a CSV file.
 
@@ -676,12 +670,6 @@ The fields are regrouped and presented in the order as they appear in the item d
 Detail window
 -------------
 
-.. contents:: Detail window features
-   :depth: 1
-   :local: 
-   :backlinks: top
-
-
 .. figure:: /images/GUI/ZONE_DetailWindow2.png
    :alt: Detail window
    :align: center
@@ -713,19 +701,19 @@ Detail window
 * Click on |buttonIconPdf|  to get a printable version of the details in PDF format.
 * Click on |buttonIconCopy| to copy the current item. (See: :ref:`copy-item`)        
 * Click on |buttonIconUndo| to cancel ongoing changes.      
+* Click on |buttonIconRefresh| to refresh the display. 
 * Click on |buttonIconDelete| to delete the item.      
-* Click on |buttonIconRefresh| to refresh the display.      
 * Click on |buttonIconEmail| to send details of item by email. (See: :ref:`email-detail`)
 * Click on |ButtonIconSubscribe| to susbcribe of item. (See: :ref:`subscribe-detail`)
 * Click on |buttonIconMultipleUpdate| to update several items in one operation. (See: :ref:`multiple-update`)
 * Click on |buttonIconRefresh| to refresh the list.
 
- .. note::
+.. note::
 
     * Some buttons are not clickable when changes are ongoing.
     * |buttonIconUndo| button is clickable only when changes are ongoing.
 
- .. warning::
+.. warning::
 
     * When changes are ongoing, you cannot select another item or another menu item. 
     * Save or cancel ongoing changes first.
@@ -789,7 +777,7 @@ Detail window
 .. _copy-item:
 
 Copy item
-^^^^^^^^^
+=========
 
 * allows you to copy an entire element or to select only some information such as project structure, meetings, links or attached files.
 * The options displayed in dialog box depends on whether the element is simple or complex.
@@ -833,7 +821,7 @@ Copy item
 .. _email-detail:
 
 Email detail
-^^^^^^^^^^^^
+============
 
 Allows to send an informative email to defined recipients list.
 
@@ -867,7 +855,7 @@ Allows to send an informative email to defined recipients list.
 .. _subscribe-detail:
 
 Subscribe detail
-^^^^^^^^^^^^^^^^
+================
 
 .. rubric:: Subscribe list 
 
@@ -906,7 +894,7 @@ When a user "subscribes" to the project, he will receive notifications "to subsc
 .. _multiple-update:
 
 Multiple update
-^^^^^^^^^^^^^^^
+===============
 
 Allows to update several items in one operation.
 
@@ -945,7 +933,7 @@ Allows to update several items in one operation.
 .. _checklist:
 
 Checklist
-^^^^^^^^^
+=========
 
 Allows to fill a checklist form.
 
@@ -998,7 +986,7 @@ A checklist is available, whether a checklist form is already defined for the el
 .. _change-history:
 
 History of changes
-^^^^^^^^^^^^^^^^^^
+==================
 
 All the changes items are tracked.
 
@@ -1066,7 +1054,7 @@ They are stored and displayed on each item.
     \newpage
 
 Text editor
-^^^^^^^^^^^
+===========
 
 Text editors are available for editing of long text fields like description, results, notes, ...
 
@@ -1154,7 +1142,7 @@ Text editors are available for editing of long text fields like description, res
     \newpage
 
 Special fields
-^^^^^^^^^^^^^^
+==============
 
 This section describes the ProjeQtOr special fields.
 
@@ -1427,7 +1415,8 @@ Each user can choose the language to display all the captions.
 
    * This parameter defines the language used to display captions.
 
-.. rubric:: d - Theme
+.. rubric:: Theme
+
 Users can select Theme to display the interface. 
 
 .. rubric:: User parameter “Theme”
@@ -1436,6 +1425,10 @@ Users can select Theme to display the interface.
 * The new theme is automatically applied when selected.
 
 .. figure:: /images/GUI/theme.png
+   :alt: Theme
+   :align: center
+   
+   theme
 
 .. note:: Default theme
 
@@ -1451,6 +1444,7 @@ Scrolling the list, it is possible to choose  the screen that will be displayed 
 Validate the new one clicking and activating the next combo box 
 
 .. rubric:: g - Online manual
+
 or press F1
 
 .. rubric:: h - Keyboard shorcuts
@@ -1605,7 +1599,8 @@ Themes
 
 Users can select Theme to display the interface. 
 
-.. rubric:: User parameter â€œThemeâ€?
+.. rubric:: User parameter Theme?
+
 * This parameter defines the theme to display.
 * The new theme is automatically applied when selected.
 
