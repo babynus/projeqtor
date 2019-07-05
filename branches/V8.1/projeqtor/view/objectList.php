@@ -137,7 +137,7 @@ if ($displayWidthList<1400) {
     }
   }
 }
-$extrahiddenFields=$obj->getExtraHiddenFields();
+$extrahiddenFields=$obj->getExtraHiddenFields('*','*');
 if ($obj->isAttributeSetToField('idClient','hidden') or in_array('idClient',$extrahiddenFields)) $hideClientSearch=true;
 if ($obj->isAttributeSetToField('idBudget','hidden') or in_array('idBudget',$extrahiddenFields)) $hideParentBudgetSearch=true;
 if ($obj->isAttributeSetToField('id'.$objectClass.'Type','hidden') or in_array('id'.$objectClass.'Type',$extrahiddenFields)) $hideTypeSearch=true;
