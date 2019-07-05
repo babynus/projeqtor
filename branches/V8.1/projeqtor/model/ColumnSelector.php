@@ -79,7 +79,7 @@ class ColumnSelector extends SqlElement {
 		// retrieve from database, in correct order
 		$user=getSessionUser();
 		$obj=new $classObj();
-		$extraHiddenFields=$obj->getExtraHiddenFields();
+		$extraHiddenFields=$obj->getExtraHiddenFields('*','*');
 		if (isset($extraHiddenFields['id'])) unset($extraHiddenFields['id']);
 		if (isset($extraHiddenFields['name'])) unset($extraHiddenFields['name']);
 		if (method_exists($obj, 'setAttributes')) $obj->setAttributes();
@@ -186,7 +186,7 @@ class ColumnSelector extends SqlElement {
 
 	private static function addAllFields($result, $obj, $included=false, $sourceClass=null) {
 		$fieldsArray=$obj->getFieldsArray();
-		$extrahiddenFields=$obj->getExtraHiddenFields();
+		$extrahiddenFields=$obj->getExtraHiddenFields('*','*');
 		$user=getSessionUser();
 		$cpt=count($result);
 		foreach($obj as $col => $val) {
