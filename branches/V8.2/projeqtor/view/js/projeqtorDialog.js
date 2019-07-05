@@ -6811,6 +6811,7 @@ function loadMenuBarItem(item, itemName, from) {
   } else if (item == 'ImputationValidation') {
 	    loadContent("imputationValidationMain.php", "centerDiv");  
   } else if (item == 'AutoSendReport') {
+    loadContent("autoSendReportList.php", "centerDiv"); 
 	loadContent("autoSendReportList.php", "centerDiv");
   } else if (item == 'DataCloning') {
 		loadContent("dataCloningList.php", "centerDiv");
@@ -7087,6 +7088,15 @@ function closeAlertBox() {
   }).play();
 }
 
+function setReadMessageLegalFollowup(idMessageLegal){
+  var param="?idMessageLegal="+idMessageLegal;
+  dojo.xhrGet({
+    url : "../tool/saveMessageLegalFollowup.php"+param,
+    handleAs : "text",
+    load : function(data, args) {
+    },
+  });
+}
 // ===========================================================================================
 // ADMIN functionalities
 // ===========================================================================================
