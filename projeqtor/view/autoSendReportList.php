@@ -103,7 +103,7 @@ $lastDay = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay
                   </script>
                   <option value=""></option>
                   <?php
-                   $specific='scheduledReport';
+                   $specific='imputation';
                    include '../tool/drawResourceListForSpecificAccess.php';?>  
               </select>
            </td>
@@ -125,7 +125,7 @@ $lastDay = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay
                     refreshAutoSendReportList(null);
                   </script>
                   <?php 
-                  $specific='scheduledReport';
+                  $specific='imputation';
                   if ($user->allSpecificRightsForProfilesOneOnlyValue($specific, 'ALL')) {?>
                   <option value=""></option>
                   <?php
