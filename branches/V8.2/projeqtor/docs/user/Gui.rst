@@ -9,10 +9,10 @@
 Graphical User Interface
 ************************
 
-.. _global_view:
+.. _overview:
 
-Global view
------------
+Overview
+--------
 
 ProjeQtOr interface is divided into several areas.
 
@@ -61,7 +61,7 @@ Those areas are :
 Top bar
 -------
 
-.. figure:: /images/GUI/topbar1.png
+.. figure:: /images/GUI/GUI_ZONE_TopBar.png
    :alt: Top bar
    :align: center
 
@@ -434,17 +434,20 @@ List window
     \newpage
 
 .. _quick-search:
+.. _global_view:
 
-Global list
-^^^^^^^^^^^
-"Global List" screen that lists all the main project objects in the same list. The "Global List" view allows you to search among all the types of elements available in a single query. Just select what must be dispayed.
+Global View
+===========
+the "Overview" screen lists all the main objects of a project in the same list. 
+The "global view" allows you to search among all the types of items available in the same query. 
+Just select what should be displayed.
 
-.. figure:: /images/GUI/screenshot.460.png
-   :alt: Zone - Quick search
+.. figure:: /images/GUI/GUI_SCR_GlobalView.png
+   :alt: Global View Screen
    :align: center
 
 Quick search
-^^^^^^^^^^^^
+============
 
 The quick search allows to execute a textual search.
 
@@ -462,7 +465,7 @@ The quick search allows to execute a textual search.
 .. _advanced-filter:
 
 Advanced filter
-^^^^^^^^^^^^^^^
+===============
 
 The advanced filter allows to define clause to filter and sort.
 
@@ -630,7 +633,7 @@ This functionality allows to define columns displayed in the list  for this elem
 .. _export-csv-format:
 
 Export to CSV format
-^^^^^^^^^^^^^^^^^^^^
+====================
 
 This functionality allows to export data of list in a CSV file.
 
@@ -676,12 +679,6 @@ The fields are regrouped and presented in the order as they appear in the item d
 Detail window
 -------------
 
-.. contents:: Detail window features
-   :depth: 1
-   :local: 
-   :backlinks: top
-
-
 .. figure:: /images/GUI/ZONE_DetailWindow2.png
    :alt: Detail window
    :align: center
@@ -713,19 +710,19 @@ Detail window
 * Click on |buttonIconPdf|  to get a printable version of the details in PDF format.
 * Click on |buttonIconCopy| to copy the current item. (See: :ref:`copy-item`)        
 * Click on |buttonIconUndo| to cancel ongoing changes.      
+* Click on |buttonIconRefresh| to refresh the display. 
 * Click on |buttonIconDelete| to delete the item.      
-* Click on |buttonIconRefresh| to refresh the display.      
 * Click on |buttonIconEmail| to send details of item by email. (See: :ref:`email-detail`)
 * Click on |ButtonIconSubscribe| to susbcribe of item. (See: :ref:`subscribe-detail`)
 * Click on |buttonIconMultipleUpdate| to update several items in one operation. (See: :ref:`multiple-update`)
 * Click on |buttonIconRefresh| to refresh the list.
 
- .. note::
+.. note::
 
     * Some buttons are not clickable when changes are ongoing.
     * |buttonIconUndo| button is clickable only when changes are ongoing.
 
- .. warning::
+.. warning::
 
     * When changes are ongoing, you cannot select another item or another menu item. 
     * Save or cancel ongoing changes first.
@@ -789,7 +786,7 @@ Detail window
 .. _copy-item:
 
 Copy item
-^^^^^^^^^
+=========
 
 * allows you to copy an entire element or to select only some information such as project structure, meetings, links or attached files.
 * The options displayed in dialog box depends on whether the element is simple or complex.
@@ -833,7 +830,7 @@ Copy item
 .. _email-detail:
 
 Email detail
-^^^^^^^^^^^^
+============
 
 Allows to send an informative email to defined recipients list.
 
@@ -867,7 +864,7 @@ Allows to send an informative email to defined recipients list.
 .. _subscribe-detail:
 
 Subscribe detail
-^^^^^^^^^^^^^^^^
+================
 
 .. rubric:: Subscribe list 
 
@@ -906,7 +903,7 @@ When a user "subscribes" to the project, he will receive notifications "to subsc
 .. _multiple-update:
 
 Multiple update
-^^^^^^^^^^^^^^^
+===============
 
 Allows to update several items in one operation.
 
@@ -945,7 +942,7 @@ Allows to update several items in one operation.
 .. _checklist:
 
 Checklist
-^^^^^^^^^
+=========
 
 Allows to fill a checklist form.
 
@@ -998,7 +995,7 @@ A checklist is available, whether a checklist form is already defined for the el
 .. _change-history:
 
 History of changes
-^^^^^^^^^^^^^^^^^^
+==================
 
 All the changes items are tracked.
 
@@ -1066,7 +1063,7 @@ They are stored and displayed on each item.
     \newpage
 
 Text editor
-^^^^^^^^^^^
+===========
 
 Text editors are available for editing of long text fields like description, results, notes, ...
 
@@ -1154,7 +1151,7 @@ Text editors are available for editing of long text fields like description, res
     \newpage
 
 Special fields
-^^^^^^^^^^^^^^
+==============
 
 This section describes the ProjeQtOr special fields.
 
@@ -1436,6 +1433,10 @@ Users can select Theme to display the interface.
 * The new theme is automatically applied when selected.
 
 .. figure:: /images/GUI/theme.png
+   :alt: Theme
+   :align: center
+   
+   theme
 
 .. note:: Default theme
 
@@ -1451,6 +1452,7 @@ Scrolling the list, it is possible to choose  the screen that will be displayed 
 Validate the new one clicking and activating the next combo box 
 
 .. rubric:: g - Online manual
+
 or press F1
 
 .. rubric:: h - Keyboard shorcuts

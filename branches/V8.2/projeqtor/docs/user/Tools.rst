@@ -4,7 +4,7 @@
 
 .. index:: ! Email (Sent)
 
-.. _toolspage
+.. _toolspage:
 
 .. _emails-sent:
 

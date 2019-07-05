@@ -1,10 +1,10 @@
 .. include:: ImageReplacement.txt
 
-.. title:: Transverse Features
+.. title:: Transverses Features
 
-.. index:: ! Transverse Features
+.. index:: ! Transverses Features
 
-.. _AS:
+.. _Activity_Stream:
 
 Activity Stream
 ---------------
@@ -15,7 +15,7 @@ To default you will see all visible notes for each items.
 
 There are filters to refine the search.
 
-.. figure:: /images/GUI/ActivityStream.png
+.. figure:: /images/GUI/TRANSFEAT_ZONE_ActivityStream.png
    :alt: Task list zone
    :align: center
 
@@ -24,6 +24,20 @@ There are filters to refine the search.
 
   * Click on |buttonCollapseClose|  to hide note comment.  
   * Click on |buttonCollapseOpen|  to display note comment.
+
+
+.. figure:: /images/GUI/TRANSFEAT_ZONE_ActivityStream_Details.png
+
+in either case, the notes are displayed or not.
+
+.. rubric:: We can see on this summary several elements displayed:
+
+* The creator of the note,
+* The ID of the note
+* The element and its ID on which the note was created
+* the date and time of creation of the note
+* and the note itself - option enabled
+
 
 .. raw:: latex
 
