@@ -252,7 +252,7 @@ class AutoSendReport extends SqlElement{
       $af=new Affectable($idUser);
       $listUser[$idUser]=($af->name)?$af->name:$af->userName;
     } else {
-      $listUser = getUserVisibleResourcesList(true);
+      $listUser = getListForSpecificRights('imputation');
     }
 	  $result = "";
 	  $result .='<div id="autoSendReportDiv" align="center" style="margin-top:20px;margin-bottom:20px; overflow-y:auto; width:100%;">';
@@ -409,7 +409,6 @@ class AutoSendReport extends SqlElement{
   	  }
 	  }
 	  if($noData==true){
-	  	noData :
 	  	$result .='<tr><td colspan="8">';
 	  	$result .='<div style="background:#FFDDDD;font-size:150%;color:#808080;text-align:center;padding:15px 0px;width:100%;">'.i18n('noDataFound').'</div>';
 	  	$result .='</td></tr>';
