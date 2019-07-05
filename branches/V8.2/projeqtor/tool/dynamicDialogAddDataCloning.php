@@ -29,6 +29,7 @@ $user = getSessionUser();
 $dataCloning = new DataCloning();
 $dataCloningMaxCount = 3;
 $dataCloningCount = $dataCloning->countSqlElementsFromCriteria(array("idResource"=>$user->id, "idle"=>"0"));
+$plannedDate = date('Y-m-d H:i:s');
 ?>
   <table>
     <tr>
@@ -73,7 +74,7 @@ $dataCloningCount = $dataCloning->countSqlElementsFromCriteria(array("idResource
                id="dataCloningPlannedDate" name="dataCloningPlannedDate"
                type="text" maxlength="10" hasDownArrow=false
                style="width:80px; text-align:center;" class="input rounded"
-               value="">
+               value="<?php echo $plannedDate;?>">
                </div>
   				    </td>
             </tr>
