@@ -36,6 +36,7 @@
 .iconNotificationManual32 { background-image: url(images/iconNotificationManual.png); background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .iconGoto16 { background-image: url(images/iconGoto.png); background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .iconGoto22 { background-image: url(images/iconGoto.png); background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconGoto24 { background-image: url(images/iconGoto.png); background-repeat: no-repeat; width: 24px; height: 24px; background-size: 24px 24px;}
 .iconGoto32 { background-image: url(images/iconGoto.png); background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .iconSum16 { background-image: url(images/iconSum.png); background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .iconSum22 { background-image: url(images/iconSum.png); background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
@@ -148,6 +149,7 @@
 .iconButtonRemove24 { background-image: url(images/mediumButtonRemove.png);  background-repeat: no-repeat; width: 24px; height: 24px; }
 .iconButtonSave24 { background-image: url(images/iconButtonSave.png);  background-repeat: no-repeat; width: 24px; height: 24px; }
 .iconButtonAdd16 { background-image: url(images/smallButtonAdd.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+.iconButtonAdd32 { background-image: url(images/buttonAdd32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .iconButtonLink16 { background-image: url(images/smallButtonLink.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 .iconButtonView16 { background-image: url(images/display.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 .iconButtonSplit16 { background-image: url(images/iconSplit.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
@@ -339,6 +341,10 @@
 .iconCriticality32 { background-image: url(images/iconCriticality32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconCriticality22 { background-image: url(images/iconCriticality22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconCriticality16 { background-image: url(images/iconCriticality16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+
+.iconCancel16 { background-image: url(images/iconUndo.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.iconCancel24 { background-image: url(images/iconUndo.png);  background-repeat: no-repeat; width: 24px; height: 24px; background-size: 24px 24px;}
+.iconCancel32 { background-image: url(images/iconUndo.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 
 /* BEGIN - ADD qCazelles - Requirement dashboard - Ticket 90 */
 
@@ -1117,3 +1123,9 @@
 .ProjeQtOrFlatRed .iconAutoSendReport { background-image: url(customIcons/red/iconAutoSendReports.png); }
 .ProjeQtOrFlatGreen .iconAutoSendReport { background-image: url(customIcons/green/iconAutoSendReports.png); }
 .ProjeQtOrFlatGrey .iconAutoSendReport { background-image: url(customIcons/grey/iconAutoSendReports.png); }
+
+.iconDataCloning { background-image: url(images/iconDataCloning.png); }
+.ProjeQtOrFlatBlue .iconDataCloning { background-image: url(customIcons/blue/iconDataCloning.png); }
+.ProjeQtOrFlatRed .iconDataCloning { background-image: url(customIcons/red/iconDataCloning.png); }
+.ProjeQtOrFlatGreen .iconDataCloning { background-image: url(customIcons/green/iconDataCloning.png); }
+.ProjeQtOrFlatGrey .iconDataCloning { background-image: url(customIcons/grey/iconDataCloning.png); }
