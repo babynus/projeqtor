@@ -6038,3 +6038,62 @@ function selectedMultiProject(){
 		setSelectedProject(arraySelectedProject.flat(), nameProject, 'selectedProject');
 	}
 }
+
+function refreshDataCloningList() {
+	formInitialize();
+	var callback=function() {
+		hideWait();
+	};
+	loadContent('../view/refreshDataCloningList.php', 'dataCloningWorkDiv', 'dataCloningListForm', false,false,false,false,callback,false);
+}
+
+function saveDataCloning(){
+	var formVar=dijit.byId('dataCloningForm');
+	  if (dijit.byId('dataCloningUser').get('value') == '' || dijit.byId('dataCloningName').get('value') == '') {
+	      showAlert(i18n("errorNoUserOrNoName"));
+	      return;
+	  }
+      callback=function() {
+    	  hideWait();
+    	  refreshDataCloningList();
+	  };
+	  if (formVar.validate()) {
+		  showWait();
+		  loadContent("../tool/saveDataCloning.php", "resultDiv", "dataCloningForm", true, false, false, false, callback);
+		  dijit.byId('dialogAddDataCloning').hide();
+	  } else {
+	    showAlert(i18n("alertInvalidForm"));
+	  }
+}
+
+function removeDataCloningStatus(idDataCloning){
+	action=function(){
+		showWait();
+		var url='../tool/saveDataCloning.php?status=remove&idDataCloning='+idDataCloning;
+		  dojo.xhrGet({
+		    url : url,
+		    handleAs : "text",
+		    load : function(){
+		    	hideWait();
+		    	refreshDataCloningList();
+		    }
+		  });
+	}
+  showConfirm(i18n('removeDataCloning') ,action);
+}
+
+function cancelDataCloningStatus(idDataCloning){
+	action=function(){
+		showWait();
+		var url='../tool/saveDataCloning.php?status=cancel&idDataCloning='+idDataCloning;
+		  dojo.xhrGet({
+		    url : url,
+		    handleAs : "text",
+		    load : function(){
+		    	hideWait();
+		    	refreshDataCloningList();
+		    }
+		  });
+	}
+  showConfirm(i18n('cancelDataCloning') ,action);
+}

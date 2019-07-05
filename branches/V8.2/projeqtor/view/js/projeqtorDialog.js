@@ -6811,7 +6811,9 @@ function loadMenuBarItem(item, itemName, from) {
   } else if (item == 'ImputationValidation') {
 	    loadContent("imputationValidationMain.php", "centerDiv");  
   } else if (item == 'AutoSendReport') {
-	loadContent("autoSendReportList.php", "centerDiv"); 
+	loadContent("autoSendReportList.php", "centerDiv");
+  } else if (item == 'DataCloning') {
+		loadContent("dataCloningList.php", "centerDiv");
     //ADD qCazelles - GANTT
   } else if (item == 'VersionsPlanning') {
 	//CHANGE qCazelles - Correction GANTT - Ticket #100
@@ -10457,4 +10459,8 @@ function saveModuleStatusCheckParent(id) {
       });
     }
   }
+}
+
+function addDataCloning(){
+	loadDialog('dialogAddDataCloning',null,true,null,true);
 }
