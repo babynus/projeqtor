@@ -331,19 +331,11 @@ Logo area
 List window
 -----------
 
-.. contents:: List window features
-   :depth: 1
-   :local: 
-   :backlinks: top
-
 .. figure:: /images/GUI/zonelistwindows.png
    :alt: List window
    :align: center
 
-   List window
-
-
-.. rubric:: 1 - Element identifier
+.. rubric:: |one| - Element identifier
 
 * Displays the element name and the count of items in the list.  
 * Each element is identified with a distinctive icon.
@@ -374,7 +366,7 @@ List window
     \newpage
 
 
-.. rubric:: 3 - Buttons 
+.. rubric:: |three| - Buttons 
 
 * Click on |buttonIconSearch| to execute a textual search. (See: :ref:`quick-search`)
 * Click on |buttonIconFilter| to define an advanced filter. (See: :ref:`advanced-filter`)
@@ -385,7 +377,7 @@ List window
 * Click on |buttonIconNew| to create a new item of the element.*
 * Click on |buttonIconRefresh| to refresh the list
 
-.. rubric:: 4 - Extra buttons
+.. rubric:: |four| - Extra buttons
 
 * Click on |buttonIconStatus| to diplays status list.
 
@@ -424,10 +416,9 @@ List window
 
 
 
-.. rubric:: 7 - Items list
+.. rubric:: |seven| - Items list
 
 * Click on a line (any column) will display the corresponding item in the detail window.
-
 
 .. raw:: latex
 
@@ -929,6 +920,8 @@ Allows to update several items in one operation.
    :align: center
 
    Multiple mode window
+   
+
 
 .. rubric:: Apply updates
 

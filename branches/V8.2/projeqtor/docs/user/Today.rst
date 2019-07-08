@@ -31,7 +31,7 @@ This screen allows user to have a global view of its projects and tasks.
 Messages
 --------
 
-.. figure:: /images/GUI/SEC_TodayMessages.png
+.. figure:: /images/GUI/TODAY_ZONE_TodayMessages.png
    :alt: Section - Messages 
    :align: center
 
@@ -94,7 +94,7 @@ Messages
     * Allows to reorder sections displayed with drag & drop feature.
     * Using the selector area button icon drag |buttonIconDrag|. 
 
-.. figure:: /images/GUI/BOX_TodayParameters1.png
+.. figure:: /images/GUI/TODAY_BOX_Parameters.png
    :alt: Dialog box - Today parameters 
    :align: center
 
@@ -120,7 +120,7 @@ Start guide
   * This section will not be displayed anymore.
   * To show it again, select it as the start page in :ref:`Users parameters<graphic-interface-behavior-section>` screen. 
 
-.. figure:: /images/GUI/SEC_TodayStartGuide.png
+.. figure:: /images/GUI/TODAY_SCR_StartGuide.png
    :alt: Section - Start guide 
    :align: center
 
@@ -138,7 +138,7 @@ A quick overview of projects status.
 
 The projects list is limited to the project visibility scope of the connected user. 
 
-.. figure:: /images/GUI/SEC_TodayProjects.png
+.. figure:: /images/GUI/TODAY_ZONE_Projects.png
    :alt: Section - Projects 
    :align: center
 
@@ -268,7 +268,7 @@ You can select any report to be displayed on the Today screen.
 * Any unchanged parameter will be set as default value.
 * These reports will be displayed on Today screen like other pre-defined parts.
 
-.. figure:: /images/GUI/SEC_TodayExtending.png
+.. figure:: /images/GUI/TODAY_ZONE_ExtendingReport.png
    :alt: Report selection
    :align: center
 
@@ -280,7 +280,7 @@ You can select any report to be displayed on the Today screen.
 * You can reorder like any other parts.
 * Click on |buttonIconDelete| to completely remove them from the list.
 
-.. figure:: /images/GUI/BOX_TodayParametersWithExtending.png
+.. figure:: /images/GUI/TODAY_BOX_ParametersExtending.png
    :alt: Dialog box - Today parameters with extending parts 
    :align: center
 
