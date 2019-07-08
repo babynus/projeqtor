@@ -176,20 +176,30 @@ Buttons of the timesheet:
    * Click on the icon to open windows view comments
       
    .. figure:: /images/GUI/REALWORK_BOX_leftclickNote.png
-
-
-    * **Planned dates**: Planned start and end dates.
-    * **Assigned**: Planned work assigned to the resource.
-    * **Real**: Sum of work done by the resource.
-    * **Left**: The remaining planned work. 
-    * **Reassessed**: The work needed to complete the task.
+      :alt: 
+      :align: center
+             
         
 .. compound:: |D| **Imput fields**
-    
-Each day, for each task, a field of entered allows you to inform your real work.
+
+Each day, for each task, an input field allows you to enter your actual work.
+
+The column of the day is highlighted with a yellow background
 
 see: :ref:`inputFields-section`
-    
+
+In order to see and know the assignment times on a task, several columns indicate the periods that are assigned to a resource
+
+      * **Planned dates**: Planned start and end dates.
+      * **Assigned**: Planned work assigned to the resource.
+      * **Real**: Sum of work done by the resource.
+      * **Left**: The remaining planned work. 
+      * **Reassessed**: The work needed to complete the task. 
+      
+.. figure:: /images/GUI/REALWORK_ZONE_RowsTime.png
+   :scale: 60%
+              
+          
 **Total of days**
 
 On the last column is the sum for all days of the week. 
@@ -201,13 +211,7 @@ It is a synthesis displayed for each project and globally for the whole week.
    
    Total of the day Zone  
    
-.. note:: Start and end Dates  
-
-   .. figure:: /images/GUI/REALWORK_ZONE_Dates.png
-    
-    You can see at a glance the start and end dates for each item in the list
-    
-    
+ 
 .. raw:: latex
 
     \newpage

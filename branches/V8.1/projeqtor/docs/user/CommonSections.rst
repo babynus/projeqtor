@@ -1174,18 +1174,25 @@ This section allows to define priority and follow progress on a meeting.
 Predecessor and Sucessor element sections
 -----------------------------------------
 
-.. sidebar:: Concepts 
-
-   * :ref:`dependencies`
-
 This section allows to manage dependency links between planning elements.
 
-A dependency link can be created from a planning element (Predecessor) and to a planning element (Successor).
+* A dependency can be created from the predecessor and/or successor planning element.
 
-.. note:: Gantt chart
+* The dependency link can be created in the Gantt chart.
 
-   * The dependency link can be created in the Gantt chart.
-   * See: :ref:`project-planning`
+* Click on the name of a predecessor or successor to go directly to the element.
+  
+.. seealso:: 
+
+  * :ref:`project-planning`
+  
+  * :ref:`dependencies`
+  
+  * :ref:`Gantt Chart view<Gantt_DependencyLink_Milestone>`
+
+.. figure:: /images/GUI/COMMON_ZONE_Success&Predecessor.png
+   :alt: Predecessor and Successor section
+   :align: center
 
 .. tabularcolumns:: |l|l|
 
@@ -1200,12 +1207,9 @@ A dependency link can be created from a planning element (Predecessor) and to a 
    * - Name
      - Name of the element.
    * - Status
-     - Actual status of the element.
-
-.. note::
- 
-   * Click on the name of a predecessor or successor will directly move to it.
-
+     - Actual status of the element
+   * - End Date
+     - End date of the selected item  
 
 .. rubric:: Predecessors and successors elements list management
 
@@ -1213,32 +1217,44 @@ A dependency link can be created from a planning element (Predecessor) and to a 
 * Click on |buttonEdit| to edit the dependency link.
 * Click on |buttonIconDelete| to delete the corresponding dependency link. 
 
-.. figure:: /images/GUI/COMMON_BOX_PredSuccess.png
+.. figure:: /images/GUI/COMMON_BOX_Success&Predecessor.png
    :alt: Dialog box - Predecessor or Successor element
    :align: center
+   :scale: 80%
 
    Dialog box - Predecessor or Successor element
+
+In the NAME field, icons are displayed to indicate the type of dependencies
+
+* |iconEE| End End dependency
+* |iconES| End start dependency
+* |iconEE| End End dependency
 
 
 
 .. note:: 
 
-   * Recursive loops are controlled on saving.
+   Recursive loops are controlled on saving.
 
-.. topic:: Linked element list of values
+   **Linked element list of values**
+   
+   By default, the list of values shows items of the same project.
 
-   * By default, the list of values shows items of the same project. But, it is possible to link items from different projects.
-   * Click on |buttonIconSearch| to get the list of elements of all projects. 	
+   But, it is possible to link items from different projects.
+   
+   Click on |buttonIconSearch| to get the list of elements of all projects. 	
 
-.. topic:: Multi-value selection
+   **Multi-value selection**
 
    * Multi-line selection is possible using :kbd:`Control` key while clicking.
 
-.. topic:: Delay (late)
+   **Delay (late)**
 
    * Days between predecessor end and successor start.
 
+.. figure:: /images/GUI/COMMON_ZONE_Success&Predecessor_REDDate.png
 
+Highlighting the date that will most constrain the next activity
 
 .. raw:: latex
 

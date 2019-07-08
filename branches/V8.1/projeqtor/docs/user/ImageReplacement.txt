@@ -1,7 +1,23 @@
 .. |iconNotPlanned| image:: images/iconNotPlanned.png
    :alt: Icon not planned
 
-.. |buttonIconSubscribe| image:: images/buttonIconSubscribe.png
+.. |iconSS| image:: images/dependency_SS.png
+   :alt: Start start dependency
+   
+.. |iconES| image:: images/dependency_E-S.png
+   :alt: End Start dependency
+
+.. |iconEE| image:: images/dependency_E-E.png
+   :alt: End End dependency
+   
+.. |iconSplit| image:: images/iconSplit.png
+   :alt: Icon divide
+
+.. |iconStar| image:: images/iconStar.png
+   :alt: mandatory attendant
+   :scale: 60
+
+.. |buttonIconSubscribe| image:: images/buttonIconSubscribe16.png
    :alt: Suscribe Button
    
 .. |RequiredField| image:: images/RequiredFILE.png
@@ -15,10 +31,10 @@
    :alt: Add formated line 
       
 .. |iconNoteAdd| image:: images/GUI/iconNoteAdd.png
-   :alt: Icon not planned
+   :alt: Add a Note
    
 .. |iconenablecalendar| image:: images/iconEnableCalendar.png
-   :alt: Icon not planned
+   :alt: Enable calendar
 
 .. |iconPlanned| image:: images/iconPlanned.png
    :alt: Icon planned
@@ -148,6 +164,7 @@
  
 .. |iconHideStream| image:: images/iconHideStream.png
    :alt: icon Hide Stream  
+   :scale: 80%
  
 .. |buttonIconSave| image:: images/buttonIconSave.png
    :alt: Button icon save

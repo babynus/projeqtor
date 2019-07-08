@@ -26,31 +26,27 @@ Those areas are :
 * :ref:`detail-window` |six|
 * :ref:`info-bar` |seven|
 
-.. figure:: /images/GUI/globalview0.png
-   :alt: Global view
+.. figure:: /images/GUI/GUI_SCR_Overview_V82.png
+   :alt: Overview
    :align: center
 
-.. raw:: latex
-
-    \newpage
 
 .. rubric:: Area separation
 
+.. figure:: /images/GUI/GUI_SCR_Splitters.png
+   :alt: Windows splitters
+   :align: center   
+   
 * The splitters allow resizing areas in the interface.
-* The green splitter allows to resize the areas **«Menu and Documents window» and «Message and Link window»**.
-* The red splitter allows to resize the areas left and right.
-* The orange splitter allows to resize the areas **«List window» and «Detail window»**.
+* The green splitter allows to resize the areas **Menu and Documents window** and **Message and Link window**.
+* The pink splitter allows to resize the areas left and right.
+* The orange splitter allows to resize the areas **List window** and **Detail window**.
+
+* The |iconHideStream| allows to hide the **Menu and Documents window** and **Message and Link window**
 
 .. note::
 
-   * The  position of splitters is saved and retrieved on each connection.
-
-.. figure:: /images/GUI/splitter1.png
-   :alt: Windows splitters
-   :align: center
-
-   Area separation
-
+   * The position of splitters is saved and retrieved on each connection.
 
 .. raw:: latex
 
@@ -325,19 +321,11 @@ Logo area
 List window
 -----------
 
-.. contents:: List window features
-   :depth: 1
-   :local: 
-   :backlinks: top
-
 .. figure:: /images/GUI/zonelistwindows.png
    :alt: List window
    :align: center
 
-   List window
-
-
-.. rubric:: 1 - Element identifier
+.. rubric:: |one| - Element identifier
 
 * Displays the element name and the count of items in the list.  
 * Each element is identified with a distinctive icon.
@@ -345,7 +333,7 @@ List window
 
 .. _rapid-filter:
 
-.. rubric:: 2 - Rapid filter
+.. rubric:: |two| - Rapid filter
 
 * Rapid filtering fields are proposed : «Id», «Name» and «Type».
 
@@ -368,7 +356,7 @@ List window
     \newpage
 
 
-.. rubric:: 3 - Buttons 
+.. rubric:: |three| - Buttons 
 
 * Click on |buttonIconSearch| to execute a textual search. (See: :ref:`quick-search`)
 * Click on |buttonIconFilter| to define an advanced filter. (See: :ref:`advanced-filter`)
@@ -379,7 +367,7 @@ List window
 * Click on |buttonIconNew| to create a new item of the element.*
 * Click on |buttonIconRefresh| to refresh the list
 
-.. rubric:: 4 - Extra buttons
+.. rubric:: |four| - Extra buttons
 
 * Click on |buttonIconStatus| to diplays status list.
 
@@ -394,12 +382,12 @@ List window
 
    * Actives 'quick filtering by status' in  global parameters otherwise this button is hidden.
 
-.. rubric:: 5 - Checkbox «Show closed items»
+.. rubric:: |five| - Checkbox «Show closed items»
 
 * Flag on «Show closed items» allows to list also closed items.
 
 
-.. rubric:: 6 - Column headers
+.. rubric:: |six| - Column headers
 
 * Click a column header to sort the list on that column (first ascending, then descending).
 
@@ -418,10 +406,9 @@ List window
 
 
 
-.. rubric:: 7 - Items list
+.. rubric:: |seven| - Items list
 
 * Click on a line (any column) will display the corresponding item in the detail window.
-
 
 .. raw:: latex
 
@@ -920,6 +907,8 @@ Allows to update several items in one operation.
    :align: center
 
    Multiple mode window
+   
+
 
 .. rubric:: Apply updates
 
