@@ -47,11 +47,10 @@ if($dataCloning->getVersionCodeList()){
 
 <div dojoType="dijit.layout.BorderContainer" id="dataCloningParamDiv" name="dataCloningParamDiv">
   <div style="top:30px !important; left: 200px !important; width: 500px; margin: 0px 8px 4px 8px; padding: 5px;display:none;" 
-       id="dataCloningResultDiv" dojoType="dijit.layout.ContentPane" region="none" >
+       id="resultDiv" dojoType="dijit.layout.ContentPane" region="none" >
   </div>   
   <div dojoType="dijit.layout.ContentPane" region="top" id="dataCloningButtonDiv" class="listTitle" >
   <form dojoType="dijit.form.Form" name="dataCloningListForm" id="dataCloningListForm" action="" method="post" >
-  <input type="hidden" id="idSendReport" name="idSendReport" value="" />
   <table width="100%" height="64px" class="listTitle">
     <tr height="32px">
     <td style="vertical-align:top;min-width:100px;width:20%;">
@@ -148,7 +147,7 @@ if($dataCloning->getVersionCodeList()){
               title="<?php echo i18n('parameterDataCloning');?>"
               iconClass="iconParameter32" class="button">
                 <script type="dojo/method" event="onClick" args="evt">
-                  parametersDataCloning();
+                  loadMenuBarItem('DataCloningParameter', 'DataCloningParameter', 'bar');  
                 </script>
               </button>
             <?php }?> 
@@ -158,7 +157,6 @@ if($dataCloning->getVersionCodeList()){
       </td>
     </tr>
   </table>
-  <div id="resultDiv" dojoType="dijit.layout.ContentPane" region="top" style="display:none"></div>
   </form>
   </div>
   <div id="dataCloningWorkDiv" name="dataCloningWorkDiv" dojoType="dijit.layout.ContentPane" region="center" >
