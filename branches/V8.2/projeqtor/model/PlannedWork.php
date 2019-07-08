@@ -909,7 +909,9 @@ class PlannedWork extends GeneralWork {
                 if ($profile=='RECW') {                 
                   $dow=date('N',strtotime($currentDate));  
                   if (isset($reserved['W'][$plan->id][$ass->idResource][$dow]) ) {
-                    $value=$reserved['W'][$plan->id][$ass->idResource][$dow];
+                    //$value=$reserved['W'][$plan->id][$ass->idResource][$dow];     // PBE Start of change - Ticket #4092
+                    $targetValue=$reserved['W'][$plan->id][$ass->idResource][$dow]; //  
+                    $value=($targetValue>$value)?$value:$targetValue;               // PBE End of change
                     $ass->assignedWork+=$value;
                     $ass->leftWork+=$value;
                     $ass->plannedWork+=$value;
