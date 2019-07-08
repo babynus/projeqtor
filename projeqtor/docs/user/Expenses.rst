@@ -15,10 +15,21 @@ The expenses incurred for the project are monitored.
 
 Budget
 ------
-A budget is a list of all products and different expenses to plan. 
-It is a plan that allows to define in advance the expenses and the possible savings to be realized during a definite period.
+* A budget is a list of all products and different expenses to plan.
+ 
+* It is a plan that allows to define in advance the expenses, the incomes and the possible savings to be realized during a definite period.
 
-it allows to anticipate the resources that the company will have at a specific moment
+* It allows to anticipate the resources that the company will have at a specific moment.
+
+* You can create as much budget and sub budget as you want.
+
+* An expense can be linked to a basic budget: the budget item
+
+.. note:: The budget item
+
+   The budget items are the finer element of the budget analysis. 
+   
+   These posts or budget destinations will allow you to detail your budget, categorizing it at your convenience.
 
 .. figure:: /images/GUI/EXPENSES_SCREEN_Budget.png
    :alt: Budget screen
