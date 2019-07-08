@@ -1129,3 +1129,15 @@
 .ProjeQtOrFlatRed .iconDataCloning { background-image: url(customIcons/red/iconDataCloning.png); }
 .ProjeQtOrFlatGreen .iconDataCloning { background-image: url(customIcons/green/iconDataCloning.png); }
 .ProjeQtOrFlatGrey .iconDataCloning { background-image: url(customIcons/grey/iconDataCloning.png); }
+
+.iconMessageLegal { background-image: url(images/iconMessageLegal.png); }
+.ProjeQtOrFlatBlue .iconMessageLegal { background-image: url(customIcons/blue/iconMessageLegal.png); }
+.ProjeQtOrFlatRed .iconMessageLegal { background-image: url(customIcons/red/iconMessageLegal.png); }
+.ProjeQtOrFlatGreen .iconMessageLegal { background-image: url(customIcons/green/iconMessageLegal.png); }
+.ProjeQtOrFlatGrey .iconMessageLegal { background-image: url(customIcons/grey/iconMessageLegal.png); }
+
+.iconArrowMessageLegal { background-image: url(images/iconArrowMessageLegal.png); }
+.ProjeQtOrFlatBlue .iconArrowMessageLegal { background-image: url(customIcons/blue/iconArrowMessageLegal.png); }
+.ProjeQtOrFlatRed .iconArrowMessageLegal { background-image: url(customIcons/red/iconArrowMessageLegal.png); }
+.ProjeQtOrFlatGreen .iconArrowMessageLegal { background-image: url(customIcons/green/iconArrowMessageLegal.png); }
+.ProjeQtOrFlatGrey .iconArrowMessageLegal { background-image: url(customIcons/grey/iconArrowMessageLegal.png); }

@@ -468,6 +468,31 @@ html, body {
   vertical-align: middle;
 }
   
+#dialogMessageLegal {
+  z-index:9999999;
+  position:absolute; 
+  bottom:0; right:0; 
+  height: 150px;
+  border-radius:0px 0px 0px 0px;
+  background: #FFFFFF;
+  border: 2px solid #909090;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}  
+
+.iconArrowMessageLegal {
+  background-image: url('../img/iconArrowMessageLegal.png');
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 140px;
+  background-size: 100px 140px;
+  text-align: center;
+  cursor: pointer;
+}
+
 #dialogReminder {
   z-index:9999;
   position:absolute; 

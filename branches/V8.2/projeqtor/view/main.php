@@ -699,6 +699,61 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 	<?php }?>  
 	</div>
 	
+	<?php   
+  //Gautier RGPD
+  $crit = array ('idUser'=>$user->id,'accepted'=>'0');
+  $listMessageLegalFollowup=SqlList::getListWithCrit ('MessageLegalFollowup',$crit,'idMessageLegal');
+  if($listMessageLegalFollowup){
+    $nbListMess = count($listMessageLegalFollowup);
+    $cptMess = 0;?>
+   <div id="dialogMessageLegal" style="width:100%; visibility:visible; display:inline-block;"> 
+     <div id="messageLegallArrow" style="display:block; float:right; margin-top:15px; width:5%; height:140px; margin-top:5px;">
+      <div class="iconArrowMessageLegal"><span style="color:white; width:18px; writing-mode:vertical-rl; margin-top:10px;"><?php echo i18n("readToHide");?></span></div>
+     </div>
+      <?php Sql::beginTransaction();
+            foreach ($listMessageLegalFollowup as $idFollowup=>$idMessage){
+              $cptMess++;
+              $messFollow = new MessageLegalFollowup($idFollowup);
+              if(!$messFollow->firstViewDate){
+                $messFollow->firstViewDate = date('Y-m-d H:i:s');
+              }
+              $messFollow->lastViewDate = date('Y-m-d H:i:s');
+              $messFollow->save();
+              $messLegal = new MessageLegal($idMessage);
+              $text=new Html2Text($messLegal->description);
+              $val=$text->getText(); 
+              if($cptMess < $nbListMess){ ?>
+                 <div id="messageLegall<?php echo $messFollow->id;?>" style="display:none; margin-top:15px; width:95%; height:135px; overflow-y:auto;"> 
+                   <div id="messageLegal<?php echo $messFollow->id;?>" style="font-size:12pt; min-height:100px; margin:0px 40px 0px 40px;">
+              <?php }else{ ?> 
+                 <div id="messageLegall<?php echo $messFollow->id;?>" style="display:block; margin-top:15px; width:95%; height:135px; overflow-y:auto;"> 
+                   <div id="messageLegal<?php echo $messFollow->id;?>" style="font-size:12pt; min-height:100px; margin:0px 40px 0px 40px;">
+              <?php } echo htmlEncode($val);?>
+                  </div>
+                  <div style="width:97%;  bottom:5px; text-align:right;">
+                      <?php if($cptMess != 1){?>
+                  	   <span style="cursor:pointer; text-decoration:underline;" id="plusTard<?php echo $messFollow->id;?>" onclick="dojo.byId('messageLegall<?php echo $oldValue;?>').style.display='block';dojo.byId('messageLegall<?php echo $messFollow->id;?>').style.display='none'";>
+                      <?php }else{?>   
+                        <span style="cursor:pointer; text-decoration:underline;" id="buttonLater<?php echo $messFollow->id;?>" onclick="dojo.byId('dialogMessageLegal').style.visibility='hidden'";>
+                      <?php } echo i18n("buttonLater");?> 
+                        </span>
+                     &nbsp;&nbsp;&nbsp;
+                     <?php if($cptMess != 1){?>
+                  	   <button dojoType="dijit.form.Button" id="markOK<?php echo $messFollow->id;?>" onclick="setReadMessageLegalFollowup(<?php echo $messFollow->id;?>);dojo.byId('messageLegall<?php echo $oldValue;?>').style.display='block';dojo.byId('messageLegall<?php echo $messFollow->id;?>').style.display='none'";>
+                     <?php }else{?>
+                       <button dojoType="dijit.form.Button" id="markOK<?php echo $messFollow->id;?>" onclick="setReadMessageLegalFollowup(<?php echo $messFollow->id;?>);dojo.byId('dialogMessageLegal').style.visibility='hidden'";>
+                     <?php } echo i18n("buttonAgree");?>
+                       </button>
+                   </div>
+                   
+                 </div>
+            <?php 
+              $oldValue = $messFollow->id;
+            }
+            Sql::commitTransaction(); ?>
+    </div>
+ <?php  } ?>
+	
   <div id="globalContainer" class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">    
     <div id="leftDiv" dojoType="dijit.layout.ContentPane" region="left" splitter="true" style="width:<?php echo $IconSizeMenuHide2;?>">
       <script type="dojo/connect" event="resize" args="evt">
@@ -899,6 +954,9 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
           
     <div id="centerDiv" dojoType="dijit.layout.ContentPane" region="center">
     </div>
+    
+    
+  
     
     <div id="statusBarDivBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="overflow:visible;display:block;height:0px; position:absolute; bottom:0px;">
        <div id="dialogReminder" >
