@@ -223,6 +223,13 @@ Defines behavior of tasks in the real work allocation screen.
 
   * Possibly to display the pool whose the resource belongs to.
 
+You can manage different trigger settings per recipient
+
+.. Warning::
+   
+   Resources that do not have access to the imputations screen do not receive these alerts
+
+
 .. compound:: **After submit, alert to project leader**
   
   * After submission what type of alert would you want to send to the project leader 
@@ -234,6 +241,8 @@ Defines behavior of tasks in the real work allocation screen.
 .. compound:: **After submit, alert to organism manager**
   
   * After submission what type of alert would you want to send to the organism manager  
+  
+  
   
 Tab Activity
 ------------

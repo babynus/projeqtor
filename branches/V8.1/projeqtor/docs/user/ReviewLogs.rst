@@ -7,7 +7,7 @@
 .. _meeting:
 
 Meetings
-========
+********
 
 Meeting items are stored to keep track of important meetings during the project lifecycle :
 
@@ -20,10 +20,6 @@ In fact, you should keep track of every meeting where decisions are taken, or qu
 This will provide an easy way to find back when, where and why a decision has been taken.
 
 Each meeting is displayed in the agenda
-
-.. contents:: Meeting features
-   :local: 
-   :backlinks: top
 
 .. rubric:: Project task
 
@@ -41,12 +37,12 @@ Each meeting is displayed in the agenda
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: |ReqFieldLegend| Required field
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -55,20 +51,18 @@ Each meeting is displayed in the agenda
      - Unique Id for the meeting.
    * - Name
      - Short description of the meeting.
-   * - **Meeting type**
+   * - |RequiredField| Meeting type
      - Type of meeting. 
-   * - **Project**
+   * - |RequiredField| Project
      - The project concerned by the meeting.
-   * - **Meeting date**
+   * - |RequiredField| Meeting date
      - Date of the meeting (initially expected date), including start and end time.
    * - Location
      - Place (room or else) when meeting will stand.
    * - :term:`Description`
      - Description of the meeting. 
  
-**\* Required field**
-
-.. topic:: Field: Name
+.. topic:: Field Name
 
    * If not set, will automatically be set to meeting type completed with meeting date.
 
@@ -85,19 +79,19 @@ Each meeting is displayed in the agenda
     \newpage
 
 
-.. rubric:: Section: Treatment
+.. rubric:: Section Treatment
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: |ReqFieldLegend| Required field
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - Parent activity
      - Parent activity of the meeting.
-   * - **Status**
+   * - |RequiredField| Status
      - Actual :term:`status` of the meeting.
    * - :term:`Responsible`
      - Resource who is responsible for the organization of the meeting.
@@ -112,9 +106,7 @@ Each meeting is displayed in the agenda
    * - :term:`Minutes<Result>`
      - Minutes of the meeting.
  
-**\* Required field**
-
-.. topic:: Field: Parent activity
+.. topic:: Field Parent activity
 
    * In the WBS structure, under which the meeting will be displayed in the Gantt planning.
 
@@ -134,7 +126,6 @@ Viewing meetings in agenda, even if they are not planned
 
     \newpage
 
-
 .. index:: ! Meeting (Periodic)  
 
 .. _periodic-meeting:
@@ -144,22 +135,42 @@ Periodic meetings
 
 Periodic meeting is a way to define some meetings that will occur on a regular basis.
 
-
+.. figure:: /images/GUI/REVIEWLOGS_SCR_PeriodicMeeting.png
+   :alt: Periodic Meeting screen
+   :align: center
+   
+   Periodic meeting screen
+   
 .. note::
 
-   * Most fields fit, but some information is not present for periodic meetings, such as Minutes or Status. 
-   * It is because these fields won’t be set through periodic meeting definition, but must be set directly on the meetings.
-
+   * Most fields fit, but some information is not present for periodic meetings, such as Minutes or Status
+   
+   * It is because these fields won’t be set through periodic meeting definition, but must be set directly on the meetings
+  
 .. rubric:: Periodic meeting process
 
 * When saving periodic meeting, elementary meetings are automatically created.
+
 * Changes can be done in elementary meetings. In most cases, these changes won't be erased by periodic meeting updates.
 
-.. topic:: Update on a periodic meeting
+.. note:: Each periodic meeting is displayed in Gantt Chart under the parent meeting.
+      
+      .. figure:: /images/GUI/REVIEWLOGS_ZONE_Gantt-PeriodMeetings.png
+         :alt: displaying periodic meetings in the Gantt chart
 
-   * On each update of a periodic meeting, meetings are re-evaluated.
-   * This may lead to deletion of some meetings.
-   * This will also reposition meetings, even if their planned dates were elementary updated.
+.. sidebar:: Other sections
+
+   * :ref:`Attendees<attendees-section>`
+   * :ref:`Progress<progress-section-meeting>`
+   * :ref:`Predecessor and Sucessor element<predSuces-element-section>`
+   * :ref:`Notes<note-section>`   
+   
+  
+.. rubric:: Update on a periodic meeting
+
+* On each update of a periodic meeting, meetings are re-evaluated.
+* This may lead to deletion of some meetings.
+* This will also reposition meetings, even if their planned dates were elementary updated.
 
 .. rubric:: Attendees assignment
 
@@ -169,48 +180,35 @@ Periodic meeting is a way to define some meetings that will occur on a regular b
 * The periodic meetings will not be planned, only elementary meetings will be. 
 * So left work will always be set to zero on periodic meetings.  
 
-.. sidebar:: Other sections
-
-   * :ref:`Attendees<attendees-section>`
-   * :ref:`Progress<progress-section-meeting>`
-   * :ref:`Predecessor and Sucessor element<predSuces-element-section>`
-   * :ref:`Notes<note-section>`   
-
-.. raw:: latex
-
-    \newpage
-
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: |ReqFieldLegend| Required field
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
-     - Unique Id for the periodic meeting.
+     - Unique Id for the periodic meeting
    * - Name
-     - Short description of the meeting.
-   * - **Meeting type**
-     - Type of meeting. 
-   * - **Project**
-     - The project concerned by the meeting.
+     - Short description of the meeting
+   * - |RequiredField| Meeting type
+     - Type of meeting
+   * - |RequiredField| Project
+     - The project concerned by the meeting
    * - Location
-     - Place (room or else) when meeting will stand.
+     - Place (room or else) when meeting will stand
    * - :term:`Description`
-     - Description of the meeting.
- 
-**\* Required field**
-
-.. rubric:: Section: Treatment
+     - Description of the meeting
+     
+.. rubric:: Section Treatment
 
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -222,28 +220,26 @@ Periodic meeting is a way to define some meetings that will occur on a regular b
    * - :term:`Closed`
      - Flag to indicate that periodic meeting is archived.
 
-.. rubric:: Section: Periodicity
+.. rubric:: Section Periodicity
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: |ReqFieldLegend| Required field
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
-   * - **Period**
+   * - |RequiredField| Period
      - Start date and end date or number of occurrences to define the range of the periodicity.
    * - Time
      - Start and end time for all the meetings.
-   * - **Periodicity**
+   * - |RequiredField| Periodicity
      - Frequency of the meeting, on proposed bases (daily, weekly monthly).
    * - Only on open days
      - Specify that meetings will not be set on off days.
 
-**\* Required field**
-
-.. topic:: Field: Periodicity
+.. topic:: **Field Periodicity**
 
    * Several periodicity is proposed:
     
@@ -252,27 +248,42 @@ Periodic meeting is a way to define some meetings that will occur on a regular b
      * Same day every mouth
      * Same week every mounth
 
-
-
-
 .. raw:: latex
 
     \newpage
 
-.. _attendees-section:
+.. _attendees-Section:
 
 Attendees section
 -----------------
 
 This section allows to define the list of attendees to the meeting.
 
+* Meeting is a task you can assign project resources.
+
+* A possibility to assign work to some attendees (project resources). 
+
+  So meeting works of these attendees are booked in the project.
+  
+* Ability to assign to a meeting a resource or a contact or a user not member of the project team
+
+.. figure:: /images/GUI/REVIEWLOGS_ZONE_Attendees.png
+   :alt: Attendees section
+   :align: center
+
+
 .. rubric:: Attendee list
 
-* Meeting is a task you can assign project resources.
-* A possibility to assign work to some attendees (project resources). So meeting works of these attendees are booked in the project.
-* Ability to assign to a meeting a resource or a contact or a user not member of the project team
+* Click on |buttonAdd| to add a new attendee
+* Click on |buttonEdit| modify the assignment of the resource
+* Click on |buttonIconDelete| to delete the assignment of the resource
+* Click on |iconSplit| to divide the assignement with another resource
+
+.. note:: Mandatory participant
+
+   * The icon |iconStar| indicates that the presence of the participant is mandatory
  
-* More detail about how assigned project resources, see: :ref:`assignment-section` section.
+   * More detail about how assigned project resources, see: :ref:`assignment-section` section.
    
 .. rubric:: Other attendees
 
@@ -287,19 +298,16 @@ This section allows to define the list of attendees to the meeting.
 
    * Duplicate email addresses in the attendee list will automatically be removed.
 
-
-
 .. raw:: latex
 
     \newpage
-
 
 .. index:: ! Decision
 
 .. _decision: 
 
 Decisions
-=========
+*********
 
 Decisions are stored to keep track of important decisions, when, where and why the decision was taken.
 
@@ -311,40 +319,38 @@ You can link a decision to a meeting to rapidly find the minutes where the decis
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: |ReqFieldLegend| Required field
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
      - Unique Id for the decision.
-   * - **Name**
+   * - |RequiredField| Name
      - Short description of the decision.
-   * - **Decision type**
+   * - |RequiredField| Decision type
      - Type of decision. 
-   * - **Project**
+   * - |RequiredField| Project
      - The project concerned by the decision.
    * - :term:`Description`
      - Complete description of the decision.
  
-**\* Required field**
-
-.. rubric:: Section: Validation
+.. rubric:: Section Validation
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: |ReqFieldLegend| Required field
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
-   * - **Status**
+   * - |RequiredField| Status
      - Actual :term:`status` of the decision.
    * - Decision date
      - Date of the decision.
@@ -357,13 +363,11 @@ You can link a decision to a meeting to rapidly find the minutes where the decis
    * - Cancelled
      - Flag to indicate that decision is cancelled.
  
-**\* Required field**
-
-.. topic:: Field: Origin
+.. topic:: Field Origin
 
    * It can be either the reference to a meeting where the decision was taken (so also add the reference to the meetings list), or a short description of why the decision was taken. 
 
-.. topic:: Field: Accountable
+.. topic:: Field Accountable
 
    * The person who took the decision.
 
@@ -376,7 +380,7 @@ You can link a decision to a meeting to rapidly find the minutes where the decis
 .. _question:
 
 Questions
-=========
+*********
 
 Question are stored to keep track of important questions and answers.
 
@@ -403,44 +407,38 @@ You can link a question to a meeting to rapidly find the minutes where the quest
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: |ReqFieldLegend| Required field
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
      - Unique Id for the question.
-   * - **Name**
+   * - |RequiredField| Name
      - Short description of the question.
-   * - **Question type**
+   * - |RequiredField| Question type
      - Type of question. 
-   * - **Project**
+   * - |RequiredField| Project
      - The project concerned by the question.
    * - :term:`Description`
      - Complete description of the question.
- 
-**\* Required field**
 
-.. raw:: latex
-
-    \newpage
-
-.. rubric:: Section: Answer
+.. rubric:: Section Answer
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: |ReqFieldLegend| Required field
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
-   * - **Status**
+   * - |RequiredField| Status
      - Actual :term:`status` of the decision.
    * - :term:`Responsible`
      - Resource who is responsible for the follow-up of the question.
@@ -460,9 +458,6 @@ You can link a question to a meeting to rapidly find the minutes where the quest
      - Flag to indicate that question is cancelled. 
    * - :term:`Response<Result>`
      - Complete description of the answer to the question.
-
-**\* Required field**
-
   
 .. raw:: latex
 
@@ -473,7 +468,7 @@ You can link a question to a meeting to rapidly find the minutes where the quest
 .. _deliverables:
 
 Deliverables
-============
+************
 
 This section allows to define the list of deliverables items.
 
@@ -487,19 +482,19 @@ Deliverables links with Milestones.
 
    * If you change the responsible of milestones, the responsible of deliverable will automatically changed, and vice versa. 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: |ReqFieldLegend| Required field
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
      - Unique Id for the KPI.
-   * - **Name**
+   * - |RequiredField| Name
      - name of the deliverable.
    * - IdDeliverableType
      - id of the Deliverable Type.
@@ -520,12 +515,12 @@ Deliverables links with Milestones.
 
     \newpage
 
-.. rubric:: Section: Validation
+.. rubric:: Section Validation
 
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -543,12 +538,16 @@ Deliverables links with Milestones.
 
 To follow life cycle management on deliverables (status managed as a workflow)
 
+.. raw:: latex
+
+    \newpage
+
 .. index:: ! Incoming
     
 .. _incomings:
 
 Incomings
-=========
+*********
 
 This section allows to define the list of incomings items from customers.
 
@@ -566,7 +565,7 @@ Incomings links with Milestones.
    * You can estimated quality value for incoming  and this will produce a KPI.
 
    * See: :ref:`kpi-definitions`
-   
+
 .. raw:: latex
 
     \newpage
@@ -576,7 +575,7 @@ Incomings links with Milestones.
 .. _deliveries:
 
 Deliveries
-==========
+**********
 
 Deliveries items are stored to keep track of deliveries.
 
@@ -586,30 +585,28 @@ Added list of deliverables integrated in delivery.
 
    * Automatic dispatch of delivery status to deliverables.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: |ReqFieldLegend| Required field
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
      - Unique Id for the delivery.
-   * - **Name**
+   * - |RequiredField| Name
      - Short description of the delivery.
-   * - **Deliverable type**
+   * - |RequiredField| Deliverable type**
      - Type of deliverable.
-   * - **Project**
+   * - |RequiredField| Project
      - The project concerned by the delivery. 
    * - ExternalReference
      - name of the external reference.
    * - Description
      - Description of the delivery. 
- 
-**\* Required field**
 
 .. sidebar:: Other sections
    
@@ -618,12 +615,12 @@ Added list of deliverables integrated in delivery.
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`
 
-.. rubric:: Section: Validation
+.. rubric:: Section Validation
 
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
