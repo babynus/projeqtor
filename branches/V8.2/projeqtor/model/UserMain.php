@@ -1501,6 +1501,7 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
     }
     traceLog("NEW CONNECTED USER '" . $this->name . "'".(($rememberMe)?' (using remember me feature)':(($sso)?' (using sso authentication)':'')));
     Audit::updateAudit();
+    MessageLegalFollowup::updateMessageLegalFollowup();
   }
   public static function refreshUserInSession() {
     $target=getSessionUser();
