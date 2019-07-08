@@ -3332,6 +3332,7 @@ function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target) {
       forceListRefresh = true;
     }
   }
+  if (eltClass=='BudgetItem') eltClass='Budget';
   selectTreeNodeById(dijit.byId('menuTree'), eltClass);
   formChangeInProgress = false;
   // if ( dojo.byId("GanttChartDIV")
