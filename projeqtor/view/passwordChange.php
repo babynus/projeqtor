@@ -69,7 +69,7 @@
       currentLocale="<?php echo $currentLocale?>";
       hideWait();
       changePassword=false;
-      dojo.byId('dojox_form__NewPWBox_0').focus();
+     dojo.byId('dojox_form__NewPWBox_0').focus();
     }); 
   </script>
 </head>
@@ -112,7 +112,7 @@
               return false;       
             </script><br/>
             <?php
-            $topMsg=180;
+            $topMsg=230;
             if (isset($ssoUserCreated) and $ssoUserCreated==true) {
             	echo '<b>'.i18n('newUserSSO').'</b><br/>'; 
             	$topMsg+=20;
@@ -123,16 +123,23 @@
             }
             ?> 
             <br/>
-            <div dojoType="dojox.form.PasswordValidator" id="password" class="input rounded" style="color:#000000;padding:10px">
+            <div dojoType="dojox.form.PasswordValidator" id="password" onkeydown="controlChar(event)" onchange="validatePassword()"  class="input rounded"  style="color:#000000;padding:10px;">
               <label class="label" style="width:200px;"><?php echo i18n('newPassword');?>&nbsp;:&nbsp;</label>
-              <input type="password" pwType="new" class="input rounded" /><br/>
+              <input type="password" pwType="new" class="input rounded"  style="color:#000000;"><br/>
               <br/>
               <label class="label" style="width:200px;"><?php echo i18n('validatePassword');?>&nbsp;:&nbsp;</label>
-              <input type="password" pwType="verify" class="input rounded" style="color:#000000"/><br/>
-            </div>            
+              <input type="password" pwType="verify" class="input rounded"  style="color:#000000;"><br/>
+            <br/>
+            <p><meter id="advancement" max="4" style="margin-left:200px;width:180px; "></meter> <span id="error" style="float:right;" ></span>  </p>
+            <span id="strength" style="margin-left:270px;"></span>     
+            </div>
+            <input type="hidden" id="parmPwdSth"  value="<?php echo Parameter::getGlobalParameter('paramPasswordStrength');?>"/>
+            <input type="hidden" id="paramPwdLth"  value="<?php echo Parameter::getGlobalParameter('paramPasswordMinLength');?>"/>
             <input type="hidden" id="hashString" name="password" value=""/>
             <input type="hidden" id="userSalt" name="userSalt" value=""/>
             <input type="hidden" id="passwordLength" name="passwordLength" value=""/>
+            <input type="hidden" id="passwordValidate" name="passwordValidate" value=""/>
+            <input type="hidden" id="criteria" name="criteria" value=""/>
             <br/>
             <button type="submit" style="margin-left:200px;width:200px;color:#555555;" class="largeTextButton" id="goButton" dojoType="dijit.form.Button" showlabel="true">OK
               <script type="dojo/connect" event="onClick" args="evt">

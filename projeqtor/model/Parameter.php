@@ -285,6 +285,15 @@ class Parameter extends SqlElement {
         $list=array('YES'=>i18n('displayYes'),
                     'NO'=>i18n('displayNo'));
         break;
+        //Florent
+      case 'paramPasswordStrength':
+        $lvl=1;
+          $list=array('1'=>'[#1] '.i18n('passMinLength'),
+          '2'=>'[#2] '.i18n('passMinLength').'+'.i18n('passMinMaj'),
+          '3'=>'[#3] '.i18n('passMinLength').'+'.i18n('passMinMaj').'+'.i18n('passNum'),
+          '4'=>'[#4] '.i18n('passMinLength').'+'.i18n('passMinMaj').'+'.i18n('passNum').'+'.i18n('passChar'));
+          break;
+         //End
       case 'setResponsibleIfSingle': case 'allocateResponsibleToProject':
       case 'realWorkOnlyForResponsible': case 'preserveUploadedFileName': case 'ganttPlanningPrintOldStyle':
       case 'displayOnlyHandled': case 'setHandledOnRealWork': case 'setDoneOnNoLeftWork':
@@ -950,12 +959,13 @@ class Parameter extends SqlElement {
       	                  'newColumnAuthentLeft'=>'newColumn',
         	                  'sectionUserAndPassword'=>'section',
           	                  'defaultProfile'=>'list',
-          	                  'paramDefaultPassword'=>'text',
+          	                  //'paramDefaultPassword'=>'text',
           	                  'paramPasswordMinLength'=>'number',
           	                  'paramLockAfterWrongTries'=>'number',
           	                  'passwordValidityDays'=>'number',
           	                  'rememberMe'=>'list',
-          	                  'initializePassword'=>'list', 	                     
+          	                  'initializePassword'=>'list', 	
+          	                  'paramPasswordStrength'=>'list',                    
         	                  'sectionLdap'=>'section',
           	                  'paramLdap_allow_login'=>'list',
           	                  'paramLdap_base_dn'=>'text',

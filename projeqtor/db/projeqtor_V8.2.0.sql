@@ -76,3 +76,5 @@ CREATE TABLE `${prefix}datacloning` (
 		`idle` int(1) unsigned DEFAULT 0,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('paramPasswordStrength','1');
