@@ -1656,14 +1656,25 @@ function finalizeMessageDisplay(destination, validationType) {
           needProjectListRefresh = true;
         }
         if (dojo.byId("buttonDivObjectId")
-            && (dojo.byId("buttonDivObjectId").innerHTML == "" || forceRefreshCreationInfo)
+            && (lastOperation.value=='insert' || forceRefreshCreationInfo)
             && lastSaveId && lastSaveId.value) {
-          dojo.byId("buttonDivObjectId").innerHTML = "&nbsp;#"
-              + lastSaveId.value;
+          if (lastOperation.value=='insert') {
+            //dojo.byId("buttonDivObjectId").innerHTML = "&nbsp;#"
+            //  + lastSaveId.value;
+            var ref=dojo.byId('directLinkUrlDivDetail').value;
+            var objId=dojo.byId('id').value;
+            var valueDiv='<span class="roundedButton">';
+            valueDiv+= '  <a href="'+ref+'" onClick="copyDirectLinkUrl(\'Button\');return false;" title="'+i18n("rightClickToCopy")+'" style="cursor: pointer; color: white;" onmouseover=this.style.color="black" onmouseout=this.style.color="white">';
+            valueDiv+= (objId)?'&nbsp;#'+objId:'';
+            valueDiv+= '&nbsp;</a>';
+            valueDiv+= '</span>';
+            valueDiv+= '<input readOnly type="text" onClick="this.select();" id="directLinkUrlDivButton" style="display:none;font-size:9px; color: #000000;position :absolute; top: 47px; left: 157px; border: 0;background: transparent;width:300px;" value="'+ref+'" />';
+            dojo.byId("buttonDivObjectId").innerHTML=valueDiv;
+          }
           //gautier
           if(dojo.byId("buttonDivObjectName") && dijit.byId('name')){
               if(dijit.byId('name').get("value")){
-                dojo.byId("buttonDivObjectName").innerHTML="&nbsp;-&nbsp;"+dijit.byId('name').get("value");
+                dojo.byId("buttonDivObjectName").innerHTML="-&nbsp;"+dijit.byId('name').get("value");
             }
           }
           if (dojo.byId('buttonDivCreationInfo')) {
