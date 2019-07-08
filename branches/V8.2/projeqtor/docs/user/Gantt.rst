@@ -389,6 +389,8 @@ For each planning element, a bar is associated with it
       
    Move the cursor over the bar to display item name and planned dates.   
 
+.. index: Dependency Links
+
 .. _Gantt_DependencyLink_Milestone:
 
 .. rubric:: |five| Dependency links
@@ -402,9 +404,9 @@ For each planning element, a bar is associated with it
 
 **3 dependency types are managed:**
 
-* **End-Start:** The second activity can not start before the end of the first activity.
-* **Start-Start:** the successor can not begin before the beginning of the predecessor. Anyway, the successor can begin after the beginning of the predecessor.
-* **End-End:** The successor should not end after the end of the predecessor, which leads to planning "as late as possible". Anyway, the successor can end before the predecessor. Note that the successor "should" not end after the end of predecessor, but in some cases this will not be respected:
+* |iconES| **End-Start:** The second activity can not start before the end of the first activity.
+* |iconSS| **Start-Start:** the successor can not begin before the beginning of the predecessor. Anyway, the successor can begin after the beginning of the predecessor.
+* |iconEE| **End-End:** The successor should not end after the end of the predecessor, which leads to planning "as late as possible". Anyway, the successor can end before the predecessor. Note that the successor "should" not end after the end of predecessor, but in some cases this will not be respected:
 
   * if the resource is already 100% used until the end of the successor
   * if the successor has another predecessor of type "End-Start" or "Start-Start" and the remaining time is not enough to complete the task

@@ -454,16 +454,16 @@ More detail, see: :ref:`project-planning`, :ref:`predSuces-element-section`.
    * ProjeQtOr offers only the dependency (Finish to Start).
    * This section explains what are they dependency types can be reproduced or not.
 
-    .. compound:: **Start to Start**
+    .. compound:: |iconSS| **Start to Start**
 
        * To reproduce this dependency type, it's possible to add a milestone as prior of both tasks.
 
-    .. compound:: **Start to Finish** 
+    .. compound:: |iconES| **Start to Finish** 
 
        * This dependency type can't be reproduced in ProjeQtOr.
        * This is a very weird scenario.
 
-    .. compound:: **Finish to Finish**
+    .. compound:: |iconEE| **Finish to Finish**
 
        * This dependency type can't be reproduced in ProjeQtOr.
        * This involves reverse planning and may introduce overloading of resources, what is not possible in ProjeQtOr.
