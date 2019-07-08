@@ -39,33 +39,31 @@ $idDataCloning = RequestHandler::getId('idDataCloning');
 $status = RequestHandler::getValue('status');
 $result='';
 
-debugLog($requestedDeletedDate);
-debugLog($idDataCloning);
-
 //open transaction bdd
 Sql::beginTransaction();
 
 if($idDataCloning){
   $dataCloning = new DataCloning($idDataCloning, true);
-  debugLog($dataCloning);
   if($status == 'remove'){
-    debugLog('remove');
-    $dataCloning->requestedDeletedDate = $requestedDeletedDate;
-    $dataCloning->isRequestedDelete = 1;
+    if($dataCloning->isActive){
+      $dataCloning->requestedDeletedDate = $requestedDeletedDate;
+      $dataCloning->isRequestedDelete = 1;
+      $result=$dataCloning->save();
+    }else{
+      $result=$dataCloning->delete();
+    }
   }else{
-    debugLog('cancel');
     $dataCloning->requestedDeletedDate = null;
     $dataCloning->isRequestedDelete = 0;
+    $result=$dataCloning->save();
   }
 }else{
-  debugLog('add');
   $dataCloning = new DataCloning();
   $dataCloning->versionCode = $version;
   $dataCloning->idResource = $user;
   $dataCloning->requestedDate = $requestedDate;
   $dataCloning->name = $name;
+  $result=$dataCloning->save();
 }
-debugLog($dataCloning);
-$result=$dataCloning->save();
 displayLastOperationStatus($result);
 ?>
