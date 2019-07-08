@@ -118,8 +118,8 @@
             echo '<span id="buttonDivObjectId">';
             echo '<span class="roundedButton">';
             echo '  <a href="' . $ref . '" onClick="copyDirectLinkUrl(\'Button\');return false;"' . ' title="' . i18n("rightClickToCopy") . '" style="cursor: pointer; color: white;" onmouseover=this.style.color="black" onmouseout=this.style.color="white">';
-            echo ($obj->id)?'&nbsp;#'.$obj->id:'';'&nbsp';
- 			      echo ' </a>';
+            echo ($obj->id)?'&nbsp;#'.$obj->id:'';
+ 			      echo '&nbsp;</a>';
            	echo '</span>';
           	echo '<input readOnly type="text" onClick="this.select();" id="directLinkUrlDivButton" style="display:none;font-size:9px; color: #000000;position :absolute; top: 47px; left: 157px; border: 0;background: transparent;width:300px;" value="' . $ref . '" />';
           	echo '</span>';
@@ -131,7 +131,7 @@
             <div id="buttonDivObjectName" style="width:100%;position:absolute;top:8px;text-overflow:ellipsis;overflow:hidden;">
                  <?php  
                   if (property_exists($obj,'name') and $obj->name){ 
-                 	  echo '&nbsp;-&nbsp;';
+                 	  echo '-&nbsp;';
                  	  if (isset($obj->_isNameTranslatable) and $obj->_isNameTranslatable) {
                  	  	echo i18n($obj->name);
                  	  } else { 
