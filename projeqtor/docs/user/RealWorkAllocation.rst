@@ -185,8 +185,13 @@ Buttons of the timesheet:
     * **Reassessed**: The work needed to complete the task.
         
 .. compound:: |D| **Imput fields**
-    
-Each day, for each task, a field of entered allows you to inform your real work.
+
+.. figure:: /images/GUI/REALWORK_ZONE_BGColorYellow.png
+   :align: left
+
+Each day, for each task, an input field allows you to enter your actual work.
+
+The column of the day is highlighted with a yellow background.
 
 see: :ref:`inputFields-section`
     
@@ -201,13 +206,7 @@ It is a synthesis displayed for each project and globally for the whole week.
    
    Total of the day Zone  
    
-.. note:: Start and end Dates  
-
-   .. figure:: /images/GUI/REALWORK_ZONE_Dates.png
-    
-    You can see at a glance the start and end dates for each item in the list
-    
-    
+ 
 .. raw:: latex
 
     \newpage
