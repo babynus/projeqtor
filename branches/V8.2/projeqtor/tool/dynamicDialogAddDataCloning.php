@@ -29,7 +29,7 @@ $user = getSessionUser();
 $dataCloning = new DataCloning();
 $dataCloningMaxCount = 3;
 $dataCloningCount = $dataCloning->countSqlElementsFromCriteria(array("idResource"=>$user->id, "idle"=>"0"));
-$plannedDate = date('Y-m-d H:i:s');
+$plannedDate = date('Y-m-d');
 ?>
   <table>
     <tr>
