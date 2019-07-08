@@ -43,6 +43,15 @@ var hideUnderMenuTimeout;
 var hideUnderMenuId;
 var previewhideUnderMenuId;
 var stockEmailHistory = new Array();
+var lastKeys= new Array();
+var cplastKey;
+var tabLastKeys= new Array();
+var addVal= [0,0,0,0];
+var paramLength;
+var cpMaj=0;
+var cpNum=0;
+var cpChar=0;
+var cpParamLength=0;
 // =============================================================================
 // = Wait spinner
 // =============================================================================
@@ -10474,3 +10483,178 @@ function saveModuleStatusCheckParent(id) {
 function addDataCloning(){
 	loadDialog('dialogAddDataCloning',null,true,null,true);
 }
+//florent
+function validatePassword(){
+  var pdwdSth=dojo.byId('parmPwdSth').value;
+  var pdwLgh=dojo.byId('paramPwdLth').value;
+  var psw=dijit.byId('password').get('value');
+  var info=document.getElementById('error');
+  var arrayStrong = [ "^(?=.*[a-z])(?=.*[A-Z])","^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])","^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])"];
+  if(pdwdSth >0){
+    if(psw.length >=pdwLgh ){
+      strong = new RegExp(arrayStrong[pdwdSth-2]);
+        if(pdwdSth==1){
+          isValidatePassword(info);
+        }else if(pdwdSth>1){
+          if(strong.test(psw)){
+            isValidatePassword(info);
+        }else{
+          var strength=[pdwdSth];
+          var ctx='strength';
+          if(strength==2){
+            strengthCrtit=i18n('minMax');
+          }else if(strength==3){
+            strengthCrtit=i18n('minMaxNum');
+          }else if(strength==4){
+            strengthCrtit=i18n('minMaxNumChar');
+          }
+          errorValidatePassword(ctx,strength,info,strengthCrtit);
+       }
+    }
+   }else{
+     var ctx='length';
+     var length=[pdwLgh];
+     errorValidatePassword(ctx,length,info);
+   }
+ }
+}
+
+function isValidatePassword(info){
+  dojo.byId('advancement').value=4;
+  var strength=document.getElementById('strength');
+  require(["dijit/Tooltip", "dojo/dom", "dojo/on", "dojo/mouse", "dojo/domReady!"], function(Tooltip, dom, on, mouse) {
+    var node = dom.byId('error');
+    Tooltip.hide(node);
+    info.innerHTML='';
+    strength.innerHTML='';
+    strength.style="color:black;margin-left:270px;";
+  });
+  strength.innerHTML=i18n('strong');
+}
+
+function errorValidatePassword(ctx,crit,info,strengthCrtit){
+  dojo.byId('advancement').value=0;
+  strength.style="color:red;margin-left:270px;font-weight: bold;";
+  strength.innerHTML=i18n('low');
+  info.innerHTML='<img src="./css/images/iconSeverity16.png"/>';
+  require(["dijit/Tooltip", "dojo/dom", "dojo/on", "dojo/mouse", "dojo/domReady!"], function(Tooltip, dom, on, mouse) {
+    var node = dom.byId('error');
+    if(ctx=='length'){
+      Tooltip.show(i18n("errorLength",crit), node);
+      }else if(ctx=='strength'){
+        Tooltip.show(i18n("errorStrength")+'<br>'+strengthCrtit, node);
+        dojo.byId('criteria').value=strengthCrtit;
+      }
+      on.once(node, mouse.leave, function(){
+        info.innerHTML='';
+        strength.innerHTML='';
+        strength.style="color:black;margin-left:270px;";
+        Tooltip.hide(node);
+    });
+  });
+  dojo.byId('passwordValidate').value='false';
+}
+
+function controlChar (event){
+  var pdwdSth=dojo.byId('parmPwdSth').value;
+  var gen= new RegExp(["^(?=.*[a-zA-Z0-9!@#$&()-`.+,/\"])"]);
+  var minMax =new RegExp([ "^(?=.*[A-Z])"]);
+  var num=new RegExp(["^(?=.*[0-9])"]);
+  var char=new RegExp("(?=.*[!@#\$%\^&\*])");
+  var evt= event.key;
+  var adv=dojo.byId('advancement');
+  var comptMaj=0;
+  var comptNum=0;
+  var comptChar=0;
+  if (adv.value==''){
+    adv.value=0;
+  }
+  if(evt != undefined && lastKeys=='' && cpParamLength==0){
+    paramLength=1;
+    cpParamLength=1;
+  }else if( evt == undefined && lastKeys=='' && cpParamLength==0) {
+    paramLength=0;
+    cpParamLength=1;
+  }
+  if(evt=='Backspace'){
+    if(lastKeys.length==''){
+      adv.value=0;
+      cpParamLength=0;
+        for(var i=0;i <= tabLastKeys.length;i++){
+          tabLastKeys.splice(i,1);
+        }
+    }else if(paramLength=1){
+      if( lastKeys.length/2 < pdwdSth && addVal[0]==1){
+        addVal[0]=0;
+        adv.value=adv.value-1; 
+      }
+    }else{
+      if( lastKeys.length < pdwdSth && addVal[0]==1){
+        addVal[0]=0;
+        adv.value=adv.value-1; 
+      }
+    }
+    for(var j=0;j <tabLastKeys.length;j++){
+        if (minMax.test(tabLastKeys[j])){
+          comptMaj++;
+        }
+        if (num.test(tabLastKeys[j])){
+          comptNum++;
+        }
+        if (char.test(tabLastKeys[j])){
+          comptChar++;
+        }
+    }
+    if(minMax.test(tabLastKeys[lastKeys.length-1]) && addVal[1]==1){
+      cpMaj=cpMaj+1;
+        if(cpMaj==comptMaj){
+          addVal[1]=0;
+          adv.value=adv.value-1; 
+          cpMaj=0;
+        }
+    }else if(num.test(tabLastKeys[lastKeys.length-1])&& addVal[2]==1){
+      cpNum=cpNum+1;
+        if(cpNum==comptNum){
+          addVal[2]=0;
+          adv.value=adv.value-1; 
+          cpNum=0;
+        }
+    }else if(char.test(tabLastKeys[lastKeys.length-1]) && addVal[3]==1){
+      cpChar=cpChar+1;
+        if(cpChar==comptChar){
+          addVal[3]=0;
+          adv.value=adv.value-1; 
+          cpChar=0;
+        }
+    }
+   lastKeys.splice(cplastKey,1);
+  }else if(gen.test(evt) && evt !=undefined){
+    if(evt.length ==1 ){
+      tabLastKeys.push(evt);
+        if(paramLength=='1'){
+          if(tabLastKeys.length/2 >= pdwdSth && addVal[0]==0 ){
+            addVal[0]=1;
+            adv.value=adv.value+1; 
+          }
+        }else{
+          if(tabLastKeys.length >= pdwdSth && addVal[0]==0 ){
+            addVal[0]=1;
+            adv.value=adv.value+1; 
+          }
+        }
+       if( minMax.test(evt) && addVal[1]==0){
+         addVal[1]=1;
+         adv.value=adv.value+1; 
+       }else if(num.test(evt)  && addVal[2]==0){
+         addVal[2]=1;
+         adv.value=adv.value+1; 
+       }else if(char.test(evt) && addVal[3]==0){
+         addVal[3]=1;
+         adv.value=adv.value+1; 
+       }
+      lastKeys.push(evt);
+      cplastKey=lastKeys.lastIndexOf();
+    }
+  }
+}
+//End

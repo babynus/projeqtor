@@ -30,9 +30,16 @@
   require_once "../tool/projeqtor.php"; 
 scriptLog("changePassword.php");  
   $password="";
+  if($_POST['passwordValidate']=='false'){
+    if($_POST['criteria']!=''){
+    passwordErrorCrit($_POST['criteria']);
+    }else{
+      passwordError();
+    }
+  }
   if (array_key_exists('password',$_POST)) {
     $password=$_POST['password'];
-  }    
+  }   
   $userSalt=$_POST['userSalt'];
   if ($password=="") {
     passwordError(i18n("isEmpty"));
@@ -58,6 +65,7 @@ scriptLog("changePassword.php");
   if ($passwordLength<Parameter::getGlobalParameter('paramPasswordMinLength')) {
     passwordError(i18n("paramParamPasswordMinLength"));
   }
+
   
   changePassword($user, $password, $userSalt, 'sha256');
   
@@ -72,6 +80,20 @@ scriptLog("changePassword.php");
     echo '</div>';
     if ($userIssue and SSO::isSamlEnabled()) {
     	SSO::addTry();
+    }
+    exit;
+  }
+  /** ========================================================================
+   * Display an error message because of invalid login
+   * @return void
+   */
+  function passwordErrorCrit($crit,$userIssue=false) {
+    echo '<div class="messageERROR">';
+    echo i18n('invalidPasswordChange', array(Parameter::getGlobalParameter('paramPasswordMinLength')));
+    echo i18n('invalidCrit').': '.$crit;
+    echo '</div>';
+    if ($userIssue and SSO::isSamlEnabled()) {
+      SSO::addTry();
     }
     exit;
   }
