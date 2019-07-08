@@ -38,6 +38,7 @@ class DataCloning extends SqlElement{
 	public $deletedDate;
 	public $requestedDeletedDate;
 	public $isRequestedDelete;
+	public $isActive;
 	public $idle;
 	
 	private static $_databaseTableName = 'dataCloning';
@@ -143,10 +144,15 @@ class DataCloning extends SqlElement{
 			    $result .='<td width="80%" style="background-color:'.$background.';border-right:1px solid grey;height:40px;">'.i18n('cancelCloningStatus').'</td>';
 			    $result .='<td width="20%"><a onClick="cancelDataCloningStatus('.$data->id.');" title="'.i18n('cancelDataCloningStatus').'" > '.formatMediumButton('Cancel', true).'</a></td>';
 			  }else{
+			    if($data->isActive){
+			      $activeText = i18n('activeCloningStatus');
+			    }else{
+			      $activeText = i18n('requestedCloningStatus');
+			    }
 			    $result .='<td width=80%" style="background-color:'.$background.';border-right:1px solid grey;height:40px;">';
 			    $result .='<table width="100%"><tr>';
 			    $result .='<td width=10%" style="padding-left:10px"><a onClick="gotoDataCloningStatus('.$data->id.');" title="'.i18n('gotoDataCloningStatus').'" > '.formatMediumButton('Goto', true).'</a></td>';
-			    $result .='<td width=90%">'.i18n('activeCloningStatus').'</td></tr></table>';
+			    $result .='<td width=90%">'.$activeText.'</td></tr></table>';
 			    $result .='<td width="20%"><a onClick="removeDataCloningStatus('.$data->id.');" title="'.i18n('removeDataCloningStatus').'" > '.formatMediumButton('Remove').'</a></td>';
 			  }
 			  $result .='</tr></table></td>';

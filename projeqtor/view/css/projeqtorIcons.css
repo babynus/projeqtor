@@ -1130,6 +1130,12 @@
 .ProjeQtOrFlatGreen .iconDataCloning { background-image: url(customIcons/green/iconDataCloning.png); }
 .ProjeQtOrFlatGrey .iconDataCloning { background-image: url(customIcons/grey/iconDataCloning.png); }
 
+.iconDataCloningParameter { background-image: url(images/iconDataCloningParameter.png); }
+.ProjeQtOrFlatBlue .iconDataCloningParameter { background-image: url(customIcons/blue/iconDataCloningParameter.png); }
+.ProjeQtOrFlatRed .iconDataCloningParameter { background-image: url(customIcons/red/iconDataCloningParameter.png); }
+.ProjeQtOrFlatGreen .iconDataCloningParameter { background-image: url(customIcons/green/iconDataCloningParameter.png); }
+.ProjeQtOrFlatGrey .iconDataCloningParameter { background-image: url(customIcons/grey/iconDataCloningParameter.png); }
+
 .iconMessageLegal { background-image: url(images/iconMessageLegal.png); }
 .ProjeQtOrFlatBlue .iconMessageLegal { background-image: url(customIcons/blue/iconMessageLegal.png); }
 .ProjeQtOrFlatRed .iconMessageLegal { background-image: url(customIcons/red/iconMessageLegal.png); }

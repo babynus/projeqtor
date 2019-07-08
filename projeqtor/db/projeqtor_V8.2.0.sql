@@ -40,14 +40,14 @@ CREATE TABLE `${prefix}messagelegalFollowup` (
 INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
 (222, 'menuDataCloning', 11, 'item', 530, Null, 0, 'Admin');
 
-INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
-(1, 222, 1),
-(2, 222, 1),
-(3, 222, 1),
-(4, 222, 1),
-(5, 222, 1),
-(6, 222, 1),
-(7, 222, 1);
+INSERT INTO `${prefix}habilitation` (idProfile, idMenu, allowAccess) VALUES
+(1,222,1),
+(2,222,1),
+(3,222,1),
+(4,222,1),
+(5,222,1),
+(6,222,1),
+(7,222,1);
 
 INSERT INTO `${prefix}habilitationother` (idProfile, rightAccess, scope) VALUES
 (1,4,'dataCloning'),
@@ -73,8 +73,19 @@ CREATE TABLE `${prefix}datacloning` (
 		`deletedDate` datetime DEFAULT NULL,
 		`requestedDeletedDate` datetime DEFAULT NULL,
 		`isRequestedDelete` int(1) unsigned DEFAULT 0,
+		`isActive` int(1) unsigned DEFAULT 0,
 		`idle` int(1) unsigned DEFAULT 0,
   PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
+(224, 'menuDataCloningParameter', 11, 'item', 531, Null, 0, 'Admin');
+
+INSERT INTO `${prefix}habilitation` (idProfile, idMenu, allowAccess) VALUES
+(1,224,1);
+
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
+(1,224,8);
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('paramPasswordStrength','1');
