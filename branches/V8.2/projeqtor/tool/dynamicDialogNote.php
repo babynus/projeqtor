@@ -109,11 +109,11 @@ if (sessionValueExists('screenHeight')) {
            id="noteNote" name="noteNote"
            style="display:none;"><?php echo htmlspecialchars($note->note);?></textarea>    
            <div data-dojo-type="dijit.Editor" id="noteNoteEditor"
-             data-dojo-props="onChange:function(){top.dojo.byId('noteNote').value=arguments[0];}
+             data-dojo-props="onChange:function(){window.top.dojo.byId('noteNote').value=arguments[0];}
               ,plugins:['removeFormat','bold','italic','underline','|', 'indent', 'outdent', 'justifyLeft', 'justifyCenter', 
                         'justifyRight', 'justifyFull','|','insertOrderedList','insertUnorderedList','|']
-              ,onKeyDown:function(event){top.onKeyDownFunction(event,'noteNoteEditor',this);}
-              ,onBlur:function(event){top.editorBlur('noteNoteEditor',this);}
+              ,onKeyDown:function(event){window.top.onKeyDownFunction(event,'noteNoteEditor',this);}
+              ,onBlur:function(event){window.top.editorBlur('noteNoteEditor',this);}
               ,extraPlugins:['dijit._editor.plugins.AlwaysShowToolbar','foreColor','hiliteColor']"
               style="color:#606060 !important; background:none;padding:3px 0px 3px 3px;margin-right:2px;width:<?php echo $detailWidth;?>px;overflow:auto;"
               class="input"><?php 

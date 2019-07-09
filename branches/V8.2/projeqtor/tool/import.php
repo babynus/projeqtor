@@ -41,7 +41,7 @@ header ('Content-Type: text/html; charset=UTF-8');
   <script type="text/javascript" src="../view/js/projeqtorDialog.js?version=<?php echo $version.'.'.$build;?>" ></script>
 </head>
 
-<body class="white" onLoad="top.hideWait();//showInfo('<?php echo i18n('ImportCompleted')?>');" style="overflow: auto; ">
+<body class="white" onLoad="window.top.hideWait();//showInfo('<?php echo i18n('ImportCompleted')?>');" style="overflow: auto; ">
 <?php 
 $class='';
 $dateFormat='dd/mm/yyyy';
