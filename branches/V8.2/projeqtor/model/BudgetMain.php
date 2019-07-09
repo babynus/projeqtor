@@ -106,6 +106,7 @@ class BudgetMain extends SqlElement {
   public $_Attachment=array();
   public $_Note=array();
 
+  public static $_consolidate=false;
   public $_nbColMax=3;
   // Define the layout that will be used for lists
   
@@ -473,7 +474,11 @@ class BudgetMain extends SqlElement {
     if (!$this->leftAmount) $this->leftAmount=null;
     if (!$this->leftFullAmount) $this->leftFullAmount=null;
     // CALCULATE WBS
-    $result = parent::save();
+    if (Budget::$_consolidate==true) {
+      $result = parent::saveForced();
+    } else {
+      $result = parent::save();
+    }
     if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
       return $result;     
     }   
