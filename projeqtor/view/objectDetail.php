@@ -2439,7 +2439,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo '<div class="roundedVisibleButton roundedButton generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class"';
           echo ' title="'.i18n("moveStatusTo", array(SqlList::getNameFromId('Status', $next))).'"';
           echo ' style="text-align:left;float:right;margin-right:10px; width:'.($fieldWidth-5).'px;'.$specificStyleWithoutCustom.'"';
-          $saveFunction=($comboDetail)?'top.saveDetailItem();':'saveObject()';
+          $saveFunction=($comboDetail)?'window.top.saveDetailItem();':'saveObject()';
           echo ' onClick="dijit.byId(\''.$fieldId.'\').set(\'value\','.$next.');setTimeout(\''.$saveFunction.'\',100);">';
           echo '<img src="css/images/iconMoveTo.png" style="position:relative;left:5px;top:2px;"/>';
           echo '<div style="position:relative;top:-16px;left:25px;width:'.($fieldWidth-30).'px">'.SqlList::getNameFromId('Status', $next).'<div>';
@@ -2450,7 +2450,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo '<div class="roundedVisibleButton roundedButton generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class"';
           echo ' title="'.i18n("moveStatusTo", array(SqlList::getNameFromId('StatusNotification', $next))).'"';
           echo ' style="text-align:left;float:right;margin-right:10px; width:'.($fieldWidth-5).'px;'.$specificStyleWithoutCustom.'"';
-          $saveFunction=($comboDetail)?'top.saveDetailItem();':'saveObject()';
+          $saveFunction=($comboDetail)?'window.top.saveDetailItem();':'saveObject()';
           echo ' onClick="dijit.byId(\''.$fieldId.'\').set(\'value\','.$next.');setTimeout(\''.$saveFunction.'\',100);">';
           echo '<img src="css/images/iconMoveTo.png" style="position:relative;left:5px;top:2px;"/>';
           echo '<div style="position:relative;top:-16px;left:25px;width:'.($fieldWidth-30).'px">'.i18n(SqlList::getNameFromId('StatusNotification', $next)).'<div>';
@@ -2468,7 +2468,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             echo '<div class="roundedVisibleButton roundedButton generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class"';
             echo ' title="'.i18n("assignToMe").'"';
             echo ' style="text-align:left;float:right;margin-right:10px; width:'.($fieldWidth-5).'px;'.$specificStyle.'"';
-            $saveFunction=($comboDetail)?'top.saveDetailItem();':'saveObject()';
+            $saveFunction=($comboDetail)?'window.top.saveDetailItem();':'saveObject()';
             echo ' onClick="dijit.byId(\''.$fieldId.'\').set(\'value\','.htmlEncode($user->id).');setTimeout(\''.$saveFunction.'\',100);"';
             echo '>';
             echo '<img src="css/images/iconMoveTo.png" style="position:relative;left:5px;top:2px;"/>';
@@ -2788,7 +2788,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             echo ",'|', 'indent', 'outdent', 'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'";
             echo ",'|','insertOrderedList','insertUnorderedList','|']";
             echo ',onKeyDown:function(event){onKeyDownFunction(event,\''.$fieldId.'\',this);}'; // hard coding default event
-                                                                                                // echo ',onBlur:function(event){top.editorBlur(\'' . $fieldId . '\',this)}'; // hard coding default event
+                                                                                                // echo ',onBlur:function(event){window.top.editorBlur(\'' . $fieldId . '\',this)}'; // hard coding default event
             echo ",extraPlugins:['dijit._editor.plugins.AlwaysShowToolbar','foreColor','hiliteColor'";
             // Full screen mode disabled : sets many issues on some keys : tab, esc or ctrl+S, ...
             echo ",'|','print'";
