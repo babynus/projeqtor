@@ -40,7 +40,7 @@ scriptLog('   ->/tool/importHelp.php');
   <link rel="stylesheet" type="text/css" href="../view/css/projeqtorFlat.css" />
 </head>
 
-<body class="white" onLoad="top.hideWait();" style="overflow: auto; ">
+<body class="white" onLoad="window.top.hideWait();" style="overflow: auto; ">
 <?php 
 $class='';
 
