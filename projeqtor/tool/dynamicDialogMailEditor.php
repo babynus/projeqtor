@@ -68,11 +68,11 @@ if (sessionValueExists('screenHeight')) {
           <textarea dojoType="dijit.form.Textarea" type="hidden" id="mailEditor" name="mailEditor" style="display:none;">
             <?php echo htmlspecialchars($testMessage); ?></textarea>
              <div data-dojo-type="dijit.Editor" id="messageMailEditor"
-             data-dojo-props="onChange:function(){top.dojo.byId('mailEditorType').value=arguments[0];}
+             data-dojo-props="onChange:function(){window.top.dojo.byId('mailEditorType').value=arguments[0];}
              ,plugins:['removeFormat','bold','italic','underline','|', 'indent', 'outdent', 'justifyLeft', 'justifyCenter', 
              'justifyRight', 'justifyFull','|','insertOrderedList','insertUnorderedList','|']
-             ,onKeyDown:function(event){top.onKeyDownFunction(event,'messageMailEditor',this);}
-             ,onBlur:function(event){top.editorBlur('messageMailEditor',this);}
+             ,onKeyDown:function(event){window.top.onKeyDownFunction(event,'messageMailEditor',this);}
+             ,onBlur:function(event){window.top.editorBlur('messageMailEditor',this);}
              ,extraPlugins:['dijit._editor.plugins.AlwaysShowToolbar','foreColor','hiliteColor']"
              style="color:#606060 !important; background:none;padding:3px 0px 3px 3px;margin-right:2px;width:<?php echo $detailWidth;?>px;overflow:auto;"
              class="input"><?php 
