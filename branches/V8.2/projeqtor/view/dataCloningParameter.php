@@ -71,15 +71,7 @@ $userName=$user->id;
   </div>
   <div id="dataCloningParameterDiv" name="dataCloningParameterDiv" dojoType="dijit.layout.ContentPane" region="center" >
     <div id="dataCloningParameterCenterDiv" name="dataCloningParameterCenterDiv">
-      <?php echo '<div dojoType="dijit.TitlePane"';
-  	echo ' title="' . i18n('sectionImputationDiary') . '">';
-  	htmlDrawCrossTable(array('imputation'=>i18n('imputationAccess'), 
-  	                         'workValid'=>i18n('workValidate'),
-  	                         'diary'=>i18n('diaryAccess'),
-  			                     'subscription'=>i18n('canSubscribeForOthers'),
-  	                         'scheduledReport'=>i18n('autoSendReportAccess')), 
-  	    'scope', 'profile', 'idProfile', 'habilitationOther', 'rightAccess', 'list', 'accessScopeSpecific') ;
-  	echo '</div><br/>';?>
+      <?php DataCloning::drawDataCloningParameter();?>
     </div>
   </div>  
 </div>
