@@ -37,7 +37,6 @@ class MessageLegalFollowup extends SqlElement {
   public $lastViewDate;
   public $acceptedDate;
   public $accepted;
-  public $idle;
   
    /** ==========================================================================
    * Constructor
