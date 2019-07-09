@@ -73,8 +73,8 @@ function hideWait() {
   waitingForReply=false;
   hideField("wait");
   hideField("waitLogin");
-  if (top.dijit.byId("dialogInfo")) {
-    top.dijit.byId("dialogInfo").hide();
+  if (window.top.dijit.byId("dialogInfo")) {
+    window.top.dijit.byId("dialogInfo").hide();
   }
 }
 
@@ -150,10 +150,10 @@ function protectDblClick(widget){
  * @return void
  */
 function showError(msg) {
-  top.hideWait();
-  if (top.dojo.byId("dialogErrorMessage")) {
-    top.dojo.byId("dialogErrorMessage").innerHTML=msg;
-    top.dijit.byId("dialogError").show();
+  window.top.hideWait();
+  if (window.top.dojo.byId("dialogErrorMessage")) {
+    window.top.dojo.byId("dialogErrorMessage").innerHTML=msg;
+    window.top.dijit.byId("dialogError").show();
   } else if (dojo.byId('loginResultDiv')) {
     dojo.byId('loginResultDiv').innerHTML=
       '<input type="hidden" id="isLoginPage" name="isLoginPage" value="true" />'
@@ -176,9 +176,9 @@ function showInfo(msg,callback) {
   if (callback) { 
     callbackFunc=callback;
   }
-  top.dojo.byId("dialogInfoMessage").innerHTML=msg;
-  top.dijit.byId("dialogInfo").acceptCallback=callbackFunc;
-  top.dijit.byId("dialogInfo").show();
+  window.top.dojo.byId("dialogInfoMessage").innerHTML=msg;
+  window.top.dijit.byId("dialogInfo").acceptCallback=callbackFunc;
+  window.top.dijit.byId("dialogInfo").show();
 }
 
 /**
@@ -190,14 +190,14 @@ function showInfo(msg,callback) {
  * @return void
  */
 function showAlert(msg,callback) {
-  top.hideWait();
+  window.top.hideWait();
   var callbackFunc=function() {};
   if (callback) { 
     callbackFunc=callback;
   }
-  top.dojo.byId("dialogAlertMessage").innerHTML=msg;
-  top.dijit.byId("dialogAlert").acceptCallback=callbackFunc;
-  top.dijit.byId("dialogAlert").show();
+  window.top.dojo.byId("dialogAlertMessage").innerHTML=msg;
+  window.top.dijit.byId("dialogAlert").acceptCallback=callbackFunc;
+  window.top.dijit.byId("dialogAlert").show();
 }
 
 /**
@@ -770,7 +770,7 @@ function displaySearch(objClass) {
   showField('comboCloseButton');
   var multipleSelect=(dojo.byId('comboMultipleSelect').value == 'true') ? '&multipleSelect=true'
       : '';
-  top.frames['comboDetailFrame'].location.href="comboSearch.php?objectClass="
+  window.top.frames['comboDetailFrame'].location.href="comboSearch.php?objectClass="
       + objClass + "&mode=search" + multipleSelect;
   setTimeout('dijit.byId("dialogDetail").show()', 10);
 }
@@ -808,7 +808,7 @@ function gotoDetailItem(objectClass,objectId) {
     page+="&mode=new";
   }
   page+="&destinationWidth=" + destinationWidth;
-  top.frames['comboDetailFrame'].location.href=page;
+  window.top.frames['comboDetailFrame'].location.href=page;
   setTimeout('dijit.byId("dialogDetail").show()', 10);
 }
 
@@ -837,10 +837,10 @@ function saveDetailItem() {
             }
             contentWidget.set('content', data);
             checkDestination("comboDetailResult");
-            var lastOperationStatus=top.dojo
+            var lastOperationStatus=window.top.dojo
                 .byId('lastOperationStatusComboDetail');
-            var lastOperation=top.dojo.byId('lastOperationComboDetail');
-            var lastSaveId=top.dojo.byId('lastSaveIdComboDetail');
+            var lastOperation=window.top.dojo.byId('lastOperationComboDetail');
+            var lastSaveId=window.top.dojo.byId('lastSaveIdComboDetail');
             if (lastOperationStatus.value == "OK") {
               var currentItemName="";
               if (frames['comboDetailFrame'].dijit.byId("name")) {
@@ -3611,9 +3611,9 @@ var filterFromDetail=false;
 function showFilterDialog() {
   function callBack(){
     filterStartInput=false;
-    top.filterFromDetail=false;
-    if (top.dijit.byId('dialogDetail').open) {
-      top.filterFromDetail=true;
+    window.top.filterFromDetail=false;
+    if (window.top.dijit.byId('dialogDetail').open) {
+      window.top.filterFromDetail=true;
       dojo.byId('filterDefaultButtonDiv').style.display='none';
     } else {
       dojo.byId('filterDefaultButtonDiv').style.display='block';
@@ -3646,7 +3646,7 @@ function showFilterDialog() {
     else if (dojo.byId('objectClass') && dojo.byId('objectClass').value) dojo.byId('filterObjectClass').value=dojo.byId('objectClass').value;
     else dojo.byId('filterObjectClass').value=null;
     filterType="";
-    var compUrl=(top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
+    var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
     dojo.xhrPost({
       url : "../tool/backupFilter.php?filterObjectClass="
           + dojo.byId('filterObjectClass').value + compUrl,
@@ -3654,7 +3654,7 @@ function showFilterDialog() {
       load : function(data, args) {
       }
     });
-    compUrl=(top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
+    compUrl=(window.top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
     loadContent("../tool/displayFilterClause.php" + compUrl,
     		"listFilterClauses", "dialogFilterForm", false, null, null, null, displayOrOperator);
     loadContent("../tool/displayFilterList.php" + compUrl,
@@ -4096,7 +4096,7 @@ function addfilterClause(silent) {
   }
   //END ADD qCazelles - Dynamic filter - Ticket #78
   // Add controls on operator and value
-  var compUrl=(top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
+  var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
   loadContent("../tool/addFilterClause.php" + compUrl, "listFilterClauses",
       "dialogFilterForm", false);
   // dijit.byId('filterNameDisplay').set('value',null);
@@ -4121,7 +4121,7 @@ function removefilterClause(id) {
   }
   // Add controls on operator and value
   dojo.byId("filterClauseId").value=id;
-  var compUrl=(top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
+  var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
   loadContent("../tool/removeFilterClause.php" + compUrl,
       "listFilterClauses", "dialogFilterForm", false);
   // dijit.byId('filterNameDisplay').set('value',null);
@@ -4153,15 +4153,15 @@ function selectFilter() {
 }
 
 function selectFilterContinue() {
-  if (top.dijit.byId('dialogDetail').open) {
-    var doc=top.window.frames['comboDetailFrame'];
+  if (window.top.dijit.byId('dialogDetail').open) {
+    var doc=window.top.frames['comboDetailFrame'];
   } else {
-    var doc=top;
+    var doc=window.top;
   }
   if (dijit.byId('filterNameDisplay')) {
     dojo.byId('filterName').value=dijit.byId('filterNameDisplay').get('value');
   }
-  var compUrl=(top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
+  var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
   dojo.xhrPost({
     url : "../tool/backupFilter.php?valid=true" + compUrl,
     form : 'dialogFilterForm',
@@ -4170,7 +4170,7 @@ function selectFilterContinue() {
   });
   if (dojo.byId('objectClassList') && dojo.byId('objectClassList').value){
     objectClass=dojo.byId('objectClassList').value;
-  }else if (! top.dijit.byId('dialogDetail').open && dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value){ 
+  }else if (! window.top.dijit.byId('dialogDetail').open && dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value){ 
     objectClass=dojo.byId("objectClassManual").value;
   }else if (dojo.byId('objectClass') && dojo.byId('objectClass').value){
     objectClass=dojo.byId('objectClass').value;
@@ -4189,10 +4189,10 @@ function selectFilterContinue() {
    } else {
      setTimeout("dijit.byId('listFilterFilter').set('iconClass', 'iconFilter')",100);
    }
-  if(! top.dijit.byId('dialogDetail').open && dojo.byId('objectClassManual') && (dojo.byId('objectClassManual').value=='Plugin_kanban' || dojo.byId('objectClassManual').value=='Plugin_liveMeeting')){
+  if(! window.top.dijit.byId('dialogDetail').open && dojo.byId('objectClassManual') && (dojo.byId('objectClassManual').value=='Plugin_kanban' || dojo.byId('objectClassManual').value=='Plugin_liveMeeting')){
     loadContent("../plugin/kanban/kanbanView.php?idKanban="+dojo.byId('idKanban').value, "divKanbanContainer");
   }else if (!dijit.byId('filterDynamicParameter').get("checked")) {
-    if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Planning' && ! top.dijit.byId('dialogDetail').open) {
+    if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Planning' && ! window.top.dijit.byId('dialogDetail').open) {
       refreshJsonPlanning();
     } else if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Report') {
       dojo.byId('outMode').value='';runReport();
@@ -4210,7 +4210,7 @@ function selectFilterContinue() {
  */
 function cancelFilter() {
   filterStartInput=true;
-  var compUrl=(top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
+  var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
   dojo.xhrPost({
     url : "../tool/backupFilter.php?cancel=true" + compUrl,
     form : 'dialogFilterForm',
@@ -4250,7 +4250,7 @@ function defaultFilter() {
     dojo.byId('filterName').value=dijit.byId('filterNameDisplay').get(
         'value');
   }
-  var compUrl=(top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
+  var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
   loadContent("../tool/defaultFilter.php" + compUrl, "listStoredFilters",
       "dialogFilterForm", false);
 }
@@ -4268,7 +4268,7 @@ function saveFilter() {
     dojo.byId('filterName').value=dijit.byId('filterNameDisplay').get(
         'value');
   }
-  var compUrl=(top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
+  var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
   loadContent("../tool/saveFilter.php" + compUrl, "listStoredFilters",
       "dialogFilterForm", false);
 }
@@ -4280,7 +4280,7 @@ function saveFilter() {
 var globalSelectFilterContenLoad=null;
 var globalSelectFilterContainer=null;
 function selectStoredFilter(idFilter, context, contentLoad, container) {  
-  var compUrl=(top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
+  var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
   globalSelectFilterContenLoad=null;
   globalSelectFilterContainer=null;
   if (context == 'directFilterList') {
@@ -4290,11 +4290,11 @@ function selectStoredFilter(idFilter, context, contentLoad, container) {
       } else {
         dojo.byId('noFilterSelected').value='false';
       }
-    } else if (top.dojo.byId('noFilterSelected')) {
+    } else if (window.top.dojo.byId('noFilterSelected')) {
     	if (idFilter == '0') {
-        top.dojo.byId('noFilterSelected').value='true';
+    	  window.top.dojo.byId('noFilterSelected').value='true';
       } else {
-        top.dojo.byId('noFilterSelected').value='false';
+        window.top.dojo.byId('noFilterSelected').value='false';
       }
     }
     if (dojo.byId('objectClassList') && dojo.byId('objectClassList').value) objectClass=dojo.byId('objectClassList').value;
@@ -4338,12 +4338,12 @@ function selectStoredFilter(idFilter, context, contentLoad, container) {
  * 
  */
 function removeStoredFilter(idFilter, nameFilter) {
-  var compUrl=(top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
+  var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
   var action=function() {
     loadContent("../tool/removeFilter.php?idFilter=" + idFilter + compUrl,
         "listStoredFilters", "dialogFilterForm", false);
   };
-  top.showConfirm(i18n("confirmRemoveFilter", new Array(nameFilter)), action);
+  window.top.showConfirm(i18n("confirmRemoveFilter", new Array(nameFilter)), action);
 }
 
 /**
@@ -4351,7 +4351,7 @@ function removeStoredFilter(idFilter, nameFilter) {
  * 
  */
 function shareStoredFilter(idFilter, nameFilter) {
-  var compUrl=(top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
+  var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '&comboDetail=true' : '';
   loadContent("../tool/shareFilter.php?idFilter=" + idFilter + compUrl,
         "listStoredFilters", "dialogFilterForm", false);
 }
@@ -4380,15 +4380,15 @@ function selectDynamicFilter() {
 		}
 	}
 	
-	var compUrl=(top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
+	var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
 	var callBack=function() {selectDynamicFilterContinue();}
 	loadContent("../tool/addDynamicFilterClause.php" + compUrl, "listDynamicFilterClauses",
 		      "dialogDynamicFilterForm", false,null,null,null,callBack);
 }
 
 function selectDynamicFilterContinue() {
-	  if (top.dijit.byId('dialogDetail').open) {
-	    var doc=top.window.frames['comboDetailFrame'];
+	  if (window.top.dijit.byId('dialogDetail').open) {
+	    var doc=window.top.frames['comboDetailFrame'];
 	  } else {  
 	    var doc=top;
 	  }
@@ -4403,7 +4403,7 @@ function selectDynamicFilterContinue() {
 	      "../tool/displayFilterList.php?context=directFilterList&filterObjectClass="
 	          + objectClass, "directFilterList", null,
 	      false, 'returnFromFilter', false);
-	  if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Planning' && ! top.dijit.byId('dialogDetail').open) {
+	  if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Planning' && ! window.top.dijit.byId('dialogDetail').open) {
       refreshJsonPlanning();
 	  } else if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Report') {
 	    dojo.byId('outMode').value='';runReport();
@@ -6744,7 +6744,7 @@ function copyProjectStructureChange() {
 
 function selectIconMenuBar(menuClass){
 	var icon = dojo.byId('iconMenuBar'+menuClass);
-	if (dojo.hasClass(icon,'menuBarItem')){
+	if (icon && dojo.hasClass(icon,'menuBarItem')){
 		dojo.query('.menuBarItem').removeClass('menuBarItemSelected', icon);
 		dojo.addClass(icon,'menuBarItemSelected');
 	}
@@ -7456,19 +7456,19 @@ function moveFilterListColumn() {
     }  
     
     var callback=function() {
-        if (top.dijit.byId('dialogDetail').open) {
-          var doc=top.window.frames['comboDetailFrame'];
+        if (window.top.dijit.byId('dialogDetail').open) {
+          var doc=window.top.frames['comboDetailFrame'];
         } else {
           var doc=top;
         }
         if (dojo.byId('objectClassList') && dojo.byId('objectClassList').value){
           var objectClass=dojo.byId('objectClassList').value;
-        }else if (! top.dijit.byId('dialogDetail').open && dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value){ 
+        }else if (! window.top.dijit.byId('dialogDetail').open && dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value){ 
           var objectClass=dojo.byId("objectClassManual").value;
         }else if (dojo.byId('objectClass') && dojo.byId('objectClass').value){
           var objectClass=dojo.byId('objectClass').value;
         } 
-        var compUrl=(top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
+        var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
         
         doc.loadContent(
             "../tool/displayFilterList.php?context=directFilterList&filterObjectClass="
