@@ -79,6 +79,9 @@ class DataCloning extends SqlElement{
 		$dataCloning = new DataCloning();
 		$user = getSessionUser();
 		$showClosed = Parameter::getUserParameter('dataCloningShowClosed');
+		if($showClosed == ''){
+		  $showClosed = 0;
+		}
 		$critWhere = "";
 		if($versionCode != ''){
 			$critWhere .=" and versionCode='".$versionCode."'";
