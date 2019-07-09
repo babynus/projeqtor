@@ -147,7 +147,7 @@ if($dataCloning->getVersionCodeList()){
               title="<?php echo i18n('parameterDataCloning');?>"
               iconClass="iconParameter32" class="button">
                 <script type="dojo/method" event="onClick" args="evt">
-                  loadBarItem('DataCloningParameter', 'DataCloningParameter', 'bar');  
+                  loadMenuBarItem('DataCloningParameter', 'DataCloningParameter', 'bar');  
                 </script>
               </button>
             <?php }?> 
