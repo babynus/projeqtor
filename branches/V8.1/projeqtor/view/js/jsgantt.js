@@ -684,7 +684,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
     }
   };
   this.Draw = function(){
-	  top.showWait();
+    window.top.showWait();
     var vMaxDate = new Date();
     var vMinDate = new Date();
     var vDefaultMinDate = new Date();
@@ -1502,7 +1502,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
       dojo.byId('ganttScale').style.left=(dojo.byId('leftGanttChartDIV').scrollLeft)+'px';
       adjustSpecificDaysHeight();
     }
-    top.hideWait();
+    window.top.hideWait();
   }; // this.draw
    
 }; // GanttChart
@@ -1755,7 +1755,7 @@ JSGantt.findObj = function (theObj, theDoc) {
  */
 JSGantt.changeFormat = function(pFormat,ganttObj) {
   if(ganttObj) {
-	  top.showWait();
+    window.top.showWait();
 	  var func=function() {
   	  if (ganttObj.getFormat()=='month' && ganttObj.getEndDateView() ) {
         ganttObj.setFormat(pFormat);
@@ -1766,7 +1766,7 @@ JSGantt.changeFormat = function(pFormat,ganttObj) {
         ganttObj.setFormat(pFormat);
         ganttObj.DrawDependencies();
       }
-  	  top.hideWait();
+  	  window.top.hideWait();
 	  };
 	  setTimeout(func,10); // This is done to let the time to the browser to display the waiting spinner (showWait())
   } else {
@@ -1965,7 +1965,7 @@ JSGantt.formatDateStr = function(pDate,pFormatStr, vMonthArray) {
   var vWeekNum = dateGetWeek(pDate,1); 
   switch(pFormatStr) {
     case 'default':
-      fmt=top.getBrowserLocaleDateFormatJs();
+      fmt=window.top.getBrowserLocaleDateFormatJs();
       return dojo.date.locale.format(pDate, {datePattern: fmt, formatLength: "short", fullYear: true, selector: "date"});
     case 'mm/dd/yyyy':
       return( vMonthStr + '/' + vDayStr + '/' + vYear4Str );
@@ -1998,7 +1998,7 @@ JSGantt.formatDateStr = function(pDate,pFormatStr, vMonthArray) {
       }
       return ( vYear2Str + ' #'  + vWeekNum  );
     case 'week-firstday':
-      fmt=top.getBrowserLocaleDateFormatJs();
+      fmt=window.top.getBrowserLocaleDateFormatJs();
       if (fmt.substr(0,5).toUpperCase()=="DD/MM") {
         return (  vDayStr + '/' + vMonthStr );
       } else {
