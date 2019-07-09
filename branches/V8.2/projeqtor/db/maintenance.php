@@ -819,6 +819,26 @@ if (beforeVersion($currVersion,"V8.0.5")) {
     traceLog("   => $cpt saved");
   }
 }
+
+if (beforeVersion($currVersion,"V8.2.0")) {  
+  $timeZone = Parameter::getGlobalParameter('paramDefaultTimezone');
+  if(substr($timeZone,0,6)== 'Europe'){
+    Sql::beginTransaction();
+    $MessageLegal = new MessageLegal();
+    if(substr(Parameter::getGlobalParameter('paramDefaultLocale'),0,6)=='fr'){
+      $MessageLegal->name = "Message par défaut";
+      $MessageLegal->description = 'Test de Maintenance';
+    }else{
+      $MessageLegal->name = "Default message";
+      $MessageLegal->description = "This is a test";
+    }
+    $MessageLegal->endDate='2010-10-04 00:00:00';
+    $MessageLegal->save();
+    debugLog($MessageLegal);
+    Sql::commitTransaction();
+  }
+}
+
 // To be sure, after habilitations updates ...
 Habilitation::correctUpdates();
 Habilitation::correctUpdates();
