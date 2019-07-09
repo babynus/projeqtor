@@ -486,9 +486,9 @@ html, body {
 .iconArrowMessageLegal {
   background-image: url('../img/iconArrowMessageLegal.png');
   background-repeat: no-repeat;
-  width: 100px;
+  width: 85px;
   height: 140px;
-  background-size: 100px 140px;
+  background-size: 85px 140px;
   text-align: center;
   cursor: pointer;
 }
