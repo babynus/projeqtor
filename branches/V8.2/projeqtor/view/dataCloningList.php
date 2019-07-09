@@ -141,13 +141,13 @@ if($dataCloning->getVersionCodeList()){
                 </script>
               </div>
             </td>
-            <td width="10%" nowrap="nowrap" style="padding-right: 5%" >
+            <td width="10%" nowrap="nowrap" style="padding-right:5%" >
             <?php if($userProfil->profileCode == 'ADM'){?>
               <button id="parameterDataCloning" dojoType="dijit.form.Button" showlabel="false"
               title="<?php echo i18n('parameterDataCloning');?>"
               iconClass="iconParameter32" class="button">
                 <script type="dojo/method" event="onClick" args="evt">
-                  loadMenuBarItem('DataCloningParameter', 'DataCloningParameter', 'bar');  
+                  loadBarItem('DataCloningParameter', 'DataCloningParameter', 'bar');  
                 </script>
               </button>
             <?php }?> 

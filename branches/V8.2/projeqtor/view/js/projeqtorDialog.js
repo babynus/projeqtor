@@ -6821,9 +6821,10 @@ function loadMenuBarItem(item, itemName, from) {
 	    loadContent("imputationValidationMain.php", "centerDiv");  
   } else if (item == 'AutoSendReport') {
     loadContent("autoSendReportList.php", "centerDiv"); 
-	loadContent("autoSendReportList.php", "centerDiv");
   } else if (item == 'DataCloning') {
 		loadContent("dataCloningList.php", "centerDiv");
+  } else if (item == 'DataCloningParameter') {
+		loadContent("dataCloningParameter.php", "centerDiv");
     //ADD qCazelles - GANTT
   } else if (item == 'VersionsPlanning') {
 	//CHANGE qCazelles - Correction GANTT - Ticket #100
