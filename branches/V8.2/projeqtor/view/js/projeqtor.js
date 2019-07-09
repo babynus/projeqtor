@@ -1064,8 +1064,8 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
           }
           if (destination == "directFilterList") {
             if (!validationType || validationType=='returnFromFilter' ) {
-              if (top.dojo.byId('noFilterSelected')
-                  && top.dojo.byId('noFilterSelected').value == 'true') {
+              if (window.top.dojo.byId('noFilterSelected')
+                  && window.top.dojo.byId('noFilterSelected').value == 'true') {
                 dijit.byId("listFilterFilter").set("iconClass", "iconFilter");
               } else {
                 dijit.byId("listFilterFilter").set("iconClass",
@@ -2686,12 +2686,12 @@ function i18n(str, vars) {
     }
   }
   var ret = null;
-  if (top.i18nMessagesCustom[str]) {
-    ret = top.i18nMessagesCustom[str];
-  } else if (top.i18nMessages[str]) {
-    ret = top.i18nMessages[str];
-  } else if (top.i18nPluginArray && top.i18nPluginArray[str]) {
-    ret = top.i18nPluginArray[str];
+  if (window.top.i18nMessagesCustom[str]) {
+    ret = window.top.i18nMessagesCustom[str];
+  } else if (window.top.i18nMessages[str]) {
+    ret = window.top.i18nMessages[str];
+  } else if (window.top.i18nPluginArray && window.top.i18nPluginArray[str]) {
+    ret = window.top.i18nPluginArray[str];
   }
   if (ret) {
     if (vars) {
@@ -3464,6 +3464,7 @@ function refreshTodayProjectsList(value) {
 }
 
 function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target) {
+  console.log("gotoElement("+eltClass+", "+eltId+")");
   if (checkFormChangeInProgress()) {
     return false;
   }
@@ -3475,6 +3476,7 @@ function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target) {
       forceListRefresh = true;
     }
   }
+  if (eltClass=='BudgetItem') eltClass='Budget'; 
   selectTreeNodeById(dijit.byId('menuTree'), eltClass);
   formChangeInProgress = false;
   // if ( dojo.byId("GanttChartDIV")
@@ -4416,18 +4418,18 @@ function onKeyDownFunction(event, field, editorFld) {
     event.preventDefault();
     if (fullScreenEditor)
       return;
-    if (top.dojo.isFF) {
-      top.stopDef();
+    if (window.top.dojo.isFF) {
+      window.top.stopDef();
     }
-    top.setTimeout("top.onKeyDownFunctionEditorSave();", 10);
+    window.top.setTimeout("window.top.onKeyDownFunctionEditorSave();", 10);
   } else if (event.keyCode == 112) { // On F1
     event.preventDefault();
     if (fullScreenEditor)
       return;
-    if (top.dojo.isFF) {
-      top.stopDef();
+    if (window.top.dojo.isFF) {
+      window.top.stopDef();
     }
-    top.showHelp();
+    window.top.showHelp();
   } else if (event.keyCode == 9 || event.keyCode == 27) { // Tab : prevent
     if (fullScreenEditor) {
       event.preventDefault();
@@ -4445,7 +4447,7 @@ function onKeyDownFunction(event, field, editorFld) {
 }
 function onKeyDownCkEditorFunction(event, editor) {
   var editorWidth = editor.document.$.body.offsetWidth;
-  var screenWidth = top.document.body.getBoundingClientRect().width;
+  var screenWidth = window.top.document.body.getBoundingClientRect().width;
   var fullScreenEditor = (editorWidth > screenWidth * 0.9) ? true : false; // if
                                                                             // editor
                                                                             // is >
@@ -4462,28 +4464,28 @@ function onKeyDownCkEditorFunction(event, editor) {
     event.cancel();
     /*if (fullScreenEditor)
       return;*/
-    if (top.dojo.isFF) {
-      top.stopDef();
+    if (window.top.dojo.isFF) {
+      window.top.stopDef();
     }
-    top.setTimeout("top.onKeyDownFunctionEditorSave();", 10);
+    window.top.setTimeout("window.top.onKeyDownFunctionEditorSave();", 10);
   } else if (event.data.keyCode == 112) { // On F1
     event.cancel();
     if (fullScreenEditor)
       return;
-    if (top.dojo.isFF) {
-      top.stopDef();
+    if (window.top.dojo.isFF) {
+      window.top.stopDef();
     }
-    top.showHelp();
+    window.top.showHelp();
   }else if(event.data.keyCode==27){
-    if(top.editorInFullScreen() && top.whichFullScreen!=-1){
-      top.editorArray[whichFullScreen].execCommand('maximize');
+    if(window.top.editorInFullScreen() && top.whichFullScreen!=-1){
+      window.top.editorArray[whichFullScreen].execCommand('maximize');
     }
   } 
 }
 
 function cancelBothFullScreen(){
-  if(top.editorInFullScreen() && top.whichFullScreen!=-1){
-    top.editorArray[whichFullScreen].execCommand('maximize');
+  if(window.top.editorInFullScreen() && top.whichFullScreen!=-1){
+    window.top.editorArray[whichFullScreen].execCommand('maximize');
     dijit.byId("globalContainer").resize();
   }
   
@@ -4506,7 +4508,7 @@ function onKeyDownFunctionEditorSave() {
     if (dijit.byId('id')) dijit.byId('id').focus();
     dojo.byId('formDiv').scrollTop = formDivPosition;
   }
-  top.setTimeout("top.globalSave();", 20);
+  window.top.setTimeout("top.globalSave();", 20);
 }
 
 function editorBlur(fieldId, editorFld) {
@@ -4524,7 +4526,7 @@ function editorBlur(fieldId, editorFld) {
                                                                             // in
                                                                             // full
                                                                             // mode
-  top.dojo.byId(fieldId).value = editorFld.document.body.firstChild.innerHTML;
+  window.top.dojo.byId(fieldId).value = editorFld.document.body.firstChild.innerHTML;
   if (fullScreenEditor) {
     editorFld.toggle(); // Not existing function : block some unexpected
                         // resizing // KEEP THIS even if it logs an error in the

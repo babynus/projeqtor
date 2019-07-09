@@ -289,12 +289,12 @@ function workFormatter(value) {
   if (value == null) return null;
   if (value == '-') return hiddenField;
   // result=dojo.number.format(value);
-  var paramUnit=top.paramWorkUnit;
+  var paramUnit=window.top.paramWorkUnit;
   if (dojo.byId('objectClassList') && (dojo.byId('objectClassList').value=='Ticket' || dojo.byId('objectClassList').value=='TicketSimple')) {
-    paramUnit=top.paramImputationUnit;
+    paramUnit=window.top.paramImputationUnit;
   } 
   if (paramUnit != 'days') {
-       value = value * top.paramHoursPerDay;
+       value = value * window.top.paramHoursPerDay;
     }
   roundedValue = dojo.number.format(Math.round(value * 100) / 100, { places:1} );
   // var result = roundedValue.replace(/^0+/g,'');
@@ -311,10 +311,10 @@ function costFormatter(value) {
   roundedValue = dojo.number.format(Math.round(value * 100) / 100, { places:2} );
   // var result = roundedValue.replace(/^0+/g,'');
   // result = value.replace(/^0+/g,'');
-  if (top.paramCurrencyPosition == 'before') {
-    return '<div style="width:100%;text-align:right;">'+top.paramCurrency + '&nbsp;' + roundedValue + '</div>';
+  if (window.top.paramCurrencyPosition == 'before') {
+    return '<div style="width:100%;text-align:right;">'+window.top.paramCurrency + '&nbsp;' + roundedValue + '</div>';
   } else {
-    return '<div style="width:100%;text-align:right;">'+roundedValue + '&nbsp;' + top.paramCurrency + '</div>';
+    return '<div style="width:100%;text-align:right;">'+roundedValue + '&nbsp;' + window.top.paramCurrency + '</div>';
   }
 }
 /**
@@ -326,7 +326,7 @@ function costFormatter(value) {
  * @return the formatted value
  */
 function dateFormatter(value) {
-  fmt = top.getBrowserLocaleDateFormatJs();
+  fmt = window.top.getBrowserLocaleDateFormatJs();
   if (value.length == 19) {
     value=value.substr(0,10);
   }
@@ -379,7 +379,7 @@ function longDateFormatter(value) {
  * @return the formatted value
  */
 function dateTimeFormatter(value) {
-  fmt = top.getBrowserLocaleDateFormatJs();
+  fmt = window.top.getBrowserLocaleDateFormatJs();
   if (value && value.length == 19) {
     vDate = dojo.date.locale.parse(value, {
       datePattern : "yyyy-MM-dd",
@@ -397,7 +397,7 @@ function dateTimeFormatter(value) {
     return dojo.date.locale.format(vDate, {
       datePattern : fmt,
       formatLength : "short",
-      timePattern : top.browserLocaleTimeFormat,
+      timePattern : window.top.browserLocaleTimeFormat,
       fullYear : true
     });
   } else {
@@ -422,7 +422,7 @@ function timeFormatter(value) {
     if (!vDate || vDate==undefined) return value;
     return dojo.date.locale.format(vDate, {
       formatLength : "time",
-      timePattern : top.browserLocaleTimeFormat
+      timePattern : window.top.browserLocaleTimeFormat
     });
   } else {
     var dateFormattedValue="2000-01-01 "+value;
