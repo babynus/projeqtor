@@ -139,18 +139,18 @@
 //       var onKeyPressFunc = function(event) {
 //             if(event.ctrlKey && event.keyChar == 's'){
 //               event.preventDefault();
-//               top.globalSave();
+//               window.top.globalSave();
 //             }  
 //       };
       var onKeyDownFunc = function(event) {
         if (event.keyCode == 83 && (navigator.platform.match("Mac") ? event.metaKey : event.ctrlKey) && ! event.altKey) { // CTRL + S (save)
           event.preventDefault();
-          if (top.dojo.isFF) stopDef();
-          top.globalSave();
+          if (window.top.dojo.isFF) stopDef();
+          window.top.globalSave();
         } else if (event.keyCode == 112) { // F1 (show help)
           event.preventDefault();
-          if (top.dojo.isFF) stopDef();
-          top.showHelp();
+          if (window.top.dojo.isFF) stopDef();
+          window.top.showHelp();
         }
       };
       //dojo.connect(document, "onkeypress", this, onKeyPressFunc);
@@ -164,7 +164,7 @@
     });
   </script>
 </head>
-<body id="body" style="opacity:0" class="<?php echo getTheme();?>" onload="ckEditorReplaceAll();top.hideWait();">
+<body id="body" style="opacity:0" class="<?php echo getTheme();?>" onload="ckEditorReplaceAll();window.top.hideWait();">
   <input type="hidden" id="comboDetail" name="comboDetail" value="true" />
   <input type="hidden" id="comboDetailId" name="comboDetailId" value="" />
   <input type="hidden" id="comboDetailName" name="comboDetailName" value="" />
