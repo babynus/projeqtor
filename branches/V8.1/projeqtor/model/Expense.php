@@ -214,7 +214,9 @@ class Expense extends SqlElement {
     
     if ($this->idBudgetItem) {
       $item=new Budget($this->idBudgetItem);
-      $item->save();
+      Budget::$_consolidate=true;
+      $resB=$item->save();
+      Budget::$_consolidate=false;
     }
     if ($this->idBudgetItem!=$old->idBudgetItem and $old->idBudgetItem) {
       $item=new Budget($old->idBudgetItem);
