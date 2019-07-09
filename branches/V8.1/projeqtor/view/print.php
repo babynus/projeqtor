@@ -189,14 +189,14 @@ use Spipu\Html2Pdf\Html2Pdf;
         var height=dojo.byId("leftside").offsetHeight;
         height+=43;
         dojo.byId("GanttChartDIV_print").style.height=height+'px';
-        //var g = new JSGantt.GanttChart('g',dojo.byId('ganttDiv'), top.g.getFormat()); 
+        //var g = new JSGantt.GanttChart('g',dojo.byId('ganttDiv'), window.top.g.getFormat()); 
       <?php }?>
     }); 
     
   </script>
 </head>
 <page backtop="100px" backbottom="20px" footer="page">
-<<?php echo ($printInNewPage or $outMode=='pdf') ?'body':'div';?> style="-webkit-print-color-adjust: exact;<?php echo ($outMode=='pdf')?'font-size:90%;':''; ?>" id="bodyPrint" class="tundra ProjeQtOrFlatGrey" onload="top.hideWait();">
+<<?php echo ($printInNewPage or $outMode=='pdf') ?'body':'div';?> style="-webkit-print-color-adjust: exact;<?php echo ($outMode=='pdf')?'font-size:90%;':''; ?>" id="bodyPrint" class="tundra ProjeQtOrFlatGrey" onload="window.top.hideWait();">
   <?php 
   }
   $page=$_REQUEST['page'];
