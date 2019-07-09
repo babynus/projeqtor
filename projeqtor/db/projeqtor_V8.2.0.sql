@@ -86,6 +86,5 @@ INSERT INTO `${prefix}habilitation` (idProfile, idMenu, allowAccess) VALUES
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,224,8);
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('paramPasswordStrength','1');
