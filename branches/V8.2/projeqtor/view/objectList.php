@@ -1025,7 +1025,7 @@ $listStatus = $object->getExistingStatus();
       dojo.byId('comboDetailId').value=row.id;
       dojo.byId('comboDetailId').value=dojo.byId('comboDetailId').value.replace(/^[0]+/g,"");
       dojo.byId('comboDetailName').value=row.name;
-      top.selectDetailItem();
+      window.top.selectDetailItem();
       return;
     }
   </script>
