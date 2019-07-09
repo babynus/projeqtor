@@ -1340,7 +1340,7 @@ class PlannedWork extends GeneralWork {
       } else {
    	    $resPe=$pe->simpleSave(); // Attention ! simpleSave for PlanningElement will execute direct query
       }
-   	  if ($pe->refType=='Milestone' and SqlElement::is_a($pe,'MilestonePlanningElement')) {
+   	  if ($pe->refType=='Milestone' and method_exists($pe, "updateMilestonableItems")) {
    	    $pe->updateMilestonableItems();
    	  }
      }
