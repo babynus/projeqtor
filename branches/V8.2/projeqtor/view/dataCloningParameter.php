@@ -52,14 +52,30 @@ $userName=$user->id;
           <td width="200px"><span class="title"><?php echo i18n('menuDataCloningParameter');?></span></td>
   		  </tr>
   		  <tr height="32px">
-          <td>
-            <button id="refreshDataCloningParameterButton" dojoType="dijit.form.Button" showlabel="false"
-              title="<?php echo i18n('buttonRefreshList');?>"
-              iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
-              <script type="dojo/method" event="onClick" args="evt">
-	             refreshDataCloningParameter();
-              </script>
-            </button> 
+  		    <td colspan="2">
+  		      <table width="100%"  >
+  		        <tr>
+  		          <td width="36px"> 
+                  <button id="refreshDataCloningParameterButton" dojoType="dijit.form.Button" showlabel="false"
+                    title="<?php echo i18n('buttonRefreshList');?>"
+                    iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
+                    <script type="dojo/method" event="onClick" args="evt">
+	                     refreshDataCloningParameter();
+                    </script>
+                  </button> 
+                </td>
+                <td>
+                  <button id="saveParameterButton" dojoType="dijit.form.Button"
+                    showlabel="false"
+                    title="<?php echo i18n('buttonSaveParameters');?>"
+                    iconClass="dijitButtonIcon dijitButtonIconSave" class="detailButton">
+                    <script type="dojo/connect" event="onClick" args="evt">              
+                      submitForm("../tool/saveParameter.php","resultDiv", "parameterForm", true);
+                    </script>
+                  </button>
+                </td>
+              </tr>
+            </table>
           </td>
         </tr>
 		  </table>
@@ -69,8 +85,11 @@ $userName=$user->id;
   </form>
   </div>
   <div id="dataCloningParameterDiv" name="dataCloningParameterDiv" dojoType="dijit.layout.ContentPane" region="center" >
-    <div id="dataCloningParameterCenterDiv" name="dataCloningParameterCenterDiv">
-      <?php DataCloning::drawDataCloningParameter();?>
-    </div>
+    <form dojoType="dijit.form.Form" name="parameterForm" id="parameterForm" action="" method="post" >
+      <input type="hidden" name="parameterType" value="dataCloning" />
+      <div id="dataCloningParameterCenterDiv" name="dataCloningParameterCenterDiv">
+        <?php DataCloning::drawDataCloningParameter();?>
+      </div>
+    </form>
   </div>  
 </div>
