@@ -44,8 +44,7 @@ if($dataCloning->getVersionCodeList()){
   $versionCodeList=$dataCloning->getVersionCodeList();
 }
 ?>
-
-<div dojoType="dijit.layout.BorderContainer" id="dataCloningParamDiv" name="dataCloningParamDiv">
+<div class="container" dojoType="dijit.layout.BorderContainer" id="dataCloningParamDiv" name="dataCloningParamDiv">
   <div style="top:30px !important; left: 200px !important; width: 500px; margin: 0px 8px 4px 8px; padding: 5px;display:none;" 
        id="resultDiv" dojoType="dijit.layout.ContentPane" region="none" >
   </div>   
