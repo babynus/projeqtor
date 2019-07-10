@@ -30,13 +30,12 @@
  */
 require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
-scriptLog('   ->/view/dataCloningList.php');
+scriptLog('   ->/view/dataCloningParameter.php');
 
 $user=getSessionUser();
 $userName=$user->id;
 ?>
-
-<div dojoType="dijit.layout.BorderContainer" id="dataCloningParameterTopDiv" name="dataCloningParameterTopDiv">
+<div class="container" dojoType="dijit.layout.BorderContainer" id="dataCloningParameterTopDiv" name="dataCloningParameterTopDiv">
   <div style="top:30px !important; left: 200px !important; width: 500px; margin: 0px 8px 4px 8px; padding: 5px;display:none;" 
        id="resultDiv" dojoType="dijit.layout.ContentPane" region="none" >
   </div>   

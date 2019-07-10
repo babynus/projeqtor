@@ -6820,11 +6820,11 @@ function loadMenuBarItem(item, itemName, from) {
   } else if (item == 'ImputationValidation') {
 	    loadContent("imputationValidationMain.php", "centerDiv");  
   } else if (item == 'AutoSendReport') {
-    loadContent("autoSendReportList.php", "centerDiv"); 
+    loadContent("autoSendReportMain.php", "centerDiv"); 
   } else if (item == 'DataCloning') {
-		loadContent("dataCloningList.php", "centerDiv");
+		loadContent("dataCloningMain.php", "centerDiv");
   } else if (item == 'DataCloningParameter') {
-		loadContent("dataCloningParameter.php", "centerDiv");
+		loadContent("dataCloningParameterMain.php", "centerDiv");
     //ADD qCazelles - GANTT
   } else if (item == 'VersionsPlanning') {
 	//CHANGE qCazelles - Correction GANTT - Ticket #100

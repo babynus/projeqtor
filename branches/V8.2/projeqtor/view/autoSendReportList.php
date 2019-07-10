@@ -51,8 +51,7 @@ $firstDay = date('Y-m-d', firstDayofWeek($currentWeek, $currentYear));
 $lastDay = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay)));
 //style="padding-left:10px;"
 ?>
-
-<div dojoType="dijit.layout.BorderContainer" id="autoSendReportParamDiv" name="autoSendReportParamDiv">
+<div class="container" dojoType="dijit.layout.BorderContainer" id="autoSendReportParamDiv" name="autoSendReportParamDiv">
   <div style="top:30px !important; left: 200px !important; width: 500px; margin: 0px 8px 4px 8px; padding: 5px;display:none;" 
        id="autoSendReportResultDiv" dojoType="dijit.layout.ContentPane" region="none" >
   </div>   
