@@ -98,7 +98,16 @@ if($dataCloning->getVersionCodeList()){
                    include '../tool/drawResourceListForSpecificAccess.php';?>  
               </select>
            </td>
-           
+           <td>
+              <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
+                style="width: 150px;"
+                name="oui" id="oui"
+                <?php echo autoOpenFilteringSelect();?>
+                value="">
+                  <option value=""></option>
+                  <?php htmlDrawOptionForReference('idaccessScopeSpecific',4,null,true);?>  
+              </select>
+           </td>
            <td nowrap="nowrap" style="text-align: right;padding-left:10px;padding-right:5px;"><?php echo i18n("colVersion");?></td>
            <td>
               <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 

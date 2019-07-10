@@ -173,66 +173,57 @@ class DataCloning extends SqlElement{
 	}
 	
 	public static function drawDataCloningParameter(){
-	  $result = '';
 	  $columnList=SqlList::getList('profile');
-	  $result .= '<br/><div style="width:98%; overflow-x:auto;  overflow-y:hidden;">';
-  	$result .= '<table class="crossTable" >';
+	  echo '<br/><div style="width:100%;">';
+  	echo '<table class="crossTable" >';
   	// Draw Header
-  	$result .= '<tr><td>&nbsp;</td>';
+  	echo '<tr><td>&nbsp;</td>';
   	foreach ($columnList as $col) {
-  		$result .= '<td class="tabLabel">' . $col . '</td>';
+  		echo '<td class="tabLabel">' . $col . '</td>';
   	}
-  	$result .= '</tr>';
-  	$result .= '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningCreationRequest').'</label></td>';
+  	echo '</tr>';
+  	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningAccess').'</label></td>';
   	foreach ($columnList as $colId => $colName) {
-  		$result .= '<td class="crossTablePivot">';
-  		$result .= '<select dojoType="dijit.form.FilteringSelect" class="input" ';
-  		$result .= autoOpenFilteringSelect();
-  		$result .= ' style="width: 100px; font-size: 80%;"';
-  		$result .= ' >';
-  		//htmlDrawOptionForReference('id' . $formatList, $val, null, true);
-  		$result .= '</select>';
-  		$result .= '</td>';
+  		echo '<td class="crossTablePivot">';
+  		echo '<select dojoType="dijit.form.FilteringSelect" class="input" ';
+  		echo autoOpenFilteringSelect();
+  		echo ' style="width: 100px; font-size: 80%;"';
+  		echo ' id="dataCloningAccess'.$colId.'" name="dataCloningAccess'.$colId.'" ';
+  		echo ' >';
+  		echo htmlDrawOptionForReference('idaccessScopeSpecific',4,null,true);
+  		echo '</select>';
+  		echo '</td>';
   	}
-  	$result .= '</tr>';
-  	$result .= '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningAccess').'</label></td>';
+  	echo '</tr>';
+  	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningCreationRequest').'</label></td>';
   	foreach ($columnList as $colId => $colName) {
-  		$result .= '<td class="crossTablePivot">';
-  		$result .= '<select dojoType="dijit.form.FilteringSelect" class="input" ';
-  		$result .= autoOpenFilteringSelect();
-  		$result .= ' style="width: 100px; font-size: 80%;"';
-  		$result .= ' >';
-  		//htmlDrawOptionForReference('id' . $formatList, $val, null, true);
-  		$result .= '</select>';
-  		$result .= '</td>';
+  		echo '<td class="crossTablePivot">';
+  		echo '<select dojoType="dijit.form.FilteringSelect" class="input" ';
+  		echo autoOpenFilteringSelect();
+  		echo ' style="width: 100px; font-size: 80%;"';
+  		echo ' id="dataCloningCreationRequest'.$colId.'" name="dataCloningCreationRequest'.$colId.'"';
+  		echo ' >';
+  		echo '<option value="immediate">'.i18n('immediate').'</option>';
+  		    echo '<option value="specificDate">'.i18n('specificDate').'</option>';
+  		echo '</select>';
+  		echo '</td>';
   	}
-  	$result .= '</tr>';
-  	$result .= '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningTotal').'</label></td>';
+  	echo '</tr>';
+  	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningTotal').'</label></td>';
   	foreach ($columnList as $colId => $colName) {
-  		$result .= '<td class="crossTablePivot">';
-  		$result .= '<select dojoType="dijit.form.FilteringSelect" class="input" ';
-  		$result .= autoOpenFilteringSelect();
-  		$result .= ' style="width: 100px; font-size: 80%;"';
-  		$result .= ' >';
-  		//htmlDrawOptionForReference('id' . $formatList, $val, null, true);
-  		$result .= '</select>';
-  		$result .= '</td>';
+  		echo '<td class="crossTablePivot">';
+  		echo '<input dojoType="dijit.form.TextBox" id="dataCloningTotal'.$colId.'" name="dataCloningTotal'.$colId.'" type="number" class="input" style="width: 100px;" value="100" />';
+  		echo '</td>';
   	}
-  	$result .= '</tr>';
-  	$result .= '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningDay').'</label></td>';
+  	echo '</tr>';
+  	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningPerDay').'</label></td>';
   	foreach ($columnList as $colId => $colName) {
-  		$result .= '<td class="crossTablePivot">';
-  		$result .= '<select dojoType="dijit.form.FilteringSelect" class="input" ';
-  		$result .= autoOpenFilteringSelect();
-  		$result .= ' style="width: 100px; font-size: 80%;"';
-  		$result .= ' >';
-  		//htmlDrawOptionForReference('id' . $formatList, $val, null, true);
-  		$result .= '</select>';
-  		$result .= '</td>';
+  		echo '<td class="crossTablePivot">';
+  		echo '<input dojoType="dijit.form.TextBox" id="dataCloningPerDay'.$colId.'" name="dataCloningPerDay'.$colId.'" type="number" class="input" style="width: 100px;" value="10" />';
+  		echo '</td>';
   	}
-  	$result .= '</tr>';
-  	$result .= '</table></div>';
-	  echo $result;
+  	echo '</tr>';
+  	echo '</table></div>';
 	}
 }
 ?>

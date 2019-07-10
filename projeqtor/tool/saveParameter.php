@@ -396,7 +396,9 @@ if ($type=='habilitation') {
   }
 // MTY - LEAVE SYSTEM    
   Parameter::clearGlobalParameters();// force refresh 
-} else {
+}else if($type=='dataCloning'){
+  debugLog($_REQUEST);
+}else {
    $errors="Save not implemented";
    $status='WARNING';
 }
