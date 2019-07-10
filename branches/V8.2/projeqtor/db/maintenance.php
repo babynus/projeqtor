@@ -827,12 +827,16 @@ if (beforeVersion($currVersion,"V8.2.0")) {
     $MessageLegal = new MessageLegal();
     if(substr(Parameter::getGlobalParameter('paramDefaultLocale'),0,6)=='fr'){
       $MessageLegal->name = "Message par défaut";
-      $MessageLegal->description = 'Test de Maintenance';
+      $MessageLegal->description = "Les données personnelles que nous collectons sur vous sont votre nom, adresse email et le travail. 
+                                    Nous les stockons uniquement dans le cadre de connexion ,d'usage de l'application et de la gestion des projets. 
+                                    Ses données peuvent être supprimées, mises à jour par l'administrateur, veuillez le contacter si besoin.";
     }else{
       $MessageLegal->name = "Default message";
-      $MessageLegal->description = "This is a test";
+      $MessageLegal->description = "The personal data we collect on you is your name, email address and work.
+                                    We store them only as part of connection, application usage and project management.
+                                    It can be deleted, updated by the administrator, please contact if necessary";
     }
-    $MessageLegal->endDate='2010-10-04 00:00:00';
+    $MessageLegal->endDate='2010-01-01 00:00:00';
     $MessageLegal->save();
     debugLog($MessageLegal);
     Sql::commitTransaction();
