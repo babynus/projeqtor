@@ -356,12 +356,12 @@ class Consistency {
     $query="SELECT pe.refType as reftype, pe.refId as refid, pe.realWork as realwork, pe.leftWork as leftwork, pe.plannedWork as plannedwork,"
           ."  coalesce((select sum(work) from $workTable w where w.refType=pe.refType and w.refId=pe.refId),0)"
           ."+coalesce((select sum(pesum.realWork) from $peTable pesum where pesum.topId=pe.id),0)"
-          ."+coalesce((select sum(coalesce(wesum.realWork)) from $weTable wesum where pe.refType='Project' and wesum.idProject=pe.refId and wesum.idActivity is null),0)"
+          ."+coalesce((select sum(coalesce(wesum.realWork,0)) from $weTable wesum where pe.refType='Project' and wesum.idProject=pe.refId and wesum.idActivity is null),0)"
           ." as sumwork "
           ."FROM $peTable pe "
           ."WHERE pe.isManualProgress=0 and ( (pe.realWork+pe.leftWork)!=pe.plannedWork or pe.realwork!="
            ."coalesce((select sum(work) from $workTable w where w.refType=pe.refType and w.refId=pe.refId),0)"
-           ."+coalesce((select sum(pesum.realWork) from $peTable pesum where pesum.topId=pe.id),0) "
+           ."+coalesce((select sum(pesum.realWork) from $peTable pesum where pesum.topId=pe.id),0)"
            ."+coalesce((select sum(coalesce(wesum.realWork,0)) from $weTable wesum where pe.refType='Project' and wesum.idProject=pe.refId and wesum.idActivity is null),0)"
            ." )";
     $result=Sql::query($query);
@@ -371,14 +371,29 @@ class Consistency {
       $realWork=$line['realwork'];
       $leftWork=$line['leftwork'];
       $plannedWork=$line['plannedwork'];
-      $sumWork=$line['sumwork'];
-      
+      $sumWork=$line['sumwork'];      
       if(!$sumWork){
         $sumWork = 0;
       }
-      if (Work::displayWorkWithUnit($realWork)==Work::displayWorkWithUnit($sumWork) and Work::displayWorkWithUnit($realWork+$leftWork)==Work::displayWorkWithUnit($plannedWork)) continue; // It is just a rounding issue
-      if (round($realWork,2)!=round($sumWork,2)) displayError(i18n("checkIncorrectWork",array(i18n($refType),$refId,Work::displayWorkWithUnit($realWork),Work::displayWorkWithUnit($sumWork))));
-      if (round($realWork+$leftWork,2)!=round($plannedWork,2)) displayError(i18n("checkIncorrectSumWork",array(i18n($refType),$refId,Work::displayWorkWithUnit($realWork),Work::displayWorkWithUnit($leftWork),Work::displayWorkWithUnit($plannedWork))));
+      if (Work::displayWorkWithUnit($realWork)==Work::displayWorkWithUnit($sumWork) and Work::displayWorkWithUnit($realWork+$leftWork)==Work::displayWorkWithUnit($plannedWork)) {
+        continue; // It is just a rounding issue
+      } else if (abs($realWork+$leftWork-$plannedWork)<0.01) {
+        continue; // It is just a rounding issue
+      }
+      $errorDisplayed=false;
+      if (round($realWork,2)!=round($sumWork,2)) {
+        displayError(i18n("checkIncorrectWork",array(i18n($refType),$refId,Work::displayWorkWithUnit($realWork),Work::displayWorkWithUnit($sumWork))));
+        $errorDisplayed=true;
+      }
+      if (round($realWork+$leftWork,2)!=round($plannedWork,2)) {
+        displayError(i18n("checkIncorrectSumWork",array(i18n($refType),$refId,Work::displayWorkWithUnit($realWork),Work::displayWorkWithUnit($leftWork),Work::displayWorkWithUnit($plannedWork))));
+        $errorDisplayed=true;
+      }
+      if (!$errorDisplayed) {
+        $msg=(substr(i18n("checkUnknownError"),0,1)=='[')?"Unknown error for $refType #$refId":i18n("checkUnknownError",array(i18n($refType),$refId));
+        displayError($msg);
+        traceLog($msg. " at Consistency::checkWorkOnActivity() | realWork=$realWork | leftWork=$leftWork | plannedWork=$plannedWork | sumWork=$sumWork");
+      }
       $errors++;
       if ($correct) {
         $res=PlanningElement::updateSynthesis($refType,$refId);
