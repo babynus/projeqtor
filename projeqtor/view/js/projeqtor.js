@@ -4606,11 +4606,15 @@ function showHideMoveButtons() {
   left = parseInt(bar.style.left.substr(0, bar.style.left.length - 2), 10);
   width = parseInt(bar.style.width.substr(0, bar.style.width.length - 2), 10);
   dojo.byId('menuBarMoveLeft').style.display = (left == 0) ? 'none' : 'block';
-  var visibleWidthRight = dojo.byId('menuBarRight').getBoundingClientRect().left;
-  var visibleWidthLeft = dojo.byId('menuBarLeft').getBoundingClientRect().right;
-  var visibleWidth = visibleWidthRight - visibleWidthLeft;
-  dojo.byId('menuBarMoveRight').style.display = (visibleWidth - left > width) ? 'none'
-      : 'block';
+  if (dojo.byId('menuBarRight') && dojo.byId('menuBarLeft')) {
+    var visibleWidthRight = dojo.byId('menuBarRight').getBoundingClientRect().left;
+    var visibleWidthLeft = dojo.byId('menuBarLeft').getBoundingClientRect().right;
+    var visibleWidth = visibleWidthRight - visibleWidthLeft;
+    dojo.byId('menuBarMoveRight').style.display = (visibleWidth - left > width) ? 'none'
+        : 'block';
+  } else if (dojo.byId('menuBarMoveRight')){
+    dojo.byId('menuBarMoveRight').style.display='none';
+  }
 }
 
 function getExtraRequiredFields() {
