@@ -397,7 +397,31 @@ if ($type=='habilitation') {
 // MTY - LEAVE SYSTEM    
   Parameter::clearGlobalParameters();// force refresh 
 }else if($type=='dataCloning'){
-  debugLog($_REQUEST);
+  //debugLog($_REQUEST);
+  $profileList=SqlList::getList('profile');
+  foreach ($profileList as $idProfile=>$name){
+    $idAccess = RequestHandler::getValue('dataCloningRight'.$idProfile);
+    $habilitationOther=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array("scope"=>"dataCloningRight", "idProfile"=>$idProfile));
+    $habilitationOther->rightAccess = ($idAccess)?$idAccess:0;
+    $result=$habilitationOther->save();
+    $isSaveOK=strpos($result, 'id="lastOperationStatus" value="OK"');
+    $isSaveNO_CHANGE=strpos($result, 'id="lastOperationStatus" value="NO_CHANGE"');
+    if ($isSaveNO_CHANGE===false) {
+    	if ($isSaveOK===false) {
+    		$status="ERROR";
+    		$errors=$result;
+    	} else if ($status=="NO_CHANGE") {
+    		$status="OK";
+    	}
+    }
+    
+    $creaRequest = RequestHandler::getValue('dataCloningCreationRequest'.$idProfile);
+    debugLog('CreaRequest='.$creaRequest);
+    $creaTotal = RequestHandler::getValue('dataCloningTotal'.$idProfile);
+    debugLog('creaTotal='.$creaTotal);
+    $creaPerDay = RequestHandler::getValue('dataCloningPerDay'.$idProfile);
+    debugLog('creaPerDay='.$creaPerDay);
+  }
 }else {
    $errors="Save not implemented";
    $status='WARNING';
