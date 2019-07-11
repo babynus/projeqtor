@@ -175,6 +175,10 @@ class DataCloning extends SqlElement{
 	public static function drawDataCloningParameter(){
 	  $columnList=SqlList::getList('profile');
 	  echo '<br/><div style="width:100%;">';
+	  echo '<div id="CrossTable_DataCloning_Right" dojoType="dijit.TitlePane"';
+	  echo ' title="' .i18n('dataCloningRight') . '"';
+	  echo ' style="width:100%; overflow-x:auto;  overflow-y:hidden;"';
+	  echo '><br/>';
   	echo '<table class="crossTable" >';
   	// Draw Header
   	echo '<tr><td>&nbsp;</td>';
@@ -185,12 +189,22 @@ class DataCloning extends SqlElement{
   	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningAccess').'</label></td>';
   	foreach ($columnList as $colId => $colName) {
   		echo '<td class="crossTablePivot">';
+  		$checked = '';
+  		echo '<input dojoType="dijit.form.CheckBox" type="checkbox" '.$checked.' id="dataCloningAccess'.$colId.'" name="dataCloningAccess'.$colId.'"/>';
+  		echo '</td>';
+  	}
+  	echo '</tr>';
+  	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningRight').'</label></td>';
+  	foreach ($columnList as $colId => $colName) {
+  		echo '<td class="crossTablePivot">';
   		echo '<select dojoType="dijit.form.FilteringSelect" class="input" ';
   		echo autoOpenFilteringSelect();
   		echo ' style="width: 100px; font-size: 80%;"';
-  		echo ' id="dataCloningAccess'.$colId.'" name="dataCloningAccess'.$colId.'" ';
+  		echo ' id="dataCloningRight'.$colId.'" name="dataCloningRight'.$colId.'" ';
   		echo ' >';
-  		echo htmlDrawOptionForReference('idaccessScopeSpecific',4,null,true);
+  		$crit = array("scope"=>"dataCloning", "idProfile"=>$colId);
+  		$right=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', $crit);
+  		echo htmlDrawOptionForReference('idaccessScopeSpecific',$right->rightAccess,null,true);
   		echo '</select>';
   		echo '</td>';
   	}
@@ -203,27 +217,28 @@ class DataCloning extends SqlElement{
   		echo ' style="width: 100px; font-size: 80%;"';
   		echo ' id="dataCloningCreationRequest'.$colId.'" name="dataCloningCreationRequest'.$colId.'"';
   		echo ' >';
-  		echo '<option value="immediate">'.i18n('immediate').'</option>';
-  		    echo '<option value="specificDate">'.i18n('specificDate').'</option>';
+  		echo '<option value="1">'.i18n('immediate').'</option>';
+  		    echo '<option value="2">'.i18n('specificDate').'</option>';
   		echo '</select>';
   		echo '</td>';
   	}
-  	echo '</tr>';
+  	echo '</tr></table><br/>';
+  	echo '<div id="CrossTable_DataCloning_GlobalParmeter" dojoType="dijit.TitlePane"';
+  	echo ' title="' .i18n('globalParameter') . '"';
+  	echo ' style="width:100%; overflow-x:auto;  overflow-y:hidden;"';
+  	echo '>';
+  	echo '<table class="crossTable" >';
   	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningTotal').'</label></td>';
-  	foreach ($columnList as $colId => $colName) {
   		echo '<td class="crossTablePivot">';
-  		echo '<input dojoType="dijit.form.TextBox" id="dataCloningTotal'.$colId.'" name="dataCloningTotal'.$colId.'" type="number" class="input" style="width: 100px;" value="100" />';
+  		echo '<input dojoType="dijit.form.TextBox" id="dataCloningTotal" name="dataCloningTotal" type="number" class="input" style="width: 100px;" value="50" />';
   		echo '</td>';
-  	}
   	echo '</tr>';
   	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningPerDay').'</label></td>';
-  	foreach ($columnList as $colId => $colName) {
   		echo '<td class="crossTablePivot">';
-  		echo '<input dojoType="dijit.form.TextBox" id="dataCloningPerDay'.$colId.'" name="dataCloningPerDay'.$colId.'" type="number" class="input" style="width: 100px;" value="10" />';
+  		echo '<input dojoType="dijit.form.TextBox" id="dataCloningPerDay" name="dataCloningPerDay" type="number" class="input" style="width: 100px;" value="5" />';
   		echo '</td>';
-  	}
-  	echo '</tr>';
-  	echo '</table></div>';
+  	echo '</tr></table>';
+  	echo '</div></div>';
 	}
 }
 ?>
