@@ -139,7 +139,7 @@ class TodayParameter extends SqlElement {
       } else if ($param->paramType=='resourceList') {
         $defaultValue='';
         if ($param->defaultValue=='currentResource') {
-          if (Project::isSelectedProject) {
+          if (Project::isSelectedProject()) {
             $user=getSessionUser();
             $defaultValue=$user->id;
           }
