@@ -407,11 +407,11 @@ class CommandMain extends SqlElement {
     if (count($this->_BillLine)) {
       self::$_fieldsAttributes['untaxedAmount']='readonly';
       self::$_fieldsAttributes['fullAmount']='readonly';
-      self::$_fieldsAttributes['addUntaxedAmount']='readonly';
-      self::$_fieldsAttributes['addFullAmount']='readonly';
+      //self::$_fieldsAttributes['addUntaxedAmount']='readonly';
+      //self::$_fieldsAttributes['addFullAmount']='readonly';
       self::$_fieldsAttributes['totalUntaxedAmount']='readonly';
       self::$_fieldsAttributes['initialWork']='readonly';
-      self::$_fieldsAttributes['addWork']='readonly';
+      //self::$_fieldsAttributes['addWork']='readonly';
     }
     $paramImputOfAmountClient = Parameter::getGlobalParameter('ImputOfAmountClient');
     if($paramImputOfAmountClient == 'HT'){
