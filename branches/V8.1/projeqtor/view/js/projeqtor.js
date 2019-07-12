@@ -3464,7 +3464,6 @@ function refreshTodayProjectsList(value) {
 }
 
 function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target) {
-  console.log("gotoElement("+eltClass+", "+eltId+")");
   if (checkFormChangeInProgress()) {
     return false;
   }
