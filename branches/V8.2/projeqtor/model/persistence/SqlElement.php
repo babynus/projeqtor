@@ -2653,12 +2653,18 @@ abstract class SqlElement {
     $result = Sql::query ( $query );
     if (Sql::$lastQueryNbRows > 0) {
       $line = Sql::fetchLine ( $result );
-      if ($grouped)
-        return $result;
-      else if (is_array ( $field ))
+      if ($grouped) {
+        $res=array();
+        while ($line) {
+          $res[]=$line;
+          $line = Sql::fetchLine ( $result );
+        }
+        return $res;
+      } else if (is_array ( $field )) {
         return $line;
-      else
+      } else {
         return $line ["sum" . strtolower ( $field )];
+      }
     }
     return null;
   }
