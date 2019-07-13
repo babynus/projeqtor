@@ -2615,7 +2615,7 @@ abstract class SqlElement {
     }
     return null;
   }
-  public function sumSqlElementsFromCriteria($field, $critArray, $clauseWhere = null) {
+  public function sumSqlElementsFromCriteria($field, $critArray, $clauseWhere = null, $grouped=null) {
     // Build where clause from criteria
     $fields = array();
     if (is_array ( $field )) {
@@ -2649,11 +2649,13 @@ abstract class SqlElement {
       $selectFields .= " sum($fldName) as sum" . strtolower ( $fld );
     }
     
-    $query = "select " . $selectFields . ' from ' . $this->getDatabaseTableName () . $whereClause;
+    $query = "select " . $selectFields . (($grouped)?','.$grouped:'').' from ' . $this->getDatabaseTableName () . $whereClause.(($grouped)?' group by '.$grouped:'');
     $result = Sql::query ( $query );
     if (Sql::$lastQueryNbRows > 0) {
       $line = Sql::fetchLine ( $result );
-      if (is_array ( $field ))
+      if ($grouped)
+        return $result;
+      else if (is_array ( $field ))
         return $line;
       else
         return $line ["sum" . strtolower ( $field )];
