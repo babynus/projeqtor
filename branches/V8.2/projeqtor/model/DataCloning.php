@@ -73,6 +73,45 @@ class DataCloning extends SqlElement{
 	    return false;
 	  }
 	}
+	
+	public function calculNextTime(){
+		$UTC=new DateTimeZone(Parameter::getGlobalParameter ( 'paramDefaultTimezone' ));
+		$date=new DateTime('now');
+		$date->modify('+1 minute');
+		$cron = Parameter::getGlobalParameter('dataCloningCreationRequest');
+		if(!$cron){
+			$splitCron=explode(" ",$this->cron);
+		}else{
+			$splitCron=explode(" ",$cron);
+		}
+		$count=0;
+		if(count($splitCron)==5){
+			$find=false;
+			while(!$find){ //cron minute/hour/dayOfMonth/month/dayOfWeek
+				if(($splitCron[0]=='*' || $date->format("i")==$splitCron[0])
+				&& ($splitCron[1]=='*' || $date->format("H")==$splitCron[1])
+				&& ($splitCron[2]=='*' || $date->format("d")==$splitCron[2])
+				&& ($splitCron[3]=='*' || $date->format("m")==$splitCron[3])
+				&& ($splitCron[4]=='*' || $date->format("N")==$splitCron[4])){
+					$find=true;
+					$date->setTime($date->format("H"), $date->format("i"), 0);
+					$this->plannedDate=$date->format("U");
+					$this->save(false);
+				}else{
+					$date->modify('+1 minute');
+				}
+				$count++;
+				if($count>=2150000){
+					$this->idle=1;
+					$this->save(false);
+					$find=true;
+					errorLog("Can't find next time for cronAutoSendReport because too many execution #".$this->id);
+				}
+			}
+		}else{
+			errorLog("Can't find next time for cronAutoSendReport because too many execution #".$this->id);
+		}
+	}
 
 	public static function drawDataCloningList($idUser, $versionCode){
 		$noData = true;
@@ -96,7 +135,16 @@ class DataCloning extends SqlElement{
 		} else {
 			$listUser = getListForSpecificRights('imputation');
 		}
-		$dataCloningCount = $dataCloning->countSqlElementsFromCriteria(array("idResource"=>$user->id, "idle"=>"0"));
+		$wherePerDay = 'idResource = '.$user->id.' and `requestedDate` > "'.addDaysToDate(date('Y-m-d'), -1).'" and `requestedDate` < "'.addDaysToDate(date('Y-m-d'), 1).'" and `idle` = 0';
+		$dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
+		$dataCloningCountTotal = $dataCloning->countSqlElementsFromCriteria(array("idle"=>"0"));
+		$dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
+		$dataCloningTotal = Parameter::getGlobalParameter('dataCloningTotal');
+		if(($dataCloningPerDay-$dataCloningCountPerDay > 0) and ($dataCloningTotal-$dataCloningCountTotal > 0)){
+		  $hide = 'block';
+		}else{
+		  $hide = 'none';
+		}
 		$result = "";
 		$result .='<div id="dataCloningDiv" align="center" style="margin-top:20px;margin-bottom:20px; overflow-y:auto; width:100%;">';
 		$result .='  <table width="98%" style="margin-left:20px;margin-right:20px;border: 1px solid grey;">';
@@ -108,7 +156,7 @@ class DataCloning extends SqlElement{
 		$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:15%;text-align:center;vertical-align:center;">'.i18n('colPlannedDate').'</td>';
 		$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:15%;text-align:center;vertical-align:center;">'.i18n('colRequestedDeletedDate').'</td>';
 		$result .='     <td style="border: 1px solid grey;height:60px;width:20%;text-align:center;vertical-align:center;">';
-		$result .='     <a onClick="addDataCloning();" title="'.i18n('addDataCloning').'" >'.formatBigButton('Add').'</a></td>';
+		$result .='     <a onClick="addDataCloning();" title="'.i18n('addDataCloning').'" style="display:'.$hide.'">'.formatBigButton('Add').'</a></td>';
 		$result .='   </tr>';
 		foreach ($listUser as $id=>$name){
 		  $where ="idResource=".$id.$critWhere.";";
@@ -134,7 +182,7 @@ class DataCloning extends SqlElement{
 			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:center;vertical-align:center;'.$idleColor.'">'.$data->name.'</td>';
 			  $result .='<td style="border: 1px solid grey;height:40px;width:10%;text-align:center;vertical-align:center;'.$idleColor.'">'.$data->versionCode.'</td>';
 			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:center;vertical-align:center;font-style:italic;'.$idleColor.'">'.htmlFormatDateTime($data->requestedDate).'</td>';
-			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:center;vertical-align:center;font-style:italic;'.$idleColor.'">'.htmlFormatDateTime($data->plannedDate).'</td>';
+			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:center;vertical-align:center;font-style:italic;'.$idleColor.'">'.htmlFormatDateTime(date('Y-m-d H:i', $data->plannedDate)).'</td>';
 			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:center;vertical-align:center;font-style:italic;'.$idleColor.'">'.htmlFormatDateTime($data->requestedDeletedDate).'</td>';
 			  $result .='<td style="border: 1px solid grey;height:40px;width:20%;text-align:center;vertical-align:center;">';
 			  $background = '#a3d179';
@@ -174,9 +222,9 @@ class DataCloning extends SqlElement{
 	
 	public static function drawDataCloningParameter(){
 	  $columnList=SqlList::getList('profile');
-	  echo '<br/><div style="width:100%;">';
+	  echo '<div style="width:100%;">';
 	  echo '<div id="CrossTable_DataCloning_Right" dojoType="dijit.TitlePane"';
-	  echo ' title="' .i18n('dataCloningRight') . '"';
+	  echo ' title="' .i18n('dataCloningProfileRight') . '"';
 	  echo ' style="width:100%; overflow-x:auto;  overflow-y:hidden;"';
 	  echo '><br/>';
   	echo '<table class="crossTable" >';
@@ -186,15 +234,17 @@ class DataCloning extends SqlElement{
   		echo '<td class="tabLabel">' . $col . '</td>';
   	}
   	echo '</tr>';
-  	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningAccess').'</label></td>';
+  	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningAccess').' : </label></td>';
   	foreach ($columnList as $colId => $colName) {
   		echo '<td class="crossTablePivot">';
-  		$checked = '';
+  		$crit = array("idProfile"=>$colId, "idMenu"=>"222");
+  		$checked = SqlElement::getSingleSqlElementFromCriteria('Habilitation', $crit);
+  		$checked = ($checked->allowAccess)?'checked':'';
   		echo '<input dojoType="dijit.form.CheckBox" type="checkbox" '.$checked.' id="dataCloningAccess'.$colId.'" name="dataCloningAccess'.$colId.'"/>';
   		echo '</td>';
   	}
   	echo '</tr>';
-  	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningRight').'</label></td>';
+  	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningRight').' : </label></td>';
   	foreach ($columnList as $colId => $colName) {
   		echo '<td class="crossTablePivot">';
   		echo '<select dojoType="dijit.form.FilteringSelect" class="input" ';
@@ -202,40 +252,53 @@ class DataCloning extends SqlElement{
   		echo ' style="width: 100px; font-size: 80%;"';
   		echo ' id="dataCloningRight'.$colId.'" name="dataCloningRight'.$colId.'" ';
   		echo ' >';
-  		$crit = array("scope"=>"dataCloning", "idProfile"=>$colId);
+  		$crit = array("scope"=>"dataCloningRight", "idProfile"=>$colId);
   		$right=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', $crit);
   		echo htmlDrawOptionForReference('idaccessScopeSpecific',$right->rightAccess,null,true);
   		echo '</select>';
   		echo '</td>';
   	}
   	echo '</tr>';
-  	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningCreationRequest').'</label></td>';
-  	foreach ($columnList as $colId => $colName) {
-  		echo '<td class="crossTablePivot">';
-  		echo '<select dojoType="dijit.form.FilteringSelect" class="input" ';
-  		echo autoOpenFilteringSelect();
-  		echo ' style="width: 100px; font-size: 80%;"';
-  		echo ' id="dataCloningCreationRequest'.$colId.'" name="dataCloningCreationRequest'.$colId.'"';
-  		echo ' >';
-  		echo '<option value="1">'.i18n('immediate').'</option>';
-  		    echo '<option value="2">'.i18n('specificDate').'</option>';
-  		echo '</select>';
-  		echo '</td>';
-  	}
-  	echo '</tr></table><br/>';
+  	echo '</table></div><br/>';
   	echo '<div id="CrossTable_DataCloning_GlobalParmeter" dojoType="dijit.TitlePane"';
-  	echo ' title="' .i18n('globalParameter') . '"';
+  	echo ' title="' .i18n('menuGlobalParameter') . '"';
   	echo ' style="width:100%; overflow-x:auto;  overflow-y:hidden;"';
   	echo '>';
   	echo '<table class="crossTable" >';
-  	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningTotal').'</label></td>';
+  	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningCreationRequest').' : </label></td>';
+  	echo '<td class="crossTablePivot">';
+  	echo '<select dojoType="dijit.form.FilteringSelect" class="input" ';
+  	echo autoOpenFilteringSelect();
+  	echo ' style="width: 100px; font-size: 80%;"';
+  	echo ' id="dataCloningCreationRequest" name="dataCloningCreationRequest"';
+  	echo ' onChange="showSpecificHours();">';
+  	$request=SqlElement::getSingleSqlElementFromCriteria('Parameter', array("parameterCode"=>"dataCloningCreationRequest"));
+  	$request=$request->parameterValue;
+  	$selectImmediate = ($request=='* * * * *')?'selected':'';
+  	$selectSpecificHours = ($request !='* * * * *')?'selected':'';
+  	echo '<option value="immediate" '.$selectImmediate.'>'.i18n('dataCloningImmediate').'</option>';
+  	echo '<option value="specificHours" '.$selectSpecificHours.'>'.i18n('dataCloningSpecificHours').'</option>';
+  	echo '</select></td>';
+  	echo '<td>';
+  	$display = ($request !='* * * * *')?'block':'none';
+  	echo '<div dojoType="dijit.form.TimeTextBox" name="dataCloningSpecificHours" id="dataCloningSpecificHours"
+                    invalidMessage="'.i18n('messageInvalidTime').'" 
+                    type="text" maxlength="5" style="margin-left:20px;width:40px; text-align: center;display:'.$display.';" class="input rounded"
+                    value="T'.date('H:i').'" hasDownArrow="false">';
+    echo '</div>';
+  	echo '</td></tr>';
+  	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningTotal').' : </label></td>';
   		echo '<td class="crossTablePivot">';
-  		echo '<input dojoType="dijit.form.TextBox" id="dataCloningTotal" name="dataCloningTotal" type="number" class="input" style="width: 100px;" value="50" />';
+  		$paramCreaTotal=SqlElement::getSingleSqlElementFromCriteria('Parameter', array("parameterCode"=>"dataCloningTotal"));
+  		$creaTotal=$paramCreaTotal->parameterValue;
+  		echo '<input dojoType="dijit.form.TextBox" id="dataCloningTotal" name="dataCloningTotal" type="number" class="input" style="width: 100px;" value="'.$creaTotal.'" />';
   		echo '</td>';
   	echo '</tr>';
-  	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningPerDay').'</label></td>';
+  	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningPerDay').' : </label></td>';
   		echo '<td class="crossTablePivot">';
-  		echo '<input dojoType="dijit.form.TextBox" id="dataCloningPerDay" name="dataCloningPerDay" type="number" class="input" style="width: 100px;" value="5" />';
+  		$paramPerDay=SqlElement::getSingleSqlElementFromCriteria('Parameter', array("parameterCode"=>"dataCloningPerDay"));
+  		$creaPerDay=$paramPerDay->parameterValue;
+  		echo '<input dojoType="dijit.form.TextBox" id="dataCloningPerDay" name="dataCloningPerDay" type="number" class="input" style="width: 100px;" value="'.$creaPerDay.'" />';
   		echo '</td>';
   	echo '</tr></table>';
   	echo '</div></div>';

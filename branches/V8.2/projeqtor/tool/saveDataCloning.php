@@ -63,6 +63,7 @@ if($idDataCloning){
   $dataCloning->idResource = $user;
   $dataCloning->requestedDate = $requestedDate;
   $dataCloning->name = $name;
+  $dataCloning->calculNextTime();
   $result=$dataCloning->save();
 }
 displayLastOperationStatus($result);
