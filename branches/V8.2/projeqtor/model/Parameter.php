@@ -170,7 +170,29 @@ class Parameter extends SqlElement {
       $colScript .= '    dojo.removeClass(dijit.byId("SAML_attributeUid").domNode, "required");';
       $colScript .= '  } ';
       $colScript .= '</script>';
-    } else {
+      //Florent 
+    } else if($colName=='paramAttachmentMaxSize'){
+      $colScript .='<script type="dojo/connect" event="onChange">';
+      $colScript .='var newValue=(this.value).trim();';
+      $colScript .='if (newValue !=""){';
+      $colScript .='var val=newValue.split("");';
+      $colScript .='var lettre="";';
+      $colScript .='var valLettre="0";';
+      $colScript .='  val.forEach(function(element){';
+      $colScript .='    if (isNaN(element)==true){';
+      $colScript .='      lettre=lettre+element.toUpperCase();';
+      $colScript .='    }';
+      $colScript .='  });';
+      $colScript .='  if(lettre.length==1 && (lettre=="K" || lettre=="M" || lettre=="G" || lettre=="T")){';
+      $colScript .='    valLettre=lettre;';
+      $colScript .='  }else if(lettre==""){';
+       $colScript .='   valLettre="1";';
+      $colScript .='  }else {newValue ="0"; }';
+      $colScript .='dojo.byId("paramAttachmentNum").value=lettre;';
+      $colScript .='dojo.byId("paramAttachmentMaxSize").value=newValue.toUpperCase();';
+      $colScript .='}';
+      $colScript .='</script>';
+    }else {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  newValue=this.value;';
       $colScript .= ' saveDataToSession(\''.$colName.'\', newValue);';
@@ -1052,7 +1074,8 @@ class Parameter extends SqlElement {
           	            'tabSystem'=>"tab",
           	              'newColumnbSystemLeft'=>'newColumn',
             	              'sectionFiles'=>'section',
-            	                'paramAttachmentMaxSize'=>'longnumber',
+            	                'paramAttachmentMaxSize'=>'text',
+            	                'paramAttachmentNum'=>'text',
       	                      'paramAttachmentDirectory'=>'text',
       	                      'paramReportTempDirectory'=>'text',
       	                      'documentRoot'=>'text',    
@@ -1961,6 +1984,46 @@ static public function getTimezoneList() {
    }
    if ($this->parameterCode=="SslCa" and trim($this->parameterValue)!="" and !file_exists($this->parameterValue)) {
        $result.='<br/>' . i18n('msgNotaFile',array(i18n("paramSslCa"),$this->parameterValue));
+   }
+   if($this->parameterCode=="paramAttachmentMaxSize" and $this->parameterValue != "" ){
+     $newVal=$this->parameterValue;
+     $newValTab=str_split($newVal);
+     $lettre="";
+     $chiffre=null;
+     $valLettre=1;
+      for($i=0;$i<count($newValTab);$i++){
+        if(is_numeric($newValTab[$i])==true){
+          $chiffre=$chiffre.$newValTab[$i];
+        }else{
+          $lettre=$lettre.$newValTab[$i];
+        }
+      }
+      if(strlen($lettre)==1){
+          switch (strtoupper($lettre)) {
+         	 case "K":
+         	    $valLettre=1024;
+         	  break;
+             case "M":
+         	    $valLettre=1024*1024;
+         	  break;
+         	 case "G":
+         	   $valLettre=1024*1024*1024;
+         	  break;
+         	 case "T":
+         	    $valLettre=1024*1024*1024*1024;
+         	  break;
+          }
+      }
+      $sumVal=$chiffre*$valLettre;
+      $this->parameterValue=$sumVal;
+   }
+   if($this->parameterCode=="paramAttachmentNum" ){
+     $lettreN=strtoupper($this->parameterValue);
+     if(strlen($this->parameterValue)==1 and ($lettreN=="K" or $lettreN=="M" or $lettreN=="G" or $lettreN=="T")){
+         $this->parameterValue=$lettreN;
+     }else{
+      $this->parameterValue="";
+     }
    }
    $defaultControl=parent::control();
    if ($defaultControl!='OK') {
