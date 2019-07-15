@@ -7,8 +7,8 @@
 .. _Organizations:
 
 Organizations
--------------
-
+*************
+   
 .. rubric:: Management of organizations
 
 * Management of organizations allows to edit the structure of the company in the frame of organizations (Departments, Units, Location, ...)
@@ -28,7 +28,7 @@ Depending on the profile, you can limit the visibility of resources to people in
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: titre
    :widths: 20, 80
    :header-rows: 1
 
@@ -48,3 +48,4 @@ Depending on the profile, you can limit the visibility of resources to people in
      - parent organization.
    * - Closed 
      - Box checked indicates the organization is archived.
+ 

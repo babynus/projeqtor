@@ -407,7 +407,9 @@ To use it define your start and delivery date in Product Version and Component V
    
 .. note::
 
- * To insert values you have to Actives 'display the start and delivery milestones' in  global parameters otherwise these fields are hidden.
+ * 
+
+    To insert values you have to activate display the start and delivery milestonesâ€™ in global parameters otherwise these fields are hidden.
 
 This screen allows to see if the delivery date of Component versions is more later than their Product versions. 
 

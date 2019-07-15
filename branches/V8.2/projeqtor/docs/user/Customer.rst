@@ -87,13 +87,22 @@ The customer defined here is not a person. Real persons into a customer entity a
 Contacts
 --------
 
+.. figure:: /images/GUI/CUSTOMER_SCR_Contacts.png
+   :alt: Contacts screen
+   :align: center
+   
+   
 .. sidebar:: Concepts 
 
    * :ref:`projeqtor-roles`
    * :ref:`profiles-definition`
    * :ref:`user-ress-contact-demystify`
    * :ref:`photo`
-
+   
+   **Other section**
+   
+   * :ref:`Allocations<allocation-section>`
+   
 A contact is a person in a business relationship with the company.
 
 The company keeps all information data to be able to contact him when needed.
@@ -103,42 +112,40 @@ A contact can be a person in the customer organization.
 A contact can be the contact person for contracts, sales and billing.
 
 
-.. sidebar:: Other sections
 
-   * :ref:`Allocations<allocation-section>`
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: |ReqFieldLegend| Required fields
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
-     - Unique Id for the contact.
+     - Unique Id for the contact
    * - Photo
-     - Photo of the contact.
-   * - **Real name**
-     - Name of the contact.
+     - Photo of the contact
+   * - |RequiredField| Real name
+     - Name of the contact
    * - User name
-     - Name of user.
+     - Name of user
    * - Initials
-     - Initials of the contact.
+     - Initials of the contact
    * - Email address
-     - Email address of the contact. 
+     - Email address of the contact.
    * - Profile
      - Profile of the user.
    * - Customer
-     - The customer the contact belongs to.
+     - The customer the contact belongs to
    * - Function
-     - Function of contact.
+     - Function of contact
    * - Phone
      - Phone number of the contact.
    * - Mobile
-     - Mobile phone number of the contact.
+     - Mobile phone number of the contact
    * - Fax
      - Fax number of the contact.
    * - Is a resource

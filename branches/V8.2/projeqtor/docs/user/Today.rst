@@ -89,19 +89,28 @@ Messages
 
  
  .. compound:: **Items to be displayed**
+ 
+ .. figure:: /images/GUI/TODAY_BOX_Parameters.png
+   :alt: Dialog box - Today parameters 
+   :align: center
 
     * Allows to define sections displayed on the screen.
     * Allows to reorder sections displayed with drag & drop feature.
     * Using the selector area button icon drag |buttonIconDrag|. 
 
-.. figure:: /images/GUI/TODAY_BOX_Parameters.png
-   :alt: Dialog box - Today parameters 
-   :align: center
+
+.. figure:: images/GUI/TODAY_BOX_Parameters_FALSE.png
+   :alt: You can not drag it here
+
+.. figure:: images/GUI
+   :alt: .. figure:: images/GUI/TODAY_BOX_Parameters_TRUE.png
+   :alt: You can drag it here
 
 .. note:: 
     * If you have added any reports to the Today page, they will appear in the list.
     * You can then hide or delete any added reports.
-
+    see : :ref:`Favorite Report<favorite_report>`
+    
 .. raw:: latex
 
     \newpage

@@ -23,7 +23,7 @@ Module Management
 | This screen is then accessible via a dedicated menu in the :ref:`Acces_Right<Module_Management>`
 
 
-.. figure:: /images/GUI/ACCESRIGHT_ManagementModule.png
+.. figure:: /images/GUI/ACCESSRIGHT_ManagementModule.png
 
 .. topic:: **columns descriptions**
 
@@ -63,7 +63,7 @@ The profile is an entitlement group, each with specific access rights to the dat
 
 So, each user is linked to a profile which defines the data they can see and possibly manage. 
 
-.. figure:: /images/GUI/ACCESRIGHT_SCR_Profiles.png 
+.. figure:: /images/GUI/ACCESSRIGHT_SCR_Profiles.png 
    :alt: Access to forms screen
    :align: center
 
@@ -75,13 +75,13 @@ So, each user is linked to a profile which defines the data they can see and pos
 when the new profile is created, it appears in the list of existing profiles in the list box.
 It remains between square brackets because it does not exist in :ref:`translatable-name`. 
 
-.. figure:: /images/GUI/ACCESRIGHT_ZONE_ProfilesDescription.png
+.. figure:: /images/GUI/ACCESSRIGHT_ZONE_ProfilesDescription.png
    :alt: Profile description
    :align: center
    
 .. topic:: New profile
 
-   .. figure:: /images/GUI/ACCESRIGHT_ZONE_NewProfil.png
+   .. figure:: /images/GUI/ACCESSRIGHT_ZONE_NewProfil.png
       :alt: New profil details zone
       :align: center
       
@@ -141,7 +141,7 @@ Each access is defined as scope of visible and/or updatable, that can be, by kin
 * **Elements of own project:** Only the elements of the projects the user/resource is allocated to.
 * **All elements on all projects:** All elements, whatever the project.
 
-.. figure:: /images/GUI/ACCESRIGHT_ZONE_AccessModeList.png 
+.. figure:: /images/GUI/ACCESSRIGHT_ZONE_AccessModeList.png 
    :alt: Access to forms screen
    :align: center 
 
@@ -200,7 +200,7 @@ Users belonging to one profile can see the corresponding screen if authorized or
 
 * Click on checkbox to permit or revoke access to the screen for a profile.
 
-.. figure:: /images/GUI/ACCESRIGHT_SCR_AccesTOforms.png
+.. figure:: /images/GUI/ACCESSRIGHT_SCR_AccesTOforms.png
    :alt: Access to forms scREEN
    :align: center
 
@@ -217,7 +217,7 @@ Reports are grouped by report categories
 
 * Click on checkbox to permit or revoke access to the report  for a profile.
 
-.. figure:: /images/GUI/ACCESRIGHT_ZONE_AccessToReports.png
+.. figure:: /images/GUI/ACCESSRIGHT_ZONE_AccessToReports.png
    :alt: Access to reports screen
    :align: center
 
@@ -234,7 +234,7 @@ This screen is only for the elements reliant on a project.
 
 * For each element, selected the access mode granted to a profile.
 
-.. figure:: /images/GUI/ACCESRIGHT_ZONE_AccessToDataProjectDependant.png
+.. figure:: /images/GUI/ACCESSRIGHT_ZONE_AccessToDataProjectDependant.png
    :alt: Access to data (Project dependant) screen
    :align: center
 
@@ -251,7 +251,7 @@ This screen is only for the elements not reliant on a project.
 
 * For each element, select the access rights granted to a profile.
 
-.. figure:: /images/GUI/ACCESRIGHT_ZONE_AccessToDataNotProjectDependant.png
+.. figure:: /images/GUI/ACCESSRIGHT_ZONE_AccessToDataNotProjectDependant.png
    :alt: Access to data (Not project dependant) screen
    :align: center
 
@@ -270,7 +270,7 @@ Depending on options of functionality, allows to grant access rights, to define 
 
 * For each option, select the access granted to a profile.
 
-.. figure:: /images/GUI/ACCESRIGHT_SCR_SpecificAccess.png 
+.. figure:: /images/GUI/ACCESSRIGHT_SCR_SpecificAccess.png 
    :alt: Specific access screen
    :align: center
 
