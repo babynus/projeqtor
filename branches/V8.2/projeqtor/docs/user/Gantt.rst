@@ -785,8 +785,10 @@ Export planning to PDF
 ======================
 
 Allows to export planning to PDF format.
+Export can be done horizontally (landscape) or vertically (portrait) in A4 and / or A3 format
+with great detail even with a zoom
 
-Export contains all details and links between tasks.
+Export contains all details and links between tasks and also include a pagination.
 
 .. figure:: /images/GUI/BOX_ExportPlanningPDF.png
    :alt: Dialog box - Export planning to PDF
