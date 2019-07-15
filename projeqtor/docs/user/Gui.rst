@@ -1,3 +1,4 @@
+
 .. include:: ImageReplacement.txt
 
 .. title:: Graphical User Interface
@@ -257,7 +258,7 @@ Logo area
 
    * To toggling between windows, just click on window header.  
 
-.. rubric:: 1 - Menu window
+.. rubric:: |one| Menu window
 
 * The menu is proposed as a tree view of reachable items. 
 * The items presented will depend on the access rights of user to the screens.
@@ -271,13 +272,14 @@ Logo area
    * This parameter defines the size of icons in the menu.
 
 
-.. rubric:: 2 - Documents window
+.. rubric:: |two| Documents window
 
 * Document directories give direct access to documents contained in the directory.
 
- .. compound:: **3 - Document directories**
+.. rubric:: |three| Document directories
 
-    * This icon |buttonIconDocDir| gives direct access to the :ref:`document-directory` screen.
+* This icon |buttonIconDocDir| gives direct access to the :ref:`document-directory` screen.
+
 
 .. raw:: latex
 
@@ -299,14 +301,14 @@ Logo area
 
    * To toggling between windows, just click on window header.   
 
-.. rubric:: 1 - External shortcuts window
+.. rubric:: |one| External shortcuts window
 
 * Display hyperlinks to remote web pages.
 * These links are defined as hyperlink attachments on projects.
 * Links displayed here depend on the selected project.
 
 
-.. rubric:: 2 - Console messages window
+.. rubric:: |two| Console messages window
 
 * Displays information about main actions: insert, update, delete. 
 * The timestamp indicates when the action was done.
@@ -315,7 +317,7 @@ Logo area
 
     * Messages displayed here are not stored and will be flushed when user logout.
 
-.. rubric:: 3 -  Shortcuts windows
+.. rubric:: |three| Shortcuts windows
 
 * [CTRL] +S = save the current element
 * [F1]= Opens the online manual (contextual opening on the current screen)
@@ -359,11 +361,6 @@ List window
  .. compound:: **Other filter fields**
   
     * Depending on the element, other filter fields will be available.
-
-
-.. raw:: latex
-
-    \newpage
 
 
 .. rubric:: |three| - Buttons 
@@ -614,8 +611,26 @@ This functionality allows to define columns displayed in the list  for this elem
     * The exceedance will be highlighted beside the buttons. |two|
     * This may lead to strange display, over page width, on list, reports and PDF export, depending on the browser.
 
+.. raw:: latex
 
+    \newpage
 
+.. _export-csv-format:
+
+Export to PDF format
+====================
+
+Allows to export data of list to PDF format.
+
+Export contains all details and links between tasks.
+
+.. figure:: /images/GUI/BOX_ExportPlanningPDF.png
+   :alt: Dialog box - Export planning to PDF
+   :align: center
+
+   Export planning to PDF
+
+export can be done horizontally (landscape) or vertically (portrait) in A4 and / or A3 format with high quality of details
 
 .. raw:: latex
 
@@ -825,7 +840,7 @@ Email detail
 
 Allows to send an informative email to defined recipients list.
 
-.. figure:: /images/GUI/BOX_EmailDetail.png
+.. figure:: /images/GUI/GUI_BOX_EmailDetails.png
    :alt: Dialog box - Email detail
    :align: center
 
@@ -846,6 +861,14 @@ Allows to send an informative email to defined recipients list.
 
 * Flag on to indicate the email message will be saved as a note.
 
+.. rubric:: Email Template
+
+You can choose an email template even without having predefined it in the settings
+
+To create and view templates 
+
+see: :ref:`email-template`
+
 .. raw:: latex
 
     \newpage
@@ -857,35 +880,53 @@ Allows to send an informative email to defined recipients list.
 Subscribe detail
 ================
 
-.. rubric:: Subscribe list 
+.. rubric:: Subscribe list
 
 Allows to subscribe to tracking of an item.
 
-.. figure:: /images/GUI/zone_subscribe1.png
+This icon is checked when you subscribed |iconSubscribe|.
+
+
+.. figure:: /images/GUI/GUI_ZONE_Subscribe.png
    :alt: Dialog box - Susbcribe detail
    
-This icon is checked when you subscribed.
 
 When a user "subscribes" to the project, he will receive notifications "to subscribers" for all elements of the project
 
-.. figure:: /images/GUI/Subscribe.png
-   :alt: Dialog box - Susbcribe
 
-* | Ability to subscribe a third party user to the tracking of an element (according to configurable rights).
-  | You can drag the name of selected ressources and drop them on the right column for subscribe them.
+Ability to subscribe a third party user to the tracking of an element (according to configurable rights).
 
-.. figure:: /images/GUI/ZONE_subscribe_for_other.png
+You can drag the name of selected ressources and drop them on the right column for subscribe them.
+
+.. figure:: /images/GUI/GUI_ZONE_SubscribeOther.png
    :alt: Dialog box - Susbcribe for other
 
 
-* | Display of list of tracked items.
-  | To display it, click on button "Show list of subscriptions"
+.. rubric:: Display of list of tracked items.
 
-.. figure:: /images/GUI/List_of_subscribe.png
+You can view the list of tracked items in two ways:
+
+* click on the button "View the list of subscriptions" in the subscription menu
+
+* In the user settings of the :ref:`Miscellaneous section<userparam_miscelleaneous>`, click on the "Show subscription list" button.
+
+.. figure:: /images/GUI/GUI_BOX_ListSubscribe.png
    :alt: Dialog box - Display list of tracked items
 
 
-* Possibility to send an email to users following the item, when unitary sending detail or on automatic sending or on indicator.
+.. note:: 
+   
+   **email**
+   
+   Possibility to send an email to users following the item
+   
+   when unitary sending detail or on automatic sending or on indicator.
+   
+   **contacts**
+   
+   You can see the items followed by your contacts
+   
+   see: :ref:`contact`
 
 .. raw:: latex
 
@@ -1448,8 +1489,11 @@ Validate the new one clicking and activating the next combo box
 
 or press F1
 
+.. _keyboard_shortcut
+
 .. rubric:: h - Keyboard shorcuts
-.. rubric:: Shortcut keys
+
+Click on "Keyboard shortcuts" to get the list of functional shortcuts in ProjeQtOr. The link redirects you to the manual
 
 * :kbd:`Control-s` to save the changes. 
 * :kbd:`F1` to open the online user manual, to the page corresponding to the actual screen.

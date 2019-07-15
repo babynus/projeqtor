@@ -59,6 +59,7 @@ Project element is more than a :ref:`planning-element`, it is also used to:
       * Manual Billed, Fixed price, Capped time, Time & materials, Internal are operationals projects
 
    .. image:: /images/GUI/CONCEPT_ZONE_ProjectType.png
+      :align: center
 
    **Administrative project**
 
@@ -112,7 +113,7 @@ The notion of organization introduces a way to consolidate projects on a differe
 
 * The organization summarizes the data of the projects in progress for the organization
 
-.. figure:: /images/Organization.PNG
+.. figure:: /images/GUI/CONCEPT_ORG_Organisations.png
    :align: center
 
 .. rubric:: Organization link

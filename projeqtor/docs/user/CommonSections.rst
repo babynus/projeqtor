@@ -6,6 +6,8 @@
 
 .. title:: Common sections
 
+.. index:: Common sections
+
 .. _common-sections:
 
 Common sections
@@ -356,6 +358,10 @@ This section allows to manage assignment of resources to tasks.
 Progress section
 ----------------
 
+.. figure:: /images/GUI/COMMON_ZONE_ProgressSection.png
+   :alt: Progress Section
+   :align: center
+   
 This section allows all at once, define planning and follow-up the progress.
 
 All planning elements have a progress section.
@@ -375,7 +381,7 @@ Next, description of fields and information in sections will be displayed.
 .. _progress-section-column-def:
 
 Columns definition
-^^^^^^^^^^^^^^^^^^
+==================
 
 .. rubric:: Column "Requested"
 
@@ -469,7 +475,7 @@ Columns definition
 .. _progress-section-consolidation:
 
 Work and cost consolidation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+===========================
 
 Work and cost from tasks (Activity, Test session and Meeting) are summarized for each parent element.
 
@@ -511,7 +517,7 @@ Allows to follow-up progress on grouped tasks like phase, delivery, test group, 
 .. _progress-section-monitor-indicator:
 
 Monitoring indicator
-^^^^^^^^^^^^^^^^^^^^
+====================
 
 The indicators can be defined on the progress data.
 
@@ -568,7 +574,7 @@ Next indicators defined for Project, Activity and Test session
 .. _progress-section-activity:
 
 Progress section (Project, Activity & Test session)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+===================================================
 
 Next sections describe each part of progress section display.
 
@@ -1450,7 +1456,7 @@ This section allows to attach files or hyperlinks to items of elements.
 
     \newpage
 
-.. index:: ! Note (section)
+.. index:: ! Notes (section)
 
 .. _note-section:
 
