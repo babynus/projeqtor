@@ -170,7 +170,7 @@ function drawTableFromObjectList($objectList) {
 			echo '<table>';
 			$hasSection=true;
 	  } else {
-		  echo '<tr>'; // open the line level (must end with  a </td></tr>)
+		  echo ($code=='paramAttachmentNum')?'<tr hidden> ':'<tr> '; // open the line level (must end with  a </td></tr>)
 		  echo '<td class="crossTableLine"><label class="label largeLabel" for="' . $code . '" title="' . i18n('help' . ucfirst($code)) . '">' 
 		              . (($format!='photo')?i18n('param' . ucfirst($code) ) . ' :&nbsp;':'')
 		         .'</label></td><td style="position:relative">';
@@ -218,10 +218,33 @@ function drawTableFromObjectList($objectList) {
 				echo '<div dojoType="dijit.form.TextBox" ';
 				echo ' name="' . $code . '" id="' . $code . '"';
 				echo ' title="' . i18n('help' . ucfirst($code)) . '"';
-				echo ' style="width: 200px;" ';
+				echo ($code=='paramAttachmentMaxSize')?' style="width: 100px;text-align: center;" ':' style="width: 200px;" ';
 				echo ' class="input '.$requiredClass.'" ';
 				if ($format=='password') echo ' type="password" ';
-				echo ' value="' .  htmlEncode($obj->parameterValue) . '" ';
+				//florent
+				if($code=='paramAttachmentMaxSize'){
+				 $valChar=1;
+				 $char=Parameter::getGlobalParameter('paramAttachmentNum');
+				    switch ($char) {
+				 	  case "K":
+				 	    $valChar=1024;
+				 	  break;
+				 	  case "M":
+				 	    $valChar=1024*1024;
+				 	  break;
+				 	  case "G":
+				 	   $valChar=1024*1024*1024;
+				 	  break;
+				 	  case "T":
+				 	    $valChar=1024*1024*1024*1024;
+				 	  break;
+				    }
+				   $numb= number_format(intval($obj->parameterValue)/$valChar,0,' ',' ');
+				 echo ' value="' .  htmlEncode(strval($numb).$char) . '" ';
+				}else{
+				  echo ' value="' .  htmlEncode($obj->parameterValue) . '" ';
+				}
+				//end
 				echo ' >';
 				echo $obj->getValidationScript($code);
 				echo '</div>';
