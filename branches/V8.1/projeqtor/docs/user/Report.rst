@@ -42,6 +42,8 @@ A list of reports is available in different categories.
 
 .. index:: ! Report (Favorite)
 
+.. _favorite_report:
+
 Favorite reports
 ----------------
 
@@ -66,3 +68,24 @@ Select a report to display (in print mode), without leaving the current screen.
 .. figure:: /images/GUI/BOX_DirectDisplay.png
    :alt: Dialog box - Print preview 
    :align: center
+
+   
+   
+Filter Reports
+--------------
+For tickets and only tickets, you can apply an existing or create filter
+
+.. figure:: /images/GUI/REPORT_FiltersTickets.png
+   :alt: filters on ticket's report
+   :align: center
+   
+
+.. figure:: /images/GUI/REPORT_AdvancedFilter.png
+   :alt: Advanced filters
+   :align: center
+   
+You can choose from many criteria to create your filter
+
+.. figure:: /images/GUI/REPORT_CriteriaFilter.png
+   :alt: criteria's filter
+   :align: left

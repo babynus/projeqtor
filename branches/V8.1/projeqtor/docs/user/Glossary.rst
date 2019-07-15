@@ -36,7 +36,9 @@ Glossary
       Closed is a micro state in ProjeQtOr
    
       * Flag to indicate that item is archived.
-      * Item will not appear in lists any more, unless “show closed” is checked.
+      * Item will not appear in lists any more
+      * You can display them again by checking the box "Show closed items"
+      * You can setting their default display in the :ref:`user's Parameters<graphic-interface-behavior-section>`
 
    Decision
    

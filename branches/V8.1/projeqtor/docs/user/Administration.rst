@@ -64,8 +64,20 @@ Manage connections
 
 Consistency check
 -----------------
+.. figure:: /images/GUI/ADMIN_ConstencyCheck.png
+   :alt: constancy check
+   :align: center
+   
+**Consistency check**
 
-* Consistency check on the WBS sequence (search for duplicates, sequence holes, incorrect order)
+* on the WBS sequence search for duplicates, sequence holes, incorrect order
+* on the presence of one and only one line of "PlanningElement" for the planifiable elements
+* on the consolidation of ticket work
+* on consolidation of work on activities
+* on assignments
+
+
+
 * This feature available on the administration screen also automatically corrects detected issues
 
 .. index:: ! Email (Maintenance of Data)
