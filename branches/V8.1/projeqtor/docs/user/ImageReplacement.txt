@@ -1,3 +1,9 @@
+.. |iconSubscribe| .. image:: images/Subscribe.png
+   :alt: Susbcribe
+
+.. |iconReply| image:: images/iconReply.png
+	:alt: icon reply
+		
 .. |iconNotPlanned| image:: images/iconNotPlanned.png
    :alt: Icon not planned
 
