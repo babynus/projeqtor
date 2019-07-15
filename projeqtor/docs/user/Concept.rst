@@ -59,6 +59,7 @@ Project element is more than a :ref:`planning-element`, it is also used to:
       * Manual Billed, Fixed price, Capped time, Time & materials, Internal are operationals projects
 
    .. image:: /images/GUI/CONCEPT_ZONE_ProjectType.png
+      :align: center
 
    **Administrative project**
 
@@ -112,7 +113,7 @@ The notion of organization introduces a way to consolidate projects on a differe
 
 * The organization summarizes the data of the projects in progress for the organization
 
-.. figure:: /images/Organization.PNG
+.. figure:: /images/GUI/CONCEPT_ORG_Organisations.png
    :align: center
 
 .. rubric:: Organization link
@@ -1187,35 +1188,3 @@ A calendar is defined for a type of resources and each resource is attached to a
 
    * Even if you can create a specific calendar to each resource, this is not the advised way to manage personal days off and vacations.
    * You’d better use Administrative projects (enter real work in advance).
-
-
-.. raw:: latex
-
-    \newpage
-
-
-.. _photo:
-
-Photo
-*****
-
-A photo can be defined for a user, a resource and a contact.
-
-It is a visual identification associated with the name.
-
-To default, the first letter of the name appear as long as you don't add photo.
-
-.. note::
-
-   * To enlarge, move the cursor over the picture.
-
-.. rubric:: Photo management
-
-* Click on |buttonAdd| or photo frame to add an image file. To complete instruction see: :ref:`Attachment file<attachment-file>`.
-* Click on |buttonIconDelete| to remove  the image.
-* Click on image to display the photo.
-
-.. note::
-
-   * Photo management can be done in :ref:`user-parameters`, :ref:`user`, :ref:`resource` , :ref:`contact` screens.
-

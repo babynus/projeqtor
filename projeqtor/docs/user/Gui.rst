@@ -1,3 +1,4 @@
+
 .. include:: ImageReplacement.txt
 
 .. title:: Graphical User Interface
@@ -210,21 +211,28 @@ Menu on top bar allows a rapid access to elements.
 Logo area
 ---------
 
-.. figure:: /images/GUI/logoArea.PNG
+.. rubric:: Information about the software
+
+When the left menu is open. The ProjeQtOr logo is displayed
+
+Click on it to get the ProjeQtOr configuration information 
+
+.. figure:: /images/GUI/GUI_ZONE_LogoArea.PNG
    :alt: Logo area
    :align: center
 
    Logo area
 
-.. rubric:: Information about the software
+Click on «Logo Area» will display the software information box
 
-* Click on «Logo Area» will display the software information box.
-
-.. figure:: /images/GUI/GUI_BOX_LogoInfos.png
+.. figure:: /images/GUI/GUI_BOX_AboutProjeQtOr.png
    :alt: Box - Software information
    :align: center
 
-   Software information
+.. note::
+   You can view this information with the login window and click About ProjeQtOr ...
+   
+   see: :ref:`info-bar<session_loginwindows>`
 
 .. note:: 
 
@@ -234,8 +242,8 @@ Logo area
 
 .. _menu-document-window:
 
-«Menu» and «Documents» windows
-------------------------------
+**Menu** and **Documents** windows
+----------------------------------
 
 .. figure:: /images/GUI/ZONE_MenuDocument.png
    :alt: «Menu» and «Documents» windows 
@@ -247,7 +255,7 @@ Logo area
 
    * To toggling between windows, just click on window header.  
 
-.. rubric:: 1 - Menu window
+.. rubric:: |one| Menu window
 
 * The menu is proposed as a tree view of reachable items. 
 * The items presented will depend on the access rights of user to the screens.
@@ -261,13 +269,14 @@ Logo area
    * This parameter defines the size of icons in the menu.
 
 
-.. rubric:: 2 - Documents window
+.. rubric:: |two| Documents window
 
 * Document directories give direct access to documents contained in the directory.
 
- .. compound:: **3 - Document directories**
+.. rubric:: |three| Document directories
 
-    * This icon |buttonIconDocDir| gives direct access to the :ref:`document-directory` screen.
+* This icon |buttonIconDocDir| gives direct access to the :ref:`document-directory` screen.
+
 
 .. raw:: latex
 
@@ -275,8 +284,8 @@ Logo area
 
 .. _message-link-window:
 
-«External shortcuts»,«Console messages» windows and «Shortcuts»
----------------------------------------------------------------
+**External shortcuts**, **Console messages** windows and **Shortcuts**
+----------------------------------------------------------------------
 
 .. figure:: /images/GUI/ZONE_ShortcutMessage.png
    :alt: External shortcuts and Console messages windows
@@ -289,14 +298,14 @@ Logo area
 
    * To toggling between windows, just click on window header.   
 
-.. rubric:: 1 - External shortcuts window
+.. rubric:: |one| External shortcuts window
 
 * Display hyperlinks to remote web pages.
 * These links are defined as hyperlink attachments on projects.
 * Links displayed here depend on the selected project.
 
 
-.. rubric:: 2 - Console messages window
+.. rubric:: |two| Console messages window
 
 * Displays information about main actions: insert, update, delete. 
 * The timestamp indicates when the action was done.
@@ -305,7 +314,7 @@ Logo area
 
     * Messages displayed here are not stored and will be flushed when user logout.
 
-.. rubric:: 3 -  Shortcuts windows
+.. rubric:: |three| Shortcuts windows
 
 * [CTRL] +S = save the current element
 * [F1]= Opens the online manual (contextual opening on the current screen)
@@ -349,11 +358,6 @@ List window
  .. compound:: **Other filter fields**
   
     * Depending on the element, other filter fields will be available.
-
-
-.. raw:: latex
-
-    \newpage
 
 
 .. rubric:: |three| - Buttons 
@@ -601,8 +605,26 @@ This functionality allows to define columns displayed in the list  for this elem
     * The exceedance will be highlighted beside the buttons. |two|
     * This may lead to strange display, over page width, on list, reports and PDF export, depending on the browser.
 
+.. raw:: latex
 
+    \newpage
 
+.. _export-csv-format:
+
+Export to PDF format
+====================
+
+Allows to export data of list to PDF format.
+
+Export contains all details and links between tasks.
+
+.. figure:: /images/GUI/BOX_ExportPlanningPDF.png
+   :alt: Dialog box - Export planning to PDF
+   :align: center
+
+   Export planning to PDF
+
+export can be done horizontally (landscape) or vertically (portrait) in A4 and / or A3 format with high quality of details
 
 .. raw:: latex
 
@@ -623,18 +645,19 @@ The fields are regrouped and presented in the order as they appear in the item d
 .. note::
 
    * The active filter defined will be applied to export data.
-   * The CSV exported files can directly be imported through the import functionality. (See: :ref:`import-data`)
+   * The CSV exported files can directly be imported through the import functionality. 
+     (See: :ref:`import-data`)
    * The export definition is defined for each user. 
    * The same definition can be applied in the next export.
 
-.. figure:: /images/GUI/BOX_Export.png
+.. figure:: /images/GUI/GUI_BOX_Export.png
    :alt: Dialog box - Export 
    :align: center
 
 .. rubric:: Fields selection
 
 * Use the checkbox to select or unselect all fields.
-* Click on **«Select list columns»** button to restrict selected fields to the ones that are currently displayed in the list.
+* Click on **Select list columns** button to restrict selected fields to the ones that are currently displayed in the list.
 
 .. rubric:: Id or name for references
 
@@ -812,7 +835,7 @@ Email detail
 
 Allows to send an informative email to defined recipients list.
 
-.. figure:: /images/GUI/BOX_EmailDetail.png
+.. figure:: /images/GUI/GUI_BOX_EmailDetails.png
    :alt: Dialog box - Email detail
    :align: center
 
@@ -833,6 +856,14 @@ Allows to send an informative email to defined recipients list.
 
 * Flag on to indicate the email message will be saved as a note.
 
+.. rubric:: Email Template
+
+You can choose an email template even without having predefined it in the settings
+
+To create and view templates 
+
+see: :ref:`email-template`
+
 .. raw:: latex
 
     \newpage
@@ -844,35 +875,53 @@ Allows to send an informative email to defined recipients list.
 Subscribe detail
 ================
 
-.. rubric:: Subscribe list 
+.. rubric:: Subscribe list
 
 Allows to subscribe to tracking of an item.
 
-.. figure:: /images/GUI/zone_subscribe1.png
+This icon is checked when you subscribed |iconSubscribe|.
+
+
+.. figure:: /images/GUI/GUI_ZONE_Subscribe.png
    :alt: Dialog box - Susbcribe detail
    
-This icon is checked when you subscribed.
 
 When a user "subscribes" to the project, he will receive notifications "to subscribers" for all elements of the project
 
-.. figure:: /images/GUI/Subscribe.png
-   :alt: Dialog box - Susbcribe
 
-* | Ability to subscribe a third party user to the tracking of an element (according to configurable rights).
-  | You can drag the name of selected ressources and drop them on the right column for subscribe them.
+Ability to subscribe a third party user to the tracking of an element (according to configurable rights).
 
-.. figure:: /images/GUI/ZONE_subscribe_for_other.png
+You can drag the name of selected ressources and drop them on the right column for subscribe them.
+
+.. figure:: /images/GUI/GUI_ZONE_SubscribeOther.png
    :alt: Dialog box - Susbcribe for other
 
 
-* | Display of list of tracked items.
-  | To display it, click on button "Show list of subscriptions"
+.. rubric:: Display of list of tracked items.
 
-.. figure:: /images/GUI/List_of_subscribe.png
+You can view the list of tracked items in two ways:
+
+* click on the button "View the list of subscriptions" in the subscription menu
+
+* In the user settings of the :ref:`Miscellaneous section<userparam_miscelleaneous>`, click on the "Show subscription list" button.
+
+.. figure:: /images/GUI/GUI_BOX_ListSubscribe.png
    :alt: Dialog box - Display list of tracked items
 
 
-* Possibility to send an email to users following the item, when unitary sending detail or on automatic sending or on indicator.
+.. note:: 
+   
+   **email**
+   
+   Possibility to send an email to users following the item
+   
+   when unitary sending detail or on automatic sending or on indicator.
+   
+   **contacts**
+   
+   You can see the items followed by your contacts
+   
+   see: :ref:`contact`
 
 .. raw:: latex
 
@@ -1361,30 +1410,36 @@ Indicates the visibility level defined in a note or attachment.
 Info bar
 --------
 
-.. figure:: /images/GUI/infobar3.png
+.. figure:: /images/GUI/GUI_ZONE_InfosBar.png
    :alt: Info bar zone
    :align: center
 
    Info bar
 
-.. rubric:: 1 - Version button
+.. rubric:: |one| Version button
 
-* Displays the application version.
-* Click on button to access to ProjeQtOr site.
+displays the version of ProjeQtOr installed
+Click on the button to access the site of ProjeQtOr.org
 
+.. _session_loginwindows:
 
-.. rubric:: 2 -Session 
-.. figure:: /images/GUI/infobar2.png
+.. rubric:: |two| Session 
 
+login window with many setup shortcuts.
 
+.. figure:: /images/GUI/GUI_BOX_LogoInfos.png
+   :alt: Infos Area
+   :align: center
+   
 
 .. rubric:: a - Log out button
 
 * Allows to disconnect the user.
 
- .. note:: User parameter “Confirm quit application”
+ .. note:: **User parameter “Confirm quit application”**
 
-    * This parameter defines whether a  disconnection confirmation will be displayed before.
+    * This parameter defines whether a disconnection confirmation will be displayed before.
+    * see: :ref:`graphic-interface-behavior-section`
 
 
 
@@ -1395,39 +1450,44 @@ Info bar
 
 .. rubric:: c - Language
 
-ProjeQtOr is multilingual.
+ProjeQtOr is multilingual. We offer 19 languages (one being translated: Polish)
 
 Each user can choose the language to display all the captions.
 
 
-.. note:: User parameter “Language”
+ .. note:: **User parameter “Language”**
 
    * This parameter defines the language used to display captions.
+   * see: :ref:`display-parameters`
 
-.. rubric:: Theme
+.. rubric:: d - Theme
 
-Users can select Theme to display the interface. 
-
-.. rubric:: User parameter “Theme”
-
-* This parameter defines the theme to display.
-* The new theme is automatically applied when selected.
-
-.. figure:: /images/GUI/theme.png
+* Users can select Theme to display the interface. 
+* By default your selected theme is "ProjeQtOr 'Flat Desgin' Blue".
+* Screenshoots has been taken with "ProjeQtOr Standard" theme. 
+* Many themes are available
+ 
+.. figure:: /images/GUI/GUI_ZONE_theme.png
    :alt: Theme
    :align: center
    
-   theme
+   ProjeQtOr's Themes
+      
+      
+.. note:: **User parameter “Theme”**
 
-.. note:: Default theme
-
-  * By default your selected theme is "ProjeQtOr 'Flat Desgin' Blue".
-  * Screenshoots has been taken with "ProjeQtOr Standard" theme. 
+   * This parameter defines the theme to display.
+   * The new theme is automatically applied when selected.
+   * see: :ref:`display-parameters`
 
 .. rubric:: e - Fist page
 
 Scrolling the list, it is possible to choose  the screen that will be displayed first, on each connection, among items of the general menu.
 
+.. figure:: /images/GUI/GUI_BOX_ScreenDefault.png
+   :alt: Choose your default screen
+   :align: center
+   
 .. rubric:: f - Change password
 
 Validate the new one clicking and activating the next combo box 
@@ -1436,8 +1496,11 @@ Validate the new one clicking and activating the next combo box
 
 or press F1
 
+.. _keyboard_shortcut
+
 .. rubric:: h - Keyboard shorcuts
-.. rubric:: Shortcut keys
+
+Click on "Keyboard shortcuts" to get the list of functional shortcuts in ProjeQtOr. The link redirects you to the manual
 
 * :kbd:`Control-s` to save the changes. 
 * :kbd:`F1` to open the online user manual, to the page corresponding to the actual screen.
