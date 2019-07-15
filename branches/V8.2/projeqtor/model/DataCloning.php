@@ -135,7 +135,7 @@ class DataCloning extends SqlElement{
 		} else {
 			$listUser = getListForSpecificRights('imputation');
 		}
-		$wherePerDay = 'idResource = '.$user->id.' and `requestedDate` > "'.addDaysToDate(date('Y-m-d'), -1).'" and `requestedDate` < "'.addDaysToDate(date('Y-m-d'), 1).'" and `idle` = 0';
+		$wherePerDay = 'idResource = '.$idUser.' and `requestedDate` > "'.addDaysToDate(date('Y-m-d'), -1).'" and `requestedDate` < "'.addDaysToDate(date('Y-m-d'), 1).'" and `idle` = 0';
 		$dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
 		$dataCloningCountTotal = $dataCloning->countSqlElementsFromCriteria(array("idle"=>"0"));
 		$dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
@@ -144,6 +144,11 @@ class DataCloning extends SqlElement{
 		  $hide = 'block';
 		}else{
 		  $hide = 'none';
+		}
+		if($idUser != ''){
+		  $dataCloningCount = i18n('colDataCloningCount', array($dataCloningPerDay-$dataCloningCountPerDay, $dataCloningPerDay));
+		}else{
+		  $dataCloningCount = i18n('colDataCloningCount', array($dataCloningTotal-$dataCloningCountTotal, $dataCloningTotal));
 		}
 		$result = "";
 		$result .='<div id="dataCloningDiv" align="center" style="margin-top:20px;margin-bottom:20px; overflow-y:auto; width:100%;">';
@@ -156,7 +161,10 @@ class DataCloning extends SqlElement{
 		$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:15%;text-align:center;vertical-align:center;">'.i18n('colPlannedDate').'</td>';
 		$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:15%;text-align:center;vertical-align:center;">'.i18n('colRequestedDeletedDate').'</td>';
 		$result .='     <td style="border: 1px solid grey;height:60px;width:20%;text-align:center;vertical-align:center;">';
-		$result .='     <a onClick="addDataCloning();" title="'.i18n('addDataCloning').'" style="display:'.$hide.'">'.formatBigButton('Add').'</a></td>';
+		$result .='       <table width="100%"><tr>';
+		$result .='         <td width="80%">'.$dataCloningCount.'</td>';
+		$result .='         <td width="20%"><a onClick="addDataCloning();" title="'.i18n('addDataCloning').'" style="display:'.$hide.'">'.formatBigButton('Add').'</a></td>';
+		$result .='       </tr></table>';
 		$result .='   </tr>';
 		foreach ($listUser as $id=>$name){
 		  $where ="idResource=".$id.$critWhere.";";
@@ -182,7 +190,7 @@ class DataCloning extends SqlElement{
 			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:center;vertical-align:center;'.$idleColor.'">'.$data->name.'</td>';
 			  $result .='<td style="border: 1px solid grey;height:40px;width:10%;text-align:center;vertical-align:center;'.$idleColor.'">'.$data->versionCode.'</td>';
 			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:center;vertical-align:center;font-style:italic;'.$idleColor.'">'.htmlFormatDateTime($data->requestedDate).'</td>';
-			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:center;vertical-align:center;font-style:italic;'.$idleColor.'">'.htmlFormatDateTime(date('Y-m-d H:i', $data->plannedDate)).'</td>';
+			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:center;vertical-align:center;font-style:italic;'.$idleColor.'">'.htmlFormatDateTime(date('Y-m-d H:i:s', $data->plannedDate)).'</td>';
 			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:center;vertical-align:center;font-style:italic;'.$idleColor.'">'.htmlFormatDateTime($data->requestedDeletedDate).'</td>';
 			  $result .='<td style="border: 1px solid grey;height:40px;width:20%;text-align:center;vertical-align:center;">';
 			  $background = '#a3d179';

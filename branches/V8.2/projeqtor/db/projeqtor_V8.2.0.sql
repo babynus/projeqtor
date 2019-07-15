@@ -45,18 +45,18 @@ INSERT INTO `${prefix}habilitation` (idProfile, idMenu, allowAccess) VALUES
 (2,222,1),
 (3,222,1),
 (4,222,1),
-(5,222,1),
-(6,222,1),
-(7,222,1);
+(5,222,0),
+(6,222,0),
+(7,222,0);
 
 INSERT INTO `${prefix}habilitationother` (idProfile, rightAccess, scope) VALUES
-(1,4,'dataCloning'),
-(2,2,'dataCloning'),
-(3,2,'dataCloning'),
-(4,2,'dataCloning'),
-(5,2,'dataCloning'),
-(6,2,'dataCloning'),
-(7,2,'dataCloning');
+(1,4,'dataCloningRight'),
+(2,2,'dataCloningRight'),
+(3,6,'dataCloningRight'),
+(4,2,'dataCloningRight'),
+(5,1,'dataCloningRight'),
+(6,2,'dataCloningRight'),
+(7,2,'dataCloningRight');
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,222,8),
@@ -86,6 +86,10 @@ INSERT INTO `${prefix}habilitation` (idProfile, idMenu, allowAccess) VALUES
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,224,8);
+
+INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('dataCloningCreationRequest','* * * * *');
+INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('dataCloningPerDay','5');
+INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('dataCloningTotal','50');
 
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('paramPasswordStrength','1');
 
