@@ -10488,10 +10488,12 @@ function addDataCloning(){
 function validatePassword(){
   var pdwdSth=dojo.byId('parmPwdSth').value;
   var pdwLgh=dojo.byId('paramPwdLth').value;
-  var psw=dijit.byId('password').get('value');
+  var psw=dojo.byId('password').value;
   var info=document.getElementById('error');
   var arrayStrong = [ "^(?=.*[a-z])(?=.*[A-Z])","^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])","^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])"];
-  if(pdwdSth >0){
+  if(psw === undefined){
+    psw="";
+  }else if(pdwdSth >0){
     if(psw.length >=pdwLgh ){
       strong = new RegExp(arrayStrong[pdwdSth-2]);
         if(pdwdSth==1){
@@ -10557,7 +10559,7 @@ function errorValidatePassword(ctx,crit,info,strengthCrtit){
 }
 
 function controlChar (event){
-  var pdwdSth=dojo.byId('parmPwdSth').value;
+  var pdwdLth=dojo.byId('paramPwdLth').value;
   var gen= new RegExp(["^(?=.*[a-zA-Z0-9!@#$&()-`.+,/\"])"]);
   var minMax =new RegExp([ "^(?=.*[A-Z])"]);
   var num=new RegExp(["^(?=.*[0-9])"]);
@@ -10567,6 +10569,7 @@ function controlChar (event){
   var comptMaj=0;
   var comptNum=0;
   var comptChar=0;
+  
   if (adv.value==''){
     adv.value=0;
   }
@@ -10578,19 +10581,20 @@ function controlChar (event){
     cpParamLength=1;
   }
   if(evt=='Backspace'){
-    if(lastKeys.length==''){
+    if(lastKeys.length==1){
+      addVal=[0,0,0,0];
       adv.value=0;
       cpParamLength=0;
         for(var i=0;i <= tabLastKeys.length;i++){
           tabLastKeys.splice(i,1);
         }
     }else if(paramLength=1){
-      if( lastKeys.length/2 < pdwdSth && addVal[0]==1){
+      if( lastKeys.length/2 < pdwdLth && addVal[0]==1){
         addVal[0]=0;
         adv.value=adv.value-1; 
       }
     }else{
-      if( lastKeys.length < pdwdSth && addVal[0]==1){
+      if( lastKeys.length < pdwdLth && addVal[0]==1){
         addVal[0]=0;
         adv.value=adv.value-1; 
       }
@@ -10632,13 +10636,13 @@ function controlChar (event){
   }else if(gen.test(evt) && evt !=undefined){
     if(evt.length ==1 ){
       tabLastKeys.push(evt);
-        if(paramLength=='1'){
-          if(tabLastKeys.length/2 >= pdwdSth && addVal[0]==0 ){
+        if(paramLength==1){
+          if(tabLastKeys.length/2 >= pdwdLth && addVal[0]==0 ){
             addVal[0]=1;
             adv.value=adv.value+1; 
           }
         }else{
-          if(tabLastKeys.length >= pdwdSth && addVal[0]==0 ){
+          if(tabLastKeys.length >= pdwdLth && addVal[0]==0 ){
             addVal[0]=1;
             adv.value=adv.value+1; 
           }
