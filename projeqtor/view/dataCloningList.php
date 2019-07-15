@@ -33,7 +33,11 @@ require_once "../tool/formatter.php";
 scriptLog('   ->/view/dataCloningList.php');
 
 $user=getSessionUser();
-$userName=$user->id;
+if(sessionValueExists('userName')){
+  $userName=getSessionValue('userName');
+}else{
+  $userName=$user->id;
+}
 $userProfil = new Profile($user->idProfile);
 $versionCode=$version;
 $showClosed = 0;
