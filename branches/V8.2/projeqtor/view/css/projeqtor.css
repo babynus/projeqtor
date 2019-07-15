@@ -3728,3 +3728,35 @@ li.section {
 .selectPlan .dojoxCheckedMultiSelectWrapper{
   width: 500px;
 }
+/*Florent*/
+progress {
+  display: block; /* default: inline-block */
+  width: 300px;
+  border: 0 none;
+  border-radius: 10px;
+  box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+}
+progress::-moz-progress-bar {
+  border-radius: 10px;
+  background: #37A346;
+}
+
+progress::-ms-fill {
+  border-radius: 10px;
+  background: #37A346;
+}
+/* webkit */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  progress {
+    height: 10px;
+     background: #D3D2D2;
+  }
+}
+progress::-webkit-progress-bar {
+    background: transparent;
+}  
+
+progress::-webkit-progress-value {  
+  border-radius: 10px;
+  background: #37A346;
+} 
