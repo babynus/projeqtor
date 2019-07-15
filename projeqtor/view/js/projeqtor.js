@@ -6114,3 +6114,12 @@ function cancelDataCloningStatus(idDataCloning){
 	}
   showConfirm(i18n('cancelDataCloning') ,action);
 }
+
+function showSpecificHours(){
+	var value = dijit.byId('dataCloningCreationRequest').get('value');
+	if(value == 'specificHours'){
+		dijit.byId("dataCloningSpecificHours").domNode.style.display = 'block';
+	}else{
+		dijit.byId("dataCloningSpecificHours").domNode.style.display = 'none';
+	}
+}

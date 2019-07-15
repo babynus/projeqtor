@@ -27,9 +27,12 @@
 scriptLog('dynamicDialogAddDataCloning.php');
 $user = getSessionUser();
 $dataCloning = new DataCloning();
-$dataCloningMaxCount = 3;
-$dataCloningCount = $dataCloning->countSqlElementsFromCriteria(array("idResource"=>$user->id, "idle"=>"0"));
-$plannedDate = date('Y-m-d');
+$wherePerDay = 'idResource = '.$user->id.' and `requestedDate` > "'.addDaysToDate(date('Y-m-d'), -1).'" and `requestedDate` < "'.addDaysToDate(date('Y-m-d'), 1).'" and `idle` = 0';
+$dataCloningCount = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
+$dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
+$dataCloning->calculNextTime();
+$plannedDate = date('Y-m-d', $dataCloning->plannedDate);
+$plannedHours = date('H:i', $dataCloning->plannedDate);
 ?>
   <table>
     <tr>
@@ -76,6 +79,10 @@ $plannedDate = date('Y-m-d');
                style="width:80px; text-align:center;" class="input rounded"
                value="<?php echo $plannedDate;?>">
                </div>
+               <div dojoType="dijit.form.TimeTextBox" name="dataCloningPlannedHours" id="dataCloningPlannedHours" disabled
+                    type="text" maxlength="5" style="margin-left:5px;width:40px; text-align: center;" class="input rounded"
+                    value="T<?php echo $plannedHours;?>" hasDownArrow="false">';
+               </div>
   				    </td>
             </tr>
             <tr>
@@ -86,7 +93,7 @@ $plannedDate = date('Y-m-d');
            </tr>
            <tr>
              <td style="text-align:center;" class="dialogLabel">
-               <?php echo i18n('colDataCloningCount', array($dataCloningMaxCount-$dataCloningCount, $dataCloningMaxCount));?>
+               <?php echo i18n('colDataCloningCount', array($dataCloningPerDay-$dataCloningCount, $dataCloningPerDay));?>
              </td>
            </tr>
           </table>
