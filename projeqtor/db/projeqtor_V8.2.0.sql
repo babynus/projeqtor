@@ -89,4 +89,4 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('paramPasswordStrength','1');
 
-INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('paramAttachmentNum','2097152');
+INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('paramAttachmentNum','');
