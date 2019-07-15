@@ -39,32 +39,24 @@ $userName=$user->id;
   <div style="top:30px !important; left: 200px !important; width: 500px; margin: 0px 8px 4px 8px; padding: 5px;display:none;" 
        id="resultDiv" dojoType="dijit.layout.ContentPane" region="none" >
   </div>   
-  <div dojoType="dijit.layout.ContentPane" region="top" id="dataCloningParameterButtonDiv" class="listTitle" >
+  <div dojoType="dijit.layout.ContentPane" region="top" id="dataCloningParameterButtonDiv">
   <form dojoType="dijit.form.Form" name="dataCloningParameterForm" id="dataCloningParameterForm" action="" method="post" >
-  <table width="100%" height="64px" class="listTitle">
-    <tr height="32px">
-    <td style="vertical-align:top;min-width:100px;width:20%;">
-      <table >
-		    <tr height="32px">
-  		    <td width="50px" align="center">
-            <?php echo formatIcon('DataCloningParameter', 32, null, true);?>
-          </td>
-          <td width="200px"><span class="title"><?php echo i18n('menuDataCloningParameter');?></span></td>
-  		  </tr>
-  		  <tr height="32px">
-  		    <td>
-            <button id="saveParameterButton" dojoType="dijit.form.Button"
-              showlabel="false"
-              title="<?php echo i18n('buttonSaveParameters');?>"
-              iconClass="dijitButtonIcon dijitButtonIconSave" class="detailButton">
-              <script type="dojo/connect" event="onClick" args="evt">              
+  <table width="100%" class="listTitle">
+    <tr>
+	    <td width="50px" align="center">
+        <?php echo formatIcon('DataCloningParameter', 32, null, true);?>
+      </td>
+      <td width="200px"><span class="title"><?php echo i18n('menuDataCloningParameter');?></span></td>
+      <td align="right">
+        <button id="saveParameterButton" dojoType="dijit.form.Button"
+          showlabel="false"
+          title="<?php echo i18n('buttonSaveParameters');?>"
+          iconClass="dijitButtonIcon dijitButtonIconSave" class="detailButton">
+          <script type="dojo/connect" event="onClick" args="evt">              
                 submitForm("../tool/saveParameter.php","resultDiv", "parameterForm", true);
               </script>
-            </button>
-          </td>
-        </tr>
-		  </table>
-    </td>
+        </button>
+      </td>
     </tr>
   </table>
   </form>
