@@ -123,15 +123,15 @@
             }
             ?> 
             <br/>
-            <div dojoType="dojox.form.PasswordValidator" id="password" onkeydown="controlChar(event)" onchange="validatePassword()"  class="input rounded"  style="color:#000000;padding:10px;">
-              <label class="label" style="width:200px;"><?php echo i18n('newPassword');?>&nbsp;:&nbsp;</label>
+            <div dojoType="dojox.form.PasswordValidator" id="password" onkeydown="controlChar(event)" onchange="validatePassword()"  class="input rounded"  style="color:#000000;padding:10px;margin-left:15px;">
+              <label class="label" style="width:150px;"><?php echo i18n('newPassword');?>&nbsp;:&nbsp;</label>
               <input type="password" pwType="new" class="input rounded"  style="color:#000000;"><br/>
               <br/>
-              <label class="label" style="width:200px;"><?php echo i18n('validatePassword');?>&nbsp;:&nbsp;</label>
+              <label class="label" style="width:150px;"><?php echo i18n('validatePassword');?>&nbsp;:&nbsp;</label>
               <input type="password" pwType="verify" class="input rounded"  style="color:#000000;"><br/>
             <br/>
-            <p><meter id="advancement" max="4" style="margin-left:200px;width:180px; "></meter> <span id="error" style="float:right;" ></span>  </p>
-            <span id="strength" style="margin-left:270px;"></span>     
+            <p><progress id="advancement" max="4" style="margin-left:150px;width:180px; "></progress> <span id="error" style="float:right;" ></span>  </p>
+            <span id="strength" style="margin-left:220px;"></span>     
             </div>
             <input type="hidden" id="parmPwdSth"  value="<?php echo Parameter::getGlobalParameter('paramPasswordStrength');?>"/>
             <input type="hidden" id="paramPwdLth"  value="<?php echo Parameter::getGlobalParameter('paramPasswordMinLength');?>"/>
@@ -141,7 +141,7 @@
             <input type="hidden" id="passwordValidate" name="passwordValidate" value=""/>
             <input type="hidden" id="criteria" name="criteria" value=""/>
             <br/>
-            <button type="submit" style="margin-left:200px;width:200px;color:#555555;" class="largeTextButton" id="goButton" dojoType="dijit.form.Button" showlabel="true">OK
+            <button type="submit" style="margin-left:150px;width:200px;color:#555555;" class="largeTextButton" id="goButton" dojoType="dijit.form.Button" showlabel="true">OK
               <script type="dojo/connect" event="onClick" args="evt">
                 //loadContent("../tool/changePassword.php","passwordResultDiv", "passwordForm");
               </script>
@@ -149,7 +149,7 @@
             <br/>
             <div style="height:5px">&nbsp;</div>
             <?php if ( $user->password != md5(Parameter::getGlobalParameter('paramDefaultPassword')) ) {?>
-            <button class="largeTextButton" type="button" style="margin-left:200px;width:200px;color:#555555;" id="cancelButton" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('buttonCancel');?>
+            <button class="largeTextButton" type="button" style="margin-left:150px;width:200px;color:#555555;" id="cancelButton" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('buttonCancel');?>
               <script type="dojo/connect" event="onClick" args="evt">
               showWait(); 
               window.location=".";

@@ -10528,14 +10528,14 @@ function isValidatePassword(info){
     Tooltip.hide(node);
     info.innerHTML='';
     strength.innerHTML='';
-    strength.style="color:black;margin-left:270px;";
+    strength.style="color:black;margin-left:220px;";
   });
   strength.innerHTML=i18n('strong');
 }
 
 function errorValidatePassword(ctx,crit,info,strengthCrtit){
   dojo.byId('advancement').value=0;
-  strength.style="color:red;margin-left:270px;font-weight: bold;";
+  strength.style="color:red;margin-left:220px;font-weight: bold;";
   strength.innerHTML=i18n('low');
   info.innerHTML='<img src="./css/images/iconSeverity16.png"/>';
   require(["dijit/Tooltip", "dojo/dom", "dojo/on", "dojo/mouse", "dojo/domReady!"], function(Tooltip, dom, on, mouse) {
@@ -10549,7 +10549,7 @@ function errorValidatePassword(ctx,crit,info,strengthCrtit){
       on.once(node, mouse.leave, function(){
         info.innerHTML='';
         strength.innerHTML='';
-        strength.style="color:black;margin-left:270px;";
+        strength.style="color:black;margin-left:220px;";
         Tooltip.hide(node);
     });
   });
