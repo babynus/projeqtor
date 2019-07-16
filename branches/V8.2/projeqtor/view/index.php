@@ -53,7 +53,7 @@ if (is_file ( "../tool/parametersLocation.php" )) {
   <script type="text/javascript">             
      dojo.addOnLoad(function(){
        //dojo.byId("currentLocale").value=dojo.locale;
-       var tempo=<?php echo (SSO::isEnabled())?1000:10;?>;
+       var tempo=<?php echo (is_file ( "../tool/parametersLocation.php" ) and SSO::isEnabled())?1000:10;?>;
        window.setTimeout('dojo.byId("indexForm").submit();',tempo);
      });
   </script>
@@ -89,11 +89,11 @@ if (is_file ( "../tool/parametersLocation.php" )) {
   </form>
               </div>
               <div style="width: 470px; height:130px;position:absolute;top:160px;overflow:hidden;text-align:center;">
-                  <?php    if (SSO::isEnabled() and ! SSO::issetAccessFromLoginScreen()) { 
+                  <?php    if (is_file ( "../tool/parametersLocation.php" ) and SSO::isEnabled() and ! SSO::issetAccessFromLoginScreen()) { 
                     echo '<div style="font-size:125%;font-weight:bold">'.i18n("ssoRedirectionMessage",array(SSO::getCommonName())).'</div>';
                   } else {
                     echo  "Loading ..."; 
-                    SSO::unsetAccessFromLoginScreen();
+                    if (is_file ( "../tool/parametersLocation.php" )) SSO::unsetAccessFromLoginScreen();
                   }?>    
               </div>
             </td>
