@@ -160,7 +160,7 @@ $line->idMeasureUnit=$unit;
 $line->extra=$extra;
 $line->billingType=$billingType;
 //gautier #2516
-if($boolCatalog){
+if($boolCatalog and $lineId){
   $line->idCatalog=$catalog->id;
   if($line->refType=="Bill"){
     $bill=new Bill($line->refId);
