@@ -47,7 +47,7 @@ $userName=$user->id;
         <?php echo formatIcon('DataCloningParameter', 32, null, true);?>
       </td>
       <td width="200px"><span class="title"><?php echo i18n('menuDataCloningParameter');?></span></td>
-      <td align="right">
+      <td align="right" style="padding-right:1%;">
         <button id="saveParameterButton" dojoType="dijit.form.Button"
           showlabel="false"
           title="<?php echo i18n('buttonSaveParameters');?>"

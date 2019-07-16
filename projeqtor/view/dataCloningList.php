@@ -132,7 +132,7 @@ if($dataCloning->getVersionCodeList()){
       <td style="text-align: right; align: right;">
         <table width="100%">
           <tr>
-            <td width="90%" nowrap="nowrap">
+            <td width="90%" nowrap="nowrap" style="padding-right:2%">
               <?php echo i18n("labelShowIdle");?>
               <div title="<?php echo i18n('showIdleElements')?>" dojoType="dijit.form.CheckBox" 
                  class="whiteCheck" type="checkbox" id="listShowIdle" name="listShowIdle"
@@ -143,7 +143,7 @@ if($dataCloning->getVersionCodeList()){
                 </script>
               </div>
             </td>
-            <td width="10%" nowrap="nowrap" style="padding-right:5%" >
+            <td width="10%" nowrap="nowrap" style="padding-right:9%" >
             <?php if($userProfil->profileCode == 'ADM'){?>
               <button id="parameterDataCloning" dojoType="dijit.form.Button" showlabel="false"
               title="<?php echo i18n('parameterDataCloning');?>"

@@ -318,6 +318,9 @@
 .iconComponentVersionType22 { background-image: url(images/iconComponentVersionType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconComponentVersionType16 { background-image: url(images/iconComponentVersionType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
+.iconButtonCopy16 { background-image: url(images/iconCopy.png); background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+.iconButtonCopy24 { background-image: url(images/iconCopy.png); background-repeat: no-repeat; width: 24px; height: 24px; background-size: 24px 24px;}
+
 .iconFinancial32 { background-image: url(images/iconFinancial32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconFinancial22 { background-image: url(images/iconFinancial22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconFinancial16 { background-image: url(images/iconFinancial16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
