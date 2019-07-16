@@ -157,9 +157,10 @@ class DataCloning extends SqlElement{
 		$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('colIdUser').'</td>';
 		$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:15%;text-align:center;vertical-align:center;">'.i18n('colName').'</td>';
 		$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('colVersion').'</td>';
-		$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:15%;text-align:center;vertical-align:center;">'.i18n('colRequestDate').'</td>';
-		$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:15%;text-align:center;vertical-align:center;">'.i18n('colPlannedDate').'</td>';
-		$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:15%;text-align:center;vertical-align:center;">'.i18n('colRequestedDeletedDate').'</td>';
+		$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:15%;text-align:center;vertical-align:center;">'.i18n('colOrigin').'</td>';
+		$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('colRequestDate').'</td>';
+		$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('colPlannedDate').'</td>';
+		$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('colRequestedDeletedDate').'</td>';
 		$result .='     <td style="border: 1px solid grey;height:60px;width:20%;text-align:center;vertical-align:center;">';
 		$result .='       <table width="100%"><tr>';
 		$result .='         <td width="80%">'.$dataCloningCount.'</td>';
@@ -187,11 +188,27 @@ class DataCloning extends SqlElement{
 			  if($data->idle){
 			    $idleColor = 'background-color:#eeeeee;';
 			  }
-			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:center;vertical-align:center;'.$idleColor.'">'.$data->name.'</td>';
+			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:left;vertical-align:center;'.$idleColor.'">';
+			  $result .='<table width="100%"><tr>';
+			  if(!$data->idle){
+			    $result .='<td width=10%" style="padding-left:10px"><a onClick="copyDataCloningStatus('.$data->id.');" title="'.i18n('copyDataCloningStatus').'" > '.formatMediumButton('Copy').'</a></td>';
+			    $result .='<td width=90%" style="padding-left:32%">'.$data->name.'</td></tr></table></td>';
+			  }else{
+			    $result .='<td width=100%" style="text-align:center;">'.$data->name.'</td></tr></table></td>';
+			  }
 			  $result .='<td style="border: 1px solid grey;height:40px;width:10%;text-align:center;vertical-align:center;'.$idleColor.'">'.$data->versionCode.'</td>';
-			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:center;vertical-align:center;font-style:italic;'.$idleColor.'">'.htmlFormatDateTime($data->requestedDate).'</td>';
-			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:center;vertical-align:center;font-style:italic;'.$idleColor.'">'.htmlFormatDateTime(date('Y-m-d H:i:s', $data->plannedDate)).'</td>';
-			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:center;vertical-align:center;font-style:italic;'.$idleColor.'">'.htmlFormatDateTime($data->requestedDeletedDate).'</td>';
+			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:left;vertical-align:center;'.$idleColor.'">';
+			  $result .='<table width="100%"><tr>';
+			  if($data->idOrigine and !$data->idle){
+			    $result .='<td width=10%" style="padding-left:10px"><a onClick="gotoDataCloningStatus('.$data->id.');" title="'.i18n('gotoDataCloningStatus').'" > '.formatMediumButton('Goto', true).'</a></td>';
+			    $origin = new DataCloning($data->idOrigine);
+			    $result .='<td width=90%" style="padding-left:30%">'.$origin->name.'</td></tr></table></td>';
+			  }else{
+			    $result .='</tr></table></td>';
+			  }
+			  $result .='<td style="border: 1px solid grey;height:40px;width:10%;text-align:center;vertical-align:center;font-style:italic;'.$idleColor.'">'.htmlFormatDateTime($data->requestedDate).'</td>';
+			  $result .='<td style="border: 1px solid grey;height:40px;width:10%;text-align:center;vertical-align:center;font-style:italic;'.$idleColor.'">'.htmlFormatDateTime(date('Y-m-d H:i:s', $data->plannedDate)).'</td>';
+			  $result .='<td style="border: 1px solid grey;height:40px;width:10%;text-align:center;vertical-align:center;font-style:italic;'.$idleColor.'">'.htmlFormatDateTime($data->requestedDeletedDate).'</td>';
 			  $result .='<td style="border: 1px solid grey;height:40px;width:20%;text-align:center;vertical-align:center;">';
 			  $background = '#a3d179';
 			  $result .='<table width="100%"><tr>';
