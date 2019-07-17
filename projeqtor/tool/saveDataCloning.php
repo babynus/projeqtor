@@ -36,6 +36,7 @@ $requestedDeletedDate = date('Y-m-d H:i:s');
 $user = RequestHandler::getValue('dataCloningUser');
 $name = RequestHandler::getValue('dataCloningName');
 $idDataCloning = RequestHandler::getId('idDataCloning');
+$idDataCloningParent = RequestHandler::getId('idDataCloningParent');
 $status = RequestHandler::getValue('status');
 $result='';
 
@@ -59,6 +60,9 @@ if($idDataCloning){
   }
 }else{
   $dataCloning = new DataCloning();
+  if($idDataCloningParent){
+    $dataCloning->idOrigine = $idDataCloningParent;
+  }
   $dataCloning->versionCode = $version;
   $dataCloning->idResource = $user;
   $dataCloning->requestedDate = $requestedDate;

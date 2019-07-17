@@ -10484,6 +10484,12 @@ function saveModuleStatusCheckParent(id) {
 function addDataCloning(){
 	loadDialog('dialogAddDataCloning',null,true,null,true);
 }
+
+function copyDataCloning(idDataCloning){
+	var param = '&idDataCloningParent='+idDataCloning;
+	loadDialog('dialogAddDataCloning',null,true,param,true);
+}
+
 //florent
 function validatePassword(){
   var pdwdSth=dojo.byId('parmPwdSth').value;
