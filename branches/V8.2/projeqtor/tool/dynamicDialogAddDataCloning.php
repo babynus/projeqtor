@@ -27,17 +27,19 @@
 scriptLog('dynamicDialogAddDataCloning.php');
 $user = getSessionUser();
 $dataCloning = new DataCloning();
-$wherePerDay = 'idResource = '.$user->id.' and `requestedDate` > "'.addDaysToDate(date('Y-m-d'), -1).'" and `requestedDate` < "'.addDaysToDate(date('Y-m-d'), 1).'" and `idle` = 0';
+$wherePerDay = 'idResource = '.$user->id.' and `requestedDate` > "'.date('Y-m-d').'" and `requestedDate` < "'.addDaysToDate(date('Y-m-d'), 1).'" and `idle` = 0';
 $dataCloningCount = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
 $dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
 $dataCloning->calculNextTime();
 $plannedDate = date('Y-m-d', $dataCloning->plannedDate);
 $plannedHours = date('H:i', $dataCloning->plannedDate);
+$idDataCloningParent = RequestHandler::getId('idDataCloningParent');
 ?>
   <table>
     <tr>
       <td>
         <form dojoType="dijit.form.Form" id='dataCloningForm' name='dataCloningForm' onSubmit="return false;">
+          <input type="hidden" id="idDataCloningParent" name="idDataCloningParent" value="<?php echo $idDataCloningParent?>"/>
           <table width="100%" style="white-space:nowrap">
             <tr>
               <td>
