@@ -192,9 +192,9 @@ class DataCloning extends SqlElement{
 			  $result .='<table width="100%"><tr>';
 			  if(!$data->idle){
 			    $result .='<td width=10%" style="padding-left:10px"><a onClick="copyDataCloning('.$data->id.');" title="'.i18n('copyDataCloning').'" > '.formatMediumButton('Copy').'</a></td>';
-			    $result .='<td width=90%" style="padding-left:32%">'.$data->name.'</td></tr></table></td>';
+			    $result .='<td width=90%" style="padding-left:10px">'.$data->name.'</td></tr></table></td>';
 			  }else{
-			    $result .='<td width=100%" style="text-align:center;">'.$data->name.'</td></tr></table></td>';
+			    $result .='<td width=100%" style="padding-left:44px">'.$data->name.'</td></tr></table></td>';
 			  }
 			  $result .='<td style="border: 1px solid grey;height:40px;width:10%;text-align:center;vertical-align:center;'.$idleColor.'">'.$data->versionCode.'</td>';
 			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:left;vertical-align:center;'.$idleColor.'">';
@@ -202,7 +202,7 @@ class DataCloning extends SqlElement{
 			  if($data->idOrigine and !$data->idle){
 			    $result .='<td width=10%" style="padding-left:10px"><a onClick="gotoDataCloningStatus('.$data->id.');" title="'.i18n('gotoDataCloningStatus').'" > '.formatMediumButton('Goto', true).'</a></td>';
 			    $origin = new DataCloning($data->idOrigine);
-			    $result .='<td width=90%" style="padding-left:30%">'.$origin->name.'</td></tr></table></td>';
+			    $result .='<td width=90%" style="padding-left:10px">'.$origin->name.'</td></tr></table></td>';
 			  }else{
 			    $result .='</tr></table></td>';
 			  }
