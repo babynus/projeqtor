@@ -135,7 +135,7 @@ class DataCloning extends SqlElement{
 		} else {
 			$listUser = getListForSpecificRights('imputation');
 		}
-		$wherePerDay = 'idResource = '.$idUser.' and `requestedDate` > "'.addDaysToDate(date('Y-m-d'), -1).'" and `requestedDate` < "'.addDaysToDate(date('Y-m-d'), 1).'" and `idle` = 0';
+		$wherePerDay = 'idResource = '.$idUser.' and `requestedDate` > "'.date('Y-m-d').'" and `requestedDate` < "'.addDaysToDate(date('Y-m-d'), 1).'" and `idle` = 0';
 		$dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
 		$dataCloningCountTotal = $dataCloning->countSqlElementsFromCriteria(array("idle"=>"0"));
 		$dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
@@ -191,7 +191,7 @@ class DataCloning extends SqlElement{
 			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:left;vertical-align:center;'.$idleColor.'">';
 			  $result .='<table width="100%"><tr>';
 			  if(!$data->idle){
-			    $result .='<td width=10%" style="padding-left:10px"><a onClick="copyDataCloningStatus('.$data->id.');" title="'.i18n('copyDataCloningStatus').'" > '.formatMediumButton('Copy').'</a></td>';
+			    $result .='<td width=10%" style="padding-left:10px"><a onClick="copyDataCloning('.$data->id.');" title="'.i18n('copyDataCloning').'" > '.formatMediumButton('Copy').'</a></td>';
 			    $result .='<td width=90%" style="padding-left:32%">'.$data->name.'</td></tr></table></td>';
 			  }else{
 			    $result .='<td width=100%" style="text-align:center;">'.$data->name.'</td></tr></table></td>';
