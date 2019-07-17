@@ -4184,7 +4184,7 @@ function selectFilterContinue() {
    *  Ticket #4010  
    * When adding filter (not stored), icon has not the "on" flag
    */
-   if(dojo.byId("nbFilterCriteria").value > 0 && !dijit.byId('filterDynamicParameter').get("checked") && dojo.byId('nbDynamicFilterCriteria').value==0) {
+   if(dojo.byId("nbFilterCriteria").value >= 0 && !dijit.byId('filterDynamicParameter').get("checked") && dojo.byId('nbDynamicFilterCriteria').value==0) {
      setTimeout("dijit.byId('listFilterFilter').set('iconClass', 'iconActiveFilter')",100);
    } else {
      setTimeout("dijit.byId('listFilterFilter').set('iconClass', 'iconFilter')",100);
