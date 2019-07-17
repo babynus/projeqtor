@@ -26,8 +26,12 @@
 
 scriptLog('dynamicDialogAddDataCloning.php');
 $user = getSessionUser();
+$userId = $user->id;
+if(sessionValueExists('userName') and getSessionValue('userName') != ''){
+  $userId = getSessionValue('userName');
+}
 $dataCloning = new DataCloning();
-$wherePerDay = 'idResource = '.$user->id.' and `requestedDate` > "'.date('Y-m-d').'" and `requestedDate` < "'.addDaysToDate(date('Y-m-d'), 1).'" and `idle` = 0';
+$wherePerDay = 'idResource = '.$userId.' and `requestedDate` > "'.date('Y-m-d').'" and `requestedDate` < "'.addDaysToDate(date('Y-m-d'), 1).'" and `idle` = 0';
 $dataCloningCount = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
 $dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
 $dataCloning->calculNextTime();
@@ -47,7 +51,7 @@ $idDataCloningParent = RequestHandler::getId('idDataCloningParent');
                 <select dojoType="dijit.form.FilteringSelect" class="input" xlabelType="html"
                 style="width: 150px;" name="dataCloningUser" id="dataCloningUser" required
                 <?php echo autoOpenFilteringSelect();?>
-                value="<?php echo $user->id;?>">
+                value="<?php echo $userId;?>">
                   <?php $specific='imputation';
                    include '../tool/drawResourceListForSpecificAccess.php';?>  
                  </select>
