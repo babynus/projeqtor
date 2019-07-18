@@ -189,7 +189,7 @@
    // If it's not the leave system project and portfolio
   if ($portfolio and isLeavesSystemActiv()) {
       $queryWhere.=  "(".$table . ".idProject not in " . Project::getAdminitrativeProjectList() ;      
-      $queryWhere.=  " OR ".$table . ".idProject = " . Project::getLeaveProjectId().") " ;      
+      $queryWhere.=  " OR ".$table . ".idProject = " . ((Project::getLeaveProjectId())?Project::getLeaveProjectId():0).") " ;      
   } else {
   $queryWhere.=  $table . ".idProject not in " . Project::getAdminitrativeProjectList() ;
   }
