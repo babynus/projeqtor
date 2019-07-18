@@ -926,6 +926,7 @@ class Cron {
   		$arrayTo=array("","","");
   		$class=str_replace($arrayFrom, $arrayTo, $class);
   		$id=str_replace($arrayFrom, $arrayTo, $id);	
+  		$id=str_replace(']','',$id);
       $obj=null;
       if (SqlElement::class_exists($class) and is_numeric($id)) {
         $obj=new $class($id);
