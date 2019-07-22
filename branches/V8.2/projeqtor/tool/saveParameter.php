@@ -421,6 +421,12 @@ if ($type=='habilitation') {
     $dataCloningCreationRequest->parameterValue = $minutes.' '.$hours.' * * *';
   }else{
     $dataCloningCreationRequest->parameterValue = '* * * * *';
+    $dataCloningSpecificFrequency=SqlElement::getSingleSqlElementFromCriteria('Parameter', array("parameterCode"=>"dataCloningSpecificFrequency"));
+    $frequency = RequestHandler::getValue('dataCloningSpecificFrequency');
+    $dataCloningSpecificFrequency->parameterValue = $frequency;
+    $dataCloningSpecificFrequency->idUser = null;
+    $result=$dataCloningSpecificFrequency->save();
+    array_push($SaveChange, $result);
   }
   $dataCloningCreationRequest->idUser = null;
   $result=$dataCloningCreationRequest->save();
