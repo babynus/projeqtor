@@ -75,12 +75,17 @@ class DataCloning extends SqlElement{
 	}
 	
 	public function calculNextTime(){
+	  $cron = Parameter::getGlobalParameter('dataCloningCreationRequest');
+	  $frequency = Parameter::getGlobalParameter('dataCloningSpecificFrequency');
 		$UTC=new DateTimeZone(Parameter::getGlobalParameter ( 'paramDefaultTimezone' ));
 		$date=new DateTime('now');
-		$date->modify('+1 minute');
-		$cron = Parameter::getGlobalParameter('dataCloningCreationRequest');
+		if($cron == '* * * * *' and $frequency != ''){
+		  $date->modify('+'.$frequency.' minute');
+		}else{
+		  $date->modify('+1 minute');
+		}
 		if(!$cron){
-			$splitCron=explode(" ",$this->cron);
+			$splitCron=explode(" ","* * * * *");
 		}else{
 			$splitCron=explode(" ",$cron);
 		}
@@ -164,7 +169,7 @@ class DataCloning extends SqlElement{
 		$result .='     <td style="border: 1px solid grey;height:60px;width:20%;text-align:center;vertical-align:center;">';
 		$result .='       <table width="100%"><tr>';
 		$result .='         <td width="80%">'.$dataCloningCount.'</td>';
-		$result .='         <td width="20%"><a onClick="addDataCloning();" title="'.i18n('addDataCloning').'" style="display:'.$hide.'">'.formatBigButton('Add').'</a></td>';
+		$result .='         <td width="20%"><a onClick="addDataCloning();" title="'.i18n('dialogAddDataCloning').'" style="display:'.$hide.'">'.formatBigButton('Add').'</a></td>';
 		$result .='       </tr></table>';
 		$result .='   </tr>';
 		foreach ($listUser as $id=>$name){
@@ -191,7 +196,11 @@ class DataCloning extends SqlElement{
 			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:left;vertical-align:center;'.$idleColor.'">';
 			  $result .='<table width="100%"><tr>';
 			  if(!$data->idle){
-			    $result .='<td width=10%" style="padding-left:10px"><a onClick="copyDataCloning('.$data->id.');" title="'.i18n('copyDataCloning').'" > '.formatMediumButton('Copy').'</a></td>';
+			    $result .='<td width=10%" style="padding-left:10px">';
+			    if($data->isActive){
+			      $result .='<a onClick="copyDataCloning('.$data->id.');" title="'.i18n('copyDataCloningButton').'" > '.formatMediumButton('Copy').'</a>';
+			    }
+			    $result .='</td>';
 			    $result .='<td width=90%" style="padding-left:10px">'.$data->name.'</td></tr></table></td>';
 			  }else{
 			    $result .='<td width=100%" style="padding-left:44px">'.$data->name.'</td></tr></table></td>';
@@ -200,8 +209,12 @@ class DataCloning extends SqlElement{
 			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:left;vertical-align:center;'.$idleColor.'">';
 			  $result .='<table width="100%"><tr>';
 			  if($data->idOrigine and !$data->idle){
-			    $result .='<td width=10%" style="padding-left:10px"><a onClick="gotoDataCloningStatus('.$data->id.');" title="'.i18n('gotoDataCloningStatus').'" > '.formatMediumButton('Goto', true).'</a></td>';
-			    $origin = new DataCloning($data->idOrigine);
+			    $origin = new DataCloning($data->idOrigine, true);
+			    $result .='<td width=10%" style="padding-left:10px">';
+			    if($origin->isActive){
+			      $result .='<a onClick="gotoDataCloningStatus('.$data->id.');" title="'.i18n('gotoDataCloningButton').'" > '.formatMediumButton('Goto', true).'</a>';
+			    }
+			    $result .='</td>';
 			    $result .='<td width=90%" style="padding-left:10px">'.$origin->name.'</td></tr></table></td>';
 			  }else{
 			    $result .='</tr></table></td>';
@@ -218,7 +231,7 @@ class DataCloning extends SqlElement{
 			  }else if($data->isRequestedDelete){
 			    $background = '#ffb366';
 			    $result .='<td width="80%" style="background-color:'.$background.';border-right:1px solid grey;height:40px;">'.i18n('cancelCloningStatus').'</td>';
-			    $result .='<td width="20%"><a onClick="cancelDataCloningStatus('.$data->id.');" title="'.i18n('cancelDataCloningStatus').'" > '.formatMediumButton('Cancel', true).'</a></td>';
+			    $result .='<td width="20%"><a onClick="cancelDataCloningStatus('.$data->id.');" title="'.i18n('cancelDataCloningButton').'" > '.formatMediumButton('Cancel', true).'</a></td>';
 			  }else{
 			    if($data->isActive){
 			      $activeText = i18n('activeCloningStatus');
@@ -227,9 +240,13 @@ class DataCloning extends SqlElement{
 			    }
 			    $result .='<td width=80%" style="background-color:'.$background.';border-right:1px solid grey;height:40px;">';
 			    $result .='<table width="100%"><tr>';
-			    $result .='<td width=10%" style="padding-left:10px"><a onClick="gotoDataCloningStatus('.$data->id.');" title="'.i18n('gotoDataCloningStatus').'" > '.formatMediumButton('Goto', true).'</a></td>';
+			    $result .='<td width=10%" style="padding-left:10px">';
+			    if($data->isActive){
+			      $result .='<a onClick="gotoDataCloningStatus('.$data->id.');" title="'.i18n('gotoDataCloningButton').'" > '.formatMediumButton('Goto', true).'</a>';
+			    }
+			    $result .='</td>';
 			    $result .='<td width=90%">'.$activeText.'</td></tr></table>';
-			    $result .='<td width="20%"><a onClick="removeDataCloningStatus('.$data->id.');" title="'.i18n('removeDataCloningStatus').'" > '.formatMediumButton('Remove').'</a></td>';
+			    $result .='<td width="20%"><a onClick="removeDataCloningStatus('.$data->id.');" title="'.i18n('removeDataCloningButton').'" > '.formatMediumButton('Remove').'</a></td>';
 			  }
 			  $result .='</tr></table></td>';
 			  $countLine++;
@@ -243,6 +260,37 @@ class DataCloning extends SqlElement{
 		$result .='  </table>';
 		$result .='</div>';
 		echo $result;
+	}
+	
+	public static function htmlReturnOptionForMinutesHoursCron($selection, $isHours=false, $isDayOfMonth=false, $required=false) {
+		$arrayWeekDay=array();
+		$max=59;
+		$start=0;
+		$modulo=5;
+		if($isHours){
+			$max=23;
+			$start=0;
+			$modulo=1;
+		}
+		if($isDayOfMonth){
+			$max=31;
+			$start=1;
+			$modulo=1;
+		}
+		for($i=$start;$i<=$max;$i++){
+			$key=$i;
+			if ( $i % $modulo==0) $arrayWeekDay[$key]=$key;
+		}
+		$result="";
+		if (! $required) {
+			$result.='<option value="*" '.(($selection=='*')?'selected':'').'>'.i18n('all').'</option>';
+		}
+		foreach($arrayWeekDay as $key=>$line) {
+			$result.= '<option value="' . $key . '"';
+			if ($selection!==null and $key==$selection ) { $result.= ' SELECTED '; }
+			$result.= '>'.$line.'</option>';
+		}
+		return $result;
 	}
 	
 	public static function drawDataCloningParameter(){
@@ -296,7 +344,7 @@ class DataCloning extends SqlElement{
   	echo autoOpenFilteringSelect();
   	echo ' style="width: 100px; font-size: 80%;"';
   	echo ' id="dataCloningCreationRequest" name="dataCloningCreationRequest"';
-  	echo ' onChange="showSpecificHours();">';
+  	echo ' onChange="showSpecificCreationRequest();">';
   	$request=SqlElement::getSingleSqlElementFromCriteria('Parameter', array("parameterCode"=>"dataCloningCreationRequest"));
   	$request=$request->parameterValue;
   	$selectImmediate = ($request=='* * * * *')?'selected':'';
@@ -311,6 +359,31 @@ class DataCloning extends SqlElement{
                     type="text" maxlength="5" style="margin-left:20px;width:40px; text-align: center;display:'.$display.';" class="input rounded"
                     value="T'.date('H:i').'" hasDownArrow="false">';
     echo '</div>';
+    $display = ($request =='* * * * *')?'block':'none';
+    $specificFrequency=SqlElement::getSingleSqlElementFromCriteria('Parameter', array("parameterCode"=>"dataCloningSpecificFrequency"));
+    $specificFrequency = $specificFrequency->parameterValue;
+    echo '<select dojoType="dijit.form.FilteringSelect" class="input"';
+    echo autoOpenFilteringSelect();
+    echo 'style="width:80px;margin-left:20px;display:'.$display.';" name="dataCloningSpecificFrequency" id="dataCloningSpecificFrequency">';
+    $selected = ($specificFrequency=='5')?'selected':'';
+    echo '<option value="5" '.$selected.'>'.i18n('periodicEvery').' 5'.i18n('shortMinute').'</option>';
+    $selected = ($specificFrequency=='10')?'selected':'';
+    echo '<option value="10" '.$selected.'>10'.i18n('shortMinute').'</option>';
+    $selected = ($specificFrequency=='15')?'selected':'';
+    echo '<option value="15" '.$selected.'>15'.i18n('shortMinute').'</option>';
+    $selected = ($specificFrequency=='30')?'selected':'';
+    echo '<option value="30" '.$selected.'>30'.i18n('shortMinute').'</option>';
+    $selected = ($specificFrequency=='60')?'selected':'';
+    echo '<option value="60" '.$selected.'>1'.i18n('shortHour').'</option>';
+    $selected = ($specificFrequency=='120')?'selected':'';
+    echo '<option value="120" '.$selected.'>2'.i18n('shortHour').'</option>';
+    $selected = ($specificFrequency=='240')?'selected':'';
+    echo '<option value="240" '.$selected.'>4'.i18n('shortHour').'</option>';
+    $selected = ($specificFrequency=='360')?'selected':'';
+    echo '<option value="360" '.$selected.'>6'.i18n('shortHour').'</option>';
+    $selected = ($specificFrequency=='720')?'selected':'';
+    echo '<option value="720" '.$selected.'>12'.i18n('shortHour').'</option>';
+    echo '</select>';
   	echo '</td></tr>';
   	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningTotal').' : </label></td>';
   		echo '<td class="crossTablePivot">';
