@@ -146,7 +146,7 @@ if($dataCloning->getVersionCodeList()){
             <td width="10%" nowrap="nowrap" style="padding-right:9%" >
             <?php if($userProfil->profileCode == 'ADM'){?>
               <button id="parameterDataCloning" dojoType="dijit.form.Button" showlabel="false"
-              title="<?php echo i18n('parameterDataCloning');?>"
+              title="<?php echo i18n('menuDataCloningParameter');?>"
               iconClass="iconParameter32" class="button">
                 <script type="dojo/method" event="onClick" args="evt">
                   loadMenuBarItem('DataCloningParameter', 'DataCloningParameter', 'bar');  

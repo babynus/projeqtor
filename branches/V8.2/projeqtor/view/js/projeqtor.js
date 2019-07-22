@@ -6115,11 +6115,16 @@ function cancelDataCloningStatus(idDataCloning){
   showConfirm(i18n('cancelDataCloning') ,action);
 }
 
-function showSpecificHours(){
+function showSpecificCreationRequest(){
 	var value = dijit.byId('dataCloningCreationRequest').get('value');
 	if(value == 'specificHours'){
 		dijit.byId("dataCloningSpecificHours").domNode.style.display = 'block';
 	}else{
 		dijit.byId("dataCloningSpecificHours").domNode.style.display = 'none';
+	}
+	if(value == 'immediate'){
+		dijit.byId("dataCloningSpecificFrequency").domNode.style.display = 'block';
+	}else{
+		dijit.byId("dataCloningSpecificFrequency").domNode.style.display = 'none';
 	}
 }

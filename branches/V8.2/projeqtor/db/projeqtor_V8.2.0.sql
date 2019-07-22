@@ -90,6 +90,7 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('dataCloningCreationRequest','* * * * *');
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('dataCloningPerDay','5');
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('dataCloningTotal','50');
+INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('dataCloningSpecificFrequency','5');
 
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('paramPasswordStrength','1');
 
