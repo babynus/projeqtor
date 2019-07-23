@@ -1658,7 +1658,7 @@ function finalizeMessageDisplay(destination, validationType) {
         if (dojo.byId("buttonDivObjectId")
             && (lastOperation.value=='insert' || forceRefreshCreationInfo)
             && lastSaveId && lastSaveId.value) {
-          if (lastOperation.value=='insert') {
+          if (lastOperation.value=='insert' && dojo.byId('directLinkUrlDivDetail')) {
             //dojo.byId("buttonDivObjectId").innerHTML = "&nbsp;#"
             //  + lastSaveId.value;
             var ref=dojo.byId('directLinkUrlDivDetail').value;
