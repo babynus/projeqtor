@@ -3048,6 +3048,8 @@ function countDayDiffDates($start, $end, $idCalendarDefinition) {
  * @return int number of days
  */
 function dayDiffDates($start, $end) {
+  if (strlen($start)>10) $start=substr($start,0,10);
+  if (strlen($end)>10) $end=substr($end,0,10);
   if (!trim($start) or !trim($end)) return 0;
   $tStart=explode("-", $start);
   $tEnd=explode("-", $end);
