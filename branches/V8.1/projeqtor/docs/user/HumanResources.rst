@@ -1,6 +1,4 @@
-.. raw:: latex
-
-    \newpage
+.. include:: ImageReplacement.txt
 
 .. title:: Humans Resources
 
@@ -13,20 +11,22 @@ Humans Resources
 
 .. note:: **Documentation**
 
-   `Documentation <https://www.projeqtor.org/files/ProjeQtOr%20-%20Documentation%20-%20Absences%20r%C3%A9glement%C3%A9es.pdf/>`_ on the implementation of regulated absences by Salto consulting 
-   is online on the `download page <https://www.projeqtor.org/fr/product-fr/downloads-fr/>`_
+   `Documentation <https://www.projeqtor.org/files/ProjeQtOr%20-%20Documentation%20-%20Absences%20r%C3%A9glement%C3%A9es.pdf>`_ on the implementation of regulated absences by Salto 
+   
+   You can consult it is online on the `download page <https://www.projeqtor.org/fr/product-fr/downloads-fr/>`_
 
 This section allows to manage the society's Humans Resources 
 
 This system comes in addition to the standards of the management of absences
 
-* You must define the employees [#f1]_, contract types and leaves types contract 
+* You must define the :ref:`employee_manager`, :ref:`Leaves_Types` and :ref:`employment_contract_type` 
 
 * You can choose the leave entitlement standard for each type of contract
 
 * The employee may reserve periods of leave of absence according to his rights.
 
 * The system also includes a validation process of the requests during the leave period.
+
 
 .. warning:: **Absence Administrator**
 
@@ -41,47 +41,23 @@ This system comes in addition to the standards of the management of absences
    
    You can choose here who will be the administrator of this module
 
-
-
-
-.. index:: Humans Resources (Sections)
-.. rubric:: **Humans Resources Sections**
-
-   * Leaves Calendar
-   * Leaves Period
-   * Leaves rights earned
-   * Employees
-   * Employment Contract
-   * Employee Managers
-   * Leaves Dashboard
-   * Regulated leaves parameters
-
-
-.. index:: Human Resources (variable capacity)
-.. rubric:: **Variable capacity**
-   
-   The resources may have a capacity that varies over time. 
-   This allows you to reserve and enter additional time (for periods of overtime) 
-   or less than the standard capacity (for some periods of 'rest
    
 .. important:: The HR module was created in order to be easily adapted to French law 
    but it can be fully parameterized according to the rights of any country
-   
-.. index:: ! Regulated absence
 
-.. rubric:: **Footnote**
 
-.. [#f1] an employee is a resource whose property 'is an employee' is checked.
-      
-      This property is visible only when the REGULATED ABSENCE module is enabled.
- 
+.. raw:: latex
+
+    \newpage
+    
+.. index:: ! Regulated absence 
    
 .. _regulated_absences:
    
 Regulated absence
 -----------------
 
-The 'Regulated Absence' module is used to manage absences that must be validated, controlled and have values to be regulated according to French law.
+The "Regulated Absence" module is used to manage absences that must be validated, controlled and have values to be regulated according to French law.
 
 Thanks to this module, it is thus possible to manage the paid holidays, the RTT, the Stopped diseases by treating
 
@@ -89,13 +65,198 @@ Thanks to this module, it is thus possible to manage the paid holidays, the RTT,
    * the period of validity of a quantity of absence 
    * the possibility or not to take early holidays over the period being acquired
    * the number of days before and after which the absence request can be made
-   * 'specific' acquisition rules
+   * specific acquisition rules
    * validation or rejection of an application
    
 .. note:: A project dedicated to these regulated absences is created and makes it possible to store the requested days of absence as planned time 
    and the days of absence validated as working time thus making it possible to integrate these absences in the planning.   
 
+.. rubric:: Leaves States   
+
+Regulated absences have 3 states:
+
+* **recorded:** 
+
+Creation status. In this state all the data of the absence can be modified
+
+* **validated:** 
+
+State that only the manager and the administrator of the module can be enabled.
+
+In this state, only the state of absence can be changed by the manager or administrator
+
+* **cancelled:** 
+
+State that only the manager and the administrator of the module can be enabled.
+
+In this state, only the state of absence can be modified by the manager or administrator
+
+and the number of days the absence represents are not taken
+
+
+.. note:: 
+
+   The calculation of the number of days represented by absence is done on the basis of working days
+   :ref:`global-parameters` and schedule associated with employee: holidays, non-working days
+
+
+.. raw:: latex
+
+    \newpage
+    
+.. index:: ! Employees
+
+.. _employee_manager:
+    
+Employees and Manager
+=====================
+
+.. sidebar:: Other section 
+
+   * :ref:`resource`
+   * :ref:`Module_Management`
+
+The properties below is visible only when the :ref:`regulated Absence module<Module_Management>` is enabled
+
+
+.. rubric:: employee
+
+An employee is a :ref:`resource` whose property **"is an employee"** is checked in the screen ressources
+
+.. note:: 
    
+   * The manager records the request
+   * Employee makes the request 
+   
+.. figure:: /images/GUI/RH_ZONE_DescriptionEmployee.png
+   :alt: Employee is a resource
+   :align: center
+   :scale: 70%
+   
+   Box **"is an employee"** is checked
+
+To an employee are associated a :ref:`employment_contract` and :ref:`leaves_rights_earned` 
+
+The contract is associated with a :ref:`employment_contract_type` 
+
+This allow the employee to associate the rules of acquisition, 
+
+the special rules of regulated absences and the acquired rights by type of absence and by acquisition period.
+
+.. figure:: /images/GUI/RH_ZONE_MenuEmployee.png
+   :alt: Employee Menu 
+   :scale: 70%
+
+   Employee menu
+
+Once the resources are saved as employees, you can manage them from the employee screen
+
+you find the same fields of description as the resources.
+
+.. rubric:: Employment Contract
+
+This section is visible and linked to the :ref:`employment_contract_type` screen
+
+.. rubric:: Manager
+
+In this section, the employee can see the person who manage its leaves periods
+
+.. figure:: /images/GUI/RH_SCR_Employee.png
+   :alt: Employee screen 
+
+   Employee screen
+
+
+.. rubric:: Manager
+
+A manager is a resource whose properties **"is an employee"** and **"is absence manager"** are checked
+
+.. figure:: /images/GUI/RH_ZONE_DescriptionManager.png
+   :alt: Manager is a resource and the manager of leaves
+   :align: center
+   :scale: 70%
+   
+   Box **"is an employee"** and **"is manager of leaves"** is checked
+
+A manager must be an employee.
+
+An employee manager can make absence requests in lieu of employees.
+
+He can validate or reject employee absentee requests that he manages.
+
+.. figure:: /images/GUI/RH_ZONE_MenuManager.png
+   :alt: Employee Menu 
+   :scale: 70%
+   
+   Manager menu
+   
+
+.. important:: 
+
+   The management of an employee is dated, which allows to change manager 
+   
+   or temporarily delegate management to another manager (absences).
+
+
+.. figure:: /images/GUI/RH_SCR_Manager.png
+   :alt: Manager Screen
+   
+   Manager Screen 
+
+
+.. rubric:: Bulk add for employees managed
+
+It is possible here to associate the employees with their manager, ie:
+
+* IN MASS: According to criteria of massification
+
+* UNITAIREMENT with the list of employees attached to this manager
+ 
+
+for example, if the company closes in August ...
+
+the manager can register a request for his organization and under organization, for all the organizations, his entire team,
+himself included
+
+
+
+.. rubric:: Administrator
+
+If an employee does not have a manager, the administrator of the Regulated absence module acts as manager.
+
+the administrator is obligatorily a leave manager
+
+
+.. figure:: /images/GUI/RH_ZONE_MenuAdminManager.PNG
+   :alt: Employee Menu 
+   :scale: 70%
+          
+   Administrator and Leaves Manager menu.
+
+
+
+.. warning::
+
+   When a resource is no longer 'used', all the elements of the Regulated absence module are deleted by the module:
+   
+   • assignments to activities associated with type of absence
+   • time spent generated following validated absence requests
+   • planned times generated due to absence requests not yet validated
+   • absence requests
+   • acquired rights
+   • contracts
+   • links with his managers
+
+
+
+.. raw:: latex
+
+    \newpage
+
+.. index:: ! Leaves Calendar
+
+.. _leaves_calendar:
+
 Leaves Calendar
 ===============
 
@@ -111,31 +272,25 @@ To record or change your absences, double clicking on an existing date or absenc
 
 a pop up opens to display the properties of an absence (date and type of absence ...)
 
-.. figure:: /images/GUI/RH_POPUP_LeavesAttributs.png
+.. figure:: /images/GUI/RH_BOX_LeavesAttributs.png
    :alt: Leaves attributs
    :align: center
    
-.. rubric:: Leaves States   
+   
+After validation, the holiday appears in the calendar.
 
-Regulated absences have 3 states:
+The manager (and / or administrator) can validate or not, the leave of the employees.
 
-* **recorded:** 
-Creation status. In this state all the data of the absence can be modified
+The color of the holidays will change according to the validation.
+   
+.. raw:: latex
 
-* **validated:** 
-State that only the manager and the administrator of the module can be enabled.
-In this state, only the state of absence can be changed by the manager or administrator
+    \newpage
 
-* **canceled:** 
-State that only the manager and the administrator of the module can be enabled.
-In this state, only the state of absence can be modified by the manager or administrator
-and the number of days the absence represents are not taken
+.. index:: ! Leaves Period
 
-.. note:: 
-
-   The calculation of the number of days represented by absence is done on the basis of working days
-   Global setting of projeqtor and schedule associated with employee: holidays, non-working days
-
+.. _leaves_period:
+   
 Leaves Periods
 ==============
 
@@ -146,12 +301,22 @@ Absences can be recorded from the leaves Periods screen
 .. figure:: /images/GUI/RH_SCR_LeavesPeriods.png
    :alt: Leaves periods
    :align: center
+  
 
-On this screen, you can save, edit, delete a holiday request as on the absence schedule.
+On this screen, you can save, edit, delete a holiday request, as in the holiday calendar.
 
-The employee manager and the administrator can change the status of a holiday (see reports)
+The Employee Manager and Administrator can change the status of a holiday (see :ref:`report`).
 
 
+.. raw:: latex
+
+    \newpage
+
+.. title:: Humans Resources
+
+.. index:: ! Leaves rights earned
+
+.. _leaves_rights_earned:
 
 Leave Rights earned
 ===================
@@ -162,54 +327,106 @@ On this screen, you can see your leaves rights earned since your contratc's begi
    :alt: Leaves rights earned
    :align: center
 
-* the start and end dates correspond to the period on which the days of leave are calculated
+the start and end dates correspond to the period on which the days of leave are calculated
 
-* The numbers of the days acquired and remaining 
+The numbers of the days acquired and remaining 
 
-* If your holidays over the reference period and according to the type of leave, 
-  then the checkbox "closed" is validated.
-  You no longer have this type of holiday available and can not ask any more
+If your holidays over the reference period and according to the type of leave, 
 
-Employees
-=========
+then the checkbox "closed" is validated. 
+
+You no longer have this type of holiday available and can not ask any more
+
+.. raw:: latex
+
+    \newpage
+
+.. index:: ! Employment Contract
+
+.. _employment_contract:
 
 Employment contract
 ===================
 
-Employee Managers
-=================
+you can see the details of the contracts and which employee is attached to them 
+
+.. figure:: /images/GUI/RH_SCR_EmploymentContract.png
+   :alt: Leaves rights earned
+   :align: center
+   
+   
+.. raw:: latex
+
+    \newpage
+
+.. index:: ! Leaves Dashboard
+
+.. _leaves_dashboard:
 
 Leaves Dashboard
 ================
 
+A dashboard is available to absence managers
+
+.. figure:: /images/GUI/RH_SCR_LeavesDashboard.png
+   :alt: Leaves Dahsboard
+   
+The filter bar allows you to filter the information presented in the dashboard
+
+.. figure:: /images/GUI/RH_ZONE_FilterBar.png
+   :alt: Filters
+
+Leaves Calendar displays informations based on filters applied by managed employee
+
+The |iconDelay| tells you that the request was made late 
+
+You can export the calendar into Excel format 
+
+.. rubric:: Synthesis
+
+The synthesis is also displayed according to the filters selected beforehand, 
+
+and gives the number of days remaining to be taken by type of leave and managed employees
+
+
+.. rubric:: Leave period to process
+
+In this section, appears the list of absences to be processed, that is to say under the "recorded" status
+
+
+.. raw:: latex
+
+    \newpage
+
+.. index:: ! Leaves Parameters
+
+.. _Leaves_parameters:
+
 Regulated leaves parameters
 ===========================
 
-.. _rh_LeavesTypes:
 
-Leaves types
-^^^^^^^^^^^^
 
-this part allows you to create the types of absences regulated according to the laws of your country.
+.. _earned_rights:
 
-A corresponding activity (= name of absence type) is created on the project dedicated to absences management.
+Earned rights
+^^^^^^^^^^^^^
 
-All employees (resource registered as employee) are assigned to this activity
+The regulation of absences is based on the rights to take absences acquired over a given period.
 
-.. figure:: /images/GUI/RH_SCR_TypesConges.png
-   :alt: creating types of absences
-   :align: center
-   
-   Leaves types
+It is therefore based on values to be given to attributes of regulation according to the type of absence 
 
-In the details area, you assign a name and color to your type of absence.
+(ex: Paid leave, RTT, sick leave, legal leave, etc.) 
 
-You can choose which workflow it is attached to
+and the type of contract associated with the employee (Ex: Full time, Part time).
 
-You can define who will receive, an alert, a notification, and / or an email when creating, updating, processing or deleting types of absences .
 
-The manager records the request
-Employee makes the request 
+.. rubric:: General acquisition of rights
+
+When you create a :ref:`employment_contract_type` or :ref:`Leaves_Types`, you have contractual values to fill in
+
+.. figure:: /images/GUI/RH_ZONE_LeavesRights.png
+   :alt: Contractual values for the leaves type
 
 .. warning:: Check box "On default" and "on everything"
 
@@ -220,16 +437,8 @@ Employee makes the request
    * These values can not be changed after they are saved.
 
    For any change, the creation of a new type of absence is necessary.  
-
-.. note:: In France, an employee is entitled to 2 and a half days of leave per month of actual work at the same employer, 
-   wether 5 weeks per full year of work (from June 1st to May 31st)
-
-
-.. _rh_ContractuelValues:
-
-.. rubric:: **Contractual values**
-      
-   .. tabularcolumns:: |l|l|
+     
+.. tabularcolumns:: |l|l|
 
 .. list-table::
    :widths: 20, 70
@@ -260,6 +469,82 @@ Employee makes the request
    * - max delay for anticipated absence (days)
      - Number of days before which an application can be made     
 
+.. note:: In France, an employee is entitled to 2 and a half days of leave per month of actual work at the same employer, 
+   wether 5 weeks per full year of work (from June 1st to May 31st)
+
+.. rubric:: Specific acquisition of rights
+
+To integrate specific rights of absence, the concept of special rights has been put in place.
+
+usable entities are:
+
+* Absences
+
+* Employees
+
+* Contracts
+
+* Acquired rights
+
+.. figure:: /images/GUI/RH_BOX_AddSpecialLeaves.png
+   :alt: Contractual values for the leaves type
+
+.. tabularcolumns:: |l|l|
+
+.. list-table::
+   :widths: 20, 70
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - Name
+     - The name to give to the special right
+   * - custom earned rule
+     - The rule allowing the calculation of a number of times to apply the quantity of right to absence
+   * - where clause 
+     - Condition of application of the special right 
+   * - Quantity
+     - The elementary quantity of the special right
+   * - Leave type   
+     - The type of absence to which the special duty applies
+
+
+
+.. _Leaves_Types:
+
+Leaves types
+^^^^^^^^^^^^
+
+this part allows you to create the types of absences regulated according to the laws of your country.
+
+A corresponding activity (= name of absence type) is created on the project dedicated to absences management.
+
+All employees (resource registered as employee) are assigned to this activity
+
+.. figure:: /images/GUI/RH_SCR_LeavesTypes.png
+   :alt: creating types of absences
+   :align: center
+   
+   Leaves types screen
+
+In the details area, you defined the type of absence.
+
+.. rubric:: Section treatment
+
+You can choose the workflow that will be attached to human resources
+
+.. rubric:: Section "Send Information..."
+
+.. figure:: /images/GUI/RH_ZONE_Alerts.png
+   :alt: Send an alert to...
+
+In this section, you can defined who received an internal alert or an email on the creation, the update, the delete and/or the treatment of the leaves
+
+.. seealso:: More detail about **contractual values**, see :ref:`earned_rights`
+   
+
+.. _employment_contract_type:
+
 Employment contract type
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -285,34 +570,36 @@ You can only have one type of default contract
    
    Screen of Employment contract type   
    
-In the details area, you assign a name to your contract's type.
-
-You choose which workflow it is attached to
+.. seealso:: More detail about **contractual values**, see :ref:`earned_rights`
 
 
-.. rubric:: **Parameters for earned leave rights**
+.. rubric:: Parameters for earned leave rights
    
 * In this section you can define which types of regulated absences will be attached to this type of contract.
 
 * If you have created several types of regulated absences and attached them to all your contracts
- (check box **on default** or **on everything**), 
- these types will be visible in this section.
+ (check box **on default** or **on everything**), these types will be visible in this section.
 
 
 If you are missing types of absences, you can create them from this screen:
 
-* Click on the |ButtonADD| button
+* Click on the |buttonAdd| button
 * A pop up opens and proposes to fill in the same fields as on the screen of the types of regulated absences
 
-.. figure:: /images/GUI/RH_POPUP_AddTypesConges.png
+.. figure:: /images/GUI/RH_BOX_RightsAcquisition.png
    :alt: Special leaves rights
    :align: center
 
-.. rubric:: **Configuration of special leave rights**
+.. seealso:: More detail about **Specific values**, see :ref:`earned_rights`
+
+
+
+
+.. rubric:: Configuration of special leave rights
 
 Special acquisition rules are rules that can not be expressed with the values of the standard acquisition rules
 
-.. figure:: /images/GUI/RH_POPUP_AddSpecialLeaves.png
+.. figure:: /images/GUI/RH_BOX_AddSpecialLeaves.png
    :alt: Special leaves rights
    :align: center
 
@@ -328,12 +615,13 @@ Condition of application of the special right
 
 this clause follows the vocabulary of the SQL language
 
-.. important:: for help with the SQL functions you can use, 
-   click on the section bar ** help on clause input **
+.. important:: 
+
+   for help with the SQL functions you can use, click on the section bar **help on clause input**
    
    A new part appears and proposes drop-down menus with prerecorded SQL queries 
 
-.. figure:: /images/GUI/RH_POPUP_AddSpecialLeavesPLUS.png
+.. figure:: /images/GUI/RH_BOX_AddSpecialLeaves+mysql.PNG
    :alt: Special Leaves
    :align: center
    
@@ -355,8 +643,11 @@ Allows you to record the different types of end of contract.
 .. note:: **Why end a contract?**
    
    * resignation
-   * change of status (ETAM -> FRAMEWORK) 
-   * change in the percentage of working time (100% -> 80%)
+   * change of the status (non managment -> management) 
+   * change of the quotity (100% -> 80%)
+   * going to retire...
+   
+These different reasons may lead to changes in the rules governing the acquisition of the rights of absence
 
 .. figure:: /images/GUI/RH_SCR_ContractEND.png
 

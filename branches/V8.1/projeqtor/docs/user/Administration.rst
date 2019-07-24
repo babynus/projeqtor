@@ -1,4 +1,4 @@
-
+.. include:: ImageReplacement.txt
 
 .. title:: Administration
 
@@ -139,6 +139,8 @@ Global parameters screen allows configuration of application settings.
    .. figure:: /images/GUI/GLOBALPARAM_ZONE_Tooltip.png
    
    * Moving the mouse over the caption of a parameter will display a tooltip with more description about the parameter.
+
+.. _work-time:
 
 Tab Work time
 -------------
@@ -547,6 +549,9 @@ Document reference format
       * {TYPE} for type code, 
       * {NUM} for number as computed for reference, 
       * {NAME} for document name.
+      
+you can allow or forbid downloading locked files in this section
+
 
 .. compound:: **version reference suffix**
 
@@ -699,8 +704,15 @@ Input of amounts for incomes
 
 * Defined for icomes items if the total bill lines feed the total with or without taxes. The parameter is priority if there a bill lines
 
+
+.. index:: Mailing Parameters
+
+.. _mailing_parameters:
+
 Tab Mailing
 -----------
+
+.. index:: emailing
 
 Emailing
 ========
@@ -775,7 +787,7 @@ User and password
 
 * You can display or no the check box on the login screen "remember me" 
 
-* You can initialize password on user creation
+* You can initialize password on user creation and defined a new password to random value 
 
 LDAP Management Parameters
 ==========================
@@ -795,6 +807,8 @@ Single Sign On SAML2
 ====================
 
 Use SSO connection through SAML2 protocol
+
+Single sign-on: SSO is a method that allows a user to access multiple computer applications (or secure websites) by performing only one authentication.
 
 .. figure:: /images/GUI/GLOBALPARAM_ZONE_SSO.png
    :alt: Global parameters : LDAP

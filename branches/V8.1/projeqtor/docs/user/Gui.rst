@@ -77,10 +77,18 @@ Top bar
 * Restricted the visibility of all objects of the selected project, including sub-projects if any.
 * Defined the “default” project for new items.
 
-.. note:: **User parameter: "Default project"**
+.. note:: 
 
-   * Defines the project that will be selected and display by default into the project selector
+   **User parameter**
+
+   * **default project** Defines the project that will be selected and display by default into the project selector
    * see: :ref:`User parameters - section miscelleanous<userparam_miscelleaneous>`
+
+
+.. figure:: /images/GUI/GUI_ZONE_SelectorProject.png
+   :alt: Project Selector Multi selection
+   
+* You can choose to display multiple projects by checking the corresponding boxes.
 
 
 .. rubric:: 1.1 - Project selector parameters
@@ -144,7 +152,9 @@ Click on |buttonIconSearch| to search projects and subprojects from any screen w
 
 .. rubric:: 2 - Menu on top bar
 
-Menu on top bar allows a rapid access to elements.
+Menu on top bar allows a rapid access to elements. 
+
+the screen icon you are on will be highlighted
 
 .. figure:: /images/GUI/ZONE_TopBarMenu.png
    :alt: Menu on top bar
@@ -330,7 +340,7 @@ Click on «Logo Area» will display the software information box
 List window
 -----------
 
-.. figure:: /images/GUI/zonelistwindows.png
+.. figure:: /images/GUI/GUI_ZONE_ListWindows.png
    :alt: List window
    :align: center
 
@@ -342,7 +352,7 @@ List window
 
 .. _rapid-filter:
 
-.. rubric:: |two| - Rapid filter
+.. rubric:: |two| Rapid filter
 
 * Rapid filtering fields are proposed : «Id», «Name» and «Type».
 
@@ -359,19 +369,22 @@ List window
   
     * Depending on the element, other filter fields will be available.
 
+ .. compound:: **Reset**
+  
+    * click on the clear button to reset the filter list.
 
-.. rubric:: |three| - Buttons 
+.. rubric:: |three| Buttons 
 
 * Click on |buttonIconSearch| to execute a textual search. (See: :ref:`quick-search`)
 * Click on |buttonIconFilter| to define an advanced filter. (See: :ref:`advanced-filter`)
 * Click on |buttonIconColumn| to define the columns displayed. (See: :ref:`displayed-columns`)
 * Click on |buttonIconPrint| to get a printable version of the list.
 * Click on |buttonIconPdf| to export it to PDF format.
-* Click on |buttonIconCsv| to export data of the selected items in a CSV format file. (See: :ref:`export-csv-format`)
+* Click on |buttonIconCsv| to export data of the selected items in a CSV format file. (See: :ref:`export-CSVformat`)
 * Click on |buttonIconNew| to create a new item of the element.*
 * Click on |buttonIconRefresh| to refresh the list
 
-.. rubric:: |four| - Extra buttons
+.. rubric:: |four| Extra buttons
 
 * Click on |buttonIconStatus| to diplays status list.
 
@@ -386,12 +399,12 @@ List window
 
    * Actives 'quick filtering by status' in  global parameters otherwise this button is hidden.
 
-.. rubric:: |five| - Checkbox «Show closed items»
+.. rubric:: |five| Checkbox «Show closed items»
 
 * Flag on «Show closed items» allows to list also closed items.
 
 
-.. rubric:: |six| - Column headers
+.. rubric:: |six| Column headers
 
 * Click a column header to sort the list on that column (first ascending, then descending).
 
@@ -400,7 +413,7 @@ List window
    * If the sorted column is linked to a reference list with sort order value, the sorting is executed on this sort value.
 
 
-.. admonition:: For instance
+.. note:: For instance
     
    * Sorting on the «Status» allows to sort values such as defined in the workflow. 
 
@@ -410,7 +423,7 @@ List window
 
 
 
-.. rubric:: |seven| - Items list
+.. rubric:: |seven| Items list
 
 * Click on a line (any column) will display the corresponding item in the detail window.
 
@@ -431,6 +444,14 @@ Just select what should be displayed.
    :alt: Global View Screen
    :align: center
 
+.. raw:: latex
+
+    \newpage
+    
+.. _quick_search:
+
+.. index:: Quick search
+
 Quick search
 ============
 
@@ -442,6 +463,7 @@ The quick search allows to execute a textual search.
 
 * Click on |buttonIconSearch| to execute the search.
 * Click on |buttonIconUndo| to close the quick search.
+* accents are not taken into account
 
 .. raw:: latex
 
@@ -456,11 +478,11 @@ The advanced filter allows to define clause to filter and sort.
 
 * The advanced filter definition dialog box is divided into two sections.
 
-.. figure:: /images/GUI/Filters.png
+.. figure:: /images/GUI/GUI_BOX_AdvancedFilters.png
    :alt: Dialog box - Advanced filter definition
    :align: center
  
-.. rubric:: 1 - Active filter
+.. rubric:: |one| Active filter
 
 * This section allows to define the filter and sort clauses.
 
@@ -471,6 +493,8 @@ The advanced filter allows to define clause to filter and sort.
     * Click on |buttonAdd| to add additional criteria. 
     * Click on **OK** button to apply the filter.
     * Click on **Cancel** button to revert to previous filter.
+    * Click on |buttonIconSearch| to filter the filter list.
+    
     
     
     * Possibility to select the logical operator **OR** between the criteria of a filter instead of **AND**. 
@@ -503,13 +527,14 @@ The advanced filter allows to define clause to filter and sort.
     \newpage
 
  
-.. rubric:: 2 - Saved filters
+.. rubric:: |two| Saved filters
 
-* This section allows to manage saved filters.
+This section allows to manage saved filters.
 
 * Click on a saved filter to retrieve its definition.
 * Click on |buttonIconDelete| from a saved filter to delete it.
 * Click on the **Default** button to define the active stored filter as the default, kept even after disconnection.
+* Click on |IconDragBLC| to reorganize the filters.
 
 .. note:: Default filter
 
@@ -630,7 +655,7 @@ export can be done horizontally (landscape) or vertically (portrait) in A4 and /
 
     \newpage
 
-.. _export-csv-format:
+.. _export-CSVformat:
 
 Export to CSV format
 ====================
@@ -684,12 +709,12 @@ Detail window
    :alt: Detail window
    :align: center
 
-.. rubric:: 1 - Item identifier
+.. rubric:: |one| Item identifier
 
 * Identifies the item with the element type and the item id and name.
 * Each element is identified with a distinctive icon.
 
-.. rubric:: 2 - Creation information
+.. rubric:: |two| Creation information
 
 * Information on the item (issuer and creation date) in thumbnail format.
 * See: :ref:`thumbnails`.
@@ -703,7 +728,7 @@ Detail window
 
     \newpage
 
-.. rubric:: 3 - Buttons
+.. rubric:: |three| Buttons
 
 * Click on |buttonIconNew| to create a new item.        
 * Click on |buttonIconSave| or use shortcut key :kbd:`Control-s` to save the changes on the current item. 
@@ -728,7 +753,7 @@ Detail window
     * When changes are ongoing, you cannot select another item or another menu item. 
     * Save or cancel ongoing changes first.
 
-.. rubric:: 4 - Drop file area
+.. rubric:: |four| Drop file area
 
 * This area allows to add an attachment file to the item.
 
@@ -740,7 +765,7 @@ Detail window
     \newpage
 
 
-.. rubric:: 5 - Sections
+.. rubric:: |five| Sections
 
 * The fields are regrouped under a section.
 * All sections can be folded or unfolded, clicking on the section title. 
@@ -847,6 +872,7 @@ Allows to send an informative email to defined recipients list.
  .. compound:: **Checkbox “other”**
 
     * Flag on the checkbox “other” to manually enter email addresses.
+    * When sending an email, the address (es) entered in "other" remains in memory and will be proposed during the next mailing
 
 .. rubric:: Message
 
@@ -927,6 +953,8 @@ You can view the list of tracked items in two ways:
 
     \newpage
 
+.. index:: Multiple update 
+
 .. _multiple-update:
 
 Multiple update
@@ -957,14 +985,23 @@ Allows to update several items in one operation.
 
    Multiple mode window
    
-
-
 .. rubric:: Apply updates
 
 * Click on |buttonIconSave| to save updates on selection.
 * Click on |buttonIconDelete| to delete all selected items.
 * The update will be applied to all the items (if possible) and a report will be displayed on the right. |four|
 
+
+.. note:: 
+
+   * target milestones can be modified with "multiple update" tickets and activity screens
+   
+   * You can bulk close items that do not have status (assigned, closed, recorded ...) as resources
+   
+   .. figure:: /images/GUI/GUI_ZONE_MultipleUpdate.png
+      :alt: multiple update on resource
+      
+       
 
 .. index:: ! Checklist
 
@@ -1496,7 +1533,7 @@ Validate the new one clicking and activating the next combo box
 
 or press F1
 
-.. _keyboard_shortcut
+.. _keyboard_shortcut:
 
 .. rubric:: h - Keyboard shorcuts
 

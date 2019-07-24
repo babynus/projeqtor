@@ -15,19 +15,23 @@ Real work allocation
 
 This screen is devoted to input of real work.
 
-Resource enters work day by day, on each assigned task.
+The resource informs his work day by day, for each assigned task.
 
 Data entry for one resource, on a weekly base.
 
 .. note::
 
-   * The corresponding cost to the real work is automatically updated to the assignment, activity and project.
+   The corresponding cost to the real work is automatically updated to the assignment, activity and project.
 
-.. warning:: **Global parameter:** Number of hours per **day**
+.. warning:: 
+
+   **Global parameter - Number of hours per day**
 
    * In global parameters screen, you can define wether work will be entered in hours or in days.
    * If you enter work in hours, you must define  the parameter **number of hours per day** before some real work has been entered.
    * After first work is entered, this parameter will be locked.
+      
+   **see:** :ref:`Global Parameters<work-time>`
 
 .. figure:: /images/GUI/REALWORK_SCR_TimeSheetZone2.png
    :alt: Timesheet zone screen
@@ -54,7 +58,7 @@ Data entry for one resource, on a weekly base.
 
 .. note::
 
-   * The planned work will be deleted if the real work is entered instead of planned work (to avoid duplication of work in reports) to see it you have to refresh the screen.
+   The planned work will be deleted if the real work is entered instead of planned work (to avoid duplication of work in reports) to see it you have to refresh the screen.
 
 .. rubric:: |three| Filters
 
@@ -80,10 +84,13 @@ Filters allow to define the list of assigned tasks displayed.
 
 * Show ID to identify all single task.
 
-.. note:: **Global parameter** "Display only handled tasks"
+.. note:: 
 
-   * If the value of the parameter is set to "Yes", only tasks taken over (status "handled") will be displayed.
-   * The checkbox "Hide not handled items" will be hidden.
+   **Global parameter - "Display only handled tasks"**
+
+   If the value of the parameter is set to "Yes", only tasks taken over (status "handled") will be displayed.
+   
+   The checkbox "Hide not handled items" will be hidden.
 
 .. rubric:: |four| Buttons
 
@@ -249,6 +256,8 @@ Selection timesheet
   * Select year and week |two| 
   
   * Or select the first day of the week |three| 
+  
+  * Or click on the **Today** button to return to the current week
 
 .. rubric:: |four| |five| |six| Displayed timesheet
 

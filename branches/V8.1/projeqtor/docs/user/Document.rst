@@ -6,7 +6,7 @@
 
 .. title:: Documents
 
-.. index:: ! Document 
+.. index:: ! Documents 
 
 .. _document:
 
@@ -19,95 +19,104 @@ Documents
 
 A document is a reference element that gives a description of a project or product.
 
-Document item describes general information about the document.
+The document element describes the general information.
 
-The file document will be stored in the tool as versions.
+The file will be stored in the tool as versions.
 
-.. topic:: Document files storage
+.. rubric:: files storage
 
-   * Document will always refer to a directory where the file is physically stored.
-   * Directories are defined in :ref:`document-directory` screen.
-
-.. topic:: Document versioning
-
-   * Document versioning allows to keep different version at each evolution of the document.
-   * Document can evolve and a new file is generated at each evolution.
-   * :term:`Type of versioning` must be defined for a document. 
-
-.. topic:: Approval process
+Document will always refer to a directory where the file is physically stored.
    
-   * You can define approvers to a document.
-   * When all approvers have approved the document version, it is considered as approved and then appears with a check in the list of versions.
-   * When creating an approver in the list, the approver is also automatically added to the latest version of the document.
-   * When adding a version to the document, the approvers are automatically added to the version.
+Directories are defined in :ref:`document-directory` screen.
+
+.. rubric:: Approval process
+   
+You can define approvers to a document.
+   
+When all approvers have approved the document version, it is considered as approved and then appears with a check in the list of versions.
+   
+When creating an approver in the list, the approver is also automatically added to the latest version of the document.
+   
+When adding a version to the document, the approvers are automatically added to the version.
 
 .. raw:: latex
 
     \newpage
 
+.. index:: Document
 
-.. glossary::   
+.. index:: Versioning
 
+.. _versioning:
+
+Document versioning
+-------------------
+
+Document versioning allows to keep different version at each evolution of the document.
+
+Document can evolve and a new file is generated at each evolution.
+
+Type of versioning must be defined for a document. 
+
+
+.. note::
+
+   **Type of versioning**
+
+   A document can evolve following four ways defined as versioning type :
+
+   **Evolutive**
    
-   Type of versioning
-       |
-       A document can evolve following four ways defined as versioning type :
-
-       **Evolutive**
-
-       * Version is a standard Vx.y format. 
-       * It is the most commonly used versioning type.
-       * Major updates increase x and reset y to zero. 
-       * Minor updates increase y.
-
-       **Chronological**
-
-       * Version is a date. 
-       * This versioning type is commonly used for periodical documents.
-       * For instance : weekly boards.
-
-       **Sequential**
-
-       * Version is a sequential number. 
-       * This versioning type is commonly used for recurring documents.
-       * For instance : Meeting reviews.
-
-       **Custom**
-
-       * Version is manually set. 
-       * This versioning type is commonly used for external documents, when version is not managed by the tool, or when the format cannot fit any other versioning type.
+   * Version is a standard Vx.y format. 
+   * It is the most commonly used versioning type.
+   * Major updates increase x and reset y to zero. 
+   * Minor updates increase y.
+   
+   **Chronological**
+   
+   * Version is a date. 
+   * This versioning type is commonly used for periodical documents.
+   * For instance : weekly boards.
+   
+   **Sequential**
+   
+   * Version is a sequential number. 
+   * This versioning type is commonly used for recurring documents.
+   * For instance : Meeting reviews.
+   
+   **Custom**
+   
+   * Version is manually set. 
+   * This versioning type is commonly used for external documents, when version is not managed by the tool, or when the format cannot fit any other versioning type.
 
 
-.. raw:: latex
-
-    \newpage
 
 .. sidebar:: Other sections
 
    * :ref:`Linked element<linkElement-section>`
    * :ref:`Notes<note-section>`
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: 
-   :widths: 20, 80
+.. list-table:: Required field |RequiredField|
+   :widths: 40, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
      - Unique Id for the document.
-   * - **Name**
+   * - |RequiredField| Name
      - Short description of the document.
-   * - **Type**
+   * - |RequiredField| Type
      - Type of document.
    * - Project
      - The project concerned by the document.
    * - Product
      - The product concerned by the document.
-   * - **Directory**
+   * - |RequiredField| Directory
      - Place where the document is stored  to organize document structure. 
    * - Document reference
      - Document reference name.
@@ -120,68 +129,67 @@ The file document will be stored in the tool as versions.
    * - Cancelled
      - Box checked indicates the document is cancelled.
 
-**\* Required field**
+.. rubric:: Field "Project and Product"
 
-.. topic:: Fields: Project and Product
+* Must be concerned either with a project, a product or both.
+* If the project is specified, the list of values for field "Product" contains only products linked the selected project.
 
-   * Must be concerned either with a project, a product or both.
-   * If the project is specified, the list of values for field "Product" contains only products linked the selected project.
+.. rubric:: Field "Document reference"
 
-.. topic:: Field: Document reference
+* Document reference name is calculated from format defined in the :ref:`Global parameters<format_reference_doc>` screen.
 
-   * Document reference name is calculated from format defined in the :ref:`Global parameters<format_reference_doc>` screen.
+.. rubric:: Field "Author"
 
-.. topic:: Field: Author
-
-   * Positioned by default as the connected user.
-   * Can be changed (for instance if the author is not  the current user).
-
-
-
+* Positioned by default as the connected user.
+* Can be changed (for instance if the author is not  the current user).
 
 .. raw:: latex
 
     \newpage
 
-.. rubric:: Section: Versions
+.. index:: Version Managment
+
+.. _version_Managment:
+
+Version management
+------------------
 
 This section allows to manage version list of document.
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Version list fields
-   :widths: 20, 80
+.. list-table:: Required field |ReqFieldLegend|
+   :widths: 40, 80
    :header-rows: 1
 
    * - Field
      - Description
-   * - **Versioning type**
-     - :term:`Type of versioning` for the document.
+   * - |RequiredField| Versioning type
+     - Type of versioning for the document.
    * - Last version
      - Caption of the last version of the document.
    * - :term:`Status`
      - Status of the last version of the document.
- 
-**\* Required field**
 
 
-
-.. rubric:: Version list management
 
 * Click on |buttonAdd| to add a new version. 
 * Click on |buttonEdit| to modifiy a version.
 * Click on |buttonIconDelete| to delete a version.
 * Click on |iconDownload| to download file at this version.
 
- .. compound:: **Document viewer**
+.. rubric:: **Document viewer**
 
-    * Document viewer available for image, text and PDF files.
-    * Click on icon.
+ * Document viewer available for image, text and PDF files.
+ * Click on icon.
 
- .. note:: Name of download file
+.. note:: 
 
-    * The name of download file will be the document reference name displayed in **description** section.
-    * If you want to preserve the uploaded file name, set the parameter in  the :ref:`Global parameters <format_reference_doc>`
+   **Name of download file**
+   
+   The name of download file will be the document reference name displayed in **description** section.
+   
+   If you want to preserve the uploaded file name, set the parameter in  the :ref:`Global parameters <format_reference_doc>`
 
 .. figure:: /images/GUI/BOX_DocumentVersion.png
    :alt: Dialog box - Document version 
@@ -213,29 +221,24 @@ This section allows to manage version list of document.
    * - Description
      - Description of the version.
 
-.. topic:: Field: Update
+.. rubric:: Field "Update"
 
-   * A version can have a draft status, that may be removed afterwards.
+* A version can have a draft status, that may be removed afterwards.
 
-.. topic:: Field: Is a reference
+.. rubric:: Field "Is a reference"
 
-   * Should be checked when version is validated.
-   * Only one version can be the reference for a document.
-   * Reference version is displayed in bold format in the versions list.
+* Should be checked when version is validated.
+* Only one version can be the reference for a document.
+* Reference version is displayed in bold format in the versions list.
 
-.. topic:: Field: Description
+.. rubric:: Field "Description"
    
-   * May be used to describe updates brought by the version.
-   * This icon |Note| appears when the description field is filled.
-   * Moving the mouse over the icon will display description text.
+* May be used to describe updates brought by the version.
+* This icon |Note| appears when the description field is filled.
+* Moving the mouse over the icon will display description text.
 
 
-.. raw:: latex
-
-    \newpage
-
-
-.. rubric:: Section: Approvers
+.. rubric:: Section Approvers
 
 This section allows to manage approver list of a document.
 
@@ -254,12 +257,15 @@ This section allows to manage approver list of a document.
    * - Status
      - Status of the approval of the last version of document.
 
-**Button: Approve now**
+.. note:: 
 
- * This button appears in approver list.
- * Just click on the button to approve the latest version of the document.
+   **Button "Approve now"**
 
-**Button: Send a reminder email to the approvers**
+   This button appears in approver list.
+
+   Just click on the button to approve the latest version of the document.
+
+   **Button "Send a reminder email to the approvers"**
 
  * This button allows to send a reminder email to all the approvers who have not yet approved the document.
 
@@ -270,40 +276,49 @@ This section allows to manage approver list of a document.
 * Click on |buttonIconDelete| to delete the approver.
 
 
+.. index:: lock document
 
-
-.. rubric:: Section: Lock
+.. rubric:: Section Lock
 
 This section allows to manage document locking.
 
-  **Button: lock/unlock this document**
+When a document is locked the following fields are displayed.
 
-  * Button to lock or unlock the document to preserve it from being editing, or new version added.
-  * When document is locked it cannot be modified.
-  * Only the user who locked the document, or a user with privilege to unlock any document, can unlock it.
 
-  **Document locked**
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Fields when the document is locked
+   :widths: 20, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - Locked
+     - Box checked indicates the document is locked.
+   * - Locked by
+     - User who locked the document.
+   * - Locked since
+     - Date and time when document was locked.
+
+
+.. compound:: **lock/unlock this document**
    
-  * When a document is locked the following fields are displayed.
+Button to lock or unlock the document to preserve it from being editing, or new version added.
+      
+When document is locked it cannot be modified
+            
+When the document is locked, it can not be downloaded except for the user who locked it or a user with privilege
+      
+Only the user who locked the document, or a user with privilege can unlock it
 
-  .. tabularcolumns:: |l|l|
-  .. list-table:: Fields when the document is locked
-     :widths: 20, 80
-     :header-rows: 1
+You can forbid :ref:`Global Parameters<format_reference_doc>`
+      
 
-     * - Field
-       - Description
-     * - Locked
-       - Box checked indicates the document is locked.
-     * - Locked by
-       - User who locked the document.
-     * - Locked since
-       - Date and time when document was locked.
+Nomenclature
+------------
 
-.. rubric:: Nomenclature
+.. rubric:: Possibility to take into account the designation of the product in the nomenclature of documents with the new codes :
 
-.. topic:: Possibility to take into account the designation of the product in the nomenclature of documents with the new codes :
-
-   * {PROD} product designation
-   * {PROJ / PROD} the project code if specified, otherwise the product designation
-   * {PROD / PROJ} designation of the product if specified, otherwise the project code
+* {PROD} product designation
+* {PROJ / PROD} the project code if specified, otherwise the product designation
+* {PROD / PROJ} designation of the product if specified, otherwise the project code

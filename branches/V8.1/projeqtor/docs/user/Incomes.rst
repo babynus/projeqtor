@@ -71,9 +71,9 @@ On the quotation form, you can record all the information about the sent proposa
 
 .. note:: Field "Customer"
      
-   * Automatically updated from project field.
+   Automatically updated from project field.
 
-.. rubric:: **Section Treatment**
+.. rubric:: Section Treatment
 
 .. tabularcolumns:: |l|l|
 
@@ -188,9 +188,9 @@ On the order form, you can record all the information of the received order.
 
 .. note:: **Field Customer** 
      
-   * Automatically updated from project field.
+   Automatically updated from project field.
 
-.. rubric:: **Section Treatment**
+.. rubric:: Section Treatment
 
 .. tabularcolumns:: |l|l|
 
@@ -284,8 +284,9 @@ You can define as many terms as you wish, to define the billing calendar.
 
 .. note::
 
-   * Terms are mandatory to bill “Fixed price” project.
-   * A term can be used just one time. The bill name will be displayed.
+   Terms are mandatory to bill “Fixed price” project.
+   
+   A term can be used just one time. The bill name will be displayed.
 
 .. rubric:: **A term has triggers**
 

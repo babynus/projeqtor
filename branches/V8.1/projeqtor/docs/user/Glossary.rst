@@ -9,14 +9,14 @@ Glossary
 
    Action
    
-      Stocks are used in anticipation of risk. They serve to reduce the risks.
+     Stocks are used in anticipation of risk. They serve to reduce the risks.
 
-      The analysis of these risks consists in defining actions. There are two types of actions:
+     The analysis of these risks consists in defining actions. There are two types of actions:
 
        * Preventive action aimed at removing the risk or
        * Corrective action that has been earned on the occurrence of a risk
 
-   Acivity
+   Activity
    
       An Activity can be likened to the key stages of the project: it is the skeleton of your project that organizes the main phases of a project
          
@@ -25,6 +25,12 @@ Glossary
          * They serve to organize the milestones and tasks of a project
          * They can allocated to a or many resources
          * They can be prioritized and have sub-activities
+   
+   Administrator
+
+      An administrator is a :term:`user` with "Administrator" profile.
+      Has a visibility over all the projects.
+   
          
    AGILE
    
@@ -39,6 +45,14 @@ Glossary
       * Item will not appear in lists any more
       * You can display them again by checking the box "Show closed items"
       * You can setting their default display in the :ref:`user's Parameters<graphic-interface-behavior-section>`
+
+   Contact
+
+      A contact is a person in a business relationship.
+      A contact can be a person in the customer organization.
+      Used as contact person for contracts, sales and billing.
+      Contacts management is performed on :ref:`contact` screen.
+
 
    Decision
    
@@ -107,6 +121,14 @@ Glossary
    
       Any event that is not part of the standard operation of a service and that causes, 
       or may cause, an interruption or decrease in the quality of that service   
+
+   Issuer
+
+      An issuer is a :term:`user` who created the item.
+
+      .. seealso:: **Creation information**
+
+         The issuer name and creation date of an item are displayed in the :ref:`Creation information zone<detail-window>`.
    
    Key Performance Indicator (KPI)
    
@@ -155,20 +177,81 @@ Glossary
    
    Project Leader
       
+      A project leader is a :term:`resource` allocated to a project with a “Project Leader” profile.
       person responsible for leading a project and managing its smooth running. 
       In general, he leads a team during the duration of the various projects for which he is responsible
+
+   Project manager
+
+    A project manager is a :term:`resource` defined as the manager on a project.
+
+    .. seealso:: **Accelerator button**
+
+       This button allows to set current user is the project manager.
+       More detail, see: :ref:`Assign to me button<assignToMe-button>`.  
+
+   Project team
+
+    All :term:`resources<resource>` allocated to a project.
    
    Quotity
    
-   A quota is the amount of a quota. 
-   This term of right refers to the fraction of a whole, a proportional sum in a share.
-   A quota can be to pay or to collect.
+      A quota is the amount of a quota. 
+      This term of right refers to the fraction of a whole, a proportional sum in a share.
+      A quota can be to pay or to collect.
    
    Reference
     
-    * Reference is displayed after id, automatically generated on creation. 
-    * Reference depends on defined format, see under "Format for reference numbering" section in :ref:`global-parameters` screen.
-    * Default format defines a specific numbering format that can provide unique numbering sequence for each project and/or each type of items.
+      * Reference is displayed after id, automatically generated on creation. 
+      * Reference depends on defined format, see under "Format for reference numbering" section in :ref:`global-parameters` screen.
+      * Default format defines a specific numbering format that can provide unique numbering sequence for each project and/or each type of items.
+
+   Requestor
+
+      A requestor is a :term:`contact`.
+      Used to specify the requestor for ticket, activity and requirement.
+      Only contacts allocated to the selected project can be a requestor.  
+
+   Responsible
+
+    A responsible is a :term:`resource` in charge of item treatment. 
+    Usually, the responsible is set when the status of the item is :term:`handled<Handled status>`.
+    Only resources allocated to the selected project can be a responsible.  
+
+    .. seealso:: 
+
+       **GUI behavior**
+    
+         It is possible to define that responsible field is mandatory on handled status.
+   
+         The element type screens allow to set this parameter to several elements. 
+   
+         More detail, see: :ref:`behavior-section`. 
+         
+       **Set automatically the responsible**
+
+         It is possible to set automatically the responsible.
+   
+         More detail, see: :ref:`Global parameters<auto-responsible>`  
+
+       **Accelerator button**
+
+         This button allows to set current user is the responsible.
+   
+         More detail, see: :ref:`Assign to me button<assignToMe-button>`.
+
+       **Access rights**
+
+         It is possible to define a combination of rights to permit access for elements the user is responsible for.
+   
+         More detail, see: :ref:`access-mode` screen.
+
+   Resource
+
+    * Human or material resource involved in the projects.
+    * It is possible to define the resource availability to the projects.
+    * Resources management is performed on the :ref:`resource` screen.
+
 
    Result
 
@@ -177,8 +260,9 @@ Glossary
 
     .. seealso:: **GUI behavior**
 
-       * It is possible to define that result field is mandatory on done status.
-       * The element type screens allow to set this parameter to several elements.
+       It is possible to define that result field is mandatory on done status.
+       
+       The element type screens allow to set this parameter to several elements.
    
    Risks
    
@@ -198,6 +282,12 @@ Glossary
       The Quality approach consists in finding the match between the answer to the needs of the project, 
       the correct expression of these needs by adequate specifications which go through a careful listening of the customer, 
       and a realization answering the expression of the needs.
+
+   User
+
+    * User allows to connect to the application.
+    * User profile define general access rights. But it does not necessarily give access to project data.
+    * Users management is performed on the :ref:`user` screen.
    
    SMART
    
@@ -212,10 +302,13 @@ Glossary
     * Item is linked to a element type, element type is linked to a workflow.
     * A workflow defines the possibility to go from one status to another one, more detail, see: :ref:`workflow`.
 
-    .. seealso:: **Accelerator button**
+    .. seealso:: 
+    
+      **Accelerator button**
 
-       * This button allows to skip to the next status.
-       * More detail, see: :ref:`Move to next status button<moveToNextStatus-button>`.    
+       This button allows to skip to the next status.
+       
+       More detail, see: :ref:`Move to next status button<moveToNextStatus-button>`.    
    
    Ticketing
    

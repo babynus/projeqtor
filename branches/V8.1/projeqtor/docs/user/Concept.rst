@@ -18,26 +18,29 @@ Project element is more than a :ref:`planning-element`, it is also used to:
 
 .. rubric:: Gather all project data
 
-* Allows to gather all data depend on project:
+Allows to gather all data depend on project:
 
-  * Planning element
-  * Risk assessment, Risk mitigation, Reserve
-  * Ticket, Issue, Bug tracking, Change request, Support
-  * Review logs, Meeting, Decision, Action plan
-  * Requirement & Test 
-  * Project expense
-  * Quotation, Order, Bill, Payment
-  * Document
+ * Planning element
+ * Risk assessment, Risk mitigation, Reserve
+ * Ticket, Issue, Bug tracking, Change request, Support
+ * Review logs, Meeting, Decision, Action plan
+ * Requirement & Test 
+ * Project expense
+ * Quotation, Order, Bill, Payment
+ * Document
 
 .. rubric:: Restrict data visibility
 
 * Allows restricting data visibility to users by project.
 * The project data visibility is granted according to the user profile.
-* See: :ref:`profiles-definition`
-* See: :ref:`allocation-to-project`
+
+   .. seealso:: 
+   
+     :ref:`profiles-definition` and :ref:`allocation-to-project`
 
 
- .. compound:: **Project selector**
+
+   .. compound:: **Project selector**
 
     * The project selector works as a filter.
     * By default, the selector displays "all projects", you can change this view in the user-miscelleanous settings and choose the project to display by default
@@ -45,15 +48,14 @@ Project element is more than a :ref:`planning-element`, it is also used to:
     
     .. seealso:: 
       
-      * See: :ref:`top-bar`
-      * see: :ref:`user-parameters`
+      :ref:`top-bar` and :ref:`user-parameters`
     
 
 .. rubric:: Define the project type
 
 .. compound:: Three project types can be defined:
 
-   **Operational project**
+   **1 - Operational project**
 
       * Most common project to follow activity.
       * Manual Billed, Fixed price, Capped time, Time & materials, Internal are operationals projects
@@ -61,24 +63,21 @@ Project element is more than a :ref:`planning-element`, it is also used to:
    .. image:: /images/GUI/CONCEPT_ZONE_ProjectType.png
       :align: center
 
-   **Administrative project**
+   **2 - Administrative project**
 
    * Allows to follow the non productive work as holidays, sickness, training, …
    * All resource will be able to enter some real work on such project, without having to be allocated to the project, nor assigned to project activities.
 
-   **Template project**
+   **3 - Template project**
 
-   * Designed to define templates, to be copied as operational project. (See: :ref:`copy-item`)
+   * Designed to define templates, to be copied as operational project. See: :ref:`copy-item`
    * Any project leaders can copy such projects, without having to be allocated to them.
-
-
-
-
 
 .. note:: 
 
-   * The project type is defined in a project type (See: :ref:`project-type`).
-   * Which is associated to a project (See: :ref:`project`).	
+   The project type is defined in a project type. See: :ref:`project-type`
+   
+   Which is associated to a project. See: :ref:`project`
 
 .. rubric:: Define billable project
 
@@ -91,11 +90,21 @@ A project can be billable or not.
  .. compound:: **Billable project**
 
     * For billable projects the billing types available are: at terms, on producing work, on capping produced work and manual.
+    * the actual work done and billed is locked
 
 .. note:: 
 
-   * The project billing type is defined in a project type (See: :ref:`project-type`).
-   * Which is associated to a project (See: :ref:`project`). 
+   * The project billing type is defined in a project type. See: :ref:`project-type`
+   * Which is associated to a project. See: :ref:`project` 
+
+.. warning:: 
+
+   When deleting a project, also delete the indicators, Emails and Delays for the tickets of this project
+
+.. rubric:: Fix the planning
+
+    * you can freeze the content of a project or projects from the moment you do not want to extend the project or modify it
+
 
 
 .. raw:: latex
@@ -120,15 +129,15 @@ The notion of organization introduces a way to consolidate projects on a differe
 
 * Each project can be linked to an organization
 
-.. note::
+.. note:: 
 
-  * Sub-projects are by default attached to the same organization as the parent, but can be integrated into another organization.
+   Sub-projects are by default attached to the same organization as the parent, but can be integrated into another organization.
   
 * Resources can be linked to an organization.
 
 .. note::
 
-  * Depending on the profile, you can limit the visibility of resources to people in the same organization or team as the current user.
+   Depending on the profile, you can limit the visibility of resources to people in the same organization or team as the current user.
 
 
 .. raw:: latex
@@ -163,7 +172,10 @@ A product is a material object or for IT/IS projects is a software application.
 
 .. rubric:: Identifying the version that is the subject of treatment
 
-* Product (component) versions can be identified in these elements: :ref:`activity`, :ref:`milestone`, :ref:`requirement`, :ref:`test-case`, :ref:`test-session` and :ref:`ticket`.
+* Product (component) versions can be identified in these elements:
+
+  :ref:`activity`, :ref:`milestone`, :ref:`requirement`, :ref:`test-case`, :ref:`test-session` and :ref:`ticket`.
+  
 * The purpose is to identify which product (component) and its version that is the subject of the treatment.
 * Depending on the element, it has the possibility identifying version of  origin, target version or both.
 
@@ -248,7 +260,7 @@ Based upon on resource availability and their capacity.
 
 .. rubric:: Resource availability
 
-* Resource availability is defined by calendars and project allocation period.
+Resource availability is defined by calendars and project allocation period.
 
  .. compound:: **Resource calendar**
 
@@ -267,7 +279,7 @@ Based upon on resource availability and their capacity.
 * Resource capacity is defined on daily base.
 * The scheduling tool does not exceed the daily resource capacity.
 
-.. topic:: Full Time Equivalent (FTE)
+.. note:: Full Time Equivalent (FTE)
  
    * This indicator is defined for each resource.   
    * It allows to define the daily capacity.
@@ -290,17 +302,17 @@ Draft planning
 
 Two methods can be used to create a draft planning.
 
- .. compound:: **Use planning mode "fixed duration"**
+.. rubric:: Use planning mode "fixed duration"
 
-    * This planning mode is used to define fixed duration tasks. (See: :ref:`planningMode`)
-    * Dependencies allow to define the execution order of tasks. (See: :ref:`dependencies`)
-    * You can define this planning mode as defaut in the Activities Types screen for some types of activities you'll use in draft plannings
+* This planning mode is used to define fixed duration tasks. See: :ref:`planningMode`
+* Dependencies allow to define the execution order of tasks. See: :ref:`dependencies`
+* You can define this planning mode as defaut in the Activities Types screen for some types of activities you'll use in draft plannings
 
- .. compound:: **Use faked and team resource**
+.. rubric:: Use faked and team resource
 
-    * The faked and team resource can be useful to get a first estimate of project cost and duration without involving the real resources.
-    * Planning schedule is calculated using of the work-driven planning method.
-    * Faked and team resources can be mixed in same draft planning.
+* The faked and team resource can be useful to get a first estimate of project cost and duration without involving the real resources.
+* Planning schedule is calculated using of the work-driven planning method.
+* Faked and team resources can be mixed in same draft planning.
 
      .. compound:: **Faked resources**
 
@@ -345,7 +357,9 @@ This planning element defines the project.
     * Sub-project is used to split the project.
     * The project can be split to correspond the organizational breakdown or something else.
 
-     .. admonition:: Separation of duties
+     .. note::
+     
+      **Separation of duties**
 
         * A project can be split into multiple sub projects.
         * A project leader and team can be allocated to each sub-project. 
@@ -371,6 +385,7 @@ An activity can grouped other activities or be a task.
     * Dates, works and costs of activities (child) are summarized in the activity (parent).
 
  .. compound:: **Task**
+ 
     * An activity is a task when it's not a parent of activities.
     * A task is assigned to resources for to be performed.
 
@@ -441,9 +456,11 @@ Dependencies can be managed in the Gantt chart and in screen of planning element
 
 More detail, see: :ref:`project-planning`, :ref:`predSuces-element-section`.
 
-.. note:: Global parameter "Apply strict mode for dependencies"
+.. note:: 
 
-   * If the value is set to “Yes”, the planning element (successor) can't start the same day that the end date of planning element (predecessor). 
+   **Global parameter "Apply strict mode for dependencies"**
+
+   If the value is set to “Yes”, the planning element (successor) can't start the same day that the end date of planning element (predecessor). 
 
 .. rubric:: Delay (days)
 
@@ -499,12 +516,13 @@ More detail, see: :ref:`Activity and Test session  planning modes<progress-secti
 
 .. note:: 
 
-   * Because ProjeQtOr does not backward planning, the planning mode "As late as possible" with no constraint date  (Floating) is not available.
+   Because ProjeQtOr does not backward planning, the planning mode "As late as possible" with no constraint date  (Floating) is not available.
 
-.. note:: Default planning mode
+   **Default planning mode**
 
-   * Possibility to define the default planning mode according to element type.
-   * See: :ref:`activity-type`, :ref:`milestone-type` and :ref:`test-session-type` screens. 
+   Possibility to define the default planning mode according to element type.
+   
+   See: :ref:`activity-type`, :ref:`milestone-type` and :ref:`test-session-type` screens. 
 
 
 
@@ -537,7 +555,7 @@ Scheduling priority value is set in progress section of planning element.
 
 .. note::
 
-   * If projects have different priorities, all elements of project with highest priority are scheduled first.
+   If projects have different priorities, all elements of project with highest priority are scheduled first.
 
 
 Project structure
@@ -676,23 +694,25 @@ Glossary
     Usually, the responsible is set when the status of the item is :term:`handled<Handled status>`.
     Only resources allocated to the selected project can be a responsible.  
 
-    .. seealso:: **GUI behavior**
+    .. seealso:: 
+    
+    **GUI behavior**
 
        It is possible to define that responsible field is mandatory on handled status.
        The element type screens allow to set this parameter to several elements. 
        More detail, see: :ref:`behavior-section`. 
 
-    .. seealso:: **Set automatically the responsible**
+    **Set automatically the responsible**
 
        It is possible to set automatically the responsible.
        More detail, see: :ref:`Global parameters<auto-responsible>`	
 
-    .. seealso:: **Accelerator button**
+    **Accelerator button**
 
        This button allows to set current user is the responsible.
        More detail, see: :ref:`Assign to me button<assignToMe-button>`.
 
-    .. seealso:: **Access rights**
+    **Access rights**
 
        It is possible to define a combination of rights to permit access for elements the user is responsible for.
        More detail, see: :ref:`access-mode` screen.
@@ -731,8 +751,9 @@ A user linked to a profile belongs to this group who share same application beha
 
 .. note::
 
-   * You can define profiles to be conformed to the roles defined in your organization.
-   * Access rights management is done on :ref:`Access rights<profile>` screens 
+   You can define profiles to be conformed to the roles defined in your organization.
+   
+   Access rights management is done on :ref:`Access rights<profile>` screens 
 
 
 .. rubric:: Used for
@@ -941,7 +962,7 @@ Allocation to project and user profile are also shared.
 
 .. note::
 
-   * For a stakeholder, you can define and redefine the combination without losing data.
+   For a stakeholder, you can define and redefine the combination without losing data.
 
 
 
@@ -964,7 +985,7 @@ Allocation to project is used to:
 
 .. note::
 
-   * The :ref:`allocation` screen allows to manage overall allocations to project. 
+   The :ref:`allocation` screen allows to manage overall allocations to project. 
 
 The following sections describe allocation to project, performed for user, resource or contact.
 
@@ -986,8 +1007,9 @@ Allocation to project can be defined in the :ref:`user` screen.
 
    .. note:: 
 
-      * Profile defined in allocation to project does not grant or revoke access to users.
-      * General access to application functionalities and data is defined by user profile. 
+      Profile defined in allocation to project does not grant or revoke access to users.
+      
+      General access to application functionalities and data is defined by user profile. 
 
 .. rubric:: Period selection
 
@@ -1019,7 +1041,7 @@ It is also possible to allocate a team to a project in :ref:`team` screens.
 
 .. note::
 
-   * A resource allocated to a project can be defined as :term:`responsible` of project items treatment.
+   A resource allocated to a project can be defined as :term:`responsible` of project items treatment.
 
 
 .. rubric:: Period & Rate selection
@@ -1028,12 +1050,13 @@ It is also possible to allocate a team to a project in :ref:`team` screens.
 
 .. note::
 
-   * If the period is not specified then the resource is allocated throughout the project.
+   If the period is not specified then the resource is allocated throughout the project.
 
 .. attention::
 
-    * The planning calculator tries to plan, the remaining work on the task assigned to a resource within the allocation to project period.
-    * If remaining work on the task can't be planned, a purple bar appears in the Gantt view.
+    The planning calculator tries to plan, the remaining work on the task assigned to a resource within the allocation to project period.
+    
+    If remaining work on the task can't be planned, a purple bar appears in the Gantt view.
 
 .. rubric:: Change resource on an allocation to project
 
@@ -1083,11 +1106,9 @@ A resource assignment contains data about work on task (planned,  real, left and
     
 .. note::
 
-   * Only resources allocated by the project can be assigned to project tasks.
+   Only resources allocated by the project can be assigned to project tasks.
 
-.. note::
-
-   * Assignment can be done in :ref:`activity`, :ref:`test-session` and :ref:`meeting` screens.
+   Assignment can be done in :ref:`activity`, :ref:`test-session` and :ref:`meeting` screens.
 
 
 
@@ -1128,7 +1149,7 @@ Resource function and cost
 
 .. note::
  
-   * Function and cost are defined in :ref:`resource` screen.
+   Function and cost are defined in :ref:`resource` screen.
 
 .. raw:: latex
 
@@ -1152,7 +1173,7 @@ A calendar is defined for a type of resources and each resource is attached to a
 
  .. note:: 
 
-    * You must re-calculate an existing planning to take into account changes on the calendar.
+    You must re-calculate an existing planning to take into account changes on the calendar.
 
 .. rubric:: Shows the availability of resources
 
@@ -1169,8 +1190,9 @@ A calendar is defined for a type of resources and each resource is attached to a
 
 .. note::
 
-   * A calendar is set in :ref:`resource` screen. 
-   * The calendar is defined in :ref:`calendars` screen.
+   A calendar is set in :ref:`resource` screen. 
+   
+   The calendar is defined in :ref:`calendars` screen.
 
 .. rubric:: Use case
 
