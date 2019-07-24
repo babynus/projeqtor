@@ -140,7 +140,7 @@ function cronActivate() {
 }
 
 function dataCloningCheckRequest(){
-  $cronExecution=CronExecution::getSingleSqlElementFromCriteria('cronExecution', array('id'=>7));
+  $cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
   debugLog("dataCloningCheckRequest() at ".$cronExecution->nextTime);
 }
 ?>
