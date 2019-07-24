@@ -74,50 +74,6 @@ class DataCloning extends SqlElement{
 	  }
 	}
 	
-	public function calculNextTime(){
-	  $cron = Parameter::getGlobalParameter('dataCloningCreationRequest');
-	  $frequency = Parameter::getGlobalParameter('dataCloningSpecificFrequency');
-		$UTC=new DateTimeZone(Parameter::getGlobalParameter ( 'paramDefaultTimezone' ));
-		$date=new DateTime('now');
-		if($cron == '* * * * *' and $frequency != ''){
-		  $date->modify('+'.$frequency.' minute');
-		}else{
-		  $date->modify('+1 minute');
-		}
-		if(!$cron){
-			$splitCron=explode(" ","* * * * *");
-		}else{
-			$splitCron=explode(" ",$cron);
-		}
-		$count=0;
-		if(count($splitCron)==5){
-			$find=false;
-			while(!$find){ //cron minute/hour/dayOfMonth/month/dayOfWeek
-				if(($splitCron[0]=='*' || $date->format("i")==$splitCron[0])
-				&& ($splitCron[1]=='*' || $date->format("H")==$splitCron[1])
-				&& ($splitCron[2]=='*' || $date->format("d")==$splitCron[2])
-				&& ($splitCron[3]=='*' || $date->format("m")==$splitCron[3])
-				&& ($splitCron[4]=='*' || $date->format("N")==$splitCron[4])){
-					$find=true;
-					$date->setTime($date->format("H"), $date->format("i"), 0);
-					$this->plannedDate=$date->format("U");
-					$this->save(false);
-				}else{
-					$date->modify('+1 minute');
-				}
-				$count++;
-				if($count>=2150000){
-					$this->idle=1;
-					$this->save(false);
-					$find=true;
-					errorLog("Can't find next time for cronAutoSendReport because too many execution #".$this->id);
-				}
-			}
-		}else{
-			errorLog("Can't find next time for cronAutoSendReport because too many execution #".$this->id);
-		}
-	}
-
 	public static function drawDataCloningList($idUser, $versionCode){
 		$noData = true;
 		$dataCloning = new DataCloning();
@@ -191,7 +147,7 @@ class DataCloning extends SqlElement{
 			  }
 			  $idleColor='';
 			  if($data->idle){
-			    $idleColor = 'background-color:#eeeeee;';
+			    $idleColor = 'background-color:#d9d9d9;';
 			  }
 			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:left;vertical-align:center;'.$idleColor.'">';
 			  $result .='<table width="100%"><tr>';
@@ -347,21 +303,20 @@ class DataCloning extends SqlElement{
   	echo ' onChange="showSpecificCreationRequest();">';
   	$request=SqlElement::getSingleSqlElementFromCriteria('Parameter', array("parameterCode"=>"dataCloningCreationRequest"));
   	$request=$request->parameterValue;
-  	$selectImmediate = ($request=='* * * * *')?'selected':'';
-  	$selectSpecificHours = ($request !='* * * * *')?'selected':'';
+  	$selectImmediate = ($request!='specificHours')?'selected':'';
+  	$selectSpecificHours = ($request=='specificHours')?'selected':'';
   	echo '<option value="immediate" '.$selectImmediate.'>'.i18n('dataCloningImmediate').'</option>';
   	echo '<option value="specificHours" '.$selectSpecificHours.'>'.i18n('dataCloningSpecificHours').'</option>';
   	echo '</select></td>';
   	echo '<td>';
-  	$display = ($request !='* * * * *')?'block':'none';
+  	$display = ($request =='specificHours')?'block':'none';
   	echo '<div dojoType="dijit.form.TimeTextBox" name="dataCloningSpecificHours" id="dataCloningSpecificHours"
                     invalidMessage="'.i18n('messageInvalidTime').'" 
                     type="text" maxlength="5" style="margin-left:20px;width:40px; text-align: center;display:'.$display.';" class="input rounded"
                     value="T'.date('H:i').'" hasDownArrow="false">';
     echo '</div>';
-    $display = ($request =='* * * * *')?'block':'none';
-    $specificFrequency=SqlElement::getSingleSqlElementFromCriteria('Parameter', array("parameterCode"=>"dataCloningSpecificFrequency"));
-    $specificFrequency = $specificFrequency->parameterValue;
+    $display = ($request !='specificHours')?'block':'none';
+    $specificFrequency=$request;
     echo '<select dojoType="dijit.form.FilteringSelect" class="input"';
     echo autoOpenFilteringSelect();
     echo 'style="width:80px;margin-left:20px;display:'.$display.';" name="dataCloningSpecificFrequency" id="dataCloningSpecificFrequency">';

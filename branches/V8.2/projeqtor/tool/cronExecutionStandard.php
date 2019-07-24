@@ -138,4 +138,9 @@ function cronActivate() {
   $cronExecution->nextTime=null;
   $result=$cronExecution->save();
 }
+
+function dataCloningCheckRequest(){
+  $cronExecution=CronExecution::getSingleSqlElementFromCriteria('cronExecution', array('id'=>7));
+  debugLog("dataCloningCheckRequest() at ".$cronExecution->nextTime);
+}
 ?>
