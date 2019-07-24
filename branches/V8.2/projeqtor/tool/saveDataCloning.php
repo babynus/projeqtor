@@ -60,6 +60,7 @@ if($idDataCloning){
   }
 }else{
   $dataCloning = new DataCloning();
+  $cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
   if($idDataCloningParent){
     $dataCloning->idOrigine = $idDataCloningParent;
   }
@@ -67,7 +68,7 @@ if($idDataCloning){
   $dataCloning->idResource = $user;
   $dataCloning->requestedDate = $requestedDate;
   $dataCloning->name = $name;
-  $dataCloning->calculNextTime();
+  $dataCloning->plannedDate = $cronExecution->nextTime;
   $result=$dataCloning->save();
 }
 displayLastOperationStatus($result);
