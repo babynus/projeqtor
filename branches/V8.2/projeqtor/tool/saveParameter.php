@@ -413,23 +413,28 @@ if ($type=='habilitation') {
     array_push($SaveChange, $result);
   }
   $request = RequestHandler::getValue('dataCloningCreationRequest');
+  $frequency = RequestHandler::getValue('dataCloningSpecificFrequency');
   $dataCloningCreationRequest=SqlElement::getSingleSqlElementFromCriteria('Parameter', array("parameterCode"=>"dataCloningCreationRequest"));
+  $dataCloningCreationRequest->idUser = null;
+  $cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
   if($request=='specificHours'){
+    $dataCloningCreationRequest->parameterValue = $request;
     $specificHours = RequestHandler::getValue('dataCloningSpecificHours');
     $hours = substr($specificHours, 1, 2);
     $minutes = substr($specificHours, 4, -3);
-    $dataCloningCreationRequest->parameterValue = $minutes.' '.$hours.' * * *';
+    $cronExecution->cron = $minutes.' '.$hours.' * * *';
   }else{
-    $dataCloningCreationRequest->parameterValue = '* * * * *';
-    $dataCloningSpecificFrequency=SqlElement::getSingleSqlElementFromCriteria('Parameter', array("parameterCode"=>"dataCloningSpecificFrequency"));
-    $frequency = RequestHandler::getValue('dataCloningSpecificFrequency');
-    $dataCloningSpecificFrequency->parameterValue = $frequency;
-    $dataCloningSpecificFrequency->idUser = null;
-    $result=$dataCloningSpecificFrequency->save();
-    array_push($SaveChange, $result);
+    $dataCloningCreationRequest->parameterValue = $frequency;
+    if($frequency <= 30){
+      $cronExecution->cron = '*/'.$frequency.' * * * *';
+    }else{
+      $frequency = $frequency/60;
+      $cronExecution->cron = '* */'.$frequency.' * * *';
+    }
   }
-  $dataCloningCreationRequest->idUser = null;
   $result=$dataCloningCreationRequest->save();
+  array_push($SaveChange, $result);
+  $result=$cronExecution->save();
   array_push($SaveChange, $result);
   $creaTotal = RequestHandler::getValue('dataCloningTotal');
   $paramCreaTotal=SqlElement::getSingleSqlElementFromCriteria('Parameter', array("parameterCode"=>"dataCloningTotal"));
