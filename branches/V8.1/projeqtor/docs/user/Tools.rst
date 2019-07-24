@@ -66,49 +66,42 @@ You can limit the display by profile, project and user.
 
 The message will be displayed in a color depending on the message type.
 
+.. figure:: /images/GUI/TOOLS_SCR_Message.png
+   :alt: Today screen Message
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Message description section fields
+.. list-table:: |ReqFieldLegend| Required Fields
    :widths: 20, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
-     - Unique Id for the message. 
-   * - **Title**
-     - Header of the message.
-   * - **Message type**
-     - Type of message. 
-   * - Profile
-     - The message is limited to users with this profile.
-   * - Project
-     - The message is limited to resources allocated to the project.
-   * - User
-     - The message is limited to this user.
-   * - Show on login screen
-     - Show this message on login screen. 
-   * - :term:`Closed`
-     - Flag to indicate that the message is archived.
- 
-**\* Required field**
-
-.. rubric:: Section: Message
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Message message section fields
-   :widths: 20, 80
-   :header-rows: 1
-
-   * - Field
-     - Description
+     - Unique Id for the message 
+   * - |RequiredField| Title
+     - Header of the message
+   * - |RequiredField| Message type
+     - Type of message
+   * - Sart Date
+     - Date when the message begins
+   * - End Date
+     - Date when the message ended
    * - :term:`Message<Description>`
-     - Complete text of the message. 
-     
+     - Complete text of the message       
+   * - Profile
+     - The message is limited to users with this profile
+   * - Project
+     - The message is limited to resources allocated to the project
+   * - User
+     - The message is limited to this user
+   * - Show on login screen
+     - Show this message on login screen
+   * - :term:`Closed`
+     - Flag to indicate that the message is archived
+    
 
 .. raw:: latex
 
@@ -245,6 +238,7 @@ For columns corresponding to linked tables ("idXxxx"), you can indicate as the c
 * The data of this table can be inserted into the import file.
 
 .. rubric:: Tickets
+
 * Do not import the value of "real work" on tickets, even if it is specified in the import file.
 
 

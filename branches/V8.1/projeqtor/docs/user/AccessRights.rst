@@ -11,6 +11,10 @@
 Acces Right
 ***********
 
+
+This section allows the fine management of the rights as well as the management of the modules
+
+
 .. _profile:
 
 .. _Module_Management:
@@ -20,7 +24,7 @@ Module Management
 
 | The Module Management allows to choose the module(s) that will appear in the interface.
 | This enables or disables a consistent group of features.
-| This screen is then accessible via a dedicated menu in the :ref:`Acces_Right<Module_Management>`
+| This screen is then accessible via a dedicated menu in the Acces Right
 
 
 .. figure:: /images/GUI/ACCESSRIGHT_ManagementModule.png
@@ -100,7 +104,7 @@ and the other based on the restriction of product versions
 .. tabularcolumns:: |l|l|
 
 .. list-table:: |ReqFieldLegend| Required Field
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field

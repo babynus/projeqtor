@@ -257,7 +257,7 @@ For each planning element, the progress data are displayed at them right.
 * Click on **OK** button to apply changes.
    
 
-.. figure:: /images/GUI/TIP_GanttSelectColunmsToDisplay.png
+.. figure:: /images/GUI/GANTT_ZONE_SelectColumns.png
    :alt: Popup list - Select columns
    :align: center
 
@@ -526,6 +526,7 @@ Project planning and activity planning calculation can be done in the Gantt.
 .. rubric:: |one| Add a new planning element
 
 * Allows to create a new planning element.
+* The created element is added under the previously selected element with the same level of incrementation
 * The created element is added in the Gantt and detail window is opened.
 * The detail window allows to complete entry.
 

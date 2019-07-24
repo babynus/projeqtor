@@ -1,3 +1,5 @@
+.. include:: ImageReplacement.txt
+
 .. raw:: latex
 
     \newpage

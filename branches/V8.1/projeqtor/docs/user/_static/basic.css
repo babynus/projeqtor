@@ -99,7 +99,7 @@ div.sphinxsidebar #searchbox input[type="submit"] {
 
 img {
     border: 0;
-    max-width: 100%;
+    max-width: 80%;
 }
 
 /* -- search page ----------------------------------------------------------- */
@@ -129,6 +129,7 @@ ul.search li div.context {
 ul.keywordmatches li.goodmatch a {
     font-weight: bold;
 }
+
 
 /* -- index page ------------------------------------------------------------ */
 

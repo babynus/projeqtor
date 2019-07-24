@@ -6,6 +6,8 @@
 
     \newpage
 
+.. index:: Planning element
+
 .. _planning_element:
     
 Planning elements
@@ -24,12 +26,21 @@ The planning elements :ref:`test-session` and :ref:`meeting` are described in th
 Projects
 --------
 
+.. sidebar:: Other sections
+
+   * :ref:`Progress<progress-section-activity>`
+   * :ref:`Allocations<allocation-section>`
+   * :ref:`Versions linked to this project<Link-version-project-section>`  
+   * :ref:`Types restrictions<type-restriction-section>`  
+   * :ref:`Predecessor and Sucessor<predSuces-element-section>`
+   * :ref:`Linked element<linkElement-section>`   
+   * :ref:`Attachments<attachment-section>`   
+   * :ref:`Notes<note-section>`   
+   
+   
 The project is the primary entity of ProjeQtOr.
 
 It is also the top-level of visibility, depending on profiles.
-
-
-
 
 .. rubric:: Sub-projects 
 
@@ -79,23 +90,11 @@ It is also the top-level of visibility, depending on profiles.
 * The amount of project reserve will be added to remaining amount.
 * See: :ref:`risk` and :ref:`opportunity`
 
-
-.. sidebar:: Other sections
-
-   * :ref:`Progress<progress-section-activity>`
-   * :ref:`Allocations<allocation-section>`
-   * :ref:`Versions linked to this project<Link-version-project-section>`  
-   * :ref:`Types restrictions<type-restriction-section>`  
-   * :ref:`Predecessor and Sucessor element<predSuces-element-section>`
-   * :ref:`Linked element<linkElement-section>`   
-   * :ref:`Attachments<attachment-section>`   
-   * :ref:`Notes<note-section>`   
-
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -103,9 +102,9 @@ It is also the top-level of visibility, depending on profiles.
      - Description
    * - :term:`Id`
      - Unique Id for the project.
-   * - **Name**
+   * - |RequiredField| Name
      - Short name of the project.
-   * - **Type**
+   * - |RequiredField| Type
      - Type of project.
    * - Organization
      - The organization of the project.
@@ -127,7 +126,7 @@ It is also the top-level of visibility, depending on profiles.
      - Name of the resource who manages the project.
    * - Color
      - Color of the project, to be displayed in some reports.
-   * - **Status**
+   * - |RequiredField| Status
      - Actual :term:`status` of the project.
    * - Health status
      - Global health status of the project.
@@ -152,19 +151,17 @@ It is also the top-level of visibility, depending on profiles.
    * - Objectives
      - Objectives of the project.
 
-**\* Required field**
-
-.. topic:: Field: Customer
+.. topic:: Field "Customer"
 
    * The value of the field is used in the Quotations, Orders and Bills concerned with the project.
 
-.. topic:: Field: Bill contact
+.. topic:: Field "Bill contact"
 
    * The value of the field is used in Bills concerned with the project.
 
 
 
-.. rubric:: Section: Sub projects
+.. rubric:: Section Sub projects
 
 * List of sub-projects under for the project.
 
@@ -175,11 +172,23 @@ It is also the top-level of visibility, depending on profiles.
 
 .. index:: ! Activity 
 
+.. index:: Activities
+
 .. _activity:
 
 Activities
 ----------
 
+.. sidebar:: Other sections
+
+   * :ref:`Assignment<assignment-section>`
+   * :ref:`Progress<progress-section-activity>`
+   * :ref:`Predecessor and Sucessor element<predSuces-element-section>`
+   * :ref:`Linked element<linkElement-section>`   
+   * :ref:`Attachments<attachment-section>`   
+   * :ref:`Notes<note-section>`
+   
+   
 An activity is a kind of task that must be planned, or that regroups other activities.
 
 An activity can be:
@@ -225,34 +234,25 @@ Ability to filter activities by data or type, for instance by assigned resources
 .. rubric:: Monitoring indicator
 
 * The indicators can be defined on the progress data.
-* See: :ref:`progress-section-monitor-indicator`
+* See: :ref:`progress-section-monitor-indicator`   
 
-.. sidebar:: Other sections
-
-   * :ref:`Assignment<assignment-section>`
-   * :ref:`Progress<progress-section-activity>`
-   * :ref:`Predecessor and Sucessor element<predSuces-element-section>`
-   * :ref:`Linked element<linkElement-section>`   
-   * :ref:`Attachments<attachment-section>`   
-   * :ref:`Notes<note-section>`   
-
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: 
-   :widths: 20, 80
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 20, 70
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
      - Unique Id for the activity.
-   * - **Name**
+   * - |RequiredField| Name
      - Short description of the activity.
-   * - **Activity type**
+   * - |RequiredField| Activity type
      - Type of activity.
-   * - **Project**
+   * - |RequiredField| Project
      - The project concerned by the activity.
    * - :term:`External reference`
      - External reference of the activity.
@@ -263,13 +263,11 @@ Ability to filter activities by data or type, for instance by assigned resources
    * - :term:`Description`
      - Complete description of the activity.
 
-**\* Required field**
-
-.. rubric:: Section: Treatment
+.. rubric:: Section Treatment
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: 
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -277,7 +275,7 @@ Ability to filter activities by data or type, for instance by assigned resources
      - Description
    * - Parent activity
      - Parent activity for grouping purpose. 
-   * - **Status**
+   * - |RequiredField| Status
      - Actual :term:`status` of the activity.
    * - :term:`Responsible`
      - Resource who is responsible for the activity.
@@ -294,9 +292,7 @@ Ability to filter activities by data or type, for instance by assigned resources
    * - :term:`Result`
      - Complete description of the treatment done on the activity. 
  
-**\* Required field**
-
-.. topic:: Field: Target version
+.. topic:: Field "Target version"
 
    * Contains the list of product versions linked to the project.
    * More detail, see: :ref:`Product concept<product-concept>`
@@ -312,6 +308,14 @@ Ability to filter activities by data or type, for instance by assigned resources
 Milestones
 ----------
 
+.. sidebar:: Other sections
+
+   * :ref:`Progress<progress-section-milestone>`
+   * :ref:`Predecessor and Sucessor element<predSuces-element-section>`
+   * :ref:`Linked element<linkElement-section>`   
+   * :ref:`Attachments<attachment-section>`   
+   * :ref:`Notes<note-section>`   
+   
 A milestone is a flag in the planning, to point out key dates.
 
 Milestones are commonly used to check delivery dates.
@@ -335,19 +339,11 @@ ProjeQtOr offers two types of milestone:
 * The indicators can be defined on the progress data.
 * See: :ref:`progress-section-monitor-indicator`
 
-.. sidebar:: Other sections
-
-   * :ref:`Progress<progress-section-milestone>`
-   * :ref:`Predecessor and Sucessor element<predSuces-element-section>`
-   * :ref:`Linked element<linkElement-section>`   
-   * :ref:`Attachments<attachment-section>`   
-   * :ref:`Notes<note-section>`   
-
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: 
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -355,25 +351,22 @@ ProjeQtOr offers two types of milestone:
      - Description
    * - :term:`Id`
      - Unique Id for the milestone.
-   * - **Name**
+   * - |RequiredField| Name
      - Short description of the milestone.
-   * - **Milestone type**
+   * - |RequiredField| Milestone type**
      - Type of milestone.
-   * - **Project**
+   * - |RequiredField| Project
      - The project concerned by the milestone.
    * - :term:`Origin`
      - Element which is the origin of the milestone.
    * - :term:`Description`
      - Long description of the milestone.
 
-**\* Required field**
-
-
-.. rubric:: Section: Treatment
+.. rubric:: Section Treatment
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: 
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -381,7 +374,7 @@ ProjeQtOr offers two types of milestone:
      - Description
    * - Parent activity
      - Parent activity for grouping purpose. 
-   * - **Status**
+   * - |RequiredField| Status
      - Actual :term:`status` of the milestone.
    * - :term:`Responsible`
      - Resource who is responsible for the milestone.
@@ -398,9 +391,7 @@ ProjeQtOr offers two types of milestone:
    * - :term:`Result`
      - Complete description of the treatment done on the milestone. 
  
-**\* Required field**
-
-.. topic:: Field: Target version
+.. topic:: Field "Target version"
 
    * Contains the list of product versions linked to the project.
    * More detail, see: :ref:`Product concept<product-concept>`

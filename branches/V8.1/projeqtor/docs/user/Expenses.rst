@@ -23,13 +23,27 @@ Budget
 
 * You can create as much budget and sub budget as you want.
 
-* An expense can be linked to a basic budget: the budget item
+* An expense is related to a base budget, ie a budget item
 
-.. note:: The budget item
+* A budget item is linked to a parent budget 
 
-   The budget items are the finer element of the budget analysis. 
+* in the same way as the project selector, you can filter, thanks to the "Budget Parent" filter, a budget and "his family" on the list poster.
+
+
+.. note:: 
+
+   **The parent budget**
+
+   * The parent budget exists only to consolidate budget line items
+   * You can't change spending in the Progress field of a parent budget 
+   * Only the target amount can be changed
+
+   **The budget item**
+
+   * The budget items are the finer element of the budget analysis. 
+   * These posts or budget destinations will allow you to detail your budget, categorizing it at your convenience.
    
-   These posts or budget destinations will allow you to detail your budget, categorizing it at your convenience.
+   
 
 .. figure:: /images/GUI/EXPENSES_SCREEN_Budget.png
    :alt: Budget screen
@@ -52,9 +66,9 @@ Budget
    * - |RequiredField| Name
      - Short description of the payment
    * - |RequiredField| Budget type
-     - Type of budget
+     - Type of budget: initial or additional
    * - Budget orientation
-     - the orientation of the budget  
+     - the orientation of the budget: operation or transformation 
    * - Budget category
      - subdivision of budget orientation into category
    * - Article number
@@ -69,12 +83,41 @@ Budget
      - from the budget.
        If your budget comes from grant for example
        
-       
-       
-       
-       
-       
-       
+.. rubric:: Progress
+
+.. figure:: /images/GUI/EXPENSES_ZONE_Progress.png
+   :alt: Progress Section
+
+This section allows to follow the consolidation of all the expenses 
+
+* The target amount is the only amount you can save on a parent budget 
+
+* Other amounts are recovered from the sub-budgets and consolidated on the parent budget
+
+* Transferred Amount allows to release a sum of an amount planned for a budget item in order to redistribute it to another item
+
+* This amount is visible on all budget items 
+
+.. note:: 
+
+   **Transfered Amount**
+   
+   * Enter a negative amount on a budget line to transfer an amount
+   * Enter a positive amount on a budget line to recover this amount
+   * Only the parent budget and its sub budget will see this amount. 
+   * Another parent budget can not recover this amount.
+
+.. rubric:: Budget expense detail
+
+This section brings and displays the :ref:`project-expense` lines in the details 
+
+.. figure:: /images/GUI/EXPENSES_ZONE_DetailLine.png
+   :alt: Progress Section
+
+
+
+
+
 .. rubric:: Treatment
 
 .. tabularcolumns:: |l|l|
@@ -87,26 +130,19 @@ Budget
      - Description
    * - |RequiredField| :term:`Status`
      - change of states according to the :ref:`workflow` selected for the type of your budget 
-   * - |RequiredField| Payment date
-     - Date of payment.
-   * - |RequiredField| Payment amount
-     - Amount of the payment.
-   * - Payment fee
-     - Payment of the fee.  
-   * - Payment credit
-     - Balance of payment amount less payment fee.
-   * - Bill
-     - Bill concerned with the payment.
-   * - Bill reference
-     - Reference of bill.
-   * - Customer
-     - Customer of bill.
-   * - Recipient
-     - Recipient of bill. 
-   * - Bill amount 
-     - Amount of bill.
+   * - is a budget item
+     - Self-checked box when the budget becomes a sub-budget
+   * - Under construction
+     - When the budget is validated. The box is unchecked
+   * - approved
+     - When the box is checked, the target amount is blocked
    * - :term:`Closed`
-     - Flag to indicate that payment is archived.
+     - Flag to indicate that profile is archived.
+   * - Cancelled
+     - Flag to indicate that profile is cancelled.
+
+
+
 
 
 
@@ -308,6 +344,10 @@ Orders to provider
 
 .. rubric:: Section Description
 
+.. figure:: /images/GUI/EXPENSES_ZONE_DescriptionZone.png
+   :alt: Order to provider - Description section
+   :align: center
+
 .. tabularcolumns:: |l|l|
 
 .. list-table:: required field |ReqFieldLegend|
@@ -317,22 +357,23 @@ Orders to provider
    * - Field
      - Description
    * - :term:`Id`
-     - Unique Id for the expense
+     - Unique Id for the expense 
    * - |RequiredField| Name
      - Short description of the expense
    * - |RequiredField| Order to provider type
-     - Type of order.
-   * - |RequiredField| Project
-     - The project concerned by the order.
-   * - Sent date
+     - Type of order: Product and/or Service
+   * - |RequiredField| Project 
+     - The project concerned by the order
+   * - Sent date 
      - date of sending to the supplier
    * - :term:`Origin`
      - Element which is the origin of the quotation 
    * - Provider
      - Name of the provider
    * - External Reference
-       supplier's reference
-       
+     - supplier's reference
+
+ 
 .. rubric:: Section Treatment
 
 .. figure:: /images/GUI/EXPENSES_ZONE_TreatmentOrderProvider.png
@@ -450,7 +491,7 @@ In this screen, you can save, organize, track and edit your payment dates to you
      - Applicable tax
    * - Full
      - Amount with taxes 
-   * - |RequiredField|Date
+   * - |RequiredField| Date
      - date of expiry  
    * - Billed status
      - If payment has been billed  
@@ -465,7 +506,9 @@ In this screen, you can save, organize, track and edit your payment dates to you
 
       * **Tax:** If the tax is not defined, nothing is applied in this field and the amount will remain without tax
  
-      * **Full: ** If the total amount exclusive of tax and the tax rate have been entered, the totel amount will be calculated automatically 
+      * **Full:** If the total amount exclusive of tax and the tax rate have been entered, the total amount will be calculated automatically 
+      
+      * On the project, the sum of the expenses must be carried out in including taxes if the entry of expenses is in including taxes
  
 
 
@@ -720,11 +763,6 @@ This can be used for all kinds of project cost :
 * Any logistic item.
 
 
-.. rubric:: Purchase request
-
-Allows to manage the purchase request information about the expense. (Purchase order, receipt and payment)
-
-
 .. rubric:: Planned amount
 
 Planned amount will help to have an overview of project total costs, even before expense is realized.
@@ -752,13 +790,15 @@ Planned amount will help to have an overview of project total costs, even before
    * - |RequiredField| Name
      - Short description of the expense
    * - |RequiredField| Type
-     - Type of expense.
+     - Type of expense: machine or office expense
    * - |RequiredField| Project
      - The project concerned by the expense
    * - Provider
      - Provider name
    * - :term:`External reference`
      - External reference of the expense
+   * - :term:`Origin`
+     - Element which is the origin of the quotation  
    * - Business responsible
      - The person who makes the purchase requisition
    * - Financial responsible

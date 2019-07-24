@@ -37,8 +37,8 @@ Allows to link components to product.
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Required field |ReqFieldLegend|
-   :widths: 30, 80
+.. list-table:: |ReqFieldLegend| Required fields
+   :widths: 45, 80
    :header-rows: 1
 
    * - Field
@@ -47,7 +47,7 @@ Allows to link components to product.
      - Unique Id for the product.
    * - |RequiredField| Name
      - Name of the product.
-   * - Product type
+   * - |RequiredField| Product type
      - Type of product.
    * - Designation
      - Trade name of the product known outside the company.
@@ -59,12 +59,17 @@ Allows to link components to product.
      - Person responsible for the product.
    * - sub-product 
      - Name of the top product if this product is a sub-product.
-   * - Status
+   * - |RequiredField| Status
      - State to be registered.
    * - :term:`Closed`
      - item is closed if checked
    * - Description :
      - Box checked indicates the product is archived.
+
+
+.. rubric:: Section Project linked to this product
+
+* possibility of attaching the products of the list to projects.
 
 .. rubric:: Section Product versions
 
@@ -79,11 +84,13 @@ Allows to link components to product.
 
 * See: :ref:`relationship-product-component`.
 
-.. topic:: Button Display structure
+.. note:: **Button Display structure**
 
-   * Displays the structure of the product.
-   * Box checked "Show versions for all structure" allows to display versions of sub-products and components.
-   * Box checked "Show projects linked to versions" allows to display projects linked.
+   Displays the structure of the product.
+
+   Box checked "Show versions for all structure" allows to display versions of sub-products and components.
+
+   Box checked "Show projects linked to versions" allows to display projects linked.
 
 .. index:: ! Product (Version)
 
@@ -102,15 +109,19 @@ Ability to define the compatibility between product versions (feature activated 
 
 .. rubric:: Automatic formatting of version name
 
-* Possibility to define if the version name is automatically produced from the product name and version number.
-* Set global parameters to activate this feature.
-* Else, the version name will entered manually.
+Possibility to define if the version name is automatically produced from the product name and version number.
+
+Set :ref:`global-parameters` to activate this feature.
+
+Else, the version name will entered manually.
+
+By profile, possibility to have a different list of the version of the original product according to the status.
 
 .. sidebar:: Other sections
 
 
    * :ref:`Projects linked to this version<Link-version-project-section>`
-   * :ref:`Composition - List of component versions used this version<version-product-component>`  
+   * :ref:`Composition...<version-product-component>`  
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
 
@@ -119,7 +130,7 @@ Ability to define the compatibility between product versions (feature activated 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
-   :widths: 30, 80
+   :widths: 45, 80
    :header-rows: 1
 
    * - Field
@@ -130,39 +141,49 @@ Ability to define the compatibility between product versions (feature activated 
      - The product on which the version applies
    * - |RequiredField| Version number
      - Version number of the product
-   * - |RequiredField| Name
-     - Name of the version
+   * - |RequiredField| Product version type
+     - Type of the product version: major, minor, patch 
+   * - Name
+     - Name of the version  
    * - Prime contractor
      - The contact, into customer organization, who will be responsible for the version delivery
    * - Responsible
      - Resource responsible of the version.
+   * - Sart date
+     - Initial, planned and real start dates of the version
+   * - Delivery date
+     - Initial, planned and real delivery dates of the version
    * - Entry into service
      - Initial, planned and real entry into service date of the version
    * - End date
      - Initial, planned and real end dates of the version
-   * - Status 
+   * - |RequiredField| Status 
      - State to be registered
    * - Description
      - Complete description of the version
 
-.. topic:: Fields "Version number & Name"
 
-   * The field "Version number" appears only if the global parameter "Automatic format of version name" is set to Yes.
-   * The field "Name" will be read only.
+.. rubric:: Fields "Version number & Name"
 
-.. topic:: Field "Prime contractor"
+The field "Version number" appears only if the global parameter "Automatic format of version name" is set to Yes.
+
+The field "Name" will be read only.
+
+.. rubric:: Field "Prime contractor"
      
-   * Can be different from product prime contractor.
+Can be different from product prime contractor.
 
-.. topic:: Field "Entry into service" (Real)
+.. rubric:: Field "Entry into service" (Real)
 
-   * Specify the date of entry into service.
-   * The box "Done" is checked when the real date field is set.
+Specify the date of entry into service.
 
-.. topic:: Field "End date" (Real)
+The box "Done" is checked when the real date field is set.
 
-   * Specify the date end-of-service.
-   * The box "Done" is checked when the real date field is set.
+.. rubric:: Field "End date" (Real)
+
+Specify the date end-of-service.
+
+The box "Done" is checked when the real date field is set.
 
 .. raw:: latex
 
@@ -203,13 +224,13 @@ Possibility to define component types and component versions that will only be u
      - Unique Id for the component
    * - |RequiredField| Name
      - Name of the component
-   * - Component type
+   * - |RequiredField| Component type
      - Type of component
    * - Identifier
      - Another name to identify the component
    * - Responsible
      - Person responsible for the component
-   * - Statut 
+   * - |RequiredField| Statut 
      - State to be registered
    * - :term:`Closed`
      - Box checked indicates the component is archived
@@ -237,6 +258,14 @@ Allows to define versions of a component.
 
 Allows to link a product version to component version.
 
+.. sidebar:: Other sections
+
+   * :ref:`Structure...<version-product-component>`  
+   * :ref:`Composition...<version-product-component>`  
+   * :ref:`Attachments<attachment-section>`   
+   * :ref:`Notes<note-section>`   
+   
+   
 .. rubric:: Automatic formatting of version name
 
 * Possibility to define if the version name is automatically produced from the component name and version number.
@@ -244,19 +273,12 @@ Allows to link a product version to component version.
 * Else, the version name will entered manually.
 
 
-.. sidebar:: Other sections
-
-   * :ref:`Structure - List of product or component versions using this component version<version-product-component>`  
-   * :ref:`Composition - List of component versions used by this version<version-product-component>`  
-   * :ref:`Attachments<attachment-section>`   
-   * :ref:`Notes<note-section>`   
-
 .. rubric:: Section "Description"
 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
-   :widths: 30, 80
+   :widths: 45, 80
    :header-rows: 1
 
    * - Field
@@ -266,33 +288,49 @@ Allows to link a product version to component version.
    * - |RequiredField| Component
      - The component on which the version applies
    * - |RequiredField| Version number
-     - Version number of the component
-   * - |RequiredField| Name
+     - V° number of the component
+   * - |RequiredField| Component V° type
+     - Type of the component version: major, minor or patch
+   * - Name
      - Name of the version.
+   * - Responsible
+     - Name of the responsible.  
+   * - Start date
+     - Initial, planned and real start dates of the version
+   * - Delivery date
+     - Initial, planned and real delivery dates of the version
    * - Entry into service
      - Initial, planned and real entry into service date of the version 
    * - End date
      - Initial, planned and real end dates of the version
-   * - Statut 
+   * - |RequiredField| Statut 
      - State to be registered
    * - Description
      - Complete description of the version
 
-.. topic:: Fields "Version number & Name"
+.. note:: **Initial Date**
 
-   * The field "Version number" appears only if the global parameter "Automatic format of version name" is set to Yes.
-   * The field "Name" will be read only.
+   when the planned date has been set, the initial date (if it is empty only) will be defined
 
 
-.. topic:: Field "Entry into service" (Real)
+.. rubric:: Fields "Version number & Name"
 
-   * Specify the date of entry into service.
-   * The box "Done" is checked when the real date field is set.
+The field "Version number" appears only if the global parameter "Automatic format of version name" is set to Yes.
 
-.. topic:: Field "End date (Real)"
+The field "Name" will be read only.
 
-   * Specify the date end-of-service.
-   * The box "Done" is checked when the real date field is set.
+
+.. rubric:: Field "Entry into service" (Real)
+
+Specify the date of entry into service.
+
+The box "Done" is checked when the real date field is set.
+
+.. rubric:: Field "End date (Real)"
+
+Specify the date end-of-service.
+
+The box "Done" is checked when the real date field is set.
    
 .. raw:: latex
 

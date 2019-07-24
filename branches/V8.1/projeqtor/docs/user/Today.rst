@@ -21,6 +21,8 @@ It's the User parameter “First page” by default
 
 This parameter defines the screen that will be displayed first on each connection.
 
+The definition of visibility is based on the access rights of each user
+
 
 .. index:: ! Message (Section)
 
@@ -100,14 +102,16 @@ Messages
 .. figure:: images/GUI/TODAY_BOX_Parameters_FALSE.png
    :alt: You can not drag it here
 
-.. figure:: images/GUI
-   :alt: .. figure:: images/GUI/TODAY_BOX_Parameters_TRUE.png
+.. figure:: images/GUI/TODAY_BOX_Parameters_TRUE.png
    :alt: You can drag it here
 
 .. note:: 
-    * If you have added any reports to the Today page, they will appear in the list.
-    * You can then hide or delete any added reports.
-    see : :ref:`Favorite Report<favorite_report>`
+
+   If you have added any reports to the Today page, they will appear in the list.
+   
+   You can then hide or delete any added reports.
+   
+   see : :ref:`Favorite Report<favorite_report>`
     
 .. raw:: latex
 
