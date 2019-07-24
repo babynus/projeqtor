@@ -61,8 +61,37 @@ class CronExecution extends SqlElement {
   public function calculNextTime(){
     $UTC=new DateTimeZone(Parameter::getGlobalParameter ( 'paramDefaultTimezone' ));
     $date=new DateTime('now');
-    $date->modify('+1 minute');
     $splitCron=explode(" ",$this->cron);
+    $minute=1;
+		$splitMinuteCron=explode("/",$splitCron[0]);
+		if(count($splitMinuteCron)==2){
+		  $splitCron[0]=$splitMinuteCron[0];
+		  $mod = $date->format('i')%$splitMinuteCron[1];
+		  if($mod > 0){
+		    $minute = $splitMinuteCron[1] - $mod;
+		  }else{
+		    $minute = $splitMinuteCron[1];
+		  }
+		}
+		$splitHourCron=explode("/",$splitCron[1]);
+		if(count($splitHourCron)==2){
+			$splitCron[1]=$splitHourCron[0];
+			$mod = $date->format('H')%$splitHourCron[1];
+			if($mod > 0){
+			  if($splitCron[0] != '*'){
+			    $minute = ($splitHourCron[1]-$mod)*60-$date->format('i')+$splitCron[0];
+			  }else{
+			    $minute = ($splitHourCron[1]-$mod)*60-$date->format('i');
+			  }
+			}else{
+			  if($splitCron[0] != '*'){
+			    $minute = abs($date->format('i') - $splitCron[0]);
+			  }else{
+			  	$minute = abs(60-$date->format('i'));
+			  }
+			}
+		}
+		$date->modify('+'.$minute.' minute');
     $count=0;
     if(count($splitCron)==5){
       $find=false;
