@@ -19,19 +19,19 @@ A workflow defines the possibility to go from one status to another one, and who
 
 Once defined, a workflow can be linked to any type of any item. 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: Required Fields |ReqFieldLegend|
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
      - Unique Id for the workflow.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of the workflow.
    * - Sort order
      - Number to define the order of display in lists.
@@ -40,37 +40,42 @@ Once defined, a workflow can be linked to any type of any item.
    * - Description
      - Complete description of the workflow.
 
-**\* Required field**
+.. rubric:: Button "Select status to show or hide"
+   
+By clicking this button |buttonIconParameter| you can hide some unnecessary states..
 
-.. raw:: latex
-
-    \newpage
-
-.. rubric:: Button: Select status to show or hide
-
-* This button |buttonIconParameter|  can be used to hide some unnecessary status.
-
-.. figure:: /images/GUI/BOX_SelectStatusToShowOrHide.png
+.. image:: /images/GUI/CONTROLAUTO_ZONE_SelectHide.png
+   :alt: Select or hide
+   :align: center 
+   
+.. figure:: /images/GUI/CONTROLAUTO_BOX_SelectStatus.png
    :alt: Dialog box - Select status to show or hide 
    :align: center
 
 
-.. rubric:: Section: Workflow Diagram
+.. rubric:: Section List of types using this workflow
 
-* The workflow diagram presents a visual representation of the workflow displaying all possible transitions (independently to profile rights).
 
-.. figure:: /images/GUI/SEC_WorkflowDiagram.png
+List of all elements and objects related to this workflow
+
+
+.. image:: /images/GUI/CONTROLAUTO_ZONE_ListOfType.png
+   :alt: List of types using this workflow
+   
+   
+
+.. rubric:: Section Workflow Diagram
+
+The workflow diagram presents a visual representation of the workflow displaying all possible transitions (independently to profile rights).
+
+.. figure:: /images/GUI/CONTROLAUTO_ZONE_WorkflowDiagram.png
    :alt: Workflow Diagram
    :align: center
 
    Workflow Diagram
 
 
-.. raw:: latex
-
-    \newpage
-
-.. rubric:: Section: Habilitation to change from a status to another
+.. rubric:: Section Habilitation to change from a status to another
 
 * The habilitation table helps defining who can move from one status to another one.
 * Each line corresponds to the status from which you want to be able to move.
@@ -78,14 +83,22 @@ Once defined, a workflow can be linked to any type of any item.
 * It is not possible to go from one status to itself (these cells are blank).
 * Just check the profile (or “all”) who is allowed to pass from one status to the other.
 
-.. figure:: /images/GUI/SEC_HabilitationTable.png
+.. figure:: /images/GUI/CONTROLAUTO_ZONE_WorkflowList.png
    :alt: Habilitation table
    :align: center
 
-.. compound:: **In the upper example:**
+.. note:: **Exemple**
 
-    * Anyone can move an item from “recorded” to “assigned” and from “recorded” to “cancelled”.
-    * No one can move an item from “qualified” status to any other status. In this case, pay attention that it must never be possible to move an item to “qualified” status, because it will not be possible to leave this status.
+   In the example above, only the administrator, lead project, and supervisor can change from **Recorded** status to **assigned**, **verified**, or **canceled** status.
+  
+   Everyone can move from the **assigned** state to the **in progress** state.
+   
+   however, no one can move from **qualified** to another.
+   
+   .. warning::
+
+      In this case, make sure that it is never possible to transfer an item to the "qualified" status, as it will not be possible to leave this status.
+      You can also review the links in the workflow diagram area.
 
 .. raw:: latex
 
@@ -98,17 +111,21 @@ Once defined, a workflow can be linked to any type of any item.
 Email Templates
 ---------------
 
-The user is able to format mails that are sent automaticaly on events (see Mails on event).
+The user is able to format mails that are sent automaticaly on events. 
+
+See :ref:`Mails on event<mail-on-event>`.
+
 When using template, the standard email formating is replaced with selected one.
+
 Just define your templates, and select it on the "Mail on Events"
 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
    
    * - `Id`
@@ -128,20 +145,28 @@ Just define your templates, and select it on the "Mail on Events"
 
 
 
-.. topic:: Field: element updated and type
+.. topic:: Field element updated and type
 
    * If not set, the template is valid for every type of the element
    * If element is set, only these elements will be able to select the template
-   * if element and type are set, only these elements of the correspondiong type will be able to select the template
+   * if **element** and **type** are defined, only elements of the corresponding type will be able to select the model of mail
    
-.. note::
-  
-   * in the template, user can use any property of the updated object to show in the mail, just use ${propertyName}
-     for instance ${name} will display the name of the item, ${id} will display its id
-   * for properties referencing external item, such as idXxxxx, use ${nameXxxxx} to display name of item instead of its id
-     for instance ${nameProject} will display the name of the project, as ${idProject} will display the id of the project
-   * other tags are available as parameters for email titles (see Global Parameters > emails)
-   * some specific tags can also be used
+.. rubric:: Specifics Tags on email template
+ 
+In the model, the user can use any property of the object, and display it in the mail using specific tags.
+
+you just have to use the $ {projectName} tag for the project name to appear. Likewise with $ {idproject} to display the identification number of it
+   
+.. warning::
+   
+   for properties referencing an external element, such as idXxxxx, use ${nameXxxxx}
+   
+     
+Other tags are available as parameters for email titles
+
+More details, see :ref:`Global Parameters<mailing_parameters>`
+
+.. topic:: some specific tags can also be used
    
      - ${item} : class of the item 
      - ${dbName} : display name of current instance
@@ -150,12 +175,28 @@ Just define your templates, and select it on the "Mail on Events"
      - ${project} : synonym for ${nameProject}
      - ${url} : url to get the direct link to the item
      - ${goto} : display Class and Id of item, clickable to have direct link to the item
-   * 3 other tags are available except in the mail title because they display a table.
+        
+   **This tags are available except in the mail title because they display a table**
    
      - ${HISTORY} : displays the last change of an object.
-     - ${
+     - ${HISTORYFULL} : display all the modifications
      - ${LINK} : list linked elements to the item
      - ${NOTE} : lists the notes of the item 
+
+
+.. rubric:: the Tags selector
+
+
+.. image:: /images/GUI/CONTROLAUTO_ZONE_InsertTAG.png
+   :alt: Insert specific tags
+
+A tag selector is available under the text fields.
+
+choose the tag you want to insert.
+
+Click the insert button
+
+The tag appears in the body of the text
     
 
 .. index:: ! Email (Event)
@@ -176,12 +217,12 @@ Events are defined on an element and element type.
    * Mail titles is defined in :ref:`Global parameters<mail-titles>` screen.
    * Selecting a Template will use the formating of the template instead of default standard formating.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -200,12 +241,12 @@ Events are defined on an element and element type.
      - Flag to indicate that status mail is archived.
 
 
-.. topic:: Field: Type
+.. topic:: Field Type
 
    * If not set, the event is valid for every type of the element.
 
 
-.. rubric:: Section: Mail receivers
+.. rubric:: Section Mail receivers
 
 * List of addresses of the mails.
 * The list is not nominative, but defined as roles on the element.
@@ -227,39 +268,38 @@ It is possible to define a default delay for tickets, for each ticket type and e
 
 .. note::
 
-   * On creation, the due date will automatically be calculated as creation date + delay.
+   On creation, the due date will automatically be calculated as creation date + delay.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: Required Fields |ReqFieldLegend|
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
      - Unique Id for the delay definition.
-   * - **Ticket type**
+   * - |RequiredField| Ticket type
      - Ticket type the delay applies to.
-   * - **Urgency**
+   * - |RequiredField| Urgency
      - Urgency of ticket the delay applied to.
-   * - **Value**
+   * - |RequiredField| Value
      - Value of delay.
    * - :term:`Closed`
      - Flag to indicate that delay definition is archived.
 
-**\* Required field**
 
-.. topic:: Field: Value
+.. topic:: Field Value
 
-   * Unit for the value can be :
+   **Unit for the value can be**
     
-     - Days : simple calculation as days.
-     - Hours : simple calculation as hours.
-     - Open days : calculation excluding days off (weekends and days off defined on “calendar”).
-     - Open hours : calculation only on the “standard open hours” defined in :ref:`Global parameters<daily-work-hours-section>` screen. 
+     * **Days:** simple calculation as days.
+     * **Hours:** simple calculation as hours.
+     * **Open days:** calculation excluding days off (weekends and days off defined on “calendar”).
+     * **Open hours:** calculation only on the “standard open hours” defined in :ref:`Global parameters<daily-work-hours-section>` screen. 
 
 
 
@@ -285,12 +325,12 @@ Some indicators are based on delay (due date), some on work, some on cost.
 
 For each indicator a warning value and an alert value can be defined.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -310,14 +350,14 @@ For each indicator a warning value and an alert value can be defined.
    * - :term:`Closed`
      - Flag to indicate that delay definition is archived.
 
-.. rubric:: Section: Mail receivers
+.. rubric:: Section Mail receivers
 
 * List of addresses of the mails.
 * The list is not nominative, but defined as roles on the element.
 * Each addressee will receive mail only once, even if a person has several “checked” roles on the element. 
 * See : :ref:`receivers-list` for receivers detail.
 
-.. rubric:: Section: Internal alert receivers
+.. rubric:: Section Internal alert receivers
 
 * List of addresses of the internal alert.
 * The list is not nominative, but defined as roles on the element.
@@ -341,19 +381,19 @@ When some predefined notes are defined for an element and / or type a list will 
 
 Selecting an item in the list will automatically fill in the note text field.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: Required Fields |ReqFieldLegend|
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
      - Unique Id for the predefined note.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of the predefined note.
    * - Element
      - Kind of item (Ticket, Activity, …) for which this predefined note will be proposed on note creation.
@@ -364,13 +404,11 @@ Selecting an item in the list will automatically fill in the note text field.
    * - Text
      - Predefined text for notes.
 
-**\* Required field**
-
-.. topic:: Field: Element
+.. topic:: Field Element
 
    * If not set, predefined note is valid for every element type.
 
-.. topic:: Field: Type
+.. topic:: Field Type
 
    * If not set, predefined note is valid for every type of the element.
 
@@ -389,12 +427,12 @@ It is possible to define checklist forms for each type of element.
 
 When a checklist form exists for a given element, the checklist is available for the element.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: 
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -408,7 +446,7 @@ When a checklist form exists for a given element, the checklist is available for
    * - :term:`Closed`
      - Flag to indicate that checklist definition is archived. 
 
-.. rubric:: Section: Checklist lines
+.. rubric:: Section Checklist lines
 
 A checklist is built from checklist lines.
 
@@ -423,8 +461,8 @@ A checklist is built from checklist lines.
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Fields - Choices for the checklist lines
-   :widths: 20, 80
+.. list-table:: Choices for the checklist lines
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -519,12 +557,12 @@ A performance indicator or key performance indicator (KPI) is a type of performa
 
 It is possible to define Kpi on incomings and deliverables items.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -544,7 +582,7 @@ It is possible to define Kpi on incomings and deliverables items.
      
       * Description integrates the formula used to calculate the KPI.
 
-.. rubric:: Section: Tresholds
+.. rubric:: Section Tresholds
 
 It is possible to attributes tresholds lines to KPI.
 
@@ -580,12 +618,12 @@ When a Joblist form exists for a given element, the Joblist is available for the
 
 It is an indicator to follow the respect of dates values.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -599,7 +637,7 @@ It is an indicator to follow the respect of dates values.
    * - Idle
      - idle.
 
-.. rubric:: Section: JobList lines
+.. rubric:: Section JobList lines
 
 A JobList is built from JobList lines.
 
@@ -655,12 +693,12 @@ The definition of notification generation is based on the following:
 **\* Definition of notifications**
 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -673,12 +711,12 @@ The definition of notification generation is based on the following:
      - Type represents level 1 of the unread notification tree.
 
 
-.. rubric:: Section: Notification title
+.. rubric:: Section Notification title
 
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field

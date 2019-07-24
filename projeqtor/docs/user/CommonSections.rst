@@ -231,33 +231,38 @@ Assignment section
 
 .. sidebar:: Concepts 
 
-   * :ref:`resource-function-cost`
+   :ref:`resource-function-cost`
 
 This section allows to manage assignment of resources to tasks.
 
 .. note::
 
-   * Only resources allocated to a project can be assigned to its tasks.
+   Only resources allocated to a project can be assigned to its tasks.
 
 .. rubric:: Assignment function
 
-* The assignment function allows to define the resource function to task and the daily cost if defined. 
+The assignment function allows to define the resource function to task and the daily cost if defined. 
 
 .. rubric:: Assignment rate
 
-* Assignment rate is used to keep some scheduling time for other tasks.
-* For instance, if rate is 50%, the resource will not be planned more than half days on the task.
+Assignment rate is used to keep some scheduling time for other tasks.
+
+For instance, if rate is 50%, the resource will not be planned more than half days on the task.
 
 .. rubric:: Multiple assignment to a task
 
-* A resource can be assigned more than once to a task.
-* Allows to assign the resource to the same task, but with a different function (different daily cost).
-* Allows to add extra work without modifying initial assignment.
+A resource can be assigned more than once to a task.
+
+You can assign the resource to the same task, but with a different function (different daily cost).
+
+Allows to add extra work without modifying initial assignment.
 
 .. rubric:: Incomplete planned work
 
-* The scheduling process tries to schedule, the remaining work on the assigned task within the allocation to project period.
-* The remaining work that can't be planned is displayed on the right of the resource name.
+The scheduling process tries to schedule, the remaining work on the assigned task within the allocation to project period.
+
+The remaining work that can't be planned is displayed on the right of the resource name.
+
 
 .. figure:: /images/GUI/COMMON_ZONE_AssSection-NotPlannedWork.png
    :alt: Assignment section with incomplete planned work
@@ -297,6 +302,7 @@ This section allows to manage assignment of resources to tasks.
 .. warning::
 
    * If real work exists for an assignment, it can not be deleted.
+   
 
 .. figure:: /images/GUI/COMMON_BOX_Assignment.png
    :alt: Dialog box - Assignment 
@@ -791,6 +797,10 @@ Progress, Expected, WBS & Priority
 * Percentage of actual progress.
 * Calculated by the sum of the work done divided by sum of work reassessed.
 * [Progress %] = [real work] / [reassessed work] = [real work] / ( [real work] + [left work] )
+
+.. note:: 
+   
+   Ability to manually update progress for fixed-time activities without work
 
 .. rubric:: Expected
 
@@ -1418,11 +1428,12 @@ This section allows to attach files or hyperlinks to items of elements.
        :align: center
 
        Dialog box - Attachment for file
-   
 
-.. note:: **To attach a Hyperlink
+.. note:: 
 
-   * Enter hyperlink in «Hyperlink» field.
+   **To attach a Hyperlink**
+
+   Enter hyperlink in "Hyperlink" field.
 
     .. figure:: /images/GUI/COMMON_BOX_attachmentHyperLink.png
        :alt: Dialog box - Attachment for hyperlink 	

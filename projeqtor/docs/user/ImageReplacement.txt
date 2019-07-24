@@ -1,8 +1,8 @@
-.. |iconSubscribe| .. image:: images/Subscribe.png
+.. |iconDelay| image:: images/iconDelay.png
    :alt: Susbcribe
 
-.. |iconReply| image:: images/iconReply.png
-	:alt: icon reply
+.. |iconSubscribe| image:: images/IconSubscribe.png
+   :alt: Susbcribe
 		
 .. |iconNotPlanned| image:: images/iconNotPlanned.png
    :alt: Icon not planned
@@ -23,9 +23,6 @@
    :alt: mandatory attendant
    :scale: 60
 
-.. |buttonIconSubscribe| image:: images/buttonIconSubscribe16.png
-   :alt: Suscribe Button
-   
 .. |RequiredField| image:: images/RequiredFILE.png
    :alt: Required File 
 
@@ -54,7 +51,7 @@
 .. |iconBlocked| image:: images/iconBlocked.png
    :alt: Icon blocked
 
-.. |buttonAdd| image:: images/smallButtonAdd.png
+.. |buttonAdd| image:: images/ButtonAdd.png
    :alt: Button add
 
 .. |buttonEdit| image:: images/smallButtonEdit.png
