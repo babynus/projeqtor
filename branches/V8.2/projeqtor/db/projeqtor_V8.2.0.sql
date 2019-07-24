@@ -65,6 +65,7 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 CREATE TABLE `${prefix}datacloning` (
     `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
     `name` varchar(100) DEFAULT NULL,
+    `nameDir` varchar(100) DEFAULT NULL,
     `idResource` int(12) unsigned DEFAULT NULL,
     `idOrigine` int(12) unsigned DEFAULT NULL,
 		`versionCode` varchar(100) DEFAULT NULL,
@@ -87,11 +88,9 @@ INSERT INTO `${prefix}habilitation` (idProfile, idMenu, allowAccess) VALUES
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,224,8);
 
-INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('dataCloningCreationRequest','* * * * *');
-INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('dataCloningPerDay','5');
-INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('dataCloningTotal','50');
-INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('dataCloningSpecificFrequency','5');
-
-INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('paramPasswordStrength','1');
-
-INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES ('paramAttachmentNum','');
+INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
+('dataCloningCreationRequest','* * * * *')
+('dataCloningPerDay','5'),
+('dataCloningTotal','50'),
+('paramPasswordStrength','1'),
+('paramAttachmentNum','');
