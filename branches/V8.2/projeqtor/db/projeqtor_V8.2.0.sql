@@ -94,3 +94,5 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES
 ('dataCloningTotal','50'),
 ('paramPasswordStrength','1'),
 ('paramAttachmentNum','');
+
+DROP TABLE `${prefix}noteflux`;
