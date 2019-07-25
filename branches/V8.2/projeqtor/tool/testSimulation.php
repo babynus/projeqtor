@@ -42,14 +42,16 @@ $dataCloning->idResource = $idResource;
 $dataCloning->requestedDate = $requestedDate;
 $dataCloning->calculNextTime();
 $dataCloning->name = $newPwd;
-$dataCloning->save();
-Sql::commitTransaction();
 //end test 
 
 //COPY FOLDER and CODE
 // si origine  alors changer le dossier 
 $dir_source = '../../projeqtorV8.2';
 $dir_dest = '../../projeqtorV8.2/simulation/'.$newPwd;
+
+$dataCloning->$nameDir;
+$dataCloning->save();
+Sql::commitTransaction();
 
 //create folder
 mkdir($dir_dest, 0777,true);
@@ -111,15 +113,13 @@ $PDO=Sql::getConnection();
 //creer la DB
 $requete= "CREATE DATABASE IF NOT EXISTS `".$newPwd."` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
 $PDO->prepare($requete)->execute();
-//recup la db d'origine
 $sql = 'SHOW TABLE STATUS';
 $result_tables = $PDO->query($sql);
-//inserer la db
 $sql = "";
 
 //Connect new bd
 $connexion = connectTestSimu($newPwd);
-//predefinedAction , sla
+// sla
 $exceptionTable = array("alert","attachment","audit","auditsummary","cronautosendreport","cronexecution","datacloning","history","kpihistory"
                         ,"kpivalue","language","mail","mailtosend","message","messagelegal","messagelegalfollowup","notification","notificationdefinition"
                         ,"projecthistory","statusmail","subscription","translationaccessright","translationcode","translationlanguage","translationvalue");
