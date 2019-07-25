@@ -30,6 +30,7 @@ require_once "../tool/formatter.php";
 class DataCloning extends SqlElement{
 	public $id;
 	public $name;
+	public $nameDir;
 	public $idResource;
 	public $versionCode;
 	public $idOrigine;
