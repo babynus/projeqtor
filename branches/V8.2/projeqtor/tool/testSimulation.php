@@ -40,7 +40,6 @@ $dataCloning = new DataCloning();
 $dataCloning->versionCode = $version;
 $dataCloning->idResource = $idResource;
 $dataCloning->requestedDate = $requestedDate;
-$dataCloning->calculNextTime();
 $dataCloning->name = $newPwd;
 //end test 
 
@@ -49,7 +48,7 @@ $dataCloning->name = $newPwd;
 $dir_source = '../../projeqtorV8.2';
 $dir_dest = '../../projeqtorV8.2/simulation/'.$newPwd;
 
-$dataCloning->$nameDir;
+$dataCloning->nameDir = $newPwd ;
 $dataCloning->save();
 Sql::commitTransaction();
 
@@ -136,7 +135,6 @@ if($test){
         $connexion->prepare($sql)->execute();
         $sql = "";
       }
-
       if(str_replace($exceptionTable,'',$row[0]) != $row[0]){
         continue;
       }
