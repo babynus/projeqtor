@@ -403,8 +403,8 @@ class UserMain extends SqlElement {
     // first time function is called for object, so go and fetch data
     if (!$obj) $this->_accessControlVisibility='PRO';
     $accessControlRights=array();
-    $accessScopeList=SqlList::getList('AccessScope', 'accessCode');
-    $accessScopeRW=SqlList::getList('ListReadWrite', 'code');
+    $accessScopeList=SqlList::getList('AccessScope', 'accessCode',null, true);
+    $accessScopeRW=SqlList::getList('ListReadWrite', 'code',null, true);
     $accessRight=new AccessRight();
     $noAccessAllowed=array();
     $crit=array('idProfile'=>$profile);
