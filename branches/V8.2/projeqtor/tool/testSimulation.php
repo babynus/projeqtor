@@ -71,7 +71,7 @@ foreach($iterator as $element){
       //modifier le nom de la bd
       $parameterPhp2 = "../".str_replace("parameters.php", "parameters_".$newPwd.".php",$iterator->getSubPathName());
       $paramContext = file_get_contents($parameterPhp);
-      $paramContext = str_replace($paramDbName,$newPwd, $paramContext);
+      $paramContext = str_replace($paramDbName,'simu_'.$newPwd, $paramContext);
       $paramContext .= "\n";
       $paramContext .= '$simuIndex="'.$newPwd.'";';
       file_put_contents($parameterPhp, $paramContext);

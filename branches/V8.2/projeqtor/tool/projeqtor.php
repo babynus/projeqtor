@@ -2800,8 +2800,6 @@ function securityGetAccessRightYesNo($menuName, $accessType, $obj=null, $user=nu
   }
 // MTY - LEAVE SYSTEM  
   $class=substr ( $menuName, 4 ); 
-  global $simuIndex;
-  if (isset($simuIndex) and $simuIndex) return;
   global $remoteDb;
   if (isset($remoteDb) and $remoteDb==true) {
     if ($class=='Parameter' or $class=='History' or $class=='TranslationCode' or $class=='TranslationValue') {
