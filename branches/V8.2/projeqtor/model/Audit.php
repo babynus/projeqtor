@@ -136,7 +136,9 @@ class Audit extends SqlElement {
 	static function updateAudit() {
 		// $source can be "main" (from projeqtor.php), "login" (from loginCheck.php) or "alert" (from checkAlertToDisplay.php)
 		global $remoteDb;
+		global $simuIndex;
 		if (isset($remoteDb) and $remoteDb) return;
+		if (isset($simuIndex) and $simuIndex) return;
 		if (self::$_lastAudit and self::$_lastAudit==date("Y-m-d H:i:s")) return; // Do not save audit more than once each second
 		self::$_lastAudit=date("Y-m-d H:i:s");
 		if (! getSessionUser() )
@@ -195,7 +197,9 @@ class Audit extends SqlElement {
 	}
 	static function finishSession() {
 	  global $remoteDb;
+	  global $simuIndex;
 	  if (isset($remoteDb) and $remoteDb) return;
+	  if (isset($simuIndex) and $simuIndex) return;
 		$audit = SqlElement::getSingleSqlElementFromCriteria ( 'Audit', array (
 				'sessionId' => session_id () 
 		) );
@@ -336,7 +340,9 @@ class Audit extends SqlElement {
 	}
 	public function save() {
 	  global $remoteDb;
+	  global $simuIndex;
 	  if (isset($remoteDb) and $remoteDb) return;
+	  if (isset($simuIndex) and $simuIndex) return;
 	  return parent::save();
 	}
 }
