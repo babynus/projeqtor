@@ -794,7 +794,8 @@ if (beforeVersion($currVersion,"V8.0.4")) {
   }
 }
 if (beforeVersion($currVersion,"V8.0.5")) {
-  $crit="validatedCost is not null and validatedCost>0";
+  //$crit="validatedCost is not null and validatedCost>0";
+  $crit="refType='Milestone' and validatedCost is not null and validatedCost>0";
   $m=new MilestonePlanningElement();
   $mList=$m->getSqlElementsFromCriteria(null,null,$crit);
   if (count($mList)>0) {
@@ -807,6 +808,43 @@ if (beforeVersion($currVersion,"V8.0.5")) {
     foreach ($mList as $m) {
       $m->validatedCost=0;
       $m->save();
+      $cpt++;
+      if ( ($cpt % $cptCommit) == 0) {
+        Sql::commitTransaction();
+        traceLog("   => $cpt saved...");
+        projeqtor_set_time_limit(1500);
+        Sql::beginTransaction();
+      }
+    }
+    Sql::commitTransaction();
+    traceLog("   => $cpt saved");
+  }
+}
+if (afterVersion($currVersion,"V8.0.4") and beforeVersion($currVersion,"V8.1.3") and $currVersion!="V8.0.7") {
+//if (beforeVersion($currVersion,"V8.0.7")) {
+  //$crit="validatedCost is not null and validatedCost>0";
+  $mpe=new MilestonePlanningElement();
+  $mpeTable=$mpe->getDatabaseTableName();
+  $h=new History();
+  $hTable=$h->getDatabaseTableName();
+  $crit="refType='MilestonePlanningElement' "
+  ." and (colName='validatedCost' or colName='validatedWork') and oldValue is not null and newValue is null"
+  ." and operationDate > '2019-06-24 00:00:00'"
+  ." and (select $mpeTable.refType from $mpeTable where $mpeTable.id=$hTable.refId)!='Milestone'"
+  ." and not exists (select 'x' from $hTable as xx$hTable where xx$hTable.refType like '%PlanningElement' and xx$hTable.refId=$hTable.refId and xx$hTable.colName=$hTable.colName and xx$hTable.operationDate>$hTable.operationDate)";
+  $hList=$h->getSqlElementsFromCriteria(null,null,$crit, 'operationDate asc');
+  if (count($hList)>0) {
+    traceLog("Fix incorrectly reset validatedCost and validatedWork");
+    $cpt=0;
+    $cptCommit=100;
+    Sql::beginTransaction();
+    traceLog("   => ".count($hList)." to save");
+    projeqtor_set_time_limit(1500);
+    foreach ($hList as $h) {
+      $pe=new PlanningElement($h->refId);
+      if ($h->colName=='validatedCost') $pe->validatedCost=$h->oldValue;
+      if ($h->colName=='validatedWork') $pe->validatedWork=$h->oldValue;
+      $pe->save();
       $cpt++;
       if ( ($cpt % $cptCommit) == 0) {
         Sql::commitTransaction();
