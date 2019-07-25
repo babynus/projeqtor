@@ -1410,7 +1410,7 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
   private function unsuccessfullLogin() {
   	global $loginSave;
   	$maxTry=Parameter::getGlobalParameter('paramLockAfterWrongTries');
-  	if ($maxTry) {
+  	if ($maxTry and $this->id) {
   		$this->loginTry+=1;
   		if ($this->loginTry>=$maxTry) {
   			$this->locked=1;
