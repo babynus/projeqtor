@@ -144,6 +144,8 @@ class ProjectPlanningElementMain extends PlanningElement {
   );   
   
   private static $_databaseTableName = 'planningelement';
+  private static $_databaseCriteria = array('refType'=>'Project');
+  
   private static $_colCaptionTransposition = array('initialStartDate'=>'requestedStartDate',
       'initialEndDate'=> 'requestedEndDate',
       'initialDuration'=>'requestedDuration'
@@ -174,7 +176,13 @@ class ProjectPlanningElementMain extends PlanningElement {
     $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
     return $paramDbPrefix . self::$_databaseTableName;
   }
-    
+  /** ========================================================================
+   * Return the specific database criteria
+   * @return the databaseTableName
+   */
+  protected function getStaticDatabaseCriteria() {
+    return self::$_databaseCriteria;
+  }    
   public function save() {
     $old=$this->getOld();
   	$this->updateTotal();

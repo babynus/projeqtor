@@ -87,6 +87,7 @@ class MeetingPlanningElementMain extends PlanningElement {
   );   
   
   private static $_databaseTableName = 'planningelement';
+  //private static $_databaseCriteria = array('refType'=>'Meeting'); // Cannot use auto filter as PeriodicMeeting is a Meeting (no PeriodicMeetingPlanningElement)
   
   private static $_databaseColumnName=array(
     "idMeetingPlanningMode"=>"idPlanningMode"
@@ -298,7 +299,13 @@ class MeetingPlanningElementMain extends PlanningElement {
     $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
     return $paramDbPrefix . self::$_databaseTableName;
   }
-    
+//   /** ========================================================================
+//    * Return the specific database criteria
+//    * @return the databaseTableName
+//    */
+//   protected function getStaticDatabaseCriteria() {
+//     return self::$_databaseCriteria;
+//   }  
   /** ==========================================================================
    * Return the specific fieldsAttributes
    * @return the fieldsAttributes
