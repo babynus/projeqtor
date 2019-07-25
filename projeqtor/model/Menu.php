@@ -72,5 +72,17 @@ class Menu extends SqlElement {
   public function canDisplay() {
     return self::canDisplayMenu($this->name);
   }
+  public static function getMenuNameFromPage($page) {
+    if (substr($page,0,27)=='objectMain.php?objectClass=') {
+      $class=substr($page,27);
+      if (strpos($class,'&')>0) $class=substr($class,0,strpos($class,'&'));
+      return $class;
+    } else {
+      $class=str_replace('Main.php','',$page);
+      $class=str_replace('.php','',$class);
+      $class=ucfirst($class);
+      return $class;
+    }
+  }
 }
 ?>

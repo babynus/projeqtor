@@ -417,7 +417,10 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       }
       $paramFirstPage=Parameter::getUserParameter('startPage');
       if ($paramFirstPage) {
-        $firstPage=$paramFirstPage;
+        $menuName=Menu::getMenuNameFromPage($paramFirstPage);
+        if (securityCheckDisplayMenu(null,$menuName) ) {
+          $firstPage=$paramFirstPage;
+        }
       }
       if (array_key_exists("directAccessPage",$_REQUEST)) {
  // MTY - LEAVE SYSTEM
