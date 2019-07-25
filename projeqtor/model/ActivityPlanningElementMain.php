@@ -121,6 +121,7 @@ class ActivityPlanningElementMain extends PlanningElement {
   );   
   
   private static $_databaseTableName = 'planningelement';
+  private static $_databaseCriteria = array('refType'=>'Activity');
   
   private static $_databaseColumnName=array(
     "idActivityPlanningMode"=>"idPlanningMode"
@@ -189,7 +190,13 @@ class ActivityPlanningElementMain extends PlanningElement {
     $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
     return $paramDbPrefix . self::$_databaseTableName;
   }
-    
+  /** ========================================================================
+   * Return the specific database criteria
+   * @return the databaseTableName
+   */
+  protected function getStaticDatabaseCriteria() {
+    return self::$_databaseCriteria;
+  }  
   /** ==========================================================================
    * Return the specific fieldsAttributes
    * @return the fieldsAttributes
