@@ -4195,7 +4195,7 @@ function selectFilterContinue() {
    */
    if(dojo.byId("nbFilterCriteria").value >= 0 && !dijit.byId('filterDynamicParameter').get("checked") && dojo.byId('nbDynamicFilterCriteria').value==0) {
      setTimeout("dijit.byId('listFilterFilter').set('iconClass', 'iconActiveFilter')",500);
-   } else {
+   }else{
      setTimeout("dijit.byId('listFilterFilter').set('iconClass', 'iconFilter')",500);
    }
   if(! window.top.dijit.byId('dialogDetail').open && dojo.byId('objectClassManual') && (dojo.byId('objectClassManual').value=='Plugin_kanban' || dojo.byId('objectClassManual').value=='Plugin_liveMeeting')){
@@ -10483,6 +10483,14 @@ function saveModuleStatusCheckParent(id) {
 
 function addDataCloning(){
 	loadDialog('dialogAddDataCloning',null,true,null,true);
+	var idResource = 1;
+	var url='../tool/testSimulation.php?idResource='+idResource;
+  dojo.xhrGet({
+    url : url,
+    handleAs : "text",
+    load : function(){         
+    }
+  });
 }
 
 function copyDataCloning(idDataCloning){
