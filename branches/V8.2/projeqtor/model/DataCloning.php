@@ -197,9 +197,9 @@ class DataCloning extends SqlElement{
 			    $result .='<td width=80%" style="background-color:'.$background.';border-right:1px solid grey;height:40px;">';
 			    $result .='<table width="100%"><tr>';
 			     $result .='<td width=10%" style="padding-left:10px">';
-			    if($data->isActive){
+			   // if($data->isActive){
 			      $result .='<a href="../simulation/'.$data->name.'/view/main.php?directAccess=true" target="_blank" title="'.i18n('gotoDataCloningStatus').'" > '.formatMediumButton('Goto', true).'</a>';
-			    }
+			    //}
 			    $result .='</td>';
 			    $result .='<td width=90%">'.$activeText.'</td></tr></table>';
 			    $result .='<td width="20%"><a onClick="removeDataCloningStatus('.$data->id.');" title="'.i18n('removeDataCloningButton').'" > '.formatMediumButton('Remove').'</a></td>';
