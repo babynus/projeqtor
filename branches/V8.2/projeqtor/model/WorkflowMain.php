@@ -257,6 +257,7 @@ class WorkflowMain extends SqlElement {
     } else {
       $detailWidth="100%";
     }
+    $canUpdate=securityGetAccessRightYesNo('menu'.get_class($this), 'update', $this, getSessionUser())=="YES";
     $result="";
     if ($item=='workflowStatus') {
       $wp= new workflowProfile();
@@ -301,8 +302,9 @@ class WorkflowMain extends SqlElement {
             $result .= '  <tr title="' . $title . '"><td>';
             // dojotype not set to improve perfs
             $result .= '  <input xdojoType="dijit.form.CheckBox" type="checkbox" ';
-            $result .= ' onclick="workflowSelectAll('. $statLineCode . ',' . $statColumnCode . ',\'' . $profileIdList .'\');"';
-            $name = 'val_' . $statLineCode . '_' . $statColumnCode;
+            if ($canUpdate) $result .= ' onclick="workflowSelectAll('. $statLineCode . ',' . $statColumnCode . ',\'' . $profileIdList .'\');"';
+            else $result.=' onclick="return false;" ';
+            $name = ' val_' . $statLineCode . '_' . $statColumnCode;
             $result .= ' name="' . $name . '" id="' . $name . '" ';
             $result .= ($allChecked)?' checked ':'';
             $result .= '/>';
@@ -318,8 +320,9 @@ class WorkflowMain extends SqlElement {
                 $result.='  <tr title="'.$titleProfile.'" class="workflowDetail" ><td valign="top" style="vertical-align: top;" >';
                 // dojotype not set to improve perfs
                 $result.='  <input xdojoType="dijit.form.CheckBox" type="checkbox" ';
-                $result.=' onclick="workflowChange('.$statLineCode.','.$statColumnCode.',\''.$profileIdList.'\');"';
-                $name='val_'.$statLineCode.'_'.$statColumnCode.'_'.$profileCode;
+                if ($canUpdate) $result.=' onclick="workflowChange('.$statLineCode.','.$statColumnCode.',\''.$profileIdList.'\');"';
+                else $result.=' onclick="return false;" ';
+                $name=' val_'.$statLineCode.'_'.$statColumnCode.'_'.$profileCode;
                 $result.=' name="'.$name.'" id="'.$name.'" ';
                 if ($wsListArray[$statLineCode][$statColumnCode][$profileCode]==1) {
                   $result.='checked';
