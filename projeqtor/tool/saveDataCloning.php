@@ -60,16 +60,24 @@ if($idDataCloning){
   }
 }else{
   $dataCloning = new DataCloning();
-  $cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
-  if($idDataCloningParent){
-    $dataCloning->idOrigine = $idDataCloningParent;
+  $wherePerDay = 'idResource = '.$user.' and `requestedDate` > "'.date('Y-m-d').'" and `requestedDate` < "'.addDaysToDate(date('Y-m-d'), 1).'" and `idle` = 0';
+  $dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
+  $dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
+  
+  if($dataCloningPerDay-$dataCloningCountPerDay > 0){
+    $cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
+    if($idDataCloningParent){
+    	$dataCloning->idOrigin = $idDataCloningParent;
+    }
+    $dataCloning->versionCode = $version;
+    $dataCloning->idResource = $user;
+    $dataCloning->requestedDate = $requestedDate;
+    $dataCloning->name = $name;
+    $dataCloning->plannedDate = $cronExecution->nextTime;
+    $result=$dataCloning->save();
+  }else{
+    $result='<b>Contrôles invalides.</b><br/><br/>'.i18n('errorAddDataCloning').'<input type="hidden" id="lastOperationStatus" value="INVALID" /><input type="hidden" id="lastSaveId" value="" /><input type="hidden" id="lastOperation" value="control" />';
   }
-  $dataCloning->versionCode = $version;
-  $dataCloning->idResource = $user;
-  $dataCloning->requestedDate = $requestedDate;
-  $dataCloning->name = $name;
-  $dataCloning->plannedDate = $cronExecution->nextTime;
-  $result=$dataCloning->save();
 }
 displayLastOperationStatus($result);
 ?>
