@@ -67,7 +67,7 @@ CREATE TABLE `${prefix}datacloning` (
     `name` varchar(100) DEFAULT NULL,
     `nameDir` varchar(100) DEFAULT NULL,
     `idResource` int(12) unsigned DEFAULT NULL,
-    `idOrigine` int(12) unsigned DEFAULT NULL,
+    `idOrigin` int(12) unsigned DEFAULT NULL,
 		`versionCode` varchar(100) DEFAULT NULL,
     `requestedDate` datetime DEFAULT NULL,
     `plannedDate` varchar(100) DEFAULT NULL,
@@ -89,7 +89,7 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (1,224,8);
 
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
-('dataCloningCreationRequest','* * * * *')
+('dataCloningCreationRequest','5')
 ('dataCloningPerDay','5'),
 ('dataCloningTotal','50'),
 ('paramPasswordStrength','1'),

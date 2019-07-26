@@ -140,7 +140,16 @@ function cronActivate() {
 }
 
 function dataCloningCheckRequest(){
-  $cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
-  debugLog("dataCloningCheckRequest() at ".$cronExecution->nextTime);
+  $dataCloning = new DataCloning();
+  $dataCloningList = $dataCloning->getSqlElementsFromCriteria(array('idle'=>'0'));
+  
+  foreach ($dataCloningList as $data){
+    if(!$data->isActive){
+      $data->createDataCloning($data->id);
+    }
+    if($data->isRequestedDelete){
+      $data->deleteDataCloning($data->id);
+    }
+  }
 }
 ?>
