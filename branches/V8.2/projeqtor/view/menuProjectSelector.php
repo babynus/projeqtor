@@ -25,7 +25,7 @@
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
 include_once("../tool/projeqtor.php");
-$proj='*'; 
+$proj='*';
 if(sessionValueExists('project')){
   $proj=getSessionValue('project');
 } else {
@@ -58,7 +58,7 @@ if (sessionValueExists('projectSelectorDisplayMode')) {
     <?php
 if ($proj=='*') {
   echo '<i>' . i18n('allProjects') . '</i>';
-} else if(strpos($proj, ",") !== null){
+} else if(strpos($proj, ",") !== null and strlen($proj) > 1){
   echo '<i>'.i18n('selectedProject').'</i>';
 } else {
   $projObject=new Project($proj);
@@ -90,7 +90,7 @@ if ($proj=='*') {
        setSelectedProject(this.value, this.displayedValue, 'selectedProject',true);
      </script>
      <option value=""></option>
-     <?php htmlDrawOptionForReference("idProject", $proj, null, true,null, null, $limitToActiveProjects);?>
+     <?php htmlDrawOptionForReference("idProject", null, null, false,null, null, $limitToActiveProjects);?>
    </div>
    <input type="hidden" id="projectSelectorMode" value="Standard" />
    <div style="text-align:left;position:absolute; top:1px; left:281px; padding:0px;">
