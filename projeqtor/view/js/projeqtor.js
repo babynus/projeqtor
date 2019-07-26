@@ -6039,7 +6039,7 @@ function removeAutoSendReport(idSendReport){
 }
 
 function selectedMultiProject(){
-	var nameProject = '<i>'+i18n('selectedProject')+'</i>';
+	var nameProject = null;
 	arraySelectedProject.splice(0);
 	dojo.query(".projectSelectorCheckbox").forEach(function(node, index, nodelist) {
 	    if(dijit.byId(node.getAttribute('widgetid')).get('checked')){
@@ -6051,6 +6051,16 @@ function selectedMultiProject(){
 		nameProject = '<i>'+i18n('allProjects')+'</i>';
 	}
 	if(arraySelectedProject != null){
-		setSelectedProject(arraySelectedProject.flat(), nameProject, 'selectedProject');
+		if(arraySelectedProject.length ==  1){
+			if(dojo.byId('projectSelectorName'+arraySelectedProject[0])){
+				nameProject = dojo.byId('projectSelectorName'+arraySelectedProject[0]).value;
+			}else{
+				nameProject = '<i>'+i18n('allProjects')+'</i>';
+			}
+			setSelectedProject(arraySelectedProject[0], nameProject, 'selectedProject');
+		}else{
+			nameProject = '<i>'+i18n('selectedProject')+'</i>';
+			setSelectedProject(arraySelectedProject.flat(), nameProject, 'selectedProject');
+		}
 	}
 }
