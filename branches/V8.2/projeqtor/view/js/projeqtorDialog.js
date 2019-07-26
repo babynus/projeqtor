@@ -10483,14 +10483,6 @@ function saveModuleStatusCheckParent(id) {
 
 function addDataCloning(){
 	loadDialog('dialogAddDataCloning',null,true,null,true);
-//	var idResource = 1;
-//	var url='../tool/testSimulation.php?idResource='+idResource;
-//  dojo.xhrGet({
-//    url : url,
-//    handleAs : "text",
-//    load : function(){         
-//    }
-//  });
 }
 
 function copyDataCloning(idDataCloning){
