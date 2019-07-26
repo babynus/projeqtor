@@ -68,14 +68,14 @@ CREATE TABLE `${prefix}datacloning` (
     `nameDir` varchar(100) DEFAULT NULL,
     `idResource` int(12) unsigned DEFAULT NULL,
     `idOrigin` int(12) unsigned DEFAULT NULL,
-		`versionCode` varchar(100) DEFAULT NULL,
+	`versionCode` varchar(100) DEFAULT NULL,
     `requestedDate` datetime DEFAULT NULL,
     `plannedDate` varchar(100) DEFAULT NULL,
-		`deletedDate` datetime DEFAULT NULL,
-		`requestedDeletedDate` datetime DEFAULT NULL,
-		`isRequestedDelete` int(1) unsigned DEFAULT 0,
-		`isActive` int(1) unsigned DEFAULT 0,
-		`idle` int(1) unsigned DEFAULT 0,
+	`deletedDate` datetime DEFAULT NULL,
+    `requestedDeletedDate` datetime DEFAULT NULL,
+    `isRequestedDelete` int(1) unsigned DEFAULT 0,
+    `isActive` int(1) unsigned DEFAULT 0,
+	`idle` int(1) unsigned DEFAULT 0,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -89,10 +89,11 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (1,224,8);
 
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
-('dataCloningCreationRequest','5')
+('dataCloningCreationRequest','5'),
 ('dataCloningPerDay','5'),
 ('dataCloningTotal','50'),
 ('paramPasswordStrength','1'),
 ('paramAttachmentNum','');
 
 DROP TABLE `${prefix}noteflux`;
+DROP TABLE `${prefix}absence`;
