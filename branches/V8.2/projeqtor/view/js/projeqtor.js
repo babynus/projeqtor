@@ -6067,7 +6067,7 @@ function refreshDataCloningList() {
 function saveDataCloning(){
 	var formVar=dijit.byId('dataCloningForm');
 	  if (dijit.byId('dataCloningUser').get('value') == '' || dijit.byId('dataCloningName').get('value') == '') {
-	      showAlert(i18n("errorNoUserOrNoName"));
+		  showAlert(i18n("alertInvalidForm"));
 	      return;
 	  }
       callback=function() {

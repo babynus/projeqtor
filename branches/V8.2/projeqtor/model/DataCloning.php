@@ -33,7 +33,7 @@ class DataCloning extends SqlElement{
 	public $nameDir;
 	public $idResource;
 	public $versionCode;
-	public $idOrigine;
+	public $idOrigin;
 	public $requestedDate;
 	public $plannedDate;
 	public $deletedDate;
@@ -97,19 +97,29 @@ class DataCloning extends SqlElement{
 		} else {
 			$listUser = getListForSpecificRights('imputation');
 		}
-		$wherePerDay = 'idResource = '.$idUser.' and `requestedDate` > "'.date('Y-m-d').'" and `requestedDate` < "'.addDaysToDate(date('Y-m-d'), 1).'" and `idle` = 0';
+		if($idUser != ''){
+		  $idresource='idResource = '.$idUser.' and ';
+		}else{
+		  $idresource='';
+		}
+		$wherePerDay = $idresource.'`requestedDate` > "'.date('Y-m-d').'" and `requestedDate` < "'.addDaysToDate(date('Y-m-d'), 1).'" and `idle` = 0';
 		$dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
 		$dataCloningCountTotal = $dataCloning->countSqlElementsFromCriteria(array("idle"=>"0"));
 		$dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
 		$dataCloningTotal = Parameter::getGlobalParameter('dataCloningTotal');
-		if(($dataCloningPerDay-$dataCloningCountPerDay > 0) and ($dataCloningTotal-$dataCloningCountTotal > 0)){
-		  $hide = 'block';
-		}else{
-		  $hide = 'none';
-		}
 		if($idUser != ''){
+		  if($dataCloningPerDay-$dataCloningCountPerDay > 0){
+		  	$hide = 'block';
+		  }else{
+		  	$hide = 'none';
+		  }
 		  $dataCloningCount = i18n('colDataCloningCount', array($dataCloningPerDay-$dataCloningCountPerDay, $dataCloningPerDay));
 		}else{
+		  if($dataCloningTotal-$dataCloningCountTotal > 0){
+		  	$hide = 'block';
+		  }else{
+		  	$hide = 'none';
+		  }
 		  $dataCloningCount = i18n('colDataCloningCount', array($dataCloningTotal-$dataCloningCountTotal, $dataCloningTotal));
 		}
 		$result = "";
@@ -165,8 +175,8 @@ class DataCloning extends SqlElement{
 			  $result .='<td style="border: 1px solid grey;height:40px;width:10%;text-align:center;vertical-align:center;'.$idleColor.'">'.$data->versionCode.'</td>';
 			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:left;vertical-align:center;'.$idleColor.'">';
 			  $result .='<table width="100%"><tr>';
-			  if($data->idOrigine and !$data->idle){
-			    $origin = new DataCloning($data->idOrigine, true);
+			  if($data->idOrigin and !$data->idle){
+			    $origin = new DataCloning($data->idOrigin, true);
 			    $result .='<td width=10%" style="padding-left:10px">';
 			    if($origin->isActive){
 			      $result .='<a onClick="gotoDataCloningStatus('.$data->id.');" title="'.i18n('gotoDataCloningButton').'" > '.formatMediumButton('Goto', true).'</a>';
@@ -197,10 +207,10 @@ class DataCloning extends SqlElement{
 			    }
 			    $result .='<td width=80%" style="background-color:'.$background.';border-right:1px solid grey;height:40px;">';
 			    $result .='<table width="100%"><tr>';
-			     $result .='<td width=10%" style="padding-left:10px">';
-			   // if($data->isActive){
-			      $result .='<a href="../simulation/'.$data->name.'/view/main.php?directAccess=true" target="_blank" title="'.i18n('gotoDataCloningStatus').'" > '.formatMediumButton('Goto', true).'</a>';
-			    //}
+			    $result .='<td width=10%" style="padding-left:10px">';
+			    if($data->isActive){
+			      $result .='<a href="../simulation/'.$data->nameDir.'/view/main.php?directAccess=true" target="_blank" title="'.i18n('gotoDataCloningStatus').'" > '.formatMediumButton('Goto', true).'</a>';
+			    }
 			    $result .='</td>';
 			    $result .='<td width=90%">'.$activeText.'</td></tr></table>';
 			    $result .='<td width="20%"><a onClick="removeDataCloningStatus('.$data->id.');" title="'.i18n('removeDataCloningButton').'" > '.formatMediumButton('Remove').'</a></td>';
@@ -217,37 +227,6 @@ class DataCloning extends SqlElement{
 		$result .='  </table>';
 		$result .='</div>';
 		echo $result;
-	}
-	
-	public static function htmlReturnOptionForMinutesHoursCron($selection, $isHours=false, $isDayOfMonth=false, $required=false) {
-		$arrayWeekDay=array();
-		$max=59;
-		$start=0;
-		$modulo=5;
-		if($isHours){
-			$max=23;
-			$start=0;
-			$modulo=1;
-		}
-		if($isDayOfMonth){
-			$max=31;
-			$start=1;
-			$modulo=1;
-		}
-		for($i=$start;$i<=$max;$i++){
-			$key=$i;
-			if ( $i % $modulo==0) $arrayWeekDay[$key]=$key;
-		}
-		$result="";
-		if (! $required) {
-			$result.='<option value="*" '.(($selection=='*')?'selected':'').'>'.i18n('all').'</option>';
-		}
-		foreach($arrayWeekDay as $key=>$line) {
-			$result.= '<option value="' . $key . '"';
-			if ($selection!==null and $key==$selection ) { $result.= ' SELECTED '; }
-			$result.= '>'.$line.'</option>';
-		}
-		return $result;
 	}
 	
 	public static function drawDataCloningParameter(){
@@ -356,6 +335,220 @@ class DataCloning extends SqlElement{
   		echo '</td>';
   	echo '</tr></table>';
   	echo '</div></div>';
+	}
+	
+	public static function createDataCloning($id){
+	  $dataCloning = new DataCloning($id);
+	  global $paramDbName;
+	  $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	  $newPwd = substr( str_shuffle( $chars ), 0, 6);
+	  
+	  //COPY FOLDER and CODE
+	  // si origine  alors changer le dossier
+	  $dir_source = '../../projeqtorV8.2';
+	  $dir_dest = '../../projeqtorV8.2/simulation/'.$newPwd;
+	  
+	  $nameDir = $newPwd;
+	  
+	  //create folder
+	  mkdir($dir_dest, 0777,true);
+	  
+	  $dir_iterator = new RecursiveDirectoryIterator($dir_source, RecursiveDirectoryIterator::SKIP_DOTS);
+	  $iterator = new RecursiveIteratorIterator($dir_iterator, RecursiveIteratorIterator::SELF_FIRST);
+	  
+	  // tool/parameterlocation
+	  $exceptionPath = array(".settings","simulation",".svn","deploy","test",".externalToolBuilders","api","db","manual","attach","cron","documents","import","logs","\files\report");
+	  $exceptionFile = array("simulation","deploy","test","api","db","manual");
+	  
+	  foreach($iterator as $element){
+	  	//parameter php
+	  	if($element->getBasename()=="parameters.php" AND (str_replace("plugin", '', $element->getPath()) == $element->getPath()) AND (str_replace("simulation", '', $element->getPath()) == $element->getPath())){
+	  		$parameterPhp  = $dir_dest . DIRECTORY_SEPARATOR . str_replace("parameters.php", "parameters_".$newPwd.".php",$iterator->getSubPathName());
+	  		copy($element,$parameterPhp);
+	  		$parameterPhp2 = "../".str_replace("parameters.php", "parameters_".$newPwd.".php",$iterator->getSubPathName());
+	  		$paramContext = file_get_contents($parameterPhp);
+	  		$paramContext = str_replace($paramDbName,'simu_'.$newPwd, $paramContext);
+	  		$paramContext .= "\n";
+	  		$paramContext .= '$simuIndex="'.$newPwd.'";';
+	  		file_put_contents($parameterPhp, $paramContext);
+	  		continue;
+	  	}
+	  	//exception
+	  	if((str_replace($exceptionPath, '', $element->getPath()) != $element->getPath()) OR (substr($element->getBasename(),0,1)==".") OR (in_array($element->getBasename(), $exceptionFile)) ){
+	  		continue;
+	  	}
+	  	//end exception
+	  	if($element->isDir()){
+	  		mkdir($dir_dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
+	  	} else{
+	  		if(($element->getBasename()=="parametersLocation.php")){
+	  			$paramLocation =  $dir_dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName();
+	  		}
+	  		copy($element, $dir_dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
+	  	}
+	  }
+	  
+	  //Param Location
+	  kill($paramLocation);
+	  if (! writeFile(' ',$paramLocation)) {
+	  	showError("impossible to write \'$paramLocation\' file, cannot write to such a file : check access rights");
+	  }
+	  kill($paramLocation);
+	  writeFile('<?php ' . "\n", $paramLocation);
+	  writeFile('$parametersLocation = \'' . $parameterPhp2 . '\';', $paramLocation);
+	   
+	  //BD
+	  $newPwd = 'simu_'.$newPwd;
+	  //connexion
+	   if ($dataCloning->idOrigin){
+	     $OriginData = new DataCloning($dataCloning->idOrigin);
+	     $dataCloning->connectTestSimu('simu_'.$OriginData->nameDir);
+	  }else{
+	    $PDO=Sql::getConnection();
+	  }
+	  //creer la DB
+	  $requete= "CREATE DATABASE IF NOT EXISTS `".$newPwd."` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
+	  $PDO->prepare($requete)->execute();
+	  $sql = 'SHOW TABLE STATUS';
+	  $result_tables = $PDO->query($sql);
+	  $sql = "";
+	  
+	  //Connect new bd
+	  $connexion = $dataCloning->connectTestSimu($newPwd);
+	  $exceptionTable = array("alert","attachment","audit","auditsummary","cronautosendreport","cronexecution","datacloning","history","kpihistory"
+                    	  		,"kpivalue","language","mail","mailtosend","message","messagelegal","messagelegalfollowup","notification","notificationdefinition"
+                    	  		,"projecthistory","statusmail","subscription","translationaccessright","translationcode","translationlanguage","translationvalue");
+	  	
+  	foreach($result_tables as $row) {
+  		// CREATE ..
+  		$result_create = $PDO->query('SHOW CREATE TABLE `'. $row['Name'] .'`');
+  		foreach ($result_create as $row){
+  			$obj_create = $row;
+  			$sql .= $obj_create['Create Table'] .";\n";
+  		}
+  		if($sql){
+  			$connexion->prepare($sql)->execute();
+  			$sql = "";
+  		}
+  		if(str_replace($exceptionTable,'',$row[0]) != $row[0]){
+  			continue;
+  		}
+  		// INSERT ...
+  		$sqlInsert = "";
+  		$result_insert = $PDO->query('SELECT * FROM `'. $row[0] .'`');
+  		//$sql .= "\n";
+  		$cpt = 0;
+  
+  		foreach ($result_insert as $rowInsert){
+  			$cpt++;
+  			$virgule = false;
+  			$sqlInsert .= 'INSERT INTO `'. $row[0] .'` VALUES (';
+  			foreach($rowInsert as $fld=>$val) {
+  				if(is_numeric($fld))continue;
+  				$sqlInsert .= ($virgule ? ',' : '');
+  				if(is_null($val)) {
+  					$sqlInsert .= 'NULL';
+  				} else {
+  					$sqlInsert .= '\''. $dataCloning->insert_clean($val) . '\'';
+  				}
+  				$virgule = true;
+  			} // for
+  			$sqlInsert .= ')' .";\n";
+  			if($cpt > 100){
+  				$connexion->prepare($sqlInsert)->execute();
+  				$sqlInsert = "";
+  				$cpt = 0;
+  			}
+  		}
+  
+  		if($sqlInsert){
+  			$connexion->prepare($sqlInsert)->execute();
+  		}
+  	}
+	   
+  	$dataCloning->isActive = 1;
+  	$dataCloning->nameDir = $nameDir;
+  	$dataCloning->save();
+	} 
+	
+	public static function deleteDataCloning($id){
+	  $dataCloning = new DataCloning($id);
+	  $dataCloning->idle = 1;
+	  $dataCloning->deletedDate = date('Y-m-d H:i');
+	  $dataCloning->save();
+	}
+	
+	public static function connectTestSimu($dbName){
+		$dbType=Parameter::getGlobalParameter('paramDbType');
+		$dbHost=Parameter::getGlobalParameter('paramDbHost');
+		$dbPort=Parameter::getGlobalParameter('paramDbPort');
+		$dbUser=Parameter::getGlobalParameter('paramDbUser');
+		$dbPassword=Parameter::getGlobalParameter('paramDbPassword');
+	
+		if ($dbType != "mysql" and $dbType != "pgsql") {
+			$logLevel=Parameter::getGlobalParameter('logLevel');
+			if ($logLevel>=3) {
+				echo htmlGetErrorMessage("SQL ERROR : Database type unknown '" . $dbType . "' \n");
+			} else {
+				echo htmlGetErrorMessage("SQL ERROR : Database type unknown");
+			}
+			errorLog("SQL ERROR : Database type unknown '" . $dbType . "'");
+			$lastConnectError="TYPE";
+			exit;
+		}
+		enableCatchErrors();
+		if ($dbType == "mysql") {
+			ini_set('mysql.connect_timeout', 10);
+		}
+		try {
+			$sslArray=array();
+			$sslKey=Parameter::getGlobalParameter("SslKey");
+			if($sslKey and !file_exists($sslKey)){
+				traceLog("Error for SSL Key : file $sslKey do not exist");
+				$sslKey=null;
+			}
+			 
+			$sslCert=Parameter::getGlobalParameter("SslCert");
+			if($sslCert and !file_exists($sslCert)){
+				traceLog("Error for SSL Certification : file $sslCert do not exist");
+				$sslCert=null;
+			}
+	
+			$sslCa=Parameter::getGlobalParameter("SslCa");
+			if($sslCa and !file_exists($sslCa)){
+				traceLog("Error for SSL Certification Authority : file $sslCa do not exist");
+				$sslCa=null;
+			}
+	
+			if($sslKey and $sslCert and $sslCa){
+				$sslArray=array(
+						PDO::MYSQL_ATTR_SSL_KEY  => $sslKey,
+						PDO::MYSQL_ATTR_SSL_CERT => $sslCert,
+						PDO::MYSQL_ATTR_SSL_CA   => $sslCa
+				);
+			}
+			$sslArray[PDO::ATTR_ERRMODE]=PDO::ERRMODE_SILENT;
+			$dsn = $dbType.':host='.$dbHost.';port='.$dbPort.';dbname='.$dbName;
+			$connexion = new PDO($dsn, $dbUser, $dbPassword, $sslArray);
+			$connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			if ($dbType == "mysql" and isset($enforceUTF8) and $enforceUTF8) {
+				$connexion->query("SET NAMES utf8");
+			}
+		}catch (PDOException $e) {
+			echo htmlGetErrorMessage($e->getMessage( )).'<br />';
+		}
+		if ($dbType == "mysql") {
+			ini_set('mysql.connect_timeout', 60);
+		}
+		disableCatchErrors();
+		$lastConnectError=NULL;
+		return $connexion;
+	}
+	
+	public static function insert_clean($string) {
+		$s1 = array( "\\"	, "'"	, "\r", "\n", );
+		$s2 = array( "\\\\"	, "''"	, '\r', '\n', );
+		return str_replace($s1, $s2, $string);
 	}
 }
 ?>
