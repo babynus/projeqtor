@@ -315,8 +315,26 @@ class AutoSendReport extends SqlElement{
   			$strParam = '';
   			$separator=' | ';
   			foreach ($param as $name=>$value){
-  			  if(is_array($value)){
-  			  	$value = implode(',', $value);
+  			if(is_array($value)){
+  			    $class = substr($name, 2);
+  			    if(Security::checkValidClass($class)){
+  			      $array = array();
+  			      foreach ($value as $id){
+  			        if(Security::checkValidId($id)){
+  			          $obj = new $class($id, true);
+  			          if($name = 'idProfile'){
+  			          	$array[$id]=substr($obj->name, 7);
+  			          }else{
+  			          	$array[$id]=$obj->name;
+  			          }
+  			        }else{
+  			          $array[$id]=$id;
+  			        }
+  			      }
+  			      $value = implode(', ', $array);
+  			    }else{
+  			      $value = implode(', ', $value);
+  			    }
   			  }
   			  if( trim($value) != ''){
     		    if($name == 'idProject'){
