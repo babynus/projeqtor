@@ -95,8 +95,8 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES
 ('paramPasswordStrength','1'),
 ('paramAttachmentNum','');
 
-INSERT INTO `${prefix}cronExecution` (`cron`, `fileExecuted`, `fonctionName`) VALUES
-('*/5 * * * *', '../tool/cronExecutionStandard.php', 'dataCloningCheckRequest');
+INSERT INTO `${prefix}cronExecution` (`cron`, `fileExecuted`, `idle` ,`fonctionName`) VALUES
+('*/5 * * * *', '../tool/cronExecutionStandard.php', 0, 'dataCloningCheckRequest');
 
 DROP TABLE `${prefix}noteflux`;
 DROP TABLE `${prefix}absence`;
