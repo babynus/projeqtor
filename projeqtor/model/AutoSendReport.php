@@ -385,6 +385,8 @@ class AutoSendReport extends SqlElement{
     		    and $name != 'print' and $name != 'report' and $name != 'reportName' and $name != 'periodValue' and $name != 'periodType' and $name != 'objectClassList'){
     		      if($name == 'periodScale'){
     		        $strParam .= i18n($name).' : '.i18n($value).$separator;
+  		        }else if($name == 'nbOfMonths'){
+    		        	$strParam .= i18n('numberOfMonths').' : '.$value.$separator;
     		      }else{
     		        if(substr($name, 0, 2) == 'id'){
     		        	$idValue = SqlList::getNameFromId(substr($name, 2), $value);
