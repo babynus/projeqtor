@@ -346,7 +346,7 @@ class DataCloning extends SqlElement{
 	  //COPY FOLDER and CODE
 	  if($dataCloning->idOrigin){
 	    $OriginData = new DataCloning($dataCloning->idOrigin);
-	    $dir_dest = '../../projeqtorV8.2/simulation/'.$OriginData->nameDir;
+	    $dir_source = '../../projeqtorV8.2/simulation/'.$OriginData->nameDir;
 	  }else{
   	  $dir_source = '../../projeqtorV8.2';
 	  }
