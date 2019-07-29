@@ -2,12 +2,9 @@
 
 .. title:: Concepts
 
-
-.. raw:: latex
-
-    \newpage
-
 .. _concept:
+
+.. _Concept_project:
 
 Project
 *******
@@ -49,9 +46,13 @@ Allows to gather all data depend on project:
     .. seealso:: 
       
       :ref:`top-bar` and :ref:`user-parameters`
-    
 
-.. rubric:: Define the project type
+.. index:: Project type
+    
+.. _project_type:
+
+the project type
+----------------
 
 .. compound:: Three project types can be defined:
 
@@ -66,8 +67,9 @@ Allows to gather all data depend on project:
    **2 - Administrative project**
 
    * Allows to follow the non productive work as holidays, sickness, training, …
-   * All resource will be able to enter some real work on such project, without having to be allocated to the project, nor assigned to project activities.
-
+   * All resources have access to this project type without being assigned (project) or assigned (Activity).
+   * Create an activity, like an OPE project, for each type of absence.
+   
    **3 - Template project**
 
    * Designed to define templates, to be copied as operational project. See: :ref:`copy-item`
@@ -75,9 +77,9 @@ Allows to gather all data depend on project:
 
 .. note:: 
 
-   The project type is defined in a project type. See: :ref:`project-type`
+   The project type is defined in a project type. See: :ref:`project_type`
    
-   Which is associated to a project. See: :ref:`project`
+   Which is associated to a project. See: :ref:`planningelem_project`
 
 .. rubric:: Define billable project
 
@@ -94,8 +96,8 @@ A project can be billable or not.
 
 .. note:: 
 
-   * The project billing type is defined in a project type. See: :ref:`project-type`
-   * Which is associated to a project. See: :ref:`project` 
+   * The project billing type is defined in a project type. See: :ref:`project_type`
+   * Which is associated to a project. See: :ref:`planningelem_project` 
 
 .. warning:: 
 
@@ -103,7 +105,7 @@ A project can be billable or not.
 
 .. rubric:: Fix the planning
 
-    * you can freeze the content of a project or projects from the moment you do not want to extend the project or modify it
+* you can freeze the content of a project or projects from the moment you do not want to extend the project or modify it
 
 
 
@@ -118,7 +120,9 @@ Organization
 
 The notion of organization introduces a way to consolidate projects on a different hiererchic structure, apart from projects / sub-projects structure.
 
-.. rubric:: Definition of the structure of the company in the frame of organizations (Departments, Units, Location, ...)
+.. rubric:: Definition of the structure of the company in the frame of organizations 
+
+(Departments, Units, Location, ...)
 
 * The organization summarizes the data of the projects in progress for the organization
 
@@ -162,9 +166,9 @@ A product is a material object or for IT/IS projects is a software application.
 * A product is an element delivered by a project.
 * The link with the project have no impact on project planning.
 * Indicates only that project is devoted to a specific product versions.
-* The link management is done in :ref:`project` and :ref:`product-version` screens.
+* The link management is done in :ref:`planningelem_project` and :ref:`product-version` screens.
 
-.. figure:: /images/LinkProductToProject.png
+.. figure:: /images/GUI/CONCEPT_SCHEMA_LinkProductToProject.png
    :alt: Link with projects
    :align: center
 
@@ -202,7 +206,7 @@ The rules defining a product structure are:
     * A product can have several sub-products.
     * A sub-product can be in the composition only one product.
 
-    .. figure:: /images/LinkProductSubProduct.png
+    .. figure:: /images/GUI/CONCEPT_SCHEMA_LinkProductSubProduct.png
        :alt: Relationships between product elements
        :align: center
 
@@ -213,7 +217,7 @@ The rules defining a product structure are:
     * A product can be composed of several components.
     * A component can be in the composition of several products.
 
-    .. figure:: /images/LinkProductComponent.png
+    .. figure:: /images/GUI/CONCEPT_SCHEMA_LinkProductComponent.png
        :alt: Relationships between product and component elements
        :align: center
 
@@ -223,7 +227,7 @@ The rules defining a product structure are:
 
     * Components can be linked between them (N to N relationships).
 
-    .. figure:: /images/LinkBetweenComponent.png
+    .. figure:: /images/GUI/CONCEPT_SCHEMA_LinkBetweenComponent.png
        :alt: Relationships between component elements
        :align: center
 
@@ -236,7 +240,7 @@ The rules defining a product structure are:
 * Links can be defined between versions of products and components, but only with the elements defined in the product structure.
 
 
-.. figure:: /images/LinkProductComponentVersion.png
+.. figure:: /images/GUI/CONCEPT_SCHEMA_LinkProductComponentVersion.png
    :alt: Link between versions of product and component
    :align: center
 
@@ -349,10 +353,9 @@ This planning element defines the project.
 
 * It allows to specify information on the project sheet like the customer, bill contact, sponsor, manager and objectives.
 * Documents, notes and attachments can be annexed.
-* More detail, see: :ref:`project` screen.
+* More detail: :ref:`planningelem_project`
 
-
- .. compound:: **Sub-project**
+.. compound:: **Sub-project**
 
     * Sub-project is used to split the project.
     * The project can be split to correspond the organizational breakdown or something else.
@@ -366,7 +369,7 @@ This planning element defines the project.
         * Project allocation allows to define data visibility and isolate sub-projects. (See: :ref:`allocation-to-project`)
         * A supervisor can follow-up the project in its totality. 
 
-        .. figure:: /images/SeparationDuties.png
+        .. figure:: /images/GUI/CONCEPT_SCHEMA_SeparationDuties.png
            :alt: Separation of duties
            :align: center
 
@@ -753,7 +756,7 @@ A user linked to a profile belongs to this group who share same application beha
 
    You can define profiles to be conformed to the roles defined in your organization.
    
-   Access rights management is done on :ref:`Access rights<profile>` screens 
+   Access rights management is done on :ref:`Acces_Right<profiles>` screens 
 
 
 .. rubric:: Used for
@@ -880,7 +883,7 @@ The next matrix shows the different possibilities.
 
 .. rubric:: Data visibility
 
-.. figure:: /images/Stakeholder-DataVisibility.png
+.. figure:: /images/GUI/CONCEPT_SCHEMA_Stakeholder-DataVisibility.png
    :alt: Stakeholder data visibility
    :align: center
 
@@ -914,7 +917,7 @@ The next matrix shows the different possibilities.
 .. rubric:: Resource availability
 
 
-.. figure:: /images/Stakeholder-ResourceAvailability.png
+.. figure:: /images/GUI/CONCEPT_SCHEMA_Stakeholder-ResourceAvailability.png
    :alt: Stakeholder resource availability
    :align: center
 
@@ -942,7 +945,7 @@ The next matrix shows the different possibilities.
 * Combined with a user, a contact can connect to the application
 * Combined with a resource, contact availability can be planned in projects.
 
-.. figure:: /images/Stakeholder-ContactRoles.png
+.. figure:: /images/GUI/CONCEPT_SCHEMA_Stakeholder-ContactRoles.png
    :alt: Stakeholder contact roles
    :align: center
 
@@ -977,15 +980,58 @@ Allocation to project and user profile are also shared.
 Allocation to project
 *********************
 
+.. sidebar:: Concepts 
+
+   * :ref:`allocation-to-project`
+   * :ref:`profiles-definition`
+   * :ref:`user-ress-contact-demystify`
+   
 Allocation to project is used to:
 
-* Defines project data visibility.
-* Defines resource availability.
-* Defines the period of access to project data by the user. 
+* Define project data visibility.
+* Define resource availability.
+* Define the period of access to project data by the user. 
 
-.. note::
 
-   The :ref:`allocation` screen allows to manage overall allocations to project. 
+.. figure:: /images/GUI/ENVPARAM_SCR_AllocationProject.png
+   :alt: Allocation to project
+   :align: center
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: |ReqFieldLegend| Required Field
+   :widths: 20, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id of the resource.
+   * - Resource
+     - Name of the allocated resource.
+   * - Or contact
+     - Name of the allocated contact.
+   * - |RequiredField| Profile
+     - Selected profile.
+   * - |RequiredField| Project
+     - Project allocated to.
+   * - Rate
+     - Allocation rate for the project (%).
+   * - Start date
+     - Start date of allocation.
+   * - End date
+     - End date of allocation.
+   * - :term:`Closed`
+     - Flag to indicate that the allocation is archived.
+   * - :term:`Description`
+     - Complete description of the allocation.
+
+.. topic:: Fields Resource & Contact
+
+   * You can select resource or contact.
+   * If none is selected then the user connected is used to define the allocation.
+   * If a contact is a resource and inversely, then resource or contact name will be selected too.
+
 
 The following sections describe allocation to project, performed for user, resource or contact.
 
@@ -1035,7 +1081,7 @@ Allocation to project allows to define the resource availability on project.
 
 A resource may be allocated to projects at a specified rate for a period.
 
-Allocation to project can be defined in :ref:`project` and :ref:`resource` screens.
+Allocation to project can be defined in :ref:`planningelem_project` and :ref:`resource` screens.
 
 It is also possible to allocate a team to a project in :ref:`team` screens.
 
@@ -1085,7 +1131,7 @@ Contact allocation to project
 
 A contact allocated to a project can be defined as :term:`requestor`.
 
-Allocation to project can be defined in :ref:`project` and :ref:`contact` screens.
+Allocation to project can be defined in :ref:`planningelem_project` and :ref:`contact` screens.
 
 
 
@@ -1210,3 +1256,61 @@ A calendar is defined for a type of resources and each resource is attached to a
 
    * Even if you can create a specific calendar to each resource, this is not the advised way to manage personal days off and vacations.
    * You’d better use Administrative projects (enter real work in advance).
+
+   
+   
+.. raw:: latex
+
+    \newpage
+
+.. title:: Contexts
+
+.. index:: ! Context
+.. index:: ! Ticket (Context)
+.. index:: ! Test case (Environment)  
+
+.. _context:
+
+Contexts
+********
+
+The contexts defines a list of elements selectable to define ticket context and test case environment.
+
+Contexts are initially set to be able to define contexts for IT Projects, for three context types :
+
+* Environment
+
+* Operating System
+
+* Browser
+
+They can be changed to be adapted to any kind of project.
+
+.. rubric:: Section: Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table::
+   :widths: 30, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for the context.
+   * - Context type
+     - One of the three context type.
+   * - **Name**
+     - Name of the context.
+   * - Sort order
+     - Number to define the order of display in lists
+   * - :term:`Closed`
+     - Flag to indicate that the context is archived.
+ 
+
+.. topic:: Fields **Context type**
+
+   * The list is fixed. 
+   * Captions are translated and so can be changed in language file.
+
+   

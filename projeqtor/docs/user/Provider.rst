@@ -1,3 +1,5 @@
+.. include:: ImageReplacement.txt
+
 .. raw:: latex
 
     \newpage
@@ -18,19 +20,19 @@ Allows to manage provider list.
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 40, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
      - Unique Id for the provider.
-   * - **Name**
+   * - |RequiredField| Name
      - Provider name.
    * - Type of provider
      - Type of provider.
@@ -47,9 +49,7 @@ Allows to manage provider list.
    * - :term:`Description`
      - Description of the provider.
 
-**\* Required field**
+.. rubric:: Section Address
 
-.. rubric:: Section: Address
-
-* Full address of the provider.
+Full address of the provider.
 

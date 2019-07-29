@@ -176,7 +176,7 @@ Buttons of the timesheet:
 
 .. note:: The comments |Note|
 
-   * fly over the icon with the mouse to see the comment
+   fly over the icon with the mouse to see the comment
    
    .. figure:: /images/GUI/REALWORK_BOX_Timesheet_ViewComment.PNG
    
@@ -238,7 +238,7 @@ Selection timesheet
 
 * By default, users can only select themselves as a resource.
 
-* Access to other resources timesheet depending on :ref:`specific-access-mode`, then user can select other resources timesheets. 
+* Access to other resources timesheet depending on :ref:`specific_access`, then user can select other resources timesheets. 
 
 * Clicking on the checkbox below allows to select only resources allocated to the selected project on the list roll displayed. 
 
@@ -399,7 +399,7 @@ The task status can be changed automatically according to data entries on real w
 
     .. note::
 
-       * Move the cursor over the icon to see the message.
+       Move the cursor over the icon to see the message.
 
  .. compound:: **Common issue**
 

@@ -538,7 +538,7 @@ Provider bills
      - Unique Id for the term of payment
    * - |RequiredField| Name
      - Short description of the term
-   * - |RequiredField| Provider :ref:`bill-type`
+   * - |RequiredField| Provider :ref:`client_bill_type`
      - The way to define common behavior on group of bills     
    * - |RequiredField| Project
      - project attached to the bill 

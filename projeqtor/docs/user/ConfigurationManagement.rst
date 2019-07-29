@@ -111,7 +111,7 @@ Ability to define the compatibility between product versions (feature activated 
 
 Possibility to define if the version name is automatically produced from the product name and version number.
 
-Set :ref:`global-parameters` to activate this feature.
+Set :ref:`global_parameters` to activate this feature.
 
 Else, the version name will entered manually.
 
@@ -350,7 +350,7 @@ See possible relationships:  :ref:`product-structure`
 * Click on |buttonAdd| to create a new relationship. The dialog box "Structure" appear. 
 * Click on |buttonIconDelete| to delete the corresponding relationship.
 
-.. figure:: /images/GUI/BOX_ProductStructure.png
+.. figure:: /images/GUI/CONF_BOX_ProductStructure.png
    :alt: Dialog box - Structure 
    :align: center
 
@@ -370,7 +370,7 @@ Allows to define links between versions of products and components.
 * Click on |buttonAdd| to create a new link. The dialog box "Version Structure" appear. 
 * Click on |buttonIconDelete| to delete the corresponding link.
 
-.. figure:: /images/GUI/BOX_VersionStructure.png
+.. figure:: /images/GUI/CONF_BOX_VersionStructure.png
    :alt: Dialog box - Version structure 
    :align: center
 
@@ -392,7 +392,7 @@ This section allows to manage links between projects and versions of products.
 * Click on |buttonIconDelete| to delete the corresponding link.
 
 
-.. figure:: /images/GUI/BOX_ProjectVersionLink.png
+.. figure:: /images/GUI/CONF_BOX_ProjectVersionLink.png
    :alt: Dialog box - Project-Version link 
    :align: center
 
@@ -418,10 +418,10 @@ This section allows to manage links between projects and versions of products.
    * - Closed
      - Box checked indicates the link is not active anymore, without deleting it.
 
-.. topic:: Fields "Project, Product and Version"
+.. topic:: Fields **Project, Product and Version**
  
-   * From the screen «Projects», the fields «product and version» will be selectable.
-   * From the screen «Product versions», the field «project» will be selectable.
+   * From the screen **Projects**, the fields **product and version** will be selectable.
+   * From the screen **Product versions**, the field **project** will be selectable.
    
 .. _versions-planning:
 
@@ -434,20 +434,18 @@ This planning displays each version of selected product versions and their compo
 
 To use it define your start and delivery date in Product Version and Component Version.
 
-.. figure:: /images/GUI/deliveryDateComponent.png
+.. figure:: /images/GUI/CONF_ZONE_deliveryDateComponent.png
    :alt: Delivery date component 
    :align: center
    
-.. note::
+.. note:: 
 
- * 
-
-    To insert values you have to activate display the start and delivery milestones’ in global parameters otherwise these fields are hidden.
+   To insert values you have to activate display the start and delivery milestones’ in global parameters otherwise these fields are hidden.
 
 This screen allows to see if the delivery date of Component versions is more later than their Product versions. 
 
 Graphically, you can see any delay or incompatibility.
 
-.. figure:: /images/GUI/planningVersion.png
+.. figure:: /images/GUI/CONF_ZONE_planningVersion.png
    :alt: Planning version
    :align: center

@@ -6,6 +6,7 @@
 
 .. _humans_resources:
 
+****************
 Humans Resources
 ****************
 
@@ -97,7 +98,7 @@ and the number of days the absence represents are not taken
 .. note:: 
 
    The calculation of the number of days represented by absence is done on the basis of working days
-   :ref:`global-parameters` and schedule associated with employee: holidays, non-working days
+   :ref:`global_parameters` and schedule associated with employee: holidays, non-working days
 
 
 .. raw:: latex

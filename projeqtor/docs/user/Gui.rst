@@ -263,7 +263,7 @@ Click on «Logo Area» will display the software information box
 
 .. note:: Toggling between windows
 
-   * To toggling between windows, just click on window header.  
+   To toggling between windows, just click on window header.  
 
 .. rubric:: |one| Menu window
 
@@ -276,7 +276,7 @@ Click on «Logo Area» will display the software information box
 
 .. note:: User parameter “Icon size in menu”
 
-   * This parameter defines the size of icons in the menu.
+   This parameter defines the size of icons in the menu.
 
 
 .. rubric:: |two| Documents window
@@ -344,7 +344,7 @@ List window
    :alt: List window
    :align: center
 
-.. rubric:: |one| - Element identifier
+.. rubric:: |one| Element identifier
 
 * Displays the element name and the count of items in the list.  
 * Each element is identified with a distinctive icon.
@@ -359,9 +359,9 @@ List window
  .. compound:: **Any change on «Id» and «Name»**
 
     * Will instantly filter data.  
-    * Search is considered as «contains», so typing «1» in «Id» will select «1», «10», «11», «21», «31» and so on.
+    * Search is considered as «contains», so typing **1** in **ID** will select **1**, **10**, **11**, **21**, **31** and so on.
 
- .. compound:: **Selecting a «Type»**
+ .. compound:: **Selecting a Type**
   
     * Will restrict the list to the corresponding type.
 
@@ -397,7 +397,7 @@ List window
 
 .. note::
 
-   * Actives 'quick filtering by status' in  global parameters otherwise this button is hidden.
+   Actives 'quick filtering by status' in  global parameters otherwise this button is hidden.
 
 .. rubric:: |five| Checkbox «Show closed items»
 
@@ -410,12 +410,12 @@ List window
 
 .. note:: Sorting is not always on the name displayed 
 
-   * If the sorted column is linked to a reference list with sort order value, the sorting is executed on this sort value.
+   If the sorted column is linked to a reference list with sort order value, the sorting is executed on this sort value.
 
 
 .. note:: For instance
     
-   * Sorting on the «Status» allows to sort values such as defined in the workflow. 
+   Sorting on the «Status» allows to sort values such as defined in the workflow. 
 
 
 
@@ -463,7 +463,7 @@ The quick search allows to execute a textual search.
 
 * Click on |buttonIconSearch| to execute the search.
 * Click on |buttonIconUndo| to close the quick search.
-* accents are not taken into account
+* Accents are not taken into account
 
 .. raw:: latex
 
@@ -541,7 +541,7 @@ This section allows to manage saved filters.
    * The default filter is defined for the user.
    * The filter will be automatically applied in the next connection.
 
-.. rubric:: 3 - Shared filters
+.. rubric:: |three| Shared filters
 
 * Defined filters can be shared with other users.
 * Click on |unShareFilter| to share the selected filter.
@@ -562,7 +562,7 @@ Shared filters are available for all users in them session.
 
     \newpage
 
-.. rubric:: - List of filters
+.. rubric:: List of filters
 
 * The filter list allows to select a stored filter.
 * To see the filter list, move the cursor over the advanced filter icon.
@@ -598,19 +598,13 @@ This functionality allows to define columns displayed in the list  for this elem
 
 * Use checkboxes to select or unselect columns to display.
 
- .. note:: 
+.. note:: 
 
-    * **Id** and **name** are mandatory fields.
-    * They cannot be removed from display.
+    **Id** and **name** are mandatory fields. They cannot be removed from display.
 
 .. rubric:: Columns order
 
 * Use the selector area |buttonIconDrag| to reorder fields with drag & drop feature.
-
-
-.. raw:: latex
-
-    \newpage
 
 .. rubric:: Column size 
 
@@ -619,12 +613,12 @@ This functionality allows to define columns displayed in the list  for this elem
 * The minimum width is 1%. 
 * The maximum width is 50%.
 
- .. note:: Field: Name
+ .. note:: **Field Name**
 
     * The width of the field is automatically adjusted so that the total list width is 100%.
     * The width of the field cannot be less than 10%.
 
- .. warning:: Total width over 100%
+ .. warning:: **Total width over 100%**
 
     * The total width must be limited to a maximum 100%.
     * The exceedance will be highlighted beside the buttons. |two|
@@ -722,7 +716,7 @@ Detail window
 
  .. note::
 
-    * Administrator can change information.
+    Administrator can change information.
 
 .. raw:: latex
 
@@ -1017,11 +1011,11 @@ A checklist is available, whether a checklist form is already defined for the el
 
 .. note::
 
-   * The checklist forms are defined in :ref:`checklist-definition` screen.
+   The checklist forms are defined in :ref:`checklist-definition` screen.
 
 .. note::
 
-   * The access to view the checklist depends on your access rights.
+   The access to view the checklist depends on your access rights.
 
 
 .. rubric:: Displaying the checklist
@@ -1069,7 +1063,7 @@ They are stored and displayed on each item.
 
 .. note::
 
-   * On creation, just an insert operation is stored, not all the initial values on creation.
+   On creation, just an insert operation is stored, not all the initial values on creation.
 
 .. tabularcolumns:: |l|l|
 
@@ -1136,7 +1130,7 @@ Text editors are available for editing of long text fields like description, res
 
 .. note:: Parameter “Editor for rich text”
 
-   * Selection of text editor can be done in User and Global parameters screens.
+   Selection of text editor can be done in User and Global parameters screens.
 
 .. rubric:: CK Editor
 
@@ -1156,10 +1150,6 @@ Text editors are available for editing of long text fields like description, res
 
 .. rubric:: CK editor inline
 
-.. figure:: /images/GUI/ZONE_CKEditorInline.png
-   :alt: CK Editor inline
-   :align: center   
-   
 * As CK Editor. 
 * Activated only when needed.
 
@@ -1178,10 +1168,6 @@ Text editors are available for editing of long text fields like description, res
    :align: center
 
    Dojo Editor
-
-.. raw:: latex
-
-    \newpage
 
 .. rubric:: Inline editor
 
@@ -1220,12 +1206,6 @@ Special fields
 ==============
 
 This section describes the ProjeQtOr special fields.
-
-.. contents:: Special fields
-   :depth: 1
-   :local: 
-   :backlinks: top
-
 
 Accelerator buttons
 """""""""""""""""""
@@ -1281,7 +1261,7 @@ Combo list field
 
   .. note ::
 
-     * Click on |buttonIconBackNavigation| to return to the last screen. (More detail, see: :ref:`Top bar <navigation-buttons>`)
+     Click on |buttonIconBackNavigation| to return to the last screen. (More detail, see: :ref:`Top bar <navigation-buttons>`)
 
 .. raw:: latex
 
@@ -1295,7 +1275,7 @@ Combo list field
 
     * If the field value is filled, the details of item associated  are displayed.
 
-    .. figure:: /images/GUI/BOX_DetailOfListElement.png
+    .. figure:: /images/GUI/GUI_BOX_DetailOfListITEM.png
        :alt: Dialog box - Item details
        :align: center
 
@@ -1322,11 +1302,11 @@ Combo list field
 
     .. note:: Window header
 
-       * You have access to :ref:`Rapid filter<rapid-filter>`, :ref:`Quick search<quick-search>` and :ref:`Advanced filter<advanced-filter>`.
+       You have access to :ref:`Rapid filter<rapid-filter>`, :ref:`Quick search<quick-search>` and :ref:`Advanced filter<advanced-filter>`.
 
     .. note:: Select several items
 
-       * Some elements is possible to select several items, use :kbd:`Control` or :kbd:`Shift`.
+       Some elements is possible to select several items, use :kbd:`Control` or :kbd:`Shift`.
  
  
 .. raw:: latex
@@ -1408,12 +1388,16 @@ Thumbnails are a graphical representation of the field value.
 
 .. rubric:: User
 
-* Displays the user who created or updated the item.
-* Move cursor over thumbnail to display the name and a large photo of the user.
+* Portrait of the user. Displays if it has created or updated an item.
+* If no photo is saved, an icon will automatically be generated.
+* The letter is chosen according to the real name. This is his initial.
+* Move the cursor over the thumbnail to display the user's name and photo in its original size.
 
  .. compound:: |defaultUserThumb| The user doesn't have a photo.
 
-
+.. figure:: /images/GUI/GUI_ZONE_ListNONphoto.PNG
+   :alt: list of users without personal photo
+   
 .. rubric:: Comment
 
 * |Note| Indicates a comment or description is defined.

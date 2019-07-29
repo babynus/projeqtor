@@ -39,6 +39,76 @@ When creating an approver in the list, the approver is also automatically added 
    
 When adding a version to the document, the approvers are automatically added to the version.
 
+
+.. raw:: latex
+
+    \newpage
+
+.. title:: Document directories management
+
+.. index:: ! Document (Directories management) 
+
+.. _document-directory:
+
+Document directories
+--------------------
+
+Document directories management allows to define a structure for document storage.
+
+* The files of document will be stored in the folder defined by the parameters  «Document root» and «Location».
+* «Document root» is defined in :ref:`Global parameters <document-section>` screen. 
+
+.. rubric:: Section: Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 20, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for the directory.
+   * - |RequiredField| Name
+     - Name of the directory.
+   * - Parent directory
+     - Name of the parent directory to define hierarchic structure.
+   * - Location
+     - Folder where files will be stored.
+   * - Project
+     - Directory is dedicated to this project.
+   * - Product
+     - Directory is dedicated to this product.
+   * - Default type
+     - Type of document the directory is dedicated to.
+   * - :term:`Closed`
+     - Flag to indicate that directory is archived.
+ 
+.. topic:: Field **Parent directory**
+
+   * The current directory is then a sub-directory of parent.
+
+.. topic:: Field **Location**
+
+   * Location is automatically defined as «Parent directory» / «Name».
+
+.. topic:: Field **Project**
+
+   * This project will be the default to new stored documents in this directory.
+
+.. topic:: Field **Product**
+
+   * This product will be the default to new stored documents in this directory.
+   * If the project is specified, the list of values contains the products linked the selected project.
+   * If the project is not specified, the list of values contains all products defined.
+
+.. topic:: Field **Default type**
+
+   * This document type will be the default to new stored documents in this directory.
+
+
+
 .. raw:: latex
 
     \newpage
@@ -100,8 +170,8 @@ Type of versioning must be defined for a document.
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Required field |RequiredField|
-   :widths: 40, 80
+.. list-table:: Required field |ReqFieldLegend|
+   :widths: 50, 80
    :header-rows: 1
 
    * - Field
@@ -129,16 +199,16 @@ Type of versioning must be defined for a document.
    * - Cancelled
      - Box checked indicates the document is cancelled.
 
-.. rubric:: Field "Project and Product"
+.. rubric:: Field **Project and Product**
 
 * Must be concerned either with a project, a product or both.
 * If the project is specified, the list of values for field "Product" contains only products linked the selected project.
 
-.. rubric:: Field "Document reference"
+.. rubric:: Field **Document reference**
 
 * Document reference name is calculated from format defined in the :ref:`Global parameters<format_reference_doc>` screen.
 
-.. rubric:: Field "Author"
+.. rubric:: Field **Author**
 
 * Positioned by default as the connected user.
 * Can be changed (for instance if the author is not  the current user).
