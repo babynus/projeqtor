@@ -1,11 +1,6 @@
 .. include:: ImageReplacement.txt
 
-.. raw:: latex
-
-    \newpage
-
 .. title:: Requirements dashboard
-
 
 .. index:: ! Requirement (Dashboard)
 
@@ -20,6 +15,9 @@ Shows several small reports, listing the number of requirements by item.
 
 Filters are available to limit scope.
 
+.. figure:: /images/GUI/REQUIREMENT_SCR_Dashboard.png
+   :alt: Requirement dashboard screen
+
 .. rubric:: Direct access to the list of requirements
 
 * In reports, click on an item to get list of requirement corresponding to this item.
@@ -32,10 +30,10 @@ Filters are available to limit scope.
 
 .. note::
 
-   * Arrange reports on left and right on screen. 
+   Arrange reports on left and right on screen. 
 
 
-.. figure:: /images/GUI/requirementsdashboard.png 
+.. figure:: /images/GUI/REQUIREMENT_BOX_Itemdisplay.png 
    :alt: Dialog box - Ticket dashboard parameters
    :align: center
 
@@ -44,7 +42,7 @@ Filter clauses
 
 .. note:: Report: Synthesis by status
 
-   * For this report, filter clauses are not applicable.
+   For this report, filter clauses are not applicable.
 
 
 .. rubric:: Scope filters

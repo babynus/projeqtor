@@ -1,6 +1,21 @@
 .. |iconDelay| image:: images/iconDelay.png
    :alt: Susbcribe
 
+.. |iconNotif| image:: images/iconNotification.png
+   :alt: Notification
+	
+.. |iconInfo| image:: images/iconInformation.png
+   :alt: Information
+
+.. |iconAlert| image:: images/iconAlert.png
+   :alt: Alert
+
+.. |iconWarning| image:: images/iconWarning.png
+   :alt: Warning
+
+.. |iconSum| image:: images/iconSum.png
+   :alt: Sum 
+   
 .. |iconSubscribe| image:: images/IconSubscribe.png
    :alt: Susbcribe
 		
@@ -27,7 +42,7 @@
    :alt: Required File 
 
 .. |ReqFieldLegend| image:: images/RequiredFILE.png
-   :alt: Required File
+   :alt: Required File legend
    :scale: 40 
    
 .. |buttonClientBill| image:: images/iconClientBill16.png
@@ -271,7 +286,7 @@
 .. |privateThumb| image:: images/private.png
    :alt: private thumbnail
 
-.. |teamThumb| image:: images/team.png
+.. |teamThumb| image:: images/Teams22.png
    :alt: team thumbnail
 
 .. |unShareFilter| image:: images/share.png
@@ -325,10 +340,6 @@
    :alt: Ten
    :scale: 30
    
-.. |ButtonADD| image:: images/ButtonADD.png
-   :alt: Add
-   :scale: 30  
-
 .. |A| image:: images/A.png
    :alt: A letter
    :scale: 30

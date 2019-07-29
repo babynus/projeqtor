@@ -182,7 +182,7 @@ Moreover, updating the left work allows to recalculate the planning taking into 
 
    * :ref:`resource`
    * :ref:`pool`
-   * :ref:`CommonSections<allocation>`
+   * :ref:`CommonSections<allocation-section>`
    
 
 .. raw:: latex

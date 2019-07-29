@@ -1,12 +1,17 @@
+.. include:: ImageReplacement.txt
+
 .. title:: Lists of values
 
 .. index:: ! Function - Lists of values
+
+Lis of Values
+#############
 
 Each screen in List of values allows to define your own values.
 
 Then you will be able to select them in corresponding screens.
 
-.. topic:: Note:
+.. note::
    
    * By default, some lists are not visible on their corresponding screen like Languages in Product and Component screen.
    
@@ -15,15 +20,15 @@ Then you will be able to select them in corresponding screens.
 .. _function:
 
 Functions
-^^^^^^^^^
+*********
 
 The function defines the generic competency of a resource.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -31,7 +36,7 @@ The function defines the generic competency of a resource.
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
    * - Sort order
      - Number to define order of display in lists.
@@ -39,9 +44,6 @@ The function defines the generic competency of a resource.
      - Flag to indicate this value is archived.
    * - Description
      - Complete description of this value.
-
-
-**\* Required field**
 
 .. raw:: latex
 
@@ -52,7 +54,7 @@ The function defines the generic competency of a resource.
 .. _status:
 
 Status
-^^^^^^
+******
 
 The status is an important element of items lifecycle.
 
@@ -86,11 +88,11 @@ See: :ref:`workflow`.
 
      * This status specifies that the item is cancelled.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -98,7 +100,7 @@ See: :ref:`workflow`.
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
    * - :term:`Handled status`
      - Defines whether ‘handled’ flag is automatically set for this status.
@@ -115,9 +117,6 @@ See: :ref:`workflow`.
    * - :term:`Closed`
      - Flag to indicate this value is archived.
 
-**\* Required field**
-
-
 
 .. rubric:: Consolidation of status changes  
 
@@ -126,10 +125,9 @@ See: :ref:`workflow`.
 
 .. note::
 
-  * Select YES 'auto set parent activity status' in global parameters to use it.
-
-* If an activity changes to a "handled" status, all parents move to the first "handled" status available in the workflow.
-* If an activity changes to a "done", "closed" or "canceled" status, moving of each parent to the first "done" or "closed" status according to the status of all its children.
+   * Select YES 'auto set parent activity status' in global parameters to use it.
+   * If an activity changes to a "handled" status, all parents move to the first "handled" status available in the workflow.
+   * If an activity changes to a "done", "closed" or "canceled" status, moving of each parent to the first "done" or "closed" status according to the status of all its children.
 
 
 .. warning::  If parents items status has not been changed auto, please check your controls like required fields.
@@ -143,15 +141,15 @@ See: :ref:`workflow`.
 .. _resolution:
 
 Resolutions
-^^^^^^^^^^^
+***********
 
 Allows to define different kinds of resolution for tickets.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -159,7 +157,7 @@ Allows to define different kinds of resolution for tickets.
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
    * - Solved
      - Box checked indicates the ticket will be automatically marked as “solved” when this resolution is selected.
@@ -170,7 +168,7 @@ Allows to define different kinds of resolution for tickets.
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**
+
 
 
 .. index:: ! Quality level - Lists of values
@@ -178,17 +176,17 @@ Allows to define different kinds of resolution for tickets.
 .. _quality-level:
 
 Quality levels
-^^^^^^^^^^^^^^
+**************
 
 The quality is a manual indicator for the conformity of a project to quality processes.
 
 It defines in a visual way the global conformity of the project.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -196,7 +194,7 @@ It defines in a visual way the global conformity of the project.
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
    * - Color
      - Color to display the quality level in element lists and on today screen.
@@ -207,9 +205,9 @@ It defines in a visual way the global conformity of the project.
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**
 
-.. topic:: Field: Icon
+
+.. topic:: Field Icon
    
    * If no icon is defined, color is used.
    * You can define your own icons list (see: administration guide).
@@ -225,7 +223,7 @@ It defines in a visual way the global conformity of the project.
 .. _health-status:
 
 Health status
-^^^^^^^^^^^^^
+*************
 
 The health status is a manual indicator for the health of a project.
 
@@ -234,11 +232,11 @@ It defines in a visual way the global health of the project.
 It is displayed on Today screen, for each project, as a Red / Amber / Green traffic light.
 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -246,7 +244,7 @@ It is displayed on Today screen, for each project, as a Red / Amber / Green traf
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
    * - Color
      - Color to display the health status in element lists and on today screen.
@@ -257,9 +255,9 @@ It is displayed on Today screen, for each project, as a Red / Amber / Green traf
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**
 
-.. topic:: Field: Icon
+
+.. topic:: Field Icon
    
    * If no icon is defined, color is used.
    * You can define your own icons list (see: administration guide).
@@ -271,7 +269,7 @@ It is displayed on Today screen, for each project, as a Red / Amber / Green traf
 .. _overall-progress:
 
 Overall progress
-^^^^^^^^^^^^^^^^
+****************
 
 The overall progress is a manual indicator for global progress of a project.
 
@@ -280,11 +278,11 @@ It defines in a visual way the global progress of the project, independently fro
 It is displayed on Today screen, for each project.
 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -292,15 +290,12 @@ It is displayed on Today screen, for each project.
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
    * - Sort order
      - Number to define order of display in lists.
    * - :term:`Closed`
      - Flag to indicate this value is archived.
-
-**\* Required field**
-
 
 .. raw:: latex
 
@@ -312,7 +307,7 @@ It is displayed on Today screen, for each project.
 .. _trend:
 
 Trends
-^^^^^^
+******
 
 The trend is a manual indicator for the global trend of project health.
 
@@ -321,11 +316,11 @@ It defines in a visual way the health trend of the project.
 It is displayed on Today screen, for each project.
 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -333,7 +328,7 @@ It is displayed on Today screen, for each project.
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
    * - Color
      - Color to display the trend in element lists and on today screen.
@@ -344,9 +339,9 @@ It is displayed on Today screen, for each project.
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**
 
-.. topic:: Field: Icon
+
+.. topic:: Field Icon
    
    * If no icon is defined, color is used.
    * You can define your own icons list (see: administration guide).
@@ -357,15 +352,15 @@ It is displayed on Today screen, for each project.
 .. _likelihood:
 
 Likelihoods
-^^^^^^^^^^^
+***********
 
 The likelihood is the probability of a risk or an opportunity to occur.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -373,7 +368,7 @@ The likelihood is the probability of a risk or an opportunity to occur.
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
    * - Value
      - Value of likelihood.
@@ -386,11 +381,11 @@ The likelihood is the probability of a risk or an opportunity to occur.
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**
 
-.. topic:: Field: % value
 
-   * This field is used to calculate a reserve amount according to the likelihood of risk or opportunity.
+.. topic:: Field % value
+
+   This field is used to calculate a reserve amount according to the likelihood of risk or opportunity.
 
 
 .. raw:: latex
@@ -403,24 +398,24 @@ The likelihood is the probability of a risk or an opportunity to occur.
 .. _criticality:
 
 Criticalities
-^^^^^^^^^^^^^
+*************
 
 The criticality is the importance of an element to its context.
 
 .. topic:: Risk and Opportunity
 
-   * The criticality designs the level of impact the risk or opportunity may have to the project.
+   The criticality designs the level of impact the risk or opportunity may have to the project.
 
 .. topic:: Ticket
 
-   * The criticality is the estimated impact that the subject of the ticket may have for the product.
+   The criticality is the estimated impact that the subject of the ticket may have for the product.
 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -428,7 +423,7 @@ The criticality is the importance of an element to its context.
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
    * - Value
      - Value of criticality.
@@ -439,7 +434,7 @@ The criticality is the importance of an element to its context.
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**
+
 
 
 
@@ -448,16 +443,16 @@ The criticality is the importance of an element to its context.
 .. _severity:
 	
 Severities
-^^^^^^^^^^
+**********
 
 The severity designs the level of negative or positive impact the risk or opportunity may have for the product.
 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -465,7 +460,7 @@ The severity designs the level of negative or positive impact the risk or opport
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
    * - Value
      - Value of severity.
@@ -476,7 +471,7 @@ The severity designs the level of negative or positive impact the risk or opport
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**
+
 
 
 .. raw:: latex
@@ -489,15 +484,15 @@ The severity designs the level of negative or positive impact the risk or opport
 .. _urgency:
 
 Urgencies
-^^^^^^^^^
+*********
 
 The ticket urgency is an element given by the requestor to indicate the quickness of treatment needed for the ticket.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -505,7 +500,7 @@ The ticket urgency is an element given by the requestor to indicate the quicknes
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
    * - Value
      - Value of urgency.
@@ -516,7 +511,7 @@ The ticket urgency is an element given by the requestor to indicate the quicknes
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**
+
 
 
 
@@ -526,16 +521,16 @@ The ticket urgency is an element given by the requestor to indicate the quicknes
 .. _priority:
 
 Priorities
-^^^^^^^^^^
+**********
 
 The ticket priority defines the order to treat different tickets.
 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -543,7 +538,7 @@ The ticket priority defines the order to treat different tickets.
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
    * - Value
      - Value of priority.
@@ -554,7 +549,7 @@ The ticket priority defines the order to treat different tickets.
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**
+
 
 
 .. raw:: latex
@@ -567,16 +562,16 @@ The ticket priority defines the order to treat different tickets.
 .. _risk-level:
 
 Risk levels
-^^^^^^^^^^^
+***********
 
 The risk level measures the technical risk of implementation of a requirement.
 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -584,7 +579,7 @@ The risk level measures the technical risk of implementation of a requirement.
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
    * - Color
      - Color to display the risk level in element lists.
@@ -593,7 +588,7 @@ The risk level measures the technical risk of implementation of a requirement.
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**
+
 
 
 .. index:: ! Feasibility - Lists of values
@@ -601,16 +596,16 @@ The risk level measures the technical risk of implementation of a requirement.
 .. _feasibility:
 
 Feasibilities
-^^^^^^^^^^^^^
+*************
 
 The feasibility defines the first analysis of implementation of a requirement.
 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -618,7 +613,7 @@ The feasibility defines the first analysis of implementation of a requirement.
      - Description
    * - :term:`Id`
      - Unique Id for this status.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this status.
    * - Color
      - Color to display the feasibility in element lists.
@@ -627,7 +622,7 @@ The feasibility defines the first analysis of implementation of a requirement.
    * - :term:`Closed`
      - Flag to indicate this status is archived.
    
-**\* Required field**
+
 
 
 
@@ -641,16 +636,16 @@ The feasibility defines the first analysis of implementation of a requirement.
 .. _efficiency:
 
 Efficiencies
-^^^^^^^^^^^^
+************
 
 The efficiency measures the result of an action.
 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -658,7 +653,7 @@ The efficiency measures the result of an action.
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
    * - Color
      - Color to display the efficiency in element lists.
@@ -667,7 +662,7 @@ The efficiency measures the result of an action.
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**
+
 
 
 .. index:: ! Payment deadline - Lists of values
@@ -675,16 +670,16 @@ The efficiency measures the result of an action.
 .. _payment-deadline:
 
 Payment deadlines
-^^^^^^^^^^^^^^^^^
+*****************
 
 The payment deadline is stated on the bill.
 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -692,7 +687,7 @@ The payment deadline is stated on the bill.
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
    * - Number of days
      - Delay in payment (in days).
@@ -703,7 +698,7 @@ The payment deadline is stated on the bill.
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**
+
 
 
 .. raw:: latex
@@ -716,16 +711,16 @@ The payment deadline is stated on the bill.
 .. _payment-method:
 
 Payment methods
-^^^^^^^^^^^^^^^
+***************
 
 The mode of payment.
 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -733,29 +728,29 @@ The mode of payment.
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
    * - Sort order
      - Number to define order of display in lists.
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**
+
 
 .. index:: ! Delivery mode - Lists of values
 
 .. _delivery-mode:
 
 Delivery modes
-^^^^^^^^^^^^^^
+**************
 
 The mode of delivery.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -763,14 +758,14 @@ The mode of delivery.
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
    * - Sort order
      - Number to define order of display in lists.
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**
+
 
 * Add dates on deliveries to follow dates : initial, planned, real, validation
 
@@ -785,15 +780,15 @@ The mode of delivery.
 .. _measure-unit:
 
 Measure units
-^^^^^^^^^^^^^
+*************
 
 The measure units.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -801,7 +796,7 @@ The measure units.
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
    * - Plural of name
      - Plural form of name.
@@ -809,21 +804,18 @@ The measure units.
      - Number to define order of display in lists.
    * - :term:`Closed`
      - Flag to indicate this value is archived.
-   
-**\* Required field**
 
-Tender status
-^^^^^^^^^^^^^
 
-Allows to define or create your own tender status list.
+Budget orientation
+******************
 
-Tender status displayed on Tenders screen and in the table Submissions of tenders 
+The orientation of the budget
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -831,7 +823,58 @@ Tender status displayed on Tenders screen and in the table Submissions of tender
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
+     - Name of this value.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.
+
+Budget Category
+***************
+
+The orientation of the budget
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 20, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.
+
+
+Tender status
+*************
+
+Allows to define or create your own tender status list.
+
+Tender status displayed on Tenders screen and in the table Submissions of tenders 
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 20, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
      - Name of this value.
    * - Color
      - Color to display the status in element lists.
@@ -848,18 +891,18 @@ Tender status displayed on Tenders screen and in the table Submissions of tender
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**
+
 
 Categories of project
-^^^^^^^^^^^^^^^^^^^^^
+*********************
 
 Define your categories of project and you are able to select one in Project screen.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -867,27 +910,27 @@ Define your categories of project and you are able to select one in Project scre
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
    * - Sort order
      - Number to define order of display in lists.
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**
+
 
 Incoming weights
-^^^^^^^^^^^^^^^^
+****************
 
 Define your incoming weights list and select it in Incoming screen.
 
 That is useful to calculate weighting between different parameters in Reports->KPIs->KPI-incoming-for-project screen.   
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -895,9 +938,9 @@ That is useful to calculate weighting between different parameters in Reports->K
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
-   * - **Value**
+   * - |RequiredField| Value
      - Value of incoming weights.
    * - Color
      - Color to display the incoming weights in element lists.
@@ -906,20 +949,20 @@ That is useful to calculate weighting between different parameters in Reports->K
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**
+
 
 Deliverable weights
-^^^^^^^^^^^^^^^^^^^
+*******************
 
 Define your deliverable weights list and select it in Deliverable screen.
 
 That is useful to calculate weighting between different parameters in Reports->KPIs->KPI-deliverable-for-project screen. 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -927,9 +970,9 @@ That is useful to calculate weighting between different parameters in Reports->K
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
-   * - **Value**
+   * - |RequiredField| Value
      - Value of deliverable weights.
    * - Color
      - Color to display the deliverable weights in element lists.
@@ -938,19 +981,19 @@ That is useful to calculate weighting between different parameters in Reports->K
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**
+
 
 
 Incoming status
-^^^^^^^^^^^^^^^
+***************
 
 Define your incoming status list and select it in Incoming screen.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -958,9 +1001,9 @@ Define your incoming status list and select it in Incoming screen.
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
-   * - **Value**
+   * - |RequiredField| Value
      - Value of incoming status.
    * - Color
      - Color to display the incoming status in element lists.
@@ -969,21 +1012,21 @@ Define your incoming status list and select it in Incoming screen.
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**
 
-*Add dates on incomings to follow dates : initial, planned, real, validation
+
+* Add dates on incomings to follow dates : initial, planned, real, validation
 
 
 Deliverable status
-^^^^^^^^^^^^^^^^^^
+******************
 
 Define your deliverable status list and select it in Deliverable screen.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -991,9 +1034,9 @@ Define your deliverable status list and select it in Deliverable screen.
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
-   * - **Value**
+   * - |RequiredField| Value
      - Value of deliverable status.
    * - Color
      - Color to display the deliverable status in element lists.
@@ -1002,26 +1045,26 @@ Define your deliverable status list and select it in Deliverable screen.
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**
 
-*Add dates on deliverables to follow dates : initial, planned, real, validation 
+
+* Add dates on deliverables to follow dates : initial, planned, real, validation 
 
 Languages
-^^^^^^^^^
+*********
 
 Allows to define and create your own languages list.
 
 Then in Product or Component screen you can select your languages values.
 
-.. topic:: Note:
+.. note:: 
    
-   * you have to active 'display language in Product/Component' in global parameters.
+   you have to active 'display language in Product/Component' in global parameters.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -1029,13 +1072,12 @@ Then in Product or Component screen you can select your languages values.
      - Description
    * - :term:`Id`
      - Unique Id for this value.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of this value.
-   * - **Value**
+   * - |RequiredField| Value
      - Value of deliverable status.
    * - Sort order
      - Number to define order of display in lists.
    * - :term:`Closed`
      - Flag to indicate this value is archived.
    
-**\* Required field**

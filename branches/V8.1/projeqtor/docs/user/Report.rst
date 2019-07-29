@@ -16,18 +16,20 @@ Reports
 .. image:: /images/GUI/REPORT_SCR_DisplayReport.png
    :alt: Reports screen
    
+   report screen with a report selected in direct view
+   
 A list of reports is available in different categories.
 
 .. figure:: /images/GUI/REPORT_ZONE_Menu.PNG
    :alt: Reports screen
    :align: center
    
-#. Select a category |one| 
-#. Corresponding reports list |two| will appear under the splitter |three|.
-#. The specific parameters |four| for this report appears.
-#. Update the parameters to get the information you need.
+#. Select a category |one| and the subcategories will appear in replacement
+#. the Selected report |two| will appear under the separator |three|.
+#. The specific parameters |four| |five| for this report appears.
+#. Update the parameters |five| to get the information you need.
 #. Click on |buttonIconDisplay| to produce the report. |four|
-#. Click on the arrow to return to the category list. |five|
+#. Click on the arrow to return to the category list. |six|
 
 
    
@@ -42,6 +44,7 @@ A list of reports is available in different categories.
 * Click on |buttonIconPdf| to export the report as PDF format.
 * Click on |buttonIconToday| to display this report on the Today screen.
 * Click on |buttonIconReportFavorite| to define this report as favorite. This report will be available in your favorite reports list. 
+* Click on |buttonIconEmail| to schedule the sending of the selected report
 
 .. raw:: latex
 
@@ -114,9 +117,15 @@ You can choose from many criteria to create your filter
 Report Sending programmation
 ----------------------------
 
+.. sidebar:: Other sections
+
+   * :ref:`scheduled_report`
+   
 Ability to schedule the sending of reports as emails
 
 For example, you can send a report every day, every Monday or every first day of the month
+
+To view all scheduled reports for sending, go to Scheduled Report in the Tools menu
 
 .. figure:: /images/GUI/REPORT_BOX_SendingMailReport.png
    :alt: Sending a report to email
