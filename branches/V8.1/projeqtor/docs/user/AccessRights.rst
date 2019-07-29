@@ -2,40 +2,33 @@
 
 .. index:: ! Access rights
 
-.. title:: Access rights
-
-.. index:: ! Access rights (Profile)
-
 .. _Acces_Right:
-
-Acces Right
-***********
-
 
 This section allows the fine management of the rights as well as the management of the modules
 
-
-.. _profile:
+.. index:: Module Management
 
 .. _Module_Management:
 
 Module Management
 -----------------
 
-| The Module Management allows to choose the module(s) that will appear in the interface.
-| This enables or disables a consistent group of features.
-| This screen is then accessible via a dedicated menu in the Acces Right
+The Module Management allows to choose the module(s) that will appear in the interface.
+
+This enables or disables a consistent group of features.
+
+This screen is then accessible via a dedicated menu in the Acces Right
 
 
-.. figure:: /images/GUI/ACCESSRIGHT_ManagementModule.png
+.. image:: /images/GUI/ACCESSRIGHT_ManagementModule.png
 
-.. topic:: **columns descriptions**
+.. topic:: columns descriptions
 
-   .. compound:: **first column:** The module's name
-   .. compound:: **second column:** The list of screens that will be displayed if the module is installed.
-   .. compound:: **third column:** The module's description
+   .. compound:: * **first column:** The module's name
+   .. compound:: * **second column:** The list of screens that will be displayed if the module is installed.
+   .. compound:: * **third column:** The module's description
 
-**you can choose to install or not :**
+**you can choose to install or not:**
 
 * the planning section 
 * the tickets
@@ -54,7 +47,11 @@ Module Management
 
 .. note:: 
    * Each module can be installed independently.
-   * each module is described and explained on ProjeQtor
+   * Each module is described and explained on ProjeQtor
+
+.. index:: ! Profiles
+
+.. _profiles: 
 
 Profiles
 --------
@@ -80,7 +77,7 @@ when the new profile is created, it appears in the list of existing profiles in 
 It remains between square brackets because it does not exist in :ref:`translatable-name`. 
 
 .. figure:: /images/GUI/ACCESSRIGHT_ZONE_ProfilesDescription.png
-   :alt: Profile description
+   :alt: Profile description with translatable name
    :align: center
    
 .. topic:: New profile
@@ -123,12 +120,12 @@ and the other based on the restriction of product versions
      - Complete description of the profile.
 
 
-.. topic:: Field: Profile code
+.. topic:: Field Profile code
 
    * ADM: will designate administrator.
    * PL: will designate project leader. 
 
-.. index:: ! Access rights (Access mode)
+.. index:: Access mode (Access right)
 
 .. _access-mode:
 
@@ -160,6 +157,10 @@ Each access is defined as scope of visible and/or updatable, that can be, by kin
    * The value of field "Name" must be a significant name and must not contain spaces or special characters.
    * Ideally, the value of the field should start with "accessProfile" (to be easily identified in the translation table).
 
+
+.. figure:: /images/GUI/ACCESSRIGHT_ZONE_CreateNewMode.png
+   :alt: Create a new profile
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: |ReqFieldLegend| Required Field 
@@ -176,7 +177,7 @@ Each access is defined as scope of visible and/or updatable, that can be, by kin
      - Scope of visible items
    * - |RequiredField| Create rights
      - Scope of possibility to create items.
-   * - |RequiredField| Update rights**
+   * - |RequiredField| Update rights
      - Scope of updatable items.
    * - |RequiredField| Delete rights
      - Scope of deletable items.
@@ -192,7 +193,7 @@ Each access is defined as scope of visible and/or updatable, that can be, by kin
 
     \newpage
 
-.. index:: ! Access rights (Access to forms)
+.. index:: Access to form (Access rights)
 
 .. _access-to-forms:
 
@@ -202,13 +203,13 @@ Access to forms
 This table is used to define the access to the selected screen for each profile.
 Users belonging to one profile can see the corresponding screen if authorized or not. 
 
-* Click on checkbox to permit or revoke access to the screen for a profile.
+**Click on checkbox to permit or revoke access to the screen for a profile.**
 
 .. figure:: /images/GUI/ACCESSRIGHT_SCR_AccesTOforms.png
    :alt: Access to forms scREEN
    :align: center
 
-.. index:: ! Access rights (Access to reports)
+.. index:: ! Access to reports (Access rights)
 
 .. _access-to-reports:
 
@@ -219,51 +220,52 @@ This screen allows to define report access for each profile.
 Users belonging to a profile can see the corresponding report in the report list.
 Reports are grouped by report categories
 
-* Click on checkbox to permit or revoke access to the report  for a profile.
+**Click on checkbox to permit or revoke access to the report  for a profile.**
 
 .. figure:: /images/GUI/ACCESSRIGHT_ZONE_AccessToReports.png
    :alt: Access to reports screen
    :align: center
 
-.. index:: ! Access rights (Access to data - Project dependant)
+.. index:: Access to data (Acces rights)
+
+Access to data
+--------------
+
+.. index:: Access to data Project dependant (Access rights)
 
 .. _access-mode-to-data-project-dependant:
 
 Access to data (project dependant)
-----------------------------------
+==================================
 
 This screen allows to set element access mode for each profile.
 Allows to define scope of visibility  and/or updating of data in elements for users and resources.
 This screen is only for the elements reliant on a project.
 
-* For each element, selected the access mode granted to a profile.
+**For each element, selected the access mode granted to a profile.**
 
 .. figure:: /images/GUI/ACCESSRIGHT_ZONE_AccessToDataProjectDependant.png
    :alt: Access to data (Project dependant) screen
    :align: center
 
-.. index:: ! Access rights (Access to data - Not project dependant)
+.. index:: Access to data - Not project dependant(Access rights)
 
 .. _access-mode-to-data-not-project-dependant:
 
 Access to data (not project dependant)
---------------------------------------
+======================================
 
 This screen allows to set for each profile, elements access rights.
 Allows to grant access rights (read only or write) to users, to data on specific elements.
 This screen is only for the elements not reliant on a project.
 
-* For each element, select the access rights granted to a profile.
+**For each element, select the access rights granted to a profile.**
 
 .. figure:: /images/GUI/ACCESSRIGHT_ZONE_AccessToDataNotProjectDependant.png
    :alt: Access to data (Not project dependant) screen
    :align: center
 
-   Access to data (Not project dependant) screen
-
-.. index:: ! Access rights (Specific access)
-
-.. _specific-access-mode:
+.. _specific_access:
 
 Specific access
 ---------------
@@ -272,14 +274,15 @@ This screen groups specific functionalities options.
 Users belonging to a profile can have access to the application specific functions.
 Depending on options of functionality, allows to grant access rights, to define data visibility  or to enable or disable option.
 
-* For each option, select the access granted to a profile.
+**For each option, select the access granted to a profile.**
 
 .. figure:: /images/GUI/ACCESSRIGHT_SCR_SpecificAccess.png 
    :alt: Specific access screen
    :align: center
+   
+-----------------------
 
-Sections
-========
+.. rubric:: **SECTIONS**
 
 .. rubric:: Access to resource data
 
@@ -290,9 +293,7 @@ This section allows to:
 * Defines who have access on diary for resources.
 * Defines who, as a resource, can subscribe to survey for users. 
 
-.. note:: Validate real work
-
-   * In most cases, it is devoted to project leader.
+.. note:: Validate real work: in most cases, it is devoted to project leader.
 
 .. rubric:: Work and Cost visibility
 
@@ -361,7 +362,7 @@ Translatable name
 
 For profiles and access modes, the value of field "Name" is translatable.
 
-The field "Name" in screens :ref:`profile` and :ref:`access-mode` is not the name displayed, but it is a code in the translation table. 
+The field "Name" in screens :ref:`profiles` and :ref:`access-mode` is not the name displayed, but it is a code in the translation table. 
 
 The name displayed at right of the field is the translated name.
 

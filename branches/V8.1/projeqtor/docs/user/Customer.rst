@@ -4,14 +4,9 @@
 
     \newpage
 
-.. contents::
-   :depth: 1
-   :backlinks: top
-
 .. title:: Customers & Contacts
 
 .. index:: ! Customer
-.. index:: ! Bill (Customer) 
 
 .. _customer:
 
@@ -31,11 +26,11 @@ The customer defined here is not a person. Real persons into a customer entity a
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -43,9 +38,9 @@ The customer defined here is not a person. Real persons into a customer entity a
      - Description
    * - :term:`Id`
      - Unique Id for the customer.
-   * - **Customer name**
+   * - |RequiredField| Customer name
      - Short name of the customer.
-   * - **Type of customer**
+   * - |RequiredField| Type of customer
      - Type of customer.
    * - Customer code
      - Code of the customer.
@@ -60,19 +55,17 @@ The customer defined here is not a person. Real persons into a customer entity a
    * - :term:`Description`
      - Complete description of the customer.
 
-**\* Required field**
+.. rubric:: Section Address
 
-.. rubric:: Section: Address
+Full address of the customer.
 
-* Full address of the customer.
+.. rubric:: Section Projects
 
-.. rubric:: Section: Projects
+List of the projects of the customer.
 
-* List of the projects of the customer.
+.. rubric:: Section Contacts
 
-.. rubric:: Section: Contacts
-
-* List of the contacts known in the entity of the customer.
+List of the contacts known in the entity of the customer.
 
 
 .. raw:: latex

@@ -1,4 +1,3 @@
-.. include:: ImageReplacement.txt
 
 .. title:: Planning elements
 
@@ -13,15 +12,11 @@
 Planning elements
 =================
 
-.. contents:: Planning elements
-   :local: 
-   :backlinks: top
-
 The planning elements :ref:`test-session` and :ref:`meeting` are described in their topics.
 
 .. index:: ! Project 
 
-.. _project:
+.. _planningelem_project:
 
 Projects
 --------
@@ -151,11 +146,11 @@ It is also the top-level of visibility, depending on profiles.
    * - Objectives
      - Objectives of the project.
 
-.. topic:: Field "Customer"
+.. topic:: Field Customer
 
    * The value of the field is used in the Quotations, Orders and Bills concerned with the project.
 
-.. topic:: Field "Bill contact"
+.. topic:: Field Bill contact
 
    * The value of the field is used in Bills concerned with the project.
 
@@ -163,7 +158,7 @@ It is also the top-level of visibility, depending on profiles.
 
 .. rubric:: Section Sub projects
 
-* List of sub-projects under for the project.
+List of sub-projects under for the project.
 
 
 .. raw:: latex
@@ -292,7 +287,7 @@ Ability to filter activities by data or type, for instance by assigned resources
    * - :term:`Result`
      - Complete description of the treatment done on the activity. 
  
-.. topic:: Field "Target version"
+.. topic:: Field Target version
 
    * Contains the list of product versions linked to the project.
    * More detail, see: :ref:`Product concept<product-concept>`

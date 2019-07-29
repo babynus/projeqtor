@@ -2,9 +2,19 @@
 
 .. title:: Tools
 
-.. index:: ! Email (Sent)
+.. index:: Toolspage
 
 .. _toolspage:
+
+*****
+Tools
+*****
+
+.. raw:: latex
+
+    \newpage
+    
+.. index:: ! Email (Sent)
 
 .. _emails-sent:
 
@@ -14,6 +24,45 @@ Emails sent
 Users can have a look at the list of the automatic emails sent.
 
 All the information about the email, including the status showing whether the email was correctly sent or not.
+
+.. raw:: latex
+
+    \newpage
+    
+.. _emails-to-send:
+
+Emails to send
+--------------
+
+You must enable the Activate email grouping option in the :ref:`global parameters<administration-emailing-group-label>`
+
+The programmed emails will be grouped in this screen before their automatic sending based on the period entered in the global parameters
+
+.. figure:: /images/GUI/TOOLS_SCR_EmailtoSend.png
+   :alt: Email to send screen
+
+
+.. raw:: latex
+
+    \newpage
+
+.. index:: ! scheduled report
+
+.. _scheduled_report:
+   
+Sheduled Report
+---------------
+
+In reports, you can schedule sending emails for accurate reports.
+See: :ref:`sending_report`
+
+You can get the list and details of this programming on this screen
+
+Click on |buttonIconDelete| to cancelled the programmation
+
+.. figure:: /images/GUI/TOOLS_ZONE_ScheduledReport.png
+   :alt: Sending a report to email
+   :align: center
 
 
 .. index:: ! Internal alert (Sent)
@@ -35,7 +84,7 @@ By default, administrators can see all the alerts sent, and other users only see
    Alert screen
 
 
-.. topic:: Button: Mark as read
+.. topic:: Button Mark as read
 
    * The button is available if  the user alert is not tagged “read” yet.
 
@@ -102,16 +151,31 @@ The message will be displayed in a color depending on the message type.
    * - :term:`Closed`
      - Flag to indicate that the message is archived
     
+.. raw:: latex
+
+    \newpage
+
+.. index:: ! Message Legal
+
+.. _message-legal:
+
+Message Legal
+-------------
+
+You can define a "legal" message that will be displayed when you log in from the home screen
+
+.. figure:: /images/GUI/TOOLS_SCR_MessageLegal.png
+   :alt: Display of the legal message
+
+You must click on the button I agree that the message disappears
 
 .. raw:: latex
 
     \newpage
 
-
 .. index:: ! Import data
 
 .. _import-data:
-
 
 Import data
 -----------
@@ -136,11 +200,11 @@ Imports data from CSV or XLSX files.
    * The password field must be cut and pasted from the database because it is encrypted.
    * If you enter some readable password, the users will not be able to connect.
 
-   .. attention:: 
+.. attention:: 
 
-      * If you want to create new users **don't put any id** because if id already exists, it will be overridden by the new (with possibility to erase admin user…).
-      * Always keep in mind that your import may have some impact on administrator user.
-      * So be sure to keep an operational admin access.
+   * If you want to create new users **don't put any id** because if id already exists, it will be overridden by the new (with possibility to erase admin user…).
+   * Always keep in mind that your import may have some impact on administrator user.
+   * So be sure to keep an operational admin access.
 
 
 .. note:: Importing document versions
@@ -249,8 +313,11 @@ For columns corresponding to linked tables ("idXxxx"), you can indicate as the c
 .. index:: ! Import data (Automatic)
 
 Automatic import
-----------------
+""""""""""""""""
 
+.. figure:: /images/GUI/ADMIN_ZONE_AutoImport.png
+   :alt: Automatic import of files
+   
 Imports can be automated.
 
 Files placed on a defined directory will automatically be imported.
@@ -303,3 +370,91 @@ The files must respect some basic rules.
 * If an error occurs during import of a file, the full file is moved to “error” sub-folder of the import folder, even if there is only one error over many other items correctly integrated.
 * You can get the result as a log file and/or email summary. 
 
+.. raw:: latex
+
+    \newpage
+
+.. index:: ! Manual Notification
+
+.. _manual_notification:
+
+Notifications
+-------------
+
+You can defined manually notifications in this screen
+
+.. figure:: /images/GUI/TOOLS_SCR_Notifications.png
+   :alt: Notifications of the Tools menu screen
+
+You receive notifications as soon as you authenticate on the login screen
+
+.. figure:: /images/GUI/TOOLS_ZONE_ConnectionNotif.png
+   :alt: Connection screen with notification
+
+When you are logged in, you have a reminder at the top of the screen. 
+
+You have the number of unread notifications
+
+Hover over it for the list of notifications to appear
+
+A slight color line in front of the name indicates the type of notification
+
+* Red = alert
+* Blue = information
+* Yellow = warning
+
+Click on the name of the notification to display its detail screen
+
+.. figure:: /images/GUI/TOOLS_ZONE_NotificationList.png
+
+You can also display the notification in the part below the menu 
+
+.. figure:: /images/GUI/TOOLS_ZONE_MenuNotification.png
+   :alt: Unread notification in the menu
+   
+Click on an unread notification for discover the details
+
+
+.. figure:: /images/GUI/TOOLS_ZONE_MenuNotification_details.PNG
+   :alt: Unread notification details
+
+* The first icon indicates the type of notification
+* the second icon indicates how the notification was created
+   * System Notification
+   * Manual Notification
+* The third icon indicates if the notification has a definition. see: :ref:`notification-system`
+* Click on the fourth icon for display the detail of the notification
+ 
+
+.. note:: 
+
+   Type of alert 
+   
+   * |iconinfo| type information
+   * |iconwarning| type Warning
+   * |iconalert| type alert
+   * |iconsum| sum - Records all the type
+      
+.. raw:: latex
+
+    \newpage
+    
+.. index:: ! Audit connections
+.. index:: ! Connection (Audit)
+
+.. _audit-connections:
+
+Audit connections
+-----------------
+
+Audit connection proposes a view of “who is online”.
+
+you can know which platform the user has logged on to, his browser and dates of his first and last access, as well as the duration of the connection
+
+.. figure:: /images/GUI/TOOL_SCR_AuditConnexion.png
+   :alt: Audit connection screen
+
+.. note::
+
+   The administrator has the possibility to force the disconnection of any user (except his own current connection,
+   see: :ref:`admin-console<manage_connection>`.

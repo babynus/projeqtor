@@ -11,19 +11,18 @@
 Gantt charts
 ************
 
-.. contents:: Gantt charts
-   :depth: 1
-   :local: 
-   :backlinks: top
-   
+The Gantt chart is a tool used in scheduling and project management and allowing to visualize in time the various tasks composing a project.
+
+It is a representation of a connected graph, evaluated and oriented, which makes it possible to graphically represent the progress of the project
+
+This chapter offers many features that will be described in the next sections
+
 .. index:: ! Gantt chart (Planning)
 
 Planning
 ========
 
 This screen allows to define projects planning and follow progress.
-
-.. note:: This screen offers many features that will be described in the next sections.
 
 .. figure:: /images/GUI/PLANNING1.png 
    :alt: Gantt (Planning)
@@ -443,12 +442,14 @@ For each planning element, a bar is associated with it
       :alt: completed milestone and in times
 
 .. compound:: **Ongoing milestone and delayed**
+
 Planned end date > Validate end date
 
 .. image:: /images/ganttRedMilestone.png
       :alt: ongoing milestone and delayed
 
 .. compound:: **Completed milestone and delayed**
+
 Real end date > Validated end date
 
 .. image:: /images/ganttFilledRedMilestone.png

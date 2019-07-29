@@ -53,6 +53,10 @@ Glossary
       Used as contact person for contracts, sales and billing.
       Contacts management is performed on :ref:`contact` screen.
 
+   CRON
+      
+      cron is a program that allows users of Unix systems to automatically execute scripts, 
+      commands or software at a date and time specified in advance, or according to a cycle defined in advance.
 
    Decision
    
@@ -80,8 +84,6 @@ Glossary
       * Date of done is saved.
       * A result can be specify.
       * It is possible to require a result when the status change to “done”.
-
-   Entrant
 
    External reference
 
@@ -203,7 +205,7 @@ Glossary
    Reference
     
       * Reference is displayed after id, automatically generated on creation. 
-      * Reference depends on defined format, see under "Format for reference numbering" section in :ref:`global-parameters` screen.
+      * Reference depends on defined format, see under "Format for reference numbering" section in :ref:`global_parameters` screen.
       * Default format defines a specific numbering format that can provide unique numbering sequence for each project and/or each type of items.
 
    Requestor

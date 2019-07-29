@@ -18,7 +18,7 @@ Resources
    :alt: create a resource
    :align: center
    
-    Area of details on the screen for
+   Area of details on the screen for
     
 .. sidebar:: Concepts 
 
@@ -55,11 +55,10 @@ Resource availability is defined by assigning it to a project.
    
    Description field for creating a resource
 
-
 .. tabularcolumns:: |l|l|
 
-.. list-table:: 
-   :widths: 20, 80
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -68,20 +67,22 @@ Resource availability is defined by assigning it to a project.
      - Unique Id for the resource.
    * - Photo
      - Photo of the resource.
-   * - Real name
+   * - |RequiredField| Real name
      - Name of the resource.
-   * - :ref:`user` name
+   * - |RequiredField| :ref:`user` name
      - Name of user.
    * - Initials
      - Initials of the resource.
    * - Email address
-     - Email address of the resource. 
-   * - Profile
-     - Profile of the user.
+     - Email address of the resource
    * - Capacity (FTE)
      - Capacity of the resource in Full Time Equivalent. [#f1]_
-   * - :ref:`Calendar<calendar>`
+   * - |RequiredField| :ref:`calendars`
      - Calendar defines the availability of the resource.
+   * - |RequiredField| Profile
+     - Profile of the user.
+   * - Organization
+     - The organization to which the resource is attached   
    * - :ref:`Team<team>`
      - The team to which the resource belongs.
    * - Phone
@@ -90,14 +91,16 @@ Resource availability is defined by assigning it to a project.
      - Mobile phone number of the resource.
    * - Fax
      - Fax number of the resource.
+   * - Entry date
+     - Date to which the resource arrived 
    * - Is a contact
-     - Is this resource also a contact? [#f2]_
+     - Is this resource also a contact?
    * - Is a user
-     - Is this resource also a user? [#f3]_
+     - Is this resource also a user?
    * - Is an employee
      - used for the humans resources module
    * - is a student
-       The resource is a student
+     - The resource is a student
    * - is outsourced
      - The resource is an outsourced
    * - is manager of leaves 
@@ -108,26 +111,25 @@ Resource availability is defined by assigning it to a project.
      - Complete description of the resource.
 
 
-**Field is Capacity (FTE)** 
+.. rubric:: Full Time Equivalent
 
-   * 1 FTE (full time equivalent)  
-   * < 1 for part time working resource or variations of capacity
-   * > 1 for virtual resources or teams, pool of ressource or variations of capacity
+* 1 FTE (full time equivalent)  
+* < 1 for part time working resource or variations of capacity
+* > 1 for virtual resources or teams, pool of ressource or variations of capacity
 
 .. note:: If you want a resource pool of three people, the ETP capacity must be set to 3
 
-**Field is a contact**
    
    * Check this if the resource must also be a :ref:`contact`.
    * The resource will then also appear in the “Contacts” list. 
 
-**Field is a user**
+.. rubric:: Field is a user
 
    * Check this if the resource must connect to the application.
    * You must then define the **User name** and **Profile** fields.
    * The resource will then also appear in the :ref:`user` list. 
 
-**Field is a employee**
+.. rubric:: Field is a employee
 
    * Check this box if the resource needs to be linked to the human resources module.
    * The resource will then also appear in the :ref:`employee_manager` list.
@@ -187,12 +189,12 @@ The resource will continue to report their charges normally, with no extra or re
 
 .. Warning::
 
-variable capacity and overbooking do not behave in the same way.
-
-Variable capacity will be more used to control and record periods of actual overtime and the behavior of imputations
-will be adapted to this ability.
-
-overbooking is a way of planning in the future without interacting with the behavior of the working time of the resources
+   variable capacity and overbooking do not behave in the same way.
+   
+   Variable capacity will be more used to control and record periods of actual overtime and the behavior of imputations
+   will be adapted to this ability.
+   
+   overbooking is a way of planning in the future without interacting with the behavior of the working time of the resources
 
 .. raw:: latex
 
@@ -306,7 +308,7 @@ This section allows to define functions and cost of the resource.
 Pool of Resources
 *****************
 
-.. figure:: /images/GUI/pool.png
+.. figure:: /images/PoolRessource.png
    :alt: Resource cost dialog box
    :align: left
    
@@ -402,7 +404,7 @@ You assign resources to the pool at a given rate for a given period.
 Teams
 *****
 
-.. figure:: /images/teams.png
+.. figure:: /images/Teams22.png
    :alt: Team
    :align: left
    

@@ -7,14 +7,19 @@
 Plug-ins management
 -------------------
 
-Plug-ins allows to add non generic features to ProjeQtOr.
+Plug-ins add non-generic features to ProjeQtOr.
 
+You will find the complete list of plugins in the `ProjeQtOr online store <https://www.projeqtor.net/fr/shop-fr/plugins>`_
+
+.. figure:: /images/GUI/PLUGIN_SCR_PluginManagement.PNG
+   :alt: Plugin management screen
+   
 .. rubric:: Plug-in deployment
 
 * Plug-in will be deployed during installation.
 * The result of deployment will be available in the log file (See: :ref:`admin-console`).
 
-.. rubric:: Section: Installed plug-ins
+.. rubric:: Section Installed plug-ins
 
 This section lists the installed plug-ins.
 
@@ -39,12 +44,11 @@ This section lists the installed plug-ins.
    * - Compatible since
      - Compatibility version.
 
-.. raw:: latex
+.. rubric:: Section Available plug-ins (local)
 
-    \newpage
-
-.. rubric:: Section: Available plug-ins (local)
-
+.. figure:: /images/GUI/PLUGIN_ZONE_AvailablePlugin.png
+   :alt: Add a plugin
+   
 This section allows to manage local plug-ins.
 
  .. compound:: **Available plug-ins list**
@@ -72,13 +76,13 @@ This section allows to manage local plug-ins.
     * Click on |buttonAdd| to install plug-in.
     * Click on |buttonIconDisplay| to display the description of plug-in.
  
-.. figure:: /images/GUI/BOX_DescriptionOfPlugin.png
+.. figure:: /images/GUI/PLUGIN_BOX_DescriptionOfPlugin.png
    :alt: Dialog box - Description plug-in 
    :align: center
 
 .. note:: 
 
-   * Plug-in is removed from the list after installation.
+   Plug-in is removed from the list after installation.
 
 
 .. rubric:: Section: Available plug-ins (remote)
@@ -87,4 +91,4 @@ This section allows to manage remote plug-ins.
 
 .. note::
 
-   * This feature will be available later.
+   This feature will be available later.
