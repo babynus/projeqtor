@@ -344,10 +344,13 @@ class DataCloning extends SqlElement{
 	  $newPwd = substr( str_shuffle( $chars ), 0, 6);
 	  
 	  //COPY FOLDER and CODE
-	  // si origine  alors changer le dossier
-	  $dir_source = '../../projeqtorV8.2';
+	  if($dataCloning->idOrigin){
+	    $OriginData = new DataCloning($dataCloning->idOrigin);
+	    $dir_dest = '../../projeqtorV8.2/simulation/'.$OriginData->nameDir;
+	  }else{
+  	  $dir_source = '../../projeqtorV8.2';
+	  }
 	  $dir_dest = '../../projeqtorV8.2/simulation/'.$newPwd;
-	  
 	  $nameDir = $newPwd;
 	  
 	  //create folder
@@ -400,9 +403,8 @@ class DataCloning extends SqlElement{
 	  //BD
 	  $newPwd = 'simu_'.$newPwd;
 	  //connexion
-	   if ($dataCloning->idOrigin){
-	     $OriginData = new DataCloning($dataCloning->idOrigin);
-	     $dataCloning->connectTestSimu('simu_'.$OriginData->nameDir);
+	  if($dataCloning->idOrigin){
+	    $PDO=$dataCloning->connectTestSimu('simu_'.$OriginData->nameDir);
 	  }else{
 	    $PDO=Sql::getConnection();
 	  }
