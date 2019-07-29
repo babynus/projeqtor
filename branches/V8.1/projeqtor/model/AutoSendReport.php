@@ -315,6 +315,9 @@ class AutoSendReport extends SqlElement{
   			$strParam = '';
   			$separator=' | ';
   			foreach ($param as $name=>$value){
+  			  if(is_array($value)){
+  			  	$value = implode(',', $value);
+  			  }
   			  if( trim($value) != ''){
     		    if($name == 'idProject'){
     		      $proj = new Project($value, true);
