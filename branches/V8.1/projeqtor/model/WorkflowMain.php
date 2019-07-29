@@ -304,7 +304,7 @@ class WorkflowMain extends SqlElement {
             $result .= '  <input xdojoType="dijit.form.CheckBox" type="checkbox" ';
             if ($canUpdate) $result .= ' onclick="workflowSelectAll('. $statLineCode . ',' . $statColumnCode . ',\'' . $profileIdList .'\');"';
             else $result.=' onclick="return false;" ';
-            $name = ' val_' . $statLineCode . '_' . $statColumnCode;
+            $name = 'val_' . $statLineCode . '_' . $statColumnCode;
             $result .= ' name="' . $name . '" id="' . $name . '" ';
             $result .= ($allChecked)?' checked ':'';
             $result .= '/>';
@@ -322,7 +322,7 @@ class WorkflowMain extends SqlElement {
                 $result.='  <input xdojoType="dijit.form.CheckBox" type="checkbox" ';
                 if ($canUpdate) $result.=' onclick="workflowChange('.$statLineCode.','.$statColumnCode.',\''.$profileIdList.'\');"';
                 else $result.=' onclick="return false;" ';
-                $name=' val_'.$statLineCode.'_'.$statColumnCode.'_'.$profileCode;
+                $name='val_'.$statLineCode.'_'.$statColumnCode.'_'.$profileCode;
                 $result.=' name="'.$name.'" id="'.$name.'" ';
                 if ($wsListArray[$statLineCode][$statColumnCode][$profileCode]==1) {
                   $result.='checked';
