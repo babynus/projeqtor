@@ -179,7 +179,7 @@ class DataCloning extends SqlElement{
 			    $origin = new DataCloning($data->idOrigin, true);
 			    $result .='<td width=10%" style="padding-left:10px">';
 			    if($origin->isActive){
-			      $result .='<a onClick="gotoDataCloningStatus('.$data->id.');" title="'.i18n('gotoDataCloningButton').'" > '.formatMediumButton('Goto', true).'</a>';
+			       $result .='<a href="../simulation/'.$origin->nameDir.'/view/main.php?directAccess=true" target="_blank" title="'.i18n('gotoDataCloningStatus').'" > '.formatMediumButton('Goto', true).'</a>';
 			    }
 			    $result .='</td>';
 			    $result .='<td width=90%" style="padding-left:10px">'.$origin->name.'</td></tr></table></td>';
@@ -187,7 +187,12 @@ class DataCloning extends SqlElement{
 			    $result .='</tr></table></td>';
 			  }
 			  $result .='<td style="border: 1px solid grey;height:40px;width:10%;text-align:center;vertical-align:center;font-style:italic;'.$idleColor.'">'.htmlFormatDateTime($data->requestedDate).'</td>';
-			  $result .='<td style="border: 1px solid grey;height:40px;width:10%;text-align:center;vertical-align:center;font-style:italic;'.$idleColor.'">'.htmlFormatDateTime(date('Y-m-d H:i:s', $data->plannedDate)).'</td>';
+			  $plannedDate = $data->plannedDate;
+			  if(!$data->isActive){
+			    $cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
+			    $plannedDate = $cronExecution->nextTime;
+			  }
+			  $result .='<td style="border: 1px solid grey;height:40px;width:10%;text-align:center;vertical-align:center;font-style:italic;'.$idleColor.'">'.htmlFormatDateTime(date('Y-m-d H:i:s', $plannedDate)).'</td>';
 			  $result .='<td style="border: 1px solid grey;height:40px;width:10%;text-align:center;vertical-align:center;font-style:italic;'.$idleColor.'">'.htmlFormatDateTime($data->requestedDeletedDate).'</td>';
 			  $result .='<td style="border: 1px solid grey;height:40px;width:20%;text-align:center;vertical-align:center;">';
 			  $background = '#a3d179';
@@ -467,9 +472,12 @@ class DataCloning extends SqlElement{
   			$connexion->prepare($sqlInsert)->execute();
   		}
   	}
-	   
+
+  	$cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
+  	
   	$dataCloning->isActive = 1;
   	$dataCloning->nameDir = $nameDir;
+  	$dataCloning->plannedDate = $cronExecution->nextTime;
   	$dataCloning->save();
 	} 
 	
