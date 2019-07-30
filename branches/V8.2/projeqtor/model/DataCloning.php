@@ -160,7 +160,7 @@ class DataCloning extends SqlElement{
 			  if($data->idle){
 			    $idleColor = 'background-color:#d9d9d9;';
 			  }
-			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:left;vertical-align:center;'.$idleColor.'">';
+			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:center;vertical-align:center;'.$idleColor.'">';
 			  $result .='<table width="100%"><tr>';
 			  if(!$data->idle){
 			    $result .='<td width=10%" style="padding-left:10px">';
@@ -168,12 +168,12 @@ class DataCloning extends SqlElement{
 			      $result .='<a onClick="copyDataCloning('.$data->id.');" title="'.i18n('copyDataCloningButton').'" > '.formatMediumButton('Copy').'</a>';
 			    }
 			    $result .='</td>';
-			    $result .='<td width=90%" style="padding-left:10px">'.$data->name.'</td></tr></table></td>';
+			    $result .='<td width=90%" style="padding-right:42px">'.$data->name.'</td></tr></table></td>';
 			  }else{
-			    $result .='<td width=100%" style="padding-left:44px">'.$data->name.'</td></tr></table></td>';
+			    $result .='<td width=100%">'.$data->name.'</td></tr></table></td>';
 			  }
 			  $result .='<td style="border: 1px solid grey;height:40px;width:10%;text-align:center;vertical-align:center;'.$idleColor.'">'.$data->versionCode.'</td>';
-			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:left;vertical-align:center;'.$idleColor.'">';
+			  $result .='<td style="border: 1px solid grey;height:40px;width:15%;text-align:center;vertical-align:center;'.$idleColor.'">';
 			  $result .='<table width="100%"><tr>';
 			  if($data->idOrigin and !$data->idle){
 			    $origin = new DataCloning($data->idOrigin, true);
@@ -182,7 +182,7 @@ class DataCloning extends SqlElement{
 			       $result .='<a href="../simulation/'.$origin->nameDir.'/view/main.php?directAccess=true" target="_blank" title="'.i18n('gotoDataCloningStatus').'" > '.formatMediumButton('Goto', true).'</a>';
 			    }
 			    $result .='</td>';
-			    $result .='<td width=90%" style="padding-left:10px">'.$origin->name.'</td></tr></table></td>';
+			    $result .='<td width=90%" style="padding-right:42px">'.$origin->name.'</td></tr></table></td>';
 			  }else{
 			    $result .='</tr></table></td>';
 			  }
