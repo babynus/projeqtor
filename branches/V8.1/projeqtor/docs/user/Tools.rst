@@ -86,16 +86,14 @@ By default, administrators can see all the alerts sent, and other users only see
 
 .. topic:: Button Mark as read
 
-   * The button is available if  the user alert is not tagged “read” yet.
+   The button is available if  the user alert is not tagged “read” yet.
 
 
 .. raw:: latex
 
     \newpage
 
-
 .. index:: ! Message
-
 
 .. _message:
 

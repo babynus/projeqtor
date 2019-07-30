@@ -18,7 +18,7 @@ Resources
    :alt: create a resource
    :align: center
    
-   Area of details on the screen for
+   Details area of the resources screen
     
 .. sidebar:: Concepts 
 
@@ -44,7 +44,9 @@ Resource availability is defined by assigning it to a project.
   
   See: :ref:`assignment-section`
 
-* A resource can be a group of people or a fictitious resource with a FTE> 1
+* A resource can be a group of people 
+
+  or a fictitious resource with a FTE> 1
   
   See: :ref:`pool`
 
@@ -119,7 +121,8 @@ Resource availability is defined by assigning it to a project.
 
 .. note:: If you want a resource pool of three people, the ETP capacity must be set to 3
 
-   
+.. rubric:: Field is a contact
+
    * Check this if the resource must also be a :ref:`contact`.
    * The resource will then also appear in the “Contacts” list. 
 
@@ -278,11 +281,11 @@ This section allows to define functions and cost of the resource.
 
 .. topic:: Field Function
 
-   * The default value will be the main function. 
+   The default value will be the main function. 
 
 .. topic:: Field Start date
 
-   * Start date must be set when a new resource cost is created for the same function.
+   Start date must be set when a new resource cost is created for the same function.
 
 
 .. list-table:: Miscellanous section fields
@@ -340,7 +343,7 @@ You assign resources to the pool at a given rate for a given period.
      - Unique Id for the pool.
    * - Photo
      - Photo of the pool.
-   * - || Real name
+   * - |RequiredField| Real name
      - Name of the pool.
    * - Initials
      - Initials of the resource.
@@ -440,7 +443,7 @@ Teams
 
 List of the resources members of the team.
 
-.. topic:: Button: Allocate all team members of a project
+.. topic:: Button **Allocate all team members of a project**
 
    * This button allows to allocate all team members of a project.
    * The :ref:`allocation dialog box<allocation-box>` will be displayed.

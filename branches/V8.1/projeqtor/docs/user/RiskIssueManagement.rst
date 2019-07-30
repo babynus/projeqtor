@@ -1,3 +1,5 @@
+.. include:: ImageReplacement.txt
+
 .. title:: Risk & Issue Management
 
 .. index:: ! Risk 
@@ -37,23 +39,23 @@ The risk management plan is a key point to project management :
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 40, 60
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
      - Unique Id for the risk.
-   * - **Name**
+   * - |RequiredField| Name
      - Short description of the risk.
-   * - **Type**
+   * - |RequiredField| Type
      - Type of risk.
-   * - **Project**
+   * - |RequiredField| Project
      - The project concerned by the risk.
    * - Severity
      - Level of importance of the impact for the project.
@@ -73,30 +75,27 @@ The risk management plan is a key point to project management :
      - Description of the estimated impact on the project if the risk occurs.
    * - :term:`Description`
      - Complete description of the risk.
+     
+.. topic:: Field Criticality
 
-**\* Required field**
+   Automatically calculated from Severity and Likelihood values. See: :ref:`criticality-calculation`. Value can be changed. 
 
-.. topic:: Field: Criticality
+.. topic:: Field Project reserved cost
 
-   * Automatically calculated from Severity and Likelihood values. (See: :ref:`criticality-calculation`)
-   * Value can be changed. 
-
-.. topic:: Field: Project reserved cost
-
-   * Automatically calculated from the percentage defined for the selected likelihood. (See: :ref:`likelihood`)
+   Automatically calculated from the percentage defined for the selected likelihood. (See: :ref:`likelihood`)
 
 
-.. rubric:: Section: Treatment
+.. rubric:: Section Treatment
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
    * - Field
      - Description
-   * - **Status**
+   * - |RequiredField| Status
      - Actual :term:`status` of the risk.
    * - :term:`Responsible`
      - Resource who is responsible for the treatment of the risk.
@@ -117,11 +116,6 @@ The risk management plan is a key point to project management :
    * - :term:`Result`
      - Complete description of the treatment done on the risk.  
  
-**\* Required field**
-
-
-
-
 .. raw:: latex
 
     \newpage
@@ -133,38 +127,40 @@ The risk management plan is a key point to project management :
 Opportunities
 -------------
 
-An opportunity can be seen as a positive risk. It is not a threat but the opportunity to have a positive impact to the project.
-
-.. index:: ! Opportunity (Potential gain) 
-
-.. rubric:: Potential gain
-
-* The potential gain is defined according to the expected amount and likelihood of occurrence.
-* Contingency reserve for risks and potential gain for opportunities allow to define the project reserve. (See: :ref:`Project reserve<project-reserve>`)
-
 .. sidebar:: Other sections
 
    * :ref:`Linked element<linkElement-section>`   
    * :ref:`Attachments<attachment-section>`   
-   * :ref:`Notes<note-section>`   
+   * :ref:`Notes<note-section>` 
+   
+An opportunity can be seen as a positive risk. It is not a threat but the opportunity to have a positive impact to the project.
 
-.. rubric:: Section: Description
+.. index:: ! Opportunity (Potential gain) 
+   
+.. rubric:: Potential gain
+
+* The potential gain is defined according to the expected amount and likelihood of occurrence.
+* Contingency reserve for risks and potential gain for opportunities allow to define the project reserve. 
+* See: :ref:`Project reserve<project-reserve>`
+ 
+
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: Required fields |ReqFieldLegend| 
+   :widths: 30, 50
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
      - Unique Id for the opportunity.
-   * - **Name**
+   * - |RequiredField| Name
      - Short description of the opportunity.
-   * - **Type**
+   * - |RequiredField| Type
      - Type of opportunity.
-   * - **Project**
+   * - |RequiredField| Project
      - The project concerned by the opportunity.
    * - Significance
      - Level of importance of the impact for the project.
@@ -185,28 +181,25 @@ An opportunity can be seen as a positive risk. It is not a threat but the opport
    * - :term:`Description`
      - Complete description of the opportunity.
 
-**\* Required field**
+.. topic:: Field Criticality
 
-.. topic:: Field: Criticality
+   Automatically calculated from Significance and Likelihood values. See: :ref:`criticality-calculation` - Value can be changed. 
 
-   * Automatically calculated from Significance and Likelihood values. (See: :ref:`criticality-calculation`)
-   * Value can be changed. 
+.. topic:: Field Project reserved gain
 
-.. topic:: Field: Project reserved gain
+   Automatically calculated from the percentage defined for the selected likelihood. (See: :ref:`likelihood`)
 
-   * Automatically calculated from the percentage defined for the selected likelihood. (See: :ref:`likelihood`)
-
-.. rubric:: Section: Treatment
+.. rubric:: Section Treatment
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend| 
    :widths: 20, 80
    :header-rows: 1
 
    * - Field
      - Description
-   * - **Status**
+   * - |RequiredField| Status
      - Actual :term:`status` of the opportunity.
    * - :term:`Responsible`
      - Resource who is responsible for the opportunity.
@@ -227,10 +220,6 @@ An opportunity can be seen as a positive risk. It is not a threat but the opport
    * - :term:`Result`
      - Complete description of the treatment of the opportunity.  
  
-**\* Required field**
-
-
-
 .. raw:: latex
 
     \newpage
@@ -242,7 +231,9 @@ Criticality value calculation
 
 Criticality value is automatically calculated from **Severity (Significance)** and **Likelihood** values.
 
-Criticality, Severity (Significance) and Likelihood values are defined in lists of values screens. See: :ref:`criticality`, :ref:`severity` and :ref:`likelihood` screens.
+Criticality, Severity (Significance) and Likelihood values are defined in lists of values screens. 
+
+See: :ref:`criticality`, :ref:`severity` and :ref:`likelihood` screens.
 
 In the previous screens, a name of value is set with numeric value.  
 
@@ -292,11 +283,11 @@ Actions must be defined to solve the issue.
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend| 
    :widths: 20, 80
    :header-rows: 1
 
@@ -304,11 +295,11 @@ Actions must be defined to solve the issue.
      - Description
    * - :term:`Id`
      - Unique Id for the issue.
-   * - **Name**
+   * - |RequiredField| Name
      - Short description of the issue.
-   * - **Type**
+   * - |RequiredField| Type
      - Type of issue.
-   * - **Project**
+   * - |RequiredField| Project
      - The project concerned by the issue.
    * - Criticality
      - Level of importance of the impact for the project.
@@ -323,19 +314,17 @@ Actions must be defined to solve the issue.
    * - :term:`Description`
      - Complete description of the issue.
 
-**\* Required field**
-
-.. rubric:: Section: Treatment
+.. rubric:: Section Treatment
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend| 
    :widths: 20, 80
    :header-rows: 1
 
    * - Field
      - Description
-   * - **Status**
+   * - |RequiredField| Status
      - Actual :term:`status` of the issue.
    * - :term:`Responsible`
      - Resource who is responsible for the issue.
@@ -354,8 +343,6 @@ Actions must be defined to solve the issue.
    * - :term:`Result`
      - Complete description of the treatment of the issue.  
  
-**\* Required field**
-
 .. raw:: latex
 
     \newpage
@@ -398,11 +385,11 @@ They must be regularly followed-up.
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend| 
    :widths: 20, 80
    :header-rows: 1
 
@@ -410,11 +397,11 @@ They must be regularly followed-up.
      - Description
    * - :term:`Id`
      - Unique Id for the action.
-   * - **Name**
+   * - |RequiredField| Name
      - Short description of the action.
-   * - **Action type**
+   * - |RequiredField| Action type
      - Type of action.
-   * - **Project**
+   * - |RequiredField| Project
      - The project concerned by the action.
    * - Priority
      - Priority requested to the treatment of the action.
@@ -423,19 +410,17 @@ They must be regularly followed-up.
    * - :term:`Description`
      - Complete description of the action.
 
-**\* Required field**
-
-.. rubric:: Section: Treatment
+.. rubric:: Section Treatment
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend| 
    :widths: 20, 80
    :header-rows: 1
 
    * - Field
      - Description
-   * - **Status**
+   * - |RequiredField| Status
      - Actual :term:`status` of the action.
    * - :term:`Responsible`
      - Resource who is responsible for the action.
@@ -455,7 +440,4 @@ They must be regularly followed-up.
      - Evaluation of the efficiency the action had on the objective (for instance on the risk mitigation).
    * - :term:`Result`
      - Complete description of the treatment of the action.  
- 
-**\* Required field**
-
 
