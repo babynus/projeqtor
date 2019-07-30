@@ -29,6 +29,70 @@
  */
   require_once "../tool/projeqtor.php";
   scriptLog('   ->/view/objectMain.php');
+  //florent
+  if(empty(Parameter::getUserParameter("paramScreen"))){
+    if(empty(RequestHandler::getValue('paramScreen'))){
+      $valScreen='0';
+      $widthListDiv='100%';
+      $widthDetailDiv='100%';
+      $positionListDiv='top';
+      Parameter::storeUserParameter("paramScreen", $valScreen);
+    }else{
+      $valScreen='1';
+       $widthListDiv='58%';
+      $widthDetailDiv='42%';
+      $positionListDiv='left';
+      Parameter::storeUserParameter("paramScreen", $valScreen);
+    }
+  }else{ 
+    if(RequestHandler::getValue('paramScreen')=='1'){
+      $valScreen='0';
+      $widthListDiv='100%';
+      $widthDetailDiv='100%';
+      $positionListDiv='top';
+      Parameter::storeUserParameter("paramScreen", $valScreen); 
+    }else{
+      $valScreen='1';
+      $widthListDiv='58%';
+      $widthDetailDiv='42%';
+      $positionListDiv='left';
+      Parameter::storeUserParameter("paramScreen", $valScreen);
+    }
+  }
+  
+  if(empty(Parameter::getUserParameter("paramRightDiv"))){
+    debugLog('1');
+    if(empty(RequestHandler::getValue('paramRightDiv'))){
+      $valScreen='0';
+      $positonRightDiv='right';
+      Parameter::storeUserParameter("paramRightDiv", $valScreen);
+      debugLog('2');
+    }else{
+      $valScreen='2';
+      $positonRightDiv='bottom';
+      Parameter::storeUserParameter("paramRightDiv", $valScreen);
+      debugLog('3');
+    }
+  }else{
+    debugLog('4');
+    if(RequestHandler::getValue('paramRightDiv')=='2' and Parameter::getUserParameter("paramRightDiv") == '2'){
+      $valScreen='0';
+      $positonRightDiv='right';
+      Parameter::storeUserParameter("paramRightDiv", $valScreen);
+      debugLog('5');
+    }else{
+      $valScreen='2';
+      $positonRightDiv='bottom';
+      Parameter::storeUserParameter("paramRightDiv", $valScreen);
+      debugLog('6');
+    }
+  }
+  
+  
+  debugLog(RequestHandler::getValue('paramScreen'));
+  debugLog($positonRightDiv);
+  
+  
   $listHeight='40%';
   $objectClass="";
   if (isset($_REQUEST['objectClass'])) {
@@ -46,23 +110,28 @@
   	$detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
   	if (!$detailDivWidth) $detailDivWidth=0;
   	if($detailDivWidth or $detailDivWidth==="0"){
+  	  if ($detailDivWidth > 400 ){
+  	    $detailDivWidth=400;
+  	  }
   	  $rightWidth=$detailDivWidth.'px';
   	} else {
   	  $rightWidth="0%";
   	}
   }
+  
 ?>
+<input type="hidden" id="objectClass" value="<?php echo $objectClass;?>" />
 <div id="mainDivContainer" class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
   <div dojoType="dijit.layout.ContentPane" region="center" splitter="true">
     <div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
-		  <div id="listDiv" dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:<?php echo $listHeight;?>">
+		  <div id="listDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positionListDiv; ?>" splitter="true" style="height:<?php echo $listHeight;?>;width:<?php echo $widthListDiv; ?>">
 		   <script type="dojo/connect" event="resize" args="evt">
-         if (switchedMode) return;
-           saveDataToSession("contentPaneTopDetailDivHeight<?php echo $objectClass;?>", dojo.byId("listDiv").offsetHeight, true);
-       </script>
+               if (switchedMode) return;
+               saveDataToSession("contentPaneTopDetailDivHeight<?php echo $objectClass;?>", dojo.byId("listDiv").offsetHeight, true);
+            </script>
 		   <?php include 'objectList.php'?>
 		  </div>
-		  <div dojoType="dijit.layout.ContentPane" region="center">
+		  <div dojoType="dijit.layout.ContentPane" region="center"  style="width:<?php echo $widthDetailDiv; ?>">
 			  <div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
 			   <?php if (property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream') ) {?>
 				  <div id="hideStreamButton" style="cursor:pointer;position:absolute; right:-2px; bottom:2px;z-index:999999">
@@ -86,8 +155,8 @@
       $showNotes=false;
     }
     if ($showNotes) {?>
-  <div id="detailRightDiv" dojoType="dijit.layout.ContentPane" region="right" splitter="true" style="width:<?php echo $rightWidth;?>">
-    <script type="dojo/connect" event="resize" args="evt">
+  <div id="detailRightDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positonRightDiv; ?>" splitter="true" style="width:<?php echo $rightWidth;?>">
+      <script type="dojo/connect" event="resize" args="evt">
              saveDataToSession("contentPaneRightDetailDivWidth<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetWidth, true);
              var newWidth=dojo.byId("detailRightDiv").offsetWidth;
              dojo.query(".activityStreamNoteContainer").forEach(function(node, index, nodelist) {

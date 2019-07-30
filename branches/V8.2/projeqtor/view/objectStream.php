@@ -60,6 +60,8 @@
     $updateDate='';
   }
   if (!$objectId) {
+    echo "<div onclick='switchMode2(2);' class='verticalLayoutClass' style='position:absolute;top:2px;left:3px'></div>";
+    echo "</br></br>";
     echo $noData; 
     exit;
   }
@@ -68,11 +70,11 @@
   $privacyNotes=Parameter::getUserParameter('privacyNotes'.$objectClass);
 ?>
 <!-- Titre et listes de notes -->
-
 <?php if (!$onlyCenter) {?>
 <div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
 	<div id="activityStreamTop" dojoType="dijit.layout.ContentPane" region="top" style="text-align:center" class="dijitAccordionTitle">
-	  <span class="title" ><?php echo i18n("titleStream");?></span>
+	   <div onclick='switchMode2("2");' class='verticalLayoutClass' style='position:absolute;top:2px;left:3px'></div>
+	   <div><span class="title" ><?php echo i18n("titleStream");?></span></div>
 	</div>
 	<div id="activityStreamCenter" dojoType="dijit.layout.ContentPane" region="center" style="overflow-x:hidden;">
 	<script type="dojo/connect" event="onLoad" args="evt">
