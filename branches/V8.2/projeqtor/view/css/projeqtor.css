@@ -673,7 +673,17 @@ div#reportParametersDiv .label, div#reportParametersDiv label {
  background-size: 24px 24px;
 }
 
+.changeActivityStreamClass {
+  height:24px; width:24px; position: relative; top: 1px;
+ background-image: url(../img/changeActivityStream.png) ;
+ background-size: 24px 24px;
+}
 
+.changeActivityStreamBotClass {
+  height:24px; width:24px; position: relative; top: 1px;
+ background-image: url(../img/changeActivityStreamBot.png) ;
+ background-size: 24px 24px;
+}
 /* Specific classes =========================================================== */
 
 .title {

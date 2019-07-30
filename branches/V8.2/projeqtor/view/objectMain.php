@@ -60,19 +60,24 @@
     }
   }
   
+
   if(empty(Parameter::getUserParameter("paramRightDiv"))){
     if(empty(RequestHandler::getValue('paramRightDiv'))){
+      $valScreen='0';
       $positonRightDiv='right';
       Parameter::storeUserParameter("paramRightDiv", $valScreen);
     }else{
+      $valScreen='2';
       $positonRightDiv='bottom';
       Parameter::storeUserParameter("paramRightDiv", $valScreen);
     }
   }else{
     if(RequestHandler::getValue('paramRightDiv')=='2' and Parameter::getUserParameter("paramRightDiv") == '2'){
+      $valScreen='0';
       $positonRightDiv='right';
       Parameter::storeUserParameter("paramRightDiv", $valScreen);
     }else{
+      $valScreen='2';
       $positonRightDiv='bottom';
       Parameter::storeUserParameter("paramRightDiv", $valScreen);
     }
