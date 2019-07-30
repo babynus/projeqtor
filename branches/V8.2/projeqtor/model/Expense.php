@@ -182,15 +182,28 @@ class Expense extends SqlElement {
     //if (! $this->expensePlannedDate and ! $this->expenseRealDate) {
     //  $result.= '<br/>' . i18n('msgEnterRPDate');
     //}
-    if ( ($this->plannedAmount and ! $this->expensePlannedDate ) 
-      or (! $this->plannedAmount and $this->plannedAmount!=='0'  and $this->expensePlannedDate ) ){
-      $result.= '<br/>' . i18n('msgEnterPlannedDA');	
-    }
-    if ($this->realAmount==0) $this->realAmount=null;
-    if ( ($this->realAmount and ! $this->expenseRealDate ) 
-      or ( ! $this->realAmount and $this->realAmount!==0 and $this->expenseRealDate ) ){
-      $result.= '<br/>' . i18n('msgEnterRealDA');  
-    }
+  	$paramInputExpense = Parameter::getGlobalParameter('ImputOfAmountProvider');
+  	if ($paramInputExpense=='TTC') {
+  	  if ($this->realAmount==0) $this->realAmount=null;
+  	  if ( ($this->plannedFullAmount and ! $this->expensePlannedDate )
+  	      or (! $this->plannedFullAmount and $this->plannedFullAmount!=='0'  and $this->expensePlannedDate ) ){
+  	    $result.= '<br/>' . i18n('msgEnterPlannedDA');
+  	  }
+  	  if ( ($this->realFullAmount and ! $this->expenseRealDate )
+  	      or ( ! $this->realFullAmount and $this->realFullAmount!==0 and $this->expenseRealDate ) ){
+  	    $result.= '<br/>' . i18n('msgEnterRealDA');
+  	  }  	  
+  	} else {
+      if ( ($this->plannedAmount and ! $this->expensePlannedDate ) 
+        or (! $this->plannedAmount and $this->plannedAmount!=='0'  and $this->expensePlannedDate ) ){
+        $result.= '<br/>' . i18n('msgEnterPlannedDA');	
+      }
+      if ($this->realAmount==0) $this->realAmount=null;
+      if ( ($this->realAmount and ! $this->expenseRealDate ) 
+        or ( ! $this->realAmount and $this->realAmount!==0 and $this->expenseRealDate ) ){
+        $result.= '<br/>' . i18n('msgEnterRealDA');  
+      }
+  	}
     if ($result=="") {
     	return 'OK';
     } else {
