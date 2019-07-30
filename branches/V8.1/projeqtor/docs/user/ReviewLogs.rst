@@ -42,7 +42,7 @@ Each meeting is displayed in the agenda
 .. tabularcolumns:: |l|l|
 
 .. list-table:: |ReqFieldLegend| Required field
-   :widths: 30, 80
+   :widths: 40, 60
    :header-rows: 1
 
    * - Field
@@ -64,11 +64,11 @@ Each meeting is displayed in the agenda
  
 .. topic:: Field Name
 
-   * If not set, will automatically be set to meeting type completed with meeting date.
+   If not set, will automatically be set to meeting type completed with meeting date.
 
-.. hint:: Description can be used to store agenda.
+.. note:: Description can be used to store agenda.
 
-.. rubric:: Button: Email invitation
+.. rubric:: Button **Email invitation**
 
 * Allows to send the email to attendees.
 * They will receive the invitation in their calendar management tool. 
@@ -84,7 +84,7 @@ Each meeting is displayed in the agenda
 .. tabularcolumns:: |l|l|
 
 .. list-table:: |ReqFieldLegend| Required field
-   :widths: 30, 80
+   :widths: 40, 60
    :header-rows: 1
 
    * - Field
@@ -110,17 +110,19 @@ Each meeting is displayed in the agenda
 
    * In the WBS structure, under which the meeting will be displayed in the Gantt planning.
 
-.. topic:: Minutes
+.. note::
 
-   * You can enter here only a short summary of the minutes and attach the full minutes as a file.
+   **Minutes**
 
-**\* Steering**
+   You can enter here only a short summary of the minutes and attach the full minutes as a file.
 
-Retrieving the agenda of a meeting from the description of its type
+   **Steering**
 
-**\* Diary**
+   Retrieving the agenda of a meeting from the description of its type
 
-Viewing meetings in agenda, even if they are not planned
+   **Diary**
+
+   Viewing meetings in agenda, even if they are not planned
 
 .. raw:: latex
 
@@ -162,7 +164,7 @@ Periodic meeting is a way to define some meetings that will occur on a regular b
 
    * :ref:`Attendees<attendees-section>`
    * :ref:`Progress<progress-section-meeting>`
-   * :ref:`Predecessor and Sucessor element<predSuces-element-section>`
+   * :ref:`Predecessor and Sucessor<predSuces-element-section>`
    * :ref:`Notes<note-section>`   
    
   
@@ -287,9 +289,7 @@ This section allows to define the list of attendees to the meeting.
    
 .. rubric:: Other attendees
 
-* Extra list of persons attending (or expecting to attend) the meeting, in completion to resource in the attendee list.
-
-.. topic:: Attendees entry
+Extra list of persons attending (or expecting to attend) the meeting, in completion to resource in the attendee list.
 
    * You can enter attendees by email address, resource or contact name, user name or initial without caring about. 
    * Just separate attendees with commas or semicolons.
@@ -324,7 +324,7 @@ You can link a decision to a meeting to rapidly find the minutes where the decis
 .. tabularcolumns:: |l|l|
 
 .. list-table:: |ReqFieldLegend| Required field
-   :widths: 30, 80
+   :widths: 40, 60
    :header-rows: 1
 
    * - Field
@@ -365,11 +365,11 @@ You can link a decision to a meeting to rapidly find the minutes where the decis
  
 .. topic:: Field Origin
 
-   * It can be either the reference to a meeting where the decision was taken (so also add the reference to the meetings list), or a short description of why the decision was taken. 
+   It can be either the reference to a meeting where the decision was taken (so also add the reference to the meetings list), or a short description of why the decision was taken. 
 
 .. topic:: Field Accountable
 
-   * The person who took the decision.
+   The person who took the decision.
 
 .. raw:: latex
 
@@ -396,7 +396,7 @@ You can link a question to a meeting to rapidly find the minutes where the quest
 
 .. rubric:: Monitoring indicator
 
-* Possibility to define indicators to follow the respect of dates values.
+Possibility to define indicators to follow the respect of dates values.
 
  .. describe:: Respect of initial due date
  .. describe:: Respect of planned due date
@@ -412,7 +412,7 @@ You can link a question to a meeting to rapidly find the minutes where the quest
 .. tabularcolumns:: |l|l|
 
 .. list-table:: |ReqFieldLegend| Required field
-   :widths: 30, 80
+   :widths: 40, 60
    :header-rows: 1
 
    * - Field
@@ -480,7 +480,7 @@ Deliverables links with Milestones.
 
 .. note::
 
-   * If you change the responsible of milestones, the responsible of deliverable will automatically changed, and vice versa. 
+   If you change the responsible of milestones, the responsible of deliverable will automatically changed, and vice versa. 
 
 .. rubric:: Section Description
 
@@ -557,14 +557,9 @@ Incomings links with Milestones.
 
 .. note::
 
-   * If you change the responsible of milestones, the responsible of Incomings will automatically changed, and vice versa. 
+   If you change the responsible of milestones, the responsible of Incomings will automatically changed, and vice versa. 
 
-
-.. note::
-
-   * You can estimated quality value for incoming  and this will produce a KPI.
-
-   * See: :ref:`kpi-definitions`
+   You can estimated quality value for incoming  and this will produce a KPI. See: :ref:`kpi-definitions`
 
 .. raw:: latex
 
@@ -583,7 +578,7 @@ Added list of deliverables integrated in delivery.
 
 .. note::
 
-   * Automatic dispatch of delivery status to deliverables.
+   Automatic dispatch of delivery status to deliverables.
 
 .. rubric:: Section Description
 
@@ -599,7 +594,7 @@ Added list of deliverables integrated in delivery.
      - Unique Id for the delivery.
    * - |RequiredField| Name
      - Short description of the delivery.
-   * - |RequiredField| Deliverable type**
+   * - |RequiredField| Deliverable type
      - Type of deliverable.
    * - |RequiredField| Project
      - The project concerned by the delivery. 
@@ -620,7 +615,7 @@ Added list of deliverables integrated in delivery.
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 30, 80
+   :widths: 40, 60
    :header-rows: 1
 
    * - Field

@@ -159,7 +159,9 @@ Defines if a task can begin the same day as the preceding one.
 
   * If yes, the successor should begin the next day 
   * If no, the successor can start the same day.
-    
+
+.. _globalParam_tickets:
+
 Tickets
 =======
 Specific behavior for ticket management 

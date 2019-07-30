@@ -53,7 +53,7 @@ It can be linked to test cases, it's used to describe how you will test that a g
 .. sidebar:: Other sections
 
    * :ref:`Summary of test cases<summary-test-case-section>`
-   * :ref:`Predecessor and Sucessor element<predSuces-element-section>`
+   * :ref:`Predecessor and Sucessor<predSuces-element-section>`
    * :ref:`Linked element<linkElement-section>`   
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
@@ -63,13 +63,13 @@ It can be linked to test cases, it's used to describe how you will test that a g
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
+   :widths: 40, 60
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
-     - Unique Id for the requirement.
+     - Unique Id for the requirement
    * - |RequiredField| Name
      - Short description of the requirement.
    * - |RequiredField| Requirement type
@@ -103,7 +103,7 @@ It can be linked to test cases, it's used to describe how you will test that a g
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
+   :widths: 40, 60
    :header-rows: 1
 
    * - Field
@@ -549,7 +549,7 @@ This section allows to manage test case runs.
 
 .. topic:: Field Ticket
 
-   * Field appear only whether status of test case run is **failed**.
+   Field appear only whether status of test case run is **failed**.
 
 
 
@@ -567,7 +567,7 @@ This section summarizes the status of test case runs to requirement and test ses
 
 .. rubric:: Requirement
 
-* Summarizes the status of test case runs for test cases are linked to the requirement.
+Summarizes the status of test case runs for test cases are linked to the requirement.
 
  .. note:: Field Total 
 
@@ -575,7 +575,7 @@ This section summarizes the status of test case runs to requirement and test ses
 
 .. rubric:: Test session
 
-* Summarizes the status of test case runs in the test session.
+Summarizes the status of test case runs in the test session.
 
 ----------
 
@@ -614,7 +614,7 @@ This section summarizes the status of test case runs to requirement and test ses
 
 .. note::
 
-   * Percent to each status is displayed.
+   Percent to each status is displayed.
 
 
 

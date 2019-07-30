@@ -1,10 +1,46 @@
+.. include:: ImageReplacement.txt
+
 .. raw:: latex
 
     \newpage
 
 .. title:: Features
 
+********
+Features
+********
+
+ProjeQtOr  is a "Quality based Project Organizer".
+
+It is particularly well suited to IT projects, but can manage any type of project.
+
+It proposes a unique interface 
+
+It offers all the features needed to different Project Management actors under a unique collaborative interface.
+
+.. index:: ! Start guide
+
+.. _start_guide: 
+
+Start guide
+***********
+
+* Start page for new installations to assist the administrator in the first configuration steps.
+* A progress display |one| allows to determine the percent of complete installation.
+* You can hide this section on startup, just unchecked. |two|
+
+  * This section will not be displayed anymore.
+  * To show it again, select it as the start page in :ref:`Users parameters<graphic-interface-behavior-section>` screen. 
+
+.. figure:: /images/GUI/TODAY_SCR_StartGuide.png
+   :alt: Section - Start guide 
+   :align: center
+   
+   
+
 .. index:: ! Planning management
+
+.. _planning_management:
 
 Planning management
 *******************
