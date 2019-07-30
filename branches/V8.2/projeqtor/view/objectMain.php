@@ -61,32 +61,25 @@
   }
   
   if(empty(Parameter::getUserParameter("paramRightDiv"))){
-    debugLog('1');
     if(empty(RequestHandler::getValue('paramRightDiv'))){
-      $valScreen='0';
       $positonRightDiv='right';
       Parameter::storeUserParameter("paramRightDiv", $valScreen);
-      debugLog('2');
     }else{
-      $valScreen='2';
       $positonRightDiv='bottom';
       Parameter::storeUserParameter("paramRightDiv", $valScreen);
-      debugLog('3');
     }
   }else{
-    debugLog('4');
     if(RequestHandler::getValue('paramRightDiv')=='2' and Parameter::getUserParameter("paramRightDiv") == '2'){
-      $valScreen='0';
       $positonRightDiv='right';
       Parameter::storeUserParameter("paramRightDiv", $valScreen);
-      debugLog('5');
     }else{
-      $valScreen='2';
       $positonRightDiv='bottom';
       Parameter::storeUserParameter("paramRightDiv", $valScreen);
-      debugLog('6');
     }
   }
+  
+  
+  
   $listHeight='40%';
   $objectClass="";
   if (isset($_REQUEST['objectClass'])) {

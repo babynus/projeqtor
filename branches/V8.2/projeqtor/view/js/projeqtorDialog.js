@@ -6363,7 +6363,6 @@ function switchMode() {
 
 function switchMode2(paramToSend){
   var currentScreen=dojo.byId('objectClass').value;
-  console.log(paramToSend);
   if (paramToSend=='1'){
     loadContent("objectMain.php?objectClass=" + currentScreen+"&paramScreen="+paramToSend, "centerDiv");
   }else{
