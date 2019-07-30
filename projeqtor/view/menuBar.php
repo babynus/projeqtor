@@ -282,9 +282,8 @@
         </a>
       </div>  
     </td>
-      
-    <td title="<?php echo i18n('menuUserParameter');?>"  style="position:relative;width:100px;">
-      <div dojoType="dijit.layout.ContentPane"  id="menuUserParameterTop" class="pseudoButton" style="position:relative;overflow:hidden; height:28px; min-width:100px;top:-5px;" title="<?php echo i18n('menuUserParameter');?>">
+    <td title="<?php echo i18n('menuUserParameter');?>"  style="position:relative;width:105px;">
+      <div dojoType="dijit.layout.ContentPane"  id="menuUserParameterTop" class="pseudoButton" style="position:relative;overflow:hidden; height:28px;width:100px; min-width:100px;top:-5px;" title="<?php echo i18n('menuUserParameter');?>">
         <div dojoType="dijit.form.DropDownButton"  id="iconMenuUserPhoto" style="display: table-cell;background-color: #D3D3D3;vertical-align: middle;position:relative;min-width:100px;top:-3px" >
 			    <table style="width:100%">
     			  <tr>
@@ -308,22 +307,28 @@
           </div> 
 		    </div>
       </div>
-    </td> 
-    
-    <td width="<?php echo (isIE())?37:35;?>px" style="padding-left:3px;" > 
-      <div class="pseudoButton" onclick="switchMode();" style="height:28px; position:relative;top:-5px; z-index:30; width:30px;" title="<?php echo i18n("buttonSwitchedMode");?>">
-        <table >
-          <tr>
-            <td style="width:28x;text-align:center">
-              <div class="dijitButtonIcon dijitButtonIconSwitchMode" style="position:absolute;top:2px;left:3px" ></div>
-            </td>
-          </tr>
-        </table>    
-     </div>
     </td>
+    <td title="<?php ?>"  style="position:relative;width:55px;">
+      <div dojoType="dijit.layout.ContentPane"  id="menuUserScreenTop" class="pseudoButton" style="position:relative;overflow:hidden;width:50px; height:28px; min-width:50px;top:-5px;">
+        <div dojoType="dijit.form.DropDownButton"  id="iconMenuUserScreen" style="display: table-cell;background-color: #D3D3D3;vertical-align: middle;position:relative;min-width:50px;top:-3px" >
+			    <table style="width:100%">
+    			  <tr>
+      				<td style="width:24px;padding-top:2px;">
+      				  <div class="iconChangeLayout22 iconChangeLayout iconSize22">&nbsp;</div> 
+      				</td>
+      			  <td style="vertical-align:middle;">&nbsp;</td>
+    			  </tr>
+			    </table>
+			    <div id="drawMenuUserScreenOrganization" dojoType="dijit.TooltipDialog"
+             style="max-width:600px; overflow-x:hidden; height:450px;  max-height:500px;  width:150px; ">
+             <?php include "menuUserScreenOrganization.php" ?>          
+          </div> 
+		</div>
+      </div>
+    </td> 
      <?php if (! isIE()) {?>
-    <td  width="35px" > 
-      <div  class="pseudoButtonFullScreen" style="height:28px; position:relative; top:-5px; z-index:30; width:28px;" onclick="toggleFullScreen()" >
+    <td  width="28px" > 
+      <div  class="pseudoButtonFullScreen" style="height:28px; position:relative; top:-5px; z-index:30;margin-right:0px; width:28px;" onclick="toggleFullScreen()" >
         <table>
           <tr>
             <td style="width:28px" >
@@ -334,15 +339,6 @@
       </div>
     </td>
      <?php }?>  
-    <td width="24px">   
-      <div id="hideMenuBarShowButtonTop" style="cursor:pointer;position:relative; top:-11px;right:0px; z-index:949" >
-  		  <a onClick="hideMenuBarShowModeTop();" id="buttonSwitchedMenuBarTopShow" title="<?php echo i18n("buttonShowMenu");?>" >
-  		    <span style='display:inline-block;width:24px;height:22px;'>
-  		     <div style="position:absolute;top:1px;right:0px;height:26px;width:24px" dojoType="dijit.form.Button" iconClass="dijitButtonIcon iconHideStream22" class="detailButton">&nbsp;</div>
-  		    </span>
-  		  </a>
-		  </div>
-    </td>
   </tr>
 </table>
 <div class="customMenuAddRemove"  id="customMenuAdd" onClick="customMenuAddItem();"><?php echo i18n('customMenuAdd');?></div>

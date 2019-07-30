@@ -666,6 +666,14 @@ div#reportParametersDiv .label, div#reportParametersDiv label {
  background-image: url(../img/disconnect.png) ;
  background-size: 24px 24px;
 }
+
+.verticalLayoutClass {
+  height:24px; width:24px; position: relative; top: 1px;
+ background-image: url(../img/verticalLayout.png) ;
+ background-size: 24px 24px;
+}
+
+
 /* Specific classes =========================================================== */
 
 .title {

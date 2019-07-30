@@ -215,8 +215,8 @@ if (property_exists($objectClass,'idStatus')) {
 <?php echo ($showIdle)?'&idle=true':'';?>
 <?php echo ($allProjectsChecked)?'&showAllProjects=on':'';?>" >
 </div>
-<div dojoType="dijit.layout.BorderContainer">
-<div dojoType="dijit.layout.ContentPane" region="top" id="listHeaderDiv">
+<div dojoType="dijit.layout.BorderContainer" >
+<div dojoType="dijit.layout.ContentPane" region="top" id="listHeaderDiv" style="width:50%;">
   <form dojoType="dijit.form.Form" id="quickSearchListForm" action="" method="" >
   <script type="dojo/method" event="onSubmit" >
     quickSearchExecute();
