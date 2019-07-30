@@ -66,7 +66,7 @@ $idDataCloningParent = RequestHandler::getId('idDataCloningParent');
                 <input data-dojo-type="dijit.form.TextBox"
   				          id="dataCloningName" name="dataCloningName"
   				          style="width: 300px;"
-  				          maxlength="4000"
+  				          maxlength="30"
   				          class="input" value=""/>
   				    </td>
             </tr>
