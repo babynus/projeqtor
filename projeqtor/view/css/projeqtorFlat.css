@@ -563,6 +563,10 @@ body .ProjeQtOrFlatBlue {
   { background-image: url(images/calendarYellowUpdateFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
 .ProjeQtOrFlatBlue .verticalLayoutClass { background-image: url(customIcons/blue/verticalLayout.png); background-size: 24px 24px;background-repeat: no-repeat;}
+
+.ProjeQtOrFlatBlue .changeActivityStreamClass { background-image: url(customIcons/blue/changeActivityStream.png); background-size: 24px 24px;background-repeat: no-repeat;}
+
+.ProjeQtOrFlatBlue .changeActivityStreamBotClass { background-image: url(customIcons/blue/changeActivityStreamBot.png); background-size: 24px 24px;background-repeat: no-repeat;}
 /* =============================================================================== */
 /* ICONS                                                                           */
 /* =============================================================================== */
@@ -1958,6 +1962,10 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatRed .iconLoginPassword { background-image: url(customIcons/red/iconPassword.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px}
 
 .ProjeQtOrFlatRed .verticalLayoutClass { background-image: url(customIcons/red/verticalLayout.png); background-size: 24px 24px;background-repeat: no-repeat;}
+
+.ProjeQtOrFlatRed .changeActivityStreamClass { background-image: url(customIcons/red/changeActivityStream.png); background-size: 24px 24px;background-repeat: no-repeat;}
+
+.ProjeQtOrFlatRed .changeActivityStreamBotClass { background-image: url(customIcons/red/changeActivityStreamBot.png); background-size: 24px 24px;background-repeat: no-repeat;}
 /* =============================================================================== */
 /* ICONS                                                                           */
 /* =============================================================================== */
@@ -3351,6 +3359,11 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconLoginPassword { background-image: url(customIcons/green/iconPassword.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px}
 
 .ProjeQtOrFlatGreen .verticalLayoutClass { background-image: url(customIcons/green/verticalLayout.png); background-size: 24px 24px;background-repeat: no-repeat;}
+
+.ProjeQtOrFlatGreen .changeActivityStreamClass { background-image: url(customIcons/green/changeActivityStream.png); background-size: 24px 24px;background-repeat: no-repeat;}
+
+.ProjeQtOrFlatGreen .changeActivityStreamBotClass { background-image: url(customIcons/green/changeActivityStreamBot.png); background-size: 24px 24px;background-repeat: no-repeat;}
+
 /* =============================================================================== */
 /* ICONS                                                                           */
 /* =============================================================================== */
@@ -4743,6 +4756,10 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconLoginPassword { background-image: url(customIcons/grey/iconPassword.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px}
 
 .ProjeQtOrFlatGrey .verticalLayoutClass { background-image: url(customIcons/grey/verticalLayout.png); background-size: 24px 24px;background-repeat: no-repeat;}
+
+.ProjeQtOrFlatGrey .changeActivityStreamClass { background-image: url(customIcons/grey/changeActivityStream.png); background-size: 24px 24px;background-repeat: no-repeat;}
+
+.ProjeQtOrFlatGrey .changeActivityStreamBotClass { background-image: url(customIcons/grey/changeActivityStreamBot.png); background-size: 24px 24px;background-repeat: no-repeat;}
 /* =============================================================================== */
 /* ICONS                                                                           */
 /* =============================================================================== */
