@@ -19,7 +19,6 @@ This enables or disables a consistent group of features.
 
 This screen is then accessible via a dedicated menu in the Acces Right
 
-
 .. image:: /images/GUI/ACCESSRIGHT_ManagementModule.png
 
 .. topic:: columns descriptions
