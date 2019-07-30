@@ -561,7 +561,8 @@ body .ProjeQtOrFlatBlue {
   { background-image: url(images/calendarYellowUpdateFlat.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .calendarYellowUpdate16, .ProjeQtOrFlatRed .calendarYellowUpdate16, .ProjeQtOrFlatGreen .calendarYellowUpdate16, .ProjeQtOrFlatGrey .calendarYellowUpdate16 
   { background-image: url(images/calendarYellowUpdateFlat.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
-  
+
+.ProjeQtOrFlatBlue .verticalLayoutClass { background-image: url(customIcons/blue/verticalLayout.png); background-size: 24px 24px;background-repeat: no-repeat;}
 /* =============================================================================== */
 /* ICONS                                                                           */
 /* =============================================================================== */
@@ -731,6 +732,9 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatBlue .iconCancel24 { background-image: url(customIcons/blue/iconUndo.png);  background-repeat: no-repeat; width: 24px; height: 24px; background-size: 24px 24px;}
 .ProjeQtOrFlatBlue .iconCancel32 { background-image: url(customIcons/blue/iconUndo.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 
+.ProjeQtOrFlatBlue .iconChangeLayout32 { background-image: url(customIcons/blue/iconChangeLayout.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatBlue .iconChangeLayout22 { background-image: url(customIcons/blue/iconChangeLayout.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatBlue .iconChangeLayout16 { background-image: url(customIcons/blue/iconChangeLayout.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 /* D */
 
 /* BEGIN - ADD qCazelles - Requirement dashboard - Ticket 90 */
@@ -1953,6 +1957,7 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatRed .iconLoginUser { background-image: url(customIcons/red/iconLogin.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px}
 .ProjeQtOrFlatRed .iconLoginPassword { background-image: url(customIcons/red/iconPassword.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px}
 
+.ProjeQtOrFlatRed .verticalLayoutClass { background-image: url(customIcons/red/verticalLayout.png); background-size: 24px 24px;background-repeat: no-repeat;}
 /* =============================================================================== */
 /* ICONS                                                                           */
 /* =============================================================================== */
@@ -2118,6 +2123,10 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatRed .iconCancel16 { background-image: url(customIcons/red/iconUndo.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOrFlatRed .iconCancel24 { background-image: url(customIcons/red/iconUndo.png);  background-repeat: no-repeat; width: 24px; height: 24px; background-size: 24px 24px;}
 .ProjeQtOrFlatRed .iconCancel32 { background-image: url(customIcons/red/iconUndo.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+
+.ProjeQtOrFlatRed .iconChangeLayout32 { background-image: url(customIcons/red/iconChangeLayout.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatRed .iconChangeLayout22 { background-image: url(customIcons/red/iconChangeLayout.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatRed .iconChangeLayout16 { background-image: url(customIcons/red/iconChangeLayout.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /* D */
 
@@ -3341,6 +3350,7 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconLoginUser { background-image: url(customIcons/green/iconLogin.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px}
 .ProjeQtOrFlatGreen .iconLoginPassword { background-image: url(customIcons/green/iconPassword.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px}
 
+.ProjeQtOrFlatGreen .verticalLayoutClass { background-image: url(customIcons/green/verticalLayout.png); background-size: 24px 24px;background-repeat: no-repeat;}
 /* =============================================================================== */
 /* ICONS                                                                           */
 /* =============================================================================== */
@@ -3506,6 +3516,10 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconCancel16 { background-image: url(customIcons/green/iconUndo.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOrFlatGreen .iconCancel24 { background-image: url(customIcons/green/iconUndo.png);  background-repeat: no-repeat; width: 24px; height: 24px; background-size: 24px 24px;}
 .ProjeQtOrFlatGreen .iconCancel32 { background-image: url(customIcons/green/iconUndo.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+
+.ProjeQtOrFlatGreen .iconChangeLayout32 { background-image: url(customIcons/green/iconChangeLayout.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGreen .iconChangeLayout22 { background-image: url(customIcons/green/iconChangeLayout.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGreen .iconChangeLayout16 { background-image: url(customIcons/green/iconChangeLayout.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /* D */
 
@@ -4728,6 +4742,7 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconLoginUser { background-image: url(customIcons/grey/iconLogin.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px}
 .ProjeQtOrFlatGrey .iconLoginPassword { background-image: url(customIcons/grey/iconPassword.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px}
 
+.ProjeQtOrFlatGrey .verticalLayoutClass { background-image: url(customIcons/grey/verticalLayout.png); background-size: 24px 24px;background-repeat: no-repeat;}
 /* =============================================================================== */
 /* ICONS                                                                           */
 /* =============================================================================== */
@@ -4799,6 +4814,10 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconBillType32 { background-image: url(customIcons/grey/iconClientBillType.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGrey .iconBillType22 { background-image: url(customIcons/grey/iconClientBillType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGrey .iconBillType16 { background-image: url(customIcons/grey/iconClientBillType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatGrey .iconChangeLayout32 { background-image: url(customIcons/grey/iconChangeLayout.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGrey .iconChangeLayout22 { background-image: url(customIcons/grey/iconChangeLayout.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGrey .iconChangeLayout16 { background-image: url(customIcons/grey/iconChangeLayout.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /* C */
 

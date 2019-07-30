@@ -1040,6 +1040,11 @@
 .ProjeQtOrFlatGreen .iconBudgetType { background-image: url(customIcons/green/iconBudgetType.png); }
 .ProjeQtOrFlatGrey .iconBudgetType { background-image: url(customIcons/grey/iconBudgetType.png); }
 
+.iconChangeLayout { background-image: url(images/iconChangeLayout.png); }
+.ProjeQtOrFlatBlue .iconChangeLayout { background-image: url(customIcons/blue/iconChangeLayout.png); }
+.ProjeQtOrFlatRed .iconChangeLayout { background-image: url(customIcons/red/iconChangeLayout.png); }
+.ProjeQtOrFlatGreen .iconChangeLayout { background-image: url(customIcons/green/iconChangeLayout.png); }
+.ProjeQtOrFlatGrey .iconChangeLayout { background-image: url(customIcons/grey/iconChangeLayout.png); }
 /* G */
 
 .iconGlobalPlanning { background-image: url(images/iconGlobalPlanning.png); }

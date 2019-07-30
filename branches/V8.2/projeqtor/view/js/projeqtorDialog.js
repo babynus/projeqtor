@@ -6361,6 +6361,16 @@ function switchMode() {
   }
 }
 
+function switchMode2(paramToSend){
+  var currentScreen=dojo.byId('objectClass').value;
+  console.log(paramToSend);
+  if (paramToSend=='1'){
+    loadContent("objectMain.php?objectClass=" + currentScreen+"&paramScreen="+paramToSend, "centerDiv");
+  }else{
+    loadContent("objectMain.php?objectClass=" + currentScreen+"&paramRightDiv="+paramToSend, "centerDiv");
+  }
+}
+
 var switchModeSkipAnimation=true;
 function showList(mode, skipAnimation) {
   duration=300;
