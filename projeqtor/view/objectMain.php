@@ -87,12 +87,6 @@
       debugLog('6');
     }
   }
-  
-  
-  debugLog(RequestHandler::getValue('paramScreen'));
-  debugLog($positonRightDiv);
-  
-  
   $listHeight='40%';
   $objectClass="";
   if (isset($_REQUEST['objectClass'])) {
