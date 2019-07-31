@@ -26,45 +26,58 @@
 
 include_once("../tool/projeqtor.php");
 include_once '../tool/formatter.php';
-
+$iconSize=32;
+$showMenuBar=Parameter::getUserParameter('paramShowMenuBar');
+$showMenuBar='YES';
+if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
 //Param
 ?>
-<table width="100%">
-  <tr height="<?php echo $iconSize+8; ?>px">  
-    <td width="<?php echo (isIE())?37:35;?>px" > 
-      <div class="pseudoButton" onclick="switchMode();" style="height:28px; position:relative;top:-5px; z-index:30; width:30px;" title="<?php echo i18n("buttonSwitchedMode");?>">
-        <table >
-          <tr>
-            <td style="width:28x;text-align:center">
-              <div class="dijitButtonIcon dijitButtonIconSwitchMode" style="position:absolute;top:2px;left:3px" ></div>
-            </td>
-          </tr>
-        </table>    
-     </div>
-    </td>
-  </tr>
-  <tr height="<?php echo $iconSize+8; ?>px">
-    <td width="24px" >   
-      <div id="hideMenuBarShowButtonTop" style="position:relative; top:-5px; z-index:949;" >
-  		  <a onClick="hideMenuBarShowModeTop();" id="buttonSwitchedMenuBarTopShow" title="<?php echo i18n("buttonShowMenu");?>" >
-  		    <span style='display:inline-block;width:24px;height:22px;'>
-  		     <div style="position:absolute;top:1px;height:26px;width:24px" dojoType="dijit.form.Button" iconClass="dijitButtonIcon iconHideStream22" class="detailButton">&nbsp;</div>
-  		    </span>
-  		  </a>
-		  </div>
-    </td>
-  </tr>
-  <tr>
-    <td width="<?php echo (isIE())?37:35;?>px"  > 
-      <div class="pseudoButton" onclick="switchMode2('1');" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" title="<?php echo i18n("buttonSwitchedMode");?>">
-        <table >
-          <tr>
-            <td style="width:28x;text-align:center">
-              <div class="verticalLayoutClass" style="position:absolute;top:2px;left:3px" ></div>
-            </td>
-          </tr>
-        </table>    
-     </div>
-    </td>
-  </tr>
-</table>
+<div id="mainDivMenu" class="container" >
+ <table width="100%">
+  <?php if(RequestHandler::getValue('paramScreen')==Parameter::getUserParameter('paramScreen')){?>
+    <tr height="<?php echo $iconSize+8; ?>px">  
+      <td width="<?php echo (isIE())?37:35;?>px" > 
+        <div class="pseudoButton" onclick="switchMode();" style="height:28px; position:relative;top:-5px; z-index:30; width:30px;" title="<?php echo i18n("buttonSwitchedMode");?>">
+          <table >
+            <tr>
+              <td style="width:28x;text-align:center">
+                <div class="dijitButtonIcon dijitButtonIconSwitchMode" style="position:absolute;top:2px;left:3px" ></div>
+              </td>
+            </tr>
+          </table>    
+       </div>
+      </td>
+    </tr>
+   <?php }?>
+   <tr height="<?php echo $iconSize+8; ?>px">
+      <td width="24px" >   
+        <div id="hideMenuBarShowButtonTop"style="height:28px; position:relative;top:-5px; z-index:30; width:30px;" onclick="hideMenuBarShowModeTop();">
+            <table>
+              <tr>
+                <td style="width:28x;text-align:center">
+                   <div style="position:absolute;top:2px;left:5px"  Class="dijitButtonIcon iconHideStream22" >&nbsp;</div>
+                </td>
+              </tr>
+            </table>    
+  		</div>
+      </td>
+    </tr>
+    <tr>
+      <td width="<?php echo (isIE())?37:35;?>px"  > 
+        <div class="pseudoButton" onclick="switchMode2('1');" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" title="<?php echo i18n("buttonSwitchedMode");?>">
+          <table >
+            <tr>
+              <td style="width:28x;text-align:center">
+              <?php if(RequestHandler::getValue('paramScreen')==Parameter::getUserParameter('paramScreen')){?>
+                <div class="horizontalLayoutClass" style="position:absolute;top:2px;left:3px" ></div>
+              <?php }else{?>
+                <div class="verticalLayoutClass" style="position:absolute;top:2px;left:3px" ></div>
+              <?php }?>
+              </td>
+            </tr>
+          </table>    
+       </div>
+      </td>
+    </tr>
+  </table>
+</div>
