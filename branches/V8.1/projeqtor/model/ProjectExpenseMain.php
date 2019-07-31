@@ -268,8 +268,13 @@ class ProjectExpenseMain extends Expense {
       if($paramImputOfBillLineProvider == "TTC"){  
         if ($this->realFullAmount!=null) {
           if($this->taxPct > 0) {
-            $this->realAmount =  $this->realFullAmount / ( 1 + ( $this->taxPct / 100 ));
-            $this->realTaxAmount= $this->realFullAmount - $this->realAmount;
+            if ($this->taxPct==100) {
+              $this->realTaxAmount=$this->realFullAmount;
+              $this->realAmount=0;
+            } else {
+              $this->realAmount =  $this->realFullAmount / ( 1 + ( $this->taxPct / 100 ));
+              $this->realTaxAmount= $this->realFullAmount - $this->realAmount;
+            }
           }else{
             $this->realAmount =  $this->realFullAmount;
             $this->realTaxAmount= 0;
