@@ -102,3 +102,8 @@ INSERT INTO `${prefix}cronExecution` (`cron`, `fileExecuted`, `idle` ,`fonctionN
 
 DROP TABLE `${prefix}noteflux`;
 DROP TABLE `${prefix}absence`;
+
+INSERT INTO `${prefix}importable` (`id`, `name`, `idle`) VALUES
+(54, 'Budget', 0);
+
+ALTER TABLE `${prefix}expense` CHANGE `realTaxAmount` `realTaxAmount` DECIMAL(14,5);
