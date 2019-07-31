@@ -838,7 +838,7 @@
               </td>
             </tr>
             <?php  }?>
-            <?php if(get_class($obj)=='User'){?>
+            <?php if(property_exists(get_class($obj), 'isLdap')){?>
             <tr class="detail">
               <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeIsLDAP');?>&nbsp;:&nbsp;</td>
               <td>
