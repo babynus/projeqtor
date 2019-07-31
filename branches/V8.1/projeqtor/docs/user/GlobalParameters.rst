@@ -657,6 +657,8 @@ Test email configuration
 Tab Authentication
 ------------------
 
+.. _user_password:
+
 User and password
 =================
 
@@ -671,6 +673,8 @@ User and password
 * You can display or no the check box on the login screen "remember me" 
 
 * You can initialize password on user creation and defined a new password to random value 
+
+.. _ldap_user:
 
 LDAP Management Parameters
 ==========================
@@ -691,9 +695,41 @@ LDAP Management Parameters
 Single Sign On SAML2
 ====================
 
-Use SSO connection through SAML2 protocol
+.. rubric:: Single sign-on 
 
-Single sign-on: SSO is a method that allows a user to access multiple computer applications (or secure websites) by performing only one authentication.
+Single sign-on is a method that allows a user to access multiple computer applications (or secure websites) 
+
+by performing a single authentication.
+
+.. figure:: /images/GUI/GLOBALPARAM_ZONE_ConnexionSSO.PNG
+   :alt: Connexion screen with the protocol SSO
+   
+   With the single sign on you do not go through the login screen of projeqtor but by a screen dedicated to single sign-on
+
+When connected to the SSO service, the service tells each application that the user is logged on. 
+
+This avoids having to connect to applications one by one.
+
+In concrete terms, the site or service to which the user is trying to connect makes a request to the server 
+
+or the identity provider's site. This one asks if the user is connected. If so, he transmits the information.
+
+Depending on the protocol used, the two sites exchange keys, signatures and / or other information 
+
+to verify the identity of the user.
+
+.. figure:: /images/GUI/GLOBALPARAM_ZONE_DeconnexionSSO.png
+   :alt: disconnection screen
+   
+When you want to disconnect from ProjeQtOr with the SSO method, the logout screen gives you several options
+
+* local disconnection of projeqtor. I do not leave my SSO session
+* Internal reconnection: I reconnect to ProjeQtOr locally. I leave my SSO session. I should identify myself again
+* SSO disconnect. I leave my SSO session. I should identify myself again    
+
+.. rubric:: Parameters
+
+This is an SSO connection via the SAML2 protocol
 
 .. figure:: /images/GUI/GLOBALPARAM_ZONE_SSO.png
    :alt: Global parameters : LDAP
@@ -792,16 +828,22 @@ An email is sent on the agreed date. Click on the button **Defined Parameters** 
 
 .. compound:: **generation parameters for the Resource/Project leader and Team Manager**
 
-* select the frequency of the calendar with which the emails will be generated and sent to the profile 
+select the frequency of the calendar with which the emails will be generated and sent to the profile 
 
 
-.. topic:: 
+.. topic:: When and How
 
-          **Control input up to** Select when you want to be controlled. Current day, previous day or next days.
-
-          **Number of days to control** Choose how many days will be controled
-      
-          **Select how to send alert to each profil** chose how alerts will be sent, Internal alert, email, both or none
+   **Control input up to** 
+   
+   Select when you want to be controlled. Current day, previous day or next days.
+   
+   **Number of days to control** 
+   
+   Choose how many days will be controled
+         
+   **Send alert to resource** 
+   
+   chose how alerts will be sent, Internal alert, email, both or none
 
 
 .. warning::
