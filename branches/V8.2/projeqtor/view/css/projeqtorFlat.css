@@ -564,6 +564,8 @@ body .ProjeQtOrFlatBlue {
 
 .ProjeQtOrFlatBlue .verticalLayoutClass { background-image: url(customIcons/blue/verticalLayout.png); background-size: 24px 24px;background-repeat: no-repeat;}
 
+.ProjeQtOrFlatBlue .horizontalLayoutClass { background-image: url(customIcons/blue/horizontalLayout.png); background-size: 24px 24px;background-repeat: no-repeat;}
+
 .ProjeQtOrFlatBlue .changeActivityStreamClass { background-image: url(customIcons/blue/changeActivityStream.png); background-size: 24px 24px;background-repeat: no-repeat;}
 
 .ProjeQtOrFlatBlue .changeActivityStreamBotClass { background-image: url(customIcons/blue/changeActivityStreamBot.png); background-size: 24px 24px;background-repeat: no-repeat;}
@@ -1963,6 +1965,8 @@ body .ProjeQtOrFlatRed {
 
 .ProjeQtOrFlatRed .verticalLayoutClass { background-image: url(customIcons/red/verticalLayout.png); background-size: 24px 24px;background-repeat: no-repeat;}
 
+.ProjeQtOrFlatRed .horizontalLayoutClass { background-image: url(customIcons/red/horizontalLayout.png); background-size: 24px 24px;background-repeat: no-repeat;}
+
 .ProjeQtOrFlatRed .changeActivityStreamClass { background-image: url(customIcons/red/changeActivityStream.png); background-size: 24px 24px;background-repeat: no-repeat;}
 
 .ProjeQtOrFlatRed .changeActivityStreamBotClass { background-image: url(customIcons/red/changeActivityStreamBot.png); background-size: 24px 24px;background-repeat: no-repeat;}
@@ -3360,6 +3364,8 @@ body .ProjeQtOrFlatGreen {
 
 .ProjeQtOrFlatGreen .verticalLayoutClass { background-image: url(customIcons/green/verticalLayout.png); background-size: 24px 24px;background-repeat: no-repeat;}
 
+.ProjeQtOrFlatGreen .horizontalLayoutClass { background-image: url(customIcons/green/horizontalLayout.png); background-size: 24px 24px;background-repeat: no-repeat;}
+
 .ProjeQtOrFlatGreen .changeActivityStreamClass { background-image: url(customIcons/green/changeActivityStream.png); background-size: 24px 24px;background-repeat: no-repeat;}
 
 .ProjeQtOrFlatGreen .changeActivityStreamBotClass { background-image: url(customIcons/green/changeActivityStreamBot.png); background-size: 24px 24px;background-repeat: no-repeat;}
@@ -4756,6 +4762,8 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconLoginPassword { background-image: url(customIcons/grey/iconPassword.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px}
 
 .ProjeQtOrFlatGrey .verticalLayoutClass { background-image: url(customIcons/grey/verticalLayout.png); background-size: 24px 24px;background-repeat: no-repeat;}
+
+.ProjeQtOrFlatGrey .horizontalLayoutClass { background-image: url(customIcons/grey/horizontalLayout.png); background-size: 24px 24px;background-repeat: no-repeat;}
 
 .ProjeQtOrFlatGrey .changeActivityStreamClass { background-image: url(customIcons/grey/changeActivityStream.png); background-size: 24px 24px;background-repeat: no-repeat;}
 

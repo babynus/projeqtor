@@ -125,10 +125,10 @@
 		  </div>
 		  <div dojoType="dijit.layout.ContentPane" region="center"  style="width:<?php echo $widthDetailDiv; ?>">
 			  <div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
-			   <?php if (property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream') ) {?>
+			   <?php if (property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream') and Parameter::getUserParameter("paramRightDiv") !='2' ) {?>
 				  <div id="hideStreamButton" style="cursor:pointer;position:absolute; right:-2px; bottom:2px;z-index:999999">
-		        <a onClick="hideStreamMode(false);" id="buttonSwitchedStream" title="" ><span style="top:0px;display:inline-block;width:20px;height:22px;"><div class='iconHideStream22' style='' >&nbsp;</div></span></a>
-		      </div>
+		            <a onClick="hideStreamMode(false);" id="buttonSwitchedStream" title="" ><span style="top:0px;display:inline-block;width:20px;height:22px;"><div class='iconHideStream22' style='' >&nbsp;</div></span></a>
+		          </div>
 		     <?php }?>
 				  <div id="detailDiv" dojoType="dijit.layout.ContentPane" region="center" >
 				   <?php $noselect=true; include 'objectDetail.php'; ?>
@@ -155,7 +155,7 @@
               node.style.maxWidth=(newWidth-30)+"px";
              });
        </script>
-    <script type="dojo/connect" event="onLoad" args="evt">
+      <script type="dojo/connect" event="onLoad" args="evt">
         scrollInto();
 	  </script>
       <?php include 'objectStream.php';?>
