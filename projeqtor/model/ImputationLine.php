@@ -964,6 +964,8 @@ class ImputationLine {
                 echo ' > ';
                 echo htmlDisplayNumericWithoutTrailingZeros(Work::displayImputation($line->arrayPlannedWork[$i]->work));
                 echo '</div>';
+                $res = new ResourceAll($line->arrayPlannedWork[$i]->idResource, true);
+                echo '<input type="hidden" id="isResourceTeam_'.$nbLine.'_'.$i.'" value="'.$res->isResourceTeam.'"/>';
               }
               $colorStyle="";
               $colorClass="";

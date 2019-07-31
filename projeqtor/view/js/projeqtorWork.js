@@ -475,7 +475,11 @@ function enterRealAsPlanned(nbDays){
     for (day=1; day<=nbDays; day++) { 
       var workValue = dijit.byId('workValue_' + line + '_' + day);
       var plannedValue = dojo.byId('plannedValue_' + line + '_' + day);
-      if(plannedValue){        
+      var isResourceTeam = '';
+      if(dojo.byId('isResourceTeam_' + line + '_' + day)){
+    	  isResourceTeam = dojo.byId('isResourceTeam_' + line + '_' + day).value;
+      }
+      if(plannedValue && isResourceTeam != '1'){
         workValue.set('value',plannedValue.getAttribute("data-value"));
         cptUpdates++;
       }
