@@ -669,19 +669,25 @@ div#reportParametersDiv .label, div#reportParametersDiv label {
 
 .verticalLayoutClass {
   height:24px; width:24px; position: relative; top: 1px;
- background-image: url(../img/verticalLayout.png) ;
+ background-image: url(images/verticalLayout.png) ;
+ background-size: 24px 24px;
+}
+
+.horizontalLayoutClass {
+  height:24px; width:24px; position: relative; top: 1px;
+ background-image: url(images/horizontalLayout.png) ;
  background-size: 24px 24px;
 }
 
 .changeActivityStreamClass {
   height:24px; width:24px; position: relative; top: 1px;
- background-image: url(../img/changeActivityStream.png) ;
+ background-image: url(images/changeActivityStream.png) ;
  background-size: 24px 24px;
 }
 
 .changeActivityStreamBotClass {
   height:24px; width:24px; position: relative; top: 1px;
- background-image: url(../img/changeActivityStreamBot.png) ;
+ background-image: url(images/changeActivityStreamBot.png) ;
  background-size: 24px 24px;
 }
 /* Specific classes =========================================================== */
