@@ -20,6 +20,10 @@ User parameters screen allows configuration of personal settings.
 
 You can display the Users Parameters with the principal menu 
 
+You can also display the "Start Guide" if you uncheck the box "show this page at startup"
+
+The guide will appear on today's screen between messages and items to follow (according to your preferences) 
+
 
 .. figure:: /images/GUI/USERPARAM_BOX_AccessParam.png
    :scale: 70%
