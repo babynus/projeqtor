@@ -14,34 +14,26 @@
 Users
 -----
 
-.. sidebar:: Concepts 
-
-   * :ref:`projeqtor-roles`
-   * :ref:`profiles-definition`
-   * :ref:`user-ress-contact-demystify`
-   * :ref:`photo`
-
 The user is a person that will be able to connect to the application.
 
-.. note:: 
+.. attention:: 
 
-   * To be able to connect, the user must have a password and a user profile defined.
+   To be able to connect, the user must have a password and a user profile defined.
 
 .. _ldap_users:
 
 .. rubric:: ProjeQtOr and LDAP users
 
-* ProjeQtOr offers two modes of authentication.
+ProjeQtOr offers three modes of authentication.
 
  .. compound:: **ProjeQtOr users**
 
     * Users' information is kept in the application database.
     * Password policy and login behavior are managed by the application.
-
+    * See: :ref:`user_password`
     .. note::
        
-       * The users "admin" and "guest" are created during installation.
-
+       The users "admin" and "guest" are created during installation.
 
  .. compound:: **LDAP users**
 
@@ -49,6 +41,15 @@ The user is a person that will be able to connect to the application.
     * Users' information and password policy are managed in the external directory.
     * for each user from an LDAP, the word "comes from Ldap" will be displayed next to the user's name
       with possibility of modification according to the rights of the connected user
+    * See: :ref:`ldap_user`  
+
+ .. compound:: **SSO users**
+
+   * Allows users to connect to ProjeQtOr using the SSO protocol.
+   * Set entity ID, IDP certificate, unique login and logout, etc.
+   * Information message on creating a new user from SAML
+   * User information and password policy are handled by your SSO solution.
+   * See :ref:`SSO_Saml2`
       
 .. rubric:: Default user profile
 
@@ -61,21 +62,12 @@ The user is a person that will be able to connect to the application.
 * An API key is defined for the user.
 * This API key is used to encrypt the data for methods: PUT, PUSH and DELETE.
 
-
-.. raw:: latex
-
-    \newpage
-
-.. sidebar:: Other sections
-
-   * :ref:`Allocations<allocation-section>`   
-
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Users description section fields
-   :widths: 20, 80
+.. list-table:: Users description section fields - Required Field |ReqFieldLegend| 
+   :widths: 30, 70
    :header-rows: 1
 
    * - Field
@@ -84,7 +76,7 @@ The user is a person that will be able to connect to the application.
      - Unique Id for the user.
    * - Photo
      - Photo of the user.
-   * - **User name**
+   * - |RequiredField| User name
      - login id of the user.
    * - Real name
      - Name of the user.
@@ -92,7 +84,7 @@ The user is a person that will be able to connect to the application.
      - Initials of the user.
    * - Email address
      - Email address of the user. 
-   * - **Profile**
+   * - |RequiredField| Profile
      - Profile of the user.
    * - Locked
      - Flag used to lock the user, to prohibit connections.
@@ -105,29 +97,34 @@ The user is a person that will be able to connect to the application.
    * - Description
      - Complete description of the user.
 
-**\* Required field**
+.. sidebar:: Other sections
 
-.. topic:: Field: User name
+   * :ref:`Allocations<allocation-section>`   
 
-   * The user name must be unique.
+   **Concepts**
 
-.. topic:: Field: Is a contact
+   * :ref:`projeqtor-roles`
+   * :ref:`profiles-definition`
+   * :ref:`user-ress-contact-demystify`
+   * :ref:`photo`
+
+.. warning:: **User name**
+
+   The user name must be unique.
+
+.. topic:: Is a contact
    
    * Check this if you want created a contact to this user.
    * This user will then appear in the “Contact” list 
 
-.. topic:: Field: Is a resource
+.. topic:: Is a resource
 
    * Check this if you want created a resource to this user.
    * The user will then also appear in the “Resources” list.
-
-.. raw:: latex
-
-    \newpage
  
-.. rubric:: Section: Miscellanous
+.. rubric:: Section Miscellanous
 
-.. topic:: Button: Reset password
+.. topic:: Button Reset password
 
    * This button allows to reset password to default password.
    * Default password value is defined in :ref:`Global parameters<user-password-section>` screen.
@@ -136,7 +133,7 @@ The user is a person that will be able to connect to the application.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Users miscellaneous section fields
-   :widths: 20, 80
+   :widths: 30, 70
    :header-rows: 1
 
    * - Field
@@ -149,9 +146,9 @@ The user is a person that will be able to connect to the application.
      - Key string used by web service consumer.
 
 
-.. topic:: Button: Send information to the user
+.. topic:: Button Send information to the user
 
-   * This button allows to send by email to the user the login information.
+   This button allows to send by email to the user the login information.
 
 
 
