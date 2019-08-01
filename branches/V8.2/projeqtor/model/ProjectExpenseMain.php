@@ -300,7 +300,7 @@ class ProjectExpenseMain extends Expense {
           } 
           $this->realFullAmount=$this->realAmount+$this->realTaxAmount;
         }
-      } else {
+      } else if ($this->taxPct!=100) {
           $this->realTaxAmount=null;
           $this->realFullAmount=null;
       }  
