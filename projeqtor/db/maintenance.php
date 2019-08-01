@@ -874,7 +874,6 @@ if (beforeVersion($currVersion,"V8.2.0")) {
     }
     $MessageLegal->endDate='2010-01-01 00:00:00';
     $MessageLegal->save();
-    debugLog($MessageLegal);
     Sql::commitTransaction();
   }
 }
