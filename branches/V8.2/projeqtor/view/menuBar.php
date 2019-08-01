@@ -338,7 +338,16 @@
         </table>
       </div>
     </td>
-     <?php }?>  
+     <?php }?> 
+    <td width="29px">   
+      <div id="hideMenuBarShowButtonTop" style="cursor:pointer;position:relative; top:-11px;right:0px; z-index:949" >
+  		  <a onClick="hideMenuBarShowModeTop();" id="buttonSwitchedMenuBarTopShow" title="<?php echo i18n("buttonShowMenu");?>" >
+  		    <span style='display:inline-block;width:24px;height:22px;'>
+  		     <div style="position:absolute;top:1px;right:0px;height:26px;width:24px" dojoType="dijit.form.Button" iconClass="dijitButtonIcon iconHideStream22" class="detailButton">&nbsp;</div>
+  		    </span>
+  		  </a>
+		  </div>
+    </td> 
   </tr>
 </table>
 <div class="customMenuAddRemove"  id="customMenuAdd" onClick="customMenuAddItem();"><?php echo i18n('customMenuAdd');?></div>
