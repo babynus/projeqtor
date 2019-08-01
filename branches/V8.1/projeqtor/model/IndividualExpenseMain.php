@@ -43,7 +43,7 @@ class IndividualExpenseMain extends Expense {
   public $_sec_treatment;
   public $idStatus;  
   public $idResponsible;
-  public $_tab_2_2 = array('fullAmount','paymentDateShort', 'plannedAmount', 'realAmount');
+  public $_tab_2_2 = array('amount','paymentDateShort', 'plannedAmount', 'realAmount');
   public $plannedAmount;
   public $expensePlannedDate;
   public $realAmount;
@@ -74,6 +74,7 @@ class IndividualExpenseMain extends Expense {
     ';
 
   private static $_fieldsAttributes=array("id"=>"nobr", "reference"=>"readonly",
+                                  "scope"=>"hidden",
                                   "idProject"=>"required",
                                   "name"=>"required",
                                   "idIndividualExpenseType"=>"required",
@@ -205,10 +206,27 @@ class IndividualExpenseMain extends Expense {
       $colScript .= '    var curDate = new Date();';
       $colScript .= '    dijit.byId("expenseRealDate").set("value",curDate);';
       $colScript .= '  }';
+      $colScript .= '  if (this.checked && dijit.byId("paymentDate") && !dijit.byId("paymentDate").get("value")) {';
+      $colScript .= '    var curDate = new Date();';
+      $colScript .= '    dijit.byId("paymentDate").set("value",curDate);';
+      $colScript .= '  }';
+      $colScript .= '  formChanged();';
+      $colScript .= '</script>';
+    } else if ($colName=="paymentDate") {
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  if (this.value && dijit.byId("paymentDone")) {';
+      $colScript .= '    dijit.byId("paymentDone").set("checked",true);';
+      $colScript .= '  }';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
     }
+    
     return $colScript;
+  }
+  public function save() {
+    $this->plannedFullAmount=$this->plannedAmount;
+    $this->realFullAmount=$this->realAmount;
+    return parent::save();
   }
 }
 ?>
