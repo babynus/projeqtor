@@ -100,8 +100,17 @@ $showUserParameters=securityCheckDisplayMenu($menu->id,substr($menu->name,4));
               onClick="addAttachment('file');" title="<?php echo i18n('addPhoto');?> "><div style="font-size:80%;position:relative;top:32px"><?php echo i18n('addPhoto');?></div></div> 
    <?php } ?></td>
     <td>
-    <?php if (SSO::isEnabled()) {?>
-     <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnectSSO('welcome','<?php echo SSO::getCommonName(true);?>')">
+    <?php if (Parameter::getGlobalParameter('simuIndex')){?>
+     <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnectDataCloning('welcome','simu');">
+        <table style="width:122px;">
+          <tr>
+            <td> <div class="disconnectClass">&nbsp;</div> </td>
+            <td>&nbsp;&nbsp;<?php echo i18n('disconnect');?></td>
+          </tr>
+        </table>
+      </div>
+    <?php }else if (SSO::isEnabled()) {?>
+     <div class="pseudoButton disconnectTextClass" style="width:120px;height:35px;" title="<?php echo i18n('disconnectMessage');?>" onclick="disconnectSSO('welcome','<?php echo SSO::getCommonName(true);?>');">
         <table style="width:122px;">
           <tr>
             <td> <div class="disconnectClass">&nbsp;</div> </td>

@@ -2883,6 +2883,27 @@ function disconnectSSO(target,ssoCommonName) {
     }
   }
 }
+//Gautier #dataCloning
+function disconnectDataCloning(target,dataCloningName) {
+  if (!dataCloningName) dataCloningName='simu';
+  disconnectFunction = function() {
+    quitConfirmed = true;
+    extUrl="origin==disconnect&cleanCookieHash=true";
+      var callBack = function(){
+        showWait();
+        setTimeout('window.location = "../view/welcome.php"',100);
+      }
+      saveDataToSession("disconnect", extUrl, null, callBack);
+  };
+  if (!checkFormChangeInProgress()) {
+    if ( paramConfirmQuit != "NO"  && target!='welcome') {
+      var msg=i18n('confirmDisconnection');
+      showConfirm(msg, disconnectFunction);
+    } else {
+      disconnectFunction();
+    }
+  }
+}
 /**
  * Disconnect (kill current session)
  * 
