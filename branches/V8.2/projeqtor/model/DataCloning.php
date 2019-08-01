@@ -351,40 +351,58 @@ class DataCloning extends SqlElement{
 	  //COPY FOLDER and CODE
 	  if($dataCloning->idOrigin){
 	    $OriginData = new DataCloning($dataCloning->idOrigin);
-	    $dir_source = '../../projeqtorV8.2/simulation/'.$OriginData->nameDir;
+	    $dir_source = dirname(__DIR__)."/simulation/".$OriginData->nameDir;
+	    $dir_dest = dirname(__DIR__).'/simulation/'.$newPwd;
+	    $parameterP = "parameters_".$OriginData->nameDir.".php";
 	  }else{
-  	  $dir_source = '../../projeqtorV8.2';
+  	  $dir_source = dirname(__DIR__);
+  	  $parameterP = "parameters.php";
+  	  $dir_dest = '../simulation/'.$newPwd;
 	  }
-	  $dir_dest = '../../projeqtorV8.2/simulation/'.$newPwd;
 	  $nameDir = $newPwd;
-	  
 	  //create folder
 	  mkdir($dir_dest, 0777,true);
-	  
 	  $dir_iterator = new RecursiveDirectoryIterator($dir_source, RecursiveDirectoryIterator::SKIP_DOTS);
 	  $iterator = new RecursiveIteratorIterator($dir_iterator, RecursiveIteratorIterator::SELF_FIRST);
 	  
-	  // tool/parameterlocation
-	  $exceptionPath = array(".settings","simulation",".svn","deploy","test",".externalToolBuilders","api","db","manual","attach","cron","documents","import","logs","\files\report");
-	  $exceptionFile = array("simulation","deploy","test","api","db","manual");
-	  
+	  if(!$dataCloning->idOrigin){
+	    $exceptionPath = array(".settings","simulation",".svn","deploy","test",".externalToolBuilders","api","db","manual","attach","cron","documents","import","logs","\files\report");
+	    $exceptionFile = array("simulation","deploy","test","api","db","manual");
+	  }else{
+	    $exceptionPath = array(".settings",".svn","deploy","test",".externalToolBuilders","api","db","manual","attach","cron","documents","import","logs","\files\report");
+	    $exceptionFile = array("deploy","test","api","db","manual");
+	  }
 	  foreach($iterator as $element){
 	  	//parameter php
-	  	if($element->getBasename()=="parameters.php" AND (str_replace("plugin", '', $element->getPath()) == $element->getPath()) AND (str_replace("simulation", '', $element->getPath()) == $element->getPath())){
-	  		$parameterPhp  = $dir_dest . DIRECTORY_SEPARATOR . str_replace("parameters.php", "parameters_".$newPwd.".php",$iterator->getSubPathName());
-	  		copy($element,$parameterPhp);
-	  		$parameterPhp2 = "../".str_replace("parameters.php", "parameters_".$newPwd.".php",$iterator->getSubPathName());
-	  		$paramContext = file_get_contents($parameterPhp);
-	  		$paramContext = str_replace($paramDbName,'simu_'.$newPwd, $paramContext);
-	  		$paramContext .= "\n";
-	  		$paramContext .= '$simuIndex="'.$newPwd.'";';
-	  		file_put_contents($parameterPhp, $paramContext);
-	  		continue;
+	  	if($dataCloning->idOrigin){
+	  	  if($element->getBasename()==$parameterP){
+  	  	  $parameterPhp  = $dir_dest . DIRECTORY_SEPARATOR . str_replace($parameterP, "parameters_".$newPwd.".php",$iterator->getSubPathName());
+  	  	  copy($element,$parameterPhp);
+  	  	  $parameterPhp2 = "../".str_replace($parameterP, "parameters_".$newPwd.".php",$iterator->getSubPathName());
+  	  	  $paramContext = file_get_contents($parameterPhp);
+  	  	  $paramContext = str_replace('simu_'.$OriginData->nameDir,'simu_'.$newPwd, $paramContext);
+  	  	  $paramContext .= "\n";
+  	  	  $paramContext .= '$simuIndex="'.$newPwd.'";';
+  	  	  file_put_contents($parameterPhp, $paramContext);
+  	  	  continue;
+	  	  }
+	  	}else{
+  	  	if($element->getBasename()==$parameterP AND (str_replace("plugin", '', $element->getPath()) == $element->getPath()) AND (str_replace("simulation", '', $element->getPath()) == $element->getPath())){
+  	  		 $parameterPhp  = $dir_dest . DIRECTORY_SEPARATOR . str_replace("parameters.php", "parameters_".$newPwd.".php",$iterator->getSubPathName());
+  	  		 copy($element,$parameterPhp);
+  	  		 $parameterPhp2 = "../".str_replace("parameters.php", "parameters_".$newPwd.".php",$iterator->getSubPathName());
+  	  		$paramContext = file_get_contents($parameterPhp);
+  	  		$paramContext = str_replace($paramDbName,'simu_'.$newPwd, $paramContext);
+  	  		$paramContext .= "\n";
+  	  		$paramContext .= '$simuIndex="'.$newPwd.'";';
+  	  		file_put_contents($parameterPhp, $paramContext);
+  	  		continue;
+  	  	}
 	  	}
 	  	//exception
-	  	if((str_replace($exceptionPath, '', $element->getPath()) != $element->getPath()) OR (substr($element->getBasename(),0,1)==".") OR (in_array($element->getBasename(), $exceptionFile)) ){
-	  		continue;
-	  	}
+  	  if((str_replace($exceptionPath, '', $element->getPath()) != $element->getPath()) OR (substr($element->getBasename(),0,1)==".") OR (in_array($element->getBasename(), $exceptionFile)) ){
+  		 continue;
+  	  }
 	  	//end exception
 	  	if($element->isDir()){
 	  		mkdir($dir_dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
@@ -396,18 +414,20 @@ class DataCloning extends SqlElement{
 	  	}
 	  }
 	  
-	  //Param Location
-	  kill($paramLocation);
-	  if (! writeFile(' ',$paramLocation)) {
-	  	showError("impossible to write \'$paramLocation\' file, cannot write to such a file : check access rights");
+	  if(isset($paramLocation)){
+  	  //Param Location
+  	  kill($paramLocation);
+  	  if (! writeFile(' ',$paramLocation)) {
+  	  	showError("impossible to write \'$paramLocation\' file, cannot write to such a file : check access rights");
+  	  }
+  	  kill($paramLocation);
+  	  writeFile('<?php ' . "\n", $paramLocation);
+  	  if(isset($parameterPhp2)){
+  	   writeFile('$parametersLocation = \'' . $parameterPhp2 . '\';', $paramLocation);
+  	  }
 	  }
-	  kill($paramLocation);
-	  writeFile('<?php ' . "\n", $paramLocation);
-	  writeFile('$parametersLocation = \'' . $parameterPhp2 . '\';', $paramLocation);
-	   
 	  //BD
 	  $newPwd = 'simu_'.$newPwd;
-	  //connexion
 	  if($dataCloning->idOrigin){
 	    $PDO=$dataCloning->connectTestSimu('simu_'.$OriginData->nameDir);
 	  }else{
