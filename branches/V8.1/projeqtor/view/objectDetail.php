@@ -2106,6 +2106,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           } else if (substr($col, -16)=="ComponentVersion") {
             $idMenu='menuComponentVersion';
             $comboClass='ComponentVersion';
+          } else if ($col=='idBudgetItem') {
+            $idMenu='menuBudget';
           }
           $menu=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>$idMenu));
           $crit=array();
@@ -2163,7 +2165,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         if ($obj->isAttributeSetToField($col, 'canSearchForAll')) {
           $displayComboButtonCol='force';
-          // $displayDirectAccessButton=false;
+          //$displayDirectAccessButton=false;
         }
         if ($col=='idProfile' and !$obj->id and !$val and ($classObj=='Resource' or $classObj=='User')) { // set default
           $val=Parameter::getGlobalParameter('defaultProfile');
@@ -2392,7 +2394,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         echo $colScript;
         echo '</select>';
-        if ($displayDirectAccessButton or $displayComboButtonCol) {
+        if ($displayDirectAccessButton) {
           echo '<div id="'.$col.'ButtonGoto" ';
           echo ' title="'.i18n('showDirectAccess').'" style="float:right;margin-right:3px;'.$specificStyleWithoutCustom.'"';
           echo ' class="roundedButton  generalColClass '.$col.'Class">';
