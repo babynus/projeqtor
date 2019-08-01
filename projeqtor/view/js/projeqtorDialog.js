@@ -6318,6 +6318,7 @@ var switchedVisible='';
 var switchListMode='CLICK';
 function switchMode() {
   if (!switchedMode) {
+    console.log('1');
     switchedMode=true;
     //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonStandardMode');
     if (!dojo.byId("listDiv")) {
@@ -6337,6 +6338,7 @@ function switchMode() {
       showList();
     }
   } else {
+    console.log('2');
     switchedMode=false;
     //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonSwitchedMode');
     if (!dojo.byId("listDiv")) {
@@ -6365,6 +6367,7 @@ function switchMode2(paramToSend){
   var currentScreen=dojo.byId('objectClass').value;
   if (paramToSend=='1'){
     loadContent("objectMain.php?objectClass=" + currentScreen+"&paramScreen="+paramToSend, "centerDiv");
+    loadDiv("menuBar.php?paramScreen="+paramToSend,'iconMenuUserScreen');
     loadDiv("menuUserScreenOrganization.php?paramScreen="+paramToSend,"mainDivMenu");
   }else{
     loadContent("objectMain.php?objectClass=" + currentScreen+"&paramRightDiv="+paramToSend, "centerDiv");
