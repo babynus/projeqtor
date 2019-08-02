@@ -2,7 +2,7 @@
 
 .. title:: Requirements and Tests
 
-.. index:: ! Requirement
+.. index:: Requirement
 
 .. _requirement:
 
@@ -172,7 +172,7 @@ A requirement can be locked to ensure that its definition has not changed during
 
     \newpage
 
-.. index:: ! Test case
+.. index:: Test case
 
 .. _test-case:
 
@@ -189,7 +189,7 @@ You may define several tests to check a requirement, or check several requiremen
 
 The test case is defined for a project, a product or one these components.
 
-.. index:: ! Test case (Run status)
+.. index:: Test case (Run status)
 
 .. _test-case-run-status:
 
@@ -334,7 +334,7 @@ The test case is defined for a project, a product or one these components.
 
     \newpage
 
-.. index:: ! Test session
+.. index:: Test session
 
 .. _test-session:
 

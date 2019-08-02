@@ -6,7 +6,7 @@
 
 .. title:: Customers & Contacts
 
-.. index:: ! Customer
+.. index:: Customer
 
 .. _customer:
 
@@ -72,8 +72,8 @@ List of the contacts known in the entity of the customer.
 
     \newpage
 
-.. index:: ! Contact (Screen)
-.. index:: ! Customer (Contact) 
+.. index:: Contact (Screen)
+.. index:: Customer (Contact) 
 
 .. _contact:
 

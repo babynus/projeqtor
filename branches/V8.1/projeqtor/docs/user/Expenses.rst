@@ -2,8 +2,8 @@
 
 .. title:: Expenses
 
-.. index:: ! Expense
-.. index:: ! Project (Expense)
+.. index:: Expense
+.. index:: Project (Expense)
 
 .. _Expenses:
 
@@ -150,7 +150,7 @@ This section brings and displays the :ref:`project-expense` lines in the details
 
     \newpage
 
-.. index:: ! Expense (Call_for_tender)
+.. index:: Expense (Call_for_tender)
 
 .. _call-for-tenders:
 
@@ -243,7 +243,7 @@ You have the possibility to create some different evaluation criterias. Thereaft
 
     \newpage
 
-.. index:: ! Expenses (Provider Tenders)
+.. index:: Expenses (Provider Tenders)
 
 .. _tenders:
 
@@ -335,7 +335,7 @@ Provider Tenders
 
     \newpage
 
-.. index:: ! Expenses (Order to provider)
+.. index:: Expenses (Order to provider)
 
 .. _order_providers:
 
@@ -435,7 +435,7 @@ Orders to provider
 
     \newpage
 
-.. index:: ! Expenses (Terms of payment to provider)
+.. index:: Expenses (Terms of payment to provider)
 
 .. _Term_payment:
 
@@ -517,7 +517,7 @@ In this screen, you can save, organize, track and edit your payment dates to you
 
     \newpage
 
-.. index:: ! Expenses (Provider Bills)
+.. index:: Expenses (Provider Bills)
 
 .. Provider_Bills:
 
@@ -588,7 +588,7 @@ Provider bills
 
     \newpage
 
-.. index:: ! Expense (Terms of payment to provider)
+.. index:: Expense (Terms of payment to provider)
 
 .. _Term_payment:
 
@@ -657,7 +657,7 @@ Follow the payment of your supplier invoices to better organize your general cas
 
     \newpage
 
-.. index:: ! Expense (Individual)
+.. index:: Expense (Individual)
 
 .. _individual-expense:
 
@@ -746,7 +746,7 @@ Planned amount will help to have an overview of project total costs, even before
     \newpage
 
 
-.. index:: ! Expense (Project)
+.. index:: Expense (Project)
 
 .. _project-expense:
 

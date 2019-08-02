@@ -2,7 +2,7 @@
 
 .. title:: Risk & Issue Management
 
-.. index:: ! Risk 
+.. index:: Risk 
 
 .. _risk:
 
@@ -19,7 +19,7 @@ The risk management plan is a key point to project management :
  - Follow-up actions.
  - Identify risks that finally occur (becoming an issue).
 
-.. index:: ! Risk (Contingency reserve)
+.. index:: Risk (Contingency reserve)
 
 .. rubric:: Contingency reserve
 
@@ -120,7 +120,7 @@ The risk management plan is a key point to project management :
 
     \newpage
 
-.. index:: ! Opportunity 
+.. index:: Opportunity 
 
 .. _opportunity:
 
@@ -135,7 +135,7 @@ Opportunities
    
 An opportunity can be seen as a positive risk. It is not a threat but the opportunity to have a positive impact to the project.
 
-.. index:: ! Opportunity (Potential gain) 
+.. index:: Opportunity (Potential gain) 
    
 .. rubric:: Potential gain
 
@@ -256,7 +256,7 @@ Criticality numeric value is determined by a simple equation as follows:
 
     \newpage
 
-.. index:: ! Issue 
+.. index:: Issue 
 
 .. _issue:
 
@@ -347,7 +347,7 @@ Actions must be defined to solve the issue.
 
     \newpage
 
-.. index:: ! Action 
+.. index:: Action 
 
 
 .. _action:

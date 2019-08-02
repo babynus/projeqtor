@@ -6,7 +6,7 @@
 
 .. title:: Documents
 
-.. index:: ! Documents 
+.. index:: Documents 
 
 .. _document:
 
@@ -46,7 +46,7 @@ When adding a version to the document, the approvers are automatically added to 
 
 .. title:: Document directories management
 
-.. index:: ! Document (Directories management) 
+.. index:: Document (Directories management) 
 
 .. _document-directory:
 

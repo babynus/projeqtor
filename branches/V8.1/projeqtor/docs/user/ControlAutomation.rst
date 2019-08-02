@@ -10,7 +10,7 @@ Control Automation
 ******************
 
 
-.. index:: ! Workflow
+.. index:: Workflow
 
 .. _workflow:
 
@@ -110,7 +110,7 @@ The workflow diagram presents a visual representation of the workflow displaying
 
     \newpage
 
-.. index:: ! Email (template)
+.. index:: Email (template)
 
 .. _email-template:
 
@@ -205,7 +205,7 @@ Click the insert button
 The tag appears in the body of the text
     
 
-.. index:: ! Email (Event)
+.. index:: Email (Event)
 
 .. _mail-on-event:
 
@@ -263,7 +263,7 @@ Events are defined on an element and element type.
 
     \newpage
 
-.. index:: ! Ticket (Delay)
+.. index:: Ticket (Delay)
 
 .. _delay-for-ticket:
 
@@ -314,9 +314,9 @@ It is possible to define a default delay for tickets, for each ticket type and e
 
     \newpage
 
-.. index:: ! Indicator (Definition)
-.. index:: ! Email (Indicator)
-.. index:: ! Internal alert (Indicator)
+.. index:: Indicator (Definition)
+.. index:: Email (Indicator)
+.. index:: Internal alert (Indicator)
 
 .. _indicator:
 
@@ -373,8 +373,8 @@ For each indicator a warning value and an alert value can be defined.
 
     \newpage
 
-.. index:: ! Predefined notes
-.. index:: ! Note (Predefined)
+.. index:: Predefined notes
+.. index:: Note (Predefined)
 
 .. _predefined-notes:
 
@@ -422,7 +422,7 @@ Selecting an item in the list will automatically fill in the note text field.
 
     \newpage
 
-.. index:: ! Checklist (Definition)
+.. index:: Checklist (Definition)
 
 .. _checklist-definition:
 
@@ -501,8 +501,8 @@ A checklist is built from checklist lines.
 
     \newpage
 
-.. index:: ! Email (Receivers)
-.. index:: ! Internal alert (Receivers)
+.. index:: Email (Receivers)
+.. index:: Internal alert (Receivers)
 
 .. _receivers-list:
 
@@ -552,7 +552,7 @@ A description of receivers below.
 
     \newpage
 
-.. index:: ! KPI
+.. index:: KPI
 
 .. _kpi-definitions:
 
@@ -611,7 +611,7 @@ It is possible to attributes tresholds lines to KPI.
 
     \newpage
 
-.. index:: ! JobList
+.. index:: JobList
 
 .. _jobList:
 
@@ -657,7 +657,7 @@ A JobList is built from JobList lines.
 
    Looking like CheckLists with no choice.
 
-.. index:: ! Notification
+.. index:: Notification
 
 .. _notifications:
 

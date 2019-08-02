@@ -2,7 +2,7 @@
 
 .. title:: Plug-ins management
 
-.. index:: ! Plug-ins (Management)
+.. index:: Plug-ins (Management)
 
 Plug-ins management
 -------------------

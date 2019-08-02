@@ -7,8 +7,8 @@
 .. title:: Today (Dashboard)
 
 
-.. index:: ! Today
-.. index:: ! Dashboard
+.. index:: Today
+.. index:: Dashboard
 
 Today (Dashboard)
 =================
@@ -24,7 +24,7 @@ This parameter defines the screen that will be displayed first on each connectio
 The definition of visibility is based on the access rights of each user
 
 
-.. index:: ! Message (Section)
+.. index:: Message (Section)
 
 .. _messages-section:
 

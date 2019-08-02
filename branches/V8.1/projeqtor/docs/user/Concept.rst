@@ -741,7 +741,7 @@ Glossary
     \newpage
 
 
-.. index:: ! Profile (Definition)
+.. index:: Profile (Definition)
 
 .. _profiles-definition:
 
@@ -1163,7 +1163,7 @@ A resource assignment contains data about work on task (planned,  real, left and
     \newpage
 
 
-.. index:: ! Resource (Function & Cost)
+.. index:: Resource (Function & Cost)
 
 .. _resource-function-cost:
 
@@ -1201,7 +1201,7 @@ Resource function and cost
 
     \newpage
 
-.. index:: ! Resource (Calendar) 
+.. index:: Resource (Calendar) 
 
 .. _resource-calendar:
 
@@ -1265,9 +1265,9 @@ A calendar is defined for a type of resources and each resource is attached to a
 
 .. title:: Contexts
 
-.. index:: ! Context
-.. index:: ! Ticket (Context)
-.. index:: ! Test case (Environment)  
+.. index:: Context
+.. index:: Ticket (Context)
+.. index:: Test case (Environment)  
 
 .. _context:
 

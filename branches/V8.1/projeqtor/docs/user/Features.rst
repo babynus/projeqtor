@@ -18,7 +18,7 @@ It proposes a unique interface
 
 It offers all the features needed to different Project Management actors under a unique collaborative interface.
 
-.. index:: ! Start guide
+.. index:: Start guide
 
 .. _start_guide: 
 
@@ -38,7 +38,7 @@ Start guide
    
    
 
-.. index:: ! Planning management
+.. index:: Planning management
 
 .. _planning_management:
 
@@ -158,7 +158,7 @@ You can display the planning for each resource, but also by team, by pool or you
 
     \newpage
 
-.. index:: ! Resource management
+.. index:: Resource management
 
 Resource management
 *******************
@@ -225,7 +225,7 @@ Moreover, updating the left work allows to recalculate the planning taking into 
 
     \newpage
 
-.. index:: ! Tickets management
+.. index:: Tickets management
 
 Tickets management
 ******************
@@ -265,7 +265,7 @@ Elements created as simple tickets are also visible as Tickets, and vice versa.
 
     \newpage
 
-.. index:: ! Costs management
+.. index:: Costs management
 
 Costs management
 ****************
@@ -320,7 +320,7 @@ ProjeQtOr  can manage various financial elements found on a project: Quotation (
 
     \newpage
 
-.. index:: ! Quality management
+.. index:: Quality management
 
 Quality management
 ******************
@@ -380,7 +380,7 @@ In addition, all updates are tracked on each item to retain (and display) a hist
    * :ref:`control_automation`
    * :ref:`report`
 
-.. index:: ! Risks management
+.. index:: Risks management
 
 Risks management
 ****************
@@ -430,7 +430,7 @@ It is also appropriate to provide mitigation actions for identified risks that d
 
     \newpage
 
-.. index:: ! Perimeter management
+.. index:: Perimeter management
 
 Perimeter management
 ********************
@@ -486,7 +486,7 @@ This also allows to know, in the case of Bug Tracking, the version on which a pr
 
     \newpage
 
-.. index:: ! Document management
+.. index:: Document management
 
 Documents management
 ********************
@@ -526,7 +526,7 @@ Document can be versioning and an approver process can be defined.
 
     \newpage
 
-.. index:: ! Commitments management
+.. index:: Commitments management
 
 Commitments management
 **********************
@@ -558,7 +558,7 @@ Test sessions group test cases to be executed for a particular purpose.
    * :ref:`requirements-dashboard`   
    
 
-.. index:: ! Humans Resources
+.. index:: Humans Resources
 
 .. title:: Humans Resources
 
@@ -607,7 +607,7 @@ This system comes in addition to the standards of the management of absences
 
 
 
-.. index:: ! Tools
+.. index:: Tools
 
 Tools
 *****

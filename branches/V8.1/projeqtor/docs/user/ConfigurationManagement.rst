@@ -17,7 +17,7 @@ The product and component is done on screens:
 * :ref:`component-version`
 * :ref:`versions-planning`
 
-.. index:: ! Product
+.. index:: Product
 
 .. _product:
 
@@ -92,7 +92,7 @@ Allows to link components to product.
 
    Box checked "Show projects linked to versions" allows to display projects linked.
 
-.. index:: ! Product (Version)
+.. index:: Product (Version)
 
 .. _product-version:
 
@@ -189,7 +189,7 @@ The box "Done" is checked when the real date field is set.
 
     \newpage
 
-.. index:: ! Component
+.. index:: Component
 
 .. _component:
 
@@ -247,7 +247,7 @@ Possibility to define component types and component versions that will only be u
 
     \newpage
 
-.. index:: ! Component (Version)
+.. index:: Component (Version)
 
 .. _component-version:
 

@@ -5,7 +5,7 @@
     \newpage
 
 
-.. index:: ! Report
+.. index:: Report
 
 .. _report:
 
@@ -50,7 +50,7 @@ A list of reports is available in different categories.
 
     \newpage
 
-.. index:: ! Report (Favorite)
+.. index:: Report (Favorite)
 
 .. _favorite_report:
 
@@ -83,7 +83,7 @@ Select a report to display (in print mode), without leaving the current screen.
 
     \newpage
 
-.. index:: ! Report (Favorite)
+.. index:: Report (Favorite)
 
 .. _filter_report:  
    
@@ -110,7 +110,7 @@ You can choose from many criteria to create your filter
 
     \newpage
 
-.. index:: ! Report (Favorite)
+.. index:: Report (Favorite)
 
 .. _sending_report:
    
