@@ -5,8 +5,8 @@
     \newpage
 
 
-.. index:: ! Diary
-.. index:: ! Resource (Diary)
+.. index:: Diary
+.. index:: Resource (Diary)
 
 Diary
 -----

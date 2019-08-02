@@ -2,7 +2,7 @@
 
 .. title:: Global Parameters
 
-.. index:: ! Global Parameters
+.. index:: Global Parameters
 
 .. _global_parameters:
 
@@ -47,8 +47,8 @@ Open days
    This parameter are taken into account in : **working days on calendars**, 
    the working days on the calculation and the display, the working days on the display of real work allocation.
 
-.. index:: ! Real work allocation (Unit for work)
-.. index:: ! Workload (Unit form work)
+.. index:: Real work allocation (Unit for work)
+.. index:: Workload (Unit form work)
 
 .. _unitForWork-section:
 
@@ -71,7 +71,7 @@ Units for work
 
   * Allows to set number of hours per day.
 
-.. index:: ! Real work allocation (Behavior)
+.. index:: Real work allocation (Behavior)
 
 .. _realWorkAllocation-section:
 
@@ -930,7 +930,7 @@ Allows to set up a secure SSL connection
    and you'll have to manually fix parameters in the database.  
     
 
-.. index:: ! Special Fields
+.. index:: Special Fields
 
 .. _administration-special-fields:
 

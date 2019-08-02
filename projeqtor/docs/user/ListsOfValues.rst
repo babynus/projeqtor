@@ -2,7 +2,7 @@
 
 .. title:: Lists of values
 
-.. index:: ! Function - Lists of values
+.. index:: Function - Lists of values
 
 Lis of Values
 #############
@@ -49,7 +49,7 @@ The function defines the generic competency of a resource.
 
     \newpage
 
-.. index:: ! Status - Lists of values
+.. index:: Status - Lists of values
 
 .. _status:
 
@@ -136,7 +136,7 @@ See: :ref:`workflow`.
 
     \newpage
 
-.. index:: ! Resolutions - Lists of values
+.. index:: Resolutions - Lists of values
 
 .. _resolution:
 
@@ -171,7 +171,7 @@ Allows to define different kinds of resolution for tickets.
 
 
 
-.. index:: ! Quality level - Lists of values
+.. index:: Quality level - Lists of values
 
 .. _quality-level:
 
@@ -218,7 +218,7 @@ It defines in a visual way the global conformity of the project.
     \newpage
 
 
-.. index:: ! Health status - Lists of values
+.. index:: Health status - Lists of values
 
 .. _health-status:
 
@@ -264,7 +264,7 @@ It is displayed on Today screen, for each project, as a Red / Amber / Green traf
 
 
 
-.. index:: ! Overall progress - Lists of values
+.. index:: Overall progress - Lists of values
 
 .. _overall-progress:
 
@@ -302,7 +302,7 @@ It is displayed on Today screen, for each project.
     \newpage
 
 
-.. index:: ! Trend - Lists of values
+.. index:: Trend - Lists of values
 
 .. _trend:
 
@@ -347,7 +347,7 @@ It is displayed on Today screen, for each project.
    * You can define your own icons list (see: administration guide).
 
 
-.. index:: ! Likelihood - Lists of values
+.. index:: Likelihood - Lists of values
 
 .. _likelihood:
 
@@ -393,7 +393,7 @@ The likelihood is the probability of a risk or an opportunity to occur.
     \newpage
 
 
-.. index:: ! Criticality - Lists of values
+.. index:: Criticality - Lists of values
 
 .. _criticality:
 
@@ -438,7 +438,7 @@ The criticality is the importance of an element to its context.
 
 
 
-.. index:: ! Severity - Lists of values
+.. index:: Severity - Lists of values
 
 .. _severity:
 	
@@ -479,7 +479,7 @@ The severity designs the level of negative or positive impact the risk or opport
     \newpage
 
 
-.. index:: ! Urgency - Lists of values
+.. index:: Urgency - Lists of values
 
 .. _urgency:
 
@@ -516,7 +516,7 @@ The ticket urgency is an element given by the requestor to indicate the quicknes
 
 
 
-.. index:: ! Priority - Lists of values
+.. index:: Priority - Lists of values
 
 .. _priority:
 
@@ -557,7 +557,7 @@ The ticket priority defines the order to treat different tickets.
     \newpage
 
 
-.. index:: ! Risk level - Lists of values
+.. index:: Risk level - Lists of values
 
 .. _risk-level:
 
@@ -591,7 +591,7 @@ The risk level measures the technical risk of implementation of a requirement.
 
 
 
-.. index:: ! Feasibility - Lists of values
+.. index:: Feasibility - Lists of values
 
 .. _feasibility:
 
@@ -631,7 +631,7 @@ The feasibility defines the first analysis of implementation of a requirement.
     \newpage
 
 
-.. index:: ! Efficiency - Lists of values
+.. index:: Efficiency - Lists of values
 
 .. _efficiency:
 
@@ -665,7 +665,7 @@ The efficiency measures the result of an action.
 
 
 
-.. index:: ! Payment deadline - Lists of values
+.. index:: Payment deadline - Lists of values
 
 .. _payment-deadline:
 
@@ -706,7 +706,7 @@ The payment deadline is stated on the bill.
     \newpage
 
 
-.. index:: ! Payment method - Lists of values
+.. index:: Payment method - Lists of values
 
 .. _payment-method:
 
@@ -737,7 +737,7 @@ The mode of payment.
    
 
 
-.. index:: ! Delivery mode - Lists of values
+.. index:: Delivery mode - Lists of values
 
 .. _delivery-mode:
 
@@ -775,7 +775,7 @@ The mode of delivery.
     \newpage
 
 
-.. index:: ! Measure unit - Lists of values
+.. index:: Measure unit - Lists of values
 
 .. _measure-unit:
 

@@ -2,7 +2,7 @@
 
 .. title:: Review logs
 
-.. index:: ! Meeting 
+.. index:: Meeting 
 
 .. _meeting:
 
@@ -27,22 +27,20 @@ Each meeting is displayed in the agenda
 * You can assign project resources (named attendees).
 * You have progress section that allows for followed resources work and cost. 
 
-.. sidebar:: Other sections
+.. rubric:: Section Description
 
+.. sidebar:: Other sections
 
    * :ref:`Attendees<attendees-section>`
    * :ref:`Progress<progress-section-meeting>`
-   * :ref:`Predecessor and Sucessor element<predSuces-element-section>`
+   * :ref:`Predecessor and Sucessor <predSuces-element-section>`
    * :ref:`Linked element<linkElement-section>`   
-   * :ref:`Attachments<attachment-section>`   
+   * :ref:`Attachments<attachment-section>`
    * :ref:`Notes<note-section>`   
-
-.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: |ReqFieldLegend| Required field
-   :widths: 40, 60
    :header-rows: 1
 
    * - Field
@@ -73,18 +71,11 @@ Each meeting is displayed in the agenda
 * Allows to send the email to attendees.
 * They will receive the invitation in their calendar management tool. 
 
-
-.. raw:: latex
-
-    \newpage
-
-
 .. rubric:: Section Treatment
 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: |ReqFieldLegend| Required field
-   :widths: 40, 60
    :header-rows: 1
 
    * - Field
@@ -128,7 +119,7 @@ Each meeting is displayed in the agenda
 
     \newpage
 
-.. index:: ! Meeting (Periodic)  
+.. index:: Meeting (Periodic)  
 
 .. _periodic-meeting:
 
@@ -158,14 +149,7 @@ Periodic meeting is a way to define some meetings that will occur on a regular b
 .. note:: Each periodic meeting is displayed in Gantt Chart under the parent meeting.
       
       .. figure:: /images/GUI/REVIEWLOGS_ZONE_Gantt-PeriodMeetings.png
-         :alt: displaying periodic meetings in the Gantt chart
-
-.. sidebar:: Other sections
-
-   * :ref:`Attendees<attendees-section>`
-   * :ref:`Progress<progress-section-meeting>`
-   * :ref:`Predecessor and Sucessor<predSuces-element-section>`
-   * :ref:`Notes<note-section>`   
+         :alt: displaying periodic meetings in the Gantt chart 
    
   
 .. rubric:: Update on a periodic meeting
@@ -184,10 +168,16 @@ Periodic meeting is a way to define some meetings that will occur on a regular b
 
 .. rubric:: Section Description
 
+.. sidebar:: Other sections
+
+   * :ref:`Attendees<attendees-section>`
+   * :ref:`Progress<progress-section-meeting>`
+   * :ref:`Predecessor and Sucessor<predSuces-element-section>`
+   * :ref:`Notes<note-section>`  
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: |ReqFieldLegend| Required field
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -210,7 +200,6 @@ Periodic meeting is a way to define some meetings that will occur on a regular b
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -227,7 +216,6 @@ Periodic meeting is a way to define some meetings that will occur on a regular b
 .. tabularcolumns:: |l|l|
 
 .. list-table:: |ReqFieldLegend| Required field
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -259,7 +247,7 @@ Periodic meeting is a way to define some meetings that will occur on a regular b
 Attendees section
 -----------------
 
-This section allows to define the list of attendees to the meeting.
+**This section allows to define the list of attendees to the meeting.**
 
 * Meeting is a task you can assign project resources.
 
@@ -283,9 +271,9 @@ This section allows to define the list of attendees to the meeting.
 
 .. note:: Mandatory participant
 
-   * The icon |iconStar| indicates that the presence of the participant is mandatory
+   The icon |iconStar| indicates that the presence of the participant is mandatory
  
-   * More detail about how assigned project resources, see: :ref:`assignment-section` section.
+   More detail about how assigned project resources, see: :ref:`assignment-section` section.
    
 .. rubric:: Other attendees
 
@@ -296,13 +284,13 @@ Extra list of persons attending (or expecting to attend) the meeting, in complet
 
 .. note::
 
-   * Duplicate email addresses in the attendee list will automatically be removed.
+   Duplicate email addresses in the attendee list will automatically be removed.
 
 .. raw:: latex
 
     \newpage
 
-.. index:: ! Decision
+.. index:: Decision
 
 .. _decision: 
 
@@ -313,18 +301,17 @@ Decisions are stored to keep track of important decisions, when, where and why t
 
 You can link a decision to a meeting to rapidly find the minutes where the decision is described.
 
+.. rubric:: Section Description
+
 .. sidebar:: Other sections
 
    * :ref:`Linked element<linkElement-section>`   
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
 
-.. rubric:: Section Description
-
 .. tabularcolumns:: |l|l|
 
 .. list-table:: |ReqFieldLegend| Required field
-   :widths: 40, 60
    :header-rows: 1
 
    * - Field
@@ -345,7 +332,6 @@ You can link a decision to a meeting to rapidly find the minutes where the decis
 .. tabularcolumns:: |l|l|
 
 .. list-table:: |ReqFieldLegend| Required field
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -375,7 +361,7 @@ You can link a decision to a meeting to rapidly find the minutes where the decis
 
     \newpage
 
-.. index:: ! Question 
+.. index:: Question 
 
 .. _question:
 
@@ -401,18 +387,17 @@ Possibility to define indicators to follow the respect of dates values.
  .. describe:: Respect of initial due date
  .. describe:: Respect of planned due date
 
+.. rubric:: Section Description
+
 .. sidebar:: Other sections
 
    * :ref:`Linked element<linkElement-section>`   
    * :ref:`Attachments<attachment-section>`   
-   * :ref:`Notes<note-section>`   
-
-.. rubric:: Section Description
-
+   * :ref:`Notes<note-section>`
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: |ReqFieldLegend| Required field
-   :widths: 40, 60
    :header-rows: 1
 
    * - Field
@@ -428,12 +413,13 @@ Possibility to define indicators to follow the respect of dates values.
    * - :term:`Description`
      - Complete description of the question.
 
+   
+
 .. rubric:: Section Answer
 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: |ReqFieldLegend| Required field
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -463,7 +449,7 @@ Possibility to define indicators to follow the respect of dates values.
 
     \newpage
     
-.. index:: ! Deliverable
+.. index:: Deliverable
 
 .. _deliverables:
 
@@ -487,7 +473,6 @@ Deliverables links with Milestones.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: |ReqFieldLegend| Required field
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -507,9 +492,9 @@ Deliverables links with Milestones.
      
 .. note::
 
-   * You can estimated quality value for deliverable and this will produce a KPI. 
+   You can estimated quality value for deliverable and this will produce a KPI. 
       
-   * See: :ref:`kpi-definitions`
+   See: :ref:`kpi-definitions`
   
 .. raw:: latex
 
@@ -520,14 +505,13 @@ Deliverables links with Milestones.
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Validation
-   * - Delivery statu
+   * - Delivery status
      - Actual :term:`status` of the delivery.
-   * - Deliverable w
+   * - Deliverable
      - Weight of the quality of the deliverable.
    * - Responsible
      - to name
@@ -542,7 +526,7 @@ To follow life cycle management on deliverables (status managed as a workflow)
 
     \newpage
 
-.. index:: ! Incoming
+.. index:: Incoming
     
 .. _incomings:
 
@@ -565,7 +549,7 @@ Incomings links with Milestones.
 
     \newpage
 
-.. index:: ! Deliveries
+.. index:: Deliveries
     
 .. _deliveries:
 
@@ -585,7 +569,6 @@ Added list of deliverables integrated in delivery.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: |ReqFieldLegend| Required field
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -603,19 +586,18 @@ Added list of deliverables integrated in delivery.
    * - Description
      - Description of the delivery. 
 
+.. rubric:: Section Validation
+
 .. sidebar:: Other sections
    
    * :ref:`Deliverables`
    * :ref:`Linked element<linkElement-section>`   
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`
-
-.. rubric:: Section Validation
-
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 40, 60
    :header-rows: 1
 
    * - Field

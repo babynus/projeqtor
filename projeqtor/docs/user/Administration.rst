@@ -2,7 +2,7 @@
 
 .. title:: Administration
 
-.. index:: ! Administration console
+.. index:: Administration console
 
 .. _admin-console:
 
@@ -23,9 +23,9 @@ Administration Console
 
 Administration console allows to execute administration tasks on application.
 
-.. index:: ! Internal alert (Background tasks)
-.. index:: ! Email (Background tasks)
-.. index:: ! Import data (Background tasks)
+.. index:: Internal alert (Background tasks)
+.. index:: Email (Background tasks)
+.. index:: Import data (Background tasks)
 
 
 Background tasks
@@ -43,14 +43,14 @@ Starts and stops background jobs that process and periodically checks the flags 
    :alt: Background tasks in Admin
    
    
-.. index:: ! Internal alert (Send)
+.. index:: Internal alert (Send)
 
 Send an internal alert
 ----------------------
 
 * Allows to send an internal alert to users.
 
-.. index:: ! Connection (Management)
+.. index:: Connection (Management)
 
 .. _manage_connection:
 
@@ -92,9 +92,9 @@ Consistency check
 
 * This feature available on the administration screen also automatically corrects detected issues
 
-.. index:: ! Email (Maintenance of Data)
-.. index:: ! Internal alert (Maintenance of Data)
-.. index:: ! Connection (Maintenance of Data)
+.. index:: Email (Maintenance of Data)
+.. index:: Internal alert (Maintenance of Data)
+.. index:: Connection (Maintenance of Data)
 
 Maintenance of Data
 -------------------
@@ -105,7 +105,7 @@ Maintenance of Data
   * Delete history of connections. 
   * Updating references for any kind of element.
 
-.. index:: ! Log file (Maintenance)   
+.. index:: Log file (Maintenance)   
 
 Log files maintenance
 ---------------------

@@ -17,7 +17,7 @@ It is a representation of a connected graph, evaluated and oriented, which makes
 
 This chapter offers many features that will be described in the next sections
 
-.. index:: ! Gantt chart (Planning)
+.. index:: Gantt chart (Planning)
 
 Planning
 ========
@@ -508,7 +508,7 @@ Real end date > Validated end date
 
     \newpage
 
-.. index:: ! Project planning
+.. index:: Project planning
 
 .. _project-planning:
 
@@ -666,7 +666,7 @@ The global planning allows to create and visualize any type of element (project,
 
 
 
-.. index:: ! Gantt chart (Projects portfolio)
+.. index:: Gantt chart (Projects portfolio)
 
 Projects portfolio
 ==================
@@ -699,7 +699,7 @@ It displays summary and project dependencies only.
 
     \newpage
 
-.. index:: ! Gantt chart (Resource planning)
+.. index:: Gantt chart (Resource planning)
 
 Resource Planning
 =================

@@ -2,7 +2,7 @@
 
 .. title:: Requirements dashboard
 
-.. index:: ! Requirement (Dashboard)
+.. index:: Requirement (Dashboard)
 
 .. _requirements-dashboard:
 

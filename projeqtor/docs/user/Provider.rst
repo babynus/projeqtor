@@ -6,7 +6,7 @@
 
 .. title:: Providers
 
-.. index:: ! Provider
+.. index:: Provider
 
 .. _provider:
 

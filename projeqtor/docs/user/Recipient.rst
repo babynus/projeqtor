@@ -6,8 +6,8 @@
 
 .. title:: Recipients
 
-.. index:: ! Recipient
-.. index:: ! Bill (Recipient) 
+.. index:: Recipient
+.. index:: Bill (Recipient) 
 
 .. _recipient:
 

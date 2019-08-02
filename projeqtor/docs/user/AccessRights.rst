@@ -1,8 +1,11 @@
 .. include:: ImageReplacement.txt
 
-.. index:: ! Access rights
+.. index:: Access rights
 
 .. _Acces_Right:
+
+Acces Rights
+************
 
 This section allows the fine management of the rights as well as the management of the modules
 
@@ -45,10 +48,11 @@ This screen is then accessible via a dedicated menu in the Acces Right
 * and the notifications.
 
 .. note:: 
-   * Each module can be installed independently.
-   * Each module is described and explained on ProjeQtor
+   Each module can be installed independently.
+   
+   Each module is described and explained on ProjeQtor
 
-.. index:: ! Profiles
+.. index:: Profiles
 
 .. _profiles: 
 
@@ -85,8 +89,9 @@ It remains between square brackets because it does not exist in :ref:`translatab
       :alt: New profil details zone
       :align: center
       
-   * The value of field "Name" must be a significant name and must not contain spaces or special characters.
-   * Ideally, the value of the field should start with "profile" (to be easily identified in the translation table).
+   The value of field "Name" must be a significant name and must not contain spaces or special characters.
+   
+   Ideally, the value of the field should start with "profile" (to be easily identified in the translation table).
 
 The restriction zone offers two types of restriction.
 One by type based on ProjeQtOr elements (actions, activities, invoices, catalog ...) 
@@ -208,7 +213,7 @@ Users belonging to one profile can see the corresponding screen if authorized or
    :alt: Access to forms scREEN
    :align: center
 
-.. index:: ! Access to reports (Access rights)
+.. index:: Access to reports (Access rights)
 
 .. _access-to-reports:
 
@@ -302,7 +307,7 @@ This section allows to:
 
 * This section defines the visibility and the possibility to edit assignments (on activities or else).
 
-.. index:: ! Checklist (Access rights)
+.. index:: Checklist (Access rights)
 
 .. rubric:: Display specific buttons
 

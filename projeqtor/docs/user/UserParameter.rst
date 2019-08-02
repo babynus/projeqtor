@@ -6,7 +6,7 @@
 
 .. title:: User parameters
 
-.. index:: ! User parameters
+.. index:: User parameters
 
 .. _user-parameters:
 

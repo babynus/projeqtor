@@ -7,7 +7,7 @@
 
 .. title:: Users
 
-.. index:: ! User (Definition)
+.. index:: User (Definition)
 
 .. _user:
 

@@ -1,6 +1,6 @@
 .. include:: ImageReplacement.txt
 
-.. index:: ! Function - Lists of values
+.. index:: Function - Lists of values
 
 .. title:: Lists of types
 
@@ -25,14 +25,15 @@ Restrictions can be defined for a project, a project type or a profile.
 
 .. note:: Types restrictions section on Project screen.
 
-   * To display types restrictions section, the global parameter "allow type restriction on project" must be set to "Yes".
-   * Possibility to define more restrictions to a project against restrictions defined at the project type level.
+   To display types restrictions section, the global parameter "allow type restriction on project" must be set to "Yes".
+   
+   Possibility to define more restrictions to a project against restrictions defined at the project type level.
 
 
 .. rubric:: Type restriction management
 
-#. Click on "Restrict types" button to display the dialog box.
-#. For each element type, select values that will be in the list of values displayed.
+   1 - Click on "Restrict types" button to display the dialog box.
+   2 - For each element type, select values that will be in the list of values displayed.
 
 If no element type is selected, by default all values of the row will be displayed on each screen concerned by.
 (One example below of selection)
@@ -53,7 +54,7 @@ Reminder : It means too, no restriction for remainding element types on each ded
 
     \newpage
 
-.. index:: ! Project (Type)
+.. index:: Project (Type)
 
 
 .. _project-type:
@@ -65,13 +66,14 @@ The type of organization allows you to define a common behavior on organizations
 
 Management of :ref:`Organizations` allows to edit the structure of the company in the frame of organizations
 
+
+.. rubric:: Section Description
+
 .. sidebar:: Other sections
 
    * :ref:`Behavior <behavior-section>`
    * :ref:`Types restrictions<type-restriction-section>`
-
-.. rubric:: Section Description
-
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -99,7 +101,7 @@ Management of :ref:`Organizations` allows to edit the structure of the company i
 
     \newpage
 
-.. index:: ! Project (Type)
+.. index:: Project (Type)
 
 
 .. _project_type:
@@ -109,38 +111,40 @@ Projects types
 
 Project type is a way to define common behavior on group of projects.
 
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
-   * :ref:`Types of restrictions <type-restriction-section>`
-
 .. glossary::
 
    Code of the project type
 
       Some important behavior will depend on code of the project type.
 
-      **OPE** : Operational project
+.. topic:: **OPE** : Operational project
 
-          * Most common project to follow activity.
+   Most common project to follow activity.
 
-          .. note::
+   All new types are created with **OPE** code.
 
-             All new types are created with **OPE** code.
+.. topic:: **ADM** : Administrative project
 
-      **ADM** : Administrative project
+   Type of project to follow non productive work : holidays, sickness, training, …
 
-          * Type of project to follow non productive work : holidays, sickness, training, …
-          * Every resource will be able to enter some real work on such projects, without having to be allocated to the project, nor assigned to project activities.
-          * Assignments to all project task will be automatically created for users to enter real work.
+   Every resource will be able to enter some real work on such projects, without having to be allocated to the project, nor assigned to project activities.
 
-      **TMP** : Template project 
+   Assignments to all project task will be automatically created for users to enter real work.
 
-          * These projects will not be used to follow some work.
-          * They are just designed to define templates, to be copied as operational projects.
-          * Any project leader can copy such projects, without having to be allocated to them.
+.. topic::  **TMP** : Template project 
+
+   These projects will not be used to follow some work.
+   
+   They are just designed to define templates, to be copied as operational projects.
+
+   Any project leader can copy such projects, without having to be allocated to them.
 
 .. rubric:: Section Description
+
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
+   * :ref:`Types of restrictions <type-restriction-section>`
 
 .. tabularcolumns:: |l|l|
 
@@ -172,20 +176,20 @@ Project type is a way to define common behavior on group of projects.
     \newpage
 
 
-.. index:: ! Ticket (Type)
+.. index:: Ticket (Type)
 
 .. _ticket-type:
 
 Tickets types
 -------------
-
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
    
 Ticket type is a way to define common behavior on group of tickets.
 
 .. rubric:: Section Description
+
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
 
 .. tabularcolumns:: |l|l|
 
@@ -214,25 +218,25 @@ Ticket type is a way to define common behavior on group of tickets.
 
     \newpage
     
-.. index:: ! Activity (Type)
+.. index:: Activity (Type)
 
 .. _activity-type:
 
 Activities types
 ----------------
-
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
-   
+  
 Activity type is a way to define common behavior on group of activities.
 
 .. rubric:: Section Description
 
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
+
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
+   :widths: 30, 70
    :header-rows: 1
 
    * - Field
@@ -258,25 +262,26 @@ Activity type is a way to define common behavior on group of activities.
 
     \newpage
 
-.. index:: ! Milestone (Type)
+.. index:: Milestone (Type)
 
 .. _milestone-type:
 
 Milestones types
 ----------------
 
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
    
 Milestone type is a way to define common behavior on group of milestones.
 
 .. rubric:: Section Description
 
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
+
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
+   :widths: 30, 70
    :header-rows: 1
 
    * - Field
@@ -302,16 +307,14 @@ Milestone type is a way to define common behavior on group of milestones.
 
     \newpage
     
-.. index:: ! Budget (Type)
+.. index:: Budget (Type)
 
 .. _budget-type:
 
 Budget types
 ------------
 
-.. sidebar:: Other sections
 
-   * :ref:`Behavior <behavior-section>`
 
 Budget types are a way to define the best budget for each project/activity. 
 
@@ -319,6 +322,10 @@ Estimated budget, cash, investment, sale ...
 
 .. rubric:: Section Description
 
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -353,13 +360,15 @@ Estimated budget, cash, investment, sale ...
 Call for tender types
 ---------------------
 
+The types of calls for tenders make it possible to define the best procedure for launching calls with respect to the organization of your company:
+
+the open, restricted tender, with minimum capacity requirements or pre-selection;
+
 .. sidebar:: Other sections
 
    * :ref:`Behavior <behavior-section>`
 
-The types of calls for tenders make it possible to define the best procedure for launching calls with respect to the organization of your company:
-
-the open, restricted tender, with minimum capacity requirements or pre-selection;
+.. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
@@ -393,13 +402,14 @@ the open, restricted tender, with minimum capacity requirements or pre-selection
 Provider tender types
 ---------------------
 
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
-   
+  
 Quote types allow you to organize and categorize the different offers received by your suppliers
 
 .. rubric:: Section Description
+
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
 
 .. tabularcolumns:: |l|l|
 
@@ -434,15 +444,15 @@ Quote types allow you to organize and categorize the different offers received b
 
 Order to Provider types
 -----------------------
-
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
    
 Vendor order types categorize the subject of the request: service or product
 
 .. rubric:: Section Description
 
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -478,16 +488,16 @@ Vendor order types categorize the subject of the request: service or product
 Provider bill types
 -------------------
 
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
-
 There is a wide variety of invoice types. Each one is used in specific circumstances and requires the respect of protocols concerning their constitution and their emission. 
 
 You can create as many invoice types as you need.
 
 .. rubric:: Section Description
 
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -513,21 +523,21 @@ You can create as many invoice types as you need.
 
     \newpage
     
-.. index:: ! Payment to provider (Type)
+.. index:: Payment to provider (Type)
 
 .. _payment_provider_type:
 
 Payments to provider types
 --------------------------
 
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
-
 Payment type is a way to define common behavior on group of payments.
 
 .. rubric:: Section Description
 
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -551,7 +561,7 @@ Payment type is a way to define common behavior on group of payments.
 
 
 
-.. index:: ! Expense (Individual expense type)
+.. index:: Expense (Individual expense type)
 
 .. _individual-expense-type:
 
@@ -560,12 +570,12 @@ Individual expenses types
 
 Individual expense type is a way to define common behavior on group of individual expense.
 
+.. rubric:: Section Description
+
 .. sidebar:: Other sections
 
    * :ref:`Behavior <behavior-section>`
-
-.. rubric:: Section Description
-
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -591,7 +601,7 @@ Individual expense type is a way to define common behavior on group of individua
 
     \newpage
 
-.. index:: ! Expense (Project expense type)
+.. index:: Expense (Project expense type)
 
 .. _project-expense-type:
 
@@ -600,12 +610,13 @@ Project expenses types
 
 Project expense type is a way to define common behavior on group of project expense.
 
+.. rubric:: Section Description
+
+
 .. sidebar:: Other sections
 
    * :ref:`Behavior <behavior-section>`
-
-.. rubric:: Section Description
-
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -631,7 +642,7 @@ Project expense type is a way to define common behavior on group of project expe
 
     \newpage
 
-.. index:: ! Expense (Detail type)
+.. index:: Expense (Detail type)
 
 .. _expense-detail-type:
 
@@ -691,7 +702,7 @@ Expense detail type is a way to define common behavior and calculation mode on g
 
     \newpage
 
-.. index:: ! Client quotation (Type)
+.. index:: Client quotation (Type)
 
 .. _client_quotation_type:
 
@@ -733,21 +744,21 @@ Customer quote types allow you to define common behaviors on a quote group, such
 
     \newpage
 
-.. index:: ! Client order (Type)
+.. index:: Client order (Type)
 
 .. _client_order_type:
 
 Client order types
 ------------------
 
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
-
 Client order types allow you to define common order behaviors, such as billing
 
 .. rubric:: Section Description
 
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -775,21 +786,21 @@ Client order types allow you to define common order behaviors, such as billing
 
     \newpage
 
-.. index:: ! Bill (Type)
+.. index:: Bill (Type)
 
 .. _client_bill_type:
 
 Client Bills types
 ------------------
 
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
-
 Bill type is a way to define common behavior on group of bills.
 
 .. rubric:: Section Description
 
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -817,19 +828,20 @@ Bill type is a way to define common behavior on group of bills.
 
     \newpage
 
-.. index:: ! Client payments (Type)
+.. index:: Client payments (Type)
 
 .. _client_payments_type:
 
 Client payments types
 ---------------------
 
+customer payment type defines how the customer will pay the bill
+
 .. sidebar:: Other sections
 
    * :ref:`Behavior <behavior-section>`
-
-customer payment type defines how the customer will pay the bill
-
+   
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -858,21 +870,21 @@ customer payment type defines how the customer will pay the bill
     \newpage
 
 
-.. index:: ! Catalog (Type)
+.. index:: Catalog (Type)
 
 .. _catalog-type:
 
 Catalog types
 -------------
 
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
-   
 catalog types allow you to defune what type of item you produce or sell to your customers: products, services ...
 
 .. rubric:: Section Description
 
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -898,7 +910,7 @@ catalog types allow you to defune what type of item you produce or sell to your 
 
     \newpage
 
-.. index:: ! Risk (Type)
+.. index:: Risk (Type)
 
 .. _risk-type:
 
@@ -907,11 +919,11 @@ Risks types
 
 Risk type is a way to define common behavior on group of risks.
 
+.. rubric:: Section Description
+
 .. sidebar:: Other sections
 
    * :ref:`Behavior <behavior-section>`
-
-.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
@@ -940,21 +952,21 @@ Risk type is a way to define common behavior on group of risks.
 
     \newpage
     
-.. index:: ! Opportunity (Type)
+.. index:: Opportunity (Type)
 
 .. _opportunity-type:
 
 Opportunities types
 -------------------
 
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
-
 Opportunity type is a way to define common behavior on group of opportunities.
 
 .. rubric:: Section Description
 
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -982,7 +994,7 @@ Opportunity type is a way to define common behavior on group of opportunities.
 
     \newpage
 
-.. index:: ! Action (Type)
+.. index:: Action (Type)
 
 .. _action-type:
 
@@ -991,12 +1003,12 @@ Actions types
 
 Action type is a way to define common behavior on group of actions.
 
+.. rubric:: Section Description
+
 .. sidebar:: Other sections
 
    * :ref:`Behavior <behavior-section>`
-
-.. rubric:: Section Description
-
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -1024,7 +1036,7 @@ Action type is a way to define common behavior on group of actions.
 
     \newpage
     
-.. index:: ! Issue (Type)
+.. index:: Issue (Type)
 
 .. _issue-type:
 
@@ -1033,12 +1045,12 @@ Issues types
 
 Issue type is a way to define common behavior on group of issues.
 
+.. rubric:: Section Description
+
 .. sidebar:: Other sections
 
    * :ref:`Behavior <behavior-section>`
-
-.. rubric:: Section Description
-
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -1066,17 +1078,13 @@ Issue type is a way to define common behavior on group of issues.
 
     \newpage
 
-.. index:: ! Meeting (Type)
+.. index:: Meeting (Type)
 
 .. _meeting-type:
 
 Meetings types
 --------------
 
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
-   
 Meeting type is a way to define common behavior on group of meetings.
 
 .. note::
@@ -1085,6 +1093,10 @@ Meeting type is a way to define common behavior on group of meetings.
 
 .. rubric:: Section Description
 
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -1112,23 +1124,21 @@ Meeting type is a way to define common behavior on group of meetings.
 
     \newpage
 
-.. index:: ! Decision (Type)
+.. index:: Decision (Type)
 
 .. _decision-type:
 
 Decisions types
 ---------------
 
+Decision type is a way to define common behavior on group of decisions.
+
+.. rubric:: Section Description
+
 .. sidebar:: Other sections
 
    * :ref:`Behavior <behavior-section>`
    
-Decision type is a way to define common behavior on group of decisions.
-
-
-
-.. rubric:: Section Description
-
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -1156,20 +1166,20 @@ Decision type is a way to define common behavior on group of decisions.
 
     \newpage
 
-.. index:: ! Question (Type)
+.. index:: Question (Type)
 
 .. _question-type:
 
 Questions types
 ---------------
-
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
    
 Question type is a way to define common behavior on group of questions.
 
 .. rubric:: Section Description
+
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
 
 .. tabularcolumns:: |l|l|
 
@@ -1198,20 +1208,20 @@ Question type is a way to define common behavior on group of questions.
 
     \newpage
 
-.. index:: ! Message (Type)
+.. index:: Message (Type)
 
 .. _message-type:
 
 Messages types
 --------------
 
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
-   
 Message type is a way to define common behavior on group of messages (appearing on today screen).
 
 .. rubric:: Section Description
+
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
 
 .. tabularcolumns:: |l|l|
 
@@ -1238,7 +1248,7 @@ Message type is a way to define common behavior on group of messages (appearing 
 
     \newpage
 
-.. index:: ! Document (Type)
+.. index:: Document (Type)
 
 .. _document-type:
 
@@ -1247,11 +1257,11 @@ Documents types
 
 Document type is a way to define common behavior on group of documents.
 
+.. rubric:: Section Description
+
 .. sidebar:: Other sections
 
    * :ref:`Behavior <behavior-section>`
-
-.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
@@ -1280,7 +1290,7 @@ Document type is a way to define common behavior on group of documents.
 
     \newpage
     
-.. index:: ! Context (Type)
+.. index:: Context (Type)
 
 .. _context-type:
 
@@ -1320,20 +1330,20 @@ Only three context types exist, corresponding to the three selectable fields. (E
 
     \newpage
 
-.. index:: ! Requirement (Type)
+.. index:: Requirement (Type)
 
 .. _requirement-type:
 
 Requirements types
 ------------------
 
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
-
 Requirement type is a way to define common behavior on group of requirements.
 
 .. rubric:: Section Description
+
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
 
 .. tabularcolumns:: |l|l|
 
@@ -1362,21 +1372,21 @@ Requirement type is a way to define common behavior on group of requirements.
 
     \newpage
     
-.. index:: ! Test case (Type)
+.. index:: Test case (Type)
 
 .. _test-case-type:
 
 Test cases types
 ----------------
-
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
    
 Test case type is a way to define common behavior on group of test cases.
 
 
 .. rubric:: Section Description
+
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
 
 .. tabularcolumns:: |l|l|
 
@@ -1405,20 +1415,20 @@ Test case type is a way to define common behavior on group of test cases.
 
     \newpage
 
-.. index:: ! Test session (Type)
+.. index:: Test session (Type)
 
 .. _test-session-type:
 
 Test sessions types
 -------------------
-
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
    
 Test session type is a way to define common behavior on group of test sessions.
 
 .. rubric:: Section Description
+
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
 
 .. tabularcolumns:: |l|l|
 
@@ -1457,14 +1467,14 @@ Test session type is a way to define common behavior on group of test sessions.
 
 Customers types
 ---------------
-
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
    
 Customer type is a way to define different kinds of customers  (prospects or clients).
 
 .. rubric:: Section Description
+
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
 
 .. tabularcolumns:: |l|l|
 
@@ -1489,20 +1499,20 @@ Customer type is a way to define different kinds of customers  (prospects or cli
 
     \newpage
     
-.. index:: ! Provider (Type)
+.. index:: Provider (Type)
 
 .. _provider-type:
 
 Providers types
 ---------------
-
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
    
 Provider type is a way to define different kinds of providers.
 
 .. rubric:: Section Description
+
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
 
 .. tabularcolumns:: |l|l|
 
@@ -1527,21 +1537,21 @@ Provider type is a way to define different kinds of providers.
 
     \newpage
 
-.. index:: ! Product (Type)
+.. index:: Product (Type)
 
 .. _product-type:
 
 Products types
 --------------
-
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
    
 Product type is a way to define common behavior to group of product.
 
 .. rubric:: Section Description
 
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -1569,7 +1579,7 @@ Product type is a way to define common behavior to group of product.
 
     \newpage
 
-.. index:: ! Component (Type)
+.. index:: Component (Type)
 
 .. _component-type:
 
@@ -1578,12 +1588,12 @@ Components types
 
 Component type is a way to define common behavior to group of component.
 
+.. rubric:: Section Description
+
 .. sidebar:: Other sections
 
    * :ref:`Behavior <behavior-section>`
-
-.. rubric:: Section Description
-
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -1611,21 +1621,21 @@ Component type is a way to define common behavior to group of component.
 
     \newpage
 
-.. index:: ! Products versions (Type)
+.. index:: Products versions (Type)
 
 .. _product_version_type:
 
 Product version types
 ---------------------
-
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
    
 Product version type is a way to define common behavior to group of Product version.
 
 .. rubric:: Section Description
 
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -1653,20 +1663,20 @@ Product version type is a way to define common behavior to group of Product vers
 
     \newpage
 
-.. index:: ! Component versions (Type)
+.. index:: Component versions (Type)
 
 .. _component_version_type:
 
 Component version types
 -----------------------
-
-.. sidebar:: Other sections
-
-   * :ref:`Behavior <behavior-section>`
    
 Component version type is a way to define common behavior to group of Component version.
 
 .. rubric:: Section Description
+
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
 
 .. tabularcolumns:: |l|l|
 

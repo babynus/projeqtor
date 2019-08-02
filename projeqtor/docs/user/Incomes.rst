@@ -3,14 +3,14 @@
 
 .. title:: Incomes
 
-.. index:: ! Incomes
+.. index:: Incomes
 
 .. _Incomes:
 
 Incomes
 *******
 
-.. index:: ! Quotation 
+.. index:: Quotation 
 
 .. _quotation:
 .. _client_quotation
@@ -121,7 +121,7 @@ On the quotation form, you can record all the information about the sent proposa
 
     \newpage
 
-.. index:: ! Orders (Client)
+.. index:: Orders (Client)
 
 .. _orders:
 
@@ -269,7 +269,7 @@ On the order form, you can record all the information of the received order.
 
     \newpage
 
-.. index:: ! Bill (Term)
+.. index:: Bill (Term)
 
 .. _term:
 
@@ -723,7 +723,7 @@ Input for each bill line depends on billing type.
 
     \newpage
 
-.. index:: ! Bill (Activity Price)
+.. index:: Bill (Activity Price)
 
 .. _activity-price:
 
@@ -763,8 +763,8 @@ This is used to calculate a billing amount for billing type **On produced work**
 
     \newpage
 
-.. index:: ! Bill (Payment)
-.. index:: ! Payment
+.. index:: Bill (Payment)
+.. index:: Payment
 
 .. _payment:
 
@@ -835,7 +835,7 @@ The bill keeps track of payment.
 
     \newpage
     
-.. index:: ! Financial Galery
+.. index:: Financial Galery
 
 .. _financial_gallery:
 
@@ -898,8 +898,8 @@ Filters can be applied to the list.
 
     \newpage
     
-.. index:: ! Bill (Catalog)
-.. index:: ! Catalog
+.. index:: Bill (Catalog)
+.. index:: Catalog
 
 .. _catalog:
 

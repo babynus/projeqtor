@@ -2,7 +2,7 @@
 
 .. title:: Tickets
 
-.. index:: ! Ticket 
+.. index:: Ticket 
 
 .. _ticket:
 .. _simple-ticket:
@@ -27,7 +27,7 @@ For instance, bugs should be managed through tickets :
 * You must be able to give a feedback on each bug.
 * You can (or at least should) globally plan bug fixing activity. 
 
-.. index:: ! Ticket (Simple) 
+.. index:: Ticket (Simple) 
 
 .. topic:: Tickets (simple) 
 
