@@ -179,7 +179,7 @@ class DataCloning extends SqlElement{
 			    $origin = new DataCloning($data->idOrigin, true);
 			    $result .='<td width=10%" style="padding-left:10px">';
 			    if($origin->isActive){
-			       $result .='<a href="../simulation/'.$origin->nameDir.'/view/main.php?directAccess=true" target="_blank" title="'.i18n('gotoDataCloningStatus').'" > '.formatMediumButton('Goto', true).'</a>';
+			       $result .='<a href="../simulation/'.$origin->nameDir.'/view/main.php?directAccess=true" target="_blank" title="'.i18n('gotoDataCloningButton').'" > '.formatMediumButton('Goto', true).'</a>';
 			    }
 			    $result .='</td>';
 			    $result .='<td width=90%" style="padding-right:42px">'.$origin->name.'</td></tr></table></td>';
@@ -214,7 +214,7 @@ class DataCloning extends SqlElement{
 			    $result .='<table width="100%"><tr>';
 			    $result .='<td width=10%" style="padding-left:10px">';
 			    if($data->isActive){
-			      $result .='<a href="../simulation/'.$data->nameDir.'/view/main.php?directAccess=true" target="_blank" title="'.i18n('gotoDataCloningStatus').'" > '.formatMediumButton('Goto', true).'</a>';
+			      $result .='<a href="../simulation/'.$data->nameDir.'/view/main.php?directAccess=true" target="_blank" title="'.i18n('gotoDataCloningButton').'" > '.formatMediumButton('Goto', true).'</a>';
 			    }
 			    $result .='</td>';
 			    $result .='<td width=90%">'.$activeText.'</td></tr></table>';
@@ -508,6 +508,21 @@ class DataCloning extends SqlElement{
 	  
 	  $dir= dirname(__DIR__).'/simulation/'.$dataCloning->nameDir;
 	  $dataCloning->remove_dir($dir,$dataCloning);
+	  
+	  //base de données
+	  $PDO=$dataCloning->connectTestSimu('simu_'.$dataCloning->nameDir);
+	  $sql = 'SHOW TABLES';
+	  $result_tables = $PDO->query($sql);
+	  $sqlRemove = "";
+	  $sqlDrop = "DROP DATABASE simu_".$dataCloning->nameDir;
+	  $sqlDrop.= ";";
+	  foreach($result_tables as $row) {
+	    $sqlRemove.="DROP TABLE ".$row[0];
+	    $sqlRemove.=";";
+	  }
+	  $PDO->prepare($sqlRemove)->execute();
+	  $PDO->prepare($sqlDrop)->execute();
+	  
 	  $dataCloning->save();
 	}
 	
