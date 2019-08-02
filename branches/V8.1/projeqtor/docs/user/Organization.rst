@@ -2,7 +2,7 @@
 
 .. title:: Organizations
 
-.. index:: ! Organizations
+.. index:: Organizations
 
 .. _Organizations:
 

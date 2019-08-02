@@ -6,7 +6,7 @@
 
 .. title:: Real work allocation
 
-.. index:: ! Real work allocation 
+.. index:: Real work allocation 
 
 .. _RWA:
 

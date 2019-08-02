@@ -7,7 +7,7 @@
 
 .. title:: Resource
  
-.. index:: ! Resource (Definition) 
+.. index:: Resource (Definition) 
 
 .. _resource:
 
@@ -177,7 +177,7 @@ The resource will then enter its imputations, the exact value of its variable ca
 
 1 + XX hours for the status of his day to go green  
 
-.. index:: ! Surbooking
+.. index:: Surbooking
 
 .. _surbooking:
 
@@ -203,7 +203,7 @@ The resource will continue to report their charges normally, with no extra or re
 
     \newpage
 
-.. index:: ! Resource (Function & Cost definition)   
+.. index:: Resource (Function & Cost definition)   
    
 .. rubric:: Function and cost zone
 
@@ -304,7 +304,7 @@ This section allows to define functions and cost of the resource.
 
 .. title:: Pool of Resource
 
-.. index:: ! Pool of Resource (Definition) 
+.. index:: Pool of Resource (Definition) 
 
 .. _pool:
 
@@ -399,8 +399,8 @@ You assign resources to the pool at a given rate for a given period.
 
     \newpage
 
-.. index:: ! Team
-.. index:: ! Resource (Team) 
+.. index:: Team
+.. index:: Resource (Team) 
 
 .. _team:
 
@@ -452,9 +452,9 @@ List of the resources members of the team.
 
     \newpage
 
-.. index:: ! Calendar definition
-.. index:: ! Resource (Calendar definition)  
-.. index:: ! Calendar
+.. index:: Calendar definition
+.. index:: Resource (Calendar definition)  
+.. index:: Calendar
 
 .. _calendars:
 

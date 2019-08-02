@@ -2,7 +2,7 @@
 
 .. title:: Transverse Features
 
-.. index:: ! Transverse Features
+.. index:: Transverse Features
 
 .. _ActivityStream:
 

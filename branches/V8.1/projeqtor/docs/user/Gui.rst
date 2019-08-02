@@ -65,7 +65,7 @@ Top bar
    Top bar
 
 
-.. index:: ! Project (Selector)
+.. index:: Project (Selector)
 
 .. rubric:: |one| Project selector
 
@@ -845,7 +845,7 @@ Copy item
 
     \newpage
 
-.. index:: ! Email (Send)
+.. index:: Email (Send)
   
 .. _email-detail:
 
@@ -888,7 +888,7 @@ see: :ref:`email-template`
 
     \newpage
 
-.. index:: ! Subscribe
+.. index:: Subscribe
   
 .. _subscribe-detail:
 
@@ -997,7 +997,7 @@ Allows to update several items in one operation.
       
        
 
-.. index:: ! Checklist
+.. index:: Checklist
 
 .. _checklist:
 
@@ -1050,7 +1050,7 @@ A checklist is available, whether a checklist form is already defined for the el
 
     \newpage
 
-.. index:: ! Change history
+.. index:: Change history
 
 .. _change-history:
 
@@ -1574,8 +1574,8 @@ Click on "Keyboard shortcuts" to get the list of functional shortcuts in ProjeQt
 
     \newpage
 
-.. index:: ! Internal alert (Display)
-.. index:: ! Indicator (Internal alert)
+.. index:: Internal alert (Display)
+.. index:: Indicator (Internal alert)
 
 Internal alert
 ==============

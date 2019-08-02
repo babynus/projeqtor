@@ -7,7 +7,7 @@
 .. title:: Tickets dashboard
 
 
-.. index:: ! Ticket (Dashboard)
+.. index:: Ticket (Dashboard)
 
 .. _ticket-dashboard:
 

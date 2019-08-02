@@ -14,7 +14,7 @@ Tools
 
     \newpage
     
-.. index:: ! Email (Sent)
+.. index:: Email (Sent)
 
 .. _emails-sent:
 
@@ -46,7 +46,7 @@ The programmed emails will be grouped in this screen before their automatic send
 
     \newpage
 
-.. index:: ! scheduled report
+.. index:: scheduled report
 
 .. _scheduled_report:
    
@@ -65,7 +65,7 @@ Click on |buttonIconDelete| to cancelled the programmation
    :align: center
 
 
-.. index:: ! Internal alert (Sent)
+.. index:: Internal alert (Sent)
 
 .. _alerts:
 
@@ -93,7 +93,7 @@ By default, administrators can see all the alerts sent, and other users only see
 
     \newpage
 
-.. index:: ! Message
+.. index:: Message
 
 .. _message:
 
@@ -153,7 +153,7 @@ The message will be displayed in a color depending on the message type.
 
     \newpage
 
-.. index:: ! Message Legal
+.. index:: Message Legal
 
 .. _message-legal:
 
@@ -171,7 +171,7 @@ You must click on the button I agree that the message disappears
 
     \newpage
 
-.. index:: ! Import data
+.. index:: Import data
 
 .. _import-data:
 
@@ -308,7 +308,7 @@ For columns corresponding to linked tables ("idXxxx"), you can indicate as the c
 
     \newpage
 
-.. index:: ! Import data (Automatic)
+.. index:: Import data (Automatic)
 
 Automatic import
 """"""""""""""""
@@ -372,7 +372,7 @@ The files must respect some basic rules.
 
     \newpage
 
-.. index:: ! Manual Notification
+.. index:: Manual Notification
 
 .. _manual_notification:
 
@@ -437,8 +437,8 @@ Click on an unread notification for discover the details
 
     \newpage
     
-.. index:: ! Audit connections
-.. index:: ! Connection (Audit)
+.. index:: Audit connections
+.. index:: Connection (Audit)
 
 .. _audit-connections:
 

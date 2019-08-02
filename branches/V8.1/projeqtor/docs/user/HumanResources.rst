@@ -2,7 +2,7 @@
 
 .. title:: Humans Resources
 
-.. index:: ! Humans resources
+.. index:: Humans resources
 
 .. _humans_resources:
 
@@ -51,7 +51,7 @@ This system comes in addition to the standards of the management of absences
 
     \newpage
     
-.. index:: ! Regulated absence 
+.. index:: Regulated absence 
    
 .. _regulated_absences:
    
@@ -105,7 +105,7 @@ and the number of days the absence represents are not taken
 
     \newpage
     
-.. index:: ! Employees
+.. index:: Employees
 
 .. _employee_manager:
     
@@ -254,7 +254,7 @@ the administrator is obligatorily a leave manager
 
     \newpage
 
-.. index:: ! Leaves Calendar
+.. index:: Leaves Calendar
 
 .. _leaves_calendar:
 
@@ -288,7 +288,7 @@ The color of the holidays will change according to the validation.
 
     \newpage
 
-.. index:: ! Leaves Period
+.. index:: Leaves Period
 
 .. _leaves_period:
    
@@ -315,7 +315,7 @@ The Employee Manager and Administrator can change the status of a holiday (see :
 
 .. title:: Humans Resources
 
-.. index:: ! Leaves rights earned
+.. index:: Leaves rights earned
 
 .. _leaves_rights_earned:
 
@@ -342,7 +342,7 @@ You no longer have this type of holiday available and can not ask any more
 
     \newpage
 
-.. index:: ! Employment Contract
+.. index:: Employment Contract
 
 .. _employment_contract:
 
@@ -360,7 +360,7 @@ you can see the details of the contracts and which employee is attached to them
 
     \newpage
 
-.. index:: ! Leaves Dashboard
+.. index:: Leaves Dashboard
 
 .. _leaves_dashboard:
 
@@ -399,7 +399,7 @@ In this section, appears the list of absences to be processed, that is to say un
 
     \newpage
 
-.. index:: ! Leaves Parameters
+.. index:: Leaves Parameters
 
 .. _Leaves_parameters:
 

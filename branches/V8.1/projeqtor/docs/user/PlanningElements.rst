@@ -14,7 +14,7 @@ Planning elements
 
 The planning elements :ref:`test-session` and :ref:`meeting` are described in their topics.
 
-.. index:: ! Project 
+.. index:: Project 
 
 .. _planningelem_project:
 
@@ -75,7 +75,7 @@ It is also the top-level of visibility, depending on profiles.
 
 .. _project-reserve:
 
-.. index:: ! Project (Reserve)
+.. index:: Project (Reserve)
 
 .. rubric:: Project reserve
 
@@ -165,7 +165,7 @@ List of sub-projects under for the project.
 
     \newpage
 
-.. index:: ! Activity 
+.. index:: Activity 
 
 .. index:: Activities
 
@@ -296,7 +296,7 @@ Ability to filter activities by data or type, for instance by assigned resources
 
     \newpage
 
-.. index:: ! Milestone
+.. index:: Milestone
 
 .. _milestone:
 

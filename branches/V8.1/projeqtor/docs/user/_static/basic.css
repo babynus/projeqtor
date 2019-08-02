@@ -9,81 +9,228 @@
  *
  */
 
-/* -- main layout ----------------------------------------------------------- */
+ 
+ /* ------------------------------- IMPORT FONT -------------------------------------- */
+@import url('https://fonts.googleapis.com/css?family=Oswald:700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web&display=swap');
+/* ----------------------------------------------------------------------------------- */
+
+
+
+
+/* -------------------------------- MAIN LAYOUT -------------------------------------- */
+/* ------------------ Découpage + apparence générale de la page ---------------------- */
 
 div.clearer {
-    clear: both;
+    clear: none;
 }
 
-/* -- relbar ---------------------------------------------------------------- */
+/* séparation page : marge contenant Sphinxsidebar */
+div.bodywrapper {
+    margin: 0 0 0 260px;
+}
+
+/* Apparence du corps de la page - Global */
+body {
+    background-color: #545381;
+    margin: 0;
+    padding: 0;
+    font-family: 'Titillium Web', sans-serif;
+    font-size: 100%;
+}
+
+/* Apparence corps de la page - Contenu Only */
+div.body {
+    background-color: #ffffff;
+    color: #6e6e6e;
+    padding: 0 60px 30px 50px;    
+    min-width: 400px;
+    max-width: 650px;
+}
+
+/* Alignement tout élément txt */
+.align-left {
+    text-align: left;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.align-right {
+    text-align: right;
+}
+/* ----------------------------------------------------------------------------------- */
+
+
+
+
+
+
+
+
+
+
+/* ------------------------------------- REL BAR ------------------------------------- */
+/* ----------------------- Barre de Navigation HAUT et BAS --------------------------- */
 
 div.related {
+    line-height: 30px;
+    color: #ffffff;
     width: 100%;
     font-size: 90%;
 }
 
+div.related a {
+    color: #ffffff;
+}
+
+/* masque le titre de la RELBAR = "Navigation" */ 
 div.related h3 {
     display: none;
 }
 
+/* Liste pour l'affichage du contenu de la RELBAR */ 
 div.related ul {
     margin: 0;
     padding: 0 0 0 10px;
     list-style: none;
 }
 
+/* Affichage des éléments la RELBAR sur une seule ligne */ 
 div.related li {
     display: inline;
 }
 
+/* Affichage next + index la RELBAR à droite */ 
 div.related li.right {
     float: right;
     margin-right: 5px;
 }
 
-/* -- sidebar --------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------------- */
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ------------------------------- SPHINXSIDEBAR ------------------------------------- */
+/* ------------------------ Position - Menu de gauche -------------------------------- */
+
+/* marges interieures autour du contenu */
 div.sphinxsidebarwrapper {
-    padding: 10px 5px 0 10px;
+    padding: 30px 5px 0 10px;
 }
-
+/* Position/dimensions de la barre */
 div.sphinxsidebar {
     float: left;
-    width: 230px;
+    width: 260px;
     margin-left: -100%;
-    font-size: 85%;
+    font-size: 90%;
     word-wrap: break-word;
     overflow-wrap : break-word;
+    top: 30px;
+    bottom: 0;
+    margin: 0;
+    position: fixed;
+    overflow: auto;
+    height: auto;
 }
 
+/* ------------------------------- SPHINXSIDEBAR ------------------------------------- */
+/* ---------------------------- Apparence liste menu --------------------------------- */
 div.sphinxsidebar ul {
     list-style: none;
+    margin: 10px 5px 20px 5px;
+    padding: 0;
+    color: #ffffff;
 }
 
+/* Décalage des niveaux + style de points - Liste menu */
 div.sphinxsidebar ul ul,
 div.sphinxsidebar ul.want-points {
-    margin-left: 10px;
+    margin-left: 20px;
     list-style: square;
 }
 
+/* espacement entre les éléments de la liste du menu */
 div.sphinxsidebar ul ul {
     margin-top: 0;
     margin-bottom: 0;
 }
-
-div.sphinxsidebar form {
-    margin-top: 10px;
+div.sphinxsidebar li {
+    padding: 0;
+    line-height: 1.3em;
 }
 
+/* apparence des liens */
+div.sphinxsidebar a {
+    color: #bfbfdf;
+}
+
+/* ------------------------------- SPHINXSIDEBAR ------------------------------------- */
+/* ----------------------------- Titres importants ----------------------------------- */
+
+/* Titre Table of content + Quick Search */
+div.sphinxsidebar h3 {
+    font-family: 'Oswald', sans-serif;
+    color: #ffffff;
+    font-size: 1.4em;
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+}
+
+div.sphinxsidebar h3 a {
+    color: #ffffff;
+}
+
+/* Titre Previous/Next Topic */
+div.sphinxsidebar h4 {
+    font-family: 'Oswald', sans-serif;
+    color: #ffffff;
+    font-size: 1em;
+    font-weight: bolder;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+}
+
+/* Espacement autour de Previous/Next Topic */
+div.sphinxsidebar p.topless {
+    margin: 5px 10px 10px 10px;
+}
+
+
+/* ------------------------------- SPHINXSIDEBAR ------------------------------------- */
+/* -------------------------------- SEARCH BOX --------------------------------------- */
+
+/* Marge entre Search Box et Titre QuickSearch */
+div.sphinxsidebar form {
+    margin-top: 5px;
+}
+
+/* Conteneu général de la SearchBox */
 div.sphinxsidebar input {
-    border: 1px solid #98dbcc;
+    border: 1px solid #bfbfdf;
     font-family: sans-serif;
     font-size: 1em;
 }
 
 div.sphinxsidebar #searchbox input[type="text"] {
     float: left;
-    width: 80%;
+    width: 60%;
     padding: 0.25em;
     box-sizing: border-box;
 }
@@ -97,166 +244,99 @@ div.sphinxsidebar #searchbox input[type="submit"] {
 }
 
 
+/* ----------------------------------------------------------------------------------- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ------------------------------------ PIED DE PAGE ---------------------------------- */
+div.footer {
+    color: #bfbfdf;
+    width: 100%;
+    padding: 0;
+    margin: -10px 0 20px 0;
+    text-align: center;
+    font-size: 70%;
+}
+
+div.footer a {
+    color: #e9e9f3;
+    text-decoration: none;
+}
+
+/* --> PdP copyright : apparence lien sur Sphinx <-- */
+div.footer a:hover {
+    color: #ff954a;
+    text-decoration: underline;
+}
+/* ----------------------------------------------------------------------------------- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ------------------------------- IMAGES ET FIGURES --------------------------------- */
+/* ------------------------------------ images --------------------------------------- */
+
 img {
     border: 0;
-    max-width: 98%;
+    max-width: 100%;
 }
-
-/* -- search page ----------------------------------------------------------- */
-
-ul.search {
-    margin: 10px 0 0 20px;
-    padding: 0;
-}
-
-ul.search li {
-    padding: 5px 0 5px 20px;
-    background-image: url(file.png);
-    background-repeat: no-repeat;
-    background-position: 0 7px;
-}
-
-ul.search li a {
-    font-weight: bold;
-}
-
-ul.search li div.context {
-    color: #888;
-    margin: 2px 0 0 30px;
-    text-align: left;
-}
-
-ul.keywordmatches li.goodmatch a {
-    font-weight: bold;
-}
-
-/* -- index page ------------------------------------------------------------ */
-
-table.contentstable {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-table.contentstable p.biglink {
-    line-height: 150%;
-}
-
-a.biglink {
-    font-size: 1.3em;
-}
-
-span.linkdescr {
-    font-style: italic;
-    padding-top: 5px;
-    font-size: 90%;
-}
-
-/* -- general index --------------------------------------------------------- */
-
-table.indextable {
-    width: 100%;
-}
-
-table.indextable td {
-    text-align: left;
-    vertical-align: top;
-}
-
-table.indextable ul {
-    margin-top: 0;
-    margin-bottom: 0;
-    list-style-type: none;
-}
-
-table.indextable > tbody > tr > td > ul {
-    padding-left: 0em;
-}
-
-table.indextable tr.pcap {
-    height: 10px;
-}
-
-table.indextable tr.cap {
-    margin-top: 10px;
-    background-color: #f2f2f2;
-}
-
+/*
 img.toggler {
     margin-right: 3px;
     margin-top: 3px;
     cursor: pointer;
 }
 
-div.modindex-jumpbox {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    margin: 1em 0 1em 0;
-    padding: 0.4em;
+/* ------------------------------- IMAGES ET FIGURES --------------------------------- */
+/* ------------------------------------ figures --------------------------------------- */
+
+div.figure {
+    margin: 1.5em 0 3em 0;
+    padding: 20px 20px 5px 20px;
+    background-color: #f0f3f5;
 }
 
-div.genindex-jumpbox {
-    border-top: 1px solid #ddd;
-    border-bottom: 1px solid #ddd;
-    margin: 1em 0 1em 0;
-    padding: 0.4em;
+
+div.figure p.caption {
+	margin: 2px 0 2px 0;
+	padding: 5px 0 5px 0;
+	border-top: 1px dotted #414141;    
+	border-bottom: 1px dotted #414141;   
+	color: #808080;
+    text-align: center;
+    font-size: 75%;
+    font-style: italic;
 }
 
-/* -- domain module index --------------------------------------------------- */
-
-table.modindextable td {
-    padding: 2px;
-    border-collapse: collapse;
+div.figure p.caption span.caption-number {
+    font-style: italic;
 }
 
-/* -- general body styles --------------------------------------------------- */
-
-div.body {
-    min-width: 450px;
-    max-width: 800px;
+div.figure p.caption span.caption-text {
 }
 
-div.body p, div.body dd, div.body li, div.body blockquote {
-    -moz-hyphens: auto;
-    -ms-hyphens: auto;
-    -webkit-hyphens: auto;
-    hyphens: auto;
-}
-
-a.headerlink {
-    visibility: hidden;
-}
-
-h1:hover > a.headerlink,
-h2:hover > a.headerlink,
-h3:hover > a.headerlink,
-h4:hover > a.headerlink,
-h5:hover > a.headerlink,
-h6:hover > a.headerlink,
-dt:hover > a.headerlink,
-caption:hover > a.headerlink,
-p.caption:hover > a.headerlink,
-div.code-block-caption:hover > a.headerlink {
-    visibility: visible;
-}
-
-div.body p.caption {
-    text-align: inherit;
-}
-
-div.body td {
-    text-align: left;
-}
-
-.first {
-    margin-top: 0 !important;
-}
-
-p.rubric {
-    margin-top: 30px;
-    font-weight: bold;
-}
-
+/* ------------------------------- IMAGES ET FIGURES --------------------------------- */
+/* ------------------------------------ aligement ------------------------------------ */
 img.align-left, .figure.align-left, object.align-left {
     clear: left;
     float: left;
@@ -275,378 +355,149 @@ img.align-center, .figure.align-center, object.align-center {
   margin-right: auto;
 }
 
-.align-left {
-    text-align: left;
-}
+/* ----------------------------------------------------------------------------------- */
 
-.align-center {
-    text-align: center;
-}
 
-.align-right {
-    text-align: right;
-}
 
-/* -- sidebars -------------------------------------------------------------- */
+
+
+
+
+/* --------------------------- SIDEBAR FLOTTANTE ------------------------------- */
 
 div.sidebar {
-    margin: 0 0 0.5em 1em;
-    border: 1px solid #ddb;
-    padding: 7px 7px 0 7px;
-    background-color: #ffe;
-    width: 40%;
+    margin: 0 0 1em 1em;
+    border: 1px solid #ffffff;
+    padding: 0;
+    background-color: #f0f3f5;
+    width: 30%;
     float: right;
+    box-shadow: 2px 2px 5px #aaa;
+    font-size: 85%;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 }
 
 p.sidebar-title {
+	margin-top: 0;
+	color: #ffffff;
     font-weight: bold;
+    background-image: linear-gradient(#646f7f, #4a5564);
+    border-bottom: 2px solid #4a5564;
+    border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+    padding: 5px;
+    font-size: 100%;
 }
 
-/* -- topics ---------------------------------------------------------------- */
+/* ----------------------------------------------------------------------------- */
 
-div.topic {
-    border: 1px solid #ccc;
-    padding: 7px 7px 0 7px;
-    margin: 10px 0 10px 0;
-}
 
-p.topic-title {
-    font-size: 1.1em;
-    font-weight: bold;
-    margin-top: 10px;
-}
 
-/* -- admonitions ----------------------------------------------------------- */
 
-div.admonition {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding: 7px;
-}
 
-div.admonition dt {
-    font-weight: bold;
-}
 
-div.admonition dl {
-    margin-bottom: 0;
-}
 
-p.admonition-title {
-    margin: 0px 10px 5px 0px;
-    font-weight: bold;
-}
 
-div.body p.centered {
-    text-align: center;
-    margin-top: 25px;
-}
 
-/* -- tables ---------------------------------------------------------------- */
+
+
+/* -------------------------------- TABLEAUX ------------------------------------ */
 
 table.docutils {
-    border: 0;
-    border-collapse: collapse;
+	border-collapse: separate;
+	background: #fff;
+	border-radius: 5px;
+	margin: 10px auto;
+	box-shadow: 0px 0px 5px #aaa;
+	/*table-layout: auto;
+	max-width: 100%;*/
 }
 
-table.align-center {
-    margin-left: auto;
-    margin-right: auto;
+table.docutils thead {
+	border-radius: 5px;
 }
 
-table caption span.caption-number {
+table.docutils thead th {
+  font-family: 'Oswald', sans-serif;
+  font-size: 90%;
+  color: #fff;
+  text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+  text-align: left;
+  padding: 10px;
+  background-image: linear-gradient(#646f7f, #4a5564);
+  border-top: 1px solid #858d99;
+}
+
+table.docutils tbody tr td {
+  font-weight: 100;
+  color: #5f6062;
+  font-size: 90%;
+  padding: 0 15px 0 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+table.docutils tbody tr:nth-child(2n) {
+  background: #f0f3f5;
+}
+table.docutils tbody tr:last-child td {
+  border-bottom: none;
+}
+
+table.docutils caption {
+    caption-side: bottom;
+    text-align: right;
+    font-size: 80%;
     font-style: italic;
 }
 
-table caption span.caption-text {
+
+/* --------- Bords arrondis --------- */
+thead th:first-child {
+  border-top-left-radius: 5px;
+}
+thead th:last-child {
+  border-top-right-radius: 5px;
+}
+tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 5px;
+}
+tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 5px;
+}
+ /* ---------------------------------*/
+ 
+ 
+ 
+/* --------- Effet opacité --------- */
+tbody:hover > tr td {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  opacity: 0.5;
+  @include text-shadow(0px 0px 2px rgba(0,0,0,0.8));*/
 }
 
-table.docutils td, table.docutils th {
-    padding: 1px 8px 1px 5px;
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 1px solid #aaa;
+tbody:hover > tr:hover td {
+  text-shadow: none;
+  color: #808080;
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
 }
+/* ----------------------------------------------------------------------------- */
 
-table.footnote td, table.footnote th {
-    border: 0 !important;
-}
 
-th {
-    text-align: left;
-    padding-right: 5px;
-}
 
-table.citation {
-    border-left: solid 1px gray;
-    margin-left: 1px;
-}
 
-table.citation td {
-    border-bottom: none;
-}
 
-/* -- figures --------------------------------------------------------------- */
 
-div.figure {
-    margin: 0.5em;
-    padding: 0.5em;
-}
 
-div.figure p.caption {
-    padding: 0.3em;
-}
 
-div.figure p.caption span.caption-number {
-    font-style: italic;
-}
 
-div.figure p.caption span.caption-text {
-}
 
-/* -- field list styles ----------------------------------------------------- */
 
-table.field-list td, table.field-list th {
-    border: 0 !important;
-}
 
-.field-list ul {
-    margin: 0;
-    padding-left: 1em;
-}
 
-.field-list p {
-    margin: 0;
-}
 
-.field-name {
-    -moz-hyphens: manual;
-    -ms-hyphens: manual;
-    -webkit-hyphens: manual;
-    hyphens: manual;
-}
-
-/* -- other body styles ----------------------------------------------------- */
-
-ol.arabic {
-    list-style: decimal;
-}
-
-ol.loweralpha {
-    list-style: lower-alpha;
-}
-
-ol.upperalpha {
-    list-style: upper-alpha;
-}
-
-ol.lowerroman {
-    list-style: lower-roman;
-}
-
-ol.upperroman {
-    list-style: upper-roman;
-}
-
-dl {
-    margin-bottom: 15px;
-}
-
-dd p {
-    margin-top: 0px;
-}
-
-dd ul, dd table {
-    margin-bottom: 10px;
-}
-
-dd {
-    margin-top: 3px;
-    margin-bottom: 10px;
-    margin-left: 30px;
-}
-
-dt:target, span.highlighted {
-    background-color: #fbe54e;
-}
-
-rect.highlighted {
-    fill: #fbe54e;
-}
-
-dl.glossary dt {
-    font-weight: bold;
-    font-size: 1.1em;
-}
-
-.optional {
-    font-size: 1.3em;
-}
-
-.sig-paren {
-    font-size: larger;
-}
-
-.versionmodified {
-    font-style: italic;
-}
-
-.system-message {
-    background-color: #fda;
-    padding: 5px;
-    border: 3px solid red;
-}
-
-.footnote:target  {
-    background-color: #ffa;
-}
-
-.line-block {
-    display: block;
-    margin-top: 1em;
-    margin-bottom: 1em;
-}
-
-.line-block .line-block {
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: 1.5em;
-}
-
-.guilabel, .menuselection {
-    font-family: sans-serif;
-}
-
-.accelerator {
-    text-decoration: underline;
-}
-
-.classifier {
-    font-style: oblique;
-}
-
-abbr, acronym {
-    border-bottom: dotted 1px;
-    cursor: help;
-}
-
-/* -- code displays --------------------------------------------------------- */
-
-pre {
-    overflow: auto;
-    overflow-y: hidden;  /* fixes display issues on Chrome browsers */
-}
-
-span.pre {
-    -moz-hyphens: none;
-    -ms-hyphens: none;
-    -webkit-hyphens: none;
-    hyphens: none;
-}
-
-td.linenos pre {
-    padding: 5px 0px;
-    border: 0;
-    background-color: transparent;
-    color: #aaa;
-}
-
-table.highlighttable {
-    margin-left: 0.5em;
-}
-
-table.highlighttable td {
-    padding: 0 0.5em 0 0.5em;
-}
-
-div.code-block-caption {
-    padding: 2px 5px;
-    font-size: small;
-}
-
-div.code-block-caption code {
-    background-color: transparent;
-}
-
-div.code-block-caption + div > div.highlight > pre {
-    margin-top: 0;
-}
-
-div.code-block-caption span.caption-number {
-    padding: 0.1em 0.3em;
-    font-style: italic;
-}
-
-div.code-block-caption span.caption-text {
-}
-
-div.literal-block-wrapper {
-    padding: 1em 1em 0;
-}
-
-div.literal-block-wrapper div.highlight {
-    margin: 0;
-}
-
-code.descname {
-    background-color: transparent;
-    font-weight: bold;
-    font-size: 1.2em;
-}
-
-code.descclassname {
-    background-color: transparent;
-}
-
-code.xref, a code {
-    background-color: transparent;
-    font-weight: bold;
-}
-
-h1 code, h2 code, h3 code, h4 code, h5 code, h6 code {
-    background-color: transparent;
-}
-
-.viewcode-link {
-    float: right;
-}
-
-.viewcode-back {
-    float: right;
-    font-family: sans-serif;
-}
-
-div.viewcode-block:target {
-    margin: -1px -10px;
-    padding: 0 10px;
-}
-
-/* -- math display ---------------------------------------------------------- */
-
-img.math {
-    vertical-align: middle;
-}
-
-div.body div.math p {
-    text-align: center;
-}
-
-span.eqno {
-    float: right;
-}
-
-span.eqno a.headerlink {
-    position: relative;
-    left: 0px;
-    z-index: 1;
-}
-
-div.math:hover a.headerlink {
-    visibility: visible;
-}
-
-/* -- printout stylesheet --------------------------------------------------- */
+/* -------------------------- printout stylesheet ------------------------------- */
 
 @media print {
     div.document,
@@ -662,4 +513,4 @@ div.math:hover a.headerlink {
     #top-link {
         display: none;
     }
-}
+/* ----------------------------------------------------------------------------- */

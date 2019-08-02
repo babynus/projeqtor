@@ -2,7 +2,7 @@
 
 .. title:: Common sections
 
-.. index:: ! Common sections
+.. index:: Common sections
 
 .. _common-sections:
 
@@ -60,7 +60,7 @@ Depending on the element, this section  may have a different name.
 
     \newpage
 
-.. index:: ! Project (Allocation)
+.. index:: Project (Allocation)
 
 .. _allocation-section:
 
@@ -1437,7 +1437,7 @@ This section allows to attach files or hyperlinks to items of elements.
 
     \newpage
 
-.. index:: ! Notes (section)
+.. index:: Notes (section)
 
 .. _note-section:
 
