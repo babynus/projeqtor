@@ -160,23 +160,23 @@ $line->idMeasureUnit=$unit;
 $line->extra=$extra;
 $line->billingType=$billingType;
 //gautier #2516
-if($boolCatalog and $lineId){
+if($boolCatalog){
   $line->idCatalog=$catalog->id;
-  if($line->refType=="Bill"){
+  if(!$lineId and $line->refType=="Bill"){
     $bill=new Bill($line->refId);
     if(!$bill->description or strpos($bill->description,$catalogSpecification )=== FALSE){ 
       $bill->description .= $catalogSpecification;
     }
     $bill->save();
   }
-  if($line->refType=="Quotation"){
+  if(!$lineId and $line->refType=="Quotation"){
     $quot=new Quotation($line->refId);
     if(!$quot->comment or strpos($quot->comment,$catalogSpecification )=== FALSE){ 
       $quot->comment .= $catalogSpecification;
     }
     $quot->save();
   }
-  if($line->refType=="Command"){
+  if(!$lineId and $line->refType=="Command"){
     $order=new Command($line->refId);
     if(!$order->comment or strpos($order->comment,$catalogSpecification )=== FALSE){ 
       $order->comment .= $catalogSpecification;
