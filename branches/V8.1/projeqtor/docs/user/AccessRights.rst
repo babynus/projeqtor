@@ -68,8 +68,10 @@ The profile is an entitlement group, each with specific access rights to the dat
 So, each user is linked to a profile which defines the data they can see and possibly manage. 
 
 .. figure:: /images/GUI/ACCESSRIGHT_SCR_Profiles.png 
-   :alt: Access to forms screen
+   :alt: Profiles screen
    :align: center
+   
+   Profiles screen
 
 .. rubric:: Value of Field "Name"
 
@@ -83,10 +85,11 @@ It remains between square brackets because it does not exist in :ref:`translatab
    :alt: Profile description with translatable name
    :align: center
    
+   Profile description with translatable name
+   
 .. topic:: New profile
 
-   .. figure:: /images/GUI/ACCESSRIGHT_ZONE_NewProfil.png
-      :alt: New profil details zone
+   .. image:: /images/GUI/ACCESSRIGHT_ZONE_NewProfil.png
       :align: center
       
    The value of field "Name" must be a significant name and must not contain spaces or special characters.
@@ -126,17 +129,19 @@ and the other based on the restriction of product versions
 
 .. topic:: Field Profile code
 
-   * ADM: will designate administrator.
-   * PL: will designate project leader. 
+   * **ADM:** will designate administrator.
+   * **PL:** will designate project leader. 
 
-.. index:: Access mode (Access right)
+.. index:: Access mode
 
 .. _access-mode:
 
 Access modes
 ------------
 
-The access mode defines a combination of rights to read, created, update or delete items. (CRUD RIGHTS)
+The access mode defines a combination of rights to Created, Read, Update or Delete items. 
+
+It's the CRUD RIGHTS
 
 Each access is defined as scope of visible and/or updatable, that can be, by kind of elements:
 
@@ -147,8 +152,10 @@ Each access is defined as scope of visible and/or updatable, that can be, by kin
 * **All elements on all projects:** All elements, whatever the project.
 
 .. figure:: /images/GUI/ACCESSRIGHT_ZONE_AccessModeList.png 
-   :alt: Access to forms screen
+   :alt: Access modes screen
    :align: center 
+   
+   Access modes screen
 
 .. rubric:: Value of Field "Name"
 
@@ -158,12 +165,19 @@ Each access is defined as scope of visible and/or updatable, that can be, by kin
 
 .. topic:: New access mode
 
-   * The value of field "Name" must be a significant name and must not contain spaces or special characters.
-   * Ideally, the value of the field should start with "accessProfile" (to be easily identified in the translation table).
+   * The value of field "Name" must be a significant name 
+   
+     and must not contain spaces or special characters.
+     
+   * Ideally, the value of the field should start with "accessProfile" 
+     
+     (to be easily identified in the translation table).
 
 
 .. figure:: /images/GUI/ACCESSRIGHT_ZONE_CreateNewMode.png
    :alt: Create a new profile
+   
+   Create a new profile
    
 .. tabularcolumns:: |l|l|
 
@@ -196,8 +210,8 @@ Each access is defined as scope of visible and/or updatable, that can be, by kin
 .. raw:: latex
 
     \newpage
-
-.. index:: Access to form (Access rights)
+    
+.. index:: Access to form
 
 .. _access-to-forms:
 
@@ -210,10 +224,12 @@ Users belonging to one profile can see the corresponding screen if authorized or
 **Click on checkbox to permit or revoke access to the screen for a profile.**
 
 .. figure:: /images/GUI/ACCESSRIGHT_SCR_AccesTOforms.png
-   :alt: Access to forms scREEN
+   :alt: Access to forms screen
    :align: center
+   
+   Access to forms screen
 
-.. index:: Access to reports (Access rights)
+.. index:: Access to reports
 
 .. _access-to-reports:
 
@@ -229,18 +245,21 @@ Reports are grouped by report categories
 .. figure:: /images/GUI/ACCESSRIGHT_ZONE_AccessToReports.png
    :alt: Access to reports screen
    :align: center
+   
+   Access to reports screen
 
-.. index:: Access to data (Acces rights)
+
+.. index:: Access to data
 
 Access to data
 --------------
 
-.. index:: Access to data Project dependant (Access rights)
+.. index:: Access to data (project dependant)
 
 .. _access-mode-to-data-project-dependant:
 
-Access to data (project dependant)
-==================================
+Project dependant
+=================
 
 This screen allows to set element access mode for each profile.
 Allows to define scope of visibility  and/or updating of data in elements for users and resources.
@@ -251,13 +270,15 @@ This screen is only for the elements reliant on a project.
 .. figure:: /images/GUI/ACCESSRIGHT_ZONE_AccessToDataProjectDependant.png
    :alt: Access to data (Project dependant) screen
    :align: center
+   
+   Access to data (Project dependant) screen
 
-.. index:: Access to data - Not project dependant(Access rights)
+.. index:: Access to data (not project dependant)
 
 .. _access-mode-to-data-not-project-dependant:
 
-Access to data (not project dependant)
-======================================
+Not project dependant
+=====================
 
 This screen allows to set for each profile, elements access rights.
 Allows to grant access rights (read only or write) to users, to data on specific elements.
@@ -268,6 +289,10 @@ This screen is only for the elements not reliant on a project.
 .. figure:: /images/GUI/ACCESSRIGHT_ZONE_AccessToDataNotProjectDependant.png
    :alt: Access to data (Not project dependant) screen
    :align: center
+   
+   Access to data (Not project dependant) screen
+
+.. index:: Specific Access
 
 .. _specific_access:
 
@@ -284,8 +309,8 @@ Depending on options of functionality, allows to grant access rights, to define 
    :alt: Specific access screen
    :align: center
    
------------------------
-
+   Specific access screen
+   
 .. rubric:: **SECTIONS**
 
 .. rubric:: Access to resource data
@@ -358,6 +383,7 @@ This section allows to:
 
     \newpage
 
+.. index:: Translatable name
 
 .. _translatable-name:
 
@@ -374,7 +400,7 @@ The translated name depends on user language selected in :ref:`User parameters<d
 
 .. note::
 
-   * If translated name is displayed between suqare brackets [ ], then the value of field "Name" is not found in the translation table.
+   If translated name is displayed between square brackets [ ], then the value of field "Name" is not found in the translation table.
 
 .. rubric:: Translation table files
 

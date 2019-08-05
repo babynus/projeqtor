@@ -15,6 +15,7 @@
  /* ------------------------------- IMPORT FONT -------------------------------------- */
 @import url('https://fonts.googleapis.com/css?family=Oswald:700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Blinker&display=swap');
 /* ----------------------------------------------------------------------------------- */
 
 
@@ -46,8 +47,9 @@ div.body h3,
 div.body h4,
 div.body h5,
 div.body h6 {
-    font-family: 'Oswald', sans-serif;
-    background-color: #9a94b1;
+    font-family: 'Blinker', sans-serif;
+    text-transform: uppercase;
+    background-color: #545381;
     font-weight: bolder;
     color: #ffffff;
     border-bottom: 1px solid #ccc;
@@ -121,7 +123,21 @@ p.rubric {
     padding: 5px;
     color: #ffffff;
     font-weight: bold;
-    background-color: #b1acc4;
+    background-color: #8a83a7;
+}
+
+p.compound-first {
+    margin-top: 40px;
+    padding: 5px;
+    font-weight: bold;
+    border-bottom: 1px solid #8a83a7;
+}
+
+p.compound-first::before {
+    content: "";
+    background: url(/images/arrowCompound.png);
+    display: block;
+	position: absolute;
 }
 
 
@@ -142,12 +158,26 @@ pre {
 /* Texte code */
 code {
     background-color: #f0f3f5;
-    border-top: 1px solid #4a5564;
-    border-bottom: 1px solid #4a5564;
+    border-top: 1px solid #8080c0;
+    border-bottom: 1px solid #8080c0;
     padding: 2px 2px 2px 2px;
     font-size: 1em;
 }
 
+kbd {
+	background-color: #fafbfc;
+    border: 1px solid #c6cbd1;
+    border-bottom-color: rgb(198, 203, 209);
+    border-bottom-color: #959da5;
+    border-radius: 3px;
+    box-shadow: inset 0 -1px 0 #959da5;
+    color: #444d56;
+    display: inline-block;
+    font-size: 11px;
+    line-height: 10px;
+    padding: 3px 5px;
+    vertical-align: middle;
+}
 
 /* ------------------------------- MISE EN PAGE --------------------------------- */
 /* ------------------------- Search page presentation --------------------------- */
@@ -252,26 +282,26 @@ div.topic {
 /* -------------------------- ADMONITIONS TITRES ------------------------ */
 
 div.note p.admonition-title {
-    background-color: #008e9c;
-    border-bottom: 4px solid #007784;
+    background-color: #545381;
+    border-bottom: 4px solid #434266;
     line-height: 150%;
 }
 
-div.seealso p.admonition-title {
+div.warning p.admonition-title {
     background-color: #ffbe6f;
     border-bottom: 4px solid #ff9518;
     line-height: 150%;
 }
 
-div.warning p.admonition-title {
+div.important p.admonition-title {
     background-color: #CF0000;
     border-bottom: 4px solid #940000;
     line-height: 150%;
 }
 
-div.important p.admonition-title {
-    background-color: #ff8080;
-    border-bottom: 4px solid #ff4a4a;
+div.seealso p.admonition-title {
+    background-color: #b0a9c0;
+    border-bottom: 4px solid #c6c1d2;
     line-height: 150%;
 }
 

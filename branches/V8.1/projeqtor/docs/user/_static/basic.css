@@ -13,6 +13,7 @@
  /* ------------------------------- IMPORT FONT -------------------------------------- */
 @import url('https://fonts.googleapis.com/css?family=Oswald:700&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Titillium+Web&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Blinker&display=swap');
 /* ----------------------------------------------------------------------------------- */
 
 
@@ -27,7 +28,7 @@ div.clearer {
 
 /* séparation page : marge contenant Sphinxsidebar */
 div.bodywrapper {
-    margin: 0 0 0 260px;
+    margin: 0 0 0 300px;
 }
 
 /* Apparence du corps de la page - Global */
@@ -130,12 +131,12 @@ div.related li.right {
 
 /* marges interieures autour du contenu */
 div.sphinxsidebarwrapper {
-    padding: 30px 5px 0 10px;
+    padding: 0px 5px 0 10px;
 }
 /* Position/dimensions de la barre */
 div.sphinxsidebar {
     float: left;
-    width: 260px;
+    width: 300px;
     margin-left: -100%;
     font-size: 90%;
     word-wrap: break-word;
@@ -152,7 +153,7 @@ div.sphinxsidebar {
 /* ---------------------------- Apparence liste menu --------------------------------- */
 div.sphinxsidebar ul {
     list-style: none;
-    margin: 10px 5px 20px 5px;
+    margin: 10px 5px 20px 2px;
     padding: 0;
     color: #ffffff;
 }
@@ -160,7 +161,7 @@ div.sphinxsidebar ul {
 /* Décalage des niveaux + style de points - Liste menu */
 div.sphinxsidebar ul ul,
 div.sphinxsidebar ul.want-points {
-    margin-left: 20px;
+    margin-left: 40px;
     list-style: square;
 }
 
@@ -184,7 +185,7 @@ div.sphinxsidebar a {
 
 /* Titre Table of content + Quick Search */
 div.sphinxsidebar h3 {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Blinker', sans-serif;
     color: #ffffff;
     font-size: 1.4em;
     font-weight: normal;
@@ -198,7 +199,7 @@ div.sphinxsidebar h3 a {
 
 /* Titre Previous/Next Topic */
 div.sphinxsidebar h4 {
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Blinker', sans-serif;
     color: #ffffff;
     font-size: 1em;
     font-weight: bolder;
@@ -326,6 +327,8 @@ div.figure p.caption {
     text-align: center;
     font-size: 75%;
     font-style: italic;
+    background-color: #f7f8f9;
+    box-shadow: 1px 1px 5px #d4d4d4;
 }
 
 div.figure p.caption span.caption-number {
@@ -376,13 +379,14 @@ div.sidebar {
     font-size: 85%;
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
+	text-align: left;
 }
 
 p.sidebar-title {
 	margin-top: 0;
 	color: #ffffff;
     font-weight: bold;
-    background-image: linear-gradient(#646f7f, #4a5564);
+    background-image: linear-gradient(to bottom, #9593e0, #8482c7, #7472af, #646298, #545381);
     border-bottom: 2px solid #4a5564;
     border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
@@ -416,16 +420,17 @@ table.docutils {
 
 table.docutils thead {
 	border-radius: 5px;
+	height: 50px;
 }
 
 table.docutils thead th {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Blinker', sans-serif;
   font-size: 90%;
   color: #fff;
   text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
   text-align: left;
   padding: 10px;
-  background-image: linear-gradient(#646f7f, #4a5564);
+  background-image: linear-gradient(to bottom, #9593e0, #8482c7, #7472af, #646298, #545381);
   border-top: 1px solid #858d99;
 }
 

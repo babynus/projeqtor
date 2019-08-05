@@ -91,7 +91,7 @@ But on Projeqtor, you can specify deadlines (positive or negative) to apply to y
 
 .. topic:: **More details**
    
-   * See: :ref:`gantt-chart-view<Gantt_DependencyLink_Milestone>`
+   See: :ref:`gantt-chart-view<Gantt_DependencyLink_Milestone>`
 
 .. index:: Planning management (Resource)
 .. rubric:: Resources
