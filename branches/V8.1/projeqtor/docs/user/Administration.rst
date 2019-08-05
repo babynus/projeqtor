@@ -23,10 +23,9 @@ Administration Console
 
 Administration console allows to execute administration tasks on application.
 
-.. index:: Internal alert (Background tasks)
-.. index:: Email (Background tasks)
-.. index:: Import data (Background tasks)
-
+.. index:: Background tasks (Alert)
+.. index:: Background tasks (Email)
+.. index:: Background tasks (Import data)
 
 Background tasks
 ----------------
@@ -42,15 +41,17 @@ Starts and stops background jobs that process and periodically checks the flags 
 .. figure:: /images/GUI/ADMIN_ZONE_BackgroundTask.png
    :alt: Background tasks in Admin
    
+   Background tasks is running in Administration console
    
 .. index:: Internal alert (Send)
+.. index:: Background tasks (Internal alert)
 
 Send an internal alert
 ----------------------
 
 * Allows to send an internal alert to users.
 
-.. index:: Connection (Management)
+.. index:: Connection Management
 
 .. _manage_connection:
 
@@ -74,11 +75,15 @@ Manage connections
     * Allows to open and close application.
     * When the application is closed the message below will appear on login screen.
 
+.. index:: Consistency check
+
 Consistency check
 -----------------
 .. figure:: /images/GUI/ADMIN_ConstencyCheck.png
    :alt: constancy check
    :align: center
+   
+   constancy check
    
 **Consistency check**
 
@@ -92,9 +97,9 @@ Consistency check
 
 * This feature available on the administration screen also automatically corrects detected issues
 
-.. index:: Email (Maintenance of Data)
-.. index:: Internal alert (Maintenance of Data)
-.. index:: Connection (Maintenance of Data)
+.. index:: Maintenance of Data (Email)
+.. index:: Maintenance of Data (Internal alert)
+.. index:: Maintenance of Data (Connection)
 
 Maintenance of Data
 -------------------
@@ -105,7 +110,7 @@ Maintenance of Data
   * Delete history of connections. 
   * Updating references for any kind of element.
 
-.. index:: Log file (Maintenance)   
+.. index:: Log file Maintenance   
 
 Log files maintenance
 ---------------------
