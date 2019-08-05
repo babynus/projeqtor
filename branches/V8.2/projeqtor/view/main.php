@@ -418,7 +418,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       $paramFirstPage=Parameter::getUserParameter('startPage');
       if ($paramFirstPage) {
         $menuName=Menu::getMenuNameFromPage($paramFirstPage);
-        if (securityCheckDisplayMenu(null,$menuName) ) {
+        if (securityCheckDisplayMenu(null,$menuName) or $paramFirstPage=='welcome.php') {
           $firstPage=$paramFirstPage;
         }
       }
