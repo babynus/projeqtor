@@ -382,7 +382,7 @@ class DataCloning extends SqlElement{
 	  $dataCloning = new DataCloning($id);
 	  global $paramDbName;
 	  global $dbType;
-	  $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	  $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	  $newPwd = substr( str_shuffle( $chars ), 0, 6);
 	  $newPwdBd = strtolower($newPwd);
 	  //COPY FOLDER and CODE
@@ -418,21 +418,20 @@ class DataCloning extends SqlElement{
   	  	  $parameterPhp2 = "../".str_replace($parameterP, "parameters_".$newPwd.".php",$iterator->getSubPathName());
   	  	  $paramContext = file_get_contents($parameterPhp);
   	  	  $paramDbNameOrigin = 'simu_'.$OriginData->nameDir;
+  	  	  $paramDbNameOrigin = strtolower($paramDbNameOrigin);
   	  	  $paramDbNameParam = "\$paramDbName='$paramDbNameOrigin';";
-  	  	  $paramDbNameNew="simu_".$newPwdBd;
+  	  	  $paramDbNameNew='simu_'.$newPwdBd;
+  	  	  $paramDbNameNew = strtolower($paramDbNameNew);
   	  	  $paramDbNameParamSimu = "\$paramDbName='$paramDbNameNew';";
   	  	  $paramContext = str_replace($paramDbNameParam,$paramDbNameParamSimu,$paramContext);
-  	  	  $indexSimuOrigin = "\$simuIndex='$dataCloning->nameDir';";
-  	  	  $paramContext .= "\$simuIndex='$newPwd';";
-  	  	  $paramContext = str_replace($indexSimuOrigin,$indexSimu,$paramContext);
   	  	  file_put_contents($parameterPhp, $paramContext);
   	  	  continue;
 	  	  }
 	  	}else{
   	  	if($element->getBasename()==$parameterP AND (str_replace("plugin", '', $element->getPath()) == $element->getPath()) AND (str_replace("simulation", '', $element->getPath()) == $element->getPath())){
-  	  		 $parameterPhp  = $dir_dest . DIRECTORY_SEPARATOR . str_replace("parameters.php", "parameters_".$newPwd.".php",$iterator->getSubPathName());
-  	  		 copy($element,$parameterPhp);
-  	  		 $parameterPhp2 = "../".str_replace("parameters.php", "parameters_".$newPwd.".php",$iterator->getSubPathName());
+	  		  $parameterPhp  = $dir_dest . DIRECTORY_SEPARATOR . str_replace("parameters.php", "parameters_".$newPwd.".php",$iterator->getSubPathName());
+	  		  copy($element,$parameterPhp);
+	  		  $parameterPhp2 = "../".str_replace("parameters.php", "parameters_".$newPwd.".php",$iterator->getSubPathName());
   	  		$paramContext = file_get_contents($parameterPhp);
   	  		$paramDbNameParam = "\$paramDbName='$paramDbName';";
   	  		$newPwdBd2="simu_".$newPwdBd;
@@ -487,8 +486,8 @@ class DataCloning extends SqlElement{
 	      $originDb = 'simu_'.$OriginData->nameDir;
 	    }
 	    $sql = "SELECT pg_terminate_backend(pg_stat_activity.pid)
-	    FROM pg_stat_activity
-	    WHERE pg_stat_activity.datname = '".$originDb."' AND pid <> pg_backend_pid();";
+        	    FROM pg_stat_activity
+        	    WHERE pg_stat_activity.datname = '".$originDb."' AND pid <> pg_backend_pid();";
 	    $sql2 = "CREATE DATABASE ".$newPwd." WITH TEMPLATE ".$originDb.";";
 	    $PDO->prepare($sql)->execute();
 	    $PDO->prepare($sql2)->execute();
@@ -582,14 +581,13 @@ class DataCloning extends SqlElement{
 	  
 	  $dir= dirname(__DIR__).'/simulation/'.$dataCloning->nameDir;
 	  $dataCloning->remove_dir($dir,$dataCloning);
-	  $bdName = strtolower($dataCloning->nameDir);
-	  $PDO=$dataCloning->connectTestSimu('simu_'.$bdName);
+	  $bdName = 'simu_'.strtolower($dataCloning->nameDir);
+	  $PDO=$dataCloning->connectTestSimu(Parameter::getGlobalParameter('paramDbName'));
 	  if (Parameter::getGlobalParameter('paramDbType') == "pgsql") {
-	    $originDb = "simu_".$bdName;
 	    $sqlRemove = "SELECT pg_terminate_backend(pg_stat_activity.pid)
               	    FROM pg_stat_activity
-              	    WHERE pg_stat_activity.datname = '".$originDb."' AND pid <> pg_backend_pid();";
-	    $sqlDrop = "DROP DATABASE simu_".$dataCloning->nameDir;
+              	    WHERE pg_stat_activity.datname = '$bdName';";
+	    $sqlDrop = "DROP DATABASE $bdName ;";
 	  }else{
   	  $sql = 'SHOW TABLES';
   	  $result_tables = $PDO->query($sql);
@@ -647,6 +645,7 @@ public static	function remove_dir($directory,$dataCloning,$empty = false) {
 		$dbPort=Parameter::getGlobalParameter('paramDbPort');
 		$dbUser=Parameter::getGlobalParameter('paramDbUser');
 		$dbPassword=Parameter::getGlobalParameter('paramDbPassword');
+		$dbName = strtolower($dbName);
 		if ($dbType != "mysql" and $dbType != "pgsql") {
 			$logLevel=Parameter::getGlobalParameter('logLevel');
 			if ($logLevel>=3) {
