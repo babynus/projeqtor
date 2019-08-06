@@ -582,24 +582,25 @@ class DataCloning extends SqlElement{
 	  $dir= dirname(__DIR__).'/simulation/'.$dataCloning->nameDir;
 	  $dataCloning->remove_dir($dir,$dataCloning);
 	  $bdName = 'simu_'.strtolower($dataCloning->nameDir);
-	  $PDO=$dataCloning->connectTestSimu(Parameter::getGlobalParameter('paramDbName'));
 	  if (Parameter::getGlobalParameter('paramDbType') == "pgsql") {
+	    $PDO=$dataCloning->connectTestSimu(Parameter::getGlobalParameter('paramDbName'));
 	    $sqlRemove = "SELECT pg_terminate_backend(pg_stat_activity.pid)
               	    FROM pg_stat_activity
               	    WHERE pg_stat_activity.datname = '$bdName';";
 	    $sqlDrop = "DROP DATABASE $bdName ;";
 	  }else{
+	    $PDO=$dataCloning->connectTestSimu($bdName);
   	  $sql = 'SHOW TABLES';
   	  $result_tables = $PDO->query($sql);
+  	  $sqlDrop = "DROP DATABASE $bdName;";
   	  $sqlRemove = "";
-  	  $sqlDrop = "DROP DATABASE simu_".$bdName;
-  	  $sqlDrop.= ";";
   	  foreach($result_tables as $row) {
-  	    $sqlRemove.="DROP TABLE ".$row[0];
-  	    $sqlRemove.=";";
+  	    $sqlRemove.="DROP TABLE $row[0];";
   	  }
 	  }
-	  $PDO->prepare($sqlRemove)->execute();
+	  if($sqlRemove){
+	   $PDO->prepare($sqlRemove)->execute();
+	  }
 	  $PDO->prepare($sqlDrop)->execute();
 	  $dataCloning->save();
 	}
