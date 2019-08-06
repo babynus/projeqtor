@@ -97,14 +97,15 @@ class DataCloning extends SqlElement{
 		} else {
 			$listUser = getListForSpecificRights('imputation');
 		}
-// 		if($idUser != ''){
-// 		  $idresource='idResource = '.$idUser.' and ';
-// 		}else{
-// 		  $idresource='';
-// 		}
-// 		$wherePerDay = $idresource.'`requestedDate` > "'.date('Y-m-d').'" and `requestedDate` < "'.addDaysToDate(date('Y-m-d'), 1).'" and `idle` = 0';
-//		$dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
-		$dataCloningCountPerDay = 1;
+		if($idUser != ''){
+		  $idresource='idResource = '.$idUser.' and ';
+		}else{
+		  $idresource='';
+		}
+		$date = date('Y-m-d');
+		$addDate =  addDaysToDate(date('Y-m-d'), 1);
+		$wherePerDay = "$idresource requesteddate > '$date' and requesteddate < '$addDate' and idle = 0 ";
+		$dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
 		$dataCloningCountTotal = $dataCloning->countSqlElementsFromCriteria(array("idle"=>"0"));
 		$dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
 		$dataCloningTotal = Parameter::getGlobalParameter('dataCloningTotal');
@@ -236,6 +237,7 @@ class DataCloning extends SqlElement{
 	}
 	
 	public static function drawDataCloningParameter(){
+	  $paramDbType = Parameter::getGlobalParameter('paramDbType');
 	  $columnList=SqlList::getList('profile');
 	  echo '<div style="width:100%;">';
 	  echo '<div id="CrossTable_DataCloning_Right" dojoType="dijit.TitlePane"';
@@ -279,16 +281,37 @@ class DataCloning extends SqlElement{
   	echo ' title="' .i18n('menuGlobalParameter') . '"';
   	echo ' style="width:100%; overflow-x:auto;  overflow-y:hidden;"';
   	echo '>';
+  	if($paramDbType == 'pgsql'){
+    	$endPm = Parameter::getGlobalParameter('endPM');
+    	$date=new DateTime();
+    	$date->setTimestamp(strtotime($endPm));
+    	$date->modify('+60 minute');
+    	$endPm = htmlFormatTime(date('H:i',$date->getTimestamp()));
+    	$startAm = Parameter::getGlobalParameter('startAM');
+    	$date=new DateTime();
+    	$date->setTimestamp(strtotime($startAm));
+    	$date->modify('-60 minute');
+    	$startAm = htmlFormatTime(date('H:i',$date->getTimestamp()));
+    	echo '<div class="messageWARNING" style="width:89%; margin-left:5%;margin-right:5%;text-align:center;margin-bottom:0.5%;margin-top:0.2%">'
+    	       .i18n('pgsqlDataCloningMessage', array($endPm, $startAm)).'</div>';
+  	}
   	echo '<table class="crossTable" >';
   	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningCreationRequest').' : </label></td>';
   	echo '<td class="crossTablePivot">';
+  	$disabled = '';
+  	if($paramDbType == 'pgsql'){
+  		$disabled = 'disabled';
+  	}
   	echo '<select dojoType="dijit.form.FilteringSelect" class="input" ';
   	echo autoOpenFilteringSelect();
   	echo ' style="width: 100px; font-size: 80%;"';
   	echo ' id="dataCloningCreationRequest" name="dataCloningCreationRequest"';
-  	echo ' onChange="showSpecificCreationRequest();">';
+  	echo ' onChange="showSpecificCreationRequest();" '.$disabled.'>';
   	$request=SqlElement::getSingleSqlElementFromCriteria('Parameter', array("parameterCode"=>"dataCloningCreationRequest"));
   	$request=$request->parameterValue;
+  	if($paramDbType == 'pgsql'){
+  		$request = 'specificHours';
+  	}
   	$selectImmediate = ($request!='specificHours')?'selected':'';
   	$selectSpecificHours = ($request=='specificHours')?'selected':'';
   	echo '<option value="immediate" '.$selectImmediate.'>'.i18n('dataCloningImmediate').'</option>';
@@ -297,9 +320,21 @@ class DataCloning extends SqlElement{
   	echo '<td>';
   	$display = ($request =='specificHours')?'block':'none';
   	echo '<div dojoType="dijit.form.TimeTextBox" name="dataCloningSpecificHours" id="dataCloningSpecificHours"
-                    invalidMessage="'.i18n('messageInvalidTime').'" 
-                    type="text" maxlength="5" style="margin-left:20px;width:40px; text-align: center;display:'.$display.';" class="input rounded"
-                    value="T'.date('H:i').'" hasDownArrow="false">';
+          invalidMessage="'.i18n('messageInvalidTime').'"';
+  	        $cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
+            if($request =='specificHours' and strpos($cronExecution->cron, '/') == null){
+              $minutes = substr($cronExecution->cron, 0, 2);
+              $hours = substr($cronExecution->cron, 3, -6);
+              $min = $hours.':'.$minutes.':00';
+            }else{
+              $min = Parameter::getGlobalParameter('endPM');
+            	$date=new DateTime();
+            	$date->setTimestamp(strtotime($min));
+            	$date->modify('+30 minute');
+            	$min = date('H:i:s', $date->getTimestamp());
+            }
+    echo 'type="text" maxlength="5" style="margin-left:20px;width:40px; text-align: center;display:'.$display.';" class="input rounded"
+          value="T'.$min.'" hasDownArrow="false">';
     echo '</div>';
     $display = ($request !='specificHours')?'block':'none';
     $specificFrequency=$request;

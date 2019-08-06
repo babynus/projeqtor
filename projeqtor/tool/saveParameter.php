@@ -423,13 +423,33 @@ if ($type=='habilitation') {
     $hours = substr($specificHours, 1, 2);
     $minutes = substr($specificHours, 4, -3);
     $cronExecution->cron = $minutes.' '.$hours.' * * *';
-  }else{
+  }else if($request=='immediate'){
     $dataCloningCreationRequest->parameterValue = $frequency;
     if($frequency <= 30){
       $cronExecution->cron = '*/'.$frequency.' * * * *';
     }else{
       $frequency = $frequency/60;
       $cronExecution->cron = '* */'.$frequency.' * * *';
+    }
+  }else{
+    $dataCloningCreationRequest->parameterValue = 'specificHours';
+    $specificHours = RequestHandler::getValue('dataCloningSpecificHours');
+    $endPm = Parameter::getGlobalParameter('endPM');
+    $date=new DateTime();
+    $date->setTimestamp(strtotime($endPm));
+    $date->modify('+60 minute');
+    $endPm = date('H:i', $date->getTimestamp());
+    $startAm = Parameter::getGlobalParameter('startAM');
+    $date=new DateTime();
+    $date->setTimestamp(strtotime($startAm));
+    $date->modify('-45 minute');
+    $startAm = date('H:i', $date->getTimestamp());
+    if(substr($specificHours, 1) >= $endPm or $startAm >= substr($specificHours, 1)){
+      $hours = substr($specificHours, 1, 2);
+      $minutes = substr($specificHours, 4, -3);
+      $cronExecution->cron = $minutes.' '.$hours.' * * *';
+    }else{
+      $status='INVALID HOURS';
     }
   }
   $result=$dataCloningCreationRequest->save();
@@ -448,17 +468,22 @@ if ($type=='habilitation') {
   $paramPerDay->idUser = null;
   $result=$paramPerDay->save();
   array_push($SaveChange, $result);
-  foreach ($SaveChange as $change){
-    $isSaveOK=strpos($change, 'id="lastOperationStatus" value="OK"');
-    $isSaveNO_CHANGE=strpos($change, 'id="lastOperationStatus" value="NO_CHANGE"');
-    if ($isSaveNO_CHANGE===false) {
-    	if ($isSaveOK===false) {
-    		$status="ERROR";
-    		$errors=$result;
-    	} else if ($status=="NO_CHANGE") {
-    		$status="OK";
+  if($status!='INVALID HOURS'){
+    foreach ($SaveChange as $change){
+    	$isSaveOK=strpos($change, 'id="lastOperationStatus" value="OK"');
+    	$isSaveNO_CHANGE=strpos($change, 'id="lastOperationStatus" value="NO_CHANGE"');
+    	if ($isSaveNO_CHANGE===false) {
+    		if ($isSaveOK===false) {
+    			$status="ERROR";
+    			$errors=$result;
+    		} else if ($status=="NO_CHANGE") {
+    			$status="OK";
+    		}
     	}
     }
+  }else{
+    $status="CONTROL";
+    $errors=i18n('messageInvalidTimeNamed', array(i18n('dataCloningSpecificHours')));
   }
 }else {
    $errors="Save not implemented";
