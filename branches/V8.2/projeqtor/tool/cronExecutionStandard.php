@@ -142,7 +142,6 @@ function cronActivate() {
 function dataCloningCheckRequest(){
   $dataCloning = new DataCloning();
   $dataCloningList = $dataCloning->getSqlElementsFromCriteria(array('idle'=>'0'));
-  
   foreach ($dataCloningList as $data){
     if(!$data->isActive){
       $data->createDataCloning($data->id);
