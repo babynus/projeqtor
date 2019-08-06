@@ -32,8 +32,9 @@ if(sessionValueExists('userName') and getSessionValue('userName') != ''){
 }
 $dataCloning = new DataCloning();
 $cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
-$wherePerDay = 'idResource = '.$userId.' and `requestedDate` > "'.date('Y-m-d').'" and `requestedDate` < "'.addDaysToDate(date('Y-m-d'), 1).'" and `idle` = 0';
-$dataCloningCount = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
+// $wherePerDay = 'idResource = '.$userId.' and `requestedDate` > "'.date('Y-m-d').'" and `requestedDate` < "'.addDaysToDate(date('Y-m-d'), 1).'" and `idle` = 0';
+// $dataCloningCount = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
+$dataCloningCount = 50;
 $dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
 $plannedDate = date('Y-m-d', $cronExecution->nextTime);
 $plannedHours = date('H:i', $cronExecution->nextTime);
