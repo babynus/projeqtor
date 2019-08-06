@@ -876,10 +876,18 @@ function htmlDisplayInfos() {
 function htmlDisplayDatabaseInfos() {
   $paramDbName=Parameter::getGlobalParameter('paramDbName');
   $paramDbDisplayName=Parameter::getGlobalParameter('paramDbDisplayName');
+  $simuIndex=Parameter::getGlobalParameter('simuIndex');
   if (! $paramDbDisplayName) {
     $paramDbDisplayName=$paramDbName;
   }
-  echo "<div style='text-align:center;'><b>$paramDbDisplayName</b></div>";
+  if($simuIndex){
+    if ($paramDbDisplayName) {
+    	$paramDbDisplayName=i18n('DataCloning').' '.$paramDbDisplayName;
+    }else{
+      $paramDbDisplayName=i18n('DataCloning').' '.$paramDbName;
+    }
+  }
+  echo "<div style='text-align:center;z-index:9999;'><b>$paramDbDisplayName</b></div>";
 }
 
 /** ===========================================================================
