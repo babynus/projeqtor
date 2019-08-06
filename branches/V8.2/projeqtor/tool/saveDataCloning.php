@@ -60,9 +60,11 @@ if($idDataCloning){
   }
 }else{
   $dataCloning = new DataCloning();
-//   $wherePerDay = 'idResource = '.$user.' and `requestedDate` > "'.date('Y-m-d').'" and `requestedDate` < "'.addDaysToDate(date('Y-m-d'), 1).'" and `idle` = 0';
-//   $dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
-  $dataCloningCountPerDay = 10;
+  $date = date('Y-m-d');
+  $addDate =  addDaysToDate(date('Y-m-d'), 1);
+  $wherePerDay = "idResource = $user and requesteddate > '$date' and requesteddate < '$addDate' and idle = 0 ";
+  $dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
+  $dataCloningCountPerDay = 1;
   $dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
   if($dataCloningPerDay-$dataCloningCountPerDay > 0){
     $cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
