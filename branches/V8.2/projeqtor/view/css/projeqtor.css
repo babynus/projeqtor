@@ -1473,6 +1473,10 @@ div#reportParametersDiv .label, div#reportParametersDiv label {
   text-shadow: 1px 1px #FFFFFF  ;
 }
 
+.simuToolBar {
+	background: #EEEEEE;
+}
+
 .directAttachment .dijitButtonText {
   margin:auto;
   padding:0;

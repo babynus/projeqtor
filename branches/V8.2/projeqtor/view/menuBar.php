@@ -39,6 +39,15 @@
   
   $customMenuArray=SqlList::getListWithCrit("MenuCustom",array('idUser'=>getSessionUser()->id));
   
+  $simuIndex=Parameter::getGlobalParameter('simuIndex');
+  if($simuIndex){
+    $simuClass = 'simuToolBar';
+    $simuBarColor = 'style="background-color:#ff7777 !important;"';
+  }else{
+    $simuClass = '';
+    $simuBarColor='';
+  }
+  
   $cptAllMenu=0;
   $obj=new Menu();
   $menuList=$obj->getSqlElementsFromCriteria(null, false);
@@ -176,7 +185,7 @@
   }
 ?>
 <table width="100%">
-  <tr height="<?php echo $iconSize+8; ?>px">  
+  <tr height="<?php echo $iconSize+8; ?>px;" <?php echo $simuBarColor;?> >  
     <td style="min-width:320px;width:40%;position:relative; white-space:nowrap">
       <button id="menuBarUndoButton" dojoType="dijit.form.Button" showlabel="false"
        title="<?php echo i18n('buttonUndoItem');?>"
@@ -246,7 +255,7 @@
       </span>
     </td>
     <td width="" style="text-align:center;">
-      <div style="position:absolute;font-size:130%;top:5px;left:50%;width:600px;margin-left:-300px;z-index:-1"><?php htmlDisplayDatabaseInfos();?></div>
+      <div style="position:absolute;font-size:130%;top:5px;left:50%;width:600px;margin-left:-300px;z-index:999"><?php htmlDisplayDatabaseInfos();?></div>
     </td>    
     <?php if(isNotificationSystemActiv() and securityCheckDisplayMenu(null,'Notification')) {?>
     <td  width="63px" style=""> 
@@ -267,7 +276,7 @@
     </td>
     <?php } ?>    
     <td title="<?php echo i18n('infoMessage');?>" style="vertical-align: middle;text-align:center;width:105px;"> 
-      <div class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:100px;" >
+      <div class="pseudoButton <?php echo $simuClass;?>"  style="height:28px; position:relative;top:-5px; z-index:30; width:100px;" >
         <a target="#" href="<?php echo $website;?>" >
           <table style="width:100%">
             <tr>
@@ -328,7 +337,7 @@
     </td> 
      <?php if (! isIE()) {?>
     <td  width="28px" > 
-      <div  class="pseudoButtonFullScreen" style="height:28px; position:relative; top:-5px; z-index:30;margin-right:0px; width:28px;" onclick="toggleFullScreen()" >
+      <div  class="pseudoButtonFullScreen <?php echo $simuClass;?>" style="height:28px; position:relative; top:-5px; z-index:30;margin-right:0px; width:28px;" onclick="toggleFullScreen()" >
         <table>
           <tr>
             <td style="width:28px" >
@@ -339,7 +348,7 @@
       </div>
     </td>
      <?php }?> 
-    <td width="29px">   
+    <td width="29px" class="<?php echo $simuClass;?>">   
       <div id="hideMenuBarShowButtonTop" style="cursor:pointer;position:relative; top:-11px;right:0px; z-index:949" >
   		  <a onClick="hideMenuBarShowModeTop();" id="buttonSwitchedMenuBarTopShow" title="<?php echo i18n("buttonShowMenu");?>" >
   		    <span style='display:inline-block;width:24px;height:22px;'>
