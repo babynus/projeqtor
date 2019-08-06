@@ -177,6 +177,12 @@
   font-weight: bold;
   background: rgba(255,255,255,0.5);
 }
+
+.ProjeQtOrFlatBlue .simuToolBar {
+  color: #545281;
+  background: #cdcadb;
+}
+
 .ProjeQtOrFlatBlue .pseudoButton:hover {
   background: rgba(255,255,255,1);
 }
@@ -1629,6 +1635,12 @@ body .ProjeQtOrFlatBlue {
   font-weight: bold;
   background: rgba(255,255,255,0.5);
 }
+
+.ProjeQtOrFlatRed .simuToolBar {
+  color: #833e3e;
+  background: #ddcdce;
+}
+
 .ProjeQtOrFlatRed .pseudoButton:hover {
   background: rgba(255,255,255,1);
 }
@@ -3026,6 +3038,12 @@ body .ProjeQtOrFlatRed {
   font-weight: bold;
   background: rgba(255,255,255,0.5);
 }
+
+.ProjeQtOrFlatGreen .simuToolBar {
+  color: #537665;
+  background: #c9dbce;
+}
+
 .ProjeQtOrFlatGreen .pseudoButton:hover {
   background: rgba(255,255,255,1);
 }
@@ -4427,6 +4445,12 @@ body .ProjeQtOrFlatGreen {
   font-weight: bold;
   background: rgba(255,255,255,0.5);
 }
+
+.ProjeQtOrFlatGrey .simuToolBar {
+  color: #656565;
+  background: #d4d1d1;
+}
+
 .ProjeQtOrFlatGrey .pseudoButton:hover {
   background: rgba(255,255,255,1);
 }
