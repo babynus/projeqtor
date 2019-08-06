@@ -97,13 +97,14 @@ class DataCloning extends SqlElement{
 		} else {
 			$listUser = getListForSpecificRights('imputation');
 		}
-		if($idUser != ''){
-		  $idresource='idResource = '.$idUser.' and ';
-		}else{
-		  $idresource='';
-		}
-		$wherePerDay = $idresource.'`requestedDate` > "'.date('Y-m-d').'" and `requestedDate` < "'.addDaysToDate(date('Y-m-d'), 1).'" and `idle` = 0';
-		$dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
+// 		if($idUser != ''){
+// 		  $idresource='idResource = '.$idUser.' and ';
+// 		}else{
+// 		  $idresource='';
+// 		}
+// 		$wherePerDay = $idresource.'`requestedDate` > "'.date('Y-m-d').'" and `requestedDate` < "'.addDaysToDate(date('Y-m-d'), 1).'" and `idle` = 0';
+//		$dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
+		$dataCloningCountPerDay = 1;
 		$dataCloningCountTotal = $dataCloning->countSqlElementsFromCriteria(array("idle"=>"0"));
 		$dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
 		$dataCloningTotal = Parameter::getGlobalParameter('dataCloningTotal');
@@ -345,9 +346,10 @@ class DataCloning extends SqlElement{
 	public static function createDataCloning($id){
 	  $dataCloning = new DataCloning($id);
 	  global $paramDbName;
+	  global $dbType;
 	  $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 	  $newPwd = substr( str_shuffle( $chars ), 0, 6);
-	  
+	  $newPwdBd = strtolower($newPwd);
 	  //COPY FOLDER and CODE
 	  if($dataCloning->idOrigin){
 	    $OriginData = new DataCloning($dataCloning->idOrigin);
@@ -380,9 +382,14 @@ class DataCloning extends SqlElement{
   	  	  copy($element,$parameterPhp);
   	  	  $parameterPhp2 = "../".str_replace($parameterP, "parameters_".$newPwd.".php",$iterator->getSubPathName());
   	  	  $paramContext = file_get_contents($parameterPhp);
-  	  	  $paramContext = str_replace('simu_'.$OriginData->nameDir,'simu_'.$newPwd, $paramContext);
-  	  	  $paramContext .= "\n";
-  	  	  $paramContext .= '$simuIndex="'.$newPwd.'";';
+  	  	  $paramDbNameOrigin = 'simu_'.$OriginData->nameDir;
+  	  	  $paramDbNameParam = "\$paramDbName='$paramDbNameOrigin';";
+  	  	  $paramDbNameNew="simu_".$newPwdBd;
+  	  	  $paramDbNameParamSimu = "\$paramDbName='$paramDbNameNew';";
+  	  	  $paramContext = str_replace($paramDbNameParam,$paramDbNameParamSimu,$paramContext);
+  	  	  $indexSimuOrigin = "\$simuIndex='$dataCloning->nameDir';";
+  	  	  $paramContext .= "\$simuIndex='$newPwd';";
+  	  	  $paramContext = str_replace($indexSimuOrigin,$indexSimu,$paramContext);
   	  	  file_put_contents($parameterPhp, $paramContext);
   	  	  continue;
 	  	  }
@@ -392,9 +399,12 @@ class DataCloning extends SqlElement{
   	  		 copy($element,$parameterPhp);
   	  		 $parameterPhp2 = "../".str_replace("parameters.php", "parameters_".$newPwd.".php",$iterator->getSubPathName());
   	  		$paramContext = file_get_contents($parameterPhp);
-  	  		$paramContext = str_replace($paramDbName,'simu_'.$newPwd, $paramContext);
+  	  		$paramDbNameParam = "\$paramDbName='$paramDbName';";
+  	  		$newPwdBd2="simu_".$newPwdBd;
+  	  		$paramDbNameParamSimu = "\$paramDbName='$newPwdBd2';";
+  	  		$paramContext = str_replace($paramDbNameParam,$paramDbNameParamSimu,$paramContext);
   	  		$paramContext .= "\n";
-  	  		$paramContext .= '$simuIndex="'.$newPwd.'";';
+  	  		$paramContext .= "\$simuIndex='$newPwd';";
   	  		file_put_contents($parameterPhp, $paramContext);
   	  		continue;
   	  	}
@@ -427,74 +437,103 @@ class DataCloning extends SqlElement{
   	  }
 	  }
 	  //BD
-	  $newPwd = 'simu_'.$newPwd;
+	  $newPwd = 'simu_'.$newPwdBd;
+	  $newPwd = strtolower($newPwd);
 	  if($dataCloning->idOrigin){
 	    $PDO=$dataCloning->connectTestSimu('simu_'.$OriginData->nameDir);
 	  }else{
 	    $PDO=Sql::getConnection();
 	  }
-	  //creer la DB
-	  $requete= "CREATE DATABASE IF NOT EXISTS `".$newPwd."` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
-	  $PDO->prepare($requete)->execute();
-	  $sql = 'SHOW TABLE STATUS';
-	  $result_tables = $PDO->query($sql);
-	  $sql = "";
 	  
-	  //Connect new bd
-	  $connexion = $dataCloning->connectTestSimu($newPwd);
-	  $exceptionTable = array("alert","attachment","audit","auditsummary","cronautosendreport","cronexecution","datacloning","history","kpihistory"
-                    	  		,"kpivalue","language","mail","mailtosend","message","messagelegal","messagelegalfollowup","notification","notificationdefinition"
-                    	  		,"projecthistory","statusmail","subscription","translationaccessright","translationcode","translationlanguage","translationvalue");
-	  	
-  	foreach($result_tables as $row) {
-  		// CREATE ..
-  		$result_create = $PDO->query('SHOW CREATE TABLE `'. $row['Name'] .'`');
-  		foreach ($result_create as $row){
-  			$obj_create = $row;
-  			$sql .= $obj_create['Create Table'] .";\n";
-  		}
-  		if($sql){
-  			$connexion->prepare($sql)->execute();
-  			$sql = "";
-  		}
-  		if(str_replace($exceptionTable,'',$row[0]) != $row[0]){
-  			continue;
-  		}
-  		// INSERT ...
-  		$sqlInsert = "";
-  		$result_insert = $PDO->query('SELECT * FROM `'. $row[0] .'`');
-  		//$sql .= "\n";
-  		$cpt = 0;
-  
-  		foreach ($result_insert as $rowInsert){
-  			$cpt++;
-  			$virgule = false;
-  			$sqlInsert .= 'INSERT INTO `'. $row[0] .'` VALUES (';
-  			foreach($rowInsert as $fld=>$val) {
-  				if(is_numeric($fld))continue;
-  				$sqlInsert .= ($virgule ? ',' : '');
-  				if(is_null($val)) {
-  					$sqlInsert .= 'NULL';
-  				} else {
-  					$sqlInsert .= '\''. $dataCloning->insert_clean($val) . '\'';
-  				}
-  				$virgule = true;
-  			} // for
-  			$sqlInsert .= ')' .";\n";
-  			if($cpt > 100){
-  				$connexion->prepare($sqlInsert)->execute();
-  				$sqlInsert = "";
-  				$cpt = 0;
-  			}
-  		}
-  
-  		if($sqlInsert){
-  			$connexion->prepare($sqlInsert)->execute();
-  		}
-  	}
-
+	  if (Parameter::getGlobalParameter('paramDbType') == "pgsql") {
+	    if(!$dataCloning->idOrigin){
+	      $originDb = $paramDbName;
+	    }else{
+	      $originDb = 'simu_'.$OriginData->nameDir;
+	    }
+	    $sql = "SELECT pg_terminate_backend(pg_stat_activity.pid)
+	    FROM pg_stat_activity
+	    WHERE pg_stat_activity.datname = '".$originDb."' AND pid <> pg_backend_pid();";
+	    $sql2 = "CREATE DATABASE ".$newPwd." WITH TEMPLATE ".$originDb.";";
+	    $PDO->prepare($sql)->execute();
+	    $PDO->prepare($sql2)->execute();
+	    $exceptionTable = "('alert','attachment','audit','auditsummary','cronautosendreport','cronexecution','datacloning','history','kpihistory'
+                	        ,'kpivalue','language','mail','mailtosend','message','messagelegal','messagelegalfollowup','notification','notificationdefinition'
+                	        ,'projecthistory','statusmail','subscription','translationaccessright','translationcode','translationlanguage','translationvalue')";
+	    
+	    $sqlDropTable =  "SELECT table_name
+                        FROM information_schema.tables
+                        WHERE table_schema = 'public'
+                        AND table_name in ".$exceptionTable.";";
+	    $PDO3=$dataCloning->connectTestSimu($newPwd);
+	    $sth = $PDO3->prepare($sqlDropTable);
+	    $sth->execute();
+	    $listTable = $sth->fetchAll(PDO::FETCH_COLUMN,0);
+	    foreach ($listTable as $table){
+	      $sqlTruncateTable = "TRUNCATE TABLE ".$table.";";
+	      $PDO3->prepare($sqlTruncateTable)->execute();
+	    }
+	  }else{
+	    //creer la DB
+	    $requete= "CREATE DATABASE IF NOT EXISTS `".$newPwd."` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
+	    $PDO->prepare($requete)->execute();
+	    $sql = 'SHOW TABLE STATUS';
+	    $result_tables = $PDO->query($sql);
+	    $sql = "";
+	     
+	    //Connect new bd
+	    $connexion = $dataCloning->connectTestSimu($newPwd);
+	    $exceptionTable = array("alert","attachment","audit","auditsummary","cronautosendreport","cronexecution","datacloning","history","kpihistory"
+                    	        ,"kpivalue","language","mail","mailtosend","message","messagelegal","messagelegalfollowup","notification","notificationdefinition"
+                    	        ,"projecthistory","statusmail","subscription","translationaccessright","translationcode","translationlanguage","translationvalue");
+	    
+	    foreach($result_tables as $row) {
+	      // CREATE ..
+	      $result_create = $PDO->query('SHOW CREATE TABLE `'. $row['Name'] .'`');
+	      foreach ($result_create as $row){
+	        $obj_create = $row;
+	        $sql .= $obj_create['Create Table'] .";\n";
+	      }
+	      if($sql){
+	        $connexion->prepare($sql)->execute();
+	        $sql = "";
+	      }
+	      if(str_replace($exceptionTable,'',$row[0]) != $row[0]){
+	        continue;
+	      }
+	      // INSERT ...
+	      $sqlInsert = "";
+	      $result_insert = $PDO->query('SELECT * FROM `'. $row[0] .'`');
+	      $cpt = 0;
+	    
+	      foreach ($result_insert as $rowInsert){
+	        $cpt++;
+	        $virgule = false;
+	        $sqlInsert .= 'INSERT INTO `'. $row[0] .'` VALUES (';
+	        foreach($rowInsert as $fld=>$val) {
+	      				if(is_numeric($fld))continue;
+	      				$sqlInsert .= ($virgule ? ',' : '');
+	      				if(is_null($val)) {
+	      				  $sqlInsert .= 'NULL';
+	      				} else {
+	      				  $sqlInsert .= '\''. $dataCloning->insert_clean($val) . '\'';
+	      				}
+	      				$virgule = true;
+	        } // for
+	        $sqlInsert .= ')' .";\n";
+	        if($cpt > 100){
+	      				$connexion->prepare($sqlInsert)->execute();
+	      				$sqlInsert = "";
+	      				$cpt = 0;
+	        }
+	      }
+	    
+	      if($sqlInsert){
+	        $connexion->prepare($sqlInsert)->execute();
+	      }
+	    }
+	  }
   	$cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
-  	
   	$dataCloning->isActive = 1;
   	$dataCloning->nameDir = $nameDir;
   	$dataCloning->plannedDate = $cronExecution->nextTime;
@@ -508,21 +547,27 @@ class DataCloning extends SqlElement{
 	  
 	  $dir= dirname(__DIR__).'/simulation/'.$dataCloning->nameDir;
 	  $dataCloning->remove_dir($dir,$dataCloning);
-	  
-	  //base de données
-	  $PDO=$dataCloning->connectTestSimu('simu_'.$dataCloning->nameDir);
-	  $sql = 'SHOW TABLES';
-	  $result_tables = $PDO->query($sql);
-	  $sqlRemove = "";
-	  $sqlDrop = "DROP DATABASE simu_".$dataCloning->nameDir;
-	  $sqlDrop.= ";";
-	  foreach($result_tables as $row) {
-	    $sqlRemove.="DROP TABLE ".$row[0];
-	    $sqlRemove.=";";
+	  $bdName = strtolower($dataCloning->nameDir);
+	  $PDO=$dataCloning->connectTestSimu('simu_'.$bdName);
+	  if (Parameter::getGlobalParameter('paramDbType') == "pgsql") {
+	    $originDb = "simu_".$bdName;
+	    $sqlRemove = "SELECT pg_terminate_backend(pg_stat_activity.pid)
+              	    FROM pg_stat_activity
+              	    WHERE pg_stat_activity.datname = '".$originDb."' AND pid <> pg_backend_pid();";
+	    $sqlDrop = "DROP DATABASE simu_".$dataCloning->nameDir;
+	  }else{
+  	  $sql = 'SHOW TABLES';
+  	  $result_tables = $PDO->query($sql);
+  	  $sqlRemove = "";
+  	  $sqlDrop = "DROP DATABASE simu_".$bdName;
+  	  $sqlDrop.= ";";
+  	  foreach($result_tables as $row) {
+  	    $sqlRemove.="DROP TABLE ".$row[0];
+  	    $sqlRemove.=";";
+  	  }
 	  }
 	  $PDO->prepare($sqlRemove)->execute();
 	  $PDO->prepare($sqlDrop)->execute();
-	  
 	  $dataCloning->save();
 	}
 	
@@ -549,7 +594,6 @@ public static	function remove_dir($directory,$dataCloning,$empty = false) {
         }
       }
     }
-
     closedir($directoryHandle);
 
     if($empty == false) {
@@ -568,7 +612,6 @@ public static	function remove_dir($directory,$dataCloning,$empty = false) {
 		$dbPort=Parameter::getGlobalParameter('paramDbPort');
 		$dbUser=Parameter::getGlobalParameter('paramDbUser');
 		$dbPassword=Parameter::getGlobalParameter('paramDbPassword');
-	
 		if ($dbType != "mysql" and $dbType != "pgsql") {
 			$logLevel=Parameter::getGlobalParameter('logLevel');
 			if ($logLevel>=3) {
