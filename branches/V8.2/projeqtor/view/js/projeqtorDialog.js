@@ -6364,11 +6364,14 @@ function switchMode() {
 function switchMode2(paramToSend){
   var currentScreen=dojo.byId('objectClass').value;
   if (paramToSend=='1'){
-    loadContent("objectMain.php?objectClass=" + currentScreen+"&paramScreen="+paramToSend, "centerDiv");
-    loadDiv("menuBar.php?paramScreen="+paramToSend,'iconMenuUserScreen');
+    loadContent("objectMain.php?objectClass="+ currentScreen+"&paramScreen="+paramToSend, "centerDiv");
     loadDiv("menuUserScreenOrganization.php?paramScreen="+paramToSend,"mainDivMenu");
-  }else{
-    loadContent("objectMain.php?objectClass=" + currentScreen+"&paramRightDiv="+paramToSend, "centerDiv");
+  }else if(paramToSend=='2'){
+    loadContent("objectMain.php?objectClass="+ currentScreen+"&paramRightDiv="+paramToSend, "centerDiv");
+  }
+  else if(paramToSend=='4'){
+    loadContent("objectMain.php?objectClass=" +currentScreen+"&paramLayoutObjectDetail="+paramToSend, "centerDiv");
+    loadDiv("menuUserScreenOrganization.php?paramScreen="+paramToSend,"mainDivMenu");
   }
 }
 
