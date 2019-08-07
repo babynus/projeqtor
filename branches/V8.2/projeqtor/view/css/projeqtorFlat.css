@@ -747,6 +747,10 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatBlue .iconChangeLayout32 { background-image: url(customIcons/blue/iconChangeLayout.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatBlue .iconChangeLayout22 { background-image: url(customIcons/blue/iconChangeLayout.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .iconChangeLayout16 { background-image: url(customIcons/blue/iconChangeLayout.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatBlue .iconLayoutTab32 { background-image: url(customIcons/blue/iconLayoutTab.png);	background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;} } 
+.ProjeQtOrFlatBlue .iconLayoutTab22 { background-image: url(customIcons/blue/iconLayoutTab.png);	background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatBlue .iconLayoutTab16 { background-image: url(customIcons/blue/iconLayoutTab.png); 	background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 /* D */
 
 /* BEGIN - ADD qCazelles - Requirement dashboard - Ticket 90 */
@@ -999,6 +1003,10 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatBlue .iconLanguage32 { background-image: url(customIcons/blue/iconLanguage.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatBlue .iconLanguage22 { background-image: url(customIcons/blue/iconLanguage.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .iconLanguage16 { background-image: url(customIcons/blue/iconLanguage.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatBlue .iconLayoutList32 { background-image: url(customIcons/blue/iconLayoutList.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatBlue .iconLayoutList22 { background-image: url(customIcons/blue/iconLayoutList.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatBlue .iconLayoutList16 { background-image: url(customIcons/blue/iconLayoutList.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /*END ADD qCazelles - lang-Context*/
 
@@ -2152,6 +2160,9 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatRed .iconChangeLayout22 { background-image: url(customIcons/red/iconChangeLayout.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatRed .iconChangeLayout16 { background-image: url(customIcons/red/iconChangeLayout.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatRed .iconLayoutTab32 { background-image: url(customIcons/red/iconLayoutTab.png);	background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;} } 
+.ProjeQtOrFlatRed .iconLayoutTab22 { background-image: url(customIcons/red/iconLayoutTab.png);	background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatRed .iconLayoutTab16 { background-image: url(customIcons/red/iconLayoutTab.png); 	background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 /* D */
 
 /* BEGIN - ADD qCazelles - Requirement dashboard - Ticket 90 */
@@ -2415,6 +2426,9 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatRed .iconListOfValues22 { background-image: url(customIcons/red/iconListOfValues.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatRed .iconListOfValues16 { background-image: url(customIcons/red/iconListOfValues.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatRed .iconLayoutList32 { background-image: url(customIcons/red/iconLayoutList.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatRed .iconLayoutList22 { background-image: url(customIcons/red/iconLayoutList.png);   background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatRed .iconLayoutList16 { background-image: url(customIcons/red/iconLayoutList.png);   background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 /* M */
 
 .ProjeQtOrFlatRed .iconMilestone32 { background-image: url(customIcons/red/iconMilestone.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
@@ -3558,6 +3572,10 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconChangeLayout22 { background-image: url(customIcons/green/iconChangeLayout.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconChangeLayout16 { background-image: url(customIcons/green/iconChangeLayout.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatGreen .iconLayoutTab32 { background-image: url(customIcons/green/iconLayoutTab.png);	background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;} } 
+.ProjeQtOrFlatGreen .iconLayoutTab22 { background-image: url(customIcons/green/iconLayoutTab.png);	background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGreen .iconLayoutTab16 { background-image: url(customIcons/green/iconLayoutTab.png); 	background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
 /* D */
 
 /* BEGIN - ADD qCazelles - Requirement dashboard - Ticket 90 */
@@ -3820,6 +3838,10 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconListOfValues32 { background-image: url(customIcons/green/iconListOfValues.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGreen .iconListOfValues22 { background-image: url(customIcons/green/iconListOfValues.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconListOfValues16 { background-image: url(customIcons/green/iconListOfValues.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatGreen .iconLayoutList32 { background-image: url(customIcons/green/iconLayoutList.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGreen .iconLayoutList22 { background-image: url(customIcons/green/iconLayoutList.png);   background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGreen .iconLayoutList16 { background-image: url(customIcons/green/iconLayoutList.png);   background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /* M */
 
@@ -4868,6 +4890,10 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconChangeLayout22 { background-image: url(customIcons/grey/iconChangeLayout.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGrey .iconChangeLayout16 { background-image: url(customIcons/grey/iconChangeLayout.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatGrey .iconLayoutTab32 { background-image: url(customIcons/grey/iconLayoutTab.png);	background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;} } 
+.ProjeQtOrFlatGrey .iconLayoutTab22 { background-image: url(customIcons/grey/iconLayoutTab.png);	background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGrey .iconLayoutTab16 { background-image: url(customIcons/grey/iconLayoutTab.png); 	background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
 /* C */
 
 .ProjeQtOrFlatGrey .iconCalendar32 { background-image: url(customIcons/grey/iconCalendar.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
@@ -5225,6 +5251,9 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconListOfValues22 { background-image: url(customIcons/grey/iconListOfValues.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGrey .iconListOfValues16 { background-image: url(customIcons/grey/iconListOfValues.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatGrey .iconLayoutList32 { background-image: url(customIcons/grey/iconLayoutList.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGrey .iconLayoutList22 { background-image: url(customIcons/grey/iconLayoutList.png); background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGrey .iconLayoutList16 { background-image: url(customIcons/grey/iconLayoutList.png); background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 /* M */
 
 .ProjeQtOrFlatGrey .iconMilestone32 { background-image: url(customIcons/grey/iconMilestone.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}

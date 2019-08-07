@@ -48,17 +48,21 @@ $pramScreen=Parameter::getUserParameter('paramScreen');
        </div>
       </td>
     </tr>
-   <tr height="<?php echo $iconSize+8; ?>px">
-      <td width="24px" >   
-        <div id="hideMenuBarShowButtonTop"style="height:28px; position:relative;top:-5px; z-index:30; width:30px;" onclick="hideMenuBarShowModeTop();">
-            <table>
-              <tr>
-                <td style="width:28x;text-align:center">
-                   <div style="position:absolute;top:2px;left:5px"  Class="dijitButtonIcon iconHideStream22" >&nbsp;</div>
-                </td>
-              </tr>
-            </table>    
-  		</div>
+    <tr>
+      <td width="<?php echo (isIE())?37:35;?>px"  > 
+        <div class="pseudoButton" onclick="switchMode2('4');" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" title="<?php echo i18n("buttonSwitchedMode");?>">
+          <table >
+            <tr>
+              <td style="width:28x;text-align:center">
+              <?php if(Parameter::getUserParameter('paramLayoutObjectDetail')=='4'){?>
+                <div class="iconLayoutTab22 iconLayoutTab iconSize22 " style="position:absolute;top:2px;left:3px" ></div>
+              <?php }else{?>
+                <div class="iconLayoutList22 iconLayoutList iconSize22" style="position:absolute;top:2px;left:3px" ></div>
+              <?php }?>
+              </td>
+            </tr>
+          </table>    
+       </div>
       </td>
     </tr>
     <tr>
