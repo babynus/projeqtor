@@ -4,19 +4,24 @@
 
 .. title:: Configuration Management
 
+.. index:: Configuration Management
+
 .. _ConfigurationManagement:
 
 Configuration Management
 ************************
 
-The product and component is done on screens:
+Configuration management consists of managing the technical description of a system, as well as managing all changes made during the evolution of the system.
 
-* :ref:`product`
-* :ref:`component`
-* :ref:`product-version`
-* :ref:`component-version`
-* :ref:`versions-planning`
+It is the set of processes to ensure the conformity of a product to the requirements, throughout its life cycle.
 
+In computing, for example, configuration management can be used for many purposes.
+
+* To store and trace the different versions or revisions of any information intended to be used by a system (hardware, software, document, unit data, etc.).
+* To deploy configurations through a computer park in the form of files and data.
+* Manage source codes ...
+  
+  
 .. index:: Product
 
 .. _product:
@@ -28,16 +33,17 @@ Allows to define product and sub-product.
 
 Allows to link components to product.
 
-.. sidebar:: Other sections
-   
-   * :ref:`Attachments<attachment-section>`   
-   * :ref:`Notes<note-section>`   
 
 .. rubric:: Section Description
 
+.. sidebar:: Other sections
+   
+   * :ref:`Attachments<attachment-section>`   
+   * :ref:`Notes<note-section>` 
+   
 .. tabularcolumns:: |l|l|
 
-.. list-table:: |ReqFieldLegend| Required fields
+.. list-table:: Required field |ReqFieldLegend|
    :widths: 45, 80
    :header-rows: 1
 
@@ -69,24 +75,27 @@ Allows to link components to product.
 
 .. rubric:: Section Project linked to this product
 
-* possibility of attaching the products of the list to projects.
+Possibility of attaching the products of the list to projects.
 
 .. rubric:: Section Product versions
 
-* List of versions defined for the product.
-* Product versions are defined in :ref:`product-version` screen.
+List of versions defined for the product.
+
+Product versions are defined in :ref:`product-version` screen.
 
 .. rubric:: Section Composition - List of sub-products used by this product
 
-* List of sub-products for the product.
+List of sub-products for the product.
 
 .. rubric:: Section Composition - List of components used by this product
 
-* See: :ref:`relationship-product-component`.
+See: :ref:`relationship-product-component`.
 
-.. note:: **Button Display structure**
+.. note::
 
-   Displays the structure of the product.
+   :kbd:`Display structure`
+
+   Button for displays the structure of the product.
 
    Box checked "Show versions for all structure" allows to display versions of sub-products and components.
 
@@ -117,16 +126,15 @@ Else, the version name will entered manually.
 
 By profile, possibility to have a different list of the version of the original product according to the status.
 
-.. sidebar:: Other sections
+.. rubric:: Section Description
 
+.. sidebar:: Other sections
 
    * :ref:`Projects linked to this version<Link-version-project-section>`
    * :ref:`Composition...<version-product-component>`  
    * :ref:`Attachments<attachment-section>`   
-   * :ref:`Notes<note-section>`   
-
-.. rubric:: Section Description
-
+   * :ref:`Notes<note-section>` 
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
@@ -141,7 +149,7 @@ By profile, possibility to have a different list of the version of the original 
      - The product on which the version applies
    * - |RequiredField| Version number
      - Version number of the product
-   * - |RequiredField| Product version type
+   * - |RequiredField| Product v° type
      - Type of the product version: major, minor, patch 
    * - Name
      - Name of the version  
@@ -163,25 +171,25 @@ By profile, possibility to have a different list of the version of the original 
      - Complete description of the version
 
 
-.. rubric:: Fields "Version number & Name"
+.. rubric:: Version number & Name
 
 The field "Version number" appears only if the global parameter "Automatic format of version name" is set to Yes.
 
 The field "Name" will be read only.
 
-.. rubric:: Field "Prime contractor"
+.. rubric:: Prime contractor
      
-Can be different from product prime contractor.
+The field "Prime contractor can be different from product prime contractor.
 
-.. rubric:: Field "Entry into service" (Real)
+.. rubric:: Entry into service (Real)
 
-Specify the date of entry into service.
+The field "Entry into service" specify the date of entry into service.
 
 The box "Done" is checked when the real date field is set.
 
-.. rubric:: Field "End date" (Real)
+.. rubric:: End date (Real)
 
-Specify the date end-of-service.
+The field "End date" specify the date end-of-service.
 
 The box "Done" is checked when the real date field is set.
 
@@ -203,19 +211,19 @@ Allows to define products using the component.
 Possibility to define component types and component versions that will only be used for definition of structure (not for Version Planning or Tickets)
 
 
+.. rubric:: Section Description
+
 .. sidebar:: **Other sections**
    
    * :ref:`Structure...<relationship-product-component>`   
    * :ref:`Composition...<relationship-product-component>`   
    * :ref:`Attachments<attachment-section>`   
-   * :ref:`Notes<note-section>`   
-
-.. rubric:: Section Description
-
+   * :ref:`Notes<note-section>`  
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
-   :widths: 30, 80
+   :widths: 40, 70
    :header-rows: 1
 
    * - Field
@@ -239,8 +247,9 @@ Possibility to define component types and component versions that will only be u
 
 .. rubric:: Section Component versions
 
-* List of versions defined for the component.
-* Component versions are defined in :ref:`component-version` screen.
+List of versions defined for the component.
+
+Component versions are defined in :ref:`component-version` screen.
 
 
 .. raw:: latex
@@ -257,6 +266,18 @@ Component Versions
 Allows to define versions of a component.
 
 Allows to link a product version to component version.
+ 
+   
+.. rubric:: Automatic formatting of version name
+
+Possibility to define if the version name is automatically produced from the component name and version number.
+
+Set global parameters to activate this feature.
+
+Else, the version name will entered manually.
+
+
+.. rubric:: Section Description
 
 .. sidebar:: Other sections
 
@@ -265,16 +286,6 @@ Allows to link a product version to component version.
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
    
-   
-.. rubric:: Automatic formatting of version name
-
-* Possibility to define if the version name is automatically produced from the component name and version number.
-* Set global parameters to activate this feature.
-* Else, the version name will entered manually.
-
-
-.. rubric:: Section "Description"
-
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
@@ -313,22 +324,22 @@ Allows to link a product version to component version.
    when the planned date has been set, the initial date (if it is empty only) will be defined
 
 
-.. rubric:: Fields "Version number & Name"
+.. rubric:: Version number & Name
 
 The field "Version number" appears only if the global parameter "Automatic format of version name" is set to Yes.
 
 The field "Name" will be read only.
 
 
-.. rubric:: Field "Entry into service" (Real)
+.. rubric:: Entry into service (Real)
 
-Specify the date of entry into service.
+The field "Entry into service" specify the date of entry into service.
 
 The box "Done" is checked when the real date field is set.
 
-.. rubric:: Field "End date (Real)"
+.. rubric:: End date (Real)
 
-Specify the date end-of-service.
+The field "End date" specify the date end-of-service.
 
 The box "Done" is checked when the real date field is set.
    
@@ -338,8 +349,11 @@ The box "Done" is checked when the real date field is set.
 
 .. _relationship-product-component:
 
-Relationships between product and component elements
-----------------------------------------------------
+Relationships
+-------------
+
+product and component elements
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Allows to manage relationships between products and components to define product structure.
 
@@ -353,17 +367,19 @@ See possible relationships:  :ref:`product-structure`
 .. figure:: /images/GUI/CONF_BOX_ProductStructure.png
    :alt: Dialog box - Structure 
    :align: center
+   
+   Structure
 
 .. _version-product-component:
 
-Link between versions of products and components
-------------------------------------------------
+versions of products and components
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Allows to define links between versions of products and components.
 
 .. note:: 
 
-   * Only with the elements defined in the product structure.
+   Only with the elements defined in the product structure.
 
 .. rubric:: Link management
 
@@ -373,6 +389,8 @@ Allows to define links between versions of products and components.
 .. figure:: /images/GUI/CONF_BOX_VersionStructure.png
    :alt: Dialog box - Version structure 
    :align: center
+   
+   Version structure
 
 .. raw:: latex
 
@@ -380,8 +398,8 @@ Allows to define links between versions of products and components.
 
 .. _Link-version-project-section:
 
-Link version to projects
-------------------------
+version to projects
+^^^^^^^^^^^^^^^^^^^
 
 This section allows to manage links between projects and versions of products.
 
@@ -396,6 +414,7 @@ This section allows to manage links between projects and versions of products.
    :alt: Dialog box - Project-Version link 
    :align: center
 
+   Project / Version Link
 
 .. list-table:: Project-Version link dialog box
    :widths: 30, 80
@@ -418,7 +437,7 @@ This section allows to manage links between projects and versions of products.
    * - Closed
      - Box checked indicates the link is not active anymore, without deleting it.
 
-.. topic:: Fields **Project, Product and Version**
+.. topic:: Fields Project, Product and Version
  
    * From the screen **Projects**, the fields **product and version** will be selectable.
    * From the screen **Product versions**, the field **project** will be selectable.
@@ -438,6 +457,8 @@ To use it define your start and delivery date in Product Version and Component V
    :alt: Delivery date component 
    :align: center
    
+   Delivery date component
+   
 .. note:: 
 
    To insert values you have to activate display the start and delivery milestones’ in global parameters otherwise these fields are hidden.
@@ -449,3 +470,7 @@ Graphically, you can see any delay or incompatibility.
 .. figure:: /images/GUI/CONF_ZONE_planningVersion.png
    :alt: Planning version
    :align: center
+   
+   Planning version
+   
+   

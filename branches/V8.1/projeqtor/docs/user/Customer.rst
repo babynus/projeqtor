@@ -21,16 +21,16 @@ It can be an internal entity, into the same enterprise, or a different enterpris
 
 The customer defined here is not a person. Real persons into a customer entity are called “Contacts”. 
 
+.. rubric:: Section Description
+
 .. sidebar:: Other sections
   
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
 
-.. rubric:: Section Description
-
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Required fields |ReqFieldLegend|
+.. list-table:: Required field |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -84,7 +84,18 @@ Contacts
    :alt: Contacts screen
    :align: center
    
+   Contacts screen
    
+A contact is a person in a business relationship with the company.
+
+The company keeps all information data to be able to contact him when needed.
+
+A contact can be a person in the customer organization.
+
+A contact can be the contact person for contracts, sales and billing.
+
+.. rubric:: Section Description
+
 .. sidebar:: Concepts 
 
    * :ref:`projeqtor-roles`
@@ -96,22 +107,9 @@ Contacts
    
    * :ref:`Allocations<allocation-section>`
    
-A contact is a person in a business relationship with the company.
-
-The company keeps all information data to be able to contact him when needed.
-
-A contact can be a person in the customer organization.
-
-A contact can be the contact person for contracts, sales and billing.
-
-
-
-
-.. rubric:: Section Description
-
 .. tabularcolumns:: |l|l|
 
-.. list-table:: |ReqFieldLegend| Required fields
+.. list-table:: Required field |ReqFieldLegend|
    :widths: 30, 80
    :header-rows: 1
 
@@ -127,7 +125,7 @@ A contact can be the contact person for contracts, sales and billing.
      - Name of user
    * - Initials
      - Initials of the contact
-   * - Email address
+   * - Email
      - Email address of the contact.
    * - Profile
      - Profile of the user.
@@ -151,12 +149,12 @@ A contact can be the contact person for contracts, sales and billing.
      - Complete description of the contact
 
 
-.. topic:: Field **Is a resource**
+.. topic:: Field Is a resource
    
    * Check this if the contact must also be a resource.
    * The contact will then also appear in the “Resources” list. 
 
-.. topic:: Field **Is a user**
+.. topic:: Field Is a user
 
    * Check this if the contact must connect to the application. 
    * You must then define the **User name** and **Profile** fields.
@@ -181,8 +179,9 @@ You can see the items followed by your contact in this section
 .. figure:: /images/GUI/CUSTOMER_ZONE_Subscription.png
    :alt: list of elements followed by your contact
    :align: center
-
-
+   
+   list of elements followed by your contact
+   
 .. rubric:: Section Miscellanous
 
 if the box is checked, the contact will not receive the mails sent to the team

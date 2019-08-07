@@ -5,7 +5,7 @@
 
     \newpage
 
-.. index:: Planning element
+.. index:: Planning elements
 
 .. _planning_element:
     

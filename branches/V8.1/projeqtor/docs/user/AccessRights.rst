@@ -4,8 +4,8 @@
 
 .. _Acces_Right:
 
-Acces Rights
-************
+Access Rights
+*************
 
 This section allows the fine management of the rights as well as the management of the modules
 
@@ -52,7 +52,7 @@ This screen is then accessible via a dedicated menu in the Acces Right
    
    Each module is described and explained on ProjeQtor
 
-.. index:: Profiles
+.. index:: Profile (Access Rights)
 
 .. _profiles: 
 
@@ -248,13 +248,12 @@ Reports are grouped by report categories
    
    Access to reports screen
 
-
-.. index:: Access to data
+.. index:: Access to data 
 
 Access to data
 --------------
 
-.. index:: Access to data (project dependant)
+.. index:: Access to data (Project dependant)
 
 .. _access-mode-to-data-project-dependant:
 
@@ -273,7 +272,7 @@ This screen is only for the elements reliant on a project.
    
    Access to data (Project dependant) screen
 
-.. index:: Access to data (not project dependant)
+.. index:: Access to data (No project dependant)
 
 .. _access-mode-to-data-not-project-dependant:
 
@@ -292,7 +291,7 @@ This screen is only for the elements not reliant on a project.
    
    Access to data (Not project dependant) screen
 
-.. index:: Specific Access
+.. index:: Specific Access 
 
 .. _specific_access:
 
@@ -311,7 +310,7 @@ Depending on options of functionality, allows to grant access rights, to define 
    
    Specific access screen
    
-.. rubric:: **SECTIONS**
+.. rubric:: SECTIONS
 
 .. rubric:: Access to resource data
 

@@ -381,7 +381,7 @@ Faked and team resources can be mixed in same draft planning.
 
     \newpage
     
-.. index:: Planning elements
+.. index:: Planning elements (Concept)
 
 .. _planning-element:
 
@@ -1043,7 +1043,7 @@ Allocation to project is used to:
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: |ReqFieldLegend| Required Field
+.. list-table:: Required field |ReqFieldLegend| 
    :widths: 20, 80
    :header-rows: 1
 

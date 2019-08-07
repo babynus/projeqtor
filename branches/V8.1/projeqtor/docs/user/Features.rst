@@ -47,7 +47,7 @@ Planning management
 
 ProjeQtOr  provides all the elements needed to build a planning from workload, constraints between tasks and resources availability.
 
-.. topic:: **Multiple Access:** 
+.. topic:: **Multiple Access** 
 
    People can edit the same item (if they get the right to do it) at the same time, without disturbing each other, as long as they do not change the same fields.
 
@@ -94,6 +94,7 @@ But on Projeqtor, you can specify deadlines (positive or negative) to apply to y
    See: :ref:`gantt-chart-view<Gantt_DependencyLink_Milestone>`
 
 .. index:: Planning management (Resource)
+
 .. rubric:: Resources
  
 Resources can be assigned to activities.
@@ -103,6 +104,7 @@ This means that some work is defined on this activity for the resource.
 Only the resources allocated to the project of the activity can be assigned to the activity.
 
 .. index:: Planning management (Real work allocation) 
+
 .. rubric:: Real work allocation
  
 Resources enter their time spent on the Real work allocation screen.
@@ -112,30 +114,35 @@ This allows for a real-time monitoring of work.
 Moreover, updating the left work allows to recalculate the planning taking into account the actual progress on each task.
 
 .. index:: Planning management (Planning)
+
 .. rubric:: Planning
  
 The planning is based on all the constraints defined:
 
-* left work on each activity
+   * left work on each activity
+   
+   * availability of resources
+   
+   * rate of resource allocation to projects 
 
-* availability of resources
-
-* rate of resource allocation to projects and assignment rate of resources to activities
-
-* planning mode for each activity (as soon as possible, fixed duration, ... )
-
-* dependencies between activities
-
-* priorities of activities and projects
+   * assignment rate of resources to activities
+   
+   * planning mode for each activity (as soon as possible, fixed duration, ... )
+   
+   * dependencies between activities
+   
+   * priorities of activities and projects
 
 The planning is displayed as a Gantt chart.
 
 .. index:: Planning management (Project portfolio)
+
 .. rubric:: Project Portfolio
  
 The planning can also be viewed as a Project Portfolio, which is a Gantt planning view restricted to one line per project, plus optionally selected milestones.
 
 .. index:: Planning management (Global Planning)
+
 .. rubric:: Global Planning
  
 The Global Planning allows you to display many more elements on the gantt chart in addition to the usual projects, activities, and milestones.
@@ -145,6 +152,7 @@ In this diagram view, you can view decisions, test sessions, deliveries, risks, 
 All of which can be linked to an activity or any other element of the diagram. 
 
 .. index:: Planning management (Resources Planning)
+
 .. rubric:: Resources Planning
  
 You can display the planning for each resource, but also by team, by pool or you can display all the resources whatever their assignments or assignments.

@@ -1,10 +1,5 @@
 .. include:: ImageReplacement.txt
 
-.. raw:: latex
-
-    \newpage
-
-
 .. index:: Diary
 .. index:: Resource (Diary)
 
@@ -31,6 +26,8 @@ Calendar selector
 .. figure:: /images/GUI/Planning_SCR_DiaryPresentation.png
    :alt: Diary calendar selector
    :align: center
+   
+   Diary calendar selector
 
 .. topic:: Day colors
 
@@ -38,29 +35,29 @@ Calendar selector
    * **Grey days** : Days off
    
    
-.. rubric:: |one| Period
+.. rubric:: |oneBLC| Period
 
 Displays the current day, month, and year according to the selected view.
 
-.. rubric:: |two| 1st day
+.. rubric:: |twoBLC| 1st day
 
 Displays a specific date or date.
 
 The first day of the week or month is displayed according to the selected view.
 
-.. rubric:: |three| Resource
+.. rubric:: |threeBLC| Resource
 
 Allows to select the resource calendar.
 
-.. rubric:: |four| Select item to display on the liste
+.. rubric:: |fourBLC| Select item to display on the liste
 
 Allows you to display only certain items on the calendar.
 
-.. rubric:: |five| Show done items & Show closed items
+.. rubric:: |fiveBLC| Show done items & Show closed items
 
 Allows to display or not the done and closed items.
 
-.. rubric:: |six| and |seven| Top buttons and Left side buttons
+.. rubric:: |sixBLC| and |sevenBLC| Top buttons and Left side buttons
 
 Allows to change current month, week, or day.
 
@@ -68,11 +65,11 @@ Click on |arrowRight| to go to week display mode.
 
 Click on |arrowLeft| to return to the last display mode.
 
-.. rubric:: |eight| Day number button 
+.. rubric:: |eightBLC| Day number button 
 
 Click on the day number button to go day display mode.
 
-.. rubric:: |nine| Task / Activity / Tickets/ Leaves 
+.. rubric:: |nineBLC| Task / Activity / Tickets/ Leaves 
 
 Each item the resource is assigned to is displayed in its log.
 
