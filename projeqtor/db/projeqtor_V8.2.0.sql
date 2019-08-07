@@ -95,7 +95,9 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES
 ('paramPasswordStrength','1'),
 ('paramAttachmentNum',''),
 ('paramScreen','0'),
-('paramRightDiv','0');
+('paramRightDiv','0'),
+('contentPaneRightDetailDivHeight','0'),
+('paramLayoutObjectDetail','0');
 
 INSERT INTO `${prefix}cronExecution` (`cron`, `fileExecuted`, `idle` ,`fonctionName`) VALUES
 ('*/5 * * * *', '../tool/cronExecutionStandard.php', 0, 'dataCloningCheckRequest');

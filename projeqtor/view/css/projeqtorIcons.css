@@ -1058,6 +1058,19 @@
 .ProjeQtOrFlatRed .iconGlobalView { background-image: url(customIcons/red/iconGlobalView.png); }
 .ProjeQtOrFlatGreen .iconGlobalView { background-image: url(customIcons/green/iconGlobalView.png); }
 .ProjeQtOrFlatGrey .iconGlobalView { background-image: url(customIcons/grey/iconGlobalView.png); }
+/* L */
+
+.iconLayoutList { background-image: url(images/iconLayoutList.png); }
+.ProjeQtOrFlatBlue .iconLayoutList { background-image: url(customIcons/blue/iconLayoutList.png); }
+.ProjeQtOrFlatRed .iconLayoutList { background-image: url(customIcons/red/iconLayoutList.png); }
+.ProjeQtOrFlatGreen .iconLayoutList { background-image: url(customIcons/green/iconLayoutList.png); }
+.ProjeQtOrFlatGrey .iconLayoutList { background-image: url(customIcons/grey/iconLayoutList.png); }
+
+.iconLayoutTab { background-image: url(images/iconLayoutTab.png); }
+.ProjeQtOrFlatBlue .iconLayoutTab { background-image: url(customIcons/blue/iconLayoutTab.png); }
+.ProjeQtOrFlatRed .iconLayoutTab { background-image: url(customIcons/red/iconLayoutTab.png); }
+.ProjeQtOrFlatGreen .iconLayoutTab { background-image: url(customIcons/green/iconLayoutTab.png); }
+.ProjeQtOrFlatGrey .iconLayoutTab { background-image: url(customIcons/grey/iconLayoutTab.png); }
 
 /* P */
 

@@ -32,11 +32,9 @@
   //florent
   if(empty(Parameter::getUserParameter("paramScreen"))){
     if(empty(RequestHandler::getValue('paramScreen'))){
-      $valScreen='0';
       $widthListDiv='100%';
       $widthDetailDiv='100%';
       $positionListDiv='top';
-      Parameter::storeUserParameter("paramScreen", $valScreen);
     }else{
       $valScreen='1';
        $widthListDiv='58%';
@@ -59,13 +57,9 @@
       Parameter::storeUserParameter("paramScreen", $valScreen);
     }
   }
-  
-
   if(empty(Parameter::getUserParameter("paramRightDiv"))){
     if(empty(RequestHandler::getValue('paramRightDiv'))){
-      $valScreen='0';
       $positonRightDiv='right';
-      Parameter::storeUserParameter("paramRightDiv", $valScreen);
     }else{
       $valScreen='2';
       $positonRightDiv='bottom';
@@ -83,8 +77,15 @@
     }
   }
   
-  
-  
+  if(empty(Parameter::getUserParameter("paramLayoutObjectDetail")) and RequestHandler::getValue('paramLayoutObjectDetail')=='4'){
+    $valScreen='4';
+    Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
+  }else if(Parameter::getUserParameter("paramLayoutObjectDetail")=='4' and RequestHandler::getValue('paramLayoutObjectDetail')=='4'){
+    $valScreen='0';
+    Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
+  }
+  ///////
+     
   $listHeight='40%';
   $objectClass="";
   if (isset($_REQUEST['objectClass'])) {
@@ -102,7 +103,7 @@
   	$detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
   	if (!$detailDivWidth) $detailDivWidth=0;
   	if($detailDivWidth or $detailDivWidth==="0"){
-  	  if ($detailDivWidth > 400 ){
+  	  if ($detailDivWidth > 400){
   	    $detailDivWidth=400;
   	  }
   	  $rightWidth=$detailDivWidth.'px';
@@ -110,6 +111,21 @@
   	  $rightWidth="0%";
   	}
   }
+  //florent
+  $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
+  if (!$detailRightHeight) $detailRightHeight=0;
+  if($detailRightHeight or $detailRightHeight==="0"){
+    if ($detailRightHeight < 80){
+      $detailRightHeight=100;
+    }
+    if( $detailRightHeight > 700 ){
+      $detailRightHeight=400;
+    }
+    $rightHeight=$detailRightHeight.'px';
+  } else {
+    $rightHeight="0%";
+  }
+  ///////
   
 ?>
 <input type="hidden" id="objectClass" value="<?php echo $objectClass;?>" />
@@ -147,9 +163,10 @@
       $showNotes=false;
     }
     if ($showNotes) {?>
-  <div id="detailRightDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positonRightDiv; ?>" splitter="true" style="width:<?php echo $rightWidth;?>">
+  <div id="detailRightDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positonRightDiv; ?>" splitter="true" style="width:<?php echo $rightWidth;?>;height:<?php echo $rightHeight;?>">
       <script type="dojo/connect" event="resize" args="evt">
              saveDataToSession("contentPaneRightDetailDivWidth<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetWidth, true);
+             saveDataToSession("contentPaneRightDetailDivHeight<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetHeight, true);
              var newWidth=dojo.byId("detailRightDiv").offsetWidth;
              dojo.query(".activityStreamNoteContainer").forEach(function(node, index, nodelist) {
               node.style.maxWidth=(newWidth-30)+"px";
