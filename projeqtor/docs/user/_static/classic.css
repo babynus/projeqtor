@@ -249,7 +249,7 @@ div.admonition {
     font-size: 85%;
     background-color: #f0f3f5;
     border: 2px solid #a2a2a2;
-    line-height: 1em;
+    line-height: 1.5em;
     max-width: 100%;
     display: block;
 }
@@ -312,8 +312,8 @@ div.error p.admonition-title {
 }
 
 div.tip p.admonition-title {
-    background-color: #00b359;
-    border-bottom: 4px solid #008000;
+    background-color: #94d584;
+    border-bottom: 4px solid #4a9d35;
     line-height: 150%;
 }
 

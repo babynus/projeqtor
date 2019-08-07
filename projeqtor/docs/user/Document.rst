@@ -55,14 +55,14 @@ Document directories
 
 Document directories management allows to define a structure for document storage.
 
-* The files of document will be stored in the folder defined by the parameters  «Document root» and «Location».
-* «Document root» is defined in :ref:`Global parameters <document-section>` screen. 
+* The files of document will be stored in the folder defined by the parameters  **Document root** and **Location**.
+* **Document root** is defined in :ref:`Global parameters <document-section>` screen. 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Required fields |ReqFieldLegend|
+.. list-table:: Required field |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -87,25 +87,27 @@ Document directories management allows to define a structure for document storag
  
 .. topic:: Field **Parent directory**
 
-   * The current directory is then a sub-directory of parent.
+   The current directory is then a sub-directory of parent.
 
 .. topic:: Field **Location**
 
-   * Location is automatically defined as «Parent directory» / «Name».
+   Location is automatically defined as «Parent directory» / «Name».
 
 .. topic:: Field **Project**
 
-   * This project will be the default to new stored documents in this directory.
+   This project will be the default to new stored documents in this directory.
 
 .. topic:: Field **Product**
 
-   * This product will be the default to new stored documents in this directory.
-   * If the project is specified, the list of values contains the products linked the selected project.
-   * If the project is not specified, the list of values contains all products defined.
+   This product will be the default to new stored documents in this directory.
+   
+   If the project is specified, the list of values contains the products linked the selected project.
+   
+   If the project is not specified, the list of values contains all products defined.
 
 .. topic:: Field **Default type**
 
-   * This document type will be the default to new stored documents in this directory.
+   This document type will be the default to new stored documents in this directory.
 
 
 
@@ -129,45 +131,41 @@ Document can evolve and a new file is generated at each evolution.
 Type of versioning must be defined for a document. 
 
 
-.. note::
+.. rubric:: Type of versioning
 
-   **Type of versioning**
+A document can evolve following four ways defined as versioning type :
 
-   A document can evolve following four ways defined as versioning type :
+   .. compound:: **Evolutive**
+   
+    * Version is a standard Vx.y format. 
+    * It is the most commonly used versioning type.
+    * Major updates increase x and reset y to zero. 
+    * Minor updates increase y.
+   
+   .. compound:: **Chronological**
+   
+    * Version is a date. 
+    * This versioning type is commonly used for periodical documents.
+    * For instance : weekly boards.
+   
+   .. compound:: **Sequential**
+   
+    * Version is a sequential number. 
+    * This versioning type is commonly used for recurring documents.
+    * For instance : Meeting reviews.
+   
+   .. compound:: **Custom**
+   
+    * Version is manually set. 
+    * This versioning type is commonly used for external documents, when version is not managed by the tool, or when the format cannot fit any other versioning type.
 
-   **Evolutive**
-   
-   * Version is a standard Vx.y format. 
-   * It is the most commonly used versioning type.
-   * Major updates increase x and reset y to zero. 
-   * Minor updates increase y.
-   
-   **Chronological**
-   
-   * Version is a date. 
-   * This versioning type is commonly used for periodical documents.
-   * For instance : weekly boards.
-   
-   **Sequential**
-   
-   * Version is a sequential number. 
-   * This versioning type is commonly used for recurring documents.
-   * For instance : Meeting reviews.
-   
-   **Custom**
-   
-   * Version is manually set. 
-   * This versioning type is commonly used for external documents, when version is not managed by the tool, or when the format cannot fit any other versioning type.
-
-
+.. rubric:: Section Description
 
 .. sidebar:: Other sections
 
    * :ref:`Linked element<linkElement-section>`
    * :ref:`Notes<note-section>`
-
-.. rubric:: Section Description
-
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
@@ -199,19 +197,21 @@ Type of versioning must be defined for a document.
    * - Cancelled
      - Box checked indicates the document is cancelled.
 
-.. rubric:: Field **Project and Product**
+.. rubric:: Project and Product
 
-* Must be concerned either with a project, a product or both.
-* If the project is specified, the list of values for field "Product" contains only products linked the selected project.
+Must be concerned either with a project, a product or both.
 
-.. rubric:: Field **Document reference**
+If the project is specified, the list of values for field "Product" contains only products linked the selected project.
 
-* Document reference name is calculated from format defined in the :ref:`Global parameters<format_reference_doc>` screen.
+.. rubric:: Document reference
 
-.. rubric:: Field **Author**
+Document reference name is calculated from format defined in the :ref:`Global parameters<format_reference_doc>` screen.
 
-* Positioned by default as the connected user.
-* Can be changed (for instance if the author is not  the current user).
+.. rubric:: Field Author
+
+Positioned by default as the connected user.
+
+Can be changed (for instance if the author is not  the current user).
 
 .. raw:: latex
 
@@ -264,7 +264,8 @@ This section allows to manage version list of document.
 .. figure:: /images/GUI/BOX_DocumentVersion.png
    :alt: Dialog box - Document version 
    :align: center
-
+   
+   Document version dialog box
 
 .. tabularcolumns:: |l|l|
 
@@ -293,19 +294,23 @@ This section allows to manage version list of document.
 
 .. rubric:: Field "Update"
 
-* A version can have a draft status, that may be removed afterwards.
+A version can have a draft status, that may be removed afterwards.
 
 .. rubric:: Field "Is a reference"
 
-* Should be checked when version is validated.
-* Only one version can be the reference for a document.
-* Reference version is displayed in bold format in the versions list.
+Should be checked when version is validated.
+
+Only one version can be the reference for a document.
+
+Reference version is displayed in bold format in the versions list.
 
 .. rubric:: Field "Description"
    
-* May be used to describe updates brought by the version.
-* This icon |Note| appears when the description field is filled.
-* Moving the mouse over the icon will display description text.
+May be used to describe updates brought by the version.
+
+This icon |Note| appears when the description field is filled.
+
+Moving the mouse over the icon will display description text.
 
 
 .. rubric:: Section Approvers
@@ -329,15 +334,15 @@ This section allows to manage approver list of a document.
 
 .. note:: 
 
-   **Button "Approve now"**
+   :kbd:`Approve now`
 
    This button appears in approver list.
 
    Just click on the button to approve the latest version of the document.
 
-   **Button "Send a reminder email to the approvers"**
-
- * This button allows to send a reminder email to all the approvers who have not yet approved the document.
+   :kbd:`Send a reminder email to the approvers`
+   
+   This button allows to send a reminder email to all the approvers who have not yet approved the document.
 
  
 .. rubric:: Approver list management
@@ -354,7 +359,6 @@ This section allows to manage document locking.
 
 When a document is locked the following fields are displayed.
 
-
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Fields when the document is locked
@@ -370,24 +374,25 @@ When a document is locked the following fields are displayed.
    * - Locked since
      - Date and time when document was locked.
 
-
-.. compound:: **lock/unlock this document**
-   
-Button to lock or unlock the document to preserve it from being editing, or new version added.
-      
-When document is locked it cannot be modified
-            
-When the document is locked, it can not be downloaded except for the user who locked it or a user with privilege
-      
-Only the user who locked the document, or a user with privilege can unlock it
-
-You can forbid :ref:`Global Parameters<format_reference_doc>`
+.. compound:: lock/unlock this document
+ 
+   * Button to lock or unlock the document to preserve it from being editing, or new version added.
+         
+   * When document is locked it cannot be modified
+         
+   * When the document is locked, it can not be downloaded except for the user who locked it or a user with privilege
+         
+   * Only the user who locked the document, or a user with privilege can unlock it
+         
+   * You can forbid :ref:`Global Parameters<format_reference_doc>`
       
 
 Nomenclature
 ------------
 
-.. rubric:: Possibility to take into account the designation of the product in the nomenclature of documents with the new codes :
+.. rubric:: product designation in the document nomenclature
+
+Possibility to take into account the designation of the product in the nomenclature of documents with the new codes
 
 * {PROD} product designation
 * {PROJ / PROD} the project code if specified, otherwise the product designation

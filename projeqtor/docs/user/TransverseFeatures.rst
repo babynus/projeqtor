@@ -78,4 +78,4 @@ You can change the visibility of the note if you click on the bottom right corne
 
 * Click on |iconHideStream|  to hide or display the chat.
 
-.. figure:: /images/GUI/ChatActivityStream.png
+.. figure:: /images/GUI/TRANSFEAT_ZONE_ChatActivityStream.png

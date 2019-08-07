@@ -17,13 +17,13 @@ Administration Console
 
 .. note::
 
-  * The screens described below are restricted to users with administrator profile.
+  The screens described below are restricted to users with administrator profile.
    
-  * Users with other profiles can not access it, whether display or access rights are granted or not.   
+  Users with other profiles can not access it, whether display or access rights are granted or not.   
 
 Administration console allows to execute administration tasks on application.
 
-.. index:: Background tasks (Alert)
+.. index:: Background tasks
 .. index:: Background tasks (Email)
 .. index:: Background tasks (Import data)
 
@@ -49,7 +49,7 @@ Starts and stops background jobs that process and periodically checks the flags 
 Send an internal alert
 ----------------------
 
-* Allows to send an internal alert to users.
+Allows to send an internal alert to users.
 
 .. index:: Connection Management
 
@@ -58,20 +58,18 @@ Send an internal alert
 Manage connections
 ------------------
 
-* Allows to force disconnection of active users and close the application for new connections.
+Allows to force disconnection of active users and close the application for new connections.
 
-.. compound:: **Button: Disconnect all users**
+.. compound:: Disconnect all users
 
-    * Allows to disconnect all connected users except your own connection.
+    * The button :kbd:`Disconnect all users` allows to disconnect all connected users except your own connection.
     * The application status is displayed below.
+    * Disconnection will be effective for each user when his browser will ckeck for alerts to be displayed.
+    * The delay for the effective disconnection of users will depend on the parameter “delay (in second) to check alerts” in :ref:`Global parameters<automated-service>` screen.
 
-    .. note::
+.. compound:: Open/Close application
 
-       * Disconnection will be effective for each user when his browser will ckeck for alerts to be displayed.
-       * The delay for the effective disconnection of users will depend on the parameter “delay (in second) to check alerts” in :ref:`Global parameters<automated-service>` screen.
-
-.. compound:: **Button: Open/Close application**
-
+    * The button :kbd:`Open/Close application`
     * Allows to open and close application.
     * When the application is closed the message below will appear on login screen.
 
@@ -83,7 +81,7 @@ Consistency check
    :alt: constancy check
    :align: center
    
-   constancy check
+   consistency check
    
 **Consistency check**
 
@@ -95,7 +93,7 @@ Consistency check
 
 
 
-* This feature available on the administration screen also automatically corrects detected issues
+* This feature available automatically corrects detected issues
 
 .. index:: Maintenance of Data (Email)
 .. index:: Maintenance of Data (Internal alert)
@@ -104,7 +102,7 @@ Consistency check
 Maintenance of Data
 -------------------
  
-* The administrator has the possibility to:
+The administrator has the possibility to:
 
   * Close and delete sent emails and alerts. 
   * Delete history of connections. 
@@ -119,3 +117,5 @@ The administrator has the possibility to:
   
   * Delete old log files.
   * Show the list and specific log file.
+  
+  

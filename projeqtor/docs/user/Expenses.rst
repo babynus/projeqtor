@@ -2,8 +2,7 @@
 
 .. title:: Expenses
 
-.. index:: Expense
-.. index:: Project (Expense)
+.. index:: Expenses
 
 .. _Expenses:
 
@@ -12,6 +11,7 @@ Expenses
 
 The expenses incurred for the project are monitored.
 
+.. index:: Budget
 
 Budget
 ------
@@ -55,7 +55,7 @@ Budget
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: required field |ReqFieldLegend|  
+.. list-table:: Required field |ReqFieldLegend|  
    :widths: 30, 80
    :header-rows: 1
 
@@ -87,16 +87,18 @@ Budget
 
 .. figure:: /images/GUI/EXPENSES_ZONE_Progress.png
    :alt: Progress Section
+   
+   Progress Section
 
-This section allows to follow the consolidation of all the expenses 
+This section allows to follow the consolidation of all the expenses.
 
-* The target amount is the only amount you can save on a parent budget 
+The target amount is the only amount you can save on a parent budget.
 
-* Other amounts are recovered from the sub-budgets and consolidated on the parent budget
+Other amounts are recovered from the sub-budgets and consolidated on the parent budget.
 
-* Transferred Amount allows to release a sum of an amount planned for a budget item in order to redistribute it to another item
+Transferred Amount allows to release a sum of an amount planned for a budget item in order to redistribute it to another item.
 
-* This amount is visible on all budget items 
+This amount is visible on all budget items.
 
 .. note:: 
 
@@ -112,17 +114,15 @@ This section allows to follow the consolidation of all the expenses
 This section brings and displays the :ref:`project-expense` lines in the details 
 
 .. figure:: /images/GUI/EXPENSES_ZONE_DetailLine.png
-   :alt: Progress Section
+   :alt: Details lines
 
-
-
-
+   Details lines
 
 .. rubric:: Treatment
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: required field |ReqFieldLegend|
+.. list-table:: Required field |ReqFieldLegend|
    :widths: 30, 80
    :header-rows: 1
 
@@ -150,7 +150,9 @@ This section brings and displays the :ref:`project-expense` lines in the details
 
     \newpage
 
-.. index:: Expense (Call_for_tender)
+.. index:: Expenses (Call for tender)
+
+.. index:: Call for tender (Expenses)
 
 .. _call-for-tenders:
 
@@ -167,7 +169,7 @@ You have the possibility to create some different evaluation criterias. Thereaft
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: required field |ReqFieldLegend|
+.. list-table:: Required field |ReqFieldLegend|
    :widths: 30, 80
    :header-rows: 1
 
@@ -190,7 +192,7 @@ You have the possibility to create some different evaluation criterias. Thereaft
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: required field |ReqFieldLegend|
+.. list-table:: Required field |ReqFieldLegend|
    :widths: 30, 70
    :header-rows: 1
    
@@ -219,6 +221,8 @@ You have the possibility to create some different evaluation criterias. Thereaft
    :alt: Submission of tender
    :align: center
 
+   Submission of tender
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table::
@@ -245,27 +249,29 @@ You have the possibility to create some different evaluation criterias. Thereaft
 
 .. index:: Expenses (Provider Tenders)
 
+.. index:: Provider Tenders (Expenses)
+
 .. _tenders:
 
 Provider Tenders
 ----------------
 
-* Tenders store information about the responses to the call for tenders that you have submitted.
+Tenders store information about the responses to the call for tenders that you have submitted.
 
-* This can for instance be used to detail all the tenders and compare them to choose one of them.
+This can for instance be used to detail all the tenders and compare them to choose one of them.
 
-* If your call for tenders has evaluation criteria, you can attribute a rating for each criteria.
+If your call for tenders has evaluation criteria, you can attribute a rating for each criteria.
 
-* Evalutation will display a summary of your criterias with their ratings. 
+Evalutation will display a summary of your criterias with their ratings. 
 
-* Global rating will then be displayed on the call for tender for all concerned tenders.
+Global rating will then be displayed on the call for tender for all concerned tenders.
 
 
 .. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: required field |ReqFieldLegend|
+.. list-table:: Required field |ReqFieldLegend|
    :widths: 30, 80
    :header-rows: 1
 
@@ -292,7 +298,7 @@ Provider Tenders
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::  required field |ReqFieldLegend|
+.. list-table::  Required field |ReqFieldLegend|
    :widths: 30, 80
    :header-rows: 1
    
@@ -337,6 +343,8 @@ Provider Tenders
 
 .. index:: Expenses (Order to provider)
 
+.. index:: Order to provider (Expenses)
+
 .. _order_providers:
 
 Orders to provider
@@ -347,10 +355,12 @@ Orders to provider
 .. figure:: /images/GUI/EXPENSES_ZONE_DescriptionZone.png
    :alt: Order to provider - Description section
    :align: center
+   
+   Order to provider - Description section
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: required field |ReqFieldLegend|
+.. list-table:: Required field |ReqFieldLegend|
    :widths: 30, 80
    :header-rows: 1
 
@@ -380,9 +390,11 @@ Orders to provider
    :alt: Order to provider - Treatment section
    :align: center
    
+   Order to provider - Treatment section
+   
 .. tabularcolumns:: |l|l|
 
-.. list-table:: required field |ReqFieldLegend|
+.. list-table:: Required field |ReqFieldLegend|
    :widths: 30, 80
    :header-rows: 1
 
@@ -420,22 +432,19 @@ Orders to provider
      - Total amount of taxes calculated based on Taxe rate
    * - Full amount
      - Total amount of the order including taxes             
-     
-.. Note:: Other Sections
+
+
+.. note:: 
 
    you can attach many documents related to your order: The general conditions of sale, the quotation, the order form ...            
-
-
-
-
-
-
-
+   
 .. raw:: latex
 
     \newpage
 
 .. index:: Expenses (Terms of payment to provider)
+
+.. index:: Terms of payment to provider (Expenses)
 
 .. _Term_payment:
 
@@ -456,8 +465,8 @@ In this screen, you can save, organize, track and edit your payment dates to you
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::  required field |ReqFieldLegend|
-   :widths: 30, 80
+.. list-table::  Required field |ReqFieldLegend|
+   :widths: 40, 70
    :header-rows: 1
 
    * - Field
@@ -479,7 +488,7 @@ In this screen, you can save, organize, track and edit your payment dates to you
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::  required field |ReqFieldLegend|
+.. list-table::  Required field |ReqFieldLegend|
    :widths: 30, 80
    :header-rows: 1
 
@@ -519,6 +528,8 @@ In this screen, you can save, organize, track and edit your payment dates to you
 
 .. index:: Expenses (Provider Bills)
 
+.. index:: Provider Bills (Expenses)
+
 .. Provider_Bills:
 
 Provider bills
@@ -528,7 +539,7 @@ Provider bills
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::  required field |ReqFieldLegend|
+.. list-table::  Required field |ReqFieldLegend|
    :widths: 30, 80
    :header-rows: 1
 
@@ -557,7 +568,7 @@ Provider bills
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::  required field |ReqFieldLegend|
+.. list-table::  Required field |ReqFieldLegend|
    :widths: 30, 80
    :header-rows: 1
 
@@ -588,7 +599,9 @@ Provider bills
 
     \newpage
 
-.. index:: Expense (Terms of payment to provider)
+.. index:: Expenses (Payment to provider)
+
+.. index:: Payment to provider (Expenses)
 
 .. _Term_payment:
 
@@ -603,7 +616,7 @@ Follow the payment of your supplier invoices to better organize your general cas
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::  required field |ReqFieldLegend|
+.. list-table::  Required field |ReqFieldLegend|
    :widths: 30, 80
    :header-rows: 1
 
@@ -619,11 +632,13 @@ Follow the payment of your supplier invoices to better organize your general cas
 .. rubric:: Section Treament 
 
 .. figure:: /images/GUI/EXPENSES_ZONE_TreatmentPayments.PNG
-
+   :alt: Payment modes
+   
+   Payment modes
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::  required field |ReqFieldLegend|
+.. list-table::  Required field |ReqFieldLegend|
    :widths: 30, 80
    :header-rows: 1
 
@@ -657,12 +672,14 @@ Follow the payment of your supplier invoices to better organize your general cas
 
     \newpage
 
-.. index:: Expense (Individual)
+.. index:: Expenses (Individual)
+
+.. index:: Individual Expenses
 
 .. _individual-expense:
 
-Individual expense
-------------------
+Individual expenses
+-------------------
 
 An individual expense stores information about individual costs, such as travel costs or else.
 
@@ -674,6 +691,8 @@ This can for instance be used to detail all the expense on one month so that eac
 
 Planned amount will help to have an overview of project total costs, even before expense is realized.
 
+.. rubric:: Section Description
+
 .. sidebar:: Other sections
 
    * :ref:`expense-detail-lines`
@@ -681,11 +700,9 @@ Planned amount will help to have an overview of project total costs, even before
    * :ref:`Attachments<attachment-section>`
    * :ref:`Notes<note-section>`
 
-.. rubric:: Section Description
-
 .. tabularcolumns:: |l|l|
 
-.. list-table:: required field |ReqFieldLegend|
+.. list-table:: Required field |ReqFieldLegend|
    :widths: 30, 80
    :header-rows: 1
 
@@ -708,7 +725,7 @@ Planned amount will help to have an overview of project total costs, even before
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: required field |ReqFieldLegend|
+.. list-table:: Required field |ReqFieldLegend|
    :widths: 30, 80
    :header-rows: 1
 
@@ -729,7 +746,7 @@ Planned amount will help to have an overview of project total costs, even before
    * - Cancelled
      - Box checked indicates that the expense is cancelled
 
-.. topic:: **Fields Planned & Real**
+.. topic:: Fields Planned & Real
 
    * **Full**: Amount.
 
@@ -746,7 +763,9 @@ Planned amount will help to have an overview of project total costs, even before
     \newpage
 
 
-.. index:: Expense (Project)
+.. index:: Expenses (Project)
+
+.. index:: Project (Expenses)
 
 .. _project-expense:
 
@@ -767,6 +786,7 @@ This can be used for all kinds of project cost :
 
 Planned amount will help to have an overview of project total costs, even before expense is realized.
 
+.. rubric:: Section Description
 
 .. sidebar:: Other sections
 
@@ -775,11 +795,9 @@ Planned amount will help to have an overview of project total costs, even before
    * :ref:`Attachments<attachment-section>`
    * :ref:`Notes<note-section>`
 
-.. rubric:: Section Description
-
 .. tabularcolumns:: |l|l|
 
-.. list-table:: required field |ReqFieldLegend|
+.. list-table:: Required field |ReqFieldLegend|
    :widths: 30, 80
    :header-rows: 1
 
@@ -813,7 +831,7 @@ Planned amount will help to have an overview of project total costs, even before
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: required field |ReqFieldLegend|
+.. list-table:: Required field |ReqFieldLegend|
    :widths: 30, 80
    :header-rows: 1
 
@@ -864,14 +882,14 @@ Planned amount will help to have an overview of project total costs, even before
 
     \newpage
 
-.. index::  ! Expense (Detail line)
+.. index::  Expenses (Detail line)
 
 .. _expense-detail-lines:
 
-Expense detail lines
-====================
+Expenses detail lines
+=====================
 
-.. rubric:: Section Expense detail lines
+.. rubric:: Section Expenses detail lines
 
 This section is common to individual and project expenses.
 
@@ -911,12 +929,14 @@ It allows to enter detail on expense line.
 
 
 .. figure:: /images/GUI/BOX_ExpenseDetail.png
-   :alt: Dialog box - Expense detail 
+   :alt: Dialog box - Expense detail
    :align: center
 
+   Expense detail dialog box
+   
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Fields - Expense detail dialog box | required field |ReqFieldLegend| 
+.. list-table:: Fields - Expense detail dialog box - Required field |ReqFieldLegend| 
    :widths: 30, 80
    :header-rows: 1
 
@@ -935,16 +955,19 @@ It allows to enter detail on expense line.
 
 .. topic:: Field Date
 
-   * This allows to input several items, during several days, for the same expense, to have for instance one expense per travel or per month.
+   This allows to input several items, during several days, for the same expense, to have for instance one expense per travel or per month.
 
 .. topic:: Field Type
 
-   * Depending on type, new fields will appear to help calculate of amount.
-   * Available types depending on whether individual or project expense.
-   * See: :ref:`expense-detail-type`. 
+   Depending on type, new fields will appear to help calculate of amount.
+   
+   Available types depending on whether individual or project expense.
+   
+   See: :ref:`expense-detail-type`. 
 
 .. topic:: Field Amount 
 
-   * Automatically calculated from fields depending on type.
-   * May also be input for type “justified expense”.
+   Automatically calculated from fields depending on type.
+   
+   May also be input for type “justified expense”.
 

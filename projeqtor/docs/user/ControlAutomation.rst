@@ -9,6 +9,9 @@
 Control Automation
 ******************
 
+The menu "controls and automatisms" allows to manage and parameterize efficiently and finely the triggering events as well as all that ensues from it ... automatically.
+
+Sending mails, changes of status, status, loading of notes ...
 
 .. index:: Workflow
 
@@ -29,7 +32,7 @@ Once defined, a workflow can be linked to any type of any item.
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Required Fields |ReqFieldLegend|
+.. list-table:: Required field |ReqFieldLegend|
    :widths: 30, 80
    :header-rows: 1
 
@@ -46,29 +49,30 @@ Once defined, a workflow can be linked to any type of any item.
    * - Description
      - Complete description of the workflow.
 
-.. rubric:: Button "Select status to show or hide"
+.. rubric:: Select status to show or hide
    
 By clicking this button |buttonIconParameter| you can hide some unnecessary states..
 
 .. image:: /images/GUI/CONTROLAUTO_ZONE_SelectHide.png
    :alt: Select or hide
    :align: center 
+  
    
 .. figure:: /images/GUI/CONTROLAUTO_BOX_SelectStatus.png
    :alt: Dialog box - Select status to show or hide 
    :align: center
-
+   
+   Select or hide state.s
 
 .. rubric:: Section List of types using this workflow
-
 
 List of all elements and objects related to this workflow
 
 
-.. image:: /images/GUI/CONTROLAUTO_ZONE_ListOfType.png
+.. figure:: /images/GUI/CONTROLAUTO_ZONE_ListOfType.png
    :alt: List of types using this workflow
    
-   
+   List of types using this workflow
 
 .. rubric:: Section Workflow Diagram
 
@@ -93,7 +97,9 @@ The workflow diagram presents a visual representation of the workflow displaying
    :alt: Habilitation table
    :align: center
 
-.. note:: **Exemple**
+   Habilitation table
+   
+.. note:: 
 
    In the example above, only the administrator, lead project, and supervisor can change from **Recorded** status to **assigned**, **verified**, or **canceled** status.
   
@@ -101,10 +107,11 @@ The workflow diagram presents a visual representation of the workflow displaying
    
    however, no one can move from **qualified** to another.
    
-   .. warning::
 
-      In this case, make sure that it is never possible to transfer an item to the "qualified" status, as it will not be possible to leave this status.
-      You can also review the links in the workflow diagram area.
+.. warning::
+   
+   In this case, make sure that it is never possible to transfer an item to the "qualified" status, as it will not be possible to leave this status.
+   You can also review the links in the workflow diagram area.
 
 .. raw:: latex
 
@@ -161,7 +168,9 @@ Just define your templates, and select it on the "Mail on Events"
  
 In the model, the user can use any property of the object, and display it in the mail using specific tags.
 
-you just have to use the $ {projectName} tag for the project name to appear. Likewise with $ {idproject} to display the identification number of it
+you just have to use the ${projectName} tag for the project name to appear. 
+
+Likewise with ${idproject} to display the identification number of it
    
 .. warning::
    
@@ -182,7 +191,7 @@ More details, see :ref:`Global Parameters<mailing_parameters>`
      - ${url} : url to get the direct link to the item
      - ${goto} : display Class and Id of item, clickable to have direct link to the item
         
-   **This tags are available except in the mail title because they display a table**
+.. topic:: This tags are available except in the mail title because they display a table**
    
      - ${HISTORY} : displays the last change of an object.
      - ${HISTORYFULL} : display all the modifications
@@ -193,16 +202,18 @@ More details, see :ref:`Global Parameters<mailing_parameters>`
 .. rubric:: the Tags selector
 
 
-.. image:: /images/GUI/CONTROLAUTO_ZONE_InsertTAG.png
+.. figure:: /images/GUI/CONTROLAUTO_ZONE_InsertTAG.png
    :alt: Insert specific tags
+   
+   Insert specific tags
 
-A tag selector is available under the text fields.
+* A tag selector is available under the text fields.
 
-choose the tag you want to insert.
+* Choose the tag you want to insert.
 
-Click the insert button
+* Click the insert button
 
-The tag appears in the body of the text
+* The tag appears in the body of the text
     
 
 .. index:: Email (Event)
@@ -249,7 +260,7 @@ Events are defined on an element and element type.
 
 .. topic:: Field Type
 
-   * If not set, the event is valid for every type of the element.
+   If not set, the event is valid for every type of the element.
 
 
 .. rubric:: Section Mail receivers
@@ -280,7 +291,7 @@ It is possible to define a default delay for tickets, for each ticket type and e
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Required Fields |ReqFieldLegend|
+.. list-table:: Required field |ReqFieldLegend|
    :widths: 30, 80
    :header-rows: 1
 
@@ -302,9 +313,14 @@ It is possible to define a default delay for tickets, for each ticket type and e
 
    **Unit for the value can be**
     
-     * **Days:** simple calculation as days.
-     * **Hours:** simple calculation as hours.
-     * **Open days:** calculation excluding days off (weekends and days off defined on “calendar”).
+     * **Days:** simple calculation as days
+     
+     * **Hours:** simple calculation as hours
+     
+     * **Open days:** calculation excluding days off 
+     
+       weekends and days off defined on “calendar”
+       
      * **Open hours:** calculation only on the “standard open hours” defined in :ref:`Global parameters<daily-work-hours-section>` screen. 
 
 
@@ -391,7 +407,7 @@ Selecting an item in the list will automatically fill in the note text field.
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Required Fields |ReqFieldLegend|
+.. list-table:: Required field |ReqFieldLegend|
    :widths: 30, 80
    :header-rows: 1
 
@@ -412,11 +428,11 @@ Selecting an item in the list will automatically fill in the note text field.
 
 .. topic:: Field Element
 
-   * If not set, predefined note is valid for every element type.
+   If not set, predefined note is valid for every element type.
 
 .. topic:: Field Type
 
-   * If not set, predefined note is valid for every type of the element.
+   If not set, predefined note is valid for every type of the element.
 
 .. raw:: latex
 
@@ -464,7 +480,8 @@ A checklist is built from checklist lines.
    :alt: Dialog box - Choices for the checklist lines 
    :align: center
 
-
+   Choices for the checklist lines
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Choices for the checklist lines
@@ -515,37 +532,39 @@ A description of receivers below.
 
 .. rubric:: Requestor
 
-* The contact defined as :term:`requestor` on current item; sometimes appears as “contact” (on quotation and order, for instance) and sometimes have no meaning (for instance for milestone).
+The contact defined as :term:`requestor` on current item; sometimes appears as “contact” (on quotation and order, for instance) and sometimes have no meaning (for instance for milestone).
 
 .. rubric:: Issuer
 
-* The user defined as :term:`Issuer`.
+The user defined as :term:`Issuer`.
 
 .. rubric:: Responsible
 
-* The resource defined as :term:`responsible`.
+The resource defined as :term:`responsible`.
 
 .. rubric:: Project team
 
-* All resources allocated to the project.
+All resources allocated to the project.
 
 .. rubric:: Project leader
 
-* The resource(s) allocated to the project with a “Project Leader” profile.
+The resource(s) allocated to the project with a “Project Leader” profile.
 
 .. rubric:: Project manager
 
-* The resource defined as the manager on a project.
+The resource defined as the manager on a project.
 
 .. rubric:: Assigned resource
 
-* All resources assigned.
+All resources assigned.
 
 .. rubric:: Other
 
-* Provides an extra field to manually enter email addresses.
-* If “other” is checked, an input box is displayed to enter a static mail address list.
-* Several addresses can be entered, separated by semicolon.
+Provides an extra field to manually enter email addresses.
+
+If “other” is checked, an input box is displayed to enter a static mail address list.
+
+Several addresses can be entered, separated by semicolon.
 
 
 .. raw:: latex
@@ -600,11 +619,15 @@ It is possible to attributes tresholds lines to KPI.
 
 .. note::
      
-   * Keep in mind KPI is an indicator of performance at project level (opposite to indicator which is calculated at item level).
-   * to display the indicator, use Kpi report. See: :ref:`report`
+   Keep in mind KPI is an indicator of performance at project level (opposite to indicator which is calculated at item level).
+   
+   To display the indicator, use Kpi report. See: :ref:`report`
       
       
 .. figure:: /images/GUI/CONTROLAUTO_ZONE_KpiReport.png
+   :alt: List of KPI Reports
+   
+   List of KPI Reports 
 
 
 .. raw:: latex
@@ -652,6 +675,9 @@ A JobList is built from JobList lines.
 * Click on |buttonIconDelete| to delete the corresponding JobList line.
 
 .. figure:: /images/GUI/CONTROLAUTO_BOX_Joblist.png
+   :alt: Definition of a job
+   
+   Definition of a job
 
 .. note::
 
@@ -686,6 +712,8 @@ If it is generated by the notification system, it is linked to an element of the
 
 .. figure:: /images/GUI/CONTROLAUTO_SCR_NotificationsSystem.png
    :alt: Notifications system screen
+   
+   Notifications system screen
 
 .. rubric:: Creation
 
@@ -731,7 +759,7 @@ Select an object and / or a field and click the Insert button so that the dynami
 
 In this case, the syntax must be: `#{the name of the field}` ...
 
-.. note::
+.. tip::
 
    #{billId} - Invoice not paid - Sent on #{sendDate}
    If the rule (see below) of the instruction on the invoice of 'billId' 2019-12-30-0001 whose sending date is 30-12-2019 
@@ -742,12 +770,15 @@ In this case, the syntax must be: `#{the name of the field}` ...
 .. rubric:: Section Rule to apply
 
 .. figure:: /images/GUI/CONTROLAUTO_ZONE_NotificationsRules.png
-
+   :alt: Notifications rules
+   
+   Notifications rules
+   
 This rule determines which instance of the item will generate a notification.
 
 The syntax is the one we take for a WHERE clause in an SQL statement.
 
-:Example: 
+.. tip:: 
 
    scheduling a notification for all invoices where the amount has been paid = total amount AND project name 'ACME'
 
@@ -764,6 +795,9 @@ The syntax is the one we take for a WHERE clause in an SQL statement.
    In addition to choosing a dynamic field, you can choose to use an operator or function with the following elements:
 
    .. figure:: /images/GUI/CONTROLAUTO_ZONE_OperatorFunctions.png
+      :alt: Operator functions
+   
+      Operator functions
 
 
 .. rubric:: Notification content
@@ -774,48 +808,59 @@ You can also add dynamic fields with **help to insert a dynamic field in content
 
 .. figure:: /images/GUI/CONTROLAUTO_ZONE_Content.png
    :alt: Content section
+   
+   Content section
 
 .. rubric:: Section Start as
 
 .. figure:: /images/GUI/CONTROLAUTO_ZONE_StartAS.png
    :alt: Start as section
    
+   Start as section
+   
 this section allows you to program the frequency of the notification display
 
    .. compound:: **The reference date**
    
-   Date on witch will be generate the notification (minus the number of days or minutes programmed before) 
+   * Date on witch will be generate the notification (minus the number of days or minutes programmed before) 
    
-   Notify before: This is a number of days before the notification date for which the notification is to be generated
+   * Notify before: This is a number of days before the notification date for which the notification is to be generated
    
-   This field is mandatory       
+   * This field is mandatory       
+
+--------------   
    
-   :Example: 'delivery expected date' is selected. 
+   Example "delivery expected date" is selected. 
    
    For all deliverables that do not follow the previous rule, a notification will be generated if the delivery date is not respected.
    
+--------------
    
    .. compound:: **Every year**
    
-   If the year is checked, the generator is a notification every year to the month and the day of the reference date
+   * If the year is checked, the generator is a notification every year to the month and the day of the reference date
    
-   If the year is checked, the month and day filled, then it is a birthday. The reference date will not be used.
+   * If the year is checked, the month and day filled, then it is a birthday. The reference date will not be used.
    
    .. compound:: **Every month / Week / Open day**
    
-   Is selected, responsive notifications will be generate monthly / weekly or each open day 
+   * Is selected, responsive notifications will be generate monthly / weekly or each open day 
    
    
 .. rubric:: Receivers
    
 These are the types of people who are notified.
    
-The syntax is as follows: One of the words in the "Help - Authorized Recipients" section separated by a ';
+The syntax is as follows: One of the words in the "Help Authorized Recipients" 
+
+section separated by a ';
    
 The following items allow you to choose the type of remitter.
    
 .. figure:: /images/GUI/CONTROLAUTO_ZONE_Receivers.png 
    :alt: Receivers section
+   
+   Receivers section
    
    .. compound:: **Sent e-mail**
    
@@ -849,38 +894,48 @@ After logging in, a message generated after "Login accepted" that tells you that
 
 .. figure:: /images/GUI/CONTROLAUTO_BOX_IHMNotif.png 
    :alt: notification on the login screen
+   
+   notification on the login screen
 
 .. figure:: /images/GUI/CONTROLAUTO_ZONE_IconNotif.png
+   :alt: icon notifications
+   
+   Icon notifications
+   
 
 Display of unread notifications
+
 It is done at 2 levels on the main screen:
 
-Bottom right
-A notification icon appears as soon as a notification is not intended for the user.
+   * Bottom right
+     A notification icon appears as soon as a notification is not intended for the user.
 
-Clicking on the icon gives direct access to the notifications screen. 
+     Clicking on the icon gives direct access to the notifications screen. 
 
-• Below the menus
+   * Below the menus
 
 .. figure:: /images/GUI/CONTROLAUTO_ZONE_NotifRecap.png
+   :alt: notification area
+   
+   Notifications area
 
 A tree whose title indicates the number of unread notifications intended for the user.
 
 This tree has the following levels:
 
-• Level 1: The types of notifications
+* Level 1: The types of notifications
 
-• Level 2: The trigger for notifications
+* Level 2: The trigger for notifications
 
-• Level 3: The Notification Definition to Product Notifications
+* Level 3: The Notification Definition to Product Notifications
 
-• Level 4: The id of the element that generated the notification. Allows direct access to the item.
+* Level 4: The id of the element that generated the notification. Allows direct access to the item.
 
 The icon |buttonIconRefresh| allows you to refresh notifications without waiting for the scheduled update.
 
 The icon |iconNotif| provides direct access to the notifications screen.
 
-
+Numbers in parentheses indicate the number of unread notifications
 
 
 

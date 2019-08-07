@@ -140,6 +140,8 @@ You can manage different trigger settings per recipient
 Tab Activity
 ------------
 
+.. gp_activity_planning:
+
 Planning
 ========
 Specific parameters about Gantt planning presentation.
