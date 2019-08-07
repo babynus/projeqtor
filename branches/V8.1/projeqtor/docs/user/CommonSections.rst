@@ -124,7 +124,7 @@ This section allows to manage resource allocation to projects.
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Allocation dialog box - Required Field |ReqFieldLegend|
+.. list-table:: Allocation dialog box - Required field |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -180,7 +180,7 @@ This section allows to manage resource allocation to projects.
 
 .. note:: 
 
-   Work done on tasks belongs to always the old resource.
+   Work done on tasks still belongs the old resource.
 
 .. figure:: /images/GUI/COMMON_BOX_ReplaceAffectation.png
    :alt: Dialog box - Replace allocation 
@@ -190,7 +190,7 @@ This section allows to manage resource allocation to projects.
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Replace allocation dialog box - Required Field |ReqFieldLegend| 
+.. list-table:: Replace allocation dialog box - Required field |ReqFieldLegend| 
    :widths: 20, 80
    :header-rows: 1
 

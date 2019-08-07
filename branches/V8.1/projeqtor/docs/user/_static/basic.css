@@ -22,10 +22,6 @@
 /* -------------------------------- MAIN LAYOUT -------------------------------------- */
 /* ------------------ Découpage + apparence générale de la page ---------------------- */
 
-div.clearer {
-    clear: none;
-}
-
 /* séparation page : marge contenant Sphinxsidebar */
 div.bodywrapper {
     margin: 0 0 0 300px;
@@ -161,7 +157,7 @@ div.sphinxsidebar ul {
 /* Décalage des niveaux + style de points - Liste menu */
 div.sphinxsidebar ul ul,
 div.sphinxsidebar ul.want-points {
-    margin-left: 40px;
+    margin-left: 25px;
     list-style: square;
 }
 
@@ -261,6 +257,13 @@ div.sphinxsidebar #searchbox input[type="submit"] {
 
 
 /* ------------------------------------ PIED DE PAGE ---------------------------------- */
+
+div.clearer {
+    clear: none;
+    position: fixed;
+    border-top: 2px solid #8080c0;
+}
+
 div.footer {
     color: #bfbfdf;
     width: 100%;
@@ -280,6 +283,7 @@ div.footer a:hover {
     color: #ff954a;
     text-decoration: underline;
 }
+
 /* ----------------------------------------------------------------------------------- */
 
 
@@ -312,8 +316,8 @@ img.toggler {
 /* ------------------------------------ figures --------------------------------------- */
 
 div.figure {
-    margin: 1.5em 0 3em 0;
-    padding: 20px 20px 5px 20px;
+    margin: 5px 0 3px 0;
+    padding: 5px 5px 5px 5px;
     background-color: #f0f3f5;
 }
 
@@ -324,10 +328,11 @@ div.figure p.caption {
 	border-top: 1px dotted #414141;    
 	border-bottom: 1px dotted #414141;   
 	color: #808080;
+	text-shadow: 1px 1px 0px #ffffff;
     text-align: center;
     font-size: 75%;
     font-style: italic;
-    background-color: #f7f8f9;
+    background-color: #dcdae4;
     box-shadow: 1px 1px 5px #d4d4d4;
 }
 
