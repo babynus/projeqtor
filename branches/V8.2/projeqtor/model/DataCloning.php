@@ -567,10 +567,9 @@ class DataCloning extends SqlElement{
 	      }
 	    }
 	  }
-  	$cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
   	$dataCloning->isActive = 1;
   	$dataCloning->nameDir = $nameDir;
-  	$dataCloning->plannedDate = $cronExecution->nextTime;
+  	$dataCloning->plannedDate = strtotime(date('Y-m-d H:i:s'));
   	$dataCloning->save();
 	} 
 	

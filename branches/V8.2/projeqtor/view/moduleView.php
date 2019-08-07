@@ -81,7 +81,11 @@ $user=getSessionUser();
     <?php 
     $mod=new Module();
     $modList=$mod->getSqlElementsFromCriteria(null,null,null,'sortOrder asc');
-    foreach ($modList as $mod) {?>
+    $simuIndex=Parameter::getGlobalParameter('simuIndex');
+    foreach ($modList as $mod) {
+      if($simuIndex and $mod->name == 'moduleDataCloning'){
+        continue;
+      }?>
       <tr style="height:30px" >
         <td style="width:25%;padding:10px;vertical-align:top" class="simpleText">
           <?php if ($mod->idModule) echo "<div style='width:40px;float:left'>&nbsp;</div>";?> 
