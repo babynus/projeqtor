@@ -109,3 +109,10 @@ INSERT INTO `${prefix}importable` (`id`, `name`, `idle`) VALUES
 (54, 'Budget', 0);
 
 ALTER TABLE `${prefix}expense` CHANGE `realTaxAmount` `realTaxAmount` DECIMAL(14,5);
+
+INSERT INTO `${prefix}module`(`id`, `name`, `sortOrder`, `idModule`, `idle`, `active`) VALUES 
+(17,'moduleDataCloning',1200,null,0,1);
+
+INSERT INTO `modulemenu`(`idModule`, `idMenu`, `hidden`, `active`) VALUES 
+(17,222,0,1),
+(17,224,0,1);
