@@ -34,6 +34,7 @@ class ShortType extends SqlElement {
   public $_sec_Description;
   public $id;    // redefine $id to specify its visible place 
   public $name;
+  public $code;
   public $idWorkflow;
   public $sortOrder=0;
   public $idle;
