@@ -132,6 +132,7 @@
             <br/>
             <p><progress  id="advancement" max="4" style="margin-left:148px;width:185px;" value="0" ></progress> <span id="error" style="float:right;" ></span>  </p>
             <span id="strength" style="margin-left:220px;"></span>     
+            <!-- florent 4088 -->
             </div>
             <input type="hidden" id="parmPwdSth"  value="<?php echo Parameter::getGlobalParameter('paramPasswordStrength');?>"/>
             <input type="hidden" id="paramPwdLth"  value="<?php echo Parameter::getGlobalParameter('paramPasswordMinLength');?>"/>
@@ -140,6 +141,7 @@
             <input type="hidden" id="passwordLength" name="passwordLength" value=""/>
             <input type="hidden" id="passwordValidate" name="passwordValidate" value=""/>
             <input type="hidden" id="criteria" name="criteria" value=""/>
+            <!-- florent -->
             <br/>
             <button type="submit" style="margin-left:150px;width:200px;color:#555555;" class="largeTextButton" id="goButton" dojoType="dijit.form.Button" showlabel="true">OK
               <script type="dojo/connect" event="onClick" args="evt">
