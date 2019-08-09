@@ -112,18 +112,26 @@
   	}
   }
   //florent
-  $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
-  if (!$detailRightHeight) $detailRightHeight=0;
-  if($detailRightHeight or $detailRightHeight==="0"){
-    if ($detailRightHeight < 80){
-      $detailRightHeight=100;
+  if(Parameter::getUserParameter("paramRightDiv") == '2' ){
+    $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
+    $detailDivHeight=Parameter::getUserParameter('contentPaneDetailDivHeight'.$objectClass);
+    if (!$detailRightHeight) $detailRightHeight=0;
+    if($detailRightHeight or $detailRightHeight==="0"){
+      if ($detailRightHeight > 500){
+        $detailRightHeight=200;
+      }
+      if ($detailRightHeight < 80){
+        $detailRightHeight=100;
+      }
+      if ($detailDivHeight < 100 or $detailDivHeight < ($detailRightHeight/2)){
+        $detailRightHeight=$detailRightHeight/2;
+      }
+      $rightHeight=$detailRightHeight.'px';
+    } else {
+      $rightHeight="0%";
     }
-    if( $detailRightHeight > 700 ){
-      $detailRightHeight=400;
-    }
-    $rightHeight=$detailRightHeight.'px';
-  } else {
-    $rightHeight="0%";
+  }else{
+    $rightHeight="100%";
   }
   ///////
   
@@ -132,14 +140,14 @@
 <div id="mainDivContainer" class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
   <div dojoType="dijit.layout.ContentPane" region="center" splitter="true">
     <div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
-		  <div id="listDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positionListDiv; ?>" splitter="true" style="height:<?php echo $listHeight;?>;width:<?php echo $widthListDiv; ?>">
+		  <div id="listDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positionListDiv; ?>" splitter="true" style="height:<?php echo $listHeight;?>;width:<?php echo $widthListDiv; ?>;">
 		   <script type="dojo/connect" event="resize" args="evt">
                if (switchedMode) return;
                saveDataToSession("contentPaneTopDetailDivHeight<?php echo $objectClass;?>", dojo.byId("listDiv").offsetHeight, true);
             </script>
 		   <?php include 'objectList.php'?>
 		  </div>
-		  <div dojoType="dijit.layout.ContentPane" region="center"  style="width:<?php echo $widthDetailDiv; ?>">
+		  <div id="contentDetailDiv" dojoType="dijit.layout.ContentPane" region="center"  style="width:<?php echo $widthDetailDiv; ?>;">
 			  <div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
 			   <?php if (property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream') and Parameter::getUserParameter("paramRightDiv") !='2' ) {?>
 				  <div id="hideStreamButton" style="cursor:pointer;position:absolute; right:-2px; bottom:2px;z-index:999999">
@@ -149,6 +157,9 @@
 				  <div id="detailDiv" dojoType="dijit.layout.ContentPane" region="center" >
 				   <?php $noselect=true; include 'objectDetail.php'; ?>
 				  </div>
+				    <script type="dojo/connect" event="resize" args="evt">
+                       saveDataToSession("contentPaneDetailDivHeight<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
+                    </script>
 				</div>
 		  </div>
     </div>
