@@ -131,7 +131,7 @@ $assRec=array();
 if ($planningMode=='RECW') {
   for ($i=1;$i<=7;$i++) $assRec[$i]=RequestHandler::getValue('recurringAssignmentW'.$i);
 }
-
+$idle=RequestHandler::getBoolean('assignmentIdle');
 
 //$comment=htmlEncode($_REQUEST['assignmentComment']);
 $comment=$_REQUEST['assignmentComment']; // Must not escape : will be done on display
@@ -178,6 +178,7 @@ $assignment->assignedWork=Work::convertWork($assignedWork);
 //$assignment->realWork=Work::convertWork($realWork); // Should not be changed here
 $assignment->leftWork=Work::convertWork($leftWork);
 $assignment->plannedWork=Work::convertWork($plannedWork);
+$assignment->idle=trim($idle);
 $assignment->comment=$comment;
 
 if (! $assignment->idProject) {
@@ -201,6 +202,7 @@ if (! $oldCost and $cost and $assignment->realWork) {
 if(isset($optional)){
   $assignment->optional=$optional;
 }
+debugLog($assignment);
 $result=$assignment->save();
 
 // 
