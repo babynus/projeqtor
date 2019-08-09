@@ -56,7 +56,14 @@ INSERT INTO `${prefix}habilitationother` (idProfile, rightAccess, scope) VALUES
 (4,2,'dataCloningRight'),
 (5,1,'dataCloningRight'),
 (6,2,'dataCloningRight'),
-(7,2,'dataCloningRight');
+(7,2,'dataCloningRight'),
+(1,10,'dataCloningTotal'),
+(2,1,'dataCloningTotal'),
+(3,3,'dataCloningTotal'),
+(4,1,'dataCloningTotal'),
+(5,1,'dataCloningTotal'),
+(6,1,'dataCloningTotal'),
+(7,1,'dataCloningTotal');
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,222,8),
@@ -91,7 +98,6 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
 ('dataCloningCreationRequest','5'),
 ('dataCloningPerDay','5'),
-('dataCloningTotal','50'),
 ('paramPasswordStrength','1'),
 ('paramAttachmentNum',''),
 ('paramScreen','0'),
