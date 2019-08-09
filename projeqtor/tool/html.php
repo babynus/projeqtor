@@ -881,11 +881,7 @@ function htmlDisplayDatabaseInfos() {
     $paramDbDisplayName=$paramDbName;
   }
   if($simuIndex){
-    if ($paramDbDisplayName) {
-    	$paramDbDisplayName=i18n('DataCloning').' '.$paramDbDisplayName;
-    }else{
-      $paramDbDisplayName=i18n('DataCloning').' '.$paramDbName;
-    }
+  	$paramDbDisplayName=i18n('DataCloning').' '.$simuIndex;
   }
   echo "<div style='text-align:center;z-index:9999;'><b>$paramDbDisplayName</b></div>";
 }

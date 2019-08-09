@@ -411,6 +411,12 @@ if ($type=='habilitation') {
     $habilitation->allowAccess = $access;
     $result=$habilitation->save();
     array_push($SaveChange, $result);
+    
+    $creaTotal = RequestHandler::getValue('dataCloningTotal'.$idProfile);
+    $paramCreaTotal=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array("scope"=>"dataCloningTotal", "idProfile"=>$idProfile));
+    $paramCreaTotal->rightAccess = $creaTotal;
+    $result=$paramCreaTotal->save();
+    array_push($SaveChange, $result);
   }
   $request = RequestHandler::getValue('dataCloningCreationRequest');
   $frequency = RequestHandler::getValue('dataCloningSpecificFrequency');
@@ -455,12 +461,6 @@ if ($type=='habilitation') {
   $result=$dataCloningCreationRequest->save();
   array_push($SaveChange, $result);
   $result=$cronExecution->save();
-  array_push($SaveChange, $result);
-  $creaTotal = RequestHandler::getValue('dataCloningTotal');
-  $paramCreaTotal=SqlElement::getSingleSqlElementFromCriteria('Parameter', array("parameterCode"=>"dataCloningTotal"));
-  $paramCreaTotal->parameterValue = $creaTotal;
-  $paramCreaTotal->idUser = null;
-  $result=$paramCreaTotal->save();
   array_push($SaveChange, $result);
   $creaPerDay = RequestHandler::getValue('dataCloningPerDay');
   $paramPerDay=SqlElement::getSingleSqlElementFromCriteria('Parameter', array("parameterCode"=>"dataCloningPerDay"));
