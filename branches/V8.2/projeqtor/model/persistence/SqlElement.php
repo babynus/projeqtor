@@ -4364,7 +4364,7 @@ abstract class SqlElement {
           }
         } else if ($dataType == "int" or $dataType == "decimal") {
           if (trim ( $val ) and ! is_numeric ( $val )) {
-            $result .= '<br/>' . i18n ( 'messageInvalidNumeric', array(i18n ( 'col' . ucfirst ( $col ) )) );
+            $result .= '<br/>' . i18n ( 'messageInvalidNumeric', array(i18n ( 'col' . ucfirst ( $col ) )."='".$val."'") );
           }
         }
       }
@@ -6173,7 +6173,7 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
     return array('select' => $select, 'from' => $from);
   }
 
-  public function setReference($force = false, $old = null) {
+  public function setReference($force = false, $old = null, $fmtPrefix=null, $fmtSuffix=null, $fmtNumber=null) {
     scriptLog ( 'SqlElement::setReference' );
     $objectsWithFixedReference = array('Bill');
     if (! property_exists ( $this, 'reference' )) {
@@ -6185,9 +6185,9 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
     if ($class == 'Bill' and ! $this->billId)
       return; // Do not set Reference until billId is set
     
-    $fmtPrefix = Parameter::getGlobalParameter ( 'referenceFormatPrefix' );
-    $fmtSuffix = '';
-    $fmtNumber = Parameter::getGlobalParameter ( 'referenceFormatNumber' );
+    if (!$fmtPrefix) $fmtPrefix = Parameter::getGlobalParameter ( 'referenceFormatPrefix' );
+    if (!$fmtSuffix) $fmtSuffix = '';
+    if (!$fmtNumber) $fmtNumber = Parameter::getGlobalParameter ( 'referenceFormatNumber' );
     if ($class == 'Bill') {
       $fmtPrefixBill = Parameter::getGlobalParameter ( 'billReferenceFormat' );
       $fmtNumberBill = Parameter::getGlobalParameter ( 'billNumSize' );
