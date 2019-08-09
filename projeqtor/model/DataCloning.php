@@ -352,9 +352,9 @@ class DataCloning extends SqlElement{
     $specificFrequency=$request;
     echo '<select dojoType="dijit.form.FilteringSelect" class="input"';
     echo autoOpenFilteringSelect();
-    echo 'style="width:100px;margin-left:20px;display:'.$display.';" name="dataCloningSpecificFrequency" id="dataCloningSpecificFrequency">';
+    echo 'style="width:110px;margin-left:20px;display:'.$display.';" name="dataCloningSpecificFrequency" id="dataCloningSpecificFrequency">';
     $selected = ($specificFrequency=='5')?'selected':'';
-    echo '<option value="5" '.$selected.'>'.i18n('periodicEvery').' 5'.i18n('shortMinute').'</option>';
+    echo '<option value="5" '.$selected.'>'.i18n('dataCloningEveryTime').' 5'.i18n('shortMinute').'</option>';
     $selected = ($specificFrequency=='10')?'selected':'';
     echo '<option value="10" '.$selected.'>10'.i18n('shortMinute').'</option>';
     $selected = ($specificFrequency=='15')?'selected':'';
