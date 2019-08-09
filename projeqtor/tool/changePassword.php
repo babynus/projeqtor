@@ -30,6 +30,7 @@
   require_once "../tool/projeqtor.php"; 
 scriptLog("changePassword.php");  
   $password="";
+  //florent 4088
   if($_POST['passwordValidate']=='false'){
     if($_POST['criteria']!=''){
     passwordErrorCrit($_POST['criteria']);
@@ -39,7 +40,8 @@ scriptLog("changePassword.php");
   }
   if (array_key_exists('password',$_POST)) {
     $password=$_POST['password'];
-  }   
+  }
+  //   
   $userSalt=$_POST['userSalt'];
   if ($password=="") {
     passwordError(i18n("isEmpty"));
@@ -87,6 +89,7 @@ scriptLog("changePassword.php");
    * Display an error message because of invalid login
    * @return void
    */
+  //florent
   function passwordErrorCrit($crit,$userIssue=false) {
     echo '<div class="messageERROR">';
     echo i18n('invalidPasswordChange', array(Parameter::getGlobalParameter('paramPasswordMinLength')));
@@ -97,7 +100,7 @@ scriptLog("changePassword.php");
     }
     exit;
   }
-  
+  //
    /** ========================================================================
    * Valid login
    * @param $user the user object containing login information

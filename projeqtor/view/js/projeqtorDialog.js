@@ -10553,6 +10553,7 @@ function isValidatePassword(info){
     strength.style="color:black;margin-left:220px;";
   });
   strength.innerHTML=i18n('strong');
+  dojo.byId('passwordValidate').value='true';
 }
 
 function errorValidatePassword(ctx,crit,info,strengthCrtit){
