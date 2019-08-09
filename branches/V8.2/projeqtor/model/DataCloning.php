@@ -106,9 +106,10 @@ class DataCloning extends SqlElement{
 		$addDate =  addDaysToDate(date('Y-m-d'), 1);
 		$wherePerDay = "$idresource requesteddate > '$date' and requesteddate < '$addDate' and idle = 0 ";
 		$dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
-		$dataCloningCountTotal = $dataCloning->countSqlElementsFromCriteria(array("idle"=>"0"));
+		$dataCloningCountTotal = $dataCloning->countSqlElementsFromCriteria(array("idle"=>"0", "idResource"=>$user->id));
 		$dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
-		$dataCloningTotal = Parameter::getGlobalParameter('dataCloningTotal');
+		$dataCloningTotal=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array("scope"=>"dataCloningTotal", "idProfile"=>$user->idProfile));
+		$dataCloningTotal = $dataCloningTotal->rightAccess;
 		if($idUser != ''){
 		  if($dataCloningPerDay-$dataCloningCountPerDay > 0){
 		  	$hide = 'block';
@@ -275,6 +276,17 @@ class DataCloning extends SqlElement{
   		echo '</select>';
   		echo '</td>';
   	}
+  	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningTotal').' : </label></td>';
+  	foreach ($columnList as $colId => $colName) {
+    	echo '<td class="crossTablePivot">';
+    	$crit = array("scope"=>"dataCloningTotal", "idProfile"=>$colId);
+    	$paramCreaTotal=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', $crit);
+    	$creaTotal=$paramCreaTotal->rightAccess;
+    	echo '<input dojoType="dijit.form.TextBox" id="dataCloningTotal'.$colId.'" name="dataCloningTotal'.$colId.'" type="number" class="input" style="width: 100px;" value="'.$creaTotal.'" />';
+    	echo '</td>';
+  	}
+  	echo '</tr>';
+  	
   	echo '</tr>';
   	echo '</table></div><br/>';
   	echo '<div id="CrossTable_DataCloning_GlobalParmeter" dojoType="dijit.TitlePane"';
@@ -304,7 +316,7 @@ class DataCloning extends SqlElement{
   	}
   	echo '<select dojoType="dijit.form.FilteringSelect" class="input" ';
   	echo autoOpenFilteringSelect();
-  	echo ' style="width: 100px; font-size: 80%;"';
+  	echo ' style="width: 120px; font-size: 80%;"';
   	echo ' id="dataCloningCreationRequest" name="dataCloningCreationRequest"';
   	echo ' onChange="showSpecificCreationRequest();" '.$disabled.'>';
   	$request=SqlElement::getSingleSqlElementFromCriteria('Parameter', array("parameterCode"=>"dataCloningCreationRequest"));
@@ -340,7 +352,7 @@ class DataCloning extends SqlElement{
     $specificFrequency=$request;
     echo '<select dojoType="dijit.form.FilteringSelect" class="input"';
     echo autoOpenFilteringSelect();
-    echo 'style="width:80px;margin-left:20px;display:'.$display.';" name="dataCloningSpecificFrequency" id="dataCloningSpecificFrequency">';
+    echo 'style="width:100px;margin-left:20px;display:'.$display.';" name="dataCloningSpecificFrequency" id="dataCloningSpecificFrequency">';
     $selected = ($specificFrequency=='5')?'selected':'';
     echo '<option value="5" '.$selected.'>'.i18n('periodicEvery').' 5'.i18n('shortMinute').'</option>';
     $selected = ($specificFrequency=='10')?'selected':'';
@@ -361,13 +373,6 @@ class DataCloning extends SqlElement{
     echo '<option value="720" '.$selected.'>12'.i18n('shortHour').'</option>';
     echo '</select>';
   	echo '</td></tr>';
-  	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningTotal').' : </label></td>';
-  		echo '<td class="crossTablePivot">';
-  		$paramCreaTotal=SqlElement::getSingleSqlElementFromCriteria('Parameter', array("parameterCode"=>"dataCloningTotal"));
-  		$creaTotal=$paramCreaTotal->parameterValue;
-  		echo '<input dojoType="dijit.form.TextBox" id="dataCloningTotal" name="dataCloningTotal" type="number" class="input" style="width: 100px;" value="'.$creaTotal.'" />';
-  		echo '</td>';
-  	echo '</tr>';
   	echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningPerDay').' : </label></td>';
   		echo '<td class="crossTablePivot">';
   		$paramPerDay=SqlElement::getSingleSqlElementFromCriteria('Parameter', array("parameterCode"=>"dataCloningPerDay"));
