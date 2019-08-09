@@ -103,6 +103,7 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES
 ('paramScreen','0'),
 ('paramRightDiv','0'),
 ('contentPaneRightDetailDivHeight','0'),
+('contentPaneDetailDivHeight','0'),
 ('paramLayoutObjectDetail','0');
 
 INSERT INTO `${prefix}cronExecution` (`cron`, `fileExecuted`, `idle` ,`fonctionName`) VALUES
