@@ -275,6 +275,14 @@ $resource=new ResourceAll($idResource);
                  onblur="assignmentUpdatePlannedWork('assignment');"  
                  style="width:97px" >
                  <?php echo $keyDownEventScript;?>
+                 <script type="dojo/connect" event="onChange">
+                   if (this.value>0) {
+                     dijit.byId("assignmentIdle").set("checked",false);
+                     dijit.byId("assignmentIdle").set("readOnly",true); 
+                   } else {
+                     dijit.byId("assignmentIdle").set("readOnly",false);
+                   }
+                 </script>
                  </div>
                <input id="assignmentLeftUnit" name="assignmentLeftUnit" value="<?php echo $unit ;?>" readonly tabindex="-1"
                  xdojoType="dijit.form.TextBox" 
@@ -309,6 +317,27 @@ $resource=new ResourceAll($idResource);
                  xdojoType="dijit.form.TextBox" 
                  class="display" style="width:15px;background-color:#FFFFFF; border:0px;"/>
              </td>
+           </tr>
+           <tr>
+             <td class="dialogLabel" >
+               <label for="assignmentIdle" ><?php echo i18n("colIdle");?>&nbsp;:&nbsp;</label>
+             </td>
+             <td>
+               <?php $checked=$assignmentObj->idle;
+                     $readonly=0;
+                     if ($obj->idle) {
+                       $checked=1;
+                       $readonly=1;
+                     }
+                     if ($assignmentObj->leftWork > 0) $readonly=1; 
+                     ?>
+               <div id="assignmentIdle" name="assignmentIdle" <?php echo ($checked)?" checked=checked ":""; ?>
+                 dojoType="dijit.form.CheckBox" type="checkbox" <?php echo ($readonly)?"readonly=readonly":"";?>
+                 onclick="if (dijit.byId('assignmentLeftWork').get('value')>0) {dojo.byId('assignmentIdleErrorMsg').innerHTML=i18n('errorIdleWithLeftWork');return false;}"
+               >
+               </div>
+               <span style="color:red" id="assignmentIdleErrorMsg"></span>
+             </td>    
            </tr>
            <tr>
              <td class="dialogLabel" >
