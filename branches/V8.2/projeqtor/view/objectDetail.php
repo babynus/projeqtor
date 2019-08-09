@@ -1822,7 +1822,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo $alertLevelArray['description'];
           echo '</div>';
         }
-      } else if ($col=='reference') {
+      } else if ($col=='reference' and ! $obj->isAttributeSetToField($col, 'canChangeReference')) {
         // Draw reference (only visible) ============================================= ID
         // id is only visible
         echo '<span dojoType="dijit.form.TextBox" type="text"  ';
