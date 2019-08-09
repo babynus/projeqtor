@@ -98,7 +98,7 @@ if($dataCloning->getVersionCodeList()){
                   </script>
                   <option value=""></option>
                   <?php
-                   $specific='imputation';
+                   $specific='dataCloningRight';
                    include '../tool/drawResourceListForSpecificAccess.php';?>  
               </select>
            </td>
