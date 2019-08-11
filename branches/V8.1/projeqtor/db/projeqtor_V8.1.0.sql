@@ -26,11 +26,17 @@ CREATE TABLE `${prefix}resourcesurbooking` (
 CREATE INDEX `resourcevariablesurbooking` ON `${prefix}resourcesurbooking` (`idResource`);
 
 ALTER TABLE `${prefix}planningelement` ADD surbooked int(1) DEFAULT 0;
+
 ALTER TABLE `${prefix}planningelementbaseline` ADD surbooked int(1) DEFAULT 0;
+
 ALTER TABLE `${prefix}plannedwork` ADD surbooked int(1) DEFAULT 0;
+
 ALTER TABLE `${prefix}plannedwork` ADD surbookedWork decimal(8,5) unsigned DEFAULT NULL;
+
 ALTER TABLE `${prefix}plannedworkbaseline` ADD surbooked int(1) DEFAULT 0;
+
 ALTER TABLE `${prefix}plannedworkbaseline` ADD surbookedWork decimal(8,5) unsigned DEFAULT NULL;
+
 ALTER TABLE `${prefix}assignment` ADD surbooked int(1) DEFAULT 0;
 
 -- /Flo
