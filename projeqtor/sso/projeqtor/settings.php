@@ -56,8 +56,7 @@ $settingsInfo = array (
       'wantXMLValidation' => true,
       'relaxDestinationValidation' => true, //false,
       'signatureAlgorithm' => 'http://www.w3.org/2001/04/xmldsig-more#rsa-sha256',
-      'digestAlgorithm' => 'http://www.w3.org/2001/04/xmlenc#sha256',
-      
+      'digestAlgorithm' => 'http://www.w3.org/2001/04/xmlenc#sha256',     
       'lowercaseUrlencoding' => $lowerCaseEncoding, // ADFS URL-Encodes SAML data as lowercase, and the toolkit by default uses uppercase. Turn it True for ADFS compatibility on signature verification
   ),
 
