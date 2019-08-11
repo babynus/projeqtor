@@ -102,7 +102,7 @@ class TestSessionPlanningElementMain extends PlanningElement {
   );   
   
   private static $_databaseTableName = 'planningelement';
-  private static $_databaseCriteria = array('refType'=>'TestSession');
+  //private static $_databaseCriteria = array('refType'=>'TestSession'); // Bad idea : sets a mess when moving projets and possibly elsewhere.
   
   private static $_databaseColumnName=array(
     "idTestSessionPlanningMode"=>"idPlanningMode"
@@ -138,13 +138,13 @@ class TestSessionPlanningElementMain extends PlanningElement {
     $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
     return $paramDbPrefix . self::$_databaseTableName;
   }
-  /** ========================================================================
-   * Return the specific database criteria
-   * @return the databaseTableName
-   */
-  protected function getStaticDatabaseCriteria() {
-    return self::$_databaseCriteria;
-  }    
+//   /** ========================================================================
+//    * Return the specific database criteria
+//    * @return the databaseTableName
+//    */
+//   protected function getStaticDatabaseCriteria() {
+//     return self::$_databaseCriteria;
+//   }    
   /** ==========================================================================
    * Return the specific fieldsAttributes
    * @return the fieldsAttributes
