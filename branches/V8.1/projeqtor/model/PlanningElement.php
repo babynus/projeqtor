@@ -263,6 +263,7 @@ class PlanningElement extends SqlElement {
    * @return the result of parent::save() function
    */
   public function save() {
+    debugLog("save for pe #$this->id $this->refType #$this->refId - $this->refName - wbs = $this->wbs - top = #$this->topId $this->topRefType #$this->topRefId");
     $pmName='id'.$this->refType.'PlanningMode';
     if( property_exists($this,$pmName)){
      $this->idPlanningMode = $this->$pmName;
@@ -345,8 +346,10 @@ class PlanningElement extends SqlElement {
     $dispatchNeeded=false;
     $crit='';
     if (! $this->wbs or trim($this->wbs)=='') {
+      debugLog("   calculate WBS");
       $wbs="";
       if ($topElt) {
+        debugLog("   has topElt");
         $wbs=$topElt->wbs . ".";
         $crit=" topId=" . Sql::fmtId($this->topId);
       } else {
@@ -356,6 +359,7 @@ class PlanningElement extends SqlElement {
         $crit.=" and id<>" . Sql::fmtId($this->id);
       }
       $lst=$this->getSqlElementsFromCriteria(null, null, $crit, 'wbsSortable desc');
+      debugLog("   has topElt");
       if (count($lst)==0) {
         $localSort=1;
       } else {
@@ -460,6 +464,8 @@ class PlanningElement extends SqlElement {
     }
     //end
     $result=parent::save();
+    debugLog("  after save for pe #$this->id $this->refType #$this->refId - $this->refName - wbs = $this->wbs - top = #$this->topId $this->topRefType #$this->topRefId");
+    debugLog("  dispatchNeeded='$dispatchNeeded'");
     if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
       return $result;     
     }

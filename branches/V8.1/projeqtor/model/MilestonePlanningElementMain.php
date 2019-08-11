@@ -86,7 +86,7 @@ class MilestonePlanningElementMain extends PlanningElement {
   );   
   
   private static $_databaseTableName = 'planningelement';
-  private static $_databaseCriteria = array('refType'=>'Milestone');
+  //private static $_databaseCriteria = array('refType'=>'Milestone'); // Bad idea : sets a mess when moving projets and possibly elsewhere.
   
   private static $_databaseColumnName=array(
     "idMilestonePlanningMode"=>"idPlanningMode"
@@ -122,13 +122,13 @@ class MilestonePlanningElementMain extends PlanningElement {
     $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
     return $paramDbPrefix . self::$_databaseTableName;
   }
-  /** ========================================================================
-   * Return the specific database criteria
-   * @return the databaseTableName
-   */
-  protected function getStaticDatabaseCriteria() {
-    return self::$_databaseCriteria;
-  }    
+//   /** ========================================================================
+//    * Return the specific database criteria
+//    * @return the databaseTableName
+//    */
+//   protected function getStaticDatabaseCriteria() {
+//     return self::$_databaseCriteria;
+//   }    
   /** ==========================================================================
    * Return the specific fieldsAttributes
    * @return the fieldsAttributes
