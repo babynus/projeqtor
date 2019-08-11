@@ -6249,6 +6249,9 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
     if (get_class ( $this ) == 'Bill') {
       $year = substr ( $this->date, 0, 4 );
       $month = substr ( $this->date, 5, 2 );
+    } else if (property_exists ( $this, 'sendDate' ) and $this->sendDate) {
+      $year = substr ( $this->sendDate, 0, 4 );
+      $month = substr ( $this->sendDate, 5, 2 );
     } else if (property_exists ( $this, 'creationDate' )) {
       $year = substr ( $this->creationDate, 0, 4 );
       $month = substr ( $this->creationDate, 5, 2 );
