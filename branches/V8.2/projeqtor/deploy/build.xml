@@ -6,7 +6,7 @@
   <property name="projName"       value="projeqtor" />
   <property name="setup.dir"     value="${drive}/ProjeQtOr/setup" />
   <property name="deploy.dir"    value="${setup.dir}/${projName}" />
-  <property name="src.dir"       value="${drive}/www/projeqtorV8.1" />
+  <property name="src.dir"       value="${drive}/www/projeqtorV8.2" />
   
   <target name="clean">
      <delete dir="${deploy.dir}"/>
