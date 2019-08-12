@@ -1277,6 +1277,14 @@ function setupLocale() {
   setSessionValue('lang', $currentLocale); // Must be kept for user parameter screen initialization
   if (sessionValueExists('browserLocaleDateFormat')) {
     $browserLocaleDateFormat=getSessionValue('browserLocaleDateFormat');
+  } else if (! $browserLocaleDateFormat) {
+    if ($currentLocale=='fr' or $currentLocale=='de') {
+      $browserLocaleDateFormat='DD/MM/YYYY';
+    } else if ($currentLocale=='en') {
+      $browserLocaleDateFormat='MM/DD/YYYY';
+    } else {
+      $browserLocaleDateFormat='YYYY-MM-DD';
+    } 
   }
 }
 
