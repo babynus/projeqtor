@@ -202,7 +202,6 @@ if (! $oldCost and $cost and $assignment->realWork) {
 if(isset($optional)){
   $assignment->optional=$optional;
 }
-debugLog($assignment);
 $result=$assignment->save();
 
 // 
