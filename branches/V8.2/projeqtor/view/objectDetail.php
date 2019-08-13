@@ -309,9 +309,9 @@ if (array_key_exists('refresh', $_REQUEST)) {
     if (!$print or $comboDetail) {
       echo '<input type="hidden" id="objectClassName" name="objectClassName" value="'.$objClass.'" />'.$cr;
     }
-    drawTableFromObject($obj);
-    drawChecklistFromObject($obj);
-    drawJoblistFromObject($obj);
+      drawTableFromObject($obj);
+      drawChecklistFromObject($obj);
+      drawJoblistFromObject($obj);
   }
   
   if (!$print) {
@@ -671,7 +671,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     }
   }
   // END - ADD BY TABARY - NOTIFICATION SYSTEM
-  
+  if( Parameter::getUserParameter('paramLayoutObjectDetail')==0 and $included==false){
+    echo '<div dojoType="dijit/layout/TabContainer" tabStrip="true">';
+  }
   // Loop on each property of the object
   foreach ($obj as $col=>$val) {
     if ($detailWidth) {
@@ -1595,7 +1597,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           if ($hide or $obj->isAttributeSetToField($col, 'hidden') or in_array($col, $extraHiddenFields)) {
             $visibileSubObject=false;
           }
-          // if () {
           drawTableFromObject($val, true, $readOnly, !$visibileSubObject);
           $hide=true; // to avoid display of an extra field for the object and an additional carriage return
                         // }
@@ -2936,6 +2937,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       // echo '</td></tr></table>';
     }
   }
+  if( Parameter::getUserParameter('paramLayoutObjectDetail')==0 and $included==false){
+    echo '</div>';
+  }
   if (!$included) endBuffering($section, $included);
   if (!$included) finalizeBuffering();
   if ($outMode=='pdf') {
@@ -2963,11 +2967,13 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
     echo '</table>';
     if (!$print) {
       echo '</div>';
+      if( Parameter::getUserParameter('paramLayoutObjectDetail')==0 and $included==false){
+        echo '</div>';
+      }
     } else {
       echo '<br/>';
     }
   }
-  $paramLayoutObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
   endBuffering($prevSection, $included);
   $sectionName=$section;
   if(strstr($sectionName,'Link_')){
@@ -2999,7 +3005,9 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
     $attrs=splitCssAttributes($labelStyle);
     $fontSize=(isset($attrs['font-size']))?intval($attrs['font-size']):'';
     // gautier #resourceTeam
-
+    if( Parameter::getUserParameter('paramLayoutObjectDetail')==0 and $included==false){
+      echo '<div dojoType="dijit/layout/ContentPane" title="'.$section.'" style="width:100%;" selected="true">';
+    }
       echo '<div dojoType="dijit.TitlePane" title="'.i18n('section'.ucfirst($sectionName)).(($nbBadge!==null)?'<div id=\''.$section.'Badge\' class=\'sectionBadge\'>'.$nbBadge.'</div>':'').'"';
       echo ' open="'.(array_key_exists($titlePane, $collapsedList)?'false':'true').'" ';
       echo ' id="'.$titlePane.'" ';
@@ -3008,10 +3016,13 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
       echo ' style="display:'.$display.';position:relative;width:'.$widthPct.';float: '.$float.';clear:'.$clear.';margin: 0 0 4px 4px; padding: 0;top:0px;"';
       echo ' onHide="saveCollapsed(\''.$titlePane.'\');"';
       echo ' onShow=";saveExpanded(\''.$titlePane.'\');">';
-      $titleHeight=($fontSize)?$fontSize*1.6:'';
+      $titleHeight=($fontSize)?$fontSize*1.6:''; 
       echo ' <script type="dojo/method" event="titlePaneHandler" > setAttributeOnTitlepane(\''.$titlePane.'\',\''.$labelStyle.'\',\''.$titleHeight.'\');</script>';
-      echo '<table class="detail"  style="width: 100%;" >';
-    
+      if(Parameter::getUserParameter('paramLayoutObjectDetail')==0 and $included==false){
+        echo '<table class="detail"  style="width:95%;padding-right:5%;" >';
+      }else{
+        echo '<table class="detail"  style="width:100%;" >';
+      }
   } else {
     $hide=false;
     $display='';
@@ -7574,11 +7585,7 @@ function endBuffering($prevSection, $included) {
       return;
     }
     if ($nbColMax==1) {
-      if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0'){
-        $pane.=$display;
-      }else{
         $leftPane.=$display;
-      }
     } else {
       $position='right'; // Not placed sections are located right (default)
       $sectionName=strtolower($prevSection);
@@ -7591,10 +7598,7 @@ function endBuffering($prevSection, $included) {
           $position='center';
         } 
       }
-      if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0'){
-          $pane.=$display;
-      }
-      else{
+
         if ($position=='extra') {
           $extraPane.=$display;
         } else if ($position=='bottom') {
@@ -7606,7 +7610,6 @@ function endBuffering($prevSection, $included) {
         } else {
           traceLog("ERROR at endBuffering() : '$position' is not an expected position");
         }
-      }
      
     }
   // echo $display; // firt test !!!
@@ -7624,12 +7627,6 @@ function finalizeBuffering() {
   echo $beforeAllPanes;
   echo '<table style="width=100%">';
   $showBorders=false;
-  $paramLayoutObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
-  if($paramLayoutObjectDetail=='0'){
-      echo '<div dojoType="dijit/layout/TabContainer" style="width: 100%; height: 100%;">';
-        echo '<tr><td style="width:100%;vertical-align: left;'.(($showBorders)?'border:1px solid red':'').'">'.$pane.'</td></tr>';
-      echo '</div>';
-  }else{
     if ($nbColMax==1) {
       echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid red':'').'">'.$leftPane.'</td></tr>';
       if ($rightPane) {
@@ -7653,7 +7650,6 @@ function finalizeBuffering() {
     } else {
       traceLog("ERROR at finalizeBuffering() : '$nbColMax' is not an expected max column count");
     }
-  }
   echo '</table>';
 }
 
@@ -7754,4 +7750,5 @@ function drawJoblistFromObject($obj) {
     }
   }
 }
+
 ?>
