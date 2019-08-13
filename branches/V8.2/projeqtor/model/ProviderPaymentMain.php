@@ -167,6 +167,12 @@ class ProviderPaymentMain extends SqlElement {
   public function save() {
     $old=$this->getOld();
     $this->paymentCreditAmount=$this->paymentAmount-$this->paymentFeeAmount;
+    if ($this->idProviderTerm and ! $this->idProviderBill) {
+      $term=new ProviderTerm($this->idProviderTerm);
+      if ($term->idProviderBill) {
+        $this->idProviderBill=$term->idProviderBill;
+      }
+    }
     if ($this->idProviderBill) {
       $bill=new ProviderBill($this->idProviderBill);
       $this->idProvider=$bill->idProvider;
@@ -193,13 +199,11 @@ class ProviderPaymentMain extends SqlElement {
     // ProviderTerm isPaid
     if($old->idProviderTerm and $old->idProviderTerm != $this->idProviderTerm){
       $provTerm = new ProviderTerm($old->idProviderTerm);
-      $provTerm->isPaid = 0;
-      $provTerm->save();
+      $provTerm->updatePaidFlag();
     }
     if($this->idProviderTerm){
       $provTerm = new ProviderTerm($this->idProviderTerm);
-      $provTerm->isPaid = 1;
-      $provTerm->save();
+      $provTerm->updatePaidFlag();
     }
     return $result;
   }

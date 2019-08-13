@@ -482,7 +482,9 @@ class ProviderBillMain extends SqlElement {
         $result.= formatSmallButton('ProviderPayment');
         $result.='</td>';
         $result.='<td style="width:30px">#'.htmlEncode($pay->id).'</td><td>&nbsp;&nbsp;&nbsp;</td>';
-        $result.='<td style="padding:0px 5px;text-align:left;width:300px">'.htmlEncode($pay->name).'</td></tr>';
+        $result.='<td style="padding:0px 5px;text-align:left;width:250px">'.htmlEncode($pay->name).'</td>';
+        $result.='<td style="padding:0px 5px;text-align:right;width:50px">'.htmlDisplayCurrency($pay->paymentAmount,false).'</td>';
+        $result.='</tr>';
       }
       $result.='</table>';
       $result.='</div>';
