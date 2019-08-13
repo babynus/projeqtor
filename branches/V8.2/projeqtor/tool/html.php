@@ -208,12 +208,14 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     	$listAllType = SqlList::getListWithCrit ( "EmailTemplate", $crit, 'name', $selection, false );
     	$table=array_merge_preserve_keys($list,$listAll,$listAllType);
     }
-  } else if ($col=='idBill' or $col=='idProviderBill')  {
+  } else if ($col=='idBill' or $col=='idProviderBill' or $col=='idProviderTerm')  {
     // Limit Bills list to done but not paid (this isd used on Payment screen to list bills to link to the payment)
     if ($col=='idBill'){
       $crit=array('paymentDone'=>'0','done'=>'1');
-    }else{
+    } else if  ($col=='idProviderBill') {
       $crit=array('done'=>'1');
+    } else if  ($col=='idProviderTerm') {
+      $crit=array('isPaid'=>'0');
     }
     $table=SqlList::getListWithCrit($listType, $crit,$column,$selection, (! $obj)?!$limitToActiveProjects:false);
   } else if ($listType=='Linkable' or $listType=='Copyable' or $listType=='Dependable' or $listType=='Originable'){

@@ -49,6 +49,7 @@ class ProviderTermMain extends SqlElement {
   public $date;
   public $isBilled;
   public $isPaid;
+  public $_spe_paymentsList;
   public $idle;
   public $idProjectExpense;
   public $_Note=array();
@@ -83,6 +84,7 @@ class ProviderTermMain extends SqlElement {
   );  
   
   private static $_colCaptionTransposition = array("idUser"=>"issuer", 'idResource'=> 'responsible');
+  public $_calculateForColumn=array("name"=>"concat(name,' (',coalesce(fullAmount,0),')')");
   
   //private static $_databaseColumnName = array('realAmount'=>'amount');
    /** ==========================================================================
@@ -259,5 +261,41 @@ class ProviderTermMain extends SqlElement {
     
   }
   
+  public function updatePaidFlag() {
+    $pmt=new ProviderPayment();
+    $pmtSum=$pmt->sumSqlElementsFromCriteria('paymentAmount', array('idProviderTerm'=>$this->id));
+    if ($pmtSum >= $this->fullAmount) $this->isPaid=1;
+    else $this->isPaid=0;
+    $this->simpleSave();
+  } 
+  
+  public function drawSpecificItem($item){
+    global $print,$displayWidth,$largeWidth,$maxWidth,$fieldWidth;
+    $labelWidth=175; // To be changed if changes in css file (label and .label)
+    $largeWidth=( (intval($displayWidth)+30) / 2) - $labelWidth;
+    $result="";
+    if ($item=='paymentsList') {
+      if (!$this->id) return '';
+      $pay=new ProviderPayment();
+      $payList=$pay->getSqlElementsFromCriteria(array('idProviderTerm'=>$this->id));
+      //$result.='</td><td>';
+      $tabWidth=$largeWidth-300;
+      $result.='<div style="position:relative;top:0px;left:145px;width:310px; ">';
+      $result.='<table style="width:100%">';
+      foreach ($payList as $pay) {
+        $result.='<tr class="noteHeader pointer" onClick="gotoElement(\'ProviderPayment\','.htmlEncode($pay->id).');">';
+        $result.='<td style="padding:0px 5px; width:20px;">';
+        $result.= formatSmallButton('ProviderPayment');
+        $result.='</td>';
+        $result.='<td style="width:30px">#'.htmlEncode($pay->id).'</td><td>&nbsp;&nbsp;&nbsp;</td>';
+        $result.='<td style="padding:0px 5px;text-align:left;width:250px">'.htmlEncode($pay->name).'</td>';
+        $result.='<td style="padding:0px 5px;text-align:right;width:50px">'.htmlDisplayCurrency($pay->paymentAmount,false).'</td>';
+        $result.='</tr>';
+      }
+      $result.='</table>';
+      $result.='</div>';
+    }
+    return $result;
+  }
 }
 ?>
