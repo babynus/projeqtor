@@ -2530,7 +2530,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         if ($dataType=='decimal' and (substr($col, -4, 4)=='Cost' or substr($col, -6, 6)=='Amount' or $col=='amount')) {
           $isCost=true;
           $fieldWidth=$smallWidth;
-          if (substr($col, -6, 6)=='Amount' or $col=='amount') {
+          if ( (substr($col, -6, 6)=='Amount' or $col=='amount') and ! SqlElement::is_a($obj, 'PlanningElement')) {
             $isAmount=true;
           }
         }
