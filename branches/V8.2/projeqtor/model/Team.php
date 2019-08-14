@@ -50,7 +50,7 @@ class Team extends SqlElement {
     <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
     ';
   
-  private static $_colCaptionTransposition = array('idResource'=>'manager');
+  private static $_colCaptionTransposition = array('idResource'=>'teamManager');
   
    /** ==========================================================================
    * Constructor

@@ -240,6 +240,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     var scaytAutoStartup=<?php echo (Parameter::getUserParameter('scaytAutoStartup')=='NO')?'false':'true';?>;
     var offDayList='<?php echo Calendar::getOffDayList();?>';
     var workDayList='<?php echo Calendar::getWorkDayList();?>';
+    var applicationName='<?php echo (Parameter::getGlobalParameter('paramDbDisplayName'))?Parameter::getGlobalParameter('paramDbDisplayName'):i18n("applicationTitle");?>';
 // MTY - MULTI CALENDAR    
     var uOffDayList='<?php echo Calendar::getOffDayList(getSessionUser()->idCalendarDefinition);?>';
     var uWorkDayList='<?php echo Calendar::getWorkDayList(getSessionUser()->idCalendarDefinition);?>';
@@ -363,7 +364,6 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       aboutMessage+='&nbsp;&nbsp;.&nbsp;phpMailer : <?php $vers=file_get_contents('../external/PHPMailer/VERSION');echo $vers;?>'+'<br/>';
       aboutMessage+='&nbsp;&nbsp;.&nbsp;html2canvas : <?php include_once('../external/html2canvas/getVersion.php');echo html2canvasGetVersion();?>'+'<br/>';    
       aboutMessage+='&nbsp;&nbsp;.&nbsp;pdfMake : <?php include_once('../external/pdfmake/getVersion.php');echo pdfmakeGetVersion();?>'+'<br/>';
-      
       aboutMessage+='&nbsp;&nbsp;&nbsp;CryptoJS 3.1.2 '+'<br/>';      
       aboutMessage+='&nbsp;&nbsp;&nbsp;phpAES '+'<br/>';
       aboutMessage+='&nbsp;&nbsp;&nbsp;TinyButStrong 3.10.1'+'<br/>';
@@ -1224,7 +1224,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   </table>
 </div>
 
-<div id="dialogPrint" dojoType="dijit.Dialog" title="<?php echo i18n("dialogPrint");?>" onHide="window.document.title=i18n('applicationTitle');dojo.byId('printFrame').src='../view/preparePreview.php';" >
+<div id="dialogPrint" dojoType="dijit.Dialog" title="<?php echo i18n("dialogPrint");?>" onHide="window.document.title=applicationName;dojo.byId('printFrame').src='../view/preparePreview.php';" >
   <?php 
     $printHeight=600;
     $printWidth=1010;
