@@ -855,6 +855,24 @@ if (afterVersion($currVersion,"V8.0.4") and beforeVersion($currVersion,"V8.1.3")
     traceLog("   => $cpt saved");
   }
 }
+
+if (afterVersion($currVersion,"V8.1.0") and beforeVersion($currVersion,"V8.1.5") ) {
+	// Issue existing for version 8.1.0 to 8.1.4
+	$ap=new AccessProfile(10);
+	if (!$ap->id) {
+		$ap->id=10;
+		$ap->name='accessReadOwnOnly';
+		$ap->description=null;
+		$ap->idAccessScopeRead=2;
+		$ap->idAccessScopeCreate=1;
+		$ap->idAccessScopeUpdate=1;
+		$ap->idAccessScopeDelete=1;
+		$ap->sortOrder=900;
+		$ap->idle=0;
+		$ap->save;
+	}
+}
+
 // To be sure, after habilitations updates ...
 Habilitation::correctUpdates();
 Habilitation::correctUpdates();
