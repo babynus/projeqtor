@@ -48,6 +48,7 @@ if (Sql::getDbVersion()!=$version) {
 	include_once 'login.php';
 	exit;
 }
+unsetSessionTable('_tablesFormatList', 'User'); // Force refresh of User description (otherwise, after first install User screen is not correct)
 $currency=Parameter::getGlobalParameter('currency');
 $currencyPosition=Parameter::getGlobalParameter('currencyPosition');
 checkVersion(); 
