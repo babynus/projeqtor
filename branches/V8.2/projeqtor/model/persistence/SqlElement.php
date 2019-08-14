@@ -133,6 +133,8 @@ abstract class SqlElement {
   private static $_relationShip = array(
       "AccessProfile" => array(
           "AccessRight" => "controlStrict"), 
+      "AccessScope" => array(
+          "AccessProfile" => "controlStrict"),
       "AccessScopeRead" => array(
           "AccessProfile" => "controlStrict"), 
       "AccessScopeCreate" => array(
