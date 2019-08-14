@@ -3862,7 +3862,8 @@ function formatColorFromNameAndColor($name, $color) {
 }
 
 function getPrintTitle() {
-  $result=i18n("applicationTitle");
+  //$result=i18n("applicationTitle");
+  $result=(Parameter::getGlobalParameter('paramDbDisplayName'))?Parameter::getGlobalParameter('paramDbDisplayName'):i18n("applicationTitle");
   if (isset($_REQUEST['objectClass']) and isset($_REQUEST['page'])) {
     $objectClass=$_REQUEST['objectClass'];
     Security::checkValidClass($objectClass, 'objectClass');

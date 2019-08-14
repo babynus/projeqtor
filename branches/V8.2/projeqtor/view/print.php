@@ -172,10 +172,11 @@ use Spipu\Html2Pdf\Html2Pdf;
         var objTop=window.opener;
       } else {
     	  var objTop=top;
+    	  objTop.window.document.title="<?php echo getPrintTitle();?>";
       }
       objTop.hideWait();
-      objTop.window.document.title="<?php echo getPrintTitle();?>";
-      window.document.title="<?php echo getPrintTitle();?>";
+      //objTop.window.document.title="<?php echo getPrintTitle();?>";
+      //window.document.title=applicationName;
       <?php if ($_REQUEST['page']=='planningPrint.php') {?>
         
         dojo.byId("leftGanttChartDIV_print").innerHTML=objTop.dojo.byId("leftGanttChartDIV").innerHTML;
