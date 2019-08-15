@@ -47,11 +47,11 @@ Security::checkValidClass($objectClass);
            
            <tr style="vertical-align: top;">
              <td style="width: 210px;" >
-               <input readOnly class="dijit dijitInline dijitLeft input dijitTextBox" value="<?php echo $filterCriteria->dispAttribute;?>" style="width: 200px;padding:5px 10px;" />
+               <input readOnly class="dijit dijitInline dijitLeft input dijitTextBox" tabIndex="-1" value="<?php echo $filterCriteria->dispAttribute;?>" style="width: 200px;padding:5px 10px;" />
                <input type="hidden" id="idFilterAttribute<?php echo $cpt;?>" name="idFilterAttribute<?php echo $cpt;?>" value="<?php echo $filterCriteria->sqlAttribute;?>" />
              </td>
              <td style="width: 110px;">
-             	<input readOnly class="dijit dijitInline input dijitTextBox" value="<?php echo $filterCriteria->dispOperator;?>" style="width: 100px;padding:5px 10px;text-align:center" />
+             	<input readOnly class="dijit dijitInline input dijitTextBox" tabIndex="-1" value="<?php echo $filterCriteria->dispOperator;?>" style="width: 100px;padding:5px 10px;text-align:center" />
              	<input type="hidden" id="idFilterOperator<?php echo $cpt;?>" name="idFilterOperator<?php echo $cpt;?>" value="<?php echo $filterCriteria->sqlOperator;?>" />
              </td>
              <td style="width:330px;vertical-align:middle;">
@@ -145,7 +145,7 @@ Security::checkValidClass($objectClass);
     <tr style="height:32px">
       <td align="center">
         <table><tr><td>
-        <button class="mediumTextButton" dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogDynamicFilter').hide();">
+        <button class="mediumTextButton" tabIndex="-1" dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogDynamicFilter').hide();">
           <?php echo i18n("buttonCancel");?>
         </button>
         </td><td>
