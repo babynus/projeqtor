@@ -869,7 +869,7 @@ if (afterVersion($currVersion,"V8.1.0") and beforeVersion($currVersion,"V8.1.5")
 		$ap->idAccessScopeDelete=1;
 		$ap->sortOrder=900;
 		$ap->idle=0;
-		$ap->save;
+		$ap->save();
 	}
 }
 				
