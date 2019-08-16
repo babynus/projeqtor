@@ -2212,6 +2212,22 @@ abstract class SqlElement {
       $newObj->sendDate = null;
       $newObj->idDeliveryMode = null;
     }
+    if (property_exists($newObj, "sendDate")) {
+    	$newObj->sendDate = null;
+    }
+    if (property_exists($newObj, "paymentDate")) {
+      $newObj->paymentDate = null;
+    }
+    if (property_exists($newObj, "paymentAmount")) {
+      $newObj->paymentAmount = null;
+    }
+    if (property_exists($newObj, "paymentDone")) {
+      $newObj->paymentDone = null;
+    }
+    if (property_exists($newObj, "paymentsCount")) {
+      $newObj->paymentsCount = null;
+    }
+    
     if (get_class ( $newObj ) == 'ProviderPayment') {
       $newObj->idPaymentMode = SqlList::getFirstId('PaymentMode');
       $newObj->paymentDate=date('Y-m-d');
