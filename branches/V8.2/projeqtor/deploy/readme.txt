@@ -18,6 +18,7 @@ Pre-requisites :
     register_globals = Off ; securite advise
     magic_quotes_gpc = off ; security advise
     max_input_vars = 4000 ; must be > 2000 for real work allocation screen
+    request_terminate_timeout = 0 ; must not end requests on timeout to let cron run without ending
 	suhosin.post.max_vars = 4000 ; like max_input_vars when suhosin module is deployed
     suhosin.request.max_vars 4000 ; like max_input_vars when suhosin module is deployed
     max_execution_time = 30 ; minimum advised
