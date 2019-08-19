@@ -828,6 +828,16 @@ class UserMain extends SqlElement {
     return $result;
   }
   
+  public static function resetVisibleVersions() {
+    $user=getSessionUser();
+    $user->_visibleVersions=null;
+    $user->_visibleVersionsIncludingClosed=null;
+    $user->_visibleVersionsOnlyDelivered=null;
+    $user->_visibleVersionsIncludingClosedOnlyDelivered=null;
+    $user->_visibleProducts=null;
+    $user->_visibleProductsIncludingClosed=null;
+    setSessionUser($user);
+  }
   public function getHierarchicalViewOfVisibleProjects($hideClosed=false) {
 //scriptLog("getHierarchicalViewOfVisibleProjects()");
     if (!$hideClosed and is_array($this->_hierarchicalViewOfVisibleProjects)) {
