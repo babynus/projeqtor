@@ -670,13 +670,6 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     $showModuleScreen=true;
     include "../view/moduleView.php";
   }
-  
-  //Disable DataCloning module on simulation
-  $simuIndex=Parameter::getGlobalParameter('simuIndex');
-  if($simuIndex){
-  	$mod=SqlElement::getSingleSqlElementFromCriteria('Module', array('name'=>'moduleDataCloning'));
-  	$mod->active = 0;
-  }
   ?>
   <?php $leftWidth=Parameter::getUserParameter('contentPaneLeftDivWidth');
      $leftWidth=($leftWidth and $leftWidth>35)?$leftWidth.'px':'20%';
