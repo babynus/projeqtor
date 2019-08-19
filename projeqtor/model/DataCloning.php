@@ -134,7 +134,7 @@ class DataCloning extends SqlElement{
 		$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('colVersion').'</td>';
 		$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:15%;text-align:center;vertical-align:center;">'.i18n('colOrigin').'</td>';
 		$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('colRequestDate').'</td>';
-		$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('colPlannedDate').'</td>';
+		$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('dataCloningPlannedDate').'</td>';
 		$result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:10%;text-align:center;vertical-align:center;">'.i18n('colRequestedDeletedDate').'</td>';
 		$result .='     <td style="border: 1px solid grey;height:60px;width:20%;text-align:center;vertical-align:center;">';
 		$result .='       <table width="100%"><tr>';
@@ -195,7 +195,11 @@ class DataCloning extends SqlElement{
 			    $cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
 			    $plannedDate = $cronExecution->nextTime;
 			  }
-			  $result .='<td style="border: 1px solid grey;height:40px;width:10%;text-align:center;vertical-align:center;font-style:italic;'.$idleColor.'">'.htmlFormatDateTime(date('Y-m-d H:i:s', $plannedDate)).'</td>';
+			  $font='';
+			  if(!$data->isActive){
+			    $font='font-style:italic';
+			  }
+			  $result .='<td style="border: 1px solid grey;height:40px;width:10%;text-align:center;vertical-align:center;'.$font.';'.$idleColor.'">'.htmlFormatDateTime(date('Y-m-d H:i:s', $plannedDate)).'</td>';
 			  $result .='<td style="border: 1px solid grey;height:40px;width:10%;text-align:center;vertical-align:center;font-style:italic;'.$idleColor.'">'.htmlFormatDateTime($data->requestedDeletedDate).'</td>';
 			  $result .='<td style="border: 1px solid grey;height:40px;width:20%;text-align:center;vertical-align:center;">';
 			  $background = '#a3d179';
@@ -211,6 +215,7 @@ class DataCloning extends SqlElement{
 			    if($data->isActive){
 			      $activeText = i18n('activeCloningStatus');
 			    }else{
+			      $background = '#99ccff';
 			      $activeText = i18n('requestedCloningStatus');
 			    }
 			    $result .='<td width=80%" style="background-color:'.$background.';border-right:1px solid grey;height:40px;">';
@@ -605,6 +610,12 @@ class DataCloning extends SqlElement{
 	  $nameDbParam = $dbParam->getDatabaseTableName();
 	  $requeteDbName= "UPDATE ".$nameDbParam." SET parameterValue = ".Sql::str($dataCloning->name)." WHERE parameterCode = 'paramDbDisplayName';";
 	  $connexion->prepare($requeteDbName)->execute();
+	  $dbModule = new Module();
+	  $moduleName = $dbModule->getDatabaseTableName();
+	  $requestModuleActive= "UPDATE ".$moduleName." SET active = 0 WHERE name = 'moduleDataCloning';";
+	  $connexion->prepare($requestModuleActive)->execute();
+	  $requestModuleIdle= "UPDATE ".$moduleName." SET idle = 1 WHERE name = 'moduleDataCloning';";
+	  $connexion->prepare($requestModuleIdle)->execute();
 	  
   	$cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
   	$dataCloning->isActive = 1;

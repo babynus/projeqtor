@@ -331,7 +331,7 @@ if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMo
   }
   if (isset($user)) {
     Audit::updateAudit();
-  }
+  } 
 }
 
 /*
