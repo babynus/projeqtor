@@ -600,6 +600,10 @@ class DataCloning extends SqlElement{
 	      }
 	    }
 	  }
+	  
+	  $requeteDbName= "UPDATE parameter SET parameterValue = '".$dataCloning->name."' WHERE parameterCode = 'paramDbDisplayName';";
+	  $connexion->prepare($requeteDbName)->execute();
+	  
   	$cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
   	$dataCloning->isActive = 1;
   	$dataCloning->nameDir = $nameDir;
