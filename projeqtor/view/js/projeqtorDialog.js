@@ -6363,15 +6363,28 @@ function switchMode() {
 
 function switchMode2(paramToSend){
   var currentScreen=dojo.byId('objectClass').value;
+  var objectIdScreen=dojo.byId('objectId').value;
   if (paramToSend=='1'){
-    loadContent("objectMain.php?objectClass="+ currentScreen+"&paramScreen="+paramToSend, "centerDiv");
+    loadContent("objectMain.php?objectClass="+ currentScreen+"&paramScreen="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     loadDiv("menuUserScreenOrganization.php?paramScreen="+paramToSend,"mainDivMenu");
+    if(objectIdScreen !=null){
+      listClick();
+      loadContent("objectDetail.php", "detailDiv", 'listForm');
+    }
   }else if(paramToSend=='2'){
-    loadContent("objectMain.php?objectClass="+ currentScreen+"&paramRightDiv="+paramToSend, "centerDiv");
+    loadContent("objectMain.php?objectClass="+ currentScreen+"&paramRightDiv="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    if(objectIdScreen !=null){
+      listClick();
+      loadContent("objectDetail.php", "detailDiv", 'listForm');
+    }
   }
   else if(paramToSend=='4'){
-    loadContent("objectMain.php?objectClass=" +currentScreen+"&paramLayoutObjectDetail="+paramToSend, "centerDiv");
+    loadContent("objectMain.php?objectClass=" +currentScreen+"&paramLayoutObjectDetail="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     loadDiv("menuUserScreenOrganization.php?paramScreen="+paramToSend,"mainDivMenu");
+    if(objectIdScreen !=null){
+      listClick();
+      loadContent("objectDetail.php", "detailDiv", 'listForm');
+    }
   }
 }
 
