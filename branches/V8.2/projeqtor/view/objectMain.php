@@ -117,8 +117,8 @@
     $detailDivHeight=Parameter::getUserParameter('contentPaneDetailDivHeight'.$objectClass);
     if (!$detailRightHeight) $detailRightHeight=0;
     if($detailRightHeight or $detailRightHeight==="0"){
-      if ($detailRightHeight > 500){
-        $detailRightHeight=200;
+      if ($detailRightHeight > 800){
+        $detailRightHeight=750;
       }
       if ($detailRightHeight < 80){
         $detailRightHeight=100;
