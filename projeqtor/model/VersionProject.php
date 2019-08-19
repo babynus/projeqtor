@@ -155,6 +155,9 @@ class VersionProject extends SqlElement {
         }
       }
     }
+    if (! $old->id) { // On creation of link Product-Version : refresh rights
+      User::resetVisibleVersions();
+    }
     return $result;
   }
   public function delete() {
@@ -169,6 +172,7 @@ class VersionProject extends SqlElement {
         $comp->updateAllVersionProject();
       }
     }
+    User::resetVisibleVersions();
     return $result;
   }
 
