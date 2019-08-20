@@ -408,6 +408,8 @@ class DataCloning extends SqlElement{
   	  $dir_dest = '../simulation/'.$newPwd;
 	  }
 	  $nameDir = $newPwd;
+	  
+	  $startMicroTime=microtime(true);
 	  //create folder
 	  mkdir($dir_dest, 0777,true);
 	  $dir_iterator = new RecursiveDirectoryIterator($dir_source, RecursiveDirectoryIterator::SKIP_DOTS);
@@ -622,6 +624,8 @@ class DataCloning extends SqlElement{
   	$dataCloning->nameDir = $nameDir;
   	$dataCloning->plannedDate = $cronExecution->nextTime;
   	$dataCloning->save();
+  	
+  	debugTraceLog( $dataCloning->name . i18n('dataCloningFinish'). round((microtime(true) - $startMicroTime)*1000000)/1000000 . i18n('second'));
 	} 
 	
 	public static function deleteDataCloning($id){
