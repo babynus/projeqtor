@@ -410,6 +410,7 @@ class DataCloning extends SqlElement{
 	  $nameDir = $newPwd;
 	  
 	  $startMicroTime=microtime(true);
+	  debugTraceLog( $dataCloning->name . i18n('dataCloningStart'));
 	  //create folder
 	  mkdir($dir_dest, 0777,true);
 	  $dir_iterator = new RecursiveDirectoryIterator($dir_source, RecursiveDirectoryIterator::SKIP_DOTS);
@@ -518,7 +519,7 @@ class DataCloning extends SqlElement{
 	  }else{
 	    $PDO=Sql::getConnection();
 	  }
-	  
+	  debugTraceLog( $dataCloning->name . i18n('dataCloningStartDbCopy'). ' ' .$newPwd);
 	  if (Parameter::getGlobalParameter('paramDbType') == "pgsql") {
 	    if(!$dataCloning->idOrigin){
 	      $originDb = $paramDbName;
@@ -550,7 +551,7 @@ class DataCloning extends SqlElement{
 	  }else{
 	    //creer la DB
 	    $requete= "CREATE DATABASE IF NOT EXISTS `".$newPwd."` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
-	    $PDO->prepare($requete)->execute();
+	    $PDO->query($requete);
 	    $sql = 'SHOW TABLE STATUS';
 	    $result_tables = $PDO->query($sql);
 	    $sql = "";
@@ -562,6 +563,7 @@ class DataCloning extends SqlElement{
                     	        ,"projecthistory","statusmail","subscription","translationaccessright","translationcode","translationlanguage","translationvalue");
 	    
 	    foreach($result_tables as $row) {
+	      debugLog("   table ".$row['Name']);
 	      // CREATE ..
 	      $result_create = $PDO->query('SHOW CREATE TABLE `'. $row['Name'] .'`');
 	      foreach ($result_create as $row){
@@ -569,7 +571,8 @@ class DataCloning extends SqlElement{
 	        $sql .= $obj_create['Create Table'] .";\n";
 	      }
 	      if($sql){
-	        $connexion->prepare($sql)->execute();
+	        //debugLog($sql);
+	        $connexion->exec($sql);
 	        $sql = "";
 	      }
 	      if(str_replace($exceptionTable,'',$row[0]) != $row[0]){
@@ -577,9 +580,10 @@ class DataCloning extends SqlElement{
 	      }
 	      // INSERT ...
 	      $sqlInsert = "";
-	      $result_insert = $PDO->query('SELECT * FROM `'. $row[0] .'`');
+	      $query='SELECT * FROM `'. $row[0] .'`';
+	      $result_insert = $PDO->query($query);
 	      $cpt = 0;
-	    
+	      $connexion->beginTransaction();
 	      foreach ($result_insert as $rowInsert){
 	        $cpt++;
 	        $virgule = false;
@@ -594,17 +598,24 @@ class DataCloning extends SqlElement{
 	      				}
 	      				$virgule = true;
 	        } // for
-	        $sqlInsert .= ')' .";\n";
-	        if($cpt > 100){
-	      				$connexion->prepare($sqlInsert)->execute();
+	        $sqlInsert .= ')' .";\n";      
+	        if($cpt%10==0){
+	              //debugLog("      QUERY TABLE ". $row[0]." -> $cpt");
+	              $connexion->exec($sqlInsert);
 	      				$sqlInsert = "";
-	      				$cpt = 0;
+	      				//$cpt = 0;
+	        }
+	        if($cpt%100==0){
+	          //debugLog("   COMMIT TABLE ". $row[0]." -> $cpt");
+	          $connexion->commit();
+	          $connexion->beginTransaction();
 	        }
 	      }
-	    
 	      if($sqlInsert){
-	        $connexion->prepare($sqlInsert)->execute();
+	        $connexion->exec($sqlInsert);       
 	      }
+	      //debugLog("   COMMIT TABLE ". $row[0]." -> $cpt");
+	      $connexion->commit();
 	    }
 	  }
 	  
@@ -625,7 +636,7 @@ class DataCloning extends SqlElement{
   	$dataCloning->plannedDate = $cronExecution->nextTime;
   	$dataCloning->save();
   	
-  	debugTraceLog( $dataCloning->name . i18n('dataCloningFinish'). round((microtime(true) - $startMicroTime)*1000000)/1000000 . i18n('second'));
+  	debugTraceLog( $dataCloning->name . i18n('dataCloningFinish').' - '. (round((microtime(true) - $startMicroTime)*1000000)/1000000) . i18n('second'));
 	} 
 	
 	public static function deleteDataCloning($id){
@@ -746,6 +757,8 @@ public static	function remove_dir($directory,$dataCloning,$empty = false) {
 			$dsn = $dbType.':host='.$dbHost.';port='.$dbPort.';dbname='.$dbName;
 			$connexion = new PDO($dsn, $dbUser, $dbPassword, $sslArray);
 			$connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			//$connexion->setAttribute(PDO::ATTR_TIMEOUT, 500);
+			//$connexion->setAttribute(PDO::ATTR_AUTOCOMMIT, true);
 			if ($dbType == "mysql" and isset($enforceUTF8) and $enforceUTF8) {
 				$connexion->query("SET NAMES utf8");
 			}
