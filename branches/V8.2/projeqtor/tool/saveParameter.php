@@ -461,6 +461,7 @@ if ($type=='habilitation') {
   $result=$dataCloningCreationRequest->save();
   array_push($SaveChange, $result);
   $result=$cronExecution->save();
+  $cronExecution->calculNextTime();
   array_push($SaveChange, $result);
   $creaPerDay = RequestHandler::getValue('dataCloningPerDay');
   $paramPerDay=SqlElement::getSingleSqlElementFromCriteria('Parameter', array("parameterCode"=>"dataCloningPerDay"));
@@ -476,9 +477,12 @@ if ($type=='habilitation') {
     		if ($isSaveOK===false) {
     			$status="ERROR";
     			$errors=$result;
+    			break;
     		} else if ($status=="NO_CHANGE") {
     			$status="OK";
     		}
+    	}else{
+    	  continue;
     	}
     }
   }else{
