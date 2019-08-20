@@ -37,4 +37,5 @@ $scaytAutoStartup='NO';
 //$filenameCharsetForImport="WINDOWS-1252";
 //$paramReorg=false;
 //$imapFilterCriteria='UNSEEN';
+$dataCloningDirectory='d:\wwww\simulation';
 //======= END
