@@ -43,7 +43,7 @@ $versionCode=$version;
 $showClosed = 0;
 $showClosed = Parameter::getUserParameter('dataCloningShowClosed');
 $dataCloning = new DataCloning();
-$versionCodeList=array();
+$versionCodeList=array($versionCode);
 if($dataCloning->getVersionCodeList()){
   $versionCodeList=$dataCloning->getVersionCodeList();
 }
