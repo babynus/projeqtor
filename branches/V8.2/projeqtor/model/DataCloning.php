@@ -622,18 +622,21 @@ class DataCloning extends SqlElement{
 	  $dbParam = new Parameter();
 	  $nameDbParam = $dbParam->getDatabaseTableName();
 	  $requeteDbName= "UPDATE ".$nameDbParam." SET parameterValue = ".Sql::str($dataCloning->name)." WHERE parameterCode = 'paramDbDisplayName';";
-	  $connexion->prepare($requeteDbName)->execute();
-	  $dbModule = new Module();
-	  $moduleName = $dbModule->getDatabaseTableName();
-	  $requestModuleActive= "UPDATE ".$moduleName." SET active = 0 WHERE name = 'moduleDataCloning';";
-	  $connexion->prepare($requestModuleActive)->execute();
-	  $requestModuleIdle= "UPDATE ".$moduleName." SET idle = 1 WHERE name = 'moduleDataCloning';";
-	  $connexion->prepare($requestModuleIdle)->execute();
+	  $connexion->exec($requeteDbName);
 	  
-  	$cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
+	  $dbModule = new Module();
+	  $moduleDBName = $dbModule->getDatabaseTableName();
+	  $requestModule= "UPDATE ".$moduleDBName." SET active = 0, idle = 1 WHERE name = 'moduleDataCloning';";
+	  $connexion->exec($requestModule);
+	  
+	  $dbHabilitation = new Habilitation();
+	  $habilitationDBName = $dbHabilitation->getDatabaseTableName();
+	  $requestHabilitation = "UPDATE ".$habilitationDBName." SET allowAccess = 0 WHERE idMenu = 222 or idMenu = 224;";
+	  $connexion->exec($requestHabilitation);
+	  
   	$dataCloning->isActive = 1;
   	$dataCloning->nameDir = $nameDir;
-  	$dataCloning->plannedDate = $cronExecution->nextTime;
+  	$dataCloning->plannedDate = strtotime(date('Y-m-d H:i:s'));
   	$dataCloning->save();
   	
   	debugTraceLog( $dataCloning->name . i18n('dataCloningFinish').' - '. (round((microtime(true) - $startMicroTime)*1000000)/1000000) . i18n('second'));
