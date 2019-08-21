@@ -104,7 +104,7 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES
 ('paramRightDiv','0'),
 ('contentPaneRightDetailDivHeight','0'),
 ('contentPaneDetailDivHeight','0'),
-('paramLayoutObjectDetail','0');
+('paramLayoutObjectDetail','4');
 
 INSERT INTO `${prefix}cronExecution` (`cron`, `fileExecuted`, `idle` ,`fonctionName`) VALUES
 ('*/5 * * * *', '../tool/cronExecutionStandard.php', 0, 'dataCloningCheckRequest');
