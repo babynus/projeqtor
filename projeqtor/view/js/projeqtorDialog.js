@@ -6367,23 +6367,26 @@ function switchMode2(paramToSend){
   if (paramToSend=='1'){
     loadContent("objectMain.php?objectClass="+ currentScreen+"&paramScreen="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     loadDiv("menuUserScreenOrganization.php?paramScreen="+paramToSend,"mainDivMenu");
-    if(objectIdScreen !=null){
+    if(objectIdScreen !=''){
       listClick();
       loadContent("objectDetail.php", "detailDiv", 'listForm');
+      if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
     }
   }else if(paramToSend=='2'){
     loadContent("objectMain.php?objectClass="+ currentScreen+"&paramRightDiv="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-    if(objectIdScreen !=null){
+    if(objectIdScreen !=''){
       listClick();
       loadContent("objectDetail.php", "detailDiv", 'listForm');
+      if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
     }
   }
   else if(paramToSend=='4'){
     loadContent("objectMain.php?objectClass=" +currentScreen+"&paramLayoutObjectDetail="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     loadDiv("menuUserScreenOrganization.php?paramScreen="+paramToSend,"mainDivMenu");
-    if(objectIdScreen !=null){
+    if(objectIdScreen !=''){
       listClick();
       loadContent("objectDetail.php", "detailDiv", 'listForm');
+      if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
     }
   }
 }
