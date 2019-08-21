@@ -407,7 +407,9 @@ class DataCloning extends SqlElement{
   	  $parameterP = "parameters.php";
   	  $dataCloningDirectory = Parameter::getGlobalParameter('dataCloningDirectory');
   	  if($dataCloningDirectory){
-  	   $dir_dest = $dataCloningDirectory;
+  	    $pathSeparator=Parameter::getGlobalParameter('paramPathSeparator');
+  	    if (substr($dataCloningDirectory,-1)!=$pathSeparator) $dataCloningDirectory.=$pathSeparator;
+  	    $dir_dest = $dataCloningDirectory.$newPwd;
   	  }else{
   	   $dir_dest = '../simulation/'.$newPwd;
   	  }
@@ -667,13 +669,13 @@ class DataCloning extends SqlElement{
       $sqlDrop = "DROP DATABASE $bdName ;";
 	  }else{
 	    $PDO=$dataCloning->connectTestSimu($bdName);
-  	  $sql = 'SHOW TABLES';
-  	  $result_tables = $PDO->query($sql);
+//   	  $sql = 'SHOW TABLES';
+//   	  $result_tables = $PDO->query($sql);
   	  $sqlDrop = "DROP DATABASE $bdName;";
   	  $sqlRemove = "";
-  	  foreach($result_tables as $row) {
-  	    $sqlRemove.="DROP TABLE $row[0];";
-  	  }
+//   	  foreach($result_tables as $row) {
+//   	    $sqlRemove.="DROP TABLE $row[0];";
+//   	  }
 	  }
 	  if($sqlRemove){
 	   $PDO->exec($sqlRemove);
