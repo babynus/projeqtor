@@ -405,10 +405,15 @@ class DataCloning extends SqlElement{
 	  }else{
   	  $dir_source = dirname(__DIR__);
   	  $parameterP = "parameters.php";
-  	  $dir_dest = '../simulation/'.$newPwd;
+  	  $dataCloningDirectory = Parameter::getGlobalParameter('dataCloningDirectory');
+  	  if($dataCloningDirectory){
+  	   $dir_dest = $dataCloningDirectory;
+  	  }else{
+  	   $dir_dest = '../simulation/'.$newPwd;
+  	  }
 	  }
 	  $nameDir = $newPwd;
-	  
+	 
 	  $startMicroTime=microtime(true);
 	  debugTraceLog( $dataCloning->name . i18n('dataCloningStart'));
 	  //create folder
@@ -440,8 +445,8 @@ class DataCloning extends SqlElement{
   	  	  $paramDbNameNew = strtolower($paramDbNameNew);
   	  	  $paramDbNameParamSimu = "\$paramDbName='$paramDbNameNew';";
   	  	  $paramContext = str_replace($paramDbNameParam,$paramDbNameParamSimu,$paramContext);
-  	  	  $paramSimuIndexOrigin = "\$simuIndex='$OriginData->name';";
-  	  	  $paramSimuIndexNew = "\$simuIndex='$dataCloning->name';";
+  	  	  $paramSimuIndexOrigin = "\$simuIndex='$OriginData->nameDir';";
+  	  	  $paramSimuIndexNew = "\$simuIndex='$nameDir';";
   	  	  $paramContext .= str_replace($paramSimuIndexOrigin,$paramSimuIndexNew,$paramContext);
   	  	  file_put_contents($parameterPhp, $paramContext);
   	  	  continue;
@@ -458,7 +463,7 @@ class DataCloning extends SqlElement{
   	  		$paramDbNameParamSimu = "\$paramDbName='$newPwdBd2';";
   	  		$paramContext = str_replace($paramDbNameParam,$paramDbNameParamSimu,$paramContext);
   	  		$paramContext .= "\n";
-  	  		$paramContext .= "\$simuIndex='$dataCloning->name';";
+  	  		$paramContext .= "\$simuIndex='$nameDir';";
   	  		file_put_contents($parameterPhp, $paramContext);
   	  		continue;
         }
@@ -563,7 +568,7 @@ class DataCloning extends SqlElement{
                     	        ,"projecthistory","statusmail","subscription","translationaccessright","translationcode","translationlanguage","translationvalue");
 	    
 	    foreach($result_tables as $row) {
-	      debugLog("   table ".$row['Name']);
+	      //debugLog("   table ".$row['Name']);
 	      // CREATE ..
 	      $result_create = $PDO->query('SHOW CREATE TABLE `'. $row['Name'] .'`');
 	      foreach ($result_create as $row){
@@ -581,6 +586,9 @@ class DataCloning extends SqlElement{
 	      // INSERT ...
 	      $sqlInsert = "";
 	      $query='SELECT * FROM `'. $row[0] .'`';
+	      if($row[0] == 'columnselector'){
+	        $query='SELECT * FROM `'. $row[0] .'` WHERE idUser='.$dataCloning->idResource;
+	      }
 	      $result_insert = $PDO->query($query);
 	      $cpt = 0;
 	      $connexion->beginTransaction();
@@ -647,6 +655,8 @@ class DataCloning extends SqlElement{
 	  $dataCloning->idle = 1;
 	  $dataCloning->deletedDate = date('Y-m-d H:i');
 	  $dir= dirname(__DIR__).'/simulation/'.$dataCloning->nameDir;
+	  $startMicroTime=microtime(true);
+	  debugTraceLog(i18n('DataCloningDeleteStart').$dataCloning->name);
 	  $dataCloning->remove_dir($dir,$dataCloning);
 	  $bdName = 'simu_'.strtolower($dataCloning->nameDir);
 	  if (Parameter::getGlobalParameter('paramDbType') == "pgsql") {
@@ -666,10 +676,11 @@ class DataCloning extends SqlElement{
   	  }
 	  }
 	  if($sqlRemove){
-	   $PDO->prepare($sqlRemove)->execute();
+	   $PDO->exec($sqlRemove);
 	  }
-	  $PDO->prepare($sqlDrop)->execute();
+	  $PDO->exec($sqlDrop);
 	  $dataCloning->save();
+	  debugTraceLog( $dataCloning->name . i18n('dataCloningDeleteFinish').' - '. (round((microtime(true) - $startMicroTime)*1000000)/1000000) . i18n('second'));
 	}
 
 public static	function remove_dir($directory,$dataCloning,$empty = false) {
