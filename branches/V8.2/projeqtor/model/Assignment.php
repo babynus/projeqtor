@@ -403,6 +403,7 @@ class Assignment extends SqlElement {
           $arrTeams[$pool->idResourceTeam]=$pool->idResourceTeam;
         }
         $idAct = $this->refId;
+        
         $ass = new Assignment();
         $lstAss = $ass->getSqlElementsFromCriteria(array('refId'=>$this->refId,'refType'=>'Activity'));
         foreach ($lstAss as $value){
@@ -477,6 +478,16 @@ class Assignment extends SqlElement {
     }
     if ($result=="") {
       $result='OK';
+    }
+    if($this->refType=='Activity'){
+      $activity = new Activity($this->refId);
+      $minimumThreshold = $activity->ActivityPlanningElement->minimumThreshold;
+      if($minimumThreshold){
+      	$res = new ResourceAll($this->idResource);
+      	if($res->capacity*($this->rate/100) > $minimumThreshold){
+      		$result=i18n('minimumThresholdError');
+      	}
+      }
     }
     return $result;
   }
