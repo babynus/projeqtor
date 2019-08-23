@@ -60,10 +60,10 @@
     $updateDate='';
   }
   if (!$objectId) {
-    if(Parameter::getUserParameter('paramRightDiv')=='2'){
-      echo "<div onclick='switchMode2(2);' class='changeActivityStreamClass' style='position:absolute;top:2px;left:3px'></div>";
+    if(Parameter::getUserParameter('paramRightDiv')=='3'){
+      echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamClass' style='position:absolute;top:2px;left:3px'></div>";
     }else{
-      echo "<div onclick='switchMode2(2);' class='changeActivityStreamBotClass' style='position:absolute;top:2px;left:3px'></div>";
+      echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamBotClass' style='position:absolute;top:2px;left:3px'></div>";
     }
     echo "</br></br>";
     echo $noData; 
@@ -77,10 +77,10 @@
 <?php if (!$onlyCenter) {?>
 <div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
 	<div id="activityStreamTop" dojoType="dijit.layout.ContentPane" region="top" style="text-align:center" class="dijitAccordionTitle">
-	<?php if(Parameter::getUserParameter('paramRightDiv')=='2'){
-      echo "<div onclick='switchMode2(2);' class='changeActivityStreamClass' style='position:absolute;top:2px;left:3px'></div>";
+	<?php if(Parameter::getUserParameter('paramRightDiv')=='3'){
+      echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamClass' style='position:absolute;top:2px;left:3px'></div>";
     }else{
-      echo "<div onclick='switchMode2(2);' class='changeActivityStreamBotClass' style='position:absolute;top:2px;left:3px'></div>";
+      echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamBotClass' style='position:absolute;top:2px;left:3px'></div>";
     }
     ?>
 	   <div><span class="title" ><?php echo i18n("titleStream");?></span></div>

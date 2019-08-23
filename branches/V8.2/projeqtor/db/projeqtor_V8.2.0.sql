@@ -102,9 +102,12 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES
 ('paramAttachmentNum',''),
 ('paramScreen','0'),
 ('paramRightDiv','0'),
+('paramScreenRessourcePlanning','0'),
 ('contentPaneRightDetailDivHeight','0'),
 ('contentPaneDetailDivHeight','0'),
-('paramLayoutObjectDetail','4');
+('contentPaneRightDetailDivHeightPlanning','0'),
+('contentPaneRightDetailDivHeightGlobalPlanning','0'),
+('paramLayoutObjectDetail','5');
 
 INSERT INTO `${prefix}cronExecution` (`cron`, `fileExecuted`, `idle` ,`fonctionName`) VALUES
 ('*/5 * * * *', '../tool/cronExecutionStandard.php', 0, 'dataCloningCheckRequest');
