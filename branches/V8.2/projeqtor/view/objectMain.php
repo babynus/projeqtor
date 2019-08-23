@@ -30,26 +30,20 @@
   require_once "../tool/projeqtor.php";
   scriptLog('   ->/view/objectMain.php');
   //florent
-  if(empty(Parameter::getUserParameter("paramScreen"))){
-    if(empty(RequestHandler::getValue('paramScreen'))){
+  if(empty(RequestHandler::getValue('paramScreen'))and Parameter::getUserParameter("paramScreen") =='0'){
+      $valScreen='0';
       $widthListDiv='100%';
       $widthDetailDiv='100%';
       $positionListDiv='top';
-    }else{
-      $valScreen='1';
-       $widthListDiv='58%';
-      $widthDetailDiv='42%';
-      $positionListDiv='left';
       Parameter::storeUserParameter("paramScreen", $valScreen);
-    }
-  }else{ 
+  }else{
     if(RequestHandler::getValue('paramScreen')=='1'){
       $valScreen='0';
       $widthListDiv='100%';
       $widthDetailDiv='100%';
       $positionListDiv='top';
-      Parameter::storeUserParameter("paramScreen", $valScreen); 
-    }else{
+      Parameter::storeUserParameter("paramScreen", $valScreen);
+    }else {
       $valScreen='1';
       $widthListDiv='58%';
       $widthDetailDiv='42%';
@@ -61,26 +55,26 @@
     if(empty(RequestHandler::getValue('paramRightDiv'))){
       $positonRightDiv='trailing';
     }else{
-      $valScreen='2';
+      $valScreen='3';
       $positonRightDiv='bottom';
       Parameter::storeUserParameter("paramRightDiv", $valScreen);
     }
   }else{
-    if(RequestHandler::getValue('paramRightDiv')=='2' and Parameter::getUserParameter("paramRightDiv") == '2'){
+    if(RequestHandler::getValue('paramRightDiv')=='3' and Parameter::getUserParameter("paramRightDiv") == '3'){
       $valScreen='0';
       $positonRightDiv='trailing';
       Parameter::storeUserParameter("paramRightDiv", $valScreen);
     }else{
-      $valScreen='2';
+      $valScreen='3';
       $positonRightDiv='bottom';
       Parameter::storeUserParameter("paramRightDiv", $valScreen);
     }
   }
   
-  if(empty(Parameter::getUserParameter("paramLayoutObjectDetail")) and RequestHandler::getValue('paramLayoutObjectDetail')=='4'){
+  if((empty(Parameter::getUserParameter("paramLayoutObjectDetail")) or Parameter::getUserParameter("paramLayoutObjectDetail")=='4')and RequestHandler::getValue('paramLayoutObjectDetail')=='4') {
     $valScreen='4';
     Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
-  }else if(Parameter::getUserParameter("paramLayoutObjectDetail")=='4' and RequestHandler::getValue('paramLayoutObjectDetail')=='4'){
+  }else if(Parameter::getUserParameter("paramLayoutObjectDetail")=='4' and RequestHandler::getValue('paramLayoutObjectDetail')=='0'){
     $valScreen='0';
     Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
   }
@@ -112,7 +106,7 @@
   	}
   }
   //florent
-  if(Parameter::getUserParameter("paramRightDiv") == '2' and Parameter::getUserParameter('paramScreen')=='0' ){
+  if(Parameter::getUserParameter("paramRightDiv") == '3' and Parameter::getUserParameter('paramScreen')=='0' ){
     $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
     if (!$detailRightHeight) $detailRightHeight=0;
     if($detailRightHeight or $detailRightHeight==="0"){
@@ -127,7 +121,7 @@
       $rightHeight="0%";
     }
   }else{
-    $rightHeight="10%";
+    $rightHeight="20%";
   }
   ///////
   
@@ -151,9 +145,9 @@
             <script type="dojo/connect" event="resize" args="evt">
               saveDataToSession("contentPaneDetailDivHeight<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
             </script>
-	  <?php if (property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream') and Parameter::getUserParameter("paramRightDiv") !='2' ) {?>
+	  <?php if (property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream') and Parameter::getUserParameter("paramRightDiv") !='3' ) {?>
     	<div id="hideStreamButton" region="center" style="cursor:pointer;position:absolute; right:0px; bottom:2px;z-index:999999">
-    	   <a onClick="hideStreamMode(false);" id="buttonSwitchedStream" title="" ><span style="top:0px;display:inline-block;width:20px;height:22px;"><div class='iconHideStream22'  >&nbsp;</div></span></a>
+    	   <a onClick="hideStreamMode(false);" id="buttonSwitchedStream" title="" ><span style="top:px;display:inline-block;margin-right:12px;"><div class='iconActivityStream32 '  >&nbsp;</div></span></a>
     	</div>
       <?php 
             }
