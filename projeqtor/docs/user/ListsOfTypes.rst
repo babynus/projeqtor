@@ -23,7 +23,7 @@ Allows to limit values displayed in the list of values for each element type.
 
 Restrictions can be defined for a project, a project type or a profile.
 
-.. note:: Types restrictions section on Project screen.
+.. note:: **Types restrictions section on Project screen**
 
    To display types restrictions section, the global parameter "allow type restriction on project" must be set to "Yes".
    

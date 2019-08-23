@@ -93,7 +93,7 @@ div.code-block-caption:hover > a.headerlink {
 
 /* ------------------------------- MISE EN PAGE --------------------------------- */
 /* ------------------------------- Text styles ---------------------------------- */
-div.body p, div.body dd, div.body li, div.body blockquote {
+div.body p, div.body dd, div.body li {
     text-align: justify;
 /*    line-height: 100%;     */
     -moz-hyphens: auto;
@@ -126,18 +126,11 @@ p.rubric {
     background-color: #8a83a7;
 }
 
-p.compound-first {
-    margin-top: 40px;
-    padding: 5px;
-    font-weight: bold;
-    border-bottom: 1px solid #8a83a7;
-}
-
-p.compound-first::before {
-    content: "";
-    background: url(/images/arrowCompound.png);
-    display: block;
-	position: absolute;
+p.compound-first { 
+	margin-top: 30px;
+    padding: 5px 0 5px 0px;
+    border-bottom: 1px solid #808080;
+    font-weight: bold;  
 }
 
 
@@ -313,7 +306,7 @@ div.error p.admonition-title {
 
 div.tip p.admonition-title {
     background-color: #94d584;
-    border-bottom: 4px solid #4a9d35;
+    border-bottom: 4px solid #6ac653;
     line-height: 150%;
 }
 

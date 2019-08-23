@@ -56,7 +56,7 @@ Document directories
 Document directories management allows to define a structure for document storage.
 
 * The files of document will be stored in the folder defined by the parameters  **Document root** and **Location**.
-* **Document root** is defined in :ref:`Global parameters <document-section>` screen. 
+* **Document root** is defined in :ref:`Global parameters<file-directory-section>` screen. 
 
 .. rubric:: Section Description
 
@@ -248,10 +248,10 @@ This section allows to manage version list of document.
 * Click on |buttonIconDelete| to delete a version.
 * Click on |iconDownload| to download file at this version.
 
-.. rubric:: **Document viewer**
+.. rubric:: Document viewer
 
- * Document viewer available for image, text and PDF files.
- * Click on icon.
+* Document viewer available for image, text and PDF files.
+* Click on icon.
 
 .. note:: 
 
