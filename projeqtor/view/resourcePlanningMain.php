@@ -29,7 +29,6 @@
  */
   require_once "../tool/projeqtor.php";
   scriptLog('   ->/view/planningMain.php');  
-  
   $listHeight='60%';
   $topDetailDivHeight=Parameter::getUserParameter('contentPaneTopResourcePlanningDivHeight');
   $screenHeight=getSessionValue('screenHeight');
@@ -37,18 +36,48 @@
     $topDetailDivHeight=$screenHeight-300;
   }
   $listHeight=($topDetailDivHeight)?$topDetailDivHeight.'px':$listHeight;
+  
+  
+  if(empty(RequestHandler::getValue('paramScreen'))and Parameter::getUserParameter("paramScreen") =='0'){
+    $valScreen='0';
+    $widthListDiv='100%';
+    $widthDetailDiv='100%';
+    $positionListDiv='top';
+    Parameter::storeUserParameter("paramScreen", $valScreen);
+  }else{
+    if(RequestHandler::getValue('paramScreen')=='1'){
+      $valScreen='0';
+      $widthListDiv='100%';
+      $widthDetailDiv='100%';
+      $positionListDiv='top';
+      Parameter::storeUserParameter("paramScreen", $valScreen);
+    }else {
+      $valScreen='1';
+      $widthListDiv='58%';
+      $widthDetailDiv='42%';
+      $positionListDiv='left';
+      Parameter::storeUserParameter("paramScreen", $valScreen);
+    }
+  }
+  if((empty(Parameter::getUserParameter("paramLayoutObjectDetail")) or Parameter::getUserParameter("paramLayoutObjectDetail")=='4')and RequestHandler::getValue('paramLayoutObjectDetail')=='4') {
+    $valScreen='4';
+    Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
+  }else if(Parameter::getUserParameter("paramLayoutObjectDetail")=='4' and RequestHandler::getValue('paramLayoutObjectDetail')=='0'){
+    $valScreen='0';
+    Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
+  }
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="ResourcePlanning" />
 <input type="hidden" name="resourcePlanning" id="resourcePlanning" value="true" />
 <div id="mainDivContainer" class="container" dojoType="dijit.layout.BorderContainer">
-  <div id="listDiv" dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:<?php echo $listHeight;?>;">
+  <div id="listDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positionListDiv?>" splitter="true" style="width:<?php echo $widthListDiv?>;height:<?php echo $listHeight;?>;">
     <script type="dojo/connect" event="resize" args="evt">
          if (switchedMode) return;
               saveDataToSession("contentPaneTopResourcePlanningDivHeight", dojo.byId("listDiv").offsetHeight, true);
     </script>
    <?php include 'resourcePlanningList.php'?>
   </div>
-  <div id="detailDiv" dojoType="dijit.layout.ContentPane" region="center">
+  <div id="detailDiv" dojoType="dijit.layout.ContentPane" region="center"  style="width:<?php echo $widthDetailDiv?>">
     <div id="detailBarShow" class="dijitAccordionTitle" onMouseover="hideList('mouse');" onClick="hideList('click');">
       <div id="detailBarIcon" align="center"></div>
     </div>

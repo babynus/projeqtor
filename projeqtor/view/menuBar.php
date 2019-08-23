@@ -318,7 +318,7 @@
       </div>
     </td>
     <td title="<?php ?>"  style="position:relative;width:55px;">
-      <div dojoType="dijit.layout.ContentPane"  id="menuUserScreenTop" class="pseudoButton" style="position:relative;overflow:hidden;width:50px; height:28px; min-width:50px;top:-5px;">
+      <div dojoType="dijit.layout.ContentPane"  id="menuUserScreenTop" class="pseudoButton" style="position:relative;overflow:hidden;width:55px; height:28px; min-width:55px;top:-5px;">
         <div dojoType="dijit.form.DropDownButton"  id="iconMenuUserScreen" style="display: table-cell;background-color: #D3D3D3;vertical-align: middle;position:relative;min-width:50px;top:-3px" >
 			    <table style="width:100%">
     			  <tr>
@@ -334,28 +334,6 @@
           </div> 
 		</div>
       </div>
-    </td> 
-     <?php if (! isIE()) {?>
-    <td  width="28px" > 
-      <div  class="pseudoButtonFullScreen <?php echo $simuClass;?>" style="height:28px; position:relative; top:-5px; z-index:30;margin-right:0px; width:28px;" onclick="toggleFullScreen()" >
-        <table>
-          <tr>
-            <td style="width:28px" >
-              <?php echo formatIcon('FullScreen', 32,i18n("fullScreen"));?>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </td>
-     <?php }?> 
-    <td width="29px" class="<?php echo $simuClass;?>">   
-      <div id="hideMenuBarShowButtonTop" style="cursor:pointer;position:relative; top:-11px;right:0px; z-index:949" >
-  		  <a onClick="hideMenuBarShowModeTop();" id="buttonSwitchedMenuBarTopShow" title="<?php echo i18n("buttonShowMenu");?>" >
-  		    <span style='display:inline-block;width:24px;height:22px;'>
-  		     <div style="position:absolute;top:1px;right:0px;height:26px;width:24px" dojoType="dijit.form.Button" iconClass="dijitButtonIcon iconHideStream22" class="detailButton">&nbsp;</div>
-  		    </span>
-  		  </a>
-		  </div>
     </td> 
   </tr>
 </table>

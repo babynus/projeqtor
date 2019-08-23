@@ -6361,32 +6361,74 @@ function switchMode() {
   }
 }
 
-function switchMode2(paramToSend){
-  var currentScreen=dojo.byId('objectClass').value;
+function switchModeLayout(paramToSend){
+  var currentObject=dojo.byId('objectClass').value;
   var objectIdScreen=dojo.byId('objectId').value;
-  if (paramToSend=='1'){
-    loadContent("objectMain.php?objectClass="+ currentScreen+"&paramScreen="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-    loadDiv("menuUserScreenOrganization.php?paramScreen="+paramToSend,"mainDivMenu");
+  var currentItem=historyTable[historyPosition];
+  var currentScreen=currentItem[2];
+  console.log(currentScreen);
+  if (paramToSend=='1' || paramToSend=='2'){
+    if(paramToSend=='2'){
+      dojo.setStyle('verticalLayout',{"opacity": '0.5',"cursor":'not-allowed'});
+      dojo.removeAttr('verticalLayout','disabled');
+      dojo.setStyle('changeLayout',{"opacity": '0.5',"cursor":'not-allowed'});
+      dojo.setStyle('horizontalLayout',{"opacity": '1',"cursor":'initial'});
+    }else{
+      dojo.setStyle('verticalLayout',{"opacity": '1',"cursor":'initial'});
+      dojo.setStyle('changeLayout',{"opacity": '1',"cursor":'initial'});
+      dojo.setStyle('horizontalLayout',{"opacity": '0.5',"cursor":'not-allowed'});
+    }
     if(objectIdScreen !=''){
       listClick();
       loadContent("objectDetail.php", "detailDiv", 'listForm');
       if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
     }
-  }else if(paramToSend=='2'){
-    loadContent("objectMain.php?objectClass="+ currentScreen+"&paramRightDiv="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    if(currentScreen=='Planning' ){
+      loadContent("planningMain.php?objectClass="+ currentObject+"&paramScreen="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }else if(currentScreen=='ResourcePlanning' ){
+      loadContent("resourcePlanningMain.php?objectClass="+ currentObject+"&paramScreen="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }else if(currentScreen=='GlobalPlanning'){
+      loadContent("globalPlanningMain.php?objectClass="+ currentObject+"&paramScreen="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }else{
+      loadContent("objectMain.php?objectClass="+ currentObject+"&paramScreen="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }
+  }else if(paramToSend=='3'){
     if(objectIdScreen !=''){
       listClick();
       loadContent("objectDetail.php", "detailDiv", 'listForm');
       if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
+    }
+    if(currentScreen=='Planning' || currentScreen=='ResourcePlanning' || currentScreen=='GlobalPlanning'){
+      loadContent("planningMain.php?objectClass="+ currentObject+"&paramRightDiv="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }else if(currentScreen=='ResourcePlanning' ){
+      return false;
+    }else if(currentScreen=='GlobalPlanning'){
+      loadContent("globalPlanningMain.php?objectClass="+ currentObject+"&paramRightDiv="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }else{
+      loadContent("objectMain.php?objectClass="+ currentObject+"&paramRightDiv="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     }
   }
-  else if(paramToSend=='4'){
-    loadContent("objectMain.php?objectClass=" +currentScreen+"&paramLayoutObjectDetail="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-    loadDiv("menuUserScreenOrganization.php?paramScreen="+paramToSend,"mainDivMenu");
+  else if(paramToSend=='4' || paramToSend=='0'){
+    if(paramToSend=='4'){
+      dojo.setStyle('layoutList',{"opacity": '0.5',"cursor":'not-allowed'});
+      dojo.setStyle('layoutTab',{"opacity": '1',"cursor":'initial'});
+    }else{
+      dojo.setStyle('layoutList',{"opacity": '1',"cursor":'initial'});
+      dojo.setStyle('layoutTab',{"opacity": '0.5',"cursor":'not-allowed'});
+    }
     if(objectIdScreen !=''){
       listClick();
       loadContent("objectDetail.php", "detailDiv", 'listForm');
       if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
+    }
+    if(currentScreen=='Planning' || currentScreen=='ResourcePlanning' || currentScreen=='GlobalPlanning'){
+      loadContent("planningMain.php?objectClass="+currentObject+"&paramLayoutObjectDetail="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }else if(currentScreen=='ResourcePlanning' ){
+      loadContent("resourcePlanningMain.php?objectClass="+currentObject+"&paramLayoutObjectDetail="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }else if(currentScreen=='GlobalPlanning'){
+      loadContent("globalPlanningMain.php?objectClass="+ currentObject+"&paramLayoutObjectDetail="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }else{
+      loadContent("objectMain.php?objectClass="+ currentObject+"&paramLayoutObjectDetail="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     }
   }
 }
@@ -6533,7 +6575,7 @@ function stockHistory(curClass, curId, currentScreen) {
   historyTable[historyPosition]=new Array(curClass, curId,currentScreen);
   // Purge next history (not valid any more)
   for (var i=historyPosition+1;i<historyTable.length;i++) {
-    historyTable.splice(i,1);
+    historyTable.splice(i,1); 
   }
   if (historyPosition > 0) {
     enableWidget('menuBarUndoButton');
