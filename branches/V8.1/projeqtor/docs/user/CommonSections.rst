@@ -531,7 +531,7 @@ The calculation depends on consolidation method selected and on which level the 
                
 .. seealso:: 
 
-   For more details. See: :ref:`GlobalParam_Consolidation` screen allows to select consolidation method.
+   For more details. See: :ref:`GlobalParam_automation` screen allows to select consolidation method.
            
 .. _progress-section-monitor-indicator:
 
@@ -636,7 +636,7 @@ Dates and duration
 
 .. rubric:: Requested
 
- * Allows to define preliminary planned dates.
+* Allows to define preliminary planned dates.
 
 .. rubric:: Validated
 
@@ -1505,7 +1505,7 @@ Select an attachment depends on whether is a file or a hyperlink.
 
    Enter hyperlink in «Hyperlink» field.
 
-    .. image:: /images/GUI/COMMON_BOX_attachmentHyperLink.png
+    .. figure:: /images/GUI/COMMON_BOX_attachmentHyperLink.png
        :alt: Dialog box - Attachment for hyperlink
        
        Attachment for hyperlink

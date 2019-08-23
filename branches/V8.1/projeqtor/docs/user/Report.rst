@@ -64,6 +64,8 @@ Move your cursor over the reports menu icon (in the top bar) to show the popup m
    :alt: Pop-up list - Favorite reports
    :align: center
 
+You can add a "blank" report type to the favorites or to a specific project and resources.
+In this case, next to the report name, linked items will be displayed.
 
 .. compound:: **Popup menu management**
 
@@ -106,6 +108,14 @@ You can choose from many criteria to create your filter
    :alt: Advanced filters
    :align: center
 
+
+
+
+
+
+
+
+
 .. raw:: latex
 
     \newpage
@@ -130,3 +140,26 @@ To view all scheduled reports for sending, go to Scheduled Report in the Tools m
 .. figure:: /images/GUI/REPORT_BOX_SendingMailReport.png
    :alt: Sending a report to email
    :align: center
+
+   
+   
+   
+   
+   
+   
+   
+.. raw:: latex
+
+    \newpage
+
+.. index:: Report (Explanation of reading)
+
+.. _explanation_report:
+
+Explanation of reading
+----------------------
+
+
+
+
+   
