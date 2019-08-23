@@ -95,7 +95,7 @@ class DataCloning extends SqlElement{
 			$aff=new Affectable($idUser);
 			$listUser[$idUser]=($aff->name)?$aff->name:$aff->userName;
 		} else {
-			$listUser = getListForSpecificRights('imputation');
+			$listUser = getListForSpecificRights('dataCloningRight');
 		}
 		if($idUser != ''){
 		  $idresource='idResource = '.$idUser.' and ';

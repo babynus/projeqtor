@@ -2075,6 +2075,18 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo '    formChanged();';
           echo '</script>';
         }
+        if($col=='indivisibility'){
+        	echo '<script type="dojo/connect" event="onChange" >';
+        	echo 'console.log(dijit.byId("ActivityPlanningElement_minimumThreshold"));';
+        	echo '  if(this.checked){';
+        	echo '   dijit.byId("ActivityPlanningElement_minimumThreshold").set("required", true);';
+        	echo '   dijit.byId("ActivityPlanningElement_minimumThreshold").set("class", "input required");';
+        	echo '  }else{';
+        	echo '   dijit.byId("ActivityPlanningElement_minimumThreshold").set("required", false);';
+        	echo '   dijit.byId("ActivityPlanningElement_minimumThreshold").set("class", "input");';
+        	echo '  }';
+        	echo '</script>';
+        }
         echo '</div>';
         // BEGIN - REPLACE BY TABARY - USE isForeignKey GENERIC FUNCTION
       } else if (isForeignKey($col, $obj)) {

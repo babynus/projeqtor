@@ -112,7 +112,7 @@ class ActivityMain extends SqlElement {
       "done" => "nobr", 
       "idle" => "nobr", 
       "idleDate" => "nobr", 
-      "cancelled" => "nobr", 
+      "cancelled" => "nobr",
       "isPlanningActivity" => "title"
   );
   private static $_colCaptionTransposition = array(
@@ -377,6 +377,22 @@ class ActivityMain extends SqlElement {
     }
     if ($result == "") {
       $result = 'OK';
+    }
+    if($this->ActivityPlanningElement->minimumThreshold){
+      $ass = new Assignment();
+      $assList = $ass->getSqlElementsFromCriteria(array('refType'=>'Activity', 'refId'=>$this->id));
+      $maxThreshold = 1;
+      if($assList){
+        foreach ($assList as $assign){
+          $res = new ResourceAll($assign->idResource);
+        	if($res->capacity*($assign->rate/100) < $maxThreshold){
+        	  $maxThreshold = $res->capacity*($assign->rate/100);
+        	}
+        }
+        if($this->ActivityPlanningElement->minimumThreshold > $maxThreshold){
+          $result=i18n ('minimumThresholdError');
+        }
+      }
     }
     return $result;
   }

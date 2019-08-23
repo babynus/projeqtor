@@ -75,6 +75,8 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $priority;
   public $_label_planning;
   public $idActivityPlanningMode;
+  public $minimumThreshold;
+  public $indivisibility;
   public $_tab_5_1_smallLabel = array('workElementCount', 'estimated', 'real', 'left', '', 'ticket');
   public $workElementCount;
   public $workElementEstimatedWork;
@@ -105,6 +107,7 @@ class ActivityPlanningElementMain extends PlanningElement {
     "assignedWork"=>"readonly,noImport",
     "idActivityPlanningMode"=>"required,mediumWidth,colspan3",
     "idPlanningMode"=>"hidden,noImport",
+    "indivisibility"=>"colspan3",
   	"workElementEstimatedWork"=>"readonly,noImport",
   	"workElementRealWork"=>"readonly,noImport",
   	"workElementLeftWork"=>"readonly,noImport",
@@ -172,7 +175,6 @@ class ActivityPlanningElementMain extends PlanningElement {
     }else{
       self::$_fieldsAttributes["progress"]='';
     }
-    
   }
   /** ==========================================================================
    * Destructor

@@ -123,3 +123,6 @@ INSERT INTO `${prefix}module`(`id`, `name`, `sortOrder`, `idModule`, `idle`, `ac
 INSERT INTO `${prefix}modulemenu`(`idModule`, `idMenu`, `hidden`, `active`) VALUES 
 (17,222,0,1),
 (17,224,0,1);
+
+ALTER TABLE `${prefix}planningelement` ADD COLUMN `indivisibility` int(1) DEFAULT 0,
+ADD COLUMN `minimumThreshold` decimal(5,2) DEFAULT NULL;
