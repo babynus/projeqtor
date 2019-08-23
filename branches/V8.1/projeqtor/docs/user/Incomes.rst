@@ -17,6 +17,20 @@ Incomes
 
 Client Quotation
 ----------------
+  
+A quotation is a proposal estimate sent to customer to get approval of what’s to be done, and how must the customer will pay for it.
+
+On the quotation form, you can record all the information about the sent proposal, including attaching some file completely describing the proposal with details terms and conditions.
+
+.. rubric:: Transform quotation to order
+
+A quotation can be copied into an order when corresponding document is received as customer agreement.
+
+.. rubric:: Bill lines section
+
+This section allows to detail the quotation modality.
+
+.. rubric:: Section Description
 
 .. sidebar:: Other sections
 
@@ -24,20 +38,6 @@ Client Quotation
    * :ref:`Linked element<linkElement-section>`   
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`  
-   
-A quotation is a proposal estimate sent to customer to get approval of what’s to be done, and how must the customer will pay for it.
-
-On the quotation form, you can record all the information about the sent proposal, including attaching some file completely describing the proposal with details terms and conditions.
-
-.. rubric:: **Transform quotation to order**
-
-* A quotation can be copied into an order when corresponding document is received as customer agreement.
-
-.. rubric:: **Bill lines section**
-
-* This section allows to detail the quotation modality.
-
-.. rubric:: **Section Description**
 
 
 .. tabularcolumns:: |l|l|
@@ -69,7 +69,7 @@ On the quotation form, you can record all the information about the sent proposa
    * - Additional info.
      - Any additional information about the quotation.
 
-.. note:: Field "Customer"
+.. note:: **Field "Customer"**
      
    Automatically updated from project field.
 
@@ -134,15 +134,17 @@ An order (also called command) is the trigger to start work.
 
 On the order form, you can record all the information of the received order.
 
-.. rubric:: **Scheduled work and budgeted cost of project**
+.. rubric:: Scheduled work and budgeted cost of project
 
 * The scheduled work (field: "validated work") of the project will be initialized with the sum of total work from all orders.
 * The budgeted cost (field: "validated cost") of the project will be initialized with the sum of the total amount before taxes for all orders. 
 * See: :ref:`progress-section-resource`
 
-.. rubric:: **Bill lines section**
+.. rubric:: Bill lines section
 
-* This section allows to detail the order modality.
+This section allows to detail the order modality.
+
+.. rubric:: Section Description
 
 .. sidebar:: Other sections
 
@@ -150,8 +152,6 @@ On the order form, you can record all the information of the received order.
    * :ref:`Linked element<linkElement-section>`   
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
-
-.. rubric:: **Section Description**
 
 .. tabularcolumns:: |l|l|
 
@@ -288,7 +288,7 @@ You can define as many terms as you wish, to define the billing calendar.
    
    A term can be used just one time. The bill name will be displayed.
 
-.. rubric:: **A term has triggers**
+.. rubric:: A term has triggers
 
 * You can link the activities that should be billed at this term.
 * A summary of activities is displayed for validated and planned amount and end date.
@@ -400,66 +400,72 @@ Billing will depend on billing type defined for the project through project type
 .. figure:: /images/GUI/BILL_SCR_BillsClient.png
    :alt: Clients Bills
    :align: center
+   
+   Clients Bills
+   
 
 .. _Billing_types:
 
 Billing Type
 ============
 
-.. note::
+.. figure:: /images/GUI/BILL_CAPT_SchemaBill.png
+   :align: center
+      
+   Schema bill
 
-      .. figure:: /images/GUI/BILL_CAPT_SchemaBill.png
-         :align: center
-
-      * Each bill is linked to project, a project has a project type, and a project type is linked to a billing type.
+* Each bill is linked to project, a project has a project type, and a project type is linked to a billing type.
     
-      * So the billing type is automatically defined for the selected project. 
+* So the billing type is automatically defined for the selected project. 
 
-      * Billing type will influence bill line format.
+* Billing type will influence bill line format.
 
 
 
-   .. compound:: **At terms**
+      .. compound:: **At terms**
 
-      * A :ref:`term <term>` must be defined to generate the bill, generally following a billing calendar.
-      * Used for instance for: **Fixed price projects**.
+         * A :ref:`term <term>` must be defined to generate the bill, generally following a billing calendar.
+         * Used for instance for: **Fixed price projects**.
 
-   .. compound:: **On produced work**
+      .. compound:: **On produced work**
 
-      * No term is needed.
-      * The billing will be calculated based on produced work by resources 
-        on selected :ref:`activities <activity-price>` and on a selected period.
-      * Used for instance for **Time & Materials projects**.
+         * No term is needed.
+         * The billing will be calculated based on produced work by resources 
+           on selected :ref:`activities <activity-price>` and on a selected period.
+         * Used for instance for **Time & Materials projects**.
 
       .. compound:: **On capped produced work**
 
-      * No term is needed.
-      * The billing will be calculated based on produced work by resources  
-      on selected :ref:`activities <activity-price>` and on a selected period. 
-      * Taking into account that total billing cannot be more than project validated work.
+         * No term is needed.
+         * The billing will be calculated based on produced work by resources  
+           on selected :ref:`activities <activity-price>` and on a selected period. 
+         * Taking into account that total billing cannot be more than project validated work.
     
-      * Used for instance for **Capped Time & Materials projects**.
+         * Used for instance for **Capped Time & Materials projects**.
 
-   .. compound:: **Manual**
+      .. compound:: **Manual**
  
-      * Billing is defined manually, with no link to the project activity.
-      * Used, for instance for **Any kind of project where no link to activity is needed**.
+         * Billing is defined manually, with no link to the project activity.
+         * Used, for instance for **Any kind of project where no link to activity is needed**.
 
-   .. compound:: **Not billed**
+      .. compound:: **Not billed**
 
-      * No billing is possible for these kinds of projects.
-      * Used, for instance for **Internal projects & Administrative projects**.
+         * No billing is possible for these kinds of projects.
+         * Used, for instance for **Internal projects & Administrative projects**.
 
-.. warning:: Billing report
+.. warning:: **Billing report**
 
-   * Only bill with at least status "done" will be available for reporting.
-   * Before this status, they are considered as a draft.
+   Only bill with at least status "done" will be available for reporting.
+   
+   Before this status, they are considered as a draft.
 
-.. compound:: **Description Zone**
+.. rubric:: Description section
 
 .. figure:: /images/GUI/BILL_ZONE_BillDescription.png
    :alt: Description fields
    :align: center
+   
+   Description fields
    
 .. sidebar:: Other sections
 
@@ -504,11 +510,13 @@ Billing Type
    * - Billing type
      - Project billing type.
 
-.. compound:: **Treatment Zone**
+.. rubric:: Treatment Zone
 
 .. figure:: /images/GUI/BILL_ZONE_BillTreatment.png
    :alt: Treatment
    :align: center
+   
+   Treatment section
    
    
 .. tabularcolumns:: |l|l|
@@ -568,6 +576,8 @@ Bill lines
    :alt: Treatment
    :align: center
    
+   bill lines treatment
+   
 Input for each bill line depends on billing type.
 
 .. tabularcolumns:: |l|l|
@@ -623,20 +633,16 @@ Input for each bill line depends on billing type.
    * - Description
      - Description of line.
    * - Detail
-     - Detail of the line.
+     - Detail of the line Can be set on update.
    * - Price
      - Real amount of term.
 
-.. topic:: Field "Description"
+.. topic:: Field Description
  
    * Automatically set with the term name.
    * Can be modified on update.
 
-.. topic:: "Field Detail"
-
-   * Can be set on update.
-
-.. rubric:: **Bill line "On produced work & On capped produced work"**
+.. rubric:: Bill line On produced work & On capped produced work
 
 .. figure:: /images/GUI/BILL_BOX_BillLine-ProduceWork.png
    :alt: Dialog box - Bill line - On produced work & On capped produced work
@@ -663,7 +669,7 @@ Input for each bill line depends on billing type.
    * - Description
      - Description of line.
    * - Detail
-     - Detail of the line.
+     - Detail of the line Can be set on update.
    * - Price
      - Price of the activity.
    * - Quantity
@@ -675,10 +681,6 @@ Input for each bill line depends on billing type.
  
    * Automatically set with selected resource, activity price name and dates.
    * Can be modified on update.
-
-.. topic:: Field "Detail"
-
-   * Can be set on update.
 
 
 .. _manual-billing:

@@ -399,3 +399,75 @@
    :alt: D letter
    :scale: 30
 
+.. |E| image:: images/E.png
+   :alt: D letter
+   :scale: 30
+
+.. |F| image:: images/F.png
+   :alt: D letter
+   :scale: 30
+
+.. |G| image:: images/G.png
+   :alt: D letter
+   :scale: 30
+   
+.. |H| image:: images/H.png
+   :alt: D letter
+   :scale: 30
+
+.. |I| image:: images/I.png
+   :alt: D letter
+   :scale: 30
+
+.. |J| image:: images/J.png
+   :alt: D letter
+   :scale: 30
+   
+.. |K| image:: images/K.png
+   :alt: D letter
+   :scale: 30
+   
+   
+.. |A-BLC| image:: images/A-BLC.png
+   :alt: A letter
+   :scale: 30
+
+.. |B-BLC| image:: images/B-BLC.png
+   :alt: B letter
+   :scale: 30
+
+.. |C-BLC| image:: images/C-BLC.png
+   :alt: C letter
+   :scale: 30
+
+.. |D-BLC| image:: images/D-BLC.png
+   :alt: D letter
+   :scale: 30
+
+.. |E-BLC| image:: images/E-BLC.png
+   :alt: D letter
+   :scale: 30
+
+.. |F-BLC| image:: images/F-BLC.png
+   :alt: D letter
+   :scale: 30
+
+.. |G-BLC| image:: images/G-BLC.png
+   :alt: D letter
+   :scale: 30
+   
+.. |H-BLC| image:: images/H-BLC.png
+   :alt: D letter
+   :scale: 30
+
+.. |I-BLC| image:: images/I-BLC.png
+   :alt: D letter
+   :scale: 30
+
+.. |J| image:: images/J-BLC.png
+   :alt: D letter
+   :scale: 30
+   
+.. |K| image:: images/K-BLC.png
+   :alt: D letter
+   :scale: 30
