@@ -36,36 +36,18 @@
     $topDetailDivHeight=$screenHeight-300;
   }
   $listHeight=($topDetailDivHeight)?$topDetailDivHeight.'px':$listHeight;
-  
-  
-  if(empty(RequestHandler::getValue('paramScreen'))and Parameter::getUserParameter("paramScreen") =='0'){
-    $valScreen='0';
+  //florent
+  $paramScreen=RequestHandler::getValue('paramScreen');
+  $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
+  $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
+  if($positionListDiv=='left'){
+    $widthListDiv='65%';
+    $widthDetailDiv='25%';
+  }else{
     $widthListDiv='100%';
     $widthDetailDiv='100%';
-    $positionListDiv='top';
-    Parameter::storeUserParameter("paramScreen", $valScreen);
-  }else{
-    if(RequestHandler::getValue('paramScreen')=='1'){
-      $valScreen='0';
-      $widthListDiv='100%';
-      $widthDetailDiv='100%';
-      $positionListDiv='top';
-      Parameter::storeUserParameter("paramScreen", $valScreen);
-    }else {
-      $valScreen='1';
-      $widthListDiv='58%';
-      $widthDetailDiv='42%';
-      $positionListDiv='left';
-      Parameter::storeUserParameter("paramScreen", $valScreen);
-    }
   }
-  if((empty(Parameter::getUserParameter("paramLayoutObjectDetail")) or Parameter::getUserParameter("paramLayoutObjectDetail")=='4')and RequestHandler::getValue('paramLayoutObjectDetail')=='4') {
-    $valScreen='4';
-    Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
-  }else if(Parameter::getUserParameter("paramLayoutObjectDetail")=='4' and RequestHandler::getValue('paramLayoutObjectDetail')=='0'){
-    $valScreen='0';
-    Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
-  }
+  ///////
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="ResourcePlanning" />
 <input type="hidden" name="resourcePlanning" id="resourcePlanning" value="true" />

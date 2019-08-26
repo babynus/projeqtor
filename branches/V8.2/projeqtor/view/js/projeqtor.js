@@ -5591,13 +5591,14 @@ function hideStreamMode(noRefresh){
       w : 0
     });
     dijit.byId("centerDiv").resize();
-
+    dojo.setStyle("hideStreamButton", "display", "block");
   } else {
     if (! menuRightDivSize) menuRightDivSize=((dojo.byId("centerDiv").offsetWidth)*0.15);
     dijit.byId("detailRightDiv").resize({
       w : menuRightDivSize
     });
     dijit.byId("centerDiv").resize();
+    dojo.setStyle("hideStreamButton", "display", "none");
   }
   var detailHidden=false;
   if (dojo.byId('detailBarShow') && dojo.byId('detailBarShow').style.display=='block') detailHidden=true;
