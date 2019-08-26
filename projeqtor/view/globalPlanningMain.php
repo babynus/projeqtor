@@ -44,70 +44,20 @@
     $rightWidthGlobalPlanning="15%";
   }
   
-  if(empty(RequestHandler::getValue('paramScreen'))and Parameter::getUserParameter("paramScreen") =='0'){
-    $valScreen='0';
+  //florent
+  $paramScreen=RequestHandler::getValue('paramScreen');
+  $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
+  $paramRightDiv=RequestHandler::getValue('paramRightDiv');
+  $currentScreen='GlobalPlanning';
+  $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
+  $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
+  $rightHeightGlobalPlanning=heightLaoutActivityStream($currentScreen);
+  if($positionListDiv=='left'){
+    $widthListDiv='58%';
+    $widthDetailDiv='42%';
+  }else{
     $widthListDiv='100%';
     $widthDetailDiv='100%';
-    $positionListDiv='top';
-    Parameter::storeUserParameter("paramScreen", $valScreen);
-  }else{
-    if(RequestHandler::getValue('paramScreen')=='1'){
-      $valScreen='0';
-      $widthListDiv='100%';
-      $widthDetailDiv='100%';
-      $positionListDiv='top';
-      Parameter::storeUserParameter("paramScreen", $valScreen);
-    }else {
-      $valScreen='1';
-      $widthListDiv='65%';
-      $widthDetailDiv='25%';
-      $positionListDiv='left';
-      Parameter::storeUserParameter("paramScreen", $valScreen);
-    }
-  }
-  if(empty(Parameter::getUserParameter("paramRightDiv"))){
-    if(empty(RequestHandler::getValue('paramRightDiv'))){
-      $positonRightDiv='trailing';
-    }else{
-      $valScreen='3';
-      $positonRightDiv='bottom';
-      Parameter::storeUserParameter("paramRightDiv", $valScreen);
-    }
-  }else{
-    if(RequestHandler::getValue('paramRightDiv')=='3' and Parameter::getUserParameter("paramRightDiv") == '3'){
-      $valScreen='0';
-      $positonRightDiv='trailing';
-      Parameter::storeUserParameter("paramRightDiv", $valScreen);
-    }else{
-      $valScreen='3';
-      $positonRightDiv='bottom';
-      Parameter::storeUserParameter("paramRightDiv", $valScreen);
-    }
-  }
-  if((empty(Parameter::getUserParameter("paramLayoutObjectDetail")) or Parameter::getUserParameter("paramLayoutObjectDetail")=='4')and RequestHandler::getValue('paramLayoutObjectDetail')=='4') {
-    $valScreen='4';
-    Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
-  }else if(Parameter::getUserParameter("paramLayoutObjectDetail")=='4' and RequestHandler::getValue('paramLayoutObjectDetail')=='0'){
-    $valScreen='0';
-    Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
-  }
-  //florent
-  if(Parameter::getUserParameter("paramRightDiv") == '3' and Parameter::getUserParameter('paramScreen')=='0' ){
-    $detailRightHeightPlanning=Parameter::getUserParameter('contentPaneRightDetailDivHeightGlobalPlanning');
-    if (!$detailRightHeightPlanning) $detailRightHeightPlanning=0;
-    if($detailRightHeightPlanning or $detailRightHeightPlanning==="0"){
-      if ($detailRightHeightPlanning > 750){
-        $detailRightHeightPlanning=750;
-      }
-      if ($detailRightHeightPlanning < 80){
-        $detailRightHeightPlanning=100;
-      }
-      $rightHeightGlobalPlanning=$detailRightHeightPlanning.'px';
-    } else {
-      $rightHeightGlobalPlanning="0%";
-    }
-  }else{
-    $rightHeightGlobalPlanning="20%";
   }
   ///////
 ?>

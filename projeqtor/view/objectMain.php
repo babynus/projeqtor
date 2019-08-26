@@ -29,57 +29,21 @@
  */
   require_once "../tool/projeqtor.php";
   scriptLog('   ->/view/objectMain.php');
-  //florent
-  if(empty(RequestHandler::getValue('paramScreen'))and Parameter::getUserParameter("paramScreen") =='0'){
-      $valScreen='0';
-      $widthListDiv='100%';
-      $widthDetailDiv='100%';
-      $positionListDiv='top';
-      Parameter::storeUserParameter("paramScreen", $valScreen);
-  }else{
-    if(RequestHandler::getValue('paramScreen')=='1'){
-      $valScreen='0';
-      $widthListDiv='100%';
-      $widthDetailDiv='100%';
-      $positionListDiv='top';
-      Parameter::storeUserParameter("paramScreen", $valScreen);
-    }else {
-      $valScreen='1';
-      $widthListDiv='58%';
-      $widthDetailDiv='42%';
-      $positionListDiv='left';
-      Parameter::storeUserParameter("paramScreen", $valScreen);
-    }
-  }
-  if(empty(Parameter::getUserParameter("paramRightDiv"))){
-    if(empty(RequestHandler::getValue('paramRightDiv'))){
-      $positonRightDiv='trailing';
-    }else{
-      $valScreen='3';
-      $positonRightDiv='bottom';
-      Parameter::storeUserParameter("paramRightDiv", $valScreen);
-    }
-  }else{
-    if(RequestHandler::getValue('paramRightDiv')=='3' and Parameter::getUserParameter("paramRightDiv") == '3'){
-      $valScreen='0';
-      $positonRightDiv='trailing';
-      Parameter::storeUserParameter("paramRightDiv", $valScreen);
-    }else{
-      $valScreen='3';
-      $positonRightDiv='bottom';
-      Parameter::storeUserParameter("paramRightDiv", $valScreen);
-    }
-  }
   
-  if((empty(Parameter::getUserParameter("paramLayoutObjectDetail")) or Parameter::getUserParameter("paramLayoutObjectDetail")=='4')and RequestHandler::getValue('paramLayoutObjectDetail')=='4') {
-    $valScreen='4';
-    Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
-  }else if(Parameter::getUserParameter("paramLayoutObjectDetail")=='4' and RequestHandler::getValue('paramLayoutObjectDetail')=='0'){
-    $valScreen='0';
-    Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
+  //florent
+  $paramScreen=RequestHandler::getValue('paramScreen');
+  $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
+  $paramRightDiv=RequestHandler::getValue('paramRightDiv');
+  $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
+  $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
+  if($positionListDiv=='left'){
+    $widthListDiv='58%';
+    $widthDetailDiv='42%';
+  }else{
+    $widthListDiv='100%';
+    $widthDetailDiv='100%';
   }
   ///////
-     
   $listHeight='40%';
   $objectClass="";
   if (isset($_REQUEST['objectClass'])) {
@@ -105,25 +69,7 @@
   	  $rightWidth="0%";
   	}
   }
-  //florent
-  if(Parameter::getUserParameter("paramRightDiv") == '3' and Parameter::getUserParameter('paramScreen')=='0' ){
-    $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
-    if (!$detailRightHeight) $detailRightHeight=0;
-    if($detailRightHeight or $detailRightHeight==="0"){
-      if ($detailRightHeight > 750){
-        $detailRightHeight=750;
-      }
-      if ($detailRightHeight < 80){
-        $detailRightHeight=100;
-      }
-      $rightHeight=$detailRightHeight.'px';
-    } else {
-      $rightHeight="0%";
-    }
-  }else{
-    $rightHeight="20%";
-  }
-  ///////
+  $rightHeight=heightLaoutActivityStream($objectClass);
   
 ?>
 <input type="hidden" id="objectClass" value="<?php echo $objectClass;?>" />
