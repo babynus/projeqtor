@@ -1717,7 +1717,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           //}
           echo '</span>';
         } else if ($dataType=='decimal' and substr($col, -4, 4)=='Work') {
-          echo '<span style="'.$fiFeldStyle.'">';
+          echo '<span style="'.$fieldStyle.'">';
           echo Work::displayWork($val).' '.Work::displayShortWorkUnit();
           echo '</span>';
         } else if (strtolower(substr($col, -8, 8))=='progress' or substr($col, -3, 3)=='Pct' or substr($col, -4, 4)=='Rate') {
@@ -2547,7 +2547,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             $isAmount=true;
           }
         }
-        if ($dataType=='decimal' and (substr($col, -4, 4)=='Work')) {
+        if ($dataType=='decimal' and ((substr($col, -4, 4)=='Work') or $col='minimumThreshold')) {
           $isWork=true;
           $fieldWidth=$smallWidth;
         }
@@ -2667,7 +2667,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           );
           if(($isAmount or $isCost) and !in_array($col,$arrayPossibleNegativeAmounts) and $classObj != 'Bill'){
               echo ' constraints="{min:0,max:'.$max.(($isAmount)?',places:2':'').'}" ';
-          } else if(!in_array($col,$arrayPossibleNegativeAmounts)){
+          } else if($col='minimumThreshold'){
               echo ' constraints="{min:0,max:'.$max.(($isAmount)?',places:2':'').'}" ';
           } else {
             echo ' constraints="{min:-'.$max.',max:'.$max.(($isAmount)?',places:2':'').'}" ';
