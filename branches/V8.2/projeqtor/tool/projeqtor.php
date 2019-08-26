@@ -4722,3 +4722,76 @@ function isLeavesSystemActiv() {
 	//return ((Parameter::getGlobalParameter ( 'leavesSystemActiv' )=="NO"?false:true));
 	return Module::isModuleActive('moduleHumanResource');
 }
+
+// florent ticket 4102
+function changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail){
+  if(empty($paramScreen)and Parameter::getUserParameter("paramScreen") =='0'){
+    $valScreen='0';
+    $positionListDiv='top';
+    Parameter::storeUserParameter("paramScreen", $valScreen);
+  }else{
+    if($paramScreen=='1'){
+      $valScreen='0';
+      $positionListDiv='top';
+      Parameter::storeUserParameter("paramScreen", $valScreen);
+    }else {
+      $valScreen='1';
+      $positionListDiv='left';
+      Parameter::storeUserParameter("paramScreen", $valScreen);
+    }
+  }
+  if((empty(Parameter::getUserParameter("paramLayoutObjectDetail")) or Parameter::getUserParameter("paramLayoutObjectDetail")=='4')and $paramLayoutObjectDetail=='4') {
+    $valScreen='4';
+    Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
+  }else if(Parameter::getUserParameter("paramLayoutObjectDetail")=='4' and RequestHandler::getValue('paramLayoutObjectDetail')=='0'){
+    $valScreen='0';
+    Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
+  }
+  return $positionListDiv;
+}
+
+function changeLayoutActivityStream($paramRightDiv){
+  if(empty(Parameter::getUserParameter("paramRightDiv"))){
+    if(empty($paramRightDiv)){
+      $positonRightDiv='trailing';
+    }else{
+      $valScreen='3';
+      $positonRightDiv='bottom';
+      Parameter::storeUserParameter("paramRightDiv", $valScreen);
+    }
+  }else{
+    if($paramRightDiv=='3' and Parameter::getUserParameter("paramRightDiv") == '3'){
+      $valScreen='0';
+      $positonRightDiv='trailing';
+      Parameter::storeUserParameter("paramRightDiv", $valScreen);
+    }else{
+      $valScreen='3';
+      $positonRightDiv='bottom';
+      Parameter::storeUserParameter("paramRightDiv", $valScreen);
+    }
+  }
+  return $positonRightDiv;
+}
+
+function heightLaoutActivityStream($objectClass){
+  if(empty($objectClass))$objectClass='';
+  if(Parameter::getUserParameter("paramRightDiv") == '3' and Parameter::getUserParameter('paramScreen')=='0' ){
+    $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
+    if (!$detailRightHeight) $detailRightHeight=0;
+    if($detailRightHeight or $detailRightHeight==="0"){
+      if ($detailRightHeight > 750){
+        $detailRightHeight=750;
+      }
+      if ($detailRightHeight < 80){
+        $detailRightHeight=100;
+      }
+      $rightHeight=$detailRightHeight.'px';
+    } else {
+      $rightHeight="0%";
+    }
+  }else{
+    $rightHeight="20%";
+  }
+  return $rightHeight;
+}
+        	

@@ -6366,7 +6366,6 @@ function switchModeLayout(paramToSend){
   var objectIdScreen=dojo.byId('objectId').value;
   var currentItem=historyTable[historyPosition];
   var currentScreen=currentItem[2];
-  console.log(currentScreen);
   if (paramToSend=='1' || paramToSend=='2'){
     if(paramToSend=='2'){
       dojo.setStyle('verticalLayout',{"opacity": '0.5',"cursor":'not-allowed'});
