@@ -672,39 +672,53 @@ class DataCloning extends SqlElement{
 	public static function deleteDataCloning($id){
 	  $dataCloning = new DataCloning($id);
 	  $dataCloningDirectory = Parameter::getGlobalParameter('dataCloningDirectory');
-	  if($dataCloningDirectory){
-      $pathSeparator=Parameter::getGlobalParameter('paramPathSeparator');
-      if (substr($dataCloningDirectory,-1)!=$pathSeparator) $dataCloningDirectory.=$pathSeparator;
-      $dir = $dataCloningDirectory.$dataCloning->nameDir;
-	  }else{
-	    $dir= dirname(__DIR__).'/simulation/'.$dataCloning->nameDir;
+	  $codeError = $dataCloning->codeError;
+	  if($codeError != 'deleteDbDataCloning'){
+  	  if($dataCloningDirectory){
+        $pathSeparator=Parameter::getGlobalParameter('paramPathSeparator');
+        if (substr($dataCloningDirectory,-1)!=$pathSeparator) $dataCloningDirectory.=$pathSeparator;
+        $dir = $dataCloningDirectory.$dataCloning->nameDir;
+  	  }else{
+  	    $dir= dirname(__DIR__).'/simulation/'.$dataCloning->nameDir;
+  	  }
+  	  $startMicroTime=microtime(true);
+  	  debugTraceLog(i18n('DataCloningDeleteStart').$dataCloning->name);
+  	  try{
+  	   $dataCloning->remove_dir($dir,$dataCloning);
+  	  }catch(Exception $e) {
+  	    $dataCloning->codeError = "deleteFolderDataCloning";
+  	    debugTraceLog(i18n('DataCloningDeleteCanDeleteFolder').$dataCloning->nameDir);
+  	    $dataCloning->isRequestedDelete = 0;
+  	    $dataCloning->isActive = 0;
+  	  }
+  	  $dataCloning->save();
 	  }
-	  $startMicroTime=microtime(true);
-	  debugTraceLog(i18n('DataCloningDeleteStart').$dataCloning->name);
-	  $dataCloning->remove_dir($dir,$dataCloning);
-	  $bdName = 'simu_'.strtolower($dataCloning->nameDir);
-	  if (Parameter::getGlobalParameter('paramDbType') == "pgsql") {
-      $PDO=$dataCloning->connectTestSimu(Parameter::getGlobalParameter('paramDbName'));
-      $sqlRemove = "SELECT pg_terminate_backend(pg_stat_activity.pid)
-              	    FROM pg_stat_activity
-              	    WHERE pg_stat_activity.datname = '$bdName';";
-      $sqlDrop = "DROP DATABASE $bdName ;";
-      $PDO->exec($sqlRemove);
-	  }else{
-	    $PDO=$dataCloning->connectTestSimu($bdName);
-  	  $sqlDrop = "DROP DATABASE $bdName;";
+	  if($codeError != 'deleteFolderDataCloning'){
+  	  $bdName = 'simu_'.strtolower($dataCloning->nameDir);
+  	  if (Parameter::getGlobalParameter('paramDbType') == "pgsql") {
+        $PDO=$dataCloning->connectTestSimu(Parameter::getGlobalParameter('paramDbName'));
+        $sqlRemove = "SELECT pg_terminate_backend(pg_stat_activity.pid)
+                	    FROM pg_stat_activity
+                	    WHERE pg_stat_activity.datname = '$bdName';";
+        $sqlDrop = "DROP DATABASE $bdName ;";
+        $PDO->exec($sqlRemove);
+  	  }else{
+  	    $PDO=$dataCloning->connectTestSimu($bdName);
+    	  $sqlDrop = "DROP DATABASE $bdName;";
+  	  }
+     try{
+       $PDO->exec($sqlDrop);
+       $dataCloning->idle = 1;
+       $dataCloning->deletedDate = date('Y-m-d H:i');
+       debugTraceLog( $dataCloning->name . i18n('dataCloningDeleteFinish').' - '. (round((microtime(true) - $startMicroTime)*1000000)/1000000) . i18n('second'));
+     }catch(Exception $e) {
+       debugTraceLog(i18n('deleteDbDataCloning'));
+       $dataCloning->codeError = "deleteDbDataCloning";
+       $dataCloning->isRequestedDelete = 0;
+       $dataCloning->isActive = 0;
+     }
+     $dataCloning->save();
 	  }
-	  
-   try{
-     $myBdIsDrop = $PDO->exec($sqlDrop);
-     $dataCloning->idle = 1;
-     $dataCloning->deletedDate = date('Y-m-d H:i');
-     debugTraceLog( $dataCloning->name . i18n('dataCloningDeleteFinish').' - '. (round((microtime(true) - $startMicroTime)*1000000)/1000000) . i18n('second'));
-   }catch(Exception $e) {
-     debugTraceLog(i18n('dataCloningCanNotDeleteDb'));
-     $dataCloning->codeError = "DataCloningCantDropDb";
-   }
-   $dataCloning->save();
 	}
 
 public static	function remove_dir($directory,$dataCloning,$empty = false) {
