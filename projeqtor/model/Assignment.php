@@ -484,7 +484,7 @@ class Assignment extends SqlElement {
       $minimumThreshold = $activity->ActivityPlanningElement->minimumThreshold;
       if($minimumThreshold){
       	$res = new ResourceAll($this->idResource);
-      	if($res->capacity*($this->rate/100) > $minimumThreshold){
+      	if($res->capacity*($this->rate/100) < $minimumThreshold){
       		$result=i18n('minimumThresholdError');
       	}
       }
