@@ -6145,6 +6145,22 @@ function cancelDataCloningStatus(idDataCloning){
   showConfirm(i18n('cancelDataCloning') ,action);
 }
 
+function refreshDataCloningError(idDataCloning, codeError){
+	//action=function(){
+		showWait();
+		var url='../tool/saveDataCloning.php?codeError='+codeError+'&idDataCloning='+idDataCloning;
+		  dojo.xhrGet({
+		    url : url,
+		    handleAs : "text",
+		    load : function(){
+		    	hideWait();
+		    	refreshDataCloningList();
+		    }
+		  });
+	//}
+  //showConfirm(i18n('refreshDataCloning') ,action);
+}
+
 function showSpecificCreationRequest(){
 	var value = dijit.byId('dataCloningCreationRequest').get('value');
 	if(value == 'specificHours'){

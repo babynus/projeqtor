@@ -223,7 +223,7 @@ class DataCloning extends SqlElement{
 			  }else if($data->codeError){
 			    $background = '#ff7777';
 			    $result .='<td width="80%" style="background-color:'.$background.';border-right:1px solid grey;height:40px;">'.i18n($data->codeError).'</td>';
-			    $result .='<td width="20%"><a onClick="cancelDataCloningStatus('.$data->id.');" title="'.i18n('cancelDataCloningButton').'" > '.formatMediumButton('Cancel', true).'</a></td>';
+			    $result .='<td width="20%"><a onClick="refreshDataCloningError('.$data->id.', \''.$data->codeError.'\');" title="'.i18n('refreshDataCloningErrorButton').'" > '.formatMediumButton('Refresh', true).'</a></td>';
 			  }else{
 			    if($data->isActive){
 			      $activeText = i18n('activeCloningStatus');
