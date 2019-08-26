@@ -75,7 +75,7 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $priority;
   public $_label_planning;
   public $idActivityPlanningMode;
-  public $_tab_3_1_smallLabel_3 = array('', '', '', 'minimumThreshold');
+  public $_tab_3_1_3 = array('', '', '', 'minimumThreshold');
   public $minimumThreshold;
   public $_label_indivisibility;
   public $indivisibility;
@@ -125,7 +125,12 @@ class ActivityPlanningElementMain extends PlanningElement {
     "_spe_isOnCriticalPath"=>"",
     "_label_indivisibility"=>"",
     "indivisibility"=>""
-  );   
+  );
+
+  private static $_fieldsTooltip = array(
+  		"minimumThreshold"=> "tooltipMinimumThreshold",
+  		"indivisibility"=> "tooltipIndivisibility",
+  );
   
   private static $_databaseTableName = 'planningelement';
   //private static $_databaseCriteria = array('refType'=>'Activity'); // Bad idea : sets a mess when moving projets and possibly elsewhere.
@@ -146,6 +151,10 @@ class ActivityPlanningElementMain extends PlanningElement {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
+  }
+  
+  protected function getStaticFieldsTooltip() {
+  	return self::$_fieldsTooltip;
   }
   
   public function setAttributes() {

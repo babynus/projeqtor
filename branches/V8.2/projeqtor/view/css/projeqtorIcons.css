@@ -795,6 +795,10 @@
 .iconRecipient22 { background-image: url(images/iconRecipient22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconRecipient16 { background-image: url(images/iconRecipient16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
+.iconRefresh32 { background-image: url(images/iconNotificationRefresh.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px; }
+.iconRefresh24 { background-image: url(images/iconNotificationRefresh.png);  background-repeat: no-repeat; width: 24px; height: 24px; background-size: 24px 24px;}
+.iconRefresh16 { background-image: url(images/iconNotificationRefresh.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
 .iconReports32 { background-image: url(images/iconReports32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconReports22 { background-image: url(images/iconReports22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconReports16 { background-image: url(images/iconReports16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
