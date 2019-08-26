@@ -38,6 +38,7 @@ $name = RequestHandler::getValue('dataCloningName');
 $idDataCloning = RequestHandler::getId('idDataCloning');
 $idDataCloningParent = RequestHandler::getId('idDataCloningParent');
 $status = RequestHandler::getValue('status');
+$codeError = RequestHandler::getValue('codeError');
 $result='';
 
 //open transaction bdd
@@ -53,6 +54,15 @@ if($idDataCloning){
     }else{
       $result=$dataCloning->delete();
     }
+  }else if($codeError){
+    if(substr($codeError, 0, 1) == 'd'){
+      $dataCloning->requestedDeletedDate = $requestedDeletedDate;
+      $dataCloning->isRequestedDelete = 1;
+    }else{
+      $dataCloning->requestedDate = $requestedDate;
+      $dataCloning->isActive = 0;
+    }
+    $result=$dataCloning->save();
   }else{
     $dataCloning->requestedDeletedDate = null;
     $dataCloning->isRequestedDelete = 0;
