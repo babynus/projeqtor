@@ -381,7 +381,7 @@ class ActivityMain extends SqlElement {
     if($this->ActivityPlanningElement->minimumThreshold){
       $ass = new Assignment();
       $assList = $ass->getSqlElementsFromCriteria(array('refType'=>'Activity', 'refId'=>$this->id));
-      $maxThreshold = 1;
+      $maxThreshold = $this->ActivityPlanningElement->minimumThreshold;
       if($assList){
         foreach ($assList as $assign){
           $res = new ResourceAll($assign->idResource);
