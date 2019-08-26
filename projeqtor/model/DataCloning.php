@@ -214,11 +214,15 @@ class DataCloning extends SqlElement{
 			  $background = '#a3d179';
 			  $result .='<table width="100%"><tr>';
 			  if($data->idle){
-			  	$background = '#ff7777';
+			  	$background = '#d9d9d9';
 			  	$result .='<td width="100%" style="background-color:'.$background.';border-right:1px solid grey;height:40px;">'.i18n('deleteCloningStatus', array(htmlFormatDateTime($data->deletedDate))).'</td>';
 			  }else if($data->isRequestedDelete){
 			    $background = '#ffb366';
 			    $result .='<td width="80%" style="background-color:'.$background.';border-right:1px solid grey;height:40px;">'.i18n('cancelCloningStatus').'</td>';
+			    $result .='<td width="20%"><a onClick="cancelDataCloningStatus('.$data->id.');" title="'.i18n('cancelDataCloningButton').'" > '.formatMediumButton('Cancel', true).'</a></td>';
+			  }else if($data->codeError){
+			    $background = '#ff7777';
+			    $result .='<td width="80%" style="background-color:'.$background.';border-right:1px solid grey;height:40px;">'.i18n($data->codeError).'</td>';
 			    $result .='<td width="20%"><a onClick="cancelDataCloningStatus('.$data->id.');" title="'.i18n('cancelDataCloningButton').'" > '.formatMediumButton('Cancel', true).'</a></td>';
 			  }else{
 			    if($data->isActive){
