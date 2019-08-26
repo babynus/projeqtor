@@ -66,7 +66,7 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $leftCost;
   public $plannedCost;
   public $_separator_menuReview_marginTop;
-  public $_tab_5_2_smallLabel_2 = array('', '', '', '', '', 'progress','priority');
+  public $_tab_5_2_smallLabel_3 = array('', '', '', '', '', 'progress','priority');
   public $progress;
   public $_label_expected;
   public $expectedProgress;
@@ -75,7 +75,9 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $priority;
   public $_label_planning;
   public $idActivityPlanningMode;
+  public $_tab_3_1_smallLabel_3 = array('', '', '', 'minimumThreshold');
   public $minimumThreshold;
+  public $_label_indivisibility;
   public $indivisibility;
   public $_tab_5_1_smallLabel = array('workElementCount', 'estimated', 'real', 'left', '', 'ticket');
   public $workElementCount;
@@ -120,7 +122,9 @@ class ActivityPlanningElementMain extends PlanningElement {
     "latestEndDate"=>"hidden",
     "isOnCriticalPath"=>"hidden",
     "isManualProgress"=>"hidden",
-    "_spe_isOnCriticalPath"=>""
+    "_spe_isOnCriticalPath"=>"",
+    "_label_indivisibility"=>"",
+    "indivisibility"=>""
   );   
   
   private static $_databaseTableName = 'planningelement';
