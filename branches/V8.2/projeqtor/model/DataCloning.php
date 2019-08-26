@@ -550,7 +550,7 @@ class DataCloning extends SqlElement{
 	  $newPwd = 'simu_'.$newPwdBd;
 	  $newPwd = strtolower($newPwd);
 	  if($dataCloning->idOrigin){
-	    $PDO=$dataCloning->connectTestSimu('simu_'.$OriginData->nameDir);
+	    $PDO=$dataCloning->connexionDbSimu('simu_'.$OriginData->nameDir);
 	  }else{
 	    $PDO=Sql::getConnection();
 	  }
@@ -576,7 +576,7 @@ class DataCloning extends SqlElement{
                         FROM information_schema.tables
                         WHERE table_schema = 'public'
                         AND table_name in ".$exceptionTable.";";
-	    $PDO3=$dataCloning->connectTestSimu($newPwd);
+	    $PDO3=$dataCloning->connexionDbSimu($newPwd);
 	    $sth = $PDO3->prepare($sqlDropTable);
 	    $sth->execute();
 	    $listTable = $sth->fetchAll(PDO::FETCH_COLUMN,0);
@@ -590,7 +590,7 @@ class DataCloning extends SqlElement{
 	    $sql = 'SHOW TABLE STATUS';
 	    $result_tables = $PDO->query($sql);
 	    $sql = "";
-	    $connexion = $dataCloning->connectTestSimu($newPwd);
+	    $connexion = $dataCloning->connexionDbSimu($newPwd);
 	    $exceptionTable = array("alert","attachment","audit","auditsummary","cronautosendreport","cronexecution","datacloning","history","kpihistory"
                     	        ,"kpivalue","language","mail","mailtosend","message","messagelegal","messagelegalfollowup","notification","notificationdefinition"
                     	        ,"projecthistory","statusmail","subscription","translationaccessright","translationcode","translationlanguage","translationvalue");
@@ -673,6 +673,9 @@ class DataCloning extends SqlElement{
 	  $dataCloning = new DataCloning($id);
 	  $dataCloningDirectory = Parameter::getGlobalParameter('dataCloningDirectory');
 	  $codeError = $dataCloning->codeError;
+	  $startMicroTime=microtime(true);
+	  if(!$codeError)$firstDelete = true;
+	  
 	  if($codeError != 'deleteDbDataCloning'){
   	  if($dataCloningDirectory){
         $pathSeparator=Parameter::getGlobalParameter('paramPathSeparator');
@@ -681,42 +684,55 @@ class DataCloning extends SqlElement{
   	  }else{
   	    $dir= dirname(__DIR__).'/simulation/'.$dataCloning->nameDir;
   	  }
-  	  $startMicroTime=microtime(true);
   	  debugTraceLog(i18n('DataCloningDeleteStart').$dataCloning->name);
   	  try{
   	   $dataCloning->remove_dir($dir,$dataCloning);
+  	   if($dataCloning->codeError){
+  	     $dataCloning->idle = 1;
+  	     $dataCloning->deletedDate = date('Y-m-d H:i');
+  	     $dataCloning->codeError=null;
+  	     $dataCloning->isRequestedDelete = 0;
+  	     $dataCloning->isActive = 0;
+  	     $dataCloning->save();
+  	   }
   	  }catch(Exception $e) {
   	    $dataCloning->codeError = "deleteFolderDataCloning";
   	    debugTraceLog(i18n('DataCloningDeleteCanDeleteFolder').$dataCloning->nameDir);
   	    $dataCloning->isRequestedDelete = 0;
   	    $dataCloning->isActive = 0;
+  	    $dataCloning->save();
   	  }
-  	  $dataCloning->save();
 	  }
-	  if($codeError != 'deleteFolderDataCloning'){
+	  
+	  if($codeError != 'deleteFolderDataCloning' or $firstDelete){
   	  $bdName = 'simu_'.strtolower($dataCloning->nameDir);
   	  if (Parameter::getGlobalParameter('paramDbType') == "pgsql") {
-        $PDO=$dataCloning->connectTestSimu(Parameter::getGlobalParameter('paramDbName'));
+        $PDO=$dataCloning->connexionDbSimu(Parameter::getGlobalParameter('paramDbName'));
         $sqlRemove = "SELECT pg_terminate_backend(pg_stat_activity.pid)
                 	    FROM pg_stat_activity
                 	    WHERE pg_stat_activity.datname = '$bdName';";
         $sqlDrop = "DROP DATABASE $bdName ;";
         $PDO->exec($sqlRemove);
   	  }else{
-  	    $PDO=$dataCloning->connectTestSimu($bdName);
+  	    $PDO=$dataCloning->connexionDbSimu($bdName);
     	  $sqlDrop = "DROP DATABASE $bdName;";
   	  }
      try{
        $PDO->exec($sqlDrop);
+       debugTraceLog( $dataCloning->name . i18n('dataCloningDeleteFinish').' - '. (round((microtime(true) - $startMicroTime)*1000000)/1000000) . i18n('second'));
        $dataCloning->idle = 1;
        $dataCloning->deletedDate = date('Y-m-d H:i');
-       debugTraceLog( $dataCloning->name . i18n('dataCloningDeleteFinish').' - '. (round((microtime(true) - $startMicroTime)*1000000)/1000000) . i18n('second'));
+       if($dataCloning->codeError)$dataCloning->codeError=null;
      }catch(Exception $e) {
        debugTraceLog(i18n('deleteDbDataCloning'));
-       $dataCloning->codeError = "deleteDbDataCloning";
-       $dataCloning->isRequestedDelete = 0;
+       if($dataCloning->codeError == deleteFolderDataCloning){
+         $dataCloning->codeError .= "deleteDbDataCloning";
+       }else{
+        $dataCloning->codeError = "deleteDbDataCloning";
+       }
        $dataCloning->isActive = 0;
      }
+     $dataCloning->isRequestedDelete = 0;
      $dataCloning->save();
 	  }
 	}
@@ -756,7 +772,7 @@ public static	function remove_dir($directory,$dataCloning,$empty = false) {
   }
 }
 	
-	public static function connectTestSimu($dbName){
+	public static function connexionDbSimu($dbName){
 		$dbType=Parameter::getGlobalParameter('paramDbType');
 		$dbHost=Parameter::getGlobalParameter('paramDbHost');
 		$dbPort=Parameter::getGlobalParameter('paramDbPort');
