@@ -70,19 +70,20 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (2,222,2);
 
 CREATE TABLE `${prefix}datacloning` (
-    `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
-    `name` varchar(100) DEFAULT NULL,
-    `nameDir` varchar(100) DEFAULT NULL,
-    `idResource` int(12) unsigned DEFAULT NULL,
-    `idOrigin` int(12) unsigned DEFAULT NULL,
-	`versionCode` varchar(100) DEFAULT NULL,
-    `requestedDate` datetime DEFAULT NULL,
-    `plannedDate` varchar(100) DEFAULT NULL,
-	`deletedDate` datetime DEFAULT NULL,
-    `requestedDeletedDate` datetime DEFAULT NULL,
-    `isRequestedDelete` int(1) unsigned DEFAULT 0,
-    `isActive` int(1) unsigned DEFAULT 0,
-	`idle` int(1) unsigned DEFAULT 0,
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `nameDir` varchar(100) DEFAULT NULL,
+  `idResource` int(12) unsigned DEFAULT NULL,
+  `idOrigin` int(12) unsigned DEFAULT NULL,
+  `versionCode` varchar(100) DEFAULT NULL,
+  `requestedDate` datetime DEFAULT NULL,
+  `plannedDate` varchar(100) DEFAULT NULL,
+  `deletedDate` datetime DEFAULT NULL,
+  `requestedDeletedDate` datetime DEFAULT NULL,
+  `isRequestedDelete` int(1) unsigned DEFAULT 0,
+  `codeError` varchar(100) DEFAULT NULL,
+  `isActive` int(1) unsigned DEFAULT 0,
+  `idle` int(1) unsigned DEFAULT 0,
   PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
