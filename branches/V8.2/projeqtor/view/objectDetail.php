@@ -3033,7 +3033,7 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
       $titleHeight=($fontSize)?$fontSize*1.6:''; 
       echo ' <script type="dojo/method" event="titlePaneHandler" > setAttributeOnTitlepane(\''.$titlePane.'\',\''.$labelStyle.'\',\''.$titleHeight.'\');</script>';
       if(Parameter::getUserParameter('paramLayoutObjectDetail')==0 and $included==false){
-        echo '<table class="detail"  style="width:95%;padding-right:5%;" >';
+        echo '<table class="detail"  style="width:650px;height:600px;" >';
       }else{
         echo '<table class="detail"  style="width:100%;" >';
       }

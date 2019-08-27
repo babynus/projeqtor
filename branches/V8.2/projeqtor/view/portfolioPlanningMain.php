@@ -37,18 +37,30 @@
   	$topDetailDivHeight=$screenHeight-300;
   }
   $listHeight=($topDetailDivHeight)?$topDetailDivHeight.'px':$listHeight;
+  //florent
+  $paramScreen=RequestHandler::getValue('paramScreen');
+  $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
+  $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
+  if($positionListDiv=='left'){
+    $widthListDiv='65%';
+    $widthDetailDiv='25%';
+  }else{
+    $widthListDiv='100%';
+    $widthDetailDiv='100%';
+  }
+  ///////
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="PortfolioPlanning" />
 <input type="hidden" name="portfolioPlanning" id="portfolioPlanning" value="true" />
 <div id="mainDivContainer" class="container" dojoType="dijit.layout.BorderContainer">
-  <div id="listDiv" dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:<?php echo $listHeight;?>;">
+  <div id="listDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positionListDiv?>" splitter="true" style="width:<?php echo $widthListDiv?>;height:<?php echo $listHeight;?>;">
     <script type="dojo/connect" event="resize" args="evt">
          if (switchedMode) return;
              saveDataToSession("contentPaneTopPortfolioPlanningDivHeight", dojo.byId("listDiv").offsetHeight, true);
     </script>
    <?php include 'portfolioPlanningList.php'?>
   </div>
-  <div id="detailDiv" dojoType="dijit.layout.ContentPane" region="center">
+  <div id="detailDiv" dojoType="dijit.layout.ContentPane" region="center" style="width:<?php echo $widthDetailDiv?>">
     <div id="detailBarShow" class="dijitAccordionTitle" onMouseover="hideList('mouse');" onClick="hideList('click');">
       <div id="detailBarIcon" align="center"></div>
     </div>
