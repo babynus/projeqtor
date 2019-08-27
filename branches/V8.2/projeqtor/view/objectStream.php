@@ -64,8 +64,8 @@
       echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamClass' style='position:absolute;top:2px;left:3px'></div>";
     }else{
       echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamBotClass' style='position:absolute;top:2px;left:3px'></div>";
+      echo "<div onclick='hideStreamMode(false);' class='iconHideStream22' style='position:absolute;right:0px;top:2px;'></div>";
     }
-    echo "<div onclick='hideStreamMode(false);' class='iconHideStream22' style='position:absolute;right:0px;top:2px;'></div>";
     echo "</br></br>";
     echo $noData; 
     exit;
@@ -80,12 +80,13 @@
 	<div id="activityStreamTop" dojoType="dijit.layout.ContentPane" region="top" style="text-align:center" class="dijitAccordionTitle">
 	<?php if(Parameter::getUserParameter('paramRightDiv')=='3'){
       echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamClass' style='position:absolute;top:2px;left:3px'></div>";
-    }else{
+          }else{
       echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamBotClass' style='position:absolute;top:2px;left:3px'></div>";
+      echo "<div onclick='hideStreamMode(false);' class='iconHideStream22' style='position:absolute;right:0px;top:2px;'></div>";
     }
     ?>
 	   <div><span class="title" ><?php echo i18n("titleStream");?></span></div>
-	   <div onclick='hideStreamMode(false);' class='iconHideStream22' style='position:absolute;right:0px;top:2px;'></div>
+	   
 	</div>
 	<div id="activityStreamCenter" dojoType="dijit.layout.ContentPane" region="center" style="overflow-x:hidden;">
 	<script type="dojo/connect" event="onLoad" args="evt">

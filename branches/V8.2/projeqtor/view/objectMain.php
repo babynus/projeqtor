@@ -91,12 +91,7 @@
             <script type="dojo/connect" event="resize" args="evt">
               saveDataToSession("contentPaneDetailDivHeight<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
             </script>
-	  <?php if (property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream') and Parameter::getUserParameter("paramRightDiv") !='3' ) {?>
-    	<div id="hideStreamButton" region="center" style="cursor:pointer;position:absolute; right:0px; bottom:2px;z-index:999999">
-    	   <a onClick="hideStreamMode(false);" id="buttonSwitchedStream" title="" ><span style="top:px;display:inline-block;margin-right:12px;"><div class='iconActivityStream32 '  >&nbsp;</div></span></a>
-    	</div>
-      <?php 
-            }
+	  <?php 
             if (property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream')) {
               $showNotes=true;
               $item=new $objectClass();
