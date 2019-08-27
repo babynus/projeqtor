@@ -1697,20 +1697,14 @@ scriptLog("storeListPlan(listPlan,$plan->id)");
   	$list=$pe->getSqlElementsFromCriteria(null,false,$inClause,$order,true);
   	foreach ($list as $pe) {
   		// initial
-  		if (($initial=='ALWAYS' or ($initial=='IFEMPTY' and ! $pe->initialStartDate)) and trim($pe->plannedStartDate)) {
+  		if (($initial=='ALWAYS' or ($initial=='IFEMPTY' and ! $pe->initialStartDate and ! $pe->initialEndDate)) and trim($pe->plannedStartDate) and trim($pe->plannedEndDate)) {
   			$pe->initialStartDate=$pe->plannedStartDate;
-  			$cpt++;
-  		}
-  		if (($initial=='ALWAYS' or ($initial=='IFEMPTY' and ! $pe->initialEndDate)) and trim($pe->plannedEndDate)) {
   			$pe->initialEndDate=$pe->plannedEndDate;
   			$cpt++;
   		}
   		// validated
-  		if (($validated=='ALWAYS' or ($validated=='IFEMPTY' and ! $pe->validatedStartDate)) and trim($pe->plannedStartDate)) {
+  		if (($validated=='ALWAYS' or ($validated=='IFEMPTY' and ! $pe->validatedStartDate and ! $pe->validatedEndDate)) and trim($pe->plannedStartDate) and trim($pe->plannedEndDate)) {
   			$pe->validatedStartDate=$pe->plannedStartDate;
-  			$cpt++;
-  		}
-  		if (($validated=='ALWAYS' or ($validated=='IFEMPTY' and ! $pe->validatedEndDate)) and trim($pe->plannedEndDate)) {
   			$pe->validatedEndDate=$pe->plannedEndDate;
   			$cpt++;
   		}
