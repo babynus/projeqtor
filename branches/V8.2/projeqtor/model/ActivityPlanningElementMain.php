@@ -153,10 +153,6 @@ class ActivityPlanningElementMain extends PlanningElement {
     parent::__construct($id,$withoutDependentObjects);
   }
   
-  protected function getStaticFieldsTooltip() {
-  	return self::$_fieldsTooltip;
-  }
-  
   public function setAttributes() {
     
     //if (Parameter::getGlobalParameter('PlanningActivity')=='YES') {
@@ -235,6 +231,10 @@ class ActivityPlanningElementMain extends PlanningElement {
   protected function getStaticColCaptionTransposition($fld=null) {
     return self::$_colCaptionTransposition;
   }
+  
+  protected function getStaticFieldsTooltip() {
+  	return self::$_fieldsTooltip;
+  }
   /**=========================================================================
    * Overrides SqlElement::save() function to add specific treatments
    * @see persistence/SqlElement#save()
@@ -245,6 +245,9 @@ class ActivityPlanningElementMain extends PlanningElement {
     if($this->idActivityPlanningMode){
       $this->idPlanningMode = $this->idActivityPlanningMode;
     }
+//     if($this->minimumThreshold){
+//       $this->minimumThreshold = Work::convertWork($this->minimumThreshold);
+//     }
     return parent::save();
   }
   
