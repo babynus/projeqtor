@@ -369,7 +369,7 @@ class CallForTenderMain extends SqlElement {
       } else {
         $tenderAmount=($tender->totalUntaxedAmount)?$tender->totalUntaxedAmount:$tender->untaxedAmount;
       } 
-      echo '<br/><span style="white-space:nowrap;font-size:90%;color:#555555"><i>'.htmlDisplayCurrency($tenderAmount,true).'</i></span>';
+      echo '<br/><span style="white-space:nowrap;font-size:90%;color:#555555"><i>'.htmlDisplayCurrency($tenderAmount,false).'</i></span>';
       echo '</td>';
       echo '</tr>';
     }
