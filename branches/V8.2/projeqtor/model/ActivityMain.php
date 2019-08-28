@@ -381,7 +381,8 @@ class ActivityMain extends SqlElement {
     if($this->ActivityPlanningElement->minimumThreshold){
       $ass = new Assignment();
       $assList = $ass->getSqlElementsFromCriteria(array('refType'=>'Activity', 'refId'=>$this->id));
-      $maxThreshold = $this->ActivityPlanningElement->minimumThreshold;
+      $res = new ResourceAll($assList[0]->idResource);
+      $maxThreshold = $res->capacity*($assList[0]->rate/100);
       if($assList){
         foreach ($assList as $assign){
           $res = new ResourceAll($assign->idResource);
@@ -389,8 +390,8 @@ class ActivityMain extends SqlElement {
         	  $maxThreshold = $res->capacity*($assign->rate/100);
         	}
         }
-        if($this->ActivityPlanningElement->minimumThreshold > $maxThreshold){
-          $result=i18n ('minimumThresholdError');
+        if(Work::convertWork($this->ActivityPlanningElement->minimumThreshold) > $maxThreshold){
+          $result=i18n('minimumThresholdError');
         }
       }
     }
