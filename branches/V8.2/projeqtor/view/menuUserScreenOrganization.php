@@ -98,7 +98,7 @@ if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
     <tr>
      <?php if (! isIE()) {?>
     <td width="<?php echo (isIE())?37:35;?>px"> 
-      <div  class="pseudoButtonFullScreen <?php echo $simuClass;?>" style="height:28px; position:relative; top:-5px; z-index:30;margin-right:0px; width:28px;" onclick="toggleFullScreen()" >
+      <div  class="pseudoButtonFullScreen <?php echo $simuClass;?>" style="height:28px; position:relative;top:0px; z-index:30; width:30px; right:0px;" onclick="toggleFullScreen()" >
         <table>
           <tr>
             <td style="width:28px" >
@@ -109,16 +109,25 @@ if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
       </div>
     </td>
      <?php }?> 
-    <td>
-    </td>
     <td width="<?php echo (isIE())?37:35;?>px" class="<?php echo $simuClass;?>">   
-      <div id="hideMenuBarShowButtonTop" style="cursor:pointer;position:relative; top:-11px;right:0px; z-index:949" >
+      <div id="hideMenuBarShowButtonTop" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" title="<?php echo i18n("buttonSwitchedMode");?> >
   		  <a onClick="hideMenuBarShowModeTop();" id="buttonSwitchedMenuBarTopShow" title="<?php echo i18n("buttonShowMenu");?>" >
   		    <span style='display:inline-block;width:24px;height:22px;'>
   		     <div style="position:absolute;top:1px;height:26px;width:24px" dojoType="dijit.form.Button" iconClass="dijitButtonIcon iconHideStream22" class="detailButton">&nbsp;</div>
   		    </span>
   		  </a>
-		  </div>
+	  </div>
+    </td>
+    <td width="<?php echo (isIE())?37:35;?>px">
+  	  <div id="hideMenuBarShowButton2" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" title="<?php echo i18n("buttonShowMenu");?>" >
+  	  <?php if (! isset($showModuleScreen)) {?>
+  		  <a onClick="hideMenuBarShowMode();" id="buttonSwitchedMenuBarTopShow"  >
+  		    <span style='display:inline-block;width:24px;height:22px;'>
+  		     <div style="position:absolute;top:1px;height:26px;width:24px" dojoType="dijit.form.Button" iconClass="dijitButtonIcon iconHideStream22" class='detailButton'>&nbsp;</div>
+  		    </span>
+  		  </a>
+      <?php }?>  
+	  </div>
     </td> 
     </tr>
   </table>
