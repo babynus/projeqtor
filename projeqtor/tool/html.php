@@ -1030,7 +1030,7 @@ function htmlDrawCrossTable($lineObj, $lineProp, $columnObj, $colProp, $pivotObj
   		}
   		$breakVal=$test->$break;
   	}
-    echo '<tr><td class="crossTableLine"><label class="label largeLabel">' . $lineName . '</label></td>';
+    echo '<tr><td class="crossTableLine" style="padding-right:10px;"><label class="label largeLabel">' . $lineName . '</label></td>';
     foreach ($columnList as $colId => $colName) {
       $crit=array();
       $crit[$lineProp]=$lineId;
