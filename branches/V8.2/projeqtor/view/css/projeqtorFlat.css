@@ -1092,6 +1092,10 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatBlue .iconActivityStream22 { background-image: url(customIcons/blue/iconActivityStream.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .iconActivityStream16 { background-image: url(customIcons/blue/iconActivityStream.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatBlue .iconActivityStreamClose32 { background-image: url(customIcons/blue/iconActivityStreamClose.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatBlue .iconActivityStreamClose22 { background-image: url(customIcons/blue/iconActivityStreamClose.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatBlue .iconActivityStreamClose16 { background-image: url(customIcons/blue/iconActivityStreamClose.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
 .ProjeQtOrFlatBlue .iconOpportunity32 { background-image: url(customIcons/blue/iconOpportunity.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatBlue .iconOpportunity22 { background-image: url(customIcons/blue/iconOpportunity.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .iconOpportunity16 { background-image: url(customIcons/blue/iconOpportunity.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
@@ -2508,6 +2512,10 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatRed .iconActivityStream32 { background-image: url(customIcons/red/iconActivityStream.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatRed .iconActivityStream22 { background-image: url(customIcons/red/iconActivityStream.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatRed .iconActivityStream16 { background-image: url(customIcons/red/iconActivityStream.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatRed .iconActivityStreamClose32 { background-image: url(customIcons/red/iconActivityStreamClose.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatRed .iconActivityStreamClose22 { background-image: url(customIcons/red/iconActivityStreamClose.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatRed .iconActivityStreamClose16 { background-image: url(customIcons/red/iconActivityStreamClose.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
 .ProjeQtOrFlatRed .iconOpportunity32 { background-image: url(customIcons/red/iconOpportunity.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatRed .iconOpportunity22 { background-image: url(customIcons/red/iconOpportunity.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
@@ -3927,6 +3935,10 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconActivityStream22 { background-image: url(customIcons/green/iconActivityStream.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconActivityStream16 { background-image: url(customIcons/green/iconActivityStream.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatGreen .iconActivityStreamClose32 { background-image: url(customIcons/green/iconActivityStreamClose.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGreen .iconActivityStreamClose22 { background-image: url(customIcons/green/iconActivityStreamClose.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGreen .iconActivityStreamClose16 { background-image: url(customIcons/green/iconActivityStreamClose.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
 .ProjeQtOrFlatGreen .iconOpportunity32 { background-image: url(customIcons/green/iconOpportunity.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGreen .iconOpportunity22 { background-image: url(customIcons/green/iconOpportunity.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconOpportunity16 { background-image: url(customIcons/green/iconOpportunity.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
@@ -5341,6 +5353,10 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconActivityStream32 { background-image: url(customIcons/grey/iconActivityStream.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGrey .iconActivityStream22 { background-image: url(customIcons/grey/iconActivityStream.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGrey .iconActivityStream16 { background-image: url(customIcons/grey/iconActivityStream.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatGrey .iconActivityStreamClose32 { background-image: url(customIcons/grey/iconActivityStreamClose.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGrey .iconActivityStreamClose22 { background-image: url(customIcons/grey/iconActivityStreamClose.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGrey .iconActivityStreamClose16 { background-image: url(customIcons/grey/iconActivityStreamClose.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
 /* O */
 
