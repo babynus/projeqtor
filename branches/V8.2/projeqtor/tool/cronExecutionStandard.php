@@ -65,6 +65,7 @@ function cronPlanningDifferential(){
     $status='NO_CHANGE';
   }
 }
+
 function cronPlanningComplete(){
   $user=new User();//getSessionUser();
   $user->idProfile=1; // Admin
@@ -88,6 +89,7 @@ function cronPlanningComplete(){
   else $resultStatus=i18n("planningResultError");
   traceLog(i18n("sectionAutomaticPlanning").' : '.$mode." - ".i18n('colEnd')." - ". i18n("colResult"). " = $resultStatus");
 }
+
 function cronPlanningStartDate($param) {
   if ($param=="W") {
     return date('Y-m-d',firstDayofWeek()); // Call with no parameter will return first day of current week
@@ -143,7 +145,7 @@ function dataCloningCheckRequest(){
   $dataCloning = new DataCloning();
   $dataCloningList = $dataCloning->getSqlElementsFromCriteria(array('idle'=>'0'));
   foreach ($dataCloningList as $data){
-    if(!$data->isActive){
+    if(!$data->isActive and !$data->isRequestedDelete and !$data->codeError){
       $data->createDataCloning($data->id);
     }
     if($data->isRequestedDelete){
