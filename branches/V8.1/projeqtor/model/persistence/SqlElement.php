@@ -6189,7 +6189,7 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
     return array('select' => $select, 'from' => $from);
   }
 
-  public function setReference($force = false, $old = null) {
+  public function setReference($force = false, $old = null, $fmtPrefix=null, $fmtSuffix=null, $fmtNumber=null) {
     scriptLog ( 'SqlElement::setReference' );
     $objectsWithFixedReference = array('Bill');
     if (! property_exists ( $this, 'reference' )) {
@@ -6201,9 +6201,9 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
     if ($class == 'Bill' and ! $this->billId)
       return; // Do not set Reference until billId is set
     
-    $fmtPrefix = Parameter::getGlobalParameter ( 'referenceFormatPrefix' );
-    $fmtSuffix = '';
-    $fmtNumber = Parameter::getGlobalParameter ( 'referenceFormatNumber' );
+    if (!$fmtPrefix) $fmtPrefix = Parameter::getGlobalParameter ( 'referenceFormatPrefix' );
+    if (!$fmtSuffix) $fmtSuffix = '';
+    if (!$fmtNumber) $fmtNumber = Parameter::getGlobalParameter ( 'referenceFormatNumber' );
     if ($class == 'Bill') {
       $fmtPrefixBill = Parameter::getGlobalParameter ( 'billReferenceFormat' );
       $fmtNumberBill = Parameter::getGlobalParameter ( 'billNumSize' );
@@ -6265,6 +6265,9 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
     if (get_class ( $this ) == 'Bill') {
       $year = substr ( $this->date, 0, 4 );
       $month = substr ( $this->date, 5, 2 );
+    } else if (property_exists ( $this, 'sendDate' ) and $this->sendDate) {
+      $year = substr ( $this->sendDate, 0, 4 );
+      $month = substr ( $this->sendDate, 5, 2 );
     } else if (property_exists ( $this, 'creationDate' )) {
       $year = substr ( $this->creationDate, 0, 4 );
       $month = substr ( $this->creationDate, 5, 2 );
@@ -6321,7 +6324,7 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
     }
     $mutex->release ();
   }
-
+  
   public function setDefaultResponsible() {
     if (get_class ( $this ) != 'Project' and property_exists ( $this, 'idResource' ) and property_exists ( $this, 'idProject' ) and ! trim ( $this->idResource ) and trim ( $this->idProject )) {
       if (Parameter::getGlobalParameter ( 'setResponsibleIfSingle' ) == "YES") {
