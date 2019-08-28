@@ -6367,6 +6367,9 @@ function switchModeLayout(paramToSend){
   var currentItem=historyTable[historyPosition];
   var currentScreen=currentItem[2];
   console.log(currentScreen);
+  if(currentScreen=='Reports'){
+    return false;
+  }
   if (paramToSend=='1' || paramToSend=='2'){
     if(paramToSend=='2'){
       dojo.setStyle('verticalLayout',{"opacity": '0.5',"cursor":'not-allowed'});
@@ -6386,8 +6389,6 @@ function switchModeLayout(paramToSend){
       loadContent("globalPlanningMain.php?objectClass="+ currentObject+"&paramScreen="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     }else if(currentScreen=='PortfolioPlanning'){
       loadContent("portfolioPlanningMain.php?objectClass="+ currentObject+"&paramScreen="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-    }else if(currentScreen=='Reports'){
-      loadContent("reportsMain.php?objectClass="+ currentObject+"&paramScreen="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     }else{
       loadContent("objectMain.php?objectClass="+ currentObject+"&paramScreen="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     }
@@ -6403,8 +6404,6 @@ function switchModeLayout(paramToSend){
       loadContent("globalPlanningMain.php?objectClass="+ currentObject+"&paramRightDiv="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     }else if(currentScreen=='PortfolioPlanning'){
       loadContent("portfolioPlanningMain.php?objectClass="+ currentObject+"&paramRightDiv="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-    }else if(currentScreen=='Reports'){
-      loadContent("reportsMain.php?objectClass="+ currentObject+"&paramRightDiv="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     }else{
       loadContent("objectMain.php?objectClass="+ currentObject+"&paramRightDiv="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     }
@@ -6427,8 +6426,6 @@ function switchModeLayout(paramToSend){
       loadContent("globalPlanningMain.php?objectClass="+ currentObject+"&paramLayoutObjectDetail="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     }else if(currentScreen=='PortfolioPlanning'){
       loadContent("portfolioPlanningMain.php?objectClass="+ currentObject+"&paramLayoutObjectDetail="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-    }else if(currentScreen=='Reports'){
-      loadContent("reportsMain.php?objectClass="+ currentObject+"&paramLayoutObjectDetail="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     }else{
       loadContent("objectMain.php?objectClass="+ currentObject+"&paramLayoutObjectDetail="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     }
