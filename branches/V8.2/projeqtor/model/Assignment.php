@@ -485,7 +485,12 @@ class Assignment extends SqlElement {
       if($minimumThreshold){
       	$res = new ResourceAll($this->idResource);
       	if($res->capacity*($this->rate/100) < $minimumThreshold){
-      		$result=i18n('minimumThresholdError');
+      	  $workUnit = Parameter::getGlobalParameter('workUnit');
+      	  $dayTime = 1;
+      	  if($workUnit == 'hours'){
+      	  	$dayTime = Parameter::getGlobalParameter('dayTime');
+      	  }
+      	  $result=i18n('minimumThresholdAssignError',array(($minimumThreshold*$dayTime).Work::displayShortWorkUnit()));
       	}
       }
     }

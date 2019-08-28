@@ -391,7 +391,12 @@ class ActivityMain extends SqlElement {
         	}
         }
         if(Work::convertWork($this->ActivityPlanningElement->minimumThreshold) > $maxThreshold){
-          $result=i18n('minimumThresholdError');
+          $workUnit = Parameter::getGlobalParameter('workUnit');
+          $dayTime = 1;
+          if($workUnit == 'hours'){
+            $dayTime = Parameter::getGlobalParameter('dayTime');
+          }
+          $result=i18n('minimumThresholdInputError',array(($maxThreshold*$dayTime).Work::displayShortWorkUnit()));
         }
       }
     }
