@@ -35,6 +35,7 @@ class PaymentMain extends SqlElement {
   public $id;    // redefine $id to specify its visible place 
   public $name;
   public $idPaymentType;
+  public $idProject;
   public $description;
   public $idUser;
   public $creationDate;
@@ -156,6 +157,11 @@ class PaymentMain extends SqlElement {
      
     $result="";
     $old=$this->getOld();
+    
+    if ($this->idBill and !$this->idProject) {
+      $b=new Bill($this->idBill);
+      $this->idProject=$b->idProject;
+    }
     
     // Chek that bill is not already paid
     if ( trim($this->idBill) and (trim($this->idBill)!=trim($old->idBill))) {
