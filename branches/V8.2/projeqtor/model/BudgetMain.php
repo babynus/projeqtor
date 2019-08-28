@@ -438,7 +438,7 @@ class BudgetMain extends SqlElement {
       +$this->update4FullAmount;
     if ($this->elementary) {
       $exp=new Expense();
-      $expList=($this->id)?$exp->getSqlElementsFromCriteria(array('idBudgetItem'=>$this->id)):array();
+      $expList=($this->id)?$exp->getSqlElementsFromCriteria(array('idBudgetItem'=>$this->id,'idle'=>'0')):array();
       $this->usedAmount=0;
       $this->usedFullAmount=0;
       $this->billedAmount=0;
