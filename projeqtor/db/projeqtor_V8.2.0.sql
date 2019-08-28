@@ -128,4 +128,4 @@ INSERT INTO `${prefix}modulemenu`(`idModule`, `idMenu`, `hidden`, `active`) VALU
 (17,224,0,1);
 
 ALTER TABLE `${prefix}planningelement` ADD COLUMN `indivisibility` int(1) UNSIGNED DEFAULT 0,
-ADD COLUMN `minimumThreshold` decimal(5,2) UNSIGNED DEFAULT NULL;
+ADD COLUMN `minimumThreshold` decimal(7,4) UNSIGNED DEFAULT NULL;
