@@ -35,6 +35,7 @@ class ProviderPaymentMain extends SqlElement {
   public $id;    // redefine $id to specify its visible place 
   public $name;
   public $idProviderPaymentType;
+  public $idProject;
   public $description;
   public $idUser;
   public $creationDate;
@@ -154,6 +155,11 @@ class ProviderPaymentMain extends SqlElement {
     $result="";
     $old=$this->getOld();
 
+    if ($this->idProviderBill and !$this->idProject) {
+      $pb=new ProviderBill($this->idProviderBill);
+      $this->idProject=$pb->idProject;
+    }
+    
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
       $result.=$defaultControl;
