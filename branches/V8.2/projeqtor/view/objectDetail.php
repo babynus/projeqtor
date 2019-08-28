@@ -7277,15 +7277,15 @@ function drawProjectExpenseDetailLine($class,$id, $level){
 		$fullAmount = htmlDisplayCurrency($obj->paymentAmount);
 	}
 	$goto= '';
-	if (securityCheckDisplayMenu(null, $class) and securityGetAccessRightYesNo('menu'.$class, 'read', '')=="YES") {
-		$goto = 'onClick="gotoElement('."'".$class."','".htmlEncode($id)."'".');"';
+	if (securityCheckDisplayMenu(null, $class) and securityGetAccessRightYesNo('menu'.$class, 'read', $obj)=="YES") {
+		$goto = ' onClick="gotoElement('."'".$class."','".htmlEncode($id)."'".');" ';
 	}
 	echo '  <tr>';
 	for($i=0; $i<$level; $i++){
 		echo '<td class="assignData" colspan="1" style="width:3%;height:20px;border-bottom:0px;border-top:0px;border-right:solid 2px;"></td>';
 	}
 	$width=40-(3*$level);
-	echo '    <td class="assignData" align="center" colspan="'.(5-$level).'"'.$goto.'style="width:'.$width.'%;height:20px;cursor:pointer;">';
+	echo '    <td class="assignData" align="center" colspan="'.(5-$level).'"'.$goto.'style="width:'.$width.'%;height:20px;'.(($goto!='')?'cursor:pointer;':'').'">';
 	echo '      <table width="100%"><tr><td width="6%" float="right">'.formatIcon(get_class($obj), 16).'</td>';
 	echo '      <td width="94%"style="text-aglign:left;">'.i18n(get_class($obj)).' #'.$obj->id.' - '.$obj->name.'</td></tr></table>';
 	echo '    </td>';
