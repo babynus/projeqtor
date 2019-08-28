@@ -127,5 +127,9 @@ INSERT INTO `${prefix}modulemenu`(`idModule`, `idMenu`, `hidden`, `active`) VALU
 (17,222,0,1),
 (17,224,0,1);
 
-ALTER TABLE `${prefix}planningelement` ADD COLUMN `indivisibility` int(1) UNSIGNED DEFAULT 0,
-ADD COLUMN `minimumThreshold` decimal(7,4) UNSIGNED DEFAULT NULL;
+ALTER TABLE `${prefix}planningelement` ADD COLUMN `indivisibility` int(1) unsigned DEFAULT 0,
+ADD COLUMN `minimumThreshold` decimal(7,4) unsigned DEFAULT NULL;
+
+ALTER TABLE `${prefix}payment` ADD COLUMN `idProject` int(12) unsigned DEFAULT NULL;
+
+ALTER TABLE `${prefix}providerpayment`  ADD COLUMN `idProject` int(12) unsigned DEFAULT NULL;
