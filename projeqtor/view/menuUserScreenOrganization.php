@@ -70,7 +70,7 @@ if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
       </td>
     </tr>
     <tr height="<?php echo $iconSize+8; ?>px">  
-      <td width="<?php echo (isIE())?37:35;?>px"  > 
+      <td width="<?php echo (isIE())?37:35;?>px"   > 
         <div id="layoutList" class="pseudoButton" onclick="switchModeLayout('4');" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" title="<?php echo i18n("buttonSwitchedMode");?>">
           <table >
             <tr>
@@ -80,6 +80,8 @@ if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
             </tr>
           </table>    
        </div>
+      </td>
+      <td width="<?php echo (isIE())?37:35;?>px" >
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
         <div id="layoutTab" class="pseudoButton" onclick="switchModeLayout('0');" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" title="<?php echo i18n("buttonSwitchedMode");?>">
@@ -95,23 +97,25 @@ if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
     </tr>
     <tr>
      <?php if (! isIE()) {?>
-    <td  width="28px" > 
+    <td width="<?php echo (isIE())?37:35;?>px"> 
       <div  class="pseudoButtonFullScreen <?php echo $simuClass;?>" style="height:28px; position:relative; top:-5px; z-index:30;margin-right:0px; width:28px;" onclick="toggleFullScreen()" >
         <table>
           <tr>
             <td style="width:28px" >
-              <?php echo formatIcon('FullScreen', 32,i18n("fullScreen"));?>
+              <?php echo formatIcon('FullScreen', 22,i18n("fullScreen"));?>
             </td>
           </tr>
         </table>
       </div>
     </td>
      <?php }?> 
-    <td width="29px" class="<?php echo $simuClass;?>">   
+    <td>
+    </td>
+    <td width="<?php echo (isIE())?37:35;?>px" class="<?php echo $simuClass;?>">   
       <div id="hideMenuBarShowButtonTop" style="cursor:pointer;position:relative; top:-11px;right:0px; z-index:949" >
   		  <a onClick="hideMenuBarShowModeTop();" id="buttonSwitchedMenuBarTopShow" title="<?php echo i18n("buttonShowMenu");?>" >
   		    <span style='display:inline-block;width:24px;height:22px;'>
-  		     <div style="position:absolute;top:1px;right:0px;height:26px;width:24px" dojoType="dijit.form.Button" iconClass="dijitButtonIcon iconHideStream22" class="detailButton">&nbsp;</div>
+  		     <div style="position:absolute;top:1px;height:26px;width:24px" dojoType="dijit.form.Button" iconClass="dijitButtonIcon iconHideStream22" class="detailButton">&nbsp;</div>
   		    </span>
   		  </a>
 		  </div>

@@ -64,7 +64,7 @@
       echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamClass' style='position:absolute;top:2px;left:3px'></div>";
     }else{
       echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamBotClass' style='position:absolute;top:2px;left:3px'></div>";
-      echo "<div onclick='hideStreamMode(false);' class='iconHideStream22' style='position:absolute;right:0px;top:2px;'></div>";
+      echo "<div onclick='hideStreamMode(false);' class='iconActivityStreamClose22 ' style='position:absolute;right:2px;top:2px;'></div>";
     }
     echo "</br></br>";
     echo $noData; 
@@ -82,7 +82,7 @@
       echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamClass' style='position:absolute;top:2px;left:3px'></div>";
           }else{
       echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamBotClass' style='position:absolute;top:2px;left:3px'></div>";
-      echo "<div onclick='hideStreamMode(false);' class='iconHideStream22' style='position:absolute;right:0px;top:2px;'></div>";
+      echo "<div onclick='hideStreamMode(false);' class='iconActivityStreamClose22 ' style='position:absolute;right:2px;top:2px;'></div>";
     }
     ?>
 	   <div><span class="title" ><?php echo i18n("titleStream");?></span></div>
