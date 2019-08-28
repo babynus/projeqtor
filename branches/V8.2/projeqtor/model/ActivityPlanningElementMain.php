@@ -184,6 +184,9 @@ class ActivityPlanningElementMain extends PlanningElement {
     }else{
       self::$_fieldsAttributes["progress"]='';
     }
+    if($this->indivisibility){
+      self::$_fieldsAttributes["minimumThreshold"]='required';
+    }
   }
   /** ==========================================================================
    * Destructor
@@ -245,9 +248,9 @@ class ActivityPlanningElementMain extends PlanningElement {
     if($this->idActivityPlanningMode){
       $this->idPlanningMode = $this->idActivityPlanningMode;
     }
-//     if($this->minimumThreshold){
-//       $this->minimumThreshold = Work::convertWork($this->minimumThreshold);
-//     }
+    if($this->minimumThreshold){
+      $this->minimumThreshold = Work::convertWork($this->minimumThreshold);
+    }
     return parent::save();
   }
   
