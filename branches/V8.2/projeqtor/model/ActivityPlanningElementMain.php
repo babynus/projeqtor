@@ -248,8 +248,12 @@ class ActivityPlanningElementMain extends PlanningElement {
     if($this->idActivityPlanningMode){
       $this->idPlanningMode = $this->idActivityPlanningMode;
     }
+    
     if($this->minimumThreshold){
-      $this->minimumThreshold = Work::convertWork($this->minimumThreshold);
+      $old = $this->getOld();
+      if($old->minimumThreshold != $this->minimumThreshold){
+        $this->minimumThreshold = Work::convertWork($this->minimumThreshold);
+      }
     }
     return parent::save();
   }
