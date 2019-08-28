@@ -60,7 +60,7 @@ if($idDataCloning){
       $dataCloning->isRequestedDelete = 1;
     }else{
       $dataCloning->requestedDate = $requestedDate;
-      $dataCloning->isActive = 0;
+      $dataCloning->codeError = null;
     }
     $result=$dataCloning->save();
   }else{
