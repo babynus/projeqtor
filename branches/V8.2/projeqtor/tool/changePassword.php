@@ -31,12 +31,8 @@
 scriptLog("changePassword.php");  
   $password="";
   //florent 4088
-  if($_POST['passwordValidate']=='false'){
-    if($_POST['criteria']!=''){
-    passwordErrorCrit($_POST['criteria']);
-    }else{
-      passwordError();
-    }
+  if(RequestHandler::getValue('passwordValidate')!='true'){
+    passwordError();
   }
   if (array_key_exists('password',$_POST)) {
     $password=$_POST['password'];
@@ -67,8 +63,6 @@ scriptLog("changePassword.php");
   if ($passwordLength<Parameter::getGlobalParameter('paramPasswordMinLength')) {
     passwordError(i18n("paramParamPasswordMinLength"));
   }
-
-  
   changePassword($user, $password, $userSalt, 'sha256');
   
   /** ========================================================================
@@ -77,26 +71,22 @@ scriptLog("changePassword.php");
    */
   function passwordError($cause=null,$userIssue=false) {
     echo '<div class="messageERROR">';
-    echo i18n('invalidPasswordChange', array(Parameter::getGlobalParameter('paramPasswordMinLength')));
-    if (1) echo '<br/><span style="color:#ffaaaa">('.$cause.')</span>';
+    echo i18n('invalidPasswordChange');
+    if (!$cause) {
+      $reqStr=Parameter::getGlobalParameter('paramPasswordStrength');
+      debugLog($reqStr);
+      $cause='<div style="width:80%;text-align:left;color:white;padding-left:30px">';
+      if ($reqStr>=0) $cause.='<br/>'.i18n('pwdRequiredStrength');
+      if ($reqStr>=1) $cause.='<br/>&nbsp;-&nbsp;'.i18n("pwdErrorLength",array(Parameter::getGlobalParameter('paramPasswordMinLength')));
+      if ($reqStr>=2) $cause.='<br/>&nbsp;-&nbsp;'.i18n("pwdErrorCase");
+      if ($reqStr>=3) $cause.='<br/>&nbsp;-&nbsp;'.i18n("pwdErrorDijit");
+      if ($reqStr>=4) $cause.='<br/>&nbsp;-&nbsp;'.i18n("pwdErrorChar");
+      $cause.='</div>';
+    } 
+    echo '<br/><span style="color:#ffaaaa">'.$cause.'</span>';
     echo '</div>';
     if ($userIssue and SSO::isSamlEnabled()) {
     	SSO::addTry();
-    }
-    exit;
-  }
-  /** ========================================================================
-   * Display an error message because of invalid login
-   * @return void
-   */
-  //florent
-  function passwordErrorCrit($crit,$userIssue=false) {
-    echo '<div class="messageERROR">';
-    echo i18n('invalidPasswordChange', array(Parameter::getGlobalParameter('paramPasswordMinLength')));
-    echo i18n('invalidCrit').': '.$crit;
-    echo '</div>';
-    if ($userIssue and SSO::isSamlEnabled()) {
-      SSO::addTry();
     }
     exit;
   }
