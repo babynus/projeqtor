@@ -6366,7 +6366,6 @@ function switchModeLayout(paramToSend){
   var objectIdScreen=dojo.byId('objectId').value;
   var currentItem=historyTable[historyPosition];
   var currentScreen=currentItem[2];
-  console.log(currentScreen);
   if(currentScreen=='Reports'){
     return false;
   }
@@ -6398,12 +6397,10 @@ function switchModeLayout(paramToSend){
   }else if(paramToSend=='3'){
     if(currentScreen=='Planning' || currentScreen=='ResourcePlanning' || currentScreen=='GlobalPlanning'){
       loadContent("planningMain.php?objectClass="+ currentObject+"&paramRightDiv="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-    }else if(currentScreen=='ResourcePlanning' ){
-      return false;
     }else if(currentScreen=='GlobalPlanning'){
       loadContent("globalPlanningMain.php?objectClass="+ currentObject+"&paramRightDiv="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-    }else if(currentScreen=='PortfolioPlanning'){
-      loadContent("portfolioPlanningMain.php?objectClass="+ currentObject+"&paramRightDiv="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }else if(currentScreen=='PortfolioPlanning' || currentScreen=='ResourcePlanning'){
+      return false;
     }else{
       loadContent("objectMain.php?objectClass="+ currentObject+"&paramRightDiv="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     }

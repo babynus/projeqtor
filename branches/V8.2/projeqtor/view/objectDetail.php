@@ -2077,7 +2077,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         if($col=='indivisibility'){
         	echo '<script type="dojo/connect" event="onChange" >';
-        	echo 'console.log(dijit.byId("ActivityPlanningElement_minimumThreshold"));';
         	echo '  if(this.checked){';
         	echo '   dijit.byId("ActivityPlanningElement_minimumThreshold").set("required", true);';
         	echo '   dijit.byId("ActivityPlanningElement_minimumThreshold").set("class", "input required");';

@@ -603,19 +603,18 @@
     </td>
        <?php 
                if ((property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream')) and Parameter::getUserParameter("paramRightDiv") !='3') {
-	               if(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)!=0){ 
+	              if(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)!=0){ 
 	   ?>            
-            	     <div id="hideStreamButton" region="center" style="cursor:pointer;position:absolute;top:5px;right:0px; bottom:2px;z-index:999999;display:none;">
-            	       <a onClick="hideStreamMode(false);" id="buttonSwitchedStream" title="" ><span style="top:0px;display:inline-block;margin-right:12px;"><div class='iconActivityStreamWhite22 ' >&nbsp;</div></span></a>
-            	     </div>
+            	   <div id="hideStreamButton" region="center" style="cursor:pointer;position:absolute;top:5px;right:0px; bottom:2px;z-index:999999;display:none;">
+            	     <a onClick="hideStreamMode(false);" id="buttonSwitchedStream" title="" ><span style="top:0px;display:inline-block;margin-right:12px;"><div class='iconActivityStreamWhite22 ' >&nbsp;</div></span></a>
+            	   </div>
       <?php       }else{?>
                    <div id="hideStreamButton" region="center" style="cursor:pointer;position:absolute;top:5px; right:0px; bottom:2px;z-index:999999">
-            	       <a onClick="hideStreamMode(false);" id="buttonSwitchedStream" title="" ><span style="top:0px;display:inline-block;margin-right:12px;"><div class='iconActivityStreamWhite22' >&nbsp;</div></span></a>
-            	     </div>
-      <?php 
-	           }
-	       }
-	  ?>
+            	      <a onClick="hideStreamMode(false);" id="buttonSwitchedStream" title="" ><span style="top:0px;display:inline-block;margin-right:12px;"><div class='iconActivityStreamWhite22' >&nbsp;</div></span></a>
+            	   </div>
+      <?php       } 
+                }
+      ?>
   </tr>
 </table>
 <?php 
