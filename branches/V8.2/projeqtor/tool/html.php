@@ -743,6 +743,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
   }
 
   if (isLeavesSystemActiv()) { $leaveProjectId = Project::getLeaveProjectId();}
+  $group=null;
 // MTY - LEAVE SYSTEM
   foreach($table as $key => $val) {
 // MTY - LEAVE SYSTEM
@@ -809,6 +810,13 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       	$selectedFound=false;
       	$next=$key;
       }
+//       if ($col=='idBudgetItem') {
+//         $top=SqlList::getFieldFromId('Budget', $key, 'idBudget');
+//         if ($top!=$group) {
+//           $group=$top;
+//           echo '<option value="" disabled="disabled"><span style="font-weight:bold;background:#FFAAAA">'.SqlList::getNameFromId('Budget', $group).'</span></option>';
+//         }
+//       }
       echo '<option value="' . $key . '"';
       if ( $selection and $key==$selection ) { 
       	echo ' SELECTED ';
