@@ -2380,7 +2380,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // BEGIN - ADD BY TABARY - TOOLTIP
         echo htmlDisplayTooltip($toolTip, $col, $print, $outMode);
         // END - ADD BY TABARY - TOOLTIP
-        echo '<select dojoType="dijit.form.FilteringSelect" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" xlabelType="html" ';
+        echo '<select dojoType="dijit.form.FilteringSelect" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" ';
+        //echo ' labelType="html" spanLabel=true  ';
         echo '  style="width: '.($fieldWidth).'px;'.$specificStyle.'"';
         echo $name;
         
