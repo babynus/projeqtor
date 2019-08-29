@@ -5,6 +5,10 @@
 -- // Date : 2019-07-01                                     //
 -- ///////////////////////////////////////////////////////////
 
+-- ----------------------------------------------------------------
+-- Legal Notice
+-- ----------------------------------------------------------------
+
 CREATE TABLE `${prefix}messagelegal` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
@@ -17,7 +21,7 @@ CREATE TABLE `${prefix}messagelegal` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
 INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
-(223, 'menuMessageLegal', 11, 'object', 521, Null, 0, 'Admin');
+(223, 'menuMessageLegal', 11, 'object', 521, 'ReadWritePrincipal', 0, 'Admin');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,223,1);
@@ -36,6 +40,13 @@ CREATE TABLE `${prefix}messagelegalFollowup` (
   `accepted` int(1) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+
+UPDATE `${prefix}menu` set `level`='ReadWritePrincipal' 
+WHERE name in ('menuOrganization','menuBudget','menuProduct','menuProductVersion','menuComponent','menuComponentVersion');
+
+-- ------------------------------------------------------
+-- Data Cloning
+-- ------------------------------------------------------
 
 INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
 (222, 'menuDataCloning', 11, 'item', 530, Null, 0, 'Admin');
