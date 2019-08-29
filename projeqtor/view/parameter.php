@@ -429,6 +429,15 @@ function drawTableFromObjectList($objectList) {
   } else if ($type=='accessRight') {
   	htmlDrawCrossTable('menuProject', 'idMenu', 'profile', 'idProfile', 'accessRight', 'idAccessProfile', 'list', 'accessProfile', 'idMenu');
   } else if ($type=='accessRightNoProject') {
+  	$titlePane="habilitation_ReadWritePrincipal";
+  	echo '<div dojoType="dijit.TitlePane"';
+  	echo ' open="' . ( array_key_exists($titlePane, $collapsedList)?'false':'true') . '"';
+  	echo ' id="' . $titlePane . '" ';
+  	echo ' onHide="saveCollapsed(\'' . $titlePane . '\');"';
+  	echo ' onShow="saveExpanded(\'' . $titlePane . '\');"';
+  	echo ' title="' . i18n('menuPrincipal') . '">';
+  	htmlDrawCrossTable('menuReadWritePrincipal', 'idMenu', 'profile', 'idProfile', 'accessRight', 'idAccessProfile', 'list', 'listReadWrite') ;
+  	echo '</div><br/>';
   	$titlePane="habilitation_ReadWriteEnvironment";
   	echo '<div dojoType="dijit.TitlePane"';
   	echo ' open="' . ( array_key_exists($titlePane, $collapsedList)?'false':'true') . '"';
