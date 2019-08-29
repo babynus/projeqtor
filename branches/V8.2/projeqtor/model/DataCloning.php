@@ -189,7 +189,7 @@ class DataCloning extends SqlElement{
   			      if (substr($dataCloningUrl,-1)!=$pathSeparator) $dataCloningUrl.=$pathSeparator;
   			      $href = $dataCloningUrl.$origin->nameDir.'/view/main.php?directAccess=true';
 			      }else{
-			        $href = "../simulation/'.$origin->nameDir.'/view/main.php?directAccess=true";
+			        $href = "../simulation/$origin->nameDir/view/main.php?directAccess=true";
 			      }
 			       $result .='<a href='.$href.' target="_blank" title="'.i18n('gotoDataCloningButton').'" > '.formatMediumButton('Goto', true).'</a>';
 			    }
@@ -598,14 +598,14 @@ class DataCloning extends SqlElement{
         if($dataCloning->idOrigin){
           if($element->getBasename()==$parameterP){
             $paramIsRelative = true;
-            $parameterPhp  = $dir_dest . DIRECTORY_SEPARATOR . str_replace($parameterP, "parameters_".$newPwd.".php",$iterator->getSubPathName());
+            $parameterPhp  = $dir_dest . DIRECTORY_SEPARATOR . str_replace($parameterP, "parameters_".$nameDir.".php",$iterator->getSubPathName());
             copy($element,$parameterPhp);
-            $parameterPhp2 = "../".str_replace($parameterP, "parameters_".$newPwd.".php",$iterator->getSubPathName());
+            $parameterPhp2 = "../".str_replace($parameterP, "parameters_".$nameDir.".php",$iterator->getSubPathName());
             $paramContext = file_get_contents($parameterPhp);
             $paramDbNameOrigin = 'simu_'.$OriginData->nameDir;
             $paramDbNameOrigin = strtolower($paramDbNameOrigin);
             $paramDbNameParam = "\$paramDbName='$paramDbNameOrigin';";
-            $paramDbNameNew='simu_'.$newPwdBd;
+            $paramDbNameNew='simu_'.$nameDir;
             $paramDbNameNew = strtolower($paramDbNameNew);
             $paramDbNameParamSimu = "\$paramDbName='$paramDbNameNew';";
             $paramContext = str_replace($paramDbNameParam,$paramDbNameParamSimu,$paramContext);
@@ -618,9 +618,9 @@ class DataCloning extends SqlElement{
         }else{
           if($element->getBasename()==$parameterP AND (str_replace("plugin", '', $element->getPath()) == $element->getPath()) AND (str_replace("simulation", '', $element->getPath()) == $element->getPath())){
             $paramIsRelative = true;
-            $parameterPhp  = $dir_dest . DIRECTORY_SEPARATOR . str_replace("parameters.php", "parameters_".$newPwd.".php",$iterator->getSubPathName());
+            $parameterPhp  = $dir_dest . DIRECTORY_SEPARATOR . str_replace("parameters.php", "parameters_".$nameDir.".php",$iterator->getSubPathName());
             copy($element,$parameterPhp);
-            $parameterPhp2 = "../".str_replace("parameters.php", "parameters_".$newPwd.".php",$iterator->getSubPathName());
+            $parameterPhp2 = "../".str_replace("parameters.php", "parameters_".$nameDir.".php",$iterator->getSubPathName());
             $paramContext = file_get_contents($parameterPhp);
             $paramDbNameParam = "\$paramDbName='$paramDbName';";
             $newPwdBd2="simu_".$newPwdBd;
@@ -657,7 +657,7 @@ class DataCloning extends SqlElement{
         }else{
           if(($element->getBasename()=="parametersLocation.php")){
             $paramLocation =  $dir_dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName();
-            $parametersLocationNewPwd = str_replace("parameters.php", "parameters_".$newPwd.".php",$parametersLocation);
+            $parametersLocationNewPwd = str_replace("parameters.php", "parameters_".$nameDir.".php",$parametersLocation);
           }
           copy($element, $dir_dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
         }
