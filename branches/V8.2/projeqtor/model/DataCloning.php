@@ -241,7 +241,7 @@ class DataCloning extends SqlElement{
 			        if (substr($dataCloningUrl,-1)!=$pathSeparator) $dataCloningUrl.=$pathSeparator;
 			        $href = $dataCloningUrl.$data->nameDir.'/view/main.php?directAccess=true';
 			      }else{
-			        $href = "../simulation/'.$data->nameDir.'/view/main.php?directAccess=true";
+			        $href = "../simulation/$data->nameDir/view/main.php?directAccess=true";
 			      }
 			      $result .='<a href='.$href.' target="_blank" title="'.i18n('gotoDataCloningButton').'" > '.formatMediumButton('Goto', true).'</a>';
 			    }
@@ -699,7 +699,7 @@ class DataCloning extends SqlElement{
       $dataCloning->codeError = "copyFolder";
       $dataCloning->save();
       $bdName = 'simu_'.strtolower($nameDir);
-      $sqlDrop = "DROP DATABASE $bdName ;";
+      $sqlRemove = "DROP DATABASE $bdName ;";
       $connexion->exec($sqlRemove);
       return;
     }

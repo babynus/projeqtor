@@ -70,13 +70,17 @@ if($idDataCloning){
   }
 }else{
   $dataCloning = new DataCloning();
+  $res = new ResourceAll($user);
   $date = date('Y-m-d');
   $addDate =  addDaysToDate(date('Y-m-d'), 1);
   $wherePerDay = "idResource = $user and requesteddate > '$date' and requesteddate < '$addDate' and idle = 0 ";
   $dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
-  $dataCloningCountPerDay = 1;
   $dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
-  if($dataCloningPerDay-$dataCloningCountPerDay > 0){
+  $dataCloningTotal=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array("scope"=>"dataCloningTotal", "idProfile"=>$res->idProfile));
+  $dataCloningTotal = $dataCloningTotal->rightAccess;
+  $dataCloningCountTotal = $dataCloning->countSqlElementsFromCriteria(array("idle"=>"0", "idResource"=>$user));
+  
+  if($dataCloningPerDay-$dataCloningCountPerDay > 0 and $dataCloningTotal-$dataCloningCountTotal > 0){
     $cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
     if($idDataCloningParent){
     	$dataCloning->idOrigin = $idDataCloningParent;
