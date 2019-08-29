@@ -74,7 +74,6 @@ scriptLog("changePassword.php");
     echo i18n('invalidPasswordChange');
     if (!$cause) {
       $reqStr=Parameter::getGlobalParameter('paramPasswordStrength');
-      debugLog($reqStr);
       $cause='<div style="width:80%;text-align:left;color:white;padding-left:30px">';
       if ($reqStr>=0) $cause.='<br/>'.i18n('pwdRequiredStrength');
       if ($reqStr>=1) $cause.='<br/>&nbsp;-&nbsp;'.i18n("pwdErrorLength",array(Parameter::getGlobalParameter('paramPasswordMinLength')));
