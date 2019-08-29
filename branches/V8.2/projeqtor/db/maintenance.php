@@ -879,13 +879,23 @@ if (beforeVersion($currVersion,"V8.2.0")) {
     Sql::beginTransaction();
     $MessageLegal = new MessageLegal();
     if(substr(Parameter::getGlobalParameter('paramDefaultLocale'),0,6)=='fr'){
-      $MessageLegal->name = "Message par défaut";
-      $MessageLegal->description = "Les données personnelles que nous collectons sur vous sont votre nom, adresse email et le travail. 
-                                    Nous les stockons uniquement dans le cadre de connexion ,d'usage de l'application et de la gestion des projets. 
-                                    Ses données peuvent être supprimées, mises à jour par l'administrateur, veuillez le contacter si besoin.";
+      $MessageLegal->name = "Message RGPD";
+      $MessageLegal->description = "Conformément aux exigences de la RGPD, nous vous informons que les données personnelles que nous collectons sur vous sont votre nom, votre adresse email professionnelle et les informations que vous enregistrez dans ProjeQtOr dans le cadre de votre travail.
+          <br/>Nous stockons et utilisons ces données uniquement à titre professionnel dans le cadre de la gestion des projets auxquels vous participez.
+          <br/> 
+          <br/>Ces données peuvent être mises à jour par l'administrateur de l'application. 
+          <br/>Veuillez le contacter en cas de besoin. 
+          <br/>Vous trouverez ses coordonnées dans la fenêtre \"A propos de ProjeQtOr\".";
     }else{
-      $MessageLegal->name = "Default message";
-      $MessageLegal->description = "The personal data we collect on you is your name, email address and work.
+      $MessageLegal->name = "GPRD Message";
+      $MessageLegal->description = "In accordance with the requirements of the GDPR, we inform you that the personal data we collect about you is your name, your professional e-mail address and the information you save in ProjeQtOr as part of your work.
+          <br/> We only store and use this data for professional purposes as part of the management of the projects in which you participate.
+          <br/>
+          <br/> This data can be updated by the application administrator.
+          <br/> Please contact him if needed.
+          <br/> You will find its coordinates in the \"About ProjeQtOr\" window.";
+    
+          The personal data we collect on you is your name, email address and work.
                                     We store them only as part of connection, application usage and project management.
                                     It can be deleted, updated by the administrator, please contact if necessary";
     }
