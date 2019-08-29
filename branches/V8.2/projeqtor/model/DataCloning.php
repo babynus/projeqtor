@@ -419,6 +419,7 @@ class DataCloning extends SqlElement{
 	  $newPwd = substr( str_shuffle( $chars ), 0, 6);
 	  $newPwdBd = strtolower($newPwd);
 	  
+	  
 	  //COPY FOLDER and CODE
 	  if($dataCloning->idOrigin){
 	    $OriginData = new DataCloning($dataCloning->idOrigin);
@@ -437,10 +438,26 @@ class DataCloning extends SqlElement{
   	   $dir_dest = '../simulation/'.$newPwd;
   	  }
 	  }
+	  if($dataCloningDirectory and !file_exists($dataCloningDirectory)){
+	    debugTraceLog(i18n("dataCloningPathDontExist"));
+	    $dataCloning->codeError = "pathDoesNotExist";
+	    $dataCloning->save();
+	    return;
+	  }   
 	  $nameDir = $newPwd;
 	  $startMicroTime=microtime(true);
-
     debugTraceLog( $dataCloning->name . i18n('dataCloningStart'));
+    
+    //create folder
+    enableCatchErrors();
+    if(! mkdir($dir_dest,0777,true)){
+      debugTraceLog(i18n("dataCloningCanNotCreateFolder"));
+      $dataCloning->codeError = "createFolder";
+      $dataCloning->save();
+      disableCatchErrors();
+      return;
+    }
+    disableCatchErrors();
     //Database
     try{
       $newPwd = 'simu_'.$newPwdBd;
@@ -547,7 +564,6 @@ class DataCloning extends SqlElement{
       $nameDbParam = $dbParam->getDatabaseTableName();
       $requeteDbName= "UPDATE ".$nameDbParam." SET parameterValue = ".Sql::str($dataCloning->name)." WHERE parameterCode = 'paramDbDisplayName';";
       $connexion->exec($requeteDbName);
-       
       $dbModule = new Module();
       $moduleDBName = $dbModule->getDatabaseTableName();
       $requestModule= "UPDATE ".$moduleDBName." SET active = 0, idle = 1 WHERE name = 'moduleDataCloning';";
@@ -556,10 +572,6 @@ class DataCloning extends SqlElement{
       $habilitationDBName = $dbHabilitation->getDatabaseTableName();
       $requestHabilitation = "UPDATE ".$habilitationDBName." SET allowAccess = 0 WHERE idMenu = 222 or idMenu = 224;";
       $connexion->exec($requestHabilitation);
-      $dataCloning->isActive = 1;
-      $dataCloning->nameDir = $nameDir;
-      $dataCloning->plannedDate = strtotime(date('Y-m-d H:i:s'));
-      $dataCloning->save();
       debugTraceLog( $dataCloning->name . i18n('dataCloningFinish').' - '. (round((microtime(true) - $startMicroTime)*1000000)/1000000) . i18n('second') .'  '. $dataCloning->nameDir.'  ' . i18n('created'));
     }catch (Exception $e) {
       debugTraceLog("cantCreateDb");
@@ -568,25 +580,11 @@ class DataCloning extends SqlElement{
       return;
     }
     
-    //create folder
-    if($dataCloningDirectory and !file_exists($dataCloningDirectory)){
-      debugTraceLog(i18n("dataCloningPathDontExist"));
-      $dataCloning->codeError = "pathDoesNotExist";
-      $dataCloning->save();
-      return;
-    }
-    enableCatchErrors();
-    if(! mkdir($dir_dest,0777,true)){
-      debugTraceLog(i18n("dataCloningCanNotCreateFolder"));
-      $dataCloning->codeError = "createFolder";
-      $dataCloning->save();
-      disableCatchErrors();
-      return;
-    }
+    //Copy CODE
     try {
       $dir_iterator = new RecursiveDirectoryIterator($dir_source, RecursiveDirectoryIterator::SKIP_DOTS);
       $iterator = new RecursiveIteratorIterator($dir_iterator, RecursiveIteratorIterator::SELF_FIRST);
-      	
+       
       if(!$dataCloning->idOrigin){
         $exceptionPath = array(".settings","simulation",".svn","deploy","test",".externalToolBuilders","api","db","manual","attach","cron","documents","import","logs","\files\report");
         $exceptionFile = array("simulation","deploy","test","api","db","manual");
@@ -658,8 +656,8 @@ class DataCloning extends SqlElement{
            
         }else{
           if(($element->getBasename()=="parametersLocation.php")){
-      	  			$paramLocation =  $dir_dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName();
-      	  			$parametersLocationNewPwd = str_replace("parameters.php", "parameters_".$newPwd.".php",$parametersLocation);
+            $paramLocation =  $dir_dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName();
+            $parametersLocationNewPwd = str_replace("parameters.php", "parameters_".$newPwd.".php",$parametersLocation);
           }
           copy($element, $dir_dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
         }
@@ -684,9 +682,8 @@ class DataCloning extends SqlElement{
           return;
         }
       }
-      	
+       
       if(isset($paramLocation)){
-        //Param Location
         kill($paramLocation);
         if (! writeFile(' ',$paramLocation)) {
           showError("impossible to write \'$paramLocation\' file, cannot write to such a file : check access rights");
@@ -699,10 +696,18 @@ class DataCloning extends SqlElement{
       }
     } catch (Exception $e) {
       debugTraceLog(i18n("dataCloningCanNotCopy"));
-      $dataCloning->codeError = "createFolder";
+      $dataCloning->codeError = "copyFolder";
       $dataCloning->save();
+      $bdName = 'simu_'.strtolower($nameDir);
+      $sqlDrop = "DROP DATABASE $bdName ;";
+      $connexion->exec($sqlRemove);
       return;
     }
+    
+    $dataCloning->isActive = 1;
+    $dataCloning->nameDir = $nameDir;
+    $dataCloning->plannedDate = strtotime(date('Y-m-d H:i:s'));
+    $dataCloning->save();
   }
 	 
 	
