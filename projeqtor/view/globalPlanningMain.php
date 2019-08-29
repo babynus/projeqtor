@@ -53,8 +53,8 @@
   $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
   $rightHeightGlobalPlanning=heightLaoutActivityStream($currentScreen);
   if($positionListDiv=='left'){
-    $widthListDiv='58%';
-    $widthDetailDiv='42%';
+    $widthListDiv='65%';
+    $widthDetailDiv='25%';
   }else{
     $widthListDiv='100%';
     $widthDetailDiv='100%';
