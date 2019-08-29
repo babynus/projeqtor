@@ -35,7 +35,7 @@ class MessageLegal extends SqlElement {
   public $name;
   public $idUser;
   public $description;
-  public $_sec_Traitment;
+  public $_sec_Treatment;
   public $startDate;
   public $endDate;
   public $idle;
