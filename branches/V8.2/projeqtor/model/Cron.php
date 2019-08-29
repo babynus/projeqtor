@@ -57,7 +57,9 @@ class Cron {
   public static $listCronAutoSendReport;
   public static $lastCronTimeAutoSendReport;
   public static $lastCronAutoSendReport;
-  
+  public static $cronUniqueId;
+  public static $cronProcessId;
+  const CRON_DATA_SEPARATOR='|';  
    /** ==========================================================================
    * Constructor
    * @param $id the id of the object in the database (null if not stored yet)
@@ -229,10 +231,14 @@ class Cron {
   	self::init();
     if (file_exists(self::$runningFile)) {
       $handle=fopen(self::$runningFile, 'r');
-      $last=fgets($handle);
+      $lastData=fgets($handle);
+      $lastSplit=explode(self::CRON_DATA_SEPARATOR,$lastData);
+      $last=$lastSplit[0];
       $now=time();
       fclose($handle);
-      if ( !$last or !is_numeric($last) or ($now-$last) > (self::getSleepTime()*5)) {
+      //$timeout=self::getSleepTime()*5; // Old Timeout is too small : long Cronned tasks lead to unexpected relaunch
+      $timeout=30*60; // 30 minutes before considering CRON is dead
+      if ( !$last or !is_numeric($last) or ($now-$last) > $timeout) {
         // not running for more than 5 cycles : dead process
         self::removeRunningFlag();
         return "stopped";
@@ -243,6 +249,47 @@ class Cron {
       return "stopped";
     }
   }
+
+  public static function checkDuplicateRunning() {
+    // Will check if another CRON is already running (with other Process ID)
+    self::init();
+    if (file_exists(self::$runningFile)) {
+      $handle=fopen(self::$runningFile, 'r');
+      $lastData=fgets($handle);
+      fclose($handle);
+      $lastSplit=explode(self::CRON_DATA_SEPARATOR,$lastData);
+      $last=$lastSplit[0];
+      //$timeout=30*60; // 30 minutes before concidering CRON is dead
+      //$now=time();
+      //$lastExecTimeout=false;
+      //if ( !$last or !is_numeric($last) or ($now-$last) > $timeout) {
+      //  $lastExecTimeout=true;
+      //}
+      if (count($lastSplit)>2) {
+        $lastProcessId=$lastSplit[1];
+        $lastUniqueId=$lastSplit[2];
+      } else {
+        // Another process is already running with no PID logged => this is old CRON running
+        // => Set Stop flag : hoping next to execute will be the old one, and it will be stopped
+        debugTraceLog("Cron possibly running twice : set stop flag to stop the older one");
+        self::setStopFlag();
+        return;
+      }
+      if ($lastProcessId!=self::$cronProcessId or $lastUniqueId!=self::$cronUniqueId) {
+        // Another process is already running with different PID
+        // => Stop current one (exit)
+        debugTraceLog("Cron possibly running twice");
+        debugTraceLog("    current process ID is ".self::$cronProcessId);
+        debugTraceLog("    current unique ID is ".self::$cronUniqueId);
+        debugTraceLog("    running process ID is ".$lastProcessId);
+        debugTraceLog("    running unique ID is ".$lastUniqueId);
+        debugTraceLog("    => stopping current Cron");
+        exit;
+      }
+    } else {
+      // No running flag : no issue, it should be presnet at least at next loop
+    }      
+  }  
   
   public static function abort() {
   	self::init();
@@ -283,7 +330,7 @@ class Cron {
   public static function setRunningFlag() {
   	self::init();
   	$handle=fopen(self::$runningFile, 'w');
-    fwrite($handle,time());
+    fwrite($handle,time().self::CRON_DATA_SEPARATOR.self::$cronProcessId.self::CRON_DATA_SEPARATOR.self::$cronUniqueId);
     fclose($handle);
   }
   
@@ -353,14 +400,17 @@ class Cron {
 	
 	public static function run() {
 //scriptLog('Cron::run()');	
+    self::$cronProcessId=getmypid();
+    self::$cronUniqueId=uniqid('',true);
     global $cronnedScript, $i18nMessages, $currentLocale;
     $cronnedScript=true; // Defined and set to be able to force rights on Control() : Cron has all rights.
     self::init();  
     $i18nMessages=null;
     $currentLocale=Parameter::getGlobalParameter ( 'paramDefaultLocale' );
 		if (self::check()=='running') {
-      errorLog('Try to run cron already running');
-      return;
+      errorLog('Try to run cron already running - Exit');
+      session_write_close();
+      exit;
     }
     $inCronBlockFonctionCustom=true;
     self::removeDeployFlag();
@@ -395,6 +445,7 @@ class Cron {
       if (self::checkStopFlag()) {
         return; 
       }
+      self::checkDuplicateRunning();
       Sql::reconnect(); // Force reconnection to avoid "mysql has gone away"
       self::setRunningFlag();
       // CheckDates : automatically raise alerts based on dates
