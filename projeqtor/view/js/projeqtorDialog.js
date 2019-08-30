@@ -6399,8 +6399,10 @@ function switchModeLayout(paramToSend){
       loadContent("planningMain.php?objectClass="+ currentObject+"&paramRightDiv="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     }else if(currentScreen=='GlobalPlanning'){
       loadContent("globalPlanningMain.php?objectClass="+ currentObject+"&paramRightDiv="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-    }else if(currentScreen=='PortfolioPlanning' || currentScreen=='ResourcePlanning'){
-      return false;
+    }else if(currentScreen=='PortfolioPlanning' ){
+      loadContent("portfolioPlanningMain.php?objectClass="+ currentObject+"&paramRightDiv="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }else if(currentScreen=='ResourcePlanning') {
+      loadContent("resourcePlanningMain.php?objectClass="+ currentObject+"&paramRightDiv="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     }else{
       loadContent("objectMain.php?objectClass="+ currentObject+"&paramRightDiv="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     }
