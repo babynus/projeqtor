@@ -724,8 +724,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
               $messFollow->lastViewDate = date('Y-m-d H:i:s');
               $messFollow->save();
               $messLegal = new MessageLegal($idMessage);
-              $text=new Html2Text($messLegal->description);
-              $val=$text->getText(); 
+              $val=$messLegal->description; 
               if($cptMess < $nbListMess){ ?>
                  <div id="messageLegall<?php echo $messFollow->id;?>" style="display:none; margin-top:15px; width:95%; height:135px; overflow-y:auto;"> 
                    <div id="messageLegal<?php echo $messFollow->id;?>" style="font-size:12pt; min-height:100px; margin:0px 40px 0px 40px;">
