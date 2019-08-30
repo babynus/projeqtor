@@ -44,7 +44,7 @@ $idDataCloningParent = RequestHandler::getId('idDataCloningParent');
   <table>
     <tr>
       <td>
-        <form dojoType="dijit.form.Form" id='dataCloningForm' name='dataCloningForm' onSubmit="return false;">
+        <form dojoType="dijit.form.Form" id='addDataCloningForm' name='addDataCloningForm' onSubmit="return false;">
           <input type="hidden" id="idDataCloningParent" name="idDataCloningParent" value="<?php echo $idDataCloningParent?>"/>
           <table width="100%" style="white-space:nowrap">
             <tr>
@@ -54,10 +54,13 @@ $idDataCloningParent = RequestHandler::getId('idDataCloningParent');
                 style="width: 150px;" name="dataCloningUser" id="dataCloningUser" required
                 <?php echo autoOpenFilteringSelect();?>
                 value="<?php echo $userId;?>">
-                  <?php $specific='imputation';
+                  <?php $specific='dataCloningRight';
                    include '../tool/drawResourceListForSpecificAccess.php';?>  
+                   <script type="dojo/connect" event="onChange" args="evt">
+                     refreshDataCloningCountDiv(this.value);
+                   </script>
                  </select>
-  				    </td>
+  			 </td>
             </tr>
             <tr>
              <td></br></td>
@@ -70,7 +73,7 @@ $idDataCloningParent = RequestHandler::getId('idDataCloningParent');
   				          style="width: 300px;"
   				          maxlength="30"
   				          class="input" value=""/>
-  				    </td>
+  		      </td>
             </tr>
             <tr>
              <td></br></td>
@@ -100,9 +103,17 @@ $idDataCloningParent = RequestHandler::getId('idDataCloningParent');
              <td></br></td>
            </tr>
            <tr>
-             <td style="text-align:center;" class="dialogLabel">
-               <?php echo i18n('colDataCloningCount', array($dataCloningPerDay-$dataCloningCount, $dataCloningPerDay));?>
-             </td>
+           <td>
+            <div id="labelDataCloningCountDiv" name="labelDataCloningCountDiv" dojoType="dijit.layout.ContentPane" region="center">
+             <table align="center" >
+              <tr>
+                <td style="text-align:center;" class="dialogLabel">
+                  <?php echo i18n('colDataCloningCount', array($dataCloningPerDay-$dataCloningCount, $dataCloningPerDay));?>
+                </td>
+              </tr>
+            </table>
+            </div>
+            </td>
            </tr>
           </table>
         </form>
