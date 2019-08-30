@@ -124,7 +124,8 @@ class ActivityPlanningElementMain extends PlanningElement {
     "isManualProgress"=>"hidden",
     "_spe_isOnCriticalPath"=>"",
     "_label_indivisibility"=>"",
-    "indivisibility"=>""
+    "indivisibility"=>"",
+    "minimumThreshold"=>""
   );
 
   private static $_fieldsTooltip = array(
