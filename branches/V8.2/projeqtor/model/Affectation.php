@@ -52,7 +52,7 @@ public $_noCopy;
   // Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
-    <th field="nameResource" formatter="thumbName22" width="15%" >${resourceName}</th>
+    <th field="nameResourceSelect" formatter="thumbName22" width="15%" >${resourceName}</th>
     <th field="nameContact" formatter="thumbName22" width="15%" >${contactName}</th>
     <th field="nameUser" formatter="thumbName22" width="15%" >${userName}</th>
     <th field="nameProfile" formatter="translateFormatter" width="15%" >${idProfile}</th> 
@@ -66,8 +66,8 @@ public $_noCopy;
                                                    'idResourceSelect'=>'idResource');
   
    private static $_fieldsAttributes=array(
-       "idResourceSelect"=>"hidden, forceExport", 
-       "idResource"=>"noExport,noList",
+       "idResourceSelect"=>"forceExport", 
+       "idResource"=>"hidden,noExport,noList",
        "idProfile"=>"required"
    ); 
    /** ==========================================================================
