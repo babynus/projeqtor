@@ -298,7 +298,7 @@ if (property_exists($objectClass,'idStatus')) {
               </div>
             </td>
             <?php }?>
-              <?php if ( ! $hideNameSearch and property_exists($obj,'name')) { ?>
+              <?php if ( ! $hideNameSearch and (property_exists($obj,'name') or get_class($obj)=='Affectation')) { ?>
               <td style="text-align:right;" width="5px">
                 <span class="nobr">&nbsp;&nbsp;&nbsp;
                 <?php echo i18n("colName");?>
