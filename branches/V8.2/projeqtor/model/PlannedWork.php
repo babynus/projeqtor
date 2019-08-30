@@ -733,6 +733,8 @@ class PlannedWork extends GeneralWork {
             $ass->leftWork=0;
             $ass->plannedWork=$ass->realWork;
           }
+          $cptThresholdReject=0;
+          $cptThresholdRejectMax=100; // will end try to plan if 
           while (1) {
             $surbooked=0;
             $surbookedWork=0;
@@ -1080,8 +1082,21 @@ class PlannedWork extends GeneralWork {
                 	}
                 }
                 // Minimum Threshold
-                if ($plan->minimumThreshold and $value<$plan->minimumThreshold) {
+                if ($plan->minimumThreshold and $value<$plan->minimumThreshold and $value<$left) {
                   $value=0;
+                  $cptThresholdReject++;
+                  if ($cptThresholdReject>$cptThresholdRejectMax) {
+                    $changedAss=true;
+                    $ass->notPlannedWork=$left;
+                    if ($ass->optional==0) {
+                      $plan->notPlannedWork+=$left;
+                      $arrayNotPlanned[$ass->id]=$left;
+                    }
+                    $left=0;
+                    break;
+                  }
+                } else {
+                  $cptThresholdReject=0;
                 }
                 if ($value>=0.01) { // Store value on Resource Team if current resource belongs to a Resource Team
                   if (!$ress['team'] and isset($ress['isMemberOf']) and count($ress['isMemberOf'])>0) {
