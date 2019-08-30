@@ -37,5 +37,6 @@ $scaytAutoStartup='NO';
 //$filenameCharsetForImport="WINDOWS-1252";
 //$paramReorg=false;
 //$imapFilterCriteria='UNSEEN';
-$dataCloningDirectory='d:\wwww\simulation';
+$dataCloningDirectory="D:\www\simulation";       //Modify repertory simulation avoid Eclipse conflict
+$dataCloningUrl="http://localhost/simulation/";  //Acces data cloning url for goto
 //======= END

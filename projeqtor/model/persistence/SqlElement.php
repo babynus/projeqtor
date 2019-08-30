@@ -282,6 +282,7 @@ abstract class SqlElement {
           "PlannedWork" => "cascade"), 
       "MeetingType" => array("Meeting" => "controlStrict", "PeriodicMeeting" => "controlStrict"), 
       "Menu" => array("AccessRight" => "cascade"), 
+      "MessageLegal" => array("MessageLegalFollowup" => "confirm"),
       "MessageType" => array("Message" => "controlStrict"), 
       "Milestone" => array("Attachment" => "cascade", "Dependency" => "cascade", "Link" => "cascade", "Note" => "cascade"), 
       "MilestoneType" => array("Milestone" => "controlStrict"),     
