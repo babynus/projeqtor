@@ -916,6 +916,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                                 if (totalCount==0) {
                                     document.getElementById("notificationTree").style.visibility = "hidden";
                                     document.getElementById("menuBarNotificationCount").style.visibility = "hidden";
+                                    document.getElementById("drawNotificationUnread").style.visibility = "hidden";
                                 } else {
                                     // Show and Update the Notification count in menuBar
                                     document.getElementById("notificationTree").style.visibility = "visible";
