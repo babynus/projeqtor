@@ -4082,6 +4082,7 @@ abstract class SqlElement {
         // ADD tLaguerie ticket #396
       if (property_exists ( $this, 'endDate' )) {
         $colScript .= '    dijit.byId("endDate").set("value", null); ';
+        $colScript .= '    if (dijit.byId("endDateBis")) dijit.byId("endDateBis").set("value", null); ';
       }
       // END tLaguerie ticket #396
       if (property_exists ( $this, 'idleDateTime' )) {

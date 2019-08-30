@@ -88,6 +88,7 @@ public function getValidationScript($colName) {
     $colScript .= '</script>';
   }else if ($colName=="endDate"  ) {
     $colScript .= '<script type="dojo/connect" event="onChange" >';
+    $colScript .=" if (!this.value || dijit.byId('idle').get('checked')==true) return;";
     $colScript .="var end=dijit.byId('endDate').get('value');";
     $colScript .="var start=dijit.byId('startDate');";
     $colScript .="start.set('dropDownDefaultValue',this.value);";
