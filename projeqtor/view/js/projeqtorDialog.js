@@ -2159,6 +2159,22 @@ function saveApprover() {
  * Display a delete Link Box
  * 
  */
+function removeFollowup(followupId,all){
+  var param="?messageFollowup="+followupId;
+  param+="&deleteAll="+all;
+  
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  actionOK=function() {
+    loadContent("../tool/removeMessageFollowup.php"+param, "resultDiv", "objectForm", true, 'MessageLegalFollowup');
+  };
+
+  msg=i18n('confirmRemoveMessageFollowup');
+  showConfirm(msg, actionOK);
+}
+
 function removeApprover(approverId, approverName) {
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));

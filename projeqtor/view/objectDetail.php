@@ -7323,7 +7323,6 @@ function drawFollowupSynthesis($obj) {
   global $print, $user;
   $messageLegalFollowup = new MessageLegalFollowup();
   $listMessageLegalFollowup= $messageLegalFollowup->getSqlElementsFromCriteria(array('idMessageLegal'=>$obj->id));
-  
   $tabOrderByUser = array();
   foreach ($listMessageLegalFollowup as $id=>$mess){
     $tabOrderByUser[SqlList::getNameFromId('User', $mess->idUser).'#'.$id]=$mess;
@@ -7332,21 +7331,35 @@ function drawFollowupSynthesis($obj) {
   echo '<tr><td colspan="2" style="width:100%;">';
   echo '<table style="width:100%;">';
   echo '  <tr>';
-  echo '    <td class="assignHeader" colspan="1" style="width:31%">'.i18n('colUser').'</td>';
+  echo '    <td class="assignHeader" colspan="1" style="width:31%">';
+  echo '<table style="width:100%;">';  
+  echo '  <tr> <td style="width:10%"> ';
+  $lstFollowUp = $messageLegalFollowup->countSqlElementsFromCriteria(array('idMessageLegal'=>$obj->id));
+  if($lstFollowUp>0){
+    echo '<a onClick="removeFollowup('.$obj->id.',true);" '.'title="'.i18n('removeFollowupAll').'" > '.formatSmallButton('Remove').'</a>';
+  }
+  echo' </td> <td width:90%> '.i18n('colUser').'</td> </tr> </table>';
   echo '    <td class="assignHeader" colspan="1" style="width:23%">'.i18n('colFirstViewDate').'</td>';
   echo '    <td class="assignHeader" colspan="1" style="width:23%">'.i18n('colLastViewDate').'</td>';
   echo '    <td class="assignHeader" colspan="1" style="width:23%">'.i18n('colAcceptedDate').'</td>';
   echo '  </tr>';
   foreach ($tabOrderByUser as $mess){
     echo '  <tr>';
-    echo '    <td class="assignData" colspan="1" style="width:31%">'.SqlList::getNameFromId('User', $mess->idUser).'</td>';
-    echo '    <td class="assignData" align="center" colspan="1" style="width:23%">'.htmlFormatDate($mess->firstViewDate).'</td>';
-    echo '    <td class="assignData" align="center" colspan="1" style="width:23%">'.htmlFormatDate($mess->lastViewDate).'</td>';
-    echo '    <td class="assignData" align="center" colspan="1" style="width:23%"> ';
+    echo ' <td class="assignData" style="width:31%">';
+    echo '<table style="width:100%;">';
+    echo '  <tr>';
+    echo '  <td style="width:5%">';
+    if($mess->acceptedDate){
+      echo '<a onClick="removeFollowup('.$mess->id.',false);" '.'title="'.i18n('removeFollowup').'" > '.formatSmallButton('Remove').'</a>';
+    }
+    echo '</td><td style="width:95%">'.SqlList::getNameFromId('User', $mess->idUser).'</td></tr></table>';
+    echo '    <td class="assignData" align="center" style="width:23%">'.htmlFormatDate($mess->firstViewDate).'</td>';
+    echo '    <td class="assignData" align="center" style="width:23%">'.htmlFormatDate($mess->lastViewDate).'</td>';
+    echo '    <td class="assignData" align="center" style="width:23%"> ';
       echo '<table style="width:100%;">';
       echo '  <tr>';
       echo '  <td align="center" style="width:90%">'.htmlFormatDate($mess->acceptedDate).'</td>';
-      if(htmlFormatDate($mess->acceptedDate)){
+      if($mess->accepted){
         echo '  <td style="width:10%">'.formatIcon('Submitted',16).'</td>';
       }else{
         echo '  <td style="width:10%">'.formatIcon('Unsubmitted',16).'</td>';

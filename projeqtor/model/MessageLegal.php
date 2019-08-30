@@ -139,5 +139,16 @@ public function drawSpecificItem($item){
   protected function getStaticFieldsAttributes() {
     return self::$_fieldsAttributes;
   }
+  
+  public function setAttributes() {
+    if($this->id){
+      $messageLegalFollowup = new MessageLegalFollowup();
+      $lstFollowUp = $messageLegalFollowup->countSqlElementsFromCriteria(array('accepted'=>1,'idMessageLegal'=>$this->id));
+      if($lstFollowUp>0){
+        self::$_fieldsAttributes['description']='readonly';
+      }
+    }
+  }
+  
 }
 ?>
