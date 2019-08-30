@@ -39,6 +39,7 @@ class MessageLegal extends SqlElement {
   public $startDate;
   public $endDate;
   public $idle;
+  public $_sec_MessageLegalFollowup;
   public $_spe_followupSynthesis;
   
   private static $_layout='
