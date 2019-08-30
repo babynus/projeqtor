@@ -747,8 +747,8 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                   	   <span style="font-size:12pt;cursor:pointer; text-decoration:underline;" id="plusTard<?php echo $messFollow->id;?>" onclick="dojo.byId('messageLegall<?php echo $oldValue;?>').style.display='block';dojo.byId('messageLegall<?php echo $messFollow->id;?>').style.display='none'";>
                       <?php }else{?>   
                         <span style="font-size:12pt;cursor:pointer; text-decoration:underline;" id="buttonLater<?php echo $messFollow->id;?>" onclick="dojo.byId('dialogMessageLegal').style.visibility='hidden'";>
-                      <?php } echo i18n("buttonLater");?> 
-                        </span>
+                      <?php } 
+                      echo i18n("buttonLater");?></span>
                      &nbsp;&nbsp;&nbsp;
                      <?php if($cptMess != 1){?>
                   	   <button style="font-size:12pt;position:relative;top:-5px;" dojoType="dijit.form.Button" id="markOK<?php echo $messFollow->id;?>" onclick="setReadMessageLegalFollowup(<?php echo $messFollow->id;?>);dojo.byId('messageLegall<?php echo $oldValue;?>').style.display='block';dojo.byId('messageLegall<?php echo $messFollow->id;?>').style.display='none'";>
