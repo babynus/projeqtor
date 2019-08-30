@@ -54,11 +54,11 @@ $idDataCloningParent = RequestHandler::getId('idDataCloningParent');
                 style="width: 150px;" name="dataCloningUser" id="dataCloningUser" required
                 <?php echo autoOpenFilteringSelect();?>
                 value="<?php echo $userId;?>">
-                  <?php $specific='dataCloningRight';
-                   include '../tool/drawResourceListForSpecificAccess.php';?>  
                    <script type="dojo/connect" event="onChange" args="evt">
                      refreshDataCloningCountDiv(this.value);
                    </script>
+                   <?php $specific='dataCloningRight';
+                   include '../tool/drawResourceListForSpecificAccess.php';?>
                  </select>
   			 </td>
             </tr>
