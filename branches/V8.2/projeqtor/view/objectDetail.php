@@ -7318,6 +7318,41 @@ function drawExpenseBudgetDetail($obj) {
 	echo '</table>';
 	echo '</tr>';
 }
+//Gautier RGPD
+function drawFollowupSynthesis($obj) {
+  global $print, $user;
+  $messageLegalFollowup = new MessageLegalFollowup();
+  $listMessageLegalFollowup= $messageLegalFollowup->getSqlElementsFromCriteria(array('idMessageLegal'=>$obj->id));
+  echo '<tr><td colspan="2" style="width:100%;">';
+  echo '<table style="width:100%;">';
+  echo '  <tr>';
+  echo '    <td class="assignHeader" colspan="1" style="width:31%">'.i18n('colUser').'</td>';
+  echo '    <td class="assignHeader" colspan="1" style="width:23%">'.i18n('colFirstViewDate').'</td>';
+  echo '    <td class="assignHeader" colspan="1" style="width:23%">'.i18n('colLastViewDate').'</td>';
+  echo '    <td class="assignHeader" colspan="1" style="width:23%">'.i18n('colAcceptedDate').'</td>';
+  echo '  </tr>';
+  foreach ($listMessageLegalFollowup as $mess){
+    echo '  <tr>';
+    echo '    <td class="assignData" colspan="1" style="width:31%">'.SqlList::getNameFromId('User', $mess->idUser).'</td>';
+    echo '    <td class="assignData" colspan="1" style="width:23%">'.htmlFormatDate($mess->firstViewDate).'</td>';
+    echo '    <td class="assignData" colspan="1" style="width:23%">'.htmlFormatDate($mess->lastViewDate).'</td>';
+    echo '    <td class="assignData" colspan="1" style="width:23%"> ';
+      echo '<table style="width:100%;">';
+      echo '  <tr>';
+      echo '  <td style="width:90%">'.htmlFormatDate($mess->acceptedDate).'</td>';
+      if(htmlFormatDate($mess->acceptedDate)){
+        echo '  <td style="width:10%">'.formatIcon('Submitted',16).'</td>';
+      }else{
+        echo '  <td style="width:10%">'.formatIcon('Unsubmitted',16).'</td>';
+      }
+      echo '  </tr>';
+      echo '</table>';
+    echo '</td>';
+    echo '  </tr>';
+  }
+  echo '</table>';
+  echo '</tr>';
+}
 
 function drawBudgetExpenseDetailLine($class,$id){
 	$obj = new $class($id);
