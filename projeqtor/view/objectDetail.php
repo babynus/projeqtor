@@ -1770,7 +1770,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           // BEGIN - ADD BY TABARY - IF SPINNER AND HIDE => Draw but display:none
           if ($isSpinner and is_integer(intval($val))) {
             $title=' title="'.$obj->getTitle($col).'"';
-            echo htmlDisplayTooltip($toolTip, $col, $print, $outMode);
+            echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
             echo htmlDrawSpinner($col, $val, $obj->getSpinnerAttributes($col), $obj->getFieldAttributes($col), $name, $title, $smallWidth, $colScript);
           } else {
             // END - ADD BY TABARY - IF SPINNER AND HIDE => Draw but display:none
@@ -1865,7 +1865,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // Draw a color selector ============================================== COLOR
         echo '<table class="generalColClass '.$col.'Class" style="'.$specificStyleWithoutCustom.'"><tr><td class="detail">';
         // BEGIN - ADD BY TABARY - TOOLTIP
-        echo htmlDisplayTooltip($toolTip, $col, $print, $outMode);
+        echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
         // END - ADD BY TABARY - TOOLTIP
         echo '<input xdojoType="dijit.form.TextBox" class="colorDisplay" type="text" readonly tabindex="-1" ';
         echo $name;
@@ -1917,7 +1917,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // Draw a color selector ============================================== SLA as a duration
         echo '<div class="generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" style="width: 30px;'.$specificStyleWithoutCustom.'">';
         // BEGIN - ADD BY TABARY - TOOLTIP
-        echo htmlDisplayTooltip($toolTip, $col, $print, $outMode);
+        echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
         // END - ADD BY TABARY - TOOLTIP
         echo '<div dojoType="dijit.form.TextBox" class="colorDisplay generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" type="text"  ';
         echo $name;
@@ -1952,7 +1952,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $negative=($col=="plannedEndDate" and $obj->plannedEndDate and $obj->validatedEndDate and $obj->plannedEndDate>$obj->validatedEndDate)?'background-color: #FFAAAA !important;':'';
         }
         // BEGIN - ADD BY TABARY - TOOLTIP
-        echo htmlDisplayTooltip($toolTip, $col, $print, $outMode);
+        echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
         // END - ADD BY TABARY - TOOLTIP
         echo '<div dojoType="dijit.form.DateTextBox" ';
         echo $name;
@@ -1997,7 +1997,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $valTime=date("H:i");
         }
         // BEGIN - ADD BY TABARY - TOOLTIP
-        echo htmlDisplayTooltip($toolTip, $col, $print, $outMode);
+        echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
         // END - ADD BY TABARY - TOOLTIP
         echo '<div dojoType="dijit.form.DateTextBox" ';
         echo $name;
@@ -2036,7 +2036,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         $fmtDT=($classObj=="Audit"&&strlen($val)>5&&strpos($attributes, 'readonly')!==false)?'text':'time'; // valTime=substr($valTime,0,5);
                                                                                                             // BEGIN - ADD BY TABARY - TOOLTIP
-        echo htmlDisplayTooltip($toolTip, $col, $print, $outMode);
+        echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
         // END - ADD BY TABARY - TOOLTIP
         echo '<div dojoType="dijit.form.'.(($fmtDT=='time')?'Time':'').'TextBox" ';
         echo $name;
@@ -2057,7 +2057,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         if ($col=='cancelled' or $col=='solved') echo "&nbsp;&nbsp;&nbsp;";
         // Draw a boolean (as a checkbox ====================================== BOOLEAN
         // BEGIN - ADD BY TABARY - TOOLTIP
-        echo htmlDisplayTooltip($toolTip, $col, $print, $outMode);
+        echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
         // END - ADD BY TABARY - TOOLTIP
         echo '<div dojoType="dijit.form.CheckBox" type="checkbox" ';
         echo $name;
@@ -2377,7 +2377,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // END - ADD BY TABARY - NOTIFICATION SYSTEM
         
         // BEGIN - ADD BY TABARY - TOOLTIP
-        echo htmlDisplayTooltip($toolTip, $col, $print, $outMode);
+        echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
         // END - ADD BY TABARY - TOOLTIP
         echo '<select dojoType="dijit.form.FilteringSelect" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" ';
         //echo ' labelType="html" spanLabel=true  ';
@@ -2507,7 +2507,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         if (!$print) {
           // BEGIN - ADD BY TABARY - TOOLTIP
-          echo htmlDisplayTooltip($toolTip, $col, $print, $outMode);
+          echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
           // END - ADD BY TABARY - TOOLTIP
           echo '<input type="hidden" '.$name.' value="'.htmlEncode($val).'" />';
         }
@@ -2520,7 +2520,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // Draw an integer as spinner ================================================ SPINNER
         $title=' title="'.$obj->getTitle($col).'"';
         // BEGIN - ADD BY TABARY - TOOLTIP
-        echo htmlDisplayTooltip($toolTip, $col, $print, $outMode);
+        echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
         // END - ADD BY TABARY - TOOLTIP
         echo htmlDrawSpinner($col, $val, $obj->getSpinnerAttributes($col), $obj->getFieldAttributes($col), $name, $title, $smallWidth, $colScript);
         // END ADD BY Marc TABARY - 2017-03-02 - DRAW SPINNER
@@ -2638,7 +2638,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $negative=($obj->workElementLeftWork>$obj->leftWork)?'background-color: #FFAAAA !important;':'';
         }
         // BEGIN - ADD BY TABARY - TOOLTIP
-        echo htmlDisplayTooltip($toolTip, $col, $print, $outMode);
+        echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
         // END - ADD BY TABARY - TOOLTIP
         // gautier #work
         echo '<div dojoType="dijit.form.NumberTextBox" ';
@@ -2718,7 +2718,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       } else if ($dataLength>200 and ($dataLength<=4000 or getEditorType()=='text')) {
         // Draw a long text (as a textarea) =================================== TEXTAREA
         // BEGIN - ADD BY TABARY - TOOLTIP
-        echo htmlDisplayTooltip($toolTip, $col, $print, $outMode);
+        echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
         // END - ADD BY TABARY - TOOLTIP
         echo '<textarea dojoType="dijit.form.Textarea" ';
         echo ' onKeyPress="if (dojo.isFF || isEditingKey(event)) {formChanged();}" '; // hard coding default event
@@ -2756,7 +2756,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo '<input type="hidden" id="ckeditorObj'.$ckEditorNumber.'" value="'.$classObj.$col.$extName.'" />';
           
           // BEGIN - ADD BY TABARY - TOOLTIP
-          echo htmlDisplayTooltip($toolTip, $col, $print, $outMode);
+          echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
           // END - ADD BY TABARY - TOOLTIP
           echo '<textarea style="height:300px"'; // Important to set big height to retreive correct scroll position after save
           echo ' name="'.$col.$extName.'" ';
@@ -2782,7 +2782,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $val=str_replace("\n", "", $val);
           
           // BEGIN - ADD BY TABARY - TOOLTIP
-          echo htmlDisplayTooltip($toolTip, $col, $print, $outMode);
+          echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
           // END - ADD BY TABARY - TOOLTIP
           
           echo '<textarea style="display:none; visibility:hidden;" ';
@@ -2875,7 +2875,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
       } else if ($col=='icon') {
         // BEGIN - ADD BY TABARY - TOOLTIP
-        echo htmlDisplayTooltip($toolTip, $col, $print, $outMode);
+        echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
         // END - ADD BY TABARY - TOOLTIP
         echo '<div dojoType="dijit.form.Select" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" ';
         echo '  style="width: '.($fieldWidth).'px;'.$specificStyle.'"';
@@ -2903,7 +2903,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $fieldWidth=$fieldWidth/2;
         }
         // BEGIN - ADD BY TABARY - TOOLTIP
-        echo htmlDisplayTooltip($toolTip, $col, $print, $outMode);
+        echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
         // END - ADD BY TABARY - TOOLTIP
         echo '<div type="text" dojoType="dijit.form.ValidationTextBox" ';
         echo $name;
