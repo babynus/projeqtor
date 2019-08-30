@@ -709,21 +709,30 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   $listMessageLegalFollowup=SqlList::getListWithCrit ('MessageLegalFollowup',$crit,'idMessageLegal');
   if($listMessageLegalFollowup){
     $nbListMess = count($listMessageLegalFollowup);
-    $cptMess = 0;?>
+    $cptMess = 0;
+    foreach ($listMessageLegalFollowup as $idFollowup=>$idMessage){
+      $messLegal = new MessageLegal($idMessage);
+      if((date('Y-m-d H:i:s') > $messLegal->endDate AND $messLegal->endDate )  OR (date('Y-m-d H:i:s') < $messLegal->startDate AND $messLegal->startDate ) OR $messLegal->idle){
+        unset($listMessageLegalFollowup[$idFollowup]);
+      }
+    }
+   }
+   if($listMessageLegalFollowup){
+    ?>
    <div id="dialogMessageLegal" style="width:100%; visibility:visible; display:inline-block;"> 
      <div id="messageLegallArrow" style="display:block; float:right; margin-top:15px; width:5%; height:140px; margin-top:5px;">
       <div class="iconArrowMessageLegal"><span style="color:white; width:18px; writing-mode:vertical-rl; margin-top:10px;"><?php echo i18n("readToHide");?></span></div>
      </div>
       <?php Sql::beginTransaction();
             foreach ($listMessageLegalFollowup as $idFollowup=>$idMessage){
-              $cptMess++;
               $messFollow = new MessageLegalFollowup($idFollowup);
+              $messLegal = new MessageLegal($idMessage);
+              $cptMess++;
               if(!$messFollow->firstViewDate){
                 $messFollow->firstViewDate = date('Y-m-d H:i:s');
               }
               $messFollow->lastViewDate = date('Y-m-d H:i:s');
               $messFollow->save();
-              $messLegal = new MessageLegal($idMessage);
               $val=$messLegal->description; 
               if($cptMess < $nbListMess){ ?>
                  <div id="messageLegall<?php echo $messFollow->id;?>" style="display:none; margin-top:15px; width:95%; height:135px; overflow-y:auto;"> 
