@@ -544,6 +544,21 @@
 	    if (property_exists($obj,'idProject')) {
 	      $querySelect.=','.$table.'.idProject as idproject';
 	    }
+	    if (get_class($obj)=='Affectation') {
+	      $idTab+=1;
+	      $externalClass = 'Affectable';
+	      $externalObj=new Affectable();
+	      $externalTable = $externalObj->getDatabaseTableName();
+	      $externalTableAlias = 'T' . $idTab;
+	      $fld='name';
+	      $querySelect .= ($querySelect=='')?'':', ';
+	      $querySelect .= $externalTableAlias . '.name as ' . ((Sql::isPgsql())?'"'.$fld.'"':$fld);
+	      $queryFrom .= ' left join ' . $externalTable . ' as ' . $externalTableAlias .
+	      ' on ' . $table . "." . $obj->getDatabaseColumnName('idResource') .
+	      ' = ' . $externalTableAlias . '.' . $externalObj->getDatabaseColumnName('id');
+	      $numField+=1;
+	      $formatter[$numField]='';
+	    }
     }
     // --- build order by clause
     if ($objectClass=='DocumentDirectory') {

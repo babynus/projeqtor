@@ -635,6 +635,9 @@ class PlannedWork extends GeneralWork {
         }
         $plan->notPlannedWork=0;
         $plan->surbooked=0;
+        if ($plan->indivisibility) {
+          $stockPlan=$plan;
+        }
         foreach ($listAss as $ass) {
           if ($ass->notPlannedWork>0) {
             $ass->notPlannedWork=0;
@@ -1243,8 +1246,8 @@ class PlannedWork extends GeneralWork {
             $arrayAssignment[]=$ass;
           }
           $resources[$ass->idResource]=$ress;
-        } 
-      }
+        } // End loop on date => While (1)
+      } // End Loop on each $ass (assignment)
       $fullListPlan=self::storeListPlan($fullListPlan,$plan);
       if (isset($reserved['allPreds'][$plan->id]) ) {
         foreach($reserved['W'] as $idPe=>$pe) {
