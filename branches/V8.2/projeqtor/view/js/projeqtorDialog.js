@@ -10621,4 +10621,8 @@ function controlChar (event){
     }
   });
 }
+
+function refreshDataCloningCountDiv(userSelected){
+	loadContent("../tool/refreshDataCloningCountDiv.php?userSelected="+userSelected, "labelDataCloningCountDiv", "addDataCloningForm");
+}
 //End
