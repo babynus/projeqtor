@@ -76,9 +76,12 @@
   <div class="container" dojoType="dijit.layout.BorderContainer"  liveSplitters="false">
       <div id="detailDiv" dojoType="dijit.layout.ContentPane" region="center"  style="width:<?php echo $widthDetailDiv?>">
         <div id="detailBarShow" class="dijitAccordionTitle" onMouseover="hideList('mouse');" onClick="hideList('click');">
-        <div id="detailBarIcon" align="center"></div>
-      </div>
+          <div id="detailBarIcon" align="center"></div>
+        </div>
         <?php $noselect=true; //include 'objectDetail.php'; ?>
+        <script type="dojo/connect" event="resize" args="evt">
+          saveDataToSession("contentPaneDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("detailDiv").offsetHeight, true);
+        </script>
       </div>
       <div id="detailRightDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positonRightDiv; ?>" splitter="true" style="width:<?php echo $rightWidthResourcePlanning;?>;height:<?php echo $rightHeightResourcePlanning;?>">
               <script type="dojo/connect" event="resize" args="evt">

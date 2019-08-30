@@ -89,7 +89,7 @@
 		   <?php $noselect=true; include 'objectDetail.php'; ?>
 		</div>
             <script type="dojo/connect" event="resize" args="evt">
-              saveDataToSession("contentPaneDetailDivHeight<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
+              saveDataToSession("contentPaneDetailDivHeight<?php echo $objectClass;?>", dojo.byId("detailDiv").offsetHeight, true);
             </script>
 	  <?php 
             if (property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream')) {

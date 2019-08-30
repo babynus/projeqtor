@@ -80,6 +80,9 @@
               <div id="detailBarIcon" align="center"></div> 
             </div> 
             <?php $noselect=true; //include 'objectDetail.php'; ?>
+            <script type="dojo/connect" event="resize" args="evt">
+                saveDataToSession("contentPaneDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("detailDiv").offsetHeight, true);
+            </script>
           </div>
           <div id="detailRightDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positonRightDiv; ?>" splitter="true" style="width:<?php echo $rightWidthGlobalPlanning;?>;height:<?php echo $rightHeightGlobalPlanning;?>">
               <script type="dojo/connect" event="resize" args="evt">
