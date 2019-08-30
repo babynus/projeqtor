@@ -75,6 +75,8 @@ class PlanningElement extends SqlElement {
   public $done;
   public $cancelled;
   public $idPlanningMode;
+  public $minimumThreshold;
+  public $indivisibility;
   public $_workVisibility;
   public $_costVisibility;
   public $idBill;
@@ -135,7 +137,9 @@ class PlanningElement extends SqlElement {
                                   "latestEndDate"=>"hidden",
                                   "isOnCriticalPath"=>"hidden",
                                   "isManualProgress"=>"hidden",
-                                  "surbooked"=>"hidden"
+                                  "surbooked"=>"hidden",
+      "indivisibility"=>"hidden",
+      "minimumThreshold"=>"hidden"
   );   
   
   private static $_predecessorItemsArray = array();
