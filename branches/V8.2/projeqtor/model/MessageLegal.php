@@ -39,6 +39,7 @@ class MessageLegal extends SqlElement {
   public $startDate;
   public $endDate;
   public $idle;
+  public $_spe_followupSynthesis;
   
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="10%"># ${id}</th>
@@ -97,6 +98,17 @@ public function getValidationScript($colName) {
     $colScript .= '</script>';
   }
   return $colScript;
+}
+
+public function drawSpecificItem($item){
+  global $comboDetail, $print, $outMode, $largeWidth;
+  $result="";
+  if ($item=='followupSynthesis') {
+    if($this->id){
+      drawFollowupSynthesis($this);
+    }
+    return $result;
+  }
 }
 
 // ============================================================================**********
