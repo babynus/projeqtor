@@ -6096,7 +6096,7 @@ function refreshDataCloningList() {
 }
 
 function saveDataCloning(){
-	var formVar=dijit.byId('dataCloningForm');
+	var formVar=dijit.byId('addDataCloningForm');
 	  if (dijit.byId('dataCloningUser').get('value') == '' || dijit.byId('dataCloningName').get('value') == '') {
 		  showAlert(i18n("alertInvalidForm"));
 	      return;
@@ -6105,9 +6105,9 @@ function saveDataCloning(){
     	  hideWait();
     	  refreshDataCloningList();
 	  };
-	  if (formVar.validate()) {
+	  if(formVar.validate()) {
 		  showWait();
-		  loadContent("../tool/saveDataCloning.php", "resultDiv", "dataCloningForm", true, false, false, false, callback);
+		  loadContent("../tool/saveDataCloning.php", "resultDiv", "addDataCloningForm", true, false, false, false, callback);
 		  dijit.byId('dialogAddDataCloning').hide();
 	  } else {
 	    showAlert(i18n("alertInvalidForm"));
