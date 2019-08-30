@@ -1079,6 +1079,10 @@ class PlannedWork extends GeneralWork {
 	                  }
                 	}
                 }
+                // Minimum Threshold
+                if ($plan->minimumThreshold and $value<$plan->minimumThreshold) {
+                  $value=0;
+                }
                 if ($value>=0.01) { // Store value on Resource Team if current resource belongs to a Resource Team
                   if (!$ress['team'] and isset($ress['isMemberOf']) and count($ress['isMemberOf'])>0) {
                     // For each Pool current resource is member of
