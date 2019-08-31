@@ -257,7 +257,17 @@ class PlanningElement extends SqlElement {
       $colScript .= '    formChanged();';
       $colScript .= '  }';
       $colScript .= '</script>';
-    }    
+    } else if($colName=='indivisibility'){
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  if(this.checked){';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_minimumThreshold").set("required", true);';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_minimumThreshold").set("class", "input required");';
+      $colScript .= '  }else{';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_minimumThreshold").set("required", false);';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_minimumThreshold").set("class", "input");';
+      $colScript .= '  }';
+      $colScript .= '</script>';
+    } 
     return $colScript;
   }
   
