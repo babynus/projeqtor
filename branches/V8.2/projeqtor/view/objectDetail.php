@@ -2075,17 +2075,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo '    formChanged();';
           echo '</script>';
         }
-        if($col=='indivisibility'){
-        	echo '<script type="dojo/connect" event="onChange" >';
-        	echo '  if(this.checked){';
-        	echo '   dijit.byId("ActivityPlanningElement_minimumThreshold").set("required", true);';
-        	echo '   dijit.byId("ActivityPlanningElement_minimumThreshold").set("class", "input required");';
-        	echo '  }else{';
-        	echo '   dijit.byId("ActivityPlanningElement_minimumThreshold").set("required", false);';
-        	echo '   dijit.byId("ActivityPlanningElement_minimumThreshold").set("class", "input");';
-        	echo '  }';
-        	echo '</script>';
-        }
         echo '</div>';
         // BEGIN - REPLACE BY TABARY - USE isForeignKey GENERIC FUNCTION
       } else if (isForeignKey($col, $obj)) {
@@ -2547,7 +2536,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             $isAmount=true;
           }
         }
-        if ($dataType=='decimal' AND (substr($col, -4, 4)=='Work'  OR $col=='minimumThreshold')){
+        if ($dataType=='decimal' AND (substr($col, -4, 4)=='Work' OR $col=='minimumThreshold') ){
           $isWork=true;
           $fieldWidth=$smallWidth;
         }
@@ -2659,7 +2648,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           		                                'update3Amount','update3FullAmount','update4Amount','update4FullAmount',
                                               'addUntaxedAmount','addFullAmount','availableAmount','availableFullAmount',
                                               'leftAmount','leftFullAmount','reserveAmount','totalLeftCost', 'totalPlannedCost',
-          		                                'marginCost',
+          		                                'marginCost','marginWork',
                                               'untaxedAmount','taxAmount','fullAmount',
                                               'addUntaxedAmount','addTaxAmount','addFullAmount',
                                               'totalUntaxedAmount','totalTaxAmount','totalFullAmount',
@@ -2667,7 +2656,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           );
           if(($isAmount or $isCost) and !in_array($col,$arrayPossibleNegativeAmounts) and $classObj != 'Bill'){
               echo ' constraints="{min:0,max:'.$max.(($isAmount)?',places:2':'').'}" ';
-          } else if($col='minimumThreshold'){
+          } else if( ! in_array($col,$arrayPossibleNegativeAmounts) or $col=='minimumThreshold'){
               echo ' constraints="{min:0,max:'.$max.'}" ';
           } else {
             echo ' constraints="{min:-'.$max.',max:'.$max.(($isAmount)?',places:2':'').'}" ';
