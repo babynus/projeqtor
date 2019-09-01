@@ -123,6 +123,7 @@ class PlannedWork extends GeneralWork {
   public static function plan($projectIdArray, $startDate,$withCriticalPath=true) {
     global $cronnedScript;
   	projeqtor_set_time_limit(300);
+  	debugLog("Start plan "); set_time_limit(10);
   	projeqtor_set_memory_limit('512M');
   	
   	if (!is_array($projectIdArray)) $projectIdArray=array($projectIdArray);
@@ -145,7 +146,7 @@ class PlannedWork extends GeneralWork {
     $result="";
     $startTime=time();
     $startMicroTime=microtime(true);
-    $globalMaxDate=date('Y')+3 . "-12-31"; // Don't try to plan after Dec-31 of current year + 3
+    $globalMaxDate=date('Y')+5 . "-12-31"; // Don't try to plan after Dec-31 of current year + 3
     $globalMinDate=date('Y')-1 . "-01-01"; // Don't try to plan before Jan-01 of current year -1
     
     $arrayPlannedWork=array();
@@ -635,8 +636,8 @@ class PlannedWork extends GeneralWork {
         }
         $plan->notPlannedWork=0;
         $plan->surbooked=0;
-        if ($plan->indivisibility) {
-          $stockPlan=$plan;
+        if ($plan->indivisibility==1 and ($profile=='RECW' or $profile=='FDUR' or $profile=="REGUL" or $profile=="FULL" or $profile=="HALF" or $profile=="QUART")) {
+          $plan->indivisibility=0; // Cannot plan with indivisibility on some modes
         }
         foreach ($listAss as $ass) {
           if ($ass->notPlannedWork>0) {
@@ -738,6 +739,18 @@ class PlannedWork extends GeneralWork {
           }
           $cptThresholdReject=0;
           $cptThresholdRejectMax=100; // will end try to plan if 
+          if ($plan->indivisibility==1) {
+            $stockPlan=$plan;
+            $stockPlanStart=$plan->plannedStartDate;
+            $stockAss=$ass;
+            $stockLeft=$left;
+            $stockResources=$resources;
+            $stockRess=$ress;
+            $stockPlannedWork=$arrayPlannedWork;
+            $countRejectedIndivisibility=0;
+            $countRejectedIndivisibilityMax=1000;
+          }
+          debugLog("indivisibility $plan->indivisibility");
           while (1) {
             $surbooked=0;
             $surbookedWork=0;
@@ -830,10 +843,10 @@ class PlannedWork extends GeneralWork {
               break;
             }
             // Set limits to avoid eternal loop
-            if ($currentDate==$globalMaxDate) { break; }         
-            if ($currentDate==$globalMinDate) { break; } 
+            if ($currentDate>=$globalMaxDate) { break; }         
+            if ($currentDate<=$globalMinDate) { break; } 
             if ($ress['Project#' . $plan->idProject]['rate']==0) { break ; } // Resource allocated to project with rate = 0, cannot be planned
-            if (isOpenDay($currentDate, $r->idCalendarDefinition)) {              
+            if (isOpenDay($currentDate, $r->idCalendarDefinition)) {            
               $planned=0;
               $plannedReserved=0;
               $week=getWeekNumberFromDate($currentDate);
@@ -904,7 +917,25 @@ class PlannedWork extends GeneralWork {
                   $interval+=$step;
               	}
               }
-              if ($planned < $capacity or $profile=='RECW')  {
+              if ( ! ($planned < $capacity or $profile=='RECW') )  {
+                if ($plan->indivisibility==1) {
+                  $plan=$stockPlan;
+                  $plan->plannedStartDate=$stockPlanStart;
+                  $ass=$stockAss;
+                  $fractionStart=0;
+                  $ass->plannedStartDate=null;
+                  $left=$stockLeft;
+                  $arrayPlannedWork=$stockPlannedWork;
+                  $ress=$stockRess;
+                  $resources=$stockResources;
+                  $countRejectedIndivisibility++;
+                  debugLog("$currentDate empty for $plan->refType #$plan->refId - $plan->refName");
+                  debugLog("StartDate=$plan->plannedStartDate");
+                  if ($countRejectedIndivisibility>$countRejectedIndivisibilityMax){
+                    break;
+                  }
+                }
+              } else {
                 $value=$capacity-$planned; 
                 if (isset($ress['real'][$keyElt][$currentDate])) {
                   //$value-=$ress['real'][$keyElt][$currentDate]; // Case 1 remove existing
@@ -1101,6 +1132,24 @@ class PlannedWork extends GeneralWork {
                 } else {
                   $cptThresholdReject=0;
                 }
+                debugLog("$currentDate | $value | $plan->refType #$plan->refId - $plan->refName ");
+                if ($value<=0.01 and $plan->indivisibility==1) {
+                 $plan=$stockPlan;
+                  $plan->plannedStartDate=$stockPlanStart;
+                  $ass=$stockAss;
+                  $fractionStart=0;
+                  $ass->plannedStartDate=null;
+                  $left=$stockLeft;
+                  $arrayPlannedWork=$stockPlannedWork;
+                  $ress=$stockRess;
+                  $resources=$stockResources;
+                  $countRejectedIndivisibility++;
+                  debugLog("$currentDate empty for $plan->refType #$plan->refId - $plan->refName");
+                  debugLog("StartDate=$plan->plannedStartDate");
+                  if ($countRejectedIndivisibility>$countRejectedIndivisibilityMax){
+                    break;
+                  }
+                }
                 if ($value>=0.01) { // Store value on Resource Team if current resource belongs to a Resource Team
                   if (!$ress['team'] and isset($ress['isMemberOf']) and count($ress['isMemberOf'])>0) {
                     // For each Pool current resource is member of
@@ -1240,13 +1289,13 @@ class PlannedWork extends GeneralWork {
               $currentDate=$endPlan;
               $step=1;
             }
-          }
-          if ($changedAss) {
-            $ass->_noHistory=true; // Will only save planning data, so no history required  
-            $arrayAssignment[]=$ass;
-          }
-          $resources[$ass->idResource]=$ress;
+          }          
         } // End loop on date => While (1)
+        if ($changedAss) {
+          $ass->_noHistory=true; // Will only save planning data, so no history required
+          $arrayAssignment[]=$ass;
+        }
+        $resources[$ass->idResource]=$ress;
       } // End Loop on each $ass (assignment)
       $fullListPlan=self::storeListPlan($fullListPlan,$plan);
       if (isset($reserved['allPreds'][$plan->id]) ) {
