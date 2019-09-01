@@ -185,7 +185,19 @@ class ActivityPlanningElementMain extends PlanningElement {
     }else{
       self::$_fieldsAttributes["progress"]='';
     }
-    if($this->indivisibility){
+    $planningMode=new PlanningMode($this->idPlanningMode);
+    $mode=$planningMode->code;
+    debugLog("mode=$mode");
+    if ($mode!='ASAP' and $mode!='ALAP' and $mode!='START' and $mode!='GROUP') {
+      $this->indivisibility=0;
+      $this->minimumThreshold=0;
+      self::$_fieldsAttributes["indivisibility"]='readonly';
+      self::$_fieldsAttributes["minimumThreshold"]='readonly';
+    } else {
+      self::$_fieldsAttributes["indivisibility"]='';
+      self::$_fieldsAttributes["minimumThreshold"]='';
+    }
+    if ($this->indivisibility){
       self::$_fieldsAttributes["minimumThreshold"]='required';
     }
   }
