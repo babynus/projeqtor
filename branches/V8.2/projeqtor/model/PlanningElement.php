@@ -704,7 +704,7 @@ class PlanningElement extends SqlElement {
       // Otherwise, saving planned data may overwrite real work entered on Timesheet for corresponding items.
       $old=$this->getOld();
       $change=false;
-      $fields=array('plannedStartDate','plannedStartFraction','plannedEndDate','plannedEndFraction','latestStartDate','latestEndDate','isOnCriticalPath','notPlannedWork','surbooked');
+      $fields=array('plannedStartDate','plannedStartFraction','plannedEndDate','plannedEndFraction','plannedDuration','latestStartDate','latestEndDate','isOnCriticalPath','notPlannedWork','surbooked');
       if (property_exists($this,'_profile') and $this->_profile=='RECW' and $this->assignedWork!=$old->assignedWork) {
         $extraFields=array('assignedWork','assignedCost','leftWork','leftCost','plannedWork','plannedCost','progress');
         $fields=array_merge($fields,$extraFields);
@@ -712,6 +712,7 @@ class PlanningElement extends SqlElement {
         $this->plannedCost=$this->leftCost+$old->realCost;
         $this->progress=(($this->plannedWork)?round($old->realWork/($this->plannedWork)*100):0);
       }
+      $this->plannedDuration=workDayDiffDates($this->plannedStartDate, $this->plannedEndDate);
       $query="UPDATE ".$this->getDatabaseTableName(). " SET ";
       foreach($fields as $field) {
         if (substr($field,-4)!='Date') {
