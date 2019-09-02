@@ -4775,27 +4775,22 @@ function changeLayoutActivityStream($paramRightDiv){
 
 function heightLaoutActivityStream($objectClass){
   if(empty($objectClass))$objectClass='';
-  if(Parameter::getUserParameter("paramRightDiv") == '3' and Parameter::getUserParameter('paramScreen')=='0' ){
+  if(Parameter::getUserParameter("paramRightDiv") == '3' ){
     $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
     $detailDetailHeight=Parameter::getUserParameter('contentPaneDetailDivHeight'.$objectClass);
     if (!$detailRightHeight) $detailRightHeight=0;
     if($detailRightHeight or $detailRightHeight==="0"){
-      if ($detailRightHeight > 750){
-        $detailRightHeight=750;
-      }
       if ($detailRightHeight < 80){
         $detailRightHeight=100;
       }
-      if($detailDetailHeight==$detailRightHeight or $detailDetailHeight==0 ){
-        $prc=$detailRightHeight*0.2;
-        $detailRightHeight=$detailRightHeight-$prc;
+      if($detailDetailHeight<=$detailRightHeight or $detailDetailHeight==0 ){
+        
+        $detailRightHeight=$detailRightHeight-($detailRightHeight-$detailDetailHeight)-20;
       }
       $rightHeight=$detailRightHeight.'px';
     } else {
       $rightHeight="0%";
     }
-  }else{
-    $rightHeight="20%";
   }
   return $rightHeight;
 }
