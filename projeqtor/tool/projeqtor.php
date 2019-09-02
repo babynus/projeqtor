@@ -4778,7 +4778,6 @@ function heightLaoutActivityStream($objectClass){
   if(Parameter::getUserParameter("paramRightDiv") == '3' and Parameter::getUserParameter('paramScreen')=='0' ){
     $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
     $detailDetailHeight=Parameter::getUserParameter('contentPaneDetailDivHeight'.$objectClass);
-    debugLog('detail :'.$detailDetailHeight.'      ActivityStream :'.$detailRightHeight);
     if (!$detailRightHeight) $detailRightHeight=0;
     if($detailRightHeight or $detailRightHeight==="0"){
       if ($detailRightHeight > 750){
