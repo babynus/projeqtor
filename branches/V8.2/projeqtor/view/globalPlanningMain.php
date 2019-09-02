@@ -39,6 +39,9 @@
   $listHeight=($topDetailDivHeight)?$topDetailDivHeight.'px':$listHeight;
   $detailDivWidthPlanning=Parameter::getUserParameter('contentPaneRightDetailDivWidthGlobalPlanning');
   if($detailDivWidthPlanning or $detailDivWidthPlanning==="0"){
+    if ($detailDivWidthPlanning > 400){
+      $detailDivWidthPlanning=400;
+    }
     $rightWidthGlobalPlanning=$detailDivWidthPlanning.'px';
   } else {
     $rightWidthGlobalPlanning="15%";
