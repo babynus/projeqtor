@@ -52,7 +52,6 @@ var cpMaj=0;
 var cpNum=0;
 var cpChar=0;
 var cpParamLength=0;
-var paramLayoutTab=[0,0,0];
 // =============================================================================
 // = Wait spinner
 // =============================================================================
@@ -6334,7 +6333,7 @@ var listDivSize=0;
 var switchedVisible='';
 var switchListMode='CLICK';
 function switchMode() {
-  if (!switchedMode && paramLayoutTab[0]==0) {
+  if (!switchedMode ) {
     switchedMode=true;
     //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonStandardMode');
     if (!dojo.byId("listDiv")) {
@@ -6353,10 +6352,9 @@ function switchMode() {
     } else {
       showList();
     }
-    dojo.setStyle('verticalLayout',{"opacity": '0.5',"cursor":'not-allowed'});
-    dojo.setStyle('horizontalLayout',{"opacity": '0.5',"cursor":'not-allowed'});
-    paramLayoutTab[2]=1;
-  } else if(  paramLayoutTab[2]==1 ) {
+    loadDiv("menuUserScreenOrganization.php?switchParam=1","mainDivMenu");
+    
+  } else  {
     switchedMode=false;
     //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonSwitchedMode');
     if (!dojo.byId("listDiv")) {
@@ -6378,9 +6376,7 @@ function switchMode() {
       h : listDivSize
     });
     dijit.byId("mainDivContainer").resize();
-    dojo.setStyle('verticalLayout',{"opacity": '1',"cursor":'initial'});
-    dojo.setStyle('horizontalLayout',{"opacity": '0.5',"cursor":'not-allowed'});
-    paramLayoutTab[2]=0;
+    loadDiv("menuUserScreenOrganization.php?switchParam=0","mainDivMenu");
   }
 }
 
@@ -6393,38 +6389,12 @@ function switchModeLayout(paramToSend){
     return false;
   }
   if (paramToSend=='1' || paramToSend=='2'){
-    if(paramLayoutTab[2]==0){
-      if(paramToSend=='2' && paramLayoutTab[0]==0){
-        dojo.setStyle('verticalLayout',{"opacity": '0.5',"cursor":'not-allowed'});
-        dojo.setStyle('changeLayout',{"opacity": '0.5',"cursor":'not-allowed'});
-        dojo.setStyle('horizontalLayout',{"opacity": '1',"cursor":'initial'});
-        paramLayoutTab[0]=1;
-      }else if (paramToSend=='1' && paramLayoutTab[0]==1){
-        dojo.setStyle('verticalLayout',{"opacity": '1',"cursor":'initial'});
-        dojo.setStyle('changeLayout',{"opacity": '1',"cursor":'initial'});
-        dojo.setStyle('horizontalLayout',{"opacity": '0.5',"cursor":'not-allowed'});
-        paramLayoutTab[0]=0;
-      }else{
-        return false;
-      }
       var paramDiv='paramScreen';
       switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
-    }
   }else if(paramToSend=='3'){
     var paramDiv='paramRightDiv';
     switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
   }else if(paramToSend=='4' || paramToSend=='0'){
-    if(paramToSend=='4' && paramLayoutTab[1]==0){
-      dojo.setStyle('layoutList',{"opacity": '0.5',"cursor":'not-allowed'});
-      dojo.setStyle('layoutTab',{"opacity": '1',"cursor":'initial'});
-      paramLayoutTab[1]=1;
-    }else if(paramToSend=='0' && paramLayoutTab[1]==1){
-      dojo.setStyle('layoutList',{"opacity": '1',"cursor":'initial'});
-      dojo.setStyle('layoutTab',{"opacity": '0.5',"cursor":'not-allowed'});
-      paramLayoutTab[1]=0;
-    }else{
-      return false;
-    }
     var paramDiv='paramLayoutObjectDetail';
     switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
   }
@@ -6444,8 +6414,8 @@ function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectI
   }
   if(objectIdScreen !=''){
     loadContent("objectDetail.php", "detailDiv", 'listForm');
-    resizeContainer("objectDetail.php",20);
   }
+  loadDiv("menuUserScreenOrganization.php?"+paramDiv+"="+paramToSend,"mainDivMenu");
 }
 var switchModeSkipAnimation=true;
 function showList(mode, skipAnimation) {
