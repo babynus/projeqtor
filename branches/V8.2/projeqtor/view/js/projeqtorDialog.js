@@ -8145,9 +8145,9 @@ function startMultipleUpdateMode(objectClass) {
     switchMode();
   }
   unselectAllRows("objectGrid");
-  dijit.byId('objectGrid').selection.setMode('multiple');
+  dijit.byId('objectGrid').selection.setMode('extended');
   loadContent('../view/objectMultipleUpdate.php?objectClass=' + objectClass,
-      'detailDiv')
+      'detailDiv');
 }
 
 function saveMultipleUpdateMode(objectClass) {
