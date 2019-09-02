@@ -4725,22 +4725,22 @@ function isLeavesSystemActiv() {
 
 // florent ticket 4102
 function changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail){
-  if(empty($paramScreen)and Parameter::getUserParameter("paramScreen") =='0'){
-    $valScreen='0';
+  if(empty($paramScreen)and Parameter::getUserParameter("paramScreen") =='1'){
+    $valScreen='1';
     $positionListDiv='top';
     Parameter::storeUserParameter("paramScreen", $valScreen);
   }else{
     if($paramScreen=='1'){
-      $valScreen='0';
+      $valScreen='1';
       $positionListDiv='top';
       Parameter::storeUserParameter("paramScreen", $valScreen);
     }else {
-      $valScreen='1';
+      $valScreen='2';
       $positionListDiv='left';
       Parameter::storeUserParameter("paramScreen", $valScreen);
     }
   }
-  if((empty(Parameter::getUserParameter("paramLayoutObjectDetail")) or Parameter::getUserParameter("paramLayoutObjectDetail")=='4')and $paramLayoutObjectDetail=='4') {
+  if((empty(Parameter::getUserParameter("paramLayoutObjectDetail")) or (Parameter::getUserParameter("paramLayoutObjectDetail")=='4')and $paramLayoutObjectDetail=='4')) {
     $valScreen='4';
     Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
   }else if(Parameter::getUserParameter("paramLayoutObjectDetail")=='4' and RequestHandler::getValue('paramLayoutObjectDetail')=='0'){
