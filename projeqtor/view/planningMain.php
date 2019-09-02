@@ -29,7 +29,7 @@
  */
   require_once "../tool/projeqtor.php";
   scriptLog('   ->/view/planningMain.php');
-    
+  
   $listHeight='60%';
   $topDetailDivHeight=Parameter::getUserParameter('contentPaneTopPlanningDivHeight');
   $screenHeight=getSessionValue('screenHeight');
