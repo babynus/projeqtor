@@ -750,7 +750,7 @@ class PlannedWork extends GeneralWork {
             $countRejectedIndivisibility=0;
             $countRejectedIndivisibilityMax=1000;
           }
-          debugLog("indivisibility $plan->indivisibility");
+          debugLog("$plan->refType #$plan->refId - $plan->refName | ass #$ass->id res #$ass->idResource");
           while (1) {
             $surbooked=0;
             $surbookedWork=0;
@@ -929,8 +929,9 @@ class PlannedWork extends GeneralWork {
                   $ress=$stockRess;
                   $resources=$stockResources;
                   $countRejectedIndivisibility++;
-                  debugLog("$currentDate empty for $plan->refType #$plan->refId - $plan->refName");
-                  debugLog("StartDate=$plan->plannedStartDate");
+                  if ($profile=='GROUP') {
+                    //$startDate
+                  }
                   if ($countRejectedIndivisibility>$countRejectedIndivisibilityMax){
                     break;
                   }
@@ -1132,7 +1133,6 @@ class PlannedWork extends GeneralWork {
                 } else {
                   $cptThresholdReject=0;
                 }
-                debugLog("$currentDate | $value | $plan->refType #$plan->refId - $plan->refName ");
                 if ($value<=0.01 and $plan->indivisibility==1) {
                  $plan=$stockPlan;
                   $plan->plannedStartDate=$stockPlanStart;
@@ -1144,8 +1144,9 @@ class PlannedWork extends GeneralWork {
                   $ress=$stockRess;
                   $resources=$stockResources;
                   $countRejectedIndivisibility++;
-                  debugLog("$currentDate empty for $plan->refType #$plan->refId - $plan->refName");
-                  debugLog("StartDate=$plan->plannedStartDate");
+                  if ($profile=='GROUP') {
+                    $ass=reset($listAss);
+                  }
                   if ($countRejectedIndivisibility>$countRejectedIndivisibilityMax){
                     break;
                   }
@@ -1289,14 +1290,14 @@ class PlannedWork extends GeneralWork {
               $currentDate=$endPlan;
               $step=1;
             }
-          }          
-        } // End loop on date => While (1)
-        if ($changedAss) {
-          $ass->_noHistory=true; // Will only save planning data, so no history required
-          $arrayAssignment[]=$ass;
-        }
-        $resources[$ass->idResource]=$ress;
-      } // End Loop on each $ass (assignment)
+          }      // End loop on date => While (1)    
+          if ($changedAss) {
+            $ass->_noHistory=true; // Will only save planning data, so no history required
+            $arrayAssignment[]=$ass;
+          }
+          $resources[$ass->idResource]=$ress;
+        } // End Loop on each $ass (assignment)
+      } 
       $fullListPlan=self::storeListPlan($fullListPlan,$plan);
       if (isset($reserved['allPreds'][$plan->id]) ) {
         foreach($reserved['W'] as $idPe=>$pe) {
