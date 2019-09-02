@@ -52,6 +52,7 @@ var cpMaj=0;
 var cpNum=0;
 var cpChar=0;
 var cpParamLength=0;
+var paramLayoutTab=[0,0,0];
 // =============================================================================
 // = Wait spinner
 // =============================================================================
@@ -6333,7 +6334,7 @@ var listDivSize=0;
 var switchedVisible='';
 var switchListMode='CLICK';
 function switchMode() {
-  if (!switchedMode) {
+  if (!switchedMode && paramLayoutTab[0]==0) {
     switchedMode=true;
     //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonStandardMode');
     if (!dojo.byId("listDiv")) {
@@ -6352,7 +6353,10 @@ function switchMode() {
     } else {
       showList();
     }
-  } else {
+    dojo.setStyle('verticalLayout',{"opacity": '0.5',"cursor":'not-allowed'});
+    dojo.setStyle('horizontalLayout',{"opacity": '0.5',"cursor":'not-allowed'});
+    paramLayoutTab[2]=1;
+  } else if(  paramLayoutTab[2]==1 ) {
     switchedMode=false;
     //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonSwitchedMode');
     if (!dojo.byId("listDiv")) {
@@ -6374,6 +6378,9 @@ function switchMode() {
       h : listDivSize
     });
     dijit.byId("mainDivContainer").resize();
+    dojo.setStyle('verticalLayout',{"opacity": '1',"cursor":'initial'});
+    dojo.setStyle('horizontalLayout',{"opacity": '0.5',"cursor":'not-allowed'});
+    paramLayoutTab[2]=0;
   }
 }
 
@@ -6386,29 +6393,37 @@ function switchModeLayout(paramToSend){
     return false;
   }
   if (paramToSend=='1' || paramToSend=='2'){
-    if(paramToSend=='2'){
-      dojo.setStyle('verticalLayout',{"opacity": '0.5',"cursor":'not-allowed'});
-      dojo.removeAttr('verticalLayout','disabled');
-      dojo.setStyle('changeLayout',{"opacity": '0.5',"cursor":'not-allowed'});
-      dojo.setStyle('horizontalLayout',{"opacity": '1',"cursor":'initial'});
-    }else{
-      dojo.setStyle('verticalLayout',{"opacity": '1',"cursor":'initial'});
-      dojo.setStyle('changeLayout',{"opacity": '1',"cursor":'initial'});
-      dojo.setStyle('horizontalLayout',{"opacity": '0.5',"cursor":'not-allowed'});
+    if(paramLayoutTab[2]==0){
+      if(paramToSend=='2' && paramLayoutTab[0]==0){
+        dojo.setStyle('verticalLayout',{"opacity": '0.5',"cursor":'not-allowed'});
+        dojo.setStyle('changeLayout',{"opacity": '0.5',"cursor":'not-allowed'});
+        dojo.setStyle('horizontalLayout',{"opacity": '1',"cursor":'initial'});
+        paramLayoutTab[0]=1;
+      }else if (paramToSend=='1' && paramLayoutTab[0]==1){
+        dojo.setStyle('verticalLayout',{"opacity": '1',"cursor":'initial'});
+        dojo.setStyle('changeLayout',{"opacity": '1',"cursor":'initial'});
+        dojo.setStyle('horizontalLayout',{"opacity": '0.5',"cursor":'not-allowed'});
+        paramLayoutTab[0]=0;
+      }else{
+        return false;
+      }
+      var paramDiv='paramScreen';
+      switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
     }
-    var paramDiv='paramScreen';
-    switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
-    
   }else if(paramToSend=='3'){
     var paramDiv='paramRightDiv';
     switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
   }else if(paramToSend=='4' || paramToSend=='0'){
-    if(paramToSend=='4'){
+    if(paramToSend=='4' && paramLayoutTab[1]==0){
       dojo.setStyle('layoutList',{"opacity": '0.5',"cursor":'not-allowed'});
       dojo.setStyle('layoutTab',{"opacity": '1',"cursor":'initial'});
-    }else{
+      paramLayoutTab[1]=1;
+    }else if(paramToSend=='0' && paramLayoutTab[1]==1){
       dojo.setStyle('layoutList',{"opacity": '1',"cursor":'initial'});
       dojo.setStyle('layoutTab',{"opacity": '0.5',"cursor":'not-allowed'});
+      paramLayoutTab[1]=0;
+    }else{
+      return false;
     }
     var paramDiv='paramLayoutObjectDetail';
     switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
@@ -8147,7 +8162,7 @@ function startMultipleUpdateMode(objectClass) {
   unselectAllRows("objectGrid");
   dijit.byId('objectGrid').selection.setMode('extended');
   loadContent('../view/objectMultipleUpdate.php?objectClass=' + objectClass,
-      'detailDiv');
+      'detailDiv')
 }
 
 function saveMultipleUpdateMode(objectClass) {

@@ -110,7 +110,7 @@ if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
     </td>
      <?php }?> 
     <td width="<?php echo (isIE())?37:35;?>px" class="<?php echo $simuClass;?>">   
-      <div id="hideMenuBarShowButtonTop" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" title="<?php echo i18n("buttonSwitchedMode");?> >
+      <div id="hideMenuBarShowButtonTop" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;"  >
   		  <a onClick="hideMenuBarShowModeTop();" id="buttonSwitchedMenuBarTopShow" title="<?php echo i18n("buttonShowMenu");?>" >
   		    <span style='display:inline-block;width:24px;height:22px;'>
   		     <div style="position:absolute;top:1px;height:26px;width:24px" dojoType="dijit.form.Button" iconClass="dijitButtonIcon iconHideStream22" class="detailButton">&nbsp;</div>
