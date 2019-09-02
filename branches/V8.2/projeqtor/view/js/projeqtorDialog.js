@@ -6429,6 +6429,7 @@ function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectI
   }
   if(objectIdScreen !=''){
     loadContent("objectDetail.php", "detailDiv", 'listForm');
+    resizeContainer("objectDetail.php",20);
   }
 }
 var switchModeSkipAnimation=true;
