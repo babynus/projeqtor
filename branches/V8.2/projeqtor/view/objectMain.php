@@ -69,28 +69,37 @@
   	  $rightWidth="0%";
   	}
   }
-  $rightHeight=heightLaoutActivityStream($objectClass);
-  
+  if($positonRightDiv=="bottom"){
+    $rightHeight=heightLaoutActivityStream($objectClass);
+  }
 ?>
 <input type="hidden" id="objectClass" value="<?php echo $objectClass;?>" />
 <div id="mainDivContainer" class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
   <div dojoType="dijit.layout.ContentPane" region="center" splitter="true">
     <div class="container" dojoType="dijit.layout.BorderContainer"  liveSplitters="false">
-	  <div id="listDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positionListDiv; ?>" splitter="true" style="height:<?php echo $listHeight;?>;width:<?php echo $widthListDiv; ?>;">
+	  <div id="listDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positionListDiv; ?>" splitter="true" 
+	  style="<?php if($positionListDiv=='top'){echo "height:".$listHeight;}else{ echo "width:".$widthListDiv;}?>">
 	     <script type="dojo/connect" event="resize" args="evt">
             if (switchedMode) return;
-            saveDataToSession("contentPaneTopDetailDivHeight<?php echo $objectClass;?>", dojo.byId("listDiv").offsetHeight, true);
+            var paramDiv=<?php echo json_encode($positionListDiv); ?>;
+            if(paramDiv=="top"){
+              saveDataToSession("contentPaneTopDetailDivHeight<?php echo $objectClass;?>", dojo.byId("listDiv").offsetHeight, true);
+            }
          </script>
 	     <?php include 'objectList.php'?>
 	  </div>
 	  <div id="contentDetailDiv" dojoType="dijit.layout.ContentPane" region="center"  style="width:<?php echo $widthDetailDiv; ?>;">
+	      <script type="dojo/connect" event="resize" args="evt">
+              var paramDiv=<?php echo json_encode($positionListDiv); ?>;
+              if(paramDiv=="top"){
+                saveDataToSession("contentPaneDetailDivHeight<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
+              }
+           </script>
 	  <div class="container" dojoType="dijit.layout.BorderContainer"  liveSplitters="false">
 	    <div id="detailDiv" dojoType="dijit.layout.ContentPane" region="center" >
 		   <?php $noselect=true; include 'objectDetail.php'; ?>
 		</div>
-            <script type="dojo/connect" event="resize" args="evt">
-              saveDataToSession("contentPaneDetailDivHeight<?php echo $objectClass;?>", dojo.byId("detailDiv").offsetHeight, true);
-            </script>
+
 	  <?php 
             if (property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream')) {
               $showNotes=true;
@@ -101,14 +110,20 @@
               $showNotes=false;
             }
       if ($showNotes) {?>
-	  <div id="detailRightDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positonRightDiv; ?>" splitter="true" style="width:<?php echo $rightWidth;?>;height:<?php echo $rightHeight;?>">
+	  <div id="detailRightDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positonRightDiv; ?>" splitter="true" 
+	  style="<?php if($positonRightDiv=="bottom"){echo "height:".$rightHeight;}else{ echo "width:".$rightWidth;}?>">
       	  <script type="dojo/connect" event="resize" args="evt">
-              saveDataToSession("contentPaneRightDetailDivWidth<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetWidth, true);
-              saveDataToSession("contentPaneRightDetailDivHeight<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetHeight, true);
-              var newWidth=dojo.byId("detailRightDiv").offsetWidth;
-              dojo.query(".activityStreamNoteContainer").forEach(function(node, index, nodelist) {
-              node.style.maxWidth=(newWidth-30)+"px";
-              });
+              var paramDiv=<?php echo json_encode($positonRightDiv); ?>;
+              if(paramDiv=='trailing'){
+                saveDataToSession("contentPaneRightDetailDivWidth<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetWidth, true);
+                var newWidth=dojo.byId("detailRightDiv").offsetWidth;
+                dojo.query(".activityStreamNoteContainer").forEach(function(node, index, nodelist) {
+                  node.style.maxWidth=(newWidth-30)+"px";
+                });
+              }else{
+                saveDataToSession("contentPaneRightDetailDivHeight<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetHeight, true);
+              }
+                
       	  </script>
       	  <script type="dojo/connect" event="onLoad" args="evt">
               scrollInto();

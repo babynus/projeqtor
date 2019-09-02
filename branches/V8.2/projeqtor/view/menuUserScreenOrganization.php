@@ -86,7 +86,7 @@ $paramSwitchMode=Parameter::getUserParameter("switchParam");
       </td>
     </tr>
     <tr height="<?php echo $iconSize+8; ?>px">  
-      <td width="<?php echo (isIE())?37:35;?>px"   > 
+      <td width="<?php echo (isIE())?37:35;?>px"> 
         <div id="layoutList" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
         <?php if($paramObjectDetail=='4'){echo 'opacity:0.5;cursor:not-allowed';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
         onclick="<?php if($paramObjectDetail=='0'){echo 'switchModeLayout(\'4\');';}?>">
