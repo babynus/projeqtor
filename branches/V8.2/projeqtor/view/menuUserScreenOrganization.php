@@ -31,12 +31,24 @@ $showMenuBar=Parameter::getUserParameter('paramShowMenuBar');
 $showMenuBar='YES';
 if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
 //Param
+if(RequestHandler::getValue("switchParam")==1){
+  $val=1;
+}else{
+  $val=0;
+}
+Parameter::storeUserParameter("switchParam", $val);
+$paramScreen=Parameter::getUserParameter('paramScreen');
+$paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
+$paramSwitchMode=Parameter::getUserParameter("switchParam");
 ?>
+
 <div id="mainDivMenu" class="container" >
  <table width="100%">
     <tr height="<?php echo $iconSize+8; ?>px">  
       <td width="<?php echo (isIE())?37:35;?>px" > 
-        <div id="changeLayout" class="pseudoButton" onclick="switchMode();" style="height:28px; position:relative;top:-5px; z-index:30; width:30px;" title="<?php echo i18n("buttonSwitchedMode");?>">
+        <div id="changeLayout" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px;
+        <?php if($paramScreen=='2'){echo 'opacity:0.5;cursor:not-allowed';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
+         onclick="<?php if($paramScreen=='1'){echo 'switchMode()';}?>">
           <table >
             <tr>
               <td style="width:28x;text-align:center">
@@ -47,7 +59,9 @@ if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
        </div>
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
-        <div id="horizontalLayout"  class="pseudoButton" onclick="switchModeLayout('1');" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" title="<?php echo i18n("buttonSwitchedMode");?>">
+        <div id="horizontalLayout"  class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
+        <?php if($paramScreen=='1'){echo 'opacity:0.5;cursor:not-allowed';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
+        onclick="<?php if($paramScreen=='2'){echo 'switchModeLayout(\'1\');';}?>">
           <table >
             <tr>
               <td style="width:28x;text-align:center">
@@ -58,7 +72,9 @@ if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
        </div>
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
-        <div id="verticalLayout" lass="pseudoButton" onclick="switchModeLayout('2');" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" title="<?php echo i18n("buttonSwitchedMode");?>">
+        <div id="verticalLayout" lass="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
+        <?php if($paramScreen=='2'or $paramSwitchMode=='1'){echo 'opacity:0.5;cursor:not-allowed';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
+        onclick="<?php if($paramScreen=='1' and $paramSwitchMode=='0'){echo 'switchModeLayout(\'2\');';}?>">
           <table >
             <tr>
               <td style="width:28x;text-align:center">
@@ -71,7 +87,9 @@ if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
     </tr>
     <tr height="<?php echo $iconSize+8; ?>px">  
       <td width="<?php echo (isIE())?37:35;?>px"   > 
-        <div id="layoutList" class="pseudoButton" onclick="switchModeLayout('4');" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" title="<?php echo i18n("buttonSwitchedMode");?>">
+        <div id="layoutList" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
+        <?php if($paramObjectDetail=='4'){echo 'opacity:0.5;cursor:not-allowed';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
+        onclick="<?php if($paramObjectDetail=='0'){echo 'switchModeLayout(\'4\');';}?>">
           <table >
             <tr>
               <td style="width:28x;text-align:center">
@@ -84,7 +102,10 @@ if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
       <td width="<?php echo (isIE())?37:35;?>px" >
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
-        <div id="layoutTab" class="pseudoButton" onclick="switchModeLayout('0');" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" title="<?php echo i18n("buttonSwitchedMode");?>">
+        <div id="layoutTab" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
+        <?php if($paramObjectDetail=='0'){echo 'opacity:0.5;cursor:not-allowed';}?>" 
+        title="<?php echo i18n("buttonSwitchedMode");?>"
+        onclick="<?php if($paramObjectDetail=='4'){echo 'switchModeLayout(\'0\');';}?>">
           <table >
             <tr>
               <td style="width:28x;text-align:center">
@@ -98,7 +119,7 @@ if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
     <tr>
      <?php if (! isIE()) {?>
     <td width="<?php echo (isIE())?37:35;?>px"> 
-      <div  class="pseudoButtonFullScreen <?php echo $simuClass;?>" style="height:28px; position:relative;top:0px; z-index:30; width:30px; right:0px;" onclick="toggleFullScreen()" >
+      <div  class="pseudoButtonFullScreen " style="height:28px; position:relative;top:0px; z-index:30; width:30px; right:0px;" onclick="toggleFullScreen()" >
         <table>
           <tr>
             <td style="width:28px" >
@@ -109,7 +130,7 @@ if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
       </div>
     </td>
      <?php }?> 
-    <td width="<?php echo (isIE())?37:35;?>px" class="<?php echo $simuClass;?>">   
+    <td width="<?php echo (isIE())?37:35;?>px">   
       <div id="hideMenuBarShowButtonTop" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;"  >
   		  <a onClick="hideMenuBarShowModeTop();" id="buttonSwitchedMenuBarTopShow" title="<?php echo i18n("buttonShowMenu");?>" >
   		    <span style='display:inline-block;width:24px;height:22px;'>
