@@ -4787,8 +4787,7 @@ function heightLaoutActivityStream($objectClass){
       if ($detailRightHeight < 80){
         $detailRightHeight=100;
       }
-      if($detailDetailHeight<=$detailRightHeight or $detailDetailHeight==0 ){
-        
+      if(($detailDetailHeight<=$detailRightHeight or $detailDetailHeight==0 )and (!empty($detailDetailHeight))){
         $detailRightHeight=$detailRightHeight-($detailRightHeight-$detailDetailHeight)-20;
       }
       $rightHeight=$detailRightHeight.'px';
@@ -4798,4 +4797,20 @@ function heightLaoutActivityStream($objectClass){
   }
   return $rightHeight;
 }
-        	
+
+function WidthLayoutActivityStream($objectClass){
+  $detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
+  $topDivWidth=Parameter::getUserParameter('contentPaneDetailDivWidth'.$objectClass);
+  if (!$detailDivWidth) $detailDivWidth=0;
+  if($detailDivWidth or $detailDivWidth==="0"){
+    if (($detailDivWidth > $topDivWidth)and (!empty($topDivWidth)) ){
+      $detailDivWidth=$detailDivWidth-($detailDivWidth-$topDivWidth)-20;
+    }else if(empty($topDivWidth)){
+      $detailDivWidth=$detailDivWidth-100;
+    }
+    $rightWidth=$detailDivWidth.'px';
+  } else {
+    $rightWidth="0%";
+  }
+  return $rightWidth;
+}

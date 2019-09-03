@@ -6333,18 +6333,15 @@ var listDivSize=0;
 var switchedVisible='';
 var switchListMode='CLICK';
 function switchModeOn(){
-  console.log('la');
   switchedMode=true;
   //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonStandardMode');
   if (!dojo.byId("listDiv")) {
     if (listDivSize == 0) {
       listDivSize=dojo.byId("centerDiv").offsetHeight * .4;
-      console.log(listDivSize);
     }
     return;
   } else {
     listDivSize=dojo.byId("listDiv").offsetHeight;
-    console.log(listDivSize);
   }
   if (dojo.byId('listDiv_splitter')) {
     dojo.byId('listDiv_splitter').style.display='none';
@@ -6423,7 +6420,6 @@ function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectI
 }
 var switchModeSkipAnimation=true;
 function showList(mode, skipAnimation) {
-  console.log('ici');
   duration=300;
   if (switchModeSkipAnimation) {
     skipAnimation=true;
