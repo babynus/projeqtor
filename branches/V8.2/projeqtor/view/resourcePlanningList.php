@@ -359,9 +359,6 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
 		    </td>
 		  </tr>
 		</table>
-		<div id="listBarShow" class="dijitAccordionTitle" onMouseover="showList('mouse')" onClick="showList('click');">
-		  <div id="listBarIcon" align="center"></div>
-		</div>
 	
 		<div dojoType="dijit.layout.ContentPane" id="planningJsonData" jsId="planningJsonData" 
      style="display: none">

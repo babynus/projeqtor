@@ -71,6 +71,9 @@
 <div id="mainDivContainer" class="container" dojoType="dijit.layout.BorderContainer" onclick="hideDependencyRightClick();">
  <div dojoType="dijit.layout.ContentPane" region="center" splitter="true">
     <div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
+    <div id="listBarShow" class="dijitAccordionTitle"  onMouseover="showList('mouse')" onClick="showList('click');">
+		  <div id="listBarIcon" align="center"></div>
+		</div>
       <div id="listDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positionListDiv; ?>" splitter="true" 
       style="<?php if($positionListDiv=='top'){echo "height:".$listHeight;}else{ echo "width:".$widthListDiv;}?>">
         <script type="dojo/connect" event="resize" args="evt">
@@ -90,10 +93,10 @@
                   }
           </script>
 	  <div class="container" dojoType="dijit.layout.BorderContainer"  liveSplitters="false">
-          <div id="detailDiv" dojoType="dijit.layout.ContentPane" region="center"> 
-            <div id="detailBarShow" class="dijitAccordionTitle" onMouseover="hideList('mouse');" onClick="hideList('click');">
+	  <div id="detailBarShow" class="dijitAccordionTitle" onMouseover="hideList('mouse');" onClick="hideList('click');">
               <div id="detailBarIcon" align="center"></div> 
-            </div> 
+           </div> 
+          <div id="detailDiv" dojoType="dijit.layout.ContentPane" region="center"> 
             <?php $noselect=true; //include 'objectDetail.php'; ?>
           </div>
           <div id="detailRightDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positonRightDiv; ?>" splitter="true"
