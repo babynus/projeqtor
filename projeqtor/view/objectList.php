@@ -919,9 +919,6 @@ if (property_exists($objectClass,'idStatus')) {
         
   </tr>
 </table>
-<div id="listBarShow" class="dijitAccordionTitle" onMouseover="showList('mouse')" onClick="showList('click');">
-  <div id="listBarIcon" align="center"></div>
-</div>
 </div>
 
 <!-- ADD by qCazelles - Filter by Status -->

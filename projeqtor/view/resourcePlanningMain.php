@@ -67,6 +67,9 @@
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="ResourcePlanning" />
 <input type="hidden" name="resourcePlanning" id="resourcePlanning" value="true" />
 <div id="mainDivContainer" class="container" dojoType="dijit.layout.BorderContainer">
+  <div id="listBarShow" class="dijitAccordionTitle" onMouseover="showList('mouse')" onClick="showList('click');">
+	<div id="listBarIcon" align="center"></div>
+  </div>
   <div id="listDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positionListDiv?>" splitter="true" 
    style="<?php if($positionListDiv=='top'){echo "height:".$listHeight;}else{ echo "width:".$widthListDiv;}?>">
     <script type="dojo/connect" event="resize" args="evt">
@@ -86,10 +89,10 @@
            }
       </script>
   <div class="container" dojoType="dijit.layout.BorderContainer"  liveSplitters="false">
-      <div id="detailDiv" dojoType="dijit.layout.ContentPane" region="center"  style="width:<?php echo $widthDetailDiv?>">
-        <div id="detailBarShow" class="dijitAccordionTitle" onMouseover="hideList('mouse');" onClick="hideList('click');">
+  <div id="detailBarShow" class="dijitAccordionTitle" onMouseover="hideList('mouse');" onClick="hideList('click');">
           <div id="detailBarIcon" align="center"></div>
         </div>
+      <div id="detailDiv" dojoType="dijit.layout.ContentPane" region="center"  style="width:<?php echo $widthDetailDiv?>">
         <?php $noselect=true; //include 'objectDetail.php'; ?>
 
       </div>
