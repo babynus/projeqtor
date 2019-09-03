@@ -1694,6 +1694,11 @@ scriptLog("storeListPlan(listPlan,$plan->id)");
       } else {
         $crit.=$str99;
       }
+      if ($elt->indivisibility==1 and $elt->realWork>0) {
+        $crit.=".0";
+      } else {
+        $crit.=".1";
+      }
       $crit.='.'.$elt->wbsSortable;
       $elt->_sortCriteria=$crit;
       $list[$id]=$elt;
