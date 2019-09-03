@@ -4874,6 +4874,8 @@ abstract class SqlElement {
       $type=null;
       if(property_exists($this, "idProject")){
         $proj=($objectClass=='Project')?$this->id:$this->idProject;
+        $project = new Project($proj);
+        $topList=$project->getTopProjectList(true);
       }
       if(property_exists($this, $typeName)){
         $type=$this->$typeName;
@@ -4881,8 +4883,7 @@ abstract class SqlElement {
       $isSubProj = false;
       foreach ($statusMailList as $stm) {
         if($proj and $stm->idProject){
-        	$project = new Project($proj);
-        	if($project->idProject == $stm->idProject){
+        	if(in_array($stm->idProject,$topList)){
         		$statusMailListOrganized[$stm->idEventForMail]=$stm;
         		$isSubProj = true;
         	}
