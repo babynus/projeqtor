@@ -33,14 +33,13 @@ if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
 //Param
 $paramScreen=Parameter::getUserParameter('paramScreen');
 $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
-//debugLog($paramScreen);
 ?>
 
 <div id="mainDivMenu" class="container" >
  <table width="100%">
     <tr height="<?php echo $iconSize+8; ?>px">  
       <td width="<?php echo (isIE())?37:35;?>px" > 
-        <div id="changeLayout" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px;"
+        <div id="changeLayout" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px;
         <?php if( $paramScreen=='5'){echo 'opacity:0.5;cursor:not-allowed';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
          onclick="<?php if($paramScreen=='1' or $paramScreen=='2'){echo 'switchModeLayout(\'5\')';}?>">
           <table >
