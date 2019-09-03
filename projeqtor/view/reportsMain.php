@@ -29,25 +29,13 @@
  */
   require_once "../tool/projeqtor.php";
   scriptLog('   ->/view/reportsMain.php');  
-  //florent
-  $paramScreen=RequestHandler::getValue('paramScreen');
-  $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
-  $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
-  if($positionListDiv=='left'){
-    $widthListDiv='65%';
-    $widthDetailDiv='25%';
-  }else{
-    $widthListDiv='100%';
-    $widthDetailDiv='100%';
-  }
-  ///////
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="Report" />
 <div class="container" dojoType="dijit.layout.BorderContainer">
-  <div id="listReportDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positionListDiv?>" splitter="true" style="width:<?php echo $widthListDiv?>;height:245px;">
+  <div id="listReportDiv" dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:245px;">
    <?php include 'reportsList.php'?>
   </div>
-  <div id="detailReportDiv" dojoType="dijit.layout.ContentPane" region="center" style="width:<?php echo $widthDetailDiv?>">
+  <div id="detailReportDiv" dojoType="dijit.layout.ContentPane" region="center">
    <?php $noselect=true; //include 'objectDetail.php'; ?>
   </div>
-</div>  
+</div>   

@@ -113,7 +113,6 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES
 ('paramPasswordStrength','1'),
 ('paramAttachmentNum',''),
 ('paramScreen','2'),
-('switchParam','0'),
 ('paramRightDiv','3'),
 ('contentPaneRightDetailDivHeight','0'),
 ('contentPaneDetailDivHeight','0'),
