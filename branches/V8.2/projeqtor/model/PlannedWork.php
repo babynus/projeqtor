@@ -123,7 +123,6 @@ class PlannedWork extends GeneralWork {
   public static function plan($projectIdArray, $startDate,$withCriticalPath=true) {
     global $cronnedScript;
   	projeqtor_set_time_limit(300);
-  	debugLog("Start plan "); set_time_limit(10);
   	projeqtor_set_memory_limit('512M');
   	
   	if (!is_array($projectIdArray)) $projectIdArray=array($projectIdArray);
@@ -679,8 +678,6 @@ class PlannedWork extends GeneralWork {
             	foreach ($listAss as $asstmp) {
   	            foreach ($listTopProjects as $idProject) {
   	              $projKey='Project#' . $idProject;
-  	              debugLog($groupAss[$asstmp->idResource]);
-  	              debugLog($groupAss[$asstmp->idResource]['ResourceWork']);
   	              $groupAss[$asstmp->idResource]['ResourceWork'][$projKey]=$groupAss[$asstmp->idResource]['ResourceWork']['init'.$projKey];
   	            }
             	}
@@ -779,7 +776,6 @@ class PlannedWork extends GeneralWork {
               $countRejectedIndivisibility=0;
               $countRejectedIndivisibilityMax=1000;
             }
-            debugLog("$plan->refType #$plan->refId - $plan->refName | ass #$ass->id res #$ass->idResource");
             while (1) {
               $surbooked=0;
               $surbookedWork=0;
