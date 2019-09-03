@@ -37,16 +37,6 @@
     $topDetailDivHeight=$screenHeight-300;
   }
   $listHeight=($topDetailDivHeight)?$topDetailDivHeight.'px':$listHeight;
-  $detailDivWidthPlanning=Parameter::getUserParameter('contentPaneRightDetailDivWidthGlobalPlanning');
-  if($detailDivWidthPlanning or $detailDivWidthPlanning==="0"){
-    if ($detailDivWidthPlanning > 400){
-      $detailDivWidthPlanning=400;
-    }
-    $rightWidthGlobalPlanning=$detailDivWidthPlanning.'px';
-  } else {
-    $rightWidthGlobalPlanning="15%";
-  }
-  
   //florent
   $paramScreen=RequestHandler::getValue('paramScreen');
   $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
@@ -54,12 +44,28 @@
   $currentScreen='GlobalPlanning';
   $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
   $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
+  $rightWidthGlobalPlanning=WidthLayoutActivityStream($currentScreen);
   if($positonRightDiv=="bottom"){
     $rightHeightGlobalPlanning=heightLaoutActivityStream($currentScreen);
   }
-  if($positionListDiv=='left'){
-    $widthListDiv='65%';
-    $widthDetailDiv='25%';
+if($positionListDiv=='left'){
+    $widthListDiv=Parameter::getUserParameter("contentPaneTopDetailDivWidth".$currentScreen);
+    $widthDetailDiv=Parameter::getUserParameter('contentPaneDetailDivWidth'.$currentScreen);
+    if(!empty($widthListDiv) or !empty($widthDetailDiv)){
+      if($widthListDiv <= $widthDetailDiv){
+        $widthDetailDiv=$widthDetailDiv-($widthDetailDiv-$widthListDiv)-20;
+      }else if($widthDetailDiv==0){
+        $widthDetailDiv=($widthListDiv*.5);
+        $widthListDiv=$widthListDiv-$widthDetailDiv;
+      }else if($widthListDiv >= 1800){
+        $widthListDiv=$widthListDiv-$widthDetailDiv;
+      }
+      $widthListDiv= $widthListDiv.'px' ; 
+      $widthDetailDiv=$widthDetailDiv.'px';
+    }else{
+      $widthListDiv= '60%' ;
+      $widthDetailDiv='40%';
+    }
   }else{
     $widthListDiv='100%';
     $widthDetailDiv='100%';
@@ -79,8 +85,11 @@
         <script type="dojo/connect" event="resize" args="evt">
           if (switchedMode) return;
           var paramDiv=<?php echo json_encode($positionListDiv); ?>;
-            if(paramDiv=="top"){
+            var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
+           if(paramDiv=="top" && paramMode!='5'){
               saveDataToSession("contentPaneTopGlobalPlanningDivHeight",dojo.byId("listDiv").offsetHeight);
+            }else{
+              saveDataToSession("contentPaneTopDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("listDiv").offsetWidth, true);
             }
         </script>
         <?php include 'globalPlanningList.php'?>
@@ -88,9 +97,12 @@
       <div id="contentDetailDiv" dojoType="dijit.layout.ContentPane" region="center"   style="width:<?php echo $widthDetailDiv; ?>;">
           <script type="dojo/connect" event="resize" args="evt">
                 var paramDiv=<?php echo json_encode($positionListDiv); ?>;
-                  if(paramDiv=="top"){
+                  var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
+           if(paramDiv=="top" && paramMode!='5'){
                     saveDataToSession("contentPaneDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
-                  }
+                  }else{
+              saveDataToSession("contentPaneDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
+            }
           </script>
 	  <div class="container" dojoType="dijit.layout.BorderContainer"  liveSplitters="false">
 	  <div id="detailBarShow" class="dijitAccordionTitle" onMouseover="hideList('mouse');" onClick="hideList('click');">
@@ -103,13 +115,14 @@
           style="<?php if($positonRightDiv=="bottom"){echo "height:".$rightHeightGlobalPlanning;}else{ echo "width:".$rightWidthGlobalPlanning;}?>" >
               <script type="dojo/connect" event="resize" args="evt">
                 var paramDiv=<?php echo json_encode($positonRightDiv); ?>;
-                  if(paramDiv=='trailing'){
+                  var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
+                  if(paramDiv=='trailing' && paramMode!='5'){
                     saveDataToSession("contentPaneRightDetailDivWidthGlobalPlanning", dojo.byId("detailRightDiv").offsetWidth, true);
                     var newWidth=dojo.byId("detailRightDiv").offsetWidth;
                     dojo.query(".activityStreamNoteContainer").forEach(function(node, index, nodelist) {
                     node.style.maxWidth=(newWidth-30)+"px";
                     });
-                  }else{
+                  }else if(paramMode!='5'){
                     saveDataToSession("contentPaneRightDetailDivHeightGlobalPlanning", dojo.byId("detailRightDiv").offsetHeight, true);
                   }
               </script>
