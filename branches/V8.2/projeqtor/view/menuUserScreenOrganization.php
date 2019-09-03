@@ -31,24 +31,18 @@ $showMenuBar=Parameter::getUserParameter('paramShowMenuBar');
 $showMenuBar='YES';
 if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
 //Param
-if(RequestHandler::getValue("switchParam")==1){
-  $val=1;
-}else{
-  $val=0;
-}
-Parameter::storeUserParameter("switchParam", $val);
 $paramScreen=Parameter::getUserParameter('paramScreen');
 $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
-$paramSwitchMode=Parameter::getUserParameter("switchParam");
+//debugLog($paramScreen);
 ?>
 
 <div id="mainDivMenu" class="container" >
  <table width="100%">
     <tr height="<?php echo $iconSize+8; ?>px">  
       <td width="<?php echo (isIE())?37:35;?>px" > 
-        <div id="changeLayout" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px;
-        <?php if($paramScreen=='2'){echo 'opacity:0.5;cursor:not-allowed';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
-         onclick="<?php if($paramScreen=='1'){echo 'switchMode()';}?>">
+        <div id="changeLayout" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px;"
+        <?php if( $paramScreen=='5'){echo 'opacity:0.5;cursor:not-allowed';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
+         onclick="<?php if($paramScreen=='1' or $paramScreen=='2'){echo 'switchModeLayout(\'5\')';}?>">
           <table >
             <tr>
               <td style="width:28x;text-align:center">
@@ -61,7 +55,7 @@ $paramSwitchMode=Parameter::getUserParameter("switchParam");
       <td width="<?php echo (isIE())?37:35;?>px"  > 
         <div id="horizontalLayout"  class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
         <?php if($paramScreen=='1'){echo 'opacity:0.5;cursor:not-allowed';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
-        onclick="<?php if($paramScreen=='2'){echo 'switchModeLayout(\'1\');';}?>">
+        onclick="<?php if($paramScreen=='2' or $paramScreen=='5'){echo 'switchModeLayout(\'1\');';}?>">
           <table >
             <tr>
               <td style="width:28x;text-align:center">
@@ -73,8 +67,8 @@ $paramSwitchMode=Parameter::getUserParameter("switchParam");
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
         <div id="verticalLayout" lass="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramScreen=='2'or $paramSwitchMode=='1'){echo 'opacity:0.5;cursor:not-allowed';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
-        onclick="<?php if($paramScreen=='1' and $paramSwitchMode=='0'){echo 'switchModeLayout(\'2\');';}?>">
+        <?php if($paramScreen=='2'){echo 'opacity:0.5;cursor:not-allowed';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
+        onclick="<?php if($paramScreen=='1' or $paramScreen=='5' ){echo 'switchModeLayout(\'2\');';}?>">
           <table >
             <tr>
               <td style="width:28x;text-align:center">

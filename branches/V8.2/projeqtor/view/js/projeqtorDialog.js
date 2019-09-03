@@ -6332,53 +6332,6 @@ var switchedMode=false;
 var listDivSize=0;
 var switchedVisible='';
 var switchListMode='CLICK';
-function switchMode() {
-  if (!switchedMode ) {
-    switchedMode=true;
-    //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonStandardMode');
-    if (!dojo.byId("listDiv")) {
-      if (listDivSize == 0) {
-        listDivSize=dojo.byId("centerDiv").offsetHeight * .4;
-      }
-      return;
-    } else {
-      listDivSize=dojo.byId("listDiv").offsetHeight;
-    }
-    if (dojo.byId('listDiv_splitter')) {
-      dojo.byId('listDiv_splitter').style.display='none';
-    }
-    if (dijit.byId('id')) {
-      hideList();
-    } else {
-      showList();
-    }
-    loadDiv("menuUserScreenOrganization.php?switchParam=1","mainDivMenu");
-    
-  } else  {
-    switchedMode=false;
-    //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonSwitchedMode');
-    if (!dojo.byId("listDiv")) {
-      return;
-    }
-    if (dojo.byId('listBarShow')) {
-      dojo.byId('listBarShow').style.display='none';
-    }
-    if (dojo.byId('detailBarShow')) {
-      dojo.byId('detailBarShow').style.display='none';
-    }
-    if (dojo.byId('listDiv_splitter')) {
-      dojo.byId('listDiv_splitter').style.display='block';
-    }
-    if (listDivSize == 0) {
-      listDivSize=dojo.byId("centerDiv").offsetHeight * .4;
-    }
-    dijit.byId("listDiv").resize({
-      h : listDivSize
-    });
-    dijit.byId("mainDivContainer").resize();
-    loadDiv("menuUserScreenOrganization.php?switchParam=0","mainDivMenu");
-  }
-}
 
 function switchModeLayout(paramToSend){
   var currentObject=dojo.byId('objectClass').value;
@@ -6390,6 +6343,27 @@ function switchModeLayout(paramToSend){
   }
   if (paramToSend=='1' || paramToSend=='2'){
       var paramDiv='paramScreen';
+      switchedMode=false;
+      //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonSwitchedMode');
+      if (!dojo.byId("listDiv")) {
+        return;
+      }
+      if (dojo.byId('listBarShow')) {
+        dojo.byId('listBarShow').style.display='none';
+      }
+      if (dojo.byId('detailBarShow')) {
+        dojo.byId('detailBarShow').style.display='none';
+      }
+      if (dojo.byId('listDiv_splitter')) {
+        dojo.byId('listDiv_splitter').style.display='block';
+      }
+      if (listDivSize == 0) {
+        listDivSize=dojo.byId("centerDiv").offsetHeight * .4;
+      }
+      dijit.byId("listDiv").resize({
+        h : listDivSize
+      });
+      dijit.byId("mainDivContainer").resize();
       switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
   }else if(paramToSend=='3'){
     var paramDiv='paramRightDiv';
@@ -6397,6 +6371,27 @@ function switchModeLayout(paramToSend){
   }else if(paramToSend=='4' || paramToSend=='0'){
     var paramDiv='paramLayoutObjectDetail';
     switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
+  }else if (paramToSend=='5'){
+    var paramDiv='paramScreen';
+      switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
+      switchedMode=true;
+      //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonStandardMode');
+      if (!dojo.byId("listDiv")) {
+        if (listDivSize == 0) {
+          listDivSize=dojo.byId("centerDiv").offsetHeight * .4;
+        }
+        return;
+      } else {
+        listDivSize=dojo.byId("listDiv").offsetHeight;
+      }
+      if (dojo.byId('listDiv_splitter')) {
+        dojo.byId('listDiv_splitter').style.display='none';
+      }
+      if (dijit.byId('id')) {
+        hideList();
+      } else {
+        showList();
+    } 
   }
 }
 
@@ -6521,7 +6516,7 @@ function resizeContainer(container, duration) {
 
 function listClick() {
   stockHistory(dojo.byId('objectClass').value, dojo.byId('objectId').value);
-  if (!switchedMode || !switcheModeLayout) {
+  if (!switchedMode ) {
     return;
   }
   setTimeout("hideList(null,true);", 1);

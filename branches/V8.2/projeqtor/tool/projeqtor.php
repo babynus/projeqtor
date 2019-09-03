@@ -4734,7 +4734,11 @@ function changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail){
       $valScreen='1';
       $positionListDiv='top';
       Parameter::storeUserParameter("paramScreen", $valScreen);
-    }else {
+    }else if($paramScreen=='5'){
+      $valScreen='5';
+      $positionListDiv='top';
+      Parameter::storeUserParameter("paramScreen", $valScreen);
+    }else{
       $valScreen='2';
       $positionListDiv='left';
       Parameter::storeUserParameter("paramScreen", $valScreen);

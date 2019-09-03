@@ -46,7 +46,6 @@
   } else {
     $rightWidthPlanning="15%";
   }
-  
   //florent
   $paramScreen=RequestHandler::getValue('paramScreen');
   $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
