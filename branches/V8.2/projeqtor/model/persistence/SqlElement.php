@@ -4878,8 +4878,16 @@ abstract class SqlElement {
       if(property_exists($this, $typeName)){
         $type=$this->$typeName;
       }
+      $isSubProj = false;
       foreach ($statusMailList as $stm) {
-        if ($proj and $stm->idProject and $stm->idProject!=$proj) { // Does not concern current project, must not apply
+        if($proj and $stm->idProject){
+        	$project = new Project($proj);
+        	if($project->idProject == $stm->idProject){
+        		$statusMailListOrganized[$stm->idEventForMail]=$stm;
+        		$isSubProj = true;
+        	}
+        }
+        if ($proj and $stm->idProject and $stm->idProject!=$proj and !$isSubProj) { // Does not concern current project, must not apply
           continue;
         }
         if ($type and $stm->idType and $stm->idType!=$type) { // Does not concern current type, must not apply

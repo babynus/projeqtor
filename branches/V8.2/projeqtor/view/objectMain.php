@@ -29,7 +29,7 @@
  */
   require_once "../tool/projeqtor.php";
   scriptLog('   ->/view/objectMain.php');
-  debugLog($_REQUEST);
+
   //florent
   $paramScreen=RequestHandler::getValue('paramScreen');
   $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
