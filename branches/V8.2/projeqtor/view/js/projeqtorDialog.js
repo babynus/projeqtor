@@ -6339,10 +6339,12 @@ function switchModeOn(){
   if (!dojo.byId("listDiv")) {
     if (listDivSize == 0) {
       listDivSize=dojo.byId("centerDiv").offsetHeight * .4;
+      console.log(listDivSize);
     }
     return;
   } else {
     listDivSize=dojo.byId("listDiv").offsetHeight;
+    console.log(listDivSize);
   }
   if (dojo.byId('listDiv_splitter')) {
     dojo.byId('listDiv_splitter').style.display='none';
@@ -6469,10 +6471,10 @@ function showList(mode, skipAnimation) {
 }
 
 function hideList(mode, skipAnimation) {
-  console.log('la');
   duration=300; 
-  if (mode == 'mouse' && switchListMode == 'CLICK')
+  if (mode == 'mouse' && switchListMode == 'CLICK'){
     return;
+  }
   if (!switchedMode) {
     return;
   }
@@ -6516,7 +6518,7 @@ function hideList(mode, skipAnimation) {
 function resizeContainer(container, duration) {
   sequ=10;
   if (duration) {
-    for (i=0; i < sequ; i++) {
+    for (var i=0; i < sequ; i++) {
       setTimeout('dijit.byId("' + container + '").resize();', i * duration / sequ);
     }
   }
