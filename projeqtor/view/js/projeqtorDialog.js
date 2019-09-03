@@ -6332,6 +6332,50 @@ var switchedMode=false;
 var listDivSize=0;
 var switchedVisible='';
 var switchListMode='CLICK';
+function switchModeOn(){
+  console.log('la');
+  switchedMode=true;
+  //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonStandardMode');
+  if (!dojo.byId("listDiv")) {
+    if (listDivSize == 0) {
+      listDivSize=dojo.byId("centerDiv").offsetHeight * .4;
+    }
+    return;
+  } else {
+    listDivSize=dojo.byId("listDiv").offsetHeight;
+  }
+  if (dojo.byId('listDiv_splitter')) {
+    dojo.byId('listDiv_splitter').style.display='none';
+  }
+  if (dijit.byId('id')) {
+    hideList();
+  } else {
+    showList();
+  } 
+}
+function switchModeOff(){
+  switchedMode=false;
+  //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonSwitchedMode');
+  if (!dojo.byId("listDiv")) {
+    return;
+  }
+  if (dojo.byId('listBarShow')) {
+    dojo.byId('listBarShow').style.display='none';
+  }
+  if (dojo.byId('detailBarShow')) {
+    dojo.byId('detailBarShow').style.display='none';
+  }
+  if (dojo.byId('listDiv_splitter')) {
+    dojo.byId('listDiv_splitter').style.display='block';
+  }
+  if (listDivSize == 0) {
+    listDivSize=dojo.byId("centerDiv").offsetHeight * .4;
+  }
+  dijit.byId("listDiv").resize({
+    h : listDivSize
+  });
+  dijit.byId("mainDivContainer").resize();
+}
 
 function switchModeLayout(paramToSend){
   var currentObject=dojo.byId('objectClass').value;
@@ -6343,28 +6387,8 @@ function switchModeLayout(paramToSend){
   }
   if (paramToSend=='1' || paramToSend=='2'){
       var paramDiv='paramScreen';
-      switchedMode=false;
-      //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonSwitchedMode');
-      if (!dojo.byId("listDiv")) {
-        return;
-      }
-      if (dojo.byId('listBarShow')) {
-        dojo.byId('listBarShow').style.display='none';
-      }
-      if (dojo.byId('detailBarShow')) {
-        dojo.byId('detailBarShow').style.display='none';
-      }
-      if (dojo.byId('listDiv_splitter')) {
-        dojo.byId('listDiv_splitter').style.display='block';
-      }
-      if (listDivSize == 0) {
-        listDivSize=dojo.byId("centerDiv").offsetHeight * .4;
-      }
-      dijit.byId("listDiv").resize({
-        h : listDivSize
-      });
-      dijit.byId("mainDivContainer").resize();
-      switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
+        switchModeOff();
+     switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
   }else if(paramToSend=='3'){
     var paramDiv='paramRightDiv';
     switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
@@ -6374,24 +6398,7 @@ function switchModeLayout(paramToSend){
   }else if (paramToSend=='5'){
     var paramDiv='paramScreen';
       switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
-      switchedMode=true;
-      //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonStandardMode');
-      if (!dojo.byId("listDiv")) {
-        if (listDivSize == 0) {
-          listDivSize=dojo.byId("centerDiv").offsetHeight * .4;
-        }
-        return;
-      } else {
-        listDivSize=dojo.byId("listDiv").offsetHeight;
-      }
-      if (dojo.byId('listDiv_splitter')) {
-        dojo.byId('listDiv_splitter').style.display='none';
-      }
-      if (dijit.byId('id')) {
-        hideList();
-      } else {
-        showList();
-    } 
+      setTimeout("switchModeOn();", 100);
   }
 }
 
@@ -6414,6 +6421,7 @@ function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectI
 }
 var switchModeSkipAnimation=true;
 function showList(mode, skipAnimation) {
+  console.log('ici');
   duration=300;
   if (switchModeSkipAnimation) {
     skipAnimation=true;
@@ -6437,7 +6445,7 @@ function showList(mode, skipAnimation) {
   if (dojo.byId("listDiv").offsetHeight > 100)
     correction=5;
   fullSize=dojo.byId("listDiv").offsetHeight
-      + dojo.byId("detailDiv").offsetHeight - 20 + correction;
+      + dojo.byId("contentDetailDiv").offsetHeight -20+correction;
   if (skipAnimation || !isHtml5()) {
     dijit.byId("listDiv").resize({
       h : fullSize
@@ -6461,6 +6469,7 @@ function showList(mode, skipAnimation) {
 }
 
 function hideList(mode, skipAnimation) {
+  console.log('la');
   duration=300; 
   if (mode == 'mouse' && switchListMode == 'CLICK')
     return;
