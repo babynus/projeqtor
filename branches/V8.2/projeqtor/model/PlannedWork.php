@@ -639,664 +639,700 @@ class PlannedWork extends GeneralWork {
         if ($plan->indivisibility==1 and ($profile=='RECW' or $profile=='FDUR' or $profile=="REGUL" or $profile=="FULL" or $profile=="HALF" or $profile=="QUART")) {
           $plan->indivisibility=0; // Cannot plan with indivisibility on some modes
         }
-        foreach ($listAss as $ass) {
-          if ($ass->notPlannedWork>0) {
-            $ass->notPlannedWork=0;
-            $changedAss=true;
-          }
-          if ($ass->surbooked!=0) {
-            $ass->surbooked=0;
-            $changedAss=true;
-          }
-          if ($profile=='GROUP' and $withProjectRepartition) {
-          	foreach ($listAss as $asstmp) {
-	            foreach ($listTopProjects as $idProject) {
-	              $projKey='Project#' . $idProject;
-	              $groupAss[$asstmp->idResource]['ResourceWork'][$projKey]=$groupAss[$asstmp->idResource]['ResourceWork']['init'.$projKey];
-	            }
-          	}
-          }
-          $changedAss=true;
-          $ass->plannedStartDate=null;
-          $ass->plannedEndDate=null;
-          $r=new ResourceAll($ass->idResource,true);
-          $capacity=($r->capacity)?$r->capacity:1;
-          if (array_key_exists($ass->idResource,$resources)) {
-            $ress=$resources[$ass->idResource];
-          } else {
-            $ress=$r->getWork($startDate, $withProjectRepartition);
-          }
-          $ress['capacity']=$capacity;
-          if ($startPlan>$startDate) {
-            $currentDate=$startPlan;
-          } else {
-            $currentDate=$startDate;
-            if ($step==-1) {
-              $step=1;
-            }
-          }
-          if ($profile=='GROUP') {
-            foreach($groupAss as $id=>$grp) {
-              $groupAss[$id]['leftWorkTmp']=$groupAss[$id]['leftWork'];	
-            }
-          }  
-          $assRate=1;
-          if ($ass->rate) {
-            $assRate=$ass->rate / 100;
-          }
-          // Get data to limit to affectation on each project           
-          if ($withProjectRepartition) {
-            foreach ($listTopProjects as $idProject) {
-              $projKey='Project#' . $idProject;
-              if (! array_key_exists($projKey,$ress)) {
-                $ress[$projKey]=array();
-              }
-              if (! array_key_exists('rate',$ress[$projKey])) {
-                $ress[$projKey]['rate']=$r->getAffectationRate($idProject);
-              }
-            }
-          }
-          //$projRate=$ress['Project#' . $ass->idProject]['rate'];
-          if ($ress['team']) {
-            $capacityRate=$ass->capacity;
-          } else {
-            $capacityRate=round($assRate*$capacity,2);
-          }
-          $keyElt=$ass->refType.'#'.$ass->refId;
-          $left=$ass->leftWork;
-          $regul=false;
-          if ($profile=="REGUL" or $profile=="FULL" or $profile=="HALF" or $profile=="QUART" or $profile=="FDUR") {
-          	$delaiTh=workDayDiffDates($currentDate,$endPlan);
-          	if ($delaiTh and $delaiTh>0) { 
-              $regulTh=round($ass->leftWork/$delaiTh,10);
-          	}
-          	$delai=0;          	
-          	for($tmpDate=$currentDate; $tmpDate<=$endPlan;$tmpDate=addDaysToDate($tmpDate, 1)) {
-          		if (isOffDay($tmpDate,$r->idCalendarDefinition)) continue;
-          		if (isset($ress['real'][$keyElt][$tmpDate])) continue;
-          		$tempCapacity=$capacityRate;
-          		if (isset($ress[$tmpDate])) {
-          			$tempCapacity-=$ress[$tmpDate];
-          		}
-          		if ($tempCapacity<0) $tempCapacity=0;
-          		if ($tempCapacity>=$regulTh or $regulTh==0) {
-          			$delai+=1;
-          		} else {
-          			$delai+=round($tempCapacity/$regulTh,2);
-          		}
-          	}            
-            if ($delai and $delai>0) { 
-              $regul=round(($ass->leftWork/$delai)+0.000005,5);                            
-              $regulDone=0;
-              $interval=0;
-              $regulTarget=0;
-            }
-          }
-          if ($profile=='RECW') {
-            $ass->assignedWork=$ass->realWork;
-            $ass->leftWork=0;
-            $ass->plannedWork=$ass->realWork;
-          }
-          $cptThresholdReject=0;
-          $cptThresholdRejectMax=100; // will end try to plan if 
-          if ($plan->indivisibility==1) {
-            $stockPlan=$plan;
-            $stockPlanStart=$plan->plannedStartDate;
-            $stockAss=$ass;
-            $stockLeft=$left;
-            $stockResources=$resources;
-            $stockRess=$ress;
-            $stockPlannedWork=$arrayPlannedWork;
-            $countRejectedIndivisibility=0;
+        if ($plan->indivisibility==1 and $profile=='GROUP') {
+          $stockPlan=$plan;
+          $stockPlanStart=$plan->plannedStartDate;
+          $stockAss=$ass;
+          $stockLeft=$left;
+          $stockResources=$resources;
+          $stockRess=$ress;
+          $stockPlannedWork=$arrayPlannedWork;
+          $countRejectedIndivisibility=0;
+          $countRejectedIndivisibilityMax=1000;
+          $stockGroupAss=$groupAss;
+        }
+        $restartLoopAllAssignements=true;
+        while ($restartLoopAllAssignements) {
+          if ($plan->indivisibility==1 and $profile=='GROUP') {
+            $plan=$stockPlan;
+            $plan->plannedStartDate=$stockPlanStart;
+            $resources=$stockResources;
+            $arrayPlannedWork=$stockPlannedWork;
+            $countRejectedIndivisibility++;
             $countRejectedIndivisibilityMax=1000;
-          }
-          debugLog("$plan->refType #$plan->refId - $plan->refName | ass #$ass->id res #$ass->idResource");
-          while (1) {
-            $surbooked=0;
-            $surbookedWork=0;
-            if ($withProjectRepartition and isset($reserved['W'])) {
-              //$reserved[type='W']['sum'][idResource][day]+=value
-              // $reserved[type='W'][idPE][idResource][day]=value
-              foreach($reserved['W'] as $idPe=>$arPeW) {
-                if ($idPe=='sum') continue;
-                if ($arPeW['idProj']!=$plan->idProject) continue;
-                if (! isset($arPeW[$ass->idResource]) ) continue;
-                $projectKey='Project#' . $plan->idProject;
-                $week=getWeekNumberFromDate($currentDate);
-                if (! isset($ress[$projectKey][$week])) {
-                  $weeklyReserved=0;
-                  $firstDay=date('Y-m-d',firstDayofWeek(substr($week,-2),substr($week,0,4)));
-                  foreach ($arPeW[$ass->idResource] as $dayOW=>$valReserved) {
-                    $dayToTest=($dayOW==1)?$firstDay:addDaysToDate($firstDay, $dayOW-1);
-                    if (isOpenDay($dayToTest,$ress['calendar']))
-                      $weeklyReserved+=$valReserved;
-                  }
-                  $ress[$projectKey][$week]=$weeklyReserved;
-                  $resources[$ass->idResource][$projectKey][$week]=$weeklyReserved;
-                }
-              }        
+            $groupAss=$stockGroupAss;
+            if ($countRejectedIndivisibility>$countRejectedIndivisibilityMax){
+              break;
             }
-            // Variable Capacity : retreive the capacity for the current date
-            if ($ress['variableCapacity']) {
-              $capacity=$r->getSurbookingCapacity($currentDate);
-              if ($ress['team']) {
-                $capacityRate=$ass->capacity;
-              } else {              
-                $capacityRate=round($assRate*$r->getCapacityPeriod($currentDate),2);
+          }
+          $restartLoopAllAssignements=false;
+          foreach ($listAss as $ass) {
+            if ($ass->notPlannedWork>0) {
+              $ass->notPlannedWork=0;
+              $changedAss=true;
+            }
+            if ($ass->surbooked!=0) {
+              $ass->surbooked=0;
+              $changedAss=true;
+            }
+            if ($profile=='GROUP' and $withProjectRepartition) {
+            	foreach ($listAss as $asstmp) {
+  	            foreach ($listTopProjects as $idProject) {
+  	              $projKey='Project#' . $idProject;
+  	              debugLog($groupAss[$asstmp->idResource]);
+  	              debugLog($groupAss[$asstmp->idResource]['ResourceWork']);
+  	              $groupAss[$asstmp->idResource]['ResourceWork'][$projKey]=$groupAss[$asstmp->idResource]['ResourceWork']['init'.$projKey];
+  	            }
+            	}
+            }
+            $changedAss=true;
+            $ass->plannedStartDate=null;
+            $ass->plannedEndDate=null;
+            $r=new ResourceAll($ass->idResource,true);
+            $capacity=($r->capacity)?$r->capacity:1;
+            if (array_key_exists($ass->idResource,$resources)) {
+              $ress=$resources[$ass->idResource];
+            } else {
+              $ress=$r->getWork($startDate, $withProjectRepartition);
+            }
+            $ress['capacity']=$capacity;
+            if ($startPlan>$startDate) {
+              $currentDate=$startPlan;
+            } else {
+              $currentDate=$startDate;
+              if ($step==-1) {
+                $step=1;
               }
             }
-            $week=getWeekNumberFromDate($currentDate);
-            if (! isset($ress['weekTotalCapacity'][$week])) {
-              $rTemp=new ResourceAll($ass->idResource);
-              $capaWeek=$rTemp->getWeekCapacity($week,$capacityRate);
-              $ress['weekTotalCapacity'][$week]=$capaWeek;
-              $resources[$ass->idResource]['weekTotalCapacity'][$week]=$capaWeek;
-            }            
-            // End Variable capacity
-            if ($ress['team']) { // For team resource, check if unitary resources have enought availability
-              $period=ResourceTeamAffectation::findPeriod($currentDate,$ress['periods']); 
-              if ($period===null) {
-                $capacity=0;
-              } else {
-                $capacity=0;                
-                foreach ($ress['members'] as $idMember=>$member) {
-                  if (isset($ress['periods'][$period]['idResource'][$idMember])) {
-                    $tmpCapa=$ress['periods'][$period]['idResource'][$idMember];
-                    if (isset($member[$currentDate])) {
-                      if (isset($resources[$idMember]) and isset($resources[$idMember]['capacity'])) {
-                        $capaMember=$resources[$idMember]['capacity'];
-                      } else {
-                        $capaMember=SqlList::getFieldFromId('Resource', $idMember, 'capacity');
-                      }
-                      if ($capaMember-$member[$currentDate]>=$tmpCapa) {
-                        // tmpCapa preserved : enough left 
-                      } else {
-                        $tmpCapa=$capaMember-$member[$currentDate];
-                      }                      
-                    }
-                    if ($tmpCapa>0) $capacity+=$tmpCapa;
-                  }                
+            if ($profile=='GROUP') {
+              foreach($groupAss as $id=>$grp) {
+                $groupAss[$id]['leftWorkTmp']=$groupAss[$id]['leftWork'];	
+              }
+            }  
+            $assRate=1;
+            if ($ass->rate) {
+              $assRate=$ass->rate / 100;
+            }
+            // Get data to limit to affectation on each project           
+            if ($withProjectRepartition) {
+              foreach ($listTopProjects as $idProject) {
+                $projKey='Project#' . $idProject;
+                if (! array_key_exists($projKey,$ress)) {
+                  $ress[$projKey]=array();
                 }
-                $capacityNormal=$capacity;
-                $capacity+=$r->getSurbookingCapacity($currentDate,true);
-                if ($capacityNormal==$capacity) unset($capacityNormal);
+                if (! array_key_exists('rate',$ress[$projKey])) {
+                  $ress[$projKey]['rate']=$r->getAffectationRate($idProject);
+                }
+              }
+            }
+            //$projRate=$ress['Project#' . $ass->idProject]['rate'];
+            if ($ress['team']) {
+              $capacityRate=$ass->capacity;
+            } else {
+              $capacityRate=round($assRate*$capacity,2);
+            }
+            $keyElt=$ass->refType.'#'.$ass->refId;
+            $left=$ass->leftWork;
+            $regul=false;
+            if ($profile=="REGUL" or $profile=="FULL" or $profile=="HALF" or $profile=="QUART" or $profile=="FDUR") {
+            	$delaiTh=workDayDiffDates($currentDate,$endPlan);
+            	if ($delaiTh and $delaiTh>0) { 
+                $regulTh=round($ass->leftWork/$delaiTh,10);
+            	}
+            	$delai=0;          	
+            	for($tmpDate=$currentDate; $tmpDate<=$endPlan;$tmpDate=addDaysToDate($tmpDate, 1)) {
+            		if (isOffDay($tmpDate,$r->idCalendarDefinition)) continue;
+            		if (isset($ress['real'][$keyElt][$tmpDate])) continue;
+            		$tempCapacity=$capacityRate;
+            		if (isset($ress[$tmpDate])) {
+            			$tempCapacity-=$ress[$tmpDate];
+            		}
+            		if ($tempCapacity<0) $tempCapacity=0;
+            		if ($tempCapacity>=$regulTh or $regulTh==0) {
+            			$delai+=1;
+            		} else {
+            			$delai+=round($tempCapacity/$regulTh,2);
+            		}
+            	}            
+              if ($delai and $delai>0) { 
+                $regul=round(($ass->leftWork/$delai)+0.000005,5);                            
+                $regulDone=0;
+                $interval=0;
+                $regulTarget=0;
               }
             }
             if ($profile=='RECW') {
-              if ($currentDate<=$endPlan) {
-                $left=$capacity;
-              } else {
-                $left=0;
-              }
+              $ass->assignedWork=$ass->realWork;
+              $ass->leftWork=0;
+              $ass->plannedWork=$ass->realWork;
             }
-            if ($left<0.01) {
-              break;
+            $cptThresholdReject=0;
+            $cptThresholdRejectMax=100; // will end try to plan if 
+            if ($plan->indivisibility==1 and $profile!='GROUP') {
+              $stockPlan=$plan;
+              $stockPlanStart=$plan->plannedStartDate;
+              $stockAss=$ass;
+              $stockLeft=$left;
+              $stockResources=$resources;
+              $stockRess=$ress;
+              $stockPlannedWork=$arrayPlannedWork;
+              $countRejectedIndivisibility=0;
+              $countRejectedIndivisibilityMax=1000;
             }
-            if ($profile=='FIXED' and $currentDate>$plan->validatedEndDate) {
-              $changedAss=true;
-              $ass->notPlannedWork=$left;
-              if ($ass->optional==0) {
-                $plan->notPlannedWork+=$left;
-                $arrayNotPlanned[$ass->id]=$left;
-              }              
-              $left=0;
-              break;
-            }
-            // Set limits to avoid eternal loop
-            if ($currentDate>=$globalMaxDate) { break; }         
-            if ($currentDate<=$globalMinDate) { break; } 
-            if ($ress['Project#' . $plan->idProject]['rate']==0) { break ; } // Resource allocated to project with rate = 0, cannot be planned
-            if (isOpenDay($currentDate, $r->idCalendarDefinition)) {            
-              $planned=0;
-              $plannedReserved=0;
-              $week=getWeekNumberFromDate($currentDate);
-              if (array_key_exists($currentDate, $ress)) {
-                $planned=$ress[$currentDate];
-              }
-              // Specific reservation for RECW that are not planned yet but will be when start and end are known
-              $dow=date('N',strtotime($currentDate));
-              $resourceHasReserved=false;
-              if ($profile=='GROUP') {
-                foreach($groupAss as $assIdResource=>$groupData) {
-                  if (isset($reserved['W']['sum'][$assIdResource][$dow])) {
-                    $resourceHasReserved=true;
-                    break;
-                  }
-                }
-              } else {
-                if (isset($reserved['W']['sum'][$ass->idResource][$dow])) $resourceHasReserved=true;
-              }
-              if ($resourceHasReserved) {
-                foreach($reserved['W'] as $idPe=>$arPeW) {                  
+            debugLog("$plan->refType #$plan->refId - $plan->refName | ass #$ass->id res #$ass->idResource");
+            while (1) {
+              $surbooked=0;
+              $surbookedWork=0;
+              if ($withProjectRepartition and isset($reserved['W'])) {
+                //$reserved[type='W']['sum'][idResource][day]+=value
+                // $reserved[type='W'][idPE][idResource][day]=value
+                foreach($reserved['W'] as $idPe=>$arPeW) {
                   if ($idPe=='sum') continue;
-                  if ($idPe==$plan->id) continue; // we are treating the one we reserved for
-                  // === Determine if we must start to reserve work on this task for RECW tasks that will be planned after
-                  $startReserving=false;
-                  if ($arPeW['start'] ) { // Start is defined from predecessor
-                    if ($arPeW['start']<=$currentDate) { // Start is defined (from predecessor) and passed
-                      $startReserving=true;  
+                  if ($arPeW['idProj']!=$plan->idProject) continue;
+                  if (! isset($arPeW[$ass->idResource]) ) continue;
+                  $projectKey='Project#' . $plan->idProject;
+                  $week=getWeekNumberFromDate($currentDate);
+                  if (! isset($ress[$projectKey][$week])) {
+                    $weeklyReserved=0;
+                    $firstDay=date('Y-m-d',firstDayofWeek(substr($week,-2),substr($week,0,4)));
+                    foreach ($arPeW[$ass->idResource] as $dayOW=>$valReserved) {
+                      $dayToTest=($dayOW==1)?$firstDay:addDaysToDate($firstDay, $dayOW-1);
+                      if (isOpenDay($dayToTest,$ress['calendar']))
+                        $weeklyReserved+=$valReserved;
                     }
-                  } else if (count($reserved['W'][$idPe]['pred'])==0) { // No predecessor, so start is start of project
-                    $startReserving=true; 
-                  } else if (isset($reserved['W'][$idPe]['pred'][$plan->id]) and ($reserved['W'][$idPe]['pred'][$plan->id]['type']=='S-S')) { // Current is predecessor type S-S
-                    $delayPred=$reserved['W'][$idPe]['pred'][$plan->id]['delay'];
-                    if ($delayPred<=0 or addWorkDaysToDate($startPlan,$delayPred+1)<=$currentDate) { // ... and delay make it started 
-                      $startReserving=true;
-                    } 
-                  } else { // Start Date not Set, check if some predecessor exist (but do not count E-E wich are not real predecessors)
-                    $cpt=0;
-                    foreach ($reserved['W'][$idPe]['pred'] as $idPredTmp=>$predTmp) {
-                      if ($predTmp['type']!='E-E') $cpt++;
-                    }
-                    if ($cpt==0) $startReserving=true;
+                    $ress[$projectKey][$week]=$weeklyReserved;
+                    $resources[$ass->idResource][$projectKey][$week]=$weeklyReserved;
                   }
-                  // === Determine if we must end to reserve work on this task for RECW tasks that will be planned after
-                  $endReserving=false;
-                  if ($arPeW['end'] and $arPeW['end']<$currentDate) {
-                    $endReserving=true;
-                  } // NB : cannot take into account E-E with negative delay : we don't know yet when current task will end to determine [end - x days] 
-                  // OK, reserve work ...
-                  if ( $startReserving and ! $endReserving ) {
-                    $reservedWork=0;
-                    if ($profile=='GROUP') {
-                      foreach($groupAss as $assIdResource=>$groupData) {
-                        if (isset($arPeW[$assIdResource]) and isset($arPeW[$assIdResource][$dow]) and $arPeW[$assIdResource][$dow]>$reservedWork) {
-                          $reservedWork=$arPeW[$assIdResource][$dow];
-                        }
-                      }
-                    } else if (isset($arPeW[$ass->idResource][$dow])) {
-                      $reservedWork=$arPeW[$ass->idResource][$dow];
-                    }
-                    $planned+=$reservedWork;
-                    $plannedReserved+=$reservedWork;
-                  }
-                }
-              } 
-              if ($regul) {
-              	if (! isset($ress['real'][$keyElt][$currentDate])) {
-                  $interval+=$step;
-              	}
+                }        
               }
-              if ( ! ($planned < $capacity or $profile=='RECW') )  {
-                if ($plan->indivisibility==1) {
-                  $plan=$stockPlan;
-                  $plan->plannedStartDate=$stockPlanStart;
-                  $ass=$stockAss;
-                  $fractionStart=0;
-                  $ass->plannedStartDate=null;
-                  $left=$stockLeft;
-                  $arrayPlannedWork=$stockPlannedWork;
-                  $ress=$stockRess;
-                  $resources=$stockResources;
-                  $countRejectedIndivisibility++;
-                  if ($profile=='GROUP') {
-                    //$startDate
-                  }
-                  if ($countRejectedIndivisibility>$countRejectedIndivisibilityMax){
-                    break;
-                  }
+              // Variable Capacity : retreive the capacity for the current date
+              if ($ress['variableCapacity']) {
+                $capacity=$r->getSurbookingCapacity($currentDate);
+                if ($ress['team']) {
+                  $capacityRate=$ass->capacity;
+                } else {              
+                  $capacityRate=round($assRate*$r->getCapacityPeriod($currentDate),2);
                 }
-              } else {
-                $value=$capacity-$planned; 
-                if (isset($ress['real'][$keyElt][$currentDate])) {
-                  //$value-=$ress['real'][$keyElt][$currentDate]; // Case 1 remove existing
-                  //if ($value<0) $value=0;
-                  $value=0; // Case 2 : if real is already defined for the given activity, no more work to plan
+              }
+              $week=getWeekNumberFromDate($currentDate);
+              if (! isset($ress['weekTotalCapacity'][$week])) {
+                $rTemp=new ResourceAll($ass->idResource);
+                $capaWeek=$rTemp->getWeekCapacity($week,$capacityRate);
+                $ress['weekTotalCapacity'][$week]=$capaWeek;
+                $resources[$ass->idResource]['weekTotalCapacity'][$week]=$capaWeek;
+              }            
+              // End Variable capacity
+              if ($ress['team']) { // For team resource, check if unitary resources have enought availability
+                $period=ResourceTeamAffectation::findPeriod($currentDate,$ress['periods']); 
+                if ($period===null) {
+                  $capacity=0;
+                } else {
+                  $capacity=0;                
+                  foreach ($ress['members'] as $idMember=>$member) {
+                    if (isset($ress['periods'][$period]['idResource'][$idMember])) {
+                      $tmpCapa=$ress['periods'][$period]['idResource'][$idMember];
+                      if (isset($member[$currentDate])) {
+                        if (isset($resources[$idMember]) and isset($resources[$idMember]['capacity'])) {
+                          $capaMember=$resources[$idMember]['capacity'];
+                        } else {
+                          $capaMember=SqlList::getFieldFromId('Resource', $idMember, 'capacity');
+                        }
+                        if ($capaMember-$member[$currentDate]>=$tmpCapa) {
+                          // tmpCapa preserved : enough left 
+                        } else {
+                          $tmpCapa=$capaMember-$member[$currentDate];
+                        }                      
+                      }
+                      if ($tmpCapa>0) $capacity+=$tmpCapa;
+                    }                
+                  }
+                  $capacityNormal=$capacity;
+                  $capacity+=$r->getSurbookingCapacity($currentDate,true);
+                  if ($capacityNormal==$capacity) unset($capacityNormal);
                 }
-                if ($profile=='RECW') {                 
-                  $dow=date('N',strtotime($currentDate));  
-                  if (isset($reserved['W'][$plan->id][$ass->idResource][$dow]) ) {
-                    //$value=$reserved['W'][$plan->id][$ass->idResource][$dow];     // PBE Start of change - Ticket #4092
-                    $targetValue=$reserved['W'][$plan->id][$ass->idResource][$dow]; //  
-                    $value=($targetValue>$value)?$value:$targetValue;               // PBE End of change
-                    $ass->assignedWork+=$value;
-                    $ass->leftWork+=$value;
-                    $ass->plannedWork+=$value;
-                    $plan->assignedWork+=$value;
-                    $plan->leftWork+=$value;
-                    $plan->plannedWork+=$value;
-                  } else {
-                    $value=0; 
-                  }
+              }
+              if ($profile=='RECW') {
+                if ($currentDate<=$endPlan) {
+                  $left=$capacity;
+                } else {
+                  $left=0;
                 }
-                if ($value>$capacityRate) {
-               	  $value=$capacityRate;
+              }
+              if ($left<0.01) {
+                break;
+              }
+              if ($profile=='FIXED' and $currentDate>$plan->validatedEndDate) {
+                $changedAss=true;
+                $ass->notPlannedWork=$left;
+                if ($ass->optional==0) {
+                  $plan->notPlannedWork+=$left;
+                  $arrayNotPlanned[$ass->id]=$left;
+                }              
+                $left=0;
+                break;
+              }
+              // Set limits to avoid eternal loop
+              if ($currentDate>=$globalMaxDate) { break; }         
+              if ($currentDate<=$globalMinDate) { break; } 
+              if ($ress['Project#' . $plan->idProject]['rate']==0) { break ; } // Resource allocated to project with rate = 0, cannot be planned
+              if (isOpenDay($currentDate, $r->idCalendarDefinition)) {            
+                $planned=0;
+                $plannedReserved=0;
+                $week=getWeekNumberFromDate($currentDate);
+                if (array_key_exists($currentDate, $ress)) {
+                  $planned=$ress[$currentDate];
                 }
-                if ($withProjectRepartition and $profile!='RECW') {
-                  foreach ($listTopProjects as $idProject) {
-                    $projectKey='Project#' . $idProject;
-                    $plannedProj=0;
-                    $rateProj=1;
-                    if (array_key_exists($week,$ress[$projectKey])) {
-                      $plannedProj=$ress[$projectKey][$week];
-                    }
-                    $rateProj=Resource::findAffectationRate($ress[$projectKey]['rate'],$currentDate) / 100;
-                    // ATTENTION, if $rateProj < 0, this means there is no affectation left ...
-                    if ($rateProj<0) {
-                    	$changedAss=true;
-                    	$ass->notPlannedWork=$left;
-                    	$plan->notPlannedWork+=$left;
-                    	if (!$ass->plannedStartDate) $ass->plannedStartDate=$currentDate;
-                    	if (!$ass->plannedEndDate) $ass->plannedEndDate=$currentDate;
-                    	if (!$plan->plannedStartDate) $plan->plannedStartDate=$currentDate;
-                    	if (!$plan->plannedEndDate) $plan->plannedEndDate=$currentDate;
-                    	$arrayNotPlanned[$ass->id]=$left;
-                    	$left=0;
-                    }
-                    //if ($ress['variableCapacity']) {
-                    $capaWeek=$ress['weekTotalCapacity'][getWeekNumberFromDate($currentDate)];
-                    //} else {
-                    //  if ($rateProj==1) {
-                    //    $capaWeek=7*$capacity;
-                    //  } else {
-                    //    $capaWeek=$daysPerWeek*$capacity;
-                    //  }
-                    //}
-                    $leftProj=round($capaWeek*$rateProj,2)-$plannedProj; // capacity for a week
-                    if ($value>$leftProj) {
-                      $value=$leftProj;
-                    }
-                  }
-                }
-                $value=($value>$left)?$left:$value;
-                if ($currentDate==$startPlan and $value>((1-$startFraction)*$capacity)) {
-                  $value=((1-$startFraction)*$capacity);
-                }
-                if ($regul) {
-                	$tmpTarget=$regul;
-                	if (isset($ress['real'][$keyElt][$currentDate])) {
-                	  $tmpTarget=0;
-                	}
-                  $tempCapacity=$capacityRate;
-                  if (isset($ress[$currentDate])) {
-                    $tempCapacity-=$ress[$currentDate];
-                  }
-                  if ($tempCapacity<0) $tempCapacity=0;
-                  if ($tempCapacity<$regulTh and $regulTh!=0) {
-                    $tmpTarget=round($tmpTarget*$tempCapacity/$regulTh,10);
-                  }                                    
-                	$regulTarget=round($regulTarget+$tmpTarget,10);              
-                  $toPlan=$regulTarget-$regulDone;
-                  if ($value>$toPlan) {
-                    $value=$toPlan;
-                  }
-                  if ($workUnit=='days') {
-                    $value=round($value,1);
-                  } else {
-                  	$value=round($value/$halfHour,0)*$halfHour;
-                  }
-                  if ($profile=="FULL" and $toPlan<1 and $interval<$delaiTh) {
-                    $value=0;
-                  }
-                  if ($profile=="HALF" and $interval<$delaiTh) {
-                    if ($toPlan<0.5) {
-                      $value=0;
-                    } else {
-                      $value=0.5;
-                    }
-                  }
-                  if ($profile=="QUART" and $interval<$delaiTh) {
-                    if ($toPlan<0.25) {
-                      $value=0;
-                    } else {
-                      $value=0.25;
-                    }
-                  }
-                  if ($value>($capacity-$planned)) {
-                    $value=$capacity-$planned;
-                    if ($value<0.1) $value=0;
-                  }
-                  $regulDone+=$value;
-                }
+                // Specific reservation for RECW that are not planned yet but will be when start and end are known
+                $dow=date('N',strtotime($currentDate));
+                $resourceHasReserved=false;
                 if ($profile=='GROUP') {
-                	foreach($groupAss as $id=>$grp) {
-                		$grpCapacity=1;
-                		if ($grp['leftWorkTmp']>0) {
-	                		$grpCapacity=$grp['capacity']*$grp['assRate'];
-	                		if ($resources[$id]['variableCapacity']) {
-	                		  if (! isset($resourceOfTheGroup[$id]['capacity'][$currentDate])) {
-	                		    $rTemp=$resourceOfTheGroup[$id]['resObj'];
-	                		    $resourceOfTheGroup[$id]['capacity'][$currentDate]=$rTemp->getSurbookingCapacity($currentDate);
-	                		  } 
-	                		  $grpCapacity=$resourceOfTheGroup[$id]['capacity'][$currentDate]*$grp['assRate'];
-	                		}
-	                		if (isOffDay($currentDate,$grp['calendar'])) {
-	                		  $grpCapacity=0;
-	                		} else if (isset($grp['ResourceWork'][$currentDate])) {
-	                			$grpCapacity-=$grp['ResourceWork'][$currentDate];
-	                		}
-                		}
-                		if ($value>$grpCapacity-$plannedReserved) {
-                			$value=$grpCapacity-$plannedReserved;
-                		}
-                	}
-                	// Check Project Affectation Rate
-                	foreach($groupAss as $id=>$grp) {
-	                  foreach ($listTopProjects as $idProject) {
-	                    $projectKey='Project#' . $idProject;
-	                    $plannedProj=0;
-	                    $rateProj=1;
-	                    if (isset($grp['ResourceWork'][$projectKey][$week])) {
-	                      $plannedProj=$grp['ResourceWork'][$projectKey][$week];
-	                    }
-	                    $rateProj=Resource::findAffectationRate($grp['ResourceWork'][$projectKey]['rate'],$currentDate) / 100;
-	                    $week=getWeekNumberFromDate($currentDate);
-	                    if (! isset($resources[$id]['weekTotalCapacity'][$week])) {
-	                      $rTemp=new Resource($id);
-	                      $capaWeek=$rTemp->getWeekCapacity($week,$capacityRate);	                      
-	                      $resources[$id]['weekTotalCapacity'][$week]=$capaWeek;
-	                    } else {
-	                      $capaWeek=$resources[$id]['weekTotalCapacity'][$week];
-	                    }
-	                    //if ($rateProj==1) {
-	                    //  $leftProj=round(7*$grp['capacity']*$rateProj,2)-$plannedProj; // capacity for a full week
-	                      // => to be able to plan weekends
-	                    //} else {
-	                    //  $leftProj=round($daysPerWeek*$grp['capacity']*$rateProj,2)-$plannedProj; // capacity for a week
-	                    //}
-	                    $leftProj=round($capaWeek*$rateProj,2)-$plannedProj; // capacity for a week
-	                    if ($value>$leftProj) {
-	                      $value=$leftProj;
-	                    }
-	                  }
-                	}
-                	
-                	foreach($groupAss as $id=>$grp) {
-                		$groupAss[$id]['leftWorkTmp']-=$value;
-                		//$groupAss[$id]['weekWorkTmp'][$week]+=$value;
-	                	if ($withProjectRepartition and $value >= 0.01) {
-	                    foreach ($listTopProjects as $idProject) {
-	                      $projectKey='Project#' . $idProject;
-	                      $plannedProj=0;
-	                      if (array_key_exists($week,$grp['ResourceWork'][$projectKey])) {
-	                        $plannedProj=$grp['ResourceWork'][$projectKey][$week];
-	                      }
-	                      $groupAss[$id]['ResourceWork'][$projectKey][$week]=$value+$plannedProj;
-	                    }
-	                  }
-                	}
-                }
-                // Minimum Threshold
-                if ($plan->minimumThreshold and $value<$plan->minimumThreshold and $value<$left) {
-                  $value=0;
-                  $cptThresholdReject++;
-                  if ($cptThresholdReject>$cptThresholdRejectMax) {
-                    $changedAss=true;
-                    $ass->notPlannedWork=$left;
-                    if ($ass->optional==0) {
-                      $plan->notPlannedWork+=$left;
-                      $arrayNotPlanned[$ass->id]=$left;
+                  foreach($groupAss as $assIdResource=>$groupData) {
+                    if (isset($reserved['W']['sum'][$assIdResource][$dow])) {
+                      $resourceHasReserved=true;
+                      break;
                     }
-                    $left=0;
-                    break;
                   }
                 } else {
-                  $cptThresholdReject=0;
+                  if (isset($reserved['W']['sum'][$ass->idResource][$dow])) $resourceHasReserved=true;
                 }
-                if ($value<=0.01 and $plan->indivisibility==1) {
-                 $plan=$stockPlan;
-                  $plan->plannedStartDate=$stockPlanStart;
-                  $ass=$stockAss;
-                  $fractionStart=0;
-                  $ass->plannedStartDate=null;
-                  $left=$stockLeft;
-                  $arrayPlannedWork=$stockPlannedWork;
-                  $ress=$stockRess;
-                  $resources=$stockResources;
-                  $countRejectedIndivisibility++;
-                  if ($profile=='GROUP') {
-                    $ass=reset($listAss);
-                  }
-                  if ($countRejectedIndivisibility>$countRejectedIndivisibilityMax){
-                    break;
-                  }
-                }
-                if ($value>=0.01) { // Store value on Resource Team if current resource belongs to a Resource Team
-                  if (!$ress['team'] and isset($ress['isMemberOf']) and count($ress['isMemberOf'])>0) {
-                    // For each Pool current resource is member of
-                    foreach($ress['isMemberOf'] as $idRT=>$rt) {
-                      if (!isset($resources[$idRT]) ) {
-                        $rTeam=new ResourceAll($idRT,true);
-                        $resources[$idRT]=$rTeam->getWork($startDate, $withProjectRepartition);
+                if ($resourceHasReserved) {
+                  foreach($reserved['W'] as $idPe=>$arPeW) {                  
+                    if ($idPe=='sum') continue;
+                    if ($idPe==$plan->id) continue; // we are treating the one we reserved for
+                    // === Determine if we must start to reserve work on this task for RECW tasks that will be planned after
+                    $startReserving=false;
+                    if ($arPeW['start'] ) { // Start is defined from predecessor
+                      if ($arPeW['start']<=$currentDate) { // Start is defined (from predecessor) and passed
+                        $startReserving=true;  
                       }
-                      $period=ResourceTeamAffectation::findPeriod($currentDate, $resources[$idRT]['periods']);
-                      // For current date : if 1) some work exists on Pool 2) current resource has not null capacity on Pool  
-                      // => must check that there is no constraint 
-                      if ($period and isset($resources[$idRT][$currentDate]) 
-                      and isset($resources[$idRT]['periods'][$period]['idResource'][$ass->idResource])
-                      and $resources[$idRT]['periods'][$period]['idResource'][$ass->idResource]>0) {
-                        $ctrlPlannedWorkOnPool=$resources[$idRT][$currentDate];
-                        $ctrlCanBeDoneByOthersOnPool=0;
-                        foreach ($resources[$idRT]['members'] as $idMember=>$workMember) {
-                          if ($idMember==$ass->idResource) continue; // Do not count work that can be done by current (we count only "others")
-                          if (isset($resources[$idMember]) and isset($resources[$idMember]['capacity'])) {
-                            $ctrlCapaMember=$resources[$idMember]['capacity'];
-                          } else {
-                            $ctrlCapaMember=SqlList::getFieldFromId('Resource', $idMember, 'capacity');
-                          }
-                          $ctrlCanBeDoneByMember=$ctrlCapaMember; // Limit to own capacity of resource
-                          if (isset($resources[$idMember]) and isset($resources[$idMember][$currentDate])) {
-                            $ctrlCanBeDoneByMember-=$resources[$idMember][$currentDate]; // Subtract already planned for member
-                          }
-                          if (isset($resources[$idRT]['periods'][$period]['idResource'][$idMember])) { // If member has capacity on the period
-                            $capaMaxMemberOnPool=$resources[$idRT]['periods'][$period]['idResource'][$idMember];
-                            if ($capaMaxMemberOnPool<$ctrlCanBeDoneByMember) {
-                              $ctrlCanBeDoneByMember=$capaMaxMemberOnPool;
-                            }
-                          } else {
-                            $ctrlCanBeDoneByMember=0;
-                          }
-                          $ctrlCanBeDoneByOthersOnPool+=$ctrlCanBeDoneByMember;
-                        }
-                        $mustBeDoneByCurrentResourceOnPool=$ctrlPlannedWorkOnPool-$ctrlCanBeDoneByOthersOnPool;
-                        $available=$capacity-$mustBeDoneByCurrentResourceOnPool;
-                        if (isset($resources[$ass->idResource][$currentDate]) ) {
-                          $available-=$resources[$ass->idResource][$currentDate]; // Subtract already planned for current user
-                        }
-                        if ($available<$value) {
-                          $value=$available;
-                        }
-                        if ($value<0) $value=0;
+                    } else if (count($reserved['W'][$idPe]['pred'])==0) { // No predecessor, so start is start of project
+                      $startReserving=true; 
+                    } else if (isset($reserved['W'][$idPe]['pred'][$plan->id]) and ($reserved['W'][$idPe]['pred'][$plan->id]['type']=='S-S')) { // Current is predecessor type S-S
+                      $delayPred=$reserved['W'][$idPe]['pred'][$plan->id]['delay'];
+                      if ($delayPred<=0 or addWorkDaysToDate($startPlan,$delayPred+1)<=$currentDate) { // ... and delay make it started 
+                        $startReserving=true;
+                      } 
+                    } else { // Start Date not Set, check if some predecessor exist (but do not count E-E wich are not real predecessors)
+                      $cpt=0;
+                      foreach ($reserved['W'][$idPe]['pred'] as $idPredTmp=>$predTmp) {
+                        if ($predTmp['type']!='E-E') $cpt++;
                       }
+                      if ($cpt==0) $startReserving=true;
                     }
-                    foreach($ress['isMemberOf'] as $idRT=>$rt) {
-                      // Store detail of already planned for each member (will be used when planning Pool)
-                      // Attention, must be done after controlling every Pool, to have the correc $value
-                      $period=ResourceTeamAffectation::findPeriod($currentDate, $resources[$idRT]['periods']);
-                      if ($period and isset($resources[$idRT]['periods'][$period]['idResource'][$ass->idResource])) {
-                        if (! isset($resources[$idRT]['members'][$ass->idResource][$currentDate])) $resources[$idRT]['members'][$ass->idResource][$currentDate]=0;
-                        $resources[$idRT]['members'][$ass->idResource][$currentDate]+=$value;
+                    // === Determine if we must end to reserve work on this task for RECW tasks that will be planned after
+                    $endReserving=false;
+                    if ($arPeW['end'] and $arPeW['end']<$currentDate) {
+                      $endReserving=true;
+                    } // NB : cannot take into account E-E with negative delay : we don't know yet when current task will end to determine [end - x days] 
+                    // OK, reserve work ...
+                    if ( $startReserving and ! $endReserving ) {
+                      $reservedWork=0;
+                      if ($profile=='GROUP') {
+                        foreach($groupAss as $assIdResource=>$groupData) {
+                          if (isset($arPeW[$assIdResource]) and isset($arPeW[$assIdResource][$dow]) and $arPeW[$assIdResource][$dow]>$reservedWork) {
+                            $reservedWork=$arPeW[$assIdResource][$dow];
+                          }
+                        }
+                      } else if (isset($arPeW[$ass->idResource][$dow])) {
+                        $reservedWork=$arPeW[$ass->idResource][$dow];
+                      }
+                      $planned+=$reservedWork;
+                      $plannedReserved+=$reservedWork;
+                    }
+                  }
+                } 
+                if ($regul) {
+                	if (! isset($ress['real'][$keyElt][$currentDate])) {
+                    $interval+=$step;
+                	}
+                }
+                if ( ! ($planned < $capacity or $profile=='RECW') )  {
+                  if ($plan->indivisibility==1) {
+                    if ($profile=='GROUP') {
+                      $restartLoopAllAssignements=true;
+                      $startPlan=addDaysToDate($currentDate,$step);
+                      break(2);
+                    } else {
+                      $plan=$stockPlan;
+                      $plan->plannedStartDate=$stockPlanStart;
+                      $ass=$stockAss;
+                      $fractionStart=0;
+                      $ass->plannedStartDate=null;
+                      $left=$stockLeft;
+                      $arrayPlannedWork=$stockPlannedWork;
+                      $ress=$stockRess;
+                      $resources=$stockResources;
+                      $countRejectedIndivisibility++;
+                      if ($countRejectedIndivisibility>$countRejectedIndivisibilityMax){
+                        break;
                       }
                     }
                   }
-                }
-                if ($value>=0.01) {
-                  if ( $value+$planned > $r->getCapacityPeriod($currentDate)) {
-                    $surbooked=1;
-                    $surbookedWork=$value+$planned-$r->getCapacityPeriod($currentDate);
-                  }else if (isset($capacityNormal)) { // For Pools
-                    if ($value>$capacityNormal) {
-                      $surbooked=1;
-                      $surbookedWork=$value-$capacityNormal;
+                } else {
+                  $value=$capacity-$planned; 
+                  if (isset($ress['real'][$keyElt][$currentDate])) {
+                    //$value-=$ress['real'][$keyElt][$currentDate]; // Case 1 remove existing
+                    //if ($value<0) $value=0;
+                    $value=0; // Case 2 : if real is already defined for the given activity, no more work to plan
+                  }
+                  if ($profile=='RECW') {                 
+                    $dow=date('N',strtotime($currentDate));  
+                    if (isset($reserved['W'][$plan->id][$ass->idResource][$dow]) ) {
+                      //$value=$reserved['W'][$plan->id][$ass->idResource][$dow];     // PBE Start of change - Ticket #4092
+                      $targetValue=$reserved['W'][$plan->id][$ass->idResource][$dow]; //  
+                      $value=($targetValue>$value)?$value:$targetValue;               // PBE End of change
+                      $ass->assignedWork+=$value;
+                      $ass->leftWork+=$value;
+                      $ass->plannedWork+=$value;
+                      $plan->assignedWork+=$value;
+                      $plan->leftWork+=$value;
+                      $plan->plannedWork+=$value;
+                    } else {
+                      $value=0; 
                     }
                   }
-                  if ($profile=='FIXED' and $currentDate==$plan->validatedStartDate) {
-                    $fractionStart=$plan->validatedStartFraction;
-                  } else {
-                    $fractionStart=($capacity!=0)?round($planned/$capacity,2):'0';
+                  if ($value>$capacityRate) {
+                 	  $value=$capacityRate;
                   }
-                  $fraction=($capacity!=0)?round($value/$capacity,2):'1';;             
-                  $plannedWork=new PlannedWork();
-                  $plannedWork->idResource=$ass->idResource;
-                  $plannedWork->idProject=$ass->idProject;
-                  $plannedWork->refType=$ass->refType;
-                  $plannedWork->refId=$ass->refId;
-                  $plannedWork->idAssignment=$ass->id;
-                  $plannedWork->work=$value;
-                  $plannedWork->surbooked=$surbooked;
-                  $plannedWork->surbookedWork=$surbookedWork;
-                  $plannedWork->setDates($currentDate);
-                  $arrayPlannedWork[]=$plannedWork;
-                  if (! $ass->plannedStartDate or $ass->plannedStartDate>$currentDate) {
-                    $ass->plannedStartDate=$currentDate;
-                    $ass->plannedStartFraction=$fractionStart;
-                  }
-                  if (! $ass->plannedEndDate or $ass->plannedEndDate<$currentDate) {
-                    $ass->plannedEndDate=$currentDate;
-                    $ass->plannedEndFraction=min(($fractionStart+$fraction),1);
-                  }
-                  if (! $plan->plannedStartDate or $plan->plannedStartDate>$currentDate) {
-                    $plan->plannedStartDate=$currentDate;
-                    $plan->plannedStartFraction=$fractionStart;
-                  } else if ($plan->plannedStartDate==$currentDate and $plan->plannedStartFraction<$fractionStart) {
-                    $plan->plannedStartFraction=$fractionStart;
-                  }
-                  if ($surbooked) {
-                    $plan->surbooked=1;
-                    $ass->surbooked=1;
-                    $changedAss=true;
-                  }                  
-                  if (! $plan->plannedEndDate or $plan->plannedEndDate<$currentDate) {
-                    if ($ass->realEndDate && $ass->realEndDate>$currentDate) {
-                  		$plan->plannedEndDate=$ass->realEndDate;
-                  		$plan->plannedEndFraction=1;
-                  	} else {
-                      $plan->plannedEndDate=$currentDate;
-                      $plan->plannedEndFraction=min(($fractionStart+$fraction),1);
-                  	}
-                  } else if ($plan->plannedEndDate==$currentDate and $plan->plannedEndFraction<$fraction) {
-                    $plan->plannedEndFraction=min(($fractionStart+$fraction),1);
-                  }
-                  $changedAss=true;
-                  $left-=$value;
-                  $ress[$currentDate]=$value+$planned-$plannedReserved;
-                  // Set value on each project (from current to top)
-                  if ($withProjectRepartition and $value >= 0.01) {
+                  if ($withProjectRepartition and $profile!='RECW') {
                     foreach ($listTopProjects as $idProject) {
                       $projectKey='Project#' . $idProject;
                       $plannedProj=0;
+                      $rateProj=1;
                       if (array_key_exists($week,$ress[$projectKey])) {
                         $plannedProj=$ress[$projectKey][$week];
                       }
-                      $ress[$projectKey][$week]=$value+$plannedProj;               
+                      $rateProj=Resource::findAffectationRate($ress[$projectKey]['rate'],$currentDate) / 100;
+                      // ATTENTION, if $rateProj < 0, this means there is no affectation left ...
+                      if ($rateProj<0) {
+                      	$changedAss=true;
+                      	$ass->notPlannedWork=$left;
+                      	$plan->notPlannedWork+=$left;
+                      	if (!$ass->plannedStartDate) $ass->plannedStartDate=$currentDate;
+                      	if (!$ass->plannedEndDate) $ass->plannedEndDate=$currentDate;
+                      	if (!$plan->plannedStartDate) $plan->plannedStartDate=$currentDate;
+                      	if (!$plan->plannedEndDate) $plan->plannedEndDate=$currentDate;
+                      	$arrayNotPlanned[$ass->id]=$left;
+                      	$left=0;
+                      }
+                      //if ($ress['variableCapacity']) {
+                      $capaWeek=$ress['weekTotalCapacity'][getWeekNumberFromDate($currentDate)];
+                      //} else {
+                      //  if ($rateProj==1) {
+                      //    $capaWeek=7*$capacity;
+                      //  } else {
+                      //    $capaWeek=$daysPerWeek*$capacity;
+                      //  }
+                      //}
+                      $leftProj=round($capaWeek*$rateProj,2)-$plannedProj; // capacity for a week
+                      if ($value>$leftProj) {
+                        $value=$leftProj;
+                      }
                     }
                   }
-
-                }
-              }            
+                  $value=($value>$left)?$left:$value;
+                  if ($currentDate==$startPlan and $value>((1-$startFraction)*$capacity)) {
+                    $value=((1-$startFraction)*$capacity);
+                  }
+                  if ($regul) {
+                  	$tmpTarget=$regul;
+                  	if (isset($ress['real'][$keyElt][$currentDate])) {
+                  	  $tmpTarget=0;
+                  	}
+                    $tempCapacity=$capacityRate;
+                    if (isset($ress[$currentDate])) {
+                      $tempCapacity-=$ress[$currentDate];
+                    }
+                    if ($tempCapacity<0) $tempCapacity=0;
+                    if ($tempCapacity<$regulTh and $regulTh!=0) {
+                      $tmpTarget=round($tmpTarget*$tempCapacity/$regulTh,10);
+                    }                                    
+                  	$regulTarget=round($regulTarget+$tmpTarget,10);              
+                    $toPlan=$regulTarget-$regulDone;
+                    if ($value>$toPlan) {
+                      $value=$toPlan;
+                    }
+                    if ($workUnit=='days') {
+                      $value=round($value,1);
+                    } else {
+                    	$value=round($value/$halfHour,0)*$halfHour;
+                    }
+                    if ($profile=="FULL" and $toPlan<1 and $interval<$delaiTh) {
+                      $value=0;
+                    }
+                    if ($profile=="HALF" and $interval<$delaiTh) {
+                      if ($toPlan<0.5) {
+                        $value=0;
+                      } else {
+                        $value=0.5;
+                      }
+                    }
+                    if ($profile=="QUART" and $interval<$delaiTh) {
+                      if ($toPlan<0.25) {
+                        $value=0;
+                      } else {
+                        $value=0.25;
+                      }
+                    }
+                    if ($value>($capacity-$planned)) {
+                      $value=$capacity-$planned;
+                      if ($value<0.1) $value=0;
+                    }
+                    $regulDone+=$value;
+                  }
+                  if ($profile=='GROUP') {
+                  	foreach($groupAss as $id=>$grp) {
+                  		$grpCapacity=1;
+                  		if ($grp['leftWorkTmp']>0) {
+  	                		$grpCapacity=$grp['capacity']*$grp['assRate'];
+  	                		if ($resources[$id]['variableCapacity']) {
+  	                		  if (! isset($resourceOfTheGroup[$id]['capacity'][$currentDate])) {
+  	                		    $rTemp=$resourceOfTheGroup[$id]['resObj'];
+  	                		    $resourceOfTheGroup[$id]['capacity'][$currentDate]=$rTemp->getSurbookingCapacity($currentDate);
+  	                		  } 
+  	                		  $grpCapacity=$resourceOfTheGroup[$id]['capacity'][$currentDate]*$grp['assRate'];
+  	                		}
+  	                		if (isOffDay($currentDate,$grp['calendar'])) {
+  	                		  $grpCapacity=0;
+  	                		} else if (isset($grp['ResourceWork'][$currentDate])) {
+  	                			$grpCapacity-=$grp['ResourceWork'][$currentDate];
+  	                		}
+                  		}
+                  		if ($value>$grpCapacity-$plannedReserved) {
+                  			$value=$grpCapacity-$plannedReserved;
+                  		}
+                  	}
+                  	// Check Project Affectation Rate
+                  	foreach($groupAss as $id=>$grp) {
+  	                  foreach ($listTopProjects as $idProject) {
+  	                    $projectKey='Project#' . $idProject;
+  	                    $plannedProj=0;
+  	                    $rateProj=1;
+  	                    if (isset($grp['ResourceWork'][$projectKey][$week])) {
+  	                      $plannedProj=$grp['ResourceWork'][$projectKey][$week];
+  	                    }
+  	                    $rateProj=Resource::findAffectationRate($grp['ResourceWork'][$projectKey]['rate'],$currentDate) / 100;
+  	                    $week=getWeekNumberFromDate($currentDate);
+  	                    if (! isset($resources[$id]['weekTotalCapacity'][$week])) {
+  	                      $rTemp=new Resource($id);
+  	                      $capaWeek=$rTemp->getWeekCapacity($week,$capacityRate);	                      
+  	                      $resources[$id]['weekTotalCapacity'][$week]=$capaWeek;
+  	                    } else {
+  	                      $capaWeek=$resources[$id]['weekTotalCapacity'][$week];
+  	                    }
+  	                    //if ($rateProj==1) {
+  	                    //  $leftProj=round(7*$grp['capacity']*$rateProj,2)-$plannedProj; // capacity for a full week
+  	                      // => to be able to plan weekends
+  	                    //} else {
+  	                    //  $leftProj=round($daysPerWeek*$grp['capacity']*$rateProj,2)-$plannedProj; // capacity for a week
+  	                    //}
+  	                    $leftProj=round($capaWeek*$rateProj,2)-$plannedProj; // capacity for a week
+  	                    if ($value>$leftProj) {
+  	                      $value=$leftProj;
+  	                    }
+  	                  }
+                  	}
+                  	
+                  	foreach($groupAss as $id=>$grp) {
+                  		$groupAss[$id]['leftWorkTmp']-=$value;
+                  		//$groupAss[$id]['weekWorkTmp'][$week]+=$value;
+  	                	if ($withProjectRepartition and $value >= 0.01) {
+  	                    foreach ($listTopProjects as $idProject) {
+  	                      $projectKey='Project#' . $idProject;
+  	                      $plannedProj=0;
+  	                      if (array_key_exists($week,$grp['ResourceWork'][$projectKey])) {
+  	                        $plannedProj=$grp['ResourceWork'][$projectKey][$week];
+  	                      }
+  	                      $groupAss[$id]['ResourceWork'][$projectKey][$week]=$value+$plannedProj;
+  	                    }
+  	                  }
+                  	}
+                  }
+                  // Minimum Threshold
+                  if ($plan->minimumThreshold and $value<$plan->minimumThreshold and $value<$left) {
+                    $value=0;
+                    $cptThresholdReject++;
+                    if ($cptThresholdReject>$cptThresholdRejectMax) {
+                      $changedAss=true;
+                      $ass->notPlannedWork=$left;
+                      if ($ass->optional==0) {
+                        $plan->notPlannedWork+=$left;
+                        $arrayNotPlanned[$ass->id]=$left;
+                      }
+                      $left=0;
+                      break;
+                    }
+                  } else {
+                    $cptThresholdReject=0;
+                  }
+                  if ($value<=0.01 and $plan->indivisibility==1) {
+                    if ($profile=='GROUP') {
+                      $restartLoopAllAssignements=true;
+                      $startPlan=addDaysToDate($currentDate,$step);
+                      break(2);
+                    } else {                   
+                      $plan=$stockPlan;
+                      $plan->plannedStartDate=$stockPlanStart;
+                      $ass=$stockAss;
+                      $fractionStart=0;
+                      $ass->plannedStartDate=null;
+                      $left=$stockLeft;
+                      $arrayPlannedWork=$stockPlannedWork;
+                      $ress=$stockRess;
+                      $resources=$stockResources;
+                      $countRejectedIndivisibility++;
+                      if ($countRejectedIndivisibility>$countRejectedIndivisibilityMax){
+                        break;
+                      }
+                    }
+                  }
+                  if ($value>=0.01) { // Store value on Resource Team if current resource belongs to a Resource Team
+                    if (!$ress['team'] and isset($ress['isMemberOf']) and count($ress['isMemberOf'])>0) {
+                      // For each Pool current resource is member of
+                      foreach($ress['isMemberOf'] as $idRT=>$rt) {
+                        if (!isset($resources[$idRT]) ) {
+                          $rTeam=new ResourceAll($idRT,true);
+                          $resources[$idRT]=$rTeam->getWork($startDate, $withProjectRepartition);
+                        }
+                        $period=ResourceTeamAffectation::findPeriod($currentDate, $resources[$idRT]['periods']);
+                        // For current date : if 1) some work exists on Pool 2) current resource has not null capacity on Pool  
+                        // => must check that there is no constraint 
+                        if ($period and isset($resources[$idRT][$currentDate]) 
+                        and isset($resources[$idRT]['periods'][$period]['idResource'][$ass->idResource])
+                        and $resources[$idRT]['periods'][$period]['idResource'][$ass->idResource]>0) {
+                          $ctrlPlannedWorkOnPool=$resources[$idRT][$currentDate];
+                          $ctrlCanBeDoneByOthersOnPool=0;
+                          foreach ($resources[$idRT]['members'] as $idMember=>$workMember) {
+                            if ($idMember==$ass->idResource) continue; // Do not count work that can be done by current (we count only "others")
+                            if (isset($resources[$idMember]) and isset($resources[$idMember]['capacity'])) {
+                              $ctrlCapaMember=$resources[$idMember]['capacity'];
+                            } else {
+                              $ctrlCapaMember=SqlList::getFieldFromId('Resource', $idMember, 'capacity');
+                            }
+                            $ctrlCanBeDoneByMember=$ctrlCapaMember; // Limit to own capacity of resource
+                            if (isset($resources[$idMember]) and isset($resources[$idMember][$currentDate])) {
+                              $ctrlCanBeDoneByMember-=$resources[$idMember][$currentDate]; // Subtract already planned for member
+                            }
+                            if (isset($resources[$idRT]['periods'][$period]['idResource'][$idMember])) { // If member has capacity on the period
+                              $capaMaxMemberOnPool=$resources[$idRT]['periods'][$period]['idResource'][$idMember];
+                              if ($capaMaxMemberOnPool<$ctrlCanBeDoneByMember) {
+                                $ctrlCanBeDoneByMember=$capaMaxMemberOnPool;
+                              }
+                            } else {
+                              $ctrlCanBeDoneByMember=0;
+                            }
+                            $ctrlCanBeDoneByOthersOnPool+=$ctrlCanBeDoneByMember;
+                          }
+                          $mustBeDoneByCurrentResourceOnPool=$ctrlPlannedWorkOnPool-$ctrlCanBeDoneByOthersOnPool;
+                          $available=$capacity-$mustBeDoneByCurrentResourceOnPool;
+                          if (isset($resources[$ass->idResource][$currentDate]) ) {
+                            $available-=$resources[$ass->idResource][$currentDate]; // Subtract already planned for current user
+                          }
+                          if ($available<$value) {
+                            $value=$available;
+                          }
+                          if ($value<0) $value=0;
+                        }
+                      }
+                      foreach($ress['isMemberOf'] as $idRT=>$rt) {
+                        // Store detail of already planned for each member (will be used when planning Pool)
+                        // Attention, must be done after controlling every Pool, to have the correc $value
+                        $period=ResourceTeamAffectation::findPeriod($currentDate, $resources[$idRT]['periods']);
+                        if ($period and isset($resources[$idRT]['periods'][$period]['idResource'][$ass->idResource])) {
+                          if (! isset($resources[$idRT]['members'][$ass->idResource][$currentDate])) $resources[$idRT]['members'][$ass->idResource][$currentDate]=0;
+                          $resources[$idRT]['members'][$ass->idResource][$currentDate]+=$value;
+                        }
+                      }
+                    }
+                  }
+                  if ($value>=0.01) {
+                    if ( $value+$planned > $r->getCapacityPeriod($currentDate)) {
+                      $surbooked=1;
+                      $surbookedWork=$value+$planned-$r->getCapacityPeriod($currentDate);
+                    }else if (isset($capacityNormal)) { // For Pools
+                      if ($value>$capacityNormal) {
+                        $surbooked=1;
+                        $surbookedWork=$value-$capacityNormal;
+                      }
+                    }
+                    if ($profile=='FIXED' and $currentDate==$plan->validatedStartDate) {
+                      $fractionStart=$plan->validatedStartFraction;
+                    } else {
+                      $fractionStart=($capacity!=0)?round($planned/$capacity,2):'0';
+                    }
+                    $fraction=($capacity!=0)?round($value/$capacity,2):'1';;             
+                    $plannedWork=new PlannedWork();
+                    $plannedWork->idResource=$ass->idResource;
+                    $plannedWork->idProject=$ass->idProject;
+                    $plannedWork->refType=$ass->refType;
+                    $plannedWork->refId=$ass->refId;
+                    $plannedWork->idAssignment=$ass->id;
+                    $plannedWork->work=$value;
+                    $plannedWork->surbooked=$surbooked;
+                    $plannedWork->surbookedWork=$surbookedWork;
+                    $plannedWork->setDates($currentDate);
+                    $arrayPlannedWork[]=$plannedWork;
+                    if (! $ass->plannedStartDate or $ass->plannedStartDate>$currentDate) {
+                      $ass->plannedStartDate=$currentDate;
+                      $ass->plannedStartFraction=$fractionStart;
+                    }
+                    if (! $ass->plannedEndDate or $ass->plannedEndDate<$currentDate) {
+                      $ass->plannedEndDate=$currentDate;
+                      $ass->plannedEndFraction=min(($fractionStart+$fraction),1);
+                    }
+                    if (! $plan->plannedStartDate or $plan->plannedStartDate>$currentDate) {
+                      $plan->plannedStartDate=$currentDate;
+                      $plan->plannedStartFraction=$fractionStart;
+                    } else if ($plan->plannedStartDate==$currentDate and $plan->plannedStartFraction<$fractionStart) {
+                      $plan->plannedStartFraction=$fractionStart;
+                    }
+                    if ($surbooked) {
+                      $plan->surbooked=1;
+                      $ass->surbooked=1;
+                      $changedAss=true;
+                    }                  
+                    if (! $plan->plannedEndDate or $plan->plannedEndDate<$currentDate) {
+                      if ($ass->realEndDate && $ass->realEndDate>$currentDate) {
+                    		$plan->plannedEndDate=$ass->realEndDate;
+                    		$plan->plannedEndFraction=1;
+                    	} else {
+                        $plan->plannedEndDate=$currentDate;
+                        $plan->plannedEndFraction=min(($fractionStart+$fraction),1);
+                    	}
+                    } else if ($plan->plannedEndDate==$currentDate and $plan->plannedEndFraction<$fraction) {
+                      $plan->plannedEndFraction=min(($fractionStart+$fraction),1);
+                    }
+                    $changedAss=true;
+                    $left-=$value;
+                    $ress[$currentDate]=$value+$planned-$plannedReserved;
+                    // Set value on each project (from current to top)
+                    if ($withProjectRepartition and $value >= 0.01) {
+                      foreach ($listTopProjects as $idProject) {
+                        $projectKey='Project#' . $idProject;
+                        $plannedProj=0;
+                        if (array_key_exists($week,$ress[$projectKey])) {
+                          $plannedProj=$ress[$projectKey][$week];
+                        }
+                        $ress[$projectKey][$week]=$value+$plannedProj;               
+                      }
+                    }
+  
+                  }
+                }            
+              }
+              $currentDate=addDaysToDate($currentDate,$step);
+              if ($currentDate<$endPlan and $step==-1) {
+                $currentDate=$endPlan;
+                $step=1;
+              }
+            }      // End loop on date => While (1)    
+            if ($changedAss) {
+              $ass->_noHistory=true; // Will only save planning data, so no history required
+              $arrayAssignment[]=$ass;
             }
-            $currentDate=addDaysToDate($currentDate,$step);
-            if ($currentDate<$endPlan and $step==-1) {
-              $currentDate=$endPlan;
-              $step=1;
-            }
-          }      // End loop on date => While (1)    
-          if ($changedAss) {
-            $ass->_noHistory=true; // Will only save planning data, so no history required
-            $arrayAssignment[]=$ass;
-          }
-          $resources[$ass->idResource]=$ress;
-        } // End Loop on each $ass (assignment)
+            $resources[$ass->idResource]=$ress;
+          } // End Loop on each $ass (assignment)
+        } // End loop while ($restartLoopAllAssignements)
       } 
       $fullListPlan=self::storeListPlan($fullListPlan,$plan);
       if (isset($reserved['allPreds'][$plan->id]) ) {
