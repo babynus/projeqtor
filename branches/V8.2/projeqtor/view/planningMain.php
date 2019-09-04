@@ -37,7 +37,6 @@
     $topDetailDivHeight=$screenHeight-300;
   }
   $listHeight=($topDetailDivHeight)?$topDetailDivHeight.'px':$listHeight;
- 
   //florent
   $paramScreen=RequestHandler::getValue('paramScreen');
   $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
@@ -49,28 +48,7 @@
   if($positonRightDiv=="bottom"){
     $rightHeightPlanning=heightLaoutActivityStream($currentScreen);
   }
-  if($positionListDiv=='left'){
-    $widthListDiv=Parameter::getUserParameter("contentPaneTopDetailDivWidth".$currentScreen);
-    $widthDetailDiv=Parameter::getUserParameter('contentPaneDetailDivWidth'.$currentScreen);
-    if(!empty($widthListDiv) or !empty($widthDetailDiv)){
-      if($widthListDiv <= $widthDetailDiv){
-        $widthDetailDiv=$widthDetailDiv-($widthDetailDiv-$widthListDiv)-20;
-      }else if($widthDetailDiv==0){
-        $widthDetailDiv=($widthListDiv*.5);
-        $widthListDiv=$widthListDiv-$widthDetailDiv;
-      }else if($widthListDiv >= 1800){
-        $widthListDiv=$widthListDiv-$widthDetailDiv;
-      }
-      $widthListDiv= $widthListDiv.'px' ; 
-      $widthDetailDiv=$widthDetailDiv.'px';
-    }else{
-      $widthListDiv= '60%' ;
-      $widthDetailDiv='40%';
-    }
-  }else{
-    $widthListDiv='100%';
-    $widthDetailDiv='100%';
-  }
+  $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
   ///////
  
  
@@ -83,20 +61,20 @@
 		  <div id="listBarIcon" align="center"></div>
 	 </div>
       <div id="listDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positionListDiv; ?>" splitter="true" 
-      style="<?php if($positionListDiv=='top'){echo "height:".$listHeight;}else{ echo "width:".$widthListDiv;}?>">
+      style="<?php if($positionListDiv=='top'){echo "height:".$listHeight;}else{ echo "width:".$tableWidth[0];}?>">
         <script type="dojo/connect" event="resize" args="evt">
           if (switchedMode) return;
            var paramDiv=<?php echo json_encode($positionListDiv); ?>;
            var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
            if(paramDiv=="top" && paramMode!='5'){
-              saveDataToSession("contentPaneTopPlanningDivHeight",dojo.byId("listDiv").offsetHeight);
+              saveDataToSession("contentPaneTopPlanningDivHeight",dojo.byId("listDiv").offsetHeight, true);
             }else{
               saveDataToSession("contentPaneTopDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("listDiv").offsetWidth, true);
             }
         </script>
         <?php include 'planningList.php'?>
       </div>
-      <div id="contentDetailDiv" dojoType="dijit.layout.ContentPane" region="center"   style="width:<?php echo $widthDetailDiv; ?>;">
+      <div id="contentDetailDiv" dojoType="dijit.layout.ContentPane" region="center"   style="width:<?php echo $tableWidth[1]; ?>;">
           <script type="dojo/connect" event="resize" args="evt">
            var paramDiv=<?php echo json_encode($positionListDiv); ?>;
            var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
@@ -107,7 +85,7 @@
             }
           </script>
 	  <div class="container" dojoType="dijit.layout.BorderContainer"  liveSplitters="false">
-	     <div id="detailBarShow" class="dijitAccordionTitle" onMouseover="hideList('mouse');" onClick="hideList('click');">
+	      <div id="detailBarShow" class="dijitAccordionTitle" onMouseover="hideList('mouse');" onClick="hideList('click');">
             <div id="detailBarIcon" align="center"></div>
           </div>
           <div id="detailDiv" dojoType="dijit.layout.ContentPane" region="center">
@@ -116,19 +94,19 @@
           <div id="detailRightDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positonRightDiv; ?>" splitter="true" 
           style="<?php if($positonRightDiv=="bottom"){echo "height:".$rightHeightPlanning;}else{ echo "width:".$rightWidthPlanning;}?>">
               <script type="dojo/connect" event="resize" args="evt">
-              var paramDiv=<?php echo json_encode($positonRightDiv); ?>;
-              var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
-              if(paramDiv=='trailing' && paramMode!='5'){
+                var paramDiv=<?php echo json_encode($positonRightDiv); ?>;
+                var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
+                if(paramDiv=='trailing' && paramMode!='5'){
                   saveDataToSession("contentPaneRightDetailDivWidth<?php echo $currentScreen;?>"", dojo.byId("detailRightDiv").offsetWidth, true);
                   var newWidth=dojo.byId("detailRightDiv").offsetWidth;
                   dojo.query(".activityStreamNoteContainer").forEach(function(node, index, nodelist) {
                     node.style.maxWidth=(newWidth-30)+"px";
                   });
-              }else if( paramMode != '5'){
+                }else if( paramMode != '5'){
                 saveDataToSession("contentPaneRightDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("detailRightDiv").offsetHeight, true);
-              }
-      	  </script>
-              <script type="dojo/connect" event="onLoad" args="evt">
+                }
+      	     </script>
+             <script type="dojo/connect" event="onLoad" args="evt">
                 scrollInto();
 	         </script>
               <?php include 'objectStream.php'?>
