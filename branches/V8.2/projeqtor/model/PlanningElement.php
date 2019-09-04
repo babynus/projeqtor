@@ -2028,19 +2028,19 @@ class PlanningElement extends SqlElement {
         $refList=$ref->getSqlElementsFromCriteria($critMilestone);
         foreach ($refList as $ref) {
           $ref->$dt=$this->plannedStartDate;
-          $ref->save();
-          if (Parameter::getGlobalParameter('autoLinkMilestone')=='YES') { // Add a link to milestone
-            if ($class<'Milestone') {
-              $crit=array('ref1Type'=>$class, 'ref1Id'=>$ref->id,'ref2Type'=>'Milestone','ref2Id'=>$this->refId);
-            } else {
-              $crit=array('ref2Type'=>$class, 'ref2Id'=>$ref->id,'ref1Type'=>'Milestone','ref1Id'=>$this->refId);
-            }
-            $link=SqlElement::getSingleSqlElementFromCriteria('Link', $crit);
-            if (!$link->id) {
-              $link->creationDate=date('Y-m-d');
-              $resLn=$link->save();
-            }
-          }
+          $ref->save();   
+        }
+      }
+      if ($restrictType and $restrictId and Parameter::getGlobalParameter('autoLinkMilestone')=='YES') { // Add a link to milestone
+        if ($class=='Activity') {
+          $crit=array('ref1Type'=>$restrictType, 'ref1Id'=>$restrictId,'ref2Type'=>'Milestone','ref2Id'=>$this->refId);
+        } else {
+          $crit=array('ref2Type'=>$restrictType, 'ref2Id'=>$restrictId,'ref1Type'=>'Milestone','ref1Id'=>$this->refId);
+        }
+        $link=SqlElement::getSingleSqlElementFromCriteria('Link', $crit);
+        if (!$link->id) {
+          $link->creationDate=date('Y-m-d H:i:s');
+          $resLn=$link->save();
         }
       }
     }
