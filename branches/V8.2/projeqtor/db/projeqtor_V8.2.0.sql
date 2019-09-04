@@ -112,15 +112,15 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES
 ('dataCloningPerDay','5'),
 ('paramPasswordStrength','1'),
 ('paramAttachmentNum',''),
-('paramScreen','2'),
-('paramRightDiv','3'),
+('paramScreen','1'),
+('paramRightDiv','0'),
 ('contentPaneRightDetailDivHeight','0'),
 ('contentPaneRightDetailDivWidth','0'),
 ('contentPaneDetailDivHeight','0'),
 ('contentPaneDetailDivWidth','0'),
 ('contentPaneTopDetailDivHeight','0'),
 ('contentPaneTopDetailDivWidth','0'),
-('paramLayoutObjectDetail','0');
+('paramLayoutObjectDetail','4');
 
 INSERT INTO `${prefix}cronExecution` (`cron`, `fileExecuted`, `idle` ,`fonctionName`) VALUES
 ('*/5 * * * *', '../tool/cronExecutionStandard.php', 0, 'dataCloningCheckRequest');
