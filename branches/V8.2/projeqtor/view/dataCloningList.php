@@ -47,6 +47,13 @@ $versionCodeList=array($versionCode);
 if($dataCloning->getVersionCodeList()){
   $versionCodeList=$dataCloning->getVersionCodeList();
 }
+
+$date = date('Y-m-d');
+$addDate =  addDaysToDate(date('Y-m-d'), 1);
+$wherePerDay = "requesteddate > '$date' and requesteddate < '$addDate' and idle = 0 ";
+$dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
+$dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
+$dataCloningCount = i18n('colDataCloningCount', array($dataCloningPerDay-$dataCloningCountPerDay, $dataCloningPerDay));
 ?>
 <div class="container" dojoType="dijit.layout.BorderContainer" id="dataCloningParamDiv" name="dataCloningParamDiv">
   <div style="top:30px !important; left: 200px !important; width: 500px; margin: 0px 8px 4px 8px; padding: 5px;display:none;" 
@@ -132,6 +139,11 @@ if($dataCloning->getVersionCodeList()){
       <td style="text-align: right; align: right;">
         <table width="100%">
           <tr>
+            <td width="10%" nowrap="nowrap">
+              <div id="dataCloningRequestorCount">
+                <?php echo $dataCloningCount;?>
+              </div>
+            </td>
             <td width="90%" nowrap="nowrap" style="padding-right:2%">
               <?php echo i18n("labelShowIdle");?>
               <div title="<?php echo i18n('showIdleElements')?>" dojoType="dijit.form.CheckBox" 

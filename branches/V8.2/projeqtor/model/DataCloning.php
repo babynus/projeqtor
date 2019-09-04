@@ -32,6 +32,7 @@ class DataCloning extends SqlElement{
 	public $name;
 	public $nameDir;
 	public $idResource;
+	public $idRequestor;
 	public $versionCode;
 	public $idOrigin;
 	public $requestedDate;
@@ -98,33 +99,26 @@ class DataCloning extends SqlElement{
 		} else {
 			$listUser = getListForSpecificRights('dataCloningRight');
 		}
-		if($idUser != ''){
-		  $idresource='idResource = '.$idUser.' and ';
-		}else{
-		  $idresource='';
-		}
+		$res = new Resource($idUser);
 		$date = date('Y-m-d');
 		$addDate =  addDaysToDate(date('Y-m-d'), 1);
-		$wherePerDay = "$idresource requesteddate > '$date' and requesteddate < '$addDate' and idle = 0 ";
+		$wherePerDay = "requesteddate > '$date' and requesteddate < '$addDate' and idle = 0 ";
 		$dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
-		$dataCloningCountTotal = $dataCloning->countSqlElementsFromCriteria(array("idle"=>"0", "idResource"=>$user->id));
+		$dataCloningCountTotal = $dataCloning->countSqlElementsFromCriteria(array("idle"=>"0", "idResource"=>$idUser));
 		$dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
-		$dataCloningTotal=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array("scope"=>"dataCloningTotal", "idProfile"=>$user->idProfile));
+		$dataCloningTotal=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array("scope"=>"dataCloningTotal", "idProfile"=>$res->idProfile));
 		$dataCloningTotal = $dataCloningTotal->rightAccess;
+		$hide = 'none';
 		if($idUser != ''){
+		  if($dataCloningTotal-$dataCloningCountTotal > 0 and $dataCloningPerDay-$dataCloningCountPerDay > 0){
+		  	$hide = 'block';
+		  }
+		  $dataCloningCount = i18n('colDataCloningCountTotal', array($dataCloningTotal-$dataCloningCountTotal, $dataCloningTotal));
+		}else{
 		  if($dataCloningPerDay-$dataCloningCountPerDay > 0){
 		  	$hide = 'block';
-		  }else{
-		  	$hide = 'none';
 		  }
 		  $dataCloningCount = i18n('colDataCloningCount', array($dataCloningPerDay-$dataCloningCountPerDay, $dataCloningPerDay));
-		}else{
-		  if($dataCloningTotal-$dataCloningCountTotal > 0){
-		  	$hide = 'block';
-		  }else{
-		  	$hide = 'none';
-		  }
-		  $dataCloningCount = i18n('colDataCloningCount', array($dataCloningTotal-$dataCloningCountTotal, $dataCloningTotal));
 		}
 		$result = "";
 		$result .='<div id="dataCloningDiv" align="center" style="margin-top:20px;margin-bottom:20px; overflow-y:auto; width:100%;">';
