@@ -6092,6 +6092,7 @@ function refreshDataCloningList() {
 	var callback=function() {
 		hideWait();
 	};
+	loadDiv('../view/refreshDataCloningCount.php', 'dataCloningRequestorCount', 'dataCloningListForm');
 	loadContent('../view/refreshDataCloningList.php', 'dataCloningWorkDiv', 'dataCloningListForm', false,false,false,false,callback,false);
 }
 
