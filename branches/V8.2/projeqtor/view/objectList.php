@@ -268,7 +268,7 @@ if (property_exists($objectClass,'idStatus')) {
   </form>
 <table width="100%" class="listTitle" >
   <tr >
-    <td width="50px" align="center">
+    <td style="width:50px;min-width:43px;" align="center">
        <div style="position:absolute;left:0px;width:43px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>
        <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" style="margin-left:9px;width:32px;height:32px" /></div>
     </td>
