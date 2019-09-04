@@ -4781,14 +4781,14 @@ function heightLaoutActivityStream($objectClass){
   if(empty($objectClass))$objectClass='';
   if(Parameter::getUserParameter("paramRightDiv") == '3' ){
     $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
-    $detailDetailHeight=Parameter::getUserParameter('contentPaneDetailDivHeight'.$objectClass);
+    $detailDivHeight=Parameter::getUserParameter('contentPaneDetailDivHeight'.$objectClass);
     if (!$detailRightHeight) $detailRightHeight=0;
     if($detailRightHeight or $detailRightHeight==="0"){
       if ($detailRightHeight < 80){
         $detailRightHeight=100;
       }
-      if(($detailDetailHeight<=$detailRightHeight or $detailDetailHeight==0 )and (!empty($detailDetailHeight))){
-        $detailRightHeight=$detailRightHeight-($detailRightHeight-$detailDetailHeight)-20;
+      if(($detailRightHeight> $detailDivHeight )and (!empty($detailDivHeight))){
+        $detailRightHeight=($detailDivHeight/2);
       }
       $rightHeight=$detailRightHeight.'px';
     } else {
@@ -4803,8 +4803,8 @@ function WidthLayoutActivityStream($objectClass){
   $topDivWidth=Parameter::getUserParameter('contentPaneDetailDivWidth'.$objectClass);
   if (!$detailDivWidth) $detailDivWidth=0;
   if($detailDivWidth or $detailDivWidth==="0"){
-    if (($detailDivWidth > $topDivWidth)and (!empty($topDivWidth)) ){
-      $detailDivWidth=$detailDivWidth-($detailDivWidth-$topDivWidth)-20;
+    if((!empty($topDivWidth)) and ($detailDivWidth > ($topDivWidth/2))  ){
+      $detailDivWidth=($topDivWidth/2);
     }else if(empty($topDivWidth)){
       $detailDivWidth=$detailDivWidth-100;
     }
@@ -4819,9 +4819,11 @@ function WidthDivContentDetail($positionListDiv,$objectClass){
   if($positionListDiv=='left'){
     $widthListDiv=Parameter::getUserParameter("contentPaneTopDetailDivWidth".$objectClass);
     $widthDetailDiv=Parameter::getUserParameter('contentPaneDetailDivWidth'.$objectClass);
+    debugLog($widthListDiv.'                                                    '.$widthDetailDiv);
     if(!empty($widthListDiv) or !empty($widthDetailDiv)){
-      if($widthListDiv <= $widthDetailDiv){
-        $widthDetailDiv=$widthDetailDiv-($widthDetailDiv-$widthListDiv)-20;
+      if($widthDetailDiv > 1400){
+        $widthDetailDiv=1400;
+        $widthListDiv=463;
       }else if($widthDetailDiv==0){
         $widthDetailDiv=($widthListDiv*.5);
         $widthListDiv=$widthListDiv-$widthDetailDiv;
@@ -4839,4 +4841,20 @@ function WidthDivContentDetail($positionListDiv,$objectClass){
     $widthDetailDiv='100%';
   }
   return $tableDiv=array($widthListDiv,$widthDetailDiv);
+}
+
+function HeightLayoutListDiv($objectClass){
+  $topDetailDivHeight=Parameter::getUserParameter('contentPaneTopDetailDivHeight'.$objectClass);
+  $screenHeight=getSessionValue('screenHeight');
+  debugLog('hauteur ecran '.$screenHeight.'   hauteurObjectDetail  '.$topDetailDivHeight);
+    if ($screenHeight and $topDetailDivHeight>$screenHeight-300) {
+      debugLog('1 '.$topDetailDivHeight);
+      $topDetailDivHeight=$screenHeight-300;
+      debugLog('2 '.$topDetailDivHeight);
+    }else if(empty($topDetailDivHeight)){
+      $listHeight='50%';
+    }else{
+    $listHeight=($topDetailDivHeight)?$topDetailDivHeight.'px':$listHeight;
+    }
+    return $listHeight;
 }
