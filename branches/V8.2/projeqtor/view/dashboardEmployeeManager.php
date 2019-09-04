@@ -148,7 +148,7 @@
         </table>
         <table style="vertical-align:middle;text-align:center;height:90%;width:100%">
             <tr>
-                <td style="height:100%;width:100%;"><span style="font-size:400%;font-weight:bold;"><?php echo i18n('DashboardEmpty');?></span></td>                
+                <td style="height:100%;width:100%;"><span style="font-size:250%;font-weight:bold;"><?php echo i18n('DashboardEmpty');?></span></td>                
             </tr>
         </table>
     </div>
