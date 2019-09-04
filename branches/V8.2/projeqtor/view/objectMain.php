@@ -38,26 +38,23 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
   $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
   $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
   ///////
-  $listHeight='40%';
   $objectClass="";
   if (isset($_REQUEST['objectClass'])) {
     $objectClass=$_REQUEST['objectClass'];
     Security::checkValidClass($objectClass);
   	if ($_REQUEST['objectClass']=='CalendarDefinition') {
   		$listHeight='25%';
+  	}else if ($positionListDiv=='top'){
+  	  $listHeight=HeightLayoutListDiv($objectClass);
   	}
-  	$topDetailDivHeight=Parameter::getUserParameter('contentPaneTopDetailDivHeight'.$objectClass);
-  	$screenHeight=getSessionValue('screenHeight');
-  	if ($screenHeight and $topDetailDivHeight>$screenHeight-300) {
-  		$topDetailDivHeight=$screenHeight-300;
-  	}
-  	$listHeight=($topDetailDivHeight)?$topDetailDivHeight.'px':$listHeight; 	
-  	$rightWidth=WidthLayoutActivityStream($objectClass);
-  }
-  if($positonRightDiv=="bottom"){
+  	if($positonRightDiv=="bottom"){
     $rightHeight=heightLaoutActivityStream($objectClass);
+    }else{
+  	 $rightWidth=WidthLayoutActivityStream($objectClass);
+  	}
   }
   $tableWidth=WidthDivContentDetail($positionListDiv,$objectClass);
+  debugLog($tableWidth);
 ?>
 <input type="hidden" id="objectClass" value="<?php echo $objectClass;?>" />
 <div id="mainDivContainer" class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
@@ -73,6 +70,7 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
             var paramDiv=<?php echo json_encode($positionListDiv); ?>;
             var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
             if(paramDiv=="top" && paramMode!='5'){
+              console.log( dojo.byId("listDiv").offsetHeight);
               saveDataToSession("contentPaneTopDetailDivHeight<?php echo $objectClass;?>", dojo.byId("listDiv").offsetHeight, true);
             }else{
               saveDataToSession("contentPaneTopDetailDivWidth<?php echo $objectClass;?>", dojo.byId("listDiv").offsetWidth, true);
@@ -80,7 +78,7 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
          </script>
 	     <?php include 'objectList.php'?>
 	  </div>
-	  <div id="contentDetailDiv" dojoType="dijit.layout.ContentPane" region="center"  style="width:<?php echo $tableWidth[1]; ?>;">
+	  <div id="contentDetailDiv" dojoType="dijit.layout.ContentPane" region="center"  style="width:<?php echo $tableWidth[1];?>;">
 	      <script type="dojo/connect" event="resize" args="evt">
               var paramDiv=<?php echo json_encode($positionListDiv); ?>;
               var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;

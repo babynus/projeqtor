@@ -6386,8 +6386,10 @@ function switchModeLayout(paramToSend){
   }
   if (paramToSend=='1' || paramToSend=='2'){
       var paramDiv='paramScreen';
-        switchModeOff();
-     switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
+      if(switchedMode==true){
+       switchModeOff();
+      }
+       switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
   }else if(paramToSend=='3'){
     var paramDiv='paramRightDiv';
     switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
