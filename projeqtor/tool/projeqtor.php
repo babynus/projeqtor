@@ -4806,7 +4806,7 @@ function WidthLayoutActivityStream($objectClass){
     if((!empty($topDivWidth)) and ($detailDivWidth > ($topDivWidth/2))  ){
       $detailDivWidth=($topDivWidth/2);
     }else if(empty($topDivWidth)){
-      $detailDivWidth=$detailDivWidth-100;
+      $detailDivWidth='20%';
     }
     $rightWidth=$detailDivWidth.'px';
   } else {
@@ -4820,7 +4820,6 @@ function WidthDivContentDetail($positionListDiv,$objectClass){
     $detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
     $widthListDiv=Parameter::getUserParameter("contentPaneTopDetailDivWidth".$objectClass);
     $widthDetailDiv=Parameter::getUserParameter('contentPaneDetailDivWidth'.$objectClass);
-    debugLog($widthListDiv.'                                                    '.$widthDetailDiv);
     if(!empty($widthListDiv) or !empty($widthDetailDiv)){
       if($widthDetailDiv > 1400){
         $widthDetailDiv=1400;
@@ -4836,8 +4835,8 @@ function WidthDivContentDetail($positionListDiv,$objectClass){
       $widthListDiv= $widthListDiv.'px' ;
       $widthDetailDiv=$widthDetailDiv.'px';
     }else{
-      $widthListDiv= '60%' ;
-      $widthDetailDiv='40%';
+        $widthListDiv= '60%';
+        $widthDetailDiv='40%';
     }
   }else{
     $widthListDiv='100%';
