@@ -24,31 +24,22 @@
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
+/* ============================================================================
+ * Presents the list of objects of a given class.
+ *
+ */
 require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
-scriptLog('   ->/tool/refreshDataCloningCountDiv.php');
+scriptLog('   ->/view/refreshDataCloningList.php'); 
 
-$userSelected = RequestHandler::getValue('userSelected');
 $dataCloning = new DataCloning();
 $date = date('Y-m-d');
 $addDate =  addDaysToDate(date('Y-m-d'), 1);
 $wherePerDay = "requesteddate > '$date' and requesteddate < '$addDate' and idle = 0 ";
 $dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
-$dataCloningCountTotal = $dataCloning->countSqlElementsFromCriteria(array("idle"=>"0", "idResource"=>$userSelected));
 $dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
-$res = new Resource($userSelected);
-$dataCloningTotal=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array("scope"=>"dataCloningTotal", "idProfile"=>$res->idProfile));
-$dataCloningTotal = $dataCloningTotal->rightAccess;
+$dataCloningCount = i18n('colDataCloningCount', array($dataCloningPerDay-$dataCloningCountPerDay, $dataCloningPerDay));
 ?>
-<table align="center">
-  <tr>
-    <td style="text-align:center;" class="dialogLabel">
-      <?php echo i18n('colDataCloningCount', array($dataCloningPerDay-$dataCloningCountPerDay, $dataCloningPerDay));?>
-    </td>
-  </tr>
-  <tr>
-    <td style="text-align:center;" class="dialogLabel">
-      <?php echo i18n('colDataCloningCount', array($dataCloningTotal-$dataCloningCountTotal, $dataCloningTotal));?>
-    </td>
-  </tr>
-</table>
+<div id="dataCloningRequestorCount">
+  <?php echo $dataCloningCount;?>
+</div>

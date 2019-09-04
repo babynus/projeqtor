@@ -70,29 +70,42 @@ if($idDataCloning){
   }
 }else{
   $dataCloning = new DataCloning();
-  $res = new ResourceAll($user);
+  $activeUser = getSessionUser();
+  
   $date = date('Y-m-d');
   $addDate =  addDaysToDate(date('Y-m-d'), 1);
-  $wherePerDay = "idResource = $user and requesteddate > '$date' and requesteddate < '$addDate' and idle = 0 ";
-  $dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
-  $dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
-  $dataCloningTotal=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array("scope"=>"dataCloningTotal", "idProfile"=>$res->idProfile));
-  $dataCloningTotal = $dataCloningTotal->rightAccess;
-  $dataCloningCountTotal = $dataCloning->countSqlElementsFromCriteria(array("idle"=>"0", "idResource"=>$user));
+  $wherePerDay = "requesteddate > '$date' and requesteddate < '$addDate' and idle = 0 ";
+  $dataCloningRequestorCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
+  $dataCloningRequestorTotalPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
   
-  if($dataCloningPerDay-$dataCloningCountPerDay > 0 and $dataCloningTotal-$dataCloningCountTotal > 0){
-    $cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
-    if($idDataCloningParent){
-    	$dataCloning->idOrigin = $idDataCloningParent;
+  if($dataCloningRequestorTotalPerDay-$dataCloningRequestorCountPerDay > 0){
+    $res = new ResourceAll($user);
+    $date = date('Y-m-d');
+    $addDate =  addDaysToDate(date('Y-m-d'), 1);
+    $wherePerDay = "idResource = $user and requesteddate > '$date' and requesteddate < '$addDate' and idle = 0 ";
+    $dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
+    $dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
+    $dataCloningTotal=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array("scope"=>"dataCloningTotal", "idProfile"=>$res->idProfile));
+    $dataCloningTotal = $dataCloningTotal->rightAccess;
+    $dataCloningCountTotal = $dataCloning->countSqlElementsFromCriteria(array("idle"=>"0", "idResource"=>$user));
+
+    if($dataCloningTotal-$dataCloningCountTotal > 0){
+    	$cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
+    	if($idDataCloningParent){
+    		$dataCloning->idOrigin = $idDataCloningParent;
+    	}
+    	$dataCloning->versionCode = $version;
+    	$dataCloning->idResource = $user;
+    	$dataCloning->idRequestor = $activeUser->id;
+    	$dataCloning->requestedDate = $requestedDate;
+    	$dataCloning->name = $name;
+    	$dataCloning->plannedDate = $cronExecution->nextTime;
+    	$result=$dataCloning->save();
+    }else{
+    	$result='<b>Contrôles invalides.</b><br/><br/>'.i18n('errorAddDataCloning').'<input type="hidden" id="lastOperationStatus" value="INVALID" /><input type="hidden" id="lastSaveId" value="" /><input type="hidden" id="lastOperation" value="control" />';
     }
-    $dataCloning->versionCode = $version;
-    $dataCloning->idResource = $user;
-    $dataCloning->requestedDate = $requestedDate;
-    $dataCloning->name = $name;
-    $dataCloning->plannedDate = $cronExecution->nextTime;
-    $result=$dataCloning->save();
   }else{
-    $result='<b>Contrôles invalides.</b><br/><br/>'.i18n('errorAddDataCloning').'<input type="hidden" id="lastOperationStatus" value="INVALID" /><input type="hidden" id="lastSaveId" value="" /><input type="hidden" id="lastOperation" value="control" />';
+  	$result='<b>Contrôles invalides.</b><br/><br/>'.i18n('errorAddDataCloningPerDay').'<input type="hidden" id="lastOperationStatus" value="INVALID" /><input type="hidden" id="lastSaveId" value="" /><input type="hidden" id="lastOperation" value="control" />';
   }
 }
 displayLastOperationStatus($result);

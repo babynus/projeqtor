@@ -34,9 +34,14 @@ $dataCloning = new DataCloning();
 $cronExecution = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'dataCloningCheckRequest'));
 $date = date('Y-m-d');
 $addDate =  addDaysToDate(date('Y-m-d'), 1);
-$wherePerDay = "idResource = $userId and requesteddate > '$date' and requesteddate < '$addDate' and idle = 0 ";
-$dataCloningCount = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
+$wherePerDay = "requesteddate > '$date' and requesteddate < '$addDate' and idle = 0 ";
+$dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
+$dataCloningCountTotal = $dataCloning->countSqlElementsFromCriteria(array("idle"=>"0", "idResource"=>$userId));
 $dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
+$res = new Resource($userId);
+$dataCloningTotal=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array("scope"=>"dataCloningTotal", "idProfile"=>$res->idProfile));
+$dataCloningTotal = $dataCloningTotal->rightAccess;
+
 $plannedDate = date('Y-m-d', $cronExecution->nextTime);
 $plannedHours = date('H:i', $cronExecution->nextTime);
 $idDataCloningParent = RequestHandler::getId('idDataCloningParent');
@@ -108,11 +113,16 @@ $idDataCloningParent = RequestHandler::getId('idDataCloningParent');
              <table align="center" >
               <tr>
                 <td style="text-align:center;" class="dialogLabel">
-                  <?php echo i18n('colDataCloningCount', array($dataCloningPerDay-$dataCloningCount, $dataCloningPerDay));?>
+                  <?php echo i18n('colDataCloningCount', array($dataCloningPerDay-$dataCloningCountPerDay, $dataCloningPerDay));?>
+                </td>
+              </tr>
+              <tr>
+                <td style="text-align:center;" class="dialogLabel">
+                  <?php echo i18n('colDataCloningCountTotal', array($dataCloningTotal-$dataCloningCountTotal, $dataCloningTotal));?>
                 </td>
               </tr>
             </table>
-            </div>
+           </div>
             </td>
            </tr>
           </table>
