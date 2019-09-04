@@ -226,7 +226,7 @@ if (property_exists($objectClass,'idStatus')) {
      style="display:none; height:100%; width: 100%; position: absolute;">
     <table >
       <tr height="100%" style="vertical-align: middle;">
-        <td width="50px" align="center">        
+        <td style="width:50px;min-width:50px" align="center">        
          <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" style="margin-left:9px;width:32px;height:32px" /></div>    
         </td>
         <td><span class="title" ><?php echo i18n("menu" . $objectClass);?></span></td>
