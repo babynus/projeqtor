@@ -4792,7 +4792,7 @@ function heightLaoutActivityStream($objectClass){
       }
       $rightHeight=$detailRightHeight.'px';
     } else {
-      $rightHeight="0%";
+      $rightHeight="10%";
     }
   }
   return $rightHeight;
@@ -4810,7 +4810,7 @@ function WidthLayoutActivityStream($objectClass){
     }
     $rightWidth=$detailDivWidth.'px';
   } else {
-    $rightWidth="0%";
+    $rightWidth="20%";
   }
   return $rightWidth;
 }

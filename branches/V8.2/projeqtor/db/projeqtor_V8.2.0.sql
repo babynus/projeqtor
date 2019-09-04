@@ -115,9 +115,11 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES
 ('paramScreen','2'),
 ('paramRightDiv','3'),
 ('contentPaneRightDetailDivHeight','0'),
+('contentPaneRightDetailDivWidth','0'),
 ('contentPaneDetailDivHeight','0'),
-('contentPaneRightDetailDivHeightPlanning','0'),
-('contentPaneRightDetailDivHeightGlobalPlanning','0'),
+('contentPaneDetailDivWidth','0'),
+('contentPaneTopDetailDivHeight','0'),
+('contentPaneTopDetailDivWidth','0'),
 ('paramLayoutObjectDetail','0');
 
 INSERT INTO `${prefix}cronExecution` (`cron`, `fileExecuted`, `idle` ,`fonctionName`) VALUES
