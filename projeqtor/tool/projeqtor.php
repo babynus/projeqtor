@@ -4814,3 +4814,29 @@ function WidthLayoutActivityStream($objectClass){
   }
   return $rightWidth;
 }
+
+function WidthDivContentDetail($positionListDiv,$objectClass){
+  if($positionListDiv=='left'){
+    $widthListDiv=Parameter::getUserParameter("contentPaneTopDetailDivWidth".$objectClass);
+    $widthDetailDiv=Parameter::getUserParameter('contentPaneDetailDivWidth'.$objectClass);
+    if(!empty($widthListDiv) or !empty($widthDetailDiv)){
+      if($widthListDiv <= $widthDetailDiv){
+        $widthDetailDiv=$widthDetailDiv-($widthDetailDiv-$widthListDiv)-20;
+      }else if($widthDetailDiv==0){
+        $widthDetailDiv=($widthListDiv*.5);
+        $widthListDiv=$widthListDiv-$widthDetailDiv;
+      }else if($widthListDiv >= 1800){
+        $widthListDiv=$widthListDiv-$widthDetailDiv;
+      }
+      $widthListDiv= $widthListDiv.'px' ;
+      $widthDetailDiv=$widthDetailDiv.'px';
+    }else{
+      $widthListDiv= '60%' ;
+      $widthDetailDiv='40%';
+    }
+  }else{
+    $widthListDiv='100%';
+    $widthDetailDiv='100%';
+  }
+  return $tableDiv=array($widthListDiv,$widthDetailDiv);
+}

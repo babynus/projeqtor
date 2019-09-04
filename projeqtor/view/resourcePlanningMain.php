@@ -36,8 +36,6 @@
     $topDetailDivHeight=$screenHeight-300;
   }
   $listHeight=($topDetailDivHeight)?$topDetailDivHeight.'px':$listHeight;
-
-  
   //florent
   $paramScreen=RequestHandler::getValue('paramScreen');
   $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
@@ -49,28 +47,7 @@
   if($positonRightDiv=="bottom"){
     $rightHeightResourcePlanning=heightLaoutActivityStream($currentScreen);
   }
-if($positionListDiv=='left'){
-    $widthListDiv=Parameter::getUserParameter("contentPaneTopDetailDivWidth".$currentScreen);
-    $widthDetailDiv=Parameter::getUserParameter('contentPaneDetailDivWidth'.$currentScreen);
-    if(!empty($widthListDiv) or !empty($widthDetailDiv)){
-      if($widthListDiv <= $widthDetailDiv){
-        $widthDetailDiv=$widthDetailDiv-($widthDetailDiv-$widthListDiv)-20;
-      }else if($widthDetailDiv==0){
-        $widthDetailDiv=($widthListDiv*.5);
-        $widthListDiv=$widthListDiv-$widthDetailDiv;
-      }else if($widthListDiv >= 1800){
-        $widthListDiv=$widthListDiv-$widthDetailDiv;
-      }
-      $widthListDiv= $widthListDiv.'px' ; 
-      $widthDetailDiv=$widthDetailDiv.'px';
-    }else{
-      $widthListDiv= '60%' ;
-      $widthDetailDiv='40%';
-    }
-  }else{
-    $widthListDiv='100%';
-    $widthDetailDiv='100%';
-  }
+ $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
   ///////
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="ResourcePlanning" />
@@ -80,7 +57,7 @@ if($positionListDiv=='left'){
 	<div id="listBarIcon" align="center"></div>
   </div>
   <div id="listDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positionListDiv?>" splitter="true" 
-   style="<?php if($positionListDiv=='top'){echo "height:".$listHeight;}else{ echo "width:".$widthListDiv;}?>">
+   style="<?php if($positionListDiv=='top'){echo "height:".$listHeight;}else{ echo "width:".$tableWidth[0];}?>">
     <script type="dojo/connect" event="resize" args="evt">
          if (switchedMode) return;
          var paramDiv=<?php echo json_encode($positionListDiv); ?>;
@@ -89,11 +66,11 @@ if($positionListDiv=='left'){
              saveDataToSession("contentPaneTopResourcePlanningDivHeight", dojo.byId("listDiv").offsetHeight, true);
           }else{
               saveDataToSession("contentPaneTopDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("listDiv").offsetWidth, true);
-            }
+          }
     </script>
    <?php include 'resourcePlanningList.php'?>
   </div>
-  <div id="contentDetailDiv" dojoType="dijit.layout.ContentPane" region="center"   style="width:<?php echo $widthDetailDiv; ?>;">
+  <div id="contentDetailDiv" dojoType="dijit.layout.ContentPane" region="center"   style="width:<?php echo $tableWidth[1]; ?>;">
       <script type="dojo/connect" event="resize" args="evt">
            var paramDiv=<?php echo json_encode($positionListDiv); ?>;
            var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
