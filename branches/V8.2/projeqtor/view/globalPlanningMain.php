@@ -66,7 +66,7 @@
           var paramDiv=<?php echo json_encode($positionListDiv); ?>;
             var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
            if(paramDiv=="top" && paramMode!='5'){
-              saveDataToSession("contentPaneTopGlobalPlanningDivHeight",dojo.byId("listDiv").offsetHeight);
+              saveDataToSession("contentPaneTopDetailDivHeight<?php echo $currentScreen;?>",dojo.byId("listDiv").offsetHeight);
             }else{
               saveDataToSession("contentPaneTopDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("listDiv").offsetWidth, true);
             }
