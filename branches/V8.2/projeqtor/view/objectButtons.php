@@ -108,7 +108,7 @@
         <tr style="height:35px;">
           <td style="width:43px;">&nbsp;
             <?php $iconClassName=((SqlElement::is_subclass_of($class, 'PlgCustomList'))?'ListOfValues':$class);?>
-            <div style="position:absolute;left:0px;width:43px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>
+            <div style="position:absolute;left:0px;width:43px;max-width:50px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>
             <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" style="margin-left:9px;width:32px;height:32px" /></div>
           </td>
           <td class="title" style="width:10%;">
@@ -194,18 +194,33 @@
 		      saveObject();
         </script>
       </button>
-      <?php organizeButtons();?>
-      <button id="printButton" dojoType="dijit.form.Button" showlabel="false"
-       title="<?php echo i18n('buttonPrint', array(i18n($_REQUEST['objectClass'])));?>"
+     <?php // organizeButtons(); // removed on V7.1 : buttons undo and refresh not visible at same time?>
+     <button id="refreshButton" dojoType="dijit.form.Button" showlabel="false" 
+       title="<?php echo i18n('buttonRefresh', array(i18n($_REQUEST['objectClass'])));?>"
        <?php if ($noselect) {echo "disabled";} ?> 
-       iconClass="dijitButtonIcon dijitButtonIconPrint" class="detailButton">
+       iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
-		    dojo.byId("printButton").blur();
-        hideExtraButtons('extraButtonsDetail');
-        if (dojo.byId("printPdfButton")) {dojo.byId("printPdfButton").blur();}
-        showPrint("<?php echo $printPage;?>", null, null, null, 'P');
-        </script>
-      </button>  
+          dojo.byId("refreshButton").blur();
+          hideExtraButtons('extraButtonsDetail');
+// ADD BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
+          // If undo Organization's detail screen, must passed periodic year in REQUEST
+          cl='';
+          if (dojo.byId('objectClass')) {
+            cl=dojo.byId('objectClass').value;
+          }
+          if (cl=='Organization' && dijit.byId('OrganizationBudgetElementCurrent__byMet_periodYear')) {
+            param='?OrganizationBudgetPeriod='+dijit.byId('OrganizationBudgetElementCurrent__byMet_periodYear').value;
+          } else {
+            param='';
+          }
+          loadContent("objectDetail.php"+param, "detailDiv", 'listForm');
+          if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
+// END ADD BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
+// COMMENT BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
+//          loadContent("objectDetail.php", "detailDiv", 'listForm');
+// END COMMENT BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT        </script>
+      </button>        
+      <?php organizeButtons();?>
 <?php if ($_REQUEST['objectClass']!='Workflow' and $_REQUEST['objectClass']!='Mail') {
      // Disable PDF Export for :
      //    - Wokflow : too complex and systematically fails in timeout
@@ -295,32 +310,18 @@
           formChangeInProgress=false;
         </script>
       </button>
-      <?php // organizeButtons(); // removed on V7.1 : buttons undo and refresh not visible at same time?>
-     <button id="refreshButton" dojoType="dijit.form.Button" showlabel="false" 
-       title="<?php echo i18n('buttonRefresh', array(i18n($_REQUEST['objectClass'])));?>"
+      <?php organizeButtons();?>
+      <button id="printButton" dojoType="dijit.form.Button" showlabel="false"
+       title="<?php echo i18n('buttonPrint', array(i18n($_REQUEST['objectClass'])));?>"
        <?php if ($noselect) {echo "disabled";} ?> 
-       iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
+       iconClass="dijitButtonIcon dijitButtonIconPrint" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
-          dojo.byId("refreshButton").blur();
-          hideExtraButtons('extraButtonsDetail');
-// ADD BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
-          // If undo Organization's detail screen, must passed periodic year in REQUEST
-          cl='';
-          if (dojo.byId('objectClass')) {
-            cl=dojo.byId('objectClass').value;
-          }
-          if (cl=='Organization' && dijit.byId('OrganizationBudgetElementCurrent__byMet_periodYear')) {
-            param='?OrganizationBudgetPeriod='+dijit.byId('OrganizationBudgetElementCurrent__byMet_periodYear').value;
-          } else {
-            param='';
-          }
-          loadContent("objectDetail.php"+param, "detailDiv", 'listForm');
-          if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
-// END ADD BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
-// COMMENT BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
-//          loadContent("objectDetail.php", "detailDiv", 'listForm');
-// END COMMENT BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT        </script>
-      </button>        
+		    dojo.byId("printButton").blur();
+        hideExtraButtons('extraButtonsDetail');
+        if (dojo.byId("printPdfButton")) {dojo.byId("printPdfButton").blur();}
+        showPrint("<?php echo $printPage;?>", null, null, null, 'P');
+        </script>
+      </button>  
       <?php organizeButtons();?>
       <button id="deleteButton" dojoType="dijit.form.Button" showlabel="false" 
        title="<?php echo i18n('buttonDelete', array(i18n($_REQUEST['objectClass'])));?>"
