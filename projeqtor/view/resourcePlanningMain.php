@@ -81,10 +81,11 @@
             }
       </script>
   <div class="container" dojoType="dijit.layout.BorderContainer"  liveSplitters="false">
-  <div id="detailBarShow" class="dijitAccordionTitle" onMouseover="hideList('mouse');" onClick="hideList('click');">
+        <div id="detailBarShow" class="dijitAccordionTitle" onMouseover="hideList('mouse');" onClick="hideList('click');"
+          <?php if (RequestHandler::isCodeSet('switchedMode') and RequestHandler::getValue('switchedMode')=='on') echo ' style="display:block;"'?>>
           <div id="detailBarIcon" align="center"></div>
         </div>
-      <div id="detailDiv" dojoType="dijit.layout.ContentPane" region="center"  style="width:<?php echo $widthDetailDiv?>">
+      <div id="detailDiv" dojoType="dijit.layout.ContentPane" region="center" >
         <?php $noselect=true; //include 'objectDetail.php'; ?>
 
       </div>
