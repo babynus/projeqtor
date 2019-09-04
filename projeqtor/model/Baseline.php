@@ -116,8 +116,9 @@ class Baseline extends SqlElement {
     if ($itemFrom=='PlannedWork') { // Also include existing real work
       $objFrom=new Work();
       $tableFrom=$objFrom->getDatabaseTableName();
+      $colListWork=str_replace(array('surbookedWork','surbooked'), array('0','0'), $colList);
       $query="INSERT INTO $tableTo ($colList idBaseline, isRealWork)\n"
-      ."SELECT $colList $idBaseline, 1 FROM $tableFrom \n"
+      ."SELECT $colListWork $idBaseline, 1 FROM $tableFrom \n"
       ." where idProject in ".transformListIntoInClause($proj->getRecursiveSubProjectsFlatList(true, true));
       $res=SqlDirectElement::execute($query);
     }
