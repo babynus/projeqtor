@@ -641,10 +641,7 @@ class PlannedWork extends GeneralWork {
         if ($plan->indivisibility==1 and $profile=='GROUP') {
           $stockPlan=$plan;
           $stockPlanStart=$plan->plannedStartDate;
-          $stockAss=$ass;
-          $stockLeft=$left;
           $stockResources=$resources;
-          $stockRess=$ress;
           $stockPlannedWork=$arrayPlannedWork;
           $countRejectedIndivisibility=0;
           $countRejectedIndivisibilityMax=1000;
@@ -658,7 +655,6 @@ class PlannedWork extends GeneralWork {
             $resources=$stockResources;
             $arrayPlannedWork=$stockPlannedWork;
             $countRejectedIndivisibility++;
-            $countRejectedIndivisibilityMax=1000;
             $groupAss=$stockGroupAss;
             if ($countRejectedIndivisibility>$countRejectedIndivisibilityMax){
               break;

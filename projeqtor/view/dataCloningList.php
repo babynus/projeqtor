@@ -59,7 +59,7 @@ if($dataCloning->getVersionCodeList()){
     <td style="vertical-align:top;min-width:100px;width:20%;">
       <table >
 		    <tr height="32px">
-  		    <td width="50px" align="center">
+  		    <td style="width:50px;min-width:50px" align="center">  
             <?php echo formatIcon('DataCloning', 32, null, true);?>
           </td>
           <td width="200px"><span class="title"><?php echo i18n('menuDataCloning');?></span></td>
