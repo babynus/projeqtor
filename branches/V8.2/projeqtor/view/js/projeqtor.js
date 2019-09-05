@@ -5614,13 +5614,14 @@ function hideStreamMode(param,noRefresh){
       });
       dijit.byId("centerDiv").resize();
       dojo.setStyle("hideStreamButton", "display", "block");
+      setTimeout('dojo.setStyle("hideStreamButton", "display", "block");',100);
     } else {
       if (! menuRightDivSize) menuRightDivSize=((dojo.byId("centerDiv").offsetHeight)*0.15);
       dijit.byId("detailRightDiv").resize({
         h : menuRightDivSize
       });
       dijit.byId("centerDiv").resize();
-      dojo.setStyle("hideStreamButton", "display", "none");
+      setTimeout('dojo.setStyle("hideStreamButton", "display", "none");',100);
     }
     var detailHidden=false;
     if (dojo.byId('detailBarShow') && dojo.byId('detailBarShow').style.display=='block') detailHidden=true;
