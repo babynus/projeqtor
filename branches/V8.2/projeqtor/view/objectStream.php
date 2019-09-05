@@ -62,10 +62,12 @@
   }
   if (!$objectId) {
    
-      echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamBotClass' style='position:absolute;top:2px;left:3px'></div>";
+      
       if(Parameter::getUserParameter('paramRightDiv')!=3){
+        echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamBotClass' style='position:absolute;top:2px;right:40px'></div>";
          echo "<div onclick='hideStreamMode(0,false);' class='iconActivityStreamClose22 ' style='position:absolute;right:2px;top:2px;'></div>";
       }else{
+        echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamClass' style='position:absolute;top:2px;right:40px'></div>";
         echo "<div onclick='hideStreamMode(1,false);' class='iconActivityStreamClose22 ' style='position:absolute;right:2px;top:2px;'></div>";
       }
     
@@ -88,10 +90,12 @@
 <div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
 	<div id="activityStreamTop" dojoType="dijit.layout.ContentPane" region="top" style="text-align:center" class="dijitAccordionTitle">
 	<?php 
-      echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamBotClass' style='position:absolute;top:2px;left:3px'></div>";
+     
       if(Parameter::getUserParameter('paramRightDiv')!=3){
+         echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamBotClass' style='position:absolute;top:2px;right:40px'></div>";
          echo "<div onclick='hideStreamMode(0,false);' class='iconActivityStreamClose22 ' style='position:absolute;right:2px;top:2px;'></div>";
       }else{
+        echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamClass' style='position:absolute;top:2px;right:40px'></div>";
         echo "<div onclick='hideStreamMode(1,false);' class='iconActivityStreamClose22 ' style='position:absolute;right:2px;top:2px;'></div>";
       }
     
@@ -130,9 +134,12 @@
 	  </table>
 	   
 <?php if (!$onlyCenter) {?>   
-<?php if($countIdNote==0){ echo "<div style='padding:10px'>".$noNotes."</div>";}	?>  
+<?php 
+     $paramHeightStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass)-40;
+    if($countIdNote==0){ echo "<div style='padding:10px'>".$noNotes."</div>";}	
+?>  
 	</div>
-	<div id="activityStreamBottom" dojoType="dijit.layout.ContentPane" region="<?php echo$postionactivityStreamBottom;?>" style="<?php if($positionActivityStream==3){echo "width:30%;height:140px;overflow-x:hidden;";}else{echo "height:70px;overflow-x:hidden;";}?>>
+	<div id="activityStreamBottom" dojoType="dijit.layout.ContentPane" region="<?php echo$postionactivityStreamBottom;?>" style="<?php if($positionActivityStream==3){echo "width:30%;height:140px;overflow-x:hidden;padding-right:4px;";}else{echo "height:70px;overflow-x:hidden;padding-right:4px;";}?>>
 	  <form id='noteFormStream' name='noteFormStream' onSubmit="return false;" >
        <input id="noteId" name="noteId" type="hidden" value="" />
        <input id="noteRefType" name="noteRefType" type="hidden" value="<?php echo $objectClass;?>" />
@@ -140,7 +147,7 @@
        <input id="noteEditorTypeStream" name="noteEditorTypeStream" type="hidden" value="<?php echo getEditorType();?>" />
        <div style="width:99%;position:relative">
          <textarea rows="4"  name="noteNoteStream" id="noteNoteStream" dojoType="dijit.form.SimpleTextarea"
-         style="width:98%;<?php if($positionActivityStream==3){echo "height:140px;";}else{echo "height:60px";}?>;overflow-x:hidden;overflow-y:auto;border:1px solid grey;margin-top:2px;" onfocus="focusStream();"><?php echo i18n("textareaEnterText");?></textarea>
+         style="width:98%;<?php if($positionActivityStream==3){echo "height:".$paramHeightStream."px";}else{echo "height:60px";}?>;overflow-x:hidden;overflow-y:auto;border:1px solid grey;margin-top:2px;" onfocus="focusStream();"><?php echo i18n("textareaEnterText");?></textarea>
          <?php
          $privacyClass="";
          $privacyLabel=i18n("public");
