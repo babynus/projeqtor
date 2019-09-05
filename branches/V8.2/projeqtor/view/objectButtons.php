@@ -607,7 +607,6 @@
         $parmRightDiv=Parameter::getUserParameter('paramRightDiv'); 
         $paramWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
         $paramHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
-        
                if (property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream'))  {
                     if(($paramWidth!=0 and $parmRightDiv!=3 ) or ($paramHeight!=0 and $parmRightDiv==3)){ 
   	   ?>            
