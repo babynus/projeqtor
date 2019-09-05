@@ -602,20 +602,27 @@
       
       </div>
     </td>
+    <td  style="white-space:nowrap;">
        <?php 
-               if ((property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream')) and Parameter::getUserParameter("paramRightDiv") !='3') {
-	              if(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)!=0){ 
-	   ?>            
-            	   <div id="hideStreamButton" region="center" style="cursor:pointer;position:absolute;top:5px;right:0px; bottom:2px;z-index:999999;display:none;">
-            	     <a onClick="hideStreamMode(false);" id="buttonSwitchedStream" title="" ><span style="top:0px;display:inline-block;margin-right:12px;"><div class='iconActivityStreamWhite22 ' >&nbsp;</div></span></a>
-            	   </div>
-      <?php       }else{?>
-                   <div id="hideStreamButton" region="center" style="cursor:pointer;position:absolute;top:5px; right:0px; bottom:2px;z-index:999999">
-            	      <a onClick="hideStreamMode(false);" id="buttonSwitchedStream" title="" ><span style="top:0px;display:inline-block;margin-right:12px;"><div class='iconActivityStreamWhite22' >&nbsp;</div></span></a>
-            	   </div>
-      <?php       } 
-                }
+        $parmRightDiv=Parameter::getUserParameter('paramRightDiv'); 
+        $paramWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
+        $paramHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
+        
+               if (property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream'))  {
+                    if(($paramWidth!=0 and $parmRightDiv!=3 ) or ($paramHeight!=0 and $parmRightDiv==3)){ 
+  	   ?>            
+              	   <div id="hideStreamButton" region="center" style="cursor:pointer;position:absolute;top:5px;right:0px; bottom:2px;z-index:999999;display:none;">
+              	     <a onClick="hideStreamMode(<?php if($parmRightDiv==3){echo'1';}else{echo'0';}?>,false);" id="buttonSwitchedStream" title="" ><span style="top:0px;display:inline-block;margin-right:12px;"><div class='iconActivityStreamWhite22 ' >&nbsp;</div></span></a>
+              	   </div>
+        <?php       }else{?>
+                     <div id="hideStreamButton" region="center" style="cursor:pointer;position:absolute;top:5px; right:0px; bottom:2px;z-index:999999">
+              	      <a onClick="hideStreamMode(<?php if($parmRightDiv==3){echo'1';}else{echo'0';}?>,false);" id="buttonSwitchedStream" title="" ><span style="top:0px;display:inline-block;margin-right:12px;"><div class='iconActivityStreamWhite22' >&nbsp;</div></span></a>
+              	     </div>
+        <?php       } 
+  
+              }
       ?>
+      </td>
   </tr>
 </table>
 <?php 

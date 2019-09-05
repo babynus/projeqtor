@@ -61,12 +61,14 @@
     $updateDate='';
   }
   if (!$objectId) {
-    if(Parameter::getUserParameter('paramRightDiv')=='3'){
-      echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamClass' style='position:absolute;top:2px;left:3px'></div>";
-    }else{
+   
       echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamBotClass' style='position:absolute;top:2px;left:3px'></div>";
-      echo "<div onclick='hideStreamMode(false);' class='iconActivityStreamClose22 ' style='position:absolute;right:2px;top:2px;'></div>";
-    }
+      if(Parameter::getUserParameter('paramRightDiv')!=3){
+         echo "<div onclick='hideStreamMode(0,false);' class='iconActivityStreamClose22 ' style='position:absolute;right:2px;top:2px;'></div>";
+      }else{
+        echo "<div onclick='hideStreamMode(1,false);' class='iconActivityStreamClose22 ' style='position:absolute;right:2px;top:2px;'></div>";
+      }
+    
     echo "</br></br>";
     echo $noData; 
     exit;
@@ -74,17 +76,25 @@
   $countIdNote=count($notes);
   $onlyCenter=(RequestHandler::getValue('onlyCenter')=='true')?true:false;
   $privacyNotes=Parameter::getUserParameter('privacyNotes'.$objectClass);
+  $positionActivityStream= Parameter::getUserParameter('paramRightDiv');
+  if($positionActivityStream==3){
+    $postionactivityStreamBottom="trailing";
+  }else{
+    $postionactivityStreamBottom="bottom";
+  }
 ?>
 <!-- Titre et listes de notes -->
 <?php if (!$onlyCenter) {?>
 <div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
 	<div id="activityStreamTop" dojoType="dijit.layout.ContentPane" region="top" style="text-align:center" class="dijitAccordionTitle">
-	<?php if(Parameter::getUserParameter('paramRightDiv')=='3'){
-      echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamClass' style='position:absolute;top:2px;left:3px'></div>";
-          }else{
+	<?php 
       echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamBotClass' style='position:absolute;top:2px;left:3px'></div>";
-      echo "<div onclick='hideStreamMode(false);' class='iconActivityStreamClose22 ' style='position:absolute;right:2px;top:2px;'></div>";
-    }
+      if(Parameter::getUserParameter('paramRightDiv')!=3){
+         echo "<div onclick='hideStreamMode(0,false);' class='iconActivityStreamClose22 ' style='position:absolute;right:2px;top:2px;'></div>";
+      }else{
+        echo "<div onclick='hideStreamMode(1,false);' class='iconActivityStreamClose22 ' style='position:absolute;right:2px;top:2px;'></div>";
+      }
+    
     ?>
 	   <div><span class="title" ><?php echo i18n("titleStream");?></span></div>
 	   
@@ -122,7 +132,7 @@
 <?php if (!$onlyCenter) {?>   
 <?php if($countIdNote==0){ echo "<div style='padding:10px'>".$noNotes."</div>";}	?>  
 	</div>
-	<div id="activityStreamBottom" dojoType="dijit.layout.ContentPane" region="bottom" style="height:70px;overflow-x:hidden;">
+	<div id="activityStreamBottom" dojoType="dijit.layout.ContentPane" region="<?php echo$postionactivityStreamBottom;?>" style="height:70px;overflow-x:hidden;">
 	  <form id='noteFormStream' name='noteFormStream' onSubmit="return false;" >
        <input id="noteId" name="noteId" type="hidden" value="" />
        <input id="noteRefType" name="noteRefType" type="hidden" value="<?php echo $objectClass;?>" />
