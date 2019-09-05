@@ -30,13 +30,11 @@
   require_once "../tool/projeqtor.php";
   scriptLog('   ->/view/portfolioPlanningMain.php');  
   
-  $listHeight='60%';
   $topDetailDivHeight=Parameter::getUserParameter('contentPaneTopPortfolioPlanningDivHeight');
   $screenHeight=getSessionValue('screenHeight');
   if ($screenHeight and $topDetailDivHeight>$screenHeight-300) {
   	$topDetailDivHeight=$screenHeight-300;
   }
-  $listHeight=($topDetailDivHeight)?$topDetailDivHeight.'px':$listHeight;
   //florent
   $paramScreen=RequestHandler::getValue('paramScreen');
   $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
@@ -44,12 +42,17 @@
   $currentScreen='PortfolioPlanning';
   $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
   $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
-  $rightWidthPortfolioPlanning=WidthLayoutActivityStream($currentScreen);
-  if($positonRightDiv=="bottom"){
-    $rightHeightPortfolioPlanning=heightLaoutActivityStream($currentScreen);
-  }
  $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
-  ///////
+ if ($positionListDiv=='top'){
+   $listHeight=HeightLayoutListDiv($currentScreen);
+ }
+ if($positonRightDiv=="bottom"){
+   $rightHeightPortfolioPlanning=heightLaoutActivityStream($currentScreen);
+ }else{
+   $rightWidthPortfolioPlanning=WidthLayoutActivityStream($currentScreen);
+ }
+ $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
+ //////
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="PortfolioPlanning" />
 <input type="hidden" name="portfolioPlanning" id="portfolioPlanning" value="true" />

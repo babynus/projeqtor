@@ -29,13 +29,11 @@
  */
   require_once "../tool/projeqtor.php";
   scriptLog('   ->/view/planningMain.php');  
-  $listHeight='60%';
   $topDetailDivHeight=Parameter::getUserParameter('contentPaneTopResourcePlanningDivHeight');
   $screenHeight=getSessionValue('screenHeight');
   if ($screenHeight and $topDetailDivHeight>$screenHeight-300) {
     $topDetailDivHeight=$screenHeight-300;
   }
-  $listHeight=($topDetailDivHeight)?$topDetailDivHeight.'px':$listHeight;
   //florent
   $paramScreen=RequestHandler::getValue('paramScreen');
   $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
@@ -43,12 +41,16 @@
   $currentScreen='ResourcePlanning';
   $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
   $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
+ if ($positionListDiv=='top'){
+   $listHeight=HeightLayoutListDiv($currentScreen);
+ }
+ if($positonRightDiv=="bottom"){
+   $rightHeightResourcePlanning=heightLaoutActivityStream($currentScreen);
+ }else{
   $rightWidthResourcePlanning=WidthLayoutActivityStream($currentScreen);
-  if($positonRightDiv=="bottom"){
-    $rightHeightResourcePlanning=heightLaoutActivityStream($currentScreen);
-  }
+ }
  $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
-  ///////
+ //////
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="ResourcePlanning" />
 <input type="hidden" name="resourcePlanning" id="resourcePlanning" value="true" />
