@@ -4375,7 +4375,7 @@ function debugPrintTraceStack() {
     $line=isset($stackLine['line'])?$stackLine['line']:'';
     $func=isset($stackLine['function'])?$stackLine['function']:'';
     $clas=isset($stackLine['class'])?$stackLine['class']:'';
-    debugTraceLog(" =>".(($file)?" $file":"").(($line)?" at line $line":"").(($func)?" called from $func":"").(($clas)?" for class $clas":""));
+    debugTraceLog(" =>".(($file)?" $file":"").(($line)?" at line $line":"").( ($func)?" calling ".(($clas)?"$clas:":"")."$func()":""));
   }
 }
 

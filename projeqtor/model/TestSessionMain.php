@@ -49,8 +49,8 @@ class TestSessionMain extends SqlElement {
   public $idStatus;
   public $idResource;
   public $startDate;
-  public $endDate;
-  public $handled;
+  //public $endDate;
+  //public $handled;
   public $handledDate;
   public $done;
   public $doneDate;
