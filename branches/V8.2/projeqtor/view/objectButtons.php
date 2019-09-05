@@ -194,6 +194,7 @@
 		      saveObject();
         </script>
       </button>
+      <?php organizeButtons();?>
      <?php // organizeButtons(); // removed on V7.1 : buttons undo and refresh not visible at same time?>
      <button id="refreshButton" dojoType="dijit.form.Button" showlabel="false" 
        title="<?php echo i18n('buttonRefresh', array(i18n($_REQUEST['objectClass'])));?>"
@@ -220,28 +221,7 @@
 //          loadContent("objectDetail.php", "detailDiv", 'listForm');
 // END COMMENT BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT        </script>
       </button>        
-      <?php organizeButtons();?>
-<?php if ($_REQUEST['objectClass']!='Workflow' and $_REQUEST['objectClass']!='Mail') {
-     // Disable PDF Export for :
-     //    - Wokflow : too complex and systematically fails in timeout
-     //    - Mail : description is content of email possibly truncated, so tags may be not closed?>    
-     <?php organizeButtons();?>
-     <button id="printButtonPdf" dojoType="dijit.form.Button" showlabel="false"
-       title="<?php echo ($modePdf=='pdf')?i18n('reportPrintPdf'):i18n('reportPrintTemplate');?>"
-       <?php if ($noselect) {echo "disabled";} ?> 
-       iconClass="dijitButtonIcon dijitButtonIcon<?php echo ucfirst($modePdf);?>" class="detailButton">
-        <script type="dojo/connect" event="onClick" args="evt">
-        dojo.byId("printButton").blur();
-        hideExtraButtons('extraButtonsDetail');
-        if (dojo.byId("printPdfButton")) {dojo.byId("printPdfButton").blur();}
-        <?php if (substr($modePdf,-5)=="multi" and SqlElement::class_exists('TemplateReport') ) {?>
-        selectTemplateForReport('<?php echo $class?>','detail');
-        <?php } else { ?> 
-        showPrint("<?php echo $printPagePdf;?>", null, null, '<?php echo $modePdf;?>', 'P');
-        <?php } ?>
-        </script>
-      </button>   
-<?php } 
+      <?php organizeButtons();
       if (! (property_exists($_REQUEST['objectClass'], '_noCopy')) ) { ?>
       <?php organizeButtons();?>
       <button id="copyButton" dojoType="dijit.form.Button" showlabel="false"
@@ -282,6 +262,26 @@
         </script>
       </button>    
 <?php }?>
+            <?php organizeButtons();?>
+      <button id="deleteButton" dojoType="dijit.form.Button" showlabel="false" 
+       title="<?php echo i18n('buttonDelete', array(i18n($_REQUEST['objectClass'])));?>"
+       <?php
+// MTY - LEAVE SYSTEM       
+            if ($noselect or $noSelectLeaveDeleteCopy) {echo "disabled";} 
+// MTY - LEAVE SYSTEM       
+       ?> 
+       iconClass="dijitButtonIcon dijitButtonIconDelete" class="detailButton">
+        <script type="dojo/connect" event="onClick" args="evt">
+          dojo.byId("deleteButton").blur();
+          hideExtraButtons('extraButtonsDetail');
+		      action=function(){
+		        loadContent("../tool/deleteObject.php", "resultDiv", 'objectForm', true);
+            if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
+          };
+          var alsoDelete="";
+          showConfirm(i18n("confirmDelete", new Array("<?php echo i18n($_REQUEST['objectClass']);?>",dojo.byId('id').value))+alsoDelete ,action);
+        </script>
+      </button>  
       <?php organizeButtons();?>
       <button id="undoButton" dojoType="dijit.form.Button" showlabel="false"
        title="<?php echo i18n('buttonUndo', array(i18n($_REQUEST['objectClass'])));?>"
@@ -321,27 +321,28 @@
         if (dojo.byId("printPdfButton")) {dojo.byId("printPdfButton").blur();}
         showPrint("<?php echo $printPage;?>", null, null, null, 'P');
         </script>
-      </button>  
-      <?php organizeButtons();?>
-      <button id="deleteButton" dojoType="dijit.form.Button" showlabel="false" 
-       title="<?php echo i18n('buttonDelete', array(i18n($_REQUEST['objectClass'])));?>"
-       <?php
-// MTY - LEAVE SYSTEM       
-            if ($noselect or $noSelectLeaveDeleteCopy) {echo "disabled";} 
-// MTY - LEAVE SYSTEM       
-       ?> 
-       iconClass="dijitButtonIcon dijitButtonIconDelete" class="detailButton">
+      </button>
+      <?php if ($_REQUEST['objectClass']!='Workflow' and $_REQUEST['objectClass']!='Mail') {
+     // Disable PDF Export for :
+     //    - Wokflow : too complex and systematically fails in timeout
+     //    - Mail : description is content of email possibly truncated, so tags may be not closed?>    
+     <?php organizeButtons();?>
+     <button id="printButtonPdf" dojoType="dijit.form.Button" showlabel="false"
+       title="<?php echo ($modePdf=='pdf')?i18n('reportPrintPdf'):i18n('reportPrintTemplate');?>"
+       <?php if ($noselect) {echo "disabled";} ?> 
+       iconClass="dijitButtonIcon dijitButtonIcon<?php echo ucfirst($modePdf);?>" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
-          dojo.byId("deleteButton").blur();
-          hideExtraButtons('extraButtonsDetail');
-		      action=function(){
-		        loadContent("../tool/deleteObject.php", "resultDiv", 'objectForm', true);
-            if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
-          };
-          var alsoDelete="";
-          showConfirm(i18n("confirmDelete", new Array("<?php echo i18n($_REQUEST['objectClass']);?>",dojo.byId('id').value))+alsoDelete ,action);
+        dojo.byId("printButton").blur();
+        hideExtraButtons('extraButtonsDetail');
+        if (dojo.byId("printPdfButton")) {dojo.byId("printPdfButton").blur();}
+        <?php if (substr($modePdf,-5)=="multi" and SqlElement::class_exists('TemplateReport') ) {?>
+        selectTemplateForReport('<?php echo $class?>','detail');
+        <?php } else { ?> 
+        showPrint("<?php echo $printPagePdf;?>", null, null, '<?php echo $modePdf;?>', 'P');
+        <?php } ?>
         </script>
-      </button>    
+      </button>   
+<?php } ?>  
     <?php 
     $clsObj=get_class($obj);
     if ($clsObj=='TicketSimple') {$clsObj='Ticket';}
