@@ -48,7 +48,7 @@ $dataCloningTotal = $dataCloningTotal->rightAccess;
   </tr>
   <tr>
     <td style="text-align:center;" class="dialogLabel">
-      <?php echo i18n('colDataCloningCount', array($dataCloningTotal-$dataCloningCountTotal, $dataCloningTotal));?>
+      <?php echo i18n('colDataCloningCountTotal', array($dataCloningTotal-$dataCloningCountTotal, $dataCloningTotal));?>
     </td>
   </tr>
 </table>

@@ -140,7 +140,7 @@ $dataCloningCount = i18n('colDataCloningCount', array($dataCloningPerDay-$dataCl
         <table width="100%">
           <tr>
             <td width="10%" nowrap="nowrap">
-              <div id="dataCloningRequestorCount">
+              <div id="dataCloningRequestorCount" style="font-weight:bold;">
                 <?php echo $dataCloningCount;?>
               </div>
             </td>
