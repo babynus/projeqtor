@@ -48,7 +48,7 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
   	  $listHeight=HeightLayoutListDiv($objectClass);
   	}
   	if($positonRightDiv=="bottom"){
-    $rightHeight=heightLaoutActivityStream($objectClass);
+      $rightHeight=heightLaoutActivityStream($objectClass);
     }else{
   	 $rightWidth=WidthLayoutActivityStream($objectClass);
   	}
