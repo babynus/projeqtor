@@ -4792,7 +4792,7 @@ function heightLaoutActivityStream($objectClass){
       }
       $rightHeight=$detailRightHeight.'px';
     } else {
-      $rightHeight="10%";
+      $rightHeight="0%";
     }
   }
   return $rightHeight;

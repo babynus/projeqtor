@@ -54,7 +54,6 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
   	}
   }
   $tableWidth=WidthDivContentDetail($positionListDiv,$objectClass);
-  debugLog($tableWidth);
 ?>
 <input type="hidden" id="objectClass" value="<?php echo $objectClass;?>" />
 <div id="mainDivContainer" class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
@@ -70,7 +69,6 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
             var paramDiv=<?php echo json_encode($positionListDiv); ?>;
             var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
             if(paramDiv=="top" && paramMode!='5'){
-              console.log( dojo.byId("listDiv").offsetHeight);
               saveDataToSession("contentPaneTopDetailDivHeight<?php echo $objectClass;?>", dojo.byId("listDiv").offsetHeight, true);
             }else{
               saveDataToSession("contentPaneTopDetailDivWidth<?php echo $objectClass;?>", dojo.byId("listDiv").offsetWidth, true);
