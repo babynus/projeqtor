@@ -4784,8 +4784,8 @@ function heightLaoutActivityStream($objectClass){
     $detailDivHeight=Parameter::getUserParameter('contentPaneDetailDivHeight'.$objectClass);
     if (!$detailRightHeight) $detailRightHeight=0;
     if($detailRightHeight or $detailRightHeight==="0"){
-      if ($detailRightHeight < 80){
-        $detailRightHeight=100;
+      if ($detailRightHeight < 180){
+        $detailRightHeight=180;
       }
       if(($detailRightHeight> $detailDivHeight )and (!empty($detailDivHeight))){
         $detailRightHeight=($detailDivHeight/2);
