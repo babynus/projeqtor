@@ -136,6 +136,9 @@
 <?php if (!$onlyCenter) {?>   
 <?php 
      $paramHeightStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass)-40;
+     if(empty($paramHeightStream)){
+        $paramHeightStream=140;
+      }
     if($countIdNote==0){ echo "<div style='padding:10px'>".$noNotes."</div>";}	
 ?>  
 	</div>

@@ -30,13 +30,13 @@
   require_once "../tool/projeqtor.php";
   scriptLog('   ->/view/planningMain.php');
   
-  $listHeight='60%';
   $topDetailDivHeight=Parameter::getUserParameter('contentPaneTopPlanningDivHeight');
   $screenHeight=getSessionValue('screenHeight');
   if ($screenHeight and $topDetailDivHeight>$screenHeight-300) {
     $topDetailDivHeight=$screenHeight-300;
   }
-  $listHeight=($topDetailDivHeight)?$topDetailDivHeight.'px':$listHeight;
+  
+  
   //florent
   $paramScreen=RequestHandler::getValue('paramScreen');
   $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
@@ -44,14 +44,16 @@
   $currentScreen='Planning';
   $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
   $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
-  $rightWidthPlanning=WidthLayoutActivityStream($currentScreen);
+  if ($positionListDiv=='top'){
+    $listHeight=HeightLayoutListDiv($currentScreen);
+  }
   if($positonRightDiv=="bottom"){
     $rightHeightPlanning=heightLaoutActivityStream($currentScreen);
+  }else{
+  	$rightWidthPlanning=WidthLayoutActivityStream($currentScreen);
   }
   $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
-  ///////
- 
- 
+  //
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="Planning" />
 <input type="hidden" name="planning" id="planning" value="true" />
@@ -69,7 +71,7 @@
            var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
            if(paramDiv=="top" && paramMode!='5'){
               saveDataToSession("contentPaneTopDetailDivHeight<?php echo $currentScreen;?>",dojo.byId("listDiv").offsetHeight, true);
-            }else{
+            }else if(paramMode!='5'){
               saveDataToSession("contentPaneTopDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("listDiv").offsetWidth, true);
             }
         </script>
@@ -81,7 +83,7 @@
            var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
            if(paramDiv=="top" && paramMode!='5'){
                     saveDataToSession("contentPaneDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
-                  }else{
+                  }else if(paramMode!='5'){
               saveDataToSession("contentPaneDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
             }
           </script>

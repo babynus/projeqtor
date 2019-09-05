@@ -30,13 +30,11 @@
   require_once "../tool/projeqtor.php";
   scriptLog('   ->/view/globalPlanningMain.php');
     
-  $listHeight='60%';
   $topDetailDivHeight=Parameter::getUserParameter('contentPaneTopGlobalPlanningDivHeight');
   $screenHeight=getSessionValue('screenHeight');
   if ($screenHeight and $topDetailDivHeight>$screenHeight-300) {
     $topDetailDivHeight=$screenHeight-300;
   }
-  $listHeight=($topDetailDivHeight)?$topDetailDivHeight.'px':$listHeight;
   //florent
   $paramScreen=RequestHandler::getValue('paramScreen');
   $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
@@ -44,12 +42,16 @@
   $currentScreen='GlobalPlanning';
   $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
   $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
-  $rightWidthGlobalPlanning=WidthLayoutActivityStream($currentScreen);
-  if($positonRightDiv=="bottom"){
+ if ($positionListDiv=='top'){
+   $listHeight=HeightLayoutListDiv($currentScreen);
+ }
+ if($positonRightDiv=="bottom"){
     $rightHeightGlobalPlanning=heightLaoutActivityStream($currentScreen);
-  }
+ }else{
+  $rightWidthGlobalPlanning=WidthLayoutActivityStream($currentScreen);
+ }
  $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
-  ///////
+ //////
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="GlobalPlanning" />
 <input type="hidden" name="globalPlanning" id="globalPlanning" value="true" />
