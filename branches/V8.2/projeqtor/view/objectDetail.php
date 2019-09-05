@@ -391,7 +391,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
     } else {
       $titlePane=$objClass."_history";
       ?>
-<div style="width: <?php echo $displayWidth;?>;" dojoType="dijit.TitlePane" 
+<div style="width: <?php echo $displayWidth;?>; overflow:auto" dojoType="dijit.TitlePane" 
        title="<?php echo i18n('elementHistory');?>"
        open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
        id="<?php echo $titlePane;?>"         
@@ -700,7 +700,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     $hiddenSection=false;
     if ($section) {
       if ($parentHidden or $obj->isAttributeSetToField('_sec_'.$section, 'hidden') or in_array('_sec_'.$section, $extraHiddenFields)) {
-        $hide=true;
+        //$hide=true;
         $hiddenSection=true;
       }
     }
@@ -3206,7 +3206,8 @@ function drawOrigin($list, $refType, $refId, $obj, $col, $print) {
 }
 
 function drawHistoryFromObjects($refresh=false) {
-  global $cr, $print, $treatedObjects, $comboDetail;
+  global $cr, $print, $treatedObjects, $comboDetail, $displayWidth;
+  $maxWidth=($displayWidth and substr($displayWidth,-2)=='px')?(intval($displayWidth)/2)-180:500;
   SqlElement::$_cachedQuery['Note']=array();
   SqlElement::$_cachedQuery['Attachment']=array();
   if ($comboDetail) {
@@ -3229,7 +3230,7 @@ function drawHistoryFromObjects($refresh=false) {
   $order=' operationDate desc, id asc';
   $hist=new History();
   $historyList=$hist->getSqlElementsFromCriteria(null, false, $where, $order);
-  echo '<table style="width:100%;">';
+  echo '<table style="width:100%;margin-right:10px">';
   echo '<tr>';
   echo '<td class="historyHeader" style="width:10%">'.i18n('colOperation').'</td>';
   echo '<td class="historyHeader" style="width:14%">'.i18n('colColumn').'</td>';
@@ -3378,9 +3379,8 @@ function drawHistoryFromObjects($refresh=false) {
         $oldValue=$oldValue.' '.i18n('colPct');
         $newValue=$newValue.' '.i18n('colPct');
       } else if ($dataLength>4000 or $refType=='Note') {
-        // $diff=diffValues($oldValue,$newValue);
-        // Nothing, preserve html format
-        // $oldValue=$colName;
+        $oldValue='<div style="max-width:'.$maxWidth.'px;overflow:auto;">'.$oldValue.'</div>';
+        $newValue='<div style="max-width:'.$maxWidth.'px;overflow:auto">'.$newValue.'</div>';
       } else if ($colName=='password' or $colName=='apiKey') {
         $allstars="**********";
         if ($oldValue) $oldValue=substr($oldValue, 0, 5).$allstars.substr($oldValue, -5);
