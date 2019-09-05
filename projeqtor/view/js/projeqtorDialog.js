@@ -6399,7 +6399,7 @@ function switchModeLayout(paramToSend){
   }else if (paramToSend=='5'){
     var paramDiv='paramScreen';
       switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
-      setTimeout("switchModeOn();", 100);
+      setTimeout("switchModeOn();", 300);
   }
 }
 

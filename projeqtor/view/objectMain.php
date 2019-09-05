@@ -70,7 +70,7 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
             var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
             if(paramDiv=="top" && paramMode!='5'){
               saveDataToSession("contentPaneTopDetailDivHeight<?php echo $objectClass;?>", dojo.byId("listDiv").offsetHeight, true);
-            }else{
+            }else if(paramMode!='5'){
               saveDataToSession("contentPaneTopDetailDivWidth<?php echo $objectClass;?>", dojo.byId("listDiv").offsetWidth, true);
             }
          </script>
@@ -82,7 +82,7 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
               var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
               if(paramDiv=="top" && paramMode!='5'){
                 saveDataToSession("contentPaneDetailDivHeight<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
-              }else{
+              }else if(paramMode!='5'){
               saveDataToSession("contentPaneDetailDivWidth<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
             }
 
