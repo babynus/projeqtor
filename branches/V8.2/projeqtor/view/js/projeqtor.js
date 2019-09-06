@@ -1054,7 +1054,13 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
             dojo.byId('formDiv').scrollTop = formDivPosition;
           }
           if (destination == "centerDiv" && switchedMode && !directAccess) {
-            showList();
+            if(loadingContentDiv==true){
+              hideList();
+              loadingContentDiv=false;
+            }else{
+              showList();
+            }
+            
           }
           if (destination == "centerDiv" && dijit.byId('objectGrid')) {
             mustApplyFilter=true;

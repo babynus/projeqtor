@@ -6329,10 +6329,59 @@ function menuClick() {
 }
 
 var switchedMode=false;
+var loadingContentDiv=false;
 var listDivSize=0;
 var switchedVisible='';
 var switchListMode='CLICK';
-function switchModeOn(){
+function switchMode() {
+  if (!switchedMode) {
+    switchedMode=true;
+    //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonStandardMode');
+    if (!dojo.byId("listDiv")) {
+      if (listDivSize == 0) {
+        listDivSize=dojo.byId("centerDiv").offsetHeight * .4;
+      }
+      return;
+    } else {
+      listDivSize=dojo.byId("listDiv").offsetHeight;
+    }
+    if (dojo.byId('listDiv_splitter')) {
+      dojo.byId('listDiv_splitter').style.display='none';
+    }
+    if (dijit.byId('id')) {
+      
+      hideList();
+    } else {
+      showList();
+    }
+  } else {
+    switchedMode=false;
+    //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonSwitchedMode');
+    if (!dojo.byId("listDiv")) {
+      return;
+    }
+    if (dojo.byId('listBarShow')) {
+      dojo.byId('listBarShow').style.display='none';
+    }
+    if (dojo.byId('detailBarShow')) {
+      dojo.byId('detailBarShow').style.display='none';
+    }
+    if (dojo.byId('listDiv_splitter')) {
+      dojo.byId('listDiv_splitter').style.display='block';
+    }
+    if (listDivSize == 0) {
+      listDivSize=dojo.byId("centerDiv").offsetHeight * .4;
+    }
+    dijit.byId("listDiv").resize({
+      h : listDivSize
+    });
+    dijit.byId("mainDivContainer").resize();
+  }
+}
+
+
+
+function switchModeOn(objectIdScreen){
   switchedMode=true;
   //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonStandardMode');
   if (!dojo.byId("listDiv")) {
@@ -6349,9 +6398,11 @@ function switchModeOn(){
   if (dijit.byId('id')) {
     hideList();
   } else {
+    loadingContentDiv=false;
     showList();
-  } 
+  }
 }
+
 function switchModeOff(){
   switchedMode=false;
   //dojo.byId("buttonSwitchModeLabel").innerHTML=i18n('buttonSwitchedMode');
@@ -6398,22 +6449,39 @@ function switchModeLayout(paramToSend){
     switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
   }else if (paramToSend=='5'){
     var paramDiv='paramScreen';
+    if(objectIdScreen!=null){
+      loadingContentDiv=true;
+    }
       switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
-      setTimeout("switchModeOn();", 300);
+      switchModeOn(objectIdScreen);
   }
 }
 
-function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen){
-  if(currentScreen=='Planning'){
-    loadContent("planningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-  }else if(currentScreen=='GlobalPlanning'){
-    loadContent("globalPlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-  }else if(currentScreen=='PortfolioPlanning' ){
-    loadContent("portfolioPlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-  }else if(currentScreen=='ResourcePlanning') {
-    loadContent("resourcePlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen,showList){
+  if(showList=='1'){
+    if(currentScreen=='Planning'){
+      loadContent("planningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }else if(currentScreen=='GlobalPlanning'){
+      loadContent("globalPlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }else if(currentScreen=='PortfolioPlanning' ){
+      loadContent("portfolioPlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }else if(currentScreen=='ResourcePlanning') {
+      loadContent("resourcePlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }else{
+      loadContent("objectMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }
   }else{
-    loadContent("objectMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    if(currentScreen=='Planning'){
+      loadContent("planningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }else if(currentScreen=='GlobalPlanning'){
+      loadContent("globalPlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }else if(currentScreen=='PortfolioPlanning' ){
+      loadContent("portfolioPlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }else if(currentScreen=='ResourcePlanning') {
+      loadContent("resourcePlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }else{
+      loadContent("objectMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }
   }
   if(objectIdScreen !=''){
     loadContent("objectDetail.php", "detailDiv", 'listForm');
