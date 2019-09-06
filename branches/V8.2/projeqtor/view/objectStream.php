@@ -143,7 +143,7 @@
     if($countIdNote==0){ echo "<div style='padding:10px'>".$noNotes."</div>";}	
 ?>  
 	</div>
-	<div id="activityStreamBottom" dojoType="dijit.layout.ContentPane" region="<?php echo$postionactivityStreamBottom;?>" style="<?php if($positionActivityStream==3){echo "width:30%;height:140px;overflow-x:hidden;padding-right:4px;";}else{echo "height:70px;overflow-x:hidden;padding-right:4px;";}?>>
+	<div id="activityStreamBottom" dojoType="dijit.layout.ContentPane" region="<?php echo$postionactivityStreamBottom;?>" style="<?php if($positionActivityStream==3){echo "width:30%;height:140px;overflow-x:hidden;";}else{echo "height:70px;overflow-x:hidden;";}?>">
 	  <form id='noteFormStream' name='noteFormStream' onSubmit="return false;" >
        <input id="noteId" name="noteId" type="hidden" value="" />
        <input id="noteRefType" name="noteRefType" type="hidden" value="<?php echo $objectClass;?>" />
