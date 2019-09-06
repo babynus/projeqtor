@@ -323,6 +323,7 @@ class TicketMain extends SqlElement {
    */
   public function control(){
     $result="";
+    $old=$this->getOld();
     // TODO : if planned changed so that left is null, control still blocks
     // if (isset($this->WorkElement)) {
     //   $this->WorkElement->leftWork=$this->WorkElement->plannedWork-$this->WorkElement->realWork;
@@ -333,6 +334,10 @@ class TicketMain extends SqlElement {
         $result.='<br/>' . i18n('msgParentActivityInSameProject');
       }
     }
+    if ($this->id and trim($this->idActivity)!=trim($old->idActivity) and $this->WorkElement->realWork>0)  {
+      $result .='<br/>' . i18n ( 'msgPlanningActivityWithWork' );
+    }
+    
     if ($this->idTicket) {
     	if ($this->idTicket==$this->id) {
     		$result.='<br/>' . i18n('duplicateIsSame');
