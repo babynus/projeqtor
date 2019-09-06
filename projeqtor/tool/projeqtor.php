@@ -4778,8 +4778,8 @@ function changeLayoutActivityStream($paramRightDiv){
 }
 
 function heightLaoutActivityStream($objectClass){
-  if(empty($objectClass))$objectClass='';
   if(Parameter::getUserParameter("paramRightDiv") == '3' ){
+    $paramScreen=Parameter::getUserParameter("paramScreen");
     $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
     $detailDivHeight=Parameter::getUserParameter('contentPaneDetailDivHeight'.$objectClass);
     if (!$detailRightHeight) $detailRightHeight=0;
@@ -4787,7 +4787,7 @@ function heightLaoutActivityStream($objectClass){
       if ($detailRightHeight < 180){
         $detailRightHeight=180;
       }
-      if(($detailRightHeight> $detailDivHeight )and (!empty($detailDivHeight))){
+      if((($detailRightHeight>$detailDivHeight ) and $paramScreen=='1' )and (!empty($detailDivHeight))){
         $detailRightHeight=($detailDivHeight/2);
       }
       $rightHeight=$detailRightHeight.'px';
@@ -4804,7 +4804,7 @@ function WidthLayoutActivityStream($objectClass){
   $topDivWidth=Parameter::getUserParameter('contentPaneDetailDivWidth'.$objectClass);
   if (!$detailDivWidth) $detailDivWidth=0;
   if($detailDivWidth or $detailDivWidth==="0"){
-    if((!empty($topDivWidth)) and ($detailDivWidth > ($topDivWidth/2)) and $paramDetailDiv==2){
+    if((!empty($topDivWidth)) and ($detailDivWidth > ($topDivWidth/2)) and $paramDetailDiv=='2'){
       $detailDivWidth=($topDivWidth/2);
     }else if(empty($topDivWidth) and $paramDetailDiv==2){
       $detailDivWidth='20%';
@@ -4850,8 +4850,12 @@ function HeightLayoutListDiv($objectClass){
   $topDetailDivHeight=Parameter::getUserParameter('contentPaneTopDetailDivHeight'.$objectClass);
   $screenHeight=getSessionValue('screenHeight');
   if ($screenHeight and $topDetailDivHeight>$screenHeight-300) {
-    $topDetailDivHeight=$screenHeight-300;
-  }    
-  $listHeight=($topDetailDivHeight)?$topDetailDivHeight.'px':'50%';
+   $topDetailDivHeight=$screenHeight-300;
+  }
+  if(empty($topDetailDivHeight)){
+    $listHeight='50%';
+  }else{
+  $listHeight=$topDetailDivHeight;
+  }
   return $listHeight;
 }
