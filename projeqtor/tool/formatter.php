@@ -558,7 +558,11 @@ function activityStreamDisplayNote ($note,$origin){
     echo '</div></td></tr></table>';
     
     if ($origin=='objectStream') {
-    	$rightWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-30).'px"';
+        if(Parameter::getUserParameter('paramRightDiv')==3){
+          $rightWidth='70%';
+        }else{
+          $rightWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-30).'px"';
+        }
     } else {
     	if (RequestHandler::isCodeSet('destinationWidth')) {
         $rightWidth=(RequestHandler::getNumeric('destinationWidth')-30).'px';
