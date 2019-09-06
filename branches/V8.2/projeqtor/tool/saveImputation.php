@@ -114,7 +114,8 @@ for ($i=0; $i<$nbLines; $i++) {
     }
     $line->arrayWork=$arrayWork;
     $result=$line->save();
-    if (stripos($result,'id="lastOperationStatus" value="ERROR"')>0 ) {
+    $status=getLastOperationStatus($result);
+    if ($status=="ERROR" or $status=="INVALID") {
       $status='ERROR';
       $finalResult=$result;
       break;
