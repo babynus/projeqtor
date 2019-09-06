@@ -4849,12 +4849,12 @@ function WidthDivContentDetail($positionListDiv,$objectClass){
 function HeightLayoutListDiv($objectClass){
   $topDetailDivHeight=Parameter::getUserParameter('contentPaneTopDetailDivHeight'.$objectClass);
   $screenHeight=getSessionValue('screenHeight');
-    if ($screenHeight and $topDetailDivHeight>$screenHeight-300) {
-      $topDetailDivHeight=$screenHeight-300;
-    }else if(empty($topDetailDivHeight)){
-      $listHeight='50%';
-    }else{
-    $listHeight=($topDetailDivHeight)?$topDetailDivHeight.'px':$listHeight;
-    }
-    return $listHeight;
+  debugLog('hauteur ecran '.$screenHeight.'   hauteurObjectDetail  '.$topDetailDivHeight);
+  if ($screenHeight and $topDetailDivHeight>$screenHeight-300) {
+    debugLog('1 '.$topDetailDivHeight);
+    $topDetailDivHeight=$screenHeight-300;
+    debugLog('2 '.$topDetailDivHeight);
+  }    
+  $listHeight=($topDetailDivHeight)?$topDetailDivHeight.'px':'50%';
+  return $listHeight;
 }
