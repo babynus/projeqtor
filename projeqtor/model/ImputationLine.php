@@ -1286,7 +1286,8 @@ class ImputationLine {
           $result=$work->delete();
         }
       }
-      if (stripos($result, 'id="lastOperationStatus" value="ERROR"')>0) {
+      $status=getLastOperationStatus($result);
+      if ($status=="ERROR" or $status=="INVALID") {
         $status='ERROR';
         $finalResult=$result;
         break;
