@@ -88,6 +88,23 @@ class Work extends GeneralWork {
     if ($obj->validated=='1' or $obj->submitted=='1') {
       $result.='<br/>' . i18n('errorWeekValidated');
     }
+    if ($this->idAssignment and !$this->idWorkElement) {
+      $ass=new Assignment($this->idAssignment);
+      if ($ass->idResource != $this->idResource) { // Resource of work different from resource of assignment 
+        $res=new ResourceAll($ass->idResource); 
+        if ($res->id and ! $res->isResourceTeam ) {
+          $msg=i18n('errorWorkResource',array($this->idResource,$ass->idResource));
+          $result.='<br/>'.$msg;
+          errorLog("------------------------------");
+          errorLog($msg);
+          errorLog(i18n('Work'));
+          errorLog($this);
+          errorLog(i18n('Assignment'));
+          errorLog($ass);
+          errorLog("------------------------------");
+        }
+      }
+    }
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
       $result.=$defaultControl;
