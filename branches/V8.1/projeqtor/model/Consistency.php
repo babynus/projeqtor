@@ -457,6 +457,31 @@ class Consistency {
         }
       }
     }
+    // Check Resource 
+    $res=new Resource();
+    $resTable=$res->getDatabaseTableName();
+    $query="SELECT a.id as assid, a.idResource as assress, w.id as workid, w.idResource as workres, w.workDate as workdate, w.refType as reftype, w.refid as refid "
+        ." FROM $workTable w, $assTable a, $resTable r "
+        ." where w.idAssignment=a.id and a.idResource=r.id and r.isResourceTeam=0 and a.idResource!=w.idResource";
+    $result=Sql::query($query);
+    while ($line = Sql::fetchLine($result)) {
+      $wRes=SqlList::getNameFromId('Affectable', $line['workres']);
+      $aRes=SqlList::getNameFromId('Affectable', $line['assress']);
+      $date=htmlFormatDate($line['workdate']);
+      displayError(i18n('errorWorkResource',array($wRes,$aRes,$date,$line['workid'],$line['assid'],i18n($line['reftype']),$line['refid'])));
+      $errors++;
+      if ($correct) {
+        $w=new Work($line['workid']);
+        $w->idResource=$line['assress'];
+        $res=$w->save();
+        if (getLastOperationStatus($res)!='OK') {
+          displayMsg(i18n("checkNotFixed"),true);
+          debugTraceLog($res);
+        } else {
+          displayOK(i18n("checkFixed"),true);
+        }
+      }
+    }
     if (!$errors) {
       displayOK(i18n("checkNoError"));
   
