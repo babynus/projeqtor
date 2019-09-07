@@ -93,7 +93,7 @@ class Work extends GeneralWork {
       if ($ass->idResource != $this->idResource) { // Resource of work different from resource of assignment 
         $res=new ResourceAll($ass->idResource); 
         if ($res->id and ! $res->isResourceTeam ) {
-          $msg=i18n('errorWorkResource',array($this->idResource,$ass->idResource));
+          $msg=i18n('errorWorkResource',array($this->idResource,$ass->idResource,htmlFormatDate($this->workDate),null,null,i18n($this->refType),$this->refId));
           $result.='<br/>'.$msg;
           errorLog("------------------------------");
           errorLog($msg);
