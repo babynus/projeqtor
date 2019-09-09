@@ -84,6 +84,7 @@ CREATE TABLE `${prefix}datacloning` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `nameDir` varchar(100) DEFAULT NULL,
+  `idRequestor` int(12) unsigned DEFAULT NULL,
   `idResource` int(12) unsigned DEFAULT NULL,
   `idOrigin` int(12) unsigned DEFAULT NULL,
   `versionCode` varchar(100) DEFAULT NULL,
