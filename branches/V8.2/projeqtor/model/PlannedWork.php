@@ -1690,7 +1690,7 @@ scriptLog("storeListPlan(listPlan,$plan->id)");
       } else {
         $crit.=$str99;
       }
-      if ($elt->indivisibility==1 and $elt->realWork>0) {
+      if (property_exists($elt,'indivisibility') and $elt->indivisibility==1 and $elt->realWork>0) {
         $crit.=".0";
       } else {
         $crit.=".1";
