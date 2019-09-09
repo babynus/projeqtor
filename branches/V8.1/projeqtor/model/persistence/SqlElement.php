@@ -545,9 +545,6 @@ abstract class SqlElement {
       "DocumentDirectory" => array(
           "Document" => "control", 
           "DocumentDirectory" => "control"), 
-      "Meeting" => array(
-      		"Assignment" => "cascade"
-      ),
 // MTY - LEAVE SYSTEM
       "EmploymentContractEndReason" => array(
           "EmploymentContract" => "control"
@@ -564,6 +561,9 @@ abstract class SqlElement {
           "LeaveTypeOfEmploymentContractType" => "control"          
       ),
 // MTY - LEAVE SYSTEM
+      "Meeting" => array(
+          "Assignment" => "cascade"
+      ),
 // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM      
       "Notifiable" => array(
           "NotificationDefinition" => "confirm"),
@@ -4562,6 +4562,24 @@ abstract class SqlElement {
     $class = get_class ( $this );
     $old = new $class ( $this->id );
     $fldType = 'id' . $class . 'Type';
+    
+    // When reopening item control that parent is not still closed
+    if (property_exists($this,'idle') and $this->id and $this->idle==0 and $old->idle==1) {
+      if (property_exists($this,'idActivity') and $this->idActivity) {
+        $act=new Activity($this->idActivity,true);
+        if ($act->idle==1) {
+          $msg="<br/>".i18n("errorReopenControl",array(i18n('Activity').' #'.$this->idActivity));
+          if (strpos($result,$msg)===false) $result.=$msg;
+        }
+      }
+      if (property_exists($this,'idProject') and $this->idProject) {
+        $prj=new Project($this->idProject,true);
+        if ($prj->idle==1) {
+          $msg="<br/>".i18n("errorReopenControl",array(i18n('Project').' #'.$this->idProject));
+          if (strpos($result,$msg)===false) $result.=$msg;
+        }
+      }
+    } 
     
     if (property_exists ( $class, 'idStatus' ) and property_exists ( $class, $fldType ) and trim ( $old->idStatus ) and trim ( $old->$fldType ) and (trim ( $old->idStatus ) != trim ( $this->idStatus ) or trim ( $old->$fldType ) != trim ( $this->$fldType )) and $old->id and $class != 'Document') {
       $oldStat = new Status ( $old->idStatus );
