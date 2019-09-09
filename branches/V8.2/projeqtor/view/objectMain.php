@@ -87,8 +87,11 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
               saveDataToSession("contentPaneDetailDivWidth<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
               var param=dojo.byId('objectClass').value;
               var paramId=dojo.byId('objectId').value;
-              if(paramId !=''){
+              if(paramId !='' && switchedModeBeforeMultiSelection==false){
                 loadContent("objectDetail.php?objectClass"+param+"&objectId="+paramId, "detailDiv", 'listForm');  
+              }else if(switchedModeBeforeMultiSelection==switchedMode){
+               loadContent('objectMultipleUpdate.php?objectClass=' + param,
+                  'detailDiv')
               }
             }
 
