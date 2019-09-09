@@ -628,7 +628,7 @@
 <?php 
 function organizeButtons($nbButton=1) {
 	global $displayWidthButton, $cptButton,$showAttachment,$entendedZone, $obj;
-	$buttonWidth=36;
+	$buttonWidth=34;
 	$cptButton+=$nbButton;
 	$requiredWidth=$cptButton*$buttonWidth;
 	if ($showAttachment and $obj->id) {

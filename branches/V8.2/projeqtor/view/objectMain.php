@@ -54,6 +54,7 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
   	}
   }
   $tableWidth=WidthDivContentDetail($positionListDiv,$objectClass);
+
 ?>
 <input type="hidden" id="objectClass" value="<?php echo $objectClass;?>" />
 <div id="mainDivContainer" class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
@@ -84,6 +85,11 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
                 saveDataToSession("contentPaneDetailDivHeight<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
               }else if(paramMode!='5'){
               saveDataToSession("contentPaneDetailDivWidth<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
+              var param=dojo.byId('objectClass').value;
+              var paramId=dojo.byId('objectId').value;
+              if(paramId !=''){
+                loadContent("objectDetail.php?objectClass"+param+"&objectId="+paramId, "detailDiv", 'listForm');  
+              }
             }
 
            </script>
@@ -120,6 +126,7 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
                 });
               }else{
                 saveDataToSession("contentPaneRightDetailDivHeight<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetHeight, true);
+                   if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
               }
                 
       	  </script>
