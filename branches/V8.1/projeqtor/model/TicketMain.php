@@ -334,7 +334,7 @@ class TicketMain extends SqlElement {
         $result.='<br/>' . i18n('msgParentActivityInSameProject');
       }
     }
-    if ($this->id and trim($this->idActivity)!=trim($old->idActivity) and $this->WorkElement->realWork>0)  {
+    if ($this->id and trim($old->idActivity) and trim($this->idActivity)!=trim($old->idActivity) and $this->WorkElement->realWork>0)  {
       $result .='<br/>' . i18n ( 'msgPlanningActivityWithWork' );
     }
     
