@@ -87,9 +87,9 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
               saveDataToSession("contentPaneDetailDivWidth<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
               var param=dojo.byId('objectClass').value;
               var paramId=dojo.byId('objectId').value;
-              if(paramId !='' && switchedModeBeforeMultiSelection==false){
+              if(paramId !='' && multiSelection==true){
                 loadContent("objectDetail.php?objectClass"+param+"&objectId="+paramId, "detailDiv", 'listForm');  
-              }else if(switchedModeBeforeMultiSelection==switchedMode){
+              }else if(multiSelection==false){
                loadContent('objectMultipleUpdate.php?objectClass=' + param,
                   'detailDiv')
               }
@@ -129,7 +129,7 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
                 });
               }else{
                 saveDataToSession("contentPaneRightDetailDivHeight<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetHeight, true);
-                   if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
+                if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
               }
                 
       	  </script>

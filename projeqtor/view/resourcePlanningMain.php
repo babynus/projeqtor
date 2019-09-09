@@ -80,6 +80,12 @@
             saveDataToSession("contentPaneDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
            }else{
               saveDataToSession("contentPaneDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
+              var param=dojo.byId('objectClass').value;
+              var paramId=dojo.byId('objectId').value;
+              if(paramId !='' ){
+                loadContent("objectDetail.php?objectClass"+param+"&objectId="+paramId, "detailDiv", 'listForm');  
+                if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
+              }
             }
       </script>
   <div class="container" dojoType="dijit.layout.BorderContainer"  liveSplitters="false">
@@ -104,7 +110,11 @@
                     });
                   }else if(paramMode!='5'){
                     saveDataToSession("contentPaneRightDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("detailRightDiv").offsetHeight, true);
-                  }
+                    var paramId=dojo.byId('objectId').value;
+                    if(paramId!=''){
+                      if (dijit.byId('detailRightDiv')) loadContent("objectStream.php?objectClass="+"PlanningElement"+"&objectId="+objectId, "detailRightDiv", 'listForm');
+                    }
+                 }
                  
               </script>
               <script type="dojo/connect" event="onLoad" args="evt">
