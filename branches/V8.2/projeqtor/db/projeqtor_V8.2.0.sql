@@ -126,7 +126,7 @@ INSERT INTO `${prefix}cronexecution` (`cron`, `fileExecuted`, `idle` ,`fonctionN
 ('*/5 * * * *', '../tool/cronExecutionStandard.php', 0, 'dataCloningCheckRequest');
 
 INSERT INTO `${prefix}module`(`id`, `name`, `sortOrder`, `idModule`, `idle`, `active`) VALUES 
-(17,'moduleDataCloning',1200,null,0,1);
+(17,'moduleDataCloning',1200,null,0,0);
 
 INSERT INTO `${prefix}modulemenu`(`idModule`, `idMenu`, `hidden`, `active`) VALUES 
 (17,222,0,1),
