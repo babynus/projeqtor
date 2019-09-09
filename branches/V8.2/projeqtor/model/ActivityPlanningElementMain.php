@@ -187,7 +187,6 @@ class ActivityPlanningElementMain extends PlanningElement {
     }
     $planningMode=new PlanningMode($this->idPlanningMode);
     $mode=$planningMode->code;
-    debugLog("mode=$mode");
     if ($mode!='ASAP' and $mode!='ALAP' and $mode!='START' and $mode!='GROUP') {
       $this->indivisibility=0;
       $this->minimumThreshold=0;

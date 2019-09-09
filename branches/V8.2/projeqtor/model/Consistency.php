@@ -520,11 +520,13 @@ class Consistency {
           if ($assId) {
             $ass=new Assignment($assId);
             $ass->idle=$actIdle;
+            if ($ass->idle==1) $ass->leftWork=0;
             $resAss=$ass->save();
           }
           if ($peId) {
             $pe=new PlanningElement($peId);
             $pe->idle=$actIdle;
+            if ($pe->idle==1) $pe->leftWork=0;
             $resPe=$pe->save();
           }
           $act=new $type($actId);
