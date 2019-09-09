@@ -29,7 +29,7 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,223,8);
 
-CREATE TABLE `${prefix}messagelegalFollowup` (
+CREATE TABLE `${prefix}messagelegalfollowup` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `idMessageLegal` INT(12) NOT NULL,
@@ -55,7 +55,7 @@ INSERT INTO `${prefix}habilitation` (idProfile, idMenu, allowAccess) VALUES
 (1,222,1),
 (2,222,1),
 (3,222,1),
-(4,222,1),
+(4,222,0),
 (5,222,0),
 (6,222,0),
 (7,222,0);
@@ -64,17 +64,17 @@ INSERT INTO `${prefix}habilitationother` (idProfile, rightAccess, scope) VALUES
 (1,4,'dataCloningRight'),
 (2,2,'dataCloningRight'),
 (3,6,'dataCloningRight'),
-(4,2,'dataCloningRight'),
+(4,1,'dataCloningRight'),
 (5,1,'dataCloningRight'),
-(6,2,'dataCloningRight'),
-(7,2,'dataCloningRight'),
+(6,1,'dataCloningRight'),
+(7,1,'dataCloningRight'),
 (1,10,'dataCloningTotal'),
 (2,1,'dataCloningTotal'),
 (3,3,'dataCloningTotal'),
-(4,1,'dataCloningTotal'),
-(5,1,'dataCloningTotal'),
-(6,1,'dataCloningTotal'),
-(7,1,'dataCloningTotal');
+(4,0,'dataCloningTotal'),
+(5,0,'dataCloningTotal'),
+(6,0,'dataCloningTotal'),
+(7,0,'dataCloningTotal');
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,222,8),
