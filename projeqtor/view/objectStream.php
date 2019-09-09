@@ -87,7 +87,7 @@
 ?>
 <!-- Titre et listes de notes -->
 <?php if (!$onlyCenter) {?>
-<div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
+<divclass="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
 	<div id="activityStreamTop" dojoType="dijit.layout.ContentPane" region="top" style="text-align:center" class="dijitAccordionTitle">
 	<?php 
      
@@ -143,7 +143,7 @@
     if($countIdNote==0){ echo "<div style='padding:10px'>".$noNotes."</div>";}	
 ?>  
 	</div>
-	<div id="activityStreamBottom" dojoType="dijit.layout.ContentPane" region="<?php echo$postionactivityStreamBottom;?>" style="<?php if($positionActivityStream==3){echo "width:30%;height:140px;overflow-x:hidden;";}else{echo "height:70px;overflow-x:hidden;";}?>">
+	<div id="activityStreamBottom" dojoType="dijit.layout.ContentPane" region="<?php echo$postionactivityStreamBottom;?>" style="<?php if($positionActivityStream==3){echo "width:30%;height:140px;overflow-x:hidden;padding-right:8px;";}else{echo "height:70px;overflow-x:hidden;padding-right:8px;";}?>">
 	  <form id='noteFormStream' name='noteFormStream' onSubmit="return false;" >
        <input id="noteId" name="noteId" type="hidden" value="" />
        <input id="noteRefType" name="noteRefType" type="hidden" value="<?php echo $objectClass;?>" />
