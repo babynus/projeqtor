@@ -66,24 +66,29 @@
         <script type="dojo/connect" event="resize" args="evt">
           if (switchedMode) return;
           var paramDiv=<?php echo json_encode($positionListDiv); ?>;
-            var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
-           if(paramDiv=="top" && paramMode!='5'){
-              saveDataToSession("contentPaneTopDetailDivHeight<?php echo $currentScreen;?>",dojo.byId("listDiv").offsetHeight);
-            }else{
-              saveDataToSession("contentPaneTopDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("listDiv").offsetWidth, true);
-            }
+          var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
+          if(paramDiv=="top" && paramMode!='5'){
+            saveDataToSession("contentPaneTopDetailDivHeight<?php echo $currentScreen;?>",dojo.byId("listDiv").offsetHeight);
+          }else{
+            saveDataToSession("contentPaneTopDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("listDiv").offsetWidth, true);
+          }
         </script>
         <?php include 'globalPlanningList.php'?>
       </div>
       <div id="contentDetailDiv" dojoType="dijit.layout.ContentPane" region="center"   style="width:<?php echo $tableWidth[1]; ?>;">
           <script type="dojo/connect" event="resize" args="evt">
-                var paramDiv=<?php echo json_encode($positionListDiv); ?>;
-                  var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
-           if(paramDiv=="top" && paramMode!='5'){
-                    saveDataToSession("contentPaneDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
-                  }else{
-              saveDataToSession("contentPaneDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
-            }
+              var paramDiv=<?php echo json_encode($positionListDiv); ?>;
+              var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
+              if(paramDiv=="top" && paramMode!='5'){
+                saveDataToSession("contentPaneDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
+              }else{
+                saveDataToSession("contentPaneDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
+                var param=dojo.byId('objectClass').value;
+                var paramId=dojo.byId('objectId').value;
+                if(paramId !='' ){
+                  loadContent("objectDetail.php?objectClass"+param+"&objectId="+paramId, "detailDiv", 'listForm');
+                }
+              }
           </script>
 	  <div class="container" dojoType="dijit.layout.BorderContainer"  liveSplitters="false">
 	  <div id="detailBarShow" class="dijitAccordionTitle" onMouseover="hideList('mouse');" onClick="hideList('click');"
@@ -106,7 +111,11 @@
                     });
                   }else if(paramMode!='5'){
                     saveDataToSession("contentPaneRightDetailDivHeightGlobalPlanning", dojo.byId("detailRightDiv").offsetHeight, true);
-                  }
+                    var paramId=dojo.byId('objectId').value;
+                    if(paramId!=''){
+                      if (dijit.byId('detailRightDiv')) loadContent("objectStream.php?objectClass="+"PlanningElement"+"&objectId="+objectId, "detailRightDiv", 'listForm');
+                    }
+                 }
               </script>
               <script type="dojo/connect" event="onLoad" args="evt">
                 scrollInto();
