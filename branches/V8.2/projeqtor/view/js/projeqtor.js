@@ -5590,7 +5590,32 @@ function saveNoteStream(event){
 
 var menuRightDivSize=null;
 function hideStreamMode(param,noRefresh){
-  if(param != '1'){
+  console.log('fqds '+param);
+  if(param == '1'){
+    console.log('1');
+    if(dijit.byId("detailRightDiv").h != '0'){
+      menuRightDivSize=dojo.byId("detailRightDiv").offsetHeight;
+      dijit.byId("detailRightDiv").resize({
+        h : 0
+      });
+      dijit.byId("centerDiv").resize();
+      paramDisplay="none";
+    } else {
+      if (! menuRightDivSize) menuRightDivSize=((dojo.byId("centerDiv").offsetHeight)*0.15);
+      dijit.byId("detailRightDiv").resize({
+        h : menuRightDivSize
+      });
+      dijit.byId("centerDiv").resize();
+      paramDisplay="block";
+    }
+    var detailHidden=false;
+    if (dojo.byId('detailBarShow') && dojo.byId('detailBarShow').style.display=='block') detailHidden=true;
+    if (!noRefresh && !formChangeInProgress && dojo.byId('id') && dojo.byId('id').value && !detailHidden) {
+      setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50);
+    }
+    setTimeout('dojo.setStyle("hideStreamButton", "display", '+paramDisplay+');',100);
+  }else{
+    console.log('2');
     if (! dijit.byId('detailRightDiv')) return;
     if(dijit.byId("detailRightDiv").w != '0'){
       menuRightDivSize=dojo.byId("detailRightDiv").offsetWidth;
@@ -5598,42 +5623,21 @@ function hideStreamMode(param,noRefresh){
         w : 0
       });
       dijit.byId("centerDiv").resize();
-      dojo.setStyle("hideStreamButton", "display", "block");
+      paramDisplay="block";
     } else {
       if (! menuRightDivSize) menuRightDivSize=((dojo.byId("centerDiv").offsetWidth)*0.15);
       dijit.byId("detailRightDiv").resize({
         w : menuRightDivSize
       });
       dijit.byId("centerDiv").resize();
-      dojo.setStyle("hideStreamButton", "display", "none");
+      paramDisplay="none";
     }
     var detailHidden=false;
     if (dojo.byId('detailBarShow') && dojo.byId('detailBarShow').style.display=='block') detailHidden=true;
     if (!noRefresh && !formChangeInProgress && dojo.byId('id') && dojo.byId('id').value && !detailHidden) {
       setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50);
     }
-  }else{
-    if(dijit.byId("detailRightDiv").h != '0'){
-      menuRightDivSize=dojo.byId("detailRightDiv").offsetHeight;
-      dijit.byId("detailRightDiv").resize({
-        h : 0
-      });
-      dijit.byId("centerDiv").resize();
-      dojo.setStyle("hideStreamButton", "display", "block");
-      setTimeout('dojo.setStyle("hideStreamButton", "display", "block");',100);
-    } else {
-      if (! menuRightDivSize) menuRightDivSize=((dojo.byId("centerDiv").offsetHeight)*0.15);
-      dijit.byId("detailRightDiv").resize({
-        h : menuRightDivSize
-      });
-      dijit.byId("centerDiv").resize();
-      setTimeout('dojo.setStyle("hideStreamButton", "display", "none");',100);
-    }
-    var detailHidden=false;
-    if (dojo.byId('detailBarShow') && dojo.byId('detailBarShow').style.display=='block') detailHidden=true;
-    if (!noRefresh && !formChangeInProgress && dojo.byId('id') && dojo.byId('id').value && !detailHidden) {
-      setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50);
-    }
+    setTimeout('dojo.setStyle("hideStreamButton", "display",'+paramDisplay+');',100);
   }
 }
 
