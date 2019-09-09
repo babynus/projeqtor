@@ -5599,21 +5599,20 @@ function hideStreamMode(param,noRefresh){
         h : 0
       });
       dijit.byId("centerDiv").resize();
-      paramDisplay="none";
+      setTimeout('dojo.setStyle("hideStreamButton", "display", "block");',100);
     } else {
       if (! menuRightDivSize) menuRightDivSize=((dojo.byId("centerDiv").offsetHeight)*0.15);
       dijit.byId("detailRightDiv").resize({
         h : menuRightDivSize
       });
       dijit.byId("centerDiv").resize();
-      paramDisplay="block";
+      setTimeout('dojo.setStyle("hideStreamButton", "display", "none");',100);
     }
     var detailHidden=false;
     if (dojo.byId('detailBarShow') && dojo.byId('detailBarShow').style.display=='block') detailHidden=true;
     if (!noRefresh && !formChangeInProgress && dojo.byId('id') && dojo.byId('id').value && !detailHidden) {
       setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50);
     }
-    setTimeout('dojo.setStyle("hideStreamButton", "display", '+paramDisplay+');',100);
   }else{
     console.log('2');
     if (! dijit.byId('detailRightDiv')) return;
@@ -5623,21 +5622,20 @@ function hideStreamMode(param,noRefresh){
         w : 0
       });
       dijit.byId("centerDiv").resize();
-      paramDisplay="block";
+      dojo.setStyle("hideStreamButton", "display", "block");
     } else {
       if (! menuRightDivSize) menuRightDivSize=((dojo.byId("centerDiv").offsetWidth)*0.15);
       dijit.byId("detailRightDiv").resize({
         w : menuRightDivSize
       });
       dijit.byId("centerDiv").resize();
-      paramDisplay="none";
+      dojo.setStyle("hideStreamButton", "display", "none");
     }
     var detailHidden=false;
     if (dojo.byId('detailBarShow') && dojo.byId('detailBarShow').style.display=='block') detailHidden=true;
     if (!noRefresh && !formChangeInProgress && dojo.byId('id') && dojo.byId('id').value && !detailHidden) {
       setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50);
     }
-    setTimeout('dojo.setStyle("hideStreamButton", "display",'+paramDisplay+');',100);
   }
 }
 
