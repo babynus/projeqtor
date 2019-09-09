@@ -172,3 +172,6 @@ UPDATE `${prefix}menu` SET `sortOrder`=1062 WHERE id=218;
 UPDATE `${prefix}menu` SET `sortOrder`=1063 WHERE id=219;
 UPDATE `${prefix}menu` SET `sortOrder`=1064 WHERE id=220; 
 UPDATE `${prefix}menu` SET `idMenu`=14, `sortOrder`=602 WHERE id=212; 
+
+-- 
+  UPDATE `${prefix}menu` SET `sortOrder`=205 WHERE id=154;
