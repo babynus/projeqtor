@@ -35,7 +35,7 @@
   if (array_key_exists('destinationWidth',$_REQUEST)) {
     $width=$_REQUEST['destinationWidth'];
     $displayWidth=floor($width*0.6);
-    $labelWidth=250;
+    $labelWidth=150;
     $fieldWidth=$displayWidth-$labelWidth-15-15;
   } 
   $objectClass=$_REQUEST['objectClass'];
@@ -137,7 +137,7 @@
      $collapsedList=Collapsed::getCollaspedList();
      $titlePane=get_class($obj)."_MultipleDescription";?>
      <br/>
-     <div style="width: <?php echo $displayWidth;?>" dojoType="dijit.TitlePane" 
+     <div style="width: <?php  echo $displayWidth;?>" dojoType="dijit.TitlePane" 
      title="<?php echo i18n('sectionDescription');?>"
      open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
      id="<?php echo $titlePane;?>" 
@@ -148,7 +148,7 @@
       // Project
              if (isDisplayable($obj,'idProject')) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeProject',array($obj->getColCaption('idProject')));?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeProject',array($obj->getColCaption('idProject')));?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
@@ -170,7 +170,7 @@
 //            if (isDisplayable($obj,$type)) {
             if (isDisplayable($obj,$type) and get_class($obj)!="Leave") {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeType');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeType');?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
@@ -189,7 +189,7 @@
       // Issuer
             if (isDisplayable($obj,'idUser')) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeIssuer',array($obj->getColCaption('idUser')));?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeIssuer',array($obj->getColCaption('idUser')));?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
@@ -208,7 +208,7 @@
       // Requestor
              if (isDisplayable($obj,'idContact')) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeRequestor',array($obj->getColCaption('idContact')));?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeRequestor',array($obj->getColCaption('idContact')));?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
@@ -227,7 +227,7 @@
             // Customer
               if (isDisplayable($obj,'idClient')) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeCustomer');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeCustomer');?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
@@ -248,7 +248,7 @@
              if ( $paramDisplayBusinessFeature == "YES"){
              if (isDisplayable($obj,'idBusinessFeature')) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeBusinessFeature');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeBusinessFeature');?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
@@ -269,7 +269,7 @@
              foreach($arrayCheckbox as $checkField) {
              if (isDisplayable($obj,$checkField)) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeRequestor',array($obj->getColCaption($checkField)));?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeRequestor',array($obj->getColCaption($checkField)));?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
@@ -285,7 +285,7 @@
       // Description 
             if (isDisplayable($obj, 'description') ) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colAddToDescription');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colAddToDescription');?>&nbsp;:&nbsp;</td>
               <td>
                 <textarea dojoType="dijit.form.Textarea" name="description" id="description"
                  rows="2" style="width:<?php echo $fieldWidth;?>px;" maxlength="4000" maxSize="4" class="input" ></textarea>
@@ -307,7 +307,7 @@
       // Status      
             if (isDisplayable($obj,'idActivity')) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo (SqlElement::is_a($obj,'Ticket'))?i18n('colChangePlanningActivity'):i18n('colChangeParentActivity');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo (SqlElement::is_a($obj,'Ticket'))?i18n('colChangePlanningActivity'):i18n('colChangeParentActivity');?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
@@ -332,7 +332,7 @@
             <?php } 
             if (isDisplayable($obj,'idStatus')) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeStatus');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeStatus');?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
@@ -357,7 +357,7 @@
       // Resolution
             if (isDisplayable($obj,'idResolution')) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeResolution');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeResolution');?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
@@ -376,7 +376,7 @@
       // Responsable
             if (isDisplayable($obj,'idResource')) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeResponsible',array($obj->getColCaption('idResource')));?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeResponsible',array($obj->getColCaption('idResource')));?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
@@ -395,7 +395,7 @@
       // Target Version
              if (isDisplayable($obj,'idTargetVersion')) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeTargetVersion');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeTargetVersion');?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
@@ -414,7 +414,7 @@
             //Product
             if (isDisplayable($obj,'idProduct')) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeProduct');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeProduct');?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
@@ -433,7 +433,7 @@
          // Product Target Version
              if (isDisplayable($obj,'idTargetProductVersion')) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeTargetProductVersion');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeTargetProductVersion');?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
@@ -452,7 +452,7 @@
             //targetMilestone
             if (isDisplayable($obj,'idMilestone')) {?>
               <tr class="detail">
-                <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeMilestone');?>&nbsp;:&nbsp;</td>
+                <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeMilestone');?>&nbsp;:&nbsp;</td>
                 <td>
                   <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                   <?php echo autoOpenFilteringSelect();?>
@@ -471,7 +471,7 @@
             //component
             if (isDisplayable($obj,'idComponent')) {?>
               <tr class="detail">
-                <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeComponent');?>&nbsp;:&nbsp;</td>
+                <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeComponent');?>&nbsp;:&nbsp;</td>
                 <td>
                   <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                   <?php echo autoOpenFilteringSelect();?>
@@ -491,7 +491,7 @@
              if (isDisplayable($obj,'idTargetComponentVersion')) {?>
                
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeTargetComponentVersion');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeTargetComponentVersion');?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
@@ -511,7 +511,7 @@
        // Initial Due Date
             if (isDisplayable($obj,'initialDueDate')) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('changeInitialDueDate');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('changeInitialDueDate');?>&nbsp;:&nbsp;</td>
               <td>
                 <div dojoType="dijit.form.DateTextBox" name="initialDueDate" id="initialDueDate"
                 	<?php if (sessionValueExists('browserLocaleDateFormatJs')) {
@@ -524,7 +524,7 @@
       // Actual due date
             if (isDisplayable($obj,'actualDueDate')) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('changeActualDueDate');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('changeActualDueDate');?>&nbsp;:&nbsp;</td>
               <td>
                 <div dojoType="dijit.form.DateTextBox" name="actualDueDate" id="actualDueDate"
                 <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
@@ -537,7 +537,7 @@
       // Initial End Date
 						if (isDisplayable($obj,'initialEndDate')) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('changeInitialEndDate');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('changeInitialEndDate');?>&nbsp;:&nbsp;</td>
               <td>
                 <div dojoType="dijit.form.DateTextBox" name="initialEndDate" id="initialEndDate"
                 <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
@@ -550,7 +550,7 @@
       // Actual End Date
             if (isDisplayable($obj,'actualEndDate')) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('changeActualEndDate');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('changeActualEndDate');?>&nbsp;:&nbsp;</td>
               <td>
                 <div dojoType="dijit.form.DateTextBox" name="actualEndDate" id="actualEndDate"
                 <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
@@ -563,7 +563,7 @@
       // Initial Due DateTime 
             if (isDisplayable($obj,'initialDueDateTime')) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('changeInitialDueDateTime');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('changeInitialDueDateTime');?>&nbsp;:&nbsp;</td>
               <td>
                 <div dojoType="dijit.form.DateTextBox" name="initialDueDate" id="initialDueDate"
                 <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
@@ -578,7 +578,7 @@
       // Actual Due Datetime
             if (isDisplayable($obj,'actualDueDateTime')) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('changeActualDueDateTime');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('changeActualDueDateTime');?>&nbsp;:&nbsp;</td>
               <td>
                 <div dojoType="dijit.form.DateTextBox" name="actualDueDate" id="actualDueDate"
                 <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
@@ -594,7 +594,7 @@
             $pe=get_class($obj).'PlanningElement';
             if (isDisplayable($obj,'validatedStartDate', true)) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('changeValidatedStartDate');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('changeValidatedStartDate');?>&nbsp;:&nbsp;</td>
               <td>
                 <div dojoType="dijit.form.DateTextBox" name="<?php echo $pe;?>_validatedStartDate" id="<?php echo $pe;?>_validatedStartDate"
                 <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
@@ -608,7 +608,7 @@
             $pe=get_class($obj).'PlanningElement';
             if (isDisplayable($obj,'validatedEndDate', true)) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('changeValidatedEndDate');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('changeValidatedEndDate');?>&nbsp;:&nbsp;</td>
               <td>
                 <div dojoType="dijit.form.DateTextBox" name="<?php echo $pe;?>_validatedEndDate" id="<?php echo $pe;?>_validatedEndDate"
                 <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
@@ -622,7 +622,7 @@
             $pe=get_class($obj).'PlanningElement';
             if (isDisplayable($obj,'validatedWork', true)) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colValidatedWork');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colValidatedWork');?>&nbsp;:&nbsp;</td>
               <td>
                 <div dojoType="dijit.form.NumberTextBox" name="<?php echo $pe;?>_validatedWork" id="<?php echo $pe;?>_validatedWork"
                  style="width:60px;" maxlength="10" maxSize="4" class="input" ></div>
@@ -636,7 +636,7 @@
             $pe=get_class($obj).'PlanningElement';
             if (isDisplayable($obj,'validatedCost', true)) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colValidatedCost');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colValidatedCost');?>&nbsp;:&nbsp;</td>
               <td>
                 <?php if ($currencyPosition=='before') echo $currency;?>
                 <div dojoType="dijit.form.NumberTextBox" name="<?php echo $pe;?>_validatedCost" id="<?php echo $pe;?>_validatedCost"
@@ -650,7 +650,7 @@
             $pm='id'.get_class($obj).'PlanningMode';
             if (isDisplayable($obj,$pm, true)) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('changePlanningMode');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('changePlanningMode');?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
@@ -665,7 +665,7 @@
             $pm='id'.get_class($obj).'PlanningMode';
             if (isDisplayable($obj,'priority', true)) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeRequestor',array(i18n('colPriority')));?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeRequestor',array(i18n('colPriority')));?>&nbsp;:&nbsp;</td>
               <td>
                 <input dojoType="dijit.form.TextBox" class="input" style="width:<?php echo $fieldWidth;?>px;" 
                  id="<?php echo $pe.'_priority';?>" name="<?php echo $pe.'_priority';?>" value="">
@@ -676,7 +676,7 @@
        // result
             if (isDisplayable($obj,'result')) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colAddToResult');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colAddToResult');?>&nbsp;:&nbsp;</td>
               <td>
                 <textarea dojoType="dijit.form.Textarea" name="result" id="result"
                  rows="2" style="width:<?php echo $fieldWidth;?>px;" maxlength="4000" maxSize="4" class="input" ></textarea>
@@ -690,7 +690,7 @@
                 if ($lsClass=="EmployeeLeaveEarned") {
                     ?>
                     <tr class="detail">
-                      <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('changeStartDate');?>&nbsp;:&nbsp;</td>
+                      <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('changeStartDate');?>&nbsp;:&nbsp;</td>
                       <td>
                         <div dojoType="dijit.form.DateTextBox" name="startDate" id="startDate"
                         <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
@@ -707,7 +707,7 @@
                 if ($lsClass=="EmployeeLeaveEarned") {
                 ?>
                     <tr class="detail">
-                      <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('changeEndDate');?>&nbsp;:&nbsp;</td>
+                      <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('changeEndDate');?>&nbsp;:&nbsp;</td>
                       <td>
                         <div dojoType="dijit.form.DateTextBox" name="endDate" id="endDate"
                         <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
@@ -724,7 +724,7 @@
                 if ($lsClass=="EmployeeLeaveEarned") {
                 ?>
                     <tr class="detail">
-                      <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('ChangeQuantity');?>&nbsp;:&nbsp;</td>
+                      <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('ChangeQuantity');?>&nbsp;:&nbsp;</td>
                       <td>
                         <textarea dojoType="dijit.form.Textarea" name="quantity" id="quantity"
                          rows="2" style="width:60px;" maxlength="4000" maxSize="4" class="input" ></textarea>
@@ -739,7 +739,7 @@
                 if ($lsClass=="Resource") {
                 ?>
                     <tr class="detail">
-                      <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('changeIsEmployee');?>&nbsp;:&nbsp;</td>
+                      <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('changeIsEmployee');?>&nbsp;:&nbsp;</td>
                       <td>
                         <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                         <?php echo autoOpenFilteringSelect();?>
@@ -770,7 +770,7 @@
       // Notes
             if (isDisplayable($obj,'_Note')) {?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colAddNote');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colAddNote');?>&nbsp;:&nbsp;</td>
               <td>
                 <textarea dojoType="dijit.form.Textarea" name="note" id="note"
                  rows="2" style="width:<?php echo $fieldWidth;?>px;" maxlength="4000" maxSize="4" class="input" ></textarea>
@@ -778,7 +778,7 @@
             </tr>
             <?php } if(get_class($obj)=='Affectation'){ ?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeProfile',array($obj->getColCaption('idProfile')));?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeProfile',array($obj->getColCaption('idProfile')));?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
@@ -794,7 +794,7 @@
               </td>
             </tr>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeRate');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeRate');?>&nbsp;:&nbsp;</td>
               <td>
                 <textarea dojoType="dijit.form.NumberTextBox"  constraints="{min:0,max:100}" name="rate_multiple" id="rate_multiple"
                  rows="2" style="width:60px;" maxlength="4000" maxSize="4" class="input" ></textarea>
@@ -802,7 +802,7 @@
             </tr>
             <?php } if(get_class($obj)=='Resource'){?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeTeam');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeTeam');?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
@@ -826,7 +826,7 @@
             }
             if(!property_exists($obj, 'idProject') or !property_exists($obj,$type)){?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeStatusIdle');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeStatusIdle');?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
@@ -840,7 +840,7 @@
             <?php  }?>
             <?php if(property_exists(get_class($obj), 'isLdap')){?>
             <tr class="detail">
-              <td class="label" style="width:<?php echo $labelWidth;?>px;"><?php echo i18n('colChangeIsLDAP');?>&nbsp;:&nbsp;</td>
+              <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeIsLDAP');?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
