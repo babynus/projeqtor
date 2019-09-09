@@ -122,7 +122,7 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES
 ('contentPaneTopDetailDivWidth','0'),
 ('paramLayoutObjectDetail','4');
 
-INSERT INTO `${prefix}cronExecution` (`cron`, `fileExecuted`, `idle` ,`fonctionName`) VALUES
+INSERT INTO `${prefix}cronexecution` (`cron`, `fileExecuted`, `idle` ,`fonctionName`) VALUES
 ('*/5 * * * *', '../tool/cronExecutionStandard.php', 0, 'dataCloningCheckRequest');
 
 INSERT INTO `${prefix}module`(`id`, `name`, `sortOrder`, `idModule`, `idle`, `active`) VALUES 
@@ -172,6 +172,5 @@ UPDATE `${prefix}menu` SET `sortOrder`=1062 WHERE id=218;
 UPDATE `${prefix}menu` SET `sortOrder`=1063 WHERE id=219;
 UPDATE `${prefix}menu` SET `sortOrder`=1064 WHERE id=220; 
 UPDATE `${prefix}menu` SET `idMenu`=14, `sortOrder`=602 WHERE id=212; 
-
 -- 
   UPDATE `${prefix}menu` SET `sortOrder`=205 WHERE id=154;
