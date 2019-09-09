@@ -1767,6 +1767,9 @@ class PlanningElement extends SqlElement {
       if (! $pe->realEndDate and ! (isset($pe->_noPlan) and $pe->_noPlan) and ! (isset($pe->isGlobal) and $pe->isGlobal)) {
         $pe->plannedEndDate=null;
       }
+      if (! property_exists($pe, 'indivisibility')) {
+        $pe->indivisibility=0;
+      }
       $result[$id]=$pe;
     }
     $result['_listProjectsPriority']=$listProjectsPriority;
