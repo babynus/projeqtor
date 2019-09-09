@@ -1100,11 +1100,16 @@ abstract class SqlElement {
         $indDef = new IndicatorDefinition ();
         if(property_exists($this, 'idProject')) {
           $idP=(get_class($this)=='Project')?$this->id:$this->idProject;
-          $crit = array('nameIndicatorable' => get_class ( $this ), 'idle' => '0','idProject' => $idP);
+          $proj= new Project($idP); 
+          $listProj = $proj->getTopProjectList(true);
+          $listProj = implode(',', $listProj);
+          //$crit = array('nameIndicatorable' => get_class ( $this ), 'idle' => '0','idProject' => $idP);
+          $where = "nameIndicatorable='".get_class ( $this )."' and idle = 0 and idProject in (".$listProj.")";
         } else {
-          $crit = array('nameIndicatorable' => get_class ( $this ), 'idle' => '0');
+          //$crit = array('nameIndicatorable' => get_class ( $this ), 'idle' => '0');
+          $where = "nameIndicatorable='".get_class ( $this )."' and idle = 0";
         }
-        $lstInd = $indDef->getSqlElementsFromCriteria ( $crit, false );
+        $lstInd = $indDef->getSqlElementsFromCriteria ( null, false, $where );
         if(!$lstInd){
           $crit = array('nameIndicatorable' => get_class ( $this ), 'idle' => '0','idProject' =>"");
           $lstInd = $indDef->getSqlElementsFromCriteria ( $crit, false );
