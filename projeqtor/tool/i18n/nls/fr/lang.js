@@ -1814,6 +1814,7 @@ errorQuantityNotModuloOfZeroPointFive: "La quantité n'est pas un modulo de 0.5"
 errorQuantityStartDateEndDateMustBeDefinedTogether: "La quantité&#44; la date de début et la date de fin doivent être définis en même temps",
 errorRegisterGlobals: "register_globals doit être désactivé (positionné à false). <br/>Mettez à jour le fichier Php.ini.",
 errorRemoveTooMuchWork: "Vous tentez de retirer plus que votre propre travail (${1}). <br/>Vous devriez utilisez le bouton &#34;Répartir&#34; pour cela.",
+errorReopenControl: "Impossible de ré-ouvrir cet élément qui est sous un élément clos (${1})",
 errorReplaceResourceNotChanged: "la nouvelle ressource doit être différente de celle qu'elle remplace",
 errorSessionHash: "Une anomalie est survenue avec la session actuelle.<br/>Rafraîchissez la page ou fermez le navigateur et réessayez.<br/>Vérifiez aussi que les cookies sont autorisés.<br/>Si le problème persiste&#44; contactez votre administrateur.",
 errorStartEndDates: "la '${1}'  ne doit pas être postérieure à la '${2}'",
