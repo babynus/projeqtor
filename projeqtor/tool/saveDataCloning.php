@@ -55,13 +55,14 @@ if($idDataCloning){
       $result=$dataCloning->delete();
     }
   }else if($codeError){
-    if(substr($codeError, 0, 1) == 'd'){
-      $dataCloning->requestedDeletedDate = $requestedDeletedDate;
-      $dataCloning->isRequestedDelete = 1;
-    }else{
+    //if(substr($codeError, 0, 1) == 'd'){
+    //  $dataCloning->requestedDeletedDate = $requestedDeletedDate;
+    //  $dataCloning->isRequestedDelete = 1;
+    //}else{
       $dataCloning->requestedDate = $requestedDate;
       $dataCloning->codeError = null;
-    }
+      $dataCloning->isActive=0;
+    //}
     $result=$dataCloning->save();
   }else{
     $dataCloning->requestedDeletedDate = null;
@@ -74,7 +75,7 @@ if($idDataCloning){
   
   $date = date('Y-m-d');
   $addDate =  addDaysToDate(date('Y-m-d'), 1);
-  $wherePerDay = "requesteddate > '$date' and requesteddate < '$addDate' and idle = 0 ";
+  $wherePerDay = "requestedDate > '$date' and requestedDate < '$addDate' ";
   $dataCloningRequestorCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
   $dataCloningRequestorTotalPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
   
@@ -82,7 +83,7 @@ if($idDataCloning){
     $res = new ResourceAll($user);
     $date = date('Y-m-d');
     $addDate =  addDaysToDate(date('Y-m-d'), 1);
-    $wherePerDay = "idResource = $user and requesteddate > '$date' and requesteddate < '$addDate' and idle = 0 ";
+    $wherePerDay = "idResource = $user and idle = 0 ";
     $dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
     $dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
     $dataCloningTotal=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array("scope"=>"dataCloningTotal", "idProfile"=>$res->idProfile));

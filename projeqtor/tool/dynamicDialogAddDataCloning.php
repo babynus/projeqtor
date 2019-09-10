@@ -77,7 +77,7 @@ $idDataCloningParent = RequestHandler::getId('idDataCloningParent');
   				          id="dataCloningName" name="dataCloningName"
   				          style="width: 300px;"
   				          maxlength="30"
-  				          class="input" value=""/>
+  				          class="input required" value=""/>
   		      </td>
             </tr>
             <tr>

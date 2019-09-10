@@ -50,7 +50,7 @@ if($dataCloning->getVersionCodeList()){
 
 $date = date('Y-m-d');
 $addDate =  addDaysToDate(date('Y-m-d'), 1);
-$wherePerDay = "requesteddate > '$date' and requesteddate < '$addDate' and idle = 0 ";
+$wherePerDay = "requestedDate > '$date' and requestedDate < '$addDate' ";
 $dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
 $dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
 $dataCloningCount = i18n('colDataCloningCount', array($dataCloningPerDay-$dataCloningCountPerDay, $dataCloningPerDay));
@@ -61,7 +61,7 @@ $dataCloningCount = i18n('colDataCloningCount', array($dataCloningPerDay-$dataCl
   </div>   
   <div dojoType="dijit.layout.ContentPane" region="top" id="dataCloningButtonDiv" class="listTitle" >
   <form dojoType="dijit.form.Form" name="dataCloningListForm" id="dataCloningListForm" action="" method="post" >
-  <table width="100%" height="64px" class="listTitle">
+  <table width="100%" height="32px" class="listTitle">
     <tr height="32px">
     <td style="vertical-align:top;min-width:100px;width:20%;">
       <table >
@@ -71,23 +71,12 @@ $dataCloningCount = i18n('colDataCloningCount', array($dataCloningPerDay-$dataCl
           </td>
           <td width="200px"><span class="title"><?php echo i18n('menuDataCloning');?></span></td>
   		  </tr>
-  		  <tr height="32px">
-          <td>
-            <button id="refreshDataCloningButton" dojoType="dijit.form.Button" showlabel="false"
-              title="<?php echo i18n('buttonRefreshList');?>"
-              iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
-              <script type="dojo/method" event="onClick" args="evt">
-	             refreshDataCloningList();
-              </script>
-            </button> 
-          </td>
-        </tr>
 		  </table>
     </td>
       <td>   
         <table>
          <tr>
-           <td nowrap="nowrap" style="text-align: right;padding-right:5px;"><?php echo i18n("colIdUser");?></td>
+           <td nowrap="nowrap" style="text-align: right;padding-right:5px;padding-left:20px;"><?php echo i18n("colIdUser");?></td>
            <td>
               <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
                 style="width: 150px;"
@@ -155,15 +144,22 @@ $dataCloningCount = i18n('colDataCloningCount', array($dataCloningPerDay-$dataCl
                 </script>
               </div>
             </td>
-            <td width="10%" nowrap="nowrap" style="padding-right:9%" >
+            <td width="10%" nowrap="nowrap" style="test_align:right;padding-right:4px" >
             <?php if($userProfil->profileCode == 'ADM'){?>
               <button id="parameterDataCloning" dojoType="dijit.form.Button" showlabel="false"
               title="<?php echo i18n('menuDataCloningParameter');?>"
-              iconClass="iconParameter32" class="button">
+              iconClass="iconParameter32   iconSize32" class="button">
                 <script type="dojo/method" event="onClick" args="evt">
                   loadMenuBarItem('DataCloningParameter', 'DataCloningParameter', 'bar');  
                 </script>
               </button>
+              <button id="refreshDataCloningButton" dojoType="dijit.form.Button" showlabel="false"
+              title="<?php echo i18n('buttonRefreshList');?>"
+              iconClass="iconRefresh32" class="button">
+              <script type="dojo/method" event="onClick" args="evt">
+	             refreshDataCloningList();
+              </script>
+            </button> 
             <?php }?> 
             </td>
           </tr>

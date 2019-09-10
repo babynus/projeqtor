@@ -102,7 +102,7 @@ class DataCloning extends SqlElement{
 		$res = new Resource($idUser);
 		$date = date('Y-m-d');
 		$addDate =  addDaysToDate(date('Y-m-d'), 1);
-		$wherePerDay = "requesteddate > '$date' and requesteddate < '$addDate' and idle = 0 ";
+		$wherePerDay = "requestedDate > '$date' and requestedDate < '$addDate' ";
 		$dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
 		$dataCloningCountTotal = $dataCloning->countSqlElementsFromCriteria(array("idle"=>"0", "idResource"=>$idUser));
 		$dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
@@ -415,38 +415,46 @@ class DataCloning extends SqlElement{
 	  
 	  
 	  //COPY FOLDER and CODE
+	  $dataCloningDirectory = Parameter::getGlobalParameter('dataCloningDirectory');
+	  if($dataCloningDirectory and !file_exists($dataCloningDirectory)){
+	    errorLog(i18n("dataCloningErrorPathDontExist"));
+	    $dataCloning->codeError = "dataCloningErrorPathDontExist";
+	    $dataCloning->save();
+	    return;
+	  }
+	  if ($dataCloningDirectory) {
+	    $pathSeparator=Parameter::getGlobalParameter('paramPathSeparator');
+	    if (substr($dataCloningDirectory,-1)!=$pathSeparator) $dataCloningDirectory.=$pathSeparator;
+	  }
 	  if($dataCloning->idOrigin){
 	    $OriginData = new DataCloning($dataCloning->idOrigin);
-	    $dir_source = dirname(__DIR__)."/simulation/".$OriginData->nameDir;
-	    $dir_dest = dirname(__DIR__).'/simulation/'.$newPwd;
+	    if($dataCloningDirectory){
+	      $dir_source = $dataCloningDirectory.$OriginData->nameDir;
+	      $dir_dest = $dataCloningDirectory.$newPwd;
+	    } else {
+	      $dir_source = dirname(__DIR__)."/simulation/".$OriginData->nameDir;
+	      $dir_dest = dirname(__DIR__).'/simulation/'.$newPwd;
+	    }
 	    $parameterP = "parameters_".$OriginData->nameDir.".php";
 	  }else{
   	  $dir_source = dirname(__DIR__);
   	  $parameterP = "parameters.php";
-  	  $dataCloningDirectory = Parameter::getGlobalParameter('dataCloningDirectory');
   	  if($dataCloningDirectory){
-  	    $pathSeparator=Parameter::getGlobalParameter('paramPathSeparator');
-  	    if (substr($dataCloningDirectory,-1)!=$pathSeparator) $dataCloningDirectory.=$pathSeparator;
   	    $dir_dest = $dataCloningDirectory.$newPwd;
   	  }else{
   	   $dir_dest = '../simulation/'.$newPwd;
   	  }
 	  }
-	  if($dataCloningDirectory and !file_exists($dataCloningDirectory)){
-	    debugTraceLog(i18n("dataCloningPathDontExist"));
-	    $dataCloning->codeError = "pathDoesNotExist";
-	    $dataCloning->save();
-	    return;
-	  }   
+  
 	  $nameDir = $newPwd;
 	  $startMicroTime=microtime(true);
-    debugTraceLog( $dataCloning->name . i18n('dataCloningStart'));
+    traceLog( $dataCloning->name . ' - '. i18n('dataCloningStart'));
     
     //create folder
     enableCatchErrors();
     if(! mkdir($dir_dest,0777,true)){
-      debugTraceLog(i18n("dataCloningCanNotCreateFolder"));
-      $dataCloning->codeError = "createFolder";
+      errorLog(i18n("dataCloningErrorCanNotCreateFolder"));
+      $dataCloning->codeError = "dataCloningErrorCanNotCreateFolder";
       $dataCloning->save();
       disableCatchErrors();
       return;
@@ -461,7 +469,7 @@ class DataCloning extends SqlElement{
       }else{
         $PDO=Sql::getConnection();
       }
-      debugTraceLog( $dataCloning->name . i18n('dataCloningStartDbCopy'). ' ' .$newPwd);
+      traceLog( $dataCloning->name . ' - '.i18n('dataCloningStartDbCopy'). ' ' .$newPwd);
       //pgsql
       if (Parameter::getGlobalParameter('paramDbType') == "pgsql") {
         if(!$dataCloning->idOrigin){
@@ -566,10 +574,10 @@ class DataCloning extends SqlElement{
       $habilitationDBName = $dbHabilitation->getDatabaseTableName();
       $requestHabilitation = "UPDATE ".$habilitationDBName." SET allowAccess = 0 WHERE idMenu = 222 or idMenu = 224;";
       $connexion->exec($requestHabilitation);
-      debugTraceLog( $dataCloning->name . i18n('dataCloningFinish').' - '. (round((microtime(true) - $startMicroTime)*1000000)/1000000) . i18n('second') .'  '. $dataCloning->nameDir.'  ' . i18n('created'));
+      traceLog( $dataCloning->name .' - '.i18n('dataCloningFinish').' - '. (round((microtime(true) - $startMicroTime),1)) . ' '. i18n('shortSecond'));
     }catch (Exception $e) {
-      debugTraceLog("cantCreateDb");
-      $dataCloning->codeError="createDb";
+      errorLog(i18n("dataCloningErrorCantCreateDb"));
+      $dataCloning->codeError="dataCloningErrorCantCreateDb";
       $dataCloning->save();
       return;
     }
@@ -588,12 +596,18 @@ class DataCloning extends SqlElement{
       }
       $paramIsRelative = false;
       foreach($iterator as $element){
+        if ($iterator->getSubPathName()=='tool\parameters.php' or $iterator->getSubPathName()=='tool/parameters.php') continue; // Not expected file existing on very old instances
         //parameter php
         if($dataCloning->idOrigin){
           if($element->getBasename()==$parameterP){
             $paramIsRelative = true;
             $parameterPhp  = $dir_dest . DIRECTORY_SEPARATOR . str_replace($parameterP, "parameters_".$nameDir.".php",$iterator->getSubPathName());
-            copy($element,$parameterPhp);
+            enableCatchErrors();
+            $resCopy=copy($element,$parameterPhp);
+            if (!$resCopy) {
+              errorLog(i18n("dataCloningErrorCantCreateParameter")." (1.1)");
+              $dataCloning->codeError="dataCloningErrorCantCreateParameter";
+            }
             $parameterPhp2 = "../".str_replace($parameterP, "parameters_".$nameDir.".php",$iterator->getSubPathName());
             $paramContext = file_get_contents($parameterPhp);
             $paramDbNameOrigin = 'simu_'.$OriginData->nameDir;
@@ -606,14 +620,24 @@ class DataCloning extends SqlElement{
             $paramSimuIndexOrigin = "\$simuIndex='$OriginData->nameDir';";
             $paramSimuIndexNew = "\$simuIndex='$nameDir';";
             $paramContext .= str_replace($paramSimuIndexOrigin,$paramSimuIndexNew,$paramContext);
-            file_put_contents($parameterPhp, $paramContext);
+            $resUpdate=file_put_contents($parameterPhp, $paramContext);
+            if (!$resUpdate) {
+              errorLog(i18n("dataCloningErrorCantCreateParameter")." (1.2)");
+              $dataCloning->codeError="dataCloningErrorCantCreateParameter";
+            }
+            disableCatchErrors();
             continue;
           }
         }else{
           if($element->getBasename()==$parameterP AND (str_replace("plugin", '', $element->getPath()) == $element->getPath()) AND (str_replace("simulation", '', $element->getPath()) == $element->getPath())){
             $paramIsRelative = true;
             $parameterPhp  = $dir_dest . DIRECTORY_SEPARATOR . str_replace("parameters.php", "parameters_".$nameDir.".php",$iterator->getSubPathName());
-            copy($element,$parameterPhp);
+            enableCatchErrors();
+            $resCopy=copy($element,$parameterPhp);
+            if (!$resCopy) {
+              errorLog(i18n("dataCloningErrorCantCreateParameter")." (2.1)");
+              $dataCloning->codeError="dataCloningErrorCantCreateParameter";
+            }
             $parameterPhp2 = "../".str_replace("parameters.php", "parameters_".$nameDir.".php",$iterator->getSubPathName());
             $paramContext = file_get_contents($parameterPhp);
             $paramDbNameParam = "\$paramDbName='$paramDbName';";
@@ -622,7 +646,12 @@ class DataCloning extends SqlElement{
             $paramContext = str_replace($paramDbNameParam,$paramDbNameParamSimu,$paramContext);
             $paramContext .= "\n";
             $paramContext .= "\$simuIndex='$nameDir';";
-            file_put_contents($parameterPhp, $paramContext);
+            $resUpdate=file_put_contents($parameterPhp, $paramContext);
+            if (!$resUpdate) {
+              errorLog(i18n("dataCloningErrorCantCreateParameter")." (2.2)");
+              $dataCloning->codeError="dataCloningErrorCantCreateParameter";
+            }
+            disableCatchErrors();
             continue;
           }
         }
@@ -641,8 +670,8 @@ class DataCloning extends SqlElement{
         if($element->isDir()){
           enableCatchErrors();
           if(!mkdir($dir_dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName())){
-            debugTraceLog(i18n('cantCreateUnderFolder'));
-            $dataCloning->codeError = "createFolder";
+            errorLog(i18n('dataCloningErrorCantCreateUnderFolder'));
+            $dataCloning->codeError = "dataCloningErrorCantCreateUnderFolder";
             $dataCloning->save();
             disableCatchErrors();
             return;
@@ -670,8 +699,8 @@ class DataCloning extends SqlElement{
           $paramContext .= "\$simuIndex='$dataCloning->name';";
           file_put_contents($parametersLocationNewPwd, $paramContext);
         }catch (Exception $e) {
-          debugTraceLog("cantCreateParameter.php");
-          $dataCloning->codeError="createParameter";
+          errorLog(i18n("dataCloningErrorCantCreateParameter"));
+          $dataCloning->codeError="dataCloningErrorCantCreateParameter";
           $dataCloning->save();
           return;
         }
@@ -689,8 +718,8 @@ class DataCloning extends SqlElement{
         }
       }
     } catch (Exception $e) {
-      debugTraceLog(i18n("dataCloningCanNotCopy"));
-      $dataCloning->codeError = "copyFolder";
+      errorLog(i18n("dataCloningErrorCanNotCopy"));
+      $dataCloning->codeError = "dataCloningErrorCanNotCopy";
       $dataCloning->save();
       $bdName = 'simu_'.strtolower($nameDir);
       $sqlRemove = "DROP DATABASE $bdName ;";
@@ -711,9 +740,9 @@ class DataCloning extends SqlElement{
 	  $codeError = $dataCloning->codeError;
 	  $startMicroTime=microtime(true);
 	  $firstDelete=true;
-	  if($codeError)$firstDelete = false;
-	  debugTraceLog(i18n('DataCloningDeleteStart').$dataCloning->name);
-	  if($codeError != 'deleteDbDataCloning'){
+	  if($codeError) $firstDelete=false;
+	  traceLog(i18n('dataCloningDeleteStart').' - '.$dataCloning->name);
+	  if($codeError != 'dataCloningErrorDeleteDb'){
   	  if($dataCloningDirectory){
         $pathSeparator=Parameter::getGlobalParameter('paramPathSeparator');
         if (substr($dataCloningDirectory,-1)!=$pathSeparator) $dataCloningDirectory.=$pathSeparator;
@@ -732,15 +761,15 @@ class DataCloning extends SqlElement{
   	     $dataCloning->save();
   	   }
   	  }catch(Exception $e) {
-  	    $dataCloning->codeError = "deleteFolderDataCloning";
-  	    debugTraceLog(i18n('DataCloningDeleteCanDeleteFolder').$dataCloning->nameDir);
+  	    $dataCloning->codeError = "dataCloningErrorCantDeleteFolder";
+  	    errorLog(i18n('dataCloningErrorCantDeleteFolder').' - '.$dataCloning->nameDir);
   	    $dataCloning->isRequestedDelete = 0;
   	    $dataCloning->isActive = 0;
   	    $dataCloning->save();
   	  }
 	  }
 	  
-	  if($codeError != 'deleteFolderDataCloning' or $firstDelete){
+	  if($codeError != 'dataCloningErrorDeleteFolder' or $firstDelete){
   	  $bdName = 'simu_'.strtolower($dataCloning->nameDir);
   	  if (Parameter::getGlobalParameter('paramDbType') == "pgsql") {
         $PDO=$dataCloning->connexionDbSimu(Parameter::getGlobalParameter('paramDbName'));
@@ -755,16 +784,16 @@ class DataCloning extends SqlElement{
   	  }
      try{
        $PDO->exec($sqlDrop);
-       debugTraceLog( $dataCloning->name . i18n('dataCloningDeleteFinish').' - '. (round((microtime(true) - $startMicroTime)*1000000)/1000000) . i18n('second'));
+       traceLog( $dataCloning->name . ' - '.i18n('dataCloningDeleteFinish').' - '. (round((microtime(true) - $startMicroTime),1)) . ' '.i18n('shortSecond'));
        $dataCloning->idle = 1;
        $dataCloning->deletedDate = date('Y-m-d H:i');
        if($dataCloning->codeError)$dataCloning->codeError=null;
      }catch(Exception $e) {
-       debugTraceLog(i18n('deleteDbDataCloning'));
-       if($dataCloning->codeError == "deleteFolderDataCloning"){
-         $dataCloning->codeError .= "deleteDbDataCloning";
+       errorLog(i18n('dataCloningErrorDeleteDb'));
+       if($dataCloning->codeError == "dataCloningErrorDeleteFolder"){
+         $dataCloning->codeError .= "dataCloningErrorDeleteDb";
        }else{
-        $dataCloning->codeError = "deleteDbDataCloning";
+         $dataCloning->codeError = "dataCloningErrorDeleteDb";
        }
        $dataCloning->isActive = 0;
      }
@@ -834,19 +863,19 @@ public static	function remove_dir($directory,$dataCloning,$empty = false) {
 			$sslArray=array();
 			$sslKey=Parameter::getGlobalParameter("SslKey");
 			if($sslKey and !file_exists($sslKey)){
-				traceLog("Error for SSL Key : file $sslKey do not exist");
+				errorLog("Error for SSL Key : file $sslKey do not exist");
 				$sslKey=null;
 			}
 			 
 			$sslCert=Parameter::getGlobalParameter("SslCert");
 			if($sslCert and !file_exists($sslCert)){
-				traceLog("Error for SSL Certification : file $sslCert do not exist");
+				errorLog("Error for SSL Certification : file $sslCert do not exist");
 				$sslCert=null;
 			}
 	
 			$sslCa=Parameter::getGlobalParameter("SslCa");
 			if($sslCa and !file_exists($sslCa)){
-				traceLog("Error for SSL Certification Authority : file $sslCa do not exist");
+				errorLog("Error for SSL Certification Authority : file $sslCa do not exist");
 				$sslCa=null;
 			}
 	
