@@ -121,17 +121,17 @@ class DataCloning extends SqlElement {
     } else {
       $listUser=getListForSpecificRights('dataCloningRight');
     }
-    $res=new Resource($idUser);
+    $res=new Affectable($idUser);
     $date=date('Y-m-d');
     $addDate=addDaysToDate(date('Y-m-d'), 1);
     $wherePerDay="requestedDate > '$date' and requestedDate < '$addDate' ";
     $dataCloningCountPerDay=$dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
     $dataCloningCountTotal=$dataCloning->countSqlElementsFromCriteria(array("idle"=>"0", "idResource"=>$idUser));
     $dataCloningPerDay=Parameter::getGlobalParameter('dataCloningPerDay');
-    $dataCloningTotal=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array(
+    $dataCloningTotalObj=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array(
         "scope"=>"dataCloningTotal", 
         "idProfile"=>$res->idProfile));
-    $dataCloningTotal=$dataCloningTotal->rightAccess;
+    $dataCloningTotal=intval($dataCloningTotalObj->rightAccess);
     $hide='none';
     if ($idUser!='') {
       if ($dataCloningTotal-$dataCloningCountTotal>0 and $dataCloningPerDay-$dataCloningCountPerDay>0) {
@@ -162,7 +162,7 @@ class DataCloning extends SqlElement {
     $result.='       </tr></table>';
     $result.='   </tr>';
     foreach ($listUser as $id=>$name) {
-      $where="idResource=".$id.$critWhere.";";
+      $where="idResource=".$id." ".$critWhere;
       $listDataCloning=$dataCloning->getSqlElementsFromCriteria(null, null, $where);
       $countLine=0;
       foreach ($listDataCloning as $data) {

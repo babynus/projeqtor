@@ -81,14 +81,14 @@ if($idDataCloning){
   $dataCloningRequestorTotalPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
   
   if($dataCloningRequestorTotalPerDay-$dataCloningRequestorCountPerDay > 0){
-    $res = new ResourceAll($user);
+    $res = new Affectable($user);
     $date = date('Y-m-d');
     $addDate =  addDaysToDate(date('Y-m-d'), 1);
     $wherePerDay = "idResource = $user and idle = 0 ";
     $dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
     $dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
-    $dataCloningTotal=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array("scope"=>"dataCloningTotal", "idProfile"=>$res->idProfile));
-    $dataCloningTotal = $dataCloningTotal->rightAccess;
+    $dataCloningTotalObj=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array("scope"=>"dataCloningTotal", "idProfile"=>$res->idProfile));
+    $dataCloningTotal = $dataCloningTotalObj->rightAccess;
     $dataCloningCountTotal = $dataCloning->countSqlElementsFromCriteria(array("idle"=>"0", "idResource"=>$user));
 
     if($dataCloningTotal-$dataCloningCountTotal > 0){
