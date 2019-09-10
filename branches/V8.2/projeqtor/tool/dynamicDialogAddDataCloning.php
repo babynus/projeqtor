@@ -138,7 +138,7 @@ $idDataCloningParent = RequestHandler::getId('idDataCloningParent');
         <button dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogAddDataCloning').hide();">
           <?php echo i18n("buttonCancel");?>
         </button>
-        <button dojoType="dijit.form.Button" type="button" type="submit" onclick="saveDataCloning();">
+        <button dojoType="dijit.form.Button" type="button" id="dialogAddDataCloningSubmit" type="submit" onclick="saveDataCloning();">
           <?php echo i18n("buttonOK");?>
         </button>
       </td>
