@@ -38,9 +38,9 @@ $wherePerDay = "requestedDate > '$date' and requestedDate < '$addDate'";
 $dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
 $dataCloningCountTotal = $dataCloning->countSqlElementsFromCriteria(array("idle"=>"0", "idResource"=>$userId));
 $dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
-$res = new Resource($userId);
-$dataCloningTotal=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array("scope"=>"dataCloningTotal", "idProfile"=>$res->idProfile));
-$dataCloningTotal = $dataCloningTotal->rightAccess;
+$res = new Affectable($userId);
+$dataCloningTotalObj=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array("scope"=>"dataCloningTotal", "idProfile"=>$res->idProfile));
+$dataCloningTotal = $dataCloningTotalObj->rightAccess;
 
 $plannedDate = date('Y-m-d', $cronExecution->nextTime);
 $plannedHours = date('H:i', $cronExecution->nextTime);

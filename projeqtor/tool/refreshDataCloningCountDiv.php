@@ -36,9 +36,9 @@ $wherePerDay = "requestedDate > '$date' and requestedDate < '$addDate'";
 $dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
 $dataCloningCountTotal = $dataCloning->countSqlElementsFromCriteria(array("idle"=>"0", "idResource"=>$userSelected));
 $dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
-$res = new Resource($userSelected);
-$dataCloningTotal=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array("scope"=>"dataCloningTotal", "idProfile"=>$res->idProfile));
-$dataCloningTotal = $dataCloningTotal->rightAccess;
+$res = new Affectable($userSelected);
+$dataCloningTotalObj=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array("scope"=>"dataCloningTotal", "idProfile"=>$res->idProfile));
+$dataCloningTotal = $dataCloningTotalObj->rightAccess;
 ?>
 <table align="center">
   <tr>
