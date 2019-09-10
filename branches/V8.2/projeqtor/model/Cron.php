@@ -298,10 +298,10 @@ class Cron {
   	  unlink(self::$runningFile);
     }
     
-    $errorFileName=self::$errorFile.'_'.date('Ymd_His');
-    $mode=(file_exists($errorFileName))?'w':'x';
-    $errorFile=fopen($errorFileName, $mode);
-    fclose($errorFile);  
+    //$errorFileName=self::$errorFile.'_'.date('Ymd_His');
+    //$mode=(file_exists($errorFileName))?'w':'x';
+    //$errorFile=fopen($errorFileName, 'w');
+    //fclose($errorFile);  
   } 
   
   public static function removeStopFlag() {

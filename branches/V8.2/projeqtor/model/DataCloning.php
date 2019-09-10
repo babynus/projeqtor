@@ -524,6 +524,7 @@ class DataCloning extends SqlElement {
           $sqlTruncateTable="TRUNCATE TABLE ".$table.";";
           $PDO3->prepare($sqlTruncateTable)->execute();
         }
+        $connexion=$PDO3;
       } else {
         $requete="CREATE DATABASE IF NOT EXISTS `".$newPwd."` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
         $PDO->query($requete);
