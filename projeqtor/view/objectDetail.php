@@ -2931,14 +2931,16 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       echo '</table>';
       if ($section and !$print) {
         echo '</div>';
+         
       }
       // echo '</td></tr></table>';
     }
   }
+
+  if (!$included) endBuffering($section, $included);
   if( Parameter::getUserParameter('paramLayoutObjectDetail')==0 and $included==false){
     echo '</div>';
   }
-  if (!$included) endBuffering($section, $included);
   if (!$included) finalizeBuffering();
   if ($outMode=='pdf') {
     $cpt=0;
@@ -2965,7 +2967,7 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
     echo '</table>';
     if (!$print) {
       echo '</div>';
-      if( Parameter::getUserParameter('paramLayoutObjectDetail')==0 and $included==false){
+      if( Parameter::getUserParameter('paramLayoutObjectDetail')==0 and $included==false and $prevSection!='predecessor'){
         echo '</div>';
       }
     } else {
@@ -3017,7 +3019,7 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
       $titleHeight=($fontSize)?$fontSize*1.6:''; 
       echo ' <script type="dojo/method" event="titlePaneHandler" > setAttributeOnTitlepane(\''.$titlePane.'\',\''.$labelStyle.'\',\''.$titleHeight.'\');</script>';
       if(Parameter::getUserParameter('paramLayoutObjectDetail')==0 and $included==false){
-        echo '<table class="detail"  style="width:650px;height:600px;" >';
+        echo '<table class="detail"  style="width:650px;" >';
       }else{
         echo '<table class="detail"  style="width:100%;" >';
       }
@@ -7650,19 +7652,21 @@ function endBuffering($prevSection, $included) {
           $position='center';
         } 
       }
-
-        if ($position=='extra') {
-          $extraPane.=$display;
-        } else if ($position=='bottom') {
-          $bottomPane.=$display;
-        } else if ($position=='right') {
-          $rightPane.=$display;
-        } else if ($position=='left') {
-          $leftPane.=$display;
-        } else {
-          traceLog("ERROR at endBuffering() : '$position' is not an expected position");
+        if(Parameter::getUserParameter('paramLayoutObjectDetail'=='0')){
+        	$pane.=$display;
+        }else{
+          if ($position=='extra') {
+            $extraPane.=$display;
+          } else if ($position=='bottom') {
+            $bottomPane.=$display;
+          } else if ($position=='right') {
+            $rightPane.=$display;
+          } else if ($position=='left') {
+            $leftPane.=$display;
+          } else {
+            traceLog("ERROR at endBuffering() : '$position' is not an expected position");
+          }
         }
-     
     }
   // echo $display; // firt test !!!
   //}
@@ -7699,7 +7703,9 @@ function finalizeBuffering() {
     } else if ($nbColMax==3) {
       echo '<tr style="height:10px">'.'<td style="width:33%;vertical-align: top;'.(($showBorders)?'border:1px solid red':'').'">'.$leftPane.'</td>'.'<td style="width:33%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$rightPane.'</td>'.'<td rowspan="2" style="width:34%;vertical-align: top;'.(($showBorders)?'border:1px solid blue':'').'">'.$extraPane.'</td>'.'</tr>';
       echo '<tr><td colspan="2" style="width:66%;vertical-align: top;'.(($showBorders)?'border:1px solid yellow':'').'">'.$bottomPane.'</td></tr>';
-    } else {
+    } else if(Parameter::getUserParameter('paramLayoutObjectDetail'=='0')){
+      echo '<tr><td style="width:50%;vertical-align: top;'.(($showBorders)?'border:1px solid red':'').'">'.$pane.'</td>'.'<td style="width:50%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$rightPane.'</td>'.'</tr>';
+    }else {
       traceLog("ERROR at finalizeBuffering() : '$nbColMax' is not an expected max column count");
     }
   echo '</table>';
