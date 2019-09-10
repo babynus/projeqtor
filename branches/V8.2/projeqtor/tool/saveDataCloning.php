@@ -55,14 +55,15 @@ if($idDataCloning){
       $result=$dataCloning->delete();
     }
   }else if($codeError){
-    //if(substr($codeError, 0, 1) == 'd'){
-    //  $dataCloning->requestedDeletedDate = $requestedDeletedDate;
-    //  $dataCloning->isRequestedDelete = 1;
-    //}else{
+    if(substr($codeError, 0, 22) == 'dataCloningErrorDelete'){
+      //$dataCloning->codeError = null;
+      $dataCloning->requestedDeletedDate = $requestedDeletedDate;
+      $dataCloning->isRequestedDelete = 1;
+    }else{
       $dataCloning->requestedDate = $requestedDate;
       $dataCloning->codeError = null;
       $dataCloning->isActive=0;
-    //}
+    }
     $result=$dataCloning->save();
   }else{
     $dataCloning->requestedDeletedDate = null;
