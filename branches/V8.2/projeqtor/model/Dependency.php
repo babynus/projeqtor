@@ -181,6 +181,9 @@ class Dependency extends SqlElement {
 	    	$result.='<br/>' . i18n('errorUpdateRights');
 	    }
     }
+    if($this->predecessorRefType=='PeriodicMeeting' or $this->successorRefType=='PeriodicMeeting'){
+    	$result.='<br/>' . i18n('errorDependencyPeriodicMeeting');
+    }
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
       $result.=$defaultControl;

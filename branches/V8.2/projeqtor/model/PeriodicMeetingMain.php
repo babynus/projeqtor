@@ -72,10 +72,10 @@ class PeriodicMeetingMain extends SqlElement {
   public $_spe_buttonAssignTeam;
   public $_sec_progress;
   public $MeetingPlanningElement;
-  public $_sec_predecessor;
-  public $_Dependency_Predecessor=array();
-  public $_sec_successor;
-  public $_Dependency_Successor=array();
+//   public $_sec_predecessor;
+//   public $_Dependency_Predecessor=array();
+//   public $_sec_successor;
+//   public $_Dependency_Successor=array();
   public $_Note=array();
   public $idPeriodicMeeting;
 
