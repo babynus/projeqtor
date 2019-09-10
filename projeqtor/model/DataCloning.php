@@ -838,8 +838,8 @@ class DataCloning extends SqlElement {
           $dataCloning->save();
         }
       } catch (Exception $e) {
-        $dataCloning->codeError="dataCloningErrorCantDeleteFolder";
-        errorLog(i18n('dataCloningErrorCantDeleteFolder').' - '.$dataCloning->nameDir);
+        $dataCloning->codeError="dataCloningErrorDeleteFolder";
+        errorLog(i18n('dataCloningErrorDeleteFolder').' - '.$dataCloning->nameDir);
         $dataCloning->isRequestedDelete=0;
         $dataCloning->isActive=0;
         $dataCloning->save();
