@@ -4747,7 +4747,7 @@ function changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail){
   if((empty(Parameter::getUserParameter("paramLayoutObjectDetail")) or (Parameter::getUserParameter("paramLayoutObjectDetail")=='4')and $paramLayoutObjectDetail=='4')) {
     $valScreen='4';
     Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
-  }else if(Parameter::getUserParameter("paramLayoutObjectDetail")=='4' and RequestHandler::getValue('paramLayoutObjectDetail')=='0'){
+  }else if(Parameter::getUserParameter("paramLayoutObjectDetail")=='4' and $paramLayoutObjectDetail=='0'){
     $valScreen='0';
     Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
   }

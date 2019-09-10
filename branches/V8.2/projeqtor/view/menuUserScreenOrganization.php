@@ -40,7 +40,7 @@ $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
     <tr height="<?php echo $iconSize+8; ?>px">  
       <td width="<?php echo (isIE())?37:35;?>px" > 
         <div id="changeLayout" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px;
-        <?php if( $paramScreen=='5'){echo 'opacity:0.5;cursor:not-allowed';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
+        <?php if( $paramScreen=='5'){echo 'opacity:0.5;cursor:not-allowed;';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
          onclick="<?php if($paramScreen=='1' or $paramScreen=='2'){echo 'switchModeLayout(\'5\')';}?>">
           <table >
             <tr>
@@ -53,7 +53,7 @@ $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
         <div id="horizontalLayout"  class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramScreen=='1'){echo 'opacity:0.5;cursor:not-allowed';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
+        <?php if($paramScreen=='1'){echo 'opacity:0.5;cursor:not-allowed;';}?>" title="<?php echo i18n("");?>"
         onclick="<?php if($paramScreen=='2' or $paramScreen=='5'){echo 'switchModeLayout(\'1\');';}?>">
           <table >
             <tr>
@@ -66,7 +66,7 @@ $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
         <div id="verticalLayout" lass="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramScreen=='2'){echo 'opacity:0.5;cursor:not-allowed';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
+        <?php if($paramScreen=='2'){echo 'opacity:0.5;cursor:not-allowed;';}?>" title="<?php echo i18n("");?>"
         onclick="<?php if($paramScreen=='1' or $paramScreen=='5' ){echo 'switchModeLayout(\'2\');';}?>">
           <table >
             <tr>
@@ -81,7 +81,7 @@ $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
     <tr height="<?php echo $iconSize+8; ?>px">  
       <td width="<?php echo (isIE())?37:35;?>px"> 
         <div id="layoutList" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramObjectDetail=='4'){echo 'opacity:0.5;cursor:not-allowed';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
+        <?php if($paramObjectDetail=='4'){echo 'opacity:0.5;cursor:not-allowed;';}?>" title="<?php echo i18n("");?>"
         onclick="<?php if($paramObjectDetail=='0'){echo 'switchModeLayout(\'4\');';}?>">
           <table >
             <tr>
@@ -92,11 +92,9 @@ $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
           </table>    
        </div>
       </td>
-      <td width="<?php echo (isIE())?37:35;?>px" >
-      </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
         <div id="layoutTab" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramObjectDetail=='0'){echo 'opacity:0.5;cursor:not-allowed';}?>" 
+        <?php if($paramObjectDetail=='0'){echo 'opacity:0.5;cursor:not-allowed;';}?>" 
         title="<?php echo i18n("buttonSwitchedMode");?>"
         onclick="<?php if($paramObjectDetail=='4'){echo 'switchModeLayout(\'0\');';}?>">
           <table >
@@ -124,22 +122,26 @@ $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
     </td>
      <?php }?> 
     <td width="<?php echo (isIE())?37:35;?>px">   
-      <div id="hideMenuBarShowButtonTop" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;"  >
-  		  <a onClick="hideMenuBarShowModeTop();" id="buttonSwitchedMenuBarTopShow" title="<?php echo i18n("buttonShowMenu");?>" >
-  		    <span style='display:inline-block;width:24px;height:22px;'>
-  		     <div style="position:absolute;top:1px;height:26px;width:24px" dojoType="dijit.form.Button" iconClass="dijitButtonIcon iconHideStream22" class="detailButton">&nbsp;</div>
-  		    </span>
-  		  </a>
+      <div id="hideMenuBarShowButtonTop" class="pseudoButton"   onClick="hideMenuBarShowModeTop();" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;"  >
+          <table >
+            <tr>
+              <td style="width:28x;text-align:center">
+                <div class="iconHideStreamTop22 iconHideStreamTop iconSize22 " style="position:absolute;top:2px;left:3px" ></div>
+              </td>
+            </tr>
+          </table>    
 	  </div>
     </td>
     <td width="<?php echo (isIE())?37:35;?>px">
-  	  <div id="hideMenuBarShowButton2" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" title="<?php echo i18n("buttonShowMenu");?>" >
+  	  <div id="hideMenuBarBottom" class="pseudoButton" onClick="hideMenuBarShowMode();" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;"  >
   	  <?php if (! isset($showModuleScreen)) {?>
-  		  <a onClick="hideMenuBarShowMode();" id="buttonSwitchedMenuBarTopShow"  >
-  		    <span style='display:inline-block;width:24px;height:22px;'>
-  		     <div style="position:absolute;top:1px;height:26px;width:24px" dojoType="dijit.form.Button" iconClass="dijitButtonIcon iconHideStream22" class='detailButton'>&nbsp;</div>
-  		    </span>
-  		  </a>
+  		  <table>
+            <tr>
+              <td style="width:28x;text-align:center">
+                <div class="iconHideStreamLeft22 iconHideStreamLeft iconSize22 " style="position:absolute;top:2px;left:3px" ></div>
+              </td>
+            </tr>
+          </table>  
       <?php }?>  
 	  </div>
     </td> 

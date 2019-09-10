@@ -298,6 +298,14 @@
 .iconHideStream22 { background-image: url(images/iconHideStream.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 20px 22px;}
 .iconHideStream16 { background-image: url(images/iconHideStream.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
+.iconHideStreamTop32 { background-image: url(images/iconHideStreamTop.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconHideStreamTop22 { background-image: url(images/iconHideStreamTop.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 20px 22px;}
+.iconHideStreamTop16 { background-image: url(images/iconHideStreamTop.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
+.iconHideStreamLeft32 { background-image: url(images/iconHideStreamLeft.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconHideStreamLeft22 { background-image: url(images/iconHideStreamLeft.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 20px 22px;}
+.iconHideStreamLeft16 { background-image: url(images/iconHideStreamLeft.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
 .iconCommand32 { background-image: url(images/iconClientCommand32.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .iconCommand22 { background-image: url(images/iconClientCommand32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .iconCommand16 { background-image: url(images/iconClientCommand32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
