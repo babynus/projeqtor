@@ -17,7 +17,7 @@ $logLevel='3';                    // "1"=Errors, "2"=Trace, "3"=Debug, "4"=Scrip
 
 // ========== Contextual configuration ===================================================
 //$lockPassword="false";           // Forbid password change (used in Demo to forbit password change)
-//$hosted=true;                    // Is a hosted mode ? => should hide some configuration (directories, ...)
+//$hosted=true;                    // Is a hosted mode. Hide some configuration. Set to true hides Data Cloning. Set to anything else ('dedicated') enables Data Cloning
 //$flashReport=true;               // Specific evolution Parameter
 $enforceUTF8 = '1';                // Positionned by default for new installs since V4.4.0
 $paramSupportEmail="support@projeqtor.org"; // Email displayed as support mail
