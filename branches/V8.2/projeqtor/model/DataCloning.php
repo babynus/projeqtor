@@ -636,42 +636,23 @@ class DataCloning extends SqlElement {
     try {
       $dir_iterator=new RecursiveDirectoryIterator($dir_source, RecursiveDirectoryIterator::SKIP_DOTS);
       $iterator=new RecursiveIteratorIterator($dir_iterator, RecursiveIteratorIterator::SELF_FIRST);
-      
-      if (!$dataCloning->idOrigin) {
-        $exceptionPath=array(
-            ".settings", 
-            "simulation", 
-            ".svn", 
-            "deploy", 
-            "test", 
-            ".externalToolBuilders", 
-            "api", 
-            "db", 
-            "manual", 
-            "attach", 
-            "cron", 
-            "documents", 
-            "import", 
-            "logs", 
-            "\files\report");
+      $exceptionPath=array(
+            "/.settings","\.settings", 
+            "/simulation","\simulation", 
+            "/.svn", "\.svn",
+            "/deploy", "\deploy",
+//"/test", "\test", 
+            "/.externalToolBuilders", "\.externalToolBuilders", 
+            "/api", "\api",
+            "/db", "\db",
+            "/manual", "\manual", 
+            "/attach", "\attach",
+            "/cron", "\cron",
+            "/documents", "\documents",
+            "/import", "\import", 
+            "/logs", "\logs",
+            "/files/report","\\files\\report");
         $exceptionFile=array("simulation", "deploy", "test", "api", "db", "manual");
-      } else {
-        $exceptionPath=array(
-            ".settings", 
-            ".svn", 
-            "deploy", 
-            "test", 
-            ".externalToolBuilders", 
-            "api", 
-            "db", 
-            "manual", 
-            "attach", 
-            "cron", 
-            "documents", 
-            "import", 
-            "logs", 
-            "\files\report");
-        $exceptionFile=array("deploy", "test", "api", "db", "manual");
       }
       $paramIsRelative=false;
       foreach ($iterator as $element) {
@@ -735,14 +716,8 @@ class DataCloning extends SqlElement {
           }
         }
         // exception
-        if ($dataCloning->idOrigin) {
-          if ((str_replace($exceptionPath, '', $element->getPath())!=$element->getPath()) or (substr($element->getBasename(), 0, 1)==".") or (in_array($element->getBasename(), $exceptionFile))) {
-            continue;
-          }
-        } else {
-          if ((str_replace($exceptionPath, '', $element->getPath())!=$element->getPath()) or (substr($element->getBasename(), 0, 1)==".") or (in_array($element->getBasename(), $exceptionFile))) {
-            continue;
-          }
+        if ((str_replace($exceptionPath, '', $element->getPath())!=$element->getPath()) or (substr($element->getBasename(), 0, 1)==".") or (in_array($element->getBasename(), $exceptionFile))) {
+          continue;
         }
         // end exception
         
