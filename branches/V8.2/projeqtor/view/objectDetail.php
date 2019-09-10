@@ -36,6 +36,13 @@ $rightPane="";
 $extraPane="";
 $bottomPane="";
 $pane="";
+$paneDescription="";
+$paneLink="";
+$paneTreatment="";
+$paneDependency="";
+$paneProgress="";
+$paneNote="";
+$paneAssignment="";
 scriptLog('   ->/view/objectDetail.php');
 if (!isset($comboDetail)) {
   $comboDetail=false;
@@ -429,7 +436,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
  */
 function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $parentHidden=false) {
   scriptLog("drawTableFromObject(obj, included=$included, parentReadOnly=$parentReadOnly)");
-  global $toolTip, $cr, $print, $treatedObjects, $displayWidth, $outMode, $comboDetail, $collapsedList, $printWidth, $profile, $detailWidth, $readOnly, $largeWidth, $widthPct, $nbColMax, $preseveHtmlFormatingForPDF, $reorg,$pane, $leftPane, $rightPane, $extraPane, $bottomPane, $nbColMax, $section, $beforeAllPanes, $colWidth,$objInsert;
+  global $toolTip, $cr, $print, $treatedObjects, $displayWidth, $outMode, $comboDetail, $collapsedList, $printWidth, $profile, $detailWidth, $readOnly, $largeWidth, $widthPct, $nbColMax, $preseveHtmlFormatingForPDF, $reorg,$pane, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAssignment,$paneLink, $nbColMax, $section, $beforeAllPanes, $colWidth,$objInsert;
   $ckEditorNumber=0; // Will be used only if getEditor=="CK" for CKEditor
 
   //gautier
@@ -2961,15 +2968,12 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
 
 function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, $outMode, $prevSection, $nbCol, $nbBadge=null, $included=null, $obj=null) {
   // scriptLog("startTitlePane(classObbj=$classObj, section=$section, collapsedList=array, widthPct=$widthPct, print=$print, outMode=$outMode, prevSection=$prevSection, nbCol=$nbCol, nbBadge=$nbBadge)");
-  global $currentColumn, $reorg,$pane, $leftPane, $rightPane, $extraPane, $bottomPane, $beforeAllPanes,$type;
+  global $currentColumn, $reorg,$pane, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAssignment,$paneLink, $beforeAllPanes,$type;
   if (!$currentColumn) $currentColumn=0;
   if ($prevSection) {
     echo '</table>';
     if (!$print) {
       echo '</div>';
-      if( Parameter::getUserParameter('paramLayoutObjectDetail')==0 and $included==false and $prevSection!='predecessor'){
-        echo '</div>';
-      }
     } else {
       echo '<br/>';
     }
@@ -3006,7 +3010,8 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
     $fontSize=(isset($attrs['font-size']))?intval($attrs['font-size']):'';
     // gautier #resourceTeam
     if( Parameter::getUserParameter('paramLayoutObjectDetail')==0 and $included==false){
-      echo '<div dojoType="dijit/layout/ContentPane" title="'.$section.'" style="width:100%;" selected="true">';
+      echo '<div dojoType="dijit.layout.ContentPane" title="'.$section.'" style="width:100%;" selected="true">';
+      echo '<div>';
     }
       echo '<div dojoType="dijit.TitlePane" title="'.i18n('section'.ucfirst($sectionName)).(($nbBadge!==null)?'<div id=\''.$section.'Badge\' class=\'sectionBadge\'>'.$nbBadge.'</div>':'').'"';
       echo ' open="'.(array_key_exists($titlePane, $collapsedList)?'false':'true').'" ';
@@ -3018,11 +3023,7 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
       echo ' onShow=";saveExpanded(\''.$titlePane.'\');">';
       $titleHeight=($fontSize)?$fontSize*1.6:''; 
       echo ' <script type="dojo/method" event="titlePaneHandler" > setAttributeOnTitlepane(\''.$titlePane.'\',\''.$labelStyle.'\',\''.$titleHeight.'\');</script>';
-      if(Parameter::getUserParameter('paramLayoutObjectDetail')==0 and $included==false){
-        echo '<table class="detail"  style="width:650px;" >';
-      }else{
-        echo '<table class="detail"  style="width:100%;" >';
-      }
+       echo '<table class="detail"  style="width:100%;" >';
   } else {
     $hide=false;
     $display='';
@@ -7568,65 +7569,65 @@ function getNbColMax($displayWidth, $print, $printWidth, $obj) {
 }
 
 function startBuffering() {
-  global $reorg,$pane, $leftPane, $rightPane, $extraPane, $bottomPane, $nbColMax, $section;
+  global $reorg,$pane, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAssignment,$paneLink, $nbColMax, $section;
   if (!$reorg) return;
   ob_start();
 }
 
 function endBuffering($prevSection, $included) {
-  global $reorg,$pane, $leftPane, $rightPane, $extraPane, $bottomPane, $nbColMax, $section, $beforeAllPanes; 
+  global $reorg,$pane, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAssignment,$paneLink, $nbColMax, $section, $beforeAllPanes; 
     $sectionPosition=array(
-        'assignment'=>array('2'=>'left', '3'=>'extra'), 
-        'attachment'=>array('2'=>'bottom', '3'=>'extra'), 
-        'attendees'=>array('2'=>'right', '3'=>'extra'), 
-        'billline'=>array('2'=>'bottom', '3'=>'bottom'), 
-        'billlineterm'=>array('2'=>'bottom', '3'=>'bottom'), 
-        'calendar'=>array('2'=>'bottom', '3'=>'bottom'), 
-        'description'=>array('2'=>'left', '3'=>'left'), 
-        'evaluation'=>array('2'=>'left', '3'=>'extra'), 
-        'evaluationcriteria'=>array('2'=>'right', '3'=>'extra'), 
-        'expensedetail'=>array('2'=>'bottom', '3'=>'bottom'), 
-        'helpallowedwords'=>array('3'=>'bottom', '3'=>'extra'), 
-        'helpallowedreceivers'=>array('3'=>'bottom', '3'=>'extra'), 
-        'hierarchicorganizationprojects'=>array('2'=>'bottom', '3'=>'extra'), 
-        'iban'=>array('2'=>'right', '3'=>'extra'), 
-        'internalalert'=>array('2'=>'right', '3'=>'extra'), 
-        'link'=>array('2'=>'bottom', '3'=>'extra'), 
-        'link_requirement'=>array('2'=>'bottom', '3'=>'extra'), 
-        'link_deliverable'=>array('2'=>'left', '3'=>'extra'), 
-        'link_activity'=>array('2'=>'left', '3'=>'extra'),
-        'listtypeusingworkflow'=>array('2'=>'right', '3'=>'extra'), 
-        'lock'=>array('2'=>'left', '3'=>'left'), 
-        'mailtext'=>array('2'=>'bottom', '3'=>'bottom'), 
-        'miscellaneous'=>array('2'=>'right', '3'=>'extra'), 
-        'note'=>array('2'=>'bottom', '3'=>'extra'), 
-        'notificationtitle'=>array('2'=>'left', '3'=>'left'), 
-        'notificationrule'=>array('2'=>'left', '3'=>'left'), 
-        'notificationcontent'=>array('2'=>'left', '3'=>'right'), 
-        'notification'=>array('3'=>'bottom', '3'=>'extra'), 
-        'predecessor'=>array('2'=>'bottom', '3'=>'bottom'), 
-        'projectsofobject'=>array('2'=>'bottom', '3'=>'extra'), 
-        'progress'=>array('2'=>'right', '3'=>'extra'), 
-        'progress_left'=>array('2'=>'left', '3'=>'extra'), 
-        'progress_center'=>array('2'=>'right', '3'=>'right'), 
-        'productcomponent'=>array('2'=>'left', '3'=>'extra'), 
-        'providerterm'=>array('2'=>'right', '3'=>'extra'), 
-        'receivers'=>array('3'=>'bottom', '3'=>'extra'), 
-        'resourcesofobject'=>array('2'=>'bottom', '3'=>'extra'), 
-        'resourcecost'=>array('2'=>'right', '3'=>'extra'), 
-        'subbudgets'=>array('2'=>'right', '3'=>'extra'), 
-        'submissions'=>array('2'=>'right', '3'=>'extra'), 
-        'successor'=>array('2'=>'bottom', '3'=>'bottom'), 
-        'target'=>array('2'=>'bottom', '3'=>'extra'), 
-        'treatment_right'=>array('2'=>'right', '3'=>'extra'), 
-        'link_testcase'=>array('2'=>'bottom', '3'=>'extra'), 
-        'testcaserun'=>array('2'=>'bottom', '3'=>'bottom'), 
-        'testcaserunsummary'=>array('2'=>'left', '3'=>'extra'), 
-        'testcasesummary'=>array('2'=>'right', '3'=>'extra'),
-        'totalfinancialsynthesis'=>array('2'=>'bottom', '3'=>'bottom'),
-        'void'=>array('2'=>'right', '3'=>'right'), 
-        'workflowdiagram'=>array('2'=>'bottom', '3'=>'bottom'), 
-        'workflowstatus'=>array('2'=>'bottom', '3'=>'bottom'));
+        'assignment'=>array('2'=>'left', '3'=>'extra','99'=>'assignment'), 
+        'attachment'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'), 
+        'attendees'=>array('2'=>'right', '3'=>'extra','99'=>'pane'), 
+        'billline'=>array('2'=>'bottom', '3'=>'bottom','99'=>'pane'), 
+        'billlineterm'=>array('2'=>'bottom', '3'=>'bottom','99'=>'pane'), 
+        'calendar'=>array('2'=>'bottom', '3'=>'bottom','99'=>'pane'), 
+        'description'=>array('2'=>'left', '3'=>'left','99'=>'description'), 
+        'evaluation'=>array('2'=>'left', '3'=>'extra','99'=>'pane'), 
+        'evaluationcriteria'=>array('2'=>'right', '3'=>'extra','99'=>'pane'), 
+        'expensedetail'=>array('2'=>'bottom', '3'=>'bottom','99'=>'pane'), 
+        'helpallowedwords'=>array('3'=>'bottom', '3'=>'extra','99'=>'pane'), 
+        'helpallowedreceivers'=>array('3'=>'bottom', '3'=>'extra','99'=>'pane'), 
+        'hierarchicorganizationprojects'=>array('2'=>'bottom', '3'=>'extra','99'=>'description'), 
+        'iban'=>array('2'=>'right', '3'=>'extra','99'=>'pane'), 
+        'internalalert'=>array('2'=>'right', '3'=>'extra','99'=>'pane'), 
+        'link'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'), 
+        'link_requirement'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'), 
+        'link_deliverable'=>array('2'=>'left', '3'=>'extra','99'=>'link'), 
+        'link_activity'=>array('2'=>'left', '3'=>'extra','99'=>'link'),
+        'listtypeusingworkflow'=>array('2'=>'right', '3'=>'extra','99'=>'pane'), 
+        'lock'=>array('2'=>'left', '3'=>'left','99'=>'pane'), 
+        'mailtext'=>array('2'=>'bottom', '3'=>'bottom','99'=>'pane'), 
+        'miscellaneous'=>array('2'=>'right', '3'=>'extra','99'=>'pane'), 
+        'note'=>array('2'=>'bottom', '3'=>'extra','99'=>'note'), 
+        'notificationtitle'=>array('2'=>'left', '3'=>'left','99'=>'note'), 
+        'notificationrule'=>array('2'=>'left', '3'=>'left','99'=>'note'), 
+        'notificationcontent'=>array('2'=>'left', '3'=>'right','99'=>'note'), 
+        'notification'=>array('3'=>'bottom', '3'=>'extra','99'=>'note'), 
+        'predecessor'=>array('2'=>'bottom', '3'=>'bottom','99'=>'dependency'), 
+        'projectsofobject'=>array('2'=>'bottom', '3'=>'extra','99'=>'pane'), 
+        'progress'=>array('2'=>'right', '3'=>'extra','99'=>'description','99'=>'progress'), 
+        'progress_left'=>array('2'=>'left', '3'=>'extra','99'=>'progress'), 
+        'progress_center'=>array('2'=>'right', '3'=>'right','99'=>'progress'), 
+        'productcomponent'=>array('2'=>'left', '3'=>'extra','99'=>'link'), 
+        'providerterm'=>array('2'=>'right', '3'=>'extra','99'=>'pane'), 
+        'receivers'=>array('3'=>'bottom', '3'=>'extra','99'=>'pane'), 
+        'resourcesofobject'=>array('2'=>'bottom', '3'=>'extra','99'=>'pane'), 
+        'resourcecost'=>array('2'=>'right', '3'=>'extra','99'=>'pane'), 
+        'subbudgets'=>array('2'=>'right', '3'=>'extra','99'=>'pane'), 
+        'submissions'=>array('2'=>'right', '3'=>'extra','99'=>'pane'), 
+        'successor'=>array('2'=>'bottom', '3'=>'bottom','99'=>'dependency'), 
+        'target'=>array('2'=>'bottom', '3'=>'extra','99'=>'treatment'), 
+        'treatment_right'=>array('2'=>'right', '3'=>'extra','99'=>'treatment'), 
+        'link_testcase'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'), 
+        'testcaserun'=>array('2'=>'bottom', '3'=>'bottom','99'=>'pane'), 
+        'testcaserunsummary'=>array('2'=>'left', '3'=>'extra','99'=>'pane'), 
+        'testcasesummary'=>array('2'=>'right', '3'=>'extra','99'=>'pane'),
+        'totalfinancialsynthesis'=>array('2'=>'bottom', '3'=>'bottom','99'=>'pane'),
+        'void'=>array('2'=>'right', '3'=>'right','99'=>'pane'), 
+        'workflowdiagram'=>array('2'=>'bottom', '3'=>'bottom','99'=>'pane'), 
+        'workflowstatus'=>array('2'=>'bottom', '3'=>'bottom','99'=>'pane'));
     
     // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
     // if(Parameter::getGlobalParameter('useOrganizationBudgetElement')==="YES") {
@@ -7638,6 +7639,8 @@ function endBuffering($prevSection, $included) {
       $beforeAllPanes=$display;
       return;
     }
+    
+    
     if ($nbColMax==1) {
         $leftPane.=$display;
     } else {
@@ -7652,8 +7655,28 @@ function endBuffering($prevSection, $included) {
           $position='center';
         } 
       }
-        if(Parameter::getUserParameter('paramLayoutObjectDetail'=='0')){
-        	$pane.=$display;
+      if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' ){
+          $groupe='pane';
+          if(isset($sectionPosition[$sectionName]['99'])){
+            $groupe=$sectionPosition[$sectionName]['99'];
+          }
+        	if($groupe=='description'){
+        	 $paneDescription.=$display;
+        	}else if($groupe=='treatment'){
+        	 $paneTreatment.=$display;
+        	}else if($groupe=='dependency'){
+        	 $paneDependency.=$display;
+        	}else if($groupe=='progress'){
+        	 $paneProgress.=$display;
+        	}else if($groupe=='note'){
+        	 $paneNote.=$display;
+        	}else if($groupe=='assignment'){
+        	 $paneAssignment.=$display;
+        	}else if($groupe=='link'){
+        	 $paneLink.=$display;
+        	}else if($groupe=='pane'){
+             $pane.=$display;
+            }
         }else{
           if ($position=='extra') {
             $extraPane.=$display;
@@ -7673,7 +7696,7 @@ function endBuffering($prevSection, $included) {
 }
 
 function finalizeBuffering() {
-  global $reorg,$pane, $leftPane, $rightPane, $extraPane, $bottomPane, $nbColMax, $section, $beforeAllPanes;
+  global $reorg,$pane, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAssignment,$paneLink, $nbColMax, $section, $beforeAllPanes;
   if (!$reorg) return;
   if (!$leftPane and $rightPane) {
     $leftPane=$rightPane;
@@ -7683,31 +7706,54 @@ function finalizeBuffering() {
   echo $beforeAllPanes;
   echo '<table style="width=100%">';
   $showBorders=false;
+  if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0'){
+    echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid red':'').'">'.$paneDescription.'</td></tr>';
+    if($paneTreatment){
+      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneTreatment.'</td></tr>';
+    }
+    if ($paneDependency) {
+      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneDependency.'</td></tr>';
+    }
+    if ($paneProgress) {
+      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneProgress.'</td></tr>';
+    }
+    if ($paneNote) {
+      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneNote.'</td></tr>';
+    }
+    if ($paneAssignment) {
+      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneAssignment.'</td></tr>';
+    }
+    if ($paneLink) {
+      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneLink.'</td></tr>';
+    }
+    if($pane){
+      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$pane.'</td></tr>';
+    }
+  }else{
     if ($nbColMax==1) {
-      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid red':'').'">'.$leftPane.'</td></tr>';
-      if ($rightPane) {
-        echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$rightPane.'</td></tr>';
-      }
-      if ($bottomPane) {
-        echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid yellow':'').'">'.$bottomPane.'</td></tr>';
-      }
-      if ($extraPane) {
-        echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid blue':'').'">'.$extraPane.'</td></tr>';
-      }
+        echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid red':'').'">'.$leftPane.'</td></tr>';
+        if ($rightPane) {
+          echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$rightPane.'</td></tr>';
+        }
+        if ($bottomPane) {
+          echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid yellow':'').'">'.$bottomPane.'</td></tr>';
+        }
+        if ($extraPane) {
+          echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid blue':'').'">'.$extraPane.'</td></tr>';
+        }
     } else if ($nbColMax==2) {
-      echo '<tr><td style="width:50%;vertical-align: top;'.(($showBorders)?'border:1px solid red':'').'">'.$leftPane.'</td>'.'<td style="width:50%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$rightPane.'</td>'.'</tr>';
-      echo '<tr><td colspan="2" style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid yellow':'').'">'.$bottomPane.'</td></tr>';
-      if ($extraPane) {
-        echo '<tr><td colspan="2" style="vertical-align: top;'.(($showBorders)?'border:1px solid blue':'').'">'.$extraPane.'</td></tr>';
-      }
+        echo '<tr><td style="width:50%;vertical-align: top;'.(($showBorders)?'border:1px solid red':'').'">'.$leftPane.'</td>'.'<td style="width:50%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$rightPane.'</td>'.'</tr>';
+        echo '<tr><td colspan="2" style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid yellow':'').'">'.$bottomPane.'</td></tr>';
+        if ($extraPane) {
+          echo '<tr><td colspan="2" style="vertical-align: top;'.(($showBorders)?'border:1px solid blue':'').'">'.$extraPane.'</td></tr>';
+        }
     } else if ($nbColMax==3) {
-      echo '<tr style="height:10px">'.'<td style="width:33%;vertical-align: top;'.(($showBorders)?'border:1px solid red':'').'">'.$leftPane.'</td>'.'<td style="width:33%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$rightPane.'</td>'.'<td rowspan="2" style="width:34%;vertical-align: top;'.(($showBorders)?'border:1px solid blue':'').'">'.$extraPane.'</td>'.'</tr>';
-      echo '<tr><td colspan="2" style="width:66%;vertical-align: top;'.(($showBorders)?'border:1px solid yellow':'').'">'.$bottomPane.'</td></tr>';
-    } else if(Parameter::getUserParameter('paramLayoutObjectDetail'=='0')){
-      echo '<tr><td style="width:50%;vertical-align: top;'.(($showBorders)?'border:1px solid red':'').'">'.$pane.'</td>'.'<td style="width:50%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$rightPane.'</td>'.'</tr>';
-    }else {
+        echo '<tr style="height:10px">'.'<td style="width:33%;vertical-align: top;'.(($showBorders)?'border:1px solid red':'').'">'.$leftPane.'</td>'.'<td style="width:33%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$rightPane.'</td>'.'<td rowspan="2" style="width:34%;vertical-align: top;'.(($showBorders)?'border:1px solid blue':'').'">'.$extraPane.'</td>'.'</tr>';
+        echo '<tr><td colspan="2" style="width:66%;vertical-align: top;'.(($showBorders)?'border:1px solid yellow':'').'">'.$bottomPane.'</td></tr>';
+    }  else {
       traceLog("ERROR at finalizeBuffering() : '$nbColMax' is not an expected max column count");
     }
+ }
   echo '</table>';
 }
 
