@@ -81,7 +81,7 @@ $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
     <tr height="<?php echo $iconSize+8; ?>px">  
       <td width="<?php echo (isIE())?37:35;?>px"> 
         <div id="layoutList" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramObjectDetail=='4'){echo 'opacity:0.5;cursor:not-allowed;';}?>" title="<?php echo i18n("");?>"
+        <?php if($paramObjectDetail=='4'){echo 'opacity:0.5;cursor:not-allowed;';}?>" title="<?php echo i18n("sectionMode");?>"
         onclick="<?php if($paramObjectDetail=='0'){echo 'switchModeLayout(\'4\');';}?>">
           <table >
             <tr>
@@ -95,7 +95,7 @@ $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
       <td width="<?php echo (isIE())?37:35;?>px"  > 
         <div id="layoutTab" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
         <?php if($paramObjectDetail=='0'){echo 'opacity:0.5;cursor:not-allowed;';}?>" 
-        title="<?php echo i18n("buttonSwitchedMode");?>"
+        title="<?php echo i18n("tabularMode");?>"
         onclick="<?php if($paramObjectDetail=='4'){echo 'switchModeLayout(\'0\');';}?>">
           <table >
             <tr>
@@ -122,7 +122,7 @@ $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
     </td>
      <?php }?> 
     <td width="<?php echo (isIE())?37:35;?>px">   
-      <div id="hideMenuBarShowButtonTop" class="pseudoButton"   onClick="hideMenuBarShowModeTop();" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;"  >
+      <div id="hideMenuBarShowButtonTop" class="pseudoButton"   onClick="hideMenuBarShowModeTop();" title="<?php echo i18n('buttonShowTopMenu')?>" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;"  >
           <table >
             <tr>
               <td style="width:28x;text-align:center">
@@ -133,7 +133,7 @@ $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
 	  </div>
     </td>
     <td width="<?php echo (isIE())?37:35;?>px">
-  	  <div id="hideMenuBarBottom" class="pseudoButton" onClick="hideMenuBarShowMode();" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;"  >
+  	  <div id="hideMenuBarBottom" class="pseudoButton" onClick="hideMenuBarShowMode();" title="<?php echo i18n('buttonShowLeftMenu')?>" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;"  >
   	  <?php if (! isset($showModuleScreen)) {?>
   		  <table>
             <tr>
