@@ -6410,8 +6410,7 @@ function switchModeLayout(paramToSend){
   }
 }
 
-function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen,showList){
-  if(showList=='1'){
+function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen){
     if(currentScreen=='Planning'){
       loadContent("planningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     }else if(currentScreen=='GlobalPlanning'){
@@ -6422,19 +6421,6 @@ function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectI
       loadContent("resourcePlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     }else{
       loadContent("objectMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-    }
-  }else{
-    if(currentScreen=='Planning'){
-      loadContent("planningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-    }else if(currentScreen=='GlobalPlanning'){
-      loadContent("globalPlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-    }else if(currentScreen=='PortfolioPlanning' ){
-      loadContent("portfolioPlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-    }else if(currentScreen=='ResourcePlanning') {
-      loadContent("resourcePlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-    }else{
-      loadContent("objectMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-    }
   }
   if(objectIdScreen !=''){
     loadContent("objectDetail.php", "detailDiv", 'listForm');
