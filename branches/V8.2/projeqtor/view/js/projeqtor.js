@@ -5590,9 +5590,7 @@ function saveNoteStream(event){
 
 var menuRightDivSize=null;
 function hideStreamMode(param,noRefresh){
-  console.log('fqds '+param);
   if(param == '1'){
-    console.log('1');
     if(dijit.byId("detailRightDiv").h != '0'){
       menuRightDivSize=dojo.byId("detailRightDiv").offsetHeight;
       dijit.byId("detailRightDiv").resize({
@@ -5614,7 +5612,6 @@ function hideStreamMode(param,noRefresh){
       setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50);
     }
   }else{
-    console.log('2');
     if (! dijit.byId('detailRightDiv')) return;
     if(dijit.byId("detailRightDiv").w != '0'){
       menuRightDivSize=dojo.byId("detailRightDiv").offsetWidth;
