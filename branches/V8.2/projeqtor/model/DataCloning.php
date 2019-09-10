@@ -637,22 +637,26 @@ class DataCloning extends SqlElement {
       $dir_iterator=new RecursiveDirectoryIterator($dir_source, RecursiveDirectoryIterator::SKIP_DOTS);
       $iterator=new RecursiveIteratorIterator($dir_iterator, RecursiveIteratorIterator::SELF_FIRST);
       $exceptionPath=array(
-            "/.settings","\.settings", 
-            "/simulation","\simulation", 
-            "/.svn", "\.svn",
-            "/deploy", "\deploy",
-//"/test", "\test", 
-            "/.externalToolBuilders", "\.externalToolBuilders", 
-            "/api", "\api",
-            "/db", "\db",
-            "/manual", "\manual", 
-            "/attach", "\attach",
-            "/cron", "\cron",
-            "/documents", "\documents",
-            "/import", "\import", 
-            "/logs", "\logs",
+            "/.settings","\\.settings", 
+            "/.svn", "\\.svn",
+            "/deploy", "\\deploy",
+            "/html2pdf/test", "\\html2pdf\\test",
+//"/test", "\\test", 
+            "/.externalToolBuilders", "\\.externalToolBuilders", 
+            "/api", "\\api",
+            "/db", "\\db",
+            "/manual", "\\manual", 
+            "/attach", "\\attach",
+            "/cron", "\\cron",
+            "/documents", "\\documents",
+            "/import", "\\import", 
+            "/logs", "\\logs",
             "/files/report","\\files\\report");
-        $exceptionFile=array("simulation", "deploy", "test", "api", "db", "manual");
+      $exceptionFile=array("deploy", "test", "api", "db", "manual");
+      if (! $dataCloning->idOrigin) {
+        $exceptionPath[]="/simulation";
+        $exceptionPath[]="\\simulation";
+        $exceptionFile[]="simulation";
       }
       $paramIsRelative=false;
       foreach ($iterator as $element) {
@@ -738,10 +742,16 @@ class DataCloning extends SqlElement {
           copy($element, $dir_dest.DIRECTORY_SEPARATOR.$iterator->getSubPathName());
         }
       }
-      disableCatchErrors();
+      enableCatchErrors();
       if (!$paramIsRelative) {
         try {
-          copy($parametersLocation, $parametersLocationNewPwd);
+          $resCopy=copy($parametersLocation, $parametersLocationNewPwd);
+          if (!$resCopy) {
+            errorLog(i18n("dataCloningErrorCantCreateParameter"));
+            $dataCloning->codeError="dataCloningErrorCantCreateParameter";
+            $dataCloning->save();
+            return;
+          }
           $parameterPhp2=$parametersLocationNewPwd;
           $paramContext=file_get_contents($parametersLocationNewPwd);
           $paramDbNameParam="\$paramDbName='$paramDbName';";
@@ -750,7 +760,13 @@ class DataCloning extends SqlElement {
           $paramContext=str_replace($paramDbNameParam, $paramDbNameParamSimu, $paramContext);
           $paramContext.="\n";
           $paramContext.="\$simuIndex='$dataCloning->name';";
-          file_put_contents($parametersLocationNewPwd, $paramContext);
+          $resCopy=file_put_contents($parametersLocationNewPwd, $paramContext);
+          if (!$resCopy) {
+            errorLog(i18n("dataCloningErrorCantCreateParameter"));
+            $dataCloning->codeError="dataCloningErrorCantCreateParameter";
+            $dataCloning->save();
+            return;
+          }
         } catch (Exception $e) {
           errorLog(i18n("dataCloningErrorCantCreateParameter"));
           $dataCloning->codeError="dataCloningErrorCantCreateParameter";
