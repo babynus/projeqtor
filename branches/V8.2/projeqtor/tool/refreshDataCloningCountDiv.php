@@ -32,7 +32,7 @@ $userSelected = RequestHandler::getValue('userSelected');
 $dataCloning = new DataCloning();
 $date = date('Y-m-d');
 $addDate =  addDaysToDate(date('Y-m-d'), 1);
-$wherePerDay = "requesteddate > '$date' and requesteddate < '$addDate' and idle = 0 ";
+$wherePerDay = "requestedDate > '$date' and requestedDate < '$addDate'";
 $dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wherePerDay);
 $dataCloningCountTotal = $dataCloning->countSqlElementsFromCriteria(array("idle"=>"0", "idResource"=>$userSelected));
 $dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
