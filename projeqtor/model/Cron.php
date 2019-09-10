@@ -336,6 +336,8 @@ class Cron {
   
   public static function setRestartFlag() {
     self::init();
+    self::removeRunningFlag();
+    self::removeStopFlag();
     $handle=fopen(self::$restartFile, 'w');
     fwrite($handle,time());
     fclose($handle);
