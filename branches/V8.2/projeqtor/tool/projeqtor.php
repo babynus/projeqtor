@@ -4744,12 +4744,14 @@ function changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail){
       Parameter::storeUserParameter("paramScreen", $valScreen);
     }
   }
-  if((empty(Parameter::getUserParameter("paramLayoutObjectDetail")) or (Parameter::getUserParameter("paramLayoutObjectDetail")=='4')and $paramLayoutObjectDetail=='4')) {
-    $valScreen='4';
-    Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
-  }else if(Parameter::getUserParameter("paramLayoutObjectDetail")=='4' and $paramLayoutObjectDetail=='0'){
-    $valScreen='0';
-    Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
+  if($paramLayoutObjectDetail!=''){
+    if((empty(Parameter::getUserParameter("paramLayoutObjectDetail")) or ((Parameter::getUserParameter("paramLayoutObjectDetail")=='4')and $paramLayoutObjectDetail=='4'))) {
+      $valScreen='4';
+      Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
+    }else if(Parameter::getUserParameter("paramLayoutObjectDetail")=='4' and $paramLayoutObjectDetail=='0'){
+      $valScreen='0';
+      Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
+    }
   }
   return $positionListDiv;
 }
