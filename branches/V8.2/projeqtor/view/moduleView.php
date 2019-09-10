@@ -82,6 +82,8 @@ $user=getSessionUser();
     $mod=new Module();
     $modList=$mod->getSqlElementsFromCriteria(null,null,null,'sortOrder asc');
     $simuIndex=Parameter::getGlobalParameter('simuIndex');
+    global $hosted;
+    if ($hosted===true) $simuIndex=1; // Will hide Simulation Module for hosted
     foreach ($modList as $mod) {
       if($simuIndex and $mod->name == 'moduleDataCloning'){
         continue;

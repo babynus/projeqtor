@@ -130,8 +130,8 @@ INSERT INTO `${prefix}module`(`id`, `name`, `sortOrder`, `idModule`, `idle`, `ac
 (17,'moduleDataCloning',1200,null,0,0);
 
 INSERT INTO `${prefix}modulemenu`(`idModule`, `idMenu`, `hidden`, `active`) VALUES 
-(17,222,0,1),
-(17,224,0,1);
+(17,222,0,0),
+(17,224,0,0);
 
 -- ------------------------------------------------------
 -- Indivcisibility and Minimum threshold

@@ -6179,7 +6179,7 @@ function cancelDataCloningStatus(idDataCloning){
 function refreshDataCloningError(idDataCloning, codeError){
 	//action=function(){
 		showWait();
-		var url='../tool/saveDataCloning.php?codeError='+codeError+'&idDataCloning='+idDataCloning;
+		var url='../tool/saveDataCloning.php?status=reset&codeError='+codeError+'&idDataCloning='+idDataCloning;
 		  dojo.xhrGet({
 		    url : url,
 		    handleAs : "text",
