@@ -351,9 +351,7 @@ class DataCloning extends SqlElement {
       $date->setTimestamp(strtotime($startAm));
       $date->modify('-60 minute');
       $startAm=htmlFormatTime(date('H:i', $date->getTimestamp()));
-      echo '<div class="messageWARNING" style="width:89%; margin-left:5%;margin-right:5%;text-align:center;margin-bottom:0.5%;margin-top:0.2%">'.i18n('pgsqlDataCloningMessage', array(
-          $endPm, 
-          $startAm)).'</div>';
+      echo '<div class="messageWARNING" style="width:89%; margin-left:5%;margin-right:5%;text-align:center;margin-bottom:0.5%;margin-top:0.2%">'.i18n('pgsqlDataCloningMessage', array($endPm, $startAm)).'</div>';
     }
     echo '<table class="crossTable" >';
     echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningCreationRequest').' : </label></td>';
