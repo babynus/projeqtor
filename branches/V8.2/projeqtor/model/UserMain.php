@@ -343,7 +343,7 @@ class UserMain extends SqlElement {
     $result="";
     if ($item=='buttonSendMail') {
       $canUpdate=(securityGetAccessRightYesNo('menuUser', 'update', $this) == "YES");
-      if ($print or !$canUpdate or $this->crypto!=null or ! $this->id or !$this->password) {
+      if ($print or !$canUpdate or ! $this->id or !$this->password) {
         return "";
       } 
       $result .= '<tr><td valign="top" class="label"><label></label></td><td>';

@@ -5363,7 +5363,7 @@ abstract class SqlElement {
     
     // password
     $arrayFrom [] = '${password}';
-    $arrayTo [] = ($objectClass=='User' && $this->crypto==null)?$this->password:'';
+    $arrayTo [] = ($objectClass=='User')?(($this->crypto==null)?$this->password:'('.i18n("passwordAlreadyChanged").')'):'';
     
     // admin mail
     $arrayFrom [] = '${adminMail}';
