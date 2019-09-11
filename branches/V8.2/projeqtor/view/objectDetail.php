@@ -250,13 +250,13 @@ if (array_key_exists('refresh', $_REQUEST)) {
       style="display: none; z-index: 99999;"></div>
 		<?php  include 'objectButtons.php'; ?>
   </div>
-  <div id="formDiv" dojoType="dijit.layout.ContentPane" region="center">
+  <div id="formDiv" dojoType="dijit.layout.ContentPane" region="center" style="<?php if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0'){echo 'overflow:hidden;';}else{echo 'overflow:scroll;';} ?>">
 
 	<?php
   }
   if (!$print) {
     ?>  
-<form dojoType="dijit.form.Form" id="objectForm" jsId="objectForm"
+<form dojoType="dijit.form.Form" id="objectForm" jsId="objectForm" 
       name="objectForm" encType="multipart/form-data" action=""
       method="">
       <script type="dojo/method" event="onShow">
@@ -673,7 +673,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     }
   }
   // END - ADD BY TABARY - NOTIFICATION SYSTEM
-  if( Parameter::getUserParameter('paramLayoutObjectDetail')==0 and $included==false){
+  if( Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and $included==false){
     echo '<div dojoType="dijit/layout/TabContainer" tabStrip="true">';
   }
   // Loop on each property of the object
@@ -2945,7 +2945,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   }
 
   if (!$included) endBuffering($section, $included);
-  if( Parameter::getUserParameter('paramLayoutObjectDetail')==0 and $included==false){
+  if( Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and $included==false){
     echo '</div>';
   }
   if (!$included) finalizeBuffering();
@@ -3008,11 +3008,14 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
     }
     $attrs=splitCssAttributes($labelStyle);
     $fontSize=(isset($attrs['font-size']))?intval($attrs['font-size']):'';
-    // gautier #resourceTeam
-    if( Parameter::getUserParameter('paramLayoutObjectDetail')==0 and $included==false){
-      echo '<div dojoType="dijit.layout.ContentPane" title="'.$section.'" style="width:100%;" selected="true">';
-      echo '<div>';
+    //florent ticket 4102
+    if( Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and $included==false){
+      echo '<div dojoType="dijit.layout.ContentPane" title="'.$section.'" style="width:100%;overFlow:scroll;" selected="true">';
+      if(isset($prevSection)){
+        echo '<div>';
+      }
     }
+    // gautier #resourceTeam
       echo '<div dojoType="dijit.TitlePane" title="'.i18n('section'.ucfirst($sectionName)).(($nbBadge!==null)?'<div id=\''.$section.'Badge\' class=\'sectionBadge\'>'.$nbBadge.'</div>':'').'"';
       echo ' open="'.(array_key_exists($titlePane, $collapsedList)?'false':'true').'" ';
       echo ' id="'.$titlePane.'" ';
