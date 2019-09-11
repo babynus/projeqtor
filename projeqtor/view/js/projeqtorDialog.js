@@ -6317,6 +6317,9 @@ function hideMenuBarShowModeTop(){
       var height = dojo.byId("leftDiv").offsetHeight;
       dojo.byId('leftDiv_splitter').style.height=height+'px';
     }
+    if(switchedMode==true){
+      switchModeOn();
+    }
   }
 }
 
@@ -6381,7 +6384,11 @@ function switchModeOff(){
 }
 
 function switchModeLayout(paramToSend){
-  var currentObject=dojo.byId('objectClass').value;
+  if(dojo.byId('objectClass')){
+    var currentObject=dojo.byId('objectClass').value;
+  }else{
+    return;
+  }
   var objectIdScreen=dojo.byId('objectId').value;
   var currentItem=historyTable[historyPosition];
   var currentScreen=currentItem[2];
@@ -10056,12 +10063,6 @@ function toggleFullScreen() {
     } else if (document.documentElement.webkitRequestFullScreen) {  
       document.documentElement.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);  
     }
-    if (menuHidden==false){
-      hideShowMenu();
-    }
-    if(switchedMode==false){
-      switchModeOn();
-    }
   } else { 
     if (document.cancelFullScreen ) {
       document.cancelFullScreen(); 
@@ -10069,12 +10070,6 @@ function toggleFullScreen() {
       document.mozCancelFullScreen(); 
     } else if (document.webkitCancelFullScreen) {  
       document.webkitCancelFullScreen(); 
-    }
-    if(menuHidden==true){
-      hideShowMenu();
-    }
-    if(switchedMode==true){
-      switchModeOn();
     }
   }
 }
