@@ -384,8 +384,8 @@ class TicketMain extends SqlElement {
         
   		if ($delay and !$delay->id) {
   		  $proj = new Project($this->idProject);
-  		  $topList = $proj->getTopProjectList(true);
-  		  if($topList){
+  		  if($proj->idProject){
+  		    $topList = $proj->getTopProjectList(true);
   		  	foreach ($topList as $id){
   		  		$crit=array('idTicketType'=>$this->idTicketType, 'idUrgency'=>$this->idUrgency, 'idle'=>'0', 'idProject'=>$id);
   		  		$delay=SqlElement::getSingleSqlElementFromCriteria('TicketDelay', $crit);
