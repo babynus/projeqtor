@@ -7711,23 +7711,24 @@ function finalizeBuffering() {
     if($paneTreatment){
       echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneTreatment.'</td></tr>';
     }
-    if ($paneDependency) {
-      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneDependency.'</td></tr>';
+    if ($paneAssignment) {
+      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneAssignment.'</td></tr>';
     }
     if ($paneProgress) {
       echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneProgress.'</td></tr>';
     }
-    if ($paneNote) {
-      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneNote.'</td></tr>';
-    }
-    if ($paneAssignment) {
-      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneAssignment.'</td></tr>';
+    if ($paneDependency) {
+      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneDependency.'</td></tr>';
     }
     if ($paneLink) {
       echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneLink.'</td></tr>';
     }
     if($pane){
-      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$pane.'</td></tr>';
+      echo '<tr><td  style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$pane.'</td></tr>';
+    }
+
+    if ($paneNote) {
+      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneNote.'</td></tr>';
     }
   }else{
     if ($nbColMax==1) {
