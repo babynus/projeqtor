@@ -102,6 +102,8 @@ if ($adminFunctionality=='sendAlert') {
   Consistency::checkMissingPlanningElement($correct, false);
   echo "<div class='consistencySection' style=''>".i18n('sectionCheckWorkOnActivity')."</div>";
   Consistency::checkWorkOnActivity($correct, false);
+  echo "<div class='consistencySection' style=''>".i18n('sectionCheckTechnicalData')."</div>";
+  Consistency::checkInvalidFilters($correct, false);
   
   $result=false;
   Sql::commitTransaction();
