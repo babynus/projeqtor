@@ -46,7 +46,7 @@
     $listHeight=HeightLayoutListDiv($currentScreen);
   }
   if($positonRightDiv=="bottom"){
-    $rightHeightPlanning=heightLaoutActivityStream($currentScreen);
+    $rightHeightPlanning=heightLaoutActivityStream($currentScreen)."px";
   }else{
   	$rightWidthPlanning=WidthLayoutActivityStream($currentScreen);
   }

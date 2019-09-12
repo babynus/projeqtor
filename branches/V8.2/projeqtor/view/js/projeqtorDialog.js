@@ -6418,7 +6418,8 @@ function switchModeLayout(paramToSend){
 }
 
 function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen){
-    if(currentScreen=='Planning'){
+  console.log(currentScreen,currentObject+'    '+paramDiv+'    '+paramToSend+'    '+objectIdScreen);  
+  if(currentScreen=='Planning'){
       loadContent("planningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     }else if(currentScreen=='GlobalPlanning'){
       loadContent("globalPlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
