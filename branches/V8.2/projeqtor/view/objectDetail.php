@@ -2148,7 +2148,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             // Don't see or access to the resource if is not visible for the user connected (respect of HabilitationOther - teamOrga)
             // Add idEmployee for LEAVE SYSTEM
             $arrayIdSpecial=array('idResource', 'idLocker', 'idAuthor', 'idResponsible', 'idAccountable', 'idEmployee');
-            if (in_array($col, $arrayIdSpecial)) {
+            if (in_array($col, $arrayIdSpecial) or substr($col,-12)=='__idResource') {
 // MTY - LEAVE SYSTEM
               if ($col=="idEmployee") {
               // Limits list to Resource with isEmployee = 1  
@@ -2204,7 +2204,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $critFld=null;
         $critVal=null;
         $valStore='';
-        if ($col=='idResource' or $col=="idAccountable" or $col=='idActivity' or $col=='idProduct' or $col=='idComponent' or $col=='idProductOrComponent' or $col=='idProductVersion' or $col=='idComponentVersion' or $col=='idVersion' or $col=='idOriginalVersion' or $col=='idTargetVersion' or $col=='idOriginalProductVersion' or $col=='idTargetProductVersion' or $col=='idOriginalComponentVersion' or $col=='idTargetComponentVersion' or $col=='idTestCase' or $col=='idRequirement' or $col=='idContact' or $col=='idMilestone' or $col=='idTicket' or $col=='idUser' or $col=='id'.$classObj.'Type') {
+        if ($col=='idResource' or substr($col,-12)=='__idResource' or $col=="idAccountable" or $col=='idActivity' or $col=='idProduct' or $col=='idComponent' or $col=='idProductOrComponent' or $col=='idProductVersion' or $col=='idComponentVersion' or $col=='idVersion' or $col=='idOriginalVersion' or $col=='idTargetVersion' or $col=='idOriginalProductVersion' or $col=='idTargetProductVersion' or $col=='idOriginalComponentVersion' or $col=='idTargetComponentVersion' or $col=='idTestCase' or $col=='idRequirement' or $col=='idContact' or $col=='idMilestone' or $col=='idTicket' or $col=='idUser' or $col=='id'.$classObj.'Type') {
           if ($col=='idContact' and property_exists($obj, 'idClient') and $obj->idClient) {
             $critFld='idClient';
             $critVal=$obj->idClient;
