@@ -120,6 +120,9 @@ if (!isset($noScriptLog)) {
   }
 }
 
+if (RequestHandler::isCodeSet('nosso')) {
+  SSO::setAvoidSSO();
+}
 $testMode=false; // Setup a variable for testing purpose test.php changes this value to true
 $i18nMessages=null; // Array containing messages depending on local (initialized at first need)
 
