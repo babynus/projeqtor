@@ -72,8 +72,13 @@ if ($proj=='*' or !$proj) {
 		        <table style="width: 100%;">
 		          <tr>
 		            <td style="width:70px">
-		              <input type="hidden" id="objectClass" name="objectClass" value="" /> 
-		              <input type="hidden" id="objectId" name="objectId" value="" />
+		              <?php 
+		              $objectClass=(RequestHandler::isCodeSet('objectClass'))?RequestHandler::getClass('objectClass'):'';
+		              $objectId=(RequestHandler::isCodeSet('objectId'))?RequestHandler::getId('objectId'):'';
+		              $productVersionsListId=(RequestHandler::isCodeSet('productVersionsListId'))?RequestHandler::getId('productVersionsListId'):'';?>
+		              <input type="text" id="objectClass" name="objectClass" value="<?php echo $objectClass;?>" /> 
+		              <input type="text" id="objectId" name="objectId" value="<?php echo $objectId;?>" />
+		              <input type="text" id="productVersionsListId" name="productVersionsListId" value="<?php echo $productVersionsListId;?>" />
                   	  <input type="hidden" id="versions" name="versions" value="true" />
 		              &nbsp;&nbsp;&nbsp;
 <?php

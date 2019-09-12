@@ -107,8 +107,11 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
 		        <table style="width: 100%;">
 		          <tr>
 		            <td style="width:70px">
-		              <input type="hidden" id="objectClass" name="objectClass" value="" /> 
-		              <input type="hidden" id="objectId" name="objectId" value="" />
+		              <?php 
+		              $objectClass=(RequestHandler::isCodeSet('objectClass'))?RequestHandler::getClass('objectClass'):'';
+		              $objectId=(RequestHandler::isCodeSet('objectId'))?RequestHandler::getId('objectId'):'';?>
+		              <input type="hidden" id="objectClass" name="objectClass" value="<?php echo $objectClass;?>" /> 
+		              <input type="hidden" id="objectId" name="objectId" value="<?php echo $objectId;?>" />
 		              &nbsp;&nbsp;&nbsp;
 <?php if ($canPlan) { ?>
 		              <button id="planButton" dojoType="dijit.form.Button" showlabel="false"
