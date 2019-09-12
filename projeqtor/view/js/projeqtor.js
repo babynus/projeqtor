@@ -2832,7 +2832,7 @@ function disconnect(cleanCookieHash) {
   disconnectFunction = function() {
     quitConfirmed = true;
     if(switchedMode=true){
-      saveDataToSession("paramScreen",'1');
+      saveDataToSession("paramScreen",'5');
     }
     //extUrl="";
     extUrl="origin==disconnect";
