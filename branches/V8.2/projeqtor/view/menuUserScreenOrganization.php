@@ -59,7 +59,7 @@ $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
         <div id="horizontalLayout"  class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramScreen=='1'){echo 'opacity:0.5;cursor:not-allowed;';}?>" title="<?php echo i18n("");?>"
+        <?php if($paramScreen=='1'){echo 'opacity:0.5;cursor:not-allowed;';}?>" title="<?php echo i18n("showListTop");?>"
         onclick="<?php if($paramScreen=='2' or $paramScreen=='5'){echo 'switchModeLayout(\'1\');';}?>">
           <table >
             <tr>
@@ -72,7 +72,7 @@ $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
         <div id="verticalLayout" lass="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramScreen=='2'){echo 'opacity:0.5;cursor:not-allowed;';}?>" title="<?php echo i18n("");?>"
+        <?php if($paramScreen=='2'){echo 'opacity:0.5;cursor:not-allowed;';}?>" title="<?php echo i18n("showListLeft"); ?>"
         onclick="<?php if($paramScreen=='1' or $paramScreen=='5' ){echo 'switchModeLayout(\'2\');';}?>">
           <table >
             <tr>

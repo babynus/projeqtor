@@ -612,11 +612,11 @@
                     if(($paramWidth!=0 and $parmRightDiv!=3 ) or ($paramHeight!=0 and $parmRightDiv==3)){ 
   	   ?>            
               	   <div id="hideStreamButton" region="center" style="cursor:pointer;position:absolute;top:5px;right:0px; bottom:2px;z-index:999999;display:none;">
-              	     <a onClick="hideStreamMode(<?php if($parmRightDiv==3){echo'1';}else{echo'0';}?>,false);" id="buttonSwitchedStream" title="" ><span style="top:0px;display:inline-block;margin-right:12px;"><div class='iconActivityStreamWhite22 ' >&nbsp;</div></span></a>
+              	     <a onClick="hideStreamMode(<?php if($parmRightDiv==3){echo'1';}else{echo'0';}?>,false);" id="buttonSwitchedStream" title="<?php echo i18n('showActivityStream');?>" ><span style="top:0px;display:inline-block;margin-right:12px;"><div class='iconActivityStreamWhite22 ' >&nbsp;</div></span></a>
               	   </div>
         <?php       }else{?>
                      <div id="hideStreamButton" region="center" style="cursor:pointer;position:absolute;top:5px; right:0px; bottom:2px;z-index:999999">
-              	      <a onClick="hideStreamMode(<?php if($parmRightDiv==3){echo'1';}else{echo'0';}?>,false);" id="buttonSwitchedStream" title="" ><span style="top:0px;display:inline-block;margin-right:12px;"><div class='iconActivityStreamWhite22' >&nbsp;</div></span></a>
+              	      <a onClick="hideStreamMode(<?php if($parmRightDiv==3){echo'1';}else{echo'0';}?>,false);" id="buttonSwitchedStream" title="<?php echo i18n('showActivityStream');?>" ><span style="top:0px;display:inline-block;margin-right:12px;"><div class='iconActivityStreamWhite22' >&nbsp;</div></span></a>
               	     </div>
         <?php       } 
   
