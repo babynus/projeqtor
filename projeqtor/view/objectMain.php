@@ -56,7 +56,6 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
   $tableWidth=WidthDivContentDetail($positionListDiv,$objectClass);
 
 ?>
-<input type="hidden" id="objectClass" value="<?php echo $objectClass;?>" />
 <div id="mainDivContainer" class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
   <div dojoType="dijit.layout.ContentPane" region="center" splitter="true">
     <div class="container" dojoType="dijit.layout.BorderContainer"  liveSplitters="false">
