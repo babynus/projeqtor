@@ -36,6 +36,7 @@ GET    ../api/{objectClass}/{objectId}
        ../api/{objectClass}/filter/{filterId}
        ../api/{objectClass}/search/criteria1/criteria2/... (criteria as sql where clause)
        ../api/{objectClass}/updated/{YYYYMMDDHHMNSS}/{YYYYMMDDHHMNSS}
+       ../api/Cron/{cmd} with cmd = "start", "stop", restart", "check"
 PUT    ../api/{objectClass} with data containing json description of items
 POST   ../api/{objectClass} with data containing json description of items
 DELETE ../api/{objectClass} with data containing json id of items';
@@ -85,14 +86,61 @@ if ($_SERVER['REQUEST_METHOD']=='GET') {
     //$uri=htmlEncode($_REQUEST['uri']);
     $uri=$_REQUEST['uri'];
     $split=explode('/',$uri);
-    if (count($split)>0) {
+    if (count($split)>1) {
+      debugLog("Step 1");
     	$class=ucfirst($split[0]);
     	$where="1=0";
     	if (SqlElement::class_exists($class)) {
-    	  Security::checkValidClass($class);
-    		$obj=new $class();
-    		$table=$obj->getDatabaseTableName();
-    		if (count($split)==2 and is_numeric($split[1]) ) {      // =============== uri = {OblectClass}/{ObjectId}
+    	  if ($class!='Cron') {
+    	    Security::checkValidClass($class);
+    	    $obj=new $class();
+    	    $table=$obj->getDatabaseTableName();
+    	  }
+    		if ($class=='Cron') {
+    		  $cmd=$split[1];
+    		  if ($cmd=='start') {
+    		    if (Cron::check()=='running') {
+    		      echo '{"cronStatus":"running"}';
+    		      exit;
+    		    } else {
+//     		      if ( isset( $_COOKIE[session_name()] ) )
+//     		        setcookie( session_name(), “”, time()-3600, “/” );
+//     		      $_SESSION = array();
+//     		      session_destroy();
+//     		      session_start();
+//     		      echo '{"cronStatus":"started"}';
+//     		      ignore_user_abort(1);
+//     		      function cronAbort() {Cron::abort();}
+//     		      register_shutdown_function('cronAbort');
+//     		      error_reporting(0);
+//     		      session_write_close();
+     		      Cron::run();
+    		      exit;
+    		    }
+    		  } else if ($cmd=='stop') {
+    		    if (Cron::check()=='running') {
+    		      echo '{"cronStatus":"stopping"}';
+    		      Cron::setStopFlag();
+    		      exit;
+    		    } else {
+    		      echo '{"cronStatus":"stopped"}';
+    		    }
+    		  } else if ($cmd=='restart') {
+    		    if (Cron::check()=='running') {
+    		      echo '{"cronStatus":"running"}';
+    		      exit;
+    		    } else {
+    		      Cron::run();
+    		      echo '{"cronStatus":"started"}';
+    		      exit;
+    		    }
+    		  } else if ($cmd=='check') {
+    		    echo '{"cronStatus":"'.Cron::check().'"}';
+    		    exit;
+    		  } else {
+    		    returnError($invalidQuery, $querySyntax);
+    		  }
+    		} else if (count($split)==2 and is_numeric($split[1]) ) {      // =============== uri = {OblectClass}/{ObjectId}
 	    		$id=$split[1];
 	    		$where="id=".Sql::fmtId($id);   			
     		} else if (count($split)==2 and $split[1]=='all') {     // =============== uri = {OblectClass}/all
@@ -362,8 +410,7 @@ function jsonFillObj(&$obj, $arrayObj, $included=false) {
 	
 }
 
-function http_digest_parse($txt)
-{
+function http_digest_parse($txt) {
 	// protect against missing data
 	$needed_parts = array('nonce'=>1, 'nc'=>1, 'cnonce'=>1, 'qop'=>1, 'username'=>1, 'uri'=>1, 'response'=>1);
 	$data = array();
