@@ -4725,7 +4725,19 @@ function isLeavesSystemActiv() {
 
 // florent ticket 4102
 function changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail){
-  if(empty($paramScreen)and Parameter::getUserParameter("paramScreen") =='1'){
+  if(sessionValueExists("paramScreen")){
+    switch (getSessionValue("paramScreen")) {
+    	case 1:
+    	    Parameter::storeUserParameter("paramScreen", '1');
+    	  break;
+    	case 5:
+    	   Parameter::storeUserParameter("paramScreen", '1');
+    	  break;
+
+    }
+    setSessionValue("paramScreen", "0");
+  }
+  if(empty($paramScreen)and Parameter::getUserParameter("paramScreen") =='1' ){
     $valScreen='1';
     $positionListDiv='top';
     Parameter::storeUserParameter("paramScreen", $valScreen);
@@ -4857,7 +4869,8 @@ function HeightLayoutListDiv($objectClass){
   if(empty($topDetailDivHeight)){
     $listHeight='50%';
   }else{
-  $listHeight=$topDetailDivHeight;
+  $listHeight=$topDetailDivHeight."px";
   }
   return $listHeight;
+  
 }
