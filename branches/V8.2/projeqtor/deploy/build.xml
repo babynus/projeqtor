@@ -171,6 +171,7 @@
         <fileset dir="${src.dir}/api">
           <include name="*.*" />
           <exclude name=".htpasswd" />
+          <exclude name=".htaccess" />
         </fileset>
       </copy>
     </target>

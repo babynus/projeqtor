@@ -132,7 +132,8 @@ if ($action=='display') {
       dojo.xhrGet({
         url: url,
         handleAs: "text",
-        load: function (data) {
+        timeout: 3000,
+        load: function (data, args) {
           //alert(data);
           var spl=data.split('#$#$#');
           dojo.byId('resultUrl').innerHTML=spl[0];
@@ -141,7 +142,7 @@ if ($action=='display') {
         },
         error: function () {
           document.body.style.cursor = 'default';
-          alert('error');
+          alert("error");
         }
       });
     }
@@ -179,11 +180,12 @@ if ($action=='display') {
 <?php 
 //htmlDrawOptionForReference('idImportable', null, null, true);
 foreach (SqlList::getListNotTranslated('Importable') as $id=>$val) {
-  echo "<option valued='$val' >$val</option>";
+  echo "<option value='$val' >$val</option>";
 }
 ?>
 <option value="User">User</option>
 <option value="History">History</option>
+<option value="Cron">Cron</option>
 </select></div>
 <div class="line"></div>
 </td>
