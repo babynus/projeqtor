@@ -141,6 +141,9 @@ if ($currVersion=='V0.0.0') {
   $prm->save();
   // New in V5 : Start Guide Page
   Parameter::storeUserParameter('startPage', 'startGuide.php',1);
+  enableCatchErrors();
+  rename("../api/.htaccess.example","../api/.htaccess"); // Use exemple to "lock" API access (will use not existing password file)
+  disableCatchErrors();
 }
 
 //echo "for V1.6.1<br/>";
@@ -295,7 +298,7 @@ if (beforeVersion($currVersion,"V4.0.0")) {
 	}	
 	$files = glob($root.'/db/Projector_*.sql'); // get all file names
   error_reporting(0);
-  disableCatchErrors();
+  enableCatchErrors();
   if ($files) {
 	  foreach($files as $file){ // iterate files
 	    if(is_file($file))
@@ -326,7 +329,7 @@ if (beforeVersion($currVersion,"V4.0.0")) {
   	}
   }
   error_reporting(E_ALL);
-  enableCatchErrors();
+  disableCatchErrors();
 }
 
 if (beforeVersion($currVersion,"V4.1.-")) {
