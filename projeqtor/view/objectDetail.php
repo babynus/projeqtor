@@ -7568,6 +7568,9 @@ function getNbColMax($displayWidth, $print, $printWidth, $obj) {
   }
   $paramMax=Parameter::getUserParameter('maxColumns');
   if ($paramMax and $paramMax<$nbColMax) $nbColMax=$paramMax;
+  if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0'){
+    $nbColMax=1;
+  }
   return $nbColMax;
 }
 

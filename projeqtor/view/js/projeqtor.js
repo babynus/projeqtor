@@ -2831,6 +2831,9 @@ function setSelectedProject(idProject, nameProject, selectionField,resetPrevious
 function disconnect(cleanCookieHash) {
   disconnectFunction = function() {
     quitConfirmed = true;
+    if(switchedMode=true){
+      saveDataToSession("paramScreen",'1');
+    }
     //extUrl="";
     extUrl="origin==disconnect";
     if (cleanCookieHash) {
