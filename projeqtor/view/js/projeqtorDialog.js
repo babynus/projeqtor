@@ -6418,7 +6418,6 @@ function switchModeLayout(paramToSend){
 }
 
 function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen){
-  console.log(currentScreen,currentObject+'    '+paramDiv+'    '+paramToSend+'    '+objectIdScreen);  
   if(currentScreen=='Planning'){
       loadContent("planningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     }else if(currentScreen=='GlobalPlanning'){
@@ -6427,6 +6426,9 @@ function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectI
       loadContent("portfolioPlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
     }else if(currentScreen=='ResourcePlanning') {
       loadContent("resourcePlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    }else if(currentScreen=='VersionsPlanning') {
+      var productVersionsListId=dojo.byId('productVersionsListId').value;
+      loadContent("versionsPlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen+"&productVersionsListId="+productVersionsListId, "centerDiv");
     }else{
       loadContent("objectMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
   }

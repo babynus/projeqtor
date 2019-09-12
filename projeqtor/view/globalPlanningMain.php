@@ -69,7 +69,7 @@
           var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
           if(paramDiv=="top" && paramMode!='5'){
             saveDataToSession("contentPaneTopDetailDivHeight<?php echo $currentScreen;?>",dojo.byId("listDiv").offsetHeight);
-          }else{
+          }else if(paramMode!='5'){
             saveDataToSession("contentPaneTopDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("listDiv").offsetWidth, true);
           }
         </script>
@@ -81,13 +81,16 @@
               var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
               if(paramDiv=="top" && paramMode!='5'){
                 saveDataToSession("contentPaneDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
-              }else{
+              }else if(paramMode!='5'){
                 saveDataToSession("contentPaneDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
-                var param=dojo.byId('objectClass').value;
-                var paramId=dojo.byId('objectId').value;
-                if(paramId !='' ){
-                  loadContent("objectDetail.php?objectClass"+param+"&objectId="+paramId, "detailDiv", 'listForm');
-                }
+              var param=dojo.byId('objectClass').value;
+              var paramId=dojo.byId('objectId').value;
+              if(paramId !='' && multiSelection==false){
+                loadContent("objectDetail.php?objectClass"+param+"&objectId="+paramId, "detailDiv", 'listForm');  
+              }else if(multiSelection==true){
+               loadContent('objectMultipleUpdate.php?objectClass=' + param,
+                  'detailDiv')
+              }
               }
           </script>
 	  <div class="container" dojoType="dijit.layout.BorderContainer"  liveSplitters="false">
@@ -111,10 +114,6 @@
                     });
                   }else if(paramMode!='5'){
                     saveDataToSession("contentPaneRightDetailDivHeightGlobalPlanning", dojo.byId("detailRightDiv").offsetHeight, true);
-                    var paramId=dojo.byId('objectId').value;
-                    if(paramId!=''){
-                      if (dijit.byId('detailRightDiv')) loadContent("objectStream.php?objectClass="+"PlanningElement"+"&objectId="+objectId, "detailRightDiv", 'listForm');
-                    }
                  }
               </script>
               <script type="dojo/connect" event="onLoad" args="evt">
