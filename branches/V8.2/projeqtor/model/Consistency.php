@@ -482,6 +482,45 @@ class Consistency {
         }
       }
     }
+    // Check work with no project
+    $query="SELECT w.id as id, w.idAssignment as assid, w.refType as reftype, w.refId as refid"
+        ." FROM $workTable w "
+        ." WHERE w.idProject is null or w.idProject=0 ";
+    $result=Sql::query($query);
+    while ($line = Sql::fetchLine($result)) {
+      $id=$line['id'];
+      $refType=$line['reftype'];
+      $refId=$line['refid'];
+      $assid=$line['assid'];
+      displayError(i18n('checkWorkWithoutProject',array($id,i18n($refType),$refId)));
+      $errors++;
+      if ($correct) {
+        $w=new Work($id);
+        $proj=null;
+        $ass=new Assignment($assid);
+        if ($ass->idProject) {
+          $proj=$ass->idProject;
+        } else if ($refType and $refId) {
+          $obj=new $refType($refId);
+          if (property_exists($obj, 'idProject') and $obj->idProject) {
+            $proj=$obj->idProject;
+          }
+        }
+        if ($proj) {
+          $w->idProject=$proj;
+          $res=$w->save();
+        } else {
+          $res="No Project found for Assignment #$assid and for $refType #$refId";
+        }
+        if (getLastOperationStatus($res)!='OK') {
+          displayMsg(i18n("checkNotFixed"),true);
+          debugTraceLog($res);
+        } else {
+          displayOK(i18n("checkFixed"),true);
+        }
+      }
+      }  
+     
     if (!$errors) {
       displayOK(i18n("checkNoError"));
   
@@ -618,6 +657,46 @@ class Consistency {
         }
       }
     }
+    if (!$errors) {
+      displayOK(i18n("checkNoError"));
+  
+    }
+  }
+  
+  // =================================================================================================================
+  // Idle consistency from Activity / PlanningElement / Assignment
+  // =================================================================================================================
+  
+  public static function checkInvalidFilters($correct=false,$trace=false) {
+    $errors=0;
+    // Direct Query : valid here for technical needs on grouping
+    $crit=new FilterCriteria();
+    $critTable=$crit->getDatabaseTableName();
+    $filter=new Filter();
+    $filterTable=$filter->getDatabaseTableName();
+    $query="SELECT crit.id as idcrit, crit.dispAttribute as attribute, filter.name as name, filter.refType as reftype, filter.idUser as user "
+        ." FROM $critTable crit, $filterTable filter"
+        ." WHERE crit.idFilter=filter.id and crit.sqlOperator='IN' and crit.sqlValue='0' and crit.isDynamic=0";
+    $result=Sql::query($query);
+    while ($line = Sql::fetchLine($result)) {
+      $type=$line['reftype'];
+      $userName=SqlList::getNameFromId('User', $line['user']);
+      $attribute=$line['attribute'];
+      $filterName=$line['name'];
+      $id=$line['idcrit'];
+      displayError(i18n("checkIncorrectFilterCriteria",array($filterName,i18n($type),$userName,$attribute)));
+      $errors++;
+      if ($correct) {
+        $fc=new FilterCriteria($id);
+        $res=$fc->delete();
+        if (getLastOperationStatus($res)=='OK') {
+          displayOK(i18n("checkFixed"),true);
+        } else {
+          displayMsg(i18n("checkNotFixed"),true);
+        }
+      }
+    }
+
     if (!$errors) {
       displayOK(i18n("checkNoError"));
   

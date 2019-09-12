@@ -208,6 +208,7 @@ class PlannedWork extends GeneralWork {
       echo '<div class="messageINCOMPLETE" >' . $result . '</div>';
       return $result;
     }
+    $templateProjects=Project::getTemplateList();
     $fullListPlan=PlanningElement::initializeFullList($list);
     $listProjectsPriority=$fullListPlan['_listProjectsPriority'];
     unset($fullListPlan['_listProjectsPriority']);
