@@ -31,6 +31,12 @@ $showMenuBar=Parameter::getUserParameter('paramShowMenuBar');
 $showMenuBar='YES';
 if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
 //Param
+if(sessionValueExists("paramScreen")){
+  if(getSessionValue("paramScreen")=='5') {
+  	  Parameter::storeUserParameter("paramScreen", '1');
+  }
+  setSessionValue("paramScreen", "0");
+}
 $paramScreen=Parameter::getUserParameter('paramScreen');
 $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
 ?>
