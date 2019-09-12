@@ -5,6 +5,9 @@ $theme="ProjeQtOr";
 if (is_file ( "../tool/parametersLocation.php" )) {
   include_once '../tool/projeqtor.php';
   $theme=getTheme();
+  if (RequestHandler::isCodeSet('nosso')) {
+    SSO::setAvoidSSO();
+  }
 } 
 /*** COPYRIGHT NOTICE *********************************************************
  *
