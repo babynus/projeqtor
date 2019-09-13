@@ -97,10 +97,10 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
           dojo.query(".allSearchTD").forEach(function(node, index, nodelist) { node.style.display="table-cell";});
           var refWidth=50;
           if (width<1650) {
-            dojo.query(".clientSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
+            dojo.query(".parentBudgetSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
           }
           if (width<1300) {
-            dojo.query(".parentBudgetSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
+            dojo.query(".clientSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
           }
           if (width<1100) {
             refWidth=25;
