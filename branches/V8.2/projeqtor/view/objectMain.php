@@ -78,18 +78,19 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
 	  </div>
 	  <div id="contentDetailDiv" dojoType="dijit.layout.ContentPane" region="center"  style="width:<?php echo $tableWidth[1];?>;">
 	      <script type="dojo/connect" event="resize" args="evt">
-          var paramDiv=<?php echo json_encode($positionListDiv); ?>;
-          var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
-          if(paramDiv=="top" && paramMode!='5'){
-            saveDataToSession("contentPaneDetailDivHeight<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
-          } else if(paramMode!='5'){
-            saveDataToSession("contentPaneDetailDivWidth<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
-            var param=dojo.byId('objectClass').value;
-            var paramId=dojo.byId('objectId').value;
-            if(paramId !='' && multiSelection==false){
-              loadContent("objectDetail.php?objectClass"+param+"&objectId="+paramId, "detailDiv", 'listForm');  
-            }else if(multiSelection==true){
-              loadContent('objectMultipleUpdate.php?objectClass=' + param,'detailDiv');
+              var paramDiv=<?php echo json_encode($positionListDiv); ?>;
+              var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
+              if(paramDiv=="top" && paramMode!='5'){
+                saveDataToSession("contentPaneDetailDivHeight<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
+              }else if(paramMode!='5'){
+              saveDataToSession("contentPaneDetailDivWidth<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
+              var param=dojo.byId('objectClass').value;
+              var paramId=dojo.byId('objectId').value;
+              if(paramId !='' && multiSelection==false){
+                loadContent("objectDetail.php?objectClass="+param+"&objectId="+paramId, "detailDiv", 'listForm');  
+              }else if(multiSelection==true){
+               loadContent('objectMultipleUpdate.php?objectClass=' + param,'detailDiv')
+              }
             }
           }
           //resizeListDiv();
@@ -155,7 +156,7 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
                 dojo.query(".activityStreamNoteContainer").forEach(function(node, index, nodelist) {
                   node.style.maxWidth=(newWidth-30)+"px";
                 });
-              }else{
+              }else if (paramMode!='5'){
                 saveDataToSession("contentPaneRightDetailDivHeight<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetHeight, true);
                 if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
               }
