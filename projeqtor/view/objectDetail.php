@@ -3013,7 +3013,7 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
       if(isset($arrayGroupe[$lc]['99'])){
         $tabName=ucfirst($arrayGroupe[$lc]['99']);
       }
-      echo '<div dojoType="dijit.layout.ContentPane" title="'.i18n('tab'.ucfirst($tabName)).(($nbBadge!==null)?'<div id=\''.$tabName.'Badge\' class=\'sectionBadge\' style=\'right:0px;top:0px;width:25%;\' >'.$nbBadge.'</div>':'').'" style="width:100%;height:100%;overFlow:auto;" selected="true">';
+      echo '<div dojoType="dijit.layout.ContentPane" title="'.i18n('tab'.ucfirst($tabName)).(($nbBadge!==null )?'<div id=\''.$tabName.'Badge\' class=\'sectionBadge\' style=\'right:0px;top:0px;width:25%;z-index:9999;position:absolute;overflow:visible;\' >'.$nbBadge.'</div>':'').'" style="width:100%;height:100%;overflow:auto;" selected="true">';
       if(isset($prevSection)){
         echo '<div>';
       }

@@ -239,6 +239,21 @@
 .ProjeQtOrFlatBlue #statusBarMessageDiv {
   text-shadow:none;
 }
+
+.ProjeQtOrFlatBlue .sectionBadge {
+  background: #545281;
+  position: absolute;
+  top:3px; right:7px;
+  width: 40px;
+  height: 12px;
+  text-align: center;
+  display: inline;
+  border: 1px solid #FFFFFF;
+  border-radius:12px;
+  font-size:7pt;
+  color:white;
+}
+
 .ProjeQtOrFlatBlue .messageHeader {
   background: url() #a6a0bc !important;
   color: #ffffff !important;
@@ -1730,6 +1745,20 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatRed #statusBarMessageDiv {
   text-shadow:none;
 }
+
+.ProjeQtOrFlatRed .sectionBadge {
+  background: #833e3e;
+  position: absolute;
+  top:3px; right:7px;
+  width: 40px;
+  height: 12px;
+  text-align: center;
+  display: inline;
+  border: 1px solid #FFFFFF;
+  border-radius:12px;
+  font-size:7pt;
+  color:white;
+}
 .ProjeQtOrFlatRed .messageHeader {
   background: url() #bda1a6 !important;
   color: #ffffff !important;
@@ -3158,6 +3187,19 @@ body .ProjeQtOrFlatRed {
 
 .ProjeQtOrFlatGreen #statusBarMessageDiv {
   text-shadow:none;
+}
+.ProjeQtOrFlatGreen .sectionBadge {
+  background: #537665;
+  position: absolute;
+  top:3px; right:7px;
+  width: 40px;
+  height: 12px;
+  text-align: center;
+  display: inline;
+  border: 1px solid #FFFFFF;
+  border-radius:12px;
+  font-size:7pt;
+  color:white;
 }
 .ProjeQtOrFlatGreen .messageHeader {
   background: url() #86a790 !important;
@@ -4593,6 +4635,20 @@ body .ProjeQtOrFlatGreen {
 
 .ProjeQtOrFlatGrey #statusBarMessageDiv {
   text-shadow:none;
+}
+
+.ProjeQtOrFlatGrey .sectionBadge {
+  background: #656565;
+  position: absolute;
+  top:3px; right:7px;
+  width: 40px;
+  height: 12px;
+  text-align: center;
+  display: inline;
+  border: 1px solid #FFFFFF;
+  border-radius:12px;
+  font-size:7pt;
+  color:white;
 }
 .ProjeQtOrFlatGrey .messageHeader {
   background: url() #AEAEAE !important;
