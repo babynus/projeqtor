@@ -46,35 +46,35 @@ This section summarizes significant changes made in the user guide document for 
 
 To see complete list of changes made to software, visit the ProjeQtOr web site.
 
-**Current version V8.0 : Mains evolutions**
+**Current version V8.1 : Mains evolutions**
 
-.. topic:: **Modules Management**
+.. topic:: **SSO connection through SAML 2**
 
-   Allows to activate or no the modules wich include a coherent group of features.
+   Single sign-on: SSO is a method that allows a user to access multiple computer applications (or websites) by performing only one authentication..
 
-      * see: :ref:`Module_Management`
+      * see: :ref:`SSO_Saml2`
 
-.. topic:: **Humans Resources Management**
+.. topic:: **Surbooking**
 
-   Allows to manage the society's humans resources
+   Allows you to add extra work time on the standard capabilities of your resources to plan more projects that you will not process
 
-      * see: :ref:`humans_resources` (under construction)
+      * see: :ref:`surbooking`
 
 --------------------------------------------------------------------
 
-**Reminder of the latest evolutions from V7.2**
+**Reminder of the latest evolutions from V8.0**
 
-**Expenses:** Extension of the Expenses part to put it at the same level as the Recipes
+**Financial:**  finalization of the expenditure part to put it at the same level as the incomes
 
  * See: :ref:`Expenses` and :ref:`Incomes`
 
-**Planning:** Global planning can show any item on Gantt chart
+**Humans Resources:** Allows to manage the society’s humans resources
 
- * See: :ref:`gantt-planning`
+ * See: :ref:`humans_resources`
 
-**Ergonomics and interface:** A new "Global List" screen that lists all the main project objects in the same list.
+**Modules Management:** Allows to activate or no the modules wich include a coherent group of features.
 
- * See: :ref:`global_view`
+ * See: :ref:`Module_Management`
 
 
 .. raw:: latex
@@ -165,7 +165,7 @@ Document management
 ProjeQtOr integrates an easy to use Document Management feature.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    Document
 
@@ -227,14 +227,11 @@ Environmental parameters
 .. toctree::
    :maxdepth: 1
 
-   Affectation
    User
    Resource
    Customer
    Provider
    Recipient
-   Context
-   DocumentDirectory 
 
 Tools
 -----
@@ -304,6 +301,7 @@ Administration
    :maxdepth: 1
 
    Administration
+   GlobalParameters
 
 Transverses Features
 --------------------
@@ -313,6 +311,14 @@ Transverses Features
 
    TransverseFeatures   
 
+Humans Resources
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+   HumanResources   
+   
 Glossary
 --------
 

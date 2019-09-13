@@ -2,9 +2,18 @@
 
 .. title:: Controls & Automation
 
-.. index:: ! Workflow
+.. index:: Control automation
 
 .. _control_automation:
+
+Control Automation
+******************
+
+The menu "controls and automatisms" allows to manage and parameterize efficiently and finely the triggering events as well as all that ensues from it ... automatically.
+
+Sending mails, changes of status, status, loading of notes ...
+
+.. index:: Workflow
 
 .. _workflow:
 
@@ -19,19 +28,19 @@ A workflow defines the possibility to go from one status to another one, and who
 
 Once defined, a workflow can be linked to any type of any item. 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: Required field |ReqFieldLegend|
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
      - Unique Id for the workflow.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of the workflow.
    * - Sort order
      - Number to define the order of display in lists.
@@ -40,37 +49,43 @@ Once defined, a workflow can be linked to any type of any item.
    * - Description
      - Complete description of the workflow.
 
-**\* Required field**
+.. rubric:: Select status to show or hide
+   
+By clicking this button |buttonIconParameter| you can hide some unnecessary states..
 
-.. raw:: latex
-
-    \newpage
-
-.. rubric:: Button: Select status to show or hide
-
-* This button |buttonIconParameter|  can be used to hide some unnecessary status.
-
-.. figure:: /images/GUI/BOX_SelectStatusToShowOrHide.png
+.. image:: /images/GUI/CONTROLAUTO_ZONE_SelectHide.png
+   :alt: Select or hide
+   :align: center 
+  
+   
+.. figure:: /images/GUI/CONTROLAUTO_BOX_SelectStatus.png
    :alt: Dialog box - Select status to show or hide 
    :align: center
+   
+   Select or hide state.s
+
+.. rubric:: Section List of types using this workflow
+
+List of all elements and objects related to this workflow
 
 
-.. rubric:: Section: Workflow Diagram
+.. figure:: /images/GUI/CONTROLAUTO_ZONE_ListOfType.png
+   :alt: List of types using this workflow
+   
+   List of types using this workflow
 
-* The workflow diagram presents a visual representation of the workflow displaying all possible transitions (independently to profile rights).
+.. rubric:: Section Workflow Diagram
 
-.. figure:: /images/GUI/SEC_WorkflowDiagram.png
+The workflow diagram presents a visual representation of the workflow displaying all possible transitions (independently to profile rights).
+
+.. figure:: /images/GUI/CONTROLAUTO_ZONE_WorkflowDiagram.png
    :alt: Workflow Diagram
    :align: center
 
    Workflow Diagram
 
 
-.. raw:: latex
-
-    \newpage
-
-.. rubric:: Section: Habilitation to change from a status to another
+.. rubric:: Section Habilitation to change from a status to another
 
 * The habilitation table helps defining who can move from one status to another one.
 * Each line corresponds to the status from which you want to be able to move.
@@ -78,37 +93,52 @@ Once defined, a workflow can be linked to any type of any item.
 * It is not possible to go from one status to itself (these cells are blank).
 * Just check the profile (or “all”) who is allowed to pass from one status to the other.
 
-.. figure:: /images/GUI/SEC_HabilitationTable.png
+.. figure:: /images/GUI/CONTROLAUTO_ZONE_WorkflowList.png
    :alt: Habilitation table
    :align: center
 
-.. compound:: **In the upper example:**
+   Habilitation table
+   
+.. note:: 
 
-    * Anyone can move an item from “recorded” to “assigned” and from “recorded” to “cancelled”.
-    * No one can move an item from “qualified” status to any other status. In this case, pay attention that it must never be possible to move an item to “qualified” status, because it will not be possible to leave this status.
+   In the example above, only the administrator, lead project, and supervisor can change from **Recorded** status to **assigned**, **verified**, or **canceled** status.
+  
+   Everyone can move from the **assigned** state to the **in progress** state.
+   
+   however, no one can move from **qualified** to another.
+   
+
+.. warning::
+   
+   In this case, make sure that it is never possible to transfer an item to the "qualified" status, as it will not be possible to leave this status.
+   You can also review the links in the workflow diagram area.
 
 .. raw:: latex
 
     \newpage
 
-.. index:: ! Email (template)
+.. index:: Email (template)
 
 .. _email-template:
 
 Email Templates
 ---------------
 
-The user is able to format mails that are sent automaticaly on events (see Mails on event).
+The user is able to format mails that are sent automaticaly on events. 
+
+See :ref:`Mails on event<mail-on-event>`.
+
 When using template, the standard email formating is replaced with selected one.
+
 Just define your templates, and select it on the "Mail on Events"
 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
    
    * - `Id`
@@ -128,20 +158,30 @@ Just define your templates, and select it on the "Mail on Events"
 
 
 
-.. topic:: Field: element updated and type
+.. topic:: Field element updated and type
 
    * If not set, the template is valid for every type of the element
    * If element is set, only these elements will be able to select the template
-   * if element and type are set, only these elements of the correspondiong type will be able to select the template
+   * if **element** and **type** are defined, only elements of the corresponding type will be able to select the model of mail
    
-.. note::
-  
-   * in the template, user can use any property of the updated object to show in the mail, just use ${propertyName}
-     for instance ${name} will display the name of the item, ${id} will display its id
-   * for properties referencing external item, such as idXxxxx, use ${nameXxxxx} to display name of item instead of its id
-     for instance ${nameProject} will display the name of the project, as ${idProject} will display the id of the project
-   * other tags are available as parameters for email titles (see Global Parameters > emails)
-   * some specific tags can also be used
+.. rubric:: Specifics Tags on email template
+ 
+In the model, the user can use any property of the object, and display it in the mail using specific tags.
+
+you just have to use the ${projectName} tag for the project name to appear. 
+
+Likewise with ${idproject} to display the identification number of it
+   
+.. warning::
+   
+   for properties referencing an external element, such as idXxxxx, use ${nameXxxxx}
+   
+     
+Other tags are available as parameters for email titles
+
+More details, see :ref:`Global Parameters<mailing_parameters>`
+
+.. topic:: some specific tags can also be used
    
      - ${item} : class of the item 
      - ${dbName} : display name of current instance
@@ -150,15 +190,33 @@ Just define your templates, and select it on the "Mail on Events"
      - ${project} : synonym for ${nameProject}
      - ${url} : url to get the direct link to the item
      - ${goto} : display Class and Id of item, clickable to have direct link to the item
-   * 3 other tags are available except in the mail title because they display a table.
+        
+.. topic:: This tags are available except in the mail title because they display a table**
    
      - ${HISTORY} : displays the last change of an object.
-     - ${
+     - ${HISTORYFULL} : display all the modifications
      - ${LINK} : list linked elements to the item
      - ${NOTE} : lists the notes of the item 
+
+
+.. rubric:: the Tags selector
+
+
+.. figure:: /images/GUI/CONTROLAUTO_ZONE_InsertTAG.png
+   :alt: Insert specific tags
+   
+   Insert specific tags
+
+* A tag selector is available under the text fields.
+
+* Choose the tag you want to insert.
+
+* Click the insert button
+
+* The tag appears in the body of the text
     
 
-.. index:: ! Email (Event)
+.. index:: Email (Event)
 
 .. _mail-on-event:
 
@@ -176,12 +234,12 @@ Events are defined on an element and element type.
    * Mail titles is defined in :ref:`Global parameters<mail-titles>` screen.
    * Selecting a Template will use the formating of the template instead of default standard formating.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -200,12 +258,12 @@ Events are defined on an element and element type.
      - Flag to indicate that status mail is archived.
 
 
-.. topic:: Field: Type
+.. topic:: Field Type
 
-   * If not set, the event is valid for every type of the element.
+   If not set, the event is valid for every type of the element.
 
 
-.. rubric:: Section: Mail receivers
+.. rubric:: Section Mail receivers
 
 * List of addresses of the mails.
 * The list is not nominative, but defined as roles on the element.
@@ -216,7 +274,7 @@ Events are defined on an element and element type.
 
     \newpage
 
-.. index:: ! Ticket (Delay)
+.. index:: Ticket (Delay)
 
 .. _delay-for-ticket:
 
@@ -227,39 +285,43 @@ It is possible to define a default delay for tickets, for each ticket type and e
 
 .. note::
 
-   * On creation, the due date will automatically be calculated as creation date + delay.
+   On creation, the due date will automatically be calculated as creation date + delay.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: Required field |ReqFieldLegend|
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
      - Unique Id for the delay definition.
-   * - **Ticket type**
+   * - |RequiredField| Ticket type
      - Ticket type the delay applies to.
-   * - **Urgency**
+   * - |RequiredField| Urgency
      - Urgency of ticket the delay applied to.
-   * - **Value**
+   * - |RequiredField| Value
      - Value of delay.
    * - :term:`Closed`
      - Flag to indicate that delay definition is archived.
 
-**\* Required field**
 
-.. topic:: Field: Value
+.. topic:: Field Value
 
-   * Unit for the value can be :
+   **Unit for the value can be**
     
-     - Days : simple calculation as days.
-     - Hours : simple calculation as hours.
-     - Open days : calculation excluding days off (weekends and days off defined on “calendar”).
-     - Open hours : calculation only on the “standard open hours” defined in :ref:`Global parameters<daily-work-hours-section>` screen. 
+     * **Days:** simple calculation as days
+     
+     * **Hours:** simple calculation as hours
+     
+     * **Open days:** calculation excluding days off 
+     
+       weekends and days off defined on “calendar”
+       
+     * **Open hours:** calculation only on the “standard open hours” defined in :ref:`Global parameters<daily-work-hours-section>` screen. 
 
 
 
@@ -268,9 +330,9 @@ It is possible to define a default delay for tickets, for each ticket type and e
 
     \newpage
 
-.. index:: ! Indicator (Definition)
-.. index:: ! Email (Indicator)
-.. index:: ! Internal alert (Indicator)
+.. index:: Indicator (Definition)
+.. index:: Email (Indicator)
+.. index:: Internal alert (Indicator)
 
 .. _indicator:
 
@@ -285,12 +347,12 @@ Some indicators are based on delay (due date), some on work, some on cost.
 
 For each indicator a warning value and an alert value can be defined.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -310,14 +372,14 @@ For each indicator a warning value and an alert value can be defined.
    * - :term:`Closed`
      - Flag to indicate that delay definition is archived.
 
-.. rubric:: Section: Mail receivers
+.. rubric:: Section Mail receivers
 
 * List of addresses of the mails.
 * The list is not nominative, but defined as roles on the element.
 * Each addressee will receive mail only once, even if a person has several “checked” roles on the element. 
 * See : :ref:`receivers-list` for receivers detail.
 
-.. rubric:: Section: Internal alert receivers
+.. rubric:: Section Internal alert receivers
 
 * List of addresses of the internal alert.
 * The list is not nominative, but defined as roles on the element.
@@ -327,8 +389,8 @@ For each indicator a warning value and an alert value can be defined.
 
     \newpage
 
-.. index:: ! Predefined notes
-.. index:: ! Note (Predefined)
+.. index:: Predefined notes
+.. index:: Note (Predefined)
 
 .. _predefined-notes:
 
@@ -341,19 +403,19 @@ When some predefined notes are defined for an element and / or type a list will 
 
 Selecting an item in the list will automatically fill in the note text field.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: Required field |ReqFieldLegend|
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
      - Unique Id for the predefined note.
-   * - **Name**
+   * - |RequiredField| Name
      - Name of the predefined note.
    * - Element
      - Kind of item (Ticket, Activity, …) for which this predefined note will be proposed on note creation.
@@ -364,21 +426,19 @@ Selecting an item in the list will automatically fill in the note text field.
    * - Text
      - Predefined text for notes.
 
-**\* Required field**
+.. topic:: Field Element
 
-.. topic:: Field: Element
+   If not set, predefined note is valid for every element type.
 
-   * If not set, predefined note is valid for every element type.
+.. topic:: Field Type
 
-.. topic:: Field: Type
-
-   * If not set, predefined note is valid for every type of the element.
+   If not set, predefined note is valid for every type of the element.
 
 .. raw:: latex
 
     \newpage
 
-.. index:: ! Checklist (Definition)
+.. index:: Checklist (Definition)
 
 .. _checklist-definition:
 
@@ -389,12 +449,12 @@ It is possible to define checklist forms for each type of element.
 
 When a checklist form exists for a given element, the checklist is available for the element.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: 
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -408,7 +468,7 @@ When a checklist form exists for a given element, the checklist is available for
    * - :term:`Closed`
      - Flag to indicate that checklist definition is archived. 
 
-.. rubric:: Section: Checklist lines
+.. rubric:: Section Checklist lines
 
 A checklist is built from checklist lines.
 
@@ -416,15 +476,16 @@ A checklist is built from checklist lines.
 * Click on |buttonEdit| to update an existing checklist line.
 * Click on |buttonIconDelete| to delete the corresponding checklist line.
 
-.. figure:: /images/GUI/BOX_ChoicesForChecklistLines.png
+.. figure:: /images/GUI/CONTROLAUTO_BOX_ChoicesForChecklistLines.png
    :alt: Dialog box - Choices for the checklist lines 
    :align: center
 
-
+   Choices for the checklist lines
+   
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Fields - Choices for the checklist lines
-   :widths: 20, 80
+.. list-table:: Choices for the checklist lines
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -457,8 +518,8 @@ A checklist is built from checklist lines.
 
     \newpage
 
-.. index:: ! Email (Receivers)
-.. index:: ! Internal alert (Receivers)
+.. index:: Email (Receivers)
+.. index:: Internal alert (Receivers)
 
 .. _receivers-list:
 
@@ -471,44 +532,46 @@ A description of receivers below.
 
 .. rubric:: Requestor
 
-* The contact defined as :term:`requestor` on current item; sometimes appears as “contact” (on quotation and order, for instance) and sometimes have no meaning (for instance for milestone).
+The contact defined as :term:`requestor` on current item; sometimes appears as “contact” (on quotation and order, for instance) and sometimes have no meaning (for instance for milestone).
 
 .. rubric:: Issuer
 
-* The user defined as :term:`Issuer`.
+The user defined as :term:`Issuer`.
 
 .. rubric:: Responsible
 
-* The resource defined as :term:`responsible`.
+The resource defined as :term:`responsible`.
 
 .. rubric:: Project team
 
-* All resources allocated to the project.
+All resources allocated to the project.
 
 .. rubric:: Project leader
 
-* The resource(s) allocated to the project with a “Project Leader” profile.
+The resource(s) allocated to the project with a “Project Leader” profile.
 
 .. rubric:: Project manager
 
-* The resource defined as the manager on a project.
+The resource defined as the manager on a project.
 
 .. rubric:: Assigned resource
 
-* All resources assigned.
+All resources assigned.
 
 .. rubric:: Other
 
-* Provides an extra field to manually enter email addresses.
-* If “other” is checked, an input box is displayed to enter a static mail address list.
-* Several addresses can be entered, separated by semicolon.
+Provides an extra field to manually enter email addresses.
+
+If “other” is checked, an input box is displayed to enter a static mail address list.
+
+Several addresses can be entered, separated by semicolon.
 
 
 .. raw:: latex
 
     \newpage
 
-.. index:: ! KPI
+.. index:: KPI
 
 .. _kpi-definitions:
 
@@ -519,12 +582,12 @@ A performance indicator or key performance indicator (KPI) is a type of performa
 
 It is possible to define Kpi on incomings and deliverables items.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -542,9 +605,9 @@ It is possible to define Kpi on incomings and deliverables items.
      
 .. warning::
      
-      * Description integrates the formula used to calculate the KPI.
+      Description integrates the formula used to calculate the KPI.
 
-.. rubric:: Section: Tresholds
+.. rubric:: Section Tresholds
 
 It is possible to attributes tresholds lines to KPI.
 
@@ -552,22 +615,26 @@ It is possible to attributes tresholds lines to KPI.
 * Click on |buttonEdit| to update an existing JobList line.
 * Click on |buttonIconDelete| to delete the corresponding JobList line.
 
-.. figure:: /images/GUI/Kpi_Tresholds.PNG
+.. figure:: /images/GUI/CONTROLAUTO_KpiTresholds.PNG
 
 .. note::
      
-   * Keep in mind KPI is an indicator of performance at project level (opposite to indicator which is calculated at item level).
-   * to display the indicator, use Kpi report. See: :ref:`report`
+   Keep in mind KPI is an indicator of performance at project level (opposite to indicator which is calculated at item level).
+   
+   To display the indicator, use Kpi report. See: :ref:`report`
       
       
-.. figure:: /images/GUI/Kpi_report.png
+.. figure:: /images/GUI/CONTROLAUTO_ZONE_KpiReport.png
+   :alt: List of KPI Reports
+   
+   List of KPI Reports 
 
 
 .. raw:: latex
 
     \newpage
 
-.. index:: ! JobList
+.. index:: JobList
 
 .. _jobList:
 
@@ -580,12 +647,12 @@ When a Joblist form exists for a given element, the Joblist is available for the
 
 It is an indicator to follow the respect of dates values.
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 20, 80
+   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -599,7 +666,7 @@ It is an indicator to follow the respect of dates values.
    * - Idle
      - idle.
 
-.. rubric:: Section: JobList lines
+.. rubric:: Section JobList lines
 
 A JobList is built from JobList lines.
 
@@ -607,243 +674,268 @@ A JobList is built from JobList lines.
 * Click on |buttonEdit| to update an existing JobList line.
 * Click on |buttonIconDelete| to delete the corresponding JobList line.
 
-.. figure:: /images/GUI/Joblist.png
+.. figure:: /images/GUI/CONTROLAUTO_BOX_Joblist.png
+   :alt: Definition of a job
+   
+   Definition of a job
 
 .. note::
 
-   * Looking like CheckLists with no choice.
+   Looking like CheckLists with no choice.
 
-.. index:: ! Notification
+.. index:: Notification
 
-.. _notification-system :
+.. _notifications:
 
-Notification system
--------------------
+Notifications
+-------------
 
-This system also allows you to generate notifications manually or according to some very "powerful" rules (defined as "where" clauses).
-We now have 2 systems for generating alerts or reminders :  indicators and notifications.
+You must activate the notifications module to display the corresponding screens
 
-The concept of user notification has been incorporated into projeqtor. A notification has a title, a content, a remitter. If it is generated by the notification system (see following paragraph), it is linked to an element of the system (Action, Invoice,…).
-
-In order to automatically generate notifications based on certain field values of a system element, a notification system has been implemented.
-This notification system, whose purpose is to automatically generate notifications, is based on notification generation definitions.
+This system allows you to generate notifications or according to very "powerful" rules (defined as "where" clauses).
 
 
-A) Creation _________________
+.. note::
 
+   ProjeQtOr offers 2 systems to generate alerts or reminders: definition of notifications and manual notifications from the tools menu
+   
+   see: :ref:`manual_notification`.
 
-The definition of notification generation is based on the following:
+Notification definition in control and automation menu allows you to create notifications about events
+
+.. _notification-system:
+
+Notification System
+===================
+
+If it is generated by the notification system, it is linked to an element of the system (Action, Invoice, ...).
+
+.. figure:: /images/GUI/CONTROLAUTO_SCR_NotificationsSystem.png
+   :alt: Notifications system screen
+   
+   Notifications system screen
+
+.. rubric:: Creation
+
+**The definition of notification generation is based on the following:**
+
+* The title that can contain the field values of the notifiable element or its sub-elements
 
 * The element of the system that determines the notification, called "Notifiable Element" (notifiable)
-   
-* The notification rule notifying the elements related to the generation of a notification
-   
-* The date (referred to as the reference date) at which the notification must be generated. This is one of the dates of the notifiable item that is not the creation date.
-
-* The generated notification receivers. Fields of the notifiable element or its sub-elements that refer to users.
-
 
 * The type of notification (Alert, Warning, Information)
    
-* The title that can contain the field values of the notifiable element or its sub-elements
-   
+* The notification rule notifying the elements related to the generation of a notification
+
 * The content may also contain the field values of the notifiable element or its sub-elements.
-   
+
+* The date (referred to as the reference date) at which the notification must be generated. This is one of the dates of the notifiable item that is not the creation date.
+
+* The generated notification receivers. Fields of the notifiable element or its sub-elements that refer to users.
+         
 * The choice to send, or not, to all the sending of emails at the same time as the notifications.
 
 
-**\* Definition of notifications**
+.. rubric:: Section Description
+
+This section briefly describes the type of notification
+
+Its name, its type: alert, information or warning as well as the notifiable element.
 
 
-.. rubric:: Section: Description
+.. rubric:: Section Notification title
 
-.. tabularcolumns:: |l|l|
+This section allows you to give a title to your notification.
 
-.. list-table::
-   :widths: 20, 80
-   :header-rows: 1
+This title will be the object of the programmed mail if you tick the box **send an email** in the receivers section
 
-   * - Field
-     - Description
-   * - Name
-     - appears on level 3 of the unread notification tree.
-   * - Notif. item
-     - Type of the element the list applies to .
-   * - Type
-     - Type represents level 1 of the unread notification tree.
+You can add dynamic fields with **help to insert a dynamic field in the title**
 
+The title of the notification can therefore contain fields of the "notifiable" object and its linked elements via an idXXX.
 
-.. rubric:: Section: Notification title
+where XXX is the name of the linked item. 
 
-.. tabularcolumns:: |l|l|
+Select an object and / or a field and click the Insert button so that the dynamic field with the correct syntax fits directly in the title, where the cursor is.
 
-.. list-table::
-   :widths: 20, 80
-   :header-rows: 1
+In this case, the syntax must be: `#{the name of the field}` ...
 
-   * - Field
-     - Description
-   * - Title
-     - Can add dynamics fields.
+.. tip::
 
+   #{billId} - Invoice not paid - Sent on #{sendDate}
+   If the rule (see below) of the instruction on the invoice of 'billId' 2019-12-30-0001 whose sending date is 30-12-2019 
+   then the title of the notification will be:
    
-This is the screen used to define the "programmed" parameters of the programming generation.
+   **2019-12-30-0001 - Invoice not paid - Submitted on 12-30-2019**
 
-• Section 'Description':
- 
-◦ Closed: As everywhere in projeQtor.
+.. rubric:: Section Rule to apply
 
-• Section "Title of the notification"
-
-◦ Title: The title of the notification (the subject of the email is the option 'Send email' is selected).
-It can contain fields of the "notifiable" element and its linked elements through an idXXX (where XXX represents the name of the linked element). In this case, the syntax must be: # {the field name}.
-Example: # {billId} - Invoice not paid - Sent on # {sendDate}
-If the rule (see below) of the instruction on the invoice of 'billId' 2017-10-30-0001 whose sending date is 30-10-2017 then the title of the notification SERA:
-2017-10-30-0001 - Invoice not paid - Submitted on 10-30-2017
-
-The following elements allow you to integrate dynamic fields:
-The comboBox 'Element' allows you to choose the selected notifiable element or one of its key linked elements.
-The comboxBox 'Field' allows you to choose the dynamic field of the element selected in 'Element'.
-The 'Insert' button allows you to insert where the cursor is in the title the dynamic field with the right synthax.
-
-◦ Content: This is the content of the notification (to the email, if the 'Send Email' option is selected).
-In the same way as for the title, it can contain fields of the "notifiable" element and its elements leas by an idXXXX.
-
-• Rule to apply: 
-
-
-.. figure:: /images/GUI/screenshot156.png
-
+.. figure:: /images/GUI/CONTROLAUTO_ZONE_NotificationsRules.png
+   :alt: Notifications rules
+   
+   Notifications rules
+   
 This rule determines which instance of the item will generate a notification.
+
 The syntax is the one we take for a WHERE clause in an SQL statement.
-Example: Declares a notification for all invoices whose amount has been paid <total amount AND whose project name is 'ACME'
-# {paymentAmount} <# {fullAmount}
-AND
-# {idProject.name} = 'ACME'
-AND
-isnull (# {paymentDate)
+
+.. tip:: 
+
+   scheduling a notification for all invoices where the amount has been paid = total amount AND project name 'ACME'
+
+   #{paymentAmount} < #{fullAmount}
+   AND
+   #{idProject.name} = 'ACME'
+   AND
+   isnull (#{paymentDate)
 
 .. note::
 
-  The rule to apply is not mandatory. If the rule is empty, then only the reference date is used to determine whether or not a notification is generated. 
-  In addition to choosing a dynamic field, you can choose to use an operator or function with the following elements:
+   The rule to apply is not mandatory. If the rule is empty, then only the reference date is used to determine whether or not a notification is generated. 
+  
+   In addition to choosing a dynamic field, you can choose to use an operator or function with the following elements:
 
-.. figure:: /images/GUI/screenshot155.png
-
-
-• Notification content : Mandatory
-
-
-• Start as: 
-
-• | Reference Date : This is the notification date of the creation of the notification.
-  | Example: 'Due date' (paymentDueDate) is selected. For all invoices that are not the previous rule, a notification will be generated if the due date is greater than or equal to the current date.
-
-• Month: If checked, the generator (notification) applies to the year from the reference date to the reference day.
-
-• Fixed Day: If a day is chosen (not empty), the generator (if the rule applies).
-
-• Year: If the year is checked, the generator is a notification every year to the month and the day of the reference date
-
-• Fixed month: If a month is chosen, the generator (a rule) a notification each year to the fixed month and the day of the reference date
-
-• Fixed day: If a day is chosen, the data generator (not apply) is notified each year to the year of the reference date on the day fixed.
-
-.. note:: 
-
- * If Year Checked, month and day corrects, then it is a birthday. The statement generator a notification every year to come in the month and on the set day. The reference date is no longer used for anything in this case.
-
-• Notify before: This is a number of days before the notification date for which the notification is to be generated
-
-• | Send to: These are the types of people who are notified.
-  | The syntax is as follows: One of the words in the "Help - Authorized Recipients" section separated by a ';
-  | The following items allow you to choose the type of remitter.
-
-.. figure:: /images/GUI/screenshot157.png 
+   .. figure:: /images/GUI/CONTROLAUTO_ZONE_OperatorFunctions.png
+      :alt: Operator functions
+   
+      Operator functions
 
 
-• Sent e-mail: If checked, an e-mail will be generated even if the notification for each type of person has been defined.
+.. rubric:: Notification content
+
+This section is mandatory
+
+You can also add dynamic fields with **help to insert a dynamic field in content** in the same way as in the description section
+
+.. figure:: /images/GUI/CONTROLAUTO_ZONE_Content.png
+   :alt: Content section
+   
+   Content section
+
+.. rubric:: Section Start as
+
+.. figure:: /images/GUI/CONTROLAUTO_ZONE_StartAS.png
+   :alt: Start as section
+   
+   Start as section
+   
+this section allows you to program the frequency of the notification display
+
+   .. compound:: **The reference date**
+   
+   * Date on witch will be generate the notification (minus the number of days or minutes programmed before) 
+   
+   * Notify before: This is a number of days before the notification date for which the notification is to be generated
+   
+   * This field is mandatory       
+
+--------------   
+   
+   Example "delivery expected date" is selected. 
+   
+   For all deliverables that do not follow the previous rule, a notification will be generated if the delivery date is not respected.
+   
+--------------
+   
+   .. compound:: **Every year**
+   
+   * If the year is checked, the generator is a notification every year to the month and the day of the reference date
+   
+   * If the year is checked, the month and day filled, then it is a birthday. The reference date will not be used.
+   
+   .. compound:: **Every month / Week / Open day**
+   
+   * Is selected, responsive notifications will be generate monthly / weekly or each open day 
+   
+   
+.. rubric:: Receivers
+   
+These are the types of people who are notified.
+   
+The syntax is as follows: One of the words in the "Help Authorized Recipients" 
+
+section separated by a ';
+   
+The following items allow you to choose the type of remitter.
+   
+.. figure:: /images/GUI/CONTROLAUTO_ZONE_Receivers.png 
+   :alt: Receivers section
+   
+   Receivers section
+   
+   .. compound:: **Sent e-mail**
+   
+   If checked, an e-mail will be generated even if the notification for each type of person has been defined.
 
 
- B) Miscellaneous ____________________
-
-• The parameterization
-
-There are 2 global settings for the notification system:
-
-   • | notificationSystemActiv
-     | If YES, the notification system is implemented.
-
-   • | CronCheckNotifications
-     | Gives in seconds, the time interval between two generations of notification (and the Cron system is active) and between two the refresh of notifications on the HMI.
 
 
-Generation of notifications
-
-Made by the CRON every hour
-Made at each change (creation, modification, deletion) of rule definition
-Not done on changes of other classes
-
-
-* The authorizations
-
-The access rights for the 'Notification' menu were given to the 'standard' projeqtor profiles (idProfile = 1 to 7).
-The access rights for the 'Notification Definition' menu have been given for the administrator profile (idProfile = 1).
-
-* Access Rights 
-
-For notifications, rights:
-
-• 'full' were given to the administrator profile.
-
-• 'modifiers'
-
-For the definition of the notification rules (notificationDefinition), the rights:
-
-"update" was given to the administrator profile.
-
-'read only' for other profiles
+.. seealso::
+   
+   **Global Parameters** :ref:`automated-service`
+   
+   Gives in seconds, the time interval between two generations of notification (and the Cron system is active) 
+   
+   and between two the refresh of notifications on the HMI.
 
 
- C) The IHMs ____________________
+.. note::
 
+   **The authorizations** 
+   
+   The access rights for the 'notification' menu were given to the 'standard' projeqtor profiles (idProfile = 1 to 7) with the CRUD rights reader only
+
+   The access rights for the 'notification definition' menu have been given for the administrator profile (idProfile = 1)with the CRUD rights modifiers
+  
+
+Notification and the IHM
+========================
 
 After logging in, a message generated after "Login accepted" that tells you that you have unread notifications:
 
+.. figure:: /images/GUI/CONTROLAUTO_BOX_IHMNotif.png 
+   :alt: notification on the login screen
+   
+   notification on the login screen
 
-.. figure:: /images/GUI/himnotification1.png 
-
-
-.. figure:: /images/GUI/himnotification2.png
+.. figure:: /images/GUI/CONTROLAUTO_ZONE_IconNotif.png
+   :alt: icon notifications
+   
+   Icon notifications
+   
 
 Display of unread notifications
+
 It is done at 2 levels on the main screen:
 
-Bottom right
-A notification icon appears as soon as a notification is not intended for the user.
+   * Bottom right
+     A notification icon appears as soon as a notification is not intended for the user.
 
-Clicking on the icon gives direct access to the notifications screen. 
+     Clicking on the icon gives direct access to the notifications screen. 
 
-• Below the menus
+   * Below the menus
 
-.. figure:: /images/GUI/himnotification3.png
+.. figure:: /images/GUI/CONTROLAUTO_ZONE_NotifRecap.png
+   :alt: notification area
+   
+   Notifications area
 
 A tree whose title indicates the number of unread notifications intended for the user.
 
 This tree has the following levels:
 
-• Level 1: The types of notifications
+* Level 1: The types of notifications
 
-• Level 2: The trigger for notifications
+* Level 2: The trigger for notifications
 
-• Level 3: The Notification Definition to Product Notifications
+* Level 3: The Notification Definition to Product Notifications
 
-• Level 4: The id of the element that generated the notification. The icon allows direct access to the item.
+* Level 4: The id of the element that generated the notification. Allows direct access to the item.
 
-The icon allows you to refresh notifications without waiting for the scheduled update.
-The icon provides direct access to the notifications screen.
+The icon |buttonIconRefresh| allows you to refresh notifications without waiting for the scheduled update.
 
+The icon |iconNotif| provides direct access to the notifications screen.
 
+Numbers in parentheses indicate the number of unread notifications
 
 
 

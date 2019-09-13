@@ -7,32 +7,38 @@
 .. title:: Tickets dashboard
 
 
-.. index:: ! Ticket (Dashboard)
+.. index:: Ticket (Dashboard)
 
 .. _ticket-dashboard:
 
 Tickets dashboard
 =================
 
+.. figure:: /images/GUI/TICKET_SCR_Dashboard.png
+   :alt: Ticket dashboard screen
+   
 Allows user to have a tickets global view of his projects.
 
-Shows several small reports, listing the number of tickets by item.
+Displays several small syntheses that group the tickets by category: type, priority or by product, component or by state.
+
+The number of tickets is listed. The result is displayed with numbers and as a percentage. |two|
 
 Filters are available to limit scope.
 
 .. rubric:: Direct access to the list of tickets
 
-* In reports, click on an item to get list of tickets corresponding to this item.
+* In the various summaries, click on an element |one| to obtain the list of tickets corresponding to this element.
+* you return to the tickets screen
 
 .. rubric:: Parameters
 
-* Click on |buttonIconParameter| to access parameters.
+* Click on |buttonIconParameter| to access parameters |three|.
 * Allows to define reports displayed on the screen.
 * Allows to reorder reports displayed with drag & drop feature. Using the selector area button |buttonIconDrag|.
 
 .. note::
 
-   * Arrange reports on left and right on screen. 
+   Arrange reports on left and right on screen. 
 
 
 .. figure:: /images/GUI/BOX_TicketDashboardParameters.png
@@ -42,15 +48,17 @@ Filters are available to limit scope.
 Filter clauses
 --------------
 
-.. note:: Report: Synthesis by status
+.. note:: Synthesis by status
 
-   * For this report, filter clauses are not applicable.
+   For this report, filter clauses are not applicable.
 
-
+.. figure:: /images/GUI/TICKET_ZONE_ScopeFilters.png
+   :alt: filters
+   
 .. rubric:: Scope filters
 
 * **All issues**
-  
+   
   * All tickets.
 
 * **Not closed issues**

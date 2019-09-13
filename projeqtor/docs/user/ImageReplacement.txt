@@ -1,12 +1,52 @@
+.. |arrowCompound| image:: images/arrowCompound.png
+   :alt: arrow
+
+.. |iconDelay| image:: images/iconDelay.png
+   :alt: Susbcribe
+
+.. |iconNotif| image:: images/iconNotification.png
+   :alt: Notification
+	
+.. |iconInfo| image:: images/iconInformation.png
+   :alt: Information
+
+.. |iconAlert| image:: images/iconAlert.png
+   :alt: Alert
+
+.. |iconWarning| image:: images/iconWarning.png
+   :alt: Warning
+
+.. |iconSum| image:: images/iconSum.png
+   :alt: Sum 
+   
+.. |iconSubscribe| image:: images/IconSubscribe.png
+   :alt: Susbcribe
+		
 .. |iconNotPlanned| image:: images/iconNotPlanned.png
    :alt: Icon not planned
+
+.. |iconSS| image:: images/dependency_SS.png
+   :alt: Start start dependency
    
+.. |iconES| image:: images/dependency_E-S.png
+   :alt: End Start dependency
+
+.. |iconEE| image:: images/dependency_E-E.png
+   :alt: End End dependency
+   
+.. |iconSplit| image:: images/iconSplit.png
+   :alt: Icon divide
+
+.. |iconStar| image:: images/iconStar.png
+   :alt: mandatory attendant
+   :scale: 60
+
 .. |RequiredField| image:: images/RequiredFILE.png
    :alt: Required File 
 
 .. |ReqFieldLegend| image:: images/RequiredFILE.png
-   :alt: Required File
-   :scale: 40 
+   :alt: Required File legend
+   :scale: 60 
    
 .. |buttonClientBill| image:: images/iconClientBill16.png
    :alt: Add formated line 
@@ -29,7 +69,7 @@
 .. |iconBlocked| image:: images/iconBlocked.png
    :alt: Icon blocked
 
-.. |buttonAdd| image:: images/smallButtonAdd.png
+.. |buttonAdd| image:: images/ButtonAdd.png
    :alt: Button add
 
 .. |buttonEdit| image:: images/smallButtonEdit.png
@@ -249,7 +289,7 @@
 .. |privateThumb| image:: images/private.png
    :alt: private thumbnail
 
-.. |teamThumb| image:: images/team.png
+.. |teamThumb| image:: images/Teams22.png
    :alt: team thumbnail
 
 .. |unShareFilter| image:: images/share.png
@@ -267,19 +307,39 @@
    :alt: One
    :scale: 30
 
+.. |oneBLC| image:: images/oneBLC.png
+   :alt: One
+   :scale: 30
+
 .. |two| image:: images/two.png
    :alt: Two
    :scale: 30
 
+.. |twoBLC| image:: images/twoBLC.png
+   :alt: Two
+   :scale: 30
+   
 .. |three| image:: images/three.png
    :alt: Three
    :scale: 30
 
+.. |threeBLC| image:: images/threeBLC.png
+   :alt: Three
+   :scale: 30
+   
 .. |four| image:: images/four.png
    :alt: Four
    :scale: 30
 
+.. |fourBLC| image:: images/fourBLC.png
+   :alt: Four
+   :scale: 30
+   
 .. |five| image:: images/five.png
+   :alt: Five
+   :scale: 30
+
+.. |fiveBLC| image:: images/fiveBLC.png
    :alt: Five
    :scale: 30
 
@@ -287,26 +347,42 @@
    :alt: Six
    :scale: 30
 
+.. |sixBLC| image:: images/sixBLC.png
+   :alt: Six
+   :scale: 30
+
 .. |seven| image:: images/seven.png
    :alt: Seven
    :scale: 30
 
+.. |sevenBLC| image:: images/sevenBLC.png
+   :alt: Seven
+   :scale: 30
+   
 .. |eight| image:: images/eight.png
    :alt: Eight
    :scale: 30
 
+.. |eightBLC| image:: images/eightBLC.png
+   :alt: Eight
+   :scale: 30
+   
 .. |nine| image:: images/nine.png
    :alt: Nine
    :scale: 30
 
+.. |nineBLC| image:: images/nineBLC.png
+   :alt: Nine
+   :scale: 30
+   
 .. |ten| image:: images/ten.png
    :alt: Ten
    :scale: 30
-   
-.. |ButtonADD| image:: images/ButtonADD.png
-   :alt: Add
-   :scale: 30  
 
+.. |tenBLC| image:: images/tenBLC.png
+   :alt: Ten
+   :scale: 30
+   
 .. |A| image:: images/A.png
    :alt: A letter
    :scale: 30
@@ -323,3 +399,75 @@
    :alt: D letter
    :scale: 30
 
+.. |E| image:: images/E.png
+   :alt: D letter
+   :scale: 30
+
+.. |F| image:: images/F.png
+   :alt: D letter
+   :scale: 30
+
+.. |G| image:: images/G.png
+   :alt: D letter
+   :scale: 30
+   
+.. |H| image:: images/H.png
+   :alt: D letter
+   :scale: 30
+
+.. |I| image:: images/I.png
+   :alt: D letter
+   :scale: 30
+
+.. |J| image:: images/J.png
+   :alt: D letter
+   :scale: 30
+   
+.. |K| image:: images/K.png
+   :alt: D letter
+   :scale: 30
+   
+   
+.. |A-BLC| image:: images/A-BLC.png
+   :alt: A letter
+   :scale: 30
+
+.. |B-BLC| image:: images/B-BLC.png
+   :alt: B letter
+   :scale: 30
+
+.. |C-BLC| image:: images/C-BLC.png
+   :alt: C letter
+   :scale: 30
+
+.. |D-BLC| image:: images/D-BLC.png
+   :alt: D letter
+   :scale: 30
+
+.. |E-BLC| image:: images/E-BLC.png
+   :alt: D letter
+   :scale: 30
+
+.. |F-BLC| image:: images/F-BLC.png
+   :alt: D letter
+   :scale: 30
+
+.. |G-BLC| image:: images/G-BLC.png
+   :alt: D letter
+   :scale: 30
+   
+.. |H-BLC| image:: images/H-BLC.png
+   :alt: D letter
+   :scale: 30
+
+.. |I-BLC| image:: images/I-BLC.png
+   :alt: D letter
+   :scale: 30
+
+.. |J| image:: images/J-BLC.png
+   :alt: D letter
+   :scale: 30
+   
+.. |K| image:: images/K-BLC.png
+   :alt: D letter
+   :scale: 30

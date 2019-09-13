@@ -1,11 +1,13 @@
+.. include:: ImageReplacement.txt
+
 .. raw:: latex
 
     \newpage
 
 .. title:: Recipients
 
-.. index:: ! Recipient
-.. index:: ! Bill (Recipient) 
+.. index:: Recipient
+.. index:: Bill (Recipient) 
 
 .. _recipient:
 
@@ -16,11 +18,11 @@ The recipient is the beneficiary of bill payments.
 
 Recipients are mainly defined to store billing information. 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -28,7 +30,7 @@ Recipients are mainly defined to store billing information.
      - Description
    * - :term:`Id`
      - Unique Id for the recipient.
-   * - **Name**
+   * -  Name
      - Short name of the recipient.
    * - Company number
      - Company number, to be displayed on the bill.
@@ -47,13 +49,11 @@ Recipients are mainly defined to store billing information.
    * - :term:`Closed`
      - Flag to indicate that the recipient is archived.
  
-**\* Required field**
-
-.. rubric:: Section: International Bank Account Number
+.. rubric:: Section International Bank Account Number
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
+.. list-table:: 
    :widths: 20, 80
    :header-rows: 1
 
@@ -68,8 +68,8 @@ Recipients are mainly defined to store billing information.
    * - National account number
      - Full account number defining the BBAN account code.
 
-.. rubric:: Section: Address
+.. rubric:: Section Address
 
-* Full address of the recipient.
+Full address of the recipient.
 
 

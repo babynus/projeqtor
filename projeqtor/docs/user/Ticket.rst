@@ -2,7 +2,7 @@
 
 .. title:: Tickets
 
-.. index:: ! Ticket 
+.. index:: Ticket 
 
 .. _ticket:
 .. _simple-ticket:
@@ -12,7 +12,12 @@ Tickets
 
 A ticket is a kind of task that can not be unitarily planned. 
 
-It is generally a short time activity for a single ticket, that is interesting to follow unitarily to give a feedback to the issuer or to keep trace of result. 
+It is generally a short time activity for a single ticket, that is interesting to follow unitarily 
+
+to give a feedback to the issuer or to keep trace of result. 
+
+.. figure:: /images/GUI/TICKET_SCR_Presentation.png
+   :alt: Tickets management screen
 
 It can be globally planned as a general activity, but not unitarily.
 
@@ -22,7 +27,7 @@ For instance, bugs should be managed through tickets :
 * You must be able to give a feedback on each bug.
 * You can (or at least should) globally plan bug fixing activity. 
 
-.. index:: ! Ticket (Simple) 
+.. index:: Ticket (Simple) 
 
 .. topic:: Tickets (simple) 
 
@@ -41,16 +46,11 @@ For instance, bugs should be managed through tickets :
     * The resource is automatically assigned to this activity.
     * Real work set on tickets is automatically set in resource timesheet.
 
-.. raw:: latex
-
-    \newpage
-
-.. rubric:: Restrict the entry of real work in the ticket.
+.. rubric:: Restrict the entry of real work in the ticket
 
 * Possibility to define that only the responsible of ticket can enter real work.
 * This behavior can be set in  :ref:`Global parameters<auto-responsible>` screen.
 
------------
 
 .. rubric:: Due dates
 
@@ -76,41 +76,12 @@ For instance, bugs should be managed through tickets :
 
 .. note::
 
-   * Initial due date of the ticket set as read only if it is calculated from the setting of "delays for tickets"
-   
-
------------
+   Initial due date of the ticket set as read only if it is calculated from the setting of "delays for tickets"
 
 .. rubric:: Product, component and versions fields
 
 * Allows to identify the product and component relating to the issue.
 * Identifies from which versions, the issue occurs and to which versions a resolution will be applied. 
-
- .. compound:: **Versions identified**
-
-    * A ticket can identify all versions allocated.
-    * Possibility to define a main version and the other versions allocated.
-
-.. note:: 
-
-   * More detail, see: :ref:`Product concept<product-concept>`.
-
-
------------
-
-.. rubric:: Responsible of product
-
-A responsible can be defined for a product or component.
-
-If a product or component is selected, the responsible defined can be automatically assigned to the ticket.
-
-.. note:: Global parameter: Ticket responsible from product responsible
-
-   * This parameter allows to define, if the defined responsible is automatically assigned to the ticket or not.
-
-.. raw:: latex
-
-    \newpage
 
 .. sidebar:: Other sections
 
@@ -118,24 +89,44 @@ If a product or component is selected, the responsible defined can be automatica
    * :ref:`Attachments<attachment-section>`
    * :ref:`Notes<note-section>`
    
+ .. compound:: **Versions identified**
 
-.. rubric:: Section: Description
+    * A ticket can identify all versions allocated.
+    * Possibility to define a main version and the other versions allocated.
+    * See: :ref:`Product concept<product-concept>`.
+
+.. rubric:: Responsible of product
+
+
+   
+   
+A responsible can be defined for a product or component.
+
+If a product or component is selected, the responsible defined can be automatically assigned to the ticket.
+
+.. note:: Ticket responsible from product responsible
+
+   This parameter, in Global parameters, allows to define, if the defined responsible is automatically assigned to the ticket.
+   
+   See: :ref:`Global Parameters<globalParam_tickets>`
+
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: 
-   :widths: 20, 80
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 40, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
      - Unique Id for the ticket.
-   * - **Name**
+   * - |RequiredField| Name
      - Short description of the ticket.
-   * - **Ticket type**
+   * - |RequiredField| Ticket type
      - Type of ticket.
-   * - **Project**
+   * - |RequiredField| Project
      - The project concerned by the ticket.
    * - :term:`External reference`
      - External reference of the ticket.
@@ -160,9 +151,7 @@ If a product or component is selected, the responsible defined can be automatica
    * - :term:`Description`
      - Complete description of the ticket.
 
-**\* Required field**
-
-.. topic :: Field: Context
+.. topic :: Field Context
 
    * Contexts are initialized for IT Projects as “Environment”, “OS” and “Browser”. 
    * This can be easily changed values in :ref:`context` screen.  
@@ -177,19 +166,19 @@ If a product or component is selected, the responsible defined can be automatica
    * Click on |buttonAdd| to add a other version, see :ref:`multi-version-selection`.
 
 
-.. rubric:: Section: Treatment
+.. rubric:: Section Treatment
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: 
-   :widths: 20, 80
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 40, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - Planning activity
      - Activity where global work for this kind of ticket is planned. 
-   * - **Status**
+   * - |RequiredField| Status
      - Actual :term:`status` of the ticket.
    * - Resolution
      - Ticket resolution.
@@ -226,29 +215,25 @@ If a product or component is selected, the responsible defined can be automatica
    * - :term:`Result`
      - Complete description of the resolution of the ticket. 
  
-**\* Required field**
-
-.. topic:: Field: Priority
+.. topic:: Priority
 
    * Automatically calculated from Urgency and Criticality values. See: :ref:`priority-calculation`.
    * Can be changed manually.
-
-.. topic:: Note
-
-   * Notion of regression can be added.
-
-.. topic:: Field: Left work
+   
+   Notion of regression can be added.
+   
+   **Left work**
 
    * Automatically calculated as Estimated – Real.
    * Set to zero when ticket is done.
 
 
-.. topic:: Fields: Target product version & Target comp. version
+   **Target product version & Target comp. version**
 
    * The list of values will be filtered depends on the selected value in fields "Product and component".
    * Click on |buttonAdd| to add a other version, see :ref:`multi-version-selection`.
 
-.. topic:: Field: Solved
+   **Field Solved**
 
    * The box is automatically checked or unchecked, according to the resolution selected.
 
@@ -256,23 +241,36 @@ If a product or component is selected, the responsible defined can be automatica
 
     \newpage
 
-.. rubric:: Button: Start/End work
+.. rubric:: Button **Start/End work**
 
-* This button is clock on/off timer.
-* If connected user is a resource, he has the possibility to start working on the ticket.
-* When work is finished, he will just have to stop the timer.
+.. figure:: /images/GUI/TICKET_ZONE_Button_StartWork.png
+   :alt: Button start work
+   
+* The start Work / Stop Work button is a clock on / off timer.
+* If the logged in user is a resource, he or she has the option to start working on the ticket.
+* Click the "Start work" button to start timing the processing time on the ticket.
+* The start time is then displayed under the button and the button changes name
 
-.. note::
+.. figure:: /images/GUI/TICKET_ZONE_StartWork.png
+   :alt: Button start work
 
-   * Closing the application or starting work on another ticket will automatically stop the current ongoing work.
+* Once the work is done, press the "stop work" button
+* The spend time will automatically be converted as real work
+* It'll be transferred on planning activity if it is set
+* A decrease in "left work" on activity will be carried out
 
-* The spend time will automatically be converted as real work, and transferred on planning activity if it is set (decreasing left work on the activity). 
+.. figure:: /images/GUI/TICKET_ZONE_StopWork.png
+   :alt: Button stop work
+   
+.. attention::
 
-.. rubric:: Button: Dispatch
+   Closing the application or starting work on another ticket will automatically stop the current ongoing work. 
+
+.. rubric:: Button Dispatch
 
 This button allows to dispatch ticket.
 
-.. figure:: /images/GUI/BOX_DispatchWork.png
+.. figure:: /images/GUI/TICKET_BOX_DispatchWork.png
    :alt: Dialog box - Dispatch work 
    :align: center
 
@@ -315,7 +313,7 @@ In the version fields, it's possible to set several versions.
 * Click on |buttonAdd| to add a other version. 
 * Click on |buttonIconDelete| to delete a version.
 
-.. figure:: /images/GUI/BOX_AddOtherVersion.png
+.. figure:: /images/GUI/TICKET_BOX_AddOtherVersion.png
    :alt: Dialog box - Add other version 
    :align: center
 

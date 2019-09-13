@@ -6,7 +6,7 @@
 
 .. title:: Real work allocation
 
-.. index:: ! Real work allocation 
+.. index:: Real work allocation 
 
 .. _RWA:
 
@@ -15,19 +15,23 @@ Real work allocation
 
 This screen is devoted to input of real work.
 
-Resource enters work day by day, on each assigned task.
+The resource informs his work day by day, for each assigned task.
 
 Data entry for one resource, on a weekly base.
 
 .. note::
 
-   * The corresponding cost to the real work is automatically updated to the assignment, activity and project.
+   The corresponding cost to the real work is automatically updated to the assignment, activity and project.
 
-.. warning:: **Global parameter:** Number of hours per **day**
+.. warning:: 
+
+   **Global parameter - Number of hours per day**
 
    * In global parameters screen, you can define wether work will be entered in hours or in days.
    * If you enter work in hours, you must define  the parameter **number of hours per day** before some real work has been entered.
    * After first work is entered, this parameter will be locked.
+      
+   **see:** :ref:`Global Parameters<work-time>`
 
 .. figure:: /images/GUI/REALWORK_SCR_TimeSheetZone2.png
    :alt: Timesheet zone screen
@@ -54,7 +58,7 @@ Data entry for one resource, on a weekly base.
 
 .. note::
 
-   * The planned work will be deleted if the real work is entered instead of planned work (to avoid duplication of work in reports) to see it you have to refresh the screen.
+   The planned work will be deleted if the real work is entered instead of planned work (to avoid duplication of work in reports) to see it you have to refresh the screen.
 
 .. rubric:: |three| Filters
 
@@ -80,10 +84,13 @@ Filters allow to define the list of assigned tasks displayed.
 
 * Show ID to identify all single task.
 
-.. note:: **Global parameter** "Display only handled tasks"
+.. note:: 
 
-   * If the value of the parameter is set to "Yes", only tasks taken over (status "handled") will be displayed.
-   * The checkbox "Hide not handled items" will be hidden.
+   **Global parameter - "Display only handled tasks"**
+
+   If the value of the parameter is set to "Yes", only tasks taken over (status "handled") will be displayed.
+   
+   The checkbox "Hide not handled items" will be hidden.
 
 .. rubric:: |four| Buttons
 
@@ -169,32 +176,37 @@ Buttons of the timesheet:
 
 .. note:: The comments |Note|
 
-   * fly over the icon with the mouse to see the comment
+   fly over the icon with the mouse to see the comment
    
    .. figure:: /images/GUI/REALWORK_BOX_Timesheet_ViewComment.PNG
    
    * Click on the icon to open windows view comments
       
    .. figure:: /images/GUI/REALWORK_BOX_leftclickNote.png
-
-
-    * **Planned dates**: Planned start and end dates.
-    * **Assigned**: Planned work assigned to the resource.
-    * **Real**: Sum of work done by the resource.
-    * **Left**: The remaining planned work. 
-    * **Reassessed**: The work needed to complete the task.
+      :alt: 
+      :align: center
+             
         
 .. compound:: |D| **Imput fields**
 
-.. figure:: /images/GUI/REALWORK_ZONE_BGColorYellow.png
-   :align: left
-
 Each day, for each task, an input field allows you to enter your actual work.
 
-The column of the day is highlighted with a yellow background.
+The column of the day is highlighted with a yellow background
 
 see: :ref:`inputFields-section`
-    
+
+In order to see and know the assignment times on a task, several columns indicate the periods that are assigned to a resource
+
+      * **Planned dates**: Planned start and end dates.
+      * **Assigned**: Planned work assigned to the resource.
+      * **Real**: Sum of work done by the resource.
+      * **Left**: The remaining planned work. 
+      * **Reassessed**: The work needed to complete the task. 
+      
+.. figure:: /images/GUI/REALWORK_ZONE_RowsTime.png
+   :scale: 60%
+              
+          
 **Total of days**
 
 On the last column is the sum for all days of the week. 
@@ -226,7 +238,7 @@ Selection timesheet
 
 * By default, users can only select themselves as a resource.
 
-* Access to other resources timesheet depending on :ref:`specific-access-mode`, then user can select other resources timesheets. 
+* Access to other resources timesheet depending on :ref:`specific_access`, then user can select other resources timesheets. 
 
 * Clicking on the checkbox below allows to select only resources allocated to the selected project on the list roll displayed. 
 
@@ -244,6 +256,8 @@ Selection timesheet
   * Select year and week |two| 
   
   * Or select the first day of the week |three| 
+  
+  * Or click on the **Today** button to return to the current week
 
 .. rubric:: |four| |five| |six| Displayed timesheet
 
@@ -385,7 +399,7 @@ The task status can be changed automatically according to data entries on real w
 
     .. note::
 
-       * Move the cursor over the icon to see the message.
+       Move the cursor over the icon to see the message.
 
  .. compound:: **Common issue**
 
