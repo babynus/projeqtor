@@ -3006,7 +3006,7 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
     $fontSize=(isset($attrs['font-size']))?intval($attrs['font-size']):'';
     //florent ticket 4102
     if( Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and $included==false){
-      $tabName='Detail';
+      $tabName=i18n("colDetail");
       if(isset($arrayGroupe[$lc]['99'])){
         $tabName=ucfirst($arrayGroupe[$lc]['99']);
       }
@@ -7586,27 +7586,27 @@ function endBuffering($prevSection, $included) {
         'assignment'=>array('2'=>'left', '3'=>'extra','99'=>'progress'),
         'affectations'=>array('2'=>'right', '3'=>'right','99'=>'allocation'),
         'attachment'=>array('2'=>'bottom', '3'=>'extra','99'=>'note'), 
-        'attendees'=>array('2'=>'right', '3'=>'extra','99'=>'pane'), 
-        'billline'=>array('2'=>'bottom', '3'=>'bottom','99'=>'pane'), 
-        'billlineterm'=>array('2'=>'bottom', '3'=>'bottom','99'=>'pane'), 
-        'calendar'=>array('2'=>'bottom', '3'=>'bottom','99'=>'pane'), 
+        'attendees'=>array('2'=>'right', '3'=>'extra','99'=>'detail'), 
+        'billline'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
+        'billlineterm'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
+        'calendar'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
         'description'=>array('2'=>'left', '3'=>'left','99'=>'description'), 
         'evaluation'=>array('2'=>'left', '3'=>'extra','99'=>'progress'), 
         'evaluationcriteria'=>array('2'=>'right', '3'=>'extra','99'=>'progress'), 
-        'expensedetail'=>array('2'=>'bottom', '3'=>'bottom','99'=>'pane'), 
-        'helpallowedwords'=>array('3'=>'bottom', '3'=>'extra','99'=>'pane'), 
-        'helpallowedreceivers'=>array('3'=>'bottom', '3'=>'extra','99'=>'pane'), 
+        'expensedetail'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
+        'helpallowedwords'=>array('3'=>'bottom', '3'=>'extra','99'=>'detail'), 
+        'helpallowedreceivers'=>array('3'=>'bottom', '3'=>'extra','99'=>'detail'), 
         'hierarchicorganizationprojects'=>array('2'=>'bottom', '3'=>'extra','99'=>'dependency'), 
-        'iban'=>array('2'=>'right', '3'=>'extra','99'=>'pane'), 
-        'internalalert'=>array('2'=>'right', '3'=>'extra','99'=>'pane'), 
+        'iban'=>array('2'=>'right', '3'=>'extra','99'=>'detail'), 
+        'internalalert'=>array('2'=>'right', '3'=>'extra','99'=>'detail'), 
         'link'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'), 
         'link_requirement'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'), 
         'link_deliverable'=>array('2'=>'left', '3'=>'extra','99'=>'link'), 
         'link_activity'=>array('2'=>'left', '3'=>'extra','99'=>'link'),
         'listtypeusingworkflow'=>array('2'=>'right', '3'=>'extra','99'=>'link'), 
         'lock'=>array('2'=>'left', '3'=>'left','99'=>'treatment'), 
-        'mailtext'=>array('2'=>'bottom', '3'=>'bottom','99'=>'pane'), 
-        'miscellaneous'=>array('2'=>'right', '3'=>'extra','99'=>'pane'), 
+        'mailtext'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
+        'miscellaneous'=>array('2'=>'right', '3'=>'extra','99'=>'detail'), 
         'note'=>array('2'=>'bottom', '3'=>'extra','99'=>'note'), 
         'notificationtitle'=>array('2'=>'left', '3'=>'left','99'=>'note'), 
         'notificationrule'=>array('2'=>'left', '3'=>'left','99'=>'note'), 
@@ -7625,9 +7625,9 @@ function endBuffering($prevSection, $included) {
         'productbusinessfeatures'=>array('2'=>'right', '3'=>'right','99'=>'link'), 
         'productversions'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
         'providerterm'=>array('2'=>'right', '3'=>'extra','99'=>'link'), 
-        'receivers'=>array('3'=>'bottom', '3'=>'extra','99'=>'pane'), 
+        'receivers'=>array('3'=>'bottom', '3'=>'extra','99'=>'detail'), 
         'resourcesofobject'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'), 
-        'resourcecost'=>array('2'=>'right', '3'=>'extra','99'=>'pane'),
+        'resourcecost'=>array('2'=>'right', '3'=>'extra','99'=>'detail'),
         'subprojects'=>array('2'=>'right', '3'=>'right','99'=>'dependency'),
         'subproducts'=>array('2'=>'right', '3'=>'right','99'=>'dependency'),
         'subbudgets'=>array('2'=>'right', '3'=>'extra','99'=>'dependency'), 
@@ -7641,12 +7641,12 @@ function endBuffering($prevSection, $included) {
         'testcaserun'=>array('2'=>'bottom', '3'=>'bottom','99'=>'progress'), 
         'testcaserunsummary'=>array('2'=>'left', '3'=>'extra','99'=>'progress'), 
         'testcasesummary'=>array('2'=>'right', '3'=>'extra','99'=>'progress'),
-        'totalfinancialsynthesis'=>array('2'=>'bottom', '3'=>'bottom','99'=>'pane'),
+        'totalfinancialsynthesis'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
         'valuealertoverwarningoverokunder'=>array('2'=>'right', '3'=>'right','99'=>'progress'),
         'versionprojectversions'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
-        'void'=>array('2'=>'right', '3'=>'right','99'=>'pane'), 
-        'workflowdiagram'=>array('2'=>'bottom', '3'=>'bottom','99'=>'pane'), 
-        'workflowstatus'=>array('2'=>'bottom', '3'=>'bottom','99'=>'pane'));
+        'void'=>array('2'=>'right', '3'=>'right','99'=>'detail'), 
+        'workflowdiagram'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
+        'workflowstatus'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'));
     $arrayGroupe=$sectionPosition;
     // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
     // if(Parameter::getGlobalParameter('useOrganizationBudgetElement')==="YES") {
@@ -7660,7 +7660,7 @@ function endBuffering($prevSection, $included) {
     }
     $sectionName=strtolower($prevSection);
     if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$included ){
-      $groupe='pane';
+      $groupe='detail';
       if(isset($sectionPosition[$sectionName]['99'])){
         $groupe=$sectionPosition[$sectionName]['99'];
       }
@@ -7678,7 +7678,7 @@ function endBuffering($prevSection, $included) {
         $paneAllocation.=$display;
       }else if($groupe=='link'){
         $paneLink.=$display;
-      }else if($groupe=='pane'){
+      }else if($groupe=='detail'){
         $pane.=$display;
       }else if($groupe=='configuration'){
         $paneConfiguration.=$display;
