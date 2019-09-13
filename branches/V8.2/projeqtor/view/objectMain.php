@@ -77,20 +77,19 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
 	     <?php include 'objectList.php'?>
 	  </div>
 	  <div id="contentDetailDiv" dojoType="dijit.layout.ContentPane" region="center"  style="width:<?php echo $tableWidth[1];?>;">
-	      <script type="dojo/connect" event="resize" args="evt">
-              var paramDiv=<?php echo json_encode($positionListDiv); ?>;
-              var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
-              if(paramDiv=="top" && paramMode!='5'){
-                saveDataToSession("contentPaneDetailDivHeight<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
-              }else if(paramMode!='5'){
-              saveDataToSession("contentPaneDetailDivWidth<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
-              var param=dojo.byId('objectClass').value;
-              var paramId=dojo.byId('objectId').value;
-              if(paramId !='' && multiSelection==false){
-                loadContent("objectDetail.php?objectClass="+param+"&objectId="+paramId, "detailDiv", 'listForm');  
-              }else if(multiSelection==true){
-               loadContent('objectMultipleUpdate.php?objectClass=' + param,'detailDiv')
-              }
+	    <script type="dojo/connect" event="resize" args="evt">
+          var paramDiv=<?php echo json_encode($positionListDiv); ?>;
+          var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
+          if(paramDiv=="top" && paramMode!='5'){
+            saveDataToSession("contentPaneDetailDivHeight<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
+          } else if(paramMode!='5'){
+            saveDataToSession("contentPaneDetailDivWidth<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
+            var param=dojo.byId('objectClass').value;
+            var paramId=dojo.byId('objectId').value;
+            if(paramId !='' && multiSelection==false){
+              loadContent("objectDetail.php?objectClass"+param+"&objectId="+paramId, "detailDiv", 'listForm');  
+            }else if(multiSelection==true){
+              loadContent('objectMultipleUpdate.php?objectClass=' + param,'detailDiv');
             }
           }
           //resizeListDiv();
@@ -102,7 +101,6 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
           }
           if (width<1300) {
             dojo.query(".parentBudgetSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-            dojo.query(".clientSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
           }
           if (width<1100) {
             refWidth=25;
@@ -121,9 +119,13 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
           if (width<700) {
             dojo.query(".idSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
           }
+          if (width<620) {
+            dojo.query(".idleSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
+          }
           if (width<600) {
             dojo.query(".nameSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-          }        </script>
+          }
+         </script>
 	    <div class="container" dojoType="dijit.layout.BorderContainer"  liveSplitters="false">
 	       <div id="detailBarShow" class="dijitAccordionTitle"
               onMouseover="hideList('mouse');" onClick="hideList('click');"
