@@ -95,7 +95,6 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
           }
           //resizeListDiv();
           var width = parseInt(dojo.style('listDiv', "width"));
-          console.log(width);
           dojo.query(".allSearchTD").forEach(function(node, index, nodelist) { node.style.display="table-cell";});
           var refWidth=50;
           if (width<1650) {
