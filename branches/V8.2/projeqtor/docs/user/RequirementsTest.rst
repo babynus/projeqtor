@@ -2,7 +2,7 @@
 
 .. title:: Requirements and Tests
 
-.. index:: ! Requirement
+.. index:: Requirement
 
 .. _requirement:
 
@@ -36,10 +36,6 @@ It can be linked to test cases, it's used to describe how you will test that a g
 * When test case run status is set to **failed**, the reference to a ticket must be defined (reference to the incident).
 * When the requirement is linked to a test case with this run status, ticket is automatically linked to the requirement. 
 
-.. raw:: latex
-
-    \newpage
-
 .. rubric:: Predecessor and successor elements
 
 * Requirements can have predecessors and successors.
@@ -54,34 +50,29 @@ It can be linked to test cases, it's used to describe how you will test that a g
 
   .. describe:: Respect of planned due date
 
-
-.. raw:: latex
-
-    \newpage
-
 .. sidebar:: Other sections
 
    * :ref:`Summary of test cases<summary-test-case-section>`
-   * :ref:`Predecessor and Sucessor element<predSuces-element-section>`
+   * :ref:`Predecessor and Sucessor<predSuces-element-section>`
    * :ref:`Linked element<linkElement-section>`   
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
-
-.. rubric:: Section: Description
+   
+.. rubric:: Section  Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 40, 60
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
-     - Unique Id for the requirement.
-   * - **Name**
+     - Unique Id for the requirement
+   * - |RequiredField| Name
      - Short description of the requirement.
-   * - **Requirement type**
+   * - |RequiredField| Requirement type
      - Type of requirement.
    * - Project
      - The project concerned by the requirement.
@@ -99,29 +90,27 @@ It can be linked to test cases, it's used to describe how you will test that a g
      - Initial due date.
    * - Planned due date
      - Planned due date.
-   * - **Description**
+   * - |RequiredField| Description
      - Long :term:`description` of the requirement.
 
-**\* Required field**
-
-.. topic:: Fields: Project and Product
+.. topic:: Fields Project and Product
 
    * Must be concerned either with a project, a product or both.
    * If the project is specified, the list of values for field "Product" contains only products linked the selected project.
 
-.. rubric:: Section: Treatment
+.. rubric:: Section  Treatment
 
 .. tabularcolumns:: |l|l|
 
-.. list-table::
-   :widths: 20, 80
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 40, 60
    :header-rows: 1
 
    * - Field
      - Description
    * - Top requirement
      - Parent requirement, defining a hierarchic structure.
-   * - **Status**
+   * - |RequiredField| Status
      - Actual :term:`status` of the requirement.
    * - :term:`Responsible`
      - Resource who is responsible for the requirement.
@@ -146,13 +135,11 @@ It can be linked to test cases, it's used to describe how you will test that a g
    * - :term:`Result`
      - Description of the implementation of the requirement. 
  
-**\* Required field**
+.. topic:: Field Target version
 
-.. topic:: Field: Target version
-
-   * Contains the list of product versions available according to the project and product selected.
-
-.. rubric:: Section: Lock
+   Contains the list of product versions available according to the project and product selected.
+    
+.. rubric:: Section  Lock
 
 A requirement can be locked to ensure that its definition has not changed during the implementation process.
 
@@ -181,16 +168,11 @@ A requirement can be locked to ensure that its definition has not changed during
    * - Locked since
      - Date and time when the requirement was locked.
 
-
-
-
-
-
 .. raw:: latex
 
     \newpage
 
-.. index:: ! Test case
+.. index:: Test case
 
 .. _test-case:
 
@@ -207,7 +189,7 @@ You may define several tests to check a requirement, or check several requiremen
 
 The test case is defined for a project, a product or one these components.
 
-.. index:: ! Test case (Run status)
+.. index:: Test case (Run status)
 
 .. _test-case-run-status:
 
@@ -235,12 +217,7 @@ The test case is defined for a project, a product or one these components.
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
 
-.. raw:: latex
-
-    \newpage
-
-
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
@@ -252,9 +229,9 @@ The test case is defined for a project, a product or one these components.
      - Description
    * - :term:`Id`
      - Unique Id for the test case.
-   * - **Name**
+   * - |RequiredField| Name
      - Short description of the test case.
-   * - **Test type**
+   * - |RequiredField| Test type
      - Type of test case.
    * - Project
      - The project concerned by the test case.
@@ -266,37 +243,29 @@ The test case is defined for a project, a product or one these components.
      - External reference for the test case.
    * - Environment
      - List of 3 items describing the context of the test case.
-   * - **Description**
+   * - |RequiredField| Description
      - Complete :term:`description` of the test case.
 
-**\* Required field**
-
-.. topic:: Fields: Project and Product
+.. topic:: Fields Project and Product
 
    * Must be concerned either with a project, a product or both.
    * If the project is specified, the list of values for field "Product" contains only products linked the selected project.
 
-.. topic:: Field: Version
+.. topic:: Field Version
 
    * Contains the list of product and component versions available according to the project and product selected.
 
-.. topic:: Field: Environment (Context)
+.. topic:: Field Environment (Context)
 
    * Contexts are initialized for IT Projects as “Environment”, “OS” and “Browser”. 
    * This can be easily changed values in :ref:`context` screen.  
 
-.. topic:: Field: Description
+.. topic:: Field Description
 
    * The description of test case should describe the steps to run the test.
 
 
-
-.. raw:: latex
-
-    \newpage
-
-
-.. rubric:: Section: Treatment
+.. rubric:: Section  Treatment
 
 .. tabularcolumns:: |l|l|
 
@@ -308,7 +277,7 @@ The test case is defined for a project, a product or one these components.
      - Description
    * - Parent test case
      - Parent test case, defining a hierarchic structure for test cases.
-   * - **Status**
+   * - |RequiredField| Status
      - Actual :term:`status` of the requirement.
    * - :term:`Responsible`
      - Resource who is responsible of the test case.
@@ -327,19 +296,17 @@ The test case is defined for a project, a product or one these components.
    * - :term:`Expected result<Result>`
      - Description of expected result of the test.
  
-**\* Required field**
+.. topic:: Field Prerequisite
 
-.. topic:: Field: Prerequisite
+   If left blank and test case has a parent, parent prerequisite will automatically be copied here. 
 
-   * If left blank and test case has a parent, parent prerequisite will automatically be copied here. 
-
-.. rubric:: Section: Test case runs
+.. rubric:: Section  Test case runs
 
 * This section allows to display a complete list of test case runs.
 * These are links of the test to test sessions.
 * This list also displays the current status of the test in the sessions.
 
-.. topic:: Field: Summary
+.. topic:: Field Summary
 
    * An icon whose presents the run status of the test case.
    * For detail, see: :ref:`Summary of test case run status<summary-test-case-run-status>`. 
@@ -347,7 +314,7 @@ The test case is defined for a project, a product or one these components.
 
 .. note ::
 
-   * To go, click on the corresponding test session.
+   To go, click on the corresponding test session.
 
 
 .. tabularcolumns:: |l|l|
@@ -367,7 +334,7 @@ The test case is defined for a project, a product or one these components.
 
     \newpage
 
-.. index:: ! Test session
+.. index:: Test session
 
 .. _test-session:
 
@@ -420,7 +387,7 @@ The test session is defined for a project, a product or one these components.
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`   
 
-.. rubric:: Section: Description 
+.. rubric:: Section Description 
 
 .. tabularcolumns:: |l|l|
 
@@ -432,9 +399,9 @@ The test session is defined for a project, a product or one these components.
      - Description
    * - :term:`Id`
      - Unique Id for the test session.
-   * - **Name**
+   * - |RequiredField| Name
      - Short description of the test session.
-   * - **Session type**
+   * - |RequiredField| Session type
      - Type of test session.
    * - Project
      - The project concerned by the test session.
@@ -447,18 +414,16 @@ The test session is defined for a project, a product or one these components.
    * - :term:`Description`
      - Complete description of the test session.
 
-**\* Required field**
-
-.. topic:: Fields: Project and Product
+.. topic:: Fields Project and Product
 
    * Must be concerned either with a project, a product or both.
    * If the project is specified, the list of values for field "Product" contains only products linked the selected project.
 
-.. topic:: Field: Version
+.. topic:: Field Version
 
    * Contains the list of product and component versions available according to the project and product selected.
 
-.. rubric:: Section: Treatment
+.. rubric:: Section Treatment
 
 .. tabularcolumns:: |l|l|
 
@@ -472,7 +437,7 @@ The test session is defined for a project, a product or one these components.
      - Parent activity, to define hierarchic position in the Gantt.
    * - Parent session
      - Parent session, to define session of sessions.
-   * - **Status**
+   * - |RequiredField| Status
      - Actual :term:`status` of the test session.
    * - :term:`Responsible`
      - Resource who is responsible of the test session.
@@ -487,13 +452,11 @@ The test session is defined for a project, a product or one these components.
    * - :term:`Result`
      - Summary result of the test session. 
  
-**\* Required field**
-
 .. raw:: latex
 
     \newpage
 
-.. rubric:: Section: Test case runs
+.. rubric:: Section Test case runs
 
 This section allows to manage test case runs.
 
@@ -510,18 +473,18 @@ This section allows to manage test case runs.
    * - Status
      - Status of test case run.
 
-.. topic:: Field: Test case
+.. topic:: Field Test case
    
    * This icon |Note| appears when the test case run comment field is filled.
    * Moving the mouse over the icon will display the test case run comments.
 
-.. topic:: Field: Detail
+.. topic:: Field Detail
 
    * Moving the mouse over the icon |Description| will display the test case description.
    * Moving the mouse over the icon |Result| will display the test case expected result.
    * Moving the mouse over the icon |Prerequisite| will display the test case prerequisite. 
 
-.. topic:: Field: Status
+.. topic:: Field Status
  
    * If status of test case run is **failed**, information about selected ticket is displayed too.
 
@@ -545,7 +508,7 @@ This section allows to manage test case runs.
     * When status is set to failed, the reference to a ticket must be defined (reference to the incident).
     * The referenced ticket is automatically added in linked element. 
 
-.. figure:: /images/GUI/BOX_TestCaseRun.png
+.. figure:: /images/GUI/REQUIREMENT_BOX_TestCaseRun.png
    :alt: Dialog box - Test case run 
    :align: center
 
@@ -563,19 +526,11 @@ This section allows to manage test case runs.
    * - Allow duplicate
      - Check the box, if you allow this test case can be used more than once in a test session.
 
-
-
-
-
-.. figure:: /images/GUI/BOX_TestCaseRunDetail.png
+.. figure:: /images/GUI/REQUIREMENT_BOX_TestCaseRunDetail.png
    :alt: Diaglog box - Test case run detail
    :align: center
 
    Diaglog box - Test case run detail
-
-
-
-
 
 .. list-table:: Fields - Test case run detail dialog box
    :widths: 20, 80
@@ -592,9 +547,9 @@ This section allows to manage test case runs.
    * - Comments
      - Comments of test case run.
 
-.. topic:: Field: Ticket
+.. topic:: Field Ticket
 
-   * Field appear only whether status of test case run is **failed**.
+   Field appear only whether status of test case run is **failed**.
 
 
 
@@ -612,15 +567,15 @@ This section summarizes the status of test case runs to requirement and test ses
 
 .. rubric:: Requirement
 
-* Summarizes the status of test case runs for test cases are linked to the requirement.
+Summarizes the status of test case runs for test cases are linked to the requirement.
 
- .. note:: Field: Total 
+ .. note:: Field Total 
 
-    * Because a test case can be linked to several test sessions, total can be greater than linked to the requirement.
+    Because a test case can be linked to several test sessions, total can be greater than linked to the requirement.
 
 .. rubric:: Test session
 
-* Summarizes the status of test case runs in the test session.
+Summarizes the status of test case runs in the test session.
 
 ----------
 
@@ -659,7 +614,7 @@ This section summarizes the status of test case runs to requirement and test ses
 
 .. note::
 
-   * Percent to each status is displayed.
+   Percent to each status is displayed.
 
 
 
