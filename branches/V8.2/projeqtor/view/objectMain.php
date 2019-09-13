@@ -119,7 +119,7 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
           if (width<700) {
             dojo.query(".idSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
           }
-          if (width<620) {
+          if (width<630) {
             dojo.query(".idleSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
           }
           if (width<600) {

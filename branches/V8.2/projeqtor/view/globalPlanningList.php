@@ -473,7 +473,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                 
 		            <td style="text-align: right; align: right;">
 		              <table width="100%"><tr><td>
-                  <?php echo i18n("labelShowWbs");?>
+                  <?php echo i18n("labelShowWbsShort");?>
                   </td><td width="35px">
 		              <div title="<?php echo i18n('showWbs')?>" dojoType="dijit.form.CheckBox" 
                     class="whiteCheck" type="checkbox" id="showWBS" name="showWBS"
@@ -484,7 +484,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                     </script>
 		              </div>&nbsp;
 		              </td></tr><tr><td>
-		              <?php echo i18n("labelShowIdle");?>
+		              <?php echo i18n("labelShowIdleShort");?>
                   </td><td>
 		              <div title="<?php echo i18n('showIdleElements')?>" dojoType="dijit.form.CheckBox" 
                      class="whiteCheck" type="checkbox" id="listShowIdle" name="listShowIdle"
@@ -497,7 +497,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                   </td></tr>
                   <?php if (strtoupper(Parameter::getGlobalParameter('displayResourcePlan'))!='NO') {?>
                   <tr><td>
-                  <?php echo i18n("labelShowResource");?>
+                  <?php echo i18n("labelShowResourceShort");?>
                   </td><td>
                   <div title="<?php echo i18n('showResources')?>" dojoType="dijit.form.CheckBox" 
                     class="whiteCheck" type="checkbox" id="listShowResource" name="listShowResource"
