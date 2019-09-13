@@ -295,7 +295,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
 		              <td>&nbsp;</td>
 		              <td width="35px">&nbsp;</td>
 		              <td width="200px">
-                  <?php echo i18n("labelShowWbs");?>
+                  <?php echo i18n("labelShowWbsShort");?>
                   </td><td width="35px">
 		              <div title="<?php echo i18n('showWbs')?>" dojoType="dijit.form.CheckBox" 
                     type="checkbox" id="showWBS" name="showWBS" class="whiteCheck"
@@ -319,7 +319,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                   </div>&nbsp;
                   </td>
 		              <td>
-		              <?php echo i18n("labelShowIdle");?>
+		              <?php echo i18n("labelShowIdleShort");?>
                   </td><td>
 		              <div title="<?php echo i18n('showIdleElements')?>" dojoType="dijit.form.CheckBox" 
                     type="checkbox" id="listShowIdle" name="listShowIdle" class="whiteCheck"
