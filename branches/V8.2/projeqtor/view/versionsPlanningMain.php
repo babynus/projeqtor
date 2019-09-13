@@ -58,7 +58,7 @@ $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
               var param=dojo.byId('objectClass').value;
               var paramId=dojo.byId('objectId').value;
               if(paramId !='' && multiSelection==false){
-                loadContent("objectDetail.php?objectClass"+param+"&objectId="+paramId, "detailDiv", 'listForm');  
+                loadContent("objectDetail.php?objectClass"+param=+"&objectId="+paramId, "detailDiv", 'listForm');  
               }else if(multiSelection==true){
                loadContent('objectMultipleUpdate.php?objectClass=' + param,
                   'detailDiv')

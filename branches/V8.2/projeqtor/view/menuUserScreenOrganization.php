@@ -31,14 +31,28 @@ $showMenuBar=Parameter::getUserParameter('paramShowMenuBar');
 $showMenuBar='YES';
 if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
 //Param
+$currentScreen="";
+if(isset($_REQUEST['currentScreen'])){
+  $currentScreen=$_REQUEST['currentScreen'];
+}
+debugLog($currentScreen);
 if(sessionValueExists("paramScreen")){
   if(getSessionValue("paramScreen")=='5') {
   	  Parameter::storeUserParameter("paramScreen", '1');
+  	  
   }
   setSessionValue("paramScreen", "0");
 }
 $paramScreen=Parameter::getUserParameter('paramScreen');
+$paramRightDiv=Parameter::getUserParameter('paramRightDiv');
 $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
+if($paramRightDiv=='3'){
+  $ActivityStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$currentScreen);
+  debugLog($ActivityStream);
+}else{
+  $ActivityStream=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$currentScreen);
+}
+debugLog($ActivityStream);
 ?>
 
 <div id="mainDivMenu" class="container" >
@@ -46,7 +60,7 @@ $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
     <tr height="<?php echo $iconSize+8; ?>px">  
       <td width="<?php echo (isIE())?37:35;?>px" > 
         <div id="changeLayout" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px;
-        <?php if( $paramScreen=='5'){echo 'opacity:0.5;cursor:not-allowed;';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
+        <?php if( $paramScreen=='5'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
          onclick="<?php if($paramScreen=='1' or $paramScreen=='2'){echo 'switchModeLayout(\'5\')';}?>">
           <table >
             <tr>
@@ -59,7 +73,7 @@ $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
         <div id="horizontalLayout"  class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramScreen=='1'){echo 'opacity:0.5;cursor:not-allowed;';}?>" title="<?php echo i18n("showListTop");?>"
+        <?php if($paramScreen=='1'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" title="<?php echo i18n("showListTop");?>"
         onclick="<?php if($paramScreen=='2' or $paramScreen=='5'){echo 'switchModeLayout(\'1\');';}?>">
           <table >
             <tr>
@@ -72,7 +86,7 @@ $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
         <div id="verticalLayout" lass="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramScreen=='2'){echo 'opacity:0.5;cursor:not-allowed;';}?>" title="<?php echo i18n("showListLeft"); ?>"
+        <?php if($paramScreen=='2'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" title="<?php echo i18n("showListLeft"); ?>"
         onclick="<?php if($paramScreen=='1' or $paramScreen=='5' ){echo 'switchModeLayout(\'2\');';}?>">
           <table >
             <tr>
@@ -87,26 +101,42 @@ $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
     <tr height="<?php echo $iconSize+8; ?>px">  
       <td width="<?php echo (isIE())?37:35;?>px"> 
         <div id="layoutList" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramObjectDetail=='4'){echo 'opacity:0.5;cursor:not-allowed;';}?>" title="<?php echo i18n("sectionMode");?>"
+        <?php if($paramObjectDetail=='4'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" title="<?php echo i18n("sectionMode");?>"
         onclick="<?php if($paramObjectDetail=='0'){echo 'switchModeLayout(\'4\');';}?>">
           <table >
             <tr>
               <td style="width:28x;text-align:center">
-                <div class="iconLayoutList22 iconLayoutList iconSize22" style="position:absolute;top:2px;left:3px" ></div>
+                <div class="iconLayoutList22 iconLayoutList iconSize22" style="position:absolute;top:2px;left:4px" ></div>
               </td>
             </tr>
           </table>    
        </div>
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
-        <div id="layoutTab" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramObjectDetail=='0'){echo 'opacity:0.5;cursor:not-allowed;';}?>" 
+        <div id="layoutTab" class="pseudoButton"   style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
+        <?php if($paramObjectDetail=='0'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" 
         title="<?php echo i18n("tabularMode");?>"
         onclick="<?php if($paramObjectDetail=='4'){echo 'switchModeLayout(\'0\');';}?>">
           <table >
             <tr>
               <td style="width:28x;text-align:center">
-                <div class="iconLayoutTab22 iconLayoutTab iconSize22 " style="position:absolute;top:2px;left:3px" ></div>
+                <div class="iconLayoutTab22 iconLayoutTab iconSize22 " style="position:absolute;top:2px;left:4px" ></div>
+              </td>
+            </tr>
+          </table>    
+       </div>
+      </td>
+      <td width="<?php echo (isIE())?37:35;?>px"  > 
+        <div id="hideStreamButton" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" 
+        onclick="hideStreamMode(<?php if($paramRightDiv=='3'){echo'1';}else{echo'0';}?>,false);">
+          <table >
+            <tr>
+              <td >
+              <?php if($ActivityStream==0){ debugLog('ici');?>
+                <div class="iconActivityStream22 iconActivityStream iconSize22 " style="position:absolute;top:2px;left:3px" title="<?php echo i18n("showActivityStream");?>"></div>
+              <?php }else{?>
+                <div class="iconActivityStreamClose22 iconActivityStreamClose iconSize22 " style="position:absolute;top:2px;left:3px" title="<?php echo i18n("hideActivityStream");?>"></div>
+              <?php }?>
               </td>
             </tr>
           </table>    
@@ -114,7 +144,31 @@ $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
       </td>
     </tr>
     <tr>
-     <?php if (! isIE()) {?>
+    <td width="<?php echo (isIE())?37:35;?>px">
+	   <div id="hideMenuBarBottom" class="pseudoButton" onClick="hideMenuBarShowMode();" title="<?php echo i18n('buttonShowLeftMenu')?>" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;"  >
+	     <?php if (! isset($showModuleScreen)) {?>
+		  <table>
+          <tr>
+            <td style="width:28x;text-align:center">
+              <div class="iconHideStreamLeft22 iconHideStreamLeft iconSize22 " style="position:absolute;top:2px;left:3px" ></div>
+            </td>
+          </tr>
+        </table>  
+       <?php }?>  
+   </div>
+    </td>
+    <td width="<?php echo (isIE())?37:35;?>px">   
+      <div id="hideMenuBarShowButtonTop" class="pseudoButton"   onClick="hideMenuBarShowModeTop();" title="<?php echo i18n('buttonShowTopMenu')?>" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;"  >
+          <table >
+            <tr>
+              <td style="width:28x;text-align:center">
+                <div class="iconHideStreamTop22 iconHideStreamTop iconSize22 " style="position:absolute;top:2px;left:3px" ></div>
+              </td>
+            </tr>
+          </table>    
+	  </div>
+    </td>
+    <?php if (! isIE()) {?>
     <td width="<?php echo (isIE())?37:35;?>px"> 
       <div  class="pseudoButtonFullScreen " style="height:28px; position:relative;top:0px; z-index:30; width:30px; right:0px;" onclick="toggleFullScreen()" >
         <table>
@@ -127,30 +181,7 @@ $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
       </div>
     </td>
      <?php }?> 
-    <td width="<?php echo (isIE())?37:35;?>px">   
-      <div id="hideMenuBarShowButtonTop" class="pseudoButton"   onClick="hideMenuBarShowModeTop();" title="<?php echo i18n('buttonShowTopMenu')?>" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;"  >
-          <table >
-            <tr>
-              <td style="width:28x;text-align:center">
-                <div class="iconHideStreamTop22 iconHideStreamTop iconSize22 " style="position:absolute;top:2px;left:3px" ></div>
-              </td>
-            </tr>
-          </table>    
-	  </div>
-    </td>
-    <td width="<?php echo (isIE())?37:35;?>px">
-  	  <div id="hideMenuBarBottom" class="pseudoButton" onClick="hideMenuBarShowMode();" title="<?php echo i18n('buttonShowLeftMenu')?>" style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;"  >
-  	  <?php if (! isset($showModuleScreen)) {?>
-  		  <table>
-            <tr>
-              <td style="width:28x;text-align:center">
-                <div class="iconHideStreamLeft22 iconHideStreamLeft iconSize22 " style="position:absolute;top:2px;left:3px" ></div>
-              </td>
-            </tr>
-          </table>  
-      <?php }?>  
-	  </div>
-    </td> 
+    
     </tr>
   </table>
 </div>

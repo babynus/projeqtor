@@ -111,6 +111,11 @@
             <div style="position:absolute;left:0px;width:43px;max-width:50px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>
             <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" style="margin-left:9px;width:32px;height:32px" /></div>
           </td>
+          <?php if(Parameter::getUserParameter("paramScreen")=='2'){?>
+          <td>
+            <div style="position:relative;left:0px;width:40px;max-width:50px;top:0px;height:36px;" >&nbsp;</div>
+          </td>
+          <?php }?>
           <td class="title" style="width:10%;">
             &nbsp;<?php echo i18n($_REQUEST['objectClass']);
 //ADD BY Quentin Boudier - 2017-04-26 'copylink in title of object detail    '
@@ -603,26 +608,6 @@
       
       </div>
     </td>
-    <td  style="white-space:nowrap;">
-       <?php 
-        $parmRightDiv=Parameter::getUserParameter('paramRightDiv'); 
-        $paramWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
-        $paramHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
-               if (property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream'))  {
-                    if(($paramWidth!=0 and $parmRightDiv!=3 ) or ($paramHeight!=0 and $parmRightDiv==3)){ 
-  	   ?>            
-              	   <div id="hideStreamButton" region="center" style="cursor:pointer;position:absolute;top:5px;right:0px; bottom:2px;z-index:999999;display:none;">
-              	     <a onClick="hideStreamMode(<?php if($parmRightDiv==3){echo'1';}else{echo'0';}?>,false);" id="buttonSwitchedStream" title="<?php echo i18n('showActivityStream');?>" ><span style="top:0px;display:inline-block;margin-right:12px;"><div class='iconActivityStreamWhite22 ' >&nbsp;</div></span></a>
-              	   </div>
-        <?php       }else{?>
-                     <div id="hideStreamButton" region="center" style="cursor:pointer;position:absolute;top:5px; right:0px; bottom:2px;z-index:999999">
-              	      <a onClick="hideStreamMode(<?php if($parmRightDiv==3){echo'1';}else{echo'0';}?>,false);" id="buttonSwitchedStream" title="<?php echo i18n('showActivityStream');?>" ><span style="top:0px;display:inline-block;margin-right:12px;"><div class='iconActivityStreamWhite22' >&nbsp;</div></span></a>
-              	     </div>
-        <?php       } 
-  
-              }
-      ?>
-      </td>
   </tr>
 </table>
 <?php 
