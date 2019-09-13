@@ -4793,6 +4793,7 @@ function heightLaoutActivityStream($objectClass){
         $detailRightHeight=180;
       }
       if((($detailRightHeight>$detailDivHeight ) and $paramScreen=='1' )and (!empty($detailDivHeight))){
+        
         $detailRightHeight=($detailDivHeight/2);
       }
       $rightHeight=$detailRightHeight.'px';
@@ -4801,10 +4802,11 @@ function heightLaoutActivityStream($objectClass){
     }
   }
   return $rightHeight;
+  
 }
 
 function WidthLayoutActivityStream($objectClass){
-  $paramDetailDiv=Parameter::getUserParameter('paramSreen');
+  $paramDetailDiv=Parameter::getUserParameter('paramScreen');
   $detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
   $topDivWidth=Parameter::getUserParameter('contentPaneDetailDivWidth'.$objectClass);
   if (!$detailDivWidth) $detailDivWidth=0;
