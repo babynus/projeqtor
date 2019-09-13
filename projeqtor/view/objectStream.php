@@ -97,7 +97,7 @@
       }
     
     ?>
-	   <div><span class="title" ><?php echo i18n("titleStream");?></span></div>
+	   <div style="text-align:left"><span class="title" ><?php echo i18n("titleStream");?></span></div>
 	   
 	</div>
 	<div id="activityStreamCenter" dojoType="dijit.layout.ContentPane" region="center" style="overflow-x:hidden;">
