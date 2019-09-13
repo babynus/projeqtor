@@ -251,7 +251,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
       style="display: none; z-index: 99999;"></div>
 		<?php  include 'objectButtons.php'; ?>
   </div>
-  <div id="formDiv" dojoType="dijit.layout.ContentPane" region="center" style="overflow:hidden;">
+  <div id="formDiv" dojoType="dijit.layout.ContentPane" region="center" style="overflow:<?php if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' ){echo 'hidden';}else{echo 'auto';}?>;">
 
 	<?php
   }
