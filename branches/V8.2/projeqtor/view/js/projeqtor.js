@@ -895,7 +895,6 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
   if (contentNode && page.indexOf("destinationWidth=")<0) {
     destinationWidth = dojo.style(contentNode, "width");
     destinationHeight = dojo.style(contentNode, "height");
-    
     if (destination == 'detailFormDiv' && !editorInFullScreen()) {
       widthNode = dojo.byId('detailDiv');
       if (widthNode) {
@@ -910,7 +909,6 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
       detail.style.height = destinationHeight + "px";
     	dojo.byId('detailDiv').style.top = detailTop + "px";
     }
-    console.log("destionation="+destination+", destinationHeight="+destinationHeight+", destinationWidth="+destinationWidth);
     if (page.indexOf("?") > 0) {
       page += "&destinationWidth=" + destinationWidth + "&destinationHeight="
           + destinationHeight;
@@ -5595,6 +5593,11 @@ function saveNoteStream(event){
 
 var menuRightDivSize=null;
 function hideStreamMode(param,noRefresh){
+  var currentItem=historyTable[historyPosition];
+  var currentScreen=currentItem[0];
+  if(currentScreen==null){
+    currentScreen=currentItem[2];
+  }
   if(param == '1'){
     if(dijit.byId("detailRightDiv").h != '0'){
       menuRightDivSize=dojo.byId("detailRightDiv").offsetHeight;
@@ -5602,14 +5605,12 @@ function hideStreamMode(param,noRefresh){
         h : 0
       });
       dijit.byId("centerDiv").resize();
-      setTimeout('dojo.setStyle("hideStreamButton", "display", "block");',100);
     } else {
       if (! menuRightDivSize) menuRightDivSize=((dojo.byId("centerDiv").offsetHeight)*0.15);
       dijit.byId("detailRightDiv").resize({
         h : menuRightDivSize
       });
       dijit.byId("centerDiv").resize();
-      setTimeout('dojo.setStyle("hideStreamButton", "display", "none");',100);
     }
     var detailHidden=false;
     if (dojo.byId('detailBarShow') && dojo.byId('detailBarShow').style.display=='block') detailHidden=true;
@@ -5624,14 +5625,12 @@ function hideStreamMode(param,noRefresh){
         w : 0
       });
       dijit.byId("centerDiv").resize();
-      dojo.setStyle("hideStreamButton", "display", "block");
     } else {
       if (! menuRightDivSize) menuRightDivSize=((dojo.byId("centerDiv").offsetWidth)*0.15);
       dijit.byId("detailRightDiv").resize({
         w : menuRightDivSize
       });
       dijit.byId("centerDiv").resize();
-      dojo.setStyle("hideStreamButton", "display", "none");
     }
     var detailHidden=false;
     if (dojo.byId('detailBarShow') && dojo.byId('detailBarShow').style.display=='block') detailHidden=true;
@@ -5639,6 +5638,8 @@ function hideStreamMode(param,noRefresh){
       setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50);
     }
   }
+  loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen,"mainDivMenu");
+  $( 'drawMenuUserScreenOrganization').hide();
 }
 
 function focusStream() {

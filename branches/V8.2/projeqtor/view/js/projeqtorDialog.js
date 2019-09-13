@@ -6389,6 +6389,9 @@ function switchModeLayout(paramToSend){
   }else{
     return;
   }
+  if(checkFormChangeInProgress()){
+    return;
+  }
   var objectIdScreen=dojo.byId('objectId').value;
   var currentItem=historyTable[historyPosition];
   var currentScreen=currentItem[2];
@@ -6435,8 +6438,9 @@ function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectI
   if(objectIdScreen !=''){
     loadContent("objectDetail.php", "detailDiv", 'listForm');
   }
-  loadDiv("menuUserScreenOrganization.php?"+paramDiv+"="+paramToSend,"mainDivMenu");
-}
+  loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+"&"+paramDiv+"="+paramToSend,"mainDivMenu");
+  
+  }
 var switchModeSkipAnimation=true;
 function showList(mode, skipAnimation) {
   duration=300;
@@ -6847,7 +6851,9 @@ function loadMenuBarObject(menuClass, itemName, from) {
   cleanContent("detailDiv");
   formChangeInProgress=false;
   var currentScreen=menuClass; 
+  console.log(currentScreen);
   loadContent("objectMain.php?objectClass=" + currentScreen, "centerDiv"); 
+  loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen,"mainDivMenu");
   stockHistory(currentScreen,null,"object");
   selectIconMenuBar(menuClass);
   return true;
@@ -6956,6 +6962,7 @@ function loadMenuBarItem(item, itemName, from) {
   }else {  
     showInfo(i18n("messageSelectedNotAvailable", new Array(itemName)));
   }
+  loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen,"mainDivMenu");
   stockHistory(null,null,currentScreen);
   selectIconMenuBar(item);
   return true;
