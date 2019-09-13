@@ -87,7 +87,6 @@ if ($_SERVER['REQUEST_METHOD']=='GET') {
     $uri=$_REQUEST['uri'];
     $split=explode('/',$uri);
     if (count($split)>1) {
-      debugLog("Step 1");
     	$class=ucfirst($split[0]);
     	$where="1=0";
     	if (SqlElement::class_exists($class)) {
