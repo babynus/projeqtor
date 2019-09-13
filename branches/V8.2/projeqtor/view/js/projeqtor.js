@@ -1037,8 +1037,8 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
                 .substr(dojo.byId('objectClass').value.length + 1);
             if (dojo.byId(section + "SectionCount")
                 && dojo.byId(section + "Badge")) {
-              dojo.byId(section + "Badge").innerHTML = dojo.byId(section
-                  + "SectionCount").value;
+              dojo.byId(section + "Badge").innerHTML = dojo.byId(section+ "SectionCount").value;
+              if (dojo.byId(section + "BadgeTab")) dojo.byId(section + "BadgeTab").innerHTML = dojo.byId(section+"SectionCount").value;
             }
           }
           if (destination == "detailDiv" || destination == "centerDiv") {
