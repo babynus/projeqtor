@@ -348,7 +348,7 @@ if (property_exists($objectClass,'idStatus')) {
               </td>
               <?php }?>
               <?php if ( $objectClass=='GlobalView') { ?>
-                <td width="56px">
+                <td width="56px" class="allSearchTD resetSearchTD">
                     <button dojoType="dijit.form.Button" type="button" >
                             <?php echo i18n('resetColor');?>
                             <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
@@ -460,7 +460,7 @@ if (property_exists($objectClass,'idStatus')) {
                 <?php if ( $objectClass == 'Budget'  || property_exists($obj,'idClient') || property_exists($obj,'idMailable') || property_exists($obj,'idIndicatorable')|| property_exists($obj,'idTextable')|| property_exists($obj,'idChecklistable')) {
                 }else {  
                   ?>
-                      <td width="6px">
+                      <td width="6px" class="allSearchTD resetSearchTD">
                         <button dojoType="dijit.form.Button" type="button" >
                             <?php echo i18n('resetColor');?>
                             <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
@@ -468,20 +468,19 @@ if (property_exists($objectClass,'idStatus')) {
                              var lstStat = <?php echo json_encode($lstStat); ?>;
                              resetFilter(lstStat);
                              </script>
-                          
                         </button>
-
+                      </td>
                 <?php } ?>      
               <?php } ?> 
               
               <!-- gautier #budgetParent  -->
               <?php if ( !$hideParentBudgetSearch and  $objectClass == 'Budget' ) { ?>
-               <td style="vertical-align: middle; text-align:right;" width="5px" class="parentBudgetSearchTD">
+               <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD parentBudgetSearchTD">
                  <span class="nobr">&nbsp;&nbsp;&nbsp;
                 <?php echo i18n("colParentBudget");?>
                 &nbsp;</span>
               </td>
-              <td width="5px" class="parentBudgetSearchTD">
+              <td width="5px" class="allSearchTD parentBudgetSearchTD">
                 <select title="<?php echo i18n('filterOnBudgetParent')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
                 <?php echo autoOpenFilteringSelect();?> 
                 data-dojo-props="queryExpr: '*${0}*',autoComplete:false"
@@ -496,8 +495,8 @@ if (property_exists($objectClass,'idStatus')) {
                    florent
               -->
               <?php if ($hideClientSearch and $objectClass !='GlobalView') { ?>
-              <td width="6px">
-                <button dojoType="dijit.form.Button" type="button" >
+              <td width="6px" class="allSearchTD resetSearchTD">
+                <button dojoType="dijit.form.Button" type="button">
                     <?php echo i18n('resetColor');?>
                     <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
                   <script type="dojo/method" event="onClick">
@@ -512,12 +511,12 @@ if (property_exists($objectClass,'idStatus')) {
               <!-- end  -->
               
               <?php if ( !$hideClientSearch and property_exists($obj,'idClient') ) { ?>
-              <td style="vertical-align: middle; text-align:right;" width="5px">
+              <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD clientSearchTD">
                  <span class="nobr">&nbsp;&nbsp;&nbsp;
                 <?php echo i18n("colClient");?>
                 &nbsp;</span>
               </td>
-              <td width="5px">
+              <td width="5px" class="allSearchTD clientSearchTD">
                 <select title="<?php echo i18n('filterOnClient')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
                 <?php echo autoOpenFilteringSelect();?> 
                 data-dojo-props="queryExpr: '*${0}*',autoComplete:false"
@@ -531,7 +530,7 @@ if (property_exists($objectClass,'idStatus')) {
               <!-- Ticket #3988	- Object list : boutton reset parameters  
                    florent
               -->
-              <td width="6px">
+              <td width="6px" class="allSearchTD resetSearchTD">
                 <button dojoType="dijit.form.Button" type="button" >
                     <?php echo i18n('resetColor'); ?>
                     <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
@@ -566,7 +565,7 @@ if (property_exists($objectClass,'idStatus')) {
                 </select>
               </td>
               <?php if($objectClass !='GlobalView'){?>
-              <td width="6px ">
+              <td width="6px " class="allSearchTD resetSearchTD">
                 <button dojoType="dijit.form.Button" type="button" >
                     <?php echo i18n('resetColor');?>
                     <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
