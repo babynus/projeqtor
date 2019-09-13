@@ -895,6 +895,7 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
   if (contentNode && page.indexOf("destinationWidth=")<0) {
     destinationWidth = dojo.style(contentNode, "width");
     destinationHeight = dojo.style(contentNode, "height");
+    
     if (destination == 'detailFormDiv' && !editorInFullScreen()) {
       widthNode = dojo.byId('detailDiv');
       if (widthNode) {
@@ -903,12 +904,13 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
       }
     }
     if (page.indexOf('diary.php') != -1) {
-		detailTop = dojo.byId('listDiv').offsetHeight;
-		detail = dojo.byId('detailDiv');
-        destinationHeight = dojo.byId('centerDiv').offsetHeight - detailTop;
-        detail.style.height = destinationHeight + "px";
+		  detailTop = dojo.byId('listDiv').offsetHeight;
+		  detail = dojo.byId('detailDiv');
+      destinationHeight = dojo.byId('centerDiv').offsetHeight - detailTop;
+      detail.style.height = destinationHeight + "px";
     	dojo.byId('detailDiv').style.top = detailTop + "px";
     }
+    console.log("destionation="+destination+", destinationHeight="+destinationHeight+", destinationWidth="+destinationWidth);
     if (page.indexOf("?") > 0) {
       page += "&destinationWidth=" + destinationWidth + "&destinationHeight="
           + destinationHeight;
