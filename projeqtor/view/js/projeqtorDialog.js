@@ -6418,6 +6418,7 @@ function switchModeLayout(paramToSend){
       switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
       switchModeOn(objectIdScreen);
   }
+  dijit.byId('iconMenuUserScreen').closeDropDown();
 }
 
 function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen){
