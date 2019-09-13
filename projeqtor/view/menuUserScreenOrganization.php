@@ -35,7 +35,6 @@ $currentScreen="";
 if(isset($_REQUEST['currentScreen'])){
   $currentScreen=$_REQUEST['currentScreen'];
 }
-debugLog($currentScreen);
 if(sessionValueExists("paramScreen")){
   if(getSessionValue("paramScreen")=='5') {
   	  Parameter::storeUserParameter("paramScreen", '1');
@@ -48,11 +47,9 @@ $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
 $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
 if($paramRightDiv=='3'){
   $ActivityStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$currentScreen);
-  debugLog($ActivityStream);
 }else{
   $ActivityStream=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$currentScreen);
 }
-debugLog($ActivityStream);
 ?>
 
 <div id="mainDivMenu" class="container" >
@@ -132,7 +129,7 @@ debugLog($ActivityStream);
           <table >
             <tr>
               <td >
-              <?php if($ActivityStream==0){ debugLog('ici');?>
+              <?php if($ActivityStream==0){ ;?>
                 <div class="iconActivityStream22 iconActivityStream iconSize22 " style="position:absolute;top:2px;left:3px" title="<?php echo i18n("showActivityStream");?>"></div>
               <?php }else{?>
                 <div class="iconActivityStreamClose22 iconActivityStreamClose iconSize22 " style="position:absolute;top:2px;left:3px" title="<?php echo i18n("hideActivityStream");?>"></div>

@@ -114,7 +114,6 @@
                     });
                   }else if(paramMode!='5'){
                     saveDataToSession("contentPaneRightDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("detailRightDiv").offsetHeight, true);
-                    console.log(dojo.byId("detailRightDiv").offsetHeight);
                   }
               </script>
               <script type="dojo/connect" event="onLoad" args="evt">

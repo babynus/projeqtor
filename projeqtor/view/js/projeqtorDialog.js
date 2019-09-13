@@ -6851,7 +6851,6 @@ function loadMenuBarObject(menuClass, itemName, from) {
   cleanContent("detailDiv");
   formChangeInProgress=false;
   var currentScreen=menuClass; 
-  console.log(currentScreen);
   loadContent("objectMain.php?objectClass=" + currentScreen, "centerDiv"); 
   loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen,"mainDivMenu");
   stockHistory(currentScreen,null,"object");
