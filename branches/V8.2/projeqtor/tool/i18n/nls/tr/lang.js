@@ -2336,7 +2336,7 @@ labelLimitResourceByProject: "Seçilen proje için kaynakların sınır listesi"
 labelMultipleMode: "Çoklu mod",
 labelPartToTerm: "Part of line on term",
 labelRegularTerms: "${1} terms on day ${2} of month starting at ${3}",
-labelShowAssignmentWithoutWork: "show activities without work",
+labelShowAssignmentWithoutWork: "activities without work",
 labelShowDone: "tamamlanmış öğeleri göster",
 labelShowId: "kimliği göster",
 labelShowIdle: "kapalı ürünleri göster",
