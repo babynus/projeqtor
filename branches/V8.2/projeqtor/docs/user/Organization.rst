@@ -2,7 +2,7 @@
 
 .. title:: Organizations
 
-.. index:: ! Organizations
+.. index:: Organizations
 
 .. _Organizations:
 
@@ -22,13 +22,14 @@ Depending on the profile, you can limit the visibility of resources to people in
    * :ref:`Linked element<linkElement-section>`   
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`
+   * :ref:`organization-concept`
 
 
-.. rubric:: Section: Description
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: titre
+.. list-table:: Required fields |ReqFieldLegend|
    :widths: 20, 80
    :header-rows: 1
 
@@ -36,9 +37,9 @@ Depending on the profile, you can limit the visibility of resources to people in
      - Description
    * - :term:`Id`
      - Unique Id for the Organization.
-   * - **Name**
+   * - |RequiredField| Name
      - Short name of the Organization.
-   * - **Organization type**
+   * - |RequiredField| Organization type
      - Type of organization.
    * - Manager
      - Manager of organization.

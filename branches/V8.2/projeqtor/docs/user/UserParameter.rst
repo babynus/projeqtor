@@ -6,7 +6,7 @@
 
 .. title:: User parameters
 
-.. index:: ! User parameters
+.. index:: User parameters
 
 .. _user-parameters:
 
@@ -19,6 +19,10 @@ User parameters
 User parameters screen allows configuration of personal settings.
 
 You can display the Users Parameters with the principal menu 
+
+You can also display the "Start Guide" if you uncheck the box "show this page at startup"
+
+The guide will appear on today's screen between messages and items to follow (according to your preferences) 
 
 
 .. figure:: /images/GUI/USERPARAM_BOX_AccessParam.png
@@ -41,7 +45,7 @@ Generic display parameter for user. Choose your theme - Language or size of icon
 
 .. figure:: /images/GUI/USERPARAM_ZONE_SectionDisplay.png
    :alt: Display Parameters section 
-   :align: left
+   :align: center
 
 .. _graphic-interface-behavior-section:
 
@@ -54,7 +58,7 @@ or choose default behaviors like closing the page or flipping mode
 
 .. figure:: /images/GUI/USERPARAM_ZONE_SectionGraphicInterBehavior.PNG
    :alt: Graphic Interfac behavior section 
-   :align: left
+   :align: center
 
 Section Print & Export parameters
 ---------------------------------
@@ -63,7 +67,7 @@ This section allows you to define whether you want to print the history, whether
 
 .. figure:: /images/GUI/USERPARAM_ZONE_SectionPrint.png
    :alt: Print section 
-   :align: left
+   :align: center
 
 .. _userparam_miscelleaneous:
 
@@ -74,7 +78,7 @@ Default selected project and choice of character [1]_ used to indent lists of pr
 
 .. figure:: /images/GUI/USERPARAM_ZONE_SectionMiscellaneous.PNG
    :alt: Miscellaneaous section 
-   :align: left
+   :align: center
 
 you can also see all the items you are registered for tracking and delete them from this window
 

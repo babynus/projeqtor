@@ -1,10 +1,10 @@
 .. include:: ImageReplacement.txt
 
-.. title:: Transverses Features
+.. title:: Transverse Features
 
-.. index:: ! Transverses Features
+.. index:: Transverse Features
 
-.. _Activity_Stream:
+.. _ActivityStream:
 
 Activity Stream
 ---------------
@@ -48,7 +48,7 @@ in either case, the notes are displayed or not.
 Global view
 -----------
 
-.. figure:: /images/GUI/GlobalView.png
+.. figure:: /images/GUI/TRANSV_SCR_GlobalView.png
    :alt: Global View Screen
    :align: center
    
@@ -58,7 +58,7 @@ The "Global view" screen lists all the main objects created during a project. Th
 
 You can also choose to display only certain items through the list to display
 
-.. figure:: /images/GUI/GlobalView_DisplayItems.png
+.. figure:: /images/GUI/TRANSV_ZONE_DisplayItems.png
    :alt: display items
    :align: center 
    
@@ -78,4 +78,4 @@ You can change the visibility of the note if you click on the bottom right corne
 
 * Click on |iconHideStream|  to hide or display the chat.
 
-.. figure:: /images/GUI/ChatActivityStream.png
+.. figure:: /images/GUI/TRANSFEAT_ZONE_ChatActivityStream.png

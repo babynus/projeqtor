@@ -3,82 +3,96 @@
 .. title:: Concepts
 
 
-.. raw:: latex
-
-    \newpage
+.. index: Project (concept)
 
 .. _concept:
+
+.. _Concept_project:
 
 Project
 *******
 
 A project is the main entity of ProjeQtOr.
 
-Project element is more than a :ref:`planning-element`, it is also used to:
+Project element is more than a :ref:`planning-element`.
+
 
 .. rubric:: Gather all project data
 
-* Allows to gather all data depend on project:
+It is also used to allows to gather all data depend on project:
 
-  * Planning element
-  * Risk assessment, Risk mitigation, Reserve
-  * Ticket, Issue, Bug tracking, Change request, Support
-  * Review logs, Meeting, Decision, Action plan
-  * Requirement & Test 
-  * Project expense
-  * Quotation, Order, Bill, Payment
-  * Document
+ * Planning element
+ * Risk assessment, Risk mitigation, Reserve
+ * Ticket, Issue, Bug tracking, Change request, Support
+ * Review logs, Meeting, Decision, Action plan
+ * Requirement & Test 
+ * Project expense
+ * Quotation, Order, Bill, Payment
+ * Document
+
 
 .. rubric:: Restrict data visibility
-
-* Allows restricting data visibility to users by project.
-* The project data visibility is granted according to the user profile.
-* See: :ref:`profiles-definition`
-* See: :ref:`allocation-to-project`
-
-
- .. compound:: **Project selector**
-
-    * The project selector works as a filter.
-    * By default, the selector displays "all projects", you can change this view in the user-miscelleanous settings and choose the project to display by default
-    * You can restrict data for one or more dedicated projects without necessarily being bound
-    
-    .. seealso:: 
+   
+Allows restricting data visibility to users by project.
+   
+The project data visibility is granted according to the user profile.
+   
+   
+.. seealso:: 
       
-      * See: :ref:`top-bar`
-      * see: :ref:`user-parameters`
-    
+   :ref:`profiles-definition` and :ref:`allocation-to-project`
 
-.. rubric:: Define the project type
+
+.. compound:: **Project selector**
+      
+   The project selector works as a filter.
+          
+   By default, the selector displays "all projects", you can change this view in the user-miscelleanous settings and choose the project to display by default
+          
+   You can restrict data for one or more dedicated projects without necessarily being bound
+       
+.. seealso:: 
+         
+   :ref:`top-bar` and :ref:`user-parameters`
+
+
+.. index:: Project (type)
+    
+.. _project_type:
+
+the project type
+----------------
 
 .. compound:: Three project types can be defined:
 
-   **Operational project**
-
-      * Most common project to follow activity.
-      * Manual Billed, Fixed price, Capped time, Time & materials, Internal are operationals projects
-
-   .. image:: /images/GUI/CONCEPT_ZONE_ProjectType.png
-      :align: center
-
-   **Administrative project**
-
-   * Allows to follow the non productive work as holidays, sickness, training, …
-   * All resource will be able to enter some real work on such project, without having to be allocated to the project, nor assigned to project activities.
-
-   **Template project**
-
-   * Designed to define templates, to be copied as operational project. (See: :ref:`copy-item`)
-   * Any project leaders can copy such projects, without having to be allocated to them.
-
-
-
-
+ **1 - Operational project**
+            
+ Most common project to follow activity.
+               
+ Manual Billed, Fixed price, Capped time, Time & materials, Internal are operationals projects
+         
+ .. image:: /images/GUI/CONCEPT_ZONE_ProjectType.png
+   :align: center
+         
+ **2 - Administrative project**
+         
+ Allows to follow the non productive work as holidays, sickness, training, …
+               
+ All resources have access to this project type without being assigned (project) or assigned (Activity).
+               
+ Create an activity, like an OPE project, for each type of absence.
+            
+ **3 - Template project**
+         
+ Designed to define templates, to be copied as operational project. See: :ref:`copy-item`
+               
+ Any project leaders can copy such projects, without having to be allocated to them.
 
 .. note:: 
 
-   * The project type is defined in a project type (See: :ref:`project-type`).
-   * Which is associated to a project (See: :ref:`project`).	
+   The project type is defined in a project type.
+   
+   Which is associated to a project. See: :ref:`planningelem_project`
 
 .. rubric:: Define billable project
 
@@ -86,21 +100,37 @@ A project can be billable or not.
 
  .. compound:: **Non billable project**
 
-    * The non billable project is used for internal or administrative project.
+    The non billable project is used for internal or administrative project.
 
  .. compound:: **Billable project**
 
-    * For billable projects the billing types available are: at terms, on producing work, on capping produced work and manual.
+    For billable projects the billing types available are: at terms, on producing work, on capping produced work and manual.
+    
+    The actual work done and billed is locked
 
 .. note:: 
 
-   * The project billing type is defined in a project type (See: :ref:`project-type`).
-   * Which is associated to a project (See: :ref:`project`). 
+   The project billing type is defined in a project type.
+   
+   Which is associated to a project. See: :ref:`planningelem_project` 
+
+
+.. warning:: 
+
+   When deleting a project, also delete the indicators, Emails and Delays for the tickets of this project
+
+
+.. rubric:: Fix the planning
+
+you can freeze the content of a project or projects from the moment you do not want to extend the project or modify it.
+
 
 
 .. raw:: latex
 
     \newpage
+
+.. index:: Organization
 
 .. _organization-concept:
 
@@ -109,31 +139,35 @@ Organization
 
 The notion of organization introduces a way to consolidate projects on a different hiererchic structure, apart from projects / sub-projects structure.
 
-.. rubric:: Definition of the structure of the company in the frame of organizations (Departments, Units, Location, ...)
+.. rubric:: Definition of the structure of the company in the frame of organizations 
 
-* The organization summarizes the data of the projects in progress for the organization
+Departments, Units, Location, ...
+
+The organization summarizes the data of the projects in progress for the organization.
 
 .. figure:: /images/GUI/CONCEPT_ORG_Organisations.png
    :align: center
+   
+   distribution within organizations
 
 .. rubric:: Organization link
 
-* Each project can be linked to an organization
+Each project can be linked to an organization.
+     
+Resources can be linked to an organization.
 
 .. note::
 
-  * Sub-projects are by default attached to the same organization as the parent, but can be integrated into another organization.
-  
-* Resources can be linked to an organization.
+   Depending on the profile, you can limit the visibility of resources to people in the same organization or team as the current user.
 
-.. note::
-
-  * Depending on the profile, you can limit the visibility of resources to people in the same organization or team as the current user.
+   Sub-projects are by default attached to the same organization as the parent, but can be integrated into another organization.
 
 
 .. raw:: latex
 
     \newpage
+    
+.. index:: product 
 
 .. _product-concept:
 
@@ -144,18 +178,23 @@ A product is a material object or for IT/IS projects is a software application.
 
 .. rubric:: Composition of product
 
-* A product can have a complex structure that can be composed of sub-product and components.
-* A product and its components can have several versions that represent each declination.
-* See: :ref:`product-structure`
+A product can have a complex structure that can be composed of sub-product and components.
+
+A product and its components can have several versions that represent each declination.
+
+See: :ref:`product-structure`
 
 .. rubric:: Linked to a project
 
-* A product is an element delivered by a project.
-* The link with the project have no impact on project planning.
-* Indicates only that project is devoted to a specific product versions.
-* The link management is done in :ref:`project` and :ref:`product-version` screens.
+A product is an element delivered by a project.
 
-.. figure:: /images/LinkProductToProject.png
+The link with the project have no impact on project planning.
+
+Indicates only that project is devoted to a specific product versions.
+
+The link management is done in :ref:`planningelem_project` and :ref:`product-version` screens.
+
+.. figure:: /images/GUI/CONCEPT_SCHEMA_LinkProductToProject.png
    :alt: Link with projects
    :align: center
 
@@ -163,18 +202,28 @@ A product is a material object or for IT/IS projects is a software application.
 
 .. rubric:: Identifying the version that is the subject of treatment
 
-* Product (component) versions can be identified in these elements: :ref:`activity`, :ref:`milestone`, :ref:`requirement`, :ref:`test-case`, :ref:`test-session` and :ref:`ticket`.
-* The purpose is to identify which product (component) and its version that is the subject of the treatment.
-* Depending on the element, it has the possibility identifying version of  origin, target version or both.
+Product (component) versions can be identified in these elements:
+
+* :ref:`activity`
+* :ref:`milestone`
+* :ref:`requirement`
+* :ref:`test-case`
+* :ref:`test-session` 
+* :ref:`ticket`.
+  
+The purpose is to identify which product (component) and its version that is the subject of the treatment.
+
+Depending on the element, it has the possibility identifying version of  origin, target version or both.
 
 .. rubric:: Document management
 
-* Documents can be identified to products.
-* See: :ref:`document`
+Documents can be identified to products.
+
+See: :ref:`document`
 
 .. rubric:: Management of product and component elements 
 
-* See: :ref:`ConfigurationManagement`, for detail about management of product and component elements.
+See: :ref:`ConfigurationManagement`, for detail about management of product and component elements.
 
 .. _product-structure:
 
@@ -190,7 +239,7 @@ The rules defining a product structure are:
     * A product can have several sub-products.
     * A sub-product can be in the composition only one product.
 
-    .. figure:: /images/LinkProductSubProduct.png
+    .. figure:: /images/GUI/CONCEPT_SCHEMA_LinkProductSubProduct.png
        :alt: Relationships between product elements
        :align: center
 
@@ -201,7 +250,7 @@ The rules defining a product structure are:
     * A product can be composed of several components.
     * A component can be in the composition of several products.
 
-    .. figure:: /images/LinkProductComponent.png
+    .. figure:: /images/GUI/CONCEPT_SCHEMA_LinkProductComponent.png
        :alt: Relationships between product and component elements
        :align: center
 
@@ -211,7 +260,7 @@ The rules defining a product structure are:
 
     * Components can be linked between them (N to N relationships).
 
-    .. figure:: /images/LinkBetweenComponent.png
+    .. figure:: /images/GUI/CONCEPT_SCHEMA_LinkBetweenComponent.png
        :alt: Relationships between component elements
        :align: center
 
@@ -219,12 +268,14 @@ The rules defining a product structure are:
 
 .. rubric:: Versions of product and component elements
 
-* A product can have several versions that represent each declination of product.
-* A component can have several versions that represent each declination of the component.
-* Links can be defined between versions of products and components, but only with the elements defined in the product structure.
+A product can have several versions that represent each declination of product.
+
+A component can have several versions that represent each declination of the component.
+
+Links can be defined between versions of products and components, but only with the elements defined in the product structure.
 
 
-.. figure:: /images/LinkProductComponentVersion.png
+.. figure:: /images/GUI/CONCEPT_SCHEMA_LinkProductComponentVersion.png
    :alt: Link between versions of product and component
    :align: center
 
@@ -235,6 +286,7 @@ The rules defining a product structure are:
 
     \newpage
 
+.. index:: Planning
 
 .. _planning:
 
@@ -248,7 +300,7 @@ Based upon on resource availability and their capacity.
 
 .. rubric:: Resource availability
 
-* Resource availability is defined by calendars and project allocation period.
+Resource availability is defined by calendars and project allocation period.
 
  .. compound:: **Resource calendar**
 
@@ -264,10 +316,11 @@ Based upon on resource availability and their capacity.
 
 .. rubric:: Resource capacity
 
-* Resource capacity is defined on daily base.
-* The scheduling tool does not exceed the daily resource capacity.
+Resource capacity is defined on daily base.
 
-.. topic:: Full Time Equivalent (FTE)
+The scheduling tool does not exceed the daily resource capacity.
+
+.. note:: Full Time Equivalent (FTE)
  
    * This indicator is defined for each resource.   
    * It allows to define the daily capacity.
@@ -275,32 +328,38 @@ Based upon on resource availability and their capacity.
 
 .. rubric:: Project allocation rate
 
-* The project allocation rate is used to resolve allocation conflicts between projects.
-* It allows to define resource availability for a project during a period.
-* Use with the resource capacity, it allows to define the project allocation capacity on a weekly base.
+The project allocation rate is used to resolve allocation conflicts between projects.
 
+It allows to define resource availability for a project during a period.
+
+Use with the resource capacity, it allows to define the project allocation capacity on a weekly base.
 
 .. rubric:: Task assignation rate
 
-* The task assignation rate is used to keep some scheduling time for other tasks.
-* Use with the resource capacity, it allows to define the assignation capacity on a daily base.
+The task assignation rate is used to keep some scheduling time for other tasks.
+
+Use with the resource capacity, it allows to define the assignation capacity on a daily base.
 
 Draft planning
 --------------
 
 Two methods can be used to create a draft planning.
 
- .. compound:: **Use planning mode "fixed duration"**
+.. rubric:: Use planning mode "fixed duration"
 
-    * This planning mode is used to define fixed duration tasks. (See: :ref:`planningMode`)
-    * Dependencies allow to define the execution order of tasks. (See: :ref:`dependencies`)
-    * You can define this planning mode as defaut in the Activities Types screen for some types of activities you'll use in draft plannings
+This planning mode is used to define fixed duration tasks. See: :ref:`planningMode`
 
- .. compound:: **Use faked and team resource**
+Dependencies allow to define the execution order of tasks. See: :ref:`dependencies`
 
-    * The faked and team resource can be useful to get a first estimate of project cost and duration without involving the real resources.
-    * Planning schedule is calculated using of the work-driven planning method.
-    * Faked and team resources can be mixed in same draft planning.
+You can define this planning mode as defaut in the Activities Types screen for some types of activities you'll use in draft plannings
+
+.. rubric:: Use faked and team resource
+
+The faked and team resource can be useful to get a first estimate of project cost and duration without involving the real resources.
+
+Planning schedule is calculated using of the work-driven planning method.
+
+Faked and team resources can be mixed in same draft planning.
 
      .. compound:: **Faked resources**
 
@@ -321,6 +380,8 @@ Two methods can be used to create a draft planning.
 .. raw:: latex
 
     \newpage
+    
+.. index:: Planning elements (Concept)
 
 .. _planning-element:
 
@@ -337,22 +398,24 @@ This planning element defines the project.
 
 * It allows to specify information on the project sheet like the customer, bill contact, sponsor, manager and objectives.
 * Documents, notes and attachments can be annexed.
-* More detail, see: :ref:`project` screen.
+* More detail: :ref:`planningelem_project`
 
+   .. compound:: **Sub-project**
+   
+       Sub-project is used to split the project.
+       
+       The project can be split to correspond the organizational breakdown or something else.
 
- .. compound:: **Sub-project**
-
-    * Sub-project is used to split the project.
-    * The project can be split to correspond the organizational breakdown or something else.
-
-     .. admonition:: Separation of duties
+     .. note::
+     
+      **Separation of duties**
 
         * A project can be split into multiple sub projects.
         * A project leader and team can be allocated to each sub-project. 
-        * Project allocation allows to define data visibility and isolate sub-projects. (See: :ref:`allocation-to-project`)
+        * Project allocation allows to define data visibility and isolate sub-projects. See: :ref:`allocation-to-project`
         * A supervisor can follow-up the project in its totality. 
 
-        .. figure:: /images/SeparationDuties.png
+        .. figure:: /images/GUI/CONCEPT_SCHEMA_SeparationDuties.png
            :alt: Separation of duties
            :align: center
 
@@ -364,6 +427,8 @@ This planning element can be a phase, a delivery, a task or any other activity.
 
 An activity can grouped other activities or be a task.
 
+More detail, see: :ref:`activity` screen
+
  .. compound:: **Grouping of activities**
 
     * An activity can be the parent of activities.
@@ -371,10 +436,10 @@ An activity can grouped other activities or be a task.
     * Dates, works and costs of activities (child) are summarized in the activity (parent).
 
  .. compound:: **Task**
+ 
     * An activity is a task when it's not a parent of activities.
     * A task is assigned to resources for to be performed.
 
-More detail, see: :ref:`activity` screen.
 
 
 .. rubric:: Test session
@@ -384,6 +449,8 @@ This planning element is a specialized activity aimed for tests.
 A test session allows to define a set of test case that must be run.
 
 A test session can grouped other test sessions or be a task.
+
+More detail, see: :ref:`test-session` screen.
 
  .. compound:: **Grouping of test sessions**
 
@@ -395,12 +462,6 @@ A test session can grouped other test sessions or be a task.
 
     * A test session is a task when it's not a parent of test sessions.
     * A task is assigned to resources for to be performed.
-
-More detail, see: :ref:`test-session` screen.
-
-.. raw:: latex
-
-    \newpage
 
 .. rubric:: Milestone
 
@@ -441,13 +502,15 @@ Dependencies can be managed in the Gantt chart and in screen of planning element
 
 More detail, see: :ref:`project-planning`, :ref:`predSuces-element-section`.
 
-.. note:: Global parameter "Apply strict mode for dependencies"
+.. note:: 
 
-   * If the value is set to “Yes”, the planning element (successor) can't start the same day that the end date of planning element (predecessor). 
+   **Global parameter "Apply strict mode for dependencies"**
+
+   If the value is set to “Yes”, the planning element (successor) can't start the same day that the end date of planning element (predecessor). 
 
 .. rubric:: Delay (days)
 
-* A delay can be defined between predecessor and successor (start).
+A delay can be defined between predecessor and successor (start).
 
 
 .. topic:: Dependency types
@@ -457,17 +520,19 @@ More detail, see: :ref:`project-planning`, :ref:`predSuces-element-section`.
 
     .. compound:: |iconSS| **Start to Start**
 
-       * To reproduce this dependency type, it's possible to add a milestone as prior of both tasks.
+       To reproduce this dependency type, it's possible to add a milestone as prior of both tasks.
 
     .. compound:: |iconES| **Start to Finish** 
 
-       * This dependency type can't be reproduced in ProjeQtOr.
-       * This is a very weird scenario.
+       This dependency type can't be reproduced in ProjeQtOr.
+       
+       This is a very weird scenario.
 
     .. compound:: |iconEE| **Finish to Finish**
 
-       * This dependency type can't be reproduced in ProjeQtOr.
-       * This involves reverse planning and may introduce overloading of resources, what is not possible in ProjeQtOr.
+       This dependency type can't be reproduced in ProjeQtOr.
+       
+       This involves reverse planning and may introduce overloading of resources, what is not possible in ProjeQtOr.
 
 
 .. raw:: latex
@@ -499,12 +564,13 @@ More detail, see: :ref:`Activity and Test session  planning modes<progress-secti
 
 .. note:: 
 
-   * Because ProjeQtOr does not backward planning, the planning mode "As late as possible" with no constraint date  (Floating) is not available.
+   Because ProjeQtOr does not backward planning, the planning mode "As late as possible" with no constraint date  (Floating) is not available.
 
-.. note:: Default planning mode
+   **Default planning mode**
 
-   * Possibility to define the default planning mode according to element type.
-   * See: :ref:`activity-type`, :ref:`milestone-type` and :ref:`test-session-type` screens. 
+   Possibility to define the default planning mode according to element type.
+   
+   See: :ref:`activity-type`, :ref:`milestone-type` and :ref:`test-session-type` screens. 
 
 
 
@@ -537,7 +603,7 @@ Scheduling priority value is set in progress section of planning element.
 
 .. note::
 
-   * If projects have different priorities, all elements of project with highest priority are scheduled first.
+   If projects have different priorities, all elements of project with highest priority are scheduled first.
 
 
 Project structure
@@ -621,80 +687,83 @@ Specific roles are defined to allow:
 * As reports parameters.
 * As recipients list to mailing and alert.
 
---------------------------
+Glossary
+--------
 
 .. glossary::
 
    Administrator
 
-    * An administrator is a :term:`user` with "Administrator" profile.
-    * Has a visibility over all the projects.
+    An administrator is a :term:`user` with "Administrator" profile.
+    Has a visibility over all the projects.
 
    Contact
 
-    * A contact is a person in a business relationship.
-    * A contact can be a person in the customer organization.
-    * Used as contact person for contracts, sales and billing.
-    * Contacts management is performed on :ref:`contact` screen.
+    A contact is a person in a business relationship.
+    A contact can be a person in the customer organization.
+    Used as contact person for contracts, sales and billing.
+    Contacts management is performed on :ref:`contact` screen.
 
    Issuer
 
-    * An issuer is a :term:`user` who created the item.
+    An issuer is a :term:`user` who created the item.
 
-    .. seealso:: Creation information
+    .. seealso:: **Creation information**
 
-       * The issuer name and creation date of an item are displayed in the :ref:`Creation information zone<detail-window>`.
+       The issuer name and creation date of an item are displayed in the :ref:`Creation information zone<detail-window>`.
 
    Project leader
 
-    * A project leader is a :term:`resource` allocated to a project with a “Project Leader” profile.
+    A project leader is a :term:`resource` allocated to a project with a “Project Leader” profile.
 
    Project manager
 
-    * A project manager is a :term:`resource` defined as the manager on a project.
+    A project manager is a :term:`resource` defined as the manager on a project.
 
-    .. seealso:: Accelerator button
+    .. seealso:: **Accelerator button**
 
-       * This button allows to set current user is the project manager.
-       * More detail, see: :ref:`Assign to me button<assignToMe-button>`.  
+       This button allows to set current user is the project manager.
+       More detail, see: :ref:`Assign to me button<assignToMe-button>`.  
 
    Project team
 
-    * All :term:`resources<resource>` allocated to a project.
+    All :term:`resources<resource>` allocated to a project.
 
 
    Requestor
 
-    * A requestor is a :term:`contact`.
-    * Used to specify the requestor for ticket, activity and requirement.
-    * Only contacts allocated to the selected project can be a requestor.  
+    A requestor is a :term:`contact`.
+    Used to specify the requestor for ticket, activity and requirement.
+    Only contacts allocated to the selected project can be a requestor.  
  
    Responsible
 
-    * A responsible is a :term:`resource` in charge of item treatment. 
-    * Usually, the responsible is set when the status of the item is :term:`handled<Handled status>`.
-    * Only resources allocated to the selected project can be a responsible.  
+    A responsible is a :term:`resource` in charge of item treatment. 
+    Usually, the responsible is set when the status of the item is :term:`handled<Handled status>`.
+    Only resources allocated to the selected project can be a responsible.  
 
-    .. seealso:: GUI behavior
+    .. seealso:: 
+    
+    **GUI behavior**
 
-       * It is possible to define that responsible field is mandatory on handled status.
-       * The element type screens allow to set this parameter to several elements. 
-       * More detail, see: :ref:`behavior-section`. 
+       It is possible to define that responsible field is mandatory on handled status.
+       The element type screens allow to set this parameter to several elements. 
+       More detail, see: :ref:`behavior-section`. 
 
-    .. seealso:: Set automatically the responsible
+    **Set automatically the responsible**
 
-       * It is possible to set automatically the responsible.
-       * More detail, see: :ref:`Global parameters<responsible-section>`. 	
+       It is possible to set automatically the responsible.
+       More detail, see: :ref:`Global parameters<auto-responsible>`	
 
-    .. seealso:: Accelerator button
+    **Accelerator button**
 
-       * This button allows to set current user is the responsible.
-       * More detail, see: :ref:`Assign to me button<assignToMe-button>`.
+       This button allows to set current user is the responsible.
+       More detail, see: :ref:`Assign to me button<assignToMe-button>`.
 
-    .. seealso:: Access rights
+    **Access rights**
 
-       * It is possible to define a combination of rights to permit access for elements the user is responsible for.
-       * More detail, see: :ref:`access-mode` screen.
+       It is possible to define a combination of rights to permit access for elements the user is responsible for.
+       More detail, see: :ref:`access-mode` screen.
 
    Resource
 
@@ -717,7 +786,7 @@ Specific roles are defined to allow:
     \newpage
 
 
-.. index:: ! Profile (Definition)
+.. index:: Profile (Definition)
 
 .. _profiles-definition:
 
@@ -730,33 +799,34 @@ A user linked to a profile belongs to this group who share same application beha
 
 .. note::
 
-   * You can define profiles to be conformed to the roles defined in your organization.
-   * Access rights management is done on :ref:`Access rights<profile>` screens 
+   You can define profiles to be conformed to the roles defined in your organization.
+   
+   Access rights management is done on :ref:`Acces Right<profiles>` screens 
 
 
 .. rubric:: Used for
 
-* The profile is used to define access rights to application and data, first.
-* Also, the profile is used to send message, email and alert to groups.
+The profile is used to define access rights to application and data, first.
+
+Also, the profile is used to send message, email and alert to groups.
 
 .. rubric:: Selected profile in project allocation
 
-* A profile can be selected to a user, resource or contact in project allocation.
-* The profile selected is used to give data access to elements of the projects.
+A profile can be selected to a user, resource or contact in project allocation.
+
+The profile selected is used to give data access to elements of the projects.
 
 .. rubric:: Workflow definition
 
-* The profile is used to define who can change from one status to another one.
-* You can restrict or allow the state transition to another one according to the profile.
-* Workflow definition is managed in :ref:`workflow` screen.
+The profile is used to define who can change from one status to another one.
 
-.. raw:: latex
+You can restrict or allow the state transition to another one according to the profile.
 
-    \newpage
+Workflow definition is managed in :ref:`workflow` screen.
 
 .. rubric:: Predefined profiles
 
-* ProjeQtOr offer some predefined profiles.
+ProjeQtOr offer some predefined profiles.
 
  .. glossary::
 
@@ -788,16 +858,13 @@ A user linked to a profile belongs to this group who share same application beha
 
 .. rubric:: Predefined profiles (External)
 
-* ProjeQtOr allow to involve client employees in their projects.
-* The distinction between this profile and its equivalent, user access is more limited.
+ProjeQtOr allow to involve client employees in their projects.
 
-
+The distinction between this profile and its equivalent, user access is more limited.
 
 .. raw:: latex
 
     \newpage
-
-
 
 .. _user-ress-contact-demystify:
 
@@ -850,7 +917,7 @@ The next matrix shows the different possibilities.
 
 .. rubric:: Row legend
 
-* U = User, R = Resource, C = Contact   
+U = User, R = Resource, C = Contact   
 
 .. raw:: latex
 
@@ -858,7 +925,7 @@ The next matrix shows the different possibilities.
 
 .. rubric:: Data visibility
 
-.. figure:: /images/Stakeholder-DataVisibility.png
+.. figure:: /images/GUI/CONCEPT_SCHEMA_Stakeholder-DataVisibility.png
    :alt: Stakeholder data visibility
    :align: center
 
@@ -892,14 +959,15 @@ The next matrix shows the different possibilities.
 .. rubric:: Resource availability
 
 
-.. figure:: /images/Stakeholder-ResourceAvailability.png
+.. figure:: /images/GUI/CONCEPT_SCHEMA_Stakeholder-ResourceAvailability.png
    :alt: Stakeholder resource availability
    :align: center
 
    Resource availability diagram
 
-* Only resource can be assigned to project activities.
-* Project allocation allows to define the resource availability on project.
+Only resource can be assigned to project activities.
+
+Project allocation allows to define the resource availability on project.
 
  .. compound:: **Human resource**
 
@@ -920,7 +988,7 @@ The next matrix shows the different possibilities.
 * Combined with a user, a contact can connect to the application
 * Combined with a resource, contact availability can be planned in projects.
 
-.. figure:: /images/Stakeholder-ContactRoles.png
+.. figure:: /images/GUI/CONCEPT_SCHEMA_Stakeholder-ContactRoles.png
    :alt: Stakeholder contact roles
    :align: center
 
@@ -940,8 +1008,7 @@ Allocation to project and user profile are also shared.
 
 .. note::
 
-   * For a stakeholder, you can define and redefine the combination without losing data.
-
+   For a stakeholder, you can define and redefine the combination without losing data.
 
 
 
@@ -955,15 +1022,60 @@ Allocation to project and user profile are also shared.
 Allocation to project
 *********************
 
+.. sidebar:: Concepts 
+
+   * :ref:`allocation-to-project`
+   * :ref:`profiles-definition`
+   * :ref:`user-ress-contact-demystify`
+   
 Allocation to project is used to:
 
-* Defines project data visibility.
-* Defines resource availability.
-* Defines the period of access to project data by the user. 
+* Define project data visibility.
+* Define resource availability.
+* Define the period of access to project data by the user. 
 
-.. note::
 
-   * The :ref:`allocation` screen allows to manage overall allocations to project. 
+.. figure:: /images/GUI/ENVPARAM_SCR_AllocationProject.png
+   :alt: Allocation to project
+   :align: center
+   
+   Allocation to project
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required field |ReqFieldLegend| 
+   :widths: 20, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id of the resource.
+   * - Resource
+     - Name of the allocated resource.
+   * - Or contact
+     - Name of the allocated contact.
+   * - |RequiredField| Profile
+     - Selected profile.
+   * - |RequiredField| Project
+     - Project allocated to.
+   * - Rate
+     - Allocation rate for the project (%).
+   * - Start date
+     - Start date of allocation.
+   * - End date
+     - End date of allocation.
+   * - :term:`Closed`
+     - Flag to indicate that the allocation is archived.
+   * - :term:`Description`
+     - Complete description of the allocation.
+
+.. topic:: Fields Resource & Contact
+
+   * You can select resource or contact.
+   * If none is selected then the user connected is used to define the allocation.
+   * If a contact is a resource and inversely, then resource or contact name will be selected too.
+
 
 The following sections describe allocation to project, performed for user, resource or contact.
 
@@ -976,25 +1088,28 @@ Allocation to project can be defined in the :ref:`user` screen.
 
 .. rubric:: Profile selection
 
-* Selected profile allows to define access rights on project elements.
+Selected profile allows to define access rights on project elements.
 
-.. hint::
+.. tip::
 
-   * Selected profile allows to define the role played by the user in a project.
-   * For instance, the user might be a project manager in a project and it could be a project member in another. 
+   Selected profile allows to define the role played by the user in a project.
+   
+   For instance, the user might be a project manager in a project and it could be a project member in another. 
+   
+   
+.. note:: 
 
-   .. note:: 
-
-      * Profile defined in allocation to project does not grant or revoke access to users.
-      * General access to application functionalities and data is defined by user profile. 
+   Profile defined in allocation to project does not grant or revoke access to users.
+      
+   General access to application functionalities and data is defined by user profile. 
 
 .. rubric:: Period selection
 
-* Allow to define the period of project data visibility.
+Allow to define the period of project data visibility.
 
-  .. hint::
+.. tip::
  
-     * Can be used to limit access period, according to services agreement.
+     Can be used to limit access period, according to services agreement.
 
 
 
@@ -1012,33 +1127,36 @@ Allocation to project allows to define the resource availability on project.
 
 A resource may be allocated to projects at a specified rate for a period.
 
-Allocation to project can be defined in :ref:`project` and :ref:`resource` screens.
+Allocation to project can be defined in :ref:`planningelem_project` and :ref:`resource` screens.
 
 It is also possible to allocate a team to a project in :ref:`team` screens.
 
 .. note::
 
-   * A resource allocated to a project can be defined as :term:`responsible` of project items treatment.
+   A resource allocated to a project can be defined as :term:`responsible` of project items treatment.
 
 
 .. rubric:: Period & Rate selection
 
-* A resource may be allocated to a project at a specified rate for a period. 
+A resource may be allocated to a project at a specified rate for a period. 
 
 .. note::
 
-   * If the period is not specified then the resource is allocated throughout the project.
+   If the period is not specified then the resource is allocated throughout the project.
 
-.. attention::
+.. warning::
 
-    * The planning calculator tries to plan, the remaining work on the task assigned to a resource within the allocation to project period.
-    * If remaining work on the task can't be planned, a purple bar appears in the Gantt view.
+    The planning calculator tries to plan, the remaining work on the task assigned to a resource within the allocation to project period.
+    
+    If remaining work on the task can't be planned, a purple bar appears in the Gantt view.
 
 .. rubric:: Change resource on an allocation to project
 
-* A resource can be changed on allocation to project.
-* All tasks assigned to old resource will be transferred to the new resource with planned work and remaining work.
-* Work done on tasks belongs to always the old resource.
+A resource can be changed on allocation to project.
+
+All tasks assigned to old resource will be transferred to the new resource with planned work and remaining work.
+
+Work done on tasks belongs to always the old resource.
 
 
 Multi-allocation to project
@@ -1050,10 +1168,11 @@ Make sure that the allocation to projects for a period not exceeding 100%.
 
 In the section **Allocations** in :ref:`resource` screen, a tool allows to displayed conflicts.
 
-.. hint:: How resolve conflicts?
+.. tip:: How resolve conflicts?
 
-   * You can change allocation period to avoid overlap between projects.
-   * You can change the rate of allocation for it does not exceed 100% for the period.
+   You can change allocation period to avoid overlap between projects.
+   
+   You can change the rate of allocation for it does not exceed 100% for the period.
 
 
 Contact allocation to project
@@ -1061,7 +1180,7 @@ Contact allocation to project
 
 A contact allocated to a project can be defined as :term:`requestor`.
 
-Allocation to project can be defined in :ref:`project` and :ref:`contact` screens.
+Allocation to project can be defined in :ref:`planningelem_project` and :ref:`contact` screens.
 
 
 
@@ -1082,11 +1201,9 @@ A resource assignment contains data about work on task (planned,  real, left and
     
 .. note::
 
-   * Only resources allocated by the project can be assigned to project tasks.
+   Only resources allocated by the project can be assigned to project tasks.
 
-.. note::
-
-   * Assignment can be done in :ref:`activity`, :ref:`test-session` and :ref:`meeting` screens.
+   Assignment can be done in :ref:`activity`, :ref:`test-session` and :ref:`meeting` screens.
 
 
 
@@ -1095,7 +1212,7 @@ A resource assignment contains data about work on task (planned,  real, left and
     \newpage
 
 
-.. index:: ! Resource (Function & Cost)
+.. index:: Resource (Function & Cost)
 
 .. _resource-function-cost:
 
@@ -1104,36 +1221,43 @@ Resource function and cost
 
 .. rubric:: Function
 
-* The function defines the generic competency of a resource.
-* It is used to define the role play by the resource on tasks.
-* In real work allocation screen, the function name will be displayed in the real work entry.
-* A main function must be defined to resource and it is used as default function.
-* A daily cost can be defined for each function of the resource.
-* The :ref:`function` screen allows to manage function list.
+The function defines the generic competency of a resource.
+
+It is used to define the role play by the resource on tasks.
+
+In real work allocation screen, the function name will be displayed in the real work entry.
+
+A main function must be defined to resource and it is used as default function.
+
+A daily cost can be defined for each function of the resource.
+
+The :ref:`function` screen allows to manage function list.
 
 .. rubric:: Resource cost definition
 
-* Allows to define the daily cost, according to the functions of the resource. 
-* The daily cost is defined for a specific period.
+Allows to define the daily cost, according to the functions of the resource. 
+
+The daily cost is defined for a specific period.
 
 .. rubric:: Real cost calculation
 
-* When real work is entered, the real cost is calculated with work of the day and daily cost for this period. 
+When real work is entered, the real cost is calculated with work of the day and daily cost for this period. 
 
 .. rubric:: Planned cost calculation
 
-* When the project planning is calculated, resource cost is used to calculate planned cost.
-* Planned cost is calculated with planned work of the day and current daily cost. 
+When the project planning is calculated, resource cost is used to calculate planned cost.
+
+Planned cost is calculated with planned work of the day and current daily cost. 
 
 .. note::
  
-   * Function and cost are defined in :ref:`resource` screen.
+   Function and cost are defined in :ref:`resource` screen.
 
 .. raw:: latex
 
     \newpage
 
-.. index:: ! Resource (Calendar) 
+.. index:: Resource (Calendar) 
 
 .. _resource-calendar:
 
@@ -1146,76 +1270,109 @@ A calendar is defined for a type of resources and each resource is attached to a
 
 .. rubric:: Planning process
 
-* Calendars are used in the planning process which dispatches work on every working day. 
-* During the planning process, the assigned work to a resource is planned in its working days.
+Calendars are used in the planning process which dispatches work on every working day. 
+
+During the planning process, the assigned work to a resource is planned in its working days.
 
  .. note:: 
 
-    * You must re-calculate an existing planning to take into account changes on the calendar.
+    You must re-calculate an existing planning to take into account changes on the calendar.
 
 .. rubric:: Shows the availability of resources
 
-* Working days defined in a calendar allows to show availability of resources.
+Working days defined in a calendar allows to show availability of resources.
 
 .. rubric:: Default calendar
 
-* The default calendar is used to define the working days in the year.
-* By default, this calendar is defined for all resources.
+The default calendar is used to define the working days in the year.
+
+By default, this calendar is defined for all resources.
 
 .. rubric:: Specific calendar
 
-* A specific calendar can be created to define working days for a type of resource.
+A specific calendar can be created to define working days for a type of resource.
 
 .. note::
 
-   * A calendar is set in :ref:`resource` screen. 
-   * The calendar is defined in :ref:`calendar` screen.
+   A calendar is set in :ref:`resource` screen. 
+   
+   The calendar is defined in :ref:`calendars` screen.
 
 .. rubric:: Use case
 
 .. topic:: Public holiday
 
-   * You can use the default calendar to set public holidays.
+   You can use the default calendar to set public holidays.
 
 .. topic:: Work schedule
 
-   * You can define a different work schedule to some resources.
-   * This calendar defined exceptions to normal working days.
-   * For instance, you can define a calendar for resources on leave on Wednesdays.
+   You can define a different work schedule to some resources.
+   
+   This calendar defined exceptions to normal working days.
+   
+   For instance, you can define a calendar for resources on leave on Wednesdays.
 
-.. important:: Personal calendar
+.. important:: **Personal calendar**
 
-   * Even if you can create a specific calendar to each resource, this is not the advised way to manage personal days off and vacations.
-   * You’d better use Administrative projects (enter real work in advance).
+   Even if you can create a specific calendar to each resource, this is not the advised way to manage personal days off and vacations.
+   
+   You’d better use Administrative projects (enter real work in advance).
 
-
+   
+   
 .. raw:: latex
 
     \newpage
 
+.. title:: Contexts
 
-.. _photo:
+.. index:: Context
+.. index:: Ticket (Context)
+.. index:: Test case (Environment)  
 
-Photo
-*****
+.. _context:
 
-A photo can be defined for a user, a resource and a contact.
+Contexts
+********
 
-It is a visual identification associated with the name.
+The contexts defines a list of elements selectable to define ticket context and test case environment.
 
-To default, the first letter of the name appear as long as you don't add photo.
+Contexts are initially set to be able to define contexts for IT Projects, for three context types :
 
-.. note::
+* Environment
 
-   * To enlarge, move the cursor over the picture.
+* Operating System
 
-.. rubric:: Photo management
+* Browser
 
-* Click on |buttonAdd| or photo frame to add an image file. To complete instruction see: :ref:`Attachment file<attachment-file>`.
-* Click on |buttonIconDelete| to remove  the image.
-* Click on image to display the photo.
+They can be changed to be adapted to any kind of project.
 
-.. note::
+.. rubric:: Section Description
 
-   * Photo management can be done in :ref:`user-parameters`, :ref:`user`, :ref:`resource` , :ref:`contact` screens.
+.. tabularcolumns:: |l|l|
 
+.. list-table::
+   :widths: 30, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for the context.
+   * - Context type
+     - One of the three context type.
+   * - **Name**
+     - Name of the context.
+   * - Sort order
+     - Number to define the order of display in lists
+   * - :term:`Closed`
+     - Flag to indicate that the context is archived.
+ 
+
+.. topic:: Fields **Context type**
+
+   The list is fixed. 
+   
+   Captions are translated and so can be changed in language file.
+
+   
