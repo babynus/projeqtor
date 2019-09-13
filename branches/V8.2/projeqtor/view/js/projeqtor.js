@@ -5639,7 +5639,7 @@ function hideStreamMode(param,noRefresh){
     }
   }
   loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen,"mainDivMenu");
-  $( 'drawMenuUserScreenOrganization').hide();
+  dijit.byId('iconMenuUserScreen').closeDropDown();
 }
 
 function focusStream() {
