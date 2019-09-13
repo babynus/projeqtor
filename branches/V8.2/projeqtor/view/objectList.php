@@ -219,7 +219,6 @@ if (property_exists($objectClass,'idStatus')) {
 <div dojoType="dijit.layout.BorderContainer" >
 <div dojoType="dijit.layout.ContentPane" region="top" id="listHeaderDiv" style="width:50%;">
   <form dojoType="dijit.form.Form" id="quickSearchListForm" action="" method="" >
-  <div style="background:#FFAAAA;position:fixed;top:10px;left:10px"><?php echo $displayWidthList;?></div>
   <script type="dojo/method" event="onSubmit" >
     quickSearchExecute();
     return false;        
