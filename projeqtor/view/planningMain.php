@@ -46,7 +46,7 @@
     $listHeight=HeightLayoutListDiv($currentScreen);
   }
   if($positonRightDiv=="bottom"){
-    $rightHeightPlanning=heightLaoutActivityStream($currentScreen)."px";
+    $rightHeightPlanning=heightLaoutActivityStream($currentScreen);
   }else{
   	$rightWidthPlanning=WidthLayoutActivityStream($currentScreen);
   }
@@ -86,7 +86,7 @@
               var param=dojo.byId('objectClass').value;
               var paramId=dojo.byId('objectId').value;
               if(paramId !='' && multiSelection==false){
-                loadContent("objectDetail.php?objectClass"+param+"&objectId="+paramId, "detailDiv", 'listForm');  
+                loadContent("objectDetail.php?objectClass="+param+"&objectId="+paramId, "detailDiv", 'listForm');  
               }else if(multiSelection==true){
                loadContent('objectMultipleUpdate.php?objectClass=' + param,
                   'detailDiv')
@@ -107,14 +107,14 @@
                 var paramDiv=<?php echo json_encode($positonRightDiv); ?>;
                   var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
                   if(paramDiv=='trailing' && paramMode!='5'){
-                    saveDataToSession("contentPaneRightDetailDivWidthPlanning", dojo.byId("detailRightDiv").offsetWidth, true);
+                    saveDataToSession("contentPaneRightDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("detailRightDiv").offsetWidth, true);
                     var newWidth=dojo.byId("detailRightDiv").offsetWidth;
                     dojo.query(".activityStreamNoteContainer").forEach(function(node, index, nodelist) {
                     node.style.maxWidth=(newWidth-30)+"px";
                     });
                   }else if(paramMode!='5'){
-                    saveDataToSession("contentPaneRightDetailDivHeightPlanning", dojo.byId("detailRightDiv").offsetHeight, true);
-                    
+                    saveDataToSession("contentPaneRightDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("detailRightDiv").offsetHeight, true);
+                    console.log(dojo.byId("detailRightDiv").offsetHeight);
                   }
               </script>
               <script type="dojo/connect" event="onLoad" args="evt">

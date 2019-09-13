@@ -65,11 +65,9 @@
    
       
       if(Parameter::getUserParameter('paramRightDiv')!=3){
-        echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamBotClass' style='position:absolute;top:2px;right:40px'></div>";
-         echo "<div onclick='hideStreamMode(0,false);' title='".i18n('hideActivityStream')."' class='iconActivityStreamClose22 ' style='position:absolute;right:2px;top:2px;'></div>";
+        echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamBotClass' style='position:absolute;top:2px;right:2px'></div>";
       }else{
-        echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamClass' style='position:absolute;top:2px;right:40px'></div>";
-        echo "<div onclick='hideStreamMode(1,false);' title='".i18n('hideActivityStream')."' class='iconActivityStreamClose22 ' style='position:absolute;right:2px;top:2px;'></div>";
+        echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamClass' style='position:absolute;top:2px;right:2px'></div>";
       }
     
     echo "</br></br>";
@@ -93,11 +91,9 @@
 	<?php 
      
       if(Parameter::getUserParameter('paramRightDiv')!=3){
-         echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamBotClass' style='position:absolute;top:2px;right:40px'></div>";
-         echo "<div onclick='hideStreamMode(0,false);' title='".i18n('hideActivityStream')."' class='iconActivityStreamClose22 ' style='position:absolute;right:2px;top:2px;'></div>";
+         echo "<div onclick='switchModeLayout(3);' class='changeActivityStreamBotClass' style='position:absolute;top:2px;right:2px'></div>";
       }else{
-        echo "<div onclick='switchModeLayout(3);'  class='changeActivityStreamClass' style='position:absolute;top:2px;right:40px'></div>";
-        echo "<div onclick='hideStreamMode(1,false);' title='".i18n('hideActivityStream')."' class='iconActivityStreamClose22 ' style='position:absolute;right:2px;top:2px;'></div>";
+        echo "<div onclick='switchModeLayout(3);'  class='changeActivityStreamClass' style='position:absolute;top:2px;right:2px'></div>";
       }
     
     ?>

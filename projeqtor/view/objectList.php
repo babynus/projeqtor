@@ -215,7 +215,6 @@ if (property_exists($objectClass,'idStatus')) {
 <?php echo ($showIdle)?'&idle=true':'';?>
 <?php echo ($allProjectsChecked)?'&showAllProjects=on':'';?>" >
 </div>
-
 <div dojoType="dijit.layout.BorderContainer" >
 <div dojoType="dijit.layout.ContentPane" region="top" id="listHeaderDiv" style="width:50%;">
   <form dojoType="dijit.form.Form" id="quickSearchListForm" action="" method="" >
@@ -475,11 +474,13 @@ if (property_exists($objectClass,'idStatus')) {
               
               <!-- gautier #budgetParent  -->
               <?php if ( !$hideParentBudgetSearch and  $objectClass == 'Budget' ) { ?>
+               <td style="vertical-align: middle; text-align:right;" width="5px">
                <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD parentBudgetSearchTD">
                  <span class="nobr">&nbsp;&nbsp;&nbsp;
                 <?php echo i18n("colParentBudget");?>
                 &nbsp;</span>
               </td>
+              <td width="5px">
               <td width="5px" class="allSearchTD parentBudgetSearchTD">
                 <select title="<?php echo i18n('filterOnBudgetParent')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
                 <?php echo autoOpenFilteringSelect();?> 
