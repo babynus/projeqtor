@@ -6281,6 +6281,7 @@ function hideShowMenu(noRefresh,noStore) {
 // gautier #2672
 function hideMenuBarShowMode() {
   hideShowMenu(false);
+  dijit.byId("iconMenuUserScreen").closeDropDown();
 }
 
 //gautier menu top
@@ -6321,6 +6322,7 @@ function hideMenuBarShowModeTop(){
       switchModeOn();
     }
   }
+  dijit.byId("iconMenuUserScreen").closeDropDown();
 }
 
 function menuClick() {
@@ -10082,6 +10084,7 @@ function toggleFullScreen() {
       document.webkitCancelFullScreen(); 
     }
   }
+  dijit.byId("iconMenuUserScreen").closeDropDown();
 }
 
 /**
