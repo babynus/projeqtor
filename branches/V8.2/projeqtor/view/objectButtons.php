@@ -106,16 +106,11 @@
     <div style="width:100%;height:100%;">
       <table style="width:100%;height:100%;">
         <tr style="height:35px;">
-          <td style="width:43px;">&nbsp;
+          <td style="width:43px;min-width:43px;">&nbsp;
             <?php $iconClassName=((SqlElement::is_subclass_of($class, 'PlgCustomList'))?'ListOfValues':$class);?>
             <div style="position:absolute;left:0px;width:43px;max-width:50px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>
-            <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" style="margin-left:9px;width:32px;height:32px" /></div>
+            <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" style="margin-left:9px;width:32px;height:32px" /></div>          
           </td>
-          <?php if(Parameter::getUserParameter("paramScreen")=='2'){?>
-          <td>
-            <div style="position:relative;left:0px;width:40px;max-width:50px;top:0px;height:36px;" >&nbsp;</div>
-          </td>
-          <?php }?>
           <td class="title" style="width:10%;">
             &nbsp;<?php echo i18n($_REQUEST['objectClass']);
 //ADD BY Quentin Boudier - 2017-04-26 'copylink in title of object detail    '
@@ -145,17 +140,12 @@
                   }?>
             </div>
           </td>
-          <td>
-          </td>
         </tr>
       </table>  
     </div> 
   </td>
   <td style="width:8%; text-align:right;"  >
-      <div style="width:<?php echo (property_exists($obj, 'idStatus') and $displayWidthButton>=1000)?'252':'122';?>px;margin-right:16px;" id="buttonDivCreationInfo"><?php include_once '../tool/getObjectCreationInfo.php';?></div>
-  </td>
-  <td style="width:2%;">
-    &nbsp;
+      <div style="width:<?php echo (property_exists($obj, 'idStatus') and $displayWidthButton>=1000)?'252':'122';?>px;margin-right:16px;white-space:nowrap;max-height:10px;" id="buttonDivCreationInfo"><?php include_once '../tool/getObjectCreationInfo.php';?></div>
   </td>
   <td  style="white-space:nowrap;">
     <div style="float:left;position:relative;width:45%;white-space:nowrap" id="buttonDivContainerDiv"> 
@@ -200,6 +190,33 @@
         </script>
       </button>
       <?php organizeButtons();?>
+      <button id="undoButton" dojoType="dijit.form.Button" showlabel="false"
+       title="<?php echo i18n('buttonUndo', array(i18n($_REQUEST['objectClass'])));?>"
+       <?php if ($noselect or 1) {echo "disabled style=\"display:none;\"";} ?>
+       iconClass="dijitButtonIcon dijitButtonIconUndo" class="detailButton">
+        <script type="dojo/connect" event="onClick" args="evt">
+          dojo.byId("undoButton").blur();
+          hideExtraButtons('extraButtonsDetail');
+          if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
+// ADD BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
+          // If undo Organization's detail screen, must passed periodic year in REQUEST
+          cl='';
+          if (dojo.byId('objectClass')) {
+            cl=dojo.byId('objectClass').value;
+          }
+          if (cl=='Organization' && dijit.byId('OrganizationBudgetElementCurrent__byMet_periodYear')) {
+            param='?OrganizationBudgetPeriod='+dijit.byId('OrganizationBudgetElementCurrent__byMet_periodYear').value;
+          } else {
+            param='';
+          }
+          loadContent("objectDetail.php"+param, "detailDiv", 'listForm');
+// END ADD BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
+// COMMENT BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
+//          loadContent("objectDetail.php", "detailDiv", 'listForm');
+// END COMMENT BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
+          formChangeInProgress=false;
+        </script>
+      </button>
      <?php // organizeButtons(); // removed on V7.1 : buttons undo and refresh not visible at same time?>
      <button id="refreshButton" dojoType="dijit.form.Button" showlabel="false" 
        title="<?php echo i18n('buttonRefresh', array(i18n($_REQUEST['objectClass'])));?>"
@@ -208,6 +225,7 @@
         <script type="dojo/connect" event="onClick" args="evt">
           dojo.byId("refreshButton").blur();
           hideExtraButtons('extraButtonsDetail');
+          formChangeInProgress=false;
 // ADD BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
           // If undo Organization's detail screen, must passed periodic year in REQUEST
           cl='';
@@ -287,34 +305,6 @@
           showConfirm(i18n("confirmDelete", new Array("<?php echo i18n($_REQUEST['objectClass']);?>",dojo.byId('id').value))+alsoDelete ,action);
         </script>
       </button>  
-      <?php organizeButtons();?>
-      <button id="undoButton" dojoType="dijit.form.Button" showlabel="false"
-       title="<?php echo i18n('buttonUndo', array(i18n($_REQUEST['objectClass'])));?>"
-       <?php if ($noselect or 1) {echo "disabled style=\"display:none;\"";} ?>
-       iconClass="dijitButtonIcon dijitButtonIconUndo" class="detailButton">
-        <script type="dojo/connect" event="onClick" args="evt">
-          dojo.byId("undoButton").blur();
-          hideExtraButtons('extraButtonsDetail');
-          if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
-// ADD BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
-          // If undo Organization's detail screen, must passed periodic year in REQUEST
-          cl='';
-          if (dojo.byId('objectClass')) {
-            cl=dojo.byId('objectClass').value;
-          }
-          if (cl=='Organization' && dijit.byId('OrganizationBudgetElementCurrent__byMet_periodYear')) {
-            param='?OrganizationBudgetPeriod='+dijit.byId('OrganizationBudgetElementCurrent__byMet_periodYear').value;
-          } else {
-            param='';
-          }
-          loadContent("objectDetail.php"+param, "detailDiv", 'listForm');
-// END ADD BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
-// COMMENT BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
-//          loadContent("objectDetail.php", "detailDiv", 'listForm');
-// END COMMENT BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
-          formChangeInProgress=false;
-        </script>
-      </button>
       <?php organizeButtons();?>
       <button id="printButton" dojoType="dijit.form.Button" showlabel="false"
        title="<?php echo i18n('buttonPrint', array(i18n($_REQUEST['objectClass'])));?>"
@@ -568,17 +558,14 @@
       </button>
     </span>
     <?php }?>
-    
-    
     <?php organizeButtonsEnd();?>
-    
       <input type="hidden" id="createRight" name="createRight" value="<?php echo $createRight;?>" />
       <input type="hidden" id="updateRight" name="updateRight" value="<?php echo (!$obj->id)?$createRight:$updateRight;?>" />
       <input type="hidden" id="deleteRight" name="deleteRight" value="<?php echo $deleteRight;?>" />
        <?php if ($isAttachmentEnabled and property_exists($obj,'_Attachment') and $updateRight=='YES' and isHtml5() and ! $readOnly ) {
          $labelAttachmentFileDirect=i18n("Attachment").'<br/><i>('.i18n("dragAndDrop").')</i>';
          ?>
-			<span id="attachmentFileDirectDiv" style="position:relative;<?php echo (!$obj->id or $comboDetail)?'visibility:hidden;':'';?>">
+			<span id="attachmentFileDirectDiv" style="position:relative;<?php echo (!$obj->id or $comboDetail)?'visibility:hidden;':'';?>;padding-left:4px;">
 			<div dojoType="dojox.form.Uploader" type="file" id="attachmentFileDirect" name="attachmentFile" 
 			MAX_FILE_SIZE="<?php echo Parameter::getGlobalParameter('paramAttachmentMaxSize');?>"
 			url="../tool/saveAttachment.php?attachmentRefType=<?php echo get_class($obj);?>&attachmentRefId=<?php echo $obj->id;?>"
@@ -586,10 +573,11 @@
 			uploadOnSelect="true"
 			target="resultPost"
 			onBegin="saveAttachment(true);"
+			iconClass="iconAttachFiles"
 			onError="dojo.style(dojo.byId('downloadProgress'), {display:'none'});"
-			style="font-size:60%;height:21px; width:100px; border-radius: 5px; border: 1px dashed #EEEEEE; padding:1px 7px 5px 1px; color: #000000;
-			 text-align: center; vertical-align:middle;font-size: 7pt; background-color: #FFFFFF; opacity: 0.8;z-index:9999"
-			label="<?php echo $labelAttachmentFileDirect;?>">		 
+			style="font-size:60%;height:26px; width:36px; border: 1px dashed #ffffff; padding:0; color: #000000; position:absolute;
+			 text-align: left; vertical-align:middle;font-size: 7pt; opacity: 0.8;z-index:9999"
+			label="">		 
 			  <script type="dojo/connect" event="onComplete" args="dataArray">
           saveAttachmentAck(dataArray);
 	      </script>
@@ -605,7 +593,6 @@
 			<?php } else {?>
 			 <span style="display:inline-block;width:2px"></span>
 			<?php }?>
-      
       </div>
     </td>
   </tr>

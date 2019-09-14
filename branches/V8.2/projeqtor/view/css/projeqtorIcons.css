@@ -1188,3 +1188,15 @@
 .ProjeQtOrFlatRed .iconArrowMessageLegal { background-image: url(customIcons/red/iconArrowMessageLegal.png); }
 .ProjeQtOrFlatGreen .iconArrowMessageLegal { background-image: url(customIcons/green/iconArrowMessageLegal.png); }
 .ProjeQtOrFlatGrey .iconArrowMessageLegal { background-image: url(customIcons/grey/iconArrowMessageLegal.png); }
+
+.iconAttachFiles {
+  background-image: url(images/iconAttach.png);
+  background-repeat: no-repeat;
+  width: 24px; height: 24px;
+  background-size: 24px 24px;
+  text-align: center;
+}
+.ProjeQtOrFlatBlue .iconAttachFiles { background-image: url(customIcons/blue/iconAttach.png); }
+.ProjeQtOrFlatRed .iconAttachFiles { background-image: url(customIcons/red/iconAttach.png); }
+.ProjeQtOrFlatGreen .iconAttachFiles { background-image: url(customIcons/green/iconAttach.png); }
+.ProjeQtOrFlatGrey .iconAttachFiles { background-image: url(customIcons/grey/iconAttach.png); }
