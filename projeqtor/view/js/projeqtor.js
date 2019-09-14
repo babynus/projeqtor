@@ -4726,6 +4726,29 @@ function getExtraHiddenFields(idType,idStatus,idProfile) {
       for (key in obj) {
         dojo.query("." + obj[key] + "Class:not(.dijitTooltipData)").style("display", "none");
       }
+      hideEmptyTabs();
+    }
+  });
+}
+function hideEmptyTabs() {
+  dojo.query(".detailTabClass").forEach(function(domNode){
+    var name=domNode.id.replace("widget_","");
+    var widget=dijit.byId(name);
+    if (widget) {
+      var displayTab="none";
+      var children=widget.getChildren();
+      for (var i=0;i<children.length;i++) {
+        if (children[i].class.indexOf("titlePaneFromDetail")>=0) {
+          item=dojo.byId(children[i].id);
+          if (dojo.style(item,"display")!="none") {
+            displayTab="inline-block";
+            break;
+          }
+        }
+      }
+      dojo.query("[widgetid$=tablist_"+domNode.id+"]").forEach(function(tabNode){
+        dojo.style(tabNode,"display",displayTab);
+      });
     }
   });
 }
