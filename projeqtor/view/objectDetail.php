@@ -676,7 +676,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   }
   // END - ADD BY TABARY - NOTIFICATION SYSTEM
   if( Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and $included==false){
-    echo '<div dojoType="dijit.layout.TabContainer" >';
+    echo '<div dojoType="dijit.layout.TabContainer">';
   }
   // Loop on each property of the object
   foreach ($obj as $col=>$val) {
@@ -3013,8 +3013,10 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
       if(isset($arrayGroupe[$lc]['99'])){
         $tabName=ucfirst($arrayGroupe[$lc]['99']);
       }
-      echo '<div dojoType="dijit.layout.ContentPane" title="'.i18n('tab'.ucfirst($tabName)).(($nbBadge!==null )?'<div id=\''.$section.'BadgeTab\' class=\'sectionBadge\' style=\'right:0px;top:0px;width:25%;zoom:0.9; -moz-transform: scale(0.9);\' >'.$nbBadge.'</div>':'').'" style="width:100%;height:100%;overflow:auto;" selected="true">';
-      if(isset($prevSection)){
+      $sessionTabName='detailTab'.$classObj;
+      $selectedTab=getSessionValue($sessionTabName,'Description');
+      echo '<div dojoType="dijit.layout.ContentPane" onShow="saveDataToSession(\''.$sessionTabName.'\',\''.$tabName.'\');" title="'.i18n('tab'.ucfirst($tabName)).(($nbBadge!==null )?'<div id=\''.$section.'BadgeTab\' class=\'sectionBadge\' style=\'right:0px;top:0px;width:25%;zoom:0.9; -moz-transform: scale(0.9);\' >'.$nbBadge.'</div>':'').'" style="width:100%;height:100%;overflow:auto;" '.(($tabName==$selectedTab)?' selected="true" ':'').'>';
+      if(isset($prevSection)){ // TODO : sure it's not a </DIV> and set before previous line ?
         echo '<div>';
       }
     }
