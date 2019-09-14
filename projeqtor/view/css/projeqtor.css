@@ -1490,8 +1490,8 @@ div#reportParametersDiv .label, div#reportParametersDiv label {
 #attachmentFile  {
   width:100px;
 }
-.dijitUploader .dijitReset.dijitInline.dijitButtonNode {
-  width:100px !important;
+.dijitUploader .dijitReset.dijitInline.dijitButtonNode:hover {
+  /* height:100px !important;*/ 
 }
 .closeBoxIcon { 
   float:right; position: absolute;right:4%; 
