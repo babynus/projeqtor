@@ -1038,7 +1038,14 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
             if (dojo.byId(section + "SectionCount")
                 && dojo.byId(section + "Badge")) {
               dojo.byId(section + "Badge").innerHTML = dojo.byId(section+ "SectionCount").value;
-              if (dojo.byId(section + "BadgeTab")) dojo.byId(section + "BadgeTab").innerHTML = dojo.byId(section+"SectionCount").value;
+              if (dojo.byId(section + "BadgeTab")) {
+                dojo.byId(section + "BadgeTab").innerHTML = dojo.byId(section+"SectionCount").value;
+                if (dojo.byId(section+"SectionCount").value>0) {
+                  dojo.byId(section + "BadgeTab").style.opacity=1;
+                } else {
+                  dojo.byId(section + "BadgeTab").style.opacity=0.5;
+                }
+              }
             }
           }
           if (destination == "detailDiv" || destination == "centerDiv") {
