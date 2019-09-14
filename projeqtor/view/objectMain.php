@@ -92,39 +92,7 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
               loadContent('objectMultipleUpdate.php?objectClass=' + param,'detailDiv');
             }
           }
-          //resizeListDiv();
-          var width = parseInt(dojo.style('listDiv', "width"));
-          dojo.query(".allSearchTD").forEach(function(node, index, nodelist) { node.style.display="table-cell";});
-          var refWidth=50;
-          if (width<1650) {
-            dojo.query(".parentBudgetSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-          }
-          if (width<1300) {
-            dojo.query(".clientSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-          }
-          if (width<1100) {
-            refWidth=25;
-          }
-          dojo.query("#widget_listNameFilter").forEach(function(node, index, nodelist) { node.style.width=(refWidth*2)+"px";});
-          dojo.query("#widget_listIdFilter").forEach(function(node, index, nodelist) { node.style.width=(refWidth*1)+"px";});
-          dojo.query("#widget_listTypeFilter").forEach(function(node, index, nodelist) { node.style.width=(refWidth*4)+"px";});
-
-          if (width<900) {
-            dojo.query(".typeSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-          }
-          if (width<800) {
-            dojo.query(".idSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-            dojo.query(".resetSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-          }
-          if (width<700) {
-            dojo.query(".idSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-          }
-          if (width<630) {
-            dojo.query(".idleSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-          }
-          if (width<600) {
-            dojo.query(".nameSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-          }
+          resizeListDiv();
          </script>
 	    <div class="container" dojoType="dijit.layout.BorderContainer"  liveSplitters="false">
 	       <div id="detailBarShow" class="dijitAccordionTitle"
