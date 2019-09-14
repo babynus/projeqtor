@@ -7505,8 +7505,9 @@ function changeListColumnWidth(tableId, fieldId, width) {
 function validateListColumn() {
   showWait();
   dijit.byId('listColumnSelector').closeDropDown();
-  loadContent("objectList.php?objectClass=" + dojo.byId('objectClassList').value
-	      + "&objectId=" + dojo.byId('objectId').value, "listDiv");
+  var callBack=function(){resizeListDiv();};
+  loadContent("objectList.php?objectClass=" + dojo.byId('objectClassList').value+ "&objectId="+dojo.byId('objectId').value, 
+              "listDiv",null,null,null,null,null,callBack);
 }
 
 function resetListColumn() {
@@ -7518,9 +7519,9 @@ function resetListColumn() {
           + dojo.byId('objectClassList').value,
       handleAs : "text",
       load : function(data, args) {
-        loadContent("objectList.php?objectClass="
-            + dojo.byId('objectClassList').value + "&objectId="
-            + dojo.byId('objectId').value, "listDiv");
+        var callBack=function(){resizeListDiv();};
+        loadContent("objectList.php?objectClass="+dojo.byId('objectClassList').value+"&objectId="+dojo.byId('objectId').value,
+                    "listDiv",null,null,null,null,null,callBack);
       },
       error : function() {
       }
