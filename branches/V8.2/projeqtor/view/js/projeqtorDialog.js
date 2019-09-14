@@ -6388,6 +6388,7 @@ function switchModeOff(){
 function switchModeLayout(paramToSend){
   if(dojo.byId('objectClass')){
     var currentObject=dojo.byId('objectClass').value;
+    var currentScreen=(dojo.byId('objectClassManual'))?dojo.byId('objectClassManual').value:'Object';
   }else{
     return;
   }
@@ -6396,7 +6397,7 @@ function switchModeLayout(paramToSend){
   }
   var objectIdScreen=dojo.byId('objectId').value;
   var currentItem=historyTable[historyPosition];
-  var currentScreen=currentItem[2];
+  if (currentItem && currentItem!='undefined' && currentItem.length>2) currentScreen=currentItem[2];
   if(currentScreen=='Reports'){
     return false;
   }

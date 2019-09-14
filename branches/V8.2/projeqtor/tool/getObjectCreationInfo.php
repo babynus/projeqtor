@@ -63,7 +63,7 @@ if (isset($obj)) {
   	$displayWidthButtonCI=$_REQUEST ['destinationWidth'];
   }
   ?>
-  <?php  if (property_exists($obj, 'idStatus') and $displayWidthButtonCI>=1000) {
+  <?php  if (property_exists($obj, 'idStatus') and $displayWidthButtonCI>=400) {
 // Bug correction
 // Now take care of fieldAttribute
   $extraReadonlyFields=$obj->getExtraReadonlyFields();      
@@ -161,14 +161,15 @@ if (isset($obj)) {
     </div>
   </div>
   <?php }?>
-  <div style="float:left;">
+  <div style="boder:1px solid red;position:relative;top:0px">
+  <div style="float:left;<?php if($displayWidthButtonCI<750) echo 'display:none;'?>">
   <?php 
   if (property_exists ( $obj, 'lastUpdateDateTime' ) && $obj->lastUpdateDateTime) {
     echo formatDateThumb(null,$obj->lastUpdateDateTime,'left',32,'Update');
   }
   ?>
   </div>
-  <div style="padding-right:16px;" <?php echo ($canUpdateCreationInfo)?'class="buttonDivCreationInfoEdit" onClick="changeCreationInfo();"':'';?>>
+  <div style="padding-right:16px;<?php if($displayWidthButtonCI<750) echo 'display:none;'?>" <?php echo ($canUpdateCreationInfo)?'class="buttonDivCreationInfoEdit" onClick="changeCreationInfo();"':'';?>>
   <?php 
   if (!$comboDetail and $obj->id and property_exists ( $obj, 'idUser' )) {
     echo formatUserThumb($obj->idUser,SqlList::getNameFromId('Affectable', $obj->idUser),'Creator',32,'right',true);
@@ -191,6 +192,7 @@ if (isset($obj)) {
     echo '</div>';
   }
   ?>
+  </div>
   </div>
   <?php if($objectClass == 'ComponentVersion' or $objectClass == 'ProductVersion'){
     $user = getSessionUser();

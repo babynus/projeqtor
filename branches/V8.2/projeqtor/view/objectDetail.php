@@ -3009,7 +3009,7 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
     //florent ticket 4102
     if( Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and $included==false){
       $margin=4;
-      $tabName=i18n("colDetail");
+      $tabName="Detail";
       if(isset($arrayGroupe[$lc]['99'])){
         $tabName=ucfirst($arrayGroupe[$lc]['99']);
       }
