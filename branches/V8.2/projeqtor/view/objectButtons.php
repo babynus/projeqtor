@@ -98,7 +98,7 @@
   	$isAttachmentEnabled = false;
   }
   $showAttachment=($isAttachmentEnabled and property_exists($obj,'_Attachment') and $updateRight=='YES' and isHtml5() and ! $readOnly )?true:false;
-  $entendedZone=false;
+  $extendedZone=false;
 ?>
 <table style="width:100%;height:100%;">
  <tr style="height:100%";>
@@ -599,7 +599,7 @@
 </table>
 <?php 
 function organizeButtons($nbButton=1) {
-	global $displayWidthButton, $cptButton,$showAttachment,$entendedZone, $obj;
+	global $displayWidthButton, $cptButton,$showAttachment,$extendedZone, $obj;
 	$buttonWidth=34;
 	$cptButton+=$nbButton;
 	$requiredWidth=$cptButton*$buttonWidth;
@@ -607,8 +607,8 @@ function organizeButtons($nbButton=1) {
 		$requiredWidth+=100;
 	}
 	if ($requiredWidth>($displayWidthButton/2)) {
-		if (! $entendedZone) {
-			$entendedZone=true;
+		if (! $extendedZone) {
+			$extendedZone=true;
 			echo '<div dojoType="dijit.form.Button" showlabel="false" title="'. i18n('extraButtonsBar'). '" '
           .' iconClass="dijitButtonIcon dijitButtonIconExtraButtons" class="detailButton"'
  		      .' id="extraButtonsDetail" onClick="showExtraButtons(\'extraButtonsDetail\')" '
@@ -621,8 +621,8 @@ function organizeButtons($nbButton=1) {
 	
 }
 function organizeButtonsEnd() {
-	global $displayWidth, $cptButton,$showAttachment,$entendedZone;
-	if ($entendedZone) {
+	global $displayWidth, $cptButton,$showAttachment,$extendedZone;
+	if ($extendedZone) {
 		echo '</div>';
 	}
 }
