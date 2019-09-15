@@ -2451,7 +2451,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $saveFunction=($comboDetail)?'window.top.saveDetailItem();':'saveObject()';
           echo ' onClick="dijit.byId(\''.$fieldId.'\').set(\'value\','.$next.');setTimeout(\''.$saveFunction.'\',100);">';
           echo '<img src="css/images/iconMoveTo.png" style="position:relative;left:5px;top:2px;"/>';
-          echo '<div style="position:relative;top:-16px;left:25px;width:'.($fieldWidth-30).'px">'.SqlList::getNameFromId('Status', $next).'<div>';
+          echo '<div style="position:relative;top:-16px;left:25px;width:'.($fieldWidth-30).'px">'.SqlList::getNameFromId('Status', $next).'</div>';
           echo '</div>';
         }
         // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM
@@ -2462,7 +2462,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $saveFunction=($comboDetail)?'window.top.saveDetailItem();':'saveObject()';
           echo ' onClick="dijit.byId(\''.$fieldId.'\').set(\'value\','.$next.');setTimeout(\''.$saveFunction.'\',100);">';
           echo '<img src="css/images/iconMoveTo.png" style="position:relative;left:5px;top:2px;"/>';
-          echo '<div style="position:relative;top:-16px;left:25px;width:'.($fieldWidth-30).'px">'.i18n(SqlList::getNameFromId('StatusNotification', $next)).'<div>';
+          echo '<div style="position:relative;top:-16px;left:25px;width:'.($fieldWidth-30).'px">'.i18n(SqlList::getNameFromId('StatusNotification', $next)).'</div>';
           echo '</div>';
         }
         // END - ADD BY TABARY - NOTIFICATION SYSTEM
@@ -2481,7 +2481,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             echo ' onClick="dijit.byId(\''.$fieldId.'\').set(\'value\','.htmlEncode($user->id).');setTimeout(\''.$saveFunction.'\',100);"';
             echo '>';
             echo '<img src="css/images/iconMoveTo.png" style="position:relative;left:5px;top:2px;"/>';
-            echo '<div style="position:relative;top:-16px;left:25px;width:'.($fieldWidth-30).'px">'.i18n('assignToMeShort').'<div>';
+            echo '<div style="position:relative;top:-16px;left:25px;width:'.($fieldWidth-30).'px">'.i18n('assignToMeShort').'</div>';
             echo '</div>';
           }
         }
@@ -3015,11 +3015,14 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
       }
       $sessionTabName='detailTab'.$classObj;
       $selectedTab=getSessionValue($sessionTabName,'Description');
+      $paneName='pane'.$tabName;
+      if (!isset($$paneName) or $$paneName=='') {
       echo '<div id="'.$tabName.'" dojoType="dijit.layout.ContentPane" class="detailTabClass" title="'.i18n('tab'.ucfirst($tabName)).(($nbBadge!==null )?'<div id=\''.$section.'BadgeTab\' class=\'sectionBadge\' style=\'right:0px;top:0px;width:auto;padding:0px 7px;font-weight:normal;zoom:0.9; -moz-transform: scale(0.9);'.(($nbBadge==0)?'opacity:0.5;':'').'\' >'.$nbBadge.'</div>':'').'" style="width:100%;height:100%;overflow:auto;" '.(($tabName==$selectedTab)?' selected="true" ':'').'>';
       echo ' <script type="dojo/method" event="onShow" >'; 
       echo '   saveDataToSession(\''.$sessionTabName.'\',\''.$tabName.'\');';
       echo '   hideEmptyTabs();';
       echo ' </script>';
+      }
       if(isset($prevSection)){ // TODO : sure it's not a </DIV> and set before previous line ?
         echo '<div>';
       }
@@ -7594,6 +7597,7 @@ function endBuffering($prevSection, $included) {
     $sectionPosition=array(
         'assignment'=>array('2'=>'left', '3'=>'extra','99'=>'progress'),
         'affectations'=>array('2'=>'right', '3'=>'right','99'=>'allocation'),
+        'approver'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
         'attachment'=>array('2'=>'bottom', '3'=>'extra','99'=>'fichier'), 
         'attendees'=>array('2'=>'right', '3'=>'extra','99'=>'detail'), 
         'billline'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
@@ -7613,7 +7617,7 @@ function endBuffering($prevSection, $included) {
         'link_deliverable'=>array('2'=>'left', '3'=>'extra','99'=>'link'), 
         'link_activity'=>array('2'=>'left', '3'=>'extra','99'=>'link'),
         'listtypeusingworkflow'=>array('2'=>'right', '3'=>'extra','99'=>'link'), 
-        'lock'=>array('2'=>'left', '3'=>'left','99'=>'treatment'), 
+        'lock'=>array('2'=>'left', '3'=>'left','99'=>'description'), 
         'mailtext'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
         'miscellaneous'=>array('2'=>'right', '3'=>'extra','99'=>'detail'), 
         'note'=>array('2'=>'bottom', '3'=>'extra','99'=>'note'), 
@@ -7630,6 +7634,7 @@ function endBuffering($prevSection, $included) {
         'productprojectprojects'=>array('2'=>'right', '3'=>'right','99'=>'configuration'), 
         'productprojectproducts'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
         'productcomponent'=>array('2'=>'right', '3'=>'right','99'=>'configuration'), 
+        'productcomponent_right'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
         'productcomposition'=>array('2'=>'right', '3'=>'right','99'=>'link'), 
         'productbusinessfeatures'=>array('2'=>'right', '3'=>'right','99'=>'link'), 
         'productversions'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
@@ -7646,12 +7651,13 @@ function endBuffering($prevSection, $included) {
         'target'=>array('2'=>'bottom', '3'=>'extra','99'=>'treatment'), 
         'treatment'=>array('2'=>'right', '3'=>'right','99'=>'treatment'),
         'treatment_right'=>array('2'=>'right', '3'=>'extra','99'=>'treatment'), 
-        'link_testcase'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'), 
+        'link_testcase'=>array('2'=>'bottom', '3'=>'extra','99'=>'progress'), 
         'testcaserun'=>array('2'=>'bottom', '3'=>'bottom','99'=>'progress'), 
         'testcaserunsummary'=>array('2'=>'left', '3'=>'extra','99'=>'progress'), 
         'testcasesummary'=>array('2'=>'right', '3'=>'extra','99'=>'progress'),
         'totalfinancialsynthesis'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
         'valuealertoverwarningoverokunder'=>array('2'=>'right', '3'=>'right','99'=>'progress'),
+        'version'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
         'versionprojectversions'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
         'void'=>array('2'=>'right', '3'=>'right','99'=>'detail'), 
         'workflowdiagram'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
@@ -7668,6 +7674,7 @@ function endBuffering($prevSection, $included) {
       return;
     }
     $sectionName=strtolower($prevSection);
+    $sectionName=str_replace('_right','',$sectionName);
     if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$included ){
       $groupe='detail';
       if(isset($sectionPosition[$sectionName]['99'])){
@@ -7693,8 +7700,7 @@ function endBuffering($prevSection, $included) {
         $paneFichier.=$display;
       }else if($groupe=='configuration'){
         $paneConfiguration.=$display;
-      }
-      
+      }      
     }else{
       if ($nbColMax==1) {
           $leftPane.=$display;
