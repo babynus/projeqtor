@@ -99,6 +99,7 @@
   }
   $showAttachment=($isAttachmentEnabled and property_exists($obj,'_Attachment') and $updateRight=='YES' and isHtml5() and ! $readOnly )?true:false;
   $extendedZone=false;
+  $maxTitleWidth=round($displayWidthButton*0.4,0);
 ?>
 <table style="width:100%;height:100%;">
  <tr style="height:100%";>
@@ -106,12 +107,12 @@
     <div style="width:100%;height:100%;">
       <table style="width:100%;height:100%;">
         <tr style="height:35px;">
-          <td style="width:43px;min-width:43px;">&nbsp;
+          <td style="width:43px;min-width:43px;max-width:43px;">&nbsp;
             <?php $iconClassName=((SqlElement::is_subclass_of($class, 'PlgCustomList'))?'ListOfValues':$class);?>
             <div style="position:absolute;left:0px;width:43px;max-width:50px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>
             <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" style="margin-left:9px;width:32px;height:32px" /></div>          
           </td>
-          <td class="title" style="width:10%;">
+          <td class="title" style="width:10%;max-width:<?php echo $maxTitleWidth?>px;overflow:hidden">
             &nbsp;<?php echo i18n($_REQUEST['objectClass']);
 //ADD BY Quentin Boudier - 2017-04-26 'copylink in title of object detail    '
             $ref=$obj->getReferenceUrl();
@@ -126,29 +127,36 @@
 // END ADD BY Quentin Boudier - 2017-04-26 'copylink in tilte of object detail	'
            	?>
           </td>
-          <td class="title" style="height:35px;">
-            <div style="width:100%;height:100%;position:relative;">
-            <div id="buttonDivObjectName" style="width:100%;position:absolute;top:8px;text-overflow:ellipsis;overflow:hidden;">
-                 <?php  
-                  if (property_exists($obj,'name') and $obj->name){ 
-                 	  echo '-&nbsp;';
-                 	  if (isset($obj->_isNameTranslatable) and $obj->_isNameTranslatable) {
-                 	  	echo i18n($obj->name);
-                 	  } else { 
-                 	  	echo $obj->name;
-                    }
-                  }?>
+          <td class="title" style="height:35px;<?php if ($displayWidthButton<400) echo 'display:none;'?>">
+            <div style="width:100%;height:100%;position:relative;<?php if ($displayWidthButton<400) echo 'display:none;'?>">
+              <div id="buttonDivObjectName" style="width:100%;position:absolute;top:8px;text-overflow:ellipsis;overflow:hidden;">
+                   <?php  
+                    if (property_exists($obj,'name') and $obj->name){ 
+                   	  echo '-&nbsp;';
+                   	  if (isset($obj->_isNameTranslatable) and $obj->_isNameTranslatable) {
+                   	  	echo i18n($obj->name);
+                   	  } else { 
+                   	  	echo $obj->name;
+                      }
+                    }?>
+              </div>
             </div>
           </td>
         </tr>
       </table>  
     </div> 
   </td>
-  <td style="width:8%; text-align:right;"  >
-      <div style="width:<?php echo (property_exists($obj, 'idStatus') and $displayWidthButton>=1000)?'252':'122';?>px;margin-right:16px;white-space:nowrap;max-height:10px;" id="buttonDivCreationInfo"><?php include_once '../tool/getObjectCreationInfo.php';?></div>
+  <td style="width:1%; text-align:right;"  >
+      <?php 
+      $creationInfoWidth=0;
+      if (property_exists($obj, 'idStatus') and $displayWidthButton>=500) $creationInfoWidth+=125;
+      if ($displayWidthButton>=800) $creationInfoWidth+=130;
+      ?>
+      <div style="width:<?php echo $creationInfoWidth;?>px;margin-right:0px;white-space:nowrap;max-height:32px;" id="buttonDivCreationInfo"><?php include_once '../tool/getObjectCreationInfo.php';?></div>
   </td>
-  <td  style="white-space:nowrap;">
-    <div style="float:left;position:relative;width:45%;white-space:nowrap" id="buttonDivContainerDiv"> 
+  <td style="width:1%"></td>
+  <td  style="white-space:nowrap;width:33%">
+    <div style="float:right;position:relative;width:fit-content;white-space:nowrap;<?php if ($showAttachment) echo 'padding-right:44px';?>" id="buttonDivContainerDiv"> 
     <?php if (! $comboDetail and $class!='GlobalView') {?>
       <?php organizeButtons();?>
       <button id="newButton" dojoType="dijit.form.Button" showlabel="false"
@@ -338,12 +346,12 @@
         </script>
       </button>   
 <?php } ?>  
-    <?php 
-    $clsObj=get_class($obj);
-    if ($clsObj=='TicketSimple') {$clsObj='Ticket';}
-    $mailable=SqlElement::getSingleSqlElementFromCriteria('Mailable', array('name'=>$clsObj));
-    if ($mailable and $mailable->id) {
-    ?>
+      <?php 
+      $clsObj=get_class($obj);
+      if ($clsObj=='TicketSimple') {$clsObj='Ticket';}
+      $mailable=SqlElement::getSingleSqlElementFromCriteria('Mailable', array('name'=>$clsObj));
+      if ($mailable and $mailable->id) {
+      ?>
      <?php organizeButtons();?>
      <button id="mailButton" dojoType="dijit.form.Button" showlabel="false"
        title="<?php echo i18n('buttonMail', array(i18n($clsObj)));?>"
@@ -557,12 +565,15 @@
         </script>
       </button>
     </span>
+    </div>
+    </td>
+    <td style="width:40px">
     <?php }?>
     <?php organizeButtonsEnd();?>
       <input type="hidden" id="createRight" name="createRight" value="<?php echo $createRight;?>" />
       <input type="hidden" id="updateRight" name="updateRight" value="<?php echo (!$obj->id)?$createRight:$updateRight;?>" />
       <input type="hidden" id="deleteRight" name="deleteRight" value="<?php echo $deleteRight;?>" />
-       <?php if ($isAttachmentEnabled and property_exists($obj,'_Attachment') and $updateRight=='YES' and isHtml5() and ! $readOnly ) {
+       <?php if ($showAttachment) {
          $labelAttachmentFileDirect=i18n("Attachment").'<br/><i>('.i18n("dragAndDrop").')</i>';
          ?>
 			<span id="attachmentFileDirectDiv" style="position:relative;<?php echo (!$obj->id or $comboDetail)?'visibility:hidden;':'';?>;padding-left:4px;">
@@ -593,7 +604,6 @@
 			<?php } else {?>
 			 <span style="display:inline-block;width:2px"></span>
 			<?php }?>
-      </div>
     </td>
   </tr>
 </table>
@@ -604,9 +614,9 @@ function organizeButtons($nbButton=1) {
 	$cptButton+=$nbButton;
 	$requiredWidth=$cptButton*$buttonWidth;
 	if ($showAttachment and $obj->id) {
-		$requiredWidth+=100;
+		$requiredWidth+=44;
 	}
-	if ($requiredWidth>($displayWidthButton/2)) {
+	if ($requiredWidth>($displayWidthButton/3)) {
 		if (! $extendedZone) {
 			$extendedZone=true;
 			echo '<div dojoType="dijit.form.Button" showlabel="false" title="'. i18n('extraButtonsBar'). '" '
