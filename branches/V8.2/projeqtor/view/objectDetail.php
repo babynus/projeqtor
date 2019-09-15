@@ -3016,6 +3016,7 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
       $sessionTabName='detailTab'.$classObj;
       $selectedTab=getSessionValue($sessionTabName,'Description');
       $paneName='pane'.$tabName;
+
       if (!isset($$paneName) or $$paneName=='') {
       echo '<div id="'.$tabName.'" dojoType="dijit.layout.ContentPane" class="detailTabClass" title="'.i18n('tab'.ucfirst($tabName)).(($nbBadge!==null )?'<div id=\''.$section.'BadgeTab\' class=\'sectionBadge\' style=\'right:0px;top:0px;width:auto;padding:0px 7px;font-weight:normal;zoom:0.9; -moz-transform: scale(0.9);'.(($nbBadge==0)?'opacity:0.5;':'').'\' >'.$nbBadge.'</div>':'').'" style="width:100%;height:100%;overflow:auto;" '.(($tabName==$selectedTab)?' selected="true" ':'').'>';
       echo ' <script type="dojo/method" event="onShow" >'; 
@@ -3024,7 +3025,7 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
       echo ' </script>';
       }
       if(isset($prevSection)){ // TODO : sure it's not a </DIV> and set before previous line ?
-        echo '<div>';
+        echo '<div style="border: 2px solid red">';
       }
     }
     // gautier #resourceTeam
@@ -7597,9 +7598,10 @@ function endBuffering($prevSection, $included) {
     $sectionPosition=array(
         'assignment'=>array('2'=>'left', '3'=>'extra','99'=>'progress'),
         'affectations'=>array('2'=>'right', '3'=>'right','99'=>'allocation'),
+        'answer'=>array('2'=>'right', '3'=>'right','99'=>'progress'),
         'approver'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
         'attachment'=>array('2'=>'bottom', '3'=>'extra','99'=>'fichier'), 
-        'attendees'=>array('2'=>'right', '3'=>'extra','99'=>'detail'), 
+        'attendees'=>array('2'=>'right', '3'=>'extra','99'=>'progress'), 
         'billline'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
         'billlineterm'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
         'calendar'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
@@ -7635,15 +7637,15 @@ function endBuffering($prevSection, $included) {
         'productprojectproducts'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
         'productcomponent'=>array('2'=>'right', '3'=>'right','99'=>'configuration'), 
         'productcomponent_right'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
-        'productcomposition'=>array('2'=>'right', '3'=>'right','99'=>'link'), 
-        'productbusinessfeatures'=>array('2'=>'right', '3'=>'right','99'=>'link'), 
+        'productcomposition'=>array('2'=>'right', '3'=>'right','99'=>'configuration'), 
+        'productbusinessfeatures'=>array('2'=>'right', '3'=>'right','99'=>'detail'), 
         'productversions'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
         'providerterm'=>array('2'=>'right', '3'=>'extra','99'=>'link'), 
         'receivers'=>array('3'=>'bottom', '3'=>'extra','99'=>'detail'), 
         'resourcesofobject'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'), 
         'resourcecost'=>array('2'=>'right', '3'=>'extra','99'=>'detail'),
         'subprojects'=>array('2'=>'right', '3'=>'right','99'=>'dependency'),
-        'subproducts'=>array('2'=>'right', '3'=>'right','99'=>'dependency'),
+        'subproducts'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
         'subbudgets'=>array('2'=>'right', '3'=>'extra','99'=>'dependency'), 
         'submissions'=>array('2'=>'right', '3'=>'extra','99'=>'progress'), 
         'synthesis'=>array('2'=>'right', '3'=>'right','99'=>'progress'), 
@@ -7656,6 +7658,7 @@ function endBuffering($prevSection, $included) {
         'testcaserunsummary'=>array('2'=>'left', '3'=>'extra','99'=>'progress'), 
         'testcasesummary'=>array('2'=>'right', '3'=>'extra','99'=>'progress'),
         'totalfinancialsynthesis'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
+        'validation'=>array('2'=>'right', '3'=>'right','99'=>'progress'),
         'valuealertoverwarningoverokunder'=>array('2'=>'right', '3'=>'right','99'=>'progress'),
         'version'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
         'versionprojectversions'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
