@@ -59,7 +59,7 @@ if (false===function_exists('lcfirst')) {
   }
 }
 $preseveHtmlFormatingForPDF=true;
-$arrayPanes=array('paneDescription','paneTreatment','paneAllocation','paneProgress','paneConfiguration','paneDetail','paneDependency','paneLink','paneFichier','paneNote');
+$arrayPanes=array('paneDescription','paneTreatment','paneAllocation','paneProgress','paneConfiguration','paneDetail','paneDependency','paneCheckList','paneLink','paneFichier','paneNote','paneHistory');
 // ********************************************************************************************************
 // MAIN PAGE
 // ********************************************************************************************************
@@ -327,56 +327,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
   <?php
   }
   $widthPct=setWidthPct($displayWidth, $print, $printWidth, $obj, "2");
-  if (!$noselect and isset($obj->_ChecklistDefinitionLine)) {
-    ?> <br />
-  <?php if ($print) {?>
-<table width="<?php echo $printWidth;?>px;">
-      <tr>
-        <td class="section"><?php echo i18n('sectionChecklistLines');?></td>
-      </tr>
-      <tr>
-        <td><?php drawChecklistDefinitionLinesFromObject($obj);?></td>
-      </tr>
-    </table>
-  <?php
-    } else {
-      $titlePane=$objClass."_checklistDefinitionLine";
-      ?>
-<div style="width: <?php echo $displayWidth;?>" dojoType="dijit.TitlePane" 
-     title="<?php echo i18n('sectionChecklistLines');?>"
-     open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
-     id="<?php echo $titlePane;?>"       
-     onHide="saveCollapsed('<?php echo $titlePane;?>');"
-     onShow="saveExpanded('<?php echo $titlePane;?>');" >
-     <?php  drawChecklistDefinitionLinesFromObject($obj); ?>
-</div>
-<?php }?> <?php
-  }
-  if (!$noselect and isset($obj->_JobDefinition)) {
-    ?> <br />
-  <?php if ($print) {?>
-  <table width="<?php echo $printWidth;?>px;">
-      <tr>
-        <td class="section"><?php echo i18n('sectionJoblist');?></td>
-      </tr>
-      <tr>
-        <td><?php drawJobDefinitionFromObject($obj);?></td>
-      </tr>
-    </table>
-  <?php
-    } else {
-      $titlePane=$objClass."_jobDefinition";
-      ?>
-  <div style="width: <?php echo $displayWidth;?>" dojoType="dijit.TitlePane"
-     title="<?php echo i18n('sectionJoblist');?>"
-     open="<?php echo ( array_key_exists($titlePane, $collapsedList)?'false':'true');?>"
-     id="<?php echo $titlePane;?>"
-     onHide="saveCollapsed('<?php echo $titlePane;?>');"
-     onShow="saveExpanded('<?php echo $titlePane;?>');" >
-     <?php  drawJobDefinitionFromObject($obj); ?>
-  </div>
-  <?php }?> <?php
-  }
+
   $displayHistory='REQ';
   $paramDisplayHistory=Parameter::getUserParameter('displayHistory');
   if ($paramDisplayHistory) {
@@ -2945,6 +2896,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       // echo '</td></tr></table>';
     }
   }
+
   if (!$included) endBuffering($section, $included);
   if (!$included) finalizeBuffering();
   if ($outMode=='pdf') {
@@ -7587,13 +7539,13 @@ function getNbColMax($displayWidth, $print, $printWidth, $obj) {
 }
 
 function startBuffering() {
-  global $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $nbColMax, $section,$arrayGroupe;
+  global $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $paneHistory, $paneCheckList, $nbColMax, $section,$arrayGroupe;
   if (!$reorg) return;
   ob_start();
 }
 
 function endBuffering($prevSection, $included) {
-  global $print, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $nbColMax, $section, $beforeAllPanes, $arrayGroupe; 
+  global $print, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier,$paneHistory, $paneCheckList, $nbColMax, $section, $beforeAllPanes, $arrayGroupe; 
     $sectionPosition=array(
         'assignment'=>array('2'=>'left', '3'=>'extra','99'=>'progress'),
         'affectations'=>array('2'=>'right', '3'=>'right','99'=>'allocation'),
@@ -7605,7 +7557,8 @@ function endBuffering($prevSection, $included) {
         'attendees'=>array('2'=>'right', '3'=>'extra','99'=>'progress'), 
         'billline'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
         'billlineterm'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
-        'calendar'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
+        'calendar'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
+        'checklistdefinitionline'=>array('2'=>'bottom', '3'=>'bottom','99'=>'description'),
         'componentcomposition'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
         'componentstructure'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
         'componentversions'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
@@ -7622,6 +7575,7 @@ function endBuffering($prevSection, $included) {
         'hierarchicorganizationprojects'=>array('2'=>'bottom', '3'=>'extra','99'=>'dependency'), 
         'iban'=>array('2'=>'right', '3'=>'extra','99'=>'detail'), 
         'internalalert'=>array('2'=>'right', '3'=>'extra','99'=>'detail'), 
+        'jobdefinition'=>array('2'=>'bottom', '3'=>'bottom','99'=>'description'),
         'link'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'), 
         'link_requirement'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'), 
         'link_deliverable'=>array('2'=>'left', '3'=>'extra','99'=>'link'), 
@@ -7719,7 +7673,11 @@ function endBuffering($prevSection, $included) {
         $paneFichier.=$display;
       }else if($groupe=='configuration'){
         $paneConfiguration.=$display;
-      }      
+      }else if($groupe=='checklist') {
+        $paneCheckList.=$display;      
+      }else if ($groupe=='history') {
+        $paneHistory.=$display;     
+      }
     }else{
       if ($nbColMax==1) {
           $leftPane.=$display;
@@ -7752,7 +7710,7 @@ function endBuffering($prevSection, $included) {
 }
 
 function finalizeBuffering() {
-  global $print,$reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $arrayPanes, $paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier,$arrayGroupe, $nbColMax, $section, $beforeAllPanes;
+  global $print,$reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $arrayPanes, $paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $paneHistory, $paneCheckList, $arrayGroupe, $nbColMax, $section, $beforeAllPanes;
   if (!$reorg) return;
   if (!$leftPane and $rightPane) {
     $leftPane=$rightPane;
