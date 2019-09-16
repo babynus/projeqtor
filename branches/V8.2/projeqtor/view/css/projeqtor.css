@@ -3787,3 +3787,8 @@ progress::-webkit-progress-value {
   border-radius: 10px;
   background: #37A346;
 } 
+
+.dijitReset.dijitMenuItemLabel div.sectionBadge {
+	display:none;
+	/* position : relative; left:5px;*/
+}
