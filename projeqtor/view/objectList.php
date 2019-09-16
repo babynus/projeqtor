@@ -272,7 +272,11 @@ if (property_exists($objectClass,'idStatus')) {
        <div style="position:absolute;left:0px;width:43px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>
        <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" style="margin-left:9px;width:32px;height:32px" /></div>
     </td>
-    <td><span class="title"><?php echo i18n("menu" . $objectClass);?></span></td>
+    <td class="title" style="height:35px;width:30%;">
+      <div style="width:100%;height:100%;position:relative;">
+        <div id="menuName" style="width:100%;position:absolute;top:8px;text-overflow:ellipsis;overflow:hidden;"><?php echo i18n("menu" . $objectClass);?></div>
+      </div>
+    </td>
     <td>   
       <form dojoType="dijit.form.Form" id="listForm" action="" method="" >
         <script type="dojo/method" event="onSubmit" >
@@ -878,12 +882,12 @@ if (property_exists($objectClass,'idStatus')) {
      }?>             
             
 <?php if ( property_exists($obj,'isEis') and !$hideEisSearch) { ?>
-              <td style="vertical-align: middle; width:15%; min-width:110px; text-align:right;white-space:normal;">
+              <td style="vertical-align: middle; width:15%; min-width:110px; text-align:right;white-space:normal;" class="allSearchTD hideInServiceTD">
                 <div style="max-height:32px;"> 
                 <?php echo i18n("hideInService");?>
                 </div>
               </td>
-              <td style="width: 10px;text-align: center; align: center;white-space:nowrap;">&nbsp;
+              <td style="width: 10px;text-align: center; align: center;white-space:nowrap;" class="allSearchTD hideInServiceTD">&nbsp;
                 <?php $hideInService=Parameter::getUserParameter('hideInService');?>
                 <div title="<?php echo i18n('hideInService')?>" dojoType="dijit.form.CheckBox" 
                 class="whiteCheck" <?php if ($hideInService=='true') echo " checked ";?>
