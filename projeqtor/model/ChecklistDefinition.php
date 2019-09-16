@@ -38,9 +38,9 @@ class ChecklistDefinition extends SqlElement {
   public $nameChecklistable;
   public $idType;
   //public $lineCount;
-
   public $idle;
-  public $_sec_void;
+  public $_sec_ChecklistDefinitionLine;
+  public $_spe_ChecklistDefinitionLine;
   public $_ChecklistDefinitionLine=array();
   public $_noCopy;
     
@@ -145,6 +145,15 @@ class ChecklistDefinition extends SqlElement {
       $result='OK';
     }
     return $result;
+  }
+  
+  public function drawSpecificItem($item){
+    global $print, $outMode, $largeWidth;
+    $result="";
+    if ($item=='ChecklistDefinitionLine') {
+      drawChecklistDefinitionLinesFromObject($this);
+      return $result;
+    }
   }
   
 }

@@ -1533,11 +1533,11 @@ function finalizeMessageDisplay(destination, validationType) {
         // 'listForm');
       } else if (validationType == 'checklistDefinitionLine') {
         loadContent("objectDetail.php?refreshChecklistDefinitionLines=true",
-            dojo.byId('objectClass').value + '_checklistDefinitionLine',
+            dojo.byId('objectClass').value + '_ChecklistDefinitionLine',
             'listForm');
       } else if (validationType == 'jobDefinition') {
         loadContent("objectDetail.php?refreshJobDefinition=true",
-            dojo.byId('objectClass').value + '_jobDefinition',
+            dojo.byId('objectClass').value + '_JobDefinition',
             'listForm');
       } else if (validationType == 'testCaseRun') {
         loadContent("objectDetail.php?refresh=true", "detailFormDiv",
