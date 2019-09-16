@@ -34,7 +34,7 @@ $leftPane="";
 $rightPane="";
 $extraPane="";
 $bottomPane="";
-$pane="";
+$paneDetail="";
 $paneDescription="";
 $paneLink="";
 $paneTreatment="";
@@ -59,6 +59,7 @@ if (false===function_exists('lcfirst')) {
   }
 }
 $preseveHtmlFormatingForPDF=true;
+$arrayPanes=array('paneDescription','paneTreatment','paneAllocation','paneProgress','paneConfiguration','paneDetail','paneDependency','paneLink','paneFichier','paneNote');
 // ********************************************************************************************************
 // MAIN PAGE
 // ********************************************************************************************************
@@ -438,7 +439,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
  */
 function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $parentHidden=false) {
   scriptLog("drawTableFromObject(obj, included=$included, parentReadOnly=$parentReadOnly)");
-  global $toolTip, $cr, $print, $treatedObjects, $displayWidth, $outMode, $comboDetail, $collapsedList, $printWidth, $profile, $detailWidth, $readOnly, $largeWidth, $widthPct, $nbColMax, $preseveHtmlFormatingForPDF, $reorg,$pane, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier,$arrayGroupe, $nbColMax, $section, $beforeAllPanes, $colWidth,$objInsert;
+  global $toolTip, $cr, $print, $treatedObjects, $displayWidth, $outMode, $comboDetail, $collapsedList, $printWidth, $profile, $detailWidth, $readOnly, $largeWidth, $widthPct, $nbColMax, $preseveHtmlFormatingForPDF, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier,$arrayGroupe, $nbColMax, $section, $beforeAllPanes, $colWidth,$objInsert;
   $ckEditorNumber=0; // Will be used only if getEditor=="CK" for CKEditor
 
   //gautier
@@ -2965,7 +2966,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
 
 function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, $outMode, $prevSection, $nbCol, $nbBadge=null, $included=null, $obj=null) {
   // scriptLog("startTitlePane(classObbj=$classObj, section=$section, collapsedList=array, widthPct=$widthPct, print=$print, outMode=$outMode, prevSection=$prevSection, nbCol=$nbCol, nbBadge=$nbBadge)");
-  global $currentColumn, $reorg,$pane, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $beforeAllPanes,$type, $arrayGroupe;
+  global $currentColumn, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $beforeAllPanes,$type, $arrayGroupe;
   if (!$currentColumn) $currentColumn=0;
   if ($prevSection) {
     echo '</table>';
@@ -3016,7 +3017,6 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
       $sessionTabName='detailTab'.$classObj;
       $selectedTab=getSessionValue($sessionTabName,'Description');
       $paneName='pane'.$tabName;
-
       if (!isset($$paneName) or $$paneName=='') {
       echo '<div id="'.$tabName.'" dojoType="dijit.layout.ContentPane" class="detailTabClass" title="'.i18n('tab'.ucfirst($tabName)).(($nbBadge!==null )?'<div id=\''.$section.'BadgeTab\' class=\'sectionBadge\' style=\'right:0px;top:0px;width:auto;padding:0px 7px;font-weight:normal;zoom:0.9; -moz-transform: scale(0.9);'.(($nbBadge==0)?'opacity:0.5;':'').'\' >'.$nbBadge.'</div>':'').'" style="width:100%;height:100%;overflow:auto;" '.(($tabName==$selectedTab)?' selected="true" ':'').'>';
       echo ' <script type="dojo/method" event="onShow" >'; 
@@ -3024,9 +3024,9 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
       echo '   hideEmptyTabs();';
       echo ' </script>';
       }
-      if(isset($prevSection)){ // TODO : sure it's not a </DIV> and set before previous line ?
-        echo '<div style="border: 2px solid red">';
-      }
+      //if(isset($prevSection)){ // TODO : sure it's not a </DIV> and set before previous line ?
+      //  echo '<div style="border: 2px solid red">';
+      //}
     }
     // gautier #resourceTeam
     echo '<div dojoType="dijit.TitlePane" title="'.i18n('section'.ucfirst($sectionName)).(($nbBadge!==null)?'<div id=\''.$section.'Badge\' class=\'sectionBadge\'>'.$nbBadge.'</div>':'').'"';
@@ -7588,13 +7588,13 @@ function getNbColMax($displayWidth, $print, $printWidth, $obj) {
 }
 
 function startBuffering() {
-  global $reorg,$pane, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $nbColMax, $section,$arrayGroupe;
+  global $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $nbColMax, $section,$arrayGroupe;
   if (!$reorg) return;
   ob_start();
 }
 
 function endBuffering($prevSection, $included) {
-  global $reorg,$pane, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $nbColMax, $section, $beforeAllPanes, $arrayGroupe; 
+  global $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $nbColMax, $section, $beforeAllPanes, $arrayGroupe; 
     $sectionPosition=array(
         'assignment'=>array('2'=>'left', '3'=>'extra','99'=>'progress'),
         'affectations'=>array('2'=>'right', '3'=>'right','99'=>'allocation'),
@@ -7698,7 +7698,7 @@ function endBuffering($prevSection, $included) {
       }else if($groupe=='link'){
         $paneLink.=$display;
       }else if($groupe=='detail'){
-        $pane.=$display;
+        $paneDetail.=$display;
       }else if($groupe=='fichier'){
         $paneFichier.=$display;
       }else if($groupe=='configuration'){
@@ -7736,7 +7736,7 @@ function endBuffering($prevSection, $included) {
 }
 
 function finalizeBuffering() {
-  global $reorg,$pane, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier,$arrayGroupe, $nbColMax, $section, $beforeAllPanes;
+  global $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $arrayPanes, $paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier,$arrayGroupe, $nbColMax, $section, $beforeAllPanes;
   if (!$reorg) return;
   if (!$leftPane and $rightPane) {
     $leftPane=$rightPane;
@@ -7744,36 +7744,15 @@ function finalizeBuffering() {
   }
   // $leftPane="";$rightPane="";$extraPane="";$bottomPane="";
   echo $beforeAllPanes;
+  debugLog($beforeAllPanes);
   echo '<table style="width=100%">';
-  $showBorders=false;
-  if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0'){
-    echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid red':'').'">'.$paneDescription.'</td></tr>';
-    if($paneTreatment){
-      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneTreatment.'</td></tr>';
-    }
-    if ($paneAllocation) {
-      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneAllocation.'</td></tr>';
-    }
-    if ($paneProgress) {
-      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneProgress.'</td></tr>';
-    }
-    if ($paneConfiguration) {
-      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneConfiguration.'</td></tr>';
-    }
-    if($pane){
-      echo '<tr><td  style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$pane.'</td></tr>';
-    }
-    if ($paneDependency) {
-      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneDependency.'</td></tr>';
-    }
-    if ($paneLink) {
-      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneLink.'</td></tr>';
-    }
-    if ($paneFichier) {
-      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneFichier.'</td></tr>';
-    }
-    if ($paneNote) {
-      echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneNote.'</td></tr>';
+  $showBorders=true;
+  if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0'){ // Attention, panes start with DIV that is not closed
+    debugLog($paneDescription);
+    foreach ($arrayPanes as $paneName) {
+      if(isset($$paneName) and $$paneName){
+        echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$$paneName.'</div></td></tr>';
+      }
     }
   }else{
     if ($nbColMax==1) {
@@ -7801,6 +7780,7 @@ function finalizeBuffering() {
     }
  }
   echo '</table>';
+  
 }
 
 function drawJobDefinitionFromObject($obj, $refresh=false) {
