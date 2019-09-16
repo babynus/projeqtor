@@ -53,7 +53,7 @@ class ProductOrComponent extends SqlElement {
   public $_productLanguage;
   public $_sec_context;
   public $_productContext;
-  public $_sec_void;
+  //public $_sec_void;
   //END ADD qCazelles - LANG2
 
   // Define the layout that will be used for lists

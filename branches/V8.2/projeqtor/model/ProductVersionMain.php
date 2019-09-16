@@ -75,14 +75,15 @@ class ProductVersionMain extends Version {
   public $_sec_ProductVersionCompatibility;
   public $_productVersionCompatibility=array();
   //END ADD qCazelles - Version compatibility
-  public $_sec_Tenders;
-  public $_spe_tenders;
+  
   //ADD qCazelles - LANG 2
   public $_sec_language;
   public $_productLanguage;
   public $_sec_context;
   public $_productContext;
   //END ADD qCazelles - LANG 2
+  public $_sec_Tenders;
+  public $_spe_tenders;
   //ADD qCazelles
   public $_sec_delivery;
   public $_versionDelivery;
