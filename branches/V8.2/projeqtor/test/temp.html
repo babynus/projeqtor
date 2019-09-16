@@ -1,138 +1,131 @@
 <div id="Detail" dojoType="dijit.layout.ContentPane"
 	class="detailTabClass" title="Détail"
-	style="width: 100%; height: 100%; overflow: auto;" selected="true">
+	style="width: 100%; height: 100%; overflow: auto;">
 	<script type="dojo/method" event="onShow">   saveDataToSession('detailTabProduct','Detail');   hideEmptyTabs(); </script>
-	<div dojoType="dijit.TitlePane"
-		title="Liste des fonctionnalités métier de ce produit" open="true"
-		id="Product_ProductBusinessFeatures"
-		class="titlePaneFromDetail generalColClass _sec_ProductBusinessFeaturesClass"
-		titleStyle=""
-		style="display: inline-block; position: relative; width: 710px; float: left; clear: none; margin: 4px 0 4px 4px; padding: 0; top: 0px;"
-		onHide="saveCollapsed('Product_ProductBusinessFeatures');"
-		onShow=";saveExpanded('Product_ProductBusinessFeatures');">
-		<script type="dojo/method" event="titlePaneHandler"> setAttributeOnTitlepane('Product_ProductBusinessFeatures','','');</script>
-		<table class="detail" style="width: 100%;">
-			<tr>
-				<td colspan="2"><table style="width: 100%;">
-						<tr>
-							<td class="linkHeader" style="width: 5%"><a
-								onClick="addBusinessFeature();"
-								title="Ajouter une fonctionnalité métier"> <span
-									class='roundedButtonSmall'
-									style='top: 0px; display: inline-block; width: 16px; height: 16px;'><div
-											class='iconButtonAdd16' style=''>&nbsp;</div></span></a></td>
-							<td class="linkHeader" style="width: 15%">id</td>
-							<td class="linkHeader" style="width: 80%">Fonctionnalité
-								Métier</td>
-						</tr>
-					</table></td>
-			</tr>
-			<input id="BusinessFeatureSectionCount" type="hidden" value="0" />
-		</table>
-	</div>
-	<div dojoType="dijit.TitlePane" title="Langue" open="true"
-		id="Product_language"
-		class="titlePaneFromDetail generalColClass _sec_languageClass"
-		titleStyle=""
-		style="display: inline-block; position: relative; width: 710px; float: left; clear: none; margin: 4px 0 4px 4px; padding: 0; top: 0px;"
-		onHide="saveCollapsed('Product_language');"
-		onShow=";saveExpanded('Product_language');">
-		<script type="dojo/method" event="titlePaneHandler"> setAttributeOnTitlepane('Product_language','','');</script>
-		<table class="detail" style="width: 100%;">
-			<tr>
-				<td colspan="2"><table style="width: 100%;">
-						<tr>
-							<td class="linkHeader" style="width: 5%"><a
-								onClick="addProductLanguage();" title="ajouter une langue">
-									<span class='roundedButtonSmall'
-									style='top: 0px; display: inline-block; width: 16px; height: 16px;'><div
-											class='iconButtonAdd16' style=''>&nbsp;</div></span>
-							</a></td>
-							<td class="linkHeader" style="width: 15%">Langue</td>
-							<td class="linkHeader" style="width: 80%">nom</td>
-						</tr>
-					</table></td>
-			</tr>
-			<input id="ProductLanguageSectionCount" type="hidden" value="0" />
-		</table>
-	</div>
-	<div dojoType="dijit.TitlePane" title="Contexte" open="true"
-		id="Product_context"
-		class="titlePaneFromDetail generalColClass _sec_contextClass"
-		titleStyle=""
-		style="display: inline-block; position: relative; width: 710px; float: left; clear: none; margin: 4px 0 4px 4px; padding: 0; top: 0px;"
-		onHide="saveCollapsed('Product_context');"
-		onShow=";saveExpanded('Product_context');">
-		<script type="dojo/method" event="titlePaneHandler"> setAttributeOnTitlepane('Product_context','','');</script>
-		<table class="detail" style="width: 100%;">
-			<tr>
-				<td colspan="2"><table style="width: 100%;">
-						<tr>
-							<td class="linkHeader" style="width: 5%"><a
-								onClick="addProductContext();" title="ajouter un contexte">
-									<span class='roundedButtonSmall'
-									style='top: 0px; display: inline-block; width: 16px; height: 16px;'><div
-											class='iconButtonAdd16' style=''>&nbsp;</div></span>
-							</a></td>
-							<td class="linkHeader" style="width: 15%">Context</td>
-							<td class="linkHeader" style="width: 80%">nom</td>
-						</tr>
-					</table></td>
-			</tr>
-			<input id="ProductContextSectionCount" type="hidden" value="0" />
-			<tr>
-				<td colspan=2><div dojoType="dijit.TitlePane"
-						title="Appels d'offres" open="true" id="sectionTender_idProduct"
-						style="display: inline-block; position: relative; width: 710px; float: right;; margin: 0 0 4px 4px; padding: 0; top: 0px;"
-						onHide="saveCollapsed('sectionTender_idProduct');"
-						onShow="saveExpanded('sectionTender_idProduct');">
-						<table class="detail" style="width: 100%;"></table>
-					</div></td>
-			</tr>
-		</table>
-	</div>
-	<div id="Note" dojoType="dijit.layout.ContentPane"
-		class="detailTabClass"
-		title="Notes<div id='NoteBadgeTab' class='sectionBadge' style='right:0px;top:0px;width:auto;padding:0px 7px;font-weight:normal;zoom:0.9; -moz-transform: scale(0.9);opacity:0.5;' >0</div>"
-		style="width: 100%; height: 100%; overflow: auto;">
-		<script type="dojo/method" event="onShow">   saveDataToSession('detailTabProduct','Note');   hideEmptyTabs(); </script>
+	<div>
 		<div dojoType="dijit.TitlePane"
-			title="Notes<div id='NoteBadge' class='sectionBadge'>0</div>"
-			open="true" id="Product_Note"
-			class="titlePaneFromDetail generalColClass _sec_NoteClass"
+			title="Liste des fonctionnalités métier de ce produit" open="true"
+			id="Product_ProductBusinessFeatures"
+			class="titlePaneFromDetail generalColClass _sec_ProductBusinessFeaturesClass"
 			titleStyle=""
-			style="display: inline-block; position: relative; width: 710px; float: left; clear: none; margin: 4px 0 4px 4px; padding: 0; top: 0px;"
-			onHide="saveCollapsed('Product_Note');"
-			onShow=";saveExpanded('Product_Note');">
-			<script type="dojo/method" event="titlePaneHandler"> setAttributeOnTitlepane('Product_Note','','');</script>
+			style="display: inline-block; position: relative; width: 697px; float: left; clear: none; margin: 4px 0 4px 4px; padding: 0; top: 0px;"
+			onHide="saveCollapsed('Product_ProductBusinessFeatures');"
+			onShow=";saveExpanded('Product_ProductBusinessFeatures');">
+			<script type="dojo/method" event="titlePaneHandler"> setAttributeOnTitlepane('Product_ProductBusinessFeatures','','');</script>
 			<table class="detail" style="width: 100%;">
 				<tr>
-					<td colspan="2"><input type="hidden" id="noteIdle" value="0" />
-					<table width="100%">
+					<td colspan="2"><table style="width: 100%;">
 							<tr>
-								<td class="noteHeader smallButtonsGroup" style="width: 10%"><a
-									onClick="addNote(false);" title="Ajouter une note"><span
+								<td class="linkHeader" style="width: 5%"><a
+									onClick="addBusinessFeature();"
+									title="Ajouter une fonctionnalité métier"> <span
 										class='roundedButtonSmall'
 										style='top: 0px; display: inline-block; width: 16px; height: 16px;'><div
 												class='iconButtonAdd16' style=''>&nbsp;</div></span></a></td>
-								<td class="noteHeader" style="width: 5%">id</td>
-								<td colspan="6" class="noteHeader" style="width: 85%">note</td>
-							</tr>
-							<tr>
-								<td colspan="6" class="noteDataClosetable">&nbsp;</td>
-								<td colspan="3" class="noteDataClosetable">&nbsp;</td>
+								<td class="linkHeader" style="width: 15%">id</td>
+								<td class="linkHeader" style="width: 80%">Fonctionnalité
+									Métier</td>
 							</tr>
 						</table></td>
 				</tr>
-				<input id="NoteSectionCount" type="hidden" value="0" />
-				<div dojoType="dijit.form.TextBox" type="hidden"
-					id="idComponentType" name="idComponentType" value=""></div>
+				<input id="BusinessFeatureSectionCount" type="hidden" value="0" />
 			</table>
 		</div>
-		<div style="float: left; width: 710px">
-			<table>
+		<div dojoType="dijit.TitlePane" title="Langue" open="true"
+			id="Product_language"
+			class="titlePaneFromDetail generalColClass _sec_languageClass"
+			titleStyle=""
+			style="display: inline-block; position: relative; width: 697px; float: left; clear: none; margin: 4px 0 4px 4px; padding: 0; top: 0px;"
+			onHide="saveCollapsed('Product_language');"
+			onShow=";saveExpanded('Product_language');">
+			<script type="dojo/method" event="titlePaneHandler"> setAttributeOnTitlepane('Product_language','','');</script>
+			<table class="detail" style="width: 100%;">
 				<tr>
-					<td>&nbsp;</td>
+					<td colspan="2"><table style="width: 100%;">
+							<tr>
+								<td class="linkHeader" style="width: 5%"><a
+									onClick="addProductLanguage();" title="ajouter une langue">
+										<span class='roundedButtonSmall'
+										style='top: 0px; display: inline-block; width: 16px; height: 16px;'><div
+												class='iconButtonAdd16' style=''>&nbsp;</div></span>
+								</a></td>
+								<td class="linkHeader" style="width: 15%">Langue</td>
+								<td class="linkHeader" style="width: 80%">nom</td>
+							</tr>
+						</table></td>
 				</tr>
+				<input id="ProductLanguageSectionCount" type="hidden" value="0" />
 			</table>
 		</div>
+		<div dojoType="dijit.TitlePane" title="Contexte" open="true"
+			id="Product_context"
+			class="titlePaneFromDetail generalColClass _sec_contextClass"
+			titleStyle=""
+			style="display: inline-block; position: relative; width: 697px; float: left; clear: none; margin: 4px 0 4px 4px; padding: 0; top: 0px;"
+			onHide="saveCollapsed('Product_context');"
+			onShow=";saveExpanded('Product_context');">
+			<script type="dojo/method" event="titlePaneHandler"> setAttributeOnTitlepane('Product_context','','');</script>
+			<table class="detail" style="width: 100%;">
+				<tr>
+					<td colspan="2"><table style="width: 100%;">
+							<tr>
+								<td class="linkHeader" style="width: 5%"><a
+									onClick="addProductContext();" title="ajouter un contexte">
+										<span class='roundedButtonSmall'
+										style='top: 0px; display: inline-block; width: 16px; height: 16px;'><div
+												class='iconButtonAdd16' style=''>&nbsp;</div></span>
+								</a></td>
+								<td class="linkHeader" style="width: 15%">Context</td>
+								<td class="linkHeader" style="width: 80%">nom</td>
+							</tr>
+						</table></td>
+				</tr>
+				<input id="ProductContextSectionCount" type="hidden" value="0" />
+			</table>
+		</div>
+		<div id="Note" dojoType="dijit.layout.ContentPane"
+			class="detailTabClass"
+			title="Notes<div id='NoteBadgeTab' class='sectionBadge' style='right:0px;top:0px;width:auto;padding:0px 7px;font-weight:normal;zoom:0.9; -moz-transform: scale(0.9);opacity:0.5;' >0</div>"
+			style="width: 100%; height: 100%; overflow: auto;">
+			<script type="dojo/method" event="onShow">   saveDataToSession('detailTabProduct','Note');   hideEmptyTabs(); </script>
+			<div>
+				<div dojoType="dijit.TitlePane"
+					title="Notes<div id='NoteBadge' class='sectionBadge'>0</div>"
+					open="true" id="Product_Note"
+					class="titlePaneFromDetail generalColClass _sec_NoteClass"
+					titleStyle=""
+					style="display: inline-block; position: relative; width: 697px; float: left; clear: none; margin: 4px 0 4px 4px; padding: 0; top: 0px;"
+					onHide="saveCollapsed('Product_Note');"
+					onShow=";saveExpanded('Product_Note');">
+					<script type="dojo/method" event="titlePaneHandler"> setAttributeOnTitlepane('Product_Note','','');</script>
+					<table class="detail" style="width: 100%;">
+						<tr>
+							<td colspan="2"><input type="hidden" id="noteIdle" value="0" />
+							<table width="100%">
+									<tr>
+										<td class="noteHeader smallButtonsGroup" style="width: 10%"><a
+											onClick="addNote(false);" title="Ajouter une note"><span
+												class='roundedButtonSmall'
+												style='top: 0px; display: inline-block; width: 16px; height: 16px;'><div
+														class='iconButtonAdd16' style=''>&nbsp;</div></span></a></td>
+										<td class="noteHeader" style="width: 5%">id</td>
+										<td colspan="6" class="noteHeader" style="width: 85%">note</td>
+									</tr>
+									<tr>
+										<td colspan="6" class="noteDataClosetable">&nbsp;</td>
+										<td colspan="3" class="noteDataClosetable">&nbsp;</td>
+									</tr>
+								</table></td>
+						</tr>
+						<input id="NoteSectionCount" type="hidden" value="0" />
+						<div dojoType="dijit.form.TextBox" type="hidden"
+							id="idComponentType" name="idComponentType" value=""></div>
+					</table>
+				</div>
+				<div style="float: left; width: 697px">
+					<table>
+						<tr>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+				</div>

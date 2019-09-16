@@ -1215,6 +1215,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $cpt++;
         }
       }
+      debugLog("NOTES !!!!  $section");
       startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, $outMode, $prevSection, $nbCol, $cpt, $included, $obj);
       drawNotesFromObject($obj, false);
     } else if ($col=='_BillLine') {
@@ -3018,15 +3019,13 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
       $selectedTab=getSessionValue($sessionTabName,'Description');
       $paneName='pane'.$tabName;
       if (!isset($$paneName) or $$paneName=='') {
-      echo '<div id="'.$tabName.'" dojoType="dijit.layout.ContentPane" class="detailTabClass" title="'.i18n('tab'.ucfirst($tabName)).(($nbBadge!==null )?'<div id=\''.$section.'BadgeTab\' class=\'sectionBadge\' style=\'right:0px;top:0px;width:auto;padding:0px 7px;font-weight:normal;zoom:0.9; -moz-transform: scale(0.9);'.(($nbBadge==0)?'opacity:0.5;':'').'\' >'.$nbBadge.'</div>':'').'" style="width:100%;height:100%;overflow:auto;" '.(($tabName==$selectedTab)?' selected="true" ':'').'>';
-      echo ' <script type="dojo/method" event="onShow" >'; 
-      echo '   saveDataToSession(\''.$sessionTabName.'\',\''.$tabName.'\');';
-      echo '   hideEmptyTabs();';
-      echo ' </script>';
+        echo '<div id="'.$tabName.'" dojoType="dijit.layout.ContentPane" class="detailTabClass" title="'.i18n('tab'.ucfirst($tabName)).(($nbBadge!==null )?'<div id=\''.$section.'BadgeTab\' class=\'sectionBadge\' style=\'right:0px;top:0px;width:auto;padding:0px 7px;font-weight:normal;zoom:0.9; -moz-transform: scale(0.9);'.(($nbBadge==0)?'opacity:0.5;':'').'\' >'.$nbBadge.'</div>':'').'" style="width:100%;height:100%;overflow:auto;" '.(($tabName==$selectedTab)?' selected="true" ':'').'>';
+        echo ' <script type="dojo/method" event="onShow" >'; 
+        echo '   saveDataToSession(\''.$sessionTabName.'\',\''.$tabName.'\');';
+        echo '   hideEmptyTabs();';
+        echo ' </script>';
+        echo '  <div>';
       }
-      //if(isset($prevSection)){ // TODO : sure it's not a </DIV> and set before previous line ?
-      //  echo '<div style="border: 2px solid red">';
-      //}
     }
     // gautier #resourceTeam
     echo '<div dojoType="dijit.TitlePane" title="'.i18n('section'.ucfirst($sectionName)).(($nbBadge!==null)?'<div id=\''.$section.'Badge\' class=\'sectionBadge\'>'.$nbBadge.'</div>':'').'"';
@@ -7623,10 +7622,10 @@ function endBuffering($prevSection, $included) {
         'mailtext'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
         'miscellaneous'=>array('2'=>'right', '3'=>'extra','99'=>'detail'), 
         'note'=>array('2'=>'bottom', '3'=>'extra','99'=>'note'), 
-        'notificationtitle'=>array('2'=>'left', '3'=>'left','99'=>'note'), 
-        'notificationrule'=>array('2'=>'left', '3'=>'left','99'=>'note'), 
-        'notificationcontent'=>array('2'=>'left', '3'=>'right','99'=>'note'), 
-        'notification'=>array('3'=>'bottom', '3'=>'extra','99'=>'note'), 
+        'notificationtitle'=>array('2'=>'left', '3'=>'left','99'=>'description'), 
+        'notificationrule'=>array('2'=>'left', '3'=>'left','99'=>'treatment'), 
+        'notificationcontent'=>array('2'=>'left', '3'=>'right','99'=>'description'), 
+        'notification'=>array('3'=>'bottom', '3'=>'extra','99'=>'description'), 
         'predecessor'=>array('2'=>'bottom', '3'=>'bottom','99'=>'dependency'),
         'price' =>array('2'=>'right', '3'=>'right','99'=>'treatment'),
         'projectsofobject'=>array('2'=>'bottom', '3'=>'extra','99'=>'dependency'), 
@@ -7641,7 +7640,7 @@ function endBuffering($prevSection, $included) {
         'productbusinessfeatures'=>array('2'=>'right', '3'=>'right','99'=>'detail'), 
         'productversions'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
         'providerterm'=>array('2'=>'right', '3'=>'extra','99'=>'link'), 
-        'receivers'=>array('3'=>'bottom', '3'=>'extra','99'=>'detail'), 
+        'receivers'=>array('3'=>'bottom', '3'=>'extra','99'=>'treatment'), 
         'resourcesofobject'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'), 
         'resourcecost'=>array('2'=>'right', '3'=>'extra','99'=>'detail'),
         'subprojects'=>array('2'=>'right', '3'=>'right','99'=>'dependency'),
@@ -7683,6 +7682,7 @@ function endBuffering($prevSection, $included) {
       if(isset($sectionPosition[$sectionName]['99'])){
         $groupe=$sectionPosition[$sectionName]['99'];
       }
+      debugLog("section=$sectionName => groupe=$groupe");
       if($groupe=='description'){
         $paneDescription.=$display;
       }else if($groupe=='treatment'){
@@ -7744,17 +7744,14 @@ function finalizeBuffering() {
   }
   // $leftPane="";$rightPane="";$extraPane="";$bottomPane="";
   echo $beforeAllPanes;
-  debugLog($beforeAllPanes);
   echo '<table style="width=100%">';
-  $showBorders=true;
+  $showBorders=false;
   if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0'){ // Attention, panes start with DIV that is not closed
-    debugLog($paneDescription);
     foreach ($arrayPanes as $paneName) {
       if(isset($$paneName) and $$paneName){
-        echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$$paneName.'</div></td></tr>';
+        echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$$paneName.'</div></div></td></tr>';
       }
-    }
-  }else{
+    }  }else{
     if ($nbColMax==1) {
       echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid red':'').'">'.$leftPane.'</td></tr>';
       if ($rightPane) {
