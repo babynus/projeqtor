@@ -552,12 +552,12 @@ if (property_exists($objectClass,'idStatus')) {
                  else if ( property_exists($obj,'idChecklistable')) $elementable='idChecklistable';
                  //$elementable=null;
                  if ($elementable) { ?>
-              <td style="vertical-align: middle; text-align:right;" width="5px">
+              <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD elementSearchTD">
                  <span class="nobr">&nbsp;&nbsp;&nbsp;
                 <?php echo i18n("colElement");?>
                 &nbsp;</span>
               </td>
-              <td width="5px">
+              <td width="5px" class="allSearchTD elementSearchTD">
                 <select title="<?php echo i18n('filterOnElement')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
                 <?php echo autoOpenFilteringSelect();?> 
                 id="listElementableFilter" name="listElementableFilter" style="width:140px" value="<?php if(!$comboDetail and sessionValueExists('listElementableFilter'.$objectClass)){ echo getSessionValue('listElementableFilter'.$objectClass); }?>">
