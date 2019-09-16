@@ -319,7 +319,7 @@
     </td>
     <td title="<?php ?>"  style="position:relative;width:55px;">
       <div dojoType="dijit.layout.ContentPane"  id="menuUserScreenTop" class="pseudoButton" style="position:relative;overflow:hidden;width:55px; height:28px; min-width:55px;top:-5px;">
-        <div dojoType="dijit.form.DropDownButton"  id="iconMenuUserScreen" style="display: table-cell;background-color: #D3D3D3;vertical-align: middle;position:relative;min-width:50px;top:-3px" >
+        <div dojoType="dijit.form.DropDownButton"  title="<?php echo i18n("menuUserScreenTopTitle");?>" id="iconMenuUserScreen" style="display: table-cell;background-color: #D3D3D3;vertical-align: middle;position:relative;min-width:50px;top:-3px" >
 			    <table style="width:100%">
     			  <tr>
       				<td style="width:24px;padding-top:2px;">
