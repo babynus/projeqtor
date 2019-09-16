@@ -676,7 +676,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     }
   }
   // END - ADD BY TABARY - NOTIFICATION SYSTEM
-  if( Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and $included==false){
+  if( Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and $included==false and !$print){
     echo '<div dojoType="dijit.layout.TabContainer">';
   }
   // Loop on each property of the object
@@ -1215,7 +1215,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $cpt++;
         }
       }
-      debugLog("NOTES !!!!  $section");
       startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, $outMode, $prevSection, $nbCol, $cpt, $included, $obj);
       drawNotesFromObject($obj, false);
     } else if ($col=='_BillLine') {
@@ -2967,7 +2966,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
 
 function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, $outMode, $prevSection, $nbCol, $nbBadge=null, $included=null, $obj=null) {
   // scriptLog("startTitlePane(classObbj=$classObj, section=$section, collapsedList=array, widthPct=$widthPct, print=$print, outMode=$outMode, prevSection=$prevSection, nbCol=$nbCol, nbBadge=$nbBadge)");
-  global $currentColumn, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $beforeAllPanes,$type, $arrayGroupe;
+  global $comboDetail, $currentColumn, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $beforeAllPanes,$type, $arrayGroupe;
   if (!$currentColumn) $currentColumn=0;
   if ($prevSection) {
     echo '</table>';
@@ -3009,7 +3008,7 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
     $fontSize=(isset($attrs['font-size']))?intval($attrs['font-size']):'';
     $margin=0;
     //florent ticket 4102
-    if( Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and $included==false){
+    if( Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and $included==false and !$print){
       $margin=4;
       $tabName="Detail";
       if(isset($arrayGroupe[$lc]['99'])){
@@ -3018,8 +3017,9 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
       $sessionTabName='detailTab'.$classObj;
       $selectedTab=getSessionValue($sessionTabName,'Description');
       $paneName='pane'.$tabName;
+      $extName=($comboDetail)?"_detail":'';
       if (!isset($$paneName) or $$paneName=='') {
-        echo '<div id="'.$tabName.'" dojoType="dijit.layout.ContentPane" class="detailTabClass" title="'.i18n('tab'.ucfirst($tabName)).(($nbBadge!==null )?'<div id=\''.$section.'BadgeTab\' class=\'sectionBadge\' style=\'right:0px;top:0px;width:auto;padding:0px 7px;font-weight:normal;zoom:0.9; -moz-transform: scale(0.9);'.(($nbBadge==0)?'opacity:0.5;':'').'\' >'.$nbBadge.'</div>':'').'" style="width:100%;height:100%;overflow:auto;" '.(($tabName==$selectedTab)?' selected="true" ':'').'>';
+        echo '<div id="'.$tabName.$extName.'" dojoType="dijit.layout.ContentPane" class="detailTabClass" title="'.i18n('tab'.ucfirst($tabName)).(($nbBadge!==null )?'<div id=\''.$section.'BadgeTab\' class=\'sectionBadge\' style=\'right:0px;top:0px;width:auto;padding:0px 7px;font-weight:normal;zoom:0.9; -moz-transform: scale(0.9);'.(($nbBadge==0)?'opacity:0.5;':'').'\' >'.$nbBadge.'</div>':'').'" style="width:100%;height:100%;overflow:auto;" '.(($tabName==$selectedTab)?' selected="true" ':'').'>';
         echo ' <script type="dojo/method" event="onShow" >'; 
         echo '   saveDataToSession(\''.$sessionTabName.'\',\''.$tabName.'\');';
         echo '   hideEmptyTabs();';
@@ -7580,7 +7580,7 @@ function getNbColMax($displayWidth, $print, $printWidth, $obj) {
   }
   $paramMax=Parameter::getUserParameter('maxColumns');
   if ($paramMax and $paramMax<$nbColMax) $nbColMax=$paramMax;
-  if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0'){
+  if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print){
     $nbColMax=1;
   }
   return $nbColMax;
@@ -7593,7 +7593,7 @@ function startBuffering() {
 }
 
 function endBuffering($prevSection, $included) {
-  global $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $nbColMax, $section, $beforeAllPanes, $arrayGroupe; 
+  global $print, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $nbColMax, $section, $beforeAllPanes, $arrayGroupe; 
     $sectionPosition=array(
         'assignment'=>array('2'=>'left', '3'=>'extra','99'=>'progress'),
         'affectations'=>array('2'=>'right', '3'=>'right','99'=>'allocation'),
@@ -7604,6 +7604,7 @@ function endBuffering($prevSection, $included) {
         'billline'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
         'billlineterm'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
         'calendar'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
+        'context'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
         'description'=>array('2'=>'left', '3'=>'left','99'=>'description'), 
         'evaluation'=>array('2'=>'left', '3'=>'extra','99'=>'progress'), 
         'evaluationcriteria'=>array('2'=>'right', '3'=>'extra','99'=>'progress'), 
@@ -7639,6 +7640,8 @@ function endBuffering($prevSection, $included) {
         'productcomposition'=>array('2'=>'right', '3'=>'right','99'=>'configuration'), 
         'productbusinessfeatures'=>array('2'=>'right', '3'=>'right','99'=>'detail'), 
         'productversions'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
+        'productversioncomposition'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
+        'productversioncompatibility'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
         'providerterm'=>array('2'=>'right', '3'=>'extra','99'=>'link'), 
         'receivers'=>array('3'=>'bottom', '3'=>'extra','99'=>'treatment'), 
         'resourcesofobject'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'), 
@@ -7652,6 +7655,7 @@ function endBuffering($prevSection, $included) {
         'target'=>array('2'=>'bottom', '3'=>'extra','99'=>'treatment'), 
         'treatment'=>array('2'=>'right', '3'=>'right','99'=>'treatment'),
         'treatment_right'=>array('2'=>'right', '3'=>'extra','99'=>'treatment'), 
+        'ticket'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
         'link_testcase'=>array('2'=>'bottom', '3'=>'extra','99'=>'progress'), 
         'testcaserun'=>array('2'=>'bottom', '3'=>'bottom','99'=>'progress'), 
         'testcaserunsummary'=>array('2'=>'left', '3'=>'extra','99'=>'progress'), 
@@ -7661,6 +7665,7 @@ function endBuffering($prevSection, $included) {
         'valuealertoverwarningoverokunder'=>array('2'=>'right', '3'=>'right','99'=>'progress'),
         'version'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
         'versionprojectversions'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
+        'versionprojectprojects'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
         'void'=>array('2'=>'right', '3'=>'right','99'=>'detail'), 
         'workflowdiagram'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
         'workflowstatus'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'));
@@ -7677,12 +7682,11 @@ function endBuffering($prevSection, $included) {
     }
     $sectionName=strtolower($prevSection);
     $sectionName=str_replace('_right','',$sectionName);
-    if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$included ){
+    if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$included and ! $print ){
       $groupe='detail';
       if(isset($sectionPosition[$sectionName]['99'])){
         $groupe=$sectionPosition[$sectionName]['99'];
       }
-      debugLog("section=$sectionName => groupe=$groupe");
       if($groupe=='description'){
         $paneDescription.=$display;
       }else if($groupe=='treatment'){
@@ -7736,7 +7740,7 @@ function endBuffering($prevSection, $included) {
 }
 
 function finalizeBuffering() {
-  global $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $arrayPanes, $paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier,$arrayGroupe, $nbColMax, $section, $beforeAllPanes;
+  global $print,$reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $arrayPanes, $paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier,$arrayGroupe, $nbColMax, $section, $beforeAllPanes;
   if (!$reorg) return;
   if (!$leftPane and $rightPane) {
     $leftPane=$rightPane;
@@ -7746,7 +7750,7 @@ function finalizeBuffering() {
   echo $beforeAllPanes;
   echo '<table style="width=100%">';
   $showBorders=false;
-  if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0'){ // Attention, panes start with DIV that is not closed
+  if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print){ // Attention, panes start with DIV that is not closed
     foreach ($arrayPanes as $paneName) {
       if(isset($$paneName) and $$paneName){
         echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$$paneName.'</div></div></td></tr>';
