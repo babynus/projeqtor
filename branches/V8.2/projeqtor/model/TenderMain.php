@@ -597,23 +597,7 @@ class TenderMain extends SqlElement {
     // Finish previous section
     
     // Start section
-    if (!$print) {
-      echo '<div dojoType="dijit.TitlePane" title="' . i18n('menuCallForTender') . '"';
-      echo ' open="' . (array_key_exists($titlePane, $collapsedList)?'false':'true') . '" ';
-      echo ' id="'.$titlePane.'" ';
-      echo ' style="display:inline-block;position:relative;width:'.$widthPct.';float:right;;margin: 0 0 4px 4px; padding: 0;top:0px;"';
-      echo ' onHide="saveCollapsed(\'' . $titlePane . '\');"';
-      echo ' onShow="saveExpanded(\'' . $titlePane . '\');">';
-      echo '<table class="detail"  style="width: 100%;" >';
-    } else {
-      echo '<br/>';
-      echo '<table class="detail" style="width:'.$widthPct.';" >';
-      echo '<tr><td class="section">' . i18n('menuCallForTender') . '</td></tr>';
-      echo '<tr class="detail" style="height:2px;font-size:2px;">';
-      echo '<td class="detail" >&nbsp;</td>';
-      echo '</tr>';
-      echo '</table><table class="detail" style="width:99%;" >';
-    }
+    echo '<table class="detail"  style="width: 100%;" >';
     $cft=new CallForTender();
     if (!$val) $val='0';
     $list=$cft->getSqlElementsFromCriteria(array($crit=>$val));
@@ -631,9 +615,6 @@ class TenderMain extends SqlElement {
       echo "</td></tr>";
     } 
     echo '</table>';
-    if (!$print) {
-      echo '</div>';
-    }
   }
   
   public function setAttributes() {

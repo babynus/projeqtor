@@ -62,6 +62,7 @@ class ProductMain extends ProductOrComponent {
   public $_productLanguage;
   public $_sec_context;
   public $_productContext;
+  public $_sec_Tenders;
   public $_spe_tenders;
   public $_sec_Link;
   public $_Link = array();
