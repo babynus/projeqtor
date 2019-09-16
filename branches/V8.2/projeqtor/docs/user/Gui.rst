@@ -1464,12 +1464,8 @@ Info bar
          |i|  :ref:`About ProjeQtOr<ib-about-projeqtor>`    
               
             
-   |three| :ref:`Switched mode button<ib-switch-mode-button>`
-      
-   |four| :ref:`Full-screen button<ib-fullscr-button>` 
-   
-   |five| :ref:`Hide and show menu button<ib-menu-button>`
-   
+   |three| :ref:`Screen Layout<screen-layout>`
+         
 
 
 .. figure:: /images/GUI/GUI_ZONE_InfosBar.png
@@ -1661,58 +1657,69 @@ login window with many setup shortcuts.
          
          
          
-.. _ib-switch-mode-button:
+.. _screen-layout:
 
-.. rubric:: |threeBLC| Switched mode button
+.. rubric:: |threeBLC| Screen layout
 
-Allows to enable or disable switched mode that allows to switch between list and detail windows.
-      
-Window selected is displayed in "full screen" mode.
-      
-Hidden window are replaced by a gray bar.
-      
-Click on the gray bar to switch between windows. 
+In this view menu you can define how you want ProjeQtOr to display your information.
 
-.. note:: **User parameter Switched mode**
-      
-      This parameter defines whether switching mode is enabled or not.
-      
+.. figure:: /images/GUI/GUI_BOX_ScreenLayout.png
+   :alt: screen layout
+   
+   Screen layout
+   
+   
+|iconChangeLayout| **Use switched mode**
+
+Enables or disables the switched mode that switches between list and detail windows in full screen.
+Hidden windows are replaced by a gray bar. Click on it to switch between zones.
+
+|horizontalLayout| **Show list top**
+
+Allows to display the list zone on top of the screen and the details zone in the bottom
+
+|verticalLayout| **Show list left**
+
+Allows to display the list zone on left of the screen and the details zone in the right
+
+-----
+
+|iconLayoutList| **Mode List view**
+
+Allows to display the details area elements in section view (as on previous versions) 
+
+.. figure:: /images/GUI/GUI_ZONE_DisplayList.png
+   :alt: mode List view
+   
+   Mode List view
+
+|iconLayoutTab| **Mode Tab view**
+
+Allows to display the details area elements in tab view
+
+.. figure:: /images/GUI/GUI_ZONE_DisplayTAB.png
+   :alt: mode tab view
+   
+   Mode tab view
+
+-----
+
+|HideStreamLeft| **show / hide left menu**
+
+|HideStreamTop| **show / hide top menu**
+
+-----
+
+|ActivityStreamWhite| |ActivityStreamClose| **Tchat mode**
+
+Enables or disables the tchat mode
+
+|changeActivityStream| |changeActivityStreamBot| **Tchat mode position**
+
+Display the tchat mode to the bottom of the screen or to the right       
+            
 
 :ref:`Return to Info bar<info-bar>`
-
-
-
-
-.. _ib-fullscr-button:
-
-.. rubric::  |fourBLC| Full-screen button
-
-One-click to displays in full Screen view.
-
-:ref:`Return to Info bar<info-bar>`
-
-
-.. _ib-menu-button:
-
-.. rubric:: |fiveBLC| Hide and show menu button
-
-Allows to hide or show the menu section.
-
-:ref:`Return to Info bar<info-bar>`
-
-.. note:: **User parameter "Hide menu"**
-
-    This parameter defines whether the menu is hidden by default.
-
-
-
-
-
-
-
-
-
-
 
 
 .. raw:: latex

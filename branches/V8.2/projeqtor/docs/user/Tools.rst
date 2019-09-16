@@ -160,12 +160,30 @@ The message will be displayed in a color depending on the message type.
 Message Legal
 -------------
 
-You can define a "legal" message that will be displayed when you log in from the home screen
+You can define a "legal" message that will be displayed when you log in from the home screen.
+
+go to the legal notice screen to create your message.
+
+
+.. figure:: /images/GUI/TOOLS_ZONE_LegalNoticeCreation.png
+   :alt: New legal notice
+   
+   New legal notice
+
+Define a broadcast period and follow live users who have read it
+
+.. figure:: /images/GUI/TOOLS_ZONE_FollowNotice.png
+   :alt: Tracking users
+   
+   Tracking users
+
+The mentions will appear from the date mentioned on the start screen.
+
+You must click on the button I agree that the message disappears
 
 .. figure:: /images/GUI/TOOLS_SCR_MessageLegal.png
    :alt: Display of the legal message
 
-You must click on the button I agree that the message disappears
 
 .. raw:: latex
 
