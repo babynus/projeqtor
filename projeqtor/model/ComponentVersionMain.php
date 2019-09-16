@@ -81,6 +81,7 @@ class ComponentVersionMain extends Version {
   //ADD qCazelles - dateComposition
   public $_spe_flatStructure;
   //END ADD qCazelles - dateComposition
+  public $_sec_Tenders;
   public $_spe_tenders;
   //ADD qCazelles - LANG 2
   public $_sec_language;
