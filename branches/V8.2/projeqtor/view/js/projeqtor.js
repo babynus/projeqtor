@@ -6262,6 +6262,7 @@ function resizeListDiv() {
 
   if (width<1050) {
     dojo.query(".typeSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
+    dojo.query(".elementSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
   }
   if (width<900) {
     dojo.query(".idSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
