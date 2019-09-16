@@ -51,6 +51,7 @@ class ComponentMain extends ProductOrComponent {
   public $_componentStructure=array();
   public $_sec_ComponentComposition;
   public $_componentComposition=array(); 
+  public $_sec_Tenders;
   public $_spe_tenders;
   public $_sec_language;
   public $_productLanguage;
