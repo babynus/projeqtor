@@ -46,19 +46,31 @@ This section summarizes significant changes made in the user guide document for 
 
 To see complete list of changes made to software, visit the ProjeQtOr web site.
 
-**Current version V8.1 : Mains evolutions**
+**Current version V8.2 : Mains evolutions**
 
-.. topic:: **SSO connection through SAML 2**
+.. topic:: **Cloned environements**
 
-   Single sign-on: SSO is a method that allows a user to access multiple computer applications (or websites) by performing only one authentication..
+   You will be able to duplicate the complete environment (data and code) to form a simulation environment. This possibility will also be accessible from simulated environments.
 
-      * see: :ref:`SSO_Saml2`
+      * see: :ref:`cloned-environment`
 
-.. topic:: **Surbooking**
+.. topic:: **Minimum Threshold and the task "should not be split"**
 
-   Allows you to add extra work time on the standard capabilities of your resources to plan more projects that you will not process
+   These planning options to set a minimum load on activity and indivisibility of this charge in the General Planning.
 
-      * see: :ref:`surbooking`
+      * see: :ref:`minimum-threshold`
+
+--------------------------------------------------------------------
+
+**Reminder of the latest evolutions from V8.1**
+
+**SSO connection through SAML 2**
+
+ * see: :ref:`SSO_Saml2`
+
+**Surbooking**
+
+ * see: :ref:`surbooking`
 
 --------------------------------------------------------------------
 
@@ -91,7 +103,7 @@ It is particularly well suited to IT projects, but can manage any type of projec
 It offers all the features needed to different Project Management actors under a unique collaborative interface.
   
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    
    Features
 
@@ -103,7 +115,7 @@ This chapter defines the concepts of ProjeQtOr.
 They can be referred in the following chapters.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    Concept
 
@@ -237,7 +249,7 @@ Tools
 -----
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
  
    Tools
 
