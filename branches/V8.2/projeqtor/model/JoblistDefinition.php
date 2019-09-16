@@ -40,7 +40,8 @@ class JoblistDefinition extends SqlElement {
   //public $lineCount;
 
   public $idle;
-  public $_sec_void;
+  public $_sec_JobDefinition;
+  public $_spe_JobDefinition;
   public $_JobDefinition=array();
   public $_noCopy;
 
@@ -147,5 +148,13 @@ class JoblistDefinition extends SqlElement {
     return $result;
   }
 
+  public function drawSpecificItem($item){
+    global $print, $outMode, $largeWidth;
+    $result="";
+    if ($item=='JobDefinition') {
+      drawJobDefinitionFromObject($this);
+      return $result;
+    }
+  }
 }
 ?>
