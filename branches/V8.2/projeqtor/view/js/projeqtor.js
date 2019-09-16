@@ -6249,8 +6249,9 @@ function resizeListDiv() {
   if (width<1650) {
     dojo.query(".parentBudgetSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
   }
-  if (width<1300) {
+  if (width<1400) {
     dojo.query(".clientSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
+    dojo.query(".hideInServiceTD").forEach(function(node, index, nodelist) { node.style.display="none";});
   }
   if (width<1100) {
     refWidth=25;
@@ -6259,20 +6260,18 @@ function resizeListDiv() {
   dojo.query("#widget_listIdFilter").forEach(function(node, index, nodelist) { node.style.width=(refWidth*1)+"px";});
   dojo.query("#widget_listTypeFilter").forEach(function(node, index, nodelist) { node.style.width=(refWidth*4)+"px";});
 
-  if (width<900) {
+  if (width<1050) {
     dojo.query(".typeSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
   }
-  if (width<800) {
+  if (width<900) {
     dojo.query(".idSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
     dojo.query(".resetSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
   }
-  if (width<700) {
+  if (width<750) {
+	dojo.query(".idleSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
     dojo.query(".idSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
   }
-  if (width<630) {
-    dojo.query(".idleSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
-  }
-  if (width<600) {
+  if (width<670) {
     dojo.query(".nameSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
   }
 }
