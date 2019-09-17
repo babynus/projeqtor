@@ -52,7 +52,7 @@ class MessageLegal extends SqlElement {
   
   private static $_colCaptionTransposition = array('name'=> 'title', 'description'=>'message');
   
-  private static $_fieldsAttributes=array("name"=>"required","idUser"=>"hidden");  
+  private static $_fieldsAttributes=array("name"=>"required","description"=>"required","idUser"=>"hidden");  
    /** ==========================================================================
    * Constructor
    * @param $id the id of the object in the database (null if not stored yet)
