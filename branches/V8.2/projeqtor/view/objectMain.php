@@ -123,7 +123,11 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
               if(paramDiv=='trailing' && paramMode!='5'){
                 if(dojo.byId("detailRightDiv").offsetWidth == 0){
                   dojo.query('#detailRightDiv_splitter').forEach(function(node, index, nodelist) {
-    	             node.style.visibility = 'hidden';
+    	             node.style.display = 'none';
+                  });
+                }else{
+                  dojo.query('#detailRightDiv_splitter').forEach(function(node, index, nodelist) {
+    	             node.style.display = 'block';
                   });
                 }
                 saveDataToSession("contentPaneRightDetailDivWidth<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetWidth, true);
@@ -134,7 +138,11 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
               }else if (paramMode!='5'){
                 if(dojo.byId("detailRightDiv").offsetHeight == 0){
                   dojo.query('#detailRightDiv_splitter').forEach(function(node, index, nodelist) {
-    	             node.style.visibility = 'hidden';
+    	             node.style.display = 'none';
+                  });
+                }else{
+                  dojo.query('#detailRightDiv_splitter').forEach(function(node, index, nodelist) {
+    	             node.style.display = 'block';
                   });
                 }
                 saveDataToSession("contentPaneRightDetailDivHeight<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetHeight, true);
