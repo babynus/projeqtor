@@ -87,7 +87,7 @@
 ?>
 <!-- Titre et listes de notes -->
 <?php if (!$onlyCenter) {?>
-<divclass="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
+<div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
 	<div id="activityStreamTop" dojoType="dijit.layout.ContentPane" region="top" style="text-align:center" class="dijitAccordionTitle">
 	<?php 
      

@@ -6276,3 +6276,21 @@ function resizeListDiv() {
     dojo.query(".nameSearchTD").forEach(function(node, index, nodelist) { node.style.display="none";});
   }
 }
+
+function checkValidatedSize(paramDiv){
+  if(paramDiv== 'left'){
+    if (dojo.byId("contentDetailDiv").offsetWidth<400) {
+      var listWidth=(dojo.byId("centerDiv").offsetWidth)-410;
+      dijit.byId("listDiv").resize({w: listWidth});
+      resizeContainer("mainDivContainer", null);
+      return;
+   }
+  }else {
+    if (dojo.byId("contentDetailDiv").offsetHeight<250) {
+      var listWidth=(dojo.byId("centerDiv").offsetHeight)-260;
+      dijit.byId("listDiv").resize({h: listWidth});
+      resizeContainer("mainDivContainer", null);
+      return;
+   }
+ }
+}
