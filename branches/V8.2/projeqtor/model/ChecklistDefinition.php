@@ -42,7 +42,9 @@ class ChecklistDefinition extends SqlElement {
   public $_sec_ChecklistDefinitionLine;
   public $_spe_ChecklistDefinitionLine;
   public $_ChecklistDefinitionLine=array();
+  public $_checklistDefinitionLine_colSpan="2";
   public $_noCopy;
+  //public $_nbColMax=2;
     
     private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
