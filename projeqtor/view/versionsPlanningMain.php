@@ -6,7 +6,6 @@
 
 require_once "../tool/projeqtor.php";
 scriptLog('   ->/view/versionsPlanningMain.php');
-
 //florent
 $paramScreen=RequestHandler::getValue('paramScreen');
 $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
@@ -50,8 +49,15 @@ $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
              saveDataToSession("contentPaneDetailDivHeight<?php  echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
            }else if(paramMode!='5'){
               saveDataToSession("contentPaneDetailDivWidth<?php  echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
-                
-           }
+              var param=dojo.byId('objectClass').value;
+              var paramId=dojo.byId('objectId').value;
+              if(paramId !='' && multiSelection==false){
+                loadContent("objectDetail.php?objectClass"+param+"&objectId="+paramId, "detailDiv", 'listForm');  
+              }else if(multiSelection==true){
+               loadContent('objectMultipleUpdate.php?objectClass=' + param,
+                  'detailDiv');
+              }
+            }
       </script>
      <div class="container" dojoType="dijit.layout.BorderContainer"  liveSplitters="false">
         <div id="detailBarShow" class="dijitAccordionTitle" onMouseover="hideList('mouse');" onClick="hideList('click');"

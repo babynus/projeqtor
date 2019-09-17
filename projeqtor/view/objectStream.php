@@ -31,10 +31,11 @@
   require_once "../tool/formatter.php";
   scriptLog('   ->/view/objectStream.php');
   global $print,$user;
+  
   if (! isset($objectClass) ) $objectClass=RequestHandler::getClass('objectClass');
   if (! isset($objectId)) $objectId=RequestHandler::getId('objectId');
   if($objectClass=='ResourcePlanning')$objectClass='PlanningElement';
-  if(RequestHandler::getId('productVersionsListId')!=null and $objectClass=='')$objectClass='PlanningElement';
+  if(RequestHandler::getValue('productVersionsListId')!=null and $objectClass=='')$objectClass='PlanningElement';
   $obj=new $objectClass($objectId);
   $canUpdate=securityGetAccessRightYesNo('menu' . $objectClass, 'update', $obj) == "YES";
   if (!property_exists($obj, 'idle') or $obj->idle == 1) {
