@@ -6562,7 +6562,7 @@ function consoleLogHistory(msg) {
   if (historyTable.length==0) {
     consoleTraceLog(msg+' => Empty');
   }
-  for (i=0;i<historyTable.length;i++) {
+  for (var i=0;i<historyTable.length;i++) {
     current=historyTable[i];
     consoleTraceLog(msg+' => '+current[0]+ ' | '+current[1]+' | '+current[2]);
   }

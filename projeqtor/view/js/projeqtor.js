@@ -5668,7 +5668,7 @@ function hideStreamMode(param,noRefresh){
       setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50);
     }
   }
-  loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen,"mainDivMenu");
+  loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+"&objectExist=true","mainDivMenu");
   dijit.byId('iconMenuUserScreen').closeDropDown();
 }
 
