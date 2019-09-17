@@ -43,6 +43,7 @@ class JoblistDefinition extends SqlElement {
   public $_sec_JobDefinition;
   public $_spe_JobDefinition;
   public $_JobDefinition=array();
+  public $_jobDefinition_colSpan="2";
   public $_noCopy;
 
     private static $_layout='
