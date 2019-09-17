@@ -5634,17 +5634,11 @@ function hideStreamMode(param,noRefresh){
       dijit.byId("detailRightDiv").resize({
         h : 0
       });
-      dojo.query('#detailRightDiv_splitter').forEach(function(node, index, nodelist) {
-    	  node.style.visibility = 'hidden';
-      });
       dijit.byId("centerDiv").resize();
     } else {
       if (! menuRightDivSize) menuRightDivSize=((dojo.byId("centerDiv").offsetHeight)*0.15);
       dijit.byId("detailRightDiv").resize({
         h : menuRightDivSize
-      });
-      dojo.query('#detailRightDiv_splitter').forEach(function(node, index, nodelist) {
-    	  node.style.visibility = 'visible';
       });
       dijit.byId("centerDiv").resize();
     }
@@ -5660,17 +5654,11 @@ function hideStreamMode(param,noRefresh){
       dijit.byId("detailRightDiv").resize({
         w : 0
       });
-      dojo.query('#detailRightDiv_splitter').forEach(function(node, index, nodelist) {
-    	  node.style.visibility = 'hidden';
-      });
       dijit.byId("centerDiv").resize();
     } else {
       if (! menuRightDivSize) menuRightDivSize=((dojo.byId("centerDiv").offsetWidth)*0.15);
       dijit.byId("detailRightDiv").resize({
         w : menuRightDivSize
-      });
-      dojo.query('#detailRightDiv_splitter').forEach(function(node, index, nodelist) {
-    	  node.style.visibility = 'visible';
       });
       dijit.byId("centerDiv").resize();
     }
