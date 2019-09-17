@@ -136,7 +136,7 @@ if ($print) $canUpdate=false;
         } else {
           $lineVal=new ChecklistLine();
         }?>	 
-		    <tr >
+		    <tr style="height:25px;min-height:25px">
 <?php   if ($line->check01) {?>
 			    <td class="noteData" style="<?php echo ($print)?'width:'.$nameWidth:'';?>border-right:0; text-align:right" title="<?php echo ($print)?'':$line->title;?>"> 
 				  <?php echo htmlEncode($line->name);?> :   
@@ -184,7 +184,7 @@ if ($print) $canUpdate=false;
 				  <?php if (! $print) {?>
 				  <textarea dojoType="dijit.form.Textarea" 
             id="checklistLineComment_<?php echo $line->id;?>" name="checklistLineComment_<?php echo $line->id;?>"
-            style="width: 150px;min-height: 25px; font-size: 90%"
+            style="width: 150px;min-height:20px; top:-2px;font-size:90%"
             maxlength="4000"
             class="input"><?php echo $lineVal->comment;?></textarea>
           <?php } else {
