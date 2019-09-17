@@ -616,7 +616,7 @@ function organizeButtons($nbButton=1) {
 	if ($showAttachment and $obj->id) {
 		$requiredWidth+=44;
 	}
-	if ($requiredWidth>($displayWidthButton/3)) {
+	if ($requiredWidth>($displayWidthButton/3) and $displayWidthButton<1000) {
 		if (! $extendedZone) {
 			$extendedZone=true;
 			echo '<div dojoType="dijit.form.Button" showlabel="false" title="'. i18n('extraButtonsBar'). '" '
