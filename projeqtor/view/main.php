@@ -712,7 +712,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     $cptMess = 0;
     foreach ($listMessageLegalFollowup as $idFollowup=>$idMessage){
       $messLegal = new MessageLegal($idMessage);
-      if((date('Y-m-d H:i:s') > $messLegal->endDate AND $messLegal->endDate )  OR (date('Y-m-d H:i:s') < $messLegal->startDate AND $messLegal->startDate ) OR $messLegal->idle){
+      if((date('Y-m-d H:i:s') > $messLegal->endDate AND $messLegal->endDate )  OR (date('Y-m-d H:i:s') < $messLegal->startDate AND $messLegal->startDate ) OR $messLegal->idle OR (!$messLegal->endDate and !$messLegal->startDate)){
         unset($listMessageLegalFollowup[$idFollowup]);
       }
     }
