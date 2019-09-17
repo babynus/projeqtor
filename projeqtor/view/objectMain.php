@@ -80,18 +80,10 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
 	    <script type="dojo/connect" event="resize" args="evt">
           var paramDiv=<?php echo json_encode($positionListDiv); ?>;
           var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
+          checkValidatedSize(paramDiv);
           if(paramDiv=="top" && paramMode!='5'){
             saveDataToSession("contentPaneDetailDivHeight<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
-            // Set min height
           } else if(paramMode!='5'){
-            // Set min width
-            if (dojo.byId("contentDetailDiv").offsetWidth<400) {
-               //dijit.byId("contentDetailDiv").resize({w:410});
-               var listWidth=(dojo.byId("centerDiv").offsetWidth)-410;
-               dijit.byId("listDiv").resize({w: listWidth});
-               resizeContainer("mainDivContainer", null);
-               return;
-            }
             saveDataToSession("contentPaneDetailDivWidth<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
             var param=dojo.byId('objectClass').value;
             var paramId=dojo.byId('objectId').value;
