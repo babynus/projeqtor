@@ -124,7 +124,7 @@ if($paramRightDiv=='3'){
        </div>
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
-        <div id="hideStreamButton" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" 
+        <div id="hideStreamButton" class="pseudoButton"  style="<?php if(RequestHandler::getValue('objectExist')=='true'){echo 'opacity:1;';}else{echo 'opacity:0.5;cursor:not-allowed;';} ?>height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" 
         onclick="hideStreamMode(<?php if($paramRightDiv=='3'){echo'1';}else{echo'0';}?>,false);">
           <table >
             <tr>

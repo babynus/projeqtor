@@ -6854,9 +6854,10 @@ function loadMenuBarObject(menuClass, itemName, from) {
   }
   cleanContent("detailDiv");
   formChangeInProgress=false;
+  var objectExist='true';
   var currentScreen=menuClass; 
   loadContent("objectMain.php?objectClass=" + currentScreen, "centerDiv"); 
-  loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen,"mainDivMenu");
+  loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+'&objectExist='+objectExist,"mainDivMenu");
   stockHistory(currentScreen,null,"object");
   selectIconMenuBar(menuClass);
   return true;
@@ -6873,21 +6874,26 @@ function loadMenuBarItem(item, itemName, from) {
   cleanContent("detailDiv");
   formChangeInProgress=false;
   var currentScreen=item;
+  var objectExist='false';
   if (item == 'Today') {
     loadContent("today.php", "centerDiv");
   } else if (item == 'Planning') {
+    objectExist='true';
     vGanttCurrentLine=-1;
     cleanContent("centerDiv");
     loadContent("planningMain.php", "centerDiv");
   } else if (item == 'PortfolioPlanning') {
+    objectExist='true';
     vGanttCurrentLine=-1;
     cleanContent("centerDiv");
     loadContent("portfolioPlanningMain.php", "centerDiv");
   } else if (item == 'ResourcePlanning') {
+    objectExist='true';
     vGanttCurrentLine=-1;
     cleanContent("centerDiv");
     loadContent("resourcePlanningMain.php", "centerDiv");
   } else if (item == 'GlobalPlanning') {
+    objectExist='true';
     vGanttCurrentLine=-1;
     cleanContent("centerDiv");
     loadContent("globalPlanningMain.php", "centerDiv");
@@ -6913,6 +6919,7 @@ function loadMenuBarItem(item, itemName, from) {
 		loadContent("dataCloningParameterMain.php", "centerDiv");
     //ADD qCazelles - GANTT
   } else if (item == 'VersionsPlanning') {
+    objectExist='true';
 	//CHANGE qCazelles - Correction GANTT - Ticket #100
 	//Old
 	//loadDialog("dialogVersionsPlanning", null, true, null, false);
@@ -6965,7 +6972,7 @@ function loadMenuBarItem(item, itemName, from) {
   }else {  
     showInfo(i18n("messageSelectedNotAvailable", new Array(itemName)));
   }
-  loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen,"mainDivMenu");
+  loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+'&objectExist='+objectExist,"mainDivMenu");
   stockHistory(null,null,currentScreen);
   selectIconMenuBar(item);
   return true;
