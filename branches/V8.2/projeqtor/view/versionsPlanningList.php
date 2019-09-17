@@ -75,7 +75,7 @@ if ($proj=='*' or !$proj) {
 		              <?php 
 		              $objectClass=(RequestHandler::isCodeSet('objectClass'))?RequestHandler::getClass('objectClass'):'';
 		              $objectId=(RequestHandler::isCodeSet('objectId'))?RequestHandler::getId('objectId'):'';
-		              $productVersionsListId=(RequestHandler::isCodeSet('productVersionsListId'))?RequestHandler::getId('productVersionsListId'):'';?>
+		              $productVersionsListId=(RequestHandler::isCodeSet('productVersionsListId'))?RequestHandler::getValue('productVersionsListId'):'';?>
 		              <input type="hidden" id="objectClass" name="objectClass" value="<?php echo $objectClass;?>" /> 
 		              <input type="hidden" id="objectId" name="objectId" value="<?php echo $objectId;?>" />
 		              <input type="hidden" id="productVersionsListId" name="productVersionsListId" value="<?php echo $productVersionsListId;?>" />
@@ -86,6 +86,7 @@ if ($proj=='*' or !$proj) {
 //Old
 // $tabProductVersions = $_REQUEST['productVersionsListId'];
 //New
+//END CHANGE qCazelles - Correction GANTT - Ticket #100
 $tabProductVersions=array();
 if ( strpos($_REQUEST['productVersionsListId'], '_')!==false) {
   $tabProductVersions=explode('_', $_REQUEST['productVersionsListId']);
@@ -93,14 +94,14 @@ if ( strpos($_REQUEST['productVersionsListId'], '_')!==false) {
 else {
   $tabProductVersions[]=$_REQUEST['productVersionsListId'];
 }
-//END CHANGE qCazelles - Correction GANTT - Ticket #100
 $nbPvs = 0;
 foreach ($tabProductVersions as $idProductVersion) {
 	echo '<input type="hidden" id="pvNo'.$nbPvs.'" name="idsProductVersion[]" value="'.$idProductVersion.'" />';
 	$nbPvs += 1;
 }
 echo '<input type="hidden" id="nbPvs" name="nbPvs" value="'.$nbPvs.'" />';
-?>            
+
+?>                  
 		            </td>
 		            <td style="white-space:nowrap;width:240px">
 		              <table>
