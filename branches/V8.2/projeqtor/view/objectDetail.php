@@ -237,43 +237,42 @@ if (array_key_exists('refresh', $_REQUEST)) {
     echo '<input type="hidden" id="objectClassName" name="objectClassName" value="'.$objClass.'" />'.$cr;
   }
   drawTableFromObject($obj);
-  drawChecklistFromObject($obj);
-  drawJoblistFromObject($obj);
+//   drawChecklistFromObject($obj);
+//   drawJoblistFromObject($obj);
   exit();
 }
 ?>
 <div <?php echo ($print)?'x':'';?>
-  dojoType="dijit.layout.BorderContainer">
+	dojoType="dijit.layout.BorderContainer">
   <?php
   if (!$refresh and !$print) {
     ?>
   <div id="buttonDiv" dojoType="dijit.layout.ContentPane" region="top"
-    style="z-index: 3; height: 35px; position: relative; overflow: visible !important;">
-    <div id="resultDiv" dojoType="dijit.layout.ContentPane" region="top"
-      style="display: none; z-index: 99999;"></div>
+		style="z-index: 3; height: 35px; position: relative; overflow: visible !important;">
+		<div id="resultDiv" dojoType="dijit.layout.ContentPane" region="top"
+			style="display: none; z-index: 99999;"></div>
 		<?php  include 'objectButtons.php'; ?>
   </div>
-  <div id="formDiv" dojoType="dijit.layout.ContentPane" region="center" style="overflow:<?php if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' ){echo 'hidden';}else{echo 'auto';}?>;">
+	<div id="formDiv" dojoType="dijit.layout.ContentPane" region="center" style="overflow:<?php if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' ){echo 'hidden';}else{echo 'auto';}?>;">
 
 	<?php
   }
   if (!$print) {
     ?>  
-<form dojoType="dijit.form.Form" id="objectForm" jsId="objectForm" 
-      name="objectForm" encType="multipart/form-data" action=""
-      method="">
-      <script type="dojo/method" event="onShow">
+<form dojoType="dijit.form.Form" id="objectForm" jsId="objectForm"
+			name="objectForm" encType="multipart/form-data" action="" method="">
+			<script type="dojo/method" event="onShow">
         if (dijit.byId('name')) dijit.byId('name').focus();
       </script>
-      <script type="dojo/method" event="onSubmit">
+			<script type="dojo/method" event="onSubmit">
         // Don't do anything on submit, just cancel : no button is default => must click
 		    //submitForm("../tool/saveObject.php","resultDiv", "objectForm", true);
 		    return false;        
         </script>
-      <div style="width: 100%; height: 100%;">
-        <div id="detailFormDiv" dojoType="dijit.layout.ContentPane"
-          region="top" style="width: 100%; height: 100%;"
-          onmouseout="hideGraphStatus();">
+			<div style="width: 100%; height: 100%;">
+				<div id="detailFormDiv" dojoType="dijit.layout.ContentPane"
+					region="top" style="width: 100%; height: 100%;"
+					onmouseout="hideGraphStatus();">
           <?php
   }
   $noData=htmlGetNoDataMessage($objClass);
@@ -315,15 +314,15 @@ if (array_key_exists('refresh', $_REQUEST)) {
       echo '<input type="hidden" id="objectClassName" name="objectClassName" value="'.$objClass.'" />'.$cr;
     }
       drawTableFromObject($obj);
-      drawChecklistFromObject($obj);
-      drawJoblistFromObject($obj);
+//       drawChecklistFromObject($obj);
+//       drawJoblistFromObject($obj);
   }
   
   if (!$print) {
     ?> 
   </div>
-      </div>
-    </form>
+			</div>
+		</form>
   <?php
   }
   $widthPct=setWidthPct($displayWidth, $print, $printWidth, $obj, "2");
@@ -344,10 +343,10 @@ if (array_key_exists('refresh', $_REQUEST)) {
     if ($print) {
       ?>
 <table width="<?php echo $printWidth;?>px;">
-      <tr>
-        <td class="section"><?php echo i18n('elementHistory');?></td>
-      </tr>
-    </table>
+			<tr>
+				<td class="section"><?php echo i18n('elementHistory');?></td>
+			</tr>
+		</table>
 <?php drawHistoryFromObjects();?> <?php
     } else {
       $titlePane=$objClass."_history";
@@ -359,7 +358,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
        onHide="saveCollapsed('<?php echo $titlePane;?>');"
        onShow="saveExpanded('<?php echo $titlePane;?>');" ><?php drawHistoryFromObjects();?>
 </div>
-    <br />
+		<br />
 <?php }?> <?php
   } else if (!$print) {
     $titlePane=$objClass."_history";
@@ -391,6 +390,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
 function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $parentHidden=false) {
   scriptLog("drawTableFromObject(obj, included=$included, parentReadOnly=$parentReadOnly)");
   global $toolTip, $cr, $print, $treatedObjects, $displayWidth, $outMode, $comboDetail, $collapsedList, $printWidth, $profile, $detailWidth, $readOnly, $largeWidth, $widthPct, $nbColMax, $preseveHtmlFormatingForPDF, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier,$arrayGroupe, $nbColMax, $section, $beforeAllPanes, $colWidth,$objInsert;
+  global $section, $prevSection;
   $ckEditorNumber=0; // Will be used only if getEditor=="CK" for CKEditor
 
   //gautier
@@ -921,7 +921,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       // Determine colSpan
       $colSpan=null;
       $colSpanSection='_'.lcfirst($section).'_colSpan';
-      debugLog("search $colSpanSection");
       if (property_exists($obj, $colSpanSection)) {
         $colSpan=$obj->$colSpanSection;
         debugLog("colSpan=$colSpan");
@@ -2871,6 +2870,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       }
     }
   }
+
   if (!$included) {
     if ($currentCol==0) {
       if ($section and !$print) {
@@ -2886,8 +2886,17 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     }
   }
 
-  if (!$included) endBuffering($section, $included);
-  if (!$included) finalizeBuffering();
+  if (!$included) {
+    endBuffering($section, $included);
+    startBuffering();
+    drawChecklistFromObject($obj,$nbCol);
+    endBuffering('Checklist', $included);
+    //drawJoblistFromObject($obj);
+    //endBuffering('Joblist', $included);
+    finalizeBuffering();
+  }
+  
+  
   if ($outMode=='pdf') {
     $cpt=0;
     foreach ($obj as $col=>$val) {
@@ -2906,7 +2915,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
 }
 
 function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, $outMode, $prevSection, $nbCol, $nbBadge=null, $included=null, $obj=null) {
-  // scriptLog("startTitlePane(classObbj=$classObj, section=$section, collapsedList=array, widthPct=$widthPct, print=$print, outMode=$outMode, prevSection=$prevSection, nbCol=$nbCol, nbBadge=$nbBadge)");
+  debugLog("startTitlePane(classObbj=$classObj, section=$section, collapsedList=array, widthPct=$widthPct, print=$print, outMode=$outMode, prevSection=$prevSection, nbCol=$nbCol, nbBadge=$nbBadge)");
   global $comboDetail, $currentColumn, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $beforeAllPanes,$type, $arrayGroupe;
   if (!$currentColumn) $currentColumn=0;
   if ($prevSection) {
@@ -7432,8 +7441,8 @@ function drawOtherClientFromObject($otherClient, $obj) {
   echo '</table>';
 }
 
-function drawChecklistFromObject($obj) {
-  global $print, $outMode, $noselect, $collapsedList, $displayWidth, $printWidth, $profile, $prevSection,$comboDetail;
+function drawChecklistFromObject($obj,$nbCol=3) {
+  global $print, $outMode, $noselect, $collapsedList, $displayWidth, $printWidth, $profile, $comboDetail;
   if (!$obj or !$obj->id) return; // Don't try and display checklist for non existant objects
   $displayChecklist='NO';
   $crit="nameChecklistable='".get_class($obj)."' and idle=0";
@@ -7456,20 +7465,19 @@ function drawChecklistFromObject($obj) {
   if (!$noselect and $obj->id and $list->code=='YES' and ($displayChecklist=='YES' or $print)) {
     if ($print) {
       // echo '<table class="detail" width="'.$printWidth.'px;">';
-      // echo '<tr><td>';
+       echo '<tr><td>';
       include_once "../tool/dynamicDialogChecklist.php";
-      // echo '</td></tr>';
+       echo '</td></tr>';
       // echo '</table>';
     } else {
       $titlePane=get_class($obj)."_checklist";
       $selectedTab=null;
       $tabName="Checklist";
+      $sessionTabName='detailTab'.get_class($obj);
+      $selectedTab=getSessionValue($sessionTabName,'Description');
+      $paneName='pane'.$tabName;
+      $extName=($comboDetail)?"_detail":'';
       if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print){
-        echo '<tr><td style="width:100%;vertical-align: top;">';
-        $sessionTabName='detailTab'.get_class($obj);
-        $selectedTab=getSessionValue($sessionTabName,'Description');
-        $paneName='pane'.$tabName;
-        $extName=($comboDetail)?"_detail":'';
 //         echo '<div id="x'.$tabName.$extName.'" dojoType="dijit.layout.ContentPane" class="detailTabClass" title="'.i18n('tab'.ucfirst($tabName)).(($nbBadge!==null )?'<div id=\''.$section.'BadgeTab\' class=\'sectionBadge\' style=\'right:0px;top:0px;width:auto;padding:0px 7px;font-weight:normal;zoom:0.9; -moz-transform: scale(0.9);'.(($nbBadge==0)?'opacity:0.5;':'').'\' >'.$nbBadge.'</div>':'').'" style="width:100%;height:100%;overflow:auto;" '.(($tabName==$selectedTab)?' selected="true" ':'').'>';
 //         echo ' <script type="dojo/method" event="onShow" >';
 //         echo '   saveDataToSession(\''.$sessionTabName.'\',\''.$tabName.'\');';
@@ -7477,10 +7485,12 @@ function drawChecklistFromObject($obj) {
 //         echo ' </script>';
 //         echo '  <div>';
       }
-      echo '<div style="width:'.$displayWidth.';padding:4px;overflow:auto" dojoType="dijit.TitlePane"';
+      $paneWidth=$displayWidth;
+      if (!Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print and $nbCol==3) $paneWidth=intval(intval($displayWidth)*2/3).'px';
+      echo '<div style="width:'.$paneWidth.';padding:4px;overflow:auto" dojoType="dijit.TitlePane"';
       echo ' title="'.i18n('sectionChecklist').'" ';
       echo (($tabName==$selectedTab)?' selected="true" ':'');
-      //echo ' open="'.((array_key_exists($titlePane, $collapsedList))?'false':'true').'"';
+      // echo ' open="'.((array_key_exists($titlePane, $collapsedList))?'false':'true').'"';
       echo ' id="'.$titlePane.'"';
       echo ' onHide="saveCollapsed(\''.$titlePane.'\');"';
       echo ' onShow="saveExpanded(\''.$titlePane.'\');"';
@@ -7492,13 +7502,16 @@ function drawChecklistFromObject($obj) {
         echo ' </script>';
       }
       $count=null;
-//      startTitlePane(get_class($obj), 'Checklist', $collapsedList, $displayWidth, $print, $outMode, $prevSection, "2", $count, false, $obj);
+      
+      //echo '<tr><td style="width:100%;vertical-align: top;">';
+      //startTitlePane(get_class($obj), 'Checklist', $collapsedList, $displayWidth, $print, $outMode, $prevSection, "2", $count, false, $obj);
       include_once "../tool/dynamicDialogChecklist.php";
+      //echo '</td></tr>';
       echo '</div>';
-      if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print){
-//         echo '</div></div>';
-        echo '</td></tr>';
-      }
+//       if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print){
+// //         echo '</div></div>';
+//         
+//       }
     }
   }
 }
@@ -7562,6 +7575,7 @@ function startBuffering() {
 }
 
 function endBuffering($prevSection, $included) {
+  debugLog("endBuffering($prevSection, $included)");
   global $print, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier,$paneHistory, $paneCheckList, $nbColMax, $section, $beforeAllPanes, $arrayGroupe; 
     $sectionPosition=array(
         'assignment'=>array('2'=>'left', '3'=>'extra','99'=>'progress'),
@@ -7741,6 +7755,7 @@ function finalizeBuffering() {
   if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print){ // Attention, panes start with DIV that is not closed
     foreach ($arrayPanes as $paneName) {
       if(isset($$paneName) and $$paneName){
+        debugLog($$paneName);
         echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$$paneName.'</div></div></td></tr>';
       }
     }  }else{
@@ -7881,12 +7896,12 @@ function drawJoblistFromObject($obj) {
       echo ' onHide="saveCollapsed(\''.$titlePane.'\');"';
       echo ' onShow="saveExpanded(\''.$titlePane.'\');"';
       echo '>';
-      if(0 and Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print){
-        echo ' <script type="dojo/method" event="onShow" >';
-        echo '   saveDataToSession(\''.$sessionTabName.'\',\''.$tabName.'\');';
-        echo '   hideEmptyTabs();';
-        echo ' </script>';
-      }
+//       if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print){
+//         echo ' <script type="dojo/method" event="onShow" >';
+//         echo '   saveDataToSession(\''.$sessionTabName.'\',\''.$tabName.'\');';
+//         echo '   hideEmptyTabs();';
+//         echo ' </script>';
+//       }
       // startTitlePane(get_class($obj), 'Joblist', $collapsedList, $displayWidth, $print, $outMode, $prevSection, "2", $count, false, $obj);
       include_once "../tool/dynamicDialogJoblist.php";
       echo '</div>';
