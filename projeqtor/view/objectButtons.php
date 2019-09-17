@@ -574,13 +574,13 @@
       <input type="hidden" id="updateRight" name="updateRight" value="<?php echo (!$obj->id)?$createRight:$updateRight;?>" />
       <input type="hidden" id="deleteRight" name="deleteRight" value="<?php echo $deleteRight;?>" />
        <?php if ($showAttachment) {
-         $labelAttachmentFileDirect=i18n("Attachment").'<br/><i>('.i18n("dragAndDrop").')</i>';
+         $labelAttachmentFileDirect=i18n("dragAndDrop");
          ?>
-			<span id="attachmentFileDirectDiv" style="position:relative;<?php echo (!$obj->id or $comboDetail)?'visibility:hidden;':'';?>;padding-left:4px;">
+			<span id="attachmentFileDirectDiv" title="<?php echo $labelAttachmentFileDirect;?>" style="position:relative;<?php echo (!$obj->id or $comboDetail)?'visibility:hidden;':'';?>;padding-left:4px;">
 			<div dojoType="dojox.form.Uploader" type="file" id="attachmentFileDirect" name="attachmentFile" 
 			MAX_FILE_SIZE="<?php echo Parameter::getGlobalParameter('paramAttachmentMaxSize');?>"
 			url="../tool/saveAttachment.php?attachmentRefType=<?php echo get_class($obj);?>&attachmentRefId=<?php echo $obj->id;?>"
-			multiple="true" class="directAttachment" 			
+			multiple="true" class="directAttachment"
 			uploadOnSelect="true"
 			target="resultPost"
 			onBegin="saveAttachment(true);"
