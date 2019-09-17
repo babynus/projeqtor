@@ -1243,7 +1243,7 @@ See: :ref:`thumbnails`
 
 .. rubric:: |fourBLC| Drop file area
 
-This area allows to add an attachment file to the item.
+|DropFile| This area allows to add an attachment file to the item.
 
   * Drop the file in the area.
   * Or click on the area to select a file.
@@ -1718,6 +1718,11 @@ Enables or disables the tchat mode
 
 Display the tchat mode to the bottom of the screen or to the right       
             
+-----
+
+|iconFullScreen| **Mode full screen**
+
+Pass your ProjeQtOr instance in full screen. Make your browser invisible and adapt it to the total surface of your screen.       
 
 :ref:`Return to Info bar<info-bar>`
 

@@ -1,3 +1,9 @@
+.. |DropFile| image:: images/DropFile.png
+   :alt: Drop files area
+
+.. |iconFullScreen| image:: images/iconFullScreen.png
+   :alt: Full screen Layout
+
 .. |iconChangeLayout| image:: images/iconChangeLayout.png
    :alt: Change Layout
    
