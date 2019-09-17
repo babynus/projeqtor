@@ -121,16 +121,25 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
               var paramDiv=<?php echo json_encode($positonRightDiv); ?>;
               var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
               if(paramDiv=='trailing' && paramMode!='5'){
+                if(dojo.byId("detailRightDiv").offsetWidth == 0){
+                  dojo.query('#detailRightDiv_splitter').forEach(function(node, index, nodelist) {
+    	             node.style.visibility = 'hidden';
+                  });
+                }
                 saveDataToSession("contentPaneRightDetailDivWidth<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetWidth, true);
                 var newWidth=dojo.byId("detailRightDiv").offsetWidth;
                 dojo.query(".activityStreamNoteContainer").forEach(function(node, index, nodelist) {
                   node.style.maxWidth=(newWidth-30)+"px";
                 });
               }else if (paramMode!='5'){
+                if(dojo.byId("detailRightDiv").offsetHeight == 0){
+                  dojo.query('#detailRightDiv_splitter').forEach(function(node, index, nodelist) {
+    	             node.style.visibility = 'hidden';
+                  });
+                }
                 saveDataToSession("contentPaneRightDetailDivHeight<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetHeight, true);
                 if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
               }
-                
       	  </script>
       	  <script type="dojo/connect" event="onLoad" args="evt">
               scrollInto();
