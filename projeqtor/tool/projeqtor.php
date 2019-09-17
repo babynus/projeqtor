@@ -4825,7 +4825,7 @@ function WidthLayoutActivityStream($objectClass){
 
 function WidthDivContentDetail($positionListDiv,$objectClass){
   if($positionListDiv=='left'){
-    $detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
+    $rightDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
     $widthListDiv=Parameter::getUserParameter("contentPaneTopDetailDivWidth".$objectClass);
     $widthDetailDiv=Parameter::getUserParameter('contentPaneDetailDivWidth'.$objectClass);
     if(!empty($widthListDiv) or !empty($widthDetailDiv)){
@@ -4837,8 +4837,13 @@ function WidthDivContentDetail($positionListDiv,$objectClass){
         $widthListDiv=$widthListDiv-$widthDetailDiv;
       }else if($widthListDiv >= 1800){
         $widthListDiv=$widthListDiv-$widthDetailDiv;
-      }else if($detailDivWidth >= $widthDetailDiv){
-        $widthDetailDiv=$detailDivWidth+($detailDivWidth*0.5);
+      }else if($rightDivWidth >= $widthDetailDiv){
+        $widthDetailDiv=$rightDivWidth+($rightDivWidth*0.5);
+      }
+      if($widthDetailDiv <= 400){
+        $centerDivSize=$widthListDiv + $widthDetailDiv;
+        $widthDetailDiv=400;
+        $widthListDiv=$centerDivSize-$widthDetailDiv;
       }
       $widthListDiv= $widthListDiv.'px' ;
       $widthDetailDiv=$widthDetailDiv.'px';
@@ -4855,9 +4860,14 @@ function WidthDivContentDetail($positionListDiv,$objectClass){
 
 function HeightLayoutListDiv($objectClass){
   $topDetailDivHeight=Parameter::getUserParameter('contentPaneTopDetailDivHeight'.$objectClass);
+  $detailDivHeight=Parameter::getUserParameter('contentPaneDetailDivHeight'.$objectClass);
   $screenHeight=getSessionValue('screenHeight');
   if ($screenHeight and $topDetailDivHeight>$screenHeight-300) {
    $topDetailDivHeight=$screenHeight-300;
+  }
+  if(!empty($detailDivHeight) and !empty($topDetailDivHeight) and $detailDivHeight <= 250 ){
+    $centerDivSize=$topDetailDivHeight+$detailDivHeight;
+    $topDetailDivHeight=$centerDivSize-250;
   }
   if(empty($topDetailDivHeight)){
     $listHeight='50%';
