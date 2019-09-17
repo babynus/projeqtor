@@ -121,7 +121,7 @@ $status = array('done' => '#a5eda5',
 ?>
 <?php if (!$print) { ?>
   <div id="dialogJobInfo" dojoType="dijit.Dialog" title="<?php echo i18n("dialogJobInfo");?>">
-  <div dojoType="dijit.form.TextBox" type="hidden" id="dialogJobInfoJobId" name="dialogJobInfoJobId"></div>
+  <input dojoType="dijit.form.TextBox" type="hidden" id="dialogJobInfoJobId" name="dialogJobInfoJobId" />
   <table>
     <tr>
       <td>

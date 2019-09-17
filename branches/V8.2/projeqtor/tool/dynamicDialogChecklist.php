@@ -148,7 +148,7 @@ if ($print) $canUpdate=false;
 								$check='check0'.$i;
 								$title='title0'.$i;
 								$value='value0'.$i;?>
-								<td style="<?php echo (!$print)?'':''?>min-width:100px;width:15%;vertical-align:top;" title="<?php echo ($print)?'':$line->$title;?>" >
+								<td style="<?php echo ($line->$check)?'':''?>;min-width:100px;width:15%;vertical-align:top;<?php if (!$line->$check) echo 'display:none';?>" title="<?php echo ($print)?'':$line->$title;?>" >
 					<?php if ($line->$check) {
 								  $checkName="check_".htmlEncode($line->id)."_".$i;
 								  if ($print) {
