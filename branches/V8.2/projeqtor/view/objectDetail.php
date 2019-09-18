@@ -2966,7 +2966,7 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
         $tabName=ucfirst($arrayGroupe[$lc]['99']);
       }
       $sessionTabName='detailTab'.$classObj;
-      $selectedTab=getSessionValue($sessionTabName,'Description');
+      $selectedTab=($obj->id)?getSessionValue($sessionTabName,'Description'):'Description';
       $paneName='pane'.$tabName;
       $extName=($comboDetail)?"_detail":'';
       if (!isset($$paneName) or $$paneName=='') {
@@ -7475,7 +7475,7 @@ function drawChecklistFromObject($obj,$nbCol=3) {
       $selectedTab=null;
       $tabName="Checklist";
       $sessionTabName='detailTab'.get_class($obj);
-      $selectedTab=getSessionValue($sessionTabName,'Description');
+      $selectedTab=($obj->id)?getSessionValue($sessionTabName,'Description'):'Description';
       $paneName='pane'.$tabName;
       $extName=($comboDetail)?"_detail":'';
       $paneWidth=$displayWidth;
@@ -7862,7 +7862,7 @@ function drawJoblistFromObject($obj,$nbCol=3) {
       $selectedTab=null;
       $tabName="Joblist";
       $sessionTabName='detailTab'.get_class($obj);
-      $selectedTab=getSessionValue($sessionTabName,'Description');
+      $selectedTab=($obj->id)?getSessionValue($sessionTabName,'Description'):'Description';
       $paneName='pane'.$tabName;
       $extName=($comboDetail)?"_detail":'';
       $paneWidth=$displayWidth;

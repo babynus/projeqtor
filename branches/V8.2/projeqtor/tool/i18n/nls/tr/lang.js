@@ -3725,6 +3725,7 @@ sectionImputationAlert: "Gerçek çalışma girilmezse uyarıların oluşturulma
 sectionImputationDiary: "Access to resource data",
 sectionInternalAlert: "Dahili uyarı alıcıları",
 sectionJobDefinition: "Job list",
+sectionJoblist: "iş listesi",
 sectionLanguage: "Dil",
 sectionLdap: "Ldap yönetim parametreleri",
 sectionLeave: "Düzenlenmiş devamsızlıklar",

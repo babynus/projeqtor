@@ -3725,6 +3725,7 @@ sectionImputationAlert: "Generazione di avvisi se il lavoro reale non è inserit
 sectionImputationDiary: "Accesso ai dati risorsa",
 sectionInternalAlert: "Ricevitori di allarmi interni",
 sectionJobDefinition: "Job list",
+sectionJoblist: "Elenco dei lavori",
 sectionLanguage: "Lingua",
 sectionLdap: "Ldap management parameters",
 sectionLeave: "assenza regolamentata",
