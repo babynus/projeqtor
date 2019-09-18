@@ -3725,6 +3725,7 @@ sectionImputationAlert: "Generación de alertas si no se introduce trabajo real"
 sectionImputationDiary: "Registro de tiempos y diario",
 sectionInternalAlert: "Receptores del aviso interno",
 sectionJobDefinition: "Job list",
+sectionJoblist: "Lista de trabajo",
 sectionLanguage: "Entregable",
 sectionLdap: "Administrar configuración LDAP",
 sectionLeave: "Regulated leaves",
