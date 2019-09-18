@@ -106,6 +106,7 @@
               <script type="dojo/connect" event="resize" args="evt">
                   var paramDiv=<?php echo json_encode($positonRightDiv); ?>;
                   var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
+                  hideSplitterStream (paramDiv);
                   if(paramDiv=='trailing' && paramMode!='5'){
                     saveDataToSession("contentPaneRightDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("detailRightDiv").offsetWidth, true);
                     var newWidth=dojo.byId("detailRightDiv").offsetWidth;
