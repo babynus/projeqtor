@@ -6283,14 +6283,14 @@ function checkValidatedSize(paramDiv){
       var listWidth=(dojo.byId("centerDiv").offsetWidth)-410;
       dijit.byId("listDiv").resize({w: listWidth});
       resizeContainer("mainDivContainer", null);
-      return;
+      return true;
    }
   }else {
     if (dojo.byId("contentDetailDiv").offsetHeight<250) {
       var listWidth=(dojo.byId("centerDiv").offsetHeight)-260;
       dijit.byId("listDiv").resize({h: listWidth});
       resizeContainer("mainDivContainer", null);
-      return;
+      return true;
    }
  }
 }
