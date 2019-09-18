@@ -893,7 +893,7 @@ function htmlDisplayDatabaseInfos() {
   if($simuIndex){
   	$paramDbDisplayName=i18n('DataCloning').' '.$paramDbDisplayName;
   }
-  echo "<div style='text-align:center;z-index:9999;color:white;'><b>$paramDbDisplayName</b></div>";
+  echo "<span style='text-align:center;user-select: none;pointer-events: none;color:white;'><b>$paramDbDisplayName</b></span>";
 }
 
 /** ===========================================================================
