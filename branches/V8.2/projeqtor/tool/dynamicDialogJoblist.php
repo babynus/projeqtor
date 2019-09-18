@@ -277,7 +277,7 @@ $status = array('done' => '#a5eda5',
                                 //}
                                 ?></td>
                             <td style="width:3px;">&nbsp;</td>
-                            <td style="width:<?php echo ($print) ? '115px;font-size:90%;' : '150px;'; ?>">
+                            <td style="vertical-align:top;width:<?php echo ($print) ? '115px;font-size:90%;' : '150px;'; ?>">
                                 <?php if (!$print) { ?>
                                     <textarea dojoType="dijit.form.Textarea"
                                               id="jobComment_<?php echo $line->id; ?>" name="job_<?php echo $line->id; ?>_comment"
