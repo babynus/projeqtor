@@ -6689,7 +6689,7 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
 }
 
 function drawTestCaseRunFromObject($list, $obj, $refresh=false) {
-  global $cr, $print, $user, $browserLocale, $comboDetail;
+  global $cr, $print, $user, $browserLocale, $comboDetail, $displayWidth;
   if ($comboDetail) {
     return;
   }
@@ -6735,7 +6735,7 @@ function drawTestCaseRunFromObject($list, $obj, $refresh=false) {
     echo '<tr>';
     if (!$print and $class=='TestSession') {
       echo '<td class="assignData" style="width:10%;text-align:center;">';
-      echo '<table style="width:100%"><tr><td style="width:30%;white-space:nowrap;">';
+      echo '<table style="width:100%"><tr><td style="width:50%;">';
       if ($canUpdate and !$print) {
         echo '  <a onClick="editTestCaseRun(\''.htmlEncode($tcr->id).'\', null, null);" '.'title="'.i18n('editTestCaseRun').'" > '.formatSmallButton('Edit').'</a>';
       }
@@ -6745,7 +6745,7 @@ function drawTestCaseRunFromObject($list, $obj, $refresh=false) {
       if (!$print) {
         echo '<input type="hidden" id="comment_'.htmlEncode($tcr->id).'" value="'.htmlEncode($tcr->comment, 'none').'"/>';
       }
-      echo '</td><td>&nbsp;&nbsp;&nbsp;</td><td style="white-space:nowrap;">';
+      echo '</td><td>&nbsp;</td><td style="width:50%;">';
       if ($tcr->idRunStatus==1 or $tcr->idRunStatus==3 or $tcr->idRunStatus==4) {
         echo '  <a onClick="passedTestCaseRun(\''.htmlEncode($tcr->id).'\');" '.'title="'.i18n('passedTestCaseRun').'" /> '.formatSmallButton('Passed').'</a>';
       }
@@ -6769,11 +6769,13 @@ function drawTestCaseRunFromObject($list, $obj, $refresh=false) {
     echo '<td class="assignData" align="left"'.$goto.' style="width:'.$nameWidth.'%" >'.htmlEncode($tc->name).'</td>';
     // gautier #1716
     $checkImg='savedOk.png';
+    $commentWidth='200';
+    if (intval($displayWidth)/10<200) $commentWidth=round(intval($displayWidth)/10,0);
     echo '<td class="assignData" style="width:10%">';
     if (!$print or $tcr->result) {
       if (!$print) {
         echo '<textarea dojoType="dijit.form.Textarea" id="tcrResult_'.$tcr->id.'" name="tcrResult_'.$tcr->id.'"
-                style="float:left;width: 125px;min-height: 25px;font-size: 90%; background:none;display:block;border:none;" maxlength="4000" onchange="saveTcrData('.$tcr->id.',\'Result\');">';
+                style="float:left;width:100%;min-width:'.$commentWidth.'px;min-height: 25px;font-size: 90%; background:none;display:block;border:none;" maxlength="4000" onchange="saveTcrData('.$tcr->id.',\'Result\');">';
         echo $tcr->result;
         echo '</textarea>';
         echo '<img  id="idImageResult'.$tcr->id.'" src="img/'.$checkImg.'" style="display: none; float:right; top:2px;right:5px; height:16px;"/>';
@@ -6788,7 +6790,7 @@ function drawTestCaseRunFromObject($list, $obj, $refresh=false) {
       if (!$print) {
         echo '<img  id="idImageComment'.$tcr->id.'" src="img/'.$checkImg.'" style="display: none; float:right; top:2px;right:5px; height:16px;"/>';
         echo '<textarea dojoType="dijit.form.Textarea" id="tcrComment_'.$tcr->id.'" name="tcrComment_'.$tcr->id.'"
-                style="float:left;width: 125px;min-height: 25px;font-size: 90%; background:none;display:block;border:none;" maxlength="4000" onchange="saveTcrData('.$tcr->id.',\'Comment\');">';
+                style="float:left;width:100%;min-width:'.$commentWidth.'px;min-height: 25px;font-size: 90%; background:none;display:block;border:none;" maxlength="4000" onchange="saveTcrData('.$tcr->id.',\'Comment\');">';
         echo $tcr->comment;
         echo '</textarea>';
       } else {
@@ -6799,7 +6801,7 @@ function drawTestCaseRunFromObject($list, $obj, $refresh=false) {
     //
     // echo '</td>';
     if (!$print and $class=='TestSession') {
-      echo '<td class="assignData" style="width:10%; white-space:nowrap" align="center">';
+      echo '<td class="assignData" style="width:10%; " align="center">';
       if (isset($tc->prerequisite) and $tc->prerequisite) {
         echo formatCommentThumb('<b>'.i18n('colPrerequisite').":</b>\n\n".$tc->prerequisite, '../view/css/images/prerequisite.png');
         // echo '<img src="../view/css/images/prerequisite.png" title="' . i18n('colPrerequisite') . ":\n\n" . htmlEncode($tc->prerequisite,'protectQuotes') . '" alt="desc" />';
