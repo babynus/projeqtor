@@ -552,7 +552,7 @@
       <?php if ($noselect) {echo 'style="display:none;"';}?> 
       iconClass="dijitButtonIcon  <?php if($ActivityStream==0){echo 'iconActivityStream22';}else{echo 'iconActivityStreamClose22';}?>" class="detailButton">
       <script type="dojo/connect" event="onClick" args="evt">
-      hideStreamMode(<?php if($ActivityStream=='3'){echo'1';}else{echo'0';}?>,false);
+      hideStreamMode(<?php if($paramRightDiv=='3'){echo'1';}else{echo'0';}?>,false);
       </script>
     </button>
     <?php $extraPlgButtons=Plugin::getButtons('detail', $objectClass);
