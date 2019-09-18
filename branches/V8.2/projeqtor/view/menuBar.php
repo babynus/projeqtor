@@ -186,7 +186,7 @@
 ?>
 <table width="100%">
   <tr height="<?php echo $iconSize+8; ?>px;" <?php echo $simuBarColor;?> >  
-    <td style="min-width:320px;width:40%;position:relative; white-space:nowrap">
+    <td style="min-width:320px;width:20%;position:relative; white-space:nowrap">
       <button id="menuBarUndoButton" dojoType="dijit.form.Button" showlabel="false"
        title="<?php echo i18n('buttonUndoItem');?>"
        disabled="disabled"
@@ -254,8 +254,8 @@
 
       </span>
     </td>
-    <td width="" style="text-align:center;">
-      <div style="position:absolute;font-size:130%;top:5px;left:50%;width:600px;margin-left:-300px;z-index:999"><?php htmlDisplayDatabaseInfos();?></div>
+    <td width="" style="vertical-align:top;text-align:center;">
+      <span style="position:relative;top:5px;font-size:130%;z-index:999;"><?php htmlDisplayDatabaseInfos();?></span>
     </td>    
     <?php if(isNotificationSystemActiv() and securityCheckDisplayMenu(null,'Notification')) {?>
     <td  width="63px" style=""> 
