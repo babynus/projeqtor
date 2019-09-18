@@ -538,7 +538,23 @@
       <?php }?>
       <input type="hidden" id="buttonHistoryVisible" value="<?php echo $paramHistoryVisible;?>" />
     </span>
-    
+     <?php organizeButtons();?> 
+     <?php 
+        $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
+       if($paramRightDiv=='3'){
+         $ActivityStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
+       }else{
+         $ActivityStream=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
+       }
+     ?>
+    <button id="hideStreamButton" dojoType="dijit.form.Button" showlabel="false" 
+      title="<?php echo i18n('showActivityStream', array(i18n($_REQUEST['objectClass'])));?>"
+      <?php if ($noselect) {echo "disabled";} ?> 
+      iconClass="dijitButtonIcon <?php if($ActivityStream==0){echo 'iconActivityStream22';}else{echo 'iconActivityStreamClose22';}?>" class="detailButton">
+      <script type="dojo/connect" event="onClick" args="evt">
+      hideStreamMode(<?php if($ActivityStream=='3'){echo'1';}else{echo'0';}?>,false);
+      </script>
+    </button>
     <?php $extraPlgButtons=Plugin::getButtons('detail', $objectClass);
     foreach ($extraPlgButtons as $bt) { 
     organizeButtons();?>

@@ -57,11 +57,7 @@ $objectExist="";
 $paramScreen=Parameter::getUserParameter('paramScreen');
 $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
 $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
-if($paramRightDiv=='3'){
-  $ActivityStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$currentScreen);
-}else{
-  $ActivityStream=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$currentScreen);
-}
+
 
 ?>
 
@@ -132,22 +128,6 @@ if($paramRightDiv=='3'){
             <tr>
               <td style="width:28x;text-align:center">
                 <div class="iconLayoutTab22 iconLayoutTab iconSize22 " style="position:absolute;top:2px;left:4px" ></div>
-              </td>
-            </tr>
-          </table>    
-       </div>
-      </td>
-      <td width="<?php echo (isIE())?37:35;?>px"  > 
-        <div id="hideStreamButton" class="pseudoButton"  style="<?php if($objectExist=='true'){echo 'opacity:1';}else{echo 'opacity:0.5;cursor:not-allowed';} ?>;height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" 
-        onclick="hideStreamMode(<?php if($paramRightDiv=='3'){echo'1';}else{echo'0';}?>,false);">
-          <table >
-            <tr>
-              <td >
-              <?php if($ActivityStream==0){ ;?>
-                <div class="iconActivityStream22 iconActivityStream iconSize22 " style="position:absolute;top:2px;left:3px" title="<?php echo i18n("showActivityStream");?>"></div>
-              <?php }else{?>
-                <div class="iconActivityStreamClose22 iconActivityStreamClose iconSize22 " style="position:absolute;top:2px;left:3px" title="<?php echo i18n("hideActivityStream");?>"></div>
-              <?php }?>
               </td>
             </tr>
           </table>    
