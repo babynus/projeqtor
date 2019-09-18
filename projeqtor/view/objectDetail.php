@@ -2891,8 +2891,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     startBuffering();
     drawChecklistFromObject($obj,$nbCol);
     endBuffering('Checklist', $included);
-    //drawJoblistFromObject($obj);
-    //endBuffering('Joblist', $included);
+    startBuffering();
+    drawJoblistFromObject($obj,$nbCol);
+    endBuffering('Joblist', $included);
     finalizeBuffering();
   }
   
@@ -7477,20 +7478,12 @@ function drawChecklistFromObject($obj,$nbCol=3) {
       $selectedTab=getSessionValue($sessionTabName,'Description');
       $paneName='pane'.$tabName;
       $extName=($comboDetail)?"_detail":'';
-      if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print){
-//         echo '<div id="x'.$tabName.$extName.'" dojoType="dijit.layout.ContentPane" class="detailTabClass" title="'.i18n('tab'.ucfirst($tabName)).(($nbBadge!==null )?'<div id=\''.$section.'BadgeTab\' class=\'sectionBadge\' style=\'right:0px;top:0px;width:auto;padding:0px 7px;font-weight:normal;zoom:0.9; -moz-transform: scale(0.9);'.(($nbBadge==0)?'opacity:0.5;':'').'\' >'.$nbBadge.'</div>':'').'" style="width:100%;height:100%;overflow:auto;" '.(($tabName==$selectedTab)?' selected="true" ':'').'>';
-//         echo ' <script type="dojo/method" event="onShow" >';
-//         echo '   saveDataToSession(\''.$sessionTabName.'\',\''.$tabName.'\');';
-//         echo '   hideEmptyTabs();';
-//         echo ' </script>';
-//         echo '  <div>';
-      }
       $paneWidth=$displayWidth;
       if (!Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print and $nbCol==3) $paneWidth=intval(intval($displayWidth)*2/3).'px';
       echo '<div style="width:'.$paneWidth.';padding:4px;overflow:auto" dojoType="dijit.TitlePane"';
       echo ' title="'.i18n('sectionChecklist').'" ';
       echo (($tabName==$selectedTab)?' selected="true" ':'');
-      // echo ' open="'.((array_key_exists($titlePane, $collapsedList))?'false':'true').'"';
+      if(Parameter::getUserParameter('paramLayoutObjectDetail')!='0') echo ' open="'.((array_key_exists($titlePane, $collapsedList))?'false':'true').'"';
       echo ' id="'.$titlePane.'"';
       echo ' onHide="saveCollapsed(\''.$titlePane.'\');"';
       echo ' onShow="saveExpanded(\''.$titlePane.'\');"';
@@ -7502,16 +7495,8 @@ function drawChecklistFromObject($obj,$nbCol=3) {
         echo ' </script>';
       }
       $count=null;
-      
-      //echo '<tr><td style="width:100%;vertical-align: top;">';
-      //startTitlePane(get_class($obj), 'Checklist', $collapsedList, $displayWidth, $print, $outMode, $prevSection, "2", $count, false, $obj);
       include_once "../tool/dynamicDialogChecklist.php";
-      //echo '</td></tr>';
       echo '</div>';
-//       if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print){
-// //         echo '</div></div>';
-//         
-//       }
     }
   }
 }
@@ -7607,6 +7592,7 @@ function endBuffering($prevSection, $included) {
         'hierarchicorganizationprojects'=>array('2'=>'bottom', '3'=>'extra','99'=>'dependency'), 
         'iban'=>array('2'=>'right', '3'=>'extra','99'=>'detail'), 
         'internalalert'=>array('2'=>'right', '3'=>'extra','99'=>'detail'), 
+        'joblist'=>array('2'=>'bottom', '3'=>'bottom','99'=>'checklist'),
         'jobdefinition'=>array('2'=>'bottom', '3'=>'bottom','99'=>'description'),
         'link'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'), 
         'link_requirement'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'), 
@@ -7845,8 +7831,8 @@ function drawJobDefinitionFromObject($obj, $refresh=false) {
   echo '</table>';
 }
 
-function drawJoblistFromObject($obj) {
-  global $print, $outMode, $noselect, $collapsedList, $displayWidth, $printWidth, $profile,$prevSection;
+function drawJoblistFromObject($obj,$nbCol=3) {
+  global $print, $outMode, $noselect, $collapsedList, $displayWidth, $printWidth, $profile, $comboDetail;
   if (!$obj or !$obj->id) return; // Don't try and display joblist for non existing objects
   $crit="nameChecklistable='".get_class($obj)."' and idle=0";
   $type='id'.get_class($obj).'Type';
@@ -7865,50 +7851,38 @@ function drawJoblistFromObject($obj) {
   $list=new ListYesNo($habil->rightAccess);
   if (!$noselect and $obj->id and $list->code=='YES') {
     if ($print) {
-      // echo '<table class="detail" width="'.$printWidth.'px;">';
-      // echo '<tr><td>';
+      echo '<table class="detail" width="'.$printWidth.'px;">';
+      echo '<tr><td>';
       include_once "../tool/dynamicDialogJoblist.php";
-      // echo '</td></tr>';
-      // echo '</table>';
+      echo '</td></tr>';
+      echo '</table>';
     } else {
       $titlePane=get_class($obj)."_joblist";
       $count=null;  
       $selectedTab=null;
       $tabName="Joblist";
-      if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print){
-        echo '<tr><td style="width:100%;vertical-align: top;">';
-        $sessionTabName='detailTab'.get_class($obj);
-        $selectedTab=getSessionValue($sessionTabName,'Description');
-        $paneName='pane'.$tabName;
-        $extName=($comboDetail)?"_detail":'';
-//         echo '<div id="x'.$tabName.$extName.'" dojoType="dijit.layout.ContentPane" class="detailTabClass" title="'.i18n('tab'.ucfirst($tabName)).(($nbBadge!==null )?'<div id=\''.$section.'BadgeTab\' class=\'sectionBadge\' style=\'right:0px;top:0px;width:auto;padding:0px 7px;font-weight:normal;zoom:0.9; -moz-transform: scale(0.9);'.(($nbBadge==0)?'opacity:0.5;':'').'\' >'.$nbBadge.'</div>':'').'" style="width:100%;height:100%;overflow:auto;" '.(($tabName==$selectedTab)?' selected="true" ':'').'>';
-//         echo ' <script type="dojo/method" event="onShow" >';
-//         echo '   saveDataToSession(\''.$sessionTabName.'\',\''.$tabName.'\');';
-//         echo '   hideEmptyTabs();';
-//         echo ' </script>';
-//         echo '  <div>';
-      }
-      echo '<div style="width:'.$displayWidth.';padding:4px;overflow:auto" dojoType="dijit.TitlePane"';
+      $sessionTabName='detailTab'.get_class($obj);
+      $selectedTab=getSessionValue($sessionTabName,'Description');
+      $paneName='pane'.$tabName;
+      $extName=($comboDetail)?"_detail":'';
+      $paneWidth=$displayWidth;
+      if (!Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print and $nbCol==3) $paneWidth=intval(intval($displayWidth)*2/3).'px';
+      echo '<div style="width:'.$paneWidth.';padding:4px;overflow:auto" dojoType="dijit.TitlePane"';
       echo ' title="'.i18n('Joblist').'" ';
       echo (($tabName==$selectedTab)?' selected="true" ':'');
-      //echo ' open="'.((array_key_exists($titlePane, $collapsedList))?'false':'true').'"';
+      if(Parameter::getUserParameter('paramLayoutObjectDetail')!='0') echo ' open="'.((array_key_exists($titlePane, $collapsedList))?'false':'true').'"';
       echo ' id="'.$titlePane.'"';
       echo ' onHide="saveCollapsed(\''.$titlePane.'\');"';
       echo ' onShow="saveExpanded(\''.$titlePane.'\');"';
       echo '>';
-//       if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print){
-//         echo ' <script type="dojo/method" event="onShow" >';
-//         echo '   saveDataToSession(\''.$sessionTabName.'\',\''.$tabName.'\');';
-//         echo '   hideEmptyTabs();';
-//         echo ' </script>';
-//       }
-      // startTitlePane(get_class($obj), 'Joblist', $collapsedList, $displayWidth, $print, $outMode, $prevSection, "2", $count, false, $obj);
+      if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0'){
+        echo ' <script type="dojo/method" event="onShow" >';
+        echo '   saveDataToSession(\''.$sessionTabName.'\',\''.$tabName.'\');';
+        echo '   hideEmptyTabs();';
+        echo ' </script>';
+      }
       include_once "../tool/dynamicDialogJoblist.php";
       echo '</div>';
-      if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print){
-        //         echo '</div></div>';
-        echo '</td></tr>';
-      }
     }
   }
 }
