@@ -6294,3 +6294,27 @@ function checkValidatedSize(paramDiv){
    }
  }
 }
+
+function hideSplitterStream (paramDiv){
+  if(paramDiv=='trailing'){
+    if(dojo.byId("detailRightDiv").offsetWidth == 0){
+      dojo.query('#detailRightDiv_splitter').forEach(function(node, index, nodelist) {
+       node.style.display = 'none';
+      });
+    }else{
+      dojo.query('#detailRightDiv_splitter').forEach(function(node, index, nodelist) {
+       node.style.display = 'block';
+      });
+    }
+  }else{
+    if(dojo.byId("detailRightDiv").offsetHeight == 0){
+      dojo.query('#detailRightDiv_splitter').forEach(function(node, index, nodelist) {
+       node.style.display = 'none';
+      });
+    }else{
+      dojo.query('#detailRightDiv_splitter').forEach(function(node, index, nodelist) {
+       node.style.display = 'block';
+      });
+    }
+  }
+}
