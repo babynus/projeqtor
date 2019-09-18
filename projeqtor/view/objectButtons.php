@@ -118,7 +118,7 @@
             $ref=$obj->getReferenceUrl();
             echo '<span id="buttonDivObjectId">';
             echo '<span class="roundedButton">';
-            echo '  <a href="' . $ref . '" onClick="copyDirectLinkUrl(\'Button\');return false;"' . ' title="' . i18n("rightClickToCopy") . '" style="cursor: pointer; color: white;" onmouseover=this.style.color="black" onmouseout=this.style.color="white">';
+            echo '  <a href="' . $ref . '" onClick="copyDirectLinkUrl(\'Button\');return false;"' . ' title="' . i18n("rightClickToCopy") . '" style="cursor: pointer; color: white;" onmouseover="this.style.color=\'black\';" onmouseout="this.style.color=\'white\';">';
             echo ($obj->id)?'&nbsp;#'.$obj->id:'';
  			      echo '&nbsp;</a>';
            	echo '</span>';
