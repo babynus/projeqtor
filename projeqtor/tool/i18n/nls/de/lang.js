@@ -3725,6 +3725,7 @@ sectionImputationAlert: "Benachrichtung&#44; wenn Ist-Arbeit nicht erfaßt wurde
 sectionImputationDiary: "Ist-Arbeit-Buchung und Terminkalender",
 sectionInternalAlert: "Empfänger interner Alarme",
 sectionJobDefinition: "Job list",
+sectionJoblist: "Auftragsliste",
 sectionLanguage: "Sprache",
 sectionLdap: "LDAP Verwaltung der Parameter",
 sectionLeave: "Regulated leaves",

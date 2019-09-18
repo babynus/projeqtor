@@ -3725,6 +3725,7 @@ sectionImputationAlert: "Génération d'alertes si le travail réel n'est pas sa
 sectionImputationDiary: "Accès aux données des ressources",
 sectionInternalAlert: "Destinataires de l'alerte interne",
 sectionJobDefinition: "Liste de tâches",
+sectionJoblist: "Liste de tâches",
 sectionLanguage: "Langue",
 sectionLdap: "Paramètres de gestion LDAP",
 sectionLeave: "Absence réglementée",

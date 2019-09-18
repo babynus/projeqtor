@@ -3725,6 +3725,7 @@ sectionImputationAlert: "Generiranje upozorenja&#44; ako pravi posao nije unesen
 sectionImputationDiary: "Stvarni rad knjige i termin kalendar",
 sectionInternalAlert: "Prijamnik unutarnje alarme",
 sectionJobDefinition: "Job list",
+sectionJoblist: "Popis radnih zadataka",
 sectionLanguage: "Jezik",
 sectionLdap: "LDAP upravljanje parametrima",
 sectionLeave: "Regulirani izostanak",

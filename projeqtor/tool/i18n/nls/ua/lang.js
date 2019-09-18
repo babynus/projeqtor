@@ -3725,6 +3725,7 @@ sectionImputationAlert: "Породження попередженя якщо р
 sectionImputationDiary: "Розподіл дійсної роботи та щоденник",
 sectionInternalAlert: "внутрішні одержувачи застережень",
 sectionJobDefinition: "Job list",
+sectionJoblist: "Перелік робот",
 sectionLanguage: "Мова",
 sectionLdap: "Параметри керування LDAP",
 sectionLeave: "Regulated leaves",
