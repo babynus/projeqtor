@@ -802,7 +802,8 @@ class LeaveMain extends SqlElement {
         $this->endDate = $firstOpenDay;
     }  
     $colScript = parent::getValidationScript($colName);
-    
+    if (!$this->idLeaveType) $this->idLeaveType=0;
+    if (!$this->idStatus) $this->idStatus=0;
     if($colName=="idStatus"){//stuck here, dojo always reset the style after the style.display = none
         $colScript.='<script type="dojo/connect" event="onChange" >';
         $colScript .='var idRes = dijit.byId("idEmployee").value;';
