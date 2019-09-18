@@ -79,7 +79,9 @@
           <script type="dojo/connect" event="resize" args="evt">
            var paramDiv=<?php echo json_encode($positionListDiv); ?>;
            var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
-           checkValidatedSize(paramDiv);
+           if (checkValidatedSize(paramDiv)){
+            return;
+          }
            if(paramDiv=="top" && paramMode!='5'){
               saveDataToSession("contentPaneDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
            }else if(paramMode!='5'){

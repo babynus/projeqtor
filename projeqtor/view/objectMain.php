@@ -80,7 +80,10 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
 	    <script type="dojo/connect" event="resize" args="evt">
           var paramDiv=<?php echo json_encode($positionListDiv); ?>;
           var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
-          checkValidatedSize(paramDiv);
+          resizeListDiv();
+          if (checkValidatedSize(paramDiv)){
+            return;
+          }
           if(paramDiv=="top" && paramMode!='5'){
             saveDataToSession("contentPaneDetailDivHeight<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
           } else if(paramMode!='5'){
@@ -93,7 +96,7 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
               loadContent('objectMultipleUpdate.php?objectClass=' + param,'detailDiv');
             }
           }
-          resizeListDiv();
+          
          </script>
 	    <div class="container" dojoType="dijit.layout.BorderContainer"  liveSplitters="false">
 	       <div id="detailBarShow" class="dijitAccordionTitle"
