@@ -549,8 +549,8 @@
      ?>
     <button id="hideStreamButton" dojoType="dijit.form.Button" showlabel="false" 
       title="<?php echo i18n('showActivityStream', array(i18n($_REQUEST['objectClass'])));?>"
-      <?php if ($noselect) {echo "disabled";} ?> 
-      iconClass="dijitButtonIcon <?php if($ActivityStream==0){echo 'iconActivityStream22';}else{echo 'iconActivityStreamClose22';}?>" class="detailButton">
+      <?php if ($noselect) {echo 'style="display:none;"';}?> 
+      iconClass="dijitButtonIcon  <?php if($ActivityStream==0){echo 'iconActivityStream22';}else{echo 'iconActivityStreamClose22';}?>" class="detailButton">
       <script type="dojo/connect" event="onClick" args="evt">
       hideStreamMode(<?php if($ActivityStream=='3'){echo'1';}else{echo'0';}?>,false);
       </script>
