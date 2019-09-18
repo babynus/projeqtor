@@ -157,6 +157,9 @@ use Spipu\Html2Pdf\Html2Pdf;
   <script type="text/javascript" src="../view/js/jsgantt.js"></script>
   <script type="text/javascript"> 
     var customMessageExists=<?php echo(file_exists(Plugin::getDir()."/nls/$currentLocale/lang.js"))?'true':'false';?>;
+    dojo.require("dojo.dnd.Container");
+    dojo.require("dijit.layout.BorderContainer");
+    dojo.require("dijit.layout.ContentPane");
     dojo.require("dojo.parser");
     dojo.require("dojo.i18n");
     //dojo.require("dojo.date.locale");
