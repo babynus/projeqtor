@@ -79,9 +79,10 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
 	  <div id="contentDetailDiv" dojoType="dijit.layout.ContentPane" region="center"  style="width:<?php echo $tableWidth[1];?>;">
 	    <script type="dojo/connect" event="resize" args="evt">
           var paramDiv=<?php echo json_encode($positionListDiv); ?>;
+          var paramRightDiv=<?php echo json_encode($positonRightDiv);?>;
           var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
           resizeListDiv();
-          if (checkValidatedSize(paramDiv)){
+          if (checkValidatedSize(paramDiv,paramRightDiv)){
             return;
           }
           if(paramDiv=="top" && paramMode!='5'){
@@ -121,10 +122,12 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
 	  <div id="detailRightDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positonRightDiv; ?>" splitter="true" 
 	  style="<?php if($positonRightDiv=="bottom"){echo "height:".$rightHeight;}else{ echo "width:".$rightWidth;}?>">
       	  <script type="dojo/connect" event="resize" args="evt">
-              var paramDiv=<?php echo json_encode($positonRightDiv); ?>;
+              var paramDiv=<?php echo json_encode($positionListDiv); ?>;
+              var paramRightDiv=<?php echo json_encode($positonRightDiv); ?>;
               var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
-              hideSplitterStream (paramDiv);
-              if(paramDiv=='trailing' && paramMode!='5'){
+              hideSplitterStream (paramRightDiv);
+              checkValidatedSize(paramDiv,paramRightDiv);
+              if(paramRightDiv=='trailing' && paramMode!='5'){
                 saveDataToSession("contentPaneRightDetailDivWidth<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetWidth, true);
                 var newWidth=dojo.byId("detailRightDiv").offsetWidth;
                 dojo.query(".activityStreamNoteContainer").forEach(function(node, index, nodelist) {
