@@ -6277,22 +6277,51 @@ function resizeListDiv() {
   }
 }
 
-function checkValidatedSize(paramDiv){
+function checkValidatedSize(paramDiv,paramRightDiv){
   if(paramDiv== 'left'){
-    if (dojo.byId("contentDetailDiv").offsetWidth<400) {
-      var listWidth=(dojo.byId("centerDiv").offsetWidth)-410;
-      dijit.byId("listDiv").resize({w: listWidth});
-      resizeContainer("mainDivContainer", null);
-      return true;
+    if(dojo.byId('detailRightDiv').offsetWidth==0 || paramRightDiv=='bottom'){
+      if (dojo.byId("contentDetailDiv").offsetWidth<400) {
+        var listWidth=(dojo.byId("centerDiv").offsetWidth)-410;
+        dijit.byId("listDiv").resize({w: listWidth});
+        resizeContainer("mainDivContainer", null);
+        return true;
+     }
+   }else{
+     if((dojo.byId("contentDetailDiv").offsetWidth - dojo.byId('detailRightDiv').offsetWidth) < 400){
+       var detailRightWidth=(dojo.byId('detailRightDiv').offsetWidth)-410;
+       if(150 > detailRightWidth){
+         detailRightWidth=150;
+       }
+       var contentDetailWidth=((dojo.byId("centerDiv").offsetWidth)-((detailRightWidth)+410));
+       dijit.byId('listDiv').resize({w:contentDetailWidth});
+       dijit.byId('detailRightDiv').resize({w:detailRightWidth});
+       resizeContainer("mainDivContainer", null);
+       return true;
+     }
    }
   }else {
-    if (dojo.byId("contentDetailDiv").offsetHeight<250) {
-      var listWidth=(dojo.byId("centerDiv").offsetHeight)-260;
-      dijit.byId("listDiv").resize({h: listWidth});
-      resizeContainer("mainDivContainer", null);
-      return true;
-   }
- }
+    if(dojo.byId('detailRightDiv').offsetHeight==0 || paramRightDiv=='trailing'){
+      if (dojo.byId("contentDetailDiv").offsetHeight<250) {
+        var listWidth=(dojo.byId("centerDiv").offsetHeight)-260;
+        dijit.byId("listDiv").resize({h: listWidth});
+        resizeContainer("mainDivContainer", null);
+        return true;
+      }
+    }else{
+      if((dojo.byId("contentDetailDiv").offsetHeight - dojo.byId('detailRightDiv').offsetHeight) < 250){
+        var detailRightHeight=(dojo.byId('detailRightDiv').offsetHeight)-260;
+        if(150 > detailRightHeight){
+          detailRightHeight=130;
+        }
+        var contentDetailHeight=((dojo.byId("centerDiv").offsetHeight)-((detailRightHeight)+260));
+        dijit.byId('listDiv').resize({h:contentDetailHeight});
+        dijit.byId('detailRightDiv').resize({h:detailRightHeight});
+        resizeContainer("mainDivContainer", null);
+        return true;
+      }
+      
+    }
+  }
 }
 
 function hideSplitterStream (paramDiv){
