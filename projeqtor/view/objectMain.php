@@ -37,7 +37,9 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
   $paramRightDiv=RequestHandler::getValue('paramRightDiv');
   $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
   $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
+  $codeModeLayout=Parameter::getUserParameter('paramScreen');
   ///////
+  $sizeRightDiv="";
   $objectClass="";
   if (isset($_REQUEST['objectClass'])) {
     $objectClass=$_REQUEST['objectClass'];
@@ -54,7 +56,7 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
   	}
   }
   $tableWidth=WidthDivContentDetail($positionListDiv,$objectClass);
-
+  $sizeRightDiv=substr($tableWidth[1], 0, -2);
 ?>
 <div id="mainDivContainer" class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
   <div dojoType="dijit.layout.ContentPane" region="center" splitter="true">
@@ -67,7 +69,7 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
 	     <script type="dojo/connect" event="resize" args="evt">
             if (switchedMode) return;
             var paramDiv=<?php echo json_encode($positionListDiv); ?>;
-            var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
+            var paramMode=<?php echo json_encode($codeModeLayout); ?>;
             if(paramDiv=="top" && paramMode!='5'){
               saveDataToSession("contentPaneTopDetailDivHeight<?php echo $objectClass;?>", dojo.byId("listDiv").offsetHeight, true);
             }else if(paramMode!='5'){
@@ -80,7 +82,7 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
 	    <script type="dojo/connect" event="resize" args="evt">
           var paramDiv=<?php echo json_encode($positionListDiv); ?>;
           var paramRightDiv=<?php echo json_encode($positonRightDiv);?>;
-          var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
+          var paramMode=<?php echo json_encode($codeModeLayout); ?>;
           resizeListDiv();
           if (checkValidatedSize(paramDiv,paramRightDiv)){
             return;
@@ -124,9 +126,9 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
       	  <script type="dojo/connect" event="resize" args="evt">
               var paramDiv=<?php echo json_encode($positionListDiv); ?>;
               var paramRightDiv=<?php echo json_encode($positonRightDiv); ?>;
-              var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
+              var paramMode=<?php echo json_encode($codeModeLayout); ?>;
               hideSplitterStream (paramRightDiv);
-              checkValidatedSize(paramDiv,paramRightDiv);
+              checkValidatedSizeRightDiv(paramDiv,paramRightDiv);
               if(paramRightDiv=='trailing' && paramMode!='5'){
                 saveDataToSession("contentPaneRightDetailDivWidth<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetWidth, true);
                 var newWidth=dojo.byId("detailRightDiv").offsetWidth;
