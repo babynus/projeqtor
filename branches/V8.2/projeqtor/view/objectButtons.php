@@ -547,6 +547,7 @@
          $ActivityStream=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
        }
      ?>
+    <?php if (property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream') ) {?>
     <button id="hideStreamButton" dojoType="dijit.form.Button" showlabel="false" 
       title="<?php echo i18n('showActivityStream', array(i18n($_REQUEST['objectClass'])));?>"
       <?php if ($noselect) {echo 'style="display:none;"';}?> 
@@ -555,6 +556,7 @@
       hideStreamMode(<?php if($paramRightDiv=='3'){echo'1';}else{echo'0';}?>,false);
       </script>
     </button>
+    <?php }?>
     <?php $extraPlgButtons=Plugin::getButtons('detail', $objectClass);
     foreach ($extraPlgButtons as $bt) { 
     organizeButtons();?>

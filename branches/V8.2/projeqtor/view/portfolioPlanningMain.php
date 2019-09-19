@@ -43,6 +43,7 @@
   $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
   $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
  $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
+ $codeModeLayout=Parameter::getUserParameter('paramScreen');
  if ($positionListDiv=='top'){
    $listHeight=HeightLayoutListDiv($currentScreen);
  }
@@ -106,10 +107,12 @@
      <div id="detailRightDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positonRightDiv; ?>" splitter="true" 
      style="<?php if($positonRightDiv=="bottom"){echo "height:".$rightHeightPortfolioPlanning;}else{ echo "width:".$rightWidthPortfolioPlanning;}?>">
               <script type="dojo/connect" event="resize" args="evt">
-                  var paramDiv=<?php echo json_encode($positonRightDiv); ?>;
-                  var paramMode=<?php echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
+                  var paramDiv=<?php echo json_encode($positionListDiv); ?>;
+                  var paramMode=<?php echo json_encode($codeModeLayout); ?>;
+                  var paramRightDiv=<?php echo json_encode($positonRightDiv); ?>;
                   hideSplitterStream (paramDiv);
-                  if(paramDiv=='trailing' && paramMode!='5'){
+                  checkValidatedSizeRightDiv(paramDiv,paramRightDiv);
+                  if(paramRightDiv=='trailing' && paramMode!='5'){
                     saveDataToSession("contentPaneRightDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("detailRightDiv").offsetWidth, true);
                     var newWidth=dojo.byId("detailRightDiv").offsetWidth;
                     dojo.query(".activityStreamNoteContainer").forEach(function(node, index, nodelist) {
