@@ -6281,76 +6281,84 @@ function resizeListDiv() {
 }
 
 
-function checkValidatedSize(paramDiv,paramRightDiv){
+function checkValidatedSize(paramDiv,paramRightDiv, paramMode){
+  if(paramMode != '5'){
   if(paramDiv== 'left'){
-    if(dojo.byId('detailRightDiv').offsetWidth==0 || paramRightDiv=='bottom'){
-      if (dojo.byId("contentDetailDiv").offsetWidth<400) {
-        var listWidth=(dojo.byId("centerDiv").offsetWidth)-410;
-        dijit.byId("listDiv").resize({w: listWidth});
-        resizeContainer("mainDivContainer", null);
-        return true;
-     }
-   }else{
-     if((dojo.byId("contentDetailDiv").offsetWidth - dojo.byId('detailRightDiv').offsetWidth) < 400){
-       var detailRightWidth=(dojo.byId('contentDetailDiv').offsetWidth)-410;
-       var listWidth=dojo.byId('centerDiv').offsetWidth-dojo.byId('contentDetailDiv').offsetWidth;
-       if(150 > detailRightWidth){
-         detailRightWidth=150;
-         listWidth=(dojo.byId("centerDiv").offsetWidth)-560;
-       }
-       dijit.byId('listDiv').resize({w:listWidth});
-       dijit.byId('detailRightDiv').resize({w:detailRightWidth});
-       resizeContainer("mainDivContainer", null);
-       return true;
-     }
-   }
-  }else {
-    if(dojo.byId('detailRightDiv').offsetHeight==0 || paramRightDiv=='trailing'){
-      if (dojo.byId("contentDetailDiv").offsetHeight<250) {
-        var listWidth=(dojo.byId("centerDiv").offsetHeight)-260;
-        dijit.byId("listDiv").resize({h: listWidth});
-        resizeContainer("mainDivContainer", null);
-        return true;
-      }
-    }else{
-      if((dojo.byId("contentDetailDiv").offsetHeight - dojo.byId('detailRightDiv').offsetHeight) < 250){
-        var detailRightHeight=(dojo.byId('contentDetailDiv').offsetHeight)-260;
-        var listHeight=dojo.byId('centerDiv').offsetHeight-dojo.byId('contentDetailDiv').offsetHeight;
-        if(130 > detailRightHeight){
-          detailRightHeight=130;
-          listHeight=(dojo.byId("centerDiv").offsetHeight)-390;
-        }
-        dijit.byId('listDiv').resize({h:listHeight});
-        dijit.byId('detailRightDiv').resize({h:detailRightHeight});
-        resizeContainer("mainDivContainer", null);
-        return true;
-      }
-    }
-  }
+	    if(dojo.byId('detailRightDiv').offsetWidth==0 || paramRightDiv=='bottom'){
+	      if (dojo.byId("contentDetailDiv").offsetWidth<400) {
+	        var listWidth=(dojo.byId("centerDiv").offsetWidth)-410;
+	        dijit.byId("listDiv").resize({w: listWidth});
+	        resizeContainer("mainDivContainer", null);
+	        return true;
+	     }
+	   }else{
+	     if((dojo.byId("contentDetailDiv").offsetWidth - dojo.byId('detailRightDiv').offsetWidth) < 400){
+	       var detailRightWidth=(dojo.byId('contentDetailDiv').offsetWidth)-410;
+	       var listWidth=dojo.byId('centerDiv').offsetWidth-dojo.byId('contentDetailDiv').offsetWidth;
+	       if(150 > detailRightWidth){
+	         detailRightWidth=150;
+	         listWidth=(dojo.byId("centerDiv").offsetWidth)-560;
+	       }
+	       dijit.byId('listDiv').resize({w:listWidth});
+	       dijit.byId('detailRightDiv').resize({w:detailRightWidth});
+	       resizeContainer("mainDivContainer", null);
+	       return true;
+	     }
+	   }
+	  }else {
+	    if(dojo.byId('detailRightDiv').offsetHeight==0 || paramRightDiv=='trailing'){
+	      if (dojo.byId("contentDetailDiv").offsetHeight<250) {
+	        var listWidth=(dojo.byId("centerDiv").offsetHeight)-260;
+	        dijit.byId("listDiv").resize({h: listWidth});
+	        resizeContainer("mainDivContainer", null);
+	        return true;
+	      }
+	    }else{
+	      if((dojo.byId("contentDetailDiv").offsetHeight - dojo.byId('detailRightDiv').offsetHeight) < 250){
+	        var detailRightHeight=(dojo.byId('contentDetailDiv').offsetHeight)-260;
+	        var listHeight=dojo.byId('centerDiv').offsetHeight-dojo.byId('contentDetailDiv').offsetHeight;
+	        if(130 > detailRightHeight){
+	          detailRightHeight=130;
+	          listHeight=(dojo.byId("centerDiv").offsetHeight)-390;
+	        }
+	        dijit.byId('listDiv').resize({h:listHeight});
+	        dijit.byId('detailRightDiv').resize({h:detailRightHeight});
+	        resizeContainer("mainDivContainer", null);
+		        return true;
+		      }
+		    }
+		  }
+	  }else{
+		  return;
+	  }
 }
 
-function checkValidatedSizeRightDiv(paramDiv,paramRightDiv){
-  if(paramDiv== 'left'){
-    if(((dojo.byId("contentDetailDiv").offsetWidth - dojo.byId('detailRightDiv').offsetWidth) < 400) && paramRightDiv=='trailing' && dojo.byId('detailRightDiv').offsetWidth>150){
-      var detailRightWidth=(dojo.byId("contentDetailDiv").offsetWidth)-410;
-      if(150 > detailRightWidth){
-        detailRightWidth=150;
-      }
-      dijit.byId('detailRightDiv').resize({w:detailRightWidth});
-      resizeContainer("mainDivContainer", null);
-      return true;
-    }
- }else {
-   if(((dojo.byId("contentDetailDiv").offsetHeight - dojo.byId('detailRightDiv').offsetHeight) < 250 )&& paramRightDiv=='bottom' && dojo.byId('detailRightDiv').offsetHeight >130){
-     var detailRightHeight=(dojo.byId("contentDetailDiv").offsetHeight)-260;
-     if(130 > detailRightHeight){
-       detailRightHeight=130;
-     }
-     dijit.byId('detailRightDiv').resize({h:detailRightHeight});
-     resizeContainer("mainDivContainer", null);
-     return true;
-   }
- }
+function checkValidatedSizeRightDiv(paramDiv,paramRightDiv, paramMode){
+	if(paramMode !='5'){
+		if(paramDiv== 'left'){
+		    if(((dojo.byId("contentDetailDiv").offsetWidth - dojo.byId('detailRightDiv').offsetWidth) < 400) && paramRightDiv=='trailing' && dojo.byId('detailRightDiv').offsetWidth>150){
+		      var detailRightWidth=(dojo.byId("contentDetailDiv").offsetWidth)-410;
+		      if(150 > detailRightWidth){
+		        detailRightWidth=150;
+		      }
+		      dijit.byId('detailRightDiv').resize({w:detailRightWidth});
+		      resizeContainer("mainDivContainer", null);
+		      return true;
+		    }
+		 }else {
+		   if(((dojo.byId("contentDetailDiv").offsetHeight - dojo.byId('detailRightDiv').offsetHeight) < 250 )&& paramRightDiv=='bottom' && dojo.byId('detailRightDiv').offsetHeight >130){
+		     var detailRightHeight=(dojo.byId("contentDetailDiv").offsetHeight)-260;
+		     if(130 > detailRightHeight){
+		       detailRightHeight=130;
+		     }
+		     dijit.byId('detailRightDiv').resize({h:detailRightHeight});
+		     resizeContainer("mainDivContainer", null);
+		     return true;
+		   }
+		 }
+	}else{
+		return;
+	}	
 }
 
 
