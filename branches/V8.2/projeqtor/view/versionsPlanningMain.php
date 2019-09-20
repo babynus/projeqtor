@@ -47,7 +47,7 @@ $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
            var paramDiv=<?php  echo json_encode($positionListDiv); ?>;
            var paramRightDiv=<?php echo json_encode($positonRightDiv);?>;
            var paramMode=<?php  echo json_encode($codeModeLayout); ?>;
-           if (checkValidatedSize(paramDiv,paramRightDiv)){
+           if (checkValidatedSize(paramDiv,paramRightDiv, paramMode, paramMode)){
             return;
            }
            if(paramDiv=="top" && paramMode!='5'){
@@ -80,7 +80,9 @@ $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
                 var paramMode=<?php echo json_encode($codeModeLayout); ?>;
                 var paramRightDiv=<?php echo json_encode($positonRightDiv); ?>;
                 hideSplitterStream (paramRightDiv);
-                checkValidatedSizeRightDiv(paramDiv,paramRightDiv);
+                if (checkValidatedSizeRightDiv(paramDiv,paramRightDiv, paramMode)){
+                    return;
+                  }
                 if(paramRightDiv=='trailing' && paramMode!='5'){
                    saveDataToSession("contentPaneRightDetailDivWidth<?php  echo $currentScreen;?>", dojo.byId("detailRightDiv").offsetWidth, true);
                    var newWidth=dojo.byId("detailRightDiv").offsetWidth;
