@@ -31,9 +31,61 @@ require_once('_securityCheck.php');
 class ResourceTeamMain extends ResourceMain {
   // extends SqlElement, so has $id
   
+  // extends SqlElement, so has $id
+  public $_sec_Description;
+  public $id;
+  public $_spe_image;
+  public $name;
+  public $userName;
+  public $initials;
+  public $email;
+  public $capacity=1;
+  public $idCalendarDefinition;
+  public $idProfile;
+  public $idOrganization;
+  public $idTeam;
+  public $phone;
+  public $mobile;
+  public $fax;
+  // ADD tLaguerie Ticket #396
+  public $startDate;
+  // END tLaguerie Ticket #396
+  public $isContact;
+  public $isUser;
+  // MTY - LEAVE SYSTEM
+  public $isEmployee;
+  public $student;
+  public $subcontractor;
+  public $isLeaveManager;
+  // MTY - LEAVE SYSTEM
+  public $idle;
+  // ADD tLaguerie Ticket #396
+  public $endDate;
+  // END tLaguerie Ticket #396
+  
+  public $description;
+  public $_sec_ResourceCost;
+  public $idRole;
+  public $_ResourceCost=array();
+  public $_sec_Affectations;
+  public $_spe_affectations;
+  public $_spe_affectationGraph;
+  public $_sec_affectationResourceTeamResource;
+  public $_spe_affectationResourceTeamResource;
+  public $_sec_resourceCapacity;
+  public $_spe_resourceCapacity;
+  public $_sec_resourceSurbooking;
+  public $_spe_resourceSurbooking;
+  public $_sec_Miscellaneous;
+  public $isLdap;
+  public $dontReceiveTeamMails;
+  public $password;
+  public $crypto;
+  public $isResourceTeam;
   public $_sec_AffectationsResourceTeam;
   public $_spe_affectationsResourceTeam;
   public $_spe_affectationResourceTeamGraph;
+  public $_nbColMax=3;
   
 	  private static $_layout='
       <th field="id" formatter="numericFormatter" width="5%"># ${id}</th>
