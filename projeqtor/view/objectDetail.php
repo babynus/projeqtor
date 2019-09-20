@@ -5537,10 +5537,18 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
       if ($assignment->realWork==0 and $canUpdate and !$print and $workVisible) {
         echo '  <a onClick="removeAssignment('."'".htmlEncode($assignment->id)."','".(Work::displayWork($assignment->realWork)*100)."','".htmlEncode($resName, 'quotes')."'".');" '.'title="'.i18n('removeAssignment').'" > '.formatSmallButton('Remove').'</a>';
       }
-      if ($canUpdate and !$print and $workVisible) {
+      if ($canUpdate and !$print and $workVisible and !$assignment->idle) {
         echo '  <a onClick="divideAssignment('.htmlEncode($assignment->id).',\''.Work::displayShortWorkUnit().'\');" '.'title="'.i18n('divideAssignment').'" > '.formatSmallButton('Split').'</a>';
         echo '</td>';
+      }else{
+        if ($assignment->idle) {
+          echo '<a><div style="display:table-cell;width:20px;"><img style="position:relative;top:4px;left:2px" src="css/images/tabClose.gif" '.'title="'.i18n('colIdle').'"/></div></a>';
+        } else {
+          echo '<a><div style="display:table-cell;width:20px;">&nbsp;</div></a>';
+        }
+        echo '</td>';
       }
+      
     }
     echo '<td class="assignData'.$idleClass.'" style="width:'.(($print)?'40':'30').'%;vertical-align:middle">';
     echo '<table width="100%"><tr>';
