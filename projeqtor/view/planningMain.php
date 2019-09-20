@@ -112,17 +112,24 @@
                 var paramDiv=<?php echo json_encode($positionListDiv); ?>;
                   var paramRightDiv=<?php echo json_encode($positonRightDiv); ?>;
                   var paramMode=<?php echo json_encode($codeModeLayout); ?>;
+                  var activModeStream=<?php echo json_encode($activModeStream);?>;
                   hideSplitterStream (paramRightDiv);
                   if (checkValidatedSizeRightDiv(paramDiv,paramRightDiv, paramMode)){
                     return;
                   }
                   if(paramRightDiv=='trailing' && paramMode!='5'){
+                     if(activModeStream=='true') {
+                      saveDataToSession("contentPaneRightDetailDivHeight", dojo.byId("detailRightDiv").offsetWidth, true);
+                    }
                     saveDataToSession("contentPaneRightDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("detailRightDiv").offsetWidth, true);
                     var newWidth=dojo.byId("detailRightDiv").offsetWidth;
                     dojo.query(".activityStreamNoteContainer").forEach(function(node, index, nodelist) {
                     node.style.maxWidth=(newWidth-30)+"px";
                     });
                   }else if(paramMode!='5'){
+                    if(activModeStream=='true') {
+                      saveDataToSession("contentPaneRightDetailDivHeight", dojo.byId("detailRightDiv").offsetHeight, true);
+                    }
                     saveDataToSession("contentPaneRightDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("detailRightDiv").offsetHeight, true);
                     var newHeight=dojo.byId("detailRightDiv").offsetHeight;
                     if (dojo.byId("noteNoteStream")) dojo.byId("noteNoteStream").style.height=(newHeight-40)+'px';

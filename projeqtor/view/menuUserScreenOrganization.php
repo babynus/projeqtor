@@ -31,10 +31,6 @@ $showMenuBar=Parameter::getUserParameter('paramShowMenuBar');
 $showMenuBar='YES';
 if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
 //Param
-$currentScreen="";
-if(isset($_REQUEST['currentScreen'])){
-  $currentScreen=$_REQUEST['currentScreen'];
-}
 if(sessionValueExists("paramScreen")){
   if(getSessionValue("paramScreen")=='5') {
   	  Parameter::storeUserParameter("paramScreen", '1');
@@ -57,8 +53,43 @@ $objectExist="";
 $paramScreen=Parameter::getUserParameter('paramScreen');
 $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
 $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
+if(RequestHandler::isCodeSet('currentScreen')){
+  $currentSceen=RequestHandler::getValue('currentScreen');
+}
 
+if(RequestHandler::isCodeSet('parmActiveGlobal')){
+  $activModeStream=RequestHandler::getValue('parmActiveGlobal');
+  
+}else{
+  $activModeStream=Parameter::getUserParameter('modeActiveStreamGlobal');
+}
 
+debugLog($_REQUEST);
+if($paramRightDiv=='3'){
+  $globalActivityStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight');
+  if(isset($currentSceen)){
+    $activityStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$currentSceen);
+    if($globalActivityStream!=0 and $globalActivityStream==0){
+      $globalActivityStream=0;
+    }
+  }
+}else{
+  $globalActivityStream=Parameter::getUserParameter('contentPaneRightDetailDivWidth');
+  if(isset($currentSceen)){
+    $activityStream=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$currentSceen);
+    if($globalActivityStream!=0 and $globalActivityStream==0){
+      $globalActivityStream=0;
+    }
+  }
+}
+
+if( $activModeStream=='true'){
+  Parameter::storeUserParameter('modeActiveStreamGlobal', 'true');
+}else{
+  Parameter::storeUserParameter('modeActiveStreamGlobal', 'false');
+}
+
+debugLog($globalActivityStream);
 ?>
 
 <div id="mainDivMenu" class="container" >
@@ -128,6 +159,23 @@ $paramObjectDetail=Parameter::getUserParameter('paramLayoutObjectDetail');
             <tr>
               <td style="width:28x;text-align:center">
                 <div class="iconLayoutTab22 iconLayoutTab iconSize22 " style="position:absolute;top:2px;left:4px" ></div>
+              </td>
+            </tr>
+          </table>    
+       </div>
+      </td>
+      <td width="<?php echo (isIE())?37:35;?>px"  > 
+        <div id="hideStreamButton" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" 
+        onclick="hideStreamMode(<?php if($paramRightDiv=='3'){echo'1';}else{echo'0';}?>,false,true,<?php echo $globalActivityStream;?>);">
+        
+          <table >
+            <tr>
+              <td >
+              <?php if( $globalActivityStream=='0'){ ;?>
+                <div class="iconActivityStream22 iconActivityStream iconSize22 " style="position:absolute;top:2px;left:3px" title="<?php echo i18n("showActivityStream");?>"></div>
+              <?php }else {?>
+                <div class="iconActivityStreamClose22 iconActivityStreamClose iconSize22 " style="position:absolute;top:2px;left:3px" title="<?php echo i18n("hideActivityStream");?>"></div>
+              <?php }?>
               </td>
             </tr>
           </table>    

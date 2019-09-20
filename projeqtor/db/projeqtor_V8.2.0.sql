@@ -122,6 +122,7 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES
 ('contentPaneTopDetailDivHeight','0'),
 ('contentPaneTopDetailDivWidth','0'),
 ('paramLayoutObjectDetail','4');
+('modeActiveStreamGlobal','false');
 
 INSERT INTO `${prefix}cronexecution` (`cron`, `fileExecuted`, `idle` ,`fonctionName`) VALUES
 ('*/5 * * * *', '../tool/cronExecutionStandard.php', 0, 'dataCloningCheckRequest');

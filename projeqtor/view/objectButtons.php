@@ -538,24 +538,18 @@
       <?php }?>
       <input type="hidden" id="buttonHistoryVisible" value="<?php echo $paramHistoryVisible;?>" />
     </span>
+     <?php organizeButtons();?> 
      <?php 
-      $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
-      $classStream=$objectClass;
-      if (RequestHandler::getValue('planning')=='true' and RequestHandler::isCodeSet('planningType')) {
-        $classStream=RequestHandler::getValue('planningType');
-      } else if (RequestHandler::isCodeSet('objectClassList') and RequestHandler::getValue('objectClassList')) {
-        $classStream=RequestHandler::getValue('objectClassList');
-      }
-      if($paramRightDiv=='3'){
-        $ActivityStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$classStream);
-      }else{
-        $ActivityStream=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$classStream);
-      }
+        $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
+       if($paramRightDiv=='3'){
+         $ActivityStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
+       }else{
+         $ActivityStream=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
+       }
      ?>
     <?php if (property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream') ) {?>
-    <?php organizeButtons();?> 
     <button id="hideStreamButton" dojoType="dijit.form.Button" showlabel="false" 
-      title="<?php echo i18n((($ActivityStream==0)?'showActivityStream':'hideActivityStream'), array(i18n($_REQUEST['objectClass'])));?>"
+      title="<?php echo i18n('showActivityStream', array(i18n($_REQUEST['objectClass'])));?>"
       <?php if ($noselect) {echo 'style="display:none;"';}?> 
       iconClass="dijitButtonIcon  <?php if($ActivityStream==0){echo 'iconActivityStream22';}else{echo 'iconActivityStreamClose22';}?>" class="detailButton">
       <script type="dojo/connect" event="onClick" args="evt">

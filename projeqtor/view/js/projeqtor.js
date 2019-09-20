@@ -5631,13 +5631,18 @@ function saveNoteStream(event){
 }
 
 var menuRightDivSize=null;
-function hideStreamMode(param,noRefresh){
-  var currentItem=historyTable[historyPosition];
-  var currentScreen=currentItem[0];
-  if(currentScreen==null){
-    currentScreen=currentItem[2];
+function hideStreamMode(param,noRefresh,modeGlobal,activityStream){
+  var paramGlobal='false';
+  if(modeGlobal==true){
+    paramGlobal='true';
+  }
+  if(activityStream !=0){
+  loadDiv("menuUserScreenOrganization.php?parmActiveGlobal="+paramGlobal,"mainDivMenu");
   }
   if(param == '1'){
+    if(!activityStream){
+      activityStream=dijit.byId("detailRightDiv").h ;
+    }
     if(dijit.byId("detailRightDiv").h != '0'){
       menuRightDivSize=dojo.byId("detailRightDiv").offsetHeight;
       dijit.byId("detailRightDiv").resize({
@@ -5658,6 +5663,9 @@ function hideStreamMode(param,noRefresh){
     }
   }else{
     if (! dijit.byId('detailRightDiv')) return;
+    if(!activityStream){
+      activityStream=dijit.byId("detailRightDiv").w ;
+    }
     if(dijit.byId("detailRightDiv").w != '0'){
       menuRightDivSize=dojo.byId("detailRightDiv").offsetWidth;
       dijit.byId("detailRightDiv").resize({
@@ -5677,7 +5685,10 @@ function hideStreamMode(param,noRefresh){
       setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50);
     }
   }
-  loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+"&objectExist=true","mainDivMenu");
+  if(activityStream==0){
+    loadDiv("menuUserScreenOrganization.php?parmActiveGlobal="+paramGlobal,"mainDivMenu");
+  }
+ 
   dijit.byId('iconMenuUserScreen').closeDropDown();
 }
 
