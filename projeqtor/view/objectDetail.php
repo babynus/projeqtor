@@ -1264,7 +1264,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       // $hide=true; //continue;
       // }
       // END ADD qCazelles - dateComposition
-      if (($col=='idUser' or $col=='creationDate' or $col=='creationDateTime' or $col=='lastUpdateDateTime') and !$print) {
+      if (( ($col=='idUser' and $classObj!='Affectation') or $col=='creationDate' or $col=='creationDateTime' or $col=='lastUpdateDateTime') and !$print) {
         $hide=true;
       }
       if ($obj->isAttributeSetToField($col, 'nobr')) {
