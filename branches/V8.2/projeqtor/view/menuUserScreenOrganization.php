@@ -64,7 +64,6 @@ if(RequestHandler::isCodeSet('parmActiveGlobal')){
   $activModeStream=Parameter::getUserParameter('modeActiveStreamGlobal');
 }
 
-debugLog($_REQUEST);
 if($paramRightDiv=='3'){
   $globalActivityStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight');
   if(isset($currentSceen)){
@@ -89,7 +88,6 @@ if( $activModeStream=='true'){
   Parameter::storeUserParameter('modeActiveStreamGlobal', 'false');
 }
 
-debugLog($globalActivityStream);
 ?>
 
 <div id="mainDivMenu" class="container" >
