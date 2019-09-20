@@ -951,6 +951,12 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
                                                   + "&xhrPostValidationType="+((validationType)?validationType:'');
     // add a Timestamp to url
     page += '&xhrPostTimestamp='+Date.now();
+    if (page.substr(0, 16) == 'objectStream.php' && page.indexOf("objectClassList=")<0) {
+      var currentScreenUrl='undefined';
+      if (dojo.byId('objectClassManual')) currentScreenUrl=dojo.byId('objectClassManual').value;
+      else if (dojo.byId('objectClass')) currentScreenUrl=dojo.byId('objectClass').value;
+      page+='&objectClassList='+currentScreenUrl;
+    }
     dojo.xhrPost({
         url : page,
         form : formName,
