@@ -133,7 +133,9 @@
 	   
 <?php if (!$onlyCenter) {?>   
 <?php 
-     $paramHeightStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
+     $objectClassStream=$objectClass;
+     if (RequestHandler::isCodeSet('objectClassList')) $objectClassStream=RequestHandler::getValue('objectClassList');
+     $paramHeightStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClassStream);
      if(empty($paramHeightStream)){
         $paramHeightStream=140;
       }
