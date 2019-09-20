@@ -171,7 +171,7 @@ if (isset($obj)) {
   </div>
   <div style="padding-right:16px;<?php if($displayWidthButtonCI<800) echo 'display:none;'?>" <?php echo ($canUpdateCreationInfo)?'class="buttonDivCreationInfoEdit" onClick="changeCreationInfo();"':'';?>>
   <?php 
-  if (!$comboDetail and $obj->id and property_exists ( $obj, 'idUser' )) {
+  if (!$comboDetail and $obj->id and property_exists($obj,'idUser') and get_class($obj)!='Affectation') {
     echo formatUserThumb($obj->idUser,SqlList::getNameFromId('Affectable', $obj->idUser),'Creator',32,'right',true);
     $creationDate='';
   	if (property_exists ( $obj, 'creationDateTime' )) {
