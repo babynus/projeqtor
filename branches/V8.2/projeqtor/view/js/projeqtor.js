@@ -3536,7 +3536,7 @@ function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target) {
     dojo.byId('objectClass').value = eltClass;
     dojo.byId('objectId').value = eltId;
     loadContent('objectDetail.php', 'detailDiv', 'listForm');
-    //if (dijit.byId("detailRightDiv")) loadContent("objectStream.php", "detailRightDiv", "listForm"); 
+    if (dijit.byId("detailRightDiv")) loadContent("objectStream.php", "detailRightDiv", "listForm"); 
   } else {
     if (dojo.byId("detailDiv")) {
       cleanContent("detailDiv");
