@@ -45,7 +45,7 @@ Security::checkValidId ( $idProject );
 
 $vp=new VersionProject($idVersionProject);
 
-$vers=new Version($idVersion);
+$vers=new Version($idVersion,true);
 $idProduct=$vers->idProduct;
 
 ?>
@@ -164,7 +164,13 @@ $idProduct=$vers->idProduct;
 							</td>
 							<td>
 								<div id="versionProjectIdle" name="versionProjectIdle"
-									dojoType="dijit.form.CheckBox" type="checkbox" <?php if ($vp->idle) echo ' checked="checked" ';?> ></div>
+									dojoType="dijit.form.CheckBox" type="checkbox" 
+									<?php 
+									if ($vp->idle) { 
+									  echo ' checked="checked" ';
+									  if ($vers->idle) echo ' disabled';
+									}
+									?> ></div>
 							</td>
 						</tr>
 						<tr>
