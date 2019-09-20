@@ -38,7 +38,7 @@ class ContextType extends SqlElement {
   public $description;
   public $_noDelete=true;
   public $_noCreate=true;
-  public $_sec_void;
+  //public $_sec_void;
   //public $_isNameTranslatable = true;
   
   private static $_layout='

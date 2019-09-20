@@ -39,7 +39,7 @@ class DeliverableStatus extends SqlElement {
   public $sortOrder=0;
   public $idle;
   public $scope;
-  public $_sec_void;
+  //public $_sec_void;
   
   // Define the layout that will be used for lists
   private static $_layout='

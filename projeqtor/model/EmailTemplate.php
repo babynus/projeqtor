@@ -41,7 +41,7 @@ class EmailTemplate extends SqlElement {
     public $idle;
     public $_sec_message;
     public $template;
-    public $_sec_void;
+    //public $_sec_void;
     //Damian
     public $_spe_listItemTemplate;
     public $_spe_buttonInsertInTemplate;

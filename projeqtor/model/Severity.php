@@ -38,7 +38,7 @@ class Severity extends SqlElement {
   public $color;
   public $sortOrder=0;
   public $idle;
-  public $_sec_void;
+  //public $_sec_void;
   
   // Define the layout that will be used for lists
   private static $_layout='
