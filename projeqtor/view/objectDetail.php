@@ -806,7 +806,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $sectionField='_VersionProject';
       }
       $cpt=null;
-      debugLog("Section $section");
       if (property_exists($obj, $sectionField) && isset($obj->$sectionField) && is_array($obj->$sectionField)) {
         $cptt = 0;
         if($sectionField == "_Link"){
@@ -844,7 +843,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $crit=array('idResourceTeam'=>$obj->id);
         $aff=new ResourceTeamAffectation();
         $cpt=$aff->countSqlElementsFromCriteria($crit);
-        debugLog("  => count for affectationsResourceTeam is $cpt");
       } else if ($section=='resourceCapacity') {
         $crit=array('idResource'=>$obj->id);
         $resCap=new ResourceCapacity();
