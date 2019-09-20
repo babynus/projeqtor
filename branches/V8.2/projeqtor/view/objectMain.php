@@ -55,6 +55,8 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
   	}
   }
   $tableWidth=WidthDivContentDetail($positionListDiv,$objectClass);
+  $activModeStream=Parameter::getUserParameter('modeActiveStreamGlobal');
+  
 ?>
 <div id="mainDivContainer" class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
   <div dojoType="dijit.layout.ContentPane" region="center" splitter="true">
@@ -108,7 +110,6 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
 	    <div id="detailDiv" dojoType="dijit.layout.ContentPane" region="center" >
 		   <?php $noselect=true; include 'objectDetail.php'; ?>
 		</div>
-
 	  <?php 
             if (property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream')) {
               $showNotes=true;
@@ -125,18 +126,24 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
               var paramDiv=<?php echo json_encode($positionListDiv); ?>;
               var paramRightDiv=<?php echo json_encode($positonRightDiv); ?>;
               var paramMode=<?php echo json_encode($codeModeLayout); ?>;
+              var activModeStream=<?php echo json_encode($activModeStream);?>;
               hideSplitterStream (paramRightDiv);
-              if (checkValidatedSizeRightDiv(paramDiv,paramRightDiv, paramMode)){
-                 return;
-              }
+              checkValidatedSizeRightDiv(paramDiv,paramRightDiv);
               if(paramRightDiv=='trailing' && paramMode!='5'){
+               if(activModeStream=='true') {
+                 saveDataToSession("contentPaneRightDetailDivWidth", dojo.byId("detailRightDiv").offsetWidth, true);
+           
+               } 
                 saveDataToSession("contentPaneRightDetailDivWidth<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetWidth, true);
                 var newWidth=dojo.byId("detailRightDiv").offsetWidth;
                 dojo.query(".activityStreamNoteContainer").forEach(function(node, index, nodelist) {
                   node.style.maxWidth=(newWidth-30)+"px";
                 });
               }else if (paramMode!='5'){
-                saveDataToSession("contentPaneRightDetailDivHeight<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetHeight, true);
+                if(activModeStream=='true') {
+                  saveDataToSession("contentPaneRightDetailDivHeight", dojo.byId("detailRightDiv").offsetHeight, true);
+                }
+                  saveDataToSession("contentPaneRightDetailDivHeight<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetHeight, true);
                 //if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
                 var newHeight=dojo.byId("detailRightDiv").offsetHeight;
                 if (dojo.byId("noteNoteStream")) dojo.byId("noteNoteStream").style.height=(newHeight-40)+'px';

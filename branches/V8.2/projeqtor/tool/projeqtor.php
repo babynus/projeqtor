@@ -4785,7 +4785,13 @@ function changeLayoutActivityStream($paramRightDiv){
 function heightLaoutActivityStream($objectClass){
   if(Parameter::getUserParameter("paramRightDiv") == '3' ){
     $paramScreen=Parameter::getUserParameter("paramScreen");
-    $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
+    $modeActiveStreamGlobal=Parameter::getUserParameter('modeActiveStreamGlobal');
+    if($modeActiveStreamGlobal=='true'){
+      $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight');
+      Parameter::storeUserParameter('contentPaneRightDetailDivHeight'.$objectClass,$detailRightHeight);
+    }else{
+      $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
+    }
     $detailDivHeight=Parameter::getUserParameter('contentPaneDetailDivHeight'.$objectClass);
     if (!$detailRightHeight) $detailRightHeight=0;
     if($detailRightHeight or $detailRightHeight==="0"){
@@ -4802,12 +4808,17 @@ function heightLaoutActivityStream($objectClass){
     }
   }
   return $rightHeight;
-  
 }
 
 function WidthLayoutActivityStream($objectClass){
   $paramDetailDiv=Parameter::getUserParameter('paramScreen');
-  $detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
+  $modeActiveStreamGlobal=Parameter::getUserParameter('modeActiveStreamGlobal');
+  if($modeActiveStreamGlobal=='true'){
+    $detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth');
+    Parameter::storeUserParameter('contentPaneRightDetailDivWidth'.$objectClass,$detailDivWidth);
+  }else{
+    $detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
+  }
   $topDivWidth=Parameter::getUserParameter('contentPaneDetailDivWidth'.$objectClass);
   if (!$detailDivWidth) $detailDivWidth=0;
   if($detailDivWidth or $detailDivWidth==="0"){
