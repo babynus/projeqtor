@@ -91,7 +91,9 @@ $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
                    });
                 }else if(paramMode!='5'){
                   saveDataToSession("contentPaneRightDetailDivHeight<?php  echo $currentScreen;?>", dojo.byId("detailRightDiv").offsetHeight, true);
-                }
+                  var newHeight=dojo.byId("detailRightDiv").offsetHeight;
+                  if (dojo.byId("noteNoteStream")) dojo.byId("noteNoteStream").style.height=(newHeight-40)+'px';
+               }
                  
               </script>
               <script type="dojo/connect" event="onLoad" args="evt">
