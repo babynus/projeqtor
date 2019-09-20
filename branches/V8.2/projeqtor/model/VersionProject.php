@@ -126,6 +126,15 @@ class VersionProject extends SqlElement {
     global $doNotUpdateAllVersionProject;
     $new=($this->id)?false:true;
     $old=$this->getOld();
+    if (!$this->idle) {
+      $vers=new Version($this->idVersion,true);
+      if ($vers->idle) $this->idle=1;
+    }
+    if (!$this->idle) {  
+      $proj=new Version($this->idProject,true);
+      if ($proj->idle) $this->idle=1;
+      
+    }
     $result=parent::save();
     if (!$doNotUpdateAllVersionProject) {
       if ($new) { // On new link Version<->Project, must create VersionProject for components of Product

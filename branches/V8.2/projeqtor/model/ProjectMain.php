@@ -616,7 +616,8 @@ static function isTheLeaveProject($id=null) {
       $critArray=array('idProject'=>(($this->id)?$this->id:'0'));
       $affList=$aff->getSqlElementsFromCriteria($critArray, false);
       drawAffectationsFromObject($affList, $this, 'ResourceAll', false);  
-      drawAffectationsFromObject($affList, $this, 'Contact', false); 
+      drawAffectationsFromObject($affList, $this, 'Contact', false);
+      drawAffectationsFromObject($affList, $this, 'User', false);
       return $result;
     } else if ($item=='rf') { 
     	global $flashReport, $print;

@@ -6508,7 +6508,11 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
     $canCreate=false;
     $canDelete=false;
   }
-  
+  if ($type=='User') {
+    $canUpdate=false;
+    //$canCreate=false;
+    $canDelete=false;
+  }
   echo '<table style="width:100%">';
   echo '<tr><td colspan=2 style="width:100%;"><table style="width:100%;">';
   echo '<tr>';
@@ -6555,6 +6559,14 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
     $idleClass=($aff->idle or ($aff->endDate and $aff->endDate<$dateNow=date("Y-m-d")))?' affectationIdleClass':'';
     $res=new Resource($aff->idResource);
     $isResource=($res->id)?true:false;
+    if ($type=='User' or $type=='Contact') {
+      $affected=new Affectable($aff->idResource);
+      if ($type=='Contact' and $affected->isResource) {
+        continue;
+      } else if ($type=='User' and ($affected->isResource or $affected->isContact)) {
+        continue;
+      }
+    }
     $goto="";
     $idToShow=$aff->id;
     $classToShow='Affectation';

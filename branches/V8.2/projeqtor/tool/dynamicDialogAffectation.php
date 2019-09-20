@@ -91,7 +91,10 @@ $objTeam=($obj)?get_class($obj):'';
            </tr>
            <tr>
              <td class="dialogLabel"  >
-               <label for="affectationResource" ><?php echo i18n("colIdResource") ?>&nbsp;:&nbsp;</label>
+               <label for="affectationResource" ><?php 
+                 if ($type=="Contact") echo i18n("colIdContact");
+                 else if ($type=="User") echo i18n("colIdUser");
+                 else echo i18n("colIdResource") ?>&nbsp;:&nbsp;</label>
              </td>
              <td>
                <select dojoType="dijit.form.FilteringSelect" 
@@ -100,7 +103,10 @@ $objTeam=($obj)?get_class($obj):'';
                 onChange="affectationChangeResource();"
                 class="input" value="<?php if($class=="Project" && $type=="Resource"){ echo $affectation->idResource;}else if($class=="Project" && $type=="Contact"){ echo $affectation->idContact;}else{ echo $idResource;}?>" 
                 <?php echo ($objTeam=="Team")?"required=false":"";?> <?php echo ($class!="Project")?"readonly=readonly":"";?>>
-                 <?php ($type=="Contact")?htmlDrawOptionForReference('idContact', $idResource, null):htmlDrawOptionForReference('idResourceAll', $idResource, null,false);?>
+                 <?php if ($type=="Contact") htmlDrawOptionForReference('idContact', $idResource, null);
+                       else if ($type=="User") htmlDrawOptionForReference('idUser', $idResource, null);
+                       else htmlDrawOptionForReference('idResourceAll', $idResource, null,false);
+                 ?>
                </select> 
              </td>
              <?php if($class=="Project"){?>
