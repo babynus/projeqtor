@@ -39,7 +39,6 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
   $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
   $codeModeLayout=Parameter::getUserParameter('paramScreen');
   ///////
-  $sizeRightDiv="";
   $objectClass="";
   if (isset($_REQUEST['objectClass'])) {
     $objectClass=$_REQUEST['objectClass'];
@@ -56,7 +55,6 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
   	}
   }
   $tableWidth=WidthDivContentDetail($positionListDiv,$objectClass);
-  $sizeRightDiv=substr($tableWidth[1], 0, -2);
 ?>
 <div id="mainDivContainer" class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
   <div dojoType="dijit.layout.ContentPane" region="center" splitter="true">

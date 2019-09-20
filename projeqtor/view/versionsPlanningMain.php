@@ -33,7 +33,7 @@ $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
     <script type="dojo/connect" event="resize" args="evt">
          if (switchedMode) return;
          var paramDiv=<?php  echo json_encode($positionListDiv); ?>;
-         var paramMode=<?php  echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
+         var paramMode=<?php  echo json_encode($codeModeLayout); ?>;
          if(paramDiv=="top" && paramMode!='5'){
              saveDataToSession("contentPaneTopDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("listDiv").offsetHeight, true);
           }else{
@@ -45,10 +45,11 @@ $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
   <div id="contentDetailDiv" dojoType="dijit.layout.ContentPane" region="center"   style="width:<?php  echo $tableWidth[1]; ?>;">
       <script type="dojo/connect" event="resize" args="evt">
            var paramDiv=<?php  echo json_encode($positionListDiv); ?>;
-           var paramMode=<?php  echo json_encode(Parameter::getUserParameter('paramScreen')); ?>;
-           if (checkValidatedSize(paramDiv)){
+           var paramRightDiv=<?php echo json_encode($positonRightDiv);?>;
+           var paramMode=<?php  echo json_encode($codeModeLayout); ?>;
+           if (checkValidatedSize(paramDiv,paramRightDiv)){
             return;
-          }
+           }
            if(paramDiv=="top" && paramMode!='5'){
              saveDataToSession("contentPaneDetailDivHeight<?php  echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
            }else if(paramMode!='5'){
@@ -78,7 +79,7 @@ $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
                 var paramDiv=<?php echo json_encode($positionListDiv); ?>;
                 var paramMode=<?php echo json_encode($codeModeLayout); ?>;
                 var paramRightDiv=<?php echo json_encode($positonRightDiv); ?>;
-                hideSplitterStream (paramDiv);
+                hideSplitterStream (paramRightDiv);
                 checkValidatedSizeRightDiv(paramDiv,paramRightDiv);
                 if(paramRightDiv=='trailing' && paramMode!='5'){
                    saveDataToSession("contentPaneRightDetailDivWidth<?php  echo $currentScreen;?>", dojo.byId("detailRightDiv").offsetWidth, true);
