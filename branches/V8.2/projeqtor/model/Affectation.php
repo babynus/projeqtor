@@ -45,7 +45,7 @@ class Affectation extends SqlElement {
   public $endDate;
   public $idle;
   public $description;
-  public $_sec_void;
+  //public $_sec_void;
   
 public $_noCopy;
 

@@ -39,7 +39,7 @@ class Delay extends SqlElement {
   public $value;
   public $idDelayUnit;
   public $idle;
-  public $_sec_void;
+  //public $_sec_void;
   
   public $_noCopy;
   

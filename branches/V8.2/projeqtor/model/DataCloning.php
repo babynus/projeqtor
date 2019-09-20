@@ -641,6 +641,7 @@ class DataCloning extends SqlElement {
             "/deploy", "\\deploy",
             "/html2pdf/test", "\\html2pdf\\test",
 //"/test", "\\test", 
+            "/rst/test","\\rst\\test",
             "/.externalToolBuilders", "\\.externalToolBuilders", 
             "/api", "\\api",
             "/db", "\\db",
@@ -727,7 +728,7 @@ class DataCloning extends SqlElement {
         if ($element->isDir()) {
           enableCatchErrors();
           if (!mkdir($dir_dest.DIRECTORY_SEPARATOR.$iterator->getSubPathName())) {
-            errorLog(i18n('dataCloningErrorCantCreateUnderFolder'));
+            errorLog(i18n('dataCloningErrorCantCreateUnderFolder').' => '.$dir_dest.DIRECTORY_SEPARATOR.$iterator->getSubPathName());
             $dataCloning->codeError="dataCloningErrorCantCreateUnderFolder";
             $dataCloning->save();
             disableCatchErrors();

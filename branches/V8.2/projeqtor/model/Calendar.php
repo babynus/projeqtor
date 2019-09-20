@@ -43,7 +43,7 @@ class Calendar extends SqlElement {
   public $month;
   public $year;
   public $idle;
-  public $_sec_void;  
+  //public $_sec_void;  
   public $_spe_calendarView;
   
   // Define the layout that will be used for lists

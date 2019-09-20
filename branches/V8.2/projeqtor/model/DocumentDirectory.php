@@ -42,7 +42,7 @@ class DocumentDirectory extends SqlElement {
   public $idDocumentType;
   //public $sortOrder=0;
   public $idle;
-  public $_sec_void;
+  //public $_sec_void;
   
   public $_noCopy;
   

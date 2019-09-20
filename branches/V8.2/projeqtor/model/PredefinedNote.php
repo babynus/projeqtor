@@ -38,7 +38,7 @@ class PredefinedNote extends SqlElement {
   public $idType;
   public $idle;
   public $text;
-  public $_sec_void;  
+  //public $_sec_void;  
 
 	// Define the layout that will be used for lists
   private static $_layout='
