@@ -5487,6 +5487,9 @@ function showExtraButtons(location) {
       if (nodeLeft+nodeWidth>containerWidth-position-5) {
         divNode.style.left=(containerWidth-position-nodeWidth-5)+"px";
       }
+      if(nodeLeft < 220 && location=="subscribeButton"){
+        divNode.style.left = -186+'px';
+      }
     }
   }
 }
