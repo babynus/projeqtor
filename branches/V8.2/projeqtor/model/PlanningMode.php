@@ -41,7 +41,7 @@ class PlanningMode extends SqlElement {
   public $mandatoryDuration;
   public $applyTo;
   public $idle ;
-  public $_sec_void;
+  //public $_sec_void;
   
   public $_isNameTranslatable = true;
   

@@ -37,7 +37,7 @@ class Context extends SqlElement {
   public $name;
   public $sortOrder;
   public $idle;
-  public $_sec_void;
+  //public $_sec_void;
  
     private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>

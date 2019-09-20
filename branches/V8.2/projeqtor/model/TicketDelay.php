@@ -40,7 +40,7 @@ class TicketDelay extends Delay {
   public $value;
   public $idDelayUnit;
   public $idle;
-  public $_sec_void;
+  //public $_sec_void;
   public $isProject;
   
   private static $_layout='
