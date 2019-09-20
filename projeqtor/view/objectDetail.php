@@ -5517,6 +5517,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
   echo '</tr>';
   $fmt=new NumberFormatter52($browserLocale, NumberFormatter52::DECIMAL);
   foreach ($list as $assignment) {
+    $idleClass=$assignment->idle?' affectationIdleClass':'';
     echo '<tr>';
     $isResource=true;
     $resName=SqlList::getNameFromId('Resource', $assignment->idResource);
@@ -5528,7 +5529,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
       }
     }
     if (!$print and $canUpdate) {
-      echo '<td class="assignData" style="width:10%;text-align:center;white-space:nowrap;vertical-align:middle">';
+      echo '<td class="assignData'.$idleClass.'" style="width:10%;text-align:center;white-space:nowrap;vertical-align:middle">';
       if ($canUpdate and !$print and $workVisible) {
         echo '  <a onClick="editAssignment('."'".htmlEncode($assignment->id)."'".",'".htmlEncode($assignment->idResource)."'".",'".htmlEncode($assignment->idRole)."'".",'".($assignment->dailyCost*100)."'".",'".htmlEncode($assignment->rate)."'".",'".(Work::displayWork($assignment->assignedWork)*100)."'".",'".(Work::displayWork($assignment->realWork)*100)."'".",'".(Work::displayWork($assignment->leftWork)*100)."'".",'".Work::displayShortWorkUnit()."'".",".$assignment->optional.');" '.'title="'.i18n('editAssignment').'" > '.formatSmallButton('Edit').'</a>';
         echo '<textarea style="display:none" id="comment_assignment_'.htmlEncode($assignment->id).'" >'.htmlEncode($assignment->comment)."</textarea>";
@@ -5541,7 +5542,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
         echo '</td>';
       }
     }
-    echo '<td class="assignData" style="width:'.(($print)?'40':'30').'%;vertical-align:middle">';
+    echo '<td class="assignData'.$idleClass.'" style="width:'.(($print)?'40':'30').'%;vertical-align:middle">';
     echo '<table width="100%"><tr>';
     $goto="";
     $resource=new ResourceAll($assignment->idResource);
@@ -5584,16 +5585,16 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
     // gautier #resourceTeam
     
     if ($resource->isResourceTeam) {
-      echo '<td class="assignData" align="center" style="width:15%;vertical-align:middle;text-align:center;">'.htmlDisplayNumericWithoutTrailingZeros($assignment->capacity).' '.i18n('unitCapacity').'</td>';
+      echo '<td class="assignData'.$idleClass.'" align="center" style="width:15%;vertical-align:middle;text-align:center;">'.htmlDisplayNumericWithoutTrailingZeros($assignment->capacity).' '.i18n('unitCapacity').'</td>';
     } else {
-      echo '<td class="assignData" align="center" style="width:15%;vertical-align:middle;text-align:center;">'.htmlEncode($assignment->rate).' '.i18n('percent').'</td>';
+      echo '<td class="assignData'.$idleClass.'" align="center" style="width:15%;vertical-align:middle;text-align:center;">'.htmlEncode($assignment->rate).' '.i18n('percent').'</td>';
     }
     if ($workVisible) {
       $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       // echo '<td class="assignData" align="right" style="vertical-align:middle">'
       // mehdi======================ticket#1776
       if (!$print) echo '<input type="hidden" id="initAss_'.$assignment->id.'" value="'.Work::displayWork($assignment->assignedWork).'"/>';
-      echo '<td class="assignData" align="right" style="width:15%;vertical-align:middle;">';
+      echo '<td class="assignData'.$idleClass.'" align="right" style="width:15%;vertical-align:middle;">';
       if ($canUpdate and get_class($obj)!='PeriodicMeeting' and !$print and $planningMode!='RECW') {
         echo '<img  id="idImageAssignedWork'.$assignment->id.'" src="img/savedOk.png" 
                 style="display: none; position:relative;top:2px;left:5px; height:16px;float:left;"/>';
@@ -5614,10 +5615,10 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
       echo '</td>';
       
       echo '<input type="hidden" id="RealWork_'.$assignment->id.'" value="'.Work::displayWork($assignment->realWork).'"/>';
-      echo '<td class="assignData" align="right" style="width:15%;vertical-align:middle;">'.$fmt->format(Work::displayWork($assignment->realWork)).'</td>';
+      echo '<td class="assignData'.$idleClass.'" align="right" style="width:15%;vertical-align:middle;">'.$fmt->format(Work::displayWork($assignment->realWork)).'</td>';
       
       if (!$print) echo '<input type="hidden" id="initLeft_'.$assignment->id.'" value="'.Work::displayWork($assignment->leftWork).'"/>';
-      echo '<td class="assignData" align="right" style="width:15%;vertical-align:middle;">';
+      echo '<td class="assignData'.$idleClass.'" align="right" style="width:15%;vertical-align:middle;">';
       if ($canUpdate and get_class($obj)!='PeriodicMeeting' and !$print and $planningMode!='RECW') {
         echo '<img  id="idImageLeftWork'.$assignment->id.'" src="img/savedOk.png" style="display: none; position:relative;top:2px;left:5px; height:16px;float:left;"/>';
         echo '<div dojoType="dijit.form.NumberTextBox" id="assLeftWork_'.$assignment->id.'" name="assLeftWork_'.$assignment->id.'"
