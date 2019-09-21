@@ -13,3 +13,11 @@ UPDATE `${prefix}parameter` SET `parameterValue`=410 WHERE `parameterCode`='cont
 
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
 ('modeActiveStreamGlobal','false');
+
+UPDATE `${prefix}parameter` SET `parameterValue`='top' WHERE `parameterCode`='paramScreen' and `parameterValue`='1';
+UPDATE `${prefix}parameter` SET `parameterValue`='left' WHERE `parameterCode`='paramScreen' and `parameterValue`='2';
+UPDATE `${prefix}parameter` SET `parameterValue`='switch' WHERE `parameterCode`='paramScreen' and `parameterValue`='5';
+UPDATE `${prefix}parameter` SET `parameterValue`='col' WHERE `parameterCode`='paramLayoutObjectDetail' and `parameterValue`='4';
+UPDATE `${prefix}parameter` SET `parameterValue`='tab' WHERE `parameterCode`='paramLayoutObjectDetail' and `parameterValue`='0';
+UPDATE `${prefix}parameter` SET `parameterValue`='trailing' WHERE `parameterCode`='paramRightDiv' and `parameterValue`='0';
+UPDATE `${prefix}parameter` SET `parameterValue`='bottom' WHERE `parameterCode`='paramRightDiv' and `parameterValue`='3';
