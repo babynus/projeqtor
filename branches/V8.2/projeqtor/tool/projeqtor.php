@@ -4728,69 +4728,51 @@ function isLeavesSystemActiv() {
 
 // florent ticket 4102
 function changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail){
-  if(empty($paramScreen)and Parameter::getUserParameter("paramScreen") =='1' ){
-    $valScreen='1';
-    $positionListDiv='top';
-    Parameter::storeUserParameter("paramScreen", $valScreen);
+  if(empty($paramScreen)){
+    $currentScreen=Parameter::getUserParameter("paramScreen");
   }else{
-    if($paramScreen=='1'){
-      $valScreen='1';
-      $positionListDiv='top';
-      Parameter::storeUserParameter("paramScreen", $valScreen);
-    }else if($paramScreen=='5' or (Parameter::getUserParameter("paramScreen") =='5' and empty($paramScreen))){
-      $valScreen='5';
-      $positionListDiv='top';
-      Parameter::storeUserParameter("paramScreen", $valScreen);
-    }else{
-      $valScreen='2';
-      $positionListDiv='left';
-      Parameter::storeUserParameter("paramScreen", $valScreen);
-    }
+    Parameter::storeUserParameter("paramScreen", $paramScreen);
+    $currentScreen=$paramScreen;
   }
-  if($paramLayoutObjectDetail!=''){
-    if((empty(Parameter::getUserParameter("paramLayoutObjectDetail")) or ((Parameter::getUserParameter("paramLayoutObjectDetail")=='4')and $paramLayoutObjectDetail=='4'))) {
-      $valScreen='4';
-      Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
-    }else if(Parameter::getUserParameter("paramLayoutObjectDetail")=='4' and $paramLayoutObjectDetail=='0'){
-      $valScreen='0';
-      Parameter::storeUserParameter("paramLayoutObjectDetail", $valScreen);
+  if ($currentScreen=='top') $positionListDiv='top';
+  else if($currentScreen=='switch') $positionListDiv='top';
+  else $positionListDiv='left';
+   
+  if($paramLayoutObjectDetail){
+    $currentLayout=Parameter::getUserParameter("paramLayoutObjectDetail");
+    if(empty($currentLayout) or $currentLayout!=$paramLayoutObjectDetail) {
+      Parameter::storeUserParameter("paramLayoutObjectDetail", $paramLayoutObjectDetail);
     }
   }
   return $positionListDiv;
 }
 
 function changeLayoutActivityStream($paramRightDiv){
-  if(empty(Parameter::getUserParameter("paramRightDiv"))){
-    if(empty($paramRightDiv)){
-      $positonRightDiv='trailing';
-    }else{
-      $valScreen='3';
-      $positonRightDiv='bottom';
-      Parameter::storeUserParameter("paramRightDiv", $valScreen);
+  $currentRightDiv=Parameter::getUserParameter("paramRightDiv");
+  if (empty($paramRightDiv)) {
+    if(empty($currentRightDiv)) {
+      $currentRightDiv='trailing';
+      Parameter::storeUserParameter("paramRightDiv", $currentRightDiv);
     }
-  }else{
-    if($paramRightDiv=='3' and Parameter::getUserParameter("paramRightDiv") == '3'){
-      $valScreen='0';
-      $positonRightDiv='trailing';
-      Parameter::storeUserParameter("paramRightDiv", $valScreen);
-    }else{
-      $valScreen='3';
-      $positonRightDiv='bottom';
-      Parameter::storeUserParameter("paramRightDiv", $valScreen);
-    }
+    $positonRightDiv=$currentRightDiv;
+  } else {
+    $positonRightDiv=$paramRightDiv;
+    Parameter::storeUserParameter("paramRightDiv", $paramRightDiv);
   }
   return $positonRightDiv;
 }
 
 function heightLaoutActivityStream($objectClass){
-  if(Parameter::getUserParameter("paramRightDiv") == '3' ){
+  if(Parameter::getUserParameter("paramRightDiv") == 'bottom' ){
     $paramScreen=Parameter::getUserParameter("paramScreen");
     $modeActiveStreamGlobal=Parameter::getUserParameter('modeActiveStreamGlobal');
-    if($modeActiveStreamGlobal=='true'){
+    if($modeActiveStreamGlobal=='true'){ // Default value is global one
       $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight');
-      Parameter::storeUserParameter('contentPaneRightDetailDivHeight'.$objectClass,$detailRightHeight);
-    }else{
-      $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
+      if (Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass)) { // If specific exist, get it
+        $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
+      }else{ // else store default
+        Parameter::storeUserParameter('contentPaneRightDetailDivHeight'.$objectClass,$detailRightHeight);
+      }
     }
     $detailDivHeight=Parameter::getUserParameter('contentPaneDetailDivHeight'.$objectClass);
     if (!$detailRightHeight) $detailRightHeight=0;
@@ -4798,8 +4780,7 @@ function heightLaoutActivityStream($objectClass){
       if ($detailRightHeight < 180){
         $detailRightHeight=180;
       }
-      if((($detailRightHeight>$detailDivHeight ) and $paramScreen=='1' )and (!empty($detailDivHeight))){
-        
+      if((($detailRightHeight>$detailDivHeight ) and $paramScreen=='top' )and (!empty($detailDivHeight))){       
         $detailRightHeight=($detailDivHeight/2);
       }
       $rightHeight=$detailRightHeight.'px';
@@ -4815,16 +4796,18 @@ function WidthLayoutActivityStream($objectClass){
   $modeActiveStreamGlobal=Parameter::getUserParameter('modeActiveStreamGlobal');
   if($modeActiveStreamGlobal=='true'){
     $detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth');
-    Parameter::storeUserParameter('contentPaneRightDetailDivWidth'.$objectClass,$detailDivWidth);
-  }else{
-    $detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
+    if (Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)) {
+      $detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
+    }else{
+      Parameter::storeUserParameter('contentPaneRightDetailDivWidth'.$objectClass,$detailDivWidth);
+    }
   }
   $topDivWidth=Parameter::getUserParameter('contentPaneDetailDivWidth'.$objectClass);
   if (!$detailDivWidth) $detailDivWidth=0;
   if($detailDivWidth or $detailDivWidth==="0"){
-    if((!empty($topDivWidth)) and ($detailDivWidth > ($topDivWidth/2)) and $paramDetailDiv=='2'){
+    if((!empty($topDivWidth)) and ($detailDivWidth > ($topDivWidth/2)) and $paramDetailDiv=='left'){
       $detailDivWidth=($topDivWidth/2);
-    }else if(empty($topDivWidth) and $paramDetailDiv==2){
+    }else if(empty($topDivWidth) and $paramDetailDiv=='left'){
       $detailDivWidth='20%';
     }
     $rightWidth=$detailDivWidth.'px';
