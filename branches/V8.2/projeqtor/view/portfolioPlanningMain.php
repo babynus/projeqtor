@@ -48,9 +48,9 @@
    $listHeight=HeightLayoutListDiv($currentScreen);
  }
  if($positonRightDiv=="bottom"){
-   $rightHeightPortfolioPlanning=heightLaoutActivityStream($currentScreen);
+   $rightHeightPortfolioPlanning=getHeightLaoutActivityStream($currentScreen);
  }else{
-   $rightWidthPortfolioPlanning=WidthLayoutActivityStream($currentScreen);
+   $rightWidthPortfolioPlanning=getWidthLayoutActivityStream($currentScreen);
  }
  $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
  $activModeStream=Parameter::getUserParameter('modeActiveStreamGlobal');
