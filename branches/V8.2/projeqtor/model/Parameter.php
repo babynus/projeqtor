@@ -737,7 +737,7 @@ class Parameter extends SqlElement {
                          'sectionIHM'=>'section',
                            "displayHistory"=>"list",
                            "displayChecklist"=>"list",  
-                           "switchedMode"=>"list",
+//                           "switchedMode"=>"list", // Removed in V8.2.1
                            "paramConfirmQuit"=>"list",
                            "startPage"=>"list",
                            "editor"=>'list',
