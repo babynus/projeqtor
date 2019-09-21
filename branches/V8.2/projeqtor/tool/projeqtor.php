@@ -4794,13 +4794,13 @@ function heightLaoutActivityStream($objectClass){
 function WidthLayoutActivityStream($objectClass){
   $paramDetailDiv=Parameter::getUserParameter('paramScreen');
   $modeActiveStreamGlobal=Parameter::getUserParameter('modeActiveStreamGlobal');
-  if($modeActiveStreamGlobal=='true'){
+  $detailDivWidth=0;
+  if (Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)) {
+    $detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
+  }
+  if(!$detailDivWidth and $modeActiveStreamGlobal=='true'){
     $detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth');
-    if (Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)) {
-      $detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
-    }else{
-      Parameter::storeUserParameter('contentPaneRightDetailDivWidth'.$objectClass,$detailDivWidth);
-    }
+    Parameter::storeUserParameter('contentPaneRightDetailDivWidth'.$objectClass,$detailDivWidth);
   }
   $topDivWidth=Parameter::getUserParameter('contentPaneDetailDivWidth'.$objectClass);
   if (!$detailDivWidth) $detailDivWidth=0;
