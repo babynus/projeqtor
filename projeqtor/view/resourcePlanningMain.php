@@ -66,9 +66,9 @@
          if (switchedMode) return;
          var paramDiv=<?php echo json_encode($positionListDiv); ?>;
          var paramMode=<?php echo json_encode($codeModeLayout); ?>;
-         if(paramDiv=="top" && paramMode!='5'){
+         if(paramDiv=="top" && paramMode!='switch'){
              saveDataToSession("contentPaneTopDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("listDiv").offsetHeight, true);
-          }else if(paramMode!='5'){
+          }else if(paramMode!='switch'){
               saveDataToSession("contentPaneTopDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("listDiv").offsetWidth, true);
           }
     </script>
@@ -82,9 +82,9 @@
            if (checkValidatedSize(paramDiv,paramRightDiv, paramMode)){
             return;
            }
-           if(paramDiv=="top" && paramMode!='5'){
+           if(paramDiv=="top" && paramMode!='switch'){
             saveDataToSession("contentPaneDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
-           }else if(paramMode!='5'){
+           }else if(paramMode!='switch'){
               saveDataToSession("contentPaneDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
               var param=dojo.byId('objectClass').value;
               var paramId=dojo.byId('objectId').value;
@@ -116,7 +116,7 @@
                if (checkValidatedSizeRightDiv(paramDiv,paramRightDiv, paramMode)){
                     return;
                   }
-                  if(paramRightDiv=='trailing' && paramMode!='5'){
+                  if(paramRightDiv=='trailing' && paramMode!='switch'){
                     if(activModeStream=='true') {
                       saveDataToSession("contentPaneRightDetailDivWidth", dojo.byId("detailRightDiv").offsetWidth, true);
                     } 
@@ -125,7 +125,7 @@
                     dojo.query(".activityStreamNoteContainer").forEach(function(node, index, nodelist) {
                     node.style.maxWidth=(newWidth-30)+"px";
                     });
-                  }else if(paramMode!='5'){
+                  }else if(paramMode!='switch'){
                    if(activModeStream=='true') {
                       saveDataToSession("contentPaneRightDetailDivHeight", dojo.byId("detailRightDiv").offsetHeight, true);
                     }

@@ -31,13 +31,14 @@ $showMenuBar=Parameter::getUserParameter('paramShowMenuBar');
 $showMenuBar='YES';
 if (! $iconSize or $showMenuBar=='NO') $iconSize=16;
 //Param
-if(sessionValueExists("paramScreen")){
-  if(getSessionValue("paramScreen")=='5') {
-  	  Parameter::storeUserParameter("paramScreen", '1');
+// TODO : Verify that this code is nonsense
+// if(sessionValueExists("paramScreen")){
+//   if(getSessionValue("paramScreen")=='switch') {
+//   	  Parameter::storeUserParameter("paramScreen", 'top');
   	  
-  }
-  setSessionValue("paramScreen", "0");
-}
+//   }
+//   setSessionValue("paramScreen", "0");
+// }
 $objectExist="";
  if(RequestHandler::isCodeSet('objectExist')){
    $objectExist=RequestHandler::getValue('objectExist');
@@ -59,34 +60,30 @@ if(RequestHandler::isCodeSet('currentScreen')){
 
 if(RequestHandler::isCodeSet('parmActiveGlobal')){
   $activModeStream=RequestHandler::getValue('parmActiveGlobal');
-  
+  Parameter::storeUserParameter('modeActiveStreamGlobal', 'true');
 }else{
   $activModeStream=Parameter::getUserParameter('modeActiveStreamGlobal');
 }
 
-if($paramRightDiv=='3'){
+if($paramRightDiv=='trailing'){
   $globalActivityStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight');
-  if(isset($currentSceen)){
-    $activityStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$currentSceen);
-    if($globalActivityStream!=0 and $globalActivityStream==0){
-      $globalActivityStream=0;
-    }
-  }
+//   if(isset($currentSceen)){
+//     $activityStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$currentSceen);
+//     if($globalActivityStream!=0 and $globalActivityStream==0){
+//       $globalActivityStream=0;
+//     }
+//   }
 }else{
   $globalActivityStream=Parameter::getUserParameter('contentPaneRightDetailDivWidth');
-  if(isset($currentSceen)){
-    $activityStream=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$currentSceen);
-    if($globalActivityStream!=0 and $globalActivityStream==0){
-      $globalActivityStream=0;
-    }
-  }
+//   if(isset($currentSceen)){
+//     $activityStream=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$currentSceen);
+//     if($globalActivityStream!=0 and $globalActivityStream==0){
+//       $globalActivityStream=0;
+//     }
+//   }
 }
+if (!intval($globalActivityStream)) $globalActivityStream="0";
 
-if( $activModeStream=='true'){
-  Parameter::storeUserParameter('modeActiveStreamGlobal', 'true');
-}else{
-  Parameter::storeUserParameter('modeActiveStreamGlobal', 'false');
-}
 
 ?>
 
@@ -96,8 +93,8 @@ if( $activModeStream=='true'){
     <tr height="<?php echo $iconSize+8; ?>px">  
       <td width="<?php echo (isIE())?37:35;?>px" > 
         <div id="changeLayout" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px;
-        <?php if( $paramScreen=='5'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
-         onclick="<?php if($paramScreen=='1' or $paramScreen=='2'){echo 'switchModeLayout(\'5\')';}?>">
+        <?php if( $paramScreen=='switch'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" title="<?php echo i18n("buttonSwitchedMode");?>"
+         onclick="<?php if($paramScreen!='switch') {echo 'switchModeLayout(\'switch\')';}?>">
           <table >
             <tr>
               <td style="width:28x;text-align:center">
@@ -109,8 +106,8 @@ if( $activModeStream=='true'){
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
         <div id="horizontalLayout"  class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramScreen=='1'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" title="<?php echo i18n("showListTop");?>"
-        onclick="<?php if($paramScreen=='2' or $paramScreen=='5'){echo 'switchModeLayout(\'1\');';}?>">
+        <?php if($paramScreen=='top'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" title="<?php echo i18n("showListTop");?>"
+        onclick="<?php if($paramScreen!='top' ){echo 'switchModeLayout(\'top\');';}?>">
           <table >
             <tr>
               <td style="width:28x;text-align:center">
@@ -122,8 +119,8 @@ if( $activModeStream=='true'){
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
         <div id="verticalLayout" lass="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramScreen=='2'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" title="<?php echo i18n("showListLeft"); ?>"
-        onclick="<?php if($paramScreen=='1' or $paramScreen=='5' ){echo 'switchModeLayout(\'2\');';}?>">
+        <?php if($paramScreen=='left'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" title="<?php echo i18n("showListLeft"); ?>"
+        onclick="<?php if($paramScreen!='left' ){echo 'switchModeLayout(\'left\');';}?>">
           <table >
             <tr>
               <td style="width:28x;text-align:center">
@@ -137,8 +134,8 @@ if( $activModeStream=='true'){
     <tr height="<?php echo $iconSize+8; ?>px">  
       <td width="<?php echo (isIE())?37:35;?>px"> 
         <div id="layoutList" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramObjectDetail=='4'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" title="<?php echo i18n("sectionMode");?>"
-        onclick="<?php if($paramObjectDetail=='0'){echo 'switchModeLayout(\'4\');';}?>">
+        <?php if($paramObjectDetail=='col'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" title="<?php echo i18n("sectionMode");?>"
+        onclick="<?php if($paramObjectDetail!='col'){echo 'switchModeLayout(\'col\');';}?>">
           <table >
             <tr>
               <td style="width:28x;text-align:center">
@@ -150,9 +147,9 @@ if( $activModeStream=='true'){
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
         <div id="layoutTab" class="pseudoButton"   style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;
-        <?php if($paramObjectDetail=='0'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" 
+        <?php if($paramObjectDetail=='tab'){echo 'Background:#D1D1D1;border-radius:4px;cursor:not-allowed;';}?>" 
         title="<?php echo i18n("tabularMode");?>"
-        onclick="<?php if($paramObjectDetail=='4'){echo 'switchModeLayout(\'0\');';}?>">
+        onclick="<?php if($paramObjectDetail!='tab'){echo 'switchModeLayout(\'tab\');';}?>">
           <table >
             <tr>
               <td style="width:28x;text-align:center">
@@ -163,13 +160,12 @@ if( $activModeStream=='true'){
        </div>
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
-        <div id="hideStreamButton" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" 
-        onclick="hideStreamMode(<?php if($paramRightDiv=='3'){echo'1';}else{echo'0';}?>,false,true,<?php echo $globalActivityStream;?>);">
-        
+        <div id="hideStreamButtonGlobal" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" 
+        onclick="hideStreamMode(<?php if($paramRightDiv=='3'){echo'1';}else{echo'0';}?>,false,'<?php echo $activModeStream;?>',<?php echo $globalActivityStream;?>);">
           <table >
             <tr>
               <td >
-              <?php if( $globalActivityStream=='0'){ ;?>
+              <?php if( $activModeStream!='true'){ ;?>
                 <div class="iconActivityStream22 iconActivityStream iconSize22 " style="position:absolute;top:2px;left:3px" title="<?php echo i18n("showActivityStream");?>"></div>
               <?php }else {?>
                 <div class="iconActivityStreamClose22 iconActivityStreamClose iconSize22 " style="position:absolute;top:2px;left:3px" title="<?php echo i18n("hideActivityStream");?>"></div>
