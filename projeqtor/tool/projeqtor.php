@@ -4762,17 +4762,17 @@ function changeLayoutActivityStream($paramRightDiv){
   return $positonRightDiv;
 }
 
-function heightLaoutActivityStream($objectClass){
+function getHeightLaoutActivityStream($objectClass){
   if(Parameter::getUserParameter("paramRightDiv") == 'bottom' ){
     $paramScreen=Parameter::getUserParameter("paramScreen");
     $modeActiveStreamGlobal=Parameter::getUserParameter('modeActiveStreamGlobal');
-    if($modeActiveStreamGlobal=='true'){ // Default value is global one
+    $modeActiveStreamClass=Parameter::getUserParameter('modeActiveStream'.$objectClass);
+    $modeActiveStream=($modeActiveStreamClass==='')?$modeActiveStreamGlobal:$modeActiveStreamClass;
+    if ($modeActiveStream!='true') return 0;
+    $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
+    if (!$detailRightHeight) {
       $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight');
-      if (Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass)) { // If specific exist, get it
-        $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
-      }else{ // else store default
-        Parameter::storeUserParameter('contentPaneRightDetailDivHeight'.$objectClass,$detailRightHeight);
-      }
+      Parameter::storeUserParameter('contentPaneRightDetailDivHeight'.$objectClass,$detailRightHeight);
     }
     $detailDivHeight=Parameter::getUserParameter('contentPaneDetailDivHeight'.$objectClass);
     if (!$detailRightHeight) $detailRightHeight=0;
@@ -4791,14 +4791,15 @@ function heightLaoutActivityStream($objectClass){
   return $rightHeight;
 }
 
-function WidthLayoutActivityStream($objectClass){
+function getWidthLayoutActivityStream($objectClass){
   $paramDetailDiv=Parameter::getUserParameter('paramScreen');
   $modeActiveStreamGlobal=Parameter::getUserParameter('modeActiveStreamGlobal');
-  $detailDivWidth=0;
-  if (Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass)) {
-    $detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
-  }
-  if(!$detailDivWidth and $modeActiveStreamGlobal=='true'){
+  $modeActiveStreamGlobal=Parameter::getUserParameter('modeActiveStreamGlobal');
+  $modeActiveStreamClass=Parameter::getUserParameter('modeActiveStream'.$objectClass);
+  $modeActiveStream=($modeActiveStreamClass==='')?$modeActiveStreamGlobal:$modeActiveStreamClass;
+  if ($modeActiveStream!='true') return 0;
+  $detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
+  if (!$detailDivWidth) {
     $detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth');
     Parameter::storeUserParameter('contentPaneRightDetailDivWidth'.$objectClass,$detailDivWidth);
   }
