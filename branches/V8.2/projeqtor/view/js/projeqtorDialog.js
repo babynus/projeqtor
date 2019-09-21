@@ -6401,25 +6401,25 @@ function switchModeLayout(paramToSend){
   if(currentScreen=='Reports'){
     return false;
   }
-  if (paramToSend=='1' || paramToSend=='2'){
+  if (paramToSend=='top' || paramToSend=='left'){
       var paramDiv='paramScreen';
       if(switchedMode==true){
        switchModeOff();
       }
        switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
-  }else if(paramToSend=='3'){
+  }else if(paramToSend=='bottom' || paramToSend=='trailing'){
     var paramDiv='paramRightDiv';
     switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
-  }else if(paramToSend=='4' || paramToSend=='0'){
+  }else if(paramToSend=='col' || paramToSend=='tab'){
     var paramDiv='paramLayoutObjectDetail';
     switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
-  }else if (paramToSend=='5'){
+  }else if (paramToSend=='switch'){
     var paramDiv='paramScreen';
     if(objectIdScreen!=null){
       loadingContentDiv=true;
     }
-      switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
-      switchModeOn(objectIdScreen);
+    switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
+    switchModeOn(objectIdScreen);
   }
   dijit.byId('iconMenuUserScreen').closeDropDown();
 }

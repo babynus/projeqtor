@@ -46,6 +46,7 @@ $paneAllocation="";
 $paneConfiguration="";
 $paneFichier="";
 $arrayGroupe=array();
+$layout=Parameter::getUserParameter('paramLayoutObjectDetail');
 scriptLog('   ->/view/objectDetail.php');
 if (!isset($comboDetail)) {
   $comboDetail=false;
@@ -254,7 +255,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
 			style="display: none; z-index: 99999;"></div>
 		<?php  include 'objectButtons.php'; ?>
   </div>
-	<div id="formDiv" dojoType="dijit.layout.ContentPane" region="center" style="overflow:<?php if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' ){echo 'hidden';}else{echo 'auto';}?>;">
+	<div id="formDiv" dojoType="dijit.layout.ContentPane" region="center" style="overflow:<?php if($layout=='tab' ){echo 'hidden';}else{echo 'auto';}?>;">
 
 	<?php
   }
@@ -343,10 +344,9 @@ if (array_key_exists('refresh', $_REQUEST)) {
  */
 function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $parentHidden=false) {
   scriptLog("drawTableFromObject(obj, included=$included, parentReadOnly=$parentReadOnly)");
-  global $toolTip, $cr, $print, $treatedObjects, $displayWidth, $outMode, $comboDetail, $collapsedList, $printWidth, $profile, $detailWidth, $readOnly, $largeWidth, $widthPct, $nbColMax, $preseveHtmlFormatingForPDF, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier,$arrayGroupe, $nbColMax, $section, $beforeAllPanes, $colWidth,$objInsert;
+  global $toolTip, $cr, $print, $treatedObjects, $displayWidth, $outMode, $comboDetail, $collapsedList, $printWidth, $profile, $detailWidth, $readOnly, $largeWidth, $widthPct, $nbColMax, $preseveHtmlFormatingForPDF, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier,$arrayGroupe, $nbColMax, $section, $beforeAllPanes, $colWidth,$objInsert,$layout;
   global $section, $prevSection;
   $ckEditorNumber=0; // Will be used only if getEditor=="CK" for CKEditor
-
   //gautier
   if($objInsert){
     if(get_class($objInsert)=='Project'){
@@ -581,7 +581,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     }
   }
   // END - ADD BY TABARY - NOTIFICATION SYSTEM
-  if( Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and $included==false and !$print){
+  if( $layout=='tab' and $included==false and !$print){
     echo '<div dojoType="dijit.layout.TabContainer">';
   }
   // Loop on each property of the object
@@ -2873,7 +2873,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
 
 function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, $outMode, $prevSection, $nbCol, $nbBadge=null, $included=null, $obj=null) {
   //scriptLog("startTitlePane(classObbj=$classObj, section=$section, collapsedList=array, widthPct=$widthPct, print=$print, outMode=$outMode, prevSection=$prevSection, nbCol=$nbCol, nbBadge=$nbBadge)");
-  global $comboDetail, $currentColumn, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $beforeAllPanes,$type, $arrayGroupe;
+  global $comboDetail, $currentColumn, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $beforeAllPanes,$type, $arrayGroupe, $layout;
   if (!$currentColumn) $currentColumn=0;
   if ($prevSection) {
     echo '</table>';
@@ -2915,7 +2915,7 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
     $fontSize=(isset($attrs['font-size']))?intval($attrs['font-size']):'';
     $margin=0;
     //florent ticket 4102
-    if( Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and $included==false and !$print){
+    if( $layout=='tab' and $included==false and !$print){
       $margin=4;
       $tabName="Detail";
       if(isset($arrayGroupe[$lc]['99'])){
@@ -3131,7 +3131,7 @@ function drawOrigin($list, $refType, $refId, $obj, $col, $print) {
 }
 
 function drawHistoryFromObjects($refresh=false) {
-  global $cr, $print, $printWidth, $treatedObjects, $comboDetail, $displayWidth,$collapsedList, $paneHistory, $included;
+  global $cr, $print, $printWidth, $treatedObjects, $comboDetail, $displayWidth,$collapsedList, $paneHistory, $included, $layout;
 
   $mainObj=null;
   if (isset($treatedObjects[0])) $mainObj=$treatedObjects[0];
@@ -3175,7 +3175,7 @@ function drawHistoryFromObjects($refresh=false) {
   
   if ($print) {
     echo '<table width="'.$printWidth.'px;"><tr><td class="section">'.i18n('elementHistory').'</td></tr></table>';
-  } else {
+  } else if (!$refresh) {
     $titlePane=get_class($mainObj)."_history";
     $section='History';
     $selectedTab=null;
@@ -3183,22 +3183,10 @@ function drawHistoryFromObjects($refresh=false) {
     $sessionTabName='detailTab'.get_class($obj);
     $selectedTab=($obj->id)?getSessionValue($sessionTabName,'Description'):'Description';
     $paneName='pane'.$tabName;
-//     if( Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and $included==false and !$print){
-//       $margin=4;
-//       $nbBadge=null;
-//       if (!isset($$paneName) or $$paneName=='') {
-//         echo '<div id="'.$tabName.'" dojoType="dijit.layout.ContentPane" class="detailTabClass" title="'.i18n('tab'.ucfirst($tabName)).(($nbBadge!==null )?'<div id=\''.$section.'BadgeTab\' class=\'sectionBadge\' style=\'right:0px;top:0px;width:auto;padding:0px 7px;font-weight:normal;zoom:0.9; -moz-transform: scale(0.9);'.(($nbBadge==0)?'opacity:0.5;':'').'\' >'.$nbBadge.'</div>':'').'" style="width:100%;height:100%;overflow:auto;" '.(($tabName==$selectedTab)?' selected="true" ':'').'>';
-//         echo ' <script type="dojo/method" event="onShow" >';
-//         echo '   saveDataToSession(\''.$sessionTabName.'\',\''.$tabName.'\');';
-//         echo '   hideEmptyTabs();';
-//         echo ' </script>';
-//         echo '  <div>';
-//       }
-//     }
     echo '<div style="width: '.$displayWidth.';padding:4px;overflow:auto" dojoType="dijit.TitlePane" '; 
-    echo ' title="'.((Parameter::getUserParameter('paramLayoutObjectDetail')=='0')?i18n('tabHistory'):i18n('elementHistory')).'" ';
+    echo ' title="'.(($layout=='tab')?i18n('tabHistory'):i18n('elementHistory')).'" ';
     echo (($tabName==$selectedTab)?' selected="true" ':'');
-    if(Parameter::getUserParameter('paramLayoutObjectDetail')!='0') echo ' open="'.((array_key_exists($titlePane, $collapsedList))?'false':'true').'" ';
+    if($layout!='tab') echo ' open="'.((array_key_exists($titlePane, $collapsedList))?'false':'true').'" ';
     echo ' id="'.$titlePane.'" ';         
     echo ' onHide="saveCollapsed(\''.$titlePane.'\');"';
     echo ' >';
@@ -3395,10 +3383,9 @@ function drawHistoryFromObjects($refresh=false) {
   echo '<td class="historyDataClosetable">&nbsp;</td>';
   echo '</tr>';
   echo '</table>';
-  if (!$print) {
+  if (!$print and !$refresh) {
     echo '</div>';
     echo '<br />';
-    //if( Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and $included==false and !$print){
   }
 }
 
@@ -7481,7 +7468,7 @@ function drawOtherClientFromObject($otherClient, $obj) {
 }
 
 function drawChecklistFromObject($obj,$nbCol=3) {
-  global $print, $outMode, $noselect, $collapsedList, $displayWidth, $printWidth, $profile, $comboDetail;
+  global $print, $outMode, $noselect, $collapsedList, $displayWidth, $printWidth, $profile, $comboDetail, $layout;
   if (!$obj or !$obj->id) return; // Don't try and display checklist for non existant objects
   $displayChecklist='NO';
   $crit="nameChecklistable='".get_class($obj)."' and idle=0";
@@ -7517,16 +7504,16 @@ function drawChecklistFromObject($obj,$nbCol=3) {
       $paneName='pane'.$tabName;
       $extName=($comboDetail)?"_detail":'';
       $paneWidth=$displayWidth;
-      if (!Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print and $nbCol==3) $paneWidth=intval(intval($displayWidth)*2/3).'px';
+      if (!$layout=='tab' and !$print and $nbCol==3) $paneWidth=intval(intval($displayWidth)*2/3).'px';
       echo '<div style="width:'.$paneWidth.';padding:4px;overflow:auto" dojoType="dijit.TitlePane"';
       echo ' title="'.i18n('sectionChecklist').'" ';
       echo (($tabName==$selectedTab)?' selected="true" ':'');
-      if(Parameter::getUserParameter('paramLayoutObjectDetail')!='0') echo ' open="'.((array_key_exists($titlePane, $collapsedList))?'false':'true').'"';
+      if($layout!='tab') echo ' open="'.((array_key_exists($titlePane, $collapsedList))?'false':'true').'"';
       echo ' id="'.$titlePane.'"';
       echo ' onHide="saveCollapsed(\''.$titlePane.'\');"';
       echo ' onShow="saveExpanded(\''.$titlePane.'\');"';
       echo '>';
-      if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print){
+      if($layout=='tab' and !$print){
         echo ' <script type="dojo/method" event="onShow" >';
         echo '   saveDataToSession(\''.$sessionTabName.'\',\''.$tabName.'\');';
         echo '   hideEmptyTabs();';
@@ -7566,7 +7553,7 @@ function setWidthPct($displayWidth, $print, $printWidth, $obj, $colSpan=null) {
 }
 
 function getNbColMax($displayWidth, $print, $printWidth, $obj) {
-  global $nbColMax;
+  global $nbColMax,$layout;
   if ($displayWidth>1380) {
     $nbColMax=3;
   } else if ($displayWidth>900) {
@@ -7585,7 +7572,7 @@ function getNbColMax($displayWidth, $print, $printWidth, $obj) {
   }
   $paramMax=Parameter::getUserParameter('maxColumns');
   if ($paramMax and $paramMax<$nbColMax) $nbColMax=$paramMax;
-  if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print){
+  if($layout=='tab' and !$print){
     $nbColMax=1;
   }
   return $nbColMax;
@@ -7599,7 +7586,7 @@ function startBuffering() {
 
 function endBuffering($prevSection, $included) {
   //scriptLog("endBuffering($prevSection, $included)");
-  global $print, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane, $paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier,$paneHistory, $paneCheckList, $nbColMax, $section, $beforeAllPanes, $arrayGroupe; 
+  global $print, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane, $paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier,$paneHistory, $paneCheckList, $nbColMax, $section, $beforeAllPanes, $arrayGroupe, $layout; 
   $sectionPosition=array(
       'assignment'=>array('2'=>'left', '3'=>'extra','99'=>'progress'),
       'affectations'=>array('2'=>'right', '3'=>'right','99'=>'allocation'),
@@ -7705,7 +7692,7 @@ function endBuffering($prevSection, $included) {
   }
   $sectionName=strtolower($prevSection);
   $sectionName=str_replace('_right','',$sectionName);
-  if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$included and ! $print ){
+  if($layout=='tab' and !$included and ! $print ){
     $groupe='detail';
     if(isset($sectionPosition[$sectionName]['99'])){
       $groupe=$sectionPosition[$sectionName]['99'];
@@ -7767,7 +7754,7 @@ function endBuffering($prevSection, $included) {
 }
 
 function finalizeBuffering() {
-  global $print,$reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane, $arrayPanes, $paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $paneHistory, $paneCheckList, $arrayGroupe, $nbColMax, $section, $beforeAllPanes;
+  global $print,$reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane, $arrayPanes, $paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $paneHistory, $paneCheckList, $arrayGroupe, $nbColMax, $section, $beforeAllPanes,$layout;
   if (!$reorg) return;
   if (!$leftPane and $rightPane) {
     $leftPane=$rightPane;
@@ -7777,7 +7764,7 @@ function finalizeBuffering() {
   echo $beforeAllPanes;
   echo '<table style="width=100%">';
   $showBorders=false;
-  if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print){ // Attention, panes start with DIV that is not closed
+  if($layout=='tab' and !$print){ // Attention, panes start with DIV that is not closed
     foreach ($arrayPanes as $paneName) {
       if(isset($$paneName) and $$paneName){
         echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$$paneName.'</div></div></td></tr>';
@@ -7795,12 +7782,14 @@ function finalizeBuffering() {
       if ($extraPane) {
         echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid blue':'').'">'.$extraPane.'</td></tr>';
       }
+      echo '<tr><td colspan="1" style="width:66%;vertical-align: top;'.(($showBorders)?'border:1px solid yellow':'').'">'.$historyPane.'</td></tr>';
     } else if ($nbColMax==2) {
       echo '<tr><td style="width:50%;vertical-align: top;'.(($showBorders)?'border:1px solid red':'').'">'.$leftPane.'</td>'.'<td style="width:50%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$rightPane.'</td>'.'</tr>';
       echo '<tr><td colspan="2" style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid yellow':'').'">'.$bottomPane.'</td></tr>';
       if ($extraPane) {
         echo '<tr><td colspan="2" style="vertical-align: top;'.(($showBorders)?'border:1px solid blue':'').'">'.$extraPane.'</td></tr>';
       }
+      echo '<tr><td colspan="2" style="width:66%;vertical-align: top;'.(($showBorders)?'border:1px solid yellow':'').'">'.$historyPane.'</td></tr>';
     } else if ($nbColMax==3) {
       echo '<tr style="height:10px">'.'<td style="width:33%;vertical-align: top;'.(($showBorders)?'border:1px solid red':'').'">'.$leftPane.'</td>'.'<td style="width:33%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$rightPane.'</td>'.'<td rowspan="2" style="width:34%;vertical-align: top;'.(($showBorders)?'border:1px solid blue':'').'">'.$extraPane.'</td>'.'</tr>';
       echo '<tr><td colspan="2" style="width:66%;vertical-align: top;'.(($showBorders)?'border:1px solid yellow':'').'">'.$bottomPane.'</td></tr>';
@@ -7872,7 +7861,7 @@ function drawJobDefinitionFromObject($obj, $refresh=false) {
 }
 
 function drawJoblistFromObject($obj,$nbCol=3) {
-  global $print, $outMode, $noselect, $collapsedList, $displayWidth, $printWidth, $profile, $comboDetail;
+  global $print, $outMode, $noselect, $collapsedList, $displayWidth, $printWidth, $profile, $comboDetail,$layout;
   if (!$obj or !$obj->id) return; // Don't try and display joblist for non existing objects
   $crit="nameChecklistable='".get_class($obj)."' and idle=0";
   $type='id'.get_class($obj).'Type';
@@ -7906,16 +7895,16 @@ function drawJoblistFromObject($obj,$nbCol=3) {
       $paneName='pane'.$tabName;
       $extName=($comboDetail)?"_detail":'';
       $paneWidth=$displayWidth;
-      if (!Parameter::getUserParameter('paramLayoutObjectDetail')=='0' and !$print and $nbCol==3) $paneWidth=intval(intval($displayWidth)*2/3).'px';
+      if (!$layout=='tab' and !$print and $nbCol==3) $paneWidth=intval(intval($displayWidth)*2/3).'px';
       echo '<div style="width:'.$paneWidth.';padding:4px;overflow:auto" dojoType="dijit.TitlePane"';
-      echo ' title="'.((Parameter::getUserParameter('paramLayoutObjectDetail')=='0')?i18n('tabJoblist'):i18n('Joblist')).'" ';
+      echo ' title="'.(($layout=='tab')?i18n('tabJoblist'):i18n('Joblist')).'" ';
       echo (($tabName==$selectedTab)?' selected="true" ':'');
-      if(Parameter::getUserParameter('paramLayoutObjectDetail')!='0') echo ' open="'.((array_key_exists($titlePane, $collapsedList))?'false':'true').'"';
+      if($layout!='tab') echo ' open="'.((array_key_exists($titlePane, $collapsedList))?'false':'true').'"';
       echo ' id="'.$titlePane.'"';
       echo ' onHide="saveCollapsed(\''.$titlePane.'\');"';
       echo ' onShow="saveExpanded(\''.$titlePane.'\');"';
       echo '>';
-      if(Parameter::getUserParameter('paramLayoutObjectDetail')=='0'){
+      if($layout=='tab'){
         echo ' <script type="dojo/method" event="onShow" >';
         echo '   saveDataToSession(\''.$sessionTabName.'\',\''.$tabName.'\');';
         echo '   hideEmptyTabs();';
