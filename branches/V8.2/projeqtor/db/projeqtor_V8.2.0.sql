@@ -113,7 +113,7 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES
 ('dataCloningPerDay','5'),
 ('paramPasswordStrength','1'),
 ('paramAttachmentNum',''),
-('paramScreen','1'),
+('paramScreen','top'),
 ('paramRightDiv','0'),
 ('contentPaneRightDetailDivHeight','130'),
 ('contentPaneRightDetailDivWidth','150'),
