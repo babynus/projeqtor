@@ -60,7 +60,7 @@ if(RequestHandler::isCodeSet('currentScreen')){
 
 if(RequestHandler::isCodeSet('parmActiveGlobal')){
   $activModeStream=RequestHandler::getValue('parmActiveGlobal');
-  Parameter::storeUserParameter('modeActiveStreamGlobal', 'true');
+  Parameter::storeUserParameter('modeActiveStreamGlobal', $activModeStream);
 }else{
   $activModeStream=Parameter::getUserParameter('modeActiveStreamGlobal');
 }
