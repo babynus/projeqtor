@@ -37,6 +37,7 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
   $paramRightDiv=RequestHandler::getValue('paramRightDiv');
   $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
   $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
+  debugLog("positonRightDiv=$positonRightDiv");
   $codeModeLayout=Parameter::getUserParameter('paramScreen');
   ///////
   $objectClass="";
@@ -49,9 +50,9 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
   	  $listHeight=HeightLayoutListDiv($objectClass);
   	}
   	if($positonRightDiv=="bottom"){
-      $rightHeight=heightLaoutActivityStream($objectClass);
+      $rightHeight=getHeightLaoutActivityStream($objectClass);
     }else{
-  	 $rightWidth=WidthLayoutActivityStream($objectClass);
+  	 $rightWidth=getWidthLayoutActivityStream($objectClass);
   	}
   }
   $tableWidth=WidthDivContentDetail($positionListDiv,$objectClass);

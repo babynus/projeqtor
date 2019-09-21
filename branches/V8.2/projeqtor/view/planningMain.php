@@ -46,10 +46,10 @@
   if ($positionListDiv=='top'){
     $listHeight=HeightLayoutListDiv($currentScreen);
   }
-  if($positonRightDiv=="bottom"){
-    $rightHeightPlanning=heightLaoutActivityStream($currentScreen);
+  if($positonRightDiv=="trailing"){
+    $rightHeightPlanning=getHeightLaoutActivityStream($currentScreen);
   }else{
-  	$rightWidthPlanning=WidthLayoutActivityStream($currentScreen);
+  	$rightWidthPlanning=getWidthLayoutActivityStream($currentScreen);
   }
   $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
   //
