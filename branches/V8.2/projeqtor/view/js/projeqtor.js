@@ -2844,9 +2844,9 @@ function setSelectedProject(idProject, nameProject, selectionField,resetPrevious
 function disconnect(cleanCookieHash) {
   disconnectFunction = function() {
     quitConfirmed = true;
-    if(switchedMode=true){
-      saveDataToSession("paramScreen",'5');
-    }
+//    if(switchedMode==true){
+//      saveDataToSession("paramScreen",'switch');
+//    }
     //extUrl="";
     extUrl="origin==disconnect";
     if (cleanCookieHash) {
@@ -5632,12 +5632,9 @@ function saveNoteStream(event){
 
 var menuRightDivSize=null;
 function hideStreamMode(param,noRefresh,modeGlobal,activityStream){
-  var paramGlobal='false';
-  if(modeGlobal==true){
-    paramGlobal='true';
-  }
-  if(activityStream !=0){
-  loadDiv("menuUserScreenOrganization.php?parmActiveGlobal="+paramGlobal,"mainDivMenu");
+  if(modeGlobal){
+    paramGlobal=(modeGlobal=='true')?'false':'true'; // Will reverse current mode
+    loadDiv("menuUserScreenOrganization.php?parmActiveGlobal="+paramGlobal,"mainDivMenu");
   }
   if(param == '1'){
     if(!activityStream){
@@ -5685,10 +5682,6 @@ function hideStreamMode(param,noRefresh,modeGlobal,activityStream){
       setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50);
     }
   }
-  if(activityStream==0){
-    loadDiv("menuUserScreenOrganization.php?parmActiveGlobal="+paramGlobal,"mainDivMenu");
-  }
- 
   dijit.byId('iconMenuUserScreen').closeDropDown();
 }
 
@@ -6299,7 +6292,7 @@ function resizeListDiv() {
 
 
 function checkValidatedSize(paramDiv,paramRightDiv, paramMode){
-  if(paramMode != '5'){
+  if(paramMode != 'switch'){
   if(paramDiv== 'left'){
 	    if(dojo.byId('detailRightDiv').offsetWidth==0 || paramRightDiv=='bottom'){
 	      if (dojo.byId("contentDetailDiv").offsetWidth<400) {
@@ -6351,7 +6344,7 @@ function checkValidatedSize(paramDiv,paramRightDiv, paramMode){
 }
 
 function checkValidatedSizeRightDiv(paramDiv,paramRightDiv, paramMode){
-	if(paramMode !='5'){
+	if(paramMode !='switch'){
 		if(paramDiv== 'left'){
 		    if(((dojo.byId("contentDetailDiv").offsetWidth - dojo.byId('detailRightDiv').offsetWidth) < 400) && paramRightDiv=='trailing' && dojo.byId('detailRightDiv').offsetWidth>150){
 		      var detailRightWidth=(dojo.byId("contentDetailDiv").offsetWidth)-410;

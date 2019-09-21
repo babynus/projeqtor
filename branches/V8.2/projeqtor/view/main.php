@@ -344,11 +344,9 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
           echo "menuShowMode='" . getSessionValue('hideMenu') . "';";
         }
       }
-      if (sessionValueExists('switchedMode')) {
-        if (getSessionValue('switchedMode')!='NO') {
-          echo "switchedMode=true;";
-          echo "switchListMode='" . getSessionValue('switchedMode'). "';";
-        }
+      if (Parameter::getUserParameter('paramScreen')=='switch') {
+        echo "switchedMode=true;";
+        echo "switchListMode='CLICK';";
       }    
       ?>
       dijit.Tooltip.defaultPosition=["below", "right"];
