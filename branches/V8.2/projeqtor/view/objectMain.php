@@ -35,6 +35,10 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
   $paramScreen=RequestHandler::getValue('paramScreen');
   $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
   $paramRightDiv=RequestHandler::getValue('paramRightDiv');
+  if ($paramScreen) {
+    if ($paramScreen=='top') $paramRightDiv='trailing';
+    else if (($paramScreen=='left')) $paramRightDiv='bottom';
+  }
   $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
   $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
   $codeModeLayout=Parameter::getUserParameter('paramScreen');
@@ -80,6 +84,7 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
 	  </div>
 	  <div id="contentDetailDiv" dojoType="dijit.layout.ContentPane" region="center"  style="width:<?php echo $tableWidth[1];?>;">
 	    <script type="dojo/connect" event="resize" args="evt">
+console.log('resizeMain');
           var paramDiv=<?php echo json_encode($positionListDiv); ?>;
           var paramRightDiv=<?php echo json_encode($positonRightDiv);?>;
           var paramMode=<?php echo json_encode($codeModeLayout); ?>;
@@ -93,13 +98,13 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
             saveDataToSession("contentPaneDetailDivWidth<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
             var param=dojo.byId('objectClass').value;
             var paramId=dojo.byId('objectId').value;
-            if(paramId !='' && multiSelection==false && formChangeInProgress==false){
-              loadContent("objectDetail.php?objectClass"+param+"&objectId="+paramId, "detailDiv", 'listForm');  
-            }else if(multiSelection==true && formChangeInProgress==false){
+            if(paramId !='' && multiSelection==false){
+              if (!formChangeInProgress) { setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50); }
+              else { setTimeout('loadContent("objectButtons.php?refreshButtons=true", "buttonDiv", "listForm",false,false,false,false,function() {formChanged();},false);', 50);}
+            } else if(multiSelection==true && formChangeInProgress==false){
               loadContent('objectMultipleUpdate.php?objectClass=' + param,'detailDiv');
             }
           }
-          
          </script>
 	    <div class="container" dojoType="dijit.layout.BorderContainer"  liveSplitters="false">
 	       <div id="detailBarShow" class="dijitAccordionTitle"
@@ -123,6 +128,7 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
 	  <div id="detailRightDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positonRightDiv; ?>" splitter="true" 
 	  style="<?php if($positonRightDiv=="bottom"){echo "height:".$rightHeight;}else{ echo "width:".$rightWidth;}?>">
       	  <script type="dojo/connect" event="resize" args="evt">
+console.log('resizeStream');
               var paramDiv=<?php echo json_encode($positionListDiv); ?>;
               var paramRightDiv=<?php echo json_encode($positonRightDiv); ?>;
               var paramMode=<?php echo json_encode($codeModeLayout); ?>;
@@ -139,6 +145,10 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
                 //if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
                 var newHeight=dojo.byId("detailRightDiv").offsetHeight;
                 if (dojo.byId("noteNoteStream")) dojo.byId("noteNoteStream").style.height=(newHeight-40)+'px';
+              }
+              if (paramRightDiv=='trailing') {
+                if (!formChangeInProgress) { setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50); }
+                else { setTimeout('loadContent("objectButtons.php?refreshButtons=true", "buttonDiv", "listForm",false,false,false,false,function() {formChanged();},false);', 50);}
               }
       	  </script>
       	  <script type="dojo/connect" event="onLoad" args="evt">
