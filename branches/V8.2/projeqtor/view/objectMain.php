@@ -98,8 +98,10 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
             var param=dojo.byId('objectClass').value;
             var paramId=dojo.byId('objectId').value;
             if( multiSelection==false){
-              if (paramId !='' && !formChangeInProgress) { setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50); }
-              else { setTimeout('loadContent("objectButtons.php?refreshButtons=true", "buttonDiv", "listForm",false,false,false,false,function() {formChanged();},false);', 50);}
+              if (paramId !='') {
+                if (!formChangeInProgress) { setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50); }
+                else { setTimeout('loadContent("objectButtons.php?refreshButtons=true", "buttonDiv", "listForm",false,false,false,false,function() {formChanged();},false);', 50);}
+              }
             } else if(multiSelection==true && formChangeInProgress==false){
               loadContent('objectMultipleUpdate.php?objectClass=' + param,'detailDiv');
             }
