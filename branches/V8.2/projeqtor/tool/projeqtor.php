@@ -4766,12 +4766,11 @@ function getHeightLaoutActivityStream($objectClass){
   if(Parameter::getUserParameter("paramRightDiv") == 'bottom' ){
     $paramScreen=Parameter::getUserParameter("paramScreen");
     $modeActiveStreamGlobal=Parameter::getUserParameter('modeActiveStreamGlobal');
-    $modeActiveStreamClass=Parameter::getUserParameter('modeActiveStream'.$objectClass);
-    $modeActiveStream=($modeActiveStreamClass==='')?$modeActiveStreamGlobal:$modeActiveStreamClass;
-    if ($modeActiveStream!='true') return 0;
     $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
+    $modeActiveStream=($detailRightHeight==='')?$modeActiveStreamGlobal:($detailRightHeight==0)?'false':'true';
+    if ($modeActiveStream!='true') return 0;
     if (!$detailRightHeight) {
-      $detailRightHeight=Parameter::getUserParameter('contentPaneRightDetailDivHeight');
+      $detailRightHeight=Parameter::getGlobalParameter('contentPaneRightDetailDivHeight');
       Parameter::storeUserParameter('contentPaneRightDetailDivHeight'.$objectClass,$detailRightHeight);
     }
     $detailDivHeight=Parameter::getUserParameter('contentPaneDetailDivHeight'.$objectClass);
@@ -4794,13 +4793,12 @@ function getHeightLaoutActivityStream($objectClass){
 function getWidthLayoutActivityStream($objectClass){
   $paramDetailDiv=Parameter::getUserParameter('paramScreen');
   $modeActiveStreamGlobal=Parameter::getUserParameter('modeActiveStreamGlobal');
-  $modeActiveStreamGlobal=Parameter::getUserParameter('modeActiveStreamGlobal');
-  $modeActiveStreamClass=Parameter::getUserParameter('modeActiveStream'.$objectClass);
-  $modeActiveStream=($modeActiveStreamClass==='')?$modeActiveStreamGlobal:$modeActiveStreamClass;
-  if ($modeActiveStream!='true') return 0;
   $detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
+  $modeActiveStream=($detailDivWidth==='')?$modeActiveStreamGlobal:($detailDivWidth==0)?'false':'true';
+  if ($modeActiveStream!='true') return 0;
+  
   if (!$detailDivWidth) {
-    $detailDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth');
+    $detailDivWidth=Parameter::getGlobalParameter('contentPaneRightDetailDivWidth');
     Parameter::storeUserParameter('contentPaneRightDetailDivWidth'.$objectClass,$detailDivWidth);
   }
   $topDivWidth=Parameter::getUserParameter('contentPaneDetailDivWidth'.$objectClass);
