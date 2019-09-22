@@ -163,9 +163,9 @@ if($paramRightDiv=='trailing'){
             <tr>
               <td >
               <?php if( $activModeStream!='true'){ ;?>
-                <div class="iconActivityStream22 iconActivityStream iconSize22 " style="position:absolute;top:2px;left:3px" title="<?php echo i18n("showActivityStream");?>"></div>
+                <div class="iconActivityStream22 iconActivityStream iconSize22 " style="position:absolute;top:2px;left:3px" title="<?php echo i18n("showAllActivityStream")."\n".i18n("resetActivityStreamParams");?>"></div>
               <?php }else {?>
-                <div class="iconActivityStreamClose22 iconActivityStreamClose iconSize22 " style="position:absolute;top:2px;left:3px" title="<?php echo i18n("hideActivityStream");?>"></div>
+                <div class="iconActivityStreamClose22 iconActivityStreamClose iconSize22 " style="position:absolute;top:2px;left:3px" title="<?php echo i18n("hideAllActivityStream")."\n".i18n("resetActivityStreamParams");?>"></div>
               <?php }?>
               </td>
             </tr>
