@@ -115,8 +115,6 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES
 ('paramAttachmentNum',''),
 ('paramScreen','top'),
 ('paramRightDiv','0'),
-('contentPaneRightDetailDivHeight','130'),
-('contentPaneRightDetailDivWidth','150'),
 ('contentPaneDetailDivHeight','260'),
 ('contentPaneDetailDivWidth','410'),
 ('contentPaneTopDetailDivHeight','0'),
