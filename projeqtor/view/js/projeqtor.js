@@ -5634,8 +5634,9 @@ var menuRightDivLastWidth=null;
 var menuRightDivLastHeight=null;
 function hideStreamMode(show,position,dimension,modeGlobal){
   if(modeGlobal){
-    loadDiv("menuUserScreenOrganization.php?parmActiveGlobal="+show,"mainDivMenu");
+    loadDiv("menuUserScreenOrganization.php?paramActiveGlobal="+show,"mainDivMenu");
   }
+  dijit.byId('iconMenuUserScreen').closeDropDown();
   if (! dijit.byId('detailRightDiv')) return;
   if(position=='bottom'){
     if (show=='true') {
@@ -5667,7 +5668,6 @@ function hideStreamMode(show,position,dimension,modeGlobal){
   }
   if (!formChangeInProgress) { setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50); }
   else { setTimeout('loadContent("objectButtons.php?refreshButtons=true", "buttonDiv", "listForm",false,false,false,false,function() {formChanged();},false);', 50);}
-  dijit.byId('iconMenuUserScreen').closeDropDown();
 }
 
 function focusStream() {

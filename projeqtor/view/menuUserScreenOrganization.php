@@ -58,32 +58,29 @@ if(RequestHandler::isCodeSet('currentScreen')){
   $currentSceen=RequestHandler::getValue('currentScreen');
 }
 
-if(RequestHandler::isCodeSet('parmActiveGlobal')){
-  $activModeStream=RequestHandler::getValue('parmActiveGlobal');
+if(RequestHandler::isCodeSet('paramActiveGlobal')){
+  $activModeStream=RequestHandler::getValue('paramActiveGlobal');
   Parameter::storeUserParameter('modeActiveStreamGlobal', $activModeStream);
+  // Purge parameters
+  $par=new Parameter();
+  $clause="idUser=".getCurrentUserId()." and (parameterCode like 'contentPaneRightDetailDivHeight%' or parameterCode like 'contentPaneRightDetailDivWidth%')";
+  $res=$par->purge($clause); // Purge parameters
+  // Purge Session
+  foreach (getSessionValue('userParamatersArray') as $code=>$val) {
+    if (substr($code,0,25)=='contentPaneRightDetailDiv') {
+      setSessionTableValue('userParamatersArray', $code,'');
+    }
+    
+  }
 }else{
   $activModeStream=Parameter::getUserParameter('modeActiveStreamGlobal');
 }
 
 if($paramRightDiv=='trailing'){
-  $globalActivityStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight');
-//   if(isset($currentSceen)){
-//     $activityStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$currentSceen);
-//     if($globalActivityStream!=0 and $globalActivityStream==0){
-//       $globalActivityStream=0;
-//     }
-//   }
+  $globalActivityStreamSize=getDefaultLayoutSize('contentPaneRightDetailDivWidth');
 }else{
-  $globalActivityStream=Parameter::getUserParameter('contentPaneRightDetailDivWidth');
-//   if(isset($currentSceen)){
-//     $activityStream=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$currentSceen);
-//     if($globalActivityStream!=0 and $globalActivityStream==0){
-//       $globalActivityStream=0;
-//     }
-//   }
+  $globalActivityStreamSize=getDefaultLayoutSize('contentPaneRightDetailDivHeight');
 }
-if (!intval($globalActivityStream)) $globalActivityStream="0";
-
 
 ?>
 
@@ -161,7 +158,7 @@ if (!intval($globalActivityStream)) $globalActivityStream="0";
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
         <div id="hideStreamButtonGlobal" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" 
-        onclick="hideStreamMode('<?php echo $activModeStream;?>'<?php if($paramRightDiv=='bottom'){echo'1';}else{echo'0';}?>,false,,<?php echo $globalActivityStream;?>);">
+        onclick="hideStreamMode('<?php echo ($activModeStream!='true')?'true':'false';?>','<?php echo $paramRightDiv?>','<?php echo $globalActivityStreamSize;?>',true);">
           <table >
             <tr>
               <td >

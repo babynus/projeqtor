@@ -30,7 +30,6 @@
  */ 
   require_once "../tool/projeqtor.php";
   scriptLog('   ->/view/objectButton.php'); 
-  
   global $displayWidthButton;
   if (! isset($comboDetail)) {
     $comboDetail=false;
@@ -49,7 +48,6 @@
   if (! isset($noselect)) {
   	$noselect=false;
   }
-RequestHandler::dump();
 // MTY - LEAVE SYSTEM
     // Can't delete or copy if leave conditions are'nt satisfed.
     $noSelectLeaveDeleteCopy = isLeaveMngConditionsKO($class, $id);
@@ -551,10 +549,10 @@ RequestHandler::dump();
        $showActivityStream=false;
        if($paramRightDiv=="bottom"){
          $activityStreamSize=getHeightLaoutActivityStream($objectClass);
-         $activityStreamDefaultSize=Parameter::getGlobalParameter('contentPaneRightDetailDivHeight');
+         $activityStreamDefaultSize=getDefaultLayoutSize('contentPaneRightDetailDivHeight');
        }else{
          $activityStreamSize=getWidthLayoutActivityStream($objectClass);
-         $activityStreamDefaultSize=Parameter::getGlobalParameter('contentPaneRightDetailDivWidth');
+         $activityStreamDefaultSize=getDefaultLayoutSize('contentPaneRightDetailDivWidth');
        }
        if ($activityStreamSize) {
          $showActivityStream=true;

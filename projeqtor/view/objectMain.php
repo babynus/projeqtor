@@ -52,15 +52,10 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
   	if($positonRightDiv=="bottom"){
       $rightHeight=getHeightLaoutActivityStream($objectClass);
     }else{
-  	 $rightWidth=getWidthLayoutActivityStream($objectClass);
+      $rightWidth=getWidthLayoutActivityStream($objectClass);
   	}
   }
-  debugLog("objectMain for objectClass=$objectClass");
-  debugLog("   positonRightDiv=$positonRightDiv");
-  if (isset($rightHeight)) debugLog("   rightHeight=$rightHeight");;
-  if (isset($rightWidth)) debugLog("   rightWidth=$rightWidth");;
   $tableWidth=WidthDivContentDetail($positionListDiv,$objectClass);
-  $activModeStream=Parameter::getUserParameter('modeActiveStreamGlobal');
   
 ?>
 <div id="mainDivContainer" class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
@@ -131,13 +126,9 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
               var paramDiv=<?php echo json_encode($positionListDiv); ?>;
               var paramRightDiv=<?php echo json_encode($positonRightDiv); ?>;
               var paramMode=<?php echo json_encode($codeModeLayout); ?>;
-              var activModeStream=<?php echo json_encode($activModeStream);?>;
               hideSplitterStream (paramRightDiv);
               checkValidatedSizeRightDiv(paramDiv,paramRightDiv);
               if(paramRightDiv=='trailing' && paramMode!='switch'){
-                //if(activModeStream=='true') {
-                //  saveDataToSession("contentPaneRightDetailDivWidth", dojo.byId("detailRightDiv").offsetWidth, true);           
-                //} 
                 saveDataToSession("contentPaneRightDetailDivWidth<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetWidth, true);
                 var newWidth=dojo.byId("detailRightDiv").offsetWidth;
                 dojo.query(".activityStreamNoteContainer").forEach(function(node, index, nodelist) {
