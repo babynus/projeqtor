@@ -161,7 +161,7 @@ if (!intval($globalActivityStream)) $globalActivityStream="0";
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
         <div id="hideStreamButtonGlobal" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" 
-        onclick="hideStreamMode(<?php if($paramRightDiv=='bottom'){echo'1';}else{echo'0';}?>,false,'<?php echo $activModeStream;?>',<?php echo $globalActivityStream;?>);">
+        onclick="hideStreamMode('<?php echo $activModeStream;?>'<?php if($paramRightDiv=='bottom'){echo'1';}else{echo'0';}?>,false,,<?php echo $globalActivityStream;?>);">
           <table >
             <tr>
               <td >

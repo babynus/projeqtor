@@ -49,7 +49,7 @@
   if (! isset($noselect)) {
   	$noselect=false;
   }
-
+RequestHandler::dump();
 // MTY - LEAVE SYSTEM
     // Can't delete or copy if leave conditions are'nt satisfed.
     $noSelectLeaveDeleteCopy = isLeaveMngConditionsKO($class, $id);
@@ -97,10 +97,17 @@
   if (! Parameter::getGlobalParameter ( 'paramAttachmentDirectory' ) or ! Parameter::getGlobalParameter ( 'paramAttachmentMaxSize' )) {
   	$isAttachmentEnabled = false;
   }
+  if (!isset($readOnly)) {
+    $readOnly=false;
+  }
   $showAttachment=($isAttachmentEnabled and property_exists($obj,'_Attachment') and $updateRight=='YES' and isHtml5() and ! $readOnly )?true:false;
   $extendedZone=false;
   $maxTitleWidth=round($displayWidthButton*0.4,0);
 ?>
+<?php if (RequestHandler::isCodeSet('refreshButtons')) {?>
+<div id="resultDiv" dojoType="dijit.layout.ContentPane" region="top"
+			style="display: none; z-index: 99999;"></div>
+<?php }?>
 <table style="width:100%;height:100%;">
  <tr style="height:100%";>
   <td style="z-index:-1;width:40%;white-space:nowrap;">  
@@ -540,23 +547,26 @@
     </span>
      <?php organizeButtons();?> 
      <?php 
-        $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
-       if($paramRightDiv=='bottom'){
-         $activityStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
-         if ($activityStream==='') {
-           $activityStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClass);
-         }
+       $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
+       $showActivityStream=false;
+       if($paramRightDiv=="bottom"){
+         $activityStreamSize=getHeightLaoutActivityStream($objectClass);
+         $activityStreamDefaultSize=Parameter::getGlobalParameter('contentPaneRightDetailDivHeight');
        }else{
-         $activityStream=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
+         $activityStreamSize=getWidthLayoutActivityStream($objectClass);
+         $activityStreamDefaultSize=Parameter::getGlobalParameter('contentPaneRightDetailDivWidth');
+       }
+       if ($activityStreamSize) {
+         $showActivityStream=true;
        }
      ?>
     <?php if (property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream') ) {?>
     <button id="hideStreamButton" dojoType="dijit.form.Button" showlabel="false" 
-      title="<?php echo i18n('showActivityStream', array(i18n($_REQUEST['objectClass'])));?>"
+      title="<?php echo ($showActivityStream==false)?i18n('showActivityStream', array(i18n($_REQUEST['objectClass']))):i18n('hideActivityStream', array(i18n($_REQUEST['objectClass'])));?>"
       <?php //if ($noselect) {echo 'style="display:none;"';}?> 
-      iconClass="dijitButtonIcon  <?php if($showActivityStream==0){echo 'iconActivityStream22';}else{echo 'iconActivityStreamClose22';}?>" class="detailButton">
+      iconClass="dijitButtonIcon  <?php if(! $showActivityStream){echo 'iconActivityStream22';}else{echo 'iconActivityStreamClose22';}?>" class="detailButton">
       <script type="dojo/connect" event="onClick" args="evt">
-         hideStreamMode(<?php if($paramRightDiv=='bottom'){echo'1';}else{echo'0';}?>,false);
+         hideStreamMode('<?php echo ($showActivityStream)?'false':'true';?>','<?php echo $paramRightDiv;?>','<?php echo $activityStreamDefaultSize;?>',false);
       </script>
     </button>
     <?php }?>
