@@ -6406,7 +6406,7 @@ function switchModeLayout(paramToSend){
       if(switchedMode==true){
        switchModeOff();
       }
-       switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
+      switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
   }else if(paramToSend=='bottom' || paramToSend=='trailing'){
     var paramDiv='paramRightDiv';
     switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen);
