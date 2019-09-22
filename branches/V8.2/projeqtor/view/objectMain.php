@@ -84,7 +84,6 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
 	  </div>
 	  <div id="contentDetailDiv" dojoType="dijit.layout.ContentPane" region="center"  style="width:<?php echo $tableWidth[1];?>;">
 	    <script type="dojo/connect" event="resize" args="evt">
-console.log('resizeMain');
           var paramDiv=<?php echo json_encode($positionListDiv); ?>;
           var paramRightDiv=<?php echo json_encode($positonRightDiv);?>;
           var paramMode=<?php echo json_encode($codeModeLayout); ?>;
@@ -98,8 +97,8 @@ console.log('resizeMain');
             saveDataToSession("contentPaneDetailDivWidth<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
             var param=dojo.byId('objectClass').value;
             var paramId=dojo.byId('objectId').value;
-            if(paramId !='' && multiSelection==false){
-              if (!formChangeInProgress) { setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50); }
+            if( multiSelection==false){
+              if (paramId !='' && !formChangeInProgress) { setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50); }
               else { setTimeout('loadContent("objectButtons.php?refreshButtons=true", "buttonDiv", "listForm",false,false,false,false,function() {formChanged();},false);', 50);}
             } else if(multiSelection==true && formChangeInProgress==false){
               loadContent('objectMultipleUpdate.php?objectClass=' + param,'detailDiv');
@@ -128,7 +127,6 @@ console.log('resizeMain');
 	  <div id="detailRightDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positonRightDiv; ?>" splitter="true" 
 	  style="<?php if($positonRightDiv=="bottom"){echo "height:".$rightHeight;}else{ echo "width:".$rightWidth;}?>">
       	  <script type="dojo/connect" event="resize" args="evt">
-console.log('resizeStream');
               var paramDiv=<?php echo json_encode($positionListDiv); ?>;
               var paramRightDiv=<?php echo json_encode($positonRightDiv); ?>;
               var paramMode=<?php echo json_encode($codeModeLayout); ?>;
@@ -146,7 +144,7 @@ console.log('resizeStream');
                 var newHeight=dojo.byId("detailRightDiv").offsetHeight;
                 if (dojo.byId("noteNoteStream")) dojo.byId("noteNoteStream").style.height=(newHeight-40)+'px';
               }
-              if (paramRightDiv=='trailing') {
+              if (paramRightDiv=='trailing' && evt.w && multiSelection==false) {
                 if (!formChangeInProgress) { setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50); }
                 else { setTimeout('loadContent("objectButtons.php?refreshButtons=true", "buttonDiv", "listForm",false,false,false,false,function() {formChanged();},false);', 50);}
               }
