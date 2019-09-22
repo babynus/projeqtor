@@ -62,9 +62,7 @@
   if ($updateDate == null) {
     $updateDate='';
   }
-  if (!$objectId) {
-   
-      
+  if (!$objectId) {  
       if(Parameter::getUserParameter('paramRightDiv')!='bottom'){
         echo "<div onclick='switchModeLayout(\"bottom\");' class='changeActivityStreamBotClass' style='position:absolute;top:2px;right:2px'></div>";
       }else{
@@ -78,20 +76,14 @@
   $countIdNote=count($notes);
   $onlyCenter=(RequestHandler::getValue('onlyCenter')=='true')?true:false;
   $privacyNotes=Parameter::getUserParameter('privacyNotes'.$objectClass);
-  $positionActivityStream= Parameter::getUserParameter('paramRightDiv');
-  if($positionActivityStream==3){
-    $postionactivityStreamBottom="trailing";
-  }else{
-    $postionactivityStreamBottom="bottom";
-  }
+  $positionActivityStream=Parameter::getUserParameter('paramRightDiv');
 ?>
 <!-- Titre et listes de notes -->
 <?php if (!$onlyCenter) {?>
 <div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false">
 	<div id="activityStreamTop" dojoType="dijit.layout.ContentPane" region="top" style="text-align:center" class="dijitAccordionTitle">
-	<?php 
-     
-      if(Parameter::getUserParameter('paramRightDiv')!="bottom"){
+	<?php
+      if($positionActivityStream!="bottom"){
          echo "<div onclick='switchModeLayout(\"bottom\");' class='changeActivityStreamBotClass' style='position:absolute;top:2px;right:2px'></div>";
       }else{
         echo "<div onclick='switchModeLayout(\"trailing\");'  class='changeActivityStreamClass' style='position:absolute;top:2px;right:2px'></div>";
@@ -99,7 +91,6 @@
     
     ?>
 	   <div style="text-align:left"><span class="title" ><?php echo i18n("titleStream");?></span></div>
-	   
 	</div>
 	<div id="activityStreamCenter" dojoType="dijit.layout.ContentPane" region="center" style="overflow-x:hidden;">
 	<script type="dojo/connect" event="onLoad" args="evt">
@@ -136,22 +127,23 @@
      $objectClassStream=$objectClass;
      if (RequestHandler::isCodeSet('objectClassList')) $objectClassStream=RequestHandler::getValue('objectClassList');
      $paramHeightStream=Parameter::getUserParameter('contentPaneRightDetailDivHeight'.$objectClassStream);
+     //$paramWidthStream=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClassStream);
      if(empty($paramHeightStream)){
         $paramHeightStream=140;
       }
-      $paramHeightStream=$paramHeightStream-40;
+      $paramHeightStream=$paramHeightStream-38;
     if($countIdNote==0){ echo "<div style='padding:10px'>".$noNotes."</div>";}	
 ?>  
 	</div>
-	<div id="activityStreamBottom" dojoType="dijit.layout.ContentPane" region="<?php echo$postionactivityStreamBottom;?>" style="<?php if($positionActivityStream==3){echo "width:30%;height:140px;overflow-x:hidden;padding-right:8px;";}else{echo "height:70px;overflow-x:hidden;padding-right:8px;";}?>">
+	<div id="activityStreamBottom" dojoType="dijit.layout.ContentPane" region="<?php echo ($positionActivityStream=='bottom')?'trailing':'bottom';?>" style="<?php if($positionActivityStream=='bottom'){echo "width:30%;height:140px;overflow-x:hidden;padding-right:8px;";}else{echo "height:70px;overflow-x:hidden;padding-right:8px;";}?>">
 	  <form id='noteFormStream' name='noteFormStream' onSubmit="return false;" >
        <input id="noteId" name="noteId" type="hidden" value="" />
        <input id="noteRefType" name="noteRefType" type="hidden" value="<?php echo $objectClass;?>" />
        <input id="noteRefId" name="noteRefId" type="hidden" value="<?php echo $objectId;?>" />
        <input id="noteEditorTypeStream" name="noteEditorTypeStream" type="hidden" value="<?php echo getEditorType();?>" />
-       <div style="width:99%;position:relative">
+       <div style="width:100%;position:relative;">
          <textarea rows="4"  name="noteNoteStream" id="noteNoteStream" dojoType="dijit.form.SimpleTextarea"
-         style="width:98%;<?php if($positionActivityStream==3){echo "height:".$paramHeightStream."px";}else{echo "height:60px";}?>;overflow-x:hidden;overflow-y:auto;border:1px solid grey;margin-top:2px;" onfocus="focusStream();"><?php echo i18n("textareaEnterText");?></textarea>
+         style="resize: none;width:99%;<?php if($positionActivityStream=='bottom'){echo "height:".$paramHeightStream."px";}else{echo "height:60px";}?>;overflow-x:hidden;overflow-y:auto;border:1px solid grey;margin-top:2px;" onfocus="focusStream();"><?php echo i18n("textareaEnterText");?></textarea>
          <?php
          $privacyClass="";
          $privacyLabel=i18n("public");
@@ -162,7 +154,7 @@
            $privacyClass="iconTeam16";
            $privacyLabel=i18n("team");
          }?>
-         <div title="<?php echo i18n("colIdPrivacy").' = '.$privacyLabel;?>" id="notePrivacyStreamDiv" class="<?php echo $privacyClass;?>" onclick="switchNotesPrivacyStream();" style="border-radius:7px 0px 0px 0px;width:16px; height:16px;position:absolute;bottom:2px;right:-2px;opacity:1;background-color: #E0E0E0;color:#A0A0A0;cursor:pointer;text-align:center">...</div>
+         <div title="<?php echo i18n("colIdPrivacy").' = '.$privacyLabel;?>" id="notePrivacyStreamDiv" class="<?php echo $privacyClass;?>" onclick="switchNotesPrivacyStream();" style="border-radius:8px ;width:16px; height:16px;position:absolute;bottom:2px;right:-2px;opacity:1;background-color: #E0E0E0;color:#A0A0A0;cursor:pointer;text-align:center">...</div>
          <input type="hidden" id="notePrivacyStream" name="notePrivacyStream" value="<?php echo $privacyNotes?>" />
          <input type="hidden" id="notePrivacyStreamUserTeam" name="notePrivacyStreamUserTeam" value="<?php echo $ress->idTeam;?>" />
        </div>

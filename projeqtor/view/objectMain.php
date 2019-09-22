@@ -37,8 +37,8 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
   $paramRightDiv=RequestHandler::getValue('paramRightDiv');
   $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
   $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
-  debugLog("positonRightDiv=$positonRightDiv");
   $codeModeLayout=Parameter::getUserParameter('paramScreen');
+  
   ///////
   $objectClass="";
   if (isset($_REQUEST['objectClass'])) {
@@ -55,6 +55,10 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
   	 $rightWidth=getWidthLayoutActivityStream($objectClass);
   	}
   }
+  debugLog("objectMain for objectClass=$objectClass");
+  debugLog("   positonRightDiv=$positonRightDiv");
+  if (isset($rightHeight)) debugLog("   rightHeight=$rightHeight");;
+  if (isset($rightWidth)) debugLog("   rightWidth=$rightWidth");;
   $tableWidth=WidthDivContentDetail($positionListDiv,$objectClass);
   $activModeStream=Parameter::getUserParameter('modeActiveStreamGlobal');
   
