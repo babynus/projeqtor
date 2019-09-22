@@ -902,6 +902,10 @@ if (beforeVersion($currVersion,"V8.2.0")) {
   }
 }
 
+if (beforeVersion($currVersion,"V8.2.1") and Sql::isPgsql()) {
+  traceLog("   => Fix issues on tender for PostgreSql database");
+  $nbErrorsPg=runScript('V8.2.1.pg');
+}
 // To be sure, after habilitations updates ...
 Habilitation::correctUpdates();
 Habilitation::correctUpdates();
