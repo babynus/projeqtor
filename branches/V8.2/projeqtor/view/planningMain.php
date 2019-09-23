@@ -40,13 +40,18 @@
   $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
   $paramRightDiv=RequestHandler::getValue('paramRightDiv');
   $currentScreen='Planning';
+  setSessionValue('currentScreen', $currentScreen);
+  if ($paramScreen) {
+    if ($paramScreen=='top') $paramRightDiv='trailing';
+    else if (($paramScreen=='left')) $paramRightDiv='bottom';
+  }
   $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
   $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
   $codeModeLayout=Parameter::getUserParameter('paramScreen');
   if ($positionListDiv=='top'){
     $listHeight=HeightLayoutListDiv($currentScreen);
   }
-  if($positonRightDiv=="trailing"){
+  if($positonRightDiv=="bottom"){
     $rightHeightPlanning=getHeightLaoutActivityStream($currentScreen);
   }else{
   	$rightWidthPlanning=getWidthLayoutActivityStream($currentScreen);
@@ -88,14 +93,7 @@
               saveDataToSession("contentPaneDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
            }else if(paramMode!='switch'){
              saveDataToSession("contentPaneDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
-              var param=dojo.byId('objectClass').value;
-              var paramId=dojo.byId('objectId').value;
-              if(paramId !='' && multiSelection==false){
-                loadContent("objectDetail.php?objectClass="+param+"&objectId="+paramId, "detailDiv", 'listForm');  
-              }else if(multiSelection==true){
-               loadContent('objectMultipleUpdate.php?objectClass=' + param,
-                  'detailDiv')
-              }
+             refreshObjectDivAfterResize();
            }
           </script>
 	  <div class="container" dojoType="dijit.layout.BorderContainer"  liveSplitters="false">
@@ -110,13 +108,12 @@
           style="<?php if($positonRightDiv=="bottom"){echo "height:".$rightHeightPlanning;}else{ echo "width:".$rightWidthPlanning;}?>" >
               <script type="dojo/connect" event="resize" args="evt">
                 var paramDiv=<?php echo json_encode($positionListDiv); ?>;
-                  var paramRightDiv=<?php echo json_encode($positonRightDiv); ?>;
-                  var paramMode=<?php echo json_encode($codeModeLayout); ?>;
-                  var activModeStream=<?php echo json_encode($activModeStream);?>;
-                  hideSplitterStream (paramRightDiv);
-                  if (checkValidatedSizeRightDiv(paramDiv,paramRightDiv, paramMode)){
-                    return;
-                  }
+                var paramRightDiv=<?php echo json_encode($positonRightDiv); ?>;
+                var paramMode=<?php echo json_encode($codeModeLayout); ?>;
+                hideSplitterStream (paramRightDiv);
+                if (checkValidatedSizeRightDiv(paramDiv,paramRightDiv, paramMode)){
+                  return;
+                }
                   if(paramRightDiv=='trailing' && paramMode!='switch'){
                     saveDataToSession("contentPaneRightDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("detailRightDiv").offsetWidth, true);
                     var newWidth=dojo.byId("detailRightDiv").offsetWidth;
