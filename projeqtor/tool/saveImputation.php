@@ -29,7 +29,6 @@
  */
 
 require_once "../tool/projeqtor.php";
-
 $status="NO_CHANGE";
 $errors="";
 $finalResult="";
@@ -114,13 +113,13 @@ for ($i=0; $i<$nbLines; $i++) {
     }
     $line->arrayWork=$arrayWork;
     $result=$line->save();
-    $status=getLastOperationStatus($result);
-    if ($status=="ERROR" or $status=="INVALID") {
+    $stat=getLastOperationStatus($result);
+    if ($stat=="ERROR" or $stat=="INVALID") {
       $status='ERROR';
       $finalResult=$result;
       break;
-    } else if (stripos($result,'id="lastOperationStatus" value="OK"')>0 ) {
-      $status='OK';
+    } else if ($stat=="OK") {
+      $stat='OK';
       $changed=true;
     } else { 
       if ($finalResult=="") {
@@ -133,9 +132,10 @@ for ($i=0; $i<$nbLines; $i++) {
     }
     if ($changed) {
        $resultAss=$ass->saveWithRefresh();
-       if (stripos($resultAss,'id="lastOperationStatus" value="OK"')>0 ) {
+       $stat=getLastOperationStatus($resultAss);
+       if ($stat=="OK") {
        	$status='OK';
-       } else if (stripos($result,'id="lastOperationStatus" value="ERROR"')>0 ){
+       } else if ($stat=="ERROR"){
        	$status='ERROR';
        	$finalResult=$resultAss;
        	break;
