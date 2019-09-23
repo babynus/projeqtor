@@ -7387,8 +7387,8 @@ function drawBudgetExpenseDetailLine($class,$id){
 	}
 
 	$goto= '';
-	if (securityCheckDisplayMenu(null, $class) and securityGetAccessRightYesNo('menu'.$class, 'read', '')=="YES") {
-		$goto = 'onClick="gotoElement('."'".$class."','".htmlEncode($id)."'".');"';
+	if (securityCheckDisplayMenu(null, $class) and securityGetAccessRightYesNo('menu'.$class, 'read', $obj)=="YES") {
+	  $goto = ' onClick="gotoElement('."'".$class."','".htmlEncode($id)."'".');" ';
 	}
 	$idleClass = ($obj->idle)?' affectationIdleClass':'';
 	echo ' <tr>';
