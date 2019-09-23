@@ -69,7 +69,7 @@ $arrayPanes=array('paneDescription','paneTreatment','paneAllocation','paneProgre
 // fetch information depending on, request
 $objClass=$_REQUEST['objectClass'];
 Security::checkValidClass($objClass, 'objectClass');
-if (isset($_REQUEST['noselect'])) {
+if (isset($_REQUEST['noselect']) or !$objClass) {
   $noselect=true;
 }
 // MTY - LEAVE SYSTEM

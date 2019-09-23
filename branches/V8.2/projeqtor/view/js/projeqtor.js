@@ -5666,8 +5666,7 @@ function hideStreamMode(show,position,dimension,modeGlobal){
     //var detailHidden=false;
     //if (dojo.byId('detailBarShow') && dojo.byId('detailBarShow').style.display=='block') detailHidden=true;
   }
-  if (!formChangeInProgress) { setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50); }
-  else { setTimeout('loadContent("objectButtons.php?refreshButtons=true", "buttonDiv", "listForm",false,false,false,false,function() {formChanged();},false);', 50);}
+  refreshObjectDivAfterResize();
 }
 
 function focusStream() {
