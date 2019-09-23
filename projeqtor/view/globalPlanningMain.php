@@ -40,6 +40,7 @@
   $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
   $paramRightDiv=RequestHandler::getValue('paramRightDiv');
   $currentScreen='GlobalPlanning';
+  setSessionValue('currentScreen', $currentScreen);
   $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
   $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
   $codeModeLayout=Parameter::getUserParameter('paramScreen');

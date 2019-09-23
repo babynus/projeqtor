@@ -4763,6 +4763,7 @@ function changeLayoutActivityStream($paramRightDiv){
 }
 
 function getHeightLaoutActivityStream($objectClass){
+  $rightHeight='0%';
   if(Parameter::getUserParameter("paramRightDiv") == 'bottom' ){
     $paramScreen=Parameter::getUserParameter("paramScreen");
     $modeActiveStreamGlobal=Parameter::getUserParameter('modeActiveStreamGlobal');

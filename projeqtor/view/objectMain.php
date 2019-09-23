@@ -39,6 +39,8 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
     if ($paramScreen=='top') $paramRightDiv='trailing';
     else if (($paramScreen=='left')) $paramRightDiv='bottom';
   }
+  
+  setSessionValue('currentScreen', 'Object');
   $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
   $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
   $codeModeLayout=Parameter::getUserParameter('paramScreen');
@@ -57,6 +59,9 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
       $rightHeight=getHeightLaoutActivityStream($objectClass);
     }else{
       $rightWidth=getWidthLayoutActivityStream($objectClass);
+  	}
+  	if ($objectClass=='GlobalView') {
+  	  setSessionValue('currentScreen', 'GlobalView');
   	}
   }
   $tableWidth=WidthDivContentDetail($positionListDiv,$objectClass);
@@ -95,16 +100,7 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
             saveDataToSession("contentPaneDetailDivHeight<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
           } else if(paramMode!='switch'){
             saveDataToSession("contentPaneDetailDivWidth<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
-            var param=dojo.byId('objectClass').value;
-            var paramId=dojo.byId('objectId').value;
-            if( multiSelection==false){
-              if (paramId !='') {
-                if (!formChangeInProgress) { setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50); }
-                else { setTimeout('loadContent("objectButtons.php?refreshButtons=true", "buttonDiv", "listForm",false,false,false,false,function() {formChanged();},false);', 50);}
-              }
-            } else if(multiSelection==true && formChangeInProgress==false){
-              loadContent('objectMultipleUpdate.php?objectClass=' + param,'detailDiv');
-            }
+            refreshObjectDivAfterResize();
           }
          </script>
 	    <div class="container" dojoType="dijit.layout.BorderContainer"  liveSplitters="false">
@@ -146,9 +142,8 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
                 var newHeight=dojo.byId("detailRightDiv").offsetHeight;
                 if (dojo.byId("noteNoteStream")) dojo.byId("noteNoteStream").style.height=(newHeight-40)+'px';
               }
-              if (paramRightDiv=='trailing' && evt.w && multiSelection==false) {
-                if (!formChangeInProgress) { setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50); }
-                else { setTimeout('loadContent("objectButtons.php?refreshButtons=true", "buttonDiv", "listForm",false,false,false,false,function() {formChanged();},false);', 50);}
+              if (paramRightDiv=='trailing' && evt.w) {
+                refreshObjectDivAfterResize();
               }
       	  </script>
       	  <script type="dojo/connect" event="onLoad" args="evt">

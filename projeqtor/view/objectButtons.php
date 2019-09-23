@@ -547,11 +547,13 @@
      <?php 
        $paramRightDiv=Parameter::getUserParameter('paramRightDiv');
        $showActivityStream=false;
+       $currentScreen=getSessionValue('currentScreen');
+       if ($currentScreen=='Object') $currentScreen=$objectClass;
        if($paramRightDiv=="bottom"){
-         $activityStreamSize=getHeightLaoutActivityStream($objectClass);
+         $activityStreamSize=getHeightLaoutActivityStream($currentScreen);
          $activityStreamDefaultSize=getDefaultLayoutSize('contentPaneRightDetailDivHeight');
        }else{
-         $activityStreamSize=getWidthLayoutActivityStream($objectClass);
+         $activityStreamSize=getWidthLayoutActivityStream($currentScreen);
          $activityStreamDefaultSize=getDefaultLayoutSize('contentPaneRightDetailDivWidth');
        }
        if ($activityStreamSize) {
@@ -560,7 +562,7 @@
      ?>
     <?php if (property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream') ) {?>
     <button id="hideStreamButton" dojoType="dijit.form.Button" showlabel="false" 
-      title="<?php echo ($showActivityStream==false)?i18n('showActivityStream', array(i18n($_REQUEST['objectClass']))):i18n('hideActivityStream', array(i18n($_REQUEST['objectClass'])));?>"
+      title="<?php echo ($showActivityStream==false)?i18n('showActivityStream'):i18n('hideActivityStream');?>"
       <?php //if ($noselect) {echo 'style="display:none;"';}?> 
       iconClass="dijitButtonIcon  <?php if(! $showActivityStream){echo 'iconActivityStream22';}else{echo 'iconActivityStreamClose22';}?>" class="detailButton">
       <script type="dojo/connect" event="onClick" args="evt">
