@@ -107,6 +107,7 @@
     <div id="detailDiv" dojoType="dijit.layout.ContentPane" region="center" >
         <?php $noselect=true; //include 'objectDetail.php'; ?>
      </div>
+     <?php if (Module::isModuleActive('moduleActivityStream')) {?>
      <div id="detailRightDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positonRightDiv; ?>" splitter="true" 
      style="<?php if($positonRightDiv=="bottom"){echo "height:".$rightHeightPortfolioPlanning;}else{ echo "width:".$rightWidthPortfolioPlanning;}?>">
               <script type="dojo/connect" event="resize" args="evt">
@@ -135,6 +136,7 @@
 	         </script>
               <?php include 'objectStream.php'?>
     </div>
+    <?php }?>
   </div>
   </div>
 </div>  
