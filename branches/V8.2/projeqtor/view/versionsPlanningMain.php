@@ -11,6 +11,7 @@ $paramScreen=RequestHandler::getValue('paramScreen');
 $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
 $paramRightDiv=RequestHandler::getValue('paramRightDiv');
 $currentScreen='VersionsPlanning';
+setSessionValue('currentScreen', $currentScreen);
 $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
 $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
 $codeModeLayout=Parameter::getUserParameter('paramScreen');

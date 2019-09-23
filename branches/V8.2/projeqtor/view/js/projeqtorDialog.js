@@ -6425,23 +6425,26 @@ function switchModeLayout(paramToSend){
 }
 
 function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectIdScreen){
+  var urlParams="?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen;
+  var urlPage="objectMain.php";
   if(currentScreen=='Planning'){
-      loadContent("planningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-    }else if(currentScreen=='GlobalPlanning'){
-      loadContent("globalPlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-    }else if(currentScreen=='PortfolioPlanning' ){
-      loadContent("portfolioPlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-    }else if(currentScreen=='ResourcePlanning') {
-      loadContent("resourcePlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
-    }else if(currentScreen=='VersionsPlanning') {
-      var productVersionsListId=dojo.byId('productVersionsListId').value;
-      loadContent("versionsPlanningMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen+"&productVersionsListId="+productVersionsListId, "centerDiv");
-    }else{
-      loadContent("objectMain.php?objectClass="+ currentObject+"&"+paramDiv+"="+paramToSend+"&objectId="+objectIdScreen, "centerDiv");
+    urlPage="planningMain.php";
+  }else if(currentScreen=='GlobalPlanning'){
+    urlPage="globalPlanningMain.php";
+  }else if(currentScreen=='PortfolioPlanning' ){
+    urlPage="portfolioPlanningMain.php";
+  }else if(currentScreen=='ResourcePlanning') {
+    urlPage="resourcePlanningMain.php";
+  }else if(currentScreen=='VersionsPlanning') {
+    var productVersionsListId=dojo.byId('productVersionsListId').value;
+    urlPage="versionsPlanningMain.php";
+    urlParams+="&productVersionsListId="+productVersionsListId;
   }
+  var callBack=null;
   if(objectIdScreen !=''){
-    loadContent("objectDetail.php", "detailDiv", 'listForm');
+    callBack=function(){loadContent("objectDetail.php", "detailDiv", 'listForm');};
   }
+  loadContent(urlPage+urlParams, "centerDiv",null,null,null,null,null,callBack);
   loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+"&"+paramDiv+"="+paramToSend,"mainDivMenu");
   
   }

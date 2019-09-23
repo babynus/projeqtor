@@ -40,6 +40,7 @@
   $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
   $paramRightDiv=RequestHandler::getValue('paramRightDiv');
   $currentScreen='PortfolioPlanning';
+  setSessionValue('currentScreen', $currentScreen);
   $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
   $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
  $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
