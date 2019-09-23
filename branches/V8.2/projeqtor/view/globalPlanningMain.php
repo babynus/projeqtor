@@ -120,13 +120,13 @@
                   if (checkValidatedSizeRightDiv(paramDiv,paramRightDiv, paramMode)){
                     return;
                   }
-                  if(paramRightDiv=='trailing' && paramMode!='switch'){
+                  if(paramRightDiv=='trailing'){
                     saveDataToSession("contentPaneRightDetailDivWidthGlobalPlanning", dojo.byId("detailRightDiv").offsetWidth, true);
                     var newWidth=dojo.byId("detailRightDiv").offsetWidth;
                     dojo.query(".activityStreamNoteContainer").forEach(function(node, index, nodelist) {
                     node.style.maxWidth=(newWidth-30)+"px";
                     });
-                  }else if(paramMode!='switch'){
+                  }else{
                     saveDataToSession("contentPaneRightDetailDivHeightGlobalPlanning", dojo.byId("detailRightDiv").offsetHeight, true);
                     var newHeight=dojo.byId("detailRightDiv").offsetHeight;
                     if (dojo.byId("noteNoteStream")) dojo.byId("noteNoteStream").style.height=(newHeight-40)+'px';
