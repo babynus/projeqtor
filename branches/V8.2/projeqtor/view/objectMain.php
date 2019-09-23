@@ -130,13 +130,13 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
               var paramMode=<?php echo json_encode($codeModeLayout); ?>;
               hideSplitterStream (paramRightDiv);
               checkValidatedSizeRightDiv(paramDiv,paramRightDiv);
-              if(paramRightDiv=='trailing' && paramMode!='switch'){
+              if(paramRightDiv=='trailing'){
                 saveDataToSession("contentPaneRightDetailDivWidth<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetWidth, true);
                 var newWidth=dojo.byId("detailRightDiv").offsetWidth;
                 dojo.query(".activityStreamNoteContainer").forEach(function(node, index, nodelist) {
                   node.style.maxWidth=(newWidth-30)+"px";
                 });
-              }else if (paramMode!='switch'){
+              }else {
                 saveDataToSession("contentPaneRightDetailDivHeight<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetHeight, true);
                 //if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
                 var newHeight=dojo.byId("detailRightDiv").offsetHeight;
