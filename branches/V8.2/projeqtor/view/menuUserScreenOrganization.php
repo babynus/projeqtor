@@ -157,6 +157,7 @@ if($paramRightDiv=='trailing'){
        </div>
       </td>
       <td width="<?php echo (isIE())?37:35;?>px"  > 
+      <?php if (Module::isModuleActive('moduleActivityStream')) {?>
         <div id="hideStreamButtonGlobal" class="pseudoButton"  style="height:28px; position:relative;top:-5px; z-index:30; width:30px; right:0px;" 
         onclick="hideStreamMode('<?php echo ($activModeStream!='true')?'true':'false';?>','<?php echo $paramRightDiv?>','<?php echo $globalActivityStreamSize;?>',true);">
           <table >
@@ -171,6 +172,7 @@ if($paramRightDiv=='trailing'){
             </tr>
           </table>    
        </div>
+       <?php }?>
       </td>
     </tr>
     <tr>
