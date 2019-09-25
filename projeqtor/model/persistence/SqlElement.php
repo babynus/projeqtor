@@ -4564,7 +4564,7 @@ abstract class SqlElement {
     $fldType = 'id' . $class . 'Type';
     
     // When reopening item control that parent is not still closed
-    if (property_exists($this,'idle') and $this->id and $this->idle==0 and $old->idle==1) {
+    if (property_exists($this,'idle') and $this->id and $this->idle==0 and $old->idle==1 and !self::is_a($this,'PlanningElement')) {
       if (property_exists($this,'idActivity') and $this->idActivity) {
         $act=new Activity($this->idActivity,true);
         if ($act->idle==1) {
