@@ -2847,9 +2847,11 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     startBuffering();
     drawJoblistFromObject($obj,$nbCol);
     endBuffering('Joblist', $included);
-    startBuffering();
-    drawHistoryFromObjects(false);
-    endBuffering('History', $included);
+    if (substr(Parameter::getUserParameter('displayHistory'),0,3)=='YES') {
+      startBuffering();
+      drawHistoryFromObjects(false);
+      endBuffering('History', $included);
+    }
     finalizeBuffering();
   }
   
