@@ -2,7 +2,7 @@
 <project name="ProjeQtOr V8.2" default="buildFull">
 
   <property name="drive"       value="D:" />
-  <property name="version"       value="V8.2.1" />
+  <property name="version"       value="V8.2.2" />
   <property name="projName"       value="projeqtor" />
   <property name="setup.dir"     value="${drive}/ProjeQtOr/setup" />
   <property name="deploy.dir"    value="${setup.dir}/${projName}" />
@@ -222,6 +222,7 @@
   <target name="copyMisc">
     <copy todir="${setup.dir}" file="${src.dir}/tool/i18n/nls/lang.xls" />
     <copy todir="${setup.dir}" file="${src.dir}/manual/ProjeQtOr.ppt" />
+    <mkdir dir="${deploy.dir}/simulation" />
   </target>
   
   <target name="zipVersion">
