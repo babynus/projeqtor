@@ -331,7 +331,7 @@ class ResourceMain extends SqlElement {
     $real=array();
     $startDay=str_replace('-','',$startDate);
     $where="day >= '" . $startDay . "'";
-    $where.=" and idResource='" . Sql::fmtId($this->id) . "'"; 
+    $where.=" and idResource=" . Sql::fmtId($this->id); 
     $pw=new PlannedWork();
     $pwList=$pw->getSqlElementsFromCriteria(null,false,$where);
     $listTopProjectsArray=array();
