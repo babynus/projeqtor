@@ -30,31 +30,18 @@ Administration console allows to execute administration tasks on application.
 Background tasks
 ----------------
 
-.. figure:: /images/GUI/ADMIN_ZONE_BackgroundTask.png
-   :alt: Background tasks in Admin
-   
-   Background tasks is running in Administration console
-   
 Starts and stops background jobs that process and periodically checks the flags to generate the corresponding alerts, warnings, and auto-import when needed.
-
-Detection if several Cron are running simultaneously
-
-**Ability to manage Cron through the API**
-
-* projeqtor / api / Cron / check: returns the status (returns "running" or "stopped")
-* projeqtor / api / Cron / stop: stop the cron (return "stopping" or "stopped" if it does not run)
-* projeqtor / api / Cron / start: starts the cron (does not return any value - the cron does not stop)
-
 
 .. note:: 
 
    **It is the** :term:`CRON`
 
    CRON is a program that automatically runs scripts, commands, or software at a specified date and time, or a pre-defined cycle
+
+.. figure:: /images/GUI/ADMIN_ZONE_BackgroundTask.png
+   :alt: Background tasks in Admin
    
-   The program must be running to generate a cloned environment
-
-
+   Background tasks is running in Administration console
    
 .. index:: Internal alert (Send)
 .. index:: Background tasks (Internal alert)
@@ -103,11 +90,10 @@ Consistency check
 * on the consolidation of ticket work
 * on consolidation of work on activities
 * on assignments
-* search filter criteria on lists with the value 0
-* search for work related to no project (idPrpject = 0 or null)
 
 
-This feature available automatically corrects detected issues
+
+* This feature available automatically corrects detected issues
 
 .. index:: Maintenance of Data (Email)
 .. index:: Maintenance of Data (Internal alert)

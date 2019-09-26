@@ -7,11 +7,6 @@
 
 .. _concept:
 
-********
-Concepts
-********
-
-
 .. _Concept_project:
 
 Project
@@ -551,25 +546,21 @@ Planning mode
 
 Planning mode allows to define constraints on planning elements: activity, test session and milestone.
 
-.. rubric:: Milestones planning mode
+Planning modes are grouped under two types (Floating and Fixed).
 
-Planning modes are grouped under two types for milestone :
+.. rubric:: Floating
 
- .. compound:: Floating
-
-   * These planning modes have no constraint date.
-   * Planning element is floating depending on its predecessors.
-   * Planning modes: As soon as possible, Work together, Fixed duration and floating milestone.
+* These planning modes have no constraint date.
+* Planning element is floating depending on its predecessors.
+* Planning modes: As soon as possible, Work together, Fixed duration and floating milestone.
 
 
- .. compound:: Fixed
-   
-   * These planning modes have constraint date.
-   * Planning modes: Must not start before validated date, As late as possible, Regular and fixed milestone.
+.. rubric:: Fixed
 
-.. seealso:: 
+* These planning modes have constraint date.
+* Planning modes: Must not start before validated date, As late as possible, Regular and fixed milestone.
 
-   :ref:`Activity and Test session  planning modes<progress-section-planning-mode>` and :ref:`Milestone planning modes<planning-mode-milestone>`.
+More detail, see: :ref:`Activity and Test session  planning modes<progress-section-planning-mode>` and :ref:`Milestone planning modes<planning-mode-milestone>`.
 
 .. note:: 
 
@@ -581,50 +572,23 @@ Planning modes are grouped under two types for milestone :
    
    See: :ref:`activity-type`, :ref:`milestone-type` and :ref:`test-session-type` screens. 
 
-.. rubric:: Planning element planning mode
-
-several planning modes for your project elements are proposed to best manage the time spent on certain planning elements
-
-* As soon as possible
-* Work together
-* Fixed duration
-* Must not start before validated start date
-* Should end before validated end date
-* Regular between dates
-* Regular in full days
-* Regular in half days
-* Regular in quarter days
-* Recurry (on weekly basis)
-
- .. compound:: Prioritized planning elements
-
-   Planning elements are scheduled in this order of priority:
-   
-   #. Fixed date (Fixed milestone, Meeting)
-   #. Recurrent activities - Planning modes "Regular..." (Activity, Test session)
-   #. Fixed duration (Activity, Test session)
-   #. Others
 
 
-.. _minimum-threshold:
+.. raw:: latex
 
-minimum threshold & not splitted work
--------------------------------------
+    \newpage
 
-.. figure:: /images/GUI/CONCEPT_ZONE_Treshold&NoSPlit.png
-   :alt: The minimum threshold and the option not splitted work 
-   
-   The minimum threshold and the option not splitted work
-   
-When this value is set, the activity will only be scheduled on the day that the daily availability will be greater than or equal to this threshold.
 
-You also have the option to add a new property to a "can not be split" task.
+Prioritized planning elements
+-----------------------------
 
-This will require defining the minimum work to be allocated each day and thus filling in the minimum threshold field
+Planning elements are scheduled in this order of priority:
 
-planning will require finding consecutive days with at least the given value possible.
+#. Fixed date (Fixed milestone, Meeting)
+#. Recurrent activities - Planning modes "Regular..." (Activity, Test session)
+#. Fixed duration (Activity, Test session)
+#. Others
 
-.. warning:: Do not take into account the "real" work.
 
 .. _scheduling-priority:
 

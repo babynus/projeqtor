@@ -44,7 +44,6 @@ This screen is then accessible via a dedicated menu in the Acces Right
 * The humans resources
 * The external documents management 
 * The Organizations (level society) management 
-* The Cloned environements
 * The activity stream
 * and the notifications.
 
