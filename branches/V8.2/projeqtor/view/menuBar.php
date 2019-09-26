@@ -291,9 +291,9 @@
         </a>
       </div>  
     </td>
-    <td title="<?php echo i18n('menuUserParameter');?>"  style="position:relative;width:105px;">
-      <div dojoType="dijit.layout.ContentPane"  id="menuUserParameterTop" class="pseudoButton" style="position:relative;overflow:hidden; height:28px;width:100px; min-width:100px;top:-5px;" title="<?php echo i18n('menuUserParameter');?>">
-        <div dojoType="dijit.form.DropDownButton"  id="iconMenuUserPhoto" style="display: table-cell;background-color: #D3D3D3;vertical-align: middle;position:relative;min-width:100px;top:-3px" >
+    <td title="<?php echo i18n('menuUserParameter');?>"  style="position:relative;width:105px;padding-right:5px;">
+      <div dojoType="dijit.layout.ContentPane"  id="menuUserParameterTop" class="pseudoButton" style="position:relative;overflow:hidden; height:28px;width:100%; min-width:100px;top:-5px;" title="<?php echo i18n('menuUserParameter');?>">
+        <div dojoType="dijit.form.DropDownButton"  id="iconMenuUserPhoto" style="display: table-cell;background-color: #D3D3D3;vertical-align: middle;position:relative;min-width:100px;top:-3px;width:100%" >
 			    <table style="width:100%">
     			  <tr>
       			  <?php $user=getSessionUser();
