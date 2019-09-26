@@ -2271,7 +2271,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo $name;
         
         // ADD BY Marc TABARY - 2017-02-24 - ORGANIZATION MANAGER
-        if (get_class($obj)=='Resource' and $col=='idOrganization') {
+        if (get_class($obj)=='Resource' and $col=='idOrganization' and $val) {
           // Implement the rule : A manager of an organization can't be dissocied from it.
           $orga=new Organization($val);
           if ($obj->id==$orga->idResource) {
