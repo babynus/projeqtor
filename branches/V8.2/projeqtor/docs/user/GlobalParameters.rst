@@ -762,20 +762,36 @@ Tab Authentication
 
 .. rubric:: User and password
 
+.. figure:: /images/GUI/GLOBALPARAM_ZONE_PasswordPolitic.png
+   :alt: password and connection behavior
+   
+   password behavior
+
 Parameters to manage how the connection behaves
 
    .. compound:: Security constraints about users and passwords
    
-         You can choose the default profile and password 
-         
-         You can choose to block the user after x connection attempts
-         
-         You can define the behavior's password with the min length ord the validy period
-         
-         You can display or no the check box on the login screen "remember me" 
-         
-         You can initialize password on user creation and defined a new password to random value 
+      You can choose the default profile that will be assigned to any new user creation /
+      
+      You can determine the strength of the password that needs to be created:
+      
+         * Strength #1 = Size (Number of characters) *
+         * Strength #2 = Size + case (lowercase and uppercase)
+         * Strength #3 = Size + case + number (At least one number)
+         * Strength #4 = Size + case + number + special character (At least one special character)
+      
+      The minimum allowed size must be specified
+      
+      You can choose to block the user after x connection attempts
+      
+      You can set the validity period of the password
+      
+      You can display or not the check box on the login screen "remember me"
+      
+      You can initialize the password when creating the user and set a new password randomly         
+     
 
+.. index:: LDAP user
 
 .. _ldap_user:
 
@@ -789,14 +805,22 @@ All the necessary parameters for connecting your projeqtor instances with your c
    
    LDAP
    
-Set the base dn, host, port, version...
+Set the connection parameters for your LDAP users
 
-Default profile for Ldap users, message on creation new user from Ldap,  
+You can assign a default profile for LDAP users.
 
-Actions on LDAP user creation   
+You decide whether you receive an internal alert, an email, or both when creating a new LDAP user.
 
-Project to allocate automatically...
+Similarly, you define whether, at the time of creation, your LDAP user is created with a simple User status in ProjeQtOr, either with resource status, contact status, or both.
 
+And finally, if the new "user" is assigned directly to a project.
+
+
+.. tip:: 
+
+   You can change the source of your users in bulk with the Multiple Update feature.
+
+   See: :ref:`Graphical User Interface<multiple-update>`
 
 
 .. _SSO_Saml2:
@@ -841,6 +865,13 @@ When you want to disconnect from ProjeQtOr with the SSO method, the logout scree
          * Set the Entity ID, the IDP certificate, the single sign on and logout...
          * Default profile for users, message on creation new user from SAML,
          * And some parameters for users  
+         
+
+.. tip:: 
+
+   Possibility to directly access the internal login screen using the link ...projeqtorvXX/view/main.php?nosso
+   
+   
 
 .. _glabalparama_automation:
 
