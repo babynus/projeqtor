@@ -328,7 +328,6 @@ You assign resources to the pool at a given rate for a given period.
 
 * A pool can be allocated to projects like any resource.
 * A pool can be assigned to activities like resources. The difference is that when you assign a pool, you don't specify the rate but the FTE (Full Time Equivalent) assigned to the activity. It means the number of resources that can work at the same time on the activity.
-* A pool does not have a specific capacity. It's capacity is calculated from capacity and rate of assigned resources.
 * A pool can not be a user and does not have a profile as it may not connect to the application.
 
 .. tabularcolumns:: |l|l|
@@ -370,6 +369,7 @@ You assign resources to the pool at a given rate for a given period.
 
 * When a pool is assigned to an activity, any resource of the pool can input real work on the activity
 * This possibility is restricted to the period of assignment of the resource to the pool
+* The "enter real as scheduled" function does not work on resource pools.
 
 .. compound:: **Automatic decrement for assigned work**
 
