@@ -106,6 +106,7 @@ function drawTableFromObjectList($objectList) {
     if (in_array($code,$requiredFields)) $requiredClass= 'required';
 		$criteria=$criteriaRoot;
 		$criteria['parameterCode']=$code;
+		$helpTitle=str_replace('&#13',"\n",i18n('help'. ucfirst($code)));
 		// fetch the parameter saved in Database
 		if ($type=='userParameter') {
 			$obj=new Parameter();
@@ -171,14 +172,14 @@ function drawTableFromObjectList($objectList) {
 			$hasSection=true;
 	  } else {
 		  echo ($code=='paramAttachmentNum')?'<tr hidden> ':'<tr> '; // open the line level (must end with  a </td></tr>)
-		  echo '<td class="crossTableLine"><label class="label largeLabel" for="' . $code . '" title="' . i18n('help' . ucfirst($code)) . '">' 
+		  echo '<td class="crossTableLine"><label class="label largeLabel" for="' . $code . '" title="' . $helpTitle . '">' 
 		              . (($format!='photo')?i18n('param' . ucfirst($code) ) . ' :&nbsp;':'')
 		         .'</label></td><td style="position:relative">';
 			if ($format=='list') {
 				$listValues=Parameter::getList($code);
 				echo '<select dojoType="dijit.form.FilteringSelect" class="input '.$requiredClass.'" name="' . $code . '" id="' . $code . '" ';
 				echo autoOpenFilteringSelect();
-				echo ' title="' . i18n('help' . ucfirst($code)) . '" style="width:200px">';
+				echo ' title="' . $helpTitle. '" style="width:200px">';
 				if ($type=='userParameter' or $code=='versionNameAutoformat' or $code=='SAML_allow_login') {
 					echo $obj->getValidationScript($code);
 				}
@@ -191,7 +192,7 @@ function drawTableFromObjectList($objectList) {
 			} else if ($format=='time') {
 				echo '<div dojoType="dijit.form.TimeTextBox" ';
 				echo ' name="' . $code . '" id="' . $code . '"';
-				echo ' title="' . i18n('help' . ucfirst($code)) . '"';
+				echo ' title="' . $helpTitle . '"';
 				echo ' type="text" maxlength="5" ';
 				if (sessionValueExists('browserLocaleTimeFormat')) {
 				  echo ' constraints="{timePattern:\'' . getSessionValue('browserLocaleTimeFormat') . '\'}" ';
@@ -205,7 +206,7 @@ function drawTableFromObjectList($objectList) {
 			} else if ($format=='number' or $format=='longnumber') {
 				echo '<div dojoType="dijit.form.NumberTextBox" ';
 				echo ' name="' . $code . '" id="' . $code . '"';
-				echo ' title="' . i18n('help' . ucfirst($code)) . '"';
+				echo ' title="' . $helpTitle . '"';
 				echo ($format=='longnumber')?' style="width: 100px;" ':' style="width: 50px;" ';
 				//echo ' constraints="{places:\'0\'}" ';
 				echo ' class="input" ';
@@ -217,7 +218,7 @@ function drawTableFromObjectList($objectList) {
 			}else if ($format=='text' or $format=='password') {
 				echo '<div dojoType="dijit.form.TextBox" ';
 				echo ' name="' . $code . '" id="' . $code . '"';
-				echo ' title="' . i18n('help' . ucfirst($code)) . '"';
+				echo ' title="' . $helpTitle . '"';
 				echo ($code=='paramAttachmentMaxSize')?' style="width: 100px;text-align: center;" ':' style="width: 200px;" ';
 				echo ' class="input '.$requiredClass.'" ';
 				if ($format=='password') echo ' type="password" ';
@@ -271,7 +272,7 @@ function drawTableFromObjectList($objectList) {
 			}else if ($format=='longtext') {
 				echo '<textarea dojoType="dijit.form.Textarea" ';
 				echo ' name="' . $code . '" id="' . $code . '"';
-				echo ' title="' . i18n('help' . ucfirst($code)) . '"';
+				echo ' title="' . $helpTitle . '"';
 				echo ' style="width: '.$longTextWidth.';" ';
 				echo ' class="input" ';
 				echo ' >';
@@ -302,7 +303,7 @@ function drawTableFromObjectList($objectList) {
 			    echo '</script>';
 			    echo '</button>';
 			  } else if ($code=='markAlertsAsRead') {
-			    $title=i18n('helpMarkAlertsAsRead');
+			    $title=$helpTitle;
 			    echo '<button id="markAlertsAsRead" dojoType="dijit.form.Button" showlabel="true"';
 			    echo ' title="' . $title . '" style="vertical-align: middle;">';
 			    echo '<span>' . i18n('paramMarkAlertsAsRead') . '</span>';
@@ -311,7 +312,7 @@ function drawTableFromObjectList($objectList) {
 			    echo '</script>';
 			    echo '</button>';
 			  } else if ($code=='showSubscribedItems') {
-			    $title=i18n('helpShowSubscribedItems');
+			    $title=$helpTitle;
 			    echo '<button id="showSubscribedItems" dojoType="dijit.form.Button" showlabel="true"';
 			    echo 'iconClass="dijitButtonIcon iconListOfValues22" ';
 			    echo ' title="' . $title . '" style="vertical-align: middle;">';
@@ -335,7 +336,7 @@ function drawTableFromObjectList($objectList) {
 			  	  $prof=new Profile($usr->idProfile);
 			  	  echo i18n($prof->name);
 			  } else if ($code=='mailerTest') {
-			    $title=i18n('helpMailerTest');
+			    $title=$helpTitle;
 			    echo '<div style="vertical-align:top">';
 			    echo '<button id="testMail" dojoType="dijit.form.Button" showlabel="false"';
 			    echo 'iconClass="dijitButtonIcon dijitButtonIconEmail" ';
@@ -361,7 +362,7 @@ function drawTableFromObjectList($objectList) {
 			    echo '<div style="vertical-align:top">';
 			    echo '<button id="getSpMetadata" dojoType="dijit.form.Button" showlabel="true"';
 			    echo 'iconClass="dijitButtonIcon dijitButtonIconDisplay" ';
-			    echo ' title="'.i18n("helpSAML_metadata").'" ';
+			    echo ' title="'.$helpTitle.'" ';
 			    echo ' style="vertical-align: middle;">'.i18n("SAML_getSpMetadata");
 			    //echo '<span>' . i18n('paramMailerTest') . '</span>';
 			    echo '<script type="dojo/connect" event="onClick" args="evt">';
