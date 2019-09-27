@@ -393,8 +393,8 @@ Next, description of fields and information in sections will be displayed.
 
 .. _progress-section-column-def:
 
-General description
-===================
+Column general description
+==========================
 
 Below is the definition of the different columns that make up the Progress section.
 
@@ -627,7 +627,7 @@ Parts used by planning elements are:
 .. _progress-section-date-duration:
 
 Dates and duration
-""""""""""""""""""
+==================
 
 .. sidebar:: See 
 
@@ -684,8 +684,8 @@ The real end date is set when no more remaining work (done).
 
 .. _progress-section-resource:
 
-Resources (Work & Cost)
-"""""""""""""""""""""""
+Costs and works
+===============
 
 .. only:: html
 
@@ -752,7 +752,7 @@ Sum of resource total work that will be needed from start to end and the ensuing
 .. _progress-section-expense-reserve:
 
 Expense, Reserve and Total
-""""""""""""""""""""""""""
+==========================
 
 .. only:: html
 
@@ -810,9 +810,15 @@ Project reserve.
 
 .. _progress-section-miscellaneous:
 
-Progress, Expected, WBS & Priority
-""""""""""""""""""""""""""""""""""
+Steering
+========
 
+.. figure:: /images/GUI/COMMON_ZONE_SteeringSection.png
+   :alt: steering section
+   
+   Steering section
+   
+   
 .. rubric:: Progress
 
 Percentage of actual progress.
@@ -841,7 +847,7 @@ Hierarchical position in the global planning.
 
 .. rubric:: Priority
 
-Allows to define priority.
+Allows to define priority. Used by Project and Activity.
 
 By default, the value is set to "500" (medium priority).
 
@@ -857,6 +863,11 @@ Planning mode
 """""""""""""
 
 Used by Activity & Test session
+
+.. figure:: /images/GUI/COMMON_ZONE_PlanningMode.png
+   :alt: Planning modes
+   
+   Planning Modes
 
 .. rubric:: As soon as possible
 
@@ -896,128 +907,124 @@ The validated start or end date field must be set.
 * Used for management recurrent activities.
 * The validated dates fields must be set.
 
+**The Examples of the planning modes upcoming are based on 2 work days to plan on 10 days.**
 
 
-.. Warning::
-
-    Examples of the planning modes upcoming are based on 2 work days to plan on 10 days.
-
-
-.. compound:: **Regular between dates**
+ .. compound:: **Regular between dates**
  
-Work will be evenly divided between on working days. For instance, 0.2 days during 10 days.
+   Work will be evenly divided between on working days. For instance, 0.2 days during 10 days.
 
-.. compound:: **Regular in full days**
+ .. compound:: **Regular in full days**
  
-Work will be distributed on full day between on working days.
+   Work will be distributed on full day between on working days.
 
-.. list-table::
-           :widths: 30,9,9,9,9,9,9,9,9,9,9
-           :header-rows: 1
-           :stub-columns: 1
-           :align: left
+   .. list-table::
+              :widths: 30,9,9,9,9,9,9,9,9,9,9
+              :header-rows: 1
+              :stub-columns: 1
+              :align: left
+   
+              * - Day
+                - 1
+                - 2
+                - 3
+                - 4
+                - 5
+                - 6
+                - 7
+                - 8
+                - 9
+                - 10
+              * - Distribution
+                - 0
+                - 0
+                - 0
+                - 0
+                - 1
+                - 0
+                - 0
+                - 0
+                - 0
+                - 1
+   
+          
 
-           * - Day
-             - 1
-             - 2
-             - 3
-             - 4
-             - 5
-             - 6
-             - 7
-             - 8
-             - 9
-             - 10
-           * - Distribution
-             - 0
-             - 0
-             - 0
-             - 0
-             - 1
-             - 0
-             - 0
-             - 0
-             - 0
-             - 1
+ .. compound:: **Regular in half days**
 
-       
-
-.. compound:: **Regular in half days**
-
-Work will be distributed on half of the day between on working days.
+   Work will be distributed on half of the day between on working days.
 
 
-.. list-table::
-           :widths: 30,9,9,9,9,9,9,9,9,9,9
-           :header-rows: 1
-           :stub-columns: 1
-           :align: left
+   .. list-table::
+              :widths: 30,9,9,9,9,9,9,9,9,9,9
+              :header-rows: 1
+              :stub-columns: 1
+              :align: left
+   
+              * - Day
+                - 1
+                - 2
+                - 3
+                - 4
+                - 5
+                - 6
+                - 7
+                - 8
+                - 9
+                - 10
+              * - Distribution
+                - 0
+                - 0
+                - 0.5
+                - 0
+                - 0.5
+                - 0
+                - 0
+                - 0.5
+                - 0
+                - 0.5
 
-           * - Day
-             - 1
-             - 2
-             - 3
-             - 4
-             - 5
-             - 6
-             - 7
-             - 8
-             - 9
-             - 10
-           * - Distribution
-             - 0
-             - 0
-             - 0.5
-             - 0
-             - 0.5
-             - 0
-             - 0
-             - 0.5
-             - 0
-             - 0.5
-
-.. compound:: **Regular in quarter days**
+ .. compound:: **Regular in quarter days**
  
-Work will be distributed on one quarter of the day between on working days.
+   Work will be distributed on one quarter of the day between on working days.
 
-.. list-table::
-           :widths: 30,9,9,9,9,9,9,9,9,9,9
-           :header-rows: 1
-           :stub-columns: 1
-           :align: left
+   .. list-table::
+              :widths: 30,9,9,9,9,9,9,9,9,9,9
+              :header-rows: 1
+              :stub-columns: 1
+              :align: left
+   
+              * - Day
+                - 1
+                - 2
+                - 3
+                - 4
+                - 5
+                - 6
+                - 7
+                - 8
+                - 9
+                - 10
+              * - Distribution
+                - 0
+                - 0.25
+                - 0.25
+                - 0.25
+                - 0.25
+                - 0
+                - 0.25
+                - 0.25
+                - 0.25
+                - 0.25
 
-           * - Day
-             - 1
-             - 2
-             - 3
-             - 4
-             - 5
-             - 6
-             - 7
-             - 8
-             - 9
-             - 10
-           * - Distribution
-             - 0
-             - 0.25
-             - 0.25
-             - 0.25
-             - 0.25
-             - 0
-             - 0.25
-             - 0.25
-             - 0.25
-             - 0.25
-
-.. compound:: Recurring (on a weekly basis)
+ .. compound:: Recurring (on a weekly basis)
   
-This new mode allows reserving availability on recurring tasks on a weekly basis, for example 1/2 day every Monday, 1h every day, ... 
-    
-    Activities in this mode dynamically assign the work based on the start and end bounds:
-    
-       * start defined with a dependence End-Start or Start-Start
-       * end defined with an end-end dependency. This is the first planning mode in ProjeQtOr that defines activities whose assigned work is not fixed, but adapts to the duration of the project.
-
+   This new mode allows reserving availability on recurring tasks on a weekly basis, for example 1/2 day every Monday, 1h every day, ... 
+       
+       Activities in this mode dynamically assign the work based on the start and end bounds:
+       
+          * start defined with a dependence End-Start or Start-Start
+          * end defined with an end-end dependency. This is the first planning mode in ProjeQtOr that defines activities whose assigned work is not fixed, but adapts to the duration of the project.
+   
 
 .. rubric:: Fixed duration
 
@@ -1030,6 +1037,24 @@ This new mode allows reserving availability on recurring tasks on a weekly basis
 .. note::
 
    If you want fixed duration with fixed start, use "Regular between dates", or use milestone to define start.
+   
+Minimum threshold
+'''''''''''''''''
+   
+Minimum work value to plan.
+
+When this value is set, the activity will only be scheduled on the day that the daily availability will be greater than or equal to the defined threshold.
+
+
+not splitted work
+'''''''''''''''''
+
+You can add a property to an "unseparable" job.
+
+This will require setting the minimum work threshold to be assigned each day.
+
+planning will require finding consecutive days with at least the given value possible.
+
 
 .. raw:: latex
 
@@ -1040,6 +1065,11 @@ This new mode allows reserving availability on recurring tasks on a weekly basis
 Margin
 """"""
 
+.. figure:: /images/GUI/COMMON_ZONE_SteeringSection_Project.PNG
+   :alt: Steering section for projects 
+   
+   Steering section for projects
+   
 Used by Project.
 
 Displays remaining margin.
@@ -1071,12 +1101,18 @@ Calculated by the budgeted cost (resource & expense) minus the total of reassess
 
 .. _progress-section-ticket:
 
-Ticket
-""""""
-
+Planning activity
+"""""""""""""""""
+   
 Used by Activity.
 
 Allows tracking of tickets attached to the activity throught the "planning activity" field of tickets. 
+
+.. figure:: /images/GUI/COMMON_ZONE_SteeringSection_PlanningActivity.PNG
+   :alt: Steering section with Planning activity
+   
+   Steering section with Planning activity
+
 
 .. tabularcolumns:: |l|l|
 
@@ -1121,8 +1157,8 @@ Allows tracking of tickets attached to the activity throught the "planning activ
 
 .. _progress-section-milestone:
 
-Milestone
-^^^^^^^^^
+Progess for milestone
+=====================
 
 .. only:: html
 
@@ -1186,8 +1222,8 @@ Floating milestone
 
 .. _progress-section-meeting:
 
-Meeting
-^^^^^^^
+Progress for Meeting
+====================
 
 .. only:: html
 
@@ -1232,8 +1268,8 @@ See: :ref:`Scheduling priority<scheduling-priority>`.
 
 .. _predSuces-element-section:
 
-Predecessor and Sucessor element sections
------------------------------------------
+Predecessor and Successor
+-------------------------
 
 This section allows to manage dependency links between planning elements.
 
@@ -1291,9 +1327,9 @@ In the NAME field, icons are displayed to indicate the type of dependencies
 
 |iconEE| End End dependency
 
-|iconES| End start dependency
+|iconES| End Start dependency
 
-|iconEE| End End dependency
+|iconSS| Start Start dependency
 
 
 
