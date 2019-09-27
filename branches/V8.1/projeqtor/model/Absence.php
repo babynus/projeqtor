@@ -289,8 +289,8 @@ class Absence{
       		}
       		if($idle){
       			$workClose = new Work();
-      			$where3 = " refType = 'Activity' and refId = ".$actId." and idResource =".$userID." and year = ".$currentYear;
-      			$listWorkClose = $workClose->getSqlElementsFromCriteria(null,false,$where3);
+      			$where3 = " refType='Activity' and refId=".$actId." and idResource=".$userID." and year='".$currentYear."'";
+      			$listWorkClose = $workClose->getSqlElementsFromCriteria(null,false,$where3); 
       			if(!$listWorkClose){
       				continue;
       			}
