@@ -1,3 +1,42 @@
+.. |DropFile| image:: images/DropFile.png
+   :alt: Drop files area
+
+.. |iconFullScreen| image:: images/iconFullScreen.png
+   :alt: Full screen Layout
+
+.. |iconChangeLayout| image:: images/iconChangeLayout.png
+   :alt: Change Layout
+   
+.. |verticalLayout| image:: images/verticalLayout.png
+   :alt: Vertical Layout   
+
+.. |horizontalLayout| image:: images/horizontalLayout.png
+   :alt: Horizontal Layout   
+
+.. |iconLayoutList| image:: images/iconLayoutList.png
+   :alt: Layout List   
+
+.. |iconLayoutTab| image:: images/iconLayoutTab.png
+   :alt: Layout Tab  
+
+.. |HideStreamLeft| image:: images/iconHideStreamLeft.png
+   :alt: Hide left menu  
+   
+.. |HideStreamTop| image:: images/iconHideStreamTop.png
+   :alt: Hide top menu  
+   
+.. |ActivityStreamWhite| image:: images/iconActivityStreamWhite.png
+   :alt: Show/hide Activity Stream     
+
+.. |ActivityStreamClose| image:: images/iconActivityStreamClose.png
+   :alt: Show/hide Activity Stream     
+
+.. |changeActivityStream| image:: images/changeActivityStream.png
+   :alt:  Activity Stream     
+
+.. |changeActivityStreamBot| image:: images/changeActivityStreamBot.png
+   :alt: Show/hide Activity Stream     
+    
 .. |arrowCompound| image:: images/arrowCompound.png
    :alt: arrow
 
