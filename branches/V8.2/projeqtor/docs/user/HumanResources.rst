@@ -212,7 +212,9 @@ himself included
 
 If an employee does not have a manager, the administrator of the Regulated absence module acts as manager.
 
-The administrator is obligatorily a leave manager
+The administrator is obligatorily a leave manager.
+
+You can find The Regulated Leaves parameters in the Parameters menu.
 
 
 .. figure:: /images/GUI/RH_ZONE_MenuAdminManager.PNG
