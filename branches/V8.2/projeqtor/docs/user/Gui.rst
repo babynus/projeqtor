@@ -856,6 +856,7 @@ See: :ref:`thumbnails`
    * |buttonIconEmail| :ref:`Send details<email-detail>`
    * |iconSubscribe| :ref:`Subscribe detail<subscribe-detail>`
    * |buttonIconMultipleUpdate| :ref:`Multiple update<multiple-update>`
+   * |ActivityStreamWhite| :ref:`Show tchat<show-tchat>`
    * |buttonIconShowHistory| :ref:`Show history<change-history>`
    * |buttonIconShowChecklist| :ref:`Show checklist<dw-show-checklist>`
 
@@ -1113,7 +1114,7 @@ See: :ref:`thumbnails`
       
       
 
-.. index:: Multiple update 
+.. index:: Multiple update
 
 .. _multiple-update:
 
@@ -1130,6 +1131,8 @@ See: :ref:`thumbnails`
                * Selection of items can be done by selecting one or more items in the list window. |one|
                * Click to select the item, click again to deselect
                * Or use checkboxes to select/unselect all items in the list. |two|
+               * You can use too **Ctrl + click** to select several disparate elements
+               * Or **Shift + click** to select all items between the first and second click.
                * The count of items selected is displayed. |three|
       
                .. figure:: /images/GUI/GUI_ZONE_MultipleModeList.png
@@ -1159,6 +1162,21 @@ See: :ref:`thumbnails`
       
 
       :ref:`Return to details windows buttons<detail-window-button>`
+
+
+
+.. index:: show tchat
+
+.. _show-tchat:
+
+  .. compound:: |ActivityStreamWhite| Show/Hide the tchat
+  
+   Allows to show or hide the tchat for each screen of ProjeQtor.
+  
+   Behavior of the display different on each screen unlike :ref:`Screen Layout<screen-layout>` which changes the display on all screens at the same time.
+
+
+   :ref:`Return to details windows buttons<detail-window-button>`
 
 
 .. index:: Change history
@@ -1243,7 +1261,7 @@ See: :ref:`thumbnails`
 
 .. rubric:: |fourBLC| Drop file area
 
-This area allows to add an attachment file to the item.
+|DropFile| This area allows to add an attachment file to the item.
 
   * Drop the file in the area.
   * Or click on the area to select a file.
@@ -1464,12 +1482,8 @@ Info bar
          |i|  :ref:`About ProjeQtOr<ib-about-projeqtor>`    
               
             
-   |three| :ref:`Switched mode button<ib-switch-mode-button>`
-      
-   |four| :ref:`Full-screen button<ib-fullscr-button>` 
-   
-   |five| :ref:`Hide and show menu button<ib-menu-button>`
-   
+   |three| :ref:`Screen Layout<screen-layout>`
+         
 
 
 .. figure:: /images/GUI/GUI_ZONE_InfosBar.png
@@ -1661,58 +1675,78 @@ login window with many setup shortcuts.
          
          
          
-.. _ib-switch-mode-button:
+.. _screen-layout:
 
-.. rubric:: |threeBLC| Switched mode button
+.. rubric:: |threeBLC| Screen layout
 
-Allows to enable or disable switched mode that allows to switch between list and detail windows.
-      
-Window selected is displayed in "full screen" mode.
-      
-Hidden window are replaced by a gray bar.
-      
-Click on the gray bar to switch between windows. 
+In this view menu you can define how you want ProjeQtOr to display your information.
 
-.. note:: **User parameter Switched mode**
-      
-      This parameter defines whether switching mode is enabled or not.
-      
+.. figure:: /images/GUI/GUI_BOX_ScreenLayout.png
+   :alt: screen layout
+   
+   Screen layout
+   
+   
+|iconChangeLayout| **Use switched mode**
+
+Enables or disables the switched mode that switches between list and detail windows in full screen.
+Hidden windows are replaced by a gray bar. Click on it to switch between zones.
+
+|horizontalLayout| **Show list top**
+
+Allows to display the list zone on top of the screen and the details zone in the bottom
+
+|verticalLayout| **Show list left**
+
+Allows to display the list zone on left of the screen and the details zone in the right
+
+-----
+
+|iconLayoutList| **Mode List view**
+
+Allows to display the details area elements in section view (as on previous versions) 
+
+.. figure:: /images/GUI/GUI_ZONE_DisplayList.png
+   :alt: mode List view
+   
+   Mode List view
+
+|iconLayoutTab| **Mode Tab view**
+
+Allows to display the details area elements in tab view
+
+.. figure:: /images/GUI/GUI_ZONE_DisplayTAB.png
+   :alt: mode tab view
+   
+   Mode tab view
+
+-----
+
+|HideStreamLeft| **show / hide left menu**
+
+|HideStreamTop| **show / hide top menu**
+
+-----
+
+|ActivityStreamWhite| |ActivityStreamClose| **Global Tchat mode**
+
+Show or hide the chat on all screens of your session.
+
+You can show / hide the chat unitarily on each screen with the action toolbar in the detail area.
+
+See: :ref:`Unit tchat mode<show-tchat>`
+
+|changeActivityStream| |changeActivityStreamBot| **Tchat mode position**
+
+Display the tchat mode to the bottom of the screen or to the right       
+            
+-----
+
+|iconFullScreen| **Mode full screen**
+
+Pass your ProjeQtOr instance in full screen. Make your browser invisible and adapt it to the total surface of your screen.       
 
 :ref:`Return to Info bar<info-bar>`
-
-
-
-
-.. _ib-fullscr-button:
-
-.. rubric::  |fourBLC| Full-screen button
-
-One-click to displays in full Screen view.
-
-:ref:`Return to Info bar<info-bar>`
-
-
-.. _ib-menu-button:
-
-.. rubric:: |fiveBLC| Hide and show menu button
-
-Allows to hide or show the menu section.
-
-:ref:`Return to Info bar<info-bar>`
-
-.. note:: **User parameter "Hide menu"**
-
-    This parameter defines whether the menu is hidden by default.
-
-
-
-
-
-
-
-
-
-
 
 
 .. raw:: latex
