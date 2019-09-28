@@ -1208,8 +1208,8 @@ function exportGantt($list) {
 		 <FieldID>188743731</FieldID>
 		 <Value>lmk</Value>
 		 </ExtendedAttribute>*/
-		//echo '<Active>1</Active>' . $nl;
-		//echo '<Manual>0</Manual>' . $nl;
+		echo '<Active>1</Active>' . $nl;
+		echo '<Manual>1</Manual>' . $nl;
 		echo '<ActualWorkProtected>PT0H0M0S</ActualWorkProtected>' . $nl;
 		echo '<ActualOvertimeWorkProtected>PT0H0M0S</ActualOvertimeWorkProtected>' . $nl;
 		$crit=array('successorId'=>$line['id']);
