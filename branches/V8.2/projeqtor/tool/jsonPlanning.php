@@ -1371,7 +1371,7 @@
       echo '<ID>' . $cpt . '</ID>' . $nl;  // TODO : should be order of the tack in the list
       echo '<Name>' . htmlEncode($line['refname'],'xml') . '</Name>' . $nl;
       echo '<Active>1</Active>'. $nl;
-      echo '<Manual>0</Manual>'. $nl;
+      echo '<Manual>1</Manual>'. $nl;
       echo '<Type>1</Type>' . $nl; // TODO : 0=Fixed Units, 1=Fixed Duration, 2=Fixed Work.
       echo '<IsNull>0</IsNull>' . $nl;
       echo '<WBS>' . $line['wbs'] . '</WBS>' . $nl;
