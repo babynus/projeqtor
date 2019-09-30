@@ -4152,6 +4152,7 @@ tooltipAddInTextBoxNotificationDefinition: "Coloque el cursor donde desea insert
 tooltipExcludeFromGlobalPlanning: "No muestre los elementos &#34no planificables&#34 para este proyecto en la vista de planificación global.<br/> Esto significa que solo los elementos &#34estándar #34 de planificación se mostrarán &#44excluyendo acciones&#44 decisiones&#44 entregas &#44 ...",
 tooltipFixPerimeter: "When project perimeter is fixed you can't &#58 </br> - add new elements to this project</br> - delete elements from this project</br> - move elements to this project</br> - move elements from this project",
 tooltipFixPlanning: "Cuando un proyecto tiene &#planificación fija&#34 nunca se vuelve a calcular <br/> Significa que la planificación siempre será la misma sin importar lo que haga en otros proyectos <br/> Esto puede llevar a la falta de consistencia de las dependencias.",
+tooltipFixPlanningActivity: "When an activity has &#34fix planning&#34 it is never re-calculated<br/>It means the planning will always be the same whatever you do on other projects<br/>This may lead to dependencies unconsistency.",
 tooltipIndivisibility: "Make the activity not splitted for each assignment.<br/> The planning will be done on contiguous days with an availability greater than or equal to the minimum threshold.",
 tooltipLeaveContractStartDate: "If you change this date <br/> Do not forget to check that there are validated leaves for the new date",
 tooltipLevelNote: "Se nivelará la nota final a la correspondiente&#44 cualquiera que sea la suma de notas ponderadas",

@@ -4152,6 +4152,7 @@ tooltipAddInTextBoxNotificationDefinition: "İmleci &#44 alanı eklemek istediğ
 tooltipExcludeFromGlobalPlanning: "Do not show the &#34not plannable&#34 items for this project on the global planning view.<br/>.This means that only &#34standard&#34 planning items will be displayed&#44 excluding actions&#44 decisions&#44 deliveries&#44 ...",
 tooltipFixPerimeter: "When project perimeter is fixed you can't &#58 </br> - add new elements to this project</br> - delete elements from this project</br> - move elements to this project</br> - move elements from this project",
 tooltipFixPlanning: "When a project has &#34fix planning&#34 it is never re-calculated<br/>It means the planning will always be the same whatever you do on other projects<br/>This may lead to dependencies unconsistency.",
+tooltipFixPlanningActivity: "When an activity has &#34fix planning&#34 it is never re-calculated<br/>It means the planning will always be the same whatever you do on other projects<br/>This may lead to dependencies unconsistency.",
 tooltipIndivisibility: "Make the activity not splitted for each assignment.<br/> The planning will be done on contiguous days with an availability greater than or equal to the minimum threshold.",
 tooltipLeaveContractStartDate: "Bu tarihi değiştirirseniz <br/> yeni tarih için doğrulanmış izinler olup olmadığını kontrol etmeyi unutmayın",
 tooltipLevelNote: "Ağırlıklı notların toplamı ne olursa olsun&#44 karşılık gelen bir seviyeye kadar seviye notu",

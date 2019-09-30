@@ -51,6 +51,8 @@ class ActivityMain extends SqlElement {
   public $idStatus;
   public $idResource;
   public $idMilestone;
+  public $fixPlanning;
+  public $_lib_helpFixPlanning;
   public $handled;
   public $handledDate;
   public $done;
@@ -100,6 +102,11 @@ class ActivityMain extends SqlElement {
     <th field="done" width="4%" formatter="booleanFormatter" >${done}</th>
     <th field="idle" width="4%" formatter="booleanFormatter" >${idle}</th>
     ';
+  
+  private static $_fieldsTooltip = array(
+      "fixPlanning"=> "tooltipFixPlanningActivity",
+  );
+  
   private static $_fieldsAttributes = array(
       "id" => "nobr", 
       "reference" => "readonly", 
@@ -108,6 +115,7 @@ class ActivityMain extends SqlElement {
       "idActivityType" => "required", 
       "idStatus" => "required", 
       "creationDate" => "required", 
+      "fixPlanning"=>"nobr",
       "handled" => "nobr", 
       "done" => "nobr", 
       "idle" => "nobr", 
@@ -286,7 +294,14 @@ class ActivityMain extends SqlElement {
       $colScript .= '  setDefaultPlanningMode(this.value);';
       $colScript .= '  setDefaultPriority(this.value);';
       $colScript .= '</script>';
-    }
+    } else if ($colName == "fixPlanning") {
+      if(Parameter::getUserParameter('paramLayoutObjectDetail')=="tab"){
+        $colScript .= '<script type="dojo/connect" event="onChange" >';
+        $colScript .= ' dijit.byId("ActivityPlanningElement_fixPlanning").set("value",dijit.byId("fixPlanning").get("value"));';
+        $colScript .= '  formChanged();';
+        $colScript .= '</script>';
+      }
+    } 
     return $colScript;
   }
   
@@ -501,13 +516,27 @@ class ActivityMain extends SqlElement {
     $oldIdActivity = null;
     $oldTargetProductVersion = null;
     if ($this->id) {
-      $old = $this->getOld ();
+      $old = $this->getOld (false);
       $oldResource = $old->idResource;
       $oldIdle = $old->idle;
       $oldIdProject = $old->idProject;
       $oldIdActivity = $old->idActivity;
       $oldTargetProductVersion = $old->idTargetProductVersion;
+      if($old->fixPlanning and $old->ActivityPlanningElement->fixPlanning and !$this->ActivityPlanningElement->fixPlanning){
+        $this->fixPlanning = 0;
+        $this->ActivityPlanningElement->fixPlanning = 0;
+      }
+      if($old->idStatus != $this->idStatus){
+        $status = new Status ($this->idStatus);
+        if($status->fixPlanning and !$this->fixPlanning){
+          $this->fixPlanning = 1;
+          $this->ActivityPlanningElement->fixPlanning = 1;
+        }
+      }
     }
+    
+    if($this->fixPlanning and !$this->ActivityPlanningElement->fixPlanning)$this->ActivityPlanningElement->fixPlanning=1;
+    if(!$this->fixPlanning and $this->ActivityPlanningElement->fixPlanning)$this->fixPlanning=1;
     
     // #305 : need to recalculate before dispatching to PE
     $this->recalculateCheckboxes ();
@@ -720,11 +749,17 @@ class ActivityMain extends SqlElement {
     return $result;
   }
   public function setAttributes() {
+    if(Parameter::getUserParameter('paramLayoutObjectDetail')=="col"){
+      self::$_fieldsAttributes["fixPlanning"]='hidden';
+    }
     if (Parameter::getGlobalParameter('manageMilestoneOnItems') != 'YES' and (! property_exists('Activity','_customFields') or ! in_array('idMilestone', Activity::$_customFields))) {
       self::$_fieldsAttributes["idMilestone"]='hidden';
     }
   }
-
+  
+  protected function getStaticFieldsTooltip() {
+    return self::$_fieldsTooltip;
+  }
   
 // MTY - LEAVE SYSTEM  
   /**
