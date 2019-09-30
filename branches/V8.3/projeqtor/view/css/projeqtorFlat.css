@@ -776,6 +776,14 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatBlue .iconLayoutTab32 { background-image: url(customIcons/blue/iconLayoutTab.png);	background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;} } 
 .ProjeQtOrFlatBlue .iconLayoutTab22 { background-image: url(customIcons/blue/iconLayoutTab.png);	background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .iconLayoutTab16 { background-image: url(customIcons/blue/iconLayoutTab.png); 	background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatBlue .iconChangeRequest32 { background-image: url(customIcons/blue/iconChangeRequest.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatBlue .iconChangeRequest22 { background-image: url(customIcons/blue/iconChangeRequest.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatBlue .iconChangeRequest16 { background-image: url(customIcons/blue/iconChangeRequest.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatBlue .iconChangeRequestType32 { background-image: url(customIcons/blue/iconChangeRequestType.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatBlue .iconChangeRequestType22 { background-image: url(customIcons/blue/iconChangeRequestType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatBlue .iconChangeRequestType16 { background-image: url(customIcons/blue/iconChangeRequestType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 /* D */
 
 /* BEGIN - ADD qCazelles - Requirement dashboard - Ticket 90 */
@@ -2224,6 +2232,14 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatRed .iconLayoutTab32 { background-image: url(customIcons/red/iconLayoutTab.png);	background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;} } 
 .ProjeQtOrFlatRed .iconLayoutTab22 { background-image: url(customIcons/red/iconLayoutTab.png);	background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatRed .iconLayoutTab16 { background-image: url(customIcons/red/iconLayoutTab.png); 	background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatRed .iconChangeRequest32 { background-image: url(customIcons/red/iconChangeRequest.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatRed .iconChangeRequest22 { background-image: url(customIcons/red/iconChangeRequest.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatRed .iconChangeRequest16 { background-image: url(customIcons/red/iconChangeRequest.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatRed .iconChangeRequestType32 { background-image: url(customIcons/red/iconChangeRequestType.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatRed .iconChangeRequestType22 { background-image: url(customIcons/red/iconChangeRequestType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatRed .iconChangeRequestType16 { background-image: url(customIcons/red/iconChangeRequestType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 /* D */
 
 /* BEGIN - ADD qCazelles - Requirement dashboard - Ticket 90 */
@@ -3670,6 +3686,13 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconLayoutTab22 { background-image: url(customIcons/green/iconLayoutTab.png);	background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconLayoutTab16 { background-image: url(customIcons/green/iconLayoutTab.png); 	background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatGreen .iconChangeRequest32 { background-image: url(customIcons/green/iconChangeRequest.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGreen .iconChangeRequest22 { background-image: url(customIcons/green/iconChangeRequest.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGreen .iconChangeRequest16 { background-image: url(customIcons/green/iconChangeRequest.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatGreen .iconChangeRequestType32 { background-image: url(customIcons/green/iconChangeRequestType.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGreen .iconChangeRequestType22 { background-image: url(customIcons/green/iconChangeRequestType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGreen .iconChangeRequestType16 { background-image: url(customIcons/green/iconChangeRequestType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 /* D */
 
 /* BEGIN - ADD qCazelles - Requirement dashboard - Ticket 90 */
@@ -5115,6 +5138,13 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconCancel24 { background-image: url(customIcons/grey/iconUndo.png);  background-repeat: no-repeat; width: 24px; height: 24px; background-size: 24px 24px;}
 .ProjeQtOrFlatGrey .iconCancel32 { background-image: url(customIcons/grey/iconUndo.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 
+.ProjeQtOrFlatGrey .iconChangeRequest32 { background-image: url(customIcons/grey/iconChangeRequest.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGrey .iconChangeRequest22 { background-image: url(customIcons/grey/iconChangeRequest.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGrey .iconChangeRequest16 { background-image: url(customIcons/grey/iconChangeRequest.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatGrey .iconChangeRequestType32 { background-image: url(customIcons/grey/iconChangeRequestType.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGrey .iconChangeRequestType22 { background-image: url(customIcons/grey/iconChangeRequestType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGrey .iconChangeRequestType16 { background-image: url(customIcons/grey/iconChangeRequestType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 /* D */
 
 /* BEGIN - ADD qCazelles - Requirement dashboard - Ticket 90 */

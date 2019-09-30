@@ -2885,6 +2885,7 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
       echo '<br/>';
     }
   }
+  debugLog($paneDescription);
   endBuffering($prevSection, $included);
   $sectionName=$section;
   if(strstr($sectionName,'Link_')){
