@@ -29,15 +29,17 @@ CREATE TABLE `${prefix}changerequest` (
   `idBusinessFeature` int(12) unsigned DEFAULT NULL,
   `idMilestone` int(12) unsigned DEFAULT NULL,
   `idChangeRequestType`  int(12) unsigned DEFAULT NULL,
-   `idRunStatus` int(12) unsigned DEFAULT NULL,
+  `idRunStatus` int(12) unsigned DEFAULT NULL,
   `name` varchar(200) DEFAULT NULL,
   `externalReference` varchar(100) DEFAULT NULL,
   `idUser` int(12) unsigned DEFAULT NULL,
   `creationDateTime` datetime DEFAULT NULL,
-  `description` varchar(4000) DEFAULT NULL,
-  `idChangeRequest` int(12) unsigned DEFAULT NULL,
   `idStatus` int(12) unsigned DEFAULT NULL,
   `idResource` int(12) unsigned DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `result` mediumtext DEFAULT NULL,
+  `reason` mediumtext DEFAULT NULL,
+  `potentialBenefit` mediumtext DEFAULT NULL,
   `handled` int(1) unsigned DEFAULT '0',
   `handledDate` date DEFAULT NULL,
   `done` int(1) unsigned DEFAULT '0',
@@ -47,25 +49,15 @@ CREATE TABLE `${prefix}changerequest` (
   `idTargetProductVersion` int(12) unsigned DEFAULT NULL,
   `idTargetComponentVersion` int(12) unsigned DEFAULT NULL,
   `plannedWork` decimal(14,5) UNSIGNED DEFAULT '0',
+  `analysis` mediumtext DEFAULT NULL,
   `idUrgency` int(12) unsigned DEFAULT NULL,
   `idCriticality` int(12) unsigned DEFAULT NULL,
   `idFeasibility` int(12) unsigned DEFAULT NULL,
   `idRiskLevel` int(12) unsigned DEFAULT NULL,
-  `result` varchar(4000) DEFAULT NULL,
-  `idLocker`  int(12) unsigned DEFAULT NULL,
-  `lockedDate` date DEFAULT NULL,
-  `locked` int(1) unsigned default '0',
   `initialDueDate` date DEFAULT NULL,
   `actualDueDate` date DEFAULT NULL,
   `cancelled` INT(1) UNSIGNED DEFAULT '0',
   `idPriority` int(12) unsigned DEFAULT NULL,
-  `countPassed` int(5) default 0,
-  `countFailed` int(5) default 0,
-  `countBlocked` int(5) default 0,
-  `countPlanned` int(5) default 0,
-  `countLinked` int(5) default 0,
-  `countIssues` int(5) default 0,
-  `countTotal` int(5) default 0,
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 CREATE INDEX changerequestProject ON `${prefix}changerequest` (idProject);
@@ -73,7 +65,6 @@ CREATE INDEX changerequestProduct ON `${prefix}changerequest` (idProduct);
 CREATE INDEX changerequestVersion ON `${prefix}changerequest` (idVersion);
 CREATE INDEX changerequestType ON `${prefix}changerequest` (idchangerequestType);
 CREATE INDEX changerequestUser ON `${prefix}changerequest` (idUser);
-CREATE INDEX changerequestchangerequest ON `${prefix}changerequest` (idChangeRequest);
 CREATE INDEX changerequestStatus ON `${prefix}changerequest` (idStatus);
 CREATE INDEX changerequestResource ON `${prefix}changerequest` (idResource);
 CREATE INDEX changerequestTargetVersion ON `${prefix}changerequest` (idTargetProductVersion);
