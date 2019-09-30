@@ -4152,6 +4152,7 @@ tooltipAddInTextBoxNotificationDefinition: "Postavite pokazivač na mjesto gdje 
 tooltipExcludeFromGlobalPlanning: "Nemoj prikazivati ​​predmete  &#34koji ne mogu planirati  &#34za ovaj projekt u cjelokupnom rasporedu. <br/> To znači da će samo raspored  &#34standard  &#34biti prikazan  &#44bez akcija &#44odluka &#44isporuka&#44...",
 tooltipFixPerimeter: "Kada je perimetar projekta fiksan ne možete &#58 </br> - dodavati nove elemente ovom projektu u003c/ bru003e - brisati elemente ovog projekta </br> - premjestiti elemente u ovaj projekt </br> - premještanje stavki izvan ovog projekta",
 tooltipFixPlanning: "Kada je projekt &#34fiksirano planiran&#34 njegov raspored nikad nije izračunat. <br/> To znači da će raspored uvijek biti nepromijenjen. <br/> To može dovesti do nedosljednosti u ovisnostima.",
+tooltipFixPlanningActivity: "When an activity has &#34fix planning&#34 it is never re-calculated<br/>It means the planning will always be the same whatever you do on other projects<br/>This may lead to dependencies unconsistency.",
 tooltipIndivisibility: "Neka aktivnost nije podijeljena za svaki zadatak.<br/> Planiranje će se obavljati u neposrednim danima s raspoloživošću većom ili jednakom minimalnom pragu.",
 tooltipLeaveContractStartDate: "Ako promijenite ovaj datum <br/> Ne zaboravite provjeriti postoje li stečena prava za novi datum",
 tooltipLevelNote: "Ova opcija omogućuje vam da smanjite konačni rezultat na određenu razinu&#44 bez obzira na zbroj vaganih rezultata",

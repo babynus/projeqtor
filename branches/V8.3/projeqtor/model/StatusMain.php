@@ -39,6 +39,8 @@ class StatusMain extends SqlElement {
   public $setIntoserviceStatus; //ADD qCazelles - Ticket #53
   public $setIdleStatus;
   public $setCancelledStatus;
+  public $fixPlanning;
+  public $_lib_helpFixPlanning;
   public $color;
   public $sortOrder=0;
   public $idle;
@@ -64,10 +66,15 @@ class StatusMain extends SqlElement {
     <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
     ';
 
+  private static $_fieldsTooltip = array(
+      "fixPlanning"=> "tooltipFixPlanningActivity",
+  );
+  
   private static $_fieldsAttributes=array(
 // MTY - LEAVE SYSTEM        
       "setSubmittedLeave"=>"hidden",
       "setRejectedLeave"=>"hidden",
+      "fixPlanning"=>"nobr",
       "setAcceptedLeave"=>"hidden",
 // MTY - LEAVE SYSTEM  
       "isCopyStatus"=>"hidden", 
@@ -204,7 +211,9 @@ class StatusMain extends SqlElement {
       return $result;
   }
   
-  
+  protected function getStaticFieldsTooltip() {
+    return self::$_fieldsTooltip;
+  }
   
   /* ========================================================================================
   * VALIDATION SCRIPT

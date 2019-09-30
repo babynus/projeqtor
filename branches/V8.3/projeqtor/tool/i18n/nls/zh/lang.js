@@ -4152,6 +4152,7 @@ tooltipAddInTextBoxNotificationDefinition: "光标放到需插入字段处并点
 tooltipExcludeFromGlobalPlanning: "在项目的全局计划中不显示 &#34不可计划&#34 项.<br/>.即仅显示&#34标准&#34 计划项，&#44 排除措施&#44 决策s&#44 交付&#44 ...",
 tooltipFixPerimeter: "When project perimeter is fixed you can't &#58 </br> - add new elements to this project</br> - delete elements from this project</br> - move elements to this project</br> - move elements from this project",
 tooltipFixPlanning: "项目计划为 &#34固定计划&#34 时，该项目不会执行计划重算<br/>即无论同时在其他项目上执行任何操作，本项目计划都将保持不变<br/>由此可能导致关联不一致.",
+tooltipFixPlanningActivity: "When an activity has &#34fix planning&#34 it is never re-calculated<br/>It means the planning will always be the same whatever you do on other projects<br/>This may lead to dependencies unconsistency.",
 tooltipIndivisibility: "Make the activity not splitted for each assignment.<br/> The planning will be done on contiguous days with an availability greater than or equal to the minimum threshold.",
 tooltipLeaveContractStartDate: "If you change this date <br/> Do not forget to check that there are validated leaves for the new date",
 tooltipLevelNote: "Will level final note to corresponding one&#44; whatever the sum of weighted notes",

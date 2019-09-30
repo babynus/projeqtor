@@ -81,3 +81,7 @@ CREATE INDEX changerequestUrgency ON `${prefix}changerequest` (idUrgency);
 CREATE INDEX changerequestCriticality ON `${prefix}changerequest` (idCriticality);
 CREATE INDEX changerequestFeasibility ON `${prefix}changerequest` (idFeasibility);
 CREATE INDEX requiremenRiskLevel ON `${prefix}changerequest` (idRiskLevel);
+
+ALTER TABLE `${prefix}activity` ADD COLUMN `fixPlanning` int(1) unsigned default '0';
+ALTER TABLE `${prefix}planningelement` ADD COLUMN `fixPlanning` int(1) unsigned default '0';
+ALTER TABLE `${prefix}status` ADD COLUMN `fixPlanning` int(1) unsigned default '0';
