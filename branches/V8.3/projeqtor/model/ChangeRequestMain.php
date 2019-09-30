@@ -49,15 +49,16 @@ class ChangeRequestMain extends SqlElement {
   public $initialDueDate;
   public $actualDueDate;
   public $description;
+  public $reason;
+  public $potentialBenefit;
   public $_sec_treatment;
-  public $idChangeRequest;
   public $idStatus;
   public $idResource;
   public $idCriticality;
   public $idFeasibility;
   public $idRiskLevel;
   public $idPriority; 
-  //public $plannedWork;
+  public $plannedWork;
   public $idTargetProductVersion;
   public $idTargetComponentVersion;  
   public $idMilestone;
@@ -70,37 +71,7 @@ class ChangeRequestMain extends SqlElement {
   public $cancelled;
   public $_lib_cancelled;
   public $result;
-  public $_sec_Lock;
-  public $_spe_lockButton;
-  public $locked;
-  public $idLocker;
-  public $lockedDate;
-  public $_sec_testCaseSummary;
-  public $_tab_5_2_smallLabel = array('countTotal','countPlanned', 'countPassed', 'countBlocked', 'countFailed', 'workElementCount','');
-  public $countTotal;
-  public $countPlanned;
-  public $countPassed;
-   public $countBlocked;
-  public $countFailed;
-  public $_void_1;
-  public $pctPlanned;
-  public $pctPassed;
-   public $pctBlocked;
-  public $pctFailed;
-  public $idRunStatus;
- public $_tab_5_1_smallLabel = array('testSummary','', '','','countIssues','');
-  public $runStatusIcon;
-  public $runStatusName;
-  public $_void_5;
-  public $_void_6;
-  public $countIssues;
-  public $countLinked;
-  public $_sec_predecessor;
-  public $_Dependency_Predecessor=array();
-  public $_sec_successor;
-  public $_Dependency_Successor=array();
-  public $_sec_Link_TestCase;
-  public $_Link_TestCase=array();
+  public $analysis;
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
@@ -114,7 +85,6 @@ class ChangeRequestMain extends SqlElement {
     <th field="nameChangeRequestType" width="8%" >${type}</th>
     <th field="name" width="20%" >${name}</th>
     <th field="colorNameStatus" width="10%" formatter="colorNameFormatter">${idStatus}</th>
-    <th field="colorNameRunStatus" width="6%" formatter="colorNameFormatter">${testSummary}</th>
     <th field="nameResource" formatter="thumbName22" width="10%" >${responsible}</th>
     <th field="nameTargetProductVersion" width="10%" >${idTargetProductVersion}</th>
     <th field="handled" width="5%" formatter="booleanFormatter" >${handled}</th>
@@ -123,34 +93,15 @@ class ChangeRequestMain extends SqlElement {
     ';
   private static $_fieldsAttributes=array("id"=>"nobr", "reference"=>"readonly",
                                   "name"=>"required", 
-                                  "idChangeRequestType"=>"required",
                                   "idStatus"=>"required",
                                   "creationDateTime"=>"required",
                                   "handled"=>"nobr",
                                   "done"=>"nobr",
                                   "idle"=>"nobr",
                                   "idUser"=>"hidden",
-                                  "countLinked"=>"hidden",
-                                  "countTotal"=>"display",
-                                  "countPlanned"=>"display",
-                                  "countPassed"=>"display",
-                                  "countFailed"=>"display",
-                                   "countBlocked"=>"display",
-                                  "countIssues"=>"display",
-                                  "noDisplay1"=>"calculated,hidden",
-                                  "noDisplay2"=>"calculated,hidden",
-                                  "pctPlanned"=>"calculated,display,html",
-                                  "pctPassed"=>"calculated,display,html",
-                                  "pctBlocked"=>"calculated,display,html",
-                                  "pctFailed"=>"calculated,display,html",
-                                  "noDisplay3"=>"calculated,hidden",
-                                  "noDisplay4"=>"calculated,hidden",
                                   "idRunStatus"=>"display,html,hidden,forceExport",
                                   "runStatusIcon"=>"calculated,display,html",
                                   "runStatusName"=>"calculated,display,html",
-                                  "locked"=>"readonly",
-                                  "idLocker"=>"readonly",
-                                  "lockedDate"=>"readonly",
                                   "idleDate"=>"nobr",
                                   "cancelled"=>"nobr"
   );  
@@ -158,9 +109,8 @@ class ChangeRequestMain extends SqlElement {
   private static $_colCaptionTransposition = array('idResource'=> 'responsible',
                                                    'idTargetProductVersion'=>'targetVersion', 
                                                    'idRiskLevel'=>'technicalRisk',
-                                                   //'plannedWork'=>'estimatedEffort',
+                                                   'plannedWork'=>'estimatedEffort',
                                                    'idContact' => 'requestor',
-                                                  //'idRunStatus'=>'testSummary'
                                                    );
   
   private static $_databaseColumnName = array();
@@ -173,7 +123,6 @@ class ChangeRequestMain extends SqlElement {
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
     if ($withoutDependentObjects) return; 
-    //$this->getCalculatedItem();
   }
 
    /** ==========================================================================
@@ -275,32 +224,6 @@ class ChangeRequestMain extends SqlElement {
       $result.="<br/>" . i18n('messageMandatory',array(i18n('colIdProject') . " " . i18n('colOrProduct')));
     }
     
-    if ($this->id and $this->id==$this->idChangeRequest) {
-      $result.='<br/>' . i18n('errorHierarchicLoop');
-    } else if (trim($this->idChangeRequest)){
-      $parentList=array();
-    	$parent=new ChangeRequest($this->idChangeRequest);
-    	while ($parent->idChangeRequest) {
-    		$parentList[$parent->idChangeRequest]=$parent->idChangeRequest;
-    		$parent=new ChangeRequest($parent->idChangeRequest);
-    	}
-      if (array_key_exists($this->id,$parentList)) {
-        $result.='<br/>' . i18n('errorHierarchicLoop');
-      }
-    }
-    if (trim($this->idChangeRequest)) {
-      $parentChangeRequest=new ChangeRequest($this->idChangeRequest);
-      if ( trim($this->idProduct)) {
-        if (trim($parentChangeRequest->idProduct)!=trim($this->idProduct)) {
-          $result.='<br/>' . i18n('msgParentChangeRequestInSameProjectProduct');
-        }
-      } else {
-        if (trim($parentChangeRequest->idProject)!=trim($this->idProject)) {
-          $result.='<br/>' . i18n('msgParentChangeRequestInSameProjectProduct');
-        }
-      }
-    }
-    
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
       $result.=$defaultControl;
@@ -312,124 +235,10 @@ class ChangeRequestMain extends SqlElement {
   }
   
   public function save() {
-  	//if (! trim($this->idRunStatus)) $this->idRunStatus=5;
+  	if (! trim($this->idRunStatus)) $this->idRunStatus=5;
   	$result=parent::save();
     return $result;
   }
   
-  public function drawSpecificItem($item){
-    global $print;
-    $result="";
-    if ($item=='lockButton' and !$print) {
-      if ($this->locked) {
-        $canUnlock=false;
-        $user=getSessionUser();
-        if ($user->id==$this->idLocker) {
-          $canUnlock=true;
-        } else {
-          $right=SqlElement::getSingleSqlElementFromCriteria('habilitationOther', array('idProfile'=>$user->getProfile($this), 'scope'=>'requirement'));
-          if ($right) {
-            $list=new ListYesNo($right->rightAccess);
-            if ($list->code=='YES') {
-              $canUnlock=true;
-            }
-          }  
-        }
-        if ($canUnlock) {
-          $result .= '<tr><td></td><td>';
-          $result .= '<button id="unlockRequirement" dojoType="dijit.form.Button" showlabel="true"'; 
-          $result .= ' title="' . i18n('unlockRequirement') . '" >';
-          $result .= '<span>' . i18n('unlockRequirement') . '</span>';
-          $result .=  '<script type="dojo/connect" event="onClick" args="evt">';
-          $result .=  '  unlockRequirement();';
-          $result .= '</script>';
-          $result .= '</button>';
-          $result .= '</td></tr>';
-        }
-      } else { }
-      $result .= '<input type="hidden" id="idCurrentUser" name="idCurrentUser" value="' . getSessionUser()->id . '" />';
-      return $result;
-    }
-  }
-  
-   
-  public function getCalculatedItem(){
-     if ($this->countTotal!=0) {
-     	$this->pctPlanned='<i>('.htmlDisplayPct(round($this->countPlanned/$this->countTotal*100)).')</i>';
-     	$this->pctPassed='<i>('.htmlDisplayPct(round($this->countPassed/$this->countTotal*100)).')</i>';
-      $this->pctFailed='<i>('.htmlDisplayPct(round($this->countFailed/$this->countTotal*100)).')</i>';
-      $this->pctBlocked='<i>('.htmlDisplayPct(round($this->countBlocked/$this->countTotal*100)).')</i>';
-     }
-     if ($this->id) {
-       $name=SqlList::getNameFromId('RunStatus', $this->idRunStatus,false);
-       $this->runStatusName=i18n($name);
-       $this->runStatusIcon='<img src="../view/css/images/icon'.ucfirst($name).'22.png" />';
-     }
-  }
-  
-  public function updateDependencies() {
-  	$this->_noHistory=true;
-  	$listCrit='idTestCase in (0';
-  	$this->countLinked=0;
-  	//$this->countIssues=0;
-    foreach ($this->_Link as $link) {
-      if ($link->ref2Type=='TestCase') {
-        $listCrit.=','.Sql::fmtId($link->ref2Id);
-        $this->countLinked+=1;
-      }
-      if ($link->ref2Type=='Ticket') {
-        $this->countIssues+=1;
-      }
-    }
-    $listCrit.=")";
-    $tcr=new TestCaseRun();
-    $listTcr=$tcr->getSqlElementsFromCriteria(null, false, $listCrit,  "statusDateTime asc");
-    $this->countBlocked=0;
-    $this->countFailed=0;
-    $this->countPassed=0;
-    $this->countPlanned=0;
-    $this->countTotal=0;
-    $countTotal=0;
-    $lstStatus=array();
-    // Fixing : take into account only last test cas run for a test case
-    foreach($listTcr as $tcr) {
-    	$countTotal+=1;
-    	$lstStatus[$tcr->idTestCase]=$tcr;
-    }
-    // adding taking into account sub-ChangeRequests for top ChangeRequest
-    $lstReq=$this->getSqlElementsFromCriteria(array('idChangeRequest'=>$this->id));
-    $lstStatus=array_merge($lstStatus,$lstReq);
-    foreach ($lstStatus as $tcr) { // thanks to previous treatment, this list includes only last status of test case
-    	$this->countTotal+=1;
-      if ($tcr->idRunStatus==1) {
-        $this->countPlanned+=1;
-      }
-      if ($tcr->idRunStatus==2) {
-        $this->countPassed+=1;
-      }
-      if ($tcr->idRunStatus==3) {
-        $this->countFailed+=1;
-      }
-      if ($tcr->idRunStatus==4) {
-        $this->countBlocked+=1;
-      }
-    }
-    if ($this->countFailed>0) {
-      $this->idRunStatus=3; // failed
-    } else if ($this->countBlocked>0) {
-      $this->idRunStatus=4; // blocked
-    } else if ($this->countPlanned>0) {
-      $this->idRunStatus=1; // planned
-    } else if ($this->countTotal==0) {
-      $this->idRunStatus=5; // empty
-    } else {
-      $this->idRunStatus=2; // passed
-    }  
-    $this->save();
-    if ($this->idChangeRequest) {
-    	$top=new ChangeRequest($this->idChangeRequest);
-    	$top->updateDependencies();
-    }
-  }
 }
 ?>
