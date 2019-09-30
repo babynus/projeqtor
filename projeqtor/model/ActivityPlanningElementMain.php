@@ -79,6 +79,8 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $minimumThreshold;
   public $_label_indivisibility;
   public $indivisibility;
+  public $fixPlanning;
+  public $_lib_helpFixPlanning;
   public $_tab_5_1_smallLabel = array('workElementCount', 'estimated', 'real', 'left', '', 'ticket');
   public $workElementCount;
   public $workElementEstimatedWork;
@@ -125,12 +127,14 @@ class ActivityPlanningElementMain extends PlanningElement {
     "_spe_isOnCriticalPath"=>"",
     "_label_indivisibility"=>"",
     "indivisibility"=>"",
-    "minimumThreshold"=>""
+    "minimumThreshold"=>"",
+    "fixPlanning"=>"nobr"
   );
 
   private static $_fieldsTooltip = array(
   		"minimumThreshold"=> "tooltipMinimumThreshold",
   		"indivisibility"=> "tooltipIndivisibility",
+      "fixPlanning"=> "tooltipFixPlanningActivity",
   );
   
   private static $_databaseTableName = 'planningelement';
@@ -339,7 +343,18 @@ class ActivityPlanningElementMain extends PlanningElement {
   	   }
   	}
   }
-  
+  public function getValidationScript($colName) {
+    $colScript = parent::getValidationScript ( $colName );
+    if ($colName == "fixPlanning") {
+      if(Parameter::getUserParameter('paramLayoutObjectDetail')=="tab"){
+        $colScript .= '<script type="dojo/connect" event="onChange" >';
+        $colScript .= ' dijit.byId("fixPlanning").set("value",dijit.byId("ActivityPlanningElement_fixPlanning").get("value"));';
+        $colScript .= '  formChanged();';
+        $colScript .= '</script>';
+      }
+    }
+    return $colScript;
+  }
   public function drawSpecificItem($item) {
     if ($item=='showTickets') {
       echo '<div id="' . $item . 'Button" ';

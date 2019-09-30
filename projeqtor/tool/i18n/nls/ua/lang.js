@@ -4152,6 +4152,7 @@ tooltipAddInTextBoxNotificationDefinition: "Помістіть курсор&#44;
 tooltipExcludeFromGlobalPlanning: "Не показувати &#34не планабельні&#34 елементи для цього проекту в глобальному режимі планування.<br/>Це означає&#44 що відображатимуться лише &#34стандартні&#34 елементи планування&#44 без операцій (actions)&#44 рішення&#44 доставки(deliveries)&#44 ..",
 tooltipFixPerimeter: "Коли межі проекту зафіксовано&#44 ви не можете &#58 </br> додати нові елементи до цього проекту</br> -  видалити елементи з цього проекту</br> -  перемістити елементи до цього проекту</br> -  перемістити елементи з цього проекту",
 tooltipFixPlanning: "Коли проект  &#34фіксований&#34 його графік ніколи не перераховується.<br/> Це означає&#44 що графік завжди буде незмінним.<br/>Це може привести до невідповідності залежностей.",
+tooltipFixPlanningActivity: "When an activity has &#34fix planning&#34 it is never re-calculated<br/>It means the planning will always be the same whatever you do on other projects<br/>This may lead to dependencies unconsistency.",
 tooltipIndivisibility: "Make the activity not splitted for each assignment.<br/> The planning will be done on contiguous days with an availability greater than or equal to the minimum threshold.",
 tooltipLeaveContractStartDate: "If you change this date <br/> Do not forget to check that there are validated leaves for the new date",
 tooltipLevelNote: "Зрівняти останню ноту на відповідну ноту&#44 незалежно від суми зважених нот.",
