@@ -36,6 +36,7 @@ class Assignment extends SqlElement {
   public $refType;
   public $refId;
   public $idResource;
+  public $uniqueResource;
   public $idRole;
   public $comment;
   public $assignedWork;
