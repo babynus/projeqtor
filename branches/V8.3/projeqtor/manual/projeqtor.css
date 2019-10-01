@@ -171,22 +171,13 @@ html, body {
     #buttonDiv {  
       border-bottom: 1px solid #ffffff;
     }
-    #resultDiv {
+    #resultDivMain {
       background: #fff url(images/buttonEnabled.png) repeat-x bottom left;
       color: #555555; font-weight: bold;
       text-align: center;
       vertical-align: middle;
       margin: 4px 8px 4px 8px; padding: 5px;
       opacity:0.0;filter:alpha(opacity=00);
-    }
-    #planResultDiv {
-      background: #fff url(images/buttonEnabled.png) repeat-x bottom left;
-      color: #555555; font-weight: bold;
-      text-align: center;
-      vertical-align: middle;
-      margin: 2px 8px 2px 8px; padding: 5px;
-      opacity:0.0;filter:alpha(opacity=00);
-      overflow: hidden;
     }
     #formDiv {
       overflow: auto; 
@@ -2365,9 +2356,6 @@ label, .label {
 .dijitTitlePane .dijitTitlePaneTitle {
   /*background: url(images/titleBarDark.png) #dedede top repeat-x !important;*/
 }
-#resultDivMultiple span.messageOK, #resultDivMultiple span.messageERROR {
+#resultDivMultiple span.messageOK, #resultDivMultiple span.messageERROR, #resultDivMultiple span.messageWARNING {
 	text-shadow: 1px 1px #FFFFFF;
-}
-#resultDivMultiple span.messageWARNING {
-  text-shadow: 1px 1px #000000;
 }
