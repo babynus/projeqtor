@@ -122,6 +122,13 @@ $resource=new ResourceAll($idResource);
              </td> 
              <?php } ?>
            </tr>
+           <tr id="assignmentUniqueSelection" style="<?php echo ($resource->isResourceTeam)?"":"display:none";?>">
+            <td class="dialogLabel">&nbsp;</td>     
+            <td>
+              <input title="<?php echo i18n('helpUniqueResource');?>" dojoType="dijit.form.CheckBox" name="assignmentUnique" id="assignmentUnique" <?php echo ($assignmentObj->uniqueResource)?"checked=checked":"";?> />
+              <label title="<?php echo i18n('helpUniqueResource');?>" style="float:none" for="attendantIsOptional" ><?php echo i18n("uniqueResource"); ?></label>
+            </td>          
+           </tr>
            <tr>
              <td class="dialogLabel" >
                <label for="assignmentIdRole" ><?php echo i18n("colIdRole");?>&nbsp;:&nbsp;</label>
@@ -424,3 +431,8 @@ $resource=new ResourceAll($idResource);
       </td>
     </tr>
   </table>
+<?php if ($assignmentObj->uniqueResource and $assignmentObj->id) {
+  echo '<div style="position:relative;top:10px;width:80%;left:10%;">';
+  AssignmentSelection::drawListForAssignment($assignmentObj->id);
+  echo '</div><br/>';
+}?>
