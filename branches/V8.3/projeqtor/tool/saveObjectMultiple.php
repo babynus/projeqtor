@@ -344,6 +344,9 @@ foreach ($selectList as $id) {
   }
   if ($fixPlanning and $fixPlanning!="" and property_exists($item,'fixPlanning')) {
     $item->fixPlanning=($fixPlanning=='ON')?1:0;
+    if(get_class($item)=='Activity'){
+      $item->ActivityPlanningElement->fixPlanning =($fixPlanning=='ON')?1:0;
+    }
   }
   if ($isUnderConstruction and $isUnderConstruction!="" and property_exists($item,'isUnderConstruction')) {
     $item->isUnderConstruction=($isUnderConstruction=='ON')?1:0;
