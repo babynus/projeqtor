@@ -5,6 +5,25 @@
 -- // Date : 2019-09-27                                     //
 -- ///////////////////////////////////////////////////////////
 
+-- ======================================
+-- Agregated resource
+-- ======================================
+
+ALTER TABLE `${prefix}assignment` ADD COLUMN `uniqueResource` int(1) unsigned DEFAULT 0;
+
+CREATE TABLE `${prefix}assignmentselection` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `idAssignment` int(12) unsigned DEFAULT NULL,
+  `idResource` int(12) unsigned DEFAULT NULL,
+  `startDate` datetime DEFAULT NULL,
+  `endDate` datetime DEFAULT NULL,
+  `selected` int(1) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+
+-- ======================================
+-- Change Request
+-- ======================================
 
 INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
 (225, 'menuChangeRequest',173, 'object', 380, 'ReadWritePrincipal', 0, 'Work Configuration EnvironmentalParameter'),
