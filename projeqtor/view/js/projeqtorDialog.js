@@ -1071,7 +1071,7 @@ function saveNote() {
       return;
     }
   } 
-  loadContent("../tool/saveNote.php", "resultDiv", "noteForm", true, 'note');
+  loadContent("../tool/saveNote.php", "resultDivMain", "noteForm", true, 'note');
   if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
   dijit.byId('dialogNote').hide();
 }
@@ -1086,7 +1086,7 @@ function removeNote(noteId) {
   param+="&noteRefType="+dojo.byId('objectClass').value;
   param+="&noteRefId="+dojo.byId("objectId").value;
   actionOK=function() {
-    loadContent("../tool/removeNote.php"+param, "resultDiv", "noteForm", true, 'note');
+    loadContent("../tool/removeNote.php"+param, "resultDivMain", "noteForm", true, 'note');
   };
   msg=i18n('confirmDelete', new Array(i18n('Note'), noteId));
   showConfirm(msg, actionOK);
@@ -1237,7 +1237,7 @@ function saveAttachmentAck(dataArray) {
     resultFrame=document.getElementById("resultPost");
     resultText=resultPost.document.body.innerHTML;
     dojo.byId('resultAck').value=resultText;
-    loadContent("../tool/ack.php", "resultDiv", "attachmentAckForm", true,
+    loadContent("../tool/ack.php", "resultDivMain", "attachmentAckForm", true,
         'attachment');
     return;
   }
@@ -1249,7 +1249,7 @@ function saveAttachmentAck(dataArray) {
   }
   dojo.style(dojo.byId('downloadProgress'), {display : 'none'});
   dojo.byId('resultAck').value=result.message;
-  loadContent("../tool/ack.php", "resultDiv", "attachmentAckForm", true,
+  loadContent("../tool/ack.php", "resultDivMain", "attachmentAckForm", true,
       'attachment');
 //gautier #menuUserTop
   loadContent("../view/menuUserTop.php", "drawMenuUser");
@@ -1290,7 +1290,7 @@ function removeAttachment(attachmentId) {
   dojo.byId("attachmentRefType").value=dojo.byId('objectClass').value;
   dojo.byId("attachmentRefId").value=dojo.byId("objectId").value;
   actionOK=function() {
-    loadContent("../tool/removeAttachment.php", "resultDiv", "attachmentForm",
+    loadContent("../tool/removeAttachment.php", "resultDivMain", "attachmentForm",
         true, 'attachment');
     loadContent("../view/menuUserTop.php", "drawMenuUser");
     //loadContent("../view/menuBar.php", "iconMenuUserPhoto");
@@ -1432,7 +1432,7 @@ function saveLink() {
   if (dojo.byId("linkRef2Id").value == "")
     return;
   var fixedClass = (dojo.byId('linkFixedClass'))?dojo.byId('linkFixedClass').value:'';
-  loadContent("../tool/saveLink.php", "resultDiv", "linkForm", true, 'link'+fixedClass);
+  loadContent("../tool/saveLink.php", "resultDivMain", "linkForm", true, 'link'+fixedClass);
   dijit.byId('dialogLink').hide();
 }
 
@@ -1449,11 +1449,11 @@ function removeLink(linkId, refType, refId, refTypeName, fixedClass) {
     if(fixedClass && fixedClass==refType){
       loadContent("../tool/removeLink.php?linkId="+linkId+"&linkRef1Type="+dojo.byId('objectClass').value
           +"&linkRef1Id="+dojo.byId("objectId").value+"&linkRef2Type="+refType
-          +"&linkRef2Id="+refId, "resultDiv", null, true, 'link'+fixedClass);
+          +"&linkRef2Id="+refId, "resultDivMain", null, true, 'link'+fixedClass);
     } else {
       loadContent("../tool/removeLink.php?linkId="+linkId+"&linkRef1Type="+dojo.byId('objectClass').value
           +"&linkRef1Id="+dojo.byId("objectId").value+"&linkRef2Type="+refType
-          +"&linkRef2Id="+refId, "resultDiv", null, true, 'link');
+          +"&linkRef2Id="+refId, "resultDivMain", null, true, 'link');
     }
   };
   if (!refTypeName) {
@@ -1534,7 +1534,7 @@ function refreshProductStructureList(selected,newName) {
 */
 function saveProductStructure() {
   if (dojo.byId("productStructureListId").value == "") return;
-  loadContent("../tool/saveProductStructure.php", "resultDiv", "productStructureForm", true, 'ProductStructure');
+  loadContent("../tool/saveProductStructure.php", "resultDivMain", "productStructureForm", true, 'ProductStructure');
   dijit.byId('dialogProductStructure').hide();
 }
 
@@ -1548,7 +1548,7 @@ function removeProductStructure(ProductStructureId, refType, refId, refTypeName)
    return;
   }
   actionOK=function() {
-   loadContent("../tool/removeProductStructure.php?id="+ProductStructureId, "resultDiv", null, true, 'ProductStructure');
+   loadContent("../tool/removeProductStructure.php?id="+ProductStructureId, "resultDivMain", null, true, 'ProductStructure');
   };
   if (!refTypeName) {
    refTypeName=i18n(refType);
@@ -1587,7 +1587,7 @@ function editBusinessFeature(businessFeatureId) {
 
 function saveBusinessFeature() {
 	if (dojo.byId("businessFeatureName").value == "") return;
-	loadContent("../tool/saveBusinessFeature.php", "resultDiv", "businessFeatureForm", true, 'BusinessFeature');
+	loadContent("../tool/saveBusinessFeature.php", "resultDivMain", "businessFeatureForm", true, 'BusinessFeature');
 	dijit.byId('dialogBusinessFeature').hide();	
 }
 
@@ -1597,7 +1597,7 @@ function removeBusinessFeature(businessFeatureId, refType) {
 		return;
 	}
 	actionOK=function() {
-		loadContent("../tool/removeBusinessFeature.php?businessFeatureId="+businessFeatureId, "resultDiv", null, true, 'BusinessFeature');
+		loadContent("../tool/removeBusinessFeature.php?businessFeatureId="+businessFeatureId, "resultDivMain", null, true, 'BusinessFeature');
 	};
 	msg=i18n('confirmDeleteBusinessFeature', new Array(refType, businessFeatureId));
 	showConfirm(msg, actionOK);
@@ -1621,7 +1621,7 @@ function addProductLanguage() {
 }
 
 function saveProductLanguage() {
-	loadContent("../tool/saveProductLanguage.php", "resultDiv", "productLanguageForm", true, 'ProductLanguage');
+	loadContent("../tool/saveProductLanguage.php", "resultDivMain", "productLanguageForm", true, 'ProductLanguage');
 	dijit.byId('dialogProductLanguage').hide();	
 }
 
@@ -1643,7 +1643,7 @@ function removeProductLanguage(productLanguageId, refType) {
 		return;
 	}
 	actionOK=function() {
-		loadContent("../tool/removeProductLanguage.php?refType="+refType+"&productLanguageId="+productLanguageId, "resultDiv", null, true, 'ProductLanguage');
+		loadContent("../tool/removeProductLanguage.php?refType="+refType+"&productLanguageId="+productLanguageId, "resultDivMain", null, true, 'ProductLanguage');
 	};
 	msg=i18n('confirmDeleteProductLanguage');
 	showConfirm(msg, actionOK);
@@ -1661,7 +1661,7 @@ function addProductContext() {
 }
 
 function saveProductContext() {
-	loadContent("../tool/saveProductContext.php", "resultDiv", "productContextForm", true, 'ProductContext');
+	loadContent("../tool/saveProductContext.php", "resultDivMain", "productContextForm", true, 'ProductContext');
 	dijit.byId('dialogProductContext').hide();	
 }
 
@@ -1683,7 +1683,7 @@ function removeProductContext(productContextId, refType) {
 		return;
 	}
 	actionOK=function() {
-		loadContent("../tool/removeProductContext.php?refType="+refType+"&productContextId="+productContextId, "resultDiv", null, true, 'ProductContext');
+		loadContent("../tool/removeProductContext.php?refType="+refType+"&productContextId="+productContextId, "resultDivMain", null, true, 'ProductContext');
 	};
 	msg=i18n('confirmDeleteProductContext');
 	showConfirm(msg, actionOK);
@@ -1743,7 +1743,7 @@ function refreshVersionCompatibilityList(selected,newName) {
 
 function saveVersionCompatibility() {
 if (dojo.byId('versionCompatibilityListId').value=='') return;
-loadContent("../tool/saveVersionCompatibility.php", "resultDiv", "versionCompatibilityForm", true, 'VersionCompatibility');
+loadContent("../tool/saveVersionCompatibility.php", "resultDivMain", "versionCompatibilityForm", true, 'VersionCompatibility');
 dijit.byId('dialogVersionCompatibility').hide();
 }
 
@@ -1753,7 +1753,7 @@ if (checkFormChangeInProgress()) {
 	return;
 }
 actionOK=function() {
-	loadContent("../tool/removeVersionCompatibility.php?versionCompatibilityId="+versionCompatibilityId, "resultDiv", null, true, 'VersionCompatibility');
+	loadContent("../tool/removeVersionCompatibility.php?versionCompatibilityId="+versionCompatibilityId, "resultDivMain", null, true, 'VersionCompatibility');
 };
 if (!refTypeName) {
 	refTypeName=i18n(refType);
@@ -1825,7 +1825,7 @@ function upgradeProductVersionStructure(structureId,withoutConfirm) {
   var params="&objectClass="+objectClass+"&objectId="+objectId;
   if (structureId) params+="&structureId="+structureId;
   if (withoutConfirm) {
-    loadContent("../tool/upgradeProductVersionStructure.php?confirm=true"+params, "resultDiv", null, true, 'ProductVersionStructure');
+    loadContent("../tool/upgradeProductVersionStructure.php?confirm=true"+params, "resultDivMain", null, true, 'ProductVersionStructure');
   } else {
     dojo.xhrGet({
       url : "../tool/upgradeProductVersionStructure.php?confirm=false"+params,
@@ -1836,7 +1836,7 @@ function upgradeProductVersionStructure(structureId,withoutConfirm) {
           var objectId=dojo.byId("objectId").value;
           var params="&objectClass="+objectClass+"&objectId="+objectId;
           if (upgradeProductVersionStructureId) params+="&structureId="+upgradeProductVersionStructureId;
-          loadContent("../tool/upgradeProductVersionStructure.php?confirm=true"+params, "resultDiv", null, true, 'ProductVersionStructure');
+          loadContent("../tool/upgradeProductVersionStructure.php?confirm=true"+params, "resultDivMain", null, true, 'ProductVersionStructure');
         };
         showConfirm(data, actionOK);
       }
@@ -1870,7 +1870,7 @@ function refreshProductVersionStructureList(selected,newName) {
 */
 function saveProductVersionStructure() {
   if (dojo.byId("productVersionStructureListId").value == "") return;
-  loadContent("../tool/saveProductVersionStructure.php", "resultDiv", "productVersionStructureForm", true, 'ProductVersionStructure');
+  loadContent("../tool/saveProductVersionStructure.php", "resultDivMain", "productVersionStructureForm", true, 'ProductVersionStructure');
   dijit.byId('dialogProductVersionStructure').hide();
 }
 
@@ -1884,7 +1884,7 @@ function removeProductVersionStructure(ProductVersionStructureId, refType, refId
    return;
   }
   actionOK=function() {
-   loadContent("../tool/removeProductVersionStructure.php?id="+ProductVersionStructureId, "resultDiv", null, true, 'ProductVersionStructure');
+   loadContent("../tool/removeProductVersionStructure.php?id="+ProductVersionStructureId, "resultDivMain", null, true, 'ProductVersionStructure');
   };
   if (!refTypeName) {
    refTypeName=i18n(refType);
@@ -1946,7 +1946,7 @@ function selectOtherVersionItem() {
 function saveOtherVersion() {
   if (dojo.byId("otherVersionIdVersion").value == "")
     return;
-  loadContent("../tool/saveOtherVersion.php", "resultDiv", "otherVersionForm",
+  loadContent("../tool/saveOtherVersion.php", "resultDivMain", "otherVersionForm",
       true, 'otherVersion');
   dijit.byId('dialogOtherVersion').hide();
 }
@@ -1958,7 +1958,7 @@ function removeOtherVersion(id, name, type) {
   }
   dojo.byId("otherVersionId").value=id;
   actionOK=function() {
-    loadContent("../tool/removeOtherVersion.php", "resultDiv",
+    loadContent("../tool/removeOtherVersion.php", "resultDivMain",
         "otherVersionForm", true, 'otherVersion');
   };
   msg=i18n('confirmDeleteOtherVersion', new Array(name, i18n('colId' + type)));
@@ -1972,10 +1972,10 @@ function swicthOtherVersionToMain(id, name, type) {
   }
   dojo.byId("otherVersionId").value=id;
   // actionOK=function() {loadContent("../tool/switchOtherVersion.php",
-  // "resultDiv", "otherVersionForm", true,'otherVersion');};
+  // "resultDivMain", "otherVersionForm", true,'otherVersion');};
   // msg=i18n('confirmSwitchOtherVersion',new Array(name, i18n('col'+type)));
   // showConfirm (msg, actionOK);
-  loadContent("../tool/switchOtherVersion.php", "resultDiv",
+  loadContent("../tool/switchOtherVersion.php", "resultDivMain",
       "otherVersionForm", true, 'otherVersion');
 }
 
@@ -2055,7 +2055,7 @@ function selectOtherClientItem() {
 function saveOtherClient() {
   if (dojo.byId("otherClientIdClient").value == "")
    return;
-  loadContent("../tool/saveOtherClient.php", "resultDiv", "otherClientForm",
+  loadContent("../tool/saveOtherClient.php", "resultDivMain", "otherClientForm",
      true, 'otherClient');
   dijit.byId('dialogOtherClient').hide();
 }
@@ -2067,7 +2067,7 @@ function removeOtherClient(id, name, type) {
   }
   dojo.byId("otherClientId").value=id;
   actionOK=function() {
-   loadContent("../tool/removeOtherClient.php", "resultDiv",
+   loadContent("../tool/removeOtherClient.php", "resultDivMain",
        "otherClientForm", true, 'otherClient');
   };
   msg=i18n('confirmDeleteOtherClient', new Array(name, i18n('colId' + type)));
@@ -2080,7 +2080,7 @@ function swicthOtherClientToMain(id, name, type) {
    return;
   }
   dojo.byId("otherClientId").value=id;
-  loadContent("../tool/switchOtherClient.php", "resultDiv",
+  loadContent("../tool/switchOtherClient.php", "resultDivMain",
      "otherClientForm", true, 'otherClient');
 }
 
@@ -2150,7 +2150,7 @@ function refreshApproverList(selected) {
 function saveApprover() {
   if (dojo.byId("approverId").value == "")
     return;
-  loadContent("../tool/saveApprover.php", "resultDiv", "approverForm", true,
+  loadContent("../tool/saveApprover.php", "resultDivMain", "approverForm", true,
       'approver');
   dijit.byId('dialogApprover').hide();
 }
@@ -2168,7 +2168,7 @@ function removeFollowup(followupId,all){
     return;
   }
   actionOK=function() {
-    loadContent("../tool/removeMessageFollowup.php"+param, "resultDiv", "objectForm", true, 'MessageLegalFollowup');
+    loadContent("../tool/removeMessageFollowup.php"+param, "resultDivMain", "objectForm", true, 'MessageLegalFollowup');
   };
 
   msg=i18n('confirmRemoveMessageFollowup');
@@ -2184,7 +2184,7 @@ function removeApprover(approverId, approverName) {
   dojo.byId("approverRefType").value=dojo.byId('objectClass').value;
   dojo.byId("approverRefId").value=dojo.byId("objectId").value;
   actionOK=function() {
-    loadContent("../tool/removeApprover.php", "resultDiv", "approverForm",
+    loadContent("../tool/removeApprover.php", "resultDivMain", "approverForm",
         true, 'approver');
   };
   msg=i18n('confirmDeleteApprover', new Array(approverName));
@@ -2196,7 +2196,7 @@ function approveItem(approverId) {
     showAlert(i18n('alertOngoingChange'));
     return;
   }
-  loadContent("../tool/approveItem.php?approverId=" + approverId, "resultDiv",
+  loadContent("../tool/approveItem.php?approverId=" + approverId, "resultDivMain",
       null, true, 'approver');
 }
 // =============================================================================
@@ -2242,7 +2242,7 @@ function refreshOriginList(selected) {
 function saveOrigin() {
   if (dojo.byId("originOriginId").value == "")
     return;
-  loadContent("../tool/saveOrigin.php", "resultDiv", "originForm", true,
+  loadContent("../tool/saveOrigin.php", "resultDivMain", "originForm", true,
       'origin');
   dijit.byId('dialogOrigin').hide();
 }
@@ -2262,7 +2262,7 @@ function removeOrigin(id, origType, origId) {
   dijit.byId("originOriginType").set('value', origType);
   dojo.byId("originOriginId").value=origId;
   actionOK=function() {
-    loadContent("../tool/removeOrigin.php", "resultDiv", "originForm", true,
+    loadContent("../tool/removeOrigin.php", "resultDivMain", "originForm", true,
         'origin');
   };
   msg=i18n('confirmDeleteOrigin', new Array(i18n(origType), origId));
@@ -2430,7 +2430,7 @@ function saveAssignment() {
   if (formVar.validate()) {
     dijit.byId("assignmentPlannedWork").focus();
     dijit.byId("assignmentLeftWork").focus();
-    loadContent("../tool/saveAssignment.php", "resultDiv", "assignmentForm",
+    loadContent("../tool/saveAssignment.php", "resultDivMain", "assignmentForm",
         true, 'assignment');
     dijit.byId('dialogAssignment').hide();
   } else {
@@ -2453,7 +2453,7 @@ function removeAssignment(assignmentId, realWork, resource) {
     return;
   }
   actionOK=function() {
-    loadContent("../tool/removeAssignment.php?assignmentId="+assignmentId+"&assignmentRefType="+dojo.byId('objectClass').value+"&assignmentRefId="+dojo.byId("objectId").value, "resultDiv", null,
+    loadContent("../tool/removeAssignment.php?assignmentId="+assignmentId+"&assignmentRefType="+dojo.byId('objectClass').value+"&assignmentRefId="+dojo.byId("objectId").value, "resultDivMain", null,
         true, "assignment");
   };
   msg=i18n('confirmDeleteAssignment', new Array(resource));
@@ -2472,9 +2472,11 @@ function assignmentChangeResourceTeamForCapacity() {
       if(data == 'isResourceTeam'){
         dojo.byId('assignmentRateRow').style.display="none";
         dojo.byId('assignmentCapacityResourceTeam').style.display="table-row";
+        dojo.byId('assignmentUniqueSelection').style.display="table-row";
       }else{
         dojo.byId('assignmentRateRow').style.display="table-row";
         dojo.byId('assignmentCapacityResourceTeam').style.display="none";
+        dojo.byId('assignmentUniqueSelection').style.display="none";
       }
     }
   });
@@ -2617,7 +2619,7 @@ function saveExpenseDetail() {
   if (formVar.validate()) {
     dijit.byId("expenseDetailName").focus();
     dijit.byId("expenseDetailAmount").focus();
-    loadContent("../tool/saveExpenseDetail.php", "resultDiv",
+    loadContent("../tool/saveExpenseDetail.php", "resultDivMain",
         "expenseDetailForm", true, 'expenseDetail');
     dijit.byId('dialogExpenseDetail').hide();
   } else {
@@ -2636,7 +2638,7 @@ function removeExpenseDetail(expenseDetailId) {
   }
   dojo.byId("expenseDetailId").value=expenseDetailId;
   actionOK=function() {
-    loadContent("../tool/removeExpenseDetail.php", "resultDiv",
+    loadContent("../tool/removeExpenseDetail.php", "resultDivMain",
         "expenseDetailForm", true, 'expenseDetail');
   };
   msg=i18n('confirmDeleteExpenseDetail', new Array(dojo.byId('expenseDetail_'
@@ -2885,7 +2887,7 @@ function saveDocumentVersionAck(dataArray) {
     resultFrame=document.getElementById("documentVersionPost");
     resultText=documentVersionPost.document.body.innerHTML;
     dojo.byId('resultAckDocumentVersion').value=resultText;
-    loadContent("../tool/ack.php", "resultDiv", "documentVersionAckForm", true,
+    loadContent("../tool/ack.php", "resultDivMain", "documentVersionAckForm", true,
         'documentVersion');
     return;
   }
@@ -2899,7 +2901,7 @@ function saveDocumentVersionAck(dataArray) {
     display : 'none'
   });
   dojo.byId('resultAckDocumentVersion').value=result.message;
-  loadContent("../tool/ack.php", "resultDiv", "documentVersionAckForm", true,
+  loadContent("../tool/ack.php", "resultDivMain", "documentVersionAckForm", true,
       'documentVersion');
 }
 
@@ -2938,7 +2940,7 @@ function removeDocumentVersion(documentVersionId, documentVersionName) {
   }
   dojo.byId("documentVersionId").value=documentVersionId;
   actionOK=function() {
-    loadContent("../tool/removeDocumentVersion.php", "resultDiv",
+    loadContent("../tool/removeDocumentVersion.php", "resultDivMain",
         "documentVersionForm", true, 'documentVersion');
   };
   msg=i18n('confirmDeleteDocumentVersion', new Array(documentVersionName));
@@ -3198,7 +3200,7 @@ function saveDependency() {
   if (dojo.byId("dependencyRefIdDep").value == ""
       && !dojo.byId('dependencyId').value)
     return;
-  loadContent("../tool/saveDependency.php", "resultDiv", "dependencyForm",
+  loadContent("../tool/saveDependency.php", "resultDivMain", "dependencyForm",
       true, 'dependency');
   dijit.byId('dialogDependency').hide();
 }
@@ -3211,7 +3213,7 @@ function saveDependencyFromDndLink(ref1Type, ref1Id, ref2Type, ref2Id) {
   param+="&ref1Id=" + ref1Id;
   param+="&ref2Type=" + ref2Type;
   param+="&ref2Id=" + ref2Id;
-  loadContent("../tool/saveDependencyDnd.php?" + param, "planResultDiv", null,
+  loadContent("../tool/saveDependencyDnd.php?" + param, "resultDivMain", null,
       true, 'dependency');
 }
 /**
@@ -3225,7 +3227,7 @@ function removeDependency(dependencyId, refType, refId) {
   }
   dojo.byId("dependencyId").value=dependencyId;
   actionOK=function() {
-    loadContent("../tool/removeDependency.php", "resultDiv", "dependencyForm",
+    loadContent("../tool/removeDependency.php", "resultDivMain", "dependencyForm",
         true, 'dependency');
   };
   msg=i18n('confirmDeleteLink', new Array(i18n(refType), refId));
@@ -3293,7 +3295,7 @@ function saveBillLine() {
     });
     dijit.byId("billLineLine").focus();
   } else {
-    loadContent("../tool/saveBillLine.php", "resultDiv", "billLineForm", true,
+    loadContent("../tool/saveBillLine.php", "resultDivMain", "billLineForm", true,
         'billLine');
     dijit.byId('dialogBillLine').hide();
   }
@@ -3310,7 +3312,7 @@ function removeBillLine(lineId) {
   }
   //dojo.byId("billLineId").value=lineId;
   actionOK=function() {
-    loadContent("../tool/removeBillLine.php?billLineId="+lineId, "resultDiv", null,
+    loadContent("../tool/removeBillLine.php?billLineId="+lineId, "resultDivMain", null,
         true, 'billLine');
   };
   msg=i18n('confirmDelete', new Array(i18n('BillLine'), lineId));
@@ -3362,7 +3364,7 @@ function saveChecklistDefinitionLine() {
     showAlert(i18n('messageMandatory', new Array(i18n('colName'))));
     return false;
   }
-  loadContent("../tool/saveChecklistDefinitionLine.php", "resultDiv",
+  loadContent("../tool/saveChecklistDefinitionLine.php", "resultDivMain",
       "dialogChecklistDefinitionLineForm", true, 'checklistDefinitionLine');
   dijit.byId('dialogChecklistDefinitionLine').hide();
 
@@ -3378,7 +3380,7 @@ function removeChecklistDefinitionLine(lineId) {
   // dojo.byId("checklistDefinitionLineId").value=lineId;
   actionOK=function() {
     loadContent("../tool/removeChecklistDefinitionLine.php" + params,
-        "resultDiv", null, true, 'checklistDefinitionLine');
+        "resultDivMain", null, true, 'checklistDefinitionLine');
   };
   msg=i18n('confirmDelete', new Array(i18n('ChecklistDefinitionLine'), lineId));
   showConfirm(msg, actionOK);
@@ -3404,7 +3406,7 @@ function showChecklist(objectClass) {
 function saveChecklist() {
   // var params="&objectClass="+objectClass+"&objectId="+objectId;
   // loadDialog('dialogChecklist',null, true, params);
-  loadContent('../tool/saveChecklist.php', 'resultDiv', 'dialogChecklistForm',
+  loadContent('../tool/saveChecklist.php', 'resultDivMain', 'dialogChecklistForm',
       true, 'checklist');
   dijit.byId('dialogChecklist').hide();
   return false;
@@ -3531,7 +3533,7 @@ function plan() {
     showAlert(i18n('messageInvalidDate'));
     return;
   }
-  loadContent("../tool/plan.php", "planResultDiv", "dialogPlanForm", true, null);
+  loadContent("../tool/plan.php", "resultDivMain", "dialogPlanForm", true, null);
   dijit.byId("dialogPlan").hide();
 }
 
@@ -3564,7 +3566,7 @@ function planSaveDates() {
   if (!dijit.byId('idProjectPlanSaveDates').get('value')) {
     dijit.byId('idProjectPlanSaveDates').set('value', ' ');
   }
-  loadContent("../tool/planSaveDates.php", "planResultDiv",
+  loadContent("../tool/planSaveDates.php", "resultDivMain",
       "dialogPlanSaveDatesForm", true, null);
   dijit.byId("dialogPlanSaveDates").hide();
 }
@@ -3604,7 +3606,7 @@ function savePlanningBaseline() {
   }
   var formVar=dijit.byId('dialogPlanBaselineForm');
   if (formVar.validate()) {
-    loadContent("../tool/savePlanningBaseline.php", "planResultDiv", "dialogPlanBaselineForm", true, null,null,null,callback);
+    loadContent("../tool/savePlanningBaseline.php", "resultDivMain", "dialogPlanBaselineForm", true, null,null,null,callback);
     dijit.byId("dialogPlanBaseline").hide();
   } else {
     showAlert(i18n("alertInvalidForm"));
@@ -4530,7 +4532,7 @@ function removeResourceCost(id, idRole, nameRole, startDate) {
   loadDialog('dialogResourceCost',callBack,false,params,false); // Ticket #3584 : be sure dialog has been loaded at least once
   actionOK=function() {
     
-    loadContent("../tool/removeResourceCost.php", "resultDiv",
+    loadContent("../tool/removeResourceCost.php", "resultDivMain",
         "resourceCostForm", true, 'resourceCost');
   };
   msg=i18n('confirmDeleteResourceCost', new Array(nameRole, startDate));
@@ -4563,7 +4565,7 @@ function editResourceCost(id, idResource, idRole, cost, startDate, endDate) {
 function saveResourceCost() {
   var formVar=dijit.byId('resourceCostForm');
   if (formVar.validate()) {
-    loadContent("../tool/saveResourceCost.php", "resultDiv",
+    loadContent("../tool/saveResourceCost.php", "resultDivMain",
         "resourceCostForm", true, 'resourceCost');
     dijit.byId('dialogResourceCost').hide();
   } else {
@@ -4615,7 +4617,7 @@ function removeVersionProject(id) {
     return;
   }
   actionOK=function() {
-    loadContent("../tool/removeVersionProject.php?idVersionProject="+id, "resultDiv", null, true, 'versionProject');
+    loadContent("../tool/removeVersionProject.php?idVersionProject="+id, "resultDivMain", null, true, 'versionProject');
   };
   msg=i18n('confirmDeleteVersionProject');
   showConfirm(msg, actionOK);
@@ -4633,7 +4635,7 @@ function editVersionProject(id, idVersion, idProject) {
 function saveVersionProject() {
   var formVar=dijit.byId('versionProjectForm');
   if (formVar.validate()) {
-    loadContent("../tool/saveVersionProject.php", "resultDiv",
+    loadContent("../tool/saveVersionProject.php", "resultDivMain",
         "versionProjectForm", true, 'versionProject');
     dijit.byId('dialogVersionProject').hide();
   } else {
@@ -4660,7 +4662,7 @@ function removeProductProject(id) {
     return;
   }
   actionOK=function() {
-    loadContent("../tool/removeProductProject.php?idProductProject="+id, "resultDiv", null, true, 'productProject');
+    loadContent("../tool/removeProductProject.php?idProductProject="+id, "resultDivMain", null, true, 'productProject');
   };
   msg=i18n('confirmDeleteProductProject');
   showConfirm(msg, actionOK);
@@ -4678,7 +4680,7 @@ function editProductProject(id, idProduct, idProject) {
 function saveProductProject() {
   var formVar=dijit.byId('productProjectForm');
   if (formVar.validate()) {
-    loadContent("../tool/saveProductProject.php", "resultDiv",
+    loadContent("../tool/saveProductProject.php", "resultDivMain",
         "productProjectForm", true, 'productProject');
     dijit.byId('dialogProductProject').hide();
   } else {
@@ -4762,7 +4764,7 @@ function removeTestCaseRun(id, idTestCase) {
   }
   dojo.byId("testCaseRunId").value=id;
   actionOK=function() {
-   loadContent("../tool/removeTestCaseRun.php", "resultDiv",
+   loadContent("../tool/removeTestCaseRun.php", "resultDivMain",
        "testCaseRunForm", true, 'testCaseRun');
   };
   msg=i18n('confirmDeleteTestCaseRun', new Array(idTestCase));
@@ -4786,7 +4788,7 @@ function saveTestCaseRun() {
    }
   }
   if (formVar.validate()) {
-   loadContent("../tool/saveTestCaseRun.php", "resultDiv", "testCaseRunForm", true, 'testCaseRun');
+   loadContent("../tool/saveTestCaseRun.php", "resultDivMain", "testCaseRunForm", true, 'testCaseRun');
    dijit.byId('dialogTestCaseRun').hide();
    return true;
   } else {
@@ -5077,7 +5079,7 @@ function saveLinkObject() {
   param+="&idInstanceOfMainClass="+dojo.byId('idInstanceOfMainClass').value;
   param+="&linkObjectClassName="+dojo.byId('linkObjectClassName').value
 
-  loadContent("../tool/saveObjectLinkedByIdToMainObject.php"+param, "resultDiv", "objectForm", true, 'linkObject');
+  loadContent("../tool/saveObjectLinkedByIdToMainObject.php"+param, "resultDivMain", "objectForm", true, 'linkObject');
   dijit.byId('dialogObject').hide();
 }
 
@@ -5096,7 +5098,7 @@ if (checkFormChangeInProgress()) {
   }
 
   actionOK=function() {
-    loadContent("../tool/removeObjectLinkedByIdToMainObject.php"+param, "resultDiv", "objectForm", true, 'linkObject');
+    loadContent("../tool/removeObjectLinkedByIdToMainObject.php"+param, "resultDivMain", "objectForm", true, 'linkObject');
   };
 
   msg=i18n('confirmRemoveLinkObjFromObj') + '<br>' + nameLinkObject;
@@ -5179,7 +5181,7 @@ function saveChangedStatusObject() {
     param+="&objectClass="+objectClass;
     param+="&idInstanceOfClass="+objectId;
 
-    loadContent("../tool/changeObjectStatus.php"+param, "resultDiv", "objectForm", true, objectClass);
+    loadContent("../tool/changeObjectStatus.php"+param, "resultDivMain", "objectForm", true, objectClass);
     dijit.byId('dialogChangeStatus').hide();
     }  
 }
@@ -5261,7 +5263,7 @@ function changeStatusNotification(objId, objStatusId) {
   param="?newStatusId="+newStatusId;
   param+="&idInstanceOfClass="+objId;
 
-  loadContent("../tool/changeStatusNotification.php"+param, "resultDiv", "objectForm", true, "Notification");
+  loadContent("../tool/changeStatusNotification.php"+param, "resultDivMain", "objectForm", true, "Notification");
   refreshNotificationTree(false);
 }
 
@@ -5326,7 +5328,7 @@ function removeProviderTerm(id, fromBill) {
   actionOK=function() {
     var url="../tool/removeProviderTerm.php?providerTermId="+id;
     if (fromBill) url+="&fromBill=true";
-    loadContent(url, "resultDiv",
+    loadContent(url, "resultDivMain",
         null, true, 'providerTerm');
   };
     msg=i18n('confirmDeleteProviderTerm', new Array(id));
@@ -5339,7 +5341,7 @@ function removeProviderTermFromBill(id,idProviderBill) {
     return;
   }
   actionOK=function() {
-    loadContent("../tool/removeProviderTerm.php?providerTermId="+id+"&isProviderBill=true", "resultDiv",
+    loadContent("../tool/removeProviderTerm.php?providerTermId="+id+"&isProviderBill=true", "resultDivMain",
         null, true, 'providerTerm');
   };
     msg=i18n('confirmRemoveProviderTermFromBill', new Array(id));
@@ -5363,7 +5365,7 @@ function addProviderTerm(objectClass, type, idProviderOrder, isLine) {
 function saveProviderTerm() {
   var formVar=dijit.byId('providerTermForm');
   if (formVar.validate()) {
-    loadContent("../tool/saveProviderTerm.php", "resultDiv", "providerTermForm", true, 'providerTerm');
+    loadContent("../tool/saveProviderTerm.php", "resultDivMain", "providerTermForm", true, 'providerTerm');
     dijit.byId('dialogProviderTerm').hide();
   } else {
     showAlert(i18n("alertInvalidForm"));
@@ -5471,7 +5473,7 @@ function addProviderTermFromProviderBill() {
 function saveProviderTermFromProviderBill() {
   var formVar=dijit.byId('providerTermFromProviderBillForm');
   if (formVar.validate() && dojo.byId('linkProviderTerm') && dojo.byId('linkProviderTerm').value ) {
-    loadContent("../tool/saveProviderTermFromProviderBill.php", "resultDiv", "providerTermFromProviderBillForm", true,'ProviderTerm');
+    loadContent("../tool/saveProviderTermFromProviderBill.php", "resultDivMain", "providerTermFromProviderBillForm", true,'ProviderTerm');
     dijit.byId('dialogProviderTermFromProviderBill').hide();
   } else {
     showAlert(i18n("alertInvalidForm"));
@@ -5579,7 +5581,7 @@ function saveResourceCapacity(capacity){
   }
   
   if (formVar.validate()) {
-    loadContent("../tool/saveResourceCapacity.php", "resultDiv", "resourceCapacityForm",true,'affectation');
+    loadContent("../tool/saveResourceCapacity.php", "resultDivMain", "resourceCapacityForm",true,'affectation');
     dijit.byId('dialogResourceCapacity').hide();
   } else {
     showAlert(i18n("alertInvalidForm"));
@@ -5592,7 +5594,7 @@ function removeResourceCapacity(id,idResource) {
     return;
   }
   actionOK=function() {
-    loadContent("../tool/removeResourceCapacity.php?idResourceCapacity="+id+"&idResource="+idResource, "resultDiv",null, true, 'affectation');
+    loadContent("../tool/removeResourceCapacity.php?idResourceCapacity="+id+"&idResource="+idResource, "resultDivMain",null, true, 'affectation');
   };
   msg=i18n('confirmDeleteResourceCapacity', new Array(id,i18n('Resource'),idResource));
   showConfirm(msg, actionOK);
@@ -5672,7 +5674,7 @@ function saveResourceSurbooking(capacity){
     }
   }
   if (formVar.validate()) {
-    loadContent("../tool/saveResourceSurbooking.php", "resultDiv", "resourceSurbookingForm",true,'affectation');
+    loadContent("../tool/saveResourceSurbooking.php", "resultDivMain", "resourceSurbookingForm",true,'affectation');
     dijit.byId('dialogResourceSurbooking').hide();
   } else {
     showAlert(i18n("alertInvalidForm"));
@@ -5685,7 +5687,7 @@ function removeResourceSurbooking(id,idResource) {
     return;
   }
   actionOK=function() {
-    loadContent("../tool/removeResourceSurbooking.php?idResourceSurbooking="+id+"&idResource="+idResource, "resultDiv",null, true, 'affectation');
+    loadContent("../tool/removeResourceSurbooking.php?idResourceSurbooking="+id+"&idResource="+idResource, "resultDivMain",null, true, 'affectation');
   };
   msg=i18n('confirmDeleteResourceSurbooking', new Array(id,i18n('Resource'),idResource));
   showConfirm(msg, actionOK);
@@ -5752,7 +5754,7 @@ function removeAffectation(id,own,affectedClass,affectedId) {
     return;
   }
   actionOK=function() {
-    loadContent("../tool/removeAffectation.php?affectationId="+id+"&affectationIdTeam=''", "resultDiv",
+    loadContent("../tool/removeAffectation.php?affectationId="+id+"&affectationIdTeam=''", "resultDivMain",
         null, true, 'affectation');
   };
   if (own) {
@@ -5770,7 +5772,7 @@ function removeAffectationResourceTeam(id,idResource) {
     return;
   }
   actionOK=function() {
-    loadContent("../tool/removeAffectationResourceTeam.php?affectaionId="+id, "resultDiv",
+    loadContent("../tool/removeAffectationResourceTeam.php?affectaionId="+id, "resultDivMain",
         null, true, 'affectation');
   };
   msg=i18n('confirmDeleteAffectation', new Array(id,i18n('Resource'),idResource));
@@ -5882,7 +5884,7 @@ function saveAffectation() {
     }
   }
   if (formVar.validate()) {
-    loadContent("../tool/saveAffectation.php", "resultDiv", "affectationForm",
+    loadContent("../tool/saveAffectation.php", "resultDivMain", "affectationForm",
         true, 'affectation');
     dijit.byId('dialogAffectation').hide();
   } else {
@@ -5902,7 +5904,7 @@ function saveAffectationResourceTeam() {
     }
   }
   if (formVar.validate()) {
-    loadContent("../tool/saveAffectationResourceTeam.php", "resultDiv", "affectationResourceTeamForm",
+    loadContent("../tool/saveAffectationResourceTeam.php", "resultDivMain", "affectationResourceTeamForm",
         true, 'affectation');
     dijit.byId('dialogAffectationResourceTeam').hide();
   } else {
@@ -5961,7 +5963,7 @@ function replaceAffectationSave() {
     return;
   }
   if (formVar.validate()) {
-    loadContent("../tool/saveAffectationReplacement.php", "resultDiv", "replaceAffectationForm",
+    loadContent("../tool/saveAffectationReplacement.php", "resultDivMain", "replaceAffectationForm",
         true, 'affectation');
     dijit.byId('dialogReplaceAffectation').hide();
   } else {
@@ -6773,7 +6775,7 @@ function copyObject(objectClass) {
   dojo.byId("copyButton").blur();
   action=function() {
     unselectAllRows('objectGrid');
-    loadContent("../tool/copyObject.php", "resultDiv", 'objectForm', true);
+    loadContent("../tool/copyObject.php", "resultDivMain", 'objectForm', true);
   };
   showConfirm(i18n("confirmCopy", new Array(i18n(objectClass),
       dojo.byId('id').value)), action);
@@ -6805,13 +6807,13 @@ function copyObjectToSubmit(objectClass) {
     return;
   }
   unselectAllRows('objectGrid');
-  loadContent("../tool/copyObjectTo.php", "resultDiv", 'copyForm', true,
+  loadContent("../tool/copyObjectTo.php", "resultDivMain", 'copyForm', true,
       'copyTo');
   dijit.byId('dialogCopy').hide();
 }
 //gautier #2522
 function copyDocumentToSubmit(objectClass) {
-  loadContent("../tool/copyDocumentTo.php", "resultDiv", 'copyDocumentForm', true );
+  loadContent("../tool/copyDocumentTo.php", "resultDivMain", 'copyDocumentForm', true );
   dijit.byId('dialogCopyDocument').hide();
 }
 
@@ -6822,7 +6824,7 @@ function copyProjectToSubmit(objectClass) {
     return;
   }
   unselectAllRows('objectGrid');
-  loadContent("../tool/copyProjectTo.php", "resultDiv", 'copyProjectForm',
+  loadContent("../tool/copyProjectTo.php", "resultDivMain", 'copyProjectForm',
       true, 'copyProject');
   dijit.byId('dialogCopy').hide();
 }
@@ -6855,6 +6857,7 @@ function loadMenuBarObject(menuClass, itemName, from) {
   if (from == 'bar') {
     selectTreeNodeById(dijit.byId('menuTree'), menuClass);
   }
+  hideResultDivs();
   cleanContent("detailDiv");
   formChangeInProgress=false;
   var objectExist='true';
@@ -6864,6 +6867,11 @@ function loadMenuBarObject(menuClass, itemName, from) {
   stockHistory(currentScreen,null,"object");
   selectIconMenuBar(menuClass);
   return true;
+}
+function hideResultDivs() {
+  if (dojo.byId('resultDivMain')) {
+      dojo.byId('resultDivMain').style.display='none';
+  }
 }
 
 function loadMenuBarItem(item, itemName, from) {
@@ -6875,6 +6883,7 @@ function loadMenuBarItem(item, itemName, from) {
     selectTreeNodeById(dijit.byId('menuTree'), item);
   }
   cleanContent("detailDiv");
+  hideResultDivs();
   formChangeInProgress=false;
   var currentScreen=item;
   var objectExist='false';
@@ -6990,6 +6999,7 @@ function loadMenuBarPlugin(item, itemName, from) {
     showInfo(i18n("messageSelectedNotAvailable", new Array(item.name)));
     return;
   }
+  hideResultDivs();
   currentPluginPage=pluginMenuPage['menu'+item];
   loadContent(pluginMenuPage['menu'+item], "centerDiv");
   return currentPluginPage;
@@ -7142,7 +7152,7 @@ function setAllAlertReadMessage() {
 }
 function setAlertReadMessageInForm() {
   dijit.byId('readFlag').set('checked', 'checked');
-  submitForm("../tool/saveObject.php", "resultDiv", "objectForm", true);
+  submitForm("../tool/saveObject.php", "resultDivMain", "objectForm", true);
 }
 function setAlertRemindMessage() {
   closeAlertBox();
@@ -7304,7 +7314,7 @@ function adminSendAlert() {
   if (formVar.validate()) {
     loadContent(
         "../tool/adminFunctionalities.php?adminFunctionality=sendAlert",
-        "resultDiv", "adminForm", true, 'admin');
+        "resultDivMain", "adminForm", true, 'admin');
   }
 }
 
@@ -7316,7 +7326,7 @@ function adminDisconnectAll(toConfirm) {
   actionOK=function() {
     loadContent(
         "../tool/adminFunctionalities.php?adminFunctionality=disconnectAll&element=Audit",
-        "resultDiv", "adminForm", true, 'admin');
+        "resultDivMain", "adminForm", true, 'admin');
   };
   if (toConfirm) {
   msg=i18n('confirmDisconnectAll');
@@ -7327,7 +7337,7 @@ function adminDisconnectAll(toConfirm) {
 function maintenance(operation, item) {
   if (operation == "updateReference") {
     loadContent("../tool/adminFunctionalities.php?adminFunctionality="
-        + operation + "&element=" + item, "resultDiv", "adminForm", true,
+        + operation + "&element=" + item, "resultDivMain", "adminForm", true,
         'admin');
   } else {
     var nb=0;
@@ -7336,7 +7346,7 @@ function maintenance(operation, item) {
     }
     loadContent(
         "../tool/adminFunctionalities.php?adminFunctionality=maintenance&operation="
-            + operation + "&item=" + item + "&nbDays=" + nb, "resultDiv",
+            + operation + "&item=" + item + "&nbDays=" + nb, "resultDivMain",
         "adminForm", true, 'admin');
   }
 }
@@ -7366,7 +7376,7 @@ function lockDocument() {
   dijit.byId('lockedDate').set('value', curDate);
   dijit.byId('lockedDateBis').set('value', curDate);
   formChanged();
-  submitForm("../tool/saveObject.php", "resultDiv", "objectForm", true);
+  submitForm("../tool/saveObject.php", "resultDivMain", "objectForm", true);
   return true;
 }
 
@@ -7379,7 +7389,7 @@ function unlockDocument() {
   dijit.byId('lockedDate').set('value', null);
   dijit.byId('lockedDateBis').set('value', null);
   formChanged();
-  submitForm("../tool/saveObject.php", "resultDiv", "objectForm", true);
+  submitForm("../tool/saveObject.php", "resultDivMain", "objectForm", true);
   return true;
 }
 
@@ -7468,7 +7478,7 @@ function movePlanningColumn(source, destination) {
     load : function(data, args) {
     }
   });
-  // loadContent(url, "planResultDiv");
+  // loadContent(url, "resultDivMain");
 }
 
 /*
@@ -7559,7 +7569,7 @@ function moveListColumn(source, destination) {
     load : function(data, args) {
     }
   });
-  // loadContent(url, "planResultDiv");
+  // loadContent(url, "resultDivMain");
   // setGanttVisibility(g);
   // JSGantt.changeFormat(g.getFormat(),g);
   // hideWait();
@@ -7822,7 +7832,7 @@ function saveMailMessage() {
     dojo.byId(codeParam).value = tmpCkEditorData; 
     dojo.byId(codeParam+"_display").innerHTML = tmpCkEditorData;
   };
-  loadDiv("../tool/saveParameter.php", "resultDiv", "parameterForm", callBack);
+  loadDiv("../tool/saveParameter.php", "resultDivMain", "parameterForm", callBack);
   dijit.byId('dialogMailEditor').hide();
 }
 //end
@@ -7974,7 +7984,7 @@ function extractEmails(str) {
 
 function sendMail() {
 	var idEmailTemplate = dijit.byId('selectEmailTemplate').get("value");
-  loadContent("../tool/sendMail.php?className=Mailable&idEmailTemplate="+idEmailTemplate, "resultDiv",
+  loadContent("../tool/sendMail.php?className=Mailable&idEmailTemplate="+idEmailTemplate, "resultDivMain",
       "mailForm", true, 'mail');
   dijit.byId("dialogMail").hide();
 }
@@ -7985,7 +7995,7 @@ function assignTeamForMeeting() {
     return;
   }
   actionOK=function() {
-    loadContent("../tool/assignTeamForMeeting.php?assignmentId=&assignmentRefType="+dojo.byId('objectClass').value+"&assignmentRefId="+dojo.byId("objectId").value,"resultDiv", null,
+    loadContent("../tool/assignTeamForMeeting.php?assignmentId=&assignmentRefType="+dojo.byId('objectClass').value+"&assignmentRefId="+dojo.byId("objectId").value,"resultDivMain", null,
         true, 'assignment');
   };
   msg=i18n('confirmAssignWholeTeam');
@@ -8002,7 +8012,7 @@ function lockRequirement() {
   dijit.byId('lockedDate').set('value', curDate);
   dijit.byId('lockedDateBis').set('value', curDate);
   formChanged();
-  submitForm("../tool/saveObject.php", "resultDiv", "objectForm", true);
+  submitForm("../tool/saveObject.php", "resultDivMain", "objectForm", true);
   return true;
 }
 
@@ -8015,7 +8025,7 @@ function unlockRequirement() {
   dijit.byId('lockedDate').set('value', null);
   dijit.byId('lockedDateBis').set('value', null);
   formChanged();
-  submitForm("../tool/saveObject.php", "resultDiv", "objectForm", true);
+  submitForm("../tool/saveObject.php", "resultDivMain", "objectForm", true);
   return true;
 }
 
@@ -8177,7 +8187,7 @@ function startMultipleUpdateMode(objectClass) {
 }
 
 function saveMultipleUpdateMode(objectClass) {
-  // submitForm("../tool/saveObject.php","resultDiv", "objectForm", true);
+  // submitForm("../tool/saveObject.php","resultDivMain", "objectForm", true);
   grid=dijit.byId("objectGrid"); // if the element is not a widget, exit.
   if (!grid) {
     return;
@@ -8767,7 +8777,7 @@ function showWorkflowParameter(id) {
 }
 
 function saveWorkflowParameter() {
-  loadContent("../tool/saveWorkflowParameter.php", "resultDiv",
+  loadContent("../tool/saveWorkflowParameter.php", "resultDivMain",
       "dialogWorkflowParameterForm", true);
   dijit.byId('dialogWorkflowParameter').hide();
 }
@@ -8799,7 +8809,7 @@ loadDialog('dialogWorkflowProfileParameter', callBack, true, params);
 }
 
 function saveWorkflowProfileParameter() {
-loadContent("../tool/saveWorkflowProfileParameter.php", "resultDiv",
+loadContent("../tool/saveWorkflowProfileParameter.php", "resultDivMain",
    "dialogWorkflowProfileParameterForm", true);
 dijit.byId('dialogWorkflowProfileParameter').hide();
 }
@@ -9042,7 +9052,7 @@ function savePluginAck(dataArray) {
   if (!isHtml5()) {
     resultFrame=document.getElementById("resultPost");
     resultText=resultPost.document.body.innerHTML;
-    dijit.byId('pluginResultDiv').set('content',resultText);
+    dijit.byId('resultDivMain').set('content',resultText);
     savePluginFinalize();
     return;
   }
@@ -9062,13 +9072,15 @@ function savePluginAck(dataArray) {
   dojo.style(dojo.byId('downloadProgress'), {
     display : 'none'
   });
-  contentNode = dojo.byId('pluginResultDiv');
+  contentNode = dojo.byId('resultDivMain');
   contentNode.innerHTML=result.message;
   contentNode.style.display="block"; 
+  contentNode.style.opacity=1; 
+  setTimeout("dojo.byId('resultDivMain').style.display='none';",2000);
   savePluginFinalize();
 }
 function savePluginFinalize() {
-  contentNode = dojo.byId('pluginResultDiv');
+  contentNode = dojo.byId('resultDivMain');
   if (contentNode.innerHTML.indexOf('resultOK')>0) {
     setTimeout('loadContent("pluginManagement.php", "centerDiv");',1000);
   } else {
@@ -9095,7 +9107,7 @@ function saveReportAsFavorite() {
     if (listContent=="") {delay=1;}
     hideReportFavoriteTooltip(delay);
   };
-  loadContent("../tool/saveReportAsFavorite.php" , "resultDiv", "reportForm", true, 'report',false,false, callback);
+  loadContent("../tool/saveReportAsFavorite.php" , "resultDivMain", "reportForm", true, 'report',false,false, callback);
 }
 
 function showReportFavoriteTooltip() {
@@ -9188,7 +9200,7 @@ function saveRestrictTypes() {
       }
     });
   }
-  loadContent("../tool/saveRestrictTypes.php" , "resultDiv", "restrictTypesForm", true, 'report',false,false, $callback);
+  loadContent("../tool/saveRestrictTypes.php" , "resultDivMain", "restrictTypesForm", true, 'report',false,false, $callback);
   dijit.byId('dialogRestrictTypes').hide();
 }
 
@@ -9197,7 +9209,7 @@ function saveRestrictTypes() {
  ************************************************************************************/
 
 function saveRestrictProductList() {
-	loadContent("../tool/saveRestrictProductList.php" , "resultDiv", "dialogRestrictProductListForm", true);
+	loadContent("../tool/saveRestrictProductList.php" , "resultDivMain", "dialogRestrictProductListForm", true);
 	dijit.byId('dialogRestrictProductList').hide();
 }
 
@@ -9225,7 +9237,7 @@ function planningToCanvasToPDF(){
   if(!document.getElementById("printLandscape").checked)orientation="portrait";
   var ratio=parseInt(document.getElementById("printZoom").value)/100;
   var repeatIconTask=document.getElementById("printRepeat").checked; // If true this will repeat on each page the icon
-  loadContent("../tool/submitPlanningPdf.php", "planResultDiv", 'planningPdfForm', false,null,null,null,function(){showWait();});
+  loadContent("../tool/submitPlanningPdf.php", "resultDivMain", 'planningPdfForm', false,null,null,null,function(){showWait();});
   var sizeElements=[];
   var marge=30;
   var widthIconTask=0; // the width that icon+task represent
@@ -9785,7 +9797,7 @@ function saveTenderEvaluationCriteria() {
     return;
   }
   if (formVar.validate()) {
-    loadContent("../tool/saveTenderEvaluationCriteria.php", "resultDiv", "dialogTenderCriteriaForm", true,'tenderEvaluationCriteria');
+    loadContent("../tool/saveTenderEvaluationCriteria.php", "resultDivMain", "dialogTenderCriteriaForm", true,'tenderEvaluationCriteria');
     dijit.byId('dialogCallForTenderCriteria').hide();
   }  
 }
@@ -9795,7 +9807,7 @@ function removeTenderEvaluationCriteria(criteriaId) {
     return;
   }
   actionOK=function() {
-    loadContent("../tool/removeTenderEvaluationCriteria.php?criteriaId="+criteriaId, "resultDiv", null,true,'tenderEvaluationCriteria');
+    loadContent("../tool/removeTenderEvaluationCriteria.php?criteriaId="+criteriaId, "resultDivMain", null,true,'tenderEvaluationCriteria');
   };
   msg=i18n('confirmDelete', new Array(i18n('TenderEvaluationCriteria'), criteriaId));
   showConfirm(msg, actionOK);
@@ -9829,7 +9841,7 @@ function saveTenderSubmission() {
     return;
   }
   if (formVar.validate()) {
-    loadContent("../tool/saveTenderSubmission.php", "resultDiv", "dialogTenderSubmissionForm", true,'tenderSubmission');
+    loadContent("../tool/saveTenderSubmission.php", "resultDivMain", "dialogTenderSubmissionForm", true,'tenderSubmission');
     dijit.byId('dialogCallForTenderSubmission').hide();
   }  
 }
@@ -9839,7 +9851,7 @@ function removeTenderSubmission(tenderId) {
     return;
   }
   actionOK=function() {
-    loadContent("../tool/removeTenderSubmission.php?tenderId="+tenderId, "resultDiv", null,true,'tenderSubmission');
+    loadContent("../tool/removeTenderSubmission.php?tenderId="+tenderId, "resultDivMain", null,true,'tenderSubmission');
   };
   msg=i18n('confirmDelete', new Array(i18n('Tender'), tenderId))+'<br/><b>'+i18n('messageAlerteDeleteTender')+'</b>';
   showConfirm(msg, actionOK);
@@ -9891,7 +9903,7 @@ function saveJobDefinition() {
     showAlert(i18n('messageMandatory', new Array(i18n('colName'))));
     return false;
   }
-  loadContent("../tool/saveJobDefinition.php", "resultDiv",
+  loadContent("../tool/saveJobDefinition.php", "resultDivMain",
       "dialogJobDefinitionForm", true, 'jobDefinition');
   dijit.byId('dialogJobDefinition').hide();
 
@@ -9907,7 +9919,7 @@ function removeJobDefinition(lineId) {
   // dojo.byId("jobDefinitionId").value=lineId;
   actionOK=function() {
     loadContent("../tool/removeJobDefinition.php" + params,
-        "resultDiv", null, true, 'jobDefinition');
+        "resultDivMain", null, true, 'jobDefinition');
   };
   msg=i18n('confirmDelete', new Array(i18n('JobDefinition'), lineId));
   showConfirm(msg, actionOK);
@@ -9933,7 +9945,7 @@ function showJoblist(objectClass) {
 function saveJoblist() {
   // var params="&objectClass="+objectClass+"&objectId="+objectId;
   // loadDialog('dialogJoblist',null, true, params);
-  loadContent('../tool/saveJoblist.php', 'resultDiv', 'dialogJoblistForm',
+  loadContent('../tool/saveJoblist.php', 'resultDivMain', 'dialogJoblistForm',
       true, 'joblist');
   dijit.byId('dialogJoblist').hide();
   return false;
@@ -10060,7 +10072,7 @@ function saveKpiThreshold() {
     showAlert(i18n('messageMandatory', new Array(i18n('colValue'))));
     return false;
   }
-  loadContent("../tool/saveKpiThreshold.php", "resultDiv","dialogKpiThresholdForm", true,'kpiThreshold');
+  loadContent("../tool/saveKpiThreshold.php", "resultDivMain","dialogKpiThresholdForm", true,'kpiThreshold');
   dijit.byId('dialogKpiThreshold').hide();
 }
 
@@ -10071,7 +10083,7 @@ function saveKpiThreshold() {
 function removeKpiThreshold(idKpiThreshold) {
   var params="?kpiThresholdId=" + idKpiThreshold;
   actionOK=function() {
-    loadContent("../tool/removeKpiThreshold.php" + params, "resultDiv", null, true,'kpiThreshold');
+    loadContent("../tool/removeKpiThreshold.php" + params, "resultDivMain", null, true,'kpiThreshold');
   };
   msg=i18n('confirmDelete', new Array(i18n('KpiThreshold'), idKpiThreshold));
   showConfirm(msg, actionOK);
@@ -10455,7 +10467,7 @@ function editGenericBankOffDays(idGenericBankOffDays,
 function saveGenericBankOffDays() {
   var formVar=dijit.byId('genericBankOffDaysForm');
   if (formVar.validate()) {
-    loadContent("../tool/saveGenericBankOffDays.php", "resultDiv", "genericBankOffDaysForm", true, 'calendarBankOffDays');
+    loadContent("../tool/saveGenericBankOffDays.php", "resultDivMain", "genericBankOffDaysForm", true, 'calendarBankOffDays');
     dijit.byId('dialogGenericBankOffDays').hide();
   } else {
     showAlert(i18n("alertInvalidForm"));
@@ -10468,7 +10480,7 @@ function removeGenericBankOffDays(id, name) {
         return;
     }
     actionOK=function() {
-        loadContent("../tool/removeGenericBankOffDay.php?idBankOffDay="+id, "resultDiv", null, true, 'calendarBankOffDays');
+        loadContent("../tool/removeGenericBankOffDay.php?idBankOffDay="+id, "resultDivMain", null, true, 'calendarBankOffDays');
     };
     msg=i18n('confirmDeleteGenericBankOffDay', new Array(name));
     showConfirm(msg, actionOK);
@@ -10485,7 +10497,7 @@ function saveAutoSendReport(){
 	      return;
 	  }
 	  if (formVar.validate()) {
-		  loadContent("../tool/saveAutoSendReport.php", "resultDiv", "autoSendReportForm", true, "report");
+		  loadContent("../tool/saveAutoSendReport.php", "resultDivMain", "autoSendReportForm", true, "report");
 		  dijit.byId('dialogAutoSendReport').hide();
 	  } else {
 	    showAlert(i18n("alertInvalidForm"));

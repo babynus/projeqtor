@@ -873,7 +873,7 @@ if (property_exists($objectClass,'idStatus')) {
           <?php if ($bt->scriptJS) {?>
           <?php echo $bt->scriptJS;?>;
           <?php } else {?>
-          loadContent("<?php echo $bt->scriptPHP;?>", "resultDiv", "listForm", false);
+          loadContent("<?php echo $bt->scriptPHP;?>", "resultDivMain", "listForm", false);
           <?php }?>
         </script>
       </button>

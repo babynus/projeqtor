@@ -35,10 +35,7 @@ scriptLog('   ->/view/dataCloningParameter.php');
 $user=getSessionUser();
 $userName=$user->id;
 ?>
-<div class="container" dojoType="dijit.layout.BorderContainer" id="dataCloningParameterTopDiv" name="dataCloningParameterTopDiv">
-  <div style="top:30px !important; left: 200px !important; width: 500px; margin: 0px 8px 4px 8px; padding: 5px;display:none;" 
-       id="resultDiv" dojoType="dijit.layout.ContentPane" region="none" >
-  </div>   
+<div class="container" dojoType="dijit.layout.BorderContainer" id="dataCloningParameterTopDiv" name="dataCloningParameterTopDiv">  
   <div dojoType="dijit.layout.ContentPane" region="top" id="dataCloningParameterButtonDiv">
   <form dojoType="dijit.form.Form" name="dataCloningParameterForm" id="dataCloningParameterForm" action="" method="post" >
   <table width="100%" class="listTitle">
@@ -53,7 +50,7 @@ $userName=$user->id;
           title="<?php echo i18n('buttonSaveParameters');?>"
           iconClass="dijitButtonIcon dijitButtonIconSave" class="detailButton">
           <script type="dojo/connect" event="onClick" args="evt">              
-                submitForm("../tool/saveParameter.php","resultDiv", "parameterForm", true);
+                submitForm("../tool/saveParameter.php","resultDivMain", "parameterForm", true);
               </script>
         </button>
       </td>
