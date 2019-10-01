@@ -480,7 +480,6 @@ class WorkElementMain extends SqlElement {
 				$result .= '<span>' . $title . '</span>';
 				$result .= '<script type="dojo/connect" event="onClick" args="evt">';
 				$result .= 'startStopWork("' . (($this->ongoing) ? 'stop' : 'start') . '","' . htmlEncode($this->refType) . '",' . htmlEncode($this->refId) . ');';
-				// $result .= ' loadContent("../tool/startStopWork.php?action=' . (($this->ongoing) ? 'stop' : 'start') . '","resultDiv","objectForm",true);';
 				$result .= '</script>';
 				$result .= '</button><br/>';
 				
