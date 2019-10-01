@@ -265,6 +265,7 @@
        // fix planning, fixPerimeter, under construction
              $arrayCheckbox=array("fixPlanning","fixPerimeter","isUnderConstruction");
              foreach($arrayCheckbox as $checkField) {
+             if(get_class($obj)=='Activity' and $checkField=='fixPlanning')continue;
              if (isDisplayable($obj,$checkField)) {?>
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeRequestor',array($obj->getColCaption($checkField)));?>&nbsp;:&nbsp;</td>
@@ -671,6 +672,23 @@
               </td>
             </tr>
             <?php }
+            
+       // fix planning, fixPerimeter, under construction
+             if (isDisplayable($obj,'fixPlanning') and get_class($obj)=='Activity') {?>
+              <tr class="detail">
+                <td class="label" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeRequestor',array($obj->getColCaption('fixPlanning')));?>&nbsp;:&nbsp;</td>
+                <td>
+                  <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                  <?php echo autoOpenFilteringSelect();?>
+                   id="fixPlanning" name="fixPlanning">
+                   <option value=""> </option>
+                   <option value="ON"><?php echo i18n("checkBox");?></option>
+                   <option value="OFF"><?php echo i18n("uncheckedBox");?></option>
+                  </select>
+                </td>
+              </tr>
+            <?php }
+            
        // result
             if (isDisplayable($obj,'result')) {?>
             <tr class="detail">
