@@ -92,6 +92,23 @@ CREATE INDEX changerequestCriticality ON `${prefix}changerequest` (idCriticality
 CREATE INDEX changerequestFeasibility ON `${prefix}changerequest` (idFeasibility);
 CREATE INDEX requiremenRiskLevel ON `${prefix}changerequest` (idRiskLevel);
 
+CREATE TABLE `${prefix}resourceincompatible` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `idResource` int(12) unsigned NOT NULL,
+  `idIncompatible` int(12) unsigned DEFAULT NULL,
+  `description`  mediumtext,
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `${prefix}resourcesupport` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `idResource` int(12) unsigned NOT NULL,
+  `idSupport` int(12) unsigned DEFAULT NULL,
+  `description`  mediumtext,
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8;
+CREATE INDEX requiremenRiskLevel ON `${prefix}changerequest` (idRiskLevel);
+
 ALTER TABLE `${prefix}activity` ADD COLUMN `fixPlanning` int(1) unsigned default '0';
 ALTER TABLE `${prefix}planningelement` ADD COLUMN `fixPlanning` int(1) unsigned default '0';
 ALTER TABLE `${prefix}status` ADD COLUMN `fixPlanning` int(1) unsigned default '0';

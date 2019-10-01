@@ -72,7 +72,6 @@ class ResourceMain extends SqlElement {
   // ADD tLaguerie Ticket #396
   public $endDate;
   // END tLaguerie Ticket #396
-
   public $description;
   public $_sec_ResourceCost;
   public $idRole;
@@ -86,6 +85,10 @@ class ResourceMain extends SqlElement {
   public $_spe_resourceCapacity;
   public $_sec_resourceSurbooking;
   public $_spe_resourceSurbooking;
+  public $_sec_resourceIncompatible;
+  public $_spe_resourceIncompatible;
+  public $_sec_resourceSupport;
+  public $_spe_resourceSupport;
   public $_sec_Miscellaneous;
   public $isLdap;
   public $dontReceiveTeamMails;
@@ -750,6 +753,18 @@ class ResourceMain extends SqlElement {
       $critArray=array('idResource'=>(($this->id)?$this->id:'0'));
       $capacityList=$resourceSurbooking->getSqlElementsFromCriteria($critArray, false);
       drawResourceSurbooking($capacityList,$this,'ResourceSurbooking',false);
+      return $result;
+    }else if ($item=='resourceIncompatible'){
+      $resourceIncompatible = new ResourceIncompatible();
+      $critArray=array('idResource'=>$this->id);
+      $incompatibleResourceList=$resourceIncompatible->getSqlElementsFromCriteria($critArray, false);
+      drawIncompatibleResource($incompatibleResourceList, $this, 'ResourceIncompatible', false);
+      return $result;
+    }else if ($item=='resourceSupport'){
+      $resourceSupport = new ResourceSupport();
+      $critArray=array('idResource'=>$this->id);
+      $supportResourceList=$resourceSupport->getSqlElementsFromCriteria($critArray, false);
+      drawSupportResource($supportResourceList, $this, 'ResourceSupport', false);
       return $result;
     }
   }
