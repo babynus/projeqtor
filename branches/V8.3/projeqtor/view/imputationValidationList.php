@@ -58,10 +58,7 @@ $firstDay = date('Y-m-d', firstDayofWeek($currentWeek, $currentYear));
 $lastDay = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay)));
 ?>
 
-<div dojoType="dijit.layout.BorderContainer" id="imputationValidationParamDiv" name="imputationValidationParamDiv">
-  <div style="top:30px !important; left: 200px !important; width: 500px; margin: 0px 8px 4px 8px; padding: 5px;display:none;" 
-       id="imputationValidationResultDiv" dojoType="dijit.layout.ContentPane" region="none" >
-  </div>   
+<div dojoType="dijit.layout.BorderContainer" id="imputationValidationParamDiv" name="imputationValidationParamDiv">  
   <div dojoType="dijit.layout.ContentPane" region="top" id="imputationValidationButtonDiv" class="listTitle" >
   <form dojoType="dijit.form.Form" name="imputValidationForm" id="imputValidationForm" action="" method="post" >
   <table width="100%" height="64px" class="listTitle">

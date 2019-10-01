@@ -230,22 +230,24 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
                   <br/><br/>
 			            <table width="100%">
 			              <tr>     
-			                <td title="<?php echo i18n("login");?>" style="background:transparent !important;">
-			                  <div class="inputLoginIcon iconLoginUser">&nbsp;</div>
+			                <td title="<?php echo i18n("login");?>" style="background:transparent !important;width: 100px;">
+			                  
 			                </td>
-			                <td title="<?php echo i18n("login");?>">
+			                <td title="<?php echo i18n("login");?>" style="width:200px">
+			                  <div class="inputLoginIcon iconLoginUser">&nbsp;</div>
 			                  <input tabindex="1" id="login" type="text"  class="inputLogin"
 			                   dojoType="dijit.form.TextBox" />
                         <input type="hidden" id="hashStringLogin" name="login" style="width:200px" value=""/>  
 			                </td>
-			                <td width="110px">&nbsp;</td>
+			                <td width="100px">&nbsp;</td>
 			              </tr>
 			              <tr style="font-size:50%"><td colspan="3">&nbsp;</td></tr>
 			              <tr>
 			                <td title="<?php echo i18n("password");?>" style="background:transparent !important;">
-			                  <div  class="inputLoginIcon iconLoginPassword">&nbsp;</div>
+			                  
 			                </td>  
 			                <td title="<?php echo i18n("password");?>">
+			                <div  class="inputLoginIcon iconLoginPassword">&nbsp;</div>
 			                  <input  tabindex="2" id="password" type="password" class="inputLogin"
 			                   dojoType="dijit.form.TextBox" />
                         <input type="hidden" id="hashStringPassword" name="password" style="width:200px" value=""/>
@@ -254,7 +256,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			              </tr>
 			              <?php if (Parameter::getGlobalParameter('rememberMe')!='NO') {?>
 			              <tr style="font-size:50%"><td colspan="2">&nbsp;</td></tr>
-			              <tr>
+			              <tr style="height:30px">
 			                <td></td>
 			                <td><div style="width:200px;text-align:center;"><div class="greyCheck" dojoType="dijit.form.CheckBox" type="checkbox" name="rememberMe"></div> <?php echo i18n('rememberMe');?></div></td>
 			                <td></td>
@@ -262,8 +264,8 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			              <?php }?>
 			              <tr style="font-size:50%"><td colspan="3">&nbsp;</td></tr>
 			              <tr>
-			                <td class="label" style="background:transparent !important;"><label>&nbsp;</label></td>
-			                <td>
+			                <td style="background:transparent !important;">&nbsp;</td>
+			                <td style="text-align:center">
 			                  <button tabindex="3" type="submit" id="loginButton" class="largeTextButton"
 			                   dojoType="dijit.form.Button" showlabel="true">OK
 			                    <script type="dojo/connect" event="onClick" args="evt">
@@ -282,8 +284,8 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 	if ($showPassword) { 
 	?>               <tr style="height:5px"><td colspan="3" ></td></tr>
 			              <tr>
-			                <td class="label" style="background:transparent !important;"><label>&nbsp;</label></td>
-			                <td style="width:200px">  
+			                <td style="background:transparent !important;">&nbsp;</td>
+			                <td style="text-align:center">  
 			                  <button tabindex="4" id="passwordButton" class="largeTextButton" type="button" dojoType="dijit.form.Button" showlabel="true">
 			                    <?php echo i18n('buttonChangePassword') ?>
 			                    <script type="dojo/connect" event="onClick" args="evt">
@@ -297,9 +299,9 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
   <?php }?>
 			              <tr><td colspan="3">&nbsp;</td></tr>
 			              <tr>
-			                <td class="label" style="background:transparent !important;"><label>&nbsp;</label></td>
+			                
 			                <td colspan="3" style="position:fixed;width:100%; height:100%">
-			                  <div id="loginResultDiv" dojoType="dijit.layout.ContentPane" region="none" >
+			                  <div id="loginResultDiv" dojoType="dijit.layout.ContentPane" region="none" style="margin-left: 6px;">
 			                    <input type="hidden" id="isLoginPage" name="isLoginPage" value="true" />
 			                    <?php if (Parameter::getGlobalParameter('applicationStatus')=='Closed'
 			                          or Sql::getDbVersion()!=$version) {

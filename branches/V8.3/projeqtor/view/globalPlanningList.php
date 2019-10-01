@@ -436,9 +436,6 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                   </table>
                 </td>
 		            <td style="">
-                  <div id="planResultDiv" style="display:none" 
-                    dojoType="dijit.layout.ContentPane" region="center" >
-                  </div>
                   <table>
                   <tr><td style="font-weight:bold;text-align:center;"><?php echo i18n('displayBaseline');?></td></tr>
                   <tr><td style="text-align:right;white-space:nowrap;"><?php echo (($displayWidthPlan>1230)?i18n('baselineTop'):i18n('baselineTopShort')).'&nbsp;:&nbsp;';?>

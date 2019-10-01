@@ -55,7 +55,7 @@ scriptLog('   ->/view/reportsList.php');
             </td>
             <td>
             </td>
-            <td><div id="planResultDiv" style=" width: 400px;height: 10px;" dojoType="dijit.layout.ContentPane" region="center" ></div></td>
+            <td></td>
             <td style="text-align: right; align: right;">
             </td>
           </tr>

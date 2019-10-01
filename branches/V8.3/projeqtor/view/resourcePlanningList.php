@@ -245,9 +245,6 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                   </table>
                 </td>
 		            <td style="width:5px">
-                  <div id="planResultDiv" style="display:none"
-                    dojoType="dijit.layout.ContentPane" region="center" >
-                  </div>
                   <table>
                     <tr>
                       <td style="text-align:right;"><?php echo i18n('colIdResource');?>&nbsp;&nbsp;</td>

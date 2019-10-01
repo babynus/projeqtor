@@ -2361,7 +2361,7 @@ function removeDependencyRightClick(dependencyId,evt){
     return;
   }
   dependencyId=dojo.byId('dependencyRightClickId').value;
-    loadContent("../tool/removeDependency.php?dependencyId=" + dependencyId, "planResultDiv", "",
+    loadContent("../tool/removeDependency.php?dependencyId=" + dependencyId, "resultDivMain", "",
         true, 'dependency');
   hideDependencyRightClick();
 }
@@ -2374,7 +2374,7 @@ function saveDependencyRightClick() {
     showAlert(i18n('messageInvalidNumeric',new Array(i18n('colDependencyDelay'))));
     return;
   }
-  loadContent("../tool/saveDependencyRightClick.php", "planResultDiv", "dynamicRightClickDependencyForm",
+  loadContent("../tool/saveDependencyRightClick.php", "resultDivMain", "dynamicRightClickDependencyForm",
       true, 'dependency');
   dijit.byId('dialogDependency').hide();
   hideDependencyRightClick();

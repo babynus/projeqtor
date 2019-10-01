@@ -1003,14 +1003,6 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
             hideWait();
             return;
           }
-          if (dijit.byId('planResultDiv')) {
-            if (dojo.byId("lastPlanStatus")
-                && dojo.byId("lastPlanStatus").value == "INCOMPLETE") {
-              // Do not clean result content
-            } else {
-              // dijit.byId('planResultDiv').set('content',"");
-            }
-          }
           // Must destroy existing instances of CKEDITOR before refreshing the page
           // page.
           if (page.substr(0, 16) == 'objectDetail.php'
@@ -1423,7 +1415,6 @@ function refreshNotificationTree(bCheckFormChangeInProgress) {
  * @return void
  */
 var resultDivFadingOut = null;
-var planningResultDivFadingOut = null;
 var forceRefreshCreationInfo = false;
 function finalizeMessageDisplay(destination, validationType) {
   var contentNode = dojo.byId(destination);
@@ -1432,14 +1423,12 @@ function finalizeMessageDisplay(destination, validationType) {
   var lastOperation = dojo.byId('lastOperation');
   var needProjectListRefresh = false;
   // scpecific Plan return
-  if (destination == "planResultDiv" && (! validationType || validationType=='dependency')) {
-    if (dojo.byId('lastPlanStatus')) {
-      lastOperationStatus = dojo.byId('lastPlanStatus');
-      lastOperation = "plan";
-      validationType = null;
-    }
+  if ((! validationType || validationType=='dependency') && dojo.byId('lastPlanStatus')) {
+    lastOperationStatus = dojo.byId('lastPlanStatus');
+    lastOperation = "plan";
+    validationType = null;
   }
-  if (destination == 'resultDiv' || destination == 'planResultDiv') {
+  if (destination == 'resultDivMain') {
     contentNode.style.display = "block";
   }
   var noHideWait = false;
@@ -1611,7 +1600,7 @@ function finalizeMessageDisplay(destination, validationType) {
             || validationType == 'documentVersion') {
           refreshGrid();
         } else if ( (validationType == 'dependency' || validationType == 'affectation')
-            && (dojo.byId(destination) == "planResultDiv" || dojo.byId("GanttChartDIV"))) {
+            && (dojo.byId("GanttChartDIV"))) {
           noHideWait = true;
           refreshGrid(); // Will call refreshJsonPlanning() if needed and
                           // plan() if required
@@ -1623,11 +1612,11 @@ function finalizeMessageDisplay(destination, validationType) {
       // refresh the grid to reflect changes
       var lastSaveId = dojo.byId('lastSaveId');
       var objectId = dojo.byId('objectId');
-      if (objectId && lastSaveId && destination != "planResultDiv") {
-        objectId.value = lastSaveId.value;
-      }
       // Refresh the Grid list (if visible)
       var grid = dijit.byId("objectGrid");
+      if (objectId && lastSaveId && lastOperation!="plan") {
+        objectId.value = lastSaveId.value;
+      }
       if (grid) {
         var sortIndex = grid.getSortIndex();
         var sortAsc = grid.getSortAsc();
@@ -1647,25 +1636,19 @@ function finalizeMessageDisplay(destination, validationType) {
         });
       }
       // Refresh the planning Gantt (if visible)
-      if (dojo.byId(destination) == "planResultDiv"
-          || dojo.byId("GanttChartDIV")) {
+      if (dojo.byId("GanttChartDIV")) {
         noHideWait = true;
-        if (destination == "planResultDiv") {
-          if (dojo.byId("saveDependencySuccess")
-              && dojo.byId("saveDependencySuccess").value == 'true') {
-            refreshGrid(); // It is a dependency add throught D&D => must
-                            // replan is needed
-          } else if (dojo.byId('lastOperation')
-              && dojo.byId('lastOperation').value == 'move') {
-            refreshGrid();
-          } else {
-            refreshJsonPlanning(); // Must not call refreshGrid() to avoid
-                                    // never ending loop
-          }
-        } else {
+        if (dojo.byId("saveDependencySuccess")
+            && dojo.byId("saveDependencySuccess").value == 'true') {
+          refreshGrid(); // It is a dependency add throught D&D => must
+                          // replan is needed
+        } else if (dojo.byId('lastOperation')
+            && dojo.byId('lastOperation').value == 'move') {
           refreshGrid();
+        } else {
+          refreshJsonPlanning(); // Must not call refreshGrid() to avoid
+                                  // never ending loop
         }
-        // loadContent("planningList.php", "listDiv", 'listForm');
       }
       if (dojo.byId('id') && lastOperation && (lastOperation.value == "insert" || forceRefreshCreationInfo)) {
      // last operations depending on the executed operatoin (insert, delete, ...)
@@ -1960,35 +1943,18 @@ function finalizeMessageDisplay(destination, validationType) {
     hideWait(); 
   }
   // If operation is correct (not an error) slowly fade the result message
-  if (destination == 'planResultDiv') {
-    if (planningResultDivFadingOut)
-      planningResultDivFadingOut.stop();
-  } else {
-    if (resultDivFadingOut)
-      resultDivFadingOut.stop();
-  }
+  if (resultDivFadingOut) resultDivFadingOut.stop();
   if ((lastOperationStatus.value != "ERROR"
       && lastOperationStatus.value != "INVALID"
-      && lastOperationStatus.value != "CONFIRM" && lastOperationStatus.value != "INCOMPLETE")) {
-    if (destination == 'planResultDiv') {
-      planningResultDivFadingOut = dojo.fadeOut({
-        node : contentNode,
-        duration : 3000,
-        onEnd : function() {
-          contentNode.style.display = "none";
-          contentWidget.set("content",null);
-        }
-      }).play();
-    } else {
-      resultDivFadingOut = dojo.fadeOut({
-        node : contentNode,
-        duration : 3000,
-        onEnd : function() {
-          contentNode.style.display = "none";
-          contentWidget.set("content",null);
-        }
-      }).play();
-    }
+      && lastOperationStatus.value != "CONFIRM" && lastOperationStatus.value != "INCOMPLETE")) {   
+    resultDivFadingOut = dojo.fadeOut({
+      node : contentNode,
+      duration : 3000,
+      onEnd : function() {
+        contentNode.style.display = "none";
+        contentWidget.set("content",null);
+      }
+    }).play();  
   } else {
     if (lastOperationStatus.value == "ERROR") {
       showError(message);
@@ -1998,13 +1964,13 @@ function finalizeMessageDisplay(destination, validationType) {
         if (message.indexOf('id="confirmControl" value="delete"') > 0 || message.indexOf('id="confirmControl" type="hidden" value="delete"') > 0) {
           confirm = function() {
             dojo.byId("deleteButton").blur();
-            loadContent("../tool/deleteObject.php?confirmed=true", "resultDiv",
+            loadContent("../tool/deleteObject.php?confirmed=true", "resultDivMain",
                 'objectForm', true);
           };
         } else {
           confirm = function() {
             dojo.byId("saveButton").blur();
-            loadContent("../tool/saveObject.php?confirmed=true", "resultDiv",
+            loadContent("../tool/saveObject.php?confirmed=true", "resultDivMain",
                 'objectForm', true);
           };
         }
@@ -2038,6 +2004,8 @@ var clickCloseBoxOnMessageAction = null;
 function clickCloseBoxOnMessage(destination) {
   contentWidget = dijit.byId(destination);
   contentNode = dojo.byId(destination);
+  if (!contentNode) return;
+  if (contentNode.style.display=="none") return;
   dojo.fadeOut({
     node : contentNode,
     duration : 500,
@@ -2157,8 +2125,10 @@ function finalizeMultipleSave() {
         });
   }
   if (dojo.byId('summaryResult')) {
-    contentNode = dojo.byId('resultDiv');
+    contentNode = dojo.byId('resultDivMain');
+    console.log(dojo.byId('summaryResult').value);
     contentNode.innerHTML = dojo.byId('summaryResult').value;
+    contentNode.style.display='block';
     msg = dojo.byId('summaryResult').value;
     msg = msg.replace(" class='messageERROR' ", "");
     msg = msg.replace(" class='messageOK' ", "");
@@ -2177,7 +2147,10 @@ function finalizeMultipleSave() {
       onEnd : function() {
         dojo.fadeOut({
           node : contentNode,
-          duration : 3000
+          duration : 5000,
+          onEnd : function() {
+            dojo.byId('resultDivMain').style.display='none';
+          }
         }).play();
       }
     }).play();
@@ -3582,7 +3555,7 @@ function runReport() {
 }
 function saveReportInToday() {
   var fileName = dojo.byId('reportFile').value;
-  loadContent("../tool/saveReportInToday.php", "resultDiv", "reportForm", true,
+  loadContent("../tool/saveReportInToday.php", "resultDivMain", "reportForm", true,
       'report');
 }
 function saveReportParametersForDialog() {
@@ -3590,7 +3563,7 @@ function saveReportParametersForDialog() {
 	hideWait();
 	showDialogAutoSendReport();
   };
-  loadDiv("../tool/saveReportParametersForDialog.php", "resultDiv", "reportForm", callback);
+  loadDiv("../tool/saveReportParametersForDialog.php", "resultDivMain", "reportForm", callback);
       
 }	  
 /**
@@ -3813,12 +3786,12 @@ function moveTask(source, destination) {
   }
   var url = '../tool/moveTask.php?from=' + source.join() + '&to=' + destination
       + '&mode=' + mode;
-  loadContent(url, "planResultDiv", null, true, null);
+  loadContent(url, "resultDivMain", null, true, null);
   
 }
 
 function indentTask(way) {
-  if (!dojo.byId("planResultDiv") || !dojo.byId('objectClass')
+  if (!dojo.byId("resultDivMain") || !dojo.byId('objectClass')
       || !dojo.byId('objectId')) {
     return;
   }
@@ -3830,7 +3803,7 @@ function indentTask(way) {
   objectId = dojo.byId('objectId').value;
   var url = '../tool/indentTask.php?objectClass=' + objectClass + '&objectId='
       + objectId + '&way=' + way;
-  loadContent(url, "planResultDiv", null, true, null);
+  loadContent(url, "resultDivMain", null, true, null);
 }
 
 var arrayCollapsed=[];
@@ -4362,7 +4335,7 @@ function addNewItem(item) {
 }
 
 function startStopWork(action, type, id, start) {
-  loadContent("../tool/startStopWork.php?action=" + action, "resultDiv",
+  loadContent("../tool/startStopWork.php?action=" + action, "resultDivMain",
       "objectForm", true);
   var now = new Date();
   var vars = new Array();
@@ -4436,7 +4409,7 @@ function saveObject() {
     CKEDITOR.instances[name].updateElement();
   }
   dojo.byId("saveButton").blur();
-  submitForm("../tool/saveObject.php", "resultDiv", "objectForm", true);
+  submitForm("../tool/saveObject.php", "resultDivMain", "objectForm", true);
 }
 
 function onKeyDownFunction(event, field, editorFld) {
@@ -5624,7 +5597,7 @@ function saveNoteStream(event){
       noteEditor.focus();
       return;
     }
-    loadContent("../tool/saveNoteStream.php", "resultDiv", "noteFormStream", true, 'note',null,null);
+    loadContent("../tool/saveNoteStream.php", "resultDivMain", "noteFormStream", true, 'note',null,null);
     noteEditor.set("value",null);
     event.preventDefault();
   } 
@@ -6170,7 +6143,7 @@ function saveDataCloning(){
 	  };
 	  if(formVar.validate()) {
 		  showWait();
-		  loadContent("../tool/saveDataCloning.php", "resultDiv", "addDataCloningForm", true, false, false, false, callback);
+		  loadContent("../tool/saveDataCloning.php", "resultDivMain", "addDataCloningForm", true, false, false, false, callback);
 		  dijit.byId('dialogAddDataCloning').hide();
 	  } else {
 	    showAlert(i18n("alertInvalidForm"));

@@ -394,8 +394,6 @@ function drawTableFromObjectList($objectList) {
 <div class="container" dojoType="dijit.layout.BorderContainer">
 <div id="parameterButtonDiv" class="listTitle" style="z-index:3;overflow:visible"
   dojoType="dijit.layout.ContentPane" region="top">
-  <div id="resultDiv" dojoType="dijit.layout.ContentPane"
-      region="top" style="padding:5px;padding-bottom:20px;max-height:100px;padding-left:300px;z-index:999"></div>
 <table width="100%">
   <tr height="100%" style="vertical-align: middle;">
     <td width="50px" align="center"><?php echo formatIcon(ucfirst($type), 32, null, true);?></td>
@@ -408,7 +406,7 @@ function drawTableFromObjectList($objectList) {
       title="<?php echo i18n('buttonSaveParameters');?>"
       iconClass="dijitButtonIcon dijitButtonIconSave" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">              
-          submitForm("../tool/saveParameter.php","resultDiv", "parameterForm", true);
+          submitForm("../tool/saveParameter.php","resultDivMain", "parameterForm", true);
         </script>
     </button>
     <div dojoType="dijit.Tooltip" connectId="saveButton"><?php echo i18n("buttonSaveParameter")?></div>
