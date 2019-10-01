@@ -30,7 +30,6 @@
  */
 
 require_once "../tool/projeqtor.php";
-
 $assignmentId=null;
 if (array_key_exists('assignmentId',$_REQUEST)) {
   $assignmentId=$_REQUEST['assignmentId']; // validated to be numeric in SqlElement base constructor
@@ -58,6 +57,8 @@ if (array_key_exists('assignmentIdResource',$_REQUEST)) {
   $idResource=$_REQUEST['assignmentIdResource'];
 	Security::checkValidId($idResource);
 }
+
+$unique=RequestHandler::getBoolean('assignmentUnique');
 
 $idRole=null;
 if (array_key_exists('assignmentIdRole',$_REQUEST)) {
@@ -100,7 +101,6 @@ if (! array_key_exists('assignmentPlannedWork',$_REQUEST)) {
 }
 $plannedWork=$_REQUEST['assignmentPlannedWork'];
 Security::checkValidNumeric($plannedWork);
-
 
 if (! array_key_exists('assignmentComment',$_REQUEST)) {
   throwError('assignmentComment parameter not found in REQUEST');
@@ -152,8 +152,6 @@ if (! $oldCost or $assignment->dailyCost!=$oldCost) {
   $assignment->newDailyCost=$cost;
 }
 
-
-
 $resource = new ResourceAll($assignment->idResource);
 if($resource->isResourceTeam){
   $assignment->capacity=$etp;
@@ -173,7 +171,7 @@ if($resource->isResourceTeam){
 }else{
   $assignment->rate=$rate;
 }
-
+$assignment->uniqueResource=($unique)?1:0;;
 $assignment->assignedWork=Work::convertWork($assignedWork);
 //$assignment->realWork=Work::convertWork($realWork); // Should not be changed here
 $assignment->leftWork=Work::convertWork($leftWork);
@@ -203,7 +201,6 @@ if(isset($optional)){
   $assignment->optional=$optional;
 }
 $result=$assignment->save();
-
 // 
 //$ar=new AssignmentRecurring();
 if ($planningMode=='RECW') {
@@ -258,6 +255,11 @@ if ($idOrigin){
     $assignmentOrigin->save();
 }
   
+// If uniquerResource, store list of resources
+if ($assignment->isResourceTeam and $assignment->uniqueResource) {
+  AssignmentSelection::addResourcesFromPool($assignment->id,$assignment->idResource); 
+}
+
 // Message of correct saving
 displayLastOperationStatus($result);
 ?>
