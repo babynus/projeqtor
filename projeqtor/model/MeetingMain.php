@@ -299,7 +299,7 @@ class MeetingMain extends SqlElement {
       $result .= '<span>' . i18n('sendMailToAttendees') . '</span>';
       $result .=  '<script type="dojo/connect" event="onClick" args="evt">';
       $result .= '   if (checkFormChangeInProgress()) {return false;}';
-      $result .=  '  loadContent("../tool/sendMail.php","resultDiv","objectForm",true);';
+      $result .=  '  loadContent("../tool/sendMail.php","resultDivMain","objectForm",true);';
       $result .= '</script>';
       $result .= '</button>';
       $result .= '</td></tr>';
