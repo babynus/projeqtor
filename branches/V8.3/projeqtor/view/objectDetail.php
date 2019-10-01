@@ -6205,6 +6205,148 @@ function drawResourceSurbooking($list, $obj, $type, $refresh=false) {
   echo '</table>';
 }
 
+function drawIncompatibleResource($list, $obj, $type, $refresh=false) {
+  global $cr, $print, $user, $browserLocale, $comboDetail;
+  $pluginObjectClass='Affectation';
+  //$tableObject=$list;
+  $lstPluginEvt=Plugin::getEventScripts('list', $pluginObjectClass);
+  foreach ($lstPluginEvt as $script) {
+  	require $script; // execute code
+  }
+  
+  $canDelete=securityGetAccessRightYesNo('menu'.get_class($obj), 'delete', $obj)=="YES";
+  $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
+  $canCreate=securityGetAccessRightYesNo('menu'.get_class($obj), 'create', $obj)=="YES";
+  if (!(securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES")) {
+  	$canCreate=false;
+  	$canUpdate=false;
+  	$canDelete=false;
+  }
+  if ($obj->idle==1) {
+  	$canUpdate=false;
+  	$canCreate=false;
+  	$canDelete=false;
+  }
+  if (get_class($obj)=='GlobalView') {
+  	$canUpdate=false;
+  	$canCreate=false;
+  	$canDelete=false;
+  }
+  
+  echo '<table style="width:100%">';
+  echo '<tr><td colspan=2 style="width:100%;"><table style="width:100%;">';
+  echo '<tr>';
+  if (get_class($obj)=='Resource' or get_class($obj)=='ResourceTeam') {
+  	$idRess=$obj->id;
+  } else {
+  	$idRess=null;
+  }
+  if (!$print) {
+  	echo '<td class="assignHeader" style="width:15%">';
+  	if ($obj->id!=null and !$print and $canCreate and !$obj->idle) {
+  		echo '<a onClick="addIncompatibleResource(\''.get_class($obj).'\',\''.$type.'\',\''.$idRess.'\');" title="'.i18n('addIncompatibleResource').'" /> '.formatSmallButton('Add').'</a>';
+  	}
+  	echo '</td>';
+  }
+  echo '<td class="assignHeader" style="width:12%">'.i18n('colId').'</td>';
+  echo '<td class="assignHeader" style="width:35%">'.i18n('colName').'</td>';
+  echo '<td class="assignHeader" style="width:19%">'.i18n('colProfile').'</td>';
+  echo '</tr>';
+  
+  foreach ($list as $resInc) {
+  	echo '<tr>';
+  	if (!$print) {
+  		echo '<td class="assignData" style="text-align:center;white-space: nowrap;">';
+  		if ($canDelete) {
+  			echo '<a onClick="removeIncompatibleResource(\''.$resInc->id.'\',\''.$resInc->idResource.'\');" '.'title="'.i18n('removeIncompatibleResource').'" > '.formatSmallButton('Remove').'</a>';
+  		}
+  		if ($resInc->description) {
+  			echo '<div style="float:right">'.formatCommentThumb($resInc->description).'</div>';
+  		}
+  	}
+  	echo '</td>';
+  	$res = new Resource($resInc->idIncompatible);
+  	$profile = new Profile($res->idProfile);
+  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.$resInc->id.'</td>';
+  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.$res->name.'</td>';
+  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.$profile.'</td>';
+  	echo '</tr>';
+  }
+  echo '</table></td></tr>';
+  echo '</table>';
+}
+
+function drawSupportResource($list, $obj, $type, $refresh=false) {
+  global $cr, $print, $user, $browserLocale, $comboDetail;
+  $pluginObjectClass='Affectation';
+  //$tableObject=$list;
+  $lstPluginEvt=Plugin::getEventScripts('list', $pluginObjectClass);
+  foreach ($lstPluginEvt as $script) {
+  	require $script; // execute code
+  }
+  
+  $canDelete=securityGetAccessRightYesNo('menu'.get_class($obj), 'delete', $obj)=="YES";
+  $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
+  $canCreate=securityGetAccessRightYesNo('menu'.get_class($obj), 'create', $obj)=="YES";
+  if (!(securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES")) {
+  	$canCreate=false;
+  	$canUpdate=false;
+  	$canDelete=false;
+  }
+  if ($obj->idle==1) {
+  	$canUpdate=false;
+  	$canCreate=false;
+  	$canDelete=false;
+  }
+  if (get_class($obj)=='GlobalView') {
+  	$canUpdate=false;
+  	$canCreate=false;
+  	$canDelete=false;
+  }
+  
+  echo '<table style="width:100%">';
+  echo '<tr><td colspan=2 style="width:100%;"><table style="width:100%;">';
+  echo '<tr>';
+  if (get_class($obj)=='Resource' or get_class($obj)=='ResourceTeam') {
+  	$idRess=$obj->id;
+  } else {
+  	$idRess=null;
+  }
+  if (!$print) {
+  	echo '<td class="assignHeader" style="width:15%">';
+  	if ($obj->id!=null and !$print and $canCreate and !$obj->idle) {
+  		echo '<a onClick="addSupportResource(\''.get_class($obj).'\',\''.$type.'\',\''.$idRess.'\');" title="'.i18n('addSupportResource').'" /> '.formatSmallButton('Add').'</a>';
+  	}
+  	echo '</td>';
+  }
+  echo '<td class="assignHeader" style="width:12%">'.i18n('colId').'</td>';
+  echo '<td class="assignHeader" style="width:35%">'.i18n('colName').'</td>';
+  echo '<td class="assignHeader" style="width:19%">'.i18n('colProfile').'</td>';
+  echo '</tr>';
+  
+  foreach ($list as $resSup) {
+  	echo '<tr>';
+  	if (!$print) {
+  		echo '<td class="assignData" style="text-align:center;white-space: nowrap;">';
+  		if ($canDelete) {
+  			echo '<a onClick="removeSupportResource(\''.$resSup->id.'\',\''.$resSup->idResource.'\');" '.'title="'.i18n('removeSupportResource').'" > '.formatSmallButton('Remove').'</a>';
+  		}
+  		if ($resSup->description) {
+  			echo '<div style="float:right">'.formatCommentThumb($resSup->description).'</div>';
+  		}
+  	}
+  	echo '</td>';
+  	$res = new Resource($resSup->idIncompatible);
+  	$profile = new Profile($res->idProfile);
+  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.$resSup->id.'</td>';
+  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.$res->name.'</td>';
+  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.$profile.'</td>';
+  	echo '</tr>';
+  }
+  echo '</table></td></tr>';
+  echo '</table>';
+}
+
 // gautier #ProviderTerm
 function drawProviderTermFromObject($list, $obj, $type, $refresh=false) {
   global $cr, $print, $user, $browserLocale, $comboDetail;
