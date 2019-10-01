@@ -122,8 +122,6 @@
       </div>
     </div>
   </div>
-  <div id="resultDiv" style="left: 60% ! important; width: 40%;">
-  </div>
   <div dojoType="dijit.layout.ContentPane" region="center">
     <div dojoType="dijit.layout.BorderContainer" class="background">
       <div dojoType="dijit.layout.ContentPane" region="center" style="overflow-y: auto">
