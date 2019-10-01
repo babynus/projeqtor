@@ -2145,7 +2145,8 @@ function finalizeMultipleSave() {
       node : contentNode,
       duration : 10,
       onEnd : function() {
-        dojo.fadeOut({
+        if (resultDivFadingOut) resultDivFadingOut.stop();
+        resultDivFadingOut=dojo.fadeOut({
           node : contentNode,
           duration : 5000,
           onEnd : function() {
