@@ -238,7 +238,7 @@ class DocumentMain extends SqlElement {
     	$result .= '   if (checkFormChangeInProgress()) {return false;}';
     	$result .=  '  var email="";';
     	$result .=  '  if (dojo.byId("email")) {email = dojo.byId("email").value;}';
-    	$result .=  '  loadContent("../tool/sendMail.php","resultDiv","objectForm",true);';
+    	$result .=  '  loadContent("../tool/sendMail.php","resultDivMain","objectForm",true);';
     	$result .= '</script>';
     	$result .= '</button>';
     	$result .= '</td></tr>';
