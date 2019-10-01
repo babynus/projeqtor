@@ -55,10 +55,7 @@ $dataCloningCountPerDay = $dataCloning->countSqlElementsFromCriteria(null, $wher
 $dataCloningPerDay = Parameter::getGlobalParameter('dataCloningPerDay');
 $dataCloningCount = i18n('colDataCloningCount', array($dataCloningPerDay-$dataCloningCountPerDay, $dataCloningPerDay));
 ?>
-<div class="container" dojoType="dijit.layout.BorderContainer" id="dataCloningParamDiv" name="dataCloningParamDiv">
-  <div style="top:30px !important; left: 200px !important; width: 500px; margin: 0px 8px 4px 8px; padding: 5px;display:none;" 
-       id="resultDiv" dojoType="dijit.layout.ContentPane" region="none" >
-  </div>   
+<div class="container" dojoType="dijit.layout.BorderContainer" id="dataCloningParamDiv" name="dataCloningParamDiv"> 
   <div dojoType="dijit.layout.ContentPane" region="top" id="dataCloningButtonDiv" class="listTitle" >
   <form dojoType="dijit.form.Form" name="dataCloningListForm" id="dataCloningListForm" action="" method="post" >
   <table width="100%" height="32px" class="listTitle">

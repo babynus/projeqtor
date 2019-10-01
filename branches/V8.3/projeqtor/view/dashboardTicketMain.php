@@ -174,15 +174,11 @@
 		<form dojoType="dijit.form.Form" id="dashboardTicketMainForm" action="" method="post" >
 <?php /* CHANGE qCazelles - Dashboard : filter by type - Ticket 154
     Old
-		<div id="resultDiv" region="top"
-			style="padding: 5px; padding-bottom: 20px; max-height: 100px; padding-left: 300px; z-index: 999; padding-right: 800px"></div>
     <table width="100%">
     <tr height="32px" >
     <td width="50px" align="center"><?php echo formatIcon('TicketDashboard', 32, null, true);?></td>
     New */
 			?>
-		<div id="resultDiv" region="top"
-			style="padding: 5px; padding-bottom: 20px; max-height: 100px; padding-left: 300px; z-index: -1; padding-right: 800px"></div>
 		<table width="40%">
 			<tr height="32px" >
 			<?php //Here i correct a bug with standard themes (no icon) ?>

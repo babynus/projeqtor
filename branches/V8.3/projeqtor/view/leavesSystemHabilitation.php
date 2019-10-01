@@ -51,9 +51,6 @@
     <!--------------------------->
     <div id="leavesSystemHabilitationButtonDiv" class="listTitle" style="z-index:3;overflow:visible"
          dojoType="dijit.layout.ContentPane" region="top">
-        <div id="resultDiv" dojoType="dijit.layout.ContentPane"
-             region="top" style="padding:5px;padding-bottom:20px;max-height:100px;padding-left:300px;z-index:999">           
-        </div>
         <table width="100%">
             <tr height="100%" style="vertical-align: middle;">
                 <td width="50px" align="center"><?php echo formatIcon("LeavesSystemHabilitation", 32, null, true);?></td>
@@ -65,7 +62,7 @@
                             title="<?php echo i18n('buttonSave');?>"
                             iconClass="dijitButtonIcon dijitButtonIconSave" class="detailButton">
                         <script type="dojo/connect" event="onClick" args="evt">
-                            submitForm("../tool/saveLeavesSystemHabilitation.php","resultDiv", "LeavesSystemHabilitationForm", true);
+                            submitForm("../tool/saveLeavesSystemHabilitation.php","resultDivMain", "LeavesSystemHabilitationForm", true);
                         </script>
                     </button>
                     <div dojoType="dijit.Tooltip" connectId="saveParameterButton"><?php echo i18n("saveLeavesSystemHabilitation")?></div>

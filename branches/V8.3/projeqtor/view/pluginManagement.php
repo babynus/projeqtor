@@ -51,9 +51,7 @@ require_once "../tool/formatter.php";
         </td>
         <td width="50px"> 
         </td>
-        <td>
-          <div id="pluginResultDiv"
-             style="position:absolute; top: 5px; left:50%; padding:5px; max-height:100px;z-index:999;"></div>    
+        <td>  
         </td>
       </tr>
     </table>

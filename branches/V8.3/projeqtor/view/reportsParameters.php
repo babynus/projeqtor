@@ -1147,7 +1147,6 @@ foreach ($listParam as $param) {
   </tr>
 </table>
 </td><td>&nbsp;
-<div id="resultDiv" dojoType="dijit.layout.ContentPane" region="top" style="display:none"></div>
 </td></tr></table>
 </form>
 </div>

@@ -512,7 +512,7 @@ function checkCapacity(date) {
 function validFutureWorkDate(){
   valid=function() {
     formChangeInProgress=false; 
-    submitForm("../tool/saveImputation.php","resultDiv", "listForm", true);
+    submitForm("../tool/saveImputation.php","resultDivMain", "listForm", true);
   };
   nbDays=dojo.byId('nbFutureDays').value;
   var msg=i18n('msgRealWorkInTheFuture',new Array(nbDays));
@@ -529,7 +529,7 @@ function saveImputation() {
   } else if (futureInput) {
     valid=function() {
       formChangeInProgress=false; 
-      submitForm("../tool/saveImputation.php","resultDiv", "listForm", true);
+      submitForm("../tool/saveImputation.php","resultDivMain", "listForm", true);
     };
     nbDays=dojo.byId('nbFutureDays').value;
     var msg=i18n('msgRealWorkInTheFuture',new Array(nbDays));
@@ -537,7 +537,7 @@ function saveImputation() {
     showConfirm(msg,valid);
   } else {
     formChangeInProgress=false; 
-    submitForm("../tool/saveImputation.php","resultDiv", "listForm", true);
+    submitForm("../tool/saveImputation.php","resultDivMain", "listForm", true);
   }
   
   enableWidget("userName");
@@ -677,7 +677,7 @@ function finishDispatchWorkSave(){
   if (dijit.byId('WorkElement_realWork')) {
     dijit.byId('WorkElement_realWork').set('value',sum);
   }
-  loadContent("../tool/saveDispatchWork.php","resultDiv", "dialogDispatchWorkForm", true, 'dispatchWork');
+  loadContent("../tool/saveDispatchWork.php","resultDivMain", "dialogDispatchWorkForm", true, 'dispatchWork');
   dijit.byId('dialogDispatchWork').hide();
 }
 

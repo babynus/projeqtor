@@ -102,10 +102,6 @@
   $extendedZone=false;
   $maxTitleWidth=round($displayWidthButton*0.4,0);
 ?>
-<?php if (RequestHandler::isCodeSet('refreshButtons')) {?>
-<div id="resultDiv" dojoType="dijit.layout.ContentPane" region="top"
-			style="display: none; z-index: 99999;"></div>
-<?php }?>
 <table style="width:100%;height:100%;">
  <tr style="height:100%";>
   <td style="z-index:-1;width:40%;white-space:nowrap;">  
@@ -169,6 +165,7 @@
        iconClass="dijitButtonIcon dijitButtonIconNew" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
 		      dojo.byId("newButton").blur();
+          hideResultDivs();
           hideExtraButtons('extraButtonsDetail');
           id=dojo.byId('objectId');
 	        if (id) { 	
@@ -209,6 +206,7 @@
        iconClass="dijitButtonIcon dijitButtonIconUndo" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
           dojo.byId("undoButton").blur();
+          hideResultDivs();
           hideExtraButtons('extraButtonsDetail');
           if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
 // ADD BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
@@ -237,6 +235,7 @@
        iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
           dojo.byId("refreshButton").blur();
+          hideResultDivs();
           hideExtraButtons('extraButtonsDetail');
           formChangeInProgress=false;
 // ADD BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
@@ -270,6 +269,7 @@
        iconClass="dijitButtonIcon dijitButtonIconCopy" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
           hideExtraButtons('extraButtonsDetail');
+          hideResultDivs();
           <?php 
           $crit=array('name'=> $_REQUEST['objectClass']);
           $paramCopy="copyProject";
@@ -309,9 +309,10 @@
        iconClass="dijitButtonIcon dijitButtonIconDelete" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
           dojo.byId("deleteButton").blur();
+          hideResultDivs();
           hideExtraButtons('extraButtonsDetail');
 		      action=function(){
-		        loadContent("../tool/deleteObject.php", "resultDiv", 'objectForm', true);
+		        loadContent("../tool/deleteObject.php", "resultDivMain", 'objectForm', true);
             if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
           };
           var alsoDelete="";
@@ -325,6 +326,7 @@
        iconClass="dijitButtonIcon dijitButtonIconPrint" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
 		    dojo.byId("printButton").blur();
+        hideResultDivs();
         hideExtraButtons('extraButtonsDetail');
         if (dojo.byId("printPdfButton")) {dojo.byId("printPdfButton").blur();}
         showPrint("<?php echo $printPage;?>", null, null, null, 'P');
@@ -341,6 +343,7 @@
        iconClass="dijitButtonIcon dijitButtonIcon<?php echo ucfirst($modePdf);?>" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
         dojo.byId("printButton").blur();
+        hideResultDivs();
         hideExtraButtons('extraButtonsDetail');
         if (dojo.byId("printPdfButton")) {dojo.byId("printPdfButton").blur();}
         <?php if (substr($modePdf,-5)=="multi" and SqlElement::class_exists('TemplateReport') ) {?>
@@ -364,6 +367,7 @@
        iconClass="dijitButtonIcon dijitButtonIconEmail" class="detailButton" >
         <script type="dojo/connect" event="onClick" args="evt">
           showMailOptions();
+          hideResultDivs();
           hideExtraButtons('extraButtonsDetail');  
         </script>
       </button>
@@ -395,6 +399,7 @@
        iconClass="dijitButtonIcon dijitButtonIconSubscribe<?php if ($subscribed) echo 'Valid';?>" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
           showExtraButtons('subscribeButton');
+          hideResultDivs();
         </script>
       </button>   
       <div class="statusBar" id="subscribeButtonDiv" style="display:none;position:absolute;width:220px">
@@ -402,6 +407,7 @@
           iconClass="dijitButtonIcon dijitButtonIconSubscribe" class="detailButton"><div style="width:180px;"><?php echo i18n('subscribeButton')?></div>
           <script type="dojo/connect" event="onClick" args="evt">
             hideExtraButtons('subscribeButton');  
+            hideResultDivs();
             subscribeToItem('<?php echo get_class($obj)?>','<?php echo $obj->id;?>','<?php echo $userId;?>');
           </script>
         </button><br/>
@@ -409,6 +415,7 @@
           iconClass="dijitButtonIcon dijitButtonIconDelete" class="detailButton"><div style="width:180px;"><?php echo i18n('unsubscribeButton')?></div>
           <script type="dojo/connect" event="onClick" args="evt">
             hideExtraButtons('subscribeButton');  
+            hideResultDivs();
             unsubscribeFromItem('<?php echo get_class($obj)?>','<?php echo $obj->id;?>','<?php echo getSessionUser()->id;?>');
           </script>
         </button><br/>  
@@ -417,6 +424,7 @@
           iconClass="idijitButtonIcon iconTeam22" class="detailButton"><div style="width:180px"><?php echo i18n('subscribeOthersButton')?></div>
           <script type="dojo/connect" event="onClick" args="evt">
             hideExtraButtons('subscribeButton');  
+            hideResultDivs();
             subscribeForOthers('<?php echo get_class($obj)?>','<?php echo $obj->id;?>');
           </script>
         </button><br/> 
@@ -425,6 +433,7 @@
           iconClass="idijitButtonIcon iconTeam22" class="detailButton"><div style="width:180px"><?php echo i18n('subscribersList')?></div>
           <script type="dojo/connect" event="onClick" args="evt">
             hideExtraButtons('subscribeButton');  
+            hideResultDivs();
             showSubscribersList('<?php echo get_class($obj)?>','<?php echo $obj->id;?>');
           </script>
         </button><br/> 
@@ -433,6 +442,7 @@
           iconClass="dijitButtonIcon iconListOfValues22" class="detailButton"><div style="width:180px"><?php echo i18n('showSubscribedItemsList')?></div>
           <script type="dojo/connect" event="onClick" args="evt">
             hideExtraButtons('subscribeButton');  
+            hideResultDivs();
             showSubscriptionList('<?php echo getSessionUser()->id;?>');
           </script>
         </button>     
@@ -453,6 +463,7 @@
        title="<?php echo i18n('buttonMultiUpdate');?>"
        iconClass="dijitButtonIcon dijitButtonIconMultipleUpdate" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
+          hideResultDivs();
           startMultipleUpdateMode('<?php echo get_class($obj);?>');  
           hideExtraButtons('extraButtonsDetail');
         </script>
@@ -470,6 +481,7 @@
         iconClass="dijitButtonIcon dijitButtonIconDecrease" class="statusBar detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
           indentTask("decrease");  
+          hideResultDivs();
           hideExtraButtons('extraButtonsDetail');
         </script>
       </button>
@@ -478,6 +490,7 @@
         iconClass="dijitButtonIcon dijitButtonIconIncrease" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
           indentTask("increase");
+          hideResultDivs();
           hideExtraButtons('extraButtonsDetail');  
         </script>
       </button>
@@ -515,6 +528,7 @@
         iconClass="dijitButtonIcon dijitButtonIconChecklist" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
           showChecklist('<?php echo get_class($obj);?>');  
+          hideResultDivs();
           hideExtraButtons('extraButtonsDetail');
         </script>
       </button>
@@ -537,6 +551,7 @@
         iconClass="dijitButtonIcon dijitButtonIconHistory" class="detailButton">
         <script type="dojo/connect" event="onClick" args="evt">
           showHistory('<?php echo get_class($obj);?>');  
+          hideResultDivs();
           hideExtraButtons('extraButtonsDetail');
         </script>
       </button>
@@ -566,6 +581,7 @@
       <?php //if ($noselect) {echo 'style="display:none;"';}?> 
       iconClass="dijitButtonIcon  <?php if(! $showActivityStream){echo 'iconActivityStream22';}else{echo 'iconActivityStreamClose22';}?>" class="detailButton">
       <script type="dojo/connect" event="onClick" args="evt">
+         hideResultDivs();
          hideStreamMode('<?php echo ($showActivityStream)?'false':'true';?>','<?php echo $paramRightDiv;?>','<?php echo $activityStreamDefaultSize;?>',false);
       </script>
     </button>
@@ -590,9 +606,10 @@
             CKEDITOR.instances[name].updateElement();
           }
           dojo.byId("pluginButton<?php echo $bt->id;?>").blur();
-          submitForm("<?php echo $bt->scriptPHP;?>", "resultDiv", "listForm", true);
+          submitForm("<?php echo $bt->scriptPHP;?>", "resultDivMain", "listForm", true);
           <?php }?>
           hideExtraButtons('extraButtonsDetail');
+          hideResultDivs();
         </script>
       </button>
     </span>
@@ -614,7 +631,7 @@
 			multiple="true" class="directAttachment"
 			uploadOnSelect="true"
 			target="resultPost"
-			onBegin="saveAttachment(true);"
+			onBegin="hideResultDivs();saveAttachment(true);"
 			iconClass="iconAttachFiles"
 			onError="dojo.style(dojo.byId('downloadProgress'), {display:'none'});"
 			style="font-size:60%;height:26px; width:36px; border: 1px dashed #ffffff; padding:0; color: #000000; position:absolute;

@@ -65,10 +65,7 @@ if(sessionValueExists('listShowIdleTimesheet')and getSessionValue('listShowIdleT
 }
 ?>
 
-<div dojoType="dijit.layout.BorderContainer">
-  <div style="top:30px !important; left: 200px !important; width: 500px; margin: 0px 8px 4px 8px; padding: 5px;display:none;" 
-       id="resultDiv" dojoType="dijit.layout.ContentPane" region="none" >
-  </div>   
+<div dojoType="dijit.layout.BorderContainer">  
   <div dojoType="dijit.layout.ContentPane" region="top" id="imputationButtonDiv" class="listTitle" >
   <table width="100%" height="32px" class="listTitle">
     <tr height="32px">

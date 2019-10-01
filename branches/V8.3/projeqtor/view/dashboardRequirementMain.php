@@ -116,8 +116,6 @@ if(isset($_REQUEST['goToRequirement'])){
 	<div dojo-type="dijit.layout.ContentPane" id="parameterButtonDiv"
 		class="listTitle" style="z-index: 3; overflow: visible" region="top">
 		<form dojoType="dijit.form.Form" id="dashboardRequirementMainForm" action="" method="post" >
-		<div id="resultDiv" region="top"
-			style="padding: 5px; padding-bottom: 20px; max-height: 100px; padding-left: 300px; z-index: -1;padding-right: 800px"></div>
 		<table width="40%">
 			<tr height="32px" >
 				<td width="50px" align="center"><?php echo formatIcon('DashboardRequirement', 32, null, true);?></td>

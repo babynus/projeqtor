@@ -251,8 +251,6 @@ if (array_key_exists('refresh', $_REQUEST)) {
     ?>
   <div id="buttonDiv" dojoType="dijit.layout.ContentPane" region="top"
 		style="z-index: 3; height: 35px; position: relative; overflow: visible !important;">
-		<div id="resultDiv" dojoType="dijit.layout.ContentPane" region="top"
-			style="display: none; z-index: 99999;"></div>
 		<?php  include 'objectButtons.php'; ?>
   </div>
 	<div id="formDiv" dojoType="dijit.layout.ContentPane" region="center" style="overflow:<?php if($layout=='tab' ){echo 'hidden';}else{echo 'auto';}?>;">
@@ -268,7 +266,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
       </script>
 			<script type="dojo/method" event="onSubmit">
         // Don't do anything on submit, just cancel : no button is default => must click
-		    //submitForm("../tool/saveObject.php","resultDiv", "objectForm", true);
+		    //submitForm("../tool/saveObject.php","resultDivMain", "objectForm", true);
 		    return false;        
         </script>
 			<div style="width: 100%; height: 100%;">

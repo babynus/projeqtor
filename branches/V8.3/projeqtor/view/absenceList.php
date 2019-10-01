@@ -37,10 +37,7 @@ $currentYear=strftime("%Y") ;
 $yearSpinner = $currentYear;
 ?>
 
-<div dojoType="dijit.layout.BorderContainer" id="paramDiv" name="paramDiv">
-  <div style="top:30px !important; left: 200px !important; width: 500px; margin: 0px 8px 4px 8px; padding: 5px;display:none;" 
-       id="absenceResultDiv" dojoType="dijit.layout.ContentPane" region="none" >
-  </div>   
+<div dojoType="dijit.layout.BorderContainer" id="paramDiv" name="paramDiv">  
   <div dojoType="dijit.layout.ContentPane" region="top" id="absenceButtonDiv" class="listTitle" >
   <form dojoType="dijit.form.Form" name="listForm" id="listForm" action="" method="post" >
   <table width="100%" height="64px" class="listTitle">

@@ -1956,7 +1956,7 @@ function addLvTypeOfEmpContractType(idEmploymentContractType){
 function saveLvTypeOfEmpContractType() {
   var formVar=dijit.byId('lvTypeOfContractTypeForm');
   if (formVar.validate()) {
-    loadContent("../tool/saveLvTypeOfEmpContractType.php", "resultDiv",
+    loadContent("../tool/saveLvTypeOfEmpContractType.php", "resultDivMain",
         "lvTypeOfContractTypeForm", true, 'leaveTypeOfEmploymentContractType');
     dijit.byId('dialogLvTypeOfEmpContractType').hide();
   } else {
@@ -2024,7 +2024,7 @@ function removeLvTypeOfEmpContractType(id){
     return;
   }
   actionOK=function() {
-    loadContent("../tool/removeLvTypeOfEmpContractType.php?idLvTypeOfContractType="+id, "resultDiv",
+    loadContent("../tool/removeLvTypeOfEmpContractType.php?idLvTypeOfContractType="+id, "resultDivMain",
         null, true, 'leaveTypeOfEmploymentContractType');
   };
   msg=i18n('confirmDeleteLvTypeOfContractType', new Array(id));
@@ -2086,7 +2086,7 @@ function removeCustomEarnedRulesOfEmpContractType(idCustomEarnedRulesOfEmpContra
     return;
   }
   actionOK=function() {
-    loadContent("../tool/removeCustomEarnedRulesOfEmpContractType.php?idCustomEarnedRulesOfEmpContractType="+idCustomEarnedRulesOfEmpContractType, "resultDiv",
+    loadContent("../tool/removeCustomEarnedRulesOfEmpContractType.php?idCustomEarnedRulesOfEmpContractType="+idCustomEarnedRulesOfEmpContractType, "resultDivMain",
         null, true, 'customEarnedRulesOfEmploymentContractType');
   };
   msg=i18n('confirmDeleteCustomEarnedRulesOfEmpContractType', new Array(id));
@@ -2101,7 +2101,7 @@ function removeCustomEarnedRulesOfEmpContractType(idCustomEarnedRulesOfEmpContra
 function saveCustomEarnedRulesOfEmpContractType() {
   var formVar=dijit.byId("customEarnedRulesOfEmpContractTypeForm");
   if (formVar.validate()) {
-    loadContent("../tool/saveCustomEarnedRulesOfEmpContractType.php", "resultDiv",
+    loadContent("../tool/saveCustomEarnedRulesOfEmpContractType.php", "resultDivMain",
         "customEarnedRulesOfEmpContractTypeForm", true, "customEarnedRulesOfEmploymentContractType");
     dijit.byId('dialogCustomEarnedRulesOfEmpContractType').hide();
   } else {
@@ -2167,7 +2167,7 @@ function removeEmployeesManaged(id){
     return;
   }
   actionOK=function() {
-    loadContent("../tool/removeEmployeesManaged.php?id="+id, "resultDiv",
+    loadContent("../tool/removeEmployeesManaged.php?id="+id, "resultDivMain",
         null, true, 'employeesManaged');
   };
   msg=i18n('confirmDeleteEmployeesManaged', new Array(id));
@@ -2182,7 +2182,7 @@ function removeEmployeesManaged(id){
 function saveEmployeesManaged() {
   var formVar=dijit.byId("employeesManagedForm");
   if (formVar.validate()) {
-    loadContent("../tool/saveEmployeesManaged.php", "resultDiv",
+    loadContent("../tool/saveEmployeesManaged.php", "resultDivMain",
         "employeesManagedForm", true, "employeesManaged");
     dijit.byId('dialogEmployeesManaged').hide();
   } else {

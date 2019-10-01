@@ -37,8 +37,6 @@
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="Administration" />
 <div class="container" dojoType="dijit.layout.BorderContainer">
   <div id="adminButtonDiv" class="listTitle" dojoType="dijit.layout.ContentPane" region="top" style="z-index:3;overflow:visible">
-    <div id="resultDiv" dojoType="dijit.layout.ContentPane"
-      region="top" style="padding:5px;max-height:100px;padding-left:300px;z-index:999"></div>
     <table width="100%">
       <tr height="32px" style="vertical-align: middle;">
         <td width="50px" align="center">
