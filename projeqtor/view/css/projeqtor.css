@@ -557,7 +557,7 @@ a {
   font-weight: bold;
   color: #000000;
 }
-label, .label, .smallLabel {
+label, .label, .smallLabel, .labelMultiple {
   font-weight: 400;
   font-family: Verdana, Arial, Tahoma, sans-serif; font-size: 8pt;
   text-align: right; vertical-align: top;
@@ -566,6 +566,9 @@ label, .label, .smallLabel {
   float:left;
   border: 1px;
   text-shadow: 1px 1px #FFFFFF;
+}
+.labelMultiple {
+	width:245px;
 }
 .longLabel {
 	width: 245px;
