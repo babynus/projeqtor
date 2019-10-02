@@ -77,6 +77,9 @@ CREATE TABLE `${prefix}changerequest` (
   `actualDueDate` date DEFAULT NULL,
   `cancelled` INT(1) UNSIGNED DEFAULT '0',
   `idPriority` int(12) unsigned DEFAULT NULL,
+  `approved` int(1) unsigned DEFAULT '0',
+  `approvedDate` date DEFAULT NULL,
+  `idApprover__idResource` int(12) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 CREATE INDEX changerequestProject ON `${prefix}changerequest` (idProject);
@@ -91,6 +94,14 @@ CREATE INDEX changerequestUrgency ON `${prefix}changerequest` (idUrgency);
 CREATE INDEX changerequestCriticality ON `${prefix}changerequest` (idCriticality);
 CREATE INDEX changerequestFeasibility ON `${prefix}changerequest` (idFeasibility);
 CREATE INDEX requiremenRiskLevel ON `${prefix}changerequest` (idRiskLevel);
+
+INSERT INTO `${prefix}Type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`) VALUES 
+('ChangeRequest', 'Recurring problem',10,1, 0),
+('ChangeRequest', 'Improvement user',20,1, 0),
+('ChangeRequest', 'Technical improvement',30,1, 0),
+('ChangeRequest', 'Regulatory constraint',40,1, 0),
+('ChangeRequest', 'Request of management ',50,1, 0);
+
 
 CREATE TABLE `${prefix}resourceincompatible` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
