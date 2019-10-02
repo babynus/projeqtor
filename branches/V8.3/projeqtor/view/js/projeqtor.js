@@ -6251,8 +6251,8 @@ function resizeListDiv() {
 
 function checkValidatedSize(paramDiv,paramRightDiv, paramMode){
   if(paramMode != 'switch'){
-  if(paramDiv== 'left'){
-	    if(dojo.byId('detailRightDiv').offsetWidth==0 || paramRightDiv=='bottom'){
+    if(paramDiv== 'left'){
+	    if(! dojo.byId('detailRightDiv') || dojo.byId('detailRightDiv').offsetWidth==0 || paramRightDiv=='bottom'){
 	      if (dojo.byId("contentDetailDiv").offsetWidth<400) {
 	        var listWidth=(dojo.byId("centerDiv").offsetWidth)-410;
 	        dijit.byId("listDiv").resize({w: listWidth});
