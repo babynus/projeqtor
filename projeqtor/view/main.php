@@ -654,7 +654,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 <div id="mainDiv" style="visibility: hidden;">
   <div id="wait" >
   </div>
-  <div id="disconnectionMessage" style="display:none;z-index:999;text-align:center;position:fixed;width:300px;left:50%;top:10px;margin-left:-150px">
+  <div id="disconnectionMessage" class="resultDiv" style="display:none;z-index:999;">
     <div id="disconnectionMessageText" style="text-align:center;cursor:pointer;" onClick="quitConfirmed = true;window.location = '../index.php';"></div>
   </div>
   <div id="temporaryMessage" style="display:none;z-index:999;text-align:center;position:fixed;width:500px;left:50%;top:10px;margin-left:-250px">
