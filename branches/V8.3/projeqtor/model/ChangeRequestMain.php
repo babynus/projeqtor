@@ -69,6 +69,9 @@ class ChangeRequestMain extends SqlElement {
   public $idle;
   public $idleDate;
   public $cancelled;
+  public $approved;
+  public $approvedDate;
+  public $idApprover__idResource;
   public $_lib_cancelled;
   public $result;
   public $analysis;
@@ -90,6 +93,7 @@ class ChangeRequestMain extends SqlElement {
     <th field="handled" width="5%" formatter="booleanFormatter" >${handled}</th>
     <th field="done" width="5%" formatter="booleanFormatter" >${done}</th>
     <th field="idle" width="5%" formatter="booleanFormatter" >${idle}</th>
+    <th field="idle" width="5%" formatter="booleanFormatter" >${idle}</th>
     ';
   private static $_fieldsAttributes=array("id"=>"nobr", "reference"=>"readonly",
                                   "name"=>"required", 
@@ -103,7 +107,11 @@ class ChangeRequestMain extends SqlElement {
                                   "runStatusIcon"=>"calculated,display,html",
                                   "runStatusName"=>"calculated,display,html",
                                   "idleDate"=>"nobr",
-                                  "cancelled"=>"nobr"
+                                  "idProject"=>"required",
+                                  "approved"=>"nobr",
+                                  "approvedDate"=>"nobr",
+                                  "idApprover__idResource"=>"readonly,hidden",
+                                  
   );  
   
   private static $_colCaptionTransposition = array('idResource'=> 'responsible',
@@ -134,6 +142,11 @@ class ChangeRequestMain extends SqlElement {
   }
   
   public function setAttributes() {
+    if($this->approved){
+      self::$_fieldsAttributes['idApprover__idResource']='visible';
+    }else{
+      self::$_fieldsAttributes['idApprover__idResource']='hidden';
+    }
     $manageComponentOnChangeRequest=Parameter::getGlobalParameter('manageComponentOnChangeRequest');
     if ($manageComponentOnChangeRequest!='YES') {
       self::$_fieldsAttributes['idComponent']='hidden';
@@ -181,7 +194,6 @@ class ChangeRequestMain extends SqlElement {
     return self::$_databaseColumnName;
   }
   
-  
 // ============================================================================**********
 // GET VALIDATION SCRIPT
 // ============================================================================**********
@@ -203,10 +215,21 @@ class ChangeRequestMain extends SqlElement {
     } else if ($colName=="actualDueDate") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  if (dijit.byId("initialDueDate").get("value")==null) { ';
+      $colScript .= '  console.log(this.value);';
       $colScript .= '    dijit.byId("initialDueDate").set("value", this.value); ';
       $colScript .= '  } ';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';           
+    }else if ($colName=="approved") {
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= 'var laddate= new date();';
+      $colScript .= '  if (dijit.byId("approved").get("checked")==true) { ';
+      $colScript .= '    dijit.byId("idApprover__idResource").set("display","block"); ';
+      $colScript .= '    dijit.byId("idApprover__idResource").set("value",'.getSessionUser()->id.'); ';
+      //$colScript .= '    dijit.byId("approvedDate").set("value", ) ;';
+      $colScript .= '  } ';
+      $colScript .= '  formChanged();';
+      $colScript .= '</script>';
     }
     return $colScript;
   }
@@ -235,7 +258,7 @@ class ChangeRequestMain extends SqlElement {
   }
   
   public function save() {
-  	if (! trim($this->idRunStatus)) $this->idRunStatus=5;
+  	
   	$result=parent::save();
     return $result;
   }
