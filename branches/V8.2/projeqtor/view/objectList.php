@@ -223,11 +223,12 @@ if (property_exists($objectClass,'idStatus')) {
     return false;        
   </script>
   <div class="listTitle" id="quickSearchDiv" 
-     style="display:none; height:100%; width: 100%; position: absolute;">
+     style="display:none; height:100%; width: 100%; position: absolute;z-index:9">
     <table >
       <tr height="100%" style="vertical-align: middle;">
-        <td style="width:50px;min-width:50px" align="center">        
-         <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" style="margin-left:9px;width:32px;height:32px" /></div>    
+        <td style="width:50px;min-width:50px" align="center">  
+         <div style="position:absolute;left:0px;width:43px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>      
+         <div style="z-index:9;position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" /></div>    
         </td>
         <td><span class="title" ><?php echo i18n("menu" . $objectClass);?></span></td>
         <td style="text-align:right;" width="200px">
@@ -270,7 +271,7 @@ if (property_exists($objectClass,'idStatus')) {
   <tr >
     <td style="width:50px;min-width:43px;" align="center">
        <div style="position:absolute;left:0px;width:43px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>
-       <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" style="margin-left:9px;width:32px;height:32px" /></div>
+       <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" /></div>
     </td>
     <td class="title" style="height:35px;width:30%;">
       <div style="width:100%;height:100%;position:relative;">
