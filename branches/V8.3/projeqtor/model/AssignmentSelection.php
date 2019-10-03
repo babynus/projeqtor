@@ -86,7 +86,7 @@ class AssignmentSelection extends SqlElement {
     foreach (self::getListForAssignment($idAssignment) as $as) {
       echo "  <tr>";
       echo "    <td class='assignData'>".SqlList::getNameFromId('Resource', $as->idResource)."</td>";
-      echo "    <td class='assignData centerData'>".(($as->endDate)?htmlFormatDate($as->endDate):i18n('colNotPlannedWork'))."</td>";
+      echo "    <td class='assignData centerData'>".(($as->endDate)?htmlFormatDate($as->endDate,true):i18n('colNotPlannedWork'))."</td>";
       echo "    <td class='assignData centerData'>".htmlDisplayCheckbox($as->selected)."</td>";
       echo "  </tr>";
     }
