@@ -2015,6 +2015,21 @@ function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sen
   // + User::authenticate : sendMail($paramAdminMail, $title, $message)
   // + /tool/sendMail.php : sendMail($dest,$title,$msg)
   global $targetDirImageUpload;
+  $curUser=new Affectable(getCurrentUserId());
+  // florent 
+  if(explode(',', $to)){
+    $tabTo=explode(',', $to);
+    foreach($tabTo as $id=>$value){
+      if(trim($value) == $curUser->email){
+        unset($tabTo[$id]);
+      }
+    }
+    $to=implode(',', $tabTo);
+  }else{
+    if($to==$curUser->email){
+      return;
+    }
+  }
   $messageBody=str_replace($targetDirImageUpload, SqlElement::getBaseUrl().substr(str_replace("..", "", $targetDirImageUpload), 0, strlen(str_replace("..", "", $targetDirImageUpload))-1), $messageBody);
   $paramMailSendmailPath=Parameter::getGlobalParameter('paramMailSendmailPath');
   $paramMailSmtpUsername=Parameter::getGlobalParameter('paramMailSmtpUsername');
