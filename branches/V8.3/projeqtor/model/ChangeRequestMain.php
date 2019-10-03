@@ -93,7 +93,6 @@ class ChangeRequestMain extends SqlElement {
     <th field="handled" width="5%" formatter="booleanFormatter" >${handled}</th>
     <th field="done" width="5%" formatter="booleanFormatter" >${done}</th>
     <th field="idle" width="5%" formatter="booleanFormatter" >${idle}</th>
-    <th field="idle" width="5%" formatter="booleanFormatter" >${idle}</th>
     ';
   private static $_fieldsAttributes=array("id"=>"nobr", "reference"=>"readonly",
                                   "name"=>"required", 
@@ -108,9 +107,9 @@ class ChangeRequestMain extends SqlElement {
                                   "runStatusName"=>"calculated,display,html",
                                   "idleDate"=>"nobr",
                                   "idProject"=>"required",
-                                  "approved"=>"nobr",
-                                  "approvedDate"=>"nobr",
-                                  "idApprover__idResource"=>"readonly,hidden",
+                                  "approved"=>"hidden,nobr",
+                                  "approvedDate"=>"hidden,readonly,nobr",
+                                  "idApprover__idResource"=>"readonly",
                                   
   );  
   
@@ -142,8 +141,12 @@ class ChangeRequestMain extends SqlElement {
   }
   
   public function setAttributes() {
+    if($this->id){
+      self::$_fieldsAttributes['approved']='visible,nobr';
+      self::$_fieldsAttributes['approvedDate']='visible,nobr';
+    }
     if($this->approved){
-      self::$_fieldsAttributes['idApprover__idResource']='visible';
+      self::$_fieldsAttributes['idApprover__idResource']='visible,readonly';
     }else{
       self::$_fieldsAttributes['idApprover__idResource']='hidden';
     }
@@ -215,19 +218,22 @@ class ChangeRequestMain extends SqlElement {
     } else if ($colName=="actualDueDate") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  if (dijit.byId("initialDueDate").get("value")==null) { ';
-      $colScript .= '  console.log(this.value);';
       $colScript .= '    dijit.byId("initialDueDate").set("value", this.value); ';
       $colScript .= '  } ';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';           
     }else if ($colName=="approved") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= 'var laddate= new date();';
       $colScript .= '  if (dijit.byId("approved").get("checked")==true) { ';
-      $colScript .= '    dijit.byId("idApprover__idResource").set("display","block"); ';
+      $colScript .= '    dijit.byId("idApprover__idResource").domNode.style.display = "inline-table";';
       $colScript .= '    dijit.byId("idApprover__idResource").set("value",'.getSessionUser()->id.'); ';
-      //$colScript .= '    dijit.byId("approvedDate").set("value", ) ;';
-      $colScript .= '  } ';
+      $colScript .= '    var curDate = new Date();';
+      $colScript .= '    dijit.byId("approvedDate").set("value", curDate); ';
+      $colScript .= '  } else { ';
+      $colScript .= '   dijit.byId("idApprover__idResource").domNode.style.display = "none";';
+      $colScript .= '   dijit.byId("approvedDate").set("value", null);';
+      $colScript .= '   dijit.byId("idApprover__idResource").set("value",null); ';
+      $colScript .= '  }  ';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
     }
