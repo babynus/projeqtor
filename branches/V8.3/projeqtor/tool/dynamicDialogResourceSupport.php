@@ -30,6 +30,7 @@ $idResource=RequestHandler::getValue('idResource');
 $idSupport=RequestHandler::getId('idSupport');
 $supportRate = 100;
 $mode = '';
+$description = '';
 if($idSupport){
   $sup = new ResourceSupport($idSupport);
   $supportRate = $sup->rate;
@@ -76,8 +77,8 @@ if($idSupport){
              </td>
              <td>
                <div id="SupportingRate" name="SupportingRate" value="<?php echo $supportRate;?>" 
-                 dojoType="dijit.form.NumberTextBox"  constraints="{min:0,max:100}"
-                 style="width:100px" class="input"
+                 dojoType="dijit.form.NumberTextBox"  constraints="{min:0.01,max:100}"
+                 style="width:100px" class="input required" required
                  hasDownArrow="true">
                <?php echo $keyDownEventScript;?>
                </div>
