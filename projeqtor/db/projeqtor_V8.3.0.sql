@@ -105,7 +105,7 @@ INSERT INTO `${prefix}Type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`)
 
 CREATE TABLE `${prefix}resourceincompatible` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
-  `idResource` int(12) unsigned NOT NULL,
+  `idResource` int(12) unsigned DEFAULT NULL,
   `idIncompatible` int(12) unsigned DEFAULT NULL,
   `description`  mediumtext,
   PRIMARY KEY (`id`)
@@ -113,12 +113,12 @@ CREATE TABLE `${prefix}resourceincompatible` (
 
 CREATE TABLE `${prefix}resourcesupport` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
-  `idResource` int(12) unsigned NOT NULL,
+  `idResource` int(12) unsigned DEFAULT NULL,
   `idSupport` int(12) unsigned DEFAULT NULL,
+  `rate` int(3) unsigned DEFAULT NULL,
   `description`  mediumtext,
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8;
-CREATE INDEX requiremenRiskLevel ON `${prefix}changerequest` (idRiskLevel);
 
 ALTER TABLE `${prefix}activity` ADD COLUMN `fixPlanning` int(1) unsigned default '0';
 ALTER TABLE `${prefix}planningelement` ADD COLUMN `fixPlanning` int(1) unsigned default '0';

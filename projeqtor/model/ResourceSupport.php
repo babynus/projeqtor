@@ -33,6 +33,7 @@ class ResourceSupport extends SqlElement {
   public $id;
   public $idResource;
   public $idSupport;
+  public $rate;
   public $description;
   
   
@@ -58,6 +59,15 @@ class ResourceSupport extends SqlElement {
     $result="";
     if ($result=="") {
       $result='OK';
+    }
+    
+    if($this->idResource == $this->idSupport){
+    	$result='ERROR';
+    }
+    $resInc = new ResourceIncompatible();
+    $inc = $resInc->getSingleSqlElementFromCriteria('ResourceIncompatible', array('idResource'=>$this->idSupport, 'idIncompatible'=>$this->idResource));
+    if($inc->id){
+    	$result='ERROR';
     }
     return $result;
   }

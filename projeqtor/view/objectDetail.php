@@ -6244,13 +6244,13 @@ function drawIncompatibleResource($list, $obj, $type, $refresh=false) {
   if (!$print) {
   	echo '<td class="assignHeader" style="width:15%">';
   	if ($obj->id!=null and !$print and $canCreate and !$obj->idle) {
-  		echo '<a onClick="addIncompatibleResource(\''.get_class($obj).'\',\''.$type.'\',\''.$idRess.'\');" title="'.i18n('addIncompatibleResource').'" /> '.formatSmallButton('Add').'</a>';
+  		echo '<a onClick="addResourceIncompatible(\''.$idRess.'\');" title="'.i18n('addIncompatibleResource').'" /> '.formatSmallButton('Add').'</a>';
   	}
   	echo '</td>';
   }
   echo '<td class="assignHeader" style="width:12%">'.i18n('colId').'</td>';
   echo '<td class="assignHeader" style="width:35%">'.i18n('colName').'</td>';
-  echo '<td class="assignHeader" style="width:19%">'.i18n('colProfile').'</td>';
+  echo '<td class="assignHeader" style="width:19%">'.i18n('colIdProfile').'</td>';
   echo '</tr>';
   
   foreach ($list as $resInc) {
@@ -6258,7 +6258,7 @@ function drawIncompatibleResource($list, $obj, $type, $refresh=false) {
   	if (!$print) {
   		echo '<td class="assignData" style="text-align:center;white-space: nowrap;">';
   		if ($canDelete) {
-  			echo '<a onClick="removeIncompatibleResource(\''.$resInc->id.'\',\''.$resInc->idResource.'\');" '.'title="'.i18n('removeIncompatibleResource').'" > '.formatSmallButton('Remove').'</a>';
+  			echo '<a onClick="removeResourceIncompatible(\''.$resInc->id.'\');" '.'title="'.i18n('removeResourceIncompatible').'" > '.formatSmallButton('Remove').'</a>';
   		}
   		if ($resInc->description) {
   			echo '<div style="float:right">'.formatCommentThumb($resInc->description).'</div>';
@@ -6266,17 +6266,17 @@ function drawIncompatibleResource($list, $obj, $type, $refresh=false) {
   	}
   	echo '</td>';
   	$res = new Resource($resInc->idIncompatible);
-  	$profile = new Profile($res->idProfile);
-  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.$resInc->id.'</td>';
-  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.$res->name.'</td>';
-  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.$profile.'</td>';
+  	$profile = SqlList::getNameFromId('Profile', $res->idProfile);
+  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($resInc->id).'</td>';
+  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($res->name).'</td>';
+  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($profile).'</td>';
   	echo '</tr>';
   }
   echo '</table></td></tr>';
   echo '</table>';
 }
 
-function drawSupportResource($list, $obj, $type, $refresh=false) {
+function drawResourceSupport($list, $obj, $type, $refresh=false) {
   global $cr, $print, $user, $browserLocale, $comboDetail;
   $pluginObjectClass='Affectation';
   //$tableObject=$list;
@@ -6315,32 +6315,37 @@ function drawSupportResource($list, $obj, $type, $refresh=false) {
   if (!$print) {
   	echo '<td class="assignHeader" style="width:15%">';
   	if ($obj->id!=null and !$print and $canCreate and !$obj->idle) {
-  		echo '<a onClick="addSupportResource(\''.get_class($obj).'\',\''.$type.'\',\''.$idRess.'\');" title="'.i18n('addSupportResource').'" /> '.formatSmallButton('Add').'</a>';
+  		echo '<a onClick="addResourceSupport(\''.$idRess.'\');" title="'.i18n('addResourceSupport').'" /> '.formatSmallButton('Add').'</a>';
   	}
   	echo '</td>';
   }
   echo '<td class="assignHeader" style="width:12%">'.i18n('colId').'</td>';
   echo '<td class="assignHeader" style="width:35%">'.i18n('colName').'</td>';
-  echo '<td class="assignHeader" style="width:19%">'.i18n('colProfile').'</td>';
+  echo '<td class="assignHeader" style="width:19%">'.i18n('colIdProfile').'</td>';
+  echo '<td class="assignHeader" style="width:19%">'.i18n('colRate').'</td>';
   echo '</tr>';
   
   foreach ($list as $resSup) {
   	echo '<tr>';
   	if (!$print) {
   		echo '<td class="assignData" style="text-align:center;white-space: nowrap;">';
+  		if ($canUpdate) {
+  			echo '  <a onClick="editResourceSupport(\''.$resSup->id.'\',\''.$resSup->idResource.'\');" '.'title="'.i18n('editSupportResource').'" > '.formatSmallButton('Edit').'</a>';
+  		}
   		if ($canDelete) {
-  			echo '<a onClick="removeSupportResource(\''.$resSup->id.'\',\''.$resSup->idResource.'\');" '.'title="'.i18n('removeSupportResource').'" > '.formatSmallButton('Remove').'</a>';
+  			echo '<a onClick="removeResourceSupport(\''.$resSup->id.'\');" '.'title="'.i18n('removeSupportResource').'" > '.formatSmallButton('Remove').'</a>';
   		}
   		if ($resSup->description) {
   			echo '<div style="float:right">'.formatCommentThumb($resSup->description).'</div>';
   		}
   	}
   	echo '</td>';
-  	$res = new Resource($resSup->idIncompatible);
-  	$profile = new Profile($res->idProfile);
-  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.$resSup->id.'</td>';
-  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.$res->name.'</td>';
-  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.$profile.'</td>';
+  	$res = new Resource($resSup->idSupport);
+  	$profile = SqlList::getNameFromId('Profile', $res->idProfile);
+  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($resSup->id).'</td>';
+  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($res->name).'</td>';
+  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($profile).'</td>';
+  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($resSup->rate).'</td>';
   	echo '</tr>';
   }
   echo '</table></td></tr>';
