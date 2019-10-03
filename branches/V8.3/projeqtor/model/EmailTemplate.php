@@ -44,8 +44,7 @@ class EmailTemplate extends SqlElement {
     //public $_sec_void;
     //Damian
     public $_spe_listItemTemplate;
-    public $_spe_buttonInsertInTemplate;
-    
+    //public $_spe_buttonInsertInTemplate;
     
     private static $_fieldsAttributes=array("idMailable"=>"",
         "idType"=>"nocombo",
@@ -218,39 +217,27 @@ class EmailTemplate extends SqlElement {
       	            </option>';
       }
       //$result .=$colScript;
-      $result .="</select></td>";
+      $result .="</select>";
+      $itemEnd = str_replace("buttonAddIn","", $item);
+      $editor = getEditorType();
+      $textBox = strtolower($itemEnd);;
+      $result .= '<button id="_spe_listItemTemplate_button" dojoType="dijit.form.Button" showlabel="true" style="position:relative;top:-2px;width:145px;height:17px">';
+      $result .= i18n('operationInsert');
+      $result .= '<script type="dojo/connect" event="onClick" args="evt">';
+      $result .= '  addFieldInTextBoxForEmailTemplateItem("'.$editor.'");';
+      $result .= '  formChanged();';
+      $result .= '</script>';
+      $result .= '</button>';
+      $result .='</td>';
       $result .= '</tr></table>';
       return $result;
     }
-    
-    public function drawButtonInsertField($item) {
-    	global $largeWidth, $toolTip, $print, $outMode;
-      if ($print) return '';
-      
-    	$itemEnd = str_replace("buttonAddIn","", $item);
-    	$editor = getEditorType();
-    	$textBox = strtolower($itemEnd);;
-    	$result  = '<div style="position:relative;left:155px;top:-2px">';
-    	$result .= '<button id="_spe_'.$item.'" dojoType="dijit.form.Button" showlabel="true" style="position:absolute;top:-24px;right:0px;width:145px;height:17px">';
-    	$result .= i18n('operationInsert');
-    	$result .= '<script type="dojo/connect" event="onClick" args="evt">';
-    	$result .= '  addFieldInTextBoxForEmailTemplateItem("'.$editor.'");';
-    	$result .= '  formChanged();';
-    	$result .= '</script>';
-    	$result .= '</button>';
-    	$result .= '</div>';
-    	$result .= '<div data-dojo-type="dijit/Tooltip" data-dojo-props="connectId:_spe_'.$item.',position:[\'below\']">';
-    	$result .= '</div>';
-    
-    	return $result;
-    }
+
     
     public function drawSpecificItem($item,$readOnly=false,$refresh=false){
       if ($item=='listItemTemplate') {
       	return $this->drawListItem($item, $readOnly, $refresh);
-      } elseif ($item==='buttonInsertInTemplate'){
-        return $this->drawButtonInsertField($item);
-      }
+      } 
       return "";
     }
 }
