@@ -5568,9 +5568,13 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
       echo '</td>';
     }
     // resourceTeam
-    if ($resource->isResourceTeam) {
-      echo '<td>';
-      echo '<a style="float:right; vertical-align:middle;"> '.formatIcon('Team', 16, i18n('ResourceTeam')).'</a>';
+    if ($resource->isResourceTeam or $assignment->uniqueResource) {
+      echo '<td style="position:retalive;width:16px;">';
+      echo '<div style="position:relative;vertical-align:middle;width:16px;height:16px;"> '.formatIcon('Team', 16, i18n('ResourceTeam').(($assignment->uniqueResource)?"\n(".i18n('uniqueResource').')':''));
+      if ($assignment->uniqueResource) {
+        echo '<div style="position:absolute;top:11px;right:-3px;color:#E97B2C;font-weight:bold;">1</div>';
+      }
+      echo '</div>';
       echo '</td>';
     }
     echo '</tr></table>';
