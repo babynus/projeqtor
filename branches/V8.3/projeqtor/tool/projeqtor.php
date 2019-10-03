@@ -4884,3 +4884,22 @@ function getDefaultLayoutSize($layout) {
   }
   
 }
+
+function array_insert_after($array, $item, $position) {
+  //function insert_i($tab,$valeurInsert,$indice)
+  $result=array();
+  foreach($array as $key=>$value) {
+    array_push($result,$value);
+    if ($key==$position) array_push($result,$item);
+  }
+  return $result;
+}
+function array_insert_before($array, $item, $position) {
+  //function insert_i($tab,$valeurInsert,$indice)
+  $result=array();
+  foreach($array as $key=>$value) {
+    if ($key==$position) array_push($result,$item);
+    array_push($result,$value);
+  }
+  return $result;
+}
