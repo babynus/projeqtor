@@ -69,6 +69,11 @@ class ResourceSupport extends SqlElement {
     if($inc->id){
     	$result='ERROR';
     }
+    $resSup = new ResourceSupport();
+    $supp = $resSup->getSingleSqlElementFromCriteria('ResourceSupport', array('idResource'=>$this->idResource, 'idSupport'=>$this->idSupport));
+    if($supp->id){
+    	$result='ERROR';
+    }
     return $result;
   }
   
