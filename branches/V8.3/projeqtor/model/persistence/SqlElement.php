@@ -7252,5 +7252,18 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
     //return self::$_fieldsAttributes=array_merge_preserve_keys($selfArray,$parentArray);
     return $selfArray;
   }
+  public static function traceFields($obj,$fields) {
+    if (!is_array($fields)) $fields=array($fields);
+    $msg="=> ".get_class($obj).' #'.$obj->id;
+    foreach ($fields as $fld) {
+      $msg.=", $fld=";
+      if (property_exists($obj, $fld)) {
+        $msg.=$obj->$fld;
+      } else {
+        $msg.='#not a field#';
+      }
+    }
+    debugTraceLog($msg);
+  }
 }
 ?>
