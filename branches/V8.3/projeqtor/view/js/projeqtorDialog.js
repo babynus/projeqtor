@@ -5991,6 +5991,75 @@ function replaceAffectationChangeResource() {
     }
   });
 }
+
+function addResourceIncompatible(idResource) {
+  var callBack = function () {
+    dijit.byId("dialogResourceIncompatible").show();
+  };
+  var params="&idResource="+idResource;
+  loadDialog('dialogResourceIncompatible',callBack,false,params);
+}
+
+function saveResourceIncompatible(){
+  var formVar=dijit.byId('resourceIncompatibleForm');
+  if (formVar.validate()) {
+    loadContent("../tool/saveResourceIncompatible.php", "resultDivMain", "resourceIncompatibleForm", true, 'affectation');
+    dijit.byId('dialogResourceIncompatible').hide();
+  } else {
+    showAlert(i18n("alertInvalidForm"));
+  }
+}
+
+function removeResourceIncompatible(id) {
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  actionOK=function() {
+    loadContent("../tool/saveResourceIncompatible.php?idIncompatible="+id, "resultDivMain", null, true, 'affectation');
+  };
+  msg=i18n('confirmDeleteResourceIncompatible', new Array(id,i18n('Resource')));
+  showConfirm(msg, actionOK);
+}
+
+function addResourceSupport(idResource) {
+  var callBack = function () {
+    dijit.byId("dialogResourceSupport").show();
+  };
+  var params="&idResource="+idResource;
+  loadDialog('dialogResourceSupport',callBack,false,params);
+}
+
+function saveResourceSupport(mode){
+  var formVar=dijit.byId('resourceSupportForm');
+  if (formVar.validate()) {
+    loadContent("../tool/saveResourceSupport.php?mode="+mode, "resultDivMain", "resourceSupportForm",true, 'affectation');
+    dijit.byId('dialogResourceSupport').hide();
+  } else {
+    showAlert(i18n("alertInvalidForm"));
+  }
+}
+
+function editResourceSupport(id) {
+	var callBack = function () {
+	    dijit.byId("dialogResourceSupport").show();
+	  };
+	  var params="&idSupport="+id;
+	  loadDialog('dialogResourceSupport',callBack,false,params);
+}
+
+function removeResourceSupport(id) {
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  actionOK=function() {
+    loadContent("../tool/saveResourceSupport.php?idSupport="+id, "resultDivMain", null, true, 'affectation');
+  };
+  msg=i18n('confirmDeleteResourceSupport', new Array(id,i18n('Resource')));
+  showConfirm(msg, actionOK);
+}
+
 // =============================================================================
 // = Misceallanous
 // =============================================================================
