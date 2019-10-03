@@ -764,7 +764,7 @@ class ResourceMain extends SqlElement {
       $resourceSupport = new ResourceSupport();
       $critArray=array('idResource'=>$this->id);
       $supportResourceList=$resourceSupport->getSqlElementsFromCriteria($critArray, false);
-      drawSupportResource($supportResourceList, $this, 'ResourceSupport', false);
+      drawResourceSupport($supportResourceList, $this, 'ResourceSupport', false);
       return $result;
     }
   }
