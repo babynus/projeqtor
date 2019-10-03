@@ -226,11 +226,13 @@ class ChangeRequestMain extends SqlElement {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  if (dijit.byId("approved").get("checked")==true) { ';
       $colScript .= '    dijit.byId("idApprover__idResource").domNode.style.display = "inline-table";';
+      $colScript .= '    dojo.setStyle("idApprover__idResourceButtonGoto","display","inline-table");';
       $colScript .= '    dijit.byId("idApprover__idResource").set("value",'.getSessionUser()->id.'); ';
       $colScript .= '    var curDate = new Date();';
       $colScript .= '    dijit.byId("approvedDate").set("value", curDate); ';
       $colScript .= '  } else { ';
       $colScript .= '   dijit.byId("idApprover__idResource").domNode.style.display = "none";';
+      $colScript .= '   dojo.setStyle("idApprover__idResourceButtonGoto","display","none");';
       $colScript .= '   dijit.byId("approvedDate").set("value", null);';
       $colScript .= '   dijit.byId("idApprover__idResource").set("value",null); ';
       $colScript .= '  }  ';
