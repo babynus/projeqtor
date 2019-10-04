@@ -6319,7 +6319,7 @@ function drawResourceSupport($list, $obj, $type, $refresh=false) {
   if (!$print) {
   	echo '<td class="assignHeader" style="width:15%">';
   	if ($obj->id!=null and !$print and $canCreate and !$obj->idle) {
-  		echo '<a onClick="addResourceSupport(\''.$idRess.'\');" title="'.i18n('addResourceSupport').'" /> '.formatSmallButton('Add').'</a>';
+  		echo '<a onClick="addResourceSupport(\''.$idRess.'\');" title="'.i18n('addSupportResource').'" /> '.formatSmallButton('Add').'</a>';
   	}
   	echo '</td>';
   }
@@ -6334,10 +6334,10 @@ function drawResourceSupport($list, $obj, $type, $refresh=false) {
   	if (!$print) {
   		echo '<td class="assignData" style="text-align:center;white-space: nowrap;">';
   		if ($canUpdate) {
-  			echo '  <a onClick="editResourceSupport(\''.$resSup->id.'\',\''.$resSup->idResource.'\');" '.'title="'.i18n('editSupportResource').'" > '.formatSmallButton('Edit').'</a>';
+  			echo '  <a onClick="editResourceSupport(\''.$resSup->id.'\',\''.$resSup->idResource.'\');" '.'title="'.i18n('editResourceSupport').'" > '.formatSmallButton('Edit').'</a>';
   		}
   		if ($canDelete) {
-  			echo '<a onClick="removeResourceSupport(\''.$resSup->id.'\');" '.'title="'.i18n('removeSupportResource').'" > '.formatSmallButton('Remove').'</a>';
+  			echo '<a onClick="removeResourceSupport(\''.$resSup->id.'\');" '.'title="'.i18n('removeResourceSupport').'" > '.formatSmallButton('Remove').'</a>';
   		}
   		if ($resSup->description) {
   			echo '<div style="float:right">'.formatCommentThumb($resSup->description).'</div>';

@@ -61,22 +61,22 @@ class ResourceIncompatible extends SqlElement {
     }
     
     if($this->idResource == $this->idIncompatible){
-      $result='ERROR';
+      $result=i18n('errorCannotSelfIncompatible');
     }
     $resSup = new ResourceSupport();
     $supp = $resSup->getSingleSqlElementFromCriteria('ResourceSupport', array('idResource'=>$this->idIncompatible, 'idSupport'=>$this->idResource));
     if($supp->id){
-      $result='ERROR';
+      $result=i18n('errorAlreadySupport');
     }
     $resSup = new ResourceSupport();
     $supp = $resSup->getSingleSqlElementFromCriteria('ResourceSupport', array('idResource'=>$this->idResource, 'idSupport'=>$this->idIncompatible));
     if($supp->id){
-    	$result='ERROR';
+    	$result=i18n('errorAlreadySupport');
     }
     $resInc = new ResourceIncompatible();
     $inc = $resInc->getSingleSqlElementFromCriteria('ResourceIncompatible', array('idResource'=>$this->idResource, 'idIncompatible'=>$this->idIncompatible));
     if($inc->id){
-    	$result='ERROR';
+    	$result=i18n('errorDuplicate');
     }
     return $result;
   }

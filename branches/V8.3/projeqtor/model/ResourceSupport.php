@@ -62,17 +62,17 @@ class ResourceSupport extends SqlElement {
     }
     
     if($this->idResource == $this->idSupport){
-    	$result='ERROR';
+    	$result=i18n('errorCannotSelfSupport');
     }
     $resInc = new ResourceIncompatible();
     $inc = $resInc->getSingleSqlElementFromCriteria('ResourceIncompatible', array('idResource'=>$this->idSupport, 'idIncompatible'=>$this->idResource));
     if($inc->id){
-    	$result='ERROR';
+    	$result=i18n('errorAlreadyIncompatible');
     }
     $resSup = new ResourceSupport();
     $supp = $resSup->getSingleSqlElementFromCriteria('ResourceSupport', array('idResource'=>$this->idResource, 'idSupport'=>$this->idSupport));
     if($supp->id){
-    	$result='ERROR';
+    	$result=i18n('errorDuplicate');
     }
     return $result;
   }
