@@ -121,7 +121,12 @@ class PlannedWork extends GeneralWork {
 // ================================================================================================================================
 
   public static function plan($projectIdArray, $startDate,$withCriticalPath=true) {
+    global $strictDependency,$workUnit,$hoursPerDay,$hour,$halfHour,$daysPerWeek,$withProjectRepartition,$globalMaxDate,$globalMinDate;
+    global $arrayPlannedWork,$arrayRealWork,$arrayAssignment,$arrayPlanningElement;
+    global $listPlan,$fullListPlan,$resources,$topList,$reserved,$arrayNotPlanned,$arrayWarning;
     global $cronnedScript;
+    
+    // Increase default limits
   	projeqtor_set_time_limit(300);
   	projeqtor_set_memory_limit('512M');
   	
@@ -136,11 +141,13 @@ class PlannedWork extends GeneralWork {
   	SqlElement::$_cachedQuery['PlanningMode']=array();
   	self::$_planningInProgress=true;
   	
+  	// Gets untis
   	$workUnit=Work::getWorkUnit();
   	$hoursPerDay=Work::getHoursPerDay();
   	$hour=round(1/$hoursPerDay,10);
   	$halfHour=round(1/$hoursPerDay/2,10);
   	
+  	// Gives limits to avoid planning too far
     $withProjectRepartition=true;
     $result="";
     $startTime=time();
@@ -148,6 +155,7 @@ class PlannedWork extends GeneralWork {
     $globalMaxDate=date('Y')+5 . "-12-31"; // Don't try to plan after Dec-31 of current year + 3
     $globalMinDate=date('Y')-1 . "-01-01"; // Don't try to plan before Jan-01 of current year -1
     
+    // Work arrays
     $arrayPlannedWork=array();
     $arrayRealWork=array();
     $arrayAssignment=array();
@@ -167,6 +175,7 @@ class PlannedWork extends GeneralWork {
       }
     }
     
+    // Define number of days per week depending on open days
     $daysPerWeek=7;
     if (Parameter::getGlobalParameter('OpenDaySunday')=='offDays') $daysPerWeek--;
     if (Parameter::getGlobalParameter('OpenDayMonday')=='offDays') $daysPerWeek--;
@@ -177,7 +186,6 @@ class PlannedWork extends GeneralWork {
     if (Parameter::getGlobalParameter('OpenDaySaturday')=='offDays') $daysPerWeek--;
     
     //-- Build in list to get a where clause : "idProject in ( ... )"
-
     $inClause="(";
     foreach ($projectIdArray as $projectId) {
       $proj=new Project($projectId,true);
@@ -190,6 +198,10 @@ class PlannedWork extends GeneralWork {
     $inClause.=" and idProject not in " . Project::getFixedProjectList() ;
     $user=getSessionUser();
     if (!$cronnedScript) $inClause.=" and idProject in ". transformListIntoInClause($user->getListOfPlannableProjects());
+    // Remove activities with fixed flag
+    $pe=new PlanningElement();
+    $peTable=$pe->getDatabaseTableName();
+    $inClause.=" and (refType, refId) not in (select refType, refId from $peTable peFixed where fixPlanning=1) ";
     //-- Purge existing planned work
     $plan=new PlannedWork();
     $plan->purge($inClause);
@@ -217,59 +229,10 @@ class PlannedWork extends GeneralWork {
     $a=new Assignment();
     $topList=array();
     $reserved=array();
-    // Will constitute an array $reserved to be sure to reserve the availability of tasks as RECW that will be planned "after" predecessors to get start and end
-    // $reserved[type='W'][idPE][idResource][day]=value         // sum of work to reserve for resource on week day for a given task
-    // $reserved[type='W'][idPE]['start']=date                  // start date, that will be set when known
-    // $reserved[type='W'][idPE]['end']=date                    // end date, that will be set when known
-    // $reserved[type='W'][idPE]['pred'][idPE]['id']=idPE       // id of precedessor PlanningElement
-    // $reserved[type='W'][idPE]['pred'][idPE]['delay']=delay   // Delay of dependency
-    // $reserved[type='W'][idPE]['pred'][idPE]['type']=type     // type of dependency (E-E, E-S, S-S)
-    // $reserved[type='W'][idPE]['succ'][idPE]['id']=idPE       // id of successor PlanningElement
-    // $reserved[type='W'][idPE]['succ'][idPE]['delay']=delay   // Delay of dependency
-    // $reserved[type='W'][idPE]['succ'][idPE]['type']=type     // type of dependency (E-E, E-S, S-S)
-    // $reserved[type='W']['sum'][idResource][day]+=value       // sum of work to reserve for resource on week day
-    // $reserved['allPreds'][idPE]=idPE                         // List of all PE who are predecessors of RECW task
-    // $reserved['allSuccs'][idPE]=idPE                         // List of all PE who are successors of RECW task
-    foreach ($listPlan as $plan) { // Store RECW to reserve avaialbility
-      if (property_exists($plan, '_profile') and $plan->_profile=='RECW') { // $plan->_profile may not be set for top Project when calculating for all project (then $plan->id is null)
-        $ar=new AssignmentRecurring();
-        $artype=substr($plan->_profile,-1);
-        $arList=$ar->getSqlElementsFromCriteria(array('refType'=>$plan->refType, 'refId'=>$plan->refId, 'type'=>$artype));
-        if (!isset($reserved[$artype])) $reserved[$artype]=array();
-        if (!isset($reserved[$artype][$plan->id])) $reserved[$artype][$plan->id]=array();
-        if (!isset($reserved[$artype]['sum'])) $reserved[$artype]['sum']=array();
-        foreach ($arList as $ar) {
-          if (!isset($reserved[$artype][$plan->id][$ar->idResource])) $reserved[$artype][$plan->id][$ar->idResource]=array();
-          if (!isset($reserved[$artype]['sum'][$ar->idResource])) $reserved[$artype]['sum'][$ar->idResource]=array();
-          $reserved[$artype][$plan->id][$ar->idResource][$ar->day]=$ar->value;
-          if (!isset($reseved[$artype]['sum'][$ar->idResource][$ar->day])) $reserved[$artype]['sum'][$ar->idResource][$ar->day]=0;
-          $reserved[$artype]['sum'][$ar->idResource][$ar->day]+=$ar->value;
-          if (!isset($reseved[$artype][$plan->id]['assignments'])) $reseved[$artype][$plan->id]['assignments']=array();
-          $reseved[$artype][$plan->id]['assignments'][$ar->idAssignment]=$ar->idAssignment;
-        }
-        $reserved[$artype][$plan->id]['start']=null;
-        $reserved[$artype][$plan->id]['end']=null;
-        $reserved[$artype][$plan->id]['pred']=array();
-        $reserved[$artype][$plan->id]['succ']=array();
-        $reserved[$artype][$plan->id]['idProj']=$plan->idProject;
-        $crit="successorId=$plan->id or predecessorId=$plan->id";
-        $dep=new Dependency();
-        $depList=$dep->getSqlElementsFromCriteria(null, false, $crit);
-        foreach ($depList as $dep ) {
-          if ($dep->successorId==$plan->id) {
-            $reserved[$artype][$plan->id]['pred'][$dep->predecessorId]=array('id'=>$dep->predecessorId,'delay'=>$dep->dependencyDelay, 'type'=>$dep->dependencyType);
-            $reserved['allPreds'][$dep->predecessorId]=$dep->predecessorId;
-          }
-          if ($dep->predecessorId==$plan->id) {
-            $reserved[$artype][$plan->id]['succ'][$dep->successorId]=array('id'=>$dep->successorId,'delay'=>$dep->dependencyDelay, 'type'=>$dep->dependencyType);
-            $reserved['allSuccs'][$dep->successorId]=$dep->successorId;
-          }
-        }
-
-      }
-    }
+    self::storeReservedForRecurring();
     $arrayNotPlanned=array();
     $arrayWarning=array();
+    $uniqueResourceAssignment=null;
 //-- Treat each PlanningElement ---------------------------------------------------------------------------------------------------
     foreach ($listPlan as $plan) {
       if (! $plan->id) {
@@ -662,7 +625,76 @@ class PlannedWork extends GeneralWork {
             }
           }
           $restartLoopAllAssignements=false;
-          foreach ($listAss as $ass) {
+//          $idxAss=0;
+          // List assignments of $plan : Search for assignment for "unique resource", if found, add virtual assignment for each resource to check 
+          foreach ($listAss as $keyAss=>$ass) {
+            if ($ass->uniqueResource) {
+              if ($profile=='GROUP') $profile='ASAP';
+              if ($uniqueResourceAssignment===null) $uniqueResourceAssignment=array();
+              if (!isset($uniqueResourceAssignment[$ass->id])) $uniqueResourceAssignment[$ass->id]=array();
+              if (! isset($resources[$ass->idResource])) {
+                $r=new ResourceAll($ass->idResource,true);
+                $resources[$ass->idResource]=$r->getWork($startDate, $withProjectRepartition);
+              }
+              $uniqueResourceAss=$ass;
+              $asel=new AssignmentSelection();
+              $aselList=$asel->getSqlElementsFromCriteria(array('idAssignment'=>$ass->id));
+              foreach ($aselList as $asel) {
+                $cpAss=clone($ass);
+                $cpAss->idResource=$asel->idResource;
+                $cpAss->isTeamResource=0;
+                $cpAss->uniqueResource=0;
+                $cpAss->temp=true;
+                $uniqueResourceAssignment[$ass->id][$asel->idResource]=array('select'=>$asel);
+                $listAss=array_insert_before($listAss, $cpAss, $keyAss);
+              }
+            }
+          }
+          foreach ($listAss as $keyAss=>$ass) {
+            debugLog("TREAT ASS #$ass->id for resource $ass->idResource on $plan->refType #$plan->refId - $plan->refName");
+            if (isset($uniqueResourceAssignment[$ass->id][$ass->idResource])) {
+              debugLog("  UNIQUE RESOURCE TO PLAN");
+            } else if ($ass->uniqueResource) {
+              debugLog("  POOL : MUST SELECT UNIQUE");          
+              $minEnd='2099-12-31';
+              // Selection of resource thzt gives the soonest planning
+              $selectedRes=null;
+              foreach($uniqueResourceAssignment[$ass->id] as $keyAssRes=>$assResSelect) {
+                $testAss=$assResSelect['ass'];
+                if ($testAss->plannedEndDate < $minEnd) {
+                  $selectedRes=$keyAssRes;
+                  $minEnd=$testAss->plannedEndDate;
+                }        
+                SqlElement::traceFields($testAss, array('idResource','plannedStartDate', 'plannedEndDate'));
+              }
+              if ($selectedRes) {
+                //$ress=$uniqueResourceAssignment[$ass->id][$selectedRes]['ress'];
+                $plan=$uniqueResourceAssignment[$ass->id][$selectedRes]['plan'];
+                $resources=$uniqueResourceAssignment[$ass->id][$selectedRes]['resources'];
+                $arrayPlannedWork=$uniqueResourceAssignment[$ass->id][$selectedRes]['plannedWork'];
+                $assSelected=$uniqueResourceAssignment[$ass->id][$selectedRes]['ass'];
+                $ass->plannedStartDate=$assSelected->plannedStartDate;
+                $ass->plannedEndDate=$assSelected->plannedEndDate;
+                $assSelected->idResource=$ass->idResource;
+                $uniqueResourceAssignment[$ass->id][$selectedRes]['SELECTED']='SELECTED';
+                $changedAss=true;
+                $assSelected->_noHistory=true; // Will only save planning data, so no history required
+                $arrayAssignment[]=$assSelected;
+                // Clean data that are not usefull any more
+                // Attention, table $uniqueResourceAssignment will contain result for each uniqueResource assignement on plan to store assignmentselection data 
+                foreach($uniqueResourceAssignment[$ass->id] as $keyAssRes=>$assResSelect) {
+                  //unset($uniqueResourceAssignment[$ass->id][$keyAssRes]['ress']);
+                  unset($uniqueResourceAssignment[$ass->id][$keyAssRes]['plan']);
+                  unset($uniqueResourceAssignment[$ass->id][$keyAssRes]['resources']);
+                  unset($uniqueResourceAssignment[$ass->id][$keyAssRes]['plannedWork']);
+                  //unset($uniqueResourceAssignment[$ass->id][$keyAssRes]['ass']);
+                }
+                continue; // Do not treat current assignment, as it was already calculated for each resource, and selected as soonest
+              } else { // Could not select resource, plan pool as usual
+                debugLog("   NO SELECTION");
+                // Nothing special to do : will continue to treat the assignment as usual
+              }
+            }   
             if ($ass->notPlannedWork>0) {
               $ass->notPlannedWork=0;
               $changedAss=true;
@@ -686,8 +718,10 @@ class PlannedWork extends GeneralWork {
             $capacity=($r->capacity)?$r->capacity:1;
             if (array_key_exists($ass->idResource,$resources)) {
               $ress=$resources[$ass->idResource];
+              debugLog("  get Ress #$ass->idResource from Resources");
             } else {
               $ress=$r->getWork($startDate, $withProjectRepartition);
+              debugLog("  get Ress #$ass->idResource from calculation");
             }
             $ress['capacity']=$capacity;
             if ($startPlan>$startDate) {
@@ -772,6 +806,16 @@ class PlannedWork extends GeneralWork {
               $stockPlannedWork=$arrayPlannedWork;
               $countRejectedIndivisibility=0;
               $countRejectedIndivisibilityMax=1000;
+            }
+            if ($uniqueResourceAssignment!==null and isset($uniqueResourceAssignment[$ass->id]) and isset($uniqueResourceAssignment[$ass->id][$ass->idResource])) {
+              debugLog("   Stock plan, left, resources, arrayPlannedWork");
+              $stockPlan=$plan;
+              $stockPlanStart=$plan->plannedStartDate;
+              //$stockAss=$ass;
+              $stockLeft=$left;
+              $stockResources=$resources;
+              //$stockRess=$ress;
+              $stockPlannedWork=$arrayPlannedWork;
             }
             while (1) {
               $surbooked=0;
@@ -1318,7 +1362,25 @@ class PlannedWork extends GeneralWork {
                 $currentDate=$endPlan;
                 $step=1;
               }
-            }      // End loop on date => While (1)    
+            }      // End loop on date => While (1)
+            debugLog("   END LOOP ON DATES");
+            // If unique Assignment    
+            if ($uniqueResourceAssignment!==null and isset($uniqueResourceAssignment[$ass->id]) and isset($uniqueResourceAssignment[$ass->id][$ass->idResource])) {
+              debugLog("   planning calculated - store plan, resources, plannedWork, ass"  );
+              //$uniqueResourceAssignment[$ass->id][$ass->idResource]['ress']=$ress;
+              $uniqueResourceAssignment[$ass->id][$ass->idResource]['plan']=clone($plan);
+              $resources[$ass->idResource]=$ress;
+              $uniqueResourceAssignment[$ass->id][$ass->idResource]['resources']=$resources;
+              $uniqueResourceAssignment[$ass->id][$ass->idResource]['plannedWork']=$arrayPlannedWork;
+              $uniqueResourceAssignment[$ass->id][$ass->idResource]['ass']=clone($ass);
+              $plan=$stockPlan;
+              $plan->plannedStartDate=$stockPlanStart;
+              $left=$stockLeft;
+              $resources=$stockResources;
+              $arrayPlannedWork=$stockPlannedWork;
+              unset($listAss[$keyAss]);
+              continue;
+            }
             if ($changedAss) {
               $ass->_noHistory=true; // Will only save planning data, so no history required
               $arrayAssignment[]=$ass;
@@ -1417,6 +1479,19 @@ class PlannedWork extends GeneralWork {
       $query.=';';
       SqlDirectElement::execute($query);
     }
+    if ($uniqueResourceAssignment!==null) {
+      foreach ($uniqueResourceAssignment as $uraAss) {
+        foreach($uraAss as $ura) {
+          $select=$ura['select'];
+          $ass=$ura['ass'];
+          $select->startDate=$ass->plannedStartDate;
+          $select->endDate=$ass->plannedEndDate;
+          if (isset($ura['SELECTED'])) $select->selected=1;
+          else $select->selected=0;
+          $select->save();
+        }
+      }
+    }
     // save Assignment
     foreach ($arrayAssignment as $ass) {
       $ass->simpleSave(); // Attention ! simpleSave for Assignment will execute direct query
@@ -1489,6 +1564,65 @@ class PlannedWork extends GeneralWork {
 // End of PLAN
 // ================================================================================================================================
   
+// Functions for PLAN
+
+  // Will constitute an array $reserved to be sure to reserve the availability of tasks as RECW that will be planned "after" predecessors to get start and end
+  // $reserved[type='W'][idPE][idResource][day]=value         // sum of work to reserve for resource on week day for a given task
+  // $reserved[type='W'][idPE]['start']=date                  // start date, that will be set when known
+  // $reserved[type='W'][idPE]['end']=date                    // end date, that will be set when known
+  // $reserved[type='W'][idPE]['pred'][idPE]['id']=idPE       // id of precedessor PlanningElement
+  // $reserved[type='W'][idPE]['pred'][idPE]['delay']=delay   // Delay of dependency
+  // $reserved[type='W'][idPE]['pred'][idPE]['type']=type     // type of dependency (E-E, E-S, S-S)
+  // $reserved[type='W'][idPE]['succ'][idPE]['id']=idPE       // id of successor PlanningElement
+  // $reserved[type='W'][idPE]['succ'][idPE]['delay']=delay   // Delay of dependency
+  // $reserved[type='W'][idPE]['succ'][idPE]['type']=type     // type of dependency (E-E, E-S, S-S)
+  // $reserved[type='W']['sum'][idResource][day]+=value       // sum of work to reserve for resource on week day
+  // $reserved['allPreds'][idPE]=idPE                         // List of all PE who are predecessors of RECW task
+  // $reserved['allSuccs'][idPE]=idPE                         // List of all PE who are successors of RECW task
+  private static function storeReservedForRecurring() {
+    global $listPlan,$reserved;
+    foreach ($listPlan as $plan) { // Store RECW to reserve avaialbility
+      if (property_exists($plan, '_profile') and $plan->_profile=='RECW') { // $plan->_profile may not be set for top Project when calculating for all project (then $plan->id is null)
+        $ar=new AssignmentRecurring();
+        $artype=substr($plan->_profile,-1);
+        $arList=$ar->getSqlElementsFromCriteria(array('refType'=>$plan->refType, 'refId'=>$plan->refId, 'type'=>$artype));
+        if (!isset($reserved[$artype])) $reserved[$artype]=array();
+        if (!isset($reserved[$artype][$plan->id])) $reserved[$artype][$plan->id]=array();
+        if (!isset($reserved[$artype]['sum'])) $reserved[$artype]['sum']=array();
+        foreach ($arList as $ar) {
+          if (!isset($reserved[$artype][$plan->id][$ar->idResource])) $reserved[$artype][$plan->id][$ar->idResource]=array();
+          if (!isset($reserved[$artype]['sum'][$ar->idResource])) $reserved[$artype]['sum'][$ar->idResource]=array();
+          $reserved[$artype][$plan->id][$ar->idResource][$ar->day]=$ar->value;
+          if (!isset($reseved[$artype]['sum'][$ar->idResource][$ar->day])) $reserved[$artype]['sum'][$ar->idResource][$ar->day]=0;
+          $reserved[$artype]['sum'][$ar->idResource][$ar->day]+=$ar->value;
+          if (!isset($reseved[$artype][$plan->id]['assignments'])) $reseved[$artype][$plan->id]['assignments']=array();
+          $reseved[$artype][$plan->id]['assignments'][$ar->idAssignment]=$ar->idAssignment;
+        }
+        $reserved[$artype][$plan->id]['start']=null;
+        $reserved[$artype][$plan->id]['end']=null;
+        $reserved[$artype][$plan->id]['pred']=array();
+        $reserved[$artype][$plan->id]['succ']=array();
+        $reserved[$artype][$plan->id]['idProj']=$plan->idProject;
+        $crit="successorId=$plan->id or predecessorId=$plan->id";
+        $dep=new Dependency();
+        $depList=$dep->getSqlElementsFromCriteria(null, false, $crit);
+        foreach ($depList as $dep ) {
+          if ($dep->successorId==$plan->id) {
+            $reserved[$artype][$plan->id]['pred'][$dep->predecessorId]=array('id'=>$dep->predecessorId,'delay'=>$dep->dependencyDelay, 'type'=>$dep->dependencyType);
+            $reserved['allPreds'][$dep->predecessorId]=$dep->predecessorId;
+          }
+          if ($dep->predecessorId==$plan->id) {
+            $reserved[$artype][$plan->id]['succ'][$dep->successorId]=array('id'=>$dep->successorId,'delay'=>$dep->dependencyDelay, 'type'=>$dep->dependencyType);
+            $reserved['allSuccs'][$dep->successorId]=$dep->successorId;
+          }
+        }
+    
+      }
+    }
+  }
+  
+  // Calculate Critical Path : after planning is calculated, re-claculate reversed from end
+  //                           then critical path are tasks that give save start date as forward planning
   private static function calculateCriticalPath($idProject,$fullListPlan) {
     if (!trim($idProject) or $idProject=='*') return $fullListPlan;
     $start=null;
@@ -1610,6 +1744,8 @@ class PlannedWork extends GeneralWork {
     }
     return $fullListPlan;
   }
+  
+  // Calculate reverse planning for a task : from end, subtract duration du get "latest start date"
   private static function reverse($nodeId,&$cp) {
     $node=$cp['node'][$nodeId];
     $cp['TEST']='OK';
@@ -1629,6 +1765,7 @@ class PlannedWork extends GeneralWork {
     }
   }
   
+  // Store a plan item (planningelement) into storeListPlan table)
   private static function storeListPlan($listPlan,$plan) {
 scriptLog("storeListPlan(listPlan,$plan->id)");
     $listPlan['#'.$plan->id]=$plan;
@@ -1780,6 +1917,8 @@ scriptLog("storeListPlan(listPlan,$plan->id)");
   		}
   	}
   }
+  
+  // ================================================================================================================================
   
   public static function planSaveDates($projectId, $initial, $validated) {
   	if ($initial=='NEVER' and $validated=='NEVER') {

@@ -153,7 +153,7 @@ if (! $oldCost or $assignment->dailyCost!=$oldCost) {
 }
 
 $resource = new ResourceAll($assignment->idResource);
-if($resource->isResourceTeam){
+if($resource->isResourceTeam and !$unique){
   $assignment->capacity=$etp;
   $periods = ResourceTeamAffectation::buildResourcePeriods($idResource);
   $today=date('Y-m-d');

@@ -2481,6 +2481,16 @@ function assignmentChangeResourceTeamForCapacity() {
     }
   });
 }
+function assignmentChangeUniqueResource(newValue) {
+  console.log-(newValue);
+  if(newValue==false){
+    dojo.byId('assignmentRateRow').style.display="none";
+    dojo.byId('assignmentCapacityResourceTeam').style.display="table-row";
+  }else{
+    dojo.byId('assignmentRateRow').style.display="table-row";
+    dojo.byId('assignmentCapacityResourceTeam').style.display="none";
+  }
+}
 
 function assignmentChangeResource() {
   if (editAssignmentLoading)
