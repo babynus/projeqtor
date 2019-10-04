@@ -3112,6 +3112,7 @@ paramMilestoneFromVersion: "встановити репер(milestone) від в
 paramNone: "ніхто",
 paramNotApplicableValue: "величина не застосовується",
 paramNotificationSystemActiv: "активувати систему повідомлень",
+paramNotReceiveHisOwnEmails: "not receive his own emails",
 paramOpenDayFriday: "П'ятниця",
 paramOpenDayMonday: "Понеділок",
 paramOpenDaySaturday: "Субота",
