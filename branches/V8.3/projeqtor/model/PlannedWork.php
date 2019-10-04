@@ -603,7 +603,7 @@ class PlannedWork extends GeneralWork {
           $plan->indivisibility=0; // Cannot plan with indivisibility on some modes
         }
         if ($plan->indivisibility==1 and $profile=='GROUP') {
-          $stockPlan=$plan;
+          $stockPlan=clone($plan);
           $stockPlanStart=$plan->plannedStartDate;
           $stockResources=$resources;
           $stockPlannedWork=$arrayPlannedWork;
@@ -651,11 +651,10 @@ class PlannedWork extends GeneralWork {
             }
           }
           foreach ($listAss as $keyAss=>$ass) {
-            debugLog("TREAT ASS #$ass->id for resource $ass->idResource on $plan->refType #$plan->refId - $plan->refName");
             if (isset($uniqueResourceAssignment[$ass->id][$ass->idResource])) {
-              debugLog("  UNIQUE RESOURCE TO PLAN");
+              // UNIQUE RESOURCE TO PLAN
             } else if ($ass->uniqueResource) {
-              debugLog("  POOL : MUST SELECT UNIQUE");          
+              // POOL : MUST SELECT UNIQUE           
               $minEnd='2099-12-31';
               // Selection of resource thzt gives the soonest planning
               $selectedRes=null;
@@ -691,7 +690,6 @@ class PlannedWork extends GeneralWork {
                 }
                 continue; // Do not treat current assignment, as it was already calculated for each resource, and selected as soonest
               } else { // Could not select resource, plan pool as usual
-                debugLog("   NO SELECTION");
                 // Nothing special to do : will continue to treat the assignment as usual
               }
             }   
@@ -718,10 +716,8 @@ class PlannedWork extends GeneralWork {
             $capacity=($r->capacity)?$r->capacity:1;
             if (array_key_exists($ass->idResource,$resources)) {
               $ress=$resources[$ass->idResource];
-              debugLog("  get Ress #$ass->idResource from Resources");
             } else {
               $ress=$r->getWork($startDate, $withProjectRepartition);
-              debugLog("  get Ress #$ass->idResource from calculation");
             }
             $ress['capacity']=$capacity;
             if ($startPlan>$startDate) {
@@ -808,8 +804,7 @@ class PlannedWork extends GeneralWork {
               $countRejectedIndivisibilityMax=1000;
             }
             if ($uniqueResourceAssignment!==null and isset($uniqueResourceAssignment[$ass->id]) and isset($uniqueResourceAssignment[$ass->id][$ass->idResource])) {
-              debugLog("   Stock plan, left, resources, arrayPlannedWork");
-              $stockPlan=$plan;
+              $stockPlan=clone($plan);
               $stockPlanStart=$plan->plannedStartDate;
               //$stockAss=$ass;
               $stockLeft=$left;
@@ -1363,11 +1358,8 @@ class PlannedWork extends GeneralWork {
                 $step=1;
               }
             }      // End loop on date => While (1)
-            debugLog("   END LOOP ON DATES");
             // If unique Assignment    
             if ($uniqueResourceAssignment!==null and isset($uniqueResourceAssignment[$ass->id]) and isset($uniqueResourceAssignment[$ass->id][$ass->idResource])) {
-              debugLog("   planning calculated - store plan, resources, plannedWork, ass"  );
-              //$uniqueResourceAssignment[$ass->id][$ass->idResource]['ress']=$ress;
               $uniqueResourceAssignment[$ass->id][$ass->idResource]['plan']=clone($plan);
               $resources[$ass->idResource]=$ress;
               $uniqueResourceAssignment[$ass->id][$ass->idResource]['resources']=$resources;
