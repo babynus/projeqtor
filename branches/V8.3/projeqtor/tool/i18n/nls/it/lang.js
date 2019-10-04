@@ -3112,6 +3112,7 @@ paramMilestoneFromVersion: "definire la milestone a partire dalla versione del p
 paramNone: "nessuno",
 paramNotApplicableValue: "valore non applicabile",
 paramNotificationSystemActiv: "attivare il sistema di notifica",
+paramNotReceiveHisOwnEmails: "not receive his own emails",
 paramOpenDayFriday: "Venerdì",
 paramOpenDayMonday: "Lunedì",
 paramOpenDaySaturday: "Sabato",
