@@ -133,7 +133,7 @@ if ($dependencyId) { // Edit Mode
 	      } else {
 	        $successor->plannedStartDate=addWorkDaysToDate($predecessor->plannedEndDate, 2);
 	      } 
-	      if (!$successor->fixPlanning) $successor->save();
+	      $successor->save();
 	    }
 	  }
 	}

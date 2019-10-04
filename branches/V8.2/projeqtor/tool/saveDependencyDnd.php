@@ -84,7 +84,7 @@ if ($tmpStatus=='OK') {
       $predecessor->plannedStartDate=($predecessor->validatedStartDate)?$predecessor->validatedStartDate:date('Y-m-d');
     }
     $predecessor->plannedEndDate=addWorkDaysToDate($predecessor->plannedStartDate, $predecessor->validatedDuration);
-    if (!$predecessor->fixPlanning) $resPredecessor=$predecessor->save();
+    $resPredecessor=$predecessor->save();
   }
   if ($predecessor->plannedEndDate) {
     if ($predecessor->refType=='Milestone') {
@@ -105,7 +105,7 @@ if ($tmpStatus=='OK') {
         $successor->plannedEndDate=null;
       }
     }
-    if (!$successor->fixPlanning) $resSuccessor=$successor->save();
+    $resSuccessor=$successor->save();
   }
 }
 
