@@ -4836,6 +4836,7 @@ abstract class SqlElement {
     $statusMailListOrganized=array();
     $statusMail = new StatusMail ();
     $sender = Parameter::getGlobalParameter ( 'paramMailSender' );
+    
     if ($directStatusMail) { // Direct Send Mail
       $statusMailList = array($directStatusMail->id => $directStatusMail);
       $statusMailListOrganized=$statusMailList;
@@ -5218,6 +5219,7 @@ abstract class SqlElement {
             $emailTemplateTab[$j]->template,
             $this, null, $sender, null, null, $references );
       }
+      
     }
     //END add gmartin 
     if ($directStatusMail) {
