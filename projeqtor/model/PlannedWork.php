@@ -664,7 +664,6 @@ class PlannedWork extends GeneralWork {
                   $selectedRes=$keyAssRes;
                   $minEnd=$testAss->plannedEndDate;
                 }        
-                SqlElement::traceFields($testAss, array('idResource','plannedStartDate', 'plannedEndDate'));
               }
               if ($selectedRes) {
                 //$ress=$uniqueResourceAssignment[$ass->id][$selectedRes]['ress'];
@@ -1434,6 +1433,9 @@ class PlannedWork extends GeneralWork {
       }
     }
     // Moved transaction at end of procedure (out of script plan.php) to minimize lock possibilities
+    foreach ($fullListPlan as $keyPe=>$pe) {
+      if ($pe->fixPlanning) unset($fullListPlan[$keyPe]);
+    }
     Sql::beginTransaction();
     $cpt=0;
     $query='';
@@ -1500,6 +1502,7 @@ class PlannedWork extends GeneralWork {
     }
     $arrayProj=array();
     foreach ($fullListPlan as $pe) {
+      if ($pe->fixPlanning) continue;
       if (!$pe->refType) continue;
       if ($pe->refType!='Project' and $pe->idProject) $arrayProj[$pe->idProject]=$pe->idProject;
       if (property_exists($pe,'_profile') and $pe->_profile=='RECW') { 
