@@ -125,7 +125,10 @@ $resource=new ResourceAll($idResource);
            <tr id="assignmentUniqueSelection" style="<?php echo ($resource->isResourceTeam)?"":"display:none";?>">
             <td class="dialogLabel">&nbsp;</td>     
             <td>
-              <input title="<?php echo i18n('helpUniqueResource');?>" dojoType="dijit.form.CheckBox" name="assignmentUnique" id="assignmentUnique" <?php echo ($assignmentObj->uniqueResource)?"checked=checked":"";?> />
+              <input title="<?php echo i18n('helpUniqueResource');?>" 
+                     dojoType="dijit.form.CheckBox" name="assignmentUnique" id="assignmentUnique" 
+                     onChange="assignmentChangeUniqueResource(this.checked);"
+                     <?php echo ($assignmentObj->uniqueResource)?"checked=checked":"";?> />
               <label title="<?php echo i18n('helpUniqueResource');?>" style="float:none" for="attendantIsOptional" ><?php echo i18n("uniqueResource"); ?></label>
             </td>          
            </tr>
@@ -168,7 +171,7 @@ $resource=new ResourceAll($idResource);
              </td>
            </tr>
 
-           <tr id="assignmentRateRow" name="assignmentRateRow" <?php if ($resource->isResourceTeam) echo 'style="display:none"';?>>
+           <tr id="assignmentRateRow" name="assignmentRateRow" <?php if ($resource->isResourceTeam and !$assignmentObj->uniqueResource) echo 'style="display:none"';?>>
              <td class="dialogLabel" >
                <label for="assignmentRate" ><?php echo i18n("colRate");?>&nbsp;:&nbsp;</label>
              </td>
@@ -185,7 +188,7 @@ $resource=new ResourceAll($idResource);
              </td>
            </tr>
            
-             <tr id="assignmentCapacityResourceTeam" name="assignmentCapacityResourceTeam" <?php if (! $resource->isResourceTeam) echo 'style="display:none"';?>>
+             <tr id="assignmentCapacityResourceTeam" name="assignmentCapacityResourceTeam" <?php if (! $resource->isResourceTeam or $assignmentObj->uniqueResource) echo 'style="display:none"';?>>
                <td class="dialogLabel" >
                  <label for="assignmentCapacity" ><?php echo i18n("colCapacity");?>&nbsp;:&nbsp;</label>
                </td>
