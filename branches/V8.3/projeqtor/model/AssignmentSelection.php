@@ -57,16 +57,12 @@ class AssignmentSelection extends SqlElement {
   } 
 
   public static function addResourcesFromPool($idAssignment,$idPool) {
-    debugLog("addResourcesFromPool($idAssignment,$idPool)");
     $rtf=new ResourceTeamAffectation();
     $rList=$rtf->getSqlElementsFromCriteria(array('idResourceTeam'=>$idPool));
-    debugLog("LISTE");
-    debugLog($rList);
     foreach ($rList as $r) {
       $ar=SqlElement::getSingleSqlElementFromCriteria('AssignmentSelection', array('idResource'=>$r->idResource,'idAssignment'=>$idAssignment));
       if (! $ar->id) {
         $res=$ar->save();
-        debugLog($res);
       }
     }
   }
