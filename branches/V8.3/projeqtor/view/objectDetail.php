@@ -853,6 +853,14 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $crit=array('idResource'=>$obj->id);
         $aff=new ResourceTeamAffectation();
         $cpt=$aff->countSqlElementsFromCriteria($crit);
+      } else if ($section=='resourceIncompatible') {
+        $crit=array('idResource'=>$obj->id);
+        $resInc=new ResourceIncompatible();
+        $cpt=$resInc->countSqlElementsFromCriteria($crit);
+      } else if ($section=='resourceSupport') {
+        $crit=array('idResource'=>$obj->id);
+        $resSup=new ResourceSupport();
+        $cpt=$resSup->countSqlElementsFromCriteria($crit);
       } else {
         // ADD BY Marc TABARY - 2017-03-16 - FORCE SECTION ITEM'S COUNT
         // Want a item's count on section header
