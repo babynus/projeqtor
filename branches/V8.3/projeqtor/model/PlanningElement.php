@@ -88,6 +88,7 @@ class PlanningElement extends SqlElement {
   public $notPlannedWork;
   public $isManualProgress;
   public $surbooked;
+  public $fixPlanning;
   
   private static $_fieldsAttributes=array(
                                   "id"=>"hidden",
@@ -138,8 +139,9 @@ class PlanningElement extends SqlElement {
                                   "isOnCriticalPath"=>"hidden",
                                   "isManualProgress"=>"hidden",
                                   "surbooked"=>"hidden",
-      "indivisibility"=>"hidden",
-      "minimumThreshold"=>"hidden"
+                                  "indivisibility"=>"hidden",
+                                  "minimumThreshold"=>"hidden",
+                                  "fixPlanning;"=>"hidden"
   );   
   
   private static $_predecessorItemsArray = array();
