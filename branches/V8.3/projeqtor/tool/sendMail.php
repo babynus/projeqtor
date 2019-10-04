@@ -35,6 +35,7 @@ $title="";
 $msg="";
 $dest="";
 $typeSendMail="";
+
 if (array_key_exists('className', $_REQUEST)) {
   $typeSendMail=$_REQUEST['className'];
 } else if (array_key_exists('objectClassName', $_REQUEST)) {
