@@ -714,6 +714,11 @@ class Parameter extends SqlElement {
        	'OpenDocument'=>i18n('OpenDocument')
        	);
        	break;
+      case 'notReceiveHisOwnEmails':
+   	    $list = array('NO'=>i18n('displayNo'),
+   	    'YES'=>i18n('displayYes'));
+   	    break;
+
    	  // MTY - EXPORT EXCEL OR ODS
     } 
     return $list;
@@ -747,6 +752,7 @@ class Parameter extends SqlElement {
                            "restrictProjectList"=>'list',
                            "showIdleDefault"=>'list',
                            "userNoteDiscussionMode"=>'list',
+                           "notReceiveHisOwnEmails"=>'list',
                          'sectionPrintExport'=>'section',
                            'printHistory'=>'list',  
                            "printInNewWindow"=>"list",
@@ -765,6 +771,7 @@ class Parameter extends SqlElement {
 // MTY - EXPORT EXCEL OR ODS            
                          'sectionPhoto'=>'section',
                            'image'=>'photo'
+                         
         );
         $lockPassword=Parameter::getGlobalParameter('lockPassword');
         $paramLdap_allow_login=Parameter::getGlobalParameter('paramLdap_allow_login');

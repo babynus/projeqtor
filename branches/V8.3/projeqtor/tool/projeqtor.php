@@ -2015,21 +2015,20 @@ function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sen
   // + User::authenticate : sendMail($paramAdminMail, $title, $message)
   // + /tool/sendMail.php : sendMail($dest,$title,$msg)
   global $targetDirImageUpload;
-  $curUser=new Affectable(getCurrentUserId());
   // florent 
-  if(explode(',', $to)){
-    $tabTo=explode(',', $to);
-    foreach($tabTo as $id=>$value){
-      if(trim($value) == $curUser->email){
-        unset($tabTo[$id]);
-      }
-    }
-    $to=implode(',', $tabTo);
-  }else{
-    if($to==$curUser->email){
-      return;
-    }
-  }
+//   if(explode(',', $to)){
+//     $tabTo=explode(',', $to);
+//     foreach($tabTo as $id=>$value){
+//       if(trim($value) == $curUser->email){
+//         unset($tabTo[$id]);
+//       }
+//     }
+//     $to=implode(',', $tabTo);
+//   }else{
+//     if($to==$curUser->email){
+//       return;
+//     }
+//   }
   $messageBody=str_replace($targetDirImageUpload, SqlElement::getBaseUrl().substr(str_replace("..", "", $targetDirImageUpload), 0, strlen(str_replace("..", "", $targetDirImageUpload))-1), $messageBody);
   $paramMailSendmailPath=Parameter::getGlobalParameter('paramMailSendmailPath');
   $paramMailSmtpUsername=Parameter::getGlobalParameter('paramMailSmtpUsername');
@@ -2087,6 +2086,26 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
   $mail->mailBody=$message;
   $mail->mailStatus='WAIT';
   $mail->idle='0';
+  debugLog('to 1 :'.$mail->mailTo);
+  if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES' ){
+    $curUser=new Affectable(getSessionUser()->id);
+    if(explode(',', $to)){
+      $tabTo=explode(',', $to);
+      foreach($tabTo as $id=>$value){
+        if(trim($value)== $curUser->email){
+          unset($tabTo[$id]);
+        }
+      }
+      $mail->mailTo=implode(',', $tabTo);
+      debugLog('to 2 :'.$mail->mailTo);
+    }else{
+      if(trim(($to))== $curUser->email){
+        debugLog('ici');
+        return;
+      }
+    }
+  }
+  debugLog('11111111111');
   $resMail=$mail->save();
   if (stripos($resMail, 'id="lastOperationStatus" value="ERROR"')>0) {
     errorLog("Error storing email in table : ".$resMail);
@@ -2450,6 +2469,7 @@ function quit($sock) {
 
 function sendMail_mail($to, $title, $message, $object=null, $headers=null, $sender=null, $boundary=null, $references=null) {
   scriptLog('sendMail_mail');
+  debugLog('15');
   $paramMailSender=Parameter::getGlobalParameter('paramMailSender');
   // The user is stored in session , if you try to changed email of the admin , you need to disconnect/reconnect for have the new email in sender
   $user=getSessionUser();
@@ -2465,6 +2485,7 @@ function sendMail_mail($to, $title, $message, $object=null, $headers=null, $send
   }
   // Save data of the mail
   $mail=new Mail();
+  debugLog('17');
   if (sessionUserExists()) {
     $mail->idUser=getSessionUser()->id;
   }
