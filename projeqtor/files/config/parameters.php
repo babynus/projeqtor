@@ -39,5 +39,5 @@ $scaytAutoStartup='NO';
 //$imapFilterCriteria='UNSEEN';
 $dataCloningDirectory="D:\www\simulation";       //Modify repertory simulation avoid Eclipse conflict
 $dataCloningUrl="http://localhost/simulation/";  //Acces data cloning url for goto
-$doNotExportAssignmentsForXMLFormat=true;
+//$doNotExportAssignmentsForXMLFormat=true;
 //======= END
