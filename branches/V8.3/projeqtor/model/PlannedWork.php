@@ -660,10 +660,36 @@ class PlannedWork extends GeneralWork {
               $selectedRes=null;
               foreach($uniqueResourceAssignment[$ass->id] as $keyAssRes=>$assResSelect) {
                 $testAss=$assResSelect['ass'];
-                if ($testAss->plannedEndDate < $minEnd) {
+                $testAssSelect=$assResSelect['select'];
+                if ($testAssSelect->userSelected==1) {
+                  $selectedRes=$keyAssRes;
+                  $minEnd='1900-01-01';
+                } else if ($testAss->plannedEndDate < $minEnd) {
                   $selectedRes=$keyAssRes;
                   $minEnd=$testAss->plannedEndDate;
-                }        
+                } else if ($testAss->plannedEndDate==$minEnd) { // equality over date
+                  // Take the one with less planned work
+                  $selectedWork=self::getPlannedWorkForResource($selectedRes,$startDate);
+                  $currentWork=self::getPlannedWorkForResource($keyAssRes,$startDate);
+                  if ($currentWork<$selectedWork) {
+                    $selectedRes=$keyAssRes;
+                    $minEnd=$testAss->plannedEndDate;
+                  } else if ($currentWork==$selectedWork) { // equality over planned work
+                    // Take the one with less left work to plan
+                    $selectedWork=self::getLeftWorkForResource($selectedRes,$startDate);
+                    $currentWork=self::getLeftWorkForResource($keyAssRes,$startDate);
+                    if ($currentWork<$selectedWork) {
+                      $selectedRes=$keyAssRes;
+                      $minEnd=$testAss->plannedEndDate;
+                    } else if ($currentWork==$selectedWork) { // equality over left work
+                      // Take the one with smaller id
+                      if ($keyAssRes<$selectedRes) {
+                        $selectedRes=$keyAssRes;
+                        $minEnd=$testAss->plannedEndDate;
+                      }
+                    }
+                  } 
+                }       
               }
               if ($selectedRes) {
                 //$ress=$uniqueResourceAssignment[$ass->id][$selectedRes]['ress'];
@@ -1960,5 +1986,40 @@ scriptLog("storeListPlan(listPlan,$plan->id)");
   	return $result;
   }
   
+  private static function getPlannedWorkForResource($idRes,$startDate) {
+    global $resources,$withProjectRepartition;
+    if (!isset($resources[$idRes])) {
+      $r=new Resource($idRes,true);
+      $ress=$r->getWork($startDate, $withProjectRepartition);    
+	    $resources[$idRes]=$ress;        
+    } else {
+      $ress=$resources[$idRes];
+    }
+    $sum=0;
+    foreach ($ress as $dt=>$val) {
+      if (strlen($dt)==10 and substr($dt,4,1)=='-' and substr($dt,7,1)=='-') {
+        $sum+=$val;
+      }
+    }
+    return $sum;
+  }
+  
+  private static function getLeftWorkForResource($idRes,$startDate) {
+    global $resources,$withProjectRepartition;
+    if (!isset($resources[$idRes])) {
+      $r=new Resource($idRes,true);
+      $ress=$r->getWork($startDate, $withProjectRepartition);
+      $resources[$idRes]=$ress;
+    } else {
+      $ress=$resources[$idRes];
+    }
+    if (isset($ress['leftWork'])) {
+      return $ress['leftWork'];
+    }
+    $ass=new Assignment();
+    $sum=$ass->sumSqlElementsFromCriteria('leftWork', array('idResource'=>$idRes));
+    $resources[$idRes]['leftWork']=$sum;
+    return $sum;
+  }
 }
 ?>
