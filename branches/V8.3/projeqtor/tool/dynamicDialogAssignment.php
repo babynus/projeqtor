@@ -82,10 +82,11 @@ if ($planningMode=='RECW') {
 }
 $resource=new ResourceAll($idResource);
 ?>
+<form dojoType="dijit.form.Form" id='assignmentForm' jsid='assignmentForm' name='assignmentForm' onSubmit="return false;">    
   <table>
     <tr>
       <td>
-       <form dojoType="dijit.form.Form" id='assignmentForm' jsid='assignmentForm' name='assignmentForm' onSubmit="return false;">    
+       
          <input id="assignmentId" name="assignmentId" type="hidden" value="<?php echo $idAssignment ;?>" />
          <input id="assignmentRefType" name="assignmentRefType" type="hidden" value="<?php echo $refType ;?>" />
          <input id="assignmentRefId" name="assignmentRefId" type="hidden" value="<?php echo $refId ;?>" />
@@ -418,8 +419,6 @@ $resource=new ResourceAll($idResource);
            <tr><td colspan="5">&nbsp;</td></tr>
         </table>
       </div>
-      
-        </form>
       </td>
     </tr>
     <tr>
@@ -439,3 +438,4 @@ $resource=new ResourceAll($idResource);
   AssignmentSelection::drawListForAssignment($assignmentObj->id);
   echo '</div><br/>';
 }?>
+</form>

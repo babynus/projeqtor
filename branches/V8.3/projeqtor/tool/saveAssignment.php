@@ -60,6 +60,12 @@ if (array_key_exists('assignmentIdResource',$_REQUEST)) {
 
 $unique=RequestHandler::getBoolean('assignmentUnique');
 
+$definitive=RequestHandler::getId('definitive');
+if ($definitive>0) {
+  $idResource=$definitive;
+  $unique=false;
+}
+
 $idRole=null;
 if (array_key_exists('assignmentIdRole',$_REQUEST)) {
   $idRole=$_REQUEST['assignmentIdRole'];
@@ -257,7 +263,15 @@ if ($idOrigin){
   
 // If uniquerResource, store list of resources
 if ($assignment->isResourceTeam and $assignment->uniqueResource) {
-  AssignmentSelection::addResourcesFromPool($assignment->id,$assignment->idResource); 
+  $userSelected=RequestHandler::getValue("dialogAssignmentManualSelect");
+  $res=AssignmentSelection::addResourcesFromPool($assignment->id,$assignment->idResource,$userSelected);
+  if (getLastOperationStatus($result)=='NO_CHANGE' and $res and getLastOperationStatus($res)=='OK') {
+    $result=$res;
+  } 
+}
+if ($definitive) {
+  $assSel=new AssignmentSelection();
+  $assSel->purge("idAssignment=$assignment->id");
 }
 
 // Message of correct saving
