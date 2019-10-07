@@ -37,6 +37,7 @@ class AssignmentSelection extends SqlElement {
   public $idResource;
   public $startDate;
   public $endDate;
+  public $userSelected;
   public $selected;
   
   /** ==========================================================================
