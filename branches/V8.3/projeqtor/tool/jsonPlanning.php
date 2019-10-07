@@ -1420,7 +1420,7 @@
       echo '<Manual>1</Manual>'. $nl;
       echo '<Type>1</Type>' . $nl; // TODO : 0=Fixed Units, 1=Fixed Duration, 2=Fixed Work.
       echo '<IsNull>0</IsNull>' . $nl;
-      //echo '<CreateDate>'.date('Y_m-d').'T'.date('H:i:s').'</CreateDate>';
+      echo '<CreateDate>'.date('Y_m-d').'T'.date('H:i:s').'</CreateDate>';
       echo '<WBS>' . $line['wbs'] . '</WBS>' . $nl;
       echo '<OutlineNumber>' . $line['wbs'] . '</OutlineNumber>' . $nl;
       echo '<OutlineLevel>' . (substr_count($line['wbs'],'.')+1) . '</OutlineLevel>' . $nl;
@@ -1536,7 +1536,7 @@
         echo '<LagFormat>7</LagFormat>' . $nl;
         echo '</PredecessorLink>' . $nl;
       }
-      echo '<IsPublished>1</IsPublished>' . $nl;
+      echo '<IsPublished>0</IsPublished>' . $nl;
       echo '<CommitmentType>0</CommitmentType>' . $nl;
       //if ($pct) {
         //echo '<TimephasedData>' . $nl;
@@ -1620,6 +1620,7 @@
     $lstAss=$ass->getSqlElementsFromCriteria(null, false, $clauseWhere, null, false);
     echo '<Assignments>' . $nl;
     foreach ($lstAss as $ass) {
+      if (Parameter::getUserParameter('doNotExportAssignmentsForXMLFormat')==true) continue;
       if ($ass->plannedWork==0) continue;
     	if (array_key_exists($ass->refType . '#' . $ass->refId, $arrayTask)) {
     	  $task=$arrayTask[$ass->refType . '#' . $ass->refId];
@@ -1636,39 +1637,40 @@
 	      $pct=(floatval($ass->plannedWork))?round($ass->realWork/$ass->plannedWork*100,0):0;
 	      $pct=$task['pct'];
 	      echo "<PercentWorkComplete>".($pct)."</PercentWorkComplete>" . $nl;
-	      //echo "<ActualCost>0</ActualCost>" . $nl;
-	      //echo "<ActualOvertimeCost>0</ActualOvertimeCost>" . $nl;
-	      //echo "<ActualOvertimeWork>PT0H0M0S</ActualOvertimeWork>" . $nl;
+	      echo "<ActualCost>0</ActualCost>" . $nl;
+	      echo "<ActualOvertimeCost>0</ActualOvertimeCost>" . $nl;
+	      echo "<ActualOvertimeWork>PT0H0M0S</ActualOvertimeWork>" . $nl;
 	      $assStart=($ass->realStartDate)?$ass->realStartDate:$ass->plannedStartDate;
 	      //$assStart=$task['start'];
 	      $assEnd=($ass->leftWork==0)?$ass->realEndDate:$ass->plannedEndDate;
 	      //$assEnd=$task['end'];
 	      echo "<ActualStart>" . (($assStart)?$assStart . "T" . $startAM:'') . "</ActualStart>" . $nl;
 	      echo "<ActualWork>PT" . round($ass->realWork*$hoursPerDay,0) ."H0M0S</ActualWork>" . $nl;
-	      //echo "<ACWP>0</ACWP>" . $nl;
-	      //echo "<Confirmed>0</Confirmed>" . $nl;
-	      //echo "<Cost>0</Cost>" . $nl;
-	      //echo "<CostRateTable>0</CostRateTable>" . $nl;
-	      //echo "<CostVariance>0</CostVariance>" . $nl;
-	      //echo "<CV>0</CV>" . $nl;
-	      //echo "<Delay>0</Delay>" . $nl;
+	      echo "<ACWP>0</ACWP>" . $nl;
+	      echo "<Confirmed>0</Confirmed>" . $nl;
+	      echo "<Cost>0</Cost>" . $nl;
+	      echo "<CostRateTable>0</CostRateTable>" . $nl;
+	      echo "<RateScale>0</RateScale>" . $nl;
+	      echo "<CostVariance>0</CostVariance>" . $nl;
+	      echo "<CV>0</CV>" . $nl;
+	      echo "<Delay>0</Delay>" . $nl;
 	      echo "<Finish>" . htmlEncode($assEnd) . "T" . $endPM . "</Finish>" . $nl;
 	      
-	      //echo "<FinishVariance>0</FinishVariance>" . $nl;
-	      //echo "<WorkVariance>0</WorkVariance>" . $nl;
-	      //echo "<HasFixedRateUnits>1</HasFixedRateUnits>" . $nl;
-	      //echo "<FixedMaterial>0</FixedMaterial>" . $nl;
-	      //echo "<LevelingDelay>0</LevelingDelay>" . $nl;
-	      //echo "<LevelingDelayFormat>7</LevelingDelayFormat>" . $nl;
-	      //echo "<LinkedFields>0</LinkedFields>" . $nl;
-	      //echo "<Milestone>0</Milestone>" . $nl;
-	      //echo "<Overallocated>0</Overallocated>" . $nl;
-	      //echo "<OvertimeCost>0</OvertimeCost>" . $nl;
-	      //echo "<OvertimeWork>PT0H0M0S</OvertimeWork>" . $nl;
+	      echo "<FinishVariance>0</FinishVariance>" . $nl;
+	      echo "<WorkVariance>'.(round($ass->plannedWork*$hoursPerDay,0)*60*1000).'.00</WorkVariance>" . $nl;
+	      echo "<HasFixedRateUnits>1</HasFixedRateUnits>" . $nl;
+	      echo "<FixedMaterial>0</FixedMaterial>" . $nl;
+	      echo "<LevelingDelay>0</LevelingDelay>" . $nl;
+	      echo "<LevelingDelayFormat>39</LevelingDelayFormat>" . $nl;
+	      echo "<LinkedFields>0</LinkedFields>" . $nl;
+	      echo "<Milestone>'.(($ass->refType=='Milestone')?'1':'0').'</Milestone>" . $nl;
+	      echo "<Overallocated>0</Overallocated>" . $nl;
+	      echo "<OvertimeCost>0</OvertimeCost>" . $nl;
+	      echo "<OvertimeWork>PT0H0M0S</OvertimeWork>" . $nl;
 	      echo "<RegularWork>PT" . round($ass->plannedWork*$hoursPerDay,0) . "H0M0S</RegularWork>" . $nl;
-	      //echo "<RemainingCost>0</RemainingCost>" . $nl;
-	      //echo "<RemainingOvertimeCost>0</RemainingOvertimeCost>" . $nl;
-	      //echo "<RemainingOvertimeWork>PT0H0M0S</RemainingOvertimeWork>" . $nl;
+	      echo "<RemainingCost>0</RemainingCost>" . $nl;
+	      echo "<RemainingOvertimeCost>0</RemainingOvertimeCost>" . $nl;
+	      echo "<RemainingOvertimeWork>PT0H0M0S</RemainingOvertimeWork>" . $nl;
 	      echo "<RemainingWork>PT" . round($ass->leftWork*$hoursPerDay,0) ."H0M0S</RemainingWork>" . $nl;
 	      echo "<ResponsePending>0</ResponsePending>" . $nl;
 	      echo '<Start>'. (($assStart)?$assStart . "T" . $startAM:'') . '</Start>'. $nl;
@@ -1684,10 +1686,10 @@
 	      echo "<UpdateNeeded>0</UpdateNeeded>" . $nl;
 	      echo "<VAC>0.00</VAC>" . $nl;
 	      echo "<Work>PT" . round($ass->plannedWork*$hoursPerDay,0) . "H0M0S</Work>" . $nl;
-	      //echo "<WorkContour>0</WorkContour>" . $nl;
-	      //echo "<BCWS>0</BCWS>" . $nl;
-	      //echo "<BCWP>0</BCWP>" . $nl;
-	      //echo "<BookingType>0</BookingType>" . $nl;
+	      echo "<WorkContour>0</WorkContour>" . $nl;
+	      echo "<BCWS>0</BCWS>" . $nl;
+	      echo "<BCWP>0</BCWP>" . $nl;
+	      echo "<BookingType>0</BookingType>" . $nl;
 	      //echo "<ActualWorkProtected>PT0H0M0S</ActualWorkProtected>" . $nl;
 	      //echo "<ActualOvertimeWorkProtected>PT0H0M0S</ActualOvertimeWorkProtected>" . $nl;
 	      //echo "<CreationDate>2011-11-18T21:06:00</CreationDate>" . $nl;
