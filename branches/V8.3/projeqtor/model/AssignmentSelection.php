@@ -57,16 +57,27 @@ class AssignmentSelection extends SqlElement {
     parent::__destruct();
   } 
 
-  public static function addResourcesFromPool($idAssignment,$idPool) {
+  public static function addResourcesFromPool($idAssignment,$idPool,$userSelected) {
     $rtf=new ResourceTeamAffectation();
     $rList=$rtf->getSqlElementsFromCriteria(array('idResourceTeam'=>$idPool));
+    $res="";
     foreach ($rList as $r) {
       $ar=SqlElement::getSingleSqlElementFromCriteria('AssignmentSelection', array('idResource'=>$r->idResource,'idAssignment'=>$idAssignment));
       if (! $ar->id) {
         $res=$ar->save();
+      } else {
+        if ($ar->userSelected and $ar->idResource!=$userSelected) {
+          $ar->userSelected=0;
+          $res=$ar->save();
+        } else if (! $ar->userSelected and $ar->idResource==$userSelected) {
+          $ar->userSelected=1;
+          $res=$ar->save();
+        }
       }
     }
+    return $res;
   }
+  
   public static function getListForAssignment($idAssignment) {
     $as=new AssignmentSelection();
     $rList=$as->getSqlElementsFromCriteria(array('idAssignment'=>$idAssignment));
@@ -76,18 +87,32 @@ class AssignmentSelection extends SqlElement {
   public static function drawListForAssignment($idAssignment) {
     echo "<table style='width:100%'>";
     echo "  <tr>";
-    echo "    <td class='assignHeader' style='width:50%'>".i18n('colIdResource')."</td>";
-    echo "    <td class='assignHeader' style='width:30%'>".i18n('colPlannedEndDate')."</td>";
+    echo "    <td class='assignHeader' style='width:40%'>".i18n('colIdResource')."</td>";
+    echo "    <td class='assignHeader' style='width:20%'>".i18n('colPlannedEndDate')."</td>";
     echo "    <td class='assignHeader' style='width:20%'>".i18n('colSelected')."</td>";
+    echo "    <td class='assignHeader' style='width:20%'>".i18n('colYourSelection')."</td>";
     echo "  </tr>";
+    $userSelected=null;
     foreach (self::getListForAssignment($idAssignment) as $as) {
+      if ($as->userSelected) $userSelected=$as->idResource;
       echo "  <tr>";
-      echo "    <td class='assignData'>".SqlList::getNameFromId('Resource', $as->idResource)."</td>";
-      echo "    <td class='assignData centerData'>".(($as->endDate)?htmlFormatDate($as->endDate,true):i18n('colNotPlannedWork'))."</td>";
-      echo "    <td class='assignData centerData'>".htmlDisplayCheckbox($as->selected)."</td>";
+      echo "    <td class='assignData verticalCenterData'>".SqlList::getNameFromId('Resource', $as->idResource)."</td>";
+      echo "    <td class='assignData centerData verticalCenterData'>".(($as->endDate)?htmlFormatDate($as->endDate,true):i18n('colNotPlannedWork'))."</td>";
+      echo "    <td class='assignData centerData verticalCenterData'>".htmlDisplayCheckbox($as->selected)."</td>";
+      echo "    <td class='assignData centerData verticalCenterData' style='white-space:nowrap'>";
+      echo "      <input dojoType='dijit.form.CheckBox' class='dialogAssignmentManualSelectCheck' id='dialogAssignmentManualSelectCheck_$as->idResource'";
+      echo "       onChange='assignmentUserSelectUniqueResource(this.checked,$as->idResource);' ";
+      if  ($as->userSelected) echo " checked=checked ";
+      echo "/>";
+      echo "     <button class='textButton' dojoType='dijit.form.Button' onclick='protectDblClick(this);saveAssignment($as->idResource);return false;' title=\"".i18n('helpDefinitiveSelection')."\">";
+      echo i18n("buttonDefinitiveSelection"); 
+      echo "     </button>";
+
+      echo "</td>";
       echo "  </tr>";
     }
     echo "</table>";
+    echo "  <input type='hidden' id='dialogAssignmentManualSelect' name='dialogAssignmentManualSelect' value='$userSelected' />";
   }
 }
 ?>
