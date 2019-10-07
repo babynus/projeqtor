@@ -1306,13 +1306,14 @@
     echo '<AdminProject>0</AdminProject>' . $nl;
     echo '<UpdateManuallyScheduledTasksWhenEditingLinks>0</UpdateManuallyScheduledTasksWhenEditingLinks>'. $nl;
 	  echo '<KeepTaskOnNearestWorkingTimeWhenMadeAutoScheduled>0</KeepTaskOnNearestWorkingTimeWhenMadeAutoScheduled>'. $nl;
+	  if (Parameter::getUserParameter('lang')=='fr') {
     echo '<Views>' . $nl;
     echo '<View>' . $nl;
     echo '<Name>Gantt a&amp;vec chronologie</Name>' . $nl;
     echo '</View>' . $nl;
     echo '<View>' . $nl;
     echo '<Name>Diagramme de &amp;Gantt</Name>' . $nl;
-    echo '<IsCustomized>true</IsCustomized>' . $nl;
+    //echo '<IsCustomized>true</IsCustomized>' . $nl;
     echo '</View>' . $nl;
     echo '<View>' . $nl;
     echo '<Name>Chrono&amp;logie</Name>' . $nl;
@@ -1338,9 +1339,9 @@
     echo '<Tables>' . $nl;
     echo '<Table>' . $nl;
     echo '<Name>&amp;EntrÃ©e</Name>' . $nl;
-    echo '<IsCustomized>true</IsCustomized>' . $nl;
     echo '</Table>' . $nl;
     echo '</Tables>' . $nl;
+	  }
     echo '<Maps/>' . $nl;
     echo '<Reports/>' . $nl;
     echo '<Drawings/>' . $nl;
@@ -1408,6 +1409,9 @@
     	  if ($line['realenddate']) $pct=100;
     	  else $pct=0;
     	}
+    	if ($line['plannedwork']==0 and $line['reftype']!='Milestone') {
+    	  //$line['plannedwork']=0.01;
+    	}
       echo '<Task>' . $nl;
       echo '<UID>' . $line['id'] . '</UID>' . $nl;
       echo '<ID>' . $cpt . '</ID>' . $nl;  // TODO : should be order of the tack in the list
@@ -1416,7 +1420,7 @@
       echo '<Manual>1</Manual>'. $nl;
       echo '<Type>1</Type>' . $nl; // TODO : 0=Fixed Units, 1=Fixed Duration, 2=Fixed Work.
       echo '<IsNull>0</IsNull>' . $nl;
-      echo '<CreateDate>'.date('Y_m-d').'T'.date('H:i:s').'</CreateDate>';
+      //echo '<CreateDate>'.date('Y_m-d').'T'.date('H:i:s').'</CreateDate>';
       echo '<WBS>' . $line['wbs'] . '</WBS>' . $nl;
       echo '<OutlineNumber>' . $line['wbs'] . '</OutlineNumber>' . $nl;
       echo '<OutlineLevel>' . (substr_count($line['wbs'],'.')+1) . '</OutlineLevel>' . $nl;
@@ -1468,7 +1472,7 @@
       echo '<LateFinish>' . $line['pend'] . 'T' . (($line['reftype']=='Milestone')?$startAM:$endPM) . '</LateFinish>' . $nl;
       echo '<StartVariance>0</StartVariance>' . $nl;
       echo '<FinishVariance>0</FinishVariance>' . $nl;
-      echo '<WorkVariance>'.(round($line['plannedwork']*$hoursPerDay,0)*60*1000).'</WorkVariance>' . $nl;
+      echo '<WorkVariance>'.(round($line['plannedwork']*$hoursPerDay,0)*60*1000).'.00</WorkVariance>' . $nl;
       echo '<FreeSlack>0</FreeSlack>' . $nl;
       echo '<TotalSlack>0</TotalSlack>' . $nl;
       echo '<StartSlack>0</StartSlack>' . $nl;
@@ -1616,6 +1620,7 @@
     $lstAss=$ass->getSqlElementsFromCriteria(null, false, $clauseWhere, null, false);
     echo '<Assignments>' . $nl;
     foreach ($lstAss as $ass) {
+      if ($ass->plannedWork==0) continue;
     	if (array_key_exists($ass->refType . '#' . $ass->refId, $arrayTask)) {
     	  $task=$arrayTask[$ass->refType . '#' . $ass->refId];
     	  if (isset($arrayResource[$ass->idResource])) {
