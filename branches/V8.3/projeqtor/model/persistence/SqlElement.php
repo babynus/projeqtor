@@ -5377,7 +5377,6 @@ abstract class SqlElement {
     // admin mail
     $arrayFrom [] = '${adminMail}';
     $arrayTo [] = Parameter::getGlobalParameter ( 'paramAdminMail' );
-    
     // Format title
     return str_replace ( $arrayFrom, $arrayTo, $message );
   }
@@ -5401,7 +5400,12 @@ abstract class SqlElement {
     $sectionEnd = '</td>';
     $tableStart = '<table style="font-size:9pt; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
     $tableEnd = '</table>';
-    $msg = " \n ".$tableStart;
+    //florent
+    $replyMail=i18n("replyToMail");
+    $firstLine = "  <tr><td><div>=-=-=-=-=-=-=-=-=-= ".htmlEncode ( $replyMail)." =-=-=-=-=-=-=-=-=-=</div></td></tr>";
+    $secondLine = "  <tr><td><div>&nbsp;</div></td></tr>";
+    $msg = " \n ".$firstLine."\n".$secondLine."\n".$tableStart;
+    //
     $ref = $this->getReferenceUrl ();
     $msg .= '<tr><td colspan="3" style="font-size:18pt;color:#AAAAAA"><a href="' . $ref . '" target="#">' . i18n ( get_class ( $this ) ) . ' #' . htmlEncode ( $this->id ) . '</a></td></tr>';
     $nobr = false;
