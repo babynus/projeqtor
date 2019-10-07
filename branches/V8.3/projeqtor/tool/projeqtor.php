@@ -2086,31 +2086,22 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
   $mail->mailBody=$message;
   $mail->mailStatus='WAIT';
   $mail->idle='0';
-  debugLog('to 1 :'.$mail->mailTo);
+  // florent
   if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES' ){
     $curUser=new Affectable(getSessionUser()->id);
-    if(explode(',', $to)){
-      $tabTo=explode(',', $to);
-      foreach($tabTo as $id=>$value){
-        if(trim($value)== $curUser->email){
-          unset($tabTo[$id]);
-        }
-      }
-      $mail->mailTo=implode(',', $tabTo);
-      debugLog('to 2 :'.$mail->mailTo);
-    }else{
-      if(trim(($to))== $curUser->email){
-        debugLog('ici');
-        return;
-      }
+    if(stristr($to,$curUser->email)){
+       $to=trim(str_replace($curUser->email,"",$to));
+       if($to!=""){
+         $mail->mailTo=$to;
+       }else{
+         return;
+       }
     }
   }
-  debugLog('11111111111');
   $resMail=$mail->save();
   if (stripos($resMail, 'id="lastOperationStatus" value="ERROR"')>0) {
     errorLog("Error storing email in table : ".$resMail);
   }
-  
   enableCatchErrors();
   $resultMail="NO";
   
@@ -2469,7 +2460,6 @@ function quit($sock) {
 
 function sendMail_mail($to, $title, $message, $object=null, $headers=null, $sender=null, $boundary=null, $references=null) {
   scriptLog('sendMail_mail');
-  debugLog('15');
   $paramMailSender=Parameter::getGlobalParameter('paramMailSender');
   // The user is stored in session , if you try to changed email of the admin , you need to disconnect/reconnect for have the new email in sender
   $user=getSessionUser();
@@ -2485,7 +2475,6 @@ function sendMail_mail($to, $title, $message, $object=null, $headers=null, $send
   }
   // Save data of the mail
   $mail=new Mail();
-  debugLog('17');
   if (sessionUserExists()) {
     $mail->idUser=getSessionUser()->id;
   }
