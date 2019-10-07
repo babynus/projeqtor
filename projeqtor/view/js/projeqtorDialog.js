@@ -2418,7 +2418,7 @@ function assignmentUpdatePlannedWork(prefix) {
  * save an Assignment (after addAssignment or editAssignment)
  * 
  */
-function saveAssignment() {
+function saveAssignment(definitive) {
   /*
    * if (! dijit.byId('assignmentIdResource').get('value')) {
    * showAlert(i18n('messageMandatory',new Array(i18n('colIdResource'))));
@@ -2430,7 +2430,9 @@ function saveAssignment() {
   if (formVar.validate()) {
     dijit.byId("assignmentPlannedWork").focus();
     dijit.byId("assignmentLeftWork").focus();
-    loadContent("../tool/saveAssignment.php", "resultDivMain", "assignmentForm",
+    url="../tool/saveAssignment.php";
+    if (definitive) url+="?definitive="+definitive;
+    loadContent(url, "resultDivMain", "assignmentForm",
         true, 'assignment');
     dijit.byId('dialogAssignment').hide();
   } else {
@@ -2490,6 +2492,22 @@ function assignmentChangeUniqueResource(newValue) {
     dojo.byId('assignmentRateRow').style.display="table-row";
     dojo.byId('assignmentCapacityResourceTeam').style.display="none";
   }
+}
+assignmentUserSelectUniqueResourceCurrent=null;
+function assignmentUserSelectUniqueResource(newValue,idRes) {
+  if (assignmentUserSelectUniqueResourceCurrent!=null) return;
+  console.log("assignmentUserSelectUniqueResource("+newValue+","+idRes+")");
+  assignmentUserSelectUniqueResourceCurrent=idRes;
+  dojo.query(".dialogAssignmentManualSelectCheck").forEach(function(node, index, nodelist) {
+    var id=node.getAttribute('widgetid');
+    console.log("id="+id.substr(34));
+    if (dijit.byId(id) && parseInt(id.substr(34))!=parseInt(idRes)) {
+      console.log("set to unchecked");
+      dijit.byId(id).set('checked',false);
+    }
+  });
+  dojo.byId("dialogAssignmentManualSelect").value=(newValue)?idRes:null;
+  setTimeout("assignmentUserSelectUniqueResourceCurrent=null;",100);
 }
 
 function assignmentChangeResource() {
