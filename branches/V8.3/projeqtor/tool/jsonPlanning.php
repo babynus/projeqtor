@@ -1191,9 +1191,11 @@
     $maxDate = '';
     $minDate = '';
     $resultArray=array();
+    $selectItems="('',0)";
     if ($nbQueriedRows > 0) {
       while ($line = Sql::fetchLine($result)) {
       	$line=array_change_key_case($line,CASE_LOWER);
+      	$selectItems.=",('".$line['reftype']."',".$line['refid'].")";
       	if ($applyFilter and !isset($arrayRestrictWbs[$line['wbssortable']])) continue; // Filter applied and item is not selected and not a parent of selected
         $pStart="";
         $pStart=(trim($line['initialstartdate'])!="")?$line['initialstartdate']:$pStart;
@@ -1239,11 +1241,14 @@
       $resourceList=array();
       foreach ($affList as $aff) {
         if (isset($resourceList[$aff->idResource])) return;
-        $resourceList[$aff->idResource]=new Resource($aff->idResource,true);
+        $resourceList[$aff->idResource]=new ResourceAll($aff->idResource,true);
       }
     } else {
-      $res=new Resource();
-      $resourceList=$res->getSqlElementsFromCriteria(array(), false, false, " id asc");
+      $res=new ResourceAll();
+      $asTemp=new Assignment();
+      $asTable=$asTemp->getDatabaseTableName();
+      $crit="id in ( select idResource from $asTable asx where (asx.refType, asx.refId) in ($selectItems) )";
+      $resourceList=$res->getSqlElementsFromCriteria(null, false, $crit, " id asc");
     }
 
     echo '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' . $nl;
@@ -1420,7 +1425,7 @@
       echo '<Manual>1</Manual>'. $nl;
       echo '<Type>1</Type>' . $nl; // TODO : 0=Fixed Units, 1=Fixed Duration, 2=Fixed Work.
       echo '<IsNull>0</IsNull>' . $nl;
-      echo '<CreateDate>'.date('Y_m-d').'T'.date('H:i:s').'</CreateDate>';
+      echo '<CreateDate>'.date('Y_m-d').'T'.date('H:i:s').'</CreateDate>'. $nl;
       echo '<WBS>' . $line['wbs'] . '</WBS>' . $nl;
       echo '<OutlineNumber>' . $line['wbs'] . '</OutlineNumber>' . $nl;
       echo '<OutlineLevel>' . (substr_count($line['wbs'],'.')+1) . '</OutlineLevel>' . $nl;
@@ -1616,7 +1621,7 @@
     }
     echo "</Resources>" . $nl;
     $ass=new Assignment();
-    $clauseWhere="";
+    $clauseWhere="(refType,refId) in ($selectItems)";
     $lstAss=$ass->getSqlElementsFromCriteria(null, false, $clauseWhere, null, false);
     echo '<Assignments>' . $nl;
     foreach ($lstAss as $ass) {

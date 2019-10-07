@@ -1148,6 +1148,9 @@ div#reportParametersDiv .label, div#reportParametersDiv label {
 .centerData {
 	text-align: center;
 }
+.verticalCenterData {
+  vertical-align: middle;
+}
 .messageDataValueGrey {
   background-color: #EEEEEE;
   color: #505050;
