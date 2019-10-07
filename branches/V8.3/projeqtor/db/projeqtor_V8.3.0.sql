@@ -17,6 +17,7 @@ CREATE TABLE `${prefix}assignmentselection` (
   `idResource` int(12) unsigned DEFAULT NULL,
   `startDate` datetime DEFAULT NULL,
   `endDate` datetime DEFAULT NULL,
+  `userSelected` int(1) unsigned DEFAULT '0',
   `selected` int(1) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
