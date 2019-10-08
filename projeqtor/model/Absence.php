@@ -56,8 +56,11 @@ class Absence{
     //Get administrative project list 
     $proj = new Project();
     $act = new Activity();
+    $actTable=$act->getDatabaseTableName();
+    $work=new Work();
+    $workTable=$work->getDatabaseTableName();
     $where = "idProject in " . Project::getAdminitrativeProjectList(false, false);    
-    $where .= " and idle = 0 ";
+    $where .= " and (idle = 0 or exists (select 'x' from $workTable where idUser=".Sql::fmtId($userID)." and $workTable.refType='Activity' and $workTable.refId=$actTable.id and $workTable.year='$currentYear' )) ";
     $countExiting=$act->countSqlElementsFromCriteria(null,$where);
     $user=getSessionUser();
     $accessRightRead=securityGetAccessRight('menuActivity', 'read');
@@ -77,10 +80,10 @@ class Absence{
           $visibleProjects[$prj]=$prj;
         }
       }
-      $where .=" and idProject in ".transformListIntoInClause($visibleProjects);
+      //$where .=" and idProject in ".transformListIntoInClause($visibleProjects);
     }
     
-    $listAct = $act->getSqlElementsFromCriteria(null,false,$where,"idProject asc");
+    $listAct = $act->getSqlElementsFromCriteria(null,false,$where,"idProject asc, id asc");
     $ass = new Assignment();
     //Variable parameter
     $result="";
@@ -244,9 +247,13 @@ class Absence{
     // Activity calendar view
     $proj = new Project();
     $act = new Activity();
-    $where = "idProject in " . Project::getAdminitrativeProjectList(false,false) ;
-    //$where .= "and idle = 0 ";
-    $listAct = $act->getSqlElementsFromCriteria(null,false,$where,"idProject asc");
+    $actTable=$act->getDatabaseTableName();
+    $work=new Work();
+    $workTable=$work->getDatabaseTableName();
+    $where = "idProject in " . Project::getAdminitrativeProjectList(false, false);    
+    $where .= " and (idle = 0 or exists (select 'x' from $workTable where idUser=".Sql::fmtId($userID)." and $workTable.refType='Activity' and $workTable.refId=$actTable.id and $workTable.year='$currentYear' )) ";
+    
+    $listAct = $act->getSqlElementsFromCriteria(null,false,$where,"idProject asc, id asc");
     $ass = new Assignment();
     $res = new Resource($userID);
     
