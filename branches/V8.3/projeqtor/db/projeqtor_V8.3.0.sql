@@ -124,3 +124,6 @@ CREATE TABLE `${prefix}resourcesupport` (
 ALTER TABLE `${prefix}activity` ADD COLUMN `fixPlanning` int(1) unsigned default '0';
 ALTER TABLE `${prefix}planningelement` ADD COLUMN `fixPlanning` int(1) unsigned default '0';
 ALTER TABLE `${prefix}status` ADD COLUMN `fixPlanning` int(1) unsigned default '0';
+
+INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
+('automaticFeedingOfTheReal','No');
