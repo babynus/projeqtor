@@ -677,6 +677,12 @@ class Parameter extends SqlElement {
           'J-30'=>i18n('daysBeforeToday',array('30'))
         );
         break;
+      case 'automaticFeedingOfTheReal' :
+        $list=array(
+          'YES'=>i18n('paramFeedingTheReal'),
+          'NO'=>i18n('paramNoFeedingTheReal')
+        );
+        break;
       case 'notApplicableValue' :
         $list=array(
           'null'=>'',
@@ -1052,6 +1058,7 @@ class Parameter extends SqlElement {
                 	            'automaticPlanningDifferentialDate'=>'list',
                 	            'automaticPlanningComplete'=>'specific',
                 	            'automaticPlanningCompleteDate'=>'list',
+                	            'automaticFeedingOfTheReal'=>'list', 
         	                'newColumnbAutomationRight'=>'newColumn',
         	                  'sectionImputationAlert'=>'section',
         	                    'imputationAlertCronResource'=>'specific',
