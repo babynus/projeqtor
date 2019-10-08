@@ -303,7 +303,7 @@ class Parameter extends SqlElement {
       case 'printInNewWindow':
       case 'initializePassword': case 'setResponsibleIfNeeded': 
       case 'autoSetAssignmentByResponsible':
-      case 'autoSetUniqueComponentVersion':
+      case 'autoSetUniqueComponentVersion': case 'exportAssignmentsForXMLFormat':
         $list=array('YES'=>i18n('displayYes'),
                     'NO'=>i18n('displayNo'));
         break;
@@ -735,7 +735,8 @@ class Parameter extends SqlElement {
     switch ($typeParameter) {
       case ('userParameter'):
         $parameterList=array(
-                      'column1_1'=>'newColumn',
+                     'tabDisplay'=>"tab",
+                       'column_Dis_1'=>'newColumn',
                          'sectionDisplayParameter'=>"section",
                            "theme"=>"list", 
                            "lang"=>"list",
@@ -745,38 +746,51 @@ class Parameter extends SqlElement {
                            "paramShowThumb"=>"list",
                            "paramShowThumbList"=>"list",
                            "notApplicableValue"=>"list",
+                           'projectIndentChar'=>'list',
+                       'column_Dis_2'=>'newColumn',
                          'sectionIHM'=>'section',
                            "displayHistory"=>"list",
                            "displayChecklist"=>"list",  
-//                           "switchedMode"=>"list", // Removed in V8.2.1
                            "paramConfirmQuit"=>"list",
                            "startPage"=>"list",
                            "editor"=>'list',
                            "scaytAutoStartup"=>'list',
                            "maxColumns"=>'list',
-                           "directAccessToComponentList"=>'list',
-                           "restrictProjectList"=>'list',
                            "showIdleDefault"=>'list',
                            "userNoteDiscussionMode"=>'list',
-                           "notReceiveHisOwnEmails"=>'list',
+                           
+                     'tabExport'=>"tab",
+                       'column_Exp_1'=>'newColumn',
                          'sectionPrintExport'=>'section',
                            'printHistory'=>'list',  
                            "printInNewWindow"=>"list",
                            "pdfInNewWindow"=>"list",
-                      'column1_2'=>'newColumn',
-                         'sectionMiscellaneous'=>'section',      
+                           'typeExportXLSorODS'=>'list',
+                           'exportAssignmentsForXMLFormat'=>'list',
+                       'column_Exp_2'=>'newColumn',                         
+                     'tabAutomation'=>"tab",
+                       'column_Aut_1'=>'newColumn',
+                         'sectionProjects'=>'section',
                            "defaultProject"=>"list",
-                           'projectIndentChar'=>'list',
+                           "restrictProjectList"=>'list',
+                         'sectionAction'=>'section',
                            'markAlertsAsRead'=>'specific',
                            'showSubscribedItems'=>'specific',
+                         'sectionMail'=>'section',
+                           "notReceiveHisOwnEmails"=>'list',
+                       'column_Aut_2'=>'newColumn',
+                         'tabConfiguration'=>'section',
+                           "directAccessToComponentList"=>'list',                        
+                     'tabProfile'=>"tab",
+                       'column_Pro_1'=>'newColumn',
+                         'sectionOrganization'=>'section',
                            'team'=>'specific',
                            'organization'=>'specific',
-                           'profile'=>'specific',
-// MTY - EXPORT EXCEL OR ODS            
-                           'typeExportXLSorODS'=>'list',
-// MTY - EXPORT EXCEL OR ODS            
+                           'profile'=>'specific',                             
+                       'column_Pro_2'=>'newColumn',
                          'sectionPhoto'=>'section',
                            'image'=>'photo'
+                       
                          
         );
         $lockPassword=Parameter::getGlobalParameter('lockPassword');
@@ -784,6 +798,9 @@ class Parameter extends SqlElement {
         if (! getBooleanValue($lockPassword) and ! (getSessionUser()->isLdap and isset($paramLdap_allow_login) and strtolower($paramLdap_allow_login)=='true')) {
           $parameterList['sectionPassword']='section';
           $parameterList['password']='specific';
+        }
+        if (Parameter::getGlobalParameter('doNotExportAssignmentsForXMLFormat')===true) {
+          unset($parameterList['exportAssignmentsForXMLFormat']);
         }
         
         break;
