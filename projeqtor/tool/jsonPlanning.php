@@ -1449,7 +1449,7 @@
         $lengthDays=floor($lengthPct);
         $lengthHours=$lengthPct-$lengthDays;
         $lengthHH=floor($lengthHours*$hoursPerDay);
-        $lengthMM=(($lengthHours*$hoursPerDay)-$lengthHH)*60;
+        $lengthMM=floor((($lengthHours*$hoursPerDay)-$lengthHH)*60);
         $stop=addDaysToDate($line['pstart'], $lengthDays)."T".htmlFixLengthNumeric(substr($startAM,0,2)+$lengthHH,2).":".htmlFixLengthNumeric($lengthMM,2).":00";
         echo "<Stop>" . $stop . "</Stop>" . $nl;
         echo "<Resume>" . $stop . "</Resume>" . $nl;
