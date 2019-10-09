@@ -168,13 +168,15 @@ Just define your templates, and select it on the "Mail on Events"
  
 In the model, the user can use any property of the object, and display it in the mail using specific tags.
 
-you just have to use the ${projectName} tag for the project name to appear. 
+You just have to use the ${name} tag to display the name of the item. 
 
-Likewise with ${idproject} to display the identification number of it
+Likewise with ${idProject} you will display the identification number of the project of the item.
+To display the name of the project you just have to use the tag ${nameProject}.
+This will work with any attribute corresponding to another item.
    
 .. warning::
    
-   for properties referencing an external element, such as idXxxxx, use ${nameXxxxx}
+   for properties referencing an external element, such as idXxxxx, use ${nameXxxxx} to display the name or ${idXxxxx} to display its id.
    
      
 Other tags are available as parameters for email titles
@@ -198,7 +200,12 @@ More details, see :ref:`Global Parameters<mailing_parameters>`
      - ${LINK} : list linked elements to the item
      - ${NOTE} : lists the notes of the item 
 
-
+.. topic:: some specific tag for date/time fields
+   
+     - if some field is named ${xxxDateTime}, it will display the full date and time
+     - if you want to display only the date, use ${xxxDate}, even if this field is not proposed in the field selector
+     - Exemple for tickets : ${handledDateTime} will display '2019-12-31 23:00' and ${handledDate} will display '2019-12-31'
+     
 .. rubric:: the Tags selector
 
 
