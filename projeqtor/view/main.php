@@ -1859,7 +1859,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
        <form id='dialogPlanForm' name='dialogPlanForm' onSubmit="return false;">
          <table>
            <tr>
-             <td class="dialogLabel"  >
+             <td class="dialogLabel">
                <label for="idProjectPlan" ><?php echo i18n("colIdProject") ?>&nbsp;:&nbsp;</label>
              </td>
              <td>
@@ -1888,7 +1888,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
              <td class="dialogLabel"  >
                <label for="startDatePlan" ><?php echo i18n("colStartDate") ?>&nbsp;:&nbsp;</label>
              </td>
-             <td>
+             <td >
                <div dojoType="dijit.form.DateTextBox" 
                  id="startDatePlan" name="startDatePlan" 
                  constraints="{datePattern:browserLocaleDateFormatJs}"
@@ -1902,7 +1902,17 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                </div>
              </td>
            </tr>
-           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+           <tr>
+             <td class="dialogLabel" >
+               <label style="width:200px;" for="allowAutomaticFeedingOfTheReal" ><?php echo i18n("allowAutomaticFeedingOfTheReal").'&nbsp;:' ?></label>
+             </td>
+             <td width="200px;" >
+               <div title="<?php echo i18n('allowAutomaticFeedingOfTheReal')?>" dojoType="dijit.form.CheckBox" style="margin-left:5px;margin-top:2px;"
+                    class="" type="checkbox" id="allowAutomaticFeedingOfTheReal" name="allowAutomaticFeedingOfTheReal"  
+                    <?php if (Parameter::getGlobalParameter('automaticFeedingOfTheReal')=='YES') { echo ' checked="checked" '; }?> >
+		       </div>&nbsp;
+             </td>
+           </tr>
          </table>
         </form>
       </td>
