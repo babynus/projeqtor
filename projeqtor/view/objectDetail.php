@@ -7663,7 +7663,7 @@ function drawChecklistFromObject($obj,$nbCol=3) {
       $paneName='pane'.$tabName;
       $extName=($comboDetail)?"_detail":'';
       $paneWidth=$displayWidth;
-      if (!$layout=='tab' and !$print and $nbCol==3) $paneWidth=intval(intval($displayWidth)*2/3).'px';
+      if ( $layout!='tab' and $nbCol==3) $paneWidth=intval(intval($displayWidth)*2/3).'px';
       echo '<div style="width:'.$paneWidth.';padding:4px;overflow:auto" dojoType="dijit.TitlePane"';
       echo ' title="'.i18n('sectionChecklist').'" ';
       echo (($tabName==$selectedTab)?' selected="true" ':'');
