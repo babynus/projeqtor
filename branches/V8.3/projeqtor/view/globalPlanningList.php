@@ -118,7 +118,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
               <td style="min-width:100px" ><span class="title" style="max-width:250px;white-space:normal"><?php echo i18n('menuGlobalPlanning');?></span></td>
       		  </tr>
       		  <tr><td>
-  		        <div style="white-space:nowrap; position:absolute; bottom:5px;left:10px;">
+  		       <div style="white-space:nowrap; position:absolute; bottom:5px;left:10px;">
 	              <span title="<?php echo i18n('criticalPath');?>" dojoType="dijit.form.CheckBox"
                       type="checkbox" id="criticalPathPlanning" name="criticalPathPlanning" class="whiteCheck"
                       <?php if ( Parameter::getUserParameter('criticalPathPlanning')=='1') {echo 'checked="checked"'; } ?>  >  
@@ -126,7 +126,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                           saveUserParameter('criticalPathPlanning',((this.checked)?'1':'0'));
                           refreshJsonPlanning();
                         </script>                    
-                </span>&nbsp;<?php echo i18n('criticalPath');?>
+                  </span>&nbsp;<?php echo i18n('criticalPath');?>
               </div>
             </td></tr> 
       		  
