@@ -5963,18 +5963,31 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
       $property = trim($matches[0], '${}');
       if (property_exists($this, $property)) {
         if (isset($this, $property) and $this->$property != '') {
-          return $this->$property;
+          if (substr($property,0,-8)=='DateTime') {
+            return htmlFormatDateTime($this->$property,false, true);
+          } else if (substr($property,0,-4)=='Date') {
+            return htmlFormatDate($this->$property,true);
+          } else {
+            return $this->$property;
+          }
         } else {
           return "-";
         }
       } else if (substr($property,0,4)=='name' and $property!='name' and substr($property,4,1)==strtoupper(substr($property,4,1)) ){
         $cls=substr($property,4);
+        if (strpos($property,'__id')>0) {
+          $expl=explode('__',$property);
+          $cls=substr($expl[1],2);
+        }
         $fld='id'.$cls;
         if (property_exists($this, $fld)) {
           return SqlList::getNameFromId($cls, $this->$fld);
         } else {
           return "\$$fld not a property to define $property of " . get_class($this);
         }
+      } else if (substr($property,-4)=='Date' and property_exists($this, $property.'Time')) {
+        $propertyTime=$property.'Time';
+        return htmlFormatDate($this->$propertyTime,true);
       } else if ($property == 'responsible' and property_exists($this, 'idResource')) { 
         return SqlList::getNameFromId('Affectable', $this->idResource);
       } else if ($property == 'dbName') {
