@@ -3696,7 +3696,10 @@ function drawNotesFromObject($obj, $refresh=false) {
     $notes = $result;
   }
   foreach ($notes as $note) {
-    if ($user->id==$note->idUser or $note->idPrivacy==1 or ($note->idPrivacy==2 and $ress->idTeam==$note->idTeam)) {
+    //florent
+    $userCanChange=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$user->idProfile,'scope'=>'canChangeNote'));
+    if ($user->id==$note->idUser or $note->idPrivacy==1 or ($note->idPrivacy==2 and $ress->idTeam==$note->idTeam)   ) {
+    //
       $nbNotes++;
       $userId=$note->idUser;
       $userName=SqlList::getNameFromId('User', $userId);
@@ -3711,7 +3714,7 @@ function drawNotesFromObject($obj, $refresh=false) {
       	if ($obj->id!=null and !$print and $canUpdate) {
       		echo ' <a onClick="addNote(true,'.htmlEncode($note->id).');" title="'.i18n('replyToThisNote').'" > '.formatSmallButton('Reply').'</a>';
       	}
-      	if ($note->idUser==$user->id and !$print and $canUpdate) {
+      	if (($note->idUser==$user->id and !$print and $canUpdate) or $userCanChange->rightAccess=='1') {
       		echo ' <a onClick="editNote('.htmlEncode($note->id).','.htmlEncode($note->idPrivacy).');" title="'.i18n('editNote').'" > '.formatSmallButton('Edit').'</a>';
       		echo ' <a onClick="removeNote('.htmlEncode($note->id).');" title="'.i18n('removeNote').'" > '.formatSmallButton('Remove').'</a>';
       	}
@@ -4108,6 +4111,10 @@ function drawAttachmentsFromObject($obj, $refresh=false) {
   if ($obj->idle==1) {
     $canUpdate=false;
   }
+  $userCanDeleteAttachement=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$user->idProfile,'scope'=>'canDeleteAttachement'));
+  if($canUpdate==false){
+    $canUpdate=true;
+  }
   if (isset($obj->_Attachment)) {
     $attachments=$obj->_Attachment;
   } else {
@@ -4130,7 +4137,7 @@ function drawAttachmentsFromObject($obj, $refresh=false) {
   foreach ($attachments as $attachment) {
     $userId=$attachment->idUser;
     $ress=new Resource($user->id);
-    if ($user->id==$attachment->idUser or $attachment->idPrivacy==1 or ($attachment->idPrivacy==2 and $ress->idTeam==$attachment->idTeam)) {
+    if ($user->id==$attachment->idUser or $attachment->idPrivacy==1 or ($attachment->idPrivacy==2 and $ress->idTeam==$attachment->idTeam) ) {
       $userName=SqlList::getNameFromId('User', $userId);
       $creationDate=$attachment->creationDate;
       $updateDate=null;
@@ -4145,7 +4152,7 @@ function drawAttachmentsFromObject($obj, $refresh=false) {
           echo '<a href="'.htmlEncode(urldecode($attachment->link)).'"';
           echo ' target="#" title="'.urldecode($attachment->link).'">'.formatSmallButton('Link').'</a>';
         }
-        if ($attachment->idUser==$user->id and !$print and $canUpdate) {
+        if (($attachment->idUser==$user->id and !$print and $canUpdate) or $userCanDeleteAttachement->rightAccess==1) {
           echo ' <a onClick="removeAttachment('.htmlEncode($attachment->id).');" title="'.i18n('removeAttachment').'" >'.formatSmallButton('Remove').'</a>';
         }
         echo '</td>';
