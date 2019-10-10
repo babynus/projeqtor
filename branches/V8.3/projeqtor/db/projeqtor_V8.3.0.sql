@@ -130,4 +130,8 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES
 
 INSERT INTO `${prefix}habilitationother` (idProfile, rightAccess, scope) VALUES
 (1,1,'feedingOfTheReal'),
-(3,1,'feedingOfTheReal');
+(3,1,'feedingOfTheReal'),
+(1,1,'canChangeNote'),
+(3,1,'canChangeNote'),
+(1,1,'canDeleteAttachement'),
+(3,1,'canDeleteAttachement');
