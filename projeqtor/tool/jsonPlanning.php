@@ -1559,6 +1559,7 @@
     $arrayRessource=array();
     echo '<Resources>' . $nl;
     foreach ($resourceList as $resource) {
+      if (Parameter::getGlobalParameter('doNotExportAssignmentsForXMLFormat')===true) continue;
     	$arrayResource[$resource->id]=$resource;
       echo "<Resource>" . $nl;
       echo "<UID>" . htmlEncode($resource->id) . "</UID>" . $nl;
@@ -1625,7 +1626,7 @@
     $lstAss=$ass->getSqlElementsFromCriteria(null, false, $clauseWhere, null, false);
     echo '<Assignments>' . $nl;
     foreach ($lstAss as $ass) {
-      if (Parameter::getUserParameter('doNotExportAssignmentsForXMLFormat')==true) continue;
+      if (Parameter::getUserParameter('doNotExportAssignmentsForXMLFormat')===true) continue;
       if ($ass->plannedWork==0) continue;
     	if (array_key_exists($ass->refType . '#' . $ass->refId, $arrayTask)) {
     	  $task=$arrayTask[$ass->refType . '#' . $ass->refId];
