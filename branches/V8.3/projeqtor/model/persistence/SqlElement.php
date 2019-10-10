@@ -5981,11 +5981,11 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
         }
       } else if (substr($property,0,4)=='name' and $property!='name' and substr($property,4,1)==strtoupper(substr($property,4,1)) ){
         $cls=substr($property,4);
+        $fld='id'.$cls;
         if (strpos($property,'__id')>0) {
           $expl=explode('__',$property);
           $cls=substr($expl[1],2);
         }
-        $fld='id'.$cls;
         if (property_exists($this, $fld)) {
           return SqlList::getNameFromId($cls, $this->$fld);
         } else {
