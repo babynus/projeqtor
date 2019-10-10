@@ -303,10 +303,11 @@ class Parameter extends SqlElement {
       case 'printInNewWindow':
       case 'initializePassword': case 'setResponsibleIfNeeded': 
       case 'autoSetAssignmentByResponsible':
-      case 'autoSetUniqueComponentVersion': case 'exportAssignmentsForXMLFormat':
-        $list=array('YES'=>i18n('displayYes'),
-                    'NO'=>i18n('displayNo'));
-        break;
+      case 'autoSetUniqueComponentVersion': 
+      case 'exportAssignmentsForXMLFormat':
+      $list=array('YES'=>i18n('displayYes'),
+                  'NO'=>i18n('displayNo'));
+      break;
         //Florent
       case 'paramPasswordStrength':
         $lvl=1;
