@@ -1903,6 +1903,12 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
              </td>
            </tr>
            <tr>
+             <?php 
+                $user=getSessionUser();
+                $priority=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$user->idProfile,'scope'=>'feedingOfTheReal'));
+                debugLog($priority);
+                if( $priority and ($priority->rightAccess == 1)){
+             ?>
              <td class="dialogLabel" >
                <label style="width:200px;" for="allowAutomaticFeedingOfTheReal" ><?php echo i18n("allowAutomaticFeedingOfTheReal").'&nbsp;:' ?></label>
              </td>
@@ -1912,6 +1918,9 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                     <?php if (Parameter::getGlobalParameter('automaticFeedingOfTheReal')=='YES') { echo ' checked="checked" '; }?> >
 		       </div>&nbsp;
              </td>
+             <?php 
+             }
+             ?>
            </tr>
          </table>
         </form>
