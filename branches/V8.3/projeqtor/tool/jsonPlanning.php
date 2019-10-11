@@ -1393,6 +1393,8 @@
     echo '</WeekDays>' . $nl;
     echo '</Calendar>' . $nl;
     foreach ($resourceList as $resource) {
+      if (Parameter::getGlobalParameter('doNotExportAssignmentsForXMLFormat')===true) continue;
+      if (Parameter::getUserParameter('exportAssignmentsForXMLFormat')=='NO') continue;
     	echo "<Calendar>" . $nl;
       echo "<UID>" . htmlEncode($resource->id,'xml') . "</UID>" . $nl;
       echo "<Name>" . htmlEncode($resource->name,'xml') . "</Name>" . $nl;
