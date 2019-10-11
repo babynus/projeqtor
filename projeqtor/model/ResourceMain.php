@@ -921,11 +921,11 @@ class ResourceMain extends SqlElement {
       $capaWeek=0;
       for ($i=0;$i<7;$i++) {
         if (isOpenDay($weekDay,$this->idCalendarDefinition)) {
-          if ($this->isResourceTeam) {
-            $capaWeek+=$capacityRate;
-          } else {
-            $capaWeek+=$this->getSurbookingCapacity($weekDay);
-          }
+          //if ($this->isResourceTeam) {
+          //  $capaWeek+=$capacityRate;
+          //} else {
+          $capaWeek+=$this->getSurbookingCapacity($weekDay);
+          //}
         }
         $weekDay=addDaysToDate($weekDay,1);
       }
