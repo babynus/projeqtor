@@ -3036,6 +3036,7 @@ paramDisplayPoolsOnImputation: "показувати пули в розклад�
 paramDisplayResourcePlan: "показ.ресурсу у діаграмі Ганта",
 paramDocumentReferenceFormat: "посилання(reference) на формат документу",
 paramDocumentRoot: "кореневий каталог документів",
+paramDoNotExportAssignmentsForXMLFormat: "Do Not Export Assignments For XML Format",
 paramDontAddClosedDeliveredVersionToProject: "не додавати закриті та доставлені версії до проекту",
 paramDontReceiveTeamMails: "неможливо отримувати листи для групи(team)",
 paramDraftSeparator: "відокремлювач для проекту у назві версії",
