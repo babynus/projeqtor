@@ -1906,7 +1906,6 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
              <?php 
                 $user=getSessionUser();
                 $priority=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$user->idProfile,'scope'=>'feedingOfTheReal'));
-                debugLog($priority);
                 if( $priority and ($priority->rightAccess == 1)){
              ?>
              <td class="dialogLabel" >
