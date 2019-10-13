@@ -906,6 +906,16 @@ if (beforeVersion($currVersion,"V8.2.1") and Sql::isPgsql()) {
   traceLog("   => Fix issues on tender for PostgreSql database");
   $nbErrorsPg=runScript('V8.2.1.pg');
 }
+
+if (beforeVersion($currVersion,"V8.3.0")) {
+  if (isPluginEnabled("liveMeeting")) {
+    // remove old plugin
+    kill "../model/custom/Meeting.php";
+    purgeFiles("../plugin/liveMeeting", null);
+  } else {
+    $nbErrorsPg=runScript('V8.3.0.lm');
+  }
+}
 // To be sure, after habilitations updates ...
 Habilitation::correctUpdates();
 Habilitation::correctUpdates();
