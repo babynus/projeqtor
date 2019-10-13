@@ -199,21 +199,50 @@ function timeToTimeStamp($time){
 		dojoType="dijit.layout.ContentPane" region="top">
 	  <input type="hidden" name="objectClassManual" id="objectClassManual" value="Plugin_liveMeeting" />
 		<table width="100%">
-			<tr height="100%" style="vertical-align: middle;">
+			<tr height="100%" style="vertical-align: middle;height:34px;">
 				<td width="50px" align="middle"><?php echo formatIcon('Meeting', 32,null,true)?></td>
 				<td><span class="title"><?php echo i18n("Meeting").' : '.$meeting->name;?></span></td>
-				<td style="width:32px;"><button id="saveButton" style="margin-top:10px;margin-right:15px"
+				<td style="width:200px;padding-top:2px;position:relative;">
+						<div style="position:absolute;width:85px; height:34px;background-color: #DDD; padding: 2px 10px; top:0px;border-radius: 5px;margin-right: 20px">
+								<button iconClass="iconLiveMeetingPlay iconSize22" class="detailButton" style="position:absolute;top:-5px;width:32px;height:32px;top:-1px;"
+									dojoType="dijit.form.Button"
+									title="<?php echo i18n('liveMeetingTitlePlay');?>"
+									onclick="liveMeetingGoPlay();" 
+									id="playPauseButton"></button>
+								<button iconClass="iconLiveMeetingStop iconSize22" class="detailButton" style="position:absolute;top:-5px;left:55px;width:32px;top:-1px;"
+									dojoType="dijit.form.Button"
+									title="<?php echo i18n('liveMeetingTitleStop');?>"
+									onclick="liveMeetingGoStop(<?php echo $idMeeting;?>);" 
+									id="stopButton"></button>
+					  </div>
+					  <div style="position:absolute;width:85px; height:34px; padding: 2px 10px; margin-right: 20px; top:6px;left:100px;">
+							  <button id="switchDivBottom" dojoType="dijit.form.Button"
+							  <?php if($typeLoadBottom=='normal'){ ?>
+							  title="<?php echo i18n('liveMeetingTitleSwitchBottomKanban');?>"
+							  iconClass="iconKanban32" class="detailButton" style="cursor:pointer;padding:3px;margin-top:-10px;margin-left:-2px;"
+							  <?php }else{ ?>
+							  title="<?php echo i18n('liveMeetingTitleSwitchBottomNormal');?>"
+							  iconClass="iconActionQuestionDecision iconSize32"
+							  <?php } ?>
+							  
+									onclick="if(typeLoadBottom=='normal'){dijit.byId('switchDivBottom').setAttribute('iconClass','iconActionQuestionDecision iconSize32');dijit.byId('switchDivBottom').setAttribute('title','<?php echo i18n('liveMeetingTitleSwitchBottomNormal');?>');typeLoadBottom='kanban';loadContent('../view/kanbanViewMain.php?storeParameterBottomLiveMeeting=true', 'divBottom');}else{dijit.byId('switchDivBottom').setAttribute('iconClass','iconKanban32');dijit.byId('switchDivBottom').setAttribute('title','<?php echo i18n('liveMeetingTitleSwitchBottomKanban');?>');typeLoadBottom='normal';loadContent('../view/liveMeetingViewBottom.php?idMeeting=<?php echo $meeting->id;?>', 'divBottom');}"
+									id="switchDivBottom"></button>
+           </div>
+				</td>
+				<td style="width:32px;position:relative;">
+				  <button id="saveButton" style="margin-top:0px;margin-right:15px;position: relative;top:4px"
 						dojoType="dijit.form.Button" showlabel="false"
 						title="<?php echo i18n('buttonSave', array(i18n("Meeting").' : '.$meeting->name));?>"
 						disabled="disabled"
 						iconClass="dijitButtonIcon dijitButtonIconSave"
 						class="detailButton">
 						<script type="dojo/connect" event="onClick" args="evt">
-		      liveMeetingSave();
-        </script>
-					</button></td>
-					<td style="width:32px;">
-					<button id="exitButton" style="margin-top:10px;margin-right:15px"
+		          liveMeetingSave();
+            </script>
+					</button>
+				</td>
+				<td style="width:32px;">
+					<button id="exitButton" style="margin-top:0px;margin-right:15px; position: relative;top:4px"
 						dojoType="dijit.form.Button" showlabel="false"
 						title="<?php echo i18n('liveMeetingTitleStop');?>"
 						onclick="liveMeetingGoStop(<?php echo $idMeeting;?>);"
@@ -250,13 +279,13 @@ function timeToTimeStamp($time){
 			
 			<input dojoType="dijit.form.TextBox" type="hidden"
 				id="refreshBottomAction" value="-1"
-				onchange="if(dijit.byId(this.id).get('value')!=-1 && dijit.byId(this.id).get('value')!='')loadContent('../plugin/liveMeeting/liveMeetingViewBottom.php?idMeeting=<?php echo $meeting->id;?>&typeObj=Action&idObj='+this.value, 'divBottom');dijit.byId(this.id).set('value',-1);">
+				onchange="if(dijit.byId(this.id).get('value')!=-1 && dijit.byId(this.id).get('value')!='')loadContent('../view/liveMeetingViewBottom.php?idMeeting=<?php echo $meeting->id;?>&typeObj=Action&idObj='+this.value, 'divBottom');dijit.byId(this.id).set('value',-1);">
 			<input dojoType="dijit.form.TextBox" type="hidden"
 				id="refreshBottomDecision" value="-1"
-				onchange="if(dijit.byId(this.id).get('value')!=-1 && dijit.byId(this.id).get('value')!='')loadContent('../plugin/liveMeeting/liveMeetingViewBottom.php?idMeeting=<?php echo $meeting->id;?>&typeObj=Decision&idObj='+this.value, 'divBottom');dijit.byId(this.id).set('value',-1);">
+				onchange="if(dijit.byId(this.id).get('value')!=-1 && dijit.byId(this.id).get('value')!='')loadContent('../view/liveMeetingViewBottom.php?idMeeting=<?php echo $meeting->id;?>&typeObj=Decision&idObj='+this.value, 'divBottom');dijit.byId(this.id).set('value',-1);">
 			<input dojoType="dijit.form.TextBox" type="hidden"
 				id="refreshBottomQuestion" value="-1"
-				onchange="if(dijit.byId(this.id).get('value')!=-1 && dijit.byId(this.id).get('value')!='')loadContent('../plugin/liveMeeting/liveMeetingViewBottom.php?idMeeting=<?php echo $meeting->id;?>&typeObj=Question&idObj='+this.value, 'divBottom');dijit.byId(this.id).set('value',-1);">
+				onchange="if(dijit.byId(this.id).get('value')!=-1 && dijit.byId(this.id).get('value')!='')loadContent('../view/liveMeetingViewBottom.php?idMeeting=<?php echo $meeting->id;?>&typeObj=Question&idObj='+this.value, 'divBottom');dijit.byId(this.id).set('value',-1);">
 		  <div class="statusBar"
 				style="background-image:none !important;color: #000; height: 100%; width: 100%; min-width: 970px; margin: 0 auto; margin-top: 10px;">
 				<table width="100%"  style="position:relative;">
@@ -269,29 +298,7 @@ function timeToTimeStamp($time){
       ?>
       </td>
 						<td width="5%" style="min-width: 67px; vertical-align: top;">
-							<div style="background-color: #DDD; padding: 10px; border-radius: 10px;">
-								<button iconClass="iconLiveMeetingPlay iconSize22"
-									dojoType="dijit.form.Button"
-									title="<?php echo i18n('liveMeetingTitlePlay');?>"
-									onclick="liveMeetingGoPlay();" style="float: left;width:22px;"
-									id="playPauseButton"></button>
-								<button iconClass="iconLiveMeetingStop iconSize22"
-									dojoType="dijit.form.Button"
-									title="<?php echo i18n('liveMeetingTitleStop');?>"
-									onclick="liveMeetingGoStop(<?php echo $idMeeting;?>);" style="margin-left: 43px;margin-top: -45px; width:22px;"
-									id="stopButton"></button>
-							  <button id="switchDivBottom" dojoType="dijit.form.Button"
-							  <?php if($typeLoadBottom=='normal'){ ?>
-							  title="<?php echo i18n('liveMeetingTitleSwitchBottomKanban');?>"
-							  iconClass="iconKanban32"
-							  <?php }else{ ?>
-							  title="<?php echo i18n('liveMeetingTitleSwitchBottomNormal');?>"
-							  iconClass="iconActionQuestionDecision iconSize32"
-							  <?php } ?>
-							  style="cursor:pointer;padding:3px;margin-top:-10px;margin-left:-2px;"
-									onclick="if(typeLoadBottom=='normal'){dijit.byId('switchDivBottom').setAttribute('iconClass','iconActionQuestionDecision iconSize32');dijit.byId('switchDivBottom').setAttribute('title','<?php echo i18n('liveMeetingTitleSwitchBottomNormal');?>');typeLoadBottom='kanban';loadContent('../view/kanbanViewMain.php?storeParameterBottomLiveMeeting=true', 'divBottom');}else{dijit.byId('switchDivBottom').setAttribute('iconClass','iconKanban32');dijit.byId('switchDivBottom').setAttribute('title','<?php echo i18n('liveMeetingTitleSwitchBottomKanban');?>');typeLoadBottom='normal';loadContent('../view/liveMeetingViewBottom.php?idMeeting=<?php echo $meeting->id;?>', 'divBottom');}"
-									id="switchDivBottom"></button>
-							</div>
+
 						</td>
 				
 				</table>
