@@ -18,7 +18,6 @@
 * Violators will be prosecuted.
 *
 *** DO NOT REMOVE THIS NOTICE ************************************************/
-chdir ( '../' );
 require_once "../tool/projeqtor.php";
 $timeForSpeaker=0;
 if ( array_key_exists ( 'timeForSpeaker', $_REQUEST )) {
