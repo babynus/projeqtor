@@ -325,11 +325,11 @@ class MeetingMain extends SqlElement {
       }
       $result .= '<tr><td valign="top" class="label"><label></label></td><td>';
       $result .= '<button id="startMeeting" dojoType="dijit.form.Button" showlabel="true"';
-      $result .= ' title="' . i18n('plgLiveMeetingStart') . '" >';
-      $result .= '<span>' . i18n('plgLiveMeetingStart') . '</span>';
+      $result .= ' title="' . i18n('liveMeetingStart') . '" >';
+      $result .= '<span>' . i18n('liveMeetingStart') . '</span>';
       $result .=  '<script type="dojo/connect" event="onClick" args="evt">';
       $result .= '   if (checkFormChangeInProgress()) {return false;}';
-      $result .=  '  loadContent("../plugin/liveMeeting/liveMeetingView.php?idMeeting='.$this->id.'", "centerDiv");';
+      $result .=  '  loadContent("../view/liveMeetingView.php?idMeeting='.$this->id.'", "centerDiv");';
       $result .= '</script>';
       $result .= '</button>';
       $result .= '</td></tr>';
