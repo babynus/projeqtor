@@ -47,6 +47,7 @@ class MeetingMain extends SqlElement {
   public $meetingEndTime;
   public $location;
   public $_spe_buttonSendMail;
+  public $_spe_startMeeting;
   public $idUser;
   public $description;
   public $_sec_treatment;
@@ -314,6 +315,22 @@ class MeetingMain extends SqlElement {
       $result .= '<button id="attendeesAllTeam" dojoType="dijit.form.Button" showlabel="true" onClick ="assignTeamForMeeting()"';
       $result .= ' title="' . i18n('buttonAssignWholeTeam') . '" >';
       $result .= '<span>' . i18n('buttonAssignWholeTeam') . '</span>';
+      $result .= '</button>';
+      $result .= '</td></tr>';
+      return $result;
+    }
+    if($item=="startMeeting"){
+      if ($print) {
+        return "";
+      }
+      $result .= '<tr><td valign="top" class="label"><label></label></td><td>';
+      $result .= '<button id="startMeeting" dojoType="dijit.form.Button" showlabel="true"';
+      $result .= ' title="' . i18n('plgLiveMeetingStart') . '" >';
+      $result .= '<span>' . i18n('plgLiveMeetingStart') . '</span>';
+      $result .=  '<script type="dojo/connect" event="onClick" args="evt">';
+      $result .= '   if (checkFormChangeInProgress()) {return false;}';
+      $result .=  '  loadContent("../plugin/liveMeeting/liveMeetingView.php?idMeeting='.$this->id.'", "centerDiv");';
+      $result .= '</script>';
       $result .= '</button>';
       $result .= '</td></tr>';
       return $result;
