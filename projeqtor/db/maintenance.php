@@ -907,10 +907,12 @@ if (beforeVersion($currVersion,"V8.2.1") and Sql::isPgsql()) {
   $nbErrorsPg=runScript('V8.2.1.pg');
 }
 
+// Integration of plugin Live Meet
 if (beforeVersion($currVersion,"V8.3.0")) {
-  if (isPluginEnabled("liveMeeting")) {
+  if (Plugin::isPluginEnabled("liveMeeting")) {
     // remove old plugin
-    kill "../model/custom/Meeting.php";
+    kill("../model/custom/Meeting.php");
+    kill("../model/custom/LiveMeeting.php");
     purgeFiles("../plugin/liveMeeting", null);
   } else {
     $nbErrorsPg=runScript('V8.3.0.lm');

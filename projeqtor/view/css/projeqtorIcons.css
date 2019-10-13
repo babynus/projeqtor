@@ -1213,3 +1213,21 @@
 .ProjeQtOrFlatRed .iconAttachFiles { background-image: url(customIcons/red/iconAttach.png); }
 .ProjeQtOrFlatGreen .iconAttachFiles { background-image: url(customIcons/green/iconAttach.png); }
 .ProjeQtOrFlatGrey .iconAttachFiles { background-image: url(customIcons/grey/iconAttach.png); }
+
+/* LIVE MEETING */
+
+.iconLiveMeetingPlay{background:url('images/meetingPlay.png'); width:32px; height:32px; cursor:pointer;}
+.iconLiveMeetingPause{background:url('images/meetingPause.png'); width:32px; height:32px; cursor:pointer;}
+.iconLiveMeetingStop{background:url('images/meetingStop.png'); width:32px; height:32px; cursor:pointer;}
+.iconLiveMeetingPlayS{background:url('images/meetingPlayS.png'); width:32px; height:32px; cursor:pointer;}
+.iconLiveMeetingPauseS{background:url('images/meetingPauseS.png'); width:32px; height:32px; cursor:pointer;}
+
+.iconActionQuestionDecision{background:url('images/iconActionQuestionDecision.png'); width:32px; height:32px; cursor:pointer;}
+.iconLiveMeetingOrganizator{background:url('images/iconLiveMeetingOrganizator.png'); width:22px; height:22px; cursor:pointer;}
+.iconLiveMeetingCanSpeak{background:url('images/iconLiveMeetingCantSpeak.png'); width:22px; height:22px; cursor:pointer;}
+.iconLiveMeetingNormal{background:url('images/iconLiveMeetingNormal.png');width:22px;height:22px;cursor:pointer;}
+
+.ProjeQtOrFlatBlue .iconActionQuestionDecision { background-image: url(customIcons/blue/iconActionQuestionDecision.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatRed .iconActionQuestionDecision { background-image: url(customIcons/red/iconActionQuestionDecision.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatGreen .iconActionQuestionDecision { background-image: url(customIcons/green/iconActionQuestionDecision.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatGrey .iconActionQuestionDecision { background-image: url(customIcons/grey/iconActionQuestionDecision.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
