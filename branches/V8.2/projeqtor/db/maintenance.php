@@ -883,18 +883,18 @@ if (beforeVersion($currVersion,"V8.2.0")) {
     $MessageLegal = new MessageLegal();
     if(substr(Parameter::getGlobalParameter('paramDefaultLocale'),0,6)=='fr'){
       $MessageLegal->name = "Message RGPD";
-      $MessageLegal->description = "Conformément aux exigences de la RGPD, nous vous informons que les données personnelles que nous collectons sur vous sont votre nom, votre adresse email professionnelle et les informations que vous enregistrez dans ProjeQtOr dans le cadre de votre travail.
-          <br/>Nous stockons et utilisons ces données uniquement à titre professionnel dans le cadre de la gestion des projets auxquels vous participez.
-          <br/>Ces données peuvent être mises à jour par l'administrateur de l'application. 
+      $MessageLegal->description = "ConformÃ©ment aux exigences de la RGPD, nous vous informons que les donnÃ©es personnelles que nous collectons sur vous sont votre nom, votre adresse email professionnelle et les informations que vous enregistrez dans ProjeQtOr dans le cadre de votre travail.
+          <br/>Nous stockons et utilisons ces donnÃ©es uniquement Ã  titre professionnel dans le cadre de la gestion des projets auxquels vous participez.
+          <br/>Ces donnÃ©es peuvent Ãªtre mises Ã  jour par l'administrateur de l'application. 
           Veuillez le contacter en cas de besoin. 
-          Vous trouverez ses coordonnées dans la fenêtre \"A propos de ProjeQtOr\".";
+          Vous trouverez ses coordonnÃ©es dans la fenÃªtre \"A propos de ProjeQtOr\".";
     }else{
       $MessageLegal->name = "GPRD Message";
       $MessageLegal->description = "In accordance with the requirements of the GDPR, we inform you that the personal data we collect about you is your name, your professional e-mail address and the information you save in ProjeQtOr as part of your work.
-          <br/> We only store and use this data for professional purposes as part of the management of the projects in which you participate.
-          <br/> This data can be updated by the application administrator.
-          Please contact him if needed.
-          You will find its coordinates in the \"About ProjeQtOr\" window.";
+Â Â Â Â Â Â Â Â Â Â <br/> We only store and use this data for professional purposes as part of the management of the projects in which you participate.
+Â Â Â Â Â Â Â Â Â Â <br/> This data can be updated by the application administrator.
+Â Â Â Â Â Â Â Â Â Â Please contact him if needed.
+Â Â Â Â Â Â Â Â Â Â You will find its coordinates in the \"About ProjeQtOr\" window.";
     }
     $MessageLegal->endDate='2010-01-01 00:00:00';
     $MessageLegal->save();
@@ -905,6 +905,17 @@ if (beforeVersion($currVersion,"V8.2.0")) {
 if (beforeVersion($currVersion,"V8.2.1") and Sql::isPgsql()) {
   traceLog("   => Fix issues on tender for PostgreSql database");
   $nbErrorsPg=runScript('V8.2.1.pg');
+}
+
+if (beforeVersion($currVersion,"V8.2.3")) {
+	$rp=SqlElement::getSingleSqlElementFromCriteria('ReportParameter', array('idReport'=>26, 'name'=>'showIdle'));
+	if (!rp->id) {
+		$rp->idReport=26;
+		$rp->name='showIdle';
+		$rp->paramType='boolean';
+		$rp->sortOrder=20;
+		$rp->save();
+	}
 }
 // To be sure, after habilitations updates ...
 Habilitation::correctUpdates();
