@@ -906,16 +906,39 @@ if (beforeVersion($currVersion,"V8.2.1") and Sql::isPgsql()) {
   traceLog("   => Fix issues on tender for PostgreSql database");
   $nbErrorsPg=runScript('V8.2.1.pg');
 }
+if (beforeVersion($currVersion,"V8.2.3")) {
+  $rp=SqlElement::getSingleSqlElementFromCriteria('ReportParameter', array('idReport'=>26, 'name'=>'showIdle'));
+  if (!rp->id) {
+    $rp->idReport=26;
+    $rp->name='showIdle';
+    $rp->paramType='boolean';
+    $rp->sortOrder=20;
+    $rp->save();
+  }
+}
 
 // Integration of plugin Live Meet
 if (beforeVersion($currVersion,"V8.3.0")) {
   if (Plugin::isPluginEnabled("liveMeeting")) {
     // remove old plugin
+    enableCatchErrors();
     kill("../model/custom/Meeting.php");
     kill("../model/custom/LiveMeeting.php");
     purgeFiles("../plugin/liveMeeting", null);
+    disableCatchErrors();
   } else {
     $nbErrorsPg=runScript('V8.3.0.lm');
+  }
+}
+if (beforeVersion($currVersion,"V8.3.0")) {
+  if (Plugin::isPluginEnabled("kanban")) {
+    // remove old plugin
+    enableCatchErrors();
+    purgeFiles("../plugin/kanban", null);
+    disableCatchErrors();
+  } else {
+    $nbErrorsPg=runScript('V8.3.0.kb');
+    kanbanPostInstall();
   }
 }
 // To be sure, after habilitations updates ...

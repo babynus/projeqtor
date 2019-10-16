@@ -421,3 +421,59 @@ function afterVersion($V1,$V2) {
   $V2=ltrim($V2,'V');
   return(version_compare($V1, $V2,">="));
 }
+
+function kanbanPostInstall() {
+  $hab=SqlElement::getSingleSqlElementFromCriteria('Habilitation',array('idMenu'=>'100006001','idProfile'=>getSessionUser()->idProfile));
+  $hab->idProfile=getSessionUser()->idProfile;
+  $hab->idMenu='100006001';
+  $hab->allowAccess=1;
+  $hab->save();
+  Habilitation::correctUpdates();
+
+  if (SqlElement::class_exists('HabilitationSuperAdmin')) {
+    $hab=SqlElement::getSingleSqlElementFromCriteria('HabilitationSuperAdmin',array('idMenu'=>'100006001'));
+    $hab->idMenu='100006001';
+    $hab->save();
+  }
+
+  $objStatus = new Status();
+  $listStatus=$objStatus->getSqlElementsFromCriteria(null,false);
+  $listStatusWithOrder=array();
+  foreach ($listStatus as $line){
+    $listStatusWithOrder[$line->sortOrder.'-'.$line->id]=$line;
+  }
+  ksort($listStatusWithOrder);
+  $kanban=new Kanban();
+  $listColumn=array();
+  $stat=0;
+  foreach ($listStatusWithOrder as $line){
+    if($stat==0 && !$line->setHandledStatus && !$line->setDoneStatus && !$line->setIdleStatus){
+      $listColumn['column'][$stat]['from']=$line->id;
+      $listColumn['column'][$stat]['name']=ucfirst ("backlog");
+      $listColumn['column'][$stat]['cantDelete']=true;
+      $stat++;
+    }else
+      if($stat==1 && $line->setHandledStatus){
+      $listColumn['column'][$stat]['from']=$line->id;
+      $listColumn['column'][$stat]['name']=ucfirst (i18n("colHandled"));
+      $stat++;
+    }else
+      if($stat==2 && $line->setDoneStatus){
+      $listColumn['column'][$stat]['from']=$line->id;
+      $listColumn['column'][$stat]['name']=ucfirst (i18n("colDone"));
+      $stat++;
+    }else
+      if($stat==3 && $line->setIdleStatus){
+      $listColumn['column'][$stat]['from']=$line->id;
+      $listColumn['column'][$stat]['name']=ucfirst (i18n("colIdle"));
+      $stat++;
+    }
+  }
+  $listColumn["typeData"]="Ticket";
+  $kanban->idUser=getSessionUser()->id;
+  $kanban->param=json_encode($listColumn);
+  $kanban->name="Kanban";
+  $kanban->type="Status";
+  $kanban->isShared=0;
+  $kanban->save();
+}
