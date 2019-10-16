@@ -891,10 +891,10 @@ if (beforeVersion($currVersion,"V8.2.0")) {
     }else{
       $MessageLegal->name = "GPRD Message";
       $MessageLegal->description = "In accordance with the requirements of the GDPR, we inform you that the personal data we collect about you is your name, your professional e-mail address and the information you save in ProjeQtOr as part of your work.
-Â Â Â Â Â Â Â Â Â Â <br/> We only store and use this data for professional purposes as part of the management of the projects in which you participate.
-Â Â Â Â Â Â Â Â Â Â <br/> This data can be updated by the application administrator.
-Â Â Â Â Â Â Â Â Â Â Please contact him if needed.
-Â Â Â Â Â Â Â Â Â Â You will find its coordinates in the \"About ProjeQtOr\" window.";
+          <br/> We only store and use this data for professional purposes as part of the management of the projects in which you participate.
+          <br/>This data can be updated by the application administrator.
+          Please contact him if needed.
+          You will find its coordinates in the \"About ProjeQtOr\" window.";
     }
     $MessageLegal->endDate='2010-01-01 00:00:00';
     $MessageLegal->save();
@@ -909,7 +909,7 @@ if (beforeVersion($currVersion,"V8.2.1") and Sql::isPgsql()) {
 
 if (beforeVersion($currVersion,"V8.2.3")) {
 	$rp=SqlElement::getSingleSqlElementFromCriteria('ReportParameter', array('idReport'=>26, 'name'=>'showIdle'));
-	if (!rp->id) {
+	if (! $rp->id) {
 		$rp->idReport=26;
 		$rp->name='showIdle';
 		$rp->paramType='boolean';
