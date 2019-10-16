@@ -530,7 +530,7 @@ class Cron {
     $lstNotifDef=$notifDef->getSqlElementsFromCriteria($crit);    
     foreach($lstNotifDef as $notifDef) {
         $notifDef->generateNotifications();
-  }
+    }
   
     // Generates email notification
     $currentDate = new DateTime();
