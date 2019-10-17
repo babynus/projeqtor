@@ -336,6 +336,7 @@ class Parameter extends SqlElement {
       case 'enablePredefinedActions' :
       case 'versionCompatibility' :
       case 'paramMailerSendAsCurrentUser' :
+      case 'paramSignatureAndTagToRemove':
       case 'manageTicketCustomer' :  //ADD qCazelles - Manage ticket at customer level - Ticket #87
       case 'manageTicketVersion' :
       case 'productVersionOnDelivery' :
@@ -975,6 +976,7 @@ class Parameter extends SqlElement {
                               'paramMailerType'=>'list',
                               'paramMailerHelo'=>'list',
                               'paramMailerSendAsCurrentUser'=>'list',
+                              'paramSignatureAndTagToRemove'=>'text',
                           'newColumnMailRight'=>'newColumn',
                             'sectionMailGrouping'=>'section',
                               'mailGroupActive'=>'list',
@@ -1066,7 +1068,7 @@ class Parameter extends SqlElement {
                 	            'cronCheckImport'=>'number',
                 	            'cronImportLogDestination'=>'list',
                 	            'cronImportMailList'=>'text',
-                	          'sectionCronInputMails'=>'section',
+                	            'sectionCronInputMails'=>'section',
                 	            'cronCheckEmails'=>'number',
                 	            'cronCheckEmailsHost'=>'text',
                 	            'cronCheckEmailsUser'=>'text',
@@ -1077,8 +1079,8 @@ class Parameter extends SqlElement {
                 	            'automaticPlanningComplete'=>'specific',
                 	            'automaticPlanningCompleteDate'=>'list',
                 	            'automaticFeedingOfTheReal'=>'list', 
-        	                'newColumnbAutomationRight'=>'newColumn',
-        	                  'sectionImputationAlert'=>'section',
+        	                    'newColumnbAutomationRight'=>'newColumn',
+        	                    'sectionImputationAlert'=>'section',
         	                    'imputationAlertCronResource'=>'specific',
         	                    'imputationAlertControlDayResource'=>'list',
         	                    'imputationAlertControlNumberOfDaysResource'=>'number',

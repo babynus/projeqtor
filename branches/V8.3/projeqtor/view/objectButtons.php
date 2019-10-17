@@ -574,8 +574,14 @@
        if ($activityStreamSize) {
          $showActivityStream=true;
        }
+       $display=true;
+       if(RequestHandler::isCodeSet('mode')){
+          if(RequestHandler::getValue('mode')=='new'){
+            $display=false;
+          }
+       }
      ?>
-    <?php if (property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream') ) {?>
+    <?php if (property_exists($objectClass, '_Note') and Module::isModuleActive('moduleActivityStream')and $display==true ) {?>
     <button id="hideStreamButton" dojoType="dijit.form.Button" showlabel="false" 
       title="<?php echo ($showActivityStream==false)?i18n('showActivityStream'):i18n('hideActivityStream');?>"
       <?php //if ($noselect) {echo 'style="display:none;"';}?> 

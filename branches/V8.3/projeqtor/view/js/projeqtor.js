@@ -3565,7 +3565,6 @@ function saveReportParametersForDialog() {
 	showDialogAutoSendReport();
   };
   loadDiv("../tool/saveReportParametersForDialog.php", "resultDivMain", "reportForm", callback);
-      
 }	  
 /**
  * Global save function through [CTRL)+s
