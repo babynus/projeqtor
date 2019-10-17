@@ -491,6 +491,12 @@ class PlannedWork extends GeneralWork {
             $plan->plannedStartDate=$startPlan;
             $plan->plannedStartFraction=$startFraction;
           }
+          if ($plan->realEndDate) $plan->realStartDate=$plan->realEndDate;
+          if ($plan->realStartDate) {
+            $plan->plannedStartDate=$plan->realStartDate;
+            $plan->plannedStartFraction=0;
+            $plan->plannedEndFraction=0;
+          }
           $plan->plannedEndDate=$plan->plannedStartDate;
           $plan->plannedEndFraction=$plan->plannedStartFraction;
           $plan->plannedDuration=0;
@@ -501,6 +507,13 @@ class PlannedWork extends GeneralWork {
         	$plan->plannedEndDate=$plan->validatedEndDate;
         	$plan->plannedEndFraction=$plan->plannedStartFraction;
         	$plan->plannedDuration=0;
+        	if ($plan->realEndDate) $plan->realStartDate=$plan->realEndDate;
+        	if ($plan->realStartDate) {
+        	  $plan->plannedStartDate=$plan->realStartDate;
+        	  $plan->plannedEndDate=$plan->realEndDate;
+        	  $plan->plannedStartFraction=0;
+        	  $plan->plannedEndFraction=0;
+        	}
           //$plan->save();
           $fullListPlan=self::storeListPlan($fullListPlan,$plan);
         }
