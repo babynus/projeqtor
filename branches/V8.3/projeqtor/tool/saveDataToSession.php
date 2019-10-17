@@ -44,8 +44,8 @@ $ValidSessionIDs = '(param(ConfirmQuit|(Top)?IconSize)|lang|hideMenu'
     .'|isCheckedProjectStructureProject|isCheckedOtherProjectStructureProject|'
     .'|defaultProject|(print|pdf)InNewWindow|accordionPane(Top|Bottom)'
     .'|contentPane(Left(DivWidth|BottomDivHeight)|Top(DetailDivHeight(.*)?|(Portfolio|Resource)?PlanningDivHeight))'
-    .'|contentPaneRightDetailDivWidth(.*)|plgKanban(.*)|privacyNotes(.*)'
-    .'|contentPaneBottomLiveMeeting|contentPaneTopLiveMeeting|plgKanbanname|plgKanbanresponsible|plgKanbanstatus|plgKanbantargetProductVersion)|ckeditorHeight(.*)?'
+    .'|contentPaneRightDetailDivWidth(.*)|kanban(.*)|privacyNotes(.*)'
+    .'|contentPaneBottomLiveMeeting|contentPaneTopLiveMeeting|kanbanname|kanbanresponsible|kanbanstatus|kanbantargetProductVersion)|ckeditorHeight(.*)?'
     .'|skipEmptyDay|globalParameter(.*)|displayByStatusList(.*)';
 if (preg_match('/^'.$ValidSessionIDs.'$/', trim($id)) != True){
   if (array_key_exists($id, Parameter::getParamtersList('userParameter'))) {

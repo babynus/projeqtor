@@ -4245,7 +4245,7 @@ function selectFilterContinue() {
      setTimeout("dijit.byId('listFilterFilter').set('iconClass', 'iconFilter')",500);
    }
   if(! window.top.dijit.byId('dialogDetail').open && dojo.byId('objectClassManual') && (dojo.byId('objectClassManual').value=='Plugin_kanban' || dojo.byId('objectClassManual').value=='Plugin_liveMeeting')){
-    loadContent("../plugin/kanban/kanbanView.php?idKanban="+dojo.byId('idKanban').value, "divKanbanContainer");
+    loadContent("../view/kanbanView.php?idKanban="+dojo.byId('idKanban').value, "divKanbanContainer");
   }else if (!dijit.byId('filterDynamicParameter').get("checked")) {
     if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Planning' && ! window.top.dijit.byId('dialogDetail').open) {
       refreshJsonPlanning();
@@ -7078,6 +7078,8 @@ function loadMenuBarItem(item, itemName, from) {
 // ELIOTT - LEAVE SYSTEM    
   } else if(item == "Module"){
     loadContent("moduleView.php", "centerDiv");
+  } else if(item == "Kanban"){
+    loadContent("kanbanViewMain.php", "centerDiv");
   }else {  
     showInfo(i18n("messageSelectedNotAvailable", new Array(itemName)));
   }
