@@ -453,16 +453,16 @@ html, body {
   /* position:absolute !important; top: 0px; left: 150px !important; 
     max-width: 350px;
   */
-      width:20%;
-      position:fixed;
-      top:70% !important; left:40% !important;
-      font-size:110%;
-      min-height:100px; 
-  overflow: visible !important;
+  width:20%;
+  position:fixed;
+  top:70% !important; left:40% !important;
+  font-size:110%;
+  min-height:100px; 
+  /* overflow: visible !important;*/
   z-index:9999;
   padding: 0px 0px 20px 0px;
   text-align: center;
-  max-height:220px;
+  max-height:225px;
   vertical-align: middle;
 }
   
@@ -3802,4 +3802,129 @@ progress::-webkit-progress-value {
 .dijitReset.dijitMenuItemLabel div.sectionBadge {
 	display:none;
 	/* position : relative; left:5px;*/
+}
+
+/* =============================================================================== */
+/* Extra CSS for custom Kanban                                                     */
+/* =============================================================================== */
+
+.kanbanTextTitle {color:#656565;}
+.ProjeQtOrFlatBlue .kanbanTextTitle {color:#545381;}
+.ProjeQtOrFlatRed .kanbanTextTitle {color:#833e3e;}
+.ProjeQtOrFlatGreen .kanbanTextTitle {color:#537665;}
+.ProjeQtOrFlatGrey .kanbanTextTitle {color:#656565;}
+
+
+.ticketKanBanStyle{
+  vertical-align: top;
+  /*border-radius:3px;*/
+  display:inline-block !important; 
+  box-shadow: -1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+  background-color:#FFF;
+  width:151px;
+  margin-left:2px;
+  margin-right:2px;
+  margin-bottom: 5px;
+  position: relative;
+  max-width:149px;
+  padding: 0px !important;
+  /*word-break: break-all;
+  word-wrap:break-word;*/
+  overflow: hidden;
+}
+#title{
+  text-align:left;
+}
+.kanbanTitleTicket {
+  position:absolute;
+  cursor:move;
+  padding:3px !important;
+  width: 100%;
+  border-radius:3px 3px 0 0;
+  max-height:31px;
+  box-sizing: border-box;
+  overflow:hidden;
+  display:block;
+  text-align:center;
+  background-color:#F1F1F1; 
+  border-bottom: 1px solid #AAAAAA;
+  min-height:32px;
+}
+
+.kanbanTitleTicket:hover {
+  max-height:100%;
+}
+
+/* LARGE MODE */
+
+.ticketKanBanStyleFull{
+  display:inline-table ! important;
+  /*border-radius:6px;*/
+  box-shadow: -1px 1px 3px 1px rgba(0, 0, 0, 0.3);
+  background-color:#FFF;
+  color:#000; 
+  position:relative;
+  max-width:590px;
+  min-width:290px;
+  margin-top:2px;
+  margin-bottom:8px;
+  /*word-wrap:break-word;
+  word-break: break-all;*/
+}
+
+.kanbanTitleTicketFull {
+  cursor:move;
+  padding:3px;
+  border-radius:3px 3px 0 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+td.kanbanColumn div.ticketKanbanCustom{
+  width:32%;
+  box-sizing:border-box;
+  margin-left:0.8%;
+  margin-right:0.2%;
+}
+
+td.kanbanColumn div.ticketKanbanCustomTwo{
+  width:47%;
+  margin-left:1%;
+  margin-right:0.5%;
+  box-sizing:border-box;
+}
+
+td.kanbanColumn div.ticketKanbanCustomThree{
+  width:100%;
+  box-sizing:border-box;
+}
+
+td.kanbanColumn div.ticketKanbanCustomMin{
+  width:100%;
+  max-width:300px;
+  box-sizing:border-box;
+  margin:5px;
+}
+
+div.ticketKanbanCustomThree .princItem{
+  width: calc(100% - 48px);
+}
+div.ticketKanbanCustomThree .kanbanVersion{
+  /*max-width: 200px;*/
+}
+div.ticketKanbanCustomThree .kanbanActivity{
+  max-width: 200px;
+  margin-left:5px;
+}
+
+div.ticketKanbanCustomMin .kanbanVersion{
+  width: 200px;
+}
+
+div.ticketKanbanCustomTwo .kanbanVersion{
+  
+}
+
+div.ticketKanbanCustom .kanbanVersion{
+  
 }

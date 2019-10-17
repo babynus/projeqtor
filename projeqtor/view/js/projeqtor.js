@@ -2783,7 +2783,7 @@ function setSelectedProject(idProject, nameProject, selectionField,resetPrevious
         } else if (dojo.byId('objectClassManual') && dojo.byId('objectClassManual').value == 'Today') {
           loadContent("../view/today.php", "centerDiv");
         } else if (dojo.byId('objectClassManual') && dojo.byId('objectClassManual').value == 'Plugin_kanban') {
-          loadContent("../plugin/kanban/kanbanViewMain.php", "centerDiv");        
+          loadContent("../view/kanbanViewMain.php", "centerDiv");        
         } else if (dojo.byId('objectClassManual') && dojo.byId('objectClassManual').value == 'ActivityStream') {
           loadContent("../view/activityStreamList.php", "activityStreamListDiv", "activityStreamForm");      
         } else if (dojo.byId('objectClassManual') && dojo.byId('objectClassManual').value == 'DashboardTicket') {

@@ -78,7 +78,7 @@ if (securityCheckDisplayMenu(null,'Planning')) {$listStartPage['planningMain.php
 if (securityCheckDisplayMenu(null,'PortfolioPlanning')) {$listStartPage['portfolioPlanningMain.php']=i18n('menuPortfolioPlanning');}
 if (securityCheckDisplayMenu(null,'ResourcePlanning')) {$listStartPage['resourcePlanningMain.php']=i18n('menuResourcePlanning');}
 if (securityCheckDisplayMenu(null,'GlobalPlanning')) {$listStartPage['globalPlanningMain.php']=i18n('menuGlobalPlanning');}
-if (securityCheckDisplayMenu(null,'Kanban')) {$listStartPage['../plugin/kanban/kanbanViewMain.php']=i18n('menuKanban');}
+if (securityCheckDisplayMenu(null,'Kanban')) {$listStartPage['../view/kanbanViewMain.php']=i18n('menuKanban');}
 $arrayItem=array('Project','Document','Ticket','TicketSimple','Activity','Action','Requirement','ProductVersion','ComponentVersion');
 foreach  ($arrayItem as $item) {
   if (securityCheckDisplayMenu(null,$item)) {$listStartPage['objectMain.php?objectClass='.$item]=i18n('menu'.$item);}

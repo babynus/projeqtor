@@ -305,7 +305,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			                    <input type="hidden" id="isLoginPage" name="isLoginPage" value="true" />
 			                    <?php if (Parameter::getGlobalParameter('applicationStatus')=='Closed'
 			                          or Sql::getDbVersion()!=$version) {
-			                    	      echo '<div style="position:absolute;float: left;left:-110px;top : -50px;">';
+			                    	      echo '<div style="position:fixed;top:50%; left:50%;margin-left:-220px;margin-top:55px;">';
 			                    	      echo '<img src="../view/img/closedApplication.gif" width="60px"/>';
 			                    	      echo '</div>';
 			                    	      echo '<div class="messageERROR" >';
