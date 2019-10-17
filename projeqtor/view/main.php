@@ -1911,11 +1911,11 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                 if( $priority and ($priority->rightAccess == 1)){
              ?>
              <td class="dialogLabel" >
-               <label style="width:200px;" for="allowAutomaticFeedingOfTheReal" ><?php echo i18n("allowAutomaticFeedingOfTheReal").'&nbsp;:' ?></label>
+               <label style="width:200px;display:none;" for="allowAutomaticFeedingOfTheReal" ><?php echo i18n("allowAutomaticFeedingOfTheReal").'&nbsp;:' ?></label>
              </td>
              <td width="200px;" >
-               <div title="<?php echo i18n('allowAutomaticFeedingOfTheReal')?>" dojoType="dijit.form.CheckBox" style="margin-left:5px;margin-top:2px;"
-                    class="" type="checkbox" id="allowAutomaticFeedingOfTheReal" name="allowAutomaticFeedingOfTheReal"  
+               <div title="<?php echo i18n('allowAutomaticFeedingOfTheReal')?>" dojoType="dijit.form.CheckBox" style="margin-left:5px;margin-top:2px;display:none;"
+                    class="" type="checkbox" id="allowAutomaticFeedingOfTheReal" name="allowAutomaticFeedingOfTheReal"   
                     <?php if (Parameter::getGlobalParameter('automaticFeedingOfTheReal')=='YES') { echo ' checked="checked" '; }?> >
 		       </div>&nbsp;
              </td>
