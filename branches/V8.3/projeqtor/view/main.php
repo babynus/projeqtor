@@ -93,6 +93,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   <script type="text/javascript" src="js/projeqtorWork.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="js/projeqtorDialog.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="js/liveMeeting.js?version=<?php echo $version.'.'.$build;?>" ></script>
+  <script type="text/javascript" src="js/kanban.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="js/projeqtorFormatter.js?version=<?php echo $version.'.'.$build;?>" ></script>
   <script type="text/javascript" src="../external/ckeditor/ckeditor.js?version=<?php echo $version.'.'.$build;?>"></script>
   <!-- ELIOTT - LEAVE SYSTEM -->
@@ -242,7 +243,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     var scaytAutoStartup=<?php echo (Parameter::getUserParameter('scaytAutoStartup')=='NO')?'false':'true';?>;
     var offDayList='<?php echo Calendar::getOffDayList();?>';
     var workDayList='<?php echo Calendar::getWorkDayList();?>';
-    var applicationName='<?php echo (Parameter::getGlobalParameter('paramDbDisplayName'))?Parameter::getGlobalParameter('paramDbDisplayName'):i18n("applicationTitle");?>';
+    var applicationName='<?php echo htmlEncode(((Parameter::getGlobalParameter('paramDbDisplayName'))?Parameter::getGlobalParameter('paramDbDisplayName'):i18n("applicationTitle")),'protectQuotes');?>';
 // MTY - MULTI CALENDAR    
     var uOffDayList='<?php echo Calendar::getOffDayList(getSessionUser()->idCalendarDefinition);?>';
     var uWorkDayList='<?php echo Calendar::getWorkDayList(getSessionUser()->idCalendarDefinition);?>';

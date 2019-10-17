@@ -56,7 +56,7 @@ function kill($file) {
  * @param string $dir directory
  * @param string $pattern pattern for file selection
  */
-function purgeFiles($dir, $pattern) {
+function purgeFiles($dir, $pattern, $removeDirs=false) {
 	if (! is_dir($dir)) {
 		traceLog ("purgeFiles('$dir', '$pattern') - directory '$dir' does not exist");
 		return;
@@ -81,6 +81,9 @@ function purgeFiles($dir, $pattern) {
 		} else if (is_dir($filepath)) {
 			purgeFiles($filepath, $pattern);
 		}
+	}
+	if ($removeDirs) {
+	  rmdir($dir);
 	}
 	closedir($handle);
 }

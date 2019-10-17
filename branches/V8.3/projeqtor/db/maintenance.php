@@ -908,7 +908,7 @@ if (beforeVersion($currVersion,"V8.2.1") and Sql::isPgsql()) {
 }
 if (beforeVersion($currVersion,"V8.2.3")) {
   $rp=SqlElement::getSingleSqlElementFromCriteria('ReportParameter', array('idReport'=>26, 'name'=>'showIdle'));
-  if (!rp->id) {
+  if (! $rp->id) {
     $rp->idReport=26;
     $rp->name='showIdle';
     $rp->paramType='boolean';
