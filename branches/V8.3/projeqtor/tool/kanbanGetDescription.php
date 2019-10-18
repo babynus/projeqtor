@@ -31,8 +31,13 @@ $field = RequestHandler::getValue('field');
 $KabanClass=new $type($id);
 $result = $KabanClass->$field;
 
-$text = new Html2Text ($result);
-$description = nl2br($text->getText ());
-
-echo $description;
+$kanbanFullWidthElement = Parameter::getUserParameter ( "kanbanFullWidthElement" );
+if ($kanbanFullWidthElement == "on") {
+  echo $result;
+} else {
+  $text = new Html2Text ($result);
+  $descr = nl2br($text->getText ());
+  $descr=htmlspecialchars($descr);
+  echo $descr;
+}
 ?>
