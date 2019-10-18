@@ -5915,8 +5915,8 @@ function getLinksHtmlTab() {
 
 function getNotesHtmlTab() {
   $html = '';
-  $note = new Note;
-  $critArray = array('refType' => get_class($this), 'refId' => $this->id);
+  $note = new Note();
+  $critArray = array('refType' => get_class($this), 'refId' => $this->id, 'idPrivacy'=>'1');
   $noteList = $note->getSqlElementsFromCriteria($critArray);
   $style = 'border-top: 1px solid #7b7b7b ; border-bottom: 1px solid #7b7b7b;
             background-color:#dddddd; padding:4px;';
