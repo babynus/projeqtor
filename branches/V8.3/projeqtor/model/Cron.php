@@ -583,23 +583,16 @@ class Cron {
     $lstNotifDef=$notifDef->getSqlElementsFromCriteria($crit);    
     foreach($lstNotifDef as $notifDef) {
         $notifDef->generateNotifications();
-  }
+    }
   
     // Generates email notification
-    $currentDate = new DateTime();
-    $theCurrentDate = $currentDate->format('Y-m-d');
-    $crit = array(
-                    "idle" => '0',
-                    "sendEmail" => '1',
-                    "emailSent" => '0',
-                    "notificationDate" => $theCurrentDate,
-                 );
+    $currentDate = date('Y-m-d');
+    $currentTime = date('H:i:s');
+    $crit = "idle=0 and sendEmail=1 and emailSent=0 and ( notificationDate<'$currentDate' or (notificationDate='$currentDate' and notificationTime<'$currentTime') )";
     $notif = new Notification();
     $lstNotif = $notif->getSqlElementsFromCriteria($crit);
     foreach($lstNotif as $notif) {
-      if ($notif->notificationTime->format('H:i:s')>=$currentDate->format('H:i:s')) {
-        $notif->sendEmail();
-      }
+      $notif->sendEmail();
     }
   }// END - ADD BY TABARY - NOTIFICATION SYSTEM
     
