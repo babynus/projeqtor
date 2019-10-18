@@ -514,7 +514,7 @@ function changeTicketVisible(idTicket,factorBase){
 }
 
 function kanbanChangeOrderBy(val, idKanban){
-  loadContent("../view/kanbanView.php?idKanban="+idKanban+"&orderBy="+val, "divKanbanContainer");
+  loadContent("../view/kanbanView.php?idKanban="+idKanban+"&kanbanOrderBy="+val, "divKanbanContainer");
 }
 
 function kanbanEscapeRegExp(str) {
