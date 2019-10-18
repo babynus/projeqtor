@@ -3821,12 +3821,13 @@ progress::-webkit-progress-value {
   display:inline-block !important; 
   box-shadow: -1px 1px 3px 1px rgba(0, 0, 0, 0.3);
   background-color:#FFF;
-  width:151px;
+  width:47%;
+  max-width:250px;
+  
   margin-left:2px;
   margin-right:2px;
   margin-bottom: 5px;
   position: relative;
-  max-width:149px;
   padding: 0px !important;
   /*word-break: break-all;
   word-wrap:break-word;*/
@@ -3864,6 +3865,7 @@ progress::-webkit-progress-value {
   background-color:#FFF;
   color:#000; 
   position:relative;
+  width:100%;
   max-width:590px;
   min-width:290px;
   margin-top:2px;

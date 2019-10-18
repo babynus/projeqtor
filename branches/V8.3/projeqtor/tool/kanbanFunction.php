@@ -22,6 +22,7 @@
 require_once "../tool/kanbanConstructPrinc.php";
 function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
 	global $typeKanbanC, $arrayProject;
+	
 	$kanB = new Kanban ( $idKanban, true );
 	$json = $kanB->param;
 	$jsonDecode = json_decode ( $json, true );
@@ -40,19 +41,32 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
 	$arrayProject [$line ['idproject']] = $proJ->getColor ();
 	$color = $arrayProject [$line ['idproject']];
 	
+	$destWidth=RequestHandler::getValue('destinationWidth');
+	if (!$destWidth) $destWidth=1920;
+	$nbCol=(isset($jsonDecode['column']) and is_array($jsonDecode['column']))?count($jsonDecode['column']):1;
+	$ticketWidth=$destWidth/$nbCol-46;
+	
 	if (isset ( $line ['description'] )) {
-		$text = new Html2Text ( $line ['description'] );
-		$description = $text->getText ();
-		// $description = nl2brForPlainText($description);
-		$descr = substr ( $description, 0, 400 );
-		if (strlen ( $descr ) <= 400) {
-			$ticketDescr = nl2brForPlainText ( $descr );
-		}
-		// description for normal tickets
-		$descr2 = substr ( $description, 0, 120 );
-		if (strlen ( $descr2 ) <= 120) {
+	  $description=$line ['description'];
+	  if (strlen ($description) > 2000) {
+		  $text = new Html2Text ($description);
+		  $descr = $text->getText ();
+		  $descr=htmlspecialchars($descr);
+		  $descr1 = substr ( $descr, 0, 2000);
+			$ticketDescr = nl2brForPlainText ( $descr1 );
+			$descr2 = substr ( $descr, 0, 200 );
 			$ticketDescr2 = nl2brForPlainText ( $descr2 );
-		}
+		} else if (strlen ($description) > 200) {
+	    $text = new Html2Text ($description);
+	    $descr = $text->getText ();
+	    $descr=htmlspecialchars($descr);
+	    $ticketDescr=$description;
+	    $descr2 = substr ( $descr, 0, 200);
+	    $ticketDescr2 = nl2brForPlainText ( $descr2 );
+	  } else {
+	    $ticketDescr=$description;
+	    $ticketDescr2=$description;
+	  }
 	} else {
 		$ticketDescr = '<div style="font-style:italic; color:#CDCADB; ">' . i18n ( "kanbanNoDescription" ) . '</div>';
 		$ticketDescr2 = '<div style="font-style:italic; color:#CDCADB; ">' . i18n ( "kanbanNoDescription" ) . '</div>';
@@ -66,7 +80,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
 		$numCol = count ( $jsonDecode ['column'] );
 		
 		echo ' <script type="dojo/connect">
-        divWidthKanban(' . $id . ',\'' . $type . '\',' . $numCol . ');
+        //divWidthKanban(' . $id . ',\'' . $type . '\',' . $numCol . ');
        </script>';
 		if ($mode != "refresh") {
 			echo '
@@ -82,7 +96,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
         </div>
       </div>
       <div id="objectDescr' . $line ['id'] . '" dojoType="dijit.layout.ContentPane" region="center" class="dojoDndItem"
-        style="padding:4px;font-size:12px;font-family:arial;word-wrap:break-word;max-height:55px;overflow-y:scroll;cursor:move;border-top:1px solid #CDCADB;border-bottom:1px solid #CDCADB;"
+        style="max-width:'.$ticketWidth.'px;padding:4px;font-size:12px;font-family:arial;word-wrap:break-word;max-height:300px;overflow-y:scroll;cursor:move;border-top:1px solid #CDCADB;border-bottom:1px solid #CDCADB;"
         onScroll="kanbanShowDescr(\'description\',\'' . $typeKanbanC . '\', ' . $line ['id'] . ');">
         ' . $ticketDescr . '
       </div>

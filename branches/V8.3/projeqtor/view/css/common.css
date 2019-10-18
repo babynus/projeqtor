@@ -77,6 +77,10 @@ table.dojoDndAvatar {
 .dojoDndAvatarItem td {
   padding: 2px;
 }
+.dojoDndMove .dojoDndAvatar {
+	transform: rotate(3deg);
+	opacity:0.9;
+}
 .dojoDndMove .dojoDndAvatarHeader {
   background-color: #f58383;
   background-image: url(images/dndNoMove.png);
