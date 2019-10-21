@@ -681,8 +681,8 @@ class Parameter extends SqlElement {
         break;
       case 'automaticFeedingOfTheReal' :
         $list=array(
-          'YES'=>i18n('paramFeedingTheReal'),
-          'NO'=>i18n('paramNoFeedingTheReal')
+          'YES'=>i18n('displayYes'),
+          'NO'=>i18n('displayNo')
         );
         break;
       case 'notApplicableValue' :

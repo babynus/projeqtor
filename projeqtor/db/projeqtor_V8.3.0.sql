@@ -26,9 +26,10 @@ CREATE TABLE `${prefix}assignmentselection` (
 -- Change Request
 -- ======================================
 
-INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
-(225, 'menuChangeRequest',173, 'object', 380, 'ReadWritePrincipal', 0, 'Work Configuration EnvironmentalParameter'),
+INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
+(225,'menuChangeRequest',173,'object', 381,'ReadWritePrincipal',0,'Work Configuration EnvironmentalParameter'),
 (226,'menuChangeRequestType',79,'object',1029,NULL,NULL,0);
+
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,225,1),
@@ -94,7 +95,7 @@ CREATE INDEX changerequestTargetVersion ON `${prefix}changerequest` (idTargetPro
 CREATE INDEX changerequestUrgency ON `${prefix}changerequest` (idUrgency);
 CREATE INDEX changerequestCriticality ON `${prefix}changerequest` (idCriticality);
 CREATE INDEX changerequestFeasibility ON `${prefix}changerequest` (idFeasibility);
-CREATE INDEX requiremenRiskLevel ON `${prefix}changerequest` (idRiskLevel);
+
 
 INSERT INTO `${prefix}Type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`) VALUES 
 ('ChangeRequest', 'Recurring problem',10,1, 0),
