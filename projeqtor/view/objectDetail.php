@@ -5993,7 +5993,7 @@ function drawAffectationsResourceTeamFromObject($list, $obj, $type, $refresh=fal
   if (!$print) {
     echo '<td class="assignHeader" style="width:15%">';
     if ($obj->id!=null and !$print and $canCreate and !$obj->idle) {
-      echo '<a onClick="addAffectationResourceTeam(\''.get_class($obj).'\',\''.$type.'\',\''.$idRess.'\');" title="'.i18n('addAffectation').'" /> '.formatSmallButton('Add').'</a>';
+      echo '<a onClick="addAffectationResourceTeam(\''.get_class($obj).'\',\''.$type.'\',\''.$idRess.'\');" title="'.i18n('addAffectationResourceTeam').'" /> '.formatSmallButton('Add').'</a>';
     }
     echo '</td>';
   }
@@ -6031,10 +6031,15 @@ function drawAffectationsResourceTeamFromObject($list, $obj, $type, $refresh=fal
       if (!$print) {
         echo '<td class="assignData'.$idleClass.'" style="text-align:center;white-space: nowrap;">';
         if ($canUpdate and !$print) {
-          echo '  <a onClick="editAffectationResourceTeam('."'".htmlEncode($aff->id)."'".",'".get_class($obj)."'".",'".$type."'".",'".htmlEncode($aff->idResource)."'".",'".htmlEncode($aff->rate)."'".",'".htmlEncode($aff->idle)."'".",'".$aff->startDate."'".",'".htmlEncode($aff->endDate)."'".');" '.'title="'.i18n('editAffectation').'" > '.formatSmallButton('Edit').'</a>';
+          echo '  <a onClick="editAffectationResourceTeam('."'".htmlEncode($aff->id)."'".",'".get_class($obj)."'".",'".$type."'".",'".htmlEncode($aff->idResource)."'".",'".htmlEncode($aff->rate)."'".",'".htmlEncode($aff->idle)."'".",'".$aff->startDate."'".",'".htmlEncode($aff->endDate)."'".');" '.'title="'.i18n('editAffectationResourceTeam').'" > '.formatSmallButton('Edit').'</a>';
         }
         if ($canDelete and !$print) {
-          echo '  <a onClick="removeAffectationResourceTeam('."'".htmlEncode($aff->id)."'".',\''.$aff->idResource.'\');" '.'title="'.i18n('removeAffectation').'" > '.formatSmallButton('Remove').'</a>';
+          echo '  <a onClick="removeAffectationResourceTeam('."'".htmlEncode($aff->id)."'".',\''.$aff->idResource.'\');" '.'title="'.i18n('removeAffectationResourceTeam').'" > '.formatSmallButton('Remove').'</a>';
+        }
+        if ($aff->idle) {
+          echo '<a><div style="display:table-cell;width:20px;"><img style="position:relative;top:4px;left:2px" src="css/images/tabClose.gif" '.'title="'.i18n('colIdle').'"/></div></a>';
+        } else {
+          echo '<a><div style="display:table-cell;width:20px;">&nbsp;</div></a>';
         }
         echo '</td>';
       }
@@ -6107,7 +6112,7 @@ function drawResourceCapacity($list, $obj, $type, $refresh=false) {
 	echo '</tr>';
 
 	foreach ($list as $resCap) {
-		$idleClass=($resCap->idle or ($resCap->endDate and $resCap->endDate<$dateNow=date("Y-m-d")))?' affectationIdleClass':'';
+		$idleClass=($resCap->idle or ($resCap->endDate and $resCap->endDate<date("Y-m-d")))?' affectationIdleClass':'';
 		echo '<tr>';
 		if (!$print) {
 			echo '<td class="assignData'.$idleClass.'" style="text-align:center;white-space: nowrap;">';
@@ -6116,6 +6121,11 @@ function drawResourceCapacity($list, $obj, $type, $refresh=false) {
 			}
 			if ($canDelete) {
 				echo '  <a onClick="removeResourceCapacity(\''.$resCap->id.'\',\''.$resCap->idResource.'\');" '.'title="'.i18n('removeResourceCapacity').'" > '.formatSmallButton('Remove').'</a>';
+			}
+			if ($resCap->idle) {
+			  echo '<a><div style="display:table-cell;width:20px;"><img style="position:relative;top:4px;left:2px" src="css/images/tabClose.gif" '.'title="'.i18n('colIdle').'"/></div></a>';
+			} else {
+			  echo '<a><div style="display:table-cell;width:20px;">&nbsp;</div></a>';
 			}
 			if ($resCap->description) {
 				echo '<div style="float:right">'.formatCommentThumb($resCap->description).'</div>';
@@ -6182,15 +6192,20 @@ function drawResourceSurbooking($list, $obj, $type, $refresh=false) {
   echo '</tr>';
 
   foreach ($list as $resSur) {
-    $idleClass=($resSur->idle or ($resSur->endDate and $resSur->endDate<$dateNow=date("Y-m-d")))?' affectationIdleClass':'';
+    $idleClass=($resSur->idle or ($resSur->endDate and $resSur->endDate<date("Y-m-d")))?' affectationIdleClass':'';
     echo '<tr>';
     if (!$print) {
       echo '<td class="assignData'.$idleClass.'" style="text-align:center;white-space: nowrap;">';
       if ($canUpdate) {
-        echo '  <a onClick="editResourceSurbooking(\''.$resSur->id.'\',\''.$obj->id.'\',\''.$resSur->capacity.'\',\''.$resSur->idle.'\',\''.$resSur->startDate.'\',\''.$resSur->endDate.'\');" '.'title="'.i18n('editResourceCapacity').'" > '.formatSmallButton('Edit').'</a>';
+        echo '  <a onClick="editResourceSurbooking(\''.$resSur->id.'\',\''.$obj->id.'\',\''.$resSur->capacity.'\',\''.$resSur->idle.'\',\''.$resSur->startDate.'\',\''.$resSur->endDate.'\');" '.'title="'.i18n('editResourceSurbooking').'" > '.formatSmallButton('Edit').'</a>';
       }
       if ($canDelete) {
-        echo '  <a onClick="removeResourceSurbooking(\''.$resSur->id.'\',\''.$resSur->idResource.'\');" '.'title="'.i18n('removeResourceCapacity').'" > '.formatSmallButton('Remove').'</a>';
+        echo '  <a onClick="removeResourceSurbooking(\''.$resSur->id.'\',\''.$resSur->idResource.'\');" '.'title="'.i18n('removeResourceSurbooking').'" > '.formatSmallButton('Remove').'</a>';
+      }
+      if ($resSur->idle) {
+        echo '<a><div style="display:table-cell;width:20px;"><img style="position:relative;top:4px;left:2px" src="css/images/tabClose.gif" '.'title="'.i18n('colIdle').'"/></div></a>';
+      } else {
+        echo '<a><div style="display:table-cell;width:20px;">&nbsp;</div></a>';
       }
       if ($resSur->description) {
         echo '<div style="float:right">'.formatCommentThumb($resSur->description).'</div>';
