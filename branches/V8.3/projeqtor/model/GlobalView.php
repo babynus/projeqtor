@@ -255,7 +255,6 @@ class GlobalView extends SqlElement {
         if (substr($fld,0,1)=='_' or $fld=='id') continue;        
         $query.=", ";
         $typeFld=$obj->getDataType($fld);
-        debugLog($fld.':    '.$obj->getDataType($fld));
         if ($fld=='objectClass') $query.="'$class'";
         else if ($fld=='objectId') $query.="$table.id";
         else if (isset($convert[$fld]) and $typeDb=="mysql")$query.=(($convert[$fld]=='null')?$na:"$table.".$convert[$fld]);
