@@ -127,7 +127,7 @@ ALTER TABLE `${prefix}planningelement` ADD COLUMN `fixPlanning` int(1) unsigned 
 ALTER TABLE `${prefix}status` ADD COLUMN `fixPlanning` int(1) unsigned default '0';
 
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
-('automaticFeedingOfTheReal','No');
+('automaticFeedingOfTheReal','NO');
 
 INSERT INTO `${prefix}habilitationother` (idProfile, rightAccess, scope) VALUES
 (1,1,'feedingOfTheReal'),
