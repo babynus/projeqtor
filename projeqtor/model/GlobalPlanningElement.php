@@ -236,6 +236,7 @@ class GlobalPlanningElement extends SqlElement {
    */
   public static function getTableNameQuery($limitToClass=null) {
     global $showIdleProjects, $saveBaselineInProgress;
+    $dbType=Parameter::getGlobalParameter('paramDbType');
     $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
     $obj=new GlobalPlanningElement();
     $na=Parameter::getUserParameter('notApplicableValue');
@@ -305,8 +306,10 @@ class GlobalPlanningElement extends SqlElement {
           else if (strpos($convert[$fld],'.')!==false or strpos($convert[$fld],"'")!==false) $query.=$convert[$fld];
           else $query.="$table.".$convert[$fld];
         }
-        else $query.="$na";
-        $query.=" as $fld";
+        else {
+          $query.=(($dbType=='pgsql')?"null":"$na");
+          $query.=" as $fld";
+        }
       }
       $query.="\n    FROM $table LEFT JOIN $peTable AS pe ON pe.refType='Project' and pe.refId=$table.idProject ";
       $query.="LEFT JOIN $pexTable as pex ON pex.refType='$class' and pex.refId=$table.id ";
