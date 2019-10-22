@@ -221,12 +221,10 @@ class PlannedWork extends GeneralWork {
     // $reserved[type='W'][idPE][idResource][day]=value         // sum of work to reserve for resource on week day for a given task
     // $reserved[type='W'][idPE]['start']=date                  // start date, that will be set when known
     // $reserved[type='W'][idPE]['end']=date                    // end date, that will be set when known
+    // $reserved[type='W'][idPE]['idProj']=id                   // id of project of PlanningElement
     // $reserved[type='W'][idPE]['pred'][idPE]['id']=idPE       // id of precedessor PlanningElement
     // $reserved[type='W'][idPE]['pred'][idPE]['delay']=delay   // Delay of dependency
     // $reserved[type='W'][idPE]['pred'][idPE]['type']=type     // type of dependency (E-E, E-S, S-S)
-    // $reserved[type='W'][idPE]['succ'][idPE]['id']=idPE       // id of successor PlanningElement
-    // $reserved[type='W'][idPE]['succ'][idPE]['delay']=delay   // Delay of dependency
-    // $reserved[type='W'][idPE]['succ'][idPE]['type']=type     // type of dependency (E-E, E-S, S-S)
     // $reserved[type='W']['sum'][idResource][day]+=value       // sum of work to reserve for resource on week day
     // $reserved['allPreds'][idPE]=idPE                         // List of all PE who are predecessors of RECW task
     // $reserved['allSuccs'][idPE]=idPE                         // List of all PE who are successors of RECW task
@@ -797,6 +795,7 @@ class PlannedWork extends GeneralWork {
                   if ($arPeW['idProj']!=$plan->idProject) continue;
                   if (! isset($arPeW[$ass->idResource]) ) continue;
                   $projectKey='Project#' . $plan->idProject;
+                  if (Resource::findAffectationRate($ress[$projectKey]['rate'],$currentDate)<=0) continue;
                   $week=getWeekNumberFromDate($currentDate);
                   if (! isset($ress[$projectKey][$week])) {
                     $weeklyReserved=0;
@@ -905,6 +904,8 @@ class PlannedWork extends GeneralWork {
                   foreach($reserved['W'] as $idPe=>$arPeW) {                  
                     if ($idPe=='sum') continue;
                     if ($idPe==$plan->id) continue; // we are treating the one we reserved for
+                    $projectKeyTest='Project#' . $arPeW['idProj'];
+                    if (isset($ress[$projectKeyTest]) and Resource::findAffectationRate($ress[$projectKeyTest]['rate'],$currentDate)<=0) continue;
                     // === Determine if we must start to reserve work on this task for RECW tasks that will be planned after
                     $startReserving=false;
                     if ($arPeW['start'] ) { // Start is defined from predecessor
@@ -1035,6 +1036,9 @@ class PlannedWork extends GeneralWork {
                         $value=$leftProj;
                       }
                     }
+                  } else if ($withProjectRepartition and $profile=='RECW') {
+                    $rateProj=Resource::findAffectationRate($ress[$projectKey]['rate'],$currentDate) / 100;
+                    if ($rateProj<=0) $value=0;;
                   }
                   $value=($value>$left)?$left:$value;
                   if ($currentDate==$startPlan and $value>((1-$startFraction)*$capacity)) {
