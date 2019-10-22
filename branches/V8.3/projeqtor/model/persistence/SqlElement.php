@@ -543,6 +543,8 @@ abstract class SqlElement {
           "Ticket" => "control",
           "Link" => "cascade",          
       ), 
+      "Contact" => array(
+          "Affectation" => "cascade"),
       "Document" => array(
           "DocumentVersion" => "cascade"), 
       "DocumentDirectory" => array(
@@ -1148,6 +1150,7 @@ abstract class SqlElement {
         $objects = '';
         $error = false;
         foreach ( $relationShip [get_class ( $this )] as $object=>$val ) {
+          debugLog("$object => $val | $mode");
           if (($val == 'cascade' or $mode == 'confirm') and property_exists ( $object, 'idle' )) {
             $where = null;
             $obj = new $object ();
