@@ -237,9 +237,10 @@ class GlobalPlanningElement extends SqlElement {
   public static function getTableNameQuery($limitToClass=null) {
     global $showIdleProjects, $saveBaselineInProgress;
     $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
+    $dbType=Parameter::getGlobalParameter('paramDbType');
     $obj=new GlobalPlanningElement();
     $na=Parameter::getUserParameter('notApplicableValue');
-    if (!$na or $saveBaselineInProgress) $na='null';
+    if (!$na or $saveBaselineInProgress or $dbType=='pgsql') $na='null';
     $pe=new PlanningElement();
     $peTable=$pe->getDatabaseTableName();
     $pex=new PlanningElementExtension();
