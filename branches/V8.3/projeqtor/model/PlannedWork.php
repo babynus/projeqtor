@@ -861,6 +861,7 @@ class PlannedWork extends GeneralWork {
                   if ($arPeW['idProj']!=$plan->idProject) continue;
                   if (! isset($arPeW[$ass->idResource]) ) continue;
                   $projectKey='Project#' . $plan->idProject;
+                  if (Resource::findAffectationRate($ress[$projectKey]['rate'],$currentDate)<=0) continue;
                   $week=getWeekNumberFromDate($currentDate);
                   if (! isset($ress[$projectKey][$week])) {
                     $weeklyReserved=0;
@@ -969,6 +970,8 @@ class PlannedWork extends GeneralWork {
                   foreach($reserved['W'] as $idPe=>$arPeW) {                  
                     if ($idPe=='sum') continue;
                     if ($idPe==$plan->id) continue; // we are treating the one we reserved for
+                    $projectKeyTest='Project#' . $arPeW['idProj'];
+                    if (isset($ress[$projectKeyTest]) and Resource::findAffectationRate($ress[$projectKeyTest]['rate'],$currentDate)<=0) continue;
                     // === Determine if we must start to reserve work on this task for RECW tasks that will be planned after
                     $startReserving=false;
                     if ($arPeW['start'] ) { // Start is defined from predecessor
@@ -1099,6 +1102,9 @@ class PlannedWork extends GeneralWork {
                         $value=$leftProj;
                       }
                     }
+                  } else if ($withProjectRepartition and $profile=='RECW') {
+                    $rateProj=Resource::findAffectationRate($ress[$projectKey]['rate'],$currentDate) / 100;
+                    if ($rateProj<=0) $value=0;;
                   }
                   $value=($value>$left)?$left:$value;
                   if ($currentDate==$startPlan and $value>((1-$startFraction)*$capacity)) {
