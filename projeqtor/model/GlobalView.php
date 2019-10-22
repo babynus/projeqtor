@@ -232,9 +232,10 @@ class GlobalView extends SqlElement {
    */
   public static function getTableNameQuery() {
     $paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
+    $typeDb=Parameter::getGlobalParameter('paramDbType');
     $obj=new GlobalView();
     $na=Parameter::getUserParameter('notApplicableValue');
-    if (!$na) $na='null';
+    if (!$na or $typeDb=='pgsql') $na='null';
     $pe=new PlanningElement();
     $peTable=$pe->getDatabaseTableName();
     $itemsToDisplay=Parameter::getUserParameter('globalViewSelectedItems');
