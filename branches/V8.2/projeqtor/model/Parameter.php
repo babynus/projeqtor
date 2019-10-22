@@ -772,7 +772,9 @@ class Parameter extends SqlElement {
           $parameterList['sectionPassword']='section';
           $parameterList['password']='specific';
         }
-        
+        if(Parameter::getGlobalParameter('paramDbType')=='pgsql'){
+          unset($parameterList['notApplicableValue']);
+        }
         break;
       case ('globalParameter'):
       	$parameterList=array(
@@ -1095,6 +1097,9 @@ class Parameter extends SqlElement {
                   	          'SslCert'=>'text',
                   	          'SslCa'=>'text'
       	);
+    }
+    if(Parameter::getGlobalParameter('paramDbType')=='pgsql'){
+      unset($parameterList['notApplicableValue']);
     }
     global $hosted;
     if (isset($hosted) and $hosted) {
