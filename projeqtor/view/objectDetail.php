@@ -6005,8 +6005,8 @@ function drawAffectationsResourceTeamFromObject($list, $obj, $type, $refresh=fal
   
   echo '</tr>';
   foreach ($list as $aff) {
-    $canUpdate=securityGetAccessRightYesNo('menuAffectation', 'update', $aff)=="YES";
-    $canDelete=securityGetAccessRightYesNo('menuAffectation', 'delete', $aff)=="YES";
+    $canUpdate=securityGetAccessRightYesNo('menuResourceTeam', 'update', $aff)=="YES";
+    $canDelete=securityGetAccessRightYesNo('menuResourceTeam', 'delete', $aff)=="YES";
     if (!(securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES")) {
       $canCreate=false;
       $canUpdate=false;
@@ -6428,18 +6428,6 @@ function drawAffectationsResourceTeamResourceFromObject($list, $obj, $type, $ref
   
   echo '</tr>';
   foreach ($list as $aff) {
-    $canUpdate=securityGetAccessRightYesNo('menuAffectation', 'update', $aff)=="YES";
-    $canDelete=securityGetAccessRightYesNo('menuAffectation', 'delete', $aff)=="YES";
-    if (!(securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES")) {
-      $canCreate=false;
-      $canUpdate=false;
-      $canDelete=false;
-    }
-    if ($obj->idle==1) {
-      $canUpdate=false;
-      $canCreate=false;
-      $canDelete=false;
-    }
     $idleClass=($aff->idle or ($aff->endDate and $aff->endDate<$dateNow=date("Y-m-d")))?' affectationIdleClass':'';
     $res=new Resource($aff->idResource);
     $isResource=($res->id)?true:false;
