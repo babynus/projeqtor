@@ -28,7 +28,7 @@
  * Opportunity.
  */ 
 require_once('_securityCheck.php');
-class OpportunityMAin extends SqlElement {
+class OpportunityMain extends SqlElement {
 
   // List of fields that will be exposed in general user interface
   public $_sec_description;
