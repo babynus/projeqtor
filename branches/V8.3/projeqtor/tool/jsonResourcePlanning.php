@@ -531,6 +531,7 @@ if (Sql::$lastQueryNbRows == 0) {
 			echo  '{';
 			$nbFields=0;
 			$idPe="";
+			if (trim($line['plannedenddate'])=='' and trim($line['realenddate'])!='') $line['plannedenddate']=$line['realenddate'];
 			foreach ($line as $id => $val) {
 				if ($val==null) {$val=" ";}
 				if ($val=="") {$val=" ";}
@@ -627,7 +628,7 @@ function displayGantt($list) {
 			}
 			$pEnd="";
 			$pEnd=(trim($line['plannedenddate'])!="")?$line['plannedenddate']:$line['realenddate'];
-			//$pEnd=(trim($line['realenddate'])!="")?$line['realenddate']:$pEnd;
+			$pEnd=(trim($line['plannedenddate'])=="" and trim($line['realenddate'])!="")?$line['realenddate']:$pEnd;
 			if ($line['reftype']=='Milestone') {
 				$pStart=$pEnd;
 			}
