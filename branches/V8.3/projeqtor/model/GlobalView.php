@@ -235,7 +235,7 @@ class GlobalView extends SqlElement {
     $typeDb=Parameter::getGlobalParameter('paramDbType');
     $obj=new GlobalView();
     $na=Parameter::getUserParameter('notApplicableValue');
-    if (!$na ) $na='null';
+    if (!$na or $typeDb=='pgsql' ) $na='null';
     $pe=new PlanningElement();
     $peTable=$pe->getDatabaseTableName();
     $itemsToDisplay=Parameter::getUserParameter('globalViewSelectedItems');
@@ -254,14 +254,10 @@ class GlobalView extends SqlElement {
       foreach ($obj as $fld=>$val) {
         if (substr($fld,0,1)=='_' or $fld=='id') continue;        
         $query.=", ";
-        $typeFld=$obj->getDataType($fld);
         if ($fld=='objectClass') $query.="'$class'";
         else if ($fld=='objectId') $query.="$table.id";
-        else if (isset($convert[$fld]) and $typeDb=="mysql")$query.=(($convert[$fld]=='null')?$na:"$table.".$convert[$fld]);
-        else if(isset($convert[$fld]) and $typeDb=="pgsql" ){
-          if($convert[$fld]=='null')$query.=(($typeFld=='varchar')?$na:$convert[$fld]);
-          else $query.= "$table.".$convert[$fld];
-        } 
+        //florent
+        else if (isset($convert[$fld]) )$query.=(($convert[$fld]=='null')?$na:"$table.".$convert[$fld]);
         else if ($fld=='idType') $query.="$table.id".$class."Type";
         else if (($fld=='validatedEndDate' or $fld=='plannedEndDate' or $fld=='realEndDate') and property_exists($class, $class.'PlanningElement')) $query.="$peTable.$fld";
         else $query.="$table.$fld";
