@@ -749,7 +749,7 @@ class Parameter extends SqlElement {
                            "paramShowThumbList"=>"list",
                            "notApplicableValue"=>"list",
                            'projectIndentChar'=>'list',
-                       'column_Dis_2'=>'newColumn',
+                           'column_Dis_2'=>'newColumn',
                          'sectionIHM'=>'section',
                            "displayHistory"=>"list",
                            "displayChecklist"=>"list",  
@@ -795,6 +795,9 @@ class Parameter extends SqlElement {
                        
                          
         );
+        if(Parameter::getGlobalParameter('paramDbType')=='pgsql'){
+          unset($parameterList['notApplicableValue']);
+        }
         $lockPassword=Parameter::getGlobalParameter('lockPassword');
         $paramLdap_allow_login=Parameter::getGlobalParameter('paramLdap_allow_login');
         if (! getBooleanValue($lockPassword) and ! (getSessionUser()->isLdap and isset($paramLdap_allow_login) and strtolower($paramLdap_allow_login)=='true')) {
@@ -804,7 +807,9 @@ class Parameter extends SqlElement {
         if (Parameter::getGlobalParameter('doNotExportAssignmentsForXMLFormat')===true) {
           unset($parameterList['exportAssignmentsForXMLFormat']);
         }
-        
+        if(Parameter::getGlobalParameter('paramDbType')=='pgsql'){
+          unset($parameterList['notApplicableValue']);
+        }
         break;
       case ('globalParameter'):
       	$parameterList=array(
