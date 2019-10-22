@@ -532,6 +532,7 @@ if (Sql::$lastQueryNbRows == 0) {
 			$nbFields=0;
 			$idPe="";
 			if (trim($line['plannedenddate'])=='' and trim($line['realenddate'])!='') $line['plannedenddate']=$line['realenddate'];
+			if (trim($line['plannedstartdate'])=='' and trim($line['realstartdate'])!='') $line['plannedstartdate']=$line['realstartdate'];
 			foreach ($line as $id => $val) {
 				if ($val==null) {$val=" ";}
 				if ($val=="") {$val=" ";}
