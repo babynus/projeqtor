@@ -46,6 +46,8 @@ class Audit extends SqlElement {
 	public $lastAccessDateTime;
 	public $disconnectionDateTime;
 	public $duration;
+	public $durationSeconds;
+	public $durationDisplay;
 	public $idle;
 	public $_spe_disconnectButton;
 	public $requestRefreshParam;
@@ -61,9 +63,9 @@ class Audit extends SqlElement {
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
     <th field="sessionId" width="15%" ># ${sessionId}</th>
     <th field="userName" width="15%" >${idUser}</th>
-    <th field="connectionDateTime" formatter="dateFormatter" width="12%" >${connection}</th>
-    <th field="lastAccessDateTime" formatter="dateFormatter" width="12%"  >${lastAccess}</th>
-    <th field="duration" width="10%"  >${duration}</th>
+    <th field="connectionDateTime" formatter="dateTimeFormatter" width="12%" >${connection}</th>
+    <th field="lastAccessDateTime" formatter="dateTimeFormatter" width="12%"  >${lastAccess}</th>
+    <th field="durationDisplay" width="10%"  >${duration}</th>
     <th field="platform" width="10%" >${platform}</th>
     <th field="browser" width="10%" >${browser}</th>
     <th field="requestDisconnection" width="6%" formatter="booleanFormatter" >${requestDisconnection}</th>
@@ -74,10 +76,15 @@ class Audit extends SqlElement {
 			"disconnectionDateTime" => "hidden",
 			"idUser" => "hidden",
 			"requestRefreshParam" => "hidden",
-			"requestRefreshProject" => "hidden" 
+			"requestRefreshProject" => "hidden",
+	    "duration"=>"hidden",
+	    "durationSeconds"=>"hidden"
 	);
 	
-	private static $_colCaptionTransposition = array('connectionDateTime'=>'connection',
+	private static $_colCaptionTransposition = array(
+	    'connectionDateTime'=>'connection',
+	    'durationSeconds'=>'duration',
+	    'durationDisplay'=>'duration',
 			'lastAccessDateTime'=> 'lastAccess');
 	
 	/**
@@ -179,19 +186,30 @@ class Audit extends SqlElement {
 			}
 		}
 		$audit->lastAccessDateTime = date ( 'Y-m-d H:i:s' );
-		// date_diff is only supported from PHP 5.3
-    date_default_timezone_set('UTC');
-    $now=strtotime("now");
-		$audit->duration = date ( 'H:i:s', strtotime ( $audit->lastAccessDateTime, $now ) - strtotime ( $audit->connectionDateTime, $now ) );
-		if ($audit->duration>'23:59:59') $audit->duration='23:59:59';
-		$tz=Parameter::getGlobalParameter('paramDefaultTimezone');
-		if ($tz) date_default_timezone_set($tz); else date_default_timezone_set('Europe/Paris');;
-		// $duration=date_diff(date_create($audit->connectionDateTime), date_create($audit->lastAccessDateTime)) ;
-		// $audit->duration=$duration->format('%H%I%S');
-		//$audit->requestDisconnection = 0;
+		$audit->calculateDuration();
 		$audit->idle = 0;
 		$audit->auditDay = date ( 'Ymd' );
 		$result = $audit->save ();
+	}
+	private function calculateDuration() {
+	  // date_diff is only supported from PHP 5.3
+	  date_default_timezone_set('UTC');
+	  $now=strtotime("now");
+	  $duration=strtotime($this->lastAccessDateTime,$now) - strtotime($this->connectionDateTime,$now);
+	  debugLog($duration);
+	  $this->durationSeconds=$duration;
+	  if ($duration<86400) $this->duration=date( 'H:i:s',$duration );
+	  else $this->duration='23:59:59';
+	  // Display duration as days.Hours:Minutes.Seconds
+	  $disp='';
+	  if ($duration>=86400) {
+	    $days=floor($duration/86400);
+	    $duration=($duration%86400);
+	    $disp.=$days.'.';
+	  } 
+	  $this->durationDisplay=$disp.date('H:i:s',$duration);
+	  $tz=Parameter::getGlobalParameter('paramDefaultTimezone');
+	  if ($tz) date_default_timezone_set($tz); else date_default_timezone_set('Europe/Paris');
 	}
 	static function finishSession() {
 	  global $remoteDb;
@@ -205,10 +223,7 @@ class Audit extends SqlElement {
 			$audit->lastAccessDateTime = date ( 'Y-m-d H:i:s' );
 			$audit->requestRefreshParam = 0;
 			$audit->disconnectionDateTime = $audit->lastAccessDateTime;
-			// date_diff is only supported from PHP 5.3
-			$audit->duration = date ( 'H:i:s', strtotime ( $audit->lastAccessDateTime ) - strtotime ( $audit->connectionDateTime ) - 3600 );
-			// $duration=date_diff(date_create($audit->connectionDateTime), date_create($audit->lastAccessDateTime)) ;
-			// $audit->duration=$duration->format('%H%I%S');
+			$audit->calculateDuration();
 			$audit->idle = 1;
 			if($audit->idle== 1){
 			  $audit->sessionId=$audit->sessionId.'_'.date('YmdHis');
