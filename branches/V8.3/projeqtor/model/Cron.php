@@ -803,7 +803,6 @@ class Cron {
     $globalCronMode=true;     
     $globalCatchErrors=true;
     require_once("../model/ImapMailbox.php"); // Imap management Class
-		
     if (! ImapMailbox::checkImapEnabled()) {
       traceLog("ERROR - Cron::checkEmails() - IMAP extension not enabled in your PHP config. Cannot connect to IMAP Mailbox.");
       return;
@@ -887,8 +886,10 @@ class Cron {
   			continue;
   		}
   		// Search end of Message (this is valid for text only, treatment of html messages would require other code)  		
-  		$posEndMsg=strpos($body,"\r\n>"); // Search for Thunderbird and Gmail
-  		if ($posEndMsg) {
+  		$posEndMsg=strpos($body,"@#\PROJEQTOR\#@");
+  		if($posEndMsg){ 
+  		  $posEndMsg=strrpos(substr($body,0,$posEndMsg-20), "/@-");
+  		}else if (!$posEndMsg and strpos($body,"\r\n>")) {// Search for Thunderbird and Gmail
   		  $posEndMsg=strrpos(substr($body,0,$posEndMsg-20), "\r\n");
   		  /*if ($posEndMsg) {
   		    $posEndMsg=strrpos(substr($body,0,$posEndMsg-20), "\r\n");

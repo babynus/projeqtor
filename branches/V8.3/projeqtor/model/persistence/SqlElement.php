@@ -5182,7 +5182,7 @@ abstract class SqlElement {
     $references = $objectClass . "-" . $this->id;
     $message = $this->getMailDetail ();
     if ($directStatusMail and isset ( $directStatusMail->message )) {
-      $emailTemplateTab[0]->template = $this->parseMailMessage ( $directStatusMail->message ) . '<br/><br/>' . $emailTemplateTab[0]->template;
+      $emailTemplateTab[0]->template = $this->getMailDetail($directStatusMail->message);
     }
     //    BEGIN add gmartin Ticket #157
     $groupMails=Parameter::getGlobalParameter('mailGroupActive');
@@ -5204,7 +5204,8 @@ abstract class SqlElement {
         if ($emailTemplateTab[$j]->name == 'basic') {
           $emailTemplateTab[$j]->template = $this->getMailDetail();
           if ($directStatusMail and isset ( $directStatusMail->message )) {
-            $emailTemplateTab[$j]->template = $this->parseMailMessage ( $directStatusMail->message ) . '<br/><br/>' . $emailTemplateTab[$j]->template;
+            //florent
+            $emailTemplateTab[$j]->template =$this->getMailDetail( $directStatusMail->message);
           }
           $emailTemplateTab[$j]->title = $title;
           $emailTemplateTab[$j]->template = '<html><head><title>' . $title .
@@ -5220,6 +5221,7 @@ abstract class SqlElement {
         $resultMail[] = sendMail($destTab[$emailTemplateTab[$j]->id], $emailTemplateTab[$j]->title,
             $emailTemplateTab[$j]->template,
             $this, null, $sender, null, null, $references );
+       
       }
       
     }
@@ -5387,7 +5389,7 @@ abstract class SqlElement {
    * Get the detail of object, to be send by mail
    * This is a simplified copy of objectDetail.php, in print mode
    */
-  public function getMailDetail() {
+  public function getMailDetail($directMessage=null) {
     $currencyPosition = Parameter::getGlobalParameter ( 'currencyPosition' );
     $currency = Parameter::getGlobalParameter ( 'currency' );
     SqlList::cleanAllLists (); // To be sure...
@@ -5403,13 +5405,22 @@ abstract class SqlElement {
     $tableStart = '<table style="font-size:9pt; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;">';
     $tableEnd = '</table>';
     //florent
-    $replyMail=i18n("replyToMail");
-    $firstLine = "  <tr><td><div>=-=-=-=-=-=-=-=-=-= ".htmlEncode ( $replyMail)." =-=-=-=-=-=-=-=-=-=</div></td></tr>";
-    $secondLine = "  <tr><td><div>&nbsp;</div></td></tr>";
-    $msg = " \n ".$firstLine."\n".$secondLine."\n".$tableStart;
-    //
     $ref = $this->getReferenceUrl ();
-    $msg .= '<tr><td colspan="3" style="font-size:18pt;color:#AAAAAA"><a href="' . $ref . '" target="#">' . i18n ( get_class ( $this ) ) . ' #' . htmlEncode ( $this->id ) . '</a></td></tr>';
+    $replyMail=i18n("replyToMail");
+    $firstLine = " 
+        <table style='font-size:14pt; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;'><tr><td colspan='3' style='background:#555555;color: #FFFFFF; text-align: center;'>
+        <div style='background:#555555;color:#555555;font-size:1pt;'>@#\PROJEQTOR\#@</div><div>".htmlEncode ( $replyMail)."</div>
+        <a href='". $ref ."' target='#' style='color:white'>". i18n ( get_class ( $this ) ) ." #". htmlEncode ( $this->id ) ."</a></td></tr></table>";
+    $secondLine = "  <div>&nbsp;</div>";
+    $dmsg=(isset($directMessage))?$this->parseMailMessage ($directMessage). '<br/><br/>':'';
+    if(Parameter::getGlobalParameter('cronCheckEmailsHost')!='' and Parameter::getGlobalParameter('cronCheckEmails')>0){
+      $msg = " \n ".$firstLine."\n".$secondLine."\n".$dmsg."\n".$tableStart;
+    }else{
+      $msg = " \n ".$dmsg."\n".$tableStart;
+      $msg .= '<tr><td colspan="3" style="font-size:18pt;color:#AAAAAA"><a href="' . $ref . '" target="#">' . i18n ( get_class ( $this ) ) . ' #' . htmlEncode ( $this->id ) . '</a></td></tr>';
+    }
+    //
+   
     $nobr = false;
     foreach ( $this as $col => $val ) {
       $hide = false;
