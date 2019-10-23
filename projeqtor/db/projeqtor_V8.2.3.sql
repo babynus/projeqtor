@@ -7,3 +7,5 @@
 -- Patch on V8.2
 
 UPDATE `${prefix}menu` set isAdminMenu=1 where id=221;
+
+UPDATE `${prefix}columnselector` set formatter=null where formatter='timeFormatter';
