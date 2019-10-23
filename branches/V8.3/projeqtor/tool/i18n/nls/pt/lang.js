@@ -1355,6 +1355,8 @@ confirmDeleteProductProject: "Eliminar esta ligação entre Produto e Projeto ?"
 confirmDeleteProviderTerm: "Are you sure to delete term ?",
 confirmDeleteResourceCapacity: "Are you sure to delete this resource capacity ?",
 confirmDeleteResourceCost: "Eliminar o custo do recurso para a função ${1} ?",
+confirmDeleteResourceIncompatible: "Are you sure to delete this resource incompatible ?",
+confirmDeleteResourceSupport: "Are you sure to delete this resource support ?",
 confirmDeleteResourceSurbooking: "Confirm deletion of this surbooking period",
 confirmDeleteTestCaseRun: "Remover o caso de teste #${1} da sessão?",
 confirmDeleteVersionCompatibility: "Remover esta Versão de Compatibilidade da lista?",

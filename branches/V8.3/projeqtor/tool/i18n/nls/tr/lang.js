@@ -1355,6 +1355,8 @@ confirmDeleteProductProject: "Ürün ve Proje arasında bu bağlantıyı silinsi
 confirmDeleteProviderTerm: "Are you sure to delete term ?",
 confirmDeleteResourceCapacity: "Are you sure to delete this resource capacity ?",
 confirmDeleteResourceCost: "${1} işlevi için Kaynak maliyetini silinsin mi?",
+confirmDeleteResourceIncompatible: "Are you sure to delete this resource incompatible ?",
+confirmDeleteResourceSupport: "Are you sure to delete this resource support ?",
 confirmDeleteResourceSurbooking: "Confirm deletion of this surbooking period",
 confirmDeleteTestCaseRun: "# $ {1} test vakasını oturumdan kaldırılsın mı?",
 confirmDeleteVersionCompatibility: "Bu Sürüm Uyumluluğu listeden kaldırılsın mı?",
