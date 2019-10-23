@@ -139,3 +139,7 @@ INSERT INTO `${prefix}habilitationother` (idProfile, rightAccess, scope) VALUES
 
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
  (11,225,0,1);
+ 
+-- AUDIT IMPROVEMENT
+ALTER TABLE `${prefix}audit` ADD COLUMN `durationSeconds` int(10) unsigned default '0';
+ALTER TABLE `${prefix}audit` ADD COLUMN `durationDisplay` varchar(20);
