@@ -1355,8 +1355,6 @@ confirmDeleteProductProject: "Усунути цей зв'язок між Про�
 confirmDeleteProviderTerm: "Ви впевнені&#44 що хочете усунути термін?",
 confirmDeleteResourceCapacity: "Are you sure to delete this resource capacity ?",
 confirmDeleteResourceCost: "Усунути витратаи ресурсів для функції ${1} ?",
-confirmDeleteResourceIncompatible: "Are you sure to delete this resource incompatible ?",
-confirmDeleteResourceSupport: "Are you sure to delete this resource support ?",
 confirmDeleteResourceSurbooking: "Confirm deletion of this surbooking period",
 confirmDeleteTestCaseRun: "Усунути тестовий сценарій #${1} із сесії ?",
 confirmDeleteVersionCompatibility: "Усунути цю Згідність Версій зі списку?",
