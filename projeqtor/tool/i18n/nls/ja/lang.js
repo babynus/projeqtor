@@ -1355,8 +1355,6 @@ confirmDeleteProductProject: "この製品とプロジェクト間のリンク�
 confirmDeleteProviderTerm: "Are you sure to delete term ?",
 confirmDeleteResourceCapacity: "Are you sure to delete this resource capacity ?",
 confirmDeleteResourceCost: "役割{1}のリソースコストを削除しますか？",
-confirmDeleteResourceIncompatible: "Are you sure to delete this resource incompatible ?",
-confirmDeleteResourceSupport: "Are you sure to delete this resource support ?",
 confirmDeleteResourceSurbooking: "Confirm deletion of this surbooking period",
 confirmDeleteTestCaseRun: "テストセッションからテストケースを削除しますか？${1} ?",
 confirmDeleteVersionCompatibility: "Remove this Version Compatibility from the list ?",
