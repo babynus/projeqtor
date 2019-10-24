@@ -210,17 +210,31 @@ class Notification extends SqlElement {
    */
   public function save() {
     $userId = getSessionUser()->id;
-    
     // For new Notification
-    if (is_null($this->id)) {
-        // Inits the status to unread
-        $this->idStatusNotification = 1;
-        // Inits creationDate with today
-        $this->creationDateTime=date('Y-m-d H:i:s');
+//     if (is_null($this->id)) {
+//         // Inits the status to unread
+//         $this->idStatusNotification = 1;
+//         // Inits creationDate with today
+//         $this->creationDateTime=date('Y-m-d H:i:s');
+//         // idUser is in fact the receiver
+//         $this->idUser = $this->idResource;
+//         // idResource = connected user ==> $userId
+//         $this->idResource = $userId;
+//     }
+    if ( ! $this->id ) {
+      // Inits the status to unread
+      $this->idStatusNotification = 1;
+      // Inits creationDate with today
+      $this->creationDateTime=date('Y-m-d H:i:s');
+      if ($this->idNotificationDefinition) {
+        if ( ! $this->idUser) {$this->idUser = $this->idResource;}
+        if ( ! $this->idResource){ $this->idResource = $userId;}
+      } else {
         // idUser is in fact the receiver
         $this->idUser = $this->idResource;
         // idResource = connected user ==> $userId
         $this->idResource = $userId;
+      }
     }
     
     $old = $this->getOld();
