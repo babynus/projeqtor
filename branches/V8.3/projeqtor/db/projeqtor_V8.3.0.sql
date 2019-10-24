@@ -143,3 +143,7 @@ INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
 -- AUDIT IMPROVEMENT
 ALTER TABLE `${prefix}audit` ADD COLUMN `durationSeconds` int(10) unsigned default '0';
 ALTER TABLE `${prefix}audit` ADD COLUMN `durationDisplay` varchar(20);
+
+-- Notification improvement
+UPDATE `${prefix}notifiable` set name=notifiableItem where notifiableItem in ('EmployeeLeaveEarned', 'Leave');
+DELETE FROM `${prefix}notifiable` WHERE notifiableItem in ('Workflow', 'Status', 'LeaveType');
