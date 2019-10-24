@@ -39,6 +39,7 @@ $currentUser = getCurrentUserId ();
 $crit = array('idStatusNotification'=>1,'idUser'=>$currentUser);
 $notifsList=$notif->getSqlElementsFromCriteria($crit, false);
 foreach ($notifsList as $result) {
+    if ($result->notificationDate>date("Y-m-d") or ($result->notificationDate==date("Y-m-d") and $result->notificationTime>date('H:i:s'))) continue;
     $type=new Type($result->idNotificationType);
     $color = $type->color;
     $userId =  $result->idResource;
