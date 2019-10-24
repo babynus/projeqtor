@@ -901,6 +901,7 @@ function getTranslatedClassAndFKeyClasses($objectClassName="", $onlyResource=fal
   }
   
   $fClasses=array();
+  $objClass=new $objectClassName();
   foreach ($allFields as $field) {
     if (substr($field, 0, 2)=="id" and strpos($field, "idle")===false and substr($field, -4)!='Type' and $field!="id") {
       // Foreign Class
@@ -920,11 +921,16 @@ function getTranslatedClassAndFKeyClasses($objectClassName="", $onlyResource=fal
           $fClasses[$fClass]=i18n($fClass);
         }
       } else {
-        $fClasses[$fClass]=i18n($fClass);
+        if ($objectClassName==$fClass) {
+          $nameClass=i18n($fClass);
+        } else {
+          $nameClass=$objClass->getColCaption($field);
+        }
+        $fClasses[$fClass]=$nameClass;
+        //$fClasses[$fClass]=i18n($fClass);
       }
     }
   }
-  
   return array_merge_preserve_keys($classesList, $fClasses);
 }
 
