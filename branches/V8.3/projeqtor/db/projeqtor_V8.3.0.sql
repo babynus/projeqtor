@@ -147,3 +147,6 @@ ALTER TABLE `${prefix}audit` ADD COLUMN `durationDisplay` varchar(20);
 -- Notification improvement
 UPDATE `${prefix}notifiable` set name=notifiableItem where notifiableItem in ('EmployeeLeaveEarned', 'Leave');
 DELETE FROM `${prefix}notifiable` WHERE notifiableItem in ('Workflow', 'Status', 'LeaveType');
+
+INSERT INTO `${prefix}mailable` (`id`,`name`, `idle`) VALUES 
+(40,'CallForTender', '0');
