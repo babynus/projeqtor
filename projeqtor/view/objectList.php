@@ -968,9 +968,10 @@ $listStatus = $object->getExistingStatus();
   query="{ id: '*' }" store="objectStore"
   queryOptions="{ignoreCase:true}"
   rowPerPage="<?php echo Parameter::getGlobalParameter('paramRowPerPage');?>"
-  columnReordering="false"
+  columnReordering="true"
   rowSelector="false"
-  loadingMessage="loading..."
+  loadingMessage="loading"
+  noDataMessage="no data to display"
   fastScroll="false"
   onHeaderClick="unselectAllRows('objectGrid');selectGridRow();"
   onHeaderCellContextMenu="dijit.byId('listColumnSelector').toggleDropDown();"
@@ -1030,6 +1031,13 @@ $listStatus = $object->getExistingStatus();
       return;
     }
   </script>
+  <script type="dojo/connect" event="onMoveColumn" args="evt">
+    console.log("move of columns not stored");
+  </script>
+  <script type="dojo/connect" event="onResizeColumn" args="colIdx">
+    console.log("resize of columns not stored");
+    console.log("column index is "+colIdx);
+  </script>
   <script type="dojo/connect" event="_onFetchComplete" args="items, req">
      if (mustApplyFilter) {
        mustApplyFilter=false;
@@ -1037,6 +1045,7 @@ $listStatus = $object->getExistingStatus();
      } else {
        refreshGridCount();
      }
+     dijit.byId("objectGrid").resize();
   </script>
 </table>
 </div>
