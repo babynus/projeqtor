@@ -1037,6 +1037,7 @@ $listStatus = $object->getExistingStatus();
      } else {
        refreshGridCount();
      }
+     dijit.byId("objectGrid").resize();
   </script>
 </table>
 </div>
