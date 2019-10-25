@@ -886,9 +886,9 @@ class Cron {
   			continue;
   		}
   		// Search end of Message (this is valid for text only, treatment of html messages would require other code)  		
-  		$posEndMsg=strpos($body,"@#\PROJEQTOR\#@");
+  		$posEndMsg=strpos($body,"###PROJEQTOR###");
   		if($posEndMsg){ 
-  		  $posEndMsg=strrpos(substr($body,0,$posEndMsg-20), "/@-");
+  		  $posEndMsg=strrpos(substr($body,0,$posEndMsg-20), "###PROJEQTOR###");
   		}else if (!$posEndMsg and strpos($body,"\r\n>")) {// Search for Thunderbird and Gmail
   		  $posEndMsg=strrpos(substr($body,0,$posEndMsg-20), "\r\n");
   		  /*if ($posEndMsg) {
