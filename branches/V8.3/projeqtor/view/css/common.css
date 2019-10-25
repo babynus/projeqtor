@@ -3070,3 +3070,7 @@ table.dijitCalendarContainer {
   line-height: 20px;
   cursor: auto;
 }
+
+tr.dojoDndHorizontal .dojoDndItem {
+  display: table-cell;
+}
