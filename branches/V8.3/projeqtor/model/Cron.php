@@ -888,7 +888,7 @@ class Cron {
   		// Search end of Message (this is valid for text only, treatment of html messages would require other code)  		
   		$posEndMsg=strpos($body,"###PROJEQTOR###");
   		if($posEndMsg){ 
-  		  $posEndMsg=strrpos(substr($body,0,$posEndMsg-20), "###PROJEQTOR###");
+  		  $posEndMsg=strrpos(substr($body,0,$posEndMsg-83), "###PROJEQTOR###");
   		}else if (!$posEndMsg and strpos($body,"\r\n>")) {// Search for Thunderbird and Gmail
   		  $posEndMsg=strrpos(substr($body,0,$posEndMsg-20), "\r\n");
   		  /*if ($posEndMsg) {
@@ -941,7 +941,14 @@ class Cron {
   		  }
   		  $msg=substr($body,0,$posEndMsg);
   		}
-
+  		//florent
+  		$signIdent=Parameter::getGlobalParameter('paramSignatureAndTagToRemove');
+  		if(trim($signIdent)!=''){
+  		  $posRemoveMsg=strpos($body,$signIdent);
+  		  debugLog($posRemoveMsg);
+  		  $msg=trim(substr($body,0,$posRemoveMsg));
+  		}
+  		
   		// Remove unexpected "tags" // Valid as long as we treat emails as text
   		$msg=preg_replace('/<mailto.*?\>/','',$msg);
   		$msg=preg_replace('/<http.*?\>/','',$msg);
