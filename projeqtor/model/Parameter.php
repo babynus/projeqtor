@@ -352,6 +352,7 @@ class Parameter extends SqlElement {
       case 'csvExportUTF8':  
       case 'isManualProgress':
       case 'hideItemTypeRestrictionOnProject' : case 'SAML_isADFS' :
+      case 'automaticFeedingOfTheReal' :
         $list=array('NO'=>i18n('displayNo'),
                     'YES'=>i18n('displayYes')); 
         break;
@@ -677,12 +678,6 @@ class Parameter extends SqlElement {
           'J-10'=>i18n('daysBeforeToday',array('10')),
           'J-15'=>i18n('daysBeforeToday',array('15')),
           'J-30'=>i18n('daysBeforeToday',array('30'))
-        );
-        break;
-      case 'automaticFeedingOfTheReal' :
-        $list=array(
-          'YES'=>i18n('displayYes'),
-          'NO'=>i18n('displayNo')
         );
         break;
       case 'notApplicableValue' :
