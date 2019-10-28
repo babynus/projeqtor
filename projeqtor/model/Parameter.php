@@ -352,7 +352,7 @@ class Parameter extends SqlElement {
       case 'csvExportUTF8':  
       case 'isManualProgress':
       case 'hideItemTypeRestrictionOnProject' : case 'SAML_isADFS' :
-      case 'automaticFeedingOfTheReal' :
+      case 'automaticFeedingOfTheReal' ://florent
         $list=array('NO'=>i18n('displayNo'),
                     'YES'=>i18n('displayYes')); 
         break;
@@ -1075,7 +1075,7 @@ class Parameter extends SqlElement {
                 	            'automaticPlanningDifferentialDate'=>'list',
                 	            'automaticPlanningComplete'=>'specific',
                 	            'automaticPlanningCompleteDate'=>'list',
-                	            'automaticFeedingOfTheReal'=>'list', 
+                	            'automaticFeedingOfTheReal'=>'list',
         	                    'newColumnbAutomationRight'=>'newColumn',
         	                    'sectionImputationAlert'=>'section',
         	                    'imputationAlertCronResource'=>'specific',
