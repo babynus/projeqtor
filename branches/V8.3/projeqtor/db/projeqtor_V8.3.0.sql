@@ -30,6 +30,8 @@ INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`id
 (225,'menuChangeRequest',173,'object', 381,'ReadWritePrincipal',0,'Work Configuration EnvironmentalParameter'),
 (226,'menuChangeRequestType',79,'object',1029,NULL,NULL,0);
 
+INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
+(11,225,0,1);
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,225,1),
@@ -137,12 +139,12 @@ INSERT INTO `${prefix}habilitationother` (idProfile, rightAccess, scope) VALUES
 (1,1,'canDeleteAttachement'),
 (3,1,'canDeleteAttachement');
 
-INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
- (11,225,0,1);
- 
 -- AUDIT IMPROVEMENT
 ALTER TABLE `${prefix}audit` ADD COLUMN `durationSeconds` int(10) unsigned default '0';
 ALTER TABLE `${prefix}audit` ADD COLUMN `durationDisplay` varchar(20);
+
+ALTER TABLE `${prefix}affectation` ADD COLUMN `hideAffectation` int(1) unsigned DEFAULT 0,
+ADD COLUMN `idResourceTeam` int(12) unsigned DEFAULT NULL;
 
 -- Notification improvement
 UPDATE `${prefix}notifiable` set name=notifiableItem where notifiableItem in ('EmployeeLeaveEarned', 'Leave');
