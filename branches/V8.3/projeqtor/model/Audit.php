@@ -196,7 +196,6 @@ class Audit extends SqlElement {
 	  date_default_timezone_set('UTC');
 	  $now=strtotime("now");
 	  $duration=strtotime($this->lastAccessDateTime,$now) - strtotime($this->connectionDateTime,$now);
-	  debugLog($duration);
 	  $this->durationSeconds=$duration;
 	  if ($duration<86400) $this->duration=date( 'H:i:s',$duration );
 	  else $this->duration='23:59:59';

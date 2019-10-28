@@ -945,7 +945,6 @@ class Cron {
   		$signIdent=Parameter::getGlobalParameter('paramSignatureAndTagToRemove');
   		if(trim($signIdent)!=''){
   		  $posRemoveMsg=strpos($body,$signIdent);
-  		  debugLog($posRemoveMsg);
   		  $msg=trim(substr($body,0,$posRemoveMsg));
   		}
   		
