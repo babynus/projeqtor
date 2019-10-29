@@ -73,6 +73,11 @@ function cronPlanningComplete(){
   setSessionUser($user);
   SqlList::cleanAllLists();
   $startDatePlan=cronPlanningStartDate(Parameter::getGlobalParameter("automaticPlanningCompleteDate"));
+  $enterPlannedAsReal=Parameter::getGlobalParameter('automaticFeedingOfTheReal');
+  if ($enterPlannedAsReal=='YES') {
+    PlannedWork::enterPlannedWorkAsReal(null, $startDatePlan);  
+  }
+  
   $mode=i18n("paramAutomaticPlanningComplete");
   $mode=str_replace(array("<b>","</b>"),array("",""),$mode);
   traceLog(i18n("sectionAutomaticPlanning").' : '.$mode." - ".i18n('colStart')." - ".i18n('projects').' : '.i18n('all'));
