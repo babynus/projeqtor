@@ -590,7 +590,7 @@ class Cron {
     $currentTime = date('H:i:s');
     $crit = "idle=0 and sendEmail=1 and emailSent=0 and ( notificationDate<'$currentDate' or (notificationDate='$currentDate' and notificationTime<'$currentTime') )";
     $notif = new Notification();
-    $lstNotif = $notif->getSqlElementsFromCriteria($crit);
+    $lstNotif = $notif->getSqlElementsFromCriteria(null,false,$crit);
     foreach($lstNotif as $notif) {
       $notif->sendEmail();
     }
