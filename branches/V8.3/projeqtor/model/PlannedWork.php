@@ -1601,6 +1601,85 @@ class PlannedWork extends GeneralWork {
     self::$_planningInProgress=false;
     return $result;
   }
+  
+  public static function enterPlannedWorkAsReal($projectIdArray,$startDatePlan) {
+    global $cronnedScript;
+    debugLog("enterPlannedWorkAsReal($projectIdArray,$startDatePlan)");
+    $resources=array();
+    if (!$cronnedScript) {
+      traceLog("enterPlannedWorkAsReal must be called only for cronned calculation");
+      return;
+    }
+    $crit="workDate<'$startDatePlan'";
+    if ($projectIdArray!=null and is_array($projectIdArray) ) {
+      $crit.=" and idProject in ".transformListIntoInClause($projectIdArray);
+    }
+    debugLog("   crit=$crit");
+    $pw=new PlannedWork();
+    $pwList=$pw->getSqlElementsFromCriteria(null,false,$crit);
+    $arrayAss=array(); // Will store work to remove from left
+    $arrayPe=array();  // Will store real start and real end
+    foreach ($pwList as $pw) {
+      debugLog("  => $pw->id");
+      $work=new Work();
+      if (isset($resources[$pw->idResource])) {
+        $ress=$resources[$pw->idResource];
+      } else {
+        $r=new Resource($pw->idResource,true);
+        $ress=array('isteam'=>$r->isResourceTeam,'dates'=>array());
+        $resources[$pw->idResource]=$ress;
+      }
+      if (isset($ress['dates'][$pw->workDate])) {
+        $haswork=$ress['dates'][$pw->workDate];
+      } else {
+        $cpt=$work->countSqlElementsFromCriteria(array('idResource'=>$pw->idResource, 'workDate'=>$pw->workDate));
+        if ($cpt==0) {
+          $haswork=0;
+        } else {
+          $haswork=1;
+        }
+        $resources[$pw->idResource]['dates'][$pw->workDate]=$haswork;
+      }
+      if ($ress['isteam']) {
+        debugLog("Resource $pw->idResource is a Pool");
+        continue; // don't enter work planned on Pool
+      }
+      if ($haswork) {
+        debugLog("Resource $pw->idResource already has real work on $pw->workDate");
+        continue; //some work exist
+      }  
+      $work->idResource=$pw->idResource;
+      $work->idProject=$pw->idProject;
+      $work->refType=$pw->refType;
+      $work->refId=$pw->refId;
+      $work->idAssignment=$pw->idAssignment;
+      $work->work=$pw->work;
+      $work->workDate=$pw->workDate;
+      $work->day=$pw->day;
+      $work->week=$pw->week;
+      $work->month=$pw->month;
+      $work->year=$pw->year;
+      $work->dailyCost=$pw->dailyCost;
+      $work->cost=$pw->cost;
+      $resWork=$work->save();
+      if (! isset($arrayAss[$pw->idAssignment])) $arrayAss[$pw->idAssignment]=array('work'=>0,'start'=>$pw->workDate,'end'=>$pw->workDate);
+      $arrayAss[$pw->idAssignment]['work']+=$work->work; // Work to remove from left work
+      //if ($pw->workDate<$arrayAss[$pw->idAssignment]['start']) $arrayAss[$pw->idAssignment]['start']=$pw->workDate;
+      //if ($pw->workDate>$arrayAss[$pw->idAssignment]['end']) $arrayAss[$pw->idAssignment]['end']=$pw->workDate;
+    }
+    // Update assiognements to remove left work
+    foreach ($arrayAss as $assId=>$assAr) {
+      $ass=new Assignment($assId);
+      $left=$ass->leftWork-$assAr['work'];
+      if ($left<0) $left=0;
+      $ass->leftWork=$left;
+      //if (! $ass->realStartDate or $assAr['start']<$ass->realStartDate) $ass->realStartDate=$assAr['start'];
+      //if ($left==0 and (!$ass->realEndDate or $assAr['end']>$ass->realEndDate)) $ass->realEndDate=$assAr['end'];
+      $resAss=$ass->saveWithRefresh();
+      debugLog("save Assignment #$ass->id new left=$left : $resAss");
+    }
+  }
+
 // End of PLAN
 // ================================================================================================================================
   
@@ -1807,7 +1886,7 @@ class PlannedWork extends GeneralWork {
   
   // Store a plan item (planningelement) into storeListPlan table)
   private static function storeListPlan($listPlan,$plan) {
-scriptLog("storeListPlan(listPlan,$plan->id)");
+    scriptLog("storeListPlan(listPlan,$plan->id)");
     $listPlan['#'.$plan->id]=$plan;
     // Update planned dates of parents
     if (($plan->plannedStartDate or $plan->realStartDate) and ($plan->plannedEndDate or $plan->realEndDate) ) {
