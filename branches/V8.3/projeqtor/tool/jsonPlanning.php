@@ -1538,13 +1538,14 @@
     	}
       echo $tab.$tab.'<Task>' . $nl;
       echo $tab.$tab.$tab.'<UID>' . $line['id'] . '</UID>' . $nl;
+      echo $tab.$tab.$tab.'<projeqtorType>' . $line['reftype'] . '</projeqtorType>' . $nl;
       echo $tab.$tab.$tab.'<ID>' . $cpt . '</ID>' . $nl;  // TODO : should be order of the tack in the list
       echo $tab.$tab.$tab.'<Name>' . htmlEncode($line['refname'],'xml') . '</Name>' . $nl;
       echo $tab.$tab.$tab.'<Active>1</Active>'. $nl;
       echo $tab.$tab.$tab.'<Manual>1</Manual>'. $nl;
       echo $tab.$tab.$tab.'<Type>1</Type>' . $nl; // TODO : 0=Fixed Units, 1=Fixed Duration, 2=Fixed Work.
       echo $tab.$tab.$tab.'<IsNull>0</IsNull>' . $nl;
-      echo $tab.$tab.$tab.'<CreateDate>'.date('Y_m-d').'T'.date('H:i:s').'</CreateDate>'. $nl;
+      echo $tab.$tab.$tab.'<CreateDate>'.date('Y-m-d').'T'.date('H:i:s').'</CreateDate>'. $nl;
       echo $tab.$tab.$tab.'<WBS>' . $line['wbs'] . '</WBS>' . $nl;
       echo $tab.$tab.$tab.'<OutlineNumber>' . $line['wbs'] . '</OutlineNumber>' . $nl;
       echo $tab.$tab.$tab.'<OutlineLevel>' . (substr_count($line['wbs'],'.')+1) . '</OutlineLevel>' . $nl;
