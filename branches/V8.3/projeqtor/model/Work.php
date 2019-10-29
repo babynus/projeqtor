@@ -33,6 +33,8 @@ class Work extends GeneralWork {
 	 public $idBill;
 	 public $idWorkElement;
    public $idLeave;//Eliott - LEAVE MANAGEMENT	 
+   public $inputUser;
+   public $inputDateTime;
 	 private static $_colCaptionTransposition = array(
 	     'workDate'=>'date'
 	 );
@@ -173,6 +175,9 @@ class Work extends GeneralWork {
         }
       }
     }   
+    global $cronnedScript;
+    $this->inputUser=($cronnedScript==true)?null:getCurrentUserId();
+    $this->inputDateTime=date('Y-m-d H:i:s');
     return parent::save();
   }
   

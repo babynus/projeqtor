@@ -23,6 +23,13 @@ CREATE TABLE `${prefix}assignmentselection` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
 -- ======================================
+-- Auto input of real work
+-- ======================================
+
+ALTER TABLE `${prefix}work` ADD COLUMN `inputUser` int(12) unsigned DEFAULT NULL;
+ALTER TABLE `${prefix}work` ADD COLUMN `inputDateTime` datetime DEFAULT NULL;
+
+-- ======================================
 -- Change Request
 -- ======================================
 
@@ -30,8 +37,6 @@ INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`id
 (225,'menuChangeRequest',173,'object', 381,'ReadWritePrincipal',0,'Work Configuration EnvironmentalParameter'),
 (226,'menuChangeRequestType',79,'object',1029,NULL,NULL,0);
 
-INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
-(11,225,0,1);
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,225,1),
@@ -139,16 +144,26 @@ INSERT INTO `${prefix}habilitationother` (idProfile, rightAccess, scope) VALUES
 (1,1,'canDeleteAttachement'),
 (3,1,'canDeleteAttachement');
 
--- AUDIT IMPROVEMENT
+INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
+ (11,225,0,1),
+ (11,226,1,1);
+ 
+-- ======================================
+-- Small improvements
+-- ======================================
+ 
+-- Improve display of duration in Audit list
 ALTER TABLE `${prefix}audit` ADD COLUMN `durationSeconds` int(10) unsigned default '0';
 ALTER TABLE `${prefix}audit` ADD COLUMN `durationDisplay` varchar(20);
 
+-- Hide some affectations implicitely stored from pool affectation
 ALTER TABLE `${prefix}affectation` ADD COLUMN `hideAffectation` int(1) unsigned DEFAULT 0,
 ADD COLUMN `idResourceTeam` int(12) unsigned DEFAULT NULL;
 
--- Notification improvement
+-- Fix display of helpers in notification screen
 UPDATE `${prefix}notifiable` set name=notifiableItem where notifiableItem in ('EmployeeLeaveEarned', 'Leave');
 DELETE FROM `${prefix}notifiable` WHERE notifiableItem in ('Workflow', 'Status', 'LeaveType');
 
+-- Set Call for tender as mailable
 INSERT INTO `${prefix}mailable` (`id`,`name`, `idle`) VALUES 
 (40,'CallForTender', '0');
