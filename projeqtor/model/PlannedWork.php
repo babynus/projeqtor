@@ -1241,6 +1241,46 @@ class PlannedWork extends GeneralWork {
                   } else {
                     $cptThresholdReject=0;
                   }
+                  // Incopatible Resource
+                  if (count($ress['incompatible'])>0) {
+                    if ($profile=='GROUP') { // Activity planned : "work together" with incompatible resources
+                      $changedAss=true;
+                      $ass->notPlannedWork=$left;
+                      $plan->notPlannedWork+=$left;
+                      $incompatibleNames="";
+                      foreach ($ress['incompatible'] as $inc=>$incId) {
+                        $incompatibleNames.=(($incompatibleNames)?", ":"").SqlList::getNameFromId('Resource',$inc);
+                      }
+                      $arrayNotPlanned[$ass->id]=i18n("incompatibleResourceCannotWorkTogether",array(SqlList::getNameFromId('Resource',$ass->idResource),$incompatibleNames));
+                      $left=0;
+                      break;
+                    }
+                    foreach ($ress['incompatible'] as $inc) {
+                      if (!isset($resources[$inc])) {
+                        $resInc=new Resource($inc);
+                        $resources[$inc]=$resInc->getWork($startDate,$withProjectRepartition);
+                      } 
+                      $incRes=$resources[$inc];
+                      if (isset($incRes[$currentDate])) {
+                        $capaInc=$incRes['capacity'];
+                        $leftInc=$capaInc-$incRes[$currentDate];
+                        if ($leftInc<0) $leftInc=0;
+                        if ($value>$leftInc) {
+                          $value=$leftInc;
+                        }
+                        if ($value>0 and isset($ress[$currentDate])) {
+                          $value-=$ress[$currentDate];
+                          if ($value<0) $value=0;
+                        }
+                      }
+                    }
+                  }
+                  // Support Resource
+                  if (count($ress['support'])>0) {
+                    foreach ($ress['support'] as $sup) {
+                      
+                    }
+                  }
                   if ($value<=0.01 and $plan->indivisibility==1) {
                     if ($profile=='GROUP') {
                       $restartLoopAllAssignements=true;
