@@ -39,7 +39,6 @@ $idResource=RequestHandler::getValue('idResource');
              </td>
             <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" 
-                  style="width: 150px;"
                   name="resourceIncompatible" id="resourceIncompatible"
                   <?php echo autoOpenFilteringSelect();?>
                   value="<?php if(sessionValueExists('resourceIncompatible')){
@@ -65,7 +64,7 @@ $idResource=RequestHandler::getValue('idResource');
              <td> 
                <textarea dojoType="dijit.form.Textarea" 
                 id="resourceIncompatibleDescription" name="resourceIncompatibleDescription"
-                style="width:400px;" required="true"
+                required="true"
                 maxlength="4000"
                 class="input"></textarea>   
              </td>
