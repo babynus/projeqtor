@@ -461,7 +461,23 @@ class ResourceMain extends SqlElement {
     $result['variableCapacity']=($this->hasVariableCapacity() or $this->hasSurbookedCapacity());
     $result['weekTotalCapacity']=array();
     $result['calendar']=$this->idCalendarDefinition;
-    return $result;
+    // Incompatible resources
+    $result['incompatible']=array();
+    $resourceIncompatible = new ResourceIncompatible();
+    $critArray=array('idResource'=>$this->id);
+    $incompatibleResourceList=$resourceIncompatible->getSqlElementsFromCriteria($critArray, false);
+    foreach ($incompatibleResourceList as $inc) {
+      $result['incompatible'][$inc->idIncompatible]=$inc->idIncompatible;
+    }
+    // Support resources
+    $result['support']=array();
+    $resourceSupport = new ResourceSupport();
+    $critArray=array('idResource'=>$this->id);
+    $supportResourceList=$resourceSupport->getSqlElementsFromCriteria($critArray, false);
+    foreach ($supportResourceList as $sup) {
+      $result['support'][$sup->idSupport]=$sup->rate;
+    }   
+    return $result; 
   }
   
   private static $affectationRates=array();
