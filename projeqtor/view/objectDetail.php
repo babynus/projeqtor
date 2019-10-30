@@ -6270,7 +6270,7 @@ function drawIncompatibleResource($list, $obj, $type, $refresh=false) {
   echo '<table style="width:100%">';
   echo '<tr><td colspan=2 style="width:100%;"><table style="width:100%;">';
   echo '<tr>';
-  if (get_class($obj)=='Resource' or get_class($obj)=='ResourceTeam') {
+  if (get_class($obj)=='Resource') {
   	$idRess=$obj->id;
   } else {
   	$idRess=null;
@@ -6283,8 +6283,7 @@ function drawIncompatibleResource($list, $obj, $type, $refresh=false) {
   	echo '</td>';
   }
   echo '<td class="assignHeader" style="width:12%">'.i18n('colId').'</td>';
-  echo '<td class="assignHeader" style="width:35%">'.i18n('colName').'</td>';
-  echo '<td class="assignHeader" style="width:19%">'.i18n('colIdProfile').'</td>';
+  echo '<td class="assignHeader" style="width:73%">'.i18n('colName').'</td>';
   echo '</tr>';
   
   foreach ($list as $resInc) {
@@ -6300,10 +6299,8 @@ function drawIncompatibleResource($list, $obj, $type, $refresh=false) {
   	}
   	echo '</td>';
   	$res = new Resource($resInc->idIncompatible);
-  	$profile = SqlList::getNameFromId('Profile', $res->idProfile);
   	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($resInc->id).'</td>';
   	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($res->name).'</td>';
-  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($profile).'</td>';
   	echo '</tr>';
   }
   echo '</table></td></tr>';
@@ -6341,7 +6338,7 @@ function drawResourceSupport($list, $obj, $type, $refresh=false) {
   echo '<table style="width:100%">';
   echo '<tr><td colspan=2 style="width:100%;"><table style="width:100%;">';
   echo '<tr>';
-  if (get_class($obj)=='Resource' or get_class($obj)=='ResourceTeam') {
+  if (get_class($obj)=='Resource') {
   	$idRess=$obj->id;
   } else {
   	$idRess=null;
@@ -6354,8 +6351,7 @@ function drawResourceSupport($list, $obj, $type, $refresh=false) {
   	echo '</td>';
   }
   echo '<td class="assignHeader" style="width:12%">'.i18n('colId').'</td>';
-  echo '<td class="assignHeader" style="width:35%">'.i18n('colName').'</td>';
-  echo '<td class="assignHeader" style="width:19%">'.i18n('colIdProfile').'</td>';
+  echo '<td class="assignHeader" style="width:54%">'.i18n('colName').'</td>';
   echo '<td class="assignHeader" style="width:19%">'.i18n('colRate').'</td>';
   echo '</tr>';
   
@@ -6375,10 +6371,8 @@ function drawResourceSupport($list, $obj, $type, $refresh=false) {
   	}
   	echo '</td>';
   	$res = new Resource($resSup->idSupport);
-  	$profile = SqlList::getNameFromId('Profile', $res->idProfile);
   	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($resSup->id).'</td>';
   	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($res->name).'</td>';
-  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($profile).'</td>';
   	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($resSup->rate).'</td>';
   	echo '</tr>';
   }
