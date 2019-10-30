@@ -76,6 +76,10 @@ class ResourceTeamMain extends ResourceMain {
   public $_spe_resourceCapacity;
   public $_sec_resourceSurbooking;
   public $_spe_resourceSurbooking;
+  public $_sec_resourceIncompatible;
+  public $_spe_resourceIncompatible;
+  public $_sec_resourceSupport;
+  public $_spe_resourceSupport;
   public $_sec_Miscellaneous;
   public $isLdap;
   public $dontReceiveTeamMails;
@@ -114,7 +118,11 @@ class ResourceTeamMain extends ResourceMain {
 	      "idProfile"=>"hidden" ,
 	      "_sec_Miscellaneous"=>"hidden" ,
 	      "_sec_resourceCapacity"=>"hidden",
-        "_spe_resourceCapacity"=>"hidden",
+          "_spe_resourceCapacity"=>"hidden",
+	      "_sec_resourceIncompatible"=>"hidden",
+	      "_spe_resourceIncompatible"=>"hidden",
+	      "_sec_resourceSupport"=>"hidden",
+	      "_spe_resourceSupport"=>"hidden",
 	      "dontReceiveTeamMails"=>"hidden",
 // ELIOTT - LEAVE SYSTEM              
               "isEmployee"=>"hidden", //Hide the attribute isEmployee for the leaveManagement

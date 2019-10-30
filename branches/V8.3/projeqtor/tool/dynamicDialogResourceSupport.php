@@ -52,7 +52,6 @@ if($idSupport){
              </td>
             <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" 
-                  style="width: 150px;"
                   name="resourceSupport" id="resourceSupport"
                   <?php echo autoOpenFilteringSelect();?>
                   value="<?php if(sessionValueExists('resourceSupport')){
@@ -91,7 +90,7 @@ if($idSupport){
              <td> 
                <textarea dojoType="dijit.form.Textarea" 
                 id="resourceSupportDescription" name="resourceSupportDescription"
-                style="width:400px;" required="true"
+                required="true"
                 maxlength="4000"
                 class="input"><?php echo $description;?></textarea>   
              </td>
