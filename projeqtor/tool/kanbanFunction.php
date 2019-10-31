@@ -96,7 +96,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
         </div>
       </div>
       <div id="objectDescr' . $line ['id'] . '" dojoType="dijit.layout.ContentPane" region="center" class="dojoDndItem"
-        style="max-width:'.$ticketWidth.'px;padding:4px;font-size:12px;font-family:arial;word-wrap:break-word;max-height:300px;overflow-y:scroll;cursor:move;border-top:1px solid #CDCADB;border-bottom:1px solid #CDCADB;"
+        style="max-width:'.$ticketWidth.'px;padding:4px;font-size:12px;font-family:arial;word-wrap:break-word;max-height:300px;overflow-y:auto;cursor:move;border-top:1px solid #CDCADB;border-bottom:1px solid #CDCADB;"
         onScroll="kanbanShowDescr(\'description\',\'' . $typeKanbanC . '\', ' . $line ['id'] . ');">
         ' . $ticketDescr . '
       </div>
