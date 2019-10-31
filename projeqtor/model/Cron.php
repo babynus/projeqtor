@@ -17,7 +17,7 @@
  * more details.
  *
  * You should have received a copy of the GNU Affero General Public License along with
- * ProjeQtOr. If not, see <http://www.gnu.org/licenses/>.
+ * ProjeQtOr. If not, see <http://www.gnu.org/licenses/>. 
  *
  * You can get complete code of ProjeQtOr, other resource, help and information
  * about contributors at http://www.projeqtor.org 

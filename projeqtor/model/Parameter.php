@@ -305,6 +305,7 @@ class Parameter extends SqlElement {
       case 'autoSetAssignmentByResponsible':
       case 'autoSetUniqueComponentVersion': 
       case 'exportAssignmentsForXMLFormat':
+      case 'cronArchiveCloseItems' :
       $list=array('YES'=>i18n('displayYes'),
                   'NO'=>i18n('displayNo'));
       break;
@@ -1059,7 +1060,11 @@ class Parameter extends SqlElement {
 // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM
                               //'notificationSystemActiv'=>'list', // Now managed through module
                               'cronCheckNotifications'=>'number',
-// END - ADD BY TABARY - NOTIFICATION SYSTEM                	          
+// END - ADD BY TABARY - NOTIFICATION SYSTEM
+      	                      'sectionCronArchiveHistory'=>'section',
+      	                        'cronArchiveTime'=>'number',
+      	                        'cronArchiveCloseItems'=>'list',
+      	                        'cronArchivePlannedDate'=>'time',
                               'sectionCronImport'=>'section',
                 	            'cronImportDirectory'=>'text',
                 	            'cronCheckImport'=>'number',
