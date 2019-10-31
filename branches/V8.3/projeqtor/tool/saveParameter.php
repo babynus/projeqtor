@@ -280,6 +280,14 @@ if ($type=='habilitation') {
       if ($fld == 'mailerTestMessage'){
          $text=$val;
       }
+      if($fld =='cronArchivePlannedDate'){
+        $cronExecutionActiv = SqlElement::getSingleSqlElementFromCriteria('CronExecution', array('fonctionName'=>'archiveHistory'));
+        $hoursArchiv = substr($val, 1, 2);
+        $minutesArchiv = substr($val, 4, -3);
+        $cronExecutionActiv->cron = $minutesArchiv.' '.$hoursArchiv.' * * *';
+        $resArchi=$cronExecutionActiv->save();
+        $cronExecutionActiv->calculNextTime();
+      }
       $obj=SqlElement::getSingleSqlElementFromCriteria('Parameter', $crit);
       if ($parameterList[$fld]=='time') {
         $val=substr($val,1,5);

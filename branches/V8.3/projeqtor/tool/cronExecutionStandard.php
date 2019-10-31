@@ -158,4 +158,59 @@ function dataCloningCheckRequest(){
     }
   }
 }
+
+//florent
+function archiveHistoryIdle(){
+  $hist=new History();
+  $histArch= new HistoryArchive();
+  $archiveIdleItems=Parameter::getGlobalParameter('cronArchiveCloseItems');
+  if($archiveIdleItems=='NO'){
+    return;
+  }
+  $tableHist=$hist->getDatabaseTableName();
+  $tableHistArch=$histArch->getDatabaseTableName();
+  $colList="";
+  foreach ($hist as $fld=>$val) {
+    if (substr($fld,0,3)!='ref' or substr($fld,0,1)=='_') continue;
+    $col=$hist->getDatabaseColumnName($fld);
+    if ($col) {
+      $colList.="$col, ";
+    }
+  }
+  $colList=substr($colList,0,-2);
+  $clause=$hist->colName;
+  $clause2=$hist->newValue;
+  $query="SELECT $colList FROM $tableHist WHERE ".$clause."=idle and ".$clause2."=1";
+  debugLog($colList);
+  $res=SqlDirectElement::execute($query);
+  debugLog($res);
+}
+
+function archiveHistory(){
+  $hist=new History();
+  $histArch= new HistoryArchive();
+  $timeToArchive=Parameter::getGlobalParameter('cronArchiveTime');
+  $startArchive=Parameter::getGlobalParameter('cronArchivePlannedDate');
+  $tableHist=$hist->getDatabaseTableName();
+  $tableHistArch=$histArch->getDatabaseTableName();
+  $archivDate = date('Y-m-d', strtotime("-".$timeToArchive." day"));
+  $colList="";
+  foreach ($hist as $fld=>$val) {
+    if (substr($fld,0,1)=='_') continue;
+    $col=$hist->getDatabaseColumnName($fld);
+    if ($col) {
+      $colList.="$col, ";
+    }
+  }
+  $colList=substr($colList,0,-2);
+  $clause=$hist->operationDate;
+  $requestIns="INSERT INTO $tableHistArch ($colList)\n"
+      ."SELECT $colList FROM $tableHist WHERE ".$clause." < '".$archivDate."'"; //   INSERT INTO `archivehistory` (`idHistory`,`refType`,`refId`,`operation`,`colName`,`oldValue`,`newValue`,`operationDate`,`isWorkHistory`,`idUser`) 
+  $clauseDel="operationDate < '".$archivDate."'";
+  SqlDirectElement::execute($requestIns);
+  $res=Sql::$lastQueryNbRows;
+  if($res > 0){
+    $hist->purge($clauseDel);
+  }
+}
 ?>
