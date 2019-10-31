@@ -167,3 +167,27 @@ DELETE FROM `${prefix}notifiable` WHERE notifiableItem in ('Workflow', 'Status',
 -- Set Call for tender as mailable
 INSERT INTO `${prefix}mailable` (`id`,`name`, `idle`) VALUES 
 (40,'CallForTender', '0');
+
+--ARCHIVEHISTORY
+CREATE TABLE `${prefix}historyarchive` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `refType` varchar(100) NOT NULL,
+  `refId` int(12) unsigned NOT NULL,
+  `operation` varchar(10) DEFAULT NULL,
+  `colName` varchar(200) DEFAULT NULL,
+  `oldValue` mediumtext DEFAULT NULL,
+  `newValue` mediumtext DEFAULT NULL,
+  `operationDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `idUser` int(12) unsigned DEFAULT NULL,
+  `isWorkHistory` int(1) unsigned DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+
+INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
+('cronArchiveTime','365'),
+('cronArchiveCloseItems','YES'),
+('cronArchivePlannedDate','18:30');
+
+INSERT INTO `${prefix}cronexecution` (`cron`, `fileExecuted`, `idle` ,`fonctionName`) VALUES
+('*/5 * * * *', '../tool/cronExecutionStandard.php', 0, 'archiveHistoryIdle'),
+('30 18 * * *', '../tool/cronExecutionStandard.php', 0, 'archiveHistory');
