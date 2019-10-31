@@ -937,7 +937,7 @@ class PlannedWork extends GeneralWork {
                 $ass->notPlannedWork=$left;
                 if ($ass->optional==0) {
                   $plan->notPlannedWork+=$left;
-                  $arrayNotPlanned[$ass->id]=$left;
+                  $arrayNotPlanned[$ass->id]=i18n('planResourceNotAvailable',array(round($left,2)));
                 }              
                 $left=0;
                 break;
@@ -1085,7 +1085,7 @@ class PlannedWork extends GeneralWork {
                       	if (!$ass->plannedEndDate) $ass->plannedEndDate=$currentDate;
                       	if (!$plan->plannedStartDate) $plan->plannedStartDate=$currentDate;
                       	if (!$plan->plannedEndDate) $plan->plannedEndDate=$currentDate;
-                      	$arrayNotPlanned[$ass->id]=$left;
+                      	$arrayNotPlanned[$ass->id]=i18n('planLeftAfterEnd',array(round($left,2)));
                       	$left=0;
                       }
                       //if ($ress['variableCapacity']) {
@@ -1233,7 +1233,7 @@ class PlannedWork extends GeneralWork {
                       $ass->notPlannedWork=$left;
                       if ($ass->optional==0) {
                         $plan->notPlannedWork+=$left;
-                        $arrayNotPlanned[$ass->id]=$left;
+                        $arrayNotPlanned[$ass->id]=i18n('planThresholdTooSmall',array(round($left,2),round($plan->minimumThreshold,2)));
                       }
                       $left=0;
                       break;
