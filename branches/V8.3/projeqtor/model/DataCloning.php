@@ -633,6 +633,7 @@ class DataCloning extends SqlElement {
     
     // Copy CODE
     try {
+      debugLog("direcource=$dir_source");
       $dir_iterator=new RecursiveDirectoryIterator($dir_source, RecursiveDirectoryIterator::SKIP_DOTS);
       $iterator=new RecursiveIteratorIterator($dir_iterator, RecursiveIteratorIterator::SELF_FIRST);
       $exceptionPath=array(
@@ -640,7 +641,7 @@ class DataCloning extends SqlElement {
             "/.svn", "\\.svn",
             "/deploy", "\\deploy",
             "/html2pdf/test", "\\html2pdf\\test",
-//"/test", "\\test", 
+            "/test", "\\test", 
             "/rst/test","\\rst\\test",
             "/.externalToolBuilders", "\\.externalToolBuilders", 
             "/api", "\\api",
@@ -720,7 +721,8 @@ class DataCloning extends SqlElement {
           }
         }
         // exception
-        if ((str_replace($exceptionPath, '', $element->getPath())!=$element->getPath()) or (substr($element->getBasename(), 0, 1)==".") or (in_array($element->getBasename(), $exceptionFile))) {
+        $relativePath=substr($element->getPath(),strlen($dir_source));
+        if ((str_replace($exceptionPath, '', $relativePath)!=$relativePath) or (substr($element->getBasename(), 0, 1)==".") or (in_array($element->getBasename(), $exceptionFile))) {
           continue;
         }
         // end exception
