@@ -60,24 +60,25 @@ foreach($wkLst as $wk) {
   $dates[$wk->workDate]=$wk->workDate;
   if (!$start or $start>$wk->workDate) $start=$wk->workDate;
   if (!$end or $end<$wk->workDate) $end=$wk->workDate;
-  if (! isset($work[$wk->idAssignment])) $work[$wk->idAssignment]=array();
-  if (! isset($work[$wk->idAssignment]['resource'])) {
+  $keyAss=$wk->idAssignment.'#'.$wk->idResource;
+  if (! isset($work[$keyAss])) $work[$keyAss]=array();
+  if (! isset($work[$keyAss]['resource'])) {
     $ress=new ResourceAll($wk->idResource);
     $ressAll[$wk->idResource]=$ress;
-    $work[$wk->idAssignment]['capacity']=($ress->capacity>1)?$ress->capacity:'1';
-    $work[$wk->idAssignment]['resource']=$ress->name;
-    $work[$wk->idAssignment]['idResource']=$ress->id;
+    $work[$keyAss]['capacity']=($ress->capacity>1)?$ress->capacity:'1';
+    $work[$keyAss]['resource']=$ress->name;
+    $work[$keyAss]['idResource']=$ress->id;
     if ($ress->isResourceTeam) {
       $ass=new Assignment($wk->idAssignment);
-      $work[$wk->idAssignment]['capacity']=($ass->capacity>1)?$ass->capacity:'1';
+      $work[$keyAss]['capacity']=($ass->capacity>1)?$ass->capacity:'1';
     }
-    if ($work[$wk->idAssignment]['capacity']>1) {
-      $work[$wk->idAssignment]['resource'].=' ('.i18n('max').' = '.htmlDisplayNumericWithoutTrailingZeros($work[$wk->idAssignment]['capacity']).' '.i18n('days').')';
+    if ($work[$keyAss]['capacity']>1) {
+      $work[$keyAss]['resource'].=' ('.i18n('max').' = '.htmlDisplayNumericWithoutTrailingZeros($work[$keyAss]['capacity']).' '.i18n('days').')';
     }
   }
-  $work[$wk->idAssignment][$wk->workDate]=array('work'=>$wk->work,'type'=>'real');
-  $maxCapacity[$wk->idResource]=$work[$wk->idAssignment]['capacity'];
-  $minCapacity[$wk->idResource]=$work[$wk->idAssignment]['capacity'];
+  $work[$keyAss][$wk->workDate]=array('work'=>$wk->work,'type'=>'real');
+  $maxCapacity[$wk->idResource]=$work[$keyAss]['capacity'];
+  $minCapacity[$wk->idResource]=$work[$keyAss]['capacity'];
   $maxSurbooking[$wk->idResource]=0;
   $minSurbooking[$wk->idResource]=0;
 }
@@ -87,26 +88,27 @@ foreach($wkLst as $wk) {
   $dates[$wk->workDate]=$wk->workDate;
   if (!$start or $start>$wk->workDate) $start=$wk->workDate;
   if (!$end or $end<$wk->workDate) $end=$wk->workDate;
-  if (! isset($work[$wk->idAssignment])) $work[$wk->idAssignment]=array();
-  if (! isset($work[$wk->idAssignment]['resource'])) {
+  $keyAss=$wk->idAssignment.'#'.$wk->idResource;
+  if (! isset($work[$keyAss])) $work[$keyAss]=array();
+  if (! isset($work[$keyAss]['resource'])) {
     $ress=new ResourceAll($wk->idResource);
     $ressAll[$wk->idResource]=$ress;
-    $work[$wk->idAssignment]['capacity']=($ress->capacity>1)?$ress->capacity:'1';
-    $work[$wk->idAssignment]['resource']=$ress->name;
-    $work[$wk->idAssignment]['idResource']=$ress->id;
+    $work[$keyAss]['capacity']=($ress->capacity>1)?$ress->capacity:'1';
+    $work[$keyAss]['resource']=$ress->name;
+    $work[$keyAss]['idResource']=$ress->id;
     if ($ress->isResourceTeam) {
       $ass=new Assignment($wk->idAssignment);
-      $work[$wk->idAssignment]['capacity']=($ass->capacity>1)?$ass->capacity:'1';
+      $work[$keyAss]['capacity']=($ass->capacity>1)?$ass->capacity:'1';
     }
-    if ($work[$wk->idAssignment]['capacity']>1) {
-      $work[$wk->idAssignment]['resource'].=' ('.i18n('max').' = '.htmlDisplayNumericWithoutTrailingZeros($work[$wk->idAssignment]['capacity']).' '.i18n('days').')';
+    if ($work[$keyAss]['capacity']>1) {
+      $work[$keyAss]['resource'].=' ('.i18n('max').' = '.htmlDisplayNumericWithoutTrailingZeros($work[$keyAss]['capacity']).' '.i18n('days').')';
     }
   }
-  if (! isset($work[$wk->idAssignment][$wk->workDate]) ) {
-    $work[$wk->idAssignment][$wk->workDate]=array('work'=>$wk->work,'type'=>'planned','surbooked'=>$wk->surbooked,'surbookedWork'=>$wk->surbookedWork);
+  if (! isset($work[$keyAss][$wk->workDate]) ) {
+    $work[$keyAss][$wk->workDate]=array('work'=>$wk->work,'type'=>'planned','surbooked'=>$wk->surbooked,'surbookedWork'=>$wk->surbookedWork);
   }
-  $maxCapacity[$wk->idResource]=$work[$wk->idAssignment]['capacity'];
-  $minCapacity[$wk->idResource]=$work[$wk->idAssignment]['capacity'];
+  $maxCapacity[$wk->idResource]=$work[$keyAss]['capacity'];
+  $minCapacity[$wk->idResource]=$work[$keyAss]['capacity'];
   $maxSurbooking[$wk->idResource]=0;
   $minSurbooking[$wk->idResource]=0;
 }

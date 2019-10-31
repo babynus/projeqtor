@@ -64,6 +64,8 @@ class Assignment extends SqlElement {
   public $capacity;
   public $isResourceTeam;
   public $surbooked;
+  public $suppportedAssignment;
+  public $suppportedResource;
   
   private static $_fieldsAttributes=array("idProject"=>"required", 
     "idResource"=>"required", 

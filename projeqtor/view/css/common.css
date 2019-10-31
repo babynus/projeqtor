@@ -78,7 +78,7 @@ table.dojoDndAvatar {
   padding: 2px;
 }
 .dojoDndMove .dojoDndAvatar {
-	transform: rotate(3deg);
+	transform: rotate(1deg);
 	opacity:0.9;
 }
 .dojoDndMove .dojoDndAvatarHeader {
