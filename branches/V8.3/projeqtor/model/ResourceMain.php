@@ -460,6 +460,7 @@ class ResourceMain extends SqlElement {
     }
     $result['variableCapacity']=($this->hasVariableCapacity() or $this->hasSurbookedCapacity());
     $result['weekTotalCapacity']=array();
+    $result['normalCapacity']=$this->capacity;
     $result['calendar']=$this->idCalendarDefinition;
     // Incompatible resources
     $result['incompatible']=array();
