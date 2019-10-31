@@ -1248,14 +1248,14 @@ class PlannedWork extends GeneralWork {
                       $ass->notPlannedWork=$left;
                       $plan->notPlannedWork+=$left;
                       $incompatibleNames="";
-                      foreach ($ress['incompatible'] as $inc=>$incId) {
+                      foreach ($ress['incompatible'] as $inc=>$incValue) {
                         $incompatibleNames.=(($incompatibleNames)?", ":"").SqlList::getNameFromId('Resource',$inc);
                       }
                       $arrayNotPlanned[$ass->id]=i18n("incompatibleResourceCannotWorkTogether",array(SqlList::getNameFromId('Resource',$ass->idResource),$incompatibleNames));
                       $left=0;
                       break;
                     }
-                    foreach ($ress['incompatible'] as $inc) {
+                    foreach ($ress['incompatible'] as $inc=>$incValue) {
                       if (!isset($resources[$inc])) {
                         $resInc=new Resource($inc);
                         $resources[$inc]=$resInc->getWork($startDate,$withProjectRepartition);
@@ -1277,8 +1277,20 @@ class PlannedWork extends GeneralWork {
                   }
                   // Support Resource
                   if (count($ress['support'])>0) {
-                    foreach ($ress['support'] as $sup) {
-                      
+                    foreach ($ress['support'] as $sup=>$supRate) {
+                      if (!isset($resources[$sup])) {
+                        $resSup=new Resource($sup);
+                        $resources[$sup]=$resSup->getWork($startDate,$withProjectRepartition);
+                      }
+                      $supRes=$resources[$sup];
+                      if (isset($supRes[$currentDate])) {
+                        $capaSup=$supRes['capacity'];
+                        $leftSup=$capaSup-$supRes[$currentDate];
+                        if ($leftSup<0) $leftSup=0;
+                        if ($value>($leftSup/$supRate*100)) {
+                          $value=round($leftSup/$supRate*100,3);
+                        }
+                      }
                     }
                   }
                   if ($value<=0.01 and $plan->indivisibility==1) {
@@ -1362,78 +1374,35 @@ class PlannedWork extends GeneralWork {
                     }
                   }
                   if ($value>=0.01) {
-                    if ( $value+$planned > $r->getCapacityPeriod($currentDate)) {
-                      $surbooked=1;
-                      $surbookedWork=$value+$planned-$r->getCapacityPeriod($currentDate);
-                    }else if (isset($capacityNormal)) { // For Pools
-                      if ($value>$capacityNormal) {
-                        $surbooked=1;
-                        $surbookedWork=$value-$capacityNormal;
+                    self::storePlannedWork(
+                        $value, $planned, $plannedReserved, $withProjectRepartition,
+                        $currentDate, $week, $profile, $r, $capacity,
+                        ((isset($capacityNormal))?$capacityNormal:null), $listTopProjects,
+                        $surbooked, $surbookedWork, $ass, $plan, $arrayPlannedWork, $changedAss, 
+                        $left, $ress,
+                        null);
+                  }  
+                  // Support Resource
+                  if (count($ress['support'])>0) {
+                    foreach ($ress['support'] as $sup=>$supRate) {
+                      $supRes=$resources[$sup];
+                      $plannedSup=isset($supRes[$currentDate])?$supRes[$currentDate]:0;
+                      $valueSup=round($value*$supRate/100,3);
+                      $surbookedSup=0;
+                      $surbookedSupWork=0;
+                      $leftSup=0;
+                      if ($valueSup>0) {
+                        self::storePlannedWork(
+                          $valueSup, $plannedSup, 0, $withProjectRepartition,
+                          $currentDate, $week, $profile, null, $supRes['normalCapacity'],
+                          null, $listTopProjects,
+                          $surbookedSup, $surbookedSupWork, $ass, $plan, $arrayPlannedWork, $changedAss,
+                          $leftSup, $supRes,
+                          $sup);
                       }
                     }
-                    if ($profile=='FIXED' and $currentDate==$plan->validatedStartDate) {
-                      $fractionStart=$plan->validatedStartFraction;
-                    } else {
-                      $fractionStart=($capacity!=0)?round($planned/$capacity,2):'0';
-                    }
-                    $fraction=($capacity!=0)?round($value/$capacity,2):'1';;             
-                    $plannedWork=new PlannedWork();
-                    $plannedWork->idResource=$ass->idResource;
-                    $plannedWork->idProject=$ass->idProject;
-                    $plannedWork->refType=$ass->refType;
-                    $plannedWork->refId=$ass->refId;
-                    $plannedWork->idAssignment=$ass->id;
-                    $plannedWork->work=$value;
-                    $plannedWork->surbooked=$surbooked;
-                    $plannedWork->surbookedWork=$surbookedWork;
-                    $plannedWork->setDates($currentDate);
-                    $arrayPlannedWork[]=$plannedWork;
-                    if (! $ass->plannedStartDate or $ass->plannedStartDate>$currentDate) {
-                      $ass->plannedStartDate=$currentDate;
-                      $ass->plannedStartFraction=$fractionStart;
-                    }
-                    if (! $ass->plannedEndDate or $ass->plannedEndDate<$currentDate) {
-                      $ass->plannedEndDate=$currentDate;
-                      $ass->plannedEndFraction=min(($fractionStart+$fraction),1);
-                    }
-                    if (! $plan->plannedStartDate or $plan->plannedStartDate>$currentDate) {
-                      $plan->plannedStartDate=$currentDate;
-                      $plan->plannedStartFraction=$fractionStart;
-                    } else if ($plan->plannedStartDate==$currentDate and $plan->plannedStartFraction<$fractionStart) {
-                      $plan->plannedStartFraction=$fractionStart;
-                    }
-                    if ($surbooked) {
-                      $plan->surbooked=1;
-                      $ass->surbooked=1;
-                      $changedAss=true;
-                    }                  
-                    if (! $plan->plannedEndDate or $plan->plannedEndDate<$currentDate) {
-                      if ($ass->realEndDate && $ass->realEndDate>$currentDate) {
-                    		$plan->plannedEndDate=$ass->realEndDate;
-                    		$plan->plannedEndFraction=1;
-                    	} else {
-                        $plan->plannedEndDate=$currentDate;
-                        $plan->plannedEndFraction=min(($fractionStart+$fraction),1);
-                    	}
-                    } else if ($plan->plannedEndDate==$currentDate and $plan->plannedEndFraction<$fraction) {
-                      $plan->plannedEndFraction=min(($fractionStart+$fraction),1);
-                    }
-                    $changedAss=true;
-                    $left-=$value;
-                    $ress[$currentDate]=$value+$planned-$plannedReserved;
-                    // Set value on each project (from current to top)
-                    if ($withProjectRepartition and $value >= 0.01) {
-                      foreach ($listTopProjects as $idProject) {
-                        $projectKey='Project#' . $idProject;
-                        $plannedProj=0;
-                        if (array_key_exists($week,$ress[$projectKey])) {
-                          $plannedProj=$ress[$projectKey][$week];
-                        }
-                        $ress[$projectKey][$week]=$value+$plannedProj;               
-                      }
-                    }
-  
                   }
+
                 }            
               }
               $currentDate=addDaysToDate($currentDate,$step);
@@ -2065,6 +2034,88 @@ class PlannedWork extends GeneralWork {
       }
     }
   }
+  
+  private static function storePlannedWork(
+      $value, $planned, $plannedReserved, $withProjectRepartition,
+      $currentDate, $week, $profile, $r, $capacity, $capacityNormal,  $listTopProjects,
+      &$surbooked, &$surbookedWork, &$ass, &$plan, &$arrayPlannedWork, &$changedAss,
+      &$left, &$ress,
+      $support=null) {
+    if (!$support) {
+      if ( $value+$planned > $r->getCapacityPeriod($currentDate)) {
+        $surbooked=1;
+        $surbookedWork=$value+$planned-$r->getCapacityPeriod($currentDate);
+      }else if (isset($capacityNormal) and $capacityNormal!=null) { // For Pools
+        if ($value>$capacityNormal) {
+          $surbooked=1;
+          $surbookedWork=$value-$capacityNormal;
+        }
+      }
+    }
+    if ($profile=='FIXED' and $currentDate==$plan->validatedStartDate) {
+      $fractionStart=$plan->validatedStartFraction;
+    } else {
+      $fractionStart=($capacity!=0)?round($planned/$capacity,2):'0';
+    }
+    $fraction=($capacity!=0)?round($value/$capacity,2):'1';;
+    $plannedWork=new PlannedWork();
+    $plannedWork->idResource=($support)?$support:$ass->idResource;
+    $plannedWork->idProject=$ass->idProject;
+    $plannedWork->refType=$ass->refType;
+    $plannedWork->refId=$ass->refId;
+    $plannedWork->idAssignment=$ass->id;
+    $plannedWork->work=$value;
+    $plannedWork->surbooked=$surbooked;
+    $plannedWork->surbookedWork=$surbookedWork;
+    $plannedWork->setDates($currentDate);
+    $arrayPlannedWork[]=$plannedWork;
+    if (! $ass->plannedStartDate or $ass->plannedStartDate>$currentDate) {
+      $ass->plannedStartDate=$currentDate;
+      $ass->plannedStartFraction=$fractionStart;
+    }
+    if (! $ass->plannedEndDate or $ass->plannedEndDate<$currentDate) {
+      $ass->plannedEndDate=$currentDate;
+      $ass->plannedEndFraction=min(($fractionStart+$fraction),1);
+    }
+    if (! $plan->plannedStartDate or $plan->plannedStartDate>$currentDate) {
+      $plan->plannedStartDate=$currentDate;
+      $plan->plannedStartFraction=$fractionStart;
+    } else if ($plan->plannedStartDate==$currentDate and $plan->plannedStartFraction<$fractionStart) {
+      $plan->plannedStartFraction=$fractionStart;
+    }
+    if ($surbooked and !$support) {
+      $plan->surbooked=1;
+      $ass->surbooked=1;
+      $changedAss=true;
+    }
+    if (! $plan->plannedEndDate or $plan->plannedEndDate<$currentDate) {
+      if ($ass->realEndDate && $ass->realEndDate>$currentDate) {
+        $plan->plannedEndDate=$ass->realEndDate;
+        $plan->plannedEndFraction=1;
+      } else {
+        $plan->plannedEndDate=$currentDate;
+        $plan->plannedEndFraction=min(($fractionStart+$fraction),1);
+      }
+    } else if ($plan->plannedEndDate==$currentDate and $plan->plannedEndFraction<$fraction) {
+      $plan->plannedEndFraction=min(($fractionStart+$fraction),1);
+    }
+    $changedAss=true;
+    if (!$support) $left-=$value;
+    $ress[$currentDate]=$value+$planned-$plannedReserved;
+    // Set value on each project (from current to top)
+    if ($withProjectRepartition and $value >= 0.01) {
+      foreach ($listTopProjects as $idProject) {
+        $projectKey='Project#' . $idProject;
+        $plannedProj=0;
+        if (!isset($ress[$projectKey])) $ress[$projectKey]=array();
+        if (array_key_exists($week,$ress[$projectKey])) {
+          $plannedProj=$ress[$projectKey][$week];
+        }
+        $ress[$projectKey][$week]=$value+$plannedProj;
+      }
+    }
+  }
+  
   private static function traceArray($list) {
   	debugTraceLog('*****traceArray()*****');
   	foreach($list as $id=>$pe) {
