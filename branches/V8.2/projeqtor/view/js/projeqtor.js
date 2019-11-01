@@ -6276,30 +6276,31 @@ function resizeListDiv() {
 
 
 function checkValidatedSize(paramDiv,paramRightDiv, paramMode){
-  if(paramMode != 'switch'){
-    if(paramDiv== 'left'){
-	    if(! dojo.byId('detailRightDiv') || dojo.byId('detailRightDiv').offsetWidth==0 || paramRightDiv=='bottom'){
+  if (paramMode != 'switch'){
+    if (!dojo.byId('detailRightDiv')) return;
+    if (paramDiv== 'left'){
+	    if (! dojo.byId('detailRightDiv') || dojo.byId('detailRightDiv').offsetWidth==0 || paramRightDiv=='bottom'){
 	      if (dojo.byId("contentDetailDiv").offsetWidth<400) {
 	        var listWidth=(dojo.byId("centerDiv").offsetWidth)-410;
 	        dijit.byId("listDiv").resize({w: listWidth});
 	        resizeContainer("mainDivContainer", null);
 	        return true;
-	     }
-	   }else{
-	     if((dojo.byId("contentDetailDiv").offsetWidth - dojo.byId('detailRightDiv').offsetWidth) < 400){
-	       var detailRightWidth=(dojo.byId('contentDetailDiv').offsetWidth)-410;
-	       var listWidth=dojo.byId('centerDiv').offsetWidth-dojo.byId('contentDetailDiv').offsetWidth;
-	       if(150 > detailRightWidth){
-	         detailRightWidth=150;
-	         listWidth=(dojo.byId("centerDiv").offsetWidth)-560;
-	       }
-	       dijit.byId('listDiv').resize({w:listWidth});
-	       dijit.byId('detailRightDiv').resize({w:detailRightWidth});
-	       resizeContainer("mainDivContainer", null);
-	       return true;
-	     }
-	   }
-	  }else {
+	      }
+	    } else {
+  	    if((dojo.byId("contentDetailDiv").offsetWidth - dojo.byId('detailRightDiv').offsetWidth) < 400){
+  	      var detailRightWidth=(dojo.byId('contentDetailDiv').offsetWidth)-410;
+  	      var listWidth=dojo.byId('centerDiv').offsetWidth-dojo.byId('contentDetailDiv').offsetWidth;
+  	      if(150 > detailRightWidth){
+  	        detailRightWidth=150;
+  	        listWidth=(dojo.byId("centerDiv").offsetWidth)-560;
+  	      }
+  	      dijit.byId('listDiv').resize({w:listWidth});
+  	      dijit.byId('detailRightDiv').resize({w:detailRightWidth});
+  	      resizeContainer("mainDivContainer", null);
+  	      return true;
+  	    }
+  	  }
+	  } else {
 	    if(dojo.byId('detailRightDiv').offsetHeight==0 || paramRightDiv=='trailing'){
 	      if (dojo.byId("contentDetailDiv").offsetHeight<250) {
 	        var listWidth=(dojo.byId("centerDiv").offsetHeight)-260;
