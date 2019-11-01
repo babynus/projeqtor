@@ -917,9 +917,11 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                                     document.getElementById("notificationTree").style.visibility = "hidden";
                                     document.getElementById("menuBarNotificationCount").style.visibility = "hidden";
                                     document.getElementById("drawNotificationUnread").style.visibility = "hidden";
+                                    document.getElementById("countNotifications").style.visibility="hidden";
                                 } else {
                                     // Show and Update the Notification count in menuBar
                                     document.getElementById("notificationTree").style.visibility = "visible";
+                                    document.getElementById("countNotifications").style.visibility="visible";
                                     document.getElementById("menuBarNotificationCount").style.visibility = "visible";
                                     document.getElementById("countNotifications").innerHTML = totalCount;
                                 }
@@ -1475,7 +1477,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     <tr>
       <td>
         <!-- FORM -->
-        <form id='objectForm' name='objectForm' onSubmit="return false;">
+        <form id='objectFormDialog' name='objectFormDialog' onSubmit="return false;">
           <!-- Store the class name of the main object -->  
           <input id="mainObjectClass" name="mainObjectClass" type="hidden" value="" />
           <!-- Store the id of the instance of the main object -->            
