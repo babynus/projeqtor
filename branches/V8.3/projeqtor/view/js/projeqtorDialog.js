@@ -5107,7 +5107,7 @@ function saveLinkObject() {
   param+="&idInstanceOfMainClass="+dojo.byId('idInstanceOfMainClass').value;
   param+="&linkObjectClassName="+dojo.byId('linkObjectClassName').value
 
-  loadContent("../tool/saveObjectLinkedByIdToMainObject.php"+param, "resultDivMain", "objectForm", true, 'linkObject');
+  loadContent("../tool/saveObjectLinkedByIdToMainObject.php"+param, "resultDivMain", "objectFormDialog", true, 'linkObject');
   dijit.byId('dialogObject').hide();
 }
 
