@@ -549,6 +549,10 @@
 .iconIndividualExpenseType22 { background-image: url(images/iconIndividualExpenseType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconIndividualExpenseType16 { background-image: url(images/iconIndividualExpenseType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
+.iconIncompatible32 { background-image: url(images/iconIncompatible.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.iconIncompatible22 { background-image: url(images/iconIncompatible.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
+.iconIncompatible16 { background-image: url(images/iconIncompatible.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+
 /* BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM */
 .iconInfo16 { background-image: url(images/iconInformation.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .iconInfo22 { background-image: url(images/iconInformation.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
@@ -885,6 +889,10 @@
 .iconSeverity32 { background-image: url(images/iconSeverity32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconSeverity22 { background-image: url(images/iconSeverity22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconSeverity16 { background-image: url(images/iconSeverity16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+
+.iconSupport32 { background-image: url(images/iconSupport.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.iconSupport22 { background-image: url(images/iconSupport.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
+.iconSupport16 { background-image: url(images/iconSupport.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
 .iconStatus32 { background-image: url(images/iconStatus32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconStatus22 { background-image: url(images/iconStatus22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
