@@ -55,7 +55,6 @@ if ($currentWeek>50 and $currentMonth==1 ) {
 	$currentYear-=1;
 }
 $firstDay = date('Y-m-d', firstDayofWeek($currentWeek, $currentYear));
-$lastDay = null;
 ?>
 
 <div dojoType="dijit.layout.BorderContainer" id="imputationValidationParamDiv" name="imputationValidationParamDiv">  
@@ -143,9 +142,11 @@ $lastDay = null;
                type="text" maxlength="10" hasDownArrow="true"
                style="width:100px; text-align:center;" class="input roundedLeft"
                value="<?php if(sessionValueExists('endWeekImputationValidation')){
-                    $lastDay = date('Y-m-d', lastDayofWeek(weekNumber(getSessionValue('endWeekImputationValidation')), date('Y',strtotime(getSessionValue('endWeekImputationValidation')))));
-                    echo $lastDay;
-               }?>" >
+                    $lastWeek = weekNumber(getSessionValue('endWeekImputationValidation'));
+                    $lastYear = date('Y',strtotime(getSessionValue('endWeekImputationValidation')));
+                	$lastDay = lastDayofWeek($lastWeek, $lastYear);
+                	echo $lastDay;
+                }?>" >
                <script type="dojo/method" event="onChange" >
                  saveDataToSession('endWeekImputationValidation',formatDate(dijit.byId('endWeekImputationValidation').get("value")), false);
   				 var start = dijit.byId('startWeekImputationValidation').get('value');
