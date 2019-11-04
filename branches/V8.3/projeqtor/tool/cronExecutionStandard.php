@@ -170,7 +170,7 @@ function archiveHistory(){
   $archivDate = date('Y-m-d', strtotime("-".$timeToArchive." day"));
   $colList="";
   foreach ($hist as $fld=>$val) {
-    if (substr($fld,0,1)=='_') continue;
+    if (substr($fld,0,1)=='_' or $fld=='id') continue;
     $col=$hist->getDatabaseColumnName($fld);
     if ($col) {
       $colList.="$col, ";
