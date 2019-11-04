@@ -5576,6 +5576,30 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
       echo formatCommentThumb($assignment->comment);
       echo '</td>';
     }
+    $resInc = new ResourceIncompatible();
+    $incompatible = $resInc->getSqlElementsFromCriteria(array('idResource'=>$assignment->idResource));
+    if ($incompatible and !$print) {
+        $listImcompatible=i18n('ResourceIncompatible').' :</br>';
+        foreach ($incompatible as $id=>$val){
+          $res = new ResourceAll($val->idIncompatible);
+          $listImcompatible .= '#'.$res->id.' '.$res->name.'</br>';
+        }
+    	echo '<td title="'.i18n('resourceIncompatible').'" onmouseover="showBigImage(null,null,this, \''.$listImcompatible.'\');" onmouseout="hideBigImage();">';
+    	echo formatIcon('Incompatible', 22);
+    	echo '</td>';
+    }
+    $resSupp = new ResourceSupport();
+    $support = $resSupp->getSqlElementsFromCriteria(array('idResource'=>$assignment->idResource));
+    if ($support and !$print) {
+        $listSupport=i18n('ResourceSupport').' :</br>';
+        foreach ($support as $id=>$val){
+        	$res = new ResourceAll($val->idSupport);
+        	$listSupport .= '#'.$res->id.' '.$res->name.'</br>';
+        }
+    	echo '<td onmouseover="showBigImage(null,null,this, \''.$listSupport.'\');" onmouseout="hideBigImage();">';
+    	echo formatIcon('Support', 22);
+    	echo '</td>';
+    }
     // gautier #1702
     if (!$assignment->optional and (get_class($obj)=='Meeting' or get_class($obj)=='PeriodicMeeting')) {
       echo '<td>';
