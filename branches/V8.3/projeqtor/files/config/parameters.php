@@ -1,25 +1,43 @@
 <?php
 // =======================================================================================
-// Automatically generated parameter file
-// on 2019-10-30 16:49:49
+// PARAMETERS
 // =======================================================================================
+// ========== Database configuration =====================================================
+// --- MySql Degfault
 $paramDbType='mysql'; $paramDbPort='3306'; $paramDbUser='root'; $paramDbPassword='mysql';
 $paramDbName='projeqtor_v83';$paramDbPrefix='';
-$paramDbHost='127.0.0.1';
+// --- PostgreSql Default
+//$paramDbType='pgsql'; $paramDbPort='5432'; $paramDbName='projeqtor'; $paramDbUser='projeqtor'; $paramDbPassword='projeqtor';
+//$paramDbName='support_ige';$paramDbPrefix=''; 
+$paramDbHost='127.0.0.1';         // With MySql on Windows, better use "127.0.0.1" rather than "localhost"
+
+// ========== Log file configuration =====================================================
 $logFile='../files/logs/projeqtor_${date}.log';
-$logLevel='3';
-$enforceUTF8='1';
-$paramSupportEmail="support@projeqtor.org";
+$logLevel='3';                    // "1"=Errors, "2"=Trace, "3"=Debug, "4"=Script
+
+// ========== Contextual configuration ===================================================
+//$lockPassword="false";           // Forbid password change (used in Demo to forbit password change)
+//$hosted=true;                    // Is a hosted mode. Hide some configuration. Set to true hides Data Cloning. Set to anything else ('dedicated') enables Data Cloning
+//$flashReport=true;               // Specific evolution Parameter
+$enforceUTF8 = '1';                // Positionned by default for new installs since V4.4.0
+$paramSupportEmail="support@projeqtor.org"; // Email displayed as support mail
 $pdfNamePrefix="ProjeQtOr - ";
-$debugQuery=false;
-$debugJsonQuery=false;
-$debugPerf=true;
-$debugTraceUpdates=false;
-$debugTraceHistory=false;           // Will add trace on each save() or delete() of History and Audit (only if $debugTraceUpdates=true;
-$debugReport=true;
-$i18nNocache=true;
-$debugIEcompatibility=false;
+
+// ========== Debugging configuration ====================================================
+$debugQuery=false;                 // Debug all queries : trace Query and running time for each query
+$debugJsonQuery=false;             // Trace only JsonQuery queries  (retrieving lists)
+$debugPerf=true;                   // Add some timestamps and execution time at all debug lines
+$debugTraceUpdates=false;           // Will add trace on each save() or delete(), except for History and Audit
+$debugTraceHistory=false;           // Will add trace on each save() or delete() of History and Audit (only if $debugTraceUpdates=true;)
+$debugReport=true;                 // Displays report file name on report header
+$i18nNocache=true;                 // Will not cache i18n table, so that new values are automatically displayed without needing disconnection
+$debugIEcompatibility=false;       // If set to true, will allow compatibility mode (mode IE9 on IE11), otherwise, edge mode is forced
+//$pdfPlanningBeta='true';           // Force new PDF Export planning with all browsers (by default it only works on Chrome)
 $scaytAutoStartup='NO';
-$dataCloningDirectory="D:\www\simulation";
-$dataCloningUrl="http://localhost/simulation/";
+//$filenameCharsetForImport="WINDOWS-1252";
+//$paramReorg=false;
+//$imapFilterCriteria='UNSEEN';
+$dataCloningDirectory="D:\www\simulation";       //Modify repertory simulation avoid Eclipse conflict
+$dataCloningUrl="http://localhost/simulation/";  //Acces data cloning url for goto
+//$doNotExportAssignmentsForXMLFormat=true;      // Will not be needed anymore on V8.3 as it will become a user parameter
 //======= END
