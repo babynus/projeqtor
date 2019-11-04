@@ -5925,7 +5925,7 @@ function selectAbsenceDay(dateId, day, workDay, month, year, week, userId, isVal
 }
 
 //Imputation Validation refresh function
-function refreshImputationValidation(directDate) {
+function refreshImputationValidation(directDate, endDate) {
 	if (directDate) {
 	    var year=directDate.getFullYear();
 	    var week=getWeek(directDate.getDate(),directDate.getMonth()+1,directDate.getFullYear())+'';
@@ -5965,13 +5965,8 @@ function refreshImputationValidation(directDate) {
 		    }
 		  }
 		  var day=getFirstDayOfWeek(week,year);
-		  dijit.byId('weekImputationValidation').set('value',day);
+		  dijit.byId('startWeekImputationValidation').set('value',day);
 	}
-	
-	var end = dijit.byId('currentWeekImputationValidation');
-	var start = dijit.byId('weekImputationValidation');
-	start.constraints.max=end.get('value');
-	end.constraints.min=start.get('value');
 	formInitialize();
 	showWait();
 	var callback=function() {
