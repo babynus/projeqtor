@@ -46,16 +46,14 @@ class ImputationValidation{
 	 */
 	function __destruct() {}
 	
-	static function drawUserWorkList($idUser, $idTeam, $week){
+	static function drawUserWorkList($idUser, $idTeam, $startWeek, $endWeek){
 	  $showSubmitted = RequestHandler::getValue('showSubmitWork');
 	  $showValidated = RequestHandler::getValue('showValidatedWork');
 	  $user=getCurrentUserId();
 	  $noData = true;
 	  $critDraw = "";
 	  $result="";
-	  $startWeek = $week;
 	  $currentDay = date('Y-m-d');
-	  $endWeek = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay)));
 	  $proj = new Project();
 	  $listAdmProj = $proj->getAdminitrativeProjectList(true);
 	  $userVisbileResourceList = getListForSpecificRights('imputation');
@@ -123,6 +121,7 @@ class ImputationValidation{
 	  $result .='   </tr>';
 	  if(!isset($noResource)){
 	  $weekArray = array();
+	  $weekList = '';
 	  if($startWeek !='' and $endWeek !=''){
   	  while ($startWeek<=$endWeek){
   	    $startWeek=addDaysToDate($startWeek, 1);
@@ -136,11 +135,23 @@ class ImputationValidation{
 	  	$periodValue = new WorkPeriod();
 	  	$where = "idResource=".$idResource;
 	  	if($startWeek !='' and $endWeek !=''){
-  	  	if($critWhere){
-  	  	  $where .= $critWhere." and periodValue in ".$weekList;
-  	  	}else{
-  	  	  $where .= " and periodValue in ".$weekList;
-  	  	}
+    	  	if($critWhere){
+    	  	  $where .= $critWhere." and periodValue in ".$weekList;
+    	  	}else{
+    	  	  $where .= " and periodValue in ".$weekList;
+    	  	}
+	  	}else if ($startWeek !='' and $endWeek ==''){
+	  	  if($critWhere){
+	  	  	$where .= $critWhere." and periodValue >= '".date('YW', strtotime($startWeek))."'";
+	  	  }else{
+	  	  	$where .= " and periodValue >= '".date('YW', strtotime($startWeek))."'";
+	  	  }
+	  	}else if ($startWeek =='' and $endWeek !=''){
+	  	  if($critWhere){
+	  	  	$where .= $critWhere." and periodValue <= '".date('YW', strtotime($endWeek))."'";
+	  	  }else{
+	  	  	$where .= " and periodValue <= '".date('YW', strtotime($endWeek))."'";
+	  	  }
 	  	}
 	  	$where .= " Order by periodValue";
 	  	$periodValueList = $periodValue->getSqlElementsFromCriteria(null,null,$where);
