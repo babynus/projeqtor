@@ -39,10 +39,10 @@ $showValidated = getSessionValue('showValidatedWork','');
 $showSubmitted = getSessionValue('showSubmitWork','');
 $currentDay=date('Y-m-d');
 
-if(sessionValueExists('weekImputationValidation')){
-  $currentWeek = weekNumber(getSessionValue('weekImputationValidation'));
-  $currentYear = date('Y',strtotime(getSessionValue('weekImputationValidation')));
-  $currentMonth = date('m',strtotime(getSessionValue('weekImputationValidation')));
+if(sessionValueExists('startWeekImputationValidation')){
+  $currentWeek = weekNumber(getSessionValue('startWeekImputationValidation'));
+  $currentYear = date('Y',strtotime(getSessionValue('startWeekImputationValidation')));
+  $currentMonth = date('m',strtotime(getSessionValue('startWeekImputationValidation')));
 }else{
   $currentWeek = date('W');
   $currentYear = date('Y');
@@ -55,7 +55,7 @@ if ($currentWeek>50 and $currentMonth==1 ) {
 	$currentYear-=1;
 }
 $firstDay = date('Y-m-d', firstDayofWeek($currentWeek, $currentYear));
-$lastDay = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay)));
+$lastDay = null;
 ?>
 
 <div dojoType="dijit.layout.BorderContainer" id="imputationValidationParamDiv" name="imputationValidationParamDiv">  
@@ -113,21 +113,23 @@ $lastDay = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay
            <td>
              <div dojoType="dijit.form.DateTextBox"
               <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
-  							echo ' constraints="{datePattern:\''.getSessionValue('browserLocaleDateFormatJs').'\',max:\''.$lastDay.'\'}" ';
+  							echo ' constraints="{datePattern:\''.getSessionValue('browserLocaleDateFormatJs').'\'}" ';
   						 }?>
-               id="weekImputationValidation" name="weekImputationValidation"
+               id="startWeekImputationValidation" name="startWeekImputationValidation"
                invalidMessage="<?php echo i18n('messageInvalidDate')?>"
                type="text" maxlength="10"
                style="width:100px; text-align: center;" class="input roundedLeft"
                hasDownArrow="true"
-               value="<?php if(sessionValueExists('weekImputationValidation')){
-                    echo date('Y-m-d', firstDayofWeek(weekNumber(getSessionValue('weekImputationValidation')), date('Y',strtotime(getSessionValue('weekImputationValidation')))));
-                 }else{ 
+               value="<?php if(sessionValueExists('startWeekImputationValidation')){
+                    $firstDay = date('Y-m-d', firstDayofWeek(weekNumber(getSessionValue('startWeekImputationValidation')), date('Y',strtotime(getSessionValue('startWeekImputationValidation')))));
+                    echo $firstDay;
+               }else{ 
                     echo $firstDay; 
                  }?>" >
                <script type="dojo/method" event="onChange" >
-                 saveDataToSession('weekImputationValidation',formatDate(dijit.byId('weekImputationValidation').get("value")), false);
-                 refreshImputationValidation(this.value);
+                 saveDataToSession('startWeekImputationValidation',formatDate(dijit.byId('startWeekImputationValidation').get("value")), false);
+                 var end = dijit.byId('endWeekImputationValidation').get('value');
+                 refreshImputationValidation(this.value, end);
                </script>
              </div>
            </td>
@@ -135,15 +137,19 @@ $lastDay = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay
            <td>
            <div dojoType="dijit.form.DateTextBox"
                <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
-  							echo ' constraints="{datePattern:\''.getSessionValue('browserLocaleDateFormatJs').'\',min:\''.$firstDay.'\'}" ';
+  							echo ' constraints="{datePattern:\''.getSessionValue('browserLocaleDateFormatJs').'\'}" ';
   						 }?>
-               id="currentWeekImputationValidation" name="currentWeekImputationValidation"
+               id="endWeekImputationValidation" name="endWeekImputationValidation"
                type="text" maxlength="10" hasDownArrow="true"
                style="width:100px; text-align:center;" class="input roundedLeft"
-               value="<?php echo $lastDay; ?>">
+               value="<?php if(sessionValueExists('endWeekImputationValidation')){
+                    $lastDay = date('Y-m-d', lastDayofWeek(weekNumber(getSessionValue('endWeekImputationValidation')), date('Y',strtotime(getSessionValue('endWeekImputationValidation')))));
+                    echo $lastDay;
+               }?>" >
                <script type="dojo/method" event="onChange" >
-  						   var start = dijit.byId('weekImputationValidation').get('value');
-                 refreshImputationValidation(start);
+                 saveDataToSession('endWeekImputationValidation',formatDate(dijit.byId('endWeekImputationValidation').get("value")), false);
+  				 var start = dijit.byId('startWeekImputationValidation').get('value');
+                 refreshImputationValidation(start, this.value);
                </script>
              </div>
            </td>
@@ -220,7 +226,7 @@ $lastDay = lastDayofWeek(weekNumber($currentDay), date('Y',strtotime($currentDay
       <?php 
       RequestHandler::setValue('showSubmitWork', $showSubmitted);
       RequestHandler::setValue('showValidatedWork', $showValidated);
-      ImputationValidation::drawUserWorkList($userName, $userTeam, $firstDay);?>
+      ImputationValidation::drawUserWorkList($userName, $userTeam, $firstDay, $lastDay);?>
     </div>
   </div>  
 </div>
