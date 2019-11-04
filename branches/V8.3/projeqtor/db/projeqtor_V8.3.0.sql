@@ -196,5 +196,4 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES
 ('cronArchivePlannedDate','18:30');
 
 INSERT INTO `${prefix}cronexecution` (`cron`, `fileExecuted`, `idle` ,`fonctionName`) VALUES
-('*/5 * * * *', '../tool/cronExecutionStandard.php', 0, 'archiveHistoryIdle'),
 ('30 18 * * *', '../tool/cronExecutionStandard.php', 0, 'archiveHistory');
