@@ -2012,7 +2012,7 @@ function getTheme() {
  *          main body of the message
  * @return unknown_type
  */
-function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $boundary=null, $references=null) {
+function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $boundary=null, $references=null,$canSend=false) {
   // Code that caals sendMail :
   // + SqlElement::sendMailIfMailable() : sendMail($dest, $title, $message, $this)
   // + Cron::checkImport() : sendMail($to, $title, $message, null, null, null, $attachmentsArray, $boundary); !!! with attachments
@@ -2041,7 +2041,7 @@ function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sen
   }
 }
 
-function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $references=null) {
+function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $references=null,$canSend=false) {
   scriptLog('sendMail_phpmailer');
   global $logLevel;
   $paramMailSender=Parameter::getGlobalParameter('paramMailSender');
@@ -2079,14 +2079,14 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
   $mail->mailStatus='WAIT';
   $mail->idle='0';
   // florent
-  if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES' ){
+  if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES' and $canSend==false){
     $curUser=new Affectable(getSessionUser()->id);
     if(stristr($to,$curUser->email)){
        $to=trim(str_replace($curUser->email,"",$to));
-       if($to!=""){
+       if($to!="" ){
          $mail->mailTo=$to;
        }else{
-         return;
+         return false;
        }
     }
   }
