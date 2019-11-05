@@ -356,7 +356,7 @@ class DataCloning extends SqlElement {
     echo '<table class="crossTable" >';
     echo '<tr><td class="crossTableLine"><label class="label largeLabel">'.i18n('dataCloningCreationRequest').' : </label></td>';
     echo '<td class="crossTablePivot">';
-//     $disabled='';
+    $disabled='';
 //     if ($paramDbType=='pgsql') {
 //       $disabled='disabled';
 //     }
