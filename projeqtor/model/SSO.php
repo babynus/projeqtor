@@ -67,7 +67,7 @@ class SSO
       else if ($setting=='idpCert') return Parameter::getGlobalParameter('SAML_idpCert');
       else if ($setting=='isADFS') return (Parameter::getGlobalParameter('SAML_isADFS')=='YES')?true:false;      
       else if ($setting=='technicalContactName') return 'ProjeQtOr';
-      else if ($setting=='technicalContactEmail') return Parameter::getGlobalParameter('paramAdminMail');
+      else if ($setting=='technicalContactEmail') return ((Parameter::getGlobalParameter('paramAdminMail'))?Parameter::getGlobalParameter('paramAdminMail'):'notdefined@nomail.xyz');
       else if ($setting=='sloReturnUrl') return SqlElement::getBaseUrl().'/view/welcome.php';
       return null;
     }
