@@ -489,6 +489,33 @@ class DataCloning extends SqlElement {
     try {
       $newPwd='simu_'.$newPwdBd;
       $newPwd=strtolower($newPwd);
+      $exceptionTable=array(
+          "alert",
+          "attachment",
+          "audit",
+          "auditsummary",
+          "cronautosendreport",
+          "cronexecution",
+          "datacloning",
+          "history",
+          "kpihistory",
+          "kpivalue",
+          "language",
+          "mail",
+          "mailtosend",
+          "message",
+          "messagelegal",
+          "messagelegalfollowup",
+          "notification",
+          "notificationdefinition",
+          "projecthistory",
+          "statusmail",
+          "subscription",
+          "translationaccessright",
+          "translationcode",
+          "translationlanguage",
+          "translationvalue");
+      
       if ($dataCloning->idOrigin) {
         $PDO=$dataCloning->connexionDbSimu('simu_'.$OriginData->nameDir);
       } else {
@@ -497,67 +524,164 @@ class DataCloning extends SqlElement {
       traceLog($dataCloning->name.' - '.i18n('dataCloningStartDbCopy').' '.$newPwd);
       // pgsql
       if (Parameter::getGlobalParameter('paramDbType')=="pgsql") {
-        if (!$dataCloning->idOrigin) {
-          $originDb=$paramDbName;
-        } else {
-          $originDb='simu_'.$OriginData->nameDir;
-        }
-        $sql="SELECT pg_terminate_backend(pg_stat_activity.pid)
-          	    FROM pg_stat_activity
-          	    WHERE pg_stat_activity.datname = '".$originDb."' AND pid <> pg_backend_pid();";
-        $sql2="CREATE DATABASE ".$newPwd." WITH TEMPLATE ".$originDb.";";
-        $PDO->prepare($sql)->execute();
-        $PDO->prepare($sql2)->execute();
-        $exceptionTable="('alert','attachment','audit','auditsummary','cronautosendreport','cronexecution','datacloning','history','kpihistory'
-                  	        ,'kpivalue','language','mail','mailtosend','message','messagelegal','messagelegalfollowup','notification','notificationdefinition'
-                  	        ,'projecthistory','statusmail','subscription','translationaccessright','translationcode','translationlanguage','translationvalue')";
         
-        $sqlDropTable="SELECT table_name
-                          FROM information_schema.tables
-                          WHERE table_schema = 'public'
-                          AND table_name in ".$exceptionTable.";";
-        $PDO3=$dataCloning->connexionDbSimu($newPwd);
-        $sth=$PDO3->prepare($sqlDropTable);
-        $sth->execute();
-        $listTable=$sth->fetchAll(PDO::FETCH_COLUMN, 0);
-        foreach ($listTable as $table) {
-          $sqlTruncateTable="TRUNCATE TABLE ".$table.";";
-          $PDO3->prepare($sqlTruncateTable)->execute();
+//         if (!$dataCloning->idOrigin) {
+//           $originDb=$paramDbName;
+//         } else {
+//           $originDb='simu_'.$OriginData->nameDir;
+//         }
+//         $sql="SELECT pg_terminate_backend(pg_stat_activity.pid)
+//           	    FROM pg_stat_activity
+//           	    WHERE pg_stat_activity.datname = '".$originDb."' AND pid <> pg_backend_pid();";
+//         $sql2="CREATE DATABASE ".$newPwd." WITH TEMPLATE ".$originDb.";";
+//         $PDO->prepare($sql)->execute();
+//         $PDO->prepare($sql2)->execute();
+//         $exceptionTable="('alert','attachment','audit','auditsummary','cronautosendreport','cronexecution','datacloning','history','kpihistory'
+//                   	        ,'kpivalue','language','mail','mailtosend','message','messagelegal','messagelegalfollowup','notification','notificationdefinition'
+//                   	        ,'projecthistory','statusmail','subscription','translationaccessright','translationcode','translationlanguage','translationvalue')";
+        
+//         $sqlDropTable="SELECT table_name
+//                           FROM information_schema.tables
+//                           WHERE table_schema = 'public'
+//                           AND table_name in ".$exceptionTable.";";
+//         $PDO3=$dataCloning->connexionDbSimu($newPwd);
+//         $sth=$PDO3->prepare($sqlDropTable);
+//         $sth->execute();
+//         $listTable=$sth->fetchAll(PDO::FETCH_COLUMN, 0);
+//         foreach ($listTable as $table) {
+//           $sqlTruncateTable="TRUNCATE TABLE ".$table.";";
+//           $PDO3->prepare($sqlTruncateTable)->execute();
+//         }
+//         $connexion=$PDO3;
+        
+        $sqlCreate="CREATE DATABASE ".$newPwd.";";
+        $PDO->prepare($sqlCreate)->execute();
+        $sqlCreate = "select relname as tablename
+                      from pg_class where relkind in ('r')
+                      and relname not like 'pg_%' and relname not like 'sql_%' order by tablename";
+        $result_tables = $PDO->query($sqlCreate);
+        
+        $connexion=$dataCloning->connexionDbSimu($newPwd);
+        $sql = '';
+        
+        foreach($result_tables as $row) {
+            $hasPk=false;
+            $tableName=$row['tablename'];
+      
+          $query=" SELECT column_name , data_type , column_default, is_nullable, character_maximum_length, numeric_precision, numeric_scale
+                   FROM information_schema.columns
+                   WHERE table_schema = 'public' AND table_name = '$tableName'
+                   ORDER BY ordinal_position";
+          
+          $result_create = $PDO->query($query);
+          $sql .= 'CREATE TABLE '.$tableName.' ( ';
+          foreach ($result_create as $r){
+            $field=$r['column_name'];
+            $format='';
+            $nullable='';
+            $default='';
+            if ($r['data_type']=="integer" and substr($r['column_default'],0,7)=='nextval'){
+                $format = "serial";
+            }else if ($r['data_type']=="character varying"){
+              $format = "varchar(".$r['character_maximum_length'].")";
+   		      }else if ($r['data_type']=="numeric") {
+           		      if ($r['numeric_scale']>0) $format.="numeric(".$r['numeric_precision'].",".$r['numeric_scale'].")";
+           		          else $format.="numeric(".$r['numeric_precision'].")";
+   		      }else {
+              $format=$r['data_type'];
+            }
+   		      if ($format!='serial' and $r['is_nullable']=='NO') {
+           		      $nullable=' NOT NULL';
+            }
+            if ($format!='serial' and $r['column_default']!==null ) {
+              $default=' DEFAULT '.str_replace(array('(0)','(1)'),array('0','1'),$r['column_default']);
+            }else if ($format=='text') {
+              $default=' DEFAULT NULL';
+            }
+            $sql .= "\n  $field $format";
+                if ($nullable) $sql.=$nullable;
+                if ($default) $sql.=$default;
+                $sql.=",";
+          }
+          $sql=rtrim($sql, ",");
+          $sql .= "\n); ";
+          $sql .= "\n \n";
+          //INDEX
+          $result_index = $PDO->query("SELECT pg_index.indisprimary as ispk, pg_catalog.pg_get_indexdef(pg_index.indexrelid) as indexdef
+                                       FROM pg_catalog.pg_class c, pg_catalog.pg_class c2,pg_catalog.pg_index AS pg_index
+                                       WHERE c.relname = '$tableName'
+                                       AND c.oid = pg_index.indrelid
+                                       AND pg_index.indexrelid = c2.oid");
+          while($r = $result_index->fetch()) {
+            if ($r['ispk']) {
+              $t = str_replace("CREATE UNIQUE INDEX", "", $r['indexdef']);
+              $t = str_replace("USING btree", "|", $t);
+              $t = str_replace(" ON ", "|", $t);
+              $Temparray = explode("|", $t);
+              $sql .= "ALTER TABLE ONLY ". $Temparray[1] . " ADD CONSTRAINT " .
+              $Temparray[0] . " PRIMARY KEY " . $Temparray[2] .";\n";
+              $hasPk=true;
+            }else{
+              $sql .= $r['indexdef'].";\n";
+            }
+          }
+          $sql .= "\n ";
+          
+          if (in_array($row[0],$exceptionTable)) {
+            continue;
+          }
+          // INSERT ...
+          $result_insert = $PDO->query('SELECT * FROM '. $row[0]);
+          $sql .= "\n";
+          $cpt=0;
+          $cptMax=100; // generate an INSERT query containing max $cptMax line
+          foreach ($result_insert as $rowInsert){
+            $obj_insert = $rowInsert;
+            $virgule = false;
+            $id=null; $refType=null; $refId=null;
+            if ($cpt==0 or $cpt%$cptMax==0) {
+              if ($cpt!=0) $sql .= ";\n";
+              $sql .="INSERT INTO ". $row[0];
+              $cptFld=0;
+              foreach($obj_insert as $fld=>$val) {
+                if (is_numeric($fld)) continue;
+                if ($cptFld==0) $sql.=' (';
+                else $sql.=',';
+                $cptFld++;
+                $sql.=$fld;
+              }
+              $sql .=") VALUES\n  (";
+            }
+            else $sql.= ",\n  (";
+            $cpt++;
+            foreach($obj_insert as $fld=>$val) {
+              if (is_numeric($fld)) continue;
+              $fld=strtolower($fld);
+              $sql .= ($virgule ? ',' : '');
+              if(is_null($val)) {
+                $sql .= 'NULL';
+              } else {
+                $sql .= "'". $dataCloning->insert_clean($val,$dbType) . "'";
+              }
+              $virgule = true;
+            } // for
+            $sql .= ')';
+          }
+          if ($cpt>0) $sql .= ";\n";
+          //}
+          if ($hasPk) {
+            $sql.="SELECT setval('".$tableName."_id_seq', (SELECT MAX(id) FROM $tableName));\n";
+          }
         }
-        $connexion=$PDO3;
-      } else {
+          $connexion->exec($sql);
+      }else{
         $requete="CREATE DATABASE IF NOT EXISTS `".$newPwd."` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
         $PDO->query($requete);
         $sql='SHOW TABLE STATUS';
         $result_tables=$PDO->query($sql);
         $sql="";
         $connexion=$dataCloning->connexionDbSimu($newPwd);
-        $exceptionTable=array(
-            "alert", 
-            "attachment", 
-            "audit", 
-            "auditsummary", 
-            "cronautosendreport", 
-            "cronexecution", 
-            "datacloning", 
-            "history", 
-            "kpihistory", 
-            "kpivalue", 
-            "language", 
-            "mail", 
-            "mailtosend", 
-            "message", 
-            "messagelegal", 
-            "messagelegalfollowup", 
-            "notification", 
-            "notificationdefinition", 
-            "projecthistory", 
-            "statusmail", 
-            "subscription", 
-            "translationaccessright", 
-            "translationcode", 
-            "translationlanguage", 
-            "translationvalue");
+        
         foreach ($result_tables as $row) {
           // CREATE ..
           $result_create=$PDO->query('SHOW CREATE TABLE `'.$row['Name'].'`');
@@ -684,7 +808,7 @@ class DataCloning extends SqlElement {
             $paramContext=str_replace($paramDbNameParam, $paramDbNameParamSimu, $paramContext);
             $paramSimuIndexOrigin="\$simuIndex='$OriginData->nameDir';";
             $paramSimuIndexNew="\$simuIndex='$nameDir';";
-            $paramContext.=str_replace($paramSimuIndexOrigin, $paramSimuIndexNew, $paramContext);
+            $paramContext=str_replace($paramSimuIndexOrigin, $paramSimuIndexNew, $paramContext);
             $resUpdate=file_put_contents($parameterPhp, $paramContext);
             if (!$resUpdate) {
               errorLog(i18n("dataCloningErrorCantCreateParameter")." (1.2)");
