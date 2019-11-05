@@ -3179,7 +3179,9 @@ function drawHistoryFromObjects($refresh=false) {
   $where=' (refType, refId) in '.$inList;
   $order=' operationDate desc, id asc';
   $hist=new History();
+  $histArchive= new HistoryArchive();
   $historyList=$hist->getSqlElementsFromCriteria(null, false, $where, $order);
+  $histArchiveList=$histArchive->getSqlElementsFromCriteria(null, false, $where, $order);
   
   if ($print) {
     echo '<table width="'.$printWidth.'px;"><tr><td class="section">'.i18n('elementHistory').'</td></tr></table>';
@@ -3204,7 +3206,12 @@ function drawHistoryFromObjects($refresh=false) {
     echo '   hideEmptyTabs();';
     echo ' </script>';
   }
-  
+  echo '<div style="position:absolute;right:8px;top:3px;">';
+  echo '  <button id="historyArchive" dojoType="dijit.form.Button"  iconClass="iconHistArchive16 iconHistArchive iconSize16" > ';
+  echo '     <script type="dojo/connect" event="onClick" args="evt">';
+  echo '     </script>';
+  echo '  </button>';
+  echo '</div>';
   echo '<table style="width:100%;margin-right:10px">';
   echo '<tr>';
   echo '<td class="historyHeader" style="width:10%">'.i18n('colOperation').'</td>';

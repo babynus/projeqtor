@@ -457,7 +457,7 @@ class MeetingMain extends SqlElement {
     return parent::save();
   }
 
-  function sendMail() {
+  function sendMail($canSend=false) {
   	$paramMailSender=Parameter::getGlobalParameter('paramMailSender');
     $paramMailReplyTo=Parameter::getGlobalParameter('paramMailReplyTo');
     $paramTimezone=Parameter::getGlobalParameter('paramDefaultTimezone');
@@ -580,7 +580,7 @@ class MeetingMain extends SqlElement {
       $sent++;
     }
 
-    $result=sendMail($destList, $this->name, $vcal, $this, $headers,$sender);
+    $result=sendMail($destList, $this->name, $vcal, $this, $headers,$sender,$canSend);
     if (! $result) {
     	$sent=0;
     	$destList="";

@@ -175,7 +175,7 @@ if ($typeSendMail=="User") {
   if (array_key_exists('id', $_REQUEST)) {
     $id=$_REQUEST['id'];
     $meeting=new Meeting($id);
-    $dest=$meeting->sendMail();
+    $dest=$meeting->sendMail($canSend);
     $result=($dest!='')?'OK':'';
   }
 } else if ($typeSendMail=="Document") {

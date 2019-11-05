@@ -941,6 +941,10 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatBlue .iconHealth22 { background-image: url(customIcons/blue/iconHealth.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .iconHealth16 { background-image: url(customIcons/blue/iconHealth.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatBlue .iconHistArchive32 { background-image: url(customIcons/blue/iconHistArchive.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatBlue .iconHistArchive22 { background-image: url(customIcons/blue/iconHistArchive.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatBlue .iconHistArchive16 { background-image: url(customIcons/blue/iconHistArchive.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
 /* I */
 
 .ProjeQtOrFlatBlue .iconImportData32 { background-image: url(customIcons/blue/iconImportData.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;} 
@@ -2397,6 +2401,10 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatRed .iconHealth22 { background-image: url(customIcons/red/iconHealth.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatRed .iconHealth16 { background-image: url(customIcons/red/iconHealth.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatRed .iconHistArchive32 { background-image: url(customIcons/red/iconHistArchive.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatRed .iconHistArchive22 { background-image: url(customIcons/red/iconHistArchive.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatRed .iconHistArchive16 { background-image: url(customIcons/red/iconHistArchive.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
 /* I */
 
 .ProjeQtOrFlatRed .iconImportData32 { background-image: url(customIcons/red/iconImportData.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;} 
@@ -3850,6 +3858,10 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconHealth22 { background-image: url(customIcons/green/iconHealth.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconHealth16 { background-image: url(customIcons/green/iconHealth.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatGreen .iconHistArchive32 { background-image: url(customIcons/green/iconHistArchive.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGreen .iconHistArchive22 { background-image: url(customIcons/green/iconHistArchive.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGreen .iconHistArchive16 { background-image: url(customIcons/green/iconHistArchive.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
 /* I */
 
 .ProjeQtOrFlatGreen .iconImportData32 { background-image: url(customIcons/green/iconImportData.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;} 
@@ -5301,6 +5313,10 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconHealth32 { background-image: url(customIcons/grey/iconHealth.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGrey .iconHealth22 { background-image: url(customIcons/grey/iconHealth.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGrey .iconHealth16 { background-image: url(customIcons/grey/iconHealth.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatGrey .iconHistArchive32 { background-image: url(customIcons/grey/iconHistArchive.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGrey .iconHistArchive22 { background-image: url(customIcons/grey/iconHistArchive.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGrey .iconHistArchive16 { background-image: url(customIcons/grey/iconHistArchive.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /* I */
 
