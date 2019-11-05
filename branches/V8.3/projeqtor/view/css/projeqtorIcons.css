@@ -1098,6 +1098,14 @@
 .ProjeQtOrFlatRed .iconGlobalView { background-image: url(customIcons/red/iconGlobalView.png); }
 .ProjeQtOrFlatGreen .iconGlobalView { background-image: url(customIcons/green/iconGlobalView.png); }
 .ProjeQtOrFlatGrey .iconGlobalView { background-image: url(customIcons/grey/iconGlobalView.png); }
+/* H */
+
+.iconHistArchive { background-image: url(images/iconHistArchive.png); }
+.ProjeQtOrFlatBlue .iconHistArchive { background-image: url(customIcons/blue/iconHistArchive.png); }
+.ProjeQtOrFlatRed .iconHistArchive { background-image: url(customIcons/red/iconHistArchive.png); }
+.ProjeQtOrFlatGreen .iconHistArchive { background-image: url(customIcons/green/iconHistArchive.png); }
+.ProjeQtOrFlatGrey .iconHistArchive { background-image: url(customIcons/grey/iconHistArchive.png); }
+
 /* L */
 
 .iconLayoutList { background-image: url(images/iconLayoutList.png); }
