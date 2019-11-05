@@ -58,7 +58,7 @@ if ($line->id) {
     </td>
   </tr>
   <tr>
-    <td class="dialogLabel" ><label style="width:200px"><?php echo i18n('tooltip');?> : </label></td>
+    <td class="dialogLabel" ><label><i>(<?php echo i18n('tooltip');?>)</i><label></td>
     <td><textarea dojoType="dijit.form.Textarea"
           id="dialogJobDefinitionTitle" name="dialogJobDefinitionTitle"
           style="width: 300px;"
