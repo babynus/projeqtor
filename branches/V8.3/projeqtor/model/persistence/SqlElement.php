@@ -5230,7 +5230,8 @@ abstract class SqlElement {
       $idTemplate=(trim($directStatusMail->idEmailTemplate))?$directStatusMail->idEmailTemplate:'0';
       if ($resultMail and $resultMail[0]!='') {
         return array('result' => 'OK', 'dest' => $destTab[$idTemplate]);
-      } else {
+      //} else if (){
+      }else{
         return array('result' => '', 'dest' => $destTab[$idTemplate]);
       }
     }
