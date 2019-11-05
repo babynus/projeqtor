@@ -97,7 +97,6 @@ class History extends SqlElement {
     }
     //florent
     if(($colName=='idle' or $colName=='cancelled') and $newValue=='1' and $canArchiveIdle='YES'){
-      debugLog('obj:'.$refType.' #'.$refId);
       $tableHist=$hist->getDatabaseTableName();
       $tableHistArch=$histArch->getDatabaseTableName();
       $histArch->refType=$refType;
@@ -133,7 +132,6 @@ class History extends SqlElement {
       $requestIns="INSERT INTO $tableHistArch ($colList)\n"
       ."SELECT $colList FROM $tableHist WHERE refType='".$refType."' and refId=$refId"; 
       $clauseDel="refType='".$refType."' and refId='".$refId."'";
-      debugLog($requestIns);
       SqlDirectElement::execute($requestIns);
       $res=Sql::$lastQueryNbRows;
       if($res > 0){
