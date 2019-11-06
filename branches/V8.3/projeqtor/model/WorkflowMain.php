@@ -479,6 +479,7 @@ class WorkflowMain extends SqlElement {
         //$result.='<div>';
       }
       $result.='<table style="zoom:90%;margin:0; spacing:0; padding:0; background-color:#FFFFFF;">';
+      $result .= '<tr><td style="padding:10px;font-weight:bold;font-size:150%;color:#000000;text-align:left" colspan="' . (count($statusList)*2+1) .'"><span style="background-color:#EEEEEE;border-radius:20px;padding:5px 15px;width:auto">'.$this->name.'</span></td></tr>';
       $result.='<tr><td colspan="' . (count($statusList)*2+1) .'"><div style="height: ' . $sepHeight . 'px;"></div></td></tr>';
       $i=0;
       foreach($statusList as $idL=>$nameL) {
