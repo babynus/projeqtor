@@ -35,6 +35,7 @@ ALTER TABLE `${prefix}work` ADD COLUMN `inputDateTime` datetime DEFAULT NULL;
 
 ALTER TABLE `${prefix}assignment` ADD COLUMN `supportedAssignment` int(12) unsigned DEFAULT NULL;
 ALTER TABLE `${prefix}assignment` ADD COLUMN `supportedResource` int(12) unsigned DEFAULT NULL;
+ALTER TABLE `${prefix}assignment` ADD COLUMN `hasSupport` int(1) unsigned DEFAULT 0;
 
 -- ======================================
 -- Change Request
