@@ -290,6 +290,7 @@ class Assignment extends SqlElement {
               $ass->assignedWork-=$subtractable;
               if ($ass->assignedWork<0) $ass->assignedWork=0;
               $ass->leftWork-=$subtractable;
+              debugLog($ass->leftWork);
               if ($ass->leftWork<0) $ass->leftWork=0;
               if ($ass->leftWork==0 and $ass->realWork==0) {
                 $ass->delete();
@@ -336,6 +337,7 @@ class Assignment extends SqlElement {
         $this->plannedWork=$this->leftWork+$old->realWork;
         $this->plannedCost=$this->leftCost+$old->realCost;
       }
+      $this->leftWork=round($this->leftWork,5);
       $query="UPDATE ".$this->getDatabaseTableName(). " SET ";
       foreach($fields as $field) {
         if (substr($field,-4)!='Date') {
