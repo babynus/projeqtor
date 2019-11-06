@@ -66,6 +66,7 @@ class Assignment extends SqlElement {
   public $surbooked;
   public $supportedAssignment;
   public $supportedResource;
+  public $hasSupport;
   
   private static $_fieldsAttributes=array("idProject"=>"required", 
     "idResource"=>"required", 
@@ -148,6 +149,12 @@ class Assignment extends SqlElement {
     
     $r=new ResourceAll($this->idResource);
     $this->isResourceTeam=$r->isResourceTeam; // Store isResourceTeam from Resource for convenient use
+    if (!$this->id) { // on creation
+      $thiS->hasSupport=0;
+      $rs=new ResourceSupport();
+      $cpt=$rs->countSqlElementsFromCriteria(array('idResource'=>$this->idResource));
+      if ($cpt>0) $this->hasSupport=1;
+    }
       
     // If idRole not set, set to default for resource
     if (! $this->idRole) {
