@@ -693,7 +693,10 @@ class DataCloning extends SqlElement {
             $connexion->exec($sql);
             $sql="";
           }
-          if (str_replace($exceptionTable, '', $row[0])!=$row[0]) {
+//        if (str_replace($exceptionTable, '', $row[0])!=$row[0]) {
+//          continue;
+//        }
+          if (in_array($row[0],$exceptionTable)) {
             continue;
           }
           // INSERT ...
