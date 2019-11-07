@@ -149,8 +149,8 @@ class Assignment extends SqlElement {
     
     $r=new ResourceAll($this->idResource);
     $this->isResourceTeam=$r->isResourceTeam; // Store isResourceTeam from Resource for convenient use
-    if (!$this->id) { // on creation
-      $thiS->hasSupport=0;
+    if (!$this->id and !$this->supportedAssignment) { // on creation
+      $this->hasSupport=0;
       $rs=new ResourceSupport();
       $cpt=$rs->countSqlElementsFromCriteria(array('idResource'=>$this->idResource));
       if ($cpt>0) $this->hasSupport=1;
@@ -329,6 +329,14 @@ class Assignment extends SqlElement {
       Project::setNeedReplan($this->idProject);
     }
     
+    if ($this->hasSupport and ($this->assignedWork!=$old->assignedWork or $this->leftWork!=$old->leftWork or $this->idle!=$old->idle or $this->rate!=$old->rate)) { // If resource has support, create / update support assignments
+      $rs=new ResourceSupport();
+      $lst=$rs->getSqlElementsFromCriteria(array('idResource'=>$this->idResource));
+      foreach ($lst as $rs) {
+        $rs->manageSupportAssignment($this);
+      }
+    }
+    
     return $result;
   }
   
@@ -436,6 +444,15 @@ class Assignment extends SqlElement {
       Project::setNeedReplan($this->idProject);
     }
     // Dispatch value
+    
+    if ($this->hasSupport) { // If resource has support, delete support assignments
+      $rs=new ResourceSupport();
+      $lst=$this->getSqlElementsFromCriteria(array('supportedAssignment'=>$this->id));
+      foreach ($lst as $asSup) {
+        $asSup->delete();
+      }
+    }
+    
     return $result;
   }
   
