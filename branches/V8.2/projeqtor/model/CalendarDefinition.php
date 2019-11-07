@@ -356,6 +356,8 @@ class CalendarDefinition extends SqlElement {
   		 . ' constraints="{min:2000,max:2100,places:0,pattern:\'###0\'}" intermediateChanges="true" maxlength="4" '
        . ' value="'. $currentYear.'" smallDelta="1" id="calendartYearSpinner" name="calendarYearSpinner" >'
   		 . ' <script type="dojo/method" event="onChange" >'
+  		 . '  saveDataToSession("calendarYear",this.value);'
+  		 . '  saveDataToSession("calendarYearId",'.$this->id.');'
   		 . ' 	loadContent("../tool/saveCalendar.php?idCalendarDefinition='.htmlEncode($this->id).'&year="+this.value,"CalendarDefinition_Calendar");'
   		 . ' </script>'
   		 . '</div>';
