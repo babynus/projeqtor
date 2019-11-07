@@ -79,6 +79,7 @@ class ResourceSupport extends SqlElement {
   }
   
   public function manageSupportAssignment($ass) {
+    if ($ass->refType!='Activity') return null;
     $asSup=SqlElement::getSingleSqlElementFromCriteria('Assignment', array('supportedAssignment'=>$ass->id,'idResource'=>$this->idSupport));
     if (!$asSup->id) {
       $asSup->idResource=$this->idSupport;
@@ -106,7 +107,12 @@ class ResourceSupport extends SqlElement {
     $assList=$ass->getSqlElementsFromCriteria(array('idResource'=>$this->idResource));
     foreach ($assList as $ass) {
       $this->manageSupportAssignment($ass);
+      if (getLastOperationStatus($result)=='OK' and !$ass->hasSupport) {
+        $ass->hasSupport=1;
+        $ass->simpleSave();
+      }
     }
+    
     return $result;
   }
   
@@ -116,6 +122,14 @@ class ResourceSupport extends SqlElement {
     $assList=$ass->getSqlElementsFromCriteria(array('supportedResource'=>$this->idResource,'idResource'=>$this->idSupport));
     foreach ($assList as $ass) {
       $ass->delete();
+    }
+    $cpt=$this->countSqlElementsFromCriteria(array('idResource'=>$this->idResource));
+    if ($cpt==0) {
+      $assList=$ass->getSqlElementsFromCriteria(array('idResource'=>$this->idResource));
+      foreach ($assList as $ass) {
+        $ass->hasSupport=0;
+        $ass->simpleSave();
+      }
     }
     return $result;
   }

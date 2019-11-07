@@ -235,6 +235,7 @@ class PlannedWork extends GeneralWork {
     $uniqueResourceAssignment=null;
 //-- Treat each PlanningElement ---------------------------------------------------------------------------------------------------
     foreach ($listPlan as $plan) {
+      debugLog("***** $plan->refName *****");
       if (! $plan->id) {
         continue;
       }
@@ -666,6 +667,7 @@ class PlannedWork extends GeneralWork {
             }
           }
           foreach ($listAss as $keyAss=>$ass) {
+            if ($ass->supportedAssignment) continue;
             if (isset($uniqueResourceAssignment[$ass->id][$ass->idResource])) {
               // UNIQUE RESOURCE TO PLAN
             } else if ($ass->uniqueResource) {
@@ -1376,46 +1378,48 @@ class PlannedWork extends GeneralWork {
                     }
                   }
                   if ($value>=0.01) {
+                    debugLog("ass=$ass->id resource=$ass->idResource currentDate=$currentDate value=$value");
                     self::storePlannedWork(
                         $value, $planned, $plannedReserved, $withProjectRepartition,
                         $currentDate, $week, $profile, $r, $capacity,
                         ((isset($capacityNormal))?$capacityNormal:null), $listTopProjects,
                         $surbooked, $surbookedWork, $ass, $plan, $arrayPlannedWork, $changedAss, 
                         $left, $ress,
-                        null);
-                  }  
-                  // Support Resource
-                  if (count($ress['support'])>0) {
-                    foreach ($ress['support'] as $sup=>$supRate) {
-                      $supRes=$resources[$sup];
-                      $plannedSup=isset($supRes[$currentDate])?$supRes[$currentDate]:0;
-                      $valueSup=round($value*$supRate/100,3);
-                      $surbookedSup=0;
-                      $surbookedSupWork=0;
-                      $leftSup=0;
-                      if ($valueSup>0) {
-                        $keySupAss=$ass->id.'#'.$sup;
-                        if (!isset($supportAssignments[$keySupAss])) {
-                          $supportAss=SqlElement::getSingleSqlElementFromCriteria('Assignment', array('idResource'=>$sup,'supportedAssignment'=>$ass->id));
-                          if (! $supportAss->id) { // Assignment for support does not exist : will create it
-                            $rs=SqlElement::getSingleSqlElementFromCriteria('ResourceSupport', array('idResource'=>$ass->id,'idSupport'=>$sup));
-                            $supportAss=$rs->manageSupportAssignment($ass);
+                        null);                    
+                    // Support Resource
+                    if (count($ress['support'])>0) {
+                      foreach ($ress['support'] as $sup=>$supRate) {
+                        $supRes=$resources[$sup];
+                        $plannedSup=isset($supRes[$currentDate])?$supRes[$currentDate]:0;
+                        $valueSup=round($value*$supRate/100,3);
+                        $surbookedSup=0;
+                        $surbookedSupWork=0;
+                        $leftSup=0;
+                        if ($valueSup>0) {
+                          $keySupAss=$ass->id.'#'.$sup;
+                          if (!isset($supportAssignments[$keySupAss])) {
+                            $supportAss=SqlElement::getSingleSqlElementFromCriteria('Assignment', array('idResource'=>$sup,'supportedAssignment'=>$ass->id));
+                            if (! $supportAss->id) { // Assignment for support does not exist : will create it
+                              $rs=SqlElement::getSingleSqlElementFromCriteria('ResourceSupport', array('idResource'=>$ass->id,'idSupport'=>$sup));
+                              $supportAss=$rs->manageSupportAssignment($ass);
+                            }
+                          } else {
+                            $supportAss=$supportAssignments[$keySupAss];
                           }
-                        } else {
-                          $supportAss=$supportAssignments[$keySupAss];
+                          if (!$supportAss) continue;
+                          debugLog("  => ass=$supportAss->id resource=$supportAss->idResource currentDate=$currentDate value=$value");
+                          self::storePlannedWork(
+                            $valueSup, $plannedSup, 0, $withProjectRepartition,
+                            $currentDate, $week, $profile, null, $supRes['normalCapacity'],
+                            null, $listTopProjects,
+                            $surbookedSup, $surbookedSupWork, $supportAss, $plan, $arrayPlannedWork, $changedAss,
+                            $leftSup, $supRes,
+                            $sup);
+                          $supportAssignments[$keySupAss]=$supportAss;
                         }
-                        self::storePlannedWork(
-                          $valueSup, $plannedSup, 0, $withProjectRepartition,
-                          $currentDate, $week, $profile, null, $supRes['normalCapacity'],
-                          null, $listTopProjects,
-                          $surbookedSup, $surbookedSupWork, $supportAss, $plan, $arrayPlannedWork, $changedAss,
-                          $leftSup, $supRes,
-                          $sup);
-                        $supportAssignments[$keySupAss]=$supportAss;
                       }
                     }
                   }
-
                 }            
               }
               $currentDate=addDaysToDate($currentDate,$step);
