@@ -53,6 +53,7 @@ if($idSupport){
             <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" 
                   name="resourceSupport" id="resourceSupport"
+                  <?php if ($idSupport) echo ' readonly '?>
                   <?php echo autoOpenFilteringSelect();?>
                   value="<?php if(sessionValueExists('resourceSupport')){
                                 $resourceSupport = getSessionValue('resourceSupport');

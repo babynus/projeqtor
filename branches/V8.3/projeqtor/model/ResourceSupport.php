@@ -64,6 +64,7 @@ class ResourceSupport extends SqlElement {
     if($this->idResource == $this->idSupport){
     	$result=i18n('errorCannotSelfSupport');
     }
+    
     $resInc = new ResourceIncompatible();
     $inc = $resInc->getSingleSqlElementFromCriteria('ResourceIncompatible', array('idResource'=>$this->idSupport, 'idIncompatible'=>$this->idResource));
     if($inc->id){
@@ -71,7 +72,7 @@ class ResourceSupport extends SqlElement {
     }
     $resSup = new ResourceSupport();
     $supp = $resSup->getSingleSqlElementFromCriteria('ResourceSupport', array('idResource'=>$this->idResource, 'idSupport'=>$this->idSupport));
-    if($supp->id){
+    if($supp->id and $supp->id!=$this->id){
     	$result=i18n('errorDuplicate');
     }
     return $result;
@@ -99,5 +100,24 @@ class ResourceSupport extends SqlElement {
     return $asSup;
   }
   
+  public function save() {
+    $result=parent::save();
+    $ass=new Assignment();
+    $assList=$ass->getSqlElementsFromCriteria(array('idResource'=>$this->idResource));
+    foreach ($assList as $ass) {
+      $this->manageSupportAssignment($ass);
+    }
+    return $result;
+  }
+  
+  public function delete() {
+    $result=parent::delete();
+    $ass=new Assignment();
+    $assList=$ass->getSqlElementsFromCriteria(array('supportedResource'=>$this->idResource,'idResource'=>$this->idSupport));
+    foreach ($assList as $ass) {
+      $ass->delete();
+    }
+    return $result;
+  }
 }
 ?>
