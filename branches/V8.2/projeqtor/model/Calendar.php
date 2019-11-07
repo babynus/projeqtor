@@ -452,7 +452,7 @@ class Calendar extends SqlElement {
       } else {
       	$y=date('Y');
       }
-      // gautier 4282
+      // gautier #4282
       if($print and sessionValueExists('calendarYear') and sessionValueExists('calendarYearId')){
         $idCalendarDefinition = getSessionValue('calendarYearId');
         if($this->idCalendarDefinition == $idCalendarDefinition){
