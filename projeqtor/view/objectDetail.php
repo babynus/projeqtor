@@ -5524,7 +5524,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
   echo '</tr>';
   $fmt=new NumberFormatter52($browserLocale, NumberFormatter52::DECIMAL);
   foreach ($list as $assignment) {
-    $idleClass=$assignment->idle?' affectationIdleClass':'';
+    $idleClass=($assignment->idle or $assignment->supportedAssignment)?' affectationIdleClass':'';
     echo '<tr>';
     $isResource=true;
     $resName=SqlList::getNameFromId('Resource', $assignment->idResource);
@@ -5537,14 +5537,14 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
     }
     if (!$print and $canUpdate) {
       echo '<td class="assignData'.$idleClass.'" style="width:10%;text-align:center;white-space:nowrap;vertical-align:middle">';
-      if ($canUpdate and !$print and $workVisible) {
+      if ($canUpdate and !$print and $workVisible and !$assignment->supportedAssignment) {
         echo '  <a onClick="editAssignment('."'".htmlEncode($assignment->id)."'".",'".htmlEncode($assignment->idResource)."'".",'".htmlEncode($assignment->idRole)."'".",'".($assignment->dailyCost*100)."'".",'".htmlEncode($assignment->rate)."'".",'".(Work::displayWork($assignment->assignedWork)*100)."'".",'".(Work::displayWork($assignment->realWork)*100)."'".",'".(Work::displayWork($assignment->leftWork)*100)."'".",'".Work::displayShortWorkUnit()."'".",".$assignment->optional.');" '.'title="'.i18n('editAssignment').'" > '.formatSmallButton('Edit').'</a>';
         echo '<textarea style="display:none" id="comment_assignment_'.htmlEncode($assignment->id).'" >'.htmlEncode($assignment->comment)."</textarea>";
       }
-      if ($assignment->realWork==0 and $canUpdate and !$print and $workVisible) {
+      if ($assignment->realWork==0 and $canUpdate and !$print and $workVisible and !$assignment->supportedAssignment) {
         echo '  <a onClick="removeAssignment('."'".htmlEncode($assignment->id)."','".(Work::displayWork($assignment->realWork)*100)."','".htmlEncode($resName, 'quotes')."'".');" '.'title="'.i18n('removeAssignment').'" > '.formatSmallButton('Remove').'</a>';
       }
-      if ($canUpdate and !$print and $workVisible and !$assignment->idle) {
+      if ($canUpdate and !$print and $workVisible and !$assignment->idle and !$assignment->supportedAssignment) {
         echo '  <a onClick="divideAssignment('.htmlEncode($assignment->id).',\''.Work::displayShortWorkUnit().'\');" '.'title="'.i18n('divideAssignment').'" > '.formatSmallButton('Split').'</a>';
         echo '</td>';
       }else{
@@ -5589,7 +5589,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
         $listImcompatible=i18n('ResourceIncompatible').' :</br>';
         foreach ($incompatible as $id=>$val){
           $res = new ResourceAll($val->idIncompatible);
-          $listImcompatible .= '#'.$res->id.' '.$res->name.'</br>';
+          $listImcompatible .= '&nbsp;&nbsp;&nbsp;#'.$res->id.' '.$res->name.'</br>';
         }
     	echo '<td title="'.i18n('resourceIncompatible').'" onmouseover="showBigImage(null,null,this, \''.$listImcompatible.'\');" onmouseout="hideBigImage();">';
     	echo formatIcon('Incompatible', 22);
@@ -5601,11 +5601,18 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
         $listSupport=i18n('ResourceSupport').' :</br>';
         foreach ($support as $id=>$val){
         	$res = new ResourceAll($val->idSupport);
-        	$listSupport .= '#'.$res->id.' '.$res->name.'</br>';
+        	$listSupport .= '&nbsp;&nbsp;&nbsp;#'.$res->id.' '.$res->name.'</br>';
         }
     	echo '<td onmouseover="showBigImage(null,null,this, \''.$listSupport.'\');" onmouseout="hideBigImage();">';
     	echo formatIcon('Support', 22);
     	echo '</td>';
+    }
+    if ($assignment->supportedResource) {
+      $supported=i18n('SupportedResource').' :</br>';
+      $supported.="&nbsp;&nbsp;&nbsp;".SqlList::getNameFromId('Resource', $assignment->supportedResource);
+      echo '<td onmouseover="showBigImage(null,null,this, \''.$supported.'\');" onmouseout="hideBigImage();">';
+      echo formatIcon('Supported', 22);
+      echo '</td>';
     }
     // gautier #1702
     if (!$assignment->optional and (get_class($obj)=='Meeting' or get_class($obj)=='PeriodicMeeting')) {

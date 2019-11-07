@@ -894,6 +894,8 @@
 .iconSupport22 { background-image: url(images/iconSupport.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconSupport16 { background-image: url(images/iconSupport.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
+.iconSupported { background-image: url(images/iconSupported.png);  background-repeat: no-repeat; }
+
 .iconStatus32 { background-image: url(images/iconStatus32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconStatus22 { background-image: url(images/iconStatus22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconStatus16 { background-image: url(images/iconStatus16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
