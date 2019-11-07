@@ -439,11 +439,11 @@ class Calendar extends SqlElement {
    *  must be redefined in the inherited class
    */
   public function drawSpecificItem($item){
-  	if (! $this->id) {
+  	//if (! $this->id) {
   		//return;
-  	}
+  	//}
     $today=date('Y-m-d');
-  	global $bankHolidays,$bankWorkdays;
+  	global $bankHolidays,$bankWorkdays,$print;
     //$result="<br/>";
     $result="";
     if ($item=='calendarView') {    	
@@ -451,6 +451,13 @@ class Calendar extends SqlElement {
         $y=$this->year;
       } else {
       	$y=date('Y');
+      }
+      // gautier 4282
+      if($print and sessionValueExists('calendarYear') and sessionValueExists('calendarYearId')){
+        $idCalendarDefinition = getSessionValue('calendarYearId');
+        if($this->idCalendarDefinition == $idCalendarDefinition){
+          $y = getSessionValue('calendarYear');
+        }
       }
       //echo $y.'#'.$this->idCalendarDefinition;
       //if (! isset($bankWorkdays[$y.'#'.$this->idCalendarDefinition])) {return;	}
