@@ -639,8 +639,10 @@ class PlannedWork extends GeneralWork {
           }
           $restartLoopAllAssignements=false;
 //          $idxAss=0;
-          // List assignments of $plan : Search for assignment for "unique resource", if found, add virtual assignment for each resource to check 
+          // List assignments of $plan : Search for assignment for "unique resource", if found, add virtual assignment for each resource to check
+          $supportAssignments=array(); 
           foreach ($listAss as $keyAss=>$ass) {
+            if ($ass->supportedAssignment) continue;
             if ($ass->uniqueResource) {
               if ($profile=='GROUP') $profile='ASAP';
               if ($uniqueResourceAssignment===null) $uniqueResourceAssignment=array();
@@ -1392,13 +1394,24 @@ class PlannedWork extends GeneralWork {
                       $surbookedSupWork=0;
                       $leftSup=0;
                       if ($valueSup>0) {
+                        $keySupAss=$ass->id.'#'.$sup;
+                        if (!isset($supportAssignments[$keySupAss])) {
+                          $supportAss=SqlElement::getSingleSqlElementFromCriteria('Assignment', array('idResource'=>$sup,'supportedAssignment'=>$ass->id));
+                          if (! $supportAss->id) { // Assignment for support does not exist : will create it
+                            $rs=SqlElement::getSingleSqlElementFromCriteria('ResourceSupport', array('idResource'=>$ass->id,'idSupport'=>$sup));
+                            $supportAss=$rs->manageSupportAssignment($ass);
+                          }
+                        } else {
+                          $supportAss=$supportAssignments[$keySupAss];
+                        }
                         self::storePlannedWork(
                           $valueSup, $plannedSup, 0, $withProjectRepartition,
                           $currentDate, $week, $profile, null, $supRes['normalCapacity'],
                           null, $listTopProjects,
-                          $surbookedSup, $surbookedSupWork, $ass, $plan, $arrayPlannedWork, $changedAss,
+                          $surbookedSup, $surbookedSupWork, $supportAss, $plan, $arrayPlannedWork, $changedAss,
                           $leftSup, $supRes,
                           $sup);
+                        $supportAssignments[$keySupAss]=$supportAss;
                       }
                     }
                   }
@@ -1429,6 +1442,11 @@ class PlannedWork extends GeneralWork {
             if ($changedAss) {
               $ass->_noHistory=true; // Will only save planning data, so no history required
               $arrayAssignment[]=$ass;
+              if (count($supportAssignments)>0) {
+                foreach ($supportAssignments as $supAss) {
+                  $arrayAssignment[]=$supAss;
+                }
+              }
             }
             $resources[$ass->idResource]=$ress;
           } // End Loop on each $ass (assignment)

@@ -139,6 +139,7 @@ CREATE TABLE `${prefix}resourcesupport` (
 
 ALTER TABLE `${prefix}activity` ADD COLUMN `fixPlanning` int(1) unsigned default '0';
 ALTER TABLE `${prefix}planningelement` ADD COLUMN `fixPlanning` int(1) unsigned default '0';
+ALTER TABLE `${prefix}planningelementbaseline` ADD COLUMN `fixPlanning` int(1) unsigned default '0';
 ALTER TABLE `${prefix}status` ADD COLUMN `fixPlanning` int(1) unsigned default '0';
 
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
@@ -175,7 +176,6 @@ DELETE FROM `${prefix}notifiable` WHERE notifiableItem in ('Workflow', 'Status',
 -- Set Call for tender as mailable
 INSERT INTO `${prefix}mailable` (`id`,`name`, `idle`) VALUES 
 (40,'CallForTender', '0');
-
 --ARCHIVEHISTORY
 CREATE TABLE `${prefix}historyarchive` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,

@@ -90,12 +90,13 @@ class ResourceSupport extends SqlElement {
       $asSup->supportedResource=$ass->idResource;
       $asSup->hasSupport=0;
     }
-    $asSup->rate=$this->rate;
+    $asSup->rate=($this->rate*$ass->rate/100);
     $asSup->assignedWork=round($ass->assignedWork*$this->rate/100,5);
     $asSup->leftWork=round($ass->leftWork*$this->rate/100,5);
     $asSup->plannedWork=$asSup->realWork+$asSup->leftWork;
     $asSup->idle=$ass->idle;
     $asSup->save();
+    return $asSup;
   }
   
 }
