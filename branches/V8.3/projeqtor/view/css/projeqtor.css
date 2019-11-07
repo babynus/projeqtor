@@ -291,7 +291,7 @@ html, body {
       /* margin: 4px 8px 4px 8px;*/ 
       padding: 0px 0px 10px 0px;
       opacity:0;filter:alpha(opacity=00);
-      pointer-events: none;
+      /* pointer-events: none; */ /* removed to be able to scroll on, the box when message is big */
     }
 
     #comboDetailResult {
@@ -823,7 +823,8 @@ div#reportParametersDiv .label, div#reportParametersDiv label {
   color:#555555; 
   border: 1px solid #CCCCCC;
   border-radius: 10px;
-  min-height:16px; max-height:200px;
+  min-height:16px; 
+  max-height:200px;
   min-width: 100px;
   overflow-y:auto; overflox-x: hidden;
   width:95%;
