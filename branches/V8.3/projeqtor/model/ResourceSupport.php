@@ -77,5 +77,26 @@ class ResourceSupport extends SqlElement {
     return $result;
   }
   
+  public function manageSupportAssignment($ass) {
+    $asSup=SqlElement::getSingleSqlElementFromCriteria('Assignment', array('supportedAssignment'=>$ass->id,'idResource'=>$this->idSupport));
+    if (!$asSup->id) {
+      $asSup->idResource=$this->idSupport;
+      $asSup->idProject=$ass->idProject;
+      $asSup->refType=$ass->refType;
+      $asSup->refId=$ass->refId;
+      $asSup->idRole=$ass->idRole;
+      $asSup->realWork=0;
+      $asSup->supportedAssignment=$ass->id;
+      $asSup->supportedResource=$ass->idResource;
+      $asSup->hasSupport=0;
+    }
+    $asSup->rate=$this->rate;
+    $asSup->assignedWork=round($ass->assignedWork*$this->rate/100,5);
+    $asSup->leftWork=round($ass->leftWork*$this->rate/100,5);
+    $asSup->plannedWork=$asSup->realWork+$asSup->leftWork;
+    $asSup->idle=$ass->idle;
+    $asSup->save();
+  }
+  
 }
 ?>
