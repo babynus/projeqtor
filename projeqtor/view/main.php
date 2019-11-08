@@ -1872,18 +1872,28 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                 id="idProjectPlan" name="idProjectPlan[]" onChange="changedIdProjectPlan(this.value);"
                 value=" " >
                  <option value=" "><strong><?php echo i18n("allProjects");?></strong></option>
-                 <?php 
-                    $proj=null; 
-                    if (sessionValueExists('project')) {
-                        $proj=getSessionValue('project');
-                        if(strpos($proj, ",")){
-                        	$proj="*";
-                        }
-                    }
-                    if ($proj=="*" or ! $proj) $proj=null;
+                                  <?php 
+//                     $proj=null; 
+//                     if (sessionValueExists('project')) {
+//                         $proj=getSessionValue('project');
+//                         if(strpos($proj, ",")){
+//                         	$proj="*";
+//                         }
+//                     }
+//                     if ($proj=="*" or ! $proj) $proj=null;
                     $user=getSessionUser();
                     //$projs=$user->getListOfPlannableProjects();
-                    htmlDrawOptionForReference('planning', null, null, true);
+                    //htmlDrawOptionForReference('planning', null, null, true );
+                    $inClause=" id in ". transformListIntoInClause(getSessionUser()->getListOfPlannableProjects());
+                    $inClause.=" and id not in " . Project::getAdminitrativeProjectList();
+                    $inClause.=" and idle=0";
+                    $projObj=new Project() ;
+                    $list=$projObj->getSqlElementsFromCriteria(null,false,$inClause,null,null,true);
+                    foreach ($list as $projOb){
+                      ?>
+                      <option value="<?php echo $projOb->id; ?>"><?php echo $projOb->name; ?></option>      
+                     <?php
+                   }
                  ?>
                </select>
              </td>
