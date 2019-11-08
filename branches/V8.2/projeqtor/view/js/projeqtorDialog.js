@@ -3561,6 +3561,11 @@ function showPlanSaveDates() {
   loadDialog('dialogPlanSaveDates', callBack, true,null,true);
 }
 function planSaveDates() {
+  var formVar=dijit.byId('dialogPlanSaveDatesForm');
+  if (!formVar.validate()) {
+    showAlert(i18n("alertInvalidForm"));
+    return;
+  }
   if (!dijit.byId('idProjectPlanSaveDates').get('value')) {
     dijit.byId('idProjectPlanSaveDates').set('value', ' ');
   }

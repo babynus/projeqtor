@@ -40,7 +40,8 @@ $statusColorList=SqlList::getList('Status', 'color');
   $canUpdate=true;
   $checked=true;
   $ws=new WorkflowStatus();
-  $cptWs=$ws->countSqlElementsFromCriteria(null,"idWorkflow=$id and (idStatusFrom=$idStatus or idStatusTo=$idStatus)");
+  $p=new Profile();$pTable=$p->getDatabaseTableName();
+  $cptWs=$ws->countSqlElementsFromCriteria(null,"idWorkflow=$id and (idStatusFrom=$idStatus or idStatusTo=$idStatus) and (select idle from $pTable p where p.id=idProfile)=0");
   if ($cptWs>0) {
     $canUpdate=false;
   } else {
