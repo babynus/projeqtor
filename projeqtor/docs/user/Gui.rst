@@ -64,8 +64,8 @@ The |iconHideStream| allows to hide the **Menu and Documents window** and **Mess
 
 .. _top-bar:
 
-|oneBLC| Top bar
-----------------
+Top bar
+-------
 
 .. figure:: /images/GUI/GUI_ZONE_TopBar.png
    :alt: Top bar
@@ -356,7 +356,11 @@ The timestamp indicates when the action was done.
 
    Messages displayed here are not stored and will be flushed when user logout.
 
-.. rubric:: |threeBLC| Shortcuts windows
+
+.. _keyboard-shortcut:
+
+Keyboard Shortcut
+-----------------
 
 **[CTRL]+S** Save the current element
 
@@ -1123,7 +1127,7 @@ See: :ref:`thumbnails`
 
          * The fields that can be updated depends on the element.
          * The fields are grouped by section.
-         * Click on |buttonQuitMultiMode| to quit the multiple mode window.
+         * Click on |buttonQuit| to quit the multiple mode window.
       
             .. compound:: **Select items**
       

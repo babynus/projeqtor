@@ -1,3 +1,53 @@
+
+.. |meetingPlay| image:: images/meetingPlay.png
+   :alt: LiveMeeting Play
+   :scale: 60
+
+.. |meetingStop| image:: images/meetingStop.png
+   :alt: LiveMeeting Stop
+   :scale: 60
+   
+.. |meetingPause| image:: images/meetingPause.png
+   :alt: LiveMeeting Pause
+   :scale: 60
+   
+.. |LiveMeetingSpeak| image:: images/iconLiveMeetingNormal.png
+   :alt: LiveMeeting speak
+
+.. |LiveMeetingDtSpeak| image:: images/iconLiveMeetingCantSpeak.png
+   :alt: LiveMeeting can't speak
+
+.. |meetingOrganizer| image:: /images/iconLiveMeetingOrganizator.png
+   :alt: Meeting organizer
+
+
+
+.. |iconKanban| image:: images/iconKanban.png
+   :alt: Kanban
+   :scale: 70
+
+.. |addRequirementKanban| image:: images/iconKanbanAddRequirement.png
+   :alt: add Requirement
+
+.. |addTicketKanban| image:: images/iconAddTicket.png
+   :alt: add ticket 
+   
+.. |addActivityKanban| image:: images/iconAddActivity.png
+   :alt: add Activity  
+     
+.. |addActionKanban| image:: images/iconKanbanAddAction.png
+   :alt: add Action
+
+.. |addKanban| image:: images/iconKanbanAdd.png
+   :alt: add new Kanban
+
+.. |addColumnKanban| image:: images/iconKanbanAddColumns.png
+   :alt: add Column
+   
+   
+   
+  
+
 .. |arrowCompound| image:: images/arrowCompound.png
    :alt: arrow
 
@@ -77,9 +127,6 @@
 
 .. |iconGoto| image:: images/iconGoto.png
    :alt: Button icon goto 
-   
-.. |iconSave| image:: images/iconSave.png
-   :alt: Button icon save 
 
 .. |iconPrint| image:: images/iconPrint.png
    :alt: Button icon print
@@ -247,7 +294,7 @@
 .. |statusFinishKO| image:: images/statusFinishKO.png
    :alt: Status finish KO
 
-.. |buttonQuitMultiMode| image:: images/buttonQuitMultipleUpdateMode.png
+.. |buttonQuit| image:: images/buttonQuit.png
    :alt: button quit multiple update mode
 
 .. |closeIcon| image:: images/close.png
@@ -379,6 +426,18 @@
    :alt: Ten
    :scale: 30
 
+.. |eleven| image:: images/eleven.png
+   :alt: Eleven
+   :scale: 30
+   
+.. |twelve| image:: images/twelve.png
+   :alt: Twelve
+   :scale: 30
+
+.. |thirteen| image:: images/thirteen.png
+   :alt: Twelve
+   :scale: 30
+         
 .. |tenBLC| image:: images/tenBLC.png
    :alt: Ten
    :scale: 30
@@ -464,10 +523,10 @@
    :alt: D letter
    :scale: 30
 
-.. |J| image:: images/J-BLC.png
+.. |J-BLC| image:: images/J-BLC.png
    :alt: D letter
    :scale: 30
    
-.. |K| image:: images/K-BLC.png
+.. |K-BLC| image:: images/K-BLC.png
    :alt: D letter
    :scale: 30
