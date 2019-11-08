@@ -485,7 +485,8 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
         if ($class=="Today") {
           $firstPage="welcome.php";
         } else { 
-          echo 'gotoElement("' . $class . '","' . $id . '");';
+          echo 'var delay=(dojo.isFF)?1000:10;';
+          echo 'setTimeout(\'gotoElement("' . $class . '","' . $id . '");\',delay);';
           $firstPage="";
         }
       }
