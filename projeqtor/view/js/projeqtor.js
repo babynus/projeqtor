@@ -4812,7 +4812,8 @@ function intercepPointKey(obj, event) {
 }
 function replaceDecimalPoint(field) {
   var dom = dojo.byId(field);
-  dom.value = dom.value + browserLocaleDecimalSeparator;
+  var cursorPos = dom.selectionStart;
+  dom.value = dom.value.slice(0,cursorPos)+browserLocaleDecimalSeparator+dom.value.slice(cursorPos);
 }
 function ckEditorReplaceAll() {
   var numEditor = 1;
