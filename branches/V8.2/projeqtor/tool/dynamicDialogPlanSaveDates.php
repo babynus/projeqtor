@@ -42,17 +42,19 @@
                 id="idProjectPlanSaveDates" name="idProjectPlanSaveDates" 
                 class="input" value="" >
                  <?php 
-                    $proj=null; 
-                    if (sessionValueExists('project')){
-                        $proj= getSessionValue('project');
-                        if(strpos($proj, ",")){
-                        	$proj="*";
-                        }
-                    }
-                    if ($proj=="*" or ! $proj) $proj=null;
+//                     $proj=null; 
+//                     if (sessionValueExists('project')){
+//                         $proj= getSessionValue('project');
+//                         if(strpos($proj, ",")){
+//                         	$proj="*";
+//                         }
+//                     }
+//                     if ($proj=="*" or ! $proj) $proj=null;
+//                   htmlDrawOptionForReference('idProject', $proj, null, false)
+                    //florent
                     $scope='changeValidatedData';
                     $inClause=" id in ". transformListIntoInClause(getSessionUser()->getListOfPlannableProjects($scope));
-                    $inClause.=" and id not in " . Project::getAdminitrativeProjectList() ;
+                    $inClause.=" and id not in " . Project::getAdminitrativeProjectList();
                     $inClause.=" and idle=0";
                     $projObj=new Project() ;
                     $list=$projObj->getSqlElementsFromCriteria(null,false,$inClause,null,null,true);
@@ -61,7 +63,6 @@
                         <option value="<?php echo $projOb->id; ?>"><?php echo $projOb->name; ?></option>      
                  <?php
                     }
-//                   htmlDrawOptionForReference('idProject', $proj, null, false)
                  ?>
                </select>
              </td>
