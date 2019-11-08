@@ -1000,6 +1000,7 @@ class UserMain extends SqlElement {
     $this->_specificAffectedProfilesIncludingClosed=null;
     $this->_allProfiles=null;
     $this->_allAccessRights=null;
+    $this->_allSpecificRightsForProfiles=null;
   }
   
   public static function resetAllVisibleProjects($idProject=null, $idUser=null) {
