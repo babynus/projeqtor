@@ -14,7 +14,7 @@ Document directories
 Document directories management allows to define a structure for document storage.
 
 * The files of document will be stored in the folder defined by the parameters  «Document root» and «Location».
-* «Document root» is defined in :ref:`Global parameters <document-section>` screen. 
+* **Document root** is defined in :ref:`Global parameters<document-section>` screen. 
 
 .. rubric:: Section: Description
 

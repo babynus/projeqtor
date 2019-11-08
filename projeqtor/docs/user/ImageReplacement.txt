@@ -37,8 +37,9 @@
 .. |changeActivityStreamBot| image:: images/changeActivityStreamBot.png
    :alt: Show/hide Activity Stream     
     
-.. |arrowCompound| image:: images/arrowCompound.png
-   :alt: arrow
+.. |scrolltop| image:: images/scrolltop.png
+   :alt: scroll to top
+   :scale: 50%
 
 .. |iconDelay| image:: images/iconDelay.png
    :alt: Susbcribe
@@ -503,10 +504,10 @@
    :alt: D letter
    :scale: 30
 
-.. |J| image:: images/J-BLC.png
+.. |J-BLC| image:: images/J-BLC.png
    :alt: D letter
    :scale: 30
    
-.. |K| image:: images/K-BLC.png
+.. |K-BLC| image:: images/K-BLC.png
    :alt: D letter
    :scale: 30

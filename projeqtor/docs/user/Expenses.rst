@@ -446,7 +446,7 @@ Orders to provider
 
 .. index:: Terms of payment to provider (Expenses)
 
-.. _Term_payment:
+.. _Term_payment_to_providers:
 
 Terms of payments to providers
 ------------------------------

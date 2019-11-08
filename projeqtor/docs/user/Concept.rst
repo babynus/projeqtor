@@ -63,36 +63,39 @@ The project data visibility is granted according to the user profile.
 
 .. index:: Project (type)
     
-.. _project_type:
+.. _project_type_definition:
 
 the project type
 ----------------
 
 .. compound:: Three project types can be defined:
+   
+      **1 - Operational project**
+                     
+         Most common project to follow activity.
+                        
+         Manual Billed, Fixed price, Capped time, Time & materials, Internal are operationals projects
+                  
+         .. image:: /images/GUI/CONCEPT_ZONE_ProjectType.png
+            :align: center
+                  
+      **2 - Administrative project**
+                  
+         Allows to follow the non productive work as holidays, sickness, training, …
+                        
+         All resources have access to this project type without being assigned (project) or assigned (Activity).
+                        
+         Create an activity, like an OPE project, for each type of absence.
+                     
+      **3 - Template project**
+                  
+         Designed to define templates, to be copied as operational project.
+                        
+         Any project manager can copy these projects without having to be assigned to them. On the other hand they will not be able to modify it and will have to copy the project in OPE for that.
 
- **1 - Operational project**
-            
- Most common project to follow activity.
-               
- Manual Billed, Fixed price, Capped time, Time & materials, Internal are operationals projects
-         
- .. image:: /images/GUI/CONCEPT_ZONE_ProjectType.png
-   :align: center
-         
- **2 - Administrative project**
-         
- Allows to follow the non productive work as holidays, sickness, training, …
-               
- All resources have access to this project type without being assigned (project) or assigned (Activity).
-               
- Create an activity, like an OPE project, for each type of absence.
-            
- **3 - Template project**
-         
- Designed to define templates, to be copied as operational project. See: :ref:`copy-item`
-               
- Any project leaders can copy such projects, without having to be allocated to them.
-
+         For modifying a template project, the modifier must be assigned to the project..
+   
+         See: :ref:`Copy an item<copy-item>`
 .. note:: 
 
    The project type is defined in a project type.
@@ -263,7 +266,7 @@ The rules defining a product structure are:
 
  .. compound:: **Relationships between component elements**
 
-    * Components can be linked between them (N to N relationships).
+    Components can be linked between them (N to N relationships).
 
     .. figure:: /images/GUI/CONCEPT_SCHEMA_LinkBetweenComponent.png
        :alt: Relationships between component elements
@@ -1060,7 +1063,6 @@ Allocation to project
 
 .. sidebar:: Concepts 
 
-   * :ref:`allocation-to-project`
    * :ref:`profiles-definition`
    * :ref:`user-ress-contact-demystify`
    

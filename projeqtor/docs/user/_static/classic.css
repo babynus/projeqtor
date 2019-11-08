@@ -67,15 +67,14 @@ div.body h6 { font-size: 80%; }
 /* ------------------------------ MISE EN PAGE --------------------------------- */
 /* ------------------ Anchor of Titles styles - Permalink ---------------------- */
 a.headerlink {
-    color: #ffffff;
+    color: #545381;
     padding: 0 0 0 4px;
     text-decoration: none;
     visibility: hidden;
 }
 
 a.headerlink:hover {
-    background-color: #ffffff;
-    color: white;
+    color: #545381;
 }
 
 h1:hover > a.headerlink,
