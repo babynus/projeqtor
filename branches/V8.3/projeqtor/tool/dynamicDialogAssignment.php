@@ -40,8 +40,6 @@ $assignmentObjOrigin = new Assignment($assignedIdOrigin);
 $validatedWorkPeOld = RequestHandler::getValue('validatedWorkPe',false,null);
 $assignedWorkPeOld = RequestHandler::getValue('assignedWorkPe',false,null);
 $realWork = RequestHandler::getNumeric('realWork',false,0);
-$validatedWorkPe = str_replace(',', '.', $validatedWorkPeOld);
-$assignedWorkPe = str_replace(',', '.', $assignedWorkPeOld);
 $hoursPerDay=Work::getHoursPerDay();
 $delay=null;
 if ($assignmentObj->realWork==null){
@@ -217,7 +215,7 @@ $resource=new ResourceAll($idResource);
                               } else if ($mode=="edit"){
                                   echo Work::displayWork($assignmentObj->assignedWork);
                               } else if($mode=="add") { 
-                                  $assignedWork = GeneralWork::convertWork($validatedWorkPe)-GeneralWork::convertWork($assignedWorkPe);
+                                  $assignedWork = GeneralWork::convertWork($validatedWorkPeOld)-GeneralWork::convertWork($assignedWorkPeOld);
                                   if($assignedWork < 0 or $planningMode=='RECW'){
                                     echo "0";
                                   } else {
@@ -271,7 +269,7 @@ $resource=new ResourceAll($idResource);
                               } else if($mode=="divide"){
                                   echo Work::displayWork($assignmentObjOrigin->leftWork/2);                                                       
                               } else { 
-                                  $assignedWork = GeneralWork::convertWork($validatedWorkPe)-GeneralWork::convertWork($assignedWorkPe);
+                                  $assignedWork = GeneralWork::convertWork($validatedWorkPeOld)-GeneralWork::convertWork($assignedWorkPeOld);
                                     if($assignedWork < 0 or $planningMode=='RECW'){
                                       echo "0";
                                     } else {
@@ -311,7 +309,7 @@ $resource=new ResourceAll($idResource);
                  value="<?php if(($refType=='Meeting' || $refType=='PeriodicMeeting') && $mode=="add" && $obj->meetingStartTime && $obj->meetingEndTime){ 
                                   echo $delay;
                               } else { 
-                                  $assignedWork = GeneralWork::convertWork($validatedWorkPe)-GeneralWork::convertWork($assignedWorkPe);
+                                  $assignedWork = GeneralWork::convertWork($validatedWorkPeOld)-GeneralWork::convertWork($assignedWorkPeOld);
                                   if($assignedWork < 0){
                                     echo "0";
                                   } else {
