@@ -1657,41 +1657,52 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
     return false;
   }
   
-  public function getListOfPlannableProjects() {
+  public function getListOfPlannableProjects($scope='planning') {
     $rightsList=$this->getAllSpecificRightsForProfiles('planning'); // Get planning rights for all user profiles
-    $affProjects=$this->getSpecificAffectedProfiles();              // Affected projects, with profile
     $result=array();
-    $defProfile=$this->idProfile;
-    $access="NO";
-    $accessList=$this->getAccessControlRights();                    // Get acces rights
     $canPlan=false;
-    $right=SqlElement::getSingleSqlElementFromCriteria('habilitationOther', array('idProfile'=>$defProfile, 'scope'=>'planning'));
-    if ($right) {
-      $list=new ListYesNo($right->rightAccess);
-      if ($list->code=='YES') {
-        $canPlan=true;
-      }
+    $access="NO";
+    $affProjects=$this->getSpecificAffectedProfiles();  // list of profiles for the affected projects
+    $accessList=$this->getAccessControlRights();                    // Get all acces rights
+    foreach ($affProjects as $idProj=> $profUser){   
+      $defProfile=$profUser;
+       debugLog("id prject".$idProj.'  id profil'.$profUser);
+       if(in_array($profUser,$rightsList["YES"])){
+         $result[$idProj]=$idProj;
+       }
+//       $right =SqlElement::getSingleSqlElementFromCriteria('habilitationOther', array('idProfile'=>$defProfile, 'scope'=>$scope)); // object HabilitationOther with rightAcces
+//       if ($right) {
+//         $list=new ListYesNo($right->rightAccess);
+//         debugLog($list);
+//         if ($list->code=='YES') {
+//           $canPlan=true;
+//         }
+//         debugLog($canPlan);
+            
+     //}
+      
     }
-    if (isset($accessList['menuProject'])) {                        // Retrieve acces rights for projects
-      $access=$accessList['menuProject']['update'];                 // Retrieve update acces right for projects
-    }
-    if ($access=='ALL' and $canPlan) {        // Update rights for project = "ALL" (admin type) and Can Plan for defaut profile
-      // List of plannable project is list of all projects minus list of affected with no plan right
-      $result=$this->getVisibleProjects();
-      foreach ($affProjects as $prj=>$prf) {
-        if (isset($rightsList['NO'][$prf])) {
-          unset($result[$prj]);
-        }
-      }
-    } else {
-      // List of plannable project is list of projects with plannable rights
-      if (! isset ($rightsList['YES'])) return $result; // Return empty array
-      foreach ($affProjects as $prj=>$prf) {
-        if (isset($rightsList['YES'][$prf])) {
-          $result[$prj]=$prj;
-        }
-      }
-    }
+    
+//     if (isset($accessList['menuProject'])) {                        // Retrieve acces rights for projects
+//       $access=$accessList['menuProject']['update'];                 // Retrieve update acces right for projects
+//     }
+//     if ($access=='ALL' and $canPlan) {        // Update rights for project = "ALL" (admin type) and Can Plan for defaut profile
+//       // List of plannable project is list of all projects minus list of affected with no plan right
+//       $result=$this->getVisibleProjects();
+//       foreach ($affProjects as $prj=>$prf) {
+//         if (isset($rightsList['NO'][$prf])) {
+//           unset($result[$prj]);
+//         }
+//       }
+//     } else {
+//       // List of plannable project is list of projects with plannable rights
+//       if (! isset ($rightsList['YES'])) return $result; // Return empty array
+//       foreach ($affProjects as $prj=>$prf) {
+//         if (isset($rightsList['YES'][$prf])) {
+//           $result[$prj]=$prj;
+//         }
+//       }
+//     }
     return $result;
   } 
 
