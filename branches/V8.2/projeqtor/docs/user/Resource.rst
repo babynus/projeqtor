@@ -78,7 +78,7 @@ Resource availability is defined by assigning it to a project.
    * - Email address
      - Email address of the resource
    * - Capacity (FTE)
-     - Capacity of the resource in Full Time Equivalent. [#f1]_
+     - Capacity of the resource in Full Time Equivalent.
    * - |RequiredField| :ref:`calendars`
      - Calendar defines the availability of the resource.
    * - |RequiredField| Profile
@@ -452,8 +452,6 @@ List of the resources members of the team.
 
     \newpage
 
-.. index:: Calendar definition
-.. index:: Resource (Calendar definition)  
 .. index:: Calendar
 
 .. _calendars:
