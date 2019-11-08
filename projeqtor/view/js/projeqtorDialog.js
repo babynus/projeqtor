@@ -4859,6 +4859,10 @@ function saveAssignedWork(id, zone) {
 
 function saveLeftWork(id, zone) {
   var value=dijit.byId("ass"+zone+"_"+id).get("value");
+  if(isNaN(value) || value==null){
+    value=0;
+    dijit.byId("ass"+zone+"_"+id).set("value",0);
+  }
   // update left and planned for PlanningElement
   var initLeft =dojo.byId('initLeft_'+id).value;
   var objClass=dojo.byId('objectClass').value;
