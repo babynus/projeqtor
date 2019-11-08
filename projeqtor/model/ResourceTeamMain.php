@@ -70,8 +70,9 @@ class ResourceTeamMain extends ResourceMain {
   public $_sec_Affectations;
   public $_spe_affectations;
   public $_spe_affectationGraph;
-  public $_sec_affectationResourceTeamResource;
-  public $_spe_affectationResourceTeamResource;
+  public $_sec_AffectationsResourceTeam;
+  public $_spe_affectationsResourceTeam;
+  public $_spe_affectationResourceTeamGraph;
   public $_sec_resourceCapacity;
   public $_spe_resourceCapacity;
   public $_sec_resourceSurbooking;
@@ -86,9 +87,6 @@ class ResourceTeamMain extends ResourceMain {
   public $password;
   public $crypto;
   public $isResourceTeam;
-  public $_sec_AffectationsResourceTeam;
-  public $_spe_affectationsResourceTeam;
-  public $_spe_affectationResourceTeamGraph;
   public $_nbColMax=3;
   
 	  private static $_layout='
