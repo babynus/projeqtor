@@ -368,6 +368,8 @@ Keyboard Shortcut
 
 Click on |buttonIconHelp| ( into the logo zone ) or use shortcut key F1 shortcut key to open the English ProjeQtOr manual.
 
+**[ESC]** to exit full screen mode
+
 
 .. raw:: latex
 
