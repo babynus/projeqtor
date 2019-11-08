@@ -354,6 +354,7 @@ class Assignment extends SqlElement {
         $this->plannedWork=$this->leftWork+$old->realWork;
         $this->plannedCost=$this->leftCost+$old->realCost;
       }
+      $this->leftWork=round($this->leftWork,5);
       $query="UPDATE ".$this->getDatabaseTableName(). " SET ";
       foreach($fields as $field) {
         if (substr($field,-4)!='Date') {
