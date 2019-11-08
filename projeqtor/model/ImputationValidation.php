@@ -172,7 +172,7 @@ class ImputationValidation{
   			$inputAdm = 0;
   			$outCapacity = false;
   			
-  			if($critWorkList){
+  			if($critWorkList and isset($weekDayArray[$res->id][$week->periodValue])){
   			  foreach ($weekDayArray[$res->id][$week->periodValue] as $workDay=>$capacityValue){
   			    $workByDay = 0;
   			    foreach ($critWorkList as $critWork){
