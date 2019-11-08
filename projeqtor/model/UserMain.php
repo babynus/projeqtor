@@ -1626,7 +1626,7 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
     foreach ($this->getAllProfiles() as $prof) {
       $crit=array('scope'=>$specific, 'idProfile'=>$prof);
       $habilitation=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', $crit);
-      if ($specific=='planning') {
+      if ($specific=='planning' or $specific=='changeValidatedData') {
         $scope=new ListYesNo($habilitation->rightAccess);
         $code=$scope->code;
       } else {
@@ -1658,15 +1658,15 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
     return false;
   }
   
-  public function getListOfPlannableProjects() {
-    $rightsList=$this->getAllSpecificRightsForProfiles('planning'); // Get planning rights for all user profiles
+  public function getListOfPlannableProjects($scope="planning") {
+    $rightsList=$this->getAllSpecificRightsForProfiles($scope); // Get planning rights for all user profiles
     $affProjects=$this->getSpecificAffectedProfiles();              // Affected projects, with profile
     $result=array();
     $defProfile=$this->idProfile;
     $access="NO";
     $accessList=$this->getAccessControlRights();                    // Get acces rights
     $canPlan=false;
-    $right=SqlElement::getSingleSqlElementFromCriteria('habilitationOther', array('idProfile'=>$defProfile, 'scope'=>'planning'));
+    $right=SqlElement::getSingleSqlElementFromCriteria('habilitationOther', array('idProfile'=>$defProfile, 'scope'=>$scope));
     if ($right) {
       $list=new ListYesNo($right->rightAccess);
       if ($list->code=='YES') {
