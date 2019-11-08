@@ -5609,7 +5609,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
     }
     if ($assignment->supportedResource) {
       $supported=i18n('SupportedResource').' :</br>';
-      $supported.="&nbsp;&nbsp;&nbsp;".SqlList::getNameFromId('Resource', $assignment->supportedResource);
+      $supported.="&nbsp;&nbsp;&nbsp;#".$assignment->supportedResource.' '.SqlList::getNameFromId('Resource', $assignment->supportedResource);
       echo '<td onmouseover="showBigImage(null,null,this, \''.$supported.'\');" onmouseout="hideBigImage();">';
       echo formatIcon('Supported', 22);
       echo '</td>';
