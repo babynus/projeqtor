@@ -290,7 +290,6 @@ class Assignment extends SqlElement {
               $ass->assignedWork-=$subtractable;
               if ($ass->assignedWork<0) $ass->assignedWork=0;
               $ass->leftWork-=$subtractable;
-              debugLog($ass->leftWork);
               if ($ass->leftWork<0) $ass->leftWork=0;
               if ($ass->leftWork==0 and $ass->realWork==0) {
                 $ass->delete();

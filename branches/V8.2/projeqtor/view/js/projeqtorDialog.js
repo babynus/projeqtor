@@ -2299,8 +2299,8 @@ function addAssignment(unit, rawUnit, hoursPerDay) {
     params+="&hoursPerDay="+hoursPerDay;
   }
   if (dojo.byId('objectClass').value != 'PeriodicMeeting') {
-    params+="&validatedWorkPe="+dojo.byId(objClass +"PlanningElement_validatedWork").value;
-    params+="&assignedWorkPe="+dojo.byId(objClass +"PlanningElement_assignedWork").value;
+    params+="&validatedWorkPe="+dijit.byId(objClass +"PlanningElement_validatedWork").get('value');
+    params+="&assignedWorkPe="+dijit.byId(objClass +"PlanningElement_assignedWork").get('value');
   }
   params+="&mode=add";  
   loadDialog('dialogAssignment',callBack,false,params);
