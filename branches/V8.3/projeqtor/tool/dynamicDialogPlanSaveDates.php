@@ -30,7 +30,7 @@
     <tr><td >&nbsp;</td></tr>
     <tr>
       <td width="100%">
-       <form id='dialogPlanSaveDatesForm' name='dialogPlanSaveDatesForm' onSubmit="return false;">
+       <form dojoType="dijit.form.Form" id='dialogPlanSaveDatesForm' name='dialogPlanSaveDatesForm' onSubmit="return false;" >
          <table width="100%" >
            <tr>
              <td class="dialogLabel"  >
