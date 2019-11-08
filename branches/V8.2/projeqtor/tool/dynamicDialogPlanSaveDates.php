@@ -37,7 +37,7 @@
                <label for="idProjectPlanSaveDates" ><?php echo i18n("colIdProject") ?>&nbsp;:&nbsp;</label>
              </td>
              <td>
-               <select dojoType="dijit.form.FilteringSelect" 
+                 <select dojoType="dijit.form.FilteringSelect" 
                <?php echo autoOpenFilteringSelect();?>
                 id="idProjectPlanSaveDates" name="idProjectPlanSaveDates" 
                 class="input" value="" >
@@ -50,7 +50,18 @@
                         }
                     }
                     if ($proj=="*" or ! $proj) $proj=null;
-                    htmlDrawOptionForReference('idProject', $proj, null, false);
+                    $scope='changeValidatedData';
+                    $inClause=" id in ". transformListIntoInClause(getSessionUser()->getListOfPlannableProjects($scope));
+                    $inClause.=" and id not in " . Project::getAdminitrativeProjectList() ;
+                    $inClause.=" and idle=0";
+                    $projObj=new Project() ;
+                    $list=$projObj->getSqlElementsFromCriteria(null,false,$inClause,null,null,true);
+                    foreach ($list as $projOb){
+                 ?>
+                        <option value="<?php echo $projOb->id; ?>"><?php echo $projOb->name; ?></option>      
+                 <?php
+                    }
+//                   htmlDrawOptionForReference('idProject', $proj, null, false)
                  ?>
                </select>
              </td>
