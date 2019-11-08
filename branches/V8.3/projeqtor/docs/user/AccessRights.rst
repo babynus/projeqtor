@@ -33,18 +33,18 @@ This screen is then accessible via a dedicated menu in the Acces Right
 **you can choose to install or not:**
 
 * the planning section 
-* the tickets
+* the ticketing
 * the time tracking
 * the requirements
-* the financial section with expenses and / or billing
+* the financial section with expenses and / or incomes
 * the risks
-* The meetings
-* The steering 
-* The products configuration (versions, components...)
-* The humans resources
-* The external documents management 
-* The Organizations (level society) management 
-* The activity stream
+* the meetings
+* the steering 
+* the products configuration (versions, components...)
+* the humans resources
+* the external documents management 
+* the organizations (level society) management 
+* the activity stream
 * and the notifications.
 
 .. note:: 

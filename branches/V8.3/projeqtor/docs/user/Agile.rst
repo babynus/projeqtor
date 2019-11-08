@@ -17,7 +17,7 @@ Agile Methods
 Agile methods are groups of practices of piloting and realization of projects. 
 They originate from the Agile Manifesto, written in 2001, which uses the term "agile" to refer to multiple existing methods.
 
-Agile methods are more pragmatic than traditional methods, involve the client (client) as much as possible and allow a great reactivity to his requests. They are based on an iterative, incremental and adaptive development cycle and must respect four fundamental values, based on twelve principles, from which a base of practices, either common or complementary, derives.
+Agile methods are more pragmatic than traditional methods, involve the client as much as possible and allow a great reactivity to his requests. They are based on an iterative, incremental and adaptive development cycle and must respect four fundamental values, based on twelve principles, from which a base of practices, either common or complementary, derives.
 
 .. index:: Kanban
 
@@ -55,9 +55,8 @@ The Kanban approach is a stock management method that allows you to produce on d
 The main objective is to balance production and demand.
 
 
-   **With Kanban, you can:**
+   **With Kanban, you can create a new Kanban board for 
    
-   * Create a new Kanban board for 
       * tickets,
       * activities,
       * actions,
@@ -395,6 +394,14 @@ Find below the details of the tiles of your kanbans
 
   In this case, when you move a ticket in the Kanban columns, a pop-up window appears to allow you to enter the missing value if it is not already defined.      
        
+
+
+
+
+
+
+
+
 .. index:: Live Meeting
 
 .. _Live-meeting-Agile:

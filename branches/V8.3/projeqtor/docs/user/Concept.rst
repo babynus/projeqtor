@@ -7,6 +7,11 @@
 
 .. _concept:
 
+********
+Concepts
+********
+
+
 .. _Concept_project:
 
 Project
@@ -58,36 +63,39 @@ The project data visibility is granted according to the user profile.
 
 .. index:: Project (type)
     
-.. _project_type:
+.. _project_type_definition:
 
 the project type
 ----------------
 
 .. compound:: Three project types can be defined:
+   
+      **1 - Operational project**
+                     
+         Most common project to follow activity.
+                        
+         Manual Billed, Fixed price, Capped time, Time & materials, Internal are operationals projects
+                  
+         .. image:: /images/GUI/CONCEPT_ZONE_ProjectType.png
+            :align: center
+                  
+      **2 - Administrative project**
+                  
+         Allows to follow the non productive work as holidays, sickness, training, …
+                        
+         All resources have access to this project type without being assigned (project) or assigned (Activity).
+                        
+         Create an activity, like an OPE project, for each type of absence.
+                     
+      **3 - Template project**
+                  
+         Designed to define templates, to be copied as operational project.
+                        
+         Any project manager can copy these projects without having to be assigned to them. On the other hand they will not be able to modify it and will have to copy the project in OPE for that.
 
- **1 - Operational project**
-            
- Most common project to follow activity.
-               
- Manual Billed, Fixed price, Capped time, Time & materials, Internal are operationals projects
-         
- .. image:: /images/GUI/CONCEPT_ZONE_ProjectType.png
-   :align: center
-         
- **2 - Administrative project**
-         
- Allows to follow the non productive work as holidays, sickness, training, …
-               
- All resources have access to this project type without being assigned (project) or assigned (Activity).
-               
- Create an activity, like an OPE project, for each type of absence.
-            
- **3 - Template project**
-         
- Designed to define templates, to be copied as operational project. See: :ref:`copy-item`
-               
- Any project leaders can copy such projects, without having to be allocated to them.
-
+         For modifying a template project, the modifier must be assigned to the project..
+   
+         See: :ref:`Copy an item<copy-item>`
 .. note:: 
 
    The project type is defined in a project type.
@@ -258,7 +266,7 @@ The rules defining a product structure are:
 
  .. compound:: **Relationships between component elements**
 
-    * Components can be linked between them (N to N relationships).
+    Components can be linked between them (N to N relationships).
 
     .. figure:: /images/GUI/CONCEPT_SCHEMA_LinkBetweenComponent.png
        :alt: Relationships between component elements
@@ -546,21 +554,25 @@ Planning mode
 
 Planning mode allows to define constraints on planning elements: activity, test session and milestone.
 
-Planning modes are grouped under two types (Floating and Fixed).
+.. rubric:: Milestones planning mode
 
-.. rubric:: Floating
+Planning modes are grouped under two types for milestone :
 
-* These planning modes have no constraint date.
-* Planning element is floating depending on its predecessors.
-* Planning modes: As soon as possible, Work together, Fixed duration and floating milestone.
+ .. compound:: Floating
+
+   * These planning modes have no constraint date.
+   * Planning element is floating depending on its predecessors.
+   * Planning modes: As soon as possible, Work together, Fixed duration and floating milestone.
 
 
-.. rubric:: Fixed
+ .. compound:: Fixed
+   
+   * These planning modes have constraint date.
+   * Planning modes: Must not start before validated date, As late as possible, Regular and fixed milestone.
 
-* These planning modes have constraint date.
-* Planning modes: Must not start before validated date, As late as possible, Regular and fixed milestone.
+.. seealso:: 
 
-More detail, see: :ref:`Activity and Test session  planning modes<progress-section-planning-mode>` and :ref:`Milestone planning modes<planning-mode-milestone>`.
+   :ref:`Activity and Test session  planning modes<progress-section-planning-mode>` and :ref:`Milestone planning modes<planning-mode-milestone>`.
 
 .. note:: 
 
@@ -572,23 +584,50 @@ More detail, see: :ref:`Activity and Test session  planning modes<progress-secti
    
    See: :ref:`activity-type`, :ref:`milestone-type` and :ref:`test-session-type` screens. 
 
+.. rubric:: Planning element planning mode
+
+several planning modes for your project elements are proposed to best manage the time spent on certain planning elements
+
+* As soon as possible
+* Work together
+* Fixed duration
+* Must not start before validated start date
+* Should end before validated end date
+* Regular between dates
+* Regular in full days
+* Regular in half days
+* Regular in quarter days
+* Recurry (on weekly basis)
+
+ .. compound:: Prioritized planning elements
+
+   Planning elements are scheduled in this order of priority:
+   
+   #. Fixed date (Fixed milestone, Meeting)
+   #. Recurrent activities - Planning modes "Regular..." (Activity, Test session)
+   #. Fixed duration (Activity, Test session)
+   #. Others
 
 
-.. raw:: latex
+.. _minimum-threshold:
 
-    \newpage
+minimum threshold & not splitted work
+-------------------------------------
 
+.. figure:: /images/GUI/CONCEPT_ZONE_Treshold&NoSPlit.png
+   :alt: The minimum threshold and the option not splitted work 
+   
+   The minimum threshold and the option not splitted work
+   
+When this value is set, the activity will only be scheduled on the day that the daily availability will be greater than or equal to this threshold.
 
-Prioritized planning elements
------------------------------
+You also have the option to add a new property to a "can not be split" task.
 
-Planning elements are scheduled in this order of priority:
+This will require defining the minimum work to be allocated each day and thus filling in the minimum threshold field
 
-#. Fixed date (Fixed milestone, Meeting)
-#. Recurrent activities - Planning modes "Regular..." (Activity, Test session)
-#. Fixed duration (Activity, Test session)
-#. Others
+planning will require finding consecutive days with at least the given value possible.
 
+.. warning:: Do not take into account the "real" work.
 
 .. _scheduling-priority:
 
@@ -753,7 +792,7 @@ Glossary
     **Set automatically the responsible**
 
        It is possible to set automatically the responsible.
-       More detail, see: :ref:`Global parameters<auto-responsible>`	
+       More detail, see: :ref:`Global parameters<auto-responsible>`  
 
     **Accelerator button**
 
@@ -1024,7 +1063,6 @@ Allocation to project
 
 .. sidebar:: Concepts 
 
-   * :ref:`allocation-to-project`
    * :ref:`profiles-definition`
    * :ref:`user-ress-contact-demystify`
    
@@ -1197,7 +1235,13 @@ The assignment is used to assign resources to project tasks (activity, test sess
 
 Consists to assign a resource to a task in a specific function. The function allows to define the resource daily cost.
 
-A resource assignment contains data about work on task (planned,  real, left and reassessed work).
+A resource assignment contains data about work on task (planned, real, left and reassessed work).
+
+You can not remove a resource assignment once the resource has entered real work on the activity.
+
+Similarly, if the resource has completed its activity, deletion is not possible. 
+
+You keep track of the resources that have been assigned and worked on the activity.
     
 .. note::
 

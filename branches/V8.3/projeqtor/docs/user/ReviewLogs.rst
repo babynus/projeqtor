@@ -1,14 +1,24 @@
 .. include:: ImageReplacement.txt
 
-.. title:: Review logs
+.. index:: Steering
+
+.. title:: Steering
 
 .. index:: Meeting 
+
+
+.. _steering-page:
 
 .. _meeting:
 
 Meetings
 ********
 
+.. figure:: /images/GUI/STEERING_SCR_Meeting.png
+   :alt: Meeting screen
+   
+   Meeting screen
+   
 Meeting items are stored to keep track of important meetings during the project lifecycle :
 
 * Progress Meetings
@@ -36,7 +46,8 @@ Each meeting is displayed in the agenda
    * :ref:`Predecessor and Sucessor <predSuces-element-section>`
    * :ref:`Linked element<linkElement-section>`   
    * :ref:`Attachments<attachment-section>`
-   * :ref:`Notes<note-section>`   
+   * :ref:`Notes<note-section>` 
+   * :ref:`Live meeting<live-meeting-steering>`    
 
 .. tabularcolumns:: |l|l|
 
@@ -54,12 +65,17 @@ Each meeting is displayed in the agenda
    * - |RequiredField| Project
      - The project concerned by the meeting.
    * - |RequiredField| Meeting date
-     - Date of the meeting (initially expected date), including start and end time.
+     - The initial date of the meeting, including the start and end time.
    * - Location
      - Place (room or else) when meeting will stand.
-   * - :term:`Description`
-     - Description of the meeting. 
- 
+   * - Email invitation
+     - Send an email to the expected participant in the :ref:`Attendees<attendees-Section>` section
+   * - Start Meeting button
+     - Allow to go on the :ref:`live meeting<live-meeting-steering>` screen. 
+   * - Agenda of the meeting
+     - Description of the meeting and agenda. 
+     
+      
 .. topic:: Field Name
 
    If not set, will automatically be set to meeting type completed with meeting date.
@@ -115,6 +131,195 @@ Each meeting is displayed in the agenda
 
    Viewing meetings in agenda, even if they are not planned
 
+
+
+
+.. raw:: latex
+
+    \newpage
+
+.. index:: Live Meeting 
+.. index:: Meeting (Live) 
+
+.. _live-meeting-steering:
+
+Live Meeting
+------------
+
+
+**With LiveMeeting you can manage meetings in an :ref:`Agile` way:**
+
+* Manage minutes of meetings quickly
+
+* Automatically share the time between all participants
+
+* Dynamically measure the speaking time of each participant
+
+* Easily write minutes while assistants speak
+
+* Easily manage actions / decisions / questions while writing minutes
+
+* Manage tickets, activities, actions and requirements with Kanban while writing minutes.
+
+
+**A new button is present in the meeting screen:**
+
+.. figure:: /images/GUI/AGILE_ZONE_LiveMeeting-Button.png
+   :alt: The LiveMeeting button
+   
+   The Live Meeting button
+
+Click this button to access the Live Meeting Management screen.
+
+.. figure:: /images/GUI/AGILE_SCR_LiveMeeting.PNG
+   :alt: The LiveMeeting screen
+   
+   The Live Meeting screen
+
+* Click on |buttonQuit| to exit the LiveMeeting screen
+* Click on |buttonIconSave| to save the live meeting report
+
+
+.. rubric:: Kanban Management
+
+Click on |iconKanban| to manage the kanbans
+ 
+.. figure:: /images/GUI/AGILE_SCR_LiveMeeting-Kanban.png
+   :alt: Kanban management
+   
+   Kanban management in the Live Meeting
+   
+You can manage your Kanban tiles directly in the Live Meeting interface. 
+   
+   
+
+.. rubric:: Starting a meeting 
+
+When the Live Meeting screen opens, the duration of the meeting is automatically distributed equally to all participants.
+
+.. figure:: /images/GUI/AGILE_ZONE_LiveMeeting-Time.PNG
+   :alt: Live meeting screen
+   
+   Time distribution
+   
+ 
+* Click on |meetingPlay| to start the meeting and to start decrementing the speaking time
+
+* Click on |meetingStop| To stop the meeting and therefore close the LiveMeeting window to return to the current meeting screen
+
+* Click on |meetingPause| to pause the speaker's time
+  
+
+
+
+ .. compound:: Set the organizer
+
+   Before starting the meeting, you can define an organizer who will need additional speaking time to be able to lead the meeting.
+
+   To designate it, click twice on the hourglass | LiveMeetingSpeak | to obtain the symbol | moreButton | on the icon.
+
+   The organizer is designated, and sees his time increment double by taking equitable time on the other participants.
+
+
+   .. figure:: /images/GUI/AGILE_ZONE_Organizer.png
+      :alt: set an organizer
+      
+      The designated organizer has a PLus on the hourglass icon of his tab
+
+   Note that only one participant can be defined as an organizer.
+
+   To set another participant as an organizer, you must first redefine the current organizer as a normal participant by clicking the hourglass button again.
+
+
+
+ .. compound:: Speaking Time
+ 
+  If you started the meeting by clicking on the Play icon at the top right of the screen, then this is the first speaker displayed, the one with the green sign that will begin speaking.
+
+  Otherwise, click on the speaker's tab of your choice to start your speaking time.
+  
+  
+  * Click on |LiveMeetingDtSpeak| to prevent a speaker from speaking
+
+  * Click on |LiveMeetingSpeak| to give him the floor again
+    
+  If you prevent a speaker's speaking time by clicking on the hourglass, then the remaining speaking time of the speaker will be redistributed to the other participants entitled to speak.
+
+
+
+
+ .. compound:: Write a meeting report 
+
+   During the course of the meeting, the person in charge of the report can inform and report the words of the various participants.
+
+   The text editor is dynamic and reacts to speakers who have the floor.
+
+   When one speaker is finished and another speaker speaks, a field is added in the text editor with the name of the speaker with the detail of the time
+
+   The pause is also mentioned always with the detail of the time.
+
+
+   .. figure:: /images/GUI/AGILE_ZONE_Speaker.png
+      :alt: The field with the speaker's name
+   
+      Field with the speaker's name
+
+   When you stop LiveMeeting by clicking | meetingStop | the meeting report is automatically copied to the Minutes field in the treatment section. 
+   
+   .. figure:: /images/GUI/AGILE_ZONE_Minutes.png
+      :alt: Meeting report 
+      
+      The meeting report is copied in the minutes field in the treament section
+      
+      
+      
+.. rubric:: Actions, Decisions and Actions
+
+
+In the lower part of the screen, if the kanban is not open, you have direct access to actions, decisions and questions.
+
+.. figure:: /images/GUI/AGILE_ZONE_ADQManagement.png
+   :alt: Actions, Decisions, Questions Management
+   
+   Actions, Decisions, Questions Management
+
+Each list acts as the standard "linked element" element present on almost every element screen.
+
+You can then list an item to add it to the list of related items, but also create a new item to add to the list, just like for the Linked Items feature.
+
+All linked items through this feature will appear in linked items in the meeting.
+
+.. important:: Slight difference
+
+**But there is a slight difference with related items:** 
+
+when you click on the name of an item, you are not redirected to it. 
+
+It simply opens in a pop-up form, allowing you to update it without leaving the LiveMeeting screen.      
+
+
+ .. compound:: New element
+ 
+  You can create, edit, or delete an action, decision, or question from the live meeting screen.
+  
+  A pop up opens and allows you to create and edit the selected element.
+  
+   .. figure:: /images/GUI/AGILE_BOX_NewAction.png
+      :alt: Creating a new action
+   
+      Creating a new action 
+
+   * Click on |buttonIconSelect| to select an item into the list by 
+   
+   * Click on |createNewItem| to create an item 
+   
+   * Click on |buttonIconUndo| to undo the current manipulating and close the window
+
+   .. figure:: /images/GUI/AGILE_BOX_CreateAction.png
+      :alt: Creating a new action
+   
+      Creating a new action   
+   
 .. raw:: latex
 
     \newpage

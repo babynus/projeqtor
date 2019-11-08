@@ -1,8 +1,11 @@
+.. include:: ImageReplacement.txt
+
 .. ProjeQtOr user guide documentation master file, created by
    sphinx-quickstart on Fri May 29 11:17:53 2015.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
-
+   
+.. _#:
 
 Welcome
 -------
@@ -34,7 +37,6 @@ This allows to bring the adjustments needed to target on the objectives of the p
 The goal of ProjeQtOr is to be Project Management Method independent. 
 Whatever your choice of the method, you can use ProjeQtOr.
 
-
 .. raw:: latex
 
     \newpage
@@ -46,35 +48,67 @@ This section summarizes significant changes made in the user guide document for 
 
 To see complete list of changes made to software, visit the ProjeQtOr web site.
 
-**Current version V8.1 : Mains evolutions**
+**Current version V8.3 : Mains evolutions**
 
-.. topic:: **SSO connection through SAML 2**
+.. topic:: **Incompatible resource**
 
-   Single sign-on: SSO is a method that allows a user to access multiple computer applications (or websites) by performing only one authentication..
+   The goal of being able to define incompatible resources. 
+   
+   If A is scheduled at a given time, B can not be scheduled on the same day as for a load less than or equal to the residual availability of A ...
 
-      * see: :ref:`SSO_Saml2`
+      * see: :ref:`incompatible-resource`
+      
 
-.. topic:: **Surbooking**
+.. topic:: **Support resource**
 
-   Allows you to add extra work time on the standard capabilities of your resources to plan more projects that you will not process
+   If resource B is the resource resource of resource A, if A and planned at a given moment, 
+   
+   B must also be automatically planned pro-rata indicated as employment rate in the definition of the support resource.
 
-      * see: :ref:`surbooking`
+      * see: :ref:`support-resource`
+      
+      
+.. topic:: **Kanban**
+
+   The Kanban method is based on the continuous improvement of the production processes to allow a lean production management.
+   
+   Until now kanban was offered as a paid plugin. As of version 8.3, ProjeQtOr integrates this method into its basic version.
+   
+      * see: :ref:`kanban`
+
+.. topic:: **LiveMeeting**
+
+   With LiveMeeting, you can easily manage your meetings in agile mode.
+   
+   Until now LiveMeeting was offered as a paid plugin. As of version 8.3, ProjeQtOr integrates this method into its basic version.
+   
+      * see: :ref:`live-meeting-steering`
+      
+--------------------------------------------------------------------
+
+**Reminder of the latest evolutions from V8.2**
+
+**Cloned environements**
+
+ * see: :ref:`cloned-environment`
+
+**Minimum Threshold and the task "should not be split**
+
+ * see: :ref:`minimum-threshold`
 
 --------------------------------------------------------------------
 
-**Reminder of the latest evolutions from V8.0**
+**Reminder of the latest evolutions from V8.1**
 
-**Financial:**  finalization of the expenditure part to put it at the same level as the incomes
+**SSO connection through SAML 2**
 
- * See: :ref:`Expenses` and :ref:`Incomes`
+ * see: :ref:`SSO_Saml2`
 
-**Humans Resources:** Allows to manage the society’s humans resources
+**Surbooking** and 
 
- * See: :ref:`humans_resources`
+ * see: :ref:`surbooking`
 
-**Modules Management:** Allows to activate or no the modules wich include a coherent group of features.
-
- * See: :ref:`Module_Management`
+--------------------------------------------------------------------
 
 
 .. raw:: latex
@@ -91,7 +125,7 @@ It is particularly well suited to IT projects, but can manage any type of projec
 It offers all the features needed to different Project Management actors under a unique collaborative interface.
   
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    
    Features
 
@@ -103,11 +137,21 @@ This chapter defines the concepts of ProjeQtOr.
 They can be referred in the following chapters.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    Concept
 
+Agile Methods
+-------------
 
+This chapter includes ProjeQtOr features that allow you to practice agile methods.
+
+.. toctree::
+   :maxdepth: 2
+   
+   Agile
+
+   
 Graphical user interface
 ------------------------
 
@@ -237,7 +281,7 @@ Tools
 -----
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
  
    Tools
 

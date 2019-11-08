@@ -157,8 +157,8 @@ The message will be displayed in a color depending on the message type.
 
 .. _message-legal:
 
-Message Legal
--------------
+Legal notice
+------------
 
 You can define a "legal" message that will be displayed when you log in from the home screen
 
@@ -367,6 +367,202 @@ The files must respect some basic rules.
 * Correctly imported files are moved to a “done” sub folder of the import folder.
 * If an error occurs during import of a file, the full file is moved to “error” sub-folder of the import folder, even if there is only one error over many other items correctly integrated.
 * You can get the result as a log file and/or email summary. 
+
+.. raw:: latex
+
+    \newpage
+
+.. index:: Manual Notification
+
+.. _cloned-environment:
+
+Cloned Environnement
+--------------------
+
+You will be able to duplicate the complete environment (data and code) to form a simulation environment. 
+
+.. rubric:: Administration of simulation requests
+
+.. figure:: /images/GUI/TOOLS_ZONE_ClonedEnvironment.png
+   :alt: Cloned environment parameters
+   
+   Cloned environment parameters
+   
+   
+This parameters will also be accessible from simulated environments.
+
+Click on |buttonIconParameter| on the Simulation Management screen
+   
+   
+ .. compound:: Rights management
+
+   Definition of profiles that have the right to create a simulation.
+   
+ .. compound:: Sequencing of the creation of simulations
+
+   This is the setting for taking creation requests into account.
+   
+   * **Fixed frequency**
+   
+     Analyzes creation requests at regular intervals and starts the generation of simulation environment as soon as a request is encountered.
+   
+   * **At a given time**
+   
+     to program night creations for example
+     
+     "Immediate" requests may take some time if multiple simulation requests are generated simultaneously.  
+  
+  
+ .. compound:: Definition and management of boundaries
+
+   You can limit the number of total simulations per profiles.
+   
+      This limitation can have some advantages:
+      
+      * avoid saturating the server.
+      * force users to clean up their files.
+      * limit performance degradation caused by the creation of a simulated environment
+
+   If the limits are reached, the request screen to create a simulated environment will be blocked and the reason explained.
+   
+   .. figure:: /images/GUI/TOOLS_BOX_RequestInvalid.PNG
+      :alt: Invalid Request
+      
+      example of a invalid request due to too much creation request.
+      
+      
+   Removal requests will be decremented.
+
+.. rubric:: The cloned Environment managment
+
+.. figure:: /images/GUI/TOOLS_SCR_ClonedEnvironment.png
+   :alt: Cloned Environment managment
+   
+   Cloned environment managment
+   
+This screen allows you to manage your queries for new simulation environments, to follow them or to request the deletion of a particular simulation.
+
+You can also track requests from other users based on your profiles and your rights.
+
+
+ .. compound:: Generating a simulation environment
+
+   To request the creation of a new simulation area, click on |buttonAdd|
+   
+   A pop up will appear allowing you to make your request.
+   
+   .. figure:: /images/GUI/TOOLS_BOX_AddRequest.png
+      :alt: Add request
+      
+      Add request
+      
+
+   Identify yourself and name your space
+   
+   The simulated databases will always have a name prefixed by "simu_" followed by the name of the simulation.
+   
+
+
+ .. compound:: Availability date
+
+   The dates of availability of the simulation spaces are indicated when your request is taken into account.
+   
+   
+ .. compound:: Color code
+   
+   * **Blue:** Request being created
+   * **Orange:** Warning (delete request)
+   * **Red:** Error creating the environment (path, rights ...)
+   * **Green:** Environment creates ready to open
+   
+      
+ .. compound:: Go to the cloned Environment
+   
+   When your simulation is ready, green status, you can open your cloned environment.
+   Click on |iconGoto| to launch the environment.
+   
+   A new tab opens with a new ProjeQtOr session. Authenticate yourself, you can start working in your environment.
+   
+   .. figure:: /images/GUI/TOOLS_SCR_ClonedEnvironmentSession.PNG
+      :alt: Cloned environment session
+      
+      Cloned environment session
+   
+   The instance area turns red when you are in a simulation space.
+   
+   Not all screens or functions will be accessible in this space. 
+   
+   For example, you will not be able to request and create a new simulation space in your cloned environment.   
+     
+     
+ .. compound:: Copy a cloned Environment
+   
+You did a successful simulation on one of your cloned environment. 
+
+You want the copy to run other tests but without touching the simulation.
+
+Just copy this environment.
+
+The origin of the copy will then be indicated in the list with a shortcut to access it.
+
+   
+ .. compound:: Copying datas
+   
+   It is necessary to copy the code and the data because the simulations created in a version could no longer be compatible with the code of the main instance that has migrated.
+
+   The creation of a simulation instance is a heavy process for the server: duplication of code, duplication of data...
+   
+   That's why when generating your simulation space, not all data is copied.
+   
+  
+      **Is not copied**
+      
+           * Archived data (closed)
+           * Update history
+           * Attached documents and files
+      
+      **Copy of the code** 
+      
+      Disabling all automation and notifications
+      
+      Update the simulations table to record the actual creation:
+      
+           * Date and time of actual creation,
+           * Flag "available environment"
+           * Instance access URL 
+
+
+ .. compound:: Deleting a simulation environment
+
+   Request to delete a simulated environment:
+   
+   The delete request is available on the simulation list
+   
+   Delete requests are stored in the simulations table
+   
+   Deletes are processed in the same process as creatives but before creatives to free up space before allocating new resources to new instances
+
+      **Deleting process:**
+      
+      * Deleting data
+      * Deleting the code
+      * Update the simulations table to record the effective deletion:
+      
+           * Date and time of the effective deletion,
+           * Update of the "available environment" flag   
+
+.. tip::
+
+   To avoid problems of management of the rights too broad and invasion of the server, all the simulations (code) will be placed in a directory "simulation" of the principal repertoire of ProjeQtOr.
+
+   Thus, if the main instance is accessible via the url "projeqtor.dga.fr" the simulations will be accessible via the url "projeqtor.dga.fr/simulation/name_de_simulation".
+
+.. warning:: 
+
+   The CRON program must be started and running so that the simulation request can be taken into account and can be generated.
+
+
+
 
 .. raw:: latex
 

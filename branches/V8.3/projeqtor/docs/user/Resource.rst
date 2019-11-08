@@ -298,6 +298,48 @@ This section allows to define functions and cost of the resource.
      - Box checked indicating that the resource doesn't want to receive mails sent to the team.
 
 
+.. _incompatible-resource:
+
+Incompatible resources
+----------------------
+
+**The goal of being able to define incompatible resources:**
+
+Two resources A and B are incompatible.
+
+If A is scheduled at a given time, B can not be scheduled on the same day as for a load less than or equal to the remaining availability of To date, 
+
+that is, the minimum of [capacity of the resource-load already planned] for each incompatible resource and reciprocally with the relation is bijective.
+
+.. topic::
+
+   Example with two FTE resources = 1
+   
+   Day x, A is scheduled 0.6 d so B can be scheduled only 0.4 d on all the activities on which A is scheduled
+
+
+.. _support-resource:
+
+Support resources
+-----------------
+
+If resource B is the resource resource of resource A, if A and planned at a given moment, B must also be automatically planned pro-rata indicated as employment rate in the definition of the support resource.
+
+If A's support resource B is not available (in part or in full), we plan for A only the part that is available taking into account the employment rate.
+
+The display of the scheduled load for the support resource, although it is not assigned to the activity, is visible on the detail of a right-click Gantt bar.
+
+.. topic::
+
+   Example with B support resource of A with a 50% employment rate
+
+      * Day x, A is available 1.0 d and B 1.0 d: A is planned 1.0 d, B is planned 0.5 d.
+      
+      * Day y, A is available 0.5 d and B 1.0 d: A is planned 0.5 d, B is planned 0.25 d
+      
+      * Day z, A is available 1.0 d and B 0.2 d: A is planned 0.4 d, B is planned 0.2 d
+
+
 .. raw:: latex
 
     \newpage
