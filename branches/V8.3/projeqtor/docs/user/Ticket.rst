@@ -35,6 +35,11 @@ For instance, bugs should be managed through tickets :
    * It's dedicated to users who want to create and follow their own tickets without be involved in their treatment.
    * When fields and features are available, the description is similar.
 
+
+.. index:: Planning activity
+
+.. _planning-activity:
+
 .. rubric:: Planning activity
 
 * Planning activity field allows to link the ticket with a planning activity.
