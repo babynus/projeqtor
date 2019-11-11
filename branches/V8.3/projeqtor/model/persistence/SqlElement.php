@@ -2237,6 +2237,9 @@ abstract class SqlElement {
     if (property_exists($newObj, "paymentsCount")) {
       $newObj->paymentsCount = null;
     }
+    if (property_exists($newObj, "checked")) {
+      $newObj->checked = null;
+    }
     
     if (get_class ( $newObj ) == 'ProviderPayment') {
       $newObj->idPaymentMode = SqlList::getFirstId('PaymentMode');
