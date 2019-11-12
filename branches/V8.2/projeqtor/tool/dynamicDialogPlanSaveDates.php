@@ -42,27 +42,51 @@
                 id="idProjectPlanSaveDates" name="idProjectPlanSaveDates" 
                 class="input" value="" >
                  <?php 
-//                     $proj=null; 
-//                     if (sessionValueExists('project')){
-//                         $proj= getSessionValue('project');
-//                         if(strpos($proj, ",")){
-//                         	$proj="*";
-//                         }
-//                     }
-//                     if ($proj=="*" or ! $proj) $proj=null;
+                    $proj=null; 
+                    if (sessionValueExists('project')){
+                        $proj= getSessionValue('project');
+                        if(strpos($proj, ",")){
+                        	$proj="*";
+                        }
+                    }
+                    if ($proj=="*" or ! $proj) $proj=null;
 //                   htmlDrawOptionForReference('idProject', $proj, null, false)
                     //florent
+                    $pe=new PlanningElement();
                     $scope='changeValidatedData';
-                    $inClause=" id in ". transformListIntoInClause(getSessionUser()->getListOfPlannableProjects($scope));
-                    $inClause.=" and id not in " . Project::getAdminitrativeProjectList();
+                    $sepChar=Parameter::getUserParameter('projectIndentChar');
+                    if (!$sepChar) $sepChar='__';
+                    $wbsLevelArray=array();
+                    $inClause=" idProject in ". transformListIntoInClause(getSessionUser()->getListOfPlannableProjects($scope));
+                    $inClause.=" and idProject not in " . Project::getAdminitrativeProjectList();
+                    $inClause.=" and refType= 'Project'";
                     $inClause.=" and idle=0";
-                    $projObj=new Project() ;
-                    $list=$projObj->getSqlElementsFromCriteria(null,false,$inClause,null,null,true);
+                    $order="wbsSortable asc";
+                    $list=$pe->getSqlElementsFromCriteria(null,false,$inClause,$order,null,true);
+                    $wbsList=SqlList::getList('Project','sortOrder',null,true);
                     foreach ($list as $projOb){
-                 ?>
-                        <option value="<?php echo $projOb->id; ?>"><?php echo $projOb->name; ?></option>      
-                 <?php
-                    }
+                      if (isset($wbsList[$projOb->idProject])) {
+                        $wbs=$wbsList[$projOb->idProject];
+                      } else {
+                        $wbs='';
+                      }
+                      $wbsTest=$wbs;
+                      $level=1;
+                      while (strlen($wbsTest)>3) {
+                        $wbsTest=substr($wbsTest,0,strlen($wbsTest)-6);
+                        if (array_key_exists($wbsTest, $wbsLevelArray)) {
+                          $level=$wbsLevelArray[$wbsTest]+1;
+                          $wbsTest="";
+                        }
+                      }
+                      $wbsLevelArray[$wbs]=$level;
+                      $sep='';
+                      for ($i=1; $i<$level;$i++) {$sep.=$sepChar;}
+                      $val = $sep.$projOb->refName;
+                      ?>
+                      <option value="<?php echo $projOb->idProject; ?>"><?php echo $val; ?></option>      
+                     <?php
+                   }
                  ?>
                </select>
              </td>
