@@ -1806,7 +1806,16 @@ scriptLog("storeListPlan(listPlan,$plan->id)");
   	}
   	$cpt=0;
   	$proj=new Project($projectId,true);
-  	$inClause="idProject in " . transformListIntoInClause($proj->getRecursiveSubProjectsFlatList(true, true));
+  	$scope='changeValidatedData';
+  	$listSubproj=$proj->getRecursiveSubProjectsFlatList(true, true);
+  	$listValidProj=getSessionUser()->getListOfPlannableProjects($scope);
+  	$validSubProj=array();
+  	foreach ($listValidProj as $id=>$value){
+  	  if(isset($listSubproj[$id])){
+  	    $validSubProj[]=$listSubproj[$id];
+  	  }
+  	}
+  	$inClause="idProject in " . transformListIntoInClause($validSubProj);
   	$obj=new PlanningElement();
   	$tablePE=$obj->getDatabaseTableName();
   	$inClause.=" and " . getAccesRestrictionClause('Activity',$tablePE);
