@@ -268,8 +268,10 @@ if ($type == 'empty') {
     $user = getSessionUser ();
     $list = $user->getVisibleProjects ();
     $restrictArray = $user->getListOfPlannableProjects ();
+    //Flo #4311
+    $administrativ=Project::getAdminitrativeProjectList(true);
     foreach ( $list as $prj => $prjname ) {
-      if ($prj != '*' and ! isset ( $restrictArray [$prj] ) or trim ( $prj ) == '') {
+      if ($prj != '*' and ! isset ( $restrictArray [$prj] ) or trim ( $prj ) == '' or isset($administrativ[$prj])) {
         unset ( $list [$prj] );
       }
 // MTY - LEAVE SYSTEM
@@ -441,7 +443,7 @@ if ($type == 'empty') {
         if (!Project::isProjectLeaveVisible()) {
             $idLeavePrj = Project::getLeaveProjectId();
             unset($list[$idLeavePrj]);
-  }
+        }
     }
 // MTY - LEAVE SYSTEM
   }
@@ -592,7 +594,7 @@ if ($type == 'empty') {
       $wbsTest = $wbs;
       $level = 1;
       while ( strlen ( $wbsTest ) > 3 ) {
-        $wbsTest = substr ( $wbsTest, 0, strlen ( $wbsTest ) - 4 );
+        $wbsTest = substr ( $wbsTest, 0, strlen ( $wbsTest ) - 6 );
         if (array_key_exists ( $wbsTest, $wbsLevelArray )) {
           $level = $wbsLevelArray [$wbsTest] + 1;
           $wbsTest = "";
