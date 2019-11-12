@@ -72,6 +72,15 @@ class Dependency extends SqlElement {
    *  must be redefined in the inherited class
    */
   public function control(){
+    // Must have write access to successor to create link
+    $succClass=$this->successorRefType;
+    if ($succClass and SqlElement::class_exists($succClass)) {
+      $succ=new $succClass($this->successorRefId);
+      $canUpdateSucc=(securityGetAccessRightYesNo('menu' . $succClass, 'update', $succ)=='YES');
+      if (! $canUpdateSucc) {
+        return '<br/>' . i18n('errorUpdateRights');
+      }
+    }
   	if ($this->id) return "OK";
     $result="";
     $this->predecessorRefId=intval($this->predecessorRefId);
@@ -172,15 +181,6 @@ class Dependency extends SqlElement {
     if ($this->predecessorRefType==$this->successorRefType and $this->predecessorRefId==$this->successorRefId) {
       $result.='<br/>(11)' . i18n('errorDependencyLoop');
     }
-    // Must have write access to successor to create link
-    $succClass=$this->successorRefType;
-    if ($succClass and SqlElement::class_exists($succClass)) {  	
-	    $succ=new $succClass($this->successorRefId);
-	    $canUpdateSucc=(securityGetAccessRightYesNo('menu' . $succClass, 'update', $succ)=='YES');
-	    if (! $canUpdateSucc) {
-	    	$result.='<br/>' . i18n('errorUpdateRights');
-	    }
-    }
     if($this->predecessorRefType=='PeriodicMeeting' or $this->successorRefType=='PeriodicMeeting'){
     	$result.='<br/>' . i18n('errorDependencyPeriodicMeeting');
     }
@@ -252,6 +252,23 @@ class Dependency extends SqlElement {
     PlanningElementExtension::checkDelete($this->predecessorRefType,$this->predecessorRefId);
     PlanningElementExtension::checkDelete($this->successorRefType,$this->successorRefId);
     
+    return $result;
+  }
+  
+  public function deleteControl() {
+    // Must have write access to successor to remove link
+    $result="";
+    $succClass=$this->successorRefType;
+    if ($succClass and SqlElement::class_exists($succClass)) {
+      $succ=new $succClass($this->successorRefId);
+      $canUpdateSucc=(securityGetAccessRightYesNo('menu' . $succClass, 'update', $succ)=='YES');
+      if (! $canUpdateSucc) {
+        $result.='<br/>' . i18n('errorUpdateRights');
+      }
+    }
+    if (! $result) {
+      $result=parent::deleteControl();
+    }
     return $result;
   }
   
