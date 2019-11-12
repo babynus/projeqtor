@@ -353,7 +353,8 @@ if ($idProject) {
     $initArray[$idK]=0;
     $arrValuesStatus[$idK]=array();
   }
-
+  
+  ksort($arrayResP);
   foreach($arrayResP as $p=>$res) { // $arrayResP = array [period][idItem]=>idItemStatus
     foreach ($res as $idItem=>$valItem) {
       $currentVal[$idItem]=$valItem;
