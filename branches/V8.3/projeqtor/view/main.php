@@ -1873,26 +1873,50 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                 id="idProjectPlan" name="idProjectPlan[]" onChange="changedIdProjectPlan(this.value);"
                 value=" " >
                  <option value=" "><strong><?php echo i18n("allProjects");?></strong></option>
-                                  <?php 
-//                     $proj=null; 
-//                     if (sessionValueExists('project')) {
-//                         $proj=getSessionValue('project');
-//                         if(strpos($proj, ",")){
-//                         	$proj="*";
-//                         }
-//                     }
-//                     if ($proj=="*" or ! $proj) $proj=null;
+                 <?php 
+                    $proj=null; 
+                    if (sessionValueExists('project')) {
+                        $proj=getSessionValue('project');
+                        if(strpos($proj, ",")){
+                        	$proj="*";
+                        }
+                    }
+                    if ($proj=="*" or ! $proj) $proj=null;
+//                     $projs=$user->getListOfPlannableProjects();
+//                     htmlDrawOptionForReference('planning', null, null, true );
                     $user=getSessionUser();
-                    //$projs=$user->getListOfPlannableProjects();
-                    //htmlDrawOptionForReference('planning', null, null, true );
-                    $inClause=" id in ". transformListIntoInClause(getSessionUser()->getListOfPlannableProjects());
-                    $inClause.=" and id not in " . Project::getAdminitrativeProjectList();
+                    $wbsList=SqlList::getList('Project','sortOrder',$proj, true );
+                    $sepChar=Parameter::getUserParameter('projectIndentChar');
+                    if (!$sepChar) $sepChar='__';
+                    $wbsLevelArray=array();
+                    $inClause=" idProject in ". transformListIntoInClause(getSessionUser()->getListOfPlannableProjects());
+                    $inClause.=" and idProject not in " . Project::getAdminitrativeProjectList();
+                    $inClause.=" and refType= 'Project'";
                     $inClause.=" and idle=0";
-                    $projObj=new Project() ;
-                    $list=$projObj->getSqlElementsFromCriteria(null,false,$inClause,null,null,true);
+                    $order="wbsSortable asc";
+                    $pe=new PlanningElement();
+                    $list=$pe->getSqlElementsFromCriteria(null,false,$inClause,$order,null,true);
                     foreach ($list as $projOb){
+                      if (isset($wbsList[$projOb->idProject])) {
+                        $wbs=$wbsList[$projOb->idProject];
+                      } else {
+                        $wbs='';
+                      }
+                      $wbsTest=$wbs;
+                      $level=1;
+                      while (strlen($wbsTest)>3) {
+                        $wbsTest=substr($wbsTest,0,strlen($wbsTest)-6);
+                        if (array_key_exists($wbsTest, $wbsLevelArray)) {
+                          $level=$wbsLevelArray[$wbsTest]+1;
+                          $wbsTest="";
+                        }
+                      }
+                      $wbsLevelArray[$wbs]=$level;
+                      $sep='';
+                      for ($i=1; $i<$level;$i++) {$sep.=$sepChar;}
+                      $val = $sep.$projOb->refName;
                       ?>
-                      <option value="<?php echo $projOb->id; ?>"><?php echo $projOb->name; ?></option>      
+                      <option value="<?php echo $projOb->idProject; ?>"><?php echo $val; ?></option>      
                      <?php
                    }
                  ?>
