@@ -966,7 +966,7 @@
         $wbsTest=$wbs;
         $level=1;
         while (strlen($wbsTest)>3) {
-        	$wbsTest=substr($wbsTest,0,strlen($wbsTest)-4);
+        	$wbsTest=substr($wbsTest,0,strlen($wbsTest)-6);
         	if (array_key_exists($wbsTest, $wbsLevelArray)) {
         		$level=$wbsLevelArray[$wbsTest]+1;
         		$wbsTest="";
