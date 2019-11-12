@@ -866,7 +866,7 @@ class UserMain extends SqlElement {
     	$wbsArray[$projPe->wbsSortable]=array();
     	$wbsArray[$projPe->wbsSortable]['cpt']=0;
     	while (strlen($wbsTest)>3) {
-    		$wbsTest=substr($wbsTest,0,strlen($wbsTest)-4);
+    		$wbsTest=substr($wbsTest,0,strlen($wbsTest)-6);
     		if (array_key_exists($wbsTest,$wbsArray)) {
     			$wbsParent=$wbsTest;
     			$wbsTest="";
