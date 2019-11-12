@@ -293,6 +293,9 @@ html, body {
       opacity:0;filter:alpha(opacity=00);
       /* pointer-events: none; */ /* removed to be able to scroll on, the box when message is big */
     }
+    #resultDiv {
+      pointer-events: none;
+    }
 
     #comboDetailResult {
       width:48%;
