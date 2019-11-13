@@ -5229,11 +5229,25 @@ abstract class SqlElement {
       
     }
     //END add gmartin 
+    
     if ($directStatusMail) {
       $idTemplate=(trim($directStatusMail->idEmailTemplate))?$directStatusMail->idEmailTemplate:'0';
+      if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES'){
+        $tabDest=explode(",", $destTab[$idTemplate]);
+        if(count($tabDest)!=count($resultMail)){
+          $curUser=new Affectable(getSessionUser()->id);
+          foreach ($tabDest as $id=>$mail){
+            if(trim($mail)==$curUser->email){
+              unset($tabDest[$id]);
+            }
+          }
+        }
+        $destTab[$idTemplate]=implode(",", $tabDest);
+      }
       if ($resultMail and $resultMail[0]!='') {
         return array('result' => 'OK', 'dest' => $destTab[$idTemplate]);
-      //} else if (){
+      }else if ($resultMail[0]==''){
+        return array('result' => 'Fail', 'dest' => $destTab[$idTemplate]);
       }else{
         return array('result' => '', 'dest' => $destTab[$idTemplate]);
       }
