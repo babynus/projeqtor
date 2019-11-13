@@ -928,11 +928,11 @@ function htmlDrawCrossTable($lineObj, $lineProp, $columnObj, $colProp, $pivotObj
 // MTY - LEAVE SYSTEM
     // Don't draw leave system menu
     $testIfLeavesSystemMenu = false;
-    if (!is_array($lineObj)) {
-        if ($lineObj=="menu" and $lineProp=="idMenu") {
-            $testIfLeavesSystemMenu = true;
-        }
-    }
+//     if (!is_array($lineObj)) {
+//         if ($lineObj=="menu" and $lineProp=="idMenu") {
+//             $testIfLeavesSystemMenu = true;
+//         }
+//     }
 // MTY - LEAVE SYSTEM
   global $collapsedList;
 	if (is_array($lineObj)) {
@@ -940,15 +940,15 @@ function htmlDrawCrossTable($lineObj, $lineProp, $columnObj, $colProp, $pivotObj
   } else {
     $lineList=SqlList::getList($lineObj);
 // MTY - LEAVE SYSTEM        
-    if (isLeavesSystemActiv() and $testIfLeavesSystemMenu) {
-      $tempLineList = $lineList;
-      // Don't draw leave system menu
-      foreach($tempLineList as $id => $line) {
-        if (isLeavesSystemMenu($id)) {
-          unset($lineList[$id]);
-        }
-      }
-    }
+//     if (isLeavesSystemActiv() and $testIfLeavesSystemMenu) {
+//       $tempLineList = $lineList;
+//       // Don't draw leave system menu
+//       foreach($tempLineList as $id => $line) {
+//         if (isLeavesSystemMenu($id)) {
+//           unset($lineList[$id]);
+//         }
+//       }
+//     }
 // MTY - LEAVE SYSTEM        
   }
   // Filter on line (for instance will filter menu)
@@ -987,14 +987,14 @@ function htmlDrawCrossTable($lineObj, $lineProp, $columnObj, $colProp, $pivotObj
   foreach($lineList as $lineId => $lineName) {
 // MTY - LEAVE SYSTEM
         // Don't show menu of leave system in habilitation if not activ
-        if (!isLeavesSystemActiv() and 
-            $pivotObj=="habilitation" and 
-            $lineObj=="menu" and 
-            in_array($lineName, leavesSystemMenuI18nList())) {
-            $breakNum=0;
-            $breakVal='';
-            continue;
-        }
+//         if (!isLeavesSystemActiv() and 
+//             $pivotObj=="habilitation" and 
+//             $lineObj=="menu" and 
+//             in_array($lineName, leavesSystemMenuI18nList())) {
+//             $breakNum=0;
+//             $breakVal='';
+//             continue;
+//         }
         if (!is_array($lineObj) and $lineObj=="menu") {
           $menuName=SqlList::getNameFromId('Menu', $lineId,false);
           if (!Module::isMenuActive($menuName)) {
