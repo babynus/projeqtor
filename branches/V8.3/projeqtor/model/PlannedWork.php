@@ -2166,7 +2166,7 @@ class PlannedWork extends GeneralWork {
   	$validSubProj=array();
   	foreach ($listValidProj as $id=>$value){
   	  if(isset($listSubproj[$id])){
-  	    $validSubProj[]=$listSubproj[$id];
+  	    $validSubProj[$id]=$listSubproj[$id];
   	  }
   	}
   	$inClause="idProject in " . transformListIntoInClause($validSubProj);
