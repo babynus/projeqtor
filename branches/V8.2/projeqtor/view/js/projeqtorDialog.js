@@ -750,8 +750,6 @@ function selectDetailItem(selectedValue, lastSavedName) {
   		combo.set("value", idFldVal);
   		//}
     }else{
-      if(idFldVal.indexOf('_')>=0) 
-        idFldVal=idFldVal.split('_');
   		combo.set("value", idFldVal);
   	}
   }
