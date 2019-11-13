@@ -141,7 +141,7 @@ class PlanningElement extends SqlElement {
                                   "surbooked"=>"hidden",
                                   "indivisibility"=>"hidden",
                                   "minimumThreshold"=>"hidden",
-                                  "fixPlanning;"=>"hidden"
+                                  "fixPlanning"=>"hidden"
   );   
   
   private static $_predecessorItemsArray = array();
