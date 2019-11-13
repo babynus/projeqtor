@@ -55,6 +55,16 @@ if ($currentWeek>50 and $currentMonth==1 ) {
 	$currentYear-=1;
 }
 $firstDay = date('Y-m-d', firstDayofWeek($currentWeek, $currentYear));
+
+if(sessionValueExists('endWeekImputationValidation')){
+	$lastWeek = weekNumber(getSessionValue('endWeekImputationValidation'));
+	$lastYear = date('Y',strtotime(getSessionValue('endWeekImputationValidation')));
+}else{
+	$lastWeek = date('W');
+	$lastYear = date('Y');
+}
+
+$lastDay = lastDayofWeek($lastWeek, $lastYear);
 ?>
 
 <div dojoType="dijit.layout.BorderContainer" id="imputationValidationParamDiv" name="imputationValidationParamDiv">  
