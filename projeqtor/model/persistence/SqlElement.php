@@ -5238,7 +5238,17 @@ abstract class SqlElement {
         return array('result' => '', 'dest' => $destTab[$idTemplate]);
       }
     }
-    return $resultMail;
+    $valide=0;
+    foreach ($resultMail as $id=>$value){
+      if($value!=''){
+        $valide++;
+      }
+    }
+    if($valide!=0){
+      return $resultMail;
+    }
+    return;
+    
   }
 
   public static function getBaseUrl() {
