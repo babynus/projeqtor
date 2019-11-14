@@ -374,6 +374,10 @@ class Parameter extends SqlElement {
         $list=array('YES'=>i18n('displayYes'),
       	            'NO'=>i18n('displayNo'));
       	break;
+    	case 'autoAffectationPool' :
+    	  $list=array('NO'=>i18n('displayNo'),'IMPLICIT'=>i18n('displayImplicit'),
+    	  'EXPLICIT'=>i18n('displayExplicit'));
+    	  break;
       case 'submitAlertSendToProjectLeader': case 'submitAlertSendToTeamManager': 
       case 'submitAlertSendToOrganismManager':
         $list=array('NONE'=>i18n('displayNone'),
@@ -855,7 +859,9 @@ class Parameter extends SqlElement {
           	              //    'enablePredefinedActions'=>'list',
       	                      'manageAccountable'=>'list',
           	              'sectionOrganization'=>'section',
-          	                  'useOrganizationBudgetElement'=>'list', // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
+          	              'useOrganizationBudgetElement'=>'list', // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
+          	              'sectionPool'=>'section',
+          	               'autoAffectationPool'=>'list',
       	                  'columnPlanningRight'=>'newColumn',
       	                    'sectionPlanningAutomation'=>'section',
       	                      'consolidateValidated'=>'list',

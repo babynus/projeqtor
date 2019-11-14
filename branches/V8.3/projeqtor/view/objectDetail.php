@@ -6745,6 +6745,7 @@ function drawAffectationsFromObject($list, $obj, $type, $refresh=false) {
   
   echo '</tr>';
   foreach ($list as $aff) {
+    if($aff->hideAffectation)continue;
     $canUpdate=securityGetAccessRightYesNo('menuAffectation', 'update', $aff)=="YES";
     $canDelete=securityGetAccessRightYesNo('menuAffectation', 'delete', $aff)=="YES";
     if (!(securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES")) {
