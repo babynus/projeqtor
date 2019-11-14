@@ -3141,9 +3141,11 @@ function drawOrigin($list, $refType, $refId, $obj, $col, $print) {
 function drawHistoryFromObjects($refresh=false) {
   global $cr, $print, $printWidth, $treatedObjects, $comboDetail, $displayWidth,$collapsedList, $paneHistory, $included, $layout;
   $mainObj=null;
+  $showArchiveValue=1;
   $showArchive=false;
-  if(RequestHandler::isCodeSet('showArchive')){
-      $showArchive=RequestHandler::getValue('showArchive');
+  if(getSessionValue('showArchive')==1){
+      $showArchive=true;
+      $showArchiveValue=0;
   }
   if (isset($treatedObjects[0])) $mainObj=$treatedObjects[0];
   $widthPct=setWidthPct($displayWidth, $print, $printWidth, $mainObj, "2");
@@ -3222,15 +3224,16 @@ function drawHistoryFromObjects($refresh=false) {
   echo '<td class="historyHeader" style="width:15%">'.i18n('colUser').'</td>';
   if(RequestHandler::isCodeSet('dialog') and RequestHandler::getValue('dialog')=='dialogHistory' ){
       echo '<div style="position:absolute;right:30px;top:-1px;">';
-      echo '  <button id="historyArchive" region="center" dojoType="dijit.form.Button"  iconClass="iconHistArchive16 iconHistArchive iconSize16" > ';
+      echo '  <button id="historyArchive" title="'.i18n('helpShowHistoryArchive').'" region="center" dojoType="dijit.form.Button"  iconClass="iconHistArchive16 iconHistArchive iconSize16" > ';
       echo '     <script type="dojo/connect" event="onClick" args="evt">';
-      echo '         var params="&objectClass=" + '.json_encode(get_class($mainObj)).' + "&objectId=" + '.$mainObj->id.'+ "&showArchive=true" ;';
-      echo '         loadDialog("dialogHistory", null, true, params);';
+      echo '         saveDataToSession("showArchive",'.$showArchiveValue.');';
+      echo '         loadDialog("dialogHistory", null, true);';
   }else{
       echo '<div style="position:absolute;right:6px;top:3px;">';
-      echo '  <button id="historyArchive" region="center" dojoType="dijit.form.Button"  iconClass="iconHistArchive16 iconHistArchive iconSize16" > ';
+      echo '  <button id="historyArchive" title="'.i18n('helpShowHistoryArchive').'" region="center" dojoType="dijit.form.Button"  iconClass="iconHistArchive16 iconHistArchive iconSize16" > ';
       echo '     <script type="dojo/connect" event="onClick" args="evt">';
-      echo '         loadContent("objectDetail.php?showArchive=true", "detailDiv", "listForm")';
+      echo '         saveDataToSession("showArchive",'.$showArchiveValue.');';
+      echo '         loadContent("objectDetail.php", "detailDiv", "listForm")';
   }
   echo '     </script>';
   echo '  </button>';
