@@ -2230,6 +2230,7 @@ helpSetHandledOnRealWork: "nastaviť úlohu najprv na stav &#34spracovaný&#34 k
 helpSetResponsibleIfNeeded: "automaticky nastaviť zodpovednosť na aktuálny zdroj&#44 je to povinné (závisí od stavu)",
 helpSetResponsibleIfSingle: "automaticky nastaviť zodpovednosť&#44 ak nie je nastavená a pre projekt je pridelený len jeden zdroj",
 helpShowDetail: "show detail by project",
+helpShowHistoryArchive: "Show archived history",
 helpShowIdleDefault: "Can set &#34show idle&#34 checked by default&#13;Does not concern Planning screens and Timesheet&#13;Unlike &#34archive mode&#34&#44 will not show closed items for closed projects",
 helpShowSubscribedItems: "show list of items you are following",
 helpShowTendersOnVersions: "Zobrazte sekciu na zobrazenie prepojených ponúk na produkty&#44 komponenty&#44 verzie produktov a verzie komponentov",

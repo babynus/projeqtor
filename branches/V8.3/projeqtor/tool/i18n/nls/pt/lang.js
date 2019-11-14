@@ -2230,6 +2230,7 @@ helpSetHandledOnRealWork: "Modificar a tarefa para o estado primeira &#34;tratad
 helpSetResponsibleIfNeeded: "colocar automaticamente o responsável do recurso actual se não estiver colocado e se o responsável for necessário (depende do estado)",
 helpSetResponsibleIfSingle: "colocar automaticamente o responsável e apenas um recurso estiver afeto ao projeto",
 helpShowDetail: "show detail by project",
+helpShowHistoryArchive: "Show archived history",
 helpShowIdleDefault: "Can set &#34show idle&#34 checked by default&#13;Does not concern Planning screens and Timesheet&#13;Unlike &#34archive mode&#34&#44 will not show closed items for closed projects",
 helpShowSubscribedItems: "mostrar lista de itens que subscreveu",
 helpShowTendersOnVersions: "Mostras uma secção para listar orçamentos ligados a produtos&#44; componentes&#44; versões de produto e versões de componente",

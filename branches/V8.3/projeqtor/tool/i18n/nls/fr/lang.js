@@ -2230,6 +2230,7 @@ helpSetHandledOnRealWork: "Positionner la tâche au premier état 'pris en charg
 helpSetResponsibleIfNeeded: "renseigner automatiquement le responsable avec la resource courante quand l'état de l'élément rend le responsable obligatoire",
 helpSetResponsibleIfSingle: "renseigner automatiquement le responsable si une seule ressource est affectée au projet",
 helpShowDetail: "afficher le détail par projet",
+helpShowHistoryArchive: "Montrer l'historique archivé",
 helpShowIdleDefault: "Peut cocher &#34montrer les éléments clos&#34 par défaut.&#13;Ne concerne pas les écrans de planning et les imputations.&#13;Contrairement au &#34mode archive&#34&#44 ne montre pas les éléments clos des projets clos.",
 helpShowSubscribedItems: "Montrer la liste des éléments que vous suivez",
 helpShowTendersOnVersions: "Afficher une section listant les offres liées sur le Produits&#44; les Composants&#44; les Versions de Produits et les Versions de Composants",
