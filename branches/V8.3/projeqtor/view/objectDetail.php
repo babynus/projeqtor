@@ -176,7 +176,6 @@ if ($noselect) {
         $treatedObjects[]=$val;
       }
     }
-    debugLog($_REQUEST);
     drawHistoryFromObjects(true);
     if (isset($dynamicDialogHistory) and $dynamicDialogHistory and function_exists('showCloseButton')) {
       showCloseButton();
@@ -3141,8 +3140,11 @@ function drawOrigin($list, $refType, $refId, $obj, $col, $print) {
 
 function drawHistoryFromObjects($refresh=false) {
   global $cr, $print, $printWidth, $treatedObjects, $comboDetail, $displayWidth,$collapsedList, $paneHistory, $included, $layout;
-
   $mainObj=null;
+  $showArchive=false;
+  if(RequestHandler::isCodeSet('showArchive')){
+      $showArchive=RequestHandler::getValue('showArchive');
+  }
   if (isset($treatedObjects[0])) $mainObj=$treatedObjects[0];
   $widthPct=setWidthPct($displayWidth, $print, $printWidth, $mainObj, "2");
   $displayHistory='REQ';
@@ -3180,10 +3182,13 @@ function drawHistoryFromObjects($refresh=false) {
   $where=' (refType, refId) in '.$inList;
   $order=' operationDate desc, id asc';
   $hist=new History();
-  $histArchive= new HistoryArchive();
   $historyList=$hist->getSqlElementsFromCriteria(null, false, $where, $order);
-  $histArchiveList=$histArchive->getSqlElementsFromCriteria(null, false, $where, $order);
-  
+  //florent
+  if($showArchive==true){
+    $histArchive= new HistoryArchive();
+    $histArchiveList=$histArchive->getSqlElementsFromCriteria(null, false, $where, $order);
+    $historyList=array_merge($historyList, $histArchiveList);
+  }
   if ($print) {
     echo '<table width="'.$printWidth.'px;"><tr><td class="section">'.i18n('elementHistory').'</td></tr></table>';
   } else if (!$refresh) {
@@ -3219,13 +3224,13 @@ function drawHistoryFromObjects($refresh=false) {
       echo '<div style="position:absolute;right:30px;top:-1px;">';
       echo '  <button id="historyArchive" region="center" dojoType="dijit.form.Button"  iconClass="iconHistArchive16 iconHistArchive iconSize16" > ';
       echo '     <script type="dojo/connect" event="onClick" args="evt">';
-      echo '         var params="&objectClass=" + '.json_encode(get_class($mainObj)).' + "&objectId=" + '.$mainObj->id.';';
+      echo '         var params="&objectClass=" + '.json_encode(get_class($mainObj)).' + "&objectId=" + '.$mainObj->id.'+ "&showArchive=true" ;';
       echo '         loadDialog("dialogHistory", null, true, params);';
   }else{
       echo '<div style="position:absolute;right:6px;top:3px;">';
       echo '  <button id="historyArchive" region="center" dojoType="dijit.form.Button"  iconClass="iconHistArchive16 iconHistArchive iconSize16" > ';
       echo '     <script type="dojo/connect" event="onClick" args="evt">';
-      echo '         loadContent("objectDetail.php", "detailDiv", "listForm")';
+      echo '         loadContent("objectDetail.php?showArchive=true", "detailDiv", "listForm")';
   }
   echo '     </script>';
   echo '  </button>';
