@@ -56,6 +56,8 @@ class ProjectType extends SqlElement {
   public $_lib_statusMustChangeCancelled;
   public $lockNoLeftOnDone;
   public $_lib_statusMustChangeLeftDone;
+  public $isLeadProject;
+  public $_lib_projectsWithoutActivities;
   public $_sec_restrictTypes;
   public $_spe_restrictTypes;
 
@@ -79,6 +81,7 @@ class ProjectType extends SqlElement {
                                           "lockDone"=>"nobr",
                                           "lockIdle"=>"nobr",
                                           "lockCancelled"=>"nobr",
+                                          "isLeadProject"=>"nobr",
                                           "lockNoLeftOnDone"=>"nobr"
                                            );
    
