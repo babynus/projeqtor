@@ -107,7 +107,7 @@ foreach ($lst as $rq) {
                 if($l->ref1Type=='Question'){
                     $q=new Question($l->ref1Id);
                     $st=new Status($q->idStatus);
-                    if(!($st->id==7 OR $st->id==9)){
+                    if($st->setIdleStatus==0)){
                         $containsOpenQuestion = true;
                     }
                 }
