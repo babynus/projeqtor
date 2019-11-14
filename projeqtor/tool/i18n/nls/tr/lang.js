@@ -2230,6 +2230,7 @@ helpSetHandledOnRealWork: "Girilen gerçek çalışma olduğunda görevi ilk 'ha
 helpSetResponsibleIfNeeded: "automatically set responsible to current resource if not set and responsible is required (depending on status)",
 helpSetResponsibleIfSingle: "automatically set responsible if not set and only one resource is allocated to the project",
 helpShowDetail: "show detail by project",
+helpShowHistoryArchive: "Show archived history",
 helpShowIdleDefault: "Can set &#34show idle&#34 checked by default&#13;Does not concern Planning screens and Timesheet&#13;Unlike &#34archive mode&#34&#44 will not show closed items for closed projects",
 helpShowSubscribedItems: "abone olduğunuz öğelerin listesini göster",
 helpShowTendersOnVersions: "Ürünler&#44 Bileşenler&#44 Ürün Sürümleri ve Bileşen Sürümlerindeki bağlantılı Teklifleri listelemek için bir Bölüm görüntüleyin",

@@ -2230,6 +2230,7 @@ helpSetHandledOnRealWork: "Установите задание первого о
 helpSetResponsibleIfNeeded: "автоматически назначить ответственным данный ресурс&#44; если требуется (в зависимости от статуса)",
 helpSetResponsibleIfSingle: "автоматически назначить ответственным&#44; если на проект аффектован только один ресурс",
 helpShowDetail: "show detail by project",
+helpShowHistoryArchive: "Show archived history",
 helpShowIdleDefault: "Can set &#34show idle&#34 checked by default&#13;Does not concern Planning screens and Timesheet&#13;Unlike &#34archive mode&#34&#44 will not show closed items for closed projects",
 helpShowSubscribedItems: "show list of items you are following",
 helpShowTendersOnVersions: "Display a Section to list linked Tenders on Products&#44; Components&#44; Product Versions and Component Versions",

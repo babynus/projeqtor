@@ -2230,6 +2230,7 @@ helpSetHandledOnRealWork: "Seleccionar tarea a realizar primero en pantalla de r
 helpSetResponsibleIfNeeded: "Automáticamente selecciona el responsable si es obligatorio y no se ha seleccionado aún",
 helpSetResponsibleIfSingle: "Automáticamente selecciona el responsable si no se ha seleccionado y sólo hay un recurso afectado en el proyecto",
 helpShowDetail: "mostrar detalles por proyecto",
+helpShowHistoryArchive: "Show archived history",
 helpShowIdleDefault: "Can set &#34show idle&#34 checked by default&#13;Does not concern Planning screens and Timesheet&#13;Unlike &#34archive mode&#34&#44 will not show closed items for closed projects",
 helpShowSubscribedItems: "mostrar la lista de artículos a los que se ha suscrito",
 helpShowTendersOnVersions: "mostrar una sección para listar ofertas vinculadas a productos&#44; componentes&#44; versiones de productos y versiones de componentes",
