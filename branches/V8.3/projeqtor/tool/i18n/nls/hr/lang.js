@@ -2230,6 +2230,7 @@ helpSetHandledOnRealWork: "Zadatak postaviti samo 'počelo' na&#44; ako je otkri
 helpSetResponsibleIfNeeded: "automatski postavljen odgovara trenutnoj resurs ako nije postavljen i odgovoran je potrebno (ovisno o statusu)",
 helpSetResponsibleIfSingle: "automatski postavljen odgovoran ako nije postavljen&#44; a samo jedan resurs utječe na projektu&#44;Vrijeme početka standardnog radnog vremena u jutarnjim satima",
 helpShowDetail: "prikaz pojedinosti prema projektu",
+helpShowHistoryArchive: "Show archived history",
 helpShowIdleDefault: "Može provjeriti &#34prikazati zatvorene stavke&#34 prema zadanim postavkama.&#13; Ne odnosi se na rasporede zaslona i imputacije&#13; Za razliku od &#34arhive datoteka &#34&#44 ne prikazuje zatvorene stavke za zatvorene projekte.",
 helpShowSubscribedItems: "prikaži popis stavki koje pratite",
 helpShowTendersOnVersions: "Prikaz odjeljak za popis povezanih ponude na proizvode&#44; komponente&#44; verzije proizvoda i verzije komponenata ",

@@ -2230,6 +2230,7 @@ helpSetHandledOnRealWork: "Set the task to first 'handled' status when real work
 helpSetResponsibleIfNeeded: "automatically set responsible to current resource if not set and responsible is required (depending on status)",
 helpSetResponsibleIfSingle: "automatically set responsible if not set and only one resource if affected to the Έργο",
 helpShowDetail: "show detail by project",
+helpShowHistoryArchive: "Show archived history",
 helpShowIdleDefault: "Can set &#34show idle&#34 checked by default&#13;Does not concern Planning screens and Timesheet&#13;Unlike &#34archive mode&#34&#44 will not show closed items for closed projects",
 helpShowSubscribedItems: "show list of items you are following",
 helpShowTendersOnVersions: "Display a Section to list linked Tenders on Products&#44; Components&#44; Product Versions and Component Versions",

@@ -2230,6 +2230,7 @@ helpSetHandledOnRealWork: "作業実績を入力した際にタスクを「着�
 helpSetResponsibleIfNeeded: "責任者が未設定の場合に自動で責任者を設定する(ステータスによる)",
 helpSetResponsibleIfSingle: "責任者が未設定でリソースが唯一の場合に自動で責任者に設定する",
 helpShowDetail: "show detail by project",
+helpShowHistoryArchive: "Show archived history",
 helpShowIdleDefault: "Can set &#34show idle&#34 checked by default&#13;Does not concern Planning screens and Timesheet&#13;Unlike &#34archive mode&#34&#44 will not show closed items for closed projects",
 helpShowSubscribedItems: "show list of items you are following",
 helpShowTendersOnVersions: "入札と関連づいている製品、コンポーネント、製品バージョン、コンポーネントバージョンをリストに表示",

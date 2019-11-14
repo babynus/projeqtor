@@ -2230,6 +2230,7 @@ helpSetHandledOnRealWork: "Aufgabe erst auf 'begonnen' setzen&#44; wenn Ist-Arbe
 helpSetResponsibleIfNeeded: "Weise automatisch Verantwortlichen als Ressource zu&#44; wenn eine Resource erforderlich ist.",
 helpSetResponsibleIfSingle: "Weise automatisch Verantwortlichen als Ressource zu&#44; wenn nur eine Resource dem Projekt zugewiesen ist.",
 helpShowDetail: "Details je Projekt anzeigen",
+helpShowHistoryArchive: "Show archived history",
 helpShowIdleDefault: "Kann &#34show idle&#34 standardmäßig aktiviert setzen. Betrifft keine Planungsbildschirme und Arbeitszeittabelle. Im Gegensatz zu &#34archive mode&#34&#44 werden für geschlossene Projekte keine geschlossenen Elemente angezeigt.",
 helpShowSubscribedItems: "Zeige die Liste der Artikel an&#44; die Sie abonniert haben",
 helpShowTendersOnVersions: "Zeige Liste verknüpfter Angebote von Produkte&#44; Komponenten&#44; Produktversionen und Komponentenversionen",
