@@ -1587,7 +1587,7 @@ function throwError($message, $noEncode=false) {
     echo '<input type="hidden" id="lastOperation" value="ERROR" />';
     echo '<input type="hidden" id="lastOperationStatus" value="ERROR" />';
     if (!$globalCatchErrors) {
-      if (file_exists("../files/cron/MIGRATION")) unlink("../files/cron/MIGRATION"); // If error during migration that stops the script, remove migration Flag
+      if (Sql::$maintenanceMode==true and file_exists("../files/cron/MIGRATION")) unlink("../files/cron/MIGRATION"); // If error during migration that stops the script, remove migration Flag
       exit();
     }
   }
