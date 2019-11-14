@@ -1266,7 +1266,7 @@ class PlannedWork extends GeneralWork {
                       } 
                       $incRes=$resources[$inc];
                       if (isset($incRes[$currentDate])) {
-                        $capaInc=$incRes['capacity'];
+                        $capaInc=$incRes['normalCapacity'];
                         $leftInc=$capaInc-$incRes[$currentDate];
                         if ($leftInc<0) $leftInc=0;
                         if ($value>$leftInc) {
