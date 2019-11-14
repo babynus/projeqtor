@@ -3463,6 +3463,7 @@ function showHistory(objectClass) {
     return;
   }
   var params="&objectClass=" + objectClass + "&objectId=" + objectId;
+  console.log(params);
   loadDialog('dialogHistory', null, true, params);
 }
 // =============================================================================
