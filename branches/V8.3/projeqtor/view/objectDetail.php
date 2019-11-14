@@ -176,6 +176,7 @@ if ($noselect) {
         $treatedObjects[]=$val;
       }
     }
+    debugLog($_REQUEST);
     drawHistoryFromObjects(true);
     if (isset($dynamicDialogHistory) and $dynamicDialogHistory and function_exists('showCloseButton')) {
       showCloseButton();
@@ -3193,7 +3194,7 @@ function drawHistoryFromObjects($refresh=false) {
     $sessionTabName='detailTab'.get_class($obj);
     $selectedTab=($obj->id)?getSessionValue($sessionTabName,'Description'):'Description';
     $paneName='pane'.$tabName;
-    echo '<div style="width: '.$displayWidth.';padding:4px;overflow:auto" dojoType="dijit.TitlePane" '; 
+    echo '<div style="width: '.$displayWidth.';padding:4px;overflow:auto;position:relative;" dojoType="dijit.TitlePane" '; 
     echo ' title="'.(($layout=='tab')?i18n('tabHistory'):i18n('elementHistory')).'" ';
     echo (($tabName==$selectedTab)?' selected="true" ':'');
     if($layout!='tab') echo ' open="'.((array_key_exists($titlePane, $collapsedList))?'false':'true').'" ';
@@ -3206,13 +3207,7 @@ function drawHistoryFromObjects($refresh=false) {
     echo '   hideEmptyTabs();';
     echo ' </script>';
   }
-  echo '<div style="position:absolute;right:8px;top:3px;">';
-  echo '  <button id="historyArchive" dojoType="dijit.form.Button"  iconClass="iconHistArchive16 iconHistArchive iconSize16" > ';
-  echo '     <script type="dojo/connect" event="onClick" args="evt">';
-  echo '     </script>';
-  echo '  </button>';
-  echo '</div>';
-  echo '<table style="width:100%;margin-right:10px">';
+  echo '<table style="width:100%;margin-right:10px;position:relative;">';
   echo '<tr>';
   echo '<td class="historyHeader" style="width:10%">'.i18n('colOperation').'</td>';
   echo '<td class="historyHeader" style="width:14%">'.i18n('colColumn').'</td>';
@@ -3220,6 +3215,21 @@ function drawHistoryFromObjects($refresh=false) {
   echo '<td class="historyHeader" style="width:23%">'.i18n('colValueAfter').'</td>';
   echo '<td class="historyHeader" style="width:15%">'.i18n('colDate').'</td>';
   echo '<td class="historyHeader" style="width:15%">'.i18n('colUser').'</td>';
+  if(RequestHandler::isCodeSet('dialog') and RequestHandler::getValue('dialog')=='dialogHistory' ){
+      echo '<div style="position:absolute;right:30px;top:-1px;">';
+      echo '  <button id="historyArchive" region="center" dojoType="dijit.form.Button"  iconClass="iconHistArchive16 iconHistArchive iconSize16" > ';
+      echo '     <script type="dojo/connect" event="onClick" args="evt">';
+      echo '         var params="&objectClass=" + '.json_encode(get_class($mainObj)).' + "&objectId=" + '.$mainObj->id.';';
+      echo '         loadDialog("dialogHistory", null, true, params);';
+  }else{
+      echo '<div style="position:absolute;right:6px;top:3px;">';
+      echo '  <button id="historyArchive" region="center" dojoType="dijit.form.Button"  iconClass="iconHistArchive16 iconHistArchive iconSize16" > ';
+      echo '     <script type="dojo/connect" event="onClick" args="evt">';
+      echo '         loadContent("objectDetail.php", "detailDiv", "listForm")';
+  }
+  echo '     </script>';
+  echo '  </button>';
+  echo '</div>';
   echo '</tr>';
   $stockDate=null;
   $stockUser=null;
