@@ -45,6 +45,8 @@ class Affectation extends SqlElement {
   public $endDate;
   public $idle;
   public $description;
+  public $hideAffectation;
+  public $idResourceTeam;
   //public $_sec_void;
   
 public $_noCopy;
@@ -68,6 +70,8 @@ public $_noCopy;
    private static $_fieldsAttributes=array(
        "idResourceSelect"=>"forceExport", 
        "idResource"=>"hidden,noExport,noList",
+       "hideAffectation"=>"hidden,noExport,noList",
+       "idResourceTeam"=>"hidden,noExport,noList",
        "idProfile"=>"required"
    ); 
    /** ==========================================================================
@@ -330,6 +334,14 @@ public $_noCopy;
         $result=substr($result, 0,$pos).' - ' . Mail::getResultMessage($mailResult) .substr($result, $pos);
       }
     }
+    //Gautier #3849
+    $autoAffectationPool=Parameter::getGlobalParameter('autoAffectationPool');
+    if($autoAffectationPool=="EXPLICIT" OR $autoAffectationPool=="IMPLICIT"){
+      $res = new ResourceAll($this->idResource,true);
+      if($res->isResourceTeam){
+       // $this->affectResPool($this);
+      }
+    }
     return $result;
   }
   
@@ -378,6 +390,18 @@ public $_noCopy;
   public function delete() {
     $result = parent::delete();
     //User::resetAllVisibleProjects(null,$this->idUser);
+    //Gautier #3849
+    $autoAffectationPool=Parameter::getGlobalParameter('autoAffectationPool');
+    if($autoAffectationPool=="IMPLICIT"){
+      $res = new ResourceAll($this->idResourceSelect,true);
+      if($res->isResourceTeam){
+        $aff = new Affectation();
+        $listAff = $aff->getSqlElementsFromCriteria(array('hideAffectation'=>1,'idResourceTeam'=>$res->id,'idProject'=>$this->idProject));
+        foreach ($listAff as $affRes){
+          $affRes->delete();
+        }
+      }
+    }
     return $result;
   }
   
@@ -661,6 +685,54 @@ public $_noCopy;
       }
     }
     return$result;
+  }
+  
+  
+  public static function affectResPool() {
+    $resAffPool= new ResourceTeamAffectation();
+    $listPoolResAff = $resAffPool->getSqlElementsFromCriteria(array('idResourceTeam'=>$this->idResource));
+    //Parcourir les affectations 
+    
+    
+    
+      //Parcourir les ressources
+      foreach ($listPoolResAff as $poolRes){
+        $aff = new Affectation();
+        if($autoAffectationPool=="EXPLICIT"){
+          if($aff->countSqlElementsFromCriteria(array('idResource'=>$poolRes->idResource,'idProject'=>$this->idProject)))continue;
+        }else{
+          if($aff->countSqlElementsFromCriteria(array('idResource'=>$poolRes->idResource,'idProject'=>$this->idProject,'hideAffectation'=>1,'idResourceTeam'=>$this->idResource)))continue;
+        }
+        $aff->idResource = $poolRes->idResource;
+        $aff->idProject = $this->idProject;
+        $aff->idProfile = $this->idProfile;
+        $aff->rate = $this->rate;
+        $aff->idResourceTeam = $this->idResource;
+        //DATES
+        $poolStart = $poolRes->startDate;
+        $poolEnd = $poolRes->endDate;
+        $affStart = $this->startDate;
+        $affEnd = $this->endDate;
+      
+        if($affStart and $poolEnd){
+          if($affStart > $poolEnd)continue;
+        }
+        if($poolStart and $affStart){
+          if($poolStart > $affStart)$aff->startDate = $poolStart;
+        }
+        if($poolEnd and $affEnd){
+          if($poolEnd < $affEnd)$aff->endDate = $poolEnd;
+        }
+        if($affStart and !$aff->startDate)$aff->startDate=$affStart;
+        if($affEnd and !$aff->endDate)$aff->endDate=$affEnd;
+      
+      
+        if($autoAffectationPool=="IMPLICIT")$aff->hideAffectation = 1;
+        $aff->save();
+      }
+    
+    
+    
   }
   
 }

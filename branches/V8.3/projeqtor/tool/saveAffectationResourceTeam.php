@@ -46,10 +46,25 @@ if($idle){
 $mode = RequestHandler::getValue('mode');
 Sql::beginTransaction();
 $result = "";
-
-if($mode == 'edit'){
   $idAffectation = RequestHandler::getId('idAffectation');
   $resourceTeam=new ResourceTeamAffectation($idAffectation);
+  if($mode == 'edit'){
+    //POOL AFF
+    $autoAffectationPool=Parameter::getGlobalParameter('autoAffectationPool');
+    if($autoAffectationPool=="IMPLICIT"){
+      if($start != $resourceTeam->startDate or $end != $resourceTeam->endDate){
+        $aff = new Affectation();
+        $listAffRes = $aff->getSqlElementsFromCriteria(array('idResource'=>$resource,'idResourceTeam'=>$resourceTeam->idResourceTeam,'idle'=>'0'));
+        $listAffPool = $aff->getSqlElementsFromCriteria(array('idResource'=>$resourceTeam->idResourceTeam,'idle'=>'0'));
+        foreach ($listAffRes as $affR){
+          $ResPoolStart = $start;
+          $ResPoolEnd = $end;
+          $projStart = $affR->startDate;
+          $projEnd = $affR->endDate;
+          //$affP->save();
+        }
+      }
+    }
   $resourceTeam->idResource = $resource;
   $resourceTeam->rate = $rate;
   $resourceTeam->description = nl2brForPlainText($description);
@@ -72,6 +87,7 @@ if($mode == 'edit'){
     $result=$res;
   }
 }
+
 // Message of correct saving
 displayLastOperationStatus($result);
 

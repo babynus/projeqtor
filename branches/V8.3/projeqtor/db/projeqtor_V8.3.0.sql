@@ -198,3 +198,6 @@ INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES
 
 INSERT INTO `${prefix}cronexecution` (`cron`, `fileExecuted`, `idle` ,`fonctionName`) VALUES
 ('30 18 * * *', '../tool/cronExecutionStandard.php', 0, 'archiveHistory');
+
+-- gautier #4304
+ALTER TABLE `${prefix}type` ADD `isLeadProject` int(1) unsigned default '0';
