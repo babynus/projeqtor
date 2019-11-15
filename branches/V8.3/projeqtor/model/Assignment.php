@@ -507,6 +507,7 @@ class Assignment extends SqlElement {
     if ($result=="") {
       $result='OK';
     }
+    
     if($this->refType=='Activity'){
       $activity = new Activity($this->refId);
       $minimumThreshold = $activity->ActivityPlanningElement->minimumThreshold;
@@ -522,6 +523,20 @@ class Assignment extends SqlElement {
       	}
       }
     }
+    
+    if($this->refType=='Meeting'){
+      $supp = new ResourceSupport();
+      $suppList = $supp->getSqlElementsFromCriteria(array('idSupport'=>$this->idResource));
+      if($suppList){
+        foreach ($suppList as $id=>$obj){
+          $ass = SqlElement::getSingleSqlElementFromCriteria('Assignment', array('idResource'=>$obj->idResource, 'refType'=>'Meeting'));
+          if($ass->id){
+            $result='<br/>' . i18n('errorSupportMeeting', array($obj->idResource, $obj->idSupport));
+          }
+        }
+      }
+    }
+    
     return $result;
   }
   
