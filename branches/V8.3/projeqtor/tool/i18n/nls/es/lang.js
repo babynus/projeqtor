@@ -1880,6 +1880,7 @@ errorReplaceResourceNotChanged: "nuevo recurso debe ser diferente del existente"
 errorSessionHash: "¡ERROR! en la sesión actual<br/>Por favor&#44; refrescar el navegador o reiniciarlo y volver a probar",
 errorStartEndDates: "El '${1}' no debe estar después de '${2}'",
 errorSubmitForm: "Error en submitForm('${1}'&#44; '${2}'&#44; '${3}') ",
+errorSupportMeeting: "Resource #${1} is scheduled&#44 can not schedule support #${2} at this meeting",
 ErrorThisEmployeeDoesntHaveLeaveEarned: "this employee does'nt have earned leave rights",
 errorTooBigFile: "El tamaño del fichero excede el límite de ${1} bytes (${2})",
 errorUpdateRights: "No dispone de privilegios para actualizar este ítem",
