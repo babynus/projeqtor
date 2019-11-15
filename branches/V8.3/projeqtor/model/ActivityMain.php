@@ -318,6 +318,19 @@ class ActivityMain extends SqlElement {
     $result = "";
     $old = $this->getOld();
     
+    //Gautier #4304
+    $proj = new Project($this->idProject,true);
+    $projType = new ProjectType($proj->idProjectType);
+    if($projType->isLeadProject){
+      if (!$this->id) {
+        $result .= '<br/>' . i18n ( 'cantCreateAnActivityFromLeadProject' );
+      }
+      if ($this->id && $old->idProject != $this->idProject) {
+        //      ==> Can't associated the activity with the project dedicated to the leave
+          $result .= '<br/>' . i18n ( 'cantAssociateAnActivityWithLeadProject' );
+      }
+    }
+    
 // MTY - LEAVE SYSTEM
     if (isLeavesSystemActiv()) {
         // Can't create or associate an activity on the project that is dedicated to the leave
