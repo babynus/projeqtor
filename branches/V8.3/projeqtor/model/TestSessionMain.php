@@ -257,6 +257,18 @@ class TestSessionMain extends SqlElement {
     if (!trim($this->idProject) and !trim($this->idProduct)) {
       $result.="<br/>" . i18n('messageMandatory',array(i18n('colIdProject') . " " . i18n('colOrProduct')));
     }
+    //Gautier #4304
+    $proj = new Project($this->idProject,true);
+    $projType = new ProjectType($proj->idProjectType);
+    if($projType->isLeadProject){
+      if (!$this->id) {
+        $result .= '<br/>' . i18n ( 'cantCreateATestSessionFromLeadProject' );
+      }
+      if ($this->id && $old->idProject != $this->idProject) {
+        //      ==> Can't associated the activity with lead project 
+        $result .= '<br/>' . i18n ( 'cantAssociateATestSessionWithLeadProject' );
+      }
+    }
     if ($this->TestSessionPlanningElement and $this->TestSessionPlanningElement->id
       and ($this->idActivity!=$old->idActivity or $this->idProject!=$old->idProject)){
       if (trim($this->idActivity)) {
