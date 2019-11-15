@@ -1880,6 +1880,7 @@ errorReplaceResourceNotChanged: "новый ресурс должен отлич
 errorSessionHash: "Произошла ошибка в текущей сессии<br/>Пожалуйста&#44; обновите страницу браузера или закройте браузер и повторите снова",
 errorStartEndDates: "'${1}' не должен быть размещен после '${2}'",
 errorSubmitForm: "Ошибка в submitForm('${1}'&#44; '${2}'&#44; '${3}') ;<br/> Форма '${3}' не является виджетом.",
+errorSupportMeeting: "Resource #${1} is scheduled&#44 can not schedule support #${2} at this meeting",
 ErrorThisEmployeeDoesntHaveLeaveEarned: "this employee does'nt have earned leave rights",
 errorTooBigFile: "Размер лимита выполнения ${1} байт (${2})",
 errorUpdateRights: "у вас недостаточно прав для обновления этого элемента",

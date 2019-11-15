@@ -1880,6 +1880,7 @@ errorReplaceResourceNotChanged: "新規リソースは存在していないも�
 errorSessionHash: "接続に問題が発生しました<br/>ブラウザを更新しても改善しない場合は、ブラウザを再起動してください",
 errorStartEndDates: "「${1}」は「${2}」の後にできません",
 errorSubmitForm: "フォームのサブミット時にエラー('${1}'&#44; '${2}'&#44; '${3}') &#58; <br/> フォーム「${3}」はウィジェットではありません",
+errorSupportMeeting: "Resource #${1} is scheduled&#44 can not schedule support #${2} at this meeting",
 ErrorThisEmployeeDoesntHaveLeaveEarned: "this employee does'nt have earned leave rights",
 errorTooBigFile: "ファイルサイズが${1}バイト(${2})を超過しています",
 errorUpdateRights: "この項目を更新する権限がありません",
