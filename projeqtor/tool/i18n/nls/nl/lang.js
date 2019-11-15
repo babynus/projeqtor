@@ -1880,6 +1880,7 @@ errorReplaceResourceNotChanged: "nieuwe resource moet anders zijn dan de bestaan
 errorSessionHash: "Er is een probleem opgetreden met de huidige sessie <br/> Vernieuw de browser pagina of sluit de browser en probeer het opnieuw",
 errorStartEndDates: "de '${1}' mag niet na de '${2}' komen",
 errorSubmitForm: "Fout op submitForm ('${1}'&#44; '${2}'&#44; '${3}')&#58; <br/> Formulier '${3}' is geen widget.",
+errorSupportMeeting: "Resource #${1} is scheduled&#44 can not schedule support #${2} at this meeting",
 ErrorThisEmployeeDoesntHaveLeaveEarned: "this employee does'nt have earned leave rights",
 errorTooBigFile: "Bestandsgrootte overschrijdt de limiet van ${1} bytes (${2})",
 errorUpdateRights: "je hebt geen rechten om dit item te updaten",

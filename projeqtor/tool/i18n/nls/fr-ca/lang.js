@@ -1880,6 +1880,7 @@ errorReplaceResourceNotChanged: "La nouvelle ressource doit être différente de
 errorSessionHash: "Une anomalie est survenue avec la session actuelle.<br/>Rafraîchissez la page ou fermez le navigateur et réessayez.<br/>Vérifiez aussi que les cookies sont autorisés.<br/>Si le problème persiste&#44; contactez votre administrateur.",
 errorStartEndDates: "La '${1}'  ne doit pas être postérieure à la '${2}'",
 errorSubmitForm: "Erreur sur submitForm('${1}'&#44; '${2}'&#44; '${3}') &#58; <br/> Le formulaire '${3}' n'est pas un 'widget'.",
+errorSupportMeeting: "La ressource #${1} est planifiée impossible de planifier son support #${2} sur cette reunion",
 ErrorThisEmployeeDoesntHaveLeaveEarned: "cet employé n'a pas de droit acquis sur les absences réglementées",
 errorTooBigFile: "La taille du fichier excède la limite de ${1} octets (${2})",
 errorUpdateRights: "Vous n'avez pas le droit de mettre à jour cet élément",

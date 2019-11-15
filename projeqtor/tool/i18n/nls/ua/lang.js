@@ -1880,6 +1880,7 @@ errorReplaceResourceNotChanged: "Новий ресурс має відрізня
 errorSessionHash: "проблема сталася в поточної сесії<br/>Будь ласка&#44; оновіть сторінку браузера або перезавантажте браузер і спробуйте знову ",
 errorStartEndDates: "${1}' не мусить бути після '${2}'",
 errorSubmitForm: "Помилка у формі (SubmitForm) ('${1}'&#44; '${2}'&#44; '${3}')&#58; <br/>Форма '${3}' не є об'єкт віджет(widget).",
+errorSupportMeeting: "Resource #${1} is scheduled&#44 can not schedule support #${2} at this meeting",
 ErrorThisEmployeeDoesntHaveLeaveEarned: "this employee does'nt have earned leave rights",
 errorTooBigFile: "Розмір файлу перевищено межу ${1} байт (${2})",
 errorUpdateRights: "ви не маєте права оновити цей елемент",

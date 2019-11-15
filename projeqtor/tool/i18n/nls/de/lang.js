@@ -1880,6 +1880,7 @@ errorReplaceResourceNotChanged: "Die neue Resource muss unterschiedlich zu exist
 errorSessionHash: "In der laufenden Session ist ein Fehler aufgetreten<br/>Bitte Browserseite aktualisieren oder Browser neu starten.",
 errorStartEndDates: "${1}' darf nicht spätester als '${2}' sein.",
 errorSubmitForm: "Fehler bei 'submitForm('${1}'&#44; '${2}'&#44; '${3}')' &#58; <br/> Form '${3}' ist kein Steuerelement.",
+errorSupportMeeting: "Resource #${1} is scheduled&#44 can not schedule support #${2} at this meeting",
 ErrorThisEmployeeDoesntHaveLeaveEarned: "Dieser Mitarbeiter hat keine Urlaubsrechte erworben",
 errorTooBigFile: "Dateigröße übersteigt maximales Limit von ${1} Bytes (${2})",
 errorUpdateRights: "Sie haben nicht das Recht zum Ändern",
