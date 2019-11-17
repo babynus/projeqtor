@@ -67,7 +67,7 @@ echo 'label: "name",';
 echo ' "items":[';
 // If type = 'list' and $dataType = idResource : execute the listResourceProject type
 $required = true; // when directly requesting 'listResourceProject', required is by default
-if ($type == 'list' and array_key_exists ( 'dataType', $_REQUEST ) and ($_REQUEST ['dataType'] == 'idResource' or $_REQUEST ['dataType'] == 'idResourceAll' or $_REQUEST ['dataType'] == 'idAccountable' or $_REQUEST ['dataType'] == 'idResponsible' or substr($_REQUEST ['dataType'],-12)=='__idResource') and array_key_exists ( 'critField', $_REQUEST ) and array_key_exists ( 'critValue', $_REQUEST ) and $_REQUEST ['critField'] == 'idProject') {
+if ($type == 'list' and array_key_exists ( 'dataType', $_REQUEST ) and ($_REQUEST ['dataType'] == 'idResource' or $_REQUEST ['dataType'] == 'idResourceAll'   or $_REQUEST ['dataType'] == 'idAccountable' or $_REQUEST ['dataType'] == 'idResponsible' or substr($_REQUEST ['dataType'],-12)=='__idResource') and array_key_exists ( 'critField', $_REQUEST ) and array_key_exists ( 'critValue', $_REQUEST ) and $_REQUEST ['critField'] == 'idProject') {
   $type = 'listResourceProject';
   $_REQUEST ['idProject'] = $_REQUEST ['critValue']; // This is valid : force idProject to critValue as criFiled=idProject (value has been tested as an id)
   $required = array_key_exists ( 'required', $_REQUEST );
@@ -175,7 +175,7 @@ if ($type == 'empty') {
   } else {
     $class = substr ( $dataType, 2 );
   }
-  if ($dataType == 'idContact' and $critField == 'idProject') {
+  if (($dataType == 'idContact' or $dataType == 'idAffectable') and $critField == 'idProject') {
     //$list = SqlList::getListWithCrit ( 'Contact', array($critField => $critValue) );
     if(is_array($critValue)){
       foreach ($critValue as $idProj){
