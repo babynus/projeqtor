@@ -102,7 +102,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     $critVal=$listPrf;
     // Attention, this case will then use standard process$table is not retreived yet)
   }
-  if (($col=='idResource' or $col=='idResourceAll' or $col=='idAccountable' or $col=='idResponsible' or $col=='idContact') and $critFld=='idProject') {
+  if (($col=='idResource' or $col=='idAffectable' or $col=='idResourceAll' or $col=='idAccountable' or $col=='idResponsible' or $col=='idContact') and $critFld=='idProject') {
     // List of "affectable" with restriction to project : restrict on allocation to project (object Affectation)
   	$prj=new Project($critVal, true);
     $lstTopPrj=$prj->getTopProjectList(true);
@@ -621,7 +621,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     }
 // MTY - LEAVE SYSTEM    
     
-  if ( ($col=='idResource'  or $col=='idResourceAll'  or $col=='idAccountable' or $col=='idResponsible') and Affectable::getVisibilityScope()!="all") {
+  if ( ($col=='idResource'  or $col=='idAffectable' or $col=='idResourceAll'  or $col=='idAccountable' or $col=='idResponsible') and Affectable::getVisibilityScope()!="all") {
     // Restrict List of affectables : restrict visibility (same Organization, or same Team or All)
     $restrictArray = getUserVisibleResourcesList(true);
     if ($selection) $restrictArray[$selection]="OK";
@@ -679,7 +679,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     echo '<option value=" " ></option>';
   }
   // For affectables, get the correct name
-  if ($selection and ($col=='idResource' or $col=='idResourceAll' or $col=='idAccountable' or $col=='idResponsible') and (! isset($table[$selection]) or $table[$selection]==$selection) ) {
+  if ($selection and ($col=='idResource' or $col=='idAffectable' or $col=='idResourceAll' or $col=='idAccountable' or $col=='idResponsible') and (! isset($table[$selection]) or $table[$selection]==$selection) ) {
     $table[$selection]=SqlList::getNameFromId('Affectable', $selection);
   }
   // Sort array of classes
@@ -801,7 +801,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
 
 // MTY - LEAVE SYSTEM      
 //      if ($col=='idResource' or $col=='idResourceAll' or $col=='idAccountable' or $col=='idResponsible') {
-      if ($col=='idResource' or $col=='idResourceAll' or $col=='idAccountable' or $col=='idResponsible' or $col=="idEmployee") {
+      if ($col=='idResource' or $col=='idAffectable' or $col=='idResourceAll' or $col=='idAccountable' or $col=='idResponsible' or $col=="idEmployee") {
 // MTY - LEAVE SYSTEM      
       	if ($key==$user->id) {
       		$next=$key;

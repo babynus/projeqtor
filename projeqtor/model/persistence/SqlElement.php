@@ -3323,6 +3323,7 @@ abstract class SqlElement {
    */
   public function getFieldAttributes($fieldName) {
     $fieldsAttributes = $this->getStaticFieldsAttributes ();
+    if ($fieldName=='idApprover__idResource') debugLog($fieldsAttributes);
     if (array_key_exists ( $fieldName, $fieldsAttributes )) {
       return $fieldsAttributes [$fieldName];
     } else {
@@ -3796,6 +3797,11 @@ abstract class SqlElement {
           $required = 'false';
           if ($this->isAttributeSetToField ( 'idAccountable', 'required' )) $required = 'true';
           $colScript .= '   refreshList("idAccountable","idProject", this.value, "' . htmlEncode ( $this->idAccountable ) . '",null,' . $required . ',null,null,"' . get_class ( $this ) . '");';
+        }
+        if ($colName == 'idProject' and property_exists ( $this, 'idAffectable' )) {
+          $required = 'false';
+          if ($this->isAttributeSetToField ( 'idAffectable', 'required' )) $required = 'true';
+          $colScript .= '   refreshList("idAffectable","idProject", this.value, "' . htmlEncode ( $this->idAffectable ) . '",null,' . $required . ',null,null,"' . get_class ( $this ) . '");';
         }
         if ($colName == 'idProject' and property_exists ( $this, 'idProduct' )) {
           $colScript .= '   refreshList("idProduct","idProject", this.value, dijit.byId("idProduct").get("value"));';
