@@ -42,8 +42,8 @@ ALTER TABLE `${prefix}assignment` ADD COLUMN `hasSupport` int(1) unsigned DEFAUL
 -- ======================================
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
-(225,'menuChangeRequest',173,'object', 381,'ReadWritePrincipal',0,'Work Configuration EnvironmentalParameter'),
-(226,'menuChangeRequestType',79,'object',1029,NULL,NULL,0);
+(225,'menuChangeRequest',6,'object', 355,'ReadWritePrincipal',0,'Work Configuration EnvironmentalParameter'),
+(226,'menuChangeRequestType',79,'object',982,NULL,NULL,0);
 
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
@@ -85,6 +85,7 @@ CREATE TABLE `${prefix}changerequest` (
   `idTargetProductVersion` int(12) unsigned DEFAULT NULL,
   `idTargetComponentVersion` int(12) unsigned DEFAULT NULL,
   `plannedWork` decimal(14,5) UNSIGNED DEFAULT '0',
+  `plannedCost` decimal(12,2) UNSIGNED DEFAULT '0',
   `analysis` mediumtext DEFAULT NULL,
   `idUrgency` int(12) unsigned DEFAULT NULL,
   `idCriticality` int(12) unsigned DEFAULT NULL,
@@ -96,7 +97,7 @@ CREATE TABLE `${prefix}changerequest` (
   `idPriority` int(12) unsigned DEFAULT NULL,
   `approved` int(1) unsigned DEFAULT '0',
   `approvedDate` date DEFAULT NULL,
-  `idApprover__idResource` int(12) unsigned DEFAULT NULL,
+  `idAffectable` int(12) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 CREATE INDEX changerequestProject ON `${prefix}changerequest` (idProject);
@@ -112,12 +113,12 @@ CREATE INDEX changerequestCriticality ON `${prefix}changerequest` (idCriticality
 CREATE INDEX changerequestFeasibility ON `${prefix}changerequest` (idFeasibility);
 
 
-INSERT INTO `${prefix}Type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`) VALUES 
-('ChangeRequest', 'Recurring problem',10,1, 0),
-('ChangeRequest', 'Improvement user',20,1, 0),
-('ChangeRequest', 'Technical improvement',30,1, 0),
-('ChangeRequest', 'Regulatory constraint',40,1, 0),
-('ChangeRequest', 'Request of management ',50,1, 0);
+INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`) VALUES 
+('ChangeRequest', 'recurring problem',10,1, 0),
+('ChangeRequest', 'functional improvement',20,1, 0),
+('ChangeRequest', 'technical improvement',30,1, 0),
+('ChangeRequest', 'regulatory constraint',40,1, 0),
+('ChangeRequest', 'process and quality',50,1, 0);
 
 
 CREATE TABLE `${prefix}resourceincompatible` (

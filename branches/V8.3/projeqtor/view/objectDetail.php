@@ -1223,6 +1223,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $isRequired=true;
       }
       if (strpos($obj->getFieldAttributes($col), 'hidden')!==false) {
+        debugLog("hide $col from attributes");
+        debugLog($obj->getFieldAttributes($col));
         $hide=true;
       } else if (in_array($col, $extraHiddenFields)) {
         $specificStyle.=' display:none';
@@ -2005,6 +2007,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           if ($col=="idResourceSelect" or $col=='idAccountable' or $col=='idResponsible') {
             $idMenu='menuResource';
             $comboClass='Resource';
+          } else if ($col=='idAffectable') {
+            $idMenu='menuResource';
+            $comboClass='Affectable';
           } else if (substr($col, -14)=="ProductVersion") {
             $idMenu='menuProductVersion';
             $comboClass='ProductVersion';
@@ -2105,7 +2110,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $critFld=null;
         $critVal=null;
         $valStore='';
-        if ($col=='idResource' or substr($col,-12)=='__idResource' or $col=="idAccountable" or $col=='idActivity' or $col=='idProduct' or $col=='idComponent' or $col=='idProductOrComponent' or $col=='idProductVersion' or $col=='idComponentVersion' or $col=='idVersion' or $col=='idOriginalVersion' or $col=='idTargetVersion' or $col=='idOriginalProductVersion' or $col=='idTargetProductVersion' or $col=='idOriginalComponentVersion' or $col=='idTargetComponentVersion' or $col=='idTestCase' or $col=='idRequirement' or $col=='idContact' or $col=='idMilestone' or $col=='idTicket' or $col=='idUser' or $col=='id'.$classObj.'Type') {
+        if ($col=='idResource' or substr($col,-12)=='__idResource' or $col=='idAffectable' or $col=="idAccountable" or $col=='idActivity' or $col=='idProduct' or $col=='idComponent' or $col=='idProductOrComponent' or $col=='idProductVersion' or $col=='idComponentVersion' or $col=='idVersion' or $col=='idOriginalVersion' or $col=='idTargetVersion' or $col=='idOriginalProductVersion' or $col=='idTargetProductVersion' or $col=='idOriginalComponentVersion' or $col=='idTargetComponentVersion' or $col=='idTestCase' or $col=='idRequirement' or $col=='idContact' or $col=='idMilestone' or $col=='idTicket' or $col=='idUser' or $col=='id'.$classObj.'Type') {
           if ($col=='idContact' and property_exists($obj, 'idClient') and $obj->idClient) {
             $critFld='idClient';
             $critVal=$obj->idClient;
@@ -2255,7 +2260,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $showExtraButton=false;
 // MTY - Forgot readonly in condition        
         if (($col=='idStatus' or $col=='idResource' or $col=='idAccountable' or $col=='idResponsible') and !$readOnly) {
-          if ((($col=='idStatus') or (($col=='idResource' or $col=='idAccountable' or $col=='idResponsible') and $user->isResource and $user->id!=$val and $obj->id and $classObj!='Affectation')) and $classObj!='Document' and $classObj!='StatusMail' and $classObj!="TicketSimple" and $canUpdate) {
+          if ((($col=='idStatus') or (($col=='idResource' or $col=='idAffectable' or $col=='idAccountable' or $col=='idResponsible') and $user->isResource and $user->id!=$val and $obj->id and $classObj!='Affectation')) and $classObj!='Document' and $classObj!='StatusMail' and $classObj!="TicketSimple" and $canUpdate) {
             $showExtraButton=true;
             $fieldWidth=round($fieldWidth/2)-5;
           }
@@ -2367,7 +2372,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // END - ADD BY TABARY - NOTIFICATION SYSTEM
         // BEGIN - REPLACE BY TABARY - POSSIBILITY TO HAVE X TIMES IDXXXX IN SAME OBJECT
         $colWithoutAlias=foreignKeyWithoutAlias($col);
-        if (($colWithoutAlias=='idResource' or $colWithoutAlias=='idAccountable' or $colWithoutAlias=='idResponsible') and $next and $showExtraButton) {
+        if (($colWithoutAlias=='idResource' or $colWithoutAlias=='idAffectable' or $colWithoutAlias=='idAccountable' or $colWithoutAlias=='idResponsible') and $next and $showExtraButton) {
           // if (($col == 'idResource' or $col == 'idAccountable' or $col == 'idResponsible') and $next and $showExtraButton) {
           // END - REPLACE BY TABARY - POSSIBILITY TO HAVE X TIMES IDXXXX IN SAME OBJECT
           // ADD BY Marc TABARY - 2017-03-09 - EXTRA BUTTON (Assign to me) IS VISIBLE EVEN IDLE=1

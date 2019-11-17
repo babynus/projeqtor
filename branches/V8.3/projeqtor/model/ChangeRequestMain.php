@@ -59,19 +59,21 @@ class ChangeRequestMain extends SqlElement {
   public $idRiskLevel;
   public $idPriority; 
   public $plannedWork;
+  public $plannedCost;
   public $idTargetProductVersion;
   public $idTargetComponentVersion;  
   public $idMilestone;
   public $handled;
   public $handledDate;
+  public $approved;
+  public $approvedDate;
+  public $_lib_by;
+  public $idAffectable;
   public $done;
   public $doneDate;
   public $idle;
   public $idleDate;
   public $cancelled;
-  public $approved;
-  public $approvedDate;
-  public $idApprover__idResource;
   public $_lib_cancelled;
   public $result;
   public $analysis;
@@ -91,6 +93,7 @@ class ChangeRequestMain extends SqlElement {
     <th field="nameResource" formatter="thumbName22" width="10%" >${responsible}</th>
     <th field="nameTargetProductVersion" width="10%" >${idTargetProductVersion}</th>
     <th field="handled" width="5%" formatter="booleanFormatter" >${handled}</th>
+    <th field="approved" width="5%" formatter="booleanFormatter" >${approved}</th>
     <th field="done" width="5%" formatter="booleanFormatter" >${done}</th>
     <th field="idle" width="5%" formatter="booleanFormatter" >${idle}</th>
     ';
@@ -101,15 +104,14 @@ class ChangeRequestMain extends SqlElement {
                                   "handled"=>"nobr",
                                   "done"=>"nobr",
                                   "idle"=>"nobr",
-                                  "idUser"=>"hidden",
-                                  "idRunStatus"=>"display,html,hidden,forceExport",
-                                  "runStatusIcon"=>"calculated,display,html",
-                                  "runStatusName"=>"calculated,display,html",
                                   "idleDate"=>"nobr",
+                                  "cancelled"=>"nobr",
+                                  "idUser"=>"hidden",
                                   "idProject"=>"required",
-                                  "approved"=>"hidden,nobr",
-                                  "approvedDate"=>"hidden,readonly,nobr",
-                                  "idApprover__idResource"=>"readonly",
+                                  "approved"=>"nobr",
+                                  "approvedDate"=>"nobr",
+                                  "_lib_by"=>"nobr",
+                                  "idAffectable"=>"",
                                   
   );  
   
@@ -117,7 +119,9 @@ class ChangeRequestMain extends SqlElement {
                                                    'idTargetProductVersion'=>'targetVersion', 
                                                    'idRiskLevel'=>'technicalRisk',
                                                    'plannedWork'=>'estimatedEffort',
-                                                   'idContact' => 'requestor',
+                                                   'plannedCost'=>'estimatedBudget',
+                                                   'idAffectable' => 'approver',
+                                                   'approvalDate'=>"dateApproved"
                                                    );
   
   private static $_databaseColumnName = array();
@@ -142,13 +146,13 @@ class ChangeRequestMain extends SqlElement {
   
   public function setAttributes() {
     if($this->id){
-      self::$_fieldsAttributes['approved']='visible,nobr';
-      self::$_fieldsAttributes['approvedDate']='visible,nobr';
+      //self::$_fieldsAttributes['approved']='visible,nobr';
+      //self::$_fieldsAttributes['approvedDate']='visible,nobr';
+      //self::$_fieldsAttributes['idAffectable']='visible,nobr';
+      //self::$_fieldsAttributes['_lib_by']='visible,nobr';
     }
-    if($this->approved){
-      self::$_fieldsAttributes['idApprover__idResource']='visible,readonly';
-    }else{
-      self::$_fieldsAttributes['idApprover__idResource']='hidden';
+    if (!$this->id) {
+      self::$_fieldsAttributes['approved']='readonly,nobr';
     }
     $manageComponentOnChangeRequest=Parameter::getGlobalParameter('manageComponentOnChangeRequest');
     if ($manageComponentOnChangeRequest!='YES') {
@@ -225,14 +229,9 @@ class ChangeRequestMain extends SqlElement {
     }else if ($colName=="approved") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  if (dijit.byId("approved").get("checked")==true) { ';
-      $colScript .= '    dijit.byId("idApprover__idResource").domNode.style.display = "inline-table";';
-      $colScript .= '    dojo.setStyle("idApprover__idResourceButtonGoto","display","inline-table");';
-      $colScript .= '    dijit.byId("idApprover__idResource").set("value",'.getSessionUser()->id.'); ';
       $colScript .= '    var curDate = new Date();';
       $colScript .= '    dijit.byId("approvedDate").set("value", curDate); ';
       $colScript .= '  } else { ';
-      $colScript .= '   dijit.byId("idApprover__idResource").domNode.style.display = "none";';
-      $colScript .= '   dojo.setStyle("idApprover__idResourceButtonGoto","display","none");';
       $colScript .= '   dijit.byId("approvedDate").set("value", null);';
       $colScript .= '   dijit.byId("idApprover__idResource").set("value",null); ';
       $colScript .= '  }  ';
