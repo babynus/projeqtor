@@ -57,14 +57,18 @@ if ($proj=='*' or !$proj) {
 	style="z-index: 3; position: relative; overflow: visible !important;">
 		<table width="100%" height="27px" class="listTitle" >
 		  <tr height="27px">
-		  	<td style="vertical-align:top; width:250px;">
+		  	<td style="vertical-align:top; min-width:100px; width:15%">
 		      <table >
     		    <tr height="32px">
-      		    <td width="50px" align="center">
-                <?php echo formatIcon('VersionsPlanning', 32, null, true);?>
-              </td>
-              <td width="200px" ><span class="title" style="max-width:200px;white-space:normal"><?php echo i18n('menuVersionsPlanning');?></span></td>
-      		  </tr>
+        		    <td width="50px"  style="min-width:50px"  align="center">
+                    <?php echo formatIcon('VersionsPlanning', 32, null, true);?>
+                  </td>
+                  <td width="200px" ><span class="title" style="max-width:200px;white-space:normal"><?php echo i18n('menuVersionsPlanning');?></span></td>
+      		    </tr>
+                <tr height="32px">
+        		    <td width="50px"  style="min-width:50px"  align="center">
+        		    </td>
+      		    </tr>
     		  </table>
 		    </td>
 		    <td>   
@@ -156,17 +160,17 @@ echo '<input type="hidden" id="nbPvs" name="nbPvs" value="'.$nbPvs.'" />';
                          iconClass="dijitButtonIcon dijitButtonIconPrint" class="detailButton" 
                          showLabel="false">
                           <script type="dojo/connect" event="onClick" args="evt">
-<?php $ganttPlanningPrintOldStyle=Parameter::getGlobalParameter('ganttPlanningPrintOldStyle');
-      if (!$ganttPlanningPrintOldStyle) {$ganttPlanningPrintOldStyle="NO";}
-      if ($ganttPlanningPrintOldStyle=='YES') {?>
-                          showPrint("../tool/jsonPlanning.php?portfolio=true", 'planning');
-<?php } else { ?>
-                          showPrint("planningPrint.php", 'planning');
-<?php }?>   
+                            <?php $ganttPlanningPrintOldStyle=Parameter::getGlobalParameter('ganttPlanningPrintOldStyle');
+                                  if (!$ganttPlanningPrintOldStyle) {$ganttPlanningPrintOldStyle="NO";}
+                                  if ($ganttPlanningPrintOldStyle=='YES') {?>
+                                   showPrint("../tool/jsonPlanning.php?portfolio=true", 'planning');
+                            <?php } else { ?>
+                                  showPrint("planningPrint.php", 'planning');
+                            <?php }?>   
                           </script>
                         </button>
                       </td>
-                      <td width="200px">
+                      <td width="32px">
                         <button title="<?php echo i18n('reportPrintPdf')?>"
                          dojoType="dijit.form.Button"
                          id="listPrintPdf" name="listPrintPdf"
@@ -178,21 +182,76 @@ echo '<input type="hidden" id="nbPvs" name="nbPvs" value="'.$nbPvs.'" />';
                           </script>
                         </button>
                       </td>
-                       <td style="padding-right:5px;padding-left:20px;text-align: right;">
+                      <?php $activeFilter=false;
+                       if (is_array(getSessionUser()->_arrayFilters)) {
+                         if (array_key_exists('VersionsPlanning', getSessionUser()->_arrayFilters)) {
+                           if (count(getSessionUser()->_arrayFilters['VersionsPlanning'])>0) {
+                           	foreach (getSessionUser()->_arrayFilters['VersionsPlanning'] as $filter) {
+                           		if (!isset($filter['isDynamic']) or $filter['isDynamic']=="0") {
+                           			$activeFilter=true;
+                           		}
+                           	}
+                           }
+                         }
+                       }
+                       $showListFilter='true';
+                       if($displayComponentVersionActivity=='0' and $displayProductVersionActivity=='0'){
+                          $showListFilter='false';
+                       }
+                       
+                       ?>
+                      <td width="50px">
+                        <div id="listFilterAdvanced" style="display:<?php echo ($showListFilter=='true')?'block':'none';?>">
+                          <button 
+                           title="<?php echo i18n('advancedFilter')?>"  
+                           class="comboButton" 
+                           dojoType="dijit.form.DropDownButton" 
+                           id="listFilterFilter" name="listFilterFilter"
+                           iconClass="icon<?php echo($activeFilter)?'Active':'';?>Filter" showLabel="false">
+                            <script type="dojo/connect" event="onClick" args="evt">
+                              showFilterDialog();
+                            </script>
+                            <script type="dojo/method" event="onMouseEnter" args="evt">
+                              clearTimeout(closeFilterListTimeout);
+                              clearTimeout(openFilterListTimeout);
+                              openFilterListTimeout=setTimeout("dijit.byId('listFilterFilter').openDropDown();",popupOpenDelay);
+                            </script>
+                            <script type="dojo/method" event="onMouseLeave" args="evt">
+                              clearTimeout(openFilterListTimeout);
+                              closeFilterListTimeout=setTimeout("dijit.byId('listFilterFilter').closeDropDown();",2000);
+                            </script>
+                            <div dojoType="dijit.TooltipDialog" id="directFilterList" style="z-index: 999999;<!-- display:none; --> position: absolute;">
+                            <?php $objectClass='VersionsPlanning';
+                                  include "../tool/displayFilterList.php";
+                            ?>
+                              <script type="dojo/method" event="onMouseEnter" args="evt">
+                                clearTimeout(closeFilterListTimeout);
+                                clearTimeout(openFilterListTimeout);
+                              </script>
+                              <script type="dojo/method" event="onMouseLeave" args="evt">
+                                dijit.byId('listFilterFilter').closeDropDown();
+                              </script>
+                            </div> 
+                          </button>
+                        </div>
+                      </td>
+                      <td style="padding-right:5px;padding-left:20px;text-align: right;">
                         <?php echo i18n('displayComponentVersionActivity');?>
-                        </td><td>
+                      </td>
+                      <td>
                         <div title="<?php echo i18n('displayComponentVersionActivity')?>" dojoType="dijit.form.CheckBox" 
                           class="whiteCheck" type="checkbox" id="listDisplayComponentVersionActivity" name="listDisplayComponentVersionActivity"
                           <?php if ($displayComponentVersionActivity=='1') { echo ' checked="checked" '; }?> >
                           <script type="dojo/method" event="onChange" >
                             saveUserParameter('planningVersionDisplayComponentVersionActivity',((this.checked)?'1':'0'));
+                            showListFilter('planningVersionDisplayComponentVersionActivity',((this.checked)?'1':'0'));
                             refreshJsonPlanning();
                           </script>
                         </div>
-               		  </td>   
+               		  </td>
                     </tr>
                     <tr>
-                      <td colspan="2" style="white-space:nowrap;">
+                      <td colspan="3" style="white-space:nowrap;">
                         <span title="<?php echo i18n('saveDates')?>" dojoType="dijit.form.CheckBox"
                            type="checkbox" id="listSaveDates" name="listSaveDates" class="whiteCheck"
                            <?php if ( $saveDates) {echo 'checked="checked"'; } ?>  >
@@ -211,11 +270,11 @@ echo '<input type="hidden" id="nbPvs" name="nbPvs" value="'.$nbPvs.'" />';
                         <?php if ($displayProductVersionActivity=='1') { echo ' checked="checked" '; }?> >
                         <script type="dojo/method" event="onChange" >
                           saveUserParameter('planningVersionDisplayProductVersionActivity',((this.checked)?'1':'0'));
+                          showListFilter('planningVersionDisplayProductVersionActivity',((this.checked)?'1':'0'));
                           refreshJsonPlanning();
                         </script>
                       </div>
                       </td>
-                      
                        <td  style="padding-right:5px;padding-left:20px;text-align: right;" >
                       <?php echo i18n('labelShowIdle');?>
                       </td><td>
@@ -228,7 +287,6 @@ echo '<input type="hidden" id="nbPvs" name="nbPvs" value="'.$nbPvs.'" />';
                         </script>
                       </div>
                       </td>
-                      
                     </tr>
                   </table>
                 </td>
