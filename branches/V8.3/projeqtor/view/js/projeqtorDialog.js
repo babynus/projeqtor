@@ -3463,7 +3463,6 @@ function showHistory(objectClass) {
     return;
   }
   var params="&objectClass=" + objectClass + "&objectId=" + objectId;
-  console.log(params);
   loadDialog('dialogHistory', null, true, params);
 }
 // =============================================================================
@@ -3722,7 +3721,7 @@ function showFilterDialog() {
         "listSharedFilters", "dialogFilterForm", false);
     var objectClass='';
     if (dojo.byId('objectClassList') && dojo.byId('objectClassList').value) objectClass=dojo.byId('objectClassList').value;
-    else if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value && dojo.byId("objectClassManual").value=='Planning') objectClass='Activity';
+    else if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value && (dojo.byId("objectClassManual").value=='Planning' || dojo.byId("objectClassManual").value=='VersionsPlanning')) objectClass='Activity';
     else if (dojo.byId('objectClass') && dojo.byId('objectClass').value) objectClass=dojo.byId('objectClass').value;
     if (objectClass.substr(0,7)=='Report_') objectClass=objectClass.substr(7);
     refreshListSpecific('object', 'idFilterAttribute', 'objectClass', objectClass);
@@ -4252,8 +4251,10 @@ function selectFilterContinue() {
     loadContent("../view/kanbanView.php?idKanban="+dojo.byId('idKanban').value, "divKanbanContainer");
   }else if (!dijit.byId('filterDynamicParameter').get("checked")) {
     if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Planning' && ! window.top.dijit.byId('dialogDetail').open) {
-      refreshJsonPlanning();
-    } else if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Report') {
+        refreshJsonPlanning();
+    }else if(dojo.byId("objectClassManual") &&  dojo.byId("objectClassManual").value=='VersionsPlanning' && ! window.top.dijit.byId('dialogDetail').open){
+      refreshJsonPlanning(true);
+    }else if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Report') {
       dojo.byId('outMode').value='';runReport();
     } else {
       doc.refreshJsonList(objectClass);

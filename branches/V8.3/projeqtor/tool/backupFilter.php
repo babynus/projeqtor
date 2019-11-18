@@ -69,7 +69,7 @@ if (! array_key_exists('filterObjectClass',$_REQUEST)) {
   throwError('filterObjectClass parameter not found in REQUEST');
 }
 $filterObjectClass=$_REQUEST['filterObjectClass'];
-if ($filterObjectClass!='Planning' and $filterObjectClass!='GlobalPlanning' and substr($filterObjectClass,0,7)!='Report_') Security::checkValidClass($filterObjectClass);
+if ($filterObjectClass!='Planning' and $filterObjectClass!='GlobalPlanning' and $filterObjectClass!='VersionsPlanning' and substr($filterObjectClass,0,7)!='Report_') Security::checkValidClass($filterObjectClass);
 else if (substr($filterObjectClass,0,7)=='Report_') Security::checkValidClass(substr($filterObjectClass,7));
 
 $name="";
