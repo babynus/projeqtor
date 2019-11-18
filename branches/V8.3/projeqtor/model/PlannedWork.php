@@ -1107,6 +1107,7 @@ class PlannedWork extends GeneralWork {
                       }
                     }
                   } else if ($withProjectRepartition and $profile=='RECW') {
+                    $projectKey='Project#' . $plan->idProject;
                     $rateProj=Resource::findAffectationRate($ress[$projectKey]['rate'],$currentDate) / 100;
                     if ($rateProj<=0) $value=0;;
                   }
