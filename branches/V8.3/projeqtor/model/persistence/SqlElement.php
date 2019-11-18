@@ -2351,6 +2351,7 @@ abstract class SqlElement {
         $crit = array('refType' => get_class ( $this ), 'refId' => $this->id);
         $lstAss = $ass->getSqlElementsFromCriteria ( $crit );
         foreach ( $lstAss as $ass ) {
+          if ($ass->supportedResource) continue; // Do not copy support assignment, will be generated automatically
           $oldAssId=$ass->id;
           $ass->id = null;
           $ass->idProject = $newObj->idProject;
