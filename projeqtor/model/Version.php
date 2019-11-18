@@ -29,6 +29,7 @@
  * Almost all other objects are linked to a given project.
  */
 require_once('_securityCheck.php');
+require_once "../tool/jsonFunctions.php";
 class Version extends SqlElement {
   
   // List of fields that will be exposed in general user interface
@@ -615,28 +616,34 @@ static protected function drawProductUsingComponentVersion($class, $id)
     $displayComponentversionActivity = Parameter::getUserParameter('planningVersionDisplayComponentVersionActivity');
     $displayProductversionActivity = Parameter::getUserParameter('planningVersionDisplayProductVersionActivity');
     
-    
+    //florent ticket 4299
     $activity = new Activity;
+    $actTable=$activity->getDatabaseTableName();
+    $querySelectAct="$actTable.id as id";
+    $queryFromAct="$actTable";
+    $arrayFilter=jsonGetFilterArray('VersionsPlanning', false);
     $where = "idComponentVersion = $this->id";
     if ( $planningVersionShowClosed == 0){
       $where.=" and idle = 0";
     }
+    if (count($arrayFilter)>0){
+      $cpt=0;
+      jsonBuildWhereCriteria($querySelectAct,$queryFromAct,$where,$queryOrderByAct,$cpt,$arrayFilter,$activity);
+    }
     $listActivity = $activity->getSqlElementsFromCriteria(null,null,$where);
-    
     if ($displayComponentversionActivity == 0)
       $listActivity = array();
-      
       $where = "idVersion = $this->id and idComponentVersion IS NULL";
       if ( $planningVersionShowClosed == 0){
         $where.=" and idle = 0";
       }
+      if (count($arrayFilter)>0){
+        $cpt=0;
+        jsonBuildWhereCriteria($querySelectAct,$queryFromAct,$where,$queryOrderByAct,$cpt,$arrayFilter,$activity);
+      }
       $listActivityProductVersion = $activity->getSqlElementsFromCriteria(null,null,$where);
       
-      if ($displayProductversionActivity == 0)
-        $listActivityProductVersion = array();
-      
-        
-        
+      if ($displayProductversionActivity == 0)$listActivityProductVersion = array();
         if (self::$cpt === 1) {
           echo ',';
         }

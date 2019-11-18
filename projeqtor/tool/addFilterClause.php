@@ -123,7 +123,7 @@ if (! array_key_exists('filterObjectClass',$_REQUEST)) {
 }
 $filterObjectClass=$_REQUEST['filterObjectClass'];
 
-$objectClass=($filterObjectClass=='Planning' or $filterObjectClass=='GlobalPlanning')?'Activity':$filterObjectClass;
+$objectClass=($filterObjectClass=='Planning' or $filterObjectClass=='GlobalPlanning' or $filterObjectClass=='VersionsPlanning')?'Activity':$filterObjectClass;
 $objectClass=(substr($objectClass,0,7)=='Report_')?substr($objectClass,7):$objectClass;
 Security::checkValidClass($objectClass);
 

@@ -33,7 +33,6 @@ require_once "../tool/projeqtor.php";
 scriptLog('   ->/tool/displayFiletrList.php');
 $user=getSessionUser();
 $context="";
-
 $comboDetail=false;
 if (RequestHandler::isCodeSet('comboDetail')) {
   $comboDetail=true;
@@ -51,7 +50,7 @@ if (! RequestHandler::isCodeSet('filterObjectClass')) {
   $filterObjectClass=RequestHandler::getValue('filterObjectClass');
 }
 if (!isset($objectClass) or !$objectClass) $objectClass=$filterObjectClass;
-if ($objectClass=='Planning' or $objectClass=='GlobalPlanning') $objectClass='Activity';
+if ($objectClass=='Planning' or $objectClass=='GlobalPlanning' or $objectClass=='VersionsPlanning') $objectClass='Activity';
 else if (substr($objectClass,0,7)=='Report_') $objectClass=substr($objectClass,7);
 Security::checkValidClass($objectClass);
 if (RequestHandler::isCodeSet('context')) $context=RequestHandler::getValue('context');

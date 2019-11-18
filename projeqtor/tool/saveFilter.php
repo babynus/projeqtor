@@ -49,7 +49,7 @@ if (! array_key_exists('filterObjectClass',$_REQUEST)) {
   throwError('filterObjectClass parameter not found in REQUEST');
 }
 $filterObjectClass=$_REQUEST['filterObjectClass'];
-$objectClass=($filterObjectClass=='Planning')?'Activity':$filterObjectClass;
+$objectClass=($filterObjectClass=='Planning' or $filterObjectClass=='VersionsPlanning')?'Activity':$filterObjectClass;
 $objectClass=(substr($objectClass,0,7)=='Report_')?substr($objectClass,7):$objectClass;
 
 // Get existing filter info

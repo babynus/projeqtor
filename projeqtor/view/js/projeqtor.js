@@ -62,6 +62,9 @@ var previousSelectedProjectName=null;
 var mustApplyFilter=false;
 
 var arraySelectedProject = new Array();
+
+var displayFilterVersionPlanning='';
+var displayFilterComponentVersionPlanning='';
 // =============================================================================
 // = Functions
 // =============================================================================
@@ -280,11 +283,11 @@ function refreshJsonList(className, keepUrl) {
  * 
  * @return void
  */
-function refreshJsonPlanning() {
+function refreshJsonPlanning(versionsPlanning) {
   param = false;
   if (dojo.byId("resourcePlanning")) {
     url = "../tool/jsonResourcePlanning.php";
-  } else if (dojo.byId("versionsPlanning")) {
+  } else if (dojo.byId("versionsPlanning")|| versionsPlanning==true) {
     url = "../tool/jsonVersionsPlanning.php";
   } else if (dojo.byId("globalPlanning")) {
     url = "../tool/jsonPlanning.php?global=true";
@@ -1086,7 +1089,7 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
                 loadContent(globalSelectFilterContenLoad, globalSelectFilterContainer);
                 globalSelectFilterContenLoad=null;
                 globalSelectFilterContainer=null;
-              } else if (dojo.byId('objectClassManual') && dojo.byId('objectClassManual').value=='Planning') {
+              } else if (dojo.byId('objectClassManual') && (dojo.byId('objectClassManual').value=='Planning' || dojo.byId('objectClassManual').value=='VersionsPlanning')) {
                 refreshJsonPlanning();
               } else if (dojo.byId('objectClassList')) {
                 refreshJsonList(dojo.byId('objectClassList').value);
@@ -6361,4 +6364,28 @@ function refreshObjectDivAfterResize() {
   } else if(multiSelection==true && formChangeInProgress==false){
     loadContent('objectMultipleUpdate.php?objectClass=' + dojo.byId('objectClass').value,'detailDiv');
   }
+}
+//florent 4299
+function showListFilter(checkBoxName,value){
+  if(checkBoxName=='planningVersionDisplayProductVersionActivity' ){
+    if(value=='1' && displayFilterVersionPlanning!='1'){
+      displayFilterVersionPlanning='1';
+    }else{
+      displayFilterVersionPlanning='0';
+    }
+  }
+  if(checkBoxName=='planningVersionDisplayComponentVersionActivity' ){
+    if( value=='1' && displayFilterComponentVersionPlanning!='1'){
+      displayFilterComponentVersionPlanning='1';
+    }else{
+      displayFilterComponentVersionPlanning='0';
+    }
+  }
+  if((displayFilterVersionPlanning=='0' && displayFilterComponentVersionPlanning=='0')){
+    selectStoredFilter('0','directFilterList');
+    dojo.byId('listFilterAdvanced').style.display="none";
+  }else{
+    dojo.byId('listFilterAdvanced').style.display="block";
+  }
+  
 }
