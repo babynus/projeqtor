@@ -3232,7 +3232,9 @@ function drawHistoryFromObjects($refresh=false) {
       echo '  <button id="historyArchive" title="'.i18n('helpShowHistoryArchive').'" region="center" dojoType="dijit.form.Button"  iconClass="iconHistArchive16 iconHistArchive iconSize16" > ';
       echo '     <script type="dojo/connect" event="onClick" args="evt">';
       echo '         saveDataToSession("showArchive",'.$showArchiveValue.');';
-      echo '         loadDialog("dialogHistory", null, true);';
+      echo '         var param="&objectClass="+dojo.byId("objectClassName").value;';
+      echo '         param += "&objectId="+'.$obj->id.';';
+      echo '         loadDialog("dialogHistory", null, true,param);';
   }else{
       echo '<div style="position:absolute;right:6px;top:3px;">';
       echo '  <button id="historyArchive" title="'.i18n('helpShowHistoryArchive').'" region="center" dojoType="dijit.form.Button"  iconClass="iconHistArchive16 iconHistArchive iconSize16" > ';
