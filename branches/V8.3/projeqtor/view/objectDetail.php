@@ -6360,8 +6360,9 @@ function drawIncompatibleResource($list, $obj, $type, $refresh=false) {
   	}
   	echo '</td>';
   	$res = new Resource($resInc->idIncompatible);
+  	$goto=' onClick="gotoElement(\'Resource\',\''.htmlEncode($res->id).'\');" ';
   	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($resInc->id).'</td>';
-  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($res->name).'</td>';
+  	echo ' <td class="assignData" align="left" style="white-space: nowrap; cursor:pointer;" '.$goto.'>'.htmlEncode($res->name).'</td>';
   	echo '</tr>';
   }
   echo '</table></td></tr>';
@@ -6432,8 +6433,9 @@ function drawResourceSupport($list, $obj, $type, $refresh=false) {
   	}
   	echo '</td>';
   	$res = new Resource($resSup->idSupport);
+  	$goto=' onClick="gotoElement(\'Resource\',\''.htmlEncode($res->id).'\');" ';
   	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($resSup->id).'</td>';
-  	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($res->name).'</td>';
+  	echo ' <td class="assignData" align="left" style="white-space: nowrap; cursor:pointer;" '.$goto.'>'.htmlEncode($res->name).'</td>';
   	echo ' <td class="assignData" align="center" style="white-space: nowrap;">'.htmlEncode($resSup->rate).'</td>';
   	echo '</tr>';
   }

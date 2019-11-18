@@ -79,7 +79,7 @@ class ResourceSupport extends SqlElement {
   }
   
   public function manageSupportAssignment($ass) {
-    if ($ass->refType!='Activity') return null;
+    if ($ass->refType!='Activity' and $ass->refType!='TestSession') return null;
     $asSup=SqlElement::getSingleSqlElementFromCriteria('Assignment', array('supportedAssignment'=>$ass->id,'idResource'=>$this->idSupport));
     if (!$asSup->id) {
       $asSup->idResource=$this->idSupport;
