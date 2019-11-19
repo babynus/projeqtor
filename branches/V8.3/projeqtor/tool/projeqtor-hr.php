@@ -1797,7 +1797,12 @@ function getLeavesInArrayDateForAPeriodAndAnEmployee($employee=null,
         $statusSetLeaveChange = $leave->statusSetLeaveChange;
         $date = $lStartDate;
         while ($date <= $lEndDate) {
-            if ($leavesInArrayDate!=null and array_key_exists($date, $leavesInArrayDate)) { continue; }
+            if ($leavesInArrayDate!=null and array_key_exists($date, $leavesInArrayDate)) { 
+              $nextDate = new DateTime($date);
+              $nextDate->add(new DateInterval("P1D"));
+              $date = $nextDate->format("Y-m-d");
+              continue; 
+            }
             $leavesInArrayDate[$date]['startDate']=$lStartDate.' - '.$sAMPM;
             $leavesInArrayDate[$date]['endDate']=$lEndDate.' - '.$eAMPM;
             $leavesInArrayDate[$date]['idType']=$type;
