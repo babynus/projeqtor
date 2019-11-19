@@ -231,6 +231,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor,
   this.getID       = function(){ return vID; };
   this.getId       = function(){ return vId; };
   this.getName     = function(){ return vName; };
+  this.getNameTitle=function(){ return vName.replace(/"/g,"''"); };
   this.getStart    = function(){ return vStart;};
   this.getEnd      = function(){ return vEnd;  };
   this.getRealEnd  = function(){ return vRealEnd;  };
@@ -898,7 +899,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             + '</span>';
         }
         vLeftTable += '</TD>'
-          +'<TD class="ganttName ganttAlignLeft" style="width: ' + vNameWidth + 'px;" nowrap title="' + vTaskList[i].getName().replace(/"/g,"''") + '">';
+          +'<TD class="ganttName ganttAlignLeft" style="width: ' + vNameWidth + 'px;" nowrap title="' + vTaskList[i].getNameTitle() + '">';
         vLeftTable+='<div class="ganttLeftHover" style="width:'+(vLeftWidth-25)+'px;" '
             + ' onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '"); '
         	+ ' onMouseover=JSGantt.ganttMouseOver("'+vID+'","left","' + vRowType + '")'
@@ -1210,7 +1211,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             + ' onMouseover=JSGantt.enterBarLink('+i+'); '
             + ' onMouseout=JSGantt.exitBarLink('+i+'); '
             +'>' 
-            + ' <div id=taskbar_'+vID+' title="' + vTaskList[i].getName() + ' : ' + vDateRowStr + vBaselineTopTitle + vBaselineBottomTitle + '" '
+            + ' <div id=taskbar_'+vID+' title="' + vTaskList[i].getNameTitle() + ' : ' + vDateRowStr + vBaselineTopTitle + vBaselineBottomTitle + '" '
             + ' style="overflow:hidden; font-size:18px;" '
             + ' onmousedown=JSGantt.startLink('+i+'); '
             + ' onmouseup=JSGantt.endLink('+i+'); '
@@ -1309,7 +1310,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
                 + ' left:' + vBarLeft + 'px; height: 7px; '
                 + ' width:' + vBarWidth + 'px">';
             if (vTaskStart && vTaskEnd && Date.parse(vMaxDate)>=Date.parse(vTaskStart) ) {
-              vRightTable += '<div id=taskbar_'+vID+' title="' + vTaskList[i].getName() + ' : ' + vDateRowStr + vBaselineTopTitle + vBaselineBottomTitle +'" '
+              vRightTable += '<div id=taskbar_'+vID+' title="' + vTaskList[i].getNameTitle() + ' : ' + vDateRowStr + vBaselineTopTitle + vBaselineBottomTitle +'" '
               + ' onmousedown=JSGantt.startLink('+i+'); '
               + ' onmouseup=JSGantt.endLink('+i+'); '
               //+ ' oncontextmenu="return false;"'
@@ -1436,7 +1437,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
   	        	  }
   	        	}
   	        	vIsOnCriticalPath=vTaskList[i].getIsOnCriticalPath();
-  	        	vRightTable += '<div id=taskbar_'+vID+' title="' + vTaskList[i].getName() + ' : ' + vDateRowStr + vBaselineTopTitle + vBaselineBottomTitle + '" '
+  	        	vRightTable += '<div id=taskbar_'+vID+' title="' + vTaskList[i].getNameTitle() + ' : ' + vDateRowStr + vBaselineTopTitle + vBaselineBottomTitle + '" '
   	            + ' class="ganttTaskrowBar" style="position:relative;background-color:'+((vIsOnCriticalPath=='1')?vCriticalPathColor:tmpColor)+'; '
   	            + ' width:' + vBarWidth + 'px;'+ ((vIsOnCriticalPath=='1')?' border-bottom: 5px solid '+tmpColor+';border-top: 5px solid '+tmpColor+';height:3px;':'')+'" ' 
         		    + ' onmousedown=JSGantt.startLink('+i+'); '
@@ -1450,7 +1451,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
   	        	  }
   	            vRightTable += ' </div>';	        	
   	        	if (g.getSplitted()) {
-  	        		vRightTable +='<div class="ganttTaskrowBar"  title="' + vTaskList[i].getName() + ' : ' + vDateRowStr + vBaselineTopTitle + vBaselineBottomTitle + '" '
+  	        		vRightTable +='<div class="ganttTaskrowBar"  title="' + vTaskList[i].getNameTitle() + ' : ' + vDateRowStr + vBaselineTopTitle + vBaselineBottomTitle + '" '
   		        		  + 'style="position: absolute; background-color:#' + vTaskList[i].getColor() +';'
   		        		  + 'top: 0px; width:' + vBarWidthPlan + 'px; left: ' + vBarLeftPlan + 'px; "'
   		        		  + ' onmousedown=JSGantt.startLink('+i+'); '
