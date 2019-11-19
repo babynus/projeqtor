@@ -99,26 +99,26 @@ class History extends SqlElement {
     if(($colName=='idle' or $colName=='cancelled') and $newValue=='1' and $canArchiveIdle='YES'){
       $tableHist=$hist->getDatabaseTableName();
       $tableHistArch=$histArch->getDatabaseTableName();
-      $histArch->refType=$refType;
+      $hist->refType=$refType;
       if ($refType=='TicketSimple') {
-        $histArch->refType='Ticket';
+        $hist->refType='Ticket';
       }
-      $histArch->refId=$refId;
-      $histArch->operation=$operation;
-      $histArch->colName=$colName;
+      $hist->refId=$refId;
+      $hist->operation=$operation;
+      $hist->colName=$colName;
       if ($colName and strtolower(substr($obj->getDataType($colName),-4))=='text') {
-        $histArch->oldValue=mb_substr($oldValue,0,$histArch->getDataLength('oldValue'),'UTF-8');
-        $histArch->newValue=mb_substr($newValue,0,$histArch->getDataLength('newValue'),'UTF-8');
+        $hist->oldValue=mb_substr($oldValue,0,$histArch->getDataLength('oldValue'),'UTF-8');
+        $hist->newValue=mb_substr($newValue,0,$histArch->getDataLength('newValue'),'UTF-8');
       } else {
-        $histArch->oldValue=$oldValue;
-        $histArch->newValue=$newValue;
+        $hist->oldValue=$oldValue;
+        $hist->newValue=$newValue;
       }
       if ($obj and property_exists($obj, '_workHistory')) {
-        $histArch->isWorkHistory=1;
+        $hist->isWorkHistory=1;
       }
-      $histArch->idUser=$user->id;
-      $histArch->operationDate=self::getOperationDate($obj);
-      $returnValue=$histArch->save();
+      $hist->idUser=$user->id;
+      $hist->operationDate=self::getOperationDate($obj);
+      $returnValue=$hist->save();
       
       $colList="";
       foreach ($hist as $fld=>$val) {
@@ -131,9 +131,14 @@ class History extends SqlElement {
       $colList=substr($colList,0,-2);
       $requestIns="INSERT INTO $tableHistArch ($colList)\n"
       ."SELECT $colList FROM $tableHist WHERE refType='".$refType."' and refId=$refId"; 
-      $clauseDel="refType='".$refType."' and refId='".$refId."'";
       SqlDirectElement::execute($requestIns);
       $res=Sql::$lastQueryNbRows;
+      $where="refType='".$refType."' and refId=$refId and colName='".$hist->colName."' and newValue=$hist->newValue and operationDate='".$hist->operationDate."'";
+      $idleRow=$hist->getSqlElementsFromCriteria(null,null,$where);
+      foreach ($idleRow as $history ){
+        $result=$history->id;
+      }
+      $clauseDel="refType='".$refType."' and refId='".$refId."' and id!=$result";
       if($res > 0){
       $hist->purge($clauseDel);
       }
