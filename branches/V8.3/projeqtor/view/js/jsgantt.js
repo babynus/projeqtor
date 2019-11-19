@@ -898,7 +898,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             + '</span>';
         }
         vLeftTable += '</TD>'
-          +'<TD class="ganttName ganttAlignLeft" style="width: ' + vNameWidth + 'px;" nowrap title="' + vTaskList[i].getName() + '">';
+          +'<TD class="ganttName ganttAlignLeft" style="width: ' + vNameWidth + 'px;" nowrap title="' + vTaskList[i].getName().replace(/"/g,"''") + '">';
         vLeftTable+='<div class="ganttLeftHover" style="width:'+(vLeftWidth-25)+'px;" '
             + ' onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '"); '
         	+ ' onMouseover=JSGantt.ganttMouseOver("'+vID+'","left","' + vRowType + '")'
