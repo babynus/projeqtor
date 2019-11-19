@@ -69,7 +69,11 @@ class ProjectType extends SqlElement {
     <th field="nameWorkflow" width="20%" >${idWorkflow}</th>
     <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
     ';
-   
+  
+   private static $_fieldsTooltip = array(
+       "isLeadProject"=> "tooltipIsLeadProject",
+   );
+  
   private static $_databaseCriteria = array('scope'=>'Project');
   
    private static $_fieldsAttributes=array("name"=>"required", 
@@ -117,7 +121,10 @@ class ProjectType extends SqlElement {
   protected function getStaticLayout() {
     return self::$_layout;
   }
-
+  
+  protected function getStaticFieldsTooltip() {
+    return self::$_fieldsTooltip;
+  }
   /** ========================================================================
    * Return the specific database criteria
    * @return the databaseTableName
