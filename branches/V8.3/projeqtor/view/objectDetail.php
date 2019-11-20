@@ -1223,8 +1223,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $isRequired=true;
       }
       if (strpos($obj->getFieldAttributes($col), 'hidden')!==false) {
-        debugLog("hide $col from attributes");
-        debugLog($obj->getFieldAttributes($col));
         $hide=true;
       } else if (in_array($col, $extraHiddenFields)) {
         $specificStyle.=' display:none';
