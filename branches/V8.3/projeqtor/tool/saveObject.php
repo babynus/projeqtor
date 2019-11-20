@@ -67,7 +67,6 @@ Sql::beginTransaction ();
 // get the modifications (from request)
 $newObj = new $className ();
 $newObj->fillFromRequest ( $ext );
-debugLog($newObj->result);
 if ($newObj->id == '0') {
   $newObj->id = null;
 }
