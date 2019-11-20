@@ -4971,7 +4971,7 @@ abstract class SqlElement {
     $emailTemplateTab = array();
     $i = 0;
     foreach ( $statusMailListOrganized as $statusMail ) {
-      $emailTemplateTab[] = new EmailTemplate($statusMail->idEmailTemplate);
+      $emailTemplateTab[$i] = new EmailTemplate($statusMail->idEmailTemplate);
       if ($emailTemplateTab[$i]->name == null) {
         $emailTemplateTab[$i]->name = 'basic';
         $emailTemplateTab[$i]->id = '0';
@@ -5143,17 +5143,15 @@ abstract class SqlElement {
 
     $msgWithoutDest = 0;      //check if something went wrong in retreiving email adresses
     $j = $i;
-    while ($i--)
-    {
+    while ($i--) {
       if ($destTab[$emailTemplateTab[$i]->id] == '' or $destTab[$emailTemplateTab[$i]->id] == null)
         $msgWithoutDest++;
       else 
         $destTab[$emailTemplateTab[$i]->id] = str_replace('###', '', $destTab[$emailTemplateTab[$i]->id]);
     }
-    if ($j <= $msgWithoutDest)
-    {
+    if ($j <= $msgWithoutDest)   {
       traceLog('sendMailIfMailable : Mails without dest');
-      return false;         // exit bcause no adresses
+      return false;         // exit because no adresses
     }
     //    END modif gmartin Ticket #157
     if ($newItem) {
@@ -5195,7 +5193,8 @@ abstract class SqlElement {
     $references = $objectClass . "-" . $this->id;
     $message = $this->getMailDetail ();
     if ($directStatusMail and isset ( $directStatusMail->message )) {
-      $emailTemplateTab[0]->template = $this->getMailDetail($directStatusMail->message);
+      //$emailTemplateTab[0]->template = $this->getMailDetail($directStatusMail->message);
+      $emailTemplateTab[0]->template = $this->parseMailMessage ( $directStatusMail->message ) . '<br/><br/>' . $emailTemplateTab[0]->template;
     }
     //    BEGIN add gmartin Ticket #157
     $groupMails=Parameter::getGlobalParameter('mailGroupActive');
@@ -6014,6 +6013,16 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
   global $lastEmailChangeDate;
   $lastEmailChangeDate=$lastChangeDate;
   $templateToReplace = $this->parseMailMessage($templateToReplace);
+  $ref = $this->getReferenceUrl ();
+  $replyMail=i18n("replyToMail");
+  if(Parameter::getGlobalParameter('cronCheckEmailsHost')!='' and Parameter::getGlobalParameter('cronCheckEmails')>0){
+    $templateToReplace="
+          <table style='font-size:14pt; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;'><tr><td style='background:#555555;color: #FFFFFF; text-align: center;'>
+          <div style='background:#F0F0F0;color:#A0A0A0;font-style:italic;font-size:80%'>".htmlEncode ( $replyMail)."</div><div style='background:#F0F0F0;color:#F0F0F0;font-size:1pt;'>###PROJEQTOR###</div>
+          <a href='". $ref ."' target='#' style='color:white;display:none;'>". i18n ( get_class ( $this ) ) ." #". htmlEncode ( $this->id ) ."</a></td></tr></table>"
+          .$templateToReplace;
+  }
+  
   return preg_replace_callback('(\$\{[a-zA-Z0-9_\-]+\})',
     function ($matches) {
       global $lastEmailChangeDate;
