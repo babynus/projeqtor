@@ -50,7 +50,8 @@ if (! array_key_exists('linkObjectClassName',$_REQUEST)) {
 
 $linkedObjectId=$_REQUEST['linkedObjectId'];
 // CHANGE BY Marc TABARY - 2017-03-31 - ADD MULTIPLE OBJECTS LINKED BY ID
-$listLinkedObjectId = explode(',',$linkedObjectId);
+if (is_array($linkedObjectId)) $listLinkedObjectId = $linkedObjectId;
+else $listLinkedObjectId = explode(',',$linkedObjectId);
 foreach($listLinkedObjectId as $theId) {
     Security::checkValidId($theId);
 }
