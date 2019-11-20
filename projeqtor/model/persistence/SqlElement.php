@@ -5447,7 +5447,7 @@ abstract class SqlElement {
     $replyMail=i18n("replyToMail");
     $firstLine = " 
         <table style='font-size:14pt; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;'><tr><td colspan='3' style='background:#555555;color: #FFFFFF; text-align: center;'>
-        <div>".htmlEncode ( $replyMail)."</div><div style='background:#555555;color:#555555;font-size:1pt;'>###PROJEQTOR###</div>
+        <div style='background:#F0F0F0;color:#A0A0A0;font-style:italic;font-size:80%'>".htmlEncode ( $replyMail)."</div><div style='background:#555555;color:#555555;font-size:1pt;'>###PROJEQTOR###</div>
         <a href='". $ref ."' target='#' style='color:white'>". i18n ( get_class ( $this ) ) ." #". htmlEncode ( $this->id ) ."</a></td></tr></table>";
     $secondLine = "  <div>&nbsp;</div>";
     $dmsg=(isset($directMessage))?$this->parseMailMessage ($directMessage). '<br/><br/>':'';
