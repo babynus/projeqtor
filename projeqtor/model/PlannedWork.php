@@ -235,7 +235,6 @@ class PlannedWork extends GeneralWork {
     $uniqueResourceAssignment=null;
 //-- Treat each PlanningElement ---------------------------------------------------------------------------------------------------
     foreach ($listPlan as $plan) {
-      debugLog("***** $plan->refName *****");
       if (! $plan->id) {
         continue;
       }
@@ -1379,7 +1378,6 @@ class PlannedWork extends GeneralWork {
                     }
                   }
                   if ($value>=0.01) {
-                    debugLog("ass=$ass->id resource=$ass->idResource currentDate=$currentDate value=$value");
                     self::storePlannedWork(
                         $value, $planned, $plannedReserved, $withProjectRepartition,
                         $currentDate, $week, $profile, $r, $capacity,
@@ -1408,7 +1406,6 @@ class PlannedWork extends GeneralWork {
                             $supportAss=$supportAssignments[$keySupAss];
                           }
                           if (!$supportAss) continue;
-                          debugLog("  => ass=$supportAss->id resource=$supportAss->idResource currentDate=$currentDate value=$value");
                           self::storePlannedWork(
                             $valueSup, $plannedSup, 0, $withProjectRepartition,
                             $currentDate, $week, $profile, null, $supRes['normalCapacity'],
@@ -1636,7 +1633,6 @@ class PlannedWork extends GeneralWork {
   
   public static function enterPlannedWorkAsReal($projectIdArray,$startDatePlan) {
     global $cronnedScript;
-    debugLog("enterPlannedWorkAsReal($projectIdArray,$startDatePlan)");
     $resources=array();
     if (!$cronnedScript) {
       traceLog("enterPlannedWorkAsReal must be called only for cronned calculation");
@@ -1646,13 +1642,11 @@ class PlannedWork extends GeneralWork {
     if ($projectIdArray!=null and is_array($projectIdArray) ) {
       $crit.=" and idProject in ".transformListIntoInClause($projectIdArray);
     }
-    debugLog("   crit=$crit");
     $pw=new PlannedWork();
     $pwList=$pw->getSqlElementsFromCriteria(null,false,$crit);
     $arrayAss=array(); // Will store work to remove from left
     $arrayPe=array();  // Will store real start and real end
     foreach ($pwList as $pw) {
-      debugLog("  => $pw->id");
       $work=new Work();
       if (isset($resources[$pw->idResource])) {
         $ress=$resources[$pw->idResource];
@@ -1673,11 +1667,9 @@ class PlannedWork extends GeneralWork {
         $resources[$pw->idResource]['dates'][$pw->workDate]=$haswork;
       }
       if ($ress['isteam']) {
-        debugLog("Resource $pw->idResource is a Pool");
         continue; // don't enter work planned on Pool
       }
       if ($haswork) {
-        debugLog("Resource $pw->idResource already has real work on $pw->workDate");
         continue; //some work exist
       }  
       $work->idResource=$pw->idResource;
@@ -1708,7 +1700,6 @@ class PlannedWork extends GeneralWork {
       //if (! $ass->realStartDate or $assAr['start']<$ass->realStartDate) $ass->realStartDate=$assAr['start'];
       //if ($left==0 and (!$ass->realEndDate or $assAr['end']>$ass->realEndDate)) $ass->realEndDate=$assAr['end'];
       $resAss=$ass->saveWithRefresh();
-      debugLog("save Assignment #$ass->id new left=$left : $resAss");
     }
   }
 
