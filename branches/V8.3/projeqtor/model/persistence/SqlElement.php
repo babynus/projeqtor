@@ -3324,7 +3324,6 @@ abstract class SqlElement {
    */
   public function getFieldAttributes($fieldName) {
     $fieldsAttributes = $this->getStaticFieldsAttributes ();
-    if ($fieldName=='idApprover__idResource') debugLog($fieldsAttributes);
     if (array_key_exists ( $fieldName, $fieldsAttributes )) {
       return $fieldsAttributes [$fieldName];
     } else {

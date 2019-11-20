@@ -760,7 +760,6 @@ class DataCloning extends SqlElement {
     
     // Copy CODE
     try {
-      debugLog("direcource=$dir_source");
       $dir_iterator=new RecursiveDirectoryIterator($dir_source, RecursiveDirectoryIterator::SKIP_DOTS);
       $iterator=new RecursiveIteratorIterator($dir_iterator, RecursiveIteratorIterator::SELF_FIRST);
       $exceptionPath=array(
