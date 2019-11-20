@@ -1949,7 +1949,8 @@ function finalizeMessageDisplay(destination, validationType) {
   if (resultDivFadingOut) resultDivFadingOut.stop();
   if ((lastOperationStatus.value != "ERROR"
       && lastOperationStatus.value != "INVALID"
-      && lastOperationStatus.value != "CONFIRM" && lastOperationStatus.value != "INCOMPLETE")) {   
+      && lastOperationStatus.value != "CONFIRM" && lastOperationStatus.value != "INCOMPLETE")) {
+    contentNode.style.pointerEvents='none';
     resultDivFadingOut = dojo.fadeOut({
       node : contentNode,
       duration : 3000,
@@ -1959,6 +1960,7 @@ function finalizeMessageDisplay(destination, validationType) {
       }
     }).play();  
   } else {
+    contentNode.style.pointerEvents='auto';
     if (lastOperationStatus.value == "ERROR") {
       showError(message);
       addCloseBoxToMessage(destination);

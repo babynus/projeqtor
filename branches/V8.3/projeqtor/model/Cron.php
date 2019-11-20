@@ -865,8 +865,8 @@ class Cron {
   		if ($posClass) { // It is a ProjeQtor mail
   		  $posId=strpos($body,'&objectId=',$posClass);
   		  if (! $posId) {
-  		    debugTraceLog("Message not identified as response to Projeqtor email (cannot find objectId) in :");
-  		    debugTraceLog(substr($body,$posClass,100));
+  		    debugTraceLog("Message not identified as response to Projeqtor email (cannot find objectId)");
+  		    //debugTraceLog(substr($body,$posClass,100));
   		    continue;
   		  }
   		  $posEnd=strpos($body,'>',$posId);
@@ -874,15 +874,15 @@ class Cron {
   		    $posEnd=strpos($body,']',$posId);
   		  }
   		  if (! $posEnd or $posEnd-$posId>22) {
-  		    debugTraceLog("Message not identified as response to Projeqtor email (cannot find end of objectId) in :");
-  		    debugTraceLog(substr($body,$posClass,100));
+  		    debugTraceLog("Message not identified as response to Projeqtor email (cannot find end of objectId)");
+  		    //debugTraceLog(substr($body,$posClass,100));
   		    continue;
   		  }
   		  $class=substr($body,$posClass+30,$posId-$posClass-30);
   		  $id=substr($body,$posId+10,$posEnd-$posId-10);		  
   		} else {	
-  			debugTraceLog("Message not identified as response to Projeqtor email (cannot find objectClass) in :");
-  			debugTraceLog($body);
+  			debugTraceLog("Message not identified as response to Projeqtor email (cannot find objectClass)");
+  			//debugTraceLog($body);
   			continue;
   		}
   		// Search end of Message (this is valid for text only, treatment of html messages would require other code)  		
