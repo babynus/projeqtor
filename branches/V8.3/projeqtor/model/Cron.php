@@ -947,20 +947,18 @@ class Cron {
   		  $posRemoveMsg=strpos($body,$signIdent);
   		  $msg=trim(substr($body,0,$posRemoveMsg));
   		}
-  		
   		// Remove unexpected "tags" // Valid as long as we treat emails as text
   		$msg=preg_replace('/<mailto.*?\>/','',$msg);
   		$msg=preg_replace('/<http.*?\>/','',$msg);
   		$msg=preg_replace('/<#[A-F0-9\-]*?\>/','',$msg);
   		$msg=str_replace(" \r\n","\r\n",$msg);
   		$msg=str_replace(" \r\n","\r\n",$msg);
-  		$msg=str_replace("\r\n\r\n\r\n","\r\n\r\n",$msg);
-  		$msg=str_replace("\r\n\r\n\r\n","\r\n\r\n",$msg);
+  		//$msg=str_replace("\r\n\r\n\r\n","\r\n\r\n",$msg);
+  		//$msg=str_replace("\r\n\r\n\r\n","\r\n\r\n",$msg);
   		$msg=str_replace(" \n","\n",$msg);
   		$msg=str_replace(" \n","\n",$msg);
   		$msg=str_replace("\n\n\n","\n\n",$msg);
   		$msg=str_replace("\n\n\n","\n\n",$msg);
-  		
   		// Sender
   		$sender=$mail->fromAddress;
   		$crit=array('email'=>$sender);
@@ -997,6 +995,9 @@ class Cron {
       	continue;
       }
   		if ($obj and $obj->id and $senderId) {
+  		  if (substr_count($msg,"\r\n")==2*substr_count($msg,"\r\n\r\n")) {
+  		    $msg=str_replace("\r\n\r\n","\r\n",$msg); // Remove double lines as all are double
+  		  }
   		  $note=new Note();
   		  $note->refType=$class;
   		  $note->refId=$id;
