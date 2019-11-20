@@ -2888,6 +2888,10 @@ abstract class SqlElement {
               $test = Security::checkValidDateTime ( $_REQUEST [$formField] );
               $this->$key = $_REQUEST [$formField];
             }
+          } else if ($dataType == 'varchar' or substr ( $dataType, - 4 ) == 'text') {
+            if (array_key_exists ( $formField, $_REQUEST )) {
+              $this->$key=preg_replace('/[\xF0-\xF7].../s', '', $_REQUEST [$formField]);
+            }
           } else {
             if (array_key_exists ( $formField, $_REQUEST )) {
               $this->$key = $_REQUEST [$formField];
