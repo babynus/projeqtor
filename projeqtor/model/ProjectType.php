@@ -169,6 +169,35 @@ class ProjectType extends SqlElement {
     return $result;
   }
   
+  public function control() {
+    $result="";
+    debugLog("control project type");
+    if ($this->isLeadProject) {
+      debugLog('checked');
+      $old=$this->getOld();
+      if (!$old->isLeadProject) {
+        $pList=SqlList::getListWithCrit('Project', array('idProjectType'=>$this->id));
+        $crit="(refType='Activity' or refType='TestSession') and idProject in ".transformListIntoInClause($pList);
+        $pe=new PlanningElement();
+        $cpt=$pe->countSqlElementsFromCriteria(null,$crit);
+        if ($cpt>0) {
+          $result="<br/>" . i18n("msgCannotChangeLeadProjectOnType");
+        }
+  
+      }
+    }
+    $defaultControl=parent::control();
+    if ($defaultControl!='OK') {
+      $result.=$defaultControl;
+    }
+    if ($result=="") {
+      $result='OK';
+    }
+    debugLog($result);
+    return $result;
+    
+  }
+  
   public function save() {
   	if (! $this->code) {
   		$this->code='OPE';
