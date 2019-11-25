@@ -969,8 +969,8 @@ class ImputationLine {
               }
               $colorStyle="";
               $colorClass="";
-              if ($line->idle or $line->locked) $colorStyle="color:#A0A0A0;";
-              else if ($valWork>0) $colorClass="imputationHasValue";
+              if ($valWork>0) $colorClass="imputationHasValue";
+              else if ($line->idle or $line->locked) $colorStyle="color:#A0A0A0;";
               echo '<div type="text" idProject="'.$line->idProject.'" dojoType="dijit.form.NumberTextBox" ';
               echo ' constraints="{min:0}"';
               //gautier #3384
