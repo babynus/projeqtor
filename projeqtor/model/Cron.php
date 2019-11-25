@@ -972,7 +972,7 @@ class Cron {
   		debugTraceLog("User corresponding to email address is #$senderId");
   		if (! $senderId) {
   			traceLog("Email message received from '$sender', not recognized as resource or user or contact : message not stored as note to avoid spamming");
-  			$mailbox->markMailAsUnread($mailId);
+  			$mailbox->markMailAsRead($mailId);
   			continue;
   		}
   		$arrayFrom=array("\n","\r"," ");
