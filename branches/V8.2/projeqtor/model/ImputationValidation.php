@@ -256,7 +256,7 @@ class ImputationValidation{
   			$result .='   <div id="validatedDiv'.$week->id.'" name="validatedDiv'.$week->id.'" width="100%" dojoType="dijit.layout.ContentPane" region="center">';
   			$result .='     <table width="100%"><tr>';
   			if($week->validated){
-  				$locker = SqlList::getNameFromId('Resource', $week->idLocker);
+  				$locker = SqlList::getNameFromId('Affectable', $week->idLocker);
   				$result .='     <td style="height:30px;">'.formatIcon('Submitted', 32, i18n('validatedLineWorkPeriod', array($locker, htmlFormatDate($week->validatedDate)))).'</td>';
   				$result .='     <td style="width:73%;padding-left:5px;height:30px;">'.i18n('validatedLineWorkPeriod', array($locker, htmlFormatDate($week->validatedDate))).'</td>';
   				$result .='     <td style="width:27%;padding-right:8px;height:30px;">';
