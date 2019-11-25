@@ -104,8 +104,8 @@ class ImputationValidation{
 	  $result .='      <td style="border-top: 1px solid white;border-right: 1px solid white;width:33%;height:30px;text-align:center;vertical-align:center;">'.i18n('administrativeWork').'</td>';
 	  $result .='      <td style="border-top: 1px solid white;border-right: 1px solid white;width:33%;height:30px;text-align:center;vertical-align:center;">'.i18n('sum').'</td></tr></table>';
 	  $result .='     </td>';
-	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:23%;text-align:center;vertical-align:center;">'.i18n('ImputationSubmit').'</td>';
-	  $result .='     <td colspan="2" style="border: 1px solid grey;height:60px;width:23%;text-align:center;vertical-align:center;">';
+	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:20%;text-align:center;vertical-align:center;">'.i18n('ImputationSubmit').'</td>';
+	  $result .='     <td colspan="2" style="border: 1px solid grey;height:60px;width:26%;text-align:center;vertical-align:center;">';
     $result .='       <table width="100%"><tr><td width="62%">'.i18n('menuImputationValidation').'</td>';
     $result .='       <td width="30%">';
     $result .='       <span id="buttonValidationAll" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('validateWorkPeriod')
@@ -246,7 +246,7 @@ class ImputationValidation{
   			$result .='        <td style="'.$backgroundColor.'width:33%;height:30px;text-align:center;vertical-align:center;">'.$inputTotal.'</td></tr>';
   			$result .='      </table>';
   			$result .='     </td>';
-  			$result .='   <td style="border: 1px solid grey;height:30px;width:23%;text-align:left;vertical-align:center;">';
+  			$result .='   <td style="border: 1px solid grey;height:30px;width:20%;text-align:left;vertical-align:center;">';
   			$result .='   <div id="submittedDiv'.$week->id.'" name="submittedDiv'.$week->id.'" width="100%" dojoType="dijit.layout.ContentPane" region="center">';
   			if($week->submitted){
   				$result .='     <table width="100%"><tr><td style="height:30px;">'.formatIcon('Submitted', 32, i18n('submittedWork', array($name, htmlFormatDate($week->submittedDate)))).'</td>';
@@ -263,7 +263,7 @@ class ImputationValidation{
   				$result .='     <table width="100%"><tr><td style="height:30px;">'.formatIcon('Unsubmitted', 32, i18n('unsubmittedWork')).'</td>';
   				$result .='     <td style="height:30px;width:90%;">'.i18n('unsubmittedWork').'&nbsp'.htmlFormatDate($week->submittedDate).'</td></tr></table></div></td>';
   			}
-  			$result .='   <td style="border: 1px solid grey;height:30px;width:23%;text-align:left;vertical-align:center;">';
+  			$result .='   <td style="border: 1px solid grey;height:30px;width:26%;text-align:left;vertical-align:center;">';
   			$result .='   <div id="validatedDiv'.$week->id.'" name="validatedDiv'.$week->id.'" width="100%" dojoType="dijit.layout.ContentPane" region="center">';
   			$result .='     <table width="100%"><tr>';
   			if($week->validated){
