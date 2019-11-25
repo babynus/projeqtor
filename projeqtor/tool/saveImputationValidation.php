@@ -52,7 +52,7 @@ if($buttonAction != 'validateSelection'){
   	  break;
   	case 'validateWork' :
   	  $workPeriod->validated = 1;
-  	  $workPeriod->validatedDate = date('Y-m-d-H-i-s');
+  	  $workPeriod->validatedDate = date('Y-m-d H:i:s');
   	  $workPeriod->idLocker = getCurrentUserId();
   	  break;
   	default:
@@ -67,7 +67,7 @@ if($buttonAction == 'validateSelection'){
     $workPeriod = new WorkPeriod($id, true);
     if($workPeriod->validated == 0){
       $workPeriod->validated = 1;
-      $workPeriod->validatedDate = date('Y-m-d-H-i-s');
+      $workPeriod->validatedDate = date('Y-m-d H:i:s');
       $workPeriod->idLocker = getCurrentUserId();
       $workPeriod->save();
     }
