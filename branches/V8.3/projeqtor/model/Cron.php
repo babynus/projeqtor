@@ -926,7 +926,6 @@ class Cron {
   		if ($posEndMsg) {
   		  $msg=substr($body,0,$posEndMsg);
   		}
-  		
   		if (!trim ($msg)) { // Message not received with previous methods, try another one
   		  $posEndMsg=strrpos(substr($body,0,$posClass), "\n");
   		  $posDe=strrpos(substr($body,0,$posEndMsg), "De : ");
@@ -945,7 +944,10 @@ class Cron {
   		$signIdent=Parameter::getGlobalParameter('paramSignatureAndTagToRemove');
   		if(trim($signIdent)!=''){
   		  $posRemoveMsg=strpos($body,$signIdent);
-  		  $msg=trim(substr($body,0,$posRemoveMsg));
+  		  debugLog($posRemoveMsg);
+  		  if(trim($posRemoveMsg)){
+  		    $msg=trim(substr($body,0,$posRemoveMsg));
+  		  }
   		}
   		// Remove unexpected "tags" // Valid as long as we treat emails as text
   		$msg=preg_replace('/<mailto.*?\>/','',$msg);
