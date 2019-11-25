@@ -1068,8 +1068,8 @@ class Parameter extends SqlElement {
 // END - ADD BY TABARY - NOTIFICATION SYSTEM
       	                      'sectionCronArchiveHistory'=>'section',
       	                        'cronArchiveTime'=>'number',
-      	                        'cronArchiveCloseItems'=>'list',
       	                        'cronArchivePlannedDate'=>'time',
+      	                        'cronArchiveCloseItems'=>'list',
                               'sectionCronImport'=>'section',
                 	              'cronImportDirectory'=>'text',
                 	              'cronCheckImport'=>'number',
