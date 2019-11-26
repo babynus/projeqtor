@@ -6,10 +6,12 @@
 require_once "../tool/projeqtor.php";
 scriptLog('   ->/view/versionsPlanningList.php');
 
+$ShowRessourceComponentVersion='';
 $startDate=date('Y-m-d');
 $endDate=null;
 $user=getSessionUser();
 $saveDates=false;
+$saveShowResource=Parameter::getUserParameter('planningShowResource');
 $paramStart=SqlElement::getSingleSqlElementFromCriteria('Parameter',array('idUser'=>$user->id,'idProject'=>null,'parameterCode'=>'planningStartDate'));
 if ($paramStart->id) {
 	$startDate=$paramStart->parameterValue;
@@ -201,7 +203,7 @@ echo '<input type="hidden" id="nbPvs" name="nbPvs" value="'.$nbPvs.'" />';
                        
                        ?>
                       <td width="50px">
-                        <div id="listFilterAdvanced" style="display:<?php echo ($showListFilter=='true')?'block':'none';?>">
+                        <div id="listFilterAdvanced" style="visibility:<?php echo ($showListFilter=='true')?'visible':'hidden';?>;">
                           <button 
                            title="<?php echo i18n('advancedFilter')?>"  
                            class="comboButton" 
@@ -249,6 +251,24 @@ echo '<input type="hidden" id="nbPvs" name="nbPvs" value="'.$nbPvs.'" />';
                           </script>
                         </div>
                		  </td>
+                 		<td style="padding-right:5px;padding-left:20px;text-align: right;" >
+                 		  <div id="displayRessource" style="visibility:<?php echo ($showListFilter=='true')?'visible':'hidden';?>;">
+                            <?php echo i18n('labelShowResource');?>
+                          </div>
+                        </td>
+               		    <td>
+                 		  <div id="displayRessourceCheck" style="visibility:<?php echo ($showListFilter=='true')?'visible':'hidden';?>!important;">
+                            <div title="<?php echo i18n('showRessourceComponentVersion')?>" dojoType="dijit.form.CheckBox" 
+                              class="whiteCheck" type="checkbox" id="showRessourceComponentVersion" name="showRessourceComponentVersion"
+                              <?php if ($ShowRessourceComponentVersion=='1') { echo ' checked="checked" '; }?> >
+                              <script type="dojo/method" event="onChange" >
+                                saveUserParameter('planningShowResource',((this.checked)?'1':'0'));
+                                //displayResourceComponentVersion('showRessourceComponentVersion',((this.checked)?'1':'0'));
+                                refreshJsonPlanning();
+                              </script>
+                            </div>
+                          </div>
+               		    </td>
                     </tr>
                     <tr>
                       <td colspan="3" style="white-space:nowrap;">
