@@ -63,8 +63,8 @@ var mustApplyFilter=false;
 
 var arraySelectedProject = new Array();
 
-var displayFilterVersionPlanning='';
-var displayFilterComponentVersionPlanning='';
+var displayFilterVersionPlanning='0';
+var displayFilterComponentVersionPlanning='0';
 // =============================================================================
 // = Functions
 // =============================================================================
@@ -6385,9 +6385,13 @@ function showListFilter(checkBoxName,value){
   }
   if((displayFilterVersionPlanning=='0' && displayFilterComponentVersionPlanning=='0')){
     selectStoredFilter('0','directFilterList');
-    dojo.byId('listFilterAdvanced').style.display="none";
+    dojo.byId('listFilterAdvanced').style.visibility="hidden";
+    dojo.byId('displayRessource').style.visibility="hidden";
+    dojo.byId('displayRessourceCheck').style.visibility="hidden";
   }else{
-    dojo.byId('listFilterAdvanced').style.display="block";
+    dojo.byId('listFilterAdvanced').style.visibility="visible";
+    dojo.byId('displayRessource').style.visibility="visible";
+    dojo.byId('displayRessourceCheck').style.visibility="visible";
   }
   
 }
