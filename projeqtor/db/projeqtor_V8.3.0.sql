@@ -42,9 +42,8 @@ ALTER TABLE `${prefix}assignment` ADD COLUMN `hasSupport` int(1) unsigned DEFAUL
 -- ======================================
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
-(225,'menuChangeRequest',6,'object', 355,'ReadWritePrincipal',0,'Work Configuration EnvironmentalParameter'),
+(225,'menuChangeRequest',6,'object', 355,'ReadWritePrincipal',0,'Work Review EnvironmentalParameter'),
 (226,'menuChangeRequestType',79,'object',982,NULL,NULL,0);
-
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,225,1),
