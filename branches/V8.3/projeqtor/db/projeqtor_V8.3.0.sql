@@ -120,6 +120,11 @@ INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`)
 ('ChangeRequest', 'regulatory constraint',40,1, 0),
 ('ChangeRequest', 'process and quality',50,1, 0);
 
+INSERT INTO `${prefix}mailable` (`id`,`name`, `idle`) VALUES 
+(41,'ChangeRequest', '0');
+
+INSERT INTO `${prefix}importable` (`id`, `name`, `idle`) VALUES
+(55, 'ChangeRequest', 0);
 
 CREATE TABLE `${prefix}resourceincompatible` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
