@@ -2558,8 +2558,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
                                               'untaxedAmount','taxAmount','fullAmount',
                                               'addUntaxedAmount','addTaxAmount','addFullAmount',
                                               'totalUntaxedAmount','totalTaxAmount','totalFullAmount',
-                                              'realAmount','realTaxAmount','realFullAmount'
-          );
+                                              'realAmount','realTaxAmount','realFullAmount',
+                                              'paymentAmount','paymentFeeAmount','paymentCreditAmount'
+                    );
           if(($isAmount or $isCost) and !in_array($col,$arrayPossibleNegativeAmounts) and $classObj != 'Bill'){
               echo ' constraints="{min:0,max:'.$max.(($isAmount)?',places:2':'').'}" ';
           } else if( ! in_array($col,$arrayPossibleNegativeAmounts) or $col=='minimumThreshold'){
