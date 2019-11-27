@@ -41,10 +41,26 @@ if ($affectationId=='') {
 if ($affectationId==null) {
   throwError('affectationId parameter not found in REQUEST');
 }
+
 Sql::beginTransaction();
 $obj=new Affectation($affectationId);
+$autoAffectationPool=Parameter::getGlobalParameter('autoAffectationPool');
+//Gautier #3849
+if($autoAffectationPool=="IMPLICIT"){
+  $res = new ResourceAll($obj->idResourceSelect,true);
+  if($res->isResourceTeam){
+    $affPool = new Affectation();
+    $listAffPool = $affPool->getSqlElementsFromCriteria(array('idResourceTeam'=>$res->id,'idProject'=>$obj->idProject));
+    foreach ($listAffPool as $valAffPool){
+      if((strtotime($valAffPool->startDate) >= strtotime($obj->startDate)  and strtotime($valAffPool->endDate) <= strtotime($obj->endDate)) 
+           OR (!$obj->startDate and $obj->endDate) OR (!$obj->startDate and strtotime($obj->endDate) >= strtotime($valAffPool->endDate))  
+           OR (!$obj->endDate and strtotime($obj->startDate) <= strtotime($valAffPool->startDate))){
+        $valAffPool->delete();
+      }
+    }
+  }
+}
 $result=$obj->delete();
-
 // Message of correct saving
 displayLastOperationStatus($result);
 ?>
