@@ -720,45 +720,44 @@ public $_noCopy;
       }else{
         foreach ($tab as $idVal=>$value){
           $affImplicit = new Affectation();
-          $startDate = null;
-          $endDate = null;
-          if($aff->startDate)$affDate = strtotime($aff->startDate);
-          if($aff->endDate)$affDateEnd = strtotime($aff->endDate);
-          if($value['startDate'])$startTab = strtotime($value['startDate']);
-          if($value['endDate'])$endTab = strtotime($value['endDate']);
-          //Start Date
+          $startDate = $aff->startDate;
+          $endDate = $aff->endDate;
+          //Pour etre sur pour les comparaisons de dates
+          $affDate = strtotime($aff->startDate); ;
+          $affDateEnd = strtotime($aff->endDate); 
+          $startTab = strtotime($value['startDate']);
+          $endTab = strtotime($value['endDate']);
+          
           if($aff->startDate and $value['endDate'] ){
             if($affDate > $endTab) continue;
           }
-          if($affDate or $startTab){
-            if($startTab > $affDate){
-              if($aff->endDate){
-                //Si la date du debut d'aff de la ressource au pool est supérieure a la fin de l'aff du projet 
-                if($startTab > $affDateEnd){
-                  continue;
+          
+          //Start Date
+          if($value['startDate']){
+              if($startTab > $affDate){
+                if($aff->endDate){
+                  //Si la date du debut d'aff de la ressource au pool est supérieure a la fin de l'aff du projet 
+                  if($startTab > $affDateEnd){
+                    continue;
+                  }
                 }
                 // Si la date de debut d'aff au pool est supérieure a la date d'aff du pool au debut du projet
                 $startDate = $value['startDate'];
               }
-            //Si la date du debut d'aff du pool au projet est la plus lointaine
-            }else{
-              $startDate = $aff->startDate;
-            }
           }
           //End date
-          if($affDateEnd or $endTab){
-            if($affDateEnd > $endTab){
-              $endDate = $value['endDate'];
-            }else{
-              $endDate = $aff->endDate;
-            }
+          if($value['endDate']){
+            if($affDateEnd > $endTab)$endDate = $value['endDate'];
+            if(!$endDate)$endDate = $value['endDate'];
           }
+          
           $affImplicit->idResource = $idRes;
           $affImplicit->idProject = $aff->idProject;
           $affImplicit->idProfile = $aff->idProfile;
           $affImplicit->rate = $aff->rate;
           $affImplicit->startDate = $startDate;
           $affImplicit->endDate = $endDate;
+          $affImplicit->idResourceTeam = $aff->idResourceSelect;
           //$affImplicit->hideAffectation=1;
           $existAffImplicit = $affImplicit->countSqlElementsFromCriteria(array('startDate'=>$startDate,'endDate'=>$endDate,'idResource'=>$idRes,'idProject'=>$affImplicit->idProject));
           if(!$existAffImplicit){
