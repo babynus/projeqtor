@@ -33,6 +33,16 @@ require_once "../tool/projeqtor.php";
 $idAffectation = RequestHandler::getId('affectaionId');
 Sql::beginTransaction();
 $obj = new ResourceTeamAffectation($idAffectation);
+//Gautier #3849
+$autoAffectationPool=Parameter::getGlobalParameter('autoAffectationPool');
+if($autoAffectationPool=="IMPLICIT"){
+  $res = new ResourceAll($obj->idResource,true);
+  $affPool = new Affectation();
+  $listAffPool = $affPool->getSqlElementsFromCriteria(array('idResourceTeam'=>$obj->idResourceTeam));
+  foreach ($listAffPool as $valAffPool){
+    $valAffPool->delete();
+  }
+}
 $result=$obj->delete();
 // Message of correct saving
 displayLastOperationStatus($result);

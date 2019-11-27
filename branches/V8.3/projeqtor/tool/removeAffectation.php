@@ -44,8 +44,8 @@ if ($affectationId==null) {
 
 Sql::beginTransaction();
 $obj=new Affectation($affectationId);
-$autoAffectationPool=Parameter::getGlobalParameter('autoAffectationPool');
 //Gautier #3849
+$autoAffectationPool=Parameter::getGlobalParameter('autoAffectationPool');
 if($autoAffectationPool=="IMPLICIT"){
   $res = new ResourceAll($obj->idResourceSelect,true);
   if($res->isResourceTeam){
