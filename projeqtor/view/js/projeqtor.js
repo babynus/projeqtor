@@ -326,7 +326,7 @@ function refreshJsonPlanning(versionsPlanning) {
     }
   }
   if (dojo.byId('listShowResource')) {
-    if (dojo.byId('listShowResource').checked) {
+    if (dojo.byId('listShowResource').checked ) {
       url += (param) ? "&" : "?";
       url += "showResource=true";
       param = true;
@@ -3143,6 +3143,12 @@ function drawGantt() {
           pCaption = pResource;
         }
       }
+      if (dojo.byId('showRessourceComponentVersion')) {
+        if (dojo.byId('showRessourceComponentVersion').checked) {
+          pCaption = pResource;
+        }
+      }
+      
       if (dojo.byId('listShowLeftWork')
           && dojo.byId('listShowLeftWork').checked) {
         if (item.leftwork > 0) {
@@ -6393,5 +6399,4 @@ function showListFilter(checkBoxName,value){
     dojo.byId('displayRessource').style.visibility="visible";
     dojo.byId('displayRessourceCheck').style.visibility="visible";
   }
-  
 }

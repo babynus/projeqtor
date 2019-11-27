@@ -6,7 +6,6 @@
 require_once "../tool/projeqtor.php";
 scriptLog('   ->/view/versionsPlanningList.php');
 
-$ShowRessourceComponentVersion='';
 $startDate=date('Y-m-d');
 $endDate=null;
 $user=getSessionUser();
@@ -25,8 +24,8 @@ if ($paramEnd->id) {
 
 $saveShowWbsObj=SqlElement::getSingleSqlElementFromCriteria('Parameter',array('idUser'=>$user->id,'idProject'=>null,'parameterCode'=>'planningShowWbs'));
 $saveShowWbs=$saveShowWbsObj->parameterValue;
-$saveShowResourceObj=SqlElement::getSingleSqlElementFromCriteria('Parameter',array('idUser'=>$user->id,'idProject'=>null,'parameterCode'=>'planningShowResource'));
-$saveShowResource=$saveShowResourceObj->parameterValue;
+// $saveShowResourceObj=SqlElement::getSingleSqlElementFromCriteria('Parameter',array('idUser'=>$user->id,'idProject'=>null,'parameterCode'=>'planningShowResource'));
+// $saveShowResource=$saveShowResourceObj->parameterValue;
 $saveShowWorkObj=SqlElement::getSingleSqlElementFromCriteria('Parameter',array('idUser'=>$user->id,'idProject'=>null,'parameterCode'=>'planningShowWork'));
 $saveShowWork=$saveShowWorkObj->parameterValue;
 $saveShowClosedObj=SqlElement::getSingleSqlElementFromCriteria('Parameter',array('idUser'=>$user->id,'idProject'=>null,'parameterCode'=>'planningShowClosed'));
@@ -196,9 +195,9 @@ echo '<input type="hidden" id="nbPvs" name="nbPvs" value="'.$nbPvs.'" />';
                            }
                          }
                        }
-                       $showListFilter='true';
-                       if($displayComponentVersionActivity=='0' and $displayProductVersionActivity=='0'){
-                          $showListFilter='false';
+                       $showListFilter='false';
+                       if($displayComponentVersionActivity=='1' or $displayProductVersionActivity=='1'){
+                          $showListFilter='true';
                        }
                        
                        ?>
@@ -260,7 +259,7 @@ echo '<input type="hidden" id="nbPvs" name="nbPvs" value="'.$nbPvs.'" />';
                  		  <div id="displayRessourceCheck" style="visibility:<?php echo ($showListFilter=='true')?'visible':'hidden';?>!important;">
                             <div title="<?php echo i18n('showRessourceComponentVersion')?>" dojoType="dijit.form.CheckBox" 
                               class="whiteCheck" type="checkbox" id="showRessourceComponentVersion" name="showRessourceComponentVersion"
-                              <?php if ($ShowRessourceComponentVersion=='1') { echo ' checked="checked" '; }?> >
+                              <?php if ($saveShowResource=='1') { echo ' checked="checked" '; }?> >
                               <script type="dojo/method" event="onChange" >
                                 saveUserParameter('planningShowResource',((this.checked)?'1':'0'));
                                 //displayResourceComponentVersion('showRessourceComponentVersion',((this.checked)?'1':'0'));
