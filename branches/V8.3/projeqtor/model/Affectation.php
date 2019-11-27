@@ -339,7 +339,7 @@ public $_noCopy;
     if($autoAffectationPool=="EXPLICIT" OR $autoAffectationPool=="IMPLICIT"){
       $res = new ResourceAll($this->idResource,true);
       if($res->isResourceTeam){
-       // $this->affectResPool($this);
+       $this->affectResPool($this->id,$autoAffectationPool);
       }
     }
     return $result;
@@ -688,51 +688,85 @@ public $_noCopy;
   }
   
   
-  public static function affectResPool() {
+  public static function affectResPool($id,$mode) {
+    $resOfMyPool = array();
+    $aff = new Affectation($id);
     $resAffPool= new ResourceTeamAffectation();
-    $listPoolResAff = $resAffPool->getSqlElementsFromCriteria(array('idResourceTeam'=>$this->idResource));
-    //Parcourir les affectations 
+    $listPoolResAff = $resAffPool->getSqlElementsFromCriteria(array('idResourceTeam'=>$aff->idResourceSelect));
     
-    
-    
-      //Parcourir les ressources
-      foreach ($listPoolResAff as $poolRes){
-        $aff = new Affectation();
-        if($autoAffectationPool=="EXPLICIT"){
-          if($aff->countSqlElementsFromCriteria(array('idResource'=>$poolRes->idResource,'idProject'=>$this->idProject)))continue;
-        }else{
-          if($aff->countSqlElementsFromCriteria(array('idResource'=>$poolRes->idResource,'idProject'=>$this->idProject,'hideAffectation'=>1,'idResourceTeam'=>$this->idResource)))continue;
-        }
-        $aff->idResource = $poolRes->idResource;
-        $aff->idProject = $this->idProject;
-        $aff->idProfile = $this->idProfile;
-        $aff->rate = $this->rate;
-        $aff->idResourceTeam = $this->idResource;
-        //DATES
-        $poolStart = $poolRes->startDate;
-        $poolEnd = $poolRes->endDate;
-        $affStart = $this->startDate;
-        $affEnd = $this->endDate;
-      
-        if($affStart and $poolEnd){
-          if($affStart > $poolEnd)continue;
-        }
-        if($poolStart and $affStart){
-          if($poolStart > $affStart)$aff->startDate = $poolStart;
-        }
-        if($poolEnd and $affEnd){
-          if($poolEnd < $affEnd)$aff->endDate = $poolEnd;
-        }
-        if($affStart and !$aff->startDate)$aff->startDate=$affStart;
-        if($affEnd and !$aff->endDate)$aff->endDate=$affEnd;
-      
-      
-        if($autoAffectationPool=="IMPLICIT")$aff->hideAffectation = 1;
-        $aff->save();
+    //Parcourir les affectations des ressources du pool pour les mettre dans un tableau pour les rassembler si plusieurs affectation de la meme res au pool
+    foreach($listPoolResAff as $affPool){
+      if(!$affPool->idle){
+        $resOfMyPool[$affPool->idResource][$affPool->id]['rate']= $aff->rate;
+        $resOfMyPool[$affPool->idResource][$affPool->id]['startDate']= $affPool->startDate;
+        $resOfMyPool[$affPool->idResource][$affPool->id]['endDate']= $affPool->endDate;
       }
-    
-    
-    
+    }
+    //Parcours des ressources
+    foreach ($resOfMyPool as $idRes=>$tab){
+      if($mode=="EXPLICIT"){
+        $affExplicit = new Affectation();
+        $affExplicit->idResource = $idRes;
+        $affExplicit->idProject = $aff->idProject;
+        $affExplicit->startDate = $aff->startDate;
+        $affExplicit->endDate = $aff->endDate;
+        $affExplicit->idProfile = $aff->idProfile;
+        $affExplicit->rate = $aff->rate;
+        $existAffExplicit = $affImplicit->countSqlElementsFromCriteria(array('startDate'=>$aff->startDate,'endDate'=>$aff->endDate,'idResource'=>$idRes,'idProject'=>$aff->idProject));
+        if(!$existAffExplicit){
+          $affExplicit->save();
+        }
+        //Implicit
+      }else{
+        foreach ($tab as $idVal=>$value){
+          $affImplicit = new Affectation();
+          $startDate = null;
+          $endDate = null;
+          if($aff->startDate)$affDate = strtotime($aff->startDate);
+          if($aff->endDate)$affDateEnd = strtotime($aff->endDate);
+          if($value['startDate'])$startTab = strtotime($value['startDate']);
+          if($value['endDate'])$endTab = strtotime($value['endDate']);
+          //Start Date
+          if($aff->startDate and $value['endDate'] ){
+            if($affDate > $endTab) continue;
+          }
+          if($affDate or $startTab){
+            if($startTab > $affDate){
+              if($aff->endDate){
+                //Si la date du debut d'aff de la ressource au pool est supérieure a la fin de l'aff du projet 
+                if($startTab > $affDateEnd){
+                  continue;
+                }
+                // Si la date de debut d'aff au pool est supérieure a la date d'aff du pool au debut du projet
+                $startDate = $value['startDate'];
+              }
+            //Si la date du debut d'aff du pool au projet est la plus lointaine
+            }else{
+              $startDate = $aff->startDate;
+            }
+          }
+          //End date
+          if($affDateEnd or $endTab){
+            if($affDateEnd > $endTab){
+              $endDate = $value['endDate'];
+            }else{
+              $endDate = $aff->endDate;
+            }
+          }
+          $affImplicit->idResource = $idRes;
+          $affImplicit->idProject = $aff->idProject;
+          $affImplicit->idProfile = $aff->idProfile;
+          $affImplicit->rate = $aff->rate;
+          $affImplicit->startDate = $startDate;
+          $affImplicit->endDate = $endDate;
+          //$affImplicit->hideAffectation=1;
+          $existAffImplicit = $affImplicit->countSqlElementsFromCriteria(array('startDate'=>$startDate,'endDate'=>$endDate,'idResource'=>$idRes,'idProject'=>$affImplicit->idProject));
+          if(!$existAffImplicit){
+            $affImplicit->save();
+          }
+        }
+      }
+    }
   }
   
 }
