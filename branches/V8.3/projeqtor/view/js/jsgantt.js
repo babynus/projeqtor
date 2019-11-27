@@ -877,22 +877,20 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
         vLeftTable += '<TR id=child_'+vID+' dndType="planningTask" class="dojoDndItem ganttTask' + vRowType + '" ' 
           + invisibleDisplay + ' style="height:21px">' ;
         vLeftTable += '  <TD class="ganttName" style="width:'+vIconWidth+'px">';
-        if (planningPage=='ResourcePlanning') {
+        var iconName = vTaskList[i].getClass();
+        if (vTaskList[i].getClass() == 'ComponentVersionhasChild') {
+          iconName = 'ComponentVersion';
+        }
+        else if (vTaskList[i].getClass() == 'ProductVersionhasChild') {
+          iconName = 'ProductVersion';
+        }
+        if (planningPage=='ResourcePlanning' || planningPage=='VersionsPlanning') {
           vLeftTable += '<span class="">'
             + '<table><tr><td>&nbsp;</td><td class="ganttIconBackground">'
-            + '<div class="icon'+vTaskList[i].getClass()+'16" style="width:16px;height:16px;" >&nbsp;</div>'
+            + '<div class="icon'+iconName+'16" style="width:16px;height:16px;" >&nbsp;</div>'
             + '</td></tr></table>'
             +'</span>';
         } else {
-        	
-        	var iconName = vTaskList[i].getClass();
-        	if (vTaskList[i].getClass() == 'ComponentVersionhasChild') {
-        	  iconName = 'ComponentVersion';
-        	}
-        	else if (vTaskList[i].getClass() == 'ProductVersionhasChild') {
-        	  iconName = 'ProductVersion';
-        	}
-        	
           vLeftTable += 
               '<span class="dojoDndHandle handleCursor">'
             + ' <table><tr>'
