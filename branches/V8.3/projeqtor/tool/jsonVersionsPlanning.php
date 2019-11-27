@@ -6,7 +6,7 @@ require_once "../tool/projeqtor.php";
 scriptLog('   ->/tool/jsonVersionsPlanning.php');
 
 echo '{"identifier":"id", "items":[';
-
+$showOnlyActivesVersions=Parameter::getUserParameter('showOnlyActivesVersions');
 $pvsArray = array();
 //CHANGE qCazelles - Correction GANTT - Ticket #100
 //Old
@@ -35,7 +35,10 @@ else {
 }
 //$type = new Type();
 //$componentTypeNoDisplay = $type->getSqlElementsFromCriteria(array('lockUseOnlyForCC'=>'1','scope'=>'ComponentVersion'));
-
+debugLog($pvsArray);
+if($showOnlyActivesVersions== 1){
+  $where=" and handled = 1 and done=0 ";
+}
 
 foreach ($pvsArray as $idProductVersion) {
   $productVersion = new ProductVersion($idProductVersion);
