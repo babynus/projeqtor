@@ -615,6 +615,9 @@ static protected function drawProductUsingComponentVersion($class, $id)
     $planningVersionShowClosed = Parameter::getUserParameter('planningVersionShowClosed');
     $displayComponentversionActivity = Parameter::getUserParameter('planningVersionDisplayComponentVersionActivity');
     $displayProductversionActivity = Parameter::getUserParameter('planningVersionDisplayProductVersionActivity');
+    $showResource=Parameter::getUserParameter('planningShowResource');
+    $displayResource=Parameter::getGlobalParameter('displayResourcePlan');
+    if (!$displayResource) $displayResource="initials";
     
     //florent ticket 4299
     $activity = new Activity;
@@ -730,6 +733,32 @@ static protected function drawProductUsingComponentVersion($class, $id)
             echo ',"toprefid":"'.$this->id.'"';
             echo ',"realstartdate":"'.$lapv->startDateActivity().'"';
             echo ',"realenddate":"'.$lapv->endDateActivity().'"';
+            $crit=array('refType'=>"Activity", 'refId'=>$lapv->id);
+            $ass=new Assignment();
+            $assList=$ass->getSqlElementsFromCriteria($crit,false);
+            $resp=$lapv->idResource;
+            foreach ($assList as $assLine) {
+              $res=new ResourceAll($assLine->idResource,true);
+              if (! isset($arrayResource[$res->id])) {
+                $display=($displayResource=='NO')?null:$res->$displayResource;
+                if ($displayResource=='initials' and ! $display) {
+                  //$encoding=mb_detect_encoding($res->name, 'ISO-8859-1, UTF-8');
+                  //$display=$encoding;
+                  $words=mb_split(' ',str_replace(array('"',"'"), ' ', $res->name));
+                  $display='';
+                  foreach ($words as $word) {
+                    $display.=(mb_substr($word,0,1,'UTF-8'));
+                  }
+                }
+                if ($display)	{
+                  $arrayResource[$res->id]=htmlEncode($display);
+                  if ($resp and $resp==$res->id ) {
+                    $arrayResource[$res->id]='<b>'.htmlEncode($display).'</b>';
+                  }
+                }
+              }
+              echo ',"resource":"' . htmlEncodeJson(implode(', ',$arrayResource)) . '"';
+          }
             if ($startDate > $lapv->startDateActivity())
               echo ',"redElement":"1"';
               else
@@ -741,6 +770,10 @@ static protected function drawProductUsingComponentVersion($class, $id)
         }
         
         foreach($listActivity as $la){
+          $crit=array('refType'=>"Activity", 'refId'=>$la->id);
+          $ass=new Assignment();
+          $assList=$ass->getSqlElementsFromCriteria($crit,false);
+          $resp=$la->idResource;
           echo ',';
           echo '{';
           $idPE = $la->id.'.'.$this->nbOccurences;
@@ -759,15 +792,35 @@ static protected function drawProductUsingComponentVersion($class, $id)
           echo ',"toprefid":"'.$this->id.'"';
           echo ',"realstartdate":"'.$la->startDateActivity($this).'"';
           echo ',"realenddate":"'.$la->endDateActivity($this).'"';
+          foreach ($assList as $ass) {
+            $res=new ResourceAll($ass->idResource,true);
+            if (! isset($arrayResource[$res->id])) {
+              $display=($displayResource=='NO')?null:$res->$displayResource;
+              if ($displayResource=='initials' and ! $display) {
+                //$encoding=mb_detect_encoding($res->name, 'ISO-8859-1, UTF-8');
+                //$display=$encoding;
+                $words=mb_split(' ',str_replace(array('"',"'"), ' ', $res->name));
+                $display='';
+                foreach ($words as $word) {
+                  $display.=(mb_substr($word,0,1,'UTF-8'));
+                }
+              }
+              if ($display)	{
+                $arrayResource[$res->id]=htmlEncode($display);
+                if ($resp and $resp==$res->id ) {
+                  $arrayResource[$res->id]='<b>'.htmlEncode($display).'</b>';
+                }
+              }
+            }
+            echo ',"resource":"' . htmlEncodeJson(implode(', ',$arrayResource)) . '"';
+          }
           if ($startDate > $la->startDateActivity())
             echo ',"redElement":"1"';
             else
               echo ',"redElement":"0"';
               echo ',"status":"'.SqlList::getNameFromId('Status', $la->idStatus).'"';
-              
               echo '}';
         }
-        
   }
   //ADD qCazelles - Correction GANTT - Ticket #100
   protected function startDateVersionsPlanning($parentVersion=null) {
