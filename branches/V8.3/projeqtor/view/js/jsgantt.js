@@ -389,6 +389,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
   var vEndDateView=new Date();
   var vBaseTopName="";
   var vBaseBottomName="";
+  var showResourceComponentVersion="No";
   this.setFormatArr = function() {
     vFormatArr = new Array();
     for(var i = 0; i < arguments.length; i++) {vFormatArr[i] = arguments[i];}
@@ -725,6 +726,10 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
     var vLeftWidth = vIconWidth+getPlanningFieldWidth('Name')+2;
     //CHANGE qCazelles - GANTT (Correction)
     //ADD
+    if(dojo.byId('showRessourceComponentVersion').checked && (dojo.byId('listDisplayComponentVersionActivity').checked || dojo.byId('listDisplayProductVersionActivity').checked)){
+      showResourceComponentVersion='Yes';
+    }
+    
     if (!dojo.byId('versionsPlanning')) {
     //END ADD
 	    for (var iSort=0;iSort<sortArray.length;iSort++) {
@@ -741,7 +746,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
   	      var field=sortArray[iSort];
   	      if (field.substr(0,6)=='Hidden') field=field.substr(6);
   	      var fieldWidth=getPlanningFieldWidth(field);
-  	      if (field!='Name' && (field=='StartDate' || field=='EndDate' || field=='IdStatus')) vLeftWidth+=1+fieldWidth;
+  	      if (field!='Name' && (field=='StartDate' || field=='EndDate' || field=='IdStatus' || (field=='Resource' && showResourceComponentVersion=='Yes'))) vLeftWidth+=1+fieldWidth;
   	    }
     }
     //END ADD
@@ -828,7 +833,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
   	        var field=sortArray[iSort];
   	        if (field.substr(0,6)=='Hidden') field=field.substr(6);
   	        var fieldWidth=getPlanningFieldWidth(field);
-  	      if(field!='Name' && (field=='StartDate' || field=='EndDate' || field=='IdStatus')) {
+  	      if(field!='Name' && (field=='StartDate' || field=='EndDate' || field=='IdStatus'  || (field=='Resource' && showResourceComponentVersion=='Yes'))) {
   		        vLeftTable += '<TD class="ganttLeftTopLine" style="width: ' + fieldWidth + 'px;"></TD>' ;
   		      }
   	      }
@@ -841,7 +846,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
   	        var field=sortArray[iSort];
   	        if (field.substr(0,6)=='Hidden') field=field.substr(6);
   	        var fieldWidth=getPlanningFieldWidth(field);
-  	        if(field!='Name' && (field=='StartDate' || field=='EndDate' || field=='IdStatus')) {
+  	        if(field!='Name' && (field=='StartDate' || field=='EndDate' || field=='IdStatus' || (field=='Resource' && showResourceComponentVersion=='Yes') )) {
   		        vLeftTable += '<TD id="jsGanttHeaderTD'+field+'" class="ganttLeftTitle" style="position:relative;width: ' + fieldWidth + 'px;max-width: ' + fieldWidth + 'px;overflow:hidden" nowrap>'
   		          +'<div id="jsGanttHeader'+field+'" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width:' + fieldWidth + 'px; z-index:1000;" class="namePartgroup">'
   		          +'<span class="nobr">'+ JSGantt.i18n( ('col'+field).replace('Work','')) + '</span>'
@@ -964,9 +969,13 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
   	          var field=sortArray[iSort];
   	          if (field.substr(0,6)=='Hidden') field=field.substr(6);
   	          var fieldWidth=getPlanningFieldWidth(field);
-  	          if(field!='Name' && (field=='StartDate' || field=='EndDate' || field=='IdStatus')) { 
+  	          var valueField=vTaskList[i].getFieldValue(field,JSGantt);
+  	          if(field!='Name' && (field=='StartDate' || field=='EndDate' || field=='IdStatus' || (field=='Resource' && showResourceComponentVersion=='Yes'))) { 
+  	             if(valueField===undefined && field=='Resource' && showResourceComponentVersion=='Yes'){
+  	                valueField='-';
+  	              }
   	            vLeftTable += '<TD class="ganttDetail" style="width: ' + fieldWidth + 'px;">'
-  	              +'<span class="nobr hideLeftPart' + vRowType + '" style="width: ' + fieldWidth + 'px;text-overflow:ellipsis;">' + vTaskList[i].getFieldValue(field,JSGantt) 
+  	              +'<span class="nobr hideLeftPart' + vRowType + '" style="width: ' + fieldWidth + 'px;text-overflow:ellipsis;">' + valueField
   	              +'</span></TD>' ;
   	          }
   	        }
