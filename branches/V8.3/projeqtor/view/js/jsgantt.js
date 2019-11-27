@@ -726,7 +726,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
     var vLeftWidth = vIconWidth+getPlanningFieldWidth('Name')+2;
     //CHANGE qCazelles - GANTT (Correction)
     //ADD
-    if(dojo.byId('showRessourceComponentVersion').checked && (dojo.byId('listDisplayComponentVersionActivity').checked || dojo.byId('listDisplayProductVersionActivity').checked)){
+    if( dojo.byId('versionsPlanning')&&(dojo.byId('showRessourceComponentVersion').checked && (dojo.byId('listDisplayComponentVersionActivity').checked || dojo.byId('listDisplayProductVersionActivity').checked))){
       showResourceComponentVersion='Yes';
     }
     
