@@ -36,6 +36,7 @@ $saveShowMilestone=$saveShowMilestoneObj->parameterValue;
 $displayProductVersionActivity = Parameter::getUserParameter('planningVersionDisplayProductVersionActivity');
 $displayComponentVersionActivity = Parameter::getUserParameter('planningVersionDisplayComponentVersionActivity');
 $showClosedPlanningVersion = Parameter::getUserParameter('planningVersionShowClosed');
+$showOnlyActivesVersions=Parameter::getUserParameter('showOnlyActivesVersions');
 
 if ($saveShowClosed) {
 	$_REQUEST['idle']=true;
@@ -302,6 +303,18 @@ echo '<input type="hidden" id="nbPvs" name="nbPvs" value="'.$nbPvs.'" />';
                         <?php if ($showClosedPlanningVersion=='1') { echo ' checked="checked" '; }?> >
                         <script type="dojo/method" event="onChange" >
                           saveUserParameter('planningVersionShowClosed',((this.checked)?'1':'0'));
+                          refreshJsonPlanning();
+                        </script>
+                      </div>
+                      </td>
+                      <td  style="padding-right:5px;padding-left:20px;text-align: right;" >
+                      <?php echo i18n('showOnlyActivesVersions');?>
+                      </td><td>
+                      <div title="<?php echo i18n('showOnlyActivesVersions')?>" dojoType="dijit.form.CheckBox" 
+                        class="whiteCheck" type="checkbox" id="showOnlyActivesVersions" name="showOnlyActivesVersions"
+                        <?php if ($showOnlyActivesVersions=='1') { echo ' checked="checked" '; }?> >
+                        <script type="dojo/method" event="onChange" >
+                          saveUserParameter('showOnlyActivesVersions',((this.checked)?'1':'0'));
                           refreshJsonPlanning();
                         </script>
                       </div>
