@@ -615,6 +615,8 @@ static protected function drawProductUsingComponentVersion($class, $id)
     $planningVersionShowClosed = Parameter::getUserParameter('planningVersionShowClosed');
     $displayComponentversionActivity = Parameter::getUserParameter('planningVersionDisplayComponentVersionActivity');
     $displayProductversionActivity = Parameter::getUserParameter('planningVersionDisplayProductVersionActivity');
+    $showOnlyActivesVersions=Parameter::getUserParameter('showOnlyActivesVersions');
+    
     $showResource=Parameter::getUserParameter('planningShowResource');
     $displayResource=Parameter::getGlobalParameter('displayResourcePlan');
     if (!$displayResource) $displayResource="initials";
