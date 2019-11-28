@@ -70,7 +70,7 @@ $result = "";
               }
               if($end != $resourceTeam->endDate){
                 $affR->endDate = $endPoolProj;
-                if($endPoolProj < $affResEnd)$affR->startDate = $affResEnd;
+                if($endPoolProj < $affResEnd)$affR->endDate = $affResEnd;
               }
               $affR->save();
             }else{
