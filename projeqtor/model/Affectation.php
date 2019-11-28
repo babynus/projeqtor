@@ -255,6 +255,19 @@ public $_noCopy;
     $affectable=new Affectable($this->idResource);
     if ($affectable->isResource) {
       $this->idResourceSelect=$this->idResource;
+      //gautier #pool 
+      $affPool = new Affectation();
+      $listAffPool = $affPool->getSqlElementsFromCriteria(array('idResource'=>$this->idResource,'idProject'=>$this->idProject,'idle'=>'0'));
+      $start=($this->startDate)?$this->startDate:self::$minAffectationDate;
+      $end=($this->endDate)?$this->endDate:self::$maxAffectationDate;
+      foreach ($listAffPool as $poolAff){
+        if($poolAff->id == $this->id)continue;
+        $startPool=($poolAff->startDate)?$poolAff->startDate:self::$minAffectationDate;
+        $endPool=($poolAff->endDate)?$poolAff->endDate:self::$maxAffectationDate;
+        if(($startPool >= $start AND $startPool <= $end ) OR ( $endPool >= $start AND $endPool <= $end)){
+          $result.='<br/>' . i18n('impossibleAffectationResourcePool');
+        }
+      }
     } else {
       $this->idResourceSelect=null;
     }
@@ -334,14 +347,23 @@ public $_noCopy;
         $result=substr($result, 0,$pos).' - ' . Mail::getResultMessage($mailResult) .substr($result, $pos);
       }
     }
+    
     //Gautier #3849
     $autoAffectationPool=Parameter::getGlobalParameter('autoAffectationPool');
     if($autoAffectationPool=="EXPLICIT" OR $autoAffectationPool=="IMPLICIT"){
       $res = new ResourceAll($this->idResource,true);
       if($res->isResourceTeam){
-       $this->affectResPool($this->id,$autoAffectationPool);
+        $edit = false;
+        if($old->id and ($old->startDate != $this->startDate or $old->endDate != $this->endDate) ){
+          $edit = array();
+          $edit['isEdit'] = true;
+          $edit['start'] = $old->startDate;
+          $edit['end']= $old->endDate;
+        }
+        $this->affectResPool($this->id,$autoAffectationPool,$edit);
       }
     }
+    
     return $result;
   }
   
@@ -688,7 +710,7 @@ public $_noCopy;
   }
   
   
-  public static function affectResPool($id,$mode) {
+  public static function affectResPool($id,$mode,$edit) {
     $resOfMyPool = array();
     $aff = new Affectation($id);
     $resAffPool= new ResourceTeamAffectation();
@@ -700,6 +722,26 @@ public $_noCopy;
         $resOfMyPool[$affPool->idResource][$affPool->id]['rate']= $aff->rate;
         $resOfMyPool[$affPool->idResource][$affPool->id]['startDate']= $affPool->startDate;
         $resOfMyPool[$affPool->idResource][$affPool->id]['endDate']= $affPool->endDate;
+      }
+    }
+    
+    if($edit){
+      $editStart = $edit['start'];
+      $editEnd =$edit['end'];
+      if($aff->startDate != $editStart OR $aff->endDate != $editEnd){
+        $editStart=($edit['start'])?$edit['start']:self::$minAffectationDate;
+        $editEnd=($edit['end'])?$edit['end']:self::$maxAffectationDate;
+        $affPool = new Affectation();
+        $listAffPool = $affPool->getSqlElementsFromCriteria(array('idResourceTeam'=>$aff->idResourceSelect));
+        foreach ($listAffPool as $valAffPool){
+          $startEditPool=($valAffPool->startDate)?$valAffPool->startDate:self::$minAffectationDate;
+          $endEditPool=($valAffPool->endDate)?$valAffPool->endDate:self::$maxAffectationDate;
+          if(($startEditPool >= $editStart  AND $endEditPool <= $editEnd)
+              OR (!$editStart AND $editEnd) OR (!$editStart AND $editEnd >= $endEditPool)
+              OR (!$editEnd AND $editStart <= $startEditPool)){
+            $valAffPool->delete();
+          }
+        }
       }
     }
     //Parcours des ressources
@@ -716,7 +758,7 @@ public $_noCopy;
         if(!$existAffExplicit){
           $affExplicit->save();
         }
-        //Implicit
+      //Implicit
       }else{
         foreach ($tab as $idVal=>$value){
           $affImplicit = new Affectation();
@@ -760,6 +802,7 @@ public $_noCopy;
           $affImplicit->idResourceTeam = $aff->idResourceSelect;
           //$affImplicit->hideAffectation=1;
           $existAffImplicit = $affImplicit->countSqlElementsFromCriteria(array('startDate'=>$startDate,'endDate'=>$endDate,'idResource'=>$idRes,'idProject'=>$affImplicit->idProject));
+          //if($edit)$existAffImplicit=false;
           if(!$existAffImplicit){
             $affImplicit->save();
           }
