@@ -54,14 +54,29 @@ $result = "";
     if($autoAffectationPool=="IMPLICIT"){
       if($start != $resourceTeam->startDate or $end != $resourceTeam->endDate){
         $aff = new Affectation();
-        $listAffRes = $aff->getSqlElementsFromCriteria(array('idResource'=>$resource,'idResourceTeam'=>$resourceTeam->idResourceTeam,'idle'=>'0'));
-        $listAffPool = $aff->getSqlElementsFromCriteria(array('idResource'=>$resourceTeam->idResourceTeam,'idle'=>'0'));
+        $listAffRes = $aff->getSqlElementsFromCriteria(array('idResource'=>$resource,'idResourceTeam'=>$resourceTeam->idResourceTeam));
         foreach ($listAffRes as $affR){
-          $ResPoolStart = $start;
-          $ResPoolEnd = $end;
-          $projStart = $affR->startDate;
-          $projEnd = $affR->endDate;
-          //$affP->save();
+          $affResStart = $affR->startDate;
+          $affResEnd = $affR->endDate;
+          $affPoolProject = new Affectation();
+          $listAffPoolProject = $affPoolProject->getSqlElementsFromCriteria(array('idProject'=>$affR->idProject,'idResource'=>$resourceTeam->idResourceTeam));
+          foreach ($listAffPoolProject as $poolAffPerProj){
+            $startPoolProj = $poolAffPerProj->startDate;
+            $endPoolProj = $poolAffPerProj->endDate;
+            if( $affResStart <= $endPoolProj and $affResEnd >= $startPoolProj ){
+              if($start != $resourceTeam->startDate){
+                $affR->startDate = $startPoolProj;
+                if($startPoolProj < $affResStart)$affR->startDate = $affResStart; 
+              }
+              if($end != $resourceTeam->endDate){
+                if($endPoolProj < $affResEnd)$affR->startDate = $affResEnd;
+                $affR->endDate = $endPoolProj;
+              }
+              $affR->save();
+            }else{
+              $affR->delete();
+            }
+          }
         }
       }
     }
