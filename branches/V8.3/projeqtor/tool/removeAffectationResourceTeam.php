@@ -40,7 +40,11 @@ if($autoAffectationPool=="IMPLICIT"){
   $affPool = new Affectation();
   $listAffPool = $affPool->getSqlElementsFromCriteria(array('idResourceTeam'=>$obj->idResourceTeam));
   foreach ($listAffPool as $valAffPool){
-    $valAffPool->delete();
+    if((strtotime($valAffPool->startDate) >= strtotime($obj->startDate)  and strtotime($valAffPool->endDate) <= strtotime($obj->endDate))
+    OR (!$obj->startDate and $obj->endDate) OR (!$obj->startDate and strtotime($obj->endDate) >= strtotime($valAffPool->endDate))
+    OR (!$obj->endDate and strtotime($obj->startDate) <= strtotime($valAffPool->startDate))){
+      $valAffPool->delete();
+    }
   }
 }
 $result=$obj->delete();
