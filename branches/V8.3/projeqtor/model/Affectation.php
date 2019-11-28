@@ -716,7 +716,6 @@ public $_noCopy;
     $resAffPool= new ResourceTeamAffectation();
     $listPoolResAff = $resAffPool->getSqlElementsFromCriteria(array('idResourceTeam'=>$aff->idResourceSelect));
     
-    //Parcourir les affectations des ressources du pool pour les mettre dans un tableau pour les rassembler si plusieurs affectation de la meme res au pool
     foreach($listPoolResAff as $affPool){
       if(!$affPool->idle){
         $resOfMyPool[$affPool->idResource][$affPool->id]['rate']= $aff->rate;
@@ -744,7 +743,7 @@ public $_noCopy;
         }
       }
     }
-    //Parcours des ressources
+    //Resources
     foreach ($resOfMyPool as $idRes=>$tab){
       if($mode=="EXPLICIT"){
         $affExplicit = new Affectation();
@@ -764,7 +763,6 @@ public $_noCopy;
           $affImplicit = new Affectation();
           $startDate = $aff->startDate;
           $endDate = $aff->endDate;
-          //Pour etre sur pour les comparaisons de dates
           $affDate = strtotime($aff->startDate); ;
           $affDateEnd = strtotime($aff->endDate); 
           $startTab = strtotime($value['startDate']);
@@ -778,12 +776,10 @@ public $_noCopy;
           if($value['startDate']){
               if($startTab > $affDate){
                 if($aff->endDate){
-                  //Si la date du debut d'aff de la ressource au pool est supérieure a la fin de l'aff du projet 
                   if($startTab > $affDateEnd){
                     continue;
                   }
                 }
-                // Si la date de debut d'aff au pool est supérieure a la date d'aff du pool au debut du projet
                 $startDate = $value['startDate'];
               }
           }
@@ -800,9 +796,8 @@ public $_noCopy;
           $affImplicit->startDate = $startDate;
           $affImplicit->endDate = $endDate;
           $affImplicit->idResourceTeam = $aff->idResourceSelect;
-          //$affImplicit->hideAffectation=1;
+          $affImplicit->hideAffectation=1;
           $existAffImplicit = $affImplicit->countSqlElementsFromCriteria(array('startDate'=>$startDate,'endDate'=>$endDate,'idResource'=>$idRes,'idProject'=>$affImplicit->idProject));
-          //if($edit)$existAffImplicit=false;
           if(!$existAffImplicit){
             $affImplicit->save();
           }
