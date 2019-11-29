@@ -2204,6 +2204,9 @@ JSGantt.ganttMouseOut = function(pID, pPos, pType) {
 
 ongoingJsLink=-1;
 JSGantt.startLink = function (idRow) {
+  if(dojo.byId('versionsPlanning')){
+    return;
+  }
   if (dojo.byId('bodyPrint')) return;
 	vTaskList=g.getList();
 	document.body.style.cursor="url('css/images/dndLink.png'),help";
