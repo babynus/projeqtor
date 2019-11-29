@@ -68,7 +68,7 @@ $canRead=securityGetAccessRightYesNo('menu' . $objectClass, 'read', $item)=="YES
 if (!$canRead) exit;
 
 $subProducts=array();
-if ($objectClass=='Product') {
+if ($objectClass=='Product' and Parameter::getGlobalParameter('includeProductInProductStructure')!='NO') {
   $subProducts=$item->getRecursiveSubProducts();
   $parentProducts=$item->getParentProducts();
 }
