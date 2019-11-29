@@ -41,7 +41,9 @@ class Plugin extends SqlElement {
     private static $_pluginButtonList;
     private static $pluginRequiredVersion=array(
         "V6.0.6"=>array("screenCustomization"=>"3.1"),
-        "V8.1.0"=>array("templateReport"=>"2.1")
+        "V8.1.0"=>array("templateReport"=>"2.1"),
+        "V8.3.0"=>array("kanban"=>"99.0",
+                        "liveMeeting"=>"99.0")
     );
     private static $_activePluginList;
     private static $_lastVersionPluginList;
