@@ -102,7 +102,7 @@ if ($format=='print') {
 
 function getSubItems($item,$result){
   global $showClosedItems;
-  if (get_class($item)=='Product') {
+  if (get_class($item)=='Product' and Parameter::getGlobalParameter('includeProductInProductStructure')!='NO') {
     $crit=array('idProduct'=>$item->id);
     $lst=$item->getSqlElementsFromCriteria($crit);
     foreach ($lst as $prd) {
