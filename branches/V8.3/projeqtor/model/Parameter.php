@@ -371,6 +371,7 @@ class Parameter extends SqlElement {
      	//case 'leavesSystemActiv'://For the addition of the parameter to activate/desactivate the leaves feature
    		// ELIOTT - LEAVE SYSTEM
       case 'authorizeActivityOnDeliveredProduct' :
+      case 'includeProductInProductStructure' :
         $list=array('YES'=>i18n('displayYes'),
       	            'NO'=>i18n('displayNo'));
       	break;
@@ -935,10 +936,13 @@ class Parameter extends SqlElement {
       	                  'columnConfigurationLeft'=>'newColumn',
         	                  'sectionProductAndComponent'=>'section',  	// ADD by qCazelles
         	                  'displayBusinessFeature'=>'list',
-        	                  'displayMilestonesStartDelivery'=>'list',
         	                  'displayLanguage'=>'list',
         	                  'displayContext'=>'list',
         	                  'showTendersOnVersions'=>'list',
+        	                  'includeProductInProductStructure'=>'list',
+        	                'columnConfigurationRight'=>'newColumn',
+        	                  'sectionVersion'=>'section',
+        	                  'displayMilestonesStartDelivery'=>'list',       	                  
         	                  'displayListOfActivity'=>'list',
         	                  'directAccessToComponentList'=>'list',
         	                  'versionNameAutoformat'=>'list',

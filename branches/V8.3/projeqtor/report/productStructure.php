@@ -29,7 +29,7 @@
 //
 include_once '../tool/projeqtor.php';
 include_once '../tool/formatter.php';
-
+$print=true;
 $objectClass="";
 if (array_key_exists('objectClass', $_REQUEST)){
   $objectClass=trim($_REQUEST['objectClass']);
@@ -68,6 +68,7 @@ $canRead=securityGetAccessRightYesNo('menu' . $objectClass, 'read', $item)=="YES
 if (!$canRead) exit;
 
 $subProducts=array();
+$parentProducts=array();
 if ($objectClass=='Product' and Parameter::getGlobalParameter('includeProductInProductStructure')!='NO') {
   $subProducts=$item->getRecursiveSubProducts();
   $parentProducts=$item->getParentProducts();
