@@ -408,6 +408,31 @@ class WorkElementMain extends SqlElement {
 		$ass->leftWork -= $diff;
 		$ass->realWork += $diff;
 		$ass->realCost += $diff * $work->dailyCost;
+		
+		//gautier  #4257
+		if($ass->leftWork==0 OR $ass->leftWork < 0){
+		  $assP = new Assignment();
+		  $lstPull = $assP->countSqlElementsFromCriteria(array('refId'=>$ass->refId,'refType'=>$ass->refType,'isResourceTeam'=>1));
+		  if($lstPull){
+		    $listAssPool = $assP->getSqlElementsFromCriteria(array('refId'=>$ass->refId,'refType'=>$ass->refType,'isResourceTeam'=>1));
+		    $resTeam = new ResourceTeamAffectation();
+		    foreach ($listAssPool as $assOfPool){
+		      $resTeam->countSqlElementsFromCriteria(array('idResource'=>$ass->idResource,'idResourceTeam'=>$assOfPool->idResource));
+		      if($resTeam){
+		        if($ass->leftWork < 0){
+		          $assOfPool->leftWork = $assOfPool->leftWork - abs($ass->leftWork);
+		          $assOfPool->save();
+		        }else{
+		          if($assOfPool->leftWork > 0){
+		            $assOfPool->leftWork = $assOfPool->leftWork - $diff;
+		            $assOfPool->save();
+		          }
+		        }
+		      }
+		    }
+		  }
+		}
+		
 		if ($ass->leftWork < 0 or $ass->leftWork == null) {
 			$ass->leftWork = 0;
 		}
