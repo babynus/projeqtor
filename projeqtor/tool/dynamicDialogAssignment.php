@@ -97,10 +97,10 @@ $resource=new ResourceAll($idResource);
              </td>  
              <td>
               <select dojoType="dijit.form.FilteringSelect"
-              <?php echo autoOpenFilteringSelect();?>
+              <?php echo autoOpenFilteringSelect(); $isSelectFonction = Parameter::getGlobalParameter('selectFonction'); if($isSelectFonction == 'NO' OR $isSelectFonction='')$isSelectFonction=false; ?>
                 id="assignmentIdResource" name="assignmentIdResource"
                 class="input" 
-                onChange="assignmentChangeResource();assignmentChangeResourceTeamForCapacity();"
+                onChange="<?php if(!$isSelectFonction){?>assignmentChangeResource();<?php }else{?> assignmentChangeResourceSelectFonction(); <?php }?> assignmentChangeResourceTeamForCapacity();"
                 missingMessage="<?php echo i18n('messageMandatory',array(i18n('colIdResource')));?>" <?php echo ($realWork!=0 && $mode=='edit')?"readonly=readonly":"";?>>
                 <?php if($mode=='edit'){                      
                           htmlDrawOptionForReference('idResourceAll', $idResource,null,true,'idProject',$idProject);
@@ -141,8 +141,21 @@ $resource=new ResourceAll($idResource);
                 id="assignmentIdRole" name="assignmentIdRole"
                 class="input" 
                 onChange="assignmentChangeRole();" <?php echo ($realWork!=0 && $idRole)?"readonly=readonly":"";?>>                
-                 <?php if($mode=='edit'){
-                   htmlDrawOptionForReference('idRole', $idRole, null, true);
+                 <?php 
+                 if($mode=='edit'){
+                   if($isSelectFonction and !$resource->isResourceTeam){
+                      $critFld = 'id';
+                      $critVals = array();
+                      $vals = array();
+                      foreach (SqlList::getListWithCrit('ResourceCost', array('idResource'=>$resource->id), 'idRole') as $idRoles) {
+                        $vals[] = $idRoles;
+                      }
+                      if(!in_array($resource->idRole, $vals))array_push($vals, $resource->idRole);
+                      $critVals[] = $vals;
+                      htmlDrawOptionForReference('idRole', $idRole, null, true,$critFld,$critVals);
+                   }else{
+                    htmlDrawOptionForReference('idRole', $idRole, null, true);
+                   }
                  } else {
                    htmlDrawOptionForReference('idRole', null, null, false);
                  }?>            

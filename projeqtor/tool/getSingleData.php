@@ -51,7 +51,7 @@
     } else if ($type=='resourceRole') {
       $idRes=RequestHandler::getId('idResource'); // validated to be numeric value in SqlElement base constructor.
       if (! $idRes) return;
-      $r=new Resource($idRes);
+      $r=new ResourceAll($idRes);
       echo $r->idRole;
       return;
     } else if ($type=='resourceProfile') {
