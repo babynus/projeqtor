@@ -206,3 +206,16 @@ INSERT INTO `${prefix}cronexecution` (`cron`, `fileExecuted`, `idle` ,`fonctionN
 
 -- gautier #4304
 ALTER TABLE `${prefix}type` ADD `isLeadProject` int(1) unsigned default '0';
+
+ALTER TABLE `${prefix}expensedetailtype` 
+CHANGE `value01` `value01` DECIMAL(11,5) UNSIGNED;
+ALTER TABLE `${prefix}expensedetailtype` 
+CHANGE `value02` `value02` DECIMAL(11,5) UNSIGNED;
+ALTER TABLE `${prefix}expensedetailtype` 
+CHANGE `value03` `value03` DECIMAL(11,5) UNSIGNED;
+ALTER TABLE `${prefix}expensedetail` 
+CHANGE `value01` `value01` DECIMAL(11,5) UNSIGNED;
+ALTER TABLE `${prefix}expensedetail` 
+CHANGE `value02` `value02` DECIMAL(11,5) UNSIGNED;
+ALTER TABLE `${prefix}expensedetail` 
+CHANGE `value03` `value03` DECIMAL(11,5) UNSIGNED;
