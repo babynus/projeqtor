@@ -188,9 +188,9 @@ function resetPlayPause(){
       }
     }
     if(enterPause){
-      dijit.byId('playPauseButton').set('iconClass','iconLiveMeetingPause iconSize22');
+      dijit.byId('playPauseButton').set('iconClass','iconLiveMeetingPause22');
     }else{
-      dijit.byId('playPauseButton').set('iconClass','iconLiveMeetingPlay iconSize22');
+      dijit.byId('playPauseButton').set('iconClass','iconLiveMeetingPlay22');
       liveMeetingAddToEditor('#pause#');
     }
     if(dijit.byId('playPauseButton').get('title')==i18n('liveMeetingTitlePlay'))dijit.byId('playPauseButton').set('title',i18n('liveMeetingTitlePause'));
@@ -274,14 +274,14 @@ function liveMeetingAddToEditor(toPass){
 
 function liveMeetingGoPlay(){
   var idFirst=whoSpeak;
-  if(dijit.byId('playPauseButton').get('iconClass') == 'iconLiveMeetingPlay iconSize22'){
-    dijit.byId('playPauseButton').set('iconClass','iconLiveMeetingPause iconSize22');
+  if(dijit.byId('playPauseButton').get('iconClass') == 'iconLiveMeetingPlay22'){
+    dijit.byId('playPauseButton').set('iconClass','iconLiveMeetingPause22');
     if(idFirst==-1 && whoSpeakLast==-1)idFirst=dojo.byId('containerRessource').children[0].childNodes[0].childNodes[0].childNodes[0].id.split('blockFor')[1];
     if(idFirst==-1 && whoSpeakLast!=-1)idFirst=whoSpeakLast;
     liveMeetingStartTimerSpeak('blockFor'+idFirst,dojo.byId('nameFor'+idFirst).innerHTML);
   }else{
     if(idFirst==-1 && whoSpeakLast!=-1)idFirst=whoSpeakLast;
-    dijit.byId('playPauseButton').set('iconClass','iconLiveMeetingPlay iconSize22');
+    dijit.byId('playPauseButton').set('iconClass','iconLiveMeetingPlay22');
     liveMeetingStartTimerSpeak('blockFor'+whoSpeak,dojo.byId('nameFor'+whoSpeak).innerHTML);
   }
 }

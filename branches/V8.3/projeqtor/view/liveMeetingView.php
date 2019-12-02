@@ -202,30 +202,29 @@ function timeToTimeStamp($time){
 			<tr height="100%" style="vertical-align: middle;height:34px;">
 				<td width="50px" align="middle"><?php echo formatIcon('Meeting', 32,null,true)?></td>
 				<td><span class="title"><?php echo i18n("Meeting").' : '.$meeting->name;?></span></td>
-				<td style="width:200px;padding-top:2px;position:relative;">
-						<div style="position:absolute;width:85px; height:34px;background-color: #DDD; padding: 2px 10px; top:0px;border-radius: 5px;margin-right: 20px">
-								<button iconClass="iconLiveMeetingPlay iconSize22" class="detailButton" style="position:absolute;top:-5px;width:32px;height:32px;top:-1px;"
+				<td style="width:157px;position:relative;text-align:left">
+						<div style="position:absolute;width:78px; height:24px;background-color: #DDD; padding: 2px 5px; top:6px;border-radius: 5px;margin-right: 20px;">
+								<button iconClass="iconLiveMeetingPlay22" class="detailButton" style="position:absolute;top:-1px;"
 									dojoType="dijit.form.Button"
 									title="<?php echo i18n('liveMeetingTitlePlay');?>"
 									onclick="liveMeetingGoPlay();" 
 									id="playPauseButton"></button>
-								<button iconClass="iconLiveMeetingStop iconSize22" class="detailButton" style="position:absolute;top:-5px;left:55px;width:32px;top:-1px;"
+								<button iconClass="iconLiveMeetingStop22" class="detailButton" style="position:absolute;top:-1px;left:45px;"
 									dojoType="dijit.form.Button"
 									title="<?php echo i18n('liveMeetingTitleStop');?>"
 									onclick="liveMeetingGoStop(<?php echo $idMeeting;?>);" 
 									id="stopButton"></button>
 					  </div>
-					  <div style="position:absolute;width:85px; height:34px; padding: 2px 10px; margin-right: 20px; top:6px;left:100px;">
+					  <div style="position:absolute;width:85px; height:22px; padding: 2px 10px; margin-right: 20px; top:12px;left:100px;">
 							  <button id="switchDivBottom" dojoType="dijit.form.Button"
 							  <?php if($typeLoadBottom=='normal'){ ?>
 							  title="<?php echo i18n('liveMeetingTitleSwitchBottomKanban');?>"
-							  iconClass="iconKanban32" class="detailButton" style="cursor:pointer;padding:3px;margin-top:-10px;margin-left:-2px;"
+							  iconClass="iconKanban22" class="detailButton" style="cursor:pointer;padding:3px;margin-top:-10px;margin-left:-2px;height:23px"
 							  <?php }else{ ?>
 							  title="<?php echo i18n('liveMeetingTitleSwitchBottomNormal');?>"
-							  iconClass="iconActionQuestionDecision iconSize32"
-							  <?php } ?>
-							  
-									onclick="if(typeLoadBottom=='normal'){dijit.byId('switchDivBottom').setAttribute('iconClass','iconActionQuestionDecision iconSize32');dijit.byId('switchDivBottom').setAttribute('title','<?php echo i18n('liveMeetingTitleSwitchBottomNormal');?>');typeLoadBottom='kanban';loadContent('../view/kanbanViewMain.php?storeParameterBottomLiveMeeting=true', 'divBottom');}else{dijit.byId('switchDivBottom').setAttribute('iconClass','iconKanban32');dijit.byId('switchDivBottom').setAttribute('title','<?php echo i18n('liveMeetingTitleSwitchBottomKanban');?>');typeLoadBottom='normal';loadContent('../view/liveMeetingViewBottom.php?idMeeting=<?php echo $meeting->id;?>', 'divBottom');}"
+							  iconClass="iconActionQuestionDecision22 iconSize22" class="detailButton" style="cursor:pointer;padding:3px;margin-top:-10px;margin-left:-2px;height:23px"
+							  <?php } ?>						  
+									onclick="if(typeLoadBottom=='normal'){dijit.byId('switchDivBottom').setAttribute('iconClass','iconActionQuestionDecision22 iconSize22');dijit.byId('switchDivBottom').setAttribute('title','<?php echo i18n('liveMeetingTitleSwitchBottomNormal');?>');typeLoadBottom='kanban';loadContent('../view/kanbanViewMain.php?storeParameterBottomLiveMeeting=true', 'divBottom');}else{dijit.byId('switchDivBottom').setAttribute('iconClass','iconKanban22');dijit.byId('switchDivBottom').setAttribute('title','<?php echo i18n('liveMeetingTitleSwitchBottomKanban');?>');typeLoadBottom='normal';loadContent('../view/liveMeetingViewBottom.php?idMeeting=<?php echo $meeting->id;?>', 'divBottom');}"
 									id="switchDivBottom"></button>
            </div>
 				</td>
