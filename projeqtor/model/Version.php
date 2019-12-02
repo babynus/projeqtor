@@ -611,14 +611,12 @@ static protected function drawProductUsingComponentVersion($class, $id)
   }
   
   public function displayVersion($parentVersion = NULL) {
-    
     $planningVersionShowClosed = Parameter::getUserParameter('planningVersionShowClosed');
     $displayComponentversionActivity = Parameter::getUserParameter('planningVersionDisplayComponentVersionActivity');
     $displayProductversionActivity = Parameter::getUserParameter('planningVersionDisplayProductVersionActivity');
-    $showOnlyActivesVersions=Parameter::getUserParameter('showOnlyActivesVersions');
-    
     $showResource=Parameter::getUserParameter('planningShowResource');
     $displayResource=Parameter::getGlobalParameter('displayResourcePlan');
+    $hideversionsWithoutActivity=Parameter::getUserParameter('versionsWithoutActivity');
     if (!$displayResource) $displayResource="initials";
     
     //florent ticket 4299
@@ -647,6 +645,12 @@ static protected function drawProductUsingComponentVersion($class, $id)
         jsonBuildWhereCriteria($querySelectAct,$queryFromAct,$where,$queryOrderByAct,$cpt,$arrayFilter,$activity);
       }
       $listActivityProductVersion = $activity->getSqlElementsFromCriteria(null,null,$where);
+      if (($this->scope == 'Product') and $displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1) {
+        $listOfCompo=ProductVersionStructure::getComposition($this->id);
+        if(empty($listActivityProductVersion) and empty($listActivity) and empty($listOfCompo)){
+          return false;
+        }
+      }
       
       if ($displayProductversionActivity == 0)$listActivityProductVersion = array();
         if (self::$cpt === 1) {
@@ -823,6 +827,7 @@ static protected function drawProductUsingComponentVersion($class, $id)
               echo ',"status":"'.SqlList::getNameFromId('Status', $la->idStatus).'"';
               echo '}';
         }
+        
   }
   //ADD qCazelles - Correction GANTT - Ticket #100
   protected function startDateVersionsPlanning($parentVersion=null) {

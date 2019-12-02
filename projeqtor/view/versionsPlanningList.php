@@ -269,6 +269,23 @@ echo '<input type="hidden" id="nbPvs" name="nbPvs" value="'.$nbPvs.'" />';
                             </div>
                           </div>
                		    </td>
+               		    <td style="padding-right:5px;padding-left:20px;text-align: right;" >
+                 		  <div id="versionsWithoutActivity" style="visibility:<?php  echo ($showListFilter=='true')?'visible':'hidden';?>;">
+                            <?php echo i18n('versionsWithoutActivity');?>
+                          </div>
+                        </td>
+               		    <td>
+                 		  <div id="hideVersionsWithoutActivityCheck" style="visibility:<?php  echo ($showListFilter=='true')?'visible':'hidden';?>!important;">
+                            <div title="<?php echo i18n('')?>" dojoType="dijit.form.CheckBox" 
+                              class="whiteCheck" type="checkbox" id="versionsWithoutActivityCheck" name="versionsWithoutActivityCheck"
+                              <?php if ($hideversionsWithoutActivity=Parameter::getUserParameter('versionsWithoutActivity')=='1') { echo ' checked="checked" '; }?> >
+                              <script type="dojo/method" event="onChange" >
+                                saveUserParameter('versionsWithoutActivity',((this.checked)?'1':'0'));
+                                refreshJsonPlanning();
+                              </script>
+                            </div>
+                          </div>
+               		    </td>
                     </tr>
                     <tr>
                       <td colspan="3" style="white-space:nowrap;">
