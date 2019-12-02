@@ -83,6 +83,9 @@ class ExpenseDetailType extends SqlElement {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
+    if ($this->value01==0) $this->value01=null;
+    if ($this->value02==0) $this->value02=null;
+    if ($this->value03==0) $this->value03=null;
   }
 
   

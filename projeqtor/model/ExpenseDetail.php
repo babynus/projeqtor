@@ -119,15 +119,15 @@ class ExpenseDetail extends SqlElement {
   	$result="";
   	if ($this->value01 or $this->unit01) {
   		$result.=($result)?' <b>x</b> ':'';
-  		$result.=htmlDisplayNumeric($this->value01) . " " . $this->unit01;
+  		$result.=htmlDisplayNumericWithoutTrailingZeros($this->value01) . " " . $this->unit01;
   	}
     if ($this->value02 or $this->unit02) {
       $result.=($result)?' <b>x</b> ':'';
-      $result.=htmlDisplayNumeric($this->value02) . " " . $this->unit02;
+      $result.=htmlDisplayNumericWithoutTrailingZeros($this->value02) . " " . $this->unit02;
     }
     if ($this->value03 or $this->unit03) {
       $result.=($result)?' <b>x</b> ':'';
-      $result.=htmlDisplayNumeric($this->value03) . " " . $this->unit03;
+      $result.=htmlDisplayNumericWithoutTrailingZeros($this->value03) . " " . $this->unit03;
     }
     return $result;
   }

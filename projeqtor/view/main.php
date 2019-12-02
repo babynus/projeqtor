@@ -1833,6 +1833,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                <?php echo ($currencyPosition=='before')?$currency:''; ?>
                <div id="expenseDetailAmount" name="expenseDetailAmount" value="" 
                  dojoType="dijit.form.NumberTextBox" class="input required"
+                 constraints="{min:0,places:2}"
                  style="width:97px"
                   >
                  <?php echo $keyDownEventScript;?>
