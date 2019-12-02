@@ -60,7 +60,7 @@ function showLine($nb, $value, $unit) {
 	    $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 	      echo '<div id="expenseDetailValue' . $nb . '" name="expenseDetailValue' . $nb . '" value="' . $value . '"'; 
           echo '  dojoType="dijit.form.NumberTextBox"'; 
-          echo '  constraints="{min:0}" ';
+          echo '  constraints="{min:0,places:\'0,5\'}" ';
           echo '  onChange=expenseDetailRecalculate();';
           echo '  style="width:97px"';              
           echo '  >';

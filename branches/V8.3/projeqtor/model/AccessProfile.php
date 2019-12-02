@@ -41,7 +41,7 @@ class AccessProfile extends SqlElement {
   public $sortOrder=0;
   public $idle;
   public $description;
-  public $_sec_void;
+  //public $_sec_void;
   
   public $_isNameTranslatable = true;
   
