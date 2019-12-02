@@ -2520,6 +2520,28 @@ function assignmentChangeResource() {
     load : function(data) {
       //if (data) dijit.byId('assignmentCapacity').set('value', parseInt(data)); // Error fixed by PBER : we retreive an idRole (and must)
       if (data) dijit.byId('assignmentIdRole').set('value', parseInt(data));
+      refreshList('assignmentIdRole', expenseType, '1', null,'expenseDetailType', false);
+      
+    }
+  });
+}
+
+function assignmentChangeResourceSelectFonction(){
+  if (editAssignmentLoading)
+    return;
+  var idResource=dijit.byId("assignmentIdResource").get("value");
+  if (!idResource) {return;}
+  if (dijit.byId('assignmentDailyCost')) {dijit.byId('assignmentDailyCost').reset();}
+  dojo.xhrGet({
+    url : '../tool/getSingleData.php?dataType=resourceRole&idResource='+idResource,
+    handleAs : "text",
+    load : function(data) {
+      refreshListSpecific('listRoleResource', 'assignmentIdRole', 'idResource',idResource);
+      if (data) {
+        dijit.byId('assignmentIdRole').set('value', parseInt(data));
+      }else{
+        dijit.byId('assignmentIdRole').set('value', null);
+      }
     }
   });
 }

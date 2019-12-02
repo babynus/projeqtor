@@ -352,6 +352,7 @@ class Parameter extends SqlElement {
       case 'mailGroupActive' :
       case 'csvExportUTF8':  
       case 'isManualProgress':
+      case 'selectFonction' :
       case 'hideItemTypeRestrictionOnProject' : case 'SAML_isADFS' :
       case 'automaticFeedingOfTheReal' ://florent
         $list=array('NO'=>i18n('displayNo'),
@@ -882,6 +883,7 @@ class Parameter extends SqlElement {
       	                      'updateIncomingResponsibleFromMilestone'=>'list',
       	                    'sectionPlanningControl'=>'section',
       	                      'allowTypeRestrictionOnProject'=>'list',
+      	                      'selectFonction'=>'list',
       	                      'hideItemTypeRestrictionOnProject'=>'list',
 // ELIOTT - LEAVE SYSTEM            
                             'sectionLeaves'=>'section',
