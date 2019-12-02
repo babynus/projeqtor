@@ -773,27 +773,39 @@ if ($type == 'empty') {
 } else if ($type == 'listRoleResource') {
   $ctrl = "";
   $idR = $_REQUEST ['idResource'];
-  $resource = new Resource ( $idR );
+  $resource = new ResourceAll( $idR );
   $nbRows = 0;
-  if ($resource->idRole) {
-    echo '{id:"' . $resource->idRole . '", name:"' . SqlList::getNameFromId ( 'Role', $resource->idRole ) . '"}';
-    $nbRows += 1;
-    $ctrl .= '#' . $resource->idRole . '#';
-  }
-  
-  $where = "idResource='" . Sql::fmtId ( $idR ) . "' and endDate is null";
-  $where .= " and idRole <>'" . Sql::fmtId ( $resource->idRole ) . "'";
-  $rc = new ResourceCost ();
-  $lstRoles = $rc->getSqlElementsFromCriteria ( null, false, $where );
-  // return result in json format
-  foreach ( $lstRoles as $resourceCost ) {
-    $key = '#' . $resource->idRole . '#';
-    if (strpos ( $ctrl, $key ) === false) {
+  if($resource->isResourceTeam){
+    $role = new Role();
+    $lstRoles = $role->getSqlElementsFromCriteria(array('idle'=>'0'));
+    foreach ($lstRoles as $rol){
       if ($nbRows > 0)
         echo ', ';
-      echo '{id:"' . $resourceCost->idRole . '", name:"' . SqlList::getNameFromId ( 'Role', $resourceCost->idRole ) . '"}';
+      echo '{id:"' . $rol->id . '", name:"' . $rol->name . '"}';
       $nbRows += 1;
-      $ctrl .= $key;
+      $ctrl .= '#' . $rol->id . '#';
+    }
+  }else{
+    if ($resource->idRole) {
+      echo '{id:"' . $resource->idRole . '", name:"' . SqlList::getNameFromId ( 'Role', $resource->idRole ) . '"}';
+      $nbRows += 1;
+      $ctrl .= '#' . $resource->idRole . '#';
+    }
+    
+    $where = "idResource='" . Sql::fmtId ( $idR ) . "' and endDate is null";
+    $where .= " and idRole <>'" . Sql::fmtId ( $resource->idRole ) . "'";
+    $rc = new ResourceCost ();
+    $lstRoles = $rc->getSqlElementsFromCriteria ( null, false, $where );
+    // return result in json format
+    foreach ( $lstRoles as $resourceCost ) {
+      $key = '#' . $resource->idRole . '#';
+      //if (strpos ( $ctrl, $key ) === false) {
+        if ($nbRows > 0)
+          echo ', ';
+        echo '{id:"' . $resourceCost->idRole . '", name:"' . SqlList::getNameFromId ( 'Role', $resourceCost->idRole ) . '"}';
+        $nbRows += 1;
+        $ctrl .= $key;
+      //}
     }
   }
 } else if ($type == 'listStatusDocumentVersion') {
