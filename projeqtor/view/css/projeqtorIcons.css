@@ -1239,43 +1239,46 @@
 .iconLiveMeetingStop{background:url('images/meetingStop.png'); width:32px; height:32px; cursor:pointer;}
 .iconLiveMeetingPlayS{background:url('images/meetingPlayS.png'); width:32px; height:32px; cursor:pointer;}
 .iconLiveMeetingPauseS{background:url('images/meetingPauseS.png'); width:32px; height:32px; cursor:pointer;}
+.iconLiveMeetingPlay22{background:url('images/meetingPlay.png'); width:22px; height:22px; cursor:pointer; background-repeat: no-repeat; background-size: 22px 22px;}
+.iconLiveMeetingPause22{background:url('images/meetingPause.png'); width:22px; height:22px; cursor:pointer; background-repeat: no-repeat; background-size: 22px 22px;}
+.iconLiveMeetingStop22{background:url('images/meetingStop.png'); width:22px; height:22px; cursor:pointer; background-repeat: no-repeat; background-size: 22px 22px;}
 
-.iconActionQuestionDecision{background:url('images/iconActionQuestionDecision.png'); width:32px; height:32px; cursor:pointer;}
+.iconActionQuestionDecision{background:url('images/iconActionQuestionDecision.png'); width:22px; height:22px; cursor:pointer;}
 .iconLiveMeetingOrganizator{background:url('images/iconLiveMeetingOrganizator.png'); width:22px; height:22px; cursor:pointer;}
 .iconLiveMeetingCanSpeak{background:url('images/iconLiveMeetingCantSpeak.png'); width:22px; height:22px; cursor:pointer;}
 .iconLiveMeetingNormal{background:url('images/iconLiveMeetingNormal.png');width:22px;height:22px;cursor:pointer;}
 
-.ProjeQtOrFlatBlue .iconActionQuestionDecision { background-image: url(customIcons/blue/iconActionQuestionDecision.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.ProjeQtOrFlatRed .iconActionQuestionDecision { background-image: url(customIcons/red/iconActionQuestionDecision.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.ProjeQtOrFlatGreen .iconActionQuestionDecision { background-image: url(customIcons/green/iconActionQuestionDecision.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.ProjeQtOrFlatGrey .iconActionQuestionDecision { background-image: url(customIcons/grey/iconActionQuestionDecision.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.ProjeQtOrFlatBlue .iconActionQuestionDecision { background-image: url(customIcons/blue/iconActionQuestionDecision.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
+.ProjeQtOrFlatRed .iconActionQuestionDecision { background-image: url(customIcons/red/iconActionQuestionDecision.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
+.ProjeQtOrFlatGreen .iconActionQuestionDecision { background-image: url(customIcons/green/iconActionQuestionDecision.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
+.ProjeQtOrFlatGrey .iconActionQuestionDecision { background-image: url(customIcons/grey/iconActionQuestionDecision.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 
 /* =============================================================================== */
 /* Extra CSS for custom Kanban                                                     */
 /* =============================================================================== */
 
 .iconKanban32 { background-image: url(images/iconKanban.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.iconKanban22 { background-image: url(images/iconKanban.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 32px 32px;}
+.iconKanban22 { background-image: url(images/iconKanban.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .iconKanban16 { background-image: url(images/iconKanban.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px}
 
 .iconKanbanAdd32 { background-image: url(images/iconKanbanAddpng);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.iconKanbanAdd22 { background-image: url(images/iconKanbanAdd.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 32px 32px;}
+.iconKanbanAdd22 { background-image: url(images/iconKanbanAdd.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .iconKanbanAdd16 { background-image: url(images/iconKanbanAdd.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px}
 
 .iconKanbanAddTicket32 { background-image: url(images/iconAddTicket.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.iconKanbanAddTicket22 { background-image: url(images/iconAddTicket.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 32px 32px;}
+.iconKanbanAddTicket22 { background-image: url(images/iconAddTicket.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .iconKanbanAddTicket16 { background-image: url(images/iconAddTicket.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px}
 
 .iconKanbanAddColumns32 { background-image: url(images/iconKanbanAddColumns.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.iconKanbanAddColumns22 { background-image: url(images/iconKanbanAddColumns.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 32px 32px;}
+.iconKanbanAddColumns22 { background-image: url(images/iconKanbanAddColumns.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .iconKanbanAddColumns16 { background-image: url(images/iconKanbanAddColumns.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px}
 
 .iconKanbanAddActivity32 { background-image: url(images/iconAddActivity.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.iconKanbanAddActivity22 { background-image: url(images/iconAddActivity.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 32px 32px;}
+.iconKanbanAddActivity22 { background-image: url(images/iconAddActivity.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .iconKanbanAddActivity16 { background-image: url(images/iconAddActivity.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px}
 
 .iconKanbanAddRequirement32 { background-image: url(images/iconKanbanAddRequirement.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.iconKanbanAddRequirement22 { background-image: url(images/iconKanbanAddRequirement.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 32px 32px;}
+.iconKanbanAddRequirement22 { background-image: url(images/iconKanbanAddRequirement.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .iconKanbanAddRequirement16 { background-image: url(images/iconKanbanAddRequirement.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
 .iconKanbanAddAction32 { background-image: url(images/iconKanbanAddAction.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
