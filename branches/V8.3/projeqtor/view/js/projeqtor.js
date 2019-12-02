@@ -6389,14 +6389,19 @@ function showListFilter(checkBoxName,value){
       displayFilterComponentVersionPlanning='0';
     }
   }
+  //console.log('displayFilterVersionPlanning'+displayFilterVersionPlanning+'  displayFilterComponentVersionPlanning'+displayFilterComponentVersionPlanning);
   if((displayFilterVersionPlanning=='0' && displayFilterComponentVersionPlanning=='0')){
     selectStoredFilter('0','directFilterList');
     dojo.byId('listFilterAdvanced').style.visibility="hidden";
     dojo.byId('displayRessource').style.visibility="hidden";
     dojo.byId('displayRessourceCheck').style.visibility="hidden";
+    dojo.byId('versionsWithoutActivity').style.visibility="hidden";
+    dojo.byId('hideVersionsWithoutActivityCheck').style.visibility="hidden";
   }else{
     dojo.byId('listFilterAdvanced').style.visibility="visible";
     dojo.byId('displayRessource').style.visibility="visible";
     dojo.byId('displayRessourceCheck').style.visibility="visible";
+    dojo.byId('versionsWithoutActivity').style.visibility="visible";
+    dojo.byId('hideVersionsWithoutActivityCheck').style.visibility="visible";
   }
 }
