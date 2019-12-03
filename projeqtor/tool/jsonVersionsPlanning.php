@@ -67,27 +67,32 @@ if($showOnlyActivesVersions== 1){
   $allProductVersionActive=$productVersionActiv+$pvComponentActList;
   foreach ($allProductVersionActive as $id) {
     $productVersion= new ProductVersion($id);
-    $productVersion->displayVersion();
-    foreach (ProductVersionStructure::getComposition($productVersion->id) as $idComponentVersion) {
-      $componentVersion = new ComponentVersion($idComponentVersion);
-      $hide=SqlList::getFieldFromId('ComponentVersionType', $componentVersion->idComponentVersionType, 'lockUseOnlyForCC');
-      if ($hide!=1) $componentVersion->treatmentVersionPlanning($productVersion);
+    $res=$productVersion->displayVersion();
+    if($res=='true'){
+      foreach (ProductVersionStructure::getComposition($productVersion->id) as $idComponentVersion) {
+        $componentVersion = new ComponentVersion($idComponentVersion);
+        $hide=SqlList::getFieldFromId('ComponentVersionType', $componentVersion->idComponentVersionType, 'lockUseOnlyForCC');
+        if ($hide!=1) $componentVersion->treatmentVersionPlanning($productVersion);
+      }
     }
   }
 ///
 }else{
   foreach ($pvsArray as $idProductVersion) {
     $productVersion = new ProductVersion($idProductVersion);
-    $productVersion->displayVersion();
-    foreach (ProductVersionStructure::getComposition($productVersion->id) as $idComponentVersion) {
-      $componentVersion = new ComponentVersion($idComponentVersion);
-      //$cond=true;
-      //foreach($componentTypeNoDisplay as $ctnd){
-      //  if($componentVersion->idVersionType == $ctnd->id)
-      //    $cond=false;
-      //}
-      $hide=SqlList::getFieldFromId('ComponentVersionType', $componentVersion->idComponentVersionType, 'lockUseOnlyForCC');
-      if ($hide!=1) $componentVersion->treatmentVersionPlanning($productVersion);
+    $res=$productVersion->displayVersion();
+    if($res=='true'){
+      foreach (ProductVersionStructure::getComposition($productVersion->id) as $idComponentVersion) {
+        $componentVersion = new ComponentVersion($idComponentVersion);
+        //$cond=true;
+        //foreach($componentTypeNoDisplay as $ctnd){
+        //  if($componentVersion->idVersionType == $ctnd->id)
+        //    $cond=false;
+        //}
+        
+        $hide=SqlList::getFieldFromId('ComponentVersionType', $componentVersion->idComponentVersionType, 'lockUseOnlyForCC');
+        if ($hide!=1) $componentVersion->treatmentVersionPlanning($productVersion);
+      }
     }
   }
 }
