@@ -38,6 +38,8 @@ else {
 
 //florent ticket 4302
 if($showOnlyActivesVersions== 1){
+  $pvComponentActList= array();
+  $productVersionActiv= array();
   $listIdPv='';
   $productVersion = new ProductVersion();
   $componentVersion = new ComponentVersion();
