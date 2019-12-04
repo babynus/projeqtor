@@ -419,8 +419,14 @@ public $_noCopy;
       if($res->isResourceTeam){
         $aff = new Affectation();
         $listAff = $aff->getSqlElementsFromCriteria(array('hideAffectation'=>1,'idResourceTeam'=>$res->id,'idProject'=>$this->idProject));
+        $start=($this->startDate)?$this->startDate:self::$minAffectationDate;
+        $end=($this->endDate)?$this->endDate:self::$maxAffectationDate;
         foreach ($listAff as $affRes){
-          $affRes->delete();
+          $startPool=($affRes->startDate)?$affRes->startDate:self::$minAffectationDate;
+          $endPool=($affRes->endDate)?$affRes->endDate:self::$maxAffectationDate;
+          if($start <= $startPool and $end >= $endPool){
+            $affRes->delete();
+          }
         }
       }
     }
