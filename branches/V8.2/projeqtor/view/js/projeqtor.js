@@ -6331,6 +6331,7 @@ function checkValidatedSize(paramDiv,paramRightDiv, paramMode){
 
 function checkValidatedSizeRightDiv(paramDiv,paramRightDiv, paramMode){
 	if(paramMode !='switch'){
+	  if (!dojo.byId('detailRightDiv')) return;
 		if(paramDiv== 'left'){
 		    if(((dojo.byId("contentDetailDiv").offsetWidth - dojo.byId('detailRightDiv').offsetWidth) < 400) && paramRightDiv=='trailing' && dojo.byId('detailRightDiv').offsetWidth>150){
 		      var detailRightWidth=(dojo.byId("contentDetailDiv").offsetWidth)-410;
