@@ -797,10 +797,13 @@ public $_noCopy;
           $affImplicit->endDate = $endDate;
           $affImplicit->idResourceTeam = $aff->idResourceSelect;
           $affImplicit->hideAffectation=1;
-          $existAffImplicit = $affImplicit->countSqlElementsFromCriteria(array('startDate'=>$startDate,'endDate'=>$endDate,'idResource'=>$idRes,'idProject'=>$affImplicit->idProject));
-          if(!$existAffImplicit){
-            $affImplicit->save();
+          $listExistAffImplicit = $affImplicit->getSqlElementsFromCriteria(array('startDate'=>$startDate,'endDate'=>$endDate,'idResource'=>$idRes,'idProject'=>$affImplicit->idProject));
+          $continue = false;
+          foreach ($listExistAffImplicit as $existAffImplicit){
+            if($existAffImplicit->idProfile == $affImplicit->idProfile)$continue=true;
+            $existAffImplicit->delete();
           }
+          if(!$continue)$affImplicit->save();
         }
       }
     }
