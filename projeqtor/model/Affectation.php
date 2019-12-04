@@ -753,7 +753,7 @@ public $_noCopy;
         $affExplicit->endDate = $aff->endDate;
         $affExplicit->idProfile = $aff->idProfile;
         $affExplicit->rate = $aff->rate;
-        $existAffExplicit = $affImplicit->countSqlElementsFromCriteria(array('startDate'=>$aff->startDate,'endDate'=>$aff->endDate,'idResource'=>$idRes,'idProject'=>$aff->idProject));
+        $existAffExplicit = $affExplicit->countSqlElementsFromCriteria(array('idResource'=>$idRes,'idProject'=>$aff->idProject));
         if(!$existAffExplicit){
           $affExplicit->save();
         }
