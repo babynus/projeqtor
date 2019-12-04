@@ -882,9 +882,9 @@ class Parameter extends SqlElement {
       	                      'updateDeliverableResponsibleFromMilestone'=>'list',
       	                      'updateIncomingResponsibleFromMilestone'=>'list',
       	                    'sectionPlanningControl'=>'section',
-      	                      'allowTypeRestrictionOnProject'=>'list',
-      	                      'selectFonction'=>'list',
+      	                      'allowTypeRestrictionOnProject'=>'list',     	                      
       	                      'hideItemTypeRestrictionOnProject'=>'list',
+      	                      'selectFonction'=>'list',
 // ELIOTT - LEAVE SYSTEM            
                             'sectionLeaves'=>'section',
                             //  'leavesSystemActiv'=>'list',
