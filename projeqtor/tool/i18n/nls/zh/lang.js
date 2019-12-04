@@ -1982,7 +1982,7 @@ helpAlertCheckTime: "从呼叫（来自客户侧）到点检新的警报是否�
 helpAllocateResponsibleToProject: "automatically create an allocation for the project manager to the project",
 helpAllowTypeRestrictionOnProject: "allow to define additional restriction of types on each project additionally to restrictions defined at project type level",
 helpAuthorizeActivityOnDeliveredProduct: "include delivered products versions in target product version list for activities",
-helpAutoAffectationPool: "Automatic allocation of resources of the pool when allocating a pool to a project.&#13The explicit allocation will generate visible allocations that won't be changed afterwards (if allocation of pool changes). &#13The implicit allocation will generate invisible allocations that will follow changes of the pool (allocation of the pool to the project or of resources to the pool).",
+helpAutoAffectationPool: "Automatic allocation of resources of the pool when allocating a pool to a project.&#13The explicit allocation will generate visible allocations. &#13The implicit allocation will generate invisible allocations.",
 helpAutoLinkMilestone: "自动为链接的要素添加里程碑。&#13;根据里程碑可形成链接要素清单。",
 helpAutomaticFeedingOfTheReal: "Automatically informs the real from the planned one&#44 until a given date&#44 then triggers the automatic calculation of the projects from the day after this date",
 helpAutomaticPlanningComplete: "演算所有活动项目的计划",
