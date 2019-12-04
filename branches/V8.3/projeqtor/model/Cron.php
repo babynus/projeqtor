@@ -867,6 +867,7 @@ class Cron {
   		  if (! $posId) {
   		    debugTraceLog("Message not identified as response to Projeqtor email (cannot find objectId)");
   		    //debugTraceLog(substr($body,$posClass,100));
+  		    $mailbox->markMailAsRead($mailId);
   		    continue;
   		  }
   		  $posEnd=strpos($body,'>',$posId);
@@ -876,6 +877,7 @@ class Cron {
   		  if (! $posEnd or $posEnd-$posId>22) {
   		    debugTraceLog("Message not identified as response to Projeqtor email (cannot find end of objectId)");
   		    //debugTraceLog(substr($body,$posClass,100));
+  		    $mailbox->markMailAsRead($mailId);
   		    continue;
   		  }
   		  $class=substr($body,$posClass+30,$posId-$posClass-30);
@@ -883,6 +885,7 @@ class Cron {
   		} else {	
   			debugTraceLog("Message not identified as response to Projeqtor email (cannot find objectClass)");
   			//debugTraceLog($body);
+  			$mailbox->markMailAsRead($mailId);
   			continue;
   		}
   		// Search end of Message (this is valid for text only, treatment of html messages would require other code)  		
