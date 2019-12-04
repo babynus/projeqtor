@@ -1514,6 +1514,10 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatBlue .iconVersionsPlanning22 { background-image: url(customIcons/blue/iconVersionsPlanning.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .iconVersionsPlanning16 { background-image: url(customIcons/blue/iconVersionsPlanning.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatBlue .iconVersionsComponentPlanning32 { background-image: url(customIcons/blue/iconComponentVersionsPlanning.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatBlue .iconVersionsComponentPlanning22 { background-image: url(customIcons/blue/iconComponentVersionsPlanning.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatBlue .iconVersionsComponentPlanning16 { background-image: url(customIcons/blue/iconComponentVersionsPlanning.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
 /*END ADD qCazelles - GANTT*/
 
 /* W */
@@ -2970,6 +2974,10 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatRed .iconVersionsPlanning32 { background-image: url(customIcons/red/iconVersionsPlanning.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatRed .iconVersionsPlanning22 { background-image: url(customIcons/red/iconVersionsPlanning.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatRed .iconVersionsPlanning16 { background-image: url(customIcons/red/iconVersionsPlanning.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatRed .iconVersionsComponentPlanning32 { background-image: url(customIcons/red/iconComponentVersionsPlanning.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatRed .iconVersionsComponentPlanning22 { background-image: url(customIcons/red/iconComponentVersionsPlanning.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatRed .iconVersionsComponentPlanning16 { background-image: url(customIcons/red/iconComponentVersionsPlanning.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /*END ADD qCazelles - GANTT*/
 
@@ -4428,6 +4436,10 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconVersionsPlanning22 { background-image: url(customIcons/green/iconVersionsPlanning.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconVersionsPlanning16 { background-image: url(customIcons/green/iconVersionsPlanning.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatGreen .iconVersionsComponentPlanning32 { background-image: url(customIcons/green/iconComponentVersionsPlanning.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGreen .iconVersionsComponentPlanning22 { background-image: url(customIcons/green/iconComponentVersionsPlanning.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGreen .iconVersionsComponentPlanning16 { background-image: url(customIcons/green/iconComponentVersionsPlanning.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
 /*END ADD qCazelles - GANTT*/
 
 
@@ -5883,6 +5895,10 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconVersionsPlanning32 { background-image: url(customIcons/grey/iconVersionsPlanning.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGrey .iconVersionsPlanning22 { background-image: url(customIcons/grey/iconVersionsPlanning.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGrey .iconVersionsPlanning16 { background-image: url(customIcons/grey/iconVersionsPlanning.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatGrey .iconVersionsComponentPlanning32 { background-image: url(customIcons/grey/iconComponentVersionsPlanning.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGrey .iconVersionsComponentPlanning22 { background-image: url(customIcons/grey/iconComponentVersionsPlanning.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGrey .iconVersionsComponentPlanning16 { background-image: url(customIcons/grey/iconComponentVersionsPlanning.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /*END ADD qCazelles*/
 
