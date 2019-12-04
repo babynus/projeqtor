@@ -382,6 +382,7 @@ class PlannedWork extends GeneralWork {
         }
         $plan->plannedStartDate=$startPlan;
         $plan->plannedEndDate=$endPlan;
+        $artype=substr($plan->_profile,-1);
         if ( (!$endPlan or !$startPlan) and isset($reseved[$artype][$plan->id]['assignments']) ) {
           foreach ($reseved[$artype][$plan->id]['assignments'] as $idAssignment) {
             $dates='';
@@ -795,7 +796,7 @@ class PlannedWork extends GeneralWork {
                   if ($arPeW['idProj']!=$plan->idProject) continue;
                   if (! isset($arPeW[$ass->idResource]) ) continue;
                   $projectKey='Project#' . $plan->idProject;
-                  if (Resource::findAffectationRate($ress[$projectKey]['rate'],$currentDate)<=0) continue;
+                  if ( ! isset($ress[$projectKey]) or Resource::findAffectationRate($ress[$projectKey]['rate'],$currentDate)<=0) continue;
                   $week=getWeekNumberFromDate($currentDate);
                   if (! isset($ress[$projectKey][$week])) {
                     $weeklyReserved=0;
@@ -905,7 +906,7 @@ class PlannedWork extends GeneralWork {
                     if ($idPe=='sum') continue;
                     if ($idPe==$plan->id) continue; // we are treating the one we reserved for
                     $projectKeyTest='Project#' . $arPeW['idProj'];
-                    if (isset($ress[$projectKeyTest]) and Resource::findAffectationRate($ress[$projectKeyTest]['rate'],$currentDate)<=0) continue;
+                    if (isset($ress[$projectKeyTest]) and ( ! isset($ress[$projectKey]) or Resource::findAffectationRate($ress[$projectKeyTest]['rate'],$currentDate)<=0) ) continue;
                     // === Determine if we must start to reserve work on this task for RECW tasks that will be planned after
                     $startReserving=false;
                     if ($arPeW['start'] ) { // Start is defined from predecessor
@@ -1009,7 +1010,7 @@ class PlannedWork extends GeneralWork {
                       if (array_key_exists($week,$ress[$projectKey])) {
                         $plannedProj=$ress[$projectKey][$week];
                       }
-                      $rateProj=Resource::findAffectationRate($ress[$projectKey]['rate'],$currentDate) / 100;
+                      $rateProj=(isset($ress[$projectKey]))?Resource::findAffectationRate($ress[$projectKey]['rate'],$currentDate) / 100:0;
                       // ATTENTION, if $rateProj < 0, this means there is no affectation left ...
                       if ($rateProj<0) {
                       	$changedAss=true;
@@ -1038,7 +1039,7 @@ class PlannedWork extends GeneralWork {
                     }
                   } else if ($withProjectRepartition and $profile=='RECW') {
                     $projectKey='Project#' . $plan->idProject;
-                    $rateProj=Resource::findAffectationRate($ress[$projectKey]['rate'],$currentDate) / 100;
+                    $rateProj=(isset($ress[$projectKey]))?Resource::findAffectationRate($ress[$projectKey]['rate'],$currentDate) / 100:0;
                     if ($rateProj<=0) $value=0;;
                   }
                   $value=($value>$left)?$left:$value;
@@ -1122,7 +1123,7 @@ class PlannedWork extends GeneralWork {
   	                    if (isset($grp['ResourceWork'][$projectKey][$week])) {
   	                      $plannedProj=$grp['ResourceWork'][$projectKey][$week];
   	                    }
-  	                    $rateProj=Resource::findAffectationRate($grp['ResourceWork'][$projectKey]['rate'],$currentDate) / 100;
+  	                    $rateProj=(isset($ress[$projectKey]))?Resource::findAffectationRate($grp['ResourceWork'][$projectKey]['rate'],$currentDate) / 100:0;
   	                    $week=getWeekNumberFromDate($currentDate);
   	                    if (! isset($resources[$id]['weekTotalCapacity'][$week])) {
   	                      $rTemp=new Resource($id);
