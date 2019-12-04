@@ -1982,7 +1982,7 @@ helpAlertCheckTime: "Retardo en segundos para verificar si un nuevo aviso está 
 helpAllocateResponsibleToProject: "Crear automáticamente una asignación para el administrador del proyecto al proyecto",
 helpAllowTypeRestrictionOnProject: "permitir definir restricciones adicionales de tipos en cada proyecto además de restricciones definidas a nivel de tipo de proyecto",
 helpAuthorizeActivityOnDeliveredProduct: "include delivered products versions in target product version list for activities",
-helpAutoAffectationPool: "Automatic allocation of resources of the pool when allocating a pool to a project.&#13The explicit allocation will generate visible allocations that won't be changed afterwards (if allocation of pool changes). &#13The implicit allocation will generate invisible allocations that will follow changes of the pool (allocation of the pool to the project or of resources to the pool).",
+helpAutoAffectationPool: "Automatic allocation of resources of the pool when allocating a pool to a project.&#13The explicit allocation will generate visible allocations. &#13The implicit allocation will generate invisible allocations.",
 helpAutoLinkMilestone: "Agregue automáticamente un hito a los elementos vinculados.&#13;Esto proporcionará la lista de elementos vinculados para el hito.",
 helpAutomaticFeedingOfTheReal: "Automatically informs the real from the planned one&#44 until a given date&#44 then triggers the automatic calculation of the projects from the day after this date",
 helpAutomaticPlanningComplete: "calcular la planificación para todos los proyectos activos",
