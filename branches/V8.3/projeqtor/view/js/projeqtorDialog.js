@@ -2520,8 +2520,6 @@ function assignmentChangeResource() {
     load : function(data) {
       //if (data) dijit.byId('assignmentCapacity').set('value', parseInt(data)); // Error fixed by PBER : we retreive an idRole (and must)
       if (data) dijit.byId('assignmentIdRole').set('value', parseInt(data));
-      refreshList('assignmentIdRole', expenseType, '1', null,'expenseDetailType', false);
-      
     }
   });
 }
