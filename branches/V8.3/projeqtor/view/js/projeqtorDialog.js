@@ -10718,7 +10718,7 @@ function copyDataCloning(idDataCloning){
 	loadDialog('dialogAddDataCloning',null,true,param,true);
 }
 
-function controlChar (event){
+function controlChar (){
   var requiredLength=dojo.byId('paramPwdLth').value;
   var gen= new RegExp(["^(?=.*[a-zA-Z0-9!@#$&()-`.+,/\"])"]);
   var min =new RegExp([ "^(?=.*[a-z])"]);
