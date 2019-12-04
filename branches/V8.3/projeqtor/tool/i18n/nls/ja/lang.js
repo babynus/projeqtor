@@ -1982,7 +1982,7 @@ helpAlertCheckTime: "新しいアラートがあるかどうか(クライアン�
 helpAllocateResponsibleToProject: "automatically create an allocation for the project manager to the project",
 helpAllowTypeRestrictionOnProject: "プロジェクトの種類で定義された制限に、各プロジェクトの制限の種類を追加定義",
 helpAuthorizeActivityOnDeliveredProduct: "include delivered products versions in target product version list for activities",
-helpAutoAffectationPool: "Automatic allocation of resources of the pool when allocating a pool to a project.&#13The explicit allocation will generate visible allocations that won't be changed afterwards (if allocation of pool changes). &#13The implicit allocation will generate invisible allocations that will follow changes of the pool (allocation of the pool to the project or of resources to the pool).",
+helpAutoAffectationPool: "Automatic allocation of resources of the pool when allocating a pool to a project.&#13The explicit allocation will generate visible allocations. &#13The implicit allocation will generate invisible allocations.",
 helpAutoLinkMilestone: "Automatically add milestone to linked elements.&#13;This will provide list of linked elements from milestone.",
 helpAutomaticFeedingOfTheReal: "Automatically informs the real from the planned one&#44 until a given date&#44 then triggers the automatic calculation of the projects from the day after this date",
 helpAutomaticPlanningComplete: "calculate planning for all active projects",
