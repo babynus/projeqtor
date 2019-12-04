@@ -37,6 +37,29 @@ else {
 //$componentTypeNoDisplay = $type->getSqlElementsFromCriteria(array('lockUseOnlyForCC'=>'1','scope'=>'ComponentVersion'));
 
 //florent ticket 4302
+
+if(RequestHandler::getValue('objectVersion')=='ComponentVersion'){
+  $ps= new ProductVersionStructure();
+  $pv= new ProductVersion();
+  $productVArray= array();
+  $idVersionArray=array();
+  foreach ($pvsArray as $idCv) {
+    $crit=array('idComponentVersion'=>$idCv);
+    $productVersSt=$ps->getSqlElementsFromCriteria($crit);
+    foreach ($productVersSt as $ProductVersionStructure){
+      $productVArray[]=$ProductVersionStructure->idProductVersion;
+    }
+  }
+  $productVArray=array_unique($productVArray);
+  $productVArray=implode(',',$productVArray);
+  $where="id in ($productVArray)";
+  $idVersion=$pv->getSqlElementsFromCriteria(null,null,$where);
+  foreach ($idVersion as $key=>$val){
+    $idVersionArray[]=$val->id;
+  }
+  $pvsArray=$idVersionArray;
+}
+
 if($showOnlyActivesVersions== 1){
   $pvComponentActList= array();
   $productVersionActiv= array();

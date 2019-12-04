@@ -1000,6 +1000,10 @@
 .iconVersionsPlanning22 { background-image: url(images/iconVersionsPlanning22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconVersionsPlanning16 { background-image: url(images/iconVersionsPlanning16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
+.iconVersionsComponentPlanning32 { background-image: url(images/iconComponentVersionsPlanning.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.iconVersionsComponentPlanning22 { background-image: url(images/iconComponentVersionsPlanning.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
+.iconVersionsComponentPlanning16 { background-image: url(images/iconComponentVersionsPlanning.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+
 /* BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM */
 .iconWarning32 { background-image: url(images/iconWarning.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .iconWarning22 { background-image: url(images/iconWarning.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}

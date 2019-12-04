@@ -731,7 +731,6 @@ public $_noCopy;
     }
     
     if($edit){
-      debugLog('edit');
       $editStart = $edit['start'];
       $editEnd =$edit['end'];
       if($aff->startDate != $editStart OR $aff->endDate != $editEnd){
