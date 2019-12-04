@@ -97,10 +97,10 @@ $resource=new ResourceAll($idResource);
              </td>  
              <td>
               <select dojoType="dijit.form.FilteringSelect"
-              <?php echo autoOpenFilteringSelect(); $isSelectFonction = Parameter::getGlobalParameter('selectFonction'); if($isSelectFonction == 'NO' OR $isSelectFonction='')$isSelectFonction=false; ?>
+              <?php echo autoOpenFilteringSelect(); $isSelectFonction = Parameter::getGlobalParameter('selectFonction'); ?>
                 id="assignmentIdResource" name="assignmentIdResource"
                 class="input" 
-                onChange="<?php if(!$isSelectFonction){?>assignmentChangeResource();<?php }else{?> assignmentChangeResourceSelectFonction(); <?php }?> assignmentChangeResourceTeamForCapacity();"
+                onChange="<?php if($isSelectFonction == 'YES'){?>assignmentChangeResourceSelectFonction();<?php }else{?> assignmentChangeResource(); <?php }?> assignmentChangeResourceTeamForCapacity();"
                 missingMessage="<?php echo i18n('messageMandatory',array(i18n('colIdResource')));?>" <?php echo ($realWork!=0 && $mode=='edit')?"readonly=readonly":"";?>>
                 <?php if($mode=='edit'){                      
                           htmlDrawOptionForReference('idResourceAll', $idResource,null,true,'idProject',$idProject);
@@ -143,7 +143,7 @@ $resource=new ResourceAll($idResource);
                 onChange="assignmentChangeRole();" <?php echo ($realWork!=0 && $idRole)?"readonly=readonly":"";?>>                
                  <?php 
                  if($mode=='edit'){
-                   if($isSelectFonction and !$resource->isResourceTeam){
+                   if($isSelectFonction == 'YES' and !$resource->isResourceTeam){
                       $critFld = 'id';
                       $critVals = array();
                       $vals = array();
