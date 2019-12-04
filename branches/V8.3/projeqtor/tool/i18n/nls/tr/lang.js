@@ -1982,7 +1982,7 @@ helpAlertCheckTime: "Yeni bir uyarının mevcut olup olmadığını kontrol etme
 helpAllocateResponsibleToProject: "proje yöneticisi için projeye otomatik olarak bir ayırma oluştur",
 helpAllowTypeRestrictionOnProject: "Proje tipi seviyesinde tanımlanan kısıtlamalara ek olarak her bir projede türlerin ek kısıtlamalarını tanımlamaya izin ver",
 helpAuthorizeActivityOnDeliveredProduct: "include delivered products versions in target product version list for activities",
-helpAutoAffectationPool: "the explicit allocation will generate visible allocation . The implicit allocation will generate invisible allocation .",
+helpAutoAffectationPool: "Automatic allocation of resources of the pool when allocating a pool to a project.&#13The explicit allocation will generate visible allocations. &#13The implicit allocation will generate invisible allocations.",
 helpAutoLinkMilestone: "Bağlantı elemanlarına otomatik olarak kilometre taşını ekleyin. & # 13; Bu&#44 bağlantı elemanlarının kilometre taşından listesini sağlayacaktır.",
 helpAutomaticFeedingOfTheReal: "Automatically informs the real from the planned one&#44 until a given date&#44 then triggers the automatic calculation of the projects from the day after this date",
 helpAutomaticPlanningComplete: "Tüm aktif projeler için planlama hesaplamak",

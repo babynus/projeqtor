@@ -1982,7 +1982,7 @@ helpAlertCheckTime: "Uitstel in seconden tussen elke oproep (van klantzijde) ter
 helpAllocateResponsibleToProject: "automatically create an allocation for the project manager to the project",
 helpAllowTypeRestrictionOnProject: "toelaten om een bijkomende beperking van de types op elk project te bepalen in aanvulling op de beperkingen gedefiniëerd op projecttype nivo",
 helpAuthorizeActivityOnDeliveredProduct: "include delivered products versions in target product version list for activities",
-helpAutoAffectationPool: "the explicit allocation will generate visible allocation . The implicit allocation will generate invisible allocation .",
+helpAutoAffectationPool: "Automatic allocation of resources of the pool when allocating a pool to a project.&#13The explicit allocation will generate visible allocations. &#13The implicit allocation will generate invisible allocations.",
 helpAutoLinkMilestone: "Automatically add milestone to linked elements.&#13;This will provide list of linked elements from milestone.",
 helpAutomaticFeedingOfTheReal: "Automatically informs the real from the planned one&#44 until a given date&#44 then triggers the automatic calculation of the projects from the day after this date",
 helpAutomaticPlanningComplete: "calculate planning for all active projects",
