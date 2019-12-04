@@ -123,7 +123,7 @@
             }
             ?> 
             <br/>
-            <div dojoType="dojox.form.PasswordValidator" id="password" onkeydown="setTimeout('controlChar(event);',20);" class="input rounded"  style="color:#000000;padding:10px;margin-left:15px;">
+            <div dojoType="dojox.form.PasswordValidator" id="password" onkeydown="setTimeout('controlChar();',20);" class="input rounded"  style="color:#000000;padding:10px;margin-left:15px;">
               <label class="label" style="width:150px;"><?php echo i18n('newPassword');?>&nbsp;:&nbsp;</label>
               <input type="password" pwType="new" class="input rounded"  style="color:#000000;"><br/>
               <br/>
