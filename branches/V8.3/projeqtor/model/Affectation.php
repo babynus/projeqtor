@@ -797,7 +797,7 @@ public $_noCopy;
           $affImplicit->endDate = $endDate;
           $affImplicit->idResourceTeam = $aff->idResourceSelect;
           $affImplicit->hideAffectation=1;
-          $listExistAffImplicit = $affImplicit->getSqlElementsFromCriteria(array('startDate'=>$startDate,'endDate'=>$endDate,'idResource'=>$idRes,'idProject'=>$affImplicit->idProject));
+          $listExistAffImplicit = $affImplicit->getSqlElementsFromCriteria(array('startDate'=>$startDate,'endDate'=>$endDate,'idResource'=>$idRes,'idProject'=>$affImplicit->idProject,'idResourceTeam'=>$aff->idResourceSelect));
           $continue = false;
           foreach ($listExistAffImplicit as $existAffImplicit){
             if($existAffImplicit->idProfile == $affImplicit->idProfile)$continue=true;
