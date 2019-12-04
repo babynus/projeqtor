@@ -727,9 +727,13 @@ function selectDetailItem(selectedValue, lastSavedName) {
   
   //ADD qCazelles - Correction GANTT - Ticket #100
   if (comboName == 'versionsPlanningDetail') {
-	  displayVersionsPlanning(idFldVal);
+	  displayVersionsPlanning(idFldVal,'ProductVersion');
 	  hideDetail();
 	  return;
+  }else if('versionsComponentPlanningDetail'){
+    displayVersionsPlanning(idFldVal,'ComponentVersion');
+    hideDetail();
+    return;
   }
   //END ADD qCazelles - Correction GANTT - Ticket #100
   
@@ -7056,7 +7060,7 @@ function loadMenuBarItem(item, itemName, from) {
   } else if (item == 'DataCloningParameter') {
 		loadContent("dataCloningParameterMain.php", "centerDiv");
     //ADD qCazelles - GANTT
-  } else if (item == 'VersionsPlanning') {
+  } else if (item == 'VersionsPlanning'  ) {
     objectExist='true';
 	//CHANGE qCazelles - Correction GANTT - Ticket #100
 	//Old
@@ -7065,8 +7069,9 @@ function loadMenuBarItem(item, itemName, from) {
 	showDetail('versionsPlanningDetail', false, 'ProductVersion', true);
 	//END CHANGE qCazelles - Correction GANTT - Ticket #100
 	//END ADD qCazelles - GANTT
-	
-  } else if (item == 'UserParameter') {
+  }else if(item=='VersionsComponentPlanning'){
+    showDetail('versionsComponentPlanningDetail', false, 'ComponentVersion', true);
+  }else if (item == 'UserParameter') {
     loadContent("parameter.php?type=userParameter", "centerDiv");
   } else if (item == 'ProjectParameter') {
     loadContent("parameter.php?type=projectParameter", "centerDiv");
@@ -10388,10 +10393,10 @@ function changeSubscriptionFromDialog(mode,dialog,objectClass,objectId,userId,ke
 }
 
 //ADD qCazelles - GANTT
-function displayVersionsPlanning(idProductVersions) {
+function displayVersionsPlanning(idProductVersions,objectVersion) {
 	vGanttCurrentLine=-1;
 	cleanContent("centerDiv");
-	loadContent("versionsPlanningMain.php?productVersionsListId=" + idProductVersions, "centerDiv");
+	loadContent("versionsPlanningMain.php?productVersionsListId=" + idProductVersions+"&objectVersion="+objectVersion, "centerDiv");
 	//REMOVE qCazelles - Correction GANTT - Ticket #100
 	//dijit.byId('dialogVersionsPlanning').hide();
 	//END REMOVE qCazelles - Correction GANTT - Ticket #100

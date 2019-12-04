@@ -81,10 +81,12 @@ if ($proj=='*' or !$proj) {
 		              <?php 
 		              $objectClass=(RequestHandler::isCodeSet('objectClass'))?RequestHandler::getClass('objectClass'):'';
 		              $objectId=(RequestHandler::isCodeSet('objectId'))?RequestHandler::getId('objectId'):'';
-		              $productVersionsListId=(RequestHandler::isCodeSet('productVersionsListId'))?RequestHandler::getValue('productVersionsListId'):'';?>
+		              $productVersionsListId=(RequestHandler::isCodeSet('productVersionsListId'))?RequestHandler::getValue('productVersionsListId'):'';
+		              $objectVersion=(RequestHandler::isCodeSet('objectVersion'))?RequestHandler::getValue('objectVersion'):'';?>
 		              <input type="hidden" id="objectClass" name="objectClass" value="<?php echo $objectClass;?>" /> 
 		              <input type="hidden" id="objectId" name="objectId" value="<?php echo $objectId;?>" />
 		              <input type="hidden" id="productVersionsListId" name="productVersionsListId" value="<?php echo $productVersionsListId;?>" />
+		              <input type="hidden" id="objectVersion" name="objectVersion" value="<?php echo $objectVersion;?>" />
                   	  <input type="hidden" id="versions" name="versions" value="true" />
 		              &nbsp;&nbsp;&nbsp;
 <?php
@@ -276,7 +278,7 @@ echo '<input type="hidden" id="nbPvs" name="nbPvs" value="'.$nbPvs.'" />';
                         </td>
                		    <td>
                  		  <div id="hideVersionsWithoutActivityCheck" style="visibility:<?php  echo ($showListFilter=='true')?'visible':'hidden';?>!important;">
-                            <div title="<?php echo i18n('')?>" dojoType="dijit.form.CheckBox" 
+                            <div title="<?php echo i18n('versionsWithoutActivityCheck')?>" dojoType="dijit.form.CheckBox" 
                               class="whiteCheck" type="checkbox" id="versionsWithoutActivityCheck" name="versionsWithoutActivityCheck"
                               <?php if ($hideversionsWithoutActivity=Parameter::getUserParameter('versionsWithoutActivity')=='1') { echo ' checked="checked" '; }?> >
                               <script type="dojo/method" event="onChange" >
