@@ -253,7 +253,7 @@ public $_noCopy;
     //echo " ress=".htmlEncode($this->idResourceSelect)." cont=".htmlEncode($this->idContact)." user=".$this->idUser;
     //echo " id=".htmlEncode($this->idResource);
     $affectable=new Affectable($this->idResource);
-    if ($affectable->isResource) {
+    if ($affectable->isResourceTeam) {
       $this->idResourceSelect=$this->idResource;
       //gautier #pool 
       $affPool = new Affectation();
@@ -725,6 +725,7 @@ public $_noCopy;
     }
     
     if($edit){
+      debugLog('edit');
       $editStart = $edit['start'];
       $editEnd =$edit['end'];
       if($aff->startDate != $editStart OR $aff->endDate != $editEnd){
@@ -800,10 +801,14 @@ public $_noCopy;
           $listExistAffImplicit = $affImplicit->getSqlElementsFromCriteria(array('startDate'=>$startDate,'endDate'=>$endDate,'idResource'=>$idRes,'idProject'=>$affImplicit->idProject,'idResourceTeam'=>$aff->idResourceSelect));
           $continue = false;
           foreach ($listExistAffImplicit as $existAffImplicit){
-            if($existAffImplicit->idProfile == $affImplicit->idProfile)$continue=true;
-            $existAffImplicit->delete();
+            if($existAffImplicit->idProfile == $affImplicit->idProfile){
+              $continue=true;
+            }else{
+              $existAffImplicit->delete();
+            }
           }
           if(!$continue)$affImplicit->save();
+          
         }
       }
     }
