@@ -1982,7 +1982,7 @@ helpAlertCheckTime: "Delay in second between each call (from client side) to che
 helpAllocateResponsibleToProject: "automaticky vytvoriť alokáciu pre projektový manažér projektu",
 helpAllowTypeRestrictionOnProject: "umožniť definovať dodatočné obmedzenie typov pre každý projekt okrem obmedzení definovaných na úrovni typu projektu",
 helpAuthorizeActivityOnDeliveredProduct: "include delivered products versions in target product version list for activities",
-helpAutoAffectationPool: "the explicit allocation will generate visible allocation . The implicit allocation will generate invisible allocation .",
+helpAutoAffectationPool: "Automatic allocation of resources of the pool when allocating a pool to a project.&#13The explicit allocation will generate visible allocations. &#13The implicit allocation will generate invisible allocations.",
 helpAutoLinkMilestone: "Automaticky pridať miľník k prepojeným prvkom. Toto poskytne zoznam prepojených prvkov z miľníka.",
 helpAutomaticFeedingOfTheReal: "Automatically informs the real from the planned one&#44 until a given date&#44 then triggers the automatic calculation of the projects from the day after this date",
 helpAutomaticPlanningComplete: "calculate planning for all active projects",
