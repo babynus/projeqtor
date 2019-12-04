@@ -1982,7 +1982,7 @@ helpAlertCheckTime: "Затримка [сек] між кожним виклик�
 helpAllocateResponsibleToProject: "автоматично створити &#34;розподіл&#34; менеджеру проекта до проекту",
 helpAllowTypeRestrictionOnProject: "дозволити визначити додаткове обмеження типів для кожного проекту&#44; додатково до обмежень&#44; визначених на рівні типу проекту",
 helpAuthorizeActivityOnDeliveredProduct: "включати версії поставлених продуктів у список версій цільового продукту для справ(activities)",
-helpAutoAffectationPool: "the explicit allocation will generate visible allocation . The implicit allocation will generate invisible allocation .",
+helpAutoAffectationPool: "Automatic allocation of resources of the pool when allocating a pool to a project.&#13The explicit allocation will generate visible allocations. &#13The implicit allocation will generate invisible allocations.",
 helpAutoLinkMilestone: "Автоматично додати репер (milestone) до пов'язаних елементів.&#13;Це дозволить перелічити відповідні елементи на репер.",
 helpAutomaticFeedingOfTheReal: "Automatically informs the real from the planned one&#44 until a given date&#44 then triggers the automatic calculation of the projects from the day after this date",
 helpAutomaticPlanningComplete: "обчислити планування всіх активних проектів",
