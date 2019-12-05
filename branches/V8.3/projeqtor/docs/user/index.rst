@@ -7,108 +7,87 @@
    
 .. _#:
 
-Welcome
--------
 
-ProjeQtOr is a Quality based Project Organizer, as a web application.
 
-ProjeQtOr focuses on IT Projects, but is also compatible with all kinds of Projects.
+.. image:: /images/GUI/INDEX_ZONE_CouvManuel.png
 
-Its purpose is to propose a unique tool to gather all the information about the projects. 
 
-The fact is that many Project Management softwares just focus on planning. 
-But it is a much too restrictive point of view. 
-Of course, planning is an important activity of Project Management and is one of the keys to Project success, 
-but it is not the only one.
-
-Project Managers need to foresee all what can happen, measure risks, build an action plan and mitigation plan.
-
-It is also important to track and keep traces of all what is happening to the Project : 
-incidents, bugs , change requests, support requests, ...
-
-In this objective, ProjeQtOr gives visibility at all levels of Project Management.
-
-At lower level, the Project follow-up consists in gathering all information, and maintain it up to date. 
-This involves all the operational teams.
-
-At upper level, Project Steering uses the follow-up data to take the decisions and build the action plan. 
-This allows to bring the adjustments needed to target on the objectives of the project. 
-
-The goal of ProjeQtOr is to be Project Management Method independent. 
-Whatever your choice of the method, you can use ProjeQtOr.
+ProjeQtOr is an open source project management software that combines in one tool all the functionalities needed to organize your projects. It is simple, easy to use and covers a maximum of project management features.
+Its particularity, in addition to its completeness, is to be oriented towards quality. This means you can record all the events of your projects and thus simplify compliance with leading standards in quality management, be they ISO, CMMI, ITIL or other.
 
 .. raw:: latex
 
     \newpage
+    
+What's new in version 8.3 ?
+---------------------------
 
-What's New in this guide version?
----------------------------------
+Find in this manual, every 3 months, the latest news integrated into ProjeQtOr   
 
-This section summarizes significant changes made in the user guide document for this version.
 
-To see complete list of changes made to software, visit the ProjeQtOr web site.
-
-**Current version V8.3 : Mains evolutions**
-
-.. topic:: **Incompatible resource**
-
-   The goal of being able to define incompatible resources. 
+.. container:: 
    
-   If A is scheduled at a given time, B can not be scheduled on the same day as for a load less than or equal to the residual availability of A ...
+   **Kanban**
 
-      * see: :ref:`incompatible-resource`
+   .. image:: /images/iconKanban.png
+      :align: center
+      
+   ProjeQtOr integrates the AGILE method Kanban into its basic version.
+   
+   :ref:`kanban`
+   
+   
+   
+   
+
+.. container:: 
+
+   **LiveMeeting**
+
+   .. image:: /images/iconMeeting32.png
+      :align: center
+
+   ProjeQtOr integrates the AGILE method LiveMeeting into its basic version .
+         
+   :ref:`live-meeting-steering`
+   
+   
+   
+   
+
+.. container:: 
+
+   **Change request**
+
+   .. image:: /images/iconChangeRequest.png
+      :align: center
+      
+   change demand management is integrated with ProjeQtOr for better organization AGILE.
+         
+   :ref:`change-request`
+   
+   
+   
+   
+   
+
+.. container:: 
+
+   **Aggregated Resource**
+
+   .. image:: /images/PoolRessource.png
+      :align: center
+      
+   change demand management is integrated with ProjeQtOr for better organization AGILE.
+         
+   :ref:`aggregated-resource`
       
 
-.. topic:: **Support resource**
-
-   If resource B is the resource resource of resource A, if A and planned at a given moment, 
-   
-   B must also be automatically planned pro-rata indicated as employment rate in the definition of the support resource.
-
-      * see: :ref:`support-resource`
       
-      
-.. topic:: **Kanban**
+And others news_ that you can discover on the Change History web page
 
-   The Kanban method is based on the continuous improvement of the production processes to allow a lean production management.
-   
-   Until now kanban was offered as a paid plugin. As of version 8.3, ProjeQtOr integrates this method into its basic version.
-   
-      * see: :ref:`kanban`
+.. _news: https://www.projeqtor.org/en/product-en/downloads/change-history-en
 
-.. topic:: **LiveMeeting**
-
-   With LiveMeeting, you can easily manage your meetings in agile mode.
-   
-   Until now LiveMeeting was offered as a paid plugin. As of version 8.3, ProjeQtOr integrates this method into its basic version.
-   
-      * see: :ref:`live-meeting-steering`
-      
---------------------------------------------------------------------
-
-**Reminder of the latest evolutions from V8.2**
-
-**Cloned environements**
-
- * see: :ref:`cloned-environment`
-
-**Minimum Threshold and the task "should not be split**
-
- * see: :ref:`minimum-threshold`
-
---------------------------------------------------------------------
-
-**Reminder of the latest evolutions from V8.1**
-
-**SSO connection through SAML 2**
-
- * see: :ref:`SSO_Saml2`
-
-**Surbooking** and 
-
- * see: :ref:`surbooking`
-
---------------------------------------------------------------------
 
 
 .. raw:: latex
@@ -257,13 +236,13 @@ Risk & Issue Management
 
    RiskIssueManagement
 
-Review logs
------------
+Steering
+--------
 
 .. toctree::
    :maxdepth: 1
 
-   ReviewLogs
+   Steering
 
 Environmental parameters
 ------------------------

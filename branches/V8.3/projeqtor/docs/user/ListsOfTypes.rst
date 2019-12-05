@@ -117,11 +117,17 @@ Project type is a way to define common behavior on group of projects.
 
       Some important behavior will depend on code of the project type.
 
+
+.. figure:: /images/GUI/LISTOFTYPE_ZONE_Codes.png
+   :alt: code of different types of project 
+   
+   
 .. topic:: **OPE** : Operational project
 
    Most common project to follow activity.
 
    All new types are created with **OPE** code.
+   
 
 .. topic:: **ADM** : Administrative project
 
@@ -130,6 +136,7 @@ Project type is a way to define common behavior on group of projects.
    Every resource will be able to enter some real work on such projects, without having to be allocated to the project, nor assigned to project activities.
 
    Assignments to all project task will be automatically created for users to enter real work.
+   
 
 .. topic::  **TMP** : Template project 
 
@@ -138,6 +145,7 @@ Project type is a way to define common behavior on group of projects.
    They are just designed to define templates, to be copied as operational projects.
 
    Any project leader can copy such projects, without having to be allocated to them.
+   
 
 .. rubric:: Section Description
 
@@ -1737,8 +1745,20 @@ Allows to determine some GUI behavior, according to element types.
 * Those fields allow to determine whether the checkbox fields concerned are locked or not.
 * When a flag status is locked, move to this status through status change.
 
-Ticket type
-^^^^^^^^^^^
+Project
+^^^^^^^
+
+.. rubric:: Hat Project
+
+* The definition is made by the project type, you define that certain types of projects can not have activities, only subprojects or milestones.  
+
+.. rubric:: Lock solved
+
+* Box checked indicates the field **Solved** is read only.
+* The value of field must come from the field "Solved" defined in the selected resolution.
+
+Ticket
+^^^^^^
 
 .. rubric:: Resolution
 

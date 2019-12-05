@@ -550,7 +550,7 @@ Each button is listed below
          **Save active filter**
       
          * Active filter can be saved to reuse.
-         * Fill the filter name and click on |IconSave| to save the filter definition.  
+         * Fill the filter name and click on |buttonIconSave| to save the filter definition.  
  
  
       .. compound:: |B| Saved filters

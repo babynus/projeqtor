@@ -406,6 +406,10 @@ The task status can be changed automatically according to data entries on real w
     * If a :term:`responsible` or a :term:`result` are set as mandatory in element type definition for the task. It's impossible to set those values by real work allocation screen.
     * The change status must be done in treatment section on the task definition screen.
 
+   
+.. raw:: latex
+
+    \newpage
     
 Timesheet Validation
 --------------------
@@ -452,3 +456,34 @@ check and validate the time charged by the resources on an activity.
 
       * **Orange:** the job is not the same as the expected job but the load is the same
 
+
+
+
+
+
+
+   
+.. raw:: latex
+
+    \newpage
+    
+.. _automatic-inuptwork:
+
+Automatic input of work
+-----------------------
+
+The goal is to be able to automatically inform the real from the planned, until a given date, then trigger the automatic calculation of the projects from the day after that date.
+
+.. warning::
+
+   However, it will be necessary to ensure that the automatic capture of the real does not come superimposed on an actual seizure of real work by a resource, which would indicate in this way having worked differently from what had been planned.
+
+A parameter "automatic feed of the real" has been added on the setting of the complete automatic calculation.
+
+If the parameter "Automatic feed of the real" is selected, when the calculation is triggered, the actual work is automatically entered from the planned work until the day before the start of the calculation of the schedule.
+
+For security, and to avoid the superposition with a manual entry of real, if the resource has real for a given date, one does not copy the possible planned existing in real.
+ 
+For each planned job found, if no job exists for the resource concerned on the date of the scheduled job, copies the planned job to real work.
+
+We will mark the actual work entered automatically (technical zone type tag) to distinguish the automatic feed from a manual feed. This area will not be processed for screen renditions, but will analyze any unexpected behavior.
