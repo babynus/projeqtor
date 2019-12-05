@@ -79,7 +79,7 @@ if (securityCheckDisplayMenu(null,'PortfolioPlanning')) {$listStartPage['portfol
 if (securityCheckDisplayMenu(null,'ResourcePlanning')) {$listStartPage['resourcePlanningMain.php']=i18n('menuResourcePlanning');}
 if (securityCheckDisplayMenu(null,'GlobalPlanning')) {$listStartPage['globalPlanningMain.php']=i18n('menuGlobalPlanning');}
 if (securityCheckDisplayMenu(null,'Kanban')) {$listStartPage['../view/kanbanViewMain.php']=i18n('menuKanban');}
-$arrayItem=array('Project','Document','Ticket','TicketSimple','Activity','Action','Requirement','ProductVersion','ComponentVersion');
+$arrayItem=array('Project','Document','Ticket','TicketSimple','Activity','Action','Requirement','ProjectExpense','ProductVersion','ComponentVersion','GlobalView');
 foreach  ($arrayItem as $item) {
   if (securityCheckDisplayMenu(null,$item)) {$listStartPage['objectMain.php?objectClass='.$item]=i18n('menu'.$item);}
 }
