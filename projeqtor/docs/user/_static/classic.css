@@ -55,6 +55,7 @@ div.body h6 {
     border-bottom: 1px solid #ccc;
     margin: 30px -60px 10px -50px;
     padding: 3px 0 3px 10px;
+    clear: both;
 }
 
 div.body h1 { font-size: 160%; }
@@ -234,7 +235,7 @@ span.highlighted {
 
 
 
-/* ------------------------- ADMONITIONS & TOPICS ------------------------------ */
+/* ------------------------- ADMONITIONS - CONTAINERS & TOPICS ------------------------------ */
 
 div.admonition {
     margin: 20px 0px 30px 0px;
@@ -246,6 +247,22 @@ div.admonition {
     max-width: 100%;
     display: block;
 }
+
+
+div.container {
+	margin: 10px 5px 10px 5px;
+    padding: 10px;
+    background-color: #ffffff;
+    font-size: 85%;
+    border: 2px dashed #b1acc4;
+    line-height: 1.1em;
+    width: auto;
+    float: left;
+    max-width: 43%;
+    /*display: block;*/
+	box-shadow: 1px 1px 5px #aaa;
+}
+
 
 p.admonition-title {
     margin: 0px 0px 0px 0px;

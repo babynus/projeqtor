@@ -13,6 +13,10 @@ The menu "controls and automatisms" allows to manage and parameterize efficientl
 
 Sending mails, changes of status, status, loading of notes ...
 
+
+
+
+
 .. index:: Workflow
 
 .. _workflow:

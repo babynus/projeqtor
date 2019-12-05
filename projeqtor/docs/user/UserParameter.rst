@@ -13,87 +13,76 @@
 User parameters
 ***************
 
+The User Settings screen allows you to configure personal settings, that is, for your personal session.
 
-.. figure:: /images/GUI/USERPARAM_SCR_Parameters.png
-
-User parameters screen allows configuration of personal settings.
-
-You can display the Users Parameters with the principal menu 
-
-You can also display the "Start Guide" if you uncheck the box "show this page at startup"
-
-The guide will appear on today's screen between messages and items to follow (according to your preferences) 
-
+The parameters are organized by tab.
 
 .. figure:: /images/GUI/USERPARAM_BOX_AccessParam.png
-   :scale: 70%
-   :align: center
-
+   :alt: Display Parameters section 
+   
+   
 .. note:: 
 
    User parameters are efficient even without saving.
    
    Saving parameters will retrieve the selected parameters on each connection.
-
+   
+   
+   
 .. _display-parameters:
-
-Section Display parameters
---------------------------
-
-Generic display parameter for user. Choose your theme - Language or size of icons...
-
-
-.. figure:: /images/GUI/USERPARAM_ZONE_SectionDisplay.png
-   :alt: Display Parameters section 
-   :align: center
-
 .. _graphic-interface-behavior-section:
 
-Section Graphic interface behavior
-----------------------------------
+
+Tab Display
+-----------
+
+Generic display parameter for user. Choose your theme - Language or size of icons...
 
 Allows you to define the display of some elements of the interface like the history, the checklists, the closed elements or the style of the notes
 
 or choose default behaviors like closing the page or flipping mode
 
-.. figure:: /images/GUI/USERPARAM_ZONE_SectionGraphicInterBehavior.PNG
-   :alt: Graphic Interfac behavior section 
-   :align: center
+.. figure:: /images/GUI/USERPARAM_ZONE_SectionDisplay.PNG
+   :alt: Display Parameters section 
 
-Section Print & Export parameters
----------------------------------
+.. _UP-sectionemailing:
+
+ .. compound:: Section Emailing
+ 
+  The **not receive his own mails** option in the 'emailing' section allows you to not receive alerts and send emails on your own actions on the item
+
+.. _UP-print-export:
+
+Tab Export
+----------
 
 This section allows you to define whether you want to print the history, whether to print or PDF export in a new window
 
-.. figure:: /images/GUI/USERPARAM_ZONE_SectionPrint.png
+.. figure:: /images/GUI/USERPARAM_ZONE_Export.PNG
    :alt: Print section 
-   :align: center
+
+
 
 .. _userparam_miscelleaneous:
 
-Section Miscellaneous
----------------------
+Tab Automation
+--------------
 
-Default selected project and choice of character [1]_ used to indent lists of projects, to represent the WBS structure of projects and sub-project.
+Default selected project and choice of character (Set to “none” to get a flat list) used to indent lists of projects, to represent the WBS structure of projects and sub-project.
 
-.. figure:: /images/GUI/USERPARAM_ZONE_SectionMiscellaneous.PNG
+.. figure:: /images/GUI/USERPARAM_ZONE_SectionAutomation.PNG
    :alt: Miscellaneaous section 
    :align: center
 
 you can also see all the items you are registered for tracking and delete them from this window
 
-.. figure:: /images/GUI/USERPARAM_BOX_SectionMiscellaneous_Suivi.PNG
-   :alt: Miscellaneaous section 
-   :align: center
    
-
-.. [1] Set to "none" to get a flat list
 
 
 .. _photo:
 
-Photo
------
+Tab Profile
+-----------
    
 A photo can be defined for a user, a resource and a contact.
 
@@ -128,7 +117,7 @@ browse your pc to find an image that suits you or drag and drop in the area indi
 .. _user-password-section:
 
 Section Password
-----------------
+================
 
 Click the **Change Password** button to set a new one
 

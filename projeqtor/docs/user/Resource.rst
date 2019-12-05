@@ -298,6 +298,9 @@ This section allows to define functions and cost of the resource.
      - Box checked indicating that the resource doesn't want to receive mails sent to the team.
 
 
+
+
+
 .. _incompatible-resource:
 
 Incompatible resources
@@ -436,6 +439,60 @@ You assign resources to the pool at a given rate for a given period.
 .. compound:: **Delete an assignment**
 
 * When deleting an assignment, the remaining job is reassigned within the pool  
+  
+  
+
+
+
+
+.. _aggregated-resource:
+
+Aggregated resource
+-------------------
+
+The aggregated resource allows you to choose a single resource from a resource pool.
+
+When you assign a resource pool to an activity, a check box appears: single resource.
+
+If you select single resource then you will have no FTE capacity to fill in but a busy rate on the activity.
+
+Check the box and confirm to close the pop up.
+
+.. figure:: /images/GUI/RESOURCE_BOX_AllocationPool.PNG
+   :alt: Allocate the resource pool to the activity 
+
+
+When the pool is allocate, the pool icon appears on the board. 
+
+If you chose the unique resource then a 1 will be displayed on the icon.
+
+Similarly, the function of the resource chosen from the pool is indicated in brackets. 
+
+.. figure:: /images/GUI/RESOURCE_ZONE_AllocationPool.png
+   :alt: Pool allocation
+
+Click on |buttonEdit| to edit the allocation.
+
+The pop up opens again and this time you have the summary table showing you the resources of your pool 
+
+and the dates each resource can or should finish the activity.
+
+You must fill in the activity load to see the end dates of the pool resources.
+
+Otherwise the message 'not planned work' appears instead of the dates.
+
+
+.. figure:: /images/GUI/RESOURCE_BOX_AllocationPool_Edit.PNG
+
+Choose the appropriate resource by selecting the corresponding line and confirm.
+
+Basic, ProjeQtOr will automatically select the fastest resource to complete the task.
+
+The selected resource will then be the only one to be planned on this activity from the pool.
+
+
+  
+  
   
 .. raw:: latex
 

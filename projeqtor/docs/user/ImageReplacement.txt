@@ -1,3 +1,19 @@
+.. |support| image:: images/iconSupport.png
+   :alt: support resource
+   :scale: 60
+
+.. |incompatible| image:: images/iconIncompatible.png
+   :alt: incompatible resource
+   :scale: 60
+   
+.. |supportee| image:: images/iconSupported.png
+   :alt: supported resource
+   :scale: 60
+   
+
+
+
+
 
 .. |meetingPlay| image:: images/meetingPlay.png
    :alt: LiveMeeting Play

@@ -55,7 +55,7 @@ The Kanban approach is a stock management method that allows you to produce on d
 The main objective is to balance production and demand.
 
 
-   **With Kanban, you can create a new Kanban board for 
+   **With Kanban, you can create a new Kanban board for**
    
       * tickets,
       * activities,
