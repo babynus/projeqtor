@@ -10,7 +10,7 @@
 .. _planning_element:
     
 Planning elements
-=================
+*****************
 
 The planning elements :ref:`test-session` and :ref:`meeting` are described in their topics.
 
@@ -221,6 +221,15 @@ An activity can be:
     * Resources who will work on the ticket doesn't need to be assigned to linked activity before.
     * The assignment will be automatically created once that resource has entered the working time (real work) in the ticket.
     * The assigned task and the sum of working time entries by resource in tickets will be available in its timesheet.
+
+.. rubric:: Fix planning 
+
+* When box “fix planning” is checked, the activity scheduling won’t be remade.
+* This will avoid change on planned values.
+* The planning will always be the same whatever you do on other projects.
+
+.. warning:: This may lead to dependencies unconsistancies
+
 
 .. rubric:: Filter on list
 

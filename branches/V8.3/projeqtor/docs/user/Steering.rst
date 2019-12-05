@@ -491,6 +491,120 @@ Extra list of persons attending (or expecting to attend) the meeting, in complet
 
    Duplicate email addresses in the attendee list will automatically be removed.
 
+
+
+
+
+
+.. raw:: latex
+
+    \newpage
+
+.. index:: Decision
+
+.. _change-request: 
+
+Change Request
+**************
+
+The change request feature provides effective tracking of your customer's change requests.
+
+.. figure:: /images/GUI/STEERING_SCR_ChangeRequest.png
+   :alt: Change Request screen
+
+Its purpose is to describe a process that makes clear how the change is communicated, how decisions will be made and by whom and how the project will adapt accordingly.
+
+A change request is very close to a requirement, it can also generate several requirements. The change request is necessarily linked to a project and can be linked to a product.
+
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: |ReqFieldLegend| Required field
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - ID
+     - Request ID number 
+   * - |RequiredField| Name
+     - Fill in the title of the change. It must be understandable at first reading
+   * - Change Request Type
+     - define the type of the request
+   * - Project
+     - Link the change request to a project
+   * - Product
+     - Link the change request to a product
+   * - External reference
+     - Name of the external reference
+   * - Contact
+     - Name oft the contact  
+   * - Origin    
+     - Link to the item causing the change request
+   * - Business Features
+     - Functionality trades whose modification request will need
+   * - Urgency
+     - Determine the urgency of the request
+   * - Initial due date       
+     - Date you committed to the client
+   * - Planned due date 
+     - Deadline actually planned 
+   * - Description
+     - Describe the change request you want to initiate
+   * - Justification    
+     - Justify this change request.
+   * - Expected benefit  
+     - List the potential benefits that this change request will bring
+
+
+.. rubric:: Section Treatment
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: |ReqFieldLegend| Required field
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - Status
+     - Actual :term:`status` of the decision
+   * - :term:`Responsible`
+     - Resource who is responsible for the follow-up of the question
+   * - Criticality
+     - how critical is the demand
+   * - Feasibility
+     - how feasibility is the demand  
+   * - Technical risk    
+     - what are the technical risks
+   * - Priority
+     - What is the priority of the request
+   * - Estimate work
+     - Estimate work for the resquest
+   * - Estimate cost
+     - Estimate cost for the request  
+   * - Target Version
+     - The target version affected by the request           
+   * - :term:`Handled`
+     - Flag to indicate that question has been taken into account
+   * - Approved by
+     - Indicates the date the application was approved and by whom
+   * - :term:`Done`
+     - Flag to indicate that question has been answered
+   * - :term:`Closed`
+     - Flag to indicate that decision is archived  
+   * - Cancelled
+     - Flag to indicate that decision is cancelled
+   * - Result
+     - Enter the result of the implementation of the change request
+   * - Efficiency Annalyse
+     - Complete the analysis of the effectiveness of the implementation of the change request
+     
+     
+     
+               
+
+
 .. raw:: latex
 
     \newpage

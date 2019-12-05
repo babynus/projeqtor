@@ -1,6 +1,6 @@
 .. include:: ImageReplacement.txt
 
-.. title:: Gantt charts
+.. title:: Gantt chart
 
 .. raw:: latex
 
@@ -8,8 +8,8 @@
 
 .. _Gantt_chart:
 
-Gantt charts
-************
+Gantt chart
+***********
 
 The Gantt chart is a tool used in scheduling and project management and allowing to visualize in time the various tasks composing a project.
 
@@ -895,3 +895,23 @@ Export contains all details and links between tasks and also include a paginatio
    
    Default (when **$pdfPlanningBeta** parameter is not set) is *enabled with Chrome, disabled with other browsers* 
 
+
+
+.. raw:: latex
+
+    \newpage
+
+.. _export-Gantt-MSP:
+
+Export planning to MS Project
+=============================
+
+You have the option of exporting XML in MS Project.
+
+Click on the button to start the export. 
+
+You can open this format with ProjectLibre.
+
+A user parameter allows you to enter if you want to add the assignments when exporting the project in MS-Project format.
+
+See: :ref:`UP-print-export` 

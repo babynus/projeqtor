@@ -2,15 +2,13 @@
 
 .. title:: Concepts
 
-
-.. index: Project (concept)
-
 .. _concept:
 
 ********
 Concepts
 ********
 
+.. index: Project (concept)
 
 .. _Concept_project:
 
@@ -29,7 +27,7 @@ It is also used to allows to gather all data depend on project:
  * Planning element
  * Risk assessment, Risk mitigation, Reserve
  * Ticket, Issue, Bug tracking, Change request, Support
- * Review logs, Meeting, Decision, Action plan
+ * Steering, Meeting, Decision, Action plan
  * Requirement & Test 
  * Project expense
  * Quotation, Order, Bill, Payment
@@ -65,7 +63,7 @@ The project data visibility is granted according to the user profile.
     
 .. _project_type_definition:
 
-the project type
+The project type
 ----------------
 
 .. compound:: Three project types can be defined:
@@ -96,11 +94,15 @@ the project type
          For modifying a template project, the modifier must be assigned to the project..
    
          See: :ref:`Copy an item<copy-item>`
+         
 .. note:: 
 
    The project type is defined in a project type.
    
    Which is associated to a project. See: :ref:`planningelem_project`
+   
+   
+   
 
 .. rubric:: Define billable project
 
@@ -128,9 +130,261 @@ A project can be billable or not.
    When deleting a project, also delete the indicators, Emails and Delays for the tickets of this project
 
 
+
+.. _hat-project:
+
+.. rubric:: Hat project
+
+The definition is made by the project type, you define that certain types of projects can not have activities, only subprojects or milestones..
+
+.. figure:: /images/GUI/CONCEPT_ZONE_Behavior.png
+   :alt: Project type behavior
+   
+   Project type Behavior
+
+
+
 .. rubric:: Fix the planning
 
 you can freeze the content of a project or projects from the moment you do not want to extend the project or modify it.
+
+
+.. raw:: latex
+
+    \newpage
+
+
+
+
+
+
+
+.. _allocation-to-project:
+
+Allocation to project
+---------------------
+
+.. sidebar:: Concepts 
+
+   * :ref:`profiles-definition`
+   * :ref:`user-ress-contact-demystify`
+   
+Allocation to project is used to:
+
+* Define project data visibility.
+* Define resource availability.
+* Define the period of access to project data by the user. 
+
+
+.. figure:: /images/GUI/ENVPARAM_SCR_AllocationProject.png
+   :alt: Allocation to project
+   :align: center
+   
+   Allocation to project
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required field |ReqFieldLegend| 
+   :widths: 20, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id of the resource.
+   * - Resource
+     - Name of the allocated resource.
+   * - Or contact
+     - Name of the allocated contact.
+   * - |RequiredField| Profile
+     - Selected profile.
+   * - |RequiredField| Project
+     - Project allocated to.
+   * - Rate
+     - Allocation rate for the project (%).
+   * - Start date
+     - Start date of allocation.
+   * - End date
+     - End date of allocation.
+   * - :term:`Closed`
+     - Flag to indicate that the allocation is archived.
+   * - :term:`Description`
+     - Complete description of the allocation.
+
+.. topic:: Fields Resource & Contact
+
+   * You can select resource or contact.
+   * If none is selected then the user connected is used to define the allocation.
+   * If a contact is a resource and inversely, then resource or contact name will be selected too.
+
+
+The following sections describe allocation to project, performed for user, resource or contact.
+
+User allocation
+---------------
+
+Allocation to project gives data visibility on a project.
+
+Allocation to project can be defined in the :ref:`user` screen.
+
+.. rubric:: Profile selection
+
+Selected profile allows to define access rights on project elements.
+
+.. tip::
+
+   Selected profile allows to define the role played by the user in a project.
+   
+   For instance, the user might be a project manager in a project and it could be a project member in another. 
+   
+   
+.. note:: 
+
+   Profile defined in allocation to project does not grant or revoke access to users.
+      
+   General access to application functionalities and data is defined by user profile. 
+
+.. rubric:: Period selection
+
+Allow to define the period of project data visibility.
+
+.. tip::
+ 
+     Can be used to limit access period, according to services agreement.
+
+
+
+
+.. raw:: latex
+
+    \newpage
+
+.. _resource-allocation-to-project:
+
+Resource allocation to project
+------------------------------
+
+Allocation to project allows to define the resource availability on project.
+
+A resource may be allocated to projects at a specified rate for a period.
+
+Allocation to project can be defined in :ref:`planningelem_project` and :ref:`resource` screens.
+
+It is also possible to allocate a team to a project in :ref:`team` screens.
+
+.. note::
+
+   A resource allocated to a project can be defined as :term:`responsible` of project items treatment.
+
+
+.. rubric:: Period & Rate selection
+
+A resource may be allocated to a project at a specified rate for a period. 
+
+.. note::
+
+   If the period is not specified then the resource is allocated throughout the project.
+
+.. warning::
+
+    The planning calculator tries to plan, the remaining work on the task assigned to a resource within the allocation to project period.
+    
+    If remaining work on the task can't be planned, a purple bar appears in the Gantt view.
+
+.. rubric:: Change resource on an allocation to project
+
+A resource can be changed on allocation to project.
+
+All tasks assigned to old resource will be transferred to the new resource with planned work and remaining work.
+
+Work done on tasks belongs to always the old resource.
+
+
+Multi-allocation to project
+---------------------------
+
+A resource can be allocated to multiple projects in the same period.
+
+Make sure that the allocation to projects for a period not exceeding 100%.
+
+In the section **Allocations** in :ref:`resource` screen, a tool allows to displayed conflicts.
+
+.. tip:: How resolve conflicts?
+
+   You can change allocation period to avoid overlap between projects.
+   
+   You can change the rate of allocation for it does not exceed 100% for the period.
+
+
+Contact allocation to project
+-----------------------------
+
+A contact allocated to a project can be defined as :term:`requestor`.
+
+Allocation to project can be defined in :ref:`planningelem_project` and :ref:`contact` screens.
+
+
+
+.. _concept_activity:
+
+Activity
+********
+
+An activity is a kind of task that can be planned or that groups other activities.
+
+This is usually a long-term task that can be assigned to one or more resources. 
+
+Activities will appear on the Gantt schedule view.
+
+For example, you might consider an activity:
+
+* Scheduled tasks,
+* Modification requests,
+* The phases,
+* Versions or new deployments,
+
+Activities can be grouped as a Mother / Daughter link. 
+
+The parent activity must belong to the same project. 
+
+A WBS structure is applied and a dynamic index is calculated for all activities. 
+
+The WBS Activity Index can be changed in the Gantt schedule view using drag and drop.
+
+
+
+
+.. raw:: latex
+
+    \newpage
+
+.. _assignment:
+
+Assignment
+----------
+
+The assignment is used to assign resources to project tasks (activity, test session, meeting).
+
+Consists to assign a resource to a task in a specific function. The function allows to define the resource daily cost.
+
+A resource assignment contains data about work on task (planned, real, left and reassessed work).
+
+You can not remove a resource assignment once the resource has entered real work on the activity.
+
+Similarly, if the resource has completed its activity, deletion is not possible. 
+
+You keep track of the resources that have been assigned and worked on the activity.
+    
+.. note::
+
+   Only resources allocated by the project can be assigned to project tasks.
+
+   Assignment can be done in :ref:`activity`, :ref:`test-session` and :ref:`meeting` screens.
+
+
+
+
+
 
 
 
@@ -1048,207 +1302,6 @@ Allocation to project and user profile are also shared.
 .. note::
 
    For a stakeholder, you can define and redefine the combination without losing data.
-
-
-
-.. raw:: latex
-
-    \newpage
-
-
-.. _allocation-to-project:
-
-Allocation to project
-*********************
-
-.. sidebar:: Concepts 
-
-   * :ref:`profiles-definition`
-   * :ref:`user-ress-contact-demystify`
-   
-Allocation to project is used to:
-
-* Define project data visibility.
-* Define resource availability.
-* Define the period of access to project data by the user. 
-
-
-.. figure:: /images/GUI/ENVPARAM_SCR_AllocationProject.png
-   :alt: Allocation to project
-   :align: center
-   
-   Allocation to project
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required field |ReqFieldLegend| 
-   :widths: 20, 80
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id of the resource.
-   * - Resource
-     - Name of the allocated resource.
-   * - Or contact
-     - Name of the allocated contact.
-   * - |RequiredField| Profile
-     - Selected profile.
-   * - |RequiredField| Project
-     - Project allocated to.
-   * - Rate
-     - Allocation rate for the project (%).
-   * - Start date
-     - Start date of allocation.
-   * - End date
-     - End date of allocation.
-   * - :term:`Closed`
-     - Flag to indicate that the allocation is archived.
-   * - :term:`Description`
-     - Complete description of the allocation.
-
-.. topic:: Fields Resource & Contact
-
-   * You can select resource or contact.
-   * If none is selected then the user connected is used to define the allocation.
-   * If a contact is a resource and inversely, then resource or contact name will be selected too.
-
-
-The following sections describe allocation to project, performed for user, resource or contact.
-
-User allocation
----------------
-
-Allocation to project gives data visibility on a project.
-
-Allocation to project can be defined in the :ref:`user` screen.
-
-.. rubric:: Profile selection
-
-Selected profile allows to define access rights on project elements.
-
-.. tip::
-
-   Selected profile allows to define the role played by the user in a project.
-   
-   For instance, the user might be a project manager in a project and it could be a project member in another. 
-   
-   
-.. note:: 
-
-   Profile defined in allocation to project does not grant or revoke access to users.
-      
-   General access to application functionalities and data is defined by user profile. 
-
-.. rubric:: Period selection
-
-Allow to define the period of project data visibility.
-
-.. tip::
- 
-     Can be used to limit access period, according to services agreement.
-
-
-
-
-.. raw:: latex
-
-    \newpage
-
-.. _resource-allocation-to-project:
-
-Resource allocation to project
-------------------------------
-
-Allocation to project allows to define the resource availability on project.
-
-A resource may be allocated to projects at a specified rate for a period.
-
-Allocation to project can be defined in :ref:`planningelem_project` and :ref:`resource` screens.
-
-It is also possible to allocate a team to a project in :ref:`team` screens.
-
-.. note::
-
-   A resource allocated to a project can be defined as :term:`responsible` of project items treatment.
-
-
-.. rubric:: Period & Rate selection
-
-A resource may be allocated to a project at a specified rate for a period. 
-
-.. note::
-
-   If the period is not specified then the resource is allocated throughout the project.
-
-.. warning::
-
-    The planning calculator tries to plan, the remaining work on the task assigned to a resource within the allocation to project period.
-    
-    If remaining work on the task can't be planned, a purple bar appears in the Gantt view.
-
-.. rubric:: Change resource on an allocation to project
-
-A resource can be changed on allocation to project.
-
-All tasks assigned to old resource will be transferred to the new resource with planned work and remaining work.
-
-Work done on tasks belongs to always the old resource.
-
-
-Multi-allocation to project
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-A resource can be allocated to multiple projects in the same period.
-
-Make sure that the allocation to projects for a period not exceeding 100%.
-
-In the section **Allocations** in :ref:`resource` screen, a tool allows to displayed conflicts.
-
-.. tip:: How resolve conflicts?
-
-   You can change allocation period to avoid overlap between projects.
-   
-   You can change the rate of allocation for it does not exceed 100% for the period.
-
-
-Contact allocation to project
------------------------------
-
-A contact allocated to a project can be defined as :term:`requestor`.
-
-Allocation to project can be defined in :ref:`planningelem_project` and :ref:`contact` screens.
-
-
-
-.. raw:: latex
-
-    \newpage
-
-.. _assignment:
-
-Assignment
-**********
-
-The assignment is used to assign resources to project tasks (activity, test session, meeting).
-
-Consists to assign a resource to a task in a specific function. The function allows to define the resource daily cost.
-
-A resource assignment contains data about work on task (planned, real, left and reassessed work).
-
-You can not remove a resource assignment once the resource has entered real work on the activity.
-
-Similarly, if the resource has completed its activity, deletion is not possible. 
-
-You keep track of the resources that have been assigned and worked on the activity.
-    
-.. note::
-
-   Only resources allocated by the project can be assigned to project tasks.
-
-   Assignment can be done in :ref:`activity`, :ref:`test-session` and :ref:`meeting` screens.
-
 
 
 .. raw:: latex

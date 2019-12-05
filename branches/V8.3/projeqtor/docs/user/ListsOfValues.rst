@@ -68,21 +68,20 @@ See: :ref:`workflow`.
 
    Handled status
 
-      * This status specifies that the treatment of item is taken over.
-      * A :term:`responsible` can be determined.
-      * It is possible to require the appointment of a responsible when the status change to "handled".
+      * This status specifies that the treatment of item is supported.
+      * A :term:`responsible` can be determined or required.
 
    Done status
 
       * This status specifies that the treatment of item is done.
-      * A :term:`result` can be specify.
+      * A :term:`result` can be specified or required.
       * It is possible to require a result when the status change to "done".
 
    Closed status
 
-     * This status specifies that the item is closed.
-     * This item is archived, and it disappeared in the list.
-     * Item can reappear when "show closed item" is checked.
+      * This status indicates that the item is closed.
+      * This article is archived and will no longer appear in the lists.
+      * You can display these items by checking the "closed" option at the top right of the screen
 
    Cancelled status
 

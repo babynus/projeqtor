@@ -831,16 +831,17 @@ When you want to disconnect from ProjeQtOr with the SSO method, the logout scree
 
    .. compound:: Parameters
    
-         This is an SSO connection via the SAML2 protocol
+      This is an SSO connection via the SAML2 protocol
    
    
       .. figure:: /images/GUI/GLOBALPARAM_ZONE_SSO.png
-         :alt: Global parameters : LDAP
-         :align: center
+         :alt: Global parameters: LDAP
+         
+         Global parameters: LDAP 
    
-         * Set the Entity ID, the IDP certificate, the single sign on and logout...
-         * Default profile for users, message on creation new user from SAML,
-         * And some parameters for users  
+      * Set the Entity ID, the IDP certificate, the single sign on and logout...
+      * Default profile for users, message on creation new user from SAML,
+      * And some parameters for users  
 
 .. _glabalparama_automation:
 
@@ -890,22 +891,53 @@ Automatic import settings for :term:`cron` processes.
 
 .. rubric:: Automatic import of replies to emails
 
+
+.. figure:: /images/GUI/GLOBALPARAM_ZONE_ReplyEmail.PNG
+   :alt: settings for email responses
+   
 Defined parameters for the “Reply to” process
 It will manage connection to IMAP INBOX to retrieve email answers.
 
    .. compound:: Email input check cron delay (in seconds)
    
          Delay of -1 deactivates this functionality. 
+         
+   .. compound:: Email reception
+        
+      When you have completed the IMAP settings for receiving emails, you receive your email with a new header. See the image below.
+      
+      .. figure:: /images/GUI/GLOBALPARAM_BOX_Outlook.png
+         :alt: receiving an email before and after configuring IMAP settings    
+
+      You always find the name of the item that is related to your application. A single click takes you to the item page.
+
+      The line in the header tells you where your answer should be positioned to allow you to retrieve the response text in your ProjeQtor instance without the original message. 
+
+   .. compound:: Signing start identifier 
+        
+      When you have completed the IMAP settings for receiving emails, you receive your email with a new header. See the image below.
+
+        
+      The fields allows you to identify the beginning of your signature in order to avoid retrieving the signature in the response.
+
+      For example, enter, so that ProjeQtOr recognizes that your signature begins with this word. He will not take back everything behind.
+
+
 
 .. note:: **IMAP host**
 
    * Must be an IMAP connection string.
    * To connect to GMAIL input box, host must be: {imap.gmail.com:993/imap/ssl}INBOX
+   * You must set these parameters if you want to use the :ref:`Not receive his own mails<UP-sectionemailing>` option in the user settings 
    
 .. _automatic-planning-calcul:
 
 .. rubric:: Automatic planning calculation
 
+
+.. figure:: /images/GUI/GLOBALPARAM_ZONE_InputWork.PNG
+   :alt: Enter real work with the recalculation
+   
 Activated or desactived this feature by simple click
   
    .. compound:: Differential calculation
@@ -915,6 +947,11 @@ Activated or desactived this feature by simple click
    .. compound:: Complete calculation
    
          All projects planning are recalculated. 
+         
+
+You can choose the option **Automatic feed of the real** which will inform the real work according to the planned dates.
+
+See: :ref:`automatic-inuptwork`         
 
 
 .. note:: Select the frequency of the calendar by clicking on the button **defined parameters** and choose the schedule, day, month.

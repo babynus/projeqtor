@@ -96,8 +96,7 @@ Glossary
    FTE
    
       Full Time Equivalent
-      The full-time equivalent (FTE) or full-time equivalent (FTE) is a unit of measurement: 
-      a workload; or more often, a capacity for work or production.
+      The full-time equivalent (FTE) is a unit of measurement: a workload or more often, a capacity for work or production.
 
    Gantt chart
    
@@ -135,7 +134,7 @@ Glossary
    Key Performance Indicator (KPI)
    
       Indispensable to the project manager, an indicator makes it possible to evaluate a situation and to make an adapted decision. 
-      Key performance indicators (or Key Performance Indicators) measure the performance of your projects. 
+      Key performance indicators measure the performance of your projects. 
       You choose them together with your team. They must be simple, reliable, easily understandable by all and relevant
    
       If the indicator is green, all is well, you will need to continue the actions in progress to maintain this good result.  
