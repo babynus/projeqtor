@@ -43,18 +43,15 @@ ALTER TABLE `${prefix}assignment` ADD COLUMN `hasSupport` int(1) unsigned DEFAUL
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
 (225,'menuChangeRequest',6,'object', 355,'ReadWritePrincipal',0,'Work Review EnvironmentalParameter'),
-(226,'menuChangeRequestType',79,'object',982,NULL,NULL,0),
-(227, 'menuVersionsComponentPlanning', 173, 'item', 395, NULL, 0, 'Work');
+(226,'menuChangeRequestType',79,'object',982,NULL,NULL,0);
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,225,1),
-(1,226,1),
-(1,227,1);
+(1,226,1);
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,225,8),
-(1,226,8),
-(1,227,8);
+(1,226,8);
 
 CREATE TABLE `${prefix}changerequest` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
@@ -210,6 +207,8 @@ INSERT INTO `${prefix}cronexecution` (`cron`, `fileExecuted`, `idle` ,`fonctionN
 -- gautier #4304
 ALTER TABLE `${prefix}type` ADD `isLeadProject` int(1) unsigned default '0';
 
+INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES 
+(227, 'menuVersionsComponentPlanning', 174, 'item', 395, NULL, 0, 'Work');
 
 ALTER TABLE `${prefix}expensedetailtype` 
 CHANGE `value01` `value01` DECIMAL(11,5) UNSIGNED;
@@ -223,3 +222,5 @@ ALTER TABLE `${prefix}expensedetail`
 CHANGE `value02` `value02` DECIMAL(11,5) UNSIGNED;
 ALTER TABLE `${prefix}expensedetail` 
 CHANGE `value03` `value03` DECIMAL(11,5) UNSIGNED;
+
+DELETE FROM `${prefix}plugin` where name='kanban';
