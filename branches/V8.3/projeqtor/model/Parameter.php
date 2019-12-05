@@ -569,7 +569,7 @@ class Parameter extends SqlElement {
       	if (securityCheckDisplayMenu(null,'ResourcePlanning')) {$list['resourcePlanningMain.php']=i18n('menuResourcePlanning');}
       	if (securityCheckDisplayMenu(null,'GlobalPlanning')) {$list['globalPlanningMain.php']=i18n('menuGlobalPlanning');}
         if (securityCheckDisplayMenu(null,'Kanban')) {$list['../view/kanbanViewMain.php']=i18n('menuKanban');}
-      	$arrayItem=array('Project','Document','Ticket','TicketSimple','Activity','Action','Requirement','ProductVersion','ComponentVersion','GlobalView');
+      	$arrayItem=array('Project','Document','Ticket','TicketSimple','Activity','Action','Requirement','ProjectExpense','ProductVersion','ComponentVersion','GlobalView');
       	foreach  ($arrayItem as $item) {
       		if (securityCheckDisplayMenu(null,$item)) {$list['objectMain.php?objectClass='.$item]=i18n('menu'.$item);}
       	}
