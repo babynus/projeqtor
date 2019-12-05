@@ -4842,6 +4842,7 @@ abstract class SqlElement {
     if ($objectClass == 'History' or $objectClass == 'Audit') {
       return false; // exit : not for History
     }
+    debugLog($objectClass);
     $canBeSend = true;
     if ($idProject) {
       $canBeSend = ! SqlList::getFieldFromId ( "Project", $idProject, "isUnderConstruction" );
@@ -5241,7 +5242,7 @@ abstract class SqlElement {
     
     if ($directStatusMail) {
       $idTemplate=(trim($directStatusMail->idEmailTemplate))?$directStatusMail->idEmailTemplate:'0';
-      if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES'){
+      if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES' and $objectClass!='AutoSendReport'){
         $tabDest=explode(",", $destTab[$idTemplate]);
         if(count($tabDest)!=count($resultMail)){
           $curUser=new Affectable(getSessionUser()->id);
@@ -5252,13 +5253,13 @@ abstract class SqlElement {
           }
         }
         $destTab[$idTemplate]=implode(",", $tabDest);
-      }
-      if ($resultMail and $resultMail[0]!='') {
-        return array('result' => 'OK', 'dest' => $destTab[$idTemplate]);
-      }else if ($resultMail[0]==''){
-        return array('result' => 'Fail', 'dest' => $destTab[$idTemplate]);
-      }else{
-        return array('result' => '', 'dest' => $destTab[$idTemplate]);
+        if ($resultMail and $resultMail[0]!='') {
+          return array('result' => 'OK', 'dest' => $destTab[$idTemplate]);
+        }else if ($resultMail[0]==''){
+          return array('result' => 'Fail', 'dest' => $destTab[$idTemplate]);
+        }else{
+          return array('result' => '', 'dest' => $destTab[$idTemplate]);
+        }
       }
     }
     $valide=0;
