@@ -4842,7 +4842,6 @@ abstract class SqlElement {
     if ($objectClass == 'History' or $objectClass == 'Audit') {
       return false; // exit : not for History
     }
-    debugLog($objectClass);
     $canBeSend = true;
     if ($idProject) {
       $canBeSend = ! SqlList::getFieldFromId ( "Project", $idProject, "isUnderConstruction" );
@@ -5234,7 +5233,6 @@ abstract class SqlElement {
         $resultMail[] = sendMail($destTab[$emailTemplateTab[$j]->id], $emailTemplateTab[$j]->title,
             $emailTemplateTab[$j]->template,
             $this, null, $sender, null, null, $references );
-       
       }
       
     }
@@ -5242,7 +5240,8 @@ abstract class SqlElement {
     
     if ($directStatusMail) {
       $idTemplate=(trim($directStatusMail->idEmailTemplate))?$directStatusMail->idEmailTemplate:'0';
-      if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES' and $objectClass!='AutoSendReport'){
+      if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES' and $temp->refType!='AutoSendReport'){
+        debugLog('2');
         $tabDest=explode(",", $destTab[$idTemplate]);
         if(count($tabDest)!=count($resultMail)){
           $curUser=new Affectable(getSessionUser()->id);
@@ -5264,6 +5263,7 @@ abstract class SqlElement {
     }
     $valide=0;
     foreach ($resultMail as $id=>$value){
+      debugLog('1');
       if($value!=''){
         $valide++;
       }
