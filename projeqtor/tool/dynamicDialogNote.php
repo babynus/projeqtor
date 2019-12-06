@@ -38,7 +38,6 @@ Security::checkValidId($objectId);
 
 $reply=RequestHandler::getBoolean('reply');
 $idParentNote=RequestHandler::getId('idParentNote');
-debugLog($idParentNote);
 
 $noteId=null;
 if (array_key_exists('noteId',$_REQUEST)) {
@@ -77,7 +76,6 @@ if ($noteId) {
   }
 }
 $parentNote = new Note($idParentNote);
-debugLog($parentNote);
 $detailHeight=600;
 $detailWidth=1010;
 if (sessionValueExists('screenWidth') and getSessionValue('screenWidth')) {
