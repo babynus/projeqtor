@@ -3231,17 +3231,7 @@ function drawHistoryFromObjects($refresh=false) {
   echo '<td class="historyHeader" style="width:15%">'.i18n('colDate').'</td>';
   echo '<td class="historyHeader" style="width:15%">'.i18n('colUser').'</td>';
   if(RequestHandler::isCodeSet('dialog') and RequestHandler::getValue('dialog')=='dialogHistory' ){
-    echo '<div style="position:absolute;right:30px;top:-1px;">';
-    if($showArchive==true){
-      echo '  <button id="historyArchive" title="'.i18n('helpCloseHistoryArchive').'" region="center" dojoType="dijit.form.Button"  iconClass="iconButtonMark16 iconButtonMark  iconSize16" > ';
-    }else{
-      echo '  <button id="historyArchive" title="'.i18n('helpShowHistoryArchive').'" region="center" dojoType="dijit.form.Button"  iconClass="iconHistArchive16 iconHistArchive iconSize16" > ';
-    }
-    echo '     <script type="dojo/connect" event="onClick" args="evt">';
-    echo '         saveDataToSession("showArchive",'.$showArchiveValue.');';
-    echo '         var param="&objectClass="+dojo.byId("objectClassName").value;';
-    echo '         param += "&objectId="+'.$obj->id.';';
-    echo '         loadDialog("dialogHistory", null, true,param);';
+    // Done on dynamicDialogHistory
   }else{
     echo '<div style="position:absolute;right:6px;top:3px;">';
       if($showArchive==true){
@@ -3252,10 +3242,11 @@ function drawHistoryFromObjects($refresh=false) {
     echo '     <script type="dojo/connect" event="onClick" args="evt">';
     echo '         saveDataToSession("showArchive",'.$showArchiveValue.');';
     echo '         loadContent("objectDetail.php", "detailDiv", "listForm")';
+    echo '     </script>';
+    echo '  </button>';
+    echo '</div>';
   }
-  echo '     </script>';
-  echo '  </button>';
-  echo '</div>';
+ 
   echo '</tr>';
   $stockDate=null;
   $stockUser=null;
