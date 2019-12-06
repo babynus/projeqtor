@@ -730,7 +730,7 @@ function selectDetailItem(selectedValue, lastSavedName) {
 	  displayVersionsPlanning(idFldVal,'ProductVersion');
 	  hideDetail();
 	  return;
-  }else if('versionsComponentPlanningDetail'){
+  }else if(comboName == 'versionsComponentPlanningDetail'){
     displayVersionsPlanning(idFldVal,'ComponentVersion');
     hideDetail();
     return;
