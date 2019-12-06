@@ -41,10 +41,15 @@
   // Header
   $headerParameters="";
   if (array_key_exists('idProject',$_REQUEST) and trim($_REQUEST['idProject'])!="") {
-	$paramProject=trim($_REQUEST['idProject']);
-	Security::checkValidId($paramProject);
-
+	  $paramProject=trim($_REQUEST['idProject']);
+	  Security::checkValidId($paramProject);
     $headerParameters.= i18n("colIdProject") . ' : ' . htmlEncode(SqlList::getNameFromId('Project', $paramProject)) . '<br/>';
+  }
+  $showIdle=false;
+  
+  if (array_key_exists('showIdle',$_REQUEST)) {
+    $showIdle=true;
+    $headerParameters.= i18n("labelShowIdle").'<br/>';
   }
   include "header.php";
 
@@ -57,9 +62,14 @@
   $queryWhere='';
   $queryOrderBy='';
   $idTab=0;
-  if (! array_key_exists('idle',$_REQUEST) ) {
+  if ($showIdle) {
+    $queryWhere="1=1 ";
+  }else{
     $queryWhere= $table . ".idle=0 ";
   }
+//  if (! array_key_exists('idle',$_REQUEST) ) {
+//    $queryWhere= $table . ".idle=0 ";
+//  }
 
   // Where clause
   $queryWhere.= ($queryWhere=='')?'':' and ';
