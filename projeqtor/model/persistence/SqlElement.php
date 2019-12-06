@@ -5241,7 +5241,7 @@ abstract class SqlElement {
     
     if ($directStatusMail) {
       $idTemplate=(trim($directStatusMail->idEmailTemplate))?$directStatusMail->idEmailTemplate:'0';
-      if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES' and $temp->refType!='AutoSendReport'){
+      if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES' ){
         $tabDest=explode(",", $destTab[$idTemplate]);
         if(count($tabDest)!=count($resultMail)){
           $curUser=new Affectable(getSessionUser()->id);
