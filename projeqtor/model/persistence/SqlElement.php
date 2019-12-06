@@ -5251,13 +5251,13 @@ abstract class SqlElement {
           }
         }
         $destTab[$idTemplate]=implode(",", $tabDest);
-        if ($resultMail and $resultMail[0]!='') {
-          return array('result' => 'OK', 'dest' => $destTab[$idTemplate]);
-        }else if ($resultMail[0]==''){
-          return array('result' => 'Fail', 'dest' => $destTab[$idTemplate]);
-        }else{
-          return array('result' => '', 'dest' => $destTab[$idTemplate]);
-        }
+      }
+      if ($resultMail and $resultMail[0]!='') {
+        return array('result' => 'OK', 'dest' => $destTab[$idTemplate]);
+      }else if ($resultMail[0]==''){
+        return array('result' => 'Fail', 'dest' => $destTab[$idTemplate]);
+      }else{
+        return array('result' => '', 'dest' => $destTab[$idTemplate]);
       }
     }
     $valide=0;
