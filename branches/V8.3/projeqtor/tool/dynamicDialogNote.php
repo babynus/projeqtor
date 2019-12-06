@@ -83,7 +83,6 @@ if (sessionValueExists('screenHeight')) {
 }
 $privacy=($note->id)?$note->idPrivacy:$parentNote->idPrivacy;
 if (!$privacy) $privacy=1;
-if (!$subNotePrivacy) $subNotePrivacy=$privacy;
 ?>
 <div >
   <table style="width:100%;">
@@ -143,18 +142,18 @@ if (!$subNotePrivacy) $subNotePrivacy=$privacy;
           <table width="100%"><tr height="25px">
             <td width="33%" class="smallTabLabel" >
               <label class="smallTabLabelRight" for="notePrivacyPublic"><?php echo i18n('public');?>&nbsp;</label>
-              <input type="radio" data-dojo-type="dijit/form/RadioButton" name="notePrivacy" id="notePrivacyPublic" value="1" <?php if ($privacy==1) echo "checked"; if (!$canChangeStatus or $parentNote->idPrivacy >= 2 or $subNotePrivacy != "1") echo ' disabled ';?> />
+              <input type="radio" data-dojo-type="dijit/form/RadioButton" name="notePrivacy" id="notePrivacyPublic" value="1" <?php if ($privacy==1) echo "checked"; if (!$canChangeStatus or $parentNote->idPrivacy >= 2 or ($subNotePrivacy and $subNotePrivacy != "1")) echo ' disabled ';?> />
             </td>
             <td width="34%" class="smallTabLabel" >
               <label class="smallTabLabelRight" for="notePrivacyTeam"><?php echo i18n('team');?>&nbsp;</label>
               <?php $res=new Resource(getSessionUser()->id);
                     $hasTeam=($res->id and $res->idTeam)?true:false;
               ?>
-              <input type="radio" data-dojo-type="dijit/form/RadioButton" name="notePrivacy" id="notePrivacyTeam" value="2" <?php if ($privacy==2) echo "checked"; if (!$canChangeStatus or !$hasTeam or $parentNote->idPrivacy == 3 or $subNotePrivacy != "2") echo ' disabled ';?> />
+              <input type="radio" data-dojo-type="dijit/form/RadioButton" name="notePrivacy" id="notePrivacyTeam" value="2" <?php if ($privacy==2) echo "checked"; if (!$canChangeStatus or !$hasTeam or $parentNote->idPrivacy == 3 or ($subNotePrivacy and $subNotePrivacy != "2")) echo ' disabled ';?> />
             </td>
             <td width="33%" class="smallTabLabel" >
               <label class="smallTabLabelRight" for="notePrivacyPrivate"><?php echo i18n('private');?>&nbsp;</label>
-              <input type="radio" data-dojo-type="dijit/form/RadioButton" name="notePrivacy" id="notePrivacyPrivate" value="3" <?php if ($privacy==3) echo "checked";if (!$canChangeStatus or $subNotePrivacy != "3") echo ' disabled ';?> />
+              <input type="radio" data-dojo-type="dijit/form/RadioButton" name="notePrivacy" id="notePrivacyPrivate" value="3" <?php if ($privacy==3) echo "checked";if (!$canChangeStatus or ($subNotePrivacy and $subNotePrivacy != "3")) echo ' disabled ';?> />
             </td>
           </tr></table>
 
