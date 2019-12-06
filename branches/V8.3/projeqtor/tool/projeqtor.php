@@ -2013,7 +2013,7 @@ function getTheme() {
  *          main body of the message
  * @return unknown_type
  */
-function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $boundary=null, $references=null,$canSend=false) {
+function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $boundary=null, $references=null,$canSend=false,$autoSendReport=false) {
   // Code that caals sendMail :
   // + SqlElement::sendMailIfMailable() : sendMail($dest, $title, $message, $this)
   // + Cron::checkImport() : sendMail($to, $title, $message, null, null, null, $attachmentsArray, $boundary); !!! with attachments
@@ -2029,7 +2029,7 @@ function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sen
   $paramMailerType=strtolower(Parameter::getGlobalParameter('paramMailerType'));
   if (!isset($paramMailerType) or $paramMailerType=='' or $paramMailerType=='phpmailer') {
     // Cute method using PHPMailer : should work on all situations / First implementation on V4.0
-    return sendMail_phpmailer($to, $subject, $messageBody, $object, $headers, $sender, $attachmentsArray, $references);
+    return sendMail_phpmailer($to, $subject, $messageBody, $object, $headers, $sender, $attachmentsArray, $references,false,$autoSendReport);
   } else {
     $messageBody=wordwrap($messageBody, 70);
     if ((isset($paramMailerType) and $paramMailerType=='mail') or !$paramMailSmtpUsername or !$paramMailSmtpPassword) {
@@ -2042,7 +2042,7 @@ function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sen
   }
 }
 
-function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $references=null,$canSend=false) {
+function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $references=null,$canSend=false,$autoSendReport) {
   scriptLog('sendMail_phpmailer');
   global $logLevel;
   $paramMailSender=Parameter::getGlobalParameter('paramMailSender');
@@ -2080,7 +2080,7 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
   $mail->mailStatus='WAIT';
   $mail->idle='0';
   // florent
-  if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES' and $canSend==false){
+  if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES' and $canSend==false and $autoSendReport!=true ){
     $curUser=new Affectable(getSessionUser()->id);
     if(stristr($to,$curUser->email)){
        $to=trim(str_replace($curUser->email,"",$to));

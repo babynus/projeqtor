@@ -234,11 +234,11 @@ class AutoSendReport extends SqlElement{
       $message = 'No message';
     }
     $resource = new Resource($this->idReceiver, true);
-    sendMail($resource->email, $title, $message, null, null, null, array($fileName), null);
+    sendMail($resource->email, $title, $message, null, null, null, array($fileName), null,null,false,true);
     $email = explode(',', $this->otherReceiver);
     foreach ($email as $dest){
       if($dest != $resource->email and $dest != ''){
-        sendMail($dest, $title, $message, null, null, null, array($fileName), null);
+        sendMail($dest, $title, $message, null, null, null, array($fileName), null,null,false,true);
       }
     }
 	}
