@@ -223,4 +223,8 @@ CHANGE `value02` `value02` DECIMAL(11,5) UNSIGNED;
 ALTER TABLE `${prefix}expensedetail` 
 CHANGE `value03` `value03` DECIMAL(11,5) UNSIGNED;
 
+-- Kanban
 DELETE FROM `${prefix}plugin` where name='kanban';
+
+-- show Idle on report Work / Work synthesis per activity
+INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `idle`) VALUES (40,'showIdle','boolean',20,0);
