@@ -166,7 +166,7 @@ class ActivityPlanningElementMain extends PlanningElement {
     }
     
     $user=getSessionUser();
-    $priority=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$user->idProfile,'scope'=>'changeManualProgress'));
+    $priority=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$user->getProfile($this->idProject),'scope'=>'changeManualProgress'));
     if(!$this->isManualProgress or $priority and ($priority->rightAccess == 2 or ! $priority->id ) ){
       self::$_fieldsAttributes["progress"]='display';
     }else{
