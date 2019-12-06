@@ -1105,6 +1105,7 @@ abstract class SqlElement {
           $proj= new Project($idP); 
           $listProj = $proj->getTopProjectList(true);
           $listProj = implode(',', $listProj);
+          if (trim($listProj)=='') $listProj='0';
           //$crit = array('nameIndicatorable' => get_class ( $this ), 'idle' => '0','idProject' => $idP);
           $where = "nameIndicatorable='".get_class ( $this )."' and idle = 0 and idProject in (".$listProj.")";
         } else {
