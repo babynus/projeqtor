@@ -45,17 +45,36 @@ $showWorkHistory=false;
 if (getSessionValue('showWorkHistory')) {
   $showWorkHistory=true;
 }
+$showArchive=false;
+if(getSessionValue('showArchive')==1){ $showArchive=true; }
 ?>
+
+
 
 <?php showCloseButton();?>
 
-<div xstyle="width:300px">
+<div style="">
+  <div style="position:absolute;margin-top:-1px;right:12px;z-index:3">
+  <?php if($showArchive==true){?>
+      <button id="historyArchive" title="<?php echo i18n('helpCloseHistoryArchive');?>" region="center" dojoType="dijit.form.Button"  iconClass="iconButtonMark16 iconButtonMark  iconSize16" >
+  <?php }else{?>
+      <button id="historyArchive" title="<?php echo i18n('helpShowHistoryArchive');?>" region="center" dojoType="dijit.form.Button"  iconClass="iconHistArchive16 iconHistArchive iconSize16" >
+  <?php } ?>
+     <script type="dojo/connect" event="onClick" args="evt">
+       saveDataToSession("showArchive",<?php echo ($showArchive)?0:1;?>);
+       var param="&objectClass=<?php echo $objectClass;?>&objectId=<?php echo $objectId;?>";
+       loadDialog("dialogHistory", null, true,param);
+     </script>
+   </button>
+ </div>
+<div style="">
 <?php include '../view/objectDetail.php';?>
 </div>
-
+</div>
 <?php // Centralise button, to be displayed on top and bottom 
 function showCloseButton() {
-  global $objectClass,$showWorkHistory;?> 
+  global $objectClass,$objectId,$showWorkHistory,$showArchive;
+  ?> 
   
   <table style="width: 100%;">
    <tr>
