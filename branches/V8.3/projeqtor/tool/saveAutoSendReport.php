@@ -37,6 +37,7 @@ $monthDay = RequestHandler::getValue('monthFrequency');
 $destination = RequestHandler::getValue('destinationInput');
 $otherDestination = RequestHandler::getValue('otherDestinationInput');
 $name = RequestHandler::getValue('name');
+$name=preg_replace('/[^a-zA-Z0-9_]/','', $name); // Note: may need to be more permissive.
 $sendTime = RequestHandler::getValue('sendTime');
 $hours = substr($sendTime, 1, 2);
 $minutes = substr($sendTime, 4, -3);
@@ -109,6 +110,7 @@ if($action == null){
   $autoSendReport->idReport = $report->id;
   $autoSendReport->idResource = getCurrentUserId();
   $autoSendReport->idReceiver = $destination;
+  
   if($name != ''){
     $autoSendReport->name = $name;
   }else{
