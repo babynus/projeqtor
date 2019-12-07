@@ -242,7 +242,6 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     var alertCheckTime='<?php echo Parameter::getGlobalParameter('alertCheckTime');?>';
     var scaytAutoStartup=<?php echo (Parameter::getUserParameter('scaytAutoStartup')=='NO')?'false':'true';?>;
     var offDayList='<?php echo Calendar::getOffDayList();?>';
-    console.log(offDayList);
     var workDayList='<?php echo Calendar::getWorkDayList();?>';
     var applicationName='<?php echo htmlEncode(((Parameter::getGlobalParameter('paramDbDisplayName'))?Parameter::getGlobalParameter('paramDbDisplayName'):i18n("applicationTitle")),'protectQuotes');?>';
 // MTY - MULTI CALENDAR    

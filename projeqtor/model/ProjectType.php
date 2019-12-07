@@ -171,9 +171,7 @@ class ProjectType extends SqlElement {
   
   public function control() {
     $result="";
-    debugLog("control project type");
     if ($this->isLeadProject) {
-      debugLog('checked');
       $old=$this->getOld();
       if (!$old->isLeadProject) {
         $pList=SqlList::getListWithCrit('Project', array('idProjectType'=>$this->id));
@@ -193,7 +191,6 @@ class ProjectType extends SqlElement {
     if ($result=="") {
       $result='OK';
     }
-    debugLog($result);
     return $result;
     
   }

@@ -90,7 +90,6 @@ function sendChangeKanBan(id,type,newStatut,target,oldStatut){
         dojo.style(nodeTicket, "background-color", oldColor);
         dojo.addClass(nodeTicket,'dojoDndHandle');
       }else{
-        console.log(data);
         dataUserThumb=data.split('[splitcustom2]')[1]; 
     	  idKanban = dojo.byId("idKanban").value;
         splitData=data.split('[splitcustom]');
