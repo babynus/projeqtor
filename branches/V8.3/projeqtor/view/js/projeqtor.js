@@ -2131,7 +2131,6 @@ function finalizeMultipleSave() {
   }
   if (dojo.byId('summaryResult')) {
     contentNode = dojo.byId('resultDivMain');
-    console.log(dojo.byId('summaryResult').value);
     contentNode.innerHTML = dojo.byId('summaryResult').value;
     contentNode.style.display='block';
     msg = dojo.byId('summaryResult').value;
@@ -6267,7 +6266,6 @@ function resizeListDiv() {
         arrayFields[fld]["visible"]=false;
         variableSize-=arrayFields[fld]["size"];
         leftWidth+=arrayFields[fld]["fixWidth"];
-        console.log("hide field "+fld);
         break; // Check if display is possible
       }  
     }
