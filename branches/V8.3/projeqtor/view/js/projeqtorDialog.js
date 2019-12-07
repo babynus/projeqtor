@@ -2486,7 +2486,6 @@ function assignmentChangeResourceTeamForCapacity() {
   });
 }
 function assignmentChangeUniqueResource(newValue) {
-  console.log-(newValue);
   if(newValue==false){
     dojo.byId('assignmentRateRow').style.display="none";
     dojo.byId('assignmentCapacityResourceTeam').style.display="table-row";
@@ -2498,13 +2497,10 @@ function assignmentChangeUniqueResource(newValue) {
 assignmentUserSelectUniqueResourceCurrent=null;
 function assignmentUserSelectUniqueResource(newValue,idRes) {
   if (assignmentUserSelectUniqueResourceCurrent!=null) return;
-  console.log("assignmentUserSelectUniqueResource("+newValue+","+idRes+")");
   assignmentUserSelectUniqueResourceCurrent=idRes;
   dojo.query(".dialogAssignmentManualSelectCheck").forEach(function(node, index, nodelist) {
     var id=node.getAttribute('widgetid');
-    console.log("id="+id.substr(34));
     if (dijit.byId(id) && parseInt(id.substr(34))!=parseInt(idRes)) {
-      console.log("set to unchecked");
       dijit.byId(id).set('checked',false);
     }
   });

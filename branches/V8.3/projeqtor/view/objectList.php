@@ -1032,11 +1032,8 @@ $listStatus = $object->getExistingStatus();
     }
   </script>
   <script type="dojo/connect" event="onMoveColumn" args="evt">
-    console.log("move of columns not stored");
   </script>
   <script type="dojo/connect" event="onResizeColumn" args="colIdx">
-    console.log("resize of columns not stored");
-    console.log("column index is "+colIdx);
   </script>
   <script type="dojo/connect" event="_onFetchComplete" args="items, req">
      if (mustApplyFilter) {
