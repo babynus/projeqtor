@@ -275,7 +275,7 @@ if (property_exists($objectClass,'idStatus')) {
     </td>
     <td class="title" style="height:35px;width:30%;">
       <div style="width:100%;height:100%;position:relative;">
-        <div id="menuName" style="width:100%;position:absolute;top:8px;text-overflow:ellipsis;overflow:hidden;"><?php echo i18n("menu" . $objectClass);?></div>
+        <div id="menuName" style="width:100%;position:absolute;top:8px;text-overflow:ellipsis;overflow:hidden;"><span id="classNameSpan" style=""><?php echo i18n("menu" . $objectClass);?></span></div>
       </div>
     </td>
     <td>   
@@ -289,7 +289,7 @@ if (property_exists($objectClass,'idStatus')) {
         <table style="width: 100%; height: 27px;">
           <tr>
           <?php if ( ! $hideIdSearch ) { ?>
-            <td style="text-align:right;" width="5px" class="allSearchTD idSearchTD">
+            <td style="text-align:right;" width="5px" class="allSearchTD idSearchTD allSearchFixLength">
               <span class="nobr">&nbsp;&nbsp;&nbsp;&nbsp;
               <?php echo i18n("colId");?>
               &nbsp;</span> 
@@ -304,7 +304,7 @@ if (property_exists($objectClass,'idStatus')) {
             </td>
             <?php }?>
               <?php if ( ! $hideNameSearch and (property_exists($obj,'name') or get_class($obj)=='Affectation')) { ?>
-              <td style="text-align:right;" width="5px" class="allSearchTD nameSearchTD">
+              <td style="text-align:right;" width="5px" class="allSearchTD nameSearchTD allSearchFixLength">
                 <span class="nobr">&nbsp;&nbsp;&nbsp;
                 <?php echo i18n("colName");?>
                 &nbsp;</span> 
@@ -331,7 +331,7 @@ if (property_exists($objectClass,'idStatus')) {
 //              if ( !$hideTypeSearch and property_exists($obj,'id' . $objectClass . 'Type') ) { 
 // MTY - LEAVE SYSTEM              
               ?>
-              <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD typeSearchTD">
+              <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD typeSearchTD allSearchFixLength">
                  <span class="nobr">&nbsp;&nbsp;&nbsp;
                 <?php echo i18n("colType");?>
                 &nbsp;</span>
@@ -352,7 +352,7 @@ if (property_exists($objectClass,'idStatus')) {
               </td>
               <?php }?>
               <?php if ( $objectClass=='GlobalView') { ?>
-                <td width="56px" class="allSearchTD resetSearchTD">
+                <td width="56px" class="allSearchTD resetSearchTD allSearchFixLength">
                     <button dojoType="dijit.form.Button" type="button" >
                             <?php echo i18n('resetColor');?>
                             <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
@@ -464,7 +464,7 @@ if (property_exists($objectClass,'idStatus')) {
                 <?php if ( $objectClass == 'Budget'  || property_exists($obj,'idClient') || property_exists($obj,'idMailable') || property_exists($obj,'idIndicatorable')|| property_exists($obj,'idTextable')|| property_exists($obj,'idChecklistable')) {
                 }else {  
                   ?>
-                      <td width="6px" class="allSearchTD resetSearchTD">
+                      <td width="6px" class="allSearchTD resetSearchTD allSearchFixLength">
                         <button dojoType="dijit.form.Button" type="button" >
                             <?php echo i18n('resetColor');?>
                             <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
@@ -479,7 +479,7 @@ if (property_exists($objectClass,'idStatus')) {
               
               <!-- gautier #budgetParent  -->
               <?php if ( !$hideParentBudgetSearch and  $objectClass == 'Budget' ) { ?>
-               <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD parentBudgetSearchTD">
+               <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD parentBudgetSearchTD allSearchFixLength">
                  <span class="nobr">&nbsp;&nbsp;&nbsp;
                 <?php echo i18n("colParentBudget");?>
                 &nbsp;</span>
@@ -499,7 +499,7 @@ if (property_exists($objectClass,'idStatus')) {
                    florent
               -->
               <?php if ($hideClientSearch and $objectClass !='GlobalView') { ?>
-              <td width="6px" class="allSearchTD resetSearchTD">
+              <td width="6px" class="allSearchTD resetSearchTD allSearchFixLength">
                 <button dojoType="dijit.form.Button" type="button">
                     <?php echo i18n('resetColor');?>
                     <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
@@ -515,7 +515,7 @@ if (property_exists($objectClass,'idStatus')) {
               <!-- end  -->
               
               <?php if ( !$hideClientSearch and property_exists($obj,'idClient') ) { ?>
-              <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD clientSearchTD">
+              <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD clientSearchTD allSearchFixLength">
                  <span class="nobr">&nbsp;&nbsp;&nbsp;
                 <?php echo i18n("colClient");?>
                 &nbsp;</span>
@@ -534,7 +534,7 @@ if (property_exists($objectClass,'idStatus')) {
               <!-- Ticket #3988	- Object list : boutton reset parameters  
                    florent
               -->
-              <td width="6px" class="allSearchTD resetSearchTD">
+              <td width="6px" class="allSearchTD resetSearchTD allSearchFixLength">
                 <button dojoType="dijit.form.Button" type="button" >
                     <?php echo i18n('resetColor'); ?>
                     <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
@@ -553,7 +553,7 @@ if (property_exists($objectClass,'idStatus')) {
                  else if ( property_exists($obj,'idChecklistable')) $elementable='idChecklistable';
                  //$elementable=null;
                  if ($elementable) { ?>
-              <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD elementSearchTD">
+              <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD elementSearchTD allSearchFixLength">
                  <span class="nobr">&nbsp;&nbsp;&nbsp;
                 <?php echo i18n("colElement");?>
                 &nbsp;</span>
@@ -569,7 +569,7 @@ if (property_exists($objectClass,'idStatus')) {
                 </select>
               </td>
               <?php if($objectClass !='GlobalView'){?>
-              <td width="6px " class="allSearchTD resetSearchTD">
+              <td width="6px " class="allSearchTD resetSearchTD allSearchFixLength">
                 <button dojoType="dijit.form.Button" type="button" >
                     <?php echo i18n('resetColor');?>
                     <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
@@ -626,7 +626,7 @@ if (property_exists($objectClass,'idStatus')) {
             <!-- CHANGE qCazelles - Filter by status button is moved here -->
             <?php //Filter by status button is moved here
               if ( property_exists($obj, 'idStatus') and Parameter::getGlobalParameter('filterByStatus') == 'YES' and $objectClass!='GlobalView') {  ?>
-            <td width="36px">
+            <td width="36px" class="listButtonClass">
             	<button title="<?php echo i18n('filterByStatus');?>"
 			             dojoType="dijit.form.Button"
 			             id="iconStatusButton" name="iconStatusButton"
@@ -647,7 +647,7 @@ if (property_exists($objectClass,'idStatus')) {
 <?php if (! $comboDetail or 1) {?> 
           </td>
                 </td>
-            <td width="36px">
+            <td width="36px" class="allSearchFixLength">
               <button title="<?php echo i18n('quickSearch')?>"  
                dojoType="dijit.form.Button" 
                id="iconSearchOpenButton" name="iconSearchOpenButton"
@@ -663,7 +663,7 @@ if (property_exists($objectClass,'idStatus')) {
             </td>
 <?php }
       if (! $comboDetail or 1) {?>            
-            <td width="51px">
+            <td width="51px" class="allSearchFixLength">
               <button 
               title="<?php echo i18n('advancedFilter')?>"  
                class="comboButton"
@@ -698,7 +698,7 @@ if (property_exists($objectClass,'idStatus')) {
             </td>
 <?php }?>   
 <?php if (! $comboDetail) {?>  
-            <td width="51px">           
+            <td width="51px" class="allSearchFixLength">           
 							<div dojoType="dijit.form.DropDownButton"							    
 							  id="listColumnSelector" jsId="listColumnSelector" name="listColumnSelector" 
 							  showlabel="false" class="comboButton" iconClass="dijitButtonIcon dijitButtonIconColumn" 
@@ -754,7 +754,7 @@ if (property_exists($objectClass,'idStatus')) {
              </td>
 <?php }?>                 
 <?php if (! $comboDetail) {?>                
-             <td width="36px">
+             <td width="36px" class="allSearchFixLength">
               <button title="<?php echo i18n('printList')?>"  
                dojoType="dijit.form.Button" 
                id="listPrint" name="listPrint"
@@ -773,7 +773,7 @@ if (property_exists($objectClass,'idStatus')) {
           else if ($tmpMode=='download' or $tmpMode=='show') {$modePdf='download';}
         }
       ?>       
-             <td width="36px">
+             <td width="36px" class="allSearchFixLength">
               <button title="<?php echo ($modePdf=='pdf')?i18n('reportPrintPdf'):i18n('reportPrintTemplate');?>"
                dojoType="dijit.form.Button" 
                id="listPrintPdf" name="listPrintPdf"
@@ -787,7 +787,7 @@ if (property_exists($objectClass,'idStatus')) {
                 </script>
               </button>              
             </td>
-            <td width="36px">
+            <td width="36px" class="allSearchFixLength">
               <button title="<?php echo i18n('reportPrintCsv')?>"  
                dojoType="dijit.form.Button" 
                id="listPrintCsv" name="listPrintCsv"
@@ -798,7 +798,7 @@ if (property_exists($objectClass,'idStatus')) {
                 </script>
               </button>              
             </td>
-            <td width="36px">
+            <td width="36px" class="allSearchFixLength">
               <?php if ($objectClass=='GlobalView') {?>
               <div dojoType="dijit.form.DropDownButton"
                              class="comboButton"   
@@ -854,7 +854,7 @@ if (property_exists($objectClass,'idStatus')) {
               <?php }?>
             </td>
 <?php }?>   
-      <td width="36px">
+      <td width="36px" class="allSearchFixLength">
               <button id="newButtonRefresh" dojoType="dijit.form.Button" showlabel="false"
                 title="<?php echo i18n('buttonRefreshList');?>"
                 iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
@@ -866,7 +866,7 @@ if (property_exists($objectClass,'idStatus')) {
  <?php if (! $comboDetail) {            
     $extraPlgButtons=Plugin::getButtons('list', $objectClass);
     foreach ($extraPlgButtons as $bt) { ?>
-    <td width="36px">
+    <td width="36px" class="allSearchFixLength">
       <button id="pluginButtonList<?php echo $bt->id;?>" dojoType="dijit.form.Button" showlabel="false"
         title="<?php echo i18n($bt->buttonName);?>"
         iconClass="<?php echo $bt->iconClass;?>" class="detailButton">
@@ -883,12 +883,12 @@ if (property_exists($objectClass,'idStatus')) {
      }?>             
             
 <?php if ( property_exists($obj,'isEis') and !$hideEisSearch) { ?>
-              <td style="vertical-align: middle; width:15%; min-width:110px; text-align:right;white-space:normal;" class="allSearchTD hideInServiceTD">
+              <td style="vertical-align: middle; width:15%; min-width:110px; text-align:right;white-space:normal;" class="allSearchTD hideInServiceTD allSearchFixLength">
                 <div style="max-height:32px;"> 
                 <?php echo i18n("hideInService");?>
                 </div>
               </td>
-              <td style="width: 10px;text-align: center; align: center;white-space:nowrap;" class="allSearchTD hideInServiceTD">&nbsp;
+              <td style="width: 10px;text-align: center; align: center;white-space:nowrap;" class="allSearchTD hideInServiceTD allSearchFixLength">&nbsp;
                 <?php $hideInService=Parameter::getUserParameter('hideInService');?>
                 <div title="<?php echo i18n('hideInService')?>" dojoType="dijit.form.CheckBox" 
                 class="whiteCheck" <?php if ($hideInService=='true') echo " checked ";?>
@@ -901,10 +901,10 @@ if (property_exists($objectClass,'idStatus')) {
               </td>
               <?php }?> 
 <?php if (! $hideShowIdleSearch and ! $comboDetail) {?> 
-            <td style="text-align: right; width:10%; min-width:50px;width:80px;white-space:normal;" class="allSearchTD idleSearchTD">
+            <td style="text-align: right; width:10%; min-width:50px;width:80px;white-space:normal;" class="allSearchTD idleSearchTD allSearchFixLength">
               <?php echo i18n("labelShowIdleShort");?>
             </td>
-            <td style="width: 10px;text-align: center; align: center;white-space:nowrap;" class="allSearchTD idleSearchTD">&nbsp;
+            <td style="width: 10px;text-align: center; align: center;white-space:nowrap;" class="allSearchTD idleSearchTD allSearchFixLength">&nbsp;
               <div title="<?php echo i18n('labelShowIdle')?>" dojoType="dijit.form.CheckBox" 
                 class="whiteCheck" <?php if ($showIdle) echo " checked ";?>
                 type="checkbox" id="listShowIdle" name="listShowIdle" <?php if(!$comboDetail and sessionValueExists('listShowIdle'.$objectClass)){   if(getSessionValue('listShowIdle'.$objectClass)== "on"){ ?>checked="checked" <?php }}?>>
