@@ -200,6 +200,9 @@ class QuotationMain extends SqlElement {
   public function control(){
     $result="";
    		
+    if ($this->validityEndDate and $this->sendDate and $this->validityEndDate<$this->sendDate) {
+      $result.='<br/>' . i18n('errorStartEndDates',array(i18n('colSendDate'),i18n('colOfferValidityEndDate')));
+    }
    	$defaultControl=parent::control();
   	
    	if ($defaultControl!='OK') {
