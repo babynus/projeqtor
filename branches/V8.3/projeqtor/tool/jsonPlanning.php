@@ -1525,6 +1525,7 @@
     $cpt=0;
     $arrayTask=array();
     foreach ($resultArray as $line) {
+      debugLog($line);
     	$cpt++;
     	$arrayTask[$line['reftype'].'#'.$line['refid']]=array('id'=>$line['id']);
     	$pct=($line['plannedwork']>0)?round(100*$line['realwork']/$line['plannedwork'],0):'';
@@ -1694,6 +1695,8 @@
         //echo $tab.$tab.$tab.'<Value>'.$pct.'</Value>' . $nl;
         //echo $tab.$tab.$tab.'</TimephasedData>' . $nl;
       //}
+      echo $tab.$tab.$tab.'<projeqtorPlanningModeId>'.$line["idplanningmode"].'</projeqtorPlanningModeId>'. $nl;;
+      echo $tab.$tab.$tab.'<projeqtorPlanningModeName>'.SqlList::getNameFromId('PlanningMode',$line['idplanningmode']).'</projeqtorPlanningModeName>'. $nl;;
       echo $tab.$tab.'</Task>' . $nl;
     }
     echo $tab.'</Tasks>' . $nl;
