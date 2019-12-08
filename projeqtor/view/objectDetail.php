@@ -7838,11 +7838,11 @@ function endBuffering($prevSection, $included) {
       'calendar'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
       'checklistdefinitionline'=>array('2'=>'bottom', '3'=>'bottom','99'=>'description'),
       'checklist'=>array('2'=>'bottom', '3'=>'bottom','99'=>'checklist'),
-      'componentcomposition'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
-      'componentstructure'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
-      'componentversions'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
-      'componentversioncomposition'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
-      'componentversionstructure'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
+      'componentcomposition'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
+      'componentstructure'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
+      'componentversions'=>array('2'=>'left', '3'=>'right ','99'=>'configuration'),
+      'componentversioncomposition'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
+      'componentversionstructure'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
       'context'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
       'delivery'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
       'description'=>array('2'=>'left', '3'=>'left','99'=>'description'), 
@@ -7885,8 +7885,8 @@ function endBuffering($prevSection, $included) {
       'productcomposition'=>array('2'=>'right', '3'=>'right','99'=>'configuration'), 
       'productbusinessfeatures'=>array('2'=>'right', '3'=>'right','99'=>'detail'), 
       'productversions'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
-      'productversioncomposition'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
-      'productversioncompatibility'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
+      'productversioncomposition'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
+      'productversioncompatibility'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
       'providerterm'=>array('2'=>'right', '3'=>'extra','99'=>'link'), 
       'receivers'=>array('3'=>'bottom', '3'=>'extra','99'=>'treatment'), 
       'resourcesofobject'=>array('2'=>'bottom', '3'=>'extra','99'=>'resources'), 
@@ -7930,6 +7930,7 @@ function endBuffering($prevSection, $included) {
   }
   $sectionName=strtolower($prevSection);
   $sectionName=str_replace('_right','',$sectionName);
+  //debugLog("$sectionName => ".((isset($sectionPosition[$sectionName]))?$sectionPosition[$sectionName][$nbColMax].'|'.$sectionPosition[$sectionName][99]:'right|detail'));
   //if($layout=='tab' and !$included and ! $print ){
   if($layout=='tab' and ! $print ){
     $groupe='detail';
@@ -7937,7 +7938,6 @@ function endBuffering($prevSection, $included) {
       $groupe=$sectionPosition[$sectionName]['99'];
     }
     if (! isset($panes[$groupe])) $panes[$groupe]="";
-    debugLog("$sectionName => $groupe");
     $panes[$groupe].=$display;
 //     if($groupe=='description'){
 //       $paneDescription.=$display;
