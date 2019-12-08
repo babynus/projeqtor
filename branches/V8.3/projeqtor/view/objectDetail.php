@@ -35,16 +35,20 @@ $rightPane="";
 $extraPane="";
 $bottomPane="";
 $historyPane="";
-$paneDetail="";
-$paneDescription="";
-$paneLink="";
-$paneTreatment="";
-$paneDependency="";
-$paneProgress="";
-$paneNote="";
-$paneAllocation="";
-$paneConfiguration="";
-$paneFichier="";
+$panes=array();
+$arrayPanes=array('paneDescription','paneTreatment','paneAllocation','paneProgress','paneConfiguration','paneDetail','paneDependency','paneCheckList','paneLink','paneFichier','paneNote','paneHistory');
+// $panes['detail']="";
+// $panes['description']="";
+// $panes['link']="";
+// $panes['treatment']="";
+// $panes['dependency']="";
+// $panes['progress']="";
+// $panes['note']="";
+// $panes['allocation']="";
+// $panes['configuration']="";
+// $panes['fichier']="";
+// $panes['history']="";
+// $panes['checkList']="";
 $arrayGroupe=array();
 $layout=Parameter::getUserParameter('paramLayoutObjectDetail');
 scriptLog('   ->/view/objectDetail.php');
@@ -61,7 +65,6 @@ if (false===function_exists('lcfirst')) {
   }
 }
 $preseveHtmlFormatingForPDF=true;
-$arrayPanes=array('paneDescription','paneTreatment','paneAllocation','paneProgress','paneConfiguration','paneDetail','paneDependency','paneCheckList','paneLink','paneFichier','paneNote','paneHistory');
 // ********************************************************************************************************
 // MAIN PAGE
 // ********************************************************************************************************
@@ -342,7 +345,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
  */
 function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $parentHidden=false) {
   scriptLog("drawTableFromObject(obj, included=$included, parentReadOnly=$parentReadOnly)");
-  global $toolTip, $cr, $print, $treatedObjects, $displayWidth, $outMode, $comboDetail, $collapsedList, $printWidth, $profile, $detailWidth, $readOnly, $largeWidth, $widthPct, $nbColMax, $preseveHtmlFormatingForPDF, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier,$arrayGroupe, $nbColMax, $section, $beforeAllPanes, $colWidth,$objInsert,$layout;
+  global $toolTip, $cr, $print, $treatedObjects, $displayWidth, $outMode, $comboDetail, $collapsedList, $printWidth, $profile, $detailWidth, $readOnly, $largeWidth, $widthPct, $nbColMax, $preseveHtmlFormatingForPDF, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane,$panes,$arrayGroupe, $nbColMax, $section, $beforeAllPanes, $colWidth,$objInsert,$layout;
   global $section, $prevSection;
   $ckEditorNumber=0; // Will be used only if getEditor=="CK" for CKEditor
   //gautier
@@ -2885,7 +2888,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
 
 function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, $outMode, $prevSection, $nbCol, $nbBadge=null, $included=null, $obj=null) {
   //scriptLog("startTitlePane(classObbj=$classObj, section=$section, collapsedList=array, widthPct=$widthPct, print=$print, outMode=$outMode, prevSection=$prevSection, nbCol=$nbCol, nbBadge=$nbBadge)");
-  global $comboDetail, $currentColumn, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $beforeAllPanes,$type, $arrayGroupe, $layout;
+  global $comboDetail, $currentColumn, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane,$panes, $beforeAllPanes,$type, $arrayGroupe, $layout;
   if (!$currentColumn) $currentColumn=0;
   if ($prevSection) {
     echo '</table>';
@@ -2927,7 +2930,8 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
     $fontSize=(isset($attrs['font-size']))?intval($attrs['font-size']):'';
     $margin=0;
     //florent ticket 4102
-    if( $layout=='tab' and $included==false and !$print){
+    //if( $layout=='tab' and $included==false and !$print){
+    if( $layout=='tab' and !$print){
       $margin=4;
       $tabName="Detail";
       if(isset($arrayGroupe[$lc]['99'])){
@@ -2936,8 +2940,9 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
       $sessionTabName='detailTab'.$classObj;
       $selectedTab=($obj->id)?getSessionValue($sessionTabName,'Description'):'Description';
       $paneName='pane'.$tabName;
+      $paneIndex=lcfirst($tabName);
       $extName=($comboDetail)?"_detail":'';
-      if (!isset($$paneName) or $$paneName=='') {
+      if (!isset($panes[$paneIndex]) or $panes[$paneIndex]=='') {
         echo '<div id="'.$tabName.$extName.'" dojoType="dijit.layout.ContentPane" class="detailTabClass" title="'.i18n('tab'.ucfirst($tabName)).(($nbBadge!==null )?'<div id=\''.$section.'BadgeTab\' class=\'sectionBadge\' style=\'right:0px;top:0px;width:auto;padding:0px 7px;font-weight:normal;zoom:0.9; -moz-transform: scale(0.9);'.(($nbBadge==0)?'opacity:0.5;':'').'\' >'.$nbBadge.'</div>':'').'" style="width:100%;height:100%;overflow:auto;" '.(($tabName==$selectedTab)?' selected="true" ':'').'>';
         echo ' <script type="dojo/method" event="onShow" >'; 
         echo '   saveDataToSession(\''.$sessionTabName.'\',\''.$tabName.'\');';
@@ -7810,25 +7815,26 @@ function getNbColMax($displayWidth, $print, $printWidth, $obj) {
 }
 
 function startBuffering() {
-  global $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane,$paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $paneHistory, $paneCheckList, $nbColMax, $section,$arrayGroupe;
+  global $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane,$panes, $paneHistory, $paneCheckList, $nbColMax, $section,$arrayGroupe;
   if (!$reorg) return;
   ob_start();
 }
 
 function endBuffering($prevSection, $included) {
   //scriptLog("endBuffering($prevSection, $included)");
-  global $print, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane, $paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier,$paneHistory, $paneCheckList, $nbColMax, $section, $beforeAllPanes, $arrayGroupe, $layout; 
+  global $print, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane, $panes, $nbColMax, $section, $beforeAllPanes, $arrayGroupe, $layout; 
   $sectionPosition=array(
       'assignment'=>array('2'=>'left', '3'=>'extra','99'=>'progress'),
       'affectations'=>array('2'=>'right', '3'=>'right','99'=>'allocation'),
       'affectationresourceteamresource'=>array('2'=>'right', '3'=>'right','99'=>'allocation'),
-      'affectationsresourceteam'=>array('2'=>'right', '3'=>'right','99'=>'allocation'),
+      'affectationsresourceteam'=>array('2'=>'right', '3'=>'right','99'=>'resources'),
       'answer'=>array('2'=>'right', '3'=>'right','99'=>'progress'),
       'approver'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
       'attachment'=>array('2'=>'bottom', '3'=>'extra','99'=>'fichier'), 
       'attendees'=>array('2'=>'right', '3'=>'extra','99'=>'progress'), 
       'billline'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
       'billlineterm'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
+      'budgetsynthesis'=>array('2'=>'bottom', '3'=>'bottom','99'=>'progress'), 
       'calendar'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
       'checklistdefinitionline'=>array('2'=>'bottom', '3'=>'bottom','99'=>'description'),
       'checklist'=>array('2'=>'bottom', '3'=>'bottom','99'=>'checklist'),
@@ -7845,19 +7851,21 @@ function endBuffering($prevSection, $included) {
       'expensedetail'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
       'helpallowedwords'=>array('3'=>'bottom', '3'=>'extra','99'=>'detail'), 
       'helpallowedreceivers'=>array('3'=>'bottom', '3'=>'extra','99'=>'detail'), 
-      'hierarchicorganizationprojects'=>array('2'=>'bottom', '3'=>'extra','99'=>'dependency'),
+      'hierarchicorganizationprojects'=>array('2'=>'bottom', '3'=>'extra','99'=>'projects'),
       'history'=>array('2'=>'history', '3'=>'history','99'=>'history'),
       'iban'=>array('2'=>'right', '3'=>'extra','99'=>'detail'), 
       'internalalert'=>array('2'=>'right', '3'=>'extra','99'=>'detail'), 
       'joblist'=>array('2'=>'bottom', '3'=>'bottom','99'=>'checklist'),
       'jobdefinition'=>array('2'=>'bottom', '3'=>'bottom','99'=>'description'),
       'link'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'), 
-      'link_requirement'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'), 
-      'link_deliverable'=>array('2'=>'left', '3'=>'extra','99'=>'link'), 
       'link_activity'=>array('2'=>'left', '3'=>'extra','99'=>'link'),
+      'link_deliverable'=>array('2'=>'left', '3'=>'extra','99'=>'link'), 
+      'link_requirement'=>array('2'=>'bottom', '3'=>'extra','99'=>'coverage'), 
+      'link_testcase'=>array('2'=>'bottom', '3'=>'extra','99'=>'coverage'),
       'listtypeusingworkflow'=>array('2'=>'right', '3'=>'extra','99'=>'link'), 
       'lock'=>array('2'=>'left', '3'=>'left','99'=>'description'), 
       'mailtext'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
+      'members'=>array('2'=>'bottom', '3'=>'bottom','99'=>'resources'),
       'miscellaneous'=>array('2'=>'right', '3'=>'extra','99'=>'detail'), 
       'note'=>array('2'=>'bottom', '3'=>'extra','99'=>'note'), 
       'notificationtitle'=>array('2'=>'left', '3'=>'left','99'=>'description'), 
@@ -7881,14 +7889,14 @@ function endBuffering($prevSection, $included) {
       'productversioncompatibility'=>array('2'=>'left', '3'=>'extra','99'=>'configuration'),
       'providerterm'=>array('2'=>'right', '3'=>'extra','99'=>'link'), 
       'receivers'=>array('3'=>'bottom', '3'=>'extra','99'=>'treatment'), 
-      'resourcesofobject'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'), 
+      'resourcesofobject'=>array('2'=>'bottom', '3'=>'extra','99'=>'resources'), 
       'resourcecost'=>array('2'=>'right', '3'=>'extra','99'=>'detail'),
       'subprojects'=>array('2'=>'right', '3'=>'right','99'=>'dependency'),
       'subproducts'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
       'subbudgets'=>array('2'=>'right', '3'=>'extra','99'=>'dependency'), 
       'submissions'=>array('2'=>'right', '3'=>'extra','99'=>'progress'), 
       'subscriptioncontact'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
-      'synthesis'=>array('2'=>'right', '3'=>'right','99'=>'progress'), 
+      'synthesis'=>array('2'=>'right', '3'=>'right','99'=>'progress'),
       'successor'=>array('2'=>'bottom', '3'=>'bottom','99'=>'dependency'), 
       'target'=>array('2'=>'bottom', '3'=>'extra','99'=>'treatment'), 
       'treatment'=>array('2'=>'right', '3'=>'right','99'=>'treatment'),
@@ -7896,11 +7904,10 @@ function endBuffering($prevSection, $included) {
       'ticket'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
       'ticketscontact'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
       'ticketsclient'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
-      'link_testcase'=>array('2'=>'bottom', '3'=>'extra','99'=>'progress'),
       'tenders'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
-      'testcaserun'=>array('2'=>'bottom', '3'=>'bottom','99'=>'progress'), 
-      'testcaserunsummary'=>array('2'=>'left', '3'=>'extra','99'=>'progress'), 
-      'testcasesummary'=>array('2'=>'right', '3'=>'extra','99'=>'progress'),
+      'testcaserun'=>array('2'=>'bottom', '3'=>'bottom','99'=>'coverage'), 
+      'testcaserunsummary'=>array('2'=>'left', '3'=>'extra','99'=>'coverage'), 
+      'testcasesummary'=>array('2'=>'right', '3'=>'extra','99'=>'coverage'),
       'totalfinancialsynthesis'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
       'validation'=>array('2'=>'right', '3'=>'right','99'=>'progress'),
       'valuealertoverwarningoverokunder'=>array('2'=>'right', '3'=>'right','99'=>'progress'),
@@ -7923,36 +7930,40 @@ function endBuffering($prevSection, $included) {
   }
   $sectionName=strtolower($prevSection);
   $sectionName=str_replace('_right','',$sectionName);
-  if($layout=='tab' and !$included and ! $print ){
+  //if($layout=='tab' and !$included and ! $print ){
+  if($layout=='tab' and ! $print ){
     $groupe='detail';
     if(isset($sectionPosition[$sectionName]['99'])){
       $groupe=$sectionPosition[$sectionName]['99'];
     }
-    if($groupe=='description'){
-      $paneDescription.=$display;
-    }else if($groupe=='treatment'){
-      $paneTreatment.=$display;
-    }else if($groupe=='dependency'){
-      $paneDependency.=$display;
-    }else if($groupe=='progress'){
-      $paneProgress.=$display;
-    }else if($groupe=='note'){
-      $paneNote.=$display;
-    }else if($groupe=='allocation'){
-      $paneAllocation.=$display;
-    }else if($groupe=='link'){
-      $paneLink.=$display;
-    }else if($groupe=='detail'){
-      $paneDetail.=$display;
-    }else if($groupe=='fichier'){
-      $paneFichier.=$display;
-    }else if($groupe=='configuration'){
-      $paneConfiguration.=$display;
-    }else if($groupe=='checklist') {
-      $paneCheckList.=$display;      
-    }else if ($groupe=='history') {
-      $paneHistory.=$display;     
-    }
+    if (! isset($panes[$groupe])) $panes[$groupe]="";
+    debugLog("$sectionName => $groupe");
+    $panes[$groupe].=$display;
+//     if($groupe=='description'){
+//       $paneDescription.=$display;
+//     }else if($groupe=='treatment'){
+//       $paneTreatment.=$display;
+//     }else if($groupe=='dependency'){
+//       $paneDependency.=$display;
+//     }else if($groupe=='progress'){
+//       $paneProgress.=$display;
+//     }else if($groupe=='note'){
+//       $paneNote.=$display;
+//     }else if($groupe=='allocation'){
+//       $paneAllocation.=$display;
+//     }else if($groupe=='link'){
+//       $paneLink.=$display;
+//     }else if($groupe=='detail'){
+//       $paneDetail.=$display;
+//     }else if($groupe=='fichier'){
+//       $paneFichier.=$display;
+//     }else if($groupe=='configuration'){
+//       $paneConfiguration.=$display;
+//     }else if($groupe=='checklist') {
+//       $paneCheckList.=$display;      
+//     }else if ($groupe=='history') {
+//       $paneHistory.=$display;     
+//     }
   }else{
     if ($nbColMax==1) {
       $leftPane.=$display;
@@ -7985,7 +7996,7 @@ function endBuffering($prevSection, $included) {
 }
 
 function finalizeBuffering() {
-  global $print,$reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane, $arrayPanes, $paneDescription,$paneTreatment,$paneDependency,$paneProgress,$paneNote,$paneAllocation,$paneLink,$paneConfiguration,$paneFichier, $paneHistory, $paneCheckList, $arrayGroupe, $nbColMax, $section, $beforeAllPanes,$layout;
+  global $print,$reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane, $arrayPanes, $panes, $arrayGroupe, $nbColMax, $section, $beforeAllPanes,$layout;
   if (!$reorg) return;
   if (!$leftPane and $rightPane) {
     $leftPane=$rightPane;
@@ -7996,11 +8007,16 @@ function finalizeBuffering() {
   echo '<table style="width=100%">';
   $showBorders=false;
   if($layout=='tab' and !$print){ // Attention, panes start with DIV that is not closed
-    foreach ($arrayPanes as $paneName) {
-      if(isset($$paneName) and $$paneName){
-        echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$$paneName.'</div></div></td></tr>';
+    foreach ($panes as $paneName=>$paneContent) {
+      if($paneContent!=''){     
+        echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$paneContent.'</div></div></td></tr>';
       }
-    }  
+    }
+//     foreach ($arrayPanes as $paneName) {
+//       if(isset($$paneName) and $$paneName){
+//         echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid green':'').'">'.$$paneName.'</div></div></td></tr>';
+//       }
+//     }  
   }else{
     if ($nbColMax==1) {
       echo '<tr><td style="width:100%;vertical-align: top;'.(($showBorders)?'border:1px solid red':'').'">'.$leftPane.'</td></tr>';

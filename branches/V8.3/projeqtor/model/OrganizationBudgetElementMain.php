@@ -310,7 +310,7 @@ function periodChanged(theId) {
 //        theMsg.className = "messageOK";
 //        theMsg.style.textAlign = "center";
 //      }
-      loadContent("objectDetail.php?OrganizationBudgetPeriod="+periodYear, "detailDiv", dojo.byId("listForm"));
+      loadContent("objectDetail.php?OrganizationBudgetPeriod="+periodYear, "detailDiv", "listForm");
   }
 }
 </script>';
