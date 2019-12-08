@@ -60,7 +60,6 @@ function showXhrErrorInErrorPopup(error,msg) {
         dojo.addClass(contentNode, "messageERROR");
         dojo.addClass(contentNode, "closeBoxIconLeave");
         contentNode.innerHTML = "<h3>"+errorTitle+"</h3><br>"+msg+"<br>"+theError+"<br><i>"+i18n("clickIntoToClose")+"</i>";
-
         // Show result
         contentNode.style.display = "block";
     } 
@@ -86,8 +85,7 @@ function showSqlElementResultInPopup(msg) {
         contentNode = dojo.byId('resultPopup');
         dojo.removeClass(contentNode);
         dojo.addClass(contentNode, "message"+type);
-        dojo.addClass(contentNode, "closeBoxIconLeave");
-        contentNode.innerHTML = i18n("result")+"<br><br>"+theMsg+"<br><br><i>"+i18n("clickIntoToClose")+"</i>";
+        contentNode.innerHTML = "<br/>"+theMsg;
 
         // Show result
         contentNode.style.display = "block";
@@ -96,7 +94,7 @@ function showSqlElementResultInPopup(msg) {
         if (type=="OK" || type=="NO_CHANGE") {
             dojo.fadeIn({
               node : contentNode,
-              duration : 1000,
+              duration : 100,
               onEnd : function() {
                 dojo.fadeOut({
                   node : contentNode,
@@ -105,14 +103,15 @@ function showSqlElementResultInPopup(msg) {
               }
             }).play();
         } else { // fade long time
+          dojo.addClass(contentNode, "closeBoxIconLeave");
             dojo.fadeIn({
               node : contentNode,
-              duration : 7000,
+              duration : 100,
               onEnd : function() {
-                dojo.fadeOut({
-                  node : contentNode,
-                  duration : 5000
-                }).play();
+//                dojo.fadeOut({
+//                  node : contentNode,
+//                  duration : 10000
+//                }).play();
               }
             }).play();        
         }

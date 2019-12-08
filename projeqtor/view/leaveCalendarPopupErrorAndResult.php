@@ -43,18 +43,7 @@ require_once "../tool/projeqtor.php";
 <div
     dojoType="dijit.layout.ContentPane"
     id="resultPopup"
-    style ="width:400px !important; height: 120px; 
-            text-align:center; 
-            position:absolute; 
-            top:50%; left:25%; 
-            transform:translate(-50%, -50%);
-            z-index: 99999;
-            font-weight: bold;
-            border: 1px solid #CCCCCC;
-            border-radius: 10px;
-            box-shadow: 5px 5px 10px #656565;
-            cursor:pointer; 
-            display: none
+    style ="
            "
     onclick="dojo.byId('resultPopup').style.display='none';"       
     >

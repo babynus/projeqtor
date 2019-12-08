@@ -273,7 +273,7 @@ html, body {
     #buttonDiv {  
       border-bottom: 1px solid #ffffff;
     }
-    #resultDivMain, #resultDiv, .resultDiv{
+    #resultDivMain, #resultDiv, .resultDiv, #resultPopup{
       max-height:220px;
 /*    width:48%;
       position:absolute;
