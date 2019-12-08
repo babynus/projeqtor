@@ -1431,8 +1431,12 @@ function finalizeMessageDisplay(destination, validationType) {
     lastOperation = "plan";
     validationType = null;
   }
-  if (destination == 'resultDivMain') {
+  if (destination == 'resultDivMain' || destination == 'resultDiv') {
     contentNode.style.display = "block";
+    if (destination == 'resultDiv') {
+      contentNode.style.padding='0';
+      contentNode.style.position='absolute';
+    }
   }
   var noHideWait = false;
   if (!(contentWidget && contentNode && lastOperationStatus && lastOperation)) {

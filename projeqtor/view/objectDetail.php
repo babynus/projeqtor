@@ -7930,7 +7930,6 @@ function endBuffering($prevSection, $included) {
   }
   $sectionName=strtolower($prevSection);
   $sectionName=str_replace('_right','',$sectionName);
-  //debugLog("$sectionName => ".((isset($sectionPosition[$sectionName]))?$sectionPosition[$sectionName][$nbColMax].'|'.$sectionPosition[$sectionName][99]:'right|detail'));
   //if($layout=='tab' and !$included and ! $print ){
   if($layout=='tab' and ! $print ){
     $groupe='detail';
