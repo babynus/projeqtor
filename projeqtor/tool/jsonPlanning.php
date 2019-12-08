@@ -1196,9 +1196,11 @@
     $minDate = '';
     $resultArray=array();
     $selectItems="('',0)";
+    $allItems=array();
     if ($nbQueriedRows > 0) {
       while ($line = Sql::fetchLine($result)) {
       	$line=array_change_key_case($line,CASE_LOWER);
+      	$allItems[$line['id']]=$line['id'];
       	$selectItems.=",('".$line['reftype']."',".$line['refid'].")";
       	if ($applyFilter and !isset($arrayRestrictWbs[$line['wbssortable']])) continue; // Filter applied and item is not selected and not a parent of selected
         $pStart="";
@@ -1524,6 +1526,7 @@
     
     $cpt=0;
     $arrayTask=array();
+    
     foreach ($resultArray as $line) {
       debugLog($line);
     	$cpt++;
@@ -1671,6 +1674,7 @@
       $depList=$d->getSqlElementsFromCriteria($crit,false);
       $nbHour = Parameter::getGlobalParameter('dayTime');
       foreach ($depList as $dep) {
+        if (! isset($allItems[$dep->predecessorId])) continue;
         echo $tab.$tab.$tab.'<PredecessorLink>' . $nl;
         echo $tab.$tab.$tab.$tab.'<PredecessorUID>' . htmlEncode($dep->predecessorId) . '</PredecessorUID>' . $nl;
         echo $tab.$tab.$tab.$tab.'<Type>1</Type>' . $nl;
