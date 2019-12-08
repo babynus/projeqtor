@@ -275,7 +275,7 @@ if (property_exists($objectClass,'idStatus')) {
     </td>
     <td class="title" style="height:35px;width:30%;">
       <div style="width:100%;height:100%;position:relative;">
-        <div id="menuName" style="width:100%;position:absolute;top:8px;text-overflow:ellipsis;overflow:hidden;"><span id="classNameSpan" style=""><?php echo i18n("menu" . $objectClass);?></span></div>
+        <div id="menuName" style="width:100%;position:absolute;top:8px;text-overflow:ellipsis;overflow:hidden;"><span id="classNameSpan" style="padding-left:5px;"><?php echo i18n("menu" . $objectClass);?></span></div>
       </div>
     </td>
     <td>   

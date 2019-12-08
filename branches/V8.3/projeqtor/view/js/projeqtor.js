@@ -6229,9 +6229,10 @@ function resizeListDiv() {
       "idle":{"set":false,"visible":true,"fixWidth":0,"size":0},
       "reset":{"set":false,"visible":true,"fixWidth":0,"size":0},
       "client":{"set":false,"visible":true,"fixWidth":0,"size":3},
-      "parentBudget":{"set":false,"visible":true,"fixWidth":0,"size":3}
+      "parentBudget":{"set":false,"visible":true,"fixWidth":0,"size":3},
+      "element":{"set":false,"visible":true,"fixWidth":0,"size":3}
   };
-  var arrayFieldsOrder=["reset","client","parentBudget","type","idle","id","name"];
+  var arrayFieldsOrder=["reset","element","client","parentBudget","type","idle","id","name"];
   for (var i=0;i<arrayFieldsOrder.length;i++) {
     var fld=arrayFieldsOrder[i];
     if (arrayFields[fld]["size"]==0) continue;
@@ -6272,6 +6273,7 @@ function resizeListDiv() {
     cptLoop++;
   }
   var finalSize=Math.floor(leftWidth/variableSize);
+  if (finalSize>100) finalSize=100;
   for (var i=0;i<arrayFieldsOrder.length;i++) {
     var fld=arrayFieldsOrder[i];
     if (arrayFields[fld]["visible"]==false) {
