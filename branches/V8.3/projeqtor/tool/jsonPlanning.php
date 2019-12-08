@@ -1528,7 +1528,6 @@
     $arrayTask=array();
     
     foreach ($resultArray as $line) {
-      debugLog($line);
     	$cpt++;
     	$arrayTask[$line['reftype'].'#'.$line['refid']]=array('id'=>$line['id']);
     	$pct=($line['plannedwork']>0)?round(100*$line['realwork']/$line['plannedwork'],0):'';
