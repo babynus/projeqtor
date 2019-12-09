@@ -4793,8 +4793,11 @@ function getExtraReadonlyFields(idType,idStatus,idProfile) {
   });
 }
 function intercepPointKey(obj, event) {
-  event.preventDefault();
-  setTimeout('replaceDecimalPoint("' + obj.id + '");', 1);
+	var attr = dijit.byId(obj.id).get('readOnly');
+	if(attr == false){
+		event.preventDefault();
+		setTimeout('replaceDecimalPoint("' + obj.id + '");', 1);
+	}
   return false;
 }
 function replaceDecimalPoint(field) {
