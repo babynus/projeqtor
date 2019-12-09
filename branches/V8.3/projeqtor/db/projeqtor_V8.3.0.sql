@@ -207,8 +207,6 @@ INSERT INTO `${prefix}cronexecution` (`cron`, `fileExecuted`, `idle` ,`fonctionN
 -- gautier #4304
 ALTER TABLE `${prefix}type` ADD `isLeadProject` int(1) unsigned default '0';
 
-INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES 
-(227, 'menuVersionsComponentPlanning', 174, 'item', 395, NULL, 0, 'Work');
 
 ALTER TABLE `${prefix}expensedetailtype` 
 CHANGE `value01` `value01` DECIMAL(11,5) UNSIGNED;
@@ -233,8 +231,8 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 -- Planning Component Versions
 -- ======================================
 
-INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
-(227,'menuVersionsComponentPlanning',173,'item', 395,NULL,0,Work);
+INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES 
+(227, 'menuVersionsComponentPlanning', 173, 'item', 395, NULL, 0, 'Work');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,227,1);
