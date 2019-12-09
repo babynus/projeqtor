@@ -5,7 +5,6 @@
 require_once "../tool/projeqtor.php";
 scriptLog('   ->/tool/jsonVersionsPlanning.php');
 
-echo '{"identifier":"id", "items":[';
 $showOnlyActivesVersions=Parameter::getUserParameter('showOnlyActivesVersions');
 $pvsArray = array();
 //CHANGE qCazelles - Correction GANTT - Ticket #100
@@ -61,14 +60,15 @@ if(RequestHandler::getValue('objectVersion')=='ComponentVersion'){
 }
 
 if($showOnlyActivesVersions== 1){
-  debugLog('1');
   $pvComponentActList= array();
   $productVersionActiv= array();
   $listIdPv='';
   $productVersion = new ProductVersion();
   $componentVersion = new ComponentVersion();
   $where=" isStarted=1 and idle=0  and isDelivered=0 and isEis=0 ";
+  debugLog($where);
   $listActiveComponentVersion=$componentVersion->getSqlElementsFromCriteria(null,null,$where);
+  debugLog($listActiveComponentVersion);
   $listIdPv=implode(',',$pvsArray);
   $where.="and id in ($listIdPv)";
   foreach ($productVersion->getSqlElementsFromCriteria(null,null,$where) as $id=>$objPvValide){
@@ -76,8 +76,8 @@ if($showOnlyActivesVersions== 1){
   }
   foreach ($pvsArray as  $idProductV){
     $listComponentV=ProductVersionStructure::getComposition($idProductV);
-    debugLog($listComponentV);
-    debugLog($listActiveComponentVersion);
+//     debugLog($listComponentV);
+//     debugLog($listActiveComponentVersion);
     if(isset($listComponentV) and isset($listActiveComponentVersion)){
       foreach ($listComponentV as $idComponentV){
         foreach ($listActiveComponentVersion as $id=>$ActivComponentVersion) {
@@ -90,9 +90,15 @@ if($showOnlyActivesVersions== 1){
     }
   }
   $allProductVersionActive=$productVersionActiv+$pvComponentActList;
-  if(empty($allProductVersionActive));
+  if(empty($allProductVersionActive)){ 
+    echo '<div class="messageWARNING">'.i18n('noCurrentVersion').'</div>';
+    return; 
+  }
+  echo '{"identifier":"id", "items":[';
   foreach ($allProductVersionActive as $id) {
     $productVersion= new ProductVersion($id);
+    $list=$productVersion->searchAtivityForVersion();
+    //debugLog($list);
     $res=$productVersion->displayVersion();
     if($res=='true'){
       foreach (ProductVersionStructure::getComposition($productVersion->id) as $idComponentVersion) {
@@ -104,6 +110,7 @@ if($showOnlyActivesVersions== 1){
   }
 ///
 }else{
+  echo '{"identifier":"id", "items":[';
   foreach ($pvsArray as $idProductVersion) {
     $productVersion = new ProductVersion($idProductVersion);
     $res=$productVersion->displayVersion();
