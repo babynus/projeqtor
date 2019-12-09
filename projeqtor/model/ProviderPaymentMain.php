@@ -169,6 +169,17 @@ class ProviderPaymentMain extends SqlElement {
     }
     return $result;
   }
+  //gautier #4345
+  public function delete() {
+    $result=parent::delete();
+    if (getLastOperationStatus($result)=='OK') {
+      if($this->idProviderBill){
+        $bill=new ProviderBill($this->idProviderBill);
+        $bill->retreivePayments();
+      }
+    }
+    return $result;
+  }
   
   public function save() {
     $old=$this->getOld();
