@@ -61,12 +61,13 @@ if(RequestHandler::getValue('objectVersion')=='ComponentVersion'){
 }
 
 if($showOnlyActivesVersions== 1){
+  debugLog('1');
   $pvComponentActList= array();
   $productVersionActiv= array();
   $listIdPv='';
   $productVersion = new ProductVersion();
   $componentVersion = new ComponentVersion();
-  $where=" isStarted=1 and idle=0 ";
+  $where=" isStarted=1 and idle=0  and isDelivered=0 and isEis=0 ";
   $listActiveComponentVersion=$componentVersion->getSqlElementsFromCriteria(null,null,$where);
   $listIdPv=implode(',',$pvsArray);
   $where.="and id in ($listIdPv)";
@@ -75,12 +76,13 @@ if($showOnlyActivesVersions== 1){
   }
   foreach ($pvsArray as  $idProductV){
     $listComponentV=ProductVersionStructure::getComposition($idProductV);
+    debugLog($listComponentV);
+    debugLog($listActiveComponentVersion);
     if(isset($listComponentV) and isset($listActiveComponentVersion)){
       foreach ($listComponentV as $idComponentV){
         foreach ($listActiveComponentVersion as $id=>$ActivComponentVersion) {
           if($idComponentV==$ActivComponentVersion->id){
             $pvComponentActList[$idProductV]=$idProductV;
-            unset($listActiveComponentVersion[$id]);
             continue;
           }
         }
@@ -88,6 +90,7 @@ if($showOnlyActivesVersions== 1){
     }
   }
   $allProductVersionActive=$productVersionActiv+$pvComponentActList;
+  if(empty($allProductVersionActive));
   foreach ($allProductVersionActive as $id) {
     $productVersion= new ProductVersion($id);
     $res=$productVersion->displayVersion();
