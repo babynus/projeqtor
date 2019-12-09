@@ -228,3 +228,16 @@ DELETE FROM `${prefix}plugin` where name='kanban';
 
 -- show Idle on report Work / Work synthesis per activity
 INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `idle`) VALUES (40,'showIdle','boolean',20,0);
+
+-- ======================================
+-- Planning Component Versions
+-- ======================================
+
+INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
+(227,'menuVersionsComponentPlanning',173,'item', 395,NULL,0,Work);
+
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
+(1,227,1);
+
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
+(1,227,8);
