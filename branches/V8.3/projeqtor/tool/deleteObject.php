@@ -81,7 +81,7 @@ if (stripos($result,'id="lastOperationStatus" value="ERROR"')>0 ) {
   SqlElement::unsetCurrentObject();
 } else { 
 	Sql::commitTransaction();
-  echo '<div class="messageWARNING" >' . $result . '</div>';
+  echo '<div class="messageWARNING" >'. $result .'</div>';
 }
 echo '<input type="hidden" id="buttonCheckListVisibleObject" value="hidden" />';
 ?>
