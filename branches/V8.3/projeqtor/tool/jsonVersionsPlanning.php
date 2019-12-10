@@ -66,9 +66,7 @@ if($showOnlyActivesVersions== 1){
   $productVersion = new ProductVersion();
   $componentVersion = new ComponentVersion();
   $where=" isStarted=1 and idle=0  and isDelivered=0 and isEis=0 ";
-  debugLog($where);
   $listActiveComponentVersion=$componentVersion->getSqlElementsFromCriteria(null,null,$where);
-  debugLog($listActiveComponentVersion);
   $listIdPv=implode(',',$pvsArray);
   $where.="and id in ($listIdPv)";
   foreach ($productVersion->getSqlElementsFromCriteria(null,null,$where) as $id=>$objPvValide){
@@ -76,8 +74,6 @@ if($showOnlyActivesVersions== 1){
   }
   foreach ($pvsArray as  $idProductV){
     $listComponentV=ProductVersionStructure::getComposition($idProductV);
-//     debugLog($listComponentV);
-//     debugLog($listActiveComponentVersion);
     if(isset($listComponentV) and isset($listActiveComponentVersion)){
       foreach ($listComponentV as $idComponentV){
         foreach ($listActiveComponentVersion as $id=>$ActivComponentVersion) {
@@ -97,8 +93,6 @@ if($showOnlyActivesVersions== 1){
   echo '{"identifier":"id", "items":[';
   foreach ($allProductVersionActive as $id) {
     $productVersion= new ProductVersion($id);
-    $list=$productVersion->searchAtivityForVersion();
-    //debugLog($list);
     $res=$productVersion->displayVersion();
     if($res=='true'){
       foreach (ProductVersionStructure::getComposition($productVersion->id) as $idComponentVersion) {

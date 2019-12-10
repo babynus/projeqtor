@@ -129,19 +129,18 @@ class History extends SqlElement {
         }
       }
       $colList=substr($colList,0,-2);
-      $requestIns="INSERT INTO $tableHistArch ($colList)\n"
-      ."SELECT $colList FROM $tableHist WHERE refType='".$refType."' and refId=$refId"; 
+      $requestIns="INSERT INTO $tableHistArch ($colList)
+                   SELECT $colList FROM $tableHist WHERE refType='$refType' and refId=$refId and operationDate <> '$hist->operationDate';"; 
       SqlDirectElement::execute($requestIns);
       $res=Sql::$lastQueryNbRows;
-      $where="refType='".$refType."' and refId=$refId and colName='".$hist->colName."' and newValue=$hist->newValue and operationDate='".$hist->operationDate."'";
-      debugLog($where);
+      $where="refType='$refType' and refId=$refId and colName='$hist->colName' and newValue=$hist->newValue and operationDate='$hist->operationDate'";
       $idleRow=$hist->getSqlElementsFromCriteria(null,null,$where);
       foreach ($idleRow as $history ){
-        $result=$history->id;
+        $result=$history->operationDate;
       }
-      $clauseDel="refType='".$refType."' and refId='".$refId."' and id!=$result";
+      $clauseDel="refType='$refType' and refId=$refId and operationDate <> '$result'";
       if($res > 0){
-      $hist->purge($clauseDel);
+        $hist->purge($clauseDel);
       }
     }else{
       $hist->refType=$refType;
