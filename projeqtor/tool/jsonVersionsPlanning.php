@@ -6,6 +6,8 @@ require_once "../tool/projeqtor.php";
 scriptLog('   ->/tool/jsonVersionsPlanning.php');
 
 $showOnlyActivesVersions=Parameter::getUserParameter('showOnlyActivesVersions');
+$hideversionsWithoutActivity=Parameter::getUserParameter('versionsWithoutActivity');
+$displayProductversionActivity = Parameter::getUserParameter('planningVersionDisplayProductVersionActivity');
 $pvsArray = array();
 //CHANGE qCazelles - Correction GANTT - Ticket #100
 //Old
@@ -59,6 +61,35 @@ if(RequestHandler::getValue('objectVersion')=='ComponentVersion'){
   $pvsArray=$idVersionArray;
 }
 
+if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
+  $displayComponent=array();
+  foreach ($pvsArray as $id=>$idProd){
+    $cp=0;
+    $comptDisplay=0;
+    $prod= new ProductVersion($idProd);
+    $activityOfProdV=$prod->searchAtivityForVersion();
+    $activityOfCompV=(isset($activityOfProdV[0]))?$activityOfProdV[0]:array();
+    $activityOfProdV=(isset($activityOfProdV[1]))?$activityOfProdV[1]:array();
+    $listOfCompo=ProductVersionStructure::getComposition($idProd);
+    foreach ($listOfCompo as $idComponentVersion){
+      $cp++;
+      $componentVersion = new ComponentVersion($idComponentVersion);
+      $result=$componentVersion->searchAtivityForVersion();
+      $listActivityComponent=(isset($result[0]))?$result[0]:array();
+      $listActivityComponentVersion=(isset($result[1]))?$result[1]:array();
+      if(empty($listActivityComponent) and empty($listActivityComponentVersion)){
+        $comptDisplay++;
+        $displayComponent[]=$idComponentVersion;
+      }
+    }
+    if(empty($activityOfProdV) and empty($activityOfCompV) and $comptDisplay == $cp){
+      unset($pvsArray[$id]);
+    }
+  }
+}
+
+
+
 if($showOnlyActivesVersions== 1){
   $pvComponentActList= array();
   $productVersionActiv= array();
@@ -93,13 +124,18 @@ if($showOnlyActivesVersions== 1){
   echo '{"identifier":"id", "items":[';
   foreach ($allProductVersionActive as $id) {
     $productVersion= new ProductVersion($id);
-    $res=$productVersion->displayVersion();
-    if($res=='true'){
-      foreach (ProductVersionStructure::getComposition($productVersion->id) as $idComponentVersion) {
-        $componentVersion = new ComponentVersion($idComponentVersion);
-        $hide=SqlList::getFieldFromId('ComponentVersionType', $componentVersion->idComponentVersionType, 'lockUseOnlyForCC');
-        if ($hide!=1) $componentVersion->treatmentVersionPlanning($productVersion);
+    $productVersion->displayVersion();
+    foreach (ProductVersionStructure::getComposition($productVersion->id) as $idComponentVersion) {
+      $componentVersion = new ComponentVersion($idComponentVersion);
+      $hide=SqlList::getFieldFromId('ComponentVersionType', $componentVersion->idComponentVersionType, 'lockUseOnlyForCC');
+      if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
+        foreach ($displayComponent as $idDisplayComp){
+          if($idDisplayComp==$idComponentVersion){
+            $hide=1;
+          }
+        }
       }
+      if ($hide!=1) $componentVersion->treatmentVersionPlanning($productVersion);
     }
   }
 ///
@@ -107,19 +143,24 @@ if($showOnlyActivesVersions== 1){
   echo '{"identifier":"id", "items":[';
   foreach ($pvsArray as $idProductVersion) {
     $productVersion = new ProductVersion($idProductVersion);
-    $res=$productVersion->displayVersion();
-    if($res=='true'){
-      foreach (ProductVersionStructure::getComposition($productVersion->id) as $idComponentVersion) {
-        $componentVersion = new ComponentVersion($idComponentVersion);
-        //$cond=true;
-        //foreach($componentTypeNoDisplay as $ctnd){
-        //  if($componentVersion->idVersionType == $ctnd->id)
-        //    $cond=false;
-        //}
-        
-        $hide=SqlList::getFieldFromId('ComponentVersionType', $componentVersion->idComponentVersionType, 'lockUseOnlyForCC');
-        if ($hide!=1) $componentVersion->treatmentVersionPlanning($productVersion);
+    $productVersion->displayVersion();
+    foreach (ProductVersionStructure::getComposition($productVersion->id) as $idComponentVersion) {
+      $componentVersion = new ComponentVersion($idComponentVersion);
+      //$cond=true;
+      //foreach($componentTypeNoDisplay as $ctnd){
+      //  if($componentVersion->idVersionType == $ctnd->id)
+      //    $cond=false;
+      //}
+      
+      $hide=SqlList::getFieldFromId('ComponentVersionType', $componentVersion->idComponentVersionType, 'lockUseOnlyForCC');
+      if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
+        foreach ($displayComponent as $id){
+          if($id==$idComponentVersion){
+            $hide=1;
+          }
+        }
       }
+      if ($hide!=1) $componentVersion->treatmentVersionPlanning($productVersion);
     }
   }
 }
