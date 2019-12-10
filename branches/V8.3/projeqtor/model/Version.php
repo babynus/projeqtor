@@ -614,36 +614,14 @@ static protected function drawProductUsingComponentVersion($class, $id)
     $displayProductversionActivity = Parameter::getUserParameter('planningVersionDisplayProductVersionActivity');
     $showResource=Parameter::getUserParameter('planningShowResource');
     $displayResource=Parameter::getGlobalParameter('displayResourcePlan');
-    $hideversionsWithoutActivity=Parameter::getUserParameter('versionsWithoutActivity');
     
     if (!$displayResource) $displayResource="initials";
     
     $res=$this->searchAtivityForVersion();
     $listActivity=(isset($res[0]))?$res[0]:array();
     $listActivityProductVersion=(isset($res[1]))?$res[1]:array();
-      
-      if (($this->scope == 'Product') and $displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1) {
-        $listOfCompo=ProductVersionStructure::getComposition($this->id);
-        $listOfCompoForComp=array();
-        foreach ($listOfCompo as $idComponentVersion) {
-          $componentVersion = new ComponentVersion($idComponentVersion);
-          $listOfCompoForComp=ProductVersionStructure::getComposition($componentVersion->id);
-          $result=$componentVersion->searchAtivityForVersion();
-        }
-        $listActivityComponent=(isset($result[0]))?$result[0]:array();
-        $listActivityComponentVersion=(isset($result[1]))?$result[1]:array();
+    
 
-        if(empty($listActivityProductVersion) and empty($listActivity) and empty($listOfCompo)){
-          return 'false';
-        }else if(empty($listActivityComponent) and empty($listActivityComponentVersion) and empty($listActivity) and empty($listActivityProductVersion) and(empty($listOfCompoForComp))){
-          return 'false'; 
-        }
-      }else if (($this->scope == 'Component') and $displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1) {
-        $listOfCompo=ProductVersionStructure::getComposition($this->id);
-        if(empty($listActivityProductVersion) and empty($listActivity) and empty($listOfCompo)){
-          return ;
-        }
-      }
       if ($displayProductversionActivity == 0)$listActivityProductVersion = array();
         if (self::$cpt === 1) {
           echo ',';
@@ -1026,6 +1004,7 @@ static protected function drawProductUsingComponentVersion($class, $id)
   public function searchAtivityForVersion(){
     $planningVersionShowClosed = Parameter::getUserParameter('planningVersionShowClosed');
     $displayComponentversionActivity = Parameter::getUserParameter('planningVersionDisplayComponentVersionActivity');
+    
     $activity = new Activity;
     $actTable=$activity->getDatabaseTableName();
     $querySelectAct="$actTable.id as id";
@@ -1040,8 +1019,8 @@ static protected function drawProductUsingComponentVersion($class, $id)
       jsonBuildWhereCriteria($querySelectAct,$queryFromAct,$where,$queryOrderByAct,$cpt,$arrayFilter,$activity);
     }
     $listActivity = $activity->getSqlElementsFromCriteria(null,null,$where);
-    if ($displayComponentversionActivity == 0)
-      $listActivity = array();
+    if ($displayComponentversionActivity == 0)$listActivity = array();
+    
     $where = "idVersion = $this->id and idComponentVersion IS NULL";
     if ( $planningVersionShowClosed == 0){
       $where.=" and idle = 0";
