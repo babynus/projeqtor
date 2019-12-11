@@ -53,14 +53,23 @@ if($refType=="Meeting" || $refType=="PeriodicMeeting") {
 	$delay=Work::displayWork(workTimeDiffDateTime('2000-01-01T'.$obj->meetingStartTime,'2000-01-01T'.$obj->meetingEndTime));
 }
 $mode = RequestHandler::getValue('mode',false,true);
-$arrayDefaultOffDays=array();
-if (Parameter::getGlobalParameter('OpenDayMonday')=='offDays') $arrayDefaultOffDays[]=1;
-if (Parameter::getGlobalParameter('OpenDayTuesday')=='offDays') $arrayDefaultOffDays[]=2;
-if (Parameter::getGlobalParameter('OpenDayWednesday')=='offDays') $arrayDefaultOffDays[]=3;
-if (Parameter::getGlobalParameter('OpenDayThursday')=='offDays') $arrayDefaultOffDays[]=4;
-if (Parameter::getGlobalParameter('OpenDayFriday')=='offDays') $arrayDefaultOffDays[]=5;
-if (Parameter::getGlobalParameter('OpenDaySaturday')=='offDays') $arrayDefaultOffDays[]=6;
-if (Parameter::getGlobalParameter('OpenDaySunday')=='offDays') $arrayDefaultOffDays[]=7;
+
+// $arrayDefaultOffDays=array();
+// if (Parameter::getGlobalParameter('OpenDayMonday')=='offDays') $arrayDefaultOffDays[]=1;
+// if (Parameter::getGlobalParameter('OpenDayTuesday')=='offDays') $arrayDefaultOffDays[]=2;
+// if (Parameter::getGlobalParameter('OpenDayWednesday')=='offDays') $arrayDefaultOffDays[]=3;
+// if (Parameter::getGlobalParameter('OpenDayThursday')=='offDays') $arrayDefaultOffDays[]=4;
+// if (Parameter::getGlobalParameter('OpenDayFriday')=='offDays') $arrayDefaultOffDays[]=5;
+// if (Parameter::getGlobalParameter('OpenDaySaturday')=='offDays') $arrayDefaultOffDays[]=6;
+// if (Parameter::getGlobalParameter('OpenDaySunday')=='offDays') $arrayDefaultOffDays[]=7;
+
+$resource=new ResourceAll($idResource);
+
+if($resource->id){
+  $calendar = new CalendarDefinition($resource->idCalendarDefinition);
+}else{
+  $calendar = new CalendarDefinition();
+}
 
 $planningMode=null;
 $peName=$refType.'PlanningElement';
@@ -78,7 +87,7 @@ if ($planningMode=='RECW') {
     $assRec[$ar->day]=$ar->value;
   }
 }
-$resource=new ResourceAll($idResource);
+
 ?>
 <form dojoType="dijit.form.Form" id='assignmentForm' jsid='assignmentForm' name='assignmentForm' onSubmit="return false;">    
   <table>
@@ -401,15 +410,23 @@ $resource=new ResourceAll($idResource);
             <?php }?>
           </tr>
           <tr>
-            <?php for ($i=1; $i<=7; $i++) {?>
+            <?php for ($i=1; $i<=6; $i++) {?>
             <td>
-            <?php  $value=(isset($assRec[$i]))?Work::displayWork($assRec[$i]):0;?>
+            <?php  $value=(isset($assRec[$i]))?Work::displayWork($assRec[$i]):0;
+                    $dayofweek = 'dayOfWeek'.$i;?>
               <div dojoType="dijit.form.NumberTextBox"  style="width:53px;" name="recurringAssignmentW<?php echo $i;?>" id="recurringAssignmentW<?php echo $i;?>" value="<?php echo $value;?>" 
-              constraints="{min:0,max:999.99}" class="input <?php if (in_array($i,$arrayDefaultOffDays)) echo ' offDay';?>" >
+              constraints="{min:0,max:999.99}" class="input <?php if ($calendar->$dayofweek == 1) echo ' offDay';?>" >
               <?php echo $keyDownEventScript;?> 
               </div>
             </td>
             <?php }?>
+            <td>
+            <?php  $value=(isset($assRec[7]))?Work::displayWork($assRec[7]):0;?>
+              <div dojoType="dijit.form.NumberTextBox"  style="width:53px;" name="recurringAssignmentW7" id="recurringAssignmentW7" value="<?php echo $value;?>" 
+              constraints="{min:0,max:999.99}" class="input <?php if ($calendar->dayOfWeek0 == 1) echo ' offDay';?>" >
+              <?php echo $keyDownEventScript;?> 
+              </div>
+            </td>
           </tr>
           <tr>
             <td colspan="2">
