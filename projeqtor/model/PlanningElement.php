@@ -1605,8 +1605,12 @@ class PlanningElement extends SqlElement {
          return 'hidden';
       }
     }
+    //gautier #4344
     if ($this->id and $this->validatedCalculated) {
-    	if ($fieldName=='validatedWork' or $fieldName=='validatedCost') {
+    	if ($fieldName=='validatedWork' and $this->validatedWork > 0) {
+    	  return "readonly";
+    	}
+    	if ($fieldName=='validatedCost' and $this->validatedCost > 0) {
     	  return "readonly";
     	}
     }
