@@ -2196,6 +2196,7 @@ helpParamPasswordStrength: "Determines the strength of the password &#13  - leng
 helpParamReportTempDirectory: "tijdelijke map voor rapporten (moet in de web documenten hoofdmap staan om afbeeldingen te verkrijgen)",
 helpParamShowThumb: "toon miniatuur afbeeldingen van fotos voor de geselecteerde resource",
 helpParamShowThumbList: "toon miniatuur afbeeldingen van fotos voor de geselecteerde resources in de lijsten",
+helpParamSignatureAndTagToRemove: "Enter the signature start identifier which allows you to delete it with what is below it&#44 on the note. Do not forget to restart the cron after defining this identifier.",
 helpParamTopIconSize: "grootte van de pictogrammen weergegeven in de bovenste menubalk",
 helpPassword: "verander je wachtwoord",
 helpPasswordValidityDays: "password geldigheid (in dagen) voordat verzocht wordt om het wachtwoord te wijzigen&#44; 0 voor onbeperkt geldig",
