@@ -234,6 +234,7 @@ if ($typeSendMail=="User") {
     $dest=$resultMail['dest'];
   }
 }
+debugLog($result);
 if ($result=="OK") {
   if ($typeSendMail=="Mailable" and $saveAsNote) {
     $note=new Note();

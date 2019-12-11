@@ -2196,6 +2196,7 @@ helpParamPasswordStrength: "Određuje snagu lozinke &#13 - dužina &#58 mora ima
 helpParamReportTempDirectory: "privremeni katalog za izvješća - moraju dokumentirati korijen na webu da biste dobili slike",
 helpParamShowThumb: "pokaži mini-slike za odabrane resursa",
 helpParamShowThumbList: "pokaži mini-slike za resurse u pregledima",
+helpParamSignatureAndTagToRemove: "Enter the signature start identifier which allows you to delete it with what is below it&#44 on the note. Do not forget to restart the cron after defining this identifier.",
 helpParamTopIconSize: "veličina ikona u gornjem izbornika",
 helpPassword: "Promjeni lozinku",
 helpPasswordValidityDays: "valjanost Lozinka (u danima) da izmjeni redak -0 za trajnu valjanost",

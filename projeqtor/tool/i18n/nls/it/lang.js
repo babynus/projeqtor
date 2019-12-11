@@ -2196,6 +2196,7 @@ helpParamPasswordStrength: "Determines the strength of the password &#13  - leng
 helpParamReportTempDirectory: "directory temporanea per i reports (deve essere nella root del documento web per ottenere le immagini)",
 helpParamShowThumb: "mostrare piccoli insiemi di foto per la risorsa selezionata",
 helpParamShowThumbList: "mostrare piccoli insiemi di foto per le risorse in liste",
+helpParamSignatureAndTagToRemove: "Enter the signature start identifier which allows you to delete it with what is below it&#44 on the note. Do not forget to restart the cron after defining this identifier.",
 helpParamTopIconSize: "dimensione delle icone visualizzate nel menu della barra superiore",
 helpPassword: "cambia la password",
 helpPasswordValidityDays: "validità della password (in giorni) prima di richiedere il cambio della password&#44; 0 per una validità illimitata",

@@ -888,7 +888,8 @@ class Cron {
   			$mailbox->markMailAsRead($mailId);
   			continue;
   		}
-  		// Search end of Message (this is valid for text only, treatment of html messages would require other code)  		
+  		// Search end of Message (this is valid for text only, treatment of html messages would require other code)  
+  		debugLog($body);
   		$posEndMsg=strrpos($body,"###PROJEQTOR###");
   		if($posEndMsg){
   		  $checkThunderAndGmail=strpos($body,"\r\n>");
