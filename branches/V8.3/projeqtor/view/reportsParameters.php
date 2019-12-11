@@ -52,11 +52,14 @@ $idReport=$_REQUEST['idReport'];
 if (!$idReport) {
   exit;
 }
+
 $limitToActiveProjects=true;
 if (sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle')==1) {
   $limitToActiveProjects=false;
 }
 $report=new Report($idReport);
+debugLog($report);
+
 echo "<input type='hidden' id='reportFile' name='reportFile' value='" . htmlEncode($report->file) . "' />";
 echo "<input type='hidden' id='reportId' name='reportId' value='" . htmlEncode($report->id) . "' />";
 $param=new ReportParameter();
@@ -1130,7 +1133,7 @@ foreach ($listParam as $param) {
           </div> 
         </button>
 		  <?php }
-		  if($autoSendReportAccess){?>
+		  if($autoSendReportAccess and $report->name != 'reportAvailabilitySynthesis'){?>
   		  <button title="<?php echo i18n('reportAutoSendReport')?>"   
            dojoType="dijit.form.Button" type="submit" 
            id="reportAutoSendReport" name="reportAutoSendReport" 
