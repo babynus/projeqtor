@@ -58,7 +58,6 @@ if (sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSe
   $limitToActiveProjects=false;
 }
 $report=new Report($idReport);
-debugLog($report);
 
 echo "<input type='hidden' id='reportFile' name='reportFile' value='" . htmlEncode($report->file) . "' />";
 echo "<input type='hidden' id='reportId' name='reportId' value='" . htmlEncode($report->id) . "' />";
