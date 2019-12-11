@@ -2196,6 +2196,7 @@ helpParamPasswordStrength: "Determines the strength of the password &#13  - leng
 helpParamReportTempDirectory: "レポートの一次ディレクトリ (画像取得のためWeb文書のルートディレクトリを設定してください。)",
 helpParamShowThumb: "選択されたリソースの写真をサムネイル表示",
 helpParamShowThumbList: "リソース一覧の写真をサムネイル表示",
+helpParamSignatureAndTagToRemove: "Enter the signature start identifier which allows you to delete it with what is below it&#44 on the note. Do not forget to restart the cron after defining this identifier.",
 helpParamTopIconSize: "トップメニューバーに表示されるアイコンのサイズ",
 helpPassword: "change your password",
 helpPasswordValidityDays: "パスワードの有効日数(0は無期限)",

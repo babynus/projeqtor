@@ -2196,6 +2196,7 @@ helpParamPasswordStrength: "Détermine la force du mot de passe &#13  - taille &
 helpParamReportTempDirectory: "Répertoire temporaire pour les rapports (doit être dans le document root web pour afficher les images)",
 helpParamShowThumb: "montrer les miniatures des photos des ressources",
 helpParamShowThumbList: "montrer les miniatures des photos des ressources dans les listes",
+helpParamSignatureAndTagToRemove: "Entrer l'identifiant de debut de signature qui permet de la supprimer avec  ce qui se trouve  en dessous&#44 sur la note. Ne pas oublier de relancer le cron après avoir définit cette identifiant.",
 helpParamTopIconSize: "taille des icônes affichées dans la barre de menu supérieure",
 helpPassword: "Modifiez votre mot de passe",
 helpPasswordValidityDays: "durée de validité du mot de passe (en jours)&#44; 0 pour une validité illimitée ",
