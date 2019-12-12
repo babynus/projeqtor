@@ -129,7 +129,6 @@ if ($idOrganization ) {
   $inClause.=')';
   $queryWhere.= " and w.idResource in ".$inClause;
 }
-debugLog($queryWhere);
 $querySelect1= 'select sum(w.cost) as sumCost, w.' . $scale . ' as scale , w.idProject'; 
 $queryGroupBy1 = 'w.'.$scale . ', w.idProject, t2.sortOrder';
 $queryWhere1 = $queryWhere;
