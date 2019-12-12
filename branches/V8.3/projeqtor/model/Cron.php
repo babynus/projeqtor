@@ -498,6 +498,7 @@ class Cron {
           $cronCheckMailGroup=Cron::getCheckMailGroup();
         }
       }
+      
       // Check Database Execution
       foreach (self::$listCronExecution as $key=>$cronExecution){
         if($cronExecution->nextTime==null){
@@ -888,8 +889,7 @@ class Cron {
   			$mailbox->markMailAsRead($mailId);
   			continue;
   		}
-  		// Search end of Message (this is valid for text only, treatment of html messages would require other code)  
-  		debugLog($body);
+  		// Search end of Message (this is valid for text only, treatment of html messages would require other code)  		
   		$posEndMsg=strrpos($body,"###PROJEQTOR###");
   		if($posEndMsg){
   		  $checkThunderAndGmail=strpos($body,"\r\n>");
