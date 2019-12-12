@@ -2544,6 +2544,14 @@ function assignmentChangeResourceSelectFonction(){
   });
 }
 
+function refreshReccurentAssignmentDiv(){
+	showWait();
+	callBack=function() {
+	     hideWait();
+    };
+	loadContent('../tool/refreshReccurentAssignmentDiv.php', 'recurringAssignmentDiv', 'assignmentForm', null, null, null, null, callBack);
+}
+
 function assignmentChangeRole() {
   if (editAssignmentLoading)
     return;
