@@ -168,7 +168,7 @@ INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
  
 -- Improve display of duration in Audit list
 ALTER TABLE `${prefix}audit` ADD COLUMN `durationSeconds` int(10) unsigned DEFAULT 0;
-ALTER TABLE `${prefix}audit` ADD COLUMN `durationDisplay` varchar(20) unsigned DEFAULT NULL;
+ALTER TABLE `${prefix}audit` ADD COLUMN `durationDisplay` varchar(20) DEFAULT NULL;
 
 -- Hide some affectations implicitely stored from pool affectation
 ALTER TABLE `${prefix}affectation` ADD COLUMN `hideAffectation` int(1) unsigned DEFAULT 0,
