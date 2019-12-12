@@ -142,7 +142,6 @@
       <fileset dir="${src.dir}/model">
         <include name="**" />
         <exclude name="**/custom/*.*"/>
-        <exclude name="**/Kanban.*"/>
       </fileset>
     </copy>
     <copy todir="${deploy.dir}/model/custom">
@@ -191,7 +190,6 @@
       <fileset dir="${src.dir}/tool">
         <exclude name="**/i18n/nls/lang.xls"/>
         <exclude name="**/parametersLocation.php"/>
-        <exclude name="**/*Kanban*.*"/>
       </fileset>
     </copy>
   </target>
@@ -199,7 +197,6 @@
   <target name="copyView">
     <copy todir="${deploy.dir}/view">
       <fileset dir="${src.dir}/view">
-        <exclude name="**/css/**/*Kanban*.*"/>
       </fileset>
     </copy>
   </target>
