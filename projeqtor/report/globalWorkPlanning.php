@@ -46,6 +46,7 @@ if (array_key_exists('weekSpinner',$_REQUEST)) {
 	$paramWeek=$_REQUEST['weekSpinner'];
 	$paramWeek=Security::checkValidWeek($paramWeek);
 };
+$idOrganization = trim(RequestHandler::getId('idOrganization'));
 $paramTeam='';
 if (array_key_exists('idTeam',$_REQUEST)) {
   $paramTeam=trim($_REQUEST['idTeam']);
@@ -65,6 +66,9 @@ if (array_key_exists('periodValue',$_REQUEST))
 $headerParameters="";
 if ($idProject!="") {
   $headerParameters.= i18n("colIdProject") . ' : ' . htmlEncode(SqlList::getNameFromId('Project',$idProject)) . '<br/>';
+}
+if ($idOrganization!="") {
+  $headerParameters.= i18n("colIdOrganization") . ' : ' . htmlEncode(SqlList::getNameFromId('Organization',$idOrganization)) . '<br/>';
 }
 if ( $paramTeam) {
   $headerParameters.= i18n("team") . ' : ' . SqlList::getNameFromId('Team', $paramTeam) . '<br/>';
@@ -112,6 +116,17 @@ if ($paramTeam) {
 	}
 	$inClause.=')';
 	$queryWhere.= " and t1.idResource in ".$inClause;
+}
+
+if ($idOrganization ) {
+  $orga = new Organization($idOrganization);
+  $listResOrg=$orga->getResourcesOfAllSubOrganizationsListAsArray();
+  $inClause='(0';
+  foreach ($listResOrg as $res) {
+    $inClause.=','.$res;
+  }
+  $inClause.=')';
+  $queryWhere.= " and t1.idResource in ".$inClause;
 }
 
 $querySelect= 'select sum(work) as sumWork, ' . $scale . ' as scale , t1.idProject as idproject '; 

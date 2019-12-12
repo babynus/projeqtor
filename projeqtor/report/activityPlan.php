@@ -31,6 +31,7 @@ if (array_key_exists('yearSpinner',$_REQUEST)) {
 	$paramYear=$_REQUEST['yearSpinner'];
 	$paramYear=Security::checkValidYear($paramYear);
 };
+$idOrganization = trim(RequestHandler::getId('idOrganization'));
 $paramTeam='';
 if (array_key_exists('idTeam',$_REQUEST)) {
   $paramTeam=trim($_REQUEST['idTeam']);
@@ -79,6 +80,9 @@ if (array_key_exists('idProject',$_REQUEST) and trim($_REQUEST['idProject'])!=""
 	$idProject = trim($_REQUEST['idProject']);
 	$idProject = Security::checkValidId($idProject);
 	$headerParameters.= i18n("colIdProject") . ' : ' . htmlEncode(SqlList::getNameFromId('Project', $idProject)) . '<br/>';
+}
+if ($idOrganization!="") {
+  $headerParameters.= i18n("colIdOrganization") . ' : ' . htmlEncode(SqlList::getNameFromId('Organization',$idOrganization)) . '<br/>';
 }
 if ($paramTeam!="") {
   $headerParameters.= i18n("colIdTeam") . ' : ' . htmlEncode(SqlList::getNameFromId('Team', $paramTeam)) . '<br/>';
@@ -289,6 +293,13 @@ foreach ($sortProject as $sortId=>$name) {
 }
 
 asort($resources);
+if($idOrganization){
+  $orga = new Organization($idOrganization);
+  $listResOrg=$orga->getResourcesOfAllSubOrganizationsListAsArray();
+  foreach ($resources as $idR=>$nameR){
+    if(! in_array($idR, $listResOrg))unset($resources[$idR]);
+  }
+}
 if ($paramTeam) {
   foreach ($resources as $idR=>$ress) {
     $res=new Resource($idR);
@@ -296,6 +307,7 @@ if ($paramTeam) {
       unset($resources[$idR]);
     }
   }
+}
   foreach ($projects as $idP=>$nameP) {
   	foreach($result[$idP] as $idA=>$acti) {
 	    foreach ($result[$idP][$idA] as $idR=>$ress) {
@@ -312,7 +324,6 @@ if ($paramTeam) {
 	    }
   	}
   }
-}
 
 $globalSum=array();
 for ($i=1; $i<=$nbDays;$i++) {

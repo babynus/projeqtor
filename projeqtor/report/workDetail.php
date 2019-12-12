@@ -32,6 +32,9 @@ if (array_key_exists('idProject',$_REQUEST)) {
   $paramProject=trim($_REQUEST['idProject']);
   Security::checkValidId($paramProject);
 }
+
+$idOrganization = trim(RequestHandler::getId('idOrganization'));
+
 $paramTeam='';
 if (array_key_exists('idTeam',$_REQUEST)) {
   $paramTeam=trim($_REQUEST['idTeam']);
@@ -67,6 +70,9 @@ if (array_key_exists('periodValue',$_REQUEST))
 $headerParameters="";
 if ($paramProject!="") {
   $headerParameters.= i18n("colIdProject") . ' : ' . htmlEncode(SqlList::getNameFromId('Project', $paramProject)) . '<br/>';
+}
+if ($idOrganization!="") {
+  $headerParameters.= i18n("colIdOrganization") . ' : ' . htmlEncode(SqlList::getNameFromId('Organization',$idOrganization)) . '<br/>';
 }
 if ($paramTeam!="") {
   $headerParameters.= i18n("colIdTeam") . ' : ' . htmlEncode(SqlList::getNameFromId('Team', $paramTeam)) . '<br/>';
@@ -176,6 +182,14 @@ echo '</tr>';
 
 $sum=0;
 asort($resources);
+//gautier #4342
+if($idOrganization){
+  $orga = new Organization($idOrganization);
+  $listResOrg=$orga->getResourcesOfAllSubOrganizationsListAsArray();
+  foreach ($resources as $idR=>$nameR){
+    if(! in_array($idR, $listResOrg))unset($resources[$idR]);
+  }
+}
 foreach ($resources as $idR=>$nameR) {
 	if ($paramTeam) {
     $res=new Resource($idR);

@@ -239,3 +239,25 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,227,8);
+
+INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `idle`, `defaultValue`, `multiple`) VALUES
+(1,'idOrganization','organizationList',3,0,null,0),
+(2,'idOrganization','organizationList',3,0,null,0),
+(3,'idOrganization','organizationList',3,0,null,0),
+(28,'idOrganization','organizationList',3,0,null,0),
+(29,'idOrganization','organizationList',3,0,null,0),
+(30,'idOrganization','organizationList',3,0,null,0),
+(5,'idOrganization','organizationList',3,0,null,0),
+(6,'idOrganization','organizationList',3,0,null,0),
+(42,'idOrganization','organizationList',11,0,null,0),
+(31,'idOrganization','organizationList',11,0,null,0),
+(19,'idOrganization','organizationList',15,0,null,0),
+(20,'idOrganization','organizationList',15,0,null,0),
+(76,'idOrganization','organizationList',15,0,null,0),
+(77,'idOrganization','organizationList',15,0,null,0),
+(32,'idOrganization','organizationList',15,0,null,0),
+(52,'idOrganization','organizationList',15,0,null,0),
+(4,'idOrganization','organizationList',3,0,null,0),
+(60,'idOrganization','organizationList',15,0,null,0),
+(75,'idOrganization','organizationList',65,0,null,0),
+(27,'idOrganization','organizationList',15,0,null,0);
