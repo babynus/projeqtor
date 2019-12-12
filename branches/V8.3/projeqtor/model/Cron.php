@@ -849,11 +849,9 @@ class Cron {
 	  foreach ($mailsIds as $mailId) {
   		$mail = $mailbox->getMail($mailId);
   		$mailbox->markMailAsUnread($mailId);
-  		debugTraceLog('===============================');
-  		debugTraceLog("Message read (id $$mailId), from $mail->fromAddress"); 
   		$body=$mail->textPlain;
   		$bodyHtml=$mail->textHtml;
-  		if (!$body and $bodyHtml) {		
+  		if ($bodyHtml) {		
   		  $toText=new Html2Text($bodyHtml);
   			$body=$toText->getText();
   		}
@@ -863,10 +861,11 @@ class Cron {
   		$senderId=null;	
   		// Class and Id of object
   		$posClass=strpos($body,'directAccess=true&objectClass=');
+  		if (! $posClass) $posClass=strpos($body,'directAccess=true&amp;objectClass=');
   		if ($posClass) { // It is a ProjeQtor mail
   		  $posId=strpos($body,'&objectId=',$posClass);
+  		  if (! $posId) $posId=strpos($body,'&amp;objectId=',$posClass);
   		  if (! $posId) {
-  		    debugTraceLog("Message not identified as response to Projeqtor email (cannot find objectId)");
   		    //debugTraceLog(substr($body,$posClass,100));
   		    $mailbox->markMailAsRead($mailId);
   		    continue;
@@ -875,9 +874,27 @@ class Cron {
   		  if (!$posEnd or $posEnd-$posId>22) {
   		    $posEnd=strpos($body,']',$posId);
   		  }
+  		  if (!$posEnd or $posEnd-$posId>22) {
+  		    $posEnd=strpos($body," ",$posId);
+  		  }
+  		  if (!$posEnd or $posEnd-$posId>22) {
+  		    $posEnd=strpos($body,"\n",$posId);
+  		  }
+  		  if (!$posEnd or $posEnd-$posId>22) {
+  		    $posEnd=strpos($body,"\r",$posId);
+  		  }
+
+  		  if (!$posEnd or $posEnd-$posId>22) {
+  		    if (strlen($body)-$posId<20) {
+  		      $posEnd=strlen($body)-1;
+  		      $testId=substr($body,$posId+10);
+  		      if (! is_int($testId)) {
+  		        $posEnd=null;
+  		      }
+  		    }
+  		  }
   		  if (! $posEnd or $posEnd-$posId>22) {
   		    debugTraceLog("Message not identified as response to Projeqtor email (cannot find end of objectId)");
-  		    //debugTraceLog(substr($body,$posClass,100));
   		    $mailbox->markMailAsRead($mailId);
   		    continue;
   		  }
@@ -885,7 +902,6 @@ class Cron {
   		  $id=substr($body,$posId+10,$posEnd-$posId-10);		  
   		} else {	
   			debugTraceLog("Message not identified as response to Projeqtor email (cannot find objectClass)");
-  			//debugTraceLog($body);
   			$mailbox->markMailAsRead($mailId);
   			continue;
   		}
