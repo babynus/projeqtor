@@ -93,6 +93,7 @@ if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
 if($showOnlyActivesVersions== 1){
   $pvComponentActList= array();
   $productVersionActiv= array();
+  $componentVersionActList=array();
   $listIdPv='';
   $productVersion = new ProductVersion();
   $componentVersion = new ComponentVersion();
@@ -109,6 +110,7 @@ if($showOnlyActivesVersions== 1){
       foreach ($listComponentV as $idComponentV){
         foreach ($listActiveComponentVersion as $id=>$ActivComponentVersion) {
           if($idComponentV==$ActivComponentVersion->id){
+            $componentVersionActList[$ActivComponentVersion->id]=$ActivComponentVersion->id;
             $pvComponentActList[$idProductV]=$idProductV;
             continue;
           }
@@ -133,6 +135,12 @@ if($showOnlyActivesVersions== 1){
           if($idDisplayComp==$idComponentVersion){
             $hide=1;
           }
+        }
+      }
+
+      foreach ($componentVersionActList as $idCpActL){
+        if($idCpActL!=$idComponentVersion){
+          $hide=1;
         }
       }
       if ($hide!=1) $componentVersion->treatmentVersionPlanning($productVersion);
