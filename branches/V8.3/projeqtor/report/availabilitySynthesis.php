@@ -38,6 +38,7 @@ if (array_key_exists('periodScale',$_REQUEST)) {
   $paramPeriodScale=$_REQUEST['periodScale'];
   $paramPeriodScale=Security::checkValidPeriodScale($paramPeriodScale);
 };
+$idOrganization = trim(RequestHandler::getId('idOrganization'));
 $paramTeam='';
 if (array_key_exists('idTeam',$_REQUEST)) {
   $paramTeam=trim($_REQUEST['idTeam']);
@@ -48,6 +49,9 @@ $user=getSessionUser();
 // Header
 $headerParameters="";
 $headerParameters.= i18n('colPeriod') . ' : ' . $paramPeriodValue . ' ' . i18n($paramPeriodScale) . '<br/>';
+if ($idOrganization!="") {
+  $headerParameters.= i18n("colIdOrganization") . ' : ' . htmlEncode(SqlList::getNameFromId('Organization',$idOrganization)) . '<br/>';
+}
 if ($paramTeam!="") {
   $headerParameters.= i18n("colIdTeam") . ' : ' . SqlList::getNameFromId('Team', $paramTeam) . '<br/>';
 }
@@ -66,6 +70,13 @@ foreach($affLst as $aff){
     $resources[$ress->id]=htmlEncode($ress->name);
     $resourceCalendar[$ress->id]=$ress->idCalendarDefinition;
 	}
+}
+if($idOrganization){
+  $orga = new Organization($idOrganization);
+  $listResOrg=$orga->getResourcesOfAllSubOrganizationsListAsArray();
+  foreach ($resources as $idR=>$nameR){
+    if(! in_array($idR, $listResOrg))unset($resources[$idR]);
+  }
 }
 asort($resources);
 $where="1=1"; // Ticket #2532 : must show availability whatever the project

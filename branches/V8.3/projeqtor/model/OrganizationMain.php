@@ -1095,6 +1095,18 @@ public function saveOrganizationBudgetElement($idle=null,$idleDateTime=null,$nam
       return $listRes;
   }
   
+  //gautier #4342
+  public function getResourcesOfAllSubOrganizationsListAsArray() {
+    $listOrga = $this->getRecursiveSubOrganizationsFlatList(false,true);
+    $listResOrg = array();
+    foreach ($listOrga as $id=>$org){
+      $org = new Organization($id);
+      $listResOrg += $org->getResourcesOfOrganizationsListAsArray();
+    }
+    $listResOrg = array_flip($listResOrg);
+    return $listResOrg;
+  }
+  
   /** ===========================================================================
    * Get the list of organizations (with sub_organizations) of the connected user
    * @return array of organization's key-name

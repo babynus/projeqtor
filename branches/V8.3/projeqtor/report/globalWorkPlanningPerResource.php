@@ -46,6 +46,7 @@ if (array_key_exists('weekSpinner',$_REQUEST)) {
 	$paramWeek=$_REQUEST['weekSpinner'];
 	$paramWeek=Security::checkValidWeek($paramWeek);
 };
+$idOrganization = trim(RequestHandler::getId('idOrganization'));
 $paramTeam='';
 if (array_key_exists('idTeam',$_REQUEST)) {
   $paramTeam=trim($_REQUEST['idTeam']);
@@ -65,6 +66,9 @@ if (array_key_exists('periodValue',$_REQUEST))
 $headerParameters="";
 if ($idResource!="") {
   $headerParameters.= i18n("colIdResource") . ' : ' . htmlEncode(SqlList::getNameFromId('Affectable',$idResource)) . '<br/>';
+}
+if ($idOrganization!="") {
+  $headerParameters.= i18n("colIdOrganization") . ' : ' . htmlEncode(SqlList::getNameFromId('Organization',$idOrganization)) . '<br/>';
 }
 if ( $paramTeam) {
   $headerParameters.= i18n("team") . ' : ' . SqlList::getNameFromId('Team', $paramTeam) . '<br/>';
@@ -104,7 +108,16 @@ if ( $paramWeek) {
 if ( $idResource) {
   $queryWhere.=  " and t1.idResource=".Sql::fmtId($idResource);
 }
-
+if ($idOrganization ) {
+  $orga = new Organization($idOrganization);
+  $listResOrg=$orga->getResourcesOfAllSubOrganizationsListAsArray();
+  $inClause='(0';
+  foreach ($listResOrg as $res) {
+    $inClause.=','.$res;
+  }
+  $inClause.=')';
+  $queryWhere.= " and t1.idResource in ".$inClause;
+}
 if ($paramTeam) {
 	$res=new Resource();
 	$lstRes=$res->getSqlElementsFromCriteria(array('idTeam'=>$paramTeam));
