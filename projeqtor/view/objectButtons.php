@@ -543,7 +543,7 @@
         $buttonHistoryVisible=false;
       }
       if (!$obj->id) $buttonHistoryVisible=false;
-      //gautier #4345
+      //gautier 
       if(RequestHandler::isCodeSet('mode')){
         if(RequestHandler::getValue('mode')=='new'){
           $buttonHistoryVisible=false;

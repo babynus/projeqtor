@@ -471,7 +471,7 @@ class BillMain extends SqlElement {
      return parent::saveForced();
   }
   
-  public function retreivePayments($save=true) {   
+  public function retreivePayments($save=true,$isDeletePayment=false) {   
     $pay=new Payment();  
     if ($this->id) {
       $payList=$pay->getSqlElementsFromCriteria(array('idBill'=>$this->id));
@@ -480,6 +480,10 @@ class BillMain extends SqlElement {
     }
     if (count($payList)==0 or $this->id==null) {
       $this->paymentsCount=0;
+      if($isDeletePayment){
+        $this->paymentDate = null;
+        $this->paymentAmount = 0;
+      }
       if ($save) {
         $this->simpleSave();
       }

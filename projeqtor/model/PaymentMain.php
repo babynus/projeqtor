@@ -193,6 +193,18 @@ class PaymentMain extends SqlElement {
     return $result;
   }
   
+  // gautier #4345
+  public function delete() {
+    $result=parent::delete();
+    if (getLastOperationStatus($result)=='OK') {
+      if($this->idBill){
+        $bill=new Bill($this->idBill);
+        $bill->retreivePayments(true,true);
+      }
+    }
+    return $result;
+  }
+  
   public function save() {
     $old=$this->getOld();
     $this->paymentCreditAmount=$this->paymentAmount-$this->paymentFeeAmount;
