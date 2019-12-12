@@ -36,13 +36,14 @@ $scale=RequestHandler::getValue('format');
 $startDateReport=RequestHandler::getDatetime('startDate');
 $endDateReport=RequestHandler::getDatetime('endDate');
 $element=RequestHandler::getValue('activityOrTicket');
+$idOrganization = trim(RequestHandler::getId('idOrganization'));
 $team = RequestHandler::getValue('idTeam');
 $resource = RequestHandler::getValue('idResource');
 $today=date('Y-m-d');
 
 //Header 
 $headerParameters="";
-if ($idProject!="") {
+if ($idProject!=" ") {
   $headerParameters.= i18n("colIdProject") . ' : ' . htmlEncode(SqlList::getNameFromId('Project',$idProject)) . '<br/>';
 }
 if ( $scale) {
@@ -54,10 +55,13 @@ if ($startDateReport!="") {
 if ($endDateReport!="") {
   $headerParameters.= i18n("colEndDate") . ' : ' . htmlFormatDate($endDateReport) . '<br/>';
 }
-if ($team!="") {
+if ($idOrganization!="") {
+  $headerParameters.= i18n("colIdOrganization") . ' : ' . htmlEncode(SqlList::getNameFromId('Organization',$idOrganization)) . '<br/>';
+}
+if ($team!=" ") {
   $headerParameters.= i18n("Team") . ' : ' . htmlEncode(SqlList::getNameFromId('Team',$team)) . '<br/>';
 }
-if ($resource!="") {
+if ($resource!=" ") {
   $headerParameters.= i18n("Resource") . ' : ' . htmlEncode(SqlList::getNameFromId('Resource',$resource)) . '<br/>';
 }
 include "header.php";
@@ -468,6 +472,23 @@ if ($team != ' ') {
     if ($res->idTeam!=$team) {
       unset($nb2[$idR]);
     }
+  }
+  if (count($nb2) == 0) {
+    echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
+    echo i18n('reportNoData');
+    echo '</div>';
+    exit;
+  }
+}
+
+if ($idOrganization) {
+  $orga = new Organization($idOrganization);
+  $listResOrg=$orga->getResourcesOfAllSubOrganizationsListAsArray();
+  foreach ($indice2 as $idR=>$nameR){
+    if(! in_array($idR, $listResOrg))unset($indice2[$idR]);
+  }
+  foreach ($nb2 as $idR=>$nameR){
+    if(! in_array($idR, $listResOrg))unset($nb2[$idR]);
   }
   if (count($nb2) == 0) {
     echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';

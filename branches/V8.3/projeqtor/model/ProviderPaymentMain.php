@@ -169,7 +169,7 @@ class ProviderPaymentMain extends SqlElement {
     }
     return $result;
   }
-  //gautier #4345
+  
   public function delete() {
     $result=parent::delete();
     if (getLastOperationStatus($result)=='OK') {

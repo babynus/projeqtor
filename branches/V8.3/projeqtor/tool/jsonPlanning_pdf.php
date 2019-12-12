@@ -49,12 +49,13 @@
   if ( array_key_exists('portfolio',$_REQUEST) ) {
     $portfolio=true;
   }
+  $user=getSessionUser();
   $starDate="";
   $endDate="";
   if (array_key_exists('startDatePlanView',$_REQUEST) and array_key_exists('endDatePlanView',$_REQUEST)) {
     $starDate= trim($_REQUEST['startDatePlanView']);
     $endDate= trim($_REQUEST['endDatePlanView']);
-    $user=getSessionUser();
+    //$user=getSessionUser();
     $paramStart=SqlElement::getSingleSqlElementFromCriteria('Parameter',array('idUser'=>$user->id,'idProject'=>null,'parameterCode'=>'planningStartDate'));
     $paramEnd=SqlElement::getSingleSqlElementFromCriteria('Parameter',array('idUser'=>$user->id,'idProject'=>null,'parameterCode'=>'planningEndDate'));
     if ($saveDates) {

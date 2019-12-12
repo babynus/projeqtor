@@ -32,6 +32,7 @@ if (array_key_exists('idProject',$_REQUEST)) {
   $paramProject=trim($_REQUEST['idProject']);
   $paramProject=Security::checkValidId($paramProject); // only allow digits
 };
+$idOrganization = trim(RequestHandler::getId('idOrganization'));
 $paramTeam='';
 if (array_key_exists('idTeam',$_REQUEST)) {
   $paramTeam=trim($_REQUEST['idTeam']);
@@ -69,6 +70,9 @@ if (array_key_exists('periodValue',$_REQUEST))
 $headerParameters="";
 if ($paramProject!="") {
   $headerParameters.= i18n("colIdProject") . ' : ' . htmlEncode(SqlList::getNameFromId('Project', $paramProject)) . '<br/>';
+}
+if ($idOrganization!="") {
+  $headerParameters.= i18n("colIdOrganization") . ' : ' . htmlEncode(SqlList::getNameFromId('Organization',$idOrganization)) . '<br/>';
 }
 if ($paramTeam!="") {
   $headerParameters.= i18n("colIdTeam") . ' : ' . htmlEncode(SqlList::getNameFromId('Team', $paramTeam)) . '<br/>';
@@ -231,6 +235,14 @@ echo '<td class="reportTableHeader" >' . i18n('sum'). '</td>';
 echo '</tr>';
 
 asort($resources);
+//gautier #4342
+if($idOrganization){
+  $orga = new Organization($idOrganization);
+  $listResOrg=$orga->getResourcesOfAllSubOrganizationsListAsArray();
+  foreach ($resources as $idR=>$nameR){
+    if(! in_array($idR, $listResOrg))unset($resources[$idR]);
+  }
+}
 if ($paramTeam) {
 	foreach ($resources as $idR=>$ress) {
 		$res=new Resource($idR);
@@ -238,19 +250,18 @@ if ($paramTeam) {
 			unset($resources[$idR]);
 		}
 	}
-  foreach ($projects as $idP=>$nameP) {
-  	foreach ($result[$idP] as $idR=>$ress) {
-  	  if (! isset($resources[$idR]) ) {
-        unset  ($result[$idP][$idR]);
-        if (count($result[$idP])==0 ) {
-        	unset ($result[$idP]);
-        	unset($projects[$idP]);
-        }
+}
+foreach ($projects as $idP=>$nameP) {
+  foreach ($result[$idP] as $idR=>$ress) {
+    if (! isset($resources[$idR]) ) {
+      unset  ($result[$idP][$idR]);
+      if (count($result[$idP])==0 ) {
+        unset ($result[$idP]);
+        unset($projects[$idP]);
       }
-	  }	 
+    }
   }
 }
-
 $globalSum=array();
 for ($i=1; $i<=$nbDays;$i++) {
   $globalSum[$startDate+$i-1]=0;

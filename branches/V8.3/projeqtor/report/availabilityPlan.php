@@ -41,6 +41,7 @@ if (array_key_exists('weekSpinner',$_REQUEST)) {
 	$paramWeek=$_REQUEST['weekSpinner'];
 	$paramWeek=Security::checkValidWeek($paramWeek);
 };
+$idOrganization = trim(RequestHandler::getId('idOrganization'));
 $paramTeam='';
 if (array_key_exists('idTeam',$_REQUEST)) {
   $paramTeam=trim($_REQUEST['idTeam']);
@@ -68,6 +69,9 @@ if ($periodType=='month') {
 if ( $periodType=='week') {
   $headerParameters.= i18n("week") . ' : ' . $paramWeek . '<br/>';
 }
+if ($idOrganization!="") {
+  $headerParameters.= i18n("colIdOrganization") . ' : ' . htmlEncode(SqlList::getNameFromId('Organization',$idOrganization)) . '<br/>';
+}
 if ($paramTeam!="") {
   $headerParameters.= i18n("colIdTeam") . ' : ' . SqlList::getNameFromId('Team', $paramTeam) . '<br/>';
 }
@@ -88,6 +92,14 @@ foreach($affLst as $aff){
 	}
 	asort($resources);
 }
+if($idOrganization){
+  $orga = new Organization($idOrganization);
+  $listResOrg=$orga->getResourcesOfAllSubOrganizationsListAsArray();
+  foreach ($resources as $idR=>$nameR){
+    if(! in_array($idR, $listResOrg))unset($resources[$idR]);
+  }
+}
+
 $where="1=1"; // Ticket #2532 : must show availability whatever the project 
 $where.=($periodType=='week')?" and week='" . $periodValue . "'":'';
 $where.=($periodType=='month')?" and month='" . $periodValue . "'":'';

@@ -29,16 +29,13 @@
 include_once '../tool/projeqtor.php';
 //echo "work.php";
 
-$paramProject='';
-if (array_key_exists('idProject',$_REQUEST)) {
-  $paramProject=trim($_REQUEST['idProject']);
-  Security::checkValidId($paramProject);
-}
-$paramTeam='';
-if (array_key_exists('idTeam',$_REQUEST)) {
-  $paramTeam=trim($_REQUEST['idTeam']);
-  Security::checkValidId($paramTeam);
-}
+$paramProject = trim(RequestHandler::getId('idProject'));
+$paramTeam = trim(RequestHandler::getId('idTeam'));
+$idOrganization = trim(RequestHandler::getId('idOrganization'));
+//$paramYear = RequestHandler::getYear('yearSpinner');
+//$paramMonth = RequestHandler::getMonth('monthSpinner');
+//$paramWeek = RequestHandler::getValue('weekSpinner');
+
 $paramYear='';
 if (array_key_exists('yearSpinner',$_REQUEST)) {
 	$paramYear=$_REQUEST['yearSpinner'];
@@ -88,6 +85,9 @@ $headerParameters="";
 if ($paramProject!="") {
   $headerParameters.= i18n("colIdProject") . ' : ' . htmlEncode(SqlList::getNameFromId('Project', $paramProject)) . '<br/>';
 }
+if ($idOrganization!="") {
+  $headerParameters.= i18n("colIdOrganization") . ' : ' . htmlEncode(SqlList::getNameFromId('Organization',$idOrganization)) . '<br/>';
+}
 if ($paramTeam!="") {
   $headerParameters.= i18n("colIdTeam") . ' : ' . htmlEncode(SqlList::getNameFromId('Team', $paramTeam)) . '<br/>';
 }
@@ -112,9 +112,9 @@ if ($periodType=='month') {
 if ( $periodType=='week') {
   $headerParameters.= i18n("week") . ' : ' . $paramWeek . '<br/>';
 }
-if ( $paramResource=='') {
-  $headerParameters.= i18n("colIdResource") . ' : ' . htmlEncode(SqlList::getNameFromId('Resource',$paramResource)) . '<br/>';
-}
+// if ( $paramResource=='') {
+//   $headerParameters.= i18n("colIdResource") . ' : ' . htmlEncode(SqlList::getNameFromId('Resource',$paramResource)) . '<br/>';
+// }
 include "header.php";
 
 
@@ -124,7 +124,6 @@ $where="(".getAccesRestrictionClause('Activity',false,true,true,true) ." or idRe
 //$where="1=1 ";
 $where.=($periodType=='week')?" and week='" . $periodValue . "'":'';
 $where.=($periodType=='month')?" and month='" . $periodValue . "'":'';
-
 //CHANGE qCazelles - Report start month - Ticket #128
 //Old
 //$where.=($periodType=='year')?" and year='" . $periodValue . "'":'';
@@ -189,6 +188,21 @@ foreach ($projects as $id=>$name) {
 }
 
 asort($resources);
+//gautier #4342
+if($idOrganization){
+  $orga = new Organization($idOrganization);
+  $listOrga = $orga->getRecursiveSubOrganizationsFlatList(false,true);
+  $listResOrg = array();
+  foreach ($listOrga as $id=>$org){
+    $org = new Organization($id);
+    $listResOrg += $org->getResourcesOfOrganizationsListAsArray();
+  }
+  $listResOrg = array_flip($listResOrg);
+  foreach ($resources as $idR=>$nameR){
+    if(! in_array($idR, $listResOrg))unset($resources[$idR]);
+  }
+}
+
 foreach ($resources as $idR=>$nameR) {
   if ($paramTeam) {
     $res=new Resource($idR);
