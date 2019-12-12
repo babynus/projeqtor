@@ -109,7 +109,7 @@ if ($planningMode=='RECW') {
               <?php echo autoOpenFilteringSelect(); $isSelectFonction = Parameter::getGlobalParameter('selectFonction'); ?>
                 id="assignmentIdResource" name="assignmentIdResource"
                 class="input" 
-                onChange="<?php if($isSelectFonction == 'YES'){?>assignmentChangeResourceSelectFonction();<?php }else{?> assignmentChangeResource(); <?php }?> assignmentChangeResourceTeamForCapacity();"
+                onChange="<?php if($isSelectFonction == 'YES'){?>assignmentChangeResourceSelectFonction();<?php }else{?> assignmentChangeResource(); <?php }?> assignmentChangeResourceTeamForCapacity();refreshReccurentAssignmentDiv(this.value);"
                 missingMessage="<?php echo i18n('messageMandatory',array(i18n('colIdResource')));?>" <?php echo ($realWork!=0 && $mode=='edit')?"readonly=readonly":"";?>>
                 <?php if($mode=='edit'){                      
                           htmlDrawOptionForReference('idResourceAll', $idResource,null,true,'idProject',$idProject);
@@ -398,7 +398,7 @@ if ($planningMode=='RECW') {
         </table>
       </div>
          
-      <div id="recurringAssignmentDiv" style="<?php if ($planningMode=='RECW'){echo "display:block;";}else {echo "display:none;";}?>">
+      <div dojoType="dijit.layout.ContentPane" id="recurringAssignmentDiv" style="<?php if ($planningMode=='RECW'){echo "display:block;";}else {echo "display:none;";}?>">
         <table style="margin-left:143px;">
           <tr><td colspan="7">&nbsp;</td></tr>
           <tr>
