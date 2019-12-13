@@ -8141,7 +8141,7 @@ function drawJoblistFromObject($obj,$nbCol=3) {
       $paneName='pane'.$tabName;
       $extName=($comboDetail)?"_detail":'';
       $paneWidth=$displayWidth;
-      if (!$layout=='tab' and !$print and $nbCol==3) $paneWidth=intval(intval($displayWidth)*2/3).'px';
+      if ($layout!='tab' and !$print and $nbCol==3) $paneWidth=intval(intval($displayWidth)*2/3).'px';
       echo '<div style="width:'.$paneWidth.';padding:4px;overflow:auto" dojoType="dijit.TitlePane"';
       echo ' title="'.(($layout=='tab')?i18n('tabJoblist'):i18n('Joblist')).'" ';
       echo (($tabName==$selectedTab)?' selected="true" ':'');

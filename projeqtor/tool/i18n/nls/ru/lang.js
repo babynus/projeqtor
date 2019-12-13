@@ -1984,7 +1984,7 @@ helpAllowTypeRestrictionOnProject: "позволить задать дополн
 helpAuthorizeActivityOnDeliveredProduct: "include delivered products versions in target product version list for activities",
 helpAutoAffectationPool: "Automatic allocation of resources of the pool when allocating a pool to a project.&#13The explicit allocation will generate visible allocations that won't be changed afterwards (if allocation of pool changes). &#13The implicit allocation will generate invisible allocations that will follow changes of the pool (allocation of the pool to the project or of resources to the pool).",
 helpAutoLinkMilestone: "Automatically add milestone to linked elements.&#13;This will provide list of linked elements from milestone.",
-helpAutomaticFeedingOfTheReal: "Automatically informs the real from the planned one&#44 until a given date&#44 then triggers the automatic calculation of the projects from the day after this date",
+helpAutomaticFeedingOfTheReal: "Before complete calculation of planning&#44 automatically enters real work as planned up to the day before the planning calculation start date",
 helpAutomaticPlanningComplete: "calculate planning for all active projects",
 helpAutomaticPlanningCompleteDate: "Define planning start date when running complete automatic planning",
 helpAutomaticPlanningDifferential: "calculate planning only for projects needing calculation",

@@ -1984,7 +1984,7 @@ helpAllowTypeRestrictionOnProject: "дозволити визначити дод
 helpAuthorizeActivityOnDeliveredProduct: "включати версії поставлених продуктів у список версій цільового продукту для справ(activities)",
 helpAutoAffectationPool: "Automatic allocation of resources of the pool when allocating a pool to a project.&#13The explicit allocation will generate visible allocations that won't be changed afterwards (if allocation of pool changes). &#13The implicit allocation will generate invisible allocations that will follow changes of the pool (allocation of the pool to the project or of resources to the pool).",
 helpAutoLinkMilestone: "Автоматично додати репер (milestone) до пов'язаних елементів.&#13;Це дозволить перелічити відповідні елементи на репер.",
-helpAutomaticFeedingOfTheReal: "Automatically informs the real from the planned one&#44 until a given date&#44 then triggers the automatic calculation of the projects from the day after this date",
+helpAutomaticFeedingOfTheReal: "Before complete calculation of planning&#44 automatically enters real work as planned up to the day before the planning calculation start date",
 helpAutomaticPlanningComplete: "обчислити планування всіх активних проектів",
 helpAutomaticPlanningCompleteDate: "Визначте дату початку планування під час виконання повного автоматичного планування",
 helpAutomaticPlanningDifferential: "розрахувати планування тільки для проектів&#44; що потребують обчислювання",

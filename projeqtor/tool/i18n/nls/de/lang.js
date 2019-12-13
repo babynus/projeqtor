@@ -1984,7 +1984,7 @@ helpAllowTypeRestrictionOnProject: "Erlaube zusätzlich zu den globalen Typ-Besc
 helpAuthorizeActivityOnDeliveredProduct: "Gelieferte Produktversionen in die Zielproduktversionsliste für Aktivitäten aufnehmen",
 helpAutoAffectationPool: "Automatic allocation of resources of the pool when allocating a pool to a project.&#13The explicit allocation will generate visible allocations that won't be changed afterwards (if allocation of pool changes). &#13The implicit allocation will generate invisible allocations that will follow changes of the pool (allocation of the pool to the project or of resources to the pool).",
 helpAutoLinkMilestone: "Automatisch Meilensteine zu verbundenem Element hinzufügen.&#13;Dies liefert eine Liste aller mit dem Meilenstein verbundnenen Elemente.",
-helpAutomaticFeedingOfTheReal: "Automatically informs the real from the planned one&#44 until a given date&#44 then triggers the automatic calculation of the projects from the day after this date",
+helpAutomaticFeedingOfTheReal: "Before complete calculation of planning&#44 automatically enters real work as planned up to the day before the planning calculation start date",
 helpAutomaticPlanningComplete: "Planung kalkulieren für alle aktiven Projekte",
 helpAutomaticPlanningCompleteDate: "Geplantes Startdatum festlegen&#44; wenn vollständig automatische Planung",
 helpAutomaticPlanningDifferential: "Planung nur für Projekte durchführen&#44; wenn erforderlich",
