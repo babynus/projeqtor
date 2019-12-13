@@ -133,7 +133,7 @@ class History extends SqlElement {
                    SELECT $colList FROM $tableHist WHERE refType='$refType' and refId=$refId and operationDate <> '$hist->operationDate';"; 
       SqlDirectElement::execute($requestIns);
       $res=Sql::$lastQueryNbRows;
-      $where="refType='$refType' and refId=$refId and colName='$hist->colName' and newValue=$hist->newValue and operationDate='$hist->operationDate'";
+      $where="refType='$refType' and refId=$refId and colName='$hist->colName' and newValue='$hist->newValue' and operationDate='$hist->operationDate'";
       $idleRow=$hist->getSqlElementsFromCriteria(null,null,$where);
       foreach ($idleRow as $history ){
         $result=$history->operationDate;
