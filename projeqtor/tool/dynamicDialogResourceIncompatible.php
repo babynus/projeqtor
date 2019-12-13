@@ -64,7 +64,6 @@ $idResource=RequestHandler::getValue('idResource');
              <td> 
                <textarea dojoType="dijit.form.Textarea" 
                 id="resourceIncompatibleDescription" name="resourceIncompatibleDescription"
-                required="true"
                 maxlength="4000"
                 class="input"></textarea>   
              </td>
