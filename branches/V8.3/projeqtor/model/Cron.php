@@ -907,6 +907,7 @@ class Cron {
   		}
   		// Search end of Message (this is valid for text only, treatment of html messages would require other code)  		
   		$posEndMsg=strrpos($body,"###PROJEQTOR###");
+  		debugLog($posEndMsg);
   		if($posEndMsg){
   		  $checkThunderAndGmail=strpos($body,"\r\n>");
   		  //$checkSeparator=strpos($body,"____________________");
@@ -914,7 +915,11 @@ class Cron {
             $posEndMsg=$checkThunderAndGmail;
             $posEndMsg=strrpos(substr($body,0,$posEndMsg-20), "\r\n");// Search for Thunderbird and Gmail
           }else{
-  		    $posEndMsg=strrpos(substr($body,0,$posEndMsg-83), "###PROJEQTOR###");
+            debugLog($body);
+            debugLog(substr($body,0,$posEndMsg-83));
+            $posEndTag=strpos($body,"###PROJEQTOR###");
+            $posEndMsg=$posEndTag-90;
+            //$posEndMsg=$posEndTag-75; for English language
           }
   		}else if (!$posEndMsg and strpos($body,"\r\n>")) {
   		  $posEndMsg=strrpos(substr($body,0,$posEndMsg-20), "\r\n");
@@ -953,6 +958,8 @@ class Cron {
   		}
   		if ($posEndMsg) {
   		  $msg=substr($body,0,$posEndMsg);
+  		  debugLog('2');
+  		  debugLog($msg);
   		}
   		if (!trim ($msg)) { // Message not received with previous methods, try another one
   		  $posEndMsg=strrpos(substr($body,0,$posClass), "\n");
