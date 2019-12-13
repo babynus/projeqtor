@@ -5076,11 +5076,7 @@ function drawElementIntoVersionStructureFromObject($comp, $compObj, $print, $can
   $colorStatus = $listStatus[0]->color;
   echo '<td class="dependencyData"  style="width:10%">' . colorNameFormatter($nameStatus . "#split#" . $colorStatus) . '</td>';
   echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
-  $type = new Type();
-  $listType = $type->getSqlElementsFromCriteria(array(
-      'id' => $compObj->idVersionType
-  ));
-  $nameType = $listType[0]->name;
+  $nameType = SqlList::getNameFromId('Type', $compObj->idVersionType);
   echo htmlEncode($nameType);
   echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
   echo htmlFormatDate($compObj->plannedDeliveryDate);
