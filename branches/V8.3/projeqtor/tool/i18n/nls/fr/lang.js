@@ -1984,7 +1984,7 @@ helpAllowTypeRestrictionOnProject: "permettre de définir la restriction de type
 helpAuthorizeActivityOnDeliveredProduct: "inclure les versions de produits livrées dans la liste des versions cibles pour les activités",
 helpAutoAffectationPool: "Affectation automatique des ressources du pool lorsque l'on affecte le pool à un projet.&#13L'affectation explicite générera des affectations visibles qui ne seront plus modifiées (si on modifie l'affectation du pool). &#13L'affectation implicite générera des affectations invisibles qui suivront les modifications du pool (modification de l'affectation du pool au projet ou des ressources au pool).",
 helpAutoLinkMilestone: "Ajouter automatiquement le jalon aux éléments liés.&#13;Ceci permettra de lister les éléments liés sur le jalon.",
-helpAutomaticFeedingOfTheReal: "Renseigne automatiquement le réel à partir du plannifié&#44 jusqu'à une date donnée&#44 puis déclenche le calcul automatique des projets à partir du lendemain de cette date",
+helpAutomaticFeedingOfTheReal: "Avant le déclenchement automatique du calcul complet du planning&#44 renseigne automatiquement le réel à partir du plannifié jusqu'à la veille de la date de calcul complet du planning",
 helpAutomaticPlanningComplete: "calculer le planning pour tous les projets actifs",
 helpAutomaticPlanningCompleteDate: "Détermine la date de début du planning pour le calcul complet",
 helpAutomaticPlanningDifferential: "calculer le planning uniquement pour les projets le nécessitant",
