@@ -1984,7 +1984,7 @@ helpAllowTypeRestrictionOnProject: "omogućuju definiranje dodatnih ograničenja
 helpAuthorizeActivityOnDeliveredProduct: "uključiti isporučene verzije proizvoda u popis ciljnih proizvoda za aktivnosti",
 helpAutoAffectationPool: "Automatic allocation of resources of the pool when allocating a pool to a project.&#13The explicit allocation will generate visible allocations that won't be changed afterwards (if allocation of pool changes). &#13The implicit allocation will generate invisible allocations that will follow changes of the pool (allocation of the pool to the project or of resources to the pool).",
 helpAutoLinkMilestone: "Automatski dodaj prekretnicu na povezane elemente.&#13;Ovo će osigurati popis povezanih elemenata iz prekretnice.",
-helpAutomaticFeedingOfTheReal: "Automatically informs the real from the planned one&#44 until a given date&#44 then triggers the automatic calculation of the projects from the day after this date",
+helpAutomaticFeedingOfTheReal: "Before complete calculation of planning&#44 automatically enters real work as planned up to the day before the planning calculation start date",
 helpAutomaticPlanningComplete: "izračunati planiranje za sve aktivne projekte",
 helpAutomaticPlanningCompleteDate: "Odredi datum početka planiranja prilikom potpunog automatskog planiranja",
 helpAutomaticPlanningDifferential: "izračunati planiranje samo za projekte koji trebaju izračun",
