@@ -7135,6 +7135,7 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
           $subClass=substr($fld,0,$pos);
         }
         if (SqlElement::class_exists($subClass)) {
+          if (strtolower($subClass)=="billline") $value=array_reverse($value);
           $sub=SqlElement::toArrayList($value,$this,$outputHtml);
           $result[strtolower($subClass)]=$sub;
           if ($subClass=='Link') {
