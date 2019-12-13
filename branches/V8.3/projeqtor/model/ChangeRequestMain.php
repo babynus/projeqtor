@@ -230,10 +230,13 @@ class ChangeRequestMain extends SqlElement {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  if (dijit.byId("approved").get("checked")==true) { ';
       $colScript .= '    var curDate = new Date();';
+      $colScript .= '    var curUserId = '.getCurrentUserId ().';';
+      $colScript .= '    console.log(curUserId);';
       $colScript .= '    dijit.byId("approvedDate").set("value", curDate); ';
+      $colScript .= '   dijit.byId("idAffectable").set("value",curUserId); ';
       $colScript .= '  } else { ';
       $colScript .= '   dijit.byId("approvedDate").set("value", null);';
-      $colScript .= '   dijit.byId("idApprover__idResource").set("value",null); ';
+      $colScript .= '   dijit.byId("idAffectable").set("value",null); ';
       $colScript .= '  }  ';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
