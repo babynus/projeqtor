@@ -7015,6 +7015,7 @@ function drawTestCaseRunFromObject($list, $obj, $refresh=false) {
     $checkImg='savedOk.png';
     $commentWidth='200';
     if (intval($displayWidth)/10<200) $commentWidth=round(intval($displayWidth)/10,0);
+    if ($otherClass=='TestSession') $commentWidth=$commentWidth/2;
     echo '<td class="assignData" style="width:10%">';
     if (!$print or $tcr->result) {
       if (!$print) {
