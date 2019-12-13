@@ -91,7 +91,6 @@ if($idSupport){
              <td> 
                <textarea dojoType="dijit.form.Textarea" 
                 id="resourceSupportDescription" name="resourceSupportDescription"
-                required="true"
                 maxlength="4000"
                 class="input"><?php echo $description;?></textarea>   
              </td>
