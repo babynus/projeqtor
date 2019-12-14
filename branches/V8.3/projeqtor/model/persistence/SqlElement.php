@@ -5212,7 +5212,7 @@ abstract class SqlElement {
         $temp->dest=$destTab[$emailTemplateTab[$j]->id];
         $temp->recordDateTime=date('Y-m-d H:i:s');
         $tempRes=$temp->save();
-        $resultMail='TEMP';
+        $resultMail[]='TEMP';
       } else { 
         if ($emailTemplateTab[$j]->name == 'basic') {
           $emailTemplateTab[$j]->template = $this->getMailDetail();
@@ -5238,7 +5238,6 @@ abstract class SqlElement {
       
     }
     //END add gmartin 
-    
     if ($directStatusMail) {
       $idTemplate=(trim($directStatusMail->idEmailTemplate))?$directStatusMail->idEmailTemplate:'0';
       if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES' ){
@@ -5261,10 +5260,13 @@ abstract class SqlElement {
         return array('result' => '', 'dest' => $destTab[$idTemplate]);
       }
     }
+    
     $valide=0;
-    foreach ($resultMail as $id=>$value){
-      if($value!=''){
-        $valide++;
+    if ($resultMail and is_array($resultMail)) {
+      foreach ($resultMail as $id=>$value){
+        if($value!=''){
+          $valide++;
+        }
       }
     }
     if($valide!=0){
