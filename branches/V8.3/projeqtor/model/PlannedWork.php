@@ -1509,7 +1509,7 @@ class PlannedWork extends GeneralWork {
     }
     // Moved transaction at end of procedure (out of script plan.php) to minimize lock possibilities
     foreach ($fullListPlan as $keyPe=>$pe) {
-      if ($pe->fixPlanning) unset($fullListPlan[$keyPe]);
+      if (property_exists($pe, 'fixPlanning') and $pe->fixPlanning) unset($fullListPlan[$keyPe]);
     }
     Sql::beginTransaction();
     $cpt=0;
@@ -1577,7 +1577,7 @@ class PlannedWork extends GeneralWork {
     }
     $arrayProj=array();
     foreach ($fullListPlan as $pe) {
-      if ($pe->fixPlanning) continue;
+      if (property_exists($pe, 'fixPlanning') and $pe->fixPlanning) continue;
       if (!$pe->refType) continue;
       if ($pe->refType!='Project' and $pe->idProject) $arrayProj[$pe->idProject]=$pe->idProject;
       if (property_exists($pe,'_profile') and $pe->_profile=='RECW') { 
