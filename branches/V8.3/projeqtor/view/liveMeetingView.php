@@ -294,6 +294,8 @@ function timeToTimeStamp($time){
       if(count ( $meeting->_Assignment )!=0)generateSpeakTimeEditor ( $param );
       $topHeight=Parameter::getUserParameter('contentPaneTopLiveMeeting');
       $topHeight=($topHeight)?$topHeight:'300';
+	  $editorType=getEditorType();
+	  if ($editorType=='CKInline') $editorType='CK';
       ?>
       </td>
 						<td width="5%" style="min-width: 67px; vertical-align: top;">
@@ -304,12 +306,12 @@ function timeToTimeStamp($time){
 				<div style="width:100%; height:100%">
 					<input id="liveMeetingResultEditorType"
 						name="liveMeetingResultEditorType" type="hidden"
-						value="<?php echo getEditorType();?>" />
-     <?php if (getEditorType()=="CK") {?> 
+						value="<?php echo $editorType;?>" />
+     <?php if ($editorType=="CK") {?> 
       <textarea style="width:<?php echo $detailWidth;?>; height:<?php echo $detailHeight;?>"
       name="liveMeetingResult" id="liveMeetingResult"><?php echo htmlspecialchars($result);?></textarea>
     <?php
-    } else if (getEditorType () == "text") {
+    } else if ($editorType == "text") {
       $text = new Html2Text ( $result );
       $val = $text->getText ();
       $topHeight-=135;
