@@ -565,11 +565,15 @@ class ProductVersionMain extends Version {
     // Copy language
     $lang = new VersionLanguage();
     $listLang=$lang->getSqlElementsFromCriteria(array('idVersion'=>$this->id),null,null,null,null,true);
+    //gautier #4350
     foreach($listLang as $lang){
-      $lang->id = NULL;
-      $lang->idVersion = $result->id;
-      $lang->scope = $result->scope; //Add mOlives - bugLanguage - 19/04/2018
-      $lang->save();
+      //$lang->id = NULL;
+      $newLang = new VersionLanguage();
+      $newLang->creationDate = date('Y-m-d');
+      $newLang->idLanguage = $lang->idLanguage;
+      $newLang->idVersion = $result->id;
+      $newLang->scope = $result->scope; //Add mOlives - bugLanguage - 19/04/2018
+      $newLang->save();
     }
     //end add atrancoso ticket#149
     //add atrancoso ticket#160
