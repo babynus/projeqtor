@@ -4199,6 +4199,7 @@ abstract class SqlElement {
       if (property_exists ( $this, 'handledDate' )) {
         $colScript .= '    if (! dijit.byId("handledDate").get("value")) {';
         $colScript .= '      var curDate = new Date();';
+        $colScript .= '      console.log(curDate); ';
         $colScript .= '      dijit.byId("handledDate").set("value", curDate); ';
         $colScript .= '    }';
       }
@@ -6133,7 +6134,15 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
         if ($status->setHandledStatus) {
           $this->handled = 1;
           if (property_exists ( $this, 'handledDate' ) and ! $this->handledDate)
+            //florent  4093
             $this->handledDate = date ( "Y-m-d" );
+           if (property_exists ( $this, '_Assignment' )){
+             foreach ($this->_Assignment as $id=>$ass){
+               if(isset($ass->realStartDate)){
+                 $this->handledDate=$ass->realStartDate;
+               }
+             }
+           }
             if (property_exists ( $this, 'handledDateTime' ) and ! $this->handledDateTime)
               $this->handledDateTime = date ( "Y-m-d H:i:s" );
         } else {
