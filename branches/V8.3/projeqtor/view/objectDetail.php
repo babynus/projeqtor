@@ -7513,6 +7513,9 @@ function drawExpenseBudgetDetail($obj) {
 	$class=get_class($obj);
 	$projectExpense = new ProjectExpense();
 	$listProjectExpense = $projectExpense->getSqlElementsFromCriteria(array("idBudgetItem"=>$obj->id));
+	//gautier #4346
+	$individualExpense = new IndividualExpense();
+	$listindividualExpense = $individualExpense->getSqlElementsFromCriteria(array("idBudgetItem"=>$obj->id));
 	echo '<tr><td colspan="2" style="width:100%;">';
 	echo '<table style="width:100%;">';
 	echo '  <tr>';
@@ -7525,6 +7528,9 @@ function drawExpenseBudgetDetail($obj) {
 	echo '  </tr>';
 	foreach ($listProjectExpense as $expense){
 		drawBudgetExpenseDetailLine(get_class($expense), $expense->id);
+	}
+	foreach ($listindividualExpense as $expenseIndividual){
+	  drawBudgetExpenseDetailLine(get_class($expenseIndividual), $expenseIndividual->id);
 	}
 	echo '</table>';
 	echo '</tr>';
