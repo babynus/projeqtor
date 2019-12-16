@@ -127,7 +127,6 @@ while ($line = Sql::fetchLine($result)) {
 if (!$end) $end=$today;
 if (!$start) $start=$today;
 $endReal=$end;
-
 // constitute query and execute for planned post $end (last real work day)
 $pw=new PlannedWork();
 $pwTable=$pw->getDatabaseTableName();
@@ -193,7 +192,15 @@ if ($showCompleted) {
 }
 
 if (checkNoData(array_merge($tabLeft,$tabLeftPlanned))) exit;
-
+//gautier #4369
+if(count($tabLeftPlanned)==1 and isset($tabLeftPlanned[$today])){
+  if(trim($tabLeftPlanned[$today])==0){
+    echo '<div style="background: #FFDDDD;font-size:150%;color:#808080;text-align:center;padding:20px">';
+    echo i18n('reportNoData');
+    echo '</div>';
+    exit;
+  }
+}
 $pe=SqlElement::getSingleSqlElementFromCriteria('PlanningElement',array('refType'=>'Project', 'refId'=>$idProject));
 if (trim($pe->realStartDate) and $pe->realStartDate<$start) $start=$pe->realStartDate;
 if (trim($pe->realEndDate) and $pe->realEndDate>$end) $end=$pe->realEndDate;
@@ -487,7 +494,12 @@ $dataSet->setSerieDrawable("best",false);
 if (count($resLeft)<$maxPlotted) {
   $graph->drawPlotChart();
 }
-if ($showToday) $graph->drawXThreshold(array($indexToday),array("Alpha"=>70,"Ticks"=>0));
+
+//gautier #today should not be visible if date of today is not display
+$today = date('Y-m-d');
+if ($showToday and $today >= $start and $today <= $end){
+  $graph->drawXThreshold(array($indexToday),array("Alpha"=>70,"Ticks"=>0));
+}
 
 $dataSet->setSerieDrawable("best",true);
 $dataSet->setSerieDrawable("left",true);
