@@ -5142,7 +5142,7 @@ function saveLinkObject() {
 // END CHANGE BY Marc TABARY - 2017-03-31 - ADD MULTIPLE OBJECTS LINKED BY ID
   param+="&mainObjectClass="+dojo.byId('mainObjectClass').value;
   param+="&idInstanceOfMainClass="+dojo.byId('idInstanceOfMainClass').value;
-  param+="&linkObjectClassName="+dojo.byId('linkObjectClassName').value
+  param+="&linkObjectClassName="+dojo.byId('linkObjectClassName').value;
 
   loadContent("../tool/saveObjectLinkedByIdToMainObject.php"+param, "resultDivMain", "objectFormDialog", true, 'linkObject');
   dijit.byId('dialogObject').hide();
