@@ -4199,7 +4199,6 @@ abstract class SqlElement {
       if (property_exists ( $this, 'handledDate' )) {
         $colScript .= '    if (! dijit.byId("handledDate").get("value")) {';
         $colScript .= '      var curDate = new Date();';
-        $colScript .= '      console.log(curDate); ';
         $colScript .= '      dijit.byId("handledDate").set("value", curDate); ';
         $colScript .= '    }';
       }
