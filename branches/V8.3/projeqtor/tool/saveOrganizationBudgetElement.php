@@ -76,7 +76,8 @@ if (! array_key_exists('AddChangeBudgetElementBudgetExpenseAmount',$_REQUEST)) {
 }
 $budgetExpenseAmount = $_REQUEST['AddChangeBudgetElementBudgetExpenseAmount'];
 $budgetExpenseAmount = str_replace(' ','',str_replace(',', '.', $budgetExpenseAmount));
-
+Sql::beginTransaction();
+$result = '';
 if($action=='ADD') {
     // In fact, ADD consist to clone an existing BudgetElement of organization
     // and after cloning, change year, budgetWork, budgetCost, budgetExpenseAmount
@@ -111,11 +112,20 @@ if($action=='ADD') {
         $result = $bE->simpleSave();
     }
 }
-
+//gautier #4360
+if(getLastOperationStatus($result)=='OK'){
+  if(!isset($orga)){
+    $orga =  new Organization($bE->refId,true);
+  }
+  $orga->lastUpdateDateTime = date( "Y-m-d H:i:s" );
+  $test = $result;
+  $result = $orga->saveForced();
+  $result .= $test;
+}
 $_REQUEST['objectClass']='Organization';
 $_REQUEST['objectId']=$refId;
 $_REQUEST['OrganizationBudgetPeriod']=$year;
-include '../view/objectDetail.php';
-
+//include '../view/objectDetail.php';
+displayLastOperationStatus($result);
 // END ADD BY Marc TABARY - 2017-02-13 - PERIODIC YEAR BUDGET ELEMENT
 ?>

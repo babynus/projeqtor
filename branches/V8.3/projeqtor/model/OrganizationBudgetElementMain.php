@@ -233,10 +233,15 @@ class OrganizationBudgetElementMain extends BudgetElement {
     // It's not a very good practice, but it's an 'effective' solution
     if (RequestHandler::isCodeSet('OrganizationBudgetPeriod')) {
       $this->_byMet_periodYear = RequestHandler::getValue('OrganizationBudgetPeriod');
-    } else {                        
-      $this->_byMet_periodYear = date('Y');
+    } else {
+      if(sessionValueExists('OrganizationBudgetElementDate')){
+          $this->_byMet_periodYear = getSessionValue('OrganizationBudgetElementDate');
+          if(!$this->_byMet_periodYear)$this->_byMet_periodYear = date('Y');
+      }else{  
+        $this->_byMet_periodYear = date('Y');
+      }
     }
-    $this->setYearPeriod($this->_byMet_periodYear);  
+    $this->setYearPeriod($this->_byMet_periodYear); 
   }
   
   /** ==========================================================================
@@ -298,6 +303,7 @@ class OrganizationBudgetElementMain extends BudgetElement {
 <script type="dojo/on" data-dojo-event="change" args="event">if (isEditingKey(event)) {periodChanged(this);}
 function periodChanged(theId) {
   var periodYear = theId.get("value");
+  saveDataToSession("OrganizationBudgetElementDate",periodYear);
   if (waitingForReply) {
     showInfo(i18n("alertOngoingQuery"));
     return true;
