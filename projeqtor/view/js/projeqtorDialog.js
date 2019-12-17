@@ -5018,9 +5018,11 @@ function changeBudgetElement(objectClassName, refId, id, year, budgetWork, budge
  * Add or save a budgetElement
  * After calling the dialog dialogAddChangeBudgetElement
  */
+//gautier #4360
 function saveOrganizationBudgetElement() {
-loadContent("../tool/saveOrganizationBudgetElement.php", "detailDiv", "addChangeBudgetElementForm");
-dijit.byId('dialogAddChangeBudgetElement').hide();
+//loadContent("../tool/saveOrganizationBudgetElement.php", "detailDiv", "addChangeBudgetElementForm");
+  loadContent("../tool/saveOrganizationBudgetElement.php", "resultDivMain", "addChangeBudgetElementForm", true);
+  dijit.byId('dialogAddChangeBudgetElement').hide();
 showWait();
 }
 
