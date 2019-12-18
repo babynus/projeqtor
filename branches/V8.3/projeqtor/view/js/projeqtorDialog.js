@@ -1856,7 +1856,7 @@ function refreshProductVersionStructureList(selected,newName) {
       selectList.add(option);
     }
     var ids=selected.split('_');
-    for (j=0;j<selectList.options.length;j++) {
+    for (var j=0;j<selectList.options.length;j++) {
       var sel=selectList.options[j].value;
       if (ids.indexOf(sel)>=0) { // Found in selected items
         selectList.options[j].selected='selected';
@@ -3328,7 +3328,7 @@ function editBillLine(id,billingType) {
   params+="&refType="+dojo.byId('objectClass').value;
   params+="&refId="+dojo.byId("objectId").value;
   if (billingType) params+="&billingType="+billingType;
-  loadDialog('dialogBillLine', null, true, params, true)
+  loadDialog('dialogBillLine', null, true, params, true);
 }
 
 
@@ -7600,7 +7600,7 @@ function movePlanningColumn(source, destination) {
   var list='';
   var nodeList=dndPlanningColumnSelector.getAllNodes();
   planningColumnOrder=new Array();
-  for (i=0; i < nodeList.length; i++) {
+  for (var i=0; i < nodeList.length; i++) {
     var itemSelected=nodeList[i].id.substr(14);
     check=(dijit.byId('checkColumnSelector' + itemSelected).get('checked')) ? ''
         : 'hidden';
@@ -7694,7 +7694,7 @@ function moveListColumn(source, destination) {
   var list='';
   var nodeList=dndListColumnSelector.getAllNodes();
   listColumnOrder=new Array();
-  for (i=0; i < nodeList.length; i++) {
+  for (var i=0; i < nodeList.length; i++) {
     var itemSelected=nodeList[i].id.substr(20);
     // check=(dijit.byId('checkListColumnSelector'+itemSelected).get('checked'))?'':'hidden';
     list+=itemSelected + "|";
@@ -8023,7 +8023,7 @@ function compareEmailCurrent(){
 		var count = 0;
 		var email = "";
 		var divCount = 0;
-		var display = '';
+		//var display = '';
 		stockEmailHistory.forEach(function(element){
 			count++;
 			if(split.indexOf(element) <= -1){
@@ -8626,7 +8626,7 @@ function executeExport(obj, idUser) {
   }
   val=eval(val);
   var toExport="";
-  for (i=1; i <= val; i++) {
+  for (var i=1; i <= val; i++) {
     var checkbox=dijit.byId('column' + i);
     if (checkbox) {
       if (checkbox.get('checked')) {
@@ -8807,7 +8807,7 @@ function diaryPreviousNext(way) {
     }
     dojo.byId("diaryYear").value=year;
     dojo.byId("diaryMonth").value=(month >= 10) ? month : "0" + month;
-    diaryDisplayMonth(month, year)
+    diaryDisplayMonth(month, year);
   } else if (period == "week") {
     week=parseInt(week) + parseInt(way);
     if (parseInt(week) == 0) {
@@ -9277,7 +9277,7 @@ function removeFavoriteReport(id) {
 function reorderFavoriteReportItems() {
   var nodeList=dndFavoriteReports.getAllNodes();
   var param="";
-  for (i=0; i < nodeList.length; i++) {
+  for (var i=0; i < nodeList.length; i++) {
     var domNode=nodeList[i];
     var item=nodeList[i].id.substr(11);
     var order=dojo.byId("favoriteReportOrder" + item);
