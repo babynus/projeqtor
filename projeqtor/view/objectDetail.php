@@ -2564,6 +2564,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
                                               'realAmount','realTaxAmount','realFullAmount',
                                               'paymentAmount','paymentFeeAmount','paymentCreditAmount'
                     );
+          if ($obj->isAttributeSetToField($col, 'hidden') or $obj->isAttributeSetToField($col, 'readonly')) $arrayPossibleNegativeAmounts[]=$col;
           if(($isAmount or $isCost) and !in_array($col,$arrayPossibleNegativeAmounts) and $classObj != 'Bill'){
               echo ' constraints="{min:0,max:'.$max.(($isAmount)?',places:2':'').'}" ';
           } else if( ! in_array($col,$arrayPossibleNegativeAmounts) or $col=='minimumThreshold'){
