@@ -3150,6 +3150,7 @@ function drawOrigin($list, $refType, $refId, $obj, $col, $print) {
 function drawHistoryFromObjects($refresh=false) {
   global $cr, $print, $printWidth, $treatedObjects, $comboDetail, $displayWidth,$collapsedList, $paneHistory, $included, $layout;
   $mainObj=null;
+  $doc=false;
   $showArchiveValue=1;
   $showArchive=false;
   if(getSessionValue('showArchive')==1){
@@ -3194,6 +3195,32 @@ function drawHistoryFromObjects($refresh=false) {
   $order=' operationDate desc, id asc';
   $hist=new History();
   $historyList=$hist->getSqlElementsFromCriteria(null, false, $where, $order);
+  //florent
+  if(get_class($obj)=='Document'){
+    $doc=true;
+    $histList=array();
+    $histListDelApprove=array();
+    $listIdApprover=array();
+    $document= new Document(Sql::fmtId($obj->id));
+    foreach ($document->_Approver as $id=>$val){
+      if($val->id){
+        $listIdApprover[]=$val->id;
+      }
+    }
+    $where=' refType="Approver" and operation="delete" and oldValue="Document_'.$document->id.'"';
+    $histListDelApprove=$hist->getSqlElementsFromCriteria(null, false, $where, $order);
+    if(isset($histListDelApprove)){
+      foreach ($histListDelApprove as $history){
+        $listIdApprover[]=$history->refId;
+      }
+    }
+    $idApprovers=implode(",", $listIdApprover);
+    $where=' refType="Approver" and refId in ('.$idApprovers.')';
+    $histList=$hist->getSqlElementsFromCriteria(null, false, $where, $order);
+  }
+  if(isset($histList)or isset($histListDelApprove)){
+    $historyList=$historyList+$histList+$histListDelApprove;
+  }
   //florent
   if($showArchive==true){
     $histArchive= new HistoryArchive();
@@ -3345,10 +3372,45 @@ function drawHistoryFromObjects($refresh=false) {
     if (!$hide) {
       echo '<tr>';
       echo '<td class="historyData'.$class.'" width="10%">'.$oper.'</td>';
-      
+      //florent
+      if($doc==true and $colCaption==''){
+        
+        foreach ($document->_Approver as $id=>$val){
+          if($val->id){
+            $listIdApprover[$val->id]=$val->idAffectable;
+          }
+        }
+        foreach ($listIdApprover as $idRes=>$idRessource){
+          if($hist->refId==$idRes){
+            debugLog($idRessource);
+            $ressource= new Affectable($idRessource);
+            debugLog($ressource);
+            $colCaption=$ressource->name;
+          }
+        }
+        if($hist->operation=='delete'){
+          $ressource= new Affectable($hist->newValue);
+          $colCaption=$ressource->name;
+        }
+        if($colCaption=='' and $hist->operation=='insert'){
+          foreach ($historyList as $autherHist){
+              if($autherHist->id==$hist->id){
+                continue;
+              }
+              if($autherHist->refId==$hist->refId and $autherHist->operation=='delete'){
+                $ressource= new Affectable($autherHist->newValue);
+                $colCaption=$ressource->name;
+              }
+          }
+        }
+      }
       echo '<td class="historyData" width="14%">'.$colCaption.'</td>';
       $oldValue=$hist->oldValue;
       $newValue=$hist->newValue;
+      if($hist->refType=='Approver'){
+        $oldValue='';
+        $newValue='';
+      }
       if ($dataType=='int' and $dataLength==1) { // boolean
         $oldValue=htmlDisplayCheckbox($oldValue);
         $newValue=htmlDisplayCheckbox($newValue);
