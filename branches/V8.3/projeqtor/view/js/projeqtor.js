@@ -5177,7 +5177,6 @@ function addFieldInTextBoxForNotificationItem(context, textBox, editor) {
 
 //Damian
 function addFieldInTextBoxForEmailTemplateItem(editor) {
-	
   var selectedItem = dijit.byId('_spe_listItemTemplate').get("value");
   var idTextBox = dojo.byId('template').value;
   var element = document.getElementById('template');
@@ -5217,7 +5216,7 @@ function addFieldInTextBoxForEmailTemplateItem(editor) {
     CKEDITOR.instances[textBox].insertText(textToAdd);
     //CKEDITOR.instances[textBox].setData(newText);
   } else if (editor==='Dojo' || editor==='DojoInline') {    
-     dijit.byId(textBox+'Editor').setValue(newText)
+     dijit.byId(textBox+'Editor').setValue(newText);
   }
 }
 
