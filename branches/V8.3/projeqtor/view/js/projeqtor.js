@@ -5903,9 +5903,9 @@ function selectActivity(actRowId, actId, idProject, assId){
 		dojo.setAttr('inputAssId', 'value', assId);
 	}
 	dojo.byId('warningNoActivity').style.display = 'none';
-	saveDataToSession('selectAbsenceActivity', actId, true);
-	saveDataToSession('inputIdProject', idProject, true);
-	saveDataToSession('inputAssId', assId, true);
+	saveDataToSession('selectAbsenceActivity', actId);
+	saveDataToSession('inputIdProject', idProject);
+	saveDataToSession('inputAssId', assId);
 }
 
 // Absence day selection fonction
