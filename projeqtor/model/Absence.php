@@ -150,9 +150,15 @@ class Absence{
       	  }
       	}
     	  $actRowId = "actRow".$actId;
-    	  $isSaveUserParam = Parameter::getUserParameter('selectAbsenceActivity');
-    	  $inputIdProject = Parameter::getUserParameter('inputIdProject');
-    	  $inputAssId = Parameter::getUserParameter('inputAssId');
+    	  //$isSaveUserParam = Parameter::getUserParameter('selectAbsenceActivity');
+    	  //$inputIdProject = Parameter::getUserParameter('inputIdProject');
+    	  //$inputAssId = Parameter::getUserParameter('inputAssId');
+    	  $isSaveUserParam = '';
+    	  $inputIdProject = '';
+    	  $inputAssId= '';
+    	  if(sessionValueExists('selectAbsenceActivity'))$isSaveUserParam = getSessionValue('selectAbsenceActivity');
+    	  if(sessionValueExists('inputIdProject'))$inputIdProject = getSessionValue('inputIdProject');
+    	  if(sessionValueExists('inputAssId'))$inputAssId = getSessionValue('inputAssId');
     	  if(!$idle){
     	    if("actRow".$isSaveUserParam == $actRowId){
     	      $result .=' <tr class="absActivityRow dojoxGridRowSelected" id="'.$actRowId.'" align="center" style="height:20px; border: 1px solid grey; cursor:pointer;" onClick="selectActivity('.$actRowId.','.$actId.','.$idProject.','.$assId.')">';
