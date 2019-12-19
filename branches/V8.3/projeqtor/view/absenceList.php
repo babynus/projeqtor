@@ -70,7 +70,8 @@ $yearSpinner = $currentYear;
                              }?>">
                   <script type="dojo/method" event="onChange" >
                     saveDataToSession("userName",dijit.byId('userName').get('value'),false);
-                    saveDataToSession("inputAssId",'');
+                    saveDataToSession("inputAssId",'',true);
+                    saveDataToSession('selectAbsenceActivity','', true);
                     refreshAbsenceList();
                   </script>
                   <?php 
