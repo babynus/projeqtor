@@ -3383,9 +3383,7 @@ function drawHistoryFromObjects($refresh=false) {
         }
         foreach ($listIdApprover as $idRes=>$idRessource){
           if($hist->refId==$idRes){
-            debugLog($idRessource);
             $ressource= new Affectable($idRessource);
-            debugLog($ressource);
             $colCaption=$ressource->name;
           }
         }

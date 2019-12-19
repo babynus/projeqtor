@@ -5420,22 +5420,6 @@ abstract class SqlElement {
     $arrayFrom [] = '${adminMail}';
     $arrayTo [] = Parameter::getGlobalParameter ( 'paramAdminMail' );
     
-    //gautier #4364 date
-    $arrayFrom [] = '${handledDate}';
-    $arrayTo [] = (property_exists ( $this, 'handledDate' )) ? dateFormatter($this->handledDate) : '';
-    
-    $arrayFrom [] = '${doneDate}';
-    $arrayTo [] = (property_exists ( $this, 'doneDate' )) ? dateFormatter($this->doneDate) : '';
-    
-    $arrayFrom [] = '${idleDate}';
-    $arrayTo [] = (property_exists ( $this, 'idleDate' )) ? dateFormatter($this->idleDate) : '';
-    
-    $arrayFrom [] = '${sendDate}';
-    $arrayTo [] = (property_exists ( $this, 'sendDate' )) ? dateFormatter($this->sendDate) : '';
-    
-    $arrayFrom [] = '${paymentDueDate}';
-    $arrayTo [] = (property_exists ( $this, 'paymentDueDate' )) ? dateFormatter($this->paymentDueDate) : '';
-    
     // Format title
     return str_replace ( $arrayFrom, $arrayTo, $message );
   }
@@ -5475,7 +5459,6 @@ abstract class SqlElement {
       $msg .= '<tr><td colspan="3" style="font-size:18pt;color:#AAAAAA"><a href="' . $ref . '" target="#">' . i18n ( get_class ( $this ) ) . ' #' . htmlEncode ( $this->id ) . '</a></td></tr>';
     }
     //
-   
     $nobr = false;
     foreach ( $this as $col => $val ) {
       $hide = false;
@@ -6047,9 +6030,9 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
       $property = trim($matches[0], '${}');
       if (property_exists($this, $property)) {
         if (isset($this, $property) and $this->$property != '') {
-          if (substr($property,0,-8)=='DateTime') {
+          if (substr($property,-8)=='DateTime') {
             return htmlFormatDateTime($this->$property,false, true);
-          } else if (substr($property,0,-4)=='Date') {
+          } else if (substr($property,-4)=='Date') {
             return htmlFormatDate($this->$property,true);
           } else {
             return $this->$property;
