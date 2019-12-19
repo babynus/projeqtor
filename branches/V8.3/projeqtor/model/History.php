@@ -157,8 +157,7 @@ class History extends SqlElement {
       	$hist->oldValue=$oldValue;
       	$hist->newValue=$newValue;
       	if($refType=='Approver' and $operation=='delete'){
-      	 $hist->oldValue=$obj->refType.'_'.$obj->refId;
-      	 $hist->newValue=$obj->idAffectable;
+      	 $hist->oldValue=$obj->refType.'_'.$obj->refId.'_'.$obj->idAffectable;
       	}
       }
       if ($obj and property_exists($obj, '_workHistory')) {
