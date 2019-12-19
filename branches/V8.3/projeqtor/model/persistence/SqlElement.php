@@ -4389,8 +4389,9 @@ abstract class SqlElement {
               $this->idResource = $user->id;
               $val = $this->idResource;
             }
-            if ((! $val and $val !== 0) or trim ( $val ) == '') {
-              $result .= '<br/>' . i18n ( 'messageMandatory', array($this->getColCaption ( $col )) );
+            //if ( ( ! $val and $val !== 0) or trim ( $val ) == '') {
+            if ( ( ! $val) or trim ( $val ) == '') { // Since PHP 7.1, all numeric fields have default value zero and cannot be null  
+              $result .= '<br/>'. i18n ( 'messageMandatory', array($this->getColCaption ( $col )) );
             }
           }
           if ($dataType == 'datetime') {
