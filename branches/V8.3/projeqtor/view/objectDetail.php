@@ -3198,33 +3198,6 @@ function drawHistoryFromObjects($refresh=false) {
   $order=' operationDate desc, id asc';
   $hist=new History();
   $historyList=$hist->getSqlElementsFromCriteria(null, false, $where, $order);
-  //florent
-  if(get_class($obj)=='Document'){
-    $doc=true;
-    $where=' refType="'.get_class($obj).'" and refId='.Sql::fmtId($obj->id).'';
-    $approvers= new Approver();
-    $listApprovers=$approvers->getSqlElementsFromCriteria(null, false, $where);
-    foreach ($listApprovers as $id=>$value){
-      $listIdApprover[]=$value->id;
-    }
-    if(isset($listIdApprover)){
-      $listIdApprover=implode(",", $listIdApprover);
-      $where=' refType="Approver" and refId in ('.$listIdApprover.') ';
-      $histList=$hist->getSqlElementsFromCriteria(null, false, $where);
-    }
-    $where=' refType="Approver" and operation="delete" and oldValue like "Document_'.Sql::fmtId($obj->id).'_%"';
-    $histListDelApprove=$hist->getSqlElementsFromCriteria(null, false, $where, $order);
-    if(isset($histListDelApprove)){
-      foreach ($histListDelApprove as $history){
-        $listRefIdApprover[]=$history->refId;
-      }
-    }
-    if(isset($listRefIdApprover)){
-      $idApprovers=implode(",", $listRefIdApprover);
-      $where=' refType="Approver" and refId in ('.$idApprovers.')';
-      $histListApprover=$hist->getSqlElementsFromCriteria(null, false, $where, $order);
-    }
-  }
   $historyList=array_merge($historyList,$histList,$histListApprover);
   //florent
   if($showArchive==true){
@@ -3384,40 +3357,6 @@ function drawHistoryFromObjects($refresh=false) {
       echo '<td class="historyData" width="14%">'.$colCaption.'</td>';
       $oldValue=$hist->oldValue;
       $newValue=$hist->newValue;
-      //florent
-      if($hist->refType=='Approver'){
-        foreach ($listApprovers as $id=>$val){
-          if($hist->refId==$val->id){
-            $ressource= new Affectable($val->idAffectable);
-          }
-        }
-        if(isset($ressource)){
-          $newValue=$ressource->name;
-        }else if($hist->operation=='delete'){
-          if($hist->oldValue){
-            $idAffApprover=substr($hist->oldValue,strrpos($hist->oldValue, "_")+1);
-            $idAffApprover=intval($idAffApprover);
-            $affectable= new Affectable($idAffApprover);
-            $oldValue=$affectable->name;
-          }
-        }else if($oldValue=='' and $hist->operation=='insert'){
-          foreach ($historyList as $autherHist){
-            if($autherHist->id==$hist->id){
-              continue;
-            }
-            if($autherHist->refId==$hist->refId and $autherHist->operation=='delete' and $autherHist->oldValue!=''){
-              $idRess=substr($autherHist->oldValue,strrpos($autherHist->oldValue, "_")+1);
-              $idRess=intval($idRess);
-              break;
-            }
-          }
-          $ress= new Affectable($idRess);
-          $newValue=$ress->name;
-          $oldValue='';
-        }else{
-          $oldValue='';
-        }
-      }
       if ($dataType=='int' and $dataLength==1) { // boolean
         $oldValue=htmlDisplayCheckbox($oldValue);
         $newValue=htmlDisplayCheckbox($newValue);
