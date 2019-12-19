@@ -11,3 +11,7 @@
 -- ======================================
 
 UPDATE `${prefix}menu` SET  `level`='Project'  WHERE  `name`='menuChangeRequest';
+
+DELETE FROM `${prefix}parameter` WHERE `parameterCode`='selectAbsenceActivity';
+DELETE FROM `${prefix}parameter` WHERE `parameterCode`='inputIdProject';
+DELETE FROM `${prefix}parameter` WHERE `parameterCode`='inputAssId'; 
