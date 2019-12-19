@@ -156,9 +156,9 @@ class History extends SqlElement {
       } else {
       	$hist->oldValue=$oldValue;
       	$hist->newValue=$newValue;
-      	if($refType=='Approver' and $operation=='delete'){
-      	 $hist->oldValue=$obj->refType.'_'.$obj->refId.'_'.$obj->idAffectable;
-      	}
+//       	if($refType=='Approver' and $operation=='delete'){
+//       	 $hist->oldValue=$obj->refType.'_'.$obj->refId.'_idApprover'.$obj->idAffectable;
+//       	}
       }
       if ($obj and property_exists($obj, '_workHistory')) {
         $hist->isWorkHistory=1;
@@ -196,7 +196,15 @@ class History extends SqlElement {
       if ($colName!="updateDate") {    
         self::store ($obj, $obj->refType, $obj->refId, $operation , $colName. '|' . $refType . '|' . $obj->id, $oldValue, $newValue);
       }
-    } 
+    } else if ($refType=='Approver' ){
+      $aff= new Affectable($obj->idAffectable);
+      if($operation=='insert'){
+        self::store ($obj, $obj->refType, $obj->refId, $operation , 'Approver', '', $aff->name);
+      }else if ($operation=='delete'){
+        self::store ($obj, $obj->refType, $obj->refId, $operation , 'Approver', $aff->name,'');
+      }
+      
+    }
     if (strpos($returnValue,'<input type="hidden" id="lastOperationStatus" value="OK"')) {
       return true;
     } else {
