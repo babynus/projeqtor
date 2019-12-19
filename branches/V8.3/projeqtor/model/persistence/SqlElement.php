@@ -5419,6 +5419,23 @@ abstract class SqlElement {
     // admin mail
     $arrayFrom [] = '${adminMail}';
     $arrayTo [] = Parameter::getGlobalParameter ( 'paramAdminMail' );
+    
+    //gautier #4364 date
+    $arrayFrom [] = '${handledDate}';
+    $arrayTo [] = (property_exists ( $this, 'handledDate' )) ? dateFormatter($this->handledDate) : '';
+    
+    $arrayFrom [] = '${doneDate}';
+    $arrayTo [] = (property_exists ( $this, 'doneDate' )) ? dateFormatter($this->doneDate) : '';
+    
+    $arrayFrom [] = '${idleDate}';
+    $arrayTo [] = (property_exists ( $this, 'idleDate' )) ? dateFormatter($this->idleDate) : '';
+    
+    $arrayFrom [] = '${sendDate}';
+    $arrayTo [] = (property_exists ( $this, 'sendDate' )) ? dateFormatter($this->sendDate) : '';
+    
+    $arrayFrom [] = '${paymentDueDate}';
+    $arrayTo [] = (property_exists ( $this, 'paymentDueDate' )) ? dateFormatter($this->paymentDueDate) : '';
+    
     // Format title
     return str_replace ( $arrayFrom, $arrayTo, $message );
   }
