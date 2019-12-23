@@ -197,6 +197,10 @@ if ($planningMode=='RECW') {
                <label for="assignmentRate" ><?php echo i18n("colRate");?>&nbsp;:&nbsp;</label>
              </td>
              <td>
+             <?php if($resource->isResourceTeam and !$assignmentObj->uniqueResource){
+               $assignmentObj->rate=$assignmentObj->capacity*100; 
+               if($assignmentObj->rate > 100)$assignmentObj->rate = 100;
+             }?>
                <div id="assignmentRate" name="assignmentRate" value="<?php echo ($mode=='edit' and $planningMode!='RECW')?$assignmentObj->rate:"100";?>" 
                  dojoType="dijit.form.NumberTextBox" 
                  constraints="{min:0,max:100}" 
