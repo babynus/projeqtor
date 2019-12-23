@@ -1065,15 +1065,7 @@ abstract class SqlElement {
         $newItem = false;
         $returnValue = $this->updateSqlElement ( $force, $withoutDependencies );
       } else {
-        if (property_exists ( $this, 'idStatus' )) {
-          if ($this->idStatus and isset ( $old )) {
-            if ( $old->idStatus != '' and $old->idStatus != $this->idStatus) {
-                $statusChanged = true;
-            }
-          }else{
-            $statusChanged = true;
-          }
-        }
+        $statusChanged = true;
         $newItem = true;
         $returnValue = $this->insertSqlElement ( $forceInsert );
       }
