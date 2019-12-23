@@ -351,16 +351,19 @@ class Absence{
     		$dateId = date('M', $iDay).mb_substr(date('l',$iDay),0,1,"UTF-8").$d;
     		$dateDay = date('Ymd',$iDay);
     		$workDay = date('Y-m-d', $iDay);
-    		$week=date('Y', $iDay).date('W',$iDay) ;
+    		//$week=date('Y', $iDay).date('W',$iDay) ;
+    		//gautier #4383
+    		$week = weekFormat($workDay);
+    		$week = substr($week, 0,4).substr($week, 5,7);
     		$month = date('Ym', $iDay);
     		$year = date('Y', $iDay);
     		$result.= '<td id="'.$dateId.'" class="calendar" style="'.$style.'">';
     		$isValidate = false;
     		if($isOpen){
-      		//semaine si la semaine est validé
+      		//if week is validated
       		$workPeriod = SqlElement::getSingleSqlElementFromCriteria('WorkPeriod', array('idResource'=>$userID,'periodValue'=>$week));
       		if($workPeriod->validated or $workPeriod->submitted){
-      			$isValidate = true;
+      	    $isValidate = true;
       		}
     		}
         if ($listActId<>"(0)") {
