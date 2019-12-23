@@ -1777,9 +1777,9 @@ function getLeavesInArrayDateForAPeriodAndAnEmployee($employee=null,
         $eAMPM = $leave->endAMPM;
         $type = $leave->idLeaveType;
         if ($lvTpHasWfStWithSubmitted==null or !array_key_exists($type, $lvTpHasWfStWithSubmitted)) {
-            $tp = new LeaveType($type);
-            $wf = new Workflow($tp->idWorkflow);
-            $lvTpHasWfStWithSubmitted[$type] = ($wf->hasSetStatusOrLeave("setSubmittedLeave")==false?0:1);
+          $tp = new LeaveType($type);
+          $wf = new Workflow($tp->idWorkflow);
+          $lvTpHasWfStWithSubmitted[$type] = ($wf->hasSetStatusOrLeave("setSubmittedLeave")==false?0:1);
         }
         $status = $leave->idStatus;
         $idLeave = $leave->id;
@@ -1787,9 +1787,9 @@ function getLeavesInArrayDateForAPeriodAndAnEmployee($employee=null,
         $requestDateTime = $leave->requestDateTime;
         $processingDateTime = $leave->processingDateTime;
         if ($status==1 and $lvTpHasWfStWithSubmitted[$type]==0) {
-            $submitted = 1;            
+          $submitted = 1;            
         } else {
-            $submitted = $leave->submitted;
+          $submitted = $leave->submitted;
         }
         $rejected = $leave->rejected;
         $accepted = $leave->accepted;
@@ -1797,11 +1797,11 @@ function getLeavesInArrayDateForAPeriodAndAnEmployee($employee=null,
         $statusSetLeaveChange = $leave->statusSetLeaveChange;
         $date = $lStartDate;
         while ($date <= $lEndDate) {
-            if ($leavesInArrayDate!=null and array_key_exists($date, $leavesInArrayDate)) { 
-              $nextDate = new DateTime($date);
-              $nextDate->add(new DateInterval("P1D"));
-              $date = $nextDate->format("Y-m-d");
-              continue; 
+            if ($leavesInArrayDate!=null and array_key_exists($date, $leavesInArrayDate) and $leavesInArrayDate[$date]['quantity']==1){
+                $nextDate = new DateTime($date);
+                $nextDate->add(new DateInterval("P1D"));
+                $date = $nextDate->format("Y-m-d");
+                continue;
             }
             $leavesInArrayDate[$date]['startDate']=$lStartDate.' - '.$sAMPM;
             $leavesInArrayDate[$date]['endDate']=$lEndDate.' - '.$eAMPM;
@@ -1823,12 +1823,25 @@ function getLeavesInArrayDateForAPeriodAndAnEmployee($employee=null,
                     $leavesInArrayDate[$date]['AM']=true;
                     $leavesInArrayDate[$date]['PM']=true;
                     $leavesInArrayDate[$date]['quantity']=1;
-                    
                 } else {
+                  if(!isset($leavesInArrayDate[$date]['AM'])){
+                    $leavesInArrayDate[$date]['AM']=false;
+                  }
+                  if(!isset($leavesInArrayDate[$date]['PM'])){
+                    $leavesInArrayDate[$date]['PM']=false;
+                  }
                     // 0.5 day
-                    $leavesInArrayDate[$date]['AM']=($eAMPM=='AM');                    
-                    $leavesInArrayDate[$date]['PM']=($eAMPM=='PM');                    
-                    $leavesInArrayDate[$date]['quantity']=0.5;
+                    if($sAMPM=='AM' and $eAMPM=='AM'){
+                      $leavesInArrayDate[$date]['AM']=($eAMPM=='AM');
+                      $leavesInArrayDate[$date]['quantity']=0.5;
+                      $leavesInArrayDate[$date]['idTypeAM']=$type;
+                      $leavesInArrayDate[$date]['idStatusAM']=$status;
+                    }else{
+                      $leavesInArrayDate[$date]['PM']=($eAMPM=='PM');
+                      $leavesInArrayDate[$date]['quantity']=0.5;
+                      $leavesInArrayDate[$date]['idTypePM']=$type;
+                      $leavesInArrayDate[$date]['idStatusPM']=$status;
+                    }
                 }
             } elseif($date == $lStartDate) {
                 // It's the start date
@@ -1842,6 +1855,7 @@ function getLeavesInArrayDateForAPeriodAndAnEmployee($employee=null,
                     $leavesInArrayDate[$date]['AM']=false;
                     $leavesInArrayDate[$date]['PM']=true;                    
                     $leavesInArrayDate[$date]['quantity']=0.5;
+                    $leavesInArrayDate[$date]['idTypePM']=$type;
                 }
             } elseif ($date == $lEndDate) {
                 // It's the end date
@@ -1850,6 +1864,7 @@ function getLeavesInArrayDateForAPeriodAndAnEmployee($employee=null,
                     $leavesInArrayDate[$date]['AM']=true;
                     $leavesInArrayDate[$date]['PM']=false;
                     $leavesInArrayDate[$date]['quantity']=0.5;
+                    $leavesInArrayDate[$date]['idTypeAM']=$type;
                 } else {
                     // Start Afternoon => Full day
                     $leavesInArrayDate[$date]['AM']=true;
