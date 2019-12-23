@@ -1066,7 +1066,13 @@ abstract class SqlElement {
         $returnValue = $this->updateSqlElement ( $force, $withoutDependencies );
       } else {
         if (property_exists ( $this, 'idStatus' )) {
-          $statusChanged = true;
+          if ($this->idStatus and isset ( $old )) {
+            if ( $old->idStatus != '' and $old->idStatus != $this->idStatus) {
+                $statusChanged = true;
+            }
+          }else{
+            $statusChanged = true;
+          }
         }
         $newItem = true;
         $returnValue = $this->insertSqlElement ( $forceInsert );
@@ -1087,6 +1093,7 @@ abstract class SqlElement {
         }
       }
       // if (($statusChanged or $responsibleChanged) and stripos($returnValue,'id="lastOperationStatus" value="OK"')>0 ) {
+      
       if (stripos ( $returnValue, 'id="lastOperationStatus" value="OK"' ) > 0) {
         $mailResult = $this->sendMailIfMailable ( $newItem, $statusChanged, false, $responsibleChanged, false, false, false, $descriptionChange, $resultChange, false, false, true,false,false );
         if ($mailResult) {
