@@ -1260,8 +1260,10 @@ class LeaveMain extends SqlElement {
         $startDateTime = new Datetime($this->startDate);
         $endDateTime = new Datetime($this->endDate);
         $itDateTime = $startDateTime;
-        
+        $resEmp = new Resource($this->idEmployee);
         while($itDateTime<=$endDateTime){
+          //gautier #4371
+          if(isOffDay($itDateTime->format('Y-m-d'),$resEmp->idCalendarDefinition)!=1){
             $workOrPWork=new $workOrPlannedWork();
             if($itDateTime==$startDateTime and $this->startAMPM=="PM"){
                 $workOrPWork->work=0.5;
@@ -1281,8 +1283,9 @@ class LeaveMain extends SqlElement {
             if(strpos($resultS, "OK")===false){
                 return $resultS;   
             }
-            $itDateTime->add(new DateInterval('P1D'));
-        }
+          }
+            $itDateTime->add(new DateInterval('P1D'));            
+          }
         return $resultS;
     }
       
