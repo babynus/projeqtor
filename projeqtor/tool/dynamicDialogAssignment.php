@@ -214,7 +214,8 @@ if ($planningMode=='RECW') {
                  <label for="assignmentCapacity" ><?php echo i18n("colCapacity");?>&nbsp;:&nbsp;</label>
                </td>
                <td>
-                 <?php if ($mode=='edit' and $assignmentObj->capacity==0 and !$resource->isResourceTeam) round($assignmentObj->capacity=$resource->capacity*$assignmentObj->rate/100,1);?>
+                 <?php if ($mode=='edit' and $assignmentObj->capacity==0 and !$resource->isResourceTeam) round($assignmentObj->capacity=$resource->capacity*$assignmentObj->rate/100,1);
+                       if ($assignmentObj->uniqueResource ) round($assignmentObj->capacity=1*$assignmentObj->rate/100,1);?>
                  <div id="assignmentCapacity" name="assignmentCapacity" value="<?php echo ($mode=='edit')?$assignmentObj->capacity:"1";?>"
                    dojoType="dijit.form.NumberTextBox" 
                    style="width:97px" 
