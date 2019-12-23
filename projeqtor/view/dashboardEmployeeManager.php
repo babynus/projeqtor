@@ -503,6 +503,10 @@
                                         $statusOutOfWorkflow=0;
                                         $statusSetLeaveChange=0;
                                         $requestDateTime=null;
+                                        $idTypeAM = 0;
+                                        $idTypePM = 0;
+                                        $idStatusAM = 0;
+                                        $idStatusPM = 0;
                                         if ($leavesDay!=null) { 
                                             if (array_key_exists($date, $leavesDay)) {
                                                 $motif = ($isOffDay?"":$leavesDay[$date]['motif']);
@@ -511,7 +515,22 @@
                                                 $accepted= ($isOffDay?0:$leavesDay[$date]['accepted']);
                                                 $statusOutOfWorkflow= ($isOffDay?0:$leavesDay[$date]['statusOutOfWorkflow']);
                                                 $statusSetLeaveChange= ($isOffDay?0:$leavesDay[$date]['statusSetLeaveChange']);
-                                                $idStatus = ($isOffDay?0:$leavesDay[$date]['idStatus']);                                                
+                                                $idStatus = ($isOffDay?0:$leavesDay[$date]['idStatus']);
+                                                
+                                                if(array_key_exists('idTypeAM', $leavesDay[$date])){
+                                                  $idTypeAM = ($isOffDay?0:$leavesDay[$date]['idTypeAM']);
+                                                }
+                                                if(array_key_exists('idTypePM', $leavesDay[$date])){
+                                                  $idTypePM = ($isOffDay?0:$leavesDay[$date]['idTypePM']);
+                                                }
+                                                
+                                                if(array_key_exists('idStatusAM', $leavesDay[$date])){
+                                                  $idStatusAM = ($isOffDay?0:$leavesDay[$date]['idStatusAM']);
+                                                }
+                                                if(array_key_exists('idStatusPM', $leavesDay[$date])){
+                                                  $idStatusPM = ($isOffDay?0:$leavesDay[$date]['idStatusPM']);
+                                                }
+                                              
                                                 $idLeave = ($isOffDay?0:$leavesDay[$date]['idLeave']);
                                                 $idLeaveType = ($isOffDay?0:$leavesDay[$date]['idType']);
                                                 if ($submitted==0 and $rejected==0 and $accepted==0) {
@@ -529,23 +548,58 @@
                                                 $requestDateTime = ($isOffDay?null:$leavesDay[$date]['requestDateTime']);
                                                 $bgColorType = $leaveTypesColor[$leavesDay[$date]['idType']];
                                                 $colorType = oppositeColor($bgColorType);
-                                                if (array_key_exists($leavesDay[$date]['idStatus'], $leaveStatusColor)) {
-                                                    $colorStatus = $leaveStatusColor[$leavesDay[$date]['idStatus']];
-                                                } else {
-                                                    $colorStatus = "#000000";                                                    
+                                                //gautier
+                                                if($idTypePM != 0){
+                                                  $bgColorTypePM = $leaveTypesColor[$idTypePM];
+                                                  $colorTypePM = oppositeColor($bgColorTypePM);
                                                 }
-                                                if ($isOffDay) {
+                                                if($idTypeAM != 0){
+                                                  $bgColorTypeAM = $leaveTypesColor[$idTypeAM];
+                                                  $colorTypeAM = oppositeColor($bgColorTypeAM);
+                                                }
+                                                //gautier
+                                                if($idStatusAM!=0 or $idStatusPM!=0){
+                                                  $colorStatusAM="#000000";
+                                                  $colorStatusPM="#000000";
+                                                  if($idStatusAM!=0){
+                                                    $colorStatusAM = $leaveStatusColor[$idStatusAM];
+                                                    debugLog($colorStatusAM);
+                                                  }
+                                                  if($idStatusPM!=0){
+                                                    $colorStatusPM = $leaveStatusColor[$idStatusPM];
+                                                  }
+                                                  if ($isOffDay) {
                                                     $borderAM = 'border-right:0px;';
-                                                    $borderPM = 'border-left:0px;';                                                    
-                                                } else {
-                                                    if ($leavesDay[$date]['AM'] and $leavesDay[$date]['PM']) {                                                    
-                                                        $borderAM = 'border: 3px solid '.$colorStatus.';border-right:0px;';
-                                                        $borderPM = 'border: 3px solid '.$colorStatus.';border-left:0px;';                                                    
+                                                    $borderPM = 'border-left:0px;';
+                                                  } else {
+                                                    if ($idStatusAM!=0 and $idStatusPM!=0) {
+                                                      $borderAM = 'border: 3px solid '.$colorStatusAM.';border-right:0px;';
+                                                      $borderPM = 'border: 3px solid '.$colorStatusPM.';border-left:0px;';
                                                     } else {
-                                                        $borderAM = 'border: 3px solid '.$colorStatus.';';                                                    
-                                                        $borderPM = 'border: 3px solid '.$colorStatus.';';                                                    
+                                                      $borderAM = 'border: 3px solid '.$colorStatusAM.';';
+                                                      $borderPM = 'border: 3px solid '.$colorStatusPM.';';
                                                     }
+                                                  }
+                                                }else{
+                                                  if (array_key_exists($leavesDay[$date]['idStatus'], $leaveStatusColor)) {
+                                                    $colorStatus = $leaveStatusColor[$leavesDay[$date]['idStatus']];
+                                                  } else {
+                                                    $colorStatus = "#000000";
+                                                  }
+                                                  if ($isOffDay) {
+                                                    $borderAM = 'border-right:0px;';
+                                                    $borderPM = 'border-left:0px;';
+                                                  } else {
+                                                    if ($leavesDay[$date]['AM'] and $leavesDay[$date]['PM']) {
+                                                      $borderAM = 'border: 3px solid '.$colorStatus.';border-right:0px;';
+                                                      $borderPM = 'border: 3px solid '.$colorStatus.';border-left:0px;';
+                                                    } else {
+                                                      $borderAM = 'border: 3px solid '.$colorStatus.';';
+                                                      $borderPM = 'border: 3px solid '.$colorStatus.';';
+                                                    }
+                                                  }
                                                 }
+                                                
                                                 $tdStyle = 'max-width:2px;min-width:2px;width:2px;text-align:center;';
                                                 $theExtraStyle='background-color:'.$bgColorType.' !important; color:'.$colorType.' !important;';
                                                 $AMValue = "";
@@ -559,6 +613,10 @@
                                                         $AMValue = $statusListFirstLetter[1];
                                                     }
                                                     $AMextraStyle = $theExtraStyle.$borderAM;
+                                                    if($idTypeAM != 0){
+                                                      $AMextraStyle='background-color:'.$bgColorTypeAM.' !important; color:'.$colorTypeAM.' !important;';
+                                                      $AMextraStyle.=$borderAM;
+                                                    }
                                                 }
                                                 if ($leavesDay[$date]['PM']) {
                                                     if (array_key_exists($leavesDay[$date]['idStatus'], $statusListFirstLetter)) {
@@ -567,6 +625,10 @@
                                                         $PMValue = $statusListFirstLetter[1];                                                        
                                                     }
                                                     $PMextraStyle = $theExtraStyle.$borderPM;
+                                                    if($idTypePM != 0){
+                                                      $PMextraStyle='background-color:'.$bgColorTypePM.' !important; color:'.$colorTypePM.' !important;';
+                                                      $PMextraStyle.=$borderPM;
+                                                    }
                                                 }
                                                 $tdStyleAM .= $tdStyle;
                                                 $tdStylePM .= $tdStyle;
