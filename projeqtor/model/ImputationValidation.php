@@ -106,9 +106,9 @@ class ImputationValidation{
 	  $result .='     </td>';
 	  $result .='     <td style="border: 1px solid grey;border-right: 1px solid white;height:60px;width:20%;text-align:center;vertical-align:center;">'.i18n('ImputationSubmit').'</td>';
 	  $result .='     <td colspan="2" style="border: 1px solid grey;height:60px;width:26%;text-align:center;vertical-align:center;">';
-    $result .='       <table width="100%"><tr><td width="62%">'.i18n('menuImputationValidation').'</td>';
-    $result .='       <td width="30%">';
-    $result .='       <span id="buttonValidationAll" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('validateWorkPeriod')
+      $result .='       <table width="100%"><tr><td width="62%">'.i18n('menuImputationValidation').'</td>';
+      $result .='       <td width="30%">';
+      $result .='       <span id="buttonValidationAll" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('validateWorkPeriod')
             . '         <script type="dojo/method" event="onClick" >'
         		. '           validateAllSelection();'
     				. '         </script>'
