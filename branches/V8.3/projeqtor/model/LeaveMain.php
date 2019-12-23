@@ -1266,11 +1266,11 @@ class LeaveMain extends SqlElement {
           if(isOffDay($itDateTime->format('Y-m-d'),$resEmp->idCalendarDefinition)!=1){
             $workOrPWork=new $workOrPlannedWork();
             if($itDateTime==$startDateTime and $this->startAMPM=="PM"){
-                $workOrPWork->work=0.5;
+              $workOrPWork->work=0.5;
             }else if($itDateTime==$endDateTime and $this->endAMPM=="AM"){
-                $workOrPWork->work=0.5;
+              $workOrPWork->work=0.5;
             }else{
-                $workOrPWork->work=1.0;
+              $workOrPWork->work=1.0;
             }
             $workOrPWork->idResource=$this->idEmployee;
             $workOrPWork->idProject=$pjLeaveId;
