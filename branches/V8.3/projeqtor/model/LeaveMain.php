@@ -1284,8 +1284,8 @@ class LeaveMain extends SqlElement {
                 return $resultS;   
             }
           }
-            $itDateTime->add(new DateInterval('P1D'));            
-          }
+          $itDateTime->add(new DateInterval('P1D'));            
+        }
         return $resultS;
     }
       
