@@ -303,10 +303,6 @@ class Plugin extends SqlElement {
         deleteDuplicate(); // Avoid dupplicate for habilitation, ....
       }
       
-      if (isset($pluginPostInstall)) {
-        include self::getDir()."/$plugin/$pluginPostInstall";
-      }
-      
       // Delete zip
       kill($this->zipFile);
       // set previous version to idle (if exists)
@@ -337,6 +333,10 @@ class Plugin extends SqlElement {
       self::$_triggeredEventList=null;
       unsetSessionValue('pluginButtonList'); // Reset triggeredEventList (will be refresed on first need)
       self::$_pluginButtonList=null;
+      
+      if (isset($pluginPostInstall)) {
+        include self::getDir()."/$plugin/$pluginPostInstall";
+      }
       
       traceLog("Plugin $plugin V".$this->pluginVersion. " completely deployed");
       if (isset($pluginReload) and $pluginReload) {
