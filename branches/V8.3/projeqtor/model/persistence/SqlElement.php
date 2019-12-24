@@ -1065,7 +1065,9 @@ abstract class SqlElement {
         $newItem = false;
         $returnValue = $this->updateSqlElement ( $force, $withoutDependencies );
       } else {
-        $statusChanged = true;
+      	if (property_exists ( $this, 'idStatus' )) {
+        	$statusChanged = true;
+      	}
         $newItem = true;
         $returnValue = $this->insertSqlElement ( $forceInsert );
       }
