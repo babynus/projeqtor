@@ -563,7 +563,6 @@
                                                   $colorStatusPM="#000000";
                                                   if($idStatusAM!=0){
                                                     $colorStatusAM = $leaveStatusColor[$idStatusAM];
-                                                    debugLog($colorStatusAM);
                                                   }
                                                   if($idStatusPM!=0){
                                                     $colorStatusPM = $leaveStatusColor[$idStatusPM];
