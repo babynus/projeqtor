@@ -667,7 +667,11 @@
                                                     if ($theRequestDate>$date) {
                                                         // Recording date > date
                                                         $title .= "\r".i18n("colRequestDateTime")." = ".$requestDateTime;
-                                                        $imgOrSpace = '<img src="'.$imgDelay.'" style="width:14px; height:14px;">';
+                                                        $margin=0;
+                                                        if(($leavesDay[$date]['PM']!='1' and $leavesDay[$date]['AM']=='1') or ($leavesDay[$date]['PM']=='1' and $leavesDay[$date]['AM']!='1')){
+                                                        	$margin=-5;
+                                                        }
+                                                        $imgOrSpace = '<img src="'.$imgDelay.'" style="width:14px; height:14px;margin-left:'.$margin.'px;">';
                                                     }
                                                     if ($accepted==1) {
                                                         $imgOrSpace='<span style="color:green; font-weight:bold;">A</span>';                                                    
