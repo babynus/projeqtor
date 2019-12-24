@@ -125,9 +125,9 @@ if ($filter->isDynamic!=$dynamicFilter) {
 }
 //END ADD qCazelles - Dynamic filter - Ticket #78
 
-echo "<div style='z-index:9;position: absolute;left:50%;width:200px;margin-left:-100px;top:20px'>";
+echo "<div style='z-index:9;position: absolute;left:50%;width:100%;margin-left:-50%;top:20px'>";
 echo '<table width="100%"><tr><td align="center" >';
-echo '<span class="messageOK" style="z-index:999;position:relative;top:7px" >' . i18n('colFilter') . " '" . htmlEncode($name) . "' " . i18n('resultUpdated') . ' (#'.htmlEncode($filter->id).')</span>';
+echo '<span class="messageOK" style="z-index:999;position:relative;top:7px;white-space:nowrap" >' . i18n('colFilter') . " '" . htmlEncode($name) . "' " . i18n('resultUpdated') . ' (#'.htmlEncode($filter->id).')</span>';
 echo '</td></tr></table>';
 echo "</div>";
 
