@@ -7306,4 +7306,12 @@ body .ProjeQtOrMarylou {
 /* ProjeQtOr THEME END                                                             */
 /* =============================================================================== */
 
-
+.ProjeQtOrFlatBlue #wait, .ProjeQtOrFlatBlue #waitLogin,
+.ProjeQtOrFlatRed #wait, .ProjeQtOrFlatRed #waitLogin,
+.ProjeQtOrFlatGreen #wait, .ProjeQtOrFlatGreen #waitLogin,
+.ProjeQtOrFlatGrey #wait, .ProjeQtOrFlatGrey #waitLogin {
+  background-image: url(images/spinner16.gif); background-repeat: no-repeat;
+  margin: -100px -100px;
+  height: 200px; width: 200px;
+  opacity:1.0;filter:alpha(opacity=100);
+}
