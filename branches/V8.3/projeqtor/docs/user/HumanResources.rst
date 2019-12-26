@@ -34,9 +34,9 @@ This system comes in addition to the standards of the management of absences
    A new parameter is displayed: Leaves System
    
 
-   .. figure:: /images/GUI/RH_ZONE_ParamGlob_LeavesAdmin.png
-      :alt: Global Parameters - Leaves System
-      :align: center
+.. figure:: /images/GUI/RH_ZONE_ParamGlob_LeavesAdmin.png
+   :alt: Global Parameters - Leaves System
+   :align: center
    
    You can choose here who will be the administrator of this module
 
