@@ -4326,6 +4326,7 @@ function connect(resetPassword) {
 }
 
 function addNewItem(item) {
+  var objectClass=dojo.byId('objectClass').value;
   dojo.byId('objectClass').value = item;
   dojo.byId('objectId').value = null;
   if (switchedMode) {
@@ -4333,15 +4334,20 @@ function addNewItem(item) {
   }
     var currentItem=historyTable[historyPosition];
     var currentScreen=currentItem[2];
-    if (currentScreen=="Planning" || currentScreen=="GlobalPlanning"){
+    if (currentScreen=="Planning" || currentScreen=="GlobalPlanning" || (currentScreen=="VersionsPlanning" && objectClass=="Activity")){
       var currentItemParent = currentItem[1];
       var originClass = currentItem[0];
       var url = 'objectDetail.php?insertItem=true&currentItemParent='+currentItemParent+'&originClass='+originClass;
+      if(currentScreen=="VersionsPlanning"){
+        url+="&currentPlanning="+currentScreen;
+      }
       if(currentItemParent){
         loadContent(url, "detailDiv", 'listForm');
       }else{
         loadContent("objectDetail.php", "detailDiv", 'listForm');
       }
+    }else if(currentScreen=="VersionsPlanning" && objectClass!="Activity"){
+      showAlert(i18n('alertActivityVersion'));
     }else{
       loadContent("objectDetail.php", "detailDiv", 'listForm');
     }

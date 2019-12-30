@@ -82,7 +82,10 @@ $canReadLeave=true;
 if (!isset($noselect)) {
   $noselect=false;
 }
-
+$currentPlanning='';
+if(RequestHandler::isCodeSet('currentPlanning')){
+  $currentPlanning=RequestHandler::getValue('currentPlanning');
+}
 //gautier
 $objInsert = false;
 $insertPlanningItem = RequestHandler::getValue('insertItem');
@@ -345,7 +348,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
  */
 function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $parentHidden=false) {
   scriptLog("drawTableFromObject(obj, included=$included, parentReadOnly=$parentReadOnly)");
-  global $toolTip, $cr, $print, $treatedObjects, $displayWidth, $outMode, $comboDetail, $collapsedList, $printWidth, $profile, $detailWidth, $readOnly, $largeWidth, $widthPct, $nbColMax, $preseveHtmlFormatingForPDF, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane,$panes,$arrayGroupe, $nbColMax, $section, $beforeAllPanes, $colWidth,$objInsert,$layout;
+  global $toolTip, $cr, $print, $treatedObjects, $displayWidth, $outMode, $comboDetail, $collapsedList, $printWidth, $profile, $detailWidth, $readOnly, $largeWidth, $widthPct, $nbColMax, $preseveHtmlFormatingForPDF, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane,$panes,$arrayGroupe, $nbColMax, $section, $beforeAllPanes, $colWidth,$objInsert,$currentPlanning,$layout;
   global $section, $prevSection;
   $ckEditorNumber=0; // Will be used only if getEditor=="CK" for CKEditor
   //gautier
@@ -361,6 +364,21 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     }
     if (property_exists($obj, 'idActivity') and property_exists($objInsert, 'idActivity')) {
       $obj->idActivity = $objInsert->idActivity;
+    }
+    //florent
+    if($currentPlanning =='VersionsPlanning'){
+      if(property_exists($obj, 'idProduct')and  property_exists($objInsert, 'idProduct') ){
+        $obj->idProduct=$objInsert->idProduct;
+      }
+      if(property_exists($obj, 'idComponent')and  property_exists($objInsert, 'idComponent') ){
+        $obj->idComponent=$objInsert->idComponent;
+      }
+      if(property_exists($obj, 'idTargetProductVersion')and  property_exists($objInsert, 'idTargetProductVersion') ){
+        $obj->idTargetProductVersion=$objInsert->idTargetProductVersion;
+      }
+      if(property_exists($obj, 'idTargetComponentVersion')and  property_exists($objInsert, 'idTargetComponentVersion') ){
+        $obj->idTargetComponentVersion=$objInsert->idTargetComponentVersion;
+      }
     }
     $planningElementClass = get_class($objInsert).'PlanningElement';
     if (property_exists(get_class($objInsert), $planningElementClass)) {
