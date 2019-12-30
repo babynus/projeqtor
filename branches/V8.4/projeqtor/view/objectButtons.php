@@ -168,16 +168,22 @@
           hideResultDivs();
           hideExtraButtons('extraButtonsDetail');
           id=dojo.byId('objectId');
+          var objectClass=dojo.byId('objectClass').value;
 	        if (id) { 	
             var currentItem=historyTable[historyPosition];
             var currentScreen=(currentItem && currentItem.length>2)?currentItem[2]:null;
-            if (currentItem && (currentScreen=="Planning" || currentScreen=="GlobalPlanning")){
+            if (currentItem && (currentScreen=="Planning" || currentScreen=="GlobalPlanning") || ( currentScreen=="VersionsPlanning" && objectClass=="Activity")){
               var currentItemParent = currentItem[1];
               var originClass = currentItem[0];
               var url = 'objectDetail.php?insertItem=true&currentItemParent='+currentItemParent+'&originClass='+originClass;
+              if(currentScreen=="VersionsPlanning"){
+                url+="&currentPlanning="+currentScreen;
+              } 
               id.value="";
 		          unselectAllRows("objectGrid");
               loadContent(url, "detailDiv", 'listForm');
+            }else if ( currentScreen=="VersionsPlanning" && objectClass!="Activity"){
+                showAlert(i18n('alertActivityVersion'));
             }else{
 		          id.value="";
 		          unselectAllRows("objectGrid");
