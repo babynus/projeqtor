@@ -40,7 +40,7 @@ if (! array_key_exists('filterObjectClass',$_REQUEST)) {
 }
 $filterObjectClass=$_REQUEST['filterObjectClass'];
 if (!isset($objectClass) or !$objectClass) $objectClass=$filterObjectClass;
-if ($objectClass=='Planning'  or $objectClass=='GlobalPlanning') $objectClass='Activity';
+if ($objectClass=='Planning'  or $objectClass=='GlobalPlanning' or $objectClass=='VersionsPlanning' or $objectClass=='ResourcePlanning') $objectClass='Activity';
 else if (substr($objectClass,0,7)=='Report_') $objectClass=substr($objectClass,7);
 Security::checkValidClass($objectClass);
 $name="";

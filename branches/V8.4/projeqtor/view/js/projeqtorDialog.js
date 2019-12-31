@@ -3749,7 +3749,7 @@ function showFilterDialog() {
         "listSharedFilters", "dialogFilterForm", false);
     var objectClass='';
     if (dojo.byId('objectClassList') && dojo.byId('objectClassList').value) objectClass=dojo.byId('objectClassList').value;
-    else if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value && (dojo.byId("objectClassManual").value=='Planning' || dojo.byId("objectClassManual").value=='VersionsPlanning')) objectClass='Activity';
+    else if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value && (dojo.byId("objectClassManual").value=='Planning' || dojo.byId("objectClassManual").value=='VersionsPlanning'|| dojo.byId("objectClassManual").value=='ResourcePlanning')) objectClass='Activity';
     else if (dojo.byId('objectClass') && dojo.byId('objectClass').value) objectClass=dojo.byId('objectClass').value;
     if (objectClass.substr(0,7)=='Report_') objectClass=objectClass.substr(7);
     refreshListSpecific('object', 'idFilterAttribute', 'objectClass', objectClass);
@@ -4280,8 +4280,12 @@ function selectFilterContinue() {
   }else if (!dijit.byId('filterDynamicParameter').get("checked")) {
     if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Planning' && ! window.top.dijit.byId('dialogDetail').open) {
         refreshJsonPlanning();
-    }else if(dojo.byId("objectClassManual") &&  dojo.byId("objectClassManual").value=='VersionsPlanning' && ! window.top.dijit.byId('dialogDetail').open){
-      refreshJsonPlanning(true);
+    }else if(dojo.byId("objectClassManual") &&  (dojo.byId("objectClassManual").value=='VersionsPlanning' || dojo.byId("objectClassManual").value=='ResourcePlanning') && ! window.top.dijit.byId('dialogDetail').open){
+      if(dojo.byId("objectClassManual").value=='VersionsPlanning'){
+        refreshJsonPlanning('version');
+      }else{
+        refreshJsonPlanning('resource');
+      }
     }else if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Report') {
       dojo.byId('outMode').value='';runReport();
     } else {

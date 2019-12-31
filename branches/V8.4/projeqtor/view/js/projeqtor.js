@@ -285,9 +285,9 @@ function refreshJsonList(className, keepUrl) {
  */
 function refreshJsonPlanning(versionsPlanning) {
   param = false;
-  if (dojo.byId("resourcePlanning")) {
+  if (dojo.byId("resourcePlanning")|| versionsPlanning=='resource' ) {
     url = "../tool/jsonResourcePlanning.php";
-  } else if (dojo.byId("versionsPlanning")|| versionsPlanning==true) {
+  } else if (dojo.byId("versionsPlanning")|| versionsPlanning=='version') {
     url = "../tool/jsonVersionsPlanning.php";
   } else if (dojo.byId("globalPlanning")) {
     url = "../tool/jsonPlanning.php?global=true";
@@ -1089,7 +1089,7 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
                 loadContent(globalSelectFilterContenLoad, globalSelectFilterContainer);
                 globalSelectFilterContenLoad=null;
                 globalSelectFilterContainer=null;
-              } else if (dojo.byId('objectClassManual') && (dojo.byId('objectClassManual').value=='Planning' || dojo.byId('objectClassManual').value=='VersionsPlanning')) {
+              } else if (dojo.byId('objectClassManual') && (dojo.byId('objectClassManual').value=='Planning' || dojo.byId('objectClassManual').value=='VersionsPlanning' || dojo.byId('objectClassManual').value=='ResourcePlanning')) {
                 refreshJsonPlanning();
               } else if (dojo.byId('objectClassList')) {
                 refreshJsonList(dojo.byId('objectClassList').value);

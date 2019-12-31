@@ -39,7 +39,6 @@ $columnsDescription=Parameter::getPlanningColumnDescription();
 $obj=new $objectClass();
 $table=$obj->getDatabaseTableName();
 $displayResource=Parameter::getGlobalParameter('displayResourcePlan');
-
 $seeAllResource=false;
 $right=SqlElement::getSingleSqlElementFromCriteria('habilitationOther', array('idProfile'=>$user->idProfile, 'scope'=>'resourcePlanning'));
 if ($right) { 
