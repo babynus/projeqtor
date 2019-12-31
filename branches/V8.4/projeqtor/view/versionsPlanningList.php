@@ -185,7 +185,8 @@ echo '<input type="hidden" id="nbPvs" name="nbPvs" value="'.$nbPvs.'" />';
                               }?>
                           </div>
                         </div>
-                      </td>                      <td width="32px">
+                      </td>                      
+                      <td width="32px">
                         <button title="<?php echo i18n('printPlanning')?>"
                          dojoType="dijit.form.Button"
                          id="listPrint" name="listPrint"

@@ -763,8 +763,7 @@ static protected function drawProductUsingComponentVersion($class, $id)
         
           echo ',"reftype":"Activity"';
           echo ',"topid":"'.$this->id.'.'.$this->nbOccurences.'"';
-          
-          echo ',"topreftype":"'.$this->scope.'VersionhasChild"';
+          echo ',"topreftype":"Activity"';
           echo ',"toprefid":"'.$this->id.'"';
           echo ',"realstartdate":"'.$la->startDateActivity($this).'"';
           echo ',"realenddate":"'.$la->endDateActivity($this).'"';

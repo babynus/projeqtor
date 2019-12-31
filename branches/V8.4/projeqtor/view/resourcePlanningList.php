@@ -170,6 +170,35 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                 <td style="width:<?php echo ($displayWidthPlan>1030)?'150':'120';?>px">
                   <table>
                     <tr>
+                      <td>
+                        <div dojoType="dijit.form.DropDownButton" class="comboButton" id="planningNewItem" jsId="planningNewItem" name="planningNewItem" 
+                         iconClass="dijitButtonIcon dijitButtonIconNew" title="<?php echo i18n('comboNewButton');?>">
+                            <div dojoType="dijit.TooltipDialog" class="white" style="width:200px;">   
+                              <div style="font-weight:bold; height:25px;text-align:center">
+                              <?php echo i18n('comboNewButton');?>
+                              </div>
+                              <?php $arrayItems=array('Activity');
+                              foreach($arrayItems as $item) {
+                              $canCreate=securityGetAccessRightYesNo('menu' . $item,'create');
+                              if ($canCreate=='YES') {
+                                if (! securityCheckDisplayMenu(null,$item) ) {
+                                  $canCreate='NO';
+                                }
+                              }
+                              if ($canCreate=='YES') {?>
+                              <div style="vertical-align:top;cursor:pointer;" class="dijitTreeRow"
+                               onClick="addNewItem('<?php echo $item;?>');" >
+                                <table width:"100%"><tr style="height:22px" >
+                                <td style="vertical-align:top; width: 30px;padding-left:5px"><?php echo formatIcon($item, 22, null, false);;?></td>    
+                                <td style="vertical-align:top;padding-top:2px"><?php echo i18n($item)?></td>
+                                </tr></table>   
+                              </div>
+                              <div style="height:5px;"></div>
+                              <?php } 
+                              }?>
+                            </div>
+                          </div>
+                        </td>  
                       <td width="32px">
                         <button title="<?php echo i18n('printPlanning')?>"
                          dojoType="dijit.form.Button"
@@ -201,7 +230,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                       <td width="32px">
                         <input type="hidden" id="outMode" name="outMode" value="" />
                         <div dojoType="dijit.form.DropDownButton"
-                             id="planningColumnSelector" jsId="planningColumnSelector" name="planningColumnSelector" 
+                             id="planningColumnSelector" jsId="planningColumnSelector" name="planningColumnSelector" style="margin-right: 15px;"
                              showlabel="false" class="comboButton" iconClass="dijitButtonIcon dijitButtonIconColumn" 
                              title="<?php echo i18n('columnSelector');?>">
                           <span>title</span>
@@ -244,7 +273,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                     </tr>
                   </table>
                 </td>
-		            <td style="width:5px">
+		        <td style="width:170px">
                   <table>
                     <tr>
                       <td style="text-align:right;"><?php echo i18n('colIdResource');?>&nbsp;&nbsp;</td>
