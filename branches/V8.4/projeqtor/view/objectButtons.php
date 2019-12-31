@@ -172,7 +172,7 @@
 	        if (id) { 	
             var currentItem=historyTable[historyPosition];
             var currentScreen=(currentItem && currentItem.length>2)?currentItem[2]:null;
-            if (currentItem && (currentScreen=="Planning" || currentScreen=="GlobalPlanning") || ( currentScreen=="VersionsPlanning" && objectClass=="Activity")){
+            if (currentItem && (currentScreen=="Planning" || currentScreen=="GlobalPlanning") || ( (currentScreen=="VersionsPlanning" || currentScreen=="ResourcePlanning") && objectClass=="Activity")){
               var currentItemParent = currentItem[1];
               var originClass = currentItem[0];
               var url = 'objectDetail.php?insertItem=true&currentItemParent='+currentItemParent+'&originClass='+originClass;
@@ -182,7 +182,7 @@
               id.value="";
 		          unselectAllRows("objectGrid");
               loadContent(url, "detailDiv", 'listForm');
-            }else if ( currentScreen=="VersionsPlanning" && objectClass!="Activity"){
+            }else if ( (currentScreen=="VersionsPlanning" || currentScreen=="ResourcePlanning") && objectClass!="Activity"){
                 showAlert(i18n('alertActivityVersion'));
             }else{
 		          id.value="";
