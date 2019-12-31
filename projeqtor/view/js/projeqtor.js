@@ -4334,11 +4334,11 @@ function addNewItem(item) {
   }
     var currentItem=historyTable[historyPosition];
     var currentScreen=currentItem[2];
-    if (currentScreen=="Planning" || currentScreen=="GlobalPlanning" || (currentScreen=="VersionsPlanning" && objectClass=="Activity")){
+    if (currentScreen=="Planning" || currentScreen=="GlobalPlanning" || ((currentScreen=="VersionsPlanning" ||  currentScreen=="ResourcePlanning") && objectClass=="Activity")){
       var currentItemParent = currentItem[1];
       var originClass = currentItem[0];
       var url = 'objectDetail.php?insertItem=true&currentItemParent='+currentItemParent+'&originClass='+originClass;
-      if(currentScreen=="VersionsPlanning"){
+      if(currentScreen=="VersionsPlanning" ){
         url+="&currentPlanning="+currentScreen;
       }
       if(currentItemParent){
@@ -4346,7 +4346,7 @@ function addNewItem(item) {
       }else{
         loadContent("objectDetail.php", "detailDiv", 'listForm');
       }
-    }else if(currentScreen=="VersionsPlanning" && objectClass!="Activity"){
+    }else if((currentScreen=="VersionsPlanning" || currentScreen=="ResourcePlanning") && objectClass!="Activity"){
       showAlert(i18n('alertActivityVersion'));
     }else{
       loadContent("objectDetail.php", "detailDiv", 'listForm');
