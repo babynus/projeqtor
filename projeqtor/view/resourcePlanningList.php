@@ -316,6 +316,60 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                     </tr>
                   </table>
                 </td>
+                <td width="50px">
+                  <table>
+                    <tr>
+                       <?php $activeFilter=false;
+                       if (is_array(getSessionUser()->_arrayFilters)) {
+                         if (array_key_exists('ResourcePlanning', getSessionUser()->_arrayFilters)) {
+                           if (count(getSessionUser()->_arrayFilters['ResourcePlanning'])>0) {
+                           	foreach (getSessionUser()->_arrayFilters['ResourcePlanning'] as $filter) {
+                           		if (!isset($filter['isDynamic']) or $filter['isDynamic']=="0") {
+                           			$activeFilter=true;
+                           		}
+                           	}
+                           }
+                         }
+                       }
+                       ?>
+                      <td>
+                        <div id="listFilterAdvanced" >
+                          <button 
+                           title="<?php echo i18n('advancedFilter')?>"  
+                           class="comboButton" 
+                           dojoType="dijit.form.DropDownButton" 
+                           id="listFilterFilter" name="listFilterFilter"
+                           iconClass="icon<?php echo($activeFilter)?'Active':'';?>Filter" showLabel="false">
+                            <script type="dojo/connect" event="onClick" args="evt">
+                              showFilterDialog();
+                            </script>
+                            <script type="dojo/method" event="onMouseEnter" args="evt">
+                              clearTimeout(closeFilterListTimeout);
+                              clearTimeout(openFilterListTimeout);
+                              openFilterListTimeout=setTimeout("dijit.byId('listFilterFilter').openDropDown();",popupOpenDelay);
+                            </script>
+                            <script type="dojo/method" event="onMouseLeave" args="evt">
+                              clearTimeout(openFilterListTimeout);
+                              closeFilterListTimeout=setTimeout("dijit.byId('listFilterFilter').closeDropDown();",2000);
+                            </script>
+                            <div dojoType="dijit.TooltipDialog" id="directFilterList" style="z-index: 999999;<!-- display:none; --> position: absolute;">
+                            <?php $objectClass='ResourcePlanning';
+                                  include "../tool/displayFilterList.php";
+                            ?>
+                              <script type="dojo/method" event="onMouseEnter" args="evt">
+                                clearTimeout(closeFilterListTimeout);
+                                clearTimeout(openFilterListTimeout);
+                              </script>
+                              <script type="dojo/method" event="onMouseLeave" args="evt">
+                                dijit.byId('listFilterFilter').closeDropDown();
+                              </script>
+                            </div> 
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
 		            <td style="text-align: right; align: right;">
 		              <table width="100%"><tr>
 		              <td>&nbsp;</td>
