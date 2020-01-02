@@ -299,6 +299,9 @@ echo '<table align="center"><tr><td class="reportTableHeader" rowspan="2">' . i1
 echo '<td colspan="' . $nbDays . '" class="reportTableHeader">' . $header . '</td>';
 echo '</tr><tr>';
 $days=array();
+$daysCal=array();
+$lstCal=SqlList::getList('CalendarDefinition');
+foreach($lstCal as $idCal=>$nameCal) {$daysCal[$idCal]=array();}
 for($i=1; $i<=$nbDays;$i++) {
   if ($periodType=='month') {
     $day=(($i<10)?'0':'') . $i;
@@ -309,7 +312,13 @@ for($i=1; $i<=$nbDays;$i++) {
       $days[$periodValue . $day]="open";
       $style='';
     }
-    
+    foreach($lstCal as $idCal=>$nameCal) {
+      if (isOffDay(substr($periodValue,0,4) . "-" . substr($periodValue,4,2) . "-" . $day,$idCal)) {
+        $daysCal[$idCal][$periodValue . $day]="off";
+      } else {
+        $daysCal[$idCal][$periodValue . $day]="open";
+      }
+    }
     echo '<td class="reportTableColumnHeader" ' . $style . '>' . $day . '</td>';
   }  
 }
@@ -319,6 +328,7 @@ echo '</tr>';
 asort($resourcesToShow);
 //asort($resources);
 foreach ($resourcesToShow as $idR=>$nameR) {
+  $idCal=SqlList::getFieldFromId('Affectable', $idR, 'idCalendarDefinition');
 	//if ($paramTeam) {
     $res=new Resource($idR);
   //}
@@ -350,7 +360,8 @@ foreach ($resourcesToShow as $idR=>$nameR) {
 	  for ($i=1; $i<=$nbDays;$i++) {
 	    $day=$startDate+$i-1;
 	    $style="";
-	    if ($days[$day]=="off") {
+	    //if ($days[$day]=="off") {
+	    if ($daysCal[$idCal][$day]=="off") {
 	      $style=$weekendStyle;
 	    }
 	    echo '<td class="reportTableDataFull" ' . $style . ' valign="top">';
