@@ -189,11 +189,16 @@ class Module extends SqlElement {
       unset($list['displayLanguage']);
       unset($list['displayContext']);
       unset($list['showTendersOnVersions']);
+      unset($list['includeProductInProductStructure']);
+      unset($list['columnConfigurationRight']);
+      unset($list['sectionVersion']);
+      unset($list['displayMilestonesStartDelivery']);
       unset($list['displayListOfActivity']);
       unset($list['directAccessToComponentList']);
       unset($list['versionNameAutoformat']);
       unset($list['versionNameAutoformatSeparator']);
       unset($list['subscriptionAuto']);
+      unset($list['typeOfCopyComponentVersion']);
       unset($list['versionCompatibility']);
       unset($list['productVersionOnDelivery']);
       unset($list['sortVersionComboboxNameDesc']);
@@ -202,8 +207,6 @@ class Module extends SqlElement {
       unset($list['dontAddClosedDeliveredVersionToProject']);
       unset($list['authorizeActivityOnDeliveredProduct']);
       unset($list['autoSetUniqueComponentVersion']);
-      unset($list['columnConfigurationRight']);
-      unset($list['typeOfCopyComponentVersion']);
     }
     if (! Module::isModuleActive('moduleFinancial')) {
       unset($list['tabFinancial']);
