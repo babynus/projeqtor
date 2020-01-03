@@ -135,6 +135,7 @@ class History extends SqlElement {
       $res=Sql::$lastQueryNbRows;
       $where="refType='$refType' and refId=$refId and colName='$hist->colName' and newValue='$hist->newValue' and operationDate='$hist->operationDate'";
       $idleRow=$hist->getSqlElementsFromCriteria(null,null,$where);
+      $result=date('Y-m-d H:i:s');
       foreach ($idleRow as $history ){
         $result=$history->operationDate;
       }
