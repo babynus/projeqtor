@@ -918,6 +918,7 @@ class Parameter extends SqlElement {
       	                      "typeExportXLSorODS"=>'list',
       	                      // MTY - EXPORT XLS OR ODS
       	                      "globalNoteDiscussionMode"=>'list',
+      	                      "notReceiveHisOwnEmails"=>'list',
       	                'tabMiscellaneous'=>"tab",
       	                  'columnMiscellanousLeft'=>'newColumn',
       	                     'sectionReferenceFormat'=>'section',
@@ -960,7 +961,6 @@ class Parameter extends SqlElement {
                             'dontAddClosedDeliveredVersionToProject'=>'list', //ADD qCazelles - Dont add closed and delivered versions to Project - Ticket 181
                             'authorizeActivityOnDeliveredProduct'=>'list',
                             'autoSetUniqueComponentVersion'=>'list',
-                          'columnConfigurationRight'=>'newColumn',
                         'tabFinancial'=>"tab",
                           'newColumnbFinancialLeft'=>'newColumn',
                             'sectionFinancialProvider'=>'section',
