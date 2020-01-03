@@ -4598,11 +4598,11 @@ abstract class SqlElement {
     $fldType = 'id' . $class . 'Type';
     
     // When reopening item control that parent is not still closed
-    if (property_exists($this,'idle') and $this->id and $this->idle==0 and $old->idle==1 and !self::is_a($this,'PlanningElement')) {
-      if (property_exists($this,'idActivity') and $this->idActivity) {
+    if (property_exists($this,'idle') and $this->id and $this->idle==0 and $old->idle==1 and !self::is_a($this,'PlanningElement') and !self::is_a($this,'WorkElement')) {
+      if (property_exists($this,'idActivity') and $this->idActivity and $class!='Ticket' and $class!='TicketSimple') {
         $act=new Activity($this->idActivity,true);
         if ($act->idle==1) {
-          $msg="<br/>".i18n("errorReopenControl",array(i18n('Activity').' #'.$this->idActivity));
+          $msg="<br/>$class".i18n("errorReopenControl",array(i18n('Activity').' #'.$this->idActivity));
           if (strpos($result,$msg)===false) $result.=$msg;
         }
       }
