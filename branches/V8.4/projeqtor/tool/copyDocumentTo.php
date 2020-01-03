@@ -40,6 +40,7 @@ Sql::beginTransaction();
 $newObj=$obj->copy();
 // save the new object to session (modified status)
 $result=$newObj->_copyResult;
+debugLog("New obj status is $newObj->idStatus");
 unset($newObj->_copyResult);
 
 $list = array();
