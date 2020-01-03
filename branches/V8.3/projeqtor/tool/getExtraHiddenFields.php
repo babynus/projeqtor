@@ -61,7 +61,7 @@ if (property_exists($obj, $peName)) {
   $resultPe=$pe->getExtraHiddenFields($type,$status,$profile);
   $result=array_merge($result,$resultPe);
 }
-if (property_exists($obj, 'WorkElement')) {
+if (property_exists($obj, 'WorkElement') and $objectClass!='TicketSimple') {
   $we=$obj->WorkElement;
   $resultWe=$we->getExtraHiddenFields($type,$status,$profile);
   $result=array_merge($result,$resultWe);

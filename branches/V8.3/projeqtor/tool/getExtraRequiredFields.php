@@ -69,7 +69,7 @@ if (property_exists($obj, $peName)) {
     $result[$peName.'_'.$key]=$val;
   }
 }
-if (property_exists($obj, 'WorkElement')) {
+if (property_exists($obj, 'WorkElement') and $objectClass!='TicketSimple') {
   $we=$obj->WorkElement;
   $resultWe=$we->getExtraRequiredFields($type,$status,$planningMode,null);
   foreach ($resultWe as $key=>$val) {
