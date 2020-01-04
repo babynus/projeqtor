@@ -1029,8 +1029,8 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
               && destination == 'detailDiv') {
             if (dojo.byId('attachmentFileDirectDiv')
                 && dijit.byId('attachmentFileDirect')) {
-              dijit.byId('attachmentFileDirect').addDropTarget(
-                  dojo.byId('attachmentFileDirectDiv'));
+              dijit.byId('attachmentFileDirect').addDropTarget(dojo.byId('attachmentFileDirectDiv'));
+              dijit.byId('attachmentFileDirect').addDropTarget(dojo.byId('formDiv'),true);
             }
           }
           if (dojo.byId('objectClass') && destination.indexOf(dojo.byId('objectClass').value) == 0) { // If refresh a section
