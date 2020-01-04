@@ -975,8 +975,8 @@ class NotificationDefinition extends SqlElement {
       $colScript .= '  } else {';
       $colScript .= '       dijit.byId("notificationGenerateBefore").set("readOnly",false);';
       $colScript .= '       dijit.byId("notificationGenerateBefore").setValue("");';
-      $colScript .= '       dijit.byId("notificationGenerateBeforeInMin").set("readOnly",true);';
-      $colScript .= '       dijit.byId("notificationGenerateBeforeInMin").setValue("");';
+      //$colScript .= '       dijit.byId("notificationGenerateBeforeInMin").set("readOnly",true);';
+      //$colScript .= '       dijit.byId("notificationGenerateBeforeInMin").setValue("");';
       $colScript .= '  }';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';                                      
