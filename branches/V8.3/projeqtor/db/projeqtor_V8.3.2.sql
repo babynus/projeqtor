@@ -11,3 +11,5 @@ INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
  
 UPDATE `${prefix}modulemenu` SET idModule=10, active=(select active from ${prefix}module where id=10)
 WHERE idMenu in (225,226);
+
+UPDATE `${prefix}menu` SET level=null WHERE id=192;
