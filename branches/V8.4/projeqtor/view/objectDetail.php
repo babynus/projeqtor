@@ -261,8 +261,12 @@ if (array_key_exists('refresh', $_REQUEST)) {
 		<?php  include 'objectButtons.php'; ?>
   </div>
 	<div id="formDiv" dojoType="dijit.layout.ContentPane" region="center" style="overflow:<?php if($layout=='tab' ){echo 'hidden';}else{echo 'auto';}?>;"
-	  ondragover="event.preventDefault();" ondrop="event.preventDefault();">
-
+	   ondragover="dropFilesFormOnDragOver();" 
+	  ondragleave="dropFilesFormOnDragLeave();" 
+	       ondrop="dropFilesFormOnDrop();">
+  <div id="dropFilesInfoDiv" style="text-align:center;font-size:500%;z-index:99998;width:100%;height:100%;position:absolute;top:0px;left:0px;border:5px dashed grey;background-color:#EEEEEE;opacity:50%;display:none">
+    <div style="position:absolute;top:50%;margin-top:-25px;height:px;width:100%;text-align:center;"><?php echo i18n('dragAndDrop');?></div>
+  </div>
 	<?php
   }
   if (!$print) {
@@ -2681,7 +2685,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo '<textarea style="height:300px"'; // Important to set big height to retreive correct scroll position after save
           echo ' name="'.$col.$extName.'" ';
           echo ' id="'.$col.$extName.'" ';
-          echo ' class="input '.(($isRequired)?'required':'').'" ';
+          echo ' class="input '.(($isRequired)?'required':'').'" style="z-index:99999"';
           // echo $name.' '.$attributes;
           echo ' maxlength="'.$dataLength.'"';
           echo '>';
