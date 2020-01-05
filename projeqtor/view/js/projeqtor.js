@@ -6480,3 +6480,21 @@ function showListFilter(checkBoxName,value){
     dojo.byId('hideVersionsWithoutActivityCheck').style.visibility="visible";
   }
 }
+var dropFilesFormInProgress=null;
+function dropFilesFormOnDragOver() {
+  event.preventDefault();
+  if (dropFilesFormInProgress) clearTimeout(dropFilesFormInProgress);
+  dojo.byId('dropFilesInfoDiv').style.display='block';
+  dojo.byId('dropFilesInfoDiv').style.height=(dojo.byId('formDiv').offsetHeight-10)+"px";
+  var hasScrollBar=(dojo.byId('formDiv').scrollHeight>dojo.byId('formDiv').clientHeight)?true:false;
+  var removeWidth=(hasScrollBar)?25:10;
+  dojo.byId('dropFilesInfoDiv').style.width=(dojo.byId('formDiv').offsetWidth-removeWidth)+"px";
+}
+function dropFilesFormOnDragLeave() {
+  event.preventDefault();
+  dropFilesFormInProgress=setTimeout("dojo.byId('dropFilesInfoDiv').style.display='none';",100);
+}
+function dropFilesFormOnDrop() {
+  event.preventDefault();
+  dojo.byId('dropFilesInfoDiv').style.display='none';
+}
