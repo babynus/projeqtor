@@ -999,12 +999,11 @@ static protected function drawProductUsingComponentVersion($class, $id)
   
   //END ADD qCazelles - GANTT
   
-  //florent ticket 4299 and 4303 
+  //florent ticket 4299 and 4303 and 4389
   public function searchAtivityForVersion(){
     $planningVersionShowClosed = Parameter::getUserParameter('planningVersionShowClosed');
     $displayComponentversionActivity = Parameter::getUserParameter('planningVersionDisplayComponentVersionActivity');
-    
-    $activity = new Activity;
+    $activity = new Activity();
     $actTable=$activity->getDatabaseTableName();
     $querySelectAct="$actTable.id as id";
     $queryFromAct="$actTable";
@@ -1029,8 +1028,35 @@ static protected function drawProductUsingComponentVersion($class, $id)
       jsonBuildWhereCriteria($querySelectAct,$queryFromAct,$where,$queryOrderByAct,$cpt,$arrayFilter,$activity);
     }
     $listActivityProductVersion = $activity->getSqlElementsFromCriteria(null,null,$where);
-    
+    if(!empty($listActivity)){
+      $listActivity=$this->orderLstByWbsForActivity($listActivity);
+    }
+    if(!empty($listActivityProductVersion)){
+      $listActivityProductVersion=$this->orderLstByWbsForActivity($listActivityProductVersion);
+    }
     return [$listActivity,$listActivityProductVersion];
+  }
+
+  public function orderLstByWbsForActivity($listActivity){
+    $listIdAct= array();
+    $pL= new PlanningElement();
+    foreach ($listActivity as $id => $obj){
+        if($obj->id){
+          $listIdAct[$obj->id]=$obj->id;
+        }
+    }
+    $listIdAct=implode(",", $listIdAct);
+    if($listIdAct !=''){
+      $where = "refId in ($listIdAct) and refType= 'Activity'";
+      $where .=" order by wbs";
+      $listPl=$pL->getSqlElementsFromCriteria(null,null,$where);
+    }
+    foreach ($listPl as $id => $activityPL ){
+      if( $activityPL->refId){
+        $order[]=$act= new Activity($activityPL->refId);
+      }
+    }
+    return $order;
   }
 }
 ?>
