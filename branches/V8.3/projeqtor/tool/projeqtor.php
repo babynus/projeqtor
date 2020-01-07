@@ -2021,12 +2021,24 @@ function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sen
   // + Meeting::sendMail() : sendMail($destList, $this->name, $vcal, $this, $headers,$sender) !!! VCAL Meeting Invite
   // + User::authenticate : sendMail($paramAdminMail, $title, $message)
   // + /tool/sendMail.php : sendMail($dest,$title,$msg)
-  global $targetDirImageUpload;
+  global $targetDirImageUpload, $cronnedScript;
   $messageBody=str_replace($targetDirImageUpload, SqlElement::getBaseUrl().substr(str_replace("..", "", $targetDirImageUpload), 0, strlen(str_replace("..", "", $targetDirImageUpload))-1), $messageBody);
   $paramMailSendmailPath=Parameter::getGlobalParameter('paramMailSendmailPath');
   $paramMailSmtpUsername=Parameter::getGlobalParameter('paramMailSmtpUsername');
   $paramMailSmtpPassword=Parameter::getGlobalParameter('paramMailSmtpPassword');
   $paramMailerType=strtolower(Parameter::getGlobalParameter('paramMailerType'));
+  // florent
+  if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES' and $canSend==false and $autoSendReport!=true and ! $cronnedScript ){
+    $curUser=new Affectable(getSessionUser()->id);
+    if(stristr($to,$curUser->email)){
+      $to=trim(str_replace($curUser->email,"",$to));
+      if($to!="" ){
+        $mail->mailTo=$to;
+      }else{
+        return false;
+      }
+    }
+  }
   if (!isset($paramMailerType) or $paramMailerType=='' or $paramMailerType=='phpmailer') {
     // Cute method using PHPMailer : should work on all situations / First implementation on V4.0
     return sendMail_phpmailer($to, $subject, $messageBody, $object, $headers, $sender, $attachmentsArray, $references,false,$autoSendReport);
@@ -2079,18 +2091,6 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
   $mail->mailBody=$message;
   $mail->mailStatus='WAIT';
   $mail->idle='0';
-  // florent
-  if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES' and $canSend==false and $autoSendReport!=true ){
-    $curUser=new Affectable(getSessionUser()->id);
-    if(stristr($to,$curUser->email)){
-       $to=trim(str_replace($curUser->email,"",$to));
-       if($to!="" ){
-         $mail->mailTo=$to;
-       }else{
-         return false;
-       }
-    }
-  }
   $resMail=$mail->save();
   if (stripos($resMail, 'id="lastOperationStatus" value="ERROR"')>0) {
     errorLog("Error storing email in table : ".$resMail);
