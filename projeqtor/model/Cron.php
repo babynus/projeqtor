@@ -386,7 +386,10 @@ class Cron {
 			self::run();
 		} else if (file_exists(self::$runningFile)) {
       $handle=fopen(self::$runningFile, 'r');
-      $last=fgets($handle);
+      //$last=fgets($handle);
+      $lastData=fgets($handle);
+      $lastSplit=explode(self::CRON_DATA_SEPARATOR,$lastData);
+      $last=$lastSplit[0];
       $now=time();
       fclose($handle);
       if (!$last or !is_numeric($last)) $last=0;
