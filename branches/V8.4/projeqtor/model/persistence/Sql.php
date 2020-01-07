@@ -233,11 +233,11 @@ class Sql {
     }*/
   	$str=$string;
     // To be kept : if magic_quote_gpc is on, it would insert \' instead of ' and so on
-  	if (get_magic_quotes_gpc()) {
-      $str=str_replace('\"','"',$str);
-      $str=str_replace("\'","'",$str);
-      $str=str_replace('\\\\','\\',$str);
-    }   
+//   	if (get_magic_quotes_gpc()) {
+//       $str=str_replace('\"','"',$str);
+//       $str=str_replace("\'","'",$str);
+//       $str=str_replace('\\\\','\\',$str);
+//     }   
     $str=str_replace(chr(8),'',$str);
     if ($str===null) $str='';
     $cnx=self::getConnection();
