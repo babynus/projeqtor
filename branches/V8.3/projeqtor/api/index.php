@@ -339,7 +339,7 @@ if ($_SERVER['REQUEST_METHOD']=='GET') {
 }
 
 function returnError($error, $message) {
-	echo '{"error":"'.$error.'", "message":"'.$message.'"}';
+	echo '{"error":"'.$error.'", "message":"'.json_encode($message).'"}';
 	exit;
 }
 
