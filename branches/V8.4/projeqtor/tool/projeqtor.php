@@ -163,9 +163,9 @@ if (false===function_exists('lcfirst')) {
  */
 
 // Check 'magic_quotes' : must be disabled ====================================
-if (get_magic_quotes_runtime()) {
-  @set_magic_quotes_runtime(0);
-}
+// if (get_magic_quotes_runtime()) {
+//   @set_magic_quotes_runtime(0);
+// }
 $page=$_SERVER['PHP_SELF'];
 if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMode) and !(isset($indexPhp) and $indexPhp)) {
   // Get the user from session. If not exists, request connection ===============
@@ -2226,14 +2226,14 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
   $mail->save();
   return $resultMail;
 }
-function mb_str_split($str, $split_length) {
-  $chars = array();
-  $len = mb_strlen($str, 'UTF-8');
-  for ($i = 0; $i < $len; $i+=$split_length ) {
-    $chars[] = mb_substr($str, $i, $split_length, 'UTF-8');
-  }
-  return $chars;
-}
+// function mb_str_split($str, $split_length) {
+//   $chars = array();
+//   $len = mb_strlen($str, 'UTF-8');
+//   for ($i = 0; $i < $len; $i+=$split_length ) {
+//     $chars[] = mb_substr($str, $i, $split_length, 'UTF-8');
+//   }
+//   return $chars;
+// }
 function sendMail_socket($to, $subject, $messageBody, $object=null, $headers=null, $sender=null, $boundary=null) {
   scriptLog('sendMail_socket');
   $paramMailSender=Parameter::getGlobalParameter('paramMailSender');
