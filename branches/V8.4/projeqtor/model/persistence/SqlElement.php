@@ -4837,6 +4837,7 @@ abstract class SqlElement {
    * @return status of mail, if sent
    */
   public function sendMailIfMailable($newItem = false, $statusChange = false, $directStatusMail = null, $responsibleChange = false, $noteAdd = false, $attachmentAdd = false, $noteChange = false, $descriptionChange = false, $resultChange = false, $assignmentAdd = false, $assignmentChange = false, $anyChange = false,$affectationAdd = false , $affectationChange = false, $linkAdd = false, $linkDelete = false) {
+    global $cronnedScript;
     $objectClass = get_class($this);
     $idProject = ($objectClass == 'Project') ? $this->id : ((property_exists ( $this, 'idProject' )) ? $this->idProject : null);
     if ($objectClass == 'TicketSimple') {
@@ -5242,7 +5243,7 @@ abstract class SqlElement {
     //END add gmartin 
     if ($directStatusMail) {
       $idTemplate=(trim($directStatusMail->idEmailTemplate))?$directStatusMail->idEmailTemplate:'0';
-      if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES' ){
+      if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES' and ! $cronnedScript){
         $tabDest=explode(",", $destTab[$idTemplate]);
         if(count($tabDest)!=count($resultMail)){
           $curUser=new Affectable(getSessionUser()->id);
