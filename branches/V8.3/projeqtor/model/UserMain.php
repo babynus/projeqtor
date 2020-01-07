@@ -432,13 +432,15 @@ class UserMain extends SqlElement {
         $scopeArray=$noAccessArray;
         $accessProfile=new AccessProfile($arObj->idAccessProfile);
         if ($arObj->idAccessProfile<1000000) {
-          $scopeArray=array( 'read' =>  $accessScopeList[$accessProfile->idAccessScopeRead],
-                             'create' => $accessScopeList[$accessProfile->idAccessScopeCreate],
-                             'update' => $accessScopeList[$accessProfile->idAccessScopeUpdate],
-                             'delete' => $accessScopeList[$accessProfile->idAccessScopeDelete],
-                             'report' =>  $accessScopeList[$accessProfile->idAccessScopeRead], );
-          if ($accessScopeList[$accessProfile->idAccessScopeRead]=='ALL') {
-            if (!$obj) $this->_accessControlVisibility='ALL';
+          if ($accessProfile->id) {
+            $scopeArray=array( 'read' =>  $accessScopeList[$accessProfile->idAccessScopeRead],
+                               'create' => $accessScopeList[$accessProfile->idAccessScopeCreate],
+                               'update' => $accessScopeList[$accessProfile->idAccessScopeUpdate],
+                               'delete' => $accessScopeList[$accessProfile->idAccessScopeDelete],
+                               'report' =>  $accessScopeList[$accessProfile->idAccessScopeRead], );
+            if ($accessScopeList[$accessProfile->idAccessScopeRead]=='ALL') {
+              if (!$obj) $this->_accessControlVisibility='ALL';
+            }
           }
         } else {     
           if (isset($noAccessAllowed[$menuName]) and $noAccessAllowed[$menuName]) {
