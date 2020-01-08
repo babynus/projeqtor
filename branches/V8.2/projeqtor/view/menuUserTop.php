@@ -70,6 +70,7 @@ if (!$userLang and isset($currentLocale)) $userLang=$currentLocale;
 $userTheme = getSessionValue('theme');
 $startPage = getSessionValue('startPage');
 $listStartPage=array();
+$listStartPage['welcome.php']=i18n('paramNone');
 if (securityCheckDisplayMenu(null,'Today')) {$listStartPage['today.php']=i18n('menuToday');}
 if (securityCheckDisplayMenu(null,'DashboardTicket')) {$listStartPage['dashboardTicketMain.php']=i18n('menuDashboardTicket');}
 if (securityCheckDisplayMenu(null,'Diary')) {$listStartPage['diaryMain.php']=i18n('menuDiary');}
@@ -84,7 +85,6 @@ foreach  ($arrayItem as $item) {
   if (securityCheckDisplayMenu(null,$item)) {$listStartPage['objectMain.php?objectClass='.$item]=i18n('menu'.$item);}
 }
 
-$listStartPage['welcome.php']=i18n('paramNone');
 $prf=new Profile(getSessionUser()->idProfile);
 if ($prf->profileCode=='ADM') {
   $listStartPage['startGuide.php']=i18n('startGuideTitle');
