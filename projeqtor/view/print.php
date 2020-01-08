@@ -233,6 +233,9 @@ use Spipu\Html2Pdf\Html2Pdf;
 <?php function finalizePrint() {
   global $outMode, $download, $includeFile, $orientation;
   $pdfLib='html2pdf';
+  if (Parameter::getGlobalParameter('pathToWkHtmlToPdf')) {
+    $pdfLib='WkHtmlToPdf';
+  }
   //$pdfLib='dompdf';
   $outputFileName=null;
   if (isset($_REQUEST['objectClass']) and isset($_REQUEST['objectId']) and isset($_REQUEST['page']) 
@@ -301,6 +304,39 @@ use Spipu\Html2Pdf\Html2Pdf;
       $dompdf->load_html($content);
       $dompdf->render();
       $dompdf->stream("sample.pdf");
+    } else if ($pdfLib=='WkHtmlToPdf') {
+      $path=Parameter::getGlobalParameter('pathToWkHtmlToPdf');
+      $htmlFile='../files/report/test.html';
+      $pdfFile='../files/report/test.pdf';
+      
+      $htmlFile='test.html';
+      $pdfFile='test.pdf';
+      kill ($htmlFile);
+      writeFile($content, $htmlFile);
+      $options='-O '.(($orientation=='P')?'Portrait':'Landscape');
+      exec("\"$path\" $options $htmlFile $pdfFile");
+      if (ob_get_length()) {
+        ob_end_clean();
+      }
+      if ($download) {
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename="'.basename($pdfFile).'"');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($pdfFile));
+        readfile($pdfFile);
+      } else {
+        header('Content-Type: application/pdf');
+        header('Cache-Control: private, must-revalidate, post-check=0, pre-check=0, max-age=1');
+        //header('Cache-Control: public, must-revalidate, max-age=0'); // HTTP/1.1
+        header('Pragma: public');
+        header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+        header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
+        header('Content-Disposition: inline; filename="'.basename($pdfFile).'"');
+        readfile($pdfFile);
+      }
     }
   }
 }
