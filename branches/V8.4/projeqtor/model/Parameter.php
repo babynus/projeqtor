@@ -558,6 +558,7 @@ class Parameter extends SqlElement {
         break;
       case 'startPage':
       	$list=array();
+      	$list['welcome.php']=i18n('paramNone');
       	if (securityCheckDisplayMenu(null,'Today')) {$list['today.php']=i18n('menuToday');}
       	if (securityCheckDisplayMenu(null,'DashboardTicket')) {$list['dashboardTicketMain.php']=i18n('menuDashboardTicket');}
       	if (securityCheckDisplayMenu(null,'Diary')) {$list['diaryMain.php']=i18n('menuDiary');}
@@ -573,7 +574,6 @@ class Parameter extends SqlElement {
       	foreach  ($arrayItem as $item) {
       		if (securityCheckDisplayMenu(null,$item)) {$list['objectMain.php?objectClass='.$item]=i18n('menu'.$item);}
       	}
-      	$list['welcome.php']=i18n('paramNone');
       	$prf=new Profile(getSessionUser()->idProfile);
       	if ($prf->profileCode=='ADM') {
       	  $list['startGuide.php']=i18n('startGuideTitle');
