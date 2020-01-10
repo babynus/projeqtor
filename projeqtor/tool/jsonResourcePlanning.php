@@ -165,7 +165,11 @@ if ( array_key_exists('showProject',$_REQUEST) ) {
   $showProject=true;
 }
 
-$showNullAssignment=RequestHandler::getBoolean('listShowNullAssignment');  
+$showNullAssignment=(isset($saveShowNullAssignment) and $saveShowNullAssignment==1)?true:false;
+if ( array_key_exists('listShowNullAssignment',$_REQUEST) ) {
+  $showNullAssignment=true;
+}
+
 
  if (! $showNullAssignment) {
    $queryWhere.= ($queryWhere=='')?'':' and ';
