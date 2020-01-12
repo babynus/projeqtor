@@ -1419,6 +1419,7 @@ function refreshNotificationTree(bCheckFormChangeInProgress) {
  */
 var resultDivFadingOut = null;
 var forceRefreshCreationInfo = false;
+var avoidInfiniteLoop=false;
 function finalizeMessageDisplay(destination, validationType) {
   var contentNode = dojo.byId(destination);
   var contentWidget = dijit.byId(destination);
@@ -1652,7 +1653,11 @@ function finalizeMessageDisplay(destination, validationType) {
         } else if (dojo.byId('lastOperation')
             && dojo.byId('lastOperation').value == 'move') {
           refreshGrid();
+        } else if (! avoidInfiniteLoop) {
+          refreshGrid();
+          avoidInfiniteLoop=true;
         } else {
+          avoidInfiniteLoop=false;
           refreshJsonPlanning(); // Must not call refreshGrid() to avoid
                                   // never ending loop
         }
