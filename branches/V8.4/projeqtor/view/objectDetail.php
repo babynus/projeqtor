@@ -2581,7 +2581,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           		                                'update3Amount','update3FullAmount','update4Amount','update4FullAmount',
                                               'addUntaxedAmount','addFullAmount','availableAmount','availableFullAmount',
                                               'leftAmount','leftFullAmount','reserveAmount','totalLeftCost', 'totalPlannedCost',
-          		                                'marginCost','marginWork',
+          		                                'marginCost','marginWork','validatedCost',
                                               'untaxedAmount','taxAmount','fullAmount',
                                               'addUntaxedAmount','addTaxAmount','addFullAmount',
                                               'totalUntaxedAmount','totalTaxAmount','totalFullAmount',
