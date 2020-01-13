@@ -42,6 +42,7 @@
   	$id=$_REQUEST['objectId'];
   }	
   $obj=new $class($id);
+  $objectIsClosed=(isset($obj) and property_exists($obj, 'idle') and $obj->idle)?true:false;
   if (isset($_REQUEST['noselect'])) {
   	$noselect=true;
   }
@@ -94,6 +95,9 @@
   $isAttachmentEnabled = true; // allow attachment
   if (! Parameter::getGlobalParameter ( 'paramAttachmentDirectory' ) or ! Parameter::getGlobalParameter ( 'paramAttachmentMaxSize' )) {
   	$isAttachmentEnabled = false;
+  }
+  if ($objectIsClosed) {
+    $isAttachmentEnabled = false;
   }
   if (!isset($readOnly)) {
     $readOnly=false;
