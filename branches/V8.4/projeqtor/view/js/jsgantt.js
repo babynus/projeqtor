@@ -2347,7 +2347,8 @@ function dependencyRightClick(evt){
   divNode.style.left=((evt.pageX)+7)+"px";
   divNode.style.top=evt.pageY+"px";
   var streamWitdh=0;
-  if (dojo.byId("detailRightDiv")) {
+  //florent 4433
+  if (dojo.byId("detailRightDiv") && (dojo.byId("mainDivContainer").style.width !=  dojo.byId("detailRightDiv").style.width )) {
     streamWitdh=parseInt(dojo.byId("detailRightDiv").style.width)+5;
   }
   if(evt.pageY>divRightGanttChartHeight+divRightGanttChartTop-editDependencyDivHeight){
