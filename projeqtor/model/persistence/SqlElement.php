@@ -608,8 +608,8 @@ abstract class SqlElement {
       		"StatusMailPerProject" => "cascade",
           "Tender" => "control", 
           "TestCase" => "confirm", 
-          "TestSession" => "confirm"), 
-  		    "TicketDelayPerProject" => "cascade",
+          "TestSession" => "confirm", 
+  		    "TicketDelayPerProject" => "cascade"),
       "Requirement" => array("Requirement" => "control"), 
       "Resource" => array(
           "Action" => "control", 
