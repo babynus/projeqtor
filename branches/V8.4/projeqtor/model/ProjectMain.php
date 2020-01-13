@@ -1062,17 +1062,18 @@ static function isTheLeaveProject($id=null) {
     $result="";
     $old=$this->getOld();
     //Gautier #4304
-    if($this->idProjectType and $this->id){
-      $projType = new ProjectType($this->idProjectType);
-      if($projType->isLeadProject){
-        //change type of project to lead Project
-        if ($old->idProjectType != $this->idProjectType) {
-          $planElement = new PlanningElement();
-          $cptList = $planElement->countSqlElementsFromCriteria(null,"idProject=$this->id and (refType='Activity' or refType='TestSession')");
-          if($cptList) $result .= '<br/>' . i18n ( 'cantChangeTypeOfProjectToLeadProjectIfYouHaveActivities' );
-        }
-      }
-    }
+    // PBER - disable this control (client request)
+//     if($this->idProjectType and $this->id){
+//       $projType = new ProjectType($this->idProjectType);
+//       if($projType->isLeadProject){
+//         //change type of project to lead Project
+//         if ($old->idProjectType != $this->idProjectType) {
+//           $planElement = new PlanningElement();
+//           $cptList = $planElement->countSqlElementsFromCriteria(null,"idProject=$this->id and (refType='Activity' or refType='TestSession')");
+//           if($cptList) $result .= '<br/>' . i18n ( 'cantChangeTypeOfProjectToLeadProjectIfYouHaveActivities' );
+//         }
+//       }
+//     }
     if ($this->id and $this->id==$this->idProject) {
       $result.='<br/>' . i18n('errorHierarchicLoop');
     } else if ($this->ProjectPlanningElement and $this->ProjectPlanningElement->id){
