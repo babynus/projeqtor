@@ -2481,6 +2481,7 @@ function assignmentChangeResourceTeamForCapacity() {
         dojo.byId('assignmentRateRow').style.display="table-row";
         dojo.byId('assignmentCapacityResourceTeam').style.display="none";
         dojo.byId('assignmentUniqueSelection').style.display="none";
+        dijit.byId('assignmentUnique').set('checked',false);
       }
     }
   });
