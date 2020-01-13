@@ -1015,6 +1015,10 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
               CKEDITOR.instances[name].removeAllListeners();
               CKEDITOR.instances[name].destroy(false);
             }
+            if (dijit.byId('attachmentFileDirect')) { // Try to remove dropTarget, but does not exist in API
+              //dijit.byId('attachmentFileDirect').removeDropTarget(dojo.byId('attachmentFileDirectDiv'));
+              //dijit.byId('attachmentFileDirect').removeDropTarget(dojo.byId('formDiv'),true);
+            }
           }
           hideBigImage(); // Will avoid resident pop-up always displayed
           cleanContent(destination);
@@ -1027,8 +1031,7 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
           }
           if (page.substr(0, 16) == 'objectDetail.php'
               && destination == 'detailDiv') {
-            if (dojo.byId('attachmentFileDirectDiv')
-                && dijit.byId('attachmentFileDirect')) {
+            if (dojo.byId('attachmentFileDirectDiv') && dijit.byId('attachmentFileDirect')) {
               dijit.byId('attachmentFileDirect').addDropTarget(dojo.byId('attachmentFileDirectDiv'));
               dijit.byId('attachmentFileDirect').addDropTarget(dojo.byId('formDiv'),true);
             }

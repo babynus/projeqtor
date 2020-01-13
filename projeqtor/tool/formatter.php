@@ -525,6 +525,8 @@ function activityStreamDisplayNote ($note,$origin){
   if ($origin=='activityStream' and !$canRead) {
     return ;
   }
+  $objectIsClosed=(isset($obj) and property_exists($obj, 'idle') and $obj->idle)?true:false;
+  if ($objectIsClosed) $canUpdate=false;
   $isNoteClosed=getSessionTableValue("closedNotes", $note->id);
   if ($note->idPrivacy == 1 or ($note->idPrivacy == 3 and $user->id == $note->idUser) or ($note->idPrivacy == 2 and $userRessource->idTeam == $note->idTeam)) {
     echo '<tr style="height:100%;">';
