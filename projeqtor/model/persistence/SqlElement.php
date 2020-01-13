@@ -1148,11 +1148,20 @@ abstract class SqlElement {
     global $mode;
     if (property_exists ( $this, 'idle' ) and $this->idle) {
       $relationShip = self::$_closeRelationShip;
+      $user = getSessionUser ();
+      $crit = array('idProfile' => $user->getProfile ( $this ), 'scope' => 'canForceClose');
+      $habil = SqlElement::getSingleSqlElementFromCriteria ( 'HabilitationOther', $crit );
+      if ($habil and $habil->id and $habil->rightAccess == '1') {
+        $canForceClose = true;
+      }
       if (array_key_exists ( get_class ( $this ), $relationShip )) {
         $objects = '';
         $error = false;
-        foreach ( $relationShip [get_class ( $this )] as $object=>$val ) {
-          if (($val == 'cascade' or $mode == 'confirm') and property_exists ( $object, 'idle' )) {
+        foreach ( $relationShip [get_class ( $this )] as $object=>$mode ) {
+          if($canForceClose and $mode=='control'){
+            $mode = "confirm";
+          }
+          if (($mode == 'cascade' or $mode == 'confirm') and property_exists ( $object, 'idle' )) {
             $where = null;
             $obj = new $object ();
             $crit = array('id' . get_class ( $this ) => $this->id, 'idle' => '0');

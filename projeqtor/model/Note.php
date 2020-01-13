@@ -107,6 +107,23 @@ class Note extends SqlElement {
     return $result;
   }
   
+  public function control(){
+    $result="";
+    if(! $this->id) { // New note
+      $class = $this->refType;
+      $id = $this->refId;
+      if (property_exists($class, 'idle')){
+        $obj = new $class($id);
+        if ($obj->idle) {
+          $result .= "<br/>" . i18n("errorAddOnClosedItem");
+        }
+      } 
+    }
+    if (!$result) {
+      $result=parent::control();
+    }
+    return $result;
+  }
   public function delete() {
     $result = parent::delete ();
     if ($this->idPrivacy != 3) {
