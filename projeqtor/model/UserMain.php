@@ -1503,7 +1503,8 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
             $arraySql["attribute"]=$filterCriteria->sqlAttribute;
             $arraySql["operator"]=$filterCriteria->sqlOperator;
             $arraySql["value"]=$filterCriteria->sqlValue;
-            $filterArray[]=array("disp"=>$arrayDisp,"sql"=>$arraySql);
+            $orOperator=$filterCriteria->orOperator;
+            $filterArray[]=array("disp"=>$arrayDisp,"sql"=>$arraySql,"orOperator"=>$orOperator);
           }
         }
         $this->_arrayFilters[$filterObjectClass]=$filterArray;
