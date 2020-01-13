@@ -1151,6 +1151,7 @@ abstract class SqlElement {
       $user = getSessionUser ();
       $crit = array('idProfile' => $user->getProfile ( $this ), 'scope' => 'canForceClose');
       $habil = SqlElement::getSingleSqlElementFromCriteria ( 'HabilitationOther', $crit );
+      $canForceClose=false;
       if ($habil and $habil->id and $habil->rightAccess == '1') {
         $canForceClose = true;
       }
