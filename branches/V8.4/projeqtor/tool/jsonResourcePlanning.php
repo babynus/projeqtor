@@ -28,6 +28,7 @@
  * Get the list of objects, in Json format, to display the grid list
  */
 require_once "../tool/projeqtor.php";
+require_once "../tool/jsonFunctions.php";
 scriptLog('   ->/tool/jsonResourcePlanning.php');
 //SqlElement::$_cachedQuery['Project']=array(); // Do not manage project cahce here : lead to error and is no use as some caching is done here.
 SqlElement::$_cachedQuery['Ticket']=array();
@@ -170,7 +171,6 @@ if ( array_key_exists('listShowNullAssignment',$_REQUEST) ) {
   $showNullAssignment=true;
 }
 
-
  if (! $showNullAssignment) {
    $queryWhere.= ($queryWhere=='')?'':' and ';
    $queryWhere.=' ass.plannedWork>0 ';
@@ -265,13 +265,48 @@ foreach ($allowedResource as $resId=>$resName) {
 
 $queryWhere.="and ass.idResource in ".transformListIntoInClause($allowedResource);
 // constitute query and execute
+// florent 4391
 $queryWhere=($queryWhere=='')?' 1=1':$queryWhere;
+$arrayFilter=jsonGetFilterArray('ResourcePlanning', false);
+$act=new Activity();
+$pe=new PlanningElement();
+$peTable=$pe->getDatabaseTableName();
+$actTable=$act->getDatabaseTableName();
+$querySelectAct="pet.refId as id , pet.wbsSortable as wbs ";
+$queryFromAct=" $peTable as pet left join $actTable on (pet.refType='Activity' and pet.refId=$actTable.id)";
+$queryWhereAct="1=1 ";
+$queryOrderByAct="$actTable.id asc";
+$cpt=0;
+$applyFilter=false;
+$arrayRestrictWbs=array();
+if (count($arrayFilter)>0  ) {
+  $applyFilter=true;
+  jsonBuildWhereCriteria($querySelectAct,$queryFromAct,$queryWhereAct,$queryOrderByAct,$cpt,$arrayFilter,$act);
+  $queryAct='select ' . $querySelectAct
+  . ' from ' . $queryFromAct
+  . ' where ' . $queryWhereAct
+  . ' order by ' . $queryOrderByAct;
+  $resultAct=Sql::query($queryAct);
+  while ($line = Sql::fetchLine($resultAct)) {
+    $wbsExplode=explode('.',$line['wbs']);
+    $wbsParent="";
+    foreach ($wbsExplode as $wbsTemp) {
+      $wbsParent=$wbsParent.(($wbsParent)?'.':'').$wbsTemp;
+      if (!isset($arrayRestrictWbs[$wbsParent])) {
+        $arrayRestrictWbs[$wbsParent]=$line['id'];
+      } 
+    }
+  }
+  ksort($arrayRestrictWbs);
+}
+
 $query='select ' . $querySelect
 . ' from ' . $queryFrom
 . ' where ' . $queryWhere
 . ' order by ' . $queryOrderBy;
-
 $result=Sql::query($query);
+
+
 if (isset($debugJsonQuery) and $debugJsonQuery) { // Trace in configured to
   debugTraceLog("jsonResourcePlanning: ".$query); // Trace query
   debugTraceLog("  => error (if any) = ".Sql::$lastQueryErrorCode.' - '.Sql::$lastQueryErrorMessage);
@@ -307,6 +342,9 @@ if (Sql::$lastQueryNbRows == 0) {
   $cptLine=0; 
 	while ($line = Sql::fetchLine($result)) {
 		$line=array_change_key_case($line,CASE_LOWER);
+		debugLog($arrayRestrictWbs);
+		//florent 4391
+		if ($applyFilter and (!isset($arrayRestrictWbs[$line['wbssortable']]))) continue;
 		if (! isset($allowedResource[$line['idresource']])) continue;
 		$cptLine++;
 		if ($line['idresource']!=$idResource) {
