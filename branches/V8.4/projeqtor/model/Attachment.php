@@ -134,5 +134,22 @@ class Attachment extends SqlElement {
   public function isThumbable() {
     return isThumbable($this->fileName);
   }
+  public function control(){
+    $result="";
+    if(! $this->id) { // New note
+      $class = $this->refType;
+      $id = $this->refId;
+      if (property_exists($class, 'idle')){
+        $obj = new $class($id);
+        if ($obj->idle) {
+          $result .= "<br/>" . i18n("errorAddOnClosedItem");
+        }
+      }
+    }
+    if (!$result) {
+      $result=parent::control();
+    }
+    return $result;
+  }
 }
 ?>

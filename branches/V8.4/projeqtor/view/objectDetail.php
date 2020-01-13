@@ -3786,7 +3786,7 @@ function drawNotesFromObject($obj, $refresh=false) {
       	if ($obj->id!=null and !$print and $canUpdate) {
       		echo ' <a onClick="addNote(true,'.htmlEncode($note->id).');" title="'.i18n('replyToThisNote').'" > '.formatSmallButton('Reply').'</a>';
       	}
-      	if (($note->idUser==$user->id and !$print and $canUpdate) or $userCanChange->rightAccess=='1') {
+      	if (($note->idUser==$user->id or $userCanChange->rightAccess=='1') and !$print and $canUpdate) {
       		echo ' <a onClick="editNote('.htmlEncode($note->id).','.htmlEncode($note->idPrivacy).');" title="'.i18n('editNote').'" > '.formatSmallButton('Edit').'</a>';
       		echo ' <a onClick="removeNote('.htmlEncode($note->id).');" title="'.i18n('removeNote').'" > '.formatSmallButton('Remove').'</a>';
       	}

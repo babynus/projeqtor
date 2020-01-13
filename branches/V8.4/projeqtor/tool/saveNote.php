@@ -48,6 +48,7 @@ $refId=$_REQUEST['noteRefId'];
 if (! array_key_exists('noteNote',$_REQUEST)) {
   throwError('noteNote parameter not found in REQUEST');
 }
+
 $noteNote=$_REQUEST['noteNote'];
 $notePrivacy=null;
 if (array_key_exists('notePrivacy',$_REQUEST)) {
