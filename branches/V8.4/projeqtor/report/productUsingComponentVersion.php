@@ -92,11 +92,9 @@ if ($format == 'print') {
 
 function showProduct($item)
 {
-    $responsible = new Resource();
-    $responsible = $responsible->getSqlElementsFromCriteria(array('id'=>($item->idResource)));
     $id = $item->id;
     $name = $item->name;
-    $resource = ($responsible[0]->name?$responsible[0]->name:$item->idResponsible);
+    $resource = SqlList::getNameFromId('Affectable',$item->idResource);
     $deliveryDate = ($item->plannedDeliveryDate ? $item->plannedDeliveryDate :'');
     $startDate = ($item->realStartDate ? $item->realStartDate : '');
     $endDate = ($item->plannedEndDate ? $item->plannedEndDate : '');
