@@ -589,7 +589,7 @@ static protected function drawProductUsingComponentVersion($class, $id)
   protected static $existingIDs = array();
   protected static $tabDirectChild = array();
   
-  public function treatmentVersionPlanning ($parentVersion,$displayComponent ) {
+  public function treatmentVersionPlanning ($parentVersion,$displayComponent,$compWithAct) {
     $hideversionsWithoutActivity=Parameter::getUserParameter('versionsWithoutActivity');
     $displayProductversionActivity = Parameter::getUserParameter('planningVersionDisplayProductVersionActivity');
     $planningVersionShowClosed = Parameter::getUserParameter('planningVersionShowClosed');
@@ -607,11 +607,13 @@ static protected function drawProductUsingComponentVersion($class, $id)
                 $hide=1;
               }
             }
+            if(in_array($idComponentVersion, $compWithAct)){
+              $hide=0;
+            }
           }
-          
           if ($hide!=1 and ( $componentVersion->idle == 0  or $planningVersionShowClosed == 1) ){
             if ($componentVersion->isDelivered == 0 or $planningVersionShowClosed == 1 )
-              $componentVersion->treatmentVersionPlanning($this,$displayComponent);
+              $componentVersion->treatmentVersionPlanning($this,$displayComponent,$compWithAct);
           }
         }
       }
