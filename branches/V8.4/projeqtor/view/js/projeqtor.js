@@ -2733,6 +2733,12 @@ function i18n(str, vars) {
  * @return void
  */
 function setSelectedProject(idProject, nameProject, selectionField,resetPrevious) {
+	var isChecked = dijit.byId('onlyCheckedProject').get('checked');
+	if(isChecked == true){
+		showSelectedProject(false);
+		changedIdProjectPlan(idProject);
+		showSelectedProject(true);
+	}
 	if(idProject != '*'){
 		var pos = idProject.indexOf('_');
 		if(pos != -1){

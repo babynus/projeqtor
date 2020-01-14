@@ -1871,58 +1871,60 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                <label for="idProjectPlan" ><?php echo i18n("colIdProject") ?>&nbsp;:&nbsp;</label>
              </td>
              <td>
-               <select dojoType="dojox.form.CheckedMultiSelect"  class="selectPlan" multiple="true" style="border:1px solid #A0A0A0;width:initial;height:218px;max-height:218px;"
-                id="idProjectPlan" name="idProjectPlan[]" onChange="changedIdProjectPlan(this.value);"
-                value=" " >
-                 <option value=" "><strong><?php echo i18n("allProjects");?></strong></option>
-                 <?php 
-                    $proj=null; 
-                    if (sessionValueExists('project')) {
-                        $proj=getSessionValue('project');
-                        if(strpos($proj, ",")){
-                        	$proj="*";
-                        }
-                    }
-                    if ($proj=="*" or ! $proj) $proj=null;
-//                     $projs=$user->getListOfPlannableProjects();
-//                     htmlDrawOptionForReference('planning', null, null, true );
-                    $user=getSessionUser();
-                    $wbsList=SqlList::getList('Project','sortOrder',$proj, true );
-                    $sepChar=Parameter::getUserParameter('projectIndentChar');
-                    if (!$sepChar) $sepChar='__';
-                    $wbsLevelArray=array();
-                    $inClause=" idProject in ". transformListIntoInClause(getSessionUser()->getListOfPlannableProjects());
-                    $inClause.=" and idProject not in " . Project::getAdminitrativeProjectList();
-                    $inClause.=" and refType= 'Project'";
-                    $inClause.=" and idle=0";
-                    $order="wbsSortable asc";
-                    $pe=new PlanningElement();
-                    $list=$pe->getSqlElementsFromCriteria(null,false,$inClause,$order,null,true);
-                    foreach ($list as $projOb){
-                      if (isset($wbsList[$projOb->idProject])) {
-                        $wbs=$wbsList[$projOb->idProject];
-                      } else {
-                        $wbs='';
+                <div dojoType="dijit.layout.ContentPane" id="selectProjectList" style="overflow:unset">
+                 <select dojoType="dojox.form.CheckedMultiSelect"  class="selectPlan" multiple="true" style="border:1px solid #A0A0A0;width:initial;height:218px;max-height:218px;"
+                  id="idProjectPlan" name="idProjectPlan[]" onChange="changedIdProjectPlan(this.value);"
+                  value=" " >
+                   <option value=" "><strong><?php echo i18n("allProjects");?></strong></option>
+                   <?php 
+                      $proj=null; 
+                      if (sessionValueExists('project')) {
+                          $proj=getSessionValue('project');
+                          if(strpos($proj, ",")){
+                          	$proj="*";
+                          }
                       }
-                      $wbsTest=$wbs;
-                      $level=1;
-                      while (strlen($wbsTest)>3) {
-                        $wbsTest=substr($wbsTest,0,strlen($wbsTest)-6);
-                        if (array_key_exists($wbsTest, $wbsLevelArray)) {
-                          $level=$wbsLevelArray[$wbsTest]+1;
-                          $wbsTest="";
+                      if ($proj=="*" or ! $proj) $proj=null;
+  //                     $projs=$user->getListOfPlannableProjects();
+  //                     htmlDrawOptionForReference('planning', null, null, true );
+                      $user=getSessionUser();
+                      $wbsList=SqlList::getList('Project','sortOrder',$proj, true );
+                      $sepChar=Parameter::getUserParameter('projectIndentChar');
+                      if (!$sepChar) $sepChar='__';
+                      $wbsLevelArray=array();
+                      $inClause=" idProject in ". transformListIntoInClause(getSessionUser()->getListOfPlannableProjects());
+                      $inClause.=" and idProject not in " . Project::getAdminitrativeProjectList();
+                      $inClause.=" and refType= 'Project'";
+                      $inClause.=" and idle=0";
+                      $order="wbsSortable asc";
+                      $pe=new PlanningElement();
+                      $list=$pe->getSqlElementsFromCriteria(null,false,$inClause,$order,null,true);
+                      foreach ($list as $projOb){
+                        if (isset($wbsList[$projOb->idProject])) {
+                          $wbs=$wbsList[$projOb->idProject];
+                        } else {
+                          $wbs='';
                         }
-                      }
-                      $wbsLevelArray[$wbs]=$level;
-                      $sep='';
-                      for ($i=1; $i<$level;$i++) {$sep.=$sepChar;}
-                      $val = $sep.$projOb->refName;
-                      ?>
-                      <option value="<?php echo $projOb->idProject; ?>"><?php echo $val; ?></option>      
-                     <?php
-                   }
-                 ?>
-               </select>
+                        $wbsTest=$wbs;
+                        $level=1;
+                        while (strlen($wbsTest)>3) {
+                          $wbsTest=substr($wbsTest,0,strlen($wbsTest)-6);
+                          if (array_key_exists($wbsTest, $wbsLevelArray)) {
+                            $level=$wbsLevelArray[$wbsTest]+1;
+                            $wbsTest="";
+                          }
+                        }
+                        $wbsLevelArray[$wbs]=$level;
+                        $sep='';
+                        for ($i=1; $i<$level;$i++) {$sep.=$sepChar;}
+                        $val = $sep.$projOb->refName;
+                        ?>
+                        <option value="<?php echo $projOb->idProject; ?>"><?php echo $val; ?></option>      
+                       <?php
+                     }
+                   ?>
+                 </select>
+              </div>
              </td>
            </tr>
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
@@ -1942,6 +1944,15 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                  missingMessage="<?php echo i18n('messageMandatory',array(i18n('colStartDate')));?>"
                  value="<?php echo date('Y-m-d');?>" >
                </div>
+             </td>
+           </tr>
+           <tr>
+             <td class="dialogLabel" >
+               <label for="onlyCheckedProject" ><?php echo i18n("showSelectedProject").'&nbsp;:&nbsp;' ?></label>
+             </td>
+             <td>
+              <div dojoType="dijit.form.CheckBox" type="checkbox" id="onlyCheckedProject" name="onlyCheckedProject" onChange="showSelectedProject(this.checked);">
+              </div>
              </td>
            </tr>
            <tr>
