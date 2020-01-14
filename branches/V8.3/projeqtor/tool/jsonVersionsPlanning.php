@@ -9,6 +9,7 @@ $showOnlyActivesVersions=Parameter::getUserParameter('showOnlyActivesVersions');
 $hideversionsWithoutActivity=Parameter::getUserParameter('versionsWithoutActivity');
 $displayProductversionActivity = Parameter::getUserParameter('planningVersionDisplayProductVersionActivity');
 $pvsArray = array();
+$displayComponent=array();
 //CHANGE qCazelles - Correction GANTT - Ticket #100
 //Old
 // if (isset($_REQUEST['productVersionsListId'])) {
@@ -62,7 +63,6 @@ if(RequestHandler::getValue('objectVersion')=='ComponentVersion'){
 }
 
 if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
-  $displayComponent=array();
   foreach ($pvsArray as $id=>$idProd){
     $cp=0;
     $comptDisplay=0;
@@ -87,7 +87,6 @@ if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
     }
   }
 }
-
 
 
 if($showOnlyActivesVersions== 1){
@@ -143,7 +142,7 @@ if($showOnlyActivesVersions== 1){
           $hide=1;
         }
       }
-      if ($hide!=1) $componentVersion->treatmentVersionPlanning($productVersion);
+      if ($hide!=1) $componentVersion->treatmentVersionPlanning($productVersion,$displayComponent);
     }
   }
 ///
@@ -168,7 +167,7 @@ if($showOnlyActivesVersions== 1){
           }
         }
       }
-      if ($hide!=1) $componentVersion->treatmentVersionPlanning($productVersion);
+      if ($hide!=1) $componentVersion->treatmentVersionPlanning($productVersion,$displayComponent);
     }
   }
 }
