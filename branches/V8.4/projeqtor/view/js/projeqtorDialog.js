@@ -3560,8 +3560,9 @@ function showPlanParam(selectedProject) {
 function changedIdProjectPlan(value) {
   if (!oldSelectedProjectsToPlan || oldSelectedProjectsToPlan==value) return;
   if (oldSelectedProjectsToPlan.indexOf(" ")>=0 && value.length>1 ) {
-    //value=value.splice(0,1);
-    value[0]=null;
+    if(value.indexOf(" ")>=0){
+    	value.splice(0,1);
+    }
     oldSelectedProjectsToPlan=value;
     dijit.byId("idProjectPlan").set("value",value);
   } else if (value.indexOf(" ")>=0 && oldSelectedProjectsToPlan.indexOf(" ")===-1) {
@@ -3570,6 +3571,14 @@ function changedIdProjectPlan(value) {
     dijit.byId("idProjectPlan").set("value",value);
   }
   oldSelectedProjectsToPlan=value;
+}
+
+function showSelectedProject(value){
+	var selectedProj = oldSelectedProjectsToPlan;
+	var callback=function(){
+		 dijit.byId("idProjectPlan").set("value",selectedProj);
+	  };
+	loadContent("../view/refreshSelectedProjectListDiv.php?isChecked="+value+"&selectedProjectPlan="+selectedProj, "selectProjectList", "dialogPlanForm", false, null,null,null,callback);
 }
 
 /**
