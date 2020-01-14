@@ -1947,11 +1947,11 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
              </td>
            </tr>
            <tr>
-             <td class="dialogLabel" >
+             <td class="dialogLabel" style="white-space:nowrap;">
                <label for="onlyCheckedProject" ><?php echo i18n("showSelectedProject").'&nbsp;:&nbsp;' ?></label>
              </td>
              <td>
-              <div dojoType="dijit.form.CheckBox" type="checkbox" id="onlyCheckedProject" name="onlyCheckedProject" onChange="showSelectedProject(this.checked);">
+              <div dojoType="dijit.form.CheckBox" type="checkbox" id="onlyCheckedProject" name="onlyCheckedProject" style="margin-left:5px;" onChange="showSelectedProject(this.checked);">
               </div>
              </td>
            </tr>

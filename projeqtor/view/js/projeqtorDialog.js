@@ -3558,6 +3558,12 @@ function showPlanParam(selectedProject) {
 }
 
 function changedIdProjectPlan(value) {
+	var selectField = dijit.byId("idProjectPlan").get("value");
+	if(selectField.length <= 0){
+		dijit.byId('dialogPlanSubmit').set('disabled', true);
+	}else{
+		dijit.byId('dialogPlanSubmit').set('disabled', false);
+	}
   if (!oldSelectedProjectsToPlan || oldSelectedProjectsToPlan==value) return;
   if (oldSelectedProjectsToPlan.indexOf(" ")>=0 && value.length>1 ) {
     if(value.indexOf(" ")>=0){
@@ -3577,6 +3583,12 @@ function showSelectedProject(value){
 	var selectedProj = oldSelectedProjectsToPlan;
 	var callback=function(){
 		 dijit.byId("idProjectPlan").set("value",selectedProj);
+		 var selectField = dijit.byId("idProjectPlan").get("value");
+			if(selectField.length <= 0){
+				dijit.byId('dialogPlanSubmit').set('disabled', true);
+			}else{
+				dijit.byId('dialogPlanSubmit').set('disabled', false);
+			}
 	  };
 	loadContent("../view/refreshSelectedProjectListDiv.php?isChecked="+value+"&selectedProjectPlan="+selectedProj, "selectProjectList", "dialogPlanForm", false, null,null,null,callback);
 }
