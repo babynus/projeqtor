@@ -634,10 +634,7 @@
         </script>
       </button>
     </span>
-    </div>
-    </td>
-    <td style="width:40px">
-    <?php }?>
+   <?php }?>
     <?php organizeButtonsEnd();?>
       <input type="hidden" id="createRight" name="createRight" value="<?php echo $createRight;?>" />
       <input type="hidden" id="updateRight" name="updateRight" value="<?php echo (!$obj->id)?$createRight:$updateRight;?>" />
