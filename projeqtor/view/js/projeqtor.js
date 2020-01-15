@@ -3037,7 +3037,13 @@ function drawGantt() {
   // g.AddTaskItem(new JSGantt.TaskItem( 0, 'project', '', '', 'ff0000', '',
   // 0, '', '10', 1, '', 1, '' , 'test'));
   if (g && jsonData) {
-    var store = eval('(' + jsonData.innerHTML + ')');
+    try {
+      var store = eval('(' + jsonData.innerHTML + ')');
+    } catch(e) {
+      consoleTraceLog("ERROR Parsing jsonData in drawGantt()");
+      consoleTraceLog(jsonData.innerHTML);
+      return;
+    }
     var items = store.items;
     // var arrayKeys=new Array();
     var keys = "";
