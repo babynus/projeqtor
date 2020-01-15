@@ -6497,6 +6497,7 @@ function showListFilter(checkBoxName,value){
 var dropFilesFormInProgress=null;
 function dropFilesFormOnDragOver() {
   event.preventDefault();
+  if ( dijit.byId('idle') && dijit.byId('idle').get('checked')==true) return;
   if (dropFilesFormInProgress) clearTimeout(dropFilesFormInProgress);
   dojo.byId('dropFilesInfoDiv').style.display='block';
   dojo.byId('dropFilesInfoDiv').style.height=(dojo.byId('formDiv').offsetHeight-10)+"px";
