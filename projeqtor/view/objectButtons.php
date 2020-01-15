@@ -83,7 +83,6 @@
   } else {
     $updateRight=securityGetAccessRightYesNo('menu' . $class, 'update', $obj);
   }
-  $updateRight='YES';
   $deleteRight=securityGetAccessRightYesNo('menu' . $class, 'delete', $obj);
   
   $displayWidthButton="9999";
@@ -102,6 +101,10 @@
   if (!isset($readOnly)) {
     $readOnly=false;
   }
+  if ($readOnly or $updateRight!='YES') {
+    $isAttachmentEnabled = false;
+  }
+  
   $showAttachment=($isAttachmentEnabled and property_exists($obj,'_Attachment') and $updateRight=='YES' and isHtml5() and ! $readOnly )?true:false;
   $extendedZone=false;
   $maxTitleWidth=round($displayWidthButton*0.4,0);
