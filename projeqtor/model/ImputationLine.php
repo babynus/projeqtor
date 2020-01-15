@@ -748,6 +748,7 @@ class ImputationLine {
 //           continue;
 //         }
 //       }
+      $idAssignDirectAcces = RequestHandler::getValue('idAssignment');
       if (($line->refType=='Activity'&&!SqlList::getFieldFromId("Project", SqlList::getFieldFromId("Activity", $line->refId, "idProject"), 'isUnderConstruction'))||($line->refType!='Project'&&$line->refType!='Activity'&&!SqlList::getFieldFromId("Project", $line->idProject, "isUnderConstruction"))||($line->refType=='Project'&&!SqlList::getFieldFromId("Project", $line->refId, "isUnderConstruction"))) if (($line->refType=='Activity'&&SqlList::getFieldFromId("ProjectType", SqlList::getFieldFromId("Project", SqlList::getFieldFromId("Activity", $line->refId, "idProject"), "idProjectType"), 'code')!='TMP')||($line->refType!='Project'&&$line->refType!='Activity'&&SqlList::getFieldFromId("ProjectType", SqlList::getFieldFromId("Project", $line->idProject, "idProjectType"), 'code')!='TMP')||($line->refType=='Project'&&SqlList::getFieldFromId("ProjectType", SqlList::getFieldFromId("Project", $line->refId, "idProjectType"), 'code')!='TMP')) {
         if ($locked) $line->locked=true;
         $nbLine++;
@@ -776,7 +777,10 @@ class ImputationLine {
           $canGoto=($canRead and securityCheckDisplayMenu(null, $line->refType))?true:false;
         }
         
-        echo '<tr id="line_'.$nbLine.'"class="ganttTask'.$rowType.'"';
+        //gautier #directAcces
+        $style = '';
+        if($line->idAssignment == $idAssignDirectAcces and $line->idAssignment)$style = "style=background-color:#ffffaa;";
+        echo '<tr '.$style.' id="line_'.$nbLine.'"class="ganttTask'.$rowType.'"';
         if ($closedWbs and $closedWbs!=$line->wbsSortable) {
           echo ' style="display:none" ';
         }
