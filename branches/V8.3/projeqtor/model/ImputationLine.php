@@ -1251,24 +1251,24 @@ class ImputationLine {
    *
    * @return the validation javascript (for dojo frameword)
    */
-  public function getValidationScript($colName) {
-    $colScript=parent::getValidationScript($colName);
+//   public function getValidationScript($colName) {
+//     $colScript=parent::getValidationScript($colName);
     
-    if ($colName=="idle") {
-      $colScript.='<script type="dojo/connect" event="onChange" >';
-      $colScript.='  if (this.checked) { ';
-      $colScript.='    if (dijit.byId("PlanningElement_realEndDate").get("value")==null) {';
-      $colScript.='      dijit.byId("PlanningElement_realEndDate").set("value", new Date); ';
-      $colScript.='    }';
-      $colScript.='  } else {';
-      $colScript.='    dijit.byId("PlanningElement_realEndDate").set("value", null); ';
-      // $colScript .= ' dijit.byId("PlanningElement_realDuration").set("value", null); ';
-      $colScript.='  } ';
-      $colScript.='  formChanged();';
-      $colScript.='</script>';
-    }
-    return $colScript;
-  }
+//     if ($colName=="idle") {
+//       $colScript.='<script type="dojo/connect" event="onChange" >';
+//       $colScript.='  if (this.checked) { ';
+//       $colScript.='    if (dijit.byId("PlanningElement_realEndDate").get("value")==null) {';
+//       $colScript.='      dijit.byId("PlanningElement_realEndDate").set("value", new Date); ';
+//       $colScript.='    }';
+//       $colScript.='  } else {';
+//       $colScript.='    dijit.byId("PlanningElement_realEndDate").set("value", null); ';
+//       // $colScript .= ' dijit.byId("PlanningElement_realDuration").set("value", null); ';
+//       $colScript.='  } ';
+//       $colScript.='  formChanged();';
+//       $colScript.='</script>';
+//     }
+//     return $colScript;
+//   }
   
   // ============================================================================**********
   // MISCELLANOUS FUNCTIONS
