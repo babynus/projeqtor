@@ -63,7 +63,6 @@ if(!$selectedProjectPlan){
                         if(!trim($selectedProjectPlan) or $selectedProjectPlan == '*')$selectedProjectPlan=0;
                       	$projectClause = "(".$selectedProjectPlan.")";
                       }
-                      debugLog($projectClause);
                       $inClause=" idProject in ". $projectClause;
                       $inClause.=" and idProject not in " . Project::getAdminitrativeProjectList();
                       $inClause.=" and refType= 'Project'";
