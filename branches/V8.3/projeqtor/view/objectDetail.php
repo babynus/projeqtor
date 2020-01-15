@@ -4162,9 +4162,9 @@ function drawAttachmentsFromObject($obj, $refresh=false) {
     $canUpdate=false;
   }
   $userCanDeleteAttachement=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$user->idProfile,'scope'=>'canDeleteAttachement'));
-  if($canUpdate==false){
-    $canUpdate=true;
-  }
+//   if($canUpdate==false){
+//     $canUpdate=true;
+//   }
   if (isset($obj->_Attachment)) {
     $attachments=$obj->_Attachment;
   } else {
@@ -4202,7 +4202,7 @@ function drawAttachmentsFromObject($obj, $refresh=false) {
           echo '<a href="'.htmlEncode(urldecode($attachment->link)).'"';
           echo ' target="#" title="'.urldecode($attachment->link).'">'.formatSmallButton('Link').'</a>';
         }
-        if (($attachment->idUser==$user->id and !$print and $canUpdate) or $userCanDeleteAttachement->rightAccess==1) {
+        if (($attachment->idUser==$user->id or $userCanDeleteAttachement->rightAccess==1) and !$print and $canUpdate) {
           echo ' <a onClick="removeAttachment('.htmlEncode($attachment->id).');" title="'.i18n('removeAttachment').'" >'.formatSmallButton('Remove').'</a>';
         }
         echo '</td>';
