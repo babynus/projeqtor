@@ -39,9 +39,11 @@
   $obj=new $objectClass($objectId);
   $objectIsClosed=(isset($obj) and property_exists($obj, 'idle') and $obj->idle)?true:false;
   $canUpdate=securityGetAccessRightYesNo('menu' . $objectClass, 'update', $obj) == "YES";
+  if ($objectIsClosed) $canUpdate=false;
   if (!property_exists($obj, 'idle') or $obj->idle == 1) {
     $canUpdate=false;
   }
+  $canUpdateStream=$canUpdate;
   if($objectClass=="PlanningElement"){
     $noData = '<br/><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' . i18n('noItemSelected') . '</i>';
   } else {
@@ -134,9 +136,9 @@
       }
       $paramHeightStream=$paramHeightStream-38;
     if($countIdNote==0){ echo "<div style='padding:10px'>".$noNotes."</div>";}	
-?>  
+?>
 	</div>
-	<div id="activityStreamBottom" dojoType="dijit.layout.ContentPane" region="<?php echo ($positionActivityStream=='bottom')?'trailing':'bottom';?>" style="<?php if($positionActivityStream=='bottom'){echo "width:30%;height:140px;overflow-x:hidden;padding-right:8px;";}else{echo "height:70px;overflow-x:hidden;padding-right:8px;";}?><?php if ($objectIsClosed) echo 'display:none;';?>">
+	<div id="activityStreamBottom" dojoType="dijit.layout.ContentPane" region="<?php echo ($positionActivityStream=='bottom')?'trailing':'bottom';?>" style="<?php if($positionActivityStream=='bottom'){echo "width:30%;height:140px;overflow-x:hidden;padding-right:8px;";}else{echo "height:70px;overflow-x:hidden;padding-right:8px;";}?><?php if ($canUpdateStream!=true) echo 'display:none;';?>">
 	  <form id='noteFormStream' name='noteFormStream' onSubmit="return false;" >
        <input id="noteId" name="noteId" type="hidden" value="" />
        <input id="noteRefType" name="noteRefType" type="hidden" value="<?php echo $objectClass;?>" />
