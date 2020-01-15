@@ -6120,9 +6120,11 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
       return;
     }
     $status = new Status ( $this->idStatus );
-    // if no type => nothong to do
-    $fldType = 'id' . get_class ( $this ) . 'Type';
-    $typeClass = get_class ( $this ) . 'Type';
+    // if no type => nothing to do
+    $class=get_class($this);
+    if ($class=='TicketSimple') $class='Ticket';
+    $fldType = 'id' . $class . 'Type';
+    $typeClass = $class . 'Type';
     if (! property_exists ( $this, $fldType )) {
       return;
     }
