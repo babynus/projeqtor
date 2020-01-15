@@ -42,7 +42,7 @@ if(!$selectedProjectPlan){
 <select dojoType="dojox.form.CheckedMultiSelect"  class="selectPlan" multiple="true" style="border:1px solid #A0A0A0;width:initial;height:218px;max-height:218px;"
                   id="idProjectPlan" name="idProjectPlan[]" onChange="changedIdProjectPlan(this.value);"
                   value=" " >
-                  <?php if($selectedProjectPlan == ' ' or $isChecked == 'false'){ ?>
+                  <?php if(($selectedProjectPlan == ' ' or $selectedProjectPlan == '*') or $isChecked == 'false'){ ?>
                    <option value=" "><strong><?php echo i18n("allProjects");?></strong></option>
                    <?php }
                       $proj=null; 
@@ -60,9 +60,10 @@ if(!$selectedProjectPlan){
                       $wbsLevelArray=array();
                       $projectClause = transformListIntoInClause(getSessionUser()->getListOfPlannableProjects());
                       if($isChecked == 'true'){
-                        if(!trim($selectedProjectPlan))$selectedProjectPlan=0;
+                        if(!trim($selectedProjectPlan) or $selectedProjectPlan == '*')$selectedProjectPlan=0;
                       	$projectClause = "(".$selectedProjectPlan.")";
                       }
+                      debugLog($projectClause);
                       $inClause=" idProject in ". $projectClause;
                       $inClause.=" and idProject not in " . Project::getAdminitrativeProjectList();
                       $inClause.=" and refType= 'Project'";
