@@ -1947,7 +1947,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
              </td>
            </tr>
            <tr>
-             <td class="dialogLabel" style="white-space:nowrap;">
+             <td class="dialogLabel">
                <label for="onlyCheckedProject" ><?php echo i18n("showSelectedProject").'&nbsp;:&nbsp;' ?></label>
              </td>
              <td>
