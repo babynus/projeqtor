@@ -7361,7 +7361,7 @@ function drawTabExpense($obj, $refresh=false) {
     $link = new Link();
     //ORDER with Bill
     foreach ($listProviderOrder as $order){
-    	$listLink = $link->getSqlElementsFromCriteria(array('ref1Type'=>'ProviderBill','ref2Type'=>'ProviderOrder','ref2Id'=>$order->id));
+    	$listLink = $link->getSqlElementsFromCriteria(array('ref1Type'=>'ProviderBill','ref2Type'=>'ProviderOrder','ref2Id'=>$order->id,'idProjectExpense'=>$order->idProjectExpense));
     	foreach ($listLink as $billLinked){
     	  if(isset($tabBill[$billLinked->ref1Id])){
     	    $tabOrder[$order->id][$billLinked->ref1Id]=$tabBill[$billLinked->ref1Id];
@@ -7375,7 +7375,7 @@ function drawTabExpense($obj, $refresh=false) {
     
     //TENDER with Order
     foreach ($listTender as $tender){
-      $listLink = $link->getSqlElementsFromCriteria(array('ref1Type'=>'ProviderOrder','ref2Type'=>'Tender','ref2Id'=>$tender->id));
+      $listLink = $link->getSqlElementsFromCriteria(array('ref1Type'=>'ProviderOrder','ref2Type'=>'Tender','ref2Id'=>$tender->id,'idProjectExpense'=>$tender->idProjectExpense));
       foreach ($listLink as $orderLinked){
         $tabTender[$tender->id][$orderLinked->ref1Id]=$tabOrder[$orderLinked->ref1Id];
       }
