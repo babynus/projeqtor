@@ -708,11 +708,22 @@ static function isTheLeaveProject($id=null) {
     	foreach($visibleProjectsList as $idP=>$nameP) {
     		$split=explode('#',$nameP);
     		if (strpos($split[0],'.')==0) {
-    			$subList[substr($idP,1)]=str_replace('&sharp;','#',$split[1]);
+    		    $proj = new Project(substr($idP,1));
+    		    if($proj->handled and !$proj->done){
+    		      $subList[substr($idP,1)]=str_replace('&sharp;','#',$split[1]);
+    		    }
     		}
     	}
     } else {
   	  $subList=$this->getSubProjectsList($limitToActiveProjects,true);
+  	  $subListHandled = array();
+  	  foreach ($subList as $idPrj=>$namePrj) {
+  	    $proj = new Project($idPrj);
+  	    if($proj->handled and !$proj->done){
+  	    	$subListHandled[$idPrj]=$namePrj;
+  	    }
+  	  }
+  	  $subList = $subListHandled;
     }
     if ($selectField!=null and ! $recursiveCall) { 
       $result .= '<table ><tr><td>';
