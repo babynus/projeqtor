@@ -13,3 +13,9 @@ UPDATE `${prefix}modulemenu` SET idModule=10, active=(select active from ${prefi
 WHERE idMenu in (225,226);
 
 UPDATE `${prefix}menu` SET level=null WHERE id=192;
+
+UPDATE `${prefix}type` SET lockIdle=0
+WHERE scope='ProviderPayment';
+
+DELETE FROM `${prefix}columnselector`
+WHERE objectClass='ProviderPaymentType';
