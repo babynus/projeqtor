@@ -214,7 +214,7 @@ class Expense extends SqlElement {
   public function save() {
   	$old=$this->getOld();
     $this->idUser=$this->idResource;
-    
+    $this->name = mb_substr($this->name,0,100);
     if ($this->expenseRealDate) {
     	$this->setDates($this->expenseRealDate);
     } else {
