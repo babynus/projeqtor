@@ -10,28 +10,34 @@
 -- ======================================
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
-(228,'menuSupplierContract',151,'menu', 201,'Project',0,'Financial'),
-(229,'menuUnity',36,'object',900,NULL,0,'ListOfValues'),
-(290,'menuRenewal',36,'object',910,NULL,0,'ListOfValues');
+(228,'menuSupplierContract',151,'object', 201,'Project',0,'Financial'),
+(229,'menuSupplierContractType',79,'object',926,NULL,NULL,0),
+(230,'menuUnity',36,'object',896,'ReadWriteList',0,'ListOfValues'),
+(231,'menuRenewal',36,'object',897,'ReadWriteList',0,'ListOfValues');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,228,1),
 (1,229,1),
-(1,230,1);
+(1,230,1),
+(1,231,1);
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,228,8),
 (1,229,8),
-(1,230,8);
+(1,230,8),
+(1,231,8);
 
 INSERT INTO `${prefix}mailable` (`id`,`name`, `idle`) VALUES 
 (42,'SupplierContract', '0');
 
 INSERT INTO `${prefix}importable` (`id`, `name`, `idle`) VALUES
-(55, 'SupplierContract','0');
+(56, 'SupplierContract','0');
 
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
- (6,228,0,1);
+ (6,228,0,1),
+ (6,229,0,1),
+ (6,230,0,1),
+ (6,231,0,1);
 
 CREATE TABLE `${prefix}suppliercontract` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
