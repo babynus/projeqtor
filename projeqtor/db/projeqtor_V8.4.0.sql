@@ -11,8 +11,8 @@
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
 (228,'menuSupplierContract',151,'menu', 201,'Project',0,'Financial'),
-(229,'menuUnity',36,'object',900,NULL,0),
-(290,'menuRenewal',36,'object',910,NULL,0);
+(229,'menuUnity',36,'object',900,NULL,0,'ListOfValues'),
+(290,'menuRenewal',36,'object',910,NULL,0,'ListOfValues');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,228,1),
@@ -25,10 +25,10 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (1,230,8);
 
 INSERT INTO `${prefix}mailable` (`id`,`name`, `idle`) VALUES 
-(42,'ChangeRequest', '0');
+(42,'SupplierContract', '0');
 
 INSERT INTO `${prefix}importable` (`id`, `name`, `idle`) VALUES
-(55, 'SupplierContract', 0);
+(55, 'SupplierContract','0');
 
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
  (6,228,0,1);
@@ -41,7 +41,7 @@ CREATE TABLE `${prefix}suppliercontract` (
   `idProject` int(12) unsigned DEFAULT NULL,
   `idTender` int(12) unsigned DEFAULT NULL,
   `tenderReference` varchar(100) DEFAULT NULL,
-  `startDate` int(12) date DEFAULT NULL,
+  `startDate`  date DEFAULT NULL,
   `initialContractTerm` int(12) unsigned DEFAULT NULL,
   `idUnitDurationContract` int(12) unsigned DEFAULT 1,
   `endDate` date DEFAULT NULL,
