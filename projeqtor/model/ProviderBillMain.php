@@ -503,10 +503,11 @@ class ProviderBillMain extends SqlElement {
       self::$_fieldsAttributes['untaxedAmount']='readonly';
       self::$_fieldsAttributes['fullAmount']='readonly';
     }
-//     if (count($this->_ProviderTerm)) {
-//       self::$_fieldsAttributes['taxPct']='readonly';
-//       self::$_fieldsAttributes['untaxedAmount']='readonly';
-//     }
+    //Gautier #4445
+    if (count($this->_ProviderTerm)) {
+      self::$_fieldsAttributes['taxPct']='readonly';
+      self::$_fieldsAttributes['untaxedAmount']='readonly';
+    }
     if ($this->paymentDone) {
       self::$_fieldsAttributes['paymentDate']='readonly';
       self::$_fieldsAttributes['paymentAmount']='readonly';
