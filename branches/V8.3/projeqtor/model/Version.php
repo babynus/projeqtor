@@ -655,7 +655,7 @@ static protected function drawProductUsingComponentVersion($class, $id)
         self::$existingIDs[] = $idPE;
         echo '{';
         echo '"id":"'.$idPE.'"';
-        echo ',"refname":"'.$this->name.'"';
+        echo ',"refname":"'.htmlEncode(htmlEncodeJson($this->name)).'"';
         //echo ',"refname":"'.$this->name.' - ID : '.$idPE.' - '.(($parentVersion != NULL) ? "TOPID : $parentVersion->id.$parentVersion->nbOccurences" : "").'"';
         
         if ($parentVersion != NULL) {
@@ -693,7 +693,7 @@ static protected function drawProductUsingComponentVersion($class, $id)
           echo ',"redElement":"0"';
         }
         
-        echo ',"status":"'.$this->statusVersionPlanning().'"';
+        echo ',"status":"'.htmlEncodeJson($this->statusVersionPlanning()).'"';
         
         $this->myStartDate = $startDate;
         $this->myEndDate = $endDate;
@@ -712,7 +712,7 @@ static protected function drawProductUsingComponentVersion($class, $id)
             self::$existingIDs[] = $idPE;
             echo '"id":"'.$idPE.'"';
             echo ',"refid":"'.$lapv->id.'"';
-            echo ',"refname":"'.$lapv->name.'"';
+            echo ',"refname":"'.htmlEncode(htmlEncodeJson($lapv->name)).'"';
             echo ',"reftype":"Activity"';
             echo ',"topid":"'.$this->id.'.'.$this->nbOccurences.'"';
             echo ',"topreftype":"'.$this->scope.'VersionhasChild"';
@@ -749,7 +749,7 @@ static protected function drawProductUsingComponentVersion($class, $id)
               echo ',"redElement":"1"';
               else
                 echo ',"redElement":"0"';
-                echo ',"status":"'.SqlList::getNameFromId('Status', $lapv->idStatus).'"';
+                echo ',"status":"'.htmlEncodeJson(SqlList::getNameFromId('Status', $lapv->idStatus)).'"';
                 echo '}';
                 
           }
@@ -768,7 +768,7 @@ static protected function drawProductUsingComponentVersion($class, $id)
           $search = array("\"","\>","\<");
           $replace = array ("\\\"","\\\>","\\\<");
 
-          echo ',"refname":"'.str_replace($search, $replace, $la->name).'"';
+          echo ',"refname":"'.htmlEncode(htmlEncodeJson($la->name)).'"';
           echo ',"refid":"'.$la->id.'"';
         
           echo ',"reftype":"Activity"';
