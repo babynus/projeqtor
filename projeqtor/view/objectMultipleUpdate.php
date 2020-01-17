@@ -840,7 +840,8 @@
             }else{
               $type='id'.get_class($obj).'Type';
             }
-            if(!property_exists($obj, 'idProject') or !property_exists($obj,$type)){?>
+            
+            if( !property_exists($obj, 'idProject') or !property_exists($obj,$type) or !property_exists($obj,'idStatus')){?>
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeStatusIdle');?>&nbsp;:&nbsp;</td>
               <td>
