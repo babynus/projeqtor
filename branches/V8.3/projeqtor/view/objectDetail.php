@@ -5673,7 +5673,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
     echo '</td>';
     // gautier #resourceTeam
     
-    if ($resource->isResourceTeam) {
+    if ($resource->isResourceTeam and !$assignment->uniqueResource) {
       echo '<td class="assignData'.$idleClass.'" align="center" style="width:15%;vertical-align:middle;text-align:center;">'.htmlDisplayNumericWithoutTrailingZeros($assignment->capacity).' '.i18n('unitCapacity').'</td>';
     } else {
       echo '<td class="assignData'.$idleClass.'" align="center" style="width:15%;vertical-align:middle;text-align:center;">'.htmlEncode($assignment->rate).' '.i18n('percent').'</td>';
