@@ -358,7 +358,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       saveBrowserLocaleToSession();
       aboutMessage="<?php echo $aboutMessage;?>";
       aboutMessage+='<br/><b>'+i18n('externalLibrary')+'</b><br/>';
-      aboutMessage+='&nbsp;&nbsp;.&nbsp;Dojo : '+dojo.version+'<br/>';
+      aboutMessage+='&nbsp;&nbsp;.&nbsp;Dojo : '+dojo.version.major+"."+dojo.version.minor+"."+dojo.version.patch+'<br/>';
       aboutMessage+='&nbsp;&nbsp;.&nbsp;html2pdf : <?php use Spipu\Html2Pdf\Html2Pdf;require_once '../external/html2pdf/vendor/autoload.php';$html2pdf = new Html2Pdf();echo $html2pdf->getVersion();?>'+'<br/>';
       aboutMessage+='&nbsp;&nbsp;.&nbsp;CK Editor : '+CKEDITOR.version+'<br/>';
       aboutMessage+='&nbsp;&nbsp;.&nbsp;pChart2 : <?php include_once('../external/pChart2/getVersion.php');echo pChartGetVersion();?>'+'<br/>';
