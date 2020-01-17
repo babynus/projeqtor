@@ -192,6 +192,27 @@ class ProviderTermMain extends SqlElement {
 	public function save() {
 	  if ($this->idProviderBill) {
 	    $this->isBilled=1;
+	    //gautier #4445
+ 	    $pB = new ProviderBill($this->idProviderBill);
+ 	    $term=new ProviderTerm();
+ 	    $crit = array("idProviderBill"=>$this->idProviderBill);
+ 	    $providerTermList = $term->getSqlElementsFromCriteria($crit,false);
+ 	    if(count($providerTermList)>0){
+ 	      $amountHT = $this->untaxedAmount;
+ 	      $amountTTC=$this->fullAmount;
+ 	      foreach ($providerTermList as $line) {
+ 	        $amountHT+=$line->untaxedAmount;
+ 	        $amountTTC+=$line->fullAmount;
+ 	      }
+ 	      $pB->untaxedAmount = $amountHT;
+ 	      $pB->fullAmount =$amountTTC; 
+ 	    }else{
+ 	      $pB->untaxedAmount=$this->untaxedAmount;
+ 	      $pB->fullAmount=$this->fullAmount;
+ 	      $pB->taxPct= $this->taxPct;
+ 	      $pB->taxAmount = $this->taxPct;
+ 	    }
+    $pB->save();
 	  } else {
 	    $this->isBilled=0;
 	  }
