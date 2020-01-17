@@ -211,14 +211,14 @@ function checkPrerequisites($showOK=false,$dbType=null) {
   }
   
   // Check 'magic_quotes' : must be disabled ====================================
-  if (get_magic_quotes_gpc ()) {
-    //showWarning ( i18n ( "errorMagicQuotesGpc" ) );
-    showWarning ( "magic_quotes_gpc must be disabled (set to false). Update your Php.ini file.)");
-    $checkWarnings++;
-  } else {
-    if ($showOK) showMessage("magic_quotes_gpc is disabled : OK");
-    $checkOK++;
-  }
+//   if (get_magic_quotes_gpc ()) {
+//     //showWarning ( i18n ( "errorMagicQuotesGpc" ) );
+//     showWarning ( "magic_quotes_gpc must be disabled (set to false). Update your Php.ini file.)");
+//     $checkWarnings++;
+//   } else {
+//     if ($showOK) showMessage("magic_quotes_gpc is disabled : OK");
+//     $checkOK++;
+//   }
   
   // Check Register Globals
   if (ini_get ( 'register_globals' )) {
