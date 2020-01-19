@@ -975,7 +975,7 @@ class PlannedWork extends GeneralWork {
                     if ($idPe=='sum') continue;
                     if ($idPe==$plan->id) continue; // we are treating the one we reserved for
                     $projectKeyTest='Project#' . $arPeW['idProj'];
-                    if (isset($ress[$projectKeyTest]) and ( ! isset($ress[$projectKey]) or Resource::findAffectationRate($ress[$projectKeyTest]['rate'],$currentDate)<=0) ) continue;
+                    if (isset($ress[$projectKeyTest]) and ( ! isset($ress[$projectKeyTest]) or Resource::findAffectationRate($ress[$projectKeyTest]['rate'],$currentDate)<=0) ) continue;
                     // === Determine if we must start to reserve work on this task for RECW tasks that will be planned after
                     $startReserving=false;
                     if ($arPeW['start'] ) { // Start is defined from predecessor
