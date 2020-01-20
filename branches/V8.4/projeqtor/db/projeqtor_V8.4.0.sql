@@ -8,9 +8,11 @@
 -- ======================================
 -- Change Request
 -- ======================================
+UPDATE `${prefix}menu` SET `sortOrder` = '201' WHERE `menu`.`name` = 'menuExpenses';
+UPDATE `${prefix}menu` SET `sortOrder` = '202' WHERE `menu`.`name` = 'menuBudget';
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
-(228,'menuSupplierContract',151,'object', 201,'Project',0,'Financial'),
+(228,'menuSupplierContract',151,'object', 203,'Project',0,'Financial'),
 (229,'menuSupplierContractType',79,'object',926,NULL,NULL,0),
 (230,'menuUnity',36,'object',896,'ReadWriteList',0,'ListOfValues'),
 (231,'menuRenewal',36,'object',897,'ReadWriteList',0,'ListOfValues');
@@ -45,7 +47,7 @@ CREATE TABLE `${prefix}suppliercontract` (
   `number` varchar(100) DEFAULT NULL,
   `idTypeContract` int(12) unsigned DEFAULT NULL,
   `idProject` int(12) unsigned DEFAULT NULL,
-  `idTender` int(12) unsigned DEFAULT NULL,
+  `idProvider` int(12) unsigned DEFAULT NULL,
   `tenderReference` varchar(100) DEFAULT NULL,
   `startDate`  date DEFAULT NULL,
   `initialContractTerm` int(12) unsigned DEFAULT NULL,
@@ -60,7 +62,6 @@ CREATE TABLE `${prefix}suppliercontract` (
   `idRenewal` int(12) unsigned DEFAULT NULL,
   `description` mediumtext DEFAULT NULL,
   `idResource` int(12) unsigned DEFAULT NULL,
-  `idProvider` int(12) unsigned DEFAULT NULL,
   `idContact` int(12) unsigned DEFAULT NULL,
   `phoneNumber` int(12) unsigned DEFAULT NULL,
   `interventionStartTime` datetime DEFAULT NULL,
@@ -79,7 +80,7 @@ CREATE TABLE `${prefix}suppliercontract` (
   `cancelled` INT(1) UNSIGNED DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
-
+CREATE INDEX suppliercontractType ON `${prefix}suppliercontract` (idTypeContract);
 
 INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`) VALUES 
 ('SupplierContract', 'management assistance',10,1, 0),
@@ -110,3 +111,7 @@ INSERT INTO `${prefix}unity` (`id`, `name`, `color`, `sortOrder`, `idle`) VALUES
 (2,'months','#87ceeb',200,0),
 (3,'years','#FF0000',300,0);
 
+INSERT INTO `${prefix}renewal` (`id`, `name`, `color`, `sortOrder`, `idle`) VALUES
+(1,'never','#99FF99',100,0),
+(2,'tacit','#87ceeb',200,0),
+(3,'express','#FF0000',300,0);
