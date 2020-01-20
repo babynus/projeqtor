@@ -908,6 +908,7 @@
 .iconStatusMailPerProject22 { background-image: url(images/iconStatusMailPerProject.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .iconStatusMailPerProject16 { background-image: url(images/iconStatusMailPerProject.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
+
 .iconTeam32 { background-image: url(images/iconTeam32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconTeam22 { background-image: url(images/iconTeam22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconTeam16 { background-image: url(images/iconTeam16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
@@ -1127,6 +1128,13 @@
 .ProjeQtOrFlatGreen .iconLayoutTab { background-image: url(customIcons/green/iconLayoutTab.png); }
 .ProjeQtOrFlatGrey .iconLayoutTab { background-image: url(customIcons/grey/iconLayoutTab.png); }
 
+/* S */
+.iconSupplierContract { background-image: url(images/iconSupplierContract.png); }
+.ProjeQtOrFlatBlue .iconSupplierContract { background-image: url(customIcons/blue/iconSupplierContract.png); }
+.ProjeQtOrFlatRed .iconSupplierContract { background-image: url(customIcons/red/iconSupplierContract.png); }
+.ProjeQtOrFlatGreen .iconSupplierContract { background-image: url(customIcons/green/iconSupplierContract.png); }
+.ProjeQtOrFlatGrey .iconSupplierContract { background-image: url(customIcons/grey/iconSupplierContract.png); }
+
 /* P */
 
 .iconProviderBill { background-image: url(images/iconProviderBill.png); }
@@ -1164,6 +1172,12 @@
 .ProjeQtOrFlatRed .iconProviderPaymentType { background-image: url(customIcons/red/iconProviderPaymentType.png); }
 .ProjeQtOrFlatGreen .iconProviderPaymentType { background-image: url(customIcons/green/iconProviderPaymentType.png); }
 .ProjeQtOrFlatGrey .iconProviderPaymentType { background-image: url(customIcons/grey/iconProviderPaymentType.png); }
+/*U*/
+.iconUnity { background-image: url(images/iconUnity.png); }
+.ProjeQtOrFlatBlue .iconUnity { background-image: url(customIcons/blue/iconUnity.png); }
+.ProjeQtOrFlatRed .iconUnity { background-image: url(customIcons/red/iconUnity.png); }
+.ProjeQtOrFlatGreen .iconUnity { background-image: url(customIcons/green/iconUnity.png); }
+.ProjeQtOrFlatGrey .iconUnity { background-image: url(customIcons/grey/iconUnity.png); }
 
 .iconAbsence { background-image: url(images/iconAbsence32.png); }
 .ProjeQtOrFlatBlue .iconAbsence { background-image: url(customIcons/blue/iconAbsence.png); }

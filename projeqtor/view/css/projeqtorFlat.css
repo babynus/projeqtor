@@ -1409,6 +1409,10 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatBlue .iconStatusMailPerProject22 { background-image: url(customIcons/blue/iconStatusMailPerProject.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .iconStatusMailPerProject16 { background-image: url(customIcons/blue/iconStatusMailPerProject.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatBlue .iconSupplierContract32 { background-image: url(customIcons/blue/iconSupplierContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatBlue .iconSupplierContract22  { background-image: url(customIcons/blue/iconSupplierContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatBlue .iconSupplierContract16  { background-image: url(customIcons/blue/iconSupplierContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
 /* T */
 
 .ProjeQtOrFlatBlue .iconTeam32 { background-image: url(customIcons/blue/iconTeam.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
@@ -1506,6 +1510,11 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatBlue .iconUserParameter22 { background-image: url(customIcons/blue/iconUserParameter.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .iconUserParameter16 { background-image: url(customIcons/blue/iconUserParameter.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatBlue .iconUnity32 { background-image: url(customIcons/blue/iconUnity.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatBlue .iconUnity22 { background-image: url(customIcons/blue/iconUnity.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatBlue .iconUnity16 { background-image: url(customIcons/blue/iconUnity.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+/* D */
 /*ADD qCazelles - GANTT*/
 
 /* V */
@@ -2871,6 +2880,10 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatRed .iconStatusMailPerProject22 { background-image: url(customIcons/red/iconStatusMailPerProject.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatRed .iconStatusMailPerProject16 { background-image: url(customIcons/red/iconStatusMailPerProject.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatRed .iconSupplierContract32 { background-image: url(customIcons/red/iconSupplierContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatRed .iconSupplierContract22 { background-image: url(customIcons/red/iconSupplierContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatRed .iconSupplierContract16 { background-image: url(customIcons/red/iconSupplierContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
 /* T */
 
 .ProjeQtOrFlatRed .iconTeam32 { background-image: url(customIcons/red/iconTeam.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
@@ -2967,6 +2980,9 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatRed .iconUserParameter22 { background-image: url(customIcons/red/iconUserParameter.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatRed .iconUserParameter16 { background-image: url(customIcons/red/iconUserParameter.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatRed .iconUnity32 { background-image: url(customIcons/red/iconUnity.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatRed .iconUnity22 { background-image: url(customIcons/red/iconUnity.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatRed .iconUnity16 { background-image: url(customIcons/red/iconUnity.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 /*ADD qCazelles - GANTT*/
 
 /* V */
@@ -4332,6 +4348,10 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconStatusMailPerProject22 { background-image: url(customIcons/green/iconStatusMailPerProject.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconStatusMailPerProject16 { background-image: url(customIcons/green/iconStatusMailPerProject.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatGreen .iconSupplierContract32 { background-image: url(customIcons/green/iconSupplierContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGreen .iconSupplierContract22 { background-image: url(customIcons/green/iconSupplierContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGreen .iconSupplierContract16 { background-image: url(customIcons/green/iconSupplierContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
 /* T */
 
 .ProjeQtOrFlatGreen .iconTeam32 { background-image: url(customIcons/green/iconTeam.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
@@ -4428,6 +4448,9 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconUserParameter22 { background-image: url(customIcons/green/iconUserParameter.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconUserParameter16 { background-image: url(customIcons/green/iconUserParameter.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatGreen .iconUnity32 { background-image: url(customIcons/green/iconUnity.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGreen .iconUnity22 { background-image: url(customIcons/green/iconUnity.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGreen .iconUnity16 { background-image: url(customIcons/green/iconUnity.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 /*ADD qCazelles - GANTT*/
 
 /* V */
@@ -5792,6 +5815,10 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconStatusMailPerProject22 { background-image: url(customIcons/grey/iconStatusMailPerProject.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGrey .iconStatusMailPerProject16 { background-image: url(customIcons/grey/iconStatusMailPerProject.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatGrey .iconSupplierContract32 { background-image: url(customIcons/grey/iconSupplierContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGrey .iconSupplierContract22 { background-image: url(customIcons/grey/iconSupplierContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGrey .iconSupplierContract16 { background-image: url(customIcons/grey/iconSupplierContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
 /* T */
 
 .ProjeQtOrFlatGrey .iconTeam32 { background-image: url(customIcons/grey/iconTeam.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
@@ -5888,6 +5915,9 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconUserParameter22 { background-image: url(customIcons/grey/iconUserParameter.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGrey .iconUserParameter16 { background-image: url(customIcons/grey/iconUserParameter.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatGrey .iconUnity32 { background-image: url(customIcons/grey/iconUnity.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGrey .iconUnity22 { background-image: url(customIcons/grey/iconUnity.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGrey .iconUnity16 { background-image: url(customIcons/grey/iconUnity.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 /*ADD qCazelles - GANTT*/
 
 /* V */
@@ -7177,6 +7207,7 @@ body .ProjeQtOrMarylou {
 .ProjeQtOrMarylou .iconStatusMailPerProject32 { background-image: url(customIcons/grey/iconStatusMailPerProject.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrMarylou .iconStatusMailPerProject22 { background-image: url(customIcons/grey/iconStatusMailPerProject.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrMarylou .iconStatusMailPerProject16 { background-image: url(customIcons/grey/iconStatusMailPerProject.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
 
 /* T */
 
