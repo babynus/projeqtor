@@ -277,6 +277,9 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       // Spmecificity for list of organisation // TODO : study if no other way is possible
     	$orgaList=SqlList::getList($listType,'sortOrder',$selection, (! $obj)?!$limitToActiveOrganizations:true );
     }
+    if($col=="idBudget"){
+      $budgetList=SqlList::getList('Budget','bbsSortable',$selection);
+    }
     if ($selection) {
       // Add selected value in the table // TODO : possibly move this after the closing } because it may be used in all cases (to be studied)
       $refTable=$listType;
@@ -700,6 +703,12 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     if (!$sepChar) $sepChar='__';
     $orgaLevelArray=array();      
   }
+  // Retreive the char to indent budget structure
+  if($col=="idBudget"){
+    $sepChar=Parameter::getUserParameter('projectIndentChar');
+    if (!$sepChar) $sepChar='__';
+    $bbsLevelArray=array();
+  }
   
   //class where language will be filtered if already selected ones, in others class, all languages will be proposed
   $classMultiLanguage =array("Component","Product","ProductVersion","ComponentVersion");
@@ -796,7 +805,30 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
         }
                 
         $val = $sep.$val;
-      }      
+      }
+      //gautier #indentBudget   
+      if($col=="idBudget" and isset($budgetList[$key])){
+        $budgetOrder = $budgetList[$key];
+        $budgetTest=$budgetOrder;
+        $level=1;
+        while (strlen($budgetTest)>4) {
+          $budgetTest=substr($budgetTest,0,strlen($budgetTest)-6);
+          if (array_key_exists($budgetTest, $bbsLevelArray)) {
+            $level=$bbsLevelArray[$budgetTest]+1;
+            $budgetTest="";
+          }
+        }
+        $bbsLevelArray[$budgetOrder]=$level;
+        $sep='';
+        for ($i=1; $i<$level;$i++) {
+          if (strpos($sepChar,'|')!==FALSE and $i<$level-1 and strlen($sepChar)>1) {
+            $sepCharW = str_repeat('..', 2);
+            //                $sepCharW = str_replace('|', $sepChar[1], $sepChar);
+          } else {$sepCharW = $sepChar;}
+          $sep.=$sepCharW;
+        }
+        $val = $sep.$val;
+      }
 // END ADD BY Marc TABARY - 2017-02-12 - ORGANIZATIONS COMBOBOX LIST
 
 // MTY - LEAVE SYSTEM      
