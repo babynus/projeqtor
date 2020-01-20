@@ -709,21 +709,11 @@ static function isTheLeaveProject($id=null) {
     		$split=explode('#',$nameP);
     		if (strpos($split[0],'.')==0) {
     		    $proj = new Project(substr($idP,1));
-    		    if($proj->handled and !$proj->done){
-    		      $subList[substr($idP,1)]=str_replace('&sharp;','#',$split[1]);
-    		    }
+      	        $subList[$id]=$proj->name;
     		}
     	}
     } else {
   	  $subList=$this->getSubProjectsList($limitToActiveProjects,true);
-  	  $subListHandled = array();
-  	  foreach ($subList as $idPrj=>$namePrj) {
-  	    $proj = new Project($idPrj);
-  	    if($proj->handled and !$proj->done){
-  	    	$subListHandled[$idPrj]=$namePrj;
-  	    }
-  	  }
-  	  $subList = $subListHandled;
     }
     if ($selectField!=null and ! $recursiveCall) { 
       $result .= '<table ><tr><td>';
@@ -734,9 +724,28 @@ static function isTheLeaveProject($id=null) {
       $result .= '</div></td></tr></table>';
     }
     $result .='<table style="width:100%;">';
+    $handled = 0;
     if (count($subList)>0) {
       $level++;
       foreach ($subList as $idPrj=>$namePrj) {
+        $subProj = new Project($idPrj);
+        if($subProj->handled == '1' and $subProj->done == '0'){
+      	   $handled = 1;
+        }else{
+          $checkList = $subProj->getRecursiveSubProjectsFlatList($limitToActiveProjects);
+          if(count($checkList)>0){
+          	foreach ($checkList as $idSubPrj=>$nameSubPrj){
+      	    $obj = new Project($idSubPrj);
+    			if($obj->handled == '1' and $obj->done == '0'){
+    				$handled = 1;
+    			}
+          	}
+          }
+        }
+        if($handled == 0){
+          continue;
+        }
+        $handled = 0;
         $showLine=true;
         $reachLine=true;
         if (array_key_exists($idPrj,self::$_drawSubProjectsDone)) {
