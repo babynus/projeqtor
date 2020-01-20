@@ -339,9 +339,9 @@ class BudgetMain extends SqlElement {
    return $result;
   }
   
-  public function getSubBudgetFlatList() {
+  public function getSubBudgetFlatList($showIdle=false) {
     if (!$this->id) return array();
-    $sub=SqlList::getListWithCrit('Budget',array('idBudget'=>$this->id));
+    $sub=SqlList::getListWithCrit('Budget',array('idBudget'=>$this->id),'name',null,$showIdle);
     foreach ($sub as $budId=>$budName) {
       $bud=new Budget($budId,true);
       $subList=$bud->getSubBudgetFlatList();
@@ -499,6 +499,20 @@ class BudgetMain extends SqlElement {
         $parent->regenerateBbsLevel();
       }
     }
+    
+    //gautier #4400
+    $listSubProject = $this->getSubBudgetFlatList(true);
+    foreach ($listSubProject as $idSub=>$sub){
+      $budg=new Budget($idSub);
+      $budg->isUnderConstruction = $this->isUnderConstruction;
+      $budg->done = $this->done;
+      $budg->doneDate = $this->doneDate;
+      $budg->idle = $this->idle;
+      $budg->idleDate = $this->idleDate;
+      $budg->cancelled = $this->cancelled;
+      $budg->save();
+    }
+    
     return $result; 
   }
   public function simpleSave() {
