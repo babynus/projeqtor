@@ -4,7 +4,7 @@
 // =======================================================================================
 // ========== Database configuration =====================================================
 // --- MySql Degfault
-$paramDbType='mysql'; $paramDbPort='3308'; $paramDbUser='root'; $paramDbPassword='mysql';
+$paramDbType='mysql'; $paramDbPort='3306'; $paramDbUser='root'; $paramDbPassword='mysql';
 $paramDbName='projeqtor_v84';$paramDbPrefix='';
 // --- PostgreSql Default
 //$paramDbType='pgsql'; $paramDbPort='5432'; $paramDbName='projeqtor'; $paramDbUser='projeqtor'; $paramDbPassword='projeqtor';
@@ -40,4 +40,5 @@ $scaytAutoStartup='NO';
 $dataCloningDirectory="D:\www\simulation";       //Modify repertory simulation avoid Eclipse conflict
 $dataCloningUrl="http://localhost/simulation/";  //Acces data cloning url for goto
 //$doNotExportAssignmentsForXMLFormat=true;      // Will not be needed anymore on V8.3 as it will become a user parameter
+$pathToWkHtmlToPdf="C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe";
 //======= END
