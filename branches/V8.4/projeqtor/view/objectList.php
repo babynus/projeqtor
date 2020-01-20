@@ -489,7 +489,40 @@ if (property_exists($objectClass,'idStatus')) {
                 <?php echo autoOpenFilteringSelect();?> 
                 data-dojo-props="queryExpr: '*${0}*',autoComplete:false"
                 id="listBudgetParentFilter" name="listBudgetParentFilter" style="width:<?php echo $referenceWidth*4;?>px" value="<?php if(!$comboDetail and sessionValueExists('listBudgetParentFilter')){ echo getSessionValue('listBudgetParentFilter'); }?>" >
-                  <?php htmlDrawOptionForReference('idBudgetItemParent',$budgetParent,$obj,false);?>
+                  <?php 
+                   //gautier #indentBudget
+                   // htmlDrawOptionForReference('idBudgetItemParent',$budgetParent,$obj,false);
+                      $sepChar=Parameter::getUserParameter('projectIndentChar');
+                      if (!$sepChar) $sepChar='__';
+                      $wbsLevelArray=array();
+                      $wbsList=SqlList::getList('Budget','bbsSortable');
+                      $order="bbsSortable asc";
+                      $budget=new Budget();
+                      $list=$budget->getSqlElementsFromCriteria(null,false,null,$order,null,true);
+                      foreach ($list as $projOb){
+                        if (isset($wbsList[$projOb->id])) {
+                          $wbs=$wbsList[$projOb->id];
+                        } else {
+                          $wbs='';
+                        }
+                        $wbsTest=$wbs;
+                        $level=1;
+                        while (strlen($wbsTest)>3) {
+                          $wbsTest=substr($wbsTest,0,strlen($wbsTest)-6);
+                          if (array_key_exists($wbsTest, $wbsLevelArray)) {
+                            $level=$wbsLevelArray[$wbsTest]+1;
+                            $wbsTest="";
+                          }
+                        }
+                        $wbsLevelArray[$wbs]=$level;
+                        $sep='';
+                        for ($i=1; $i<$level;$i++) {$sep.=$sepChar;}
+                        $val = $sep.$projOb->name;
+                        ?> 
+                        <option value="<?php echo $projOb->idBudget; ?>"><?php echo $val; ?></option>      
+                       <?php
+                     }
+                    ?>
                   <script type="dojo/method" event="onChange" >
                     refreshJsonList('<?php echo $objectClass;?>');
                   </script>
