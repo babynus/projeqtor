@@ -171,19 +171,19 @@ class ProjectType extends SqlElement {
   
   public function control() {
     $result="";
-    if ($this->isLeadProject) {
-      $old=$this->getOld();
-      if (!$old->isLeadProject) {
-        $pList=SqlList::getListWithCrit('Project', array('idProjectType'=>$this->id));
-        $crit="(refType='Activity' or refType='TestSession') and idProject in ".transformListIntoInClause($pList);
-        $pe=new PlanningElement();
-        $cpt=$pe->countSqlElementsFromCriteria(null,$crit);
-        if ($cpt>0) {
-          $result="<br/>" . i18n("msgCannotChangeLeadProjectOnType");
-        }
-  
-      }
-    }
+// Crontrol disabled at customer request    
+//     if ($this->isLeadProject) {
+//       $old=$this->getOld();
+//       if (!$old->isLeadProject) {        
+//         $pList=SqlList::getListWithCrit('Project', array('idProjectType'=>$this->id));
+//         $crit="(refType='Activity' or refType='TestSession') and idProject in ".transformListIntoInClause($pList);
+//         $pe=new PlanningElement();
+//         $cpt=$pe->countSqlElementsFromCriteria(null,$crit);
+//         if ($cpt>0) {
+//           $result="<br/>" . i18n("msgCannotChangeLeadProjectOnType");
+//         }  
+//       }
+//     }
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
       $result.=$defaultControl;
