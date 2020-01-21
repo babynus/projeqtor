@@ -37,6 +37,8 @@ $displayProductVersionActivity = Parameter::getUserParameter('planningVersionDis
 $displayComponentVersionActivity = Parameter::getUserParameter('planningVersionDisplayComponentVersionActivity');
 $showClosedPlanningVersion = Parameter::getUserParameter('planningVersionShowClosed');
 $showOnlyActivesVersions=Parameter::getUserParameter('showOnlyActivesVersions');
+$listDisplayProductVersionActivity=Parameter::getUserParameter('listDisplayProductVersionActivity');
+$listDisplayComponentVersionActivity=Parameter::getUserParameter('listDisplayComponentVersionActivity');
 
 if ($saveShowClosed) {
 	$_REQUEST['idle']=true;
@@ -155,9 +157,16 @@ echo '<input type="hidden" id="nbPvs" name="nbPvs" value="'.$nbPvs.'" />';
                   </table>
   	            </td>
                 <td>
+                <?php 
+                $showListFilter='false';
+                if($displayComponentVersionActivity=='1' or $displayProductVersionActivity=='1'){
+                  $showListFilter='true';
+                }
+                ?>
                   <table >
                     <tr>
-                      <td>
+                      <td >
+                      <div id ="addNewActivity" style="visibility:<?php echo ($showListFilter=='true')?'visible':'hidden';?>;">
                        <div dojoType="dijit.form.DropDownButton" class="comboButton" id="planningNewItem" jsId="planningNewItem" name="planningNewItem" 
                          iconClass="dijitButtonIcon dijitButtonIconNew" title="<?php echo i18n('comboNewButton');?>">
                         <div dojoType="dijit.TooltipDialog" class="white" style="width:200px;">   
@@ -185,6 +194,7 @@ echo '<input type="hidden" id="nbPvs" name="nbPvs" value="'.$nbPvs.'" />';
                               }?>
                           </div>
                         </div>
+                       </div>  
                       </td>                      
                       <td width="32px">
                         <button title="<?php echo i18n('printPlanning')?>"
@@ -227,11 +237,6 @@ echo '<input type="hidden" id="nbPvs" name="nbPvs" value="'.$nbPvs.'" />';
                            }
                          }
                        }
-                       $showListFilter='false';
-                       if($displayComponentVersionActivity=='1' or $displayProductVersionActivity=='1'){
-                          $showListFilter='true';
-                       }
-                       
                        ?>
                       <td width="50px">
                         <div id="listFilterAdvanced" style="visibility:<?php echo ($showListFilter=='true')?'visible':'hidden';?>;">
