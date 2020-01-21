@@ -4347,13 +4347,20 @@ function connect(resetPassword) {
 
 function addNewItem(item) {
   var objectClass=dojo.byId('objectClass').value;
+  var currentItem=historyTable[historyPosition];
+  var currentScreen=currentItem[2];
+  if((currentScreen=="VersionsPlanning" || currentScreen=="ResourcePlanning") && objectClass!="Activity"){
+    showAlert(i18n('alertActivityVersion'));
+    return;
+  }
   dojo.byId('objectClass').value = item;
   dojo.byId('objectId').value = null;
   if (switchedMode) {
     setTimeout("hideList(null,true);", 1);
   }
-    var currentItem=historyTable[historyPosition];
-    var currentScreen=currentItem[2];
+
+    console.log(objectClass);
+
     if (currentScreen=="Planning" || currentScreen=="GlobalPlanning" || ((currentScreen=="VersionsPlanning" ||  currentScreen=="ResourcePlanning") && objectClass=="Activity")){
       var currentItemParent = currentItem[1];
       var originClass = currentItem[0];
@@ -4366,8 +4373,6 @@ function addNewItem(item) {
       }else{
         loadContent("objectDetail.php", "detailDiv", 'listForm');
       }
-    }else if((currentScreen=="VersionsPlanning" || currentScreen=="ResourcePlanning") && objectClass!="Activity"){
-      showAlert(i18n('alertActivityVersion'));
     }else{
       loadContent("objectDetail.php", "detailDiv", 'listForm');
     }
@@ -6472,18 +6477,24 @@ function refreshObjectDivAfterResize() {
 //florent 4299
 function showListFilter(checkBoxName,value){
   if(checkBoxName=='planningVersionDisplayProductVersionActivity' ){
-    if(value=='1' && displayFilterVersionPlanning!='1'){
+    if((value=='1' && displayFilterVersionPlanning!='1')){
       displayFilterVersionPlanning='1';
     }else{
       displayFilterVersionPlanning='0';
     }
   }
-  if(checkBoxName=='planningVersionDisplayComponentVersionActivity' ){
-    if( value=='1' && displayFilterComponentVersionPlanning!='1'){
+  if( displayFilterVersionPlanning=='0' && dojo.byId('listDisplayProductVersionActivity').checked==true){
+    displayFilterVersionPlanning='1';
+  }
+  if((checkBoxName=='planningVersionDisplayComponentVersionActivity') ){
+    if( (value=='1' && displayFilterComponentVersionPlanning!='1')  ){
       displayFilterComponentVersionPlanning='1';
     }else{
       displayFilterComponentVersionPlanning='0';
     }
+  }
+  if( displayFilterComponentVersionPlanning=='0' && dojo.byId('listDisplayComponentVersionActivity').checked==true){
+    displayFilterComponentVersionPlanning='1';
   }
   if((displayFilterVersionPlanning=='0' && displayFilterComponentVersionPlanning=='0')){
     selectStoredFilter('0','directFilterList');
@@ -6492,14 +6503,17 @@ function showListFilter(checkBoxName,value){
     dojo.byId('displayRessourceCheck').style.visibility="hidden";
     dojo.byId('versionsWithoutActivity').style.visibility="hidden";
     dojo.byId('hideVersionsWithoutActivityCheck').style.visibility="hidden";
+    dojo.byId('addNewActivity').style.visibility="hidden";
   }else{
     dojo.byId('listFilterAdvanced').style.visibility="visible";
     dojo.byId('displayRessource').style.visibility="visible";
     dojo.byId('displayRessourceCheck').style.visibility="visible";
     dojo.byId('versionsWithoutActivity').style.visibility="visible";
     dojo.byId('hideVersionsWithoutActivityCheck').style.visibility="visible";
+    dojo.byId('addNewActivity').style.visibility="visible";
   }
 }
+
 var dropFilesFormInProgress=null;
 function dropFilesFormOnDragOver() {
   event.preventDefault();
