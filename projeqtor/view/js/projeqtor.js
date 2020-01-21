@@ -4358,9 +4358,6 @@ function addNewItem(item) {
   if (switchedMode) {
     setTimeout("hideList(null,true);", 1);
   }
-
-    console.log(objectClass);
-
     if (currentScreen=="Planning" || currentScreen=="GlobalPlanning" || ((currentScreen=="VersionsPlanning" ||  currentScreen=="ResourcePlanning") && objectClass=="Activity")){
       var currentItemParent = currentItem[1];
       var originClass = currentItem[0];
