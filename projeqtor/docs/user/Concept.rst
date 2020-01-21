@@ -276,10 +276,16 @@ It is also possible to allocate a team to a project in :ref:`team` screens.
 
    A resource allocated to a project can be defined as :term:`responsible` of project items treatment.
 
+.. _PeriodandRate:
 
 .. rubric:: Period & Rate selection
 
-A resource may be allocated to a project at a specified rate for a period. 
+A resource may be allocated to a project or assigned to a task at a specified rate for a period.
+
+This rate is used to keep some scheduling time for other tasks.
+
+For instance, if rate is 50%, the resource will not be planned more than half days on the task.
+ 
 
 .. note::
 

@@ -15,11 +15,8 @@ The expenses incurred for the project are monitored.
 
 Budget
 ------
-* A budget is a list of all products and different expenses to plan.
- 
-* It is a plan that allows to define in advance the expenses, the incomes and the possible savings to be realized during a definite period.
-
-* It allows to anticipate the resources that the company will have at a specific moment.
+A budget is a list of all products and different expenses to plan. It is a plan that allows to define in advance the expenses, the incomes and the possible savings to be realized during a definite period.
+It allows to anticipate the resources that the company will have at a specific moment.
 
 * You can create as much budget and sub budget as you want.
 
@@ -27,20 +24,26 @@ Budget
 
 * A budget item is linked to a parent budget 
 
-* in the same way as the project selector, you can filter, thanks to the "Budget Parent" filter, a budget and "his family" on the list poster.
+* With the "Budget Parent" filter, you can display in the list area, only a budget and its family (sub-budget). An indentation of these to the right shows that they are sub-budgets.
 
+* Only current or unclosed budget items will be displayed in the lists
 
+.. figure:: /images/GUI/EXPENSES_ZONE_FilterBudgetParent.png
+   :alt: Filter parent budget
+   
+   display of a budget and its family.
+ 
 .. note:: 
 
    **The parent budget**
 
-   * The parent budget exists only to consolidate budget line items
+   * Parent budget exists only to consolidate data from underlying budget items
    * You can't change spending in the Progress field of a parent budget 
-   * Only the target amount can be changed
+   * Only the target amount can be changed if the budget treatment is under construction
 
    **The budget item**
 
-   * The budget items are the finer element of the budget analysis. 
+   * The budget item is the finer element of the budget analysis. 
    * These posts or budget destinations will allow you to detail your budget, categorizing it at your convenience.
    
    
@@ -62,9 +65,9 @@ Budget
    * - Field
      - Description
    * - :term:`Id`
-     - Unique Id for the payment
+     - Unique Id for the budget
    * - |RequiredField| Name
-     - Short description of the payment
+     - Short description of the budget
    * - |RequiredField| Budget type
      - Type of budget: initial or additional
    * - Budget orientation
@@ -82,43 +85,25 @@ Budget
    * - Sponsor     
      - from the budget.
        If your budget comes from grant for example
-       
-.. rubric:: Progress
 
-.. figure:: /images/GUI/EXPENSES_ZONE_Progress.png
-   :alt: Progress Section
-   
-   Progress Section
-
-This section allows to follow the consolidation of all the expenses.
-
-The target amount is the only amount you can save on a parent budget.
-
-Other amounts are recovered from the sub-budgets and consolidated on the parent budget.
-
-Transferred Amount allows to release a sum of an amount planned for a budget item in order to redistribute it to another item.
-
-This amount is visible on all budget items.
-
-.. note:: 
-
-   **Transfered Amount**
-   
-   * Enter a negative amount on a budget line to transfer an amount
-   * Enter a positive amount on a budget line to recover this amount
-   * Only the parent budget and its sub budget will see this amount. 
-   * Another parent budget can not recover this amount.
-
-.. rubric:: Budget expense detail
-
-This section brings and displays the :ref:`project-expense` lines in the details 
-
-.. figure:: /images/GUI/EXPENSES_ZONE_DetailLine.png
-   :alt: Details lines
-
-   Details lines
 
 .. rubric:: Treatment
+
+.. figure:: /images/GUI/EXPENSES_ZONE_TreatmentBudget.png
+   :alt:
+   
+   Treatment area for the budget
+   
+   
+This area allow you to change the macro state of the budget.
+
+You can choose whether the budget is under construction or not. If so, only the target amount can be changed in the Progress section of the parent budget.
+
+The "approved" macro-state changes and automatically cancels the "under construction" macro state. The date is then displayed in the fields of the macro-state concerned.
+
+Each sub-budget is then impacted and the "approved" state will then be propagated on all of his family.
+
+Each macro state "under construction", "approved", "closed" and "canceled" modified from the parent budget screen propagates in cascade over the entire budget hierarchy. 
 
 .. tabularcolumns:: |l|l|
 
@@ -143,7 +128,43 @@ This section brings and displays the :ref:`project-expense` lines in the details
 
 
 
+   
+   
+   
+.. rubric:: Progress
 
+.. figure:: /images/GUI/EXPENSES_ZONE_Progress.png
+   :alt: Progress Section
+   
+   Progress Section
+
+This section allows to follow the consolidation of all the expenses.
+
+The target amount is the only amount that you can change on a parent budget if it is still under construction.
+
+The other amounts are recovered from the sub-budgets and consolidated on the parent budget.
+
+Transferred Amount allows to release a sum of an amount planned for a budget item in order to redistribute it to another item.
+
+This amount is visible on all budget items.
+
+.. note:: 
+
+   **Transfered Amount**
+   
+   * Enter a negative amount on a budget line to transfer an amount
+   * Enter a positive amount on a budget line to recover this amount
+   * Only the parent budget and its sub budget will see this amount. 
+   * Another parent budget can not recover this amount.
+
+.. rubric:: Budget expense detail
+
+This section brings and displays the :ref:`project-expense` lines in the details 
+
+.. figure:: /images/GUI/EXPENSES_ZONE_DetailLine.png
+   :alt: Details lines
+
+   Details lines
 
 
 .. raw:: latex
