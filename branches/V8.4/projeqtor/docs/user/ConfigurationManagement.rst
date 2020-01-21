@@ -474,3 +474,28 @@ Graphically, you can see any delay or incompatibility.
    Planning version
    
    
+.. rubric:: Add a new activity
+
+you can add an activity directly in the version planning. 
+
+.. figure:: /images/GUI/CONF_ZONE_AddActivity.png
+   :alt: Add a new activity
+   
+   Add a new activity
+
+To see the related activities, you must check the box "show activities related to component versions" or "show activities related to product versions".
+
+New check boxes will appear: one to show resources and the other to show or hide versions with no activity displayed.
+
+.. figure:: /images/GUI/CONF_ZONE_CheckBox.png
+   :alt: checkbox to display activities related to component versions or product versions
+   
+   display activities related to component versions or product versions
+   
+The selection of an existing activity is imperative for knowing where to insert the new activity.
+
+We will therefore insert it after the selected activity, on the same project, with the same component and the same component version, and with the same product and the same product version if these elements are filled in on the original activity .
+
+The insertion from the selection of a product and component version will not be possible because we do not know where to insert it in the WBS of the projects.
+   
+   
