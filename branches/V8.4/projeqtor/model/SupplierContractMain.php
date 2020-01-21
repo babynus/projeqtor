@@ -32,7 +32,7 @@ class SupplierContractMain extends SqlElement {
   public $id;    
   public $name;
   public $number;
-  public $idTypeContract;
+  public $idSupplierContractType;
   public $idProject;
   public $idUser;
   public $idProvider;
@@ -82,10 +82,9 @@ class SupplierContractMain extends SqlElement {
           <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
           <th field="name" width="15%" >${name}</th>
           <th field="colorNameStatus" width="8%" formatter="colorNameFormatter">${idStatus}</th>
+          <th field="unitDurationContract" width="10%" >${idUnitDurationContract}</th>
+          <th field="unitDurationNotice" width="10%" >${idUnitDurationNotice}</th>
           <th field="handled" width="5%" formatter="booleanFormatter" >${handled}</th>
-          <th field="approved" width="5%" formatter="booleanFormatter" >${approved}</th>
-          <th field="handled" width="5%" formatter="booleanFormatter" >${handled}</th>
-          <th field="approved" width="5%" formatter="booleanFormatter" >${approved}</th>
           <th field="done" width="5%" formatter="booleanFormatter" >${done}</th>
           <th field="idle" width="5%" formatter="booleanFormatter" >${idle}</th>
     ';
@@ -99,8 +98,7 @@ class SupplierContractMain extends SqlElement {
                                   "idStatus"=>"required",
   );   
  
-  private static $_colCaptionTransposition = array('idResource'=>'manager',
-   'doneDate'=>'dateApproved',
+  private static $_colCaptionTransposition = array(
    'idUser'=>'issuer',
    'idResource'=>'responsible',
   );
