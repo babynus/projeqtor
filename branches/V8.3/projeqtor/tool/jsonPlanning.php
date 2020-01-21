@@ -337,6 +337,9 @@
           	continue;
           }
         }
+        if ($portfolio and $line["reftype"]=="Milestone" and $line["topreftype"]!='Project' && !isset($topProjectArray[$line['idproject']]) ) { // Case project is closed containing non closed Milestone
+          continue;
+        }
         echo (++$nbRows>1)?',':'';
         echo  '{';
         $nbFields=0;
@@ -468,6 +471,10 @@
         	  $line['reftype']='Replan';
         	}
         } else if ($portfolio and $line["reftype"]=="Milestone" and $line["topreftype"]!='Project') {
+          if (! isset($topProjectArray[$line['idproject']])) { // Case project is closed containing non closed Milestone
+            $pe=SqlElement::getSingleSqlElementFromCriteria('PlanningElement', array('refType'=>'Project','refId'=>$line['idproject']));
+            $topProjectArray[$line['idproject']]=$pe->id;
+          }
           $line["topid"]=$topProjectArray[$line['idproject']];
         }
         foreach ($line as $id => $val) {
