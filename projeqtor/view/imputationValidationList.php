@@ -158,7 +158,7 @@ if(sessionValueExists('endWeekImputationValidation')){
                 }?>" >
                <script type="dojo/method" event="onChange" >
                  saveDataToSession('endWeekImputationValidation',formatDate(dijit.byId('endWeekImputationValidation').get("value")), false);
-  				 var start = dijit.byId('startWeekImputationValidation').get('value');
+  				       var start = dijit.byId('startWeekImputationValidation').get('value');
                  refreshImputationValidation(start, this.value);
                </script>
              </div>
