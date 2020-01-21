@@ -45,7 +45,7 @@ CREATE TABLE `${prefix}suppliercontract` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(200) DEFAULT NULL,
   `number` varchar(100) DEFAULT NULL,
-  `idTypeContract` int(12) unsigned DEFAULT NULL,
+  `idSupplierContractType` int(12) unsigned DEFAULT NULL,
   `idProject` int(12) unsigned DEFAULT NULL,
   `idProvider` int(12) unsigned DEFAULT NULL,
   `tenderReference` varchar(100) DEFAULT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE `${prefix}suppliercontract` (
   `cancelled` INT(1) UNSIGNED DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
-CREATE INDEX suppliercontractType ON `${prefix}suppliercontract` (idTypeContract);
+CREATE INDEX suppliercontractType ON `${prefix}suppliercontract` (idSupplierContractType);
 
 INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`) VALUES 
 ('SupplierContract', 'management assistance',10,1, 0),
