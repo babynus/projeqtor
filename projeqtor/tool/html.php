@@ -42,7 +42,10 @@ require_once "../tool/projeqtor.php";
 function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false, $critFld=null, $critVal=null, $limitToActiveProjects=true, $limitToActiveOrganizations=true,$showIdle=false) { 
 	scriptLog("      =>htmlDrawOptionForReference(col=$col,selection=$selection,object=" .debugDisplayObj($obj).",required=$required,critFld=".debugDisplayObj($critFld).",critVal=".debugDisplayObj($critVal).")");
   // Take into account array of $critFld // TODO : check where it is used 
-	  
+	if($col =="idBudgetItem"){
+	  $col='idBudget';
+	  $listBudgetElementary = SqlList::getList('BudgetItem','id');
+	}
 // BEGIN - ADD BY TABARY - POSSIBILITY TO HAVE AT X TIMES SAME idXXXX IN THE SAME OBJECT
     $col = foreignKeyWithoutAlias($col);
 // END - ADD BY TABARY - POSSIBILITY TO HAVE AT X TIMES SAME idXXXX IN THE SAME OBJECT
@@ -709,7 +712,6 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     if (!$sepChar) $sepChar='__';
     $bbsLevelArray=array();
   }
-  
   //class where language will be filtered if already selected ones, in others class, all languages will be proposed
   $classMultiLanguage =array("Component","Product","ProductVersion","ComponentVersion");
   // Exclude in list of languages and contexts the already selected ones
@@ -807,7 +809,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
         $val = $sep.$val;
       }
       //gautier #indentBudget   
-      if($col=="idBudget" and isset($budgetList[$key])){
+      if($col=="idBudget"  and isset($budgetList[$key])){
         $budgetOrder = $budgetList[$key];
         $budgetTest=$budgetOrder;
         $level=1;
@@ -823,11 +825,10 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
         for ($i=1; $i<$level;$i++) {
           if (strpos($sepChar,'|')!==FALSE and $i<$level-1 and strlen($sepChar)>1) {
             $sepCharW = str_repeat('..', 2);
-            //                $sepCharW = str_replace('|', $sepChar[1], $sepChar);
           } else {$sepCharW = $sepChar;}
           $sep.=$sepCharW;
         }
-        $val = $sep.$val;
+        $val =$sep.$val;
       }
 // END ADD BY Marc TABARY - 2017-02-12 - ORGANIZATIONS COMBOBOX LIST
 
@@ -849,8 +850,8 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
 //           echo '<option value="" disabled="disabled"><span style="font-weight:bold;background:#FFAAAA">'.SqlList::getNameFromId('Budget', $group).'</span></option>';
 //         }
 //       }
-      echo '<option value="' . $key . '"';
-      if ( $selection and $key==$selection ) { 
+      echo '<option  value="' . $key . '"';
+      if ( $selection and $key==$selection and !isset($listBudgetElementary) ) {
       	echo ' SELECTED ';
       	$selectedFound=true; 
       }
@@ -862,8 +863,19 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
           if ($col=="idStatusNotification") {
               if ($selection==1) { $next=2; } else { $next=1;}
           }
-      } else {
-        echo '><span >'. htmlEncode($val) . '</span></option>';
+      }elseif($col=='idBudget' and isset($listBudgetElementary)){
+         $disabled ='';
+        if(!in_array($key,$listBudgetElementary)){
+          $disabled="disabled='disabled'";
+        }
+        if ( $selection and $key==$selection ) {
+          echo ' selected="selected" ';
+          $selectedFound=true;
+        }
+        echo $disabled;
+        echo '><span>'. htmlEncode($val) . '</span></option>';
+      }else{
+        echo '><span>'. htmlEncode($val) . '</span></option>';
       }
 // END - CHANGE BY TABARY - NOTIFICATION SYSTEM      
     }

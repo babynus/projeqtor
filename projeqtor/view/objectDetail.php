@@ -2301,11 +2301,14 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // BEGIN - ADD BY TABARY - TOOLTIP
         echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
         // END - ADD BY TABARY - TOOLTIP
-        echo '<select dojoType="dijit.form.FilteringSelect" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" ';
+        if($col=='idBudgetItem'){
+          echo '<select dojoType="dijit.form.Select" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" ';
+        }else{
+          echo '<select dojoType="dijit.form.FilteringSelect" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" ';
+        }
         //echo ' labelType="html" spanLabel=true  ';
         echo '  style="width: '.($fieldWidth).'px;'.$specificStyle.'"';
         echo $name;
-        
         // ADD BY Marc TABARY - 2017-02-24 - ORGANIZATION MANAGER
         if (get_class($obj)=='Resource' and $col=='idOrganization' and $val) {
           // Implement the rule : A manager of an organization can't be dissocied from it.

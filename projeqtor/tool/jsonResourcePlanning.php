@@ -342,7 +342,6 @@ if (Sql::$lastQueryNbRows == 0) {
   $cptLine=0; 
 	while ($line = Sql::fetchLine($result)) {
 		$line=array_change_key_case($line,CASE_LOWER);
-		debugLog($arrayRestrictWbs);
 		//florent 4391
 		if ($applyFilter and (!isset($arrayRestrictWbs[$line['wbssortable']]))) continue;
 		if (! isset($allowedResource[$line['idresource']])) continue;
