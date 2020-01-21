@@ -1082,7 +1082,9 @@ function htmlDrawCrossTable($lineObj, $lineProp, $columnObj, $colProp, $pivotObj
   		}
   		$breakVal=$test->$break;
   	}
-    echo '<tr><td class="crossTableLine" style="padding-right:10px;"><label class="label largeLabel">' . $lineName . '</label></td>';
+  	$title=i18n('help'.ucfirst($lineId));
+  	if (substr($title,0,1)=='[') $title="";
+    echo '<tr><td class="crossTableLine" title="'.$title.'" style="padding-right:10px;"><label class="label largeLabel">'.$lineName . '</label></td>';
     foreach ($columnList as $colId => $colName) {
       $crit=array();
       $crit[$lineProp]=$lineId;
