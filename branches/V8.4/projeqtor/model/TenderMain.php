@@ -638,7 +638,8 @@ class TenderMain extends SqlElement {
       self::$_fieldsAttributes['untaxedAmount']='readonly';
       self::$_fieldsAttributes['fullAmount']='readonly';
     }
-    if($this->idProjectExpense){
+    $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>getSessionUser()->idProfile, 'scope'=>'generateProjExpense'));
+    if($this->idProjectExpense or $habil->rightAccess == '2'){
       self::$_fieldsAttributes['_button_generateProjectExpense']='hidden';
     }
     

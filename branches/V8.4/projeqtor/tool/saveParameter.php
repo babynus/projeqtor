@@ -127,6 +127,7 @@ if ($type=='habilitation') {
   		                             'checklist'=>i18n('checklistAccess'),
 									 'joblist'=>i18n('joblistAccess'),
                                      'multipleUpdate'=>i18n('buttonMultiUpdate'),
+                                     'generateProjExpense'=>i18n('generateProjectExpenseButton'),
                                      'planning'=>i18n('planningRight'),
   									 'resourcePlanning'=>i18n('resourcePlanningRight'),
                                      'changeValidatedData'=>('changeValidatedData'),

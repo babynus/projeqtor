@@ -115,3 +115,12 @@ INSERT INTO `${prefix}renewal` (`id`, `name`, `color`, `sortOrder`, `idle`) VALU
 (1,'never','#99FF99',100,0),
 (2,'tacit','#87ceeb',200,0),
 (3,'express','#FF0000',300,0);
+
+INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) VALUES
+(1, 'generateProjExpense', 1),
+(2, 'generateProjExpense', 1),
+(3, 'generateProjExpense', 1),
+(4, 'generateProjExpense', 1),
+(5, 'generateProjExpense', 1),
+(6, 'generateProjExpense', 1),
+(7, 'generateProjExpense', 1);
