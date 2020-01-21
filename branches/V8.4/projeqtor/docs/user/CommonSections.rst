@@ -35,7 +35,31 @@ This section allows to identify items of the element.
   * Reference
   * Link
 
+.. tabularcolumns:: |l|l|
 
+.. list-table:: Allocation dialog box - Required field |ReqFieldLegend|
+   :widths: 20, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id` 
+     - unique id of the element
+     - Project list.
+   * - |RequiredField| Resource
+     - Resource list.
+   * - |RequiredField| Profile
+     - Profile list.
+   * - Rate
+     - Rate (in %) of the allocation to the project.
+   * - Start date
+     - Start date of allocation.
+   * - End date
+     - End date of allocation.
+   * - Description
+     - Complete description of the allocation.
+   * - Closed
+     - Flag to indicate that allocation in not active anymore, without deleting it.
 .. raw:: latex
 
     \newpage
@@ -233,41 +257,22 @@ Assignment section
 
 This section allows to manage assignment of resources to tasks.
 
-.. note::
+Assigning a resource to a task makes it possible to define its function on the latter and its daily cost, if defined during the creation of the resource.
 
-   Only resources allocated to a project can be assigned to its tasks.
-
-.. rubric:: Assignment function
-
-* The assignment function allows to define the resource function to task and the daily cost if defined. 
-
-.. rubric:: Assignment rate
-
-* Assignment rate is used to keep some scheduling time for other tasks.
-* For instance, if rate is 50%, the resource will not be planned more than half days on the task.
-
-.. rubric:: Multiple assignment to a task
-
-* A resource can be assigned more than once to a task.
-* Allows to assign the resource to the same task, but with a different function (different daily cost).
-* Allows to add extra work without modifying initial assignment.
-
-.. rubric:: Incomplete planned work
-
-* The scheduling process tries to schedule, the remaining work on the assigned task within the allocation to project period.
-* The remaining work that can't be planned is displayed on the right of the resource name.
-
-.. figure:: /images/GUI/COMMON_ZONE_AssSection-NotPlannedWork.png
-   :alt: Assignment section with incomplete planned work
-   :align: center
-
-   Assignment section with incomplete planned work
-
-.. rubric:: Assignment list
-
+.. warning::
+    * Only resources allocated to a project can be assigned to its tasks.
+    * If real work exists for an assignment, it can not be deleted.
+    
+    
+.. figure:: /images/GUI/COMMON_ZONE_AssignmentSection.PNG
+   :alt: assignment section
+   
+   Assignment section 
+    
 .. sidebar:: Concepts 
 
    * :ref:`resource-function-cost`
+   * :ref:`PeriodandRate`
 
 .. list-table:: Fields of assignment list
    :widths: 20, 80
@@ -286,19 +291,33 @@ This section allows to manage assignment of resources to tasks.
    * - Left
      - Remaining work to this resource to complete the task.
 
-.. note::
- 
-   Click on the resource name to directly move to resource detail.
-
-.. rubric:: **Assignment list buttons**
 
 * Click on |buttonAdd| to assign a new resource.
 * Click on |buttonEdit| to modify the assignment.
 * Click on |buttonIconDelete| to delete the assignment.
+* Click on |iconSplit| to divide the assignment of a resource with a second resource into two equal parts 
+* Click on |iconGoto| to go directly to the allocation sheet for this resource. 
+* Click on the name of the resource to access the detail of the latter on the resource screen.
 
-.. warning::
+.. rubric:: Multiple assignment to a task
 
-   If real work exists for an assignment, it can not be deleted.
+* A resource can be assigned more than once to a task.
+* Allows to assign the resource to the same task, but with a different function (different daily cost).
+* Allows to add extra work without modifying initial assignment.
+
+.. rubric:: Incomplete planned work
+
+* The scheduling process tries to schedule, the remaining work on the assigned task within the allocation to project period.
+* The remaining work that can't be planned is displayed on the right of the resource name.
+
+.. figure:: /images/GUI/COMMON_ZONE_AssSection-NotPlannedWork.png
+   :alt: Assignment section with incomplete planned work
+   :align: center
+
+   Assignment section with incomplete planned work
+
+
+.. rubric:: Add a new assignment
 
 .. figure:: /images/GUI/COMMON_BOX_Assignment.png
    :alt: Dialog box - Assignment 
@@ -319,7 +338,7 @@ This section allows to manage assignment of resources to tasks.
    * - Function
      - Function list.
    * - Cost
-     -  Daily cost defined for the resource and its function.
+     - Daily cost defined for the resource and its function.
    * - Rate
      - The max rate (%) to schedule the resource on the task by day.
    * - Assigned work
