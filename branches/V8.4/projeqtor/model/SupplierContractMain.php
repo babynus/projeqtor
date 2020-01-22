@@ -55,7 +55,7 @@ class SupplierContractMain extends SqlElement {
   public $periodicityBill;
   public $interventionStartTime;
   public $interventionEndTime;
-  public $periode;
+  public $period;
 
   
   public $_sec_Treatment_right;
