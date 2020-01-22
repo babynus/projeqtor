@@ -37,7 +37,7 @@ $buttonAction = getSessionValue('buttonAction');
 $idCheckBox = getSessionValue('idCheckBox');
 
 if($buttonAction and $idWorkPeriod){
-  $week = new WorkPeriod($idWorkPeriod);
+  $week = WorkPeriod::getWorkPeriod($idWorkPeriod);
   $result = "";
   if($buttonAction == 'validateWork' or $buttonAction == 'cancelValidation'){
   	$result .='     <table width="100%"><tr>';
@@ -46,9 +46,9 @@ if($buttonAction and $idWorkPeriod){
   		$result .='     <td style="height:30px;">'.formatIcon('Submitted', 32, i18n('validatedLineWorkPeriod', array($locker, htmlFormatDate($week->validatedDate)))).'</td>';
   		$result .='     <td style="width:73%;padding-left:5px;height:30px;">'.i18n('validatedLineWorkPeriod', array($locker, htmlFormatDate($week->validatedDate))).'</td>';
   		$result .='     <td style="width:27%;padding-right:8px;height:30px;">';
-  		$result .='      <span id="buttonCancelValidation'.$week->id.'" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('buttonCancel')
+  		$result .='      <span id="buttonCancelValidation'.$idWorkPeriod.'" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('buttonCancel')
   		. '       <script type="dojo/method" event="onClick" >'
-  				. '        saveImputationValidation('.$week->id.', "cancelValidation");'
+  				. '        saveImputationValidation("'.$idWorkPeriod.'", "cancelValidation");'
   				    . '        saveDataToSession("idCheckBox", '.$idCheckBox.', false);' 
   				    
   						. '       </script>'
@@ -57,9 +57,9 @@ if($buttonAction and $idWorkPeriod){
   		$result .='     <td style="height:30px;">'.formatIcon('Unsubmitted', 32, i18n('unvalidatedWorkPeriod')).'</td>';
   		$result .='     <td style="width:73%;padding-left:5px;height:30px;">'.i18n('unvalidatedWorkPeriod').'</td>';
   		$result .='     <td style="width:27%;padding-right:8px;height:30px;">';
-  		$result .='      <span id="buttonValidation'.$week->id.'" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('validateWorkPeriod')
+  		$result .='      <span id="buttonValidation'.$idWorkPeriod.'" style="width:100px; " type="button" dojoType="dijit.form.Button" showlabel="true">'.i18n('validateWorkPeriod')
   		. '       <script type="dojo/method" event="onClick" >'
-  				. '        saveImputationValidation('.$week->id.', "validateWork");'
+  				. '        saveImputationValidation("'.$idWorkPeriod.'", "validateWork");'
   				    . '        saveDataToSession("idCheckBox", '.$idCheckBox.', false);' 
   						. '       </script>'
   								. '     </span>';
