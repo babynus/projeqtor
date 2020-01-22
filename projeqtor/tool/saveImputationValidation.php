@@ -37,9 +37,8 @@ $buttonAction = RequestHandler::getValue('buttonAction');
 Sql::beginTransaction();
 
 if($buttonAction != 'validateSelection'){
-  $idWorkPeriod = RequestHandler::getId('idWorkPeriod');
-  $workPeriod = new WorkPeriod($idWorkPeriod, true);
-  
+  $idWorkPeriod = RequestHandler::getValue('idWorkPeriod');
+  $workPeriod = WorkPeriod::getWorkPeriod($idWorkPeriod); //new WorkPeriod($idWorkPeriod, true);
   switch ($buttonAction){
   	case 'cancelSubmit' :
   	  $workPeriod->submitted = 0;
@@ -58,22 +57,23 @@ if($buttonAction != 'validateSelection'){
   	default:
   	  break;
   }
-  $workPeriod->save();
+  $res=$workPeriod->save();
 }
 if($buttonAction == 'validateSelection'){
   $idWorkPeriod = RequestHandler::getValue('idWorkPeriod');
   $arrayId = explode(',', $idWorkPeriod);
   foreach ($arrayId as $id){
-    $workPeriod = new WorkPeriod($id, true);
+    $workPeriod = WorkPeriod::getWorkPeriod($id);
     if($workPeriod->validated == 0){
       $workPeriod->validated = 1;
       $workPeriod->validatedDate = date('Y-m-d H:i:s');
       $workPeriod->idLocker = getCurrentUserId();
-      $workPeriod->save();
+      $res=$workPeriod->save();
     }
   }
 }
 
 // commit workPeriod
 Sql::commitTransaction();
+
 ?>
