@@ -299,9 +299,26 @@ Assigning a resource to a task makes it possible to define its function on the l
 * Click on |iconGoto| to go directly to the allocation sheet for this resource. 
 * Click on the name of the resource to access the detail of the latter on the resource screen.
 
+.. rubric:: Go to the timesheet
+
+The button |iconGoto| allows you to go to the timesheet of the selected resource with the line of the current element highlighted.
+
+.. figure:: /images/GUI/COMMON_SCR_Timesheet.png
+   :alt: Resource's timesheet with the element highlighted
+   
+   Resource's timesheet with the element highlighted
+
+You can have a goto button at the top of the assignments area if you are assigned to the item yourself. 
+
+.. figure:: /images/GUI/COMMON_ZONE_AllocationSection-myself.png
+   :alt: Assignment of the connected user
+   
+   The button is displayed if the logged in user is assigned.
+   
+   
 .. rubric:: Multiple assignment to a task
 
-* A resource can be assigned more than once to a task.
+* A resource can be assigned more than once to a task. See the Assignment section illustration.
 * Allows to assign the resource to the same task, but with a different function (different daily cost).
 * Allows to add extra work without modifying initial assignment.
 
