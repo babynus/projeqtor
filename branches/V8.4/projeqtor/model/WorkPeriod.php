@@ -58,6 +58,22 @@ class WorkPeriod extends SqlElement {
   function __destruct() {
     parent::__destruct();
   }
-  
+  public static function getWorkPeriod($id) {
+    if (strpos($id,'_')>0) {
+      $split=explode('_',$id);
+      $workPeriod = SqlElement::getSingleSqlElementFromCriteria('WorkPeriod', array('periodRange'=>'week','periodValue'=>$split[0],'idResource'=>$split[1]));
+      if (! $workPeriod->id) {
+        $workPeriod->idResource=$split[1];
+        $workPeriod->periodRange='week';
+        $workPeriod->periodValue=$split[0];
+        $workPeriod->submitted=0;
+        $workPeriod->validated=0;
+      }
+      return $workPeriod;
+    } else {
+      $workPeriod = new WorkPeriod($id, true);
+      return $workPeriod;
+    }
+  }
 }
 ?>
