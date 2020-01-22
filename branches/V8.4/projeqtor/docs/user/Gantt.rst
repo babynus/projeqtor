@@ -483,9 +483,7 @@ Click on “Show resources” to display resources assigned to tasks.
    Display with initials or with the complete name
    
 
-.. topic:: 
-   
-   **Name or Initials**
+.. topic:: Name or Initials
    
    See :ref:`Global Parameters<gp_activity_planning>` 
    
@@ -540,8 +538,29 @@ Project planning and activity planning calculation can be done in the Gantt.
    :align: center
 
    Project planning 
+   
+   
+.. topic:: Interface areas:
+
+   |one| :ref:`Add a new planning element<add-new-planningelement>`
+   
+   |two| :ref:`Reorder planning elements<reorderPlanning>` 
+   
+   |three| :ref:`Hierarchical level<HierarchicalLevel>`
+   
+   |four| :ref:`Dependency links<DependencyLink>`
+   
+   |five| :ref:`Activity planning calculation<ActivityPlanningCalculation>` 
+   
+   |six| :ref:`Planning validation<planning-validation>` 
+   
+   |seven| :ref:`Save a baseline<save-baseline>`
+   
+   |eight| :ref:`Increase and decrease indent level<increase-decreaseindent>`
+
 
 .. _add-new-planningelement:
+
 .. rubric:: |oneBLC| Add a new planning element
 
 * Allows to create a new planning element.
@@ -561,6 +580,8 @@ Project planning and activity planning calculation can be done in the Gantt.
    * Planning elements can be managed with their own dedicated screen.
    * Test session and Meeting elements can be added to the planning with their own dedicated screen.  
 
+.. _reorderPlanning:
+
 .. rubric:: |twoBLC| Reorder planning elements
 
 The selector |buttonIconDrag| allows to reorder the planning elements.
@@ -569,6 +590,7 @@ The selector |buttonIconDrag| allows to reorder the planning elements.
 
    Ability to move multiple tasks at one time from one location to another using the key control to select the lines and then dragging and dropping them.
 
+.. _HierarchicalLevel:
 
 .. rubric:: |threeBLC| Hierarchical level
 
@@ -576,6 +598,8 @@ show or hide project activities
 
 Click on |minusButton| or |plusButton| to enlarge or reduce all groups of projects at the same time.
 
+
+.. _DependencyLink:
 
 .. rubric:: |fourBLC| Dependency links
 
@@ -602,9 +626,28 @@ Click on |minusButton| or |plusButton| to enlarge or reduce all groups of projec
       :alt: Pop up dependency management  
       :align: center 
 
+.. _ActivityPlanningCalculation:
+
 .. rubric:: |fiveBLC| Activity planning calculation
 
 Click on |calculatePlanning| to start the activity planning calculation.
+
+a popup is displayed with the list of projects.
+
+Check boxes allow you to select one or more projects to recalculate.
+
+.. image:: /images/GUI/GANTT_BOX_Calculation.png
+   :alt: Project selection popUp for project calculation
+   
+   Project selection popUp for project calculation 
+
+.. note::
+
+   if you have selected one or more projects with the project selector (see: :ref:`Project Selector<project-selector>`) then the selected projects will be automatically checked.
+
+   By checking the "Hide not selected projects" box you will only have the projects selected in the project selector and they will be automatically checked.
+
+Choose the date on which you want to recalculate the project. Whether in the past, today or in the future. 
 
  .. compound:: **Automatic run plan**
 
@@ -660,7 +703,9 @@ See: :ref:`display-baseline`
    
    Record baseline
 
-.. rubric:: |eightBLC| Increase and decrease indent
+.. _increase-decreaseIncident:
+
+.. rubric:: |eightBLC| Increase and decrease indent level
 
 .. figure:: /images/GUI/GANTT_Button_Indent.png
    :alt: Indentation

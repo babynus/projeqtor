@@ -93,9 +93,11 @@ Top bar
    
 Allows to select the project to work on.
 
-Restricted the visibility of all objects of the selected project, including sub-projects if any.
+Projects must be defined as "handled" to appear in the project selector.
 
-Defined the "default" project for new items.
+Limited visibility of all elements of the selected project, including sub-projects if applicable.
+
+Definition of the "default" project for new elements.
 
 .. note:: 
 
