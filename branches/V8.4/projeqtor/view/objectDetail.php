@@ -264,7 +264,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
 	   ondragover="dropFilesFormOnDragOver();" 
 	  ondragleave="dropFilesFormOnDragLeave();" 
 	       ondrop="dropFilesFormOnDrop();">
-  <div id="dropFilesInfoDiv" style="text-align:center;font-size:500%;z-index:99998;width:100%;height:100%;position:absolute;top:0px;left:0px;border:5px dashed grey;background-color:#EEEEEE;opacity:50%;display:none">
+  <div id="dropFilesInfoDiv" style="">
     <div style="position:absolute;top:50%;margin-top:-25px;height:px;width:100%;text-align:center;"><?php echo i18n('dragAndDrop');?></div>
   </div>
 	<?php
