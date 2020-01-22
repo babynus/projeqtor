@@ -3749,6 +3749,37 @@ function getFirstDayOfWeek(week, year) {
   testDate.setDate(testDate.getDate() + 1);
   return testDate;
 }
+function getFirstDayOfWeekFromDate(directDate) {
+  var year=directDate.getFullYear();
+  var week=getWeek(directDate.getDate(),directDate.getMonth()+1,directDate.getFullYear())+'';
+  if (week==1 && directDate.getMonth()>10) {
+    year+=1;
+  } else if (week==0) {
+    week=getWeek(31,12,year-1);
+    if (week==1) {
+      var day=getFirstDayOfWeek(1,year);
+      week=getWeek(day.getDate()-1,day.getMonth()+1,day.getFullYear());
+    }
+    year=year-1;
+  } else if (parseInt(week,10)>53) {
+    week='01';
+    year+=1;
+  } else if (parseInt(week,10)>52) {
+    lastWeek=getWeek(31,12,year);
+    if (lastWeek==1) {
+      var day=getFirstDayOfWeek(1,year+1);
+      lastWeek=getWeek(day.getDate()-1,day.getMonth()+1,day.getFullYear());
+    }
+    if (parseInt(week,10)>parseInt(lastWeek,10)) {
+      week='01';
+      year+=1;
+    }
+  }
+  var day=getFirstDayOfWeek(week,year);
+  return day;
+  
+}
+
 
 dateGetWeek = function(paramDate, dowOffset) {
   /*
@@ -5953,60 +5984,61 @@ function selectAbsenceDay(dateId, day, workDay, month, year, week, userId, isVal
 }
 
 //Imputation Validation refresh function
-function refreshImputationValidation(directDate) {
-	if (directDate) {
-	    var year=directDate.getFullYear();
-	    var week=getWeek(directDate.getDate(),directDate.getMonth()+1,directDate.getFullYear())+'';
-	    if (week==1 && directDate.getMonth()>10) {
-	      year+=1;
-	    }
-	    if (week.length==1 || parseInt(week,10)<10) {
-		    week='0' + week;
-		  }
-		  if (week=='00') {
-		    week=getWeek(31,12,year-1);
-		    if (week==1) {
-		      var day=getFirstDayOfWeek(1,year);
-		      //day=day-1;
-		      week=getWeek(day.getDate()-1,day.getMonth()+1,day.getFullYear());
-		    }
-		    year=year-1;
-		    dijit.byId('yearSpinner').set('value',year);
-		    dijit.byId('weekSpinner').set('value', week);
-		  } else if (parseInt(week,10)>53) {
-		      week='01';
-		      year+=1;
-		    dijit.byId('yearSpinner').set('value', year);
-		    dijit.byId('weekSpinner').set('value', week);
-		  } else if (parseInt(week,10)>52) {
-		    lastWeek=getWeek(31,12,year);
-		    if (lastWeek==1) {
-		      var day=getFirstDayOfWeek(1,year+1);
-		      //day=day-1;
-		      lastWeek=getWeek(day.getDate()-1,day.getMonth()+1,day.getFullYear());
-		    }
-		    if (parseInt(week,10)>parseInt(lastWeek,10)) {
-		      week='01';
-		        year+=1;
-		      dijit.byId('yearSpinner').set('value', year);
-		      dijit.byId('weekSpinner').set('value', week);
-		    }
-		  }
-		  var day=getFirstDayOfWeek(week,year);
-		  dijit.byId('weekImputationValidation').set('value',day);
-	}
-	
-	var end = dijit.byId('currentWeekImputationValidation');
-	var start = dijit.byId('weekImputationValidation');
-	start.constraints.max=end.get('value');
-	end.constraints.min=start.get('value');
-	formInitialize();
-	showWait();
-	var callback=function() {
-		hideWait();
-	};
-	loadContent('../view/refreshImputationValidation.php', 'imputationValidationWorkDiv', 'imputValidationForm', false,false,false,false,callback,false);
-	return true;
+function refreshImputationValidation(startDate, endDate) {
+  if (startDate) {
+//    var year=directDate.getFullYear();
+//    var week=getWeek(directDate.getDate(),directDate.getMonth()+1,directDate.getFullYear())+'';
+//    if (week==1 && directDate.getMonth()>10) {
+//      year+=1;
+//    }
+//    if (week.length==1 || parseInt(week,10)<10) {
+//      week='0' + week;
+//    }
+//    if (week=='00') {
+//      week=getWeek(31,12,year-1);
+//      if (week==1) {
+//        var day=getFirstDayOfWeek(1,year);
+//        week=getWeek(day.getDate()-1,day.getMonth()+1,day.getFullYear());
+//      }
+//      year=year-1;
+//      //dijit.byId('yearSpinner').set('value',year);
+//      //dijit.byId('weekSpinner').set('value', week);
+//    } else if (parseInt(week,10)>53) {
+//      week='01';
+//      year+=1;
+//      //dijit.byId('yearSpinner').set('value', year);
+//      //dijit.byId('weekSpinner').set('value', week);
+//    } else if (parseInt(week,10)>52) {
+//      lastWeek=getWeek(31,12,year);
+//      if (lastWeek==1) {
+//        var day=getFirstDayOfWeek(1,year+1);
+//        //day=day-1;
+//        lastWeek=getWeek(day.getDate()-1,day.getMonth()+1,day.getFullYear());
+//      }
+//      if (parseInt(week,10)>parseInt(lastWeek,10)) {
+//        week='01';
+//        year+=1;
+//        //dijit.byId('yearSpinner').set('value', year);
+//        //dijit.byId('weekSpinner').set('value', week);
+//      }
+//    }
+    
+    var day=getFirstDayOfWeekFromDate(startDate);
+    dijit.byId('startWeekImputationValidation').set('value',day);
+  }
+  if (endDate) {
+    if (startDate && startDate>endDate) endDate=startDate;
+    var day=getFirstDayOfWeekFromDate(endDate);
+    day=addDaysToDate(day,6),
+    dijit.byId('endWeekImputationValidation').set('value',day);
+  }
+  formInitialize();
+  showWait();
+  var callback=function() {
+    hideWait();
+  };
+  loadContent('../view/refreshImputationValidation.php', 'imputationValidationWorkDiv', 'imputValidationForm', false,false,false,false,callback,false);
+  return true;
 }
 
 function refreshSubmitValidateDiv(idWorkPeriod, buttonAction) {
