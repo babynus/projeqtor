@@ -6518,11 +6518,12 @@ function dropFilesFormOnDragOver() {
   if (! dojo.byId('id')) return;
   if ( dijit.byId('idle') && dijit.byId('idle').get('checked')==true) return;
   if (dropFilesFormInProgress) clearTimeout(dropFilesFormInProgress);
-  dojo.byId('dropFilesInfoDiv').style.display='block';
   dojo.byId('dropFilesInfoDiv').style.height=(dojo.byId('formDiv').offsetHeight-10)+"px";
   var hasScrollBar=(dojo.byId('formDiv').scrollHeight>dojo.byId('formDiv').clientHeight)?true:false;
   var removeWidth=(hasScrollBar)?25:10;
   dojo.byId('dropFilesInfoDiv').style.width=(dojo.byId('formDiv').offsetWidth-removeWidth)+"px";
+  dojo.byId('dropFilesInfoDiv').style.display='block';
+  dojo.byId('dropFilesInfoDiv').style.opacity='50%';
 }
 function dropFilesFormOnDragLeave() {
   event.preventDefault();
@@ -6530,5 +6531,6 @@ function dropFilesFormOnDragLeave() {
 }
 function dropFilesFormOnDrop() {
   event.preventDefault();
+  dojo.byId('dropFilesInfoDiv').style.opacity='0%';
   dojo.byId('dropFilesInfoDiv').style.display='none';
 }
