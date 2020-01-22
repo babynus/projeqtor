@@ -709,7 +709,7 @@ static function isTheLeaveProject($id=null) {
     		$split=explode('#',$nameP);
     		if (strpos($split[0],'.')==0) {
     		    $proj = new Project(substr($idP,1));
-      	        $subList[$id]=$proj->name;
+      	        $subList[substr($idP,1)]=$proj->name;
     		}
     	}
     } else {
