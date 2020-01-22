@@ -66,7 +66,7 @@ CREATE TABLE `${prefix}suppliercontract` (
   `phoneNumber` int(12) unsigned DEFAULT NULL,
   `interventionStartTime` datetime DEFAULT NULL,
   `interventionEndTime` datetime DEFAULT NULL,
-  `periode`varchar(100) DEFAULT NULL,
+  `period`varchar(100) DEFAULT NULL,
   `sla` int(1) unsigned DEFAULT '0',
   `origin` varchar(100) DEFAULT NULL,
   `idUser` int(12) unsigned DEFAULT NULL,
