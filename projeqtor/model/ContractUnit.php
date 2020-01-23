@@ -4,13 +4,12 @@
  */
 
 require_once('_securityCheck.php');
-class Unity extends SqlElement {
+class ContractUnit extends SqlElement {
 	
 	// extends SqlElement, so has $id
 	public $_sec_Description;
 	public $id;    // redefine $id to specify its visible place
 	public $name;
-	public $code;
 	public $sortOrder=0;
 	public $idle;
 	//public $_sec_void;

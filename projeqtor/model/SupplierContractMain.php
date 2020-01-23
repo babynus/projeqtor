@@ -41,27 +41,26 @@ class SupplierContractMain extends SqlElement {
   public $phoneNumber;
   public $origin;
   public $description;
-  
   public $_sec_Progress;
+  public $_tab_2_1=array('startDate', 'endDate' , 'contractDate');
   public $startDate;
-  public $initialContractTerm;
-  public $idUnitDurationContract;
   public $endDate;
+  public $idUnitDurationContract;
+  public $initialContractTerm;
   public $noticePeriod;
   public $idUnitDurationNotice;
   public $noticeDate;
   public $deadlineDate;
   public $periodicityContract;
   public $periodicityBill;
+  public $_tab_2_1_int=array('StartTime', 'EndTime' , 'interventionTime');
   public $interventionStartTime;
-  public $interventionEndTime;
-  public $period;
-
-  
+  public $interventionEndTime; 
+  public $idPeriod;
   public $_sec_Treatment_right;
-  public $idRenewal;
-  public $idStatus;
   public $idResource;
+  public $idStatus;
+  public $idRenewal;
   public $sla;
   public $handled;
   public $handledDate;
@@ -70,7 +69,6 @@ class SupplierContractMain extends SqlElement {
   public $idle;
   public $idleDate;
   public $cancelled;
-  
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
@@ -96,9 +94,11 @@ class SupplierContractMain extends SqlElement {
                                   "idleDate"=>"nobr",
                                   "cancelled"=>"nobr",
                                   "idStatus"=>"required",
+                                  "startDate"=>"nobr",
   );   
  
   private static $_colCaptionTransposition = array(
+   'idPeriod'=>'period',
    'idUser'=>'issuer',
    'idResource'=>'responsible',
   );
@@ -145,7 +145,7 @@ class SupplierContractMain extends SqlElement {
   }  
 
     /** ==========================================================================
-   * Return the specific fieldsAttributes
+   * Return the specific HsAttributes
    * @return the fieldsAttributes
    */
   protected function getStaticFieldsAttributes() {
