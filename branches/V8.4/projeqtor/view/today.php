@@ -521,6 +521,18 @@ function showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting,
   $tender=new Tender();
   $listtender=$tender->getSqlElementsFromCriteria(null, null, $where, $order, null, true, $cptMax+1);
   $list=array_merge($list, $listtender);
+  $orderToProvider=new ProviderOrder();
+  $listOrderToProvider=$orderToProvider->getSqlElementsFromCriteria(null, null, $where, $order, null, true, $cptMax+1);
+  $list=array_merge($list, $listOrderToProvider);
+  $providerTerm=new ProviderTerm();
+  $listProviderTerm=$providerTerm->getSqlElementsFromCriteria(null, null, $where, $order, null, true, $cptMax+1);
+  $list=array_merge($list, $listProviderTerm);
+  $providerBill=new ProviderBill();
+  $listProviderBill=$providerBill->getSqlElementsFromCriteria(null, null, $where, $order, null, true, $cptMax+1);
+  $list=array_merge($list, $listProviderBill);
+  $term=new Term();
+  $listTerm=$term->getSqlElementsFromCriteria(null, null, $where, $order, null, true, $cptMax+1);
+  $list=array_merge($list, $listTerm);
   
   if (!$print or !array_key_exists($divName, $collapsedList)) {
     if (!$print) {
@@ -577,8 +589,14 @@ function showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting,
         echo '<tr><td colspan="8" class="messageData" style="text-align:center;"><b>'.i18n('limitedDisplay', array($cptMax)).'</b></td></tr>';
         break;
       }
-      $statusColor=SqlList::getFieldFromId('Status', $elt->idStatus, 'color');
-      $status=SqlList::getNameFromId('Status', $elt->idStatus);
+      $status="";
+      $statusColor="";
+      $displayColorStatus="";
+      if (property_exists($elt, 'idStatus')){
+        $statusColor=SqlList::getFieldFromId('Status', $elt->idStatus, 'color');
+        $status=SqlList::getNameFromId('Status', $elt->idStatus);
+        $displayColorStatus = htmlDisplayColored($status, $statusColor);
+      }
       $status=($status=='0')?'':$status;
       $goto="";
       $classGoto=$class;
@@ -604,7 +622,11 @@ function showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting,
         echo $alertLevelArray['description'];
         echo '</div>';
       }
-      echo '  <td class="messageData" style="'.$color.'">'.'<table><tr><td>'.formatIcon($class, 16, i18n($class)).'</td><td>&nbsp;</td><td>#'.$elt->id.'</td></tr></table></td>'.'  <td class="messageData" style="'.$color.'">'.htmlEncode(SqlList::getNameFromId('Project', $elt->idProject)).'</td>'.'  <td class="messageData" style="'.$color.'">'.SqlList::getNameFromId($class.'Type', $elt->$idType).'</td>'.'  <td class="messageData" style="'.$color.'">'.htmlEncode($elt->name).'</td>'.'  <td class="messageDataValue" style="'.$color.'" NOWRAP>'.htmlFormatDate($echeance).'</td>'.'  <td class="messageData" style="'.$color.'">'.htmlDisplayColored($status, $statusColor).'</td>'.'  <td class="messageDataValue" style="'.$color.'">'.htmlDisplayCheckbox($user->id==$elt->idUser).'</td>';
+      $type="";
+      if(property_exists($elt, 'id'.$class.'Type')){
+        $type = SqlList::getNameFromId($class.'Type', $elt->$idType);
+      }
+      echo '  <td class="messageData" style="'.$color.'">'.'<table><tr><td>'.formatIcon($class, 16, i18n($class)).'</td><td>&nbsp;</td><td>#'.$elt->id.'</td></tr></table></td>'.'  <td class="messageData" style="'.$color.'">'.htmlEncode(SqlList::getNameFromId('Project', $elt->idProject)).'</td>'.'  <td class="messageData" style="'.$color.'">'.$type.'</td>'.'  <td class="messageData" style="'.$color.'">'.htmlEncode($elt->name).'</td>'.'  <td class="messageDataValue" style="'.$color.'" NOWRAP>'.htmlFormatDate($echeance).'</td>'.'  <td class="messageData" style="'.$color.'">'.$displayColorStatus.'</td>'.'  <td class="messageDataValue" style="'.$color.'">'.htmlDisplayCheckbox($user->id==$elt->idUser).'</td>';
       if (property_exists($elt, 'idAccountable')) echo '  <td class="messageDataValue" style="'.$color.'">'.htmlDisplayCheckbox($user->id==$elt->idAccountable).'</td>';
       else echo '  <td class="messageDataValue" style="'.$color.'">'.htmlDisplayCheckbox(null).'</td>';
       if (property_exists($elt, 'idAuthor')) {

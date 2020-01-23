@@ -51,6 +51,7 @@ class ProviderTermMain extends SqlElement {
   public $isPaid;
   public $_spe_paymentsList;
   public $idle;
+  public $done;
   public $idProjectExpense;
   public $_Note=array();
   public $_sec_Link;
@@ -179,6 +180,11 @@ class ProviderTermMain extends SqlElement {
       }
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
+    } else if($colName=="isPaid"){
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  diji.byId("done").set("value", this.value);';
+      $colScript .= '  formChanged();';
+      $colScript .= '</script>';
     } 
     return $colScript;
   }
@@ -215,6 +221,11 @@ class ProviderTermMain extends SqlElement {
     $pB->save();
 	  } else {
 	    $this->isBilled=0;
+	  }
+	  if($this->isPaid){
+	    $this->done = 1;
+	  }else{
+	    $this->done = 0;
 	  }
 		$result = parent::save();	
 		return $result;

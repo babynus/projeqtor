@@ -37,8 +37,10 @@ class TermMain extends SqlElement {
   public $idProject;
   public $idBill;
   public $idUser;
+  public $idResource;
   public $creationDate;
   public $idle;
+  public $done;
   public $_sec_Price;
   public $_tab_3_2_smallLabel = array('real', 'validated', 'planned', 'amount', 'date');
   public $amount;
@@ -171,6 +173,9 @@ class TermMain extends SqlElement {
    */  
 
 	public function save() {
+	    if($this->idBill){
+	      $this->done = 1;
+	    }
 		$this->setCalculatedFromActivities();
 		$result = parent::save();	
 		KpiValue::calculateKpi($this);
