@@ -72,7 +72,6 @@ if ($type == 'list' and array_key_exists ( 'dataType', $_REQUEST ) and ($_REQUES
   $_REQUEST ['idProject'] = $_REQUEST ['critValue']; // This is valid : force idProject to critValue as criFiled=idProject (value has been tested as an id)
   $required = array_key_exists ( 'required', $_REQUEST );
 }
-
 if ($type == 'ExpenseDetailType') {
   $type = 'list';
 }
@@ -216,7 +215,38 @@ if ($type == 'empty') {
   } else if ($dataType == 'idProject' and securityGetAccessRight ( 'menuProject', 'read' ) != 'ALL') {
     $user = getSessionUser ();
     $list = $user->getVisibleProjects ();
-  } else if ($dataType == 'imputationResource') {
+  }else if($dataType=='idBudgetParent'){
+    $showIdle = false;
+    if($critValue =='on')$showIdle = true; 
+    $budgetList=SqlList::getList('Budget','bbsSortable',$selected,$showIdle);
+    $sepChar=Parameter::getUserParameter('projectIndentChar');
+    if (!$sepChar) $sepChar='__';
+    $bbsLevelArray=array();
+    $list = array();
+    foreach($budgetList as $key => $val){
+      $budgetOrder = $budgetList[$key];
+      $budgetTest=$budgetOrder;
+      $level=1;
+      while (strlen($budgetTest)>4) {
+        $budgetTest=substr($budgetTest,0,strlen($budgetTest)-6);
+        if (array_key_exists($budgetTest, $bbsLevelArray)) {
+          $level=$bbsLevelArray[$budgetTest]+1;
+          $budgetTest="";
+        }
+      }
+      $bbsLevelArray[$budgetOrder]=$level;
+      $sep='';
+      for ($i=1; $i<$level;$i++) {
+        if (strpos($sepChar,'|')!==FALSE and $i<$level-1 and strlen($sepChar)>1) {
+          $sepCharW = str_repeat('..', 2);
+        } else {$sepCharW = $sepChar;}
+        $sep.=$sepCharW;
+      }
+      $val =$sep.SqlList::getNameFromId('Budget', $key);
+      $list[$key]=$val;
+      $selected=null;
+   }
+  }else if ($dataType == 'imputationResource') {
     $class = 'Affectable';
     $specific = 'imputation';
     $list = getListForSpecificRights ( $specific );
