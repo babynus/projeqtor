@@ -124,3 +124,5 @@ INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) V
 (5, 'generateProjExpense', 1),
 (6, 'generateProjExpense', 1),
 (7, 'generateProjExpense', 1);
+
+ALTER TABLE `term` ADD `idResource` int(12) unsigned DEFAULT NULL , ADD `done` int(1) unsigned DEFAULT '0';
