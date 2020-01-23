@@ -489,16 +489,23 @@ if (property_exists($objectClass,'idStatus')) {
                 <?php echo autoOpenFilteringSelect();?> 
                 data-dojo-props="queryExpr: '*${0}*',autoComplete:false"
                 id="listBudgetParentFilter" name="listBudgetParentFilter" style="width:<?php echo $referenceWidth*4;?>px" value="<?php if(!$comboDetail and sessionValueExists('listBudgetParentFilter')){ echo getSessionValue('listBudgetParentFilter'); }?>" >
+                  <option value=""></option>
                   <?php 
                    //gautier #indentBudget
                    // htmlDrawOptionForReference('idBudgetItemParent',$budgetParent,$obj,false);
                       $sepChar=Parameter::getUserParameter('projectIndentChar');
                       if (!$sepChar) $sepChar='__';
                       $wbsLevelArray=array();
-                      $wbsList=SqlList::getList('Budget','bbsSortable');
+                      $wbsList=SqlList::getList('Budget','bbsSortable',null,true);
                       $order="bbsSortable asc";
                       $budget=new Budget();
-                      $list=$budget->getSqlElementsFromCriteria(null,false,null,$order,null,true);
+                      $where = null;
+                      if(sessionValueExists('listShowIdle'.$objectClass)){  
+                        if(getSessionValue('listShowIdle'.$objectClass)!= "on"){
+                          $where = ' idle=0 ';
+                        }
+                      }
+                      $list=$budget->getSqlElementsFromCriteria(null,false,$where,$order,null,true);
                       foreach ($list as $projOb){
                         if (isset($wbsList[$projOb->id])) {
                           $wbs=$wbsList[$projOb->id];
@@ -519,7 +526,7 @@ if (property_exists($objectClass,'idStatus')) {
                         for ($i=1; $i<$level;$i++) {$sep.=$sepChar;}
                         $val = $sep.$projOb->name;
                         ?> 
-                        <option value="<?php echo $projOb->idBudget; ?>"><?php echo $val; ?></option>      
+                        <option value="<?php echo $projOb->id; ?>"><?php echo $val; ?></option>      
                        <?php
                      }
                     ?>
@@ -924,13 +931,13 @@ if (property_exists($objectClass,'idStatus')) {
               <td style="width: 10px;text-align: center; align: center;white-space:nowrap;" class="allSearchTD hideInServiceTD allSearchFixLength">&nbsp;
                 <?php $hideInService=Parameter::getUserParameter('hideInService');?>
                 <div title="<?php echo i18n('hideInService')?>" dojoType="dijit.form.CheckBox" 
-                class="whiteCheck" <?php if ($hideInService=='true') echo " checked ";?>
-                type="checkbox" id="hideInService" name="hideInService">
-                <script type="dojo/method" event="onChange" >
+                     class="whiteCheck" <?php if ($hideInService=='true') echo " checked ";?>
+                     type="checkbox" id="hideInService" name="hideInService">
+                 <script type="dojo/method" event="onChange" >
                   saveDataToSession('hideInService',((this.checked)?true:false),true);
                   setTimeout("refreshJsonList('<?php echo $objectClass;?>');",50);
-                </script>
-              </div>&nbsp;
+                 </script>
+                </div>&nbsp;
               </td>
               <?php }?> 
 <?php if (! $hideShowIdleSearch and ! $comboDetail) {?> 
