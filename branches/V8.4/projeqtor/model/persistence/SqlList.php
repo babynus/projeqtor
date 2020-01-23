@@ -86,7 +86,7 @@ class SqlList {
 //scriptLog("fetchList($listType,$displayCol, $selectedValue, $showIdle, $translate)");
     $res=array();
     if($listType == 'UnitDurationContract' or $listType== 'UnitDurationNotice'){
-      $type= new Unity();
+      $type= new ContractUnit();
       $listType=$type->getDatabaseTableName();
     }
     if (! SqlElement::class_exists($listType)) {

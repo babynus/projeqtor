@@ -4,7 +4,7 @@
  */
 
 require_once('_securityCheck.php');
-class Renewal extends SqlElement {
+class Period extends SqlElement {
 	
 	// extends SqlElement, so has $id
 	public $_sec_Description;
