@@ -126,7 +126,7 @@ for ($i=1;$i<=2;$i++) {
     	$tab[$proj][$var][$date]=0;
     }
     $tab[$proj][$var][$date]+=$cost;
-    if ($start=="" or $start>$date) {
+    if ($start=="" or ($start>$date and $date)) {
       $start=$date;
     }
     if ($end=="" or $end<$date) {
