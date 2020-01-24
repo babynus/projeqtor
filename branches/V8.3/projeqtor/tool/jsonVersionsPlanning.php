@@ -28,12 +28,14 @@ if (isset($_REQUEST['productVersionsListId'])) {
   else {
     $pvsArray[]=$_REQUEST['productVersionsListId'];
   }
-}
-//END CHANGE qCazelles - Correction GANTT - Ticket #100
-else {
+} else if (isset($_REQUEST['nbPvs'])){ //END CHANGE qCazelles - Correction GANTT - Ticket #100
 	for ($i = 0; $i < $_REQUEST['nbPvs']; $i++) {
 		$pvsArray[$i] = $_REQUEST['pvNo'.$i];
 	}
+} else { // PBE : will retreive last access if use of previous navigation button
+  if (sessionValueExists('tabProductVersions')) {
+    $pvsArray=getSessionValue('tabProductVersions');
+  }
 }
 
 //$type = new Type();
