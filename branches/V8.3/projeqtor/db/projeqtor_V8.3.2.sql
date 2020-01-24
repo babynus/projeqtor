@@ -19,3 +19,11 @@ WHERE scope='ProviderPayment';
 
 DELETE FROM `${prefix}columnselector`
 WHERE objectClass='ProviderPaymentType';
+
+INSERT INTO `${prefix}originable` ( `name`, `idle`) VALUES 
+('ProviderOrder', 0),
+('ProviderBill', 0);
+
+INSERT INTO `${prefix}importable` (`id`, `name`, `idle`) VALUES
+(56, 'ProviderOrder', 0),
+(57, 'ProviderBill', 0);
