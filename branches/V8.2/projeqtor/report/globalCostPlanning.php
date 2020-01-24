@@ -152,7 +152,7 @@ for ($i=1;$i<=2;$i++) {
       $tab[$proj]=array("name"=>SqlList::getNameFromId('Project', $proj), "real"=>array(),"plan"=>array());
     }
     $tab[$proj][$var][$date]=$cost;
-    if ($start=="" or $start>$date) {
+    if ($start=="" or ($start>$date and $date)) {
       $start=$date;
     }
     if ($end=="" or $end<$date) {
