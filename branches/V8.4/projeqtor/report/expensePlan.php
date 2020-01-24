@@ -117,14 +117,14 @@ for ($i=1;$i<=2;$i++) {
     $date=$line['scale'];
     $proj=$line['idproject'];
     $cost=round($line['sumcost'],2);
-    if (! array_key_exists($proj, $tab) ) {
+    if (! isset($tab[$proj]) ) {
       $tab[$proj]=array("name"=>SqlList::getNameFromId('Project', $proj), "real"=>array(),"plan"=>array());
     }
     $tab[$proj][$var][$date]=$cost;
-    if ($start=="" or $start>$date) {
+    if ( ! $start or ($start>$date and $date)) {
       $start=$date;
     }
-    if ($end=="" or $end<$date) {
+    if (! $end or $end<$date) {
       $end=$date;
     }
   }
