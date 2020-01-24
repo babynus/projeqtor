@@ -224,6 +224,10 @@ class Expense extends SqlElement {
     
     $pe=SqlElement::getSingleSqlElementFromCriteria('ProjectPlanningElement', array('refType'=>'Project','refId'=>$this->idProject));
     $pe->updateExpense();
+    if ($old->idProject!=$this->idProject) {
+      $peOld=SqlElement::getSingleSqlElementFromCriteria('ProjectPlanningElement', array('refType'=>'Project','refId'=>$old->idProject));
+      $peOld->updateExpense();
+    }
     
     if ($this->idBudgetItem) {
       $item=new Budget($this->idBudgetItem);
