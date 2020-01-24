@@ -98,12 +98,19 @@ if ($proj=='*' or !$proj) {
 //New
 //END CHANGE qCazelles - Correction GANTT - Ticket #100
 $tabProductVersions=array();
-if ( strpos($_REQUEST['productVersionsListId'], '_')!==false) {
-  $tabProductVersions=explode('_', $_REQUEST['productVersionsListId']);
+if (isset($_REQUEST['productVersionsListId'])) {
+  if ( strpos($_REQUEST['productVersionsListId'], '_')!==false) {
+    $tabProductVersions=explode('_', $_REQUEST['productVersionsListId']);
+  } else {
+    $tabProductVersions[]=$_REQUEST['productVersionsListId'];
+  }
+} else { // PBE : will retreive last access if use of previous navigation button
+  if (sessionValueExists('tabProductVersions')) {
+    $tabProductVersions=getSessionValue('tabProductVersions');
+  }
 }
-else {
-  $tabProductVersions[]=$_REQUEST['productVersionsListId'];
-}
+setSessionValue('tabProductVersions', $tabProductVersions);
+// PBE - end
 $nbPvs = 0;
 foreach ($tabProductVersions as $idProductVersion) {
 	echo '<input type="hidden" id="pvNo'.$nbPvs.'" name="idsProductVersion[]" value="'.$idProductVersion.'" />';
