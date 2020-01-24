@@ -221,7 +221,7 @@ class TenderMain extends SqlElement {
         $lstStatus=SqlList::getList('Status');
         reset($lstStatus);
         $projExpense->idStatus=key($lstStatus);
-        $projExpense->name = $this->name;
+        $projExpense->name = substr($this->name,0,100);
         $projExpense->idProject = $this->idProject;
         $projExpense->taxPct = $this->taxPct;
         $projExpense->plannedAmount = $this->totalUntaxedAmount;
@@ -285,6 +285,7 @@ class TenderMain extends SqlElement {
     
     if ($this->idCallForTender and $this->idProvider) {
       $this->name=SqlList::getNameFromId('CallForTender', $this->idCallForTender).' - '.SqlList::getNameFromId('Provider', $this->idProvider);
+      $this->name=substr($this->name, 0,200);
     }
     $cft=new CallForTender($this->idCallForTender);
     if (!$this->deliveryDate) $this->deliveryDate=$cft->deliveryDate;
