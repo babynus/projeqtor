@@ -98,7 +98,7 @@ class AssignmentSelection extends SqlElement {
       echo "  <tr>";
       echo "    <td class='assignData verticalCenterData'>".SqlList::getNameFromId('Resource', $as->idResource)."</td>";
       echo "    <td class='assignData centerData verticalCenterData'>".(($as->endDate)?htmlFormatDate($as->endDate,true):i18n('colNotPlannedWork'))."</td>";
-      echo "    <td class='assignData centerData verticalCenterData'>".htmlDisplayCheckbox($as->selected)."</td>";
+      echo "    <td class='assignData centerData verticalCenterData'>".(($as->selected)?"<img src='../view/img/check.png' />":"")."</td>";
       echo "    <td class='assignData centerData verticalCenterData' style='white-space:nowrap'>";
       echo "      <input dojoType='dijit.form.CheckBox' class='dialogAssignmentManualSelectCheck' id='dialogAssignmentManualSelectCheck_$as->idResource'";
       echo "       onChange='assignmentUserSelectUniqueResource(this.checked,$as->idResource);' ";
