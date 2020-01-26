@@ -1261,22 +1261,33 @@ class PlannedWork extends GeneralWork {
                       break;
                     }
                     foreach ($ress['incompatible'] as $inc=>$incValue) {
+                      if ($profile=='RECW') break;
                       if (!isset($resources[$inc])) {
                         $resInc=new Resource($inc);
                         $resources[$inc]=$resInc->getWork($startDate,$withProjectRepartition);
                       } 
+                      $dow=date('N',strtotime($currentDate));
                       $incRes=$resources[$inc];
-                      if (isset($incRes[$currentDate])) {
-                        $capaInc=$incRes['normalCapacity'];
-                        $leftInc=$capaInc-$incRes[$currentDate];
-                        if ($leftInc<0) $leftInc=0;
-                        if ($value>$leftInc) {
-                          $value=$leftInc;
-                        }
-                        if ($value>0 and isset($ress[$currentDate])) {
-                          $value-=$ress[$currentDate];
-                          if ($value<0) $value=0;
-                        }
+                      if (isset($incRes[$currentDate]) 
+                       or isset($reserved['W']['sum'][$inc][$dow]) 
+                       //or isset($reserved['W']['sum'][$ass->idResource][$dow])
+                      ) {
+//                         $capaInc=$incRes['normalCapacity'];
+//                         $leftInc=$capaInc;
+//                         if (isset($incRes[$currentDate])) $leftInc-=$incRes[$currentDate];
+//                         if (isset($reserved['W']['sum'][$inc][$dow])) $leftInc-=$reserved['W']['sum'][$inc][$dow];
+//                         if (isset($reserved['W']['sum'][$ass->idResource][$dow])) $leftInc-=$reserved['W']['sum'][$ass->idResource][$dow];
+//                         if ($leftInc<0) $leftInc=0;
+//                         if ($value>$leftInc) {
+//                           $value=$leftInc;
+//                         }
+                        if (isset($incRes[$currentDate])) $value-=$incRes[$currentDate];
+                        if (isset($reserved['W']['sum'][$inc][$dow])) $value-=$reserved['W']['sum'][$inc][$dow];
+                        //if (isset($reserved['W']['sum'][$ass->idResource][$dow])) $value-=$reserved['W']['sum'][$ass->idResource][$dow];
+//                         if ($value>0 and isset($ress[$currentDate])) {
+//                           $value-=$ress[$currentDate];
+//                           if ($value<0) $value=0;
+//                         }
                       }
                     }
                   }
@@ -1719,7 +1730,7 @@ class PlannedWork extends GeneralWork {
   // $reserved[type='W'][idPE]['succ'][idPE]['id']=idPE       // id of successor PlanningElement
   // $reserved[type='W'][idPE]['succ'][idPE]['delay']=delay   // Delay of dependency
   // $reserved[type='W'][idPE]['succ'][idPE]['type']=type     // type of dependency (E-E, E-S, S-S)
-  // $reserved[type='W']['sum'][idResource][day]+=value       // sum of work to reserve for resource on week day
+  // $reserved[type='W']['sum'][idResource][day]=value        // sum of work to reserve for resource on week day
   // $reserved['allPreds'][idPE]=idPE                         // List of all PE who are predecessors of RECW task
   // $reserved['allSuccs'][idPE]=idPE                         // List of all PE who are successors of RECW task
   private static function storeReservedForRecurring() {
