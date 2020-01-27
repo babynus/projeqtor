@@ -10,41 +10,52 @@
 -- ======================================
 UPDATE `${prefix}menu` SET `sortOrder` = '201' WHERE `menu`.`name` = 'menuExpenses';
 UPDATE `${prefix}menu` SET `sortOrder` = '202' WHERE `menu`.`name` = 'menuBudget';
+UPDATE `${prefix}menu` SET `sortOrder` = '205' WHERE `menu`.`name` = 'menuCallForTender';
+UPDATE `${prefix}menu` SET `sortOrder` = '206' WHERE `menu`.`name` = 'menuTender';
+UPDATE `${prefix}menu` SET `sortOrder` = '207' WHERE `menu`.`name` = 'menuProviderOrder';
+UPDATE `${prefix}menu` SET `sortOrder` = '208' WHERE `menu`.`name` = 'menuProviderTerm';
+UPDATE `${prefix}menu` SET `sortOrder` = '209' WHERE `menu`.`name` = 'menuProviderBill';
+UPDATE `${prefix}menu` SET `sortOrder` = '210' WHERE `menu`.`name` = 'menuProviderPayment';
+UPDATE `${prefix}menu` SET `sortOrder` = '211' WHERE `menu`.`name` = 'menuIndividualExpense';
 UPDATE `${prefix}measureunit` SET `sortOrder` = '50' WHERE `measureunit`.`name` = 'month';
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
-(228,'menuSupplierContract',151,'object', 203,'Project',0,'Financial'),
+(228,'menuSupplierContract',151,'object', 204,'Project',0,'Financial'),
 (229,'menuSupplierContractType',79,'object',926,NULL,NULL,0),
 (230,'menuPeriod',36,'object',896,'ReadWriteList',0,'ListOfValues'),
 (231,'menuRenewal',36,'object',897,'ReadWriteList',0,'ListOfValues'),
-(232,'menuContractUnit',36,'object',898,'ReadWriteList',0,'ListOfValues');
+(232,'menuContractUnit',36,'object',898,'ReadWriteList',0,'ListOfValues'),
+(233,'menuHierarchicalBudget',151,'object', 203,'Project',0,'Financial');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,228,1),
 (1,229,1),
 (1,230,1),
 (1,231,1),
-(1,232,1);
+(1,232,1),
+(1,233,1);
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,228,8),
 (1,229,8),
 (1,230,8),
 (1,231,8),
-(1,232,8);
+(1,232,8),
+(1,233,8);
 
 INSERT INTO `${prefix}mailable` (`id`,`name`, `idle`) VALUES 
 (42,'SupplierContract', '0');
 
 INSERT INTO `${prefix}importable` (`id`, `name`, `idle`) VALUES
-(56, 'SupplierContract','0');
+(58, 'SupplierContract','0');
 
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
  (6,228,0,1),
  (6,229,0,1),
  (6,230,0,1),
  (6,231,0,1),
- (6,232,0,1);
+ (6,232,0,1),
+ (6,233,0,1);
 
 CREATE TABLE `${prefix}suppliercontract` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
