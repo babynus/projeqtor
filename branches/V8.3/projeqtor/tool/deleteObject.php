@@ -61,7 +61,8 @@ if ($className=='Project') {
 }
 
 $result=$obj->delete();
-if ($className=='Project') {
+$resultStatus=getLastOperationStatus($result);
+if ($className=='Project' and $resultStatus=='OK') {
   PlanningElement::$_noDispatch=false;
   if ($topProject) {
     PlanningElement::updateSynthesis('Project', $topProject);
@@ -71,15 +72,20 @@ if ($className=='Project') {
 }
 BudgetElement::dispatchFinalize();
 
+debugLog ("delete result = $resultStatus");
 // Message of correct saving
-if (stripos($result,'id="lastOperationStatus" value="ERROR"')>0 ) {
+if ($resultStatus=="ERROR") {
 	Sql::rollbackTransaction();
   echo '<div class="messageERROR" >' . $result . '</div>';
-} else if (stripos($result,'id="lastOperationStatus" value="OK"')>0 ) {
+} else if ($resultStatus=="OK" ) {
 	Sql::commitTransaction();
   echo '<div class="messageOK" >' . $result . '</div>';
   SqlElement::unsetCurrentObject();
-} else { 
+} else  if ($resultStatus=="INVALID") {
+  debugLog($result);
+  Sql::rollbackTransaction();
+  echo '<div class="messageWARNING" >' . $result . '</div>';
+} else {
 	Sql::commitTransaction();
   echo '<div class="messageWARNING" >'. $result .'</div>';
 }

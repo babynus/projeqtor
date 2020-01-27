@@ -1299,7 +1299,9 @@ class PlannedWork extends GeneralWork {
                         $resources[$sup]=$resSup->getWork($startDate,$withProjectRepartition);
                       }
                       $supRes=$resources[$sup];
-                      if (isset($supRes[$currentDate])) {
+                      if (! isOpenDay($currentDate,$supRes['calendar'] )) {
+                        $value=0;
+                      } else if (isset($supRes[$currentDate])) {
                         $capaSup=$supRes['capacity'];
                         $leftSup=$capaSup-$supRes[$currentDate];
                         if ($leftSup<0) $leftSup=0;
