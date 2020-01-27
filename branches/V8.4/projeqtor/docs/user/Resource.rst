@@ -78,7 +78,7 @@ Resource availability is defined by assigning it to a project.
    * - Email address
      - Email address of the resource
    * - Capacity (FTE)
-     - Capacity of the resource in Full Time Equivalent. [#f1]_
+     - Capacity of the resource in Full Time Equivalent.
    * - |RequiredField| :ref:`calendars`
      - Calendar defines the availability of the resource.
    * - |RequiredField| Profile
@@ -119,23 +119,27 @@ Resource availability is defined by assigning it to a project.
 * < 1 for part time working resource or variations of capacity
 * > 1 for virtual resources or teams, pool of ressource or variations of capacity
 
-.. note:: If you want a resource pool of three people, the ETP capacity must be set to 3
+.. note:: 
+
+   If you want a resource pool of three people, the ETP capacity must be set to 3
+
+
 
 .. rubric:: Field is a contact
 
-   * Check this if the resource must also be a :ref:`contact`.
-   * The resource will then also appear in the “Contacts” list. 
+* Check this if the resource must also be a :ref:`contact`.
+* The resource will then also appear in the “Contacts” list. 
 
 .. rubric:: Field is a user
 
-   * Check this if the resource must connect to the application.
-   * You must then define the **User name** and **Profile** fields.
-   * The resource will then also appear in the :ref:`user` list. 
+* Check this if the resource must connect to the application.
+* You must then define the **User name** and **Profile** fields.
+* The resource will then also appear in the :ref:`user` list. 
 
 .. rubric:: Field is a employee
 
-   * Check this box if the resource needs to be linked to the human resources module.
-   * The resource will then also appear in the :ref:`employee_manager` list.
+* Check this box if the resource needs to be linked to the human resources module.
+* The resource will then also appear in the :ref:`employee_manager` list.
 
 .. rubric:: treatment zone
 
@@ -163,19 +167,36 @@ This Zone allows to allocated the ressources to the project
    :align: center
    
    Resource assigned to the project   
+
+
+.. _variation-capacity:
    
 Variations in resource capacity
 -------------------------------
 
-You can record dates (start and end) to indicate that the capacity (FTE) of your resource will vary during this time.
+You can record dates (start and end) to indicate that the capacity (FTE) of your resource will vary during this period.
 
-This allows you to reserve and enter additional work time or withdraw hours at standard capacity.
+This allows you to reserve and enter additional working time (overtime) or to withdraw hours at standard capacity (recovery).
 
-Overcapacity is a method of defining when resources will work overtime.
+The resource will then enter its imputations, the exact value of its variable capacity for the given period.
+1 + XX hours for the status of the day to go green
 
-The resource will then enter its imputations, the exact value of its variable capacity for a given period. 
 
-1 + XX hours for the status of his day to go green  
+.. figure:: /images/GUI/RESOURCE_ZONE_Surcapacity.png
+   :alt: Variations in resource capacity
+   
+   Variations in the capacity of an FTE 1 resource with the addition of an overcapacity of 0.2 and over the period from 10 to 14/02/2020 
+
+The overcapacity of a resource is directly visible on the Gantt chart.
+
+A thin red stripe overcomes the resource work allocation bars and you will find the exact capacity added at the end of the resource detail.
+
+
+.. figure:: /images/GUI/RESOURCE_ZONE_Surcapacity2.png
+   :alt: Variations in resource capacity
+   
+   Variations in the capacity of an FTE 0.5 resource with the addition of an overcapacity of 0.2 and over the period from 10 to 14/02/2020
+
 
 .. index:: Surbooking
 
@@ -184,9 +205,15 @@ The resource will then enter its imputations, the exact value of its variable ca
 Managment of surbooking periods
 -------------------------------
 
-surbooking in planning allows you to add extra work time on the standard capabilities of your resources to plan more projects that you will not process.
+Surbooking in planning allows you to add extra work time on the standard capabilities of your resources to plan more projects that you will not process.
 
-You can also subtract this work time to not plan the full availability of resources
+You can also subtract this work time to not plan the full availability of resources.
+
+.. figure:: /images/GUI/RESOURCE_ZONE_Surbooking.png
+   :alt: Surbooking
+   
+   Surbooking
+   
 
 The resource will continue to report their charges normally, with no extra or reduced work time, to change the status of their day to green.
 
@@ -198,6 +225,11 @@ The resource will continue to report their charges normally, with no extra or re
    will be adapted to this ability.
    
    overbooking is a way of planning in the future without interacting with the behavior of the working time of the resources
+   
+
+
+
+
 
 .. raw:: latex
 
@@ -314,7 +346,7 @@ If A is scheduled at a given time, B can not be scheduled on the same day as for
 
 that is, the minimum of [capacity of the resource-load already planned] for each incompatible resource and reciprocally with the relation is bijective.
 
-.. topic::
+.. topic:: Exemple
 
    Example with two FTE resources = 1
    
@@ -332,7 +364,7 @@ If A's support resource B is not available (in part or in full), we plan for A o
 
 The display of the scheduled load for the support resource, although it is not assigned to the activity, is visible on the detail of a right-click Gantt bar.
 
-.. topic::
+.. topic:: Exemple
 
    Example with B support resource of A with a 50% employment rate
 
@@ -365,82 +397,96 @@ Pool of Resources
    * :ref:`Allocations<allocation-section>`
    
 A pool is a group of resources that can work as any of the assigned resources.
-
 You assign resources to the pool at a given rate for a given period.
 
 .. note:: 
-   a resource cannot be assigned on pools for more than 100% on a given period 
+
+   A resource cannot be assigned on pools for more than 100% on a given period 
+
+
 
 * A pool can be allocated to projects like any resource.
 * A pool can be assigned to activities like resources. The difference is that when you assign a pool, you don't specify the rate but the FTE (Full Time Equivalent) assigned to the activity. It means the number of resources that can work at the same time on the activity.
 * A pool does not have a specific capacity. It's capacity is calculated from capacity and rate of assigned resources.
-* A pool can not be a user and does not have a profile as it may not connect to the application.
+
+
+.. figure:: /images/GUI/RESOURCE_ZONE_CreatePoolResource.png
+   :alt: create a resource
+   
+   Create a new resource
+   
+
 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: |ReqFieldLegend| Required Fields
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
      - Unique Id for the pool.
-   * - Photo
-     - Photo of the pool.
    * - |RequiredField| Real name
      - Name of the pool.
    * - Initials
-     - Initials of the resource.
+     - Initials of the pool of resource.
    * - |RequiredField| Calendar
      - :ref:`Calendar<calendars>` defines the availability of the resource.
+   * - Start date
+     - Start date of activity for this pool
+   * - is a student
+     - Indicates if the pool is made up of students.       
+   * - is a outsourced
+     - Indicates if the pool is made up of outsourced.     
    * - :term:`Closed`
      - Flag to indicate that the resource is archived.
    * - Description
      - Complete description of the resource.
 
-.. compound:: **Capacity**
 
-  A pool does not have a specific capacity. It's capacity is calculated from capacity and rate of assigned resources.
+.. warning:: 
+   
+   **Limits**
+      
+   * A pool can not be a user and does not have a profile as it may not connect to the application.
+   * A pool can not be a contact
+   * A pool cannot be the responsible of an itemA pool can not be a user and does not have a profile as it may not connect to the application.
 
-.. warning:: **Limits**
 
-  A pool can not be a user and does not have a profile as it may not connect to the application.
-  
-  A pool can not be a contact
-  
-  A pool cannot be the responsible of an item
+.. _behavior-pool:
 
-.. compound:: **Real work input**
+Behaviour
+---------
 
-* When a pool is assigned to an activity, any resource of the pool can input real work on the activity
-* This possibility is restricted to the period of assignment of the resource to the pool
+  .. compound:: Automatic decrement for assigned work
+     * When you assign a pool to an activity, and then assign a resource of the pool to the same activity, then assigned work on the resource is automatically subtracted from assignment of the pool
+     * The same way, when you assign a pool to an activity, and then assign a resource of the pool to a sub-activity of this activity, then assigned work on the resource is automatically subtracted from assignment of the pool
+     * When you assign a pool to an activity, and then assign the same pool to a sub-activity of this activity, then assigned work on the pool on the sub-activity is automatically subtracted from assignment of the pool on the parent activity
 
-.. compound:: **Automatic decrement for assigned work**
+  .. compound:: Planning
 
-* When you assign a pool to an activity, and then assign a resource of the pool to the same activity, then assigned work on the resource is automatically subtracted from assignment of the pool
-* The same way, when you assign a pool to an activity, and then assign a resource of the pool to a sub-activity of this activity, then assigned work on the resource is automatically subtracted from assignment of the pool
-* When you assign a pool to an activity, and then assign the same pool to a sub-activity of this activity, then assigned work on the pool on the sub-activity is automatically subtracted from assignment of the pool on the parent activity
+     * When planning a pool, availability of unitary resources already booked on other tasks is taken into account
+     * When planning an unitary resource, availability already booked through the pool on other tasks is also taken into account (globally for all the resources of the pool)
 
-.. compound:: **Planning**
+  .. compound:: **Possible use cases for pool**
 
-* When planning a pool, availability of unitary resources already booked on other tasks is taken into account
-* When planning an unitary resource, availability already booked through the pool on other tasks is also taken into account (globally for all the resources of the pool)
-
-.. compound:: **Possible use cases for pool**
-
-* When you have a group of resources that may work on same tasks, but you don't know in advance who will work. For instance a maintenance team that may work on maintenance tasks and other project tasks
-* For macro planning
-* Define a poll for each group of resources (depending for instance on competencies)
-* On first step, assign fake resources to the pools, and plan your project with the pools : you get a first draft of your project, even before knowing who will work on the project, and without needing to go to a very detailed level of tasks (it's macro planning, you just have macro tasks)
-* Then when you know who will work on the project : just replace the fake resource with real resources : you immediately get a realistic planning taking into account availability of real resources already booked on other projects. It's still a macro planning, but realistic.
-* Then you can draw you detailed planning, just adding sub-activities to your macro tasks, and assigning real resources to the lowest level activities : when you add assigned work, it is automatically subtracted from assigned work on the pool on the macro task, and golbal assigned work on the project is constant.
+     * When you have a group of resources that may work on same tasks, but you don't know in advance who will work. For instance a maintenance team that may work on maintenance tasks and other project tasks
+     * For macro planning
+     * Define a poll for each group of resources (depending for instance on competencies)
+     * On first step, assign fake resources to the pools, and plan your project with the pools : you get a first draft of your project, even before knowing who will work on the project, and without needing to go to a very detailed level of tasks (it's macro planning, you just have macro tasks)
+     * Then when you know who will work on the project : just replace the fake resource with real resources : you immediately get a realistic planning taking into account availability of real resources already booked on other projects. It's still a macro planning, but realistic.
+     * Then you can draw you detailed planning, just adding sub-activities to your macro tasks, and assigning real resources to the lowest level activities : when you add assigned work, it is automatically subtracted from assigned work on the pool on the macro task, and golbal assigned work on the project is constant.
     
-.. compound:: **Delete an assignment**
+  .. compound:: Delete an assignment
 
-* When deleting an assignment, the remaining job is reassigned within the pool  
+     * When deleting an assignment, the remaining job is reassigned within the pool  
   
   
+
+
+
+
+
 
 
 
@@ -645,32 +691,32 @@ A Pop Up open and you can defined the Off day
   * Check the boxes corresponding to non-working days if the default settings do not suit the structure of your company
   
 
-.. compound:: **Year**
+ .. compound:: Year
 
   * Select the calendar year to create.
    
-.. compound:: **Year field**
+ .. compound:: Year field
 
   * Create the calendar from the specified year with all the features of the calendar called.
-   
-.. compound:: **Button Import this year from calendar**
+  
+ .. compound:: Button Import this year from calendar
 
   * Copy exceptions of the selected year of the selected calendar into current calendar.
 
-.. compound:: **Calendar days**
+ .. compound:: Calendar days
 
-.. figure:: /images/GUI/SEC_YearCalendar.png
-   :alt: Year calendar
-   :align: center
+  .. figure:: /images/GUI/SEC_YearCalendar.png
+     :alt: Year calendar
+     :align: center
 
 
-A calendar of selected year is displayed to give a global overview of the exceptions existing.
+  A calendar of selected year is displayed to give a global overview of the exceptions existing.
 
-* In white: days work.
-* In gray: days off.
-* In red: exception days work. 
-* In blue: exception days off. 
-* In bold: current day. 
+  * In white: days work.
+  * In gray: days off.
+  * In red: exception days work. 
+  * In blue: exception days off. 
+  * In bold: current day. 
 
-Just click on one day in the calendar to switch between off and work day.
+  Just click on one day in the calendar to switch between off and work day.
 

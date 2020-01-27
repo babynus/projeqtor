@@ -617,7 +617,7 @@ Two methods can be used to create a draft planning.
 
 This planning mode is used to define fixed duration tasks. See: :ref:`planningMode`
 
-Dependencies allow to define the execution order of tasks. See: :ref:`dependencies`
+Dependencies allow to define the execution order of tasks. See: :ref:`dependency-links`
 
 You can define this planning mode as defaut in the Activities Types screen for some types of activities you'll use in draft plannings
 
@@ -757,10 +757,10 @@ More detail, see: :ref:`meeting` screen.
 
     \newpage
 
-.. _dependencies:
+.. _dependencies-role:
 
-Dependencies
-------------
+Role of an dependency
+---------------------
 
 Dependencies allow to define the execution order of tasks (sequential or concurrent).
 
@@ -768,7 +768,7 @@ All planning elements can be linked to others.
 
 Dependencies can be managed in the Gantt chart and in screen of planning element.
 
-More detail, see: :ref:`project-planning`, :ref:`predSuces-element-section`.
+More detail, see: :ref:`dependency-links`, :ref:`predSuces-element-section`.
 
 .. note:: 
 
@@ -798,9 +798,13 @@ A delay can be defined between predecessor and successor (start).
 
     .. compound:: |iconEE| **Finish to Finish**
 
-       This dependency type can't be reproduced in ProjeQtOr.
-       
-       This involves reverse planning and may introduce overloading of resources, what is not possible in ProjeQtOr.
+       The successor should not end after the end of the predecessor, which leads to planning "as late as possible". 
+    
+       Anyway, the successor can end before the predecessor. Note that the successor "should" not end after the end of predecessor, but in some cases this will not be respected:
+    
+           * if the resource is already 100% used until the end of the successor
+           * if the successor has another predecessor of type "End-Start" or "Start-Start" and the remaining time is not enough to complete the task
+           * if the delay from the planning start date does not allow to complete the task.
 
 
 .. raw:: latex

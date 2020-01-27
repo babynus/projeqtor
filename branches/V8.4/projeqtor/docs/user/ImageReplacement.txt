@@ -162,6 +162,14 @@
 
 .. |iconSwitch| image:: images/smallButtonSwitch.png
    :alt: Button small button switch 
+
+.. |construction| image:: images/iconConstruction.png
+   :alt: under construction
+   :scale: 60
+
+.. |fixPlann| image:: images/iconFixed22.png
+   :alt: Fixed planning
+   :scale: 60
    
 .. |iconProject16| image:: images/iconProject16.png
    :alt: Icon Project
