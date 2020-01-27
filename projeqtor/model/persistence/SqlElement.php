@@ -4374,6 +4374,7 @@ abstract class SqlElement {
     }
     if ($right != 'YES') {
       $result .= '<br/>' . i18n ( 'error' . (($this->id) ? 'Update' : 'Create') . 'Rights' );
+      $result .= ' <span style="font-style:italic">('.i18n(get_class($this)).(($this->id)?' #'.$this->id:'').')</span>';
       return $result;
     }
     $isCopy = false;
