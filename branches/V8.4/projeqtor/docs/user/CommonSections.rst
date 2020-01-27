@@ -1268,10 +1268,10 @@ See: :ref:`Scheduling priority<scheduling-priority>`.
 
 .. _predSuces-element-section:
 
-Predecessor and Sucessor element sections
------------------------------------------
+Predecessor and Sucessor
+------------------------
 
-This section allows to manage dependency links between planning elements.
+This section allows to manage dependency link between planning elements.
 
 A dependency can be created from the predecessor and/or successor planning element.
 
@@ -1283,9 +1283,9 @@ Click on the name of a predecessor or successor to go directly to the element.
 
   * :ref:`project-planning`
   
-  * :ref:`dependencies`
+  * :ref:`Dependencies<dependency-links>`
   
-  * :ref:`Gantt Chart view<Gantt_DependencyLink_Milestone>`
+  * :ref:`Milestones on the Gantt Chart View<milestones-gantt>`
 
 .. figure:: /images/GUI/COMMON_ZONE_Success&Predecessor.png
    :alt: Predecessor and Successor section
@@ -1293,24 +1293,8 @@ Click on the name of a predecessor or successor to go directly to the element.
    
    Predecessor and Successor section
 
-.. tabularcolumns:: |l|l|
 
-.. list-table:: Fields of predecessors and successors lists
-   :widths: 20, 80
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - Element
-     - Type and id of the element.
-   * - Name
-     - Name of the element.
-   * - Status
-     - Actual status of the element
-   * - End Date
-     - End date of the selected item  
-
-.. rubric:: Predecessors and successors elements list management
+.. rubric:: Predecessors and successors
 
 * Click on |buttonAdd| on the corresponding section to add a dependency link.
 * Click on |buttonEdit| to edit the dependency link.
