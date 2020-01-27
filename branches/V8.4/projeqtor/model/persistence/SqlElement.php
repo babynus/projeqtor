@@ -1837,8 +1837,9 @@ abstract class SqlElement {
             $statusSub = getLastOperationStatus ( $resSub );
             if ($statusSub == 'INVALID' or $statusSub == 'ERROR') {
               $returnStatus = $statusSub;
-              $returnValue = "$object #$subObj->id <br/><br/>" . getLastOperationMessage ( $resSub );
-              break 2;
+              $returnValue = $resSub;
+              //$returnValue = "$object #$subObj->id <br/><br/>" . getLastOperationMessage ( $resSub );
+              break ;
             }
           }
         }
@@ -4722,6 +4723,7 @@ abstract class SqlElement {
     }
     if ($right != 'YES') {
       $result .= '<br/>' . i18n ( 'errorDeleteRights' );
+      $result .= ' <span style="font-style:italic">('.i18n(get_class($this)).' #'.$this->id.')</span>';
       return $result;
     }
     $relationShip = self::$_relationShip;
