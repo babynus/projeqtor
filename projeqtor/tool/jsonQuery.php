@@ -476,7 +476,7 @@
 	          	//$calculated=true;
 	          	$querySelect .= $fieldCalc . ' as ' . ((Sql::isPgsql())?'"'.$fld.'"':$fld);
 	          } else if ($externalClass=='DocumentDirectory') {
-	          	  $querySelect .= $externalTableAlias . '.' . $externalObj->getDatabaseColumnName('location') . ' as ' . ((Sql::isPgsql())?'"'.$fld.'"':$fld);	   
+	          	  $querySelect .= $externalTableAlias . '.' . $externalObj->getDatabaseColumnName('location') . ' as ' . ((Sql::isPgsql())?'"'.$fld.'"':$fld);
 	          } else {
 	          	$querySelect .= $externalTableAlias . '.' . $externalObj->getDatabaseColumnName('name') . ' as ' . ((Sql::isPgsql())?'"'.$fld.'"':$fld);
 	          }

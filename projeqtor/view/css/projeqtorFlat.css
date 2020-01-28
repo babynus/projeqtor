@@ -1510,9 +1510,9 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatBlue .iconUserParameter22 { background-image: url(customIcons/blue/iconUserParameter.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .iconUserParameter16 { background-image: url(customIcons/blue/iconUserParameter.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
-.ProjeQtOrFlatBlue .iconUnity32 { background-image: url(customIcons/blue/iconUnity.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatBlue .iconUnity22 { background-image: url(customIcons/blue/iconUnity.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatBlue .iconUnity16 { background-image: url(customIcons/blue/iconUnity.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+.ProjeQtOrFlatBlue .iconContractUnit32 { background-image: url(customIcons/blue/iconUnity.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatBlue .iconContractUnit22 { background-image: url(customIcons/blue/iconUnity.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatBlue .iconContractUnit16 { background-image: url(customIcons/blue/iconUnity.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /* D */
 /*ADD qCazelles - GANTT*/
@@ -2980,9 +2980,9 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatRed .iconUserParameter22 { background-image: url(customIcons/red/iconUserParameter.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatRed .iconUserParameter16 { background-image: url(customIcons/red/iconUserParameter.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
-.ProjeQtOrFlatRed .iconUnity32 { background-image: url(customIcons/red/iconUnity.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatRed .iconUnity22 { background-image: url(customIcons/red/iconUnity.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatRed .iconUnity16 { background-image: url(customIcons/red/iconUnity.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+.ProjeQtOrFlatRed .iconContractUnit32 { background-image: url(customIcons/red/iconUnity.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatRed .iconContractUnit22 { background-image: url(customIcons/red/iconUnity.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatRed .iconContractUnit16 { background-image: url(customIcons/red/iconUnity.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 /*ADD qCazelles - GANTT*/
 
 /* V */
@@ -4448,9 +4448,9 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconUserParameter22 { background-image: url(customIcons/green/iconUserParameter.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconUserParameter16 { background-image: url(customIcons/green/iconUserParameter.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
-.ProjeQtOrFlatGreen .iconUnity32 { background-image: url(customIcons/green/iconUnity.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatGreen .iconUnity22 { background-image: url(customIcons/green/iconUnity.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatGreen .iconUnity16 { background-image: url(customIcons/green/iconUnity.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+.ProjeQtOrFlatGreen .iconContractUnit32 { background-image: url(customIcons/green/iconUnity.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGreen .iconContractUnit22 { background-image: url(customIcons/green/iconUnity.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGreen .iconContractUnit16 { background-image: url(customIcons/green/iconUnity.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 /*ADD qCazelles - GANTT*/
 
 /* V */
@@ -5915,9 +5915,9 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconUserParameter22 { background-image: url(customIcons/grey/iconUserParameter.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGrey .iconUserParameter16 { background-image: url(customIcons/grey/iconUserParameter.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
-.ProjeQtOrFlatGrey .iconUnity32 { background-image: url(customIcons/grey/iconUnity.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatGrey .iconUnity22 { background-image: url(customIcons/grey/iconUnity.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatGrey .iconUnity16 { background-image: url(customIcons/grey/iconUnity.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+.ProjeQtOrFlatGrey .iconContractUnit32 { background-image: url(customIcons/grey/iconUnity.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGrey .iconContractUnit22 { background-image: url(customIcons/grey/iconUnity.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGrey .iconContractUnit16 { background-image: url(customIcons/grey/iconUnity.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 /*ADD qCazelles - GANTT*/
 
 /* V */
