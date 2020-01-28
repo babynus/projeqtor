@@ -133,7 +133,7 @@ class Team extends SqlElement {
     $res=new Resource();
     $resList=$res->getSqlElementsFromCriteria($crit, false);
     foreach ($resList as $res) {
-      $result[$res->id]=$res->name;
+      if (!$res->idle) $result[$res->id]=$res->name;
     }
     return $result;
   }
