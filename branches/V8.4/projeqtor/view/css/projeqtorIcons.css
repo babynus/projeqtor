@@ -1173,11 +1173,11 @@
 .ProjeQtOrFlatGreen .iconProviderPaymentType { background-image: url(customIcons/green/iconProviderPaymentType.png); }
 .ProjeQtOrFlatGrey .iconProviderPaymentType { background-image: url(customIcons/grey/iconProviderPaymentType.png); }
 /*U*/
-.iconUnity { background-image: url(images/iconUnity.png); }
-.ProjeQtOrFlatBlue .iconUnity { background-image: url(customIcons/blue/iconUnity.png); }
-.ProjeQtOrFlatRed .iconUnity { background-image: url(customIcons/red/iconUnity.png); }
-.ProjeQtOrFlatGreen .iconUnity { background-image: url(customIcons/green/iconUnity.png); }
-.ProjeQtOrFlatGrey .iconUnity { background-image: url(customIcons/grey/iconUnity.png); }
+.iconContractUnit { background-image: url(images/iconUnity.png); }
+.ProjeQtOrFlatBlue .iconContractUnit { background-image: url(customIcons/blue/iconUnity.png); }
+.ProjeQtOrFlatRed .iconContractUnit { background-image: url(customIcons/red/iconUnity.png); }
+.ProjeQtOrFlatGreen .iconContractUnit { background-image: url(customIcons/green/iconUnity.png); }
+.ProjeQtOrFlatGrey .iconContractUnit { background-image: url(customIcons/grey/iconUnity.png); }
 
 .iconAbsence { background-image: url(images/iconAbsence32.png); }
 .ProjeQtOrFlatBlue .iconAbsence { background-image: url(customIcons/blue/iconAbsence.png); }

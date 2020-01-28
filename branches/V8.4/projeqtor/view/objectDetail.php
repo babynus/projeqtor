@@ -2043,6 +2043,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             $comboClass='ComponentVersion';
           } else if ($col=='idBudgetItem') {
             $idMenu='menuBudget';
+          }else if($col='idUnitDurationContract' or $col='idUnitDurationNotice'){
+            $comboClass='ContractUnit';
           }
           $menu=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>$idMenu));
           $crit=array();
@@ -2087,7 +2089,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
               } else {
                 $idList=getUserVisibleResourcesList(true, "List");
               }
-// MTY - LEAVE SYSTEM                
+// MTY - LEAVE SYSTEM  
               if ($val and !array_key_exists($val, $idList)) {
                 $displayComboButtonCol=false;
                 $displayDirectAccessButton=false;
@@ -2101,6 +2103,19 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         if ($obj->isAttributeSetToField($col, 'canSearchForAll')) {
           $displayComboButtonCol='force';
           //$displayDirectAccessButton=false;
+        }
+        if($col='idUnitDurationContract' or $col='idUnitDurationNotice' ){
+          $accessRight=securityGetAccessRight('menu'.$classObj, 'read');
+          $idList=getUserVisibleResourcesList(true, "List");
+          $idUser=getCurrentUserId();
+          if(array_key_exists($idUser, $idList)){
+            $displayComboButtonCol=true;
+            $displayDirectAccessButton=true;
+          }
+          if($accessRight=='chips'){
+            $displayComboButtonCol=true;
+            $displayDirectAccessButton=true;
+          }
         }
         if ($col=='idProfile' and !$obj->id and !$val and ($classObj=='Resource' or $classObj=='User')) { // set default
           $val=Parameter::getGlobalParameter('defaultProfile');

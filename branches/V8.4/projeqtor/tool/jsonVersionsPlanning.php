@@ -114,7 +114,6 @@ if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
       unset($pvsArray[$idComponentVersion]);
     }
   }
-  debugLog($compWithAct);
   if(isset($displayList)){
     $compWithAct=$compWithAct+$displayList;
   }
@@ -159,7 +158,6 @@ if($showOnlyActivesVersions== 1){
     foreach ($listActiveComponentVersion as $id=>$objCvValide){
       $pvComponentActList[$objCvValide->id]=$objCvValide->id;
     }
-    debugLog($pvComponentActList);
   }
   $allProductVersionActive=$productVersionActiv+$pvComponentActList;
   if(empty($allProductVersionActive)){ 
