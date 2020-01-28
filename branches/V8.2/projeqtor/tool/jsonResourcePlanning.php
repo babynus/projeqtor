@@ -103,7 +103,6 @@ if (array_key_exists('selectResourceName',$_REQUEST)) {
 if(!$selectResource and sessionValueExists('selectResourceName')){ 
   $selectResource =trim(getSessionValue('selectResourceName'));
 }
- 
 $selectTeam=null;
 if (array_key_exists('teamName',$_REQUEST)) {
   $selectTeam=trim($_REQUEST['teamName']);
@@ -111,7 +110,6 @@ if (array_key_exists('teamName',$_REQUEST)) {
 if(!$selectTeam and sessionValueExists('teamName')){
   $selectTeam =trim(getSessionValue('teamName'));
 }
-
 // Header
 if ( array_key_exists('report',$_REQUEST) ) {
 	$headerParameters="";
@@ -538,7 +536,7 @@ if (Sql::$lastQueryNbRows == 0) {
 				if ($val=="") {$val=" ";}
 				echo (++$nbFields>1)?',':'';
 				//echo '"' . htmlEncode($id) . '":"' . htmlEncodeJson(htmlEncode($val)) . '"';
-				if ($id=='refname' or $id=='resource') {
+				if ($id=='refname' or $id=='resource' or $id=='planningmode' or substr($id,-7)!='display') { 
           $val=htmlEncode(htmlEncodeJson($val));
         } else {
           $val=htmlEncodeJson($val);
