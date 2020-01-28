@@ -617,13 +617,18 @@ class Plugin extends SqlElement {
             if ($plg and $plg->id and self::beforeVersion($plg->pluginVersion,$versPlgRequired)) {
               $plg->idle=1;
               $plg->save();
-              echo '<div class="messageWARNING">';
-              traceLog("=== PLUGIN COMPATIBILITY ISSUE =====================================");
-              echo "Plugin <b>$namePlg</b> version $plg->pluginVersion<br/>is not compatible with ProjeQtOr $version.<br/>";
-              traceLog("Plugin $namePlg version $plg->pluginVersion is not compatible with ProjeQtOr $version.");
-              echo "It has been desactivated.<br/>Please install version $versPlgRequired or over.";
-              traceLog("It has been desactivated. Please install version $versPlgRequired or over.");
+              echo '<div class="message'.(($versPlgRequired=="99.0")?'OK':'WARNING').'">';
+              traceLog("=== PLUGIN COMPATIBILITY ISSUE =====================================");                          
+              if ($versPlgRequired=="99.0") {
+                traceLog("The plug-in $namePlg is now integrated in community version.");
+                echo i18n("pluginIntegratedInCommunityVersion",array("<b>$namePlg</b>"));
+              } else {
+                traceLog("Plugin $namePlg version $plg->pluginVersion is not compatible with ProjeQtOr $version.");
+                traceLog("It has been desactivated. Please install version $versPlgRequired or over.");
+                echo i18n("pluginNotCompatibleWithCurrentVersion",array("<b>$namePlg</b>",$plg->pluginVersion,$version,$versPlgRequired));
+              }
               echo '</div>';
+              
             }
           }
         }
@@ -641,7 +646,11 @@ class Plugin extends SqlElement {
             if ($compPlgName==$plgName) {
               if (beforeVersion($plgVersion, $compPlgVersion)) {
                 //$result.=($result!="")?'<br/>':''; // Will display only lkast version to install
-                $result=i18n("pluginNotCompatibleWithCurrentVersion",array("<b>$plgName</b>",$plgVersion,$version,$compPlgVersion));
+                if ($compPlgVersion=="99.0") {
+                  $result=i18n("pluginIntegratedInCommunityVersion",array("<b>$plgName</b>"));
+                } else {
+                  $result=i18n("pluginNotCompatibleWithCurrentVersion",array("<b>$plgName</b>",$plgVersion,$version,$compPlgVersion));
+                }
               }
             }
           }
