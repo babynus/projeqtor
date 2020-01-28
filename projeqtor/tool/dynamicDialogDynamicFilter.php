@@ -73,7 +73,9 @@ Security::checkValidClass($objectClass);
                  }else{
                  	 $listField=$filterCriteria->sqlAttribute;
                  	 if ($listField=='idTargetProductVersion' or $listField=='idOriginalProductVersion') $listField='idProductVersion';
-                   htmlDrawOptionForReference($listField, null, null, true,null,null,null,null,true);
+                 	 $showIdle=true;
+                 	 if ($listField=='idResource') $showIdle=false;
+                   htmlDrawOptionForReference($listField, null, null, true,null,null,false,null,$showIdle);
                  }
                  ?>
                </select>
@@ -128,7 +130,7 @@ Security::checkValidClass($objectClass);
                           $objectClassSelect=substr($filterCriteria->sqlAttribute,2);
                           if ($objectClassSelect=='TargetProductVersion' || $objectClassSelect=='OriginalProductVersion') $objectClassSelect='ProductVersion';
                           ?>
-                          showDetail(fieldTarget,0,'<?php echo $objectClassSelect; ?>',true);
+                          showDetail(fieldTarget,0,'<?php echo $objectClassSelect; ?>',true,null,true);
                       </script>
                     </button>  
              <?php } ?> 
