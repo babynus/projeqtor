@@ -72,7 +72,6 @@ if ($className=='Project' and $resultStatus=='OK') {
 }
 BudgetElement::dispatchFinalize();
 
-debugLog ("delete result = $resultStatus");
 // Message of correct saving
 if ($resultStatus=="ERROR") {
 	Sql::rollbackTransaction();
@@ -82,7 +81,6 @@ if ($resultStatus=="ERROR") {
   echo '<div class="messageOK" >' . $result . '</div>';
   SqlElement::unsetCurrentObject();
 } else  if ($resultStatus=="INVALID") {
-  debugLog($result);
   Sql::rollbackTransaction();
   echo '<div class="messageWARNING" >' . $result . '</div>';
 } else {
