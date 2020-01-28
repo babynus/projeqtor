@@ -190,6 +190,7 @@
       <fileset dir="${src.dir}/tool">
         <exclude name="**/i18n/nls/lang.xls"/>
         <exclude name="**/parametersLocation.php"/>
+      	<exclude name="**/dynamicDialogChangeVersionList.php"/>
       </fileset>
     </copy>
   </target>
