@@ -193,7 +193,7 @@ class SupplierContractMain extends SqlElement {
   }
   
   public function save() {
-     
+    
     $result=parent::save();
     return $result;
   }

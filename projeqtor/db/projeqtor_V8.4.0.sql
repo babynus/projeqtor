@@ -24,8 +24,9 @@ INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`id
 (229,'menuSupplierContractType',79,'object',926,NULL,NULL,0),
 (230,'menuPeriod',36,'object',896,'ReadWriteList',0,'ListOfValues'),
 (231,'menuRenewal',36,'object',897,'ReadWriteList',0,'ListOfValues'),
-(232,'menuContractUnit',36,'object',898,'ReadWriteList',0,'ListOfValues'),
-(233,'menuHierarchicalBudget',151,'object', 203,'Project',0,'Financial');
+(232,'menuUnitDurationContract',36,'object',898,'ReadWriteList',0,'ListOfValues'),
+(233,'menuHierarchicalBudget',151,'object', 203,'Project',0,'Financial'),
+(234,'menuUnitDurationNotice',36,'object',899,'ReadWriteList',0,'ListOfValues');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,228,1),
@@ -33,7 +34,8 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 (1,230,1),
 (1,231,1),
 (1,232,1),
-(1,233,1);
+(1,233,1),
+(1,234,1);
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,228,8),
@@ -41,7 +43,8 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (1,230,8),
 (1,231,8),
 (1,232,8),
-(1,233,8);
+(1,233,8),
+(1,234,8);
 
 INSERT INTO `${prefix}mailable` (`id`,`name`, `idle`) VALUES 
 (42,'SupplierContract', '0');
@@ -55,7 +58,8 @@ INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
  (6,230,0,1),
  (6,231,0,1),
  (6,232,0,1),
- (6,233,0,1);
+ (6,233,0,1),
+ (6,234,0,1);
 
 CREATE TABLE `${prefix}suppliercontract` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
@@ -97,7 +101,6 @@ CREATE TABLE `${prefix}suppliercontract` (
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 CREATE INDEX suppliercontractType ON `${prefix}suppliercontract` (idSupplierContractType);
-CREATE INDEX suppliercontractPeriode ON `${prefix}suppliercontract` (idPeriod);
 CREATE INDEX suppliercontractRenewal ON `${prefix}suppliercontract` (idRenewal);
 CREATE INDEX suppliercontractPeriod ON `${prefix}suppliercontract` (idPeriod);
 
@@ -124,7 +127,7 @@ CREATE TABLE `${prefix}period` (
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
-CREATE TABLE `${prefix}contractunit` (
+CREATE TABLE `${prefix}unitdurationnotice` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `sortOrder` int(3) unsigned DEFAULT NULL,
@@ -132,7 +135,20 @@ CREATE TABLE `${prefix}contractunit` (
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
-INSERT INTO `${prefix}contractunit` ( `name`, `sortOrder`, `idle`) VALUES
+CREATE TABLE `${prefix}unitdurationcontract` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `sortOrder` int(3) unsigned DEFAULT NULL,
+  `idle` int(1) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+INSERT INTO `${prefix}unitdurationnotice` ( `name`, `sortOrder`, `idle`) VALUES
+('day',40,0),
+('month',50,0),
+('year',60,0);
+
+INSERT INTO `${prefix}unitdurationcontract` ( `name`, `sortOrder`, `idle`) VALUES
 ('day',40,0),
 ('month',50,0),
 ('year',60,0);
