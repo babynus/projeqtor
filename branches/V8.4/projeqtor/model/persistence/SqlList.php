@@ -85,10 +85,6 @@ class SqlList {
   private static function fetchList($listType,$displayCol, $selectedValue, $showIdle=false, $translate=true,$applyRestrictionClause=false) {
 //scriptLog("fetchList($listType,$displayCol, $selectedValue, $showIdle, $translate)");
     $res=array();
-    if($listType == 'UnitDurationContract' or $listType== 'UnitDurationNotice'){
-      $type= new ContractUnit();
-      $listType=$type->getDatabaseTableName();
-    }
     if (! SqlElement::class_exists($listType)) {
       debugTraceLog("WARNING : SqlElement::fetchList() called for not valid class '$listType'");
       return array();

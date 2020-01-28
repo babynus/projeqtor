@@ -4,7 +4,7 @@
  */
 
 require_once('_securityCheck.php');
-class ContractUnit extends SqlElement {
+class UnitDurationContract extends SqlElement {
 	
 	// extends SqlElement, so has $id
 	public $_sec_Description;
