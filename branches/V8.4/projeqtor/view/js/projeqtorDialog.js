@@ -660,7 +660,7 @@ function selectDetailItem(selectedValue, lastSavedName) {
   critVal=null;
   if (comboClass == 'Activity' || comboClass == 'Resource'
       || comboClass == 'Ticket') {
-    if (comboName=='filterValueList') {
+    if (comboName.substr(0,15)=='filterValueList') {
       // Do not set current project (would be project of selected item), will apply restriction to selected project
     } else {
       prj=dijit.byId('idProject');
@@ -748,7 +748,7 @@ function selectDetailItem(selectedValue, lastSavedName) {
   		}else{
   			combo.set("value", idFldVal);
   		}
-  	}else if(comboName == 'filterValueList'){
+  	}else if(comboName.substr(0,15) == 'filterValueList'){
   		//var pos = idFldVal.indexOf('_');
   		//if(pos != -1){
   		//	dijit.byId('filterValueList').set("value", idFldVal);
@@ -6250,8 +6250,8 @@ function refreshList(field, param, paramVal, selected, destination, required, pa
     if (field=='planning') {
       mySelect.set("value",selected); 
     }
-    if(destination=='filterValueList') {
-      var list=dojo.byId('filterValueList');
+    if(destination.substr(0,15)=='filterValueList') {
+      var list=dojo.byId(destination);
       selectionList=selected.split('_');
       //while (list.options.length) {list.remove(0);} // Clean combo
       items.forEach(function(item) {
