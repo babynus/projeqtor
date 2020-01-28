@@ -927,6 +927,7 @@ if (beforeVersion($currVersion,"V8.3.0")) {
     purgeFiles("../plugin/liveMeeting", null);
     disableCatchErrors();
   } else {
+    debugLog("liveMeeting not enabled");
     $nbErrorsPg=runScript('V8.3.0.lm');
   }
 }
@@ -937,6 +938,7 @@ if (beforeVersion($currVersion,"V8.3.0")) {
     purgeFiles("../plugin/kanban", null);
     disableCatchErrors();
   } else {
+    debugLog("kanban not enabled");
     $nbErrorsPg=runScript('V8.3.0.kb');
     kanbanPostInstall();
   }
