@@ -7852,7 +7852,7 @@ function endBuffering($prevSection, $included) {
       'attendees'=>array('2'=>'right', '3'=>'extra','99'=>'progress'), 
       'billline'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
       'billlineterm'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
-      'budgetsynthesis'=>array('2'=>'bottom', '3'=>'bottom','99'=>'progress'), 
+      'budgetsynthesis'=>array('2'=>'right', '3'=>'right','99'=>'progress'), 
       'calendar'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
       'checklistdefinitionline'=>array('2'=>'bottom', '3'=>'bottom','99'=>'description'),
       'checklist'=>array('2'=>'bottom', '3'=>'bottom','99'=>'checklist'),
