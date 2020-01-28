@@ -42,6 +42,7 @@ require_once "../tool/projeqtor.php";
 function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false, $critFld=null, $critVal=null, $limitToActiveProjects=true, $limitToActiveOrganizations=true,$showIdle=false) { 
 	scriptLog("      =>htmlDrawOptionForReference(col=$col,selection=$selection,object=" .debugDisplayObj($obj).",required=$required,critFld=".debugDisplayObj($critFld).",critVal=".debugDisplayObj($critVal).")");
   // Take into account array of $critFld // TODO : check where it is used 
+
 	  
 // BEGIN - ADD BY TABARY - POSSIBILITY TO HAVE AT X TIMES SAME idXXXX IN THE SAME OBJECT
     $col = foreignKeyWithoutAlias($col);
@@ -268,7 +269,9 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     $table=SqlList::getList($listType,$column,$selection, (! $obj)?!$limitToActiveProjects:false,true );
   } else {
     // None of the previous cases : no criteria and not of the expected above cases
-    $table=SqlList::getList($listType,$column,$selection, (! $obj)?!$limitToActiveProjects:false );
+    $showIdleCriteria=$showIdle;
+    if (! $obj and property_exists($listType, 'idProject'))  $showIdleCriteria=(! $limitToActiveProjects);
+    $table=SqlList::getList($listType,$column,$selection, $showIdleCriteria );
     if ($col=="idProject" or $col=="planning") { 
       // $wbsList will able to order list depending on WBS
     	$wbsList=SqlList::getList($listType,'sortOrder',$selection, (! $obj)?!$limitToActiveProjects:false );
