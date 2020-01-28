@@ -927,6 +927,7 @@ if (beforeVersion($currVersion,"V8.3.0")) {
     purgeFiles("../plugin/liveMeeting", null);
     disableCatchErrors();
   } else {
+    debugLog("liveMeeting not enabled");
     $nbErrorsPg=runScript('V8.3.0.lm');
   }
 }
@@ -937,6 +938,7 @@ if (beforeVersion($currVersion,"V8.3.0")) {
     purgeFiles("../plugin/kanban", null);
     disableCatchErrors();
   } else {
+    debugLog("kanban not enabled");
     $nbErrorsPg=runScript('V8.3.0.kb');
     kanbanPostInstall();
   }
@@ -960,8 +962,8 @@ if ($nbErrors==0) {
   traceLog("DATABASE UPDATE COMPLETED TO VERSION " . $version);
   echo "DATABASE UPDATE COMPLETED <br/>TO VERSION " . $version;
 } else {
-  traceLog($nbErrors . " ERRORS DURING UPDATE TO VERSION " . $version );
-  echo $nbErrors . " ERRORS DURING UPDATE <BR/>TO VERSION " . $version . "<br/>";
+  traceLog($nbErrors . " ERRORS DURING UPGRADE TO VERSION " . $version );
+  echo $nbErrors . " ERRORS DURING UPGRADE <BR/>TO VERSION " . $version . "<br/>";
   echo "(details of errors in log file)";
 }
 
