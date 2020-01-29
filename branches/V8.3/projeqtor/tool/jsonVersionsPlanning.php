@@ -204,18 +204,21 @@ function drawElementJsonVersion($object,$pvsArray,$displayProductversionActivity
     foreach ($pvsArray as $idComponentVersion) {
       $componentVersion = new ComponentVersion($idComponentVersion);
       $componentVersion->displayVersion();
-      $hide=SqlList::getFieldFromId('ComponentVersionType', $componentVersion->idComponentVersionType, 'lockUseOnlyForCC');
-      if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
-        foreach ($hideComponent as $id){
-          if($id==$idComponentVersion){
-            $hide=1;
+      foreach (ProductVersionStructure::getComposition($idComponentVersion) as $idComponentVer) {
+        $componentVer = new ComponentVersion($idComponentVer);
+        $hide=SqlList::getFieldFromId('ComponentVersionType', $componentVer->idComponentVersionType, 'lockUseOnlyForCC');
+        if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
+          foreach ($hideComponent as $id){
+            if($id==$idComponentVer){
+              $hide=1;
+            }
+          }
+          if(in_array($idComponentVer,$compWithAct)){
+            $hide=0;
           }
         }
-        if(in_array($idComponentVersion,$compWithAct)){
-          $hide=0;
-        }
+        if ($hide!=1) $componentVer->treatmentVersionPlanning($componentVersion,$hideComponent,$compWithAct);
       }
-      if ($hide!=1) $componentVersion->treatmentVersionPlanning($componentVersion,$hideComponent,$compWithAct);
     }
   }
 }
