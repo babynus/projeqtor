@@ -415,7 +415,10 @@
 	    foreach ($array as $val) {
 	      //$sp=preg_split('field=', $val);
 	      //$sp=explode('field=', $val);
-	      $fld=htmlExtractArgument($val, 'field');      
+	      $fld=htmlExtractArgument($val, 'field');
+// 	      if($fld="unitDurationContract" or $fld="unitDurationNotice"){
+// 	        $fld="id".$fld;
+// 	      }  
 	      if ($fld) {
 	        $numField+=1;    
 	        $formatter[$numField]=htmlExtractArgument($val, 'formatter');
