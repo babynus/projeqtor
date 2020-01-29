@@ -24,6 +24,7 @@
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 $showIdle=(sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle')==1)?1:0;
+$showHandlelProject=Parameter::getUserParameter('projectSelectorShowHandlelProject');
 $displayMode="standard";
 if (sessionValueExists('projectSelectorDisplayMode')) {
   $displayMode=getSessionValue('projectSelectorDisplayMode');
@@ -50,6 +51,26 @@ if (sessionValueExists('projectSelectorDisplayMode')) {
          </script>
 	     </div>
 	     <?php echo i18n('enterArchiveMode');?>
+	  </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;width:250px">
+	    <?php echo i18n("showHandlelProject");?>&nbsp;:&nbsp;
+	  </td>
+	  <td style="text-align: left; vertical-align: middle;width:250px" title="<?php echo i18n('showHandlelProject');?>">
+	     <div title="<?php echo i18n('showHandlelProject');?>" dojoType="dijit.form.CheckBox" type="checkbox"
+         <?php if ($showHandlelProject) echo ' checked ';?>">
+	       <script type="dojo/method" event="onChange" >
+           var callBack = function(){
+             refreshProjectSelectorList();
+             if (dojo.byId('objectClass') ) {
+               refreshGrid();
+             }
+           }
+           saveDataToSession('projectSelectorShowHandlelProject', ((this.checked)?1:0),true,callBack);
+           dijit.byId('dialogProjectSelectorParameters').hide();
+         </script>
+	     </div>
 	  </td>
   </tr>
   <tr><td></td><td>&nbsp;</td></tr>
