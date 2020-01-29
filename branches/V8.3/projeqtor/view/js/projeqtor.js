@@ -2737,7 +2737,11 @@ function setSelectedProject(idProject, nameProject, selectionField,resetPrevious
 		var pos = idProject.indexOf('_');
 		if(pos != -1){
 			idProject = idProject.split('_');
-			idProject = idProject.flat();
+			if(!dojo.isIE){
+				idProject = idProject.flat();
+			}else{
+				idProject = idProject.concat();
+			}
 		}
 		if(Array.isArray(idProject)){
 			arraySelectedProject.forEach(function(element){
@@ -6180,7 +6184,11 @@ function selectedMultiProject(){
 			setSelectedProject(arraySelectedProject[0], nameProject, 'selectedProject');
 		}else{
 			nameProject = '<i>'+i18n('selectedProject')+'</i>';
-			setSelectedProject(arraySelectedProject.flat(), nameProject, 'selectedProject');
+			if(dojo.isIE){
+				setSelectedProject(arraySelectedProject.concat(), nameProject, 'selectedProject');
+			}else{
+				setSelectedProject(arraySelectedProject.flat(), nameProject, 'selectedProject');
+			}
 		}
 	}
 }
