@@ -103,6 +103,8 @@ CREATE TABLE `${prefix}suppliercontract` (
 CREATE INDEX suppliercontractType ON `${prefix}suppliercontract` (idSupplierContractType);
 CREATE INDEX suppliercontractRenewal ON `${prefix}suppliercontract` (idRenewal);
 CREATE INDEX suppliercontractPeriod ON `${prefix}suppliercontract` (idPeriod);
+CREATE INDEX suppliercontractUnitDurationNotice ON `${prefix}suppliercontract` (idUnitDurationNotice);
+CREATE INDEX suppliercontractUnitDurationContract ON `${prefix}suppliercontract` (idUnitDurationContract);
 
 INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`) VALUES 
 ('SupplierContract', 'management assistance',10,1, 0),
