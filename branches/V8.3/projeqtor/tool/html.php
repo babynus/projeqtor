@@ -1477,7 +1477,7 @@ function htmlDisplayFilterCriteria($filterArray, $filterName="") {
   echo '<label for="filterNameDisplay" >' . i18n("filterName") . '&nbsp;:&nbsp;</label>';
   echo '<div type="text" dojoType="dijit.form.ValidationTextBox" ';
   echo ' name="filterNameDisplay" id="filterNameDisplay"';
-  echo '  style="width: 564px;" ';
+  echo '  style="width: 560px;" ';
   echo ' trim="true" maxlength="100" class="input" ';
   echo ' value="' . $filterName . '" ';
   echo ' >';
