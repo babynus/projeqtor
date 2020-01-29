@@ -727,25 +727,28 @@ static function isTheLeaveProject($id=null) {
     $handled = 0;
     if (count($subList)>0) {
       $level++;
+      $showHandlelProject=Parameter::getUserParameter('projectSelectorShowHandlelProject');
       foreach ($subList as $idPrj=>$namePrj) {
-        $subProj = new Project($idPrj);
-        if($subProj->handled == '1' and $subProj->done == '0'){
-      	   $handled = 1;
-        }else{
-          $checkList = $subProj->getRecursiveSubProjectsFlatList($limitToActiveProjects);
-          if(count($checkList)>0){
-          	foreach ($checkList as $idSubPrj=>$nameSubPrj){
-      	    $obj = new Project($idSubPrj);
-    			if($obj->handled == '1' and $obj->done == '0'){
-    				$handled = 1;
-    			}
+        if($showHandlelProject){
+          $subProj = new Project($idPrj);
+          if($subProj->handled == '1' and $subProj->done == '0'){
+          	$handled = 1;
+          }else{
+          	$checkList = $subProj->getRecursiveSubProjectsFlatList($limitToActiveProjects);
+          	if(count($checkList)>0){
+          		foreach ($checkList as $idSubPrj=>$nameSubPrj){
+          			$obj = new Project($idSubPrj);
+          			if($obj->handled == '1' and $obj->done == '0'){
+          				$handled = 1;
+          			}
+          		}
           	}
           }
+          if($handled == 0){
+          	continue;
+          }
+          $handled = 0;
         }
-        if($handled == 0){
-          continue;
-        }
-        $handled = 0;
         $showLine=true;
         $reachLine=true;
         if (array_key_exists($idPrj,self::$_drawSubProjectsDone)) {
