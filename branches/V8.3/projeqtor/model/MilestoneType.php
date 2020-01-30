@@ -73,7 +73,8 @@ class MilestoneType extends Type {
       "showInFlash"=>"hidden",
       "idPlanningMode"=>"hidden",
       "idMilestonePlanningMode"=>"required",
-      "lockNoLeftOnDone"=>"nobr",
+      "lockNoLeftOnDone"=>"hidden",
+      "_lib_statusMustChangeLeftDone"=>"hidden",
       "scope"=>"hidden");
   private static $_colCaptionTransposition = array('idMilestonePlanningMode'=>'defaultPlanningMode');
   private static $_databaseColumnName = array('idMilestonePlanningMode'=>'idPlanningMode');
