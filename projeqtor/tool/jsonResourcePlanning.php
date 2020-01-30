@@ -164,7 +164,13 @@ if ( array_key_exists('showProject',$_REQUEST) ) {
   $showProject=true;
 }
 
-$showNullAssignment=RequestHandler::getBoolean('listShowNullAssignment');  
+$showNullAssignment=false;
+if (RequestHandler::isCodeSet('listShowNullAssignment')) {
+  $showNullAssignment=RequestHandler::getBoolean('listShowNullAssignment');
+} else if (Parameter::getUserParameter('listShowNullAssignment')) {
+  $showNullAssignment=Parameter::getUserParameter('listShowNullAssignment');
+}
+
 
  if (! $showNullAssignment) {
    $queryWhere.= ($queryWhere=='')?'':' and ';
@@ -193,7 +199,7 @@ $queryWhere.= ($queryWhere=='')?'':' and ';
 $queryWhere.=  $table . ".idProject not in " . Project::getAdminitrativeProjectList() ;
 $ass=new Assignment();
 $res=new Resource();
-$querySelect .= "pe.idProject as idProj, pe.id idPe, pe.wbs wbs, pe.wbsSortable wbsSortable, pe.priority priority, pe.idplanningmode idplanningmode, pe.validatedenddate, pe.notplannedwork, ass.* , usr.fullName as name, pe.refName refName";
+$querySelect .= "pe.idProject as idProj, pe.id idPe, pe.wbs wbs, pe.wbsSortable wbsSortable, pe.priority priority, pe.idplanningmode idplanningmode, pe.validatedenddate, pe.notplannedwork  , pe.plannedenddate as peplannedend, pe.plannedstartdate as peplannedstart, ass.* , usr.fullName as name, pe.refName refName";
 $querySelect .= ", pe.topRefType as topreftype, pe.toprefid as toprefid, pe.topid as topid ";
 $queryFrom .= $table . ' pe, ' . $ass->getDatabaseTableName() . ' ass, ' . $res->getDatabaseTableName() . ' usr';
 $queryWhere= ' pe.refType=ass.refType and pe.RefId=ass.refId and usr.id=ass.idResource and ' . str_replace($table, 'pe', $queryWhere);
@@ -531,6 +537,8 @@ if (Sql::$lastQueryNbRows == 0) {
 			$idPe="";
 			if (trim($line['plannedenddate'])=='' and trim($line['realenddate'])!='') $line['plannedenddate']=$line['realenddate'];
 			if (trim($line['plannedstartdate'])=='' and trim($line['realstartdate'])!='') $line['plannedstartdate']=$line['realstartdate'];
+			if (floatval($line['plannedwork'])==0 and trim($line['plannedstartdate'])=='' and trim($line['peplannedstart'])!='') { $line['plannedstartdate']=$line['peplannedstart'];}
+			if (floatval($line['plannedwork'])==0 and trim($line['plannedenddate'])=='' and trim($line['peplannedend'])!='') { $line['plannedenddate']=$line['peplannedend'];}
 			foreach ($line as $id => $val) {
 				if ($val==null) {$val=" ";}
 				if ($val=="") {$val=" ";}
