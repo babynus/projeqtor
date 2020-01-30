@@ -79,9 +79,9 @@ class SupplierContractMain extends SqlElement {
   private static $_layout='
           <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
           <th field="name" width="15%" >${name}</th>
-          <th field="colorNameStatus" width="8%" formatter="colorNameFormatter">${idStatus}</th>
-          <th field="unitDurationContract" width="10%" >${idUnitDurationContract}</th>
-          <th field="unitDurationNotice" width="10%" >${idUnitDurationNotice}</th>
+          <th field="number" width="15%" >${number}</th>
+          <th field="nameProject" width="8%" >${idProject}</th>
+          <th field="colorNameStatus" width="10%" formatter="colorNameFormatter">${idStatus}</th>
           <th field="handled" width="5%" formatter="booleanFormatter" >${handled}</th>
           <th field="done" width="5%" formatter="booleanFormatter" >${done}</th>
           <th field="idle" width="5%" formatter="booleanFormatter" >${idle}</th>
@@ -123,6 +123,9 @@ class SupplierContractMain extends SqlElement {
   }
 
   public function setAttributes() {
+    if (!$this->id) {
+      self::$_fieldsAttributes['approved']='readonly,nobr';
+    }
   }
 // ============================================================================**********
 // GET STATIC DATA FUNCTIONS
@@ -135,6 +138,13 @@ class SupplierContractMain extends SqlElement {
   protected function getStaticLayout() {
     return self::$_layout;
   }
+  /** ==========================================================================
+   * Return the specific fieldsAttributes
+   * @return the fieldsAttributes
+   */
+  protected function getStaticFieldsAttributes() {
+    return self::$_fieldsAttributes;
+  }
   
   /** ============================================================================
    * Return the specific colCaptionTransposition
@@ -144,13 +154,6 @@ class SupplierContractMain extends SqlElement {
     return self::$_colCaptionTransposition;
   }  
 
-    /** ==========================================================================
-   * Return the specific HsAttributes
-   * @return the fieldsAttributes
-   */
-  protected function getStaticFieldsAttributes() {
-    return self::$_fieldsAttributes;
-  }
   
   /** ========================================================================
    * Return the specific databaseColumnName
