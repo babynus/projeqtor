@@ -50,16 +50,16 @@ if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
   $comp=array();
   $displayList=array();
   if($object!='ComponentVersion'){
-    foreach ($pvsArray as $id=>$idProd){
+    foreach ($pvsArray as $id=>$idProd){ // product version 
       $prod= new ProductVersion($idProd);
       $activityOfProdV=$prod->searchAtivityForVersion();
-      $activityOfCompV=(isset($activityOfProdV[0]))?$activityOfProdV[0]:array();
+      $activityOfProductV=(isset($activityOfProdV[0]))?$activityOfProdV[0]:array();
       $activityOfProdV=(isset($activityOfProdV[1]))?$activityOfProdV[1]:array();
       $listOfCompo=ProductVersionStructure::getComposition($idProd);
       foreach ($listOfCompo as $idCVs){
         $comp[$idCVs]=ProductVersionStructure::getComposition($idCVs);
       }
-      foreach ($listOfCompo as $idComponentVersion){
+      foreach ($listOfCompo as $idComponentVersion){ // component  version 
         $cp++;
         $componentVersion = new ComponentVersion($idComponentVersion);
         $result=$componentVersion->searchAtivityForVersion();
@@ -81,12 +81,12 @@ if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
           }
         }
       }
-      if(empty($activityOfProdV) and empty($activityOfCompV) and $comptDisplay == $cp){
+      if(empty($activityOfProdV) and empty($activityOfProductV) and $comptDisplay == $cp){
         unset($pvsArray[$id]);
       }
     }
-  }else {
     
+  }else {
     foreach ($pvsArray as $idComponentVersion){
       $comp[$idComponentVersion]=ProductVersionStructure::getComposition($idComponentVersion);
       $cp++;
@@ -114,10 +114,12 @@ if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
       unset($pvsArray[$idComponentVersion]);
     }
   }
+  
   if(isset($displayList)){
     $compWithAct=$compWithAct+$displayList;
   }
-  if(empty($compWithAct)){
+  
+  if((empty($compWithAct) and empty($pvsArray) and $object!='ComponentVersion') or (empty($compWithAct)and $object=='ComponentVersion')){ 
     echo '<div class="messageWARNING">'.i18n('noActivityVersions').'</div>';
     return;
   }
@@ -165,51 +167,60 @@ if($showOnlyActivesVersions== 1){
     return; 
   }
   echo '{"identifier":"id", "items":[';
-  foreach ($allProductVersionActive as $id) {
-    $productVersion= new ProductVersion($id);
-    $productVersion->displayVersion();
-    foreach (ProductVersionStructure::getComposition($productVersion->id) as $idComponentVersion) {
-      $componentVersion = new ComponentVersion($idComponentVersion);
-      $hide=SqlList::getFieldFromId('ComponentVersionType', $componentVersion->idComponentVersionType, 'lockUseOnlyForCC');
-      if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
-        foreach ($displayComponent as $idDisplayComp){
-          if($idDisplayComp==$idComponentVersion){
-            $hide=1;
+  drawElementJsonVersion($object,$allProductVersionActive,$displayProductversionActivity,$hideversionsWithoutActivity,$compWithAct,$hideComponent);
+  
+}else{
+  echo '{"identifier":"id", "items":[';
+  drawElementJsonVersion($object,$pvsArray,$displayProductversionActivity,$hideversionsWithoutActivity,$compWithAct,$hideComponent);
+}
+
+echo ']}';
+
+
+function drawElementJsonVersion($object,$pvsArray,$displayProductversionActivity,$hideversionsWithoutActivity,$compWithAct,$hideComponent){
+  if($object!='ComponentVersion'){
+    foreach ($pvsArray as $idProductVersion) {
+      $productVersion = new ProductVersion($idProductVersion);
+      $productVersion->displayVersion();
+      foreach (ProductVersionStructure::getComposition($productVersion->id) as $idComponentVersion) {
+        $componentVersion = new ComponentVersion($idComponentVersion);
+        $hide=SqlList::getFieldFromId('ComponentVersionType', $componentVersion->idComponentVersionType, 'lockUseOnlyForCC');
+        if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
+          foreach ($hideComponent as $id){
+            if($id==$idComponentVersion){
+              $hide=1;
+            }
           }
-          if(in_array($idDisplayComp, $compWithAct)){
+          if(in_array($idComponentVersion,$compWithAct)){
             $hide=0;
           }
         }
+  
+        if ($hide!=1) $componentVersion->treatmentVersionPlanning($productVersion,$hideComponent,$compWithAct);
       }
-      foreach ($componentVersionActList as $idCpActL){
-        if($idCpActL!=$idComponentVersion){
-          $hide=1;
-        }
-      }
-      if ($hide!=1) $componentVersion->treatmentVersionPlanning($productVersion,$displayComponent,$compWithAct);
     }
-  }
-///
-}else{
-  echo '{"identifier":"id", "items":[';
-  foreach ($pvsArray as $idProductVersion) {
-    $productVersion = new ProductVersion($idProductVersion);
-    $productVersion->displayVersion();
-    foreach (ProductVersionStructure::getComposition($productVersion->id) as $idComponentVersion) {
+  }else {
+    if($hideversionsWithoutActivity==1){
+      $pvsArray=$compWithAct;
+    }
+    foreach ($pvsArray as $idComponentVersion) {
       $componentVersion = new ComponentVersion($idComponentVersion);
-      
-      $hide=SqlList::getFieldFromId('ComponentVersionType', $componentVersion->idComponentVersionType, 'lockUseOnlyForCC');
-      if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
-        foreach ($displayComponent as $id){
-          if($id==$idComponentVersion){
-            $hide=1;
+      $componentVersion->displayVersion();
+      foreach (ProductVersionStructure::getComposition($idComponentVersion) as $idComponentVer) {
+        $componentVer = new ComponentVersion($idComponentVer);
+        $hide=SqlList::getFieldFromId('ComponentVersionType', $componentVer->idComponentVersionType, 'lockUseOnlyForCC');
+        if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
+          foreach ($hideComponent as $id){
+            if($id==$idComponentVer){
+              $hide=1;
+            }
+          }
+          if(in_array($idComponentVer,$compWithAct)){
+            $hide=0;
           }
         }
-        if(in_array($idComponentVersion,$compWithAct)){
-          $hide=0;
-        }
+        if ($hide!=1) $componentVer->treatmentVersionPlanning($componentVersion,$hideComponent,$compWithAct);
       }
-      if ($hide!=1) $componentVersion->treatmentVersionPlanning($componentVersion,$hideComponent,$compWithAct);
     }
   }
 }
