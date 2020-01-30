@@ -434,6 +434,8 @@ if (Sql::$lastQueryNbRows == 0) {
 		$line["realworkdisplay"]=Work::displayWorkWithUnit($line["realwork"]);
 		$line["leftworkdisplay"]=Work::displayWorkWithUnit($line["leftwork"]);
 		$line["plannedworkdisplay"]=Work::displayWorkWithUnit($line["plannedwork"]);
+		if (floatval($line['plannedwork'])==0 and trim($line['plannedstartdate'])=='' and trim($line['peplannedstart'])!='') { $line['plannedstartdate']=$line['peplannedstart'];}
+		if (floatval($line['plannedwork'])==0 and trim($line['plannedenddate'])=='' and trim($line['peplannedend'])!='') { $line['plannedenddate']=$line['peplannedend'];}
 		if ($columnsDescription['IdStatus']['show']==1 or $columnsDescription['Type']['show']==1) {
 		  $ref=$line['reftype'];
 		  $type='id'.$ref.'Type';
@@ -571,8 +573,6 @@ if (Sql::$lastQueryNbRows == 0) {
 			$idPe="";
 			if (trim($line['plannedenddate'])=='' and trim($line['realenddate'])!='') $line['plannedenddate']=$line['realenddate'];
 			if (trim($line['plannedstartdate'])=='' and trim($line['realstartdate'])!='') $line['plannedstartdate']=$line['realstartdate'];
-			if (floatval($line['plannedwork'])==0 and trim($line['plannedstartdate'])=='' and trim($line['peplannedstart'])!='') { $line['plannedstartdate']=$line['peplannedstart'];}
-			if (floatval($line['plannedwork'])==0 and trim($line['plannedenddate'])=='' and trim($line['peplannedend'])!='') { $line['plannedenddate']=$line['peplannedend'];}
 			foreach ($line as $id => $val) {
 				if ($val==null) {$val=" ";}
 				if ($val=="") {$val=" ";}
