@@ -50,16 +50,16 @@ if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
   $comp=array();
   $displayList=array();
   if($object!='ComponentVersion'){
-    foreach ($pvsArray as $id=>$idProd){
+    foreach ($pvsArray as $id=>$idProd){ // product version 
       $prod= new ProductVersion($idProd);
       $activityOfProdV=$prod->searchAtivityForVersion();
-      $activityOfCompV=(isset($activityOfProdV[0]))?$activityOfProdV[0]:array();
+      $activityOfProductV=(isset($activityOfProdV[0]))?$activityOfProdV[0]:array();
       $activityOfProdV=(isset($activityOfProdV[1]))?$activityOfProdV[1]:array();
       $listOfCompo=ProductVersionStructure::getComposition($idProd);
       foreach ($listOfCompo as $idCVs){
         $comp[$idCVs]=ProductVersionStructure::getComposition($idCVs);
       }
-      foreach ($listOfCompo as $idComponentVersion){
+      foreach ($listOfCompo as $idComponentVersion){ // component  version 
         $cp++;
         $componentVersion = new ComponentVersion($idComponentVersion);
         $result=$componentVersion->searchAtivityForVersion();
@@ -81,12 +81,11 @@ if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
           }
         }
       }
-      if(empty($activityOfProdV) and empty($activityOfCompV) and $comptDisplay == $cp){
+      if(empty($activityOfProdV) and empty($activityOfProductV) and $comptDisplay == $cp){
         unset($pvsArray[$id]);
       }
-    }
+    }  
   }else {
-    
     foreach ($pvsArray as $idComponentVersion){
       $comp[$idComponentVersion]=ProductVersionStructure::getComposition($idComponentVersion);
       $cp++;
@@ -117,7 +116,7 @@ if($displayProductversionActivity == 1  and $hideversionsWithoutActivity== 1){
   if(isset($displayList)){
     $compWithAct=$compWithAct+$displayList;
   }
-  if(empty($compWithAct)){
+  if((empty($compWithAct) and empty($pvsArray) and $object!='ComponentVersion') or (empty($compWithAct)and $object=='ComponentVersion')){ 
     echo '<div class="messageWARNING">'.i18n('noActivityVersions').'</div>';
     return;
   }
