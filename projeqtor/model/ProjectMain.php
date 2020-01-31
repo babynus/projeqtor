@@ -770,7 +770,8 @@ static function isTheLeaveProject($id=null) {
             $arrayProj = explode(',', getSessionValue('project'));
             if(in_array($idPrj, $arrayProj))$checked='checked';
           }else{
-            $checked='';
+            if (getSessionValue('project')==$idPrj) $checked='checked';
+            else $checked='';
           }
         	$prj=new Project($idPrj);
         	$left = 0;
@@ -782,7 +783,7 @@ static function isTheLeaveProject($id=null) {
         	}
           $result .='<tr>';
           if(!$drawCheckBox){
-            $result .='<td valign="top" width="20px"><div dojoType="dijit.form.CheckBox" type="checkbox" class="projectSelectorCheckbox" style="float:left;position:relative;left:'.$left.'px" id="checkBoxProj'.$idPrj.'" value="'.$idPrj.'"'.$checked.'>';
+            $result .='<td valign="top" width="20px"><div dojoType="dijit.form.CheckBox" type="checkbox" class="projectSelectorCheckbox" style="float:left;position:relative;left:'.$left.'px" id="checkBoxProj'.$idPrj.'" value="'.$idPrj.'" '.$checked.'>';
             $result .='</div></td>';
             $result .='<input type="hidden" id="projectSelectorName'.$idPrj.'" name="projectSelectorName'.$idPrj.'" value="'.$prj->name.'">';
           }
