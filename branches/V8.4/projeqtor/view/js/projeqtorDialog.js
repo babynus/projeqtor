@@ -7074,6 +7074,11 @@ function loadMenuBarItem(item, itemName, from) {
     vGanttCurrentLine=-1;
     cleanContent("centerDiv");
     loadContent("globalPlanningMain.php", "centerDiv");
+  } else if (item == 'HierarchicalBudget') {
+	objectExist='true';
+    vGanttCurrentLine=-1;
+    cleanContent("centerDiv");
+    loadContent("hierarchicalBudgetMain.php", "centerDiv");
   } else if (item == 'Imputation') {
     loadContent("imputationMain.php", "centerDiv");
   } else if (item == 'Diary') {
