@@ -465,7 +465,7 @@ public $_noCopy;
   	if (!$showIdle) {
   		$crit['idle']='0';
   	}
-  	$list=$aff->getSqlElementsFromCriteria($crit,false,null, 'startDate asc, endDate asc, idProject asc');
+  	$list=$aff->getSqlElementsFromCriteria($crit,false,null, 'startDate asc, endDate asc, idProject asc, hideAffectation asc');
   	$res=array();
   	foreach ($list as $aff) {
   		$start=($aff->startDate)?$aff->startDate:self::$minAffectationDate;
@@ -481,8 +481,8 @@ public $_noCopy;
   						$res[$r['start']]=array(
   								'start'=>$r['start'],
   								'end'=>$end,
-  								'rate'=>$aff->rate+$r['rate'],
-  								'projects'=>array_sum_preserve_keys($r['projects'],$arrAffProj));
+  								'rate'=>($aff->hideAffectation)?$r['rate']:$r['rate']+$aff->rate,
+  								'projects'=>array_sum_preserve_keys($aff->hideAffectation,$r['projects'],$arrAffProj));
   						if ($end!=$r['end']) {
 	  						$next=addDaysToDate($end, 1);
 	  						$res[$next]=array(
@@ -504,8 +504,8 @@ public $_noCopy;
   						$res[$next]=array(
   								'start'=>$next,
   								'end'=>$r['end'],
-  								'rate'=>$r['rate']+$aff->rate,
-  								'projects'=>array_sum_preserve_keys($r['projects'],$arrAffProj));
+  								'rate'=>($aff->hideAffectation)?$r['rate']:$r['rate']+$aff->rate,
+  								'projects'=>array_sum_preserve_keys($aff->hideAffectation,$r['projects'],$arrAffProj));
   						$start=($end!=$r['end'])?addDaysToDate($r['end'], 1):'';
   					}
   				}  				

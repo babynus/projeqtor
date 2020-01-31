@@ -1701,10 +1701,15 @@ function array_merge_preserve_keys() {
 function array_sum_preserve_keys() {
   $params=func_get_args();
   $result=array();
+  $hiddenAff=false;
   foreach ($params as &$array) {
+    if (! is_array($array)) {
+      $hiddenAff=$array;
+      continue;
+    }
     foreach ($array as $key=>&$value) {
       if (isset($result[$key])) {
-        $result[$key]+=$value;
+        if (! $hiddenAff) $result[$key]+=$value;
       } else {
         $result[$key]=$value;
       }
@@ -1712,7 +1717,25 @@ function array_sum_preserve_keys() {
   }
   return $result;
 }
-
+function array_max_preserve_keys() {
+  $params=func_get_args();
+  $result=array();
+  $hiddenAff=false;
+  foreach ($params as &$array) {
+    if (! is_array($array)) {
+      $hiddenAff=$array;
+      continue;
+    }
+    foreach ($array as $key=>&$value) {
+      if (isset($result[$key])) {
+        if (! $hiddenAff) $result[$key]=max($result[$key],$value);
+      } else {
+        $result[$key]=$value;
+      }
+    }
+  }
+  return $result;
+}
 /**
  * ===========================================================================
  * Check if menu can be displayed, depending of user profile
