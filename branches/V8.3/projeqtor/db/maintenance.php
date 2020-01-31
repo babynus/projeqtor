@@ -932,13 +932,12 @@ if (beforeVersion($currVersion,"V8.3.0")) {
   }
 }
 if (beforeVersion($currVersion,"V8.3.0")) {
-  if (Plugin::isPluginEnabled("kanban")) {
+  if (Plugin::isPluginInstalled("kanban")) {
     // remove old plugin
     enableCatchErrors();
     purgeFiles("../plugin/kanban", null);
     disableCatchErrors();
   } else {
-    debugLog("kanban not enabled");
     $nbErrorsPg=runScript('V8.3.0.kb');
     kanbanPostInstall();
   }
