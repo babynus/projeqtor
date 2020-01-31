@@ -943,6 +943,10 @@ if (beforeVersion($currVersion,"V8.3.0")) {
     kanbanPostInstall();
   }
 }
+if (beforeVersion($currVersion,"V8.3.3")) {
+  $plg=new Plugin();
+  $plg->purge("name='kanban'");
+}
 // To be sure, after habilitations updates ...
 Habilitation::correctUpdates();
 Habilitation::correctUpdates();
