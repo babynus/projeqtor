@@ -490,5 +490,16 @@ class ResourceTeamAffectation extends SqlElement {
     return null;
   }
   
+  public function delete() {
+    $result=parent::delete();
+    $status=getLastOperationStatus($result);
+    if ($status=='OK') {
+      $as=new AssignmentSelection();
+      $resPurge=$as->purge("idResource=$this->idResource");
+    }
+    
+    return $result;
+  }
+  
 }
 ?>
