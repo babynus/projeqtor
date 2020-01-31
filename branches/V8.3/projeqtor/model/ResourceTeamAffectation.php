@@ -74,6 +74,7 @@ class ResourceTeamAffectation extends SqlElement {
       $periods=self::buildResourcePeriods($this->idResource,false,'Resource');
       $maxExitingRate=0;
       foreach ($periods as $period){
+        $capacity=$ress->getCapacityPeriod($period['start']);
         if ($start<=$period['end'] and $end>=$period['start'] and $capacity>0) {
           $ratePeriod=floatval($period['idResource'][$this->idResource])*100/$capacity;
           if ($ratePeriod>$maxExitingRate) {
