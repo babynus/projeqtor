@@ -417,6 +417,11 @@ class Plugin extends SqlElement {
       if ($plg->idle) return false;
       return true;
     }
+    public static function isPluginInstalled($pluginName) {
+      $listPlugin=self::getLastVersionPluginList();
+      if (!isset($listPlugin[$pluginName])) return false;
+      return true;
+    }
     
     public static function getInstalledPluginNames() {
       $dir=self::getDir();
