@@ -629,9 +629,9 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     }
 // MTY - LEAVE SYSTEM    
     
-  if ( ($col=='idResource'  or $col=='idAffectable' or $col=='idResourceAll'  or $col=='idAccountable' or $col=='idResponsible') and Affectable::getVisibilityScope()!="all") {
+  if ( ($col=='idResource'  or $col=='idAffectable' or $col=='idResourceAll'  or $col=='idAccountable' or $col=='idResponsible') and Affectable::getVisibilityScope('List',($critFld=='idProject')?$critVal:null)!="all") {
     // Restrict List of affectables : restrict visibility (same Organization, or same Team or All)
-    $restrictArray = getUserVisibleResourcesList(true);
+    $restrictArray = getUserVisibleResourcesList(true, "List",'', false, false, false, false, false,($critFld=='idProject')?$critVal:null);
     if ($selection) $restrictArray[$selection]="OK";
   }
   if (($col=='idResource' or $col=='idResourceAll') and $obj and get_class($obj)==='Organization') {
