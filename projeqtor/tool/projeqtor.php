@@ -1159,7 +1159,8 @@ function getUserVisibleResourcesList($limitToActiveResources=false,
                                      $limitToEmployee=false,
                                      $limitToManagedEmployee=false,
                                      $selfIncluded=false,
-                                     $limitToUser=false) {
+                                     $limitToUser=false,
+                                     $idProject=null) {
   $crit="";
   if ($limitToActiveResources) {
     $crit="idle=0 and ";
@@ -1213,7 +1214,7 @@ function getUserVisibleResourcesList($limitToActiveResources=false,
   $resourcesList=array();
   $res=new Resource();
   if ($includePool) $res=new ResourceAll();
-  $scope=Affectable::getVisibilityScope($listScreen);
+  $scope=Affectable::getVisibilityScope($listScreen,$idProject);
   switch ($scope) {
     case 'all' :
       $crit.='(1=1)';
