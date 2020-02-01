@@ -673,10 +673,11 @@ class PlannedWork extends GeneralWork {
             } else if ($ass->uniqueResource) {
               // POOL : MUST SELECT UNIQUE           
               $minEnd='2099-12-31';
-              // Selection of resource thzt gives the soonest planning
+              // Selection of resource that gives the soonest planning
               $selectedRes=null;
               foreach($uniqueResourceAssignment[$ass->id] as $keyAssRes=>$assResSelect) {
                 $testAss=$assResSelect['ass'];
+                debugLog($testAss);
                 $testAssSelect=$assResSelect['select'];
                 if ($testAssSelect->userSelected==1) {
                   $selectedRes=$keyAssRes;
