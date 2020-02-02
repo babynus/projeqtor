@@ -677,15 +677,19 @@ class PlannedWork extends GeneralWork {
               $selectedRes=null;
               foreach($uniqueResourceAssignment[$ass->id] as $keyAssRes=>$assResSelect) {
                 $testAss=$assResSelect['ass'];
-                debugLog($testAss);
                 $testAssSelect=$assResSelect['select'];
                 if ($testAssSelect->userSelected==1) {
+                  if ($testAss->notPlannedWork==0 and isset($arrayNotPlanned[$ass->id])) unset($arrayNotPlanned[$ass->id]);
                   $selectedRes=$keyAssRes;
                   $minEnd='1900-01-01';
-                } else if ($testAss->plannedEndDate < $minEnd) {
+                } else if ($testAss->notPlannedWork>0) {
+                  $uniqueResourceAssignment[$ass->id][$keyAssRes]['ass']->plannedEndDate=null;
+                } else if ($testAss->plannedEndDate < $minEnd ) {
                   $selectedRes=$keyAssRes;
                   $minEnd=$testAss->plannedEndDate;
+                  if (isset($arrayNotPlanned[$ass->id])) unset($arrayNotPlanned[$ass->id]);
                 } else if ($testAss->plannedEndDate==$minEnd) { // equality over date
+                  if (isset($arrayNotPlanned[$ass->id])) unset($arrayNotPlanned[$ass->id]);
                   // Take the one with less planned work
                   $selectedWork=self::getPlannedWorkForResource($selectedRes,$startDate);
                   $currentWork=self::getPlannedWorkForResource($keyAssRes,$startDate);
