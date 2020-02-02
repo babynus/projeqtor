@@ -1212,7 +1212,7 @@ function getUserVisibleResourcesList($limitToActiveResources=false,
     $crit.=$idLinkObjectName." is null and ";
   }
   $resourcesList=array();
-  $res=new Resource();
+  $res=new Affectable();
   if ($includePool) $res=new ResourceAll();
   $scope=Affectable::getVisibilityScope($listScreen,$idProject);
   switch ($scope) {
@@ -1221,24 +1221,24 @@ function getUserVisibleResourcesList($limitToActiveResources=false,
       break;
     case 'orga' :
       if (Organization::getUserOrganization()) {
-        $crit.="idOrganization = ".Organization::getUserOrganization();
+        $crit.="(idOrganization = ".Organization::getUserOrganization()." or isResourceTeam=1)";
       } else {
-        $crit.="idOrganization is null";
+        $crit.="(idOrganization is null or isResourceTeam=1)";
       }
       break;
     case 'subOrga' :
       if (Organization::getUserOrganization()) {
-        $crit.="idOrganization in (".Organization::getUserOrganizationList().")";
+        $crit.="(idOrganization in (".Organization::getUserOrganizationList().") or isResourceTeam=1)";
       } else {
-        $crit.="idOrganization is null";
+        $crit.="(idOrganization is null or isResourceTeam=1)";
       }
       break;
     case 'team' :
       $aff=new Affectable(getSessionUser()->id, true);
       if ($aff->idTeam) {
-        $crit.="idTeam=$aff->idTeam";
+        $crit.="(idTeam=$aff->idTeam or isResourceTeam=1)";
       } else {
-        $crit.="idTeam is null";
+        $crit.="(idTeam is null or isResourceTeam=1)";
       }
       break;
     default :
