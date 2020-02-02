@@ -52,9 +52,9 @@ class Affectable extends SqlElement {
   private static $_databaseColumnName=array('name' => 'fullName','userName' => 'name');
   private static $_databaseCriteria=array();
   
-  private static $_visibilityScope;
+  private static $_visibilityScope=array();
 // ADD BY Marc TABARY - 2017-02-20 - ORGANIZATION VISIBILITY  
-  private static $_organizationVisibilityScope;
+  private static $_organizationVisibilityScope=array();
 // END ADD BY Marc TABARY - 2017-02-20 - ORGANIZATION VISIBILITY  
 
   // Define the layout that will be used for lists
@@ -309,26 +309,27 @@ class Affectable extends SqlElement {
   
 // ADD BY Marc TABARY - 2017-02-20 ORGANIZATION VISIBILITY  
   public static function  getOrganizationVisibilityScope($scope='List') {
-    if (self::$_organizationVisibilityScope) return self::$_organizationVisibilityScope;
+    if (isset(self::$_organizationVisibilityScope[$scope])) return self::$_organizationVisibilityScope[$scope];
     $orga='all';
     $crit=array('idProfile'=>getSessionUser()->idProfile, 'scope'=>'orgaVisibility'.$scope);
     $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', $crit);
     if ($habil and $habil->id) {
       $orga=SqlList::getFieldFromId('ListOrgaSubOrga', $habil->rightAccess,'code',false);
     }
-    self::$_organizationVisibilityScope==$orga;
+    self::$_organizationVisibilityScope[$scope]=$orga;
     return $orga;
   }
 // END ADD BY Marc TABARY - 2017-02-20 - ORGANIZATION VISIBILITY
   public static function  getVisibilityScope($scope='List',$idProject=null) {
-    if (self::$_visibilityScope) return self::$_visibilityScope;
+    $profile=getSessionUser()->getProfile($idProject);
+    if (isset(self::$_visibilityScope[$scope][$profile])) return self::$_visibilityScope[$scope][$profile];
     $res='all';
-    $crit=array('idProfile'=>getSessionUser()->getProfile($idProject), 'scope'=>'resVisibility'.$scope);
+    $crit=array('idProfile'=>$profile, 'scope'=>'resVisibility'.$scope);
     $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', $crit);
     if ($habil and $habil->id) {
       $res=SqlList::getFieldFromId('ListTeamOrga', $habil->rightAccess,'code',false);
     }
-    self::$_visibilityScope==$res;
+    self::$_visibilityScope[$scope][$profile]=$res;
     return $res;
   }
   
