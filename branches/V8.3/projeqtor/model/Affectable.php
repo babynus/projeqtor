@@ -316,7 +316,7 @@ class Affectable extends SqlElement {
     if ($habil and $habil->id) {
       $orga=SqlList::getFieldFromId('ListOrgaSubOrga', $habil->rightAccess,'code',false);
     }
-    self::$_organizationVisibilityScope==$orga;
+    //self::$_organizationVisibilityScope=$orga;
     return $orga;
   }
 // END ADD BY Marc TABARY - 2017-02-20 - ORGANIZATION VISIBILITY
@@ -328,7 +328,7 @@ class Affectable extends SqlElement {
     if ($habil and $habil->id) {
       $res=SqlList::getFieldFromId('ListTeamOrga', $habil->rightAccess,'code',false);
     }
-    self::$_visibilityScope==$res;
+    //self::$_visibilityScope=$res;
     return $res;
   }
   
