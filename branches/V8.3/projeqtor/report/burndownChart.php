@@ -136,7 +136,7 @@ $queryWhere=  " where pw.workDate>'$end'";
 $proj=new Project($idProject);
 $queryWhere.= " and pw.idProject in " . transformListIntoInClause($proj->getRecursiveSubProjectsFlatList(false, true));
 $queryWhere.= " and pw.idProject in ".transformListIntoInClause($user->getVisibleProjects(false));
-$queryOrder= "  group by pw.workDate";
+$queryOrder= "  group by pw.workDate order by pw.workDate";
 $query=$querySelect.$queryFrom.$queryWhere.$queryOrder;
 $resultPlanned=Sql::query($query);
 $tabLeftPlanned=array();
@@ -154,7 +154,8 @@ while ($line = Sql::fetchLine($resultPlanned)) {
   if ($end=="" or $end<$day) { $end=$day;}
   if ($newLastLeft==0) break;
 }
-
+ksort($tabLeftPlanned);
+debugLog($tabLeftPlanned);
 // constitute query and execute for completed tasks
 $pe=new PlanningElement();
 $peTable=$pe->getDatabaseTableName();
