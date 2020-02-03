@@ -137,7 +137,7 @@ while ($line = Sql::fetchLine($resultReal)) {
   //$tableRealSum[$day]=$sumReal;
   if ( ($start=="" or $start>$day) and $day<=$today) {$start=$day;}
   if ( ($end=="" or $end<$day) and $day<=$today) { $end=$day;}
-  if ( $endACWP="" or $endACWP<$day) {$endACWP=$day;}
+  if ( $endACWP=="" or $endACWP<$day) {$endACWP=$day;}
 }
 if (!$end) $end=$today;
 if (!$start) $start=$today;
@@ -166,7 +166,7 @@ while ($line = Sql::fetchLine($resultPlanned)) {
   //$tablePlannedSum[$day]=$sumPlanned;
   if ($start>$day) {$start=$day;}
   if ($end<$day) { $end=$day;}
-  if ( $endACWP="" or $endACWP<$day) {$endACWP=$day;}
+  if ( $endACWP=="" or $endACWP<$day) {$endACWP=$day;}
 }
 
 // constitute query and execute for baseline
@@ -189,9 +189,11 @@ while ($line = Sql::fetchLine($resultBaseline)) {
   $tableBaseline[$day]=$planned;
   if ($start>$day) {$start=$day;}
   if ($end<$day) { $end=$day;}
-  if ( $endBCWS="" or $endBCWS<$day) {$endBCWS=$day;}
+  if ( $endBCWS=="" or $endBCWS<$day) {$endBCWS=$day;}
 }
-
+ksort($tableBaseline);
+debugLog("==========================================================");
+debugLog($tableBaseline);
 if (checkNoData(array_merge($tablePlanned,$tableReal,$tableBaseline))) exit;
 
 $pe=SqlElement::getSingleSqlElementFromCriteria('PlanningElement',array('refType'=>'Project', 'refId'=>$idProject));
@@ -227,6 +229,8 @@ $resPlanned=array();
 $sumPlanned=0;
 $resBaseline=array();
 $sumBaseline=0;
+debugLog("==========================================================");
+debugLog($arrDates);
 foreach ($arrDates as $date => $period) {
   if (isset($tableReal[$date])) {
     $sumReal+=$tableReal[$date];
@@ -263,6 +267,7 @@ foreach ($arrDates as $date => $period) {
     $resBaseline[$period]=$sumBaseline;
   }
 }
+debugLog($resBaseline);
 $startDatePeriod=null;
 $endDatePeriod=null;
 if ($startDateReport and isset($arrDates[$startDateReport])) $startDatePeriod=$arrDates[$startDateReport];
