@@ -927,7 +927,6 @@ if (beforeVersion($currVersion,"V8.3.0")) {
     purgeFiles("../plugin/liveMeeting", null);
     disableCatchErrors();
   } else {
-    debugLog("liveMeeting not enabled");
     $nbErrorsPg=runScript('V8.3.0.lm');
   }
 }
