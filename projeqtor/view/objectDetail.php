@@ -7858,7 +7858,7 @@ function endBuffering($prevSection, $included) {
       'checklist'=>array('2'=>'bottom', '3'=>'bottom','99'=>'checklist'),
       'componentcomposition'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
       'componentstructure'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
-      'componentversions'=>array('2'=>'left', '3'=>'right ','99'=>'configuration'),
+      'componentversions'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
       'componentversioncomposition'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
       'componentversionstructure'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
       'context'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
