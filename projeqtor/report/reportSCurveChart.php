@@ -192,8 +192,6 @@ while ($line = Sql::fetchLine($resultBaseline)) {
   if ( $endBCWS=="" or $endBCWS<$day) {$endBCWS=$day;}
 }
 ksort($tableBaseline);
-debugLog("==========================================================");
-debugLog($tableBaseline);
 if (checkNoData(array_merge($tablePlanned,$tableReal,$tableBaseline))) exit;
 
 $pe=SqlElement::getSingleSqlElementFromCriteria('PlanningElement',array('refType'=>'Project', 'refId'=>$idProject));
@@ -229,8 +227,6 @@ $resPlanned=array();
 $sumPlanned=0;
 $resBaseline=array();
 $sumBaseline=0;
-debugLog("==========================================================");
-debugLog($arrDates);
 foreach ($arrDates as $date => $period) {
   if (isset($tableReal[$date])) {
     $sumReal+=$tableReal[$date];
@@ -267,7 +263,6 @@ foreach ($arrDates as $date => $period) {
     $resBaseline[$period]=$sumBaseline;
   }
 }
-debugLog($resBaseline);
 $startDatePeriod=null;
 $endDatePeriod=null;
 if ($startDateReport and isset($arrDates[$startDateReport])) $startDatePeriod=$arrDates[$startDateReport];
