@@ -3837,7 +3837,7 @@ progress::-webkit-progress-value {
   word-wrap:break-word;*/
   overflow: hidden;
 }
-.dojoDndMove .ticketKanBanStyle {
+.dojoDndMove .dojoDndAvatar .ticketKanBanStyle {
 	width: 95%;
 }
 #title{
