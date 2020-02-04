@@ -1966,6 +1966,8 @@ class PlannedWork extends GeneralWork {
     		$crit='1'.$str01;
     	} else if ($pm=='REGUL' or $pm=='FULL' or $pm=='HALF' or $pm=='QUART') { // REGUL or FULL or HALF or QUART)
     	  $crit='2'.$str01;
+    	} else if ($elt->indivisibility==1 and $elt->realWork>0) { // Increase priority for started tasks that should not be slit
+    		$crit='3'.$str01;
     	} else if ($pm=='FDUR') { // FDUR  
     	  $crit='4'.$str01;
     	} else if ($pm=='RECW') { // RECW
@@ -2017,6 +2019,8 @@ class PlannedWork extends GeneralWork {
   			$pe->_tmpPrec=array();
   			// retrieve prédecessors not sorted yet
   			foreach($pe->_predecessorListWithParent as $precId=>$precPe) {
+  				//if ($pe->indivisibility==1 and $pe->realWork>0 and $list[$precId]->indivisibility==0 and $list[$precId]->realWork==0 ) continue; // If current not splitable with already real work but predecessor is not, do not take predecessor into account
+  				if ($pe->indivisibility==1 and $pe->realWork>0 ) break; // If current not splitable with already real work but predecessor is not, do not take predecessor into account
   				if (! array_key_exists($precId, $result)) {
   					 $pe->_tmpPrec[$precId]=$precPe;
   				}
