@@ -5587,12 +5587,12 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
     $today = date('Y-m-d');
     $firstDay = date('Y-m-d', firstDayofWeek(substr($today, 4, 2),substr($today, 0, 4)));
     if($canSeeDirectAcces){
-      $goto="showWait();saveDataToSession('userName',$user->id,false, function() {
+      $goto="var callback = accessImputationCallBack(); 
+             saveDataToSession('userName',$user->id,false, function() {
              saveDataToSession('yearSpinner',".intval(substr($today, 0, 4)).",false, function() {
   		       saveDataToSession('weekSpinner',".substr(weekFormat($today), 5, 2).",false, function() {
       		   saveDataToSession('dateSelector','$firstDay',false, function() {
-      		   loadContent('../view/imputationMain.php?idAssignment=".$idAssignment."','centerDiv');}); }); }); });";
-      
+      		   loadContent('../view/imputationMain.php?idAssignment=".$idAssignment."','centerDiv',null,null,null,null,null,callback);}); }); }); });";
       echo '<a onClick="'.$goto.'" style="cursor: pointer;" ';
       echo ' title="'.i18n('gotoImputation').'" > '.formatSmallButton('Goto',true).'</a>';
     }
@@ -5633,11 +5633,12 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
         //gautier #directAcces
         $listUser=getListForSpecificRights('Imputation');
         if(!$assignment->isResourceTeam and isset($listUser[$assignment->idResource])){
-          $goto="showWait();saveDataToSession('userName',$assignment->idResource,false, function() {
-          saveDataToSession('yearSpinner',".intval(substr($today, 0, 4)).",false, function() {
+          $goto=" var callback = accessImputationCallBack();
+             saveDataToSession('userName',$assignment->idResource,false, function() {
+             saveDataToSession('yearSpinner',".intval(substr($today, 0, 4)).",false, function() {
   		       saveDataToSession('weekSpinner',".substr(weekFormat($today), 5, 2).",false, function() {
-                		   saveDataToSession('dateSelector','$firstDay',false, function() {
-                		   loadContent('../view/imputationMain.php?idAssignment=".$assignment->id."','centerDiv');}); }); }); });";
+      		   saveDataToSession('dateSelector','$firstDay',false, function() {
+      		   loadContent('../view/imputationMain.php?idAssignment=".$assignment->id."','centerDiv',null,null,null,null,null,callback);}); }); }); });";
           echo '<a onClick="'.$goto.'" style="cursor: pointer;" ';
           echo ' title="'.i18n('gotoImputation').'" > '.formatSmallButton('Goto',true).'</a>';
         }

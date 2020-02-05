@@ -5661,6 +5661,20 @@ function scrollInto(){
   }
 }
 
+//*************************************************************************
+//Access Imputation
+//*************************************************************************
+function accessImputationCallBack(){
+  var callback=function(){
+    if(dojo.byId('focusToday')){
+    var valTest = dojo.byId('focusToday').value;
+    dojo.window.scrollIntoView(valTest);
+    dijit.byId(valTest).focus(); }  };
+    showWait();
+    return callback;
+}
+
+
 // *************************************************************************
 // Activity Stream 
 // *************************************************************************
