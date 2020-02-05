@@ -1952,12 +1952,20 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
            </tr>
            <tr>
              <td>
-              <div dojoType="dijit.form.CheckBox" type="checkbox" id="onlyCheckedProject" name="onlyCheckedProject" 
-              style="margin-right: 10px;float: right;" onChange="showSelectedProject(this.checked);">
-              </div>
              </td>
-             <td class="dialogLabel" style="white-space:nowrap">
-               <label for="onlyCheckedProject" ><?php echo i18n("showSelectedProject"); ?></label>
+             <td>
+               <table>
+                <tr>
+                  <td>
+                    <div dojoType="dijit.form.CheckBox" type="checkbox" id="onlyCheckedProject" name="onlyCheckedProject" 
+                      style="margin-right: 5px;" onChange="showSelectedProject(this.checked);">
+                    </div>
+                  </td>
+                  <td class="dialogLabel" style="white-space:nowrap">
+                    <label for="onlyCheckedProject" ><?php echo i18n("showSelectedProject"); ?></label>
+                  </td>
+                </tr>
+               </table>
              </td>
            </tr>
            <tr>
