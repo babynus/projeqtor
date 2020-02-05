@@ -396,7 +396,12 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   if (property_exists($obj, '_sec_Assignment')) {
     $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$profile, 'scope'=>'assignmentView'));
     if ($habil and $habil->rightAccess!=1) {
-      unset($obj->_sec_Assignment);
+      //gautier #directAccess
+      $ass = new Assignment();
+      $assigned = $ass->countSqlElementsFromCriteria(array('idResource'=>getCurrentUserId(),'refId'=>$obj->id,'refType'=>get_class($obj)));
+      if(!$assigned){
+        unset($obj->_sec_Assignment);
+      }
     }
   }
   if ($print) $obj->_nbColMax=1;
@@ -2916,7 +2921,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
 
 function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, $outMode, $prevSection, $nbCol, $nbBadge=null, $included=null, $obj=null) {
   //scriptLog("startTitlePane(classObbj=$classObj, section=$section, collapsedList=array, widthPct=$widthPct, print=$print, outMode=$outMode, prevSection=$prevSection, nbCol=$nbCol, nbBadge=$nbBadge)");
-  global $comboDetail, $currentColumn, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane,$panes, $beforeAllPanes,$type, $arrayGroupe, $layout;
+  global $comboDetail, $currentColumn, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane,$panes, $beforeAllPanes,$type, $arrayGroupe, $layout,$profile;
   if (!$currentColumn) $currentColumn=0;
   if ($prevSection) {
     echo '</table>';
@@ -2981,6 +2986,12 @@ function startTitlePane($classObj, $section, $collapsedList, $widthPct, $print, 
       }
     }
     // gautier #resourceTeam
+    if($section=='Assignment'){
+      $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$profile, 'scope'=>'assignmentView'));
+      if ($habil and $habil->rightAccess!=1) {
+        $nbBadge=null;
+      }
+    }
     echo '<div dojoType="dijit.TitlePane" title="'.i18n('section'.ucfirst($sectionName)).(($nbBadge!==null)?'<div id=\''.$section.'Badge\' class=\'sectionBadge\'>'.$nbBadge.'</div>':'').'"';
     echo ' open="'.(array_key_exists($titlePane, $collapsedList)?'false':'true').'" ';
     echo ' id="'.$titlePane.'" ';
@@ -5543,9 +5554,31 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
   foreach ($lstPluginEvt as $script) {
     require $script; // execute code
   }
+  
+  //gautier #accesImputation
+  $canSeeDirectAcces = false;
+  foreach ($list as $assignment) {
+    if($assignment->idResource == $user->id){
+      $canSeeDirectAcces = true;
+      $idAssignment = $assignment->id;
+    }
+  }
+  $today = date('Y-m-d');
+  $firstDay = date('Y-m-d', firstDayofWeek(substr($today, 4, 2),substr($today, 0, 4)));
   $list=$tableObject;
   $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$profile, 'scope'=>'assignmentView'));
   if ($habil and $habil->rightAccess!=1) {
+    if($canSeeDirectAcces){
+      $goto="var callback = accessImputationCallBack();
+        saveDataToSession('userName',$user->id,false, function() {
+        saveDataToSession('yearSpinner',".intval(substr($today, 0, 4)).",false, function() {
+  		       saveDataToSession('weekSpinner',".substr(weekFormat($today), 5, 2).",false, function() {
+            		   saveDataToSession('dateSelector','$firstDay',false, function() {
+            		   loadContent('../view/imputationMain.php?idAssignment=".$idAssignment."','centerDiv',null,null,null,null,null,callback);}); }); }); });";
+      
+      echo'<tr> <td style="width:10%;"><a onClick="'.$goto.'" style="cursor: pointer;" title="'.i18n('gotoMyImputation').'" > '.formatBigButton('Goto',true).'</a> </td>
+           <td> '.i18n('gotoMyImputation'). '</td></tr>';
+    }
     return;
   }
   // $section='Assignment';
@@ -5576,16 +5609,6 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
       echo '<a onClick="addAssignment(\''.Work::displayShortWorkUnit().'\',\''.Work::getWorkUnit().'\',\''.Work::getHoursPerDay().'\');" ';
       echo ' title="'.i18n('addAssignment').'" > '.formatSmallButton('Add').'</a>';
     }
-    //gautier #accesImputation
-    $canSeeDirectAcces = false;
-    foreach ($list as $assignment) {
-      if($assignment->idResource == $user->id){
-        $canSeeDirectAcces = true;
-        $idAssignment = $assignment->id;
-      }
-    }
-    $today = date('Y-m-d');
-    $firstDay = date('Y-m-d', firstDayofWeek(substr($today, 4, 2),substr($today, 0, 4)));
     if($canSeeDirectAcces){
       $goto="var callback = accessImputationCallBack(); 
              saveDataToSession('userName',$user->id,false, function() {
@@ -5594,7 +5617,20 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
       		   saveDataToSession('dateSelector','$firstDay',false, function() {
       		   loadContent('../view/imputationMain.php?idAssignment=".$idAssignment."','centerDiv',null,null,null,null,null,callback);}); }); }); });";
       echo '<a onClick="'.$goto.'" style="cursor: pointer;" ';
-      echo ' title="'.i18n('gotoImputation').'" > '.formatSmallButton('Goto',true).'</a>';
+      echo ' title="'.i18n('gotoMyImputation').'" > '.formatSmallButton('Goto',true).'</a>';
+    }
+    echo '</td>';
+  }if(!$print and !$canUpdate ){
+    echo '<td class="assignHeader" style="width:10%;vertical-align:middle;">';
+    if($canSeeDirectAcces){
+          $goto="var callback = accessImputationCallBack();
+          saveDataToSession('userName',$user->id,false, function() {
+          saveDataToSession('yearSpinner',".intval(substr($today, 0, 4)).",false, function() {
+  		    saveDataToSession('weekSpinner',".substr(weekFormat($today), 5, 2).",false, function() {
+          		   saveDataToSession('dateSelector','$firstDay',false, function() {
+          		   loadContent('../view/imputationMain.php?idAssignment=".$idAssignment."','centerDiv',null,null,null,null,null,callback);}); }); }); });";
+      echo '<a onClick="'.$goto.'" style="cursor: pointer;" ';
+      echo ' title="'.i18n('gotoMyImputation').'" > '.formatSmallButton('Goto',true).'</a>';
     }
     echo '</td>';
   }
@@ -5651,7 +5687,21 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
         }
         echo '</td>';
       }
-      
+    }elseif(!$print and !$canUpdate and $workVisible and !$assignment->idle and !$assignment->supportedAssignment){
+      echo '<td class="assignData'.$idleClass.'" style="width:10%;text-align:center;white-space:nowrap;vertical-align:middle">';
+        //gautier #directAcces
+        $listUser=getListForSpecificRights('Imputation');
+        if(!$assignment->isResourceTeam and isset($listUser[$assignment->idResource])){
+          $goto=" var callback = accessImputationCallBack();
+          saveDataToSession('userName',$assignment->idResource,false, function() {
+          saveDataToSession('yearSpinner',".intval(substr($today, 0, 4)).",false, function() {
+  		    saveDataToSession('weekSpinner',".substr(weekFormat($today), 5, 2).",false, function() {
+          saveDataToSession('dateSelector','$firstDay',false, function() {
+          loadContent('../view/imputationMain.php?idAssignment=".$assignment->id."','centerDiv',null,null,null,null,null,callback);}); }); }); });";
+          echo '<a onClick="'.$goto.'" style="cursor: pointer;" ';
+          echo ' title="'.i18n('gotoImputation').'" > '.formatSmallButton('Goto',true).'</a>';
+        }
+        echo '</td>';
     }
     echo '<td class="assignData'.$idleClass.'" style="width:'.(($print)?'40':'30').'%;vertical-align:middle">';
     echo '<table width="100%"><tr>';
