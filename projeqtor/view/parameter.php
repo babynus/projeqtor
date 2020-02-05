@@ -506,7 +506,7 @@ function drawTableFromObjectList($objectList) {
   	echo ' onHide="saveCollapsed(\'' . $titlePane . '\');"';
   	echo ' onShow="saveExpanded(\'' . $titlePane . '\');"';
   	echo ' title="' . i18n('sectionButtons') . '">';
-  	htmlDrawCrossTable(array('combo'=>i18n('comboDetailAccess'),'checklist'=>i18n('checklistAccess'),'joblist'=>i18n('joblistAccess'),'multipleUpdate'=>i18n('buttonMultiUpdate'),'generateProjExpense'=>i18n('generateProjectExpenseButton')), 'scope', 'profile', 'idProfile', 'habilitationOther', 'rightAccess', 'list', 'listYesNo') ;
+  	htmlDrawCrossTable(array('combo'=>i18n('comboDetailAccess'),'checklist'=>i18n('checklistAccess'),'joblist'=>i18n('joblistAccess'),'multipleUpdate'=>i18n('buttonMultiUpdate')), 'scope', 'profile', 'idProfile', 'habilitationOther', 'rightAccess', 'list', 'listYesNo') ;
   	echo '</div><br/>';
   	$titlePane="habilitationOther_PlanningRight";
   	echo '<div dojoType="dijit.TitlePane"';
@@ -542,7 +542,7 @@ function drawTableFromObjectList($objectList) {
   	echo ' onHide="saveCollapsed(\'' . $titlePane . '\');"';
   	echo ' onShow="saveExpanded(\'' . $titlePane . '\');"';
   	echo ' title="' . i18n('sectionDelete') . '">';
-  	htmlDrawCrossTable(array('canChangeNote'=>i18n('canChangeNote'),'canDeleteAttachement'=>i18n('canDeleteAttachement'),'canForceDelete'=>i18n('canForceDelete'), 'canForceClose'=>i18n('canForceClose'),'canUpdateCreation'=>i18n('canUpdateCreationInfo'),'viewComponents'=>i18n('viewComponents')), 'scope', 'profile', 'idProfile', 'habilitationOther', 'rightAccess', 'list', 'listYesNo') ;
+  	htmlDrawCrossTable(array('canChangeNote'=>i18n('canChangeNote'),'canDeleteAttachement'=>i18n('canDeleteAttachement'),'canForceDelete'=>i18n('canForceDelete'), 'canForceClose'=>i18n('canForceClose'),'canUpdateCreation'=>i18n('canUpdateCreationInfo'),'viewComponents'=>i18n('viewComponents'),'generateProjExpense'=>i18n('generateProjectExpenseButton')), 'scope', 'profile', 'idProfile', 'habilitationOther', 'rightAccess', 'list', 'listYesNo') ;
   	echo '</div><br/>';
   	$titlePane="habilitationOther_ResourceVisibility";
   	echo '<div dojoType="dijit.TitlePane"';
