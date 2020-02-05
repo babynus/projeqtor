@@ -4426,6 +4426,7 @@ function debugPrintTraceStack() {
 }
 
 function formatIcon ($class, $size, $title=null, $withHighlight=false) {
+  $title=htmlEncode($title,"quote");
 // MTY - LEAVE SYSTEM    
     $hr="";
     $menuName = "menu".$class;
