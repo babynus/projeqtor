@@ -830,6 +830,9 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
           } else {$sepCharW = $sepChar;}
           $sep.=$sepCharW;
         }
+        if(isset($listBudgetElementary)){
+          if( in_array($key, $listBudgetElementary))continue;
+        }
         $val =$sep.$val;
       }
 // END ADD BY Marc TABARY - 2017-02-12 - ORGANIZATIONS COMBOBOX LIST
