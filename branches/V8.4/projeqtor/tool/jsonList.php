@@ -216,6 +216,7 @@ if ($type == 'empty') {
     $user = getSessionUser ();
     $list = $user->getVisibleProjects ();
   }else if($dataType=='idBudgetParent'){
+    $listBudgetElementary = SqlList::getList('BudgetItem','id',null,true);
     $showIdle = false;
     if($critValue =='on')$showIdle = true; 
     $budgetList=SqlList::getList('Budget','bbsSortable',$selected,$showIdle);
@@ -224,6 +225,7 @@ if ($type == 'empty') {
     $bbsLevelArray=array();
     $list = array();
     foreach($budgetList as $key => $val){
+      if( in_array($key, $listBudgetElementary))continue;
       $budgetOrder = $budgetList[$key];
       $budgetTest=$budgetOrder;
       $level=1;
