@@ -62,7 +62,7 @@ $query='select ' . $querySelect
 $result=Sql::query($query);
 
 // Header
-echo '<table id="budgetTable" dojoType="dojo.dnd.Source" align="left" width="70%" style="margin-top:1%">';
+echo '<table id="budgetTable" dojoType="dojo.dnd.Source" align="left" width="70%" style="">';
 echo '<TR class="ganttHeight" style="height:32px">';
 echo '  <TD class="reportTableHeader" style="width:10px; border-right: 0px;"></TD>';
 echo '  <TD class="reportTableHeader" style="width:200px; border-left:0px; text-align: left;">' . i18n('colTask') . '</TD>';

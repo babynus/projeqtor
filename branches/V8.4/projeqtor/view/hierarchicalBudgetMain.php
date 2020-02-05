@@ -198,8 +198,80 @@ if (property_exists($objectClass,'idStatus')) {
 }
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="HierarchicalBudget" />
+<input type="hidden" name="objectClass" id="objectClass" value="Budget" />
+<input type="hidden" id="forceRefreshMenu" value="HierarchicalBudget" />
 <input type="hidden" name="HierarchicalBudget" id="HierarchicalBudget" value="true" />
 <div id="mainDivContainer" class="container" dojoType="dijit.layout.BorderContainer" onclick="hideDependencyRightClick();">
+<div dojoType="dijit.layout.ContentPane" region="top" id="listHeaderDiv" style="width:50%;">
+  <form dojoType="dijit.form.Form" id="quickSearchListForm" action="" method="" >
+  <script type="dojo/method" event="onSubmit" >
+    quickSearchExecute();
+    return false;        
+  </script>
+  <div class="listTitle" id="quickSearchDiv" 
+     style="display:none; height:100%; width: 100%; position: absolute;z-index:9">
+    <table >
+      <tr height="100%" style="vertical-align: middle;">
+        <td style="width:50px;min-width:50px" align="center">  
+         <div style="position:absolute;left:0px;width:43px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>      
+         <div style="z-index:9;position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" /></div>    
+        </td>
+        <td><span class="title" ><?php echo i18n("menu" . $objectClass);?></span></td>
+        <td style="text-align:right;" width="200px">
+                <span class="nobr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <?php echo i18n("quickSearch");?>
+                &nbsp;</span> 
+        </td>
+        <td style="vertical-align: middle;">
+          <div title="<?php echo i18n('quickSearch')?>" type="text" class="filterField rounded" dojoType="dijit.form.TextBox" 
+             id="quickSearchValue" name="quickSearchValue"
+             style="width:200px;">
+          </div>
+        </td>
+	      <td style="width:36px">            
+	        <button title="<?php echo i18n('quickSearch')?>"  
+	          dojoType="dijit.form.Button" 
+	          id="listQuickSearchExecute" name="listQuickSearchExecute"
+	          iconClass="dijitButtonIcon dijitButtonIconSearch" class="detailButton" showLabel="false">
+	          <script type="dojo/connect" event="onClick" args="evt">
+              //dijit.byId('quickSearchListForm').submit();
+              quickSearchExecute();
+          </script>
+	        </button>
+	      </td>      
+        <td style="width:36px">
+          <button title="<?php echo i18n('comboCloseButton')?>"  
+            dojoType="dijit.form.Button" 
+            id="listQuickSearchClose" name="listQuickSearchClose"
+            iconClass="dijitButtonIcon dijitButtonIconUndo" class="detailButton" showLabel="false">
+            <script type="dojo/connect" event="onClick" args="evt">
+              quickSearchClose();
+            </script>
+          </button>
+        </td>    
+      </tr>
+    </table>
+  </div>
+  </form>
+<table width="100%" class="listTitle" >
+  <tr >
+    <td style="width:50px;min-width:43px;" align="center">
+       <div style="position:absolute;left:0px;width:43px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>
+       <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" /></div>
+    </td>
+    <td class="title" style="height:35px;width:30%;">
+      <div style="width:100%;height:100%;position:relative;">
+        <div id="menuName" style="width:100%;position:absolute;top:8px;text-overflow:ellipsis;overflow:hidden;"><span id="classNameSpan" style="padding-left:5px;"><?php echo i18n("menuHierarchicalBudget");?></span></div>
+      </div>
+    </td>
+    <td>   
+      <form dojoType="dijit.form.Form" id="listForm" action="" method="" >
+            
+      </form>
+    </td>
+  </tr>
+</table>
+</div>
   <div id="listDiv" dojoType="dijit.layout.ContentPane" region="<?php  echo $positionListDiv;?>" splitter="true" 
    style="<?php if($positionListDiv=='top'){echo "height:".$listHeight;}else{ echo "width:".$tableWidth[0];}?>">
     <script type="dojo/connect" event="resize" args="evt">
