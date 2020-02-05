@@ -152,13 +152,6 @@ INSERT INTO `${prefix}period` (`id`, `name`,  `sortOrder`, `idle`) VALUES
 -- ======================================
 -- Habilitation Other
 -- ======================================
-INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) VALUES
-(1, 'generateProjExpense', 1),
-(2, 'generateProjExpense', 1),
-(3, 'generateProjExpense', 1),
-(4, 'generateProjExpense', 1),
-(5, 'generateProjExpense', 1),
-(6, 'generateProjExpense', 1),
-(7, 'generateProjExpense', 1);
+INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT `profile`.id , 'generateProjExpense', 1 FROM `profile`;
 
 ALTER TABLE `term` ADD `idResource` int(12) unsigned DEFAULT NULL , ADD `done` int(1) unsigned DEFAULT '0';
