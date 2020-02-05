@@ -177,7 +177,11 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     dojo.require("dojox.fx");
     dojo.require("dojox.grid.DataGrid");
     dojo.require("dojox.image.Lightbox");
-    dojo.subscribe("/dnd/drop", function(source, nodes, copy, target){  
+    dojo.subscribe("/dnd/drop", function(source, nodes, copy, target){
+        console.log(source);
+        console.log(nodes);
+        console.log(copy);
+        console.log(target);  
       if(target.id == null){
       //gautier #translationApplication
         //if (target.id == null) we are in dgrid DROP , nothing to do.
@@ -1947,12 +1951,13 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
              </td>
            </tr>
            <tr>
-             <td class="dialogLabel">
-               <label for="onlyCheckedProject" ><?php echo i18n("showSelectedProject").'&nbsp;:&nbsp;' ?></label>
-             </td>
              <td>
-              <div dojoType="dijit.form.CheckBox" type="checkbox" id="onlyCheckedProject" name="onlyCheckedProject" style="margin-left:5px;" onChange="showSelectedProject(this.checked);">
+              <div dojoType="dijit.form.CheckBox" type="checkbox" id="onlyCheckedProject" name="onlyCheckedProject" 
+              style="margin-right: 10px;float: right;" onChange="showSelectedProject(this.checked);">
               </div>
+             </td>
+             <td class="dialogLabel" style="white-space:nowrap">
+               <label for="onlyCheckedProject" ><?php echo i18n("showSelectedProject"); ?></label>
              </td>
            </tr>
            <tr>

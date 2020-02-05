@@ -25,7 +25,7 @@ INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`id
 (230,'menuPeriod',36,'object',896,'ReadWriteList',0,'ListOfValues'),
 (231,'menuRenewal',36,'object',897,'ReadWriteList',0,'ListOfValues'),
 (232,'menuUnitDurationContract',36,'object',898,'ReadWriteList',0,'ListOfValues'),
-(233,'menuHierarchicalBudget',151,'object', 203,'Project',0,'Financial'),
+(233,'menuHierarchicalBudget',151,'item', 203,'Project',0,'Financial'),
 (234,'menuUnitDurationNotice',36,'object',899,'ReadWriteList',0,'ListOfValues');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
