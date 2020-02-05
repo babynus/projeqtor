@@ -315,7 +315,7 @@ if (Sql::$lastQueryNbRows == 0) {
 			$arrayResource[$idResource]=array();;
 			$resAr=array();
 			$resAr["refname"]=$line['name'];
-			$res=new ResourceAll($idResource);
+			$res=new ResourceAll($idResource,true);
 			if ($res->isResourceTeam) {
 			  $resAr["reftype"]='ResourceTeam';
 			} else {
