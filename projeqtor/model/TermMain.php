@@ -80,7 +80,7 @@ class TermMain extends SqlElement {
                                           "plannedDate"=>"readonly"
   );  
   
-  private static $_colCaptionTransposition = array("idUser"=>"issuer");
+  private static $_colCaptionTransposition = array("idUser"=>"issuer",'idResource'=>"responsible");
   
   //private static $_databaseColumnName = array('realAmount'=>'amount');
    /** ==========================================================================

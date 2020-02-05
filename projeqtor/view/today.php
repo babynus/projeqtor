@@ -563,7 +563,24 @@ function showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting,
         $echeance=($elt->actualEndDate)?$elt->actualEndDate:$elt->initialEndDate;
       } else if ($class=="Action") {
         $echeance=($elt->actualDueDate)?$elt->actualDueDate:$elt->initialDueDate;
+      } else if ($class=='CallForTender') {
+      	$echeance=$elt->expectedTenderDateTime;
+      } else if ($class=='Tender') {
+      	$echeance=($elt->offerValidityEndDate)?$elt->offerValidityEndDate:$elt->expectedTenderDateTime;
+      } else if ($class=='ProviderOrder') {
+      	$echeance=$elt->deliveryExpectedDate;      	
+      } else if ($class=='ProviderTerm' or $class=='Bill') {
+      	$echeance=$elt->date;      	
+      } else if ($class=='ProviderBill') {
+      	$echeance=($elt->paymentDueDate)?$elt->paymentDueDate:$elt->date;      	
+      } else if ($class=='Quotation') {
+       $echeance=$elt->validityEndDate;
+      } else if ($class=='Command') {
+      	$echeance=($elt->validatedEndDate)?$elt->validatedEndDate:$elt->initialEndDate;      	
+      } else if ($class=='Term') {
+      	$echeance=($elt->date)?$elt->date:(($elt->validatedDate)?$elt->validatedDate:$elt->plannedDate);      	
       }
+      
       $listEcheance[$echeance.'#'.$class.'#'.$elt->id]=$elt;
     }
     ksort($listEcheance);
