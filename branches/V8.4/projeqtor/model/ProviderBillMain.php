@@ -518,7 +518,7 @@ class ProviderBillMain extends SqlElement {
       self::$_fieldsAttributes['paymentAmount']='readonly';
       self::$_fieldsAttributes['paymentDone']='readonly';
     }
-    $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>getSessionUser()->idProfile, 'scope'=>'generateProjExpense'));
+    $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>getSessionUser()->getProfile($this->idProject), 'scope'=>'generateProjExpense'));
     if($this->idProjectExpense or $habil->rightAccess == '2'){
       self::$_fieldsAttributes['_button_generateProjectExpense']='hidden';
     }
