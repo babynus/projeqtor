@@ -4,7 +4,7 @@
 
 .. index:: Transverse Features
 
-.. _ActivityStream:
+.. _activity-stream:
 
 Activity Stream
 ---------------
@@ -43,7 +43,7 @@ in either case, the notes are displayed or not.
 
     \newpage
 
-.. _Global-View:
+.. _global-view:
 
 Global view
 -----------

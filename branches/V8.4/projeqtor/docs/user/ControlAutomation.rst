@@ -183,7 +183,7 @@ Likewise with ${idproject} to display the identification number of it
      
 Other tags are available as parameters for email titles
 
-More details, see :ref:`Global Parameters<mailing_parameters>`
+More details, see :ref:`Global Parameters<mail>`
 
 .. topic:: some specific tags can also be used
    
@@ -343,20 +343,47 @@ It is possible to define a default delay for tickets, for each ticket type and e
 Indicators
 ----------
 
-It is possible to define indicators on each type of element.
+.. figure:: /images/GUI/CONTROLAUTO_ZONE_Indicators.png
+   :alt: Indicators
+   
+   Indicators
+
+It is possible to define indicators on most elements.
+You can set the indicators on:
+
+* actions
+* activities
+* customer invoices
+* customer invoice exchanges
+* customer orders
+* customer quotes
+* individual expenses
+* issues
+* meetings
+* milestones
+* supplier orders
+* projects
+* project expenses
+* supplier invoices
+* supplier offers
+* questions
+* requirements
+* risks
+* payment deadlines to suppliers
+* test sessions
+* and finally the tickets
 
 Depending on type of elements the type of indicators that can be selected in list differs.
 
-Some indicators are based on delay (due date), some on work, some on cost.
+Some indicators are based on delay (due date), some on work, others on cost.
 
-For each indicator a warning value and an alert value can be defined.
+For each indicator, a warning value and an alert value can be defined in days or hours (working or not).
 
 .. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field

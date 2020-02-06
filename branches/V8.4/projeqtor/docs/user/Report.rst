@@ -13,10 +13,10 @@ Reports
 *******
 
 
-.. image:: /images/GUI/REPORT_SCR_DisplayReport.png
+.. figure:: /images/GUI/REPORT_SCR_DisplayReport.png
    :alt: Reports screen
    
-   report screen with a report selected in direct view
+   Reports screen
    
 A list of reports is available in different categories.
 
@@ -25,7 +25,7 @@ A list of reports is available in different categories.
    :align: center
    
 #. Select a category |one| and the subcategories will appear in replacement
-#. the Selected report |two| will appear under the separator |three|.
+#. The selected report will appear in the |two| under the separator |three|.
 #. The specific parameters |four| |five| for this report appears.
 #. Update the parameters |five| to get the information you need.
 #. Click on |buttonIconDisplay| to produce the report. |four|
@@ -43,8 +43,48 @@ A list of reports is available in different categories.
 * Click on |buttonIconPrint| to get a printable version of the report.
 * Click on |buttonIconPdf| to export the report as PDF format.
 * Click on |buttonIconToday| to display this report on the Today screen.
-* Click on |buttonIconReportFavorite| to define this report as favorite. This report will be available in your favorite reports list. 
+* Click on |buttonIconReportFavorite| to define this report as favorite. 
 * Click on |buttonIconEmail| to schedule the sending of the selected report
+
+
+
+.. raw:: latex
+
+    \newpage
+
+.. index:: Report (Today)
+
+.. _today_report:
+
+Today Screen Report
+-------------------
+
+You can add reports to your home screen today.
+
+* Select the report you want to see quickly on this screen.
+
+* Click on the button |buttonIconToday|
+
+* On the Today screen, the report is displayed at the bottom of the page
+
+* Click on the setting icon on the screen today to change the location of the report
+
+.. note:: 
+
+   **Update**
+   
+   The displayed report is updated automatically. Any modification made to the content of the latter is reflected on the screen today.
+
+
+.. figure:: /images/GUI/REPORT_SCR_DisplayToday.png
+   :alt: Display a report on the today screen
+   
+   Display a report on the today screen
+  
+
+Click the parameter button to define the location of the report (s) on the Today screen.
+
+Click on the handles to move the item in the list
 
 .. raw:: latex
 
@@ -139,25 +179,8 @@ To view all scheduled reports for sending, go to Scheduled Report in the Tools m
 
 .. figure:: /images/GUI/REPORT_BOX_SendingMailReport.png
    :alt: Sending a report to email
-   :align: center
-
    
-   
-   
-   
-   
-   
-   
-.. raw:: latex
-
-    \newpage
-
-.. index:: Report (Explanation of reading)
-
-.. _explanation_report:
-
-Explanation of reading
-----------------------
+   Sending a report to email
 
 
 

@@ -1715,47 +1715,6 @@ Allows to hide or show the menu section.
 
 
 
-
-
-
-
-
-
-
-
-.. raw:: latex
-
-    \newpage
-
-.. index:: Internal alert (Display)
-.. index:: Indicator (Internal alert)
-
-Internal alert
---------------
-
-Internal alerts can be sent to users.
-
-An internal alert can be sent by the administrator or by monitoring indicators.
-
- .. compound:: By the administrator
-
-    The administrator can send internal alert by administration console. (See: :ref:`admin-console`)
-    
-    The message will be received by user via message pop-up.
-
- .. compound:: Monitoring indicators   
-
-    Monitoring indicators send only warning and alert message.
-    
-    The message contains information that explains the alert:
-
-      * Item id and type.  
-      * Indicator description. 
-      * Target value.
-      * Alert or warning value.
-
-    The indicators are defined in :ref:`indicator` screen.    
-
 .. raw:: latex
 
     \newpage
