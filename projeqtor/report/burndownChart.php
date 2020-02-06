@@ -155,7 +155,6 @@ while ($line = Sql::fetchLine($resultPlanned)) {
   if ($newLastLeft==0) break;
 }
 ksort($tabLeftPlanned);
-debugLog($tabLeftPlanned);
 // constitute query and execute for completed tasks
 $pe=new PlanningElement();
 $peTable=$pe->getDatabaseTableName();
