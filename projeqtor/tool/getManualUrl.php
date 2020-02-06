@@ -174,7 +174,7 @@ $url=$userRoot.$userLink['Welcome'];
 if ($section and isset($userLink[$section])) {
   $url=$userRoot.$userLink[$section];
 } 
-if ($tab) {
+if ($tab and strpos($url,'#')===false) {
   $url.='#'.$tab;
 }
 echo $url;
