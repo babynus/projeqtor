@@ -197,7 +197,7 @@ function timeToTimeStamp($time){
 	<div id="titleLiveMeeting" class="listTitle"
 		style="z-index: 3; overflow: visible"
 		dojoType="dijit.layout.ContentPane" region="top">
-	  <input type="hidden" name="objectClassManual" id="objectClassManual" value="Plugin_liveMeeting" />
+	  <input type="hidden" name="objectClassManual" id="objectClassManual" value="LiveMeeting" />
 		<table width="100%">
 			<tr height="100%" style="vertical-align: middle;height:34px;">
 				<td width="50px" align="middle"><?php echo formatIcon('Meeting', 32,null,true)?></td>

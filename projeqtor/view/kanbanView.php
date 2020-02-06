@@ -85,7 +85,7 @@ $hasVersion=(property_exists($typeKanbanC,'idTargetProductVersion'))?true:false;
     
       </tr>
     </table>
-    <input type="hidden" name="objectClassManual" id="objectClassManual" value="Plugin_kanban" />
+    <input type="hidden" name="objectClassManual" id="objectClassManual" value="Kanban" />
     <input type="hidden" id="objectClassList" name="objectClassList" value="<?php echo $typeKanbanC;?>">
     <input dojoType="dijit.form.TextBox" type="hidden" id="refreshActionAdd<?php echo $typeKanbanC;?>" value="-1" onchange="if(dijit.byId(this.id).get('value')!=-1)loadContent('../view/kanbanView.php?idKanban=<?php echo $idKanban;?>', 'divKanbanContainer');dijit.byId(this.id).set('value',-1);">
     <input dojoType="dijit.form.TextBox" type="hidden" id="objectClass" name="objectClass" value="<?php echo $typeKanbanC;?>">
