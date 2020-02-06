@@ -45,11 +45,15 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
 	if($col =="idBudgetItem"){
 	  $col='idBudget';
 	  $listShowIdle = false;
-	  if(sessionValueExists('listShowIdleBudget')){
+	  if(sessionValueExists('listShowIdleBudget') and get_class($obj)=='Budget'){
 	    $listShowIdle = getSessionValue('listShowIdleBudget');
 	    if($listShowIdle=="on")$showIdle=true;
 	  }
-	  $listBudgetElementary = SqlList::getList('BudgetItem','id',null,$showIdle);
+	  if(get_class($obj)=='Budget'){
+	   $listBudgetElementary = SqlList::getList('BudgetItem','id',null,$showIdle);
+	  }else{
+	   $listBudgetElementary=SqlList::getListWithCrit('Budget',array('elementary'=>'1','isUnderConstruction'=>'0','idle'=>'0','cancelled'=>'0'),'id');
+	  }
 	}
 // BEGIN - ADD BY TABARY - POSSIBILITY TO HAVE AT X TIMES SAME idXXXX IN THE SAME OBJECT
     $col = foreignKeyWithoutAlias($col);
@@ -288,7 +292,12 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     	$orgaList=SqlList::getList($listType,'sortOrder',$selection, (! $obj)?!$limitToActiveOrganizations:true );
     }
     if($col=="idBudget"){
+      if(get_class($obj) == 'Budget'){
         $budgetList=SqlList::getList('Budget','bbsSortable',$selection,$showIdle);
+      }else{
+        $budgetList=SqlList::getListWithCrit('Budget',array('isUnderConstruction'=>'0','idle'=>'0','cancelled'=>'0'),'bbsSortable',$selection);
+        $budgetListId = array_flip($budgetList);
+      }
     }
     if ($selection) {
       // Add selected value in the table // TODO : possibly move this after the closing } because it may be used in all cases (to be studied)
@@ -835,7 +844,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
           } else {$sepCharW = $sepChar;}
           $sep.=$sepCharW;
         }
-        if(isset($listBudgetElementary)){
+        if(isset($listBudgetElementary) and get_class($obj)=='Budget'){
           if( in_array($key, $listBudgetElementary))continue;
         }
         $val =$sep.$val;
@@ -860,6 +869,9 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
 //           echo '<option value="" disabled="disabled"><span style="font-weight:bold;background:#FFAAAA">'.SqlList::getNameFromId('Budget', $group).'</span></option>';
 //         }
 //       }
+
+      if($col=='idBudget' and get_class($obj)!='Budget' and isset($listBudgetElementary) and  !in_array($key, $listBudgetElementary) and !in_array($key, $budgetListId))continue;
+      
       echo '<option  value="' . $key . '"';
       if ( $selection and $key==$selection and !isset($listBudgetElementary) ) {
       	echo ' SELECTED ';
