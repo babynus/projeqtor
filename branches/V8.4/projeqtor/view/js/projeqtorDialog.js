@@ -6169,6 +6169,7 @@ function showHelp(link) {
   var objectClass=(dojo.byId('objectClassList'))?dojo.byId('objectClassList'):dojo.byId('objectClass');
   var objectClassManual=dojo.byId('objectClassManual');
   var section='';
+  var selectedTab=(dijit.byId('parameterTabContainer'))?dijit.byId('parameterTabContainer').selectedChildWidget.get("id"):null;
   if (objectClassManual) {
     section=objectClassManual.value;
   } else if (objectClass) {
@@ -6178,7 +6179,7 @@ function showHelp(link) {
     section = link;
   }
   dojo.xhrGet({
-    url : "../tool/getManualUrl.php?section=" + section,
+    url : "../tool/getManualUrl.php?section=" + section+"&tab="+selectedTab,
     handleAs : "text",
     load : function(data, args) {
       var url=data;

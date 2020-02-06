@@ -134,9 +134,9 @@ function drawTableFromObjectList($objectList) {
 		  if ($hasTab) {
 		    echo '</div>'; // close the tab level
 		  } else {
-		    echo '<div dojoType="dijit/layout/TabContainer" style="width: 100%; height: 100%;">'; // Start the tabContanier Level
+		    echo '<div dojoType="dijit/layout/TabContainer" id="parameterTabContainer" style="width: 100%; height: 100%;">'; // Start the tabContanier Level
 		  }
-		  echo '<div onShow="saveDataToSession(\'globalParameterSelectedTab\',\''.$code.'\',true);" dojoType="dijit/layout/ContentPane" title="'.i18n($code).'" '.(($paramSelectedTab==$code)?'selected="true"':'').'>'; // New tab level
+		  echo '<div id="'.substr($code,3).'" onShow="saveDataToSession(\'globalParameterSelectedTab\',\''.$code.'\',true);" dojoType="dijit/layout/ContentPane" title="'.i18n($code).'" '.(($paramSelectedTab==$code)?'selected="true"':'').'>'; // New tab level
 		  $hasTab=true;
 		  $hasColumn=false;
 		  $hasSection=false;
