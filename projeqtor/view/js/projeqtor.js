@@ -285,12 +285,16 @@ function refreshJsonList(className, keepUrl) {
  */
 function refreshJsonPlanning(versionsPlanning) {
   param = false;
+  
   if (dojo.byId("resourcePlanning")|| versionsPlanning=='resource' ) {
     url = "../tool/jsonResourcePlanning.php";
   } else if (dojo.byId("versionsPlanning")|| versionsPlanning=='version') {
     url = "../tool/jsonVersionsPlanning.php";
   } else if (dojo.byId("globalPlanning")) {
     url = "../tool/jsonPlanning.php?global=true";
+    param=true;
+  } else if (dojo.byId("contractGantt")) {
+    url = "../tool/jsonContractGantt.php";
     param=true;
   } else {
     url = "../tool/jsonPlanning.php";
@@ -1092,7 +1096,7 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
                 loadContent(globalSelectFilterContenLoad, globalSelectFilterContainer);
                 globalSelectFilterContenLoad=null;
                 globalSelectFilterContainer=null;
-              } else if (dojo.byId('objectClassManual') && (dojo.byId('objectClassManual').value=='Planning' || dojo.byId('objectClassManual').value=='VersionsPlanning' || dojo.byId('objectClassManual').value=='ResourcePlanning')) {
+              } else if (dojo.byId('objectClassManual') && (dojo.byId('objectClassManual').value=='Planning' || dojo.byId('objectClassManual').value=='VersionsPlanning' || dojo.byId('objectClassManual').value=='ResourcePlanning' ||dojo.byId('objectClassManual').value=='ContractGantt')) {
                 refreshJsonPlanning();
               } else if (dojo.byId('objectClassList')) {
                 refreshJsonList(dojo.byId('objectClassList').value);
@@ -1168,8 +1172,12 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
               || page.indexOf("portfolioPlanningList.php") >= 0
               || (page.indexOf("jsonPortfolioPlanning.php") >= 0 && dijit.byId("startDatePlanView"))
               //ADD qCazelles - GANTT
-              || page.indexOf("versionsPlanningMain.php") >= 0 || page.indexOf("versionsPlanningList.php") >= 0
-              || (page.indexOf("jsonVersionsPlanning.php") >= 0 && dijit.byId("startDatePlanView"))) {
+              || page.indexOf("versionsPlanningMain.php") >= 0 
+              || page.indexOf("versionsPlanningList.php") >= 0
+              || (page.indexOf("jsonVersionsPlanning.php") >= 0 && dijit.byId("startDatePlanView"))
+              || page.indexOf("contractGanttMain.php") >= 0 
+              || page.indexOf("contractGanttList.php") >= 0
+              || (page.indexOf("jsonContractGantt.php") >= 0 && dijit.byId("startDatePlanView"))) {
             //END ADD qCazelles - GANTT
             drawGantt();
             selectPlanningRow();
@@ -3117,6 +3125,7 @@ function drawGantt() {
       // pGroup : is the task a group one ?
       var pGroup = (item.elementary == '0') ? 1 : 0;
       //MODIF qCazelles - GANTT
+      // florent si on doit afficher un jalon
       if (item.reftype=='Project' || item.reftype=='Fixed' || item.reftype=='Replan' || item.reftype=='Construction' || item.reftype=='ProductVersionhasChild' || item.reftype=='ComponentVersionhasChild' ) pGroup=1;
      //END MODIF qCazelles - GANTT
       // runScript : JavaScript to run when click on task (to display the
