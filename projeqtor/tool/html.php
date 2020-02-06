@@ -44,7 +44,12 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
   // Take into account array of $critFld // TODO : check where it is used 
 	if($col =="idBudgetItem"){
 	  $col='idBudget';
-	  $listBudgetElementary = SqlList::getList('BudgetItem','id');
+	  $listShowIdle = false;
+	  if(sessionValueExists('listShowIdleBudget')){
+	    $listShowIdle = getSessionValue('listShowIdleBudget');
+	    if($listShowIdle=="on")$showIdle=true;
+	  }
+	  $listBudgetElementary = SqlList::getList('BudgetItem','id',null,$showIdle);
 	}
 // BEGIN - ADD BY TABARY - POSSIBILITY TO HAVE AT X TIMES SAME idXXXX IN THE SAME OBJECT
     $col = foreignKeyWithoutAlias($col);
@@ -283,7 +288,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     	$orgaList=SqlList::getList($listType,'sortOrder',$selection, (! $obj)?!$limitToActiveOrganizations:true );
     }
     if($col=="idBudget"){
-      $budgetList=SqlList::getList('Budget','bbsSortable',$selection);
+        $budgetList=SqlList::getList('Budget','bbsSortable',$selection,$showIdle);
     }
     if ($selection) {
       // Add selected value in the table // TODO : possibly move this after the closing } because it may be used in all cases (to be studied)
