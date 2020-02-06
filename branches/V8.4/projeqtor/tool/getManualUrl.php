@@ -144,21 +144,15 @@ $userLink['UserParameter']='UserParameter.html';
 $userLink['VersionsPlanning']='ConfigurationManagement.html#versions-planning';
 $userLink['Workflow']='ControlAutomation.html#workflow';
 
-
-
-
-
-
-
-
-
-
-
-
 $section=null;
 if (isset($_REQUEST['section'])) {
   $section=$_REQUEST['section']; // Note: can only be a valid index in $userLink. Value is not echo'ed in HTML.
 }
+$tab=null;
+if (isset($_REQUEST['tab'])) {
+  $tab=$_REQUEST['tab']; // Note: can only be a valid index in $userLink. Value is not echo'ed in HTML.
+}
+
 if (substr($section,0,7)=='Plugin_') {
   $plugin=substr($section,7);
   $pluginRoot="../plugin/$plugin/docs";
@@ -180,4 +174,7 @@ $url=$userRoot.$userLink['Welcome'];
 if ($section and isset($userLink[$section])) {
   $url=$userRoot.$userLink[$section];
 } 
+if ($tab) {
+  $url.='#'.$tab;
+}
 echo $url;
