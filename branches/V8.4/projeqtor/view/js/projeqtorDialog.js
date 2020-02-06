@@ -6607,6 +6607,8 @@ function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectI
     var productVersionsListId=dojo.byId('productVersionsListId').value;
     urlPage="versionsPlanningMain.php";
     urlParams+="&productVersionsListId="+productVersionsListId;
+  }else if(currentScreen=='ContractGantt') {
+    urlPage="contractGanttMain.php";
   }
   var callBack=null;
   if(objectIdScreen !=''){
@@ -7080,6 +7082,11 @@ function loadMenuBarItem(item, itemName, from) {
     vGanttCurrentLine=-1;
     cleanContent("centerDiv");
     loadContent("hierarchicalBudgetMain.php", "centerDiv");
+  } else if (item == 'GanttContract') {
+    objectExist='true';
+    vGanttCurrentLine=-1;
+    cleanContent("centerDiv");
+    loadContent("contractGanttMain.php", "centerDiv");
   } else if (item == 'Imputation') {
     loadContent("imputationMain.php", "centerDiv");
   } else if (item == 'Diary') {
