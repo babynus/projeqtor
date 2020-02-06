@@ -38,7 +38,6 @@
   SqlElement::$_cachedQuery['PlanningElement']=array();
   
   $global=RequestHandler::getBoolean('global');
-
   $objectClass='PlanningElement';
   $columnsDescription=Parameter::getPlanningColumnDescription();
   $obj=new $objectClass();
