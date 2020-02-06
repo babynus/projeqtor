@@ -31,7 +31,7 @@ require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
   scriptLog('   ->/view/absenceMain.php');  
 ?>
-<input type="hidden" name="objectClassManual" id="objectClassManual" value="Imputation" />
+<input type="hidden" name="objectClassManual" id="objectClassManual" value="Absence" />
 <div class="container" dojoType="dijit.layout.BorderContainer">
   <div id="listDiv" dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:100%;">
    <?php include 'absenceList.php'?>
