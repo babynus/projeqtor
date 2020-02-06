@@ -148,6 +148,7 @@ $section=null;
 if (isset($_REQUEST['section'])) {
   $section=$_REQUEST['section']; // Note: can only be a valid index in $userLink. Value is not echo'ed in HTML.
 }
+
 $tab=null;
 if (isset($_REQUEST['tab'])) {
   $tab=$_REQUEST['tab']; // Note: can only be a valid index in $userLink. Value is not echo'ed in HTML.
@@ -174,7 +175,7 @@ $url=$userRoot.$userLink['Welcome'];
 if ($section and isset($userLink[$section])) {
   $url=$userRoot.$userLink[$section];
 } 
-if ($tab and strpos($url,'#')===false) {
+if ($tab and $tab!='null' and strpos($url,'#')===false) {
   $url.='#'.$tab;
 }
 echo $url;
