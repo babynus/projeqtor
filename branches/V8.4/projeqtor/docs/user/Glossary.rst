@@ -32,7 +32,7 @@ Glossary
       Has a visibility over all the projects.
    
          
-   AGILE
+   Agile methods
    
       Agile methods are groups of practices of piloting and realization of projects.
       They originate from the Agile manifesto, written in 2001, which uses the term 'agile' to refer to multiple existing methods
@@ -212,13 +212,15 @@ Glossary
       A requestor is a :term:`contact`.
       Used to specify the requestor for ticket, activity and requirement.
       Only contacts allocated to the selected project can be a requestor.  
-
+   
+   
+   
    Responsible
 
-    A responsible is a :term:`resource` in charge of item treatment. 
-    Usually, the responsible is set when the status of the item is :term:`handled<Handled status>`.
-    Only resources allocated to the selected project can be a responsible.  
-
+      A responsible is a :term:`resource` in charge of item treatment. 
+      Usually, the responsible is set when the status of the item is :term:`handled<Handled status>`.
+      Only resources allocated to the selected project can be a responsible.   
+     
     .. seealso:: 
 
        **GUI behavior**
@@ -229,17 +231,20 @@ Glossary
    
          More detail, see: :ref:`behavior-section`. 
          
+         
        **Set automatically the responsible**
 
          It is possible to set automatically the responsible.
    
          More detail, see: :ref:`Global parameters<auto-responsible>`  
+         
 
        **Accelerator button**
 
          This button allows to set current user is the responsible.
    
          More detail, see: :ref:`Assign to me button<assignToMe-button>`.
+         
 
        **Access rights**
 

@@ -310,8 +310,6 @@ Depending on options of functionality, allows to grant access rights, to define 
    
    Specific access screen
    
-.. rubric:: SECTIONS
-
 .. rubric:: Access to resource data
 
 This section allows to:
@@ -347,6 +345,12 @@ This section allows to:
 
     * Defines the possibility or not to change one or more criteria for one or more selected rows at a time
 
+   .. compound:: **activate automatic generation of expense**
+   
+    * Allows you to prohibit, depending on the profile of the user on the project concerned, the use of the check box "Create the expense from the current element" in the Offers, Orders to supplier and Invoices supplier forms. The setting is enabled by default
+  
+  
+  
 .. rubric:: Planning access rights
 
 * This section defines access for each profile to planning functionality.

@@ -7,7 +7,7 @@
 .. _global_parameters:
 
 Global Parameters
-*****************
+#################
 
 Global parameters screen allows configuration of application settings.
 
@@ -22,10 +22,10 @@ depending on the modules installed, some tabs may not appear.
    
    Moving the mouse over the caption of a parameter will display a tooltip with more description about the parameter.
 
-.. _work-time:
+.. _work:
 
 Tab Work time
--------------
+*************
      
 .. topic:: Work time sections
 
@@ -142,9 +142,10 @@ Defines behavior of tasks in the real work allocation screen.
       After submission what type of alert would you want to send to the organism manager  
   
   
-  
+.. _planning:
+
 Tab Activity
-------------
+************
 
 .. topic:: Activity tab's sections
 
@@ -287,6 +288,10 @@ Parameters to manage automations
       
       Allows you to manually enter a value in% in the progress field in the "steering" detail area on all the elements that proposes a duration  
 
+
+
+
+
 .. _gp-milestones-section:
 
 .. rubric:: Milestones
@@ -304,6 +309,10 @@ Specific parameters for Milstones management
    .. compound:: Set milestone from product version
     
       It optionally allows you to automatically retrieve the milestone from the milestone of the Project Version.
+       
+       
+       
+       
        
 .. _gp-control-restict-section:
 
@@ -331,9 +340,11 @@ Specific parameters for the control and management of restrictions
          
          Restrict type box
 
+
+.. _display:
     
 Tab Display
------------
+***********
 
 .. topic:: Display tab's sections
 
@@ -437,8 +448,10 @@ Default values for user
       Display of notes in discussion mode with indentation for answers 
  
 
+.. _miscellaneous:
+
 Tab References
---------------
+**************
 
 .. topic:: References tab's sections
 
@@ -520,8 +533,10 @@ Sections for bill format references
    
       Choice of the number of digits to display in an invoice.
 
+.. _configuration:
+
 Tab Configuration
------------------
+*****************
 
 .. topic:: References tab's sections
 
@@ -624,8 +639,11 @@ This menu contains all the parameters for configuration management
    
          Automatically set component version if there is only one component version of the selected component that is linked to the selected product version
 
+
+.. _financial:
+
 Tab Financial
--------------
+*************
 
 .. topic:: References tab's sections
 
@@ -663,10 +681,10 @@ Parameters for choosing the method of entering income
 
 .. index:: Mailing Parameters
 
-.. _mailing_parameters:
+.. _mail:
 
 Tab Mailing
------------
+***********
 
 .. topic:: References tab's sections
 
@@ -675,7 +693,7 @@ Tab Mailing
    * :ref:`Automatic emails grouping<administration-emailing-group-label>`
    * :ref:`Test email configuration<gp-test-email-section>`
 
-.. index:: emailing
+.. index:: Emailing
 
 .. _gp-emailing-section:
 
@@ -748,8 +766,10 @@ You can test the settings of your email submissions
       .. warning:: This operation saves global parameters
 
 
+.. _authent:
+
 Tab Authentication
-------------------
+******************
 
 .. topic:: Authentication's sections
 
@@ -843,10 +863,10 @@ When you want to disconnect from ProjeQtOr with the SSO method, the logout scree
       * Default profile for users, message on creation new user from SAML,
       * And some parameters for users  
 
-.. _glabalparama_automation:
+.. _automation:
 
 Tab Automation
---------------
+**************
 
 .. topic:: Authentication's sections
 
@@ -1001,9 +1021,12 @@ See: :ref:`automated-service` to set the send frequency.
 
    * All days of the week, open or off days are taken into account.
    * Off days in real work allocation will not send you an alert.
+
+
+.. _system:
  
 Tab System
-----------
+**********
 
 .. topic:: Authentication's sections
 
@@ -1098,7 +1121,7 @@ Allows to set up a secure SSL connection:
 .. _administration-special-fields:
 
 Special Fields
-**************
+##############
 
 Special fields can be used in the title and body mail to be replaced 
 

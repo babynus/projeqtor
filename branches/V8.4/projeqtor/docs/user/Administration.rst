@@ -24,8 +24,8 @@ Administration Console
 Administration console allows to execute administration tasks on application.
 
 .. index:: Background tasks
-.. index:: Background tasks (Email)
-.. index:: Background tasks (Import data)
+
+.. _background-task:
 
 Background tasks
 ----------------
@@ -43,13 +43,58 @@ Starts and stops background jobs that process and periodically checks the flags 
    
    Background tasks is running in Administration console
    
-.. index:: Internal alert (Send)
-.. index:: Background tasks (Internal alert)
 
-Send an internal alert
-----------------------
 
-Allows to send an internal alert to users.
+
+.. index:: Internal alert, Background tasks
+
+Internal alert
+--------------
+
+Allows to send an internal alert to users. It's a :ref:`background task<background-task>`.
+
+.. figure:: /images/GUI/ADMIN_ZONE_SendAlertIntern.png
+   :alt: Internal Alert
+   
+   Internal Alert
+   
+   
+Internal alerts can be sent to users. 
+
+You can define a date and time for sending, specific adressees or all users, the type of message that users will receive: information, an alert or a warning ...
+
+This can be a good step to warn users before a temporary shutdown of ProjeQtOr for update for example.    
+   
+ 
+.. figure:: /images/GUI/ADMIN_SCR_InternalAlertSend.png
+   :alt: receipt of internal alert
+   
+   receipt of internal alert
+
+An internal alert can be sent by the administrator or by monitoring indicators.
+
+ .. compound:: By the administrator
+
+    The administrator can send internal alert by administration console.
+    
+    The message will be received by user via message pop-up.
+    
+    
+
+ .. compound:: Monitoring indicators   
+
+    Monitoring indicators send only warning and alert message.
+    
+    The message contains information that explains the alert:
+
+      * Item id and type.  
+      * Indicator description. 
+      * Target value.
+      * Alert or warning value.
+
+    The indicators are defined in :ref:`Indicators screen<indicator>` .    
+
+   
 
 .. index:: Connection Management
 

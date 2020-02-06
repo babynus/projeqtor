@@ -1,6 +1,7 @@
 <?php
 $userLink=array();
 $userLink['Welcome']='index.html';
+$userLink['Absence']='RealWorkAllocation.html#absence';
 $userLink['AccessProfile']='AccessRights.html#access-mode';
 $userLink['AccessRight']='AccessRights.html#access-mode-to-data-project-dependant';
 $userLink['AccessRightNoProject']='AccessRights.html#access-mode-to-data-not-project-dependant';
@@ -8,6 +9,7 @@ $userLink['Action']='RiskIssueManagement.html#action';
 $userLink['ActionType']='ListsOfTypes.html#action-type';
 $userLink['Activity']='PlanningElements.html#activity';
 $userLink['ActivityPrice']='Incomes.html#activity-price';
+$userLink['ActivityStream']='TransverseFeatures.html#activity-stream';
 $userLink['ActivityType']='ListsOfTypes.html#activity-type';
 $userLink['Administration']='Administration.html#administration-console';
 $userLink['Affectation']='Affectation.html';
@@ -44,9 +46,10 @@ $userLink['Efficiency']='ListsOfValues.html#efficiency';
 $userLink['EmailTemplate']='ControlAutomation.html#email-template';
 $userLink['ExpenseDetailType']='ListsOfTypes.html#expense-detail-type';
 $userLink['Feasibility']='ListsOfValues.html#feasibility';
-$userLink['Gallery']='FinancialGallery.html';
-$userLink['GlobalParameters']='globalParameters';
-$userLink['GlobalPlanning']='Gantt.html#global-planning';
+$userLink['Gallery']='Incomes#.html';
+$userLink['GlobalParameter']='globalParameters.html';
+$userLink['GlobalPlanning']='Gantt.html#planning-global';
+$userLink['GlobalView']='TransverseFeatures.html#global-view';
 $userLink['GUI']='Gui.html';
 $userLink['Habilitation']='AccessRights.html#access-to-forms';
 $userLink['HabilitationOther']='AccessRights.html#specific-access-mode';
@@ -65,6 +68,7 @@ $userLink['IndividualExpenseType']='ListsOfTypes.html#individual-expense-type';
 $userLink['Issue']='RiskIssueManagement.html#issue';
 $userLink['IssueType']='ListsOfTypes.html#issue-type';
 $userLink['JoblistDefinition']='ControlAutomation.html#jobList';
+$userLink['Kanban']='Agile.html#kanban';
 $userLink['KpiDefinition']='ControlAutomation.html#kpi-definitions';
 $userLink['Language']='ListsOfValues.html#languages';
 $userLink['Likelihood']='ListsOfValues.html#likelihood';
@@ -176,6 +180,6 @@ if ($section and isset($userLink[$section])) {
   $url=$userRoot.$userLink[$section];
 } 
 if ($tab and $tab!='null' and strpos($url,'#')===false) {
-  $url.='#'.$tab;
+  $url.='#'.strtolower($tab);
 }
 echo $url;

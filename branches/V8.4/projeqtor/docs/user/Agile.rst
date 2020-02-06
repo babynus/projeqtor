@@ -6,7 +6,7 @@
 
     \newpage
 
-.. index:: Agile Methods
+.. index:: Agile methods
 
 .. _Agile-Methods:
 
@@ -14,22 +14,18 @@
 Agile Methods
 *************
 
-Agile methods are groups of practices of piloting and realization of projects. 
+:term:`Agile methods` are groups of practices of piloting and realization of projects. 
 They originate from the Agile Manifesto, written in 2001, which uses the term "agile" to refer to multiple existing methods.
 
 Agile methods are more pragmatic than traditional methods, involve the client as much as possible and allow a great reactivity to his requests. They are based on an iterative, incremental and adaptive development cycle and must respect four fundamental values, based on twelve principles, from which a base of practices, either common or complementary, derives.
 
 .. index:: Kanban
 
-.. _Kanban:
+
+.. _kanban:
 
 KanBan
 ******
-
-
-The Kanban methodology comes from the Japanese automotive industry. It was created with the aim of optimizing the production capacity.
-
-The Kanban method is based on the continuous improvement of production processes to enable lean production management.
 
 .. sidebar:: Other sections
 
@@ -42,6 +38,13 @@ The Kanban method is based on the continuous improvement of production processes
    * :ref:`Requirement<requirement>`
    
    * :ref:`Ticketing<ticket>`
+   
+   
+The Kanban methodology comes from the Japanese automotive industry. It was created with the aim of optimizing the production capacity.
+
+The Kanban method is based on the continuous improvement of production processes to enable lean production management.
+
+
    
       
 .. figure:: /images/GUI/AGILE_SCR_Kanban.png

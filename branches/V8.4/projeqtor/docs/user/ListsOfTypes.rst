@@ -25,8 +25,9 @@ Restrictions can be defined for a project, a project type or a profile.
 
 .. note:: **Types restrictions section on Project screen**
 
-   To display types restrictions section, the global parameter "allow type restriction on project" must be set to "Yes".
-   
+   To display types restrictions section:
+   Go to :ref:`Global parameter > Tab Activity > Controls and Restrictions Section<gp-control-restict-section>`
+   "allow type restriction on project" must be set to "Yes".
    Possibility to define more restrictions to a project against restrictions defined at the project type level.
 
 
@@ -35,8 +36,9 @@ Restrictions can be defined for a project, a project type or a profile.
    1 - Click on "Restrict types" button to display the dialog box.
    2 - For each element type, select values that will be in the list of values displayed.
 
-If no element type is selected, by default all values of the row will be displayed on each screen concerned by.
-(One example below of selection)
+By default, if no type of element is selected, all the values of the line will be displayed on each screen that will be affected. 
+
+(An example of selection below)
 
 .. figure:: /images/GUI/LISTofTYPE_ZONE_Restriction.png
    :alt: Dialog box - Restrict types for the project 

@@ -14,6 +14,10 @@ Today (Dashboard)
 =================
 
 .. figure:: /images/GUI/TODAY_SCR_GlobalView.png
+   :alt: Today's Global view
+   
+   Today screen's Global view
+   
 
 This screen allows user to have a global view of its projects and tasks.
 
@@ -120,24 +124,33 @@ The projects list is limited to the project visibility scope of the connected us
    :alt: Section - Projects 
    :align: center
 
+.. rubric:: Description
+
+The list of projects is limited to the extent of visibility of the logged in user.
+
+All the projects to which you are assigned will therefore be displayed in this list
 
 
-.. rubric:: |one| Scope of the numbers counted
 
-Checkboxes allow to filter displayed projects:
+ .. compound:: |one| Scope of the numbers counted
+
+  Checkboxes allow to filter displayed projects:
 
   * **To do:** Projects to do.
   * **Not closed:** Projects to do and done.
   * **All:** Projects to do, done and closed.
 
-.. rubric:: Projects name
+ .. compound:: Projects name
 
-Click on the name of a project will directly move to it. 
+  Click on the name of a project will directly move to it. 
 
-.. rubric:: Manuel indicators
+.. rubric:: Manual indicators
 
-* Manuel indicator can be set on project.
-* Trend and health status indicators are displayed.
+Manual indicator can be set on project.
+
+Trend and health status indicators are displayed.
+
+
 
  .. compound:: |two| Icon "Trend"
 
@@ -149,34 +162,44 @@ Click on the name of a project will directly move to it.
 
 .. rubric:: Progress
 
-* Calculated progress and overall progress are displayed.
+Calculated progress and overall progress are displayed.
+
+
 
  .. compound:: |four| Calculated progress
 
-    Actual progress of the work of project.
+    * Actual progress of the work of project.
 
-    .. note:: On mouse over the bar
+    * On mouse over the bar
+    
+    .. figure:: /images/GUI/TODAY_ZONE_Progress.png
+      :alt: Calculated progress
+      
+      Calculated progress
+      
+    On each project shows part of “to do” (red) compared to “done and closed” (green).
 
-       * On each project shows part of “to do” (red) compared to “done and closed” (green).
+
+
 
  .. compound:: |five| Overall progress
 
     Additional progress manually selected for the project.
 
-.. rubric:: |six| Other measure of progress
+ .. compound:: |six| Other measure of progress
 
-* **Left:** Left work for the project.
-* **Margin:** Work margin.
-* **End date:** Planified end date of the project.
-* **Late:** Number of late days in project.
+    * **Left:** Left work for the project.
+    * **Margin:** Work margin.
+    * **End date:** Planified end date of the project.
+    * **Late:** Number of late days in project.
  
-.. rubric:: |seven| Numbers of elements concerned to project
+ .. compound:: |seven| Numbers of elements concerned to project
 
-* Numbers of elements concerned to a project are displayed.
+  Numbers of elements concerned to a project are displayed.
 
-.. note:: On mouse over the bar
 
-   On each element shows part of “to do” (red) compared to “done and closed” (green).
+
+
 
 .. raw:: latex
 
@@ -185,26 +208,27 @@ Click on the name of a project will directly move to it.
 Tasks
 -----
 
-Here are listed, as a “To do list” all the items for which the connected user is either “assigned to”, “:term:`responsible` of” or “:term:`issuer` or :term:`requestor` of”.
+Here are listed, as a “To do list” all the items for which the connected user is either “assigned to”, “:term:`responsible` of”, “:term:`issuer` or :term:`requestor` of”.
 
 Click on an item will directly move to it.
 
-.. note:: Parameter: Max items to display
+.. note:: 
 
-   Number of items listed here are limited to a value defined  in :ref:`Global parameters<global-display-section>`.
+   **Max items to display Parameter**
+
+   Number of items listed here are limited to a value defined in :ref:`Global parameters<global-display-section>`.
 
 
 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: 
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`id`
-     - Unique Id for the item.
+     - Unique Id for the item. Id column displayed unique Id and specific icon for the item
    * - Project
      - The project concerned by the item.
    * - Type
@@ -219,10 +243,6 @@ Click on an item will directly move to it.
      - Flag on indicate the user is the issuer for the item.
    * - Resp.
      - Flag on indicate the user is the responsible for the item.
-
-.. topic:: Column: Id
-
-   Id column displayed unique Id and specific icon for the item. 
 
 
 .. raw:: latex
@@ -241,11 +261,21 @@ You can select any report to be displayed on the Today screen.
 * Any unchanged parameter will be set as default value.
 * These reports will be displayed on Today screen like other pre-defined parts.
 
-.. figure:: /images/GUI/TODAY_ZONE_ExtendingReport.png
-   :alt: Report selection
-   :align: center
+.. figure:: /images/GUI/REPORT_SCR_DisplayToday.png
+   :alt: Display a report on the today screen
+   
+   Display a report on the today screen
+   
+   
+Click on |buttonIconParameter| to set the location of the report (s) on the Today screen.
 
-   Report selection    
+Click on the handles to move the item in the list
+
+.. figure:: /images/GUI/REPORT_BOX_ReportDisplayParam.png
+   :alt: Parameters of the Today screen
+   
+   Parameters of the Today screen
+   
 
 .. rubric:: Manage extending section
 
