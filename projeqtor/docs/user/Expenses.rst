@@ -15,51 +15,71 @@ The expenses incurred for the project are monitored.
 
 Budget
 ------
+
 A budget is a list of all products and different expenses to plan. It is a plan that allows to define in advance the expenses, the incomes and the possible savings to be realized during a definite period.
+
 It allows to anticipate the resources that the company will have at a specific moment.
-
-* You can create as much budget and sub budget as you want.
-
-* An expense is related to a base budget, ie a budget item
-
-* A budget item is linked to a parent budget 
-
-* With the "Budget Parent" filter, you can display in the list area, only a budget and its family (sub-budget). An indentation of these to the right shows that they are sub-budgets.
-
-* Only current or unclosed budget items will be displayed in the lists
-
-.. figure:: /images/GUI/EXPENSES_ZONE_FilterBudgetParent.png
-   :alt: Filter parent budget
-   
-   display of a budget and its family.
- 
-.. note:: 
-
-   **The parent budget**
-
-   * Parent budget exists only to consolidate data from underlying budget items
-   * You can't change spending in the Progress field of a parent budget 
-   * Only the target amount can be changed if the budget treatment is under construction
-
-   **The budget item**
-
-   * The budget item is the finer element of the budget analysis. 
-   * These posts or budget destinations will allow you to detail your budget, categorizing it at your convenience.
-   
-   
 
 .. figure:: /images/GUI/EXPENSES_SCREEN_Budget.png
    :alt: Budget screen
    :align: center
 
    Budget Screen
+   
+   
+* You can create as much budget and sub budget as you want.
+
+* An expense is related to a base budget, ie a budget item
+
+* A budget item is linked to a parent budget 
+
+* Only the current budget items will be displayed in the lists.
+
+* Current, under construction and closed budgets will not appear in the lists. To view the closed items, check the "closed" box.
+
+
+
+ .. compound:: Budget parent filter
+  
+   With the filter, you can display in the list area, only a budget and its family (sub-budget). 
+    
+   An indentation of these to the right shows that they are sub-budgets.
+
+
+   .. figure:: /images/GUI/EXPENSES_ZONE_FilterBudgetParent.png
+      :alt: Filter parent budget
+   
+      Display of a budget and its family
+ 
+
+   * Parent budget exists only to consolidate data from underlying budget items
+   * You can't change spending in the Progress field of a parent budget 
+   * Only the target amount can be changed if the budget treatment is under construction
+
+
+ .. compound:: The budget item
+  
+   * The budget item is the finer element of the budget analysis. 
+   * These posts or budget destinations will allow you to detail your budget, categorizing it at your convenience.
+   
+   .. figure:: /images/GUI/EXPENSES_ZONE_ItemBudget.PNG
+      :alt: Display of budget items on a project expense 
+   
+      Display of budget items on a project expense   
+   
+   
+   When you create a project expenditure or an individual expenditure, you can link them to a specific budget item.
+
+   In the dropdown list of budget items, only the budget items will be available. Parent budgets will be grayed out and you will not be able to select them.
+   
 
 .. rubric:: Description
+
+This section allows to identify items of the element.
 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|  
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -71,7 +91,7 @@ It allows to anticipate the resources that the company will have at a specific m
    * - |RequiredField| Budget type
      - Type of budget: initial or additional
    * - Budget orientation
-     - the orientation of the budget: operation or transformation 
+     - The orientation of the budget: operation or transformation 
    * - Budget category
      - subdivision of budget orientation into category
    * - Article number
@@ -148,14 +168,14 @@ Transferred Amount allows to release a sum of an amount planned for a budget ite
 
 This amount is visible on all budget items.
 
-.. note:: 
-
-   **Transfered Amount**
+  .. compound:: Transfered Amount
    
    * Enter a negative amount on a budget line to transfer an amount
    * Enter a positive amount on a budget line to recover this amount
    * Only the parent budget and its sub budget will see this amount. 
    * Another parent budget can not recover this amount.
+
+
 
 .. rubric:: Budget expense detail
 
@@ -165,6 +185,26 @@ This section brings and displays the :ref:`project-expense` lines in the details
    :alt: Details lines
 
    Details lines
+
+.. raw:: latex
+
+    \newpage
+    
+.. index:: Supplier contract    
+    
+Supplier Contract
+-----------------
+
+ProjeQtOr gives you the possibility to manage and precisely follow your supplier contracts
+
+The supplier contract is necessarily linked to a project and a supplier.
+
+In addition to the contract management screen (list and details area), you can view your contracts in a time view on a Gantt chart. This is the "contract schedule"
+
+Each bar representing the different contracts, going from the start date to the end date of the contract.
+
+Notice dates and due dates are displayed as milestones.
+
 
 
 .. raw:: latex
@@ -624,11 +664,10 @@ Provider bills
 
 .. index:: Payment to provider (Expenses)
 
-.. _Term_payment:
+.. _payment-provider:
 
-
-Payements to provider
----------------------
+Payments to provider
+--------------------
 
 Follow the payment of your supplier invoices to better organize your general cash flow or your working capital
 

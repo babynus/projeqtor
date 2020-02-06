@@ -1,5 +1,6 @@
 
 .. title:: Planning elements
+.. include:: ImageReplacement.txt
 
 .. raw:: latex
 
@@ -18,21 +19,9 @@ The planning elements :ref:`test-session` and :ref:`meeting` are described in th
 
 .. _planningelem_project:
 
-Projects
---------
+Project
+-------
 
-.. sidebar:: Other sections
-
-   * :ref:`Progress<progress-section-activity>`
-   * :ref:`Allocations<allocation-section>`
-   * :ref:`Versions linked to this project<Link-version-project-section>`  
-   * :ref:`Types restrictions<type-restriction-section>`  
-   * :ref:`Predecessor and Sucessor<predSuces-element-section>`
-   * :ref:`Linked element<linkElement-section>`   
-   * :ref:`Attachments<attachment-section>`   
-   * :ref:`Notes<note-section>`   
-   
-   
 The project is the primary entity of ProjeQtOr.
 
 It is also the top-level of visibility, depending on profiles.
@@ -45,9 +34,9 @@ It is also the top-level of visibility, depending on profiles.
 
 .. rubric:: Fix planning 
 
-* When box “fix planning” is checked, the project scheduling won’t be remade.
-* This will avoid change on planned values.
-* The planning will always be the same whatever you do on other projects.
+* When the "correct planning" box is checked, the project planning will not be recalculated.
+* This avoids modifying the expected values.
+* Planning will always be the same no matter what you do on other projects.
 
 .. warning:: This may lead to dependencies unconsistancies
 
@@ -55,13 +44,18 @@ It is also the top-level of visibility, depending on profiles.
 
 * When a project is under construction, no automatic emails will be sent, no alerts will be generated for the project elements.
 * A project can be under construction as long as it isn’t stated (set to **handled** status).
-* The resources don't see it on timesheet
+* The resources don't see it on timesheet.
 
 .. rubric:: Manual indicators
 
 * Fields: Health status, Quality level, Trend and Overall progress are manual indicators.
 * They allow define visual way the general health, conformity, trend and progress of the project.
-* Some manual indicators are displayed on the Today screen.  
+* Some manual indicators are displayed on the Today screen. 
+
+.. figure:: /images/GUI/PLANNINGELEM_ZONE_ManualIndicator.png
+   :alt: Manual indicator on the Today screen
+   
+   Manual indicator on the Today screen
 
 .. rubric:: Special fields
 
@@ -71,10 +65,11 @@ It is also the top-level of visibility, depending on profiles.
 .. rubric:: Monitoring indicator
 
 * The indicators can be defined on the progress data.
-* See: :ref:`progress-section-monitor-indicator`
+
+
+
 
 .. _project-reserve:
-
 .. index:: Project (Reserve)
 
 .. rubric:: Project reserve
@@ -87,6 +82,19 @@ It is also the top-level of visibility, depending on profiles.
 
 .. rubric:: Section Description
 
+
+.. sidebar:: Other sections
+
+   * :ref:`Progress<progress-section-activity>`
+   * :ref:`Allocations<allocation-section>`
+   * :ref:`Versions linked to this project<Link-version-project-section>`  
+   * :ref:`Types restrictions<type-restriction-section>`  
+   * :ref:`Predecessor and Sucessor<predSuces-element-section>`
+   * :ref:`Linked element<linkElement-section>`   
+   * :ref:`Attachments<attachment-section>`   
+   * :ref:`Notes<note-section>` 
+   
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -165,14 +173,12 @@ List of sub-projects under for the project.
 
     \newpage
 
-.. index:: Activity 
-
-.. index:: Activities
+.. index:: Activity
 
 .. _activity:
 
-Activities
-----------
+Activity
+--------
 
 .. sidebar:: Other sections
 
@@ -309,8 +315,8 @@ Ability to filter activities by data or type, for instance by assigned resources
 
 .. _milestone:
 
-Milestones
-----------
+Milestone
+---------
 
 .. sidebar:: Other sections
 

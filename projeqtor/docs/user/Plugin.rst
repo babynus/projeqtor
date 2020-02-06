@@ -83,12 +83,3 @@ This section allows to manage local plug-ins.
 .. note:: 
 
    Plug-in is removed from the list after installation.
-
-
-.. rubric:: Section: Available plug-ins (remote)
-
-This section allows to manage remote plug-ins.
-
-.. note::
-
-   This feature will be available later.

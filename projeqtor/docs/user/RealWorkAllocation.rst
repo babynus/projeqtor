@@ -31,7 +31,7 @@ Data entry for one resource, on a weekly base.
    * If you enter work in hours, you must define  the parameter **number of hours per day** before some real work has been entered.
    * After first work is entered, this parameter will be locked.
       
-   **see:** :ref:`Global Parameters<work-time>`
+   **see:** :ref:`Global Parameters<work>`
 
 .. figure:: /images/GUI/REALWORK_SCR_TimeSheetZone2.png
    :alt: Timesheet zone screen
@@ -162,17 +162,18 @@ Buttons of the timesheet:
 * Click on the icon of the activity to display it detail without leaving the current screen.  
  
 
-.. rubric:: |B| **Assigned task function**
+.. rubric:: |B| Assigned task function
 
-    * The assigned task function is displayed in blue after the name of the activity.  
+* The assigned task function is displayed in blue after the name of the activity.  
+
 
 .. _assignedtask-comment:
 
-.. rubric:: |C| **Assigned task comments**
+.. rubric:: |C| Assigned task comments
     
-    * The icon |iconNoteAdd| allows to add a comment.
-    * The icon |Note| indicates there is a comment on assigned task. 
-    * Just move the mouse over the icon to see the last comment.
+* The icon |iconNoteAdd| allows to add a comment.
+* The icon |Note| indicates there is a comment on assigned task. 
+* Just move the mouse over the icon to see the last comment.
 
 .. note:: The comments |Note|
 
@@ -485,5 +486,60 @@ If the parameter "Automatic feed of the real" is selected, when the calculation 
 For security, and to avoid the superposition with a manual entry of real, if the resource has real for a given date, one does not copy the possible planned existing in real.
  
 For each planned job found, if no job exists for the resource concerned on the date of the scheduled job, copies the planned job to real work.
-
+  
 We will mark the actual work entered automatically (technical zone type tag) to distinguish the automatic feed from a manual feed. This area will not be processed for screen renditions, but will analyze any unexpected behavior.
+
+
+
+
+
+
+.. _absence:
+
+Absences
+********
+
+The absenteeism screen allows you to enter non-productive days, i.e. days not worked
+
+Absences must be informed as soon as possible so that the calculation of the planning of your projects takes into account the unavailability of resources.
+
+
+.. figure:: /images/GUI/REALWORK_SCR_Absence.png
+   :alt: absences screen
+   
+   absences screen
+   
+Absences are linked to an administrative project. Only one project is necessary for all the resources, without them being assigned to this project.
+
+
+ .. compound:: |one| Resource Selector
+   
+   Depending on your rights and profile, you can have access to the resources that you manage or only to yourself.
+
+   Select the resource whose non-productive days you want to add as well as the year on which these days will be retained.
+
+ .. compound:: |two| Types of absences
+
+   Each type of absence is an activity related to the administrative project.
+   
+   You can create as many activities as types of absences.
+
+ .. compound:: |three| Accelerator
+
+   Select the type of leave and click on the accelerators to enter the selected value directly in the date boxes in the calendar.
+
+   1: full day
+   0.5: half day on the type of leave selected
+   0: delete the days already entered
+
+ .. compound:: |four| calendar
+ 
+   Select the type of leave from the existing list.
+   
+   Click on the boxes of the dates concerned by non-productive work.
+   
+   The boxes are filled with the color of the leave type
+ 
+   
+   
+

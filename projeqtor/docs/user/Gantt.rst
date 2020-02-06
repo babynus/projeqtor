@@ -359,7 +359,7 @@ You can print directly on your printer or export in PDF format or in MS Project 
         Default (when **$pdfPlanningBeta** parameter is not set) is *enabled with Chrome, disabled with other browsers* 
 
 
-
+  .. index:: Export to MS Project
 
   .. compound:: Export planning to MS Project
 
@@ -1144,29 +1144,131 @@ All milestones are available: deliverable, incoming, key date...
 Resource Planning
 -----------------
 
-.. figure:: /images/GUI/GANTT_ZONE_ResourcesPlanning.png 
+
+This screen displays the Gantt chart from a resource perspective.
+
+The assigned tasks are grouped under the resource level.
+
+Regarding resource planning, periodic group meetings are under his responsibility
+
+Ability to view assigned activities without charge
+
+
+
+.. figure:: /images/GUI/GANTT_SCR_ResourcePlanning.png 
    :alt: Gantt (Resource planning) 
    :align: center
 
    Gantt (Resource planning)  
-    
-This screen displays Gantt chart from the resources point of view.
+   
+   
+.. topic:: Interface areas
 
-Assigned tasks are grouped under resource level.
+   |one| :ref:`Show project level<project-level>`
+   
+   |two| :ref:`Gantt charts for resources<gantt-bars-resource>`
+  
+   |three| :ref:`Limit display<visibility-resource>`
+   
+   |four| :ref:`Activity without work<activity-without-work>`
+   
+   |five| :ref:`Show left work<show-left-work>`
 
-On resource planning, group periodic meetings is under its parent
 
-Ability to display assigned activities with zero load
 
-.. rubric:: Gantt bars
 
-For activities, the Gantt bar is split in two: 
+.. _project-level:
 
-.. figure:: /images/GUI/GANTT_ZONE_ResourcePlanning_WorkBar.png
+.. rubric:: |oneBLC| Show project level  
+
+Tasks are grouped by project.
+
+Click "View Project Level" to view the projects on which resource activities depend.
+
+Below the two views with and without "View Project Level" 
+
+.. figure:: /images/GUI/GANTT_ZONE_ResourcesPlanning_with&without_PjtLVL.png 
+   :alt: view with project levels (Resource planning) 
+
+   view with project levels and without project levels
+   
+   
+   
+   
+   
+   
+.. _gantt-bars-resource:
+
+.. rubric:: |twoBLC| Gantt charts for resources
+   
+The remaining work can be displayed to the right of the Gantt bar..
+
+Click “Show left work” to display or not the duration of the rest to be done.
+
+
+
+
+
+.. _visibility-resource:
+
+.. rubric:: |threeBLC| Limit display to selected ressource or team 
+
+Click and select one ressource to display only his data.
+
+Click and select one team to display only data of resources of this team.
+
+
+
+
+
+
+.. _activity-without-work:
+
+.. rubric:: |fourBLC| show activities without work
+
+View activities without assigned workload.
+
+These activities then appear in the list box and on the Gantt chart in light color, as for standard planning.
+
+The software takes into account the validated dates for display on the diagram.
+
+
+
+
+
+
+
+.. _show-left-work:  
+
+.. rubric:: |fiveBLC| Show left work
+  
+The bars used in the Gantt chart for resources differ slightly from the standard planning bars.
+
+.. figure:: /images/GUI/GANTT_ZONE_PlanningResource.png
    :alt: Work Bar
    :align: center
    
    Work bars
+   
+Most of the bars used in the Gantt chart are the same as for standard planning.
+
+You will find their meaning in chapter 2 of the Gantt chart view: :ref:`Gantt chart’s bars<gantt-bars>`.
+
+
+  .. compound:: GREY BAR
+
+   .. figure:: /images/GUI/GANTT_BAR_Green.png 
+      :alt: all is well
+      :figwidth: 100% 
+      :align: left
+      
+      all is well
+      
+   Condition : Assigned resources are available and meet workload, validated or scheduled dates do not conflict with other items   
+
+
+
+
 
 Real work in grey.
 
@@ -1192,36 +1294,35 @@ Links existing between tasks on different resources are not displayed.
    
    All others behaviors are similar to :ref:`gantt-planning` screen.
 
-.. rubric:: |oneBLC| Show project level  
 
-Tasks are grouped by project.
+  .. compound:: GREEN BAR
 
-Click "View Project Level" to view the projects on which resource activities depend.
+   .. figure:: /images/GUI/GANTT_BAR_Green.png 
+      :alt: all is well
+      :figwidth: 100% 
+      :align: left
+      
+      all is well
+      
+   Condition : Assigned resources are available and meet workload, validated or scheduled dates do not conflict with other items   
 
-Below the two views with and without "View Project Level" 
 
-.. figure:: /images/GUI/GANTT_ZONE_ResourcesPlanning_with&without_PjtLVL.png 
-   :alt: view with project levels (Resource planning) 
 
-   view with project levels and without project levels
 
-.. rubric:: |twoBLC| Show left work 
 
-The remaining work can be displayed to the right of the Gantt bar..
 
-Click "Show left work" to display or not the duration of the rest to be done. .
 
-.. rubric:: |threeBLC| Limit display to selected ressource or team 
 
-Click and select one ressource to display only his data.
 
-Click and select one team to display only data of resources of this team.
 
-.. rubric:: |fourBLC| show activities without work
 
-Ability to display assigned activities with zero work 
+.. image:: /images/iconAutomation.png
 
-The names of the activities appear in the task area but no gantt bar will be displayed
+
+
+
+
+
 
 
 

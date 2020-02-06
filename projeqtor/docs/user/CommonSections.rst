@@ -83,7 +83,7 @@ Depending on the element, this section  may have a different name.
 
     \newpage
 
-.. index:: Project Allocation
+.. index:: Project Allocation, Allocation section
 
 .. _allocation-section:
 
