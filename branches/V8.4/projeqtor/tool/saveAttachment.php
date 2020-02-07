@@ -56,6 +56,8 @@ if (! array_key_exists('attachmentType',$_REQUEST)) {
   $type=$_REQUEST['attachmentType']; // compared against fixed values. (file|link).
 }
 $attachmentMaxSize=Parameter::getGlobalParameter('paramAttachmentMaxSize');
+debugLog($_REQUEST);
+debugLog($_FILES);
 $uploadedFileArray=array();
 if ($type=='file') {
   if (array_key_exists('attachmentFile',$_FILES)) {
@@ -77,6 +79,15 @@ if ($type=='file') {
       $uploadedFileArray[$i]=$uf;
     }
   } else {
+    if (RequestHandler::getValue('uploadType')=='html5' and count($_FILES)==0) {
+      $jsonReturn='{"file":"text",'
+                  .'"name":"text",'
+                  .'"type":"text",'
+                  .'"size":"0"  ,'
+                  .'"message":"text"}';
+      echo $jsonReturn;
+      exit;
+    }
     $error=htmlGetErrorMessage(i18n('errorTooBigFile',array($attachmentMaxSize,'paramAttachmentMaxSize')));
     errorLog(i18n('errorTooBigFile',array($attachmentMaxSize,'paramAttachmentMaxSize')));
     //$error=true;
