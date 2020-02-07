@@ -139,7 +139,7 @@ Resource availability is defined by assigning it to a project.
 .. rubric:: Field is a employee
 
 * Check this box if the resource needs to be linked to the human resources module.
-* The resource will then also appear in the :ref:`employee_manager` list.
+* The resource will then also appear in the :ref:`employee-manager` list.
 
 .. rubric:: treatment zone
 

@@ -11,7 +11,7 @@ This section allows the fine management of the rights as well as the management 
 
 .. index:: Module Management
 
-.. _Module_Management:
+.. _module-management:
 
 Module Management
 -----------------

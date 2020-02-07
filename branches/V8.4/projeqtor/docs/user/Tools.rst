@@ -46,24 +46,6 @@ The programmed emails will be grouped in this screen before their automatic send
 
     \newpage
 
-.. index:: scheduled report
-
-.. _scheduled_report:
-   
-Sheduled Report
----------------
-
-In reports, you can schedule sending emails for accurate reports.
-See: :ref:`sending_report`
-
-You can get the list and details of this programming on this screen
-
-Click on |buttonIconDelete| to cancelled the programmation
-
-.. figure:: /images/GUI/TOOLS_ZONE_ScheduledReport.png
-   :alt: Sending a report to email
-   :align: center
-
 
 .. index:: Internal alert (Sent)
 
@@ -432,6 +414,8 @@ Click on |buttonIconParameter| on the Simulation Management screen
       
       
    Removal requests will be decremented.
+
+.. cloned-environnement-managment:
 
 .. rubric:: The cloned Environment managment
 

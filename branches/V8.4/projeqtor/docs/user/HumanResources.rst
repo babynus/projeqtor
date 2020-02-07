@@ -18,7 +18,7 @@ This section allows to manage the society's Humans Resources
 
 This system comes in addition to the standards of the management of absences
 
-* You must define the :ref:`employee_manager`, :ref:`Leaves_Types` and :ref:`employment_contract_type` 
+* You must define the :ref:`employee-manager`, :ref:`Leaves-Types` and :ref:`employment-contract-type` 
 
 * You can choose the leave entitlement standard for each type of contract
 
@@ -105,7 +105,7 @@ Regulated absences have 3 states:
     
 .. index:: Employees
 
-.. _employee_manager:
+.. _employee-manager:
     
 Employees and Manager
 =====================
@@ -113,9 +113,9 @@ Employees and Manager
 .. sidebar:: Other section 
 
    * :ref:`resource`
-   * :ref:`Module_Management`
+   * :ref:`module-management`
 
-The properties below is visible only when the :ref:`regulated Absence module<Module_Management>` is enabled
+The properties below is visible only when the :ref:`regulated Absence module<module-management>` is enabled
 
 
 .. rubric:: Employee
@@ -150,11 +150,11 @@ In this section, the employee can see the person who manage its leaves periods
 
       .. compound:: Employment Contract
       
-         This section is visible and linked to the :ref:`employment_contract_type` screen
+         This section is visible and linked to the :ref:`employment-contract-type` screen
    
-         To an employee are associated a :ref:`employment_contract` and :ref:`leaves_rights_earned` 
+         To an employee are associated a :ref:`employment-contract` and :ref:`leaves-rights-earned` 
          
-         The contract is associated with a :ref:`employment_contract_type` 
+         The contract is associated with a :ref:`employment-contract-type` 
          
          This allow the employee to associate the rules of acquisition, the special rules of regulated absences and the acquired rights by type of absence and by acquisition period.
 
@@ -243,7 +243,7 @@ The administrator is obligatorily a leave manager
 
 .. index:: Leaves Calendar
 
-.. _leaves_calendar:
+.. _leaves-calendar:
 
 Leaves Calendar
 ===============
@@ -281,7 +281,7 @@ The color of the holidays will change according to the validation.
 
 .. index:: Leaves Period
 
-.. _leaves_period:
+.. _leaves-period:
    
 Leaves Periods
 ==============
@@ -310,7 +310,7 @@ The Employee Manager and Administrator can change the status of a holiday (see :
 
 .. index:: Leaves rights earned
 
-.. _leaves_rights_earned:
+.. _leaves-rights-earned:
 
 Leave Rights earned
 ===================
@@ -337,7 +337,7 @@ You no longer have this type of holiday available and can not ask any more
 
 .. index:: Employment Contract
 
-.. _employment_contract:
+.. _employment-contract:
 
 Employment contract
 ===================
@@ -357,7 +357,7 @@ You can see the details of the contracts and which employee is attached to them
 
 .. index:: Leaves Dashboard
 
-.. _leaves_dashboard:
+.. _leaves-dashboard:
 
 Leaves Dashboard
 ================
@@ -419,7 +419,7 @@ It is therefore based on values to be given to attributes of regulation accordin
 
 .. rubric:: General acquisition of rights
 
-When you create a :ref:`employment_contract_type` or :ref:`Leaves_Types`, you have several contractual values to fill in.
+When you create a :ref:`employment-contract-type` or :ref:`Leaves-Types`, you have several contractual values to fill in.
 
 .. figure:: /images/GUI/RH_ZONE_LeavesRights.png
    :alt: Contractual values for the leaves type
@@ -513,7 +513,7 @@ Usable entities are:
 
 
 
-.. _Leaves_Types:
+.. _Leaves-Types:
 
 Leaves types
 ^^^^^^^^^^^^
@@ -548,7 +548,7 @@ In this section, you can defined who received an internal alert or an email on t
 .. seealso:: More detail about **contractual values**, see :ref:`earned_rights`
    
 
-.. _employment_contract_type:
+.. _employment-contract-type:
 
 Employment contract type
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -582,8 +582,7 @@ You can only have one type of default contract
    
 * In this section you can define which types of regulated absences will be attached to this type of contract.
 
-* If you have created several types of regulated absences and attached them to all your contracts
- (check box **on default** or **on everything**), these types will be visible in this section.
+* If you have created several types of regulated absences and attached them to all your contracts (check box **on default** or **on everything**), these types will be visible in this section.
 
 
 If you are missing types of absences, you can create them from this screen:
@@ -649,6 +648,8 @@ This rule follows the vocabulary of the SQL language
 
 The type of regulated absence to which will be attached, the rule of special absence.   
 
+.. _employmentEndRaison:
+
 Employment contract end reason
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -668,6 +669,9 @@ These different reasons may lead to changes in the rules governing the acquisiti
    :align: center
    
    Employment contract end reason box
+
+
+.. _leavesSystemHabilitation:
 
 Leaves System habilitation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
