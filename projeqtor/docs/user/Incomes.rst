@@ -13,7 +13,7 @@ Incomes
 .. index:: Quotation 
 
 .. _quotation:
-.. _client_quotation
+.. _client-quotation:
 
 Client Quotation
 ----------------
@@ -125,7 +125,7 @@ This section allows to detail the quotation modality.
 
 .. _orders:
 
-.. _client_orders:
+.. _client-orders:
 
 Client Orders
 -------------
@@ -273,7 +273,7 @@ This section allows to detail the order modality.
 
 .. _term:
 
-.. _client_billing_term:
+.. _client-billing-term:
 
 Client billing terms
 --------------------
@@ -388,7 +388,7 @@ This section allows to manage element trigger.
 
 .. _bill:
 
-.. _client_bill:
+.. _client-bill:
 
 Client Bills
 ------------
@@ -768,10 +768,10 @@ This is used to calculate a billing amount for billing type **On produced work**
 .. index:: Bill (Payment)
 .. index:: Payment
 
-.. _payment:
+.. _client-payment:
 
-Payments
-========
+Client Payments
+---------------
 
 Allow to define payment of bills. 
 
@@ -839,7 +839,7 @@ The bill keeps track of payment.
     
 .. index:: Financial Galery
 
-.. _financial_gallery:
+.. _financial-gallery:
 
 Financial Gallery
 -----------------

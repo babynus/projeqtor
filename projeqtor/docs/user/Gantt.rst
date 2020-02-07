@@ -1304,19 +1304,7 @@ Links existing between tasks on different resources are not displayed.
       
       all is well
       
-   Condition : Assigned resources are available and meet workload, validated or scheduled dates do not conflict with other items   
-
-
-
-
-
-
-
-
-
-
-
-.. image:: /images/iconAutomation.png
+   Condition : Assigned resources are available and meet workload, validated or scheduled dates do not conflict with other items.
 
 
 

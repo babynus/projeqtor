@@ -91,6 +91,8 @@ Allows to define parameters for automatic refresh.
          
  * Selects the delay between two scrolling.
 
+.. _items-be-displayed:
+
 .. rubric:: Items to be displayed
 
 * Allows to define sections displayed on the screen.
