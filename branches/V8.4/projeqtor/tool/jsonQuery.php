@@ -515,6 +515,9 @@
 	              ' on (' . $externalTableAlias . '.refId=' . $table . ".id" . 
 	              ' and ' . $externalTableAlias . ".refType='" . $objectClass . "')";
 	          }
+	          if ($from=='OrganizationBudgetElementCurrent') {
+	            $queryFrom.=' and '.$externalTableAlias . '.' . $externalObj->getDatabaseColumnName('year').'='.date('Y');
+	          }
 	          if (strlen($fld)>4 and substr($fld,0,4)=="name") {
               $idTab+=1;
               // requested field is nameXXX => must fetch it from external table, using idXXX
