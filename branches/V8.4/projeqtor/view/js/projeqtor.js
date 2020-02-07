@@ -3101,7 +3101,9 @@ function drawGantt() {
         pPlannedStart = item.plannedstartdate;
         pWork = item.leftworkdisplay;
         g.setSplitted(true);
-      } else {
+      } else if(dojo.byId('contractGantt')){
+        pEnd=item.realstartdate;
+      }else {
         pEnd = (trim(item.realenddate) != "") ? item.realenddate : pEnd;
       }
       if (pEnd < pStart)
@@ -3161,6 +3163,7 @@ function drawGantt() {
       }      
       
       // pMile : is it a milestone ?      
+      console.log(item.reftype);
       var pMile = (item.reftype == 'Milestone') ? 1 : 0;
       if (pMile) {
         pStart = pEnd;
