@@ -394,7 +394,7 @@ class EmployeeLeaveEarnedMain extends SqlElement {
     }
 
     // At least one EmployeeLeaveEarned unclosed by leave type
-    if ($old->idle==0 and $this->idle==1) {
+    if ($old->idle==0 and $this->idle==1 and $this->quantity!==null) {
         $unclosedEmpLE = $this->getEmployeeLeaveEarnedForAnEmployee($this->idEmployee,$this->idLeaveType, false,false);
         if (!count($unclosedEmpLE)) {
         $result.='<br/>' . i18n('AtLeastOneOpenedEmployeeLeaveEarned');            
@@ -526,7 +526,7 @@ class EmployeeLeaveEarnedMain extends SqlElement {
         if ($result=="OK") { $result="";}
         
         // At least one EmployeeLeaveEarned unclosed
-        if ($this->idle==0) {
+        if ($this->idle==0 and $this->quantity!==null) {
             $unclosedEmpLE = $this->getEmployeeLeaveEarnedForAnEmployee($this->idEmployee,$this->idLeaveType, false,false);
             if (!count($unclosedEmpLE)) {
             $result.='<br/>' . i18n('AtLeastOneOpenedEmployeeLeaveEarned');            
