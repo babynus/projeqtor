@@ -323,9 +323,9 @@ ProjeQtOr  can manage various financial elements found on a project: Quotation (
 .. topic:: **more details**
 
    * :ref:`Expenses`
-   * :ref:`Incomes<client_orders>`
+   * :ref:`Incomes<client-orders>`
    * :ref:`bill`
-   * :ref:`financial_gallery`
+   * :ref:`financial-gallery`
 
 .. raw:: latex
 

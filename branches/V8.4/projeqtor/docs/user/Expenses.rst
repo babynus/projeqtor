@@ -13,6 +13,8 @@ The expenses incurred for the project are monitored.
 
 .. index:: Budget
 
+.. _budget:
+
 Budget
 ------
 
@@ -190,7 +192,9 @@ This section brings and displays the :ref:`project-expense` lines in the details
 
     \newpage
     
-.. index:: Supplier contract    
+.. index:: Supplier contract  
+
+.. _supplier-contrat:  
     
 Supplier Contract
 -----------------
@@ -507,7 +511,7 @@ Orders to provider
 
 .. index:: Terms of payment to provider (Expenses)
 
-.. _Term_payment:
+.. _TermPaymentProvider:
 
 Terms of payments to providers
 ------------------------------
