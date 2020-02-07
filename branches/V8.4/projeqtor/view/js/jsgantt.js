@@ -746,7 +746,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           var field=sortArray[iSort];
           if (field.substr(0,6)=='Hidden') field=field.substr(6);
           var fieldWidth=getPlanningFieldWidth(field);
-          if (field!='Name' && (field=='StartDate' || field=='EndDate' || field=='IdStatus' || field=='Type' || field=='Resource')) vLeftWidth+=1+fieldWidth;
+          if (field!='Name' && (field=='Resource' || field=='IdStatus' || field=='Type' || field=='StartDate' || field=='EndDate' ||  field=='Duration'  )) vLeftWidth+=1+fieldWidth;
         }
     }
     //ADD
@@ -843,7 +843,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           var field=sortArray[iSort];
           if (field.substr(0,6)=='Hidden') field=field.substr(6);
           var fieldWidth=getPlanningFieldWidth(field);
-        if((field!='Name' && (field=='StartDate' || field=='EndDate' || field=='IdStatus' || field=='Type' || field=='Resource'))) {
+        if(field!='Name' && (field=='Resource' || field=='IdStatus' || field=='Type' || field=='StartDate' || field=='EndDate' ||  field=='Duration'  )) {
             vLeftTable += '<TD class="ganttLeftTopLine" style="width: ' + fieldWidth + 'px;"></TD>' ;
           }
         }
@@ -856,7 +856,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           var field=sortArray[iSort];
           if (field.substr(0,6)=='Hidden') field=field.substr(6);
           var fieldWidth=getPlanningFieldWidth(field);
-          if((field!='Name' && (field=='StartDate' || field=='EndDate' || field=='IdStatus' || field=='Type' || field=='Resource'))) {
+          if(field!='Name' && (field=='Resource' || field=='IdStatus' || field=='Type' || field=='StartDate' || field=='EndDate' ||  field=='Duration'  )) {
             vLeftTable += '<TD id="jsGanttHeaderTD'+field+'" class="ganttLeftTitle" style="position:relative;width: ' + fieldWidth + 'px;max-width: ' + fieldWidth + 'px;overflow:hidden" nowrap>'
               +'<div id="jsGanttHeader'+field+'" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width:' + fieldWidth + 'px; z-index:1000;" class="namePartgroup">'
               +'<span class="nobr">'+ JSGantt.i18n( ('col'+field).replace('Work','')) + '</span>'
@@ -978,7 +978,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           if( vTaskList[i].getMile() ) {
         	  vLeftTable += '<div style="width:16px; height:13px;" class="ganttNoExpandMile"></div>';	
           } else {
-            vLeftTable += '<div style="width:16px; height:13px;" class="ganttNoExpand"></div>';
+              vLeftTable += '<div style="width:16px; height:13px;" class="ganttNoExpand"></div>';
           }
         }
         vLeftTable +='</td><td>';
@@ -1008,7 +1008,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             if (field.substr(0,6)=='Hidden') field=field.substr(6);
             var fieldWidth=getPlanningFieldWidth(field);
             var valueField=vTaskList[i].getFieldValue(field,JSGantt);
-            if(field!='Name' && ( field=='StartDate' || field=='EndDate' || field=='IdStatus' || field=='Type' || field=='Resource'  )) { 
+            if(field!='Name' && (field=='Resource' || field=='IdStatus' || field=='Type' || field=='StartDate' || field=='EndDate' ||  field=='Duration'  )) { 
                if(valueField===undefined && (field=='StartDate' || field=='EndDate' )  ){
                   valueField='-';
                 }
@@ -1214,7 +1214,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
         } else {
           vRightTable += '<DIV onselectstart="event.preventDefault();return false;" class="ganttUnselectable" onMouseup="JSGantt.cancelLink('+i+');" id=childgrid_'+vID+' style="position:relative;">';
         }
-        if( vTaskList[i].getMile() ) {
+        if( vTaskList[i].getMile()) {
           vRightTable += '<DIV ' + ffSpecificHeight+ '>'
             + '<TABLE class="rightTableLine" style="width: ' + (vChartWidth) + 'px; " >' 
             + '<TR id=childrow_'+vID+' class="ganttTaskmile" style="height: 21px;"'
