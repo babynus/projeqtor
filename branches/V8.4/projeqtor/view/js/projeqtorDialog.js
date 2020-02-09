@@ -3154,6 +3154,7 @@ function addDependency(depType) {
     if (objectClass == 'Term') {
       dojo.byId("dependencyDelayDiv").style.display="none";
       dojo.byId("dependencyTypeDiv").style.display="none";
+      dijit.byId("typeOfDependency").set("value","E-S");
     } else {
       dojo.byId("dependencyDelayDiv").style.display="block";
       dojo.byId("dependencyTypeDiv").style.display="block";
