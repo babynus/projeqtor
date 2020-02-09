@@ -415,7 +415,7 @@ class UserMain extends SqlElement {
     foreach ($habilitationList as $hab) { // if allowAcces = 1 in habilitation (access to screen), default access is all
     	if (array_key_exists($hab->idMenu,$menuList)) {
     	  $menuName=$menuList[$hab->idMenu];
-    	  if ($hab->allowAccess==1) {
+    	  if ($hab->allowAccess==1 and Module::isMenuActive($menuName)) {
     	    $accessControlRights[$menuName]=$allAccessArray;
     	  } else {
     	    $accessControlRights[$menuName]=$noAccessArray;
@@ -426,7 +426,7 @@ class UserMain extends SqlElement {
     }
     foreach ($accessRightList as $arObj) {
       $menuName=(array_key_exists($arObj->idMenu,$menuList))?$menuList[$arObj->idMenu]:'';
-      if (! $menuName or ! array_key_exists($menuName, $accessControlRights)) {
+      if (! $menuName or ! array_key_exists($menuName, $accessControlRights) or ! Module::isMenuActive($menuName)) {
         $accessControlRights[$menuName]=$noAccessArray;	
       } else {
         $scopeArray=$noAccessArray;
