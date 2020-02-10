@@ -36,13 +36,29 @@ scriptLog('   ->/view/hierarchicalBudgetView.php');
 $objectClass='Budget';
 $obj=new $objectClass();
 $table=$obj->getDatabaseTableName();
-$print=false;
+
 if ( array_key_exists('print',$_REQUEST) ) {
 	$print=true;
 }
 
-$accessRightRead=securityGetAccessRight('menuProject', 'read');
-$imputOfAmountProvider = Parameter::getGlobalParameter('ImputOfAmountProvider');
+
+$showFullAmount = false;
+if(sessionValueExists('showFullAmount')){
+  $amount = getSessionValue('showFullAmount');
+  if($amount=='true'){
+  	$showFullAmount = true;
+  }else{
+  	$showFullAmount=false;
+  }
+}else{
+  $amount = Parameter::getGlobalParameter('ImputOfAmountProvider');
+  if($amount == 'HT'){
+  	$showFullAmount=false;
+  }else{
+  	$showFullAmount=true;
+  }
+}
+
 $currency = Parameter::getGlobalParameter('currency');
 
 $querySelect ='';
@@ -62,7 +78,7 @@ $query='select ' . $querySelect
 $result=Sql::query($query);
 
 // Header
-echo '<table id="budgetTable" dojoType="dojo.dnd.Source" align="left" width="70%" style="">';
+echo '<table id="dndHierarchicalBudgetList" dojoType="dojo.dnd.Source" align="left" width="100%" style="">';
 echo '<TR class="ganttHeight" style="height:32px">';
 echo '  <TD class="reportTableHeader" style="width:10px; border-right: 0px;"></TD>';
 echo '  <TD class="reportTableHeader" style="width:200px; border-left:0px; text-align: left;">' . i18n('colTask') . '</TD>';
@@ -84,7 +100,7 @@ echo '</TR>';
 if (Sql::$lastQueryNbRows > 0) {
 	while ($line = Sql::fetchLine($result)) {
 		$line=array_change_key_case($line,CASE_LOWER);
-		if($imputOfAmountProvider == 'HT'){
+		if(!$showFullAmount){
 		  $plannedAmount=$line['plannedamount'];
 		  $initialAmount=$line['initialamount'];
 		  $update1Amount=$line['update1amount'];
@@ -97,7 +113,7 @@ if (Sql::$lastQueryNbRows > 0) {
 		  $availableAmount=$line['availableamount'];
 		  $billedAmount=$line['billedamount'];
 		  $leftAmount=$line['leftamount'];
-		}else if($imputOfAmountProvider == 'TCC'){
+		}else {
 		  $plannedAmount=$line['plannedfullamount'];
 		  $initialAmount=$line['initialfullamount'];
 		  $update1Amount=$line['update1fullamount'];
@@ -128,15 +144,30 @@ if (Sql::$lastQueryNbRows > 0) {
 		for ($i=1;$i<$level;$i++) {
 			$tab.='<span class="ganttSep">&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 		}
-		echo '<TR id="budgetRow_'.$id.'" dndType="budgetHierachical" class="dojoDndItem ganttTask'.$rowType.'" height="30px" onClick="loadContent('."'objectDetail.php?objectClass=Budget&objectId=$id'".', '."'detailDiv'".','."'listForm'".')">';
-		echo '  <TD class="ganttName reportTableData" style="border-right:0px;' . $compStyle . '">'.formatIcon('Budget', 16);
-		if($pGroup){
-		  echo     '<div id="group_'.$line['id'].'" class="ganttExpandClosed"';
-		  echo      'style="position: relative; z-index: 100000; width:16px; height:13px;"';
-		  echo     ' onclick="">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
-		}
+		echo '<TR id="budgetRow_'.$id.'" dndType="budgetHierachical" class="dojoDndItem ganttTask'.$rowType.'" height="30px">';
+		echo '  <TD class="ganttName reportTableData" style="border-right:0px;' . $compStyle . '">';
+		echo '  <span class="dojoDndHandle handleCursor">';
+		echo '  <table><tr>';
+		echo '  <td class="ganttIconBackground">';
+		echo    formatIcon('Budget', '16');
+		echo '  </td>';
+		echo '  <td><img style="width:8px" src="css/images/iconDrag.gif" /></td>';
+		echo '  </tr></table>';
+		echo '  </span>';
 		echo '</TD>';
-		echo '  <TD class="ganttName reportTableData" style="border-left:0px; text-align: left;' . $compStyle . '" nowrap>' . $tab . htmlEncode($line['name']) . '</TD>';
+		echo '  <TD class="ganttName reportTableData" style="border-left:0px; text-align: left;' . $compStyle . '" nowrap>';
+		echo '<div class="ganttLeftHover" style="width:100%;" onClick="dojo.byId('."'objectId'".').value='.$id.';loadContent('."'objectDetail.php'".', '."'detailDiv'".','."'listForm'".');"></div>';
+		echo '  <table><tr>';
+		echo '  <td>';
+		if($pGroup){
+			echo     '<div id="group_'.$line['id'].'" class="ganttExpandClosed"';
+			echo      'style="position: relative; z-index: 100000; width:16px; height:13px;"';
+			echo     ' onclick="JSGantt.folder('.$line['id'].',g);g.DrawDependencies();">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
+		}
+		echo '  </td>';
+		echo '  <td>'.$tab . htmlEncode($line['name']).'</td>';
+		echo '  <tr></table>';
+		echo '</TD>';
 		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;">' .htmlDisplayCurrency($plannedAmount). '</TD>' ;
 		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;">' .htmlDisplayCurrency($initialAmount). '</TD>' ;
 		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;">' .htmlDisplayCurrency($update1Amount). '</TD>' ;

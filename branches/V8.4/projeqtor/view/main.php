@@ -178,10 +178,6 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     dojo.require("dojox.grid.DataGrid");
     dojo.require("dojox.image.Lightbox");
     dojo.subscribe("/dnd/drop", function(source, nodes, copy, target){
-        console.log(source);
-        console.log(nodes);
-        console.log(copy);
-        console.log(target);  
       if(target.id == null){
       //gautier #translationApplication
         //if (target.id == null) we are in dgrid DROP , nothing to do.
@@ -198,15 +194,15 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
           var mode=(target.id=='subscriptionAvailable')?'off':'on';
           changeSubscriptionFromDialog(mode,'other',item.getAttribute('objectclass'),item.getAttribute('objectid'),item.getAttribute('userid'),null,item.getAttribute('currentuserid'))
         }
-      } else if (source.id!=target.id) { 
+      }else if (source.id!=target.id) {
         return;
       } else if (nodes.length>0 && nodes[0] && target && target.current) {
         var moveTasks=false;
         var arrayTasks=new Array();
         dojo.forEach(nodes, function(selectedItem) {
            var idFrom = selectedItem.id;
-           var idTo = target.current.id;                   
-           if (target.id=='dndSourceTable') { 
+           var idTo = target.current.id;
+           if (target.id=='dndSourceTable') {
              moveTasks=idTo;
              arrayTasks.push(idFrom);
            } else  if (target.id=='dndPlanningColumnSelector') {
@@ -221,7 +217,10 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
              setTimeout('moveFilterListColumn()',100); 
            } else if( target.id=='dndListFilterSelector2') {
              setTimeout('moveFilterListColumn2()',100); 
+           } else if( target.id=='dndHierarchicalBudgetList') {
+             setTimeout('moveBudgetFromHierarchicalView("' + idFrom + '", "' + idTo + '")',100); 
            }
+           
         });
         if (moveTasks) {
         //setTimeout('moveTask("' + idFrom + '", "' + idTo + '")',100);
