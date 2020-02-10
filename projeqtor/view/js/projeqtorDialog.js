@@ -6610,6 +6610,8 @@ function switchModeLoad(currentScreen,currentObject,paramDiv,paramToSend,objectI
     urlParams+="&productVersionsListId="+productVersionsListId;
   }else if(currentScreen=='ContractGantt') {
     urlPage="contractGanttMain.php";
+  }else if(currentScreen=='HierarchicalBudget') {
+    urlPage="hierarchicalBudgetMain.php";
   }
   var callBack=null;
   if(objectIdScreen !=''){
@@ -7661,6 +7663,17 @@ function movePlanningColumn(source, destination) {
     }
   });
   // loadContent(url, "resultDivMain");
+}
+
+function moveBudgetFromHierarchicalView(idFrom, idTo){
+	 var url='../tool/moveBudgetFromHierarchicalView.php?idFrom=' + idFrom +'&idTo='+idTo;
+	  dojo.xhrPost({
+	    url : url,
+	    handleAs : "text",
+	    load : function(data, args) {
+	    	loadContent("../view/refreshHierarchicalBudgetList.php", "hierarchicalListDiv", null, false);
+	    }
+	  });
 }
 
 /*
