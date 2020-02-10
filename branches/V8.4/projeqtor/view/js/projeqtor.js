@@ -1735,6 +1735,9 @@ function finalizeMessageDisplay(destination, validationType) {
             if (url!="") {
 // MTY - LEAVE SYSTEM    
             loadDiv(url, 'buttonDivCreationInfo',null, callback);
+	          if (dojo.byId("HierarchicalBudget")) {
+		          loadContent("../view/refreshHierarchicalBudgetList.php", "hierarchicalListDiv", null, false);
+          	  }
           }
         }
         }
@@ -3163,7 +3166,6 @@ function drawGantt() {
       }      
       
       // pMile : is it a milestone ?      
-      console.log(item.reftype);
       var pMile = (item.reftype == 'Milestone') ? 1 : 0;
       if (pMile) {
         pStart = pEnd;
@@ -6607,4 +6609,12 @@ function dropFilesFormOnDrop() {
   event.preventDefault();
   dojo.byId('dropFilesInfoDiv').style.opacity='0%';
   dojo.byId('dropFilesInfoDiv').style.display='none';
+}
+
+function refreshHierarchicalBudgetList(){
+	showWait();
+	callback=function(){
+		hideWait();
+	}
+	loadContent("../view/refreshHierarchicalBudgetList.php", "hierarchicalListDiv", null, false, null, null, null, callback, null);
 }

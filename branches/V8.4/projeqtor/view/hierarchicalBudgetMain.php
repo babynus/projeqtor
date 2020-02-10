@@ -10,7 +10,7 @@ scriptLog('   ->/view/hierarchicalBudgetMain.php');
 $paramScreen=RequestHandler::getValue('paramScreen');
 $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
 $paramRightDiv=RequestHandler::getValue('paramRightDiv');
-$currentScreen='VersionsPlanning';
+$currentScreen='HierarchicalBudget';
 setSessionValue('currentScreen', $currentScreen);
 $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
 $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
@@ -19,9 +19,9 @@ if ($positionListDiv=='top'){
   $listHeight=HeightLayoutListDiv($currentScreen);
 }
 if($positonRightDiv=="bottom"){
-  $rightHeightVersionsPlanning=getHeightLaoutActivityStream($currentScreen);
+  $rightHeightHierarchicalBudget=getHeightLaoutActivityStream($currentScreen);
 }else{
-  $rightWidthVersionsPlanning=getWidthLayoutActivityStream($currentScreen);
+  $rightWidthHierarchicalBudget=getWidthLayoutActivityStream($currentScreen);
 }
 $tableWidth=WidthDivContentDetail($positionListDiv,$currentScreen);
 $activModeStream=Parameter::getUserParameter('modeActiveStreamGlobal');
@@ -36,42 +36,8 @@ $objectType='';
 if (array_key_exists('objectType',$_REQUEST)) {
 	$objectType=$_REQUEST['objectType'];
 }
-
-$budgetParent=RequestHandler::getValue('budgetParent');
-
-$objectClient='';
-if (array_key_exists('objectClient',$_REQUEST)) {
-	$objectClient=$_REQUEST['objectClient'];
-}
-$objectElementable='';
-if (array_key_exists('objectElementable',$_REQUEST)) {
-	$objectElementable=$_REQUEST['objectElementable'];
-}
+$objectId=RequestHandler::getId('objectId');
 $obj=new $objectClass;
-
-if (array_key_exists('Directory', $_REQUEST)) {
-	setSessionValue('Directory', $_REQUEST['Directory']);
-} else {
-	unsetSessionValue('Directory');
-}
-$multipleSelect=false;
-if (array_key_exists('multipleSelect', $_REQUEST)) {
-	if ($_REQUEST['multipleSelect']) {
-		$multipleSelect=true;
-	}
-}
-$showIdle=(! $comboDetail and sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle')==1)?1:0;
-if ((Parameter::getUserParameter('showIdleDefault'))=='true') $showIdle=($showIdle==1)?0:1;
-if (! $comboDetail and is_array( getSessionUser()->_arrayFilters)) {
-	if (array_key_exists($objectClass, getSessionUser()->_arrayFilters)) {
-		$arrayFilter=getSessionUser()->_arrayFilters[$objectClass];
-		foreach ($arrayFilter as $filter) {
-			if ($filter['sql']['attribute']=='idle' and $filter['sql']['operator']=='>=' and $filter['sql']['value']=='0') {
-				$showIdle=1;
-			}
-		}
-	}
-}
 
 $displayWidthList="1980";
 if (RequestHandler::isCodeSet('destinationWidth')) {
@@ -106,9 +72,6 @@ $referenceWidth=50;
 if ($comboDetail) {
 	$screenWidth=getSessionValue('screenWidth',$displayWidthList);
 	$displayWidthList=round($screenWidth*0.55,0)+150;
-}
-if ($displayWidthList<1560 and $objectClass == 'Budget' ) {
-	$hideClientSearch=true;
 }
 if ($displayWidthList<1400) {
 	$referenceWidth=40;
@@ -196,78 +159,55 @@ if (property_exists($objectClass,'idStatus')) {
 		}
 	}
 }
+$showFullAmount = false;
+if(sessionValueExists('showFullAmount')){
+  $amount = getSessionValue('showFullAmount');
+  if($amount=='true'){
+  	$showFullAmount = true;
+  }else{
+  	$showFullAmount=false;
+  }
+}else{
+  $amount = Parameter::getGlobalParameter('ImputOfAmountProvider');
+  if($amount == 'HT'){
+  	$showFullAmount=false;
+  }else{
+  	$showFullAmount=true;
+  }
+}
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="HierarchicalBudget" />
-<input type="hidden" name="objectClass" id="objectClass" value="Budget" />
-<input type="hidden" id="forceRefreshMenu" value="HierarchicalBudget" />
 <input type="hidden" name="HierarchicalBudget" id="HierarchicalBudget" value="true" />
 <div id="mainDivContainer" class="container" dojoType="dijit.layout.BorderContainer" onclick="hideDependencyRightClick();">
 <div dojoType="dijit.layout.ContentPane" region="top" id="listHeaderDiv" style="width:50%;">
-  <form dojoType="dijit.form.Form" id="quickSearchListForm" action="" method="" >
-  <script type="dojo/method" event="onSubmit" >
-    quickSearchExecute();
-    return false;        
-  </script>
-  <div class="listTitle" id="quickSearchDiv" 
-     style="display:none; height:100%; width: 100%; position: absolute;z-index:9">
-    <table >
-      <tr height="100%" style="vertical-align: middle;">
-        <td style="width:50px;min-width:50px" align="center">  
-         <div style="position:absolute;left:0px;width:43px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>      
-         <div style="z-index:9;position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" /></div>    
-        </td>
-        <td><span class="title" ><?php echo i18n("menu" . $objectClass);?></span></td>
-        <td style="text-align:right;" width="200px">
-                <span class="nobr">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <?php echo i18n("quickSearch");?>
-                &nbsp;</span> 
-        </td>
-        <td style="vertical-align: middle;">
-          <div title="<?php echo i18n('quickSearch')?>" type="text" class="filterField rounded" dojoType="dijit.form.TextBox" 
-             id="quickSearchValue" name="quickSearchValue"
-             style="width:200px;">
-          </div>
-        </td>
-	      <td style="width:36px">            
-	        <button title="<?php echo i18n('quickSearch')?>"  
-	          dojoType="dijit.form.Button" 
-	          id="listQuickSearchExecute" name="listQuickSearchExecute"
-	          iconClass="dijitButtonIcon dijitButtonIconSearch" class="detailButton" showLabel="false">
-	          <script type="dojo/connect" event="onClick" args="evt">
-              //dijit.byId('quickSearchListForm').submit();
-              quickSearchExecute();
-          </script>
-	        </button>
-	      </td>      
-        <td style="width:36px">
-          <button title="<?php echo i18n('comboCloseButton')?>"  
-            dojoType="dijit.form.Button" 
-            id="listQuickSearchClose" name="listQuickSearchClose"
-            iconClass="dijitButtonIcon dijitButtonIconUndo" class="detailButton" showLabel="false">
-            <script type="dojo/connect" event="onClick" args="evt">
-              quickSearchClose();
-            </script>
-          </button>
-        </td>    
-      </tr>
-    </table>
-  </div>
-  </form>
 <table width="100%" class="listTitle" >
   <tr >
     <td style="width:50px;min-width:43px;" align="center">
        <div style="position:absolute;left:0px;width:43px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>
        <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" /></div>
     </td>
-    <td class="title" style="height:35px;width:30%;">
+    <td class="title" style="height:35px;width:10%;">
       <div style="width:100%;height:100%;position:relative;">
         <div id="menuName" style="width:100%;position:absolute;top:8px;text-overflow:ellipsis;overflow:hidden;"><span id="classNameSpan" style="padding-left:5px;"><?php echo i18n("menuHierarchicalBudget");?></span></div>
       </div>
     </td>
-    <td>   
-      <form dojoType="dijit.form.Form" id="listForm" action="" method="" >
-            
-      </form>
+    <td style="height:35px;width:90%;">
+        <table style="float:right;margin-right: 2%;width:12%;">
+          <tr>
+            <td>
+              <div title="<?php echo i18n('showFullAmount')?>" dojoType="dijit.form.CheckBox" type="checkbox" class="whiteCheck"
+                id="showFullAmount" name="showFullAmount" <?php if ($showFullAmount) echo "checked=ckecked"?>>
+                <script type="dojo/method" event="onChange" >
+                  saveDataToSession('showFullAmount', this.checked, false);
+                  refreshHierarchicalBudgetList();
+                </script>
+              </div>
+            </td>
+            <td>
+              <label for="showFullAmount" class="notLabel" style="text-shadow: 0px 0px;margin-left: 2%;"><?php echo i18n('showFullAmount')?></label>  
+            </td>
+          </tr>
+        </table>
     </td>
   </tr>
 </table>
@@ -284,7 +224,13 @@ if (property_exists($objectClass,'idStatus')) {
             saveDataToSession("contentPaneTopDetailDivWidth<?php  echo $currentScreen;?>", dojo.byId("listDiv").offsetWidth, true);
           }
     </script>
-   <?php include 'hierarchicalBudgetView.php'?>
+    <form dojoType="dijit.form.Form" id="listForm" action="" method="" >
+      <input type="hidden" name="objectClass" id="objectClass" value="Budget" />
+      <input type="hidden" id="objectId" name="objectId" value="<?php if (isset($_REQUEST['objectId']))  { echo htmlEncode($_REQUEST['objectId']);}?>"/>
+    </form>
+    <div id="hierarchicalListDiv" name="hierarchicalListDiv" dojoType="dijit.layout.ContentPane" region="center">
+    <?php include 'hierarchicalBudgetView.php'?>
+    </div>
   </div>
   <div id="contentDetailDiv" dojoType="dijit.layout.ContentPane" region="center"   style="width:<?php  echo $tableWidth[1]; ?>;">
       <script type="dojo/connect" event="resize" args="evt">
@@ -318,7 +264,7 @@ if (property_exists($objectClass,'idStatus')) {
         </div>
     <?php if (Module::isModuleActive('moduleActivityStream')) {?>
         <div id="detailRightDiv" dojoType="dijit.layout.ContentPane" region="<?php echo $positonRightDiv; ?>" splitter="true" 
-             style="<?php  if($positonRightDiv=="bottom"){echo "height:".$rightHeightVersionsPlanning;}else{ echo "width:".$rightWidthVersionsPlanning;}?>">
+             style="<?php  if($positonRightDiv=="bottom"){echo "height:".$rightHeightHierarchicalBudget;}else{ echo "width:".$rightWidthHierarchicalBudget;}?>">
               <script type="dojo/connect" event="resize" args="evt">
                 var paramDiv=<?php echo json_encode($positionListDiv); ?>;
                 var paramMode=<?php echo json_encode($codeModeLayout); ?>;
