@@ -228,6 +228,10 @@ class Work extends GeneralWork {
         $crit=array('idWorkElement'=>$this->idWorkElement,'workDate'=>$this->workDate); // retreive work for this assignment & day (assignment includes resource)
       }
       $work=SqlElement::getSingleSqlElementFromCriteria('Work', $crit);
+      if (isset($we) and $we->id) {
+        $we->realWork+=$this->work;
+        $we->save(true);
+      }
       if ($work->id) {
         $work->work+=$this->work;
         $result=$work->save();
