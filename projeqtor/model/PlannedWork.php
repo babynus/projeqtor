@@ -943,10 +943,14 @@ class PlannedWork extends GeneralWork {
               }
               if ($profile=='FIXED' and $currentDate>$plan->validatedEndDate) {
                 $changedAss=true;
-                $ass->notPlannedWork=$left;
+                $ass->notPlannedWork=$left;  
                 if ($ass->optional==0) {
                   $plan->notPlannedWork+=$left;
-                  $arrayNotPlanned[$ass->id]=i18n('planResourceNotAvailable',array(round($left,2)));
+                  if ($plan->refType=='Meeting' and $plan->validatedEndDate<date('Y-m-d')) {
+                    // No alert for meetings in the past...
+                  } else {
+                    $arrayNotPlanned[$ass->id]=i18n('planResourceNotAvailable',array(round($left,2)));
+                  }
                 }              
                 $left=0;
                 break;
