@@ -51,7 +51,7 @@ if (isset($rightWidth)) {
 		$rightWidthVal=intval(str_replace('px', '', $rightWidth));
 	}
 } else {
-	$detailRightDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass);
+	$detailRightDivWidth=Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$currentScreen);
 	if (!$detailRightDivWidth) $detailRightDivWidth=0;
 	if($detailRightDivWidth or $detailRightDivWidth==="0"){
 		$rightWidthVal=$detailRightDivWidth;
@@ -97,68 +97,7 @@ if ($displayWidthList<1400) {
 	}
 }
 $extrahiddenFields=$obj->getExtraHiddenFields('*','*');
-if ($obj->isAttributeSetToField('idClient','hidden') or in_array('idClient',$extrahiddenFields)) $hideClientSearch=true;
-if ($obj->isAttributeSetToField('idBudget','hidden') or in_array('idBudget',$extrahiddenFields)) $hideParentBudgetSearch=true;
-if ($obj->isAttributeSetToField('id'.$objectClass.'Type','hidden') or in_array('id'.$objectClass.'Type',$extrahiddenFields)) $hideTypeSearch=true;
 
-if ($comboDetail) $referenceWidth-=5;
-
-$iconClassName=((SqlElement::is_subclass_of($objectClass, 'PlgCustomList'))?'ListOfValues':$objectClass);
-
-$allProjectsChecked=false;
-if (RequestHandler::getValue('objectClass')=='Project' and RequestHandler::getValue('mode')=='search') {
-	$allProjectsChecked=true;
-}
-
-//Gautier saveParam
-if(sessionValueExists('listTypeFilter'.$objectClass)){
-	$listTypeFilter = getSessionValue('listTypeFilter'.$objectClass);
-}else{
-	$listTypeFilter = '';
-}
-if(sessionValueExists('listClientFilter'.$objectClass)){
-	$listClientFilter = getSessionValue('listClientFilter'.$objectClass);
-}else{
-	$listClientFilter = '';
-}
-if(sessionValueExists('listElementableFilter'.$objectClass)){
-	$listElementableFilter = getSessionValue('listElementableFilter'.$objectClass);
-}else{
-	$listElementableFilter = '';
-}
-if(sessionValueExists('listBudgetParentFilter') and $objectClass=='Budget'){
-	$listBudgetParent = getSessionValue('listBudgetParentFilter');
-}else{
-	$listBudgetParent = '';
-}
-if(sessionValueExists('listShowIdle'.$objectClass)){
-	$listShowIdle = getSessionValue('listShowIdle'.$objectClass);
-	if($listShowIdle == "on"){
-		$listShowIdle = true;
-	}else{
-		$listShowIdle = '';
-	}
-}else{
-	$listShowIdle = '';
-}
-
-//objectStatus
-$objectStatus = array();
-$object = new $objectClass();
-$cptStatus=0;
-$filteringByStatus = false;
-if (property_exists($objectClass,'idStatus')) {
-	$listStatus = $object->getExistingStatus();
-	foreach ($listStatus as $status) {
-		$cptStatus += 1;
-		if(sessionValueExists('showStatus'.$status->id.$objectClass)){
-			if(getSessionValue('showStatus'.$status->id.$objectClass)=='true'){
-				$filteringByStatus = true;
-				$objectStatus[$cptStatus] = $status->id;
-			}
-		}
-	}
-}
 $showFullAmount = false;
 if(sessionValueExists('showFullAmount')){
   $amount = getSessionValue('showFullAmount');
@@ -184,7 +123,7 @@ if(sessionValueExists('showFullAmount')){
   <tr >
     <td style="width:50px;min-width:43px;" align="center">
        <div style="position:absolute;left:0px;width:43px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>
-       <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $iconClassName;?>32 icon<?php echo $iconClassName;?> iconSize32" /></div>
+       <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $objectClass;?>32 icon<?php echo $objectClass;?> iconSize32" /></div>
     </td>
     <td class="title" style="height:35px;width:10%;">
       <div style="width:100%;height:100%;position:relative;">
