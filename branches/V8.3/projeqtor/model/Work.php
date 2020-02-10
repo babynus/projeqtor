@@ -205,7 +205,13 @@ class Work extends GeneralWork {
           if ($ass->id) {
             $this->idAssignment=$ass->id;
           } else {
-            return "ERROR idAssignment mandatory"; // could not retrieve assignment, so is mandatory
+          	$crit=array('refType'=>$this->refType,'refId'=>$this->refId);
+            $we=SqlElement::getSingleSqlElementFromCriteria('WorkElement', $crit);
+      			if ($we->id) {
+      				$this->idWorkElement=$we->id;
+      			} else {
+      				return "ERROR either idAssignment or idWorkElement is mandatory"; // could not retrieve assignment or workelement, so is mandatory
+      			}
           }
         }
       } else { // refType & refId can be retreived from assignment
@@ -214,7 +220,13 @@ class Work extends GeneralWork {
         $this->refId=$ass->refId;
         $this->idResource=$ass->idResource;
       }
-      $crit=array('idAssignment'=>$this->idAssignment,'workDate'=>$this->workDate); // retreive work for this assignment & day (assignment includes resource)
+      //$crit=array('idAssignment'=>$this->idAssignment,'workDate'=>$this->workDate); // retreive work for this assignment & day (assignment includes resource)
+      //$work=SqlElement::getSingleSqlElementFromCriteria('Work', $crit);
+      if ($this->idAssignment) {
+        $crit=array('idAssignment'=>$this->idAssignment,'workDate'=>$this->workDate); // retreive work for this assignment & day (assignment includes resource)
+      } else {
+        $crit=array('idWorkElement'=>$this->idWorkElement,'workDate'=>$this->workDate); // retreive work for this assignment & day (assignment includes resource)
+      }
       $work=SqlElement::getSingleSqlElementFromCriteria('Work', $crit);
       if ($work->id) {
         $work->work+=$this->work;
