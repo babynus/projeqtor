@@ -81,11 +81,12 @@ function drawElementContractGantt($objectClass,$lstContract,$nbRows){
         echo ',"reftype":"Milestone"';
           if($contract->noticeDate){
             echo ',"realstartdate":"'.($contract->noticeDate).'"';
+            echo ',"refname":"noticeDate_'.htmlEncode(htmlEncodeJson($contract->name)).'"';
           }else{
             echo ',"realstartdate":"'.($contract->deadlineDate).'"';
+            echo ',"refname":"dueDate_'.htmlEncode(htmlEncodeJson($contract->name)).'"';
           }
-         echo '  }';
+        echo '  }';
       }
-      
     }
 }
