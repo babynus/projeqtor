@@ -151,7 +151,7 @@ if (Sql::$lastQueryNbRows > 0) {
 		echo '  <td class="ganttIconBackground">';
 		echo    formatIcon('Budget', '16');
 		echo '  </td>';
-		echo '  <td><img style="width:8px" src="css/images/iconDrag.gif" /></td>';
+		echo '  <td><img style="margin-right:2px;width:8px" src="css/images/iconDrag.gif" /></td>';
 		echo '  </tr></table>';
 		echo '  </span>';
 		echo '</TD>';

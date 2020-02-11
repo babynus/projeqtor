@@ -13,6 +13,7 @@ $paramRightDiv=RequestHandler::getValue('paramRightDiv');
 $currentScreen='HierarchicalBudget';
 setSessionValue('currentScreen', $currentScreen);
 $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
+debugLog($positionListDiv);
 $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
 $codeModeLayout=Parameter::getUserParameter('paramScreen');
 if ($positionListDiv=='top'){
@@ -131,7 +132,8 @@ if(sessionValueExists('showFullAmount')){
       </div>
     </td>
     <td style="height:35px;width:90%;">
-        <table style="float:right;margin-right: 2%;width:12%;">
+    <?php if($positionListDiv == 'left'){ $style='float:left;margin-left:40%;width:12%';}else{$style='float:right;margin-right: 2%;width:12%;';}?>
+        <table style="<?php echo $style;?>">
           <tr>
             <td>
               <div title="<?php echo i18n('showFullAmount')?>" dojoType="dijit.form.CheckBox" type="checkbox" class="whiteCheck"
@@ -152,7 +154,7 @@ if(sessionValueExists('showFullAmount')){
 </table>
 </div>
   <div id="listDiv" dojoType="dijit.layout.ContentPane" region="<?php  echo $positionListDiv;?>" splitter="true" 
-   style="<?php if($positionListDiv=='top'){echo "height:".$listHeight;}else{ echo "width:".$tableWidth[0];}?>">
+   style="<?php if($positionListDiv=='top'){echo "height:".$listHeight;}else{ echo "width:".$tableWidth[0];}?>;overflow-y: auto;">
     <script type="dojo/connect" event="resize" args="evt">
          if (switchedMode) return;
          var paramDiv=<?php  echo json_encode($positionListDiv); ?>;
@@ -167,7 +169,7 @@ if(sessionValueExists('showFullAmount')){
       <input type="hidden" name="objectClass" id="objectClass" value="Budget" />
       <input type="hidden" id="objectId" name="objectId" value="<?php if (isset($_REQUEST['objectId']))  { echo htmlEncode($_REQUEST['objectId']);}?>"/>
     </form>
-    <div id="hierarchicalListDiv" name="hierarchicalListDiv" dojoType="dijit.layout.ContentPane" region="center">
+    <div id="hierarchicalListDiv" name="hierarchicalListDiv" dojoType="dijit.layout.ContentPane" region="center" >
     <?php include 'hierarchicalBudgetView.php'?>
     </div>
   </div>
