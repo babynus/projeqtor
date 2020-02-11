@@ -3074,3 +3074,7 @@ table.dijitCalendarContainer {
 tr.dojoDndHorizontal .dojoDndItem {
   display: table-cell;
 }
+
+table.dijitValidationTextBoxMenu tr td.dijitMenuItemIconCell {
+	width:2px;
+}
