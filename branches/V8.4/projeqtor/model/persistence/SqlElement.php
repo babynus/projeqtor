@@ -7247,6 +7247,7 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
         $result['refInitialDueDate']=self::getRefInitialDueDate($this->ref2Type, $this->ref2Id);
         $result['refActualDueDate']=self::getRefActualDueDate($this->ref2Type, $this->ref2Id);
         $result['refDate']=self::getRefDate($this->ref2Type, $this->ref2Id);
+        $result['refDescription']=self::getRefDescription($this->ref2Type, $this->ref2Id);
       } else {
         $result['refType']=$this->ref1Type;
         $result['refId']=$this->ref1Id;
@@ -7257,6 +7258,7 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
         $result['refInitialDueDate']=self::getRefInitialDueDate($this->ref1Type, $this->ref1Id);
         $result['refActualDueDate']=self::getRefActualDueDate($this->ref1Type, $this->ref1Id);
         $result['refDate']=self::getRefDate($this->ref1Type, $this->ref1Id);
+        $result['refDescription']=self::getRefDescription($this->ref1Type, $this->ref1Id);
       }
     }
     if (get_class($this)=='Project' and !$parent) {
@@ -7275,6 +7277,11 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
   public static function getRefStatus($refType,$refId) {
     $idStatus=self::getRefField($refType, $refId, 'idStatus');
     return ($idStatus)?SqlList::getNameFromId('Status',$idStatus):'';
+  }
+  public static function getRefDescription($refType,$refId) {
+    $desc=self::getRefField($refType, $refId, 'description');
+    $text=new Html2Text($desc);
+    return $text->getText();
   }
   public static function getRefResponsible($refType,$refId) {
     $idResource=self::getRefField($refType, $refId, 'idResource');
