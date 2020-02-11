@@ -224,8 +224,21 @@ class Work extends GeneralWork {
       //$work=SqlElement::getSingleSqlElementFromCriteria('Work', $crit);
       if ($this->idAssignment) {
         $crit=array('idAssignment'=>$this->idAssignment,'workDate'=>$this->workDate); // retreive work for this assignment & day (assignment includes resource)
+        if (isset($ass)) {
+          if ($ass->idResource!=$this->idResource) {
+            return "ERROR work defined for Resource $this->idResource linked to Assignment $ass->id dedicated to resource $ass->idResource";
+          }
+          if ($ass->refType!=$this->refType or $ass->refId!=$this->refId) {
+            return "ERROR work refering to $this->refType #$this->refId linked to Assignment refering to $ass->refType #$ass->refId";
+          }
+        }
       } else {
         $crit=array('idWorkElement'=>$this->idWorkElement,'workDate'=>$this->workDate); // retreive work for this assignment & day (assignment includes resource)
+        if (isset($we)) {
+          if ($we->refType!=$this->refType or $we->refId!=$this->refId) {
+            return "ERROR work refering to $this->refType #$this->refId linked to WorkElement refering to $we->refType #$we->refId";
+          }
+        }
       }
       $work=SqlElement::getSingleSqlElementFromCriteria('Work', $crit);
       if (isset($we) and $we->id) {
