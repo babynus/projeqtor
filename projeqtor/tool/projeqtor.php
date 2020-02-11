@@ -2051,6 +2051,8 @@ function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sen
   $paramMailSmtpUsername=Parameter::getGlobalParameter('paramMailSmtpUsername');
   $paramMailSmtpPassword=Parameter::getGlobalParameter('paramMailSmtpPassword');
   $paramMailerType=strtolower(Parameter::getGlobalParameter('paramMailerType'));
+  $paramMailSender=Parameter::getGlobalParameter('paramMailSender');
+  if ($cronnedScript) $sender=$paramMailSender;
   // florent
   if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES' and $canSend==false and $autoSendReport!=true and ! $cronnedScript ){
     $curUser=new Affectable(getSessionUser()->id);
