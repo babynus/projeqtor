@@ -857,10 +857,14 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           if (field.substr(0,6)=='Hidden') field=field.substr(6);
           var fieldWidth=getPlanningFieldWidth(field);
           if(field!='Name' && (field=='Resource' || field=='IdStatus' || field=='Type' || field=='StartDate' || field=='EndDate' ||  field=='Duration'  )) {
+            if(field=='Resource' && dojo.byId('objectClass').value=='supplierContract'){
+              field='IdProvider';
+            }else if(field=='Resource' && dojo.byId('objectClass').value=='clientContract'){
+              field='IdClient';
+            }
             vLeftTable += '<TD id="jsGanttHeaderTD'+field+'" class="ganttLeftTitle" style="position:relative;width: ' + fieldWidth + 'px;max-width: ' + fieldWidth + 'px;overflow:hidden" nowrap>'
               +'<div id="jsGanttHeader'+field+'" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width:' + fieldWidth + 'px; z-index:1000;" class="namePartgroup">'
               +'<span class="nobr">'+ JSGantt.i18n( ('col'+field).replace('Work','')) + '</span>'
-              //+'<div class="columnHandle" onmousedown="startResizeJsHeader(event,\''+field+'\');"  onmouseup="stopResizeJsHeader(event);" onmouseleave="stopResizeJsHeader(event);" onmousemove="resizeJsHeader(event);">&nbsp;</div>'
               +'</div></TD>' ;
           }
         }
@@ -1009,8 +1013,10 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             var fieldWidth=getPlanningFieldWidth(field);
             var valueField=vTaskList[i].getFieldValue(field,JSGantt);
             if(field!='Name' && (field=='Resource' || field=='IdStatus' || field=='Type' || field=='StartDate' || field=='EndDate' ||  field=='Duration'  )) { 
-               if(valueField===undefined && (field=='StartDate' || field=='EndDate' )  ){
+               if(valueField===undefined &&  (field=='Type' || field=='StartDate' || field=='EndDate')){
                   valueField='-';
+                }else if(valueField===undefined  ){
+                  valueField='';
                 }
               vLeftTable += '<TD class="ganttDetail" style="width: ' + fieldWidth + 'px;">'
                 +'<span class="nobr hideLeftPart' + vRowType + '" style="width: ' + fieldWidth + 'px;text-overflow:ellipsis;">' + valueField

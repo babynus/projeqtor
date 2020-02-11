@@ -47,7 +47,7 @@ if ($proj=='*' or !$proj) {
 	$proj=null;
 }
 ?>
-
+<input type="hidden" name="objectClass" id="objectClass" value="supplierContract" />
 <div id="mainPlanningDivContainer" dojoType="dijit.layout.BorderContainer">
 	<div dojoType="dijit.layout.ContentPane" region="top" id="listHeaderDiv" height="27px"
 	style="z-index: 3; position: relative; overflow: visible !important;">

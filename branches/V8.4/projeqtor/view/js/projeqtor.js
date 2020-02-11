@@ -3104,7 +3104,7 @@ function drawGantt() {
         pPlannedStart = item.plannedstartdate;
         pWork = item.leftworkdisplay;
         g.setSplitted(true);
-      } else if(dojo.byId('contractGantt')){
+      } else if(dojo.byId('contractGantt') && item.reftype == 'Milestone'){
         pEnd=item.realstartdate;
       }else {
         pEnd = (trim(item.realenddate) != "") ? item.realenddate : pEnd;
