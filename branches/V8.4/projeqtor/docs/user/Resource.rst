@@ -5,24 +5,9 @@
     
 .. include:: ImageReplacement.txt
 
-
-.. title:: Environmental parameters
  
 .. index:: Environmental parameters 
-
-.. _environmental-parameters:
-
-************************
-Environmental parameters
-************************
-
- dfkjhrgihjklqfghjlkqfglkmdshglkdfjglkfjgmlsqjkfmlksjqdlkgfvjldkgfjlksdf
- 
- srdgfjuhdfgjkhfdkjghjfhgkjdfhgkjhfgv
- 
- 
- 
- .. index:: Resource (Definition) 
+.. index:: Resource (Definition) 
 
 .. _resource:
 

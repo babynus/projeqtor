@@ -10,8 +10,12 @@
 
 .. _RWA:
 
+********************
 Real work allocation
 ********************
+
+Timesheet
+=========
 
 This screen is devoted to input of real work.
 
@@ -461,7 +465,7 @@ The list displays the assigned tasks for the resource.
     \newpage
 
 The status of tasks
-*******************
+===================
 
 The task status can be changed automatically according to data entries on real work and left work.
 
@@ -499,7 +503,7 @@ The task status can be changed automatically according to data entries on real w
     \newpage
     
 Timesheet Validation
-********************
+====================
 
 The timesheet validation screen allows the project leader to receive, 
 
@@ -557,7 +561,7 @@ check and validate the time charged by the resources on an activity.
 .. _automatic-inuptwork:
 
 Automatic input of work
-***********************
+=======================
 
 The goal is to be able to automatically inform the real from the planned, until a given date, then trigger the automatic calculation of the projects from the day after that date.
 
@@ -583,7 +587,7 @@ We will mark the actual work entered automatically (technical zone type tag) to 
 .. _absence:
 
 Absences
-********
+========
 
 The absenteeism screen allows you to enter non-productive days, i.e. days not worked
 
