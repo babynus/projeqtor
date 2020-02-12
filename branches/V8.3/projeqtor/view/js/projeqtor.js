@@ -65,6 +65,14 @@ var arraySelectedProject = new Array();
 
 var displayFilterVersionPlanning='0';
 var displayFilterComponentVersionPlanning='0';
+
+var contentPaneResizingInProgress={};
+
+function saveContentPaneResizing(pane, size, saveAsUserParameter) {
+  if (contentPaneResizingInProgress[pane]) clearTimeout(contentPaneResizingInProgress[pane]);
+  contentPaneResizingInProgress[pane]=setTimeout('saveDataToSession("'+pane+'","'+size+'",'+((saveAsUserParameter)?'true':'false')+');contentPaneResizingInProgress["'+pane+'"]=null;',100);
+  //saveDataToSession(pane,size,saveAsUserParameter);
+}
 // =============================================================================
 // = Functions
 // =============================================================================
