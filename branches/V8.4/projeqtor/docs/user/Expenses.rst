@@ -47,16 +47,22 @@ It allows to anticipate the resources that the company will have at a specific m
     
    An indentation of these to the right shows that they are sub-budgets.
 
-
+   To see the closed items in this list, check the "closed" box
+   
+   
    .. figure:: /images/GUI/EXPENSES_ZONE_FilterBudgetParent.png
       :alt: Filter parent budget
    
       Display of a budget and its family
  
 
-   * Parent budget exists only to consolidate data from underlying budget items
-   * You can't change spending in the Progress field of a parent budget 
-   * Only the target amount can be changed if the budget treatment is under construction
+   * The parent budget exists only to consolidate the data of the underlying budget items
+
+   * You cannot modify the expenses in the Progress field of a parent budget
+
+   * Only the target amount can be changed if the budget treatment is still under construction.
+
+
 
 
  .. compound:: The budget item
@@ -72,7 +78,9 @@ It allows to anticipate the resources that the company will have at a specific m
    
    When you create a project expenditure or an individual expenditure, you can link them to a specific budget item.
 
-   In the dropdown list of budget items, only the budget items will be available. Parent budgets will be grayed out and you will not be able to select them.
+   In the dropdown list of budget items, only the budget items will be available. 
+   
+   Parent budgets will be grayed out and you will not be able to select them.
    
 
 .. rubric:: Description

@@ -935,3 +935,26 @@ Added list of deliverables integrated in delivery.
      - Flag to indicate that delivery is archived.
 
 To follow life cycle management on deliveries (status managed by a workflow)
+
+
+
+
+
+.. _global_view:
+
+Global View
+***********
+
+the “Global list” screen lists all the main elements of a project in a single list.
+
+This overview allows you to search among all the types of ProjeQtOr elements available in the same query. Just select what should be displayed.
+
+.. figure:: /images/GUI/GUI_SCR_GlobalView.png
+   :alt: Global View Screen
+   :align: center
+
+.. raw:: latex
+
+    \newpage
+    
+

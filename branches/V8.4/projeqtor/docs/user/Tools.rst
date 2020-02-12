@@ -42,10 +42,28 @@ The programmed emails will be grouped in this screen before their automatic send
    :alt: Email to send screen
 
 
-.. raw:: latex
+.. index:: Scheduled report
 
-    \newpage
+.. _scheduled-report:
 
+Scheduled report
+----------------
+
+In reports, you can schedule sending emails for accurate reports. 
+
+You can get the list and details of this programming on this screen
+
+Click on Button |buttonIconDelete| to cancelled the programmation
+
+.. figure:: /images/GUI/TOOLS_ZONE_ScheduledReport.png
+   :alt: scheduled report screen
+   
+   Scheduled report screen
+   
+See: :ref:`Report Sending programmation<sending-report>`
+
+
+   
 
 .. index:: Internal alert (Sent)
 
@@ -443,7 +461,7 @@ You can also track requests from other users based on your profiles and your rig
 
    Identify yourself and name your space
    
-   The simulated databases will always have a name prefixed by \"simu_" followed by the name of the simulation.
+   The simulated databases will always have a name prefixed by \simu_ followed by the name of the simulation.
    
 
 

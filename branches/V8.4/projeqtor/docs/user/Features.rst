@@ -154,9 +154,9 @@ In this diagram view, you can view decisions, test sessions, deliveries, risks, 
 
 All of which can be linked to an activity or any other element of the diagram. 
 
-.. index:: Planning management (Resources Planning)
+.. index:: Planning management (Resource planning)
 
-.. rubric:: Resources Planning
+.. rubric:: Resource Planning
  
 You can display the planning for each resource, but also by team, by pool or you can display all the resources whatever their assignments or assignments.
 
@@ -164,6 +164,7 @@ You can display the planning for each resource, but also by team, by pool or you
 
    * :ref:`planning_element`
    * :ref:`Gantt_chart`
+   * :ref:`resource-planning`
    
 .. raw:: latex
 
@@ -568,6 +569,35 @@ Test sessions group test cases to be executed for a particular purpose.
    * :ref:`requirement`
    * :ref:`requirements-dashboard`   
    
+   
+   
+   
+   
+   
+   
+
+.. raw:: latex
+
+    \newpage
+
+.. index:: Asset Management
+
+.. title:: Asset Management
+
+.. _asset-management:
+
+Asset Management
+****************
+
+ProjeQtor includes IT asset management. The park is made up of equipment and each of these equipment may contain other equipment and will have a type of equipment.
+
+The concept of license will be managed in the form of equipment, by defining license type equipment, which is linked to software type equipment.
+
+This method makes it possible to define a stock of purchased licenses and to assign them progressively to the equipment on which they are installed.
+
+
+
+
 
 .. index:: Humans Resources
 

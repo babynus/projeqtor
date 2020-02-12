@@ -344,12 +344,7 @@ This section allows to:
    .. compound:: **Multiple update**
 
     * Defines the possibility or not to change one or more criteria for one or more selected rows at a time
-
-   .. compound:: **activate automatic generation of expense**
-   
-    * Allows you to prohibit, depending on the profile of the user on the project concerned, the use of the check box "Create the expense from the current element" in the Offers, Orders to supplier and Invoices supplier forms. The setting is enabled by default
-  
-  
+ 
   
 .. rubric:: Planning access rights
 
@@ -366,10 +361,13 @@ This section allows to:
 
 .. rubric:: Specific update rights
 
+* Defines for each profile the ability to manage all notes.
+* Defines for each profile the ability to delete attached files.
 * Defines for each profile the ability to force delete items.
 * Defines for each profile the ability to force close items.
 * Defines for each profile the ability to update creation information.
 * Defines for each profile the ability to mention or not the components on a ticket.
+* Defines for each profile the ability to use the check box "Create the expense from the current element"
 
 
 .. rubric:: Limit visibilty to resources
