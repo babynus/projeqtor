@@ -483,7 +483,7 @@ you can add an activity directly in the version planning.
    
    Add a new activity
 
-To see the related activities, you must check the box "show activities related to component versions" or "show activities related to product versions".
+To display the related activities, you must check the box "show activities related to component versions" or "show activities related to product versions".
 
 New check boxes will appear: one to show resources and the other to show or hide versions with no activity displayed.
 
@@ -492,10 +492,12 @@ New check boxes will appear: one to show resources and the other to show or hide
    
    display activities related to component versions or product versions
    
-The selection of an existing activity is imperative for knowing where to insert the new activity.
+You must select an existing activity to insert the new activity into the WBS structure.
 
-We will therefore insert it after the selected activity, on the same project, with the same component and the same component version, and with the same product and the same product version if these elements are filled in on the original activity .
+If no activity is selected then the "add new element" icon will be grayed out.
+
+The new activity is automatically inserted after the selected activity.
+
+The new activity is generated on the same project, with the same component, the same component version, and with the same product and the same product version if these elements are filled in on the original activity.
 
 The insertion from the selection of a product and component version will not be possible because we do not know where to insert it in the WBS of the projects.
-   
-   

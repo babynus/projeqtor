@@ -18,7 +18,12 @@ Reports
    
    Reports screen
    
-A list of reports is available in different categories.
+A list of reports is available in different categories. They themselves contain several sub-categories. There are 91 reports.
+
+
+
+Reports display
+---------------
 
 .. figure:: /images/GUI/REPORT_ZONE_Menu.PNG
    :alt: Reports screen
@@ -37,7 +42,7 @@ A list of reports is available in different categories.
    :alt: Reports screen
    :align: center
 
-.. rubric:: |four| Buttons
+.. rubric:: Buttons
 
 * Click on |buttonIconDisplay| to display the report.
 * Click on |buttonIconPrint| to get a printable version of the report.
@@ -162,14 +167,14 @@ You can choose from many criteria to create your filter
 
 .. index:: Report (Favorite)
 
-.. _sending_report:
+.. _sending-report:
    
 Report Sending programmation
 ----------------------------
 
 .. sidebar:: Other sections
 
-   * :ref:`scheduled_report`
+   * :ref:`scheduled-report`
    
 Ability to schedule the sending of reports as emails
 

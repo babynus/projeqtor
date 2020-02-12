@@ -299,6 +299,9 @@ Assigning a resource to a task makes it possible to define its function on the l
 * Click on |iconGoto| to go directly to the allocation sheet for this resource. 
 * Click on the name of the resource to access the detail of the latter on the resource screen.
 
+
+.. _goto-timesheet:
+
 .. rubric:: Go to the timesheet
 
 The button |iconGoto| allows you to go to the timesheet of the selected resource with the line of the current element highlighted.
@@ -467,7 +470,7 @@ Validated data can be used:
 
 * Planned dates are the estimated time to complete tasks or the estimated end date of milestones.
 * Planned dates are the estimated duration to complete tasks by resources according to assigned work.
-* Planned dates can be used to initialize validated and requested dates. (See: :ref:`project-planning`)
+* Planned dates can be used to initialize validated and requested dates.
  
 .. rubric:: Column "Assigned"
 
@@ -1281,8 +1284,6 @@ Click on the name of a predecessor or successor to go directly to the element.
   
 .. seealso:: 
 
-  * :ref:`project-planning`
-  
   * :ref:`Dependencies<dependency-links>`
   
   * :ref:`Milestones on the Gantt Chart View<milestones-gantt>`
