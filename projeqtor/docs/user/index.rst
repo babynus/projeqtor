@@ -132,8 +132,8 @@ This chapter includes ProjeQtOr features that allow you to practice agile method
    Agile
 
    
-Parameters
-----------
+Settings
+--------
 
 ProjeQtOr provides a very rich user interface.
 
@@ -144,16 +144,35 @@ as all screens have the same frames and sections always have simular structure a
 .. toctree::
    :titlesonly:
 
-   Gui
-   CommonSections
+   
    UserParameter
-   Administration
    GlobalParameters
+   
+   Administration
+   
    AccessRights
    ListsOfTypes
    ListsOfValues
+   
    ControlAutomation
    Tools
+
+Graphical user interface
+------------------------
+
+ProjeQtOr provides a very rich user interface.
+
+It may be frightening at first glance because of the very numerous elements it provides, 
+but once you'll get familiar to the structure of the interface you'll discover that it is quite simple 
+as all screens have the same frames and sections always have simular structure and position.
+
+.. toctree::
+   :titlesonly:
+   
+   Gui
+   CommonSections
+   
+
 
 
 Planning and Follow-up
@@ -206,8 +225,6 @@ Steering
 
    Steering
    ConfigurationManagement
-   Ticket
-   TicketDashBoard
    
    
 Requirements & Tests
@@ -219,13 +236,15 @@ Requirements & Tests
    RequirementsDashBoard
    RequirementsTest
 
-Risk & Issue Management
------------------------
+Risk Management & Ticketing
+---------------------------
 
 .. toctree::
    :maxdepth: 1   
    
    RiskIssueManagement
+   Ticket
+   TicketDashBoard
    
 
 Environmental parameters

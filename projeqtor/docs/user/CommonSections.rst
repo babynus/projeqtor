@@ -630,8 +630,8 @@ Next indicators defined for Milestone.
 
 .. _progress-section-activity:
 
-Project, Activity & Test session
-================================
+Others sections
+===============
 
 Next sections describe each part of progress section display.
 
@@ -790,8 +790,8 @@ Sum of resource total work that will be needed from start to end and the ensuing
 
 .. _progress-section-expense-reserve:
 
-Expense, Reserve and Total
-""""""""""""""""""""""""""
+expense tracking
+""""""""""""""""
 
 .. only:: html
 
@@ -849,8 +849,8 @@ Project reserve.
 
 .. _progress-section-miscellaneous:
 
-Progress, Expected, WBS & Priority
-""""""""""""""""""""""""""""""""""
+Progress
+""""""""
 
 .. rubric:: Progress
 
