@@ -68,9 +68,9 @@
          var paramDiv=<?php echo json_encode($positionListDiv); ?>;
          var paramMode=<?php echo json_encode($codeModeLayout); ?>;
          if(paramDiv=="top" && paramMode!='switch'){
-             saveDataToSession("contentPaneTopDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("listDiv").offsetHeight, true);
+             saveContentPaneResizing("contentPaneTopDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("listDiv").offsetHeight, true);
           }else if(paramMode!='switch'){
-              saveDataToSession("contentPaneTopDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("listDiv").offsetWidth, true);
+              saveContentPaneResizing("contentPaneTopDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("listDiv").offsetWidth, true);
           }
     </script>
    <?php include 'resourcePlanningList.php'?>
@@ -84,9 +84,9 @@
             return;
            }
            if(paramDiv=="top" && paramMode!='switch'){
-            saveDataToSession("contentPaneDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
+            saveContentPaneResizing("contentPaneDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetHeight, true);
            }else if(paramMode!='switch'){
-              saveDataToSession("contentPaneDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
+              saveContentPaneResizing("contentPaneDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
               var param=dojo.byId('objectClass').value;
               var paramId=dojo.byId('objectId').value;
               if(paramId !='' && multiSelection==false){
@@ -119,13 +119,13 @@
                     return;
                   }
                   if(paramRightDiv=='trailing'){
-                    saveDataToSession("contentPaneRightDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("detailRightDiv").offsetWidth, true);
+                    saveContentPaneResizing("contentPaneRightDetailDivWidth<?php echo $currentScreen;?>", dojo.byId("detailRightDiv").offsetWidth, true);
                     var newWidth=dojo.byId("detailRightDiv").offsetWidth;
                     dojo.query(".activityStreamNoteContainer").forEach(function(node, index, nodelist) {
                     node.style.maxWidth=(newWidth-30)+"px";
                     });
                   }else{
-                    saveDataToSession("contentPaneRightDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("detailRightDiv").offsetHeight, true);
+                    saveContentPaneResizing("contentPaneRightDetailDivHeight<?php echo $currentScreen;?>", dojo.byId("detailRightDiv").offsetHeight, true);
                     var newHeight=dojo.byId("detailRightDiv").offsetHeight;
                     if (dojo.byId("noteNoteStream")) dojo.byId("noteNoteStream").style.height=(newHeight-40)+'px';
                  }
