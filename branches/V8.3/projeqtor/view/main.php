@@ -774,7 +774,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       <script type="dojo/connect" event="resize" args="evt">
          if (hideShowMenuInProgress) return;
          if (dojo.byId("leftDiv").offsetWidth>52) 
-         saveDataToSession("contentPaneLeftDivWidth", dojo.byId("leftDiv").offsetWidth, true);
+         saveContentPaneResizing("contentPaneLeftDivWidth", dojo.byId("leftDiv").offsetWidth, true);
          dojo.byId("hideMenuBarShowButton2").style.left=dojo.byId("leftDiv").offsetWidth+3+"px";
       </script>
       <div id="menuBarShow" class="dijitAccordionTitle " onMouseover="tempShowMenu('mouse');" onClick="tempShowMenu('click');">
@@ -841,7 +841,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
            $leftBottomHeight=($leftBottomHeight)?$leftBottomHeight.'px':'300px';?>
         <div dojoType="dijit.layout.ContentPane" id="leftBottomDiv" region="bottom" splitter="true" style="height:<?php echo $leftBottomHeight;?>;">
           <script type="dojo/connect" event="resize" args="evt">
-             saveDataToSession("contentPaneLeftBottomDivHeight", dojo.byId("leftBottomDiv").offsetHeight, true);
+             saveContentPaneResizing("contentPaneLeftBottomDivHeight", dojo.byId("leftBottomDiv").offsetHeight, true);
           </script>
           <div id="accordionLeftBottomDiv" dojoType="dijit.layout.AccordionContainer" persists="true">
             <?php $selectedAccordionBottom=Parameter::getUserParameter('accordionPaneBottom');
