@@ -27,14 +27,14 @@ Find in this manual, every 3 months, the latest news integrated into ProjeQtOr
 
 .. container:: 
    
-   **Kanban**
+   **Asset Management**
 
    .. image:: /images/iconKanban.png
       :align: center
       
    ProjeQtOr integrates the AGILE method Kanban into its basic version.
    
-   :ref:`kanban`
+   :ref:`asset-management`
    
    
    
@@ -104,10 +104,11 @@ It is particularly well suited to IT projects, but can manage any type of projec
 It offers all the features needed to different Project Management actors under a unique collaborative interface.
   
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    
    Features
-
+   TransverseFeatures
+   
 Concepts
 --------
 
@@ -131,8 +132,8 @@ This chapter includes ProjeQtOr features that allow you to practice agile method
    Agile
 
    
-Graphical user interface
-------------------------
+Parameters
+----------
 
 ProjeQtOr provides a very rich user interface.
 
@@ -146,7 +147,13 @@ as all screens have the same frames and sections always have simular structure a
    Gui
    CommonSections
    UserParameter
-
+   Administration
+   GlobalParameters
+   AccessRights
+   ListsOfTypes
+   ListsOfValues
+   ControlAutomation
+   Tools
 
 
 Planning and Follow-up
@@ -166,50 +173,19 @@ In order to ease his work, ProjeQtOr provides several reporting tools, from the 
    Today 
    Diary
    Report
-
-
-Real work allocation
---------------------
-
-As ProjeQtOr implements Effort Driven planning (work drives planning calcuation), 
-one of the key to manage project progress is to enter the real work 
-and re-estimate left work for all ongoing tasks.
-
-ProjeQtOr provides a dedicate screen for this feature, to ease this input so that entering real work is as quick as possible.
- 
-.. toctree::
-   :titlesonly:
-
    RealWorkAllocation
 
-Document management
--------------------
 
-ProjeQtOr integrates an easy to use Document Management feature.
+
+Document Management System
+--------------------------
 
 .. toctree::
-   :maxdepth: 2
-
+   :maxdepth: 1
+   
    Document
-
-Ticket management
------------------
-
-.. toctree::
-   :maxdepth: 1
-
-   Ticket
-   TicketDashBoard
-
   
-Requirements & Tests
---------------------
-
-.. toctree::
-   :maxdepth: 1
-
-   RequirementsTest
-   RequirementsDashBoard
+  
 
 Financial
 ---------
@@ -220,21 +196,7 @@ Financial
    Expenses
    Incomes
    
-Configuration Management
-------------------------
 
-.. toctree::
-   :maxdepth: 1
-
-   ConfigurationManagement
-
-Risk & Issue Management
------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-   RiskIssueManagement
 
 Steering
 --------
@@ -243,6 +205,28 @@ Steering
    :maxdepth: 1
 
    Steering
+   ConfigurationManagement
+   Ticket
+   TicketDashBoard
+   
+   
+Requirements & Tests
+--------------------
+
+.. toctree::
+   :maxdepth: 1   
+   
+   RequirementsDashBoard
+   RequirementsTest
+
+Risk & Issue Management
+-----------------------
+
+.. toctree::
+   :maxdepth: 1   
+   
+   RiskIssueManagement
+   
 
 Environmental parameters
 ------------------------
@@ -255,51 +239,11 @@ Environmental parameters
    Customer
    Provider
    Recipient
-
-Tools
------
-
-.. toctree::
-   :maxdepth: 2
- 
-   Tools
-
-Controls & Automation
----------------------
-
-.. toctree::
-   :maxdepth: 1
- 
-   ControlAutomation
-
-Access rights
--------------
-
-.. toctree::
-   :maxdepth: 1
- 
-   AccessRights
-
-Lists of values
----------------
-
-.. toctree::
-   :maxdepth: 1
-
-   ListsOfValues
-
-
-.. _index-element-types-label:
-
-Lists of types
---------------
-
-Every element is linked to a type, defining some mandatory data or other GUI behavior.
-
-.. toctree::
-   :maxdepth: 1
+   Organization
+   HumanResources
    
-   ListsOfTypes
+
+   
 
 Plug-ins
 --------
@@ -309,38 +253,8 @@ Plug-ins
 
    Plugin
 
-Organizations
--------------
 
-.. toctree::
-   :maxdepth: 1
 
-   Organization
-
-Administration
---------------
-
-.. toctree::
-   :maxdepth: 1
-
-   Administration
-   GlobalParameters
-
-Transverses Features
---------------------
-
-.. toctree::
-   :maxdepth: 1
-
-   TransverseFeatures   
-
-Humans Resources
-----------------
-
-.. toctree::
-   :maxdepth: 1
-
-   HumanResources   
    
 Glossary
 --------

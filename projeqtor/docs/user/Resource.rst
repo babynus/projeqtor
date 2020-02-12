@@ -5,9 +5,24 @@
     
 .. include:: ImageReplacement.txt
 
-.. title:: Resource
+
+.. title:: Environmental parameters
  
-.. index:: Resource (Definition) 
+.. index:: Environmental parameters 
+
+.. _environmental-parameters:
+
+************************
+Environmental parameters
+************************
+
+ dfkjhrgihjklqfghjlkqfglkmdshglkdfjglkfjgmlsqjkfmlksjqdlkgfvjldkgfjlksdf
+ 
+ srdgfjuhdfgjkhfdkjghjfhgkjdfhgkjhfgv
+ 
+ 
+ 
+ .. index:: Resource (Definition) 
 
 .. _resource:
 
@@ -33,6 +48,7 @@ Resources
    
    * :ref:`Allocations<allocation-section>`
    * :ref:`Assignment<assignment-section>`
+   * :ref:`Resource planning<resource-planning>`
 
 
 .. rubric:: Description zone
@@ -60,7 +76,6 @@ Resource availability is defined by assigning it to a project.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -299,7 +314,6 @@ This section allows to define functions and cost of the resource.
    Resource cost dialog box
 
 .. list-table:: Resource cost dialog box fields
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -321,7 +335,6 @@ This section allows to define functions and cost of the resource.
 
 
 .. list-table:: Miscellanous section fields
-   :widths: 40, 80
    :header-rows: 1
 
    * - Field
@@ -568,7 +581,6 @@ Teams
 .. tabularcolumns:: |l|l|
 
 .. list-table:: **Description section fields**
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -670,7 +682,6 @@ A Pop Up open and you can defined the Off day
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Description section fields
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field

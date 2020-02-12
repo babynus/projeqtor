@@ -7,6 +7,7 @@
 
     \newpage
         
+.. _graphic-user-interface:
 
 Graphical User Interface
 ************************
@@ -81,6 +82,10 @@ Top bar
    
    |four| :ref:`New tab<buttons-new-tab>` 
    
+   
+   
+   
+   
 .. index:: Project (Selector)
 
 .. _project-selector:
@@ -92,8 +97,6 @@ Top bar
    :align: center
    
 Allows to select the project to work on.
-
-Projects must be defined as "handled" to appear in the project selector.
 
 Limited visibility of all elements of the selected project, including sub-projects if applicable.
 
@@ -118,17 +121,34 @@ You can choose to display multiple projects by checking the corresponding boxes.
 
 Click on |buttonIconParameter| to display the project selector parameters dialog box, you can select :
 
-   * View closed projects (Enter the Archive Mode).
+   * View closed projects and handled projects.
    * Change the project list display mode.
    * Refresh the list.
 
 .. figure:: /images/GUI/GUI_BOX_ProjectSelect-Param.png
    :alt: Dialog box - Project selector parameters
    :align: center
-   
+
+
+.. rubric:: Show or hide
+
+Choose which types of projects to display from the project selector list.
+
+ .. compound:: show closed items
+ 
+   This option allows you to enter the archive mode of the project selector.
+
+   Closed projects will then appear in the selector list.
+
+   For them to appear in the list box you must activate the check box "closed" in this same area.
+
+ .. compound:: Display the handled projects
+ 
+   This option allows to display only in the list of the project selector, the projects with the macro state :term:`handled`. 
+
 .. rubric:: Display mode
 
-project list display mode
+Project list display mode
 
    .. compound:: Standard reflecting WBS structure
    
@@ -498,7 +518,7 @@ Each button is listed below
 
 .. _advanced-filter:
          
-  .. compound:: |buttonIconFilter| Advanced filter
+  .. compound:: |buttonIconFilter| Advanced filters
          
    Click on the icon to define an advanced filter. 
             
@@ -602,43 +622,42 @@ Each button is listed below
 
 .. _displayed-columns:
 
-  .. compound:: |buttonIconColumn| Displayed columns
+ .. compound:: |buttonIconColumn| Displayed columns
 
-   This functionality allows to define columns displayed in the list  for this element.
-   
-   * Click on **OK** button to apply changes.
-   * Click on **Reset** button to reset the list to its default format. 
-   
-  .. note::
+  This functionality allows to define columns displayed in the list  for this element.
       
-      * The columns display is defined for the user.
-      * The definition will be automatically applied in the next connection.
+  .. note::
+     * The columns display is defined for the user.
+     * The definition will be automatically applied in the next connection.
    
-   .. figure:: /images/GUI/GUI_BOX_SelectColunmsToDisplay.png
+  .. figure:: /images/GUI/GUI_BOX_SelectColunmsToDisplay.png
       :alt: Dialog box - Select columns to display 
       :align: center
       
       Select columns to display
-
-
-      .. compound:: Column selection
-
-         * Use checkboxes to select or unselect columns to display.
-
-         .. note:: 
+      
+  * Click on **OK** button to apply changes.
+  * Click on **Reset** button to reset the list to its default format. 
          
-             **Id** and **name** are mandatory fields. They cannot be removed from display.
 
-      .. compound:: Columns order
 
-         * Use the selector area |buttonIconDrag| to reorder fields with drag & drop feature.
+  .. compound:: Column selection
+  
+   Use checkboxes to select or unselect columns to display.
+  
+  .. note:: 
+   **Id** and **name** are mandatory fields. They cannot be removed from display.
 
-      .. compound:: Column size 
+  .. compound:: Columns order
+  
+   Use the selector area |buttonIconDrag| to reorder fields with drag & drop feature.
 
-         * Use the spinner button |one| to change the width of the field.
-         * Width is in % of the total list width.
-         * The minimum width is 1%. 
-         * The maximum width is 50%.
+  .. compound:: Column size 
+
+   * Use the spinner button |one| to change the width of the field.
+   * Width is in % of the total list width.
+   * The minimum width is 1%. 
+   * The maximum width is 50%.
          
           .. note:: **Field Name**
          
@@ -797,8 +816,8 @@ Click on a line (any column) will display the corresponding item in the detail w
 
 .. _detail-window:
 
-Detail window
--------------
+Details window
+--------------
 
 .. topic:: Interface areas:
 
@@ -1997,27 +2016,3 @@ Indicates the visibility level defined in a note or attachment.
 * Displays a colored circle for field colorable.
 * Some list of values has a field to define a color. 
 * A color is defined for each value.
-
-
-
-
-
-
-
-.. _global_view:
-
-Global View
-***********
-the "Overview" screen lists all the main objects of a project in the same list. 
-The "global view" allows you to search among all the types of items available in the same query. 
-Just select what should be displayed.
-
-.. figure:: /images/GUI/GUI_SCR_GlobalView.png
-   :alt: Global View Screen
-   :align: center
-
-.. raw:: latex
-
-    \newpage
-    
-

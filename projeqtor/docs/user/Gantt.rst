@@ -24,18 +24,7 @@ Gantt chart
 This screen allows to define projects planning and follow progress.
 
 **The Gantt Chart is composed of five areas:**
-
-|one| the toolbar
-|two| the task list
-|three| the progress datas
-|four| the Gantt chart
-and like all the screens, 
-|five| the details area corresponding to the item selected in the task list.
-
-.. note::
-
-   The progress data view is hidden by default. Move the splitter on your right to display them.
-   
+  
 
 .. figure:: /images/GUI/GANTT_ZONE_Planning.png 
    :alt: Gantt (Planning)
@@ -54,6 +43,8 @@ and like all the screens,
    |three| :ref:`progress-data-view`
    
    |four| :ref:`gantt-chart-view`
+   
+   |five| :ref:`gantt-details-area`
 
 
 
@@ -139,7 +130,8 @@ ProjeQtOr offers you a critical chain rather than a critical path, but for bette
 
 Click on |calculatePlanning| to start the activity planning calculation.
 
-a popup window appears with the list of projects. The check boxes allow you to select one or more projects to recalculate.
+A popup window appears with the list of projects. The check boxes allow you to select one or more projects to recalculate.
+
 
 
 .. figure:: /images/GUI/GANTT_BOX_Calculation.png
@@ -147,13 +139,9 @@ a popup window appears with the list of projects. The check boxes allow you to s
    
    Project selection popUp for project calculation 
 
-.. note::
 
-   If you have selected one or more projects with the project selector (see :: ref: `Project Selector <project-selector>`) 
-    
-   then the selected projects will be automatically checked.
+If you have selected one or more projects with :ref:`Project Selector<project-selector>` then the selected projects will be automatically checked.
    
-
 Choose the date on which you want to recalculate the project. Whether in the past, today or in the future. 
 
 By checking the "Hide unselected projects" box, you will only have the projects selected in the project selector and they will be automatically checked.
@@ -1062,18 +1050,14 @@ Right click on a bar to displays the detail of the work for this bar.
 
 
 
+.. _gantt-details-area:
 
+Details area
+============
 
+The details area is the same as on all the ProjeQtOr element screens and adapts according to the selected element.
 
-
-
-.. raw:: latex
-
-    \newpage
-
-.. index:: Project planning
-
-.. _project-planning:
+For more details on this area, see the chapter :ref:`Details window<detail-window>` in the :ref:`graphic-user-interface`
 
 
 
@@ -1141,10 +1125,18 @@ All milestones are available: deliverable, incoming, key date...
 
 .. index:: Gantt chart (Resource planning)
 
-Resource Planning
+.. index:: Resource planning
+
+.. _resource-planning:
+
+Resource planning
 -----------------
 
+.. sidebar:: Others section 
 
+   * :ref:`resource`
+   
+   
 This screen displays the Gantt chart from a resource perspective.
 
 The assigned tasks are grouped under the resource level.
@@ -1152,7 +1144,6 @@ The assigned tasks are grouped under the resource level.
 Regarding resource planning, periodic group meetings are under his responsibility
 
 Ability to view assigned activities without charge
-
 
 
 .. figure:: /images/GUI/GANTT_SCR_ResourcePlanning.png 
@@ -1173,6 +1164,10 @@ Ability to view assigned activities without charge
    |four| :ref:`Activity without work<activity-without-work>`
    
    |five| :ref:`Show left work<show-left-work>`
+   
+   |six| :ref:`Add a new activity<add-new-activity>`
+   
+   |seven| :ref:`Advanced Filters<filter-resource-planning>`
 
 
 
@@ -1307,10 +1302,25 @@ Links existing between tasks on different resources are not displayed.
    Condition : Assigned resources are available and meet workload, validated or scheduled dates do not conflict with other items.
 
 
+.. _add-new-activity:
+
+.. rubric:: |sixBLC| Add a new activity
+
+Depending on your profile and your rights, you can add an activity directly in the schedule by resource.
+
+You must select an existing activity to insert the new activity into the WBS structure. If no activity is selected, the "add new item" icon will be grayed out.
+
+The new activity is automatically inserted after the selected activity. It is then created under the same project as the activity selected during creation.
 
 
 
 
+.. _filter-resource-planning:
 
+.. rubric:: |sevenBLC| Advanced filters
 
+Click on the icon to define an advanced filter.
 
+The advanced filter allows to define clause to filter and sort.
+
+Fore more details, see :ref:`Advanced filters<advanced-filter>` in the :ref:`Graphical user interface section<graphic-user-interface>`
