@@ -65,6 +65,14 @@ var arraySelectedProject = new Array();
 
 var displayFilterVersionPlanning='0';
 var displayFilterComponentVersionPlanning='0';
+
+var contentPaneResizingInProgress={};
+
+function saveContentPaneResizing(pane, size, saveAsUserParameter) {
+  if (contentPaneResizingInProgress[pane]) clearTimeout(contentPaneResizingInProgress[pane]);
+  contentPaneResizingInProgress[pane]=setTimeout('saveDataToSession("'+pane+'","'+size+'",'+((saveAsUserParameter)?'true':'false')+');contentPaneResizingInProgress["'+pane+'"]=null;',100);
+  //saveDataToSession(pane,size,saveAsUserParameter);
+}
 // =============================================================================
 // = Functions
 // =============================================================================
@@ -3540,6 +3548,15 @@ function refreshTodayProjectsList(value) {
 }
 
 function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target) {
+  if (eltClass=='BudgetItem') eltClass='Budget'; 
+  var ctrlPressed=false; //window.event.ctrlKey;
+  if (ctrlPressed && eltClass && eltId) {
+    console.log("Goto Element : control is pressed");
+    var url="main.php?directAccess=true&objectClass="+eltClass+"&objectId="+eltId;
+    window.open(url, "_blank"); 
+    exit;
+  }
+  
   if (checkFormChangeInProgress()) {
     return false;
   }
@@ -3551,7 +3568,6 @@ function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target) {
       forceListRefresh = true;
     }
   }
-  if (eltClass=='BudgetItem') eltClass='Budget'; 
   selectTreeNodeById(dijit.byId('menuTree'), eltClass);
   formChangeInProgress = false;
   // if ( dojo.byId("GanttChartDIV")
