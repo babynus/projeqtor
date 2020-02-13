@@ -3112,7 +3112,7 @@ function drawGantt() {
         pPlannedStart = item.plannedstartdate;
         pWork = item.leftworkdisplay;
         g.setSplitted(true);
-      } else if(dojo.byId('ContractGantt') && item.reftype == 'Milestone'){
+      } else if(dojo.byId('contractGantt') && item.reftype == 'Milestone'){
         pEnd=item.realstartdate;
       }else {
         pEnd = (trim(item.realenddate) != "") ? item.realenddate : pEnd;
@@ -3138,20 +3138,12 @@ function drawGantt() {
       // pGroup : is the task a group one ?
       var pGroup = (item.elementary == '0') ? 1 : 0;
       //MODIF qCazelles - GANTT
-      if (item.reftype=='Project' || item.reftype=='Fixed' || item.reftype=='Replan' || item.reftype=='Construction' || item.reftype=='ProductVersionhasChild' || item.reftype=='ComponentVersionhasChild' || item.reftype=='SupplierContracthasChild' ) pGroup=1;
+      // florent si on doit afficher un jalon
+      if (item.reftype=='Project' || item.reftype=='Fixed' || item.reftype=='Replan' || item.reftype=='Construction' || item.reftype=='ProductVersionhasChild' || item.reftype=='ComponentVersionhasChild' ) pGroup=1;
      //END MODIF qCazelles - GANTT
-      var pobjecttype='';
-      if(dojo.byId('ContractGantt') &&  !item.reftype=='Milestone'){
-        pobjecttype=item.objecttype;
-      }
       // runScript : JavaScript to run when click on task (to display the
       // detail of the task)
-      var runScript="";
-      if( dojo.byId('ContractGantt') && item.reftype=='Milestone'){
-         runScript = "runScript('" + item.reftypeparent + "','" + item.refid + "','"+ item.id + "');";
-      }else{
-         runScript = "runScript('" + item.reftype + "','" + item.refid + "','"+ item.id + "');";
-      }
+      var runScript = "runScript('" + item.reftype + "','" + item.refid + "','"+ item.id + "');";
       var contextMenu = "runScriptContextMenu('" + item.reftype + "','" + item.refid + "','"+ item.id + "');";
       // display Name of the task
       var pName = ((showWBS) ? item.wbs : '') + " " + item.refname; // for
@@ -3226,7 +3218,7 @@ function drawGantt() {
           item.priority, item.planningmode, 
           item.status, item.type, 
           item.validatedcostdisplay, item.assignedcostdisplay, item.realcostdisplay, item.leftcostdisplay, item.plannedcostdisplay,
-          item.baseTopStart, item.baseTopEnd, item.baseBottomStart, item.baseBottomEnd, item.isoncriticalpath,pobjecttype));
+          item.baseTopStart, item.baseTopEnd, item.baseBottomStart, item.baseBottomEnd, item.isoncriticalpath));
     }
     g.Draw();
     g.DrawDependencies();
@@ -3247,9 +3239,6 @@ function runScript(refType, refId, id) {
   }
   if (refType == 'ComponentVersionhasChild') {
     refType = 'ComponentVersion';
-  }
-  if(refType=='SupplierContracthasChild'){
-    refType = 'SupplierContract';
   }
   //END ADD qCazelles - GANTT
   if (waitingForReply) {
@@ -3579,7 +3568,6 @@ function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target) {
       forceListRefresh = true;
     }
   }
-  if (eltClass=='BudgetItem') eltClass='Budget'; 
   selectTreeNodeById(dijit.byId('menuTree'), eltClass);
   formChangeInProgress = false;
   // if ( dojo.byId("GanttChartDIV")
@@ -6645,4 +6633,22 @@ function refreshHierarchicalBudgetList(){
 		hideWait();
 	}
 	loadContent("../view/refreshHierarchicalBudgetList.php", "hierarchicalListDiv", null, false, null, null, null, callback, null);
+}
+
+function expandHierarchicalBudgetGroup(idBudget, subBudget){
+	var subBudgetList = subBudget.split(',');
+	var budgetClass = dojo.attr('group_'+idBudget, 'class');
+	if(budgetClass == 'ganttExpandClosed'){
+		saveExpanded('hierarchicalBudgetRow_'+idBudget);
+		subBudgetList.forEach(function(item){
+			dojo.byId('hierarchicalBudgetRow_'+item).style.display = '';
+		});
+		dojo.setAttr('group_'+idBudget, 'class', 'ganttExpandOpened');
+	}else{
+		saveCollapsed('hierarchicalBudgetRow_'+idBudget);
+		subBudgetList.forEach(function(item){
+			dojo.byId('hierarchicalBudgetRow_'+item).style.display = 'none';
+		});
+		dojo.setAttr('group_'+idBudget, 'class', 'ganttExpandClosed');
+	}
 }

@@ -36,6 +36,7 @@ scriptLog('   ->/view/hierarchicalBudgetView.php');
 $objectClass='Budget';
 $obj=new $objectClass();
 $table=$obj->getDatabaseTableName();
+$hiddenRow = array();
 
 if ( array_key_exists('print',$_REQUEST) ) {
 	$print=true;
@@ -69,11 +70,13 @@ $idTab=0;
 
 $querySelect .= " * ";
 $queryFrom .= $table;
+//$queryWhere='idBudget is Null';
 $queryOrderBy .= " bbssortable ";
 
 // constitute query and execute
 $query='select ' . $querySelect
 . ' from ' . $queryFrom
+//. ' where ' . $queryWhere
 . ' order by ' . $queryOrderBy;
 $result=Sql::query($query);
 
@@ -96,6 +99,14 @@ echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('colRea
 echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('progress') . '</TD>' ;
 echo '</TR>';
 
+function getSubBudgetList($subList, &$subBudget){
+	foreach ($subList as $id=>$obj){
+		$subBudget[]=$obj->id;
+		$budget = new Budget();
+		$resubList = $budget->getSqlElementsFromCriteria(array('idBudget'=>$obj->id));
+		getSubBudgetList($resubList, $subBudget);
+	}
+}
 // Treat each line
 if (Sql::$lastQueryNbRows > 0) {
 	while ($line = Sql::fetchLine($result)) {
@@ -134,8 +145,22 @@ if (Sql::$lastQueryNbRows > 0) {
 		if( $pGroup) {
 			$rowType = "group";
 			$compStyle="font-weight: bold; background: #E8E8E8 ;";
+			$budget = new Budget();
+			$subList = $budget->getSqlElementsFromCriteria(array('idBudget'=>$line['id']));
+			$subBudget=array();
+			getSubBudgetList($subList, $subBudget);
 		} else {
 			$rowType  = "row";
+		}
+		$crit=array('scope'=>'hierarchicalBudgetRow_'.$line['id'], 'idUser'=>getCurrentUserId());
+		$col=SqlElement::getSingleSqlElementFromCriteria('Collapsed', $crit);
+		if($col->id){
+		  $class = 'ganttExpandClosed';
+		  foreach ($subBudget as $id){
+		  	$hiddenRow[$id]=$id;
+		  }
+		}else{
+		  $class = 'ganttExpandOpened';
 		}
 		$wbs=$line['bbssortable'];
 		$level=(strlen($wbs)+1)/4;
@@ -144,7 +169,11 @@ if (Sql::$lastQueryNbRows > 0) {
 		for ($i=1;$i<$level;$i++) {
 			$tab.='<span class="ganttSep">&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 		}
-		echo '<TR id="budgetRow_'.$id.'" dndType="budgetHierachical" class="dojoDndItem ganttTask'.$rowType.'" height="30px">';
+		$display='';
+		if(in_array($line['id'], $hiddenRow)){
+		  $display='style="display:none"';
+		}
+		echo '<TR id="hierarchicalBudgetRow_'.$id.'" dndType="budgetHierachical" class="dojoDndItem ganttTask'.$rowType.'" height="30px" '.$display.'>';
 		echo '  <TD class="ganttName reportTableData" style="border-right:0px;' . $compStyle . '">';
 		echo '  <span class="dojoDndHandle handleCursor">';
 		echo '  <table><tr>';
@@ -160,9 +189,9 @@ if (Sql::$lastQueryNbRows > 0) {
 		echo '  <table><tr>';
 		echo '  <td>';
 		if($pGroup){
-			echo     '<div id="group_'.$line['id'].'" class="ganttExpandClosed"';
+			echo     '<div id="group_'.$line['id'].'" class="'.$class.'"';
 			echo      'style="position: relative; z-index: 100000; width:16px; height:13px;"';
-			echo     ' onclick="JSGantt.folder('.$line['id'].',g);g.DrawDependencies();">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
+			echo     ' onclick="expandHierarchicalBudgetGroup(\''.$line['id'].'\',\''.implode(',', $subBudget).'\');">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
 		}
 		echo '  </td>';
 		echo '  <td>'.$tab . htmlEncode($line['name']).'</td>';
