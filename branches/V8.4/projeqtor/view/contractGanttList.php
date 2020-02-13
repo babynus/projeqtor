@@ -46,8 +46,9 @@ if (sessionValueExists('project')) {
 if ($proj=='*' or !$proj) {
 	$proj=null;
 }
+$objectClass=(RequestHandler::isCodeSet('objectClass'))?RequestHandler::getClass('objectClass'):'';
 ?>
-<input type="hidden" name="objectClass" id="objectClass" value="supplierContract" />
+<input type="hidden" name="objectGantt" id="objectGantt" value="<?php echo $objectClass;?>"; />
 <div id="mainPlanningDivContainer" dojoType="dijit.layout.BorderContainer">
 	<div dojoType="dijit.layout.ContentPane" region="top" id="listHeaderDiv" height="27px"
 	style="z-index: 3; position: relative; overflow: visible !important;">
@@ -56,20 +57,20 @@ if ($proj=='*' or !$proj) {
 		  	<td style="vertical-align:top; min-width:100px; width:15%">
 		      <table >
     		    <tr height="32px">
-        		    <td width="50px"  style="min-width:50px"  align="center">
+        		  <td width="50px"  style="min-width:50px"  align="center">
                     <?php echo formatIcon('GanttContract', 32, null, true);?>
                   </td>
                   <td width="200px" ><span class="title" style="max-width:200px;white-space:normal"><?php echo i18n('menuGanttContract');?></span></td>
-      		    </tr>
+    		    </tr>
                 <tr height="32px">
-        		    <td width="50px"  style="min-width:50px"  align="center">
-        		    </td>
-      		    </tr>
-    		  </table>
-		    </td>
+        	       <td width="50px"  style="min-width:50px"  align="center">
+                </td>
+  		      </tr>
+		    </table>
+          </td>
 		    <td>   
 		      <form dojoType="dijit.form.Form" id="listForm" action="" method="" >
-		        <table style="width: 100%;">
+		        <table style="width: 50%;">
 		          <tr>
 		            <td style="width:70px">
 		              <?php 
@@ -79,36 +80,8 @@ if ($proj=='*' or !$proj) {
 		              <input type="hidden" id="objectId" name="objectId" value="<?php echo $objectId;?>" />
                   	  <input type="hidden" id="contract" name="contract" value="true" />
 		              &nbsp;&nbsp;&nbsp;
-<?php
-//CHANGE qCazelles - Correction GANTT - Ticket #100
-//Old
-// $tabProductVersions = $_REQUEST['productVersionsListId'];
-//New
-//END CHANGE qCazelles - Correction GANTT - Ticket #100
-// $tabProductVersions=array();
-// if (isset($_REQUEST['productVersionsListId'])) {
-//   if ( strpos($_REQUEST['productVersionsListId'], '_')!==false) {
-//     $tabProductVersions=explode('_', $_REQUEST['productVersionsListId']);
-//   } else {
-//     $tabProductVersions[]=$_REQUEST['productVersionsListId'];
-//   }
-// } else { // PBE : will retreive last access if use of previous navigation button
-//   if (sessionValueExists('tabProductVersions')) {
-//     $tabProductVersions=getSessionValue('tabProductVersions');
-//   }
-// }
-// setSessionValue('tabProductVersions', $tabProductVersions);
-// PBE - end
-// $nbPvs = 0;
-// foreach ($tabProductVersions as $idProductVersion) {
-// 	echo '<input type="hidden" id="pvNo'.$nbPvs.'" name="idsProductVersion[]" value="'.$idProductVersion.'" />';
-// 	$nbPvs += 1;
-// }
-// echo '<input type="hidden" id="nbPvs" name="nbPvs" value="'.$nbPvs.'" />';
-
-?>                  
 		            </td>
-		            <td style="white-space:nowrap;width:240px">
+		            <td style="white-space:nowrap;width:120px">
 		              <table>
                     <tr>
                       <td align="right">&nbsp;&nbsp;&nbsp;<?php echo i18n("displayStartDate");?>&nbsp;&nbsp;</td><td>
@@ -151,8 +124,8 @@ if ($proj=='*' or !$proj) {
                     </tr>
                   </table>
   	            </td>
-                      <td width="32px">
-                        <button title="<?php echo i18n('printPlanning')?>"
+                <td width="32px">
+                  <button title="<?php echo i18n('printPlanning')?>"
                          dojoType="dijit.form.Button"
                          id="listPrint" name="listPrint"
                          iconClass="dijitButtonIcon dijitButtonIconPrint" class="detailButton" 
@@ -166,9 +139,9 @@ if ($proj=='*' or !$proj) {
                                   showPrint("planningPrint.php", 'planning');
                             <?php }?>   
                           </script>
-                        </button>
-                      </td>
-                      <td width="32px">
+                  </button>
+                  </td>
+                  <td width="32px">
                         <button title="<?php echo i18n('reportPrintPdf')?>"
                          dojoType="dijit.form.Button"
                          id="listPrintPdf" name="listPrintPdf"
@@ -179,15 +152,15 @@ if ($proj=='*' or !$proj) {
                           else showPrint("../tool/jsonPlanning_pdf.php?portfolio=true", 'planning', null, 'pdf');
                           </script>
                         </button>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-		        </table>    
-		      </form>
-		    </td>
-		  </tr>
-		</table>
+                  </td>
+                </tr>
+               </table>
+              </td>
+		    </table>    
+		  </form>
+	     </td>
+	   </tr>
+	   </table>
 		<div id="listBarShow" class="dijitAccordionTitle"  onMouseover="showList('mouse')" onClick="showList('click');">
 		  <div id="listBarIcon" align="center"></div>
 		</div>

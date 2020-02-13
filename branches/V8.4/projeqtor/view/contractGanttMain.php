@@ -11,7 +11,7 @@ scriptLog('   ->/view/contractGanttMain.php');
 $paramScreen=RequestHandler::getValue('paramScreen');
 $paramLayoutObjectDetail=RequestHandler::getValue('paramLayoutObjectDetail');
 $paramRightDiv=RequestHandler::getValue('paramRightDiv');
-$currentScreen='contractGantt';
+$currentScreen='ContractGantt';
 setSessionValue('currentScreen', $currentScreen);
 $positionListDiv=changeLayoutObjectDetail($paramScreen,$paramLayoutObjectDetail);
 $positonRightDiv=changeLayoutActivityStream($paramRightDiv);
@@ -29,7 +29,7 @@ $activModeStream=Parameter::getUserParameter('modeActiveStreamGlobal');
 //////
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="ContractGantt" />
-<input type="hidden" name="contractGantt" id="contractGantt" value="true" />
+<input type="hidden" name="ContractGantt" id="ContractGantt" value="true" />
 <div id="mainDivContainer" class="container" dojoType="dijit.layout.BorderContainer" onclick="hideDependencyRightClick();">
   <div id="listDiv" dojoType="dijit.layout.ContentPane" region="<?php  echo $positionListDiv;?>" splitter="true" 
    style="<?php if($positionListDiv=='top'){echo "height:".$listHeight;}else{ echo "width:".$tableWidth[0];}?>">

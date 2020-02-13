@@ -301,7 +301,7 @@ function refreshJsonPlanning(versionsPlanning) {
   } else if (dojo.byId("globalPlanning")) {
     url = "../tool/jsonPlanning.php?global=true";
     param=true;
-  } else if (dojo.byId("contractGantt")) {
+  } else if (dojo.byId("ContractGantt")) {
     url = "../tool/jsonContractGantt.php";
     param=true;
   } else {
@@ -3112,7 +3112,7 @@ function drawGantt() {
         pPlannedStart = item.plannedstartdate;
         pWork = item.leftworkdisplay;
         g.setSplitted(true);
-      } else if(dojo.byId('contractGantt') && item.reftype == 'Milestone'){
+      } else if(dojo.byId('ContractGantt') && item.reftype == 'Milestone'){
         pEnd=item.realstartdate;
       }else {
         pEnd = (trim(item.realenddate) != "") ? item.realenddate : pEnd;
@@ -3138,12 +3138,20 @@ function drawGantt() {
       // pGroup : is the task a group one ?
       var pGroup = (item.elementary == '0') ? 1 : 0;
       //MODIF qCazelles - GANTT
-      // florent si on doit afficher un jalon
-      if (item.reftype=='Project' || item.reftype=='Fixed' || item.reftype=='Replan' || item.reftype=='Construction' || item.reftype=='ProductVersionhasChild' || item.reftype=='ComponentVersionhasChild' ) pGroup=1;
+      if (item.reftype=='Project' || item.reftype=='Fixed' || item.reftype=='Replan' || item.reftype=='Construction' || item.reftype=='ProductVersionhasChild' || item.reftype=='ComponentVersionhasChild' || item.reftype=='SupplierContracthasChild' ) pGroup=1;
      //END MODIF qCazelles - GANTT
+      var pobjecttype='';
+      if(dojo.byId('ContractGantt') &&  !item.reftype=='Milestone'){
+        pobjecttype=item.objecttype;
+      }
       // runScript : JavaScript to run when click on task (to display the
       // detail of the task)
-      var runScript = "runScript('" + item.reftype + "','" + item.refid + "','"+ item.id + "');";
+      var runScript="";
+      if( dojo.byId('ContractGantt') && item.reftype=='Milestone'){
+         runScript = "runScript('" + item.reftypeparent + "','" + item.refid + "','"+ item.id + "');";
+      }else{
+         runScript = "runScript('" + item.reftype + "','" + item.refid + "','"+ item.id + "');";
+      }
       var contextMenu = "runScriptContextMenu('" + item.reftype + "','" + item.refid + "','"+ item.id + "');";
       // display Name of the task
       var pName = ((showWBS) ? item.wbs : '') + " " + item.refname; // for
@@ -3218,7 +3226,7 @@ function drawGantt() {
           item.priority, item.planningmode, 
           item.status, item.type, 
           item.validatedcostdisplay, item.assignedcostdisplay, item.realcostdisplay, item.leftcostdisplay, item.plannedcostdisplay,
-          item.baseTopStart, item.baseTopEnd, item.baseBottomStart, item.baseBottomEnd, item.isoncriticalpath));
+          item.baseTopStart, item.baseTopEnd, item.baseBottomStart, item.baseBottomEnd, item.isoncriticalpath,pobjecttype));
     }
     g.Draw();
     g.DrawDependencies();
@@ -3239,6 +3247,9 @@ function runScript(refType, refId, id) {
   }
   if (refType == 'ComponentVersionhasChild') {
     refType = 'ComponentVersion';
+  }
+  if(refType=='SupplierContracthasChild'){
+    refType = 'SupplierContract';
   }
   //END ADD qCazelles - GANTT
   if (waitingForReply) {
@@ -3568,6 +3579,7 @@ function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target) {
       forceListRefresh = true;
     }
   }
+  if (eltClass=='BudgetItem') eltClass='Budget'; 
   selectTreeNodeById(dijit.byId('menuTree'), eltClass);
   formChangeInProgress = false;
   // if ( dojo.byId("GanttChartDIV")
