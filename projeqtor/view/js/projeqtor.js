@@ -1673,7 +1673,11 @@ function finalizeMessageDisplay(destination, validationType) {
             && dojo.byId('lastOperation').value == 'move') {
           refreshGrid();
         } else if (! avoidInfiniteLoop) {
-          refreshGrid();
+          if (dojo.byId("lastPlanStatus")) {
+            refreshGrid(true);
+          } else {
+            refreshGrid();
+          }
           avoidInfiniteLoop=true;
         } else {
           avoidInfiniteLoop=false;
