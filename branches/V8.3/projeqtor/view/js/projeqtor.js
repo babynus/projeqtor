@@ -1500,7 +1500,7 @@ function finalizeMessageDisplay(destination, validationType) {
     // add the message in the message Div (left part) and prepares form to new
     // changes
     addMessage(msg);
-    // alert('validationType='+validationType);
+    //alert('validationType='+validationType);
     if (validationType) {
       if (validationType == 'note') {
         if(!dijit.byId('dialogKanbanGetObjectStream')) loadContent("objectDetail.php?refreshNotes=true", dojo.byId('objectClass').value+ '_Note', 'listForm');
@@ -1665,7 +1665,11 @@ function finalizeMessageDisplay(destination, validationType) {
             && dojo.byId('lastOperation').value == 'move') {
           refreshGrid();
         } else if (! avoidInfiniteLoop) {
-          refreshGrid();
+          if (dojo.byId("lastPlanStatus")) {
+            refreshGrid(true);
+          } else {
+            refreshGrid();
+          }
           avoidInfiniteLoop=true;
         } else {
           avoidInfiniteLoop=false;
