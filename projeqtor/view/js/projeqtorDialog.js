@@ -7087,9 +7087,10 @@ function loadMenuBarItem(item, itemName, from) {
     loadContent("hierarchicalBudgetMain.php", "centerDiv");
   } else if (item == 'GanttContract') {
     objectExist='true';
+    var objectClass='SupplierContract';
     vGanttCurrentLine=-1;
     cleanContent("centerDiv");
-    loadContent("contractGanttMain.php", "centerDiv");
+    loadContent("contractGanttMain.php?objectClass="+objectClass, "centerDiv");
   } else if (item == 'Imputation') {
     loadContent("imputationMain.php", "centerDiv");
   } else if (item == 'Diary') {

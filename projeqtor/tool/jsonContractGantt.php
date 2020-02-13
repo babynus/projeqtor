@@ -31,6 +31,7 @@ function drawElementContractGantt($objectClass,$lstContract,$nbRows){
     $nbContract=count($lstContract);
     $cp=$nbContract;
     foreach ($lstContract as $contract) {
+      $mile= array();
       $redLine=false;
       $cp++;
       echo (++$nbRows>1)?',':'';
@@ -52,18 +53,19 @@ function drawElementContractGantt($objectClass,$lstContract,$nbRows){
       if(strtotime($contract->deadlineDate) > strtotime($contract->endDate) or strtotime($contract->endDate) < time() ){
         $redLine=true;       
       }
+      if($contract->deadlineDate or $contract->noticeDate)$class=$class.'hasChild';
       echo  '{';
-        echo '"id":"'.$idContract.'"';
+        echo '"id":"'.$contract->id.'"';
         echo ',"refid":"'.$contract->id.'"';
         echo ',"refname":"'.htmlEncode(htmlEncodeJson($contract->name)).'"';
         echo ',"reftype":"'.$class.'"';
-        //echo ',"color: #50BB50"';
-        echo ',"topreftype":"'.htmlEncode(htmlEncodeJson(SqlList::getNameFromId('Type',$type->id))).'"';
+        echo ',"objecttype":"'.htmlEncode(htmlEncodeJson($type->name)).'"';
         echo ',"resource":"'.htmlEncode(htmlEncodeJson($namePC)).'"';
         echo ',"realstartdate":"'.($contract->startDate).'"';
         echo ',"realenddate":"'.($contract->endDate).'"';
         echo ',"duration":"'.($contract->initialContractTerm).'"';
         echo ',"status":"'.htmlEncodeJson(SqlList::getNameFromId('Status', $contract->idStatus)).'"';
+        echo ',"collapsed":"0"';
         if ($contract->handled and $redLine == false ) {
           echo ',"redElement":"0"';
         }else if ($redLine==true and !$contract->idle and !$contract->done) {
@@ -75,18 +77,27 @@ function drawElementContractGantt($objectClass,$lstContract,$nbRows){
       echo '  }';
       
       if($contract->deadlineDate or $contract->noticeDate){
-        echo ',';
-        echo '{';
-        echo '"id":"'.$idContract.'.'.$cp.'"';
-        echo ',"reftype":"Milestone"';
-          if($contract->noticeDate){
+        if($contract->deadlineDate !='' )$mile[]='DeadlineDate';
+        if($contract->noticeDate!='')$mile[]='NoticeDate';
+        $compt=1;
+        foreach($mile as $id=>$name){
+          $compt++;
+          echo ',';
+          echo '{';
+          echo '"id":"'.$idContract.'.'.$compt.'"';
+          echo ',"refid":"'.$contract->id.'"';
+          echo ',"reftype":"Milestone"';
+          echo ',"reftypeparent":"'.$class.'"';
+          echo ',"topid":"'.$contract->id.'"';
+          if($name=='NoticeDate'){
             echo ',"realstartdate":"'.($contract->noticeDate).'"';
-            echo ',"refname":"noticeDate_'.htmlEncode(htmlEncodeJson($contract->name)).'"';
-          }else{
+            echo ',"refname":"'.i18n('col'.$name).'_'.htmlEncode(htmlEncodeJson($contract->name)).'"';
+          }else if ($name=='DeadlineDate'){
             echo ',"realstartdate":"'.($contract->deadlineDate).'"';
-            echo ',"refname":"dueDate_'.htmlEncode(htmlEncodeJson($contract->name)).'"';
+            echo ',"refname":"'.i18n('col'.$name).'_'.htmlEncode(htmlEncodeJson($contract->name)).'"';
           }
-        echo '  }';
+          echo '  }';
+        }
       }
     }
 }
