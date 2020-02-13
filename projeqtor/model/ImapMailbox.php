@@ -287,12 +287,14 @@ class ImapMailbox {
     $mail->fromAddress=strtolower($head->from[0]->mailbox.'@'.$head->from[0]->host);
     
     $toStrings=array();
-    foreach ($head->to as $to) {
-      if (!empty($to->mailbox)&&!empty($to->host)) {
-        $toEmail=strtolower($to->mailbox.'@'.$to->host);
-        $toName=isset($to->personal)?$this->decodeMimeStr($to->personal):null;
-        $toStrings[]=$toName?"$toName <$toEmail>":$toEmail;
-        $mail->to[$toEmail]=$toName;
+    if (isset($head->to)) {
+      foreach ($head->to as $to) {
+        if (!empty($to->mailbox)&&!empty($to->host)) {
+          $toEmail=strtolower($to->mailbox.'@'.$to->host);
+          $toName=isset($to->personal)?$this->decodeMimeStr($to->personal):null;
+          $toStrings[]=$toName?"$toName <$toEmail>":$toEmail;
+          $mail->to[$toEmail]=$toName;
+        }
       }
     }
     $mail->toString=implode(', ', $toStrings);
