@@ -6495,9 +6495,11 @@ function refreshObjectDivAfterResize() {
     if (!formChangeInProgress && dijit.byId('id')) { 
       setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50); 
     } else {
-      setTimeout('loadContent("objectButtons.php?refreshButtons=true","buttonDiv", "listForm",false,false,false,false,'
+      if (dojo.byId('buttonDiv')) {
+        setTimeout('loadContent("objectButtons.php?refreshButtons=true","buttonDiv", "listForm",false,false,false,false,'
                   +((formChangeInProgress)?'function() {formChanged();}':'null')
                   +',false);', 50);
+      }
     }
   } else if(multiSelection==true && formChangeInProgress==false){
     loadContent('objectMultipleUpdate.php?objectClass=' + dojo.byId('objectClass').value,'detailDiv');
