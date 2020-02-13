@@ -5250,7 +5250,7 @@ abstract class SqlElement {
           if ($emailTemplateTab[$j]->title == '' or $emailTemplateTab[$j]->title == null)
             $emailTemplateTab[$j]->title = $title;
           else 
-            $emailTemplateTab[$j]->title = $this->getMailDetailFromTemplate($emailTemplateTab[$j]->title);
+            $emailTemplateTab[$j]->title = $this->getMailDetailFromTemplate($emailTemplateTab[$j]->title,null,true);
         }
         $resultMail[] = sendMail($destTab[$emailTemplateTab[$j]->id], $emailTemplateTab[$j]->title,
             $emailTemplateTab[$j]->template,
@@ -6031,13 +6031,13 @@ function getNotesHtmlTab() {
  * by the property and "${HISTORY} by a table representing the last changes
  * of the object. ${LINK} and ${NOTE} by a table displaying links and notes
  */
-public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=null) {
+public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=null, $isTitle=false) {
   global $lastEmailChangeDate;
   $lastEmailChangeDate=$lastChangeDate;
   $templateToReplace = $this->parseMailMessage($templateToReplace);
   $ref = $this->getReferenceUrl ();
   $replyMail=i18n("replyToMail");
-  if(Parameter::getGlobalParameter('cronCheckEmailsHost')!='' and Parameter::getGlobalParameter('cronCheckEmails')>0){
+  if(Parameter::getGlobalParameter('cronCheckEmailsHost')!='' and Parameter::getGlobalParameter('cronCheckEmails')>0 and ! $isTitle){
     $templateToReplace="
           <table style='font-size:14pt; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;'><tr><td style='background:#555555;color: #FFFFFF; text-align: center;'>
           <div style='background:#F0F0F0;color:#A0A0A0;font-style:italic;font-size:80%'>".htmlEncode ( $replyMail)."</div><div style='background:#F0F0F0;color:#F0F0F0;font-size:1pt;'>###PROJEQTOR###</div>
