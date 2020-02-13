@@ -126,12 +126,12 @@ if(sessionValueExists('showFullAmount')){
        <div style="position:absolute;left:0px;width:43px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>
        <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $objectClass;?>32 icon<?php echo $objectClass;?> iconSize32" /></div>
     </td>
-    <td class="title" style="height:35px;width:10%;">
+    <td class="title" style="height:35px;width:20%;">
       <div style="width:100%;height:100%;position:relative;">
         <div id="menuName" style="width:100%;position:absolute;top:8px;text-overflow:ellipsis;overflow:hidden;"><span id="classNameSpan" style="padding-left:5px;"><?php echo i18n("menuHierarchicalBudget");?></span></div>
       </div>
     </td>
-    <td style="height:35px;width:90%;">
+    <td style="height:35px;width:80%;">
     <?php if($positionListDiv == 'left'){ $style='float:left;margin-left:40%;width:12%';}else{$style='float:right;margin-right: 2%;width:12%;';}?>
         <table style="<?php echo $style;?>">
           <tr>
