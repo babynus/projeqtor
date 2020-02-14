@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin name="translationFrenchCa">
+  <property name="description"    value="Translation of parameters values into canadian french " />
+  <property name="version"        value="1.4" />
+  <property name="compatibility"  value="V6.1.0" />
+  <property name="uniqueCode"     value="100003"      
+            comment="inserted id (for instance for menu) should start with this code + 3 digits" />
+  <property name="sql"            value="translationFrenchCa.sql" version="all"/>
+</plugin>
