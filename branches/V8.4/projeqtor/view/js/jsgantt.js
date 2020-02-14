@@ -735,7 +735,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
       showResourceComponentVersion='Yes';
     }
     
-    if (!dojo.byId('versionsPlanning') && !dojo.byId('ContractGantt')) {
+    if (!dojo.byId('versionsPlanning') && !dojo.byId('contractGantt')) {
     //END ADD
 	    for (var iSort=0;iSort<sortArray.length;iSort++) {
 	      var field=sortArray[iSort];
@@ -746,12 +746,12 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
 	    }
     }
   //florent ticket 4397
-    else if (dojo.byId('ContractGantt')){ 
+    else if (dojo.byId('contractGantt')){ 
       for (var iSort=0;iSort<sortArray.length;iSort++) {
           var field=sortArray[iSort];
           if (field.substr(0,6)=='Hidden') field=field.substr(6);
           var fieldWidth=getPlanningFieldWidth(field);
-          if (field!='Name' && (field=='Resource' || field=='IdStatus' || field=='Type' || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType' )) vLeftWidth+=1+fieldWidth;
+          if (field!='Name' && (field=='Resource' || field=='IdStatus'  || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType' )) vLeftWidth+=1+fieldWidth;
         }
     }
     //ADD
@@ -811,7 +811,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
 
       //CHANGE qCazelles - GANTT (Correction)
       //ADD
-      if (!dojo.byId('versionsPlanning') && !dojo.byId('ContractGantt')) {
+      if (!dojo.byId('versionsPlanning') && !dojo.byId('contractGantt')) {
       //END ADD
 	      for (iSort=0;iSort<sortArray.length;iSort++) {
 	        var field=sortArray[iSort];
@@ -840,16 +840,15 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
 		          +'</div></TD>' ;
 		      }
 	      }
-	      console.log('non');
 	  //ADD
       }
     //florent ticket 4397
-      else if (dojo.byId('ContractGantt')) {
+      else if (dojo.byId('contractGantt')) {
         for (iSort=0;iSort<sortArray.length;iSort++) {
           var field=sortArray[iSort];
           if (field.substr(0,6)=='Hidden') field=field.substr(6);
           var fieldWidth=getPlanningFieldWidth(field);
-        if(field!='Name' && (field=='Resource' || field=='IdStatus' || field=='Type' || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType' )) {
+        if(field!='Name' && (field=='Resource' || field=='IdStatus'  || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType' )) {
             vLeftTable += '<TD class="ganttLeftTopLine" style="width: ' + fieldWidth + 'px;"></TD>' ;
           }
         }
@@ -862,7 +861,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           var field=sortArray[iSort];
           if (field.substr(0,6)=='Hidden') field=field.substr(6);
           var fieldWidth=getPlanningFieldWidth(field);
-          if(field!='Name' && (field=='Resource' || field=='IdStatus' || field=='Type' || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType'  )) {
+          if(field!='Name' && (field=='Resource' || field=='IdStatus'  || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType'  )) {
             if(field=='Resource' && dojo.byId('objectGantt').value=='SupplierContract'){
               field='IdProvider';
             }else if(field=='Resource' && dojo.byId('objectGantt').value=='ClientContract'){
@@ -875,7 +874,6 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           }
         }
     }else {
-      console.log('non');
     	  for (iSort=0;iSort<sortArray.length;iSort++) {
   	        var field=sortArray[iSort];
   	        if (field.substr(0,6)=='Hidden') field=field.substr(6);
@@ -955,9 +953,13 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
         }
         vLeftTable += '</TD>'
           +'<TD class="ganttName ganttAlignLeft" style="width: ' + vNameWidth + 'px;" nowrap title="' + vTaskList[i].getNameTitle() + '">';
-        vLeftTable+='<div class="ganttLeftHover" style="width:'+(vLeftWidth-25)+'px;" '
-            + ' onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '"); '
-        	+ ' onMouseover=JSGantt.ganttMouseOver("'+vID+'","left","' + vRowType + '")'
+        if( !vTaskList[i].getMile() && dojo.byId('contractGantt')){
+          vLeftTable+='<div class="ganttLeftHover" style="width:'+(vLeftWidth-25)+'px;" ';
+          vLeftTable+=' onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '"); ';
+        }else{
+          vLeftTable+='<div class="ganttLeftMileContract" style="width:'+(vLeftWidth-25)+'px;" ';
+        }
+        vLeftTable+=' onMouseover=JSGantt.ganttMouseOver("'+vID+'","left","' + vRowType + '")'
             + ' onMouseout=JSGantt.ganttMouseOut("'+vID+'","left","' + vRowType + '")>&nbsp;</div>';
         vLeftTable += '<div ' + 
         ' onMouseover=JSGantt.ganttMouseOver("'+vID+'","left","' + vRowType + '")'
@@ -967,7 +969,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
         var levlWidth = (levl-1) * 16;
         vLeftTable +='<table><tr><td>';
         vLeftTable += '<div style="width:' + levlWidth + 'px;">';
-        if (vTaskList[i].getGroup() && vTaskList[i].getClass() != 'ProductVersionhasChild' &&  vTaskList[i].getClass() != 'ComponentVersionhasChild' &&  vTaskList[i].getClass() != 'SupplierContract') {
+        if (vTaskList[i].getGroup() && vTaskList[i].getClass() != 'ProductVersionhasChild' &&  vTaskList[i].getClass() != 'ComponentVersionhasChild' &&  vTaskList[i].getClass() != 'SupplierContracthasChild') {
           vLeftTable += '<div style="margin-left:3px;width:8px;">&nbsp</div>';
         } else {
           vLeftTable += '<div style="margin-left:3px;width:8px;background-color:#'+vTaskList[i].getColor()+'">&nbsp</div>';
@@ -1001,7 +1003,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
         	+'width:'+ nameLeftWidth +'px;" class="namePart' + vRowType + '"><span class="nobr">' + vTaskList[i].getName() + '</span></div>' ;
         vLeftTable +='</td></tr></table></div>';
         vLeftTable +='</TD>';
-        if (!dojo.byId('versionsPlanning') && !dojo.byId('ContractGantt')) {
+        if (!dojo.byId('versionsPlanning') && !dojo.byId('contractGantt')) {
 	        for (var iSort=0;iSort<sortArray.length;iSort++) {
 	          var field=sortArray[iSort];
 	          if (field.substr(0,6)=='Hidden') field=field.substr(6);
@@ -1016,14 +1018,13 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
 	        vLeftTable += '</TR>';
         }
       //florent ticket 4397
-        else if(dojo.byId('ContractGantt')) {
-          console.log(field);
+        else if(dojo.byId('contractGantt')) {
           for (var iSort=0;iSort<sortArray.length;iSort++) {
             var field=sortArray[iSort];
             if (field.substr(0,6)=='Hidden') field=field.substr(6);
             var fieldWidth=getPlanningFieldWidth(field);
             var valueField=vTaskList[i].getFieldValue(field,JSGantt);
-            if(field!='Name' && (field=='Resource' || field=='IdStatus' || field=='Type' || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType' )) { 
+            if(field!='Name' && (field=='Resource' || field=='IdStatus'  || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType' )) { 
                if(valueField===undefined &&  (field=='Type' || field=='StartDate' || field=='EndDate')){
                   valueField='-';
                 }else if(valueField===undefined ){
@@ -2225,11 +2226,9 @@ function setGanttVisibility(g) {
 	  //setPlanningFieldShow('priority',0);
 	  setPlanningFieldShowSpecif('PlanningMode',0);
   }
-	if(dojo.byId('ContractGantt')){
+	if(dojo.byId('contractGantt')){
 	  setPlanningFieldShowSpecif('ObjectType',0); 
 	}
-	console.log('oui');
-	console.log(planningColumnOrder);
 	g.setSortArray(planningColumnOrder);
 }
 JSGantt.ganttMouseOver = function( pID, pPos, pType) {
@@ -2283,7 +2282,7 @@ JSGantt.ganttMouseOut = function(pID, pPos, pType) {
 ongoingJsLink=-1;
 JSGantt.startLink = function (idRow) {
 //florent ticket 4397
-  if(dojo.byId('versionsPlanning') || dojo.byId('ContractGantt')){
+  if(dojo.byId('versionsPlanning') || dojo.byId('contractGantt')){
     return;
   }  
   if (dojo.byId('bodyPrint')) return;
