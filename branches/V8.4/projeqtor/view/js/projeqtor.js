@@ -301,7 +301,7 @@ function refreshJsonPlanning(versionsPlanning) {
   } else if (dojo.byId("globalPlanning")) {
     url = "../tool/jsonPlanning.php?global=true";
     param=true;
-  } else if (dojo.byId("ContractGantt")) {
+  } else if (dojo.byId("contractGantt")) {
     url = "../tool/jsonContractGantt.php";
     param=true;
   } else {
@@ -1067,9 +1067,7 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
           if (destination == "detailDiv" || destination == "centerDiv") {
             finaliseButtonDisplay();
           }
-          if (destination == "detailDiv" && dojo.byId('objectClass')
-              && dojo.byId('objectClass').value && dojo.byId('objectId')
-              && dojo.byId('objectId').value) {
+          if (destination == "detailDiv" && dojo.byId('objectClass')&& dojo.byId('objectClass').value && dojo.byId('objectId') && dojo.byId('objectId').value) {
             stockHistory(dojo.byId('objectClass').value,
                 dojo.byId('objectId').value);
           } 
@@ -3142,12 +3140,18 @@ function drawGantt() {
       // pGroup : is the task a group one ?
       var pGroup = (item.elementary == '0') ? 1 : 0;
       //MODIF qCazelles - GANTT
-      // florent si on doit afficher un jalon
-      if (item.reftype=='Project' || item.reftype=='Fixed' || item.reftype=='Replan' || item.reftype=='Construction' || item.reftype=='ProductVersionhasChild' || item.reftype=='ComponentVersionhasChild' ) pGroup=1;
+      if (item.reftype=='Project' || item.reftype=='Fixed' || item.reftype=='Replan' || item.reftype=='Construction' || item.reftype=='ProductVersionhasChild' || item.reftype=='ComponentVersionhasChild' || item.reftype=='SupplierContracthasChild' ) pGroup=1;
      //END MODIF qCazelles - GANTT
+      var pobjecttype='';
+      if(dojo.byId('contractGantt') &&  !item.reftype=='Milestone'){
+        pobjecttype=item.objecttype;
+      }
       // runScript : JavaScript to run when click on task (to display the
       // detail of the task)
-      var runScript = "runScript('" + item.reftype + "','" + item.refid + "','"+ item.id + "');";
+      var runScript="";
+      if(!(dojo.byId('contractGantt') && item.reftype=='Milestone')){
+         runScript = "runScript('" + item.reftype + "','" + item.refid + "','"+ item.id + "');";
+      }
       var contextMenu = "runScriptContextMenu('" + item.reftype + "','" + item.refid + "','"+ item.id + "');";
       // display Name of the task
       var pName = ((showWBS) ? item.wbs : '') + " " + item.refname; // for
@@ -3222,7 +3226,7 @@ function drawGantt() {
           item.priority, item.planningmode, 
           item.status, item.type, 
           item.validatedcostdisplay, item.assignedcostdisplay, item.realcostdisplay, item.leftcostdisplay, item.plannedcostdisplay,
-          item.baseTopStart, item.baseTopEnd, item.baseBottomStart, item.baseBottomEnd, item.isoncriticalpath));
+          item.baseTopStart, item.baseTopEnd, item.baseBottomStart, item.baseBottomEnd, item.isoncriticalpath,pobjecttype));
     }
     g.Draw();
     g.DrawDependencies();
@@ -3243,6 +3247,9 @@ function runScript(refType, refId, id) {
   }
   if (refType == 'ComponentVersionhasChild') {
     refType = 'ComponentVersion';
+  }
+  if(refType=='SupplierContracthasChild'){
+    refType = 'SupplierContract';
   }
   //END ADD qCazelles - GANTT
   if (waitingForReply) {
@@ -3572,6 +3579,7 @@ function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target) {
       forceListRefresh = true;
     }
   }
+  if (eltClass=='BudgetItem') eltClass='Budget'; 
   selectTreeNodeById(dijit.byId('menuTree'), eltClass);
   formChangeInProgress = false;
   // if ( dojo.byId("GanttChartDIV")
@@ -6559,11 +6567,9 @@ function refreshObjectDivAfterResize() {
     if (!formChangeInProgress && dijit.byId('id')) { 
       setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50); 
     } else {
-      if (dojo.byId('buttonDiv')) {
-        setTimeout('loadContent("objectButtons.php?refreshButtons=true","buttonDiv", "listForm",false,false,false,false,'
+      setTimeout('loadContent("objectButtons.php?refreshButtons=true","buttonDiv", "listForm",false,false,false,false,'
                   +((formChangeInProgress)?'function() {formChanged();}':'null')
                   +',false);', 50);
-      }
     }
   } else if(multiSelection==true && formChangeInProgress==false){
     loadContent('objectMultipleUpdate.php?objectClass=' + dojo.byId('objectClass').value,'detailDiv');

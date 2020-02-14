@@ -36,6 +36,9 @@ $columnsAll=Parameter::getPlanningColumnOrder(true);
 $desc=Parameter::getPlanningColumnDescription();
   
 foreach ($columnsAll as $order=>$col) {
+    if($col=='ObjectType'){
+      continue;
+    }
 	if ( (isset($resourcePlanning) and ($col=='ValidatedWork' or $col=='Resource' or substr($col,-4)=='Cost') )
 	  or (isset($portfolioPlanning) and ($col=='Priority' or $col=='Resource' or $col=='IdPlanningMode') )	) {
 	  // nothing	
