@@ -12,7 +12,7 @@ $lstContract= array();
 $nbRows=0;
 $obj=new $objectClass();
 $test= new SupplierContract();
-
+$sortArray=Parameter::getPlanningColumnOrder();
 $where="idle=0";
 $lstContract=$obj->getSqlElementsFromCriteria(null,null,$where);
 
@@ -29,11 +29,9 @@ echo ' ] }';
 
 function drawElementContractGantt($objectClass,$lstContract,$nbRows){
     $nbContract=count($lstContract);
-    $cp=$nbContract;
     foreach ($lstContract as $contract) {
       $mile= array();
       $redLine=false;
-      $cp++;
       echo (++$nbRows>1)?',':'';
       $idContract=$contract->id.'.'.$nbRows;
       $class=get_class($contract);

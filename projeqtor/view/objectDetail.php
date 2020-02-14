@@ -70,6 +70,7 @@ $preseveHtmlFormatingForPDF=true;
 // ********************************************************************************************************
 
 // fetch information depending on, request
+//$objClass = RequestHandler::getValue('objectClass');
 $objClass=$_REQUEST['objectClass'];
 Security::checkValidClass($objClass, 'objectClass');
 if (isset($_REQUEST['noselect']) or !$objClass) {
