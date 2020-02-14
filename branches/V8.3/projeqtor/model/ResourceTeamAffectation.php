@@ -501,6 +501,26 @@ class ResourceTeamAffectation extends SqlElement {
     
     return $result;
   }
+  public function save () {
+    $new=($this->id)?false:true;
+    $result=parent::save();
+    $status=getLastOperationStatus($result);
+    if ($new and $status=='OK') {
+      $ass=new Assignment();
+      $assTable=$ass->getDatabaseTableName();
+      $assSel=new AssignmentSelection();
+      $assSelTable=$assSel->getDatabaseTableName();
+      $crit="idResource=$this->idResourceTeam and uniqueResource=1 and not exists (select 'x' from $assSelTable sel where sel.idAssignment=$assTable.id and sel.idResource=$this->idResource)";
+      $list=$ass->getSqlElementsFromCriteria(null,null,$crit);
+      foreach ($list as $ass) {
+        $sel=new AssignmentSelection();
+        $sel->idAssignment=$ass->id;
+        $sel->idResource=$this->idResource;
+        $resSel=$sel->save();
+      }
+    }
+    return $result;
+  }
   
 }
 ?>
