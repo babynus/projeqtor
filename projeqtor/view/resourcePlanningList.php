@@ -362,6 +362,23 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                       </select>
                       </td>
                     </tr>
+                    <tr>
+                      <td style="text-align:right;"><?php echo i18n('colIdOrganization');?>&nbsp;&nbsp;</td>
+                      <td>
+                      <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
+                        style="width:  <?php echo ($displayWidthPlan>1030)?150:100;?>px;"
+                        name="organizationName" id="organizationName" value="<?php if(sessionValueExists('organizationName')){ echo getSessionValue('organizationName'); }?>"
+                        <?php echo autoOpenFilteringSelect();?>
+                        >
+                        <script type="dojo/method" event="onChange" > 
+                           saveDataToSession('organizationName', dijit.byId('organizationName').get("value"), false);                          
+                           refreshJsonPlanning();
+                        </script>
+                        <?php 
+                         htmlDrawOptionForReference('idOrganization', null)?>  
+                      </select>
+                      </td>
+                    </tr>
                   </table>
                 </td>
 		            <td style="text-align: right; align: right;">
