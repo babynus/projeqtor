@@ -2153,6 +2153,16 @@ public function saveOrganizationBudgetElement($idle=null,$idleDateTime=null,$nam
         }    
     }        
   }
+  public function getMembers() {
+    $result=array();
+    $crit=array('idOrganization'=>$this->id);
+    $res=new Resource();
+    $resList=$res->getSqlElementsFromCriteria($crit, false);
+    foreach ($resList as $res) {
+      if (!$res->idle) $result[$res->id]=$res->name;
+    }
+    return $result;
+  }
     
 // END ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
   }?>
