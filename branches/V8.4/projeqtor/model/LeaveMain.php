@@ -76,7 +76,7 @@ class LeaveMain extends SqlElement {
         <th field="nameLeaveType" width="5%" >${type}</th>
         <th field="startDate" width="8%" formatter="dateFormatter">${startDate}</th>
         <th field="endDate" width="8%" formatter="dateFormatter">${endDate}</th>
-        <th field="nbDays" formatter="numericFormatter" width="4%" ># ${nbDays}</th>
+        <th field="nbDays" formatter="decimalFormatter" width="4%" ># ${nbDays}</th>
         <th field="colorNameStatus" width="8%" formatter="colorNameFormatter">${idStatus}</th>
         <th field="statusOutOfWorkflow" width="5%" formatter="booleanFormatter">${statusOutOfWorkflow}</th>
         <th field="statusSetLeaveChange" width="5%" formatter="booleanFormatter">${statusSetLeaveChange}</th>
