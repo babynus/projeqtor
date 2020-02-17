@@ -1360,7 +1360,6 @@ class Parameter extends SqlElement {
   	$widthList=$param->getSqlElementsFromCriteria(null, false, $critWidth);
   	$hidden="|";
   	foreach($hiddenList as $param) {
-  	  debugLog($param);
   		if ($param->parameterValue=='1') {
   		  $hidden.=substr($param->parameterCode,18).'|';
   		  self::$planningColumnDescription[substr($param->parameterCode,18)]['show']=0;
@@ -1405,8 +1404,6 @@ class Parameter extends SqlElement {
   	}
   	$i=1;  	
   	foreach($arrayFieldsSorted as $order=>$column) {
-  	  debugLog($column);
-  	  debugLog(!strpos($hidden,'|'.$column.'|')>0);
   	  $res[$i]=(!strpos($hidden,'|'.$column.'|')>0)?$column:'Hidden'.$column;
   	  $resAll[$i]=$column;
   		$i++;

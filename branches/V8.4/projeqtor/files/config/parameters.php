@@ -1,7 +1,7 @@
 <?php
 // =======================================================================================
 // Automatically generated parameter file
-// on 2020-01-29 13:57:40
+// on 2020-02-17 14:22:57
 // =======================================================================================
 $paramDbType='mysql'; $paramDbPort='3306'; $paramDbUser='root'; $paramDbPassword='mysql';
 $paramDbName='projeqtor_v84';$paramDbPrefix='';

@@ -13,6 +13,9 @@ $nbRows=0;
 $obj=new $objectClass();
 $test= new SupplierContract();
 $sortArray=Parameter::getPlanningColumnOrder();
+debugLog("=============================================");
+debugLog($sortArray);
+debugLog("=============================================");
 $where="idle=0";
 $lstContract=$obj->getSqlElementsFromCriteria(null,null,$where);
 

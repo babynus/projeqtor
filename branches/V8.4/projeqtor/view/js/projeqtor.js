@@ -3143,8 +3143,9 @@ function drawGantt() {
       if (item.reftype=='Project' || item.reftype=='Fixed' || item.reftype=='Replan' || item.reftype=='Construction' || item.reftype=='ProductVersionhasChild' || item.reftype=='ComponentVersionhasChild' || item.reftype=='SupplierContracthasChild' ) pGroup=1;
      //END MODIF qCazelles - GANTT
       var pobjecttype='';
-      if(dojo.byId('contractGantt') &&  !item.reftype=='Milestone'){
+      if(dojo.byId('contractGantt') &&  item.reftype!='Milestone'){
         pobjecttype=item.objecttype;
+        console.log('oui');
       }
       // runScript : JavaScript to run when click on task (to display the
       // detail of the task)
@@ -3218,6 +3219,7 @@ function drawGantt() {
         topId = '';
       }
       keys += "#" + curKey + "#";
+      console.log('ObjectType'+pobjecttype);
       g.AddTaskItem(new JSGantt.TaskItem(item.id, pName, pStart, pEnd, pColor,
           runScript, contextMenu, pMile, pResource, progress, pGroup, 
           topId, pOpen, pDepend,
@@ -3271,6 +3273,9 @@ var ongoingRunScriptContextMenu=false;
 function runScriptContextMenu(refType, refId, id) {
   if (ongoingRunScriptContextMenu) return;
   ongoingRunScriptContextMenu=true;
+  if(refType=='SupplierContracthasChild'){
+    refType='SupplierContract';
+  }
   var objectClassManual = dojo.byId('objectClassManual').value;
   showWait();
   setTimeout("document.body.style.cursor='default';",100);

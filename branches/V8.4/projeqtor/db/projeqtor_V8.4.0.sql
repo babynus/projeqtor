@@ -49,6 +49,15 @@ INSERT INTO `${prefix}mailable` (`id`,`name`, `idle`) VALUES
 INSERT INTO `${prefix}importable` (`id`, `name`, `idle`) VALUES
 (58, 'SupplierContract','0');
 
+INSERT INTO `${prefix}linkable` ( `name`, `idle`) VALUES 
+('SupplierContract', 0);
+
+INSERT INTO `${prefix}copyable` ( `name`, `idle`) VALUES
+('SupplierContract', 0);
+
+INSERT INTO `${prefix}notifiable` ( `name`, `idle`) VALUES
+('SupplierContract', 0);
+
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
  (6,228,0,1),
  (6,229,0,1),
