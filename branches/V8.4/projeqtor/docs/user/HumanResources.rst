@@ -18,7 +18,12 @@ This section allows to manage the society's Humans Resources
 
 This system comes in addition to the standards of the management of absences
 
-* You must define the :ref:`employee-manager`, :ref:`Leaves-Types` and :ref:`employment-contract-type` 
+For the module to be functional, you must define the employees, new status for resources or users. 
+
+The absence manager in charge of leave, the types of leave you offer to your employees and the different types of employment contracts
+
+
+* Start to define the :ref:`employee-manager`, :ref:`Leaves-Types` and :ref:`employment-contract-type` 
 
 * You can choose the leave entitlement standard for each type of contract
 
@@ -60,12 +65,12 @@ The "Regulated Absence" module is used to manage absences that must be validated
 
 Thanks to this module, it is thus possible to manage the paid holidays, the RTT, the Stopped diseases by treating
 
-   * quantities acquired over a period of time
-   * the period of validity of a quantity of absence 
-   * the possibility or not to take early holidays over the period being acquired
-   * the number of days before and after which the absence request can be made
-   * specific acquisition rules
-   * validation or rejection of an application
+   * Quantities acquired over a period of time
+   * The period of validity of a quantity of absence 
+   * The possibility or not to take early holidays over the period being acquired
+   * The number of days before and after which the absence request can be made
+   * Specific acquisition rules
+   * Validation or rejection of an application
    
 .. note:: A project dedicated to these regulated absences is created and makes it possible to store the requested days of absence as planned time 
    and the days of absence validated as working time thus making it possible to integrate these absences in the planning.   
@@ -74,29 +79,37 @@ Thanks to this module, it is thus possible to manage the paid holidays, the RTT,
 
 Regulated absences have 3 states:
 
-   .. compound:: recorded
+   .. compound:: Recorded
 
       Creation status. In this state all the data of the absence can be modified
+      
+   .. compound:: Submitted
 
-   .. compound:: validated
+      This status means that the employee has sent his leave request to his hierarchy for validation.      
+      
+   .. compound:: Validated
 
       State that only the manager and the administrator of the module can be enabled.
       
-      In this state, only the state of absence can be changed by the manager or administrator
-
-   .. compound:: cancelled
+      When the leave request is validated or refused, the status of the request cannot be changed
+      
+   .. compound:: Cancelled
 
       State that only the manager and the administrator of the module can be enabled.
+            
+      The number of days the absence represents are not taken.
       
-      In this state, only the state of absence can be modified by the manager or administrator
-      
-      and the number of days the absence represents are not taken
+      When the leave request is validated or refused, the status of the request cannot be changed
 
 
 .. note:: 
 
    The calculation of the number of days represented by absence is done on the basis of working days
    :ref:`global_parameters` and schedule associated with employee: holidays, non-working days
+
+
+
+
 
 
 .. raw:: latex
