@@ -110,6 +110,13 @@ if (array_key_exists('teamName',$_REQUEST)) {
 if(!$selectTeam and sessionValueExists('teamName')){
   $selectTeam =trim(getSessionValue('teamName'));
 }
+$selectOrganization=null;
+if (array_key_exists('organizationName',$_REQUEST)) {
+  $selectOrganization=trim($_REQUEST['organizationName']);
+}
+if(!$selectOrganization and sessionValueExists('organizationName')){
+  $selectOrganization =trim(getSessionValue('organizationName'));
+}
 // Header
 if ( array_key_exists('report',$_REQUEST) ) {
 	$headerParameters="";
@@ -223,14 +230,26 @@ if ($selectTeam) {
 } else {
   $teamMembers=null;
 }
+if ($selectOrganization) {
+  $orga=new Organization($selectOrganization,true);
+  $orgaMembers=$orga->getMembers();
+} else {
+  $orgaMembers=null;
+}
 
 foreach ($allowedResource as $resId=>$resName) {
   if ($selectResource and $selectResource!=$resId) {
     unset($allowedResource[$resId]);
-  } else if ($selectTeam and is_array($teamMembers)) {
+  } 
+  if ($selectTeam and is_array($teamMembers)) {
 	  if (!isset($teamMembers[$resId])) {
 	    unset($allowedResource[$resId]);
 	  }
+  }
+  if ($selectOrganization and is_array($orgaMembers)) {
+    if (!isset($orgaMembers[$resId])) {
+      unset($allowedResource[$resId]);
+    }
   }
 }
 
