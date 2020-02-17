@@ -861,6 +861,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           var field=sortArray[iSort];
           if (field.substr(0,6)=='Hidden') field=field.substr(6);
           var fieldWidth=getPlanningFieldWidth(field);
+          var classObj='contract';
           if(field!='Name' && (field=='Resource' || field=='IdStatus'  || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType'  )) {
             if(field=='Resource' && dojo.byId('objectGantt').value=='SupplierContract'){
               field='IdProvider';
@@ -868,9 +869,13 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               field='IdClient';
             }
             vLeftTable += '<TD id="jsGanttHeaderTD'+field+'" class="ganttLeftTitle" style="position:relative;width: ' + fieldWidth + 'px;max-width: ' + fieldWidth + 'px;overflow:hidden" nowrap>'
-              +'<div id="jsGanttHeader'+field+'" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width:' + fieldWidth + 'px; z-index:1000;" class="namePartgroup">'
-              +'<span class="nobr">'+ JSGantt.i18n( ('col'+field).replace('Work','')) + '</span>'
-              +'</div></TD>' ;
+              +'<div id="jsGanttHeader'+field+'" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width:' + fieldWidth + 'px; z-index:1000;" class="namePartgroup">';
+            if(field!='ObjectType'){
+              vLeftTable +='<span class="nobr">'+ JSGantt.i18n( ('col'+field).replace('Work','')) + '</span>';
+            }else{
+              vLeftTable +='<span class="nobr">'+ JSGantt.i18n( ('col'+field).replace('Work',''))+' '+JSGantt.i18n(classObj) + '</span>';
+            }
+            vLeftTable +='</div></TD>' ;
           }
         }
     }else {
@@ -1024,6 +1029,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             if (field.substr(0,6)=='Hidden') field=field.substr(6);
             var fieldWidth=getPlanningFieldWidth(field);
             var valueField=vTaskList[i].getFieldValue(field,JSGantt);
+            //console.log(valueField);
             if(field!='Name' && (field=='Resource' || field=='IdStatus'  || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType' )) { 
                if(valueField===undefined &&  (field=='Type' || field=='StartDate' || field=='EndDate')){
                   valueField='-';
