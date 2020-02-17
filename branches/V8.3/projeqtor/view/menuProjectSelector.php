@@ -48,6 +48,24 @@ if ($paramDisplayMode) {
 if (sessionValueExists('projectSelectorDisplayMode')) {
   $displayMode=getSessionValue('projectSelectorDisplayMode');
 }
+$nbProj=0;
+$arrProj=explode(',', $proj);
+$first=null;
+if ($proj=='*') {
+  $nbProj=0;
+} else {
+  foreach ($arrProj as $idp) {
+    if (trim($idp)!='' and trim($idp)!='*') {
+      $nbProj++;
+      if (! $first) $first=$idp;
+    }
+  }
+}
+if ($displayMode!='standard' and $nbProj>1) {
+  $proj=$first;
+  $nbProj=1;
+  setSessionValue('project',$proj);
+}
 ?>
 <?php if ($displayMode=='standard') {?>
 <span maxsize="160px" style="position: absolute; left:0px; top:0px; height: 20px; width: 241px; color:#202020;" 
@@ -56,9 +74,9 @@ if (sessionValueExists('projectSelectorDisplayMode')) {
   <span style="width:220px; text-align: left;">
     <div style="width:220px; overflow: hidden; text-align: left;" >
     <?php
-if ($proj=='*') {
+if ($nbProj==0) {
   echo '<i>' . i18n('allProjects') . '</i>';
-} else if(strpos($proj, ",") !== null and strlen($proj) > 1){
+} else if($nbProj > 1){
   echo '<i>'.i18n('selectedProject').'</i>';
 } else {
   $projObject=new Project($proj);
