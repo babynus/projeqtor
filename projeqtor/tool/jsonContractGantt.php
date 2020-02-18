@@ -12,11 +12,11 @@ $lstContract= array();
 $nbRows=0;
 $obj=new $objectClass();
 $test= new SupplierContract();
-$sortArray=Parameter::getPlanningColumnOrder();
-debugLog("=============================================");
-debugLog($sortArray);
-debugLog("=============================================");
+$showClosedContract = Parameter::getUserParameter('contractShowClosed');
 $where="idle=0";
+if($showClosedContract=='1'){
+  $where="id=id";
+}
 $lstContract=$obj->getSqlElementsFromCriteria(null,null,$where);
 
 
@@ -54,14 +54,24 @@ function drawElementContractGantt($objectClass,$lstContract,$nbRows){
       if(strtotime($contract->deadlineDate) > strtotime($contract->endDate) or strtotime($contract->endDate) < time() ){
         $redLine=true;       
       }
+      if($contract->idResource){
+        $resource=new Resource($contract->idResource);
+        $words=mb_split(' ',str_replace(array('"',"'"), ' ',$resource->name));
+        $display='';
+        foreach ($words as $word) {
+          $display.=(mb_substr($word,0,1,'UTF-8'));
+        }
+      }
       if($contract->deadlineDate or $contract->noticeDate)$class=$class.'hasChild';
+      
       echo  '{';
         echo '"id":"'.$contract->id.'"';
         echo ',"refid":"'.$contract->id.'"';
         echo ',"refname":"'.htmlEncode(htmlEncodeJson($contract->name)).'"';
         echo ',"reftype":"'.$class.'"';
         echo ',"objecttype":"'.htmlEncode(htmlEncodeJson($type->name)).'"';
-        echo ',"resource":"'.htmlEncode(htmlEncodeJson($namePC)).'"';
+        echo ',"resource":"'.htmlEncode(htmlEncodeJson($display)).'"';
+        echo ',"externalressource":"'.htmlEncode(htmlEncodeJson($namePC)).'"';
         echo ',"realstartdate":"'.($contract->startDate).'"';
         echo ',"realenddate":"'.($contract->endDate).'"';
         echo ',"duration":"'.($contract->initialContractTerm).'"';
