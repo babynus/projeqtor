@@ -1337,6 +1337,7 @@ class Parameter extends SqlElement {
         'Priority'=>50,
         'IdPlanningMode'=>150,
         'ObjectType'=>150,
+        'ExterRes'=>90,
         );
     $cpt=0;
     foreach($arrayFields as $col=>$width) {
