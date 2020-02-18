@@ -12,6 +12,8 @@ Humans Resources
 
 .. note:: **Documentation** 
    
+   The human resources module was developed by an external contributor SALTO CONSULTING.
+   
    `French documentation <https://www.projeqtor.org/files/ProjeQtOr%20-%20Documentation%20-%20Absences%20r%C3%A9glement%C3%A9es.pdf>`_ on the implementation of regulated absences is available on the `download page <https://www.projeqtor.org/fr/product-fr/downloads-fr/>`_
 
 This section allows to manage the society's Humans Resources 
@@ -699,3 +701,28 @@ They can view - read - create - update and/or delete access
    :align: center
    
    Leaves System habilitation
+
+   
+   
+.. _leavesSystemHabilitation:
+
+Workflows and values
+^^^^^^^^^^^^^^^^^^^^
+
+* When you install the regulated absences module, a workflow for absences is created.
+
+* You can edit and delete it like any other workflow.
+
+* A new section is available in the list of values for the reports.
+
+* The regulated leaves section allows you to determine the behavior of the absence workflow states.
+
+* It can also trigger an alert and / or send mail
+
+.. figure:: /images/GUI/RH_ZONE_RegulatedLeaves.png
+   :alt: Regulated leaves section
+   
+   Regulated leaves section
+   
+   
+   
