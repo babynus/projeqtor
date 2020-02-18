@@ -7084,9 +7084,12 @@ function loadMenuBarItem(item, itemName, from) {
     vGanttCurrentLine=-1;
     cleanContent("centerDiv");
     loadContent("hierarchicalBudgetMain.php", "centerDiv");
-  } else if (item == 'GanttContract') {
-    objectExist='true';
+  } else if (item == 'GanttClientContract' || item == 'GanttSupplierContract') {
     var object="SupplierContract";
+    if(item == 'GanttClientContract'){
+      object="ClientContract";
+    }
+    objectExist='true';
     vGanttCurrentLine=-1;
     cleanContent("centerDiv");
     loadContent("contractGanttMain.php?objectClass="+object, "centerDiv");
