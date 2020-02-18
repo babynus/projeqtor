@@ -303,7 +303,6 @@ function refreshJsonPlanning(versionsPlanning) {
     param=true;
   } else if (dojo.byId("contractGantt")) {
     url = "../tool/jsonContractGantt.php";
-    param=true;
   } else {
     url = "../tool/jsonPlanning.php";
   }
@@ -3143,9 +3142,10 @@ function drawGantt() {
       if (item.reftype=='Project' || item.reftype=='Fixed' || item.reftype=='Replan' || item.reftype=='Construction' || item.reftype=='ProductVersionhasChild' || item.reftype=='ComponentVersionhasChild' || item.reftype=='SupplierContracthasChild' ) pGroup=1;
      //END MODIF qCazelles - GANTT
       var pobjecttype='';
+      var pExtRessource='';
       if(dojo.byId('contractGantt') &&  item.reftype!='Milestone'){
+        pExtRessource=item.externalressource;
         pobjecttype=item.objecttype;
-        console.log('oui');
       }
       // runScript : JavaScript to run when click on task (to display the
       // detail of the task)
@@ -3219,7 +3219,6 @@ function drawGantt() {
         topId = '';
       }
       keys += "#" + curKey + "#";
-      console.log('ObjectType'+pobjecttype);
       g.AddTaskItem(new JSGantt.TaskItem(item.id, pName, pStart, pEnd, pColor,
           runScript, contextMenu, pMile, pResource, progress, pGroup, 
           topId, pOpen, pDepend,
@@ -3228,7 +3227,7 @@ function drawGantt() {
           item.priority, item.planningmode, 
           item.status, item.type, 
           item.validatedcostdisplay, item.assignedcostdisplay, item.realcostdisplay, item.leftcostdisplay, item.plannedcostdisplay,
-          item.baseTopStart, item.baseTopEnd, item.baseBottomStart, item.baseBottomEnd, item.isoncriticalpath,pobjecttype));
+          item.baseTopStart, item.baseTopEnd, item.baseBottomStart, item.baseBottomEnd, item.isoncriticalpath,pobjecttype,pExtRessource));
     }
     g.Draw();
     g.DrawDependencies();

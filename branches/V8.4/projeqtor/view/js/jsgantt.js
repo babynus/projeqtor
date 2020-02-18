@@ -84,7 +84,8 @@ var planningFieldsDescription=new Array(
     {name:"Progress",       show:false,  order:19, width:100, showSpecif:true},
     {name:"IdStatus",       show:false,  order:20, width:100, showSpecif:true},
     {name:"ObjectType",       show:false,  order:21, width:100, showSpecif:true},
-    {name:"Type",         show:false,  order:22, width:100}
+    {name:"ExterRes",    show:false,  order:22, width:100, showSpecif:true},
+    {name:"Type",         show:false,  order:23, width:100}
   );
 function setPlanningFieldShow(field, value) {
   return setPlanningField('show',field, value);
@@ -144,7 +145,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor,
                             pPriority, pPlanningMode,
                             pStatus, pType, 
                             pValidatedCost, pAssignedCost, pRealCost, pLeftCost, pPlannedCost,
-                            pBaseTopStart, pBaseTopEnd, pBaseBottomStart, pBaseBottomEnd, pIsOnCriticalPath,pObjectType) {
+                            pBaseTopStart, pBaseTopEnd, pBaseBottomStart, pBaseBottomEnd, pIsOnCriticalPath,pObjectType,pExtRes) {
   var vID    = pID;
   var vName  = pName;
   var vId	 = pId;
@@ -155,6 +156,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor,
   var vContextMenu  = pContextMenu;
   var vMile  = pMile;
   var vRes   = pRes;
+  var vExtRes   = pExtRes;
   var vComp  = pComp;
   var vGroup = pGroup;
   var vParent = pParent;
@@ -211,6 +213,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor,
     else if (pField=='StartDate') return JSGantt.formatDateStr(this.getStart(),'default');
     else if (pField=='EndDate') return JSGantt.formatDateStr((this.getEnd())?this.getEnd():this.getRealEnd(),'default');
     else if (pField=='Resource') return vRes;
+    else if (pField=='ExterRes')return vExtRes;
     else if (pField=='PlanEnd') return vPlanEnd;
     else if (pField=='RealEnd') return vRealEnd;
     else if (pField=='ValidatedWork') return vValidatedWork;
@@ -255,6 +258,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor,
   this.getLeftCost     = function(){ return vLeftCost;  };
   this.getPlannedCost     = function(){ return vPlannedCost;  };
   this.getObjectType     = function(){ return vObjectType;  };
+  this.getExtRes         = function(){ return vExtRes;};
   this.getBaseTopStart     = function(){ return vBaseTopStart;  };
   this.getBaseTopEnd     = function(){ return vBaseTopEnd;  };
   this.getBaseBottomStart     = function(){ return vBaseBottomStart;  };
@@ -751,7 +755,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           var field=sortArray[iSort];
           if (field.substr(0,6)=='Hidden') field=field.substr(6);
           var fieldWidth=getPlanningFieldWidth(field);
-          if (field!='Name' && (field=='Resource' || field=='IdStatus'  || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType' )) vLeftWidth+=1+fieldWidth;
+          if (field!='Name' && (field=='Resource' || field=='IdStatus'  || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType' || field=='ExterRes' )) vLeftWidth+=1+fieldWidth;
         }
     }
     //ADD
@@ -848,7 +852,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           var field=sortArray[iSort];
           if (field.substr(0,6)=='Hidden') field=field.substr(6);
           var fieldWidth=getPlanningFieldWidth(field);
-        if(field!='Name' && (field=='Resource' || field=='IdStatus'  || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType' )) {
+        if(field!='Name' && (field=='Resource' || field=='IdStatus'  || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType' || field=='ExterRes' )) {
             vLeftTable += '<TD class="ganttLeftTopLine" style="width: ' + fieldWidth + 'px;"></TD>' ;
           }
         }
@@ -862,10 +866,10 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           if (field.substr(0,6)=='Hidden') field=field.substr(6);
           var fieldWidth=getPlanningFieldWidth(field);
           var classObj='contract';
-          if(field!='Name' && (field=='Resource' || field=='IdStatus'  || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType'  )) {
-            if(field=='Resource' && dojo.byId('objectGantt').value=='SupplierContract'){
+          if(field!='Name' && (field=='Resource' || field=='IdStatus'  || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType' || field=='ExterRes'  )) {
+            if(field=='ExterRes' && dojo.byId('objectGantt').value=='SupplierContract'){
               field='IdProvider';
-            }else if(field=='Resource' && dojo.byId('objectGantt').value=='ClientContract'){
+            }else if(field=='ExterRes' && dojo.byId('objectGantt').value=='ClientContract'){
               field='IdClient';
             }
             vLeftTable += '<TD id="jsGanttHeaderTD'+field+'" class="ganttLeftTitle" style="position:relative;width: ' + fieldWidth + 'px;max-width: ' + fieldWidth + 'px;overflow:hidden" nowrap>'
@@ -1029,8 +1033,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             if (field.substr(0,6)=='Hidden') field=field.substr(6);
             var fieldWidth=getPlanningFieldWidth(field);
             var valueField=vTaskList[i].getFieldValue(field,JSGantt);
-            //console.log(valueField);
-            if(field!='Name' && (field=='Resource' || field=='IdStatus'  || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType' )) { 
+            if(field!='Name' && (field=='Resource' || field=='IdStatus'  || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType' || field=='ExterRes' )) { 
                if(valueField===undefined &&  (field=='Type' || field=='StartDate' || field=='EndDate')){
                   valueField='-';
                 }else if(valueField===undefined ){
@@ -2232,8 +2235,12 @@ function setGanttVisibility(g) {
 	  //setPlanningFieldShow('priority',0);
 	  setPlanningFieldShowSpecif('PlanningMode',0);
   }
-	if(dojo.byId('contractGantt')){
+	if(!dojo.byId('contractGantt')){
 	  setPlanningFieldShowSpecif('ObjectType',0); 
+	  setPlanningFieldShowSpecif('ExterRes',0); 
+	}else{
+	  setPlanningFieldShowSpecif('ObjectType',1); 
+    setPlanningFieldShowSpecif('ExterRes',1); 
 	}
 	g.setSortArray(planningColumnOrder);
 }
