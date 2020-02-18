@@ -703,16 +703,15 @@ public function saveOrganizationBudgetElement($idle=null,$idleDateTime=null,$nam
   public function updateSynthesis($budget=null) {
     if(Parameter::getGlobalParameter('useOrganizationBudgetElement')!="YES") {return;}
     if (isset(BudgetElement::$_noDispatchArrayBudget[$this->id])) {return;}
-    BudgetElement::$_noDispatchArrayBudget[$this->id]=$this->id; // Will avoid double update for save change
+    BudgetElement::$_noDispatchArrayBudget[$this->id]=$this->id; // Will avoid double update for same change
     // Retrieve organization's projects
-    $this->setProjectsOnOrga();
     // Retrieve each BudgetElement of this organization
     if ($budget) {
       $budgetElementList=array('#'.$budget->id=>$budget);
     } else {
       $budgetElement = new BudgetElement();
       $scritBe = array('idle'=>'0', 'refType'=>'Organization', 'refId'=>$this->id);     // No update for closed BudgetElement
-      $budgetElementList=$budgetElement->getSqlElementsFromCriteria($scritBe,false,null,null,true,true,null);
+      $budgetElementList=$budgetElement->getSqlElementsFromCriteria($scritBe,false,null,'year asc',true,true,null);
     }
     foreach($budgetElementList as $bE) {
       // Update the idle et idleDateTime of BudgetElement
@@ -724,6 +723,7 @@ public function saveOrganizationBudgetElement($idle=null,$idleDateTime=null,$nam
         $bE->refName = $this->name;
       }
       $periodValue = $bE->year;
+      $this->setProjectsOnOrga($periodValue);
       $pe=new ProjectPlanningElement();
       $arrayFields=array('validatedWork','assignedWork','realWork','leftWork','plannedWork',
           'validatedCost','assignedCost','realCost','leftCost','plannedCost',
@@ -732,10 +732,10 @@ public function saveOrganizationBudgetElement($idle=null,$idleDateTime=null,$nam
           'totalValidatedCost','totalAssignedCost','totalRealCost','totalLeftCost','totalPlannedCost'
       );
       $whereClause="(refType='Project' and refId in ".transformListIntoInClause(self::$_projectsList).")";
-      $whereClause .= "and ( ".Sql::getYearFunction('coalesce(validatedStartDate,realStartDate,plannedStartDate,initialStartDate)')."=$periodValue )";
+      //$whereClause .= "and ( ".Sql::getYearFunction('coalesce(validatedStartDate,realStartDate,plannedStartDate,initialStartDate)')."=$periodValue )";
       $peSum = $pe->sumSqlElementsFromCriteria($arrayFields, null,$whereClause);
       $whereClause="(refType='Project' and refId in ".transformListIntoInClause(self::$_projectsListOut).")";
-      $whereClause .= "and ( ".Sql::getYearFunction('coalesce(validatedStartDate,realStartDate,plannedStartDate,initialStartDate)')."=$periodValue )";
+      //$whereClause .= "and ( ".Sql::getYearFunction('coalesce(validatedStartDate,realStartDate,plannedStartDate,initialStartDate)')."=$periodValue )";
       $peSub = $pe->sumSqlElementsFromCriteria($arrayFields, null,$whereClause);
       foreach ($arrayFields as $fld) {
         $fldsum='sum'.strtolower($fld);
@@ -1357,36 +1357,47 @@ public function saveOrganizationBudgetElement($idle=null,$idleDateTime=null,$nam
     return $prjWithOutSubPrjList;
   }
   
-  public function setProjectsOnOrga() {
+  private static function getYearFromPlanningElement($pe) {
+    if ($pe->validatedStartDate) return substr($pe->validatedStartDate,0,4);
+    if ($pe->realStartDate) return substr($pe->realStartDate,0,4);
+    if ($pe->plannedStartDate) return substr($pe->plannedStartDate,0,4);
+    if ($pe->initialStartDate) return substr($pe->initialStartDate,0,4);
+    return date('Y');
+  }
+  public function setProjectsOnOrga($periodValue=null) {
     self::$_projectsList=array();
     self::$_projectsListOut=array();
     self::$_projectsListForWork=array();
-    $prj=new Project();
+    $pe=new ProjectPlanningElement();
     
     $orgaList=$this->getSubOrgaFlatList();
-    $critOrga='idOrganization in '.transformListIntoInClause($orgaList);
-    $list=$prj->getSqlElementsFromCriteria(null,false,$critOrga,'sortOrder asc',false,true); // List of all projects linked to orga
-    $critOnSortOrder="1=0 ";
+    $critOrga="refType='Project' and idOrganization in ".transformListIntoInClause($orgaList);
+    $list=$pe->getSqlElementsFromCriteria(null,false,$critOrga,'wbsSortable asc',false,true); // List of all projects linked to orga
+    $critOnWBS="refType='Project' and (1=0 ";
     $wbsList=array();
-    foreach ($list as $prj) {
-      self::$_projectsListForWork[$prj->id]=$prj->name; // Will sum work for all projects linked to orga : right !
-      if (strlen($prj->sortOrder)>5 and in_array(substr($prj->sortOrder,-6),$wbsList)) continue; // Parent already in the list
-      $critOnSortOrder.=" or sortOrder like '$prj->sortOrder%'"; // Will fetch all sub-projects
-      $wbsList[$prj->id]=$prj->sortOrder;
+    foreach ($list as $pe) {
+      self::$_projectsListForWork[$pe->refId]=$pe->refName;
+      //if ($periodValue and self::getYearFromPlanningElement($pe)!=$periodValue) continue; 
+      if (strlen($pe->wbsSortable)>5 and in_array(substr($pe->wbsSortable,-6),$wbsList)) continue; // Parent already in the list
+      $critOnWBS.=" or wbsSortable like '$pe->wbsSortable%'"; // Will fetch all sub-projects
+      $wbsList[$pe->refId]=$pe->wbsSortable;
     }
-    $list=$prj->getSqlElementsFromCriteria(null,false,$critOnSortOrder,'sortOrder asc',false,true); // List all project where parent is in the orga
+    $critOnWBS.=')';
+    $list=$pe->getSqlElementsFromCriteria(null,false,$critOnWBS,'wbsSortable asc',false,true); // List all project where parent is in the orga
     $wbsIn=array();
     $wbsOut=array();
-    foreach ($list as $prj) {
-      if (isset($orgaList[$prj->idOrganization]) and ! $prj->cancelled) { // Project in Orga, except cancelled
-        $wbsIn[]=$prj->sortOrder;
-        if (strlen($prj->sortOrder)<=5 or ! in_array(substr($prj->sortOrder,0,-6),$wbsIn)) {
-          self::$_projectsList[$prj->id]=$prj->name; // Parent not in the list, add ! 
+    foreach ($list as $pe) {
+      $yearStartProj=self::getYearFromPlanningElement($pe);
+      if (isset($orgaList[$pe->idOrganization]) and ! $pe->cancelled and (!$periodValue or $yearStartProj==$periodValue)) { // Project in Orga, except cancelled
+        $wbsIn[]=$pe->wbsSortable;
+        if (strlen($pe->wbsSortable)<=5 or ! in_array(substr($pe->wbsSortable,0,-6),$wbsIn)) {
+          self::$_projectsList[$pe->refId]=$pe->refName; // Parent not in the list, add ! 
         }
       } else { // Not in = Orga
-        $wbsOut[]=$prj->sortOrder;
-        if (strlen($prj->sortOrder)<=5 or ! in_array(substr($prj->sortOrder,0,-6),$wbsOut)) {
-          self::$_projectsListOut[$prj->id]=$prj->name; // Parent not in the list, add !
+        if (! in_array(substr($pe->wbsSortable,0,-6),$wbsIn)) continue;
+        $wbsOut[]=$pe->wbsSortable;
+        if (strlen($pe->wbsSortable)<=5 or ! in_array(substr($pe->wbsSortable,0,-6),$wbsOut)) {
+          self::$_projectsListOut[$pe->refId]=$pe->refName; // Parent not in the list, add !
         }
       }
     }
