@@ -549,11 +549,11 @@ public $_noCopy;
   		  		               'projects'=>$arrAffProj);
   		}
   	}
-  	if (!isset($_resourcePeriods[$idResource])) {
-  		$_resourcePeriods[$idResource]=array();
+  	if (!isset(self::$_resourcePeriods[$idResource])) {
+  		self::$_resourcePeriods[$idResource]=array();
   	}
   	ksort($res);
-  	$_resourcePeriods[$idResource][$showIdle]=$res;
+  	self::$_resourcePeriods[$idResource][$showIdle]=$res;
   	return $res;
   }
   private static $_resourcePeriodsPerProject=array();
@@ -584,10 +584,10 @@ public $_noCopy;
   			}
   		}
   	}
-  	if (!isset($_resourcePeriodsPerProject[$idResource])) {
-  		$_resourcePeriodsPerProject[$idResource]=array();
+  	if (!isset(self::$_resourcePeriodsPerProject[$idResource])) {
+  		self::$_resourcePeriodsPerProject[$idResource]=array();
   	}
-  	$_resourcePeriodsPerProject[$idResource][$showIdle]=$projects;
+  	self::$_resourcePeriodsPerProject[$idResource][$showIdle]=$projects;
   	return $projects; 
   }
   
