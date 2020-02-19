@@ -1133,6 +1133,13 @@
 .ProjeQtOrFlatGreen .iconLayoutTab { background-image: url(customIcons/green/iconLayoutTab.png); }
 .ProjeQtOrFlatGrey .iconLayoutTab { background-image: url(customIcons/grey/iconLayoutTab.png); }
 
+.iconLocation { background-image: url(images/iconLocation.png); }
+.ProjeQtOrFlatBlue .iconLocation { background-image: url(customIcons/blue/iconLocation.png); }
+.ProjeQtOrFlatRed .iconLocation { background-image: url(customIcons/red/iconLocation.png); }
+.ProjeQtOrFlatGreen .iconLocation { background-image: url(customIcons/green/iconLocation.png); }
+.ProjeQtOrFlatGrey .iconLocation { background-image: url(customIcons/grey/iconLocation.png); }
+
+
 /* S */
 .iconSupplierContract { background-image: url(images/iconSupplierContract.png); }
 .ProjeQtOrFlatBlue .iconSupplierContract { background-image: url(customIcons/blue/iconSupplierContract.png); }

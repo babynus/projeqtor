@@ -235,7 +235,7 @@ INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) S
 ALTER TABLE `${prefix}term` ADD `idResource` int(12) unsigned DEFAULT NULL , ADD `done` int(1) unsigned DEFAULT '0';
 
 -- ======================================
--- Gestion Parc
+-- Asset
 -- ======================================
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
