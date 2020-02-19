@@ -251,6 +251,12 @@
 .iconBillType22 { background-image: url(images/iconClientBillType32.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .iconBillType16 { background-image: url(images/iconClientBillType32.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
+.iconBrand { background-image: url(images/iconBrand.png); }
+.ProjeQtOrFlatBlue .iconBrand { background-image: url(customIcons/blue/iconBrand.png); }
+.ProjeQtOrFlatRed .iconBrand { background-image: url(customIcons/red/iconBrand.png); }
+.ProjeQtOrFlatGreen .iconBrand { background-image: url(customIcons/green/iconBrand.png); }
+.ProjeQtOrFlatGrey .iconBrand { background-image: url(customIcons/grey/iconBrand.png); }
+
 .iconCallForTender32 { background-image: url(images/iconCallForTender32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconCallForTender22 { background-image: url(images/iconCallForTender22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconCallForTender16 { background-image: url(images/iconCallForTender16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
@@ -641,6 +647,12 @@
 .iconMilestoneType32 { background-image: url(images/iconMilestoneType32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconMilestoneType22 { background-image: url(images/iconMilestoneType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconMilestoneType16 { background-image: url(images/iconMilestoneType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+
+.iconModel { background-image: url(images/iconBrand.png); }
+.ProjeQtOrFlatBlue .iconModel { background-image: url(customIcons/blue/iconModel.png); }
+.ProjeQtOrFlatRed .iconModel { background-image: url(customIcons/red/iconModel.png); }
+.ProjeQtOrFlatGreen .iconModel { background-image: url(customIcons/green/iconModel.png); }
+.ProjeQtOrFlatGrey .iconModel { background-image: url(customIcons/grey/iconModel.png); }
 
 /* BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM */
 .iconNotification32 { background-image: url(images/iconNotification.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px; background-position:top left;}
