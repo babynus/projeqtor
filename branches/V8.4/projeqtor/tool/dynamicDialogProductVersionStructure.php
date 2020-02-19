@@ -56,7 +56,16 @@ $str=new ProductVersionStructure($structureId);
 if ($objectClass=='ProductVersion') {
   $listClass='ComponentVersion';
   $listId=$str->idComponentVersion;
-} else if ($objectClass=='ComponentVersion') {
+} else if ($objectClass=='ComponentVersion')  {
+  if ($way=='structure') {
+    $listClass='ProductVersion';
+    $listId=$str->idProductVersion;
+  } else {
+    $listClass='ComponentVersion';
+    $listId=$str->idComponentVersion;
+  }
+//gautier #4404
+}else if($objectClass=='Asset'){
   if ($way=='structure') {
     $listClass='ProductVersion';
     $listId=$str->idProductVersion;
@@ -162,10 +171,14 @@ if ($way=='composition' and $directAccessToList=='true') {
             </td>
             <td>
               <select size="14" id="productVersionStructureListId" name="productVersionStructureListId[]"
-                <?php if (!$structureId) echo 'multiple';?> class="selectList" onchange="enableWidget('dialogProductVersionStructureSubmit');"  ondblclick="saveProductVersionStructure();" value="">
+                <?php if (!$structureId) echo 'multiple';?> class="selectList" onchange="enableWidget('dialogProductVersionStructureSubmit');"  ondblclick="<?php if($objectClass=='Asset'){?>saveProductVersionStructureAsset();<?php }else{?>saveProductVersionStructure();<?php }?>" value="">
                   <?php 
                     if (!$structureId) { 
-                      htmlDrawOptionForReference('id'.$listClass, $listId, null, true, 'id'.$critClass, $objectId);
+                      if($objectClass =='Asset'){
+                        htmlDrawOptionForReference('idversion', $listId, null, true);
+                      }else{
+                        htmlDrawOptionForReference('id'.$listClass, $listId, null, true, 'id'.$critClass, $objectId);
+                      }
                     } else {
                       $compVers=new ComponentVersion($str->idComponentVersion);
                       htmlDrawOptionForReference('id'.$listClass, $listId, null, true, 'idComponent', $compVers->idComponent);
@@ -224,7 +237,7 @@ if ($way=='composition' and $directAccessToList=='true') {
       <button class="mediumTextButton" dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogProductVersionStructure').hide();">
         <?php echo i18n("buttonCancel");?>
       </button>
-      <button class="mediumTextButton" <?php if (!$structureId) echo 'disabled';?> dojoType="dijit.form.Button" type="submit" id="dialogProductVersionStructureSubmit" onclick="protectDblClick(this);saveProductVersionStructure();return false;">
+      <button class="mediumTextButton" <?php if (!$structureId) echo 'disabled';?> dojoType="dijit.form.Button" type="submit" id="dialogProductVersionStructureSubmit" onclick="protectDblClick(this);<?php if($objectClass=='Asset'){?>saveProductVersionStructureAsset();<?php }else{?>saveProductVersionStructure();<?php }?>return false;">
         <?php echo i18n("buttonOK");?>
       </button>
     </td>
