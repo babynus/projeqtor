@@ -32,9 +32,6 @@ require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
 scriptLog('   ->/view/refreshHhierarchicalList.php'); 
 
-$idUser= RequestHandler::getId('userName');
-$idReceiver = RequestHandler::getId('idReceiver');
-
 ?>
 <div id="hierarchicalListDiv" name="hierarchicalListDiv">
   <?php include 'hierarchicalBudgetView.php'?>

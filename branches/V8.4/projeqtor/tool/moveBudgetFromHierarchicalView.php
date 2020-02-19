@@ -33,16 +33,14 @@ scriptLog('   ->/tool/moveBudgetFromHierarchicalView.php');
 $idFrom = RequestHandler::getValue('idFrom');
 $idTo = RequestHandler::getValue('idTo');
 
-$idSource = substr($idFrom, 10);
-$idTarget = substr($idTo, 10);
+$idSource = substr($idFrom, -1);
+$idTarget = substr($idTo, -1);
 $source = new Budget($idSource);
 $target = new Budget($idTarget);
 
-$result = "";
 // UPDATE PARENTS (recursively)
 if ($idTarget) {
 	$source->idBudget = $idTarget;
-	$result = $source->save();
+	$source->save();
 }
-displayLastOperationStatus($result);
 ?>

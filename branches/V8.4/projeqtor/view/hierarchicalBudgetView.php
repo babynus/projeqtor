@@ -101,10 +101,26 @@ echo '</TR>';
 
 function getSubBudgetList($subList, &$subBudget){
 	foreach ($subList as $id=>$obj){
-		$subBudget[]=$obj->id;
-		$budget = new Budget();
-		$resubList = $budget->getSqlElementsFromCriteria(array('idBudget'=>$obj->id));
-		getSubBudgetList($resubList, $subBudget);
+      $subBudget[]=$obj->id;
+      $budget = new Budget();
+      $resubList = $budget->getSqlElementsFromCriteria(array('idBudget'=>$obj->id));
+      getSubBudgetList($resubList, $subBudget);
+	}
+}
+
+function getVisibleRowList($idBudget, $subList, &$visibleRow){
+	foreach ($subList as $id=>$obj){
+		$col = SqlElement::getSingleSqlElementFromCriteria('Collapsed', array('scope'=>'hierarchicalBudgetRow_'.$obj->id, 'idUser'=>getCurrentUserId()));
+		$colParent = SqlElement::getSingleSqlElementFromCriteria('Collapsed', array('scope'=>'hierarchicalBudgetRow_'.$obj->idBudget, 'idUser'=>getCurrentUserId()));
+		if(!$colParent->id and $idBudget == $obj->idBudget){
+      	   $visibleRow[$obj->id]=$obj->id;
+      	   $resubList = $obj->getSqlElementsFromCriteria(array('idBudget'=>$obj->id));
+      	   getVisibleRowList($idBudget, $resubList, $visibleRow);
+		}else if(!$colParent->id and $idBudget != $obj->idBudget){
+	  	   $visibleRow[$obj->id]=$obj->id;
+		}else{
+		  continue;
+		}
 	}
 }
 // Treat each line
@@ -142,26 +158,36 @@ if (Sql::$lastQueryNbRows > 0) {
 		// pGroup : is the tack a group one ?
 		$pGroup=($line['elementary']=='0')?1:0;
 		$compStyle="";
+		$visibleRow = array();
+		$limitedSubBudget = array();
 		if( $pGroup) {
 			$rowType = "group";
 			$compStyle="font-weight: bold; background: #E8E8E8 ;";
 			$budget = new Budget();
 			$subList = $budget->getSqlElementsFromCriteria(array('idBudget'=>$line['id']));
+			foreach ($subList as $id=>$obj){
+				$limitedSubBudget[]=$obj->id;
+			}
 			$subBudget=array();
 			getSubBudgetList($subList, $subBudget);
+			getVisibleRowList($line['id'], $subList, $visibleRow);
+			$crit=array('scope'=>'hierarchicalBudgetRow_'.$line['id'], 'idUser'=>getCurrentUserId());
+			$col=SqlElement::getSingleSqlElementFromCriteria('Collapsed', $crit);
+			if($col->id){
+				$class = 'ganttExpandClosed';
+    			if(!$line['idbudget']){
+    			  $hiddenRow[$line['id']]=$line['id'];
+    			}
+			}else{
+				$class = 'ganttExpandOpened';
+			}
 		} else {
 			$rowType  = "row";
+			if(!$line['idbudget']){
+			  $hiddenRow[$line['id']]=$line['id'];
+			}
 		}
-		$crit=array('scope'=>'hierarchicalBudgetRow_'.$line['id'], 'idUser'=>getCurrentUserId());
-		$col=SqlElement::getSingleSqlElementFromCriteria('Collapsed', $crit);
-		if($col->id){
-		  $class = 'ganttExpandClosed';
-		  foreach ($subBudget as $id){
-		  	$hiddenRow[$id]=$id;
-		  }
-		}else{
-		  $class = 'ganttExpandOpened';
-		}
+		$hiddenRow = array_merge($hiddenRow, $visibleRow);
 		$wbs=$line['bbssortable'];
 		$level=(strlen($wbs)+1)/4;
 		$tab="";
@@ -170,8 +196,8 @@ if (Sql::$lastQueryNbRows > 0) {
 			$tab.='<span class="ganttSep">&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 		}
 		$display='';
-		if(in_array($line['id'], $hiddenRow)){
-		  $display='style="display:none"';
+		if($line['idbudget'] and !in_array($line['id'], $hiddenRow)){
+		  $display='style="visibility:collapse"';
 		}
 		echo '<TR id="hierarchicalBudgetRow_'.$id.'" dndType="budgetHierachical" class="dojoDndItem ganttTask'.$rowType.'" height="30px" '.$display.'>';
 		echo '  <TD class="ganttName reportTableData" style="border-right:0px;' . $compStyle . '">';
@@ -191,7 +217,7 @@ if (Sql::$lastQueryNbRows > 0) {
 		if($pGroup){
 			echo     '<div id="group_'.$line['id'].'" class="'.$class.'"';
 			echo      'style="position: relative; z-index: 100000; width:16px; height:13px;"';
-			echo     ' onclick="expandHierarchicalBudgetGroup(\''.$line['id'].'\',\''.implode(',', $subBudget).'\');">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
+			echo     ' onclick="expandHierarchicalBudgetGroup(\''.$line['id'].'\',\''.implode(',', $limitedSubBudget).'\',\''.implode(',', $subBudget).'\',\''.implode(',', $visibleRow).'\');">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
 		}
 		echo '  </td>';
 		echo '  <td>'.$tab . htmlEncode($line['name']).'</td>';
