@@ -7694,8 +7694,8 @@ function moveBudgetFromHierarchicalView(idFrom, idTo){
 	  dojo.xhrPost({
 	    url : url,
 	    handleAs : "text",
-	    load : function(data, args) {
-	    	loadContent("../view/refreshHierarchicalBudgetList.php", "hierarchicalListDiv", null, false);
+	    load : function() {
+	    	refreshHierarchicalBudgetList();
 	    }
 	  });
 }

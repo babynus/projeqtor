@@ -123,7 +123,7 @@ if(sessionValueExists('showFullAmount')){
   <tr >
     <td style="width:50px;min-width:43px;" align="center">
        <div style="position:absolute;left:0px;width:43px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>
-       <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $objectClass;?>32 icon<?php echo $objectClass;?> iconSize32" /></div>
+       <div style="position:absolute; top:0px;left:5px ;" class="icon<?php echo $currentScreen;?>32 icon<?php echo $currentScreen;?> iconSize32" /></div>
     </td>
     <td class="title" style="height:35px;width:20%;">
       <div style="width:100%;height:100%;position:relative;">

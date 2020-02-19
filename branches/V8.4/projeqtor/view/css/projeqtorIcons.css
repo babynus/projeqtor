@@ -1276,6 +1276,12 @@
 .ProjeQtOrFlatGreen .iconActionQuestionDecision { background-image: url(customIcons/green/iconActionQuestionDecision.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .ProjeQtOrFlatGrey .iconActionQuestionDecision { background-image: url(customIcons/grey/iconActionQuestionDecision.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 
+.iconHierarchicalBudget { background-image: url(images/iconHierarchicalBudget.png); }
+.ProjeQtOrFlatBlue .iconHierarchicalBudget { background-image: url(customIcons/blue/iconHierarchicalBudget.png); }
+.ProjeQtOrFlatRed .iconHierarchicalBudget { background-image: url(customIcons/red/iconHierarchicalBudget.png); }
+.ProjeQtOrFlatGreen .iconHierarchicalBudget { background-image: url(customIcons/green/iconHierarchicalBudget.png); }
+.ProjeQtOrFlatGrey .iconHierarchicalBudget { background-image: url(customIcons/grey/iconHierarchicalBudget.png); }
+
 /* =============================================================================== */
 /* Extra CSS for custom Kanban                                                     */
 /* =============================================================================== */
