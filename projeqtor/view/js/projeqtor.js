@@ -6651,20 +6651,27 @@ function refreshHierarchicalBudgetList(){
 	loadContent("../view/refreshHierarchicalBudgetList.php", "hierarchicalListDiv", null, false, null, null, null, callback, null);
 }
 
-function expandHierarchicalBudgetGroup(idBudget, subBudget){
+function expandHierarchicalBudgetGroup(idBudget, subBudget, recSubBudget, visibleRow){
+	var recSubBudgetList = recSubBudget.split(',');
+	var visibleRowList = visibleRow.split(',');
 	var subBudgetList = subBudget.split(',');
 	var budgetClass = dojo.attr('group_'+idBudget, 'class');
-	if(budgetClass == 'ganttExpandClosed'){
-		saveExpanded('hierarchicalBudgetRow_'+idBudget);
-		subBudgetList.forEach(function(item){
-			dojo.byId('hierarchicalBudgetRow_'+item).style.display = '';
-		});
-		dojo.setAttr('group_'+idBudget, 'class', 'ganttExpandOpened');
-	}else{
-		saveCollapsed('hierarchicalBudgetRow_'+idBudget);
-		subBudgetList.forEach(function(item){
-			dojo.byId('hierarchicalBudgetRow_'+item).style.display = 'none';
-		});
-		dojo.setAttr('group_'+idBudget, 'class', 'ganttExpandClosed');
+	if(visibleRowList == ''){
+		visibleRowList = subBudgetList;
 	}
+	if(budgetClass == 'ganttExpandClosed'){
+		visibleRowList.forEach(function(item){
+			saveExpanded('hierarchicalBudgetRow_'+idBudget);
+			dojo.byId('hierarchicalBudgetRow_'+item).style.visibility = 'visible';
+			dojo.setAttr('group_'+idBudget, 'class', 'ganttExpandOpened');
+		});
+		refreshHierarchicalBudgetList();
+	}else{
+		recSubBudgetList.forEach(function(item){
+			saveCollapsed('hierarchicalBudgetRow_'+idBudget);
+			dojo.byId('hierarchicalBudgetRow_'+item).style.visibility = 'collapse';
+			dojo.setAttr('group_'+idBudget, 'class', 'ganttExpandClosed');
+		});
+	}
+	visibleRowList = '';
 }
