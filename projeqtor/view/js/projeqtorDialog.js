@@ -1878,6 +1878,12 @@ function saveProductVersionStructure() {
   dijit.byId('dialogProductVersionStructure').hide();
 }
 
+function saveProductVersionStructureAsset(){
+  if (dojo.byId("productVersionStructureListId").value == "") return;
+  loadContent("../tool/saveProductAsset.php", "resultDivMain", "productVersionStructureForm", true, 'ProductVersionStructure');
+  dijit.byId('dialogProductVersionStructure').hide();
+}
+
 /**
 * Display a delete Link Box
 * 
@@ -1893,6 +1899,21 @@ function removeProductVersionStructure(ProductVersionStructureId, refType, refId
   if (!refTypeName) {
    refTypeName=i18n(refType);
   }
+  msg=i18n('confirmDeleteLink', new Array(refTypeName, refId));
+  showConfirm(msg, actionOK);
+}
+
+function removeProductVersionStructureAsset(id,refType, refId,refTypeName) {
+  if (checkFormChangeInProgress()) {
+   showAlert(i18n('alertOngoingChange'));
+   return;
+  }
+  actionOK=function() {
+   loadContent("../tool/removeProductVersionStructureAsset.php?id="+id, "resultDivMain", null, true, 'ProductVersionStructure');
+  };
+  if (!refTypeName) {
+    refTypeName=i18n(refType);
+   }
   msg=i18n('confirmDeleteLink', new Array(refTypeName, refId));
   showConfirm(msg, actionOK);
 }

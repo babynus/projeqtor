@@ -80,13 +80,13 @@ $doNotUpdateAllVersionProject=true;
 $result="";
 // get the modifications (from request)
 foreach ($arrayId as $id) {
-	$str=new ProductVersionStructure($strId);
+	$str=new ProductAsset($strId);
 	if ($way=='composition') {
 	  $str->idProductVersion=$objectId;
-	  $str->idComponentVersion=$id;
+	  $str->idAsset=$id;
 	} else if ($way=='structure') {
 	  $str->idProductVersion=$id;
-	  $str->idComponentVersion=$objectId;
+	  $str->idAsset=$objectId;
 	} else {
 	  throwError("way '$way' is not an expected value");
 	}
