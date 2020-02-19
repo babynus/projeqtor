@@ -2306,6 +2306,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         } else {
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
         }
+        if ($col=='idProduct' and !$obj->id and $obj->isAttributeSetToField($col, 'required')) $obj->idProduct=$next;
         echo $colScript;
         echo '</select>';
         if ($displayDirectAccessButton) {

@@ -813,6 +813,9 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       	$selectedFound=false;
       	$next=$key;
       }
+      if ($col=='idProduct' and !$next) { // Will return first item (defaut value) for Product 
+        $next=$key;
+      }
 //       if ($col=='idBudgetItem') {
 //         $top=SqlList::getFieldFromId('Budget', $key, 'idBudget');
 //         if ($top!=$group) {
