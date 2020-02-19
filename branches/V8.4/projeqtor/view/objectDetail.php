@@ -70,7 +70,6 @@ $preseveHtmlFormatingForPDF=true;
 // ********************************************************************************************************
 
 // fetch information depending on, request
-//$objClass = RequestHandler::getValue('objectClass');
 $objClass=$_REQUEST['objectClass'];
 Security::checkValidClass($objClass, 'objectClass');
 if (isset($_REQUEST['noselect']) or !$objClass) {
@@ -1054,6 +1053,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       drawVersionStructureFromObject($obj, false, 'composition', 'ProductVersion');
     } else if ($col=='_componentVersionStructure' and !$obj->isAttributeSetToField($col, "hidden")) { // Display ProductVersionStructure (structure)
       drawVersionStructureFromObject($obj, false, 'structure', 'ComponentVersion');
+      //Gautier #4404
+    } else if ($col=='_componentVersionStructureAsset' and !$obj->isAttributeSetToField($col, "hidden")) { // Display ProductVersionStructure (structure)
+      drawVersionStructureFromObjectAsset($obj, false, 'structure', 'ComponentVersion');
     } else if ($col=='_componentVersionComposition' and !$obj->isAttributeSetToField($col, "hidden")) { // Display ProductVersionStructure (structure)
       drawVersionStructureFromObject($obj, false, 'composition', 'ComponentVersion');
     } else if (substr($col, 0, 11)=='_Assignment') { // Display Assignments
@@ -4980,6 +4982,7 @@ function drawActivityList($obj, $refresh=false) {
   }
 }
 // END mOlives - ticket 215 - 09/05/2018
+
 function drawVersionStructureFromObject($obj, $refresh=false, $way, $item) {
   $crit=array();
   if ($way=='composition') {
@@ -5080,7 +5083,95 @@ function drawVersionStructureFromObject($obj, $refresh=false, $way, $item) {
     echo '<input id="ProductVersionStructureSectionCount" type="hidden" value="'.count($list).'" />';
   }
 }
-
+//gautier #4404
+function drawVersionStructureFromObjectAsset($obj, $refresh=false, $way, $item) {
+  global $cr, $print, $user, $comboDetail;
+  if ($comboDetail) {
+    return;
+  }
+  $crit=array();
+  if ($way=='composition') {
+    $crit['idProductVersion']=$obj->id;
+  } else if ($way=='structure') {
+    $crit['idAsset']=$obj->id;
+  } else {
+    errorLog("unknown way=$way in drawVersionStructureFromObject()");
+  }
+  $pcs=new ProductAsset();
+  $list=$pcs->getSqlElementsFromCriteria($crit);
+  if (Parameter::getGlobalParameter('sortCompositionStructure')=='YES') {
+    if ($way=='composition') {
+      SqlElement::$_cachedQuery['ComponentVersion']=array(); 
+      SqlElement::$_cachedQuery['ComponentVersionType']=array(); 
+      usort($list, "ProductVersionStructure::sortCompositionComponentVersionListOnId");
+    } else if ($way=='structure') {
+      SqlElement::$_cachedQuery['Version']=array();
+      SqlElement::$_cachedQuery['Type']=array(); 
+      usort($list, "ProductVersionStructure::sortStructureComponentVersionListOnId");
+    }
+  }
+  $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
+  if ($obj->idle==1) {
+    $canUpdate=false;
+  }
+  if (!$refresh) echo '<tr><td colspan="2">';
+  echo '<table style="width:100%;">';
+  echo '<tr>';
+  $actualStatus = '';
+  if (!$print) {
+    echo '<td class="linkHeader" style="width:5%">';
+    if ($obj->id!=null and !$print and $canUpdate) {
+      $critStatus = array('id' => $obj->idStatus);
+      $actualStatus = SqlElement::getSingleSqlElementFromCriteria ( 'status', $critStatus);
+      if ( ( (get_class($obj)!='ComponentVersion' && get_class($obj)!='ProductVersion') || $actualStatus->setIntoserviceStatus!=1) || ($way!='composition')) {
+        echo '<a onClick="addProductVersionStructure(\''.$way.'\');" title="'.i18n('addProductVersionStructure').'" > '.formatSmallButton('Add').'</a>';
+        if ($way=='composition' and count($list)>0) {
+          echo '<a onClick="upgradeProductVersionStructure(null,false);" title="'.i18n('upgradeProductVersionStructure').'" > '.formatSmallButton('Switch').'</a>';
+        }
+      }
+    }
+    echo '</td>';
+  }
+  $listClass=($item=='ProductVersion')?'ComponentVersion':(($way=='structure')?'Version':'ComponentVersion');
+  echo '<td class="linkHeader" style="width:5%">'.i18n($listClass).'</td>';
+  echo '<td class="linkHeader" style="width:40%">'.i18n('colName').'</td>';
+  echo '<td class="linkHeader" style="width:10%">' . i18n('colIdStatus') . '</td>';
+  echo '<td class="linkHeader" style="width:10%">' . i18n('colType') . '</td>';
+  echo '<td class="linkHeader" style="width:10%">' . i18n('colPlannedDeliveryDate') . '</td>';
+  echo '<td class="linkHeader" style="width:15">' . i18n('colVersionDeliveryDate') . '</td>';
+  echo '</tr>';
+  $showClosedItemComposition = Parameter::getUserParameter('showClosedItemComposition'); // Show closed items of composition of ComponentVersion
+  $showClosedItemStructure = Parameter::getUserParameter('showClosedItemStructure'); // Show closed items of structure of Component Version
+  $showClosedItemCompositionProduct = Parameter::getUserParameter('showClosedItemCompositionProduct'); // Show closed items of composition of ProductVersion
+  foreach ($list as $comp) {
+    //$critVersionType = array('id' => $obj->idVersionType);
+    //$typeVersion = SqlElement::getSingleSqlElementFromCriteria('type',$critVersionType);
+    
+    $compObj=null;
+    $paramItem=null;
+    if ($way=='structure') {
+      $compObj=new Version($comp->idProductVersion);
+      $paramItem = $showClosedItemStructure;
+    } else {
+      $compObj=new Version($comp->idComponentVersion);
+      if($typeVersion->scope=='ComponentVersion') {
+        $paramItem = $showClosedItemComposition;
+      } else if ($typeVersion->scope=='ProductVersion') {
+        $paramItem = $showClosedItemCompositionProduct;
+      }
+    }
+    if ($compObj->scope=='Product') $compObj=new ProductVersion($compObj->id);
+    else $compObj=new ComponentVersion($compObj->id);
+    if($paramItem==1 or !$compObj->idle) {
+      drawElementIntoVersionStructureFromObject($comp, $compObj, $print, $canUpdate, $obj, $way, $actualStatus);
+    }
+  }
+  echo '</table>';
+  if (!$refresh) echo '</td></tr>';
+  if (!$print) {
+    echo '<input id="ProductVersionStructureSectionCount" type="hidden" value="'.count($list).'" />';
+  }
+}
 // UPDATE tLaguerie & dFayolle
 // Used in function drawVersionStructureFromObject above.
 // Draw an element into section Structure and Composition of ComponentVersion and Composition of ProductVersion
@@ -5096,7 +5187,11 @@ function drawElementIntoVersionStructureFromObject($comp, $compObj, $print, $can
     echo '<td class="linkData" style="text-align:center;width:5%;white-space:nowrap;">';
     if ($canUpdate && (((get_class($obj) != 'ComponentVersion' && get_class($obj) != 'ProductVersion') || $actualStatus->setIntoserviceStatus != 1) || ($way != 'composition'))) {
       echo '  <a onClick="editProductVersionStructure(\'' . $way . '\',' . htmlEncode($comp->id) . ');" ' . 'title="' . i18n('editProductStructure') . '" > ' . formatSmallButton('Edit') . '</a>';
-      echo '  <a onClick="removeProductVersionStructure(' . "'" . htmlEncode($comp->id) . "','" . get_class($compObj) . "','" . htmlEncode($compObj->id) . "','" . $classCompName . "'" . ');" ' . 'title="' . i18n('removeProductStructure') . '" > ' . formatSmallButton('Remove') . '</a>';
+      if(get_class($obj)=='Asset'){
+        echo '  <a onClick="removeProductVersionStructureAsset(' . "'" . htmlEncode($comp->id) . "','" . get_class($compObj) . "','" . htmlEncode($compObj->id) . "','" . $classCompName . "'" . ');" ' . 'title="' . i18n('removeProductStructure') . '" > ' . formatSmallButton('Remove') . '</a>';
+      }else{
+        echo '  <a onClick="removeProductVersionStructure(' . "'" . htmlEncode($comp->id) . "','" . get_class($compObj) . "','" . htmlEncode($compObj->id) . "','" . $classCompName . "'" . ');" ' . 'title="' . i18n('removeProductStructure') . '" > ' . formatSmallButton('Remove') . '</a>';
+      }
       if ($way == 'composition') {
         echo '<a onClick="upgradeProductVersionStructure(\'' . $comp->id . '\',false);" title="' . i18n('upgradeProductVersionStructureSingle') . '" > ' . formatSmallButton('Switch') . '</a>';
       }
