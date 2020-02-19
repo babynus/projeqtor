@@ -612,7 +612,7 @@ class EmployeeManagerMain extends SqlElement {
         }
         $orderBy = "idEmployee ASC, startDate ASC";
         $managedEmployees = $managedEmployee->getSqlElementsFromCriteria($crit,false,null,$orderBy);
-        $resourcesList=null;
+        $resourcesList=array();
         $whereClause = ($limitToUser?"isUser=1 ":"");
         $currentDateTime = new DateTime();
         $currentDate = $currentDateTime->format("Y-m-d");
