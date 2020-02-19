@@ -232,4 +232,129 @@ INSERT INTO `${prefix}period` (`id`, `name`,  `sortOrder`, `idle`) VALUES
 -- ======================================
 INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT `profile`.id , 'generateProjExpense', 1 FROM `profile`;
 
-ALTER TABLE `term` ADD `idResource` int(12) unsigned DEFAULT NULL , ADD `done` int(1) unsigned DEFAULT '0';
+ALTER TABLE `${prefix}term` ADD `idResource` int(12) unsigned DEFAULT NULL , ADD `done` int(1) unsigned DEFAULT '0';
+
+-- ======================================
+-- Gestion Parc
+-- ======================================
+
+INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
+(237,'menuAsset',151,'object', 203,'Project',0,'Asset'),
+(238,'menuAssetType',79,'object', 990,'ReadWriteType',0,'Type'),
+(239,'menuLocation',36,'object', 895,'ReadWriteList',0,'ListOfValues'),
+(240,'menuBrand',36,'object', 896,'ReadWriteList',0,'ListOfValues'),
+(241,'menuModel',36,'object', 897,'ReadWriteList',0,'ListOfValues'),
+(242,'menuAssetCategory',151,'object', 204,'Project',0,'Asset');
+
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
+(1,237,1),
+(1,238,1),
+(1,239,1),
+(1,240,1),
+(1,241,1),
+(1,242,1);
+
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
+(1,237,8),
+(1,238,8),
+(1,239,8),
+(1,240,8),
+(1,241,8),
+(1,242,8);
+
+INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES
+(18,'moduleAssets','850',null,0,1);
+
+INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
+(18,237,0,1),
+(18,238,0,1),
+(18,239,0,1),
+(18,240,0,1),
+(18,241,0,1),
+(18,242,0,1);
+
+CREATE TABLE `${prefix}asset` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) DEFAULT NULL,
+  `idAssetType` int(12) unsigned DEFAULT NULL,
+  `idAffectable` int(12) unsigned DEFAULT NULL,
+  `idStatus` int(12) unsigned DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `installationDate` date DEFAULT NULL,
+  `decommissioningDate` date DEFAULT NULL,
+  `serialNumber` varchar(100) DEFAULT NULL,
+  `inventoryNumber` varchar(100) DEFAULT NULL,
+  `idProvider` int(12) unsigned DEFAULT NULL,
+  `idAsset` int(12) unsigned DEFAULT NULL,
+  `idLocation` int(12) unsigned DEFAULT NULL,
+  `complement` varchar(200) DEFAULT NULL,
+  `idBrand` int(12) unsigned DEFAULT NULL,
+  `idModel` int(12) unsigned DEFAULT NULL,
+  `idAssetCategory` int(12) unsigned DEFAULT NULL,
+  `done` int(1) unsigned DEFAULT '0',
+  `doneDate` date DEFAULT NULL,
+  `idle` int(1) unsigned DEFAULT '0',
+  `idleDate` date DEFAULT NULL,
+  `cancelled` INT(1) UNSIGNED DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+CREATE INDEX assetType ON `${prefix}asset` (idAssetType);
+
+CREATE TABLE `${prefix}assettype` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) DEFAULT NULL,
+  `idStatus` int(12) unsigned DEFAULT NULL,
+  `sortOrder` int(3) unsigned DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+  `idle` int(1) unsigned DEFAULT '0',
+PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+CREATE TABLE `${prefix}location` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) DEFAULT NULL,
+  `idle` int(1) unsigned DEFAULT '0',
+  `sortOrder` int(3) unsigned DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+CREATE TABLE `${prefix}brand` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) DEFAULT NULL,
+  `idle` int(1) unsigned DEFAULT '0',
+PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+CREATE TABLE `${prefix}assetCategory` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) DEFAULT NULL,
+  `sortOrder` int(3) unsigned DEFAULT NULL,
+  `idle` int(1) unsigned DEFAULT '0',
+PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+INSERT INTO `${prefix}assetCategory` (`id`,`name`,`sortOrder`,`idle`) VALUES
+(null,'Individual',10,0),
+(null,'Collective',20,0);
+
+CREATE TABLE `${prefix}model` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) DEFAULT NULL,
+  `idAssetType` int(12) unsigned DEFAULT NULL,
+  `idBrand` int(12) unsigned DEFAULT NULL,
+  `idle` int(1) unsigned DEFAULT '0',
+PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+CREATE TABLE `${prefix}productasset` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `idAsset` int(12) unsigned DEFAULT NULL,
+  `idProductVersion` int(12) unsigned DEFAULT NULL,
+  `idUser` int(12) unsigned DEFAULT NULL,
+  `comment` varchar(100) DEFAULT NULL,
+  `creationDate` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+CREATE INDEX productassetAsset ON `${prefix}productasset` (idAsset);
+CREATE INDEX productassetProduct ON `${prefix}productasset` (idProduct);
