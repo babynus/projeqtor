@@ -7676,7 +7676,7 @@ function movePlanningColumn(source, destination) {
     list+=itemSelected + "|";
     planningColumnOrder[i]=check + itemSelected;
   }
-  
+  list+="ObjectType|ExterRes";
   //alert(planningColumnOrder);
   
   var url='../tool/movePlanningColumn.php?orderedList=' + list;

@@ -919,9 +919,9 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatBlue .iconGlobalParameter22 { background-image: url(customIcons/blue/iconGlobalParameter.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .iconGlobalParameter16 { background-image: url(customIcons/blue/iconGlobalParameter.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
-.ProjeQtOrFlatBlue .iconGanttContract32 { background-image: url(customIcons/blue/iconGanttContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatBlue .iconGanttContract22 { background-image: url(customIcons/blue/iconGanttContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatBlue .iconGanttContract16 { background-image: url(customIcons/blue/iconGanttContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+.ProjeQtOrFlatBlue .iconGanttSupplierContract32 { background-image: url(customIcons/blue/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatBlue .iconGanttSupplierContract22 { background-image: url(customIcons/blue/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatBlue .iconGanttSupplierContract16 { background-image: url(customIcons/blue/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /* H */
 
@@ -2396,9 +2396,9 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatRed .iconGlobalParameter22 { background-image: url(customIcons/red/iconGlobalParameter.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatRed .iconGlobalParameter16 { background-image: url(customIcons/red/iconGlobalParameter.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
-.ProjeQtOrFlatRed .iconGanttContract32 { background-image: url(customIcons/red/iconGanttContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatRed .iconGanttContract22 { background-image: url(customIcons/red/iconGanttContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatRed .iconGanttContract16 { background-image: url(customIcons/red/iconGanttContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+.ProjeQtOrFlatRed .iconGanttSupplierContract32 { background-image: url(customIcons/red/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatRed .iconGanttSupplierContract22 { background-image: url(customIcons/red/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatRed .iconGanttSupplierContract16 { background-image: url(customIcons/red/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /* H */
 
@@ -3868,9 +3868,9 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconGlobalParameter22 { background-image: url(customIcons/green/iconGlobalParameter.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconGlobalParameter16 { background-image: url(customIcons/green/iconGlobalParameter.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
-.ProjeQtOrFlatGreen .iconGanttContract32 { background-image: url(customIcons/green/iconGanttContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatGreen .iconGanttContract22 { background-image: url(customIcons/green/iconGanttContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatGreen .iconGanttContract16 { background-image: url(customIcons/green/iconGanttContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+.ProjeQtOrFlatGreen .iconGanttSupplierContract32 { background-image: url(customIcons/green/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGreen .iconGanttSupplierContract22 { background-image: url(customIcons/green/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGreen .iconGanttSupplierContract16 { background-image: url(customIcons/green/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /* H */
 
@@ -5339,9 +5339,9 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconGlobalParameter22 { background-image: url(customIcons/grey/iconGlobalParameter.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGrey .iconGlobalParameter16 { background-image: url(customIcons/grey/iconGlobalParameter.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
-.ProjeQtOrFlatGrey .iconGanttContract32 { background-image: url(customIcons/grey/iconGanttContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.ProjeQtOrFlatGrey .iconGanttContract22 { background-image: url(customIcons/grey/iconGanttContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.ProjeQtOrFlatGrey .iconGanttContract16 { background-image: url(customIcons/grey/iconGanttContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+.ProjeQtOrFlatGrey .iconGanttSupplierContract32 { background-image: url(customIcons/grey/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGrey .iconGanttSupplierContract22 { background-image: url(customIcons/grey/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGrey .iconGanttSupplierContract16 { background-image: url(customIcons/grey/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /* H */
 
