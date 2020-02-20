@@ -6656,8 +6656,10 @@ function expandHierarchicalBudgetGroup(idBudget, subBudget, recSubBudget, visibl
 	var visibleRowList = visibleRow.split(',');
 	var subBudgetList = subBudget.split(',');
 	var budgetClass = dojo.attr('group_'+idBudget, 'class');
+	console.log(visibleRow);
 	if(visibleRowList == ''){
 		visibleRowList = subBudgetList;
+		console.log(visibleRow);
 	}
 	if(budgetClass == 'ganttExpandClosed'){
 		visibleRowList.forEach(function(item){
@@ -6665,7 +6667,7 @@ function expandHierarchicalBudgetGroup(idBudget, subBudget, recSubBudget, visibl
 			dojo.byId('hierarchicalBudgetRow_'+item).style.visibility = 'visible';
 			dojo.setAttr('group_'+idBudget, 'class', 'ganttExpandOpened');
 		});
-		refreshHierarchicalBudgetList();
+		//refreshHierarchicalBudgetList();
 	}else{
 		recSubBudgetList.forEach(function(item){
 			saveCollapsed('hierarchicalBudgetRow_'+idBudget);
@@ -6673,5 +6675,4 @@ function expandHierarchicalBudgetGroup(idBudget, subBudget, recSubBudget, visibl
 			dojo.setAttr('group_'+idBudget, 'class', 'ganttExpandClosed');
 		});
 	}
-	visibleRowList = '';
 }
