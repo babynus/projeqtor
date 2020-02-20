@@ -3143,8 +3143,10 @@ function drawGantt() {
      //END MODIF qCazelles - GANTT
       var pobjecttype='';
       var pExtRessource='';
+      var pDurationContract='';
       if(dojo.byId('contractGantt') &&  item.reftype!='Milestone'){
         pExtRessource=item.externalressource;
+        pDurationContract=item.duration;
         pobjecttype=item.objecttype;
       }
       // runScript : JavaScript to run when click on task (to display the
@@ -3230,7 +3232,7 @@ function drawGantt() {
           item.priority, item.planningmode, 
           item.status, item.type, 
           item.validatedcostdisplay, item.assignedcostdisplay, item.realcostdisplay, item.leftcostdisplay, item.plannedcostdisplay,
-          item.baseTopStart, item.baseTopEnd, item.baseBottomStart, item.baseBottomEnd, item.isoncriticalpath,pobjecttype,pExtRessource));
+          item.baseTopStart, item.baseTopEnd, item.baseBottomStart, item.baseBottomEnd, item.isoncriticalpath,pobjecttype,pExtRessource,pDurationContract));
     }
     g.Draw();
     g.DrawDependencies();
@@ -3396,6 +3398,8 @@ function dayDiffDates(paramStartDate, paramEndDate) {
  */
 function monthDiff(paramStartDate, paramEndDate) {
   var months;
+  paramStartDate=new Date(paramStartDate);
+  paramEndDate=new Date(paramEndDate);
   months = (paramEndDate.getFullYear() - paramStartDate.getFullYear()) * 12;
   months -= paramStartDate.getMonth() + 1;
   months += paramEndDate.getMonth();
@@ -6656,10 +6660,8 @@ function expandHierarchicalBudgetGroup(idBudget, subBudget, recSubBudget, visibl
 	var visibleRowList = visibleRow.split(',');
 	var subBudgetList = subBudget.split(',');
 	var budgetClass = dojo.attr('group_'+idBudget, 'class');
-	console.log(visibleRow);
 	if(visibleRowList == ''){
 		visibleRowList = subBudgetList;
-		console.log(visibleRow);
 	}
 	if(budgetClass == 'ganttExpandClosed'){
 		visibleRowList.forEach(function(item){

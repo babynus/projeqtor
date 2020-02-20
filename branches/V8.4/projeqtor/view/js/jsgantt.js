@@ -145,7 +145,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor,
                             pPriority, pPlanningMode,
                             pStatus, pType, 
                             pValidatedCost, pAssignedCost, pRealCost, pLeftCost, pPlannedCost,
-                            pBaseTopStart, pBaseTopEnd, pBaseBottomStart, pBaseBottomEnd, pIsOnCriticalPath,pObjectType,pExtRes) {
+                            pBaseTopStart, pBaseTopEnd, pBaseBottomStart, pBaseBottomEnd, pIsOnCriticalPath,pObjectType,pExtRes,pDurationContract) {
   var vID    = pID;
   var vName  = pName;
   var vId	 = pId;
@@ -196,6 +196,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor,
   var vBaseBottomEnd=new Date(); ;
   var vIsOnCriticalPath=pIsOnCriticalPath;
   var vGlobal='notSet';
+  var vDurationContract=pDurationContract;
   
   
   vStart = JSGantt.parseDateStr(pStart,g.getDateInputFormat());
@@ -273,16 +274,19 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor,
   this.getResource = function(){ if(vRes) return vRes; else return '&nbsp';  };
   this.getCompVal  = function(){ if(vComp) return vComp; else return 0; };
   this.getCompStr  = function(){ if(vComp) return vComp+'%'; else return '0%'; };
+  this.getDurationContract =function(){ return vDurationContract; };
   this.getDuration = function(vFormat){ 
     if (vMile) { 
       vDuration = '-';
+    }else if(dojo.byId('contractGantt') && !vMile){
+      vDuration=this.getDurationContract();
     } else if (vFormat=='hour') {
       tmpPer =  Math.ceil((this.getEnd() - this.getStart()) /  ( 60 * 60 * 1000) );
       vDuration = tmpPer + ' ' + i18n('shortHour');
     } else if (vFormat=='minute') {
       tmpPer =  Math.ceil((this.getEnd() - this.getStart()) /  ( 60 * 1000) );
       vDuration = tmpPer + ' ' + i18n('shortMinute');
-    } else {
+    }else {
       if (this.getStart()==null || this.getEnd()==null) {
       	if (this.getStart()==null && this.getRealEnd()==null) {
       	  vDuration = '-';

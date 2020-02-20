@@ -34,6 +34,7 @@ function drawElementContractGantt($objectClass,$lstContract,$nbRows){
       $mile= array();
       $redLine=false;
       $display='';
+      $unity='';
       echo (++$nbRows>1)?',':'';
       $idContract=$contract->id.'.'.$nbRows;
       $class=get_class($contract);
@@ -60,7 +61,15 @@ function drawElementContractGantt($objectClass,$lstContract,$nbRows){
           $display.=(mb_substr($word,0,1,'UTF-8'));
         }
       }
+      if(isset($contract->initialContractTerm) and isset($contract->idUnitContract)){
+        $unit= new UnitContract($contract->idUnitContract);
+        $w=mb_split(' ',str_replace(array('"',"'"), ' ',$unit->name));
+        foreach ($w as $letter) {
+          $unity.=(mb_substr($letter,0,1,'UTF-8'));
+        }
+      }
       if($contract->deadlineDate or $contract->noticeDate)$class=$class.'hasChild';
+      
       
       echo  '{';
         echo '"id":"'.$contract->id.'"';
@@ -72,7 +81,7 @@ function drawElementContractGantt($objectClass,$lstContract,$nbRows){
         echo ',"externalressource":"'.htmlEncode(htmlEncodeJson($namePC)).'"';
         echo ',"realstartdate":"'.($contract->startDate).'"';
         echo ',"realenddate":"'.($contract->endDate).'"';
-        echo ',"duration":"'.($contract->initialContractTerm).'"';
+        echo ',"duration":"'.($contract->initialContractTerm).' '.($unity).'"';
         echo ',"status":"'.htmlEncodeJson(SqlList::getNameFromId('Status', $contract->idStatus)).'"';
         echo ',"collapsed":"0"';
         if ($contract->handled and $redLine == false ) {
