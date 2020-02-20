@@ -10,6 +10,7 @@ $startDate=date('Y-m-d');
 $endDate=null;
 $user=getSessionUser();
 $saveDates=false;
+$typeGanttContract='GanttSupplierContract';
 $paramStart=SqlElement::getSingleSqlElementFromCriteria('Parameter',array('idUser'=>$user->id,'idProject'=>null,'parameterCode'=>'planningStartDate'));
 if ($paramStart->id) {
 	$startDate=$paramStart->parameterValue;
@@ -38,6 +39,9 @@ if ($proj=='*' or !$proj) {
 	$proj=null;
 }
 $objectClass=(RequestHandler::isCodeSet('objectClass'))?RequestHandler::getClass('objectClass'):'';
+if($objectClass ==='ClientContract'){
+  $typeGanttContract='GanttClientContract';
+}
 ?>
 <input type="hidden" name="objectGantt" id="objectGantt" value="<?php echo $objectClass;?>" />
 <div id="mainPlanningDivContainer" dojoType="dijit.layout.BorderContainer">
@@ -55,9 +59,9 @@ $objectClass=(RequestHandler::isCodeSet('objectClass'))?RequestHandler::getClass
 		      <table >
     		    <tr height="32px">
         		  <td width="50px"  style="min-width:50px"  align="center">
-                    <?php echo formatIcon('GanttContract', 32, null, true);?>
+                    <?php echo formatIcon($typeGanttContract, 32, null, true);?>
                   </td>
-                  <td width="200px" ><span class="title" style="max-width:200px;white-space:normal"><?php echo i18n('menuGanttContract');?></span></td>
+                  <td width="200px" ><span class="title" style="max-width:200px;white-space:normal"><?php echo i18n('menu'.$typeGanttContract);?></span></td>
     		    </tr>
                 <tr height="32px">
         	       <td width="50px"  style="min-width:50px"  align="center">

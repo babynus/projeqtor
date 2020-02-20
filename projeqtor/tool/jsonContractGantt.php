@@ -7,7 +7,7 @@ require_once "../tool/jsonFunctions.php";
 scriptLog('   ->/tool/jsonContractGantt.php');
 SqlElement::$_cachedQuery['SupllierContract']=array();
 
-$objectClass='SupplierContract';
+$objectClass=(RequestHandler::isCodeSet('objectClass'))?RequestHandler::getValue('objectClass'):'';
 $lstContract= array();
 $nbRows=0;
 $obj=new $objectClass();

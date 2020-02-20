@@ -3153,7 +3153,10 @@ function drawGantt() {
       if(!(dojo.byId('contractGantt') && item.reftype=='Milestone')){
          runScript = "runScript('" + item.reftype + "','" + item.refid + "','"+ item.id + "');";
       }
-      var contextMenu = "runScriptContextMenu('" + item.reftype + "','" + item.refid + "','"+ item.id + "');";
+      if(!(dojo.byId('contractGantt'))){
+        var contextMenu = "runScriptContextMenu('" + item.reftype + "','" + item.refid + "','"+ item.id + "');";
+      }
+      
       // display Name of the task
       var pName = ((showWBS) ? item.wbs : '') + " " + item.refname; // for
                                                                     // testeing
@@ -3272,9 +3275,6 @@ var ongoingRunScriptContextMenu=false;
 function runScriptContextMenu(refType, refId, id) {
   if (ongoingRunScriptContextMenu) return;
   ongoingRunScriptContextMenu=true;
-  if(refType=='SupplierContracthasChild'){
-    refType='SupplierContract';
-  }
   var objectClassManual = dojo.byId('objectClassManual').value;
   showWait();
   setTimeout("document.body.style.cursor='default';",100);
