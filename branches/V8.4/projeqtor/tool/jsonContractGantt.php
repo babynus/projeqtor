@@ -18,8 +18,6 @@ if($showClosedContract=='1'){
   $where="id=id";
 }
 $lstContract=$obj->getSqlElementsFromCriteria(null,null,$where);
-
-
 echo '{"identifier":"id",' ;
 echo ' "items":[';
     drawElementContractGantt($objectClass,$lstContract,$nbRows);
@@ -35,6 +33,7 @@ function drawElementContractGantt($objectClass,$lstContract,$nbRows){
     foreach ($lstContract as $contract) {
       $mile= array();
       $redLine=false;
+      $display='';
       echo (++$nbRows>1)?',':'';
       $idContract=$contract->id.'.'.$nbRows;
       $class=get_class($contract);
@@ -57,7 +56,6 @@ function drawElementContractGantt($objectClass,$lstContract,$nbRows){
       if($contract->idResource){
         $resource=new Resource($contract->idResource);
         $words=mb_split(' ',str_replace(array('"',"'"), ' ',$resource->name));
-        $display='';
         foreach ($words as $word) {
           $display.=(mb_substr($word,0,1,'UTF-8'));
         }
