@@ -41,13 +41,14 @@ foreach ($columnsAll as $order=>$col) {
 	  // nothing	
 	} else if ( ! SqlElement::isVisibleField($col) ) {
 		// nothing 
-	} else if (!isset($contractGantt) and ($col=='ExterRes' or $col=='ObjectType')){
-	  // nothing
 	}else {
 	  if ($col=='Name') {
 		  echo '<div style="padding: 2px;" id="columnSelector'.$col.'" >';		
 		  echo '<span style="display:inline-block;width:15px;"><img style="width:6px" src="css/images/iconNoDrag.gif" />&nbsp;&nbsp;</span>'; 
-		} else {
+		}elseif (!isset($contractGantt) and ($col=='ExterRes' or $col=='ObjectType')){
+		  echo '<div class="dojoDndItem" id="columnSelector'.$col.'" dndType="planningColumn" style="display:none;">';
+		  echo '<span class="dojoDndHandle handleCursor"><img style="width:6px" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
+		}else {
 		  echo '<div class="dojoDndItem" id="columnSelector'.$col.'" dndType="planningColumn">';
 		  echo '<span class="dojoDndHandle handleCursor"><img style="width:6px" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
 		}
