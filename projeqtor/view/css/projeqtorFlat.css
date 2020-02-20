@@ -784,6 +784,15 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatBlue .iconChangeRequestType32 { background-image: url(customIcons/blue/iconChangeRequestType.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatBlue .iconChangeRequestType22 { background-image: url(customIcons/blue/iconChangeRequestType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .iconChangeRequestType16 { background-image: url(customIcons/blue/iconChangeRequestType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatBlue .iconClientContract32 { background-image: url(customIcons/blue/iconClientContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatBlue .iconClientContract22  { background-image: url(customIcons/blue/iconClientContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatBlue .iconClientContract16  { background-image: url(customIcons/blue/iconClientContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatBlue .iconClientContractType32 { background-image: url(customIcons/blue/iconClientContractType.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatBlue .iconClientContractType22  { background-image: url(customIcons/blue/iconClientContractType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatBlue .iconClientContractType16  { background-image: url(customIcons/blue/iconClientContractType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
 /* D */
 
 /* BEGIN - ADD qCazelles - Requirement dashboard - Ticket 90 */
@@ -922,6 +931,10 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatBlue .iconGanttSupplierContract32 { background-image: url(customIcons/blue/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatBlue .iconGanttSupplierContract22 { background-image: url(customIcons/blue/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .iconGanttSupplierContract16 { background-image: url(customIcons/blue/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatBlue .iconGanttClientContract32 { background-image: url(customIcons/blue/iconGanttClientContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatBlue .iconGanttClientContract22 { background-image: url(customIcons/blue/iconGanttClientContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatBlue .iconGanttClientContract16 { background-image: url(customIcons/blue/iconGanttClientContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /* H */
 
@@ -1298,6 +1311,11 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatBlue .iconProviderOrderType22 { background-image: url(customIcons/blue/iconProviderCommandType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .iconProviderOrderType16 { background-image: url(customIcons/blue/iconProviderCommandType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatBlue .iconPeriod32 { background-image: url(customIcons/blue/iconPeriod.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatBlue .iconPeriod22 { background-image: url(customIcons/blue/iconPeriod.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatBlue .iconPeriod16 { background-image: url(customIcons/blue/iconPeriod.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+/* Q */
 .ProjeQtOrFlatBlue .iconQuality32 { background-image: url(customIcons/blue/iconQuality.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatBlue .iconQuality22 { background-image: url(customIcons/blue/iconQuality.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .iconQuality16 { background-image: url(customIcons/blue/iconQuality.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
@@ -1392,6 +1410,10 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatBlue .iconRole22 { background-image: url(customIcons/blue/iconRole.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .iconRole16 { background-image: url(customIcons/blue/iconRole.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatBlue .iconRenewal32 { background-image: url(customIcons/blue/iconRenewal.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatBlue .iconRenewal22 { background-image: url(customIcons/blue/iconRenewal.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatBlue .iconRenewal16 { background-image: url(customIcons/blue/iconRenewal.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
 /* S */
 
 .ProjeQtOrFlatBlue .iconSearch { background-image: url(images/iconSearch.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
@@ -1416,6 +1438,10 @@ body .ProjeQtOrFlatBlue {
 .ProjeQtOrFlatBlue .iconSupplierContract32 { background-image: url(customIcons/blue/iconSupplierContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatBlue .iconSupplierContract22  { background-image: url(customIcons/blue/iconSupplierContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatBlue .iconSupplierContract16  { background-image: url(customIcons/blue/iconSupplierContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatBlue .iconSupplierContractType32 { background-image: url(customIcons/blue/iconSupplierContractType.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatBlue .iconSupplierContractType22  { background-image: url(customIcons/blue/iconSupplierContractType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatBlue .iconSupplierContractType16  { background-image: url(customIcons/blue/iconSupplierContractType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /* T */
 
@@ -2261,6 +2287,15 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatRed .iconChangeRequestType32 { background-image: url(customIcons/red/iconChangeRequestType.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatRed .iconChangeRequestType22 { background-image: url(customIcons/red/iconChangeRequestType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatRed .iconChangeRequestType16 { background-image: url(customIcons/red/iconChangeRequestType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatRed .iconClientContract32 { background-image: url(customIcons/red/iconClientContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatRed .iconClientContract22  { background-image: url(customIcons/red/iconClientContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatRed .iconClientContract16  { background-image: url(customIcons/red/iconClientContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatRed .iconClientContractType32 { background-image: url(customIcons/red/iconClientContractType.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatRed .iconClientContractType22  { background-image: url(customIcons/red/iconClientContractType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatRed .iconClientContractType16  { background-image: url(customIcons/red/iconClientContractType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
 /* D */
 
 /* BEGIN - ADD qCazelles - Requirement dashboard - Ticket 90 */
@@ -2399,6 +2434,10 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatRed .iconGanttSupplierContract32 { background-image: url(customIcons/red/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatRed .iconGanttSupplierContract22 { background-image: url(customIcons/red/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatRed .iconGanttSupplierContract16 { background-image: url(customIcons/red/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatRed .iconGanttClientContract32 { background-image: url(customIcons/red/iconGanttClientContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatRed .iconGanttClientContract22 { background-image: url(customIcons/red/iconGanttClientContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatRed .iconGanttClientContract16 { background-image: url(customIcons/red/iconGanttClientContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /* H */
 
@@ -2775,6 +2814,11 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatRed .iconProviderOrderType22 { background-image: url(customIcons/red/iconProviderCommandType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatRed .iconProviderOrderType16 { background-image: url(customIcons/red/iconProviderCommandType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatRed .iconPeriod32 { background-image: url(customIcons/red/iconPeriod.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatRed .iconPeriod22 { background-image: url(customIcons/red/iconPeriod.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatRed .iconPeriod16 { background-image: url(customIcons/red/iconPeriod.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+/* Q */
 .ProjeQtOrFlatRed .iconQuality32 { background-image: url(customIcons/red/iconQuality.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatRed .iconQuality22 { background-image: url(customIcons/red/iconQuality.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatRed .iconQuality16 { background-image: url(customIcons/red/iconQuality.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
@@ -2869,6 +2913,11 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatRed .iconRole22 { background-image: url(customIcons/red/iconRole.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatRed .iconRole16 { background-image: url(customIcons/red/iconRole.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatRed .iconRenewal32 { background-image: url(customIcons/red/iconRenewal.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatRed .iconRenewal22 { background-image: url(customIcons/red/iconRenewal.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatRed .iconRenewal16 { background-image: url(customIcons/red/iconRenewal.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+/* S */
 .ProjeQtOrFlatRed .iconSearch { background-image: url(images/iconSearch.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOrFlatRed .iconSelect { background-image: url(images/iconSelect.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
@@ -2891,6 +2940,10 @@ body .ProjeQtOrFlatRed {
 .ProjeQtOrFlatRed .iconSupplierContract32 { background-image: url(customIcons/red/iconSupplierContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatRed .iconSupplierContract22 { background-image: url(customIcons/red/iconSupplierContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatRed .iconSupplierContract16 { background-image: url(customIcons/red/iconSupplierContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatRed .iconSupplierContractType32 { background-image: url(customIcons/red/iconSupplierContractType.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatRed .iconSupplierContractType22  { background-image: url(customIcons/red/iconSupplierContractType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatRed .iconSupplierContractType16  { background-image: url(customIcons/red/iconSupplierContractType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /* T */
 
@@ -3733,6 +3786,15 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconChangeRequestType32 { background-image: url(customIcons/green/iconChangeRequestType.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGreen .iconChangeRequestType22 { background-image: url(customIcons/green/iconChangeRequestType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconChangeRequestType16 { background-image: url(customIcons/green/iconChangeRequestType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatGreen .iconClientContract32 { background-image: url(customIcons/green/iconClientContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGreen .iconClientContract22  { background-image: url(customIcons/green/iconClientContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGreen .iconClientContract16  { background-image: url(customIcons/green/iconClientContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatGreen .iconClientContractType32 { background-image: url(customIcons/green/iconClientContractType.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGreen .iconClientContractType22  { background-image: url(customIcons/green/iconClientContractType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGreen .iconClientContractType16  { background-image: url(customIcons/green/iconClientContractType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
 /* D */
 
 /* BEGIN - ADD qCazelles - Requirement dashboard - Ticket 90 */
@@ -3871,6 +3933,10 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconGanttSupplierContract32 { background-image: url(customIcons/green/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGreen .iconGanttSupplierContract22 { background-image: url(customIcons/green/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconGanttSupplierContract16 { background-image: url(customIcons/green/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatGreen .iconGanttClientContract32 { background-image: url(customIcons/green/iconGanttClientContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGreen .iconGanttClientContract22 { background-image: url(customIcons/green/iconGanttClientContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGreen .iconGanttClientContract16 { background-image: url(customIcons/green/iconGanttClientContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /* H */
 
@@ -4247,6 +4313,11 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconProviderOrderType22 { background-image: url(customIcons/green/iconProviderCommandType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconProviderOrderType16 { background-image: url(customIcons/green/iconProviderCommandType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatGreen .iconPeriod32 { background-image: url(customIcons/green/iconPeriod.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGreen .iconPeriod22 { background-image: url(customIcons/green/iconPeriod.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGreen .iconPeriod16 { background-image: url(customIcons/green/iconPeriod.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+/* Q */
 .ProjeQtOrFlatGreen .iconQuality32 { background-image: url(customIcons/green/iconQuality.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGreen .iconQuality22 { background-image: url(customIcons/green/iconQuality.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconQuality16 { background-image: url(customIcons/green/iconQuality.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
@@ -4341,6 +4412,11 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconRole22 { background-image: url(customIcons/green/iconRole.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconRole16 { background-image: url(customIcons/green/iconRole.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatGreen .iconRenewal32 { background-image: url(customIcons/green/iconRenewal.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGreen .iconRenewal22 { background-image: url(customIcons/green/iconRenewal.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGreen .iconRenewal16 { background-image: url(customIcons/green/iconRenewal.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+/* S */
 .ProjeQtOrFlatGreen .iconSearch { background-image: url(images/iconSearch.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOrFlatGreen .iconSelect { background-image: url(images/iconSelect.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
@@ -4363,6 +4439,10 @@ body .ProjeQtOrFlatGreen {
 .ProjeQtOrFlatGreen .iconSupplierContract32 { background-image: url(customIcons/green/iconSupplierContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGreen .iconSupplierContract22 { background-image: url(customIcons/green/iconSupplierContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGreen .iconSupplierContract16 { background-image: url(customIcons/green/iconSupplierContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatGreen .iconSupplierContractType32 { background-image: url(customIcons/green/iconSupplierContractType.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGreen .iconSupplierContractType22  { background-image: url(customIcons/green/iconSupplierContractType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGreen .iconSupplierContractType16  { background-image: url(customIcons/green/iconSupplierContractType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /* T */
 
@@ -5204,6 +5284,15 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconChangeRequestType32 { background-image: url(customIcons/grey/iconChangeRequestType.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGrey .iconChangeRequestType22 { background-image: url(customIcons/grey/iconChangeRequestType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGrey .iconChangeRequestType16 { background-image: url(customIcons/grey/iconChangeRequestType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatGrey .iconClientContract32 { background-image: url(customIcons/grey/iconClientContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGrey .iconClientContract22  { background-image: url(customIcons/grey/iconClientContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGrey .iconClientContract16  { background-image: url(customIcons/grey/iconClientContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatGrey .iconClientContractType32 { background-image: url(customIcons/grey/iconClientContractType.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGrey .iconClientContractType22  { background-image: url(customIcons/grey/iconClientContractType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGrey .iconClientContractType16  { background-image: url(customIcons/grey/iconClientContractType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
 /* D */
 
 /* BEGIN - ADD qCazelles - Requirement dashboard - Ticket 90 */
@@ -5342,6 +5431,10 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconGanttSupplierContract32 { background-image: url(customIcons/grey/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGrey .iconGanttSupplierContract22 { background-image: url(customIcons/grey/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGrey .iconGanttSupplierContract16 { background-image: url(customIcons/grey/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatGrey .iconGanttClientContract32 { background-image: url(customIcons/grey/iconGanttClientContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGrey .iconGanttClientContract22 { background-image: url(customIcons/grey/iconGanttClientContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGrey .iconGanttClientContract16 { background-image: url(customIcons/grey/iconGanttClientContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /* H */
 
@@ -5718,6 +5811,11 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconProviderOrderType22 { background-image: url(customIcons/grey/iconProviderCommandType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGrey .iconProviderOrderType16 { background-image: url(customIcons/grey/iconProviderCommandType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatGrey .iconPeriod32 { background-image: url(customIcons/grey/iconPeriod.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGrey .iconPeriod22 { background-image: url(customIcons/grey/iconPeriod.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGrey .iconPeriod16 { background-image: url(customIcons/grey/iconPeriod.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+/* Q */
 .ProjeQtOrFlatGrey .iconQuality32 { background-image: url(customIcons/grey/iconQuality.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGrey .iconQuality22 { background-image: url(customIcons/grey/iconQuality.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGrey .iconQuality16 { background-image: url(customIcons/grey/iconQuality.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
@@ -5812,6 +5910,11 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconRole22 { background-image: url(customIcons/grey/iconRole.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGrey .iconRole16 { background-image: url(customIcons/grey/iconRole.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.ProjeQtOrFlatGrey .iconRenewal32 { background-image: url(customIcons/grey/iconRenewal.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGrey .iconRenewal22 { background-image: url(customIcons/grey/iconRenewal.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGrey .iconRenewal16 { background-image: url(customIcons/grey/iconRenewal.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+/* S */
 .ProjeQtOrFlatGrey .iconSearch { background-image: url(images/iconSearch.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOrFlatGrey .iconSelect { background-image: url(images/iconSelect.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
 
@@ -5834,6 +5937,10 @@ body .ProjeQtOrFlatGrey {
 .ProjeQtOrFlatGrey .iconSupplierContract32 { background-image: url(customIcons/grey/iconSupplierContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
 .ProjeQtOrFlatGrey .iconSupplierContract22 { background-image: url(customIcons/grey/iconSupplierContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .ProjeQtOrFlatGrey .iconSupplierContract16 { background-image: url(customIcons/grey/iconSupplierContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
+.ProjeQtOrFlatGrey .iconSupplierContractType32 { background-image: url(customIcons/grey/iconSupplierContractType.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.ProjeQtOrFlatGrey .iconSupplierContractType22  { background-image: url(customIcons/grey/iconSupplierContractType.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.ProjeQtOrFlatGrey .iconSupplierContractType16  { background-image: url(customIcons/grey/iconSupplierContractType.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 /* T */
 

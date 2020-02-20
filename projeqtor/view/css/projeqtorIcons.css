@@ -495,6 +495,10 @@
 .iconGanttSupplierContract22 { background-image: url(images/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
 .iconGanttSupplierContract16 { background-image: url(images/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
+.iconGanttClientContract32 { background-image: url(images/iconGanttClientContract .png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconGanttClientContract22 { background-image: url(images/iconGanttClientContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconGanttClientContract16 { background-image: url(images/iconGanttClientContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+
 
 .iconHabilitation32 { background-image: url(images/iconHabilitation32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconHabilitation22 { background-image: url(images/iconHabilitation22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
@@ -1109,6 +1113,18 @@
 .ProjeQtOrFlatRed .iconChangeRequestType { background-image: url(customIcons/red/iconChangeRequestType.png); }
 .ProjeQtOrFlatGreen .iconChangeRequestType { background-image: url(customIcons/green/iconChangeRequestType.png); }
 .ProjeQtOrFlatGrey .iconChangeRequestType { background-image: url(customIcons/grey/iconChangeRequestType.png); }
+
+.iconClientContract { background-image: url(images/iconClientContract.png); }
+.ProjeQtOrFlatBlue .iconClientContract { background-image: url(customIcons/blue/iconClientContract.png); }
+.ProjeQtOrFlatRed .iconClientContract { background-image: url(customIcons/red/iconClientContract.png); }
+.ProjeQtOrFlatGreen .iconClientContract { background-image: url(customIcons/green/iconClientContract.png); }
+.ProjeQtOrFlatGrey .iconClientContract { background-image: url(customIcons/grey/iconClientContract.png); }
+
+.iconClientContractType { background-image: url(images/iconClientContractType.png); }
+.ProjeQtOrFlatBlue .iconClientContractType { background-image: url(customIcons/blue/iconClientContractType.png); }
+.ProjeQtOrFlatRed .iconClientContractType { background-image: url(customIcons/red/iconClientContractType.png); }
+.ProjeQtOrFlatGreen .iconClientContractType { background-image: url(customIcons/green/iconClientContractType.png); }
+.ProjeQtOrFlatGrey .iconClientContractType { background-image: url(customIcons/grey/iconClientContractType.png); }
 /* G */
 
 .iconGlobalPlanning { background-image: url(images/iconGlobalPlanning.png); }
@@ -1151,15 +1167,12 @@
 .ProjeQtOrFlatGreen .iconLocation { background-image: url(customIcons/green/iconLocation.png); }
 .ProjeQtOrFlatGrey .iconLocation { background-image: url(customIcons/grey/iconLocation.png); }
 
-
-/* S */
-.iconSupplierContract { background-image: url(images/iconSupplierContract.png); }
-.ProjeQtOrFlatBlue .iconSupplierContract { background-image: url(customIcons/blue/iconSupplierContract.png); }
-.ProjeQtOrFlatRed .iconSupplierContract { background-image: url(customIcons/red/iconSupplierContract.png); }
-.ProjeQtOrFlatGreen .iconSupplierContract { background-image: url(customIcons/green/iconSupplierContract.png); }
-.ProjeQtOrFlatGrey .iconSupplierContract { background-image: url(customIcons/grey/iconSupplierContract.png); }
-
 /* P */
+.iconPeriod { background-image: url(images/iconPeriod.png); }
+.ProjeQtOrFlatBlue .iconPeriod { background-image: url(customIcons/blue/iconPeriod.png); }
+.ProjeQtOrFlatRed .iconPeriod { background-image: url(customIcons/red/iconPeriod.png); }
+.ProjeQtOrFlatGreen .iconPeriod { background-image: url(customIcons/green/iconPeriod.png); }
+.ProjeQtOrFlatGrey .iconPeriod { background-image: url(customIcons/grey/iconPeriod.png); }
 
 .iconProviderBill { background-image: url(images/iconProviderBill.png); }
 .ProjeQtOrFlatBlue .iconProviderBill { background-image: url(customIcons/blue/iconProviderBill.png); }
@@ -1196,6 +1209,26 @@
 .ProjeQtOrFlatRed .iconProviderPaymentType { background-image: url(customIcons/red/iconProviderPaymentType.png); }
 .ProjeQtOrFlatGreen .iconProviderPaymentType { background-image: url(customIcons/green/iconProviderPaymentType.png); }
 .ProjeQtOrFlatGrey .iconProviderPaymentType { background-image: url(customIcons/grey/iconProviderPaymentType.png); }
+/* R */
+.iconRenewal { background-image: url(images/iconRenewal.png); }
+.ProjeQtOrFlatBlue .iconRenewal { background-image: url(customIcons/blue/iconRenewal.png); }
+.ProjeQtOrFlatRed .iconRenewal { background-image: url(customIcons/red/iconRenewal.png); }
+.ProjeQtOrFlatGreen .iconRenewal { background-image: url(customIcons/green/iconRenewal.png); }
+.ProjeQtOrFlatGrey .iconRenewal { background-image: url(customIcons/grey/iconRenewal.png); }
+
+/* S */
+.iconSupplierContract { background-image: url(images/iconSupplierContract.png); }
+.ProjeQtOrFlatBlue .iconSupplierContract { background-image: url(customIcons/blue/iconSupplierContract.png); }
+.ProjeQtOrFlatRed .iconSupplierContract { background-image: url(customIcons/red/iconSupplierContract.png); }
+.ProjeQtOrFlatGreen .iconSupplierContract { background-image: url(customIcons/green/iconSupplierContract.png); }
+.ProjeQtOrFlatGrey .iconSupplierContract { background-image: url(customIcons/grey/iconSupplierContract.png); }
+
+.iconSupplierContractType { background-image: url(images/iconSupplierContractType.png); }
+.ProjeQtOrFlatBlue .iconSupplierContractType { background-image: url(customIcons/blue/iconSupplierContractType.png); }
+.ProjeQtOrFlatRed .iconSupplierContractType { background-image: url(customIcons/red/iconSupplierContractType.png); }
+.ProjeQtOrFlatGreen .iconSupplierContractType { background-image: url(customIcons/green/iconSupplierContractType.png); }
+.ProjeQtOrFlatGrey .iconSupplierContractType { background-image: url(customIcons/grey/iconSupplierContractType.png); }
+
 /*U*/
 .iconContractUnit { background-image: url(images/iconUnity.png); }
 .ProjeQtOrFlatBlue .iconContractUnit { background-image: url(customIcons/blue/iconUnity.png); }
