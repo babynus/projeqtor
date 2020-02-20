@@ -1306,9 +1306,11 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             + ' onmousedown=JSGantt.startLink('+i+'); '
             + ' onmouseup=JSGantt.endLink('+i+'); '
             + ' onMouseover=JSGantt.enterBarLink('+i+'); '
-            + ' onMouseout=JSGantt.exitBarLink('+i+'); '
-            + ' onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '"); '
-            + ' >';
+            + ' onMouseout=JSGantt.exitBarLink('+i+'); ';
+          if(!dojo.byId('contractGantt')){
+            vRightTable += ' onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '"); ';
+          }
+          vRightTable += ' >';
           if (vTaskStart && vTaskEnd && Date.parse(vMaxDate)>=Date.parse(vTaskList[i].getEnd())) {
             if(vTaskList[i].getCompVal() < 100) {
               vRightTable += '&loz;</div>' ;
@@ -2238,9 +2240,6 @@ function setGanttVisibility(g) {
 	if(!dojo.byId('contractGantt')){
 	  setPlanningFieldShowSpecif('ObjectType',0); 
 	  setPlanningFieldShowSpecif('ExterRes',0); 
-	}else{
-	  setPlanningFieldShowSpecif('ObjectType',1); 
-    setPlanningFieldShowSpecif('ExterRes',1); 
 	}
 	g.setSortArray(planningColumnOrder);
 }

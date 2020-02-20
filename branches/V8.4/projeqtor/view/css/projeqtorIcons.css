@@ -491,9 +491,9 @@
 .iconGlobalParameter22 { background-image: url(images/iconGlobalParameter22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconGlobalParameter16 { background-image: url(images/iconGlobalParameter16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
-.iconGanttContract32 { background-image: url(images/iconGanttContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
-.iconGanttContract22 { background-image: url(images/iconGanttContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
-.iconGanttContract16 { background-image: url(images/iconGanttContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
+.iconGanttSupplierContract32 { background-image: url(images/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconGanttSupplierContract22 { background-image: url(images/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconGanttSupplierContract16 { background-image: url(images/iconGanttSupplierContract.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px; }
 
 
 .iconHabilitation32 { background-image: url(images/iconHabilitation32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
