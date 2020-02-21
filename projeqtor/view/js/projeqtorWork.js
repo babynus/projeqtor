@@ -673,12 +673,9 @@ function dispatchWorkSave() {
 
 function finishDispatchWorkSave(){
   updateDispatchWorkTotal();
-  sum=dijit.byId('dispatchWorkTotal').get('value');
-  if (dijit.byId('WorkElement_realWork')) {
-    dijit.byId('WorkElement_realWork').set('value',sum);
-  }
-  loadContent("../tool/saveDispatchWork.php","resultDivMain", "dialogDispatchWorkForm", true, 'dispatchWork');
-  dijit.byId('dialogDispatchWork').hide();
+  var callBack=function() { dijit.byId('dialogDispatchWork').hide();};
+  loadContent("../tool/saveDispatchWork.php","resultDivMain", "dialogDispatchWorkForm", true, 'dispatchWork',false,false,callBack);
+  
 }
 
 function formatDisplayToDecimal(val) {

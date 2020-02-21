@@ -1607,6 +1607,13 @@ function finalizeMessageDisplay(destination, validationType) {
       } else if (validationType == 'checklist' || validationType == 'joblist') {
         hideWait();
       } else if (validationType == 'dispatchWork') {
+        if (lastOperationStatus.value == "OK") {
+          sum=dijit.byId('dispatchWorkTotal').get('value');
+          if (dijit.byId('WorkElement_realWork')) {
+            dijit.byId('WorkElement_realWork').set('value',sum);
+          }
+        }
+        dijit.byId('dialogDispatchWork').hide();
         hideWait();
       } else if (lastOperation != 'plan') {
         if (dijit.byId('detailFormDiv')) { // only refresh is detail is show
