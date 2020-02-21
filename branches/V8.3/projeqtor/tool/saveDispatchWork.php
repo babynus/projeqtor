@@ -115,13 +115,13 @@ foreach ($dateList as $idx=>$date) {
     $work->idWorkElement=$weId;
     $work->dailyCost=null; // set to null to force refresh 
     $work->cost=null;
-    $resWork=$work->save();
-    $status = getLastOperationStatus ( $resWork );
-    if ($status=='ERROR' or $status=='INVALID') {
-      $result=$resWork;
-      $error=true;
-      break;
-    }
+//     $resWork=$work->save();
+//     $status = getLastOperationStatus ( $resWork );
+//     if ($status=='ERROR' or $status=='INVALID') {
+//       $result=$resWork;
+//       $error=true;
+//       break;
+//     }
     if ($work->idResource != $oldWork->idResource) {
       $oldAss=WorkElement::updateAssignment($oldWork, $oldWork->work*(-1));
       $diff=$newWork;
@@ -129,14 +129,18 @@ foreach ($dateList as $idx=>$date) {
     $ass=WorkElement::updateAssignment($work, $diff);
     $work->idAssignment=($ass)?$ass->id:null;
     $resWork="";
-    if ($work->work==0) {
-      if ($work->id) {
-        $resWork=$work->delete();
+    if($oldWork->work!=$work->work or $work->idResource!=$oldWork->idResource or $oldWork->day!=$work->day 
+    or $oldWork->refType!=$work->refType or $oldWork->refId!=$work->refId) {
+      if ($work->work==0) {
+        if ($work->id) {
+          $resWork=$work->delete();
+        }
+      } else {
+        $resWork=$work->save();
+        $arrayResourceDate[$work->idResource.'#'.$work->workDate]=$work->id;
       }
-    } else {
-      $resWork=$work->save();
-      $arrayResourceDate[$work->idResource.'#'.$work->workDate]=$work->id;
     }
+    
     if ($resWork) {
       $status = getLastOperationStatus ( $resWork );
       if ($status=='OK') {
@@ -144,6 +148,7 @@ foreach ($dateList as $idx=>$date) {
       } else if ($status=='ERROR' or $status=='INVALID') {
         $result=$resWork;
         $error=true;
+        break;
       }
     }
   }
