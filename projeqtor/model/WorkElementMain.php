@@ -320,7 +320,8 @@ class WorkElementMain extends SqlElement {
 		  if ($this->realWork!=0) {
 		    $this->leftCost=round($this->leftWork*$this->realCost/$this->realWork,0);
 		  }
-		  $this->save(true);
+		  $resCost=$this->save(true);
+		  if (getLastOperationStatus($result)=='NO_CHANGE') $result=$resCost;
 		}
 		
 		// UPDATE PARENTS
@@ -344,11 +345,11 @@ class WorkElementMain extends SqlElement {
 		    $ape->updateWorkElementSummary ();
 		  }
 		}
-		if (!trim($this->idActivity)) { 
+		if (!trim($this->idActivity) and getLastOperationStatus($result)!='NO_CHANGE') { 
 		  // Work not counted on activity => update project
 		  ProjectPlanningElement::updateSynthesis('Project',$this->idProject);
 		}
-		if (!$old->idActivity and $old->id and $old->idProject!=$this->idProject) {
+		if (!$old->idActivity and $old->id and $old->idProject!=$this->idProject and getLastOperationStatus($result)!='NO_CHANGE') {
 		  // Take into acocunt project change
 		  ProjectPlanningElement::updateSynthesis('Project',$old->idProject);
 		}
