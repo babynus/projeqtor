@@ -266,7 +266,7 @@ class ClientContractMain extends SqlElement {
       $colScript .="                dijit.byId('idUnitContract').set('value',3);";
       $colScript .="                dijit.byId('initialContractTerm').set('value',Math.abs(nbY));";
       $colScript .="    }else if(dayStartDate == dayEndDate && MonthStart != MonthEnd){";
-      $colScript .="                var nbM=monthDiff(MonthStart,MonthEnd);";
+      $colScript .="                var nbM=MonthStart-MonthEnd;";
       $colScript .="                dijit.byId('idUnitContract').set('value',2);";
       $colScript .="                dijit.byId('initialContractTerm').set('value',Math.abs(nbM));";
       $colScript .="    }else { ";
@@ -307,7 +307,7 @@ class ClientContractMain extends SqlElement {
       $colScript .="      dijit.byId('idUnitNotice').set('value',3);";
       $colScript .="      dijit.byId('noticePeriod').set('value',Math.abs(nbY));";
       $colScript .="    }else if( dayNoticeDate == dayEndDate &&  MonthNotice!=MonthEnd ){ ";
-      $colScript .="      var nbM=monthDiff(MonthNotice,MonthEnd);";
+      $colScript .="      var nbM=MonthNotice-MonthEnd;";
       $colScript .="      dijit.byId('idUnitNotice').set('value',2);";
       $colScript .="      dijit.byId('noticePeriod').set('value',Math.abs(nbM));";
       $colScript .="    }else{ ";
