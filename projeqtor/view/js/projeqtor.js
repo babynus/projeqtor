@@ -3401,18 +3401,6 @@ function dayDiffDates(paramStartDate, paramEndDate) {
 }
 
 /**
- * calculate diffence (in month) between dates
- */
-function monthDiff(paramStartDate, paramEndDate) {
-  var months;
-  paramStartDate=new Date(paramStartDate);
-  paramEndDate=new Date(paramEndDate);
-  months = (paramEndDate.getFullYear() - paramStartDate.getFullYear()) * 12;
-  months -= paramStartDate.getMonth() + 1;
-  months += paramEndDate.getMonth();
-  return months ;
-}
-/**
  * Return the day of the week like php function : date("N",$valDate) Monday=1,
  * Tuesday=2, Wednesday=3, Thursday=4, Friday=5, Saturday=6, Sunday=7 (not 0 !)
  */
