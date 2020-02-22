@@ -393,8 +393,8 @@ class PlanningElement extends SqlElement {
     // search for dependant elements
     $crit=" topId=" . Sql::fmtId($this->id);
     $this->elementary=1;
-    $lstElt=$this->getSqlElementsFromCriteria(null, null, $crit ,'wbsSortable asc');
-    if ($lstElt and count($lstElt)>0) {
+    $cpt=$this->countSqlElementsFromCriteria(null, null, $crit);
+    if ($cpt>0) {
       $this->elementary=0;
       if($this->isManualProgress==1){
         $this->isManualProgress = 0;

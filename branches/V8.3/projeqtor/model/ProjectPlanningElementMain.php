@@ -266,7 +266,7 @@ class ProjectPlanningElementMain extends PlanningElement {
   	$realExpense=0;
   	$leftExpense=0;
   	if (! $this->elementary) {
-  		$critPla=array("topId"=>$this->id);
+  		$critPla=array("refType"=>'Project',"topId"=>$this->id);
   		$planningElement=new ProjectPlanningElement();
   		$plaList=$planningElement->getSqlElementsFromCriteria($critPla, false);
   		// Add data from other planningElements dependant from this one
