@@ -26,6 +26,7 @@
 
 scriptLog('dynamicDialogMail.php');
 $isIE=false;
+debugLog($_REQUEST);
 if (array_key_exists('isIE',$_REQUEST)) {
 	$isIE=$_REQUEST['isIE'];
 } 
@@ -34,8 +35,10 @@ if($objectClass == 'TicketSimple'){
     $objectClass = 'Ticket';
 }
 $objectId = RequestHandler::getId('objectId');
+$lstAttach= array();
 $obj=new $objectClass($objectId);
 $emTp = new EmailTemplate();
+$attach= new Attachment();
 $idObjectType = 'id'.$objectClass.'Type';
 $idMailable = SqlList::getIdFromTranslatableName('Mailable', $objectClass);
 $where = "(idMailable = ".$idMailable." or idMailable IS NULL) and (idType = '".$obj->$idObjectType."' or idType IS NULL)";
@@ -50,12 +53,20 @@ if ($habil) {
     $displayComboButton=true;
   }
 }
+$show=( (RequestHandler::isCodeSet('show')) and RequestHandler::getValue('show')=='1')?true:false;
+if($show==true){
+  $where="refType='".$objectClass."' and refId=".$obj->id;
+  $orderBy="creationDate ASC";
+  $lstAttach=$attach->getSqlElementsFromCriteria(null,null,$where,$orderBy);
+}
+
+
 ?>
+<form dojoType="dijit.form.Form" id='mailForm' name='mailForm' onSubmit="return false;">
 <input type="hidden" name="dialogMailObjectClass" id="dialogMailObjectClass" value="<?php echo htmlEncode($objectClass);?>" />
   <table>
     <tr>
       <td>
-        <form dojoType="dijit.form.Form" id='mailForm' name='mailForm' onSubmit="return false;">
           <input id="mailRefType" name="mailRefType" type="hidden" value="" />
           <input id="mailRefId" name="mailRefId" type="hidden" value="" />
           <input id="idEmailTemplate" name="idEmailTemplate" type="hidden" value="" />
@@ -260,11 +271,13 @@ if ($habil) {
               </td>
             </tr>
           </table>
-       </form>
      </td>
    </tr>
     <tr>
       <td align="center">
+        <button dojoType="dijit.form.Button" type="button" onclick="loadDialog('dialogMail',null,true,'&objectClass=<?php echo $objectClass;?>&objectId=<?php echo $objectId;?>&show=<?php echo ($show==true)?'0':'1'; ?>')">
+          <?php echo i18n("sendDetailElement");?>
+        </button>
         <button dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogMail').hide();">
           <?php echo i18n("buttonCancel");?>
         </button>
@@ -273,4 +286,30 @@ if ($habil) {
         </button>
       </td>
     </tr>
-  </table>    
+  </table> 
+  <?php if ($show==true){?>
+  <div  style="position:relative;top:10px;width:80%;left:10%;">
+    <table style='width:100%'>
+      <tr>
+        <td class='assignHeader' style='width:40%'><?php echo i18n('sectionAttachment');?></td>
+        <td class='assignHeader' style='width:20%'><?php echo i18n('attachedFileType');?></td>
+        <td class='assignHeader' style='width:20%'><?php echo i18n('FileSize');?></td>
+        <td class='assignHeader' style='width:20%'><?php echo i18n('DocumentVersion');?></td>
+      </tr>
+      <?php 
+      foreach($lstAttach as $attached){
+        echo "<tr>";
+        echo "<td class='assignData verticalCenterData'>".$attached->fileName."</td>";
+        echo " <td class='assignData verticalCenterData' style='text-align:center;'>$attached->type</td>";
+        echo " <td class='assignData verticalCenterData' style='text-align:center;'>".(($attached->fileSize !='')?$attached->fileSize:'-')."</td>";
+        if($attached->type=='Document' or $attached->type=='DocumentVersion'){
+        }
+        echo " <td class='assignData verticalCenterData'></td>";
+        echo " </tr>";
+      }
+      ?>
+    </table>
+  </div>
+  <br/>
+  <?php }?>
+</form>   
