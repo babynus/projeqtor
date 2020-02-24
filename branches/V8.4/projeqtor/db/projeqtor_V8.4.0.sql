@@ -358,3 +358,16 @@ CREATE TABLE `${prefix}productasset` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 CREATE INDEX productassetAsset ON `${prefix}productasset` (idAsset);
 CREATE INDEX productassetProduct ON `${prefix}productasset` (idProductVersion);
+
+-- IGE #88 - Report of Subscription
+
+INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `idle`, `orientation`, `hasCsv`, `hasView`, `hasPrint`, `hasPdf`, `hasToday`, `hasFavorite`, `hasWord`, `hasExcel`, `filterClass`) VALUES
+(107, 'reportSubscription', 9, 'reportSubscription.php', 930, 0, 'L', 0, 1, 1, 1, 1, 1, 0, 0, NULL);
+
+INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `idle`, `defaultValue`, `multiple`) VALUES
+(107, 'idUser', 'userList', 10, 0, NULL, 0),
+(107, 'refType', 'objectList', 20, 0, NULL, 0);
+
+INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES
+(1, 107, 1);
+CREATE INDEX productassetProduct ON `${prefix}productasset` (idProductVersion);
