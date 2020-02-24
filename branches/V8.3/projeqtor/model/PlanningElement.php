@@ -482,7 +482,9 @@ class PlanningElement extends SqlElement {
     }
     // Update dependant objects
     if ($dispatchNeeded) { // and ! self::$_noDispatch // Criteria removed : must dispatch for move task 
-    	projeqtor_set_time_limit(600);
+      $crit=" topId=" . Sql::fmtId($this->id);
+      $lstElt=$this->getSqlElementsFromCriteria(null, null, $crit ,'wbsSortable asc');
+      projeqtor_set_time_limit(600);
       $cpt=0;
       foreach ($lstElt as $elt) {
         $cpt++;
