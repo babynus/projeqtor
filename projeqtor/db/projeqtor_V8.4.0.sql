@@ -357,4 +357,4 @@ CREATE TABLE `${prefix}productasset` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 CREATE INDEX productassetAsset ON `${prefix}productasset` (idAsset);
-CREATE INDEX productassetProduct ON `${prefix}productasset` (idProduct);
+CREATE INDEX productassetProduct ON `${prefix}productasset` (idProductVersion);
