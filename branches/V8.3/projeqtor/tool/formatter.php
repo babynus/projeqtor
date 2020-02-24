@@ -40,6 +40,7 @@ function colorNameFormatter($value,$idTicket=-1) {
       } else { // should not be found
         return value;
       }
+      if (! trim($color)) $color='#FFFFFF';
       $foreColor=getForeColor($color);
       return '<div '.($idTicket!=-1 ? 'id="status'.$idTicket.'"' : '').' style="vertical-align:middle;padding: 5px;border:1px solid #CCC;border-radius:10px;text-align: center;'.(($print and $outMode=='pdf')?'width:95%;min-height:18px;':'') . 'background-color: ' . $color . '; color:' . $foreColor . ';">' 
           .$val.'</div>';
