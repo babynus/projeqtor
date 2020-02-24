@@ -362,7 +362,7 @@ CREATE INDEX productassetProduct ON `${prefix}productasset` (idProductVersion);
 -- IGE #88 - Report of Subscription
 
 INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `idle`, `orientation`, `hasCsv`, `hasView`, `hasPrint`, `hasPdf`, `hasToday`, `hasFavorite`, `hasWord`, `hasExcel`, `filterClass`) VALUES
-(107, 'reportSubscription', 9, 'reportSubscription.php', 930, 0, 'L', 0, 1, 1, 1, 1, 1, 0, 0, NULL);
+(107, 'reportSubscription', 9, 'reportSubscription.php', 940, 0, 'L', 0, 1, 1, 1, 1, 1, 0, 0, NULL);
 
 INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `idle`, `defaultValue`, `multiple`) VALUES
 (107, 'idUser', 'userList', 10, 0, NULL, 0),
@@ -371,3 +371,25 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES
 (1, 107, 1);
 CREATE INDEX productassetProduct ON `${prefix}productasset` (idProductVersion);
+
+-- IGE #407 ( 
+
+INSERT INTO `${prefix}report` (id, name, idReportCategory, file, sortOrder, idle, orientation, hasCsv, hasView, hasPrint, hasPdf, hasToday, hasFavorite, hasWord, hasExcel, filterClass) VALUES
+(105, "reportWorkForAResourceByActivityTypeMonthly", 1, "workPerTypeOfActivity.php", 195, 0, "L", 0, 1, 1, 1, 1, 1, 0, 0, NULL),
+(106, "reportWorkForAResourceByActivityTypeYearly", 1, "workPerTypeOfActivity.php", 197, 0, "L", 0, 1, 1, 1, 1, 1, 0, 0, NULL);
+
+INSERT INTO `${prefix}habilitationreport` (idProfile, idReport, allowAccess) VALUES
+(1, 105, 1);
+(1, 106, 1);
+
+INSERT INTO `${prefix}reportparameter` ( idReport, name, paramType, sortOrder, idle, defaultValue, multiple) VALUES
+(105, "idProject", "ProjectList", 10, 0, NULL, 0),
+(105, "idResource", "resourceList", 20, 0, NULL, 0),
+(105, "idActivityType", "activityTypeList", 30, 0 ,NULL, 0),
+(105, "showDetail", "boolean", 35, 0, NULL, 0),
+(105, "month", "month", 40, 0, "currentMonth", 0),
+(106, "idProject", "ProjectList", 10, 0, NULL, 0),
+(106, "idResource", "resourceList", 20, 0, NULL, 0),
+(106, "idActivityType", "activityTypeList", 30, 0 ,NULL, 0),
+(106, "showDetail", "boolean", 35, 0, NULL, 0),
+(106, "year", "year", 20, 0, "currentYear", 0);
