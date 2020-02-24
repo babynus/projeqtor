@@ -619,7 +619,8 @@ foreach ($listParam as $param) {
        style="width: 200px;"
        id="<?php echo $param->name;?>" name="<?php echo $param->name;?>"
      >
-     <?php 
+     <?php
+       if ($defaultValue===' ')   echo '<option value=" "></option>';
        foreach ($arr as $val) {
          echo '<option value="' . $val . '" ';
          if ($val==$defaultValue) {
