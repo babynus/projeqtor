@@ -393,7 +393,7 @@ class PlanningElement extends SqlElement {
     // search for dependant elements
     $crit=" topId=" . Sql::fmtId($this->id);
     $this->elementary=1;
-    $cpt=$this->countSqlElementsFromCriteria(null, null, $crit);
+    $cpt=($this->id)?$this->countSqlElementsFromCriteria(null, $crit):0;
     if ($cpt>0) {
       $this->elementary=0;
       if($this->isManualProgress==1){
