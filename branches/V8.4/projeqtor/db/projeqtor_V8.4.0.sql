@@ -370,7 +370,6 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 
 INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES
 (1, 107, 1);
-CREATE INDEX productassetProduct ON `${prefix}productasset` (idProductVersion);
 
 -- IGE #407 ( 
 
@@ -379,7 +378,7 @@ INSERT INTO `${prefix}report` (id, name, idReportCategory, file, sortOrder, idle
 (106, "reportWorkForAResourceByActivityTypeYearly", 1, "workPerTypeOfActivity.php", 197, 0, "L", 0, 1, 1, 1, 1, 1, 0, 0, NULL);
 
 INSERT INTO `${prefix}habilitationreport` (idProfile, idReport, allowAccess) VALUES
-(1, 105, 1);
+(1, 105, 1),
 (1, 106, 1);
 
 INSERT INTO `${prefix}reportparameter` ( idReport, name, paramType, sortOrder, idle, defaultValue, multiple) VALUES
@@ -393,3 +392,11 @@ INSERT INTO `${prefix}reportparameter` ( idReport, name, paramType, sortOrder, i
 (106, "idActivityType", "activityTypeList", 30, 0 ,NULL, 0),
 (106, "showDetail", "boolean", 35, 0, NULL, 0),
 (106, "year", "year", 20, 0, "currentYear", 0);
+
+-- IGE #397
+
+ALTER TABLE `${prefix}employmentcontract` ADD `idTeam` INT(12) unsigned DEFAULT NULL;
+ALTER TABLE `${prefix}employmentcontract` ADD `idOrganization` INT(12) unsigned DEFAULT NULL;
+
+UPDATE `${prefix}employmentcontract` EC SET idTeam=(SELECT idTeam FROM `${prefix}resource` RES WHERE EC.idEmployee = RES.id);
+UPDATE `${prefix}employmentcontract` EC SET idOrganization=(SELECT idOrganization FROM `${prefix}resource` RES WHERE EC.idEmployee = RES.id);
