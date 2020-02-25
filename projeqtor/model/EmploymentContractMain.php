@@ -74,6 +74,8 @@ class EmploymentContractMain extends SqlElement {
     public $mission;
     public $idEmployee;
     public $idUser;
+    public $idTeam;
+    public $idOrganization;
     public $idEmploymentContractType;
     public $startDate;    
     public $_sec_treatment;
@@ -98,6 +100,8 @@ class EmploymentContractMain extends SqlElement {
         "name"=>"required",
         "idStatus"=>"required",
         "idEmployee"=>"required,readonly",
+        "idTeam"=>"readonly",
+        "idOrganization"=>"readonly",
         "idEmploymentContractType"=>"required",
         "idStatus"=>"required",
         "startDate"=>"required",
@@ -124,7 +128,9 @@ class EmploymentContractMain extends SqlElement {
         if ($this->id==null) {
            // resource associated to the contract is required and not readonly
            $this->___dFieldsAttributes['idEmployee'] = "required";         
-           // Readonly for idle, endDate, reason, idStatus
+           // Readonly for idle, endDate, reason, idStatus, idTeam, idOrganization
+           $this->___dFieldsAttributes['idTeam'] = "readonly";
+           $this->___dFieldsAttributes['idOrganization'] = "readonly";
            $this->___dFieldsAttributes['idle'] = "readonly";         
            $this->___dFieldsAttributes['endDate'] = "readonly";         
            $this->___dFieldsAttributes['idEmploymentContractEndReason'] = "readonly";
@@ -145,9 +151,12 @@ class EmploymentContractMain extends SqlElement {
             $this->___dFieldsAttributes['name'] = "readonly,required";
             $this->___dFieldsAttributes['mission'] = "readonly";
             $this->___dFieldsAttributes['idEmployee'] = "readonly,required";
+            $this->___dFieldsAttributes['idTeam'] = "readonly,required";
+            $this->___dFieldsAttributes['idOrganization'] = "readonly,required";
             $this->___dFieldsAttributes['idEmploymentContractType'] = "readonly,required";
             $this->___dFieldsAttributes['startDate'] = "readonly,required";
-            $this->___dFieldsAttributes['name'] = "readonly";            
+            $this->___dFieldsAttributes['name'] = "readonly";  
+            $this->setAttributes();          
         }
         
         // If endDate is valid and not null
@@ -270,7 +279,7 @@ class EmploymentContractMain extends SqlElement {
 	
         return $result;
     }
-  
+
   /**=========================================================================
    * Overrides SqlElement::save() function to add specific treatments
    * @see persistence/SqlElement#save()
@@ -291,7 +300,12 @@ class EmploymentContractMain extends SqlElement {
                                           );
             return $resultU;
         }
-    }    
+    }
+     
+    $res = new Resource($this->idEmployee);
+    $this->idTeam = $res->idTeam;
+    $this->idOrganization = $res->idOrganization;
+    
     $result = parent::save();
     
     if(strpos($result,"OK")===false){
@@ -306,6 +320,8 @@ class EmploymentContractMain extends SqlElement {
             $unclosedCtr = new EmploymentContract();
             $unclosedCtr->idEmployee = $this->idEmployee;
             $unclosedCtr->idEmploymentContractType = $this->idEmploymentContractType;
+            $unclosedCtr->idTeam = $this->idTeam;
+            $unclosedCtr->idOrganization = $this->idOrganization;
             $theStartDate = new DateTime($this->endDate);
             $theStartDate = $theStartDate->add(new DateInterval('P1D'));
             $unclosedCtr->startDate = $theStartDate->format('Y-m-d');

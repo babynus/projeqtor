@@ -586,7 +586,6 @@ class ResourceMain extends SqlElement {
         $this->isLeaveManager=0;
     }
     $oldResource=$this->getOld();
-// MTY - LEAVE SYSTEM
 
   	$result=parent::save();
   	// MTY - LEAVE SYSTEM
@@ -616,6 +615,19 @@ class ResourceMain extends SqlElement {
     if(getLastOperationStatus($result)!="OK" and getLastOperationStatus($result)!="NO_CHANGE"){
       return $result;     
     }
+    
+    // #397 : if idTeam or idOrganization are modified also modify them in employmentContract
+    if ($this->isEmployee == 1 and ($this->idTeam!=$oldResource->idTeam or $this->idOrganization!=$oldResource->idOrganization)) {
+      $ec=new EmploymentContract();
+      $ecList=$ec->getSqlElementsFromCriteria(array("idle"=>'0',"idEmployee"=>$this->id));
+      foreach ($ecList as $ec) {
+        $ec->idTeam=$this->idTeam;
+        $ec->idOrganization=$this->idOrganization;
+        $resEc=$ec->save();
+        debugLog($resEc);
+      }
+    }
+    // MTY - LEAVE SYSTEM
     
   	Affectation::updateAffectations($this->id);
   	if ($this->id==getSessionUser()->id) { //must refresh data
