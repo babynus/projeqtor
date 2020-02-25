@@ -7204,19 +7204,19 @@ function drawProviderTermFromProviderBill($list, $obj, $refresh=false) {
 }
 
 function drawTabExpense($obj, $refresh=false) {
-  global $cr, $print, $user, $browserLocale, $comboDetail;
+  global $cr, $print, $outMode, $user, $browserLocale, $comboDetail;
   if ($comboDetail) {
     return;
   }
   $class=get_class($obj);
-  echo '<tr><td colspan="2" style="width:100%;">';
+  //echo '<tr><td colspan="2" style="width:100%;">';
 
-  echo '<table style="width:70%;">';
+  echo '<table style="width:100%;">';
   echo '  <tr>';
-  echo '    <td class="" colspan="1" style="width:25%"></td>';
-  echo '    <td class="assignHeader" colspan="1" style="width:30%">'.i18n('colUntaxedAmount').'</td>';
-  echo '    <td class="assignHeader" colspan="1" style="width:30%">'.i18n('colFullAmount').'</td>';
-  echo '    <td class="assignHeader" colspan="1" style="width:15%">'.i18n('colWorkElementCount').'</td>';
+  echo '    <td class="" style="width:40%"></td>';
+  echo '    <td class="assignHeader" style="width:20%">'.i18n('colUntaxedAmount').'</td>';
+  echo '    <td class="assignHeader" style="width:20%">'.i18n('colFullAmount').'</td>';
+  echo '    <td class="assignHeader" style="width:20%">'.i18n('colWorkElementCount').'</td>';
   echo '  </tr>';
   
   //damian Tab
@@ -7237,10 +7237,10 @@ function drawTabExpense($obj, $refresh=false) {
     $tabTender[$tender->id]['tender'] = $tender->id;
   }
   echo '  <tr>';
-  echo '    <td class="assignHeader" colspan="1" style="width:25%">'.i18n('menuTender').'</td>';
-  echo '    <td class="assignData" align="right" colspan="1" style="width:30%">'.htmlDisplayCurrency($untaxedAmount).'</td>';
-  echo '    <td class="assignData" align="right" colspan="1" style="width:30%">'.htmlDisplayCurrency($fullAmount).'</td>';
-  echo '    <td class="assignData" align="center" colspan="1" style="width:15%">'.count($listTender).'</td>';
+  echo '    <td class="assignHeader">'.i18n('menuTender').'</td>';
+  echo '    <td class="assignData" align="right">'.htmlDisplayCurrency($untaxedAmount).'</td>';
+  echo '    <td class="assignData" align="right" >'.htmlDisplayCurrency($fullAmount).'</td>';
+  echo '    <td class="assignData" align="center" >'.count($listTender).'</td>';
   echo '  </tr>';
   $untaxedAmountTerm = 0;
   $fullAmountTerm =0;
@@ -7263,10 +7263,10 @@ function drawTabExpense($obj, $refresh=false) {
     }
   }
   echo '  <tr>';
-  echo '    <td class="assignHeader" colspan="1" style="width:25%">'.i18n('menuProviderOrder').'</td>';
-  echo '    <td class="assignData" align="right" colspan="1" style="width:30%">'.htmlDisplayCurrency($untaxedAmount).'</td>';
-  echo '    <td class="assignData" align="right" colspan="1" style="width:30%">'.htmlDisplayCurrency($fullAmount).'</td>';
-  echo '    <td class="assignData" align="center" colspan="1" style="width:15%">'.count($listProviderOrder).'</td>';
+  echo '    <td class="assignHeader" >'.i18n('menuProviderOrder').'</td>';
+  echo '    <td class="assignData" align="right" >'.htmlDisplayCurrency($untaxedAmount).'</td>';
+  echo '    <td class="assignData" align="right" >'.htmlDisplayCurrency($fullAmount).'</td>';
+  echo '    <td class="assignData" align="center" >'.count($listProviderOrder).'</td>';
   echo '  </tr>';
   $providerBill = new ProviderBill();
   $listProviderBill = $providerBill->getSqlElementsFromCriteria(array("idProjectExpense"=>$obj->id));
@@ -7299,30 +7299,30 @@ function drawTabExpense($obj, $refresh=false) {
     $fullAmountTerm += $term->fullAmount;
   }
   echo '  <tr>';
-  echo '    <td class="assignHeader" colspan="1" style="width:25%">'.i18n('menuProviderBill').'</td>';
-  echo '    <td class="assignData" align="right" colspan="1" style="width:30%">'.htmlDisplayCurrency($untaxedAmount).'</td>';
-  echo '    <td class="assignData" align="right" colspan="1" style="width:30%">'.htmlDisplayCurrency($fullAmount).'</td>';
-  echo '    <td class="assignData" align="center" colspan="1" style="width:15%">'.count($listProviderBill).'</td>';
+  echo '    <td class="assignHeader" >'.i18n('menuProviderBill').'</td>';
+  echo '    <td class="assignData" align="right" >'.htmlDisplayCurrency($untaxedAmount).'</td>';
+  echo '    <td class="assignData" align="right" >'.htmlDisplayCurrency($fullAmount).'</td>';
+  echo '    <td class="assignData" align="center" >'.count($listProviderBill).'</td>';
   echo '  </tr>';
   echo '  <tr>';
-  echo '    <td class="assignHeader" colspan="1" style="width:25%">'.i18n('menuProviderTerm').'</td>';
-  echo '    <td class="assignData" align="right" colspan="1" style="width:30%">'.htmlDisplayCurrency($untaxedAmountTerm).'</td>';
-  echo '    <td class="assignData" align="right" colspan="1" style="width:30%">'.htmlDisplayCurrency($fullAmountTerm).'</td>';
-  echo '    <td class="assignData" align="center" colspan="1" style="width:15%">'.$nbTerm.'</td>';
+  echo '    <td class="assignHeader" >'.i18n('menuProviderTerm').'</td>';
+  echo '    <td class="assignData" align="right" >'.htmlDisplayCurrency($untaxedAmountTerm).'</td>';
+  echo '    <td class="assignData" align="right" >'.htmlDisplayCurrency($fullAmountTerm).'</td>';
+  echo '    <td class="assignData" align="center" >'.$nbTerm.'</td>';
   echo '  </tr>';
   echo '  <tr>';
-  echo '    <td class="assignHeader" colspan="1" style="width:25%">'.i18n('menuProviderPayment').'</td>';
-  echo '    <td class="assignHeader" align="right" colspan="1" style="width:30%"></td>';
-  echo '    <td class="assignData" align="right" colspan="1" style="width:30%">'.htmlDisplayCurrency($fullAmountPayment).'</td>';
-  echo '    <td class="assignData" align="center" colspan="1" style="width:15%">'.$nbPayment.'</td>';
+  echo '    <td class="assignHeader" >'.i18n('menuProviderPayment').'</td>';
+  echo '    <td class="assignHeader" align="right" ></td>';
+  echo '    <td class="assignData" align="right" >'.htmlDisplayCurrency($fullAmountPayment).'</td>';
+  echo '    <td class="assignData" align="center" >'.$nbPayment.'</td>';
   echo '  </tr>';
   echo '</table>';
-  echo '</td></tr>';
+  //echo '</td></tr>';
   $showExpenseProjectDetail=(Parameter::getUserParameter('showExpenseProjectDetail')!='0')?true:false;
   if($showExpenseProjectDetail){
-    echo '<tr><td><br/></td></tr>';
-    echo '<tr><td colspan="2" style="width:100%;">';
+    //echo '<tr><td colspan="2"><br/></td></tr>';
     //damian
+    echo '<br/>';
     echo '<table style="width:100%;border:solid #AAAAAA 1px;">';
     echo '  <tr>';
     echo '    <td class="assignHeader" colspan="5" style="width:40%">'.i18n('colName').'</td>';
@@ -7466,10 +7466,13 @@ function drawTabExpense($obj, $refresh=false) {
         }
       }
     }
-    echo '</table></tr>';
+    echo '</table>';
+    //echo '</tr></td>';
   }
+  
 }
 function drawProjectExpenseDetailLine($class,$id, $level){
+  global $print, $outMode;
 	$obj = new $class($id);
 	$date = '';
 	if(isset($obj->date)){
@@ -7509,7 +7512,7 @@ function drawProjectExpenseDetailLine($class,$id, $level){
 	}
 	echo '  <tr>';
 	for($i=0; $i<$level; $i++){
-		echo '<td class="assignData" colspan="1" style="width:3%;height:20px;border-bottom:0px;border-top:0px;border-right:solid 2px;"></td>';
+		echo '<td class="assignData" style="width:3%;height:20px;border-bottom:0px;border-top:0px;border-right:solid 2px;"></td>';
 	}
 	$width=40-(3*$level);
 	echo '    <td class="assignData" align="center" colspan="'.(5-$level).'"'.$goto.'style="width:'.$width.'%;height:20px;'.(($goto!='')?'cursor:pointer;':'').'">';
