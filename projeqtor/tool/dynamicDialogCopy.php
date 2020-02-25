@@ -109,14 +109,30 @@ if($copyType=="copyObjectTo"){
                <label for="copyToName" ><?php echo i18n("copyToName") ?>&nbsp;:&nbsp;</label>
              </td>
              <td>
-               <div id="copyToName" name="copyToName" dojoType="dijit.form.ValidationTextBox"
+               <select id="copyToName" name="copyToName" dojoType="dijit.form.ValidationTextBox"
                 required="required"
                 style="width: 400px;"
                 trim="true" maxlength="100" class="input"
                 value="<?php echo str_replace('"', '&quot;', $toCopy->name);?>">
+               </select>     
+             </td>
+           </tr>
+           <?php if ($copyType=='copyObjectTo' and property_exists($toCopy, 'idProject')) {?>
+           <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+           <tr>
+             <td class="dialogLabel" >
+               <label for="copyToProject" ><?php echo i18n("copyToProject") ?>&nbsp;:&nbsp;</label>
+             </td>
+             <td>
+               <div id="copyToProject" name="copyToProject" dojoType="dijit.form.FilteringSelect"
+                required="required" class="input" style="width: 400px;"
+                <?php echo autoOpenFilteringSelect();?>
+                class="input">
+                <?php htmlDrawOptionForReference('idProject', $toCopy->idProject, null, true);?>
                </div>     
              </td>
            </tr>
+           <?php }?>
            <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">

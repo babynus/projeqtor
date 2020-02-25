@@ -108,6 +108,11 @@ if (array_key_exists('copyToVersionNumber',$_REQUEST)) {
 	$obj->versionNumber=$copyToVersionNumber;
 }
 
+$toProject=(property_exists($obj, 'idProject'))?$obj->idProject:null;
+if (RequestHandler::isCodeSet('copyToProject')) {
+  $toProject=RequestHandler::getId('copyToProject',false,null);
+}
+  
 Sql::beginTransaction();
 PlanningElement::$_noDispatch=true;
 SqlElement::$_doNotSaveLastUpdateDateTime=true;
@@ -119,7 +124,7 @@ if ($className=='ComponentVersion') {
 	$obj->idComponentVersionType=$toType;
 	$newObj=$obj->copy();
 } else {
-  $newObj=$obj->copyTo($toClassName,$toType, $toName, $copyToOrigin, $copyToWithNotes, $copyToWithAttachments,$copyToWithLinks, $copyAssignments,false,null,null,$copyToWithResult);
+  $newObj=$obj->copyTo($toClassName,$toType, $toName, $toProject, $copyToOrigin, $copyToWithNotes, $copyToWithAttachments,$copyToWithLinks, $copyAssignments,false,null,null,$copyToWithResult);
 }
 $result=$newObj->_copyResult;
 if (! stripos($result,'id="lastOperationStatus" value="OK"')>0 ) {
@@ -128,7 +133,7 @@ if (! stripos($result,'id="lastOperationStatus" value="OK"')>0 ) {
 unset($newObj->_copyResult);
 if (!$error and $copyWithStructure and get_class($obj)=='Activity' and get_class($newObj)=='Activity') {
 	//$res=copyStructure($obj, $newObj, $copyToOrigin, $copyToWithNotes, $copyToWithAttachments,$copyToWithLinks, $copyAssignments);
-	$res=PlanningElement::copyStructure($obj, $newObj, $copyToOrigin, $copyToWithNotes, $copyToWithAttachments,$copyToWithLinks, $copyAssignments);
+	$res=PlanningElement::copyStructure($obj, $newObj, $copyToOrigin, $copyToWithNotes, $copyToWithAttachments,$copyToWithLinks, $copyAssignments, null, $toProject);
 	if ($res!='OK') {
 	  $error=true;
 	  $result=$res;

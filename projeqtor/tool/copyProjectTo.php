@@ -27,9 +27,9 @@
 /** ===========================================================================
  * Copy an object as a new one (of the same class) : call corresponding method in SqlElement Class
  */
-
 require_once "../tool/projeqtor.php";
 projeqtor_set_time_limit(300);
+debugLog($_REQUEST);
 
 // Get the object from session(last status before change)
 $proj=SqlElement::getCurrentObject(null,null,true,false);
@@ -114,7 +114,8 @@ Security::checkValidId($toType);
 $proj->projectCode=$codeProject;
 $newProj=$proj->copyTo('Project',
                         $toType,
-                        $toName, 
+                        $toName,
+                        null, 
                         false, false,
                         $copyToWithAttachments,
                         $copyToWithLinks,

@@ -393,8 +393,8 @@ class PlanningElement extends SqlElement {
     // search for dependant elements
     $crit=" topId=" . Sql::fmtId($this->id);
     $this->elementary=1;
-    $lstElt=$this->getSqlElementsFromCriteria(null, null, $crit ,'wbsSortable asc');
-    if ($lstElt and count($lstElt)>0) {
+    $cpt=($this->id)?$this->countSqlElementsFromCriteria(null, $crit):0;
+    if ($cpt>0) {
       $this->elementary=0;
       if($this->isManualProgress==1){
         $this->isManualProgress = 0;
@@ -482,7 +482,9 @@ class PlanningElement extends SqlElement {
     }
     // Update dependant objects
     if ($dispatchNeeded) { // and ! self::$_noDispatch // Criteria removed : must dispatch for move task 
-    	projeqtor_set_time_limit(600);
+      $crit=" topId=" . Sql::fmtId($this->id);
+      $lstElt=$this->getSqlElementsFromCriteria(null, null, $crit ,'wbsSortable asc');
+      projeqtor_set_time_limit(600);
       $cpt=0;
       foreach ($lstElt as $elt) {
         $cpt++;
@@ -1824,7 +1826,7 @@ class PlanningElement extends SqlElement {
   static function copyStructure($obj, $newObj, $copyToOrigin=false, 
       $copyToWithNotes=false, $copyToWithAttachments, $copyToWithLinks=false, 
       $copyAssignments=false, $copyAffectations=false, $toProject=null, $copySubProjects=false) {
-    //self::$_noDispatch=true; // avoid recursive updates on each item, will be done only at elementary level
+    //self::$_noDispatch=true; // avoid recursive updates on each item, will be done only at elementary level    
     $pe=new PlanningElement();
     $list=$pe->getSqlElementsFromCriteria(array('topRefType'=>get_class($obj), 'topRefId'=>$obj->id),null,null,'wbsSortable asc');
     foreach ($list as $pe) { // each planning element corresponding to item to copy
@@ -1832,7 +1834,7 @@ class PlanningElement extends SqlElement {
       if ($pe->refType=='Project' and ! $copySubProjects) continue;
       $item=new $pe->refType($pe->refId);
       $type='id'.get_class($item).'Type';
-      $newItem=$item->copyTo(get_class($item),$item->$type, $item->name, $copyToOrigin, 
+      $newItem=$item->copyTo(get_class($item),$item->$type, $item->name, ($toProject)?$toProject:$pe->idProject, $copyToOrigin, 
                              $copyToWithNotes, $copyToWithAttachments,$copyToWithLinks, 
                              $copyAssignments, $copyAffectations, $toProject, (get_class($newObj)=='Activity')?$newObj->id:null );
       $resultItem=$newItem->_copyResult;
@@ -1883,7 +1885,7 @@ class PlanningElement extends SqlElement {
       } else {
         $type='id'.get_class($item).'Type';
       }   
-      $newItem=$item->copyTo(get_class($item),$item->$type, $item->name, $copyToOrigin,
+      $newItem=$item->copyTo(get_class($item),$item->$type, $pe->idProject, $item->name, $copyToOrigin,
           $copyToWithNotes, $copyToWithAttachments,$copyToWithLinks,
           $copyAssignments, $copyAffectations, $toProject,null );
       $resultItem=$newItem->_copyResult;
