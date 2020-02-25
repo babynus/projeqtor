@@ -965,14 +965,15 @@ abstract class SqlElement {
     return $result;
   }
 
-  public function copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = null, $toActivity = null, $copyToWithResult = false, $copyToWithVersionProjects = false) {
+  public function copyTo($newClass, $newType, $newName, $newProject, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = null, $toActivity = null, $copyToWithResult = false, $copyToWithVersionProjects = false) {
     global $debugTraceUpdates,$debugTraceHistory;
     if (isset($debugTraceUpdates) and $debugTraceUpdates==true) {
       if ( ! property_exists($this,'_noHistory') or (isset($debugTraceHistory) and $debugTraceHistory==true) )
         debugTraceLog("Start COPYTO for ".get_class($this)." #".$this->id);$startMicroTime=microtime(true);
     }
+    debugLog("copyTo($newClass, $newType, $newName, $newProject, ..., $toProject");
     self::setCopyInProgress();
-    $result=$this->copySqlElementTo ( $newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments, $withAffectations, $toProject, $toActivity, $copyToWithResult );
+    $result=$this->copySqlElementTo ( $newClass, $newType, $newName, $newProject, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments, $withAffectations, $toProject, $toActivity, $copyToWithResult );
     if (isset($debugTraceUpdates) and $debugTraceUpdates==true) {
       if ( ! property_exists($this,'_noHistory') or (isset($debugTraceHistory) and $debugTraceHistory==true) )
         debugTraceLog("End COPYTO for ".get_class($this)." #".$this->id." => ".round((microtime(true) - $startMicroTime)*1000000)/1000000);
@@ -2093,7 +2094,7 @@ abstract class SqlElement {
     return $newObj;
   }
 
-  private function copySqlElementTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = null, $toActivity = null, $copyToWithResult = false) {
+  private function copySqlElementTo($newClass, $newType, $newName, $newProject, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = null, $toActivity = null, $copyToWithResult = false) {
     $newObj = new $newClass ();
     $newObj->id = null;
     //$typeName = 'id' . $newClass . 'Type';
@@ -2274,6 +2275,13 @@ abstract class SqlElement {
       }
     }
     $newObj->name = $newName;
+    if (! $toProject and property_exists($newObj, 'idProject') and $newProject) {
+      $newObj->idProject=$newProject;
+      if ($newObj->idProject!=$this->idProject and property_exists($newObj, 'idActivity')) {
+        $pAct=new Activity($newObj->idActivity,true);
+        if ($newObj->idProject!=$pAct->idProject) $newObj->idActivity=null;
+      } 
+    }
     // check description
     if (property_exists ( $newObj, 'description' ) and ! $newObj->description) {
       $idType = 'id' . $newClass . 'Type';

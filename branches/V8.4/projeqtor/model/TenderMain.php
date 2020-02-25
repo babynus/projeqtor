@@ -412,7 +412,7 @@ class TenderMain extends SqlElement {
   }
 
   
-  public function copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = NULL, $toActivity = NULL, $copyToWithResult = false,$copyToWithVersionProjects=false) {
+  public function copyTo($newClass, $newType, $newName, $newProject, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = NULL, $toActivity = NULL, $copyToWithResult = false,$copyToWithVersionProjects=false) {
     if ($newClass=='ProjectExpense') {
       if (! $this->totalUntaxedAmount) {
         $this->totalUntaxedAmount=$this->untaxedAmount;
@@ -420,7 +420,7 @@ class TenderMain extends SqlElement {
       }
       $this->expensePlannedDate=$this->deliveryDate;
     }
-    return parent::copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks);
+    return parent::copyTo($newClass, $newType, $newName, $newProject, $setOrigin, $withNotes, $withAttachments, $withLinks);
   }
   // ============================================================================**********
   // GET VALIDATION SCRIPT

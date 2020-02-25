@@ -668,8 +668,8 @@ class PeriodicMeetingMain extends SqlElement {
     }*/
   }
   
-  public function copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments,$withLinks, $withAssignments=false, $withAffectations=false, $toProject=null, $toActivity=null, $copyToWithResult=false, $copyToWithVersionProjects=false){
-    $result = parent::copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, false, false,false,false,$toProject);
+  public function copyTo($newClass, $newType, $newName, $newProject, $setOrigin, $withNotes, $withAttachments,$withLinks, $withAssignments=false, $withAffectations=false, $toProject=null, $toActivity=null, $copyToWithResult=false, $copyToWithVersionProjects=false){
+    $result = parent::copyTo($newClass, $newType, $newName, $newProject, $setOrigin, $withNotes, false, false,false,false,$toProject);
     $ass=new Assignment();
     $crit=array('refId'=>$this->id,'refType'=>'PeriodicMeeting');
     $list=$ass->getSqlElementsFromCriteria($crit);
