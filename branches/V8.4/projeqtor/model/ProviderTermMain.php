@@ -231,13 +231,13 @@ class ProviderTermMain extends SqlElement {
 		return $result;
 	}
 	
-  public function copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = NULL, $toActivity = NULL, $copyToWithResult = false,$copyToWithVersionProjects=false) {
+  public function copyTo($newClass, $newType, $newName, $newProject, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = NULL, $toActivity = NULL, $copyToWithResult = false,$copyToWithVersionProjects=false) {
     if($newClass=='ProviderBill' and $this->idProviderBill){
       $result=i18n('copyNotAsProviderBill').'<br/>';
       $this->_copyResult=$result;
       return $this;
     }else {
-      $newObj =  parent::copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, null, $withLinks);
+      $newObj =  parent::copyTo($newClass, $newType, $newName, $newProject, $setOrigin, $withNotes, null, $withLinks);
       if($newClass=='ProviderBill') {
         $this->idProviderBill = $newObj->id;
         $this->isBilled=1;

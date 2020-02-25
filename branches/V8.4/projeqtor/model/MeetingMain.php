@@ -622,9 +622,9 @@ class MeetingMain extends SqlElement {
   }
   
   // gautier ticket #2315
-  public function copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments,$withLinks, $withAssignments=false, $withAffectations=false, $toProject=null, $toActivity=null, $copyToWithResult=false, $copyToWithVersionProjects=false){
+  public function copyTo($newClass, $newType, $newName, $newProject,$setOrigin, $withNotes, $withAttachments,$withLinks, $withAssignments=false, $withAffectations=false, $toProject=null, $toActivity=null, $copyToWithResult=false, $copyToWithVersionProjects=false){
     if($this->isPeriodic != 1){
-      $result = parent::copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks,null,null,$toProject,null,$copyToWithResult);
+      $result = parent::copyTo($newClass, $newType, $newName, $newProject, $setOrigin, $withNotes, $withAttachments, $withLinks,null,null,$toProject,null,$copyToWithResult);
     } else {
       $result=$this;
       $result->_copyResult="OK";

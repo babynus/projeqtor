@@ -1263,7 +1263,7 @@ static function isTheLeaveProject($id=null) {
   }
   
 // ADD BY Marc TABARY - 2017-03-17 - COPY ACTIVITY PRICE WHEN COPY PROJECT
-  public function copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments=false, $withAffectations=false,
+  public function copyTo($newClass, $newType, $newName, $newProject, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments=false, $withAffectations=false,
                          $toProject=null, $toActivity=null, $copyToWithResult=false, $copyToWithVersionProjects=false, $copyToWithActivityPrice=false) {
 
     // Control that copy is not directly copied into structure of copied project 
@@ -1275,7 +1275,7 @@ static function isTheLeaveProject($id=null) {
         return $this;
       }
     }
-    $result=parent::copyTo($newClass, $newType, $newName, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments, $withAffectations ,
+    $result=parent::copyTo($newClass, $newType, $newName, $newProject, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments, $withAffectations ,
     		                 $toProject, $toActivity, $copyToWithResult, $copyToWithVersionProjects, $copyToWithActivityPrice);
     if($copyToWithVersionProjects==true){
       $vp=new VersionProject();
