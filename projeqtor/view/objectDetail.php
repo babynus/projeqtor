@@ -1612,7 +1612,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             $checkImg='checkedOK.png';
           }
           if ($col=='cancelled' or $col=='solved') echo "&nbsp;&nbsp;&nbsp;";
-          echo '<img src="img/'.$checkImg.'" />';
+          echo '<img src="../view/img/'.$checkImg.'" />';
           // BEGIN - REPLACE BY TABARY - USE isForeignKey GENERIC FUNCTION
         } else if (isForeignKey($col, $obj)) { // Idxxx
                                                // } else if (substr($col, 0, 2) == 'id' and $dataType == 'int' and strlen($col) > 2 and substr($col, 2, 1) == strtoupper(substr($col, 2, 1))) { // Idxxx
@@ -5893,7 +5893,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
       if (!$print) echo '<input type="hidden" id="initAss_'.$assignment->id.'" value="'.Work::displayWork($assignment->assignedWork).'"/>';
       echo '<td class="assignData'.$idleClass.'" align="right" style="width:15%;vertical-align:middle;">';
       if ($canUpdate and get_class($obj)!='PeriodicMeeting' and !$print and $planningMode!='RECW') {
-        echo '<img  id="idImageAssignedWork'.$assignment->id.'" src="img/savedOk.png" 
+        echo '<img  id="idImageAssignedWork'.$assignment->id.'" src="../view/img/savedOk.png" 
                 style="display: none; position:relative;top:2px;left:5px; height:16px;float:left;"/>';
         echo '<div dojoType="dijit.form.NumberTextBox" id="assAssignedWork_'.$assignment->id.'" name="assAssignedWork_'.$assignment->id.'"
     						  class="dijitReset dijitInputInner dijitNumberTextBox"
@@ -7238,7 +7238,7 @@ function drawTestCaseRunFromObject($list, $obj, $refresh=false) {
                 style="float:left;width:100%;min-width:'.$commentWidth.'px;min-height: 25px;font-size: 90%; background:none;display:block;border:none;" maxlength="4000" onchange="saveTcrData('.$tcr->id.',\'Result\');">';
         echo $tcr->result;
         echo '</textarea>';
-        echo '<img  id="idImageResult'.$tcr->id.'" src="img/'.$checkImg.'" style="display: none; float:right; top:2px;right:5px; height:16px;"/>';
+        echo '<img  id="idImageResult'.$tcr->id.'" src="../view/img/'.$checkImg.'" style="display: none; float:right; top:2px;right:5px; height:16px;"/>';
       } else {
         echo htmlEncode($tcr->result);
       }
@@ -7248,7 +7248,7 @@ function drawTestCaseRunFromObject($list, $obj, $refresh=false) {
     echo '<td class="assignData" style="width:10%">';
     if (!$print or $tcr->comment) {
       if (!$print) {
-        echo '<img  id="idImageComment'.$tcr->id.'" src="img/'.$checkImg.'" style="display: none; float:right; top:2px;right:5px; height:16px;"/>';
+        echo '<img  id="idImageComment'.$tcr->id.'" src="../view/img/'.$checkImg.'" style="display: none; float:right; top:2px;right:5px; height:16px;"/>';
         echo '<textarea dojoType="dijit.form.Textarea" id="tcrComment_'.$tcr->id.'" name="tcrComment_'.$tcr->id.'"
                 style="float:left;width:100%;min-width:'.$commentWidth.'px;min-height: 25px;font-size: 90%; background:none;display:block;border:none;" maxlength="4000" onchange="saveTcrData('.$tcr->id.',\'Comment\');">';
         echo $tcr->comment;
