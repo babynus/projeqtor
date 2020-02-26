@@ -53,14 +53,14 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
  (6,228,0,1),
- (6,229,0,1),
- (6,230,0,1),
- (6,231,0,1),
+ (6,229,1,1),
+ (6,230,1,1),
+ (6,231,1,1),
  (6,232,0,1),
  (6,233,0,1),
- (6,234,0,1),
- (6,235,0,1),
- (6,236,0,1);
+ (7,234,0,1),
+ (7,235,0,1),
+ (7,236,1,1);
  
  INSERT INTO `${prefix}mailable` (`id`,`name`, `idle`) VALUES 
 (42,'SupplierContract', '0'),
