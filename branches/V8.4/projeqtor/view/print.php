@@ -43,6 +43,10 @@ use Spipu\Html2Pdf\Html2Pdf;
    projeqtor_set_time_limit(300);
    ob_start();
    $outMode='html';
+   $pdfLib='html2pdf';
+   if (isWkHtmlEnabled()) {
+     $pdfLib='WkHtmlToPdf';
+   }
    $printInNewPage=getPrintInNewWindow();
    if (array_key_exists('outMode', $_REQUEST)) {
      if ($_REQUEST['outMode']) {
@@ -139,12 +143,13 @@ use Spipu\Html2Pdf\Html2Pdf;
 <html>
 <head>   
   <title><?php echo getPrintTitle();?></title>
-  <link rel="stylesheet" type="text/css" href="css/jsgantt.css" />
-  <link rel="stylesheet" type="text/css" href="css/projeqtorIcons.css" />
-  <link rel="stylesheet" type="text/css" href="css/projeqtorPrint.css" />
-  <link rel="stylesheet" type="text/css" href="css/projeqtorFlat.css" />
-  <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon" />
-  <link rel="icon" href="img/logo.ico" type="image/x-icon" />
+  <link rel="stylesheet" type="text/css" href="../view/css/jsgantt.css" />
+  <link rel="stylesheet" type="text/css" href="../view/css/projeqtorIcons.css" />
+  <link rel="stylesheet" type="text/css" href="../view/css/projeqtor<?php if ($outMode!='pdf' or $pdfLib!='WkHtmlToPdf') echo 'Print';?>.css" />
+  <link rel="stylesheet" type="text/css" href="../view/css/projeqtorFlat.css" />
+  <link rel="shortcut icon" href="../view/img/logo.ico" type="image/x-icon" />
+  <link rel="icon" href="../view/img/logo.ico" type="image/x-icon" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <?php if (! isset($debugIEcompatibility) or $debugIEcompatibility==false) {?>  
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <?php }?> 
@@ -200,7 +205,7 @@ use Spipu\Html2Pdf\Html2Pdf;
   </script>
 </head>
 <page backtop="100px" backbottom="20px" footer="page">
-<<?php echo ($printInNewPage or $outMode=='pdf') ?'body':'div';?> style="-webkit-print-color-adjust: exact;<?php echo ($outMode=='pdf')?'font-size:90%;':''; ?>" id="bodyPrint" class="tundra ProjeQtOrFlatGrey" onload="window.top.hideWait();">
+<<?php echo ($printInNewPage or $outMode=='pdf') ?'body':'div';?> style="-webkit-print-color-adjust: exact;<?php echo ($outMode=='pdf' and $pdfLib!='WkHtmlToPdf')?'font-size:90%;':''; ?>" id="bodyPrint" class="tundra ProjeQtOrFlatGrey" onload="window.top.hideWait();">
   <?php 
   }
   $page=$_REQUEST['page'];
@@ -222,7 +227,7 @@ use Spipu\Html2Pdf\Html2Pdf;
     }
   }
   $outModeBack=$outMode;
-  if ($outMode=='pdf' and Parameter::getGlobalParameter('pathToWkHtmlToPdf')) { $outMode='html'; }
+  //if ($outMode=='pdf' and isWkHtmlEnabled()) { $outMode='html';}
   include $includeFile;
   $outMode=$outModeBack;
   if ($outMode!='csv' and $outMode!='mpp' and $outMode!='word' and $outMode!='excel' and $outMode!='txt' and (!$download or $outMode=='pdf') and !$noHeader) {?>
@@ -236,7 +241,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 <?php function finalizePrint() {
   global $outMode, $download, $includeFile, $orientation;
   $pdfLib='html2pdf';
-  if (Parameter::getGlobalParameter('pathToWkHtmlToPdf')) {
+  if (isWkHtmlEnabled()) {
     $pdfLib='WkHtmlToPdf';
   }
   //$pdfLib='dompdf';
@@ -309,14 +314,22 @@ use Spipu\Html2Pdf\Html2Pdf;
       $dompdf->stream("sample.pdf");
     } else if ($pdfLib=='WkHtmlToPdf') {
       $path=Parameter::getGlobalParameter('pathToWkHtmlToPdf');
-      $htmlFile='../files/report/test.html';
-      $pdfFile='../files/report/test.pdf';
-      
-      $htmlFile='test.html';
-      $pdfFile='test.pdf';
+      $smallMargin=false;
+      //$htmlFile='../files/report/test.html';
+      //$pdfFile='../files/report/test.pdf';
+      chdir ("../files");
+      $suffix=getCurrentUserId().'_'.date('Ymd_His');
+      $htmlFile="pdfExport_$suffix.html";
+      $pdfFile="report/pdfExport_$suffix.pdf";
+      $exportFileName=($outputFileName)?$outputFileName:'document.pdf';
       kill ($htmlFile);
       writeFile($content, $htmlFile);
-      $options='-O '.(($orientation=='P')?'Portrait':'Landscape');
+      $options='--orientation '.(($orientation=='P')?'Portrait':'Landscape');
+      $options.=" --encoding 'utf-8'";
+      $options.=' --zoom '.(($smallMargin)?'1.24':'1.18');
+      $options.=' --title "'.basename($exportFileName).'"';
+      $margin=($smallMargin)?'5mm':'10mm';
+      $options.=" --margin-bottom $margin --margin-left $margin --margin-right $margin --margin-top $margin";
       exec("\"$path\" $options $htmlFile $pdfFile");
       if (ob_get_length()) {
         ob_end_clean();
@@ -324,7 +337,7 @@ use Spipu\Html2Pdf\Html2Pdf;
       if ($download) {
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
-        header('Content-Disposition: attachment; filename="'.basename($pdfFile).'"');
+        header('Content-Disposition: attachment; filename="'.basename($exportFileName).'"');
         header('Expires: 0');
         header('Cache-Control: must-revalidate');
         header('Pragma: public');
@@ -337,10 +350,24 @@ use Spipu\Html2Pdf\Html2Pdf;
         header('Pragma: public');
         header('Expires: Sat, 26 Jul 1997 05:00:00 GMT'); // Date in the past
         header('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT');
-        header('Content-Disposition: inline; filename="'.basename($pdfFile).'"');
+        header('Content-Disposition: inline; filename="'.basename($exportFileName).'"');
         readfile($pdfFile);
       }
+      kill ($htmlFile);
+      kill ($pdfFile);
     }
   }
+}
+function isWkHtmlEnabled() {
+  $wkFile=Parameter::getGlobalParameter('pathToWkHtmlToPdf');
+  if ($wkFile) {
+    if (file_exists($wkFile)) {
+      return true;
+    } else {
+      debugTraceLog("incorrect patch to WkHtmlToPdf executable '$wkFile' (file does not exist)");
+      return false;
+    }
+  } 
+  return false;
 }
 ?>
