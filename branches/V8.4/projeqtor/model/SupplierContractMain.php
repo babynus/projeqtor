@@ -45,8 +45,8 @@ class SupplierContractMain extends SqlElement {
   public $_tab_2_1=array('startDate', 'endDate' , 'contractDate');
   public $startDate;
   public $endDate;
-  public $idUnitContract;
   public $initialContractTerm;
+  public $idUnitContract;
   public $idUnitNotice;
   public $noticePeriod;
   public $noticeDate;
@@ -88,6 +88,7 @@ class SupplierContractMain extends SqlElement {
     ';
 
   private static $_fieldsAttributes=array("name"=>"required",  
+                                  "idProject"=>"required",
                                   "idSupplierContractType"=>"required",
                                   "idProvider"=>"required",
                                   "done"=>"nobr",
@@ -97,6 +98,8 @@ class SupplierContractMain extends SqlElement {
                                   "cancelled"=>"nobr",
                                   "idStatus"=>"required",
                                   "startDate"=>"nobr",
+                                  "initialContractTerm"=>"nobr",
+                                  "idUnitContract"=>"size1/3"
   );   
  
   private static $_colCaptionTransposition = array(
@@ -117,6 +120,10 @@ class SupplierContractMain extends SqlElement {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
   	parent::__construct($id,$withoutDependentObjects);
+  	if (!$this->id) {
+  	  $this->idUnitNotice=2;
+  	  $this->idUnitContract=2;
+  	}
   	if ($withoutDependentObjects) return;
   }
 
