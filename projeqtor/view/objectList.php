@@ -354,7 +354,7 @@ if (property_exists($objectClass,'idStatus')) {
               <?php if ( $objectClass=='GlobalView') { ?>
                 <td width="56px" class="allSearchTD resetSearchTD allSearchFixLength">
                     <button dojoType="dijit.form.Button" type="button" >
-                            <?php echo i18n('resetColor');?>
+                            <?php echo i18n('buttonReset');?>
                             <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
                             <script type="dojo/method" event="onClick">
                              var lstStat = <?php echo json_encode($lstStat); ?>;
@@ -466,7 +466,7 @@ if (property_exists($objectClass,'idStatus')) {
                   ?>
                       <td width="6px" class="allSearchTD resetSearchTD allSearchFixLength">
                         <button dojoType="dijit.form.Button" type="button" >
-                            <?php echo i18n('resetColor');?>
+                            <?php echo i18n('buttonReset');?>
                             <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
                             <script type="dojo/method" event="onClick">
                              var lstStat = <?php echo json_encode($lstStat); ?>;
@@ -503,7 +503,7 @@ if (property_exists($objectClass,'idStatus')) {
               <?php if ($hideClientSearch and $objectClass !='GlobalView') { ?>
               <td width="6px" class="allSearchTD resetSearchTD allSearchFixLength">
                 <button dojoType="dijit.form.Button" type="button">
-                    <?php echo i18n('resetColor');?>
+                    <?php echo i18n('buttonReset');?>
                     <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
                   <script type="dojo/method" event="onClick">
                      var lstStat = <?php echo json_encode($lstStat); ?>;
@@ -538,7 +538,7 @@ if (property_exists($objectClass,'idStatus')) {
               -->
               <td width="6px" class="allSearchTD resetSearchTD allSearchFixLength">
                 <button dojoType="dijit.form.Button" type="button" >
-                    <?php echo i18n('resetColor'); ?>
+                    <?php echo i18n('buttonReset'); ?>
                     <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
                   <script type="dojo/method" event="onClick">
                      var lstStat = <?php echo json_encode($lstStat); ?>;
@@ -573,7 +573,7 @@ if (property_exists($objectClass,'idStatus')) {
               <?php if($objectClass !='GlobalView'){?>
               <td width="6px " class="allSearchTD resetSearchTD allSearchFixLength">
                 <button dojoType="dijit.form.Button" type="button" >
-                    <?php echo i18n('resetColor');?>
+                    <?php echo i18n('buttonReset');?>
                     <?php $listStatus = $object->getExistingStatus(); $lstStat=(count($listStatus));?>
                   <script type="dojo/method" event="onClick">
                      var lstStat = <?php echo json_encode($lstStat); ?>;
