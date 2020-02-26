@@ -3146,7 +3146,7 @@ function drawGantt() {
       // pGroup : is the task a group one ?
       var pGroup = (item.elementary == '0') ? 1 : 0;
       //MODIF qCazelles - GANTT
-      if (item.reftype=='Project' || item.reftype=='Fixed' || item.reftype=='Replan' || item.reftype=='Construction' || item.reftype=='ProductVersionhasChild' || item.reftype=='ComponentVersionhasChild' || item.reftype=='SupplierContracthasChild' ) pGroup=1;
+      if (item.reftype=='Project' || item.reftype=='Fixed' || item.reftype=='Replan' || item.reftype=='Construction' || item.reftype=='ProductVersionhasChild' || item.reftype=='ComponentVersionhasChild' || item.reftype=='SupplierContracthasChild' || item.reftype=='ClientContracthasChild') pGroup=1;
      //END MODIF qCazelles - GANTT
       var pobjecttype='';
       var pExtRessource='';
@@ -3263,6 +3263,9 @@ function runScript(refType, refId, id) {
   }
   if(refType=='SupplierContracthasChild'){
     refType = 'SupplierContract';
+  }
+  if(refType=='ClientContracthasChild'){
+    refType = 'ClientContract';
   }
   //END ADD qCazelles - GANTT
   if (waitingForReply) {
