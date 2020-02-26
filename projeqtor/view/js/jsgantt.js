@@ -945,6 +945,8 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
         }
         else if (vTaskList[i].getClass() == 'SupplierContracthasChild') {
           iconName = 'SupplierContract';
+        }else if (vTaskList[i].getClass() == 'ClientContracthasChild') {
+          iconName = 'SupplierContract';
         }
       //florent ticket 4397
         if (planningPage=='ResourcePlanning' || planningPage=='VersionsPlanning' || planningPage=='ContractGantt') {
@@ -982,7 +984,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
         var levlWidth = (levl-1) * 16;
         vLeftTable +='<table><tr><td>';
         vLeftTable += '<div style="width:' + levlWidth + 'px;">';
-        if (vTaskList[i].getGroup() && vTaskList[i].getClass() != 'ProductVersionhasChild' &&  vTaskList[i].getClass() != 'ComponentVersionhasChild' &&  vTaskList[i].getClass() != 'SupplierContracthasChild') {
+        if (vTaskList[i].getGroup() && vTaskList[i].getClass() != 'ProductVersionhasChild' &&  vTaskList[i].getClass() != 'ComponentVersionhasChild' &&  vTaskList[i].getClass() != 'SupplierContracthasChild' &&  vTaskList[i].getClass() != 'ClientContracthasChild') {
           vLeftTable += '<div style="margin-left:3px;width:8px;">&nbsp</div>';
         } else {
           vLeftTable += '<div style="margin-left:3px;width:8px;background-color:#'+vTaskList[i].getColor()+'">&nbsp</div>';
