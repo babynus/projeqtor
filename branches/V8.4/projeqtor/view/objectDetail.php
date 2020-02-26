@@ -4924,17 +4924,16 @@ function drawActivityList($obj, $refresh=false) {
   if ($comboDetail) {
     return;
   }
-  
-  $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
-  if ($obj->idle==1) {
-    $canUpdate=false;
-  }
+//   $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
+//   if ($obj->idle==1) {
+//     $canUpdate=false;
+//   }
+  $listClass='Activity';
   if (!$refresh) echo '<tr><td colspan="4">';
   echo '<table style="width:100%;">';
   echo '<tr>';
-  $listClass='Activity';
-  echo '<td class="linkHeader" style="width:'.(($print)?'20':'15').'%">'.i18n($listClass).'</td>';
-  echo '<td class="linkHeader" style="width:45%">'.i18n('colName').'</td>';
+  echo '<td class="linkHeader" style="width:10%">'.i18n('colId').'</td>';
+  echo '<td class="linkHeader" style="width:55%">'.i18n('colName').'</td>';
   echo '<td class="linkHeader" style="width:15%">'.i18n('colProgress').'</td>';
   echo '<td class="linkHeader" style="width:20%">'.i18n('colIdStatus').'</td>';
   echo '</tr>';
@@ -4942,6 +4941,10 @@ function drawActivityList($obj, $refresh=false) {
     $list=array();
   } else if (get_class($obj)=='ComponentVersion') {
     $crit=array('idTarget'.get_class($obj)=>$obj->id);
+    $activity=new Activity();
+    $list=$activity->getSqlElementsFromCriteria($crit);
+  } else if (get_class($obj)=='Activity') {
+    $crit=array('idActivity'=>$obj->id);
     $activity=new Activity();
     $list=$activity->getSqlElementsFromCriteria($crit);
   }
@@ -4952,7 +4955,8 @@ function drawActivityList($obj, $refresh=false) {
       $canGoto=(securityCheckDisplayMenu(null, $listClass) and securityGetAccessRightYesNo('menu'.$listClass, 'read', $activity)=="YES")?true:false;
       echo '<tr>';
       $classCompName=i18n($listClass);
-      echo '<td class="linkData" style="white-space:nowrap;width:'.(($print)?'20':'15').'%"><table><tr><td>'.formatIcon($listClass, 16).'</td><td style="vertical-align:top">&nbsp;'.'#'.$activity->id.'</td></tr></table>';
+      echo '<td class="linkData" style="white-space:nowrap;width:10%">';
+      echo '<table><tr><td>'.formatIcon($listClass, 16).'</td><td style="vertical-align:top">&nbsp;'.'#'.$activity->id.'</td></tr></table>';
       echo '</td>';
       $goto="";
       if (!$print and $canGoto) {
@@ -4960,17 +4964,17 @@ function drawActivityList($obj, $refresh=false) {
       }
       echo '<td class="linkData" '.$goto.' style="position:relative;">';
       echo htmlEncode($activity->name);
-      echo '</td><td class="linkData">';
-      $pe=new PlanningElement();
-      $crit=array('refId'=>$activity->id);
-      $arrayActivity=$pe->getSqlElementsFromCriteria($crit);
-      $act=reset($arrayActivity);
-      $activityProgress=$act->progress;
-      
+      echo '</td>';
+      echo '<td class="linkData">';
+      //$pe=new PlanningElement();
+      //$crit=array('refId'=>$activity->id);
+      //$arrayActivity=$pe->getSqlElementsFromCriteria($crit);
+      //$act=reset($arrayActivity);
+      $activityProgress=$activity->ActivityPlanningElement->progress;
       echo progressFormatter($activityProgress, null);
-      echo '</td><td class="linkData">';
-      
-      echo colorNameFormatter(SqlList::getNameFromId('Status', $activity->idStatus)."#split#".SqlList::getFieldFromId('Status', $activity->idStatus, 'color')).'</td>';
+      echo '</td>';
+      echo '<td class="linkData">';  
+      echo colorNameFormatter(SqlList::getNameFromId('Status', $activity->idStatus)."#split#".SqlList::getFieldFromId('Status', $activity->idStatus, 'color'));
       echo '</td>';
       echo '</tr>';
     }

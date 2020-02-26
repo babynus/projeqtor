@@ -221,7 +221,10 @@ use Spipu\Html2Pdf\Html2Pdf;
       $_REQUEST[$par[0]]=$par[1];
     }
   }
+  $outModeBack=$outMode;
+  if ($outMode=='pdf' and Parameter::getGlobalParameter('pathToWkHtmlToPdf')) { $outMode='html'; }
   include $includeFile;
+  $outMode=$outModeBack;
   if ($outMode!='csv' and $outMode!='mpp' and $outMode!='word' and $outMode!='excel' and $outMode!='txt' and (!$download or $outMode=='pdf') and !$noHeader) {?>
 </<?php echo ($printInNewPage or $outMode=='pdf')?'body':'div';?>>
 </page>
