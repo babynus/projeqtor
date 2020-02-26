@@ -284,7 +284,7 @@ class SupplierContractMain extends SqlElement {
       $colScript .="      case '2':";
       $colScript .="                var newDate= new Date(this.value);";
       $colScript .="                newDate.setUTCMonth(endDate.getUTCMonth()-noticePeriod);";
-      $colScript .="                dijit.byId('noticeDate').set('value',newDate);";
+      //$colScript .="                dijit.byId('noticeDate').set('value',newDate);";
       $colScript .="                break;";
       $colScript .="      case '3':";
       $colScript .="                var newDate= new Date(this.value);";
@@ -297,7 +297,7 @@ class SupplierContractMain extends SqlElement {
     }else if($colName=='noticeDate') {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .=" var endDate=dijit.byId('endDate').getValue();";
-      $colScript .=" var dayNoticeDate=(dijit.byId('noticeDate').getValue()).getDate();";
+      $colScript .=" var dayNoticeDate=this.value.getDate();";
       $colScript .=" var dayEndDate=endDate.getDate();";
       $colScript .=" var MonthNotice=this.value.getMonth();";
       $colScript .=" var MonthEnd=endDate.getMonth();";
@@ -308,11 +308,9 @@ class SupplierContractMain extends SqlElement {
       $colScript .="      dijit.byId('noticePeriod').set('value',Math.abs(nbY));";
       $colScript .="    }else if( dayNoticeDate == dayEndDate &&  MonthNotice!=MonthEnd ){ ";
       $colScript .="      var nbM=MonthNotice-MonthEnd;";
-      $colScript .="      if(dijit.byId('idUnitNotice').getValue()!=2)dijit.byId('idUnitNotice').set('value',2);";
+      $colScript .="      if(dijit.byId('idUnitNotice').getValue()!='2')dijit.byId('idUnitNotice').set('value',2);";
       $colScript .="      dijit.byId('noticePeriod').set('value',Math.abs(nbM));";
       $colScript .="    }else{ ";
-      $colScript .="      console.log(MonthNotice);";
-      $colScript .="      console.log(MonthEnd);";
       $colScript .="      var nbJ=dayDiffDates(this.value,endDate);";
       $colScript .="      dijit.byId('idUnitNotice').set('value',1);";
       $colScript .="      dijit.byId('noticePeriod').set('value',nbJ);";
@@ -331,7 +329,7 @@ class SupplierContractMain extends SqlElement {
       $colScript .="                break;";
       $colScript .="      case '2':";
       $colScript .="                var newDate= new Date(endDate);";
-      $colScript .="                newDate.setUTCMonth(endDate.getUTCMonth()-noticePeriod);";
+      $colScript .="                newDate.setMonth(endDate.getMonth()-noticePeriod);";
       $colScript .="                dijit.byId('noticeDate').set('value',newDate);";
       $colScript .="                break;";
       $colScript .="      case '3':";
@@ -357,7 +355,7 @@ class SupplierContractMain extends SqlElement {
       $colScript .="                break;";
       $colScript .="      case '2':";
       $colScript .="                var newDate= new Date(endDate);";
-      $colScript .="                newDate.setUTCMonth(endDate.getUTCMonth()-this.value);";
+      $colScript .="                newDate.setMonth(endDate.getMonth()-this.value);";
       $colScript .="                dijit.byId('noticeDate').set('value',newDate);";
       $colScript .="                break;";
       $colScript .="      case '3':";

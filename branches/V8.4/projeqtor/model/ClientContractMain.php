@@ -329,7 +329,7 @@ class ClientContractMain extends SqlElement {
       $colScript .="                break;";
       $colScript .="      case '2':";
       $colScript .="                var newDate= new Date(endDate);";
-      $colScript .="                newDate.setUTCMonth(endDate.getUTCMonth()-noticePeriod);";
+      $colScript .="                newDate.setMonth(endDate.getUTCMonth()-noticePeriod);";
       $colScript .="                dijit.byId('noticeDate').set('value',newDate);";
       $colScript .="                break;";
       $colScript .="      case '3':";
@@ -355,7 +355,7 @@ class ClientContractMain extends SqlElement {
       $colScript .="                break;";
       $colScript .="      case '2':";
       $colScript .="                var newDate= new Date(endDate);";
-      $colScript .="                newDate.setUTCMonth(endDate.getUTCMonth()-this.value);";
+      $colScript .="                newDate.setMonth(endDate.getUTCMonth()-this.value);";
       $colScript .="                dijit.byId('noticeDate').set('value',newDate);";
       $colScript .="                break;";
       $colScript .="      case '3':";
