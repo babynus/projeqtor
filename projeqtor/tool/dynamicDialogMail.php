@@ -26,7 +26,6 @@
 
 scriptLog('dynamicDialogMail.php');
 $isIE=false;
-debugLog($_REQUEST);
 if (array_key_exists('isIE',$_REQUEST)) {
 	$isIE=$_REQUEST['isIE'];
 } 
@@ -36,9 +35,9 @@ if($objectClass == 'TicketSimple'){
 }
 $objectId = RequestHandler::getId('objectId');
 $lstAttach= array();
+$lstDoc= array();
 $obj=new $objectClass($objectId);
 $emTp = new EmailTemplate();
-$attach= new Attachment();
 $idObjectType = 'id'.$objectClass.'Type';
 $idMailable = SqlList::getIdFromTranslatableName('Mailable', $objectClass);
 $where = "(idMailable = ".$idMailable." or idMailable IS NULL) and (idType = '".$obj->$idObjectType."' or idType IS NULL)";
@@ -53,11 +52,16 @@ if ($habil) {
     $displayComboButton=true;
   }
 }
-$show=( (RequestHandler::isCodeSet('show')) and RequestHandler::getValue('show')=='1')?true:false;
+$show=((RequestHandler::isCodeSet('show')) and RequestHandler::getValue('show')=='1')?true:false;
 if($show==true){
+  $attach= new Attachment();
+  $link= new Link();
   $where="refType='".$objectClass."' and refId=".$obj->id;
   $orderBy="creationDate ASC";
   $lstAttach=$attach->getSqlElementsFromCriteria(null,null,$where,$orderBy);
+  $where="ref2Type='".$objectClass."' and ref2Id=".$obj->id." and ref1Type in ('DocumentVersion','Document')";
+  $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
+  
 }
 
 
@@ -69,6 +73,7 @@ if($show==true){
       <td>
           <input id="mailRefType" name="mailRefType" type="hidden" value="" />
           <input id="mailRefId" name="mailRefId" type="hidden" value="" />
+          <input id="showAttach" name="showAttach" type="hidden" value="<?php echo $show; ?>" />
           <input id="idEmailTemplate" name="idEmailTemplate" type="hidden" value="" />
           <input id="previousEmail" name="previousEmail" type="hidden" value="" />
           <table style="white-space:nowrap">
@@ -275,10 +280,10 @@ if($show==true){
    </tr>
     <tr>
       <td align="center">
-        <button dojoType="dijit.form.Button" type="button" onclick="loadDialog('dialogMail',null,true,'&objectClass=<?php echo $objectClass;?>&objectId=<?php echo $objectId;?>&show=<?php echo ($show==true)?'0':'1'; ?>')">
+        <button dojoType="dijit.form.Button" type="button" onclick="showMailAtachement(<?php echo ($show==true)?'0':'1'; ?>)">
           <?php echo i18n("sendDetailElement");?>
         </button>
-        <button dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogMail').hide();">
+        <button dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogMail').hide();dijit.byId('showAttachement').hide();">
           <?php echo i18n("buttonCancel");?>
         </button>
         <button dojoType="dijit.form.Button" type="submit" id="dialogMailSubmit" onclick="stockEmailCurrent();protectDblClick(this);sendMail();return false;">
@@ -288,24 +293,65 @@ if($show==true){
     </tr>
   </table> 
   <?php if ($show==true){?>
-  <div  style="position:relative;top:10px;width:80%;left:10%;">
+  <div id='showAttachement' style="position:relative;top:10px;width:90%;left:5%;">
     <table style='width:100%'>
       <tr>
-        <td class='assignHeader' style='width:40%'><?php echo i18n('sectionAttachment');?></td>
-        <td class='assignHeader' style='width:20%'><?php echo i18n('attachedFileType');?></td>
-        <td class='assignHeader' style='width:20%'><?php echo i18n('FileSize');?></td>
-        <td class='assignHeader' style='width:20%'><?php echo i18n('DocumentVersion');?></td>
+        <td class='assignHeader' style='width:40%'><?php echo i18n('sectionAttachment').":&nbsp;";?></td>
+        <td class='assignHeader' style='width:20%'><?php echo i18n('dashboardTicketMainTitleType');?></td>
+        <td class='assignHeader' style='width:15%'><?php echo i18n('FileSize');?></td>
+        <td class='assignHeader' style='width:25%'><?php echo i18n('DocumentVersion');?></td>
       </tr>
       <?php 
       foreach($lstAttach as $attached){
         echo "<tr>";
-        echo "<td class='assignData verticalCenterData'>".$attached->fileName."</td>";
+        echo "<td class='assignData verticalCenterData'><div id='dialogMail".$attached->fileName."' name='dialogMailToUser' dojoType='dijit.form.CheckBox' type='checkbox' ></div>&nbsp;".$attached->fileName."</td>";
         echo " <td class='assignData verticalCenterData' style='text-align:center;'>$attached->type</td>";
         echo " <td class='assignData verticalCenterData' style='text-align:center;'>".(($attached->fileSize !='')?$attached->fileSize:'-')."</td>";
-        if($attached->type=='Document' or $attached->type=='DocumentVersion'){
-        }
         echo " <td class='assignData verticalCenterData'></td>";
         echo " </tr>";
+      }
+      if(!empty($lstDoc)){
+      echo "<tr>";
+      echo "<td class='assignHeader' >".i18n('Document').":&nbsp;</td>";
+      echo "<td class='assignHeader'></td>";
+      echo "<td class='assignHeader'></td>";
+      echo "<td class='assignHeader'></td>";
+      echo "</tr>";
+        foreach($lstDoc as $document){
+           if($document->ref1Type=='DocumentVersion'){
+              $docV= new DocumentVersion($document->ref1Id);
+              $name=$docV->fullName;
+              $filsize=$docV->fileSize;
+           }else{
+             $doc= new Document($document->ref1Id);
+             $vers='';
+             $name=$doc->name;
+             $docVersRf=new DocumentVersion($doc->idDocumentVersionRef);
+             $filsize=$docVersRf->fileSize;
+             if($doc->idDocumentVersion!=''){
+              $docVers=new DocumentVersion($doc->idDocumentVersion);
+              $filsize=$docVers->fileSize;
+              $vers=$docVers->name;
+             }
+             $versRef=$docVersRf->name;
+             if($vers==''){
+                $vers=$versRef;
+             }
+             
+          }
+          if($filsize==''){
+            $filsize='-';
+          }
+          echo "<tr>";
+          echo "<td class='assignData verticalCenterData'><div id='dialogMail".$name."' name='dialogMailToUser' dojoType='dijit.form.CheckBox' type='checkbox' ></div>&nbsp;".$name."</td>";
+          echo " <td class='assignData verticalCenterData' style='text-align:center;'>$document->ref1Type</td>";
+          echo " <td class='assignData verticalCenterData' style='text-align:center;'>".$filsize."</td>";
+          echo " <td class='assignData verticalCenterData'><input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='versionRef' value='1'/>";
+          echo "<label for='versionRef'>".((isset($docV))?$docV->name:$versRef)."</label>";
+          echo "<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='version' value='2'/>";
+          echo "<label for='version'>".((isset($docV))?'':$vers)."</label></td>";
+          echo " </tr>";
+        }
       }
       ?>
     </table>
