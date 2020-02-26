@@ -78,6 +78,8 @@ class ActivityMain extends SqlElement {
   public $_Dependency_Successor = array();
   public $_sec_Link;
   public $_Link = array();
+  public $_sec_subActivity;
+  public $_spe_activity;
   public $_Attachment = array();
   public $_Note = array();
   public $_nbColMax = 3;
