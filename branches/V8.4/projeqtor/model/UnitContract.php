@@ -12,6 +12,7 @@ class UnitContract extends SqlElement {
 	public $name;
 	public $sortOrder=0;
 	public $idle;
+	public $_isNameTranslatable = true;
 	//public $_sec_void;
 	
 	private static $_databaseTableName = 'unitcontract';
