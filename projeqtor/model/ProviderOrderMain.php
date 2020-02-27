@@ -356,21 +356,34 @@ class ProviderOrderMain extends SqlElement {
       }
       $projExpense->save();
       
-      $expenseLink = Parameter::getGlobalParameter('ExpenseLink');
-      if($expenseLink){
-        $link = new Link();
-        $listLink = $link->getSqlElementsFromCriteria(array('ref1Type'=>get_class($this),'ref1Id'=>$this->id));
-        foreach ($listLink as $lnk){
-          $class = $lnk->ref2Type;
-          $newObj = new $class($lnk->ref2Id);
-          if(property_exists($newObj, 'idProjectExpense')){
-            if(!$newObj->idProjectExpense){
-              $newObj->idProjectExpense = $this->idProjectExpense;
-              $newObj->save();
+      if(!$old->idProjectExpense){
+        $expenseLink = Parameter::getGlobalParameter('ExpenseLink');
+        if($expenseLink){
+          $link = new Link();
+          $listLink = $link->getSqlElementsFromCriteria(array('ref1Type'=>get_class($this),'ref1Id'=>$this->id));
+          foreach ($listLink as $lnk){
+            $class = $lnk->ref2Type;
+            $newObj = new $class($lnk->ref2Id);
+            if(property_exists($newObj, 'idProjectExpense')){
+              if(!$newObj->idProjectExpense){
+                $newObj->idProjectExpense = $this->idProjectExpense;
+                $newObj->save();
+              }
             }
           }
-        }
-      }      
+          $listLink2 = $link->getSqlElementsFromCriteria(array('ref2Type'=>get_class($this),'ref2Id'=>$this->id));
+          foreach ($listLink2 as $lnk){
+            $class = $lnk->ref1Type;
+            $newObj = new $class($lnk->ref1Id);
+            if(property_exists($newObj, 'idProjectExpense')){
+              if(!$newObj->idProjectExpense){
+                $newObj->idProjectExpense = $this->idProjectExpense;
+                $newObj->save();
+              }
+            }
+          }
+        }      
+      }
     }
     return $result;
   }
