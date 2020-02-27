@@ -1752,8 +1752,9 @@ function finalizeMessageDisplay(destination, validationType) {
 // MTY - LEAVE SYSTEM    
             loadDiv(url, 'buttonDivCreationInfo',null, callback);
 	          if (dojo.byId("HierarchicalBudget")) {
-		          loadContent("../view/refreshHierarchicalBudgetList.php", "hierarchicalListDiv", null, false);
-          	  }
+		          //loadContent("../view/refreshHierarchicalBudgetList.php", "hierarchicalListDiv", null, false);
+	            refreshHierarchicalBudgetList();
+          	}
           }
         }
         }
@@ -6665,15 +6666,15 @@ function expandHierarchicalBudgetGroup(idBudget, subBudget, recSubBudget, visibl
 	if(budgetClass == 'ganttExpandClosed'){
 		visibleRowList.forEach(function(item){
 			saveExpanded('hierarchicalBudgetRow_'+idBudget);
-			dojo.byId('hierarchicalBudgetRow_'+item).style.visibility = 'visible';
-			dojo.setAttr('group_'+idBudget, 'class', 'ganttExpandOpened');
+			if (dojo.byId('hierarchicalBudgetRow_'+item)) dojo.byId('hierarchicalBudgetRow_'+item).style.visibility = 'visible';
+			if (dojo.byId('group_'+idBudget)) dojo.setAttr('group_'+idBudget, 'class', 'ganttExpandOpened');
 		});
 		//refreshHierarchicalBudgetList();
 	}else{
 		recSubBudgetList.forEach(function(item){
 			saveCollapsed('hierarchicalBudgetRow_'+idBudget);
-			dojo.byId('hierarchicalBudgetRow_'+item).style.visibility = 'collapse';
-			dojo.setAttr('group_'+idBudget, 'class', 'ganttExpandClosed');
+			if (dojo.byId('hierarchicalBudgetRow_'+item)) dojo.byId('hierarchicalBudgetRow_'+item).style.visibility = 'collapse';
+			if (dojo.byId('group_'+idBudget)) dojo.setAttr('group_'+idBudget, 'class', 'ganttExpandClosed');
 		});
 	}
 }

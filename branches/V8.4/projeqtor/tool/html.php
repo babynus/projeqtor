@@ -48,7 +48,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
 	  if(sessionValueExists('listShowIdleBudget') and get_class($obj)=='Budget'){
 	    $listShowIdle = getSessionValue('listShowIdleBudget');
 	    if($listShowIdle=="on")$showIdle=true;
-	  }
+	  } 
 	  if(get_class($obj)=='Budget'){
 	   $listBudgetElementary = SqlList::getList('BudgetItem','id',null,$showIdle);
 	  }else{

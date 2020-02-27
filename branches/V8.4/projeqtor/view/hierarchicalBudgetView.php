@@ -45,39 +45,31 @@ if ( array_key_exists('print',$_REQUEST) ) {
 
 
 $showFullAmount = false;
-if(sessionValueExists('showFullAmount')){
-  $amount = getSessionValue('showFullAmount');
-  if($amount=='true'){
-  	$showFullAmount = true;
-  }else{
-  	$showFullAmount=false;
-  }
+if(getSessionValue('showFullAmountHierarchicalBudget')){
+  $showFullAmount=(getSessionValue('showFullAmountHierarchicalBudget')=='true')?true:false;
 }else{
-  $amount = Parameter::getGlobalParameter('ImputOfAmountProvider');
-  if($amount == 'HT'){
-  	$showFullAmount=false;
-  }else{
-  	$showFullAmount=true;
-  }
+  $showFullAmount=(Parameter::getGlobalParameter('ImputOfAmountProvider')== 'HT')?false:true;
 }
+$showClosed=(getSessionValue('listShowIdleBudget')=='on')?true:false;
 
-$currency = Parameter::getGlobalParameter('currency');
+$budgetParent=trim(getSessionValue('listBudgetParentFilter'));
 
-$querySelect ='';
-$queryFrom='';
-$queryWhere='';
-$queryOrderBy='';
 $idTab=0;
 
-$querySelect .= " * ";
-$queryFrom .= $table;
-//$queryWhere='idBudget is Null';
-$queryOrderBy .= " bbssortable ";
+$querySelect = " * ";
+$queryFrom = $table;
+$queryWhere=($showClosed)?'1=1':'idle=0';
+if ($budgetParent) {
+  $budg = new Budget($budgetParent);
+  $bbsSortable = $budg->bbsSortable;
+  $queryWhere.= ' and bbsSortable like "'.$bbsSortable.'%"';
+}
+$queryOrderBy =" bbssortable ";
 
 // constitute query and execute
 $query='select ' . $querySelect
 . ' from ' . $queryFrom
-//. ' where ' . $queryWhere
+.' where ' . $queryWhere
 . ' order by ' . $queryOrderBy;
 $result=Sql::query($query);
 
