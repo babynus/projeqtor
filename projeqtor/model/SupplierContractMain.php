@@ -36,9 +36,7 @@ class SupplierContractMain extends SqlElement {
   public $idProject;
   public $idUser;
   public $idProvider;
-  public $idContact;
   public $tenderReference;
-  public $phoneNumber;
   public $origin;
   public $description;
   public $_sec_Progress;
@@ -47,21 +45,18 @@ class SupplierContractMain extends SqlElement {
   public $endDate;
   public $initialContractTerm;
   public $idUnitContract;
-  public $idUnitNotice;
   public $noticePeriod;
+  public $idUnitNotice;
   public $noticeDate;
   public $deadlineDate;
   public $periodicityContract;
+  public $_lib_helpPeriodicityContract;
   public $periodicityBill;
-  public $_tab_2_1_int=array('StartTime', 'EndTime' , 'interventionTime');
-  public $interventionStartTime;
-  public $interventionEndTime; 
-  public $idPeriod;
+  public $_lib_helpPeriodicityBill;
   public $_sec_Treatment_right;
   public $idResource;
   public $idStatus;
   public $idRenewal;
-  public $sla;
   public $handled;
   public $handledDate;
   public $done;
@@ -69,6 +64,19 @@ class SupplierContractMain extends SqlElement {
   public $idle;
   public $idleDate;
   public $cancelled;
+  public $_lib_cancelled;
+  public $_sec_contacts;
+  public $idContact;
+  public $phoneNumber;
+  public $sla;
+  public $_lib_help_sla;
+  public $_tab_2_3=array('StartTime', 'EndTime' , 'weekPeriod','saturdayPeriod','sundayAndOffDayPeriod');
+  public $weekPeriod;
+  public $weekPeriodEnd;
+  public $saturdayPeriod;
+  public $saturdayPeriodEnd;
+  public $sundayAndOffDayPeriod;
+  public $sundayAndOffDayPeriodEnd;
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
@@ -98,12 +106,19 @@ class SupplierContractMain extends SqlElement {
                                   "cancelled"=>"nobr",
                                   "idStatus"=>"required",
                                   "startDate"=>"nobr",
+                                  "periodicityContract"=>"nobr",
+                                  "periodicityBill"=>"nobr",
+                                  "sla"=>"nobr",
+                                  "weekPeriod"=>"nobr",
+                                  "sundayAndOffDayPeriod"=>"nobr",
+                                  "startDate"=>"nobr",          
                                   "initialContractTerm"=>"nobr",
-                                  "idUnitContract"=>"size1/3"
+                                  "idUnitContract"=>"size1/3",
+                                  "noticePeriod"=>"nobr",
+                                  "idUnitNotice"=>"size1/3"
   );   
  
   private static $_colCaptionTransposition = array(
-   'idPeriod'=>'period',
    'idUser'=>'issuer',
    'idResource'=>'responsible',
    'idUnitContract'=>'idUnitDurationContract',
