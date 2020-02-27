@@ -86,6 +86,11 @@ class ProviderBillMain extends SqlElement {
   public $_spe_paymentsList;
   public $paymentsCount;
   public $comment;
+  
+  public $_sec_situation;
+  public $idSituation;
+  public $_spe_situation;
+  
   //link
   public $_sec_ProviderTerm;
   public $_ProviderTerm=array();
@@ -137,10 +142,11 @@ class ProviderBillMain extends SqlElement {
       'paymentsCount'=>'hidden',
       'lastPaymentDate'=>'hidden',
       "idProject"=>"required",
-      "discountFrom"=>"hidden");
+      "discountFrom"=>"hidden",
+      "idSituation"=>"readonly");
  
   
-  private static $_colCaptionTransposition = array('idResource'=> 'responsible');
+  private static $_colCaptionTransposition = array('idResource'=> 'responsible', 'idSituation'=>'actualSituation');
   public $_calculateForColumn=array("name"=>"concat(coalesce(externalReference,''),' - ',name,' (',coalesce(totalFullAmount,0),')')");
   private static $_databaseColumnName = array();
   /** ==========================================================================
@@ -524,6 +530,9 @@ class ProviderBillMain extends SqlElement {
         echo ' dojoType="dijit.form.CheckBox"  type="checkbox" >';
         echo '</div> ';
         echo ' ('.i18n("generateProjectExpenseFrom").')';
+    }else if($item=='situation'){
+      $situation = new Situation();
+      $situation->drawSituationHistory($this);
     } 
     return $result;
   }

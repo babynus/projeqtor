@@ -86,6 +86,11 @@ class CommandMain extends SqlElement {
   public $initialEndDate;
   public $validatedEndDate;
   public $comment;
+  
+  public $_sec_situation;
+  public $idSituation;
+  public $_spe_situation;
+  
   //public $_sec_BillLine;
   public $_BillLine=array();
   public $_BillLine_colSpan="2";
@@ -132,13 +137,14 @@ class CommandMain extends SqlElement {
                                   "initialPricePerDayAmount"=>"hidden",
                                   "addPricePerDayAmount"=>"hidden",
                                   "validatedPricePerDayAmount"=>"hidden",
-                                  "idProject"=>"required"
+                                  "idProject"=>"required",
+                                  "idSituation"=>"readonly"
   );  
   
   private static $_colCaptionTransposition = array('idUser'=>'issuer', 
                                                    'idResource'=> 'responsible',
   													'idActivity'=>'linkActivity',
-  'idDeliveryMode'=>'receiveMode');
+  'idDeliveryMode'=>'receiveMode', 'idSituation'=>'actualSituation');
   private static $_databaseColumnName = array('taxPct'=>'tax');
 //  private static $_databaseColumnName = array('idResource'=>'idUser');
     
@@ -421,6 +427,16 @@ class CommandMain extends SqlElement {
       self::$_fieldsAttributes['untaxedAmount']="readonly";
       self::$_fieldsAttributes['addUntaxedAmount']="readonly";
     }
+  }
+  
+  public function drawSpecificItem($item){
+  	global $comboDetail, $print, $outMode, $largeWidth;
+  	$result="";
+  	if($item=='situation'){
+  		$situation = new Situation();
+  		$situation->drawSituationHistory($this);
+  	}
+  	return $result;
   }
   
 }
