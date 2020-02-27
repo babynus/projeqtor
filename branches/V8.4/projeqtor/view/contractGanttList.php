@@ -55,13 +55,13 @@ if($objectClass ==='ClientContract'){
        <input type="hidden" id="objectId" name="objectId" value="<?php echo $objectId;?>" />
 		<table width="100%" height="27px" class="listTitle" >
 		  <tr height="27px">
-		  	<td style="vertical-align:top; min-width:100px; width:10%">
+		  	<td style="vertical-align:top; min-width:100px; width:25%">
 		      <table >
     		    <tr height="32px">
         		  <td width="50px"  style="min-width:50px"  align="center">
                     <?php echo formatIcon($typeGanttContract, 32, null, true);?>
                   </td>
-                  <td width="200px" ><span class="title" style="max-width:200px;white-space:normal"><?php echo i18n('menu'.$typeGanttContract);?></span></td>
+                  <td width="400px" ><span class="title" style="max-width:200px;white-space:normal"><?php echo i18n('menu'.$typeGanttContract);?></span></td>
     		    </tr>
                 <tr height="32px">
         	       <td width="50px"  style="min-width:50px"  align="center">
@@ -69,11 +69,11 @@ if($objectClass ==='ClientContract'){
   		      </tr>
 		    </table>
           </td>
-		   <td style="width:80%;" >   
+		   <td style="width:75%;" >   
 		   <table>
 		    <tr>
 		      <td style="width:95%;">
-		        <table style="width:50%;">
+		        <table style="width:30%;">
 		          <tr>
 		          <td style="white-space:nowrap;width:30%;padding-left:5%;">
 		            <table>
@@ -156,10 +156,10 @@ if($objectClass ==='ClientContract'){
                     </tr>
                   </table>
                  </td>
-                 <td style="width:5%;">
+                 <td style="width:5%;text-align:right;">
                   <table>
                       <tr style="white-space:nowrap;">
-		                <td style="width:120px;">
+		                <td style="width:120px;padding-right:8px;">
 		                  <?php echo i18n("labelShowIdleShort");?>
                         </td>
                         <td style="width:50px;">
@@ -175,7 +175,7 @@ if($objectClass ==='ClientContract'){
                         <?php if (strtoupper(Parameter::getGlobalParameter('displayResourcePlan'))!='NO') {?>
                       </tr>
                       <tr style="white-space:nowrap;">
-                        <td style="width:120px;">
+                        <td style="width:120px;padding-right:8px;">
                           <?php echo i18n("labelShowResourceShort");?>
                         </td>
                         <td style="white-space:nowrap;width:50px;">
