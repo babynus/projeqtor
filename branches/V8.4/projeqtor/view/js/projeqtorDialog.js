@@ -7689,7 +7689,19 @@ function movePlanningColumn(source, destination) {
 }
 
 function moveBudgetFromHierarchicalView(idFrom, idTo){
-	 var url='../tool/moveBudgetFromHierarchicalView.php?idFrom=' + idFrom +'&idTo='+idTo;
+  var mode = 'before';
+  dndSourceTableBudget.sync();
+  var nodeList = dndSourceTableBudget.getAllNodes();
+  for (i = 0; i < nodeList.length; i++) {
+    if  (nodeList[i].id == idFrom) {
+      mode = 'before';
+      break;
+    } else if (nodeList[i].id == idTo) {
+      mode = 'after';
+      break;
+    }
+  }
+	 var url='../tool/moveBudgetFromHierarchicalView.php?idFrom=' + idFrom +'&idTo='+idTo+'&mode='+mode;
 	  dojo.xhrPost({
 	    url : url,
 	    handleAs : "text",
