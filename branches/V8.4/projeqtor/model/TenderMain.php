@@ -203,6 +203,7 @@ class TenderMain extends SqlElement {
    * @return the return message of persistence/SqlElement#save() method
    */
   public function save() {
+    $old=$this->getOld();
     if (trim($this->idProvider)) {
       $provider=new Provider($this->idProvider);
       if ($provider->taxPct!='' and !$this->taxPct) {
@@ -266,23 +267,24 @@ class TenderMain extends SqlElement {
           $number++;
         }
       }
-      $expenseLink = Parameter::getGlobalParameter('ExpenseLink');
-      if($expenseLink){
-        $link = new Link();
-        $listLink = $link->getSqlElementsFromCriteria(array('ref1Type'=>get_class($this),'ref1Id'=>$this->id));
-        foreach ($listLink as $lnk){
-          $class = $lnk->ref2Type;
-          $newObj = new $class($lnk->ref2Id);
-          if(property_exists($newObj, 'idProjectExpense')){
-            if(!$newObj->idProjectExpense){
-              $newObj->idProjectExpense = $this->idProjectExpense;
-              $newObj->save();
+      if(!$old->idProjectExpense){
+        $expenseLink = Parameter::getGlobalParameter('ExpenseLink');
+        if($expenseLink){
+          $link = new Link();
+          $listLink = $link->getSqlElementsFromCriteria(array('ref1Type'=>get_class($this),'ref1Id'=>$this->id));
+          foreach ($listLink as $lnk){
+            $class = $lnk->ref2Type;
+            $newObj = new $class($lnk->ref2Id);
+            if(property_exists($newObj, 'idProjectExpense')){
+              if(!$newObj->idProjectExpense){
+                $newObj->idProjectExpense = $this->idProjectExpense;
+                $newObj->save();
+              }
             }
           }
         }
       }
     }
-    
     
     // Update amounts
     if ($this->untaxedAmount!=null) {
