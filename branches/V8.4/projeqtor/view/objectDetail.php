@@ -8144,6 +8144,7 @@ function endBuffering($prevSection, $included) {
       'componentversioncomposition'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
       'componentversionstructure'=>array('2'=>'left', '3'=>'right','99'=>'configuration'),
       'context'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'),
+      'contacts'=>array('2'=>'right', '3'=>'right','99'=>'treatment'),
       'delivery'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
       'description'=>array('2'=>'left', '3'=>'left','99'=>'description'), 
       'evaluation'=>array('2'=>'left', '3'=>'extra','99'=>'progress'), 
