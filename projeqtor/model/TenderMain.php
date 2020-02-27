@@ -94,6 +94,10 @@ class TenderMain extends SqlElement {
   public $evaluationValue;
   public $evaluationRank;
   
+  public $_sec_situation;
+  public $idSituation;
+  public $_spe_situation;
+  
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
@@ -134,11 +138,12 @@ class TenderMain extends SqlElement {
                                   "evaluationValue"=>"readonly",
                                   "evaluationRank"=>"hidden,readonly",
                                   "idProvider"=>"required",
-                                  "discountFrom"=>"hidden"
+                                  "discountFrom"=>"hidden",
+                                  "idSituation"=>"readonly"
   );  
   
   private static $_colCaptionTransposition = array('idTenderType'=>'type', 'requestDateTime'=>'requestDate', 'expectedTenderDateTime'=>'expectedTenderDate',
-     'idResource'=>'responsible' );
+     'idResource'=>'responsible','idSituation'=>'actualSituation' );
   
   private static $_databaseColumnName = array();
   
@@ -537,6 +542,9 @@ class TenderMain extends SqlElement {
       echo ' dojoType="dijit.form.CheckBox"  type="checkbox" >';
       echo '</div> ';
       echo ' ('.i18n("generateProjectExpenseFrom").')';
+    }else if($item=='situation'){
+      $situation = new Situation();
+      $situation->drawSituationHistory($this);
     } 
     return $result;
   }
