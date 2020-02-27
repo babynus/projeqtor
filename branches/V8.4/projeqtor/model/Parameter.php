@@ -410,6 +410,11 @@ class Parameter extends SqlElement {
                     'CLICK'=>i18n('displayYesShowOnClick'));
         break;
       //gautier #financial
+      case 'ExpenseLink':
+        $list=array('false'=>i18n('displayNo'),
+                    'true'=>i18n('displayYes'));
+        break;
+        
       case 'ImputOfAmountClient':
         $list=array('HT'=>i18n('imputHT'),
                     'TTC'=>i18n('imputTTC'));
@@ -969,6 +974,8 @@ class Parameter extends SqlElement {
                             'sectionFinancialClient'=>'section',
                               'ImputOfAmountClient'=>'list',
                               'ImputOfBillLineClient'=>'list',
+                              'sectionFinancialExpense'=>'section',
+                              'ExpenseLink'=>'list',
                           'newColumnbFinancialRight'=>'newColumn',
                         'tabMail'=>"tab",   
                           'newColumnMailLeft'=>'newColumn',
