@@ -6649,6 +6649,7 @@ function refreshHierarchicalBudgetList(){
 	showWait();
 	callback=function(){
 		hideWait();
+		if (dijit.byId('listDiv')) dijit.byId('listDiv').resize();
 	}
 	loadContent("../view/refreshHierarchicalBudgetList.php", "hierarchicalListDiv", null, false, null, null, null, callback, null);
 }

@@ -130,21 +130,35 @@ if(sessionValueExists('showFullAmount')){
         <div id="menuName" style="width:100%;position:absolute;top:8px;text-overflow:ellipsis;overflow:hidden;"><span id="classNameSpan" style="padding-left:5px;"><?php echo i18n("menuHierarchicalBudget");?></span></div>
       </div>
     </td>
-    <td style="height:35px;width:80%;">
-    <?php if($positionListDiv == 'left'){ $style='float:left;margin-left:40%;width:12%';}else{$style='float:right;margin-right: 2%;width:12%;';}?>
-        <table style="<?php echo $style;?>">
+    <td style="height:35px;width:80%; text-align:right">
+    <?php if($positionListDiv == 'left'){ $style='float:right;margin-left:40%;width:12%';}else{$style='float:right;margin-right: 2%;width:12%;';}?>
+        <table style="float:right; margin-right:5px">
           <tr>
+            <td>
+              <label for="showFullAmount" class="Label" style="text-shadow: 0px 0px;margin-left: 5px;width:150px;text-align:left"><?php echo i18n('showFullAmount')?></label>  
+            </td>
             <td>
               <div title="<?php echo i18n('showFullAmount')?>" dojoType="dijit.form.CheckBox" type="checkbox" class="whiteCheck"
                 id="showFullAmount" name="showFullAmount" <?php if ($showFullAmount) echo "checked=ckecked"?>>
                 <script type="dojo/method" event="onChange" >
-                  saveDataToSession('showFullAmount', this.checked, false);
+                  saveDataToSession('showFullAmountHierarchicalBudget', this.checked, true);
                   refreshHierarchicalBudgetList();
                 </script>
               </div>
             </td>
+          </tr>
+          <tr>
             <td>
-              <label for="showFullAmount" class="Label" style="text-shadow: 0px 0px;margin-left: 5px;width:150px;text-align:left"><?php echo i18n('showFullAmount')?></label>  
+              <label for="showClosed" class="Label" style="text-shadow: 0px 0px;margin-left: 5px;width:150px;text-align:left"><?php echo i18n('labelShowIdle')?></label>  
+            </td>
+            <td>
+              <div title="<?php echo i18n('labelShowIdle')?>" dojoType="dijit.form.CheckBox" type="checkbox" class="whiteCheck"
+                id="showClosed" name="showClosed" <?php if ($showFullAmount) echo "checked=ckecked"?>>
+                <script type="dojo/method" event="onChange" >
+                  saveDataToSession('showClosedHierarchicalBudget', this.checked, true);
+                  refreshHierarchicalBudgetList();
+                </script>
+              </div>
             </td>
           </tr>
         </table>
@@ -153,7 +167,7 @@ if(sessionValueExists('showFullAmount')){
 </table>
 </div>
   <div id="listDiv" dojoType="dijit.layout.ContentPane" region="<?php  echo $positionListDiv;?>" splitter="true" 
-   style="<?php if($positionListDiv=='top'){echo "height:".$listHeight;}else{ echo "width:".$tableWidth[0];}?>;overflow-y: auto;">
+   style="<?php if($positionListDiv=='top'){echo "height:".$listHeight;}else{ echo "width:".$tableWidth[0];}?>;overflow-y: none;">
     <script type="dojo/connect" event="resize" args="evt">
          if (switchedMode) return;
          var paramDiv=<?php  echo json_encode($positionListDiv); ?>;
@@ -163,12 +177,15 @@ if(sessionValueExists('showFullAmount')){
           }else{
             saveContentPaneResizing("contentPaneTopDetailDivWidth<?php  echo $currentScreen;?>", dojo.byId("listDiv").offsetWidth, true);
           }
+         var headerHeight=dojo.byId('hierarchicalBudgetListHeader').offsetHeight;
+         var totalHeight=dojo.byId('listDiv').offsetHeight;
+         dojo.byId('hierarchicalBudgetListDiv').style.height=(totalHeight-headerHeight)+'px';
     </script>
     <form dojoType="dijit.form.Form" id="listForm" action="" method="" >
       <input type="hidden" name="objectClass" id="objectClass" value="Budget" />
       <input type="hidden" id="objectId" name="objectId" value="<?php if (isset($_REQUEST['objectId']))  { echo htmlEncode($_REQUEST['objectId']);}?>"/>
     </form>
-    <div id="hierarchicalListDiv" name="hierarchicalListDiv" dojoType="dijit.layout.ContentPane" region="center" >
+    <div id="hierarchicalListDiv" name="hierarchicalListDiv"  style="overflow-x:auto;overflow-y:hidden;height:100%">
     <?php include 'hierarchicalBudgetView.php'?>
     </div>
   </div>
