@@ -66,7 +66,7 @@ class SupplierContractMain extends SqlElement {
   public $cancelled;
   public $_lib_cancelled;
   public $_sec_contacts;
-  public $idContact;
+  public $idContactContract;
   public $phoneNumber;
   public $sla;
   public $_lib_help_sla;
@@ -120,6 +120,7 @@ class SupplierContractMain extends SqlElement {
  
   private static $_colCaptionTransposition = array(
    'idUser'=>'issuer',
+   'idContactContract'=>'idContact',
    'idProvider'=>'idProviderContract',
    'idResource'=>'responsible',
    'idUnitContract'=>'idUnitDurationContract',
