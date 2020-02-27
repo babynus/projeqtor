@@ -88,6 +88,11 @@ class ProviderOrderMain extends SqlElement {
   //tab term
   public $_sec_ProviderTerm;
   public $_spe_ProviderTerm;
+  
+  public $_sec_situation;
+  public $idSituation;
+  public $_spe_situation;
+  
   //link
   public $_sec_Link;
   public $_Link=array();
@@ -130,10 +135,11 @@ class ProviderOrderMain extends SqlElement {
       "addPricePerDayAmount"=>"hidden",
       "validatedPricePerDayAmount"=>"hidden",
       "idProject"=>"required",
-      "discountFrom"=>"hidden");
+      "discountFrom"=>"hidden",
+      "idSituation"=>"readonly");
  
   
-  private static $_colCaptionTransposition = array('idResource'=> 'responsible');
+  private static $_colCaptionTransposition = array('idResource'=> 'responsible', 'idSituation'=>'actualSituation');
   
   private static $_databaseColumnName = array();
   /** ==========================================================================
@@ -438,6 +444,9 @@ class ProviderOrderMain extends SqlElement {
         echo ' dojoType="dijit.form.CheckBox"  type="checkbox" >';
         echo '</div> ';
         echo ' ('.i18n("generateProjectExpenseFrom").')';
+    }else if($item=='situation'){
+      $situation = new Situation();
+      $situation->drawSituationHistory($this);
     } 
     return $result;
   }

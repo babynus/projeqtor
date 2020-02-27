@@ -217,6 +217,40 @@ INSERT INTO `${prefix}renewal` (`id`, `name`,  `sortOrder`, `idle`) VALUES
 
 
 -- ======================================
+-- Situation
+-- ======================================
+
+CREATE TABLE `${prefix}situation` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `refType` varchar(100) NOT NULL,
+  `refId` int(12) unsigned NOT NULL,
+  `idProject` int(12) unsigned NOT NULL,
+  `situation` varchar(100) DEFAULT NULL,
+  `situationType` varchar(100) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `idUser` int(12) unsigned DEFAULT NULL,
+  `idResource` int(12) unsigned DEFAULT NULL,
+  `comment` mediumtext DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+CREATE TABLE `${prefix}projectSituation` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `idProject` int(12) unsigned NOT NULL,
+  `idSituationExpense` int(12) unsigned NOT NULL,
+  `idSituationIncome` int(12) unsigned NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+ALTER TABLE `${prefix}callfortender` ADD `idSituation` int(12) unsigned DEFAULT NULL;
+ALTER TABLE `${prefix}tender` ADD `idSituation` int(12) unsigned DEFAULT NULL;
+ALTER TABLE `${prefix}providerorder` ADD `idSituation` int(12) unsigned DEFAULT NULL;
+ALTER TABLE `${prefix}providerbill` ADD `idSituation` int(12) unsigned DEFAULT NULL;
+ALTER TABLE `${prefix}bill` ADD `idSituation` int(12) unsigned DEFAULT NULL;
+ALTER TABLE `${prefix}quotation` ADD `idSituation` int(12) unsigned DEFAULT NULL;
+ALTER TABLE `${prefix}command` ADD `idSituation` int(12) unsigned DEFAULT NULL;
+
+-- ======================================
 -- Habilitation Other
 -- ======================================
 INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT `profile`.id , 'generateProjExpense', 1 FROM `profile`;

@@ -893,6 +893,10 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $crit=array('idResource'=>$obj->id);
         $resSup=new ResourceSupport();
         $cpt=$resSup->countSqlElementsFromCriteria($crit);
+      } else if ($section=='situation') {
+        $crit=array('refId'=>$obj->id, 'refType'=>get_class($obj));
+        $situation=new Situation();
+        $cpt=$situation->countSqlElementsFromCriteria($crit);
       } else {
         // ADD BY Marc TABARY - 2017-03-16 - FORCE SECTION ITEM'S COUNT
         // Want a item's count on section header

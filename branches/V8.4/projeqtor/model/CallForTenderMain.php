@@ -76,6 +76,10 @@ class CallForTenderMain extends SqlElement {
   public $fixValue;
   public $_lib_colFixValue;
   
+  public $_sec_situation;
+  public $idSituation;
+  public $_spe_situation;
+  
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
@@ -104,7 +108,8 @@ class CallForTenderMain extends SqlElement {
                                   "idleDate"=>"nobr",
                                   "cancelled"=>"nobr",
                                   "evaluationMaxValue"=>"nobr",
-                                  "fixValue"=>"nobr"
+                                  "fixValue"=>"nobr",
+                                  "idSituation"=>"readonly"
   );  
   
   private static $_colCaptionTransposition = array('idUser'=>'issuer',
@@ -112,6 +117,7 @@ class CallForTenderMain extends SqlElement {
       'idResource'=>'responsible',
       'sendDateTime'=>'sendDate',
       'expectedTenderDateTime'=>'expectedTenderDate',
+      'idSituation'=>'actualSituation'
   );
   
   private static $_fieldsTooltip = array(
@@ -249,6 +255,10 @@ class CallForTenderMain extends SqlElement {
     }
     if ($item == 'submissions' and ! $comboDetail) {
       $this->drawTenderSubmissionsFromObject();
+    }
+    if ($item == 'situation' and ! $comboDetail) {
+      $situation = new Situation();
+      $situation->drawSituationHistory($this);
     }
     return $result;
   }

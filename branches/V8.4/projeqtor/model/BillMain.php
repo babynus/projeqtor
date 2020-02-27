@@ -71,6 +71,11 @@ class BillMain extends SqlElement {
   public $paymentsCount;
   public $description;
   public $billingType;
+  
+  public $_sec_situation;
+  public $idSituation;
+  public $_spe_situation;
+  
   //public $_sec_BillLine;
   public $_BillLine=array();
   public $_BillLine_colSpan="2";
@@ -120,10 +125,11 @@ class BillMain extends SqlElement {
                                                    'idDeliveryMode'=>'sendMode',
                                                    "idUser"=>"issuer",
                                                    'idResource'=>'responsible',
-                                                   'paymentDone'=>'paymentComplete'
+                                                   'paymentDone'=>'paymentComplete',
+                                                    "idSituation"=>"readonly"
   );
   
-  private static $_databaseColumnName = array('taxPct'=>'tax');
+  private static $_databaseColumnName = array('taxPct'=>'tax', 'idSituation'=>'actualSituation');
   public $_calculateForColumn=array("name"=>"concat(coalesce(reference,''),' - ',name,' (',coalesce(fullAmount,0),')')");
   public $_sortCriteriaForList="fullAmount, id";
     
@@ -442,7 +448,6 @@ class BillMain extends SqlElement {
         if ($this->billingType) $result .=  i18n('billingType'.$this->billingType) ;
       }
 	    $result .= '</td></tr></table>';
-      return $result;     
     } else if ($item=='paymentsList') {
       if (!$this->id) return '';
       $pay=new Payment();
@@ -462,8 +467,11 @@ class BillMain extends SqlElement {
       }
       $result.='</table>';
       $result.='</div>';
-      return $result;
+    }else if($item=='situation'){
+      $situation = new Situation();
+      $situation->drawSituationHistory($this);
     }
+    return $result;
   }
   
   // Save without extra save() feature and without controls

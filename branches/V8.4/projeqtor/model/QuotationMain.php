@@ -74,6 +74,11 @@ class QuotationMain extends SqlElement {
   public $plannedWork;
 
   public $comment;
+  
+  public $_sec_situation;
+  public $idSituation;
+  public $_spe_situation;
+  
   //public $_sec_BillLine;
   public $_BillLine=array();
   public $_BillLine_colSpan="2";
@@ -111,7 +116,8 @@ class QuotationMain extends SqlElement {
                                   "idle"=>"nobr",
   								                "idleDate"=>"nobr",
                                   "cancelled"=>"nobr",
-                                  "taxAmount"=>"calculated,readonly"
+                                  "taxAmount"=>"calculated,readonly",
+                                  "idSituation"=>"readonly"
   );  
   
   private static $_colCaptionTransposition = array('idUser'=>'issuer', 
@@ -125,7 +131,7 @@ class QuotationMain extends SqlElement {
                             'description'=>'request',
                             'idPaymentDelay'=>'paymentDelay',
                             'idDeliveryMode'=>'sendMode', 
-                            'plannedWork'=>'estimatedWork');
+                            'plannedWork'=>'estimatedWork','idSituation'=>'actualSituation');
   private static $_databaseColumnName = array('taxPct'=>'tax');
 //  private static $_databaseColumnName = array('idResource'=>'idUser');
     
@@ -330,6 +336,16 @@ class QuotationMain extends SqlElement {
     }else{
       self::$_fieldsAttributes['untaxedAmount']="readonly";
     }
+  }
+  
+  public function drawSpecificItem($item, $included=false) {
+  	global $print, $comboDetail, $nbColMax;
+  	$result = "";
+  	if ($item == 'situation' and ! $comboDetail) {
+  		$situation = new Situation();
+  		$situation->drawSituationHistory($this);
+  	}
+  	return $result;
   }
   
 }
