@@ -68,7 +68,6 @@ $preseveHtmlFormatingForPDF=true;
 // ********************************************************************************************************
 // MAIN PAGE
 // ********************************************************************************************************
-
 // fetch information depending on, request
 $objClass=$_REQUEST['objectClass'];
 Security::checkValidClass($objClass, 'objectClass');
@@ -93,6 +92,10 @@ if($insertPlanningItem){
   $currentItemParent = RequestHandler::getId('currentItemParent');
   $classItemParent = RequestHandler::getClass('originClass');
   if (SqlElement::class_exists($classItemParent)) $objInsert = new $classItemParent($currentItemParent);
+  if(RequestHandler::isCodeSet('currentPlanning'))$plan= RequestHandler::getValue('currentPlanning');
+  if($objInsert and isset($plan)and  $plan=='ResourcePlanning'){
+    debugLog($objInsert);
+  }
 }
 
 if ($noselect) {
