@@ -974,7 +974,7 @@ class Parameter extends SqlElement {
                             'sectionFinancialClient'=>'section',
                               'ImputOfAmountClient'=>'list',
                               'ImputOfBillLineClient'=>'list',
-                              'sectionFinancialExpense'=>'section',
+                              'sectionFinancialAutomation'=>'section',
                               'ExpenseLink'=>'list',
                           'newColumnbFinancialRight'=>'newColumn',
                         'tabMail'=>"tab",   
