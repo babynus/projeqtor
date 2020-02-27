@@ -3951,3 +3951,23 @@ div.ticketKanbanCustom .kanbanVersion{
   transition: opacity 0.5s;
   -webkit-transition: opacity 0.5s;
 }
+
+.amountTableDiv {
+  overflow:hidden;
+  white-space:nowrap;
+  padding:1px 3px 1px 0px;
+  width:90px;
+}
+.amountTableHeaderDiv {
+  overflow:hidden;
+  width:95px;
+}
+.amountTableTD {
+	text-align:right;
+	width:85px;
+}
+.amountTableHeaderTD {
+  text-align:center;
+  width:95px;
+  padding:0;
+}
