@@ -32,7 +32,5 @@ require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
 scriptLog('   ->/view/refreshHhierarchicalList.php'); 
 
-?>
-<div id="hierarchicalListDiv" name="hierarchicalListDiv">
-  <?php include 'hierarchicalBudgetView.php'?>
-</div>
+include 'hierarchicalBudgetView.php';
+

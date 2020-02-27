@@ -99,21 +99,14 @@ if ($displayWidthList<1400) {
 $extrahiddenFields=$obj->getExtraHiddenFields('*','*');
 
 $showFullAmount = false;
-if(sessionValueExists('showFullAmount')){
-  $amount = getSessionValue('showFullAmount');
-  if($amount=='true'){
-  	$showFullAmount = true;
-  }else{
-  	$showFullAmount=false;
-  }
+if(getSessionValue('showFullAmountHierarchicalBudget')){
+  $showFullAmount=(getSessionValue('showFullAmountHierarchicalBudget')=='true')?true:false;
 }else{
-  $amount = Parameter::getGlobalParameter('ImputOfAmountProvider');
-  if($amount == 'HT'){
-  	$showFullAmount=false;
-  }else{
-  	$showFullAmount=true;
-  }
+  $showFullAmount=(Parameter::getGlobalParameter('ImputOfAmountProvider')== 'HT')?false:true;
 }
+$showClosed=(getSessionValue('listShowIdleBudget')=='on')?true:false;
+
+$budgetParent=getSessionValue('listBudgetParentFilter');
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="HierarchicalBudget" />
 <input type="hidden" name="HierarchicalBudget" id="HierarchicalBudget" value="true" />
@@ -130,6 +123,25 @@ if(sessionValueExists('showFullAmount')){
         <div id="menuName" style="width:100%;position:absolute;top:8px;text-overflow:ellipsis;overflow:hidden;"><span id="classNameSpan" style="padding-left:5px;"><?php echo i18n("menuHierarchicalBudget");?></span></div>
       </div>
     </td>
+                   <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD parentBudgetSearchTD allSearchFixLength">
+                 <span class="nobr">&nbsp;&nbsp;&nbsp;
+                <?php echo i18n("colParentBudget");?>
+                &nbsp;</span>
+              </td>
+              <td width="5px" class="allSearchTD parentBudgetSearchTD">
+                <select title="<?php echo i18n('filterOnBudgetParent')?>" type="text" class="filterField roundedLeft" dojoType="dijit.form.FilteringSelect"
+                <?php echo autoOpenFilteringSelect();?> 
+                data-dojo-props="queryExpr: '*${0}*',autoComplete:false"
+                id="listBudgetParentFilter" name="listBudgetParentFilter" style="width:<?php echo $referenceWidth*4;?>px" value="<?php if(!$comboDetail and sessionValueExists('listBudgetParentFilter')){ echo getSessionValue('listBudgetParentFilter'); }?>" >
+                  <?php 
+                   //gautier #indentBudget
+                   htmlDrawOptionForReference('idBudgetItem',$budgetParent,$obj,false);?>
+                  <script type="dojo/method" event="onChange" >
+                    var callBack=function() {refreshHierarchicalBudgetList();};
+                    saveDataToSession('listBudgetParentFilter', this.value, false,callBack);
+                  </script>
+                </select>
+              </td>
     <td style="height:35px;width:80%; text-align:right">
     <?php if($positionListDiv == 'left'){ $style='float:right;margin-left:40%;width:12%';}else{$style='float:right;margin-right: 2%;width:12%;';}?>
         <table style="float:right; margin-right:5px">
@@ -141,8 +153,9 @@ if(sessionValueExists('showFullAmount')){
               <div title="<?php echo i18n('showFullAmount')?>" dojoType="dijit.form.CheckBox" type="checkbox" class="whiteCheck"
                 id="showFullAmount" name="showFullAmount" <?php if ($showFullAmount) echo "checked=ckecked"?>>
                 <script type="dojo/method" event="onChange" >
-                  saveDataToSession('showFullAmountHierarchicalBudget', this.checked, true);
-                  refreshHierarchicalBudgetList();
+                  var callBack=function() {refreshHierarchicalBudgetList();};
+                  saveDataToSession('showFullAmountHierarchicalBudget', this.checked, false,callBack);
+                  
                 </script>
               </div>
             </td>
@@ -153,10 +166,13 @@ if(sessionValueExists('showFullAmount')){
             </td>
             <td>
               <div title="<?php echo i18n('labelShowIdle')?>" dojoType="dijit.form.CheckBox" type="checkbox" class="whiteCheck"
-                id="showClosed" name="showClosed" <?php if ($showFullAmount) echo "checked=ckecked"?>>
+                id="showClosed" name="showClosed" <?php if ($showClosed) echo "checked=ckecked"?>>
                 <script type="dojo/method" event="onChange" >
-                  saveDataToSession('showClosedHierarchicalBudget', this.checked, true);
-                  refreshHierarchicalBudgetList();
+                  var callBack=function() {refreshHierarchicalBudgetList();};
+                  saveDataToSession('listShowIdleBudget', this.value, false,callBack);
+                  var selectedParent=dijit.byId('listBudgetParentFilter').get('value');
+                  if (! selectedParent || selectedParent==' ') selectedParent=null;
+                  refreshList('idBudgetParent','showIdle',dijit.byId('showClosed').get('value'),selectedParent,'listBudgetParentFilter');
                 </script>
               </div>
             </td>
@@ -185,7 +201,7 @@ if(sessionValueExists('showFullAmount')){
       <input type="hidden" name="objectClass" id="objectClass" value="Budget" />
       <input type="hidden" id="objectId" name="objectId" value="<?php if (isset($_REQUEST['objectId']))  { echo htmlEncode($_REQUEST['objectId']);}?>"/>
     </form>
-    <div id="hierarchicalListDiv" name="hierarchicalListDiv"  style="overflow-x:auto;overflow-y:hidden;height:100%">
+    <div id="hierarchicalListDiv" dojoType="dijit.layout.ContentPane" name="hierarchicalListDiv"  style="overflow-x:auto;overflow-y:hidden;height:100%">
     <?php include 'hierarchicalBudgetView.php'?>
     </div>
   </div>
