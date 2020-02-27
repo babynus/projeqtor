@@ -51,8 +51,11 @@ class AssetMain extends SqlElement {
   public $idAffectable;
   public $idProvider;
   public $idle;
+  public $_sec_AssetComposition;
+  public $_assetComposition=array();
   public $_sec_ComponentVersionStructureAsset;
   public $_componentVersionStructureAsset=array();
+  public $_spe_arboAsset;
   public $_sec_Link;
   public $_Link = array();
   public $_Attachment = array();
@@ -98,6 +101,19 @@ class AssetMain extends SqlElement {
     parent::__destruct();
   }
 
+  public function control(){
+    $result="";
+    if ($this->id == $this->idAsset and $this->id)$result .= '<br/>' . i18n ( 'assetParentCanNotBeHimself' );
+    
+    $defaultControl=parent::control();
+    if ($defaultControl!='OK') {
+      $result.=$defaultControl;
+    }
+    if ($result=="") {
+      $result='OK';
+    }
+    return $result;
+  }
 // ============================================================================**********
 // GET STATIC DATA FUNCTIONS
 // ============================================================================**********
@@ -142,7 +158,49 @@ class AssetMain extends SqlElement {
    *  must be redefined in the inherited class
    */
   public function drawSpecificItem($item){
-    $result="";
+    global $print;
+    $result = "";
+    if($item == 'arboAsset'){
+      if ($print) return "";
+      $result='<br/><table>';
+      $result.='<tr>';
+      $result.='<td rowspan="2" style="padding-left:10px">';
+      $result.='<button id="showStructureButton" dojoType="dijit.form.Button" showlabel="true"';
+      $result.=' title="'.i18n('showStructure').'" style="vertical-align: middle;">';
+      $result.='<span>' . i18n('showStructure') . '</span>';
+      $result.='<script type="dojo/connect" event="onClick" args="evt">';
+      $page="../view/assetStructure.php?id=$this->id";
+      $result.="var url='$page';";
+      $result.='showPrint(url, null, null, "html", "P");';
+      $result.='</script>';
+      $result.='</button>';
+      $result.='</div></td>';
+      $result.='</tr></table>';
+    }
+    return $result;
+  }
+  
+  
+  public function getRecursiveSubAsset(){
+    $crit=array('idAsset'=>$this->id);
+    $obj=new Asset();
+    $subProducts=$obj->getSqlElementsFromCriteria($crit, false,null,null,null,true) ;
+    $subProductList=null;
+    foreach ($subProducts as $subProd) {
+      $recursiveList=null;
+      $recursiveList=$subProd->getRecursiveSubAsset();
+      $arrayProd=array('id'=>$subProd->id, 'name'=>$subProd->name, 'subItems'=>$recursiveList);
+      $subProductList[]=$arrayProd;
+    }
+    return $subProductList;
+  }
+  
+  public function getParentAsset(){
+    $result=array();
+    if ($this->idAsset) {
+      $parent=new Asset($this->idAsset);
+      $result=array_merge_preserve_keys($parent->getParentAsset(),array($parent->id=>$parent->name));
+    }
     return $result;
   }
   

@@ -1056,6 +1056,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       //Gautier #4404
     } else if ($col=='_componentVersionStructureAsset' and !$obj->isAttributeSetToField($col, "hidden")) { // Display ProductVersionStructure (structure)
       drawVersionStructureFromObjectAsset($obj, false, 'structure', 'ComponentVersion');
+    } else if ($col=='_assetComposition' and !$obj->isAttributeSetToField($col, "hidden")) { // Display ProductVersionStructure (structure)
+      drawAssetComposition($obj);
     } else if ($col=='_componentVersionComposition' and !$obj->isAttributeSetToField($col, "hidden")) { // Display ProductVersionStructure (structure)
       drawVersionStructureFromObject($obj, false, 'composition', 'ComponentVersion');
     } else if (substr($col, 0, 11)=='_Assignment') { // Display Assignments
@@ -4988,6 +4990,71 @@ function drawActivityList($obj, $refresh=false) {
 }
 // END mOlives - ticket 215 - 09/05/2018
 
+//gautier #4404
+function drawAssetComposition($obj,$refresh=false){
+  global $cr, $print, $user, $comboDetail;
+  if ($comboDetail) {
+    return;
+  }
+  $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
+  if ($obj->idle==1) {
+    $canUpdate=false;
+  }
+  $canGoto = (securityCheckDisplayMenu(null, get_class($obj)) and securityGetAccessRightYesNo('menu' . get_class($obj), 'read', $obj) == "YES") ? true : false;
+  $crit['idAsset']=$obj->id;
+  $asset=new Asset();
+  $list=$asset->getSqlElementsFromCriteria($crit);
+
+  if (!$refresh) echo '<tr><td colspan="2">';
+  echo '<table style="width:100%;">';
+  echo '<tr>';
+  if (!$print) {
+    echo '<td class="linkHeader" style="width:5%">';
+    if ($obj->id!=null and !$print and $canUpdate) {
+        echo '<a onClick="addAssetComposition(\''.$obj->id.'\');" title="'.i18n('addAsset').'" > '.formatSmallButton('Add').'</a>';
+      }
+    echo '</td>';
+  }
+  echo '<td class="linkHeader" style="width:20%">'.i18n('colName').'</td>';
+  echo '<td class="linkHeader" style="width:20%">'.i18n('colAssetType').'</td>';
+  echo '<td class="linkHeader" style="width:20%">'.i18n('colBrand').'</td>';
+  echo '<td class="linkHeader" style="width:20%">'.i18n('colModel').'</td>';
+  echo '<td class="linkHeader" style="width:15%">'.i18n('colUser').'</td>';
+  echo '</tr>';
+  foreach ($list as $ass) {
+    echo '<tr>';
+    if (! $print) {
+      echo '<td class="linkData" style="text-align:center;width:5%;white-space:nowrap;">';
+      if ($canUpdate) {
+        echo '  <a onClick="removeAssetComposition(' . htmlEncode($ass->id) . ');" ' . 'title="' . i18n('removeProductStructure') . '" > ' . formatSmallButton('Remove') . '</a>';
+      }
+      echo '</td>';
+      $goto = "";
+        if (! $print and $canGoto) {
+        $goto = ' onClick="gotoElement(' . "'" . get_class($ass) . "','" . htmlEncode($ass->id) . "'" . ');" style="cursor: pointer;" ';
+      }
+      echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
+      echo htmlEncode($ass->name);
+      echo'</td>';
+      echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
+      echo SqlList::getNameFromId('Type', $ass->idAssetType);
+      echo'</td>';
+      echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
+      echo SqlList::getNameFromId('Brand', $ass->idBrand);
+      echo'</td>';
+      echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
+      echo SqlList::getNameFromId('Model', $ass->idModel);
+      echo'</td>';
+      echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
+      echo SqlList::getNameFromId('Affectable', $ass->idAffectable);
+      echo'</td>';
+    }
+    echo '</tr>';
+  }
+  echo '</table>';
+  if (!$refresh) echo '</td></tr>';
+}
+
 function drawVersionStructureFromObject($obj, $refresh=false, $way, $item) {
   $crit=array();
   if ($way=='composition') {
@@ -5191,7 +5258,11 @@ function drawElementIntoVersionStructureFromObject($comp, $compObj, $print, $can
   if (! $print) {
     echo '<td class="linkData" style="text-align:center;width:5%;white-space:nowrap;">';
     if ($canUpdate && (((get_class($obj) != 'ComponentVersion' && get_class($obj) != 'ProductVersion') || $actualStatus->setIntoserviceStatus != 1) || ($way != 'composition'))) {
-      echo '  <a onClick="editProductVersionStructure(\'' . $way . '\',' . htmlEncode($comp->id) . ');" ' . 'title="' . i18n('editProductStructure') . '" > ' . formatSmallButton('Edit') . '</a>';
+      if(get_class($obj)=='Asset'){
+        echo '  <a onClick="editProductVersionStructureAsset(' . htmlEncode($comp->id) . ');" ' . 'title="' . i18n('editProductStructureAsset') . '" > ' . formatSmallButton('Edit') . '</a>';
+      }else{
+        echo '  <a onClick="editProductVersionStructure(\'' . $way . '\',' . htmlEncode($comp->id) . ');" ' . 'title="' . i18n('editProductStructure') . '" > ' . formatSmallButton('Edit') . '</a>';
+      }
       if(get_class($obj)=='Asset'){
         echo '  <a onClick="removeProductVersionStructureAsset(' . "'" . htmlEncode($comp->id) . "','" . get_class($compObj) . "','" . htmlEncode($compObj->id) . "','" . $classCompName . "'" . ');" ' . 'title="' . i18n('removeProductStructure') . '" > ' . formatSmallButton('Remove') . '</a>';
       }else{

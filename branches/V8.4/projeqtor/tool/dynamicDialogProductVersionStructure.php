@@ -44,13 +44,15 @@ if (array_key_exists('structureId',$_REQUEST)) {
   Security::checkValidId($structureId);
 }
 $way=null;
-if (array_key_exists('way',$_REQUEST)) {
-  $way=$_REQUEST['way'];
+if($objectClass=='Asset'){
+  $way='structure';
 }
-if ($way!='structure' and $way!='composition') {
-  throwError("Incorrect value for parameter way='$way'");
-}
-
+  if (array_key_exists('way',$_REQUEST)) {
+    $way=$_REQUEST['way'];
+  }
+  if ($way!='structure' and $way!='composition') {
+    throwError("Incorrect value for parameter way='$way'");
+  }
 $str=new ProductVersionStructure($structureId);
 
 if ($objectClass=='ProductVersion') {

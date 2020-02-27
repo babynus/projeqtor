@@ -1767,6 +1767,38 @@ showConfirm(msg, actionOK);
 }
 //END ADD qCazelles - Version compatibility
 
+//Gautier #4404
+function addAssetComposition(id) {
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  var callBack = function () {
+    dijit.byId("dialogAssetComposition").show();
+  };
+  var params="&idParent="+id;
+  params+="&mode=add";  
+  loadDialog('dialogAssetComposition',callBack,false,params);
+}
+
+function saveAssetComposition() {
+  if (dojo.byId("idParent").value == "") return;
+  loadContent("../tool/saveAssetComposition.php", "resultDivMain", "assetCompositionForm", true, 'AssetComposition');
+  dijit.byId('dialogAssetComposition').hide();
+}
+
+function removeAssetComposition(assetId) {
+  if (checkFormChangeInProgress()) {
+   showAlert(i18n('alertOngoingChange'));
+   return;
+  }
+  actionOK=function() {
+   loadContent("../tool/removeAssetComposition.php?id="+assetId, "resultDivMain", null, true, 'AssetComposition');
+  };
+  refTypeName=i18n('Asset');
+  msg=i18n('confirmDeleteLink', new Array(refTypeName, assetId));
+  showConfirm(msg, actionOK);
+}
 //=============================================================================
 //= Product Version Composition
 //=============================================================================
@@ -1805,6 +1837,16 @@ function addProductVersionStructure(way) {
   //END CHANGE qCazelles - Ticket 165
 }
 
+function editProductVersionStructureAsset(productVersionStructureId) {
+  if (checkFormChangeInProgress()) {
+   showAlert(i18n('alertOngoingChange'));
+   return;
+  }
+  var objectClass=dojo.byId('objectClass').value;
+  var objectId=dojo.byId("objectId").value;
+  var param="&objectClass="+objectClass+"&objectId="+objectId+"&structureId="+productVersionStructureId;
+  loadDialog('dialogProductVersionStructure',null, true, param, true);
+}
 
 function editProductVersionStructure(way, productVersionStructureId) {
   if (checkFormChangeInProgress()) {
