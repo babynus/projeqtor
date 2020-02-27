@@ -266,6 +266,21 @@ class TenderMain extends SqlElement {
           $number++;
         }
       }
+      $expenseLink = Parameter::getGlobalParameter('ExpenseLink');
+      if($expenseLink){
+        $link = new Link();
+        $listLink = $link->getSqlElementsFromCriteria(array('ref1Type'=>get_class($this),'ref1Id'=>$this->id));
+        foreach ($listLink as $lnk){
+          $class = $lnk->ref2Type;
+          $newObj = new $class($lnk->ref2Id);
+          if(property_exists($newObj, 'idProjectExpense')){
+            if(!$newObj->idProjectExpense){
+              $newObj->idProjectExpense = $this->idProjectExpense;
+              $newObj->save();
+            }
+          }
+        }
+      }
     }
     
     
