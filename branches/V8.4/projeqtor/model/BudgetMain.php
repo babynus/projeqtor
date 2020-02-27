@@ -532,7 +532,7 @@ class BudgetMain extends SqlElement {
     $bbs=$this->bbs;
     if ($bbs) $bbs.='.';
     else $bbs='';
-    $items=$this->getSqlElementsFromCriteria(array('idBudget'=>$this->id),null,null,'id asc');
+    $items=$this->getSqlElementsFromCriteria(array('idBudget'=>$this->id),null,null,'bbsSortable asc');
     $cpt=0;
     foreach($items as $item) {
       $cpt++;
