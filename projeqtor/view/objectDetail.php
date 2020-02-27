@@ -2057,7 +2057,13 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             $comboClass='ComponentVersion';
           } else if ($col=='idBudgetItem') {
             $idMenu='menuBudget';
-           }
+          }else if ($col=='idContactContract' and get_class($obj)=='SupplierContract') {
+             $idMenu='menuSupplierContract';
+             $comboClass='Contact';
+          }else if ($col=='idContactContract' and get_class($obj)=='ClientContract') {
+             $idMenu='menuClientContract';
+             $comboClass='Contact';
+          }
           $menu=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>$idMenu));
           $crit=array();
           $crit['idProfile']=$profile;
@@ -2256,6 +2262,15 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $critFld='idProduct';
           $critVal=$obj->idProduct;
         }
+        if($col=='idContactContract' ){
+          if(get_class($obj)=='ClientContract'){
+            $critFld='idClient';
+            $critVal=$obj->idClient;
+          }else{
+            $critFld='idProvider';
+            $critVal=$obj->idProvider;
+          }
+        }
         // END ADD qCazelles
         
         if (SqlElement::is_a($obj, 'PlanningElement')) {
@@ -2342,6 +2357,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo ' >';
         if ($classObj=='IndividualExpense' and $col=='idResource' and securityGetAccessRight('menuIndividualExpense', 'read', $obj, $user)=='OWN') {
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, 'id', $user->id);
+        }if (($classObj=='SupplierContract' or $classObj=='ClientContract') and $col=='idContactContract' ) {
+          $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
         } else {
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
         }
