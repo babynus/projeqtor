@@ -360,6 +360,20 @@ class ProviderBillMain extends SqlElement {
           $projExpense->expenseRealDate = date('Y-m-d');
         }
       }
+      //gautier #4477
+      if($this->paymentDone){
+        $pbill = new ProviderBill();
+        $listProviderBill = $pbill->getSqlElementsFromCriteria(array('idProjectExpense'=>$this->idProjectExpense));
+        $isPaymentDone = 1;
+        foreach ($listProviderBill as $billProv){
+          if(!$billProv->paymentDone){
+            $isPaymentDone = 0;
+          }
+        }
+        $projExpense->paymentDone = $isPaymentDone;
+      }else{
+        if($projExpense->paymentDone)$projExpense->paymentDone=0;
+      }
       $projExpense->save();
     }
     
