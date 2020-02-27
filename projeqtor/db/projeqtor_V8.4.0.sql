@@ -239,14 +239,16 @@ ALTER TABLE `${prefix}term` ADD `idResource` int(12) unsigned DEFAULT NULL , ADD
 -- ======================================
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
-(237,'menuAsset',151,'object', 203,'Project',0,'Asset'),
+(243,'menuAssetManagment',0,'menu', 450,null,1,'Asset'),
+(237,'menuAsset',243,'object', 455,'Project',0,'Asset'),
 (238,'menuAssetType',79,'object', 990,'ReadWriteType',0,'Type'),
-(239,'menuLocation',36,'object', 895,'ReadWriteList',0,'ListOfValues'),
-(240,'menuBrand',36,'object', 896,'ReadWriteList',0,'ListOfValues'),
-(241,'menuModel',36,'object', 897,'ReadWriteList',0,'ListOfValues'),
-(242,'menuAssetCategory',151,'object', 204,'Project',0,'Asset');
+(239,'menuLocation',243,'object', 461,'ReadWriteList',0,'Asset'),
+(240,'menuBrand',243,'object', 463,'ReadWriteList',0,'Asset'),
+(241,'menuModel',243,'object', 465,'ReadWriteList',0,'Asset'),
+(242,'menuAssetCategory',243,'object', 459,'Project',0,'Asset');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
+(1,243,1),
 (1,237,1),
 (1,238,1),
 (1,239,1),
@@ -255,6 +257,7 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 (1,242,1);
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
+(1,243,8),
 (1,237,8),
 (1,238,8),
 (1,239,8),
@@ -266,8 +269,9 @@ INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active
 (18,'moduleAssets','850',null,0,1);
 
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
+(18,243,1,1),
 (18,237,0,1),
-(18,238,0,1),
+(18,238,1,1),
 (18,239,0,1),
 (18,240,0,1),
 (18,241,0,1),
