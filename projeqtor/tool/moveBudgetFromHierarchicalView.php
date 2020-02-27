@@ -29,18 +29,43 @@
  */
 require_once "../tool/projeqtor.php";
 scriptLog('   ->/tool/moveBudgetFromHierarchicalView.php');
-
 $idFrom = RequestHandler::getValue('idFrom');
 $idTo = RequestHandler::getValue('idTo');
 
-$idSource = substr($idFrom, -1);
-$idTarget = substr($idTo, -1);
+$mode=RequestHandler::getValue('mode');
+if ($mode!='before' and $mode!='after') {
+  $mode='before ?';
+}
+
+$idSource = explode('_',$idFrom)[1];
+$idTarget = explode('_',$idTo)[1];
 $source = new Budget($idSource);
 $target = new Budget($idTarget);
 
+
 // UPDATE PARENTS (recursively)
 if ($idTarget) {
-	$source->idBudget = $idTarget;
-	$source->save();
+  if ($source->idBudget != $target->idBudget) {
+    $oldParent=$source->idBudget;
+  }
+  $source->idBudget = $target->idBudget;
+  if ($mode=='after') {
+    $source->bbsSortable =  $target->bbsSortable.'.1';
+    $source->bbs =  $target->bbs.'.1';
+  } else {
+    $split=explode('.',$target->bbs);
+    $last=$split[count($split)-1];
+    $new=intval($last)-1;
+    $newBbsRoot=substr($target->bbs,0,strrpos($target->bbs, '.'));
+    $source->bbs =  $newBbsRoot.'.'.$new.'.1';
+    $source->bbsSortable =  formatSortableWbs($source->bbs);;
+  }
+  $source->save();
+  $parent=new Budget($target->idBudget);
+  $parent->regenerateBbsLevel();
+  if (isset($oldParent) and $oldParent) {
+    $parent=new Budget($oldParent);
+    $parent->regenerateBbsLevel();
+  }
 }
 ?>

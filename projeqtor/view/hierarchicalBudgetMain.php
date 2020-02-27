@@ -144,7 +144,7 @@ if(sessionValueExists('showFullAmount')){
               </div>
             </td>
             <td>
-              <label for="showFullAmount" class="notLabel" style="text-shadow: 0px 0px;margin-left: 2%;"><?php echo i18n('showFullAmount')?></label>  
+              <label for="showFullAmount" class="Label" style="text-shadow: 0px 0px;margin-left: 5px;width:150px;text-align:left"><?php echo i18n('showFullAmount')?></label>  
             </td>
           </tr>
         </table>

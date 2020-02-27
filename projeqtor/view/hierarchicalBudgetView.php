@@ -81,22 +81,21 @@ $query='select ' . $querySelect
 $result=Sql::query($query);
 
 // Header
-echo '<table id="dndHierarchicalBudgetList" dojoType="dojo.dnd.Source" align="left" width="100%" style="">';
+echo '<table id="dndHierarchicalBudgetList" dojoType="dojo.dnd.Source" jsId="dndSourceTableBudget" id="dndSourceTableBudget" align="left" width="100%" style="">';
 echo '<TR class="ganttHeight" style="height:32px">';
 echo '  <TD class="reportTableHeader" style="width:10px; border-right: 0px;"></TD>';
-echo '  <TD class="reportTableHeader" style="width:200px; border-left:0px; text-align: left;">' . i18n('colTask') . '</TD>';
-echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('colValidated') . '</TD>' ;
-echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('colAssigned') . '</TD>' ;
-echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('colReal') . '</TD>' ;
-echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('colLeft') . '</TD>' ;
-echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('colReassessed') . '</TD>' ;
-echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('progress') . '</TD>' ;
-echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('colValidated') . '</TD>' ;
-echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('colAssigned') . '</TD>' ;
-echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('colReal') . '</TD>' ;
-echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('colLeft') . '</TD>' ;
-echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('colReassessed') . '</TD>' ;
-echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('progress') . '</TD>' ;
+echo '  <TD class="reportTableHeader" style="border-left:0px; text-align: left;">' . i18n('colBudget') . '</TD>';
+echo '  <TD class="reportTableHeader" style="width:90px" nowrap>' . i18n('colEstimateAmount') . '</TD>' ;
+echo '  <TD class="reportTableHeader" style="width:90px" nowrap>' . i18n('colInitialAmount') . '</TD>' ;
+echo '  <TD class="reportTableHeader" style="width:90px" nowrap>' . i18n('colUpdate1Amount') . '</TD>' ;
+echo '  <TD class="reportTableHeader" style="width:90px" nowrap>' . i18n('colUpdate2Amount') . '</TD>' ;
+echo '  <TD class="reportTableHeader" style="width:90px" nowrap>' . i18n('colUpdate3Amount') . '</TD>' ;
+echo '  <TD class="reportTableHeader" style="width:90px" nowrap>' . i18n('colUpdate4Amount') . '</TD>' ;
+echo '  <TD class="reportTableHeader" style="width:90px" nowrap>' . i18n('colUpdatedAmount') . '</TD>' ;
+echo '  <TD class="reportTableHeader" style="width:90px" nowrap>' . i18n('colEngagedAmount') . '</TD>' ;
+echo '  <TD class="reportTableHeader" style="width:90px" nowrap>' . i18n('colAvailableAmount') . '</TD>' ;
+echo '  <TD class="reportTableHeader" style="width:90px" nowrap>' . i18n('colBilledAmount') . '</TD>' ;
+echo '  <TD class="reportTableHeader" style="width:90px" nowrap>' . i18n('colLeftAmount') . '</TD>' ;
 echo '</TR>';
 
 function getSubBudgetList($subList, &$subBudget){
@@ -223,18 +222,18 @@ if (Sql::$lastQueryNbRows > 0) {
 		echo '  <td>'.$tab . htmlEncode($line['name']).'</td>';
 		echo '  <tr></table>';
 		echo '</TD>';
-		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;">' .htmlDisplayCurrency($plannedAmount). '</TD>' ;
-		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;">' .htmlDisplayCurrency($initialAmount). '</TD>' ;
-		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;">' .htmlDisplayCurrency($update1Amount). '</TD>' ;
-		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;">' .htmlDisplayCurrency($update2Amount). '</TD>' ;
-		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;">' .htmlDisplayCurrency($update3Amount). '</TD>' ;
-		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;">' .htmlDisplayCurrency($update4Amount). '</TD>' ;
-		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;">' .htmlDisplayCurrency($actualAmount). '</TD>' ;
-		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;">' .htmlDisplayCurrency($actualSubAmount). '</TD>' ;
-		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;">' .htmlDisplayCurrency($usedAmount). '</TD>' ;
-		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;">' .htmlDisplayCurrency($availableAmount). '</TD>' ;
-		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;">' .htmlDisplayCurrency($billedAmount). '</TD>' ;
-		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;">' .htmlDisplayCurrency($leftAmount). '</TD>' ;
+		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;padding-right:5px">' .htmlDisplayCurrency($plannedAmount). '</TD>' ;
+		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;padding-right:5px">' .htmlDisplayCurrency($initialAmount). '</TD>' ;
+		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;padding-right:5px">' .htmlDisplayCurrency($update1Amount). '</TD>' ;
+		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;padding-right:5px">' .htmlDisplayCurrency($update2Amount). '</TD>' ;
+		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;padding-right:5px">' .htmlDisplayCurrency($update3Amount). '</TD>' ;
+		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;padding-right:5px">' .htmlDisplayCurrency($update4Amount). '</TD>' ;
+		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;padding-right:5px">' .htmlDisplayCurrency($actualAmount). '</TD>' ;
+		//echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;">' .htmlDisplayCurrency($actualSubAmount). '</TD>' ;
+		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;padding-right:5px">' .htmlDisplayCurrency($usedAmount). '</TD>' ;
+		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;padding-right:5px">' .htmlDisplayCurrency($availableAmount). '</TD>' ;
+		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;padding-right:5px">' .htmlDisplayCurrency($billedAmount). '</TD>' ;
+		echo '  <TD class="ganttName reportTableData" style="' . $compStyle . ';text-align:right;padding-right:5px">' .htmlDisplayCurrency($leftAmount). '</TD>' ;
 		echo '</TR>';
 	}
 }
