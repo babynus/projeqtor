@@ -3587,12 +3587,8 @@ function openInNewWindow(eltClass, eltId) {
   console.log("Goto Element in new window");
   var url="main.php?directAccess=true&objectClass="+eltClass+"&objectId="+eltId;
   var key=(window.event.ctrlKey)?'ctrl':((window.event.shiftKey)?'shift':'');
-  window.open(url,'_blank').focus;
-//  var frm = dojo.byId("openInNewWinForm");
-//  frm.action=url;
-//  frm.target='#';
-//  frm.submit();
-//  hideWait();
+  var params=(key=='shift' && ! dojo.isChrome)?"scrollbars=yes":null;
+  window.open(url,'_blank',params).focus;
 }
 function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target) {
   if (eltClass=='BudgetItem') eltClass='Budget'; 
