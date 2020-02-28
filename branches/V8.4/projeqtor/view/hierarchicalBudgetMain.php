@@ -196,6 +196,8 @@ $budgetParent=getSessionValue('listBudgetParentFilter');
          var headerHeight=dojo.byId('hierarchicalBudgetListHeader').offsetHeight;
          var totalHeight=dojo.byId('listDiv').offsetHeight;
          dojo.byId('hierarchicalBudgetListDiv').style.height=(totalHeight-headerHeight)+'px';
+
+         dojo.byId('hierarchicBudgetScrollSpace').style.width=(dojo.byId('hierarchicalBudgetListDiv').offsetWidth-dojo.byId('hierarchicalBudgetListDiv').clientWidth)+'px';
     </script>
     <form dojoType="dijit.form.Form" id="listForm" action="" method="" >
       <input type="hidden" name="objectClass" id="objectClass" value="Budget" />
