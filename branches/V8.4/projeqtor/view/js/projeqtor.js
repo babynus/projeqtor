@@ -3294,6 +3294,11 @@ function runScript(refType, refId, id) {
   }
   dojo.byId('objectClass').value = refType;
   dojo.byId('objectId').value = refId;
+  var ctrlPressed=(window.event && (window.event.ctrlKey || window.event.shiftKey))?true:false;
+  if (ctrlPressed && refType && refId) {
+    openInNewWindow(refType, refId);
+    return;
+  }
   hideList();
   loadContent('objectDetail.php?planning=true&planningType='
       + dojo.byId('objectClassManual').value, 'detailDiv', 'listForm');

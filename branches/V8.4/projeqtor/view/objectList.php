@@ -995,6 +995,23 @@ $listStatus = $object->getExistingStatus();
       dojo.byId('comboDetailName').value=row.name;
       return true;
     }
+    var ctrlPressed=(window.event && (window.event.ctrlKey || window.event.shiftKey))?true:false;
+    if (!multiSelection && ctrlPressed) {
+      rows=objectGrid.selection.getSelected();
+      row=rows[0]; 
+console.log(row);
+      refId = row.id;
+<?php if (get_class($obj)=='GlobalView') {?>
+      classNameCol=row.objectClass+"";
+      className=classNameCol.split('|');
+      refType=className[1];
+<?php } else {?>
+      refType=dojo.byId('objectClass').value;
+<?php }?>
+      openInNewWindow(refType, refId);
+      selectRowById('objectGrid', parseInt(dojo.byId('objectId').value));
+      return false;
+    }
     actionYes = function () {
       rows=objectGrid.selection.getSelected();
       row=rows[0]; 
