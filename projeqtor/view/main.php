@@ -2158,5 +2158,8 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 </form>
 <div id="deleteMultipleResultDiv" dojoType="dijit.layout.ContentPane" region="none" style="display:none"></div>
 <div id="resultDivMain"           dojoType="dijit.layout.ContentPane" region="none" style="display:none"></div>
+<form id="openInNewWinForm">
+<button type="submit">></button>
+</form>
 </body>
 </html>
