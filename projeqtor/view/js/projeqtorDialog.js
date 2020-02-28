@@ -1044,7 +1044,7 @@ function editNote(noteId, privacy) {
   };
   var params="&objectClass="+dojo.byId('objectClass').value;
   params+="&objectId="+dojo.byId("objectId").value;
-  params+="&noteId="+noteId;    
+  params+="&noteId="+noteId;
   loadDialog('dialogNote', callBack, true, params, true);
 }
 
@@ -1093,6 +1093,106 @@ function removeNote(noteId) {
     loadContent("../tool/removeNote.php"+param, "resultDivMain", "noteForm", true, 'note');
   };
   msg=i18n('confirmDelete', new Array(i18n('Note'), noteId));
+  showConfirm(msg, actionOK);
+}
+
+//=============================================================================
+//= Situation
+//=============================================================================
+
+function addSituation() {
+  if (dijit.byId("situationToolTip")) {
+    dijit.byId("situationToolTip").destroy();
+    dijit.byId("situationComment").set("class", "");
+  }
+  pauseBodyFocus();
+  var callBack=function() {
+    var editorType=dojo.byId("situationEditorType").value;
+    if (editorType=="CK" || editorType=="CKInline") { // CKeditor type
+      ckEditorReplaceEditor("situationComment",999);
+    } else if (editorType=="text") {
+      dijit.byId("situationComment").focus();
+      dojo.byId("situationComment").style.height=(screen.height*0.6)+'px';
+      dojo.byId("situationComment").style.width=(screen.width*0.6)+'px';
+    } else if (dijit.byId("situationEditor")) { // Dojo type editor
+      dijit.byId("situationEditor").set("class", "input");
+      dijit.byId("situationEditor").focus();
+      dijit.byId("situationEditor").set("height", (screen.height*0.6)+'px'); // Works on first time
+      dojo.byId("situationEditor_iframe").style.height=(screen.height*0.6)+'px'; // Works after first time
+    }
+  };
+  var params="&objectClass="+dojo.byId('objectClass').value;
+  params+="&objectId="+dojo.byId("objectId").value;
+  loadDialog('dialogSituation', callBack, true, params, true);
+}
+
+function editSituation(situationId) {
+if (dijit.byId("situationToolTip")) {
+    dijit.byId("situationToolTip").destroy();
+    dijit.byId("situationComment").set("class", "");
+  }
+  pauseBodyFocus();
+  var callBack=function() {
+	    var editorType=dojo.byId("situationEditorType").value;
+	    if (editorType=="CK" || editorType=="CKInline") { // CKeditor type
+	      ckEditorReplaceEditor("situationComment",999);
+	    } else if (editorType=="text") {
+	      dijit.byId("situationComment").focus();
+	      dojo.byId("situationComment").style.height=(screen.height*0.6)+'px';
+	      dojo.byId("situationComment").style.width=(screen.width*0.6)+'px';
+	    } else if (dijit.byId("situationEditor")) { // Dojo type editor
+	      dijit.byId("situationEditor").set("class", "input");
+	      dijit.byId("situationEditor").focus();
+	      dijit.byId("situationEditor").set("height", (screen.height*0.6)+'px'); // Works on first time
+	      dojo.byId("situationEditor_iframe").style.height=(screen.height*0.6)+'px'; // Works after first time
+	    }
+  };
+  var params="&objectClass="+dojo.byId('objectClass').value;
+  params+="&objectId="+dojo.byId("objectId").value;
+  params+="&situationId="+situationId;
+  loadDialog('dialogSituation', callBack, true, params, true);
+}
+
+function saveSituation() {
+  var editorType=dojo.byId("situationEditorType").value;
+  if (editorType=="CK" || editorType=="CKInline") {
+	situationEditor=CKEDITOR.instances['situationComment'];
+	situationEditor.updateElement();
+    var tmpCkEditor=situationEditor.document.getBody().getText();
+    var tmpCkEditorData=situationEditor.getData();
+    if (tmpCkEditor.trim()=="" && tmpCkEditorData.indexOf('<img')<=0) {
+      var msg=i18n('messageMandatory', new Array(i18n('Situation')));
+      situationEditor.focus();
+      showAlert(msg);
+      return;
+    }
+  } else if (dijit.byId("situationCommentEditor")) {
+    if (dijit.byId("situationComment").getValue() == '') {
+      dijit.byId("situationCommentEditor").set("class", "input required");
+      var msg=i18n('messageMandatory', new Array(i18n('Situation')));
+      dijit.byId("situationCommentEditor").focus();
+      dojo.byId("situationCommentEditor").focus();
+      showAlert(msg);
+      return;
+    }
+  }
+  loadContent("../tool/saveSituation.php", "resultDivMain", "situationForm", true, 'situation');
+  dijit.byId('dialogSituation').hide();
+}
+
+
+/**
+ * Display a delete situation Box
+ * 
+ */
+function removeSituation(situationId) {
+  var param="?situationId="+situationId;
+  param+="&situationRefType="+dojo.byId('objectClass').value;
+  param+="&situationRefId="+dojo.byId("objectId").value;
+  actionOK=function() {
+    loadContent("../tool/saveSituation.php"+param, "resultDivMain", "situationForm", true, 'situation');
+  };
+  msg=i18n('confirmDelete', new Array(i18n('Situation'), situationId));
   showConfirm(msg, actionOK);
 }
 

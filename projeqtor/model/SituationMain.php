@@ -58,6 +58,10 @@ class SituationMain extends SqlElement {
   	parent::__destruct();
   }
   
+  function save() {
+  	return parent::save();
+  }
+  
   function drawSituationHistory($obj){
     global $cr, $print, $outMode, $user, $comboDetail, $displayWidth, $printWidth;
     if ($comboDetail) {
@@ -88,15 +92,17 @@ class SituationMain extends SqlElement {
       if (!$print) {
       	echo '<td class="noteData smallButtonsGroup">';
       	if (!$print and $canUpdate) {
-      		echo '  <a onClick="editSituation(' . htmlEncode($val->id) . ');" title="' . i18n('editSitutation'). '" >'
-      				.formatSmallButton('Edit')
-      				.'</a> ';
+      		echo '  <a onClick="editSituation('.htmlEncode($val->id).');" title="'.i18n('editSitutation').'">'.formatSmallButton('Edit').'</a> ';
+      		echo ' <a onClick="removeSituation('.htmlEncode($val->id).');" title="'.i18n('removeSituation').'" > '.formatSmallButton('Remove').'</a>';
       	}
       	echo '</td>';
       }
       echo '<td class="noteData" style="text-align:center">' . htmlEncode($val->id) . '</td>';
       echo '<td class="noteData" style="text-align:center">' . htmlFormatDateTime($val->date) . '</td>';
-      echo '<td class="noteData" style="text-align:center">' . htmlEncode($val->situation) . '</td>';
+      echo '<td class="noteData" style="text-align:left">';
+      echo '  <div style="float:left">'.formatCommentThumb($val->comment).'</div>';
+      echo    htmlEncode($val->situation);
+      echo '</td>';
       $responsible = new ResourceAll($val->idResource);
       echo '<td class="noteData" style="text-align:center">' . htmlEncode($responsible->name) . '</td>';
       echo '</tr>';
