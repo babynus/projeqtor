@@ -183,7 +183,7 @@
               var currentItemParent = currentItem[1];
               var originClass = currentItem[0];
               var url = 'objectDetail.php?insertItem=true&currentItemParent='+currentItemParent+'&originClass='+originClass;
-              if(currentScreen=="VersionsPlanning"){
+              if(currentScreen=="VersionsPlanning" || currentScreen=="ResourcePlanning"){
                 url+="&currentPlanning="+currentScreen;
               } 
               id.value="";
