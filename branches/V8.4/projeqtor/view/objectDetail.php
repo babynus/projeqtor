@@ -87,16 +87,14 @@ if(RequestHandler::isCodeSet('currentPlanning')){
 }
 //gautier
 $objInsert = false;
+$selectedResource=null;
 $insertPlanningItem = RequestHandler::getValue('insertItem');
 if($insertPlanningItem){
   $currentItemParent = RequestHandler::getId('currentItemParent');
   $classItemParent = RequestHandler::getClass('originClass');
-  $selectedResource=RequestHandler::getValue('resourcePlanningSelectedResource',null);
-  debugLog("selected Resource = $selectedResource");
   if (SqlElement::class_exists($classItemParent)) $objInsert = new $classItemParent($currentItemParent);
-  if(RequestHandler::isCodeSet('currentPlanning'))$plan= RequestHandler::getValue('currentPlanning');
-  if($objInsert and isset($plan)and  $plan=='ResourcePlanning'){
-    //debugLog($objInsert);
+  if(isset($objInsert) and $currentPlanning=='ResourcePlanning'){
+      $selectedResource=RequestHandler::getValue('resourcePlanningSelectedResource');
   }
 }
 
@@ -359,7 +357,7 @@ if (array_key_exists('refresh', $_REQUEST)) {
  */
 function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $parentHidden=false) {
   scriptLog("drawTableFromObject(obj, included=$included, parentReadOnly=$parentReadOnly)");
-  global $toolTip, $cr, $print, $treatedObjects, $displayWidth, $outMode, $comboDetail, $collapsedList, $printWidth, $profile, $detailWidth, $readOnly, $largeWidth, $widthPct, $nbColMax, $preseveHtmlFormatingForPDF, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane,$panes,$arrayGroupe, $nbColMax, $section, $beforeAllPanes, $colWidth,$objInsert,$currentPlanning,$layout;
+  global $toolTip, $cr, $print, $treatedObjects, $displayWidth, $outMode, $comboDetail, $collapsedList, $printWidth, $profile, $detailWidth, $readOnly, $largeWidth, $widthPct, $nbColMax, $preseveHtmlFormatingForPDF, $reorg,$paneDetail, $leftPane, $rightPane, $extraPane, $bottomPane, $historyPane,$panes,$arrayGroupe, $nbColMax, $section, $beforeAllPanes, $colWidth,$objInsert,$currentPlanning,$layout,$selectedResource;
   global $section, $prevSection;
   $ckEditorNumber=0; // Will be used only if getEditor=="CK" for CKEditor
   //gautier
@@ -377,7 +375,20 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       $obj->idActivity = $objInsert->idActivity;
     }
     //florent
-    if($currentPlanning =='VersionsPlanning'){
+    if($currentPlanning =='ResourcePlanning'){
+      if(property_exists($objInsert, '_Assignment') and property_exists($obj, '_Assignment') ){
+        foreach ($objInsert->_Assignment as $val){
+          foreach ($val as $id=>$value){
+            if($id=='idResource' and $value==$selectedResource ){
+              debugLog($obj);
+              echo '<input type="hidden" id="resourcePlanningAssignment" value="'.$selectedResource.'" />';
+              break;
+            }
+           
+          }
+        }
+      }
+    } else if($currentPlanning =='VersionsPlanning'){
       if(property_exists($obj, 'idProduct')and  property_exists($objInsert, 'idProduct') ){
         $obj->idProduct=$objInsert->idProduct;
       }
