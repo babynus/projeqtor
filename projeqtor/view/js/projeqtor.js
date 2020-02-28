@@ -3266,7 +3266,6 @@ function runScript(refType, refId, id) {
       if (vTask && dojo.byId('resourcePlanningSelectedResource')) {
         dojo.byId('resourcePlanningSelectedResource').value=vTask.getResource();
       }
-      
     }
   }
   if (refType == 'Fixed' || refType=='Construction' || refType=='Replan') {
