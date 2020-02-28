@@ -104,6 +104,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
 		    </td>
 		    <td>   
 		      <form dojoType="dijit.form.Form" id="listForm" action="" method="" >
+		        <input type="hidden" name="resourcePlanningSelectedResource" id="resourcePlanningSelectedResource" value="" />
 		        <table style="width: 100%;">
 		          <tr>
 		            <td style="width:70px">
