@@ -3582,14 +3582,24 @@ function refreshTodayProjectsList(value) {
       "todayProjectsForm", false);
 }
 
+//var newWin=null;
+function openInNewWindow(eltClass, eltId) {
+  console.log("Goto Element in new window");
+  var url="main.php?directAccess=true&objectClass="+eltClass+"&objectId="+eltId;
+  var key=(window.event.ctrlKey)?'ctrl':((window.event.shiftKey)?'shift':'');
+  window.open(url,'_blank').focus;
+//  var frm = dojo.byId("openInNewWinForm");
+//  frm.action=url;
+//  frm.target='#';
+//  frm.submit();
+//  hideWait();
+}
 function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target) {
   if (eltClass=='BudgetItem') eltClass='Budget'; 
-  var ctrlPressed=false; //window.event.ctrlKey;
+  var ctrlPressed=(window.event && (window.event.ctrlKey || window.event.shiftKey))?true:false;
   if (ctrlPressed && eltClass && eltId) {
-    console.log("Goto Element : control is pressed");
-    var url="main.php?directAccess=true&objectClass="+eltClass+"&objectId="+eltId;
-    window.open(url, "_blank"); 
-    exit;
+    openInNewWindow(eltClass, eltId);
+    return;
   }
   
   if (checkFormChangeInProgress()) {
