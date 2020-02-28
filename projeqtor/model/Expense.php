@@ -223,10 +223,12 @@ class Expense extends SqlElement {
     $result=parent::save();
     
     $pe=SqlElement::getSingleSqlElementFromCriteria('ProjectPlanningElement', array('refType'=>'Project','refId'=>$this->idProject));
-    $pe->updateExpense();
-    if ($old->idProject!=$this->idProject) {
+    if (!$pe->id) debugTraceLog("Expense.php save() - cannot retreive ProjectPlanningElement with refType='Project' and refId=$this->idProject"); 
+    else $pe->updateExpense();
+    if ($old->idProject and $old->idProject!=$this->idProject) {
       $peOld=SqlElement::getSingleSqlElementFromCriteria('ProjectPlanningElement', array('refType'=>'Project','refId'=>$old->idProject));
-      $peOld->updateExpense();
+      if (!$peOld->id) debugTraceLog("Expense.php save() - cannot retreive old ProjectPlanningElement with refType='Project' and refId=$old->idProject");
+      else $peOld->updateExpense();
     }
     
     if ($this->idBudgetItem) {
