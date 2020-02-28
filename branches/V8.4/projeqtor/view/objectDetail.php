@@ -91,10 +91,12 @@ $insertPlanningItem = RequestHandler::getValue('insertItem');
 if($insertPlanningItem){
   $currentItemParent = RequestHandler::getId('currentItemParent');
   $classItemParent = RequestHandler::getClass('originClass');
+  $selectedResource=RequestHandler::getValue('resourcePlanningSelectedResource',null);
+  debugLog("selected Resource = $selectedResource");
   if (SqlElement::class_exists($classItemParent)) $objInsert = new $classItemParent($currentItemParent);
   if(RequestHandler::isCodeSet('currentPlanning'))$plan= RequestHandler::getValue('currentPlanning');
   if($objInsert and isset($plan)and  $plan=='ResourcePlanning'){
-    debugLog($objInsert);
+    //debugLog($objInsert);
   }
 }
 
