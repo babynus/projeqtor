@@ -56,8 +56,12 @@ if ($idTarget) {
     $split=explode('.',$target->bbs);
     $last=$split[count($split)-1];
     $new=intval($last)-1;
-    $newBbsRoot=substr($target->bbs,0,strrpos($target->bbs, '.'));
-    $source->bbs =  $newBbsRoot.'.'.$new.'.1';
+    if (count($split)==1) {
+      $source->bbs =  $new.'.1';
+    } else {
+      $newBbsRoot=substr($target->bbs,0,strrpos($target->bbs, '.'));
+      $source->bbs =  $newBbsRoot.'.'.$new.'.1';
+    }
     $source->bbsSortable =  formatSortableWbs($source->bbs);;
   }
   $source->save();
