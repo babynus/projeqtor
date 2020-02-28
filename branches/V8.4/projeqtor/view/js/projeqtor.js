@@ -3082,6 +3082,7 @@ function drawGantt() {
     var items = store.items;
     // var arrayKeys=new Array();
     var keys = "";
+    var currentResource=null;
     for (var i = 0; i < items.length; i++) {
       var item = items[i];
       // var topId=(i==0)?'':item.topid;
@@ -3252,6 +3253,22 @@ function drawGantt() {
 }
 
 function runScript(refType, refId, id) {
+  if (g) {  
+    var vList=g.getList();
+    if (vList) {
+      var vTask=null;
+      for(var i = 0; i < vList.length; i++) {
+        if (vList[i].getID()==id) {
+          vTask=vList[i];
+          break;
+        }
+      }
+      if (vTask && dojo.byId('resourcePlanningSelectedResource')) {
+        dojo.byId('resourcePlanningSelectedResource').value=vTask.getResource();
+      }
+      
+    }
+  }
   if (refType == 'Fixed' || refType=='Construction' || refType=='Replan') {
     refType = 'Project';
   }

@@ -586,6 +586,7 @@ if (Sql::$lastQueryNbRows == 0) {
 			if ($line['idresource']!=$idResource) {
 				$idResource=$line['idresource'];
 			}
+			$line['resource']=$idResource;
 			echo (++$nbRows>1)?',':'';
 			echo  '{';
 			$nbFields=0;
