@@ -155,6 +155,7 @@ Tab Activity
    * :ref:`Automation<GlobalParam_automation>`
    * :ref:`Milestones<gp-milestones-section>`
    * :ref:`Control and restriction<gp-control-restict-section>`
+   * :ref:`Leaves system<leaves-system>`
    
 .. _gp_planning-section:
 
@@ -339,6 +340,22 @@ Specific parameters for the control and management of restrictions
          :align: center
          
          Restrict type box
+
+
+
+.. _leaves-system:
+
+.. rubric:: Leaves system
+
+Allows you to determine who will be the administrator of regulated absences.
+
+The administrator of regulated absences can define the parameters and authorizations of the screens in this module.
+
+
+
+
+
+
 
 
 .. _display:
@@ -649,6 +666,7 @@ Tab Financial
 
    * :ref:`Input of amounts for expenses<gp-input-amount-expenses>`
    * :ref:`Input of amounts for incomes<gp-input-amount-incomes>`
+   * :ref:`deferral of expense<deferral-expense>`
    
 .. _gp-input-amount-expenses:
    
@@ -677,6 +695,19 @@ Parameters for choosing the method of entering income
    .. compound:: Input mode for bill lines
    
          Defined for icomes items if the total bill lines feed the total with or without taxes. The parameter is priority if there a bill lines
+
+
+.. _deferral-expense:
+
+.. rubric:: Automation of financial
+
+
+**The Deferral of expenses** option occurs during the automatic generation of an expense from an offer, order or invoice.
+
+If the expense is linked to an offer, an order AND / OR an invoice, then this is carried over to the related elements. This update is recursive.
+
+Example: if the expense is generated from an invoice, it is reported on the order linked to the invoice and on the offer linked to the order.
+
 
 
 .. index:: Mailing Parameters

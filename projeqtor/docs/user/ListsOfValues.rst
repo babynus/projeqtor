@@ -854,6 +854,8 @@ The orientation of the budget
      - Flag to indicate this value is archived.
 
 
+.. _LoV-tender-statut:
+
 Tender status
 *************
 
@@ -1079,4 +1081,142 @@ Then in Product or Component screen you can select your languages values.
      - Number to define order of display in lists.
    * - :term:`Closed`
      - Flag to indicate this value is archived.
-   
+
+
+Locations
+*********
+
+Allows you to define and create your own list of locations, Sites, Cities, Countries ... for the management of your IT infrastructure.
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 20, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.   
+     
+     
+     
+Periods
+*******
+
+Allows you to define and create your own list of periods. These are used to define the intervention periods in customer and supplier contracts.
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 20, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.   
+
+
+.. index:: Brands
+
+.. _brands:
+
+Brands
+******
+
+Allows you to define and create your own list of brands. These values are used in the IT asset management screens to register your equipment.
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 20, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived. 
+     
+     
+     
+     
+Renewal
+*******
+
+Allows you to define and create your own renewal type list. These values are used in the customer and supplier contract management screens.
+
+3 values are pre-registered by default: never, tacit and Express
+See: :ref:`incomes<renewal>`
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 20, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - :term:`Closed`
+     - Flag to indicate this value is archived. 
+            
+
+            
+Models
+******
+
+Allows you to define and create your own list of equipment models. These values are used in the IT asset management screens.
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 20, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - Asset type 
+     - Type of equipment. See: :ref:`List of Types<asset-type>`
+   * - Brand
+     - Name of the :ref:`brands` 
+   * - :term:`Closed`
+     - Flag to indicate this value is archived. 
+            
+            
+            
+            
+            

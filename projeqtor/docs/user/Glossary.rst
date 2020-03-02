@@ -295,6 +295,12 @@ Glossary
     * User profile define general access rights. But it does not necessarily give access to project data.
     * Users management is performed on the :ref:`user` screen.
    
+   
+   SLA
+   
+    A service level agreement (SLA) is a contract between a service provider and its customers that documents the services that the provider will provide and defines the service standards that the provider is required to meet.
+    
+    
    SMART
    
        it is an acronym or mnemonic device that stands for 'Specific, Measurable, Acceptable, Realistic and Temporally Defined'.

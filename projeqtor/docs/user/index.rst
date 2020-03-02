@@ -29,10 +29,11 @@ Find in this manual, every 3 months, the latest news integrated into ProjeQtOr
    
    **Asset Management**
 
-   .. image:: /images/iconKanban.png
+   .. image:: /images/ParcIT.png
       :align: center
+      :scale: 40
       
-   ProjeQtOr integrates the AGILE method Kanban into its basic version.
+   Projeqtor now includes the management of your IT equipment and your network.
    
    :ref:`asset-management`
    
@@ -42,7 +43,7 @@ Find in this manual, every 3 months, the latest news integrated into ProjeQtOr
 
 .. container:: 
 
-   **LiveMeeting**
+   **Supplier and Client contract**
 
    .. image:: /images/iconMeeting32.png
       :align: center
