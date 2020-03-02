@@ -611,7 +611,7 @@ class ProviderBillMain extends SqlElement {
     }
     if ($this->paymentAmount>=$this->fullAmount and $this->fullAmount>0) $this->paymentDone=1;
     if ($save) {
-      $this->simpleSave();
+      $this->save();
     }
   }
 
