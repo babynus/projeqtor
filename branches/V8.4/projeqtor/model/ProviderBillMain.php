@@ -553,6 +553,10 @@ class ProviderBillMain extends SqlElement {
       self::$_fieldsAttributes['fullAmount']='readonly';
       self::$_fieldsAttributes['untaxedAmount']='readonly';
       self::$_fieldsAttributes['fullAmount']='readonly';
+      self::$_fieldsAttributes['taxPct']='readonly';
+      self::$_fieldsAttributes['discountAmount']='readonly';
+      self::$_fieldsAttributes['discountRate']='readonly';
+      self::$_fieldsAttributes['discountFullAmount']='readonly';
     }
     if ($this->paymentsCount>0) {
       self::$_fieldsAttributes['paymentDate']='readonly';
