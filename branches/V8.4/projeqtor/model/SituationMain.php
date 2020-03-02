@@ -79,12 +79,12 @@ class SituationMain extends SqlElement {
   
   function drawSituationHistory($obj){
     global $cr, $print, $outMode, $user, $comboDetail, $displayWidth, $printWidth;
-    if ($comboDetail) {
+    if ($comboDetail or !$obj->id) {
       return;
     }
     $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj) == "YES";
-    $where = 'refType = "'.get_class($obj).'" and refId = '.$obj->id.' and idProject = '.$obj->idProject.' order by date desc';
-    $situationList = $this->getSqlElementsFromCriteria(null,null,$where);
+    $critWhere = array('refType'=>get_class($obj),'refId'=>$obj->id,'idProject'=>$obj->idProject);
+    $situationList = $this->getSqlElementsFromCriteria($critWhere,null,null, 'date desc');
     echo '</br>';
     echo '<table width="99.9%">';
     echo '<tr>';
