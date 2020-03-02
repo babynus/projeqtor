@@ -209,6 +209,17 @@ use Spipu\Html2Pdf\Html2Pdf;
   <?php 
   }
   $page=$_REQUEST['page'];
+  if (substr($page,0,17)=='../report/object/') {
+    if (file_exists($page)) {
+      $rpt=file_get_contents($page);
+      if (strpos($rpt,"templateReportExecute.php")>0 and ! Plugin::isPluginEnabled('templateReport')) {
+        // Template report plugin disabled, but custom report defined for object and is template one
+        $page="objectDetail.php";
+      }
+    } else {
+      $page="objectDetail.php";
+    }
+  }
   securityCheckPage($page);
   $includeFile=$page;
   if (! substr($page,0,3)=='../') {
