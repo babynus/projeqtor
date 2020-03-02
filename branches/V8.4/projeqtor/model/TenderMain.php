@@ -287,6 +287,17 @@ class TenderMain extends SqlElement {
               }
             }
           }
+        $listLink2 = $link->getSqlElementsFromCriteria(array('ref2Type'=>get_class($this),'ref2Id'=>$this->id));
+        foreach ($listLink2 as $lnk){
+          $class = $lnk->ref1Type;
+          $newObj = new $class($lnk->ref1Id);
+          if(property_exists($newObj, 'idProjectExpense')){
+            if(!$newObj->idProjectExpense){
+              $newObj->idProjectExpense = $this->idProjectExpense;
+              $newObj->save();
+            }
+          }
+        }
         }
       }
     }
