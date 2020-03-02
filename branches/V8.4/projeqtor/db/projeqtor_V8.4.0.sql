@@ -222,12 +222,12 @@ INSERT INTO `${prefix}renewal` (`id`, `name`,  `sortOrder`, `idle`) VALUES
 
 CREATE TABLE `${prefix}situation` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
-  `refType` varchar(100) NOT NULL,
-  `refId` int(12) unsigned NOT NULL,
-  `idProject` int(12) unsigned NOT NULL,
-  `situation` varchar(100) DEFAULT NULL,
-  `situationType` varchar(100) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `idProject` int(12) unsigned DEFAULT NULL,
+  `refType` varchar(100) DEFAULT NULL,
+  `refId` int(12) unsigned DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `situationType` varchar(100) DEFAULT NULL,
+  `date` timestamp DEFAULT NULL,
   `idUser` int(12) unsigned DEFAULT NULL,
   `idResource` int(12) unsigned DEFAULT NULL,
   `comment` mediumtext DEFAULT NULL,
@@ -236,9 +236,9 @@ CREATE TABLE `${prefix}situation` (
 
 CREATE TABLE `${prefix}projectSituation` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
-  `idProject` int(12) unsigned NOT NULL,
-  `idSituationExpense` int(12) unsigned NOT NULL,
-  `idSituationIncome` int(12) unsigned NOT NULL,
+  `idProject` int(12) unsigned DEFAULT NULL,
+  `idSituationExpense` int(12) unsigned DEFAULT NULL,
+  `idSituationIncome` int(12) unsigned DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
