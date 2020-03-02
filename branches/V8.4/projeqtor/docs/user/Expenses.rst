@@ -47,7 +47,9 @@ It allows to anticipate the resources that the company will have at a specific m
     
    An indentation of these to the right shows that they are sub-budgets.
 
-   To see the closed items in this list, check the "closed" box
+   To see the closed items in this list, check the "closed" box.
+   
+   If you change the name of a budget, remember to refresh the page so that the lists take into account the changes.
    
    
    .. figure:: /images/GUI/EXPENSES_ZONE_FilterBudgetParent.png
@@ -56,9 +58,9 @@ It allows to anticipate the resources that the company will have at a specific m
       Display of a budget and its family
  
 
-   * The parent budget exists only to consolidate the data of the underlying budget items
+   * The parent budget exists only to consolidate the data of the underlying budget items.
 
-   * You cannot modify the expenses in the Progress field of a parent budget
+   * You cannot modify the expenses in the Progress field of a parent budget.
 
    * Only the target amount can be changed if the budget treatment is still under construction.
 
@@ -144,12 +146,12 @@ Each macro state "under construction", "approved", "closed" and "canceled" modif
    * - Field
      - Description
    * - |RequiredField| :term:`Status`
-     - change of states according to the :ref:`workflow` selected for the type of your budget 
-   * - is a budget item
+     - Change of states according to the :ref:`workflow` selected for the type of your budget 
+   * - Is a budget item
      - Self-checked box when the budget becomes a sub-budget
    * - Under construction
      - When the budget is validated. The box is unchecked
-   * - approved
+   * - Approved
      - When the box is checked, the target amount is blocked
    * - :term:`Closed`
      - Flag to indicate that profile is archived.
@@ -189,12 +191,36 @@ This amount is visible on all budget items.
 
 .. rubric:: Budget expense detail
 
-This section brings and displays the :ref:`project-expense` lines in the details 
+This section displays :ref:`project-expense` lines in detail 
 
 .. figure:: /images/GUI/EXPENSES_ZONE_DetailLine.png
    :alt: Details lines
 
    Details lines
+   
+   
+   
+Hierarchical budget
+===================
+
+The hierarchical view of budgets allows you to display an overview of budgets in a very graphic way with an interpretation system for better reading.
+
+You can filter the list of budgets using the parent budget filter.
+
+You can display a particular budget family.
+
+You can move budgets by "drag and drop".
+
+
+.. figure:: /images/GUI/EXPENSES_SCR_HierarchicalBudget.png
+   :alt: Hierarchical budget screen
+   
+   Hierarchical budget screen
+   
+   
+   
+   
+      
 
 .. raw:: latex
 
@@ -211,11 +237,176 @@ ProjeQtOr gives you the possibility to manage and precisely follow your supplier
 
 The supplier contract is necessarily linked to a project and a supplier.
 
+
+.. figure:: /images/GUI/EXPENSES_SCR_SupplierContract.png
+   :alt: contract gantt chart screen
+   
+   Supplier contract screen
+ 
+
+
+.. rubric:: Section Description
+
+Complete the description of the contract.
+
+.. list-table:: Required field |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - |RequiredField| Name
+     - Name of the contract  
+   * - Number
+     - Reference number of the contract
+   * - |RequiredField| Client contract type
+     - List of types of the contracts
+   * - Project
+     - Project to which this contract will be attached
+   * - |RequiredField| Supplier
+     - Supplier concerned by the contract
+   * - Contact  
+     - List of provider contact only. Contacts must be registered in advance on the supplier's screen. Change supplier, the contacts list is suitable. 
+   * - Supplier reference    
+     - Reference of the provider
+   * - Phone number
+     - The field is of alphanumeric type. You can enter a telephone number with precision. Example:XXXXXXXXXX ext XX 
+   * - Origin    
+     - Used to enter the origin of the agreement
+       Example the name of the seller or the advertisement which brought the customer
+   * - Description
+     - Descriptive text of the contract
+
+
+
+
+
+.. rubric:: Section Treatment
+
+Follow the state, the progress of your contract in this section.
+
+ .. compound:: Responsible
+   
+   * Choose a responsible
+   
+   * Its initials are displayed on the Gantt chart of contracts
+   
+
+ .. compound:: Workflow
+   
+   * The workflow is based on the default workflow. 
+   
+   * You can change or modify the current workflow.
+   
+   * See: :ref:`workflow`
+ 
+
+.. _renewal:
+
+ .. compound:: Renewal
+   
+   Defines the behavior of the renewal of a contract at the end of the initially planned duration
+   
+      * **Never:** the contract will never be renewed
+      
+      * **Tacit:** the contract will be renewed if there is no termination
+      
+      * **Express:** the contract is renewed and is the subject of a written or verbal act 
+ 
+
+
+ .. compound:: States
+   
+      * **Handled:** Date on which the contract is taken over. Effective. This date can be entered manually or by going to the Assigned state of the workflow
+      
+      * **Done:** Date the contract ends.
+      
+      * **Closed:** Date on which the contract was closed.
+      
+      * **Cancelled:** Cancellation Date 
+
+
+
+
+.. rubric:: Section contact
+
+This section allows you to fill in the information relating to your contact with the provider
+
+.. list-table:: Required field |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - |RequiredField| Contact
+     - Name of the provider contact
+   * - Phone Number
+     - Phone number of the provider contact.The field is not numeric and lets you add textual information such as the extension number.
+   * - |RequiredField| Levels of service agreements
+     - Determines if you have levels of service agreements (:term:`SLA`) with the s for this contract. This check box is an indication.
+   * - Intervention time
+     - Periods during which services, contacts and interventions with the provider will be possible. You can choose a time slot for weeks, Saturdays, as well as Sundays and holidays.
+
+
+
+.. rubric:: Section Progress
+
+In the Progress section, determine the different dates and deadlines for the contract, notice, deadlines, payments ...
+
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required field |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - Contract dates
+     - Start and end date of the contract
+   * - Initial contract term
+     - Contract duration displayed according to the chosen unit: day, month, year
+   * - Notice period 
+     - Duration displayed according to the chosen unit: day, month, year
+   * - Notice date
+     - Free reminder of a scheduled deadline
+   * - Due date
+     - End of contract validity
+   * - Periodicity of the contract (Month)
+     - Duration of the renewal of the contract is possible. Example 24-month subscription renewable after 12 months
+   * - Billing frequency (Month)
+     - Billing frequency during the term of the contract
+
+
+Supplier contract Gantt chart
+=============================
+
 In addition to the contract management screen (list and details area), you can view your contracts in a time view on a Gantt chart. This is the "contract schedule"
 
 Each bar representing the different contracts, going from the start date to the end date of the contract.
 
 Notice dates and due dates are displayed as milestones.
+
+Gantt bars for customer contracts turn red when the due date is higher than the end of contract date. 
+
+No calculation is made. This is an indication to show an inconsistency. 
+
+
+
+.. figure:: /images/GUI/EXPENSES_SCR_GanttSupplierContract.png
+   :alt: Supplier contract gantt chart screen
+   
+   Supplier contract Gantt chart screen
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -232,18 +423,27 @@ Notice dates and due dates are displayed as milestones.
 Call for tenders
 ----------------
 
-Call for tenders stores information about your needs to create a submission to call for tenders.
 
-This can for instance be used to detail all the requests and find the best answer.
+.. figure:: /images/GUI/EXPENSES_SCR_CallforTender.png
+   :alt: Call for tender screen
+   
+   Call for tender screen
+   
+   
+This screen allows you to record information on your needs for any request for tenders from your providers.
 
-You have the possibility to create some different evaluation criterias. Thereafter you can attribute them a value in Offer.
+This can be used to detail all requests and find the best proposal.
+
+To help you do this, you have the option of creating different evaluation criteria. You can then assign a value to them in the offer.
+
+The call for tenders, once saved, automatically creates a provider offer for each of the selected providers.
+
 
 .. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -253,26 +453,36 @@ You have the possibility to create some different evaluation criterias. Thereaft
    * - |RequiredField| Name
      - Short name of the call for tender
    * - |RequiredField| Type
-     - Type of tender
+     - Type of tender. See: :ref:`List of type<call_for_tender-type>`
    * - Project
      - Project link to call for tender
    * - Maximum amount
      - Maximum amount of the call for tender
    * - Expected delivery date
      - Date expected
-
+   * - Description
+     - Description of the tender 
+   * - Business requirements
+     - Description of the requirements
+   * - Technical requirements      
+     - Description of the technical requirements
+   * - Other requirements 
+     - Description of the others requirements (organization, financial...)
+   
+   
+   
+     
 .. rubric:: Section Treatment
 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
-   :widths: 30, 70
    :header-rows: 1
    
    * - Field
      - Description
    * - |RequiredField| Status
-     - Actual :term:`status` of the call for tender.
+     - Actual :term:`status` of the item according to the workflow you have selected.
    * - Responsible
      - Person responsible for the processing of this call for tender.
    * - Sent date
@@ -287,34 +497,94 @@ You have the possibility to create some different evaluation criterias. Thereaft
      - Box checked indicates that the tender is archived with date when checked.
    * - Cancelled
      - Box checked indicates that the tender is cancelled.
+   * - Result
+     - Description or analysis of the desired result.  
+
+
+
 
 .. rubric:: Section Submissions of tenders
+
+This section contains the list of providers to whom the invitation to tender is sent.
+
+
+* Click on |buttonAdd| to add a provider to the list.
+
+* Click on |buttonEdit| to edit informations.
+
+* Click on |buttonIconDelete| to delete a provider to the list.
+
+
+A pop up is displayed. Fill in the different fields necessary for your needs.
+
+.. figure:: /images/GUI/EXPENSES_BOX_SubmissionCallTender.png
+   :alt: Submission to call for tender
+   
+   Submission to call for tender pop-up
+   
+* You can choose a specific provider contact. List of provider contact only. Contacts must be registered in advance on the provider's screen. Change provider, the contacts list is suitable
+
+* The dates of the request and the expected response.
+
+* The status of the submission to tender. Several statuses are available. 
+
+* They are fully configurable and customizable.
+
+* Each status has a color code.
+
+* See: :ref:`List of values<LoV-tender-statut>`
 
 .. figure:: /images/GUI/EXPENSES_ZONE_SubmissionsTender.png
    :alt: Submission of tender
    :align: center
 
-   Submission of tender
+   Submission of tender   
+
    
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 30, 70
-   :align: left
    :header-rows: 1
 
    * - Field
      - Description
    * - Provider
-     - Provider of the tender.
-   * - Contact
-     - Contact for the tender. 
-   * - Request date
+     - Name of the provider to which the offer was sent as well as the color code corresponding to the provider's status in relation to the offer. 
+   * - Requested
      - Request date when tender sent with the hour.
-   * - Expected answer date
-     - Date expected with the hour.
-   * - Tender status
-     - Statut of the tender.
+   * - Expected
+     - Answer date expected with the hour.
+   * - Received
+     - Date of receipt of the provider's offer   
+   * - Evaluation amount
+     - Evaluation note given to the provider upon receipt of the offer according to the selected criteria and the total amount of the offer made by the provider. See: :ref:`Provider Tenders<tenders>`.     
+     
+You can access to each offer by clicking on the name of the provider or by visiting the provider offers screen.
+     
+     
+     
+.. rubric:: Evaluation Criteria
+
+This section allows you to add evaluation criteria to rate your providers based on your requests.
+
+* Click on |buttonAdd| to add a criteria
+* Click on |buttonEdit| to modify a criteria
+* Click on |buttonIconDelete| to delete a criteria     
+     
+.. figure:: /images/GUI/EXPENSES_ZONE_CriterionEvaluation.png
+   :alt: Evaluation criteria pop-up
+   
+   Add an evaluation criteria
+   
+* Name your evaluation criteria.
+
+* Assign a maximum rating value.
+
+* Assign a coefficient according to the importance of the criteria.
+
+* The score is calculated based on the values assigned and reported in the "submission of tenders" table.      
+     
+     
 
 .. raw:: latex
 
@@ -329,15 +599,19 @@ You have the possibility to create some different evaluation criterias. Thereaft
 Provider Tenders
 ----------------
 
-Tenders store information about the responses to the call for tenders that you have submitted.
+provider tenders store information about responses to tenders you have submitted.
 
-This can for instance be used to detail all the tenders and compare them to choose one of them.
+This can be used to detail all the offers, compare them, evaluate them to choose the most suitable for your needs.
 
-If your call for tenders has evaluation criteria, you can attribute a rating for each criteria.
+.. figure:: /images/GUI/EXPENSES_SCR_ProviderTender.png
+   :alt: Provider tender screen
+   
+   Provider tender screen
 
-Evalutation will display a summary of your criterias with their ratings. 
 
-Global rating will then be displayed on the call for tender for all concerned tenders.
+An offer can be created manually or generated automatically following a call for tenders.
+
+Each provider added to the invitation to tender will generate an offer.
 
 
 .. rubric:: Section Description
@@ -345,7 +619,6 @@ Global rating will then be displayed on the call for tender for all concerned te
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -355,7 +628,7 @@ Global rating will then be displayed on the call for tender for all concerned te
    * - |RequiredField| Name
      - Short name of the tender.
    * - |RequiredField| Type
-     - Type of tender.
+     - Type of tender. See: :ref:`List of type<provider_tender_type>`
    * - Project
      - Project link to tender.
    * - Call for tender
@@ -363,16 +636,20 @@ Global rating will then be displayed on the call for tender for all concerned te
    * - Tender statuts
      - Statut of the tender.
    * - |RequiredField| Provider
-     -  Provider of the tender.
+     - Provider of the tender.
    * - External reference
      - External reference of the tender.
+
+
+
+
+
 
 .. rubric:: Section Treatment
 
 .. tabularcolumns:: |l|l|
 
 .. list-table::  Required field |ReqFieldLegend|
-   :widths: 30, 80
    :header-rows: 1
    
    * - Field
@@ -392,11 +669,17 @@ Global rating will then be displayed on the call for tender for all concerned te
    * - Offer validity
      - Offer validity date.
    * - Initial
-     - Price
-   * - Negotiated
-     - Price of negotiated.
+     - Initial amount not taxed - Amount of tax applicable by the provider and the type of product - Total amount 
+   * - Discount
+     - Negotiated price - Enter a numerical value and the percentage is calculated automatically. And conversely, enter a percentage, the numerical value is generated automatically.
+   * - Total
+     - Total amount with discount taken into account.
+   * - Project expense 
+     - Connect your provider's offer to an existing project expense. 
+   * - Generate expense 
+     - Automatically create expenses from the current item. The name of the project expenditure generated will be the same as that of the offer.  
    * - Payment conditions
-     - Type of payment conditions.
+     - Type of payment conditions. 
    * - Delivery delay
      - Delivery delay of the tender.
    * - Expected delivery date
@@ -409,6 +692,35 @@ Global rating will then be displayed on the call for tender for all concerned te
      - Box checked indicates that the tender is archived with date when checked.
    * - Cancelled
      - Box checked indicates that the tender is cancelled.
+   * - Result
+     - Description or analysis of the expected result from this provider.  
+
+
+
+.. rubric:: Evaluation Section
+
+The Evaluation section is only available when the offer is linked to a call for tenders.
+
+If the offer is created manually, the evaluation section does not offer criteria.
+
+
+.. figure:: /images/GUI/EXPENSES_ZONE_EvaluationSection.png
+   :alt: Evaluation section
+   
+   Evaluation section
+   
+   
+When the link is made then: 
+
+
+* You can assign evaluation criteria
+
+* You can assign a rating with a coefficient system.
+
+* The evaluation will display a summary of your criteria with their scores.
+
+* The overall score will then be displayed on the invitation to tender for all the offers concerned.
+
 
 .. raw:: latex
 
@@ -423,18 +735,18 @@ Global rating will then be displayed on the call for tender for all concerned te
 Orders to provider
 ------------------
 
-.. rubric:: Section Description
+This screen allow to manage the orders to provider.
 
-.. figure:: /images/GUI/EXPENSES_ZONE_DescriptionZone.png
-   :alt: Order to provider - Description section
-   :align: center
+.. figure:: /images/GUI/EXPENSES_SCR_OrderProvider.png
+   :alt: Order to provider screen
    
-   Order to provider - Description section
+   Order to provider screen
+   
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -443,18 +755,18 @@ Orders to provider
      - Unique Id for the expense 
    * - |RequiredField| Name
      - Short description of the expense
-   * - |RequiredField| Order to provider type
-     - Type of order: Product and/or Service
+   * - |RequiredField| Order to provider type.
+     - Type of order product and/or Service.  See: :ref:`order_provider_type`
    * - |RequiredField| Project 
      - The project concerned by the order
    * - Sent date 
-     - date of sending to the supplier
+     - Date of sending to the provider
    * - :term:`Origin`
      - Element which is the origin of the quotation 
    * - Provider
      - Name of the provider
    * - External Reference
-     - supplier's reference
+     - Provider reference
 
  
 .. rubric:: Section Treatment
@@ -468,44 +780,84 @@ Orders to provider
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - |RequiredField| Status
-     - Defines the progress of the element's treatment 
+     - Defines the progress of the processing of the element according to the :term:`workflow` used
    * - Responsible
      - Name of the person in charge of the order
    * - Contact
-     - Name of the contact related to the order at the supplier 
+     - Name of the contact related to the order at the provider 
    * - payment conditions 
-     - description of payment terms
+     - Description of payment terms
    * - Delivery delay 
-     - from the validation of the order, duration of treatment and preparation of products/services
-   * - Delivery date : Planned date
-     - Delivery date planned by the supplier
-   * - Delivery date : Real date
-     - Actual delivery date of the supplier
-   * - Delivery date : Validated date
-     - Delivery date validated with the supplier     
+     - From the validation of the order, processing time and preparation of the order
+   * - Delivery date: **Planned date**
+     - Delivery date planned by the provider
+   * - Delivery date: **Real date**
+     - Date of receipt of delivery
+   * - Delivery date: **Validated date**
+     - Date of validation of delivery to the service provider     
    * - :term:`Handled status`
-     - Defines whether ‘handled’ flag is automatically set for this status.
+     - Defines whether ‘handled’ flag is automatically set for this status
    * - :term:`Done status`
-     - Defines whether ‘done’ flag is automatically set for this status.
+     - Defines whether ‘done’ flag is automatically set for this status
    * - :term:`Closed status`
-     - Defines whether ‘closed’ flag is automatically set for this status.
+     - Defines whether ‘closed’ flag is automatically set for this status
    * - :term:`Cancelled status`
-     - Defines whether ‘cancelled’ flag is automatically set for this status.
+     - Defines whether ‘cancelled’ flag is automatically set for this status
    * - Untaxed amount
      - Amount of the order without taxes
    * - Tax rate
-     - applicable tax rates in your country/region
+     - Applicable tax rates in your country/region
    * - Tax Amount
      - Total amount of taxes calculated based on Taxe rate
    * - Full amount
-     - Total amount of the order including taxes             
+     - Total amount of the order including taxes
+   * - Project expense
+     - Connect your provider's offer to an existing project expense
+   * - Generate expense 
+     - Automatically create expenses from the current item. The name of the project expenditure generated will be the same as that of the order.                  
+   * - Comment
+     - Leave your comments here
 
+
+.. rubric:: List of terms section
+
+
+.. figure:: /images/GUI/EXPENSES_ZONE_ListOfTermSection.png
+   :alt: List of term section
+   
+   List of term section
+   
+This section allows you to create one or more terms for your bills.
+
+* Click on |buttonAdd| to add a term. A pop-up opens.
+
+
+.. figure:: /images/GUI/EXPENSES_ZONE_ListOfTerm.png
+   :alt: List of term section
+   
+   List of term section
+   
+* The name and the date are mandatory.
+
+* Enter the number of installments you want to pay your bill.
+
+* If 1 then it is a cash payment.
+
+.. figure:: /images/GUI/EXPENSES_ZONE_ListOfTermDetails.png
+   :alt: calculation after number of deadlines entered
+   
+   Calculation after number of deadlines entered
+   
+* When you enter several terms, the calculation on the total amount is done automatically.
+
+* When you copy your order as a bill, the terms are automatically added to it.
+
+* You can add due dates from the provider bill screen if you have not done so on this screen. 
 
 .. note:: 
 
@@ -530,16 +882,22 @@ from the date of issue of the invoice.
 Failing to mention the payment period in the contract or the invoice,
 it is legally fixed to 30 days after receipt of the goods or performance of the service. 
 
-Depending on the sector, deadlines are modifiable
+* Depending on the sector, deadlines are modifiable
 
-In this screen, you can save, organize, track and edit your payment dates to your supplier
+* you can save, organize, track and edit your payment dates to your provider
+
+* You can record one or more payment delays on each bill to the service provider.
+
+* A bill can therefore be paid either in cash or in several installments.
+
+* Each recorded due date, whether on the supplier orders screen or on the supplier invoices screen, generates a line on the terms screen.
+
 
 .. rubric:: Section Description 
 
 .. tabularcolumns:: |l|l|
 
 .. list-table::  Required field |ReqFieldLegend|
-   :widths: 40, 70
    :header-rows: 1
 
    * - Field
@@ -553,7 +911,7 @@ In this screen, you can save, organize, track and edit your payment dates to you
    * - Order to provider
      - Name of the order atatched to the term of payment  
    * - Provider Bill
-     - the supplier's invoice 
+     - the provider's invoice 
    * - Responsible
      - Name of the person in charge of the payment  
 
@@ -608,12 +966,18 @@ In this screen, you can save, organize, track and edit your payment dates to you
 Provider bills
 --------------
 
+
+.. figure:: /images/GUI/EXPENSES_SCR_ProviderBill.png
+   :alt: Provider bill screen
+   
+   Provider bill screen
+   
+   
 .. rubric:: Section Description 
 
 .. tabularcolumns:: |l|l|
 
 .. list-table::  Required field |ReqFieldLegend|
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -642,7 +1006,6 @@ Provider bills
 .. tabularcolumns:: |l|l|
 
 .. list-table::  Required field |ReqFieldLegend|
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -652,9 +1015,9 @@ Provider bills
    * - Responsible
      - person placing the order 
    * - Contact
-     - name of the person at the supplier related to this bill     
+     - name of the person at the provider related to this bill     
    * - Payment conditions
-     - the payment terms of the supplier 
+     - the payment terms of the provider 
    * - Payment due date
      - expected payment date
    * - :term:`Handled`
@@ -681,7 +1044,7 @@ Provider bills
 Payments to provider
 --------------------
 
-Follow the payment of your supplier invoices to better organize your general cash flow or your working capital
+Follow the payment of your provider invoices to better organize your general cash flow or your working capital
 
 
 .. rubric:: Section Description 
@@ -689,7 +1052,6 @@ Follow the payment of your supplier invoices to better organize your general cas
 .. tabularcolumns:: |l|l|
 
 .. list-table::  Required field |ReqFieldLegend|
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -711,7 +1073,6 @@ Follow the payment of your supplier invoices to better organize your general cas
 .. tabularcolumns:: |l|l|
 
 .. list-table::  Required field |ReqFieldLegend|
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -727,7 +1088,7 @@ Follow the payment of your supplier invoices to better organize your general cas
    * - payment credit 
      - Amount of credit if there is   
    * - Provider payment term
-     - selection of the payment deadline to the supplier
+     - selection of the payment deadline to the provider
    * - Provider bill
      - selection of the provider bill
    * - Provider bill reference
@@ -759,9 +1120,6 @@ Individual expense has detail listing for all items of expense.
 
 This can for instance be used to detail all the expense on one month so that each user opens only one individual expense per month (per project), or detail all the elements of a travel expense.
 
-.. rubric:: Planned amount
-
-Planned amount will help to have an overview of project total costs, even before expense is realized.
 
 .. rubric:: Section Description
 
@@ -775,7 +1133,6 @@ Planned amount will help to have an overview of project total costs, even before
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -798,7 +1155,6 @@ Planned amount will help to have an overview of project total costs, even before
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -807,27 +1163,20 @@ Planned amount will help to have an overview of project total costs, even before
      - Actual :term:`status` of the expense.
    * - Responsible
      - Person responsible for the processing of this expense
-   * - Planned
+   * - Planned amount
      - Planned amount of the expense (Date is mandatory)
-   * - Real
+   * - Real amount
      - Real amount of the expense (Date is mandatory) 
+   * - Budget item
+     - Budget item related to expense  
    * - Payment done
-     - Box checked indicates the payment is done
+     - Box checked indicates the payment is done. 
    * - :term:`Closed`
-     - Box checked indicates that the expense is archived
+     - The box is checked automatically when the invoice linked to this expense is paid
    * - Cancelled
      - Box checked indicates that the expense is cancelled
 
-.. topic:: Fields Planned & Real
 
-   * **Full**: Amount.
-
-     * Real amount is automatically updated with the sum of the amounts of detail lines.
-
-   * **Payment date**: 
-
-     * For field "Planned" is the planned date.
-     * For field "Real" can be the payment date or else.
 
 
 .. raw:: latex
@@ -844,6 +1193,13 @@ Planned amount will help to have an overview of project total costs, even before
 Project expense
 ---------------
 
+.. sidebar:: Other sections
+
+   * :ref:`expense-detail-lines`
+   * :ref:`Linked element<linkElement-section>`
+   * :ref:`Attachments<attachment-section>`
+   * :ref:`Notes<note-section>`
+   
 A project expense stores information about project costs that are not resource costs.
 
 This can be used for all kinds of project cost : 
@@ -853,24 +1209,11 @@ This can be used for all kinds of project cost :
 * Office.
 * Any logistic item.
 
-
-.. rubric:: Planned amount
-
-Planned amount will help to have an overview of project total costs, even before expense is realized.
-
 .. rubric:: Section Description
-
-.. sidebar:: Other sections
-
-   * :ref:`expense-detail-lines`
-   * :ref:`Linked element<linkElement-section>`
-   * :ref:`Attachments<attachment-section>`
-   * :ref:`Notes<note-section>`
 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -904,7 +1247,6 @@ Planned amount will help to have an overview of project total costs, even before
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field

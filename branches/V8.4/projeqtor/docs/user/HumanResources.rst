@@ -301,9 +301,9 @@ The color of the holidays will change according to the validation.
 Leaves Periods
 ==============
 
-Regulated absences are done either by the employees or by their manager
+Regulated absences are done either by the employees or by the manager of leaves.
 
-Absences can be recorded from the leaves Periods screen 
+Absences can be recorded from the leaves Periods screen. 
 
 .. figure:: /images/GUI/RH_SCR_LeavesPeriods.png
    :alt: Leaves periods
@@ -314,7 +314,13 @@ Absences can be recorded from the leaves Periods screen
    
 On this screen, you can save, edit, delete a holiday request, as in the holiday calendar.
 
-The Employee Manager and Administrator can change the status of a holiday (see :ref:`report`).
+The employee can record and submit his leaves.
+
+Only the **Manager of leaves** and **Leaves system administrator** can change the status of a request for the absence of subject to accepted or rejected.
+
+
+
+
 
 
 .. raw:: latex
@@ -340,7 +346,7 @@ On this screen, you can see your leaves rights earned since your contratc's begi
 
 The start and end dates correspond to the period on which the days of leave are calculated
 
-The numbers of the days acquired and remaining 
+The numbers of the acquired and left days to each types 
 
 If your holidays over the reference period and according to the type of leave, then the checkbox "closed" is validated. 
 

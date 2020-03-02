@@ -19,7 +19,11 @@ Today (Dashboard)
    Today screen's Global view
    
 
-This screen allows user to have a global view of its projects and tasks.
+This screen allows the user to have an overview of the projects and tasks he is working on.
+
+His projects, the tasks to which the user is assigned, those for which he is responsible as well as the various tasks created by himself or for which he is a requestor are listed in different sections.
+
+Each list can therefore contain different types of tasks. The user can therefore view activities, questions, decisions, tickets, risks, meetings, milestones, ... as well as financial elements, such as quotes, invoices or contracts.
 
 It's the User parameter “First page” by default
 

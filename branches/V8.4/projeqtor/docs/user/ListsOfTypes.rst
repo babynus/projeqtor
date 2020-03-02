@@ -324,8 +324,6 @@ Milestone type is a way to define common behavior on group of milestones.
 Budget types
 ------------
 
-
-
 Budget types are a way to define the best budget for each project/activity. 
 
 Estimated budget, cash, investment, sale ...
@@ -400,6 +398,89 @@ the open, restricted tender, with minimum capacity requirements or pre-selection
      - Box checked indicates the type is archived.
    * - Description
      - Description of the type.
+
+
+
+.. raw:: latex
+
+    \newpage
+
+.. index:: Supplier Contract (Type)
+
+.. _supplier-contract-type:
+
+Supplier contract types
+-----------------------
+
+Supplier contract types are a way of defining the type of contract with a supplier. 
+
+Types of contract are already pre-registered: management assistance, hosting, technical improvement or Maintenance and support
+
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 20, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for the type.
+   * - |RequiredField| Name
+     - Name of the type.
+   * - Code
+     - Code of the type.
+   * - |RequiredField| Workflow
+     - Defined the workflow ruling status change for items of this type (see: :ref:`workflow`).
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Box checked indicates the type is archived.
+   * - Description
+     - Description of the type.
+
+
+
+.. raw:: latex
+
+    \newpage
+
+.. index:: Supplier Contract (Type)
+
+.. _client-contract-type:
+
+Client contract types
+---------------------
+
+Client contract types are a way of defining the type of contract with a client. 
+
+Types of contract are already pre-registered: management assistance, hosting, technical improvement or Maintenance and support
+
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 20, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for the type.
+   * - |RequiredField| Name
+     - Name of the type.
+   * - Code
+     - Code of the type.
+   * - |RequiredField| Workflow
+     - Defined the workflow ruling status change for items of this type (see: :ref:`workflow`).
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Box checked indicates the type is archived.
+   * - Description
+     - Description of the type.
+
 
 .. raw:: latex
 
@@ -1129,6 +1210,59 @@ Meeting type is a way to define common behavior on group of meetings.
      - Box checked indicates the type is archived.
    * - Description
      - Description of the type.
+
+
+
+.. raw:: latex
+
+    \newpage
+
+.. index:: Change request (Type)
+
+.. _change-request-type:
+
+Change requests types
+---------------------
+
+The change request type is a way to define common behavior on a group of particular requests.
+
+Several types are pre recorded: recurring problems, technical and functional improvement, regulatory constraint and process and quality.
+
+
+.. rubric:: Section Description
+
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
+   
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 20, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for the type.
+   * - |RequiredField| Name
+     - Name of the type.
+   * - Code
+     - Code of the type.
+   * - |RequiredField| Workflow
+     - Defined the workflow ruling status change for items of this type (see: :ref:`workflow`).
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Box checked indicates the type is archived.
+   * - Description
+     - Description of the type.
+
+
+
+
+
+
      
 .. raw:: latex
 
@@ -1171,6 +1305,60 @@ Decision type is a way to define common behavior on group of decisions.
      - Box checked indicates the type is archived.
    * - Description
      - Description of the type.
+
+
+
+
+
+
+
+
+.. raw:: latex
+
+    \newpage
+
+.. index:: Asset (Type)
+
+.. _asset-type:
+
+Asset types
+-----------
+   
+Question type is a way to define common behavior on group of questions.
+
+.. rubric:: Section Description
+
+.. sidebar:: Other sections
+
+   * :ref:`Behavior <behavior-section>`
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 20, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for the type.
+   * - |RequiredField| Name
+     - Name of the type.
+   * - Code
+     - Code of the type.
+   * - |RequiredField| Workflow
+     - Defined the workflow ruling status change for items of this type (see: :ref:`workflow`).
+   * - Sort order
+     - Number to define order of display in lists.
+   * - :term:`Closed`
+     - Box checked indicates the type is archived.
+   * - Description
+     - Description of the type.
+
+
+
+
+
 
 .. raw:: latex
 

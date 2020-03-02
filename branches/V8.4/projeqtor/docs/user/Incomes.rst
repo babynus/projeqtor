@@ -10,6 +10,182 @@
 Incomes
 *******
 
+Follow with the "Incomes" menu, incoming financial movements and your customers and all the elements revolving around them, such as contracts, quotations, bills, catalogs ...
+
+
+.. index:: Client contract 
+
+.. _client-contract:
+
+Client contract
+---------------
+  
+ProjeQtOr gives you the possibility to precisely manage and monitor your customer contracts.
+
+The customer contract is necessarily linked to a customer.
+
+
+.. figure:: /images/GUI/INCOMES_SCR_ClientContrat.png
+   :alt: Client contract screen
+   
+   Client contract screen
+
+
+
+.. rubric:: Section Description
+
+Complete the description of the contract.
+
+.. list-table:: Required field |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - |RequiredField| Name
+     - Name of the contract  
+   * - Number
+     - Reference number of the contract
+   * - |RequiredField| Client contract type
+     - List of types of the contracts
+   * - Project
+     - Project to which this contract will be attached
+   * - |RequiredField| Customer
+     - Customer concerned by the quotation
+   * - Contact  
+     - Customer contacts only. Contacts must be registered in advance on the customer's screen. Change customer, the contacts list is suitable. 
+   * - Client reference    
+     - Reference of the client
+   * - Phone number
+     - The field is of alphanumeric type. You can enter a telephone number with precision. Example:XXXXXXXXXX ext XX 
+   * - Origin    
+     - Allows to link the document defining the SLA
+   * - Description
+     - Descriptive text of the contract
+
+
+
+
+.. rubric:: Section Treatment
+
+Follow the state, the progress of your contract in this section.
+
+ .. compound:: Responsible
+   
+   * Choose a responsible
+   
+   * Its initials are displayed on the Gantt chart of contracts
+   
+
+ .. compound:: Workflow
+   
+   * The workflow is based on the default workflow. 
+   
+   * You can change or modify the current workflow.
+   
+   * See: :ref:`workflow`
+ 
+
+.. _renewal:
+ 
+ .. compound:: Renewal
+   
+   Defines the behavior of the renewal of a contract at the end of the initially planned duration
+   
+      * **Never:** the contract will never be renewed
+      
+      * **Tacit:** the contract will be renewed if there is no termination
+      
+      * **Express:** the contract is renewed and is the subject of a written or verbal act 
+
+
+ .. compound:: States
+   
+      * **Handled:** Date on which the contract is taken over. Effective. This date can be entered manually or by going to the Assigned state of the workflow
+      
+      * **Done:** Date the contract ends.
+      
+      * **Closed:** Date on which the contract was closed.
+
+      * **Cancelled:** Cancellation Date 
+
+
+
+.. rubric:: Section contact
+
+This section allows you to fill in the information relating to your contact with the client.
+
+.. list-table:: Required field |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - |RequiredField| Contact
+     - Name of the client contact
+   * - Phone Number
+     - Phone number of the client contact.The field is not numeric and lets you add textual information such as the extension number.
+   * - |RequiredField| Levels of service agreements
+     - Determines if you have levels of service agreements (:term:`SLA`) with the client for this contract. This check box is an indication.
+   * - Intervention time
+     - Periods during which services, contacts and interventions with the client will be possible. You can choose a time slot for weeks, Saturdays, as well as Sundays and holidays.
+
+
+
+
+
+
+
+.. rubric:: Section Progress
+
+In the Progress section, determine the different dates and deadlines for the contract, notice, deadlines, payments ...
+
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required field |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - Contract dates
+     - Start and end date of the contract
+   * - Initial contract term
+     - Contract duration displayed according to the chosen unit: day, month, year
+   * - Notice period 
+     - Duration displayed according to the chosen unit: day, month, year
+   * - Notice date
+     - Exact date of notice
+   * - Due date
+     - End of contract validity
+   * - Periodicity of the contract (Month)
+     - Duration of the renewal of the contract is possible. Example 24-month subscription renewable after 12 months
+   * - Billing frequency (Month)
+     - Billing frequency during the term of the contract
+       
+
+
+
+
+Client contract Gantt chart
+===========================
+
+In addition to the contract management screen (list and details area), you can view your contracts in a time view on a Gantt chart. This is the "customer contract calendar"
+
+Each bar representing the different contracts, going from the start date to the end date of the contract.
+
+Notice dates and due dates are displayed as milestones. 
+
+Gantt bars for customer contracts turn red when the due date is higher than the end of contract date. 
+
+No calculation is made. This is an indication to show an inconsistency. 
+
+
+.. figure:: /images/GUI/INCOMES_SCR_ClientContratGANTT.png
+   :alt: Client contract gantt chart screen
+   
+   Client contract Gantt chart screen
+  
+
+
 .. index:: Quotation 
 
 .. _quotation:
@@ -495,7 +671,6 @@ Billing Type
      - Payment deadline.
    * - Payment due date
      - Due date for payment (read only).
-     
        The value is calculated with date of bill + payment deadline
    * - Customer
      - Customer who will pay for the bill.
