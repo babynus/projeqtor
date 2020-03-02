@@ -380,11 +380,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         foreach ($objInsert->_Assignment as $val){
           foreach ($val as $id=>$value){
             if($id=='idResource' and $value==$selectedResource ){
-              debugLog($obj);
               echo '<input type="hidden" id="resourcePlanningAssignment" value="'.$selectedResource.'" />';
               break;
             }
-           
           }
         }
       }

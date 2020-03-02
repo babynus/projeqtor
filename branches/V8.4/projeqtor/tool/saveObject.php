@@ -75,7 +75,13 @@ if ($newObj->id and $obj->id and $newObj->id != $obj->id) {
 }
 
 // save to database
-$result = $newObj->save ();
+if(get_class ( $newObj )=='Activity' and RequestHandler::isCodeSet('selectedResource')){
+  $selectedRes=RequestHandler::getValue('selectedResource');
+  $result = $newObj->save ($selectedRes);
+}else{
+  $result = $newObj->save ();
+}
+
 
 // Check if checklist button must be displayed
 $crit = "nameChecklistable='" . get_class ( $newObj ) . "'";
