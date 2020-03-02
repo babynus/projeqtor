@@ -4556,6 +4556,10 @@ function newObject() {
 }
 
 function saveObject() {
+  var param=false;
+  if(dojo.byId('resourcePlanningAssignment')){
+    param=dojo.byId('resourcePlanningAssignment').value;
+  }
   if(dojo.byId('buttonDivCreationInfo')!=null){
     forceRefreshCreationInfo=true;
   }
@@ -4569,7 +4573,12 @@ function saveObject() {
     CKEDITOR.instances[name].updateElement();
   }
   dojo.byId("saveButton").blur();
-  submitForm("../tool/saveObject.php", "resultDivMain", "objectForm", true);
+  if(param != null && dojo.byId('resourcePlanning')){
+    submitForm("../tool/saveObject.php?selectedResource="+param, "resultDivMain", "objectForm", true);
+  }else{
+    submitForm("../tool/saveObject.php", "resultDivMain", "objectForm", true);
+  }
+  
 }
 
 function onKeyDownFunction(event, field, editorFld) {

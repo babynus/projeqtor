@@ -579,17 +579,18 @@ class ActivityMain extends SqlElement {
     }
     
     /// KROWRY HERE
-    if(Parameter::getGlobalParameter('autoSetAssignmentByResponsible')=="YES" and !SqlElement::isCopyInProgress()  and !$this->ActivityPlanningElement->isManualProgress){ 
+    if((Parameter::getGlobalParameter('autoSetAssignmentByResponsible')=="YES" and !SqlElement::isCopyInProgress()  and !$this->ActivityPlanningElement->isManualProgress) or RequestHandler::isCodeSet('selectedResource')){ 
       $proj=new Project($this->idProject,true);
       $type=new Type($proj->idProjectType);
-      if ($type->code!='ADM' and $this->idResource and trim ( $this->idResource ) != '' and ! trim ( $oldResource ) and stripos ( $result, 'id="lastOperationStatus" value="OK"' ) > 0) {
+      $resource=(RequestHandler::isCodeSet('selectedResource'))?RequestHandler::getValue('selectedResource'):$resource;
+      if ($type->code!='ADM' and $resource and trim ( $resource ) != '' and ! trim ( $oldResource ) and stripos ( $result, 'id="lastOperationStatus" value="OK"' ) > 0) {
         // Add assignment for responsible
         $habil = SqlElement::getSingleSqlElementFromCriteria ( 'HabilitationOther', array(
             'idProfile' => getSessionUser ()->getProfile ( $this->idProject ), 
             'scope' => 'assignmentEdit') );
         if ($habil and $habil->rightAccess == 1) {
           $ass = new Assignment ();
-          $crit = array('idResource' => $this->idResource, 'refType' => 'Activity', 'refId' => $this->id);
+          $crit = array('idResource' => $resource, 'refType' => 'Activity', 'refId' => $this->id);
           //$lst = $ass->getSqlElementsFromCriteria ( $crit, false );
           //if (count ( $lst ) == 0) {
           $cpt=$ass->countSqlElementsFromCriteria($crit);
@@ -597,7 +598,7 @@ class ActivityMain extends SqlElement {
             $ass->idProject = $this->idProject;
             $ass->refType = 'Activity';
             $ass->refId = $this->id;
-            $ass->idResource = $this->idResource;
+            $ass->idResource = $resource;
             $ass->assignedWork = 0;
             $ass->realWork = 0;
             $ass->leftWork = 0;
