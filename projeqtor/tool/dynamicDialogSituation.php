@@ -24,6 +24,8 @@
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 require_once "../tool/projeqtor.php";
+require_once "../tool/formatter.php";
+
 if (! array_key_exists('objectClass',$_REQUEST)) {
   throwError('Parameter objectClass not found in REQUEST');
 }
@@ -58,6 +60,14 @@ if (sessionValueExists('screenWidth') and getSessionValue('screenWidth')) {
 if (sessionValueExists('screenHeight')) {
   $detailHeight=round(getSessionValue('screenHeight')*0.60);
 }
+if($situation->date){
+  $dateTime = explode(' ', $situation->date);
+  $date = $dateTime[0];
+  $time = $dateTime[1];
+}else{
+  $date = date('Y-m-d');
+  $time = date('H:i:s');
+}
 ?>
 <div >
   <table style="width:100%;">
@@ -89,7 +99,7 @@ if (sessionValueExists('screenHeight')) {
           <tr>
             <td>
               <label class="dialogLabel" for="situationSituation"><?php echo i18n('colSituation');?> : </label>
-              <input id="situationSituation" name="situationSituation" value="<?php echo $situation->situation;?>" 
+              <input id="situationSituation" name="situationSituation" value="<?php echo $situation->name;?>" 
                    dojoType="dijit.form.TextBox" class="input" style="width:345px"/>
             </td>
           </tr>
@@ -98,13 +108,30 @@ if (sessionValueExists('screenHeight')) {
             <label class="dialogLabel" for="ressource"><?php echo i18n('colResponsible');?> : </label>
             <select dojoType="dijit.form.FilteringSelect" class="input" 
               style="width: 150px;" name="ressource" id="ressource"
-              <?php echo autoOpenFilteringSelect();?> value="">
+              <?php echo autoOpenFilteringSelect();?> value="<?php echo $situation->idResource;?>">
                 <option value=""></option>
                 <?php
                  $specific='imputation';
                  include '../tool/drawResourceListForSpecificAccess.php';?>  
             </select>
            </td>
+          </tr>
+          <tr>
+            <td>
+              <label class="dialogLabel" for="situationDate"><?php echo i18n('colDate');?> : </label>
+              <div id="situationDate" name="situationDate" dojoType="dijit.form.DateTextBox" invalidMessage="<?php echo i18n('messageInvalidDate'); ?>" type="text" maxlength="10"
+              <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
+                echo ' constraints="{datePattern:\''.getSessionValue('browserLocaleDateFormatJs').'\'}" ';
+              }?>
+              style="width:82px;text-align: center;margin-right:-3px;margin-top:1px;" class="inputrequired generalColClass" value="<?php echo $date;?>" hasDownArrow="false">
+              </div>
+              <div id="situationTime" name="situationTime" dojoType="dijit.form.TimeTextBox" invalidMessage="<?php echo i18n('messageInvalidTime'); ?>" type="text" maxlength="8"
+              <?php if (sessionValueExists('browserLocaleTimeFormat')) {
+                echo ' constraints="{timePattern:\''.getSessionValue('browserLocaleTimeFormat').'\'}" ';
+              }?>
+              style="width:64px;text-align: center;" class="inputrequired generalColClass" value="T<?php echo $time;?>" hasDownArrow="false">
+              </div>
+            <td>
           </tr>
           <tr>
             <td>

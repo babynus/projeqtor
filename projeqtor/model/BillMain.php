@@ -116,7 +116,8 @@ class BillMain extends SqlElement {
                       "idle"=>"nobr",
                       "cancelled"=>"nobr",
                       'paymentDueDate'=>'readonly',
-                      'paymentsCount'=>'hidden'
+                      'paymentsCount'=>'hidden',
+                      'idSituation'=>'readonly'
   );  
   
   private static $_colCaptionTransposition = array('description'=>'comment',
@@ -126,10 +127,10 @@ class BillMain extends SqlElement {
                                                    "idUser"=>"issuer",
                                                    'idResource'=>'responsible',
                                                    'paymentDone'=>'paymentComplete',
-                                                    "idSituation"=>"readonly"
+                                                   'idSituation'=>'actualSituation'
   );
   
-  private static $_databaseColumnName = array('taxPct'=>'tax', 'idSituation'=>'actualSituation');
+  private static $_databaseColumnName = array('taxPct'=>'tax');
   public $_calculateForColumn=array("name"=>"concat(coalesce(reference,''),' - ',name,' (',coalesce(fullAmount,0),')')");
   public $_sortCriteriaForList="fullAmount, id";
     
