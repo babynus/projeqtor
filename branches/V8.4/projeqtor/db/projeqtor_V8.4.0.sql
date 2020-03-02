@@ -227,7 +227,7 @@ CREATE TABLE `${prefix}situation` (
   `refId` int(12) unsigned DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
   `situationType` varchar(100) DEFAULT NULL,
-  `date` timestamp DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
   `idUser` int(12) unsigned DEFAULT NULL,
   `idResource` int(12) unsigned DEFAULT NULL,
   `comment` mediumtext DEFAULT NULL,
