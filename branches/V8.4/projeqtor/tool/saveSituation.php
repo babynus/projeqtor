@@ -81,6 +81,11 @@ if ($refType=='CallForTender' or $refType=='Tender' or $refType=='ProviderOrder'
   $situationType='income';
 }
 
+$date = RequestHandler::getValue('situationDate');
+$time = RequestHandler::getValue('situationTime');
+
+$dateTime = $date.' '.substr($time, 1);
+
 Sql::beginTransaction();
 // get the modifications (from request)
 if($situationId){
@@ -95,8 +100,9 @@ $situation->refId=$refId;
 $situation->refType=$refType;
 $situation->idProject = $idProject;
 $situation->idResource=$idRessource;
-$situation->situation=$situationSituation;
+$situation->name=$situationSituation;
 $situation->situationType=$situationType;
+$situation->date = $dateTime;
 $situation->comment=$situationComment;
 
 $result=$situation->save();

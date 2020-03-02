@@ -31,15 +31,17 @@ require_once('_securityCheck.php');
 class SituationMain extends SqlElement {
   
   public $id;
+  public $idProject;
   public $refType;
   public $refId;
-  public $idProject;
+  public $name;
+  public $situationType;
   public $idUser;
   public $date;
-  public $situation;
-  public $situationType;
   public $idResource;
   public $comment;
+  
+  private static $_colCaptionTransposition = array('situation'=>'name');
 
   /** ==========================================================================
    * Constructor
@@ -61,6 +63,19 @@ class SituationMain extends SqlElement {
   function save() {
   	return parent::save();
   }
+  
+  /** ============================================================================
+   * Return the specific colCaptionTransposition
+   * @return the colCaptionTransposition
+   */
+  protected function getStaticColCaptionTransposition($fld=null) {
+  	return self::$_colCaptionTransposition;
+  }
+  
+  /** ========================================================================
+   * Return the specific databaseTableName
+   * @return the databaseTableName
+   */
   
   function drawSituationHistory($obj){
     global $cr, $print, $outMode, $user, $comboDetail, $displayWidth, $printWidth;
@@ -101,7 +116,7 @@ class SituationMain extends SqlElement {
       echo '<td class="noteData" style="text-align:center">' . htmlFormatDateTime($val->date) . '</td>';
       echo '<td class="noteData" style="text-align:left">';
       echo '  <div style="float:left">'.formatCommentThumb($val->comment).'</div>';
-      echo    htmlEncode($val->situation);
+      echo    htmlEncode($val->name);
       echo '</td>';
       $responsible = new ResourceAll($val->idResource);
       echo '<td class="noteData" style="text-align:center">' . htmlEncode($responsible->name) . '</td>';
