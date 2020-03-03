@@ -2280,7 +2280,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           if(get_class($obj)=='ClientContract'){
             $critFld='idClient';
             $critVal=$obj->idClient;
-          }else{
+          }elseif (get_class($obj)=='SupplierContract') {
             $critFld='idProvider';
             $critVal=$obj->idProvider;
           }
