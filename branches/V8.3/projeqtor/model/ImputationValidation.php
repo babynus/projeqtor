@@ -82,13 +82,13 @@ class ImputationValidation{
   	    }
   	  }
   	  
-  	  $critWhere = "";
-  	  if($showSubmitted != ''){
-  	    $critWhere .= " and submitted=".$showSubmitted;
-  	  }
-  	  if($showValidated != ''){
-  	  	$critWhere .= " and validated=".$showValidated;
-  	  }
+//   	  $critWhere = "";
+//   	  if($showSubmitted != ''){
+//   	    $critWhere .= " and submitted=".$showSubmitted;
+//   	  }
+//   	  if($showValidated != ''){
+//   	  	$critWhere .= " and validated=".$showValidated;
+//   	  }
 	  }
 	  
 	  //Header
@@ -137,7 +137,7 @@ class ImputationValidation{
 	  foreach ($userVisbileResourceList as $idResource=>$name){
 	  	$periodValue = new WorkPeriod();
 	  	$where = "idResource=".$idResource;
-	  	if ($critWhere) $where .= $critWhere;
+	  	//if ($critWhere) $where .= $critWhere;
 	  	if ($startWeek){
 	  	 	$where .= " and periodValue >= '".$startWeek."'";
 	  	} if ($endWeek) {
@@ -145,10 +145,15 @@ class ImputationValidation{
 	  	}
 	  	$where .= " Order by periodValue";
 	  	$periodValueList = $periodValue->getSqlElementsFromCriteria(null,null,$where);
+	  	$periodValueListOutOfScope=array();
 	  	//if( ! $periodValueList)continue;
 	  	$periodValueListSorted=array();
 	  	foreach ($periodValueList as $week) {
-	  	  $periodValueListSorted[$week->periodValue]=$week;
+	  	  if ($showSubmitted==='1' and $week->submitted!=1) $periodValueListOutOfScope[$week->periodValue]=$week;
+	  	  else if ($showSubmitted==='0' and $week->submitted!=0) $periodValueListOutOfScope[$week->periodValue]=$week;
+	  	  else if ($showValidated==='1' and $week->validated!=1) $periodValueListOutOfScope[$week->periodValue]=$week;
+	  	  else if ($showValidated==='0' and $week->validated!=0) $periodValueListOutOfScope[$week->periodValue]=$week;
+	  	  else $periodValueListSorted[$week->periodValue]=$week;
 	  	}
 	  	if ($showSubmitted!='1' and  $showValidated!='1') {
 	  	  $lastDayToCheck=($endDay)?$endDay:date('Y-m-d');
@@ -183,7 +188,7 @@ class ImputationValidation{
 	  	  
 	  	  while ($testDay<=$lastDayToCheck) {
   	  	  $testWeek=getWeekNumberFromDate($testDay);
-  	  	  if (! isset($periodValueListSorted[$testWeek])) {
+  	  	  if (! isset($periodValueListSorted[$testWeek]) and ! isset($periodValueListOutOfScope[$testWeek])) {
   	  	    $wp=new WorkPeriod();
   	  	    $wp->idResource=$idResource;
   	  	    $wp->periodRange='week';
