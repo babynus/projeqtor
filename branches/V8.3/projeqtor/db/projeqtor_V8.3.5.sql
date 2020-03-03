@@ -7,4 +7,4 @@
 -- Patch on V8.3.0
 
 
-ALTER TABLE `${prefix}deliverable` CHANGE `impactWork` `impactWork` DECIMAL(12,5) NULL DEFAULT NULL;
+ALTER TABLE `${prefix}deliverable` CHANGE `impactWork` `impactWork` DECIMAL(12,5);
