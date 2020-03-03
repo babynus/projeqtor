@@ -219,7 +219,7 @@ class ColumnSelector extends SqlElement {
 
 			$dataType = $obj->getDataType($col);
 			$dataLength = $obj->getDataLength($col);
-			if ($dataLength>100 or $dataType=='text') {
+			if ($dataLength>400 or $dataType=='text') {
 				continue;
 			}
 			$cpt++;
