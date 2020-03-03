@@ -130,7 +130,12 @@ class ImputationValidation{
 //   	  $weekArray = array_flip($weekArray);
 //   	  $weekList = transformListIntoInClause($weekArray);
 // 	  }
-
+    if (!trim($startDay)) {
+      $h=new History();
+      $minDay=$h->getMinValueFromCriteria('operationDate', null, "1=1", true);
+      if ($minDay) $startDay=substr($minDay,0,10);
+      else $startDay="2015-01-01";
+    }
     $startWeek=($startDay)?date('YW', strtotime($startDay)):'';
     $endWeek=($endDay)?date('YW', strtotime($endDay)):'';
 	  $idCheckBox = 0;
