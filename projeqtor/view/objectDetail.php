@@ -5244,8 +5244,6 @@ function drawVersionStructureFromObjectAsset($obj, $refresh=false, $way, $item) 
   echo '<td class="linkHeader" style="width:40%">'.i18n('colName').'</td>';
   echo '<td class="linkHeader" style="width:10%">' . i18n('colIdStatus') . '</td>';
   echo '<td class="linkHeader" style="width:10%">' . i18n('colType') . '</td>';
-  echo '<td class="linkHeader" style="width:10%">' . i18n('colPlannedDeliveryDate') . '</td>';
-  echo '<td class="linkHeader" style="width:15">' . i18n('colVersionDeliveryDate') . '</td>';
   echo '</tr>';
   $showClosedItemComposition = Parameter::getUserParameter('showClosedItemComposition'); // Show closed items of composition of ComponentVersion
   $showClosedItemStructure = Parameter::getUserParameter('showClosedItemStructure'); // Show closed items of structure of Component Version
@@ -5332,6 +5330,7 @@ function drawElementIntoVersionStructureFromObject($comp, $compObj, $print, $can
   echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
   $nameType = SqlList::getNameFromId('Type', $compObj->idVersionType);
   echo htmlEncode($nameType);
+  if(get_class($obj) != 'Asset'){
   echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
   echo htmlFormatDate($compObj->plannedDeliveryDate);
   echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
@@ -5380,6 +5379,7 @@ function drawElementIntoVersionStructureFromObject($comp, $compObj, $print, $can
   // END ADD qCazelles - dateComposition
   
   echo '</td>';
+  }
   echo '</tr>';
 }
 //END UPDATE tLaguerie & dFayolle
