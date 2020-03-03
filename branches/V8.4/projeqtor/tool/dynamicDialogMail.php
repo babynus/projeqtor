@@ -52,17 +52,15 @@ if ($habil) {
     $displayComboButton=true;
   }
 }
-$show=((RequestHandler::isCodeSet('show')) and RequestHandler::getValue('show')=='1')?true:false;
-if($show==true){
-  $attach= new Attachment();
-  $link= new Link();
-  $where="refType='".$objectClass."' and refId=".$obj->id;
-  $orderBy="creationDate ASC";
-  $lstAttach=$attach->getSqlElementsFromCriteria(null,null,$where,$orderBy);
-  $where="ref2Type='".$objectClass."' and ref2Id=".$obj->id." and ref1Type in ('DocumentVersion','Document')";
-  $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
+$attach= new Attachment();
+$link= new Link();
+$where="refType='".$objectClass."' and refId=".$obj->id;
+$orderBy="creationDate ASC";
+$lstAttach=$attach->getSqlElementsFromCriteria(null,null,$where,$orderBy);
+$where="ref2Type='".$objectClass."' and ref2Id=".$obj->id." and ref1Type in ('DocumentVersion','Document')";
+$lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
   
-}
+
 
 
 ?>
@@ -73,7 +71,6 @@ if($show==true){
       <td>
           <input id="mailRefType" name="mailRefType" type="hidden" value="" />
           <input id="mailRefId" name="mailRefId" type="hidden" value="" />
-          <input id="showAttach" name="showAttach" type="hidden" value="<?php echo $show; ?>" />
           <input id="idEmailTemplate" name="idEmailTemplate" type="hidden" value="" />
           <input id="previousEmail" name="previousEmail" type="hidden" value="" />
           <table style="white-space:nowrap">
@@ -280,9 +277,6 @@ if($show==true){
    </tr>
     <tr>
       <td align="center">
-        <button dojoType="dijit.form.Button" type="button" onclick="showMailAtachement(<?php echo ($show==true)?'0':'1'; ?>)">
-          <?php echo i18n("sendDetailElement");?>
-        </button>
         <button dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogMail').hide();dijit.byId('showAttachement').hide();">
           <?php echo i18n("buttonCancel");?>
         </button>
@@ -292,7 +286,7 @@ if($show==true){
       </td>
     </tr>
   </table> 
-  <?php if ($show==true){?>
+  <?php if(!empty($lstAttach) or !empty($lstDoc)){?>
   <div id='showAttachement' style="position:relative;top:10px;width:90%;left:5%;">
     <table style='width:100%'>
       <tr>
@@ -302,7 +296,6 @@ if($show==true){
         <td class='assignHeader' style='width:25%'><?php echo i18n('DocumentVersion');?></td>
       </tr>
       <?php 
-      if(!empty($lstAttach) or !empty($lstDoc)){
         foreach($lstAttach as $attached){
           echo "<tr>";
           echo "<td class='assignData verticalCenterData'><div id='dialogMail".$attached->fileName."' name='dialogMailToUser' dojoType='dijit.form.CheckBox' type='checkbox' ></div>&nbsp;".$attached->fileName."</td>";
@@ -354,16 +347,8 @@ if($show==true){
             echo " </tr>";
           }
         }
-      }else {?>
-          <tr>
-          <td></td>
-          <td><?php echo i18n('noAttachedFile');?></td>
-          <td></td>
-          <td></td>
-          </tr>
-      <?php }?>
+      }?>
     </table>
   </div>
   <br/>
-  <?php }?>
 </form>   

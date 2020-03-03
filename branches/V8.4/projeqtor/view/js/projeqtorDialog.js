@@ -8132,39 +8132,25 @@ function showMailOptions() {
     }else{
       dijit.byId("dialogMail").show();
     }
-   
-
-   
   }
-  if (dijit.byId("dialogMail")
-      && dojo.byId('dialogMailObjectClass')
-      && dojo.byId('dialogMailObjectClass').value == dojo.byId('objectClass').value) {
+  if (dijit.byId("dialogMail") && dojo.byId('dialogMailObjectClass') && dojo.byId('dialogMailObjectClass').value == dojo.byId('objectClass').value) {
     dojo.byId('mailRefType').value=dojo.byId('objectClass').value;
     dojo.byId('mailRefId').value=dojo.byId('objectId').value;
     refreshListSpecific('emailTemplate', 'selectEmailTemplate','objectIdClass',dojo.byId('objectId').value+'_'+dojo.byId('objectClass').value);
-    if(dojo.byId('showAttach').value=='1'){
-      loadDialog("dialogMail", null, true, '&objectClass='+ dojo.byId('objectClass').value+'&objectId='+dojo.byId('objectId').value+'&show=0');
-    }else{
-      dijit.byId("dialogMail").show();
-    }
+    loadDialog("dialogMail", null, true, '&objectClass='+ dojo.byId('objectClass').value+'&objectId='+dojo.byId('objectId').value);
+    //  dijit.byId("dialogMail").show();
   } else {
-    var param="&objectClass=" + dojo.byId('objectClass').value+"&objectId=" + dojo.byId('objectId').value;
+    var objectClass=dojo.byId('objectClass').value;
+    var objectId=dojo.byId('objectId').value;
+    if(objectClass!=null && objectId!=null){
+      dojo.byId('mailRefType').value=dojo.byId('objectClass').value;
+      dojo.byId('mailRefId').value=dojo.byId('objectId').value;
+    }
+    var param="&objectClass=" +objectClass+"&objectId=" +objectId;
     loadDialog("dialogMail", callback, false, param);
   }
 }
 
-function showMailAtachement(show){
-  var objectClass=dojo.byId('objectClass').value;
-  var objectId=dojo.byId('objectId').value;
-  if(dijit.byId('showAttachement')){
-    dijit.byId('showAttachement').show();
-  }
-  if(objectClass!=null && objectId!=null){
-    dojo.byId('mailRefType').value=objectClass;
-    dojo.byId('mailRefId').value=objectId;
-    loadDialog('dialogMail',null,true,'&objectClass='+objectClass+'&objectId='+objectId+'&show='+show);
-  }
-}
 
 function dialogMailToOtherChange() {
   var show=dijit.byId('dialogMailToOther').get('checked');
