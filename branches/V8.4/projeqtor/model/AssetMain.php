@@ -74,11 +74,12 @@ class AssetMain extends SqlElement {
     <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
     ';
   
-  private static $_colCaptionTransposition = array('idAffectable' => 'user');
+  private static $_colCaptionTransposition = array('idAffectable' => 'user','idAsset' => 'parentAsset');
   
   private static $_fieldsAttributes=array(
       'name'=>'required',
       "installationDate"=>"nobr",
+      "idLocation"=>"nobr",
   );
   
   private static $_databaseColumnName = array();
