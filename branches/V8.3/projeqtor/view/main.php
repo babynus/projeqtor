@@ -657,9 +657,6 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 <div id="mainDiv" style="visibility: hidden;">
   <div id="wait" >
   </div>
-  <div id="disconnectionMessage" class="resultDiv" style="display:none;z-index:999;">
-    <div id="disconnectionMessageText" style="text-align:center;cursor:pointer;" onClick="quitConfirmed = true;window.location = '../index.php';"></div>
-  </div>
   <div id="errorPopup" data-dojo-type="dijit.Dialog" title=<?php echo strtoupper(i18n("ERROR")) ?>></div>
   <div dojoType="dijit.layout.ContentPane" id="resultPopup" style ="vertical-align:middle;min-height:20px;max-height:500px;height:auto" onclick="dojo.byId('resultPopup').style.display='none';"></div>
   <div id="temporaryMessage" style="display:none;z-index:999;text-align:center;position:fixed;width:500px;left:50%;top:10px;margin-left:-250px">
@@ -2135,5 +2132,8 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
 </form>
 <div id="deleteMultipleResultDiv" dojoType="dijit.layout.ContentPane" region="none" style="display:none"></div>
 <div id="resultDivMain"           dojoType="dijit.layout.ContentPane" region="none" style="display:none"></div>
+<div id="disconnectionMessage" dojoType="dijit.layout.ContentPane" region="none" class="resultDiv" style="display:none;opacity:1">
+  <div id="disconnectionMessageText" style="text-align:center;cursor:pointer;" onClick="quitConfirmed = true;window.location = '../index.php';"></div>
+</div>
 </body>
 </html>

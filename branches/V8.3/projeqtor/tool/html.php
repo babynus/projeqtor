@@ -43,7 +43,6 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
 	scriptLog("      =>htmlDrawOptionForReference(col=$col,selection=$selection,object=" .debugDisplayObj($obj).",required=$required,critFld=".debugDisplayObj($critFld).",critVal=".debugDisplayObj($critVal).")");
   // Take into account array of $critFld // TODO : check where it is used 
 
-	  
 // BEGIN - ADD BY TABARY - POSSIBILITY TO HAVE AT X TIMES SAME idXXXX IN THE SAME OBJECT
     $col = foreignKeyWithoutAlias($col);
 // END - ADD BY TABARY - POSSIBILITY TO HAVE AT X TIMES SAME idXXXX IN THE SAME OBJECT
@@ -478,21 +477,37 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     	    	
     	// hide automatically component depending of his type - Add mOlives - Ticket 178 - 17/05/2018
     	if ($col =='idComponent' and get_class($obj)=='Activity' and $obj->idProduct == null){
-    	  $type = new Type();
-    	  $componentTypeDisplay = $type->getSqlElementsFromCriteria(array('lockUseOnlyForCC'=>'0','scope'=>'Component'));
-    	  
+     	  $type = new Type();
+     	  $componentTypeDisplay = $type->getSqlElementsFromCriteria(array('lockUseOnlyForCC'=>'0','scope'=>'Component'));  
+//     	  foreach ($versProjList as $versProj) {
+//     	    $vers=new Version($versProj->idVersion,true);
+//     	    $comp = new Component($vers->idProduct);   	      	    
+//     	    foreach ($componentTypeDisplay as $filterType){
+//     	      if ($comp->idComponentType == $filterType->id)
+//     	        $restrictArray[$vers->idProduct]="OK";
+//     	    }
+//     	  }  	    
+    	  $crit='idComponentType in (0';
+        foreach ($componentTypeDisplay as $filterType){
+          $crit.=','.$filterType->id;
+        }
+        $crit.=')';
+        $comp=new Component();
+        $lstTmpComp=$comp->getSqlElementsFromCriteria(null,null,$crit,null,null,true);
+        foreach($lstTmpComp as $comp) {
+          $restrictArray[$comp->id]="OK";
+        }
+    	}	else {
+    	  $crit="id in (0";
     	  foreach ($versProjList as $versProj) {
-    	    $vers=new Version($versProj->idVersion,true);
-    	    $comp = new Component($vers->idProduct);   	      	    
-    	    foreach ($componentTypeDisplay as $filterType){
-    	      if ($comp->idComponentType == $filterType->id)
-    	        $restrictArray[$vers->idProduct]="OK";
-    	    }
-    	  }  	    
-    	}
-    	else{
-    	  foreach ($versProjList as $versProj) {
-    	    $vers=new Version($versProj->idVersion,true);
+    	    //$vers=new Version($versProj->idVersion,true);
+    	    //$restrictArray[$vers->idProduct]="OK";
+     	    $crit.=','.$versProj->idVersion;
+    	  }
+    	  $crit.=')';
+    	  $vers=new Version();
+    	  $lstTmpVers=$vers->getSqlElementsFromCriteria(null,null,$crit,null,null,true);
+    	  foreach($lstTmpVers as $vers) {
     	    $restrictArray[$vers->idProduct]="OK";
     	  }
     	}  	
@@ -514,24 +529,36 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       $prod=new Product($critVal,true);
       $table=$prod->getComposition(true,true);
       
-     // hide automatically component depending of his type - Add mOlives - Ticket 178 - 17/05/2018
+      // hide automatically component depending of his type - Add mOlives - Ticket 178 - 17/05/2018
       if ($col =='idComponent' and (get_class($obj)=='Activity' or get_class($obj)=='Ticket') and $obj->idProduct != null){
+//         $type = new Type();
+//         $componentTypeNoDisplay = $type->getSqlElementsFromCriteria(array('lockUseOnlyForCC'=>'1','scope'=>'Component'));        
+//         foreach($table as $key => $val){
+//            $comp = new Component($key);
+//            foreach ($componentTypeNoDisplay as $ctnd){
+//              if ($comp->idComponentType == $ctnd->id )
+//                unset($table[$key]);       
+//            }
+//         }     
         $type = new Type();
-        $componentTypeNoDisplay = $type->getSqlElementsFromCriteria(array('lockUseOnlyForCC'=>'1','scope'=>'Component'));        
-        foreach($table as $key => $val){
-           $comp = new Component($key);
-           foreach ($componentTypeNoDisplay as $ctnd){
-             if ($comp->idComponentType == $ctnd->id )
-               unset($table[$key]);       
-           }
-        }        
+        $componentTypeDisplay = $type->getSqlElementsFromCriteria(array('lockUseOnlyForCC'=>'0','scope'=>'Component'));   
+        $crit='idComponentType in (0';
+        foreach ($componentTypeDisplay as $filterType){
+          $crit.=','.$filterType->id;
+        }
+        $crit.=')';
+        $comp=new Component();
+        $lstTmpComp=$comp->getSqlElementsFromCriteria(null,null,$crit,null,null,true);
+        foreach($lstTmpComp as $comp) {
+          $restrictArray[$comp->id]="OK";
+        }
       }
       //End mOlives - Ticket 178 - 17/05/2018
       if ($selection) {
         $table[$selection]=SqlList::getNameFromId(substr($col,2), $selection);
       }
       // End $col=='idComponent' and $critFld=='idProduct'
-    } else if (substr($col,-16)=='ComponentVersion' and $critFld=='idProductVersion' and $critVal) {
+    } else if (substr($col,-16)=='ComponentVersion' and $critFld=='idProductVersion' and $critVal) { 
       // Limit Component version (target, source or else) depending on Product Version
       $prodVers=new ProductVersion($critVal,true);
       $table=$prodVers->getComposition(true,true);
@@ -542,16 +569,30 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       }
       
       if (get_class($obj) == 'Ticket'){
+//         $type = new Type();
+//         $componentTypeNoDisplay = $type->getSqlElementsFromCriteria(array('lockUseOnlyForCC'=>'1','scope'=>'ComponentVersion'));
+//         //// hide automatically component Version depending of his type - Add mOlives - Ticket 178 - 17/05/2018
+//         foreach ($table as $key => $val){
+//           $compVers = new ComponentVersion($key);
+//           foreach($componentTypeNoDisplay as $ctnd){
+//             if ($compVers->idComponentVersionType == $ctnd->id)
+//               unset($table[$key]); 
+//           }
+//         }   
+
         $type = new Type();
-        $componentTypeNoDisplay = $type->getSqlElementsFromCriteria(array('lockUseOnlyForCC'=>'1','scope'=>'ComponentVersion'));
-        //// hide automatically component Version depending of his type - Add mOlives - Ticket 178 - 17/05/2018
-        foreach ($table as $key => $val){
-          $compVers = new ComponentVersion($key);
-          foreach($componentTypeNoDisplay as $ctnd){
-            if ($compVers->idComponentVersionType == $ctnd->id)
-              unset($table[$key]); 
-          }
-        }    
+        $componentTypeDisplay = $type->getSqlElementsFromCriteria(array('lockUseOnlyForCC'=>'0','scope'=>'ComponentVersion'));
+        $crit='idVersionType in (0';
+        foreach ($componentTypeDisplay as $filterType){
+          $crit.=','.$filterType->id;
+        }
+        $crit.=')';
+        $compVers=new ComponentVersion();
+        $lstTmpCompVers=$compVers->getSqlElementsFromCriteria(null,null,$crit,null,null,true);
+        foreach($lstTmpCompVers as $compVers) {
+          $restrictArray[$compVers->id]="OK";
+        }
+        
       }
       
       if ($selection) {
