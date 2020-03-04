@@ -36,13 +36,11 @@ class SituationMain extends SqlElement {
   public $refId;
   public $name;
   public $situationType;
-  public $idUser;
   public $date;
   public $idResource;
+  public $idUser;
   public $comment;
   
-  private static $_colCaptionTransposition = array('situation'=>'name');
-
   /** ==========================================================================
    * Constructor
    * @param $id the id of the object in the database (null if not stored yet)
@@ -64,6 +62,54 @@ class SituationMain extends SqlElement {
   	return parent::save();
   }
   
+  function drawSituationHistory($obj){
+  	global $cr, $print, $outMode, $user, $comboDetail, $displayWidth, $printWidth;
+  	if ($comboDetail or !$obj->id) {
+  		return;
+  	}
+  	$canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj) == "YES";
+  	$critWhere = array('refType'=>get_class($obj),'refId'=>$obj->id,'idProject'=>$obj->idProject);
+  	$situationList = $this->getSqlElementsFromCriteria($critWhere,null,null, 'date desc');
+  	echo '</br>';
+  	echo '<table width="99.9%">';
+  	echo '<tr>';
+  	if (!$print) {
+  		echo '<td class="noteHeader smallButtonsGroup" style="width:10%">';
+  		if (!$print and $canUpdate) {
+  			echo '<a '; echo 'onClick="addSituation('.htmlEncode($obj->id). ',\''.htmlEncode(get_class($obj)).'\','.htmlEncode($obj->idProject). ');"title="' . i18n('addSituation') .'"'; echo '>';
+  			echo formatSmallButton('Add');
+  			echo '</a>';
+  		}
+  		echo '</td>';
+  	}
+  	echo '<td class="noteHeader" style="width:10%">' . i18n('colId') . '</td>';
+  	echo '<td class="noteHeader" style="width:20%">' . i18n('colDate') . '</td>';
+  	echo '<td class="noteHeader" style="width:40%">' . i18n('colSituation') . '</td>';
+  	echo '<td class="noteHeader" style="width:30%">' . i18n('colResponsible') . '</td>';
+  	echo '</tr>';
+  	foreach ($situationList as $id=>$val){
+  		echo '<tr>';
+  		if (!$print) {
+  			echo '<td class="noteData smallButtonsGroup">';
+  			if (!$print and $canUpdate) {
+  				echo '  <a onClick="editSituation('.htmlEncode($val->id).');" title="'.i18n('editSitutation').'">'.formatSmallButton('Edit').'</a> ';
+  				echo ' <a onClick="removeSituation('.htmlEncode($val->id).');" title="'.i18n('removeSituation').'" > '.formatSmallButton('Remove').'</a>';
+  			}
+  			echo '</td>';
+  		}
+  		echo '<td class="noteData" style="text-align:center">' . htmlEncode($val->id) . '</td>';
+  		echo '<td class="noteData" style="text-align:center">' . htmlFormatDateTime($val->date) . '</td>';
+  		echo '<td class="noteData" style="text-align:left">';
+  		echo '  <div style="float:left">'.formatCommentThumb($val->comment).'</div>';
+  		echo    htmlEncode($val->name);
+  		echo '</td>';
+  		$responsible = new ResourceAll($val->idResource);
+  		echo '<td class="noteData" style="text-align:center">' . htmlEncode($responsible->name) . '</td>';
+  		echo '</tr>';
+  	}
+  	echo '</table>';
+  }
+  
   /** ============================================================================
    * Return the specific colCaptionTransposition
    * @return the colCaptionTransposition
@@ -76,54 +122,6 @@ class SituationMain extends SqlElement {
    * Return the specific databaseTableName
    * @return the databaseTableName
    */
-  
-  function drawSituationHistory($obj){
-    global $cr, $print, $outMode, $user, $comboDetail, $displayWidth, $printWidth;
-    if ($comboDetail or !$obj->id) {
-      return;
-    }
-    $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj) == "YES";
-    $critWhere = array('refType'=>get_class($obj),'refId'=>$obj->id,'idProject'=>$obj->idProject);
-    $situationList = $this->getSqlElementsFromCriteria($critWhere,null,null, 'date desc');
-    echo '</br>';
-    echo '<table width="99.9%">';
-    echo '<tr>';
-    if (!$print) {
-    	echo '<td class="noteHeader smallButtonsGroup" style="width:10%">';
-    	if (!$print and $canUpdate) {
-    		echo '<a '; echo 'onClick="addSituation('.htmlEncode($obj->id). ',\''.htmlEncode(get_class($obj)).'\','.htmlEncode($obj->idProject). ');"title="' . i18n('addSituation') .'"'; echo '>';
-    		echo formatSmallButton('Add');
-    		echo '</a>';
-    	}
-    	echo '</td>';
-    }
-    echo '<td class="noteHeader" style="width:10%">' . i18n('colId') . '</td>';
-    echo '<td class="noteHeader" style="width:20%">' . i18n('colDate') . '</td>';
-    echo '<td class="noteHeader" style="width:40%">' . i18n('colSituation') . '</td>';
-    echo '<td class="noteHeader" style="width:30%">' . i18n('colResponsible') . '</td>';
-    echo '</tr>';
-    foreach ($situationList as $id=>$val){
-      echo '<tr>';
-      if (!$print) {
-      	echo '<td class="noteData smallButtonsGroup">';
-      	if (!$print and $canUpdate) {
-      		echo '  <a onClick="editSituation('.htmlEncode($val->id).');" title="'.i18n('editSitutation').'">'.formatSmallButton('Edit').'</a> ';
-      		echo ' <a onClick="removeSituation('.htmlEncode($val->id).');" title="'.i18n('removeSituation').'" > '.formatSmallButton('Remove').'</a>';
-      	}
-      	echo '</td>';
-      }
-      echo '<td class="noteData" style="text-align:center">' . htmlEncode($val->id) . '</td>';
-      echo '<td class="noteData" style="text-align:center">' . htmlFormatDateTime($val->date) . '</td>';
-      echo '<td class="noteData" style="text-align:left">';
-      echo '  <div style="float:left">'.formatCommentThumb($val->comment).'</div>';
-      echo    htmlEncode($val->name);
-      echo '</td>';
-      $responsible = new ResourceAll($val->idResource);
-      echo '<td class="noteData" style="text-align:center">' . htmlEncode($responsible->name) . '</td>';
-      echo '</tr>';
-    }
-    echo '</table>';
-  }
   
   }
 ?>
