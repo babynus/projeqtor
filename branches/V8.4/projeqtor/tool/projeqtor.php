@@ -286,7 +286,7 @@ if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMo
       } else {
         echo '<input type="hidden" id="lastOperation" name="lastOperation" value="testConnection">';
         echo '<input type="hidden" id="lastOperationStatus" name="lastOperationStatus" value="ERROR">';
-        echo '<span class="messageERROR" >'.i18n('errorConnection').'</span>';
+        echo '<div class="messageERROR" >'.i18n('errorConnection').'</div>';
       }
       exit();
     }
