@@ -40,9 +40,11 @@ class ClientContractMain extends SqlElement {
   public $origin;
   public $description;
   public $_sec_Progress;
-  public $_tab_2_1=array('startDate', 'endDate' , 'contractDate');
+  public $_tab_4_1=array('startDate', 'endDate','','' , 'contractDate');
   public $startDate;
   public $endDate;
+  public $_void_1;
+  public $_void_2;
   public $initialContractTerm;
   public $idUnitContract;
   public $noticePeriod;
@@ -65,8 +67,8 @@ class ClientContractMain extends SqlElement {
   public $idleDate;
   public $cancelled;
   public $_lib_cancelled;
-  public $_sec_contacts;
-  public $idContactContract;
+  public $_sec_clientContact;
+  public $idContact;
   public $phoneNumber;
   public $sla;
   public $_lib_help_sla;
@@ -120,7 +122,6 @@ class ClientContractMain extends SqlElement {
   private static $_colCaptionTransposition = array(
    'idPeriod'=>'period',
    'idUser'=>'issuer',
-   'idContactContract'=>'idContact',
    'idResource'=>'responsible',
    'idUnitContract'=>'idUnitDurationContract',
    'idUnitNotice'=>'idUnitDurationNotice',
@@ -128,7 +129,9 @@ class ClientContractMain extends SqlElement {
   
   private static $_databaseColumnName = array( 
       'idUnitContract'=>'idUnitDurationContract', 
-      'idUnitNotice' => 'idUnitDurationNotice');
+      'idUnitNotice' => 'idUnitDurationNotice',
+      'idContact'=>'idContactContract',
+  );
    /** ==========================================================================
    * Constructor
    * @param $id the id of the object in the database (null if not stored yet)
