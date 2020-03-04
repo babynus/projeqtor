@@ -8114,6 +8114,18 @@ function globalPlanningSelectItems(value) {
 // =========================================================
 // Other
 // =========================================================
+
+
+//    var objectClass=dojo.byId('objectClass').value;
+//    var objectId=dojo.byId('objectId').value;
+//    var param='';
+//    if(objectClass!=null && objectId!=null  &&  dojo.byId('mailRefType') &&  dojo.byId('mailRefId').value){
+//      dojo.byId('mailRefType').value=dojo.byId('objectClass').value;
+//      dojo.byId('mailRefId').value=dojo.byId('objectId').value;
+//       param="&objectClass=" +objectClass+"&objectId=" +objectId;
+//    }
+
+
 function showMailOptions() {
   var callback=function() {
     dojo.byId('mailRefType').value=dojo.byId('objectClass').value;
@@ -8127,30 +8139,48 @@ function showMailOptions() {
     }
     dijit.byId("dialogMail").set('title', title);
     refreshListSpecific('emailTemplate', 'selectEmailTemplate','objectIdClass',dojo.byId('objectId').value+'_'+dojo.byId('objectClass').value);
-    if(dojo.byId('showAttach').value=='1'){
-      loadDialog("dialogMail", null, true, '&objectClass='+ dojo.byId('objectClass').value+'&objectId='+dojo.byId('objectId').value+'&show=0');
-    }else{
-      dijit.byId("dialogMail").show();
-    }
+    loadDialog("dialogMail", null, true, '&objectClass='+ dojo.byId('objectClass').value+'&objectId='+dojo.byId('objectId').value);
   }
-  if (dijit.byId("dialogMail") && dojo.byId('dialogMailObjectClass') && dojo.byId('dialogMailObjectClass').value == dojo.byId('objectClass').value) {
+  if (dijit.byId("dialogMail")
+      && dojo.byId('dialogMailObjectClass')
+      && dojo.byId('dialogMailObjectClass').value == dojo.byId('objectClass').value) {
     dojo.byId('mailRefType').value=dojo.byId('objectClass').value;
     dojo.byId('mailRefId').value=dojo.byId('objectId').value;
     refreshListSpecific('emailTemplate', 'selectEmailTemplate','objectIdClass',dojo.byId('objectId').value+'_'+dojo.byId('objectClass').value);
     loadDialog("dialogMail", null, true, '&objectClass='+ dojo.byId('objectClass').value+'&objectId='+dojo.byId('objectId').value);
-    //  dijit.byId("dialogMail").show();
   } else {
-    var objectClass=dojo.byId('objectClass').value;
-    var objectId=dojo.byId('objectId').value;
-    if(objectClass!=null && objectId!=null){
-      dojo.byId('mailRefType').value=dojo.byId('objectClass').value;
-      dojo.byId('mailRefId').value=dojo.byId('objectId').value;
-    }
-    var param="&objectClass=" +objectClass+"&objectId=" +objectId;
+    var param="&objectClass=" + dojo.byId('objectClass').value+"&objectId=" + dojo.byId('objectId').value;
     loadDialog("dialogMail", callback, false, param);
   }
 }
 
+//florent 
+function showAttachedSize(size,name){
+  var totalSize=dojo.byId('totalSizeNoConvert').value;
+  if(isNaN(size)){
+    size=0;
+  }
+  console.log(dijit.byId('dialogMail'+name).get('checked'));
+  if(dijit.byId('dialogMail'+name).get('checked')==true){
+    totalSize=Number(totalSize)+Number(size);
+  }else{
+    totalSize=Number(totalSize)-Number(size);
+  }
+  noConvert=totalSize;
+  if(totalSize!=0){
+    totalSize=octetConvertSize(totalSize);
+  }
+  dojo.byId('totalSizeNoConvert').value=noConvert;
+  dojo.byId('totalSize').value=totalSize;
+}
+
+function octetConvertSize(octet){
+  octet = Math.abs(parseInt(octet, 10));
+  var def = [[1, 'octets'], [1024, 'ko'], [1024*1024, 'Mo'], [1024*1024*1024, 'Go'], [1024*1024*1024*1024, 'To']];
+  for(var i=0; i<def.length; i++){
+    if(octet<def[i][0]) return (octet/def[i-1][0]).toFixed(2)+' '+def[i-1][1];
+  }
+}
 
 function dialogMailToOtherChange() {
   var show=dijit.byId('dialogMailToOther').get('checked');

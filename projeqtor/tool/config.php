@@ -309,6 +309,12 @@ $value['AttachmentMaxSize'] = "size in bytes (1024 * 1024 * MB)";
 $pname['AttachmentMaxSize'] = 'paramAttachmentMaxSize';
 $ctrls['AttachmentMaxSize'] = 'integer';
 
+$param['AttachmentMaxSizeMail'] = 1024*1024*2;
+$label['AttachmentMaxSizeMail'] = "Max file size for attachment for Mail";
+$value['AttachmentMaxSizeMail'] = "size in bytes (1024 * 1024 * MB)";
+$pname['AttachmentMaxSizeMail'] = 'AttachmentMaxSizeMail';
+$ctrls['AttachmentMaxSizeMail'] = 'integer';
+
 $param['crlf08']='';
 $label['crlf08']='crlf';
 
