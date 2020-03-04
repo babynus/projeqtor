@@ -2282,7 +2282,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             $critVal=$obj->idClient;
           }elseif (get_class($obj)=='SupplierContract') {
             $critFld='idProvider';
-            $critVal=$obj->idProvider;
+            $critVal=($obj->idProvider)?$obj->idProvider:'0';
           }
         }
         // END ADD qCazelles
