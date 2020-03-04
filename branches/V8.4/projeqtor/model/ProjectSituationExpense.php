@@ -28,10 +28,19 @@
  * Line defines right to the application for a menu and a profile.
  */  
 require_once('_securityCheck.php'); 
-class SituationIncome extends Situation {
+class ProjectSituationExpense extends ProjectSituation {
   
-  private static $_databaseTableName = 'situation';
+  private static $_databaseTableName = 'projectsituation';
 
+  private static $_fieldsAttributes=array(
+  		'id'=>'hidden',
+        'name'=>'hidden',
+  		'situtationNameIncome'=>'hidden',
+  		'refTypeIncome'=>'hidden',
+  		'situationDateIncome'=>'hidden',
+  		'idResourceIncome'=>'hidden',
+  		'commentIncome'=>'hidden',
+  );
   /** ==========================================================================
    * Constructor
    * @param $id the id of the object in the database (null if not stored yet)
@@ -47,6 +56,10 @@ class SituationIncome extends Situation {
    */
   function __destruct() {
   	parent::__destruct();
+  }
+  
+  protected function getStaticFieldsAttributes() {
+  	return self::$_fieldsAttributes;
   }
   
   protected function getStaticDatabaseTableName() {

@@ -46,12 +46,13 @@ if (array_key_exists('situationId',$_REQUEST)) {
 }
 
 if ($situationId) {
-  $situation=new Situation($situationId);
+	$situation=new Situation($situationId);
 } else {
-  $situation=new Situation();
-  $situation->refType=$objectClass;
-  $situation->refId=$objectId;
+	$situation=new Situation();
+	$situation->refType=$objectClass;
+	$situation->refId=$objectId;
 }
+
 $detailHeight=600;
 $detailWidth=1010;
 if (sessionValueExists('screenWidth') and getSessionValue('screenWidth')) {
@@ -68,48 +69,48 @@ if($situation->date){
   $date = date('Y-m-d');
   $time = date('H:i:s');
 }
+$userId = getCurrentUserId();
 ?>
 <div >
   <table style="width:100%;">
+  <tr>
+    <td>
+      <div>
+        <label class="dialogLabel" for="dialogSituationPredefinedSituation" ><?php echo i18n("colPredefinedSituation");?> : </label>
+        <select id="dialogSituationPredefinedSituation" name="dialogSituationPredefinedSituation" dojoType="dijit.form.FilteringSelect"
+        <?php echo autoOpenFilteringSelect();?>
+        onchange="situationSelectPredefinedText(this.value);"
+        class="input" style="width:345px">
+         <option value=""></option>
+         <?php
+         ?>
+        </select>
+        </div>
+      </td>
+    </tr>
     <tr>
       <td>
-        <form id='situationForm' name='situationForm' onSubmit="return false;" >
+        <form dojoType="dijit.form.Form" id='situationForm' name='situationForm' onSubmit="return false;" >
          <input id="situationId" name="situationId" type="hidden" value="<?php echo $situation->id;?>" />
          <input id="situationRefType" name="situationRefType" type="hidden" value="<?php if($situationId){echo $situation->refType;}else{echo $objectClass;}?>" />
          <input id="situationRefId" name="situationRefId" type="hidden" value="<?php if($situationId){echo $situation->refId;}else{echo $object->id;}?>" />
          <input id="situationType" name="situationType" type="hidden" value="<?php echo $situation->situationType;?>" />
          <input id="idProject" name="idProject" type="hidden" value="<?php if($situationId){echo $situation->idProject;}else{echo $object->idProject;}?>" />
          <input id="situationEditorType" name="situationEditorType" type="hidden" value="<?php echo getEditorType();?>" />
-        <table>
-          <tr>
-            <td>
-              <div>
-                <label class="dialogLabel" for="dialogSituationPredefinedSituation" ><?php echo i18n("colPredefinedSituation");?> : </label>
-                <select id="dialogSituationPredefinedSituation" name="dialogSituationPredefinedSituation" dojoType="dijit.form.FilteringSelect"
-                <?php echo autoOpenFilteringSelect();?>
-                onchange="situationSelectPredefinedText(this.value);"
-                class="input" style="width:345px">
-                 <option value=""></option>
-                 <?php
-                 ?>
-                </select>
-              </div>
-            </td>
-          </tr>
+         <table>
           <tr>
             <td>
               <label class="dialogLabel" for="situationSituation"><?php echo i18n('colSituation');?> : </label>
               <input id="situationSituation" name="situationSituation" value="<?php echo $situation->name;?>" 
-                   dojoType="dijit.form.TextBox" class="input" style="width:345px"/>
+                   dojoType="dijit.form.TextBox" class="input required" required='required' style="width:345px"/>
             </td>
           </tr>
           <tr>
            <td>
             <label class="dialogLabel" for="ressource"><?php echo i18n('colResponsible');?> : </label>
-            <select dojoType="dijit.form.FilteringSelect" class="input" 
+            <select dojoType="dijit.form.FilteringSelect" class="input required" required='required'
               style="width: 150px;" name="ressource" id="ressource"
-              <?php echo autoOpenFilteringSelect();?> value="<?php echo $situation->idResource;?>">
-                <option value=""></option>
+              <?php echo autoOpenFilteringSelect();?> value="<?php if($situation->idResource){echo $situation->idResource;}else{echo $userId;}?>">
                 <?php
                  $specific='imputation';
                  include '../tool/drawResourceListForSpecificAccess.php';?>  
@@ -123,13 +124,13 @@ if($situation->date){
               <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
                 echo ' constraints="{datePattern:\''.getSessionValue('browserLocaleDateFormatJs').'\'}" ';
               }?>
-              style="width:82px;text-align: center;margin-right:-3px;margin-top:1px;" class="inputrequired generalColClass" value="<?php echo $date;?>" hasDownArrow="false">
+              style="width:82px;text-align: center;margin-right:-3px;margin-top:1px;" class="input required generalColClass" required='required' value="<?php echo $date;?>" hasDownArrow="false">
               </div>
               <div id="situationTime" name="situationTime" dojoType="dijit.form.TimeTextBox" invalidMessage="<?php echo i18n('messageInvalidTime'); ?>" type="text" maxlength="8"
               <?php if (sessionValueExists('browserLocaleTimeFormat')) {
                 echo ' constraints="{timePattern:\''.getSessionValue('browserLocaleTimeFormat').'\'}" ';
               }?>
-              style="width:64px;text-align: center;" class="inputrequired generalColClass" value="T<?php echo $time;?>" hasDownArrow="false">
+              style="width:64px;text-align: center;" class="input required generalColClass" required='required' value="T<?php echo $time;?>" hasDownArrow="false">
               </div>
             <td>
           </tr>

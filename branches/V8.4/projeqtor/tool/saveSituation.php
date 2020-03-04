@@ -32,81 +32,79 @@
 require_once "../tool/projeqtor.php";
 
 // Get the situation info
-if (! array_key_exists('situationRefType',$_REQUEST)) {
-  throwError('situationRefType parameter not found in REQUEST');
-}
-$refType=$_REQUEST['situationRefType'];
-Security::checkValidClass($refType);
-
-if ($refType=='TicketSimple') {
-  $refType='Ticket';    
-}
-if (! array_key_exists('situationRefId',$_REQUEST)) {
-  throwError('situationRefId parameter not found in REQUEST');
-}
-$refId=$_REQUEST['situationRefId'];
-if (! array_key_exists('situationSituation',$_REQUEST)) {
-  throwError('situationSituation parameter not found in REQUEST');
-}
-
-$situationSituation=$_REQUEST['situationSituation'];
-$situationComment=null;
-if (array_key_exists('situationComment',$_REQUEST)) {
-  $situationComment=$_REQUEST['situationComment'];
-}
-
-$situationId=null;
-if (array_key_exists('situationId',$_REQUEST)) {
-  $situationId=$_REQUEST['situationId'];
-}
+$refType=RequestHandler::getClass('situationRefType');
+$refId=RequestHandler::getId('situationRefId');
+$action = RequestHandler::getValue('action');
+$situationSituation=RequestHandler::getValue('situationSituation');
+$situationComment=RequestHandler::getValue('situationComment');
+$situationId=RequestHandler::getId('situationId');
 $situationId=trim($situationId);
 if ($situationId=='') {
   $situationId=null;
 }
-
-$idProject=null;
-if (array_key_exists('idProject',$_REQUEST)) {
-	$idProject=$_REQUEST['idProject'];
-}
-
-$idRessource=null;
-if (array_key_exists('ressource',$_REQUEST)) {
-	$idRessource=$_REQUEST['ressource'];
-}
-
+$idProject=RequestHandler::getId('idProject');
+$idRessource=RequestHandler::getId('ressource');
 $situationType=null;
+$date = RequestHandler::getValue('situationDate');
+$time = RequestHandler::getValue('situationTime');
+$dateTime = $date.' '.substr($time, 1);
+
+Sql::beginTransaction();
+// get the modifications (from request)
 if ($refType=='CallForTender' or $refType=='Tender' or $refType=='ProviderOrder' or $refType=='ProviderBill') {
   $situationType='expense';
 }else{
   $situationType='income';
 }
-
-$date = RequestHandler::getValue('situationDate');
-$time = RequestHandler::getValue('situationTime');
-
-$dateTime = $date.' '.substr($time, 1);
-
-Sql::beginTransaction();
-// get the modifications (from request)
-if($situationId){
-  $situation=new Situation($situationId);
-}else{
-  $situation=new Situation();
+if ($situationId) {
+	$situation=new Situation($situationId);
+} else {
+	$situation=new Situation();
 }
 
-$user=getSessionUser();
-$situation->idUser=$user->id;
-$situation->refId=$refId;
-$situation->refType=$refType;
-$situation->idProject = $idProject;
-$situation->idResource=$idRessource;
-$situation->name=$situationSituation;
-$situation->situationType=$situationType;
-$situation->date = $dateTime;
-$situation->comment=$situationComment;
+if($action == 'remove'){
+  $result=$situation->delete();
+}else{
+  $situation->idUser=getCurrentUserId();
+  $situation->refId=$refId;
+  $situation->refType=$refType;
+  $situation->idProject = $idProject;
+  $situation->idResource=$idRessource;
+  $situation->name=$situationSituation;
+  $situation->situationType=$situationType;
+  $situation->date = $dateTime;
+  $situation->comment=$situationComment;
+  $result=$situation->save();
+}
 
-$result=$situation->save();
-
+$actualSituation = null;
+$obj = new $refType($refId);
+$critWhere = array('refType'=>$refType,'refId'=>$refId,'idProject'=>$obj->idProject);
+$situationList = $situation->getSqlElementsFromCriteria($critWhere,null,null, 'date desc');
+if(count($situationList) > 0){
+	$actualSituation = $situationList[0];
+}
+if($actualSituation->id and $actualSituation->id != $obj->idSituation){
+	$obj->idSituation = $actualSituation->id;
+	$obj->save();
+	$projectSituation = SqlElement::getSingleSqlElementFromCriteria('ProjectSituation', array('idProject'=>$actualSituation->idProject));
+	$projectName = SqlList::getNameFromId('Project', $actualSituation->idProject);
+	$projectSituation->name = i18n('projectSituation').'-'.$projectName;
+	if($actualSituation->situationType == 'expense'){
+      $projectSituation->refIdExpense = $actualSituation->refId;
+      $projectSituation->refTypeExpense = $actualSituation->refType;
+      $projectSituation->idResourceExpense = $actualSituation->idResource;
+      $projectSituation->situationNameExpense = $actualSituation->name;
+      $projectSituation->situationDateExpense = $actualSituation->date;
+	}else{
+	  $projectSituation->refIdIncome = $actualSituation->refId;
+	  $projectSituation->refTypeIncome = $actualSituation->refType;
+	  $projectSituation->idResourceIncome = $actualSituation->idResource;
+	  $projectSituation->situationNameIncome = $actualSituation->name;
+	  $projectSituation->situationDateIncome = $actualSituation->date;
+	}
+	$projectSituation->save();
+}
 // Message of correct saving
 displayLastOperationStatus($result);
 ?>
