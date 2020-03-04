@@ -192,6 +192,27 @@ class Parameter extends SqlElement {
       $colScript .='dojo.byId("paramAttachmentMaxSize").value=newValue.toUpperCase();';
       $colScript .='}';
       $colScript .='</script>';
+    }else if($colName=='paramAttachmentMaxSizeMail'){
+      $colScript .='<script type="dojo/connect" event="onChange">';
+      $colScript .='var newValue=(this.value).trim();';
+      $colScript .='if (newValue !=""){';
+      $colScript .='var val=newValue.split("");';
+      $colScript .='var lettre="";';
+      $colScript .='var valLettre="0";';
+      $colScript .='  val.forEach(function(element){';
+      $colScript .='    if (isNaN(element)==true){';
+      $colScript .='      lettre=lettre+element.toUpperCase();';
+      $colScript .='    }';
+      $colScript .='  });';
+      $colScript .='  if(lettre.length==1 && (lettre=="K" || lettre=="M" || lettre=="G" || lettre=="T")){';
+      $colScript .='    valLettre=lettre;';
+      $colScript .='  }else if(lettre==""){';
+      $colScript .='    valLettre="1";';
+      $colScript .='  }else {newValue ="0"; }';
+      $colScript .='dojo.byId("paramAttachmentNumMail").value=lettre;';
+      $colScript .='dojo.byId("paramAttachmentMaxSizeMail").value=newValue.toUpperCase();';
+      $colScript .='}';
+      $colScript .='</script>';
     }else {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  newValue=this.value;';
@@ -993,6 +1014,8 @@ class Parameter extends SqlElement {
                               'paramMailerType'=>'list',
                               'paramMailerHelo'=>'list',
                               'paramMailerSendAsCurrentUser'=>'list',
+                              'paramAttachmentMaxSizeMail'=>'text',
+                              'paramAttachmentNumMail'=>'text',
                           'newColumnMailRight'=>'newColumn',
                             'sectionMailGrouping'=>'section',
                               'mailGroupActive'=>'list',
@@ -1165,7 +1188,7 @@ class Parameter extends SqlElement {
     	  unset($parameterList['paramMemoryLimitForPDF']);
     	  unset($parameterList['sectionFiles']);
     	  unset($parameterList['paramAttachmentDirectory']);
-    	  unset($parameterList['paramAttachmentMaxSize']);    	  
+    	  unset($parameterList['paramAttachmentMaxSize']);
     	  unset($parameterList['paramReportTempDirectory']);
     	  unset($parameterList['paramMailEol']);
     	  unset($parameterList['cronDirectory']);
@@ -2042,7 +2065,7 @@ static public function getTimezoneList() {
    if ($this->parameterCode=="SslCa" and trim($this->parameterValue)!="" and !file_exists($this->parameterValue)) {
        $result.='<br/>' . i18n('msgNotaFile',array(i18n("paramSslCa"),$this->parameterValue));
    }
-   if($this->parameterCode=="paramAttachmentMaxSize" and $this->parameterValue != "" ){
+   if(($this->parameterCode=="paramAttachmentMaxSize" and $this->parameterValue != "" ) or ($this->parameterCode=="paramAttachmentMaxSizeMail" and $this->parameterValue != "" )){
      $newVal=$this->parameterValue;
      $newValTab=str_split($newVal);
      $lettre="";
@@ -2074,7 +2097,7 @@ static public function getTimezoneList() {
       $sumVal=$chiffre*$valLettre;
       $this->parameterValue=$sumVal;
    }
-   if($this->parameterCode=="paramAttachmentNum" ){
+   if($this->parameterCode=="paramAttachmentNum" or $this->parameterCode=="paramAttachmentNumMail" ){
      $lettreN=strtoupper($this->parameterValue);
      if(strlen($this->parameterValue)==1 and ($lettreN=="K" or $lettreN=="M" or $lettreN=="G" or $lettreN=="T")){
          $this->parameterValue=$lettreN;

@@ -98,7 +98,6 @@ class SupplierContractMain extends SqlElement {
   private static $_fieldsAttributes=array("name"=>"required",  
                                   "idProject"=>"required",
                                   "idSupplierContractType"=>"required",
-                                  "idProvider"=>"required",
                                   "done"=>"nobr",
                                   "handled"=>"nobr",
                                   "idle"=>"nobr",
