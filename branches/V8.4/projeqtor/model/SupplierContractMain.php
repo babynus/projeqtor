@@ -40,9 +40,11 @@ class SupplierContractMain extends SqlElement {
   public $origin;
   public $description;
   public $_sec_Progress;
-  public $_tab_2_1=array('startDate', 'endDate' , 'contractDate');
+  public $_tab_4_1=array('startDate', 'endDate','','', 'contractDate');
   public $startDate;
   public $endDate;
+  public $_void_1;
+  public $_void_2;
   public $initialContractTerm;
   public $idUnitContract;
   public $noticePeriod;
