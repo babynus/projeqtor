@@ -98,7 +98,6 @@ class ClientContractMain extends SqlElement {
   private static $_fieldsAttributes=array("name"=>"required",  
                                   "idProject"=>"required",
                                   "idClientContractType"=>"required",
-                                  "idClient"=>"required",
                                   "done"=>"nobr",
                                   "handled"=>"nobr",
                                   "idle"=>"nobr",

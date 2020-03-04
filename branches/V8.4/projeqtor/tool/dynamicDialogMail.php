@@ -54,13 +54,25 @@ if ($habil) {
 }
 $attach= new Attachment();
 $link= new Link();
-$where="refType='".$objectClass."' and refId=".$obj->id;
+$where="refType='".$objectClass."' and refId=".$obj->id." and type='file'";
 $orderBy="creationDate ASC";
 $lstAttach=$attach->getSqlElementsFromCriteria(null,null,$where,$orderBy);
 $where="ref2Type='".$objectClass."' and ref2Id=".$obj->id." and ref1Type in ('DocumentVersion','Document')";
 $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
-  
-
+$maxSizeAttachment=Parameter::getGlobalParameter('paramAttachmentMaxSize');
+if($maxSizeAttachment==''){
+  $maxSizeAttachment=0;
+}
+$def = [[1, 'octets'], [1024, 'ko'], [1024*1024, 'Mo'], [1024*1024*1024, 'Go'], [1024*1024*1024*1024, 'To']];
+// for($i=0; $i<sizeof($def); $i++){
+//   if($maxSizeAttachment<$def[$i][0]){
+//     debugLog($maxSizeAttachment);
+//     debugLog($def[$i-1][0]);
+//     $number=floatval($maxSizeAttachment/$def[$i-1][0]);
+//     $maxSizeAttachment=number_format($number,2,',','');
+//   }
+// }
+debugLog($maxSizeAttachment);
 
 
 ?>
@@ -287,6 +299,19 @@ $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
     </tr>
   </table> 
   <?php if(!empty($lstAttach) or !empty($lstDoc)){?>
+  <div id='infoAttachement' style="padding-bottom:5px;"> 
+    <table style="position:relative;top:10px;">
+      <tr>
+        <td class="dialogLabel">
+          <label for="totalSize" ><?php echo  i18n("totalSize")." :";?></label>
+        </td>
+        <td >
+            <input  name="totalSize" id="totalSizeNoConvert"  class="input"  hidden value="" />
+            <div style="font-size:12px;top:2px;position:relative;border:none;left:2px;"><input  name="totalSize" id="totalSize"  class="input"  style="border:none;width:60px;text-align:right;" value="" /><?php echo "/".$maxSizeAttachment;?></div>
+        </td>
+      </tr>
+    </table>
+  </div>
   <div id='showAttachement' style="position:relative;top:10px;width:90%;left:5%;">
     <table style='width:100%'>
       <tr>
@@ -298,7 +323,7 @@ $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
       <?php 
         foreach($lstAttach as $attached){
           echo "<tr>";
-          echo "<td class='assignData verticalCenterData'><div id='dialogMail".$attached->fileName."' name='dialogMailToUser' dojoType='dijit.form.CheckBox' type='checkbox' ></div>&nbsp;".$attached->fileName."</td>";
+          echo "<td class='assignData verticalCenterData'><div id='dialogMail".$attached->fileName."' name='dialogMail".$attached->fileName."'  dojoType='dijit.form.CheckBox' type='checkbox' onclick='showAttachedSize(".json_encode($attached->fileSize).",".json_encode($attached->fileName).");'></div>&nbsp;".$attached->fileName."</td>";
           echo " <td class='assignData verticalCenterData' style='text-align:center;'>$attached->type</td>";
           echo " <td class='assignData verticalCenterData' style='text-align:center;'>".(($attached->fileSize !='')?$attached->fileSize:'-')."</td>";
           echo " <td class='assignData verticalCenterData'></td>";
@@ -337,18 +362,22 @@ $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
               $filsize='-';
             }
             echo "<tr>";
-            echo "<td class='assignData verticalCenterData'><div id='dialogMail".$name."' name='dialogMailToUser' dojoType='dijit.form.CheckBox' type='checkbox' ></div>&nbsp;".$name."</td>";
+            echo "<td class='assignData verticalCenterData'><div id='dialogMail".$name."' name='dialogMail".$name."'  dojoType='dijit.form.CheckBox' type='checkbox'  onclick='showAttachedSize(".json_encode($filsize).",".json_encode($name).");' ></div>&nbsp;".$name."</td>";
             echo " <td class='assignData verticalCenterData' style='text-align:center;'>$document->ref1Type</td>";
             echo " <td class='assignData verticalCenterData' style='text-align:center;'>".$filsize."</td>";
-            echo " <td class='assignData verticalCenterData'><label style='width:30%;' for='versionRef".$name."'>".((isset($docV))?$docV->name:$versRef)."</label>";
-            echo "<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='versionRef".$name."' value='1'/>";
-            echo "<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='version".$name."' value='2'/>";
-            echo "<label style='width:30%;' for='version".$name."'>".((isset($docV))?'':$vers)."</label></td>";
+            if($document->ref1Type!='DocumentVersion'){
+              echo " <td class='assignData verticalCenterData'><table style='width:100%;'><tr><td style='width:50%;'><label style='width:30%;' for='versionRef".$name."'>".((isset($docV))?$docV->name:$versRef)."</label>";
+              echo "&nbsp;&nbsp;<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='versionRef".$name."' value='1'/></td>";
+              echo "<td><label style='width:30%;' for='version".$name."'>".((isset($docV))?'':$vers)."</label>";
+              echo "&nbsp;&nbsp;<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='version".$name."' value='2'/></td></tr></table></td>";
+            }else{
+              echo " <td class='assignData verticalCenterData'>".((isset($docV))?$docV->name:$versRef)."</td>";
+            }
             echo " </tr>";
           }
-        }
-      }?>
-    </table>
-  </div>
+        }?>
+      </table>
+    </div>
+<?php }?>
   <br/>
 </form>   

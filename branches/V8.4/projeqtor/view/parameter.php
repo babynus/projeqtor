@@ -171,7 +171,7 @@ function drawTableFromObjectList($objectList) {
 			echo '<table>';
 			$hasSection=true;
 	  } else {
-		  echo ($code=='paramAttachmentNum')?'<tr hidden> ':'<tr> '; // open the line level (must end with  a </td></tr>)
+		  echo ($code=='paramAttachmentNum' or $code=='paramAttachmentNumMail')?'<tr hidden> ':'<tr> '; // open the line level (must end with  a </td></tr>)
 		  echo '<td class="crossTableLine"><label class="label largeLabel" for="' . $code . '" title="' . $helpTitle . '">' 
 		              . (($format!='photo')?i18n('param' . ucfirst($code) ) . ' :&nbsp;':'')
 		         .'</label></td><td style="position:relative">';
@@ -219,13 +219,17 @@ function drawTableFromObjectList($objectList) {
 				echo '<div dojoType="dijit.form.TextBox" ';
 				echo ' name="' . $code . '" id="' . $code . '"';
 				echo ' title="' . $helpTitle . '"';
-				echo ($code=='paramAttachmentMaxSize')?' style="width: 100px;text-align: center;" ':' style="width: 200px;" ';
+				echo ($code=='paramAttachmentMaxSize' or $code=='paramAttachmentMaxSizeMail')?' style="width: 100px;text-align: center;" ':' style="width: 200px;" ';
 				echo ' class="input '.$requiredClass.'" ';
 				if ($format=='password') echo ' type="password" ';
 				//florent
-				if($code=='paramAttachmentMaxSize'){
+				if($code=='paramAttachmentMaxSize' or $code=='paramAttachmentMaxSizeMail'){
 				 $valChar=1;
 				 $char=Parameter::getGlobalParameter('paramAttachmentNum');
+				 if($code=='paramAttachmentMaxSizeMail'){
+				   $char=Parameter::getGlobalParameter('paramAttachmentNumMail');
+				 }
+				 
 				    switch ($char) {
 				 	  case "K":
 				 	    $valChar=1024;
