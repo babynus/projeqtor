@@ -67,7 +67,7 @@ class SupplierContractMain extends SqlElement {
   public $idleDate;
   public $cancelled;
   public $_lib_cancelled;
-  public $_sec_contacts;
+  public $_sec_supplierContact;
   public $idContactContract;
   public $phoneNumber;
   public $sla;
