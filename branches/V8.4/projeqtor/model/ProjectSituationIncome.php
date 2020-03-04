@@ -28,9 +28,19 @@
  * Line defines right to the application for a menu and a profile.
  */  
 require_once('_securityCheck.php'); 
-class SituationExpense extends Situation {
-
-  private static $_databaseTableName = 'situation';
+class ProjectSituationIncome extends ProjectSituation {
+  
+  private static $_databaseTableName = 'projectsituation';
+  
+  private static $_fieldsAttributes=array(
+  		'id'=>'hidden'
+        'name'=>'hidden',
+  		'situtationNameIncome'=>'hidden',
+  		'refTypeIncome'=>'hidden',
+  		'situationDateIncome'=>'hidden',
+  		'idResourceIncome'=>'hidden',
+  		'commentIncome'=>'hidden',
+  );
   
   /** ==========================================================================
    * Constructor
@@ -52,6 +62,10 @@ class SituationExpense extends Situation {
   protected function getStaticDatabaseTableName() {
   	$paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
   	return $paramDbPrefix . self::$_databaseTableName;
+  }
+  
+  protected function getStaticFieldsAttributes() {
+  	return self::$_fieldsAttributes;
   }
   
   }

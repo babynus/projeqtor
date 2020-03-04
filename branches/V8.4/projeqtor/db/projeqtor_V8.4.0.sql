@@ -15,6 +15,7 @@ UPDATE `${prefix}menu` SET `sortOrder` = '208' WHERE `menu`.`name` = 'menuProvid
 UPDATE `${prefix}menu` SET `sortOrder` = '209' WHERE `menu`.`name` = 'menuProviderBill';
 UPDATE `${prefix}menu` SET `sortOrder` = '210' WHERE `menu`.`name` = 'menuProviderPayment';
 UPDATE `${prefix}menu` SET `sortOrder` = '211' WHERE `menu`.`name` = 'menuIndividualExpense';
+UPDATE `${prefix}menu` SET `sortOrder` = '295' WHERE `menu`.`name` = 'menuRiskManagementPlan';
 UPDATE `${prefix}measureunit` SET `sortOrder` = '50' WHERE `measureunit`.`name` = 'month';
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
@@ -234,11 +235,20 @@ CREATE TABLE `${prefix}situation` (
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
-CREATE TABLE `${prefix}projectSituation` (
+CREATE TABLE `${prefix}projectsituation` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `idProject` int(12) unsigned DEFAULT NULL,
-  `idSituationExpense` int(12) unsigned DEFAULT NULL,
-  `idSituationIncome` int(12) unsigned DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `situationNameExpense` varchar(100) DEFAULT NULL,
+  `refTypeExpense` varchar(100) DEFAULT NULL,
+  `refIdExpense` int(12) unsigned DEFAULT NULL,
+  `situationDateExpense` datetime DEFAULT NULL,
+  `idResourceExpense` int(12) unsigned DEFAULT NULL,
+  `situationNameIncome` varchar(100) DEFAULT NULL,
+  `refTypeIncome` varchar(100) DEFAULT NULL,
+  `refIdIncome` int(12) unsigned DEFAULT NULL,
+  `situationDateIncome` datetime DEFAULT NULL,
+  `idResourceIncome` int(12) unsigned DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
@@ -249,6 +259,32 @@ ALTER TABLE `${prefix}providerbill` ADD `idSituation` int(12) unsigned DEFAULT N
 ALTER TABLE `${prefix}bill` ADD `idSituation` int(12) unsigned DEFAULT NULL;
 ALTER TABLE `${prefix}quotation` ADD `idSituation` int(12) unsigned DEFAULT NULL;
 ALTER TABLE `${prefix}command` ADD `idSituation` int(12) unsigned DEFAULT NULL;
+
+INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
+(244,'menuSituation',74,'menu', 287,null,1,null),
+(245,'menuProjectSituation',244,'object', 288,'Project',0,'Financial'),
+(246,'menuProjectSituationExpense',244,'object', 289,'Project',0,'Financial'),
+(247,'menuProjectSituationIncome',244,'object', 290,'Project',0,'Financial');
+
+INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES
+(19,'moduleSituation','530',5,0,0);
+
+INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
+(19,245,0,1),
+(19,246,0,1),
+(19,247,0,1);
+
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
+(1,244,1),
+(1,245,1),
+(1,246,1),
+(1,247,1);
+
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
+(1,244,8),
+(1,245,8),
+(1,246,8),
+(1,247,8);
 
 -- ======================================
 -- Habilitation Other
