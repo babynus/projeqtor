@@ -459,7 +459,7 @@ if (Sql::$lastQueryNbRows == 0) {
 		  $ref=$line['reftype'];
 		  $type='id'.$ref.'Type';
 		  $item=new $ref($line['refid'],true);
-      $line["status"]=(property_exists($item,'idStatus'))?SqlList::getNameFromId('Status',$item->idStatus):null;
+      $line["status"]=(property_exists($item,'idStatus'))?SqlList::getNameFromId('Status',$item->idStatus)."#split#".SqlList::getFieldFromId('Status',$item->idStatus,'color'):null;
       $line["type"]=(property_exists($item,$type))?SqlList::getNameFromId('Type',$item->$type):null;
 		}
 		if ($line['reftype']=='Meeting' and $line['topreftype']=='PeriodicMeeting') {
@@ -532,7 +532,7 @@ if (Sql::$lastQueryNbRows == 0) {
 	    $list[$keyProj]["progress"]=($sumProjPlanned)?round($sumProjReal/$sumProjPlanned,2):0;
 	    if ($columnsDescription['IdStatus']['show']==1 or $columnsDescription['Type']['show']==1 or $columnsDescription['Priority']['show']==1) {
 	      $item=new Project($line['idproject'],false);
-	      $list[$keyProj]["status"]=SqlList::getNameFromId('Status',$item->idStatus);
+	      $list[$keyProj]["status"]=SqlList::getNameFromId('Status',$item->idStatus)."#split#".SqlList::getFieldFromId('Status',$item->idStatus,'color');
 	      $list[$keyProj]["type"]=SqlList::getNameFromId('Type',$item->idProjectType);
 	      //$list[$keyProj]["priority"]=SqlList::getNameFromId('Priority',$item->ProjectPlanningElement->priority);
 	      $list[$keyProj]["priority"]=$item->ProjectPlanningElement->priority;
