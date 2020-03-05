@@ -196,7 +196,7 @@ class AssetMain extends SqlElement {
     return $subProductList;
   }
   
-  public function getParentAsset(){
+  public function getParentAsset() {
     $result=array();
     if ($this->idAsset) {
       $parent=new Asset($this->idAsset);
@@ -205,5 +205,11 @@ class AssetMain extends SqlElement {
     return $result;
   }
   
+  public function isElementary(){
+    $result = true;
+    $cpt = $this->countSqlElementsFromCriteria(array('idAsset'=>$this->id));
+    if($cpt > 0)$result = false;
+    return $result;
+  }
 }
 ?>

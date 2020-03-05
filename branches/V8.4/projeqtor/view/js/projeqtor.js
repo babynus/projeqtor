@@ -6714,3 +6714,27 @@ function expandHierarchicalBudgetGroup(idBudget, subBudget, recSubBudget, visibl
 		});
 	}
 }
+
+function expandAssetGroup(idAsset, subAsset,recSubAsset){
+  var recSubAsset = recSubAsset.split(',');
+  var subBudgetList = subAsset.split(',');
+  var budgetClass = dojo.attr('group_'+idAsset, 'class');
+  if(budgetClass == 'ganttExpandClosed'){
+    if (dojo.byId('group_'+idAsset)) dojo.setAttr('group_'+idAsset, 'class', 'ganttExpandOpened');
+    subBudgetList.forEach(function(item){
+      if (dojo.byId('assetStructureRow_'+item)) dojo.byId('assetStructureRow_'+item).style.visibility = 'visible';
+    });
+  }else{
+    if (dojo.byId('group_'+idAsset)){
+      dojo.setAttr('group_'+idAsset, 'class', 'ganttExpandClosed');
+    }
+    recSubAsset.forEach(function(item){
+      if (dojo.byId('assetStructureRow_'+item)){
+        dojo.byId('assetStructureRow_'+item).style.visibility = 'collapse';
+        if (dojo.attr('group_'+item, 'class')){
+          dojo.setAttr('group_'+item, 'class', 'ganttExpandClosed');
+        }
+      }
+    });
+  }
+}
