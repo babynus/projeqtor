@@ -582,7 +582,7 @@ class ActivityMain extends SqlElement {
     if((Parameter::getGlobalParameter('autoSetAssignmentByResponsible')=="YES" and !SqlElement::isCopyInProgress()  and !$this->ActivityPlanningElement->isManualProgress) or RequestHandler::isCodeSet('selectedResource')){ 
       $proj=new Project($this->idProject,true);
       $type=new Type($proj->idProjectType);
-      $resource=(RequestHandler::isCodeSet('selectedResource'))?RequestHandler::getValue('selectedResource'):$resource;
+      $resource=(RequestHandler::isCodeSet('selectedResource'))?RequestHandler::getValue('selectedResource'):$this->idResource;
       if ($type->code!='ADM' and $resource and trim ( $resource ) != '' and ! trim ( $oldResource ) and stripos ( $result, 'id="lastOperationStatus" value="OK"' ) > 0) {
         // Add assignment for responsible
         $habil = SqlElement::getSingleSqlElementFromCriteria ( 'HabilitationOther', array(
