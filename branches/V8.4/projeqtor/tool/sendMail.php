@@ -35,7 +35,6 @@ $title="";
 $msg="";
 $dest="";
 $typeSendMail="";
-
 if (array_key_exists('className', $_REQUEST)) {
   $typeSendMail=$_REQUEST['className'];
 } else if (array_key_exists('objectClassName', $_REQUEST)) {
@@ -190,6 +189,13 @@ if ($typeSendMail=="User") {
   if ($class=='TicketSimple') {
     $class='Ticket';
   }
+  if(RequestHandler::isCodeSet('attachments') and RequestHandler::getValue('attachments')!=''){
+    $attachments=explode('/',RequestHandler::getValue('attachments'));
+    $lstAttach=array();
+    foreach ($attachments as $attach){
+      $lstAttach[]=explode('_',$attach);
+    }
+  }
   $id=$_REQUEST['mailRefId'];
   $mailToContact=(array_key_exists('dialogMailToContact', $_REQUEST))?true:false;
   $mailToUser=(array_key_exists('dialogMailToUser', $_REQUEST))?true:false;
@@ -225,7 +231,9 @@ if ($typeSendMail=="User") {
   $directStatusMail->otherMail=$otherMail;
   $directStatusMail->message=htmlEncode($message, 'html'); // Attention, do not save this status mail
   $directStatusMail->idEmailTemplate=$idEmailTemplate; // damian
-  $resultMail=$obj->sendMailIfMailable(false, false, $directStatusMail, false, false, false, false, false, false, false, false, false);
+  if(!empty($lstAttach)){
+    $resultMail=$obj->sendMailIfMailable(false, false, $directStatusMail, false,false,false,false,false,false,false,false,false,false,false,false,false,$lstAttach);
+  }
   if (!$resultMail or !is_array($resultMail)) {
     $result="NO";
     $dest="";
