@@ -386,11 +386,14 @@ Keyboard Shortcut
 
 **[CTRL]+S** Save the current element
 
+**[CTRL]+clic** Opens the selected linked element in a new tab
+
 **[F1]** Opens the online manual (contextual opening on the current screen)
 
-Click on |buttonIconHelp| ( into the logo zone ) or use shortcut key F1 shortcut key to open the English ProjeQtOr manual.
-
 **[ESC]** to exit full screen mode
+
+
+Click on |buttonIconHelp| ( into the logo zone ) or use shortcut key F1 shortcut key to open the English ProjeQtOr manual.
 
 
 .. raw:: latex
@@ -985,6 +988,8 @@ See: :ref:`thumbnails`
          * Select new type (corresponding to the kind of element).
                                 
          * Change the name.
+         
+         * Change the project.
          
          * Select whether the initial element will be indicated as the origin of the copied one.
          

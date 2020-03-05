@@ -63,7 +63,9 @@
    
    
   
-
+.. |iconList| image:: images/iconButtonListApprover.png
+	:alt: List
+	
 .. |arrowCompound| image:: images/arrowCompound.png
    :alt: arrow
 
