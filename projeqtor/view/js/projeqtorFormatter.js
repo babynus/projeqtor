@@ -113,7 +113,7 @@ function colorFormatter(value) {
  *          the value of the boolean (true or false)
  * @return the formatted value as an image (html code)
  */
-function colorNameFormatter(value) {
+function colorNameFormatter(value, notRounded) {
   if (value) {
     var tab = value.split("#split#");
     if (tab.length > 1) {
@@ -145,7 +145,9 @@ function colorNameFormatter(value) {
           //+ '<table width="100%" style="min-height:20px !important;"><tr style="height:100% !important;"><td style="text-align: center;border-radius: 10px; padding: 5px 5px !important;background-color: '
           //+ color + '; color:' + foreColor + ';width: 100%;">' + val
           //+ '</td></tr></table>';
-          + '<div style="width:90%;min-height:10px !important;height:100% !important;text-align: center;border-radius: 10px; margin:auto;padding: 5px 5% !important;background-color: '
+          + '<div style="width:90%;min-height:10px !important;height:100% !important;text-align: center;'
+          +((notRounded)?'':'border-radius: 10px;')
+          +' margin:auto;padding: 5px 5% !important;background-color: '
           + color + '; color:' + foreColor + ';">' + val
           + '</div>';
     } else {
