@@ -1066,6 +1066,9 @@ class PlanningElement extends SqlElement {
       if ($projOld->fixPerimeter) {
         $result .= "<br/>" .i18n('msgUnableToMoveOutToFixPerimeter');
       }
+      if ($this->realWork>0 and $projNew->isUnderConstruction==1) {
+        $result .= "<br/>" .i18n('msgUnableToMoveRealWorkToUnderConstruction');
+      }
       if ($projNew->fixPerimeter) {
         if(!$this->id){
           $result .= "<br/>".i18n('msgUnableToAddToFixPerimeter');

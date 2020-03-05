@@ -3022,6 +3022,7 @@ msgUnableToDeleteOfFixPerimeter: "Not able to delete elements from non extendabl
 msgUnableToDeleteRealWork: "不能删除有实际工时的项",
 msgUnableToMoveOnFixPerimeter: "Not able to move elements to non extendable project",
 msgUnableToMoveOutToFixPerimeter: "Not able to move elements out of non extendable project",
+msgUnableToMoveRealWorkToUnderConstruction: "Not able to move elements with real work to a project &#34under construction&#34",
 msgVersionNotLinkedToProject: "版本产品必须链接到项目",
 name: "Name",
 nameDocument: "Name document",

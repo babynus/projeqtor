@@ -3022,6 +3022,7 @@ msgUnableToDeleteOfFixPerimeter: "Неможливо усувати елемен
 msgUnableToDeleteRealWork: "Не вдалося усунути елемент з дійсною роботою",
 msgUnableToMoveOnFixPerimeter: "Неможливо перемістити елементи у нерозширюваний проект",
 msgUnableToMoveOutToFixPerimeter: "Неможливо перемістити елементи з нерозширюваного проекту",
+msgUnableToMoveRealWorkToUnderConstruction: "Not able to move elements with real work to a project &#34under construction&#34",
 msgVersionNotLinkedToProject: "Версія продукту мусить бути пов'язана з проектом",
 name: "Name",
 nameDocument: "Name document",
