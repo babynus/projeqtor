@@ -337,20 +337,27 @@ Glossary
    
    Work 
    
-      * Assigned : The work initially planned for this resource to the task.
+      * **Assigned:** The work initially planned for this resource to the task.
 
-      * Left:  [Left work] = [Assigned Work] – [Real Work]
-               Project leaders can adjust this value to estimate the work needed to complete the task by the resource.
-               
-      * Planned: Date defined by ProjeQtOr
+      * **Left:** Assigned Work – Real Work
+                     
+      * **Planned:** Date defined by ProjeQtOr
             
-      * Real: Sum of work done by this resource to the task. 
+      * **Real:** Sum of work done by this resource to the task. 
 
-      * reassessed: [Reassessed work] = [Real Work] + [Left Work]
+      * **reassessed:** Real Work + Left Work
 
-      * Requested: Initially requested by the customer
+      * **Requested:** Initially requested by the customer
          
-      * Validated: Initial planning, on which we committed each other. Baseline.
+      * **Validated:** Initial planning, on which we committed each other. Baseline.
       
-   .. warning:: the planning does not take into account the validated charge but the assigned one
+      
+      
+      .. warning:: Except for some planning modes, the planning does not take into account the validated load but that affected.
+
+
+   Workflow
    
+      A workflow is the representation of a series of tasks or operations carried out by a person, a group of people, an organization, etc.
+
+      The term flow refers to the passage of an element, from one stage to another.     
