@@ -129,18 +129,19 @@ This section allows to identify items of the element.
    
 This area allow you to change the macro state of the budget.
 
-You can choose whether the budget is under construction or not. If so, only the target amount can be changed in the Progress section of the parent budget.
+* A budget may be under construction
 
-The "approved" macro-state changes and automatically cancels the "under construction" macro state. The date is then displayed in the fields of the macro-state concerned.
+* A budget under construction does not allow to see the fields "target amount" and prevents the modification of the estimated amount
 
-Each sub-budget is then impacted and the "approved" state will then be propagated on all of his family.
+* The "approved" macro-state changes and automatically cancels the "under construction" macro state. The date is then displayed in the fields of the macro-state concerned.
 
-Each macro state "under construction", "approved", "closed" and "canceled" modified from the parent budget screen propagates in cascade over the entire budget hierarchy. 
+* Each sub-budget is then impacted and the "approved" state will then be propagated on all of his family.
+
+* Each macro state "under construction", "approved", "closed" and "canceled" modified from the parent budget screen propagates in cascade over the entire budget hierarchy. 
 
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required field |ReqFieldLegend|
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -269,7 +270,7 @@ Complete the description of the contract.
    * - Supplier reference    
      - Reference of the provider
    * - Phone number
-     - The field is of alphanumeric type. You can enter a telephone number with precision. Example:XXXXXXXXXX ext XX 
+     - The field is of alphanumeric type. You can enter a telephone number with precision. Example with a number phone and his ext. 
    * - Origin    
      - Used to enter the origin of the agreement
        Example the name of the seller or the advertisement which brought the customer
@@ -562,6 +563,7 @@ A pop up is displayed. Fill in the different fields necessary for your needs.
 You can access to each offer by clicking on the name of the provider or by visiting the provider offers screen.
      
      
+.. _evaluation-criteria:
      
 .. rubric:: Evaluation Criteria
 
@@ -584,7 +586,18 @@ This section allows you to add evaluation criteria to rate your providers based 
 
 * The score is calculated based on the values assigned and reported in the "submission of tenders" table.      
      
-     
+.. tip:: 
+
+   Click on |buttonIconCopy| to logically switch from one financial item to another:
+
+   Call for tenders -> Provider tenders -> Order to provider -> Terms/Bills -> Payments to providers
+
+   Each time you copy a financial item, the most logical financial item for the rest of the order process will be displayed automatically.
+
+   The amount of expense of these elements will be recovered, passed on and linked to each of the others and will allow you more precise monitoring.
+   
+   You can prevent the carry forward of amounts or the generation of expenses in the :ref:`global parameters<financial>`
+   
 
 .. raw:: latex
 
@@ -599,7 +612,7 @@ This section allows you to add evaluation criteria to rate your providers based 
 Provider Tenders
 ----------------
 
-provider tenders store information about responses to tenders you have submitted.
+Provider tenders store information about responses to tenders you have submitted.
 
 This can be used to detail all the offers, compare them, evaluate them to choose the most suitable for your needs.
 
@@ -695,6 +708,16 @@ Each provider added to the invitation to tender will generate an offer.
    * - Result
      - Description or analysis of the expected result from this provider.  
 
+.
+
+  .. compound:: project expenses and generate expense
+ 
+       You can attach a specific expense to your order.
+   
+       Select a manually created expense from the project expense list.
+   
+       If you have not created an expense upstream, check the generate expense box, a line will then be created in the project expenses.
+
 
 
 .. rubric:: Evaluation Section
@@ -720,6 +743,8 @@ When the link is made then:
 * The evaluation will display a summary of your criteria with their scores.
 
 * The overall score will then be displayed on the invitation to tender for all the offers concerned.
+
+* See: :ref:`the criteria evaluations<evaluation-criteria>` in the Call for tenders chapter
 
 
 .. raw:: latex
@@ -826,42 +851,57 @@ This screen allow to manage the orders to provider.
 
 .. rubric:: List of terms section
 
+This section allows you to create one or more terms for your bills.
+
+* Click on |buttonAdd| to add a term. A pop-up opens.
+
+* Click on |iconList| to add an existing term.
 
 .. figure:: /images/GUI/EXPENSES_ZONE_ListOfTermSection.png
    :alt: List of term section
    
    List of term section
-   
-This section allows you to create one or more terms for your bills.
-
-* Click on |buttonAdd| to add a term. A pop-up opens.
-
-
-.. figure:: /images/GUI/EXPENSES_ZONE_ListOfTerm.png
-   :alt: List of term section
-   
-   List of term section
-   
+      
 * The name and the date are mandatory.
 
 * Enter the number of installments you want to pay your bill.
 
 * If 1 then it is a cash payment.
 
-.. figure:: /images/GUI/EXPENSES_ZONE_ListOfTermDetails.png
-   :alt: calculation after number of deadlines entered
+
+.. figure:: /images/GUI/EXPENSES_ZONE_ListOfTerm.png
+   :alt: Terms creation pop-up
    
-   Calculation after number of deadlines entered
-   
+   Terms creation pop-up
+
 * When you enter several terms, the calculation on the total amount is done automatically.
 
 * When you copy your order as a bill, the terms are automatically added to it.
 
 * You can add due dates from the provider bill screen if you have not done so on this screen. 
 
+
+.. figure:: /images/GUI/EXPENSES_ZONE_ListOfTermDetails.png
+   :alt: calculation after number of deadlines entered
+   
+   Calculation after number of deadlines entered
+   
+
+When you transform your order into an bill, the terms recorded in the offer are automatically transferred to the bills.
+
+In the offers, in the terms section, these will be filled in as billed with a link to the latter.
+
+
+.. figure:: /images/GUI/EXPENSES_ZONE_ListOfTermSectionBilled.png
+   :alt: List of terms billed
+   
+   List of terms billed
+   
+   
+
 .. note:: 
 
-   you can attach many documents related to your order: The general conditions of sale, the quotation, the order form ...            
+   You can attach many documents related to your order: The general conditions of sale, the quotation, the order form ...            
    
 .. raw:: latex
 
@@ -920,7 +960,6 @@ it is legally fixed to 30 days after receipt of the goods or performance of the 
 .. tabularcolumns:: |l|l|
 
 .. list-table::  Required field |ReqFieldLegend|
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -966,6 +1005,8 @@ it is legally fixed to 30 days after receipt of the goods or performance of the 
 Provider bills
 --------------
 
+This screen is used to manage bills generated manually or linked to provider offers.
+
 
 .. figure:: /images/GUI/EXPENSES_SCR_ProviderBill.png
    :alt: Provider bill screen
@@ -1001,6 +1042,11 @@ Provider bills
    * - :term:`Description`
      - Complete description of the expense.
 
+
+
+
+
+
 .. rubric:: Section Treatment
 
 .. tabularcolumns:: |l|l|
@@ -1031,6 +1077,58 @@ Provider bills
 
 
 
+
+.. rubric:: List of terms section
+
+This section allows you to create one or more terms for your bills.
+
+If your bill was created from an order, then the terms recorded on the offer will be automatically recovered on the bill.
+
+
+.. figure:: /images/GUI/EXPENSES_ZONE_ListOfTermSection.png
+   :alt: List of term section
+   
+   List of term section
+
+* Click on |buttonAdd| to add a term. A pop-up opens.
+
+* Click on |iconList| to add an existing term.
+      
+* The name and the date are mandatory.
+
+* Enter the number of installments you want to pay your bill.
+
+* If 1 then it is a cash payment.
+
+
+.. figure:: /images/GUI/EXPENSES_ZONE_ListOfTerm.png
+   :alt: Terms creation pop-up
+   
+   Terms creation pop-up
+
+* When you enter several terms, the calculation on the total amount is done automatically.
+
+* When you copy your order as a bill, the terms are automatically added to it.
+
+* You can add due dates from the provider bill screen if you have not done so on this screen. 
+
+
+.. figure:: /images/GUI/EXPENSES_ZONE_ListOfTermDetails.png
+   :alt: calculation after number of deadlines entered
+   
+   Calculation after number of deadlines entered
+   
+
+In the offers, in the terms section, these will be filled in as billed with a link to the latter.
+
+.. figure:: /images/GUI/EXPENSES_ZONE_ListOfTermSectionBilled.png
+   :alt: List of terms billed
+   
+   List of terms billed
+   
+     
+   
+   
 .. raw:: latex
 
     \newpage
@@ -1044,7 +1142,7 @@ Provider bills
 Payments to provider
 --------------------
 
-Follow the payment of your provider invoices to better organize your general cash flow or your working capital
+Follow the payment of your provider bills to better organize your general cash flow or your working capital
 
 
 .. rubric:: Section Description 
@@ -1078,28 +1176,41 @@ Follow the payment of your provider invoices to better organize your general cas
    * - Field
      - Description
    * - Payment mode
-     - groups different payment methods
+     - Groups different payment methods.
    * - Payment date
-     - the date on which the payment method chosen above will be made
+     - The date on which the payment method chosen above will be made.
    * - payment amount 
-     - Amount of the bill
+     - Amount of the bill.
    * - Payment fee
-     - Fee generated by payment or otherwise
+     - Fee generated by payment or otherwise.
    * - payment credit 
-     - Amount of credit if there is   
+     - Amount of credit if there is.   
    * - Provider payment term
-     - selection of the payment deadline to the provider
+     - Selection of the payment term to the provider. if the exchanges were created on the offers or on the bill, they will be available in the list.
    * - Provider bill
-     - selection of the provider bill
+     - Selection of the provider bill. The bill is automatically choose if the provider payment term is existing.
    * - Provider bill reference
-     - The reference is automatically fill in when selecting the provider bill
+     - The reference is automatically fill in when selecting the provider bill.
    * - Provider
-     - The name of the provider is automatically fill when selecting the provider bill
+     - The name of the provider is automatically fill when selecting the provider bill.
    * - Provider bill amount
-     - The amount of the bill is automatically fill when selecting the provider bill                               
+     - The amount of the bill is automatically fill when selecting the provider bill.                             
    * - :term:`Closed`
      - Box checked indicates that the tender is archived with date when checked.
 
+
+When the payment to the supplier has been completed and recorded, on the screen of provider bill in the treatment section, you will find a record of these payments.
+
+In the list of terms section, you can see in the table, the terms for which the settlement has been made.
+
+When all the deadlines have been honored, on the screen of invoices to the service provider the completed payment box is automatically checked and the date of the last due date is recorded but is always editable. 
+
+.. figure:: /images/GUI/EXPENSES_ZONE_Payment.png
+   :alt: List of paid installments
+   
+   List of paid installments
+   
+   
 
 .. raw:: latex
 
@@ -1318,7 +1429,6 @@ It allows to enter detail on expense line.
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -1351,7 +1461,6 @@ It allows to enter detail on expense line.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Fields - Expense detail dialog box - Required field |ReqFieldLegend| 
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field
@@ -1384,4 +1493,11 @@ It allows to enter detail on expense line.
    Automatically calculated from fields depending on type.
    
    May also be input for type “justified expense”.
+   
+   
+.. rubric:: Financial expenses synthesis
 
+When your financial elements have been linked and attached to a project expense (detailed or not), you will find the summary of these elements.
+
+.. figure:: /images/GUI/EXPENSES_ZONE_ExpensesDetailsSynthesis.png   
+   :alt: Details Line and financial expenses synthesis
