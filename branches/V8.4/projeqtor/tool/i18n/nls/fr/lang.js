@@ -3022,6 +3022,7 @@ msgUnableToDeleteOfFixPerimeter: "Impossible de supprimer des éléments du proj
 msgUnableToDeleteRealWork: "Impossible de supprimer un élément avec du travail réel",
 msgUnableToMoveOnFixPerimeter: "Impossible de déplacer des éléments vers le projet dont le périmètre est figé",
 msgUnableToMoveOutToFixPerimeter: "Impossible de déplacer des éléments hors du projet dont le périmètre est figé",
+msgUnableToMoveRealWorkToUnderConstruction: "Impossible de déplacer des éléments avec tu travail réel vers un projet &#34en construction&#34",
 msgVersionNotLinkedToProject: "La version de produit doit être liée au projet",
 name: "Nom",
 nameDocument: "Nom du document",

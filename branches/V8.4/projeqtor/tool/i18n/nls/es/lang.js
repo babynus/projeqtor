@@ -3022,6 +3022,7 @@ msgUnableToDeleteOfFixPerimeter: "Not able to delete elements from non extendabl
 msgUnableToDeleteRealWork: "No se puede eliminar un ítem con trabajo real",
 msgUnableToMoveOnFixPerimeter: "Not able to move elements to non extendable project",
 msgUnableToMoveOutToFixPerimeter: "Not able to move elements out of non extendable project",
+msgUnableToMoveRealWorkToUnderConstruction: "Not able to move elements with real work to a project &#34under construction&#34",
 msgVersionNotLinkedToProject: "la versión del producto debe estar vinculada al proyecto",
 name: "Name",
 nameDocument: "Name document",

@@ -3022,6 +3022,7 @@ msgUnableToDeleteOfFixPerimeter: "Elemente aus einem nicht erweiterbaren Projekt
 msgUnableToDeleteRealWork: "Kann nicht gelöscht werden&#44; da Ist-Arbeit gebucht ist.",
 msgUnableToMoveOnFixPerimeter: "Elemente können nicht in ein nicht erweiterbares Projekt verschoben werden",
 msgUnableToMoveOutToFixPerimeter: "Elemente aus nicht erweiterbaren Projekten können nicht verschoben werden",
+msgUnableToMoveRealWorkToUnderConstruction: "Not able to move elements with real work to a project &#34under construction&#34",
 msgVersionNotLinkedToProject: "Produkt-Version muss zu einem Projekt verbunden werden",
 name: "Name",
 nameDocument: "Name document",

@@ -3022,6 +3022,7 @@ msgUnableToDeleteOfFixPerimeter: "Nije moguće izbrisati elemente iz projekta ko
 msgUnableToDeleteRealWork: "Ne može se izbrisati&#44; jer stvarni posao je objavljen.",
 msgUnableToMoveOnFixPerimeter: "Nije moguće premjestiti elemente u projekt koji se ne može produžiti",
 msgUnableToMoveOutToFixPerimeter: "Nije moguće premjestiti elemente iz projekta koji se ne može produžiti",
+msgUnableToMoveRealWorkToUnderConstruction: "Not able to move elements with real work to a project &#34under construction&#34",
 msgVersionNotLinkedToProject: "verzija proizvoda mora biti povezana s projektom",
 name: "ime",
 nameDocument: "Ime dokumenta",
