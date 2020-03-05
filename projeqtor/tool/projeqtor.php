@@ -2037,7 +2037,7 @@ function getTheme() {
  *          main body of the message
  * @return unknown_type
  */
-function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $boundary=null, $references=null,$canSend=false,$autoSendReport=false) {
+function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $boundary=null, $references=null,$canSend=false,$autoSendReport=false,$attachments) {
   // Code that caals sendMail :
   // + SqlElement::sendMailIfMailable() : sendMail($dest, $title, $message, $this)
   // + Cron::checkImport() : sendMail($to, $title, $message, null, null, null, $attachmentsArray, $boundary); !!! with attachments
@@ -2067,7 +2067,8 @@ function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sen
   }
   if (!isset($paramMailerType) or $paramMailerType=='' or $paramMailerType=='phpmailer') {
     // Cute method using PHPMailer : should work on all situations / First implementation on V4.0
-    return sendMail_phpmailer($to, $subject, $messageBody, $object, $headers, $sender, $attachmentsArray, $references,false,$autoSendReport);
+    debugLog($attachments);
+    return sendMail_phpmailer($to, $subject, $messageBody, $object, $headers, $sender, $attachmentsArray, $references,false,$autoSendReport,$attachments);
   } else {
     $messageBody=wordwrap($messageBody, 70);
     if ((isset($paramMailerType) and $paramMailerType=='mail') or !$paramMailSmtpUsername or !$paramMailSmtpPassword) {
