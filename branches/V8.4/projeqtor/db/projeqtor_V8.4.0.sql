@@ -5,7 +5,7 @@
 -- // Date : 2020-01-14                                     //
 -- ///////////////////////////////////////////////////////////
 
-
+UPDATE `${prefix}copyable` SET `id`=27, `sortOrder` = '127' WHERE `name`='ChangeRequest';
 UPDATE `${prefix}menu` SET `sortOrder` = '201' WHERE `menu`.`name` = 'menuExpenses';
 UPDATE `${prefix}menu` SET `sortOrder` = '202' WHERE `menu`.`name` = 'menuBudget';
 UPDATE `${prefix}menu` SET `sortOrder` = '205' WHERE `menu`.`name` = 'menuCallForTender';
@@ -71,9 +71,9 @@ INSERT INTO `${prefix}linkable` ( `name`, `idle`) VALUES
 ('SupplierContract', 0),
 ('ClientContract', 0);
 
-INSERT INTO `${prefix}copyable` ( `name`, `idle`) VALUES
-('SupplierContract', 0),
-('ClientContract', 0);
+INSERT INTO `${prefix}copyable` (`id`,`name`, `idle`, `sortOrder`) VALUES
+(28,'SupplierContract', 0, 128),
+(29,'ClientContract', 0, 129);
 
 INSERT INTO `${prefix}notifiable` ( `name`, `idle`) VALUES
 ('SupplierContract', 0),

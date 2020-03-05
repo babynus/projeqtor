@@ -34,6 +34,7 @@ if($objectClass == 'TicketSimple'){
     $objectClass = 'Ticket';
 }
 $objectId = RequestHandler::getId('objectId');
+$paramMailerType=strtolower(Parameter::getGlobalParameter('paramMailerType'));
 $lstAttach= array();
 $lstDoc= array();
 $obj=new $objectClass($objectId);
@@ -52,6 +53,8 @@ if ($habil) {
     $displayComboButton=true;
   }
 }
+
+if($paramMailerType=='phpmailer'){
 $attach= new Attachment();
 $link= new Link();
 $where="refType='".$objectClass."' and refId=".$obj->id." and type='file'";
@@ -59,20 +62,20 @@ $orderBy="creationDate ASC";
 $lstAttach=$attach->getSqlElementsFromCriteria(null,null,$where,$orderBy);
 $where="ref2Type='".$objectClass."' and ref2Id=".$obj->id." and ref1Type in ('DocumentVersion','Document')";
 $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
-$maxSizeAttachment=Parameter::getGlobalParameter('paramAttachmentMaxSize');
-if($maxSizeAttachment==''){
-  $maxSizeAttachment=0;
+  $maxSizeAttachment=Parameter::getGlobalParameter('paramAttachmentMaxSizeMail');
+  if($maxSizeAttachment==''){
+    $maxSizeAttachment=0;
+  }
+  $maxSize=$maxSizeAttachment;
+  $def = [[1, 'octets'], [1024, 'ko'], [1024*1024, 'Mo'], [1024*1024*1024, 'Go'], [1024*1024*1024*1024, 'To']];
+  for($i=0; $i<sizeof($def); $i++){
+    if($maxSizeAttachment<$def[$i][0]){
+      $maxSizeAttachment=number_format(floatval($maxSizeAttachment/$def[$i-1][0]),2,'.','').''.$def[$i-1][1];
+      break;
+    }
+  }
 }
-$def = [[1, 'octets'], [1024, 'ko'], [1024*1024, 'Mo'], [1024*1024*1024, 'Go'], [1024*1024*1024*1024, 'To']];
-// for($i=0; $i<sizeof($def); $i++){
-//   if($maxSizeAttachment<$def[$i][0]){
-//     debugLog($maxSizeAttachment);
-//     debugLog($def[$i-1][0]);
-//     $number=floatval($maxSizeAttachment/$def[$i-1][0]);
-//     $maxSizeAttachment=number_format($number,2,',','');
-//   }
-// }
-debugLog($maxSizeAttachment);
+
 
 
 ?>
@@ -81,8 +84,8 @@ debugLog($maxSizeAttachment);
   <table>
     <tr>
       <td>
-          <input id="mailRefType" name="mailRefType" type="hidden" value="" />
-          <input id="mailRefId" name="mailRefId" type="hidden" value="" />
+          <input id="mailRefType" name="mailRefType" type="hidden" value="<?php echo $objectClass;?>" />
+          <input id="mailRefId" name="mailRefId" type="hidden" value="<?php echo $objectId;?>" />
           <input id="idEmailTemplate" name="idEmailTemplate" type="hidden" value="" />
           <input id="previousEmail" name="previousEmail" type="hidden" value="" />
           <table style="white-space:nowrap">
@@ -306,8 +309,10 @@ debugLog($maxSizeAttachment);
           <label for="totalSize" ><?php echo  i18n("totalSize")." :";?></label>
         </td>
         <td >
-            <input  name="totalSize" id="totalSizeNoConvert"  class="input"  hidden value="" />
-            <div style="font-size:12px;top:2px;position:relative;border:none;left:2px;"><input  name="totalSize" id="totalSize"  class="input"  style="border:none;width:60px;text-align:right;" value="" /><?php echo "/".$maxSizeAttachment;?></div>
+            <input  name="attachments" id="attachments"  class="input"  hidden value="" />
+            <input  name="totalSizeNoConvert" id="totalSizeNoConvert"  class="input"  hidden value="" />
+            <input  name="maxSizeNoconvert" id="maxSizeNoconvert" class="input"  hidden value="<?php echo $maxSize;?>" />
+            <div id="infoSize" style="font-size:12px;top:2px;position:relative;border:none;left:2px;"><input  name="totalSize" id="totalSize"  class="input"  style="border:none;width:60px;text-align:right;" value="" /><?php echo "/".$maxSizeAttachment;?></div>
         </td>
       </tr>
     </table>
@@ -323,7 +328,7 @@ debugLog($maxSizeAttachment);
       <?php 
         foreach($lstAttach as $attached){
           echo "<tr>";
-          echo "<td class='assignData verticalCenterData'><div id='dialogMail".$attached->fileName."' name='dialogMail".$attached->fileName."'  dojoType='dijit.form.CheckBox' type='checkbox' onclick='showAttachedSize(".json_encode($attached->fileSize).",".json_encode($attached->fileName).");'></div>&nbsp;".$attached->fileName."</td>";
+          echo "<td class='assignData verticalCenterData'><div id='dialogMail".$attached->fileName."' name='dialogMail".$attached->fileName."'  dojoType='dijit.form.CheckBox' type='checkbox' onclick='showAttachedSize(".json_encode($attached->fileSize).",".json_encode($attached->fileName).",".json_encode($attached->type).",".json_encode($attached->id).");'></div>&nbsp;".$attached->fileName."</td>";
           echo " <td class='assignData verticalCenterData' style='text-align:center;'>$attached->type</td>";
           echo " <td class='assignData verticalCenterData' style='text-align:center;'>".(($attached->fileSize !='')?$attached->fileSize:'-')."</td>";
           echo " <td class='assignData verticalCenterData'></td>";
@@ -337,14 +342,17 @@ debugLog($maxSizeAttachment);
         echo "<td class='assignHeader'></td>";
         echo "</tr>";
           foreach($lstDoc as $document){
+              $type=$document->ref1Type;
              if($document->ref1Type=='DocumentVersion'){
                 $docV= new DocumentVersion($document->ref1Id);
                 $name=$docV->fullName;
                 $filsize=$docV->fileSize;
+                $docId=$docV->id;
              }else{
                $doc= new Document($document->ref1Id);
                $vers='';
                $name=$doc->name;
+               $docId=$doc->id;
                $docVersRf=new DocumentVersion($doc->idDocumentVersionRef);
                $filsize=$docVersRf->fileSize;
                if($doc->idDocumentVersion!=''){
@@ -362,7 +370,7 @@ debugLog($maxSizeAttachment);
               $filsize='-';
             }
             echo "<tr>";
-            echo "<td class='assignData verticalCenterData'><div id='dialogMail".$name."' name='dialogMail".$name."'  dojoType='dijit.form.CheckBox' type='checkbox'  onclick='showAttachedSize(".json_encode($filsize).",".json_encode($name).");' ></div>&nbsp;".$name."</td>";
+            echo "<td class='assignData verticalCenterData'><div id='dialogMail".$name."' name='dialogMail".$name."'  dojoType='dijit.form.CheckBox' type='checkbox'  onclick='showAttachedSize(".json_encode($filsize).",".json_encode($name).",".json_encode($type).",".json_encode($docId).");' ></div>&nbsp;".$name."</td>";
             echo " <td class='assignData verticalCenterData' style='text-align:center;'>$document->ref1Type</td>";
             echo " <td class='assignData verticalCenterData' style='text-align:center;'>".$filsize."</td>";
             if($document->ref1Type!='DocumentVersion'){

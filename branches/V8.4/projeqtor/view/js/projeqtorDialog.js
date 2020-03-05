@@ -8135,8 +8135,6 @@ function globalPlanningSelectItems(value) {
 
 function showMailOptions() {
   var callback=function() {
-    dojo.byId('mailRefType').value=dojo.byId('objectClass').value;
-    dojo.byId('mailRefId').value=dojo.byId('objectId').value;
     title=i18n('buttonMail', new Array(i18n(dojo.byId('objectClass').value)));
     if (dijit.byId('attendees')) {
       dijit.byId('dialogMailToOther').set('checked', 'checked');
@@ -8151,8 +8149,6 @@ function showMailOptions() {
   if (dijit.byId("dialogMail")
       && dojo.byId('dialogMailObjectClass')
       && dojo.byId('dialogMailObjectClass').value == dojo.byId('objectClass').value) {
-    dojo.byId('mailRefType').value=dojo.byId('objectClass').value;
-    dojo.byId('mailRefId').value=dojo.byId('objectId').value;
     refreshListSpecific('emailTemplate', 'selectEmailTemplate','objectIdClass',dojo.byId('objectId').value+'_'+dojo.byId('objectClass').value);
     loadDialog("dialogMail", null, true, '&objectClass='+ dojo.byId('objectClass').value+'&objectId='+dojo.byId('objectId').value);
   } else {
@@ -8162,20 +8158,38 @@ function showMailOptions() {
 }
 
 //florent 
-function showAttachedSize(size,name){
+function showAttachedSize(size,name,id,type){
   var totalSize=dojo.byId('totalSizeNoConvert').value;
+  var maxSize=Number(dojo.byId('maxSizeNoconvert').value);
+  var attachments=dojo.byId('attachments').value;
+  var addAttachments='';
   if(isNaN(size)){
     size=0;
   }
-  console.log(dijit.byId('dialogMail'+name).get('checked'));
   if(dijit.byId('dialogMail'+name).get('checked')==true){
     totalSize=Number(totalSize)+Number(size);
+    if(attachments!=''){
+      addAttachments=attachments+'/'+id+'_'+type;
+    }else{
+      addAttachments=id+'_'+type;
+    }
+    dojo.byId('attachments').value=addAttachments;
   }else{
+    var regex='/'+id+'_'+type;
+    addAttachments=attachments.replace(regex,'');
+    dojo.byId('attachments').value=addAttachments;
     totalSize=Number(totalSize)-Number(size);
   }
   noConvert=totalSize;
   if(totalSize!=0){
     totalSize=octetConvertSize(totalSize);
+  }
+  if( maxSize < noConvert ){
+    dojo.byId('infoSize').style.color="red";
+    dojo.byId('totalSize').style.color="red";
+  }else if ((maxSize >= noConvert) || noConvert==0) {
+    dojo.byId('infoSize').style.color="green";
+    dojo.byId('totalSize').style.color="green";
   }
   dojo.byId('totalSizeNoConvert').value=noConvert;
   dojo.byId('totalSize').value=totalSize;
