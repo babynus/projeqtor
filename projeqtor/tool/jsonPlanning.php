@@ -445,13 +445,13 @@
         $line["plannedcostdisplay"]=($line["plannedcost"]==$na)?$na:htmlDisplayCurrency($line["plannedcost"],true);
         if ($columnsDescription['IdStatus']['show']==1 or $columnsDescription['Type']['show']==1) {
           if (isset($line["idstatus"]) and isset($line["idtype"]) and $line["idstatus"]) {
-            $line["status"]=SqlList::getNameFromId('Status',$line["idstatus"]);
+            $line["status"]=SqlList::getNameFromId('Status',$line["idstatus"])."#split#".SqlList::getFieldFromId('Status',$line["idstatus"],'color');
             $line["type"]=SqlList::getNameFromId('Type',$line["idtype"]);
           } else {
             $ref=$line['reftype'];
             $type='id'.$ref.'Type';
             $item=new $ref($line['refid'],true);
-            $line["status"]=(property_exists($item,'idStatus'))?SqlList::getNameFromId('Status',$item->idStatus):null;
+            $line["status"]=(property_exists($item,'idStatus'))?SqlList::getNameFromId('Status',$item->idStatus)."#split#".SqlList::getFieldFromId('Status',$item->idStatus,'color'):null;
             $line["type"]=(property_exists($item,$type))?SqlList::getNameFromId('Type',$item->$type):null;
           }
         }
