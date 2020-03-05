@@ -31,19 +31,109 @@ use PhpOffice\PhpPresentation\Shape\Line;
  */
 include_once '../tool/projeqtor.php';
 include_once '../tool/formatter.php';
-
+?>
+<script type="text/javascript" src="js/projeqtor.js?version=<?php echo $version.'.'.$build;?>"></script> <?php 
 $id = RequestHandler::getId('id');
-
 $obj = new Asset($id);
-$subAsset=array();
-$parentAsset=array();
+$currentLine = $id;
 
+echo '<table id="assetStructure" align="left" width="95%" style="min-width:400px">';
+echo '<TR class="ganttHeight" style="height:32px">';
+echo '  <TD class="reportTableHeader" style="width:40%;border-left:0px; text-align: left;">' . i18n('colName') . '</TD>';
+echo '  <TD class="reportTableHeader amountTableHeaderTD" style="width:15%;"  ><div class="amountTableHeaderDiv">' . i18n('colAssetType') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" style="width:15%;" ><div class="amountTableHeaderDiv">' . i18n('colBrand') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" style="width:15%;" ><div class="amountTableHeaderDiv">' . i18n('colModel') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" style="width:15%;" ><div class="amountTableHeaderDiv">' . i18n('colUser') . '</div></TD>' ;
+echo '</TR>';
+echo '</table>';
+
+echo '<div id="assetStructureListDiv" style="position:relative;height:600px;width:95%;min-width:400px;overflow:auto;">';
+echo '<table id="dndassetStructureList" id="dndassetStructure" align="left" width="100%" style="">';
+$parentAsset=array();
+$subAsset=array();
+
+$parentAsset=$obj->getParentAsset();
 $subAsset=$obj->getRecursiveSubAsset();
+
 $level=0;
-foreach ($subAsset as $parentId=>$parentName) {
+foreach ($parentAsset as $parentId=>$parentName) {
   $level++;
-  //showProduct('Product',$parentId,$parentName,$level,'top');
+  showAsset($parentId,$parentName,$level,'top');
 }
 $level++;
-//showProduct($objectClass,$item->id,$item->name,$level,'current');
-//showSubItems('Product',$subProducts,$level+1);
+showAsset($obj->id,$obj->name,$level,'current');
+showSubItems($subAsset,$level+1);
+
+
+echo "</table>";
+echo '</div>';
+
+function showSubItems($subItems,$level){
+  if (!$subItems) return;
+  foreach ($subItems as $item) {
+    showAsset($item['id'],$item['name'],$level,'sub');
+    if (isset($item['subItems']) and is_array($item['subItems'])) {
+      showSubItems($item['subItems'],$level+1);
+    }
+  }
+}
+
+
+function showAsset($id,$name,$level,$position) {
+  global $showVersionsForAll, $showProjectsLinked, $showClosedItems, $currentLine;
+  $rowType  = "row";
+  $display='';
+  $compStyle="";
+  
+  $padding=30;
+  $name="#$id - $name";
+  $style="";
+  $current=($position=='current');
+  $item=new Asset($id);
+  $isElementary = $item->isElementary();
+  $limitedSubAsset = array();
+  if( !$isElementary) {
+    $rowType = "group";
+    $asset = new Asset();
+    $subList = $asset->getSqlElementsFromCriteria(array('idAsset'=>$id));
+    foreach ($subList as $id=>$obj){
+      $limitedSubAsset[]=$obj->id;
+    }
+    $subBudget=array();
+    getSubAssetList($subList, $subBudget);
+      $class = 'ganttExpandOpened';
+  }
+  if($currentLine==$item->id) $style='style="color:red;"';
+  echo '<TR id="assetStructureRow_'.$item->id.'"  '.$style.'  height="30px" '.$display.'>';
+  echo '  <TD class="ganttName reportTableData" style="width:40%;max-width:40%;border-right:0px;' . $compStyle . '">';
+  echo '    <span>';
+  echo '      <table><tr>';
+  echo '<TD>';
+  if(!$isElementary){
+    echo '     <div id="group_'.$item->id.'" class="'.$class.'"';
+    echo '      style="margin-left:'.($level*$padding).'px; position: relative; z-index: 100000;   width:16px; height:13px;"';
+    echo '      onclick="expandAssetGroup(\''.$item->id.'\',\''.implode(',', $limitedSubAsset).'\',\''.implode(',', $subBudget).'\');">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
+  }else{
+    echo '     <div id="group_'.$item->id.'" ';
+    echo '      style=margin-left:'.($level*$padding).'px; "position: relative; z-index: 100000; width:16px; height:13px;"';
+  }
+  echo '</TD>';
+  echo '       <TD style="padding-bottom:5px;"><div class="amountTableDiv">#'.htmlEncode($item->id).'  '.htmlEncode($item->name). '</div></TD>' ;
+  echo '      </tr></table>';
+  echo '    </span>';
+  echo '  </TD>';
+  echo '  <TD class="ganttName reportTableData amountTableTD" style="width:15%;"><div class="amountTableDiv">' .SqlList::getNameFromId('Type', $item->idAssetType). '</div></TD>' ;
+  echo '  <TD class="ganttName reportTableData amountTableTD" style="width:15%;"><div class="amountTableDiv">' .SqlList::getNameFromId('Brand', $item->idBrand). '</div></TD>' ;
+  echo '  <TD class="ganttName reportTableData amountTableTD" style="width:15%;"><div class="amountTableDiv">' .SqlList::getNameFromId('Model', $item->idModel). '</div></TD>' ;
+  echo '  <TD class="ganttName reportTableData amountTableTD" style="width:15%;"><div class="amountTableDiv">' .SqlList::getNameFromId('Affectable', $item->idAffectable). '</div></TD>' ;
+}
+
+
+function getSubAssetList($subList, &$subBudget){
+  foreach ($subList as $id=>$obj){
+    $subBudget[]=$obj->id;
+    $asset = new Asset();
+    $resubList = $asset->getSqlElementsFromCriteria(array('idAsset'=>$obj->id));
+    getSubAssetList($resubList, $subBudget);
+  }
+}
