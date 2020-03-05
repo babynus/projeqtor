@@ -114,6 +114,7 @@ function colorFormatter(value) {
  * @return the formatted value as an image (html code)
  */
 function colorNameFormatter(value, notRounded) {
+  notRounded=true;
   if (value) {
     var tab = value.split("#split#");
     if (tab.length > 1) {
