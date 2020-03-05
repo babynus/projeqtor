@@ -39,7 +39,7 @@ $currentLine = $id;
 
 echo '<table id="assetStructure" align="left" width="95%" style="min-width:400px">';
 echo '<TR class="ganttHeight" style="height:32px">';
-echo '  <TD class="reportTableHeader" style="width:40%;border-left:0px; text-align: left;">' . i18n('colName') . '</TD>';
+echo '  <TD class="reportTableHeader" style="width:40%;border-left:0px; text-align: center;">' . i18n('colName') . '</TD>';
 echo '  <TD class="reportTableHeader amountTableHeaderTD" style="width:15%;"  ><div class="amountTableHeaderDiv">' . i18n('colAssetType') . '</div></TD>' ;
 echo '  <TD class="reportTableHeader amountTableHeaderTD" style="width:15%;" ><div class="amountTableHeaderDiv">' . i18n('colBrand') . '</div></TD>' ;
 echo '  <TD class="reportTableHeader amountTableHeaderTD" style="width:15%;" ><div class="amountTableHeaderDiv">' . i18n('colModel') . '</div></TD>' ;
