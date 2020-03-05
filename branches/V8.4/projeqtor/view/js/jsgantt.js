@@ -1024,10 +1024,11 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
 	          if (field.substr(0,6)=='Hidden') field=field.substr(6);
 	          var showField=getPlanningFieldShow(field);
 	          var fieldWidth=getPlanningFieldWidth(field);
-	          if(showField==1 && field!='Name') { 
+	          if(showField==1 && field!='Name') {
+	            valueField=vTaskList[i].getFieldValue(field,JSGantt);
+	            if (field=='IdStatus') valueField=colorNameFormatter(valueField, true);
 	            vLeftTable += '<TD class="ganttDetail" style="width: ' + fieldWidth + 'px;">'
-	              +'<span class="nobr hideLeftPart' + vRowType + '" style="width: ' + fieldWidth + 'px;text-overflow:ellipsis;">' + vTaskList[i].getFieldValue(field,JSGantt) 
-	              +'</span></TD>' ;
+	              +'<span class="nobr hideLeftPart' + vRowType + '" style="width: ' + fieldWidth + 'px;text-overflow:ellipsis;">'+valueField+'</span></TD>' ;
 	          }
 	        }
 	        vLeftTable += '</TR>';
