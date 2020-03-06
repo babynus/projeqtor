@@ -72,7 +72,7 @@
     echo formatDateThumb($ticket->creationDateTime, null);
     echo '</td>';
     $objStatus=new Status($ticket->idStatus);
-    echo '<td class="dependencyData"  style="width:15%">' . colorNameFormatter($objStatus->name . "#split#" . $objStatus->color) . '</td>';
+    echo '<td class="dependencyData colorNameData"  style="width:15%">' . colorNameFormatter($objStatus->name . "#split#" . $objStatus->color) . '</td>';
     echo '</tr>';
   }
   echo '</table>';

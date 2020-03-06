@@ -246,7 +246,7 @@ function drawDay($date,$ress,$inScopeDay,$period,$calendar=1) {
 		echo '<div style="width:100%;float:left;position:relative;left:-18px;padding-top:2px">';
 		echo '   <div style="float:right;min-width:22px;height:22px;position:relative;margin-top:5px;margin-right:-13px;">#'.$item['id'].'</div>';
 		echo '   <div style="float:left;width:22px;height:22px;position:relative;top:1px;">'.formatColorThumb("idPriority",$item['priorityId'], 22, 'left', i18n('colIdPriority').' : '.$item['priorityName']).'</div>';
-		echo '   <div style="max-width:100px;position:relative;margin-left:47px;">'.colorNameFormatter($item['statusName'].'#split#'.SqlList::getFieldFromId('Status', $item['statusId'], 'color')).'</div>';
+		echo '   <div style="width:60%;position:relative;margin-left:47px;height:23px;overflow:hidden" class="colorNameData">'.colorNameFormatter($item['statusName'].'#split#'.SqlList::getFieldFromId('Status', $item['statusId'], 'color')).'</div>';
 		echo '</div>';
 		echo '</div>';
 		echo '</td></tr></table>';
