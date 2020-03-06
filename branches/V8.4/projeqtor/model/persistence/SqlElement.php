@@ -5996,7 +5996,7 @@ function getLinksHtmlTab() {
     if (property_exists($obj, 'idStatus'))
       $status = colorNameFormatter(SqlList::getNameFromId('Status', $obj->idStatus) . "#split#" .
           SqlList::getFieldFromId('Status', $obj->idStatus, 'color'));
-    $html .=  '<td style="border: 1px solid #7b7b7b; padding:4px;">' . $status . '</td></tr>';
+    $html .=  '<td style="border: 1px solid #7b7b7b; padding:0;margin:0">' . $status . '</td></tr>';
     $status = '';
   }
   return $html . '</table>';
