@@ -56,8 +56,6 @@ if (! array_key_exists('attachmentType',$_REQUEST)) {
   $type=$_REQUEST['attachmentType']; // compared against fixed values. (file|link).
 }
 $attachmentMaxSize=Parameter::getGlobalParameter('paramAttachmentMaxSize');
-debugLog($_REQUEST);
-debugLog($_FILES);
 $uploadedFileArray=array();
 if ($type=='file') {
   if (array_key_exists('attachmentFile',$_FILES)) {

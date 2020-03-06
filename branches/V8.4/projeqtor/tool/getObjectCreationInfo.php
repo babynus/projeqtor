@@ -70,7 +70,7 @@ if (isset($obj)) {
   $canUpdateStatus = ( ( $obj->isAttributeSetToField('idStatus','readonly') or in_array('idStatus',$extraReadonlyFields))?false:true);
   ?>
   <div style="float:left;display:table-cell ;width:130px;height:35px;vertical-align:middle;position:relative;z-index:99998;">
-    <div style="width:133px;height:39px;display:table-cell;padding:0px 4px;vertical-align: middle;zoom:0.9;-moz-transform: scale(0.9);overflow:hidden;position:relative;<?php if ($updateRight and $canUpdateStatus) echo "cursor:pointer;";?>"
+    <div style="width:133px;max-width:133px;height:39px;max-height:39px;display:table-cell;padding:0px 4px;white-space:normal;vertical-align: middle;zoom:0.9;-moz-transform: scale(0.9);overflow:hidden;position:absolute;<?php if ($updateRight and $canUpdateStatus) echo "cursor:pointer;";?>"
     <?php if ($updateRight and $canUpdateStatus) {?> onClick="showDirectChangeStatus();" title="<?php echo i18n('moveStatusBar');?>" <?php }?> >
     <?php if ($obj->idStatus) {
     	$status=new Status($obj->idStatus);

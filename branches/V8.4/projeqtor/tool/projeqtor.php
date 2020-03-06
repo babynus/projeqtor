@@ -2067,7 +2067,6 @@ function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sen
   }
   if (!isset($paramMailerType) or $paramMailerType=='' or $paramMailerType=='phpmailer') {
     // Cute method using PHPMailer : should work on all situations / First implementation on V4.0
-    debugLog($attachments);
     return sendMail_phpmailer($to, $subject, $messageBody, $object, $headers, $sender, $attachmentsArray, $references,false,$autoSendReport,$attachments);
   } else {
     $messageBody=wordwrap($messageBody, 70);
