@@ -1149,6 +1149,10 @@ div#reportParametersDiv .label, div#reportParametersDiv label {
   vertical-align: top;
   background-color: #FFFFFF;
 }
+.colorNameData {
+	padding:0;
+	height:10px;
+}
 .centerData {
 	text-align: center;
 }

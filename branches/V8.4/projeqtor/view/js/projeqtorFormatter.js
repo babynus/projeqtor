@@ -99,8 +99,14 @@ function booleanFormatter(value) {
 function colorFormatter(value, notRounded) {
   notRounded=true;
   if (value) {
-    return '<table width="100%"><tr><td style="min-height:20px;border-radius: 10px; padding: 5px 5px !important;background-color: '
-        + value + '; width: 100%;">&nbsp;</td></tr></table>';
+//    return '<table width="100%"><tr><td style="min-height:20px;border-radius: 10px; padding: 5px 5px !important;background-color: '
+//        + value + '; width: 100%;">&nbsp;</td></tr></table>';
+    return '<div class="colorDiv" style="'
+    +'min-height:10px !important;height:100% !important;text-align: center;'
+    +((notRounded)?'width:100%;':'width:90%;')
+    +((notRounded)?'':'border-radius: 10px;')
+    +((notRounded)?' margin:-5px; padding: 10px 5% !important;':' margin:auto; padding: 5px 5% !important;')
+    +'background-color: '+ value + ';">&nbsp;</div>';
   } else {
     return '';
   }
@@ -161,7 +167,8 @@ function colorNameFormatter(value, notRounded) {
     return '';
   }
 }
-function colorTranslateNameFormatter(value) {
+function colorTranslateNameFormatter(value, notRounded) {
+  notRounded=true;
   if (value) {
     var tab = value.split("#split#");
     if (tab.length > 1) {
@@ -190,9 +197,16 @@ function colorTranslateNameFormatter(value) {
       return '<span style="display:none;">'
           + order
           + '</span>'
-          + '<table width="100%" style="min-height:20px !important;"><tr style="height:100% !important;"><td style="text-align: center;border-radius: 10px; padding: 5px 5px !important;background-color: '
-          + color + '; color:' + foreColor + ';width: 100%;">' + i18n(val)
-          + '</td></tr></table>';
+//          + '<table width="100%" style="min-height:20px !important;"><tr style="height:100% !important;"><td style="text-align: center;border-radius: 10px; padding: 5px 5px !important;background-color: '
+//          + color + '; color:' + foreColor + ';width: 100%;">' + i18n(val)
+//          + '</td></tr></table>';
+          + '<div class="colorNameDiv" style="'
+          +'min-height:10px !important;height:100% !important;text-align: center;'
+          +((notRounded)?'width:100%;':'width:90%;')
+          +((notRounded)?'':'border-radius: 10px;')
+          +((notRounded)?' margin:-5px; padding: 10px 5% !important;':' margin:auto; padding: 5px 5% !important;')
+          +'background-color: '+ color + '; color:' + foreColor + ';">' + i18n(val)
+          + '</div>';
     } else {
       return i18n(value);
     }
