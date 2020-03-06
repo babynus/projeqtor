@@ -2080,7 +2080,7 @@ function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sen
   }
 }
 
-function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $references=null,$canSend=false,$autoSendReport) {
+  function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $references=null,$canSend=false,$autoSendReport,$attachments) {
   scriptLog('sendMail_phpmailer');
   global $logLevel;
   $paramMailSender=Parameter::getGlobalParameter('paramMailSender');
@@ -2101,6 +2101,21 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
     return "";
   }
   // Save data of the mail ===========================================================
+  //florent ticket 4442
+  $directory=Parameter::getGlobalParameter('paramAttachmentDirectory');
+  $lstAtt= array();
+  if(!empty($attachments)){
+    foreach ($attachments as $val){
+      if($val[0]=='file'){
+        $att=new Attachment($val[1]);
+        $lstAtt[$att->fileName]=str_replace('${attachmentDirectory}',$directory, $att->subDirectory).$att->fileName;
+      }else{
+        $doc=new DocumentVersion($val[1]);
+        $lstAtt[$doc->fileName]=$doc->getUploadFileName();
+      }
+    }
+  }
+  //
   $mail=new Mail();
   if (sessionUserExists()) {
     $mail->idUser=getSessionUser()->id;
@@ -2192,7 +2207,7 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
      $phpmailer->ContentType = 'text/calendar; charset="utf-8"; method="REQUEST"';
      $heads = explode ( "\r\n", $headers );
      $phpmailer->Body = $message;
-    
+
     /*
      // Test V3
      $phpmailer->ContentType = 'multipart/alternative';
@@ -2211,6 +2226,14 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
      // $phpmailer->Body = $message;
      */
   } else {
+    //florent ticket 4442 
+    foreach ($lstAtt as $id=>$fileAttach){
+      if($fileAttach!="" and file_exists($fileAttach)){
+        $phpmailer->addAttachment($fileAttach,$id);
+      }else{
+        debugTraceLog("ERROR attachement : ".$id . ' not found');
+      }
+    }
     $phpmailer->Body=$message; //
     $text=new Html2Text($message);
     $phpmailer->AltBody=$text->getText();
