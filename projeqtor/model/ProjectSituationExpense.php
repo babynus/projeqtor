@@ -30,17 +30,27 @@
 require_once('_securityCheck.php'); 
 class ProjectSituationExpense extends ProjectSituation {
   
+  public $_nbColMax=2;
+  
   private static $_databaseTableName = 'projectsituation';
 
   private static $_fieldsAttributes=array(
-  		'id'=>'hidden',
-        'name'=>'hidden',
-  		'situtationNameIncome'=>'hidden',
+        '_sec_SituationIncome'=>'hidden',
+  		'situationNameIncome'=>'hidden',
+        'refIdIncome'=>'hidden',
   		'refTypeIncome'=>'hidden',
   		'situationDateIncome'=>'hidden',
   		'idResourceIncome'=>'hidden',
   		'commentIncome'=>'hidden',
+        'situationNameExpense'=>'hidden',
+        'refTypeExpense'=>'hidden',
+        'refIdExpense'=>'hidden',
+        'situationDateExpense'=>'hidden',
+        'idResourceExpense'=>'hidden',
+        'commentExpense'=>'hidden',
   );
+  
+  private static $_colCaptionTransposition = array('idResourceExpense'=> 'responsible');
   /** ==========================================================================
    * Constructor
    * @param $id the id of the object in the database (null if not stored yet)
@@ -65,6 +75,10 @@ class ProjectSituationExpense extends ProjectSituation {
   protected function getStaticDatabaseTableName() {
   	$paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
   	return $paramDbPrefix . self::$_databaseTableName;
+  }
+  
+  protected function getStaticColCaptionTransposition($fld=null) {
+  	return self::$_colCaptionTransposition;
   }
   
   }

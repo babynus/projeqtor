@@ -30,17 +30,27 @@
 require_once('_securityCheck.php'); 
 class ProjectSituationIncome extends ProjectSituation {
   
+  public $_nbColMax=2;
+  
   private static $_databaseTableName = 'projectsituation';
   
   private static $_fieldsAttributes=array(
-  		'id'=>'hidden'
-        'name'=>'hidden',
-  		'situtationNameIncome'=>'hidden',
-  		'refTypeIncome'=>'hidden',
-  		'situationDateIncome'=>'hidden',
-  		'idResourceIncome'=>'hidden',
-  		'commentIncome'=>'hidden',
+        '_sec_SituationExpense'=>'hidden',
+  		'situationNameExpense'=>'hidden',
+  		'refTypeExpense'=>'hidden',
+        'refIdExpense'=>'hidden',
+  		'situationDateExpense'=>'hidden',
+  		'idResourceExpense'=>'hidden',
+  		'commentExpense'=>'hidden',
+        'situationNameIncome'=>'hidden',
+        'refIdIncome'=>'hidden',
+        'refTypeIncome'=>'hidden',
+        'situationDateIncome'=>'hidden',
+        'idResourceIncome'=>'hidden',
+        'commentIncome'=>'hidden',
   );
+  
+  private static $_colCaptionTransposition = array('idResourceIncome'=> 'responsible');
   
   /** ==========================================================================
    * Constructor
@@ -66,6 +76,10 @@ class ProjectSituationIncome extends ProjectSituation {
   
   protected function getStaticFieldsAttributes() {
   	return self::$_fieldsAttributes;
+  }
+  
+  protected function getStaticColCaptionTransposition($fld=null) {
+  	return self::$_colCaptionTransposition;
   }
   
   }
