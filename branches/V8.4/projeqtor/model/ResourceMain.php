@@ -624,7 +624,6 @@ class ResourceMain extends SqlElement {
         $ec->idTeam=$this->idTeam;
         $ec->idOrganization=$this->idOrganization;
         $resEc=$ec->save();
-        debugLog($resEc);
       }
     }
     // MTY - LEAVE SYSTEM
