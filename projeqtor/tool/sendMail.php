@@ -233,6 +233,8 @@ if ($typeSendMail=="User") {
   $directStatusMail->idEmailTemplate=$idEmailTemplate; // damian
   if(!empty($lstAttach)){
     $resultMail=$obj->sendMailIfMailable(false, false, $directStatusMail, false,false,false,false,false,false,false,false,false,false,false,false,false,$lstAttach);
+  }else{
+    $resultMail=$obj->sendMailIfMailable(false, false, $directStatusMail);
   }
   if (!$resultMail or !is_array($resultMail)) {
     $result="NO";
