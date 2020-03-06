@@ -8157,7 +8157,7 @@ function showMailOptions() {
   }
 }
 
-//florent 
+//florent ticket 4442
 function showAttachedSize(size,name,id,type){
   var totalSize=dojo.byId('totalSizeNoConvert').value;
   var maxSize=Number(dojo.byId('maxSizeNoconvert').value);
@@ -8203,6 +8203,17 @@ function octetConvertSize(octet){
   }
 }
 
+function changeFileSizeMail(name, val){
+  var val1=dojo.byId('v1_'+name).value;
+  var val2=dojo.byId('v2_'+name).value;
+  
+  if(val==1){
+    dojo.byId('filesize'+name).value=val1;
+  }else{
+    val2=dojo.byId('filesize'+name).value=val2;
+  }
+}
+//
 function dialogMailToOtherChange() {
   var show=dijit.byId('dialogMailToOther').get('checked');
   if (show) {
@@ -8417,9 +8428,13 @@ function extractEmails(str) {
 
 function sendMail() {
 	var idEmailTemplate = dijit.byId('selectEmailTemplate').get("value");
-  loadContent("../tool/sendMail.php?className=Mailable&idEmailTemplate="+idEmailTemplate, "resultDivMain",
-      "mailForm", true, 'mail');
-  dijit.byId("dialogMail").hide();
+	if(dojo.byId('totalSizeNoConvert').value > Number(dojo.byId('maxSizeNoconvert').value)){
+	  showAlert(i18n(''));
+	}else{
+	  loadContent("../tool/sendMail.php?className=Mailable&idEmailTemplate="+idEmailTemplate, "resultDivMain",
+	      "mailForm", true, 'mail');
+	  dijit.byId("dialogMail").hide();
+	}
 }
 //gautier ticket #2096
 function assignTeamForMeeting() {
