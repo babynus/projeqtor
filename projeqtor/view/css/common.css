@@ -2509,6 +2509,7 @@ table.dijitCalendarContainer {
 	table-layout: fixed;
 	width: 0;
 	empty-cells: show;
+	min-height:30px;
 }
 .dj_ie .dojoxGridRowTable {
 	border-collapse: collapse;
@@ -2531,7 +2532,7 @@ table.dijitCalendarContainer {
 	border: 1px solid;
 	border-color: #EBEBEB;
 	border-right-color: #CDCDCD;
-	padding: 3px 3px 3px 3px;
+	padding: 0px 3px;
 	text-align: left;
 	overflow: hidden;
 }
