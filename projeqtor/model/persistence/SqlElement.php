@@ -971,7 +971,6 @@ abstract class SqlElement {
       if ( ! property_exists($this,'_noHistory') or (isset($debugTraceHistory) and $debugTraceHistory==true) )
         debugTraceLog("Start COPYTO for ".get_class($this)." #".$this->id);$startMicroTime=microtime(true);
     }
-    debugLog("copyTo($newClass, $newType, $newName, $newProject, ..., $toProject");
     self::setCopyInProgress();
     $result=$this->copySqlElementTo ( $newClass, $newType, $newName, $newProject, $setOrigin, $withNotes, $withAttachments, $withLinks, $withAssignments, $withAffectations, $toProject, $toActivity, $copyToWithResult );
     if (isset($debugTraceUpdates) and $debugTraceUpdates==true) {

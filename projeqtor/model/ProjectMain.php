@@ -1352,7 +1352,6 @@ static function isTheLeaveProject($id=null) {
       unset($this->_sec_restrictTypes);
       unset($this->_spe_restrictTypes);
     }
-    debugLog($this->ProjectPlanningElement);
     if ($this->ProjectPlanningElement and $this->ProjectPlanningElement->realWork>0) {
       self::$_fieldsAttributes["isUnderConstruction"]="readonly,nobr";
     }
