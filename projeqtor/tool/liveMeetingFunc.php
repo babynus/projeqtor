@@ -81,7 +81,7 @@ function generateAttachment($type,$meeting,$last=false){
         <td class="linkData" style="cursor: pointer;" onclick="showDetail(\'refreshBottom'.$type.'\',1,\''.$type.'\',false,'.$obj->id.');">'.$obj->name .'</td>
         <td class="linkData" >'.SqlList::getNameFromId('Affectable',$obj->idResource).'</td>
         <td class="linkData" >'.$dueDate.'</td>
-        <td class="linkData">'.colorNameFormatter(SqlList::getNameFromId("Status", $obj->idStatus).'#split#'.SqlList::getFieldFromId("Status", $obj->idStatus,'color')).'</td></tr>';
+        <td class="linkData colorNameData">'.colorNameFormatter(SqlList::getNameFromId("Status", $obj->idStatus).'#split#'.SqlList::getFieldFromId("Status", $obj->idStatus,'color')).'</td></tr>';
   }
   echo '</table></td>';
   if(!$last)echo '<td style="min-width:20px;"></td>';

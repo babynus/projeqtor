@@ -58,7 +58,7 @@ foreach ($list as $sub) {
   echo '<td class="reportTableData" width="10%" style="text-align:left;padding:0px 5px;white-space:nowrap;">'
       .'<table><tr><td>'.formatIcon($sub->refType,16).'</td><td>&nbsp;</td><td>'.i18n($sub->refType).' #'.$sub->refId.'</td></tr></table></td>';
   echo '<td class="reportTableData" width="65%" style="text-align:left;padding:0px 5px">'.$item->name.'</td>';
-  echo '<td class="reportTableData" width="15%">';
+  echo '<td class="reportTableData colorNameData" width="15%">';
   if ($objStatus->id) echo colorNameFormatter($objStatus->name . "#split#" . $objStatus->color);
   echo '</td>';
   echo '<td class="reportTableData" width="5%">'.formatDateThumb($sub->creationDateTime, null).formatUserThumb($sub->idUser, SqlList::getNameFromId('User', $sub->idUser),'').'</td>';

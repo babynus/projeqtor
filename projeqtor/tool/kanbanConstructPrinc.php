@@ -50,7 +50,7 @@ function kanbanAddPrinc($line) {
 		}
 	} else {
 		if ($line ['idstatus']) {
-			$addInPrinc .= '<div style="margin: 2px 4px 4px 4px;">' . colorNameFormatter ( SqlList::getNameFromId ( "Status", $line ['idstatus'] ) . '#split#' . SqlList::getFieldFromId ( "Status", $line ['idstatus'], 'color' ), $line ['id'] ).'</div>';
+			$addInPrinc .= '<div style="" >' . colorNameFormatter ( SqlList::getNameFromId ( "Status", $line ['idstatus'] ) . '#split#' . SqlList::getFieldFromId ( "Status", $line ['idstatus'], 'color' ), $line ['id'] ).'</div>';
 		}
 		if ($line ['idtargetproductversion']) {
 			$versionName = SqlList::getNameFromId ( "TargetProductVersion", $line ['idtargetproductversion'] );

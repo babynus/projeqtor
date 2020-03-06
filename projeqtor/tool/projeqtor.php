@@ -2080,7 +2080,7 @@ function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sen
   }
 }
 
-  function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $references=null,$canSend=false,$autoSendReport,$attachments) {
+function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $references=null,$canSend=false,$autoSendReport,$attachments) {
   scriptLog('sendMail_phpmailer');
   global $logLevel;
   $paramMailSender=Parameter::getGlobalParameter('paramMailSender');
@@ -3508,7 +3508,9 @@ function formatSortableWbs($wbs) {
  */
 function getForeColor($color) {
   $foreColor='#000000';
-  if (strlen($color)==7) {
+  if ($color=='transparent') {
+    $foreColor='#FFFFFF';
+  } else if (strlen($color)==7) {
     $red=substr($color, 1, 2);
     $green=substr($color, 3, 2);
     $blue=substr($color, 5, 2);
