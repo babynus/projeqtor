@@ -53,9 +53,9 @@ class AssetMain extends SqlElement {
   public $idle;
   public $_sec_AssetComposition;
   public $_assetComposition=array();
+  public $_spe_arboAsset;
   public $_sec_ComponentVersionStructureAsset;
   public $_componentVersionStructureAsset=array();
-  public $_spe_arboAsset;
   public $_sec_Link;
   public $_Link = array();
   public $_Attachment = array();
@@ -115,6 +115,27 @@ class AssetMain extends SqlElement {
     }
     return $result;
   }
+  public function copyTo($newClass, $newType, $newName, $newProject, $structure, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = NULL, $toActivity = NULL, $copyToWithResult = false,$copyToWithVersionProjects=false) {
+    $result=parent::copyTo($newClass, $newType, $newName, $newProject, $structure, $withNotes, $withAttachments, $withLinks);
+    if ($newClass=='Asset' and $structure) {
+      $productAsset = new ProductAsset();
+      $assList=$productAsset->getSqlElementsFromCriteria(array('idAsset'=>$this->id));
+      foreach ($assList as $list){
+        $prAss = new ProductAsset();
+        $prAss->idAsset = $result->id;
+        $prAss->idProductVersion = $list->idProductVersion;
+        $prAss->save();
+      }
+      $ass=new Asset();
+      $assList=$ass->getSqlElementsFromCriteria(array('idAsset'=>$this->id));
+      foreach($assList as $val) {
+        $val->idAsset = $result->id;
+        $val->copyTo($newClass, $newType, $val->name, $newProject, $structure, $withNotes, $withAttachments, $withLinks);
+      }
+    }
+    return $result;
+  }
+  
 // ============================================================================**********
 // GET STATIC DATA FUNCTIONS
 // ============================================================================**********
