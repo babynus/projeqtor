@@ -1334,6 +1334,30 @@
 .ProjeQtOrFlatGreen .iconHierarchicalBudget { background-image: url(customIcons/green/iconHierarchicalBudget.png); }
 .ProjeQtOrFlatGrey .iconHierarchicalBudget { background-image: url(customIcons/grey/iconHierarchicalBudget.png); }
 
+.iconSituation { background-image: url(images/iconSituation.png); }
+.ProjeQtOrFlatBlue .iconSituation { background-image: url(customIcons/blue/iconSituation.png); }
+.ProjeQtOrFlatRed .iconSituation { background-image: url(customIcons/red/iconSituation.png); }
+.ProjeQtOrFlatGreen .iconSituation { background-image: url(customIcons/green/iconSituation.png); }
+.ProjeQtOrFlatGrey .iconSituation { background-image: url(customIcons/grey/iconSituation.png); }
+
+.iconProjectSituation { background-image: url(images/iconProjectSituation.png); }
+.ProjeQtOrFlatBlue .iconProjectSituation { background-image: url(customIcons/blue/iconProjectSituation.png); }
+.ProjeQtOrFlatRed .iconProjectSituation { background-image: url(customIcons/red/iconProjectSituation.png); }
+.ProjeQtOrFlatGreen .iconProjectSituation { background-image: url(customIcons/green/iconProjectSituation.png); }
+.ProjeQtOrFlatGrey .iconProjectSituation { background-image: url(customIcons/grey/iconProjectSituation.png); }
+
+.iconProjectSituationExpense { background-image: url(images/iconProjectSituationExpense.png); }
+.ProjeQtOrFlatBlue .iconProjectSituationExpense { background-image: url(customIcons/blue/iconProjectSituationExpense.png); }
+.ProjeQtOrFlatRed .iconProjectSituationExpense { background-image: url(customIcons/red/iconProjectSituationExpense.png); }
+.ProjeQtOrFlatGreen .iconProjectSituationExpense { background-image: url(customIcons/green/iconProjectSituationExpense.png); }
+.ProjeQtOrFlatGrey .iconProjectSituationExpense { background-image: url(customIcons/grey/iconProjectSituationExpense.png); }
+
+.iconProjectSituationIncome { background-image: url(images/iconProjectSituationIncome.png); }
+.ProjeQtOrFlatBlue .iconProjectSituationIncome { background-image: url(customIcons/blue/iconProjectSituationIncome.png); }
+.ProjeQtOrFlatRed .iconProjectSituationIncome { background-image: url(customIcons/red/iconProjectSituationIncome.png); }
+.ProjeQtOrFlatGreen .iconProjectSituationIncome { background-image: url(customIcons/green/iconProjectSituationIncome.png); }
+.ProjeQtOrFlatGrey .iconProjectSituationIncome { background-image: url(customIcons/grey/iconProjectSituationIncome.png); }
+
 /* =============================================================================== */
 /* Extra CSS for custom Kanban                                                     */
 /* =============================================================================== */

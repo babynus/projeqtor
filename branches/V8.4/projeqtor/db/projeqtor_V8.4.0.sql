@@ -232,6 +232,7 @@ CREATE TABLE `${prefix}situation` (
   `idUser` int(12) unsigned DEFAULT NULL,
   `idResource` int(12) unsigned DEFAULT NULL,
   `comment` mediumtext DEFAULT NULL,
+  `idle` int(1) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
@@ -249,6 +250,7 @@ CREATE TABLE `${prefix}projectsituation` (
   `refIdIncome` int(12) unsigned DEFAULT NULL,
   `situationDateIncome` datetime DEFAULT NULL,
   `idResourceIncome` int(12) unsigned DEFAULT NULL,
+  `idle` int(1) unsigned DEFAULT '0',
     PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 

@@ -149,6 +149,10 @@ class ProviderOrderMain extends SqlElement {
    */
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
+    if(trim(Module::isModuleActive('moduleSituation')) != 1){
+    	self::$_fieldsAttributes['_sec_situation']='hidden';
+    	self::$_fieldsAttributes['idSituation']='hidden';
+    }
   }
   
   /** ==========================================================================
