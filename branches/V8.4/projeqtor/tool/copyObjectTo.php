@@ -112,6 +112,8 @@ $toProject=(property_exists($obj, 'idProject'))?$obj->idProject:null;
 if (RequestHandler::isCodeSet('copyToProject')) {
   $toProject=RequestHandler::getId('copyToProject',false,null);
 }
+
+$copyStructure = RequestHandler::getValue('copyStructure');
   
 Sql::beginTransaction();
 PlanningElement::$_noDispatch=true;
@@ -123,6 +125,8 @@ if ($className=='ComponentVersion') {
 	$obj->name=$toName;
 	$obj->idComponentVersionType=$toType;
 	$newObj=$obj->copy();
+}elseif($className=='Asset'){
+  $newObj=$obj->copyTo($toClassName,$toType, $toName, $toProject,$copyStructure,$copyToWithNotes, $copyToWithAttachments,$copyToWithLinks);
 } else {
   $newObj=$obj->copyTo($toClassName,$toType, $toName, $toProject, $copyToOrigin, $copyToWithNotes, $copyToWithAttachments,$copyToWithLinks, $copyAssignments,false,null,null,$copyToWithResult);
 }
