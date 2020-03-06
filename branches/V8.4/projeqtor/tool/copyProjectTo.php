@@ -29,7 +29,6 @@
  */
 require_once "../tool/projeqtor.php";
 projeqtor_set_time_limit(300);
-debugLog($_REQUEST);
 
 // Get the object from session(last status before change)
 $proj=SqlElement::getCurrentObject(null,null,true,false);
