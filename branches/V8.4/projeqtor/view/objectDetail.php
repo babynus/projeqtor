@@ -3147,7 +3147,7 @@ function drawDocumentVersionFromObject($list, $obj, $refresh=false) {
     echo '</td>';
     echo '<td class="assignData">'.htmlFormatDate($version->versionDate).'</td>';
     $objStatus=new Status($version->idStatus);
-    echo '<td class="assignData" style="width:15%">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</td>';
+    echo '<td class="assignData colorNameData" style="width:15%">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</td>';
     echo '<td class="assignData" title="'.htmlencode($version->description).'">';
     echo '<table style="width:100%"><tr><td style="width:20px">';
     if ($version->isThumbable()) {
@@ -3747,14 +3747,14 @@ function drawNotificationsLinkedToObject($obj, $unreadOnly=true, $refresh=false)
     echo '<td class="linkData" '.$goto.' style="position:relative;width:50%">';
     echo htmlEncode($notificationDefinition->name);
     echo '</td>';
-    echo '<td class="linkData" style="position:relative;width:20%;">';
+    echo '<td class="linkData colorNameData" style="position:relative;width:20%;">';
     echo colorNameFormatter(i18n(SqlList::getNameFromId('Type', $notif->idNotificationType))."#split#".SqlList::getFieldFromId('Type', $notif->idNotificationType, 'color'));
     echo '</td>';
     $changeStatus='';
     if (!$print and $canUpdate) {
       $changeStatus=' onClick="changeStatusNotification('."'".htmlEncode($notif->id)."','".htmlEncode($notif->idStatusNotification)."'".');" style="cursor:pointer;" ';
     }
-    echo '<td class="linkData" '.$changeStatus.' style="position:relative;width:20%;">';
+    echo '<td class="linkData colorNameData" '.$changeStatus.' style="position:relative;width:20%;">';
     echo colorNameFormatter(i18n(SqlList::getNameFromId('StatusNotification', $notif->idStatusNotification))."#split#".SqlList::getFieldFromId('StatusNotification', $notif->idStatusNotification, 'color'));
     echo '</td>';
     echo '</tr>';
@@ -4480,7 +4480,7 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
       }
       if (property_exists($linkObj, $idStatus)) {
         $objStatus=new $statusClass($linkObj->$idStatus);
-        echo '<td class="dependencyData"  style="width:15%">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</td>';
+        echo '<td class="dependencyData colorNameData"  style="width:15%">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</td>';
       } else {
         echo '<td class="dependencyData"  style="width:15%">&nbsp;</td>';
       }
@@ -4940,7 +4940,7 @@ function drawTicketsList($obj, $refresh=false) {
     }
     echo '<td class="linkData" '.$goto.' style="position:relative;">';
     echo htmlEncode($ticket->name);
-    echo '</td><td class="linkData">';
+    echo '</td><td class="linkData colorNameData">';
     // $objStatus=new $statusClass($linkObj->$idStatus);
     echo colorNameFormatter(SqlList::getNameFromId('Status', $ticket->idStatus)."#split#".SqlList::getFieldFromId('Status', $ticket->idStatus, 'color')).'</td>';
     echo '</td>';
