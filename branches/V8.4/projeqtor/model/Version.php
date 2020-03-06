@@ -434,7 +434,7 @@ class Version extends SqlElement {
       $query="SELECT * FROM status WHERE id = '".$vers->idStatus."'";
       $queryResult = Sql::query($query);
       $line = Sql::fetchLine($queryResult);
-      $result.= '</td><td class="linkData">';
+      $result.= '</td><td class="linkData  colorNameData">';
       if ($line && array_key_exists("name", $line)) {
         $result.= colorNameFormatter($line["name"]."#split#".$line["color"]);
       }      

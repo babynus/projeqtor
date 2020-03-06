@@ -5021,7 +5021,7 @@ function drawActivityList($obj, $refresh=false) {
       $activityProgress=$activity->ActivityPlanningElement->progress;
       echo progressFormatter($activityProgress, null);
       echo '</td>';
-      echo '<td class="linkData">';  
+      echo '<td class="linkData colorNameData">';  
       echo colorNameFormatter(SqlList::getNameFromId('Status', $activity->idStatus)."#split#".SqlList::getFieldFromId('Status', $activity->idStatus, 'color'));
       echo '</td>';
       echo '</tr>';
@@ -5337,7 +5337,7 @@ function drawElementIntoVersionStructureFromObject($comp, $compObj, $print, $can
   ));
   $nameStatus = $listStatus[0]->name;
   $colorStatus = $listStatus[0]->color;
-  echo '<td class="dependencyData"  style="width:10%">' . colorNameFormatter($nameStatus . "#split#" . $colorStatus) . '</td>';
+  echo '<td class="dependencyData colorNameData"  style="width:10%">' . colorNameFormatter($nameStatus . "#split#" . $colorStatus) . '</td>';
   echo '<td class="linkData" ' . $goto . ' style="position:relative;">';
   $nameType = SqlList::getNameFromId('Type', $compObj->idVersionType);
   echo htmlEncode($nameType);
@@ -5744,7 +5744,7 @@ function drawDependenciesFromObject($list, $obj, $depType, $refresh=false) {
     // $foreColor=getForeColor($color);
     // echo '<td class="dependencyData"><table><tr><td style="background-color: ' . htmlEncode($objStatus->color) . '; color:' . $foreColor . ';">' . htmlEncode($objStatus->name) . '</td></tr></table></td>';
     // echo '<td class="dependencyData" style="background-color: ' . htmlEncode($objStatus->color) . '; color:' . $foreColor . ';">' . htmlEncode($objStatus->name) . '</td>';
-    echo '<td class="dependencyData" style="width:15%">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</td>';
+    echo '<td class="dependencyData colorNameData" style="width:15%">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</td>';
     if($depType=="Predecessor"){    
       if($allTabSameDate==true and $datePredecessor and count($datePredecessor)>1 and $datePredecessor[0]== addWorkDaysToDate($endDateObj[$dep->id.get_class($depObj)],($dep->dependencyDelay>1)?$dep->dependencyDelay+1:$dep->dependencyDelay)){
         echo '<td class="dependencyData" style="text-align:center; width:15%; color:red">'.htmlFormatDate($endDateObj[$dep->id.get_class($depObj)]).'</td>';
@@ -6931,7 +6931,7 @@ function drawProviderTermFromObject($list, $obj, $type, $refresh=false) {
     $goto2="";
     $typeAffectable2='ProviderBill';
     if (!$print and securityCheckDisplayMenu(null, $typeAffectable2) and securityGetAccessRightYesNo('menu'.$typeAffectable2, 'read', '')=="YES") {
-      $goto2=' onClick="gotoElement(\''.$typeAffectable2.'\',\''.htmlEncode($term->idProviderBill).'\');" style="cursor: pointer;" ';
+      $goto2=' onClick="gotoElement(\''.$typeAffectable2.'\',\''.htmlEncode($term->idProviderBill).'\');" ';
     }
     echo '<tr>';
     if (!$print) {
@@ -6961,11 +6961,11 @@ function drawProviderTermFromObject($list, $obj, $type, $refresh=false) {
     if ($term->idProviderBill) {
       $bill=new ProviderBill($term->idProviderBill);
       $objStatus=new Status($bill->idStatus);
-      echo '<td class="assignData" align="center" '.$goto2.' style="white-space:nowrap; padding:0px !important;" >';
+      echo '<td class="assignData" align="center" '.$goto2.' style="white-space:nowrap; padding:0px !important;color: red;'.(($goto2)?"cursor:pointer;":"").'" >';
       echo '<table style="width:100%;padding:0;marin:0;"><tr>';
       echo '<td class="assignData" style="width:10%;border:0;">#'.htmlEncode($term->idProviderBill).'</td>';
       echo '<td class="assignData" style="width:50%;border:0;">'.htmlEncode($bill->externalReference).'</td>';
-      echo '<td class="assignData" style="width:40%;border:0;">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</td>';
+      echo '<td class="assignData colorNameData" style="width:40%;border:0;">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</td>';
       echo '</tr></table>';
       echo '</td>';
     } else {
@@ -7438,7 +7438,7 @@ function drawTestCaseRunFromObject($list, $obj, $refresh=false) {
       }
       echo '</td>';
     }
-    echo '<td class="assignData" style="width:8%;text-align:left;border-right:0px;">';
+    echo '<td class="assignData colorNameData" style="width:8%;text-align:left;border-right:0px;">';
     echo colorNameFormatter(i18n($st->name).'#split#'.$st->color);
     echo '</td>';
     echo '<td class="assignData" style="width:7%;border-left:0px;font-size:'.(($tcr->idTicket and $tcr->idRunStatus=='3')?'100':'80').'%; text-align: center;">';
@@ -7516,7 +7516,7 @@ function drawProviderTermFromProviderBill($list, $obj, $refresh=false) {
     $goto="";
     $typeAffectable='ProviderOrder';
     if (!$print and securityCheckDisplayMenu(null, $typeAffectable) and securityGetAccessRightYesNo('menu'.$typeAffectable, 'read', '')=="YES") {
-      $goto=' onClick="gotoElement(\''.$typeAffectable.'\',\''.htmlEncode($prT->idProviderOrder).'\');" style="cursor: pointer;" ';
+      $goto=' onClick="gotoElement(\''.$typeAffectable.'\',\''.htmlEncode($prT->idProviderOrder).'\');" ';
     }
     $goto2="";
     $typeAffectable2='ProviderTerm';
@@ -7547,11 +7547,11 @@ function drawProviderTermFromProviderBill($list, $obj, $refresh=false) {
       //echo '  <td class="assignData" align="center"'.$goto.' style="width:45%">#'.htmlEncode($prT->idProviderOrder).'</td>';
       $order=new ProviderOrder($prT->idProviderOrder);
       $objStatus=new Status($order->idStatus);
-      echo '<td class="assignData" align="center" '.$goto.' style="white-space:nowrap; padding:0px !important;" >';
+      echo '<td class="assignData" align="center" '.$goto.' style="white-space:nowrap; padding:0px !important;'.(($goto)?'cursor: pointer;':'').'" >';
       echo '<table style="width:100%;padding:0;marin:0;"><tr>';
       echo '<td class="assignData" style="width:10%;border:0;">#'.htmlEncode($prT->idProviderOrder).'</td>';
       echo '<td class="assignData" style="width:50%;border:0;">'.htmlEncode($order->name).'</td>';
-      echo '<td class="assignData" style="width:40%;border:0;">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</td>';
+      echo '<td class="assignData colorNameData" style="width:40%;border:0;">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</td>';
       echo '</tr></table>';
       echo '</td>';
     } else {
