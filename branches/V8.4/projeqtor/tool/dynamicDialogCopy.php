@@ -155,7 +155,7 @@ if($copyType=="copyObjectTo"){
               </div>
              </td>
            </tr>
-           
+           <?php if($copyToClass!="Asset"){ ?> 
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
                <label for="copyToOrigin" style="width:90%;text-align: right;"><?php echo i18n("copyToOrigin") ?>&nbsp;:&nbsp;</label>
@@ -179,6 +179,19 @@ if($copyType=="copyObjectTo"){
              </td>
            </tr>
            <tr>
+           <?php }else{ ?> 
+           <tr>
+             <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
+               <label for="copyStructure" style="width:90%;text-align: right;"><?php echo i18n("copyStructure") ?>&nbsp;:&nbsp;</label>
+               <?php $isCheckedSructure=true;$isCheckedSructure=Parameter::getUserParameter('isCheckedSructure'.$objectClass);?>
+               <div id="copyStructure" name="copyStructure" dojoType="dijit.form.CheckBox" <?php if ($isCheckedSructure=='true') echo " checked ";?> type="checkbox" >
+               <script type="dojo/method" event="onChange" >
+                  saveDataToSession('isCheckedSructure<?php echo $objectClass;?>',((this.checked)?true:false),true);
+               </script>
+               </div>
+             </td>
+           </tr>
+           <?php }?>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
                <label for="copyToWithLinks" style="width:90%;text-align: right;"><?php echo i18n("copyToWithLinks") ?>&nbsp;:&nbsp;</label>
                <?php $isCheckedWithLink=true;$isCheckedWithLink=Parameter::getUserParameter('isCheckedWithLink'.$objectClass);?>
@@ -211,7 +224,8 @@ if($copyType=="copyObjectTo"){
                </script>
                </div>
              </td>
-           </tr>     
+           </tr>   
+           <?php if($copyToClass!="Asset"){ ?> 
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
                <label for="copyToWithResult" style="width:90%;text-align: right;"><?php echo i18n("copyToWithResult") ?>&nbsp;:&nbsp;</label>
@@ -223,7 +237,8 @@ if($copyType=="copyObjectTo"){
                </script>
                </div>
              </td>
-           </tr>    
+           </tr>   
+         <?php }?> 
            <tr><td>&nbsp;</td><td >&nbsp;</td></tr>
          </table>
         </form>

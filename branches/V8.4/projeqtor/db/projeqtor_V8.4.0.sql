@@ -389,9 +389,9 @@ CREATE TABLE `${prefix}assetCategory` (
 PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
-INSERT INTO `${prefix}assetCategory` (`id`,`name`,`sortOrder`,`idle`) VALUES
-(null,'Individual',10,0),
-(null,'Collective',20,0);
+INSERT INTO `${prefix}assetCategory` (`name`,`sortOrder`,`idle`) VALUES
+('Individual',10,0),
+('Collective',20,0);
 
 CREATE TABLE `${prefix}model` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
@@ -413,6 +413,9 @@ CREATE TABLE `${prefix}productasset` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 CREATE INDEX productassetAsset ON `${prefix}productasset` (idAsset);
 CREATE INDEX productassetProduct ON `${prefix}productasset` (idProductVersion);
+
+INSERT INTO `${prefix}copyable` (`id`, `name`, `idle`, `sortOrder`) VALUES
+(30,'Asset',0,'200');
 
 -- IGE #88 - Report of Subscription
 

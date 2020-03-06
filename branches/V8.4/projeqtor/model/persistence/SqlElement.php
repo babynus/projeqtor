@@ -2231,7 +2231,11 @@ abstract class SqlElement {
     if (property_exists ( $newObj, "fixPerimeter" )) {
       $newObj->fixPerimeter = 0;
     }
-    
+    //gautier #4404
+    if (get_class ( $newObj ) == 'Asset') {
+      $newObj->serialNumber = null;
+      $newObj->inventoryNumber = null;
+    }
     if (get_class ( $newObj ) == 'Bill') {
       $newObj->paymentDate = null;
       $newObj->paymentAmount = null;
