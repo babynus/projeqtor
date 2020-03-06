@@ -2077,6 +2077,17 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           }else if ($col=='idContactContract' and get_class($obj)=='ClientContract') {
              $idMenu='menuClientContract';
              $comboClass='Contact';
+          }else if ($col=='idSituation') {
+            $refType = get_class($obj);
+            $projSituation = SqlElement::getSingleSqlElementFromCriteria('ProjectSituation', array('idProject'=>$obj->idProject));
+            $val = $projSituation->id;
+            if ($refType=='CallForTender' or $refType=='Tender' or $refType=='ProviderOrder' or $refType=='ProviderBill') {
+              $idMenu='menuProjectSituationExpense';
+              $comboClass='ProjectSituationExpense';
+            }else{
+              $idMenu='menuProjectSituationIncome';
+              $comboClass='ProjectSituationIncome';
+            }
           }
           $menu=SqlElement::getSingleSqlElementFromCriteria('Menu', array('name'=>$idMenu));
           $crit=array();
@@ -6773,6 +6784,49 @@ function drawResourceSupport($list, $obj, $type, $refresh=false) {
   echo '</table>';
 }
 
+function drawProjectSituation($type, $obj){
+	global $cr, $print, $outMode, $user, $comboDetail, $displayWidth, $printWidth;
+	if ($comboDetail) {
+		return;
+	}
+	if($type=='Expense'){
+	  $classList = array('CallForTender','Tender','ProviderOrder','ProviderBill');
+	}else{
+	  $classList = array('Bill','Quotation','Command');
+	}
+	echo '<table width="99.9%">';
+	echo '<tr>';
+	echo '<td class="noteHeader" style="width:10%">' . i18n('colId') . '</td>';
+	echo '<td class="noteHeader" style="width:30%">' . i18n('colElement') . '</td>';
+	echo '<td class="noteHeader" style="width:20%">' . i18n('colDate') . '</td>';
+	echo '<td class="noteHeader" style="width:25%">' . i18n('colSituation') . '</td>';
+	echo '<td class="noteHeader" style="width:15%">' . i18n('colResponsible') . '</td>';
+	echo '</tr>';
+  	foreach ($classList as $class){
+  	 $situation = new Situation();
+     $critWhere = array('refType'=>$class,'idProject'=>$obj->idProject);
+     $situationList = $situation->getSqlElementsFromCriteria($critWhere,null,null, 'date desc');
+     if(count($situationList) > 0){
+       $situation = $situationList[0];
+     }
+     if($situation->id){
+       $item = new $class($situation->refId);
+       echo '<tr>';
+       echo '<td class="noteData" style="text-align:center">#' . htmlEncode($situation->id) . '</td>';
+       echo '<td class="noteData" style="text-align:center">' . htmlEncode(i18n($class)).' #'.htmlEncode($item->id).' '.htmlEncode($item->name). '</td>';
+       echo '<td class="noteData" style="text-align:center">' . htmlFormatDateTime($situation->date) . '</td>';
+       echo '<td class="noteData" style="text-align:left">';
+       echo '  <div style="float:left">'.formatCommentThumb($situation->comment).'</div>';
+       echo    htmlEncode($situation->name);
+       echo '</td>';
+      $responsible = new ResourceAll($situation->idResource);
+      echo '<td class="noteData" style="text-align:center">' . htmlEncode($responsible->name) . '</td>';
+       echo '</tr>';
+     }
+	}
+	echo '</table>';
+}
+
 // gautier #ProviderTerm
 function drawProviderTermFromObject($list, $obj, $type, $refresh=false) {
   global $cr, $print, $user, $browserLocale, $comboDetail;
@@ -8227,6 +8281,8 @@ function endBuffering($prevSection, $included) {
       'receivers'=>array('3'=>'bottom', '3'=>'extra','99'=>'treatment'), 
       'resourcesofobject'=>array('2'=>'bottom', '3'=>'extra','99'=>'resources'), 
       'resourcecost'=>array('2'=>'right', '3'=>'extra','99'=>'detail'),
+      'situationexpense'=>array('2'=>'right', '3'=>'right','99'=>'detail'),
+      'situationincome'=>array('2'=>'right', '3'=>'extra','99'=>'detail'),
       'subprojects'=>array('2'=>'right', '3'=>'right','99'=>'dependency'),
       'subproducts'=>array('2'=>'right', '3'=>'right','99'=>'configuration'),
       'subbudgets'=>array('2'=>'right', '3'=>'extra','99'=>'dependency'), 

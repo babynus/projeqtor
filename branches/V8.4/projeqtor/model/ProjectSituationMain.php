@@ -30,9 +30,11 @@
 require_once('_securityCheck.php'); 
 class ProjectSituationMain extends SqlElement {
   
+  public $_sec_description;
   public $id;
   public $idProject;
   public $name;
+  public $idle;
   public $situationNameExpense;
   public $refTypeExpense;
   public $refIdExpense;
@@ -43,6 +45,47 @@ class ProjectSituationMain extends SqlElement {
   public $refIdIncome;
   public $situationDateIncome;
   public $idResourceIncome;
+  
+  public $_sec_SituationExpense;
+  public $_spe_SituationExpense;
+  
+  public $_sec_SituationIncome;
+  public $_spe_SituationIncome;
+  
+  public $_nbColMax=3;
+  
+  private static $_layout='
+    <th field="id" formatter="numericFormatter" width="4%" ># ${id}</th>
+    <th field="nameProject" width="9%" >${idProject}</th>
+    <th field="name" width="12%" >${name}</th>
+    <th field="situationNameExpense" width="12%">${situationNameExpense}</th>
+    <th field="situationDateExpense" width="8%" formatter="dateFormatter">${situationDateExpense}</th>
+    <th field="situationNameIncome" width="12%">${situationNameIncome}</th>
+    <th field="situationDateIncome" width="8%" formatter="dateFormatter">${situationDateIncome}</th>
+    <th field="idle" width="4%" formatter="booleanFormatter" >${idle}</th>';
+  //   <th field="refTypeExpense" width="8%" >${refTypeExpense}</th>
+  //   <th field="refIdExpense" width="8%" >${refIdExpense}</th>
+  //   <th field="idResourceIncome" formatter="thumbName22" width="12%" >${idResourceIncome}</th>
+  //   <th field="refTypeIncome" width="8%" >${refTypeIncome}</th>
+  //   <th field="refIdIncome" width="8%" >${refIdIncome}</th>
+  //   <th field="idResourceExpense" formatter="thumbName22" width="12%" >${idResourceExpense}</th>
+  
+  private static $_fieldsAttributes=array(
+  		'situationNameExpense'=>'hidden',
+  		'refTypeExpense'=>'hidden',
+  		'refIdExpense'=>'hidden',
+  		'situationDateExpense'=>'hidden',
+  		'idResourceExpense'=>'hidden',
+  		'commentExpense'=>'hidden',
+  		'situationNameIncome'=>'hidden',
+  		'refIdIncome'=>'hidden',
+  		'refTypeIncome'=>'hidden',
+  		'situationDateIncome'=>'hidden',
+  		'idResourceIncome'=>'hidden',
+  		'commentIncome'=>'hidden',
+  );
+  
+  private static $_colCaptionTransposition = array();//'idResourceExpense'=> 'responsible', 'idResourceIncome'=> 'responsible'
   
   /** ==========================================================================
    * Constructor
@@ -65,18 +108,28 @@ class ProjectSituationMain extends SqlElement {
   	return parent::save();
   }
   
-  /** ============================================================================
-   * Return the specific colCaptionTransposition
-   * @return the colCaptionTransposition
-   */
   protected function getStaticColCaptionTransposition($fld=null) {
   	return self::$_colCaptionTransposition;
   }
   
-  /** ========================================================================
-   * Return the specific databaseTableName
-   * @return the databaseTableName
-   */
+  protected function getStaticLayout() {
+  	return self::$_layout;
+  }
+  
+  protected function getStaticFieldsAttributes() {
+  	return self::$_fieldsAttributes;
+  }
+  
+  public function drawSpecificItem($item){
+  	global $print;
+  	$result="";
+  	if($item == 'SituationExpense'){
+  		drawProjectSituation('Expense', $this);
+  	}else if($item == 'SituationIncome'){
+  		drawProjectSituation('Income', $this);
+  	}
+  	return $result;
+  }
   
   }
 ?>

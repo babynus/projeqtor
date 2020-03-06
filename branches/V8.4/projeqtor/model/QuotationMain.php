@@ -150,6 +150,10 @@ class QuotationMain extends SqlElement {
     if ($this->fullAmount) {
       $this->taxAmount=$this->fullAmount-$this->untaxedAmount;
     }
+    if(trim(Module::isModuleActive('moduleSituation')) != 1){
+    	self::$_fieldsAttributes['_sec_situation']='hidden';
+    	self::$_fieldsAttributes['idSituation']='hidden';
+    }
   }
 
    /** ==========================================================================

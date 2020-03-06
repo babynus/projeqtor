@@ -40,6 +40,7 @@ class SituationMain extends SqlElement {
   public $idResource;
   public $idUser;
   public $comment;
+  public $idle;
   
   /** ==========================================================================
    * Constructor
@@ -67,7 +68,13 @@ class SituationMain extends SqlElement {
   	if ($comboDetail or !$obj->id) {
   		return;
   	}
-  	$canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj) == "YES";
+  	$habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>getSessionUser()->getProfile($this->idProject), 'scope'=>'situation'));
+  	if($habil->rightAccess == '2'){
+  	  $canUpdate = false;
+  	}else{
+  	  $canUpdate = true;
+  	}
+  	
   	$critWhere = array('refType'=>get_class($obj),'refId'=>$obj->id,'idProject'=>$obj->idProject);
   	$situationList = $this->getSqlElementsFromCriteria($critWhere,null,null, 'date desc');
   	echo '</br>';

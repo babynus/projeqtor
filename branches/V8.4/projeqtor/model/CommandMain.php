@@ -170,6 +170,10 @@ class CommandMain extends SqlElement {
       $this->addTaxAmount=$this->addFullAmount-$this->addUntaxedAmount;
       $this->totalTaxAmount=$this->totalFullAmount-$this->totalUntaxedAmount;
     }
+    if(trim(Module::isModuleActive('moduleSituation')) != 1){
+    	self::$_fieldsAttributes['_sec_situation']='hidden';
+    	self::$_fieldsAttributes['idSituation']='hidden';
+    }
   }
 
    /** ==========================================================================
