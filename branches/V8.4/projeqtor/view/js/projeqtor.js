@@ -6669,6 +6669,7 @@ function dropFilesFormOnDragOver() {
   var hasScrollBar=(dojo.byId('formDiv').scrollHeight>dojo.byId('formDiv').clientHeight)?true:false;
   var removeWidth=(hasScrollBar)?25:10;
   dojo.byId('dropFilesInfoDiv').style.width=(dojo.byId('formDiv').offsetWidth-removeWidth)+"px";
+  dojo.byId('dropFilesInfoDiv').style.top=(dojo.byId('formDiv').scrollTop)+"px";
   dojo.byId('dropFilesInfoDiv').style.display='block';
   dojo.byId('dropFilesInfoDiv').style.opacity='50%';
 }
