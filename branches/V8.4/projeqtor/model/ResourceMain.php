@@ -125,7 +125,7 @@ class ResourceMain extends SqlElement {
                                           "isLdap"=>"hidden",
                                           "crypto"=>"hidden",
                                           "idle"=>"nobr",
-                                          "endDate"=>"readonly",
+                                          "endDate"=>"",
                                           "startDate"=>""
   );    
   
