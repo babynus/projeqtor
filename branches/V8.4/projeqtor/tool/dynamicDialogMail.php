@@ -67,17 +67,9 @@ $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
     $maxSizeAttachment=0;
   }
   $maxSize=$maxSizeAttachment;
-  if($maxSize!=0){
-    $def = [[1, 'octets'], [1024, 'ko'], [1024*1024, 'Mo'], [1024*1024*1024, 'Go'], [1024*1024*1024*1024, 'To']];
-    for($i=0; $i<sizeof($def); $i++){
-      if($maxSizeAttachment<$def[$i][0]){
-        $maxSizeAttachment=number_format(floatval($maxSizeAttachment/$def[$i-1][0]),2,'.','').''.$def[$i-1][1];
-        break;
-      }
-    }
-  }else{
-    $maxSizeAttachment=$maxSize.'octets';
-  }
+  $maxSizeAttachment=octectConvertSize($maxSize);
+
+  
 }
 
 
@@ -334,7 +326,7 @@ $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
           echo "<tr>";
           echo "<td class='assignData verticalCenterData'><div id='dialogMail".$attached->fileName."' name='dialogMail".$attached->fileName."'  dojoType='dijit.form.CheckBox' type='checkbox' onclick='showAttachedSize(".json_encode($attached->fileSize).",".json_encode($attached->fileName).",".json_encode($attached->type).",".json_encode($attached->id).");'></div>&nbsp;".$attached->fileName."</td>";
           echo " <td class='assignData verticalCenterData' style='text-align:center;'>$attached->type</td>";
-          echo " <td class='assignData verticalCenterData' style='text-align:center;'>".(($attached->fileSize !='')?$attached->fileSize:'-')."</td>";
+          echo " <td class='assignData verticalCenterData' style='text-align:center;'>".octectConvertSize($attached->fileSize)."</td>";
           echo " <td class='assignData verticalCenterData'></td>";
           echo " </tr>";
         }
@@ -368,18 +360,20 @@ $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
                
             }
             echo "<tr>";
-            echo "<td class='assignData verticalCenterData'><div id='dialogMail".$name."' name='dialogMail".$name."'  dojoType='dijit.form.CheckBox' type='checkbox'  onclick='showAttachedSize(".json_encode($filsize).",".json_encode($name).",".json_encode($type).",".json_encode($docId).");' ></div>&nbsp;".$name."</td>";
+            echo "<td class='assignData verticalCenterData'><div id='dialogMail".$name."' name='dialogMail".$name."'  dojoType='dijit.form.CheckBox' type='checkbox'  onclick='showAttachedSize(".json_encode($filsizeRef).",".json_encode($name).",".json_encode($type).",".json_encode($docId).");' ></div>&nbsp;".$name."</td>";
             echo " <td class='assignData verticalCenterData' style='text-align:center;'>$document->ref1Type</td>";
             echo " <td class='assignData verticalCenterData' style='text-align:center;'>";
-            echo "     <input class='assignData verticalCenterData'  id='filesize".$name."' style='border:none;font-size:10px;position:relative;text-align: center;' value='".$filsizeRef."' /></td>";
+            echo "     <input   id='filesizeNoConvert".$name."' hidden value='".$filsizeRef."' />";
+            echo "     <input class='assignData verticalCenterData'  id='filesize".$name."' style='border:none;font-size:10px;position:relative;text-align: center;' value='".octectConvertSize($filsizeRef)."' /></td>";
             if($document->ref1Type!='DocumentVersion'){
               echo "<td class='assignData verticalCenterData'>";
               echo " <input  name='v1_".$name."' id='v1_".$name."'  class='input'  hidden value='$filsizeRef' />";
+              debugLog($filsizeRef);
               echo " <input  name='v2_".$name."' id='v2_".$name."'  class='input'  hidden value='$filsize' />";
               echo "<table style='width:100%;'><tr><td style='width:50%;'><label style='width:30%;' for='versionRef".$name."'>".$versRef."</label>";
-              echo "&nbsp;&nbsp;<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='versionRef".$name."' checked onChange='changeFileSizeMail(".json_encode($name).",1);'/></td>";
+              echo "&nbsp;&nbsp;<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='versionRef".$name."' checked onChange='changeFileSizeMail(".json_encode($name).");'/></td>";
               echo "<td><label style='width:30%;' for='version".$name."'>".$vers."</label>";
-              echo "&nbsp;&nbsp;<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='version".$name."'   onChange='changeFileSizeMail(".json_encode($name).",2);' /></td></tr></table></td>";
+              echo "&nbsp;&nbsp;<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='version".$name."'    /></td></tr></table></td>";
             }else{
               echo " <td class='assignData verticalCenterData'>".((isset($docV))?$docV->name:$versRef)."</td>";
             }
@@ -391,3 +385,4 @@ $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
 <?php }?>
   <br/>
 </form>   
+
