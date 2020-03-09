@@ -139,6 +139,10 @@ class ClientContractMain extends SqlElement {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
   	parent::__construct($id,$withoutDependentObjects);
+  	if (!$this->id) {
+  	  $this->idUnitNotice=2;
+  	  $this->idUnitContract=2;
+  	}
   	if ($withoutDependentObjects) return;
   }
 
@@ -287,6 +291,7 @@ class ClientContractMain extends SqlElement {
       $colScript .=" var dayEndDate=reelEndDate.getDate();";
       $colScript .=" var MonthEnd=reelEndDate.getMonth();";
       $colScript .=" var start=dijit.byId('startDate');";
+      $colScript .=" var monthYear=0;";
       $colScript .=" start.set('dropDownDefaultValue',this.value);";
       $colScript .=" start.constraints.max=this.value;";
       $colScript .="  if( startDate != undefined){";
@@ -294,10 +299,14 @@ class ClientContractMain extends SqlElement {
       $colScript .="               var nbY=startDate.getYear()-reelEndDate.getYear();";
       $colScript.="                setTimeout(dijit.byId('idUnitContract').set('value',3),500);";
       $colScript .="               setTimeout(dijit.byId('initialContractTerm').set('value',Math.abs(nbY)),500);";
-      $colScript .="    }else if( dayStartDate == dayEndDate && MonthStart!=MonthEnd) {";
-      $colScript .="                var nbM=MonthStart-MonthEnd;";
+      $colScript .="    }else if( dayStartDate == dayEndDate && MonthStart!=MonthEnd ) {";
+      $colScript .="                var nbM=Math.abs(MonthStart-MonthEnd);";
+      $colScript .="                if(startDate.getYear()!=reelEndDate.getYear()){";
+      $colScript .="                  monthYear=(Math.abs(startDate.getYear()-reelEndDate.getYear()))*12;";
+      $colScript .="                  nbM=nbM+(monthYear);";
+      $colScript .="                }";
       $colScript.="                 setTimeout(dijit.byId('idUnitContract').set('value',2),500);";
-      $colScript.="                 setTimeout(dijit.byId('initialContractTerm').set('value',Math.abs(nbM)),500);";
+      $colScript.="                 setTimeout(dijit.byId('initialContractTerm').set('value',nbM),500);";
       $colScript.="    }else { ";
       $colScript.="                var nbJ=dayDiffDates(startDate,endDate);";
       $colScript.="                setTimeout(dijit.byId('idUnitContract').set('value',1),500);";
@@ -307,18 +316,16 @@ class ClientContractMain extends SqlElement {
       $colScript .="  if( noticePeriod != 0 && idUnitNotice!= undefined){";
       $colScript .="    switch (idUnitNotice) { ";
       $colScript .="      case '1':";
-      $colScript .="                var newDate=addDaysToDate(this.value,-noticePeriod);";
+      $colScript .="                var newDate=addDaysToDate(reelEndDate,-noticePeriod);";
       $colScript .="                dijit.byId('noticeDate').set('value',newDate);";
       $colScript .="                break;";
       $colScript .="      case '2':";
-      $colScript .="                var newDate= new Date(this.value);";
-      $colScript .="                addDaysToDate(newDate,1);";
-      $colScript .="                newDate.setMonth(endDate.getMonth()-noticePeriod);";
-      $colScript .="                dijit.byId('noticeDate').set('value',newDate,1);";
+      $colScript .="                var newDate= new Date(reelEndDate);";
+      $colScript .="                newDate.setMonth(newDate.getMonth()-noticePeriod);";
+      $colScript .="                dijit.byId('noticeDate').set('value',newDate);";
       $colScript .="                break;";
       $colScript .="      case '3':";
-      $colScript .="                var newDate= new Date(this.value);";
-      $colScript .="                addDaysToDate(newDate,1);";
+      $colScript .="                var newDate= new Date(reelEndDate);";
       $colScript .="                newDate.setFullYear(newDate.getFullYear()-noticePeriod);";
       $colScript .="                dijit.byId('noticeDate').set('value',newDate);";
       $colScript .="                break;";
@@ -334,15 +341,20 @@ class ClientContractMain extends SqlElement {
       $colScript .=" var dayEndDate=reelEndDate.getDate();";
       $colScript .=" var MonthNotice=noticeDate.getMonth();";
       $colScript .=" var MonthEnd=reelEndDate.getMonth();";
+      $colScript .=" var monthYear=0;";
       $colScript .="  if( endDate != undefined ){ ";
-      $colScript .="    if( dayNoticeDate == dayEndDate &&  MonthNotice==MonthEnd && this.value.getYear()!=reelEndDate.getYear()){ ";
+      $colScript .="    if( dayNoticeDate == dayEndDate &&  MonthNotice==MonthEnd && noticeDate.getYear()!=reelEndDate.getYear()){ ";
       $colScript .="      var nbY=noticeDate.getYear()-reelEndDate.getYear();";
       $colScript .="      dijit.byId('idUnitNotice').set('value',3);";
       $colScript .="      dijit.byId('noticePeriod').set('value',Math.abs(nbY));";
       $colScript .="    }else if( dayNoticeDate == dayEndDate &&  MonthNotice!=MonthEnd ){ ";
-      $colScript .="      var nbM=MonthNotice-MonthEnd;";
-      $colScript .="      if(dijit.byId('idUnitNotice').getValue()!='2')dijit.byId('idUnitNotice').set('value',2);";
-      $colScript .="      dijit.byId('noticePeriod').set('value',Math.abs(nbM));";
+      $colScript .="        var nbM=Math.abs(MonthEnd-MonthNotice);";
+      $colScript .="        if(noticeDate.getYear()!=reelEndDate.getYear()){";
+      $colScript .="          monthYear=(Math.abs(noticeDate.getYear()-reelEndDate.getYear()))*12;";
+      $colScript .="          nbM=nbM+(monthYear);";
+      $colScript .="        }";
+      $colScript .="      dijit.byId('idUnitNotice').set('value',2);";
+      $colScript .="      dijit.byId('noticePeriod').set('value',nbM);";
       $colScript .="    }else{ ";
       $colScript .="      var nbJ=dayDiffDates(noticeDate,endDate);";
       $colScript .="      dijit.byId('idUnitNotice').set('value',1);";
@@ -363,13 +375,13 @@ class ClientContractMain extends SqlElement {
       $colScript .="      case '2':";
       $colScript .="                var newDate= new Date(endDate);";
       $colScript .="                addDaysToDate(newDate,1);";
-      $colScript .="                newDate.setMonth(endDate.getMonth()-noticePeriod);";
+      $colScript .="                newDate.setMonth(newDate.getMonth()-noticePeriod);";
       $colScript .="                dijit.byId('noticeDate').set('value',newDate);";
       $colScript .="                break;";
       $colScript .="      case '3':";
       $colScript .="                var newDate= new Date(endDate);";
       $colScript .="                addDaysToDate(newDate,1);";
-      $colScript .="                newDate.setFullYear(endDate.getFullYear()-noticePeriod);";
+      $colScript .="                newDate.setFullYear(newDate.getFullYear()-noticePeriod);";
       $colScript .="                dijit.byId('noticeDate').set('value',newDate);";
       $colScript .="                break;";
       $colScript .="    } ";
@@ -391,13 +403,13 @@ class ClientContractMain extends SqlElement {
       $colScript .="      case '2':";
       $colScript .="                var newDate= new Date(endDate);";
       $colScript .="                addDaysToDate(newDate,1);";
-      $colScript .="                newDate.setMonth(endDate.getMonth()-this.value);";
-      $colScript .="                dijit.byId('noticeDate').set('value',newDate,1);";
+      $colScript .="                newDate.setMonth(newDate.getMonth()-this.value);";
+      $colScript .="                dijit.byId('noticeDate').set('value',newDate);";
       $colScript .="                break;";
       $colScript .="      case '3':";
       $colScript .="                var newDate= new Date(endDate);";
       $colScript .="                addDaysToDate(newDate,1);";
-      $colScript .="                newDate.setFullYear(endDate.getFullYear()-this.value);";
+      $colScript .="                newDate.setFullYear(newDate.getFullYear()-this.value);";
       $colScript .="                dijit.byId('noticeDate').set('value',newDate);";
       $colScript .="                break;";
       $colScript .="    } ";

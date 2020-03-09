@@ -8180,7 +8180,7 @@ function showAttachedSize(size,name,id,type){
     dojo.byId('attachments').value=addAttachments;
     totalSize=Number(totalSize)-Number(size);
   }
-  noConvert=totalSize;
+  var noConvert=totalSize;
   if(totalSize!=0){
     totalSize=octetConvertSize(totalSize);
   }
@@ -8203,14 +8203,47 @@ function octetConvertSize(octet){
   }
 }
 
-function changeFileSizeMail(name, val){
+function changeFileSizeMail(name){
+  var totalSize=dojo.byId('totalSizeNoConvert').value;
+  var maxSize=Number(dojo.byId('maxSizeNoconvert').value);
   var val1=dojo.byId('v1_'+name).value;
   var val2=dojo.byId('v2_'+name).value;
-  
-  if(val==1){
-    dojo.byId('filesize'+name).value=val1;
+  if(dijit.byId('dialogMail'+name).get('checked')==true  ){
+    if(totalSize!=0){
+      console.log('total '+totalSize);
+      size=Number(totalSize)-Number(dojo.byId('filesizeNoConvert'+name).value);
+      console.log('filesize '+dojo.byId('filesizeNoConvert'+name).value);
+    }
+    if(dijit.byId('versionRef'+name).get('checked')==true){
+      totalSize=size+Number(val1);
+      dojo.byId('filesize'+name).value=val1;
+      dojo.byId('filesizeNoConvert'+name).value=octetConvertSize(val1);
+    }else{
+      totalSize=size+Number(val2);
+      dojo.byId('filesize'+name).value=octetConvertSize(val2);
+      dojo.byId('filesizeNoConvert'+name).value=val2;
+    }
+    var noConvert=totalSize;
+    if(totalSize!=0){
+      totalSize=octetConvertSize(totalSize);
+    }
+    if( maxSize < noConvert ){
+      dojo.byId('infoSize').style.color="red";
+      dojo.byId('totalSize').style.color="red";
+    }else if ((maxSize >= noConvert) || noConvert==0) {
+      dojo.byId('infoSize').style.color="green";
+      dojo.byId('totalSize').style.color="green";
+    }
+    dojo.byId('totalSizeNoConvert').value=noConvert;
+    dojo.byId('totalSize').value=totalSize;
   }else{
-    val2=dojo.byId('filesize'+name).value=val2;
+    if(dijit.byId('versionRef'+name).get('checked')==true){
+      dojo.byId('filesize'+name).value=octetConvertSize(val1);
+      dojo.byId('filesizeNoConvert'+name).value=val1;
+    }else{
+      dojo.byId('filesize'+name).value=octetConvertSize(val2);
+      dojo.byId('filesizeNoConvert'+name).value=val2;
+    }
   }
 }
 //
