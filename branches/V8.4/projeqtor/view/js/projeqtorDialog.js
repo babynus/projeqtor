@@ -8204,25 +8204,39 @@ function octetConvertSize(octet){
 }
 
 function changeFileSizeMail(name){
+  var attachments=dojo.byId('attachments').value;
+  var addAttachments='';
   var totalSize=dojo.byId('totalSizeNoConvert').value;
   var maxSize=Number(dojo.byId('maxSizeNoconvert').value);
   var val1=dojo.byId('v1_'+name).value;
   var val2=dojo.byId('v2_'+name).value;
+  var id=dojo.byId('addVersion'+name).value;
+  var type='DocumentVersion';
+  var docVersRef=dojo.byId('idDocRef'+name).value;
+  var docVers=dojo.byId('idDoc'+name).value;
   if(dijit.byId('dialogMail'+name).get('checked')==true  ){
     if(totalSize!=0){
-      console.log('total '+totalSize);
       size=Number(totalSize)-Number(dojo.byId('filesizeNoConvert'+name).value);
-      console.log('filesize '+dojo.byId('filesizeNoConvert'+name).value);
     }
+    var regex='/'+id+'_'+type;
+    suprAttachments=attachments.replace(regex,'');
+    
     if(dijit.byId('versionRef'+name).get('checked')==true){
+      addAttachments=suprAttachments+'/'+docVersRef+'_'+type;
       totalSize=size+Number(val1);
-      dojo.byId('filesize'+name).value=val1;
-      dojo.byId('filesizeNoConvert'+name).value=octetConvertSize(val1);
+      dojo.byId('filesize'+name).value=octetConvertSize(val1);
+      dojo.byId('filesizeNoConvert'+name).value=val1;
+      dojo.byId('addVersion'+name).value=docVersRef;
+      dojo.byId('attachments').value=addAttachments;
     }else{
+      addAttachments=suprAttachments+'/'+docVers+'_'+type;
       totalSize=size+Number(val2);
       dojo.byId('filesize'+name).value=octetConvertSize(val2);
       dojo.byId('filesizeNoConvert'+name).value=val2;
+      dojo.byId('addVersion'+name).value=docVers;
+      dojo.byId('attachments').value=addAttachments;
     }
+    
     var noConvert=totalSize;
     if(totalSize!=0){
       totalSize=octetConvertSize(totalSize);
@@ -8240,9 +8254,11 @@ function changeFileSizeMail(name){
     if(dijit.byId('versionRef'+name).get('checked')==true){
       dojo.byId('filesize'+name).value=octetConvertSize(val1);
       dojo.byId('filesizeNoConvert'+name).value=val1;
+      dojo.byId('addVersion'+name).value=docVersRef;
     }else{
       dojo.byId('filesize'+name).value=octetConvertSize(val2);
       dojo.byId('filesizeNoConvert'+name).value=val2;
+      dojo.byId('addVersion'+name).value=docVers;
     }
   }
 }

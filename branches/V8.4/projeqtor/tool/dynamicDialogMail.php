@@ -324,7 +324,7 @@ $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
       <?php 
         foreach($lstAttach as $attached){
           echo "<tr>";
-          echo "<td class='assignData verticalCenterData'><div id='dialogMail".$attached->fileName."' name='dialogMail".$attached->fileName."'  dojoType='dijit.form.CheckBox' type='checkbox' onclick='showAttachedSize(".json_encode($attached->fileSize).",".json_encode($attached->fileName).",".json_encode($attached->type).",".json_encode($attached->id).");'></div>&nbsp;".$attached->fileName."</td>";
+          echo "<td class='assignData verticalCenterData'><div id='dialogMail".$attached->fileName."' name='dialogMail".$attached->fileName."'  dojoType='dijit.form.CheckBox' type='checkbox' onclick='showAttachedSize(".json_encode($attached->fileSize).",".json_encode($attached->fileName).",".json_encode($attached->id).",".json_encode($attached->type).");'></div>&nbsp;".$attached->fileName."</td>";
           echo " <td class='assignData verticalCenterData' style='text-align:center;'>$attached->type</td>";
           echo " <td class='assignData verticalCenterData' style='text-align:center;'>".octectConvertSize($attached->fileSize)."</td>";
           echo " <td class='assignData verticalCenterData'></td>";
@@ -338,7 +338,6 @@ $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
         echo "<td class='assignHeader'></td>";
         echo "</tr>";
           foreach($lstDoc as $document){
-              $type=$document->ref1Type;
              if($document->ref1Type=='DocumentVersion'){
                 $docV= new DocumentVersion($document->ref1Id);
                 $name=$docV->fullName;
@@ -348,28 +347,31 @@ $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
                $doc= new Document($document->ref1Id);
                $vers='';
                $name=$doc->name;
-               $docId=$doc->id;
+               $docId=$doc->idDocumentVersionRef;
                $docVersRf=new DocumentVersion($doc->idDocumentVersionRef);
                $filsizeRef=($docVersRf->fileSize=='')?'-':$docVersRf->fileSize;
                if($doc->idDocumentVersion!=''){
                 $docVers=new DocumentVersion($doc->idDocumentVersion);
+                $docIdV=$docVers->id;
                 $filsize=($docVers->fileSize=='')?'-':$docVers->fileSize;
                 $vers=$docVers->name;
                }
                $versRef=$docVersRf->name;
-               
+               $type='DocumentVersion';
             }
             echo "<tr>";
-            echo "<td class='assignData verticalCenterData'><div id='dialogMail".$name."' name='dialogMail".$name."'  dojoType='dijit.form.CheckBox' type='checkbox'  onclick='showAttachedSize(".json_encode($filsizeRef).",".json_encode($name).",".json_encode($type).",".json_encode($docId).");' ></div>&nbsp;".$name."</td>";
+            echo "<td class='assignData verticalCenterData'><input   id='addVersion".$name."' hidden value='$docId' />";
+            echo "     <input   id='filesizeNoConvert".$name."' hidden value='".$filsizeRef."' />";
+            echo "<div id='dialogMail".$name."' name='dialogMail".$name."'  dojoType='dijit.form.CheckBox' type='checkbox'  onclick='showAttachedSize(dojo.byId(\"filesizeNoConvert".$name."\").value,".json_encode($name).",dojo.byId(\"addVersion".$name."\").value,".json_encode($type).");' ></div>&nbsp;".$name."</td>";
             echo " <td class='assignData verticalCenterData' style='text-align:center;'>$document->ref1Type</td>";
             echo " <td class='assignData verticalCenterData' style='text-align:center;'>";
-            echo "     <input   id='filesizeNoConvert".$name."' hidden value='".$filsizeRef."' />";
-            echo "     <input class='assignData verticalCenterData'  id='filesize".$name."' style='border:none;font-size:10px;position:relative;text-align: center;' value='".octectConvertSize($filsizeRef)."' /></td>";
+            echo "     <input readonly class='assignData verticalCenterData'  id='filesize".$name."' style='border:none;font-size:10px;position:relative;text-align: center;' value='".octectConvertSize($filsizeRef)."' /></td>";
             if($document->ref1Type!='DocumentVersion'){
               echo "<td class='assignData verticalCenterData'>";
-              echo " <input  name='v1_".$name."' id='v1_".$name."'  class='input'  hidden value='$filsizeRef' />";
-              debugLog($filsizeRef);
-              echo " <input  name='v2_".$name."' id='v2_".$name."'  class='input'  hidden value='$filsize' />";
+              echo " <input name='v1_".$name."' id='v1_".$name."'  class='input'  hidden value='$filsizeRef' />";
+              echo " <input name='idDocRef".$name."' id='idDocRef".$name."'  class='input'  hidden value='$docId' />";
+              echo " <input name='v2_".$name."' id='v2_".$name."'  class='input'  hidden value='$filsize' />";
+              echo " <input name='idDoc".$name."' id='idDoc".$name."'  class='input'  hidden value='$docIdV' />";
               echo "<table style='width:100%;'><tr><td style='width:50%;'><label style='width:30%;' for='versionRef".$name."'>".$versRef."</label>";
               echo "&nbsp;&nbsp;<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='versionRef".$name."' checked onChange='changeFileSizeMail(".json_encode($name).");'/></td>";
               echo "<td><label style='width:30%;' for='version".$name."'>".$vers."</label>";
