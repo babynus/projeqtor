@@ -122,6 +122,7 @@ function colorFormatter(value, notRounded) {
  */
 function colorNameFormatter(value) {
   notRounded=true;
+  var heightPadding=(dojo.byId('GanttChartDIV'))?'3':'10';
   if (value) {
     var tab = value.split("#split#");
     if (tab.length > 1) {
@@ -157,7 +158,7 @@ function colorNameFormatter(value) {
           +'min-height:10px !important;height:100% !important;text-align: center;'
           +((notRounded)?'width:100%;':'width:90%;')
           +((notRounded)?'':'border-radius: 10px;')
-          +((notRounded)?' margin:-5px; padding: 10px 5% !important;':' margin:auto; padding: 5px 5% !important;')
+          +((notRounded)?' margin:-5px; padding: '+heightPadding+'px 5% !important;':' margin:auto; padding: 5px 5% !important;')
           +'background-color: '+ color + '; color:' + foreColor + ';">' + val
           + '</div>';
     } else {

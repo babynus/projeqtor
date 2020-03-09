@@ -29,11 +29,18 @@
  */
   require_once "../tool/projeqtor.php";
   scriptLog('   ->/tool/jsonPlanning_pdf.php');
+  SqlElement::$_cachedQuery['Project']=array();
+  SqlElement::$_cachedQuery['Ticket']=array();
+  SqlElement::$_cachedQuery['Activity']=array();
+  SqlElement::$_cachedQuery['Resource']=array();
+  SqlElement::$_cachedQuery['PlanningElement']=array();
+  $global=RequestHandler::getBoolean('global');
   $objectClass='PlanningElement';
   $columnsDescription=Parameter::getPlanningColumnDescription();
   $obj=new $objectClass();
   $table=$obj->getDatabaseTableName();
   $displayResource=Parameter::getGlobalParameter('displayResourcePlan');
+  if (!$displayResource) $displayResource="initials";
   $print=false;
   if ( array_key_exists('print',$_REQUEST) ) {
     $print=true;
@@ -100,7 +107,7 @@
   
   $accessRightRead=securityGetAccessRight('menuActivity', 'read');
   if ( ! ( $accessRightRead!='ALL' or (sessionValueExists('project') and getSessionValue('project')!='*') and strpos(getSessionValue('project'), ",") === null)
-   and ( ! array_key_exists('idProject',$_REQUEST) or trim($_REQUEST['idProject'])=="")) {
+   and ( ! array_key_exists('idProject',$_REQUEST) or trim($_REQUEST['idProject'])=="") and !$portfolio and strpos(getSessionValue('project'), ",") === null) {
       $listProj=explode(',',getVisibleProjectsList(! $showIdleProjects));
       if (count($listProj)-1 > Parameter::getGlobalParameter('maxProjectsToDisplay')) {
         echo i18n('selectProjectToPlan');
@@ -235,7 +242,7 @@
       while ($line = Sql::fetchLine($result)) {
       	$line=array_change_key_case($line,CASE_LOWER);
         if ($line['reftype']=='Milestone' and $portfolio and $showMilestone and $showMilestone!='all' ) {   
-          $mile=new Milestone($line['refid']);
+          $mile=new Milestone($line['refid'],true);
           if ($mile->idMilestoneType!=$showMilestone) {
             continue;
           }
@@ -263,6 +270,21 @@
         if ($line['reftype']=='Milestone') {
           $pStart=$pEnd;
         }
+        if (strlen($pStart)>10) $pStart=substr($pStart,0,10);
+        if (strlen($pEnd)>10) $pStart=substr($pEnd,0,10);
+        if (trim($line['realstartdate']) and isset($line['isglobal']) and $line['isglobal']==1 and ! $line['progress']) {
+          if ($pStart==$pend) {
+            $line['progress']='50';
+          } else {
+            $taskLength=dayDiffDates($pStart,$pend);
+            if ($taskLength>0) {
+              $progressLength=dayDiffDates($pStart,date('Y-m-d'));
+              $line['progress']=round($progressLength/$taskLength*100,0);
+            } else {
+              $line['progress']='50';
+            }
+          } 
+        }															 
         $line['pstart']=$pStart;
         $line['pend']=$pEnd;
         if($line['reftype'] == 'Project') {
@@ -288,7 +310,7 @@
             $line['statuscolor'] = '';
           }
         }
-        if ($line['reftype']!='Project' and $line['reftype']!='Fixed' and $line['reftype']!='Construction') { // 'Fixed' and 'Construction' are projects !!!!
+        if ($line['reftype']!='Project' and $line['reftype']!='Fixed' and $line['reftype']!='Construction' and $line['reftype']!='Replan') { // 'Fixed' and 'Construction' are projects !!!!
           $arrayResource=array();
           if (isset($columnsDescription['Resource']) and $columnsDescription['Resource']['show']==1) { // Must always retreive resource to display value in column, even if not displayed
             $crit=array('refType'=>$line['reftype'], 'refId'=>$line['refid']);
@@ -559,6 +581,8 @@
 
         // pGroup : is the tack a group one ?
         $pGroup=($line['elementary']=='0')?1:0;
+        if ($line['reftype']=='Fixed') $pGroup=1;
+        if ($line['reftype']=='Replan') $pGroup=1;												 
         if ($closedWbs and strlen($line['wbssortable'])<=strlen($closedWbs)) {
           $closedWbs="";
         }
@@ -644,14 +668,16 @@
           //$pBackground='background:#505050 url(../view/img/grey.png) repeat-x;';
           $pBackground='background-color:#505050;';
         } else {
-          if ($line['notplannedwork']>0) {        		
+        	if ($line['notplannedwork']>0) {
         		$pColor='#9933CC';
         		$pBackground='background-color:#9933CC;';
         	} else if (trim($line['validatedenddate'])!="" && $line['validatedenddate'] < $pEnd) {
             $pColor='#BB5050';
             //$pBackground='background:#BB5050 url(../view/img/red.png) repeat-x;';
             $pBackground='background-color:#BB5050;';
-          } else  {
+        	} if ($line['surbooked']==1) {
+        	  $pColor="#f4bf42";
+        	} else  {
             $pColor="#50BB50";
             //$pBackground='background:#50BB50 url(../view/img/green.png) repeat-x;';
             $pBackground='background-color:#50BB50;';
@@ -695,9 +721,9 @@
               if ($pGroup and ($days[$i]==$pStart or $days[$i]==$pEnd) and $outMode!='pdf') {
                 echo '<div class="ganttTaskgroupBarExtInvisible" style="float:left; height:4px"></div>';
               }
-              echo '<table width="100%" height="100%" >';
+              echo '<table width="100%" height="' .  $height . 'px" >';
               //echo '<tr style="height:' . $subHeight . 'px;"><td style="' . $noBorder . '"></td></tr>';
-              echo '<tr height="100%" width="100%"><td style="' . $pBackground . 'height:' .  $height . 'px;width:100%;padding:0px;margin:0px;"></td></tr>';
+              echo '<tr height="' .  $height . 'px" width="100%"><td style="' . $pBackground .  'height:' .  $height . 'px;width:100%;padding:0px;margin:0px;"></td></tr>';
               //echo '<tr style="height:' . $subHeight . 'px;"><td style="' . $noBorder . '"></td></tr>';
               echo '</table>';
               if ($pGroup and $days[$i]==$pStart and $outMode!='pdf') {
