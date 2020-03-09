@@ -368,8 +368,8 @@ use Spipu\Html2Pdf\Html2Pdf;
         header('Content-Disposition: inline; filename="'.basename($exportFileName).'"');
         readfile($pdfFile);
       }
-      //kill ($htmlFile);
-      //kill ($pdfFile);
+      kill ($htmlFile);
+      kill ($pdfFile);
     }
   }
 }
