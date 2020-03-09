@@ -120,7 +120,7 @@ function colorFormatter(value, notRounded) {
  *          the value of the boolean (true or false)
  * @return the formatted value as an image (html code)
  */
-function colorNameFormatter(value, notRounded) {
+function colorNameFormatter(value) {
   notRounded=true;
   if (value) {
     var tab = value.split("#split#");
