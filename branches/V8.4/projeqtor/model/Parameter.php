@@ -1389,7 +1389,7 @@ class Parameter extends SqlElement {
   	$hiddenList=$param->getSqlElementsFromCriteria(null, false, $critHidden);
   	$orderList=$param->getSqlElementsFromCriteria(null, false, $critOrder);
   	$widthList=$param->getSqlElementsFromCriteria(null, false, $critWidth);
-  	$hidden="|";
+  	$hidden="||"; // double so that first is at 1, not zero
   	foreach($hiddenList as $param) {
   		if ($param->parameterValue=='1') {
   		  $hidden.=substr($param->parameterCode,18).'|';
@@ -1435,7 +1435,7 @@ class Parameter extends SqlElement {
   	}
   	$i=1;  	
   	foreach($arrayFieldsSorted as $order=>$column) {
-  	  $res[$i]=(!strpos($hidden,'|'.$column.'|')>0)?$column:'Hidden'.$column;
+  	  $res[$i]=(strpos($hidden,'|'.$column.'|')===false)?$column:'Hidden'.$column;  
   	  $resAll[$i]=$column;
   		$i++;
   	}

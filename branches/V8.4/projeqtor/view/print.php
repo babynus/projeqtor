@@ -338,7 +338,6 @@ use Spipu\Html2Pdf\Html2Pdf;
       $options='--orientation '.(($orientation=='P')?'Portrait':'Landscape');
       $options.=" --encoding 'utf-8'";
       $options.=" --page-size A4";
-      debugLog($includeFile);
       if ($includeFile=='objectDetail.php') $options.=' --zoom 1.46';
       //$options.=' --zoom '.(($smallMargin)?'1.24':'1.18');
       //$options.=' --zoom '.(($smallMargin)?'1.24':'1.46');
