@@ -612,7 +612,7 @@ function showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting,
       if (property_exists($elt, 'idStatus')){
         $statusColor=SqlList::getFieldFromId('Status', $elt->idStatus, 'color');
         $status=SqlList::getNameFromId('Status', $elt->idStatus);
-        $displayColorStatus = htmlDisplayColored($status, $statusColor);
+        $displayColorStatus = htmlDisplayColoredFull($status, $statusColor);
       }
       $status=($status=='0')?'':$status;
       $goto="";
@@ -643,7 +643,7 @@ function showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting,
       if(property_exists($elt, 'id'.$class.'Type')){
         $type = SqlList::getNameFromId($class.'Type', $elt->$idType);
       }
-      echo '  <td class="messageData" style="'.$color.'">'.'<table><tr><td>'.formatIcon($class, 16, i18n($class)).'</td><td>&nbsp;</td><td>#'.$elt->id.'</td></tr></table></td>'.'  <td class="messageData" style="'.$color.'">'.htmlEncode(SqlList::getNameFromId('Project', $elt->idProject)).'</td>'.'  <td class="messageData" style="'.$color.'">'.$type.'</td>'.'  <td class="messageData" style="'.$color.'">'.htmlEncode($elt->name).'</td>'.'  <td class="messageDataValue" style="'.$color.'" NOWRAP>'.htmlFormatDate($echeance).'</td>'.'  <td class="messageData" style="'.$color.'">'.$displayColorStatus.'</td>'.'  <td class="messageDataValue" style="'.$color.'">'.htmlDisplayCheckbox($user->id==$elt->idUser).'</td>';
+      echo '  <td class="messageData" style="'.$color.'">'.'<table><tr><td>'.formatIcon($class, 16, i18n($class)).'</td><td>&nbsp;</td><td>#'.$elt->id.'</td></tr></table></td>'.'  <td class="messageData" style="'.$color.'">'.htmlEncode(SqlList::getNameFromId('Project', $elt->idProject)).'</td>'.'  <td class="messageData" style="'.$color.'">'.$type.'</td>'.'  <td class="messageData" style="'.$color.'">'.htmlEncode($elt->name).'</td>'.'  <td class="messageDataValue" style="'.$color.'" NOWRAP>'.htmlFormatDate($echeance).'</td>'.'  <td class="messageData colorNameData" style="'.$color.'">'.$displayColorStatus.'</td>'.'  <td class="messageDataValue" style="'.$color.'">'.htmlDisplayCheckbox($user->id==$elt->idUser).'</td>';
       if (property_exists($elt, 'idAccountable')) echo '  <td class="messageDataValue" style="'.$color.'">'.htmlDisplayCheckbox($user->id==$elt->idAccountable).'</td>';
       else echo '  <td class="messageDataValue" style="'.$color.'">'.htmlDisplayCheckbox(null).'</td>';
       if (property_exists($elt, 'idAuthor')) {

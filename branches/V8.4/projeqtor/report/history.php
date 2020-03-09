@@ -191,8 +191,8 @@ foreach($historyList as $hist) {
         $newValue=htmlEncode(SqlList::getNameFromId(substr($colName,2),$newValue));
       }
     } else if ($colName=="color") {
-      $oldValue=htmlDisplayColored("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$oldValue);
-      $newValue=htmlDisplayColored("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$newValue);
+      $oldValue=htmlDisplayColoredFull("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$oldValue);
+      $newValue=htmlDisplayColoredFull("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$newValue);
     } else if ($dataType=='date') {
       $oldValue=htmlFormatDate($oldValue);
       $newValue=htmlFormatDate($newValue);
@@ -210,8 +210,8 @@ foreach($historyList as $hist) {
       $newValue=htmlEncode($newValue,'print');
     }
     if ($scope!='deleted') {    
-      echo '<td class="historyData" width="23%">' . $oldValue . '</td>';
-      echo '<td class="historyData" width="23%">' . $newValue . '</td>';
+      echo '<td class="historyData'.(($colName=="color")?' colorNameData':'').'" width="23%">' . $oldValue . '</td>';
+      echo '<td class="historyData'.(($colName=="color")?' colorNameData':'').'" width="23%">' . $newValue . '</td>';
     }
     echo '<td class="historyData'. htmlEncode($class) .'" width="15%">' . htmlEncode($date) . '</td>';
     echo '<td class="historyData'. htmlEncode($class) .'" width="15%">' . htmlEncode($user) . '</td>';
