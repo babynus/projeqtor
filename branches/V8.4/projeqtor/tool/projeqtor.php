@@ -4973,3 +4973,17 @@ function array_insert_before($array, $item, $position) {
   }
   return $result;
 }
+
+function octectConvertSize($octet){
+  if($octet!=0 and $octet!='' and $octet!='-'){
+    $def = [[1, 'octets'], [1024, 'ko'], [1024*1024, 'Mo'], [1024*1024*1024, 'Go'], [1024*1024*1024*1024, 'To']];
+    for($i=0; $i<sizeof($def); $i++){
+      if($octet<$def[$i][0]){
+        $res=number_format(floatval($octet/$def[$i-1][0]),2,'.','').''.$def[$i-1][1];
+        return $res;
+      }
+    }
+  }else{
+      return $res='0 octets';
+  }
+}
