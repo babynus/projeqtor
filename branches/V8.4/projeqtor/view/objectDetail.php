@@ -3482,8 +3482,8 @@ function drawHistoryFromObjects($refresh=false) {
           // END - ADD BY TABARY - POSSIBILITY TO HAVE X TIMES IDXXXX IN SAME OBJECT
         }
       } else if ($colName=="color") {
-        $oldValue=htmlDisplayColored("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", $oldValue);
-        $newValue=htmlDisplayColored("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", $newValue);
+        $oldValue=htmlDisplayColoredFull("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", $oldValue);
+        $newValue=htmlDisplayColoredFull("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", $newValue);
       } else if ($dataType=='date') {
         $oldValue=htmlFormatDate($oldValue);
         $newValue=htmlFormatDate($newValue);
@@ -3514,8 +3514,8 @@ function drawHistoryFromObjects($refresh=false) {
         $oldValue=htmlEncode($oldValue, 'print');
         $newValue=htmlEncode($newValue, 'print');
       }
-      echo '<td class="historyData" width="23%">'.$oldValue.'</td>';
-      echo '<td class="historyData" width="23%">'.$newValue.'</td>';
+      echo '<td class="historyData'.(($colName=="color")?' colorNameData':'').'" width="23%">'.$oldValue.'</td>';
+      echo '<td class="historyData'.(($colName=="color")?' colorNameData':'').'" width="23%">'.$newValue.'</td>';
       echo '<td class="historyData'.$class.'" width="15%">';
       // echo formatDateThumb($creationDate, $updateDate);
       echo $date.'</td>';

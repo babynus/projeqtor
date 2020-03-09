@@ -1818,7 +1818,7 @@ function htmlDisplayColored($value,$color) {
   //$result.= '<table><tr><td style="background-color:' . $color . '; color:' . $foreColor . ';">';
   //$result.= $value;
   //$result.= "</td></tr></table>";
-  $result.='<div style="vertical-align:middle;padding: 2px 5px;border:1px solid #CCC;border-radius:10px;text-align: center;'
+  $result.='<div style="vertical-align:middle;border:1px solid #CCC;border-radius:10px;text-align: center;'
       .(($print and $outMode=='pdf')?'width:95%;min-height:18px;':'') 
       . 'background-color: ' . $color . '; color:' . $foreColor . ';">'
       .$value.'</div>';
@@ -1828,10 +1828,10 @@ function htmlDisplayColoredFull($value,$color) {
   global $print, $outMode;
   $result= "";
   $foreColor=htmlForeColorForBackgroundColor($color);
-  $result.='<span style="display:block;vertical-align:middle;padding: 0px;text-align: center;'
+  $result.='<div style="height:100%;display:block;vertical-align:middle;padding: 3px;text-align: center;'
       .(($print and $outMode=='pdf')?'width:10px;min-height:18px':'')
       . 'background-color: ' . $color . '; color:' . $foreColor . ';">'
-          .$value.'</span>';
+          .$value.'</div>';
   return $result;
 }
 
