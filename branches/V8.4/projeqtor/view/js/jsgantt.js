@@ -1026,7 +1026,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
 	          var fieldWidth=getPlanningFieldWidth(field);
 	          if(showField==1 && field!='Name') {
 	            valueField=vTaskList[i].getFieldValue(field,JSGantt);
-	            if (field=='IdStatus') valueField=colorNameFormatter(valueField, true);
+	            if (field=='IdStatus') valueField=colorNameFormatter(valueField);
 	            vLeftTable += '<TD class="ganttDetail" style="width: ' + fieldWidth + 'px;">'
 	              +'<span class="nobr hideLeftPart' + vRowType + '" style="width: ' + fieldWidth + 'px;text-overflow:ellipsis;">'+valueField+'</span></TD>' ;
 	          }
