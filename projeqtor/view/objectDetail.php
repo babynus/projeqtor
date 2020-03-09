@@ -6800,38 +6800,86 @@ function drawProjectSituation($type, $obj){
 	if ($comboDetail) {
 		return;
 	}
+	$classList=array();
 	if($type=='Expense'){
 	  $classList = array('CallForTender','Tender','ProviderOrder','ProviderBill');
-	}else{
+	}else if($type=='Income'){
 	  $classList = array('Bill','Quotation','Command');
+	}
+	$elementList = array();
+	foreach ($classList as $class){
+	  $object = new $class();
+      $critWhere = array('idProject'=>$obj->idProject);
+	  $objectList = $object->getSqlElementsFromCriteria($critWhere,null,null,null);
+      if(count($objectList)>0){
+      	$elementList = array_merge($elementList, $objectList);
+      }
 	}
 	echo '<table width="99.9%">';
 	echo '<tr>';
-	echo '<td class="noteHeader" style="width:10%">' . i18n('colId') . '</td>';
 	echo '<td class="noteHeader" style="width:30%">' . i18n('colElement') . '</td>';
+	echo '<td class="noteHeader" style="width:10%">' . i18n('colId') . '</td>';
 	echo '<td class="noteHeader" style="width:20%">' . i18n('colDate') . '</td>';
 	echo '<td class="noteHeader" style="width:25%">' . i18n('colSituation') . '</td>';
 	echo '<td class="noteHeader" style="width:15%">' . i18n('colResponsible') . '</td>';
 	echo '</tr>';
-  	foreach ($classList as $class){
+  	foreach ($elementList as $element){
+  	 $class = get_class($element);
+  	 if($class == 'Tender'){
+  	    $callForTender = new CallForTender($element->idCallForTender);
+    	$TenderList = $element->getSqlElementsFromCriteria(array('idCallForTender'=>$element->idCallForTender),null,null,null);
+    	if(count($TenderList)>1){
+    		$tenderStatus = SqlElement::getSingleSqlElementFromCriteria('TenderStatus', array('isSelected'=>1));
+    		if($element->idTenderStatus != $tenderStatus->id){
+    		  continue;
+    		}
+    	}
+  	 }
   	 $situation = new Situation();
-     $critWhere = array('refType'=>$class,'idProject'=>$obj->idProject);
+     $critWhere = array('refType'=>$class,'refId'=>$element->id,'idProject'=>$obj->idProject);
      $situationList = $situation->getSqlElementsFromCriteria($critWhere,null,null, 'date desc');
-     if(count($situationList) > 0){
-       $situation = $situationList[0];
-     }
-     if($situation->id){
-       $item = new $class($situation->refId);
+     if(count($situationList)>0){
+       foreach ($situationList as $situation){
+       	if($situation->id){
+       		$item = new $class($situation->refId);
+       		echo '<tr>';
+       		echo '<td class="noteData" style="text-align:left;">';
+       		echo '<table style="width:100%;">';
+         		echo '<tr>';
+             		echo '<td style="padding-right: 5px;width:5%;">'.formatIcon($class, "16").'</td>';
+             		echo '<td style="width:75%;">'.htmlEncode(i18n($class)).' #'.htmlEncode($item->id).' - '.htmlEncode($item->name).'</td>';
+             		echo '<td style="width:5%;"><div style="padding-left: 15px;" onClick="gotoElement(\''.$situation->refType.'\',\''.htmlEncode($situation->refId).'\');">'.formatSmallButton('Goto', true).'</div></td>';
+             		echo '<td style="width:5%;"><div style="padding-left: 5px;" class="iconView roundedButtonSmall" onclick="showDetail(\'situation'.$type.'\',0,\''.$situation->refType.'\',false,\''.$situation->refId.'\',false)"></div></td>';
+         		echo '</tr>';
+       		echo '</table>';
+       		echo '</td>';
+       		echo '<td class="noteData" style="text-align:center">#' . htmlEncode($situation->id) . '</td>';
+       		echo '<td class="noteData" style="text-align:center">' . htmlFormatDateTime($situation->date) . '</td>';
+       		echo '<td class="noteData" style="text-align:left">';
+       		echo '  <div style="float:left">'.formatCommentThumb($situation->comment).'</div>';
+       		echo    htmlEncode($situation->name);
+       		echo '</td>';
+       		$responsible = new ResourceAll($situation->idResource);
+       		echo '<td class="noteData" style="text-align:center">' . htmlEncode($responsible->name) . '</td>';
+       		echo '</tr>';
+       	}
+       }
+     }else{
        echo '<tr>';
-       echo '<td class="noteData" style="text-align:center">#' . htmlEncode($situation->id) . '</td>';
-       echo '<td class="noteData" style="text-align:center">' . htmlEncode(i18n($class)).' #'.htmlEncode($item->id).' '.htmlEncode($item->name). '</td>';
-       echo '<td class="noteData" style="text-align:center">' . htmlFormatDateTime($situation->date) . '</td>';
-       echo '<td class="noteData" style="text-align:left">';
-       echo '  <div style="float:left">'.formatCommentThumb($situation->comment).'</div>';
-       echo    htmlEncode($situation->name);
+       echo '<td class="noteData" style="text-align:left;">';
+       echo '<table style="width:100%;">';
+         echo '<tr>';
+           echo '<td style="padding-right: 5px;width:5%;">'.formatIcon($class, "16").'</td>';
+           echo '<td style="width:75%;">'.htmlEncode(i18n($class)).' #'.htmlEncode($element->id).' - '.htmlEncode($element->name).'</td>';
+           echo '<td style="width:5%;"><div style="padding-left: 15px;" onClick="gotoElement(\''.$element->id.'\',\''.htmlEncode($class).'\');">'.formatSmallButton('Goto', true).'</div></td>';
+           echo '<td style="width:5%;"><div style="padding-left: 5px;" class="iconView roundedButtonSmall" onclick="showDetail(\'situation'.$type.'\',0,\''.$class.'\',false,\''.$element->id.'\',false)"></div></td>';
+         echo '</tr>';
+       echo '</table>';
        echo '</td>';
-      $responsible = new ResourceAll($situation->idResource);
-      echo '<td class="noteData" style="text-align:center">' . htmlEncode($responsible->name) . '</td>';
+       echo '<td class="noteData" style="text-align:center"></td>';
+       echo '<td class="noteData" style="text-align:center"></td>';
+       echo '<td class="noteData" style="text-align:left"></td>';
+       echo '<td class="noteData" style="text-align:center"></td>';
        echo '</tr>';
      }
 	}
