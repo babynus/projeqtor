@@ -5906,8 +5906,8 @@ public function getLastChangeTabForObject($obj,$lastChangeDate) {
           $newValue=SqlList::getNameFromId(substr($colName, 2), $newValue);
         }
       } else if ($colName == "color") {
-        $oldValue=htmlDisplayColored("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", $oldValue);
-        $newValue=htmlDisplayColored("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", $newValue);
+        $oldValue=htmlDisplayColoredFull("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", $oldValue);
+        $newValue=htmlDisplayColoredFull("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;", $newValue);
       } else if ($dataType == 'date') {
         $oldValue=htmlFormatDate($oldValue);
         $newValue=htmlFormatDate($newValue);
@@ -5940,9 +5940,9 @@ public function getLastChangeTabForObject($obj,$lastChangeDate) {
           $newValue=wordwrap($newValue, 30, '<wbr>', false);
         }
       }
-      $historyTabHtml .=  '<td class="historyData" style=" padding:4px; width:23%; border: 1px solid #7b7b7b;">' .
+      $historyTabHtml .=  '<td class="historyData'.(($colName=="color")?' colorNameData" style="':'" style="padding:4px;').' width:23%; border: 1px solid #7b7b7b;">' .
                           $oldValue . '</td>';
-      $historyTabHtml .=  '<td class="historyData" style=" padding:4px; width:23%; border: 1px solid #7b7b7b;">' .
+      $historyTabHtml .=  '<td class="historyData'.(($colName=="color")?' colorNameData" style="':'" style="padding:4px;').' width:23%; border: 1px solid #7b7b7b;">' .
                           $newValue . '</td>';
       $historyTabHtml .=  '<td class="historyData' . $class . '" style="width:15%; border: 1px solid #7b7b7b;">';
       $historyTabHtml .=   $date . '</td>';
@@ -5994,8 +5994,9 @@ function getLinksHtmlTab() {
               i18n(get_class($obj)) . ' #' . $obj->id . '</a></td>' .
               '<td style="border: 1px solid #7b7b7b; padding:4px;">' . $obj->name . '</td>';
     if (property_exists($obj, 'idStatus'))
-      $status = colorNameFormatter(SqlList::getNameFromId('Status', $obj->idStatus) . "#split#" .
-          SqlList::getFieldFromId('Status', $obj->idStatus, 'color'));
+//       $status = colorNameFormatter(SqlList::getNameFromId('Status', $obj->idStatus) . "#split#" .
+//           SqlList::getFieldFromId('Status', $obj->idStatus, 'color'));
+      $status=htmlDisplayColoredFull(SqlList::getNameFromId('Status', $obj->idStatus),SqlList::getFieldFromId('Status', $obj->idStatus, 'color'));
     $html .=  '<td style="border: 1px solid #7b7b7b; padding:0;margin:0">' . $status . '</td></tr>';
     $status = '';
   }
