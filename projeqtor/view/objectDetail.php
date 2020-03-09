@@ -218,7 +218,11 @@ if ($print and isset($outMode) and $outMode=='pdf') {
   if (isset($orientation) and $orientation=='L') $printWidth=1080;
   else $printWidth=760;
 } else {
-  $printWidth=980;
+  if (isset($outModeBack) and $outModeBack=='pdf') {
+    $printWidth='980';
+  } else {
+    $printWidth=980;
+  }
 }
 if (array_key_exists('destinationWidth', $_REQUEST)) {
   $width=$_REQUEST['destinationWidth'];
@@ -438,6 +442,10 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
   if ($outMode=='pdf') {
     // $labelWidth=40;
     // $labelStyleWidth=$labelWidth . 'px;';
+  }
+  if ($print) {
+    $labelWidth=225;
+    $labelStyleWidth='230px';
   }
   $fieldWidth=$smallWidth;
   $extName="";
@@ -793,6 +801,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       } else {
         $minWidth=75;
       }
+//       if ($print) {
+//         $minWidth*=1.5;
+//       }
       for ($i=0; $i<$internalTableCols; $i++) { // draw table headers
                                                 // echo '<td class="detail" style="min-width:75px;' . $internalTableBorderTitle . '">';
         echo '<td class="detail" style="min-width:'.$minWidth.'px;'.$internalTableBorderTitle.'">';
@@ -803,7 +814,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           // old
           // } else if ($val [$i]) {
           // END CHANGE BY Marc TABARY - 2017-03-31 - COLEMPTY
-          echo '<div class="tabLabel" style="text-align:left;white-space:nowrap;">'.htmlEncode($obj->getColCaption($val[$i])).'</div>';
+          echo '<div class="tabLabel" style="text-align:'.(($print)?'center':'left').';white-space:nowrap;">'.htmlEncode($obj->getColCaption($val[$i])).'</div>';
         } else {
           echo '<div class="tabLabel" style="text-align:left;white-space:nowrap;"></div>';
         }
@@ -1448,7 +1459,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // $internalTableBorder=($print)?'border:1px dotted #A0A0A0;':'';
         $internalTableBorder='';
         $alignForNumber='';
-        if ($dataType=='decimal' and (substr($col, -4, 4)=='Cost' or substr($col, -6, 6)=='Amount' or $col=='amount')) {
+        if ($dataType=='decimal' and (substr($col, -4, 4)=='Cost' or substr($col, -4, 4)=='Work' or substr($col, -6, 6)=='Amount' or $col=='amount')) {
           $alignForNumber='text-align:right;';
         }
         if ($internalTable%$internalTableCols==0) {
@@ -1468,14 +1479,14 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
               echo '<label class="label '.$internalTableSpecial.'">'.htmlEncode($obj->getColCaption($internalTableRowsCaptions[$internalTableCurrentRow])).'&nbsp;:&nbsp;</label>';
             }
           }
-          echo '</td><td style="'.$alignForNumber.'width:90%;white-space:nowrap;'.$internalTableBorder.'">';
+          echo '</td><td style="'.$alignForNumber.'width:90%;white-space:nowrap;padding-right:20px;'.$internalTableBorder.'">';
           $internalTableCurrentRow++;
         } else {
           if ($obj->isAttributeSetToField($col, "colspan3")) {
             echo '</td><td class="detail" colspan="3" style="'.$alignForNumber.'">';
             $internalTable-=2;
           } else {
-            echo '</td><td class="detail" style="'.$alignForNumber.'white-space:nowrap;'.$internalTableBorder.'">';
+            echo '</td><td class="detail" style="'.$alignForNumber.'white-space:nowrap;padding-right:20px;'.$internalTableBorder.'">';
           }
         }
       }
@@ -1632,7 +1643,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             $checkImg='checkedOK.png';
           }
           if ($col=='cancelled' or $col=='solved') echo "&nbsp;&nbsp;&nbsp;";
-          echo '<img src="../view/img/'.$checkImg.'" />';
+          echo '&nbsp;<img src="../view/img/'.$checkImg.'" style="position:relative;top:4px" />&nbsp;';
           // BEGIN - REPLACE BY TABARY - USE isForeignKey GENERIC FUNCTION
         } else if (isForeignKey($col, $obj)) { // Idxxx
                                                // } else if (substr($col, 0, 2) == 'id' and $dataType == 'int' and strlen($col) > 2 and substr($col, 2, 1) == strtoupper(substr($col, 2, 1))) { // Idxxx
@@ -4474,7 +4485,7 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
         echo '<td '.$goto.' class="linkData" style="white-space:nowrap;width:'.(($print)?'10':'5').'%">#'.$linkObj->id;
       }
       echo '</td>';
-      echo '<td class="linkData" '.$goto.' style="position:relative;width:'.(($classLink)?'65':'55').'%">';
+      echo '<td class="linkData" '.$goto.' style="width:'.(($classLink)?'65':'55').'%">';
       
       echo (get_class($linkObj)=='DocumentVersion')?htmlEncode($linkObj->fullName):htmlEncode($linkObj->name);
       

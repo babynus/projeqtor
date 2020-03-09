@@ -319,6 +319,10 @@ label, .label {
   background-color: #FFFFFF;
   height:25px;
 }
+.colorNameData {
+  padding:0;
+  height:10px;
+}
 .historyDataNewOperation {
   font-size: 90%;
   padding: 1px 5px 1px 5px;

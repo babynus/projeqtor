@@ -145,7 +145,7 @@ use Spipu\Html2Pdf\Html2Pdf;
   <title><?php echo getPrintTitle();?></title>
   <link rel="stylesheet" type="text/css" href="../view/css/jsgantt.css" />
   <link rel="stylesheet" type="text/css" href="../view/css/projeqtorIcons.css" />
-  <link rel="stylesheet" type="text/css" href="../view/css/projeqtor<?php if ($outMode!='pdf' or isWkHtmlEnabled()) echo 'Print';?>.css" />
+  <link rel="stylesheet" type="text/css" href="../view/css/projeqtorPrint.css" />
   <link rel="stylesheet" type="text/css" href="../view/css/projeqtorFlat.css" />
   <link rel="shortcut icon" href="../view/img/logo.ico" type="image/x-icon" />
   <link rel="icon" href="../view/img/logo.ico" type="image/x-icon" />
@@ -242,7 +242,7 @@ use Spipu\Html2Pdf\Html2Pdf;
   include $includeFile;
   $outMode=$outModeBack;
   if ($outMode!='csv' and $outMode!='mpp' and $outMode!='word' and $outMode!='excel' and $outMode!='txt' and (!$download or $outMode=='pdf') and !$noHeader) {?>
-</<?php echo ($printInNewPage or $outMode=='pdf')?'body':'div';?>>
+</<?php echo ($printInNewPage or $outMode=='pdf' or (isset($outModeBack) and $outModeBack=='pdf'))?'body':'div';?>>
 </page>
 </html>
 <?php
@@ -338,7 +338,10 @@ use Spipu\Html2Pdf\Html2Pdf;
       $options='--orientation '.(($orientation=='P')?'Portrait':'Landscape');
       $options.=" --encoding 'utf-8'";
       $options.=" --page-size A4";
+      debugLog($includeFile);
+      if ($includeFile=='objectDetail.php') $options.=' --zoom 1.46';
       //$options.=' --zoom '.(($smallMargin)?'1.24':'1.18');
+      //$options.=' --zoom '.(($smallMargin)?'1.24':'1.46');
       $options.=' --title "'.basename($exportFileName).'"';
       $margin=($smallMargin)?'5mm':'10mm';
       $options.=" --margin-bottom $margin --margin-left $margin --margin-right $margin --margin-top $margin";
