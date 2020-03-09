@@ -82,6 +82,7 @@ th {
   border: 1px solid #555555;
   background-color: #FFFFFF; 
   margin: 0px; padding: 1px 3px 1px 3px; 
+  white-space: normal;
 }
 
 a {
