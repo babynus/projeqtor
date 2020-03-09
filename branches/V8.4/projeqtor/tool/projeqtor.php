@@ -2106,11 +2106,11 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
   $lstAtt= array();
   if(!empty($attachments)){
     foreach ($attachments as $val){
-      if($val[0]=='file'){
-        $att=new Attachment($val[1]);
+      if($val[1]=='file'){
+        $att=new Attachment($val[0]);
         $lstAtt[$att->fileName]=str_replace('${attachmentDirectory}',$directory, $att->subDirectory).$att->fileName;
       }else{
-        $doc=new DocumentVersion($val[1]);
+        $doc=new DocumentVersion($val[0]);
         $lstAtt[$doc->fileName]=$doc->getUploadFileName();
       }
     }
