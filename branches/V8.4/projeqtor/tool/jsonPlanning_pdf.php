@@ -453,6 +453,8 @@
       // Header
     $sortArray=array_merge(array(), Parameter::getPlanningColumnOrder());
     $cptSort=0;
+    unset($columnsDescription['ObjectType']);
+    unset($columnsDescription['ExterRes']);
     foreach ($columnsDescription as $ganttCol) { 
       if ($ganttCol['show']==1) $cptSort++; 
     }
@@ -519,7 +521,8 @@
         if ($col=='EndDate') echo '  <TD class="reportTableHeader" style="width:'.(8*$left_size).'%;padding:0px;margin:0px;">'  . i18n('colEnd') . '</TD>' ;
         if ($col=='Resource') echo '  <TD class="reportTableHeader" style="width:'.(10*$left_size).'%;padding:0px;margin:0px;">'  . i18n('colResource') . '</TD>' ;
         if ($col=='Priority') echo '  <TD class="reportTableHeader" style="width:'.(5*$left_size).'%;padding:0px;margin:0px;">'  . i18n('colPriorityShort') . '</TD>' ;
-        if ($col=='IdPlanningMode') echo '  <TD class="reportTableHeader" style="width:'.(10*$left_size).'%;padding:0px;margin:0px;">'  . i18n('colIdPlanningMode') . '</TD>' ;        
+        if ($col=='IdPlanningMode') echo '  <TD class="reportTableHeader" style="width:'.(10*$left_size).'%;padding:0px;margin:0px;">'  . i18n('colIdPlanningMode') . '</TD>' ;   
+        if ($col=='Id') echo '  <TD class="reportTableHeader" style="width:'.(3*$left_size).'%;padding:0px;margin:0px;">'  . i18n('colId') . '</TD>' ;
       }
       $weekendColor="#cfcfcf";
       $day=$minDate;
@@ -662,6 +665,7 @@
           if ($col=='Resource') echo '  <TD class="reportTableData" style="text-align:left;' . $compStyle . 'width:'.(10*$left_size).'%;" >' . $line["resource"]  . '</TD>' ;
           if ($col=='Priority') echo '  <TD class="reportTableData" style="text-align:center;' . $compStyle . 'width:'.(5*$left_size).'%;" >' . $line["priority"]  . '</TD>' ;
           if ($col=='IdPlanningMode') echo '  <TD class="reportTableData" style="text-align:left;' . $compStyle . 'width:'.(10*$left_size).'%;white-space:nowrap" >' . SqlList::getNameFromId('PlanningMode', $line["idplanningmode"])  . '</TD>' ;
+          if ($col=='Id') echo '  <TD class="reportTableData" style="text-align:right;' . $compStyle . 'width:'.(3*$left_size).'%;" >' . $line["id"]  . '</TD>' ;
         }
         if ($pGroup) {
           $pColor='#505050;';

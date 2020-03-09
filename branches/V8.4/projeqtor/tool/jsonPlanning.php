@@ -796,14 +796,17 @@
       //$sortArray=Parameter::getPlanningColumnOrder();
 	  $sortArray=array_merge(array(), Parameter::getPlanningColumnOrder());
     $cptSort=0;
-    foreach ($columnsDescription as $ganttCol) { 
+    unset($columnsDescription['ObjectType']);
+    unset($columnsDescription['ExterRes']);
+    
+    foreach ($columnsDescription as $ganttColName=>$ganttCol) { 
       if ($ganttCol['show']==1) $cptSort++; 
     }
 	  if($outMode != 'csv') {
       //echo '<table dojoType="dojo.dnd.Source" id="wishlistNode" class="container ganttTable" style="border: 1px solid #AAAAAA; margin: 0px; padding: 0px;">';
       echo '<div style="overflow:hidden;">';
       echo '<table style="font-size:80%; border: 1px solid #AAAAAA; margin: 0px; padding: 0px;">';
-      echo '<tr style="height: 20px;"><td colspan="' . (1+$cptSort) . '">&nbsp;</td>';
+      echo '<tr style="height: 20px;"><td colspan="' . ($cptSort+1) . '">&nbsp;</td>';
       $day=$minDate;
       for ($i=0;$i<$topUnits;$i++) {
         $span=$topUnit;
@@ -866,6 +869,7 @@
         if ($col=='Resource') echo '  <TD class="reportTableHeader" style="width:50px">'  . i18n('colResource') . '</TD>' ;
         if ($col=='Priority') echo '  <TD class="reportTableHeader" style="width:50px">'  . i18n('colPriorityShort') . '</TD>' ;
         if ($col=='IdPlanningMode') echo '  <TD class="reportTableHeader" style="width:150px">'  . i18n('colIdPlanningMode') . '</TD>' ;
+        if ($col=='Id') echo '  <TD class="reportTableHeader" style="width:18px">'  . i18n('colId') . '</TD>' ;
       }
       $weekendColor="#cfcfcf";
       $day=$minDate;
@@ -926,6 +930,7 @@
           if ($col=='Resource') echo i18n('colResource') . $csvSep ;
           if ($col=='Priority') echo i18n('colPriority') . $csvSep ;
           if ($col=='IdPlanningMode') echo i18n('colIdPlanningMode') . $csvSep ;
+          if ($col=='Id') echo i18n('colId') . $csvSep ;
         }
         echo "\n";
       }
@@ -1039,6 +1044,7 @@
           if ($col=='Resource') echo '  <TD class="reportTableData" style="text-align:left;' . $compStyle . '" >' . $line["resource"]  . '</TD>' ;
           if ($col=='Priority') echo '  <TD class="reportTableData" style="text-align:center;' . $compStyle . '" >' . $line["priority"]  . '</TD>' ;
           if ($col=='IdPlanningMode') echo '  <TD class="reportTableData" style="text-align:left;' . $compStyle . '" ><span class="nobr">' . SqlList::getNameFromId('PlanningMode', $line["idplanningmode"])  . '</span></TD>' ;
+          if ($col=='Id') echo '  <TD class="reportTableData" style="text-align:right;' . $compStyle . '" >' . $line["id"] . '</TD>' ;
         }
 		    if ($pGroup) {
           $pColor='#505050;';
