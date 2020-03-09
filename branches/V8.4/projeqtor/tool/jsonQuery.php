@@ -870,7 +870,7 @@
         echo '<br/>';
         echo '<div class="reportTableHeader" style="width:99%; font-size:150%;border: 0px solid #000000;">' . i18n('menu'.$objectClass) . '</div>';
         echo '<br/>';
-	      echo '<table style="width:'.(($outMode=='pdf')?'950px':'100%').'">';
+	      echo '<table style="width:100%;'.((isset($outModeBack) and $outModeBack=='pdf' and isWkHtmlEnabled())?'font-size:10pt':'').'">';
 	      echo '<tr>';
 	      $layout=str_ireplace('width="','style="border:1px solid black;width:',$layout);
 	      $layout=str_ireplace('<th ','<th class="reportHeader" ',$layout);
@@ -954,8 +954,8 @@
 	            } else {
 	              $disp=htmlEncode($val);
 	            }
-	            
-	            echo '<td class="tdListPrint '.((substr($formatter[$numField],0,5)=='color')?'colorNameData':'').' style="width:' . $arrayWidth[$numField] . ';">' . $disp . '</td>';
+	            $colWidth=$arrayWidth[$numField];
+	            echo '<td class="tdListPrint '.((substr($formatter[$numField],0,5)=='color')?'colorNameData':'').'" style="white-space:normal;width:' . $colWidth . ';">' . $disp . '</td>';
 	          }
 	          echo '</tr>';       
 	        }
