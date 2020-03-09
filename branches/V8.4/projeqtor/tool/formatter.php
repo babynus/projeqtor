@@ -51,7 +51,7 @@ function colorNameFormatter($value,$idTicket=-1, $minHeight='10') {
 //           .'</div>';
       return '<table style="width:100%;height:100%;min-height:'.$minHeight.'px;border-collapse: collapse;"><tr style="height:100%"><td '.($idTicket!=-1 ? 'id="status'.$idTicket.'"' : '').' style="vertical-align:middle;'
           .(($notRounded)?'border:0px;padding:6px 3px;':'border:1px solid #CCC;border-radius:10px;padding: 5px;display:inline-block;')
-          .(($color=='transparent')?'font-weight:bold;font-style:italic;':'')
+          .(($color=='transparent')?'font-style:italic;':'')
           .'text-align: center;'.(($print and $outMode=='pdf')?'width:95%;min-height:18px;':'') . 'background-color: ' . $color . '; color:' . $foreColor . ';">'
           .$val
           .'</td></tr></table>';
