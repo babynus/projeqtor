@@ -955,7 +955,7 @@
 	              $disp=htmlEncode($val);
 	            }
 	            
-	            echo '<td class="tdListPrint" style="width:' . $arrayWidth[$numField] . ';">' . $disp . '</td>';
+	            echo '<td class="tdListPrint '.((substr($formatter[$numField],0,5)=='color')?'colorNameData':'').' style="width:' . $arrayWidth[$numField] . ';">' . $disp . '</td>';
 	          }
 	          echo '</tr>';       
 	        }
