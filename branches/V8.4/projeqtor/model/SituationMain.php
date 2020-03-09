@@ -64,7 +64,7 @@ class SituationMain extends SqlElement {
   }
   
   function drawSituationHistory($obj){
-  	global $cr, $print, $outMode, $user, $comboDetail, $displayWidth, $printWidth;
+  	global $cr, $print, $outMode, $user, $comboDetail;
   	if ($comboDetail or !$obj->id) {
   		return;
   	}
