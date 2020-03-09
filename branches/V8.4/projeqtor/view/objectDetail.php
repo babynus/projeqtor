@@ -4357,7 +4357,7 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
   if ($obj->isAttributeSetToField("_Link", "hidden")) {
     return;
   }
-  global $cr, $print, $user, $comboDetail;
+  global $cr, $outMode, $outModeBack, $print, $user, $comboDetail;
   if ($comboDetail) {
     return;
   }
@@ -4458,7 +4458,7 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
       }
       $goto="";
       if (!$print and $canGoto) {
-        $goto=' onClick="gotoElement('."'".get_class($gotoObj)."','".htmlEncode($gotoObj->id)."'".');" style="cursor: pointer;" ';
+        $goto=' onClick="gotoElement('."'".get_class($gotoObj)."','".htmlEncode($gotoObj->id)."'".');" ';
       }
       if (!$classLink) {
         echo '<td class="linkData" style="white-space:nowrap;width:'.(($print)?'20':'15').'%"> <table><tr><td>';
@@ -4480,7 +4480,7 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
         } else {
           echo formatIcon(get_class($linkObj), 16);
         }
-        echo '</td><td '.$goto.' style="vertical-align:top">&nbsp;'.$classLinkName.' #'.$linkObj->id.'</td></tr></table>';
+        echo '</td><td '.$goto.' style="'.(($goto)?'cursor: pointer;':'').(($print and $outMode=='pdf' and $outModeBack!='pdf')?'font-size:90%;':'').'padding-left:5px">'.$classLinkName.' #'.$linkObj->id.'</td></tr></table>';
       } else {
         echo '<td '.$goto.' class="linkData" style="white-space:nowrap;width:'.(($print)?'10':'5').'%">#'.$linkObj->id;
       }
@@ -4502,9 +4502,9 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
       }
       if (property_exists($linkObj, $idStatus)) {
         $objStatus=new $statusClass($linkObj->$idStatus);
-        echo '<td class="dependencyData colorNameData"  style="width:15%">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</td>';
+        echo '<td class="linkData colorNameData"  style="width:15%">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</td>';
       } else {
-        echo '<td class="dependencyData"  style="width:15%">&nbsp;</td>';
+        echo '<td class="linkData"  style="width:15%">&nbsp;</td>';
       }
       // //KROWRY
       if (property_exists($linkObj, 'idResource')&&$linkObj->idResource!=null) {
