@@ -945,6 +945,17 @@ if (beforeVersion($currVersion,"V8.3.3")) {
   $plg=new Plugin();
   $plg->purge("name='kanban'");
 }
+if (beforeVersion($currVersion,"V8.3.7") and $currVersion!='V0.0.0') {
+  $mail=new Mail();
+  $mailList=$mail->getSqlElementsFromCriteria(null,null,"mailTitle like '%###PROJEQTOR###%'");
+  foreach ($mailList as $mail) {
+    $pos=max(strrpos($mail->mailTitle,"\n")+1,strrpos($mail->mailTitle,">")+1);
+    if ($pos>0) {
+      $mail->mailTitle=substr($mail->mailTitle,$pos);
+      $mail->save();
+    }
+  }
+}
 // To be sure, after habilitations updates ...
 Habilitation::correctUpdates();
 Habilitation::correctUpdates();
