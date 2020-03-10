@@ -151,16 +151,18 @@ function colorNameFormatter(value) {
       return '<span style="display:none;">'
           + order
           + '</span>'
-          //+ '<table width="100%" style="min-height:20px !important;"><tr style="height:100% !important;"><td style="text-align: center;border-radius: 10px; padding: 5px 5px !important;background-color: '
-          //+ color + '; color:' + foreColor + ';width: 100%;">' + val
-          //+ '</td></tr></table>';
-          + '<div class="colorNameDiv" style="'
-          +'min-height:10px !important;height:100% !important;text-align: center;'
-          +((notRounded)?'width:100%;':'width:90%;')
-          +((notRounded)?'':'border-radius: 10px;')
-          +((notRounded)?' margin:-5px; padding: '+heightPadding+'px 5% !important;':' margin:auto; padding: 5px 5% !important;')
-          +'background-color: '+ color + '; color:' + foreColor + ';">' + val
-          + '</div>';
+          + '<table style="position:relative; margin:0px -5%; min-height:10px !important;width:110%; height:100%">'
+          + '  <tr style="height:100% !important;">'
+          + '    <td style="text-align: center;padding:3px !important;background-color:'+color+';color:'+foreColor+';width: 100%;">'+val+'</td>'
+          + '  </tr>'
+          + '</table>';
+//          + '<div class="colorNameDiv" style="'
+//          +'min-height:10px !important;height:100% !important;text-align: center;'
+//          +((notRounded)?'width:100%;':'width:90%;')
+//          +((notRounded)?'':'border-radius: 10px;')
+//          +((notRounded)?' margin:-5px; padding: '+heightPadding+'px 5% !important;':' margin:auto; padding: 5px 5% !important;')
+//          +'background-color: '+ color + '; color:' + foreColor + ';">' + val
+//          + '</div>';
     } else {
       return value;
     }
@@ -198,16 +200,18 @@ function colorTranslateNameFormatter(value, notRounded) {
       return '<span style="display:none;">'
           + order
           + '</span>'
-//          + '<table width="100%" style="min-height:20px !important;"><tr style="height:100% !important;"><td style="text-align: center;border-radius: 10px; padding: 5px 5px !important;background-color: '
-//          + color + '; color:' + foreColor + ';width: 100%;">' + i18n(val)
-//          + '</td></tr></table>';
-          + '<div class="colorNameDiv" style="'
-          +'min-height:10px !important;height:100% !important;text-align: center;'
-          +((notRounded)?'width:100%;':'width:90%;')
-          +((notRounded)?'':'border-radius: 10px;')
-          +((notRounded)?' margin:-5px; padding: 10px 5% !important;':' margin:auto; padding: 5px 5% !important;')
-          +'background-color: '+ color + '; color:' + foreColor + ';">' + i18n(val)
-          + '</div>';
+          + '<table style="position:relative; margin:0px -5%; min-height:10px !important;width:110%; height:100%">'
+          + '  <tr style="height:100% !important;">'
+          + '    <td style="text-align: center;padding:3px !important;background-color:'+color+';color:'+foreColor+';width: 100%;">'+i18n(val)+'</td>'
+          + '  </tr>'
+          + '</table>';
+//          + '<div class="colorNameDiv" style="'
+//          +'min-height:10px !important;height:100% !important;text-align: center;'
+//          +((notRounded)?'width:100%;':'width:90%;')
+//          +((notRounded)?'':'border-radius: 10px;')
+//          +((notRounded)?' margin:-5px; padding: 10px 5% !important;':' margin:auto; padding: 5px 5% !important;')
+//          +'background-color: '+ color + '; color:' + foreColor + ';">' + i18n(val)
+//          + '</div>';
     } else {
       return i18n(value);
     }

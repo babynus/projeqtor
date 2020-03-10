@@ -2421,6 +2421,10 @@ table.dijitCalendarContainer {
 	font-weight: 500;
 	text-shadow: 1px 1px #FEFEFE;
 }
+.dojoxGridCell {
+	height:25px;
+	position: relative;
+}
 .dojoxGridHeader .dojoxGridCellOver {
 	background-image: none !important;
 	background-color: white;
