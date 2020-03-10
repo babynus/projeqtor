@@ -1536,6 +1536,7 @@ function traceHack($msg="Unidentified source code") {
 }
 
 function securityCheckPage($page) {
+  if (!trim($page)) return; // Not control empty value
   $path=$page;
   $pos=strpos($path, '?');
   if ($pos!==FALSE) { // there are parameters
