@@ -116,19 +116,5 @@ class SituationMain extends SqlElement {
   	}
   	echo '</table>';
   }
-  
-  /** ============================================================================
-   * Return the specific colCaptionTransposition
-   * @return the colCaptionTransposition
-   */
-  protected function getStaticColCaptionTransposition($fld=null) {
-  	return self::$_colCaptionTransposition;
-  }
-  
-  /** ========================================================================
-   * Return the specific databaseTableName
-   * @return the databaseTableName
-   */
-  
   }
 ?>

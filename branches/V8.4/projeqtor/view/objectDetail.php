@@ -2090,8 +2090,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
              $comboClass='Contact';
           }else if ($col=='idSituation') {
             $refType = get_class($obj);
-            $projSituation = SqlElement::getSingleSqlElementFromCriteria('ProjectSituation', array('idProject'=>$obj->idProject));
-            $val = $projSituation->id;
             if ($refType=='CallForTender' or $refType=='Tender' or $refType=='ProviderOrder' or $refType=='ProviderBill') {
               $idMenu='menuProjectSituationExpense';
               $comboClass='ProjectSituationExpense';
@@ -2395,7 +2393,11 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, 'id', $user->id);
         }if (($classObj=='SupplierContract' or $classObj=='ClientContract') and $col=='idContactContract' ) {
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
-        } else {
+        }else if($col=='idSituation'){
+          $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
+          $projSituation = SqlElement::getSingleSqlElementFromCriteria('ProjectSituation', array('idProject'=>$obj->idProject));
+          $val = $projSituation->id;
+        }else {
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
         }
         if ($col=='idProduct' and !$obj->id and $obj->isAttributeSetToField($col, 'required')) $obj->idProduct=$next;
@@ -6839,7 +6841,7 @@ function drawProjectSituation($type, $obj){
      $critWhere = array('refType'=>$class,'refId'=>$element->id,'idProject'=>$obj->idProject);
      $situationList = $situation->getSqlElementsFromCriteria($critWhere,null,null, 'date desc');
      if(count($situationList)>0){
-       foreach ($situationList as $situation){
+       $situation = $situationList[0];
        	if($situation->id){
        		$item = new $class($situation->refId);
        		echo '<tr>';
@@ -6863,7 +6865,6 @@ function drawProjectSituation($type, $obj){
        		echo '<td class="noteData" style="text-align:center">' . htmlEncode($responsible->name) . '</td>';
        		echo '</tr>';
        	}
-       }
      }else{
        echo '<tr>';
        echo '<td class="noteData" style="text-align:left;">';
