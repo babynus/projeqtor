@@ -89,7 +89,7 @@ if($actualSituation->id and $actualSituation->id != $obj->idSituation){
 	$obj->save();
 	$projectSituation = SqlElement::getSingleSqlElementFromCriteria('ProjectSituation', array('idProject'=>$actualSituation->idProject));
 	$projectName = SqlList::getNameFromId('Project', $actualSituation->idProject);
-	$projectSituation->name = i18n('projectSituation').'-'.$projectName;
+	$projectSituation->name = i18n('ProjectSituation').'-'.$projectName;
 	if($actualSituation->situationType == 'expense'){
       $projectSituation->refIdExpense = $actualSituation->refId;
       $projectSituation->refTypeExpense = $actualSituation->refType;
