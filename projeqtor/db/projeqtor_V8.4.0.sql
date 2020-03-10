@@ -14,7 +14,7 @@ UPDATE `${prefix}menu` SET `sortOrder` = '207' WHERE `menu`.`name` = 'menuProvid
 UPDATE `${prefix}menu` SET `sortOrder` = '208' WHERE `menu`.`name` = 'menuProviderTerm';
 UPDATE `${prefix}menu` SET `sortOrder` = '209' WHERE `menu`.`name` = 'menuProviderBill';
 UPDATE `${prefix}menu` SET `sortOrder` = '210' WHERE `menu`.`name` = 'menuProviderPayment';
-UPDATE `${prefix}menu` SET `sortOrder` = '211' WHERE `menu`.`name` = 'menuIndividualExpense';
+UPDATE ` SET `sortOrder` = '211' WHERE `menu`.`name` = 'menuIndividualExpense';
 UPDATE `${prefix}menu` SET `sortOrder` = '295' WHERE `menu`.`name` = 'menuRiskManagementPlan';
 UPDATE `${prefix}measureunit` SET `sortOrder` = '50' WHERE `measureunit`.`name` = 'month';
 
@@ -302,10 +302,11 @@ ALTER TABLE `${prefix}term` ADD `idResource` int(12) unsigned DEFAULT NULL , ADD
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
 (243,'menuAssetManagment',0,'menu', 450,null,1,'Asset'),
 (237,'menuAsset',243,'object', 455,'Project',0,'Asset'),
-(238,'menuLocation',243,'object', 461,'ReadWriteList',0,'Asset'),
-(239,'menuBrand',243,'object', 463,'ReadWriteList',0,'Asset'),
-(240,'menuModel',243,'object', 465,'ReadWriteList',0,'Asset'),
-(241,'menuAssetCategory',243,'object', 459,'Project',0,'Asset');
+(238,'menuLocation',243,'object', 465,'ReadWriteList',0,'Asset'),
+(239,'menuBrand',243,'object', 461,'ReadWriteList',0,'Asset'),
+(240,'menuModel',243,'object', 463,'ReadWriteList',0,'Asset'),
+(241,'menuAssetCategory',243,'object', 459,'Project',0,'Asset'),
+(248,'menuAssetType',79,'object',984,NULL,0,'Type');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,243,1),
@@ -313,6 +314,7 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 (1,238,1),
 (1,239,1),
 (1,240,1),
+(1,248,1),
 (1,241,1);
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
@@ -321,6 +323,7 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (1,238,8),
 (1,239,8),
 (1,240,8),
+(1,248,1),
 (1,241,8);
 
 INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES
@@ -332,6 +335,7 @@ INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
 (18,238,1,1),
 (18,239,0,1),
 (18,240,0,1),
+(18,248,0,1),
 (18,241,0,1);
 
 CREATE TABLE `${prefix}asset` (
