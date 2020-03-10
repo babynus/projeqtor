@@ -8188,7 +8188,12 @@ function showAttachedSize(size,name,id,type){
     dojo.byId('attachments').value=addAttachments;
   }else{
     var regex='/'+id+'_'+type;
-    addAttachments=attachments.replace(regex,'');
+    if(attachments.indexOf('/'+id+'_'+type)!=-1){
+      addAttachments=attachments.replace(regex,'');
+    }else{
+      regex=id+'_'+type;
+      addAttachments=attachments.replace(regex,'');
+    }
     dojo.byId('attachments').value=addAttachments;
     totalSize=Number(totalSize)-Number(size);
   }
@@ -8208,11 +8213,16 @@ function showAttachedSize(size,name,id,type){
 }
 
 function octetConvertSize(octet){
-  octet = Math.abs(parseInt(octet, 10));
-  var def = [[1, 'octets'], [1024, 'ko'], [1024*1024, 'Mo'], [1024*1024*1024, 'Go'], [1024*1024*1024*1024, 'To']];
-  for(var i=0; i<def.length; i++){
-    if(octet<def[i][0]) return (octet/def[i-1][0]).toFixed(2)+' '+def[i-1][1];
+  if(octet!=0 && octet!='-'){
+    octet = Math.abs(parseInt(octet, 10));
+    var def = [[1, ' octets'], [1024, ' ko'], [1024*1024, ' Mo'], [1024*1024*1024, ' Go'], [1024*1024*1024*1024, ' To']];
+    for(var i=0; i<def.length; i++){
+      if(octet<def[i][0]) return (octet/def[i-1][0]).toFixed(2)+' '+def[i-1][1];
+    }
+  }else{
+    return i18n('errorNotFoundAttachement');
   }
+
 }
 
 function changeFileSizeMail(name){
@@ -8231,8 +8241,10 @@ function changeFileSizeMail(name){
       size=Number(totalSize)-Number(dojo.byId('filesizeNoConvert'+name).value);
     }
     var regex='/'+id+'_'+type;
+    if(attachments.indexOf(regex)==-1){
+      regex=id+'_'+type;
+    }
     suprAttachments=attachments.replace(regex,'');
-    
     if(dijit.byId('versionRef'+name).get('checked')==true){
       addAttachments=suprAttachments+'/'+docVersRef+'_'+type;
       totalSize=size+Number(val1);
@@ -8490,7 +8502,8 @@ function extractEmails(str) {
 function sendMail() {
 	var idEmailTemplate = dijit.byId('selectEmailTemplate').get("value");
 	if(dojo.byId('totalSizeNoConvert').value > Number(dojo.byId('maxSizeNoconvert').value)){
-	  showAlert(i18n(''));
+	  showAlert(i18n('errorAttachmentSize'));
+	  return;
 	}else{
 	  loadContent("../tool/sendMail.php?className=Mailable&idEmailTemplate="+idEmailTemplate, "resultDivMain",
 	      "mailForm", true, 'mail');
