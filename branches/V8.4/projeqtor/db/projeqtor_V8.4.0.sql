@@ -336,7 +336,7 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (1,238,8),
 (1,239,8),
 (1,240,8),
-(1,248,1),
+(1,248,8),
 (1,241,8);
 
 INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES
