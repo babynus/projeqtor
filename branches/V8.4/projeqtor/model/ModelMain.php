@@ -32,11 +32,12 @@ class ModelMain extends SqlElement {
 
   public $_sec_Description;
   public $id;
+  public $idBrand;
   public $name;
   public $idAssetType;
-  public $idBrand;
+  public $description;
   public $idle;
-  public $_nbColMax=3;
+  public $_nbColMax=2;
   
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="10%"># ${id}</th>
@@ -50,6 +51,7 @@ class ModelMain extends SqlElement {
   
   private static $_fieldsAttributes=array(
       'name'=>'required',
+      'idAssetType'=>'required',
       'idBrand'=>'required',
   );
   

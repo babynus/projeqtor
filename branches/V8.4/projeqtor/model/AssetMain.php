@@ -36,6 +36,7 @@ class AssetMain extends SqlElement {
   public $idAssetType;
   public $idBrand;
   public $idModel;
+  public $idProvider;
   public $idAssetCategory;
   public $idAsset;
   public $serialNumber;
@@ -49,7 +50,6 @@ class AssetMain extends SqlElement {
   public $idLocation;
   public $complement;
   public $idAffectable;
-  public $idProvider;
   public $idle;
   public $_sec_AssetComposition;
   public $_assetComposition=array();
@@ -68,16 +68,18 @@ class AssetMain extends SqlElement {
     <th field="nameBrand" width="10%">${idBrand}</th>
     <th field="nameModel" width="10%">${idModel}</th>
     <th field="serialNumber" width="10%">${serialNumber}</th>
-    <th field="nameLocation" width="15%">${idLocation}</th>
-    <th field="nameAffectable" formatter="thumbName22" width="15%">${idUser}</th>
-    <th field="colorNameStatus" width="7%" formatter="colorNameFormatter">${idStatus}</th>
-    <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
+    <th field="nameAsset" width="10%">${idAsset}</th>
+    <th field="nameLocation" width="13%">${idLocation}</th>
+    <th field="nameAffectable" formatter="thumbName22" width="14%">${idUser}</th>
+    <th field="colorNameStatus" width="6%" formatter="colorNameFormatter">${idStatus}</th>
+    <th field="idle" width="4%" formatter="booleanFormatter">${idle}</th>
     ';
   
   private static $_colCaptionTransposition = array('idAffectable' => 'user','idAsset' => 'parentAsset');
   
   private static $_fieldsAttributes=array(
       'name'=>'required',
+      'idAssetType'=>'required',
       "installationDate"=>"nobr",
       "idLocation"=>"nobr",
   );
@@ -149,6 +151,8 @@ class AssetMain extends SqlElement {
     $colScript = parent::getValidationScript($colName);
     if ($colName=="idBrand") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  var idBrand=dijit.byId("idBrand").get("value");';
+      $colScript .= '  if(idBrand == " "){dijit.byId("idModel").set("value",null);}';
       $colScript .= '  refreshList("idModel","idBrand", this.value, null, null, false);';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
@@ -203,7 +207,7 @@ class AssetMain extends SqlElement {
     global $print;
     $result = "";
     if($item == 'arboAsset'){
-      if ($print) return "";
+      if ($print or !$this->id) return "";
       $result='<br/><table>';
       $result.='<tr>';
       $result.='<td rowspan="2" style="padding-left:10px">';
