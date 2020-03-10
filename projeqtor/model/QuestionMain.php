@@ -204,9 +204,9 @@ class QuestionMain extends SqlElement {
       $colScript .= '      var curDate = new Date();';
       $colScript .= '      dijit.byId("idleDate").set("value", curDate); ';
       $colScript .= '    }';
-      $colScript .= '    if (! dijit.byId("done").get("checked")) {';
-      $colScript .= '      dijit.byId("done").set("checked", true);';
-      $colScript .= '    }';  
+//       $colScript .= '    if (! dijit.byId("done").get("checked")) {';
+//       $colScript .= '      dijit.byId("done").set("checked", true);';
+//       $colScript .= '    }';  
       $colScript .= '  } else {';
       $colScript .= '    dijit.byId("idleDate").set("value", null); ';
       $colScript .= '  } '; 
@@ -221,9 +221,9 @@ class QuestionMain extends SqlElement {
       $colScript .= '    }';
       $colScript .= '  } else {';
       $colScript .= '    dijit.byId("doneDate").set("value", null); ';
-      $colScript .= '    if (dijit.byId("idle").get("checked")) {';
-      $colScript .= '      dijit.byId("idle").set("checked", false);';
-      $colScript .= '    }'; 
+//       $colScript .= '    if (dijit.byId("idle").get("checked")) {';
+//       $colScript .= '      dijit.byId("idle").set("checked", false);';
+//       $colScript .= '    }'; 
       $colScript .= '  } '; 
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
