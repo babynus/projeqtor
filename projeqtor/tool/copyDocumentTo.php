@@ -52,8 +52,9 @@ if($valueCopy == 'lastVersionRef'){
 }elseif ($valueCopy == 'lastVersion'){
   $list=$vd->getSqlElementsFromCriteria($crit,null,false,'id DESC',null,false,1);
 }elseif ($valueCopy == 'allVersion'){
-  $list=$vd->getSqlElementsFromCriteria($crit);
+  $list=$vd->getSqlElementsFromCriteria($crit,null,false,'id ASC');
 }
+$lastVersion=null;
 foreach ($list as $vd) {
   $source= $vd->getUploadFileName();
   $vd->idDocument=$newObj->id;
@@ -64,11 +65,10 @@ foreach ($list as $vd) {
   $vd->save();
   $dest = $vd->getUploadFileName();
   copy($source, $dest);
-  if ($vd->version==$newObj->version and $vd->revision==$newObj->revision and $vd->draft==$newObj->draft) {
-    $newObj->idDocumentVersion=$vd->id;
-    $newObj->save();
-  }
+  $lastVersion=$vd->id;
 }
+$newObj->idDocumentVersion=$lastVersion;
+$newObj->save();
 
 // Message of correct saving
 $status = displayLastOperationStatus($result);
