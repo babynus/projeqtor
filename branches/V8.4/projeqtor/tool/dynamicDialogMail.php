@@ -298,92 +298,98 @@ $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
     </tr>
   </table> 
   <?php if(!empty($lstAttach) or !empty($lstDoc)){?>
-  <div id='infoAttachement' style="padding-bottom:5px;"> 
-    <table style="position:relative;top:10px;">
-      <tr>
-        <td class="dialogLabel">
-          <label for="totalSize" ><?php echo  i18n("totalSize")." :";?></label>
-        </td>
-        <td >
-            <input  name="attachments" id="attachments"  class="input"  hidden value="" />
-            <input  name="totalSizeNoConvert" id="totalSizeNoConvert"  class="input"  hidden value="" />
-            <input  name="maxSizeNoconvert" id="maxSizeNoconvert" class="input"  hidden value="<?php echo $maxSize;?>" />
-            <div id="infoSize" style="font-size:12px;top:2px;position:relative;border:none;left:2px;"><input  name="totalSize" id="totalSize"  class="input"  style="border:none;width:60px;text-align:right;" value="" /><?php echo "/".$maxSizeAttachment;?></div>
+  <table style="width:100%;">
+    <tr>
+      <td>
+        <div id='infoAttachement' style="margin-left:55%"> 
+          <table >
+            <tr>
+              <td class="dialogLabel">
+                <label for="totalSize" style="font-size:12px;"><?php echo  i18n("totalSize")." :";?></label>
+              </td>
+              <td class="dialogLabel">
+                  <input  name="attachments" id="attachments"  class="input"  hidden value="" />
+                  <input  name="totalSizeNoConvert" id="totalSizeNoConvert"  class="input"  hidden value="" />
+                  <input  name="maxSizeNoconvert" id="maxSizeNoconvert" class="input"  hidden value="<?php echo $maxSize;?>" />
+                  <div id="infoSize"  style="font-size:12px;top:2px;position:relative;border:none;left:2px;"><input  name="totalSize" id="totalSize"  class="input "  style="border:none;width:60px;text-align:right;" value="" /><?php echo "/".$maxSizeAttachment;?></div>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div id='showAttachement' style="position:relative;top:10px;width:98%;left:2%;">
+          <table style='width:100%;font-size:12px;'>
+            <tr>
+              <td class='assignHeader' style='width:40%'><?php echo i18n('sectionAttachment').":&nbsp;";?></td>
+              <td class='assignHeader' style='width:20%'><?php echo i18n('dashboardTicketMainTitleType');?></td>
+              <td class='assignHeader' style='width:15%'><?php echo i18n('FileSize');?></td>
+              <td class='assignHeader' style='width:25%'><?php echo i18n('DocumentVersion');?></td>
+            </tr>
+            <?php 
+              foreach($lstAttach as $attached){
+                echo "<tr>";
+                echo "<td class='assignData verticalCenterData'><div id='dialogMail".$attached->fileName."' name='dialogMail".$attached->fileName."'  dojoType='dijit.form.CheckBox' type='checkbox' onclick='showAttachedSize(".json_encode($attached->fileSize).",".json_encode($attached->fileName).",".json_encode($attached->id).",".json_encode($attached->type).");'></div>&nbsp;".$attached->fileName."</td>";
+                echo " <td class='assignData verticalCenterData' style='text-align:center;'>$attached->type</td>";
+                echo " <td class='assignData verticalCenterData' style='text-align:center;'>".octectConvertSize($attached->fileSize)."</td>";
+                echo " <td class='assignData verticalCenterData'></td>";
+                echo " </tr>";
+              }
+              if(!empty($lstDoc)){
+              echo "<tr>";
+              echo "<td class='assignHeader' >".i18n('Document').":&nbsp;</td>";
+              echo "<td class='assignHeader'></td>";
+              echo "<td class='assignHeader'></td>";
+              echo "<td class='assignHeader'></td>";
+              echo "</tr>";
+                foreach($lstDoc as $document){
+                   if($document->ref1Type=='DocumentVersion'){
+                      $docV= new DocumentVersion($document->ref1Id);
+                      $name=$docV->fullName;
+                      $filsize=$docV->fileSize;
+                      $docId=$docV->id;
+                   }else{
+                     $doc= new Document($document->ref1Id);
+                     $vers='';
+                     $name=$doc->name;
+                     $docId=$doc->idDocumentVersionRef;
+                     $docVersRf=new DocumentVersion($doc->idDocumentVersionRef);
+                     $filsizeRef=($docVersRf->fileSize=='')?'-':$docVersRf->fileSize;
+                     if($doc->idDocumentVersion!=''){
+                      $docVers=new DocumentVersion($doc->idDocumentVersion);
+                      $docIdV=$docVers->id;
+                      $filsize=($docVers->fileSize=='')?'-':$docVers->fileSize;
+                      $vers=$docVers->name;
+                     }
+                     $versRef=$docVersRf->name;
+                     $type='DocumentVersion';
+                  }
+                  echo "<tr>";
+                  echo "<td class='assignData verticalCenterData'><input   id='addVersion".$name."' hidden value='$docId' />";
+                  echo "     <input   id='filesizeNoConvert".$name."' hidden value='".$filsizeRef."' />";
+                  echo "<div id='dialogMail".$name."' name='dialogMail".$name."'  dojoType='dijit.form.CheckBox' type='checkbox'  onclick='showAttachedSize(dojo.byId(\"filesizeNoConvert".$name."\").value,".json_encode($name).",dojo.byId(\"addVersion".$name."\").value,".json_encode($type).");' ></div>&nbsp;".$name."</td>";
+                  echo " <td class='assignData verticalCenterData' style='text-align:center;'>$document->ref1Type</td>";
+                  echo " <td class='assignData verticalCenterData' style='text-align:center;'>";
+                  echo "     <input readonly class='assignData verticalCenterData'  id='filesize".$name."' style='border:none;;position:relative;text-align: center;' value='".octectConvertSize($filsizeRef)."' /></td>";
+                  if($document->ref1Type!='DocumentVersion'){
+                    echo "<td class='assignData verticalCenterData'>";
+                    echo " <input name='v1_".$name."' id='v1_".$name."'  class='input'  hidden value='$filsizeRef' />";
+                    echo " <input name='idDocRef".$name."' id='idDocRef".$name."'  class='input'  hidden value='$docId' />";
+                    echo " <input name='v2_".$name."' id='v2_".$name."'  class='input'  hidden value='$filsize' />";
+                    echo " <input name='idDoc".$name."' id='idDoc".$name."'  class='input'  hidden value='$docIdV' />";
+                    echo "<table style='width:100%;'><tr><td style='width:50%;'><label style='width:30%;' for='versionRef".$name."'>".$versRef."</label>";
+                    echo "&nbsp;&nbsp;<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='versionRef".$name."' checked onChange='changeFileSizeMail(".json_encode($name).");'/></td>";
+                    echo "<td><label style='width:30%;' for='version".$name."'>".$vers."</label>";
+                    echo "&nbsp;&nbsp;<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='version".$name."'/></td></tr></table></td>";
+                  }else{
+                    echo " <td class='assignData verticalCenterData' >".((isset($docV))?$docV->name:$versRef)."</td>";
+                  }
+                  echo " </tr>";
+                }
+              }?>
+            </table>
+          </div>
         </td>
       </tr>
     </table>
-  </div>
-  <div id='showAttachement' style="position:relative;top:10px;width:90%;left:5%;">
-    <table style='width:100%'>
-      <tr>
-        <td class='assignHeader' style='width:40%'><?php echo i18n('sectionAttachment').":&nbsp;";?></td>
-        <td class='assignHeader' style='width:20%'><?php echo i18n('dashboardTicketMainTitleType');?></td>
-        <td class='assignHeader' style='width:15%'><?php echo i18n('FileSize');?></td>
-        <td class='assignHeader' style='width:25%'><?php echo i18n('DocumentVersion');?></td>
-      </tr>
-      <?php 
-        foreach($lstAttach as $attached){
-          echo "<tr>";
-          echo "<td class='assignData verticalCenterData'><div id='dialogMail".$attached->fileName."' name='dialogMail".$attached->fileName."'  dojoType='dijit.form.CheckBox' type='checkbox' onclick='showAttachedSize(".json_encode($attached->fileSize).",".json_encode($attached->fileName).",".json_encode($attached->id).",".json_encode($attached->type).");'></div>&nbsp;".$attached->fileName."</td>";
-          echo " <td class='assignData verticalCenterData' style='text-align:center;'>$attached->type</td>";
-          echo " <td class='assignData verticalCenterData' style='text-align:center;'>".octectConvertSize($attached->fileSize)."</td>";
-          echo " <td class='assignData verticalCenterData'></td>";
-          echo " </tr>";
-        }
-        if(!empty($lstDoc)){
-        echo "<tr>";
-        echo "<td class='assignHeader' >".i18n('Document').":&nbsp;</td>";
-        echo "<td class='assignHeader'></td>";
-        echo "<td class='assignHeader'></td>";
-        echo "<td class='assignHeader'></td>";
-        echo "</tr>";
-          foreach($lstDoc as $document){
-             if($document->ref1Type=='DocumentVersion'){
-                $docV= new DocumentVersion($document->ref1Id);
-                $name=$docV->fullName;
-                $filsize=$docV->fileSize;
-                $docId=$docV->id;
-             }else{
-               $doc= new Document($document->ref1Id);
-               $vers='';
-               $name=$doc->name;
-               $docId=$doc->idDocumentVersionRef;
-               $docVersRf=new DocumentVersion($doc->idDocumentVersionRef);
-               $filsizeRef=($docVersRf->fileSize=='')?'-':$docVersRf->fileSize;
-               if($doc->idDocumentVersion!=''){
-                $docVers=new DocumentVersion($doc->idDocumentVersion);
-                $docIdV=$docVers->id;
-                $filsize=($docVers->fileSize=='')?'-':$docVers->fileSize;
-                $vers=$docVers->name;
-               }
-               $versRef=$docVersRf->name;
-               $type='DocumentVersion';
-            }
-            echo "<tr>";
-            echo "<td class='assignData verticalCenterData'><input   id='addVersion".$name."' hidden value='$docId' />";
-            echo "     <input   id='filesizeNoConvert".$name."' hidden value='".$filsizeRef."' />";
-            echo "<div id='dialogMail".$name."' name='dialogMail".$name."'  dojoType='dijit.form.CheckBox' type='checkbox'  onclick='showAttachedSize(dojo.byId(\"filesizeNoConvert".$name."\").value,".json_encode($name).",dojo.byId(\"addVersion".$name."\").value,".json_encode($type).");' ></div>&nbsp;".$name."</td>";
-            echo " <td class='assignData verticalCenterData' style='text-align:center;'>$document->ref1Type</td>";
-            echo " <td class='assignData verticalCenterData' style='text-align:center;'>";
-            echo "     <input readonly class='assignData verticalCenterData'  id='filesize".$name."' style='border:none;font-size:10px;position:relative;text-align: center;' value='".octectConvertSize($filsizeRef)."' /></td>";
-            if($document->ref1Type!='DocumentVersion'){
-              echo "<td class='assignData verticalCenterData'>";
-              echo " <input name='v1_".$name."' id='v1_".$name."'  class='input'  hidden value='$filsizeRef' />";
-              echo " <input name='idDocRef".$name."' id='idDocRef".$name."'  class='input'  hidden value='$docId' />";
-              echo " <input name='v2_".$name."' id='v2_".$name."'  class='input'  hidden value='$filsize' />";
-              echo " <input name='idDoc".$name."' id='idDoc".$name."'  class='input'  hidden value='$docIdV' />";
-              echo "<table style='width:100%;'><tr><td style='width:50%;'><label style='width:30%;' for='versionRef".$name."'>".$versRef."</label>";
-              echo "&nbsp;&nbsp;<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='versionRef".$name."' checked onChange='changeFileSizeMail(".json_encode($name).");'/></td>";
-              echo "<td><label style='width:30%;' for='version".$name."'>".$vers."</label>";
-              echo "&nbsp;&nbsp;<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='version".$name."'    /></td></tr></table></td>";
-            }else{
-              echo " <td class='assignData verticalCenterData'>".((isset($docV))?$docV->name:$versRef)."</td>";
-            }
-            echo " </tr>";
-          }
-        }?>
-      </table>
-    </div>
 <?php }?>
   <br/>
 </form>   
