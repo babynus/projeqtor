@@ -56,12 +56,18 @@ class ProjectSituationMain extends SqlElement {
   
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="4%" ># ${id}</th>
-    <th field="nameProject" width="9%" >${idProject}</th>
-    <th field="name" width="12%" >${name}</th>
-    <th field="situationNameExpense" width="12%">${situationNameExpense}</th>
-    <th field="situationDateExpense" width="8%" formatter="dateFormatter">${situationDateExpense}</th>
-    <th field="situationNameIncome" width="12%">${situationNameIncome}</th>
-    <th field="situationDateIncome" width="8%" formatter="dateFormatter">${situationDateIncome}</th>
+    <th field="nameProject" width="8%" >${idProject}</th>
+    <th field="name" width="8%" >${name}</th>
+    <th field="refTypeExpense" width="8%">${refTypeExpense}</th>
+    <th field="refIdExpense" width="4%">${refIdExpense}</th>
+    <th field="situationNameExpense" width="11%">${situationNameExpense}</th>
+    <th field="situationDateExpense" width="6%" formatter="dateTimeFormatter">${situationDateExpense}</th>
+    <th field="nameResourceExpense" formatter="thumbName22" width="8%">${idResourceExpense}</th>
+    <th field="refTypeIncome" width="8%">${refTypeIncome}</th>
+    <th field="refIdIncome" width="4%">${refIdIncome}</th>
+    <th field="situationNameIncome" width="11%">${situationNameIncome}</th>
+    <th field="situationDateIncome" width="6%" formatter="dateTimeFormatter">${situationDateIncome}</th>
+    <th field="nameResourceIncome" formatter="thumbName22" width="8%">${idResourceIncome}</th>
     <th field="idle" width="4%" formatter="booleanFormatter" >${idle}</th>';
 
   

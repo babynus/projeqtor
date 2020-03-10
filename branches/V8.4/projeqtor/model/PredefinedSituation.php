@@ -34,7 +34,7 @@ class PredefinedSituation extends SqlElement {
   public $id;
   public $name;
   public $idle;
-  public $text;
+  public $situation;
 
 	// Define the layout that will be used for lists
   private static $_layout='
