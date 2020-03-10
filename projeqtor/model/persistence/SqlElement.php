@@ -4354,9 +4354,7 @@ abstract class SqlElement {
     $result = "";
     $right = "";
     // Manage Exceptions
-    if (get_class ( $this ) == 'Alert' or get_class ( $this ) == 'Mail' or get_class ( $this ) == 'MailToSend' 
-     or get_class ( $this ) == 'Audit' or get_class ( $this ) == 'AuditSummary' or get_class ( $this ) == 'ColumnSelector'
-     or get_class ( $this ) == 'ProjectSituation' or get_class ( $this ) == 'ProjectSituationExpense' or get_class ( $this ) == 'ProjectSituationIncome'   ) {
+    if (get_class ( $this ) == 'Alert' or get_class ( $this ) == 'Mail' or get_class ( $this ) == 'MailToSend' or get_class ( $this ) == 'Audit' or get_class ( $this ) == 'AuditSummary' or get_class ( $this ) == 'ColumnSelector') {
       $right = 'YES';
     } else if (isset ( $cronnedScript ) and $cronnedScript == true) { // Cronned script can do everything
       $right = 'YES';
@@ -4736,9 +4734,7 @@ abstract class SqlElement {
     $result = "";
     $objects = "";
     $right = securityGetAccessRightYesNo ( 'menu' . get_class ( $this ), 'delete', $this );
-    if (get_class ( $this ) == 'Alert' or get_class ( $this ) == 'Mail' or get_class ( $this ) == 'MailToSend' 
-     or get_class ( $this ) == 'Audit' or get_class ( $this ) == 'AuditSummary' or get_class ( $this ) == 'ColumnSelector'
-     or get_class ( $this ) == 'ProjectSituation' or get_class ( $this ) == 'ProjectSituationExpense' or get_class ( $this ) == 'ProjectSituationIncome') {
+    if (get_class ( $this ) == 'Alert' or get_class ( $this ) == 'Mail' or get_class ( $this ) == 'MailToSend' or get_class ( $this ) == 'Audit' or get_class ( $this ) == 'AuditSummary' or get_class ( $this ) == 'ColumnSelector') {
       $right = 'YES';
     }
     if ($right != 'YES') {
@@ -5261,15 +5257,60 @@ abstract class SqlElement {
               '</title></head><body style="font-family: Verdana, Arial, Helvetica, sans-serif;">' .
               $emailTemplateTab[$j]->template . '</body></html>';
         } else {
+          //florent #4442
+          if(strpos($emailTemplateTab[$j]->template,'${LastAttachement}')!==false){
+            $attachments[]=explode('_',$this->searchLastAttachmentMailable());
+          }else if(strpos($emailTemplateTab[$j]->template,'${AllAttachements}')!==false){
+            $maxSizeAttachment=Parameter::getGlobalParameter('paramAttachmentMaxSizeMail');
+            if($maxSizeAttachment==''){
+              $maxSizeAttachment=0;
+            }
+            $allAttach=searchAllAttachmentMailable(get_class($this),$this->id);
+            $lstAttach=$allAttach[0];
+            $lstDoc=$allAttach[1];
+            $attachments=array();
+            $size=0;
+            foreach ($lstAttach as $att){
+              $size+=$att->fileSize;
+              $attachments[]= array($att->id,'file');
+            }
+            foreach ($lstDoc as $document){
+              if($document->ref1Type=='DocumentVersion'){
+                $doc= new DocumentVersion($document->ref1Id);
+                $attachments[]=array($doc->id,'DocumentVersion');
+                $addSize=$doc->fileSize;
+              }else{
+                $doc= new Document($document->ref1Id);
+                $attachments[]=array($doc->idDocumentVersionRef ,'DocumentVersion');
+                if($doc->idDocumentVersion!=''){
+                  $attachments[]=array($doc->idDocumentVersion,'DocumentVersion');
+                  $docV=new DocumentVersion($doc->idDocumentVersion);
+                  $addSize=$docV->fileSize;
+                }else{
+                  $docR=new DocumentVersion($doc->idDocumentVersionRef);
+                  $addSize=$docR->fileSize;
+                }
+              }
+              debugLog($addSize);
+              $size+=$addSize;
+            }
+            debugLog($size.'   '.$maxSizeAttachment);
+            if($size > $maxSizeAttachment){
+              return array('result' => 'Fail', 'dest' => $destTab[$idTemplate]);
+            }
+          }
+          //
           $emailTemplateTab[$j]->template = $this->getMailDetailFromTemplate($emailTemplateTab[$j]->template);
-          if ($emailTemplateTab[$j]->title == '' or $emailTemplateTab[$j]->title == null)
+          if ($emailTemplateTab[$j]->title == '' or $emailTemplateTab[$j]->title == null){
             $emailTemplateTab[$j]->title = $title;
-          else 
+          }else {
             $emailTemplateTab[$j]->title = $this->getMailDetailFromTemplate($emailTemplateTab[$j]->title,null,true);
+          }
         }
+        debugLog($attachments);
         $resultMail[] = sendMail($destTab[$emailTemplateTab[$j]->id], $emailTemplateTab[$j]->title,
             $emailTemplateTab[$j]->template,
-            $this, null, $sender, null, null, $references,false,false,$attachments );
+            $this, null, $sender, null, null, $references,false,false,$attachments);
       }
       
     }
@@ -6117,7 +6158,12 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
         return $this->getLinksHtmlTab();
       } else if ($property == 'NOTE') {
         return $this->getNotesHtmlTab();
-      } else {
+      } else if ($property == 'AllAttachements') {
+        return;
+      } else if ($property == 'LastAttachement') {
+      	return;
+      }
+       else {
         return "\$$property not a property of " . get_class($this);
       }
     },
@@ -7400,5 +7446,49 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
     }
     debugTraceLog($msg);
   }
+  //florent #4442
+  public  function searchLastAttachmentMailable (){
+    $allAttach=searchAllAttachmentMailable(get_class($this),$this->id);
+    $lstAttach=$allAttach[0];
+    $lstDoc=$allAttach[1];
+    if(!empty($lstAttach))$att=$lstAttach[0];
+    if(!empty($lstDoc))$doc=$lstDoc[0];
+    if(isset($doc) and isset($att)){
+      if(new DateTime($doc->creationDate) > new DateTime($att->creationDate)){
+        if($doc->ref1Type=='DocumentVersion'){
+          $document= new DocumentVersion($doc->ref1Id);
+          $name=$document->id.'_DocumentVersion';
+        }else{
+          $document= new Document($doc->ref1Id);
+          $name=$document->idDocumentVersionRef .'_DocumentVersion';
+          if($document->idDocumentVersion!=''){
+            $name=$document->idDocumentVersion.'_DocumentVersion';
+          }
+        }
+        return $name;
+      }else{
+        return $name=$att->id.'_file';
+      }
+    }else if(isset($att)){
+      return $name=$att->id.'_file';
+    }else if(isset($doc)) {
+      if($doc->ref1Type=='DocumentVersion'){
+        $document= new DocumentVersion($doc->ref1Id);
+        $name=$document->id.'_DocumentVersion';
+      }else{
+        $document= new Document($doc->ref1Id);
+        $name=$document->idDocumentVersionRef .'_DocumentVersion';
+        if($document->idDocumentVersion!=''){
+          $name=$document->idDocumentVersion.'_DocumentVersion';
+        }
+      }
+      return $name;
+    }else {
+      return ;
+    }
+  }
+  //
 }
+
+  
 ?>
