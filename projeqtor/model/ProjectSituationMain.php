@@ -53,6 +53,7 @@ class ProjectSituationMain extends SqlElement {
   public $_spe_SituationIncome;
   
   public $_nbColMax=2;
+  public $_readOnly = true;
   
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="4%" ># ${id}</th>

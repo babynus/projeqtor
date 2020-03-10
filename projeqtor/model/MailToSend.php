@@ -46,6 +46,7 @@ class MailToSend extends SqlElement {
   public $idle;
   
   public $_noHistory=true;
+  public $_readOnly = true;
   
     private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
