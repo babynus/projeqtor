@@ -2109,7 +2109,7 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
   $notFound=' not found ';
   if(!empty($attachments)){
     $c=0;
-    $addAttachToMessage="<table style='font-size:14pt;font-weight:bold; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;'><tr><td colspan='3' style='background:#555555;color: #FFFFFF; text-align: center;'>
+    $addAttachToMessage="<table style='font-size:12pt;font-weight:bold; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;'><tr><td colspan='3' style='background:#555555;color: #FFFFFF; text-align: center;'>
         <div >".htmlEncode( i18n('fileAttachment'))."</div></td></tr></table><table style='width:95%;fon-size:14pt'>";
     foreach ($attachments as $val){
       $c++;
