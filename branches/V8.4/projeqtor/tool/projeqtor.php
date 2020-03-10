@@ -2113,7 +2113,7 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
         <div >".htmlEncode( i18n('fileAttachment'))."</div></td></tr></table><table style='width:95%;fon-size:14pt'>";
     foreach ($attachments as $val){
       $c++;
-      $addAttachToMessage.="<tr><td colspan='3' style='background:#DDDDDD;font-weight:bold;text-align:right;width:25%;vertical-align: middle;'><div>".$val[1]."</div></td>";
+      $addAttachToMessage.="<tr><td colspan='3' style='background:#DDDDDD;font-weight:bold;text-align:right;width:25%;vertical-align: middle;'><div>".$val[1]."&nbsp</div></td>";
       if($val[1]=='file'){
         $att=new Attachment($val[0]);
         $lstAtt[$att->fileName]=str_replace('${attachmentDirectory}',$directory, $att->subDirectory).$att->fileName;
