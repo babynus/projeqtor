@@ -235,6 +235,36 @@
 .iconAlert22 { background-image: url(images/iconAlert22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconAlert16 { background-image: url(images/iconAlert16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
+.iconAsset { background-image: url(images/iconAsset.png); }
+.ProjeQtOrFlatBlue .iconAsset { background-image: url(customIcons/blue/iconAsset.png); }
+.ProjeQtOrFlatRed .iconAsset { background-image: url(customIcons/red/iconAsset.png); }
+.ProjeQtOrFlatGreen .iconAsset { background-image: url(customIcons/green/iconAsset.png); }
+.ProjeQtOrFlatGrey .iconAsset { background-image: url(customIcons/grey/iconAsset.png); }
+
+.iconAssets { background-image: url(images/iconAsset.png); }
+.ProjeQtOrFlatBlue .iconAssets { background-image: url(customIcons/blue/iconAsset.png); }
+.ProjeQtOrFlatRed .iconAssets { background-image: url(customIcons/red/iconAsset.png); }
+.ProjeQtOrFlatGreen .iconAssets { background-image: url(customIcons/green/iconAsset.png); }
+.ProjeQtOrFlatGrey .iconAssets { background-image: url(customIcons/grey/iconAsset.png); }
+
+.iconAssetCategory { background-image: url(images/iconAssetCategory.png); }
+.ProjeQtOrFlatBlue .iconAssetCategory { background-image: url(customIcons/blue/iconAssetCategory.png); }
+.ProjeQtOrFlatRed .iconAssetCategory { background-image: url(customIcons/red/iconAssetCategory.png); }
+.ProjeQtOrFlatGreen .iconAssetCategory { background-image: url(customIcons/green/iconAssetCategory.png); }
+.ProjeQtOrFlatGrey .iconAssetCategory { background-image: url(customIcons/grey/iconAssetCategory.png); }
+
+.iconAssetManagment { background-image: url(images/iconAsset.png); }
+.ProjeQtOrFlatBlue .iconAssetManagment { background-image: url(customIcons/blue/iconAsset.png); }
+.ProjeQtOrFlatRed .iconAssetManagment { background-image: url(customIcons/red/iconAsset.png); }
+.ProjeQtOrFlatGreen .iconAssetManagment { background-image: url(customIcons/green/iconAsset.png); }
+.ProjeQtOrFlatGrey .iconAssetManagment { background-image: url(customIcons/grey/iconAsset.png); }
+
+.iconAssetType { background-image: url(images/iconAssetType.png); }
+.ProjeQtOrFlatBlue .iconAssetType { background-image: url(customIcons/blue/iconAssetType.png); }
+.ProjeQtOrFlatRed .iconAssetType { background-image: url(customIcons/red/iconAssetType.png); }
+.ProjeQtOrFlatGreen .iconAssetType { background-image: url(customIcons/green/iconAssetType.png); }
+.ProjeQtOrFlatGrey .iconAssetType { background-image: url(customIcons/grey/iconAssetType.png); }
+
 .iconAudit32 { background-image: url(images/iconAudit32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconAudit22 { background-image: url(images/iconAudit22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconAudit16 { background-image: url(images/iconAudit16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
@@ -652,7 +682,7 @@
 .iconMilestoneType22 { background-image: url(images/iconMilestoneType22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconMilestoneType16 { background-image: url(images/iconMilestoneType16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
-.iconModel { background-image: url(images/iconBrand.png); }
+.iconModel { background-image: url(images/iconModel.png); }
 .ProjeQtOrFlatBlue .iconModel { background-image: url(customIcons/blue/iconModel.png); }
 .ProjeQtOrFlatRed .iconModel { background-image: url(customIcons/red/iconModel.png); }
 .ProjeQtOrFlatGreen .iconModel { background-image: url(customIcons/green/iconModel.png); }
