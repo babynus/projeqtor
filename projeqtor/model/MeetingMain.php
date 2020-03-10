@@ -260,8 +260,8 @@ class MeetingMain extends SqlElement {
       $colScript .= '      dijit.byId("idleDate").set("value", curDate); ';
       $colScript .= '    }';
       $colScript .= '    if (! dijit.byId("done").get("checked")) {';
-      $colScript .= '      dijit.byId("done").set("checked", true);';
-      $colScript .= '    }';  
+//       $colScript .= '      dijit.byId("done").set("checked", true);';
+//       $colScript .= '    }';  
       $colScript .= '  } else {';
       $colScript .= '    dijit.byId("idleDate").set("value", null); ';
       $colScript .= '  } '; 
