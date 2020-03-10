@@ -50,7 +50,7 @@ $object=new Asset($structureId);
             <td>
               <select size="14" id="assetStuctureListId" name="assetStuctureListId[]"
                 <?php if (!$structureId) echo 'multiple';?> class="selectList" onchange="enableWidget('dialogProductStructureSubmit');"  ondblclick="saveAssetComposition();" value="">
-                <?php htmlDrawOptionForReference('idAsset', null, null, true);?>
+                <?php htmlDrawOptionForReference('idAsset', null, null, true,'idAsset','');?>
               </select>
             </td>
             <td style="vertical-align: top">

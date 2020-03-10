@@ -417,6 +417,7 @@ CREATE TABLE `${prefix}model` (
   `name` varchar(200) DEFAULT NULL,
   `idAssetType` int(12) unsigned DEFAULT NULL,
   `idBrand` int(12) unsigned DEFAULT NULL,
+  `description` mediumtext DEFAULT NULL,
   `idle` int(1) unsigned DEFAULT '0',
 PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;

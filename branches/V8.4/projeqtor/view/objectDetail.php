@@ -5062,8 +5062,11 @@ function drawAssetComposition($obj,$refresh=false){
   $canGoto = (securityCheckDisplayMenu(null, get_class($obj)) and securityGetAccessRightYesNo('menu' . get_class($obj), 'read', $obj) == "YES") ? true : false;
   $crit['idAsset']=$obj->id;
   $asset=new Asset();
-  $list=$asset->getSqlElementsFromCriteria($crit);
-
+  $list = array();
+  if($obj->id){
+    $list=$asset->getSqlElementsFromCriteria($crit);
+  }
+    
   if (!$refresh) echo '<tr><td colspan="2">';
   echo '<table style="width:100%;">';
   echo '<tr>';
