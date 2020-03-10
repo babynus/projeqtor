@@ -6421,26 +6421,28 @@ function refreshList(field, param, paramVal, selected, destination, required, pa
     if (field=='planning') {
       mySelect.set("value",selected); 
     }
-    if(destination.substr(0,15)=='filterValueList') {
-      var list=dojo.byId(destination);
-      selectionList=selected.split('_');
-      //while (list.options.length) {list.remove(0);} // Clean combo
-      items.forEach(function(item) {
-        if (!item.name || item.id==' ' || item.name==selected) {
-        } else {
-          if (selectionList.indexOf(item.id)>=0 && 1) {
-            var found=false;
-            for (var i=0;i<list.options.length;i++) { if (list.options[i].value==item.id) found=true; }
-            if (!found) {
-              var option = document.createElement("option");
-              option.text = item.name;
-              option.value = item.id;
-              option.selected=true;
-              list.add(option);
+    if(destination){
+      if(destination.substr(0,15)=='filterValueList') {
+        var list=dojo.byId(destination);
+        selectionList=selected.split('_');
+        //while (list.options.length) {list.remove(0);} // Clean combo
+        items.forEach(function(item) {
+          if (!item.name || item.id==' ' || item.name==selected) {
+          } else {
+            if (selectionList.indexOf(item.id)>=0 && 1) {
+              var found=false;
+              for (var i=0;i<list.options.length;i++) { if (list.options[i].value==item.id) found=true; }
+              if (!found) {
+                var option = document.createElement("option");
+                option.text = item.name;
+                option.value = item.id;
+                option.selected=true;
+                list.add(option);
+              }
             }
           }
-        }
-      });
+        });
+      }
     }
   });
 }
