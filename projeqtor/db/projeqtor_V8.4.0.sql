@@ -258,7 +258,7 @@ CREATE TABLE `${prefix}predefinedsituation` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `idle` int(1) unsigned DEFAULT '0',
-  `text` varchar(100) DEFAULT NULL,
+  `situation` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
