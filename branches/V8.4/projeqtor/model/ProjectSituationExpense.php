@@ -36,18 +36,13 @@ class ProjectSituationExpense extends ProjectSituation {
 
   private static $_fieldsAttributes=array(
         '_sec_SituationIncome'=>'hidden',
+        '_sec_Description'=>'hidden',
   		'situationNameIncome'=>'hidden',
         'refIdIncome'=>'hidden',
   		'refTypeIncome'=>'hidden',
   		'situationDateIncome'=>'hidden',
   		'idResourceIncome'=>'hidden',
   		'commentIncome'=>'hidden',
-        'situationNameExpense'=>'hidden',
-        'refTypeExpense'=>'hidden',
-        'refIdExpense'=>'hidden',
-        'situationDateExpense'=>'hidden',
-        'idResourceExpense'=>'hidden',
-        'commentExpense'=>'hidden',
   );
   
   private static $_colCaptionTransposition = array('idResourceExpense'=> 'responsible');

@@ -70,6 +70,8 @@ if($situation->date){
   $time = date('H:i:s');
 }
 $userId = getCurrentUserId();
+$predefinedSituation = new PredefinedSituation();
+$predefinedList = $predefinedSituation->getSqlElementsFromCriteria(array('idle'=>'0'));
 ?>
 <div >
   <table style="width:100%;">
@@ -83,6 +85,9 @@ $userId = getCurrentUserId();
         class="input" style="width:345px">
          <option value=""></option>
          <?php
+         foreach ($predefinedList as $lstObj) {
+           echo '<option value="' . $lstObj->id .'" >'.htmlEncode($lstObj->name).'</option>';
+         }
          ?>
         </select>
         </div>

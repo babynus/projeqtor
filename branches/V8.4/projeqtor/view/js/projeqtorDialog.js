@@ -1203,6 +1203,16 @@ function removeSituation(situationId) {
   showConfirm(msg, actionOK);
 }
 
+function situationSelectPredefinedText(idPrefefinedText) {
+	dojo.xhrGet({
+	    url : '../tool/getPredefinedSituation.php?id=' + idPrefefinedText,
+		handleAs : "text",
+		load : function(data) {
+			dijit.byId('situationSituation').set('value', data);
+	    }
+	  });
+}
+
 // =============================================================================
 // = Attachments
 // =============================================================================
