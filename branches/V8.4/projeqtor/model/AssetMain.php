@@ -136,6 +136,26 @@ class AssetMain extends SqlElement {
     return $result;
   }
   
+  
+  // ============================================================================**********
+  // GET VALIDATION SCRIPT
+  // ============================================================================**********
+  
+  /** ==========================================================================
+   * Return the validation sript for some fields
+   * @return the validation javascript (for dojo frameword)
+   */
+  public function getValidationScript($colName) {
+    $colScript = parent::getValidationScript($colName);
+    if ($colName=="idBrand") {
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  refreshList("idModel","idBrand", this.value, null, null, false);';
+      $colScript .= '  formChanged();';
+      $colScript .= '</script>';
+    }
+    return $colScript;
+  }
+  
 // ============================================================================**********
 // GET STATIC DATA FUNCTIONS
 // ============================================================================**********
