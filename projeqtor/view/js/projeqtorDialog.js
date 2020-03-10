@@ -1162,21 +1162,6 @@ function saveSituation() {
 		situationEditor.updateElement();
 	    var tmpCkEditor=situationEditor.document.getBody().getText();
 	    var tmpCkEditorData=situationEditor.getData();
-	    if (tmpCkEditor.trim()=="" && tmpCkEditorData.indexOf('<img')<=0) {
-	      var msg=i18n('messageMandatory', new Array(i18n('Situation')));
-	      situationEditor.focus();
-	      showAlert(msg);
-	      return;
-	    }
-	  } else if (dijit.byId("situationCommentEditor")) {
-	    if (dijit.byId("situationComment").getValue() == '') {
-	      dijit.byId("situationCommentEditor").set("class", "input required");
-	      var msg=i18n('messageMandatory', new Array(i18n('Situation')));
-	      dijit.byId("situationCommentEditor").focus();
-	      dojo.byId("situationCommentEditor").focus();
-	      showAlert(msg);
-	      return;
-	    }
 	  }
 	  loadContent("../tool/saveSituation.php", "resultDivMain", "situationForm", true, 'situation');
 	  dijit.byId('dialogSituation').hide();
