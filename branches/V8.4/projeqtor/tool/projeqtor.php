@@ -2105,17 +2105,36 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
   //florent ticket 4442
   $directory=Parameter::getGlobalParameter('paramAttachmentDirectory');
   $lstAtt= array();
+  $addAttachToMessage='';
+  $notFound=' not found ';
   if(!empty($attachments)){
+    $c=0;
+    $addAttachToMessage="<table style='font-size:14pt;font-weight:bold; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;'><tr><td colspan='3' style='background:#555555;color: #FFFFFF; text-align: center;'>
+        <div >".htmlEncode( i18n('fileAttachment'))."</div></td></tr></table><table style='width:95%;fon-size:14pt'>";
     foreach ($attachments as $val){
+      $c++;
+      $addAttachToMessage.="<tr><td colspan='3' style='background:#DDDDDD;font-weight:bold;text-align:right;width:25%;vertical-align: middle;'><div>".$val[1]."</div></td>";
       if($val[1]=='file'){
         $att=new Attachment($val[0]);
         $lstAtt[$att->fileName]=str_replace('${attachmentDirectory}',$directory, $att->subDirectory).$att->fileName;
+        if( file_exists(str_replace('${attachmentDirectory}',$directory, $att->subDirectory).$att->fileName) and $lstAtt[$att->fileName]!=''){
+          $addAttachToMessage .="<td colspan='3' style='background:#FFFFFF;text-align: left;'><div>&nbsp;&nbsp;".$att->fileName."</div></td></tr>";
+        }else{
+          $addAttachToMessage .="<td colspan='3' ><div style='background:#FFFFFF;text-align: left;color:red;'>&nbsp;&nbsp;".$att->fileName.$notFound."</div></td></tr>";
+        }
       }else{
         $doc=new DocumentVersion($val[0]);
         $lstAtt[$doc->fileName]=$doc->getUploadFileName();
+        if( file_exists($doc->getUploadFileName()) and $lstAtt[$doc->fileName]!=''){
+          $addAttachToMessage.= "<td colspan='3' ><div style='background:#FFFFFF;text-align: left;'>&nbsp;&nbsp;".$doc->fileName."</div></td></tr>";
+        }else{
+          $addAttachToMessage.= "<td colspan='3' ><div style='background:#FFFFFF;text-align: left;color:red;'>&nbsp;&nbsp;".$doc->fileName.$notFound."</div></td></tr>";
+        }
       }
     }
   }
+  $addAttachToMessage.="</tr></table>;";
+  $message.=$addAttachToMessage;
   //
   $mail=new Mail();
   if (sessionUserExists()) {
@@ -2232,7 +2251,7 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
       if($fileAttach!="" and file_exists($fileAttach)){
         $phpmailer->addAttachment($fileAttach,$id);
       }else{
-        debugTraceLog("ERROR attachement : ".$id . ' not found');
+        traceLog("ERROR attachement : ".$id . ' not found');
       }
     }
     $phpmailer->Body=$message; //
