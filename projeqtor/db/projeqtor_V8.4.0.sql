@@ -14,7 +14,7 @@ UPDATE `${prefix}menu` SET `sortOrder` = '207' WHERE `menu`.`name` = 'menuProvid
 UPDATE `${prefix}menu` SET `sortOrder` = '208' WHERE `menu`.`name` = 'menuProviderTerm';
 UPDATE `${prefix}menu` SET `sortOrder` = '209' WHERE `menu`.`name` = 'menuProviderBill';
 UPDATE `${prefix}menu` SET `sortOrder` = '210' WHERE `menu`.`name` = 'menuProviderPayment';
-UPDATE ` SET `sortOrder` = '211' WHERE `menu`.`name` = 'menuIndividualExpense';
+UPDATE `${prefix}menu` SET `sortOrder` = '211' WHERE `menu`.`name` = 'menuIndividualExpense';
 UPDATE `${prefix}menu` SET `sortOrder` = '295' WHERE `menu`.`name` = 'menuRiskManagementPlan';
 UPDATE `${prefix}measureunit` SET `sortOrder` = '50' WHERE `measureunit`.`name` = 'month';
 
@@ -254,6 +254,14 @@ CREATE TABLE `${prefix}projectsituation` (
     PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
+CREATE TABLE `${prefix}predefinedsituation` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `idle` int(1) unsigned DEFAULT '0',
+  `text` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
 ALTER TABLE `${prefix}callfortender` ADD `idSituation` int(12) unsigned DEFAULT NULL;
 ALTER TABLE `${prefix}tender` ADD `idSituation` int(12) unsigned DEFAULT NULL;
 ALTER TABLE `${prefix}providerorder` ADD `idSituation` int(12) unsigned DEFAULT NULL;
@@ -266,27 +274,32 @@ INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`id
 (244,'menuSituation',74,'menu', 287,null,1,null),
 (245,'menuProjectSituation',244,'object', 288,'Project',0,'Financial'),
 (246,'menuProjectSituationExpense',244,'object', 289,'Project',0,'Financial'),
-(247,'menuProjectSituationIncome',244,'object', 290,'Project',0,'Financial');
+(247,'menuProjectSituationIncome',244,'object', 290,'Project',0,'Financial'),
+(249,'menuPredefinedSituation',36,'object',898,'ReadWriteList',0,'ListOfValues');
 
 INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES
 (19,'moduleSituation','530',5,0,0);
 
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
+(19,244,0,1),
 (19,245,0,1),
 (19,246,0,1),
-(19,247,0,1);
+(19,247,0,1),
+(19,249,0,1);
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,244,1),
 (1,245,1),
 (1,246,1),
-(1,247,1);
+(1,247,1),
+(1,249,1);
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,244,8),
 (1,245,8),
 (1,246,8),
-(1,247,8);
+(1,247,8),
+(1,249,8);
 
 -- ======================================
 -- Habilitation Other
