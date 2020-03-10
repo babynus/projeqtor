@@ -325,7 +325,7 @@ class ProviderBillMain extends SqlElement {
       }
     }
     if($paramImput == 'HT'){
-      if ($this->discountFrom=='rate' or !$this->untaxedAmount) {
+      if ($this->discountFrom=='rate' or floatval($this->untaxedAmount)==0) {
         $this->discountAmount=round($this->untaxedAmount*$this->discountRate/100,2);
       } else {
         $this->discountRate=round(100*$this->discountAmount/$this->untaxedAmount,2);
@@ -337,7 +337,7 @@ class ProviderBillMain extends SqlElement {
       $this->totalFullAmount=$this->totalUntaxedAmount+$this->totalTaxAmount;
       $this->discountFullAmount=$this->fullAmount-$this->totalFullAmount;    
     }else{
-      if ($this->discountFrom=='rate' or !$this->fullAmount) {
+      if ($this->discountFrom=='rate' or floatval($this->fullAmount)==0) {
         $this->discountFullAmount=round($this->fullAmount*$this->discountRate/100,2);
       } else {
         $this->discountRate=round($this->discountFullAmount/$this->fullAmount,2);
