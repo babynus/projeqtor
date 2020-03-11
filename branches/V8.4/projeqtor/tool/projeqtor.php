@@ -2109,11 +2109,11 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
   $notFound=' not found ';
   if(!empty($attachments)){
     $c=0;
-    $addAttachToMessage="<table style='font-size:12pt;font-weight:bold; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;'><tr><td colspan='3' style='background:#555555;color: #FFFFFF; text-align: center;'>
-        <div >".htmlEncode( i18n('fileAttachment'))."</div></td></tr></table><table style='width:95%;fon-size:14pt'>";
+    $addAttachToMessage="<table style='font-size:10pt;font-weight:bold; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;'><tr><td colspan='3' style='background:#555555;color: #FFFFFF; text-align: center;'>
+        <div >".htmlEncode( i18n('fileAttachment'))."</div></td></tr></table><table style='font-size:9pt; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;'>";
     foreach ($attachments as $val){
       $c++;
-      $addAttachToMessage.="<tr><td colspan='3' style='background:#DDDDDD;font-weight:bold;text-align:right;width:25%;vertical-align: middle;'><div>".$val[1]."&nbsp</div></td>";
+      $addAttachToMessage.="<tr><td colspan='3' style='background:#DDDDDD;font-weight:bold;text-align:right;width:25%;vertical-align: middle;'><div>".i18n('col'.ucfirst($val[1]))."&nbsp</div></td>";
       if($val[1]=='file'){
         $att=new Attachment($val[0]);
         $lstAtt[$att->fileName]=str_replace('${attachmentDirectory}',$directory, $att->subDirectory).$att->fileName;
@@ -5018,7 +5018,7 @@ function octectConvertSize($octet){
 function searchAllAttachmentMailable($objectClass,$idObj){
   $attach= new Attachment();
   $link= new Link();
-  $orderBy="creationDate DESC";
+  $orderBy="creationDate DESC, id ASC ";
   $where="refType='".$objectClass."' and refId=".$idObj." and type='file'";
   $lstAttach=$attach->getSqlElementsFromCriteria(null,null,$where,$orderBy);
   $where="ref2Type='".$objectClass."' and ref2Id=".$idObj." and ref1Type in ('DocumentVersion','Document')";
