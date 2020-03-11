@@ -5018,7 +5018,7 @@ function octectConvertSize($octet){
 function searchAllAttachmentMailable($objectClass,$idObj){
   $attach= new Attachment();
   $link= new Link();
-  $orderBy="creationDate DESC, id ASC ";
+  $orderBy="creationDate DESC,id DESC ";
   $where="refType='".$objectClass."' and refId=".$idObj." and type='file'";
   $lstAttach=$attach->getSqlElementsFromCriteria(null,null,$where,$orderBy);
   $where="ref2Type='".$objectClass."' and ref2Id=".$idObj." and ref1Type in ('DocumentVersion','Document')";
