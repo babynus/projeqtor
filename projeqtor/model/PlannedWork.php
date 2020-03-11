@@ -1533,10 +1533,12 @@ class PlannedWork extends GeneralWork {
     foreach ($fullListPlan as $keyPe=>$pe) {
       if (property_exists($pe, 'fixPlanning') and $pe->fixPlanning) unset($fullListPlan[$keyPe]);
     }
+    //$templateProjectsList=Project::getTemplateList();
     Sql::beginTransaction();
     $cpt=0;
     $query='';
     foreach ($arrayPlannedWork as $pw) {
+      //if (array_key_exists($pw->idProject, $templateProjectsList)) continue; // Do not save planned work for templates
       if ($cpt==0) {
         $query='INSERT into ' . $pw->getDatabaseTableName() 
           . ' (idResource,idProject,refType,refId,idAssignment,work,workDate,day,week,month,year,surbooked,surbookedWork)'
