@@ -34,12 +34,14 @@ class PredefinedSituation extends SqlElement {
   public $id;
   public $name;
   public $idle;
+  public $sortOrder=0;
   public $situation;
 
 	// Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="10%"># ${id}</th>
     <th field="name" width="55%">${name}</th>
+    <th field="sortOrder" width="5%">${sortOrderShort}</th>
     <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
     ';
   
