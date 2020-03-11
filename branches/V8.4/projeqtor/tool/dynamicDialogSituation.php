@@ -141,7 +141,7 @@ $predefinedList = $predefinedSituation->getSqlElementsFromCriteria(array('idle'=
           </tr>
           <tr>
             <td>
-              <label class="dialogLabel" for="situationComment"><?php echo i18n('colComment');?> : </label><br/><br/>
+              <label class="tabLabel" for="situationComment" style="text-align:left;font-weight:normal; width:300px;"><?php echo i18n('colComment');?></label><br/>
          <?php if (getEditorType()=="CK" or getEditorType()=="CKInline") {?>
           <textarea style="width:<?php echo $detailWidth;?>px; height:<?php echo $detailHeight;?>px"
           name="situationComment" id="situationComment"><?php

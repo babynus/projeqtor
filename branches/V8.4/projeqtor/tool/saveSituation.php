@@ -76,8 +76,10 @@ if($action == 'remove'){
   $situation->comment=$situationComment;
   $result=$situation->save();
 }
+// Message of correct saving
+displayLastOperationStatus($result);
 
-$actualSituation = null;
+$actualSituation = new Situation();
 $obj = new $refType($refId);
 $critWhere = array('refType'=>$refType,'refId'=>$refId,'idProject'=>$obj->idProject);
 $situationList = $situation->getSqlElementsFromCriteria($critWhere,null,null, 'date desc');
@@ -91,20 +93,18 @@ if($actualSituation->id and $actualSituation->id != $obj->idSituation){
 	$projectName = SqlList::getNameFromId('Project', $actualSituation->idProject);
 	$projectSituation->name = i18n('ProjectSituation').'-'.$projectName;
 	if($actualSituation->situationType == 'expense'){
-      $projectSituation->refIdExpense = $actualSituation->refId;
-      $projectSituation->refTypeExpense = $actualSituation->refType;
-      $projectSituation->idResourceExpense = $actualSituation->idResource;
-      $projectSituation->situationNameExpense = $actualSituation->name;
-      $projectSituation->situationDateExpense = $actualSituation->date;
+		$projectSituation->refIdExpense = $actualSituation->refId;
+		$projectSituation->refTypeExpense = $actualSituation->refType;
+		$projectSituation->idResourceExpense = $actualSituation->idResource;
+		$projectSituation->situationNameExpense = $actualSituation->name;
+		$projectSituation->situationDateExpense = $actualSituation->date;
 	}else{
-	  $projectSituation->refIdIncome = $actualSituation->refId;
-	  $projectSituation->refTypeIncome = $actualSituation->refType;
-	  $projectSituation->idResourceIncome = $actualSituation->idResource;
-	  $projectSituation->situationNameIncome = $actualSituation->name;
-	  $projectSituation->situationDateIncome = $actualSituation->date;
+		$projectSituation->refIdIncome = $actualSituation->refId;
+		$projectSituation->refTypeIncome = $actualSituation->refType;
+		$projectSituation->idResourceIncome = $actualSituation->idResource;
+		$projectSituation->situationNameIncome = $actualSituation->name;
+		$projectSituation->situationDateIncome = $actualSituation->date;
 	}
 	$projectSituation->save();
 }
-// Message of correct saving
-displayLastOperationStatus($result);
 ?>
