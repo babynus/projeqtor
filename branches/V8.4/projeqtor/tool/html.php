@@ -55,6 +55,16 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
 	   $listBudgetElementary=SqlList::getListWithCrit('Budget',array('elementary'=>'1','isUnderConstruction'=>'0','idle'=>'0','cancelled'=>'0'),'id');
 	  }
 	}
+	//gautier #asset
+	if($col=="idModel"){
+	  $critFld = "idAssetType";
+	  $critVal = $obj->idAssetType;
+	  if(!$obj->idAssetType){
+	    $type = new Type();
+	    $firstTypeAsset = $type->getSqlElementsFromCriteria(array('scope'=>'Asset'),false,null,' sortOrder asc');
+	    $critVal = $firstTypeAsset[0]->id;
+	  }
+	}
 // BEGIN - ADD BY TABARY - POSSIBILITY TO HAVE AT X TIMES SAME idXXXX IN THE SAME OBJECT
     $col = foreignKeyWithoutAlias($col);
 // END - ADD BY TABARY - POSSIBILITY TO HAVE AT X TIMES SAME idXXXX IN THE SAME OBJECT
