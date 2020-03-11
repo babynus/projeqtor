@@ -1380,9 +1380,10 @@ function htmlEncode($val,$context="default") {
   	$str=str_replace('"',"''",$val);
   	return htmlspecialchars($str,ENT_QUOTES,'UTF-8');
   } else if ($context=="title") {
-    //$str=$val;
-    $str=br2nl($val);
+    $str=$val;
+    //$str=br2nl($val);
     if (isTextFieldHtmlFormatted($str)) {
+      $str=str_replace("\n", "", $str);
       $str=htmlspecialchars($str,ENT_QUOTES,'UTF-8');
     } else {
       $str=htmlspecialchars(htmlspecialchars($str,ENT_QUOTES,'UTF-8'),ENT_QUOTES,'UTF-8');
