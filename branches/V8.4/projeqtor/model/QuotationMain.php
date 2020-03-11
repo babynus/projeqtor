@@ -345,7 +345,7 @@ class QuotationMain extends SqlElement {
   public function drawSpecificItem($item, $included=false) {
   	global $print, $comboDetail, $nbColMax;
   	$result = "";
-  	if ($item == 'situation' and ! $comboDetail) {
+  	if ($item == 'situation') {
   		$situation = new Situation();
   		$situation->drawSituationHistory($this);
   	}

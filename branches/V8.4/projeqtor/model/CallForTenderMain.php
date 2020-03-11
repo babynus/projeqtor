@@ -216,7 +216,7 @@ class CallForTenderMain extends SqlElement {
     }
     return $result;
   }
-
+  
   public function copy() {
     $result=parent::copy();
     $newId=Sql::$lastCopyId;
@@ -260,7 +260,7 @@ class CallForTenderMain extends SqlElement {
     if ($item == 'submissions' and ! $comboDetail) {
       $this->drawTenderSubmissionsFromObject();
     }
-    if ($item == 'situation' and ! $comboDetail) {
+    if ($item == 'situation') {
       $situation = new Situation();
       $situation->drawSituationHistory($this);
     }
