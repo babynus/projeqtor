@@ -11160,4 +11160,14 @@ function controlChar (){
 function refreshDataCloningCountDiv(userSelected){
 	loadContent("../tool/refreshDataCloningCountDiv.php?userSelected="+userSelected, "labelDataCloningCountDiv", "addDataCloningForm");
 }
+
+function selectAllCheckBox(val){
+  dojo.query(val).forEach(function(node, index, nodelist) {
+      if(dijit.byId(node.getAttribute('widgetid')).get('checked')){
+        dijit.byId(node.getAttribute('widgetid')).set('checked', false);
+      }else{
+        dijit.byId(node.getAttribute('widgetid')).set('checked', true);
+      }
+    });
+}
 //End
