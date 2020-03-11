@@ -37,18 +37,21 @@ $id = RequestHandler::getId('id');
 $obj = new Asset($id);
 $currentLine = $id;
 
-echo '<table id="assetStructure" align="left" width="95%" style="min-width:400px">';
+echo '<table id="assetStructure" align="left" width="100%" style="min-width:400px">';
 echo '<TR class="ganttHeight" style="height:32px">';
-echo '  <TD class="reportTableHeader" style="width:40%;border-left:0px; text-align: center;">' . i18n('colName') . '</TD>';
-echo '  <TD class="reportTableHeader amountTableHeaderTD" style="width:15%;"  ><div class="amountTableHeaderDiv">' . i18n('colAssetType') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" style="width:15%;" ><div class="amountTableHeaderDiv">' . i18n('colBrand') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader" style="width:20%;border-left:0px; text-align: center;">' . i18n('colName') . '</TD>';
+echo '  <TD class="reportTableHeader amountTableHeaderTD" style="width:13%;"  ><div class="amountTableHeaderDiv">' . i18n('colAssetType') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" style="width:12%;" ><div class="amountTableHeaderDiv">' . i18n('colBrand') . '</div></TD>' ;
 echo '  <TD class="reportTableHeader amountTableHeaderTD" style="width:15%;" ><div class="amountTableHeaderDiv">' . i18n('colModel') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" style="width:15%;" ><div class="amountTableHeaderDiv">' . i18n('colUser') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" style="width:10%;" ><div class="amountTableHeaderDiv">' . i18n('colUser') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" style="width:10%;" ><div class="amountTableHeaderDiv">' . i18n('colSerialNumber') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" style="width:10%;" ><div class="amountTableHeaderDiv">' . i18n('colInventoryNumber') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" style="width:10%;" ><div class="amountTableHeaderDiv">' . i18n('colIdStatus') . '</div></TD>' ;
 echo '</TR>';
 echo '</table>';
 
-echo '<div id="assetStructureListDiv" style="position:relative;height:600px;width:95%;min-width:400px;overflow:auto;">';
-echo '<table id="dndassetStructureList" id="dndassetStructure" align="left" width="100%" style="">';
+echo '<div id="assetStructureListDiv" style="position:relative;height:600px;width:100%;min-width:400px;">';
+echo '<table id="dndassetStructureList" id="dndassetStructure" align="left" width="100%" style="table-layout:fixed;">';
 $parentAsset=array();
 $subAsset=array();
 
@@ -103,29 +106,38 @@ function showAsset($id,$name,$level,$position) {
     getSubAssetList($subList, $subBudget);
       $class = 'ganttExpandOpened';
   }
-  if($currentLine==$item->id) $style='style="color:red;"';
-  echo '<TR id="assetStructureRow_'.$item->id.'"  '.$style.'  height="30px" '.$display.'>';
-  echo '  <TD class="ganttName reportTableData" style="width:40%;max-width:40%;border-right:0px;' . $compStyle . '">';
+  if($currentLine==$item->id){
+    $style='background-color:#ffffaa;';
+  }
+  echo '<TR id="assetStructureRow_'.$item->id.'" height="40px" '.$display.'>';
+  echo '  <TD class="ganttName reportTableData" style="'.$style.'width:20%;max-width:20%;border-right:0px;' . $compStyle . '">';
   echo '    <span>';
   echo '      <table><tr>';
   echo '<TD>';
   if(!$isElementary){
     echo '     <div id="group_'.$item->id.'" class="'.$class.'"';
-    echo '      style="margin-left:'.($level*$padding).'px; position: relative; z-index: 100000;   width:16px; height:13px;"';
+    echo '      style="'.$style.'margin-left:'.($level*$padding).'px; position: relative; z-index: 100000;   width:16px; height:13px;"';
     echo '      onclick="expandAssetGroup(\''.$item->id.'\',\''.implode(',', $limitedSubAsset).'\',\''.implode(',', $subBudget).'\');">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
   }else{
     echo '     <div id="group_'.$item->id.'" ';
-    echo '      style=margin-left:'.($level*$padding).'px; "position: relative; z-index: 100000; width:16px; height:13px;"';
+    echo '      style="'.$style.' margin-left:'.($level*$padding).'px; "position: relative; z-index: 100000; width:16px; height:13px;"';
   }
   echo '</TD>';
-  echo '       <TD style="padding-bottom:5px;"><div class="amountTableDiv">#'.htmlEncode($item->id).'  '.htmlEncode($item->name). '</div></TD>' ;
+  echo '       <TD style="'.$style.'padding-bottom:5px;"><div class="amountTableDiv">#'.htmlEncode($item->id).'  '.htmlEncode($item->name). '</div></TD>' ;
   echo '      </tr></table>';
   echo '    </span>';
   echo '  </TD>';
-  echo '  <TD class="ganttName reportTableData amountTableTD" style="width:15%;"><div class="amountTableDiv">' .SqlList::getNameFromId('Type', $item->idAssetType). '</div></TD>' ;
-  echo '  <TD class="ganttName reportTableData amountTableTD" style="width:15%;"><div class="amountTableDiv">' .SqlList::getNameFromId('Brand', $item->idBrand). '</div></TD>' ;
-  echo '  <TD class="ganttName reportTableData amountTableTD" style="width:15%;"><div class="amountTableDiv">' .SqlList::getNameFromId('Model', $item->idModel). '</div></TD>' ;
-  echo '  <TD class="ganttName reportTableData amountTableTD" style="width:15%;"><div class="amountTableDiv">' .SqlList::getNameFromId('Affectable', $item->idAffectable). '</div></TD>' ;
+  echo '  <TD class="ganttName reportTableData amountTableTD" style="'.$style.'width:13%;overflow:auto;"><div class="amountTableDiv">' .SqlList::getNameFromId('Type', $item->idAssetType). '</div></TD>' ;
+  echo '  <TD class="ganttName reportTableData amountTableTD" style="'.$style.'width:12%;overflow:auto;"><div class="amountTableDiv">' .SqlList::getNameFromId('Brand', $item->idBrand). '</div></TD>' ;
+  echo '  <TD class="ganttName reportTableData amountTableTD" style="'.$style.'width:15%;overflow:auto;"><div class="amountTableDiv">' .SqlList::getNameFromId('Model', $item->idModel). '</div></TD>' ;
+  echo '  <TD class="ganttName reportTableData amountTableTD" style="'.$style.'width:10%;overflow:auto;"><div class="amountTableDiv">' .SqlList::getNameFromId('Affectable', $item->idAffectable). '</div></TD>' ;
+  echo '  <TD class="ganttName reportTableData amountTableTD" style="'.$style.'width:10%;overflow:auto;"><div class="amountTableDiv">' .htmlEncode($item->serialNumber). '</div></TD>' ;
+  echo '  <TD class="ganttName reportTableData amountTableTD" style="'.$style.'width:10%;overflow:auto;"><div class="amountTableDiv">' .htmlEncode($item->inventoryNumber). '</div></TD>' ;
+  $objStatus=new Status($item->idStatus);
+  echo '  <TD class="ganttName  reportTableData amountTableTD" style="width:10%;"><div style="height:100%; overflow:auto;" class="amountTableDiv">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</div></TD>' ;
+  
+  
+  
 }
 
 
