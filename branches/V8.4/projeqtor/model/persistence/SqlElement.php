@@ -4357,7 +4357,9 @@ abstract class SqlElement {
     $result = "";
     $right = "";
     // Manage Exceptions
-    if (get_class ( $this ) == 'Alert' or get_class ( $this ) == 'Mail' or get_class ( $this ) == 'MailToSend' or get_class ( $this ) == 'Audit' or get_class ( $this ) == 'AuditSummary' or get_class ( $this ) == 'ColumnSelector') {
+    if (get_class ( $this ) == 'Alert' or get_class ( $this ) == 'Mail' or get_class ( $this ) == 'MailToSend' 
+     or get_class ( $this ) == 'Audit' or get_class ( $this ) == 'AuditSummary' or get_class ( $this ) == 'ColumnSelector'
+     or get_class ( $this ) == 'ProjectSituation' or get_class ( $this ) == 'ProjectSituationExpense' or get_class ( $this ) == 'ProjectSituationIncome'   ) {
       $right = 'YES';
     } else if (isset ( $cronnedScript ) and $cronnedScript == true) { // Cronned script can do everything
       $right = 'YES';
@@ -4737,7 +4739,9 @@ abstract class SqlElement {
     $result = "";
     $objects = "";
     $right = securityGetAccessRightYesNo ( 'menu' . get_class ( $this ), 'delete', $this );
-    if (get_class ( $this ) == 'Alert' or get_class ( $this ) == 'Mail' or get_class ( $this ) == 'MailToSend' or get_class ( $this ) == 'Audit' or get_class ( $this ) == 'AuditSummary' or get_class ( $this ) == 'ColumnSelector') {
+    if (get_class ( $this ) == 'Alert' or get_class ( $this ) == 'Mail' or get_class ( $this ) == 'MailToSend' 
+     or get_class ( $this ) == 'Audit' or get_class ( $this ) == 'AuditSummary' or get_class ( $this ) == 'ColumnSelector'
+     or get_class ( $this ) == 'ProjectSituation' or get_class ( $this ) == 'ProjectSituationExpense' or get_class ( $this ) == 'ProjectSituationIncome') {
       $right = 'YES';
     }
     if ($right != 'YES') {
