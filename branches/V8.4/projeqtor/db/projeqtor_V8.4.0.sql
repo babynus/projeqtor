@@ -318,8 +318,8 @@ INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`id
 (238,'menuLocation',243,'object', 465,'ReadWriteList',0,'Asset'),
 (239,'menuBrand',243,'object', 461,'ReadWriteList',0,'Asset'),
 (240,'menuModel',243,'object', 463,'ReadWriteList',0,'Asset'),
-(241,'menuAssetCategory',243,'object', 459,'Project',0,'Asset'),
-(248,'menuAssetType',243,'object',460,NULL,0,'Asset Type');
+(241,'menuAssetCategory',243,'object', 460,'Project',0,'Asset'),
+(248,'menuAssetType',243,'object',459,NULL,0,'Asset Type');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,243,1),
