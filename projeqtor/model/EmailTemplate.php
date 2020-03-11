@@ -176,6 +176,8 @@ class EmailTemplate extends SqlElement {
       $newArrayFields['_HISTORYFULL'] = i18n('mailableHistoryFull');
       $newArrayFields['_LINK'] = i18n('mailableLink');
       $newArrayFields['_NOTE'] = i18n('mailableNote');
+      $newArrayFields['_allAttachements'] = i18n('mailableAttachments');
+      $newArrayFields['_lastAttachement'] = i18n('mailableLastAttachments');
       $arrayFields = $newArrayFields;
       $fieldAttributes=$this->getFieldAttributes($item);
       if(strpos($fieldAttributes,'required')!==false) {
@@ -240,4 +242,22 @@ class EmailTemplate extends SqlElement {
       } 
       return "";
     }
+    
+    public function control(){
+      $result="";
+      if(strpos($this->template,'${lastAttachement}')and strpos($this->template, '${allAttachements}')){
+        $result=i18n('onlyOne',array('${lastAttachement}/${allAttachements}'));
+      }else if(mb_substr_count ($this->template,'${lastAttachement}')>1 or mb_substr_count ($this->template, '${allAttachements}')>1){
+        $var='${lastAttachement}';
+        if(strpos($this->template,'${allAttachements}')){
+          $var='${allAttachements}';
+        }
+        $result=i18n('onlyOne',array($var));
+      }      
+      if ($result=="") {
+        $result='OK';
+      }
+      return $result;
+    }
+    
 }
