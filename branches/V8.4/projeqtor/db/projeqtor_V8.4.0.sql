@@ -258,6 +258,7 @@ CREATE TABLE `${prefix}predefinedsituation` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `idle` int(1) unsigned DEFAULT '0',
+  `sortOrder` int(3) unsigned DEFAULT NULL,
   `situation` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
@@ -301,6 +302,8 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (1,247,8),
 (1,249,8);
 
+INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT `profile`.id , 'situation', 1 FROM `profile` where `profile`.profilecode = 'ADM' or `profile`.profilecode = 'PL';
+INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT `profile`.id , 'situation', 2 FROM `profile` where `profile`.profilecode not 'ADM' and `profile`.profilecode != 'PL';
 -- ======================================
 -- Habilitation Other
 -- ======================================
