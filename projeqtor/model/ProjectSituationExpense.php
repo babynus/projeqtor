@@ -30,7 +30,7 @@
 require_once('_securityCheck.php'); 
 class ProjectSituationExpense extends ProjectSituation {
   
-  public $_nbColMax=2;
+  public $_nbColMax=1;
   
   private static $_databaseTableName = 'projectsituation';
 

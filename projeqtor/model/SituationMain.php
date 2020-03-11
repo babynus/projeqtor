@@ -75,11 +75,11 @@ class SituationMain extends SqlElement {
   
   function drawSituationHistory($obj){
   	global $cr, $print, $outMode, $user, $comboDetail;
-  	if ($comboDetail or !$obj->id) {
+  	if (!$obj->id) {
   		return;
   	}
   	$habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>getSessionUser()->getProfile($this->idProject), 'scope'=>'situation'));
-  	if($habil->rightAccess == '2' or $obj->idle){
+  	if($habil->rightAccess == '2' or $obj->idle or $comboDetail){
   	  $canUpdate = false;
   	}else{
   	  $canUpdate = true;
