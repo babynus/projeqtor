@@ -80,6 +80,7 @@ class AssetMain extends SqlElement {
   private static $_fieldsAttributes=array(
       'name'=>'required',
       'idAssetType'=>'required',
+      'idStatus'=>'required',
       "installationDate"=>"nobr",
       "idLocation"=>"nobr",
   );
