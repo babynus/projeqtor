@@ -152,7 +152,7 @@ class AssetMain extends SqlElement {
     $colScript = parent::getValidationScript($colName);
     if ($colName=="idBrand") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  var idBrand=dijit.byId("idModel").get("value");';
+      $colScript .= '  var idModel=dijit.byId("idModel").get("value");';
       $colScript .= '  if(idModel != " "){dijit.byId("idModel").set("value",null);}';
       $colScript .= 'if(dijit.byId("idAssetType").get("value")!= " "){';
       $colScript .= '  refreshList("idModel","idBrand", this.value, null, null, false,"idAssetType",dijit.byId("idAssetType").get("value"));';
