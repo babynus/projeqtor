@@ -71,7 +71,7 @@ if($situation->date){
 }
 $userId = getCurrentUserId();
 $predefinedSituation = new PredefinedSituation();
-$predefinedList = $predefinedSituation->getSqlElementsFromCriteria(array('idle'=>'0'));
+$predefinedList = $predefinedSituation->getSqlElementsFromCriteria(array('idle'=>'0'), null, null, 'sortOrder asc');
 ?>
 <div >
   <table style="width:100%;">
