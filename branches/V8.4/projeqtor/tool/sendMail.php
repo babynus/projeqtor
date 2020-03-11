@@ -266,7 +266,11 @@ if ($result=="OK") {
   echo '<div class="messageWARNING" >'.i18n('mailImpossibleToSend').'</div>';
   echo '<input type="hidden" id="lastOperation" value="mail" />';
   echo '<input type="hidden" id="lastOperationStatus" value="OK" />';
-}else {
+}else if ($result=="ErrorSize"){
+  echo '<div class="messageERROR" >'.i18n('errorAttachmentSize').'</div>';
+  echo '<input type="hidden" id="lastOperation" value="mail" />';
+  echo '<input type="hidden" id="lastOperationStatus" value="ERROR" />';
+}else{
   echo '<div class="messageERROR" >'.i18n('noMailSent', array($dest, $result)).'</div>';
   echo '<input type="hidden" id="lastOperation" value="mail" />';
   echo '<input type="hidden" id="lastOperationStatus" value="ERROR" />';
