@@ -400,7 +400,7 @@ CREATE TABLE `${prefix}brand` (
 PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
-CREATE TABLE `${prefix}assetCategory` (
+CREATE TABLE `${prefix}assetcategory` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(200) DEFAULT NULL,
   `sortOrder` int(3) unsigned DEFAULT NULL,
@@ -408,7 +408,7 @@ CREATE TABLE `${prefix}assetCategory` (
 PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
-INSERT INTO `${prefix}assetCategory` (`name`,`sortOrder`,`idle`) VALUES
+INSERT INTO `${prefix}assetcategory` (`name`,`sortOrder`,`idle`) VALUES
 ('Individual',10,0),
 ('Collective',20,0);
 
@@ -478,3 +478,7 @@ ALTER TABLE `${prefix}employmentcontract` ADD `idOrganization` INT(12) unsigned 
 
 UPDATE `${prefix}employmentcontract` EC SET idTeam=(SELECT idTeam FROM `${prefix}resource` RES WHERE EC.idEmployee = RES.id);
 UPDATE `${prefix}employmentcontract` EC SET idOrganization=(SELECT idOrganization FROM `${prefix}resource` RES WHERE EC.idEmployee = RES.id);
+
+-- Perfs
+
+CREATE INDEX projectSortOrder ON `${prefix}project` (sortOrder);
