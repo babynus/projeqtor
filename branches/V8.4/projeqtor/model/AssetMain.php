@@ -152,14 +152,31 @@ class AssetMain extends SqlElement {
     $colScript = parent::getValidationScript($colName);
     if ($colName=="idBrand") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  var idBrand=dijit.byId("idBrand").get("value");';
-      $colScript .= '  if(idBrand == " "){dijit.byId("idModel").set("value",null);}';
+      $colScript .= '  var idBrand=dijit.byId("idModel").get("value");';
+      $colScript .= '  if(idModel != " "){dijit.byId("idModel").set("value",null);}';
+      $colScript .= 'if(dijit.byId("idAssetType").get("value")!= " "){';
+      $colScript .= '  refreshList("idModel","idBrand", this.value, null, null, false,"idAssetType",dijit.byId("idAssetType").get("value"));';
+      $colScript .= '}else{';
       $colScript .= '  refreshList("idModel","idBrand", this.value, null, null, false);';
+      $colScript .= '}';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
     }elseif($colName=="idAssetType"){
       $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= 'if(dijit.byId("idBrand").get("value")!= " "){';
+      $colScript .= '  refreshList("idModel","idAssetType", this.value, null, null, false, "idBrand",dijit.byId("idBrand").get("value"));';
+      $colScript .= '}else{';
       $colScript .= '  refreshList("idModel","idAssetType", this.value, null, null, false);';
+      $colScript .= '}';
+      $colScript .= '  formChanged();';
+      $colScript .= '</script>';
+    }elseif($colName=="idModel"){
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= 'if(dijit.byId("idBrand").get("value")!= " "){';
+      $colScript .= '  refreshList("idModel","idAssetType", dijit.byId("idAssetType").get("value"), null, null, false, "idBrand",dijit.byId("idBrand").get("value"));';
+      $colScript .= '}else{';
+      $colScript .= '  refreshList("idModel","idAssetType", dijit.byId("idAssetType").get("value"), null, null, false);';
+      $colScript .= '}';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
     }

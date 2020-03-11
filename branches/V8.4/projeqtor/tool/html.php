@@ -815,6 +815,10 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
   $group=null;
 // MTY - LEAVE SYSTEM
   foreach($table as $key => $val) {
+    
+    if($col =="idAsset"){
+      if($key== $obj->id)continue;
+    }
 // MTY - LEAVE SYSTEM
     if ($col=="planning" and isLeavesSystemActiv()) {
     // Don't show the leave system project
