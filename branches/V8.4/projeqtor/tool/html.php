@@ -1500,7 +1500,7 @@ function getResultMessage($result) {
  * @param $mimeType the textual mimeType
  * @return formated html mimeType, as an image
  */
-function htmlGetMimeType($mimeType,$fileName, $id=null, $type='Attachment') {
+function htmlGetMimeType($mimeType,$fileName, $id=null, $type='Attachment',$float="float:left") {
     $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
     if (file_exists("../view/img/mime/$ext.png")) {
       $img="../view/img/mime/$ext.png";
@@ -1510,10 +1510,10 @@ function htmlGetMimeType($mimeType,$fileName, $id=null, $type='Attachment') {
     $image='<img src="' . $img . '" title="' . $mimeType . '" ';
     //or $ext=='msg' or $ext=='emg'
     if ($id and ($ext=="htm" or $ext=="html" or $ext=="pdf" or $ext=="txt" or $ext=="log" )) {
-    	$image.=' style="cursor:pointer;float:left;" onClick="showHtml(\''.$id.'\',\''.htmlEncode($fileName,'quotes').'\',\''.$type.'\')" ';
+    	$image.=' style="cursor:pointer;'.$float.';" onClick="showHtml(\''.$id.'\',\''.htmlEncode($fileName,'quotes').'\',\''.$type.'\')" ';
     }
     else {
-      $image.=' style="float:left;opacity: 0.4;filter: alpha(opacity=40);" ';
+      $image.=' style="'.$float.';opacity: 0.4;filter: alpha(opacity=40);" ';
     }
     $image.='/>&nbsp;';
   return $image;

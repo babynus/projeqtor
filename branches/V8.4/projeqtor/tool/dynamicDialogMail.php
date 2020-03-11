@@ -317,10 +317,14 @@ if($paramMailerType=='phpmailer'){
         <div id='showAttachement' style="position:relative;top:10px;width:98%;left:2%;">
           <table style='width:100%;font-size:12px;'>
             <tr>
-              <td class='assignHeader' style='width:40%'><?php echo i18n('sectionAttachment').":&nbsp;";?></td>
+              <td class='assignHeader' style='width:40%'><?php echo i18n('sectionAttachment')."&nbsp;";?></td>
               <td class='assignHeader' style='width:20%'><?php echo i18n('dashboardTicketMainTitleType');?></td>
               <td class='assignHeader' style='width:15%'><?php echo i18n('FileSize');?></td>
-              <td class='assignHeader' style='width:25%'><?php echo i18n('DocumentVersion');?></td>
+              <?php 
+              if(!empty($lstDoc)){
+                echo " <td class='assignHeader' style='width:25%'></td>";
+              }
+              ?>
             </tr>
             <?php 
               foreach($lstAttach as $attached){
@@ -329,48 +333,70 @@ if($paramMailerType=='phpmailer'){
                 }
                 echo "<tr>";
                 echo "<td class='assignData verticalCenterData'><div id='dialogMail".$attached->fileName."' name='dialogMail".$attached->fileName."'  dojoType='dijit.form.CheckBox' type='checkbox' onclick='showAttachedSize(".json_encode($attached->fileSize).",".json_encode($attached->fileName).",".json_encode($attached->id).",".json_encode($attached->type).");'></div>&nbsp;".$attached->fileName."</td>";
-                echo " <td class='assignData verticalCenterData' style='text-align:center;'>$attached->type</td>";
+                echo " <td class='assignData verticalCenterData' style='text-align:center;'>";
+                if ($attached->isThumbable()) {
+                  $ext=pathinfo($attached->fileName, PATHINFO_EXTENSION);
+                  if (file_exists("../view/img/mime/$ext.png")) {
+                    $img="../view/img/mime/$ext.png";
+                  } else {
+                    $img="../view/img/mime/unknown.png";
+                  }
+                  echo '<img src="'.$img.'" '.' title="'.htmlEncode($attached->fileName).'" style="float:center;cursor:pointer"'.' onClick="showImage(\'Attachment\',\''.htmlEncode($attached->id).'\',\''.htmlEncode($attached->fileName, 'protectQuotes').'\');" />';
+                } else {
+                  echo htmlGetMimeType($attached->mimeType, $attached->fileName, $attached->id,'Attachment',"float:center");
+                }
+                echo "</td>";
                 echo " <td class='assignData verticalCenterData' style='text-align:center;'>".octectConvertSize($attached->fileSize)."</td>";
-                echo " <td class='assignData verticalCenterData'></td>";
+                if(!empty($lstDoc)){
+                 echo " <td class='assignData verticalCenterData' style='text-align:center;'></td>";
+                }
                 echo " </tr>";
               }
               if(!empty($lstDoc)){
               echo "<tr>";
-              echo "<td class='assignHeader' >".i18n('Document').":&nbsp;</td>";
+              echo "<td class='assignHeader' >".i18n('Document')."&nbsp;</td>";
               echo "<td class='assignHeader'></td>";
               echo "<td class='assignHeader'></td>";
-              echo "<td class='assignHeader'></td>";
+              echo "<td class='assignHeader'  style='width:25%'>".i18n('DocumentVersion')."</td>";
               echo "</tr>";
                 foreach($lstDoc as $document){
+                   $filsize=0;
                    if($document->ref1Type=='DocumentVersion'){
                       $docV= new DocumentVersion($document->ref1Id);
                       $name=$docV->fullName;
-                      $filsize=$docV->fileSize;
+                      $filsizeRef=$docV->fileSize;
                       $docId=$docV->id;
                    }else{
                      $doc= new Document($document->ref1Id);
+                     if($doc->idDocumentVersionRef=="" and $doc->idDocumentVersion==""){
+                        continue;
+                     }
                      $vers='';
                      $name=$doc->name;
-                     $docId=$doc->idDocumentVersionRef;
-                     $docVersRf=new DocumentVersion($doc->idDocumentVersionRef);
-                     $filsizeRef=($docVersRf->fileSize=='')?'-':$docVersRf->fileSize;
+                     $docId=(($doc->idDocumentVersionRef!='')?$doc->idDocumentVersionRef:$doc->idDocumentVersion);
+                     $docVersRf=new DocumentVersion($docId);
+                     $filsizeRef=(($docVersRf->fileSize=='')?'-':$docVersRf->fileSize);
                      if($doc->idDocumentVersion!=''){
                       $docVers=new DocumentVersion($doc->idDocumentVersion);
                       $docIdV=$docVers->id;
-                      $filsize=($docVers->fileSize=='')?'-':$docVers->fileSize;
+                      $filsize=(($docVers->fileSize=='')?'-':$docVers->fileSize);
                       $vers=$docVers->name;
                      }
                      $versRef=$docVersRf->name;
+                     if($versRef=="" and $vers!=""){
+                       $versRef=$vers;
+                       $filsizeRef=$filsize;
+                     }
                      $type='DocumentVersion';
                   }
                   echo "<tr>";
                   echo "<td class='assignData verticalCenterData'><input   id='addVersion".$name."' hidden value='$docId' />";
-                  echo "     <input   id='filesizeNoConvert".$name."' hidden value='".$filsizeRef."' />";
+                  echo "<input   id='filesizeNoConvert".$name."' hidden value='".$filsizeRef."' />";
                   echo "<div id='dialogMail".$name."' name='dialogMail".$name."'  dojoType='dijit.form.CheckBox' type='checkbox'  onclick='showAttachedSize(dojo.byId(\"filesizeNoConvert".$name."\").value,".json_encode($name).",dojo.byId(\"addVersion".$name."\").value,".json_encode($type).");' ></div>&nbsp;".$name."</td>";
                   echo " <td class='assignData verticalCenterData' style='text-align:center;'>$document->ref1Type</td>";
                   echo " <td class='assignData verticalCenterData' style='text-align:center;'>";
                   echo "     <input readonly class='assignData verticalCenterData'  id='filesize".$name."' style='border:none;;position:relative;text-align: center;' value='".octectConvertSize($filsizeRef)."' /></td>";
-                  if($document->ref1Type!='DocumentVersion'){
+                  if($document->ref1Type!='DocumentVersion' and $versRef!==$vers ){
                     echo "<td class='assignData verticalCenterData'>";
                     echo " <input name='v1_".$name."' id='v1_".$name."'  class='input'  hidden value='$filsizeRef' />";
                     echo " <input name='idDocRef".$name."' id='idDocRef".$name."'  class='input'  hidden value='$docId' />";
