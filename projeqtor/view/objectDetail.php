@@ -6875,7 +6875,7 @@ function drawProjectSituation($type, $obj){
          echo '<tr>';
            echo '<td style="padding-right: 5px;width:5%;">'.formatIcon($class, "16").'</td>';
            echo '<td style="width:75%;">'.htmlEncode(i18n($class)).' #'.htmlEncode($element->id).' - '.htmlEncode($element->name).'</td>';
-           echo '<td style="width:5%;"><div style="padding-left: 15px;" onClick="gotoElement(\''.$element->id.'\',\''.htmlEncode($class).'\');">'.formatSmallButton('Goto', true).'</div></td>';
+           echo '<td style="width:5%;"><div style="padding-left: 15px;" onClick="gotoElement(\''.htmlEncode($class).'\',\''.$element->id.'\');">'.formatSmallButton('Goto', true).'</div></td>';
            echo '<td style="width:5%;"><div style="padding-left: 5px;" class="iconView roundedButtonSmall" onclick="showDetail(\'situation'.$type.'\',0,\''.$class.'\',false,\''.$element->id.'\',false)"></div></td>';
          echo '</tr>';
        echo '</table>';
@@ -8344,6 +8344,7 @@ function endBuffering($prevSection, $included) {
       'receivers'=>array('3'=>'bottom', '3'=>'extra','99'=>'treatment'), 
       'resourcesofobject'=>array('2'=>'bottom', '3'=>'extra','99'=>'resources'), 
       'resourcecost'=>array('2'=>'right', '3'=>'extra','99'=>'detail'),
+      'situation'=>array('2'=>'right', '3'=>'extra','99'=>'detail'),
       'situationexpense'=>array('2'=>'left', '3'=>'right','99'=>'detail'),
       'situationincome'=>array('2'=>'right', '3'=>'right','99'=>'detail'),
       'subprojects'=>array('2'=>'right', '3'=>'right','99'=>'dependency'),

@@ -2037,6 +2037,9 @@ abstract class SqlElement {
     if (property_exists ( $newObj, "idRunStatus" )) {
       $newObj->idRunStatus = 5;
     }
+    if (property_exists ( $newObj, "idSituation" )) {
+    	$newObj->idSituation = null;
+    }
     foreach ( $newObj as $col_name => $col_value ) {
       if (ucfirst ( $col_name ) == $col_name) {
         // if property is an object, delete it
