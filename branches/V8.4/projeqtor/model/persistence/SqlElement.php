@@ -5253,6 +5253,7 @@ abstract class SqlElement {
         $tempRes=$temp->save();
         $resultMail[]='TEMP';
       } else { 
+        $tempAttach='No';
         if ($emailTemplateTab[$j]->name == 'basic') {
           $emailTemplateTab[$j]->template = $this->getMailDetail();
           if ($directStatusMail and isset ( $directStatusMail->message )) {
@@ -5265,45 +5266,25 @@ abstract class SqlElement {
               $emailTemplateTab[$j]->template . '</body></html>';
         } else {
           //florent #4442
-          if(strpos($emailTemplateTab[$j]->template,'${LastAttachement}')!==false){
-            $attachments[]=explode('_',$this->searchLastAttachmentMailable());
-          }else if(strpos($emailTemplateTab[$j]->template,'${AllAttachements}')!==false){
-            $maxSizeAttachment=Parameter::getGlobalParameter('paramAttachmentMaxSizeMail');
-            if($maxSizeAttachment==''){
-              $maxSizeAttachment=0;
-            }
-            $allAttach=searchAllAttachmentMailable(get_class($this),$this->id);
-            $lstAttach=$allAttach[0];
-            $lstDoc=$allAttach[1];
-            $attachments=array();
-            $size=0;
-            foreach ($lstAttach as $att){
-              $size+=$att->fileSize;
-              $attachments[]= array($att->id,'file');
-            }
-            foreach ($lstDoc as $document){
-              if($document->ref1Type=='DocumentVersion'){
-                $doc= new DocumentVersion($document->ref1Id);
-                $attachments[]=array($doc->id,'DocumentVersion');
-                $addSize=$doc->fileSize;
-              }else{
-                $doc= new Document($document->ref1Id);
-                $attachments[]=array($doc->idDocumentVersionRef ,'DocumentVersion');
-                if($doc->idDocumentVersion!=''){
-                  $attachments[]=array($doc->idDocumentVersion,'DocumentVersion');
-                  $docV=new DocumentVersion($doc->idDocumentVersion);
-                  $addSize=$docV->fileSize;
-                }else{
-                  $docR=new DocumentVersion($doc->idDocumentVersionRef);
-                  $addSize=$docR->fileSize;
-                }
-              }
-              debugLog($addSize);
-              $size+=$addSize;
-            }
-            debugLog($size.'   '.$maxSizeAttachment);
-            if($size > $maxSizeAttachment){
-              return array('result' => 'Fail', 'dest' => $destTab[$idTemplate]);
+          $tempAttach='Yes';
+          $maxSizeAttachment=Parameter::getGlobalParameter('paramAttachmentMaxSizeMail');
+          if($maxSizeAttachment==''){
+            $maxSizeAttachment=0;
+          }
+          if(strpos($emailTemplateTab[$j]->template,'${lastAttachement}')!==false){
+            $valueAttach=explode('/',$this->searchLastAttachmentMailable());
+            $fileSize=$valueAttach[1];
+            if($fileSize < $maxSizeAttachment){
+              $attachments[]=explode('_',$valueAttach[0]);
+            }else{
+              return array('result' => 'ErrorSize','dest'=>"");
+            } 
+          }else if(strpos($emailTemplateTab[$j]->template,'${allAttachements}')!==false){
+            $res=$this->searchAllAttachementsMailable($maxSizeAttachment);
+            $attachments=$res['attachements'];
+            $erroSize=($res['result']!='Ok')?i18n('toLargeAllNotAttached'):'';
+            if(empty($attachments)){
+              return array('result' => 'ErrorSize','dest'=>"");
             }
           }
           //
@@ -5314,10 +5295,9 @@ abstract class SqlElement {
             $emailTemplateTab[$j]->title = $this->getMailDetailFromTemplate($emailTemplateTab[$j]->title,null,true);
           }
         }
-        debugLog($attachments);
         $resultMail[] = sendMail($destTab[$emailTemplateTab[$j]->id], $emailTemplateTab[$j]->title,
             $emailTemplateTab[$j]->template,
-            $this, null, $sender, null, null, $references,false,false,$attachments);
+            $this, null, $sender, null, null, $references,false,false,$attachments,$erroSize,$tempAttach);
       }
       
     }
@@ -6165,9 +6145,9 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
         return $this->getLinksHtmlTab();
       } else if ($property == 'NOTE') {
         return $this->getNotesHtmlTab();
-      } else if ($property == 'AllAttachements') {
+      } else if ($property == 'allAttachements') {
         return;
-      } else if ($property == 'LastAttachement') {
+      } else if ($property == 'lastAttachement') {
       	return;
       }
        else {
@@ -7457,42 +7437,39 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
   public  function searchLastAttachmentMailable (){
     $allAttach=searchAllAttachmentMailable(get_class($this),$this->id);
     $lstAttach=$allAttach[0];
-    $lstDoc=$allAttach[1];
     if(!empty($lstAttach))$att=$lstAttach[0];
-    if(!empty($lstDoc))$doc=$lstDoc[0];
-    if(isset($doc) and isset($att)){
-      if(new DateTime($doc->creationDate) > new DateTime($att->creationDate)){
-        if($doc->ref1Type=='DocumentVersion'){
-          $document= new DocumentVersion($doc->ref1Id);
-          $name=$document->id.'_DocumentVersion';
-        }else{
-          $document= new Document($doc->ref1Id);
-          $name=$document->idDocumentVersionRef .'_DocumentVersion';
-          if($document->idDocumentVersion!=''){
-            $name=$document->idDocumentVersion.'_DocumentVersion';
-          }
-        }
-        return $name;
-      }else{
-        return $name=$att->id.'_file';
+    if(isset($att)){
+      if($att->idPrivacy==1){
+        return $name=$att->id.'_file/'.(($att->fileSize!='')?$att->fileSize:0);
       }
-    }else if(isset($att)){
-      return $name=$att->id.'_file';
-    }else if(isset($doc)) {
-      if($doc->ref1Type=='DocumentVersion'){
-        $document= new DocumentVersion($doc->ref1Id);
-        $name=$document->id.'_DocumentVersion';
-      }else{
-        $document= new Document($doc->ref1Id);
-        $name=$document->idDocumentVersionRef .'_DocumentVersion';
-        if($document->idDocumentVersion!=''){
-          $name=$document->idDocumentVersion.'_DocumentVersion';
-        }
-      }
-      return $name;
     }else {
-      return ;
+      return;
     }
+  }
+  public function searchAllAttachementsMailable($maxSizeAttachment){
+    $allAttach=searchAllAttachmentMailable(get_class($this),$this->id);
+    $lstAttach=$allAttach[0];
+    $attachments=array();
+    $size=0;
+    $c=0;
+    $message='Ok';
+    foreach ($lstAttach as $att){
+      $c++;
+      if($att->idPrivacy==1){
+        $size+=($att->fileSize!='')?$att->fileSize:0;
+        if($size > $maxSizeAttachment ){
+          break;
+        }else{
+          $attachments[]= array($att->id,'file');
+        }
+      }else{
+        continue;
+      }
+    }
+    if (count($lstAttach)!=$c){
+      $message='Fail';
+    }
+    return array('attachements'=>$attachments,'result'=>$message);
   }
   //
 }

@@ -53,25 +53,20 @@ if ($habil) {
     $displayComboButton=true;
   }
 }
-
+//florent #4442
 if($paramMailerType=='phpmailer'){
-$attach= new Attachment();
-$link= new Link();
-$where="refType='".$objectClass."' and refId=".$obj->id." and type='file'";
-$orderBy="creationDate ASC";
-$lstAttach=$attach->getSqlElementsFromCriteria(null,null,$where,$orderBy);
-$where="ref2Type='".$objectClass."' and ref2Id=".$obj->id." and ref1Type in ('DocumentVersion','Document')";
-$lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
+  $lstAllAttach=searchAllAttachmentMailable($objectClass,$obj->id);
+  $currentUser=new Resource(getCurrentUserId());
+  $lstAttach=$lstAllAttach[0];
+  $lstDoc=$lstAllAttach[1];
   $maxSizeAttachment=Parameter::getGlobalParameter('paramAttachmentMaxSizeMail');
   if($maxSizeAttachment==''){
     $maxSizeAttachment=0;
   }
   $maxSize=$maxSizeAttachment;
   $maxSizeAttachment=octectConvertSize($maxSize);
-
-  
 }
-
+//
 
 
 ?>
@@ -297,7 +292,10 @@ $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
       </td>
     </tr>
   </table> 
-  <?php if(!empty($lstAttach) or !empty($lstDoc)){?>
+  <?php 
+  //florent #4442
+    if(!empty($lstAttach) or !empty($lstDoc)){ 
+  ?>
   <table style="width:100%;">
     <tr>
       <td>
@@ -326,6 +324,9 @@ $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
             </tr>
             <?php 
               foreach($lstAttach as $attached){
+                if(($attached->idPrivacy==3 and $attached->idUser!=$currentUser->id) or ($attached->idPrivacy==2 and $attached->idTeam!=$currentUser->idTeam)){
+                   continue;
+                }
                 echo "<tr>";
                 echo "<td class='assignData verticalCenterData'><div id='dialogMail".$attached->fileName."' name='dialogMail".$attached->fileName."'  dojoType='dijit.form.CheckBox' type='checkbox' onclick='showAttachedSize(".json_encode($attached->fileSize).",".json_encode($attached->fileName).",".json_encode($attached->id).",".json_encode($attached->type).");'></div>&nbsp;".$attached->fileName."</td>";
                 echo " <td class='assignData verticalCenterData' style='text-align:center;'>$attached->type</td>";
@@ -390,7 +391,7 @@ $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
         </td>
       </tr>
     </table>
-<?php }?>
+<?php } //?>
   <br/>
 </form>   
 

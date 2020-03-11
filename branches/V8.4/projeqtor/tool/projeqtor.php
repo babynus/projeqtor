@@ -2038,7 +2038,7 @@ function getTheme() {
  *          main body of the message
  * @return unknown_type
  */
-function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $boundary=null, $references=null,$canSend=false,$autoSendReport=false,$attachments) {
+function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $boundary=null, $references=null,$canSend=false,$autoSendReport=false,$attachments=false,$erroSize=false,$tempAttach=false) {
   // Code that caals sendMail :
   // + SqlElement::sendMailIfMailable() : sendMail($dest, $title, $message, $this)
   // + Cron::checkImport() : sendMail($to, $title, $message, null, null, null, $attachmentsArray, $boundary); !!! with attachments
@@ -2068,7 +2068,7 @@ function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sen
   }
   if (!isset($paramMailerType) or $paramMailerType=='' or $paramMailerType=='phpmailer') {
     // Cute method using PHPMailer : should work on all situations / First implementation on V4.0
-    return sendMail_phpmailer($to, $subject, $messageBody, $object, $headers, $sender, $attachmentsArray, $references,false,$autoSendReport,$attachments);
+    return sendMail_phpmailer($to, $subject, $messageBody, $object, $headers, $sender, $attachmentsArray, $references,false,$autoSendReport,$attachments,$erroSize,$tempAttach);
   } else {
     $messageBody=wordwrap($messageBody, 70);
     if ((isset($paramMailerType) and $paramMailerType=='mail') or !$paramMailSmtpUsername or !$paramMailSmtpPassword) {
@@ -2081,7 +2081,7 @@ function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sen
   }
 }
 
-function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $references=null,$canSend=false,$autoSendReport,$attachments) {
+function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, $sender=null, $attachmentsArray=null, $references=null,$canSend=false,$autoSendReport,$attachments=false,$erroSize=false,$tempAttach=false) {
   scriptLog('sendMail_phpmailer');
   global $logLevel;
   $paramMailSender=Parameter::getGlobalParameter('paramMailSender');
@@ -2134,6 +2134,12 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
     }
   }
   $addAttachToMessage.="</tr></table>;";
+  if($tempAttach=='Yes'){
+    $addAttachToMessage="";
+    if($erroSize!=''){
+      $addAttachToMessage="<div style='color:red;'>".$erroSize."</div>";
+    }
+  }
   $message.=$addAttachToMessage;
   //
   $mail=new Mail();
@@ -4994,6 +5000,7 @@ function array_insert_before($array, $item, $position) {
   return $result;
 }
 
+//florent #4442
 function octectConvertSize($octet){
   if($octet!=0 and $octet!='' and $octet!='-'){
     $def = [[1, ' octets'], [1024, ' ko'], [1024*1024, ' Mo'], [1024*1024*1024, ' Go'], [1024*1024*1024*1024, ' To']];
@@ -5007,3 +5014,22 @@ function octectConvertSize($octet){
       return $res=i18n('errorNotFoundAttachement');
   }
 }
+
+function searchAllAttachmentMailable($objectClass,$idObj){
+  $attach= new Attachment();
+  $link= new Link();
+  $orderBy="creationDate DESC";
+  $where="refType='".$objectClass."' and refId=".$idObj." and type='file'";
+  $lstAttach=$attach->getSqlElementsFromCriteria(null,null,$where,$orderBy);
+  $where="ref2Type='".$objectClass."' and ref2Id=".$idObj." and ref1Type in ('DocumentVersion','Document')";
+  $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
+  $c=0;
+  foreach ($lstDoc as $linkdoc){
+    $c++;
+    if(!securityCheckDisplayMenu(null, get_class($linkdoc)) and securityGetAccessRightYesNo('menu'.get_class($linkdoc), 'read', $linkdoc)!="YES"){
+      unset($lstDoc[$c]);
+    }
+  }
+  return array($lstAttach, $lstDoc);
+}
+//
