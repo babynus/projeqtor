@@ -5254,6 +5254,7 @@ abstract class SqlElement {
         $resultMail[]='TEMP';
       } else { 
         $tempAttach='No';
+        $erroSize='';
         if ($emailTemplateTab[$j]->name == 'basic') {
           $emailTemplateTab[$j]->template = $this->getMailDetail();
           if ($directStatusMail and isset ( $directStatusMail->message )) {
