@@ -281,11 +281,11 @@ INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active
 (19,'moduleSituation','530',5,0,0);
 
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
-(19,244,0,1),
-(19,245,0,1),
-(19,246,0,1),
-(19,247,0,1),
-(19,249,0,1);
+(19,244,0,0),
+(19,245,0,0),
+(19,246,0,0),
+(19,247,0,0),
+(19,249,0,0);
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,244,1),

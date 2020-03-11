@@ -30,10 +30,10 @@
 
 require_once "../tool/projeqtor.php";
 $id=$_REQUEST['id'];
-$txt=new PredefinedSituation($id); // validated to be numeric value in SqlElement base constructor.
+$situation=new PredefinedSituation($id); // validated to be numeric value in SqlElement base constructor.
 if (getEditorType()=="text"){
-	$text=new Html2Text($txt->text);
+	$situation=new Html2Text($situation->situation);
   echo $text->getText();
 } else  {
-  echo $txt->text;
+  echo $situation->situation;
 }

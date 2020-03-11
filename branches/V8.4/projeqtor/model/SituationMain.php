@@ -42,6 +42,8 @@ class SituationMain extends SqlElement {
   public $comment;
   public $idle;
   
+  private static $_colCaptionTransposition = array('name'=>'situation');
+  
   /** ==========================================================================
    * Constructor
    * @param $id the id of the object in the database (null if not stored yet)
@@ -63,13 +65,21 @@ class SituationMain extends SqlElement {
   	return parent::save();
   }
   
+  /** ============================================================================
+   * Return the specific colCaptionTransposition
+   * @return the colCaptionTransposition
+   */
+  protected function getStaticColCaptionTransposition($fld=null) {
+  	return self::$_colCaptionTransposition;
+  }
+  
   function drawSituationHistory($obj){
   	global $cr, $print, $outMode, $user, $comboDetail;
   	if ($comboDetail or !$obj->id) {
   		return;
   	}
   	$habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>getSessionUser()->getProfile($this->idProject), 'scope'=>'situation'));
-  	if($habil->rightAccess == '2'){
+  	if($habil->rightAccess == '2' or $obj->idle){
   	  $canUpdate = false;
   	}else{
   	  $canUpdate = true;
