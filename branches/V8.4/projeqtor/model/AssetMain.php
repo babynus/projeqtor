@@ -156,6 +156,11 @@ class AssetMain extends SqlElement {
       $colScript .= '  refreshList("idModel","idBrand", this.value, null, null, false);';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
+    }elseif($colName=="idAssetType"){
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  refreshList("idModel","idAssetType", this.value, null, null, false);';
+      $colScript .= '  formChanged();';
+      $colScript .= '</script>';
     }
     return $colScript;
   }
