@@ -69,15 +69,15 @@ if (isset($obj)) {
   $extraReadonlyFields=$obj->getExtraReadonlyFields();      
   $canUpdateStatus = ( ( $obj->isAttributeSetToField('idStatus','readonly') or in_array('idStatus',$extraReadonlyFields))?false:true);
   ?>
-  <div style="float:left;display:table-cell ;width:130px;height:35px;vertical-align:middle;position:relative;z-index:99998;">
-    <div style="white-space:normal;width:133px;max-width:133px;height:39px;max-height:39px;display:table-cell;padding:0px 4px;vertical-align: middle;zoom:0.9;-moz-transform: scale(0.9);overflow:hidden;position:absolute;<?php if ($updateRight and $canUpdateStatus) echo "cursor:pointer;";?>"
+  <div style="float:left;display:table-cell ;top:0px;width:130px;height:35px;vertical-align:middle;position:relative;z-index:99998;">
+    <div style="white-space:normal;width:133px;max-width:133px;<?php echo (isFF())?'height:35px;':'height:39px;';?>max-height:39px;display:table-cell;padding:0px 4px;vertical-align: middle;zoom:0.9;-moz-transform: scale(0.9);overflow:hidden;position:absolute;<?php if ($updateRight and $canUpdateStatus) echo "cursor:pointer;";?>"
     <?php if ($updateRight and $canUpdateStatus) {?> onClick="showDirectChangeStatus();" title="<?php echo i18n('moveStatusBar');?>" <?php }?> >
     <?php if ($obj->idStatus) {
     	$status=new Status($obj->idStatus);
     	echo colorNameFormatter($status->name."#split#".$status->color);
     }?>
     </div>
-    <div class="statusBar" id="directChangeStatusDiv" style="white-space:normal;display:none;position:absolute;width:133px;zoom:0.9; -moz-transform: scale(0.9);padding:0px 4px 4px 4px;">
+    <div class="statusBar" id="directChangeStatusDiv" style="<?php echo (isFF())?'top:-15px;':'';?>white-space:normal;display:none;position:absolute;width:133px;zoom:0.9; -moz-transform: scale(0.9);padding:0px 4px 4px 4px;">
       <?php 
       $tmpClass=$objectClass;
       if ($tmpClass=='TicketSimple') $tmpClass='Ticket';
@@ -153,7 +153,7 @@ if (isset($obj)) {
     		}
     	}
     	foreach ($table as $stId=>$stName) {
-    		echo '<div style="padding-top:4px;'.(($stId==$obj->idStatus)?'" onClick="hideDirectChangeStatus();"':'cursor:pointer;" onClick="dijit.byId(\'idStatus\').set(\'value\','.$stId.');setTimeout(\'saveObject()\',100);" ').' >';
+    		echo '<div style="padding-top:4px;min-height:20px;height:32px;position:relative;'.(($stId==$obj->idStatus)?'" onClick="hideDirectChangeStatus();"':'cursor:pointer;" onClick="dijit.byId(\'idStatus\').set(\'value\','.$stId.');setTimeout(\'saveObject()\',100);" ').' >';
     		echo colorNameFormatter($stName."#split#".(($stId==$obj->idStatus)?'transparent':SqlList::getFieldFromId('Status', $stId, 'color')),-1,'32');
     		echo '</div>';
     	}
@@ -161,8 +161,8 @@ if (isset($obj)) {
     </div>
   </div>
   <?php }?>
-  <div style="boder:1px solid red;position:relative;top:0px">
-  <div style="float:left;<?php if($displayWidthButtonCI<800) echo 'display:none;'?>">
+  <div style="position:relative;top:0px;">
+  <div style="float:left;margin-left:5px;<?php if($displayWidthButtonCI<800) echo 'display:none;'?>">
   <?php 
   if (property_exists ( $obj, 'lastUpdateDateTime' ) && $obj->lastUpdateDateTime) {
     echo formatDateThumb(null,$obj->lastUpdateDateTime,'left',32,'Update');
