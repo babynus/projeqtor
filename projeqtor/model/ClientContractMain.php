@@ -425,7 +425,7 @@ class ClientContractMain extends SqlElement {
       $colScript .= '</script>';
     }else if ($colName=="idClient") {
 			$colScript .= '<script type="dojo/connect" event="onChange" >';
-			$colScript .= '  refreshList("idContactContract", "idClient", this.value, null, null, false);';
+			$colScript .= '  refreshList("idContact", "idClient", this.value, null, null, false);';
 			$colScript .= '  formChanged();';
 			$colScript .= '</script>';
 	}
