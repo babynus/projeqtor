@@ -59,25 +59,38 @@ INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
  (7,235,0,1),
  (7,236,1,1);
  
+ INSERT INTO `${prefix}checklistable` (`id`,`name`, `idle`) VALUES 
+(34,'ChangeRequest', '0')
+(35,'SupplierContract', '0'),
+(36,'ClientContract', '0'),
+(37,'Asset','0');
+
+INSERT INTO `${prefix}notifiable` (`id`,`name`, `idle`) VALUES 
+(34,'ChangeRequest', '0')
+(35,'SupplierContract', '0'),
+(36,'ClientContract', '0'),
+(37,'Asset','0');
+
  INSERT INTO `${prefix}mailable` (`id`,`name`, `idle`) VALUES 
 (42,'SupplierContract', '0'),
-(43,'ClientContract', 0);
+(43,'ClientContract', 0),
+(44,'Asset','0');
 
 INSERT INTO `${prefix}importable` (`id`, `name`, `idle`) VALUES
 (58, 'SupplierContract','0'),
-(59, 'ClientContract', 0);
+(59, 'ClientContract', 0),
+(60,'Asset','0');
 
 INSERT INTO `${prefix}linkable` ( `name`, `idle`) VALUES 
 ('SupplierContract', 0),
-('ClientContract', 0);
+('ClientContract', 0),
+('Asset','0');
 
 INSERT INTO `${prefix}copyable` (`id`,`name`, `idle`, `sortOrder`) VALUES
 (28,'SupplierContract', 0, 128),
-(29,'ClientContract', 0, 129);
+(29,'ClientContract', 0, 129),
+(30,'Asset','0');
 
-INSERT INTO `${prefix}notifiable` ( `name`, `idle`) VALUES
-('SupplierContract', 0),
-('ClientContract', 0);
  
 -- ======================================
 -- Supplier Contract 
