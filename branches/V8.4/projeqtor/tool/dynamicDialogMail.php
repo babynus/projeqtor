@@ -310,7 +310,7 @@ if($paramMailerType=='phpmailer'){
           <input  name="attachments" id="attachments"  class="input"  type="hidden" value="" />
           <input  name="totalSizeNoConvert" id="totalSizeNoConvert"  class="input"  type="hidden" value="" />
           <input  name="maxSizeNoconvert" id="maxSizeNoconvert" class="input"  type="hidden" value="<?php echo $maxSize;?>" />
-          <div id="infoSize"  style="position:relative;font-size:12px;border:none;right:0px;text-align:right;padding-right:10px;"><input  name="totalSize" id="totalSize"  class="input "  style="border:none;width:60px;text-align:right;" value="" readonly /><?php echo "/".$maxSizeAttachment;?></div>
+          <div id="infoSize"  style="position:relative;font-size:12px;border:none;right:0px;text-align:right;padding-right:20px;"><input  name="totalSize" id="totalSize"  class="input "  style="border:none;width:60px;text-align:right;" value="" readonly /><?php echo "/".$maxSizeAttachment;?></div>
       </td>
     </tr>
   </table>
