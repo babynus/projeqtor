@@ -11163,7 +11163,7 @@ function refreshDataCloningCountDiv(userSelected){
 
 function selectAllCheckBox(val){
   dojo.query(val).forEach(function(node, index, nodelist) {
-      if(dijit.byId(node.getAttribute('widgetid')).get('checked')){
+      if(dijit.byId('dialogMailAll').get('checked')!=true){
         dijit.byId(node.getAttribute('widgetid')).set('checked', false);
       }else{
         dijit.byId(node.getAttribute('widgetid')).set('checked', true);

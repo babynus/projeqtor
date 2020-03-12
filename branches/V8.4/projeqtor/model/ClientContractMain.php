@@ -423,9 +423,9 @@ class ClientContractMain extends SqlElement {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .=" if(isNaN(this.value))dijit.byId('periodicityBill').set('value',0);";
       $colScript .= '</script>';
-    }else if ($colName=="idProvider") {
+    }else if ($colName=="idClient") {
 			$colScript .= '<script type="dojo/connect" event="onChange" >';
-			$colScript .= '  refreshList("idContactContract", "idProvider", this.value, null, null, false);';
+			$colScript .= '  refreshList("idContactContract", "idClient", this.value, null, null, false);';
 			$colScript .= '  formChanged();';
 			$colScript .= '</script>';
 	}
