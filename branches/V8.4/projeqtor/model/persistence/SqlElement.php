@@ -5266,6 +5266,40 @@ abstract class SqlElement {
       } else { 
         $tempAttach='No';
         $erroSize='';
+        //florent ticket 4442
+        $directory=Parameter::getGlobalParameter('paramAttachmentDirectory');
+        $lstAtt= array();
+        $addAttachToMessage='';
+        $notFound=' not found ';
+        if(!empty($attachments) and Parameter::getGlobalParameter('paramMailerType')=='phpmailer'){
+          $c=0;
+          $addAttachToMessage="<table style='font-size:10pt;font-weight:bold; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;'><tr><td colspan='3' style='background:#555555;color: #FFFFFF; text-align: center;'>
+        <div >".htmlEncode( i18n('fileAttachment'))."</div></td></tr></table><table style='font-size:9pt; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;'>";
+          foreach ($attachments as $val){
+            $c++;
+            $addAttachToMessage.="<tr><td colspan='3' style='background:#DDDDDD;font-weight:bold;text-align:right;width:25%;vertical-align: middle;'><div>".i18n('col'.ucfirst($val[1]))."&nbsp</div></td>";
+            if($val[1]=='file'){
+              $att=new Attachment($val[0]);
+              $lstAtt[$att->fileName]=str_replace('${attachmentDirectory}',$directory, $att->subDirectory).$att->fileName;
+              if( file_exists(str_replace('${attachmentDirectory}',$directory, $att->subDirectory).$att->fileName) and $lstAtt[$att->fileName]!=''){
+                $addAttachToMessage .="<td colspan='3' style='background:#FFFFFF;text-align: left;'><div>&nbsp;&nbsp;".$att->fileName."</div></td></tr>";
+              }else{
+                $addAttachToMessage .="<td colspan='3' ><div style='background:#FFFFFF;text-align: left;color:red;'>&nbsp;&nbsp;".$att->fileName.$notFound."</div></td></tr>";
+              }
+            }else{
+              $doc=new DocumentVersion($val[0]);
+              $lstAtt[$doc->fileName]=$doc->getUploadFileName();
+              if( file_exists($doc->getUploadFileName()) and $lstAtt[$doc->fileName]!=''){
+                $addAttachToMessage.= "<td colspan='3' ><div style='background:#FFFFFF;text-align: left;'>&nbsp;&nbsp;".$doc->fileName."</div></td></tr>";
+              }else{
+                $addAttachToMessage.= "<td colspan='3' ><div style='background:#FFFFFF;text-align: left;color:red;'>&nbsp;&nbsp;".$doc->fileName.$notFound."</div></td></tr>";
+              }
+            }
+          }
+          $addAttachToMessage.="</tr></table>;";
+          $attachments=$lstAtt;
+        }
+        //
         if ($emailTemplateTab[$j]->name == 'basic') {
           $emailTemplateTab[$j]->template = $this->getMailDetail();
           if ($directStatusMail and isset ( $directStatusMail->message )) {
@@ -5275,7 +5309,7 @@ abstract class SqlElement {
           $emailTemplateTab[$j]->title = $title;
           $emailTemplateTab[$j]->template = '<html><head><title>' . $title .
               '</title></head><body style="font-family: Verdana, Arial, Helvetica, sans-serif;">' .
-              $emailTemplateTab[$j]->template . '</body></html>';
+              $emailTemplateTab[$j]->template .$addAttachToMessage. '</body></html>';
         } else {
           //florent #4442
           $tempAttach='Yes';
@@ -5285,12 +5319,19 @@ abstract class SqlElement {
           }
           if(strpos($emailTemplateTab[$j]->template,'${lastAttachement}')!==false){
             $valueAttach=explode('/',$this->searchLastAttachmentMailable());
-            $fileSize=$valueAttach[1];
-            if($fileSize < $maxSizeAttachment){
-              $attachments[]=explode('_',$valueAttach[0]);
-            }else{
-              return array('result' => 'ErrorSize','dest'=>"");
-            } 
+            if($valueAttach[0]!=''){
+              $fileSize=$valueAttach[1];
+              if($fileSize < $maxSizeAttachment){
+                $attachments[]=explode('_',$valueAttach[0]);
+                foreach ($attachments as $val){
+                  $att=new Attachment($val[0]);
+                  $lstAtt[$att->fileName]=str_replace('${attachmentDirectory}',$directory, $att->subDirectory).$att->fileName;
+                  $attachments=$lstAtt;
+                }
+              }else{
+                return array('result' => 'ErrorSize','dest'=>"");
+              }
+            }
           }else if(strpos($emailTemplateTab[$j]->template,'${allAttachements}')!==false){
             $res=$this->searchAllAttachementsMailable($maxSizeAttachment);
             $attachments=$res['attachements'];
@@ -5298,6 +5339,12 @@ abstract class SqlElement {
             if(empty($attachments)){
               return array('result' => 'ErrorSize','dest'=>"");
             }
+            foreach ($attachments as $val){
+              $att=new Attachment($val[0]);
+              $lstAtt[$att->fileName]=str_replace('${attachmentDirectory}',$directory, $att->subDirectory).$att->fileName;
+            }
+            debugLog($lstAtt);
+            $attachments=$lstAtt;
           }
           //
           $emailTemplateTab[$j]->template = $this->getMailDetailFromTemplate($emailTemplateTab[$j]->template);

@@ -335,7 +335,7 @@ if($paramMailerType=='phpmailer'){
     </td>
     <tr>
       <td>
-        <div id='showAttachement' style="max-height:200px;overflow:auto;float:none;width:700px;">
+        <div id='showAttachement' style="max-height:200px;overflow-y:auto;overflow-x:hidden;float:none;width:700px;">
           <table id="scrollTableMail" style='font-size:12px;width:685px;max-width:685px;'>
 
             <?php 
@@ -345,7 +345,7 @@ if($paramMailerType=='phpmailer'){
                 }
                 $attachName=$attached->fileName.''.$attached->id;
                 echo "<tr>";
-                echo "<td class='assignData verticalCenterData' ><div style='width:270px'><div id='dialogMail".$attachName."' name='dialogMail".$attachName."' class='checkBoxAttachmentMail' dojoType='dijit.form.CheckBox' type='checkbox' onclick='showAttachedSize(".json_encode($attached->fileSize).",".json_encode($attachName).",".json_encode($attached->id).",".json_encode($attached->type).");'></div>&nbsp;".$attached->fileName."</div></td>";
+                echo "<td class='assignData verticalCenterData' ><div style='width:270px'><div id='dialogMail".$attachName."' name='dialogMail".$attachName."' class='checkBoxAttachmentMail' dojoType='dijit.form.CheckBox' type='checkbox' onChange='showAttachedSize(".json_encode($attached->fileSize).",".json_encode($attachName).",".json_encode($attached->id).",".json_encode($attached->type).");'></div>&nbsp;".$attached->fileName."</div></td>";
                 //mime and img of the attachemnt
                 echo " <td class='assignData verticalCenterData' style='text-align:center;'><div style='width:110px'>";
                 if ($attached->isThumbable()) {
@@ -410,7 +410,7 @@ if($paramMailerType=='phpmailer'){
                   }
                   echo "<td class='assignData verticalCenterData'><div style='width:270px'><input   id='addVersion".$name."' hidden value='$docId' />";
                   echo "<input   id='filesizeNoConvert".$name."' hidden value='".$filsizeRef."' />";
-                  echo "<div id='dialogMail".$name."' name='dialogMail".$name."'  dojoType='dijit.form.CheckBox' type='checkbox' class='checkBoxAttachmentMail'  onclick='showAttachedSize(dojo.byId(\"filesizeNoConvert".$name."\").value,".json_encode($name).",dojo.byId(\"addVersion".$name."\").value,".json_encode($type).");' ></div>&nbsp;".$name."</div></td>";
+                  echo "<div id='dialogMail".$name."' name='dialogMail".$name."'  dojoType='dijit.form.CheckBox' type='checkbox' class='checkBoxAttachmentMail'  onChange='showAttachedSize(dojo.byId(\"filesizeNoConvert".$name."\").value,".json_encode($name).",dojo.byId(\"addVersion".$name."\").value,".json_encode($type).");' ></div>&nbsp;".$name."</div></td>";
                   //mime and img of the doc
                   echo " <td class='assignData verticalCenterData' style='text-align:center;'><div style='width:110px'>";
                   if ($docIm->isThumbable()) {
@@ -435,17 +435,19 @@ if($paramMailerType=='phpmailer'){
                     echo " <input name='v2_".$name."' id='v2_".$name."'  class='input'  hidden value='$filsize' />";
                     echo " <input name='idDoc".$name."' id='idDoc".$name."'  class='input'  hidden value='$docIdV' />";
                     echo "<table style='width:100%;'><tr><td style='width:50%;'><label style='width:30%;' for='versionRef".$name."'>".$versRef."</label>";
-                    echo "&nbsp;&nbsp;<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='versionRef".$name."' checked onChange='changeFileSizeMail(".json_encode($name).");'/></td>";
+                    echo "&nbsp;&nbsp;<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='versionRef".$name."' checked onChange='changeFileSizeMail(".json_encode($name).");'/><div dojoType='dijit.Tooltip' connectId='versionRef".$name."' position='above'>".i18n('colReferenceDocumentVersion')."</div></td>";
                     echo "<td><label style='width:30%;' for='version".$name."'>".$vers."</label>";
-                    echo "&nbsp;&nbsp;<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='version".$name."'/></td></tr></table></div></td>";
+                    echo "&nbsp;&nbsp;<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='version".$name."'/><div dojoType='dijit.Tooltip' connectId='version".$name."' position='above'>".i18n('lastVersion')."</div></td></tr></table></div></td>";
                   }else{
                     echo " <td class='assignData verticalCenterData' style='text-align:center' ><div style='width:165px'>".((isset($docV))?$docV->name:$versRef)."</div></td>";
                   }
                   echo " </tr>";
                 }
+                
               }?>
             </table>
           </div>
+          
         </td>
       </tr>
       <tr>
