@@ -359,16 +359,16 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (1,241,8);
 
 INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES
-(18,'moduleAssets','850',null,0,1);
+(18,'moduleAssets','850',null,0,0);
 
 INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
-(18,243,1,1),
-(18,237,0,1),
-(18,238,1,1),
-(18,239,0,1),
-(18,240,0,1),
-(18,248,0,1),
-(18,241,0,1);
+(18,243,1,0),
+(18,237,0,0),
+(18,238,1,0),
+(18,239,0,0),
+(18,240,0,0),
+(18,248,0,0),
+(18,241,0,0);
 
 CREATE TABLE `${prefix}asset` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
