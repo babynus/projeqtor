@@ -60,36 +60,36 @@ INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
  (7,236,1,1);
  
  INSERT INTO `${prefix}checklistable` (`id`,`name`, `idle`) VALUES 
-(34,'ChangeRequest', '0')
-(35,'SupplierContract', '0'),
-(36,'ClientContract', '0'),
-(37,'Asset','0');
+(34,'ChangeRequest', 0),
+(35,'SupplierContract', 0),
+(36,'ClientContract', 0),
+(37,'Asset',0);
 
 INSERT INTO `${prefix}notifiable` (`id`,`name`, `idle`) VALUES 
-(34,'ChangeRequest', '0')
-(35,'SupplierContract', '0'),
-(36,'ClientContract', '0'),
-(37,'Asset','0');
+(34,'ChangeRequest',0),
+(35,'SupplierContract', 0),
+(36,'ClientContract', 0),
+(37,'Asset',0);
 
  INSERT INTO `${prefix}mailable` (`id`,`name`, `idle`) VALUES 
-(42,'SupplierContract', '0'),
+(42,'SupplierContract',0),
 (43,'ClientContract', 0),
-(44,'Asset','0');
+(44,'Asset',0);
 
 INSERT INTO `${prefix}importable` (`id`, `name`, `idle`) VALUES
-(58, 'SupplierContract','0'),
-(59, 'ClientContract', 0),
-(60,'Asset','0');
+(58, 'SupplierContract',0),
+(59, 'ClientContract',0),
+(60,'Asset',0);
 
 INSERT INTO `${prefix}linkable` ( `name`, `idle`) VALUES 
 ('SupplierContract', 0),
 ('ClientContract', 0),
-('Asset','0');
+('Asset',0);
 
 INSERT INTO `${prefix}copyable` (`id`,`name`, `idle`, `sortOrder`) VALUES
 (28,'SupplierContract', 0, 128),
 (29,'ClientContract', 0, 129),
-(30,'Asset','0');
+(30,'Asset',0,130);
 
  
 -- ======================================
@@ -319,7 +319,7 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (1,249,8);
 
 INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT `profile`.id , 'situation', 1 FROM `profile` where `profile`.profilecode = 'ADM' or `profile`.profilecode = 'PL';
-INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT `profile`.id , 'situation', 2 FROM `profile` where `profile`.profilecode not 'ADM' and `profile`.profilecode != 'PL';
+INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT `profile`.id , 'situation', 2 FROM `profile` where `profile`.profilecode != 'ADM' and `profile`.profilecode != 'PL';
 -- ======================================
 -- Habilitation Other
 -- ======================================
