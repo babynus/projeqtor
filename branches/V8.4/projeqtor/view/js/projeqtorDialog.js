@@ -1170,8 +1170,6 @@ function saveSituation() {
 	  return;
   }
 }
-
-
 /**
  * Display a delete situation Box
  * 
@@ -1189,11 +1187,25 @@ function removeSituation(situationId) {
 }
 
 function situationSelectPredefinedText(idPrefefinedText) {
-	dojo.xhrGet({
+	dojo.xhrPost({
 	    url : '../tool/getPredefinedSituation.php?id=' + idPrefefinedText,
 		handleAs : "text",
-		load : function(data) {
-			dijit.byId('situationSituation').set('value', data);
+		load : function(data,args) {
+			if (data) {
+		        var ps = JSON.parse(data);
+		        dijit.byId('situationSituation').set('value', ps.situation);
+		        var editorType=dojo.byId("situationEditorType").value;
+		        if (editorType=="CK" || editorType=="CKInline") { // CKeditor type
+		          CKEDITOR.instances['situationComment'].setData(ps.comment);
+		        } else if (editorType=="text") { 
+		          dijit.byId('situationComment').set('value', ps.comment);
+		          dijit.byId('situationComment').focus();
+		        } else if (dijit.byId('situationCommentEditor')) {
+		          dijit.byId('situationComment').set('value', ps.comment);
+		          dijit.byId('situationCommentEditor').set('value', ps.comment);
+		          dijit.byId("situationCommentEditor").focus();
+		        }
+			}
 	    }
 	  });
 }

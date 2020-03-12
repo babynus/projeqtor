@@ -257,9 +257,12 @@ CREATE TABLE `${prefix}projectsituation` (
 CREATE TABLE `${prefix}predefinedsituation` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
-  `idle` int(1) unsigned DEFAULT '0',
-  `sortOrder` int(3) unsigned DEFAULT NULL,
+  `idTextable` int(12) unsigned DEFAULT NULL,
+  `idType` int(12) unsigned DEFAULT NULL,
   `situation` varchar(100) DEFAULT NULL,
+  `comment` mediumtext DEFAULT NULL,
+  `sortOrder` int(3) unsigned DEFAULT NULL,
+  `idle` int(1) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
