@@ -1479,14 +1479,14 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
               echo '<label class="label '.$internalTableSpecial.'">'.htmlEncode($obj->getColCaption($internalTableRowsCaptions[$internalTableCurrentRow])).'&nbsp;:&nbsp;</label>';
             }
           }
-          echo '</td><td style="'.$alignForNumber.'width:90%;white-space:nowrap;padding-right:20px;'.$internalTableBorder.'">';
+          echo '</td><td style="'.$alignForNumber.'width:90%;white-space:nowrap;'.(($print)?'padding-right:20px;':'').$internalTableBorder.'">';
           $internalTableCurrentRow++;
         } else {
           if ($obj->isAttributeSetToField($col, "colspan3")) {
             echo '</td><td class="detail" colspan="3" style="'.$alignForNumber.'">';
             $internalTable-=2;
           } else {
-            echo '</td><td class="detail" style="'.$alignForNumber.'white-space:nowrap;padding-right:20px;'.$internalTableBorder.'">';
+            echo '</td><td class="detail" style="'.$alignForNumber.'white-space:nowrap;'.(($print)?'padding-right:20px;':'').$internalTableBorder.'">';
           }
         }
       }
