@@ -59,12 +59,12 @@ class ProjectSituationMain extends SqlElement {
     <th field="id" formatter="numericFormatter" width="4%" ># ${id}</th>
     <th field="nameProject" width="8%" >${idProject}</th>
     <th field="name" width="8%" >${name}</th>
-    <th field="refTypeExpense" width="8%">${refTypeExpense}</th>
+    <th field="refTypeExpense" width="8%" formatter="translateFormatter">${refTypeExpense}</th>
     <th field="refIdExpense" width="4%">${refIdExpense}</th>
     <th field="situationNameExpense" width="11%">${situationNameExpense}</th>
     <th field="situationDateExpense" width="6%" formatter="dateTimeFormatter">${situationDateExpense}</th>
     <th field="nameResourceExpense" formatter="thumbName22" width="8%">${idResourceExpense}</th>
-    <th field="refTypeIncome" width="8%">${refTypeIncome}</th>
+    <th field="refTypeIncome" width="8%" formatter="translateFormatter">${refTypeIncome}</th>
     <th field="refIdIncome" width="4%">${refIdIncome}</th>
     <th field="situationNameIncome" width="11%">${situationNameIncome}</th>
     <th field="situationDateIncome" width="6%" formatter="dateTimeFormatter">${situationDateIncome}</th>
@@ -76,7 +76,7 @@ class ProjectSituationMain extends SqlElement {
         '_sec_Description'=>'hidden',
   );
   
-  private static $_colCaptionTransposition = array();//'idResourceExpense'=> 'responsible', 'idResourceIncome'=> 'responsible'
+  private static $_colCaptionTransposition = array();
   
   /** ==========================================================================
    * Constructor
