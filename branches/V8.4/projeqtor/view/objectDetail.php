@@ -6805,7 +6805,7 @@ function drawProjectSituation($type, $obj){
 	if ($comboDetail) {
 		return;
 	}
-	$classList=array();
+	$classList=null;
 	if($type=='Expense'){
 	  $classList = '(\'CallForTender\',\'Tender\',\'ProviderOrder\',\'ProviderBill\')';
 	}else if($type=='Income'){
@@ -6823,6 +6823,17 @@ function drawProjectSituation($type, $obj){
 	  	$situationOrderedList[$element->idSituation] = $sit;
 	  }
 	}
+	$classElementList = explode(',', str_replace(array("'", "(", ")"), array("","",""), $classList));
+	$elementList = array();
+	foreach ($classElementList as $class){
+	  $object = new $class();
+      $critWhere = array('idProject'=>$obj->idProject, 'idSituation'=>null);
+	  $objectList = $object->getSqlElementsFromCriteria($critWhere,null,null,null);
+      if(count($objectList)>0){
+      	$elementList = array_merge($elementList, $objectList);
+      }
+	}
+	
 	echo '<table width="99.9%">';
 	echo '<tr>';
 	echo '<td class="noteHeader" style="width:25%">' . i18n('colElement') . '</td>';
@@ -6869,6 +6880,39 @@ function drawProjectSituation($type, $obj){
    		echo '<td class="noteData" style="text-align:center">' . htmlEncode($responsible->name) . '</td>';
    		echo '</tr>';
    	  }
+	}
+	foreach ($elementList as $element){
+		$class = get_class($element);
+		if($class == 'Tender'){
+			if($element->idCallForTender){
+				$callForTender = new CallForTender($element->idCallForTender);
+				$TenderList = $element->getSqlElementsFromCriteria(array('idCallForTender'=>$element->idCallForTender),null,null,null);
+				if(count($TenderList)>1){
+					$tenderStatus = SqlElement::getSingleSqlElementFromCriteria('TenderStatus', array('isSelected'=>1));
+					$tender = SqlElement::getSingleSqlElementFromCriteria('Tender', array('idCallForTender'=>$element->idCallForTender, 'idTenderStatus'=>$tenderStatus->id));
+					if($tender->id and $element->id != $tender->id and $element->idCallForTender == $tender->idCallForTender){
+						continue;
+					}
+				}
+			}
+		}
+		echo '<tr>';
+		echo '<td class="noteData" style="text-align:left;">';
+		echo '<table style="width:100%;">';
+		echo '<tr>';
+		echo '<td style="padding-right: 5px;width:5%;">'.formatIcon($class, "16").'</td>';
+		echo '<td style="width:75%;">'.htmlEncode(i18n($class)).' #'.htmlEncode($element->id).' - '.htmlEncode($element->name).'</td>';
+		echo '<td style="width:5%;"><div style="padding-left: 15px;" onClick="gotoElement(\''.$class.'\',\''.$element->id.'\');">'.formatSmallButton('Goto', true).'</div></td>';
+		echo '<td style="width:5%;"><div style="padding-left: 5px;" class="iconView roundedButtonSmall" onclick="showDetail(\'idSituation\',0,\''.$class.'\',false,'.$element->id.',false)"></div></td>';
+		echo '</tr>';
+		echo '</table>';
+		echo '</td>';
+		echo '<td class="noteData" style="text-align:center"></td>';
+		echo '<td class="noteData" style="text-align:center"></td>';
+		echo '<td class="noteData" style="text-align:left"></td>';
+		echo '<td class="noteData" style="text-align:left"></td>';
+		echo '<td class="noteData" style="text-align:center"></td>';
+		echo '</tr>';
 	}
 	echo '</table>';
 }
