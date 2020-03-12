@@ -3985,7 +3985,6 @@ function isIE() {
 }
 function isFF() {
   $browser=Audit::getBrowser();
-  debugLog($browser);
   if ($browser['browser']=='Mozilla Firefox') {
     if ($browser['version']) {
       return $browser['version'];
