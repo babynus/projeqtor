@@ -3983,6 +3983,18 @@ function isIE() {
   }
   return false;
 }
+function isFF() {
+  $browser=Audit::getBrowser();
+  debugLog($browser);
+  if ($browser['browser']=='Mozilla Firefox') {
+    if ($browser['version']) {
+      return $browser['version'];
+    } else {
+      return true;
+    }
+  }
+  return false;
+}
 
 function formatBrowserDateToDate($dateTime) {
   global $browserLocaleDateFormat;

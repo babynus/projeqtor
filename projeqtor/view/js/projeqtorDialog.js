@@ -6894,6 +6894,7 @@ function hideList(mode, skipAnimation) {
 
 function resizeContainer(container, duration) {
   sequ=10;
+  if (!dijit.byId(container)) return;
   if (duration) {
     for (var i=0; i < sequ; i++) {
       setTimeout('dijit.byId("' + container + '").resize();', i * duration / sequ);
