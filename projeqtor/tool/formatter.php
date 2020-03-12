@@ -49,13 +49,14 @@ function colorNameFormatter($value,$idTicket=-1, $minHeight='10') {
 //           .'text-align: center;'.(($print and $outMode=='pdf')?'width:95%;min-height:18px;':'') . 'background-color: ' . $color . '; color:' . $foreColor . ';">' 
 //           .'<div style="position:relative;margin:0 auto;">'.$val.'</div>'
 //           .'</div>';
-      return '<table style="width:100%;height:100%;min-height:'.$minHeight.'px;border-collapse: collapse;"><tr style="height:100%"><td '.($idTicket!=-1 ? 'id="status'.$idTicket.'"' : '').' style="vertical-align:middle;'
-          .(($notRounded)?'border:0px;':'border:1px solid #CCC;border-radius:10px;padding: 5px;display:inline-block;')
-          . (($print and $outMode!='pdf' and $outModeBack=='pdf')?'font-size:10pt;':'')
-          .(($color=='transparent')?'font-style:italic;':'')
-          .'text-align: center;'.(($print and $outMode=='pdf')?'width:95%;min-height:18px;':'') . 'background-color: ' . $color . '; color:' . $foreColor . ';">'
-          .$val
-          .'</td></tr></table>';
+      return '<table style="width:100%;height:100%;min-height:'.$minHeight.'px;border-collapse: collapse;">'
+            .' <tr style="height:100%;min-height:'.$minHeight.'px">'
+            .'  <td '.($idTicket!=-1 ? 'id="status'.$idTicket.'"' : '').' style="vertical-align:middle;border:0px;'
+            . (($print and $outMode!='pdf' and $outModeBack=='pdf')?'font-size:10pt;':'')
+            .(($color=='transparent')?'font-style:italic;':'')
+            .'text-align: center;'.(($print and $outMode=='pdf')?'width:95%;min-height:18px;':'') . 'background-color: ' . $color . '; color:' . $foreColor . ';">'
+            .$val
+            .'</td></tr></table>';
 
     } else {
       return $value;
@@ -71,7 +72,7 @@ function classNameFormatter($value) {
   if ($outMode=='pdf') return '<div><table><tr><td><img src="../view/css/customIcons/grey/icon'.$value.'.png" style="width:16px;height:16px"/>&nbsp;</td><td>'.$className.'</td></tr></table></div>';
   else return '<div><table><tr><td><div class="icon'.$classId.'16 icon'.$classId.' iconSize16">&nbsp;</div></td><td>&nbsp;</td><td>'.$className.'</td></tr></table></div>';
 }
-function colorTranslateNameFormatter($value, $notRounded=false) {
+function colorTranslateNameFormatter($value) {
 	global $print,$outMode;
 	$notRounded=true;
 	if ($value) {
@@ -81,29 +82,15 @@ function colorTranslateNameFormatter($value, $notRounded=false) {
 				$val=$tab[0];
 				$color=$tab[1];
 				$order='';
+				return colorNameFormatter(i18n($val)."#split#".$color);
 			} else if (count($tab)==3) { // val #split# color #split# order
 				$val=$tab[1];
 				$color=$tab[2];
 				$order=$tab[0];
+				return colorNameFormatter($order."#split#".i18n($val)."#split#".$color);
 			} else { // should not be found
-				return value;
+				return i18n(value);
 			}
-			$foreColor='#000000';
-			if (strlen($color)==7) {
-				$red=substr($color,1,2);
-				$green=substr($color,3,2);
-				$blue=substr($color,5,2);
-				$light=(0.3)*base_convert($red,16,10)+(0.6)*base_convert($green,16,10)+(0.1)*base_convert($blue,16,10);
-				if ($light<128) { $foreColor='#FFFFFF'; }
-			}
-//			return '<div style="text-align: center;width:' . (($print)?'95':'100') . '%;background-color: ' . $color . '; color:' . $foreColor . ';">' . i18n($val) . '</div>';
-			return '<table style="width:100%;height:100%;border-collapse: collapse;"><tr style="height:100%"><td style="vertical-align:middle;'
-			    .(($notRounded)?'border:0px;padding:6px 3px;':'border:1px solid #CCC;border-radius:10px;padding: 5px;display:inline-block;')
-			    .(($color=='transparent')?'font-weight:bold;font-style:italic;':'')
-			    .'text-align: center;'.(($print and $outMode=='pdf')?'width:95%;min-height:18px;':'') . 'background-color: ' . $color . '; color:' . $foreColor . ';">'
-			    .i18n($val)
-			    .'</td></tr></table>';
-
 		} else {
 			return i18n($value);
 		}

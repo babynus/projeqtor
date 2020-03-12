@@ -1841,12 +1841,21 @@ function htmlDisplayColored($value,$color) {
 }
 function htmlDisplayColoredFull($value,$color) {
   global $print, $outMode;
+  $minHeight=10;
   $result= "";
   $foreColor=htmlForeColorForBackgroundColor($color);
-  $result.='<div style="height:100%;display:block;vertical-align:middle;padding: 3px;text-align: center;'
-      .(($print and $outMode=='pdf')?'width:10px;min-height:18px':'')
-      . 'background-color: ' . $color . '; color:' . $foreColor . ';">'
-          .$value.'</div>';
+//   $result.='<div style="height:100%;display:block;vertical-align:middle;padding: 3px;text-align: center;'
+//       .(($print and $outMode=='pdf')?'width:10px;min-height:18px':'')
+//       . 'background-color: ' . $color . '; color:' . $foreColor . ';">'
+//           .$value.'</div>';
+  $result.='<table style="width:100%;height:100%;min-height:'.$minHeight.'px;border-collapse: collapse;">'
+      .' <tr style="height:100%;min-height:'.$minHeight.'px">'
+      .'  <td style="vertical-align:middle;border:0px;'
+      . (($print and $outMode!='pdf' and $outModeBack=='pdf')?'font-size:10pt;':'')
+      .(($color=='transparent')?'font-style:italic;':'')
+      .'text-align: center;'.(($print and $outMode=='pdf')?'width:95%;min-height:18px;':'') . 'background-color: ' . $color . '; color:' . $foreColor . ';">'
+      .$value
+      .'</td></tr></table>';
   return $result;
 }
 
