@@ -169,7 +169,7 @@ $budgetParent=getSessionValue('listBudgetParentFilter');
                 id="showClosed" name="showClosed" <?php if ($showClosed) echo "checked=ckecked"?>>
                 <script type="dojo/method" event="onChange" >
                   var callBack=function() {refreshHierarchicalBudgetList();};
-                  saveDataToSession('listShowIdleBudget', this.value, false,callBack);
+                  saveDataToSession('listShowIdleBudget', ((this.checked)?'on':'off'), false,callBack);
                   var selectedParent=dijit.byId('listBudgetParentFilter').get('value');
                   if (! selectedParent || selectedParent==' ') selectedParent=null;
                   refreshList('idBudgetParent','showIdle',dijit.byId('showClosed').get('value'),selectedParent,'listBudgetParentFilter');
