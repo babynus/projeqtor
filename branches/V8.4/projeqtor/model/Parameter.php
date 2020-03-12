@@ -213,6 +213,14 @@ class Parameter extends SqlElement {
       $colScript .='dojo.byId("paramAttachmentMaxSizeMail").value=newValue.toUpperCase();';
       $colScript .='}';
       $colScript .='</script>';
+    } else if($colName=='paramMailerType') {
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  if (this.value=="phpmailer") {';
+      $colScript .= '    if (dijit.byId("paramAttachmentMaxSizeMail") ){ enableWidget("paramAttachmentMaxSizeMail");dijit.byId("paramAttachmentMaxSizeMail").set("value","5M");}';
+      $colScript .= '  } else {';
+      $colScript .= '    if (dijit.byId("paramAttachmentMaxSizeMail") ){ disableWidget("paramAttachmentMaxSizeMail");dijit.byId("paramAttachmentMaxSizeMail").set("value",null); }';
+      $colScript .= '  }';
+      $colScript .= '</script>';           
     }else {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  newValue=this.value;';
@@ -1193,6 +1201,9 @@ class Parameter extends SqlElement {
     	  unset($parameterList['paramMailEol']);
     	  unset($parameterList['cronDirectory']);
     	}
+    }
+    if (Parameter::getGlobalParameter('paramMailerType')!='phpmailer') {
+      unset($parameterList['paramAttachmentMaxSizeMail']);
     }
     Module::applyModuleRestrictionsOnParametersList($parameterList);
     $user=getSessionUser();
