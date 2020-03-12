@@ -1388,6 +1388,12 @@
 .ProjeQtOrFlatGreen .iconProjectSituationIncome { background-image: url(customIcons/green/iconProjectSituationIncome.png); }
 .ProjeQtOrFlatGrey .iconProjectSituationIncome { background-image: url(customIcons/grey/iconProjectSituationIncome.png); }
 
+.iconPredefinedSituation { background-image: url(images/iconPredefinedSituation.png); }
+.ProjeQtOrFlatBlue .iconPredefinedSituation { background-image: url(customIcons/blue/iconPredefinedSituation.png); }
+.ProjeQtOrFlatRed .iconPredefinedSituation { background-image: url(customIcons/red/iconPredefinedSituation.png); }
+.ProjeQtOrFlatGreen .iconPredefinedSituation { background-image: url(customIcons/green/iconPredefinedSituation.png); }
+.ProjeQtOrFlatGrey .iconPredefinedSituation { background-image: url(customIcons/grey/iconPredefinedSituation.png); }
+
 /* =============================================================================== */
 /* Extra CSS for custom Kanban                                                     */
 /* =============================================================================== */
