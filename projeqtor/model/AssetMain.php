@@ -152,12 +152,17 @@ class AssetMain extends SqlElement {
     $colScript = parent::getValidationScript($colName);
     if ($colName=="idBrand") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  var idModel=dijit.byId("idModel").get("value");';
-      $colScript .= '  if(idModel != " "){dijit.byId("idModel").set("value",null);}';
-      $colScript .= '  if(dijit.byId("idAssetType").get("value")!= " "){';
-      $colScript .= '    refreshList("idModel","idBrand", this.value, null, null, false,"idAssetType",dijit.byId("idAssetType").get("value"));';
+      $colScript .= '  var idBrand=dijit.byId("idBrand").get("value");';
+      $colScript .= '  if(idBrand == " "){';
+      $colScript .= '   refreshList("idModel","idAssetType", dijit.byId("idAssetType").get("value"), null, null, false);';
       $colScript .= '  }else{';
-      $colScript .= '    refreshList("idModel","idBrand", this.value, null, null, false);';
+      $colScript .= '   var idModel=dijit.byId("idModel").get("value");';
+      $colScript .= '   if(idModel != " "){dijit.byId("idModel").set("value",null);}';
+      $colScript .= '   if(dijit.byId("idAssetType").get("value")!= " "){';
+      $colScript .= '     refreshList("idModel","idBrand", this.value, null, null, false,"idAssetType",dijit.byId("idAssetType").get("value"));';
+      $colScript .= '   }else{';
+      $colScript .= '     refreshList("idModel","idBrand", this.value, null, null, false);';
+      $colScript .= '   }';
       $colScript .= '  }';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
