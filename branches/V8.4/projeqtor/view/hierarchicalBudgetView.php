@@ -72,7 +72,6 @@ $query='select ' . $querySelect
 .' where ' . $queryWhere
 . ' order by ' . $queryOrderBy;
 $result=Sql::query($query);
-
 // Header
 echo '<table id="hierarchicalBudgetListHeader" align="left" width="100%" style="min-width:1350px">';
 echo '<TR class="ganttHeight" style="height:32px">';
@@ -194,7 +193,7 @@ if (Sql::$lastQueryNbRows > 0) {
 			$tab.='<span class="ganttSep">&nbsp;&nbsp;&nbsp;&nbsp;</span>';
 		}
 		$display='';
-		if($line['idbudget'] and !in_array($line['id'], $hiddenRow)){
+		if($line['idbudget'] and !in_array($line['id'], $hiddenRow) and $line['id']!=$budgetParent){
 		  $display='style="visibility:collapse"';
 		}
 		echo '<TR id="hierarchicalBudgetRow_'.$id.'" dndType="budgetHierachical" class="dojoDndItem ganttTask'.$rowType.' hierarchicalBudgetRow" height="30px" '.$display.'>';
