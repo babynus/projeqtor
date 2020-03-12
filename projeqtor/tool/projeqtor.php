@@ -2102,46 +2102,13 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
     return "";
   }
   // Save data of the mail ===========================================================
-  //florent ticket 4442
-  $directory=Parameter::getGlobalParameter('paramAttachmentDirectory');
-  $lstAtt= array();
-  $addAttachToMessage='';
-  $notFound=' not found ';
-  if(!empty($attachments)){
-    $c=0;
-    $addAttachToMessage="<table style='font-size:10pt;font-weight:bold; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;'><tr><td colspan='3' style='background:#555555;color: #FFFFFF; text-align: center;'>
-        <div >".htmlEncode( i18n('fileAttachment'))."</div></td></tr></table><table style='font-size:9pt; width: 95%;font-family: Verdana, Arial, Helvetica, sans-serif;'>";
-    foreach ($attachments as $val){
-      $c++;
-      $addAttachToMessage.="<tr><td colspan='3' style='background:#DDDDDD;font-weight:bold;text-align:right;width:25%;vertical-align: middle;'><div>".i18n('col'.ucfirst($val[1]))."&nbsp</div></td>";
-      if($val[1]=='file'){
-        $att=new Attachment($val[0]);
-        $lstAtt[$att->fileName]=str_replace('${attachmentDirectory}',$directory, $att->subDirectory).$att->fileName;
-        if( file_exists(str_replace('${attachmentDirectory}',$directory, $att->subDirectory).$att->fileName) and $lstAtt[$att->fileName]!=''){
-          $addAttachToMessage .="<td colspan='3' style='background:#FFFFFF;text-align: left;'><div>&nbsp;&nbsp;".$att->fileName."</div></td></tr>";
-        }else{
-          $addAttachToMessage .="<td colspan='3' ><div style='background:#FFFFFF;text-align: left;color:red;'>&nbsp;&nbsp;".$att->fileName.$notFound."</div></td></tr>";
-        }
-      }else{
-        $doc=new DocumentVersion($val[0]);
-        $lstAtt[$doc->fileName]=$doc->getUploadFileName();
-        if( file_exists($doc->getUploadFileName()) and $lstAtt[$doc->fileName]!=''){
-          $addAttachToMessage.= "<td colspan='3' ><div style='background:#FFFFFF;text-align: left;'>&nbsp;&nbsp;".$doc->fileName."</div></td></tr>";
-        }else{
-          $addAttachToMessage.= "<td colspan='3' ><div style='background:#FFFFFF;text-align: left;color:red;'>&nbsp;&nbsp;".$doc->fileName.$notFound."</div></td></tr>";
-        }
-      }
-    }
-  }
-  $addAttachToMessage.="</tr></table>;";
+  $addAttachToMessage="";
   if($tempAttach=='Yes'){
-    $addAttachToMessage="";
     if($erroSize!=''){
       $addAttachToMessage="<div style='color:red;'>".$erroSize."</div>";
     }
   }
   $message.=$addAttachToMessage;
-  //
   $mail=new Mail();
   if (sessionUserExists()) {
     $mail->idUser=getSessionUser()->id;
@@ -2253,7 +2220,7 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
      */
   } else {
     //florent ticket 4442 
-    foreach ($lstAtt as $id=>$fileAttach){
+    foreach ($attachments as $id=>$fileAttach){
       if($fileAttach!="" and file_exists($fileAttach)){
         $phpmailer->addAttachment($fileAttach,$id);
       }else{
