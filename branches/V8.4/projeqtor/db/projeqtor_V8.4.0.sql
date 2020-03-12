@@ -485,3 +485,6 @@ UPDATE `${prefix}employmentcontract` EC SET idOrganization=(SELECT idOrganizatio
 -- Perfs
 
 CREATE INDEX projectSortOrder ON `${prefix}project` (sortOrder);
+
+INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
+('paramAttachmentMaxSizeMail','0');
