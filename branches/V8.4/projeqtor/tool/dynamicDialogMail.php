@@ -314,23 +314,30 @@ if($paramMailerType=='phpmailer'){
       </td>
     </tr>
   </table>
-  <table style="width:100%;bottom:5px;">
+  <table style="width:100%;bottom:5px;width:700px;">
+    <td>
+      <table style='width:100%;font-size:12px;width:700px;'>
+              <tr>
+              <td class='assignHeader' ><div style="width:280px">
+              
+              <div style="float:left;margin-left:5px;" id='dialogMailAll' name='dialogMailAll'  dojoType='dijit.form.CheckBox' type='checkbox' onclick='selectAllCheckBox(".checkBoxAttachmentMail");'></div>
+              <?php echo i18n('sectionAttachment')."&nbsp;";?></div></td>
+              <td class='assignHeader' ><div style="width:120px"><?php echo i18n('dashboardTicketMainTitleType');?></div></td>
+              <td class='assignHeader' ><div style="width:110px"><?php echo i18n('FileSize');?></div></td>
+              <?php 
+              if(1 or !empty($lstDoc)){
+                echo " <td class='assignHeader'><div style='width:175px'></div></td>";
+              }
+              ?>
+              <td class=''><div style="width:15px"></div></td>
+            </tr>
+      </table>
+    </td>
     <tr>
       <td>
         <div id='showAttachement' style="max-height:200px;overflow:auto;float:none;width:700px;">
-          <table style='width:100%;font-size:12px;'>
-            <tr>
-              <td class='assignHeader' style='width:40%'>
-              <div style="float:left;margin-left:5px;" id='dialogMailAll' name='dialogMailAll'  dojoType='dijit.form.CheckBox' type='checkbox' onclick='selectAllCheckBox(".checkBoxAttachmentMail");'></div>
-              <?php echo i18n('sectionAttachment')."&nbsp;";?></td>
-              <td class='assignHeader' style='width:20%'><?php echo i18n('dashboardTicketMainTitleType');?></td>
-              <td class='assignHeader' style='width:15%'><?php echo i18n('FileSize');?></td>
-              <?php 
-              if(!empty($lstDoc)){
-                echo " <td class='assignHeader' style='width:25%'></td>";
-              }
-              ?>
-            </tr>
+          <table id="scrollTableMail" style='font-size:12px;width:685px;max-width:685px;'>
+
             <?php 
               foreach($lstAttach as $attached){
                 if(($attached->idPrivacy==3 and $attached->idUser!=$currentUser->id) or ($attached->idPrivacy==2 and $attached->idTeam!=$currentUser->idTeam)){
@@ -338,9 +345,9 @@ if($paramMailerType=='phpmailer'){
                 }
                 $attachName=$attached->fileName.''.$attached->id;
                 echo "<tr>";
-                echo "<td class='assignData verticalCenterData'><div id='dialogMail".$attachName."' name='dialogMail".$attachName."' class='checkBoxAttachmentMail' dojoType='dijit.form.CheckBox' type='checkbox' onclick='showAttachedSize(".json_encode($attached->fileSize).",".json_encode($attachName).",".json_encode($attached->id).",".json_encode($attached->type).");'></div>&nbsp;".$attached->fileName."</td>";
+                echo "<td class='assignData verticalCenterData' ><div style='width:270px'><div id='dialogMail".$attachName."' name='dialogMail".$attachName."' class='checkBoxAttachmentMail' dojoType='dijit.form.CheckBox' type='checkbox' onclick='showAttachedSize(".json_encode($attached->fileSize).",".json_encode($attachName).",".json_encode($attached->id).",".json_encode($attached->type).");'></div>&nbsp;".$attached->fileName."</div></td>";
                 //mime and img of the attachemnt
-                echo " <td class='assignData verticalCenterData' style='text-align:center;'>";
+                echo " <td class='assignData verticalCenterData' style='text-align:center;'><div style='width:110px'>";
                 if ($attached->isThumbable()) {
                   $ext=pathinfo($attached->fileName, PATHINFO_EXTENSION);
                   if (file_exists("../view/img/mime/$ext.png")) {
@@ -352,16 +359,22 @@ if($paramMailerType=='phpmailer'){
                 } else {
                   echo htmlGetMimeType($attached->mimeType, $attached->fileName, $attached->id,'Attachment',"float:center");
                 }
-                echo "</td>";
+                echo "</div></td>";
                 //
-                echo " <td class='assignData verticalCenterData' style='text-align:center;'>".octectConvertSize($attached->fileSize)."</td>";
-                if(!empty($lstDoc)){
-                 echo " <td class='assignData verticalCenterData' style='text-align:center;'></td>";
+                echo " <td class='assignData verticalCenterData' style='width:105px;text-align:center;'><div style='width:100px'>".octectConvertSize($attached->fileSize)."</div></td>";
+                if(1 or !empty($lstDoc)){
+                 echo " <td class='assignData verticalCenterData' style='text-align:center;'><div style='width:165px'></div></td>";
                 }
                 echo " </tr>";
               }
               if(!empty($lstDoc)){
-
+                echo "<tr>";
+                echo "<td class='assignHeader'><div style='width:280px'>".i18n('Document')."&nbsp;</div></td>";
+                echo "<td class='assignHeader'><div style='width:120px'>".i18n('dashboardTicketMainTitleType')."</div></td>";
+                echo "<td class='assignHeader'><div style='width:110px'>".i18n('FileSize')."</div></td>";
+                echo "<td class='assignHeader'><div style='width:175px'>".i18n('DocumentVersion')."</div></td>";
+                echo "</tr>";
+                echo "<tr>";
                 foreach($lstDoc as $document){
                    $filsize=0;
                    if($document->ref1Type=='DocumentVersion'){
@@ -370,6 +383,7 @@ if($paramMailerType=='phpmailer'){
                       $name=$docV->fullName;
                       $filsizeRef=$docV->fileSize;
                       $docId=$docV->id;
+                      $type='DocumentVersion';
                    }else{
                      $doc= new Document($document->ref1Id);
                      if($doc->idDocumentVersionRef=="" and $doc->idDocumentVersion==""){
@@ -394,18 +408,11 @@ if($paramMailerType=='phpmailer'){
                      }
                      $type='DocumentVersion';
                   }
-                  echo "<tr>";
-                  echo "<td class='assignHeader' >".i18n('Document')."&nbsp;</td>";
-                  echo "<td class='assignHeader'></td>";
-                  echo "<td class='assignHeader'></td>";
-                  echo "<td class='assignHeader'  style='width:25%'>".i18n('DocumentVersion')."</td>";
-                  echo "</tr>";
-                  echo "<tr>";
-                  echo "<td class='assignData verticalCenterData'><input   id='addVersion".$name."' hidden value='$docId' />";
+                  echo "<td class='assignData verticalCenterData'><div style='width:270px'><input   id='addVersion".$name."' hidden value='$docId' />";
                   echo "<input   id='filesizeNoConvert".$name."' hidden value='".$filsizeRef."' />";
-                  echo "<div id='dialogMail".$name."' name='dialogMail".$name."'  dojoType='dijit.form.CheckBox' type='checkbox' class='checkBoxAttachmentMail'  onclick='showAttachedSize(dojo.byId(\"filesizeNoConvert".$name."\").value,".json_encode($name).",dojo.byId(\"addVersion".$name."\").value,".json_encode($type).");' ></div>&nbsp;".$name."</td>";
+                  echo "<div id='dialogMail".$name."' name='dialogMail".$name."'  dojoType='dijit.form.CheckBox' type='checkbox' class='checkBoxAttachmentMail'  onclick='showAttachedSize(dojo.byId(\"filesizeNoConvert".$name."\").value,".json_encode($name).",dojo.byId(\"addVersion".$name."\").value,".json_encode($type).");' ></div>&nbsp;".$name."</div></td>";
                   //mime and img of the doc
-                  echo " <td class='assignData verticalCenterData' style='text-align:center;'>";
+                  echo " <td class='assignData verticalCenterData' style='text-align:center;'><div style='width:110px'>";
                   if ($docIm->isThumbable()) {
                     $ext=pathinfo($docIm->fileName, PATHINFO_EXTENSION);
                     if (file_exists("../view/img/mime/$ext.png")) {
@@ -417,12 +424,12 @@ if($paramMailerType=='phpmailer'){
                   } else {
                     echo htmlGetMimeType($docIm->mimeType, $docIm->fileName, $docIm->id,'DocumentVersion',"float:center");
                   }
-                  echo "</td>";
+                  echo "</div></td>";
                   //
-                  echo " <td class='assignData verticalCenterData' style='text-align:center;'>";
-                  echo "     <input readonly class='assignData verticalCenterData'  id='filesize".$name."' style='border:none;;position:relative;text-align: center;' value='".octectConvertSize($filsizeRef)."' /></td>";
+                  echo " <td class='assignData verticalCenterData' style='text-align:center;'><div style='width:100px'>";
+                  echo "     <input readonly class='assignData verticalCenterData'  id='filesize".$name."' style='border:none;position:relative;text-align: center;width:95px' value='".octectConvertSize($filsizeRef)."' /></div></td>";
                   if($document->ref1Type!='DocumentVersion' and $versRef!==$vers ){
-                    echo "<td class='assignData verticalCenterData'>";
+                    echo "<td class='assignData verticalCenterData'><div style='width:165px'>";
                     echo " <input name='v1_".$name."' id='v1_".$name."'  class='input'  hidden value='$filsizeRef' />";
                     echo " <input name='idDocRef".$name."' id='idDocRef".$name."'  class='input'  hidden value='$docId' />";
                     echo " <input name='v2_".$name."' id='v2_".$name."'  class='input'  hidden value='$filsize' />";
@@ -430,9 +437,9 @@ if($paramMailerType=='phpmailer'){
                     echo "<table style='width:100%;'><tr><td style='width:50%;'><label style='width:30%;' for='versionRef".$name."'>".$versRef."</label>";
                     echo "&nbsp;&nbsp;<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='versionRef".$name."' checked onChange='changeFileSizeMail(".json_encode($name).");'/></td>";
                     echo "<td><label style='width:30%;' for='version".$name."'>".$vers."</label>";
-                    echo "&nbsp;&nbsp;<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='version".$name."'/></td></tr></table></td>";
+                    echo "&nbsp;&nbsp;<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='version".$name."'/></td></tr></table></div></td>";
                   }else{
-                    echo " <td class='assignData verticalCenterData' style='text-align:center' >".((isset($docV))?$docV->name:$versRef)."</td>";
+                    echo " <td class='assignData verticalCenterData' style='text-align:center' ><div style='width:165px'>".((isset($docV))?$docV->name:$versRef)."</div></td>";
                   }
                   echo " </tr>";
                 }
@@ -441,6 +448,11 @@ if($paramMailerType=='phpmailer'){
           </div>
         </td>
       </tr>
+      <tr>
+        <td>
+          <div id='showAttachement' style="max-height:3px;overflow:auto;float:none;width:690px;border-top:1px solid #cccccc"></div>
+        </td>
+      </tr>  
     </table>
 <?php } //?>
   <br/>
