@@ -142,7 +142,8 @@ abstract class SqlElement {
       "AccessScopeUpdate" => array(
           "AccessProfile" => "controlStrict"), 
       "AccessScopeDelete" => array(
-          "AccessProfile" => "controlStrict"), 
+          "AccessProfile" => "controlStrict"),
+      "AssetCategory" => array("Asset" => "controlStrict"),
       "Assignment" => array(
           "AssignmentRecurring"=>"cascade",
           "PlannedWork" => "cascade", 
@@ -175,6 +176,7 @@ abstract class SqlElement {
           "situation"=> "cascade"), 
       "BillType" => array(
           "Bill" => "controlStrict"), 
+      "Brand" => array("Asset" => "controlStrict"),
       "CallForTender" => array(
           "Tender" => "controlStrict", 
           "TenderEvaluationCriteria" => "cascade",
@@ -183,7 +185,7 @@ abstract class SqlElement {
           "CallForTender" => "controlStrict"), 
       "CalendarDefinition" => array(
           "Calendar" => "cascade", 
-          "Resource" => "controlStrict"), 
+          "Resource" => "controlStrict"),
       "Checklist" => array(
           "ChecklistLine" => "cascade"), 
       "ChecklistDefinition" => array(
@@ -276,6 +278,7 @@ abstract class SqlElement {
           ),
 // MTY - LEAVE SYSTEM      
       "Likelihood" => array("Opportunity" => "controlStrict", "Risk" => "controlStrict"), 
+      "Localisation" => array("Asset" => "controlStrict"),
       "Meeting" => array(
           "Assignment" => "cascade", 
           "Attachment" => "cascade", 
@@ -289,6 +292,7 @@ abstract class SqlElement {
       "MessageType" => array("Message" => "controlStrict"), 
       "Milestone" => array("Attachment" => "cascade", "Dependency" => "cascade", "Link" => "cascade", "Note" => "cascade"), 
       "MilestoneType" => array("Milestone" => "controlStrict"),     
+      "Model" => array("Brand" => "controlStrict","Asset" => "controlStrict"),
       "Notifiable" => array("NotificationDefinition" => "controlStrict",
                              "Notification" => "controlStrict"
                             ),
@@ -2242,6 +2246,8 @@ abstract class SqlElement {
     if (get_class ( $newObj ) == 'Asset') {
       $newObj->serialNumber = null;
       $newObj->inventoryNumber = null;
+      $newObj->installationDate = null;
+      $newObj->decommissioningDate = null;
     }
     if (get_class ( $newObj ) == 'Bill') {
       $newObj->paymentDate = null;
