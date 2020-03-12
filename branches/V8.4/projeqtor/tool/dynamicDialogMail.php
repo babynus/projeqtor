@@ -296,40 +296,33 @@ if($paramMailerType=='phpmailer'){
   //florent #4442
     if(!empty($lstAttach) or !empty($lstDoc) or $maxSize!=0){ 
   ?>
-  <table style="width:90%;margin-right:5%;margin-top:5px;margin-bottom:15px;">
+  <table style="width:90%;margin-bottom:5px;margin-left:5px;width:700px;">
     <tr>
-      <td class="dialogLabel" style="width:55%;"><div id='titleAttachmentTab' style="font-size:14px;font-weight:bold;float:left;"><?php echo i18n('titleAttachementTabMail');?></div></td>
-      
-    </tr>
-  </table>
-  <table style="width:90%;margin-bottom:5px;margin-left:5px;m">
-    <tr>
-      <td class="dialogLabel" style="float:left;width:35%;" >
-        <label for="dialogMailAll" style="font-size:12px;width:100%;"><?php echo  i18n("buttonSelectAll")." :";?></label>
-      </td>
-      <td class="dialogLabel" style="float:left; margin-left:5px;margin-top:3px;width:5%" >
-        <div id='dialogMailAll' name='dialogMailAll'  dojoType='dijit.form.CheckBox' type='checkbox' onclick='selectAllCheckBox(".checkBoxAttachmentMail");'></div>
+      <td class="dialogLabel" style="float:left; margin-left:5px;margin-top:3px;width:350px" >
+        <div id='titleAttachmentTab' style="font-size:14px;font-weight:bold;float:left;"><?php echo i18n('titleAttachementTabMail');?></div>
       </td style="width:30%">
       <td>
       </td>
-      <td class="dialogLabel" width:80% style="width:15%">
-        <label for="totalSize" style="font-size:12px;"><?php echo  i18n("totalSize")." :";?></label>
+      <td class="dialogLabel" width:80% style="width:210px;position:relative;top:5px;">
+        <label for="totalSize" style="font-size:12px;float:right;"><?php echo  i18n("totalSize")." :";?></label>
       </td>
-      <td class="dialogLabel" style="width:15%">
-          <input  name="attachments" id="attachments"  class="input"  hidden value="" />
-          <input  name="totalSizeNoConvert" id="totalSizeNoConvert"  class="input"  hidden value="" />
-          <input  name="maxSizeNoconvert" id="maxSizeNoconvert" class="input"  hidden value="<?php echo $maxSize;?>" />
-          <div id="infoSize"  style="position:relative;font-size:12px;border:none;"><input  name="totalSize" id="totalSize"  class="input "  style="border:none;width:60px;text-align:right;" value="" readonly /><?php echo "/".$maxSizeAttachment;?></div>
+      <td class="dialogLabel" style="width:140px;position:relative;top:5px;">
+          <input  name="attachments" id="attachments"  class="input"  type="hidden" value="" />
+          <input  name="totalSizeNoConvert" id="totalSizeNoConvert"  class="input"  type="hidden" value="" />
+          <input  name="maxSizeNoconvert" id="maxSizeNoconvert" class="input"  type="hidden" value="<?php echo $maxSize;?>" />
+          <div id="infoSize"  style="position:relative;font-size:12px;border:none;right:0px;text-align:right;padding-right:10px;"><input  name="totalSize" id="totalSize"  class="input "  style="border:none;width:60px;text-align:right;" value="" readonly /><?php echo "/".$maxSizeAttachment;?></div>
       </td>
     </tr>
   </table>
   <table style="width:100%;bottom:5px;">
     <tr>
       <td>
-        <div id='showAttachement' style="max-height:280px;overflow:auto;float:none;">
+        <div id='showAttachement' style="max-height:200px;overflow:auto;float:none;width:700px;">
           <table style='width:100%;font-size:12px;'>
             <tr>
-              <td class='assignHeader' style='width:40%'><?php echo i18n('sectionAttachment')."&nbsp;";?></td>
+              <td class='assignHeader' style='width:40%'>
+              <div style="float:left;margin-left:5px;" id='dialogMailAll' name='dialogMailAll'  dojoType='dijit.form.CheckBox' type='checkbox' onclick='selectAllCheckBox(".checkBoxAttachmentMail");'></div>
+              <?php echo i18n('sectionAttachment')."&nbsp;";?></td>
               <td class='assignHeader' style='width:20%'><?php echo i18n('dashboardTicketMainTitleType');?></td>
               <td class='assignHeader' style='width:15%'><?php echo i18n('FileSize');?></td>
               <?php 
