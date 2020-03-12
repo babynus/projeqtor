@@ -3000,6 +3000,7 @@ moduleReviewComment: "The management of steering elements makes it possible to f
 moduleRisk: "Risks",
 moduleRiskComment: "The risk management plan makes it possible to anticipate the potential risks of the project.&#10;<br/> Every risk can be identified&#44; qualified and identified (cost on the project).&#10;<br/> One can then build an action plan to avoid the production of risks or at least to limit their impact.",
 moduleSituation: "Financial situations",
+moduleSituationComment: "Management of the history of each financial element",
 moduleTicket: "Ticketing",
 moduleTicketComment: "La gestione dei ticket consente di tenere traccia degli eventi non pianificati (incidenti&#44 non conformità&#44 richieste di modifica&#44 ecc.). &#10;<br/> È possibile tracciare il tempo trascorso sui ticket ed&#44 eventualmente&#44 ratificarli in un'attività di pianificazione in cui è stato pianificato il lavoro sui ticket unitari.",
 Monday: "Lunedì",

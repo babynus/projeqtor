@@ -3000,6 +3000,7 @@ moduleReviewComment: "Upravljanje upravljačkim elementima omogućuje praćenje 
 moduleRisk: "Rizici",
 moduleRiskComment: "Plan upravljanja rizicima omogućuje predviđanje potencijalnih rizika projekta.&#10;<br/>  Svaki se rizik može identificirati&#44 kvalificirati i identificirati (trošak projekta).&#10;<br/>  Tada se može izraditi akcijski plan kako bi se izbjegla proizvodnja rizika ili barem ograničio njihov utjecaj.",
 moduleSituation: "Financial situations",
+moduleSituationComment: "Management of the history of each financial element",
 moduleTicket: "Tiketiranje",
 moduleTicketComment: "Upravljanje tiketima omogućuje praćenje neplaniranih događaja (incidenti&#44 nesukladnosti&#44 zahtjevi za promjenama itd.).&#10;<br/>  Moguće je pratiti vrijeme provedeno na tiketima i eventualno ih prebaciti na planiranje aktivnosti na kojima je rad na jedinici tiketa je planiran u ukupnom poretku.",
 Monday: "Ponedjeljak",
