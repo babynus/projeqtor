@@ -70,8 +70,17 @@ if($situation->date){
   $time = date('H:i:s');
 }
 $userId = getCurrentUserId();
+$idType = null;
+$idTextable = null;
 $predefinedSituation = new PredefinedSituation();
-$predefinedList = $predefinedSituation->getSqlElementsFromCriteria(array('idle'=>'0'), null, null, 'sortOrder asc');
+$idTextable=SqlList::getIdFromTranslatableName('Textable', $objectClass);
+$nameType='id'.$objectClass.'Type';
+if (property_exists($object, $nameType)) {
+	$idType=$object->$nameType;
+}
+$crit="(idTextable is null or idTextable='" . Sql::fmtId($idTextable) ."')";
+$crit.=" and (idType is null or idType='" . Sql::fmtId($idType) ."') and idle=0";
+$predefinedList = $predefinedSituation->getSqlElementsFromCriteria(null, null, $crit, 'sortOrder asc');
 ?>
 <div >
   <table style="width:100%;">

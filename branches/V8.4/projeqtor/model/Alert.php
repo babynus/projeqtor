@@ -67,7 +67,7 @@ class Alert extends SqlElement {
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
     <th field="nameProject" width="10%" >${idProject}</th>
     <th field="nameUser" formatter="thumbName22" width="10%" >${alertReceiver}</th>
-    <th field="refType" width="10%" formatter="translatterFormatter" >${element}</th>
+    <th field="refType" width="10%" formatter="translateFormatter" >${element}</th>
     <th field="refId" width="5%" >${id}</th>
     <th field="alertType" width="10%">${type}</th>
     <th field="title" width="40%" >${title}</th>

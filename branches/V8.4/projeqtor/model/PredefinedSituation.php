@@ -33,19 +33,29 @@ class PredefinedSituation extends SqlElement {
   public $_sec_Description;
   public $id;
   public $name;
-  public $idle;
+  public $idTextable;
+  public $idType;
   public $sortOrder=0;
   public $situation;
+  public $idle;
+  public $comment;
 
 	// Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="10%"># ${id}</th>
     <th field="name" width="55%">${name}</th>
+    <th field="nameTextable" width="15%" formatter="translateFormatter">${element}</th>
+    <th field="nameType" width="15%">${type}</th>
     <th field="sortOrder" width="5%">${sortOrderShort}</th>
     <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
     ';
   
   private static $_fieldsAttributes=array("name"=>"required");
+  
+  private static $_colCaptionTransposition = array('idTextable'=>'element',
+  		'idType'=> 'type');
+  
+  private static $_databaseTableName = 'predefinedsituation';
   
   
    /** ==========================================================================
@@ -57,7 +67,6 @@ class PredefinedSituation extends SqlElement {
     parent::__construct($id,$withoutDependentObjects);
   }
 
-  
    /** ==========================================================================
    * Destructor
    * @return void
@@ -69,7 +78,6 @@ class PredefinedSituation extends SqlElement {
 // ============================================================================**********
 // GET STATIC DATA FUNCTIONS
 // ============================================================================**********
-  
 
   /** ==========================================================================
    * Return the specific layout
@@ -85,6 +93,37 @@ class PredefinedSituation extends SqlElement {
    */
   protected function getStaticFieldsAttributes() {
     return self::$_fieldsAttributes;
+  }
+  
+  protected function getStaticColCaptionTransposition($fld=null) {
+  	return self::$_colCaptionTransposition;
+  }
+  
+  protected function getStaticDatabaseTableName() {
+  	$paramDbPrefix=Parameter::getGlobalParameter('paramDbPrefix');
+  	return $paramDbPrefix . self::$_databaseTableName;
+  }
+  
+  // ============================================================================**********
+  // GET VALIDATION SCRIPT
+  // ============================================================================**********
+  
+  /** ==========================================================================
+   * Return the validation sript for some fields
+   * @return the validation javascript (for dojo framework)
+   */
+  
+  public function getValidationScript($colName) {
+  	$colScript = parent::getValidationScript($colName);
+  	if ($colName=="idTextable") {
+  		$colScript .= '<script type="dojo/connect" event="onChange" >';
+  		$colScript .= '  type=textableArray[this.value];';
+  		$colScript .= "  refreshList('id'+type+'Type', '', '', '', 'idType');";
+  		$colScript .= '  dijit.byId("idType").reset(); ';
+  		$colScript .= '  formChanged();';
+  		$colScript .= '</script>';
+  	}
+  	return $colScript;
   }
   
 }

@@ -6836,10 +6836,9 @@ function drawProjectSituation($type, $obj){
 	
 	echo '<table width="99.9%">';
 	echo '<tr>';
-	echo '<td class="noteHeader" style="width:25%">' . i18n('colElement') . '</td>';
-	echo '<td class="noteHeader" style="width:5%">' . i18n('colId') . '</td>';
-	echo '<td class="noteHeader" style="width:20%">' . i18n('colDate') . '</td>';
-	echo '<td class="noteHeader" style="width:20%">' . i18n('colSituation') . '</td>';
+	echo '<td class="noteHeader" style="width:30%">' . i18n('colElement') . '</td>';
+	echo '<td class="noteHeader" style="width:15%">' . i18n('colDate') . '</td>';
+	echo '<td class="noteHeader" style="width:25%">' . i18n('colSituation') . '</td>';
 	echo '<td class="noteHeader" style="width:20%">' . i18n('colComment') . '</td>';
 	echo '<td class="noteHeader" style="width:10%">' . i18n('colResponsible') . '</td>';
 	echo '</tr>';
@@ -6872,7 +6871,6 @@ function drawProjectSituation($type, $obj){
      		echo '</tr>';
    		echo '</table>';
    		echo '</td>';
-   		echo '<td class="noteData" style="text-align:center">#' . htmlEncode($situation->id) . '</td>';
    		echo '<td class="noteData" style="text-align:center">' . htmlFormatDateTime($situation->date) . '</td>';
    		echo '<td class="noteData" style="text-align:left">'.htmlEncode($situation->name).'</td>';
    		echo '<td class="noteData" style="text-align:left">'.$situation->comment.'</td>';
@@ -6907,7 +6905,6 @@ function drawProjectSituation($type, $obj){
 		echo '</tr>';
 		echo '</table>';
 		echo '</td>';
-		echo '<td class="noteData" style="text-align:center"></td>';
 		echo '<td class="noteData" style="text-align:center"></td>';
 		echo '<td class="noteData" style="text-align:left"></td>';
 		echo '<td class="noteData" style="text-align:left"></td>';
