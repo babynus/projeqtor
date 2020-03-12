@@ -453,9 +453,6 @@ CREATE TABLE `${prefix}productasset` (
 CREATE INDEX productassetAsset ON `${prefix}productasset` (idAsset);
 CREATE INDEX productassetProduct ON `${prefix}productasset` (idProductVersion);
 
-INSERT INTO `${prefix}copyable` (`id`, `name`, `idle`, `sortOrder`) VALUES
-(30,'Asset',0,'200');
-
 -- IGE #88 - Report of Subscription
 
 INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `idle`, `orientation`, `hasCsv`, `hasView`, `hasPrint`, `hasPdf`, `hasToday`, `hasFavorite`, `hasWord`, `hasExcel`, `filterClass`) VALUES
