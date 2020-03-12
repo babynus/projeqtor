@@ -118,6 +118,21 @@ class AssetMain extends SqlElement {
     }
     return $result;
   }
+  
+
+  public function delete() {
+    $result=parent::delete();
+    if (getLastOperationStatus($result)=='OK') {
+      $asset = new Asset();
+      $listSubAsset = $asset->getSqlElementsFromCriteria(array('idAsset'=>$this->id));
+      foreach ($listSubAsset as $ass){
+        $ass->idAsset = null;
+        $ass->save();
+      }
+    }
+    return $result;
+  }
+  
   public function copyTo($newClass, $newType, $newName, $newProject, $structure, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = NULL, $toActivity = NULL, $copyToWithResult = false,$copyToWithVersionProjects=false) {
     $result=parent::copyTo($newClass, $newType, $newName, $newProject, $structure, $withNotes, $withAttachments, $withLinks);
     if ($newClass=='Asset' and $structure) {
@@ -138,7 +153,6 @@ class AssetMain extends SqlElement {
     }
     return $result;
   }
-  
   
   // ============================================================================**********
   // GET VALIDATION SCRIPT
