@@ -3907,7 +3907,7 @@ function formatColor($type, $val) {
       $foreColor='#FFFFFF';
     }
   }
-  $result='<div align="center" style="text-align:center;  background:'.$color.';color:'.$foreColor.';">'.SqlList::getNameFromId($type, $val).'</div>';
+  $result='<div align="center" style="text-align:center; height:100%; background:'.$color.';color:'.$foreColor.';">'.SqlList::getNameFromId($type, $val).'</div>';
   return $result;
 }
 
