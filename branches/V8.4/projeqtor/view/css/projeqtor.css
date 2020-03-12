@@ -1153,6 +1153,11 @@ div#reportParametersDiv .label, div#reportParametersDiv label {
 	padding:0;
 	height:10px;
 }
+@-moz-document url-prefix() {
+    .colorNameData {
+        height: 100%;
+    }
+}
 .centerData {
 	text-align: center;
 }

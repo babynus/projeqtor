@@ -323,6 +323,7 @@ label, .label {
 .colorNameData {
   padding:0;
   height:10px;
+  height: 100%;
 }
 .historyDataNewOperation {
   font-size: 90%;

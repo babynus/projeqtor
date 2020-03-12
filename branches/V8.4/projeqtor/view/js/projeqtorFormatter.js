@@ -151,7 +151,7 @@ function colorNameFormatter(value) {
       return '<span style="display:none;">'
           + order
           + '</span>'
-          + '<table style="position:relative; margin:0px -5%; min-height:10px !important;width:110%; height:100%">'
+          + '<table style="margin:0px -5%; min-height:10px !important;width:110%; height:100%">'
           + '  <tr style="height:100% !important;">'
           + '    <td style="text-align: center;padding:3px !important;background-color:'+color+';color:'+foreColor+';width: 100%;">'+val+'</td>'
           + '  </tr>'

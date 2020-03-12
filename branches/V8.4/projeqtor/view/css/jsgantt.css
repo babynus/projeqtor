@@ -290,6 +290,10 @@ div .scrollRightTop {
   z-index: 999;
   display: inline-block;
   width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
   /*cursor: pointer;*/
   
 }
@@ -297,6 +301,12 @@ div .scrollRightTop {
   z-index: 999;
   display: inline-block;
   width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  /*top: 1px;
+  position: relative;*/
   /*cursor: pointer;*/
 }
 .namePartrow, .namePartmile {
@@ -323,6 +333,7 @@ div .scrollRightTop {
   /*z-index: 15;*/
   text-align: center;
   overflow: hidden;
+  position: relative;
 }
 
 .ganttDetailNoborder {
