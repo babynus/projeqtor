@@ -30,6 +30,7 @@ echo ' ] }';
 
 function drawElementContractGantt($objectClass,$lstContract,$nbRows){
     $nbContract=count($lstContract);
+    $namePC='-';
     foreach ($lstContract as $contract) {
       $mile= array();
       $redLine=false;
@@ -44,11 +45,13 @@ function drawElementContractGantt($objectClass,$lstContract,$nbRows){
         if($contract->idProvider){
           $provider=new Provider($contract->idProvider);
           $namePC=$provider->name;
+          $val=i18n('colIdProviderContract');
         }
       }else{
         if($contract->idClient){
           $client=new Client($contract->idClient);
           $namePC=$client->name;
+          $val=i18n('colIdClient');
         }
       }
       if(strtotime($contract->deadlineDate) > strtotime($contract->endDate) or strtotime($contract->endDate) < time() ){
