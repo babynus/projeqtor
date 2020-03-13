@@ -6773,7 +6773,7 @@ function switchAddRemoveDaytoDate(unit,date,val,operator){
             if(operator=='+'){
               if(val==0)val=1;
               newDate.setFullYear(date.getFullYear()+val);
-              dijit.byId('endDate').set('value',newDate);
+              dijit.byId('endDate').set('value',addDaysToDate(newDate,-1));
             }else{
               console.log(date);
               newDate.setFullYear(date.getFullYear()-val);
