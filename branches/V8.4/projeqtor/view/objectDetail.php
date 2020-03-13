@@ -4460,8 +4460,15 @@ function drawLinksFromObject($list, $obj, $classLink, $refresh=false) {
       if (!$print) {
         echo '<td class="linkData" style="text-align:center;width:5%;white-space:nowrap;">';
         if ($canGoto and (get_class($linkObj)=='DocumentVersion' or get_class($linkObj)=='Document') and isset($gotoObj->idDocumentVersion) and $gotoObj->idDocumentVersion) {
-          echo '<a href="../tool/download.php?class='.get_class($linkObj).'&id='.htmlEncode($linkObj->id).'"';
-          echo ' target="printFrame" title="'.i18n('helpDownload').'">'.formatSmallButton('Download').'</a>';
+          $canDownload = true;
+          $forbidDownload = Parameter::getGlobalParameter('lockDocumentDownload');
+          if($forbidDownload=="YES" and $gotoObj->locked and $gotoObj->idLocker!=getCurrentUserId()){
+            $canDownload = false;
+          }
+          if ($canDownload) {
+            echo '<a href="../tool/download.php?class='.get_class($linkObj).'&id='.htmlEncode($linkObj->id).'"';
+            echo ' target="printFrame" title="'.i18n('helpDownload').'">'.formatSmallButton('Download').'</a>';
+          }
         }
         if ($canUpdate) {
           echo '  <a onClick="removeLink('."'".htmlEncode($link->id)."','".get_class($linkObj)."','".htmlEncode($linkObj->id)."','".$classLinkName."','".$classLink."'".');" title="'.i18n('removeLink').'" > '.formatSmallButton('Remove').'</a>';

@@ -5002,17 +5002,33 @@ function searchAllAttachmentMailable($objectClass,$idObj){
   $orderBy="creationDate DESC,id DESC ";
   $where="refType='".$objectClass."' and refId=".$idObj." and type='file'";
   $lstAttach=$attach->getSqlElementsFromCriteria(null,null,$where,$orderBy);
-  $where="ref2Type='".$objectClass."' and ref2Id=".$idObj." and ref1Type in ('DocumentVersion','Document')";
+  $where="(ref2Type='".$objectClass."' and ref2Id=".$idObj." and ref1Type in ('DocumentVersion','Document') ) ";
+  $where.="or (ref1Type='".$objectClass."' and ref1Id=".$idObj." and ref2Type in ('DocumentVersion','Document') ) ";
   $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
   $currentUser=new User(getCurrentUserId());
   $c=0;
   if($lstDoc!=''){
     foreach ($lstDoc as $key=>$linkdoc){
-      if(!securityCheckDisplayMenu(null, get_class($linkdoc)) and securityGetAccessRightYesNo('menu'.get_class($linkdoc), 'read', $linkdoc)!="YES"){
+      if ($linkdoc->ref1Type==$objectClass and $linkdoc->ref1Id==$idObj) { // Reverse ref1 / ref2 to have doc always in ref1
+        $linkdoc->ref1Type=$linkdoc->ref2Type;
+        $linkdoc->ref1Id=$linkdoc->ref2Id;
+        $linkdoc->ref2Type=$objectClass;
+        $linkdoc->ref2Id=$idObj;
+      }
+      if ($linkdoc->ref1Type=='Document') {
+        $obj=new Document($linkdoc->ref1Id,true);
+      } else {
+        $vers=new DocumentVersion($linkdoc->ref1Id,true);
+        $obj=new Document($vers->idDocument);
+      }
+      debugLog(get_class($obj).' #'.$obj->id);
+      debugLog('   '.securityCheckDisplayMenu(null, get_class($obj)));
+      debugLog('   '.securityGetAccessRightYesNo('menu'.get_class($obj), 'read', $obj));
+      $canDownload=(securityCheckDisplayMenu(null, get_class($obj)) and securityGetAccessRightYesNo('menu'.get_class($obj), 'read', $obj)=="YES")?true:false;
+      if(! $canDownload){
         unset($lstDoc[$key]);
       }
-      $newDoc=new Document($linkdoc->ref1Id);
-      if(($forbidDownload == "NO" and $newDoc->idLocker != $currentUser->id)){
+      if( $forbidDownload=="YES" and $obj->locked and $obj->idLocker!=$currentUser->id ){
         unset($lstDoc[$key]);
       }
     }
