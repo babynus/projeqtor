@@ -78,8 +78,9 @@ class SituationMain extends SqlElement {
   	if (!$obj->id) {
   		return;
   	}
+  	$menuAccess=securityGetAccessRightYesNo('menu'.get_class($obj), 'update')=="YES";
   	$habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>getSessionUser()->getProfile($this->idProject), 'scope'=>'situation'));
-  	if($habil->rightAccess == '2' or $obj->idle or $comboDetail){
+  	if($habil->rightAccess == '2' or $obj->idle or $comboDetail or !$menuAccess){
   	  $canUpdate = false;
   	}else{
   	  $canUpdate = true;
