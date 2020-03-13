@@ -520,4 +520,5 @@ UPDATE `${prefix}employmentcontract` EC SET idOrganization=(SELECT idOrganizatio
 CREATE INDEX projectSortOrder ON `${prefix}project` (sortOrder);
 
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
-('paramAttachmentMaxSizeMail','5242880‬');
+('paramAttachmentMaxSizeMail','5242880'),
+('paramAttachmentNumMail','M');
