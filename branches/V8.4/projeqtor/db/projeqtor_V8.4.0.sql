@@ -66,10 +66,9 @@ INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
 (37,'Asset',0);
 
 INSERT INTO `${prefix}notifiable` (`id`,`name`, `idle`) VALUES 
-(34,'ChangeRequest',0),
-(35,'SupplierContract', 0),
-(36,'ClientContract', 0),
-(37,'Asset',0);
+(28,'SupplierContract', 0),
+(29,'ClientContract', 0),
+(30,'Asset',0);
 
  INSERT INTO `${prefix}mailable` (`id`,`name`, `idle`) VALUES 
 (42,'SupplierContract',0),
@@ -91,6 +90,17 @@ INSERT INTO `${prefix}copyable` (`id`,`name`, `idle`, `sortOrder`) VALUES
 (29,'ClientContract', 0, 129),
 (30,'Asset',0,130);
 
+ INSERT INTO `${prefix}originable` (`id`,`name`, `idle`) VALUES 
+(28,'ChangeRequest', 0),
+(29,'SupplierContract', 0),
+(30,'ClientContract', 0),
+(31,'Asset',0);
+
+ INSERT INTO `${prefix}textable` (`id`,`name`, `idle`) VALUES 
+(40,'ChangeRequest', 0),
+(41,'SupplierContract', 0),
+(42,'ClientContract', 0),
+(43,'Asset',0);
  
 -- ======================================
 -- Supplier Contract 
