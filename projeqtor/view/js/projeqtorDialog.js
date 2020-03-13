@@ -8235,6 +8235,7 @@ function changeFileSizeMail(name){
   var docVersRef=dojo.byId('idDocRef'+name).value;
   var docVers=dojo.byId('idDoc'+name).value;
   if(dijit.byId('dialogMail'+name).get('checked')==true  ){
+    
     if(totalSize!=0){
       size=Number(totalSize)-Number(dojo.byId('filesizeNoConvert'+name).value);
     }
@@ -8243,22 +8244,29 @@ function changeFileSizeMail(name){
       regex=id+'_'+type;
     }
     suprAttachments=attachments.replace(regex,'');
+    console.log(suprAttachments);
     if(dijit.byId('versionRef'+name).get('checked')==true){
-      addAttachments=suprAttachments+'/'+docVersRef+'_'+type;
+      if(suprAttachments!=''){
+        addAttachments=suprAttachments+'/'+docVersRef+'_'+type;
+      }else{
+        addAttachments=docVersRef+'_'+type;
+      }
       totalSize=size+Number(val1);
       dojo.byId('filesize'+name).value=octetConvertSize(val1);
       dojo.byId('filesizeNoConvert'+name).value=val1;
       dojo.byId('addVersion'+name).value=docVersRef;
       dojo.byId('attachments').value=addAttachments;
     }else{
-      addAttachments=suprAttachments+'/'+docVers+'_'+type;
-      totalSize=size+Number(val2);
+      if(suprAttachments!=''){
+        addAttachments=suprAttachments+'/'+docVers+'_'+type;
+      }else{
+        addAttachments=docVers+'_'+type;
+      }
       dojo.byId('filesize'+name).value=octetConvertSize(val2);
       dojo.byId('filesizeNoConvert'+name).value=val2;
       dojo.byId('addVersion'+name).value=docVers;
       dojo.byId('attachments').value=addAttachments;
     }
-    
     var noConvert=totalSize;
     if(totalSize!=0){
       totalSize=octetConvertSize(totalSize);
@@ -8273,6 +8281,7 @@ function changeFileSizeMail(name){
     dojo.byId('totalSizeNoConvert').value=noConvert;
     dojo.byId('totalSize').value=totalSize;
   }else{
+    console.log('no value');
     if(dijit.byId('versionRef'+name).get('checked')==true){
       dojo.byId('filesize'+name).value=octetConvertSize(val1);
       dojo.byId('filesizeNoConvert'+name).value=val1;
