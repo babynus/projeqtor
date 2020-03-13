@@ -6739,3 +6739,153 @@ function expandAssetGroup(idAsset, subAsset,recSubAsset){
     });
   }
 }
+function switchAddRemoveDaytoDate(unit,date,val,operator){
+  var newDate
+  console.log(operator);
+  switch (unit) { 
+  case '1': 
+            
+            if(operator=='+'){
+              newDate=addDaysToDate(date,val);
+              dijit.byId('endDate').set('value',newDate);
+            }else{
+              console.log(date);
+              newDate=addDaysToDate(date,-val);
+              dijit.byId('noticeDate').set('value',newDate);
+            }
+            
+            break;
+  case '2':
+            newDate= new Date(date);
+            
+            if(operator=='+'){
+              if(val==0)val=1;
+              newDate.setMonth(date.getMonth()+val);
+              dijit.byId('endDate').set('value',addDaysToDate(newDate,-1));
+            }else{
+              console.log(date);
+              newDate.setMonth(date.getMonth()-val);
+              dijit.byId('noticeDate').set('value',newDate);
+            }
+            break;
+  case '3':
+            newDate= new Date(date);
+            if(operator=='+'){
+              if(val==0)val=1;
+              newDate.setFullYear(date.getFullYear()+val);
+              dijit.byId('endDate').set('value',newDate);
+            }else{
+              console.log(date);
+              newDate.setFullYear(date.getFullYear()-val);
+              dijit.byId('noticeDate').set('value',newDate);
+            }
+            break;
+  } 
+}
+
+
+function setDatesContract(val){
+  var endDate= new Date (dijit.byId('endDate').getValue());
+  var startDate=new Date (dijit.byId('startDate').getValue());
+  var noticeDate=new Date (dijit.byId('noticeDate').getValue());
+  var reelEndDate=addDaysToDate(endDate,1);
+  var initialContractTermVal=dijit.byId('initialContractTerm').getValue();
+  var unitDuration=dijit.byId('idUnitContract').getValue();
+  var noticePeriod=dijit.byId('noticePeriod').getValue();
+  var idUnitNotice=dijit.byId('idUnitNotice').getValue();
+  var dayEndDate=0;
+  var MonthEnd=0;
+  var dayStartDate=0;
+  var MonthStart=0;
+  var dayNoticeDate=0;
+  var MonthNotice=0;
+  if(reelEndDate!=''){
+    var dayEndDate=reelEndDate.getDate();
+    var MonthEnd=reelEndDate.getMonth();
+  }
+  if(startDate!=''){
+    var dayStartDate=startDate.getDate();
+    var MonthStart=startDate.getMonth();
+  }
+  if(noticeDate!=''){
+    var dayNoticeDate=noticeDate.getDate();
+    var MonthNotice=noticeDate.getMonth();
+  }
+  var monthYear=0;
+  if (val=='startDate') {
+      if( initialContractTermVal && initialContractTermVal != 0 ){ 
+        switchAddRemoveDaytoDate(unitDuration,startDate,initialContractTermVal,'+');
+      } 
+  }else if(val=='idUnitContract'){
+      if( (initialContractTermVal  && initialContractTermVal!= 0) && (startDate != undefined)  ){ 
+        switchAddRemoveDaytoDate(unitDuration,startDate,initialContractTermVal,'+');
+      } 
+  }else if(val=='initialContractTerm'){
+      if( startDate != undefined ){ 
+        switchAddRemoveDaytoDate(unitDuration,startDate,initialContractTermVal,'+');
+      } 
+  }else if(val=='endDate'){
+      if( startDate != undefined){
+        if( dayStartDate == dayEndDate && MonthStart==MonthEnd && startDate.getYear()!= reelEndDate.getYear()){
+          var nbY =0;
+          var newDY=0;
+          var yearStartDate=startDate.getYear();
+          for(var i=0;i<dayDiffDates(startDate,endDate);i++){
+            newDate=addDaysToDate(startDate,i);
+            newDY=newDate.getYear();
+            if(yearStartDate!=newDY){
+              nbY++;
+              yearStartDate=newDY;
+            }
+          }
+         setTimeout(dijit.byId('idUnitContract').set('value',3),500);
+         setTimeout(dijit.byId('initialContractTerm').set('value',Math.abs(nbY)),500);
+        }else if( dayStartDate == dayEndDate && MonthStart!=MonthEnd ) {
+          var nbM =dijit.byId('initialContractTerm').getValue()
+          setTimeout(dijit.byId('idUnitContract').set('value',2),500);
+          setTimeout(dijit.byId('initialContractTerm').set('value',nbM),500);
+        }else { 
+                  var nbJ=(dayDiffDates(startDate,endDate))-1;
+                  dijit.byId('idUnitContract').set('value',1);
+                  dijit.byId('initialContractTerm').set('value',nbJ);
+        }
+      }
+      if( noticePeriod != 0 && idUnitNotice!= undefined){
+        switchAddRemoveDaytoDate(idUnitNotice,endDate,noticePeriod,'-');
+      }
+  }else if(val=='noticeDate') {
+      if( endDate != undefined ){
+        if( dayNoticeDate == dayEndDate &&  MonthNotice==MonthEnd && noticeDate.getYear()!=reelEndDate.getYear()){
+          var nbY =0;
+          var newDY=0;
+          var yearStartDate=startDate.getYear();
+          for(var i=0;i<dayDiffDates(startDate,endDate);i++){
+            newDate=addDaysToDate(startDate,i);
+            newDY=newDate.getYear();
+            if(yearStartDate!=newDY){
+              nbY++;
+              yearStartDate=newDY;
+            }
+          }
+          dijit.byId('idUnitNotice').set('value',3);
+          dijit.byId('noticePeriod').set('value',nbY);
+        }else if( dayNoticeDate == dayEndDate &&  MonthNotice!=MonthEnd ){
+          var nbM =dijit.byId('noticePeriod').getValue()
+          dijit.byId('idUnitNotice').set('value',2);
+          dijit.byId('noticePeriod').set('value',nbM);
+        }else{
+          var nbJ=dayDiffDates(noticeDate,endDate);
+          dijit.byId('idUnitNotice').set('value',1);
+          dijit.byId('noticePeriod').set('value',nbJ);
+        }
+      }
+  }else if(val=='idUnitNotice'){
+     if( (noticePeriod  && noticePeriod!= 0) && (endDate != undefined)  ){
+       switchAddRemoveDaytoDate(idUnitNotice,endDate,noticePeriod,'-');
+     }
+  }else if(val=='noticePeriod'){
+    if( endDate != undefined ){
+      switchAddRemoveDaytoDate(idUnitNotice,endDate,noticePeriod,'-');
+    }
+  }
+}
