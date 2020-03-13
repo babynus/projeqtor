@@ -6866,9 +6866,11 @@ function drawProjectSituation($type, $obj){
      		echo '<tr>';
          		echo '<td style="padding-right: 5px;width:5%;">'.formatIcon($class, "16").'</td>';
          		echo '<td style="width:75%;">'.htmlEncode(i18n($class)).' #'.htmlEncode($item->id).' - '.htmlEncode($item->name).'</td>';
-         		echo '<td style="width:5%;"><div style="padding-left: 15px;" onClick="gotoElement(\''.$situation->refType.'\',\''.htmlEncode($situation->refId).'\');">'.formatSmallButton('Goto', true).'</div></td>';
-         		echo '<td style="width:5%;"><div style="padding-left: 5px;" class="iconView roundedButtonSmall" onclick="showDetail(\'idSituation\',0,\''.$situation->refType.'\',false,'.$situation->refId.',false)"></div></td>';
-     		echo '</tr>';
+         		if(!$print){
+             		echo '<td style="width:5%;"><div style="padding-left: 15px;" onClick="gotoElement(\''.$situation->refType.'\',\''.htmlEncode($situation->refId).'\');">'.formatSmallButton('Goto', true).'</div></td>';
+             		echo '<td style="width:5%;"><div style="padding-left: 5px;" class="iconView roundedButtonSmall" onclick="showDetail(\'idSituation\',0,\''.$situation->refType.'\',false,'.$situation->refId.',false)"></div></td>';
+         		}    		
+       		echo '</tr>';
    		echo '</table>';
    		echo '</td>';
    		echo '<td class="noteData" style="text-align:center">' . htmlFormatDateTime($situation->date) . '</td>';

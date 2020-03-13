@@ -109,7 +109,7 @@ class SituationMain extends SqlElement {
   		if (!$print) {
   			echo '<td class="noteData smallButtonsGroup">';
   			if (!$print and $canUpdate) {
-  				echo '  <a onClick="editSituation('.htmlEncode($val->id).');" title="'.i18n('editSitutation').'">'.formatSmallButton('Edit').'</a> ';
+  				echo '  <a onClick="editSituation('.htmlEncode($val->id).');" title="'.i18n('editSituation').'">'.formatSmallButton('Edit').'</a> ';
   				echo ' <a onClick="removeSituation('.htmlEncode($val->id).');" title="'.i18n('removeSituation').'" > '.formatSmallButton('Remove').'</a>';
   			}
   			echo '</td>';
