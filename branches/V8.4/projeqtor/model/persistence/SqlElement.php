@@ -4127,7 +4127,7 @@ abstract class SqlElement {
         $colScript .= '    }';
       }
       // ADD tLaguerie ticket #396
-      if (property_exists ( $this, 'endDate' )) {
+      if (property_exists ( $this, 'endDate' ) and get_class($this)!='SupplierContract' and get_class($this)!='ClientContract') {
         $colScript .= '    if(! dijit.byId("endDate").get("value")) {';
         $colScript .= '       var curDate = new Date();';
         $colScript .= '       dijit.byId("endDate").set("value", curDate);';
@@ -4150,7 +4150,7 @@ abstract class SqlElement {
        */
       $colScript .= '  } else {';
         // ADD tLaguerie ticket #396
-      if (property_exists ( $this, 'endDate' )) {
+      if (property_exists ( $this, 'endDate' ) and get_class($this)!='SupplierContract' and get_class($this)!='ClientContract') {
         $colScript .= '    dijit.byId("endDate").set("value", null); ';
         $colScript .= '    if (dijit.byId("endDateBis")) dijit.byId("endDateBis").set("value", null); ';
       }
