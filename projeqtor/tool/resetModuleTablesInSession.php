@@ -32,5 +32,8 @@ require_once "../tool/projeqtor.php";
 unsetSessionValue('menuInactiveList',true);
 unsetSessionValue('reportInactiveList',true);
 unsetSessionValue('moduleList',true);
+$user=getSessionUser();
+$user->reset();
+setSessionUser($user);
 
 ?>
