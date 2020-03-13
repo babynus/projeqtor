@@ -306,11 +306,11 @@ if($paramMailerType=='phpmailer'){
       <td class="dialogLabel" width:80% style="width:210px;position:relative;top:5px;">
         <label for="totalSize" style="font-size:12px;float:right;"><?php echo  i18n("totalSize")." :";?></label>
       </td>
-      <td class="dialogLabel" style="width:140px;position:relative;top:5px;">
+      <td class="dialogLabel" style="width:150px;position:relative;top:5px;">
           <input  name="attachments" id="attachments"  class="input"  type="hidden" value="" />
           <input  name="totalSizeNoConvert" id="totalSizeNoConvert"  class="input"  type="hidden" value="" />
           <input  name="maxSizeNoconvert" id="maxSizeNoconvert" class="input"  type="hidden" value="<?php echo $maxSize;?>" />
-          <div id="infoSize"  style="position:relative;font-size:12px;border:none;right:0px;text-align:right;padding-right:20px;"><input  name="totalSize" id="totalSize"  class="input "  style="border:none;width:60px;text-align:right;" value="" readonly /><?php echo "/".$maxSizeAttachment;?></div>
+          <div id="infoSize"  style="position:relative;font-size:12px;border:none;right:0px;text-align:right;padding-right:20px;white-space:nowrap"><input  name="totalSize" id="totalSize"  class="input "  style="border:none;width:70px;text-align:right;" value="" readonly /><?php echo "&nbsp;/&nbsp;".$maxSizeAttachment;?></div>
       </td>
     </tr>
   </table>
@@ -341,8 +341,6 @@ if($paramMailerType=='phpmailer'){
             <?php 
               foreach($lstAttach as $attached){
                 if(($attached->idPrivacy==3 and $attached->idUser!=$currentUser->id) or ($attached->idPrivacy==2 and $attached->idTeam!=$currentUser->idTeam)){
-debugLog('exactement');
-debugLog($attached);
                    continue;
                 }
                 $attachName=$attached->fileName.''.$attached->id;
