@@ -6741,7 +6741,6 @@ function expandAssetGroup(idAsset, subAsset,recSubAsset){
 }
 function switchAddRemoveDaytoDate(unit,date,val,operator){
   var newDate
-  console.log(operator);
   switch (unit) { 
   case '1': 
             
@@ -6749,7 +6748,6 @@ function switchAddRemoveDaytoDate(unit,date,val,operator){
               newDate=addDaysToDate(date,val);
               dijit.byId('endDate').set('value',newDate);
             }else{
-              console.log(date);
               newDate=addDaysToDate(date,-val);
               dijit.byId('noticeDate').set('value',newDate);
             }
@@ -6757,26 +6755,27 @@ function switchAddRemoveDaytoDate(unit,date,val,operator){
             break;
   case '2':
             newDate= new Date(date);
-            
+            var addJ=-1;
             if(operator=='+'){
-              if(val==0)val=1;
+              if(val==0)addJ=0;
               newDate.setMonth(date.getMonth()+val);
-              dijit.byId('endDate').set('value',addDaysToDate(newDate,-1));
+              dijit.byId('endDate').set('value',addDaysToDate(newDate,addJ));
             }else{
-              console.log(date);
               newDate.setMonth(date.getMonth()-val);
+              if(val==0)addDaysToDate(newDate,-1);
               dijit.byId('noticeDate').set('value',newDate);
             }
             break;
   case '3':
             newDate= new Date(date);
             if(operator=='+'){
-              if(val==0)val=1;
+              var addJ=-1;
+              if(val==0)addJ=0;
               newDate.setFullYear(date.getFullYear()+val);
-              dijit.byId('endDate').set('value',addDaysToDate(newDate,-1));
+              dijit.byId('endDate').set('value',addDaysToDate(newDate,addJ));
             }else{
-              console.log(date);
               newDate.setFullYear(date.getFullYear()-val);
+              if(val==0)addDaysToDate(newDate,-1);
               dijit.byId('noticeDate').set('value',newDate);
             }
             break;
@@ -6829,25 +6828,45 @@ function setDatesContract(val){
         if( dayStartDate == dayEndDate && MonthStart==MonthEnd && startDate.getYear()!= reelEndDate.getYear()){
           var nbY =0;
           var newDY=0;
-          var yearStartDate=startDate.getYear();
-          for(var i=0;i<dayDiffDates(startDate,endDate);i++){
-            newDate=addDaysToDate(startDate,i);
-            newDY=newDate.getYear();
-            if(yearStartDate!=newDY){
-              nbY++;
-              yearStartDate=newDY;
+          if(dijit.byId('idUnitContract').getValue==3 && dijit.byId('initialContractTerm').getValue!=''){
+            nbY=dijit.byId('initialContractTerm').getValue();
+          }else{
+            var yearStartDate=startDate.getYear();
+            days=dayDiffDates(startDate,reelEndDate);
+            for(var i=0;i<days;i++){
+              newDate=addDaysToDate(startDate,+1);
+              newDY=newDate.getYear();
+              if(yearStartDate!=newDY){
+                nbY++;
+                yearStartDate=newDY;
+              }
             }
           }
          setTimeout(dijit.byId('idUnitContract').set('value',3),500);
-         setTimeout(dijit.byId('initialContractTerm').set('value',Math.abs(nbY)),500);
+         setTimeout(dijit.byId('initialContractTerm').set('value',nbY),500);
         }else if( dayStartDate == dayEndDate && MonthStart!=MonthEnd ) {
-          var nbM =dijit.byId('initialContractTerm').getValue()
+          var nbM =0;
+          if(dijit.byId('idUnitContract').getValue==2 && dijit.byId('initialContractTerm').getValue!=''){
+            nbM =dijit.byId('initialContractTerm').getValue();
+          }else{
+            var newDM=0;
+            var monthStartDate=startDate.getMonth();
+            days=dayDiffDates(startDate,reelEndDate);
+            for(var i=0;i<days;i++){
+              newDate=addDaysToDate(startDate,+1);
+              newDM=newDate.getMonth();
+              if(monthStartDate!=newDM){
+                nbM++;
+                monthStartDate=newDM;
+              }
+            }
+          }
           setTimeout(dijit.byId('idUnitContract').set('value',2),500);
           setTimeout(dijit.byId('initialContractTerm').set('value',nbM),500);
         }else { 
-                  var nbJ=(dayDiffDates(startDate,endDate))-1;
-                  dijit.byId('idUnitContract').set('value',1);
-                  dijit.byId('initialContractTerm').set('value',nbJ);
+          var nbJ=(dayDiffDates(startDate,endDate))-1;
+          dijit.byId('idUnitContract').set('value',1);
+          dijit.byId('initialContractTerm').set('value',nbJ);
         }
       }
       if( noticePeriod != 0 && idUnitNotice!= undefined){
@@ -6858,19 +6877,39 @@ function setDatesContract(val){
         if( dayNoticeDate == dayEndDate &&  MonthNotice==MonthEnd && noticeDate.getYear()!=reelEndDate.getYear()){
           var nbY =0;
           var newDY=0;
-          var yearStartDate=startDate.getYear();
-          for(var i=0;i<dayDiffDates(startDate,endDate);i++){
-            newDate=addDaysToDate(startDate,i);
-            newDY=newDate.getYear();
-            if(yearStartDate!=newDY){
-              nbY++;
-              yearStartDate=newDY;
+          if(dijit.byId('idUnitNotice').getValue==3 && dijit.byId('noticePeriod').getValue!=''){
+            nbY=dijit.byId('noticePeriod').getValue();
+          }else{
+            var yearNoticeDate=noticeDate.getYear();
+            days=dayDiffDates(noticeDate,reelEndDate);
+            for(var i=0;i<days;i++){
+              newDate=addDaysToDate(noticeDate,+1);
+              newDY=newDate.getYear();
+              if(yearNoticeDate!=newDY){
+                nbY++;
+                yearNoticeDate=newDY;
+              }
             }
           }
           dijit.byId('idUnitNotice').set('value',3);
           dijit.byId('noticePeriod').set('value',nbY);
         }else if( dayNoticeDate == dayEndDate &&  MonthNotice!=MonthEnd ){
-          var nbM =dijit.byId('noticePeriod').getValue()
+          var nbM =0;
+          if(dijit.byId('idUnitNotice').getValue==2 && dijit.byId('noticePeriod').getValue!=''){
+            nbM =dijit.byId('noticePeriod').getValue();
+          }else{
+            var newDM=0;
+            var monthNoticeDAte=noticeDate.getMonth();
+            days=dayDiffDates(noticeDate,reelEndDate);
+            for(var i=0;i<days;i++){
+              newDate=addDaysToDate(noticeDate,+1);
+              newDM=newDate.getMonth();
+              if(monthNoticeDAte!=newDM){
+                nbM++;
+                monthNoticeDAte=newDM;
+              }
+            }
+          }
           dijit.byId('idUnitNotice').set('value',2);
           dijit.byId('noticePeriod').set('value',nbM);
         }else{
