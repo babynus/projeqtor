@@ -4996,6 +4996,7 @@ function octectConvertSize($octet){
 }
 
 function searchAllAttachmentMailable($objectClass,$idObj){
+  $forbidDownload = Parameter::getGlobalParameter('lockDocumentDownload');
   $attach= new Attachment();
   $link= new Link();
   $orderBy="creationDate DESC,id DESC ";
@@ -5003,11 +5004,14 @@ function searchAllAttachmentMailable($objectClass,$idObj){
   $lstAttach=$attach->getSqlElementsFromCriteria(null,null,$where,$orderBy);
   $where="ref2Type='".$objectClass."' and ref2Id=".$idObj." and ref1Type in ('DocumentVersion','Document')";
   $lstDoc=$link->getSqlElementsFromCriteria(null,null,$where,$orderBy);
-  $c=0;
-  foreach ($lstDoc as $linkdoc){
-    $c++;
+  $currentUser=new User(getCurrentUserId());
+  foreach ($lstDoc as $key=>$linkdoc){
     if(!securityCheckDisplayMenu(null, get_class($linkdoc)) and securityGetAccessRightYesNo('menu'.get_class($linkdoc), 'read', $linkdoc)!="YES"){
-      unset($lstDoc[$c]);
+      unset($lstDoc[$key]);
+    }
+    $newDoc=new Document($linkdoc->ref1Id);
+    if(($forbidDownload == "YES" and $newDoc->idLocker != $currentUser->id) or $forbidDownload== "NO" or $forbidDownload==""){
+      unset($lstDoc[$key]);
     }
   }
   return array($lstAttach, $lstDoc);
