@@ -5336,14 +5336,15 @@ abstract class SqlElement {
             $res=$this->searchAllAttachementsMailable($maxSizeAttachment);
             $attachments=$res['attachements'];
             $erroSize=($res['result']!='Ok')?i18n('toLargeAllNotAttached'):'';
-            if(empty($attachments)){
-              return array('result' => 'ErrorSize','dest'=>"");
+            if(!empty($attachments)){
+              foreach ($attachments as $val){
+                $att=new Attachment($val[0]);
+                $lstAtt[$att->fileName]=str_replace('${attachmentDirectory}',$directory, $att->subDirectory).$att->fileName;
+              }
+              $attachments=$lstAtt;
+            }else{
+              $erroSize='';
             }
-            foreach ($attachments as $val){
-              $att=new Attachment($val[0]);
-              $lstAtt[$att->fileName]=str_replace('${attachmentDirectory}',$directory, $att->subDirectory).$att->fileName;
-            }
-            $attachments=$lstAtt;
           }
           //
           $emailTemplateTab[$j]->template = $this->getMailDetailFromTemplate($emailTemplateTab[$j]->template);

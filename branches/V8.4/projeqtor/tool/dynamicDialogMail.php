@@ -294,7 +294,7 @@ if($paramMailerType=='phpmailer'){
   </table> 
   <?php 
   //florent #4442
-    if(!empty($lstAttach) or !empty($lstDoc) or $maxSize!=0){ 
+    if((!empty($lstAttach) or !empty($lstDoc)) and  $maxSize!=0){ 
   ?>
   <table style="width:90%;margin-bottom:5px;margin-left:5px;width:700px;">
     <tr>

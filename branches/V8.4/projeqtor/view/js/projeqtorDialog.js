@@ -8499,7 +8499,7 @@ function extractEmails(str) {
 
 function sendMail() {
 	var idEmailTemplate = dijit.byId('selectEmailTemplate').get("value");
-	if(dojo.byId('totalSizeNoConvert').value > Number(dojo.byId('maxSizeNoconvert').value)){
+	if(dojo.byId('maxSizeNoconvert') && dojo.byId('totalSizeNoConvert').value > Number(dojo.byId('maxSizeNoconvert').value)){
 	  showAlert(i18n('errorAttachmentSize'));
 	  return;
 	}else{

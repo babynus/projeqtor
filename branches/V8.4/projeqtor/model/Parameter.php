@@ -208,7 +208,7 @@ class Parameter extends SqlElement {
       $colScript .='    valLettre=lettre;';
       $colScript .='  }else if(lettre==""){';
       $colScript .='    valLettre="1";';
-      $colScript .='  }else {newValue ="0"; }';
+      $colScript .='  }else {newValue ="null"; }';
       $colScript .='dojo.byId("paramAttachmentNumMail").value=lettre;';
       $colScript .='dojo.byId("paramAttachmentMaxSizeMail").value=newValue.toUpperCase();';
       $colScript .='}';
@@ -1202,7 +1202,7 @@ class Parameter extends SqlElement {
     	  unset($parameterList['cronDirectory']);
     	}
     }
-    if (Parameter::getGlobalParameter('paramMailerType')!='phpmailer') {
+    if (Parameter::getGlobalParameter('paramMailerType')!='phpmailer' and Parameter::getGlobalParameter('paramAttachmentMaxSizeMail')==0) {
       unset($parameterList['paramAttachmentMaxSizeMail']);
     }
     Module::applyModuleRestrictionsOnParametersList($parameterList);

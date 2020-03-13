@@ -2220,11 +2220,13 @@ function sendMail_phpmailer($to, $title, $message, $object=null, $headers=null, 
      */
   } else {
     //florent ticket 4442 
-    foreach ($attachments as $id=>$fileAttach){
-      if($fileAttach!="" and file_exists($fileAttach)){
-        $phpmailer->addAttachment($fileAttach,$id);
-      }else{
-        traceLog("ERROR attachement : ".$id . ' not found');
+    if($attachments!=''){
+      foreach ($attachments as $id=>$fileAttach){
+        if($fileAttach!="" and file_exists($fileAttach)){
+          $phpmailer->addAttachment($fileAttach,$id);
+        }else{
+          traceLog("ERROR attachement : ".$id . ' not found');
+        }
       }
     }
     $phpmailer->Body=$message; //

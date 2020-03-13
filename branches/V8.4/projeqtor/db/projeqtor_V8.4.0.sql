@@ -41,7 +41,6 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,228,8),
 (1,229,8),
-(1,231,1000001),
 (1,232,8),
 (1,233,8),
 (1,234,8),
@@ -344,12 +343,10 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (1,244,8),
 (1,245,8),
 (1,246,8),
-(1,247,8),
-(1,249,1000001);
+(1,247,8);
 
 INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT `profile`.id , 'situation', 1 FROM `profile` where `profile`.profilecode = 'ADM' or `profile`.profilecode = 'PL';
 INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT `profile`.id , 'situation', 2 FROM `profile` where `profile`.profilecode != 'ADM' and `profile`.profilecode != 'PL';
-
 -- ======================================
 -- Habilitation Other
 -- ======================================
@@ -380,12 +377,8 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 (1,241,1);
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
-(1,237,1000001),
-(1,238,1000001),
-(1,239,1000001),
-(1,240,1000001),
-(1,248,1000001),
-(1,241,1000001);
+(1,237,8),
+(1,243,8);
 
 INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES
 (18,'moduleAssets','850',null,0,0);
@@ -529,4 +522,4 @@ UPDATE `${prefix}employmentcontract` EC SET idOrganization=(SELECT idOrganizatio
 CREATE INDEX projectSortOrder ON `${prefix}project` (sortOrder);
 
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
-('paramAttachmentMaxSizeMail','0');
+('paramAttachmentMaxSizeMail','5242880‬');
