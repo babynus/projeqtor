@@ -294,7 +294,7 @@ if($paramMailerType=='phpmailer'){
   </table> 
   <?php 
   //florent #4442
-    if((!empty($lstAttach) or !empty($lstDoc)) and  $maxSize!=0){ 
+    if((!empty($lstAttach) or !empty($lstDoc)) and  $maxSize!=0  ){ 
   ?>
   <table style="width:90%;margin-bottom:5px;margin-left:5px;width:700px;">
     <tr>
@@ -341,6 +341,8 @@ if($paramMailerType=='phpmailer'){
             <?php 
               foreach($lstAttach as $attached){
                 if(($attached->idPrivacy==3 and $attached->idUser!=$currentUser->id) or ($attached->idPrivacy==2 and $attached->idTeam!=$currentUser->idTeam)){
+debugLog('exactement');
+debugLog($attached);
                    continue;
                 }
                 $attachName=$attached->fileName.''.$attached->id;
