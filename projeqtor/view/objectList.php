@@ -461,7 +461,7 @@ if (property_exists($objectClass,'idStatus')) {
                    florent
               -->
               <?php if (!$hideTypeSearch and $objectClass !='GlobalView') { ?>
-                <?php if ( $objectClass == 'Budget'  || property_exists($obj,'idClient') || property_exists($obj,'idMailable') || property_exists($obj,'idIndicatorable')|| property_exists($obj,'idTextable')|| property_exists($obj,'idChecklistable')) {
+                <?php if ( $objectClass == 'Budget'  || property_exists($obj,'idClient') || property_exists($obj,'idMailable') || property_exists($obj,'idIndicatorable')|| property_exists($obj,'idTextable')|| property_exists($obj,'idChecklistable') || property_exists($obj,'idSituationable')) {
                 }else {  
                   ?>
                       <td width="6px" class="allSearchTD resetSearchTD allSearchFixLength">
@@ -553,6 +553,7 @@ if (property_exists($objectClass,'idStatus')) {
                  else if (property_exists($obj,'idIndicatorable')) $elementable='idIndicatorable';
                  else if (property_exists($obj,'idTextable')) $elementable='idTextable';
                  else if ( property_exists($obj,'idChecklistable')) $elementable='idChecklistable';
+                 else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable';
                  //$elementable=null;
                  if ($elementable) { ?>
               <td style="vertical-align: middle; text-align:right;" width="5px" class="allSearchTD elementSearchTD allSearchFixLength">

@@ -71,14 +71,14 @@ if($situation->date){
 }
 $userId = getCurrentUserId();
 $idType = null;
-$idTextable = null;
+$idSituationable = null;
 $predefinedSituation = new PredefinedSituation();
-$idTextable=SqlList::getIdFromTranslatableName('Textable', $objectClass);
+$idSituationable=SqlList::getIdFromTranslatableName('Situationable', $objectClass);
 $nameType='id'.$objectClass.'Type';
 if (property_exists($object, $nameType)) {
 	$idType=$object->$nameType;
 }
-$crit="(idTextable is null or idTextable='" . Sql::fmtId($idTextable) ."')";
+$crit="(idSituationable is null or idSituationable='" . Sql::fmtId($idSituationable) ."')";
 $crit.=" and (idType is null or idType='" . Sql::fmtId($idType) ."') and idle=0";
 $predefinedList = $predefinedSituation->getSqlElementsFromCriteria(null, null, $crit, 'sortOrder asc');
 ?>

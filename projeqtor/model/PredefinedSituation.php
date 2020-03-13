@@ -33,7 +33,7 @@ class PredefinedSituation extends SqlElement {
   public $_sec_Description;
   public $id;
   public $name;
-  public $idTextable;
+  public $idSituationable;
   public $idType;
   public $sortOrder=0;
   public $situation;
@@ -44,7 +44,7 @@ class PredefinedSituation extends SqlElement {
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="10%"># ${id}</th>
     <th field="name" width="55%">${name}</th>
-    <th field="nameTextable" width="15%" formatter="translateFormatter">${element}</th>
+    <th field="nameSituationable" width="15%" formatter="translateFormatter">${element}</th>
     <th field="nameType" width="15%">${type}</th>
     <th field="sortOrder" width="5%">${sortOrderShort}</th>
     <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
@@ -52,7 +52,7 @@ class PredefinedSituation extends SqlElement {
   
   private static $_fieldsAttributes=array("name"=>"required");
   
-  private static $_colCaptionTransposition = array('idTextable'=>'element',
+  private static $_colCaptionTransposition = array('idSituationable'=>'element',
   		'idType'=> 'type');
   
   private static $_databaseTableName = 'predefinedsituation';
@@ -115,9 +115,9 @@ class PredefinedSituation extends SqlElement {
   
   public function getValidationScript($colName) {
   	$colScript = parent::getValidationScript($colName);
-  	if ($colName=="idTextable") {
+  	if ($colName=="idSituationable") {
   		$colScript .= '<script type="dojo/connect" event="onChange" >';
-  		$colScript .= '  type=textableArray[this.value];';
+  		$colScript .= '  type=situationableArray[this.value];';
   		$colScript .= "  refreshList('id'+type+'Type', '', '', '', 'idType');";
   		$colScript .= '  dijit.byId("idType").reset(); ';
   		$colScript .= '  formChanged();';
