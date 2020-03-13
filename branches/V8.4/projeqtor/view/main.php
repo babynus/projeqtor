@@ -551,6 +551,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     var indicatorableArray=new Array();
     var mailableArray=new Array();
     var textableArray=new Array();
+    var situationableArray=new Array();
     var checklistableArray=new Array();
     var planningColumnOrder=new Array();
     <?php
@@ -599,6 +600,11 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       $list=SqlList::getListNotTranslated('Checklistable');
       foreach ($list as $id=>$name) {
       	echo "checklistableArray['" . $id . "']='" . $name . "';";
+      }
+      echo "\n";
+      $list=SqlList::getListNotTranslated('Situationable');
+      foreach ($list as $id=>$name) {
+      	echo "situationableArray['" . $id . "']='" . $name . "';";
       }
       echo "\n";
       // Retrieve order and visibility info for Planning Columns

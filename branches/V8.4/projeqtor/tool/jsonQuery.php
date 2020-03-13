@@ -187,6 +187,7 @@
         else if (property_exists($obj,'idIndicatorable')) $elementable='idIndicatorable';
         else if (property_exists($obj,'idTextable')) $elementable='idTextable';
         else if ( property_exists($obj,'idChecklistable')) $elementable='idChecklistable';
+        else if ( property_exists($obj,'idSituationable')) $elementable='idSituationable';
         if ($elementable) {
           $queryWhere.= ($queryWhere=='')?'':' and ';
           $queryWhere.= $table . "." . $obj->getDatabaseColumnName($elementable) . "=" . Sql::str($_REQUEST['objectElementable']);

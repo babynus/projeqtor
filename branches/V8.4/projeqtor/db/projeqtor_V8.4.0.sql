@@ -41,7 +41,7 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,228,8),
 (1,229,8),
-(1,231,8),
+(1,231,1000001),
 (1,232,8),
 (1,233,8),
 (1,234,8),
@@ -283,7 +283,7 @@ CREATE TABLE `${prefix}projectsituation` (
 CREATE TABLE `${prefix}predefinedsituation` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
-  `idTextable` int(12) unsigned DEFAULT NULL,
+  `idSituationable` int(12) unsigned DEFAULT NULL,
   `idType` int(12) unsigned DEFAULT NULL,
   `situation` varchar(100) DEFAULT NULL,
   `comment` mediumtext DEFAULT NULL,
@@ -291,6 +291,22 @@ CREATE TABLE `${prefix}predefinedsituation` (
   `idle` int(1) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+CREATE TABLE `${prefix}situationable` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) default NULL,
+  `idle` int(1) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+INSERT INTO `${prefix}situationable` (`id`,`name`,`idle`) VALUES 
+(1,'CallForTender',0),
+(2,'Tender',0),
+(3,'ProviderOrder',0),
+(4,'ProviderBill',0),
+(5,'Bill',0),
+(6,'Quotation',0),
+(7,'Command',0);
 
 ALTER TABLE `${prefix}callfortender` ADD `idSituation` int(12) unsigned DEFAULT NULL;
 ALTER TABLE `${prefix}tender` ADD `idSituation` int(12) unsigned DEFAULT NULL;
@@ -329,10 +345,11 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (1,245,8),
 (1,246,8),
 (1,247,8),
-(1,249,8);
+(1,249,1000001);
 
 INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT `profile`.id , 'situation', 1 FROM `profile` where `profile`.profilecode = 'ADM' or `profile`.profilecode = 'PL';
 INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT `profile`.id , 'situation', 2 FROM `profile` where `profile`.profilecode != 'ADM' and `profile`.profilecode != 'PL';
+
 -- ======================================
 -- Habilitation Other
 -- ======================================
