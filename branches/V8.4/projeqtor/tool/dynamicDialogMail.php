@@ -434,16 +434,16 @@ if($paramMailerType=='phpmailer'){
                     echo " <input name='idDocRef".$name."' id='idDocRef".$name."'  class='input'  hidden value='$docId' />";
                     echo " <input name='v2_".$name."' id='v2_".$name."'  class='input'  hidden value='$filsize' />";
                     echo " <input name='idDoc".$name."' id='idDoc".$name."'  class='input'  hidden value='$docIdV' />";
-                    echo "<table style='width:100%;'><tr><td style='width:50%;'><label style='width:30%;' for='versionRef".$name."'>".$versRef."</label>";
-                    echo "&nbsp;&nbsp;<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='versionRef".$name."' checked onChange='changeFileSizeMail(".json_encode($name).");'/><div dojoType='dijit.Tooltip' connectId='versionRef".$name."' position='above'>".i18n('colReferenceDocumentVersion')."</div></td>";
-                    echo "<td><label style='width:30%;' for='version".$name."'>".$vers."</label>";
-                    echo "&nbsp;&nbsp;<input type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='version".$name."'/><div dojoType='dijit.Tooltip' connectId='version".$name."' position='above'>".i18n('lastVersion')."</div></td></tr></table></div></td>";
+                    echo "<table style='width:100%;'><tr><td style='width:50%;'><label title=".i18n('colReferenceDocumentVersion')."  style='width:30%;' for='versionRef".$name."'>".$versRef."</label>";
+                    echo "&nbsp;&nbsp;<input title=".i18n('colReferenceDocumentVersion')." type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='versionRef".$name."' checked onChange='changeFileSizeMail(".json_encode($name).");'/></td>";
+                    echo "<td><label title=".i18n('lastVersion')."  style='width:30%;' for='version".$name."'>".$vers."</label>";
+                    echo "&nbsp;&nbsp;<input title=".i18n('lastVersion')." type='radio' data-dojo-type='dijit/form/RadioButton'  name='vers".$name."' id='version".$name."'/></td></tr></table></div></td>";
                   }else{
-                    echo " <td class='assignData verticalCenterData' style='text-align:center' ><div style='width:165px'>".((isset($docV))?$docV->name:$versRef)."</div></td>";
+                    echo " <td class='assignData verticalCenterData' style='text-align:center' ><div style='width:165px' >".((isset($docV))?$docV->name:$versRef)."</div></td>";
                   }
                   echo " </tr>";
                 }
-                
+                ///<div dojoType='dijit.Tooltip' connectId='version".$name."' position='above'>".i18n('lastVersion')."</div><div dojoType='dijit.Tooltip' connectId='versionRef".$name."' position='above'>".i18n('colReferenceDocumentVersion')."</div>
               }?>
             </table>
           </div>
