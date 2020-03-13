@@ -37,7 +37,7 @@ class ClientContractMain extends SqlElement {
   public $idUser;
   public $idClient;
   public $tenderReference;
-  public $origin;
+  public $Origin;
   public $description;
   public $_sec_Progress;
   public $_tab_4_1=array('startDate', 'endDate','','' , 'contractDate');
