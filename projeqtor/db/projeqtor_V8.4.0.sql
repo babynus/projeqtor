@@ -78,7 +78,9 @@ INSERT INTO `${prefix}notifiable` (`id`,`name`, `idle`) VALUES
 INSERT INTO `${prefix}importable` (`id`, `name`, `idle`) VALUES
 (58, 'SupplierContract',0),
 (59, 'ClientContract',0),
-(60,'Asset',0);
+(60,'Asset',0),
+(61,'Model',0),
+(62,'Location',0);
 
 INSERT INTO `${prefix}linkable` ( `name`, `idle`) VALUES 
 ('SupplierContract', 0),
@@ -343,12 +345,12 @@ ALTER TABLE `${prefix}term` ADD `idResource` int(12) unsigned DEFAULT NULL , ADD
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
 (243,'menuAssetManagment',0,'menu', 450,null,1,'Asset'),
-(237,'menuAsset',243,'object', 455,'Project',0,'Asset'),
+(237,'menuAsset',243,'object', 455,'ReadWritePrincipal',0,'Asset'),
 (238,'menuLocation',243,'object', 465,'ReadWriteList',0,'Asset'),
 (239,'menuBrand',243,'object', 461,'ReadWriteList',0,'Asset'),
 (240,'menuModel',243,'object', 463,'ReadWriteList',0,'Asset'),
-(241,'menuAssetCategory',243,'object', 460,'Project',0,'Asset'),
-(248,'menuAssetType',243,'object',459,NULL,0,'Asset Type');
+(241,'menuAssetCategory',243,'object', 460,'ReadWriteList',0,'Asset'),
+(248,'menuAssetType',243,'object',459,'ReadWriteType',0,'Asset Type');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,243,1),
@@ -360,13 +362,12 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 (1,241,1);
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
-(1,243,8),
-(1,237,8),
-(1,238,8),
-(1,239,8),
-(1,240,8),
-(1,248,8),
-(1,241,8);
+(1,237,1000001),
+(1,238,1000001),
+(1,239,1000001),
+(1,240,1000001),
+(1,248,1000001),
+(1,241,1000001);
 
 INSERT INTO `${prefix}module` (`id`,`name`,`sortOrder`,`idModule`,`idle`,`active`) VALUES
 (18,'moduleAssets','850',null,0,0);
