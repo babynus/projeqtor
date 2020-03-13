@@ -176,7 +176,7 @@ abstract class SqlElement {
           "situation"=> "cascade"), 
       "BillType" => array(
           "Bill" => "controlStrict"), 
-      "Brand" => array("Asset" => "controlStrict"),
+      "Brand" => array("Asset" => "controlStrict","Model" => "controlStrict"),
       "CallForTender" => array(
           "Tender" => "controlStrict", 
           "TenderEvaluationCriteria" => "cascade",
@@ -278,7 +278,7 @@ abstract class SqlElement {
           ),
 // MTY - LEAVE SYSTEM      
       "Likelihood" => array("Opportunity" => "controlStrict", "Risk" => "controlStrict"), 
-      "Localisation" => array("Asset" => "controlStrict"),
+      "Location" => array("Asset" => "controlStrict"),
       "Meeting" => array(
           "Assignment" => "cascade", 
           "Attachment" => "cascade", 
