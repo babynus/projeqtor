@@ -5343,7 +5343,6 @@ abstract class SqlElement {
               $att=new Attachment($val[0]);
               $lstAtt[$att->fileName]=str_replace('${attachmentDirectory}',$directory, $att->subDirectory).$att->fileName;
             }
-            debugLog($lstAtt);
             $attachments=$lstAtt;
           }
           //
