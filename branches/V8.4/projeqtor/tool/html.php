@@ -267,7 +267,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     $table=SqlList::getList($listType,$column,$selection, (! $obj)?!$limitToActiveProjects:false );
     foreach($arrayToDel as $key)unset($table[$key]);
   } else if ($listType=='Mailable' or $listType=='Indicatorable' or $listType=='Textable' or $listType=='Checklistable' 
-          or $listType=='Importable' or $listType=='Notifiable'){
+          or $listType=='Importable' or $listType=='Notifiable' or $listType=='Situationable'){
     $table=SqlList::getListNotTranslated($listType,$column,$selection);
     $arrayToDel=array();
     foreach($table as $key => $val){

@@ -2266,6 +2266,12 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             $critVal=SqlList::getNameFromId('Textable', $obj->idTextable, false);
           }
         }
+        if (get_class($obj)=='PredefinedSituation') {
+        	if ($col=='idType') {
+        		$critFld='idSituationable';
+        		$critVal=SqlList::getNameFromId('Situationable', $obj->idSituationable, false);
+        	}
+        }
         if (get_class($obj)=='StatusMail' or property_exists($obj,'idMailable')) {
           if ($col=='idType') {
             $critFld='scope';

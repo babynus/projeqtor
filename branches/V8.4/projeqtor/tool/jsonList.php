@@ -588,7 +588,7 @@ if ($type == 'empty') {
   }
   if ($class=='Mailable' or $class=='Indicatorable' or $class=='Textable' or $class=='Checklistable' 
       or $class=='Linkable' or $class=='Copyable' or $class=='Dependable' or $class=='Originable'
-      or $class=='Importable' or $class=='Notifiable' or $class=='Dependable' or $class=='Originable'){
+      or $class=='Importable' or $class=='Notifiable' or $class=='Dependable' or $class=='Originable' or $class=='Situationable'){
     $temp=SqlList::getListNotTranslated($class,'name',$selected);
     foreach($temp as $key => $val){
       $checkMenu='menu'.$val;
