@@ -79,8 +79,9 @@ INSERT INTO `${prefix}importable` (`id`, `name`, `idle`) VALUES
 (58, 'SupplierContract',0),
 (59, 'ClientContract',0),
 (60,'Asset',0),
-(61,'Model',0),
-(62,'Location',0);
+(61,'Brand',0),
+(62,'Model',0),
+(63,'Location',0);
 
 INSERT INTO `${prefix}linkable` ( `name`, `idle`) VALUES 
 ('SupplierContract', 0),
