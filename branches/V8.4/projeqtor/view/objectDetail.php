@@ -2397,8 +2397,12 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo ' >';
         if ($classObj=='IndividualExpense' and $col=='idResource' and securityGetAccessRight('menuIndividualExpense', 'read', $obj, $user)=='OWN') {
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, 'id', $user->id);
-        }if (($classObj=='SupplierContract' or $classObj=='ClientContract') and $col=='idContactContract' ) {
-          $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
+        }if (($classObj=='SupplierContract' or $classObj=='ClientContract') and $col=='idContactContract' or $col=='idUnitContract' or $col=='idUnitNotice') {
+          if($col=='idUnitContract' or $col=='idUnitNotice'){
+            $next=htmlDrawOptionForReference($col, $val, $obj,true, $critFld, $critVal);
+          }else{
+            $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
+          }
         }else if($col=='idSituation'){
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
           $projSituation = SqlElement::getSingleSqlElementFromCriteria('ProjectSituation', array('idProject'=>$obj->idProject));
