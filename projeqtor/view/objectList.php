@@ -1000,7 +1000,6 @@ $listStatus = $object->getExistingStatus();
     if (!multiSelection && ctrlPressed) {
       rows=objectGrid.selection.getSelected();
       row=rows[0]; 
-console.log(row);
       refId = row.id;
 <?php if (get_class($obj)=='GlobalView') {?>
       classNameCol=row.objectClass+"";
