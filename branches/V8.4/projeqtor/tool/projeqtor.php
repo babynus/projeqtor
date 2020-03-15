@@ -5021,9 +5021,6 @@ function searchAllAttachmentMailable($objectClass,$idObj){
         $vers=new DocumentVersion($linkdoc->ref1Id,true);
         $obj=new Document($vers->idDocument);
       }
-      debugLog(get_class($obj).' #'.$obj->id);
-      debugLog('   '.securityCheckDisplayMenu(null, get_class($obj)));
-      debugLog('   '.securityGetAccessRightYesNo('menu'.get_class($obj), 'read', $obj));
       $canDownload=(securityCheckDisplayMenu(null, get_class($obj)) and securityGetAccessRightYesNo('menu'.get_class($obj), 'read', $obj)=="YES")?true:false;
       if(! $canDownload){
         unset($lstDoc[$key]);
