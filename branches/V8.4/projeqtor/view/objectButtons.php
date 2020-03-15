@@ -108,6 +108,8 @@
   $showAttachment=($isAttachmentEnabled and property_exists($obj,'_Attachment') and $updateRight=='YES' and isHtml5() and ! $readOnly )?true:false;
   $extendedZone=false;
   $maxTitleWidth=round($displayWidthButton*0.4,0);
+  
+  $isMailEnabled=(Parameter::getGlobalParameter( 'paramMailSmtpServer'))?true:false;
 ?>
 <table style="width:100%;height:100%;">
  <tr style="height:100%";>
@@ -371,7 +373,7 @@
       $clsObj=get_class($obj);
       if ($clsObj=='TicketSimple') {$clsObj='Ticket';}
       $mailable=SqlElement::getSingleSqlElementFromCriteria('Mailable', array('name'=>$clsObj));
-      if ($mailable and $mailable->id) {
+      if ($mailable and $mailable->id and $isMailEnabled) {
       ?>
      <?php organizeButtons();?>
      <button id="mailButton" dojoType="dijit.form.Button" showlabel="false"
