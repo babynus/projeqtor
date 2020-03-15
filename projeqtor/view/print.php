@@ -1,5 +1,6 @@
 <?php
 use Spipu\Html2Pdf\Html2Pdf;
+use Mpdf\Mpdf;
 /*** COPYRIGHT NOTICE *********************************************************
  *
  * Copyright 2009-2017 ProjeQtOr - Pascal BERNARD - support@projeqtor.org
@@ -252,6 +253,7 @@ use Spipu\Html2Pdf\Html2Pdf;
 <?php function finalizePrint() {
   global $outMode, $download, $includeFile, $orientation;
   $pdfLib='html2pdf';
+  //$pdfLib='mPdf';
   if (isWkHtmlEnabled()) {
     $pdfLib='WkHtmlToPdf';
   }
@@ -288,9 +290,9 @@ use Spipu\Html2Pdf\Html2Pdf;
     if ($pdfLib=='html2pdf') {
       /* HTML2PDF way */
       require_once '../external/html2pdf/vendor/autoload.php';
-      
-      $html2pdf = new Html2Pdf($orientation,'A4','en');
-      //$html2pdf = new HTML2PDF($orientation,'A4','en');
+      //require_once '../external/html2pdf/src/MyPdf.php';
+      //$html2pdf = new MyPdf($orientation,'A4','en');
+      $html2pdf = new HTML2PDF($orientation,'A4','en');
       
       //$html2pdf->setModeDebug();
       $html2pdf->pdf->SetDisplayMode('fullpage');
@@ -314,6 +316,30 @@ use Spipu\Html2Pdf\Html2Pdf;
         $html2pdf->Output($outputFileName,'D');
       } else {
         $html2pdf->Output($outputFileName);
+      }
+    } else     if ($pdfLib=='mPdf') {
+      /* MPDF way */
+      require_once '../external/mPdf/autoload.php';
+      //$html2pdf = new //myHtml2Pdf($orientation,'A4','en');
+      $mPdf = new \Mpdf\Mpdf(['orientation' => $orientation]); 
+      
+      //$html2pdf->pdf->SetDisplayMode('fullpage');
+      //$html2pdf->pdf->SetMargins(10,10,10,10);
+      //$fontForPDF=Parameter::getGlobalParameter('fontForPDF');
+      //if (!$fontForPDF) $fontForPDF='freesans';
+      //$html2pdf->setDefaultFont($fontForPDF);
+      //$html2pdf->setTestTdInOnePage(false);
+
+       $mPdf->WriteHTML($content);
+     
+      if (ob_get_length()) {
+        ob_end_clean();
+      }
+      if (!$outputFileName) $outputFileName='document.pdf';
+      if ($download) {
+        $mPdf->Output($outputFileName,'D');
+      } else {
+        $mPdf->Output($outputFileName, 'I');
       }
 //traceExecutionTime($includeFile);
     } else if ($pdfLib=='dompdf') {
