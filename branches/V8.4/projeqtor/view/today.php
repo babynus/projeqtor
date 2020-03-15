@@ -271,7 +271,7 @@ function showProjects() {
             echo '  <td class="messageData" style="width:14px;margin:0;padding:0;spacing:0;border-left:0px;" '.$goto.' >'.'    <div class="colorHealth" style="'.$styleHealth.'background:'.$healthColor.';" title="'.$healthName.'">&nbsp;</div>'.'  </td>';
           }
         }
-        if ($showProject) echo '  <td style="width:'.$width.'px" class="messageDataValue'.($show?'':'Grey').'">'.($show?displayProgress(htmlDisplayPct($progress), $planned, $left, $real, true, true):'').'</td>';
+        if ($showProject) echo '  <td style="width:'.$width.'px" class="messageDataValue'.($show?'':'Grey').' colorNameData">'.($show?displayProgress(htmlDisplayPct($progress), $planned, $left, $real, true, true):'').'</td>';
         if ($showProject) echo '  <td style="width:'.$width.'px" class="messageDataValue'.($show?'':'Grey').'">'.($show?SqlList::getNameFromId('OverallProgress', $proj->idOverallProgress):"").'</td>';
         if ($workVisibility=='ALL' and $showProject) {
           echo '  <td class="messageDataValue'.($show?'':'Grey').'">'.($show?Work::displayWorkWithUnit($left):'').'</td>';
@@ -281,7 +281,7 @@ function showProjects() {
                               .'  <td class="messageDataValue'.($show?'':'Grey').'">'.($show?$late:'').'</td>';
         foreach ($arrayCols as $col) {
           if (!$showCol[$col]) continue;
-          echo '  <td class="messageDataValue'.($show?'':'Grey').'" onclick=\'gotoElement("'.$col.'",null);refreshProjectSelectorList();stockHistory("'.$col.'",null,"object");setSelectedProject("'.htmlEnCode($proj->id).'","'.htmlEnCode($proj->name).'");\' style="cursor: pointer;">'.($show?displayProgress($nbItem[$col], $nbItemAll[$col], $nbItemTodo[$col], $nbItemDone[$col]):'').'</td>';
+          echo '  <td class="messageDataValue'.($show?'':'Grey').' colorNameData" onclick=\'gotoElement("'.$col.'",null);refreshProjectSelectorList();stockHistory("'.$col.'",null,"object");setSelectedProject("'.htmlEnCode($proj->id).'","'.htmlEnCode($proj->name).'");\' style="cursor: pointer;">'.($show?displayProgress($nbItem[$col], $nbItemAll[$col], $nbItemTodo[$col], $nbItemDone[$col]):'').'</td>';
         }
         echo '</tr>';
       }
@@ -358,15 +358,15 @@ function displayProgress($value, $allValue, $todoValue, $doneValue, $showTitle=t
   if ($value==='') {
     return $value;
   }
-  $width=($print)?'45':'55';
-  ;
+  $width=($print)?'45':'65';
+
   $green=($allValue!=0 and $allValue)?round($width*($allValue-$todoValue)/$allValue, 0):$width;
   $red=$width-$green;
   
   $cptDisplayId+=1;
-  $result='<div style="position:relative; width:'.$width.'px" id="displayProgress_'.$cptDisplayId.'">';
-  $result.='<div style="overflow:hidden;position:absolute; left:0px; width:'.$green.'px;background: #AAFFAA;">&nbsp;</div>';
-  $result.='<div style="position:absolute; width:'.$red.'px;left:'.$green.'px;background: #FFAAAA;">&nbsp;</div>';
+  $result='<div style="position:relative; height:100%;width:'.$width.'px" id="displayProgress_'.$cptDisplayId.'">';
+  $result.='<div style="overflow:hidden;position:absolute; height:100%;left:0px; width:'.$green.'px;background: #AAFFAA;">&nbsp;</div>';
+  $result.='<div style="position:absolute; width:'.$red.'px;height:100%;left:'.$green.'px;background: #FFAAAA;">&nbsp;</div>';
   $result.='<div style="position:relative;">'.$value.'</div>';
   $result.='</div>';
   if ($showTitle and !$print and (!$isWork or $workVisibility=='ALL')) {
