@@ -139,6 +139,7 @@ class Html2Pdf
      */
     static protected $_subobj    = null;        // object html2pdf prepared in order to accelerate the creation of sub html2pdf
     static protected $_tables    = array();     // static table to prepare the nested html tables
+    static protected $_tmpFilesAreCleaned	= false;
 
     /**
      * list of tag definitions
@@ -232,6 +233,21 @@ class Html2Pdf
         return $this;
     }
 
+    /**
+     * Default destructor.
+     * Clean cache files once, at the end of the pdf generation
+     * @public
+     */
+    public function __destruct() {
+      if($this->_isSubPart || self::$_tmpFilesAreCleaned) return;
+      // remove all temporary files
+      $tmpfiles = glob(K_PATH_CACHE.'__tcpdf_*');
+      if (!empty($tmpfiles)) {
+        self::$_tmpFilesAreCleaned = true;
+        array_map('unlink', $tmpfiles);
+      }
+    }
+    
     /**
      * Gets the detailed version as array
      *
@@ -1181,8 +1197,8 @@ class Html2Pdf
      */
     protected function _listeArab2Rom($nbArabic)
     {
-        $nbBaseTen  = array('I','X','C','M');
-        $nbBaseFive = array('V','L','D');
+        $nbBaseTen  = array('i','x','c','m');
+        $nbBaseFive = array('v','l','d');
         $nbRoman    = '';
 
         if ($nbArabic<1) {
@@ -1505,7 +1521,13 @@ class Html2Pdf
     {
         // get the size of the image
         // WARNING : if URL, "allow_url_fopen" must turned to "on" in php.ini
-        $infos=@getimagesize($src);
+        if( strpos($src,'data:') === 0 ) {
+            $src = base64_decode( preg_replace('#^data:image/[^;]+;base64,#', '', $src) );
+            $infos = @getimagesizefromstring($src);
+            $src = "@{$src}";
+        } else {
+            $infos = @getimagesize($src);
+        }
 
         // if the image does not exist, or can not be loaded
         if (!is_array($infos) || count($infos)<2) {
@@ -1752,17 +1774,17 @@ class Html2Pdf
             $inBL[0]-= $border['l']['width'];
             $inBL[1]-= $border['b']['width'];
         }
-        
-        if ($inTL && ($inTL[0]<=0 || $inTL[1]<=0)) {
+
+        if (!is_array($inTL) || $inTL[0]<=0 || $inTL[1]<=0) {
             $inTL = null;
         }
-        if ($inTR && ($inTR[0]<=0 || $inTR[1]<=0)) {
+        if (!is_array($inTR) || $inTR[0]<=0 || $inTR[1]<=0) {
             $inTR = null;
         }
-        if ($inBR && ($inBR[0]<=0 || $inBR[1]<=0)) {
+        if (!is_array($inBR) || $inBR[0]<=0 || $inBR[1]<=0) {
             $inBR = null;
         }
-        if ($inBL && ($inBL[0]<=0 || $inBL[1]<=0)) {
+        if (!is_array($inBL) || $inBL[0]<=0 || $inBL[1]<=0) {
             $inBL = null;
         }
 
