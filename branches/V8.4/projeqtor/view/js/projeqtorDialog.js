@@ -8244,7 +8244,6 @@ function changeFileSizeMail(name){
       regex=id+'_'+type;
     }
     suprAttachments=attachments.replace(regex,'');
-    console.log(suprAttachments);
     if(dijit.byId('versionRef'+name).get('checked')==true){
       if(suprAttachments!=''){
         addAttachments=suprAttachments+'/'+docVersRef+'_'+type;
@@ -8281,7 +8280,6 @@ function changeFileSizeMail(name){
     dojo.byId('totalSizeNoConvert').value=noConvert;
     dojo.byId('totalSize').value=totalSize;
   }else{
-    console.log('no value');
     if(dijit.byId('versionRef'+name).get('checked')==true){
       dojo.byId('filesize'+name).value=octetConvertSize(val1);
       dojo.byId('filesizeNoConvert'+name).value=val1;

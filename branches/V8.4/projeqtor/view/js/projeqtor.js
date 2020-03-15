@@ -3588,7 +3588,6 @@ function refreshTodayProjectsList(value) {
 
 //var newWin=null;
 function openInNewWindow(eltClass, eltId) {
-  console.log("Goto Element in new window");
   var url="main.php?directAccess=true&objectClass="+eltClass+"&objectId="+eltId;
   var key=(window.event.ctrlKey)?'ctrl':((window.event.shiftKey)?'shift':'');
   var params=(key=='shift' && ! dojo.isChrome)?"scrollbars=yes":null;
