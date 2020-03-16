@@ -1134,35 +1134,8 @@ Allows you to define and create your own list of periods. These are used to defi
      - Flag to indicate this value is archived.   
 
 
-.. index:: Brands
 
-.. _brands:
 
-Brands
-******
-
-Allows you to define and create your own list of brands. These values are used in the IT asset management screens to register your equipment.
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for this value.
-   * - |RequiredField| Name
-     - Name of this value.
-   * - :term:`Closed`
-     - Flag to indicate this value is archived. 
-     
-     
-     
-     
 Renewal
 *******
 
