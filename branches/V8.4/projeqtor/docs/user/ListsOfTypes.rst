@@ -379,7 +379,6 @@ the open, restricted tender, with minimum capacity requirements or pre-selection
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
