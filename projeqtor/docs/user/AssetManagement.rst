@@ -153,6 +153,7 @@ But you can also create even more detailed lists with types of information stora
      - Description of the type.
 
 
+.. _asset-category:
 
 Asset category
 ==============
@@ -182,6 +183,7 @@ But you can also determine if a device is part of a hardware, network or worksta
 
 
 
+.. _brands:
 
 Brands
 ======
@@ -202,6 +204,7 @@ The brand screen allows to create a list of brands making up your IT infrastruct
    * - :term:`Closed`
      - Box checked indicates the type is archived.
 
+.. _models:
 
 Models
 ======
@@ -226,6 +229,7 @@ The model screen allows you to create a list of models linked to a brand and typ
    * - Description
      - Description of the model.
 
+.. _location:
 
 Location
 ========
