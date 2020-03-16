@@ -220,6 +220,44 @@ You can move budgets by "drag and drop".
    
    
    
+
+
+.. raw:: latex
+
+    \newpage
+    
+.. index:: Financial situation  
+
+.. _financial-situation:  
+ 
+Financial situation
+===================
+
+the financial situation screens allow you to precisely follow up all the financial elements of a project. Expenses as incomes.
+
+A tracking view also exists to view only expenses and one for incomes.
+
+The following operations will then be displayed for the expenses.
+
+- Call for tender.
+- provider tenders
+- Orders to provider
+- Provider bills
+
+
+And the following operations will then displayed for the incomes.
+
+- Client quatations
+- Client orders
+- Clients bills
+- Client paiements
+
+Find the financial situation in its entirety on the respective screens of the elements.
+
+Financial status screens will only display the most recent transaction.
+
+
+   
    
       
 
@@ -1501,3 +1539,21 @@ When your financial elements have been linked and attached to a project expense 
 
 .. figure:: /images/GUI/EXPENSES_ZONE_ExpensesDetailsSynthesis.png   
    :alt: Details Line and financial expenses synthesis
+
+   
+   
+   
+   
+.. raw:: latex
+
+    \newpage
+
+.. index::  Financial items 
+
+.. _situation-expense:
+
+Expenses detail lines
+=====================
+
+
+   

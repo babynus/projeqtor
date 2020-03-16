@@ -38,14 +38,12 @@ This section allows to identify items of the element.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Allocation dialog box - Required field |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id` 
      - unique id of the element
-     - Project list.
    * - |RequiredField| Resource
      - Resource list.
    * - |RequiredField| Profile
@@ -105,7 +103,6 @@ This section allows to manage resource allocation to projects.
 
 
 .. list-table:: Fields - Resource allocation list
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -149,7 +146,6 @@ This section allows to manage resource allocation to projects.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Allocation dialog box - Required field |ReqFieldLegend|
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -215,7 +211,6 @@ This section allows to manage resource allocation to projects.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Replace allocation dialog box - Required field |ReqFieldLegend| 
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -275,7 +270,6 @@ Assigning a resource to a task makes it possible to define its function on the l
    * :ref:`PeriodandRate`
 
 .. list-table:: Fields of assignment list
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -348,7 +342,6 @@ You can have a goto button at the top of the assignments area if you are assigne
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Fields - Assignment dialog box
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1120,7 +1113,6 @@ Allows tracking of tickets attached to the activity throught the "planning activ
 .. tabularcolumns:: |l|l|
 
 .. list-table:: 
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1263,7 +1255,34 @@ By default, the value is set to "1" (highest priority).
 
 See: :ref:`Scheduling priority<scheduling-priority>`.
 
+.. raw:: latex
 
+    \newpage
+
+.. _display-sub-project-activity:
+
+Sub-Project and Sub-Activity
+----------------------------
+
+On the projects screen, this section allows you to display the sub-projects linked to the selected one.
+
+.. figure:: /images/GUI/COMMON_ZONE_SubProject.png
+   :alt: display of sub projects
+   
+   Display of sub projects
+ 
+ 
+In the same way, you can display on the activities screen, the sub-activities linked to the selected activity.
+
+.. figure:: /images/GUI/COMMON_ZONE_SubActivity.png
+   :alt: display of sub activities
+   
+   Display of sub activities
+   
+   
+   
+   
+   
  
 .. raw:: latex
 
@@ -1390,7 +1409,6 @@ If Item A is linked to Item B, Item B is automatically linked to Item A.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Fields of linked elements list
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1480,7 +1498,6 @@ This section allows to attach files or hyperlinks to items of elements.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Fields of attachments list
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1514,6 +1531,8 @@ Select an attachment depends on whether is a file or a hyperlink.
    Attached files are stored on server side.
    
    Attachments directory is defined in :ref:`Global parameters<file-directory-section>` screen.
+   
+   You can select one or more files of different types with the CTRL shortcuts when the files are not consecutive or SHIFT for those that follow.
 
     .. figure:: /images/GUI/COMMON_BOX_attachmentFile.png
        :alt: Dialog box - Attachment for file
@@ -1535,7 +1554,6 @@ Select an attachment depends on whether is a file or a hyperlink.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Fields - Attachment dialog box
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
@@ -1548,6 +1566,13 @@ Select an attachment depends on whether is a file or a hyperlink.
      - Attachment is visible to every member of the creator’s team.
    * - Private
      - Attachment is visible only to the creator.
+
+
+
+
+.. note:: These files can be attached to the item details. See: :ref:`
+
+
 
 
 .. raw:: latex
@@ -1584,7 +1609,6 @@ Predefined notes are defined in :ref:`predefined-notes` screen.
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Fields of notes list
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field
