@@ -1212,6 +1212,7 @@ Click and select one ressource to display only his data.
 
 Click and select one team to display only data of resources of this team.
 
+Click and select one organization to display only data of resources of this organization.
 
 
 

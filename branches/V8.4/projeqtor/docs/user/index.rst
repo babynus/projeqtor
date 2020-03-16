@@ -29,9 +29,8 @@ Find in this manual, every 3 months, the latest news integrated into ProjeQtOr
    
    **Asset Management**
 
-   .. image:: /images/ParcIT.png
+   .. image:: /images/iconAsset.png
       :align: center
-      :scale: 40
       
    Projeqtor now includes the management of your IT equipment and your network.
    
@@ -45,12 +44,12 @@ Find in this manual, every 3 months, the latest news integrated into ProjeQtOr
 
    **Supplier and Client contract**
 
-   .. image:: /images/iconMeeting32.png
+   .. image:: /images/iconSupplierContract.png
       :align: center
 
-   ProjeQtOr integrates the AGILE method LiveMeeting into its basic version .
+   Follow the details of your customer or supplier contracts with a view of the Gantt chart.
          
-   :ref:`live-meeting-steering`
+   :ref:`supplier-contrat` et :ref:`client-contract`
    
    
    
@@ -58,14 +57,14 @@ Find in this manual, every 3 months, the latest news integrated into ProjeQtOr
 
 .. container:: 
 
-   **Change request**
+   **Attachments on emails**
 
-   .. image:: /images/iconChangeRequest.png
+   .. image:: /images/iconAttachment.png
       :align: center
       
-   change demand management is integrated with ProjeQtOr for better organization AGILE.
+   You can now attach the attached files to the detail of the element. 
          
-   :ref:`change-request`
+   :ref:`Email detail<email-detail>`
    
    
    
@@ -74,14 +73,14 @@ Find in this manual, every 3 months, the latest news integrated into ProjeQtOr
 
 .. container:: 
 
-   **Aggregated Resource**
+   **Financial situation**
 
-   .. image:: /images/PoolRessource.png
+   .. image:: /images/iconSituation.png
       :align: center
       
-   change demand management is integrated with ProjeQtOr for better organization AGILE.
+   Financial follow-up on the elements of expenses and incomes.
          
-   :ref:`aggregated-resource`
+   :ref:`financial-situation`
       
 
       

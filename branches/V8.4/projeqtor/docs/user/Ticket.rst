@@ -10,11 +10,10 @@
 Tickets
 -------
 
-A ticket is a kind of task that can not be unitarily planned. 
+A ticket is a kind of task that cannot be scheduled in a unitary manner.
 
-It is generally a short time activity for a single ticket, that is interesting to follow unitarily 
+This is usually a short-lived activity for a single ticket that gives feedback to the issuer or to keep track of the result.
 
-to give a feedback to the issuer or to keep trace of result. 
 
 .. figure:: /images/GUI/TICKET_SCR_Presentation.png
    :alt: Tickets management screen

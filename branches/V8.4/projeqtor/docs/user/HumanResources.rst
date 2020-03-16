@@ -230,14 +230,6 @@ If an employee does not have a manager, the administrator of the Regulated absen
 The administrator is obligatorily a leave manager
 
 
-.. figure:: /images/GUI/RH_ZONE_MenuAdminManager.PNG
-   :alt: Employee Menu 
-   :scale: 70%
-          
-   Administrator and Leaves Manager menu.
-
-
-
 .. warning::
 
    When a resource is no longer **"used"**, all the elements of the Regulated absence module are deleted by the module:
@@ -363,7 +355,7 @@ You no longer have this type of holiday available and can not ask any more
 Employment contract
 ===================
 
-You can see the details of the contracts and which employee is attached to them 
+You can see the details of the contracts and which employee is attached to them.
 
 .. figure:: /images/GUI/RH_SCR_EmploymentContract.png
    :alt: Leaves rights earned

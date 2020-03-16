@@ -736,7 +736,11 @@ You define the administrator's email with the possibility of choosing a differen
 
 You configure the SMTP serveur and port - the login name and password 
 
-You can also define the sendmail path or the send method
+You can also define the sendmail path or the send method.
+
+The maximum size not to be exceeded for sending emails is in bytes by default if you do not fill in the units.
+
+You can use bytes (O), megabytes (M) and gigabytes (G).
 
 .. _mail-titles:
 
