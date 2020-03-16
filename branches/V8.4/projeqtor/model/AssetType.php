@@ -35,6 +35,8 @@ class AssetType extends ShortType {
   
   private static $_fieldsAttributes=array(
       'lockCancelled'=>'hidden',
+      'name'=>'required',
+      'idWorkflow'=>'required',
   );
   
    /** ==========================================================================
