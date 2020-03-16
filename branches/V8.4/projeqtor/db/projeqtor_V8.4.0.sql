@@ -149,8 +149,6 @@ CREATE TABLE `${prefix}suppliercontract` (
   `cancelled` INT(1) UNSIGNED DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
-CREATE INDEX suppliercontractType ON `${prefix}suppliercontract` (idSupplierContractType);
-CREATE INDEX suppliercontractRenewal ON `${prefix}suppliercontract` (idRenewal);
 
 -- ======================================
 -- Client Contract 
@@ -171,7 +169,7 @@ CREATE TABLE `${prefix}clientcontract` (
   `noticePeriod` int(5) unsigned DEFAULT 0,
   `idUnitDurationNotice` int(12) unsigned DEFAULT 2,
   `noticeDate` date DEFAULT NULL,
-  `deadlineDate`date DEFAULT NULL,
+  `deadlineDate` date DEFAULT NULL,
   `periodicityContract` int(5) unsigned DEFAULT 0,
   `periodicityBill` int(5) unsigned DEFAULT 0,
   `idRenewal` int(12) unsigned DEFAULT NULL,
@@ -197,8 +195,6 @@ CREATE TABLE `${prefix}clientcontract` (
   `cancelled` INT(1) UNSIGNED DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
-CREATE INDEX clientcontractType ON `${prefix}clientcontract` (idClientContractType);
-CREATE INDEX clientcontractRenewal ON `${prefix}clientcontract` (idRenewal);
 
 INSERT INTO `${prefix}type` (`scope`, `name`, `sortOrder`, `idWorkflow`, `idle`) VALUES 
 ('SupplierContract', 'management assistance',10,1, 0),
