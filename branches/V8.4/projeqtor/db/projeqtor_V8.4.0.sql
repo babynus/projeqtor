@@ -64,10 +64,10 @@ INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
 (36,'ClientContract', 0),
 (37,'Asset',0);
 
-INSERT INTO `${prefix}notifiable` (`id`,`name`, `idle`) VALUES 
-(28,'SupplierContract', 0),
-(29,'ClientContract', 0),
-(30,'Asset',0);
+INSERT INTO `${prefix}notifiable` (`name`, `idle`) VALUES 
+('SupplierContract', 0),
+('ClientContract', 0),
+('Asset',0);
 
  INSERT INTO `${prefix}mailable` (`id`,`name`, `idle`) VALUES 
 (42,'SupplierContract',0),
