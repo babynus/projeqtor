@@ -584,17 +584,32 @@ Test sessions group test cases to be executed for a particular purpose.
 
 .. title:: Asset Management
 
-.. _asset-management:
+.. _asset-management-feature:
 
 Asset Management
 ****************
 
 ProjeQtor includes IT asset management. The park is made up of equipment and each of these equipment may contain other equipment and will have a type of equipment.
 
+
+.. rubric:: Licenses
+
 The concept of license will be managed in the form of equipment, by defining license type equipment, which is linked to software type equipment.
 
 This method makes it possible to define a stock of purchased licenses and to assign them progressively to the equipment on which they are installed.
 
+
+.. rubric:: Equipment
+
+This feature allows you to manage equipment types, categories, brands and models of equipment.
+
+But also the suppliers and the locations of this equipment.
+
+
+.. topic:: **More details**
+
+   * :ref:`module-management`
+   * :ref:`requirements-dashboard`   
 
 
 

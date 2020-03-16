@@ -1970,7 +1970,6 @@ Origin field
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Fields of add an origin element dialog box
-   :widths: 20, 80
    :header-rows: 1
 
    * - Field

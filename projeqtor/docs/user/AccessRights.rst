@@ -36,11 +36,12 @@ This screen is then accessible via a dedicated menu in the Acces Right
 * the ticketing
 * the time tracking
 * the requirements
-* the financial section with expenses and / or incomes
+* the financial section with expenses - Incomes and financial situation
 * the risks
 * the meetings
 * the steering 
 * the products configuration (versions, components...)
+* the asset management
 * the humans resources
 * the external documents management 
 * the organizations (level society) management 
