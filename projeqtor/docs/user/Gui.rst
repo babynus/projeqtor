@@ -16,7 +16,7 @@ Graphical User Interface
 
 ProjeQtOr interface is divided into several areas.
 
-.. figure:: /images/GUI/GUI_SCR_Overview_V82.png
+.. figure:: /images/GUI/GUI_SCR_Overview.png
    :alt: Overview
    :align: center
    
@@ -37,6 +37,8 @@ ProjeQtOr interface is divided into several areas.
    |six| :ref:`detail-window` 
    
    |seven| :ref:`info-bar`
+   
+   |eight| :ref:`activity-stream`
 
 
 .. rubric:: Area separation
@@ -386,7 +388,7 @@ Keyboard Shortcut
 
 **[CTRL]+S** Save the current element
 
-**[CTRL]+clic** Opens the selected linked element in a new tab
+**[CTRL]+clic** Open the selected item in a new tab
 
 **[F1]** Opens the online manual (contextual opening on the current screen)
 
@@ -1036,7 +1038,7 @@ See: :ref:`thumbnails`
 
 
 
-.. index:: Email (Send)
+.. index:: Email (Send details)
   
 .. _email-detail:
 
@@ -1048,7 +1050,7 @@ See: :ref:`thumbnails`
          :alt: Dialog box - Email detail
          :align: center
          
-         Email details
+         Email details dialog box
          
       The list is defined according to the role of the recipient.
 
@@ -1056,29 +1058,54 @@ See: :ref:`thumbnails`
          
       Flag on the role checkbox to define the recipients list.
       
-            **Checkbox other**
+            .. compound:: **Checkbox other**
+                  
+               Flag on the checkbox other to manually enter email addresses.
+                            
+               When sending an email, the address (es) entered in "other" remains in memory and will be proposed during the next mailing
+                           
+               Use commas or semicolons to separate addresses.
+                  
+                  
+                  
+                  
+            .. compound:: **Message**
+            
+               The message that will be included in the body of the email, in addition to a  complete description of the item.
+            
       
-            Flag on the checkbox other to manually enter email addresses.
-             
-            When sending an email, the address (es) entered in "other" remains in memory and will be proposed during the next mailing
       
-            **Message**
       
-            The message that will be included in the body of the email, in addition to a  complete description of the item.
+            .. compound:: **Save as note**
+            
+               Flag on to indicate the email message will be saved as a note.
+               
+               
+            
+            .. compound:: **Email Template**
+            
+               You can choose an email template even without having predefined it in the settings.
+               
+               To create and view templates. See :ref:`email-template`.
+               
+               
       
-            **Save as note**
+            .. compound:: **Files to attach to email**
+            
+               Attachments for the item appear in the attachment table. If the item has no files attached then the table is not visible.
       
-            Flag on to indicate the email message will be saved as a note.
+               The maximum size of attached files must be entered in the global parameters in the Mailing tab. The size indicated is in bytes unless you indicate otherwise. see: :ref:`Global parameters<gp-emailing-section>`
       
-            **Email Template**
-      
-            You can choose an email template even without having predefined it in the settings
+               When you check a file to send the size of the latter is displayed at the top right of the table. 
+               
+                  * If several files are selected, then the total size of these files is calculated and displayed.
+               
+                  * If the total size 
+
+
+
+
          
-            To create and view templates. See :ref:`email-template`
-      
-      :ref:`Return to details windows buttons<detail-window-button>`
-
-
 
 .. index:: Subscribe
   

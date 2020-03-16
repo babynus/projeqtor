@@ -169,33 +169,51 @@ Just define your templates, and select it on the "Mail on Events"
    * if **element** and **type** are defined, only elements of the corresponding type will be able to select the model of mail
    
 .. rubric:: Specifics Tags on email template
+
+.. figure:: /images/GUI/CONTROLAUTO_ZONE_SpecificTags.png
+   :alt: specifics tags 
+   
+   Specific tag
  
 In the model, the user can use any property of the object, and display it in the mail using specific tags.
 
 you just have to use the ${projectName} tag for the project name to appear. 
 
-Likewise with ${idproject} to display the identification number of it
+Likewise with ${idproject} to display the identification number of it.
    
-.. warning::
+.. tip::
    
-   for properties referencing an external element, such as idXxxxx, use ${nameXxxxx}
+   For properties referencing an external element, such as idXxxxx, use ${nameXxxxx}
    
      
 Other tags are available as parameters for email titles
 
 More details, see :ref:`Global Parameters<mail>`
 
-.. topic:: some specific tags can also be used
+.. topic:: Some specific tags can also be used
+
    
-     - ${item} : class of the item 
-     - ${dbName} : display name of current instance
-     - ${responsible} : synonym for ${nameResource}
-     - ${sender} : name of user sending the email
-     - ${project} : synonym for ${nameProject}
-     - ${url} : url to get the direct link to the item
-     - ${goto} : display Class and Id of item, clickable to have direct link to the item
+   - ${item} : class of the item 
+   - ${dbName} : display name of current instance
+   - ${responsible} : synonym for ${nameResource}
+   - ${sender} : name of user sending the email
+   - ${project} : synonym for ${nameProject}
+   - ${url} : url to get the direct link to the item
+   - ${goto} : display Class and Id of item, clickable to have direct link to the item
+     
+.. topic:: Attached files. 
         
-.. topic:: This tags are available except in the mail title because they display a table**
+   - ${allAttachements} : allow to add to your template all the attached files of the element
+   - ${lastAttachement} : allow to add the last attached files to the element
+     
+   .. warning:: When sending all the files, the software retrieves the files one by one and this, in the order of insertion, from the most recent to the oldest attached file.
+
+      If the maximum size allowed does not allow all files to be sent, then the software will stop until the maximum size is reached.
+   
+      If the last attached file saved in the software alone exceeds the maximum authorized size, then no file is sent.
+
+        
+.. topic:: This tags are available except in the mail title because they display a table
    
      - ${HISTORY} : displays the last change of an object.
      - ${HISTORYFULL} : display all the modifications
