@@ -235,6 +235,10 @@
 .iconAlert22 { background-image: url(images/iconAlert22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconAlert16 { background-image: url(images/iconAlert16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
+.iconAsset32 { background-image: url(images/iconAsset.png);  background-repeat: no-repeat; width: 32px; height: 32px; background-size: 32px 32px;}
+.iconAsset22 { background-image: url(images/iconAsset.png);  background-repeat: no-repeat; width: 22px; height: 22px; background-size: 22px 22px;}
+.iconAsset16 { background-image: url(images/iconAsset.png);  background-repeat: no-repeat; width: 16px; height: 16px; background-size: 16px 16px;}
+
 .iconAsset { background-image: url(images/iconAsset.png); }
 .ProjeQtOrFlatBlue .iconAsset { background-image: url(customIcons/blue/iconAsset.png); }
 .ProjeQtOrFlatRed .iconAsset { background-image: url(customIcons/red/iconAsset.png); }
