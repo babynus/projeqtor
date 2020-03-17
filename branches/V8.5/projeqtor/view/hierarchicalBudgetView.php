@@ -88,7 +88,7 @@ echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTab
 echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv">' . i18n('colAvailableAmount') . '</div></TD>' ;
 echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv">' . i18n('colBilledAmount') . '</div></TD>' ;
 echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv">' . i18n('colLeftAmount') . '</div></TD>' ;
-echo '  <TD class="" id="hierarchicBudgetScrollSpace" style="width:12px;" >&nbsp;</TD>' ;
+echo '  <TD class="" id="hierarchicBudgetScrollSpace" ><div style="width:12px;">&nbsp;</div></TD>' ;
 echo '</TR>';
 echo '</table>';
 
