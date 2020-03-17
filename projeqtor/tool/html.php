@@ -307,6 +307,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
         $budgetList=SqlList::getList('Budget','bbsSortable',$selection,$showIdle);
       }else{
         $budgetList=SqlList::getListWithCrit('Budget',array('isUnderConstruction'=>'0','idle'=>'0','cancelled'=>'0'),'bbsSortable',$selection);
+				foreach ($budgetList as $idB=>$bbsB) { if (! $bbsB) unset ($budgetList[$idB]); }
         $budgetListId = array_flip($budgetList);
       }
     }
