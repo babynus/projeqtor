@@ -769,7 +769,22 @@
                     <?php 
                 }
             }
-            
+            // workflow
+            $isType=get_class($obj);
+            if (property_exists($obj,'idWorkflow') and  strpos($isType,'Type')==(strlen($isType)-4)) {
+            ?>
+                <tr class="detail">
+                  <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('changeWorkFlow');?>&nbsp;:&nbsp;</td>
+                  <td>
+                    <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+                    <?php echo autoOpenFilteringSelect();?>
+                    id="changerWorkFlow" name="changerWorkFlow">
+                    <?php htmlDrawOptionForReference('idWorkflow',null,false,true);?>
+                </select>
+                  </td>
+                </tr>
+           <?php 
+           }
 // MTY - LEAVE SYSTEM
             ?>          </table>
       </div>
@@ -854,6 +869,7 @@
                 </select>
               </td>
             </tr>
+            
             <?php  }?>
             <?php if(property_exists(get_class($obj), 'isLdap')){?>
             <tr class="detail">
