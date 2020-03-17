@@ -73,22 +73,22 @@ $query='select ' . $querySelect
 . ' order by ' . $queryOrderBy;
 $result=Sql::query($query);
 // Header
-echo '<table id="hierarchicalBudgetListHeader" align="left" width="100%" style="min-width:1350px">';
+echo '<table id="hierarchicalBudgetListHeader" align="left" width="100%" style="min-width:1350px;">';
 echo '<TR class="ganttHeight" style="height:32px">';
 echo '  <TD class="reportTableHeader" style="width:20px;min-width:20px;max-width:20px; border-right: 0px;"></TD>';
 echo '  <TD class="reportTableHeader" style="border-left:0px; text-align: left;">' . i18n('colBudget') . '</TD>';
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv">' . i18n('colEstimateAmount') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv">' . i18n('colInitialAmount') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv">' . i18n('colUpdate1Amount') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv">' . i18n('colUpdate2Amount') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv">' . i18n('colUpdate3Amount') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv">' . i18n('colUpdate4Amount') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv">' . i18n('colUpdatedAmount') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv">' . i18n('colEngagedAmount') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv">' . i18n('colAvailableAmount') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv">' . i18n('colBilledAmount') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv">' . i18n('colLeftAmount') . '</div></TD>' ;
-echo '  <TD class="" id="hierarchicBudgetScrollSpace" style="width:12px;" >&nbsp;</TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colEstimateAmount') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colInitialAmount') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colUpdate1Amount') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colUpdate2Amount') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colUpdate3Amount') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colUpdate4Amount') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colUpdatedAmount') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colEngagedAmount') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colAvailableAmount') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colBilledAmount') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colLeftAmount') . '</div></TD>' ;
+echo '  <TD class="" id="hierarchicBudgetScrollSpace" ><div style="width:12px;">&nbsp;</div></TD>' ;
 echo '</TR>';
 echo '</table>';
 
