@@ -339,12 +339,12 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (1,246,8),
 (1,247,8);
 
-INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT prf.id , prf.situation, 1 FROM `${prefix}profile` prf where prf.profilecode = 'ADM' or prf.profilecode = 'PL';
-INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT prf.id , prf.situation, 2 FROM `${prefix}profile` prf where prf.profilecode != 'ADM' and prf.profilecode != 'PL';
+INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT prf.id , 'situation', 1 FROM `${prefix}profile` prf where prf.profilecode = 'ADM' or prf.profilecode = 'PL';
+INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT prf.id , 'situation', 2 FROM `${prefix}profile` prf where prf.profilecode != 'ADM' and prf.profilecode != 'PL';
 -- ======================================
 -- Habilitation Other
 -- ======================================
-INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT prf.id , prf.generateProjExpense, 1 FROM `${prefix}profile` prf;
+INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT prf.id , 'generateProjExpense', 1 FROM `${prefix}profile` prf;
 
 ALTER TABLE `${prefix}term` ADD `idResource` int(12) unsigned DEFAULT NULL , ADD `done` int(1) unsigned DEFAULT '0';
 
