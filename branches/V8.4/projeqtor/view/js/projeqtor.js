@@ -575,7 +575,9 @@ function changeTheme(newTheme) {
     dojo.byId('body').className = 'tundra ' + newTheme;
     // Mehdi #2887
     var callBack = function() { 
-      addMessage("Theme=" + newTheme); 
+      addMessage("Theme=" + newTheme);
+      console.log(newTheme);
+      resizeContainer("mainDivContainer", null);
     };
     saveDataToSession('theme',newTheme, true, callBack);
   }
