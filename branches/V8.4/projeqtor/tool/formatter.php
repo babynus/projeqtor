@@ -109,7 +109,8 @@ function booleanFormatter($value) {
 
 function colorFormatter($value) {
   if ($value) { 
-    return '<table width="100%"><tr><td style="background-color: ' . $value . '; width: 100%;">&nbsp;</td></tr></table>'; 
+    //return '<table width="100%"><tr><td style="background-color: ' . $value . '; width: 100%;">&nbsp;</td></tr></table>';
+    return colorNameFormatter("&nbsp;#split#".$value); 
   } else { 
     return ''; 
   }
