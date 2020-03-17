@@ -344,7 +344,7 @@ INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) S
 -- ======================================
 -- Habilitation Other
 -- ======================================
-INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT prf.id , prf.generateProjExpense, 1 FROM `profile` prf;
+INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT prf.id , prf.generateProjExpense, 1 FROM `${prefix}profile` prf;
 
 ALTER TABLE `${prefix}term` ADD `idResource` int(12) unsigned DEFAULT NULL , ADD `done` int(1) unsigned DEFAULT '0';
 
