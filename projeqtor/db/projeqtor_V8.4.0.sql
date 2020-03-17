@@ -6,17 +6,17 @@
 -- ///////////////////////////////////////////////////////////
 
 UPDATE `${prefix}copyable` SET `id`=27, `sortOrder` = '127' WHERE `name`='ChangeRequest';
-UPDATE `${prefix}menu` SET `sortOrder` = '201' WHERE `menu`.`name` = 'menuExpenses';
-UPDATE `${prefix}menu` SET `sortOrder` = '202' WHERE `menu`.`name` = 'menuBudget';
-UPDATE `${prefix}menu` SET `sortOrder` = '205' WHERE `menu`.`name` = 'menuCallForTender';
-UPDATE `${prefix}menu` SET `sortOrder` = '206' WHERE `menu`.`name` = 'menuTender';
-UPDATE `${prefix}menu` SET `sortOrder` = '207' WHERE `menu`.`name` = 'menuProviderOrder';
-UPDATE `${prefix}menu` SET `sortOrder` = '208' WHERE `menu`.`name` = 'menuProviderTerm';
-UPDATE `${prefix}menu` SET `sortOrder` = '209' WHERE `menu`.`name` = 'menuProviderBill';
-UPDATE `${prefix}menu` SET `sortOrder` = '210' WHERE `menu`.`name` = 'menuProviderPayment';
-UPDATE `${prefix}menu` SET `sortOrder` = '211' WHERE `menu`.`name` = 'menuIndividualExpense';
-UPDATE `${prefix}menu` SET `sortOrder` = '295' WHERE `menu`.`name` = 'menuRiskManagementPlan';
-UPDATE `${prefix}measureunit` SET `sortOrder` = '50' WHERE `measureunit`.`name` = 'month';
+UPDATE `${prefix}menu` SET `sortOrder` = '201' WHERE `name` = 'menuExpenses';
+UPDATE `${prefix}menu` SET `sortOrder` = '202' WHERE `name` = 'menuBudget';
+UPDATE `${prefix}menu` SET `sortOrder` = '205' WHERE `name` = 'menuCallForTender';
+UPDATE `${prefix}menu` SET `sortOrder` = '206' WHERE `name` = 'menuTender';
+UPDATE `${prefix}menu` SET `sortOrder` = '207' WHERE `name` = 'menuProviderOrder';
+UPDATE `${prefix}menu` SET `sortOrder` = '208' WHERE `name` = 'menuProviderTerm';
+UPDATE `${prefix}menu` SET `sortOrder` = '209' WHERE `name` = 'menuProviderBill';
+UPDATE `${prefix}menu` SET `sortOrder` = '210' WHERE `name` = 'menuProviderPayment';
+UPDATE `${prefix}menu` SET `sortOrder` = '211' WHERE `name` = 'menuIndividualExpense';
+UPDATE `${prefix}menu` SET `sortOrder` = '295' WHERE `name` = 'menuRiskManagementPlan';
+UPDATE `${prefix}measureunit` SET `sortOrder` = '50' WHERE `name` = 'month';
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
 (228,'menuSupplierContract',151,'object', 204,'Project',0,'Financial'),
@@ -64,10 +64,10 @@ INSERT INTO `${prefix}modulemenu` (`idModule`,`idMenu`,`hidden`,`active`) VALUES
 (36,'ClientContract', 0),
 (37,'Asset',0);
 
-INSERT INTO `${prefix}notifiable` (`id`,`name`, `idle`) VALUES 
-(28,'SupplierContract', 0),
-(29,'ClientContract', 0),
-(30,'Asset',0);
+INSERT INTO `${prefix}notifiable` (`name`, `idle`) VALUES 
+('SupplierContract', 0),
+('ClientContract', 0),
+('Asset',0);
 
  INSERT INTO `${prefix}mailable` (`id`,`name`, `idle`) VALUES 
 (42,'SupplierContract',0),
@@ -339,12 +339,12 @@ INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VA
 (1,246,8),
 (1,247,8);
 
-INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT `profile`.id , 'situation', 1 FROM `profile` where `profile`.profilecode = 'ADM' or `profile`.profilecode = 'PL';
-INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT `profile`.id , 'situation', 2 FROM `profile` where `profile`.profilecode != 'ADM' and `profile`.profilecode != 'PL';
+INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT prf.id , prf.situation, 1 FROM `${prefix}profile` prf where prf.profilecode = 'ADM' or prf.profilecode = 'PL';
+INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT prf.id , prf.situation, 2 FROM `${prefix}profile` prf where prf.profilecode != 'ADM' and prf.profilecode != 'PL';
 -- ======================================
 -- Habilitation Other
 -- ======================================
-INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT `profile`.id , 'generateProjExpense', 1 FROM `profile`;
+INSERT INTO `${prefix}habilitationother` (`idProfile`, `scope`, `rightAccess`) SELECT prf.id , prf.generateProjExpense, 1 FROM `${prefix}profile` prf;
 
 ALTER TABLE `${prefix}term` ADD `idResource` int(12) unsigned DEFAULT NULL , ADD `done` int(1) unsigned DEFAULT '0';
 
