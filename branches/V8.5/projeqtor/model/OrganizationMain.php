@@ -446,7 +446,7 @@ class OrganizationMain extends SqlElement {
             case 'Project' :
                 $this->drawProjectsOfOrganizationAndSubOrganizations('_spe_'.$item, $refresh);
                 break;
-        }
+        }    
         if($item == 'arboOrganization'){
         	if ($print or !$this->id) return "";
         	$result='<table>';
@@ -801,202 +801,202 @@ public function saveOrganizationBudgetElement($idle=null,$idleDateTime=null,$nam
     }
   }
   
-  public function updateSynthesisOld($updateIdle=true) {
-// ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
-    if(Parameter::getGlobalParameter('useOrganizationBudgetElement')!="YES") {return;}
-// END ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
+//   public function updateSynthesisOld($updateIdle=true) {
+// // ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
+//     if(Parameter::getGlobalParameter('useOrganizationBudgetElement')!="YES") {return;}
+// // END ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
       
-    // Retrieve organization's projects (idle=0 and 1)
-    $prjOrgaList = $this->getRecursiveOrganizationProjects(true,false);
+//     // Retrieve organization's projects (idle=0 and 1)
+//     $prjOrgaList = $this->getRecursiveOrganizationProjects(true,false);
 
-    // Retrieve each BudgetElement of this organization  
-    $budgetElement = new BudgetElement();
-    // No update for closed BudgetElement
-    $scritBe = array('idle'=>'0', 'refType'=>'Organization', 'refId'=>$this->id);
-    $budgetElementList=$budgetElement->getSqlElementsFromCriteria($scritBe,FALSE,NULL,NULL,TRUE,TRUE,NULL);
-    foreach($budgetElementList as $bE) {
-        // Update the idle et idleDateTime of BudgetElement
-        if ($updateIdle) {
-            $bE->idle = $this->idle;
-            $bE->idleDateTime = $this->idleDateTime;
-        }
-        // Update the BudgetElement's name
-        $bE->refName = $this->name;
-        $periodValue = $bE->year;
-        $bE->validatedWork=0;
-        $bE->assignedWork=0;
-        $bE->realWork=0;
-        $bE->leftWork=0;
-        $bE->plannedWork=0;
-        $bE->validatedCost=0;
-        $bE->assignedCost=0;
-        $bE->realCost=0;
-        $bE->leftCost=0;
-        $bE->plannedCost=0;
-        $bE->expenseValidatedAmount=0;
-        $bE->expenseAssignedAmount=0;
-        $bE->expenseRealAmount=0;
-        $bE->expenseLeftAmount=0;
-        $bE->expensePlannedAmount=0;
-        $bE->reserveAmount=0;
-        $bE->totalValidatedCost=0;
-        $bE->totalAssignedCost=0;
-        $bE->totalRealCost=0;
-        $bE->totalLeftCost=0;
-        $bE->totalPlannedCost=0;
+//     // Retrieve each BudgetElement of this organization  
+//     $budgetElement = new BudgetElement();
+//     // No update for closed BudgetElement
+//     $scritBe = array('idle'=>'0', 'refType'=>'Organization', 'refId'=>$this->id);
+//     $budgetElementList=$budgetElement->getSqlElementsFromCriteria($scritBe,FALSE,NULL,NULL,TRUE,TRUE,NULL);
+//     foreach($budgetElementList as $bE) {
+//         // Update the idle et idleDateTime of BudgetElement
+//         if ($updateIdle) {
+//             $bE->idle = $this->idle;
+//             $bE->idleDateTime = $this->idleDateTime;
+//         }
+//         // Update the BudgetElement's name
+//         $bE->refName = $this->name;
+//         $periodValue = $bE->year;
+//         $bE->validatedWork=0;
+//         $bE->assignedWork=0;
+//         $bE->realWork=0;
+//         $bE->leftWork=0;
+//         $bE->plannedWork=0;
+//         $bE->validatedCost=0;
+//         $bE->assignedCost=0;
+//         $bE->realCost=0;
+//         $bE->leftCost=0;
+//         $bE->plannedCost=0;
+//         $bE->expenseValidatedAmount=0;
+//         $bE->expenseAssignedAmount=0;
+//         $bE->expenseRealAmount=0;
+//         $bE->expenseLeftAmount=0;
+//         $bE->expensePlannedAmount=0;
+//         $bE->reserveAmount=0;
+//         $bE->totalValidatedCost=0;
+//         $bE->totalAssignedCost=0;
+//         $bE->totalRealCost=0;
+//         $bE->totalLeftCost=0;
+//         $bE->totalPlannedCost=0;
         
-        foreach($prjOrgaList as $keyPrjOrga => $name) {
-            // Calculate BudgetElement
-            // For Validated, Assigned AND Left => Based on PlanningElement
-            $pe=new ProjectPlanningElement();
-            $whereClause='(refId='.$keyPrjOrga.' and refType=\'Project\') and ';
-            // BudgetElement period based on 
-            //      - realStartDate and realEndDate if PlanningElement.idle=1
-            //      - validatedStartDate and validatedEndDate if PlanningElement.idle = 0 
-            // xxxStartDate = null : No Filter >
-            // xxxEndDate = null : No filter <
-            // Else filter > and < on selected period
-            /*$whereClause .= '(
-                                (idle=1 and
-                                    (
-                                        (isnull(realStartDate) and isnull(realEndDate)) or
-                                        (isnull(realStartDate) and year(realEndDate)=YYYY) OR
-                                        (isnull(realEndDate)) OR
-                                        (year(realStartDate)=YYYY or year(realEndDate)=YYYY)
-                                    )
-                                ) or
-                                (idle=0 and
-                                    (
-                                        (isnull(validatedStartDate) and isnull(validatedEndDate)) or
-                                        (isnull(validatedStartDate) and year(validatedEndDate)=YYYY) OR
-                                        (isnull(validatedEndDate)) OR
-                                        (year(validatedStartDate)=YYYY or year(validatedEndDate)=YYYY)
-                                    )
-                                )
-                             )';
-            $whereClause = str_replace('YYYY', $periodValue, $whereClause);*/
-            $whereClause .= "( ".Sql::getYearFunction('coalesce(validatedStartDate,realStartDate,plannedStartDate,initialStartDate)')."=$periodValue )";
-            $arrayFields=array('validatedWork',
-                               'assignedWork',
-                               'realWork',
-                               'leftWork',
-                               'plannedWork',
-                               'validatedCost',
-                               'assignedCost',
-                               'realCost',
-                               'leftCost',
-                               'plannedCost',
-                               'expenseValidatedAmount',
-                               'expenseAssignedAmount',
-                               'expenseRealAmount',
-                               'expenseLeftAmount',
-                               'expensePlannedAmount',
-                               'reserveAmount',
-                               'totalValidatedCost',
-                               'totalAssignedCost',
-                               'totalRealCost',
-                               'totalLeftCost',
-                               'totalPlannedCost'
-                              );
-            $peSum = $pe->sumSqlElementsFromCriteria($arrayFields, null,$whereClause);
+//         foreach($prjOrgaList as $keyPrjOrga => $name) {
+//             // Calculate BudgetElement
+//             // For Validated, Assigned AND Left => Based on PlanningElement
+//             $pe=new ProjectPlanningElement();
+//             $whereClause='(refId='.$keyPrjOrga.' and refType=\'Project\') and ';
+//             // BudgetElement period based on 
+//             //      - realStartDate and realEndDate if PlanningElement.idle=1
+//             //      - validatedStartDate and validatedEndDate if PlanningElement.idle = 0 
+//             // xxxStartDate = null : No Filter >
+//             // xxxEndDate = null : No filter <
+//             // Else filter > and < on selected period
+//             /*$whereClause .= '(
+//                                 (idle=1 and
+//                                     (
+//                                         (isnull(realStartDate) and isnull(realEndDate)) or
+//                                         (isnull(realStartDate) and year(realEndDate)=YYYY) OR
+//                                         (isnull(realEndDate)) OR
+//                                         (year(realStartDate)=YYYY or year(realEndDate)=YYYY)
+//                                     )
+//                                 ) or
+//                                 (idle=0 and
+//                                     (
+//                                         (isnull(validatedStartDate) and isnull(validatedEndDate)) or
+//                                         (isnull(validatedStartDate) and year(validatedEndDate)=YYYY) OR
+//                                         (isnull(validatedEndDate)) OR
+//                                         (year(validatedStartDate)=YYYY or year(validatedEndDate)=YYYY)
+//                                     )
+//                                 )
+//                              )';
+//             $whereClause = str_replace('YYYY', $periodValue, $whereClause);*/
+//             $whereClause .= "( ".Sql::getYearFunction('coalesce(validatedStartDate,realStartDate,plannedStartDate,initialStartDate)')."=$periodValue )";
+//             $arrayFields=array('validatedWork',
+//                                'assignedWork',
+//                                'realWork',
+//                                'leftWork',
+//                                'plannedWork',
+//                                'validatedCost',
+//                                'assignedCost',
+//                                'realCost',
+//                                'leftCost',
+//                                'plannedCost',
+//                                'expenseValidatedAmount',
+//                                'expenseAssignedAmount',
+//                                'expenseRealAmount',
+//                                'expenseLeftAmount',
+//                                'expensePlannedAmount',
+//                                'reserveAmount',
+//                                'totalValidatedCost',
+//                                'totalAssignedCost',
+//                                'totalRealCost',
+//                                'totalLeftCost',
+//                                'totalPlannedCost'
+//                               );
+//             $peSum = $pe->sumSqlElementsFromCriteria($arrayFields, null,$whereClause);
 
-            $bE->validatedWork+=$peSum['sumvalidatedwork'];
-            $bE->assignedWork+=$peSum['sumassignedwork'];
-            $bE->realWork+=$peSum['sumrealwork'];
-            $bE->leftWork+=$peSum['sumleftwork'];
-            $bE->plannedWork+=$peSum['sumplannedwork'];
-            $bE->validatedCost+=$peSum['sumvalidatedcost'];
-            $bE->assignedCost+=$peSum['sumassignedcost'];
-            $bE->realCost+=$peSum['sumrealcost'];
-            $bE->leftCost+=$peSum['sumleftcost'];
-            $bE->plannedCost+=$peSum['sumplannedcost'];
-            $bE->expenseValidatedAmount+=$peSum['sumexpensevalidatedamount'];
-            $bE->expenseAssignedAmount+=$peSum['sumexpenseassignedamount'];
-            $bE->expenseRealAmount+=$peSum['sumexpenserealamount'];
-            $bE->expenseLeftAmount+=$peSum['sumexpenseleftamount'];
-            $bE->expensePlannedAmount+=$peSum['sumexpenseplannedamount'];
-            $bE->reserveAmount+=$peSum['sumreserveamount'];
-            $bE->totalValidatedCost+=$peSum['sumtotalvalidatedcost'];
-            $bE->totalAssignedCost+=$peSum['sumtotalassignedcost'];
-            $bE->totalRealCost+=$peSum['sumtotalrealcost'];
-            $bE->totalLeftCost+=$peSum['sumtotalleftcost'];
-            $bE->totalPlannedCost+=$peSum['sumtotalplannedcost'];
+//             $bE->validatedWork+=$peSum['sumvalidatedwork'];
+//             $bE->assignedWork+=$peSum['sumassignedwork'];
+//             $bE->realWork+=$peSum['sumrealwork'];
+//             $bE->leftWork+=$peSum['sumleftwork'];
+//             $bE->plannedWork+=$peSum['sumplannedwork'];
+//             $bE->validatedCost+=$peSum['sumvalidatedcost'];
+//             $bE->assignedCost+=$peSum['sumassignedcost'];
+//             $bE->realCost+=$peSum['sumrealcost'];
+//             $bE->leftCost+=$peSum['sumleftcost'];
+//             $bE->plannedCost+=$peSum['sumplannedcost'];
+//             $bE->expenseValidatedAmount+=$peSum['sumexpensevalidatedamount'];
+//             $bE->expenseAssignedAmount+=$peSum['sumexpenseassignedamount'];
+//             $bE->expenseRealAmount+=$peSum['sumexpenserealamount'];
+//             $bE->expenseLeftAmount+=$peSum['sumexpenseleftamount'];
+//             $bE->expensePlannedAmount+=$peSum['sumexpenseplannedamount'];
+//             $bE->reserveAmount+=$peSum['sumreserveamount'];
+//             $bE->totalValidatedCost+=$peSum['sumtotalvalidatedcost'];
+//             $bE->totalAssignedCost+=$peSum['sumtotalassignedcost'];
+//             $bE->totalRealCost+=$peSum['sumtotalrealcost'];
+//             $bE->totalLeftCost+=$peSum['sumtotalleftcost'];
+//             $bE->totalPlannedCost+=$peSum['sumtotalplannedcost'];
             
-            // If periodValue < current year
-            // Real based on work & expense
-            if($periodValue<date('Y')) {
-                $bE->realWork=0;
-                $bE->realCost=0;
-                $bE->totalRealCost=0;
+//             // If periodValue < current year
+//             // Real based on work & expense
+//             if($periodValue<date('Y')) {
+//                 $bE->realWork=0;
+//                 $bE->realCost=0;
+//                 $bE->totalRealCost=0;
 
-                $bE->expenseAssignedAmount=0;
-                $bE->expenseRealAmount=0;
-                $bE->expensePlannedAmount=0;                
-                $bE->expenseLeftAmount=0;
+//                 $bE->expenseAssignedAmount=0;
+//                 $bE->expenseRealAmount=0;
+//                 $bE->expensePlannedAmount=0;                
+//                 $bE->expenseLeftAmount=0;
                 
-                // For Real => based on Work 
-                $work = new Work();
-                $whereClause = 'year<=\''.$periodValue.'\' and idProject='.$keyPrjOrga;
-                $workSum = $work->sumSqlElementsFromCriteria(array('work','cost'),null,$whereClause);
-                $bE->realWork+=$workSum['sumwork'];
-                $bE->realCost+=$workSum['sumcost'];
-                $bE->totalRealCost+=$workSum['sumcost'];
+//                 // For Real => based on Work 
+//                 $work = new Work();
+//                 $whereClause = 'year<=\''.$periodValue.'\' and idProject='.$keyPrjOrga;
+//                 $workSum = $work->sumSqlElementsFromCriteria(array('work','cost'),null,$whereClause);
+//                 $bE->realWork+=$workSum['sumwork'];
+//                 $bE->realCost+=$workSum['sumcost'];
+//                 $bE->totalRealCost+=$workSum['sumcost'];
 
-                // For Expense => based on Expense (real - planned - left=if(planned-real>0 THEN planned-real ELSE 0) - Assigned=planned
-                $expense = new Expense();
-                $whereClause = 'year<=\''.$periodValue.'\' and idProject='.$keyPrjOrga;                
-                $expenseSum = $expense->sumSqlElementsFromCriteria(array('plannedAmount','realAmount'), null, $whereClause);
-                $bE->expenseAssignedAmount+=$expenseSum['sumplannedamount'];
-                $bE->expenseRealAmount+=$expenseSum['sumrealamount'];
-                $bE->expensePlannedAmount+=$expenseSum['sumplannedamount'];
-                $bE->expenseLeftAmount+=($expenseSum['sumplannedamount']-$expenseSum['sumrealamount']>0?$expenseSum['sumplannedamount']-$expenseSum['sumrealamount']:0);
+//                 // For Expense => based on Expense (real - planned - left=if(planned-real>0 THEN planned-real ELSE 0) - Assigned=planned
+//                 $expense = new Expense();
+//                 $whereClause = 'year<=\''.$periodValue.'\' and idProject='.$keyPrjOrga;                
+//                 $expenseSum = $expense->sumSqlElementsFromCriteria(array('plannedAmount','realAmount'), null, $whereClause);
+//                 $bE->expenseAssignedAmount+=$expenseSum['sumplannedamount'];
+//                 $bE->expenseRealAmount+=$expenseSum['sumrealamount'];
+//                 $bE->expensePlannedAmount+=$expenseSum['sumplannedamount'];
+//                 $bE->expenseLeftAmount+=($expenseSum['sumplannedamount']-$expenseSum['sumrealamount']>0?$expenseSum['sumplannedamount']-$expenseSum['sumrealamount']:0);
 
-              // Do again work, plannedWork, expense for each sub-project of project
-              $prj = new Project($keyPrjOrga,true);
-              $prjList = $prj->getRecursiveSubProjectsFlatList();
-              foreach($prjList as $keyPrj=>$prjName) {
-                  // For Real => based on Work 
-                  $work = new Work();
-                  $whereClause = 'year<=\''.$periodValue.'\' and idProject='.$keyPrj;
-                  $workSum = $work->sumSqlElementsFromCriteria(array('work','cost'),null,$whereClause);
-                  $bE->realWork+=$workSum['sumwork'];
-                  $bE->realCost+=$workSum['sumcost'];
-                  $bE->totalRealCost+=$workSum['sumcost'];
+//               // Do again work, plannedWork, expense for each sub-project of project
+//               $prj = new Project($keyPrjOrga,true);
+//               $prjList = $prj->getRecursiveSubProjectsFlatList();
+//               foreach($prjList as $keyPrj=>$prjName) {
+//                   // For Real => based on Work 
+//                   $work = new Work();
+//                   $whereClause = 'year<=\''.$periodValue.'\' and idProject='.$keyPrj;
+//                   $workSum = $work->sumSqlElementsFromCriteria(array('work','cost'),null,$whereClause);
+//                   $bE->realWork+=$workSum['sumwork'];
+//                   $bE->realCost+=$workSum['sumcost'];
+//                   $bE->totalRealCost+=$workSum['sumcost'];
 
-                  // For Expense => based on Expense (real - planned - left=if(planned-real>0 THEN planned-real ELSE 0) - Assigned=planned
-                  $expense = new Expense();
-                  $whereClause = 'year<=\''.$periodValue.'\' and idProject='.$keyPrj;                
-                  $expenseSum = $expense->sumSqlElementsFromCriteria(array('plannedAmount','realAmount'), null, $whereClause);
-                  $bE->expenseAssignedAmount+=$expenseSum['sumplannedamount'];
-                  $bE->expenseRealAmount+=$expenseSum['sumrealamount'];
-                  $bE->expensePlannedAmount+=$expenseSum['sumplannedamount'];
-                  $bE->expenseLeftAmount+=($expenseSum['sumplannedamount']-$expenseSum['sumrealamount']>0?$expenseSum['sumplannedamount']-$expenseSum['sumrealamount']:0);
-              } // SubProject
-            }
-        } // Organization's projects        
+//                   // For Expense => based on Expense (real - planned - left=if(planned-real>0 THEN planned-real ELSE 0) - Assigned=planned
+//                   $expense = new Expense();
+//                   $whereClause = 'year<=\''.$periodValue.'\' and idProject='.$keyPrj;                
+//                   $expenseSum = $expense->sumSqlElementsFromCriteria(array('plannedAmount','realAmount'), null, $whereClause);
+//                   $bE->expenseAssignedAmount+=$expenseSum['sumplannedamount'];
+//                   $bE->expenseRealAmount+=$expenseSum['sumrealamount'];
+//                   $bE->expensePlannedAmount+=$expenseSum['sumplannedamount'];
+//                   $bE->expenseLeftAmount+=($expenseSum['sumplannedamount']-$expenseSum['sumrealamount']>0?$expenseSum['sumplannedamount']-$expenseSum['sumrealamount']:0);
+//               } // SubProject
+//             }
+//         } // Organization's projects        
         
-        // periodValue < current year
-        //     - Left = assigned - real
-        if($periodValue<date('Y')) {
-            $bE->leftWork = ($bE->assignedWork-$bE->realWork<0?0:$bE->assignedWork-$bE->realWork);
-            $bE->leftCost = ($bE->assignedCost-$bE->realCost<0?0:$bE->assignedCost-$bE->realCost);
-            $bE->totalLeftCost = $bE->leftCost + ($bE->expenseAssignedAmount-$bE->expenseRealAmount<0?0:$bE->expenseAssignedAmount-$bE->expenseRealAmount);
-            }
-        //Planned (in fact reevaluate) = real + left then assigned
-        $bE->plannedCost = $bE->realCost+$bE->leftCost;
-        $bE->plannedWork = $bE->realWork+$bE->leftWork;
-        $bE->expensePlannedAmount = $bE->expenseRealAmount+$bE->expenseLeftAmount;
-        $bE->totalPlannedCost = $bE->totalRealCost+$bE->totalLeftCost;
-        $bE->save();
-    }
+//         // periodValue < current year
+//         //     - Left = assigned - real
+//         if($periodValue<date('Y')) {
+//             $bE->leftWork = ($bE->assignedWork-$bE->realWork<0?0:$bE->assignedWork-$bE->realWork);
+//             $bE->leftCost = ($bE->assignedCost-$bE->realCost<0?0:$bE->assignedCost-$bE->realCost);
+//             $bE->totalLeftCost = $bE->leftCost + ($bE->expenseAssignedAmount-$bE->expenseRealAmount<0?0:$bE->expenseAssignedAmount-$bE->expenseRealAmount);
+//             }
+//         //Planned (in fact reevaluate) = real + left then assigned
+//         $bE->plannedCost = $bE->realCost+$bE->leftCost;
+//         $bE->plannedWork = $bE->realWork+$bE->leftWork;
+//         $bE->expensePlannedAmount = $bE->expenseRealAmount+$bE->expenseLeftAmount;
+//         $bE->totalPlannedCost = $bE->totalRealCost+$bE->totalLeftCost;
+//         $bE->save();
+//     }
   
-    // Repeat for parent organization
-    if ($this->idOrganization and trim($this->idOrganization)!='') {
-       $orga = new Organization($this->idOrganization);
-       // Don't update idle or name for the parent organizations
-       $orga->updateSynthesis();
-    }
-  }
+//     // Repeat for parent organization
+//     if ($this->idOrganization and trim($this->idOrganization)!='') {
+//        $orga = new Organization($this->idOrganization);
+//        // Don't update idle or name for the parent organizations
+//        $orga->updateSynthesis();
+//     }
+//   }
 
   /** ====================================================================
    * Update BudgetElement of :
@@ -2209,7 +2209,7 @@ public function saveOrganizationBudgetElement($idle=null,$idleDateTime=null,$nam
     }
     return $result;
   }
-  
+    
   public function getRecursiveSubOrganizationStructure($showClose){
   	if($showClose==true){
   	  $crit = array('idOrganization'=>$this->id);
