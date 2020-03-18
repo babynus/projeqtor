@@ -1798,6 +1798,9 @@ function securityCheckDisplayMenu($idMenu, $class=null, $user=null) {
  * @return the list of projects as a string of id
  */
 function getVisibleProjectsList($limitToActiveProjects=true, $idProject=null) {
+  if (sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle')==1) {
+    $limitToActiveProjects=false;
+  }
   if (!sessionValueExists('project')) {
     return '( 0 )';
   }
@@ -1857,6 +1860,9 @@ function getAccesRestrictionClause($objectClass, $alias=null, $showIdle=false, $
   
   $obj=new $objectClass();
   $user=getSessionUser();
+  if (sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle')==1) {
+    $showIdle=true;
+  }
   if ($alias) {
     $tableAlias=$alias.'.';
   } else if ($alias===false) {
