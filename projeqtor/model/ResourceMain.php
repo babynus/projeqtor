@@ -500,10 +500,14 @@ class ResourceMain extends SqlElement {
       }
     }*/
     $periods=Affectation::buildResourcePeriodsPerProject($this->id,$showIlde);
+    if ($this->id==8) debugLog("Resource #$this->id - $this->name for project $idProject");
+    if ($this->id==8) debugLog($periods);
     if (isset($periods[$idProject])) {
+      if ($this->id==8) debugLog("Project found");
     	$result=$periods[$idProject]['periods'];
     } else {
-		  $result=array(array('start'=>Affectation::$minAffectationDate, 'end'=>Affectation::$maxAffectationDate, 'rate'=>-0.1));
+      if ($this->id==8) debugLog("Project NOT found");
+		  $result=array(array('start'=>Affectation::$minAffectationDate, 'end'=>Affectation::$maxAffectationDate, 'rate'=>100));
     }
     self::$affectationRates[$this->id.'#'.$idProject]=$result;
     return $result;
