@@ -259,7 +259,7 @@ class AssetMain extends SqlElement {
       $result.='<script type="dojo/connect" event="onClick" args="evt">';
       $page="../view/assetStructure.php?id=$this->id";
       $result.="var url='$page';";
-      $result.='showPrint(url, null, null, "html", "P");';
+      $result.='showPrint(url, "asset", null, "html", "P");';
       $result.='</script>';
       $result.='</button>';
       $result.='</div></td>';
