@@ -605,9 +605,10 @@ class WorkflowMain extends SqlElement {
         $result.='</button>';
       }
     }else if ($item=='listTypeUsingWorkflow') {
+      global $nbColMax;
       if (array_key_exists('destinationWidth', $_REQUEST)) {
         $maxWidth=preg_replace('/[^0-9]/','', $detailWidth);
-        $maxWidth= $maxWidth/2;
+        $maxWidth= $maxWidth/ (($nbColMax)?$nbColMax:2);
         $maxWidth =  $maxWidth.'px';
       } else {
         $maxWidth =  '978px';
