@@ -503,7 +503,7 @@ class ResourceMain extends SqlElement {
     if (isset($periods[$idProject])) {
     	$result=$periods[$idProject]['periods'];
     } else {
-		  $result=array(array('start'=>Affectation::$minAffectationDate, 'end'=>Affectation::$maxAffectationDate, 'rate'=>-0.1));
+		  $result=array(array('start'=>Affectation::$minAffectationDate, 'end'=>Affectation::$maxAffectationDate, 'rate'=>100));
     }
     self::$affectationRates[$this->id.'#'.$idProject]=$result;
     return $result;
