@@ -291,7 +291,7 @@ function showPrint(page, context, comboName, outMode, orientation) {
   if (outMode == "mpp") {
     printInNewWin=true;
   }
-  if (context=='favorite' || context=='admin' || context=='asset') {
+  if (context=='favorite' || context=='admin' || context=='organization' || context=='asset') {
     printInNewWin=false;
   }
   if (outMode == "csv" || outMode == "word" || outMode == "excel" || outMode == "download" || context=="download" || context=="downloadList") {
