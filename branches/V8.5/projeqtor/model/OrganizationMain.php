@@ -38,6 +38,7 @@ class OrganizationMain extends SqlElement {
   public $idResource;
   public $_byMet_hierarchicName;
   public $idOrganization;
+  public $_spe_arboOrganization;
   public $idUser;
   public $creationDate;
   public $lastUpdateDateTime;
@@ -438,12 +439,46 @@ class OrganizationMain extends SqlElement {
    *  must be redefined in the inherited class
    */
   public function drawSpecificItem($item,$readOnly=false,$refresh=false){
+    global $print;
     $result="";
         switch($item) {
             // Draw the message that say if BudgetElement exits or not
             case 'Project' :
                 $this->drawProjectsOfOrganizationAndSubOrganizations('_spe_'.$item, $refresh);
                 break;
+        }
+        if($item == 'arboOrganization'){
+        	if ($print or !$this->id) return "";
+        	$result='<table>';
+        	$result.='<tr class="detail generalRowClass">';
+        	$result.='<td class="label"></td>';
+        	$result.='<td>';
+        	$result.='<button id="showStructureButton" dojoType="dijit.form.Button" showlabel="true"';
+        	$result.=' title="'.i18n('showStructure').'" style="vertical-align: middle;">';
+        	$result.='<span>' . i18n('showStructure') . '</span>';
+        	$result.='<script type="dojo/connect" event="onClick" args="evt">';
+        	$page="../view/organizationStructure.php?id=$this->id";
+        	$result.="var url='$page';";
+        	$result.='showPrint(url, "organization", null, "html", "P");';
+        	$result.='</script>';
+        	$result.='</button>';
+        	$result.='</div></td>';
+        	$result.='<td style="padding-left:10px;">';
+        	$showClose='';
+        	if(sessionValueExists('showIdleOrganizationStructure')){
+        		$showClose = getSessionValue('showIdleOrganizationStructure');
+        		if($showClose=="true")$showClose='checked="checked"';
+        	}
+        	$result.='  <div id="showIdleOrg" name="showIdleOrg" dojoType="dijit.form.CheckBox" '.$showClose.' class="greyCheck generalColClass" type="checkbox" title="'.i18n('colShowIdleOrganizationStructure').'">';
+        	$result.='   <script type="dojo/method" event="onChange" args="evt">';
+        	$result.='     saveDataToSession("showIdleOrganizationStructure",this.checked,true);';
+        	$result.='   </script>';
+        	$result.='  </div>';
+        	$result.='</td>';
+        	$result.='<td style="text-align:left;padding-left:5px;">';
+        	$result.='  <label class="label" for="showIdleOrg">'.i18n('colShowIdleOrganizationStructure').'</label>';
+        	$result.='</td>';
+        	$result.='</tr></table>';
         }    
      return $result;
   }
@@ -2173,6 +2208,45 @@ public function saveOrganizationBudgetElement($idle=null,$idleDateTime=null,$nam
       if (!$res->idle) $result[$res->id]=$res->name;
     }
     return $result;
+  }
+  
+  public function getRecursiveSubOrganizationStructure($showClose){
+  	if($showClose==true){
+  	  $crit = array('idOrganization'=>$this->id);
+  	}else{
+  	  $crit=array('idOrganization'=>$this->id, 'idle'=>'0');
+  	}
+  	$obj=new Organization();
+  	$subOrganization=$obj->getSqlElementsFromCriteria($crit, false,null,null,null,true) ;
+  	$subOrganizationList=null;
+  	foreach ($subOrganization as $subOrg) {
+  		$recursiveList=null;
+  		$recursiveList=$subOrg->getRecursiveSubOrganizationStructure($showClose);
+  		$arrayOrg=array('id'=>$subOrg->id, 'name'=>$subOrg->name, 'subItems'=>$recursiveList);
+  		$subOrganizationList[]=$arrayOrg;
+  	}
+  	return $subOrganizationList;
+  }
+  
+  public function getParentOrganizationStructure() {
+  	$result=array();
+  	if ($this->idOrganization) {
+  		$parent=new Organization($this->idOrganization);
+  		$result=array_merge_preserve_keys($parent->getParentOrganizationStructure(),array($parent->id=>$parent->name));
+  	}
+  	return $result;
+  }
+  
+  public function isElementary($showClose){
+  	$result = true;
+  	if($showClose==true){
+  	  $crit = array('idOrganization'=>$this->id);
+  	}else{
+  	  $crit = array('idOrganization'=>$this->id, 'idle'=>'0');
+  	}
+  	$cpt = $this->countSqlElementsFromCriteria($crit);
+  	if($cpt > 0)$result = false;
+  	return $result;
   }
     
 // END ADD BY TABARY Marc - 2017-06-06 - USE OR NOT ORGANIZATION BUDGETELEMENT
