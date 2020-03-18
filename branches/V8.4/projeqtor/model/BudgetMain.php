@@ -370,7 +370,6 @@ class BudgetMain extends SqlElement {
     if(SqlList::getFieldFromId("Status", $this->idStatus, "setHandledStatus")!=0) {
       $this->isUnderConstruction=0;
     } 
-    
     $bud=new Budget();
     $budList=($this->id)?$bud->getSqlElementsFromCriteria(array('idBudget'=>$this->id)):array();
     $this->elementary=(count($budList)==0)?1:0;
@@ -499,20 +498,23 @@ class BudgetMain extends SqlElement {
         $parent->regenerateBbsLevel();
       }
     }
-    
     //gautier #4400
-    $listSubProject = $this->getSubBudgetFlatList(true);
-    foreach ($listSubProject as $idSub=>$sub){
-      $budg=new Budget($idSub);
-      $budg->isUnderConstruction = $this->isUnderConstruction;
-      $budg->done = $this->done;
-      $budg->doneDate = $this->doneDate;
-      $budg->idle = $this->idle;
-      $budg->idleDate = $this->idleDate;
-      $budg->cancelled = $this->cancelled;
-      $budg->save();
+    if ($old->isUnderConstruction!=$this->isUnderConstruction
+     or $old->done!=$this->done
+     or $old->idle!=$this->idle
+     or $old->cancelled!=$this->cancelled) {
+      $listSubProject = $this->getSubBudgetFlatList(true);
+      foreach ($listSubProject as $idSub=>$sub){
+        $budg=new Budget($idSub);
+        $budg->isUnderConstruction = $this->isUnderConstruction;
+        $budg->done = $this->done;
+        $budg->doneDate = $this->doneDate;
+        $budg->idle = $this->idle;
+        $budg->idleDate = $this->idleDate;
+        $budg->cancelled = $this->cancelled;
+        $budg->save();
+      }
     }
-    
     return $result; 
   }
   public function simpleSave() {
