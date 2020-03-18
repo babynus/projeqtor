@@ -127,7 +127,11 @@ function showOrganization($id,$name,$level,$position, $showClose) {
     echo '      style="'.$style.' margin-left:'.($level*$padding).'px; "position: relative; z-index: 100000; width:16px; height:13px;"';
   }
   echo '</TD>';
-  echo '       <TD style="'.$style.'padding-bottom:5px;"><div class="amountTableDiv">#'.htmlEncode($item->id).'  '.htmlEncode($item->name). '</div></TD>' ;
+  $goto = "";
+  if (securityCheckDisplayMenu(null,'Organization') and securityGetAccessRightYesNo('menu'.get_class($item), 'read', '')=="YES") {
+  	$goto=' onClick="top.gotoElement(\''.get_class($item).'\',\''.htmlEncode($item->id).'\');" style="cursor: pointer;" ';
+  }
+  echo '       <TD '.$goto.' style="'.$style.'padding-bottom:5px;"><div class="amountTableDiv">#'.htmlEncode($item->id).'  '.htmlEncode($item->name). '</div></TD>' ;
   echo '      </tr></table>';
   echo '    </span>';
   echo '  </TD>';
