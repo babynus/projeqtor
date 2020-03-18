@@ -475,7 +475,7 @@ class OrganizationMain extends SqlElement {
         	$result.='   </script>';
         	$result.='  </div>';
         	$result.='</td>';
-        	$result.='<td style="text-align:left;padding-left:5px;">';
+        	$result.='<td style="text-align:left;padding-left:5px;white-space: nowrap;">';
         	$result.='  <label class="label" for="showIdleOrg">'.i18n('colShowIdleOrganizationStructure').'</label>';
         	$result.='</td>';
         	$result.='</tr></table>';
