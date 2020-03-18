@@ -6928,3 +6928,27 @@ function setDatesContract(val){
     }
   }
 }
+
+function expandOrganizationGroup(idOrganization, subOrganization,recSubOrganization){
+  var recSubOrganizationList = recSubOrganization.split(',');
+  var subOrganizationList = subOrganization.split(',');
+  var budgetClass = dojo.attr('group_'+idOrganization, 'class');
+  if(budgetClass == 'ganttExpandClosed'){
+    if (dojo.byId('group_'+idOrganization)) dojo.setAttr('group_'+idOrganization, 'class', 'ganttExpandOpened');
+    subOrganizationList.forEach(function(item){
+      if (dojo.byId('organizationStructureRow_'+item)) dojo.byId('organizationStructureRow_'+item).style.visibility = 'visible';
+    });
+  }else{
+    if (dojo.byId('group_'+idOrganization)){
+      dojo.setAttr('group_'+idOrganization, 'class', 'ganttExpandClosed');
+    }
+    recSubOrganizationList.forEach(function(item){
+      if (dojo.byId('organizationStructureRow_'+item)){
+        dojo.byId('organizationStructureRow_'+item).style.visibility = 'collapse';
+        if (dojo.attr('group_'+item, 'class')){
+          dojo.setAttr('group_'+item, 'class', 'ganttExpandClosed');
+        }
+      }
+    });
+  }
+}
