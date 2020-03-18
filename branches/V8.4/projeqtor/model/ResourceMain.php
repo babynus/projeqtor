@@ -352,7 +352,7 @@ class ResourceMain extends SqlElement {
         if (array_key_exists($projectKey,$listTopProjectsArray)) {
           $listTopProjects=$listTopProjectsArray[$projectKey];
         } else {
-          $proj = new Project($work->idProject);
+          $proj = new Project($work->idProject,true);
           $listTopProjects=$proj->getTopProjectList(true);
           $listTopProjectsArray[$projectKey]=$listTopProjects;
         }
