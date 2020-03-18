@@ -6732,7 +6732,7 @@ function expandAssetGroup(idAsset, subAsset,recSubAsset){
     recSubAsset.forEach(function(item){
       if (dojo.byId('assetStructureRow_'+item)){
         dojo.byId('assetStructureRow_'+item).style.visibility = 'collapse';
-        if (dojo.attr('group_'+item, 'class')){
+        if (dojo.attr('group_'+item, 'class') == 'ganttExpandOpened'){
           dojo.setAttr('group_'+item, 'class', 'ganttExpandClosed');
         }
       }
