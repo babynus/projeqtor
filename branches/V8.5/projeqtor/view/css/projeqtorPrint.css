@@ -54,7 +54,7 @@ tr {
    /*border: 2px solid #0000FF;  padding: 3px !important; margin: 3px !important; /* for debug purpose */
 }
 tr .defaultHeight {
-	height: 25px;
+  height: 25px;
 }
 
 .menuTree {
@@ -257,6 +257,18 @@ label, .label {
   text-shadow: none;
   background: #898989 !important; 
 }
+
+.reportTableHeaderAsset {
+  border: 1px solid #AAAAAA;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  color: #ffffff !important;
+  border-radius: 0px;
+  text-shadow: none;
+  background: #898989 !important; 
+}
+
 .reportTableColumnHeader {
   text-align: center;
   padding: 1px 3px 1px 3px;
@@ -386,10 +398,10 @@ label, .label {
 } 
 
 .tabLabel {
-	border:0;
+  border:0;
 }
 div .scrollLeftTop {
-	height:43px !important;
+  height:43px !important;
 }
 
 
