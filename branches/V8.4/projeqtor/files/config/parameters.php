@@ -8,7 +8,7 @@ $paramDbType='mysql'; $paramDbPort='3306'; $paramDbUser='root'; $paramDbPassword
 $paramDbName='projeqtor_v84';$paramDbPrefix='';
 // --- PostgreSql Default
 //$paramDbType='pgsql'; $paramDbPort='5432'; $paramDbName='projeqtor'; $paramDbUser='projeqtor'; $paramDbPassword='projeqtor';
-//$paramDbName='support_ige';$paramDbPrefix=''; 
+//$paramDbName='support_ige';$paramDbPrefix='';
 $paramDbHost='127.0.0.1';         // With MySql on Windows, better use "127.0.0.1" rather than "localhost"
 
 // ========== Log file configuration =====================================================
@@ -40,5 +40,5 @@ $scaytAutoStartup='NO';
 $dataCloningDirectory="D:\www\simulation";       //Modify repertory simulation avoid Eclipse conflict
 $dataCloningUrl="http://localhost/simulation/";  //Acces data cloning url for goto
 //$doNotExportAssignmentsForXMLFormat=true;      // Will not be needed anymore on V8.3 as it will become a user parameter
-//$pathToWkHtmlToPdf="C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe";
+$pathToWkHtmlToPdf="C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe";
 //======= END
