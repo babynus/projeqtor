@@ -2371,7 +2371,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
         // END - ADD BY TABARY - TOOLTIP
         if($col=='idBudgetItem'){
-          echo '<select dojoType="dijit.form.Select" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" ';
+          echo '<select dojoType="dijit.form.Select" class="dijitComboBox input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" ';
         }else{
           echo '<select dojoType="dijit.form.FilteringSelect" class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" ';
         }
@@ -2393,7 +2393,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         
         echo $attributes;
         echo $valStore;
-        echo autoOpenFilteringSelect();
+        echo autoOpenFilteringSelect($comboDetail);
         echo ' >';
         if ($classObj=='IndividualExpense' and $col=='idResource' and securityGetAccessRight('menuIndividualExpense', 'read', $obj, $user)=='OWN') {
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, 'id', $user->id);

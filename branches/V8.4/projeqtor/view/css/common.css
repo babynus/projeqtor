@@ -1,4 +1,4 @@
-/*** COPYRIGHT NOTICE *********************************************************
+*** COPYRIGHT NOTICE *********************************************************
  *
  * Copyright 2009-2017 ProjeQtOr - Pascal BERNARD - support@projeqtor.org
  * Contributors : 
@@ -3087,4 +3087,8 @@ tr.dojoDndHorizontal .dojoDndItem {
 
 table.dijitValidationTextBoxMenu tr td.dijitMenuItemIconCell {
 	width:2px;
+}
+
+.dijitSelect .dijitSelectLabel {
+	margin-left: 0.5em;
 }
