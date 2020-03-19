@@ -128,6 +128,21 @@
   background: #7b769c !important; 
 }
 
+.ProjeQtOrFlatBlue .dijitTitlePane .dijitTitlePaneTitle, .ProjeQtOrFlatBlue .reportTableHeaderAsset, 
+.ProjeQtOrFlatBlue .reportHeader {
+  color: #FEFEFE !important;
+  border-radius: 0px;
+  text-shadow: none;
+  background: #7b769c !important; 
+}
+
+.ProjeQtOrFlatBlue .dijitTitlePane .dijitTitlePaneTitle, .ProjeQtOrFlatBlue .reportTableHeaderAsset, 
+.ProjeQtOrFlatBlue .reportHeader {
+  color: #FEFEFE !important;
+  border-radius: 0px;
+  text-shadow: none;
+  background: #7b769c !important; 
+}
  
 .ProjeQtOrFlatBlue .iconHighlight  {
   background: rgba(255,255,255,0.7) ;
@@ -1692,6 +1707,13 @@ body .ProjeQtOrFlatBlue {
   background: #b07878 !important; 
 }
 
+.ProjeQtOrFlatRed .dijitTitlePane .dijitTitlePaneTitle, .ProjeQtOrFlatRed .reportTableHeaderAsset, 
+.ProjeQtOrFlatRed .reportHeader {
+  color: #FEFEFE !important;
+  border-radius: 0px;
+  text-shadow: none;
+  background: #b07878 !important; 
+}
  
 .ProjeQtOrFlatRed .iconHighlight  {
   background: rgba(255,255,255,0.7) ;
@@ -3193,6 +3215,13 @@ body .ProjeQtOrFlatRed {
   background: #779a84 !important; 
 }
 
+.ProjeQtOrFlatGreen .dijitTitlePane .dijitTitlePaneTitle, .ProjeQtOrFlatGreen .reportTableHeaderAsset, 
+.ProjeQtOrFlatGreen .reportHeader {
+  color: #FEFEFE !important;
+  border-radius: 0px;
+  text-shadow: none;
+  background: #779a84 !important; 
+}
 
 .ProjeQtOrFlatGreen .iconHighlight  {
   background: rgba(255,255,255,0.7) ;
@@ -4697,6 +4726,13 @@ body .ProjeQtOrFlatGreen {
   background: #898989 !important; 
 }
 
+.ProjeQtOrFlatGrey .dijitTitlePane .dijitTitlePaneTitle, .ProjeQtOrFlatGrey .reportTableHeaderAsset, 
+.ProjeQtOrFlatGrey .reportHeader {
+  color: #FEFEFE !important;
+  border-radius: 0px;
+  text-shadow: none;
+  background: #898989 !important; 
+}
  
 .ProjeQtOrFlatGrey .iconHighlight  {
   background: rgba(255,255,255,0.7) ;
