@@ -153,7 +153,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
           ' . htmlEncode ( $line ['name'] ) . '
         </div>
       </div>
-      <div id="divPrincItem' . $line ['id'] . '" style="margin-top:34px;">
+      <div id="divPrincItem' . $line ['id'] . '" style="margin-top:32px;">
         ' . kanbanAddPrinc ( $line ) . '        
       </div>
       <div id="objectDescr' . $line ['id'] . '" class="dojoDndItem"
