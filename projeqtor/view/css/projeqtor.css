@@ -1090,6 +1090,17 @@ div#reportParametersDiv .label, div#reportParametersDiv label {
   color: #FFFFFF;
   text-shadow: 1px 1px #505050;
 }
+
+.reportTableHeaderAsset {
+  border: 1px solid #AAAAAA;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  background: url(images/titleBarDark.png) #909090 top repeat-x;
+  color: #FFFFFF;
+  text-shadow: 1px 1px #505050;
+}
+
 .reportTableColumnHeader {
   border: 1px solid #AAAAAA;
   text-align: center;
@@ -3545,6 +3556,10 @@ color : #404952;
 }
 
  .Projectom .reportTableHeader {
+    background: none repeat scroll 0 0 #9099a2;
+}
+
+.Projectom .reportTableHeaderAsset {
     background: none repeat scroll 0 0 #9099a2;
 }
 
