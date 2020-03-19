@@ -576,7 +576,6 @@ function changeTheme(newTheme) {
     // Mehdi #2887
     var callBack = function() { 
       addMessage("Theme=" + newTheme);
-      console.log(newTheme);
       resizeContainer("mainDivContainer", null);
     };
     saveDataToSession('theme',newTheme, true, callBack);
