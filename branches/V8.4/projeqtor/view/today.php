@@ -316,6 +316,7 @@ function showDocuments() {
     $arrayDoc[$valApp->refId]=$valApp->refId;
   }
   $arrayD=array_diff($arrayDoc, $arrayDocVers);
+  if (count($arrayD)==0) $arrayD=array(0=>" ");
   $whereDocument="id in ".transformListIntoInClause($arrayD);
   $whereActivity="1=0";
   $where=$whereActivity;
