@@ -37,7 +37,7 @@ if ($kanbanFullWidthElement == "on") {
 } else {
   $text = new Html2Text ($result);
   $descr = nl2br($text->getText ());
-  $descr=htmlspecialchars($descr);
+  //$descr=htmlspecialchars($descr);
   echo $descr;
 }
 ?>
