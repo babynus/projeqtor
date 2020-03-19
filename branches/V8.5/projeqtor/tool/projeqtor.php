@@ -4449,8 +4449,9 @@ function decodeCSV($val) {
   return utf8_encode($val);
 }
 //
-function autoOpenFilteringSelect() {
-  return ' onMouseDown="dijit.byId(this.name).toggleDropDown();"  selectOnClick="true"';
+function autoOpenFilteringSelect($comboDatail=false) {
+  if ($comboDatail) return '';// ' onMouseDown="window.dijit.byId(this.name).toggleDropDown();"  selectOnClick="true"';
+  else return ' onMouseDown="dijit.byId(this.name).toggleDropDown();"  selectOnClick="true"';
 }
 
 function debugPrintTraceStack() {
