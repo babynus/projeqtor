@@ -3036,7 +3036,7 @@ function securityGetAccessRightYesNo($menuName, $accessType, $obj=null, $user=nu
  */
 function transformListIntoInClause($list) {
   if (count($list)==0) return '(0)';
-  $result='(';
+  $result='(0';
   foreach ($list as $id=>$name) {
     if (trim($id)) {
       $result.=($result=='(')?'':', ';
