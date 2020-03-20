@@ -47,6 +47,8 @@
     $simuClass = '';
     $simuBarColor='';
   }
+  $user = getSessionUser();
+  $profile = SqlList::getFieldFromId('Profile', $user->idProfile, 'profileCode', false);
   
   $cptAllMenu=0;
   $obj=new Menu();
@@ -183,6 +185,7 @@
     }
     //echo '<td>&nbsp;</td>';
   }
+  
 ?>
 <table width="100%">
   <tr height="<?php echo $iconSize+8; ?>px;" <?php echo $simuBarColor;?> >  
@@ -274,8 +277,16 @@
        </div>         
      </div>
     </td>
-    <?php } ?>    
-    <td title="<?php echo i18n('infoMessage');?>" style="vertical-align: middle;text-align:center;width:105px;"> 
+    <?php } if($profile == 'ADM'){
+     $cronStatus = ucfirst(Cron::check());
+     ?>
+     <td title="<?php echo i18n('cronStatus');?>" style="vertical-align: middle;text-align:center;width:32px;">
+      <div id="menuBarCronStatus" name="menuBarCronStatus" class="pseudoButton <?php echo $simuClass;?>"  style="height:28px; position:relative;top:-5px; z-index:30; width:32px;" >
+        <img id="cronStatus" name="cronStatus" style="height:28px;width:28px" src="img/iconCron<?php echo $cronStatus;?>.png" />
+      </div> 
+    </td>
+    <?php }?>    
+    <td title="<?php echo i18n('infoMessage');?>" style="vertical-align: middle;text-align:center;width:105px;padding-left:3px;"> 
       <div class="pseudoButton <?php echo $simuClass;?>"  style="height:28px; position:relative;top:-5px; z-index:30; width:100px;" >
         <a target="#" href="<?php echo $website;?>" >
           <table style="width:100%">

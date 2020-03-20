@@ -7450,7 +7450,10 @@ function checkAlertRetour(data) {
         && dojo.byId("requestRefreshProject").value == "true") {
       refreshProjectSelectorList();
       if (alertCheckTime>0) setTimeout('checkAlert();', alertCheckTime * 1000);
-    } else if (dojo.byId("alertNeedStreamRefresh") && dojo.byId("alertNeedStreamRefresh").value>0) {
+    }else if (dojo.byId("cronStatusRefresh") && dojo.byId("cronStatusRefresh").value != "") {
+    	refreshCronIconStatus(dojo.byId("cronStatusRefresh").value);
+        if (alertCheckTime>0) setTimeout('checkAlert();', alertCheckTime * 1000);
+    }else if (dojo.byId("alertNeedStreamRefresh") && dojo.byId("alertNeedStreamRefresh").value>0) {
       loadContent("objectStream.php?onlyCenter=true", "activityStreamCenter", "listForm");
         if (alertCheckTime>0) setTimeout('checkAlert();', alertCheckTime * 1000);
     } else if (dojo.byId('alertType')) {
@@ -11189,5 +11192,11 @@ function selectAllCheckBox(val){
         dijit.byId(node.getAttribute('widgetid')).set('checked', true);
       }
     });
+}
+
+function refreshCronIconStatus(status){
+	var url='../view/refreshCronIconStatus.php';
+	    url+='?cronStatus=' + status;
+    loadDiv(url, 'menuBarCronStatus', null, null);
 }
 //End

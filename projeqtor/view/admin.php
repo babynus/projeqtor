@@ -132,9 +132,11 @@
                   <?php if ($cronStatus=='stopped') {
                   	echo 'showWait();adminLaunchScript("cronRun");';
                   	echo 'disableWidget("alertRunStop");';
+                  	echo 'refreshCronIconStatus("running");';
                   } else {
                   	echo 'showWait();adminLaunchScript("cronStop");';
                   	echo 'disableWidget("alertRunStop");';  
+                  	echo 'refreshCronIconStatus("stopped");';
                   }
                     echo 'return false;';
                   ?> 
