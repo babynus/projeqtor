@@ -630,3 +630,11 @@ function hideCounters(){
     dojo.byId('containerRessource').style.visibility='visible';
   }
 }
+
+function hideCounters(){
+  if(dijit.byId('hideCounters').get('checked')==true){
+    dojo.byId('containerRessource').style.visibility='hidden';
+  }else{
+    dojo.byId('containerRessource').style.visibility='visible';
+  }
+}
