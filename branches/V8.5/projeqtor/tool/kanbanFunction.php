@@ -113,12 +113,15 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
       </div>
       <div id="divPrincItem' . $line ['id'] . '" >
        ' . kanbanAddPrinc ( $line ) . '
-      </div> 
-      <table style="margin:2px 2px 0 2px;width:58px;float:right;vertical-align: middle;">
+      </div> ';
+      $object= new $typeKanbanC ($line['id']);
+	 $nbBadge=((isset($object->_Note))?count ($object->_Note):'');
+	 $badge= '<div id="'.$line['name'].'BadgeTab" class="kanbanBadge" style="">'.$nbBadge.'</div>';
+      echo '<table style="margin:2px 2px 0 2px;width:58px;float:right;vertical-align: middle;">
         <tr>
     	    <td>
-            <div onclick="activityStreamKanban(' . $line ['id'] . ', \'' . $typeKanbanC . '\');" style="" title=" ' . i18n ( 'commentImputationAdd' ) . ' ">
-              ' . formatSmallButton ( 'AddComment' ) . '
+            <div onclick="activityStreamKanban(' . $line ['id'] . ', \'' . $typeKanbanC . '\');" style="'.((count($object->_Note)!=0)?'padding-top:10px;':'').'" title=" ' . i18n ( 'commentImputationAdd' ) . ' ">
+              ' . formatSmallButton ( 'AddComment' ) .((count($object->_Note)!=0)?$badge:''). '
             </div>
           </td>
           <td>
@@ -170,12 +173,15 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
         	' . (isset ( $line ['idpriority'] ) ? '
         <div style="float:left;margin-left:5px;width:22px;height:22px;margin-top:3px;margin-left:2px">
           ' . formatColorThumb ( "idPriority", $line ['idpriority'], 20, 'left', SqlList::getNameFromId ( "Priority", $line ['idpriority'] ) ) . '
-        </div>' : '') . '
-        <table style="float:right;margin:2px;">
+        </div>' : '').'';
+		$object= new $typeKanbanC ($line['id']);
+		$nbBadge=((isset($object->_Note) )?count ($object->_Note):'');
+		$badge= '<div id="'.$line['name'].'BadgeTab" class="kanbanBadge" style="">'.$nbBadge.'</div>';
+       echo  '<table style="float:right;margin:2px;">
           <tr>
             <td>
-              <div onclick="activityStreamKanban(' . $line ['id'] . ', \'' . $typeKanbanC . '\');" style="max-width:20px;float:left;margin-right:5px;" title=" ' . i18n ( 'commentImputationAdd' ) . ' ">
-                ' . formatSmallButton ( 'AddComment' ) . '
+              <div onclick="activityStreamKanban(' . $line ['id'] . ', \'' . $typeKanbanC . '\');" style="max-width:20px;float:left;margin-right:5px;'.((count($object->_Note)!=0)?'padding-top:10px;':'').'" title=" ' . i18n ( 'commentImputationAdd' ).' ">
+                ' . formatSmallButton ( 'AddComment' ) .((count($object->_Note)!=0)?$badge:''). '
               </div>
             </td>
             <td>
