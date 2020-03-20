@@ -202,8 +202,6 @@ function timeToTimeStamp($time){
 			<tr height="100%" style="vertical-align: middle;height:34px;">
 				<td width="50px" align="middle"><?php echo formatIcon('Meeting', 32,null,true)?></td>
 				<td ><span class="title"><?php echo i18n("Meeting").' : '.$meeting->name;?></span></td>
-				<td style="width:80px;"><label for='hideCounters' style="margin-top:3px;margin-right:5px;"><?php echo i18n('hideCounters');?></label></td>
-				<td style="width:30px;"><div id="hideCounters" name="hideCounters" dojoType="dijit.form.CheckBox" type="checkbox"  onclick="hideCounters();" style="margin-top:7px;" ></div></td>
 				<td style="width:157px;position:relative;text-align:left">
 						<div style="position:absolute;width:78px; height:24px;background-color: #DDD; padding: 2px 5px; top:6px;border-radius: 5px;margin-right: 20px;">
 								<button iconClass="iconLiveMeetingPlay22" class="detailButton" style="position:absolute;top:-1px;"
