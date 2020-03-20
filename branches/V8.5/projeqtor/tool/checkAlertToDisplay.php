@@ -39,7 +39,10 @@ $user=getSessionUser();
 $crit=array('idUser'=>$user->id,'readFlag'=>'0', 'idle'=>'0');
 $alert=new Alert();
 $lst=$alert->getSqlElementsFromCriteria($crit, false, null, 'id asc');
-
+$profile = SqlList::getFieldFromId('Profile', $user->idProfile, 'profileCode', false);
+if($profile=='ADM'){
+	echo '<input type="hidden" id="cronStatusRefresh" name="cronStatusRefresh" value="'.Cron::check().'" />';
+}
 // BABYNUS : check new notes
 $curObj=SqlElement::getCurrentObject();
 if ($curObj and $curObj->id and (isset($curObj->_Note)) and isset($curObj->_storageDateTime)) {
@@ -71,4 +74,3 @@ foreach($lst as $alert) {
 	  return;
 	}
 }
-
