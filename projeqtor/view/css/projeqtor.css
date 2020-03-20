@@ -1003,6 +1003,21 @@ div#reportParametersDiv .label, div#reportParametersDiv label {
   background: url(images/titleBarDark.png) #909090 top repeat-x !important;
   text-shadow: 1px 1px #FEFEFE;
 }
+
+.kanbanBadge {
+  position: relative;
+  bottom:7px;
+  right:0px;
+  width:15px;
+  height: 0px;
+  padding:0px 13px;
+  text-align: center;
+  display: inline;
+  font-size:8pt;
+  font-weight:normal;zoom:0.9; 
+  -moz-transform: scale(0.9);
+}
+
 .sectionBadge {
   position: absolute;
   top:3px; right:7px;

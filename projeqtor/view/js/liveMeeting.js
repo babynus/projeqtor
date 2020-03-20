@@ -622,3 +622,11 @@ function liveMeetingTitleNext(idN){
   
   if(dijit.byId('buttonChangeTimer'+idN)!=null)dijit.byId('buttonChangeTimer'+idN).set('title', i18n('liveMeetingTitleBase',tabArray));
 }
+
+function hideCounters(){
+  if(dijit.byId('hideCounters').get('checked')==true){
+    dojo.byId('containerRessource').style.visibility='hidden';
+  }else{
+    dojo.byId('containerRessource').style.visibility='visible';
+  }
+}
