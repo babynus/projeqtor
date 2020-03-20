@@ -6945,8 +6945,8 @@ function expandOrganizationGroup(idOrganization, subOrganization,recSubOrganizat
     recSubOrganizationList.forEach(function(item){
       if (dojo.byId('organizationStructureRow_'+item)){
         dojo.byId('organizationStructureRow_'+item).style.visibility = 'collapse';
-        if (dojo.attr('group_'+item, 'class')){
-          dojo.setAttr('group_'+item, 'class', 'ganttExpandClosed');
+        if (dojo.attr('group_'+item, 'class') == 'ganttExpandOpened'){
+            dojo.setAttr('group_'+item, 'class', 'ganttExpandClosed');
         }
       }
     });

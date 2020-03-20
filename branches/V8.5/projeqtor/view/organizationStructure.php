@@ -92,7 +92,8 @@ function showOrganization($id,$name,$level,$position, $showClose) {
   $display='';
   $compStyle="";
   
-  $padding=30;
+  $padding=16;
+  if($level==1)$padding=5;
   $name="#$id - $name";
   $style="";
   $current=($position=='current');
@@ -120,11 +121,11 @@ function showOrganization($id,$name,$level,$position, $showClose) {
   echo '<TD>';
   if(!$isElementary){
     echo '     <div id="group_'.$item->id.'" class="'.$class.'"';
-    echo '      style="'.$style.'margin-left:'.($level*$padding).'px; position: relative; z-index: 100000;   width:16px; height:13px;"';
+    echo '      style="'.$style.'word-wrap: break-word;margin-left:'.(($level-1)*$padding+5).'px; position: relative; z-index: 100000;   width:16px; height:13px;"';
     echo '      onclick="expandOrganizationGroup(\''.$item->id.'\',\''.implode(',', $limitedSubOrganization).'\',\''.implode(',', $subOrganization).'\');">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
   }else{
-    echo '     <div id="group_'.$item->id.'" ';
-    echo '      style="'.$style.' margin-left:'.($level*$padding).'px; "position: relative; z-index: 100000; width:16px; height:13px;"';
+    echo '     <div id="group_'.$item->id.'" class="ganttOrganization"';
+    echo '      style="'.$style.'word-wrap: break-word;margin-left:'.(($level-1)*$padding+5).'px;position: relative; z-index: 100000; width:16px; height:13px;"';
   }
   echo '</TD>';
   $goto = "";
