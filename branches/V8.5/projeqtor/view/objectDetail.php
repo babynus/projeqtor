@@ -6397,6 +6397,169 @@ function drawProductProjectsFromObject($list, $obj, $refresh=false) {
   }
   echo '</table></td></tr>';
 }
+
+#asset Tab
+function drawAssetFromModel($list, $obj) {
+  global $cr, $print, $user, $browserLocale, $comboDetail;
+  $pluginObjectClass='Model';
+  $tableObject=$list;
+  $lstPluginEvt=Plugin::getEventScripts('list', $pluginObjectClass);
+  foreach ($lstPluginEvt as $script) {
+    require $script; // execute code
+  }
+  $listTemp=$tableObject;
+  if ($comboDetail) {
+    return;
+  }
+  $typeAsset='Asset';
+  $typeAssetType = 'AssetType';
+  echo '<table style="width:100%">';
+  echo '<tr>';
+  echo '<td class="assignHeader" style="width:50%">'.i18n('dashboardTicketMainTitleType').'</td>';
+  echo '<td class="assignHeader" style="width:50%">'.i18n('colAsset').'</td>';
+  //order by alphabetic
+  asort($list);
+  $tabType = array();
+  $listType = array();
+  $listIdle = array();
+  foreach ($list as $model) {
+    $tabType[$model->idAssetType][$model->id]=$model->name;
+    $listType[$model->idAssetType]=$model->idAssetType;
+    if($model->idle)$listIdle[]=$model->id;
+  }
+  foreach ($listType as $myType){
+    asort($tabType[$myType]);
+  }
+  
+  foreach ($tabType as $id=>$val){
+    foreach ($val as  $idVal=>$value){
+      $idleClass=(in_array($idVal, $listIdle))?' affectationIdleClass':'';
+      echo '<tr>';
+      $goto="";
+      if (!$print and securityCheckDisplayMenu(null, $typeAsset) and securityGetAccessRightYesNo('menu'.$typeAsset, 'read', '')=="YES") {
+        $goto=' onClick="gotoElement(\''.$typeAsset.'\',\''.htmlEncode($idVal).'\');" style="cursor: pointer;" ';
+      }
+      $nameType=SqlList::getNameFromId('Type', $id);
+      $gotoType="";
+      if (!$print and securityCheckDisplayMenu(null, $typeAssetType) and securityGetAccessRightYesNo('menu'.$typeAssetType, 'read', '')=="YES") {
+        $gotoType=' onClick="gotoElement(\''.$typeAssetType.'\',\''.htmlEncode($id).'\');" style="cursor: pointer;" ';
+      }
+      echo '  <td '.$gotoType.' class="assignData'.$idleClass.'" align="left" style="white-space: nowrap;">'.htmlEncode($nameType).'</td>';
+      echo '  <td '.$goto.' class="assignData'.$idleClass.'" align="left" style="white-space: nowrap;">#'.$idVal.'  '.htmlEncode($value).'</td>';
+      echo '</tr>';
+    }
+  }
+  echo '</table>';
+}
+
+function drawAssetFromUser($list, $obj) {
+  global $cr, $print, $user, $browserLocale, $comboDetail;
+  $pluginObjectClass='Model';
+  $tableObject=$list;
+  $lstPluginEvt=Plugin::getEventScripts('list', $pluginObjectClass);
+  foreach ($lstPluginEvt as $script) {
+    require $script; // execute code
+  }
+  $listTemp=$tableObject;
+  if ($comboDetail) {
+    return;
+  }
+  $typeAsset='Asset';
+  $typeAssetType = 'AssetType';
+  echo '<table style="width:100%">';
+  echo '<tr>';
+  echo '<td class="assignHeader" style="width:50%">'.i18n('dashboardTicketMainTitleType').'</td>';
+  echo '<td class="assignHeader" style="width:50%">'.i18n('colAsset').'</td>';
+  //order by alphabetic
+  asort($list);
+  $tabType = array();
+  $listType = array();
+  $listIdle = array();
+  foreach ($list as $model) {
+    $tabType[$model->idAssetType][$model->id]=$model->name;
+    $listType[$model->idAssetType]=$model->idAssetType;
+    if($model->idle)$listIdle[]=$model->id;
+  }
+  foreach ($listType as $myType){
+    asort($tabType[$myType]);
+  }
+
+  foreach ($tabType as $id=>$val){
+    foreach ($val as  $idVal=>$value){
+      $idleClass=(in_array($idVal, $listIdle))?' affectationIdleClass':'';
+      echo '<tr>';
+      $goto="";
+      if (!$print and securityCheckDisplayMenu(null, $typeAsset) and securityGetAccessRightYesNo('menu'.$typeAsset, 'read', '')=="YES") {
+        $goto=' onClick="gotoElement(\''.$typeAsset.'\',\''.htmlEncode($idVal).'\');" style="cursor: pointer;" ';
+      }
+      $nameType=SqlList::getNameFromId('Type', $id);
+      $gotoType="";
+      if (!$print and securityCheckDisplayMenu(null, $typeAssetType) and securityGetAccessRightYesNo('menu'.$typeAssetType, 'read', '')=="YES") {
+        $gotoType=' onClick="gotoElement(\''.$typeAssetType.'\',\''.htmlEncode($id).'\');" style="cursor: pointer;" ';
+      }
+      echo '  <td '.$gotoType.' class="assignData'.$idleClass.'" align="left" style="white-space: nowrap;">'.htmlEncode($nameType).'</td>';
+      echo '  <td '.$goto.' class="assignData'.$idleClass.'" align="left" style="white-space: nowrap;">#'.$idVal.'  '.htmlEncode($value).'</td>';
+      echo '</tr>';
+    }
+  }
+  echo '</table>';
+}
+
+function drawModelFromBrand($list, $obj) {
+  global $cr, $print, $user, $browserLocale, $comboDetail;
+  $pluginObjectClass='Brand';
+  $tableObject=$list;
+  $lstPluginEvt=Plugin::getEventScripts('list', $pluginObjectClass);
+  foreach ($lstPluginEvt as $script) {
+    require $script; // execute code
+  }
+  $listTemp=$tableObject;
+  if ($comboDetail) {
+    return;
+  }
+  $typeModel='Model';
+  $typeAsset = 'AssetType';
+  echo '<table style="width:100%">';
+  echo '<tr>';
+  echo '<td class="assignHeader" style="width:50%">'.i18n('dashboardTicketMainTitleType').'</td>';
+  echo '<td class="assignHeader" style="width:50%">'.i18n('colModel').'</td>';
+  echo '</tr>';
+  
+  //order by alphabetic
+  asort($list);
+  $tabType = array();
+  $listType = array();
+  $listIdle = array();
+  foreach ($list as $model) {
+   $tabType[$model->idAssetType][$model->id]=$model->name;
+   $listType[$model->idAssetType]=$model->idAssetType;
+   if($model->idle)$listIdle[]=$model->id;
+  }
+  foreach ($listType as $myType){
+    asort($tabType[$myType]);
+  }
+  
+  foreach ($tabType as $id=>$val){
+    foreach ($val as  $idVal=>$value){
+      $idleClass=(in_array($idVal, $listIdle))?' affectationIdleClass':'';
+      echo '<tr>';
+      $goto="";
+      if (!$print and securityCheckDisplayMenu(null, $typeModel) and securityGetAccessRightYesNo('menu'.$typeModel, 'read', '')=="YES") {
+        $goto=' onClick="gotoElement(\''.$typeModel.'\',\''.htmlEncode($idVal).'\');" style="cursor: pointer;" ';
+      }
+      $nameType=SqlList::getNameFromId('Type', $id);
+      $gotoType="";
+      if (!$print and securityCheckDisplayMenu(null, $typeAsset) and securityGetAccessRightYesNo('menu'.$typeAsset, 'read', '')=="YES") {
+        $gotoType=' onClick="gotoElement(\''.$typeAsset.'\',\''.htmlEncode($id).'\');" style="cursor: pointer;" ';
+      }
+      echo '  <td '.$gotoType.' class="assignData'.$idleClass.'" align="left" style="white-space: nowrap;">'.htmlEncode($nameType).'</td>';
+      echo '  <td '.$goto.' class="assignData'.$idleClass.'" align="left" style="white-space: nowrap;">'.htmlEncode($value).'</td>';
+      echo '</tr>';
+    }
+  }
+  echo '</table>';
+}
+
 // gautier #resourceTeam
 function drawAffectationsResourceTeamFromObject($list, $obj, $type, $refresh=false) {
   global $cr, $print, $user, $browserLocale, $comboDetail;

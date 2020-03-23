@@ -34,6 +34,8 @@ class BrandMain extends SqlElement {
   public $id;
   public $name;
   public $idle;
+  public $_sec_Modelbrand;
+  public $_spe_modelbrand;
   
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="20%"># ${id}</th>
@@ -112,6 +114,14 @@ class BrandMain extends SqlElement {
    */
   public function drawSpecificItem($item){
     $result="";
+    if ($item=='modelbrand') {
+      $model = new model();
+      $critArray=array('idBrand'=>(($this->id)?$this->id:'0'));
+      $order = " idAssetType asc ";
+      $modelList=$model->getSqlElementsFromCriteria($critArray, false,null,$order);
+      drawModelFromBrand($modelList, $this);
+      return $result;
+    }
     return $result;
   }
   
