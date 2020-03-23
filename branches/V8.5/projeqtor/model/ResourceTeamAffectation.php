@@ -65,7 +65,7 @@ class ResourceTeamAffectation extends SqlElement {
       $rate = $this->rate;
       if($this->id){
         $teamAff = new ResourceTeamAffectation($this->id);
-        $rate = $rate - $teamAff->rate;
+        $rate =  $teamAff->rate;
       }
       $start=($this->startDate)?$this->startDate:self::$minAffectationDate;
       $end=($this->endDate)?$this->endDate:self::$maxAffectationDate;
