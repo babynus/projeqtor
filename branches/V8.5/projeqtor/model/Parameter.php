@@ -248,6 +248,7 @@ class Parameter extends SqlElement {
                     'ProjeQtOrFlatRed'=>i18n('themeProjeQtOrFlatRed'),
                     'ProjeQtOrFlatGreen'=>i18n('themeProjeQtOrFlatGreen'),
                     'ProjeQtOrFlatGrey'=>i18n('themeProjeQtOrFlatGrey'),
+                    'ProjeQtOrFlatMinimal'=>i18n('themeProjeQtOrFlatMinimal'),
                     'ProjeQtOr'=>i18n('themeProjeQtOr'),
                     'ProjeQtOrFire'=>i18n('themeProjeQtOrFire'),
                     'ProjeQtOrForest'=>i18n('themeProjeQtOrForest'),
