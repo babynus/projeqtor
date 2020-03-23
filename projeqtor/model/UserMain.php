@@ -62,6 +62,8 @@ class UserMain extends SqlElement {
   public $description;
   public $_sec_Affectations;
   public $_spe_affectations;
+  public $_sec_Asset;
+  public $_spe_asset;
   public $_sec_Miscellaneous;
   public $password;
   public $_spe_buttonSendMail;
@@ -375,6 +377,14 @@ class UserMain extends SqlElement {
       if ($print) return "";
       $result=Affectable::drawSpecificImage(get_class($this),$this->id, $print, $outMode, $largeWidth);
     	return $result;
+    }
+    if($item=='asset') {
+      $asset = new Asset();
+      $critArray=array('idAffectable'=>(($this->id)?$this->id:'0'));
+      $order = " idAssetType asc ";
+      $assetList=$asset->getSqlElementsFromCriteria($critArray, false,null);
+      drawAssetFromUser($assetList, $this);
+      return $result;
     }
   }
 

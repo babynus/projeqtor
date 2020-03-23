@@ -37,6 +37,8 @@ class ModelMain extends SqlElement {
   public $idAssetType;
   public $description;
   public $idle;
+  public $_sec_AssetModel;
+  public $_spe_assetModel;
   public $_nbColMax=2;
   
   private static $_layout='
@@ -120,6 +122,14 @@ class ModelMain extends SqlElement {
    */
   public function drawSpecificItem($item){
     $result="";
+    if ($item=='assetModel') {
+      $asset = new Asset();
+      $critArray=array('idModel'=>(($this->id)?$this->id:'0'));
+      $order = " idAssetType asc ";
+      $assetList=$asset->getSqlElementsFromCriteria($critArray, false,null);
+      drawAssetFromModel($assetList, $this);
+      return $result;
+    }
     return $result;
   }
   
