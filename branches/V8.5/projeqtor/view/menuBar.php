@@ -295,7 +295,7 @@
                 <?php echo "$copyright<br>$version";?>
               </td>
               <td  style="width:35px">
-                <img style="height:28px;width:28px" src="img/logoSmall.png" />
+                <img style="height:22px;width:22px;padding-top:3px;" src="img/logoSmall.png" />
               </td>
             </tr>
           </table>
