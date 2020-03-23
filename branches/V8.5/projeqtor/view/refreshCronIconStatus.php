@@ -35,4 +35,4 @@ scriptLog('   ->/view/refrehCronIconStatus.php');
 $cronStatus=RequestHandler::getValue('cronStatus');
 $cronStatus = ucfirst($cronStatus);
 ?>
-<img id="cronStatus" name="cronStatus" style="height:28px;width:28px" src="img/iconCron<?php echo $cronStatus;?>.png" />
+<img id="cronStatus" name="cronStatus" style="height:22px;width:22px;padding-top:3px;" src="img/iconCron<?php echo $cronStatus;?>.png" />
