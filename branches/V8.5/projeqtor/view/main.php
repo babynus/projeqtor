@@ -443,12 +443,23 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                     echo "dojo.byId('menuActualStatus').value='';";
                     echo 'gotoElement("' . $class . '","' . $id . '");';
                     $firstPage="";
+                }else{
+                  //gautier #3287
+                  if(RequestHandler::getValue('changeCurrentLocale')=="changeCurrentLocale"){
+                    $class=RequestHandler::getClass('p1name');
+                    $id=RequestHandler::getId('p1value');
+                    $directObj=new $class($id);
+                    $rights=$user->getAccessControlRights();
+                    echo "dojo.byId('directAccessPage').value='';";
+                    echo "dojo.byId('menuActualStatus').value='';";
+                    echo 'gotoElement("' . $class . '","' . $id . '");';
+                  }
                 }
             }
         } else {
 // MTY - LEAVE SYSTEM          
         securityCheckRequest();
-        $firstPage=$_REQUEST['directAccessPage'];      
+        $firstPage=$_REQUEST['directAccessPage'];     
         for ($i=1;$i<=9;$i++) {
           $pName='p'.$i.'name';
           $pValue='p'.$i.'value';
@@ -2150,6 +2161,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   <input pe="hidden" name="directAccessPage" id="directAccessPage" value="" />
   <input pe="hidden" name="menuActualStatus" id="menuActualStatus" value="" />
   <input pe="hidden" name="p1name" id="p1name" value="" />
+  <input pe="hidden" name="changeCurrentLocale" id="changeCurrentLocale" value="" />
   <input pe="hidden" name="p1value" id="p1value" value="" />
 </form>
 <form id='favoriteForm' name='favoriteForm' onSubmit="return false;">
