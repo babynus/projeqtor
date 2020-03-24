@@ -244,41 +244,7 @@ class Parameter extends SqlElement {
     $list=array();
     switch ($parameter) {
       case 'theme': case 'defaultTheme':
-        $list=array('ProjeQtOrFlatBlue'=>i18n('themeProjeQtOrFlatBlue'),
-                    'ProjeQtOrFlatRed'=>i18n('themeProjeQtOrFlatRed'),
-                    'ProjeQtOrFlatGreen'=>i18n('themeProjeQtOrFlatGreen'),
-                    'ProjeQtOrFlatGrey'=>i18n('themeProjeQtOrFlatGrey'),
-                    'ProjeQtOrFlatMinimal'=>i18n('themeProjeQtOrFlatMinimal'),
-                    'ProjeQtOr'=>i18n('themeProjeQtOr'),
-                    'ProjeQtOrFire'=>i18n('themeProjeQtOrFire'),
-                    'ProjeQtOrForest'=>i18n('themeProjeQtOrForest'),
-                    'ProjeQtOrEarth'=>i18n('themeProjeQtOrEarth'),
-                    'ProjeQtOrWater'=>i18n('themeProjeQtOrWater'),
-                    'ProjeQtOrWine'=>i18n('themeProjeQtOrWine'),
-                    'ProjeQtOrDark'=>i18n('themeProjeQtOrDark'),
-                    'ProjeQtOrLight'=>i18n('themeProjeQtOrLight'),
-                    'Projectom'=>i18n('themeProjectom'),
-                    'ProjectomLight'=>i18n('themeProjectomLight'),
-                    'blueLight'=>i18n('themeBlueLight'), 
-                    'blue'=>i18n('themeBlue'), 
-                    'blueContrast'=>i18n('themeBlueContrast'),
-                    'redLight'=>i18n('themeRedLight'),
-                    'red'=>i18n('themeRed'),
-                    'redContrast'=>i18n('themeRedContrast'),
-                    'greenLight'=>i18n('themeGreenLight'),
-                    'green'=>i18n('themeGreen'),
-                    'greenContrast'=>i18n('themeGreenContrast'),
-                    'orangeLight'=>i18n('themeOrangeLight'),
-                    'orange'=>i18n('themeOrange'),
-                    'orangeContrast'=>i18n('themeOrangeContrast'),
-                    'greyLight'=>i18n('themeGreyLight'),
-                    'grey'=>i18n('themeGrey'),
-                    'greyContrast'=>i18n('themeGreyContrast'),
-                    'white'=>i18n('themeWhite'),
-                    'ProjectOrRia'=>i18n('themeProjectOrRIA'),
-                    'ProjectOrRiaContrasted'=>i18n('themeProjectOrRIAContrasted'),
-                    'ProjectOrRiaLight'=>i18n('themeProjectOrRIALight'),
-                    'random'=>i18n('themeRandom')); // keep 'random' as last value to assure it is not selected via getTheme()
+        $list=getThemesList(); // keep 'random' as last value to assure it is not selected via getTheme()
       break;
       case 'lang':case 'paramDefaultLocale':
         $list=self::getLangList();
