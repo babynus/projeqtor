@@ -65,6 +65,10 @@
                     $list=$pe->getSqlElementsFromCriteria(null,false,$inClause,$order,null,true);
                     $wbsList=SqlList::getList('Project','sortOrder',null,true);
                     foreach ($list as $projOb){
+                      $priority=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$user->getProfile($projOb->idProject),'scope'=>'validatePlanning'));
+                      if($priority->rightAccess!=1){
+                         continue;
+                      }
                       if (isset($wbsList[$projOb->idProject])) {
                         $wbs=$wbsList[$projOb->idProject];
                       } else {
