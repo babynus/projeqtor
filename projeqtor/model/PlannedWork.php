@@ -604,7 +604,7 @@ class PlannedWork extends GeneralWork {
 	                $groupAss[$ass->idResource]['ResourceWork'][$projKey]=array();
 	              }
 	              if (! array_key_exists('rate',$groupAss[$ass->idResource]['ResourceWork'][$projKey])) {
-	                //$groupAss[$ass->idResource]['ResourceWork'][$projKey]['rate']=$r->getAffectationRate($idProject); // Ticket #4549
+	                $groupAss[$ass->idResource]['ResourceWork'][$projKey]['rate']=$r->getAffectationRate($idProject,false,$listTopProjects); // Ticket #4549
 	              }
 	              $groupAss[$ass->idResource]['ResourceWork']['init'.$projKey]=$groupAss[$ass->idResource]['ResourceWork'][$projKey];
 	            }
@@ -792,7 +792,7 @@ class PlannedWork extends GeneralWork {
                   $ress[$projKey]=array();
                 }
                 if (! array_key_exists('rate',$ress[$projKey])) {
-                  // $ress[$projKey]['rate']=$r->getAffectationRate($idProject); // Ticket #4549
+                  $ress[$projKey]['rate']=$r->getAffectationRate($idProject, false, $listTopProjects); // Ticket #4549
                 }
               }
             }
