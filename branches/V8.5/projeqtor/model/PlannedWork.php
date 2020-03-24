@@ -2174,6 +2174,7 @@ class PlannedWork extends GeneralWork {
   // ================================================================================================================================
   
   public static function planSaveDates($projectId, $initial, $validated) {
+    $user=new User(getCurrentUserId()) ;
   	if ($initial=='NEVER' and $validated=='NEVER') {
   		$result=i18n('planDatesNotSaved');
   		$result .= '<input type="hidden" id="lastPlanStatus" value="WARNING" />';
@@ -2186,7 +2187,8 @@ class PlannedWork extends GeneralWork {
   	$listValidProj=getSessionUser()->getListOfPlannableProjects($scope);
   	$validSubProj=array();
   	foreach ($listValidProj as $id=>$value){
-  	  if(isset($listSubproj[$id])){
+  	  $priority=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$user->getProfile($id),'scope'=>'validatePlanning'));// florent 
+  	  if(isset($listSubproj[$id]) and $priority->rightAccess==1){
   	    $validSubProj[$id]=$listSubproj[$id];
   	  }
   	}
