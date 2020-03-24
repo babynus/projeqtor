@@ -368,7 +368,7 @@ class ResourceMain extends SqlElement {
             }
           } else {
             $result[$projectKey]=array();
-            $result[$projectKey]['rate']=$this->getAffectationRate($idProject, false,$listTopProjects); // Ticket #4549
+            $result[$projectKey]['rate']=$this->getAffectationRate($idProject, $listTopProjects); // Ticket #4549
             $valProj=0;
           }
           $valProj+=$work->work; 
@@ -409,7 +409,7 @@ class ResourceMain extends SqlElement {
             }
           } else {
             $result[$projectKey]=array();
-            $result[$projectKey]['rate']=$this->getAffectationRate($idProject, false, $listTopProjects); // Ticket #4549
+            $result[$projectKey]['rate']=$this->getAffectationRate($idProject, $listTopProjects); // Ticket #4549
             $valProj=0;
           }
           $valProj+=$work->work; 
@@ -482,7 +482,7 @@ class ResourceMain extends SqlElement {
   }
   
   private static $affectationRates=array();
-  public function getAffectationRate($idProject, $showIlde=false, $listTopProjects) {
+  public function getAffectationRate($idProject, $listTopProjects=null) {
   	if (isset(self::$affectationRates[$this->id.'#'.$idProject])) {
   		return self::$affectationRates[$this->id.'#'.$idProject];
   	}
@@ -494,7 +494,7 @@ class ResourceMain extends SqlElement {
     } else {
       $prj=new Project($idProject);
       if ($prj->idProject) {
-        $result=$this->getAffectationRate($prj->idProject);
+        $result=$this->getAffectationRate($prj->idProject,$listTopProjects);
       } else {
         $result='100';
       }
