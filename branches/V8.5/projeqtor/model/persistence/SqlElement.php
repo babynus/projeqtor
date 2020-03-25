@@ -639,8 +639,11 @@ abstract class SqlElement {
           "Meeting" => "control", 
           "Question" => "control", 
           "Requirement" => "control", 
+          "ResourceTeamAffectation" => "cascade",
           "TestCase" => "control", 
           "TestSession" => "control"), 
+      "ResourceTeam" => array(
+          "ResourceTeamAffectation" => "cascade"),      
       "TestCase" => array(
           "TestCase" => "confirm", 
           "TestCaseRun" => "cascade"), 

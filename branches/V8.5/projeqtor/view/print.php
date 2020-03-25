@@ -210,15 +210,16 @@ use Mpdf\Mpdf;
   <?php 
   }
   $page=$_REQUEST['page'];
+  $splitPage=explode('?',$page);
   if (substr($page,0,17)=='../report/object/') {
-    if (file_exists($page)) {
-      $rpt=file_get_contents($page);
-      if (strpos($rpt,"templateReportExecute.php")>0 and ! Plugin::isPluginEnabled('templateReport')) {
-        // Template report plugin disabled, but custom report defined for object and is template one
-        $page="objectDetail.php";
-      }
+    if (file_exists($splitPage[0])) {
+       $rpt=file_get_contents($splitPage[0]);
+       if (strpos($rpt,"templateReportExecute.php")>0 and ! Plugin::isPluginEnabled('templateReport')) {     
+         // Template report plugin disabled, but custom report defined for object and is template one
+         $page="../view/objectDetail.php".((count($splitPage)>1)?'?'.$splitPage[1]:'');
+       }
     } else {
-      $page="objectDetail.php";
+       $page="../view/objectDetail.php".((count($splitPage)>1)?'?'.$splitPage[1]:'');
     }
   }
   securityCheckPage($page);
