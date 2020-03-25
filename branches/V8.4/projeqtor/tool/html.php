@@ -281,7 +281,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     }
     $table=SqlList::getList($listType,$column,$selection );
     foreach($arrayToDel as $key)unset($table[$key]);
-    sort($table);
+    asort($table);
   } else if ($col=='idActivity' or $col=='idTicket') { 
     // List Activity or Ticket without a criteria // TODO : analyse effect of this... 
   	$cls=substr($col,2);
