@@ -34,5 +34,17 @@ scriptLog('   ->/view/refrehCronIconStatus.php');
 
 $cronStatus=RequestHandler::getValue('cronStatus');
 $cronStatus = ucfirst($cronStatus);
+$simuIndex=Parameter::getGlobalParameter('simuIndex');
+if($simuIndex){
+	$simuClass = 'simuToolBar';
+	$simuBarColor = 'style="background-color:#ff7777 !important;"';
+}else{
+	$simuClass = '';
+	$simuBarColor='';
+}
 ?>
-<img id="cronStatus" name="cronStatus" style="height:22px;width:22px;padding-top:3px;" src="img/iconCron<?php echo $cronStatus;?>.png" />
+<div class="pseudoButton <?php echo $simuClass;?>"  
+style="height:28px; position:relative;top:-5px; z-index:30; width:32px;" title="<?php if(Cron::check() == 'running'){echo i18n('cronRunning');}else{echo i18n('cronStopped');}?>"
+onClick="checkCronStatus('<?php echo $cronStatus;?>');">
+  <img id="cronStatus" name="cronStatus" style="height:22px;width:22px;padding-top:3px;" src="img/iconCron<?php echo $cronStatus;?>.png" />
+</div>

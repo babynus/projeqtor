@@ -280,10 +280,14 @@
     <?php } if($profile == 'ADM'){
      $cronStatus = ucfirst(Cron::check());
      ?>
-     <td title="<?php echo i18n('cronStatus');?>" style="vertical-align: middle;text-align:center;width:32px;">
-      <div id="menuBarCronStatus" name="menuBarCronStatus" class="pseudoButton <?php echo $simuClass;?>"  style="height:28px; position:relative;top:-5px; z-index:30; width:32px;" >
-        <img id="cronStatus" name="cronStatus" style="height:28px;width:28px" src="img/iconCron<?php echo $cronStatus;?>.png" />
-      </div> 
+     <td style="vertical-align: middle;text-align:center;width:32px;">
+       <div id="menuBarCronStatus" name="menuBarCronStatus" >
+        <div class="pseudoButton <?php echo $simuClass;?>"  
+        style="height:28px; position:relative;top:-5px; z-index:30; width:32px;" title="<?php if(Cron::check() == 'running'){echo i18n('cronRunning');}else{echo i18n('cronStopped');}?>"
+        onClick="checkCronStatus('<?php echo $cronStatus;?>');">
+          <img id="cronStatus" name="cronStatus" style="height:22px;width:22px;padding-top:3px;" src="img/iconCron<?php echo $cronStatus;?>.png" />
+        </div>
+       </div>
     </td>
     <?php }?>    
     <td title="<?php echo i18n('infoMessage');?>" style="vertical-align: middle;text-align:center;width:105px;padding-left:3px;"> 
@@ -295,7 +299,7 @@
                 <?php echo "$copyright<br>$version";?>
               </td>
               <td  style="width:35px">
-                <img style="height:22px;width:22px;padding-top:3px;" src="img/logoSmall.png" />
+                <img style="height:28px;width:28px;" src="img/logoSmall.png" />
               </td>
             </tr>
           </table>

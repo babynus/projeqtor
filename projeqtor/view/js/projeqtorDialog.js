@@ -11199,4 +11199,17 @@ function refreshCronIconStatus(status){
 	    url+='?cronStatus=' + status;
     loadDiv(url, 'menuBarCronStatus', null, null);
 }
+
+function checkCronStatus(status){
+	if (status=='Stopped') {
+  	showWait();adminLaunchScript("cronRun", false);
+  	disableWidget("alertRunStop");
+  	refreshCronIconStatus("running");
+	} else {
+  	showWait();adminLaunchScript("cronStop", false);
+  	disableWidget("alertRunStop");  
+  	refreshCronIconStatus("stopped");
+	}
+	return false;
+}
 //End
