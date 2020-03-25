@@ -39,7 +39,9 @@
     throwError('refId parameter not found in REQUEST');
   }
   $refId=$_REQUEST['refId'];
-  $user=getSessionUser(); 
+  $user=getSessionUser();
+
+  $obj = new $refType($refId);
 
   $list=array();
   if ($refType=='Activity') {
@@ -76,4 +78,44 @@
     echo '</tr>';
   }
   echo '</table>';
+  if($obj->isPlanningActivity){
+    $planningElement = SqlElement::getSingleSqlElementFromCriteria('ActivityPlanningElement', array('refType'=>$refType, 'refId'=>$refId));
+  	echo '<table class="detail" style="margin-top:10px;">';
+  	echo '<tr class="detail">';
+  	echo '<td class="detail"></td>';
+  	echo '<td class="detail" style="min-width:75px;">';
+  	echo '<div class="tabLabel" style="text-align:left;white-space:nowrap;">'.i18n('colWorkElementCount').'</div>';
+  	echo '</td>';
+  	echo '<td class="detail" style="min-width:75px;">';
+  	echo '<div class="tabLabel" style="text-align:left;white-space:nowrap;">'.i18n('colEstimated').'</div>';
+  	echo '</td>';
+  	echo '<td class="detail" style="min-width:75px;">';
+  	echo '<div class="tabLabel" style="text-align:left;white-space:nowrap;">'.i18n('colReal').'</div>';
+  	echo '</td>';
+  	echo '<td class="detail" style="min-width:75px;">';
+  	echo '<div class="tabLabel" style="text-align:left;white-space:nowrap;">'.i18n('colLeft').'</div>';
+  	echo '</td>';
+  	echo '</tr>';
+  	echo '<tr class="detail">';
+  	echo '<td class="smallLabel" style="text-align:right;width:145px;">';
+  	echo '<label class="label smallLabel">'.i18n('colTicket').' : </label>';
+  	echo '</td>';
+  	echo '<td style="width:90%;white-space:nowrap;">';
+  	echo '<div class="display generalColClass inputworkElementCountClass">'.count($list).'</div>';
+  	echo '</td>';
+  	echo '<td class="detail" style="text-align:left;white-space:nowrap;">';
+  	echo '<div disabled dojoType="dijit.form.NumberTextBox" value="'.$planningElement->workElementEstimatedWork.'" class="input dijitNumberTextBox dijitNumberTextBoxReadOnly dijitTextBoxReadOnly generalColClass workElementEstimatedWorkClass" style="width: 72px"></div>';
+  	echo '<span class="generalColClass workElementEstimatedWorkClass" style="position:relative;top:2px">'.Work::displayShortWorkUnit().'</span>';
+  	echo '</td>';
+  	echo '<td class="detail" style="text-align:left;white-space:nowrap;">';
+  	echo '<div disabled dojoType="dijit.form.NumberTextBox" value="'.$planningElement->workElementRealWork.'" class="input dijitNumberTextBox dijitNumberTextBoxReadOnly dijitTextBoxReadOnly generalColClass workElementEstimatedWorkClass" style="width: 72px"></div>';
+  	echo '<span class="generalColClass workElementRealWorkClass" style="position:relative;top:2px">'.Work::displayShortWorkUnit().'</span>';
+  	echo '</td>';
+  	echo '<td class="detail" style="text-align:left;white-space:nowrap;">';
+  	echo '<div disabled dojoType="dijit.form.NumberTextBox" value="'.$planningElement->workElementLeftWork.'" class="input dijitNumberTextBox dijitNumberTextBoxReadOnly dijitTextBoxReadOnly generalColClass workElementEstimatedWorkClass" style="width: 72px"></div>';
+  	echo '<span class="generalColClass workElementLeftWorkClass" style="position:relative;top:2px">'.Work::displayShortWorkUnit().'</span>';
+  	echo '</td>';
+  	echo '</tr>';
+  	echo '</table>';
+  }
 ?>
