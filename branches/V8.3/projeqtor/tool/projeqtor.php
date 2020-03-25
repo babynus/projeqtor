@@ -1212,7 +1212,7 @@ function getUserVisibleResourcesList($limitToActiveResources=false,
     $crit.=$idLinkObjectName." is null and ";
   }
   $resourcesList=array();
-  $res=new ResourceAll();
+  $res=new Resource();
   if ($includePool) $res=new ResourceAll();
   $scope=Affectable::getVisibilityScope($listScreen,$idProject);
   switch ($scope) {
