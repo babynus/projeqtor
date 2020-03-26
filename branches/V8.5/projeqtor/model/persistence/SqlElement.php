@@ -3147,6 +3147,7 @@ abstract class SqlElement {
    * @return an array ob objects
    */
   private function getDependantSqlElements($objClass) {
+    if (get_class($this)=='Organization' and $objClass=='Resource') $objClass='ResourceAll';
     $curId = $this->id;
     $obj = new $objClass ();
     $list = array();
