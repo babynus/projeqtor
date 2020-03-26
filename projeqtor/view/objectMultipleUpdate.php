@@ -885,6 +885,22 @@
               </td>
             </tr>
             <?php  }?>
+          
+         <?php  //gautier #533
+          if(property_exists(get_class($obj), 'password') and securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=='YES'){?>
+           <tr class="detail">
+              <td></td>
+              <td>
+                <button id="resetPassword" dojoType="dijit.form.Button" showlabel="true"'
+                        class="generalColClass" title="<?php echo i18n('resetPassword');?>" >
+                  <span><?php echo i18n('resetPassword');?></span>
+                  <script type="dojo/connect" event="onClick" args="evt">
+                    multipleUpdateResetPwd("<?php echo $objectClass;?>");
+                  </script>
+                </button>
+              </td>
+            </tr>
+          <?php  } ?>  
           </table>
           </div>
         </form>
