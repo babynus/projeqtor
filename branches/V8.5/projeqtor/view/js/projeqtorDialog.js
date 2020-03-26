@@ -8800,6 +8800,27 @@ function updateSelectedCountMultiple() {
     countSelectedItem('objectGrid','selectedCount');
   }
 }
+//gautier #533
+function multipleUpdateResetPwd(objectClass) {
+  grid=dijit.byId("objectGrid"); // if the element is not a widget, exit.
+  if (!grid) {
+    return;
+  }
+  dojo.byId("selection").value="";
+  var items=grid.selection.getSelected();
+  if (items.length) {
+    dojo.forEach(items, function(selectedItem) {
+      if (selectedItem !== null) {
+        dojo.byId("selection").value+=parseInt(selectedItem.id) + ";";
+      }
+    });
+  }
+  var callBack = function(){
+    
+  };
+  loadContent('../tool/saveObjectMultiplePwd.php?objectClass=' + objectClass,
+      'resultDivMultiple', 'objectFormMultiple',null,null,null,null,callBack);
+}
 
 function showImage(objectClass, objectId, imageName) {
   if (objectClass == 'Affectable' || objectClass == 'Resource'
