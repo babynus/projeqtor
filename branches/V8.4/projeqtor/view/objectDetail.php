@@ -3593,7 +3593,6 @@ function drawObjectLinkedByIdToObject($obj, $objLinkedByIdObject='', $refresh=fa
   // ADD BY Marc TABARY - 2017-03-10 - DRAW LIST OF OBJECTS LINKED BY ID TO MAIN OBJECT - href
   $goto='';
   // END ADD BY Marc TABARY - 2017-03-10 - DRAW LIST OF OBJECTS LINKED BY ID TO MAIN OBJECT - href
-  
   $theClassName='_'.$objLinkedByIdObject;
   // Get the visible list of linked Object
   $listVisibleLinkedObj=getUserVisibleObjectsList($objLinkedByIdObject);
@@ -3622,7 +3621,6 @@ function drawObjectLinkedByIdToObject($obj, $objLinkedByIdObject='', $refresh=fa
   } else {
     $objects=array();
   }
-  
   if (!$refresh and !$print) echo '<tr><td colspan="2">';
   echo '<input type="hidden" id="objectIdle" value="'.htmlEncode($obj->idle).'" />';
   
@@ -3649,12 +3647,12 @@ function drawObjectLinkedByIdToObject($obj, $objLinkedByIdObject='', $refresh=fa
   echo '</tr>';
   $nbObjects=0;
   foreach ($objects as $theObj) {
+    if (! array_key_exists($theObj->id, $listVisibleLinkedObj)) continue;
     $nbObjects++;
     echo '<tr>';
     if (!$print) {
       echo '<td class="assignData smallButtonsGroup">';
-      if (!$print and $canUpdate and array_key_exists($theObj->id, $listVisibleLinkedObj)) {
-        
+      if (!$print and $canUpdate and array_key_exists($theObj->id, $listVisibleLinkedObj)) {        
         // Implement to following rule :
         // A manager of an organization can't be remove from it
         if (get_class($obj)=='Organization' and get_class($theObj)=='Resource' and $obj->idResource==$theObj->id) {
@@ -3677,8 +3675,10 @@ function drawObjectLinkedByIdToObject($obj, $objLinkedByIdObject='', $refresh=fa
     if (array_key_exists($theObj->id, $listVisibleLinkedObj)) {
       echo '<td class="assignData" style="width:5%">#'.htmlEncode($theObj->id).'</td>';
       // ADD BY Marc TABARY - 2017-03-10 - DRAW LIST OF OBJECTS LINKED BY ID TO MAIN OBJECT - href
-      if (!$print and securityCheckDisplayMenu(null, get_class($theObj)) and securityGetAccessRightYesNo('menu'.get_class($theObj), 'read', '')=="YES") {
-        $goto=' onClick="gotoElement(\''.get_class($theObj).'\',\''.htmlEncode($theObj->id).'\');" style="cursor: pointer;" ';
+      $classSub=get_class($theObj);
+      if ($classSub=='ResourceAll') $classSub=($theObj->isResourceTeam)?'ResourceTeam':'Resource';
+      if (!$print and securityCheckDisplayMenu(null, $classSub) and securityGetAccessRightYesNo('menu'.$classSub, 'read', '')=="YES") {
+        $goto=' onClick="gotoElement(\''.$classSub.'\',\''.htmlEncode($theObj->id).'\');" style="cursor: pointer;" ';
       }
       // END ADD BY Marc TABARY - 2017-03-10 - DRAW LIST OF OBJECTS LINKED BY ID TO MAIN OBJECT - href
       // CHANGE BY Marc TABARY - 2017-03-10 - DRAW LIST OF OBJECTS LINKED BY ID TO MAIN OBJECT - href
