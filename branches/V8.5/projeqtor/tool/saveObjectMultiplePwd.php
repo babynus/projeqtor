@@ -68,14 +68,16 @@ foreach ($selectList as $id) {
 		continue;
 	}
 	if($item->email){
-	  $dest=trim($item->email);
-	  $title= i18n('resetPassword');
 	  $newPwd = User::getRandomPassword();
-	  $msg = i18n(('passwordResetBy'),array($myUser->name));
-	  $msg.= '  '.$newPwd;
+	  $salt=hash('sha256', "projeqtor".date('YmdHis'));
+	  $dest=$item->email;
+	  $title=$item->parseMailMessage(Parameter::getGlobalParameter('paramMailTitleUser'));
+	  $msg=$item->parseMailMessage(Parameter::getGlobalParameter('paramMailBodyUser'));
 	  $result=(sendMail($dest,$title,$msg))?'OK':'';
 	  if ($result) {
+	   $item->crypto = null;
 	   $item->password = $newPwd;
+	   $item->salt = $salt;
 	  }
 	}
 	$resultSave=$item->save();
