@@ -1459,7 +1459,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // $internalTableBorder=($print)?'border:1px dotted #A0A0A0;':'';
         $internalTableBorder='';
         $alignForNumber='';
-        if ($dataType=='decimal' and (substr($col, -4, 4)=='Cost' or substr($col, -4, 4)=='Work' or substr($col, -6, 6)=='Amount' or $col=='amount')) {
+        if ($dataType=='decimal' and $print and (substr($col, -4, 4)=='Cost' or substr($col, -4, 4)=='Work' or substr($col, -6, 6)=='Amount' or $col=='amount')) {
           $alignForNumber='text-align:right;';
         }
         if ($internalTable%$internalTableCols==0) {
