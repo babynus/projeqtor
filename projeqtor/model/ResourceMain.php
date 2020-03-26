@@ -483,6 +483,7 @@ class ResourceMain extends SqlElement {
   
   private static $affectationRates=array();
   public function getAffectationRate($idProject, $listTopProjects=null) {
+    $showIdle=false; // removed from parameters;
   	if (isset(self::$affectationRates[$this->id.'#'.$idProject])) {
   		return self::$affectationRates[$this->id.'#'.$idProject];
   	}
@@ -499,7 +500,7 @@ class ResourceMain extends SqlElement {
         $result='100';
       }
     }*/
-    $periods=Affectation::buildResourcePeriodsPerProject($this->id,$showIlde);
+    $periods=Affectation::buildResourcePeriodsPerProject($this->id,$showIdle);
     if (isset($periods[$idProject])) {
     	$result=$periods[$idProject]['periods'];
     } else {
