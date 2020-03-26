@@ -11223,14 +11223,11 @@ function refreshCronIconStatus(status){
 
 function checkCronStatus(status){
 	if (status=='Stopped') {
-  	showWait();adminLaunchScript("cronRun", false);
-  	disableWidget("alertRunStop");
+  	adminLaunchScript("cronRun", false);
   	refreshCronIconStatus("running");
 	} else {
-  	showWait();adminLaunchScript("cronStop", false);
-  	disableWidget("alertRunStop");  
+  	adminLaunchScript("cronStop", false);
   	refreshCronIconStatus("stopped");
 	}
-	return false;
 }
 //End
