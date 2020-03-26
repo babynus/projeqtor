@@ -68,6 +68,7 @@ $result="";
 foreach ($listLinkedObjectId as $linkedObjId) {
 // END CHANGE BY Marc TABARY - 2017-03-31 - ADD MULTIPLE OBJECTS LINKED BY ID
   $obj=new $linkObjectClassName($linkedObjId);
+  if ($linkObjectClassName=='Resource' and !$obj->id) $obj=new ResourceTeam($linkedObjId);
   $obj->$idMainObjectClass=$idInstanceOfMainClass;
   $res=$obj->save();
   if (!$result) {
