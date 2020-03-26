@@ -625,6 +625,10 @@ class PeriodicMeetingMain extends SqlElement {
     if ($old->MeetingPlanningElement->priority!=$this->MeetingPlanningElement->priority) 
         $meeting->MeetingPlanningElement->priority=$this->MeetingPlanningElement->priority;
     $resultMeetingSave=$meeting->save();
+    $resultMeetingSaveStatus=getLastOperationStatus($resultMeetingSave);
+    if ($resultMeetingSaveStatus!='OK' and $resultMeetingSaveStatus!='NO_CHANGE') {
+      traceLog("saveMeeting() for Periodic Meeting #$this->id => unexpected result for save of Meeting : $resultMeetingSaveStatus");
+    }
     if ($isNew) {
       $ass=new Assignment();
       $assList=$ass->getSqlElementsFromCriteria(array('refType'=>'PeriodicMeeting','refId'=>$this->id));
