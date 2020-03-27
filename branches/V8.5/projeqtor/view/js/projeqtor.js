@@ -3264,6 +3264,12 @@ function drawGantt() {
     // showAlert("Gantt chart not defined");
     return;
   }
+  if (dojo.byId('leftGanttChartDIV').offsetWidth>dojo.byId('listHeaderDiv').offsetWidth-15) {
+    var resizeWidth=dojo.byId('listHeaderDiv').offsetWidth-15;
+    dijit.byId('leftGanttChartDIV').resize({w:resizeWidth});
+    dijit.byId("centerDiv").resize(); 
+  }
+
   highlightPlanningLine();
 }
 
