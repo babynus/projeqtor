@@ -1214,7 +1214,7 @@ class UserMain extends SqlElement {
    * @return -1 or Id of authentified user
    */
 	public function authenticate( $paramlogin, $parampassword) {
-	  //global $loginSave;
+	  global $loginSave;
 debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );	
 	  $paramLdap_allow_login=Parameter::getGlobalParameter('paramLdap_allow_login');
 	  $paramLdap_base_dn=Parameter::getGlobalParameter('paramLdap_base_dn');
