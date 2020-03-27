@@ -78,9 +78,11 @@ class Menu extends SqlElement {
       if (strpos($class,'&')>0) $class=substr($class,0,strpos($class,'&'));
       return $class;
     } else {
-      $class=str_replace('Main.php','',$page);
+      $class=str_replace('ViewMain.php','',$page);
+      $class=str_replace('Main.php','',$class);
       $class=str_replace('.php','',$class);
-      $class=ucfirst($class);
+      $class=str_replace('../view/','',$class);
+      $class=ucfirst($class);     
       return $class;
     }
   }
