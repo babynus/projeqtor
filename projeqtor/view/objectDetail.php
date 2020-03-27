@@ -505,6 +505,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       $restrictArray=$user->getVisibleProjects(true);
     }
     if (count($table)>0) {
+      $firstId=null;
       foreach ($table as $idTable=>$valTable) {
         if (count($restrictArray)==0 or isset($restrictArray[$idTable])) {
           $firstId=$idTable;
