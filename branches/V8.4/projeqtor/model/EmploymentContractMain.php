@@ -156,7 +156,7 @@ class EmploymentContractMain extends SqlElement {
             $this->___dFieldsAttributes['idEmploymentContractType'] = "readonly,required";
             $this->___dFieldsAttributes['startDate'] = "readonly,required";
             $this->___dFieldsAttributes['name'] = "readonly";  
-            $this->setAttributes();          
+            //$this->setAttributes();          
         }
         
         // If endDate is valid and not null
