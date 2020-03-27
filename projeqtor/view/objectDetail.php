@@ -5021,13 +5021,15 @@ function drawActivityList($obj, $refresh=false) {
     $crit=array('idTarget'.get_class($obj)=>$obj->id);
     $activity=new Activity();
     $list=$activity->getSqlElementsFromCriteria($crit);
+    $showClosedActivity=Parameter::getUserParameter('showClosedActivity');
   } else if (get_class($obj)=='Activity') {
     $crit=array('idActivity'=>$obj->id);
     $activity=new Activity();
     $list=$activity->getSqlElementsFromCriteria($crit);
+    $showClosedActivity=1;
   }
   if (!isset($list)) $list=array();
-  $showClosedActivity=Parameter::getUserParameter('showClosedActivity');
+  
   foreach ($list as $activity) {
     if ($showClosedActivity==1 or ($showClosedActivity==0 and $activity->idle==0)) {
       $canGoto=(securityCheckDisplayMenu(null, $listClass) and securityGetAccessRightYesNo('menu'.$listClass, 'read', $activity)=="YES")?true:false;
