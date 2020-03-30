@@ -86,7 +86,19 @@ if($paramMailerType=='phpmailer'){
                 <label for="dialogMailToContact"><?php echo htmlEncode($obj->getColCaption("idContact"));?>&nbsp;:&nbsp;</label>
               </td>
               <td>
-                <div id="dialogMailToContact" name="dialogMailToContact" dojoType="dijit.form.CheckBox" type="checkbox" ></div>
+              <?php  
+                    $checkContact="false";
+                    if(sessionValueExists('dialogMailToContact')){ 
+                        $dialogMailToContact = getSessionValue('dialogMailToContact');
+                        if($dialogMailToContact=="true"){
+                          $checkContact=$dialogMailToContact;
+                        }
+                     }
+              ?>
+                <div id="dialogMailToContact" name="dialogMailToContact" dojoType="dijit.form.CheckBox" type="checkbox" 
+                onChange="saveDataToSession('dialogMailToContact',this.checked,false);" 
+                <?php echo ($checkContact=="true")?"checked":"";?>
+                ></div>
               </td>
             </tr>
           <?php } ?>
@@ -96,7 +108,19 @@ if($paramMailerType=='phpmailer'){
                 <label for="dialogMailToUser"><?php echo htmlEncode($obj->getColCaption("idUser")); ?>&nbsp;:&nbsp;</label>
               </td>
               <td>
-                <div id="dialogMailToUser" name="dialogMailToUser" dojoType="dijit.form.CheckBox" type="checkbox" ></div>
+                <?php  
+                    $checkUser="false";
+                    if(sessionValueExists('dialogMailToUser')){ 
+                        $dialogMailToUser = getSessionValue('dialogMailToUser');
+                        if($dialogMailToUser=="true"){
+                          $checkUser=$dialogMailToUser;
+                        }
+                        
+                     }
+                ?>
+                <div id="dialogMailToUser" name="dialogMailToUser" dojoType="dijit.form.CheckBox" type="checkbox" onChange="saveDataToSession('dialogMailToUser',this.checked,false);"
+                  <?php echo ($checkUser=="true")?"checked":"";?>
+                ></div>             
               </td>
             </tr>
           <?php } ?>
@@ -106,7 +130,19 @@ if($paramMailerType=='phpmailer'){
                 <label for="dialogMailToAccountable"><?php echo htmlEncode($obj->getColCaption("idAccountable")); ?>&nbsp;:&nbsp;</label>
               </td>
               <td>
-                <div id="dialogMailToAccountable" name="dialogMailToAccountable" dojoType="dijit.form.CheckBox" type="checkbox" ></div>
+                <?php  
+                    $checkAccount="false";
+                    if(sessionValueExists('dialogMailToAccountable')){ 
+                        $dialogMailToAccountable = getSessionValue('dialogMailToAccountable');
+                        if($dialogMailToAccountable=="true"){
+                          $checkAccount=$dialogMailToAccountable;
+                        }
+                        
+                     }
+                ?>
+                <div id="dialogMailToAccountable" name="dialogMailToAccountable" dojoType="dijit.form.CheckBox" type="checkbox" onChange="saveDataToSession('dialogMailToAccountable',this.checked,false);"
+                  <?php echo ($checkAccount=="true")?"checked":"";?> 
+                ></div>
               </td>
             </tr>
           <?php } ?>
@@ -116,7 +152,19 @@ if($paramMailerType=='phpmailer'){
                 <label for="dialogMailToResource"><?php echo htmlEncode($obj->getColCaption("idResource")); ?>&nbsp;:&nbsp;</label>
               </td>
               <td>
-                <div id="dialogMailToResource" name="dialogMailToResource" dojoType="dijit.form.CheckBox" type="checkbox" ></div>
+                <?php  
+                    $checkRes="false";
+                    if(sessionValueExists('dialogMailToResource')){ 
+                        $dialogMailToResource = getSessionValue('dialogMailToResource');
+                        if($dialogMailToResource=="true"){
+                          $checkRes=$dialogMailToResource;
+                        }
+                        
+                     }
+                ?>
+                <div id="dialogMailToResource" name="dialogMailToResource" dojoType="dijit.form.CheckBox" type="checkbox" onChange="saveDataToSession('dialogMailToResource',this.checked,false);"
+                  <?php echo ($checkRes=="true")?"checked":"";?>
+                ></div>
               </td>
             </tr>
           <?php } ?>
@@ -126,7 +174,19 @@ if($paramMailerType=='phpmailer'){
                 <label for="dialogMailToSponsor"><?php echo htmlEncode($obj->getColCaption("idSponsor"));?>&nbsp;:&nbsp;</label>
               </td>
               <td>
-                <div id="dialogMailToSponsor" name="dialogMailToSponsor" dojoType="dijit.form.CheckBox" type="checkbox" ></div>
+                <?php  
+                    $checkSponsor="false";
+                    if(sessionValueExists('dialogMailToSponsor')){ 
+                        $dialogMailToSponsor = getSessionValue('dialogMailToSponsor');
+                        if($dialogMailToSponsor=="true"){
+                          $checkSponsor=$dialogMailToSponsor;
+                        }
+                        
+                     }
+                ?>
+                <div id="dialogMailToSponsor" name="dialogMailToSponsor" dojoType="dijit.form.CheckBox" type="checkbox" onChange="saveDataToSession('dialogMailToSponsor',this.checked,false);"
+                  <?php echo ($checkSponsor=="true")?"checked":"";?> 
+                ></div>
               </td>
             </tr>
           <?php } ?>
@@ -136,7 +196,19 @@ if($paramMailerType=='phpmailer'){
                 <label for="dialogMailToProject"><?php echo i18n("colMailToProject") ?>&nbsp;:&nbsp;</label>
               </td>
               <td>
-                <div id="dialogMailToProject" name="dialogMailToProject" dojoType="dijit.form.CheckBox" type="checkbox" ></div>
+                <?php  
+                    $checkProjr="false";
+                    if(sessionValueExists('dialogMailToProject')){ 
+                        $dialogMailToProject = getSessionValue('dialogMailToProject');
+                        if($dialogMailToProject=="true"){
+                          $checkProjr=$dialogMailToProject;
+                        }
+                        
+                     }
+                ?>
+                <div id="dialogMailToProject" name="dialogMailToProject" dojoType="dijit.form.CheckBox" type="checkbox" onChange="saveDataToSession('dialogMailToProject',this.checked,false);"
+                  <?php echo ($checkProjr=="true")?"checked":"";?> 
+                ></div>
               </td>
             </tr>
             <tr>
@@ -144,7 +216,19 @@ if($paramMailerType=='phpmailer'){
                 <label for="dialogMailToProjectIncludingParentProject"><?php echo i18n("colMailToProjectIncludingParentProject") ?>&nbsp;:&nbsp;</label>
               </td>
               <td>
-                <div id="dialogMailToProjectIncludingParentProject" name="dialogMailToProjectIncludingParentProject" dojoType="dijit.form.CheckBox" type="checkbox"></div>
+                <?php  
+                    $checkParentProjr="false";
+                    if(sessionValueExists('dialogMailToProjectIncludingParentProject')){ 
+                        $dialogMailToParentProject = getSessionValue('dialogMailToProjectIncludingParentProject');
+                        if($dialogMailToParentProject=="true"){
+                          $checkParentProjr=$dialogMailToParentProject;
+                        }
+                        
+                     }
+                ?>
+                <div id="dialogMailToProjectIncludingParentProject" name="dialogMailToProjectIncludingParentProject" dojoType="dijit.form.CheckBox" type="checkbox" onChange="saveDataToSession('dialogMailToProjectIncludingParentProject',this.checked,false);"
+                  <?php echo ($checkParentProjr=="true")?"checked":"";?> 
+                ></div>
                  <?php echo i18n('globalProjectTeam');?>
               </td>
             </tr>
@@ -153,7 +237,19 @@ if($paramMailerType=='phpmailer'){
                 <label for="dialogMailToLeader"><?php echo i18n("colMailToLeader") ?>&nbsp;:&nbsp;</label>
               </td>
               <td>
-                <div id="dialogMailToLeader" name="dialogMailToLeader" dojoType="dijit.form.CheckBox" type="checkbox" ></div>
+                <?php  
+                    $checkLeader="false";
+                    if(sessionValueExists('dialogMailToLeader')){ 
+                        $dialogMailToLeader = getSessionValue('dialogMailToLeader');
+                        if($dialogMailToLeader=="true"){
+                          $checkLeader=$dialogMailToLeader;
+                        }
+                        
+                     }
+                ?>
+                <div id="dialogMailToLeader" name="dialogMailToLeader" dojoType="dijit.form.CheckBox" type="checkbox" onChange="saveDataToSession('dialogMailToLeader',this.checked,false);"
+                  <?php echo ($checkLeader=="true")?"checked":"";?> 
+                ></div>              
               </td>
             </tr>
             <tr>
@@ -161,7 +257,19 @@ if($paramMailerType=='phpmailer'){
                 <label for="dialogMailToManager"><?php echo i18n("colMailToManager") ?>&nbsp;:&nbsp;</label>
               </td>
               <td>
-                <div id="dialogMailToManager" name="dialogMailToManager" dojoType="dijit.form.CheckBox" type="checkbox" ></div>
+                <?php  
+                    $checkManager="false";
+                    if(sessionValueExists('dialogMailToManager')){ 
+                        $dialogMailToManager = getSessionValue('dialogMailToManager');
+                        if($dialogMailToManager=="true"){
+                          $checkManager=$dialogMailToManager;
+                        }
+                        
+                     }
+                ?>
+                <div id="dialogMailToManager" name="dialogMailToManager" dojoType="dijit.form.CheckBox" type="checkbox" onChange="saveDataToSession('dialogMailToManager',this.checked,false);"
+                  <?php echo ($checkManager=="true")?"checked":"";?> 
+                ></div>
               </td>
             </tr>
           <?php } ?>
@@ -175,7 +283,18 @@ if($paramMailerType=='phpmailer'){
                 <label for="dialogMailToAssigned"><?php echo $assigedLabel; ?>&nbsp;:&nbsp;</label>
               </td>
               <td>
-                <div id="dialogMailToAssigned" name="dialogMailToAssigned" dojoType="dijit.form.CheckBox" type="checkbox" ></div>
+                <?php  
+                    $checkAssigned="false";
+                    if(sessionValueExists('dialogMailToAssigned')){ 
+                        $dialogMailToAssigned = getSessionValue('dialogMailToAssigned');
+                        if($dialogMailToAssigned=="true"){
+                          $checkAssigned=$dialogMailToAssigned;
+                        }
+                        
+                     }
+                ?>
+                <div id="dialogMailToAssigned" name="dialogMailToAssigned" dojoType="dijit.form.CheckBox" type="checkbox" onChange="saveDataToSession('dialogMailToAssigned',this.checked,false);"
+                checked="<?php echo ($checkAssigned=="true")?"checked":"";?>" ></div>
               </td>
             </tr>
             <?php }?>
@@ -184,7 +303,19 @@ if($paramMailerType=='phpmailer'){
                 <label for="dialogMailToSubscribers"><?php echo i18n("colMailToSubscribers") ?>&nbsp;:&nbsp;</label>
               </td>
               <td>
-                <div id="dialogMailToSubscribers" name="dialogMailToSubscribers" dojoType="dijit.form.CheckBox" type="checkbox" ></div>
+                <?php  
+                    $checkSubscribers="false";
+                    if(sessionValueExists('dialogMailToSubscribers')){ 
+                        $dialogMailToSubscribers = getSessionValue('dialogMailToSubscribers');
+                        if($dialogMailToSubscribers=="true"){
+                          $checkSubscribers=$dialogMailToSubscribers;
+                        }
+                        
+                     }
+                ?>
+                <div id="dialogMailToSubscribers" name="dialogMailToSubscribers" dojoType="dijit.form.CheckBox" type="checkbox" onChange="saveDataToSession('dialogMailToSubscribers',this.checked,false);"
+                  <?php echo ($checkSubscribers=="true")?"checked":"";?> 
+                ></div>
                 <?php echo i18n('colMailToSubscribersDetail');?>
               </td>
             </tr>
@@ -229,10 +360,21 @@ if($paramMailerType=='phpmailer'){
                 <label for="dialogOtherMailHistorical"></label>
               </td>
               <td>
+                <?php  
+                    $checkHist="false";
+                    if(sessionValueExists('dialogOtherMailHistorical')){ 
+                        $dialogOtherMailHistorical = getSessionValue('dialogOtherMailHistorical');
+                        if($dialogOtherMailHistorical=="true"){
+                          $checkHist=$dialogOtherMailHistorical;
+                        }
+                        
+                     }
+                ?>
                 <div id="dialogOtherMailHistorical" name="dialogOtherMailHistorical"
                      style="height:auto; margin-top:-1.9px; margin-left:0.5px; overflow-y:auto; position:relative; z-index: 999999999; 
-                     display:none; width: 498px;  background-color:white; border:1px solid grey;">
-                </div>
+                     display:none; width: 498px;  background-color:white; border:1px solid grey;" onChange="saveDataToSession('dialogOtherMailHistorical',this.checked,false);"
+                     <?php echo ($checkHist=="true")?"checked":"";?> 
+                ></div>
               </td>
             </tr>
             <tr>
@@ -240,12 +382,20 @@ if($paramMailerType=='phpmailer'){
                 <label for="dialogMailMessage"><?php echo i18n("colMailMessage") ?>&nbsp;:&nbsp;</label>
               </td>
               <td>
+                <?php  
+                    $valueMessage="false";
+                    if(sessionValueExists('dialogMailMessage')){ 
+                        $valueMessage="true";
+                        $dialogMailMessage = getSessionValue('dialogMailMessage');
+                     }
+                ?>
                  <textarea dojoType="dijit.form.Textarea" 
                     id="dialogMailMessage" name="dialogMailMessage"
                     style="width: 500px; "
                     maxlength="4000"
-                    class="input" ></textarea>
+                    class="input" onChange="saveDataToSession('dialogMailMessage',this.value,false);"><?php echo ($valueMessage=="true")?$dialogMailMessage:"";?></textarea>
               </td>
+              
             </tr>
             <?php if (property_exists($objectClass, '_Note') ) {?>    
             <tr>
@@ -253,7 +403,19 @@ if($paramMailerType=='phpmailer'){
                 <label for="dialogMailSaveAsNote"><?php echo i18n("colSaveAsNote") ?>&nbsp;:&nbsp;</label>
               </td>
               <td>
-                <div id="dialogMailSaveAsNote" name="dialogMailSaveAsNote" dojoType="dijit.form.CheckBox" type="checkbox" ></div>
+                <?php 
+                    $checkNote="false";
+                    if(sessionValueExists('dialogMailSaveAsNote')){ 
+                        $dialogMailSaveAsNote = getSessionValue('dialogMailSaveAsNote');
+                        if($dialogMailSaveAsNote=="true"){
+                          $checkNote=$dialogMailSaveAsNote;
+                        }
+                        
+                     }
+                ?>
+                <div id="dialogMailSaveAsNote" name="dialogMailSaveAsNote" dojoType="dijit.form.CheckBox" type="checkbox" onChange="saveDataToSession('dialogMailSaveAsNote',this.checked,false);"
+                  <?php echo ($checkNote=="true")?"checked":"";?> 
+                ></div>
               </td>
             </tr>
             <?php }?>
