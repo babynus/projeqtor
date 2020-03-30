@@ -925,12 +925,17 @@ class ResourceMain extends SqlElement {
     		}
     	}
     	if(!isset($capacityPeriod)){
-    		$capacityPeriod = array();
+    	  $capacityPeriod = array();
     	}
     	return $capacityPeriod;
     }
     
     public function getCapacityPeriod($date) {
+      //gautier #3880
+      //ressource closed
+      if($this->endDate){
+        if($date > $this->endDate)return 0;
+      }
     	if(!sessionValueExists('capacityPeriod')){
     		setSessionValue('capacityPeriod', array());
     	}
