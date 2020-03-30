@@ -273,8 +273,10 @@ class SqlList {
       }
       $query .= ' and id in (' . $lstIn . ')' ;
     } 
-    if ($selectedValue) {
-      $query .= " or " . $obj->getDatabaseColumnName('id') . '='. $selectedValue;
+    if (trim($selectedValue)) {
+    	if ($selectedValue!='*' and $selectedValue!='all' and intval($selectedValue) ) {
+        $query .= " or " . $obj->getDatabaseColumnName('id') .'= ' . Sql::str($selectedValue) ;
+    	}
     }
     if (property_exists($obj,'_sortCriteriaForList')) {
       $query .= ' order by ' . $obj->getDatabaseTableName() . '.'.$obj->_sortCriteriaForList;
