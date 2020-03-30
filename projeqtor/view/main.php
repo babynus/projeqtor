@@ -507,7 +507,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
         $firstPage=null;
       } else if ($firstPage) {
       ?>
-        loadContent("<?php echo $firstPage;?>","centerDiv");
+        setTimeout('loadContent("<?php echo $firstPage;?>","centerDiv");',200);
       <?php 
       }
       ?>
