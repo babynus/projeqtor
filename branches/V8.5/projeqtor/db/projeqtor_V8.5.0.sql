@@ -15,3 +15,5 @@ INSERT INTO `${prefix}habilitationother` (idProfile,scope,rightAccess) VALUES
 (6,'validatePlanning','2'),
 (7,'validatePlanning','2'),
 (5,'validatePlanning','2');
+
+DELETE FROM `${prefix}columnselector` col WHERE   col.`objectClass`='Recipient' and col.`field`='bank' and col.`attribute`='bank';

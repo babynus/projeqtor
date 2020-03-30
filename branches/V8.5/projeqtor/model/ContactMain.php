@@ -380,14 +380,38 @@ class ContactMain extends SqlElement {
   }
   
   public function drawContactsList($critArray) {
-    $result="<table>";
+    global $print,$obj;
     $conList=$this->getSqlElementsFromCriteria($critArray, false);
-    foreach ($conList as $con) {
-      $result.= '<tr><td valign="top" width="20px"><img src="css/images/iconList16.png" height="16px" /></td><td>';
-      $result.=htmlDrawLink($con);
-      $result.='</td></tr>';
+    $result= '</br>';
+    $result .= '<table width="99.9%">';
+    $result .= '<tr>';
+    if (!$print) {
+      $result .= '<td class="noteHeader smallButtonsGroup" style="width:10%">';
+      if (!$print ) {
+        $result .= '<a '; $result .= 'onClick="showDetail( \'id'.htmlEncode(get_class($this)).'\',1,\''.htmlEncode(get_class($this)).'\');"title="' . i18n('addContact') .'"'; 
+        $result .= '>';
+        $result .= formatSmallButton('Add');
+        $result .= '</a>';
+      }
+      $result .= '</td>';
     }
-    $result .="</table>";
+    $result .= '<td class="noteHeader" style="width:10%">' . i18n('colId') . '</td>';
+    $result .= '<td class="noteHeader" style="width:20%">' . i18n('colName') . '</td>';
+    $result .= '</tr>';
+    foreach ($conList as $con){
+      $result .= '<tr>';
+      if (!$print) {
+        $result .= '<td class="noteData smallButtonsGroup">';
+        if (!$print) {
+      				$result .= ' <a onClick="removeContact('.htmlEncode($con->id).');" title="'.i18n('removeContact').'" > '.formatSmallButton('Remove').'</a>';
+        }
+        $result .= '</td>';
+      }
+      $result .= '<td class="noteData" style="text-align:center">' . htmlEncode($con->id) . '</td>';
+      $result .= '<td class="noteData" style="text-align:center">' . htmlDrawLink($con) . '</td>';
+      $result .= '</tr>';
+    }
+    $result .= '</table>';
     return $result; 
   }
   
