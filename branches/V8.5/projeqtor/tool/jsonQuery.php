@@ -284,7 +284,7 @@
         $queryWhere.= ')';
       }
     }
-    if ($objectClass=='Resource' or $objectClass=='ResourceTeam') {
+    if ($objectClass=='Resource' or $objectClass=='ResourceTeam' or $objectClass=='Organization') {
       $scope=Affectable::getVisibilityScope('Screen');
       if ($scope!="all") {
         $queryWhere.= ($queryWhere=='')?'':' and ';
