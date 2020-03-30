@@ -35,8 +35,14 @@ $prj=new Project();
 $prj->id='*';
 //$cpt=$prj->countMenuProjectsList();
 $limitToActiveProjects=true;
+$critFld=null;
+$critVal=null;
 if (sessionValueExists('projectSelectorShowIdle') and getSessionValue('projectSelectorShowIdle')==1) {
   $limitToActiveProjects=false;
+}
+if (sessionValueExists('projectSelectorShowHandlelProject') and getSessionValue('projectSelectorShowHandlelProject')==1) {
+	$critFld='handled';
+	$critVal=1;
 }
 $subProjectsToDraw=$prj->drawSubProjects('selectedProject', false, true, $limitToActiveProjects);     
 $cpt=substr_count($subProjectsToDraw,'<tr>');
@@ -108,7 +114,7 @@ if ($nbProj==0) {
        setSelectedProject(this.value, this.displayedValue, 'selectedProject',true);
      </script>
      <option value=""></option>
-     <?php htmlDrawOptionForReference("idProject", null, null, false,null, null, $limitToActiveProjects);?>
+     <?php htmlDrawOptionForReference("idProject", null, null, false, $critFld, $critVal, $limitToActiveProjects);?>
    </div>
    <input type="hidden" id="projectSelectorMode" value="Standard" />
    <div style="text-align:left;position:absolute; top:1px; left:281px; padding:0px;">
@@ -130,7 +136,7 @@ if ($nbProj==0) {
     }
   </script>
    <option value="*"><i><?php echo i18n("allProjects");?></i></option>
-   <?php htmlDrawOptionForReference("idProject", $proj, null, true,null, null, $limitToActiveProjects);?>
+   <?php htmlDrawOptionForReference("idProject", $proj, null, true,$critFld, $critVal, $limitToActiveProjects);?>
 </select>
 <input type="hidden" id="projectSelectorMode" value="Filtering" />
    <div style="text-align:left;position:absolute; top:1px; left:281px; padding:0px;">
@@ -154,7 +160,7 @@ name="projectSelectorFiletering"
     }
   </script>
    <option value="*"><i><?php echo i18n("allProjects");?></i></option>
-   <?php htmlDrawOptionForReference("idProject", $proj, null, true,null, null, $limitToActiveProjects);?>  
+   <?php htmlDrawOptionForReference("idProject", $proj, null, true,$critFld, $critVal, $limitToActiveProjects);?>  
 </select>
 	<input type="hidden" id="projectSelectorMode" value="Filtering" />
    <div style="text-align:left;position:absolute; top:1px; left:281px; padding:0px;">
