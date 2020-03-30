@@ -47,6 +47,9 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
 	$spaces=10*($nbCol+1);
 	$ticketWidth=(($destWidth-$spaces)/$nbCol)-40;
 	if ($ticketWidth<305) $ticketWidth=305;
+	$nbTktPerCol=intval($ticketWidth/150);
+	$ticketWidthSmall=(round($ticketWidth/$nbTktPerCol,1)-(2*$nbTktPerCol)+3).'px';
+	
 	
 	if (isset ( $line ['description'] )) {
 	  $description=$line ['description'];
@@ -138,7 +141,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
 		// if button is unchecked elements are in normal mode
 		if ($mode != "refresh") {
 			echo '
-    <div class="dojoDndItem ' . $handle . ' ticketKanBanStyle ticketKanBanColor " style="border-left:3px solid ' . $color . ';" fromC="' . $from . '" id="itemRow' . $line ['id'] . '-' . $type . '"
+    <div class="dojoDndItem ' . $handle . ' ticketKanBanStyle ticketKanBanColor " style="width:'.$ticketWidthSmall.';border-left:3px solid ' . $color . ';" fromC="' . $from . '" id="itemRow' . $line ['id'] . '-' . $type . '"
     dndType="' . ($type == 'Status' ? 'typeRow' . $idType . $add : ($type == 'TargetProductVersion' ? $from : SqlList::getFieldFromId ( $typeKanbanC, $line ['id'], "idProject" ))) . '">';
 		}
 		echo ' 
