@@ -152,36 +152,41 @@ class AutoSendReport extends SqlElement{
   	    }
   	  }
   	  if($paramName == 'periodValue'){
-  	    $value = explode('-', $paramValue);
-  	    $year = '';
-	      if($value[0] == "currentYear"){
-	        $year = date('Y');
-	        RequestHandler::setValue($paramName, $year);
-        }else if($value[0] == 'previousYear'){
-	        	$year = date('Y')-1;
-	        	RequestHandler::setValue($paramName, $year);
-	      }
-	      if(count($value) > 1){
-  	      if($value[1] == 'currentMonth'){
-  	      	$month = date('m');
-  	      	RequestHandler::setValue($paramName, $year.$month);
-  	      }else if($value[1] == 'previousMonth'){
-  	      	$month = date('m')-1;
-  	      	if($month < 10){
-  	      		$month = '0'.$month;
-  	      	}
-  	      	RequestHandler::setValue($paramName, $year.$month);
+  	    if(strpos($paramValue, '-') != ''){
+  	      $value = explode('-', $paramValue);
+  	      $year = '';
+  	      if($value[0] == "currentYear"){
+  	      	$year = date('Y');
+  	      	RequestHandler::setValue($paramName, $year);
+  	      }else if($value[0] == 'previousYear'){
+  	      	$year = date('Y')-1;
+  	      	RequestHandler::setValue($paramName, $year);
   	      }
-  	      if($value[1] == 'currentWeek'){
-  	      	$week = date('W');
-  	      	RequestHandler::setValue($paramName, $year.$week);
-  	      }else if($value[1] == 'previousWeek'){
-  	      	$week = date('W')-1;
-  	      	if($week < 10){
-  	      		$week = '0'.$week;
+  	      if(count($value) > 1){
+  	      	if($value[1] == 'currentMonth'){
+  	      		$month = date('m');
+  	      		RequestHandler::setValue($paramName, $year.$month);
+  	      	}else if($value[1] == 'previousMonth'){
+  	      		$month = date('m')-1;
+  	      		if($month < 10){
+  	      			$month = '0'.$month;
+  	      		}
+  	      		RequestHandler::setValue($paramName, $year.$month);
   	      	}
-  	      	RequestHandler::setValue($paramName, $year.$week);
+  	      	if($value[1] == 'currentWeek'){
+  	      		$week = date('W');
+  	      		RequestHandler::setValue($paramName, $year.$week);
+  	      	}else if($value[1] == 'previousWeek'){
+  	      		$week = date('W')-1;
+  	      		if($week < 10){
+  	      			$week = '0'.$week;
+  	      		}
+  	      		RequestHandler::setValue($paramName, $year.$week);
+  	      	}
   	      }
+  	    }else{
+  	      RequestHandler::setValue($paramName, $paramValue);
+  	      continue;
   	    }
   	  }
   	}
@@ -401,6 +406,13 @@ class AutoSendReport extends SqlElement{
     		        }else {
     		          $strParam .= i18n('col'.ucfirst($name)).' : '.$value.$separator;
     		        }
+    		      }
+    		    }
+    		    if($name == 'periodValue'){
+    		      if(trim(strpos($value, 'previous')) != '' or trim(strpos($value, 'current')) != ''){
+    		      	continue;
+    		      }else{
+    		        $strParam .= i18n('colPeriod').' : '.$value.$separator;
     		      }
     		    }
   			  }

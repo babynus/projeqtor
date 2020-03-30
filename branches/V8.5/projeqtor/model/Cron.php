@@ -519,6 +519,7 @@ class Cron {
       
       // Check Database Execution for auto send report damian
       foreach (getlistCronAutoSendReport() as $key=>$cronAutoSendReport){
+        debugLog($cronAutoSendReport);
       	if($cronAutoSendReport->nextTime==null){
       		$cronAutoSendReport->calculNextTime();
       	}

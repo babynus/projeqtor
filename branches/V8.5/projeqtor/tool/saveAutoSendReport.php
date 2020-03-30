@@ -75,8 +75,9 @@ if($action == null){
   $report = new Report($idReport, true);
   $arrayParam = array();
   foreach ($param as $paramName=>$paramValue){
-    if($paramName != 'yearSpinner' and $paramName != 'monthSpinner' and $paramName != 'weekSpinner' and $paramName != 'startDate' and $paramName != 'periodValue'){
-        $arrayParam[$paramName] = $paramValue;
+    if($paramName != 'yearSpinner' and $paramName != 'monthSpinner' and $paramName != 'weekSpinner' and $paramName != 'startDate'){
+      if(!isset($param['periodScale']) and $paramName != 'periodValue')continue;  
+      $arrayParam[$paramName] = $paramValue;
     }
   }
   foreach ($param as $paramName=>$paramValue){
