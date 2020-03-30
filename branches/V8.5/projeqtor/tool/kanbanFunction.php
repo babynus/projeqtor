@@ -44,28 +44,27 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
 	$destWidth=RequestHandler::getValue('destinationWidth');
 	if (!$destWidth) $destWidth=1920;
 	$nbCol=(isset($jsonDecode['column']) and is_array($jsonDecode['column']))?count($jsonDecode['column']):1;
-	$ticketWidth=$destWidth/$nbCol-46;
+	$spaces=10*($nbCol+1);
+	$ticketWidth=(($destWidth-$spaces)/$nbCol)-40;
+	if ($ticketWidth<305) $ticketWidth=305;
+	$nbTktPerCol=intval($ticketWidth/150);
+	$ticketWidthSmall=(round($ticketWidth/$nbTktPerCol,1)-(2*$nbTktPerCol)+3).'px';
+	
 	
 	if (isset ( $line ['description'] )) {
 	  $description=$line ['description'];
-	  if (strlen ($description) > 2000) {
-		  $text = new Html2Text ($description);
-		  $descr = $text->getText ();
-		  $descr=htmlspecialchars($descr);
-		  $descr1 = substr ( $descr, 0, 2000);
+	  $text = new Html2Text ($description);
+	  $descr = $text->getText ();
+	  $descr=htmlspecialchars($descr);
+	  if (strlen ($description) > 4000) {
+		  $descr1 = substr ( $descr, 0, 4000);
 			$ticketDescr = nl2brForPlainText ( $descr1 );
 			$descr2 = substr ( $descr, 0, 200 );
 			$ticketDescr2 = nl2brForPlainText ( $descr2 );
-		} else if (strlen ($description) > 200) {
-	    $text = new Html2Text ($description);
-	    $descr = $text->getText ();
-	    $descr=htmlspecialchars($descr);
+	  } else {
 	    $ticketDescr=$description;
 	    $descr2 = substr ( $descr, 0, 200);
 	    $ticketDescr2 = nl2brForPlainText ( $descr2 );
-	  } else {
-	    $ticketDescr=$description;
-	    $ticketDescr2=$description;
 	  }
 	} else {
 		$ticketDescr = '<div style="font-style:italic; color:#CDCADB; ">' . i18n ( "kanbanNoDescription" ) . '</div>';
@@ -96,7 +95,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
         </div>
       </div>
       <div id="objectDescr' . $line ['id'] . '" dojoType="dijit.layout.ContentPane" region="center" class="dojoDndItem"
-        style="max-width:'.$ticketWidth.'px;padding:4px;font-size:12px;font-family:arial;word-wrap:break-word;max-height:300px;overflow-y:auto;cursor:move;border-top:1px solid #CDCADB;border-bottom:1px solid #CDCADB;"
+        style="width:98%;max-width:'.$ticketWidth.'px;padding:4px;font-size:12px;font-family:arial;word-wrap:break-word;max-height:300px;overflow-y:auto;cursor:move;border-top:1px solid #CDCADB;border-bottom:1px solid #CDCADB;"
         onScroll="kanbanShowDescr(\'description\',\'' . $typeKanbanC . '\', ' . $line ['id'] . ');">
         ' . $ticketDescr . '
       </div>
@@ -145,7 +144,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
 		// if button is unchecked elements are in normal mode
 		if ($mode != "refresh") {
 			echo '
-    <div class="dojoDndItem ' . $handle . ' ticketKanBanStyle ticketKanBanColor " style="border-left:3px solid ' . $color . ';" fromC="' . $from . '" id="itemRow' . $line ['id'] . '-' . $type . '"
+    <div class="dojoDndItem ' . $handle . ' ticketKanBanStyle ticketKanBanColor " style="width:'.$ticketWidthSmall.';border-left:3px solid ' . $color . ';" fromC="' . $from . '" id="itemRow' . $line ['id'] . '-' . $type . '"
     dndType="' . ($type == 'Status' ? 'typeRow' . $idType . $add : ($type == 'TargetProductVersion' ? $from : SqlList::getFieldFromId ( $typeKanbanC, $line ['id'], "idProject" ))) . '">';
 		}
 		echo ' 

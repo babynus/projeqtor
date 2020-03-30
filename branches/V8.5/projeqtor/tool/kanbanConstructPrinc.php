@@ -24,7 +24,7 @@ function kanbanAddPrinc($line) {
 	$kanbanFullWidthElement = Parameter::getUserParameter ( "kanbanFullWidthElement" );
 	if ($kanbanFullWidthElement == "on") {
 		if ($line ['idstatus']) {
-			$addInPrinc .= '<div style="float:left;margin-bottom:1px;margin-left:3px;margin-top:2px;height:21px;max-height:21px;overflow:hidden;white-space:nowrap;width:33%">' . colorNameFormatter ( SqlList::getNameFromId ( "Status", $line ['idstatus'] ) . '#split#' . SqlList::getFieldFromId ( "Status", $line ['idstatus'], 'color' ), $line ['id'] ) . '</div>';
+			$addInPrinc .= '<div style="float:left;margin-bottom:1px;margin-left:3px;margin-top:2px;height:21px;max-height:21px;overflow:hidden;white-space:nowrap;width:25%">' . colorNameFormatter ( SqlList::getNameFromId ( "Status", $line ['idstatus'] ) . '#split#' . SqlList::getFieldFromId ( "Status", $line ['idstatus'], 'color' ), $line ['id'] ) . '</div>';
 		}
 		if ($line ['idtargetproductversion']) {
 			$versionName = SqlList::getNameFromId ( "TargetProductVersion", $line ['idtargetproductversion'] );
