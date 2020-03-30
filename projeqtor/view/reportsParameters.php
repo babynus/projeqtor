@@ -1134,7 +1134,7 @@ foreach ($listParam as $param) {
           </div> 
         </button>
 		  <?php }
-		  if($autoSendReportAccess and $report->name != 'reportAvailabilitySynthesis'){?>
+		  if($autoSendReportAccess){?>
   		  <button title="<?php echo i18n('reportAutoSendReport')?>"   
            dojoType="dijit.form.Button" type="submit" 
            id="reportAutoSendReport" name="reportAutoSendReport" 
