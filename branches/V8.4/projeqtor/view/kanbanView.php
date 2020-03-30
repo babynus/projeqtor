@@ -199,6 +199,7 @@ function drawColumnKanban($type,$jsonD,$idKanban){
   global $typeKanbanC;
   $statusList=SqlList::getList('Status');
   $allowedStatus=array();
+  $kanbanFullWidthElement = Parameter::getUserParameter ( "kanbanFullWidthElement" );
   if(count($jsonD['column'])!=0){
   	$jsonArray=array();
   	$keyJsonOrder=array();
@@ -353,7 +354,7 @@ function drawColumnKanban($type,$jsonD,$idKanban){
       getNameFromTypeKanban($itemKanban,$nextFrom,$type,$isStatus,$nbItems,$idKanban,$realWork,$plannedWork,$leftWork);
       echo '</td></tr><tr>';
       echo '
-        <td class="kanbanColumn" style="overflow-y:scroll;overflow-x:hidden;display:block; height:'.$maxHeight.';max-height:'.$maxHeight.'; position:relative;background-color:#e2e4e6;padding:6px 0px 6px 4px;width:auto;min-width:332px;" id="dialogRow'.$itemKanban['from']. '" 
+        <td class="kanbanColumn" style="overflow-y:scroll;overflow-x:hidden;display:block; height:'.$maxHeight.';max-height:'.$maxHeight.'; position:relative;background-color:#e2e4e6;padding:'.(($kanbanFullWidthElement=='on')?'8px':'6px 0px 6px 4px').';width:auto;min-width:332px;" id="dialogRow'.$itemKanban['from']. '" 
         jsId="dialogRow'.$itemKanban['from']. '" dojotype="dojo.dnd.Source" dndType="typeRow'.$itemKanban['from']. '" withhandles="true"  
         '.($acceptTmp!='[]' ? 'data-dojo-props="accept: '.$acceptTmp.'"':'').' width="'.((100/count($jsonArray))).'%" valign="top">';
       echo '
