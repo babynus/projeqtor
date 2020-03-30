@@ -4487,7 +4487,7 @@ function decodeCSV($val) {
 }
 //
 function autoOpenFilteringSelect($comboDatail=false) {
-  if ($comboDatail) return '';// ' onMouseDown="window.dijit.byId(this.name).toggleDropDown();"  selectOnClick="true"';
+  if ($comboDatail) return ' onMouseDown="window.top.frames[\'comboDetailFrame\'].dijit.byId(this.name.replace(\'_detail\',\'\')).toggleDropDown();"  selectOnClick="true"';
   else return ' onMouseDown="dijit.byId(this.name).toggleDropDown();"  selectOnClick="true"';
 }
 

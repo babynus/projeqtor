@@ -4592,7 +4592,8 @@ function saveObject() {
                                       // detected
     CKEDITOR.instances[name].updateElement();
   }
-  dojo.byId("saveButton").blur();
+  if (dojo.byId("saveButton")) dojo.byId("saveButton").blur();
+  else if (dojo.byId("comboSaveButton")) dojo.byId("comboSaveButton").blur();
   if(param != null && dojo.byId('resourcePlanning')){
     submitForm("../tool/saveObject.php?selectedResource="+param, "resultDivMain", "objectForm", true);
   }else{
@@ -4822,6 +4823,7 @@ function showHideMoveButtons() {
 }
 
 function getExtraRequiredFields() {
+  var objectClass=(dojo.byId('objectClass'))?dojo.byId('objectClass').value:((dojo.byId('objectClassName'))?dojo.byId('objectClassName').value:null);
   dojo.xhrPost({
     url : "../tool/getExtraRequiredFields.php",
     form : 'objectForm',
@@ -4877,14 +4879,15 @@ function getExtraRequiredFields() {
   });
 }
 function getExtraHiddenFields(idType,idStatus,idProfile) {
+  var objectClass=(dojo.byId('objectClass'))?dojo.byId('objectClass').value:((dojo.byId('objectClassName'))?dojo.byId('objectClassName').value:null);
   if (!idStatus) {
     if (dijit.byId('idStatus')) {
       idStatus=dijit.byId('idStatus').get('value');
     }
   }
   if (!idType) {
-    if (dojo.byId('objectClass')) {
-      var typeName='id'+dojo.byId('objectClass').value+'Type';
+    if (objectClass) {
+      var typeName='id'+objectClass.value+'Type';
       if (dijit.byId(typeName)) {
         idType=dijit.byId(typeName).get('value');
       }
@@ -4892,7 +4895,7 @@ function getExtraHiddenFields(idType,idStatus,idProfile) {
   }
   dojo.xhrGet({
     url : "../tool/getExtraHiddenFields.php" + "?type=" + idType+"&status="+idStatus+"&profile="+idProfile
-        + "&objectClass=" + dojo.byId('objectClass').value,
+        + "&objectClass=" + objectClass,
     handleAs : "text",
     load : function(data) {
       var obj = JSON.parse(data);
@@ -4928,14 +4931,15 @@ function hideEmptyTabs() {
   });
 }
 function getExtraReadonlyFields(idType,idStatus,idProfile) {
+  var objectClass=(dojo.byId('objectClass'))?dojo.byId('objectClass').value:((dojo.byId('objectClassName'))?dojo.byId('objectClassName').value:null);
   if (!idStatus) {
     if (dijit.byId('idStatus')) {
       idStatus=dijit.byId('idStatus').get('value');
     }
   }
   if (!idType) {
-    if (dojo.byId('objectClass')) {
-      var typeName='id'+dojo.byId('objectClass').value+'Type';
+    if (objectClass) {
+      var typeName='id'+objectClass.value+'Type';
       if (dijit.byId(typeName)) {
         idType=dijit.byId(typeName).get('value');
       }
@@ -4943,7 +4947,7 @@ function getExtraReadonlyFields(idType,idStatus,idProfile) {
   }
   dojo.xhrGet({
     url : "../tool/getExtraReadonlyFields.php" + "?type=" + idType+"&status="+idStatus+"&profile="+idProfile
-        + "&objectClass=" + dojo.byId('objectClass').value,
+        + "&objectClass=" + objectClass,
     handleAs : "text",
     load : function(data) {
       var obj = JSON.parse(data);

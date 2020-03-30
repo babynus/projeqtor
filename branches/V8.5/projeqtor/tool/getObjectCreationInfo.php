@@ -153,7 +153,7 @@ if (isset($obj)) {
     		}
     	}
     	foreach ($table as $stId=>$stName) {
-    		echo '<div style="padding-top:4px;min-height:20px;height:32px;position:relative;'.(($stId==$obj->idStatus)?'" onClick="hideDirectChangeStatus();"':'cursor:pointer;" onClick="dijit.byId(\'idStatus\').set(\'value\','.$stId.');setTimeout(\'saveObject()\',100);" ').' >';
+    		echo '<div style="padding-top:4px;min-height:20px;height:32px;position:relative;'.(($stId==$obj->idStatus)?'" onClick="hideDirectChangeStatus();"':'cursor:pointer;" onClick="dijit.byId(\'idStatus\').set(\'value\','.$stId.');setTimeout(\''.(($comboDetail)?'window.top.saveDetailItem()':'saveObject()').'\',100);" ').' >';
     		echo colorNameFormatter($stName."#split#".(($stId==$obj->idStatus)?'transparent':SqlList::getFieldFromId('Status', $stId, 'color')),-1,'32');
     		echo '</div>';
     	}
