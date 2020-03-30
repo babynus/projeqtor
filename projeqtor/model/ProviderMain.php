@@ -137,12 +137,9 @@ class ProviderMain extends SqlElement {
     $result="";
     if ($item=='contacts') {
       $con=new Contact();
-      $result .="<table><tr><td class='label' valign='top'><label>" . i18n('contacts') . "&nbsp;:&nbsp;</label>";
-      $result .="</td><td>";
       if ($this->id) {
         $result .= $con->drawContactsList(array('idProvider'=>$this->id,'idle'=>'0'));
       }
-      $result .="</td></tr></table>";
       return $result;
     }
   }

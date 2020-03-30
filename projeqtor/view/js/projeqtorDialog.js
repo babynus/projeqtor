@@ -739,6 +739,12 @@ function selectDetailItem(selectedValue, lastSavedName) {
     return;                                                    
   }  
   //END ADD qCazelles - Correction GANTT - Ticket #100
+  if(comboClass=='Contact' && (dojo.byId('objectClass').value=='Client' || dojo.byId('objectClass').value=='Provider') ){
+    saveContact(idFldVal,comboClass,comboName);
+    hideDetail();
+    return;
+  }
+  
   if (combo) {
   	if(comboName == 'projectSelectorFiletering'){
   		var pos = idFldVal.indexOf('_');
@@ -11229,5 +11235,25 @@ function checkCronStatus(status){
   	adminLaunchScript("cronStop", false);
   	refreshCronIconStatus("stopped");
 	}
+}
+
+function saveContact(idFldVal,comboClass){
+  var addVal=dojo.byId('objectId').value;
+  var obj=dojo.byId('objectClass').value;
+  var parm="operation=add&objectClass="+comboClass+"&objectId="+idFldVal+"&class="+obj+"&addVal="+addVal;
+  var paramDetail="objectClass="+dojo.byId('objectClass').value+"&objectId="+addVal;
+  loadContent("../tool/saveContact.php?"+parm, "resultDivMain",
+      "contactForm", true);
+  loadContent("objectDetail.php?"+paramDetail, "detailDiv", 'listForm');
+}
+
+function removeContact(idFldVal){
+  var addVal=dojo.byId('objectId').value;
+  var obj=dojo.byId('objectClass').value;
+  var parm="operation=remove&objectClass=Contact&objectId="+idFldVal+"&class="+obj;
+  var paramDetail="objectClass="+dojo.byId('objectClass').value+"&objectId="+addVal;
+  loadContent("../tool/saveContact.php?"+parm, "resultDivMain",
+      "contactForm", true);
+  loadContent("objectDetail.php?"+paramDetail, "detailDiv", 'listForm');
 }
 //End
