@@ -65,7 +65,7 @@ class ResourceTeamAffectation extends SqlElement {
       $rate = $this->rate;
       if($this->id){
         $teamAff = new ResourceTeamAffectation($this->id);
-        $rate =  $teamAff->rate;
+        $rate = $rate - $teamAff->rate;
       }
       $start=($this->startDate)?$this->startDate:self::$minAffectationDate;
       $end=($this->endDate)?$this->endDate:self::$maxAffectationDate;
@@ -194,14 +194,14 @@ class ResourceTeamAffectation extends SqlElement {
     		          $res[$start]=array(
     		              'start'=>$start,
     		              'end'=>addDaysToDate($r['start'], -1),
-    		              'rate'=>($aff->rate/100*$myResource->capacity),
+    		              'rate'=>$r['rate']+($aff->rate/100*$myResource->capacity),
     		              'idResource'=>$arrAffResource);
     		        }
     		        $next=$r['start'];
     		        $res[$next]=array(
     		            'start'=>$next,
     		            'end'=>$r['end'],
-    		            'rate'=>($aff->rate/100*$myResource->capacity),
+    		            'rate'=>$r['rate']+($aff->rate/100*$myResource->capacity),
     		            'idResource'=>array_sum_preserve_keys($r['idResource'],$arrAffResource));
     		        $start=($end!=$r['end'])?addDaysToDate($r['end'], 1):'';
     		      }
