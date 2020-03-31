@@ -458,7 +458,12 @@ if($paramMailerType=='phpmailer'){
                 id="selectEmailTemplate" name="selectEmailTemplate" class="input" onChange="saveDataToSession('dialogMailEmailTemplate',this.value,false);"
                 <?php echo autoOpenFilteringSelect();?>>
                 <option value="<?php echo ($showVal==true)?$dialogMailEmailTemplate:''; ?>"><span> <?php  echo ($showVal==true)?$dialogName:''; ?></span></option>
-                <?php foreach ($listEmailTemplate as $key => $value){?>
+                <?php 
+                  foreach ($listEmailTemplate as $key => $value){
+                    if($value->id==$dialogMailEmailTemplate){
+                      continue;
+                    }
+                ?>
                 <option value="<?php echo $value->id;?>"><span> <?php echo htmlEncode($value->name);?></span></option>
                 <?php }?>
                 <script type="dojo/connect" event="onChange" args="evt">
