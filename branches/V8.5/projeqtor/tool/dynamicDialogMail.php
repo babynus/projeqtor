@@ -324,28 +324,44 @@ if($paramMailerType=='phpmailer'){
                 <label for="dialogMailToOther"><?php echo i18n("colMailToOther") ?>&nbsp;:&nbsp;</label>
               </td>
               <td>
+                <?php  
+                    $checOther="false";
+                    if(sessionValueExists('dialogMailToOther')){ 
+                        $dialogMailToOther = getSessionValue('dialogMailToOther');
+                        if($dialogMailToOther=="true"){
+                          $checOther=$dialogMailToOther;
+                        }
+                        
+                     }
+                ?>
                 <div id="dialogMailToOther" name="dialogMailToOther" dojoType="dijit.form.CheckBox" 
-                 type="checkbox" onChange="dialogMailToOtherChange();">
-                </div> <?php echo i18n('helpOtherEmail');?>
+                 type="checkbox" onChange="dialogMailToOtherChange();saveDataToSession('dialogMailToOther',this.checked,false);"
+                 <?php echo ($checOther=="true")?"checked":"";?> 
+                 ></div> <?php echo i18n('helpOtherEmail');?>
               </td>
             </tr>
             <tr>
               <td class="dialogLabel">
               </td>
               <td>
+                <?php  
+                    if(sessionValueExists('dialogMailToOther')){ 
+                        $dialogOtherMail = getSessionValue('dialogOtherMail');
+                     }
+                ?>
                 <textarea dojoType="dijit.form.Textarea" 
   				          id="dialogOtherMail" name="dialogOtherMail"
-  				          style="width: 500px; display:none"
+  				          style="width: 500px; display:<?php echo ($checOther=='true')?'block':'none';?>"
   				          maxlength="4000"
-  				          class="input" onblur="findAutoEmail();hideEmailHistorical();" oninput="compareEmailCurrent();" onclick="compareEmailCurrent();"></textarea>
+  				          class="input" onblur="findAutoEmail();hideEmailHistorical();" oninput="compareEmailCurrent();" onclick="compareEmailCurrent();" onchange="saveDataToSession('dialogOtherMail',this.value,false);"><?php echo ($checOther=='true')?$dialogOtherMail:'';?></textarea>
   				      <textarea dojoType="dijit.form.Textarea" 
       					          id="dialogMailObjectIdEmail" name="dialogMailObjectIdEmail"
-      					          style="width: 500px; display:none"
-      					          class="input" onchange="dialogMailIdEmailChange()"></textarea>
+      					          style="width: 500px;display:none"
+      					          class="input" onchange="dialogMailIdEmailChange();"></textarea>
   					    <td style="vertical-align: top">
   					    <?php if ($displayComboButton) {?>
                  <button id="otherMailDetailButton" dojoType="dijit.form.Button" showlabel="false"
-                         style="display:none" title="<?php echo i18n('showDetail')?>"iconClass="iconView">
+                         style="display:<?php echo ($checOther=='true')?'block':'none';?>" title="<?php echo i18n('showDetail')?>"iconClass="iconView">
                    <script type="dojo/connect" event="onClick" args="evt">
                       dijit.byId('dialogMailObjectIdEmail').set('value',null);
                       showDetail('dialogMailObjectIdEmail', 0, 'Resource', true);
@@ -424,10 +440,24 @@ if($paramMailerType=='phpmailer'){
                 <label for="dialogMailEmailTemplate" class="generalColClass idEmailTemplateClass"><?php echo htmlEncode($obj->getColCaption("idEmailTemplate")); ?>&nbsp;:&nbsp;</label>
               </td>
               <td>
+                <?php 
+                $showVal=false;
+                    if(sessionValueExists('dialogMailEmailTemplate')){ 
+                        $dialogMailEmailTemplate = getSessionValue('dialogMailEmailTemplate');
+                        foreach ($listEmailTemplate as $key => $value){
+                            if($value->id ==$dialogMailEmailTemplate ){
+                              $showVal=true;
+                              $dialogName=$value->name;
+                            }
+                        }
+                    }
+                    
+
+                ?>
                 <select dojoType="dijit.form.FilteringSelect" 
-                id="selectEmailTemplate" name="selectEmailTemplate" class="input"
+                id="selectEmailTemplate" name="selectEmailTemplate" class="input" onChange="saveDataToSession('dialogMailEmailTemplate',this.value,false);"
                 <?php echo autoOpenFilteringSelect();?>>
-                <option value=""></option>
+                <option value="<?php echo ($showVal==true)?$dialogMailEmailTemplate:''; ?>"><span> <?php  echo ($showVal==true)?$dialogName:''; ?></span></option>
                 <?php foreach ($listEmailTemplate as $key => $value){?>
                 <option value="<?php echo $value->id;?>"><span> <?php echo htmlEncode($value->name);?></span></option>
                 <?php }?>
