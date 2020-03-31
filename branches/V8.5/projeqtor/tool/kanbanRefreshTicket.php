@@ -41,7 +41,6 @@ $item->targetProductVersion = $kanB->type;
 /*
  * foreach($item as $fld=>$val) { $line[strtolower($fld)]=$val; }
  */
-debugLog($item);
 $line = ( array ) $item;
 $typeName = 'id' . get_class ( $item ) . 'Type';
 $line ['name'] = $item->name;
