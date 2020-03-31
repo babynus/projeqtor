@@ -62,11 +62,6 @@ class ResourceTeamAffectation extends SqlElement {
     $result="";
     if($this->idle==0){
       $idResource = $this->idResource;
-      $rate = $this->rate;
-      if($this->id){
-        $teamAff = new ResourceTeamAffectation($this->id);
-        $rate = $rate - $teamAff->rate;
-      }
       $start=($this->startDate)?$this->startDate:self::$minAffectationDate;
       $end=($this->endDate)?$this->endDate:self::$maxAffectationDate;
       $ress=new Resource($this->idResource);
@@ -82,7 +77,17 @@ class ResourceTeamAffectation extends SqlElement {
           }
         }
       }
-      $rate+=$maxExitingRate;
+      if($this->id){
+        $teamAff = new ResourceTeamAffectation($this->id);
+        if($this->rate == $teamAff->rate){
+          $rate = $this->rate;
+        }else{
+          $rate = $this->rate - $teamAff->rate;
+        }
+        $rate += $maxExitingRate;
+      }else{
+        $rate=$this->rate+$maxExitingRate;
+      }
       if($rate > 100){
         $result.='<br/>' . i18n('impossibleRateAffectationResourcePool', array($ress->name,$rate));
       }
@@ -92,7 +97,6 @@ class ResourceTeamAffectation extends SqlElement {
     }
     return $result;
   }
-  
   
   public static $maxAffectationDate='2099-12-31';
   public static $minAffectationDate='1970-01-01';
