@@ -66,28 +66,30 @@ class ResourceTeamAffectation extends SqlElement {
       $end=($this->endDate)?$this->endDate:self::$maxAffectationDate;
       $ress=new Resource($this->idResource);
       $capacity=$ress->capacity;
+      $rate = $this->rate;
+      if($this->id){
+        $teamAff = new ResourceTeamAffectation($this->id);
+      }
       $periods=self::buildResourcePeriods($this->idResource,false,'Resource');
       $maxExitingRate=0;
+      $i = 0;
       foreach ($periods as $period){
         $capacity=$ress->getCapacityPeriod($period['start']);
         if ($start<=$period['end'] and $end>=$period['start'] and $capacity>0) {
           $ratePeriod=floatval($period['idResource'][$this->idResource])*100/$capacity;
           if ($ratePeriod>$maxExitingRate) {
             $maxExitingRate=$ratePeriod;
+            if($this->id){
+              if(!$teamAff->endDate)$teamAff->endDate=self::$maxAffectationDate;
+              if(!$teamAff->startDate)$teamAff->startDate=self::$minAffectationDate;
+              if($teamAff->startDate <= $period['end'] and $teamAff->endDate >= $period['start']){
+                $maxExitingRate -= $teamAff->rate;
+              }
+            }
           }
         }
       }
-      if($this->id){
-        $teamAff = new ResourceTeamAffectation($this->id);
-        if($this->rate == $teamAff->rate){
-          $rate = $this->rate;
-        }else{
-          $rate = $this->rate - $teamAff->rate;
-        }
-        $rate += $maxExitingRate;
-      }else{
-        $rate=$this->rate+$maxExitingRate;
-      }
+      $rate += $maxExitingRate;
       if($rate > 100){
         $result.='<br/>' . i18n('impossibleRateAffectationResourcePool', array($ress->name,$rate));
       }
