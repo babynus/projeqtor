@@ -1164,6 +1164,9 @@ class PlannedWork extends GeneralWork {
                         $value=0.25;
                       }
                     }
+                    if ($value>$capacityRate) {
+                      $value=$capacityRate;
+                    }
                     if ($value>($capacity-$planned)) {
                       $value=$capacity-$planned;
                       if ($value<0.1) $value=0;
