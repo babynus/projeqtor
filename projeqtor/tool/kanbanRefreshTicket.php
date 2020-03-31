@@ -41,7 +41,7 @@ $item->targetProductVersion = $kanB->type;
 /*
  * foreach($item as $fld=>$val) { $line[strtolower($fld)]=$val; }
  */
-
+debugLog($item);
 $line = ( array ) $item;
 $typeName = 'id' . get_class ( $item ) . 'Type';
 $line ['name'] = $item->name;
@@ -73,14 +73,14 @@ $line ['targetproductversion'] = $item->targetProductVersion;
 // var_dump($line['targetproductversion']);
 
 if (property_exists ( $item, 'WorkElement' )) {
-	$we = new WorkElement ( $idItem );
+	$we = $item->WorkElement;
 	$line ['plannedwork'] = $we->plannedWork;
 	$line ['realwork'] = $we->realWork;
 	$line ['leftwork'] = $we->leftWork;
 } else {
 	$peName = get_class ( $item ) . 'PlanningElement';
 	if (property_exists ( $item, $peName )) {
-		$pe = new PlanningElement ( $idItem );
+		$pe = $item->$peName;
 		$line ['plannedwork'] = $pe->plannedWork;
 		$line ['realwork'] = $pe->realWork;
 		$line ['leftwork'] = $pe->leftWork;
