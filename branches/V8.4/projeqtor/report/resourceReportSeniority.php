@@ -164,38 +164,45 @@ $seniority=array();
 $tabRes = array();
 $monthOfTheFor = $month;
 $yearOfTheFor = $year;
+$resource = new Resource();
+$whereResource=$where." and startDate is not null and (endDate>='$yearOfTheFor-$monthOfTheFor-31' or endDate is null)";
+$lstResource = $resource->getSqlElementsFromCriteria(null, false, $whereResource);
 //We do this because we need the value of $month and $year whitout modification after for the creation the array
 for ($i=1; $i<=$paramNbOfMonths; $i++) {
     $nbRes = 0;
     if ($monthOfTheFor and $monthOfTheFor<10) $monthOfTheFor='0'.intval($monthOfTheFor);
-    $whereCompleted = $where." and startDate<='" . $yearOfTheFor . "-" . $monthOfTheFor . "-31'";
-    $whereCompleted .= " and (endDate>= '" . $yearOfTheFor . "-" . $monthOfTheFor . "-31' or endDate is null)";
     if ($monthOfTheFor == '13'){
         $monthOfTheFor = '01';
         $yearOfTheFor += 1;
     }
-    $resource = new Resource();
-    $lstResource = $resource->getSqlElementsFromCriteria(null, false, $whereCompleted);
     $nbMois = 0;
     foreach ($lstResource as $res){
         $start = $res->startDate;
+        $end=$res->endDate;
+        if (substr($start,0,7)>"$yearOfTheFor-$monthOfTheFor") continue;
+        if ($end and substr($end,0,7)<="$yearOfTheFor-$monthOfTheFor") continue;
         $startDate = new DateTime($start);
-        $startFormat = $startDate->format("Y-m-d");
-        $today = new DateTime();
-        $todayFormat = $today->format("Y-m-d");
-        $interval = $today->diff($startDate);
-        $intervalDay = $interval->days;
-        $intervalYear = $intervalDay % 365.25;
-        $intervalMonth = $intervalYear % 12;
-        if ($intervalMonth >= 15){
-            $diff = $interval->y * 12 + $interval->m + 1;
-        } else {
-            $diff = $interval->y * 12 + $interval->m;
-        }
-        $nbMois += round($diff/12, 2);
+        $lastDayOfTheFor=lastDayOfMonth(intval($monthOfTheFor),intval($yearOfTheFor));
+        $dateOfTheFor=new DateTime("$yearOfTheFor-$monthOfTheFor-$lastDayOfTheFor");
+        $interval=$startDate->diff($dateOfTheFor);
+        $nbMoisRes=$interval->m+12*$interval->y;
+        $nbMois+=$nbMoisRes;
+//         $startFormat = $startDate->format("Y-m-d");
+//         $today = new DateTime();
+//         $todayFormat = $today->format("Y-m-d");
+//         $interval = $today->diff($startDate);
+//         $intervalDay = $interval->days;
+//         $intervalYear = $intervalDay % 365.25;
+//         $intervalMonth = $intervalYear % 12;
+//         if ($intervalMonth >= 15){
+//             $diff = $interval->y * 12 + $interval->m + 1;
+//         } else {
+//             $diff = $interval->y * 12 + $interval->m;
+//         }
+//         $nbMois += round($diff/12, 2);
         $nbRes ++;
     }
-    $seniority[$i] = $nbMois;
+    $seniority[$i] = ($nbRes)?round($nbMois/$nbRes,1):0;
     $tabRes[$i] = $nbRes;
     $monthOfTheFor = intval($monthOfTheFor);
     $monthOfTheFor ++;
@@ -219,7 +226,7 @@ if ($paramNbOfMonths <= 12){
     }
 } elseif ($paramNbOfMonths > 12){
     $reste = $paramNbOfMonths % 12;
-    $nbModulo = ($paramNbOfMonths - $reste) / 12;
+    $nbModulo = ($paramNbOfMonths - $reste) / 12 - ($reste==0?1:0);
     $firstPart = 12 - $month + 1;
     //$firstPage does the first year even if it's not a full year
     echo '<td colspan="' . $firstPart . '" class="reportTableHeader">' . $year . '</td>';
@@ -256,7 +263,7 @@ if (! testGraphEnabled()) { return;}
 
 $dataSet=new pData;
 $dataSet->addPoints($seniority,"seniority");
-$dataSet->setSerieDescription("seniority",i18n("seniority"));
+$dataSet->setSerieDescription("seniority",i18n("seniority").' ('.i18n('month').')');
 $dataSet->setSerieOnAxis("seniority",0);
 $serieSettings = array("R"=>100,"G"=>100,"B"=>200,"Alpha"=>80);
 $dataSet->setPalette("seniority",$serieSettings);
@@ -288,7 +295,7 @@ echo '</tr>';
 
 $tab=$seniority;
 $caption=i18n('seniority');
-echo '<tr><td class="reportTableLineHeader" style="width:18%">' . $caption . '</td>';
+echo '<tr><td class="reportTableLineHeader" style="width:18%">' . $caption .' ('.i18n('month').')'. '</td>';
 $style = 77/$paramNbOfMonths;
 foreach ($tab as $id=>$val) {
     echo '<td style="width:'.$style.'%;" class="reportTableData">';
@@ -307,7 +314,7 @@ if ($paramNbOfMonths > 40){
 } else {
     $width=1000;
 }
-$legendWidth=100;
+$legendWidth=0;
 $height=400;
 $legendHeight=100;
 $graph = new pImage($width+$legendWidth, $height,$dataSet);
@@ -325,7 +332,7 @@ $graph->setFontProperties(array("FontName"=>getFontLocation("verdana"),"FontSize
 
 /* title */
 $graph->setFontProperties(array("FontName"=>getFontLocation("verdana"),"FontSize"=>8,"R"=>100,"G"=>100,"B"=>100));
-$graph->drawLegend($width+18,17,array("Mode"=>LEGEND_VERTICAL, "Family"=>LEGEND_FAMILY_BOX ,
+$graph->drawLegend($width/2-30,10,array("Mode"=>LEGEND_VERTICAL, "Family"=>LEGEND_FAMILY_BOX ,
     "R"=>255,"G"=>255,"B"=>255,"Alpha"=>100,
     "FontR"=>55,"FontG"=>55,"FontB"=>55,
     "Margin"=>5));
