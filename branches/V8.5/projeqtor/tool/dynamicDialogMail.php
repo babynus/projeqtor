@@ -294,7 +294,7 @@ if($paramMailerType=='phpmailer'){
                      }
                 ?>
                 <div id="dialogMailToAssigned" name="dialogMailToAssigned" dojoType="dijit.form.CheckBox" type="checkbox" onChange="saveDataToSession('dialogMailToAssigned',this.checked,false);"
-                checked="<?php echo ($checkAssigned=="true")?"checked":"";?>" ></div>
+                <?php echo ($checkAssigned=="true")?"checked":"";?> ></div>
               </td>
             </tr>
             <?php }?>
@@ -460,8 +460,10 @@ if($paramMailerType=='phpmailer'){
                 <option value="<?php echo ($showVal==true)?$dialogMailEmailTemplate:''; ?>"><span> <?php  echo ($showVal==true)?$dialogName:''; ?></span></option>
                 <?php 
                   foreach ($listEmailTemplate as $key => $value){
-                    if($value->id==$dialogMailEmailTemplate){
-                      continue;
+                    if(sessionValueExists('dialogMailEmailTemplate')){
+                      if($value->id==$dialogMailEmailTemplate){
+                        continue;
+                      }
                     }
                 ?>
                 <option value="<?php echo $value->id;?>"><span> <?php echo htmlEncode($value->name);?></span></option>
