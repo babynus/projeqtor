@@ -190,6 +190,9 @@
       <fileset dir="${src.dir}/tool">
         <exclude name="**/i18n/nls/lang.xls"/>
         <exclude name="**/parametersLocation.php"/>
+        <exclude name="**/dynamicDialogBackupCron.php"/>
+        <exclude name="**/plgBackupCron.php"/>
+        <exclude name="**/dynamicDialogTemplateReportSelectTemplate.php"/>
       </fileset>
     </copy>
   </target>
@@ -198,6 +201,10 @@
     <copy todir="${deploy.dir}/view">
       <fileset dir="${src.dir}/view">
       	<exclude name="**/importProjectView.php"/>
+      	<exclude name="**/view/css/images/iconBackup32.png"/>
+      	<exclude name="**/view/css/images/iconScreenCustomization16.png"/>
+      	<exclude name="**/view/css/images/iconScreenCustomization16.png"/>
+      	<exclude name="**/view/css/images/iconScreenCustomization16.png"/>
       </fileset>
     </copy>
   </target>
