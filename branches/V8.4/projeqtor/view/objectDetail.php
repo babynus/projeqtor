@@ -1037,7 +1037,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       echo $obj->drawCalculatedItem($item); // the method must be implemented in the corresponidng class
     } else if (substr($col, 0, 5)=='_lib_') { // if field is just a caption
       $item=substr($col, 5);
-      if (strpos($obj->getFieldAttributes($col), 'nobr')!==false) {
+      if (strpos($obj->getFieldAttributes($col), 'nobr')!==false and $obj->getFieldAttributes($col)!='hidden' and !$hide and ! in_array($col, $extraHiddenFields)) {
         $nobr=true;
       }
       if ($obj->getFieldAttributes($col)!='hidden' and !$hide) {
@@ -1338,7 +1338,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       if (( ($col=='idUser' and $classObj!='Affectation') or $col=='creationDate' or $col=='creationDateTime' or $col=='lastUpdateDateTime') and !$print) {
         $hide=true;
       }
-      if ($obj->isAttributeSetToField($col, 'nobr')) {
+      if ($obj->isAttributeSetToField($col, 'nobr') and $obj->getFieldAttributes($col)!='hidden' and !$hide and ! in_array($col, $extraHiddenFields)) {
         $nobr=true;
         $tempCurrentFound=false;
         foreach ($obj as $tmpCol=>$tmpVal) {
