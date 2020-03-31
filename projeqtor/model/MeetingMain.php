@@ -528,7 +528,7 @@ class MeetingMain extends SqlElement {
     if (trim($this->description) != ""){
       $html2text=new Html2Text($this->description);
       $textDesc = "DESCRIPTION:".str_replace(array("\r\n","\n"),array("\\n","\\n"),$html2text->gettext())."\r\n";
-      $testDescTab=mb_str_split($textDesc, 60);
+      $testDescTab=projeqtor_mb_str_split($textDesc, 60);
       $textDesc="";
       $nbLines=0;
       $lastCar='';
