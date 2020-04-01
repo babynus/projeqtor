@@ -282,6 +282,8 @@ class SqlList {
       $query .= ' order by ' . $obj->getDatabaseTableName() . '.'.$obj->_sortCriteriaForList;
     } else if (property_exists($obj,'sortOrder')) {
       $query .= ' order by ' . $obj->getDatabaseTableName() . '.sortOrder';
+    } else if (property_exists($obj,'bbsSortable')) {
+        $query .= ' order by ' . $obj->getDatabaseTableName() . '.bbsSortable';
     } else if (property_exists($obj,'order')) {
       $query .= ' order by ' . $obj->getDatabaseTableName() . '.order';
     } else if (property_exists($obj,'baselineDate')) {
