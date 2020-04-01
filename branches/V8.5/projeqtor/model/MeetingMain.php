@@ -291,7 +291,7 @@ class MeetingMain extends SqlElement {
     $result="";
     $canUpdate=securityGetAccessRightYesNo('menuMeeting', 'update', $this) == "YES";
     if ($item=='buttonSendMail') {
-      if ($print or !$canUpdate or !$this->id) {
+      if ($print or !$canUpdate or !$this->id or $this->idle or $this->done) {
         return "";
       }
       $result .= '<tr><td valign="top" class="label"><label></label></td><td>';
@@ -308,7 +308,7 @@ class MeetingMain extends SqlElement {
     }
     // Gautier ticket #2096
     if ($item=='buttonAssignTeam') {
-      if ($print or !$canUpdate  or !$this->id) {
+      if ($print or !$canUpdate  or !$this->id or $this->idle or $this->done) {
         return "";
       }
       $result .= '<tr><td valign="top" class="label"><label></label></td><td>';
@@ -320,7 +320,7 @@ class MeetingMain extends SqlElement {
       return $result;
     }
     if($item=="startMeeting"){
-      if ($print) {
+      if ($print or !$canUpdate or ! $this->id or $this->idle or $this->done ) {
         return "";
       }
       $result .= '<tr><td valign="top" class="label"><label></label></td><td>';

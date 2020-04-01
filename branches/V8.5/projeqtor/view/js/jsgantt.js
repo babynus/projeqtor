@@ -1026,6 +1026,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
 	          var fieldWidth=getPlanningFieldWidth(field);
 	          if(showField==1 && field!='Name') {
 	            valueField=vTaskList[i].getFieldValue(field,JSGantt);
+	            padding='';
 	            if (field=='IdStatus') {
 	              valueField=colorNameFormatter(valueField);
 	              padding='';
@@ -1046,13 +1047,14 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             var fieldWidth=getPlanningFieldWidth(field);
             var valueField=vTaskList[i].getFieldValue(field,JSGantt);
             if(field!='Name' && (field=='Resource' || field=='IdStatus'  || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType' || field=='ExterRes' )) { 
-               if(valueField===undefined &&  (field=='Type' || field=='StartDate' || field=='EndDate')){
-                  valueField='-';
-                  padding='';
-                }else if(valueField===undefined ){
-                  valueField='';
-                  padding='padding-top: 4px;';
-                }
+              padding=''; 
+              if(valueField===undefined &&  (field=='Type' || field=='StartDate' || field=='EndDate')){
+                valueField='-';
+                padding='';
+              }else if(valueField===undefined ){
+                valueField='';
+                padding='padding-top: 4px;';
+              }
               vLeftTable += '<TD class="ganttDetail" style="width: ' + fieldWidth + 'px;">'
                 +'<span class="nobr hideLeftPart' + vRowType + '" style="width: ' + fieldWidth + 'px;text-overflow:ellipsis;'+padding+'">' + valueField
                 +'</span></TD>' ;
