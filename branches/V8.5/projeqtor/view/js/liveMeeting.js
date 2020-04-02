@@ -625,16 +625,9 @@ function liveMeetingTitleNext(idN){
 
 function hideCounters(){
   if(dijit.byId('hideCounters').get('checked')==true){
-    dojo.byId('containerRessource').style.visibility='hidden';
+    dojo.byId('tabeTimeEditor').style.display='none';
   }else{
-    dojo.byId('containerRessource').style.visibility='visible';
+    dojo.byId('tabeTimeEditor').style.display='block';
   }
 }
 
-function hideCounters(){
-  if(dijit.byId('hideCounters').get('checked')==true){
-    dojo.byId('containerRessource').style.visibility='hidden';
-  }else{
-    dojo.byId('containerRessource').style.visibility='visible';
-  }
-}

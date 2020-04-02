@@ -202,7 +202,7 @@ function timeToTimeStamp($time){
 			<tr height="100%" style="vertical-align: middle;height:34px;">
 				<td width="50px" align="middle"><?php echo formatIcon('Meeting', 32,null,true)?></td>
 				<td ><span class="title"><?php echo i18n("Meeting").' : '.$meeting->name;?></span></td>
-				<td style="width:80px;"><label for='hideCounters' style="margin-top:3px;margin-right:5px;"><?php echo i18n('hideCounters');?></label></td>
+				<td style="width:80px;"><label for='hideCounters' style="margin-top:3px;margin-right:5px;text-shadow:none;"><?php echo i18n('hideCounters');?></label></td>
 				<td style="width:30px;"><div id="hideCounters" name="hideCounters" dojoType="dijit.form.CheckBox" type="checkbox"  onclick="hideCounters();" style="margin-top:7px;" ></div></td>
 				<td style="width:157px;position:relative;text-align:left">
 						<div style="position:absolute;width:78px; height:24px;background-color: #DDD; padding: 2px 5px; top:6px;border-radius: 5px;margin-right: 20px;">
@@ -228,7 +228,7 @@ function timeToTimeStamp($time){
 							  <?php } ?>						  
 									onclick="if(typeLoadBottom=='normal'){dijit.byId('switchDivBottom').setAttribute('iconClass','iconActionQuestionDecision22 iconSize22');dijit.byId('switchDivBottom').setAttribute('title','<?php echo i18n('liveMeetingTitleSwitchBottomNormal');?>');typeLoadBottom='kanban';loadContent('../view/kanbanViewMain.php?storeParameterBottomLiveMeeting=true', 'divBottom');}else{dijit.byId('switchDivBottom').setAttribute('iconClass','iconKanban22');dijit.byId('switchDivBottom').setAttribute('title','<?php echo i18n('liveMeetingTitleSwitchBottomKanban');?>');typeLoadBottom='normal';loadContent('../view/liveMeetingViewBottom.php?idMeeting=<?php echo $meeting->id;?>', 'divBottom');}"
 									id="switchDivBottom"></button>
-           </div>
+                      </div>
 				</td>
 				<td style="width:32px;position:relative;">
 				  <button id="saveButton" style="margin-top:0px;margin-right:15px;position: relative;top:4px"
@@ -289,60 +289,56 @@ function timeToTimeStamp($time){
 				onchange="if(dijit.byId(this.id).get('value')!=-1 && dijit.byId(this.id).get('value')!='')loadContent('../view/liveMeetingViewBottom.php?idMeeting=<?php echo $meeting->id;?>&typeObj=Question&idObj='+this.value, 'divBottom');dijit.byId(this.id).set('value',-1);">
 		  <div class="statusBar"
 				style="background-image:none !important;color: #000; height: 100%; width: 100%; min-width: 970px; margin: 0 auto; margin-top: 10px;">
-				<table width="100%"  style="position:relative;">
+				<table id="tabeTimeEditor" width="100%"  style="position:relative;">
 					<tr>
-						<td width="95%" style="min-width: 891px;">
-      <?php
-      if(count ( $meeting->_Assignment )!=0)generateSpeakTimeEditor ( $param );
-      $topHeight=Parameter::getUserParameter('contentPaneTopLiveMeeting');
-      $topHeight=($topHeight)?$topHeight:'300';
-	  $editorType=getEditorType();
-	  if ($editorType=='CKInline') $editorType='CK';
-      ?>
-      </td>
+						<td width="95%" style="min-width: 891px;height:100%;">
+                          <?php
+                          if(count ( $meeting->_Assignment )!=0)generateSpeakTimeEditor ( $param );
+                          $topHeight=Parameter::getUserParameter('contentPaneTopLiveMeeting');
+                          $topHeight=($topHeight)?$topHeight:'300';
+                    	  $editorType=getEditorType();
+                    	  if ($editorType=='CKInline') $editorType='CK';
+                          ?>
+                          </td>
 						<td width="5%" style="min-width: 67px; vertical-align: top;">
-
-						</td>
-				
+					</tr>
 				</table>
 				<div style="width:100%; height:100%">
 					<input id="liveMeetingResultEditorType"
 						name="liveMeetingResultEditorType" type="hidden"
 						value="<?php echo $editorType;?>" />
-     <?php if ($editorType=="CK") {?> 
-      <textarea style="width:<?php echo $detailWidth;?>; height:<?php echo $detailHeight;?>"
-      name="liveMeetingResult" id="liveMeetingResult"><?php echo htmlspecialchars($result);?></textarea>
-    <?php
-    } else if ($editorType == "text") {
-      $text = new Html2Text ( $result );
-      $val = $text->getText ();
-      $topHeight-=135;
-      ?>
-      <textarea onKeyUp="formChangeInProgress=true;" dojoType="dijit.form.Textarea" 
-      id="liveMeetingResult" name="liveMeetingResult" splitter="true"
-      style="width: 100%;height:<?php echo$topHeight;?>px;max-height:<?php echo $topHeight;?>px;min-height:<?php echo $topHeight;?>px;"
-      maxlength="4000"
-      class="input"
-      onClick="dijit.byId('liveMeetingResult').setAttribute('class','');"><?php echo $val;?></textarea>
-    <?php } else {
-      $topHeight-=130?>
-      <textarea dojoType="dijit.form.Textarea" type="hidden"
-       id="liveMeetingResult" name="liveMeetingResult"
-       style="display:none;"><?php echo htmlspecialchars($result);?></textarea>
-		  <div data-dojo-type="dijit.Editor" id="liveMeetingResultEditor"
-         data-dojo-props="onChange:function(){window.top.dojo.byId('liveMeetingResult').value=arguments[0];}
-          ,plugins:['removeFormat','bold','italic','underline','|', 'indent', 'outdent', 'justifyLeft', 'justifyCenter', 
-                    'justifyRight', 'justifyFull','|','insertOrderedList','insertUnorderedList','|']
-          ,onKeyDown:function(event){window.top.onKeyDownFunction(event,'liveMeetingResultEditor',this);}
-          ,onBlur:function(event){window.top.editorBlur('liveMeetingResultEditor',this);}
-          ,extraPlugins:['dijit._editor.plugins.AlwaysShowToolbar','foreColor','hiliteColor']"
-          style="color:#606060 !important; background:none; width:100%;overflow:none;height:<?php echo $topHeight;?>px"
-          ><?php echo $result;?></div>
-    <?php }?>
-    </div>
-    
-				</div>
-
+                   <?php if ($editorType=="CK") {?> 
+                    <textarea id='text1' style="width:<?php echo $detailWidth;?>; height:<?php echo $detailHeight;?>"
+                    name="liveMeetingResult" id="liveMeetingResult"><?php echo htmlspecialchars($result);?></textarea>
+                  <?php
+                  } else if ($editorType == "text") {
+                    $text = new Html2Text ( $result );
+                    $val = $text->getText ();
+                    $topHeight-=135;
+                    ?>
+                    <textarea id='text2' onKeyUp="formChangeInProgress=true;" dojoType="dijit.form.Textarea" 
+                    id="liveMeetingResult" name="liveMeetingResult" splitter="true"
+                    style="width: 100%;height:<?php echo$topHeight;?>px;max-height:<?php echo $topHeight;?>px;min-height:<?php echo $topHeight;?>px;"
+                    maxlength="4000"
+                    class="input"
+                    onClick="dijit.byId('liveMeetingResult').setAttribute('class','');"><?php echo $val;?></textarea>
+                  <?php } else {
+                    $topHeight-=130?>
+                    <textarea dojoType="dijit.form.Textarea" type="hidden" id='text3'
+                     id="liveMeetingResult" name="liveMeetingResult"
+                     style="display:none;"><?php echo htmlspecialchars($result);?></textarea>
+              		  <div data-dojo-type="dijit.Editor" id="liveMeetingResultEditor"
+                       data-dojo-props="onChange:function(){window.top.dojo.byId('liveMeetingResult').value=arguments[0];}
+                        ,plugins:['removeFormat','bold','italic','underline','|', 'indent', 'outdent', 'justifyLeft', 'justifyCenter', 
+                                  'justifyRight', 'justifyFull','|','insertOrderedList','insertUnorderedList','|']
+                        ,onKeyDown:function(event){window.top.onKeyDownFunction(event,'liveMeetingResultEditor',this);}
+                        ,onBlur:function(event){window.top.editorBlur('liveMeetingResultEditor',this);}
+                        ,extraPlugins:['dijit._editor.plugins.AlwaysShowToolbar','foreColor','hiliteColor']"
+                        style="color:#606060 !important; background:none; width:100%;overflow:none;height:<?php echo $topHeight;?>px"
+                        ><?php echo $result;?></div>
+                  <?php }?>
+                  </div>
+			</div>
 		</form>
 	</div>
 <?php $bottomHeight=Parameter::getUserParameter('contentPaneBottomLiveMeeting');
