@@ -6972,7 +6972,20 @@ function undoItemButton(curClass,curId) {
     //gautier #3413
   } else if (currentScreen=="Planning" && currentItem[1]!=null){ 
     gotoElement(currentItem[0], currentItem[1], false, false, "planning");
-  } else {
+  } else if(currentScreen=='GanttSupplierContract' || currentScreen=='GanttClientContract'){
+      if(currentScreen=='GanttClientContract'){
+        loadMenuBarItem('GanttClientContract','menuGanttClientContract','bar');
+      }else{
+        loadMenuBarItem('GanttSupplierContract','menuGanttSupplierContract','bar');
+      }
+  }else if (currentScreen=='ContractGantt') {
+    dojo.byId('objectClass').value=currentItem[0];
+    loadContent('contractGanttMain.php?objectClass='+currentItem[0]+'&objectId='+currentItem[1], 'centerDiv');
+    dojo.byId('objectClass').value = currentItem[0];
+    dojo.byId('objectId').value = currentItem[1];
+    loadContent('objectDetail.php', 'detailDiv', 'listForm');
+    if (dijit.byId("detailRightDiv")) loadContent("objectStream.php", "detailRightDiv", "listForm"); 
+  }else {
     target=getTargetFromCurrentScreen(currentScreen);
     loadContent(target,"centerDiv"); 
   }
