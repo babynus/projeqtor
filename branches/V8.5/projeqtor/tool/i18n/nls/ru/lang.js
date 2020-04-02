@@ -3855,6 +3855,7 @@ requirementUnlockRight: "Разблокировать любое требова�
 resetActivityStreamParams: "This will reset size of activity stream areas",
 resetColor: "Сброс",
 resetPassword: "Сброс пароля",
+ResetPasswordadm: "Password reset",
 Resolution: "Resolution",
 resolutionMustChangeSolved: "if checked&#44 &#34;solved&#34; can be changed only by status",
 Resource: "Ресурс",

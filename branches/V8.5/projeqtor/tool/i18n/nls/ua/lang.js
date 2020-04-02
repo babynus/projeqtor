@@ -3855,6 +3855,7 @@ requirementUnlockRight: "Розблокувати будь-які вимоги (
 resetActivityStreamParams: "This will reset size of activity stream areas",
 resetColor: "скидання",
 resetPassword: "скинути пароль",
+ResetPasswordadm: "Password reset",
 Resolution: "Рішення (Resolution)",
 resolutionMustChangeSolved: "&#34;Вирішено&#34; змінюється відповідно до рішення",
 Resource: "Ресурс",
