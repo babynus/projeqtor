@@ -779,8 +779,8 @@
                     <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
                     <?php echo autoOpenFilteringSelect();?>
                     id="changerWorkFlow" name="changerWorkFlow">
-                    <?php htmlDrawOptionForReference('idWorkflow',null,false,true);?>
-                </select>
+                    <?php htmlDrawOptionForReference('idWorkflow',null,false,false);?>
+                    </select>
                   </td>
                 </tr>
            <?php 
