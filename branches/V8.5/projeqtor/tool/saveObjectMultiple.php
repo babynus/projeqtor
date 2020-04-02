@@ -150,6 +150,10 @@ $actualDueTime="";
 if (array_key_exists('actualDueTime',$_REQUEST)) {
 	$actualDueTime=trim($_REQUEST['actualDueTime']);
 }
+$workFlow="";
+if (array_key_exists('changerWorkFlow',$_REQUEST)) {
+  $workFlow=trim($_REQUEST['changerWorkFlow']);
+}
 
 $pe=$className.'PlanningElement';
 $pe_validatedStartDate="";
@@ -192,6 +196,7 @@ $pe_priority="";
 if (array_key_exists($pe.'_priority',$_REQUEST)) {
   $pe_priority=trim($_REQUEST[$pe.'_priority']);
 }
+
 
 $profile = trim(RequestHandler::getValue('idProfile_multiple'));
 $rate= trim(RequestHandler::getValue('rate_multiple'));
@@ -350,6 +355,10 @@ foreach ($selectList as $id) {
   }
   if ($isUnderConstruction and $isUnderConstruction!="" and property_exists($item,'isUnderConstruction')) {
     $item->isUnderConstruction=($isUnderConstruction=='ON')?1:0;
+  }
+  $isType=get_class($item);
+  if($workFlow!='' and property_exists($item,'idWorkflow') and  strpos($isType,'Type')==(strlen($isType)-4 )){
+   $item->idWorkflow=$workFlow;
   }
   if (property_exists($item,$pe) and is_object($item->$pe)) {
   	if ($pe_validatedStartDate and property_exists($item->$pe,'validatedStartDate')) {
