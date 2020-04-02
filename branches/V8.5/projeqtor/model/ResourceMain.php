@@ -89,6 +89,8 @@ class ResourceMain extends SqlElement {
   public $_spe_resourceIncompatible;
   public $_sec_resourceSupport;
   public $_spe_resourceSupport;
+  public $_sec_Asset;
+  public $_spe_asset;
   public $_sec_Miscellaneous;
   public $isLdap;
   public $dontReceiveTeamMails;
@@ -794,6 +796,13 @@ class ResourceMain extends SqlElement {
       $critArray=array('idResource'=>$this->id);
       $supportResourceList=$resourceSupport->getSqlElementsFromCriteria($critArray, false);
       drawResourceSupport($supportResourceList, $this, 'ResourceSupport', false);
+      return $result;
+    }else if ($item=='asset'){
+      $asset = new Asset();
+      $critArray=array('idAffectable'=>(($this->id)?$this->id:'0'));
+      $order = " idAssetType asc ";
+      $assetList=$asset->getSqlElementsFromCriteria($critArray, false,null);
+      drawAssetFromUser($assetList, $this);
       return $result;
     }
   }

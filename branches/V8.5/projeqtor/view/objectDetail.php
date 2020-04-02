@@ -919,6 +919,18 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $crit=array('idResource'=>$obj->id);
         $resSup=new ResourceSupport();
         $cpt=$resSup->countSqlElementsFromCriteria($crit);
+      } else if ($section=='Asset') {
+        $crit=array('idAffectable'=>$obj->id);
+        $asset=new Asset();
+        $cpt=$asset->countSqlElementsFromCriteria($crit);
+      } else if ($section=='AssetModel') {
+        $crit=array('idModel'=>$obj->id);
+        $asset=new Asset();
+        $cpt=$asset->countSqlElementsFromCriteria($crit);
+      } else if ($section=='Modelbrand') {
+        $crit=array('idBrand'=>$obj->id);
+        $asset=new Model();
+        $cpt=$asset->countSqlElementsFromCriteria($crit);
       } else if ($section=='situation') {
         $crit=array('refId'=>$obj->id, 'refType'=>get_class($obj));
         $situation=new Situation();
@@ -6469,10 +6481,14 @@ function drawAssetFromUser($list, $obj) {
   }
   $typeAsset='Asset';
   $typeAssetType = 'AssetType';
+  $typeModel = 'Model';
+  $typeBrand = 'Brand';
   echo '<table style="width:100%">';
   echo '<tr>';
-  echo '<td class="assignHeader" style="width:50%">'.i18n('dashboardTicketMainTitleType').'</td>';
-  echo '<td class="assignHeader" style="width:50%">'.i18n('colAsset').'</td>';
+  echo '<td class="assignHeader" style="width:25%">'.i18n('dashboardTicketMainTitleType').'</td>';
+  echo '<td class="assignHeader" style="width:25%">'.i18n('colAsset').'</td>';
+  echo '<td class="assignHeader" style="width:25%">'.i18n('colBrand').'</td>';
+  echo '<td class="assignHeader" style="width:25%">'.i18n('colModel').'</td>';
   //order by alphabetic
   asort($list);
   $tabType = array();
@@ -6489,6 +6505,7 @@ function drawAssetFromUser($list, $obj) {
 
   foreach ($tabType as $id=>$val){
     foreach ($val as  $idVal=>$value){
+      $currentAsset = new Asset($idVal);
       $idleClass=(in_array($idVal, $listIdle))?' affectationIdleClass':'';
       echo '<tr>';
       $goto="";
@@ -6500,8 +6517,18 @@ function drawAssetFromUser($list, $obj) {
       if (!$print and securityCheckDisplayMenu(null, $typeAssetType) and securityGetAccessRightYesNo('menu'.$typeAssetType, 'read', '')=="YES") {
         $gotoType=' onClick="gotoElement(\''.$typeAssetType.'\',\''.htmlEncode($id).'\');" style="cursor: pointer;" ';
       }
+      $gotoBrand="";
+      if (!$print and securityCheckDisplayMenu(null, $typeBrand) and securityGetAccessRightYesNo('menu'.$typeBrand, 'read', '')=="YES") {
+        $gotoBrand=' onClick="gotoElement(\''.$typeBrand.'\',\''.htmlEncode($currentAsset->idBrand).'\');" style="cursor: pointer;" ';
+      }
+      $gotoModel="";
+      if (!$print and securityCheckDisplayMenu(null, $typeModel) and securityGetAccessRightYesNo('menu'.$typeModel, 'read', '')=="YES") {
+        $gotoModel=' onClick="gotoElement(\''.$typeModel.'\',\''.htmlEncode($currentAsset->idModel).'\');" style="cursor: pointer;" ';
+      }
       echo '  <td '.$gotoType.' class="assignData'.$idleClass.'" align="left" style="white-space: nowrap;">'.htmlEncode($nameType).'</td>';
       echo '  <td '.$goto.' class="assignData'.$idleClass.'" align="left" style="white-space: nowrap;">#'.$idVal.'  '.htmlEncode($value).'</td>';
+      echo '  <td '.$gotoBrand.' class="assignData'.$idleClass.'" align="left" style="white-space: nowrap;">'.htmlEncode(SqlList::getNameFromId('Brand', $currentAsset->idBrand)).'</td>';
+      echo '  <td '.$gotoModel.' class="assignData'.$idleClass.'" align="left" style="white-space: nowrap;">'.htmlEncode(SqlList::getNameFromId('Model', $currentAsset->idModel)).'</td>';
       echo '</tr>';
     }
   }
