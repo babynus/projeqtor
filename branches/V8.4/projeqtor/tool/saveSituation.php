@@ -86,25 +86,15 @@ $situationList = $situation->getSqlElementsFromCriteria($critWhere,null,null, 'd
 if(count($situationList) > 0){
 	$actualSituation = $situationList[0];
 }
-if($actualSituation->id and $actualSituation->id != $obj->idSituation){
-	$obj->idSituation = $actualSituation->id;
-	$obj->save();
-	$projectSituation = SqlElement::getSingleSqlElementFromCriteria('ProjectSituation', array('idProject'=>$actualSituation->idProject));
-	$projectName = SqlList::getNameFromId('Project', $actualSituation->idProject);
-	$projectSituation->name = i18n('ProjectSituation').' - '.$projectName;
-	if($actualSituation->situationType == 'expense'){
-		$projectSituation->refIdExpense = $actualSituation->refId;
-		$projectSituation->refTypeExpense = $actualSituation->refType;
-		$projectSituation->idResourceExpense = $actualSituation->idResource;
-		$projectSituation->situationNameExpense = $actualSituation->name;
-		$projectSituation->situationDateExpense = $actualSituation->date;
-	}else{
-		$projectSituation->refIdIncome = $actualSituation->refId;
-		$projectSituation->refTypeIncome = $actualSituation->refType;
-		$projectSituation->idResourceIncome = $actualSituation->idResource;
-		$projectSituation->situationNameIncome = $actualSituation->name;
-		$projectSituation->situationDateIncome = $actualSituation->date;
-	}
-	$projectSituation->save();
+if($actualSituation->id){
+  if($actualSituation->id != $obj->idSituation){
+    $obj->idSituation = $actualSituation->id;
+    $obj->save();
+  }
+}else{
+  $obj->idSituation = null;
+  $obj->save();
 }
+
+ProjectSituation::updateSituation($obj, $situation);
 ?>

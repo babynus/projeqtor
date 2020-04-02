@@ -237,6 +237,7 @@ class QuotationMain extends SqlElement {
    * @return the return message of persistence/SqlElement#save() method
    */
   public function save() {
+    $old=$this->getOld();
   	$result='';
     if (trim($this->id)=='') {
     	// fill the creatin date if it's empty - creationDate is not empty for import ! 
@@ -275,6 +276,20 @@ class QuotationMain extends SqlElement {
 	  }else{
 	    $this->untaxedAmount=$this->fullAmount/(1+$this->taxPct/100);
 	  }
+    if($this->idSituation){
+      $old=$this->getOld();
+    	$situation = new Situation($this->idSituation);
+    	if($this->idProject != $situation->idProject){
+    		$critWhere = array('refType'=>get_class($this),'refId'=>$this->id);
+    		$situationList = $situation->getSqlElementsFromCriteria($critWhere,null,null);
+    		foreach ($situationList as $sit){
+    		  $sit->idProject = $this->idProject;
+    		  $sit->save();
+    		}
+    		ProjectSituation::updateSituation($this);
+    		ProjectSituation::updateSituation($old);
+    	}
+    }
     $result = parent::save();
     return $result;
   }

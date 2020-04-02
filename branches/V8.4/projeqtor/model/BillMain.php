@@ -396,6 +396,22 @@ class BillMain extends SqlElement {
       $this->untaxedAmount=$this->fullAmount/(1+$this->taxPct/100);
     }
     $this->retreivePayments(false);
+    
+	if($this->idSituation){
+	  $old=$this->getOld();
+    	$situation = new Situation($this->idSituation);
+    	if($this->idProject != $situation->idProject){
+    		$critWhere = array('refType'=>get_class($this),'refId'=>$this->id);
+    		$situationList = $situation->getSqlElementsFromCriteria($critWhere,null,null);
+    		foreach ($situationList as $sit){
+    		  $sit->idProject = $this->idProject;
+    		  $sit->save();
+    		}
+    		ProjectSituation::updateSituation($this);
+    		ProjectSituation::updateSituation($old);
+    	}
+    }
+    
 		$result=parent::save();
 		return $result;
 	}  
