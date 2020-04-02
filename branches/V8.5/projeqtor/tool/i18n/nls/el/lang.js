@@ -3855,6 +3855,7 @@ requirementUnlockRight: "Ξεκλείδωμα όλων των απαιτήσεω
 resetActivityStreamParams: "This will reset size of activity stream areas",
 resetColor: "επαναφορά",
 resetPassword: "επαναφορά συνθηματικού",
+ResetPasswordadm: "Password reset",
 Resolution: "Resolution",
 resolutionMustChangeSolved: "if checked&#44 &#34;solved&#34; can be changed only by status",
 Resource: "Πόρος",
