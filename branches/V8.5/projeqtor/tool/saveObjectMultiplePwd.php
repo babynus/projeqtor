@@ -67,20 +67,27 @@ foreach ($selectList as $id) {
     echo '<td><span class="messageWARNING" >' . i18n($className) . " #" . htmlEncode($item->id) . ' '.i18n('colLocked'). '</span></td>';
 		continue;
 	}
+	$statusSave2 = false;
+	$resultSave='';
 	if($item->email){
+	  $oldCrypto = $item->crypto;
+	  $oldPwd = $item->password;
 	  $newPwd = User::getRandomPassword();
-	  $salt=hash('sha256', "projeqtor".date('YmdHis'));
-	  $dest=$item->email;
-	  $title=$item->parseMailMessage(Parameter::getGlobalParameter('paramMailTitleUser'));
-	  $msg=$item->parseMailMessage(Parameter::getGlobalParameter('paramMailBodyUser'));
-	  $result=(sendMail($dest,$title,$msg))?'OK':'';
-	  if ($result) {
-	   $item->crypto = null;
-	   $item->password = $newPwd;
-	   $item->salt = $salt;
-	  }
+	  $item->crypto = null;
+	  $item->password = $newPwd;
+  	$resultSave=$item->save();
+  	//send mail
+  	$dest=$item->email;
+  	$title=$item->parseMailMessage(Parameter::getGlobalParameter('paramMailTitleUser'));
+  	$msg=$item->parseMailMessage(Parameter::getGlobalParameter('paramMailBodyUser'));
+  	$result=(sendMail($dest,$title,$msg))?'OK':'';
+  	if (!$result) {
+  	  $item->crypto = $oldCrypto;
+  	  $item->password = $oldPwd;
+  	  $statusSave2 = true;
+  	}
 	}
-	$resultSave=$item->save();
+	if(!$resultSave)$resultSave=$item->save();
 	$resultSave=str_replace('<br/><br/>','<br/>',$resultSave);
 	$statusSave = getLastOperationStatus ( $resultSave );
 	if ($statusSave=="ERROR" ) {
@@ -97,7 +104,14 @@ foreach ($selectList as $id) {
 	  $cptWarning++;
   }
   if($statusSave=="OK"){
-   echo '<td><div style="padding: 0px 5px;" class="message'.$statusSave.'" >' . $resultSave .'  '. i18n('resetPassword') . '  ' . i18n(('mailSentTo'),array($item->email)).'</div></td>';
+    if($statusSave2){
+      traceLog($item->email.i18n(i18n('noMailSent', array($item->name, $item->email))));
+      $resultSave=$item->save();
+      $resultSave=str_replace('<br/><br/>','<br/>',$resultSave);
+       echo '<td><div style="padding: 0px 5px;" class="messageNO_CHANGE" >' . $resultSave . '    ' .i18n('noMailSent', array($item->name, $item->email)).'</div></td>';
+    }else{
+      echo '<td><div style="padding: 0px 5px;" class="message'.$statusSave.'" >' . $resultSave .'. '. i18n('ResetPasswordadm') . '. ' . i18n(('mailSentTo'),array($item->email)).'</div></td>';
+    }
   }else{
     echo '<td><div style="padding: 0px 5px;" class="messageERROR" >' . $resultSave . '    ' .i18n('noMailSent', array($item->name, $item->email)).'</div></td>';
   }
