@@ -382,8 +382,7 @@ class ContactMain extends SqlElement {
   public function drawContactsList($critArray) {
     global $print,$obj;
     $conList=$this->getSqlElementsFromCriteria($critArray, false);
-    $result= '</br>';
-    $result .= '<table width="99.9%">';
+    $result = '<table width="99.9%">';
     $result .= '<tr>';
     if (!$print) {
       $result .= '<td class="noteHeader smallButtonsGroup" style="width:10%">';
@@ -396,7 +395,8 @@ class ContactMain extends SqlElement {
       $result .= '</td>';
     }
     $result .= '<td class="noteHeader" style="width:10%">' . i18n('colId') . '</td>';
-    $result .= '<td class="noteHeader" style="width:20%">' . i18n('colName') . '</td>';
+    $result .= '<td class="noteHeader" style="width:40%">' . i18n('colName') . '</td>';
+    $result .= '<td class="noteHeader" style="width:40%">' . i18n('colFunction') . '</td>';
     $result .= '</tr>';
     foreach ($conList as $con){
       $result .= '<tr>';
@@ -407,8 +407,10 @@ class ContactMain extends SqlElement {
         }
         $result .= '</td>';
       }
+      $function=($con->contactFunction!='')?$con->contactFunction:'';
       $result .= '<td class="noteData" style="text-align:center">' . htmlEncode($con->id) . '</td>';
       $result .= '<td class="noteData" style="text-align:center">' . htmlDrawLink($con) . '</td>';
+      $result .= '<td class="noteData" style="text-align:center">' . htmlEncode($function) . '</td>';
       $result .= '</tr>';
     }
     $result .= '</table>';
