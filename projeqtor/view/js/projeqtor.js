@@ -658,7 +658,7 @@ function saveDataToSessionAndReload(param, value, saveUserParameter) {
         dojo.byId("p1name").value = currentItem[0];
         dojo.byId("p1value").value = currentItem[1];
       }else{
-        var directAccessPage=getTargetFromCurrentScreen(currentItem[2]);
+        var directAccessPage = getTargetFromCurrentScreen(currentItem[2]);
       }
       dojo.byId("directAccessPage").value = directAccessPage;
     }else{

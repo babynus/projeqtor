@@ -106,14 +106,12 @@ foreach ($selectList as $id) {
   if($statusSave=="OK"){
     if($statusSave2){
       traceLog($item->email.i18n(i18n('noMailSent', array($item->name, $item->email))));
-      $resultSave=$item->save();
-      $resultSave=str_replace('<br/><br/>','<br/>',$resultSave);
-       echo '<td><div style="padding: 0px 5px;" class="messageNO_CHANGE" >' . $resultSave . '    ' .i18n('noMailSent', array($item->name, $item->email)).'</div></td>';
+       echo '<td><div style="padding: 0px 5px;" class="messageNO_CHANGE" >'.i18n('User').' #'.$item->id.'  '.i18n('messageNoChange').'.</div></td>';
     }else{
       echo '<td><div style="padding: 0px 5px;" class="message'.$statusSave.'" >' . $resultSave .'. '. i18n('ResetPasswordadm') . '. ' . i18n(('mailSentTo'),array($item->email)).'</div></td>';
     }
   }else{
-    echo '<td><div style="padding: 0px 5px;" class="messageERROR" >' . $resultSave . '    ' .i18n('noMailSent', array($item->name, $item->email)).'</div></td>';
+    echo '<td><div style="padding: 0px 5px;" class="messageNO_CHANGE" >'.i18n('User').' #'.$item->id.'  '.i18n('messageNoChange').'.</div></td>';
   }
   echo '</tr>';
 }

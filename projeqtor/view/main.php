@@ -453,6 +453,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                     echo "dojo.byId('directAccessPage').value='';";
                     echo "dojo.byId('menuActualStatus').value='';";
                     echo 'gotoElement("' . $class . '","' . $id . '");';
+                    $firstPage="";
                   }
                 }
             }
