@@ -85,6 +85,7 @@ foreach ($selectList as $id) {
   	  $item->crypto = $oldCrypto;
   	  $item->password = $oldPwd;
   	  $statusSave2 = true;
+  	  $item->save();
   	}
 	}
 	if(!$resultSave)$resultSave=$item->save();
