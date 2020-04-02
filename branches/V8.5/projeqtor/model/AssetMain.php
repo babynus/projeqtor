@@ -82,7 +82,7 @@ class AssetMain extends SqlElement {
       'idAssetType'=>'required',
       'idStatus'=>'required',
       "installationDate"=>"nobr",
-      "idLocation"=>"nobr",
+      "idLocation"=>"nobr"
   );
   
   private static $_databaseColumnName = array();
