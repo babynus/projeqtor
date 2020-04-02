@@ -45,6 +45,8 @@ class Affectable extends SqlElement {
   public $idOrganization;
   public $idle;
   public $dontReceiveTeamMails;
+  public $_sec_Asset;
+  public $_spe_asset;
   public $_constructForName=true;
   public $_calculateForColumn=array("name" => "coalesce(fullName,concat(name,' #'))","userName" => "coalesce(name,concat(fullName,' *'))");
   private static $_fieldsAttributes=array("name" => "required","isContact" => "readonly","isUser" => "readonly","isResource" => "readonly","isResourceTeam"=>"readonly","idle" => "hidden");
@@ -297,6 +299,27 @@ class Affectable extends SqlElement {
     }
     return $result;
   }
+  
+  /** =========================================================================
+   * Draw a specific item for the current class.
+   * @param $item the item. Correct values are :
+   *    - subprojects => presents sub-projects as a tree
+   * @return an html string able to display a specific item
+   *  must be redefined in the inherited class
+   */
+  public function drawSpecificItem($item){
+    global $print, $outMode, $largeWidth;
+    $result="";
+    if($item=='asset') {
+      $asset = new Asset();
+      $critArray=array('idAffectable'=>(($this->id)?$this->id:'0'));
+      $order = " idAssetType asc ";
+      $assetList=$asset->getSqlElementsFromCriteria($critArray, false,null);
+      drawAssetFromUser($assetList, $this);
+    }
+    return $result;
+  }
+  
   public static function isAffectable($objectClass=null) {
     if ($objectClass) {
       if ($objectClass=='Resource' or $objectClass=='ResourceTeam' or $objectClass=='User' or $objectClass=='Contact' 
