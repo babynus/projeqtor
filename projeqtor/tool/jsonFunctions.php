@@ -180,6 +180,9 @@ function jsonBuildWhereCriteria(&$querySelect, &$queryFrom, &$queryWhere, &$quer
           if ($crit['sql']['operator']=='NOT IN') {
             $queryWhereTmp.=" or ".$table.".".$crit['sql']['attribute']." IS NULL ";
           }
+          if ($crit['sql']['operator']=='=' and ($critSqlValue=="'0'" or $critSqlValue=='0') ) {
+            $queryWhereTmp.=' or '.$table.".".$crit['sql']['attribute']. ' is null ';
+          }
           if (trim($crit['sql']['operator'])!='exists' and trim($crit['sql']['operator'])!='not exists') {
             $queryWhereTmp.=")";
           }
