@@ -182,6 +182,9 @@ if ($idFilterAttribute and $idFilterOperator) {
     } else if ($filterDataType=='bool') {
         $arrayDisp["value"]=($filterValueCheckbox)?i18n("displayYes"):i18n("displayNo");
         $arraySql["value"]=($filterValueCheckbox)?1:0;
+    } else if ($filterDataType=='decimal' or $filterDataType=='numeric' or $filterDataType=='int') {
+      $arrayDisp["value"]=floatval($filterValue);
+      $arraySql["value"]=floatval($filterValue);
     } else {
       $arrayDisp["value"]="'" . htmlEncode($filterValue) . "'";
       $arraySql["value"]="'" . trim(Sql::str(htmlEncode($filterValue)),"'") . "'";
