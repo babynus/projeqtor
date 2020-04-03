@@ -35,7 +35,6 @@ function drawElementContractGantt($objectClass,$lstContract,$nbRows,$displayReso
     foreach ($lstContract as $contract) {
       $mile= array();
       $redLine=false;
-      $init='';
       $unity='';
       echo (++$nbRows>1)?',':'';
       $idContract=$contract->id.'.'.$nbRows;
@@ -60,14 +59,13 @@ function drawElementContractGantt($objectClass,$lstContract,$nbRows,$displayReso
       }
       if($contract->idResource){
         $resource=new Resource($contract->idResource);
-        $display=($displayResource=='NO')?null:$resource->$displayResource;
-        if ($displayResource=='initials' and ! $display) {
+       $display=($displayResource!='NO')?$resource->$displayResource:null;
+        if ($displayResource=='initials' and (!$display or $display=='')) {
           $words=mb_split(' ',str_replace(array('"',"'"), ' ',$resource->name));
           foreach ($words as $word) {
-            $init.=(mb_substr($word,0,1,'UTF-8'));
+            $display.=(mb_substr($word,0,1,'UTF-8'));
           }
-        }else if($displayResource=='NOM'){
-          $init=$resource->name;
+          
         }
       }
       if(isset($contract->initialContractTerm) and isset($contract->idUnitContract)){
@@ -86,7 +84,7 @@ function drawElementContractGantt($objectClass,$lstContract,$nbRows,$displayReso
         echo ',"refname":"'.htmlEncode(htmlEncodeJson($contract->name)).'"';
         echo ',"reftype":"'.$class.'"';
         echo ',"objecttype":"'.htmlEncode(htmlEncodeJson($type->name)).'"';
-        echo ',"resource":"'.htmlEncode(htmlEncodeJson($init)).'"';
+        echo ',"resource":"'.htmlEncode(htmlEncodeJson($display)).'"';
         echo ',"externalressource":"'.htmlEncode(htmlEncodeJson($namePC)).'"';
         echo ',"realstartdate":"'.($contract->startDate).'"';
         echo ',"realenddate":"'.($contract->endDate).'"';
