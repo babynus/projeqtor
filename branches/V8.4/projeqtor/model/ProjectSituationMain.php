@@ -126,8 +126,8 @@ class ProjectSituationMain extends SqlElement {
   	return $result;
   }
   
-  public static function updateSituation($obj, $situation=null){
-    if($obj->idSituation){
+  public static function updateLastSituation($obj, $situation=null){
+    if($situation==null and $obj->idSituation){
       $situation = new Situation($obj->idSituation);
     }
     $actualProjectSituation = new Situation();
@@ -169,7 +169,48 @@ class ProjectSituationMain extends SqlElement {
   		$projectSituation->situationDateIncome = $situationDate;
   	}
   	$projectSituation->save();
+  	ProjectSituation::updateProjectSituation();
   }
   
+  public static function updateProjectSituation(){
+    $projectSituationList = SqlList::getList('ProjectSituation');
+    foreach ($projectSituationList as $id=>$name){
+      $projectSituation = new ProjectSituation($id);
+      $actualExpenseSituation = new Situation();
+      $actualExpenseSituationList = $actualExpenseSituation->getSqlElementsFromCriteria(array('idProject'=>$projectSituation->idProject, 'situationType'=>'expense'),null,null, 'date desc');
+      if(count($actualExpenseSituationList) > 0){
+      	$actualExpenseSituation = $actualExpenseSituationList[0];
+      	$projectSituation->refIdExpense = $actualExpenseSituation->refId;
+      	$projectSituation->refTypeExpense = $actualExpenseSituation->refType;
+      	$projectSituation->idResourceExpense = $actualExpenseSituation->idResource;
+      	$projectSituation->situationNameExpense = $actualExpenseSituation->name;
+      	$projectSituation->situationDateExpense = $actualExpenseSituation->date;
+      }else{
+        $projectSituation->refIdExpense = null;
+        $projectSituation->refTypeExpense = null;
+        $projectSituation->idResourceExpense = null;
+        $projectSituation->situationNameExpense = null;
+        $projectSituation->situationDateExpense = null;
+      }
+      
+      $actualIncomeSituation = new Situation();
+      $actualIncomeSituationList = $actualIncomeSituation->getSqlElementsFromCriteria(array('idProject'=>$projectSituation->idProject, 'situationType'=>'income'),null,null, 'date desc');
+      if(count($actualIncomeSituationList) > 0){
+       $actualIncomeSituation = $actualIncomeSituationList[0];
+        $projectSituation->refIdIncome = $actualIncomeSituation->refId;
+        $projectSituation->refTypeIncome = $actualIncomeSituation->refType;
+        $projectSituation->idResourceIncome = $actualIncomeSituation->idResource;
+        $projectSituation->situationNameIncome = $actualIncomeSituation->name;
+        $projectSituation->situationDateIncome = $actualIncomeSituation->date;
+      }else{
+        $projectSituation->refIdIncome = null;
+        $projectSituation->refTypeIncome = null;
+        $projectSituation->idResourceIncome = null;
+        $projectSituation->situationNameIncome = null;
+        $projectSituation->situationDateIncome = null;
+      }
+  	  $projectSituation->save();
+    }
+  }
   }
 ?>
