@@ -119,8 +119,13 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
       echo '<table style="margin:2px 2px 0 2px;width:58px;float:right;vertical-align: middle;">
         <tr>
     	    <td>
-            <div onclick="activityStreamKanban(' . $line ['id'] . ', \'' . $typeKanbanC . '\');" style="'.((count($object->_Note)!=0)?'padding-top:10px;':'').'" title=" ' . i18n ( 'commentImputationAdd' ) . ' ">
-              ' . formatSmallButton ( 'AddComment' ) .((count($object->_Note)!=0)?$badge:''). '
+            <div  id="badges" style="position:relative">
+              <div id="addComent" onclick="activityStreamKanban(' . $line ['id'] . ', \'' . $typeKanbanC . '\');" style="margin-bottom:2px;margin-right:4px;" title=" ' . i18n ( 'commentImputationAdd' ) . ' ">
+                ' . formatSmallButton ( 'AddComment' ) . '
+                    <div  style="position:absolute;bottom:-2px;margin-left:-2px;width:5px;">
+                    '.((count($object->_Note)!=0)?$badge:'').'
+                    </div>
+              </div>
             </div>
           </td>
           <td>
@@ -179,9 +184,14 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
        echo  '<table style="float:right;margin:2px;">
           <tr>
             <td>
-              <div onclick="activityStreamKanban(' . $line ['id'] . ', \'' . $typeKanbanC . '\');" style="max-width:20px;float:left;margin-right:5px;'.((count($object->_Note)!=0)?'padding-top:10px;':'').'" title=" ' . i18n ( 'commentImputationAdd' ).' ">
-                ' . formatSmallButton ( 'AddComment' ) .((count($object->_Note)!=0)?$badge:''). '
+              <div id="badges" style="position:relative">
+              <div id="addComent" onclick="activityStreamKanban(' . $line ['id'] . ', \'' . $typeKanbanC . '\');" style="margin-bottom:2px;margin-right:4px;" title=" ' . i18n ( 'commentImputationAdd' ) . ' ">
+                ' . formatSmallButton ( 'AddComment' ) . '
+                    <div  style="position:absolute;bottom:-2px;margin-left:-3px;width:5px;">
+                    '.((count($object->_Note)!=0)?$badge:'').'
+                    </div>
               </div>
+            </div>
             </td>
             <td>
           	  <div class="roundedButton iconView generalColClass"
