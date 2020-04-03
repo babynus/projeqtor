@@ -31,8 +31,9 @@ echo ' ] }';
 
 function drawElementContractGantt($objectClass,$lstContract,$nbRows,$displayResource){
     $nbContract=count($lstContract);
-    $namePC='-';
     foreach ($lstContract as $contract) {
+      $namePC='-';
+      $display='';
       $mile= array();
       $redLine=false;
       $unity='';
@@ -76,7 +77,6 @@ function drawElementContractGantt($objectClass,$lstContract,$nbRows,$displayReso
         }
       }
       if($contract->deadlineDate or $contract->noticeDate)$class=$class.'hasChild';
-      
       
       echo  '{';
         echo '"id":"'.$contract->id.'"';
