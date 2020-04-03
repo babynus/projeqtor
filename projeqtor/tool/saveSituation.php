@@ -96,5 +96,5 @@ if($actualSituation->id){
   $obj->save();
 }
 
-ProjectSituation::updateSituation($obj, $situation);
+ProjectSituation::updateLastSituation($obj, $situation);
 ?>

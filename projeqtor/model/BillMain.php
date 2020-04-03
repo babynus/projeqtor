@@ -407,8 +407,7 @@ class BillMain extends SqlElement {
     		  $sit->idProject = $this->idProject;
     		  $sit->save();
     		}
-    		ProjectSituation::updateSituation($this);
-    		ProjectSituation::updateSituation($old);
+    		ProjectSituation::updateLastSituation($this);
     	}
     }
     
