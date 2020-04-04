@@ -237,8 +237,8 @@ if ($typeDynamic == 'update') {
 		$tableName2 = $workflowStatus->getDatabaseTableName ();
 		$type = new Type ();
 		$tableName3 = $type->getDatabaseTableName ();
-		$result = Sql::query ( "SELECT s.id as id, s.name as name from $tableName s where s.id in (select idStatusFrom from $tableName2 w, $tableName3 t where t.idWorkflow=w.idWorkflow and t.scope='$typeData')
-      or s.id in (select idStatusTo from $tableName2 w, $tableName3 t where t.idWorkflow=w.idWorkflow and t.scope='$typeData') order by s.sortOrder" );
+		$result = Sql::query ( "SELECT s.id as id, s.name as name from $tableName s where s.idle=0 and (s.id in (select idStatusFrom from $tableName2 w, $tableName3 t where t.idWorkflow=w.idWorkflow and t.scope='$typeData')
+      or s.id in (select idStatusTo from $tableName2 w, $tableName3 t where t.idWorkflow=w.idWorkflow and t.scope='$typeData') ) order by s.sortOrder" );
 		$listToHave = array ();
 		while ( $line = Sql::fetchLine ( $result ) ) {
 			$listToHave [$line ['id']] = $line ['name'];
