@@ -573,6 +573,7 @@ function activityStreamKanban(objectId, objectClass){
 var saveNoteStreamKanbanTimeout=null;
 function saveNoteStreamKanban(event){
   var key = event.keyCode;
+  var idKanban=dojo.byId('idKanban').value;
   if (key == 13 && !event.shiftKey) {
     var noteEditor = dijit.byId("noteStreamKanban");
     var noteEditorContent=noteEditor.get("value");
@@ -587,6 +588,7 @@ function saveNoteStreamKanban(event){
 	  };
 	//loadContent(page, destination, formName, isResultMessage, validationType, directAccess, silent, callBackFunction, noFading)
 	  loadContent("../tool/saveNoteStreamKanban.php", "activityStreamCenterKanban", "noteFormStreamKanban", false, null,null,null,callBack);
+	  loadContent("../view/kanbanView.php?idKanban="+idKanban, "divKanbanContainer");
 	  noteEditor.set("value",null);
 	  event.preventDefault();
   } 
