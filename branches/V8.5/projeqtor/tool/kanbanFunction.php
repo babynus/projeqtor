@@ -115,6 +115,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
       </div> ';
       $object= new $typeKanbanC ($line['id']);
 	 $nbBadge=((isset($object->_Note))?count ($object->_Note):'');
+	 $margin=($nbBadge>9)?'-6':'-2';
 	 $badge= '<div id="'.$line['name'].'BadgeTab" class="kanbanBadge" style="">'.$nbBadge.'</div>';
       echo '<table style="margin:2px 2px 0 2px;width:58px;float:right;vertical-align: middle;">
         <tr>
@@ -122,7 +123,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
             <div  id="badges" style="position:relative">
               <div id="addComent" onclick="activityStreamKanban(' . $line ['id'] . ', \'' . $typeKanbanC . '\');" style="margin-bottom:2px;margin-right:4px;" title=" ' . i18n ( 'commentImputationAdd' ) . ' ">
                 ' . formatSmallButton ( 'AddComment' ) . '
-                    <div  style="position:absolute;bottom:-2px;margin-left:-2px;width:5px;">
+                    <div  style="position:absolute;bottom:-2px;margin-left:'.$margin.'px;width:5px;">
                     '.((count($object->_Note)!=0)?$badge:'').'
                     </div>
               </div>
@@ -180,6 +181,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
         </div>' : '').'';
 		$object= new $typeKanbanC ($line['id']);
 		$nbBadge=((isset($object->_Note) )?count ($object->_Note):'');
+		$margin=($nbBadge>9)?'-6':'-2';
 		$badge= '<div id="'.$line['name'].'BadgeTab" class="kanbanBadge" style="">'.$nbBadge.'</div>';
        echo  '<table style="float:right;margin:2px;">
           <tr>
@@ -187,7 +189,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
               <div id="badges" style="position:relative">
               <div id="addComent" onclick="activityStreamKanban(' . $line ['id'] . ', \'' . $typeKanbanC . '\');" style="margin-bottom:2px;margin-right:4px;" title=" ' . i18n ( 'commentImputationAdd' ) . ' ">
                 ' . formatSmallButton ( 'AddComment' ) . '
-                    <div  style="position:absolute;bottom:-2px;margin-left:-3px;width:5px;">
+                    <div  style="position:absolute;bottom:-2px;margin-left:'.$margin.'px;width:5px;">
                     '.((count($object->_Note)!=0)?$badge:'').'
                     </div>
               </div>

@@ -11266,20 +11266,17 @@ function checkCronStatus(status){
 function saveContact(idFldVal,comboClass){
   var addVal=dojo.byId('objectId').value;
   var obj=dojo.byId('objectClass').value;
-  var parm="operation=add&objectClass="+comboClass+"&objectId="+idFldVal+"&class="+obj+"&addVal="+addVal;
-  var paramDetail="objectClass="+dojo.byId('objectClass').value+"&objectId="+addVal;
-  loadContent("../tool/saveContact.php?"+parm, "resultDivMain",
-      "contactForm", true);
-  loadContent("objectDetail.php?"+paramDetail, "detailDiv", 'listForm');
+  var parm="operation=add&objectClass="+comboClass+"&listId="+idFldVal+"&class="+obj+"&addVal="+addVal;
+  loadContent("../tool/saveContact.php?"+parm, "resultDivMain",null,true,"contact"+dojo.byId('objectClass'));
 }
 
 function removeContact(idFldVal){
-  var addVal=dojo.byId('objectId').value;
   var obj=dojo.byId('objectClass').value;
   var parm="operation=remove&objectClass=Contact&objectId="+idFldVal+"&class="+obj;
-  var paramDetail="objectClass="+dojo.byId('objectClass').value+"&objectId="+addVal;
-  loadContent("../tool/saveContact.php?"+parm, "resultDivMain",
-      "contactForm", true);
-  loadContent("objectDetail.php?"+paramDetail, "detailDiv", 'listForm');
+  actionOK=function() {
+    loadContent("../tool/removeContact.php?"+parm, "resultDivMain",null,true,"contact"+dojo.byId('objectClass'));
+  };
+  msg=i18n('confirmDelete', new Array(i18n('Contact'),idFldVal));
+  showConfirm(msg, actionOK);
 }
 //End

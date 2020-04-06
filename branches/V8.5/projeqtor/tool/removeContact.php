@@ -24,68 +24,32 @@
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
-/** ============================================================================
- * Save real work allocation.
+/** ===========================================================================
+ * Delete the current object : call corresponding method in SqlElement Class
  */
 
 require_once "../tool/projeqtor.php";
 
 $objectClass=((RequestHandler::isCodeSet('objectClass'))?RequestHandler::getValue('objectClass'):'');
-$selectId=((RequestHandler::isCodeSet('listId'))?explode("_", RequestHandler::getValue('listId')):'');
+$selectId=((RequestHandler::isCodeSet('objectId'))?RequestHandler::getValue('objectId'):'');
 $class=((RequestHandler::isCodeSet('class'))?RequestHandler::getValue('class'):'');
 $newVal=((RequestHandler::isCodeSet('addVal'))?RequestHandler::getValue('addVal'):'');
 $operation=((RequestHandler::isCodeSet('operation'))?RequestHandler::getValue('operation'):'');
-$name='';
 if($objectClass=='' or $selectId=='' or $operation==''){
   return;
 }
-
-$res= new $class ($newVal);
-foreach ($selectId as $idCont){
-  $obj= new $objectClass ($idCont);
-  if($class=='Provider' and $obj->idProvider==$res->id or ($class=='Client' and $obj->idClient==$res->id)){
-    if($name==''){
-      $name.=$obj->name;
-    }else{
-        $name.=', '.$obj->name;
-    }
-    continue ;
-  }
-  
-  // else if($class=='Client' and $obj->idClient!='' or ($class=='Provider' and $obj->idProvider!='')){
-  //   echo '<span class="messageERROR" style="z-index:999;position:relative;top:7px">' . i18n('contact déja lié à un autre ') . '</span>';
-  //   return;
-  // }
-  Sql::beginTransaction();
-    if($operation=='add'){
-      if($class!='' and $newVal!=''){
-        if($class=='Provider'){
-          $obj->idProvider=$newVal;
-        }elseif ($class=='Client'){
-          $obj->idClient=$newVal;
-        }
-      }else{
+$obj= new $objectClass($selectId);
+Sql::beginTransaction();
+    if($class!='' ){
+      if($class=='Provider'){
+        $obj->idProvider='';
+      }elseif ($class=='Client'){
+        $obj->idClient='';
+      }
+      else{
         return;
       }
-    }elseif ($operation=='remove'){
-      if($class!='' ){
-        if($class=='Provider'){
-          $obj->idProvider='';
-        }elseif ($class=='Client'){
-          $obj->idClient='';
-        }
-        else{
-          return;
-        }
-      }
-    }else{
-      return ;
     }
-  $result=$obj->save();
-  displayLastOperationStatus($result);
-}
-if($name!=''){
-  throwError('contact #'.$name.' allready link to '.$res->name);
-}
-
+$result=$obj->save();
+displayLastOperationStatus($result);
 ?>
