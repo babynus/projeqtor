@@ -79,6 +79,14 @@ class ClientContractMain extends SqlElement {
   public $saturdayPeriodEnd;
   public $sundayAndOffDayPeriod;
   public $sundayAndOffDayPeriodEnd;
+  
+  public $_sec_Quotation;
+  public $_spe_Quotation;
+  public $_sec_Bill;
+  public $_spe_Bill;
+  public $_sec_Command;
+  public $_spe_Command;
+  
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
@@ -287,6 +295,15 @@ class ClientContractMain extends SqlElement {
     
     $result=parent::save();
     return $result;
+  }
+  
+  public function drawSpecificItem($item, $included=false) {
+  	global $print, $comboDetail, $nbColMax;
+  	$result = "";
+  	if ($item=='Quotation' or $item=="Command" or $item=="Bill"){
+  		$result .= drawClientTabList($item);
+  	}
+  	return $result;
   }
   
   }

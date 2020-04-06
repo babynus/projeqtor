@@ -7126,6 +7126,48 @@ function drawProjectSituation($type, $obj){
 	echo '</table>';
 }
 
+function drawClientTabList($item, $object){
+  echo '<table width="99.9%">';
+  echo '<tr>';
+  echo '<td class="noteHeader" style="width:30%">' . i18n('colName') . '</td>';
+  echo '<td class="noteHeader" style="width:15%">' . i18n('colDate') . '</td>';
+  echo '<td class="noteHeader" style="width:20%">' . i18n('colUntaxedAmount') . '</td>';
+  echo '<td class="noteHeader" style="width:20%">' . i18n('colFullAmount') . '</td>';
+  echo '<td class="noteHeader" style="width:15%">' . i18n('colIdStatus') . '</td>';
+  echo '</tr>';
+  
+  $itemList = SqlList::getListWithCrit($item, array('idClient'=>$object->idClient), 'id',null, true);
+  $totalUntaxedAmount = 0;
+  $totalFullAmount = 0;
+  foreach ($itemList as $id){
+    $obj = new $item($id);
+    echo '<tr>';
+    echo '<td class="noteData" style="text-align:left;">'.$obj->name.'</td>';
+    $date=null;
+    if(isset($obj->date))$date=$obj->date;
+    if(isset($obj->creationDate))$date=$obj->creationDate;
+    if(isset($obj->startDate))$date=$obj->startDate;
+    echo '<td class="noteData" style="text-align:left;">'.htmlFormatDate($date).'</td>';
+    echo '<td class="noteData" style="text-align:left;">'.htmlDisplayCurrency($obj->untaxedAmount).'</td>';
+    echo '<td class="noteData" style="text-align:left;">'.htmlDisplayCurrency($obj->fullAmount).'</td>';
+    $objStatus=new Status($obj->idStatus);
+    echo '<td class="noteData" style="text-align:left;"><div style="word-wrap: break-word; height:100%; overflow:auto;">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</div></td>';
+    echo '</tr>';
+    $totalUntaxedAmount += $obj->untaxedAmount;
+    $totalFullAmount += $obj->fullAmount;
+  }
+  if(count($itemList)>0){
+    echo '<tr>';
+    echo '<td class="noteHeader">' . i18n('sum') . '</td>';
+    echo '<td class="noteData" style="text-align:left;"></td>';
+    echo '<td class="noteData" style="text-align:left;">' .htmlDisplayCurrency($totalUntaxedAmount) . '</td>';
+    echo '<td class="noteData" style="text-align:left;">' . htmlDisplayCurrency($totalFullAmount) . '</td>';
+    echo '<td class="noteData" style="text-align:left;"></td>';
+    echo '</tr>';
+  }
+  echo '</table>';
+}
+
 // gautier #ProviderTerm
 function drawProviderTermFromObject($list, $obj, $type, $refresh=false) {
   global $cr, $print, $user, $browserLocale, $comboDetail;

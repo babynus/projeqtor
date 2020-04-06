@@ -96,7 +96,7 @@ class TenderMain extends SqlElement {
   public $_Attachment=array();
   public $_Note=array();
   public $_nbColMax=3;  
-  
+
   // Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
@@ -414,7 +414,18 @@ class TenderMain extends SqlElement {
       $this->totalTaxAmount=$this->totalFullAmount-$this->totalUntaxedAmount;
       $this->discountAmount=$this->untaxedAmount-$this->totalUntaxedAmount;
     }
-    
+    if($this->idSituation){
+    	$situation = new Situation($this->idSituation);
+    	if($this->idProject != $situation->idProject){
+    		$critWhere = array('refType'=>get_class($this),'refId'=>$this->id);
+    		$situationList = $situation->getSqlElementsFromCriteria($critWhere,null,null);
+    		foreach ($situationList as $sit){
+    		  $sit->idProject = $this->idProject;
+    		  $sit->save();
+    		}
+    		ProjectSituation::updateLastSituation($old, $this, $situation);
+    	}
+    }
     parent::simpleSave();
     return $result;
   }

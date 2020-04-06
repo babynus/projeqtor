@@ -76,6 +76,13 @@ class QuotationMain extends SqlElement {
   public $_sec_situation;
   public $idSituation;
   public $_spe_situation;
+  public $_sec_Quotation;
+  public $_spe_Quotation;
+  public $_sec_Bill;
+  public $_spe_Bill;
+  public $_sec_Command;
+  public $_spe_Command;
+  
   //public $_sec_BillLine;
   public $_BillLine=array();
   public $_BillLine_colSpan="2";
@@ -234,6 +241,7 @@ class QuotationMain extends SqlElement {
    * @return the return message of persistence/SqlElement#save() method
    */
   public function save() {
+    $old=$this->getOld();
   	$result='';
     if (trim($this->id)=='') {
     	// fill the creatin date if it's empty - creationDate is not empty for import ! 
@@ -272,6 +280,18 @@ class QuotationMain extends SqlElement {
 	  }else{
 	    $this->untaxedAmount=$this->fullAmount/(1+$this->taxPct/100);
 	  }
+    if($this->idSituation){
+    	$situation = new Situation($this->idSituation);
+    	if($this->idProject != $situation->idProject){
+    		$critWhere = array('refType'=>get_class($this),'refId'=>$this->id);
+    		$situationList = $situation->getSqlElementsFromCriteria($critWhere,null,null);
+    		foreach ($situationList as $sit){
+    		  $sit->idProject = $this->idProject;
+    		  $sit->save();
+    		}
+    		ProjectSituation::updateLastSituation($old, $this, $situation);
+    	}
+    }
     $result = parent::save();
     return $result;
   }
@@ -345,7 +365,9 @@ class QuotationMain extends SqlElement {
   	if ($item == 'situation') {
   		$situation = new Situation();
   		$situation->drawSituationHistory($this);
-  	}
+  	}else if ($item=='Quotation' or $item=="Command" or $item=="Bill"){
+      $result .= drawClientTabList($item);
+    }
   	return $result;
   }
   

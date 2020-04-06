@@ -402,6 +402,18 @@ class ProviderBillMain extends SqlElement {
         }
       }
     }
+    if($this->idSituation){
+    	$situation = new Situation($this->idSituation);
+    	if($this->idProject != $situation->idProject){
+    		$critWhere = array('refType'=>get_class($this),'refId'=>$this->id);
+    		$situationList = $situation->getSqlElementsFromCriteria($critWhere,null,null);
+    		foreach ($situationList as $sit){
+    		  $sit->idProject = $this->idProject;
+    		  $sit->save();
+    		}
+    		ProjectSituation::updateLastSituation($old, $this, $situation);
+    	}
+    }
     return $result;
   }
   
