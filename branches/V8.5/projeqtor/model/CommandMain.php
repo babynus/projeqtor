@@ -86,11 +86,9 @@ class CommandMain extends SqlElement {
   public $initialEndDate;
   public $validatedEndDate;
   public $comment;
-  
   public $_sec_situation;
   public $idSituation;
   public $_spe_situation;
-  
   //public $_sec_BillLine;
   public $_BillLine=array();
   public $_BillLine_colSpan="2";
@@ -98,8 +96,8 @@ class CommandMain extends SqlElement {
   public $_Link=array();
   public $_Attachment=array();
   public $_Note=array();
-  
   public $_nbColMax=3;
+  
   // Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="4%" ># ${id}</th>
