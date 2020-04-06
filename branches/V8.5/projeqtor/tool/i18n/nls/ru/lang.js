@@ -1466,6 +1466,7 @@ consolidateIfSet: "только если установлено (не стира
 consolidateNever: "никогда",
 Contact: "Контакт",
 contactAdministrator: "Обратитесь к администратору.",
+contactAllreadyLink: "contact allready linked",
 contacts: "Контакты",
 contains: "Содержит",
 Context: "Контекст",
