@@ -44,7 +44,7 @@ class BrandMain extends SqlElement {
   private static $_colCaptionTransposition = array();
   
   private static $_fieldsAttributes=array(
-      'name'=>'required', 
+      'name'=>'required'
   );
   
   private static $_databaseColumnName = array();
