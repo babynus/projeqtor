@@ -277,7 +277,6 @@ class QuotationMain extends SqlElement {
 	    $this->untaxedAmount=$this->fullAmount/(1+$this->taxPct/100);
 	  }
     if($this->idSituation){
-      $old=$this->getOld();
     	$situation = new Situation($this->idSituation);
     	if($this->idProject != $situation->idProject){
     		$critWhere = array('refType'=>get_class($this),'refId'=>$this->id);
@@ -286,7 +285,7 @@ class QuotationMain extends SqlElement {
     		  $sit->idProject = $this->idProject;
     		  $sit->save();
     		}
-    		ProjectSituation::updateLastSituation($this);
+    		ProjectSituation::updateLastSituation($old, $this, $situation);
     	}
     }
     $result = parent::save();

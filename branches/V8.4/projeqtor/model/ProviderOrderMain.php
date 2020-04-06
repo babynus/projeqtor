@@ -396,7 +396,6 @@ class ProviderOrderMain extends SqlElement {
       }
     }
     if($this->idSituation){
-      $old=$this->getOld();
     	$situation = new Situation($this->idSituation);
     	if($this->idProject != $situation->idProject){
     		$critWhere = array('refType'=>get_class($this),'refId'=>$this->id);
@@ -405,7 +404,7 @@ class ProviderOrderMain extends SqlElement {
     		  $sit->idProject = $this->idProject;
     		  $sit->save();
     		}
-    		ProjectSituation::updateLastSituation($this);
+    		ProjectSituation::updateLastSituation($old, $this, $situation);
     	}
     }
     return $result;

@@ -424,7 +424,6 @@ class TenderMain extends SqlElement {
       $this->discountAmount=$this->untaxedAmount-$this->totalUntaxedAmount;
     }
     if($this->idSituation){
-      $old=$this->getOld();
     	$situation = new Situation($this->idSituation);
     	if($this->idProject != $situation->idProject){
     		$critWhere = array('refType'=>get_class($this),'refId'=>$this->id);
@@ -433,7 +432,7 @@ class TenderMain extends SqlElement {
     		  $sit->idProject = $this->idProject;
     		  $sit->save();
     		}
-    		ProjectSituation::updateLastSituation($this);
+    		ProjectSituation::updateLastSituation($old, $this, $situation);
     	}
     }
     parent::simpleSave();
