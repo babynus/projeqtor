@@ -31,12 +31,43 @@ require_once('_securityCheck.php');
 class AssetType extends ShortType {
 
   // Define the layout that will be used for lists
+  public $_sec_Description;
+  public $id;    // redefine $id to specify its visible place
+  public $name;
+  public $code;
+  public $icon;
+  public $idWorkflow;
+  public $sortOrder=0;
+  public $idle;
+  public $description;
+  public $_sec_Behavior;
+  public $mandatoryDescription;
+  public $_lib_mandatoryField;
+  public $lockIdle;
+  public $_lib_statusMustChangeIdle;
+  public $lockCancelled;
+  public $_lib_statusMustChangeCancelled;
+  
+  private static $_layout='
+    <th field="id" formatter="numericFormatter" width="5%"># ${id}</th>
+    <th field="icon" width="5%" formatter="iconFormatter">${icon}</th>
+    <th field="name" width="60%">${name}</th>
+    <th field="sortOrder" width="5%">${sortOrderShort}</th>
+    <th field="nameWorkflow" width="20%" >${idWorkflow}</th>
+    <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
+    ';
+  
   private static $_databaseCriteria = array('scope'=>'Asset');
+  
   
   private static $_fieldsAttributes=array(
       'lockCancelled'=>'hidden',
       'name'=>'required',
-      'idWorkflow'=>'required'
+      'idWorkflow'=>'required',
+      'mandatoryDescription'=>'nobr',
+      'lockIdle'=>'nobr',
+      'lockCancelled'=>'hidden',
+      '_lib_statusMustChangeCancelled'=>'hidden'
   );
   
    /** ==========================================================================
@@ -60,7 +91,13 @@ class AssetType extends ShortType {
 // ============================================================================**********
 // GET STATIC DATA FUNCTIONS
 // ============================================================================**********
-  
+  /** ==========================================================================
+   * Return the specific layout
+   * @return the layout
+   */
+  protected function getStaticLayout() {
+    return self::$_layout;
+  }
   /** ========================================================================
    * Return the specific database criteria
    * @return the databaseTableName
