@@ -43,13 +43,11 @@ class TenderMain extends SqlElement {
   public $creationDate;
   public $idProvider;
   public $externalReference;
-  public $description;
-  
+  public $description;  
   public $_sec_treatment;
   public $idStatus;  
   public $idResource;
-  public $idContact;
-  
+  public $idContact;  
   public $requestDateTime;
   public $expectedTenderDateTime;
   public $receptionDateTime;
@@ -69,8 +67,7 @@ class TenderMain extends SqlElement {
   public $totalUntaxedAmount;
   public $discountFrom;
   public $totalTaxAmount;
-  public $totalFullAmount;
-  
+  public $totalFullAmount;  
   public $idProjectExpense;
   public $_button_generateProjectExpense;
   public $paymentCondition;
@@ -84,28 +81,22 @@ class TenderMain extends SqlElement {
   public $idleDate;
   public $cancelled;
   public $_lib_cancelled;
-  public $result;
-  
+  public $result;  
   public $_BillLine=array();
-  public $_BillLine_colSpan="2";
-  
+  public $_BillLine_colSpan="2";  
   public $_sec_evaluation;
   public $_spe_evaluation;
   public $evaluationValue;
-  public $evaluationRank;
-  
+  public $evaluationRank;  
   public $_sec_situation;
   public $idSituation;
-  public $_spe_situation;
-  
+  public $_spe_situation;  
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
   public $_Note=array();
-  
- 
-
   public $_nbColMax=3;  
+  
   // Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>

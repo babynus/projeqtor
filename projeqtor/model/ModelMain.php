@@ -54,7 +54,7 @@ class ModelMain extends SqlElement {
   private static $_fieldsAttributes=array(
       'name'=>'required',
       'idAssetType'=>'required',
-      'idBrand'=>'required',
+      'idBrand'=>'required'
   );
   
   private static $_databaseColumnName = array();

@@ -44,8 +44,7 @@ class CallForTenderMain extends SqlElement {
   public $description;
   public $businessRequirements;
   public $technicalRequirements;
-  public $otherRequirements;
-  
+  public $otherRequirements;  
   public $_sec_treatment;
   public $idStatus;
   public $idResource;
@@ -60,32 +59,27 @@ class CallForTenderMain extends SqlElement {
   public $cancelled;
   public $_lib_cancelled;
   public $result;
-  
   public $_sec_productComponent_right;
   public $idProduct;
   public $idComponent;
   public $idProductVersion;
-  public $idComponentVersion;
-  
+  public $idComponentVersion; 
   public $_sec_submissions;
-  public $_spe_submissions;
-  
+  public $_spe_submissions; 
   public $_sec_evaluationCriteria;
   public $_spe_evaluationCriteria;
   public $evaluationMaxValue;
   public $fixValue;
-  public $_lib_colFixValue;
-  
+  public $_lib_colFixValue; 
   public $_sec_situation;
   public $idSituation;
   public $_spe_situation;
-  
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
   public $_Note=array();
-
   public $_nbColMax=3;  
+  
   // Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>

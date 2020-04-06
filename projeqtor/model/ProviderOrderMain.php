@@ -88,17 +88,14 @@ class ProviderOrderMain extends SqlElement {
   //tab term
   public $_sec_ProviderTerm;
   public $_spe_ProviderTerm;
-  
   public $_sec_situation;
   public $idSituation;
   public $_spe_situation;
-  
   //link
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
   public $_Note=array();
-  
   public $_nbColMax=3;
  
   private static $_layout='
