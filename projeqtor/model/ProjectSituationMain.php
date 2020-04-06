@@ -126,7 +126,7 @@ class ProjectSituationMain extends SqlElement {
   	return $result;
   }
   
-  public static function updateLastSituation($obj, $situation=null){
+  public static function updateLastSituation($old, $obj, $situation=null){
     if($situation==null and $obj->idSituation){
       $situation = new Situation($obj->idSituation);
     }
@@ -169,13 +169,16 @@ class ProjectSituationMain extends SqlElement {
   		$projectSituation->situationDateIncome = $situationDate;
   	}
   	$projectSituation->save();
-  	ProjectSituation::updateProjectSituation();
+  	ProjectSituation::updateProjectSituation($old, $obj);
   }
   
-  public static function updateProjectSituation(){
-    $projectSituationList = SqlList::getList('ProjectSituation');
-    foreach ($projectSituationList as $id=>$name){
-      $projectSituation = new ProjectSituation($id);
+  public static function updateProjectSituation($old, $obj){
+    $inProject = '('.$old->idProject.','.$obj->idProject.')';
+    $where = 'idProject in '.$inProject;
+    $projectSituation = new ProjectSituation();
+    $projectSituationList = $projectSituation->getSqlElementsFromCriteria(null, null, $where);
+    foreach ($projectSituationList as $id=>$object){
+      $projectSituation = new ProjectSituation($object->id);
       $actualExpenseSituation = new Situation();
       $actualExpenseSituationList = $actualExpenseSituation->getSqlElementsFromCriteria(array('idProject'=>$projectSituation->idProject, 'situationType'=>'expense'),null,null, 'date desc');
       if(count($actualExpenseSituationList) > 0){
