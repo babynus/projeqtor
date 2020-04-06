@@ -1466,6 +1466,7 @@ consolidateIfSet: "μόνο αν έχει τεθεί (να μην γίνει δ�
 consolidateNever: "ποτέ",
 Contact: "Επαφή",
 contactAdministrator: "Επικοινωνήστε με τον διαχειριστή σας",
+contactAllreadyLink: "contact allready linked",
 contacts: "Επαφές",
 contains: "περιέχει",
 Context: "Περιεχόμενο",

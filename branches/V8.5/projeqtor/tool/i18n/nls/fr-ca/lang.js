@@ -1466,6 +1466,7 @@ consolidateIfSet: "seulement si renseigné (n'efface pas les données parentes)"
 consolidateNever: "jamais",
 Contact: "Contact",
 contactAdministrator: "Contactez votre administrateur<br/><i>(l'erreur détaillée est consignée dans le fichier de journalisation)</i>",
+contactAllreadyLink: "contact déjà lié",
 contacts: "Contacts",
 contains: "contient",
 Context: "Context",
