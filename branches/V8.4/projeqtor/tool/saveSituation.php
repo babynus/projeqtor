@@ -81,6 +81,7 @@ displayLastOperationStatus($result);
 
 $actualSituation = new Situation();
 $obj = new $refType($refId);
+$old = $obj->getOld();
 $critWhere = array('refType'=>$refType,'refId'=>$refId,'idProject'=>$obj->idProject);
 $situationList = $situation->getSqlElementsFromCriteria($critWhere,null,null, 'date desc');
 if(count($situationList) > 0){
@@ -96,5 +97,5 @@ if($actualSituation->id){
   $obj->save();
 }
 
-ProjectSituation::updateLastSituation($obj, $situation);
+ProjectSituation::updateLastSituation($old, $obj, $situation);
 ?>

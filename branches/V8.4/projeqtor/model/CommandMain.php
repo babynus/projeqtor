@@ -259,6 +259,7 @@ class CommandMain extends SqlElement {
   	$oldIdProject=0;
   	$oldTotalUntaxedAmount=0;
   	$oldValidatedWork=0;
+  	$old=$this->getOld();
   	
   	//Check if we are in CREATION
     if (trim($this->id)=='') {
@@ -351,7 +352,6 @@ class CommandMain extends SqlElement {
     	}
     }
     if($this->idSituation){
-      $old=$this->getOld();
     	$situation = new Situation($this->idSituation);
     	if($this->idProject != $situation->idProject){
     		$critWhere = array('refType'=>get_class($this),'refId'=>$this->id);
@@ -360,7 +360,7 @@ class CommandMain extends SqlElement {
     		  $sit->idProject = $this->idProject;
     		  $sit->save();
     		}
-    		ProjectSituation::updateLastSituation($this, $situation);
+    		ProjectSituation::updateLastSituation($old, $this, $situation);
     	}
     }
     return $resultClass;
