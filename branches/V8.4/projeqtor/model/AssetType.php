@@ -37,6 +37,10 @@ class AssetType extends ShortType {
       'lockCancelled'=>'hidden',
       'name'=>'required',
       'idWorkflow'=>'required',
+      'mandatoryDescription'=>'nobr',
+      'lockIdle'=>'nobr',
+      'lockCancelled'=>'hidden',
+      '_lib_statusMustChangeCancelled'=>'hidden'
   );
   
    /** ==========================================================================
