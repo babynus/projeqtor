@@ -63,14 +63,14 @@ class CallForTenderMain extends SqlElement {
   public $idProduct;
   public $idComponent;
   public $idProductVersion;
-  public $idComponentVersion; 
+  public $idComponentVersion;
   public $_sec_submissions;
-  public $_spe_submissions; 
+  public $_spe_submissions;
   public $_sec_evaluationCriteria;
   public $_spe_evaluationCriteria;
   public $evaluationMaxValue;
   public $fixValue;
-  public $_lib_colFixValue; 
+  public $_lib_colFixValue;
   public $_sec_situation;
   public $idSituation;
   public $_spe_situation;
@@ -78,8 +78,8 @@ class CallForTenderMain extends SqlElement {
   public $_Link=array();
   public $_Attachment=array();
   public $_Note=array();
-  public $_nbColMax=3;  
-  
+  public $_nbColMax=3;
+    
   // Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>
@@ -207,6 +207,18 @@ class CallForTenderMain extends SqlElement {
         // idProject and idTenderType will be updated in Tender::save()
         $tender->save();
       }
+    }
+    if($this->idSituation){
+    	$situation = new Situation($this->idSituation);
+    	if($this->idProject != $situation->idProject){
+    		$critWhere = array('refType'=>get_class($this),'refId'=>$this->id);
+    		$situationList = $situation->getSqlElementsFromCriteria($critWhere,null,null);
+    		foreach ($situationList as $sit){
+    		  $sit->idProject = $this->idProject;
+    		  $sit->save();
+    		}
+    		ProjectSituation::updateLastSituation($old, $this, $situation);
+    	}
     }
     return $result;
   }

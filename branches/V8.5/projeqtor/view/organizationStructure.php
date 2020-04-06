@@ -50,7 +50,7 @@ echo '<Table id="organizationStructure" align="left" width="100%" style="min-wid
 echo '<TR class="ganttHeight" style="height:32px">';
 echo '  <TD class="reportTableHeader" style="width:60%;border-left:0px; text-align: center;">'.i18n('colName') .'</TD>';
 echo '  <TD class="reportTableHeader amountTableHeaderTD" style="width:20%;"  ><div class="amountTableHeaderDiv">' . i18n('colIdOrganizationType') . '</div></TD>' ;
-echo '  <TD class="reportTableHeader amountTableHeaderTD" style="width:20%;" ><div class="amountTableHeaderDiv">' . i18n('colUser') . '</div></TD>' ;
+echo '  <TD class="reportTableHeader amountTableHeaderTD" style="width:20%;" ><div class="amountTableHeaderDiv">' . i18n('colManager') . '</div></TD>' ;
 echo '</TR>';
 echo '</table>';
 
