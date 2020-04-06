@@ -359,6 +359,7 @@ abstract class SqlElement {
           "PlannedWork" => "cascade", 
           "Project" => "confirm", 
           "ProjectExpense" => "control", 
+          "ProjectSituation" => "cascade",
           "ProviderBill"=> "control",
           "ProviderOrder"=> "control",
           "Requirement" => "control", 
