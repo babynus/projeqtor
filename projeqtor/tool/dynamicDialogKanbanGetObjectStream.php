@@ -51,11 +51,10 @@ $onlyCenter=(RequestHandler::getValue('onlyCenter')=='true')?true:false;
 $privacyNotes=Parameter::getUserParameter('privacyNotes'.$objectClass);
 
 //======================================================
-
 ?>
 
 <!-- Titre et listes de notes -->
-<div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false" style="width:350px; height:500px;">
+<div class="container" dojoType="dijit.layout.BorderContainer" liveSplitters="false" style="width:800px; height:500px;">
 	<div id="activityStreamTopKanban" dojoType="dijit.layout.ContentPane" region="top" style="text-align:center" class="dijitAccordionTitle">
 	  <span class="title" ><?php echo i18n("titleStream");?></span>
 	</div>
@@ -79,7 +78,7 @@ $privacyNotes=Parameter::getUserParameter('privacyNotes'.$objectClass);
        <input id="noteEditorTypeStreamKanban" name="noteEditorTypeStreamKanban" type="hidden" value="<?php echo getEditorType();?>" />
        <div style="width:99%;position:relative">
        <textarea rows="4"  name="noteStreamKanban" id="noteStreamKanban" dojoType="dijit.form.SimpleTextarea"
-         style="width:98%;height:60px;overflow-x:hidden;overflow-y:auto;border:1px solid grey;margin-top:2px;" tabIndex="-1" onclick="focusStream();" ><?php echo i18n("textareaEnterText");?></textarea>
+         style="width:99%;height:60px;overflow-x:hidden;overflow-y:auto;border:1px solid grey;margin-top:2px;" tabIndex="-1" onclick="focusStream();" ><?php echo i18n("textareaEnterText");?></textarea>
          <?php
          $privacyClass="";
          $privacyLabel=i18n("public");
