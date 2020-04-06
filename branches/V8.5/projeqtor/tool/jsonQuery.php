@@ -426,7 +426,7 @@
 	        if (substr($formatter[$numField],0,5)=='thumb' and substr($formatter[$numField],0,9)!='thumbName') {
             $querySelect.=substr($formatter[$numField],5).' as ' . $fld;;
             continue;
-          }    
+          }
 	        if (strlen($fld)>9 and substr($fld,0,9)=="colorName") {
 	          $idTab+=1;
 	          // requested field are colorXXX and nameXXX => must fetch the from external table, using idXXX
@@ -481,7 +481,7 @@
 	          } else {
 	          	$querySelect .= $externalTableAlias . '.' . $externalObj->getDatabaseColumnName('name') . ' as ' . ((Sql::isPgsql())?'"'.$fld.'"':$fld);
 	          }
-	          if (substr($formatter[$numField],0,9)=='thumbName') {
+	          if (substr($formatter[$numField],0,9)=='thumbName' or substr($formatter[$numField],0,8)=='iconName') {
 	            $numField+=1;
 	            $formatter[$numField]='';
 	            $arrayWidth[$numField]='';
@@ -927,6 +927,8 @@
                 }
               } else if ($formatter[$numField]=="iconFormatter") {
                 $disp=iconFormatter($val);
+              } else if ($formatter[$numField]=="iconNameFormatter") {
+                  $disp=iconFormatter($val);
               } else if (substr($formatter[$numField],0,9)=='thumbName') {
                 //$disp=thumbFormatter($objectClass,$line['id'],substr($formatter[$numField],5));
                 $nameClass=substr($id,4);
@@ -1021,6 +1023,12 @@
             	  	$val.='#'.$sp;
             	  }
             	} 
+            }
+            if (substr($formatter[$nbFields],0,8)=='iconName') {
+              $nameClass=substr($id,4);
+              if ($val and property_exists($nameClass,'icon')) {
+                $val=$val.'#!#'.SqlList::getFieldFromId($nameClass,$line['id'.$nameClass], 'icon');
+              }
             }
             if (substr($formatter[$nbFields],0,5)=='thumb') {             
             	if (substr($formatter[$nbFields],0,9)=='thumbName') {

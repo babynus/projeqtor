@@ -588,7 +588,25 @@ function thumb(value, size) {
 function iconFormatter(value) {
   if (!value)
     return "";
-  return '<img style="height:22px" src="icons/' + value + '" />';
+  return '<table style="width:100%"><tr><td style="text-align:center"><img style="height:22px" src="icons/' + value + '" /></td></tr></table>';
+}
+function iconName16(value) {
+  return iconName(value, 16);
+}
+function iconName22(value) {
+  return iconName(value, 22);
+}
+function iconName32(value) {
+  return iconName(value, 32);
+}
+function iconName(value, size) {
+  if (!value) return "";
+  if (!size) size=22;
+  var tab = value.split('#!#');
+  if (tab.length<2) return value;
+  var icon=tab[1];
+  var name=tab[0];
+  return '<table><tr><td><img style="height:'+size+'px" src="icons/' + icon + '" /></td><td>&nbsp;</td><td >'+name+'</td></tr></table>';
 }
 
 function privateFormatter(value) {

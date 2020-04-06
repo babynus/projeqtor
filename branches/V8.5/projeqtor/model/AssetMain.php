@@ -63,14 +63,15 @@ class AssetMain extends SqlElement {
   public $_nbColMax = 3;
   
   private static $_layout='
-    <th field="id" formatter="numericFormatter" width="8%"># ${id}</th>
+    <th field="id" formatter="numericFormatter" width="5%"># ${id}</th>
+    <th field="nameAssetType" formatter="iconName22" width="10%">${type}</th>
     <th field="name" width="15%">${name}</th>
     <th field="nameBrand" width="10%">${idBrand}</th>
     <th field="nameModel" width="10%">${idModel}</th>
     <th field="serialNumber" width="10%">${serialNumber}</th>
     <th field="nameAsset" width="10%">${idAsset}</th>
-    <th field="nameLocation" width="13%">${idLocation}</th>
-    <th field="nameAffectable" formatter="thumbName22" width="14%">${idUser}</th>
+    <th field="nameLocation" width="10%">${idLocation}</th>
+    <th field="nameAffectable" formatter="thumbName22" width="10%">${idUser}</th>
     <th field="colorNameStatus" width="6%" formatter="colorNameFormatter">${idStatus}</th>
     <th field="idle" width="4%" formatter="booleanFormatter">${idle}</th>
     ';

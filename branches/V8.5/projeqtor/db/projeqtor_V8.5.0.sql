@@ -17,3 +17,5 @@ INSERT INTO `${prefix}habilitationother` (idProfile,scope,rightAccess) VALUES
 (5,'validatePlanning','2');
 
 DELETE FROM `${prefix}columnselector` col WHERE   col.`objectClass`='Recipient' and col.`field`='bank' and col.`attribute`='bank';
+
+ALTER TABLE `${prefix}type` ADD COLUMN `icon` varchar(100);
