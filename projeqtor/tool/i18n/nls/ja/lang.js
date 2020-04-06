@@ -1466,6 +1466,7 @@ consolidateIfSet: "設定されている場合のみ（親を削除しない）"
 consolidateNever: "今後表示しない",
 Contact: "顧客担当者",
 contactAdministrator: "システム管理者に連絡する",
+contactAllreadyLink: "contact allready linked",
 contacts: "顧客担当者",
 contains: "含む",
 Context: "動作環境",
