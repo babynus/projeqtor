@@ -56,6 +56,7 @@ class ClientMain extends SqlElement {
   //ADD qCazelles - Manage ticket at customer level - Ticket #87
   public $_sec_TicketsClient;
   public $_spe_tickets;
+  
   //END ADD qCazelles - Manage ticket at customer level - Ticket #87
   public $_Attachment=array();
   public $_Note=array();
