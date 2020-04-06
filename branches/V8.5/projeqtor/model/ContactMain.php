@@ -387,7 +387,7 @@ class ContactMain extends SqlElement {
     if (!$print) {
       $result .= '<td class="noteHeader smallButtonsGroup" style="width:10%">';
       if (!$print ) {
-        $result .= '<a '; $result .= 'onClick="showDetail( \'id'.htmlEncode(get_class($this)).'\',1,\''.htmlEncode(get_class($this)).'\');"title="' . i18n('addContact') .'"'; 
+        $result .= '<a '; $result .= 'onClick="showDetail( \'id'.htmlEncode(get_class($this)).'\',1,\''.htmlEncode(get_class($this)).'\',true);"title="' . i18n('addContact') .'"'; 
         $result .= '>';
         $result .= formatSmallButton('Add');
         $result .= '</a>';
