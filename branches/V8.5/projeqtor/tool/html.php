@@ -1273,6 +1273,7 @@ function htmlGetCrossTable($lineObj, $columnObj, $pivotObj) {
  */
 function htmlGetJsTable($tableName, $colName, $jsTableName=null) {
   $tab=SqlList::getList($tableName,$colName);
+  asort($tab);
   $jsTableName=(! $jsTableName) ? 'tab'.ucfirst($tableName):$jsTableName;
   $script='var ' . $jsTableName . ' = [ ';
   $nb=0;

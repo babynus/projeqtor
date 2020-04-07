@@ -234,11 +234,11 @@ class TicketMain extends SqlElement {
       $colScript .= '  calculatedValue = Math.round(urgencyValue*criticalityValue/2);';
       $colScript .= '  var filterPriority=dojo.filter(tabPriority, function(item){return item.value==calculatedValue;});';
       $colScript .= '  if ( filterPriority.length==0) {';
-      $colScript .= '    calculatedValue = Math.round(calculatedValue/2);';
-      $colScript .= '    var filterPriority=dojo.filter(tabPriority, function(item){varChanged=true; return item.value==calculatedValue;});';
+      $colScript .= '    filterPriority=dojo.filter(tabPriority, function(item,i){if (i==0) return true; else return item.value<=calculatedValue;});';
       $colScript .= '  }';
-      $colScript .= '  var setVar="";';
-      $colScript .= '  dojo.forEach(filterPriority, function(item, i) {if (setVar=="") dijit.byId("idPriority").set("value",item.id);});';
+      $colScript .= '  if (trim(dijit.byId("idUrgency").value) && trim(dijit.byId("idCriticality").value))';
+      $colScript .= '    dojo.forEach(filterPriority, function(item, i) {dijit.byId("idPriority").set("value",item.id);});';
+      $colScript .= '  else dijit.byId("idPriority").reset();';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
     } else if ($colName=="actualDueDateTime") {
