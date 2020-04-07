@@ -1164,6 +1164,7 @@ class Parameter extends SqlElement {
     	  unset($parameterList['sectionFiles']);
     	  unset($parameterList['paramAttachmentDirectory']);
     	  unset($parameterList['paramAttachmentMaxSize']);
+    	  unset($parameterList['paramAttachmentNum']);
     	  unset($parameterList['paramReportTempDirectory']);
     	  unset($parameterList['paramMailEol']);
     	  unset($parameterList['cronDirectory']);
