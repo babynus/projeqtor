@@ -2102,8 +2102,9 @@ function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sen
     $curUser=new Affectable(getSessionUser()->id);
     if(stristr($to,$curUser->email)){
       $to=trim(str_replace($curUser->email,"",$to));
+      $to=str_replace(';;',';',$to);
       if($to!="" ){
-        $mail->mailTo=$to;
+        //$mail->mailTo=$to;
       }else{
         return false;
       }

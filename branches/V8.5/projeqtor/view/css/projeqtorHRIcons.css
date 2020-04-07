@@ -58,9 +58,9 @@
 .iconHumanResource22 { background-image: url(imagesHR/iconHumanResource.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
 .iconHumanResource16 { background-image: url(imagesHR/iconHumanResource.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
-.iconHumanResourceParameters32 { background-image: url(images/iconParamater.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
-.iconHumanResourceParameters22 { background-image: url(images/iconParamater.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
-.iconHumanResourceParameters16 { background-image: url(images/iconParamater.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
+.iconHumanResourceParameters32 { background-image: url(images/iconParameter32.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
+.iconHumanResourceParameters22 { background-image: url(images/iconParameter22.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
+.iconHumanResourceParameters16 { background-image: url(images/iconParameter16.png);  background-repeat: no-repeat; width: 16px; height: 16px; }
 
 .iconLeave32 { background-image: url(imagesHR/iconLeave.png);  background-repeat: no-repeat; width: 32px; height: 32px; }
 .iconLeave22 { background-image: url(imagesHR/iconLeave.png);  background-repeat: no-repeat; width: 22px; height: 22px; }
