@@ -193,7 +193,12 @@ class OpportunityMAin extends SqlElement {
       $colScript .= '  dojo.forEach(filterLikelihood, function(item, i) {likelihoodValue=item.value;});';
       $colScript .= '  calculatedValue = Math.round(serverityValue*likelihoodValue/2);';
       $colScript .= '  var filterCriticality=dojo.filter(tabCriticality, function(item){return item.value==calculatedValue;});';
-      $colScript .= '  dojo.forEach(filterCriticality, function(item, i) {dijit.byId("idCriticality").set("value",item.id);});';
+      $colScript .= '  if ( filterCriticality.length==0) {';
+      $colScript .= '    var filterCriticality=dojo.filter(tabCriticality, function(item,i){if (i==0) return true; else return item.value<=calculatedValue;});';
+      $colScript .= '  }';
+      $colScript .= '  if (trim(dijit.byId("idSeverity").value) && trim(dijit.byId("idLikelihood").value))';
+      $colScript .= '    dojo.forEach(filterCriticality, function(item, i) {dijit.byId("idCriticality").set("value",item.id);});';
+      $colScript .= '  else dijit.byId("idCriticality").reset();';
       if ($colName=="idLikelihood") {
         $colScript .= 'stock=dijit.byId("impactCost").get("value");';
         $colScript .= 'dijit.byId("impactCost").set("value",null);';
