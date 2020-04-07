@@ -560,6 +560,8 @@ function activityStreamDisplayNote ($note,$origin){
     if($origin=="objectStream" || $origin=="objectStreamKanban") {
           if ($note->idUser == $user->id and !$print and $canUpdate){
             echo  '<div style="float:right;" ><a onClick="removeNote(' . htmlEncode($note->id) . ');" title="' . i18n('removeNote') . '" > '.formatSmallButton('Remove').'</a></div>';
+          }
+          if (!$print and $canUpdate) {
             echo  '<div style="float:right;" ><a onClick="addNote(true,' . htmlEncode($note->id) . ');" title="' . i18n('replyToThisNote') . '" > '.formatSmallButton('Reply').'</a></div>';
           }
     }
