@@ -61,8 +61,11 @@ if (!$canUpdate) {
 }
 
 $hoursPerDay=Parameter::getGlobalParameter('dayTime');
-$hourMeeting = (strtotime($meet->meetingEndTime)-strtotime($meet->meetingStartTime))/3600;
-
+if ($meet->meetingEndTime and $meet->meetingStartTime) {
+  $hourMeeting = (strtotime($meet->meetingEndTime)-strtotime($meet->meetingStartTime))/3600;
+} else {
+  $hourMeeting = 0;
+}
 // Message error
 $result=i18n('Assignment') . ' ' . i18n('resultInserted') . ' : 0';
 $result .= '<input type="hidden" id="lastSaveId" value="" />';
