@@ -308,7 +308,7 @@ function timeToTimeStamp($time){
 						name="liveMeetingResultEditorType" type="hidden"
 						value="<?php echo $editorType;?>" />
                    <?php if ($editorType=="CK") {?> 
-                    <textarea id='liveMeetingResult' style="width:<?php echo $detailWidth;?>; height:<?php echo $detailHeight;?>"
+                    <textarea style="width:<?php echo $detailWidth;?>; height:<?php echo $detailHeight;?>"
                     name="liveMeetingResult" id="liveMeetingResult"><?php echo htmlspecialchars($result);?></textarea>
                   <?php
                   } else if ($editorType == "text") {
