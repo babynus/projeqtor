@@ -173,7 +173,10 @@ class ProjectSituationMain extends SqlElement {
   }
   
   public static function updateProjectSituation($old, $obj){
-    $inProject = '('.$old->idProject.','.$obj->idProject.')';
+    $inProject = '(0';
+    if ($old->idProject) $inProject.=','.$old->idProject;
+    if ($obj->idProject) $inProject.=','.$obj->idProject;
+    $inProject.=')';
     $where = 'idProject in '.$inProject;
     $projectSituation = new ProjectSituation();
     $projectSituationList = $projectSituation->getSqlElementsFromCriteria(null, null, $where);
