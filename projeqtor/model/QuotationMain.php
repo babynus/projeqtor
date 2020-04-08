@@ -158,6 +158,12 @@ class QuotationMain extends SqlElement {
     	self::$_fieldsAttributes['_sec_situation']='hidden';
     	self::$_fieldsAttributes['idSituation']='hidden';
     }
+    $clientElementList = Parameter::getGlobalParameter('ClientElementList');
+    if(!$clientElementList or $clientElementList == 'false'){
+    	self::$_fieldsAttributes['_sec_Quotation']='hidden';
+    	self::$_fieldsAttributes['_sec_Command']='hidden';
+    	self::$_fieldsAttributes['_sec_Bill']='hidden';
+    }
   }
 
    /** ==========================================================================
@@ -366,7 +372,7 @@ class QuotationMain extends SqlElement {
   		$situation = new Situation();
   		$situation->drawSituationHistory($this);
   	}else if ($item=='Quotation' or $item=="Command" or $item=="Bill"){
-      $result .= drawClientTabList($item);
+      $result .= drawClientElementList($item);
     }
   	return $result;
   }

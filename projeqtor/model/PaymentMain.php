@@ -107,6 +107,12 @@ class PaymentMain extends SqlElement {
       $this->paymentDate=date('Y-m-d');
     }
     parent::__construct($id,$withoutDependentObjects);
+    $clientElementList = Parameter::getGlobalParameter('ClientElementList');
+    if(!$clientElementList or $clientElementList == 'false'){
+    	self::$_fieldsAttributes['_sec_Quotation']='hidden';
+    	self::$_fieldsAttributes['_sec_Command']='hidden';
+    	self::$_fieldsAttributes['_sec_Bill']='hidden';
+    }
   }
 
   
@@ -264,7 +270,7 @@ class PaymentMain extends SqlElement {
   	global $print, $comboDetail, $nbColMax;
   	$result = "";
   	if ($item=='Quotation' or $item=="Command" or $item=="Bill"){
-  		$result .= drawClientTabList($item);
+  		$result .= drawClientElementList($item);
   	}
   	return $result;
   }
