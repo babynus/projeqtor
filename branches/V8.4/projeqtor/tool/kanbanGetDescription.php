@@ -27,13 +27,15 @@ require_once "../tool/projeqtor.php";
 $id = RequestHandler::getId('id');
 $type = RequestHandler::getClass('Type');
 $field = RequestHandler::getValue('field');
+$width = RequestHandler::getValue('width');
+if (!$width) $width=350;
 
 $KabanClass=new $type($id);
 $result = $KabanClass->$field;
 
 $kanbanFullWidthElement = Parameter::getUserParameter ( "kanbanFullWidthElement" );
 if ($kanbanFullWidthElement == "on") {
-  echo $result;
+  echo str_replace('<img ','<img style="width:'.($width-18).'px;" ',$result);
 } else {
   $text = new Html2Text ($result);
   $descr = nl2br($text->getText ());

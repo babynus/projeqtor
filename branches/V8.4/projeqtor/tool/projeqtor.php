@@ -2547,6 +2547,9 @@ function sendMail_mail($to, $title, $message, $object=null, $headers=null, $send
     $headers.='Reply-To: '.(($sender)?$sender:$paramMailReplyTo).$eol;
     $headers.='Content-Transfer-Encoding: 8bit'.$eol;
     $headers.='X-Mailer: PHP/'.phpversion().$eol;
+  } else {
+    debugLog($headers);
+    //$phpmailer->ContentType = 'text/calendar; charset="utf-8"; method="REQUEST"';
   }
   if ($references) {
     $headers.='References: <'.$references.'.'.$paramMailSender.'>'.$eol;
