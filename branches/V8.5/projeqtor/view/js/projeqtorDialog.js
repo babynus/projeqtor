@@ -11279,7 +11279,7 @@ function removeContact(idFldVal){
   actionOK=function() {
     loadContent("../tool/removeContact.php?"+parm, "resultDivMain",null,true,"contact"+dojo.byId('objectClass'));
   };
-  msg=i18n('confirmDelete', new Array(i18n('Contact'),idFldVal));
+  msg=i18n('confirmDissociate', new Array(i18n('Contact'),idFldVal));
   showConfirm(msg, actionOK);
 }
 //End
