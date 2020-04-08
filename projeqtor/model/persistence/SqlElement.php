@@ -4010,10 +4010,12 @@ abstract class SqlElement {
           $colScript .= '   refreshList("idUser","idProject", this.value);';
         }
       }
-      if ($colName == 'idStatus' or $colName == 'id' . get_class ( $this ) . 'Type' or substr ( $colName, - 12 ) == 'PlanningMode') {
+      $typeName='id' . get_class ( $this ) . 'Type';
+      if (get_class ( $this )) $typeName='idMeetingType';
+      if ($colName == 'idStatus' or $colName == $typeName or substr ( $colName, - 12 ) == 'PlanningMode') {
         $colScript .= '   getExtraRequiredFields();';
       }
-      if ($colName == 'id' . get_class ( $this ) . 'Type' or $colName == 'idStatus') {
+      if ($colName == $typeName or $colName == 'idStatus') {
         $colScript .= '   getExtraReadonlyFields("","","");';
 // MTY - LEAVE SYSTEM
         if (get_class($this)!="Leave") {
@@ -6740,6 +6742,7 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
     $testObj = $this;
     $testClass = $class;
     $typeFld = 'id' . $class . "Type";
+    if ($class=='PeriodicMeeting') $typeFld='idMeetingType';
     if (SqlElement::is_a ( $this, 'PlanningElement' )) {
       if ($this->refType) {
         $testClass = $this->refType;
