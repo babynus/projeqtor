@@ -1177,10 +1177,9 @@ static function isTheLeaveProject($id=null) {
                   if (isLeavesSystemActiv()) {
                       $isLvePrjt = self::isTheLeaveProject($proj->id);
                       if ($isLvePrjt and $withLeaveProject==false) {continue;}
-                      if (self::isTheLeaveProject($proj->id) && !self::isProjectLeaveVisible()) {continue;}
+                      //if (self::isTheLeaveProject($proj->id) && !self::isProjectLeaveVisible()) {continue;}
                   }  
   // MTY - LEAVE SYSTEM
-            
         	$arrayProj[$proj->id]=$proj->id;
         }
     	}

@@ -76,16 +76,16 @@ class ActivityMain extends SqlElement {
   public $_Dependency_Predecessor = array();
   public $_sec_successor;
   public $_Dependency_Successor = array();
-  public $_sec_Link;
-  public $_Link = array();
   public $_sec_subActivity;
   public $_spe_activity;
+  // MTY - LEAVE SYSTEM
+  public $_spe_isLeaveMngActivity;
+  // MTY - LEAVE SYSTEM
+  public $_sec_Link;
+  public $_Link = array();
   public $_Attachment = array();
   public $_Note = array();
   public $_nbColMax = 3;
-// MTY - LEAVE SYSTEM  
-  public $_spe_isLeaveMngActivity;
-// MTY - LEAVE SYSTEM
   
   // Define the layout that will be used for lists
   private static $_layout = '
@@ -123,7 +123,8 @@ class ActivityMain extends SqlElement {
       "idle" => "nobr", 
       "idleDate" => "nobr", 
       "cancelled" => "nobr",
-      "isPlanningActivity" => "title"
+      "isPlanningActivity" => "title",
+      "_spe_isLeaveMngActivity" => "hidden"
   );
   private static $_colCaptionTransposition = array(
       'idUser' => 'issuer', 
