@@ -80,28 +80,32 @@ $order="";
 if ($paramVersion) {
   $lstVersion=array($paramVersion=>SqlList::getNameFromId('Version',$paramVersion));
 } else {
-	if ($paramProject) {
-		$lstVersion=array();
-		$vp=new VersionProject();
+  $lstVersion=array();
+  $vp=new VersionProject();
+	if (trim($paramProject)) {
 		$tmpList=$vp->getSqlElementsFromCriteria(null,false,"idProject in " .  getVisibleProjectsList(false, $paramProject));
-		foreach ($tmpList as $vp) {
-			$vers=new Version($vp->idVersion);
-			if (! $vers->idle) {
-				$lstVersion[$vp->idVersion]=$vers->name;
-			}
-		}
-		if (! $paramDoneVersion) {
-		  $lstVersionNotDone=SqlList::getListWithCrit('Version',array('isEis'=>'0'),'name',null,true);
-		  $lstVersion=array_intersect($lstVersion,$lstVersionNotDone);
-		}
 	} else {
-  	if ($paramDoneVersion) {
-  	  $lstVersion=SqlList::getList('Version','name',null,true);
-    } else {
-      $lstVersion=SqlList::getListWithCrit('Version',array('isEis'=>'0'),'name',null,true);
-    }
-  
+	  $user=getSessionUser();
+	  $tmpList=$vp->getSqlElementsFromCriteria(null,false,"idProject in " . transformListIntoInClause($user->getVisibleProjects()));
+	} 
+	foreach ($tmpList as $vp) {
+		$vers=new Version($vp->idVersion);
+		if (! $vers->idle) {
+			$lstVersion[$vp->idVersion]=$vers->name;
+		}
 	}
+	if (! $paramDoneVersion) {
+	  $lstVersionNotDone=SqlList::getListWithCrit('Version',array('isEis'=>'0'),'name',null,true);
+	  $lstVersion=array_intersect($lstVersion,$lstVersionNotDone);
+	}
+// 	} else {
+//   	if ($paramDoneVersion) {
+//   	  $lstVersion=SqlList::getList('Version','name',null,true);
+//     } else {
+//       $lstVersion=SqlList::getListWithCrit('Version',array('isEis'=>'0'),'name',null,true);
+//     }
+  
+// 	}
   $lstVersion[0]='<i>'.i18n('undefinedValue').'</i>';
 }
 asort($lstVersion);
@@ -168,6 +172,7 @@ foreach ($lstVersion as $versId=>$versName) {
 	  if ($paramProject) {
 	    $crit.=" and ".$obj->getDatabaseColumnName('idProject')."=$paramProject";
 	  }
+	  $crit.=" and ".getAccesRestrictionClause(get_class($obj),false);
     $lst=$obj->getSqlElementsFromCriteria(null,null,$crit);
     $type='id'.get_class($obj).'Type';
     foreach ($lst as $item) {
