@@ -538,7 +538,7 @@ function kanbanShowDescr(field,type,id){
     return;
   }
   dojo.byId('descr_'+id).value = "full";
-  url= '../tool/kanbanGetDescription.php?dataType=defaultPriority&Type=' +type + "&id=" +id + "&field=" + field ;
+  url= '../tool/kanbanGetDescription.php?dataType=defaultPriority&Type=' +type + "&id=" +id + "&field=" + field+"&width="+dojo.byId('objectDescr'+id).offsetWidth ;
     dojo.xhrGet({
 	url: url,
 	handleAs : "text",

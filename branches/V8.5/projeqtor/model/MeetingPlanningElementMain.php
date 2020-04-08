@@ -36,7 +36,7 @@ class MeetingPlanningElementMain extends PlanningElement {
   public $refId;
   public $refName;
 
-  public $_tab_4_2=array('validated','assigned', 'real', 'left', 'work','cost');
+  public $_tab_4_2_smallLabel=array('validated','assigned', 'real', 'left', 'work','cost');
   public $validatedWork;
   public $assignedWork;
   public $realWork;
