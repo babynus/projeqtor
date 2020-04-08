@@ -113,6 +113,7 @@ function liveMeetingSave(noHistory){
   var allwhoSpeak='';
   var allOrganizator='';
   var allCanSpeak='';
+  var showCounters='false';
   require(["dojo/date/locale","dojo/domReady!"], function(dateLocale) {
     for(var i in allTime){
       if(allwhoSpeak!='')allwhoSpeak+='|'+i;
@@ -141,12 +142,16 @@ function liveMeetingSave(noHistory){
       if(nDate=='')nDate=splitDateF;
     }
   });
+  if(dojo.byId("hideCounters").checked==true){
+    showCounters='true';
+  }
   if(typeof CKEDITOR.instances.liveMeetingResult != 'undefined')CKEDITOR.instances.liveMeetingResult.updateElement();
   dojo.xhrPost({
     url : "../tool/liveMeetingUpdate.php?timeForSpeaker="+nDate+"&color="+allColor
     +"&idSpeaker="+allwhoSpeak+"&allOrganizator="+allOrganizator+"&allCanSpeak="+allCanSpeak+"&idLiveMeeting="+dojo.byId("liveMeetingId").value+"&noHistory="+(noHistory ? 1 : 0),
     form : "liveMeetingForm"
   });
+  saveUserParameter("hideCounters",showCounters);
   formChangeInProgress=false;
   liveMeetingButtonSaveChange();
 }
@@ -293,7 +298,11 @@ function liveMeetingResizeEditor(loopCount) {
   if (editorType=="CK") { // CKeditor type
     var editor = CKEDITOR.instances['liveMeetingResult'];
     if (editor.status=='ready') {
-      valueHeight-=130;
+      if(dijit.byId('hideCounters').get('checked')==true){
+        valueHeight-=29;
+      }else{
+        valueHeight-=130;
+      }
       editor.resize('100%',valueHeight,false,false);
     } else {
       if (!loopCount) loopCount=0;
@@ -626,8 +635,12 @@ function liveMeetingTitleNext(idN){
 function hideCounters(){
   if(dijit.byId('hideCounters').get('checked')==true){
     dojo.byId('tabeTimeEditor').style.display='none';
+    if(dijit.byId('playPauseButton').get('iconClass') != 'iconLiveMeetingPlay22'){
+      liveMeetingGoPlay();
+    }
   }else{
     dojo.byId('tabeTimeEditor').style.display='block';
   }
+  liveMeetingResizeEditor();
 }
 
