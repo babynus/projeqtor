@@ -7127,7 +7127,7 @@ function drawProjectSituation($type, $obj){
 	echo '</table>';
 }
 
-function drawClientTabList($item, $object){
+function drawClientElementList($item, $object){
   echo '<table width="99.9%">';
   echo '<tr>';
   echo '<td class="noteHeader" style="width:30%">' . i18n('colName') . '</td>';
@@ -7157,16 +7157,25 @@ function drawClientTabList($item, $object){
     $totalUntaxedAmount += $obj->untaxedAmount;
     $totalFullAmount += $obj->fullAmount;
   }
-  if(count($itemList)>0){
-    echo '<tr>';
-    echo '<td class="noteHeader">' . i18n('sum') . '</td>';
-    echo '<td class="noteData" style="text-align:left;"></td>';
-    echo '<td class="noteData" style="text-align:left;">' .htmlDisplayCurrency($totalUntaxedAmount) . '</td>';
-    echo '<td class="noteData" style="text-align:left;">' . htmlDisplayCurrency($totalFullAmount) . '</td>';
-    echo '<td class="noteData" style="text-align:left;"></td>';
-    echo '</tr>';
-  }
   echo '</table>';
+  if(count($itemList)>0){
+    echo '<table width="99.9%">';
+  	echo '<tr>';
+  	echo '<td class="noteHeader" style="width:30%;border:0px;"></td>';
+  echo '<td class="noteHeader" style="width:15%;border:0px;"></td>';
+  echo '<td class="noteHeader" style="width:20%;border:0px;">' . i18n('sum') . '</td>';
+  echo '<td class="noteHeader" style="width:20%;border:0px;"></td>';
+  echo '<td class="noteHeader" style="width:15%;border:0px;"></td>';
+  	echo '</tr>';
+  	echo '<tr>';
+  	echo '<td class="noteData"></td>';
+  	echo '<td class="noteData"></td>';
+  	echo '<td class="noteData" style="text-align:left;">' .htmlDisplayCurrency($totalUntaxedAmount) . '</td>';
+  	echo '<td class="noteData" style="text-align:left;">' . htmlDisplayCurrency($totalFullAmount) . '</td>';
+  	echo '<td class="noteData" style="text-align:left;"></td>';
+  	echo '</tr>';
+  	echo '</table>';
+  }
 }
 
 // gautier #ProviderTerm
