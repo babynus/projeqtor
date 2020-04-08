@@ -65,6 +65,12 @@ class SituationMain extends SqlElement {
   	return parent::save();
   }
   
+  function delete() {
+    $res=parent::delete();
+    ProjectSituation::updateProjectSituation($this, $this);
+    return $res;
+  }
+  
   /** ============================================================================
    * Return the specific colCaptionTransposition
    * @return the colCaptionTransposition

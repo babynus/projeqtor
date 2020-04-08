@@ -174,14 +174,14 @@ abstract class SqlElement {
       "Bill" => array(
           "BillLine" => "confirm", 
           "Note" => "cascade",
-          "situation"=> "cascade"), 
+          "Situation"=> "cascade"), 
       "BillType" => array(
           "Bill" => "controlStrict"), 
       "Brand" => array("Asset" => "controlStrict","Model" => "controlStrict"),
       "CallForTender" => array(
           "Tender" => "controlStrict", 
           "TenderEvaluationCriteria" => "cascade",
-          "situation"=> "cascade"), 
+          "Situation"=> "cascade"), 
       "CallForTenderType" => array(
           "CallForTender" => "controlStrict"), 
       "CalendarDefinition" => array(
@@ -198,7 +198,7 @@ abstract class SqlElement {
           "Attachment" => "cascade", 
           "Link" => "cascade", 
           "Note" => "cascade",
-          "situation"=> "cascade"), 
+          "Situation"=> "cascade"), 
       "CommandType" => array(
           "Command" => "controlStrict"), 
       "Component" => array(
@@ -375,18 +375,21 @@ abstract class SqlElement {
       		"TicketDelayPerProject" => "cascade",
           "VersionProject" => "cascade", 
           "Work" => "controlStrict"), 
-      "Provider" => array("ProjectExpense" => "controlStrict", "Tender" => "ControlStrict","situation"=> "cascade"), 
+      "Provider" => array(
+          "ProjectExpense" => "controlStrict", 
+          "Tender" => "ControlStrict",
+          "Situation"=> "cascade"), 
       "ProviderBill" => array("BillLine" => "cascade",
                               "ProviderTerm"=>"controlStrict",
-                              "situation"=> "cascade"),
+                              "Situation"=> "cascade"),
       "ProviderOrder" => array("BillLine" => "cascade",
                                "ProviderTerm"=>"controlStrict",
-                               "situation"=> "cascade"),
+                               "Situation"=> "cascade"),
       "ProviderTerm" => array("BillLine" => "cascade"),
       "Quality" => array("Project" => "controlStrict"), 
       "Question" => array("Link" => "cascade"), 
       "QuestionType" => array("Question" => "controlStrict"), 
-      "Quotation" => array("Attachment" => "cascade", "Link" => "cascade", "Note" => "cascade", "situation"=> "cascade"), 
+      "Quotation" => array("Attachment" => "cascade", "Link" => "cascade", "Note" => "cascade", "Situation"=> "cascade"), 
       "QuotationType" => array("Quotation" => "controlStrict"), 
       "Recipient" => array("Bill" => "control", "Project" => "controlStrict"), 
       "RequirementType" => array("Requirement" => "controlStrict"), 
@@ -451,7 +454,9 @@ abstract class SqlElement {
           "Ticket" => "controlStrict", 
           "WorkflowStatus" => "cascade"), 
       "Team" => array("Resource" => "control"), 
-      "Tender" => array("TenderEvaluation" => "cascade", "situation"=> "cascade"), 
+      "Tender" => array(
+          "TenderEvaluation" => "cascade", 
+          "Situation"=> "cascade"), 
       "TenderStatus" => array("Tender" => "control"), 
       "TenderType" => array("Tender" => "control"), 
       "Term" => array("Dependency" => "cascade"), 
