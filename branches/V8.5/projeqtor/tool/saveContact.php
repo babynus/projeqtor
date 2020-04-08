@@ -85,7 +85,7 @@ foreach ($selectId as $idCont){
   displayLastOperationStatus($result);
 }
 if($name!=''){
-  throwError('contact #'.$name.' allready link to '.$res->name);
+  echo '<div class="messageINVALID" >ERROR : contact #'.$name.' allready link to '.$res->name.'</div>';
 }
 
 ?>
