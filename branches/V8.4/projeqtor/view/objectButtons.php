@@ -329,6 +329,7 @@
 		      action=function(){
 		        loadContent("../tool/deleteObject.php", "resultDivMain", 'objectForm', true);
             if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
+            if(dojo.byId('HierarchicalBudget'))refreshHierarchicalBudgetList();
           };
           var alsoDelete="";
           showConfirm(i18n("confirmDelete", new Array("<?php echo i18n($_REQUEST['objectClass']);?>",dojo.byId('id').value))+alsoDelete ,action);
