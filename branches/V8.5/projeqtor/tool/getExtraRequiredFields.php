@@ -47,6 +47,7 @@ $obj=new $objectClass($objectId);
 
 $type=null;
 $typeName='id'.$objectClass.'Type';
+if ($objectClass=='PeriodicMeeting') $typeName='idMeetingType';
 if (isset($_REQUEST[$typeName])) {
 	$type=$_REQUEST[$typeName]; // Note: validated as numeric in base SqlElement constructor
 }
