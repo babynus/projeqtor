@@ -62,7 +62,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
 			$descr2 = substr ( $descr, 0, 200 );
 			$ticketDescr2 = nl2brForPlainText ( $descr2 );
 	  } else {
-	    	    $ticketDescr=str_replace('<img ','<img style="width:'.($ticketWidth-10).'px;" ',$description);
+	    	    $ticketDescr=str_replace('<img ','<img style="max-width:'.($ticketWidth-10).'px;" ',$description);
 	    $descr2 = substr ( $descr, 0, 200);
 	    $ticketDescr2 = nl2brForPlainText ( $descr2 );
 	  }
