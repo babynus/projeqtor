@@ -487,6 +487,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
     $obj->id=null;
   }
   $type=$classObj.'Type';
+  if ($classObj=="PeriodicMeeting") $type="MeetingType";
   $idType='id'.$type;
   $objType=null;
   $defaultProject=null;
