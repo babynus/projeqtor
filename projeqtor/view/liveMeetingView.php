@@ -191,6 +191,7 @@ function timeToTimeStamp($time){
     return $time;
   }
 }
+$hidecouters=(Parameter::getUserParameter('hideCounters')!='')?Parameter::getUserParameter('hideCounters'):'false';
 ?>
 <div class="container statusBar" style="color: #000;"
 	dojoType="dijit.layout.BorderContainer">
@@ -203,7 +204,7 @@ function timeToTimeStamp($time){
 				<td width="50px" align="middle"><?php echo formatIcon('Meeting', 32,null,true)?></td>
 				<td ><span class="title"><?php echo i18n("Meeting").' : '.$meeting->name;?></span></td>
 				<td style="width:80px;"><label for='hideCounters' style="margin-top:3px;margin-right:5px;text-shadow:none;"><?php echo i18n('hideCounters');?></label></td>
-				<td style="width:30px;"><div id="hideCounters" name="hideCounters" dojoType="dijit.form.CheckBox" type="checkbox"  onclick="hideCounters();" style="margin-top:7px;" ></div></td>
+				<td style="width:30px;"><div id="hideCounters" name="hideCounters" dojoType="dijit.form.CheckBox" type="checkbox"  onclick="hideCounters();" style="margin-top:7px;" <?php echo ($hidecouters=='true')?'checked':'';?>></div></td>
 				<td style="width:157px;position:relative;text-align:left">
 						<div style="position:absolute;width:78px; height:24px;background-color: #DDD; padding: 2px 5px; top:6px;border-radius: 5px;margin-right: 20px;">
 								<button iconClass="iconLiveMeetingPlay22" class="detailButton" style="position:absolute;top:-1px;"
@@ -289,20 +290,23 @@ function timeToTimeStamp($time){
 				onchange="if(dijit.byId(this.id).get('value')!=-1 && dijit.byId(this.id).get('value')!='')loadContent('../view/liveMeetingViewBottom.php?idMeeting=<?php echo $meeting->id;?>&typeObj=Question&idObj='+this.value, 'divBottom');dijit.byId(this.id).set('value',-1);">
 		  <div class="statusBar"
 				style="background-image:none !important;color: #000; height: 100%; width: 100%; min-width: 970px; margin: 0 auto; margin-top: 10px;">
-				<table id="tabeTimeEditor" width="100%"  style="position:relative;">
+				<table id="tabeTimeEditor" width="100%"  style="position:relative;display:<?php echo ($hidecouters!='true')?'block':'none'; ?>;">
 					<tr>
 						<td width="95%" style="min-width: 891px;height:100%;">
                           <?php
                           if(count ( $meeting->_Assignment )!=0)generateSpeakTimeEditor ( $param );
-                          $topHeight=Parameter::getUserParameter('contentPaneTopLiveMeeting');
-                          $topHeight=($topHeight)?$topHeight:'300';
-                    	  $editorType=getEditorType();
-                    	  if ($editorType=='CKInline') $editorType='CK';
                           ?>
                           </td>
 						<td width="5%" style="min-width: 67px; vertical-align: top;">
 					</tr>
 				</table>
+				<?php 
+				$topHeight=Parameter::getUserParameter('contentPaneTopLiveMeeting');
+				$topHeight=($topHeight)?$topHeight:'300';
+				$editorType=getEditorType();
+				if ($editorType=='CKInline') $editorType='CK';
+				
+				?>
 				<div style="width:100%; height:100%">
 					<input id="liveMeetingResultEditorType"
 						name="liveMeetingResultEditorType" type="hidden"
