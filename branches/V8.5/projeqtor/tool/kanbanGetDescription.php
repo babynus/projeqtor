@@ -35,7 +35,7 @@ $result = $KabanClass->$field;
 
 $kanbanFullWidthElement = Parameter::getUserParameter ( "kanbanFullWidthElement" );
 if ($kanbanFullWidthElement == "on") {
-  echo str_replace('<img ','<img style="width:'.($width-18).'px;" ',$result);
+  echo str_replace('<img ','<img style="max-width:'.($width-18).'px;" ',$result);
 } else {
   $text = new Html2Text ($result);
   $descr = nl2br($text->getText ());
