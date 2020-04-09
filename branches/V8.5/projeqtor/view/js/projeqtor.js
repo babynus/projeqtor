@@ -3166,6 +3166,9 @@ function drawGantt() {
       if (item.reftype=='Project' || item.reftype=='Fixed' || item.reftype=='Replan' || item.reftype=='Construction' || item.reftype=='ProductVersionhasChild' || item.reftype=='ComponentVersionhasChild' || item.reftype=='SupplierContracthasChild' || item.reftype=='ClientContracthasChild') pGroup=1;
      //END MODIF qCazelles - GANTT
       var pobjecttype='';
+      var pHealthStatus='';
+      var pQualityLevel='';
+      var pTrend='';
       var pExtRessource='';
       var pDurationContract='';
       if(dojo.byId('contractGantt') &&  item.reftype!='Milestone'){
@@ -3173,6 +3176,13 @@ function drawGantt() {
         pDurationContract=item.duration;
         pobjecttype=item.objecttype;
       }
+      if(dojo.byId('portfolio')){
+        pHealthStatus=item.health;
+        pQualityLevel=item.quality;
+        pTrend=item.trend;
+      }
+
+     
       // runScript : JavaScript to run when click on task (to display the
       // detail of the task)
       var runScript="";
@@ -3254,9 +3264,10 @@ function drawGantt() {
           pCaption, pClass, pScope, pRealEnd, pPlannedStart,
           item.validatedworkdisplay, item.assignedworkdisplay, item.realworkdisplay, item.leftworkdisplay, item.plannedworkdisplay,
           item.priority, item.planningmode, 
-          item.status, item.type, 
+          item.status,pHealthStatus,pQualityLevel,pTrend, item.type, 
           item.validatedcostdisplay, item.assignedcostdisplay, item.realcostdisplay, item.leftcostdisplay, item.plannedcostdisplay,
-          item.baseTopStart, item.baseTopEnd, item.baseBottomStart, item.baseBottomEnd, item.isoncriticalpath,pobjecttype,pExtRessource,pDurationContract));
+          item.baseTopStart, item.baseTopEnd, item.baseBottomStart, item.baseBottomEnd, 
+          item.isoncriticalpath,pobjecttype,pExtRessource,pDurationContract));
     }
     g.Draw();
     g.DrawDependencies();
