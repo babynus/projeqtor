@@ -238,6 +238,22 @@ function iconFormatter($value) {
   if (! $value) return "";
   return '<img src="icons/'.$value.'" />';
 }
+function formatIconThumb($value,$size,$float) {
+  //if (! $value) return "";
+  //return '<img src="icons/'.$value.'" />';
+  
+  $radius=round($size/2,0);
+//  $res='<img style="border: 1px solid #AAA;width:'.$size.'px;height:'.($size).'px;float:'.$float.';border-radius:'.$radius.'px"';
+  $res='<img style="border: 0;width:'.$size.'px;height:'.($size).'px;float:'.$float.';"';
+  $res.=' src="icons/'.$value.'" ';
+//   if (! $print and ($known or $alwaysDisplayBigImage)) {
+//     $res.=' onMouseOver="showBigImage(\'Affectable\',\''.$userId.'\',this,\''.$title.'\''.(($known)?",false":",true").',\''.$nocache.'\');" onMouseOut="hideBigImage();"';
+//   } else if (!$known and $userName) {
+//     $res.=' onMouseOver="showBigImage(\'Affectable\',\''.$userId.'\',this,\''.$title.'\',true,\''.$nocache.'\');" onMouseOut="hideBigImage();"';
+//   }
+  $res.='/>';
+  return $res;
+}
 
 function formatUserThumb($userId,$userName,$title,$size=22,$float='right',$alwaysDisplayBigImage=false,$idTicket=-1) {
 	global $print;

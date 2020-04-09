@@ -6731,7 +6731,7 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
   }
 
   public static function isIconableField($col) {
-    return ($col == 'idQuality' or $col == 'idHealth' or $col == 'idTrend') ? true : false;
+    return ($col == 'idQuality' or $col == 'idHealth' or $col == 'idTrend' or $col=='idAssetType') ? true : false;
   }
 
   public function getExtraRequiredFields($newType = "", $newStatus = "", $newPlanningMode = "", $profile = null) {

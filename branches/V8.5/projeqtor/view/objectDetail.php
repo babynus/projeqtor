@@ -1432,14 +1432,17 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             echo '<td class="label" style="position:relative;width:'.$labelStyleWidth.';">';
             $thumbRes=SqlElement::isThumbableField($col);
             $thumbColor=SqlElement::isColorableField($col);
+            $thumbIcon=SqlElement::isIconableField($col); 
             $formatedThumb='';
-            if ($thumbRes) {
+            if ($thumbIcon) {
+              $formatedThumb=formatIconThumb(SqlList::getFieldFromId(substr($col,2), $val, 'icon') , 22, 'right');
+            } else if ($thumbRes) {
               $formatedThumb=formatUserThumb($val, null, null, 22, 'right');
             } else if ($thumbColor) {
               $formatedThumb=formatColorThumb($col, $val, 20, 'right');
             }
-            // $thumbIcon=SqlElement::isIconableField($col);
-            $thumb=(!$print&&$val&&($thumbRes or $thumbColor)&&$showThumb&&$formatedThumb)?true:false;
+            debugLog("$col => $formatedThumb");
+            $thumb=(! $print && $val && ($thumbRes or $thumbColor or $thumbIcon) && $showThumb && $formatedThumb)?true:false;
             echo '<label for="'.$col.'" class="'.(($thumb)?'labelWithThumb ':'').'generalColClass '.$col.'Class" style="'.$specificStyle.';'.$labelStyle.'">';
             if ($outMode=='pdf') {
               echo str_replace(' ', '&nbsp;', htmlEncode($obj->getColCaption($col), 'stipAllTags'));
