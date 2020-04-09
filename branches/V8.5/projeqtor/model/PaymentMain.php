@@ -52,13 +52,6 @@ class PaymentMain extends SqlElement {
   public $billAmount;
   public $idle;
   
-  public $_sec_Quotation;
-  public $_spe_Quotation;
-  public $_sec_Bill;
-  public $_spe_Bill;
-  public $_sec_Command;
-  public $_spe_Command;
-  
   public $_Attachment=array();
   public $_Note=array();
   public $_nbColMax=3;
@@ -107,12 +100,6 @@ class PaymentMain extends SqlElement {
       $this->paymentDate=date('Y-m-d');
     }
     parent::__construct($id,$withoutDependentObjects);
-    $clientElementList = Parameter::getGlobalParameter('ClientElementList');
-    if(!$clientElementList or $clientElementList == 'false'){
-    	self::$_fieldsAttributes['_sec_Quotation']='hidden';
-    	self::$_fieldsAttributes['_sec_Command']='hidden';
-    	self::$_fieldsAttributes['_sec_Bill']='hidden';
-    }
   }
 
   
@@ -264,15 +251,6 @@ class PaymentMain extends SqlElement {
       $colScript .= '</script>';
     } 
     return $colScript;
-  }
-  
-  public function drawSpecificItem($item, $included=false) {
-  	global $print, $comboDetail, $nbColMax;
-  	$result = "";
-  	if ($item=='Quotation' or $item=="Command" or $item=="Bill"){
-  		$result .= drawClientElementList($item);
-  	}
-  	return $result;
   }
 }
 ?>
