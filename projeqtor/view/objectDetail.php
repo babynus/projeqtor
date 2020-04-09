@@ -7137,7 +7137,7 @@ function drawClientElementList($item, $object){
   echo '<td class="noteHeader" style="width:15%">' . i18n('colIdStatus') . '</td>';
   echo '</tr>';
   
-  $itemList = SqlList::getListWithCrit($item, array('idClient'=>$object->idClient), 'id',null, true);
+  $itemList = SqlList::getListWithCrit($item, array('idClient'=>$object->id), 'id',null, true);
   $totalUntaxedAmount = 0;
   $totalFullAmount = 0;
   foreach ($itemList as $id){

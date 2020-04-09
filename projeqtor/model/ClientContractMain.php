@@ -80,13 +80,6 @@ class ClientContractMain extends SqlElement {
   public $sundayAndOffDayPeriod;
   public $sundayAndOffDayPeriodEnd;
   
-  public $_sec_Quotation;
-  public $_spe_Quotation;
-  public $_sec_Bill;
-  public $_spe_Bill;
-  public $_sec_Command;
-  public $_spe_Command;
-  
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
@@ -152,12 +145,6 @@ class ClientContractMain extends SqlElement {
   	  $this->idUnitContract=2;
   	}
   	if ($withoutDependentObjects) return;
-  	$clientElementList = Parameter::getGlobalParameter('ClientElementList');
-  	if(!$clientElementList or $clientElementList == 'false'){
-  		self::$_fieldsAttributes['_sec_Quotation']='hidden';
-  		self::$_fieldsAttributes['_sec_Command']='hidden';
-  		self::$_fieldsAttributes['_sec_Bill']='hidden';
-  	}
   }
 
    /** ==========================================================================
@@ -301,15 +288,6 @@ class ClientContractMain extends SqlElement {
     
     $result=parent::save();
     return $result;
-  }
-  
-  public function drawSpecificItem($item, $included=false) {
-  	global $print, $comboDetail, $nbColMax;
-  	$result = "";
-  	if ($item=='Quotation' or $item=="Command" or $item=="Bill"){
-  		$result .= drawClientElementList($item);
-  	}
-  	return $result;
   }
   
   }
