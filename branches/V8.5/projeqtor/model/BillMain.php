@@ -73,13 +73,6 @@ class BillMain extends SqlElement {
   public $billingType; 
   public $_sec_situation;
   public $idSituation;
-  public $_spe_situation;
-  public $_sec_Quotation;
-  public $_spe_Quotation;
-  public $_sec_Bill;
-  public $_spe_Bill;
-  public $_sec_Command;
-  public $_spe_Command;
   
   //public $_sec_BillLine;
   public $_BillLine=array();
@@ -178,12 +171,6 @@ class BillMain extends SqlElement {
     if(trim(Module::isModuleActive('moduleSituation')) != 1){
       self::$_fieldsAttributes['_sec_situation']='hidden';
       self::$_fieldsAttributes['idSituation']='hidden';
-    }
-    $clientElementList = Parameter::getGlobalParameter('ClientElementList');
-    if(!$clientElementList or $clientElementList == 'false'){
-      self::$_fieldsAttributes['_sec_Quotation']='hidden';
-      self::$_fieldsAttributes['_sec_Command']='hidden';
-      self::$_fieldsAttributes['_sec_Bill']='hidden';
     }
   }
 
@@ -500,8 +487,6 @@ class BillMain extends SqlElement {
     }else if($item=='situation'){
       $situation = new Situation();
       $situation->drawSituationHistory($this);
-    }else if ($item=='Quotation' or $item=="Command" or $item=="Bill"){
-      $result .= drawClientElementList($item, $this);
     }
     return $result;
   }
