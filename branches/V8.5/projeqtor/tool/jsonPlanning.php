@@ -1,4 +1,5 @@
 <?PHP
+use PhpOffice\PhpSpreadsheet\Shared\Trend\Trend;
 /*** COPYRIGHT NOTICE *********************************************************
  *
  * Copyright 2009-2017 ProjeQtOr - Pascal BERNARD - support@projeqtor.org
@@ -217,7 +218,6 @@
     }
   	$queryWhere.=')';
   }
-  
   // Retreive baseline info
   $arrayBase=array();
   $arrayBase['top']=array();
@@ -278,7 +278,6 @@
     }
     ksort($arrayRestrictWbs);
   }
-  
   // constitute query and execute
   $queryWhere=($queryWhere=='')?' 1=1':$queryWhere;
   $query='SELECT ' . $querySelect
@@ -443,16 +442,37 @@
         $line["realcostdisplay"]=($line["realcost"]==$na)?$na:htmlDisplayCurrency($line["realcost"],true);
         $line["leftcostdisplay"]=($line["leftcost"]==$na)?$na:htmlDisplayCurrency($line["leftcost"],true);
         $line["plannedcostdisplay"]=($line["plannedcost"]==$na)?$na:htmlDisplayCurrency($line["plannedcost"],true);
-        if ($columnsDescription['IdStatus']['show']==1 or $columnsDescription['Type']['show']==1) {
-          if (isset($line["idstatus"]) and isset($line["idtype"]) and $line["idstatus"]) {
-            $line["status"]=SqlList::getNameFromId('Status',$line["idstatus"])."#split#".SqlList::getFieldFromId('Status',$line["idstatus"],'color');
-            $line["type"]=SqlList::getNameFromId('Type',$line["idtype"]);
-          } else {
-            $ref=$line['reftype'];
-            $type='id'.$ref.'Type';
-            $item=new $ref($line['refid'],true);
-            $line["status"]=(property_exists($item,'idStatus'))?SqlList::getNameFromId('Status',$item->idStatus)."#split#".SqlList::getFieldFromId('Status',$item->idStatus,'color'):null;
-            $line["type"]=(property_exists($item,$type))?SqlList::getNameFromId('Type',$item->$type):null;
+        if ($columnsDescription['IdStatus']['show']==1 or $columnsDescription['Type']['show']==1 or ($columnsDescription['IdHealthStatus']['show']==1 and $portfolio)
+              or ($columnsDescription['QualityLevel']['show']==1 and $portfolio ) or ($columnsDescription['IdTrend']['show']==1 and $portfolio) ) {
+          $ref=$line['reftype'];
+          $type='id'.$ref.'Type';
+          if($columnsDescription['IdStatus']['show']==1 or $columnsDescription['Type']['show']==1){
+            if (isset($line["idstatus"]) and isset($line["idtype"]) and $line["idstatus"]) {
+              $line["status"]=SqlList::getNameFromId('Status',$line["idstatus"])."#split#".SqlList::getFieldFromId('Status',$line["idstatus"],'color');
+              $line["type"]=SqlList::getNameFromId('Type',$line["idtype"]);
+            } else {
+              $item=new $ref($line['refid'],true);
+              $line["status"]=(property_exists($item,'idStatus'))?SqlList::getNameFromId('Status',$item->idStatus)."#split#".SqlList::getFieldFromId('Status',$item->idStatus,'color'):null;
+              $line["type"]=(property_exists($item,$type))?SqlList::getNameFromId('Type',$item->$type):null;
+            }
+          }
+          if($columnsDescription['IdHealthStatus']['show']==1 and $portfolio){
+            if(!isset($item)){
+              $item=new $ref($line['refid'],true);
+            }
+            $line["health"]=(property_exists($item,'idHealth'))?SqlList::getNameFromId('Health',$item->idHealth)."#split#".SqlList::getFieldFromId('Health',$item->idHealth,'color'):null;
+          }
+          if($columnsDescription['QualityLevel']['show']==1 and $portfolio ){
+            if(!isset($item)){
+              $item=new $ref($line['refid'],true);
+            }
+            $line["quality"]=(property_exists($item,'idQuality'))?SqlList::getNameFromId('Quality',$item->idQuality)."#split#".SqlList::getFieldFromId('Quality',$item->idQuality,'color'):null;
+          }
+           if($columnsDescription['IdTrend']['show']==1 and $portfolio ){
+            if(!isset($item)){
+              $item=new $ref($line['trend'],true);
+            }
+            $line["trend"]=(property_exists($item,'idTrend'))?SqlList::getNameFromId('Trend',$item->idTrend)."#split#".SqlList::getFieldFromId('Trend',$item->idTrend,'color'):null;
           }
         }
         $line["planningmode"]=SqlList::getNameFromId('PlanningMode',$line['idplanningmode']);
@@ -490,6 +510,11 @@
           if ($id=='id') {$idPe=$val;}
         }
         //add expanded status
+        if($portfolio){
+           echo',"idhealthstatus":"sdfs"';
+           echo',"qualitylevel":"fffffff"';
+           echo',"idtrend":"dsfdsfsdfds"';
+        }
         $refItem=$line['reftype'].'_'.$line['refid'];
         if (isset($collapsedList['Planning_'.$refItem])) {
         	echo ',"collapsed":"1"';
@@ -679,20 +704,62 @@
             $status = new Status($project->idStatus);
             $line['status'] = $status->name;
             $line['statuscolor'] = $status->color;
-        } else if ($columnsDescription['IdStatus']['show']==1 or $columnsDescription['Type']['show']==1) {
+            if($portfolio){
+              $health= new Health($project->idHealth);
+              $line['health'] = $health->name;
+              $quality= new Quality($project->idQuality);
+              $line['quality'] = $quality->name;
+              $trend= new Trend($project->idTrend);
+              $line['trend'] = $trend->name;
+            }
+        } else if ($columnsDescription['IdStatus']['show']==1 or $columnsDescription['Type']['show']==1 
+          or (($columnsDescription['IdHealthStatus']['show']==1 or $columnsDescription['QualityLevel']['show']==1 or $columnsDescription['IdTrend']['show']==1) and $portfolio)) {
           $ref=$line['reftype'];
           if ($ref=='PeriodicMeeting') $ref='Meeting';
           $type='id'.$ref.'Type';
           $item=new $ref($line['refid'],true);
-          $line["type"]=SqlList::getNameFromId('Type',$item->$type);
-          if (property_exists($item,"idStatus")) {
-            $status = new Status($item->idStatus);
-            $line['status'] = $status->name;
-            $line['statuscolor'] = $status->color;
-          } else {
-            $line['status'] = '';
-            $line['statuscolor'] = '';
+          if($columnsDescription['IdStatus']['show']==1 or $columnsDescription['Type']['show']==1 ){
+            $line["type"]=SqlList::getNameFromId('Type',$item->$type);
+            if (property_exists($item,"idStatus")) {
+              $status = new Status($item->idStatus);
+              $line['status'] = $status->name;
+              $line['statuscolor'] = $status->color;
+            } else {
+              $line['status'] = '';
+              $line['statuscolor'] = '';
+            }
           }
+          if($columnsDescription['IdHealthStatus']['show']==1 and $portfolio){
+            if (property_exists($item,"idHealth")) {
+              $health = new Health ($item->idHealth);
+              $line['health'] = $health->name;
+              $line['healthcolor'] = $health->color;
+            }else{
+              $line['health'] = '';
+              $line['healthcolor'] = '';
+            }
+          }
+          if($columnsDescription['QualityLevel']['show']==1 and $portfolio){
+            if (property_exists($item,"idQuality")) {
+              $quality = new Quality($item->idQuality);
+              $line['quality'] = $quality->name;
+              $line['qualitycolor'] = $quality->color;
+            }else{
+              $line['quality'] = '';
+              $line['qualitycolor'] = '';
+            }
+          }
+          if($columnsDescription['IdTrend']['show']==1 and $portfolio){
+            if (property_exists($item,"idHealth")) {
+              $trend = new Trend($item->idTrend);
+              $line['trend'] = $trend->name;
+              $line['trendcolor'] = $trend->color;
+            }else{
+              $line['trend'] = '';
+              $line['trendcolor'] = '';
+            }
+          }
+          
         }
         if ($line['reftype']!='Project' and $line['reftype']!='Fixed' and $line['reftype']!='Construction' and $line['reftype']!='Replan') { // 'Fixed' and 'Construction' are projects !!!!
           $arrayResource=array();
@@ -862,6 +929,9 @@
         if ($col=='PlannedCost') echo '  <TD class="reportTableHeader" style="width:30px">' . i18n('colPlannedCost') . '</TD>' ;
         if ($col=='Type') echo '  <TD class="reportTableHeader" style="width:30px">' . i18n('colType') . '</TD>' ;
         if ($col=='IdStatus') echo '  <TD class="reportTableHeader" style="width:30px">' . i18n('colIdStatus') . '</TD>' ;
+        if ($col=='IdHealthStatus') echo '  <TD class="reportTableHeader" style="width:30px">' . i18n('colIdHealthStatus') . '</TD>' ;
+        if ($col=='QualityLevel') echo '  <TD class="reportTableHeader" style="width:30px">' . i18n('colQualityLevel') . '</TD>' ;
+        if ($col=='IdTrend') echo '  <TD class="reportTableHeader" style="width:30px">' . i18n('colIdTrend') . '</TD>' ;
         if ($col=='Duration') echo '  <TD class="reportTableHeader" style="width:30px">' . i18n('colDuration') . '</TD>' ;
         if ($col=='Progress') echo '  <TD class="reportTableHeader" style="width:30px">'  . i18n('colPct') . '</TD>' ;
         if ($col=='StartDate') echo '  <TD class="reportTableHeader" style="width:50px">'  . i18n('colStart') . '</TD>' ;
@@ -922,7 +992,10 @@
           if ($col=='LeftCost') echo i18n('colLeftCost') . $currency . $csvSep ;
           if ($col=='PlannedCost') echo i18n('colPlannedCost') . $currency . $csvSep ;
           if ($col=='Type') echo i18n('colType') . $csvSep ;
-          if ($col=='IdStatus') echo i18n('colIdStatus') . $csvSep . i18n('colStatusColor') . $csvSep ;      
+          if ($col=='IdStatus') echo i18n('colIdStatus') . $csvSep . i18n('colStatusColor') . $csvSep ;
+          if ($col=='IdHealthStatus') echo i18n('colIdHealthStatus') . $csvSep . i18n('colHealthStatusColor') . $csvSep ;
+          if ($col=='QualityLevel') echo i18n('colQualityLevel') . $csvSep . i18n('colQualityLevelColor') . $csvSep ;
+          if ($col=='IdTrend') echo i18n('colIdTrend') . $csvSep . i18n('colTrendColor') . $csvSep ;
           if ($col=='Duration') echo i18n('colDuration') . ' ('.i18n('shortDay') . ')' . $csvSep ;
           if ($col=='Progress') echo i18n('colProgress'). ' (' .i18n('colPct') . ')' . $csvSep ;
           if ($col=='StartDate') echo i18n('colStart') . $csvSep ;
@@ -1037,6 +1110,9 @@
           if ($col=='PlannedCost') echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  costFormatter($line["plannedcost"])  . '</TD>' ;
           if ($col=='Type') echo '  <TD class="reportTableData" style="' . $compStyle . '" >' . ($line["type"])  . '</TD>' ;
           if ($col=='IdStatus') echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  ($line["status"])  . '</TD>' ;
+          if ($col=='IdHealthStatus') echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  ($line["health"])  . '</TD>' ;
+          if ($col=='IdQualityLevel') echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  ($line["quality"])  . '</TD>' ;
+          if ($col=='IdTrend') echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  ($line["trend"])  . '</TD>' ;
           if ($col=='Duration') echo '  <TD class="reportTableData" style="' . $compStyle . '" >' . $duration  . '</TD>' ;
           if ($col=='Progress') echo '  <TD class="reportTableData" style="' . $compStyle . '" >' . percentFormatter($progress) . '</TD>' ;
           if ($col=='StartDate') echo '  <TD class="reportTableData" style="' . $compStyle . '">'  . (($pStart)?dateFormatter($pStart):'-') . '</TD>' ;
@@ -1158,6 +1234,9 @@
             if ($col=='PlannedCost') echo formatNumericOutput($line["plannedcost"])  . $csvSep;
             if ($col=='Type') echo $line["type"]  . $csvSep;
             if ($col=='IdStatus') echo $line["status"]  . $csvSep . $line["statuscolor"]  . $csvSep;
+            if ($col=='IdHealthStatus') echo $line["health"]  . $csvSep . $line["healthcolor"]  . $csvSep;
+            if ($col=='QualityLevel') echo $line["quality"]  . $csvSep . $line["qualitycolor"]  . $csvSep;
+            if ($col=='IdTrend') echo $line["trend"]  . $csvSep . $line["trendcolor"]  . $csvSep;
             if ($col=='Duration') echo $durationNumeric . $csvSep;
             if ($col=='Progress') echo $progress . $csvSep;
             if ($col=='StartDate') echo (($pStart)?dateFormatter($pStart):'-'). $csvSep;
