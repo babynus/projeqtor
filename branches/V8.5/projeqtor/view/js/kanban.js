@@ -588,7 +588,7 @@ function saveNoteStreamKanban(event){
 	  };
 	//loadContent(page, destination, formName, isResultMessage, validationType, directAccess, silent, callBackFunction, noFading)
 	  loadContent("../tool/saveNoteStreamKanban.php", "activityStreamCenterKanban", "noteFormStreamKanban", false, null,null,null,callBack);
-	  loadContent("../view/kanbanView.php?idKanban="+idKanban, "divKanbanContainer");
+	  //loadDiv("../view/kanbanView.php", "itemRow1-Status");
 	  noteEditor.set("value",null);
 	  event.preventDefault();
   } 
