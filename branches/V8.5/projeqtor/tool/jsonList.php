@@ -453,6 +453,14 @@ if ($type == 'empty') {
           $list = array_merge_preserve_keys ( $list, SqlList::getListWithCrit ( $class, array($_REQUEST ['critField']=>$_REQUEST ['critValue'],$_REQUEST ['critField1']=>null), 'name', null, false ) );
         }
       }
+      if ($dataType=='idBrand' && $critField=='idAssetType') {
+        $brandsOfModels=SqlList::getListWithCrit('Model', array($critField=>$critValue),'idBrand');
+        foreach($list as $id=>$val) {
+          if (! in_array($id, $brandsOfModels) ) {
+            unset($list[$id]);
+          }
+        }
+      }
       if ($class=='Activity' or $class=='Ticket') {
       	foreach ($list as $idL=>$valL) {
       		$list[$idL]=SqlList::formatValWithId($idL,$valL);

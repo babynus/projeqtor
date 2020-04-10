@@ -168,35 +168,39 @@ class AssetMain extends SqlElement {
     if ($colName=="idBrand") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  var idBrand=dijit.byId("idBrand").get("value");';
+      $colScript .= '  var idModel=dijit.byId("idModel").get("value");';
       $colScript .= '  if(idBrand == " "){';
-      $colScript .= '   refreshList("idModel","idAssetType", dijit.byId("idAssetType").get("value"), null, null, false);';
+      $colScript .= '   refreshList("idModel","idAssetType", dijit.byId("idAssetType").get("value"), idModel, null, false);';
       $colScript .= '  }else{';
-      $colScript .= '   var idModel=dijit.byId("idModel").get("value");';
-      $colScript .= '   if(idModel != " "){dijit.byId("idModel").set("value",null);}';
       $colScript .= '   if(dijit.byId("idAssetType").get("value")!= " "){';
-      $colScript .= '     refreshList("idModel","idBrand", this.value, null, null, false,"idAssetType",dijit.byId("idAssetType").get("value"));';
+      $colScript .= '     refreshList("idModel","idBrand", this.value, idModel, null, false,"idAssetType",dijit.byId("idAssetType").get("value"));';
       $colScript .= '   }else{';
-      $colScript .= '     refreshList("idModel","idBrand", this.value, null, null, false);';
+      $colScript .= '     refreshList("idModel","idBrand", this.value, idModel, null, false);';
       $colScript .= '   }';
       $colScript .= '  }';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
-    }elseif($colName=="idAssetType"){
+    } else if($colName=="idAssetType"){
       $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= ' var idBrand=dijit.byId("idBrand").get("value");';
+      $colScript .= ' var idModel=dijit.byId("idModel").get("value");';
+      $colScript .= ' refreshList("idBrand","idAssetType", this.value, idBrand, null, false);';
       $colScript .= ' if(dijit.byId("idBrand").get("value")!= " "){';
-      $colScript .= '  refreshList("idModel","idAssetType", this.value, null, null, false, "idBrand",dijit.byId("idBrand").get("value"));';
+      $colScript .= '  refreshList("idModel","idAssetType", this.value, idModel, null, false, "idBrand",dijit.byId("idBrand").get("value"));';
       $colScript .= ' }else{';
-      $colScript .= '  refreshList("idModel","idAssetType", this.value, null, null, false);';
+      $colScript .= '  refreshList("idModel","idAssetType", this.value, idModel, null, false);';
       $colScript .= ' }';
       $colScript .= ' formChanged();';
       $colScript .= '</script>';
-    }elseif($colName=="idModel"){
+    } else if($colName=="idModel"){
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= ' if(dijit.byId("idBrand").get("value")!= " "){';
-      $colScript .= '  refreshList("idModel","idAssetType", dijit.byId("idAssetType").get("value"), null, null, false, "idBrand",dijit.byId("idBrand").get("value"));';
-      $colScript .= ' }else{';
-      $colScript .= '  refreshList("idModel","idAssetType", dijit.byId("idAssetType").get("value"), null, null, false);';
-      $colScript .= ' }';
+      $colScript .= ' if(dijit.byId("idBrand").get("value")== " " && this.value){';
+      $colScript .= '    dojo.xhrGet({';
+      $colScript .= '      url: "../tool/getSingleData.php?dataType=brandOfModel&idModel=" + this.value,';
+      $colScript .= '      handleAs: "text",';
+      $colScript .= '      load: function (data) {dijit.byId("idBrand").set("value",data);}';
+      $colScript .= '    });';
+      $colScript .= '  };';
       $colScript .= ' formChanged();';
       $colScript .= '</script>';
     }
