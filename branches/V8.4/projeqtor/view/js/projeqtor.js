@@ -4563,7 +4563,7 @@ function newObject() {
 
 function saveObject() {
   var param=false;
-  if(dojo.byId('resourcePlanningAssignment')){
+  if(dojo.byId('resourcePlanningAssignment') && dojo.byId('resourcePlanningAssignment').value!='false'){
     param=dojo.byId('resourcePlanningAssignment').value;
   }
   if(dojo.byId('buttonDivCreationInfo')!=null){
@@ -4580,7 +4580,7 @@ function saveObject() {
   }
   if (dojo.byId("saveButton")) dojo.byId("saveButton").blur();
   else if (dojo.byId("comboSaveButton")) dojo.byId("comboSaveButton").blur();
-  if(param != null && dojo.byId('resourcePlanning')){
+  if(param && dojo.byId('resourcePlanning')){
     submitForm("../tool/saveObject.php?selectedResource="+param, "resultDivMain", "objectForm", true);
   }else{
     submitForm("../tool/saveObject.php", "resultDivMain", "objectForm", true);
