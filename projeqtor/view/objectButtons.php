@@ -41,12 +41,6 @@
   if (array_key_exists('objectId',$_REQUEST)) {
   	$id=$_REQUEST['objectId'];
   }
-  $currentScreen=getSessionValue("currentScreen");
-  if($currentScreen == 'HierarchicalBudget'){
-    $validationType = 'HierarchicalBudget';
-  }else{
-    $validationType = null;
-  }
   $obj=new $class($id);
   $objectIsClosed=(isset($obj) and property_exists($obj, 'idle') and $obj->idle)?true:false;
   if (isset($_REQUEST['noselect'])) {
@@ -333,7 +327,7 @@
           hideResultDivs();
           hideExtraButtons('extraButtonsDetail');
 		      action=function(){
-		        loadContent("../tool/deleteObject.php", "resultDivMain", 'objectForm', true, '<?php echo $validationType; ?>');
+		        loadContent("../tool/deleteObject.php", "resultDivMain", 'objectForm', true);
             if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
           };
           var alsoDelete="";
