@@ -40,7 +40,13 @@
   Security::checkValidClass($class);
   if (array_key_exists('objectId',$_REQUEST)) {
   	$id=$_REQUEST['objectId'];
-  }	
+  }
+  $currentScreen=getSessionValue("currentScreen");
+  if($currentScreen == 'HierarchicalBudget'){
+    $validationType = 'HierarchicalBudget';
+  }else{
+    $validationType = null;
+  }
   $obj=new $class($id);
   $objectIsClosed=(isset($obj) and property_exists($obj, 'idle') and $obj->idle)?true:false;
   if (isset($_REQUEST['noselect'])) {
@@ -327,9 +333,8 @@
           hideResultDivs();
           hideExtraButtons('extraButtonsDetail');
 		      action=function(){
-		        loadContent("../tool/deleteObject.php", "resultDivMain", 'objectForm', true);
+		        loadContent("../tool/deleteObject.php", "resultDivMain", 'objectForm', true, '<?php echo $validationType; ?>');
             if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
-            if(dojo.byId('HierarchicalBudget'))refreshHierarchicalBudgetList();
           };
           var alsoDelete="";
           showConfirm(i18n("confirmDelete", new Array("<?php echo i18n($_REQUEST['objectClass']);?>",dojo.byId('id').value))+alsoDelete ,action);
