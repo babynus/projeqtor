@@ -254,7 +254,18 @@ class ClientContractMain extends SqlElement {
 			$colScript .= '  refreshList("idContact", "idClient", this.value, null, null, false);';
 			$colScript .= '  formChanged();';
 			$colScript .= '</script>';
-	}
+	  } else if ($colName=="idContact") {   
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  if (this.value && ! dijit.byId("phoneNumber").get("value")) {';
+      $colScript .= '    dojo.xhrGet({';
+      $colScript .= '      url: "../tool/getSingleData.php?dataType=contactPhone&idContact=" + this.value,';
+      $colScript .= '      handleAs: "text",';
+      $colScript .= '      load: function (data) {dijit.byId("phoneNumber").set("value",data);}';
+      $colScript .= '    });';
+      $colScript .= '  };';
+      $colScript .= '  formChanged();';
+      $colScript .= '</script>';
+    }
     return $colScript;
   }
   

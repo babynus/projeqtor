@@ -167,6 +167,15 @@
         $fullAmount = $term->fullAmount;
         echo $fullAmount;
       }
+    } else if ($type=='contactPhone') { 
+        $idContact=RequestHandler::getId('idContact');
+        if (!$idContact) return;
+        $contact=new Contact($idContact);
+        echo ($contact->phone)?$contact->phone:$contact->mobile;
+    } else if ($type=='brandOfModel') {
+        $idModel=RequestHandler::getId('idModel');
+        $model=new Model($idModel);
+        echo $model->idBrand;
     } else {
       debugTraceLog("Unknown type '$type'");          
       echo '';
