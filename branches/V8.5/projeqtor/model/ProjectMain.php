@@ -163,9 +163,7 @@ class ProjectMain extends SqlElement {
                                   "fixPerimeter"=>"nobr",
                                   "isUnderConstruction"=>"nobr",
                                   "excludeFromGlobalPlanning"=>"nobr",
-  		                            // ELIOTT - LEAVE SYSTEM
   		                            "isLeaveMngProject"=>"hidden"
-  		                            // ELIOTT - LEAVE SYSTEM
   );   
  
   private static $_colCaptionTransposition = array('idResource'=>'manager',
