@@ -1945,6 +1945,7 @@ errorLeastOneObjectAndOnlyOneInWhere: "A least one object and only one in the WH
 errorLeaveEarnedOverlap: "overlap start date and end date between the leaves earned rights",
 errorLeftQSuperiorToQuantity: "left quantity is superior to quantity",
 errorLeftQuantityOrQuantityNotModuloOfZeroPointFive: "left quantity ou quantity is not a modulo of 0.5",
+errorLinkedContact: "Error contact ${1} already linked to ${2}",
 errorLoadContent: "Fout met loadContent('${1}'&#44; '${2}'&#44; '${3}'&#44; '${4}')<br/>Bestemming '${5}' is geen knooppunt of widget",
 errorLockedBill: "Rekening is vergrendeld",
 errorLvEarnedStartDateNotValidAnymore: "the start date of leaves earned rights is not valid any more",
