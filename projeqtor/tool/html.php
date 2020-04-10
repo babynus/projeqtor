@@ -653,7 +653,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
         if ($selection) {$restrictArray[$selection]="OK";}
       }
       // End List of type on the item, where item has project 
-    } else	if ($col=="idBrand" and property_exists($obj, 'idAssetType')) {
+    } else	if (get_class($obj)=='Asset' and $col=="idBrand" and property_exists($obj, 'idAssetType')) {
       if (!$obj->id) {
         $type = new Type();
         $firstTypeAsset = $type->getSqlElementsFromCriteria(array('scope'=>'Asset'),false,null,' sortOrder asc');
