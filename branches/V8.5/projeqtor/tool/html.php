@@ -653,7 +653,17 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
         if ($selection) {$restrictArray[$selection]="OK";}
       }
       // End List of type on the item, where item has project 
-    }
+    } else	if ($col=="idBrand" and property_exists($obj, 'idAssetType')) {
+      if (!$obj->id) {
+        $type = new Type();
+        $firstTypeAsset = $type->getSqlElementsFromCriteria(array('scope'=>'Asset'),false,null,' sortOrder asc');
+        $critType = $firstTypeAsset[0]->id;
+      } else {
+        $critType = $obj->idAssetType;
+      }
+      $brandsOfModels=SqlList::getListWithCrit('Model', array('idAssetType'=>$critType),'idBrand');
+      $restrictArray=array_flip($brandsOfModels);
+  	}
     // End of $obj set
   } else { 
     // $obj not set. For lists not on Object context (on most cases combos)
