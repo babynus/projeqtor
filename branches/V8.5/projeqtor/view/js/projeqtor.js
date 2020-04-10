@@ -1704,6 +1704,10 @@ function finalizeMessageDisplay(destination, validationType) {
                                   // never ending loop
         }
       }
+   // Refresh Hierarchical Budget list
+      if (dojo.byId("HierarchicalBudget")) {
+          refreshHierarchicalBudgetList();
+		}
       if (dojo.byId('id') && lastOperation && (lastOperation.value == "insert" || forceRefreshCreationInfo)) {
      // last operations depending on the executed operatoin (insert, delete, ...)
         if (lastSaveId) dojo.byId('id').value=lastSaveId.value;
@@ -1766,10 +1770,6 @@ function finalizeMessageDisplay(destination, validationType) {
             if (url!="") {
 // MTY - LEAVE SYSTEM    
             loadDiv(url, 'buttonDivCreationInfo',null, callback);
-	          if (dojo.byId("HierarchicalBudget")) {
-		          //loadContent("../view/refreshHierarchicalBudgetList.php", "hierarchicalListDiv", null, false);
-	            refreshHierarchicalBudgetList();
-          	}
           }
         }
         }

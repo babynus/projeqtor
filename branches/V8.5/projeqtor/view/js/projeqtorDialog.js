@@ -7158,9 +7158,6 @@ function copyObject(objectClass) {
   action=function() {
     unselectAllRows('objectGrid');
     loadContent("../tool/copyObject.php", "resultDivMain", 'objectForm', true);
-    if(dojo.byId('HierarchicalBudget')){
-    	refreshHierarchicalBudgetList();
-    }
   };
   showConfirm(i18n("confirmCopy", new Array(i18n(objectClass),
       dojo.byId('id').value)), action);
