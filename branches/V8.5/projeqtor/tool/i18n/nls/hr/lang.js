@@ -1945,6 +1945,7 @@ errorLeastOneObjectAndOnlyOneInWhere: "Najmanje jedan objekt i samo jedan u WHER
 errorLeaveEarnedOverlap: "oporavak početnih i završnih datuma između stečenih prava",
 errorLeftQSuperiorToQuantity: "ostatak je veći od količine",
 errorLeftQuantityOrQuantityNotModuloOfZeroPointFive: "ostatak ili količina nije modulo od 0&#445",
+errorLinkedContact: "Error contact ${1} already linked to ${2}",
 errorLoadContent: "Pogreška loadContent (&#34;${1}'&#44;' ${2}'&#44;' ${3}'&#44;' ${4}') <br/> meta&#34; ${5}' nije čvor&#44; a ne kontrola",
 errorLockedBill: "Blokirani račun",
 errorLvEarnedStartDateNotValidAnymore: "datum početka stečenog prava više nije valjan",
