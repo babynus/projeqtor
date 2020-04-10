@@ -7149,12 +7149,11 @@ function quickSearchExecute() {
  */
 function copyObject(objectClass) {
   dojo.byId("copyButton").blur();
+  var validationType = null;
+  if(dojo.byId('HierarchicalBudget'))validationType='HierarchicalBudget';
   action=function() {
     unselectAllRows('objectGrid');
-    loadContent("../tool/copyObject.php", "resultDivMain", 'objectForm', true);
-    if(dojo.byId('HierarchicalBudget')){
-    	refreshHierarchicalBudgetList();
-    }
+    loadContent("../tool/copyObject.php", "resultDivMain", 'objectForm', true, validationType);
   };
   showConfirm(i18n("confirmCopy", new Array(i18n(objectClass),
       dojo.byId('id').value)), action);
