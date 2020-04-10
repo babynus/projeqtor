@@ -1621,6 +1621,8 @@ function finalizeMessageDisplay(destination, validationType) {
         }
         dijit.byId('dialogDispatchWork').hide();
         hideWait();
+      } else if (validationType == 'HierarchicalBudget') {
+    	  refreshHierarchicalBudgetList();
       } else if (lastOperation != 'plan') {
         if (dijit.byId('detailFormDiv')) { // only refresh is detail is show
                                             // (possible when DndLing on
