@@ -402,9 +402,9 @@
                             
                             //to calculate the number of days already taken in this period and the total left
                             if($lve->quantity){
-                                echo '<td>'.$lve->quantity.'</td>';
-                                echo '<td>'.($lve->quantity - $lve->leftQuantity).'</td>';
-                                echo '<td>'.$lve->leftQuantity.'</td>';
+                                echo '<td>'.number_format($lve->quantity+0,1).'</td>';
+                                echo '<td>'.number_format($lve->quantity - $lve->leftQuantity, 1).'</td>';
+                                echo '<td>'.number_format($lve->leftQuantity+0, 1).'</td>';
                             } else {
                                 echo '<td> - </td>';
                                 echo '<td id="summaryTakenDays'.$lve->id.'"> - </td>';
