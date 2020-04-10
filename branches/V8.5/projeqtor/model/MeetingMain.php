@@ -500,10 +500,15 @@ class MeetingMain extends SqlElement {
     $vcal .= "METHOD:REQUEST\r\n";
     $vcal .= "BEGIN:VEVENT\r\n";
     $user=getSessionUser();
-    $vcal .= "ORGANIZER;CN=".(($user->resourceName)?$user->resourceName:$user->name);
+    
     //$vcal .= ';SENT-BY="MAILTO:'.$paramMailSender.'"';
-    $vcal .= ":MAILTO:$user->email\r\n";
-    //$vcal .= ":MAILTO:$paramMailSender\r\n";
+    if (Parameter::getGlobalParameter('invitesFromMailSender')==true) {
+      $vcal .= "ORGANIZER;CN=PROJEQTOR - ".(($user->resourceName)?$user->resourceName:$user->name);
+      $vcal .= ":MAILTO:$paramMailSender\r\n";
+    } else {
+      $vcal .= "ORGANIZER;CN=".(($user->resourceName)?$user->resourceName:$user->name);
+      $vcal .= ":MAILTO:$user->email\r\n";
+    }
     foreach($lstMail as $name=>$to) {
       //$vcal .= "ATTENDEE;CN=\"$name\";ROLE=REQ-PARTICIPANT;RSVP=FALSE:MAILTO:$to\r\n";
       //$vcal .= "ATTENDEE;ROLE=REQ-PARTICIPANT;CN=\"$name\":MAILTO:$to\r\n";
