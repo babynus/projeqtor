@@ -85,7 +85,10 @@ foreach ($selectId as $idCont){
   displayLastOperationStatus($result);
 }
 if($name!=''){
-  echo '<div class="messageINVALID" >ERROR : contact #'.$name.' allready link to '.$res->name.'</div>';
+  echo '<div class="messageINVALID" id="invalidMessageSave" >'.i18n('errorLinkedContact',array($name,$res->name)).'</div>';
+  echo'<input type="hidden" id="lastSaveId" value="" />';
+  echo '<input type="hidden" id="lastOperation" value="control" />';
+  echo'<input type="hidden" id="lastOperationStatus" value="INVALID" />';
 }
 
 ?>

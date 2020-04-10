@@ -1945,6 +1945,7 @@ errorLeastOneObjectAndOnlyOneInWhere: "A least one object and only one in the WH
 errorLeaveEarnedOverlap: "overlap start date and end date between the leaves earned rights",
 errorLeftQSuperiorToQuantity: "left quantity is superior to quantity",
 errorLeftQuantityOrQuantityNotModuloOfZeroPointFive: "left quantity ou quantity is not a modulo of 0.5",
+errorLinkedContact: "Error contact ${1} already linked to ${2}",
 errorLoadContent: "Fehler bei loadContent('${1}'&#44; '${2}'&#44; '${3}'&#44; '${4}')<br/>Ziel '${5}' ist kein Knoten und kein Steuerelement",
 errorLockedBill: "Rechnung gesperrt",
 errorLvEarnedStartDateNotValidAnymore: "the start date of leaves earned rights is not valid any more",
