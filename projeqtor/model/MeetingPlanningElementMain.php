@@ -35,7 +35,6 @@ class MeetingPlanningElementMain extends PlanningElement {
   public $refType;
   public $refId;
   public $refName;
-
   public $_tab_4_2_smallLabel=array('validated','assigned', 'real', 'left', 'work','cost');
   public $validatedWork;
   public $assignedWork;
@@ -45,7 +44,7 @@ class MeetingPlanningElementMain extends PlanningElement {
   public $assignedCost;
   public $realCost;
   public $leftCost;
-  public $_tab_1_1=array('','priority');
+  //public $_tab_1_1=array('','priority');
   public $priority;
   public $idMeetingPlanningMode;
   
@@ -107,7 +106,7 @@ class MeetingPlanningElementMain extends PlanningElement {
   }
   
   private function hideWorkCost() {
-    unset($this->_tab_4_2);
+    unset($this->_tab_4_2_smallLabel);
   	self::$_fieldsAttributes['validatedWork']='hidden';
     self::$_fieldsAttributes['assignedWork']='hidden';
     self::$_fieldsAttributes['realWork']='hidden';
@@ -119,7 +118,7 @@ class MeetingPlanningElementMain extends PlanningElement {
     //self::$_fieldsAttributes['priority']='hidden';
   }
   private function showWorkCost() {
-  	$this->_tab_4_2 = array('validated','assigned', 'real', 'left', 'work','cost');
+  	$this->_tab_4_2_smallLabel = array('validated','assigned', 'real', 'left', 'work','cost');
   	//$this->_sec_progress=true;
     self::$_fieldsAttributes['validatedWork']='';
     self::$_fieldsAttributes['assignedWork']='readonly';
