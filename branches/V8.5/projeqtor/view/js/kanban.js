@@ -564,16 +564,19 @@ function setDefaultPriority(typeValue) {
 	  });
 	}
 
-function activityStreamKanban(objectId, objectClass){
-	var param = "&objectId="+objectId+"&objectClass="+objectClass;
+function activityStreamKanban(objectId, objectClass,type){
+	var param = "&objectId="+objectId+"&objectClass="+objectClass+"&type="+type;
 	//loadDialog(dialogDiv, callBack, autoShow, params, clearOnHide, closable, dialogTitle)
 	loadDialog('dialogKanbanGetObjectStream', null, true, param, true, true, 'titleStream');
 }
 
 var saveNoteStreamKanbanTimeout=null;
-function saveNoteStreamKanban(event){
+function saveNoteStreamKanban(event,line){
   var key = event.keyCode;
+  var type=dojo.byId('kanbanRefType').value;
   var idKanban=dojo.byId('idKanban').value;
+  var id= dojo.byId('noteRefId').value;
+  var newStatut= '';
   if (key == 13 && !event.shiftKey) {
     var noteEditor = dijit.byId("noteStreamKanban");
     var noteEditorContent=noteEditor.get("value");
@@ -588,7 +591,24 @@ function saveNoteStreamKanban(event){
 	  };
 	//loadContent(page, destination, formName, isResultMessage, validationType, directAccess, silent, callBackFunction, noFading)
 	  loadContent("../tool/saveNoteStreamKanban.php", "activityStreamCenterKanban", "noteFormStreamKanban", false, null,null,null,callBack);
-	  //loadDiv("../view/kanbanView.php", "itemRow1-Status");
+	  var nodeTicket=dojo.byId('itemRow'+id+'-'+type);
+	  dojo.removeClass(dojo.byId('itemRow'+id+'-'+type),'dojoDndHandle');
+	  var oldColor=dojo.style(nodeTicket, "background-color");
+	  dojo.style(nodeTicket, "background-color", '#999');
+	  dojo.xhrGet({
+	    url : "../tool/kanbanUpdate.php?idTicket="+id+"&type="+type+"&newStatut="+newStatut+"&idKanban="+idKanban,
+	    load : function(data) {
+	        var callback=function() {
+	          nodeTicket=dojo.byId('itemRow'+id+'-'+type);
+	          dojo.addClass(nodeTicket,'dojoDndItemAnchor');
+	          dojo.style(nodeTicket, "background-color", oldColor);
+	          dojo.addClass(nodeTicket,'dojoDndHandle');
+	          dojo.byId('itemRow'+id+'-'+type).setAttribute('fromC',newStatut);
+	          hideWait();
+	        };
+	        loadDiv('../tool/kanbanRefreshTicket.php?id='+id+'&type='+type+'&idKanban='+idKanban+'&from='+newStatut,'itemRow'+id+'-'+type,null,callback);
+	    },
+	  });
 	  noteEditor.set("value",null);
 	  event.preventDefault();
   } 
