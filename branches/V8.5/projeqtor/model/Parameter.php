@@ -489,6 +489,10 @@ class Parameter extends SqlElement {
         $list = array('NO'=>i18n('displayNo'),
                       'YES'=>i18n('displayYes'));
         break;
+      case 'userClientElementList':
+      	$list = array('false'=>i18n('displayNo'),
+      	              'true'=>i18n('displayYes'));
+      	break;
       case 'paramLdap_version':
         $list=array('2'=>'2',
                     '3'=>'3');
@@ -766,6 +770,7 @@ class Parameter extends SqlElement {
                            "maxColumns"=>'list',
                            "showIdleDefault"=>'list',
                            "userNoteDiscussionMode"=>'list',
+                           "userClientElementList"=>'list',
                            
                      'tabExport'=>"tab",
                        'column_Exp_1'=>'newColumn',

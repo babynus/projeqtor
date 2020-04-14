@@ -7145,17 +7145,21 @@ function drawClientElementList($item, $object){
   $totalFullAmount = 0;
   foreach ($itemList as $id){
     $obj = new $item($id);
-    echo '<tr>';
+    $goto="";
+    if (securityGetAccessRightYesNo('menu'.$item, 'read', '')=="YES") {
+    	$goto=' onClick="gotoElement('."'".$item."','".htmlEncode($obj->id)."'".');" style="cursor: pointer;" ';
+    }
+    echo '<tr '.$goto.'>';
     echo '<td class="noteData" style="text-align:left;">'.$obj->name.'</td>';
     $date=null;
     if(isset($obj->date))$date=$obj->date;
     if(isset($obj->creationDate))$date=$obj->creationDate;
     if(isset($obj->startDate))$date=$obj->startDate;
-    echo '<td class="noteData" style="text-align:left;">'.htmlFormatDate($date).'</td>';
-    echo '<td class="noteData" style="text-align:left;">'.htmlDisplayCurrency($obj->untaxedAmount).'</td>';
-    echo '<td class="noteData" style="text-align:left;">'.htmlDisplayCurrency($obj->fullAmount).'</td>';
+    echo '<td class="noteData" style="text-align:center;">'.htmlFormatDate($date).'</td>';
+    echo '<td class="noteData" style="text-align:right;">'.htmlDisplayCurrency($obj->untaxedAmount).'</td>';
+    echo '<td class="noteData" style="text-align:right;">'.htmlDisplayCurrency($obj->fullAmount).'</td>';
     $objStatus=new Status($obj->idStatus);
-    echo '<td class="noteData" style="text-align:left;"><div style="word-wrap: break-word; height:100%; overflow:auto;">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</div></td>';
+    echo '<td class="noteData colorNameData" style="text-align:left;"><div style="word-wrap: break-word; height:100%; overflow:auto;">'.colorNameFormatter($objStatus->name."#split#".$objStatus->color).'</div></td>';
     echo '</tr>';
     $totalUntaxedAmount += $obj->untaxedAmount;
     $totalFullAmount += $obj->fullAmount;
@@ -7164,18 +7168,10 @@ function drawClientElementList($item, $object){
   if(count($itemList)>0){
     echo '<table width="99.9%">';
   	echo '<tr>';
-  	echo '<td class="noteHeader" style="width:30%;border:0px;"></td>';
-  echo '<td class="noteHeader" style="width:15%;border:0px;"></td>';
-  echo '<td class="noteHeader" style="width:20%;border:0px;">' . i18n('sum') . '</td>';
-  echo '<td class="noteHeader" style="width:20%;border:0px;"></td>';
-  echo '<td class="noteHeader" style="width:15%;border:0px;"></td>';
-  	echo '</tr>';
-  	echo '<tr>';
-  	echo '<td class="noteData"></td>';
-  	echo '<td class="noteData"></td>';
-  	echo '<td class="noteData" style="text-align:left;">' .htmlDisplayCurrency($totalUntaxedAmount) . '</td>';
-  	echo '<td class="noteData" style="text-align:left;">' . htmlDisplayCurrency($totalFullAmount) . '</td>';
-  	echo '<td class="noteData" style="text-align:left;"></td>';
+  	echo '<td class="noteData affectationIdleClass" style="text-align:center;width:45%;border-top: 0px;">' . i18n('sum') . '</td>';
+  	echo '<td class="noteData affectationIdleClass" style="text-align:right;width:20%;border-top: 0px;">' .htmlDisplayCurrency($totalUntaxedAmount) . '</td>';
+  	echo '<td class="noteData affectationIdleClass" style="text-align:right;width:20%;border-top: 0px;">' . htmlDisplayCurrency($totalFullAmount) . '</td>';
+  	echo '<td class="noteData affectationIdleClass" style="width:15%;border-top: 0px;"></td>';
   	echo '</tr>';
   	echo '</table>';
   }
