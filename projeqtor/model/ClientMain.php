@@ -93,8 +93,11 @@ class ClientMain extends SqlElement {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
-    $clientElementList = Parameter::getGlobalParameter('ClientElementList');
-    if(!$clientElementList or $clientElementList == 'false'){
+    $clientElementList = Parameter::getUserParameter('userClientElementList');
+    if(!$clientElementList){
+    	$clientElementList = Parameter::getGlobalParameter('ClientElementList');
+    }
+    if($clientElementList == 'false'){
     	self::$_fieldsAttributes['_sec_Quotation']='hidden';
     	self::$_fieldsAttributes['_sec_Command']='hidden';
     	self::$_fieldsAttributes['_sec_Bill']='hidden';
