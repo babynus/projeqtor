@@ -322,6 +322,9 @@ use PhpOffice\PhpSpreadsheet\Shared\Trend\Trend;
     	$collapsedList=Collapsed::getCollaspedList();
     	$topProjectArray=array();
       while ($line = Sql::fetchLine($result)) {
+        $line["health"]='';
+        $line["quality"]='';
+        $line["trend"]='';
       	$line=array_change_key_case($line,CASE_LOWER);
       	if ($applyFilter and !isset($arrayRestrictWbs[$line['wbssortable']])) continue; // Filter applied and item is not selected and not a parent of selected
       	if ($line['id'] and !$line['refname']) { // If refName not set, delete corresponding PE (results from incorrect delete
@@ -443,36 +446,30 @@ use PhpOffice\PhpSpreadsheet\Shared\Trend\Trend;
         $line["leftcostdisplay"]=($line["leftcost"]==$na)?$na:htmlDisplayCurrency($line["leftcost"],true);
         $line["plannedcostdisplay"]=($line["plannedcost"]==$na)?$na:htmlDisplayCurrency($line["plannedcost"],true);
         if ($columnsDescription['IdStatus']['show']==1 or $columnsDescription['Type']['show']==1 or ($columnsDescription['IdHealthStatus']['show']==1 and $portfolio)
-              or ($columnsDescription['QualityLevel']['show']==1 and $portfolio ) or ($columnsDescription['IdTrend']['show']==1 and $portfolio) ) {
+              or ($columnsDescription['QualityLevel']['show']==1 and $portfolio ) or ($columnsDescription['IdTrend']['show']==1 and $portfolio) or ($columnsDescription['IdOverallProgress']['show']==1 and $portfolio)) {
           $ref=$line['reftype'];
           $type='id'.$ref.'Type';
+          $item=new $ref($line['refid'],true);
           if($columnsDescription['IdStatus']['show']==1 or $columnsDescription['Type']['show']==1){
             if (isset($line["idstatus"]) and isset($line["idtype"]) and $line["idstatus"]) {
               $line["status"]=SqlList::getNameFromId('Status',$line["idstatus"])."#split#".SqlList::getFieldFromId('Status',$line["idstatus"],'color');
               $line["type"]=SqlList::getNameFromId('Type',$line["idtype"]);
             } else {
-              $item=new $ref($line['refid'],true);
               $line["status"]=(property_exists($item,'idStatus'))?SqlList::getNameFromId('Status',$item->idStatus)."#split#".SqlList::getFieldFromId('Status',$item->idStatus,'color'):null;
               $line["type"]=(property_exists($item,$type))?SqlList::getNameFromId('Type',$item->$type):null;
             }
           }
           if($columnsDescription['IdHealthStatus']['show']==1 and $portfolio){
-            if(!isset($item)){
-              $item=new $ref($line['refid'],true);
-            }
             $line["health"]=(property_exists($item,'idHealth'))?SqlList::getNameFromId('Health',$item->idHealth)."#split#".SqlList::getFieldFromId('Health',$item->idHealth,'color'):null;
           }
           if($columnsDescription['QualityLevel']['show']==1 and $portfolio ){
-            if(!isset($item)){
-              $item=new $ref($line['refid'],true);
-            }
             $line["quality"]=(property_exists($item,'idQuality'))?SqlList::getNameFromId('Quality',$item->idQuality)."#split#".SqlList::getFieldFromId('Quality',$item->idQuality,'color'):null;
           }
            if($columnsDescription['IdTrend']['show']==1 and $portfolio ){
-            if(!isset($item)){
-              $item=new $ref($line['trend'],true);
-            }
             $line["trend"]=(property_exists($item,'idTrend'))?SqlList::getNameFromId('Trend',$item->idTrend)."#split#".SqlList::getFieldFromId('Trend',$item->idTrend,'color'):null;
+          }
+          if($columnsDescription['IdOverallProgress']['show']==1 and $portfolio ){
+            $line["overallprogress"]=(property_exists($item,'idOverallProgress'))?SqlList::getNameFromId('OverallProgress',$item->idOverallProgress):null;
           }
         }
         $line["planningmode"]=SqlList::getNameFromId('PlanningMode',$line['idplanningmode']);
@@ -711,9 +708,11 @@ use PhpOffice\PhpSpreadsheet\Shared\Trend\Trend;
               $line['quality'] = $quality->name;
               $trend= new Trend($project->idTrend);
               $line['trend'] = $trend->name;
+              $overallProgress= new OverallProgress($project->idOverallProgress);
+              $line['overallprogress'] = $overallProgress->name;
             }
         } else if ($columnsDescription['IdStatus']['show']==1 or $columnsDescription['Type']['show']==1 
-          or (($columnsDescription['IdHealthStatus']['show']==1 or $columnsDescription['QualityLevel']['show']==1 or $columnsDescription['IdTrend']['show']==1) and $portfolio)) {
+          or (($columnsDescription['IdHealthStatus']['show']==1 or $columnsDescription['QualityLevel']['show']==1 or $columnsDescription['IdTrend']['show']==1 or $columnsDescription['IdOverallProgress']['show']==1) and $portfolio)) {
           $ref=$line['reftype'];
           if ($ref=='PeriodicMeeting') $ref='Meeting';
           $type='id'.$ref.'Type';
@@ -750,13 +749,21 @@ use PhpOffice\PhpSpreadsheet\Shared\Trend\Trend;
             }
           }
           if($columnsDescription['IdTrend']['show']==1 and $portfolio){
-            if (property_exists($item,"idHealth")) {
+            if (property_exists($item,"idTrend")) {
               $trend = new Trend($item->idTrend);
               $line['trend'] = $trend->name;
               $line['trendcolor'] = $trend->color;
             }else{
               $line['trend'] = '';
               $line['trendcolor'] = '';
+            }
+          }
+          if($columnsDescription['IdOverallProgress']['show']==1 and $portfolio){
+            if (property_exists($item,"idOverallProgress")) {
+              $overallProgress = new OverallProgress($item->idOverallProgress);
+              $line['overallprogress'] = $overallProgress->name;
+            }else{
+              $line['overallprogress'] = '';
             }
           }
           
@@ -932,6 +939,7 @@ use PhpOffice\PhpSpreadsheet\Shared\Trend\Trend;
         if ($col=='IdHealthStatus') echo '  <TD class="reportTableHeader" style="width:30px">' . i18n('colIdHealthStatus') . '</TD>' ;
         if ($col=='QualityLevel') echo '  <TD class="reportTableHeader" style="width:30px">' . i18n('colQualityLevel') . '</TD>' ;
         if ($col=='IdTrend') echo '  <TD class="reportTableHeader" style="width:30px">' . i18n('colIdTrend') . '</TD>' ;
+        if ($col=='IdOverallProgress') echo '  <TD class="reportTableHeader" style="width:30px">' . i18n('colOverallProgress') . '</TD>' ;
         if ($col=='Duration') echo '  <TD class="reportTableHeader" style="width:30px">' . i18n('colDuration') . '</TD>' ;
         if ($col=='Progress') echo '  <TD class="reportTableHeader" style="width:30px">'  . i18n('colPct') . '</TD>' ;
         if ($col=='StartDate') echo '  <TD class="reportTableHeader" style="width:50px">'  . i18n('colStart') . '</TD>' ;
@@ -1113,6 +1121,7 @@ use PhpOffice\PhpSpreadsheet\Shared\Trend\Trend;
           if ($col=='IdHealthStatus') echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  ($line["health"])  . '</TD>' ;
           if ($col=='IdQualityLevel') echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  ($line["quality"])  . '</TD>' ;
           if ($col=='IdTrend') echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  ($line["trend"])  . '</TD>' ;
+          if ($col=='IdOverallProgress') echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  ($line["overallprogress"])  . '</TD>' ;
           if ($col=='Duration') echo '  <TD class="reportTableData" style="' . $compStyle . '" >' . $duration  . '</TD>' ;
           if ($col=='Progress') echo '  <TD class="reportTableData" style="' . $compStyle . '" >' . percentFormatter($progress) . '</TD>' ;
           if ($col=='StartDate') echo '  <TD class="reportTableData" style="' . $compStyle . '">'  . (($pStart)?dateFormatter($pStart):'-') . '</TD>' ;

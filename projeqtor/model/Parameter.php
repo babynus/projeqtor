@@ -1353,12 +1353,13 @@ class Parameter extends SqlElement {
         'IdHealthStatus'=>70,
         'QualityLevel'=>70,
         'IdTrend'=>70,
+        'IdOverallProgress'=>90,
         'Type'=>120,
         'Resource'=>90,
         'Priority'=>50,
         'IdPlanningMode'=>150,
         'ObjectType'=>150,
-        'ExterRes'=>90,
+        'ExterRes'=>90
         );
     $cpt=0;
     foreach($arrayFields as $col=>$width) {
