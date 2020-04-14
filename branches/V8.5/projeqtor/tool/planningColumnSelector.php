@@ -48,7 +48,7 @@ foreach ($columnsAll as $order=>$col) {
 		}elseif (!isset($contractGantt) and ($col=='ExterRes' or $col=='ObjectType')){
 		  echo '<div class="dojoDndItem" id="columnSelector'.$col.'" dndType="planningColumn" style="display:none;">';
 		  echo '<span class="dojoDndHandle handleCursor"><img style="width:6px" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
-		}elseif (!isset($portfolioPlanning) and ($col=='IdHealth' or $col=='QualityLevel' or $col=='IdTrend')){
+		}elseif (!isset($portfolioPlanning) and ($col=='IdHealth' or $col=='QualityLevel' or $col=='IdTrend' or $col='OverallProgress')){
 		  echo '<div class="dojoDndItem" id="columnSelector'.$col.'" dndType="planningColumn" style="display:none;">';
 		  echo '<span class="dojoDndHandle handleCursor"><img style="width:6px" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
 		}else {
