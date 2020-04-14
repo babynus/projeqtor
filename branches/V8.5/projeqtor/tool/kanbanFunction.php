@@ -121,7 +121,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
         <tr>
     	    <td>
             <div  id="badges" style="position:relative">
-              <div id="addComent" onclick="activityStreamKanban(' . $line ['id'] . ', \'' . $typeKanbanC . '\');" style="margin-bottom:2px;margin-right:4px;" title=" ' . i18n ( 'commentImputationAdd' ) . ' ">
+              <div id="addComent" onclick="activityStreamKanban(' . $line ['id'] . ', \'' . $typeKanbanC . '\','.$type.');" style="margin-bottom:2px;margin-right:4px;" title=" ' . i18n ( 'commentImputationAdd' ) . ' ">
                 ' . formatSmallButton ( 'AddComment' ) . '
                     <div  style="position:absolute;bottom:-2px;margin-left:'.$margin.'px;width:5px;">
                     '.((count($object->_Note)!=0)?$badge:'').'
@@ -187,7 +187,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
           <tr>
             <td>
               <div id="badges" style="position:relative">
-              <div id="addComent" onclick="activityStreamKanban(' . $line ['id'] . ', \'' . $typeKanbanC . '\');" style="margin-bottom:2px;margin-right:4px;" title=" ' . i18n ( 'commentImputationAdd' ) . ' ">
+              <div id="addComent" onclick="activityStreamKanban(' . $line ['id'] . ', \'' . $typeKanbanC . '\', \''.$type.'\');" style="margin-bottom:2px;margin-right:4px;" title=" ' . i18n ( 'commentImputationAdd' ) . ' ">
                 ' . formatSmallButton ( 'AddComment' ) . '
                     <div  style="position:absolute;bottom:-2px;margin-left:'.$margin.'px;width:5px;">
                     '.((count($object->_Note)!=0)?$badge:'').'

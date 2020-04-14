@@ -28,9 +28,10 @@ require_once "../tool/formatter.php";
 if (! isset($objectId) ) $objectId=RequestHandler::getId('objectId');
 if (! isset($objectClass) ) $objectClass=RequestHandler::getClass('objectClass');
 
+$type='';
 $note=new Note();
 $notes=$note->getSqlElementsFromCriteria(array('refType'=>$objectClass,'refId'=>$objectId), false, null);
-
+if(RequestHandler::isCodeSet('type')) $type=RequestHandler::getClass('type');
 //===============================
 
 $enterTextHere = '<p style="color:red;">'.i18n("textareaEnterText").'</p>';
@@ -75,6 +76,7 @@ $privacyNotes=Parameter::getUserParameter('privacyNotes'.$objectClass);
        <input id="noteId" name="noteId" type="hidden" value="" />
        <input id="noteRefType" name="noteRefType" type="hidden" value="<?php echo $objectClass;?>" />
        <input id="noteRefId" name="noteRefId" type="hidden" value="<?php echo $objectId;?>" />
+       <input id="kanbanRefType" name="kanbanRefType" type="hidden" value="<?php echo $type;?>" />
        <input id="noteEditorTypeStreamKanban" name="noteEditorTypeStreamKanban" type="hidden" value="<?php echo getEditorType();?>" />
        <div style="width:99%;position:relative">
        <textarea rows="4"  name="noteStreamKanban" id="noteStreamKanban" dojoType="dijit.form.SimpleTextarea"
