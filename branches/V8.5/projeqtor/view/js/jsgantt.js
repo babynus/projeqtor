@@ -86,9 +86,10 @@ var planningFieldsDescription=new Array(
     {name:"IdHealthStatus", show:false,  order:21, width:100, showSpecif:true},
     {name:"QualityLevel",   show:false,  order:22, width:100, showSpecif:true},
     {name:"IdTrend",        show:false,  order:23, width:100, showSpecif:true},
-    {name:"ObjectType",     show:false,  order:24, width:100, showSpecif:true},
-    {name:"ExterRes",       show:false,  order:25, width:100, showSpecif:true},
-    {name:"Type",           show:false,  order:26, width:100}
+    {name:"IdOverallProgress",        show:false,  order:24, width:100, showSpecif:true},
+    {name:"ObjectType",     show:false,  order:25, width:100, showSpecif:true},
+    {name:"ExterRes",       show:false,  order:26, width:100, showSpecif:true},
+    {name:"Type",           show:false,  order:27, width:100}
   );
 function setPlanningFieldShow(field, value) {
   return setPlanningField('show',field, value);
@@ -146,7 +147,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor,
                             pCaption, pClass, pScope, pRealEnd, pPlanStart,
                             pValidatedWork, pAssignedWork, pRealWork, pLeftWork, pPlannedWork, 
                             pPriority, pPlanningMode,
-                            pStatus,pHealthStatus,pQualityLevel,pTrend, pType, 
+                            pStatus,pHealthStatus,pQualityLevel,pTrend,pOverallProgress, pType, 
                             pValidatedCost, pAssignedCost, pRealCost, pLeftCost, pPlannedCost,
                             pBaseTopStart, pBaseTopEnd, pBaseBottomStart, pBaseBottomEnd, pIsOnCriticalPath,pObjectType,pExtRes,pDurationContract) {
   var vID    = pID;
@@ -190,6 +191,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor,
   var vHealthStatus=pHealthStatus;
   var vQualityLevel=pQualityLevel;
   var vTrend=pTrend;
+  var vOverallProgress=pOverallProgress;
   var vType=pType; 
   var vValidatedCost=pValidatedCost;
   var vAssignedCost=pAssignedCost;
@@ -234,6 +236,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor,
     else if (pField=='IdHealthStatus')return vHealthStatus;
     else if (pField=='QualityLevel')return vQualityLevel;
     else if (pField=='IdTrend')return vTrend;
+    else if (pField=='IdOverallProgress')return vOverallProgress;
     else if (pField=='ValidatedCost') return vValidatedCost;
     else if (pField=='AssignedCost') return vAssignedCost;
     else if (pField=='RealCost') return vRealCost;
@@ -264,6 +267,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor,
   this.getHealthStatus =function(){ return vHealthStatus;};
   this.getQualityLevel =function(){ return vQualityLevel;};
   this.getTrend     =function(){ return vTrend;};
+  this.getOverallProgress     =function(){ return vOverallProgress;};
   this.getType     = function(){ return vType;  };
   this.getValidatedCost     = function(){ return vValidatedCost;  };
   this.getAssignedCost     = function(){ return vAssignedCost;  };
@@ -364,6 +368,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor,
   this.setHealthStatus =function(pHealthStatus){vHealthStatus = pHealthStatus; };
   this.setQualityLevel =function(pQualityLevel){vQualityLevel = pQualityLevel; };
   this.setTrend =function(pTrend){vTrend = pTrend; };
+  this.setTrend =function(pOverallProgress){vOverallProgress = pOverallProgress; };
   this.setType  = function(pType) {vType = pType; };
   this.setValidatedCost  = function(pValidatedCost) {vValidatedCost = pValidatedCost; };
   this.setAssignedCost  = function(pAssignedCost) {vAssignedCost = pAssignedCost; };
@@ -856,6 +861,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
 	        var showField=getPlanningFieldShow(field);
 	        var fieldWidth=getPlanningFieldWidth(field);
 	        if(showField && field!='Name') {
+	          if(field=='IdOverallProgress') field='Progresse';
 		        vLeftTable += '<TD id="jsGanttHeaderTD'+field+'" class="ganttLeftTitle" style="position:relative;width: ' + fieldWidth + 'px;max-width: ' + fieldWidth + 'px;overflow:hidden" nowrap>'
 		          +'<div id="jsGanttHeader'+field+'" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width:' + fieldWidth + 'px; z-index:1000;" class="namePartgroup">'
 		          +'<span class="nobr">'+ JSGantt.i18n( ('col'+field).replace('Work','')) + '</span>'
@@ -1042,7 +1048,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
 	          if(showField==1 && field!='Name') {
 	            valueField=vTaskList[i].getFieldValue(field,JSGantt);
 	            padding='';
-	            if (field=='IdStatus' ||  field=='QualityLevel' || field=='IdTrend' || field=='IdHealthStatus') {
+	            if (field=='IdStatus' ||  field=='QualityLevel' || field=='IdTrend' || field=='IdHealthStatus' ) {
 	              valueField=colorNameFormatter(valueField);
 	              padding='';
 	            }else {
@@ -2273,6 +2279,7 @@ function setGanttVisibility(g) {
      setPlanningFieldShowSpecif('IdHealthStatus',0);
      setPlanningFieldShowSpecif('QualityLevel',0);
      setPlanningFieldShowSpecif('IdTrend',0);
+     setPlanningFieldShowSpecif('IdOverallProgress',0);
   }
 	if(!dojo.byId('contractGantt')){
 	  setPlanningFieldShowSpecif('ObjectType',0); 

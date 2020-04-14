@@ -3171,6 +3171,7 @@ function drawGantt() {
       var pTrend='';
       var pExtRessource='';
       var pDurationContract='';
+      var pOverallProgress='';
       if(dojo.byId('contractGantt') &&  item.reftype!='Milestone'){
         pExtRessource=item.externalressource;
         pDurationContract=item.duration;
@@ -3180,6 +3181,7 @@ function drawGantt() {
         pHealthStatus=item.health;
         pQualityLevel=item.quality;
         pTrend=item.trend;
+        pOverallProgress=item.overallprogress
       }
 
      
@@ -3264,7 +3266,7 @@ function drawGantt() {
           pCaption, pClass, pScope, pRealEnd, pPlannedStart,
           item.validatedworkdisplay, item.assignedworkdisplay, item.realworkdisplay, item.leftworkdisplay, item.plannedworkdisplay,
           item.priority, item.planningmode, 
-          item.status,pHealthStatus,pQualityLevel,pTrend, item.type, 
+          item.status,pHealthStatus,pQualityLevel,pTrend,pOverallProgress, item.type, 
           item.validatedcostdisplay, item.assignedcostdisplay, item.realcostdisplay, item.leftcostdisplay, item.plannedcostdisplay,
           item.baseTopStart, item.baseTopEnd, item.baseBottomStart, item.baseBottomEnd, 
           item.isoncriticalpath,pobjecttype,pExtRessource,pDurationContract));
