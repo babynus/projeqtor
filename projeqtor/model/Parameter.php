@@ -420,10 +420,6 @@ class Parameter extends SqlElement {
         $list=array('HT'=>i18n('imputHT'),
                     'TTC'=>i18n('imputTTC'));
         break;
-      case 'ClientElementList':
-      	$list=array('false'=>i18n('displayNo'),
-                    'true'=>i18n('displayYes'));
-      	break;
       case 'ImputOfAmountProvider':
         $list=array('HT'=>i18n('imputHT'),
                     'TTC'=>i18n('imputTTC'));
@@ -489,7 +485,7 @@ class Parameter extends SqlElement {
         $list = array('NO'=>i18n('displayNo'),
                       'YES'=>i18n('displayYes'));
         break;
-      case 'userClientElementList':
+      case 'clientElementList':
       	$list = array('false'=>i18n('displayNo'),
       	              'true'=>i18n('displayYes'));
       	break;
@@ -770,7 +766,7 @@ class Parameter extends SqlElement {
                            "maxColumns"=>'list',
                            "showIdleDefault"=>'list',
                            "userNoteDiscussionMode"=>'list',
-                           "userClientElementList"=>'list',
+                           "clientElementList"=>'list',
                            
                      'tabExport'=>"tab",
                        'column_Exp_1'=>'newColumn',
@@ -928,6 +924,7 @@ class Parameter extends SqlElement {
       	                      // MTY - EXPORT XLS OR ODS
       	                      "globalNoteDiscussionMode"=>'list',
       	                      "notReceiveHisOwnEmails"=>'list',
+      	                      "clientElementList"=>'list',
       	                'tabMiscellaneous'=>"tab",
       	                  'columnMiscellanousLeft'=>'newColumn',
       	                     'sectionReferenceFormat'=>'section',
@@ -978,7 +975,6 @@ class Parameter extends SqlElement {
                             'sectionFinancialClient'=>'section',
                               'ImputOfAmountClient'=>'list',
                               'ImputOfBillLineClient'=>'list',
-                              'ClientElementList'=>'list',
                               'sectionFinancialAutomation'=>'section',
                               'ExpenseLink'=>'list',
                           'newColumnbFinancialRight'=>'newColumn',
