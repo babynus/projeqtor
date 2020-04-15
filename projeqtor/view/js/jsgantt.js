@@ -861,7 +861,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
 	        var showField=getPlanningFieldShow(field);
 	        var fieldWidth=getPlanningFieldWidth(field);
 	        if(showField && field!='Name') {
-	          if(field=='IdOverallProgress') field='Progresse';
+	          if(field=='IdOverallProgress') field='Progress';
 		        vLeftTable += '<TD id="jsGanttHeaderTD'+field+'" class="ganttLeftTitle" style="position:relative;width: ' + fieldWidth + 'px;max-width: ' + fieldWidth + 'px;overflow:hidden" nowrap>'
 		          +'<div id="jsGanttHeader'+field+'" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width:' + fieldWidth + 'px; z-index:1000;" class="namePartgroup">'
 		          +'<span class="nobr">'+ JSGantt.i18n( ('col'+field).replace('Work','')) + '</span>'
