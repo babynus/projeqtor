@@ -1016,6 +1016,7 @@ div#reportParametersDiv .label, div#reportParametersDiv label {
   font-size:8pt;
   font-weight:normal;zoom:0.9; 
   -moz-transform: scale(0.9);
+  cursor: pointer;
 }
 
 .sectionBadge {
