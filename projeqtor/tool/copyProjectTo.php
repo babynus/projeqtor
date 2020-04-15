@@ -61,6 +61,11 @@ if (array_key_exists('copyOtherProjectStructure',$_REQUEST)) {
   $copyOtherStructure=true;
 }
 
+$copyProjectRequirement=false;
+if (array_key_exists('copyProjectRequirement',$_REQUEST)) {
+  $copyProjectRequirement=true;
+}
+  
 $copySubProjects=false;
 if (array_key_exists('copySubProjects',$_REQUEST)) {
   $copySubProjects=true;
@@ -167,6 +172,27 @@ if (!$error and $copyAffectations) {
   		$aff->id=null;
   		$aff->idProject=$newProj->id;
   		$aff->save();
+    }
+  }
+}
+if(!$error and $copyProjectRequirement){
+  $req=new Requirement();
+  $crit=array('idProject'=>$proj->id);
+  $lstReq=$req->getSqlElementsFromCriteria($crit);
+  foreach ($lstReq as $req) {
+    $critExists=array('idProject'=>$newProj->id, 'id'=>$req->id);
+    $reqExists=SqlElement::getSingleSqlElementFromCriteria('Requirement', $critExists);
+    debugLog($reqExists);
+    if ($reqExists) {
+    		$copyReq=$req->copyTo('Requirement', $req->idRequirementType, $req->name, $newProj->id, false, true, true, true);
+    		$res=$copyReq->_copyResult;
+    		if (! stripos($res,'id="lastOperationStatus" value="OK"')>0 ) {
+    		  $error=true;
+    		  $result.= '<input type="hidden" id="lastSaveId" value="" />';
+    		  $result .= '<input type="hidden" id="lastOperation" value="copy" />';
+    		  $result .= '<input type="hidden" id="lastOperationStatus" value="INVALID" />';
+    		}
+    		unset($copyReq->_copyResult);
     }
   }
 }
