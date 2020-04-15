@@ -116,7 +116,7 @@ function kanbanDisplayTicket($id, $type, $idKanban, $from, $line, $add, $mode) {
       $object= new $typeKanbanC ($line['id']);
 	 $nbBadge=((isset($object->_Note))?count ($object->_Note):'');
 	 $margin=($nbBadge>9)?'-6':'-2';
-	 $badge= '<div id="'.$line['name'].'BadgeTab" class="kanbanBadge" style="">'.$nbBadge.'</div>';
+	 $badge= '<div id="kanbanBadge_'.$line['id'].'" class="kanbanBadge" style="">'.$nbBadge.'</div>';
       echo '<table style="margin:2px 2px 0 2px;width:58px;float:right;vertical-align: middle;">
         <tr>
     	    <td>
