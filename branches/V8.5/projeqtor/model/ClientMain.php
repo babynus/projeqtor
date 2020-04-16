@@ -54,12 +54,12 @@ class ClientMain extends SqlElement {
   public $_sec_Contacts;
   public $_spe_contacts;
   public $_spe_situation;
-  public $_sec_Quotation;
+  public $_sec_QuotationsList;
   public $_spe_Quotation;
-  public $_sec_Bill;
-  public $_spe_Bill;
-  public $_sec_Command;
+  public $_sec_CommandsList;
   public $_spe_Command;
+  public $_sec_BillsList;
+  public $_spe_Bill;
   //ADD qCazelles - Manage ticket at customer level - Ticket #87
   public $_sec_TicketsClient;
   public $_spe_tickets;
@@ -95,9 +95,9 @@ class ClientMain extends SqlElement {
     parent::__construct($id,$withoutDependentObjects);
     $clientElementList = Parameter::getUserParameter('clientElementList');
     if($clientElementList == 'false'){
-    	self::$_fieldsAttributes['_sec_Quotation']='hidden';
-    	self::$_fieldsAttributes['_sec_Command']='hidden';
-    	self::$_fieldsAttributes['_sec_Bill']='hidden';
+    	self::$_fieldsAttributes['_sec_QuotationsList']='hidden';
+    	self::$_fieldsAttributes['_sec_CommandsList']='hidden';
+    	self::$_fieldsAttributes['_sec_BillsList']='hidden';
     }
   }
 
