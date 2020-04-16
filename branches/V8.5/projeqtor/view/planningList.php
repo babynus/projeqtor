@@ -120,6 +120,18 @@ $displayWidthPlan="9999";
 if (RequestHandler::isCodeSet('destinationWidth')) {
   $displayWidthPlan=RequestHandler::getNumeric('destinationWidth');
 }
+//florent
+$showValidationButton=false;
+$lstUserP=$user->getAllProfiles();
+foreach ($lstUserP as $prof){
+  $priority=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$prof,'scope'=>'validatePlanning'));
+  if($priority->rightAccess!=1){
+     continue;
+  }
+  $showValidationButton=true;
+  break;
+}
+
 //$objectClass='Task';
 //$obj=new $objectClass;
 ?>
@@ -260,7 +272,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                       <td colsan="3">
                         <table>
                           <tr>
-                            <?php if ($canPlan) { ?>
+                            <?php if ($canPlan and $showValidationButton) { ?>
                             <td colspan="1" width="32px">
                               <button id="savePlanningButton" dojoType="dijit.form.Button" showlabel="false"
                                title="<?php echo i18n('validatePlanning');?>"

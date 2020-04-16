@@ -182,7 +182,6 @@ if(!$error and $copyProjectRequirement){
   foreach ($lstReq as $req) {
     $critExists=array('idProject'=>$newProj->id, 'id'=>$req->id);
     $reqExists=SqlElement::getSingleSqlElementFromCriteria('Requirement', $critExists);
-    debugLog($reqExists);
     if ($reqExists) {
     		$copyReq=$req->copyTo('Requirement', $req->idRequirementType, $req->name, $newProj->id, false, true, true, true);
     		$res=$copyReq->_copyResult;
