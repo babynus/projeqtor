@@ -945,6 +945,9 @@ class ResourceMain extends SqlElement {
       if($this->endDate){
         if($date > $this->endDate)return 0;
       }
+      if($this->startDate){
+        if($date < $this->startDate)return 0;
+      }
     	if(!sessionValueExists('capacityPeriod')){
     		setSessionValue('capacityPeriod', array());
     	}
