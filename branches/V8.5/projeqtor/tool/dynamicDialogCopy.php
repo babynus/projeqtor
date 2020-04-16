@@ -346,18 +346,6 @@ if($copyType=="copyObjectTo"){
            </tr>
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
-               <label for="copyProjectRequirement" style="width:90%;text-align: right;"><?php echo i18n("copyProjectRequirement") ?>&nbsp;:&nbsp;</label>
-               <?php $isCheckedProjectRequirement=true;$isCheckedProjectRequirement=Parameter::getUserParameter('isCheckedProjectRequirement'.$objectClass);?>
-               <div id="copyProjectRequirement" name="copyProjectRequirement" dojoType="dijit.form.CheckBox" <?php if ($isCheckedProjectRequirement=='true') echo " checked ";?>
-                type="checkbox"  >
-               <script type="dojo/method" event="onChange" >
-                  saveDataToSession('isCheckedProjectRequirement<?php echo $objectClass;?>',((this.checked)?true:false),true);
-               </script>
-               </div>
-             </td>
-           </tr>
-           <tr>
-             <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
                <label for="copySubProjects" style="width:90%;text-align: right;"><?php echo i18n("copySubProjects") ?>&nbsp;:&nbsp;</label>
                <?php $isCheckedSubProject=true;$isCheckedSubProject=Parameter::getUserParameter('isCheckedSubProject'.$objectClass);?>
                <div id="copySubProjects" name="copySubProjects" dojoType="dijit.form.CheckBox" <?php if ($isCheckedSubProject=='true') echo " checked ";?> type="checkbox" >
@@ -391,19 +379,6 @@ if($copyType=="copyObjectTo"){
                </div>
              </td>
            </tr>
-            <!-- Gautier #1769 --> 
-              <tr>
-             <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
-               <label for="copyToWithLinks" style="width:90%;text-align: right;"><?php echo i18n("copyToWithLinks") ?>&nbsp;:&nbsp;</label>
-               <?php $isCheckedLink=true;$isCheckedLink=Parameter::getUserParameter('isCheckedLink'.$objectClass);?>
-               <div id="copyToWithLinks" name="copyToWithLinks" dojoType="dijit.form.CheckBox" <?php if ($isCheckedLink=='true') echo " checked ";?> 
-                    type="checkbox" >
-                <script type="dojo/method" event="onChange" >
-                  saveDataToSession('isCheckedLink<?php echo $objectClass;?>',((this.checked)?true:false),true);
-                </script>
-               </div>
-             </td>
-           </tr>
            <!--  Krowry #2206 -->
             <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
@@ -414,6 +389,18 @@ if($copyType=="copyObjectTo"){
                <script type="dojo/method" event="onChange" >
                   saveDataToSession('isCheckedVersionProjects<?php echo $objectClass;?>',((this.checked)?true:false),true);
                 </script>
+               </div>
+             </td>
+           </tr>
+           <tr>
+             <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
+               <label for="copyProjectRequirement" style="width:90%;text-align: right;"><?php echo i18n("copyProjectRequirement") ?>&nbsp;:&nbsp;</label>
+               <?php $isCheckedProjectRequirement=true;$isCheckedProjectRequirement=Parameter::getUserParameter('isCheckedProjectRequirement'.$objectClass);?>
+               <div id="copyProjectRequirement" name="copyProjectRequirement" dojoType="dijit.form.CheckBox" <?php if ($isCheckedProjectRequirement=='true') echo " checked ";?>
+                type="checkbox"  >
+               <script type="dojo/method" event="onChange" >
+                  saveDataToSession('isCheckedProjectRequirement<?php echo $objectClass;?>',((this.checked)?true:false),true);
+               </script>
                </div>
              </td>
            </tr>
@@ -431,6 +418,20 @@ if($copyType=="copyObjectTo"){
              </td>
            </tr>
 <!-- END ADD BY Marc TABARY - 2017-03-17 - COPY ACTIVITY PRICE WHEN COPY PROJECT -->
+            <!-- Gautier #1769 --> 
+           <tr>
+             <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
+               <label for="copyToWithLinks" style="width:90%;text-align: right;"><?php echo i18n("copyToWithLinks") ?>&nbsp;:&nbsp;</label>
+               <?php $isCheckedLink=true;$isCheckedLink=Parameter::getUserParameter('isCheckedLink'.$objectClass);?>
+               <div id="copyToWithLinks" name="copyToWithLinks" dojoType="dijit.form.CheckBox" <?php if ($isCheckedLink=='true') echo " checked ";?> 
+                    type="checkbox" >
+                <script type="dojo/method" event="onChange" >
+                  saveDataToSession('isCheckedLink<?php echo $objectClass;?>',((this.checked)?true:false),true);
+                </script>
+               </div>
+             </td>
+           </tr>
+           
           <!-- Gautier #copyAttachments Project --> 
            <tr>
              <td class="dialogLabel" colspan="2" style="width:100%; text-align: left;">
