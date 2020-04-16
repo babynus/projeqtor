@@ -471,10 +471,13 @@ public $_noCopy;
   		$start=($aff->startDate)?$aff->startDate:self::$minAffectationDate;
   		$end=($aff->endDate)?$aff->endDate:self::$maxAffectationDate;
   		//gautier #3880
-//   		$resource = new Resource($idResource,true);
-//   		if($resource->endDate){
-//   		  if($end > $resource->endDate)$end=$resource->endDate;
-//   		}
+  		$resource = new Resource($idResource,true);
+  		if($resource->endDate){
+  		  if($end > $resource->endDate)$end=$resource->endDate;
+  		}
+  		if($resource->startDate){
+  		  if($start < $resource->startDate)$start=$resource->startDate;
+  		}
   		//end
   		if ($aff->idle) $end=self::$minAffectationDate; // If affectation is closed : no work to plan
   		$arrAffProj=array($aff->idProject=>$aff->rate);
