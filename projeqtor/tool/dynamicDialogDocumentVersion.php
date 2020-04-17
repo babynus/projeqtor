@@ -155,7 +155,7 @@ if (array_key_exists('isIE',$_REQUEST)) {
         <td> 
          <div dojoType="dijit.form.TextBox" 
           id="documentVersionNewVersionDisplay" name="documentVersionNewVersionDisplay"
-          style="width: 450px;" readonly
+          style="width: 450px;" readonly required
           maxlength="100"
           class="input">  
          </div>  
@@ -235,7 +235,8 @@ if (array_key_exists('isIE',$_REQUEST)) {
             <?php echo i18n("buttonCancel");?>
           </button>
           <button id="submitDocumentVersionUpload" dojoType="dijit.form.Button" type="submit" 
-           <?php if ($isIE and $isIE<=9) {?>onclick="protectDblClick(this);saveDocumentVersion();"<?php }?> >
+           <?php if ($isIE and $isIE<=9) {?>
+           onclick=" protectDblClick(this);saveDocumentVersion();"<?php }?> >
             <?php echo i18n("buttonOK");?>
           </button>
         </td>
