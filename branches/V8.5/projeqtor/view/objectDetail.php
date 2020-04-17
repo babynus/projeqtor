@@ -2440,7 +2440,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo '</div>';
         }
         if ($displayComboButtonCol) {
-          echo '<div id="'.$col.'ButtonDetail" ';
+          echo '<div id="'.$col.'ButtonDetail" onmouseleave="dojo.byId(\''.$col.'IconViewSubMenu\').style.display=\'none\';"';
           echo ' title="'.i18n('showDetail').'" style="float:right;margin-right:3px;'.$specificStyleWithoutCustom.'"';
           echo ' class="roundedButton generalColClass '.$col.'Class">';
           echo '<div class="iconView" ';
