@@ -1973,6 +1973,7 @@ errorRegisterGlobals: "register_globals mora biti isključen (vrijednost = false
 errorRemoveTooMuchWork: "Pokušali ste i izravno ukloniti više od vlastitog rada (${1}). Trebali biste upotrijebiti &#34;Isporuku&#34; za to.",
 errorReopenControl: "Nije moguće ponovno otvoriti ovu stavku koja je ispod zatvorene stavke (${1})",
 errorReplaceResourceNotChanged: "novi resurs mora biti različit od postojećih",
+errorSameName: "same version name",
 errorSessionHash: "U trenutnoj sesiji&#44; došlo je do pogreške <br/> ažurirati je preglednik stranicu ili ponovno pokretanje preglednika.",
 errorStartEndDates: "${1}' ne smije biti nakon '${2}'",
 errorSubmitForm: "Greška u 'submitForm (&#34;${1}'&#44;'${2}'&#44; '${3}') '&#58; <br/> obrazac &#34;${3}' nije kontrola",

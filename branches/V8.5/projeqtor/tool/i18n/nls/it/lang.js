@@ -1973,6 +1973,7 @@ errorRegisterGlobals: "register_globals deve essere disabilitata (impostata su f
 errorRemoveTooMuchWork: "Hai cercato di rimuovere più del tuo proprio lavoro (${1}). Dovresti usare il pulsante &#34;Lavoro espletato#34; per ottenere il risultato voluto.",
 errorReopenControl: "Cannot re-open this item that is under a closed item (${1})",
 errorReplaceResourceNotChanged: "la nuova risorsa deve essere diversa da quella esistente",
+errorSameName: "same version name",
 errorSessionHash: "Si è verificato un problema con la sessione corrente <br/> Si prega di aggiornare la pagina del browser o chiudere il browser e riprovare",
 errorStartEndDates: "the '${1}' must not be after the '${2}'",
 errorSubmitForm: "Errore in submitForm('${1}'&#44; '${2}'&#44; '${3}') &#58; <br/> Form '${3}' non è un widget",

@@ -1973,6 +1973,7 @@ errorRegisterGlobals: "register_globals devre dışı bırakılmalıdır (false 
 errorRemoveTooMuchWork: "Kendi işinizden daha fazlasını denediniz ve doğrudan kaldırdınız (${1}). & # 34; Sevkiyat işini & # 34; kullanmalısınız düğme bunun için",
 errorReopenControl: "Cannot re-open this item that is under a closed item (${1})",
 errorReplaceResourceNotChanged: "yeni kaynak mevcuttan farklı olmalıdır",
+errorSameName: "same version name",
 errorSessionHash: "Geçerli oturumda bir sorun oluştu. <br/> Tarayıcı sayfasını yenileyin veya tarayıcıyı kapatın ve tekrar deneyin. <br/> Ayrıca&#44 çerezlerin etkinleştirildiğini de kontrol edin. <br/> Sorun devam ederse&#44 yöneticinize başvurun.",
 errorStartEndDates: "'${1}'&#44 '${2}' tarihinden sonra olmamalı",
 errorSubmitForm: "SubmitForm Hata ( '${1}'&#44 '${2}'&#44 '${3}') Form '${3}'&#44 bir eklendi değildir <br/>.",

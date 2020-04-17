@@ -1973,6 +1973,7 @@ errorRegisterGlobals: "register_globals doit être désactivé (positionné à f
 errorRemoveTooMuchWork: "Vous tentez de retirer plus que votre propre travail (${1}). <br/>Vous devriez utiliser le bouton &#34;Répartir&#34; pour cela.",
 errorReopenControl: "Impossible de ré-ouvrir cet élément qui est sous un élément clos (${1})",
 errorReplaceResourceNotChanged: "La nouvelle ressource doit être différente de celle qu'elle remplace.",
+errorSameName: "même nom de version",
 errorSessionHash: "Une anomalie est survenue avec la session actuelle.<br/>Rafraîchissez la page ou fermez le navigateur et réessayez.<br/>Vérifiez aussi que les cookies sont autorisés.<br/>Si le problème persiste&#44; contactez votre administrateur.",
 errorStartEndDates: "La '${1}'  ne doit pas être postérieure à la '${2}'",
 errorSubmitForm: "Erreur sur submitForm('${1}'&#44; '${2}'&#44; '${3}') &#58; <br/> Le formulaire '${3}' n'est pas un 'widget'.",
