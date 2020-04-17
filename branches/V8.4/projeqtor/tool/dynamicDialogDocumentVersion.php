@@ -155,7 +155,7 @@ if (array_key_exists('isIE',$_REQUEST)) {
         <td> 
          <div dojoType="dijit.form.TextBox" 
           id="documentVersionNewVersionDisplay" name="documentVersionNewVersionDisplay"
-          style="width: 450px;" readonly
+          style="width: 450px;" readonly required
           maxlength="100"
           class="input">  
          </div>  
