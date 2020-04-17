@@ -2440,7 +2440,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo '</div>';
         }
         if ($displayComboButtonCol) {
-          echo '<div id="'.$col.'ButtonDetail" onmouseleave="dojo.byId(\''.$col.'IconViewSubMenu\').style.display=\'none\';"';
+          echo '<div id="'.$col.'ButtonDetail" onmouseleave="hideIconViewSubMenu(\''.$col.'\');"';
           echo ' title="'.i18n('showDetail').'" style="float:right;margin-right:3px;'.$specificStyleWithoutCustom.'"';
           echo ' class="roundedButton generalColClass '.$col.'Class">';
           echo '<div class="iconView" ';
@@ -2448,7 +2448,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo 'oncontextmenu="event.preventDefault();showIconViewSubMenu(\''.$col.'\');"></div>';
           echo '</div>';
           echo '<div id="'.$col.'IconViewSubMenu" name="'.$col.'IconViewSubMenu" style="height:auto;overflow-y:auto;position:absolute;z-index: 999999999;display:none;width:160px;background-color:white;border:1px solid grey;"
-                onmouseleave="dojo.byId(\''.$col.'IconViewSubMenu\').style.display=\'none\';" onmouseenter="dojo.byId(\''.$col.'IconViewSubMenu\').style.display=\'block\';">';
+                onmouseleave="dojo.byId(\''.$col.'IconViewSubMenu\').style.display=\'none\';" onmouseenter="dojo.byId(\''.$col.'IconViewSubMenu\').style.display=\'block\';clearTimeout(hideIconViewSubMenuTimeOut);">';
           echo  '<div onClick="showDetail(null,'.(($canCreateCol)?1:0).',\''.$comboClass.'\',false,null,'.(($obj->isAttributeSetToField($col, 'canSearchForAll'))?'true':'false').');newDetailItem();" style="cursor:pointer;">';
           echo '  <table style="width:100%">
                     <tr>
