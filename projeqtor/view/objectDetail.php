@@ -2447,14 +2447,15 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo ' onclick="showDetail(\''.$col.'\','.(($canCreateCol)?1:0).',\''.$comboClass.'\',false,null,'.(($obj->isAttributeSetToField($col, 'canSearchForAll'))?'true':'false').')"';
           echo 'oncontextmenu="event.preventDefault();showIconViewSubMenu(\''.$col.'\');"></div>';
           echo '</div>';
-          echo '<div id="'.$col.'IconViewSubMenu" name="'.$col.'IconViewSubMenu" style="height:auto;overflow-y:auto;position:absolute;z-index: 999999999;display:none;width:160px;background-color:white;border:1px solid grey;">';
-          echo  '<div onClick="showDetail(\''.$col.'\','.(($canCreateCol)?1:0).',\''.$comboClass.'\',false,null,'.(($obj->isAttributeSetToField($col, 'canSearchForAll'))?'true':'false').');" style="cursor:pointer;">';
+          echo '<div id="'.$col.'IconViewSubMenu" name="'.$col.'IconViewSubMenu" style="height:auto;overflow-y:auto;position:absolute;z-index: 999999999;display:none;width:160px;background-color:white;border:1px solid grey;"
+                onmouseleave="dojo.byId(\''.$col.'IconViewSubMenu\').style.display=\'none\';" onmouseenter="dojo.byId(\''.$col.'IconViewSubMenu\').style.display=\'block\';">';
+          echo  '<div onClick="showDetail(null,'.(($canCreateCol)?1:0).',\''.$comboClass.'\',false,null,'.(($obj->isAttributeSetToField($col, 'canSearchForAll'))?'true':'false').');newDetailItem();" style="cursor:pointer;">';
           echo '  <table style="width:100%">
                     <tr>
                       <td style="width:24px;padding-top:2px;padding-left:2px;">
-                        <div class="iconView">&nbsp;</div>
+                        <div class="iconButtonAdd16">&nbsp;</div>
                       </td>
-                      <td class="emailHistorical"  style="vertical-align:middle;">'.i18n('showDetail').'</td>
+                      <td class="emailHistorical"  style="vertical-align:middle;">'.i18n('comboNewButton').'</td>
                     </tr>
                   </table>';
           echo '</div>';
@@ -2468,13 +2469,13 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
                     </tr>
                   </table>';
           echo '</div>';
-          echo  '<div onClick="showDetail(null,'.(($canCreateCol)?1:0).',\''.$comboClass.'\',false,null,'.(($obj->isAttributeSetToField($col, 'canSearchForAll'))?'true':'false').');newDetailItem();" style="cursor:pointer;">';
+          echo  '<div onClick="showDetail(\''.$col.'\','.(($canCreateCol)?1:0).',\''.$comboClass.'\',false,null,'.(($obj->isAttributeSetToField($col, 'canSearchForAll'))?'true':'false').');" style="cursor:pointer;">';
           echo '  <table style="width:100%">
                     <tr>
                       <td style="width:24px;padding-top:2px;padding-left:2px;">
-                        <div class="iconButtonAdd16">&nbsp;</div>
+                        <div class="iconView">&nbsp;</div>
                       </td>
-                      <td class="emailHistorical"  style="vertical-align:middle;">'.i18n('comboNewButton').'</td>
+                      <td class="emailHistorical"  style="vertical-align:middle;">'.i18n('showDetail').'</td>
                     </tr>
                   </table>';
           echo '</div>';

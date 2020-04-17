@@ -7461,7 +7461,6 @@ function showIconViewSubMenu(col){
 	}else{
 		dojo.byId(name).style.display='none';
 	}
-	setTimeout("dojo.byId("+name+").style.display='none';",3000);
 }
 // ====================================================================================
 // ALERTS
