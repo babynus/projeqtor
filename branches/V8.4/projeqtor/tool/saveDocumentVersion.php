@@ -49,6 +49,13 @@ $documentVersionLink="";
 $uploadedFile=false;
 projeqtor_set_time_limit(3600); // 60mn
 
+$docVersDispl=(RequestHandler::isCodeSet('documentVersionVersionDisplay'))?RequestHandler::getValue('documentVersionVersionDisplay'):'';
+$docNewVersDispl=(RequestHandler::isCodeSet('documentVersionNewVersionDisplay'))?RequestHandler::getValue('documentVersionVersionDisplay'):'';
+
+if($docVersDispl and $docNewVersDispl  and $docVersDispl==$docNewVersDispl){
+  $error=htmlGetWarningMessage(i18n('errorSameName'));
+}
+
 $documentVersionId=null;
 if (array_key_exists('documentVersionId',$_REQUEST)) {
     $documentVersionId=$_REQUEST['documentVersionId'];
