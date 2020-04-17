@@ -3268,6 +3268,9 @@ function calculateNewVersion(update) {
           .byId('documentVersionNewRevision').value, dojo
           .byId('documentVersionNewDraft').value, numVers, dateVers, nameVers);
   dijit.byId('documentVersionNewVersionDisplay').set('value', newVers);
+  if (typeEvo == "EXT") {
+    dojo.byId('oldDocumentVersionNewVersionDisplay').value= newVers;
+  }
   if (isDraft) {
     dijit.byId('documentVersionIsRef').set('checked', false);
     setDisplayIsRefDocumentVersion();
@@ -3285,6 +3288,15 @@ function setDisplayIsRefDocumentVersion() {
     dojo.style(dojo.byId('documentVersionIsRefDisplay'), {
       display : 'none'
     });
+  }
+}
+
+function checkValidNameVersion(){
+  var newName=dojo.byId('documentVersionNewVersionDisplay').value;
+  var oldName=dojo.byId('oldDocumentVersionNewVersionDisplay').value;
+  if(newName==oldName){
+    showAlert(i18n('errorSameName'));
+    dijit.byId('documentVersionNewVersionDisplay').set('value', '');
   }
 }
 // =============================================================================

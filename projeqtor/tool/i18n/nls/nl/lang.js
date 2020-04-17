@@ -1973,6 +1973,7 @@ errorRegisterGlobals: "register_globals moeten worden uitgeschakeld (ingesteld o
 errorRemoveTooMuchWork: "You tried and directly remove more than your own work (${1}). You should use &#34;Dispatch work&#34; button for this.",
 errorReopenControl: "Cannot re-open this item that is under a closed item (${1})",
 errorReplaceResourceNotChanged: "nieuwe resource moet anders zijn dan de bestaande",
+errorSameName: "same version name",
 errorSessionHash: "Er is een probleem opgetreden met de huidige sessie <br/> Vernieuw de browser pagina of sluit de browser en probeer het opnieuw",
 errorStartEndDates: "de '${1}' mag niet na de '${2}' komen",
 errorSubmitForm: "Fout op submitForm ('${1}'&#44; '${2}'&#44; '${3}')&#58; <br/> Formulier '${3}' is geen widget.",

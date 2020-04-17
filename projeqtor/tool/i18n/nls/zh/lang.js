@@ -1973,6 +1973,7 @@ errorRegisterGlobals: "register_globals必须禁用 (设为 false). <br/>请更�
 errorRemoveTooMuchWork: "试图直接删除多项工作 (${1}). 请使用 &#34;拆分工作&#34; 功能.",
 errorReopenControl: "Cannot re-open this item that is under a closed item (${1})",
 errorReplaceResourceNotChanged: "新密码必须不同于原密码",
+errorSameName: "same version name",
 errorSessionHash: "当前进程发生错误.<br/>请刷新浏览器页面或关闭浏览器再重试.<br/>并请检查cookies是否开启.<br/>若问题依旧存在，请联络管理员.",
 errorStartEndDates: "'${1}' 不能在 '${2}'后",
 errorSubmitForm: "<br/> Form '${3}' is not a widget.",

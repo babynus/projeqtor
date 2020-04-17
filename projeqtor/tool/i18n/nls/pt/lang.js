@@ -1973,6 +1973,7 @@ errorRegisterGlobals: "register_globals tem de estar inibido (igual a false). <b
 errorRemoveTooMuchWork: "You tried and directly remove more than your own work (${1}). You should use &#34;Dispatch work&#34; button for this.",
 errorReopenControl: "Cannot re-open this item that is under a closed item (${1})",
 errorReplaceResourceNotChanged: "o novo recurso tem de ser diferente do existente",
+errorSameName: "same version name",
 errorSessionHash: "Um problema ocorreu com a sessão atual<br/>Por favor recarregue a página do navegador ou feche o navegador e tende de novo",
 errorStartEndDates: "o '${1}' não pode estar depois de '${2}'",
 errorSubmitForm: "Erro em submitForm('${1}'&#44; '${2}'&#44; '${3}') &#58; <br/> Formulário '${3}' não é um widget.",

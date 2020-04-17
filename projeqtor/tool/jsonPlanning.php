@@ -874,7 +874,12 @@ use PhpOffice\PhpSpreadsheet\Shared\Trend\Trend;
     $cptSort=0;
     unset($columnsDescription['ObjectType']);
     unset($columnsDescription['ExterRes']);
-    
+    if(!$portfolio){
+      unset($columnsDescription['IdHealthStatus']);
+      unset($columnsDescription['QualityLevel']);
+      unset($columnsDescription['IdTrend']);
+      unset($columnsDescription['IdOverallProgress']);
+    }
     foreach ($columnsDescription as $ganttColName=>$ganttCol) { 
       if ($ganttCol['show']==1) $cptSort++; 
     }
@@ -1123,7 +1128,7 @@ use PhpOffice\PhpSpreadsheet\Shared\Trend\Trend;
           if ($col=='IdStatus') echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  ($line["status"])  . '</TD>' ;
           if ($col=='IdHealthStatus' and $portfolio) echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  ($line["health"])  . '</TD>' ;
           if ($col=='IdQualityLevel' and $portfolio) echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  ($line["quality"])  . '</TD>' ;
-          if ($col=='IdTrend'and $portfolio) echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  ($line["trend"])  . '</TD>' ;
+          if ($col=='IdTrend' and $portfolio) echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  ($line["trend"])  . '</TD>' ;
           if ($col=='IdOverallProgress' and $portfolio) echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  ($line["overallprogress"])  . '</TD>' ;
           if ($col=='Duration') echo '  <TD class="reportTableData" style="' . $compStyle . '" >' . $duration  . '</TD>' ;
           if ($col=='Progress') echo '  <TD class="reportTableData" style="' . $compStyle . '" >' . percentFormatter($progress) . '</TD>' ;

@@ -1973,6 +1973,7 @@ errorRegisterGlobals: "register_globals must be disabled (set to false). <br/>Up
 errorRemoveTooMuchWork: "You tried and directly remove more than your own work (${1}). You should use &#34;Dispatch work&#34; button for this.",
 errorReopenControl: "Cannot re-open this item that is under a closed item (${1})",
 errorReplaceResourceNotChanged: "new resource must be different from existing",
+errorSameName: "same version name",
 errorSessionHash: "An issue occured with current session.<br/>Refresh browser page or close browser and try again.<br/>Also check that cookies are enabled.<br/>If problem persists contact your administrator.",
 errorStartEndDates: "the '${1}' must not be after the '${2}'",
 errorSubmitForm: "Error on submitForm('${1}'&#44; '${2}'&#44; '${3}') &#58; <br/> Form '${3}' is not a widget.",
