@@ -194,9 +194,9 @@ if (Sql::$lastQueryNbRows > 0) {
 		}
 		$display='';
 		if($line['idbudget'] and !in_array($line['id'], $hiddenRow) and $line['id']!=$budgetParent){
-		  $display='style="visibility:collapse"';
+		  $display='visibility:collapse';
 		}
-		echo '<TR id="hierarchicalBudgetRow_'.$id.'" dndType="budgetHierachical" class="dojoDndItem ganttTask'.$rowType.' hierarchicalBudgetRow" height="30px" '.$display.'>';
+		echo '<TR id="hierarchicalBudgetRow_'.$id.'" dndType="budgetHierachical" class="dojoDndItem ganttTask'.$rowType.' hierarchicalBudgetRow" height="30px" style="cursor:default;'.$display.'">';
 		echo '  <TD class="ganttName reportTableData" style="width:30px;min-width:30px;max-width:30px;border-right:0px;' . $compStyle . '">';
 		echo '    <span class="dojoDndHandle handleCursor">';
 		echo '      <table><tr>';
@@ -207,11 +207,11 @@ if (Sql::$lastQueryNbRows > 0) {
 		echo '      </tr></table>';
 		echo '    </span>';
 		echo '  </TD>';
-		echo '  <TD class="ganttName reportTableData" style="border-left:0px; text-align: left;' . $compStyle . '" nowrap>';
-		echo '    <div class="ganttLeftHover" style="width:100%;" onClick="dojo.byId('."'objectId'".').value='.$id.';loadContent('."'objectDetail.php'".', '."'detailDiv'".','."'listForm'".');"></div>';
-		echo '    <table><tr>';
-		echo '     <td>'.$tab.'</tab>';
-		echo '     <td>';
+		echo '  <TD class="ganttName reportTableData" style="overflow:hidden;border-left:0px; text-align: left;' . $compStyle . '" nowrap>';
+		echo '    <div style="position:relative;height:100%;width:100%;"><div class="" style="position:absolute;overflow:hidden;width:100%;height:100%;top:0px;" >';
+		echo '    <table style="width:100%;height:100%;vertical-align:middle;"><tr  style="height:100%">';
+		echo '     <td style="width:1px">'.$tab.'</tab>';
+		echo '     <td style="position:relative;width:10px">';
 		if($pGroup){
 			echo '     <div id="group_'.$line['id'].'" class="'.$class.'"';
 			echo '      style="position: relative; z-index: 100000; width:16px; height:13px;"';
@@ -220,7 +220,8 @@ if (Sql::$lastQueryNbRows > 0) {
 		  echo '     <div class="ganttNoExpand" style="position: relative; z-index: 100000; width:16px; height:13px;" >&nbsp;&nbsp;&nbsp;&nbsp;</div>';
 		}
 		echo '     </td>';
-		echo '     <td>' . htmlEncode($line['name']).'</td>';
+		echo '     <td style="position:relative" onClick="dojo.byId('."'objectId'".').value='.$id.';loadContent('."'objectDetail.php'".', '."'detailDiv'".','."'listForm'".');">' . htmlEncode($line['name']).'</td>';
+		echo '     </div></div>';
 		echo '  <tr></table>';
 		echo '</TD>';
 		echo '  <TD class="ganttName reportTableData amountTableTD" style="' . $compStyle . ';"><div class="amountTableDiv">' .htmlDisplayCurrency($plannedAmount). '</div></TD>' ;
