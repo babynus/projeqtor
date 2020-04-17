@@ -1973,6 +1973,7 @@ errorRegisterGlobals: "NOTA&#58; register_globals debe estar deshabilitado (set 
 errorRemoveTooMuchWork: "Intentó y eliminó directamente más que su propio trabajo (${1}). Debería usar el botón &#34Despachar trabajo&#34 para esto.",
 errorReopenControl: "Cannot re-open this item that is under a closed item (${1})",
 errorReplaceResourceNotChanged: "nuevo recurso debe ser diferente del existente",
+errorSameName: "same version name",
 errorSessionHash: "¡ERROR! en la sesión actual<br/>Por favor&#44; refrescar el navegador o reiniciarlo y volver a probar",
 errorStartEndDates: "El '${1}' no debe estar después de '${2}'",
 errorSubmitForm: "Error en submitForm('${1}'&#44; '${2}'&#44; '${3}') ",

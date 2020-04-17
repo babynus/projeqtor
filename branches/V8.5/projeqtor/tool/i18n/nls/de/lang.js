@@ -1973,6 +1973,7 @@ errorRegisterGlobals: "register_globals' muss abgeschalten werden (Wert = false)
 errorRemoveTooMuchWork: "Sie versuchten mehr als Ihre eigene Arbeit (${1}). Sie sollten hierfür &#34 nutzen;Versand Arbeit&#34; Button dafür benutzten.",
 errorReopenControl: "Cannot re-open this item that is under a closed item (${1})",
 errorReplaceResourceNotChanged: "Die neue Resource muss unterschiedlich zu existierenden sein.",
+errorSameName: "same version name",
 errorSessionHash: "In der laufenden Session ist ein Fehler aufgetreten<br/>Bitte Browserseite aktualisieren oder Browser neu starten.",
 errorStartEndDates: "${1}' darf nicht spätester als '${2}' sein.",
 errorSubmitForm: "Fehler bei 'submitForm('${1}'&#44; '${2}'&#44; '${3}')' &#58; <br/> Form '${3}' ist kein Steuerelement.",

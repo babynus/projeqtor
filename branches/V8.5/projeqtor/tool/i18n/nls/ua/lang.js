@@ -1973,6 +1973,7 @@ errorRegisterGlobals: "&#34;register_globals&#34; мусить бути вимк
 errorRemoveTooMuchWork: "Ви намагалися безпосередньо усунути більше&#44; ніж власну роботу (${1}). Для цього вам слід скористатися кнопкою &#34;робота Організатора&#34;(Dispatch work).",
 errorReopenControl: "Cannot re-open this item that is under a closed item (${1})",
 errorReplaceResourceNotChanged: "Новий ресурс має відрізнятись від існуючих",
+errorSameName: "same version name",
 errorSessionHash: "проблема сталася в поточної сесії<br/>Будь ласка&#44; оновіть сторінку браузера або перезавантажте браузер і спробуйте знову ",
 errorStartEndDates: "${1}' не мусить бути після '${2}'",
 errorSubmitForm: "Помилка у формі (SubmitForm) ('${1}'&#44; '${2}'&#44; '${3}')&#58; <br/>Форма '${3}' не є об'єкт віджет(widget).",
