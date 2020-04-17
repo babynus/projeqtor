@@ -1127,7 +1127,7 @@ use PhpOffice\PhpSpreadsheet\Shared\Trend\Trend;
           if ($col=='Type') echo '  <TD class="reportTableData" style="' . $compStyle . '" >' . ($line["type"])  . '</TD>' ;
           if ($col=='IdStatus') echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  ($line["status"])  . '</TD>' ;
           if ($col=='IdHealthStatus' and $portfolio) echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  ($line["health"])  . '</TD>' ;
-          if ($col=='IdQualityLevel' and $portfolio) echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  ($line["quality"])  . '</TD>' ;
+          if ($col=='QualityLevel' and $portfolio) echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  ($line["quality"])  . '</TD>' ;
           if ($col=='IdTrend' and $portfolio) echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  ($line["trend"])  . '</TD>' ;
           if ($col=='IdOverallProgress' and $portfolio) echo '  <TD class="reportTableData" style="' . $compStyle . '" >' .  ($line["overallprogress"])  . '</TD>' ;
           if ($col=='Duration') echo '  <TD class="reportTableData" style="' . $compStyle . '" >' . $duration  . '</TD>' ;
