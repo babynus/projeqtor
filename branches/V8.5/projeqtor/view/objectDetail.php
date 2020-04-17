@@ -1441,7 +1441,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             } else if ($thumbColor) {
               $formatedThumb=formatColorThumb($col, $val, 20, 'right');
             }
-            debugLog("$col => $formatedThumb");
             $thumb=(! $print && $val && ($thumbRes or $thumbColor or $thumbIcon) && $showThumb && $formatedThumb)?true:false;
             echo '<label for="'.$col.'" class="'.(($thumb)?'labelWithThumb ':'').'generalColClass '.$col.'Class" style="'.$specificStyle.';'.$labelStyle.'">';
             if ($outMode=='pdf') {
@@ -2446,7 +2445,39 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo ' class="roundedButton generalColClass '.$col.'Class">';
           echo '<div class="iconView" ';
           echo ' onclick="showDetail(\''.$col.'\','.(($canCreateCol)?1:0).',\''.$comboClass.'\',false,null,'.(($obj->isAttributeSetToField($col, 'canSearchForAll'))?'true':'false').')"';
-          echo '></div>';
+          echo 'oncontextmenu="event.preventDefault();showIconViewSubMenu(\''.$col.'\');"></div>';
+          echo '</div>';
+          echo '<div id="'.$col.'IconViewSubMenu" name="'.$col.'IconViewSubMenu" style="height:auto;overflow-y:auto;position:absolute;z-index: 999999999;display:none;width:160px;background-color:white;border:1px solid grey;">';
+          echo  '<div onClick="showDetail(\''.$col.'\','.(($canCreateCol)?1:0).',\''.$comboClass.'\',false,null,'.(($obj->isAttributeSetToField($col, 'canSearchForAll'))?'true':'false').');" style="cursor:pointer;">';
+          echo '  <table style="width:100%">
+                    <tr>
+                      <td style="width:24px;padding-top:2px;padding-left:2px;">
+                        <div class="iconView">&nbsp;</div>
+                      </td>
+                      <td class="emailHistorical"  style="vertical-align:middle;">'.i18n('showDetail').'</td>
+                    </tr>
+                  </table>';
+          echo '</div>';
+          echo  '<div onClick="showDetail(null,'.(($canCreateCol)?1:0).',\''.$comboClass.'\',false,null,'.(($obj->isAttributeSetToField($col, 'canSearchForAll'))?'true':'false').');" style="cursor:pointer;">';
+          echo '  <table style="width:100%">
+                    <tr>
+                      <td style="width:24px;padding-top:2px;padding-left:2px;">
+                        <div class="iconButtonList16">&nbsp;</div>
+                      </td>
+                      <td class="emailHistorical"  style="vertical-align:middle;">'.i18n('comboSearchButton').'</td>
+                    </tr>
+                  </table>';
+          echo '</div>';
+          echo  '<div onClick="showDetail(null,'.(($canCreateCol)?1:0).',\''.$comboClass.'\',false,null,'.(($obj->isAttributeSetToField($col, 'canSearchForAll'))?'true':'false').');newDetailItem();" style="cursor:pointer;">';
+          echo '  <table style="width:100%">
+                    <tr>
+                      <td style="width:24px;padding-top:2px;padding-left:2px;">
+                        <div class="iconButtonAdd16">&nbsp;</div>
+                      </td>
+                      <td class="emailHistorical"  style="vertical-align:middle;">'.i18n('comboNewButton').'</td>
+                    </tr>
+                  </table>';
+          echo '</div>';
           echo '</div>';
         }
         if ($hasOtherVersion) {

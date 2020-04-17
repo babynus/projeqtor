@@ -7451,6 +7451,18 @@ function customMenuRemoveItem() {
   dojo.removeClass('iconMenuBar'+customMenuAddRemoveClass,'menuBarCustom');
   dojo.byId('customMenuRemove').style.display='none';
 }
+
+function showIconViewSubMenu(col){
+	var name = col+'IconViewSubMenu';
+	var offsetLeft=dojo.byId(col+'ButtonDetail').offsetLeft;
+	if(dojo.byId(name).style.display == 'none'){
+		dojo.byId(name).style.left=offsetLeft+'px';
+		dojo.byId(name).style.display='block';
+	}else{
+		dojo.byId(name).style.display='none';
+	}
+	setTimeout("dojo.byId("+name+").style.display='none';",3000);
+}
 // ====================================================================================
 // ALERTS
 // ====================================================================================
