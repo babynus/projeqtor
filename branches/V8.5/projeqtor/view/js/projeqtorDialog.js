@@ -7474,6 +7474,15 @@ function showIconViewSubMenu(col){
 		dojo.byId(name).style.display='none';
 	}
 }
+
+var hideIconViewSubMenuTimeOut;
+function hideIconViewSubMenu(col){
+	var name = col+'IconViewSubMenu';
+	if(hideIconViewSubMenuTimeOut){
+		clearTimeout(hideIconViewSubMenuTimeOut);
+	}
+	hideIconViewSubMenuTimeOut=setTimeout("dojo.byId("+name+").style.display='none';",300);
+}
 // ====================================================================================
 // ALERTS
 // ====================================================================================
