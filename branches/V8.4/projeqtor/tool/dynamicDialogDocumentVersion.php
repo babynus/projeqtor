@@ -153,10 +153,12 @@ if (array_key_exists('isIE',$_REQUEST)) {
          <label for="documentVersionNewVersionDisplay" ><?php echo i18n("colNextDocumentVersion");?>&nbsp;:&nbsp;</label>
         </td>
         <td> 
+        <input id="oldDocumentVersionNewVersionDisplay" name="oldDocumentVersionNewVersionDisplay"  value="" hidden/>
          <div dojoType="dijit.form.TextBox" 
           id="documentVersionNewVersionDisplay" name="documentVersionNewVersionDisplay"
           style="width: 450px;" readonly required
           maxlength="100"
+          onblur="checkValidNameVersion();"
           class="input">  
          </div>  
         </td>
