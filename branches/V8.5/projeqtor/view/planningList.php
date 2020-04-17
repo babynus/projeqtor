@@ -272,7 +272,9 @@ foreach ($lstUserP as $prof){
                       <td colsan="3">
                         <table>
                           <tr>
-                            <?php if ($canPlan and $showValidationButton) { ?>
+                            <?php if ($canPlan) { 
+                                    if($showValidationButton){
+                              ?>
                             <td colspan="1" width="32px">
                               <button id="savePlanningButton" dojoType="dijit.form.Button" showlabel="false"
                                title="<?php echo i18n('validatePlanning');?>"
@@ -283,6 +285,7 @@ foreach ($lstUserP as $prof){
                          </script>
                               </button>
                             </td>
+                                <?php }?>
                              <td colspan="1" width="32px">
                               <button id="saveBaselineButton" dojoType="dijit.form.Button" showlabel="false"
                                title="<?php echo i18n('savePlanningBaseline');?>"
