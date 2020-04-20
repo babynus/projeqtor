@@ -19,3 +19,5 @@ INSERT INTO `${prefix}habilitationother` (idProfile,scope,rightAccess) VALUES
 DELETE FROM `${prefix}columnselector` WHERE objectClass='Recipient' and field='bank' and attribute='bank';
 
 ALTER TABLE `${prefix}type` ADD COLUMN `icon` varchar(100);
+
+ALTER TABLE `${prefix}globalview` ADD COLUMN `creationDate` date DEFAULT NULL;
