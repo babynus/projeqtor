@@ -133,7 +133,7 @@ class MeetingPlanningElementMain extends PlanningElement {
   
   // ADD BY Marc TABARY - 2017-02-16 - WORK AND COST VISIBILITY 
   private function showValidated() {
-    $this->_tab_4_2 = array('validated','assigned', 'real', 'left', 'work','cost');
+    $this->_tab_4_2_smallLabel = array('validated','assigned', 'real', 'left', 'work','cost');
 
     self::$_fieldsAttributes['validatedWork']='';
     self::$_fieldsAttributes['assignedWork']='hidden';
@@ -146,7 +146,7 @@ class MeetingPlanningElementMain extends PlanningElement {
   }
 
   private function showOnlyWork() {
-    $this->_tab_4_2 = array('validated','assigned', 'real', 'left', 'work','cost');
+    $this->_tab_4_2_smallLabel = array('validated','assigned', 'real', 'left', 'work','cost');
 
     self::$_fieldsAttributes['validatedWork']='';
     self::$_fieldsAttributes['assignedWork']='readonly';
@@ -159,7 +159,7 @@ class MeetingPlanningElementMain extends PlanningElement {
   }
   
   private function showOnlyCost() {
-    $this->_tab_4_2 = array('validated','assigned', 'real', 'left', 'work','cost');
+    $this->_tab_4_2_smallLabel = array('validated','assigned', 'real', 'left', 'work','cost');
 
     self::$_fieldsAttributes['validatedWork']='hidden';
     self::$_fieldsAttributes['assignedWork']='hidden';
@@ -172,7 +172,7 @@ class MeetingPlanningElementMain extends PlanningElement {
   }
 
   private function showOnlyValidatedWorkAndAllCost() {
-    $this->_tab_4_2 = array('validated','assigned', 'real', 'left', 'work','cost');
+    $this->_tab_4_2_smallLabel = array('validated','assigned', 'real', 'left', 'work','cost');
 
     self::$_fieldsAttributes['validatedWork']='';
     self::$_fieldsAttributes['assignedWork']='hidden';
@@ -185,7 +185,7 @@ class MeetingPlanningElementMain extends PlanningElement {
   }
 
   private function hideWorkAndShowValidatedCost() {
-    $this->_tab_4_2 = array('validated','assigned', 'real', 'left', 'work','cost');
+    $this->_tab_4_2_smallLabel = array('validated','assigned', 'real', 'left', 'work','cost');
 
     self::$_fieldsAttributes['validatedWork']='hidden';
     self::$_fieldsAttributes['assignedWork']='hidden';
@@ -198,7 +198,7 @@ class MeetingPlanningElementMain extends PlanningElement {
   }
 
   private function showAllWorkAndValidatedCost() {
-    $this->_tab_4_2 = array('validated','assigned', 'real', 'left', 'work','cost');
+    $this->_tab_4_2_smallLabel = array('validated','assigned', 'real', 'left', 'work','cost');
 
     self::$_fieldsAttributes['validatedWork']='';
     self::$_fieldsAttributes['assignedWork']='readonly';
@@ -211,7 +211,7 @@ class MeetingPlanningElementMain extends PlanningElement {
   }
   
   private function showOnlyValidatedWorkAndHideCost() {
-    $this->_tab_4_2 = array('validated','assigned', 'real', 'left', 'work','cost');
+    $this->_tab_4_2_smallLabel = array('validated','assigned', 'real', 'left', 'work','cost');
 
     self::$_fieldsAttributes['validatedWork']='';
     self::$_fieldsAttributes['assignedWork']='hidden';
