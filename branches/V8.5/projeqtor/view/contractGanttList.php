@@ -172,7 +172,7 @@ if ($objectClass==='ClientContract') {
 									</div>&nbsp;
 								</td>
               </tr>
-              <?php if (strtoupper(Parameter::getGlobalParameter('displayResourcePlan'))!='NO') {?>
+              <?php if (strtoupper(Parameter::getUserParameter('displayResourcePlan'))!='NO') {?>
 							<tr style="white-space: nowrap;">
 								<td style="width: 120px; padding-right: 8px;">
                 <?php echo i18n("labelShowResourceShort");?>

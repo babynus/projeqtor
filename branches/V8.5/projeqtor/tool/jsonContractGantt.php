@@ -8,7 +8,7 @@ scriptLog('   ->/tool/jsonContractGantt.php');
 SqlElement::$_cachedQuery['SupllierContract']=array();
 
 $objectClass=(RequestHandler::isCodeSet('objectClass'))?RequestHandler::getValue('objectClass'):'';
-$displayResource=Parameter::getGlobalParameter('displayResourcePlan');
+$displayResource=Parameter::getUserParameter('displayResourcePlan');
 $lstContract= array();
 $nbRows=0;
 $obj=new $objectClass();
