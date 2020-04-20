@@ -623,7 +623,7 @@ static protected function drawProductUsingComponentVersion($class, $id)
   public function displayVersion($parentVersion = NULL) {
     $displayProductversionActivity = Parameter::getUserParameter('planningVersionDisplayProductVersionActivity');
     //$showResource=Parameter::getUserParameter('planningShowResource');
-    $displayResource=Parameter::getGlobalParameter('displayResourcePlan');
+    $displayResource=Parameter::getUserParameter('displayResourcePlan');
     
     if (!$displayResource) $displayResource="initials";
     
