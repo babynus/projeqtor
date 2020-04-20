@@ -744,7 +744,6 @@ function selectDetailItem(selectedValue, lastSavedName) {
     hideDetail();
     return;
   }
-  
   if (combo) {
   	if(comboName == 'projectSelectorFiletering'){
   		var pos = idFldVal.indexOf('_');
@@ -7464,14 +7463,21 @@ function customMenuRemoveItem() {
   dojo.byId('customMenuRemove').style.display='none';
 }
 
-function showIconViewSubMenu(col){
-	var name = col+'IconViewSubMenu';
-	var offsetLeft=dojo.byId(col+'ButtonDetail').offsetLeft;
+function showIconViewSubMenu(comboName){
+	var name = comboName+'IconViewSubMenu';
+	var offsetLeft=dojo.byId(comboName+'ButtonDetail').offsetLeft;
 	if(dojo.byId(name).style.display == 'none'){
 		dojo.byId(name).style.left=offsetLeft+'px';
 		dojo.byId(name).style.display='block';
 	}else{
 		dojo.byId(name).style.display='none';
+	}
+	var val=null;
+	if (dijit.byId(comboName)) {
+		val=dijit.byId(comboName).get('value');
+	}
+	if(!val || val == "" || val == " " || val == "*"){
+		dojo.byId(comboName+'SubViewItem').style.display='none';
 	}
 }
 

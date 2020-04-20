@@ -4226,6 +4226,7 @@ showHistory: "показати історію змін для елемента  
 showIdleElements: "показ.нечинні(idle) ел-ти ",
 showInService: "тільки в експлуатації",
 showInToday: "долучити цей звіт до Щоденної сторінкі",
+showItem: "View item",
 showLastLogfile: "показати останній лог-файл   ",
 showLeftWork: "показ.доробки(решту роботи) праворуч рядка Ганта",
 showListLeft: "Show list left",
