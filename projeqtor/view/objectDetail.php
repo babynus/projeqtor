@@ -2449,17 +2449,17 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo '</div>';
           echo '<div id="'.$col.'IconViewSubMenu" name="'.$col.'IconViewSubMenu" style="height:auto;overflow-y:auto;position:absolute;z-index: 999999999;display:none;width:160px;background-color:white;border:1px solid grey;"
                 onmouseleave="dojo.byId(\''.$col.'IconViewSubMenu\').style.display=\'none\';" onmouseenter="dojo.byId(\''.$col.'IconViewSubMenu\').style.display=\'block\';clearTimeout(hideIconViewSubMenuTimeOut);">';
-          echo  '<div onClick="showDetail(null,'.(($canCreateCol)?1:0).',\''.$comboClass.'\',false,null,'.(($obj->isAttributeSetToField($col, 'canSearchForAll'))?'true':'false').');newDetailItem();" style="cursor:pointer;">';
+          echo  '<div id="'.$col.'SubViewItem" name="subViewItem" onClick="showDetail(\''.$col.'\','.(($canCreateCol)?1:0).',\''.$comboClass.'\',false,null,false);" style="cursor:pointer;">';
           echo '  <table style="width:100%">
                     <tr>
                       <td style="width:24px;padding-top:2px;padding-left:2px;">
-                        <div class="iconButtonAdd16">&nbsp;</div>
+                        <div class="iconFollowup16">&nbsp;</div>
                       </td>
-                      <td class="emailHistorical"  style="vertical-align:middle;">'.i18n('comboNewButton').'</td>
+                      <td class="emailHistorical"  style="vertical-align:middle;">'.i18n('showItem').'</td>
                     </tr>
                   </table>';
           echo '</div>';
-          echo  '<div onClick="showDetail(null,'.(($canCreateCol)?1:0).',\''.$comboClass.'\',false,null,'.(($obj->isAttributeSetToField($col, 'canSearchForAll'))?'true':'false').');" style="cursor:pointer;">';
+          echo  '<div id="'.$col.'SubSearchItem" name="subSearchItem" onClick="showDetail(\''.$col.'\','.(($canCreateCol)?1:0).',\''.$comboClass.'\',false,null,true);" style="cursor:pointer;">';
           echo '  <table style="width:100%">
                     <tr>
                       <td style="width:24px;padding-top:2px;padding-left:2px;">
@@ -2469,13 +2469,13 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
                     </tr>
                   </table>';
           echo '</div>';
-          echo  '<div onClick="showDetail(\''.$col.'\','.(($canCreateCol)?1:0).',\''.$comboClass.'\',false,null,'.(($obj->isAttributeSetToField($col, 'canSearchForAll'))?'true':'false').');" style="cursor:pointer;">';
+          echo  '<div id="'.$col.'SubAddItem" name="subAddItem" onClick="showDetail(\''.$col.'\','.(($canCreateCol)?1:0).',\''.$comboClass.'\',false,null,'.(($obj->isAttributeSetToField($col, 'canSearchForAll'))?'true':'false').');newDetailItem();" style="cursor:pointer;">';
           echo '  <table style="width:100%">
                     <tr>
                       <td style="width:24px;padding-top:2px;padding-left:2px;">
-                        <div class="iconView">&nbsp;</div>
+                        <div class="iconButtonAdd16">&nbsp;</div>
                       </td>
-                      <td class="emailHistorical"  style="vertical-align:middle;">'.i18n('showDetail').'</td>
+                      <td class="emailHistorical"  style="vertical-align:middle;">'.i18n('comboNewButton').'</td>
                     </tr>
                   </table>';
           echo '</div>';

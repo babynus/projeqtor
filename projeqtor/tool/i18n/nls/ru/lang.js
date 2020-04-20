@@ -4226,6 +4226,7 @@ showHistory: "показать историю изменений этого эл
 showIdleElements: "Показать элементы простоя",
 showInService: "in service only",
 showInToday: "добавить этот отчет на экран «Сегодня»",
+showItem: "View item",
 showLastLogfile: "показать последний лог-файл",
 showLeftWork: "отображать оставшуюся работу справа от диаграммы Ганта",
 showListLeft: "Show list left",

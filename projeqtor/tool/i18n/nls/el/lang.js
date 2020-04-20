@@ -4226,6 +4226,7 @@ showHistory: "εμφάνιση ιστορικού αλλαγών του στοι
 showIdleElements: "ανενεργά στοιχεία",
 showInService: "in service only",
 showInToday: "include this report in Today page",
+showItem: "View item",
 showLastLogfile: "εμφάνιση τελευταίου αρχείου καταγραφής",
 showLeftWork: "show left work on right of gantt bar",
 showListLeft: "Show list left",
