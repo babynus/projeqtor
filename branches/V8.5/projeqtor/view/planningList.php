@@ -527,7 +527,7 @@ foreach ($lstUserP as $prof){
                     </script>
 		              </div>&nbsp;
                   </td></tr>
-                  <?php if (strtoupper(Parameter::getGlobalParameter('displayResourcePlan'))!='NO') {?>
+                  <?php if (strtoupper(Parameter::getUserParameter('displayResourcePlan'))!='NO') {?>
                   <tr><td>
                   <?php echo i18n("labelShowResourceShort");?>
                   </td><td>

@@ -767,7 +767,7 @@ class Parameter extends SqlElement {
                            "showIdleDefault"=>'list',
                            "userNoteDiscussionMode"=>'list',
                            "clientElementList"=>'list',
-                           
+                           "displayResourcePlan"=>'list',
                      'tabExport'=>"tab",
                        'column_Exp_1'=>'newColumn',
                          'sectionPrintExport'=>'section',

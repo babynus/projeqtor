@@ -43,7 +43,7 @@ use PhpOffice\PhpSpreadsheet\Shared\Trend\Trend;
   $columnsDescription=Parameter::getPlanningColumnDescription();
   $obj=new $objectClass();
   $table=$obj->getDatabaseTableName();
-  $displayResource=Parameter::getGlobalParameter('displayResourcePlan');
+  $displayResource=Parameter::getUserParameter('displayResourcePlan');
   if (!$displayResource) $displayResource="initials";
   $print=false;
   if ( array_key_exists('print',$_REQUEST) ) {
