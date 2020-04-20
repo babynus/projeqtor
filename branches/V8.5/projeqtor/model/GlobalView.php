@@ -41,6 +41,7 @@ class GlobalView extends SqlElement {
   public $idProject;
   public $idUser;
   public $description;
+  public $creationDate;
   public $_sec_treatment;
   public $idStatus;
   public $idResource;
@@ -297,22 +298,22 @@ class GlobalView extends SqlElement {
   
   static protected $_globalizables=array(
       'Project'=>array('idProject'=>'id','result'=>'null','reference'=>'null'),
-      'Ticket'=>array('handledDate'=>'handledDateTime','doneDate'=>'doneDateTime','idleDate'=>'idleDateTime','validatedEndDate'=>'initialDueDateTime','plannedEndDate'=>'actualDueDateTime','realEndDate'=>'doneDateTime'),
+      'Ticket'=>array('handledDate'=>'handledDateTime','doneDate'=>'doneDateTime','idleDate'=>'idleDateTime','validatedEndDate'=>'initialDueDateTime','plannedEndDate'=>'actualDueDateTime','realEndDate'=>'doneDateTime', 'creationDate'=>'creationDateTime'),
       'Activity'=>array(),
       'Milestone'=>array(),
       'Action'=>array('validatedEndDate'=>'initialDueDate','plannedEndDate'=>'actualDueDate','realEndDate'=>'doneDate'),
-      'Requirement'=>array('validatedEndDate'=>'initialDueDate','plannedEndDate'=>'actualDueDate','realEndDate'=>'doneDate'),
-      'TestCase'=>array('validatedEndDate'=>'null','plannedEndDate'=>'null','realEndDate'=>'doneDate'),
-      'TestSession'=>array(),
+      'Requirement'=>array('validatedEndDate'=>'initialDueDate','plannedEndDate'=>'actualDueDate','realEndDate'=>'doneDate','creationDate'=>'creationDateTime'),
+      'TestCase'=>array('validatedEndDate'=>'null','plannedEndDate'=>'null','realEndDate'=>'doneDate','creationDate'=>'creationDateTime'),
+      'TestSession'=>array('creationDate'=>'creationDateTime'),
       'Risk'=>array('validatedEndDate'=>'initialEndDate','plannedEndDate'=>'actualEndDate','realEndDate'=>'doneDate'),
       'Opportunity'=>array('validatedEndDate'=>'initialEndDate','plannedEndDate'=>'actualEndDate','realEndDate'=>'doneDate'),
       'Issue'=>array('validatedEndDate'=>'initialEndDate','plannedEndDate'=>'actualEndDate','realEndDate'=>'doneDate'),
-      'Meeting'=>array(),
+      'Meeting'=>array('creationDate'=>'meetingDate'),
       'Decision'=>array('result'=>'null','handled'=>'null','handledDate'=>'null','doneDate'=>'null','idleDate'=>'null','validatedEndDate'=>'null','plannedEndDate'=>'null','realEndDate'=>'decisionDate'),
       'Question'=>array('validatedEndDate'=>'initialDueDate','plannedEndDate'=>'actualDueDate','realEndDate'=>'doneDate'),
-      'Incoming'=>array('idType'=>'null','idStatus'=>'null','handled'=>'null','done'=>'null','cancelled'=>'null','handledDate'=>'null','doneDate'=>'null','idleDate'=>'null','validatedEndDate'=>'initialDate','plannedEndDate'=>'plannedDate','realEndDate'=>'realDate'),
-      'Deliverable'=>array('idType'=>'null','idStatus'=>'null','handled'=>'null','done'=>'null','cancelled'=>'null','handledDate'=>'null','doneDate'=>'null','idleDate'=>'null','validatedEndDate'=>'initialDate','plannedEndDate'=>'plannedDate','realEndDate'=>'realDate'),
-      'Delivery'=>array('handledDate'=>'handledDateTime','doneDate'=>'doneDateTime','idleDate'=>'idleDateTime','validatedEndDate'=>'initialDate','plannedEndDate'=>'plannedDate','realEndDate'=>'realDate'),
+      'Incoming'=>array('idType'=>'null','idStatus'=>'null','handled'=>'null','done'=>'null','cancelled'=>'null','handledDate'=>'null','doneDate'=>'null','idleDate'=>'null','validatedEndDate'=>'initialDate','plannedEndDate'=>'plannedDate','realEndDate'=>'realDate','creationDate'=>'creationDateTime'),
+      'Deliverable'=>array('idType'=>'null','idStatus'=>'null','handled'=>'null','done'=>'null','cancelled'=>'null','handledDate'=>'null','doneDate'=>'null','idleDate'=>'null','validatedEndDate'=>'initialDate','plannedEndDate'=>'plannedDate','realEndDate'=>'realDate','creationDate'=>'creationDateTime'),
+      'Delivery'=>array('handledDate'=>'handledDateTime','doneDate'=>'doneDateTime','idleDate'=>'idleDateTime','validatedEndDate'=>'initialDate','plannedEndDate'=>'plannedDate','realEndDate'=>'realDate','creationDate'=>'creationDateTime'),
   );
 
   public static function drawGlobalizableList() {
