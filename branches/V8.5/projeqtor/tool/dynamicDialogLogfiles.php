@@ -42,6 +42,7 @@ echo '<td width="20%" class="reportTableHeader">'.i18n('colSize').'</td>';
 echo '<td width="10%" class="reportTableHeader"></td>';
 echo '</tr>';
 $list=Logfile::getList(true);
+$list=array_reverse($list);
 setSessionValue('logFilesList', $list);
 foreach ($list as $id=>$file) {
   echo '<tr>';
