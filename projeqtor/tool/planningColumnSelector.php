@@ -49,7 +49,6 @@ foreach ($columnsAll as $order=>$col) {
 		  echo '<div class="dojoDndItem" id="columnSelector'.$col.'" dndType="planningColumn" style="display:none;">';
 		  echo '<span class="dojoDndHandle handleCursor"><img style="width:6px" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
 		}else if (isset($contractGantt) && $col!='ExterRes' && $col!='ObjectType' && $col!='StartDate' && $col!='EndDate' && $col!='Resource' && $col!='IdStatus' &&  $col!='Duration'){
-		  debugLog($col);
 		  echo '<div class="dojoDndItem" id="columnSelector'.$col.'" dndType="planningColumn" style="display:none;">';
 		  echo '<span class="dojoDndHandle handleCursor"><img style="width:6px" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
 		}else if (!isset($portfolioPlanning) and ($col=='IdHealthStatus' or $col=='QualityLevel' or $col=='IdTrend' or $col=='IdOverallProgress')){
