@@ -778,8 +778,9 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
       for (var iSort=0;iSort<sortArray.length;iSort++) {
           var field=sortArray[iSort];
           if (field.substr(0,6)=='Hidden') field=field.substr(6);
+          var showField=getPlanningFieldShow(field);
           var fieldWidth=getPlanningFieldWidth(field);
-          if (field!='Name' && (field=='Resource' || field=='IdStatus'  || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType' || field=='ExterRes' )) vLeftWidth+=1+fieldWidth;
+          if (field!='Name' && showField && (field=='StartDate' || field=='EndDate' ||field=='Resource' || field=='IdStatus' ||  field=='Duration' || field=='ObjectType' || field=='ExterRes'  ) ) vLeftWidth+=1+fieldWidth;
         }
     }
     //ADD
@@ -876,8 +877,9 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
         for (iSort=0;iSort<sortArray.length;iSort++) {
           var field=sortArray[iSort];
           if (field.substr(0,6)=='Hidden') field=field.substr(6);
+          var showField=getPlanningFieldShow(field);
           var fieldWidth=getPlanningFieldWidth(field);
-        if(field!='Name' && (field=='Resource' || field=='IdStatus'  || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType' || field=='ExterRes' )) {
+          if (field!='Name' && showField && (field=='StartDate' || field=='EndDate' ||field=='Resource' || field=='IdStatus' ||  field=='Duration' || field=='ObjectType' || field=='ExterRes'  ) ){
             vLeftTable += '<TD class="ganttLeftTopLine" style="width: ' + fieldWidth + 'px;"></TD>' ;
           }
         }
@@ -889,9 +891,9 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
         for (var iSort=0;iSort<sortArray.length;iSort++) {
           var field=sortArray[iSort];
           if (field.substr(0,6)=='Hidden') field=field.substr(6);
+          var showField=getPlanningFieldShow(field);
           var fieldWidth=getPlanningFieldWidth(field);
-          var classObj='contract';
-          if(field!='Name' && (field=='Resource' || field=='IdStatus'  || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType' || field=='ExterRes'  )) {
+          if (field!='Name' && showField && (field=='StartDate' || field=='EndDate' ||field=='Resource' || field=='IdStatus' ||  field=='Duration' || field=='ObjectType' || field=='ExterRes'  ) ){
             if(field=='ExterRes' && dojo.byId('objectGantt').value=='SupplierContract'){
               field='IdProvider';
             }else if(field=='ExterRes' && dojo.byId('objectGantt').value=='ClientContract'){
@@ -899,11 +901,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             }
             vLeftTable += '<TD id="jsGanttHeaderTD'+field+'" class="ganttLeftTitle" style="position:relative;width: ' + fieldWidth + 'px;max-width: ' + fieldWidth + 'px;overflow:hidden" nowrap>'
               +'<div id="jsGanttHeader'+field+'" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width:' + fieldWidth + 'px; z-index:1000;" class="namePartgroup">';
-            if(field!='ObjectType'){
-              vLeftTable +='<span class="nobr">'+ JSGantt.i18n( ('col'+field).replace('Work','')) + '</span>';
-            }else{
-              vLeftTable +='<span class="nobr">'+ JSGantt.i18n( ('col'+field).replace('Work',''))+' '+JSGantt.i18n(classObj) + '</span>';
-            }
+            vLeftTable +='<span class="nobr">'+ JSGantt.i18n( ('col'+field).replace('Work','')) + '</span>';
             vLeftTable +='</div></TD>' ;
           }
         }
@@ -1065,9 +1063,10 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
           for (var iSort=0;iSort<sortArray.length;iSort++) {
             var field=sortArray[iSort];
             if (field.substr(0,6)=='Hidden') field=field.substr(6);
+            var showField=getPlanningFieldShow(field);
             var fieldWidth=getPlanningFieldWidth(field);
             var valueField=vTaskList[i].getFieldValue(field,JSGantt);
-            if(field!='Name' && (field=='Resource' || field=='IdStatus'  || field=='StartDate' || field=='EndDate' ||  field=='Duration' || field=='ObjectType' || field=='ExterRes' )) { 
+            if (field!='Name' && showField && (field=='StartDate' || field=='EndDate' ||field=='Resource' || field=='IdStatus' ||  field=='Duration' || field=='ObjectType' || field=='ExterRes'  ) ){
               padding=''; 
               if(valueField===undefined &&  (field=='Type' || field=='StartDate' || field=='EndDate')){
                 valueField='-';

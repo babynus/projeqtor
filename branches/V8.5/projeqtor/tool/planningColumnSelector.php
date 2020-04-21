@@ -48,12 +48,16 @@ foreach ($columnsAll as $order=>$col) {
 		}elseif (!isset($contractGantt) and ($col=='ExterRes' or $col=='ObjectType')){
 		  echo '<div class="dojoDndItem" id="columnSelector'.$col.'" dndType="planningColumn" style="display:none;">';
 		  echo '<span class="dojoDndHandle handleCursor"><img style="width:6px" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
-		}elseif (!isset($portfolioPlanning) and ($col=='IdHealthStatus' or $col=='QualityLevel' or $col=='IdTrend' or $col=='IdOverallProgress')){
+		}else if (isset($contractGantt) && $col!='ExterRes' && $col!='ObjectType' && $col!='StartDate' && $col!='EndDate' && $col!='Resource' && $col!='IdStatus' &&  $col!='Duration'){
+		  debugLog($col);
+		  echo '<div class="dojoDndItem" id="columnSelector'.$col.'" dndType="planningColumn" style="display:none;">';
+		  echo '<span class="dojoDndHandle handleCursor"><img style="width:6px" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
+		}else if (!isset($portfolioPlanning) and ($col=='IdHealthStatus' or $col=='QualityLevel' or $col=='IdTrend' or $col=='IdOverallProgress')){
 		  echo '<div class="dojoDndItem" id="columnSelector'.$col.'" dndType="planningColumn" style="display:none;">';
 		  echo '<span class="dojoDndHandle handleCursor"><img style="width:6px" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
 		}else {
-		  echo '<div class="dojoDndItem" id="columnSelector'.$col.'" dndType="planningColumn">';
-		  echo '<span class="dojoDndHandle handleCursor"><img style="width:6px" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
+          echo '<div class="dojoDndItem" id="columnSelector'.$col.'" dndType="planningColumn">';
+          echo '<span class="dojoDndHandle handleCursor"><img style="width:6px" src="css/images/iconDrag.gif" />&nbsp;&nbsp;</span>';
 		}
 	  echo '<span dojoType="dijit.form.CheckBox" type="checkbox" id="checkColumnSelector'.$col.'" ' 
 	    . ((substr($columns[$order],0,6)!='Hidden')?' checked="checked" ':'') 
@@ -61,7 +65,15 @@ foreach ($columnsAll as $order=>$col) {
 	    . ' onChange="changePlanningColumn(\'' . $col . '\',this.checked,\'' . $order . '\');" '
 	    . '></span><label for="checkColumnSelector'.$col.'" class="checkLabel" style="white-space:nowrap">';
 	  echo '&nbsp;';
-	  echo i18n('col' . $col) . "</label>";
+	  if($col=='ExterRes'){
+	    if(isset($objectClass) and $objectClass=='ClientContract'){
+	      echo i18n('colIdClient') . "</label>";
+	    }else if($objectClass=='SupplierContract'){
+	      echo i18n('colIdProvider') . "</label>";
+	    }
+	  }else {
+	    echo i18n('col' . $col) . "</label>";
+	  }
 	  echo '<div style="float: right; text-align:right">&nbsp;';
 	  echo '<div dojoType="dijit.form.NumberSpinner" id="planningColumnSelectorWidthId'.$order.'" ';
 	  echo (substr($columns[$order],0,6)=='Hidden')?'disabled="disabled" ':'';
