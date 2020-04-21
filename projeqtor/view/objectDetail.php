@@ -4910,13 +4910,14 @@ function drawSubscriptionsList($obj, $refresh=false, $limitToActive) {
   }
  	$checked = '';
  	if (isset($_REQUEST['showClosedSub']) and $_REQUEST['showClosedSub'] == true) $checked = ' checked ';
- 	echo '<div style="position:absolute;right:5px;top:2px;">';
- 	echo '<label for="showClosedSub" class="dijitTitlePaneTitle" style="font-weight:normal !important;height:10px;width:250px">' . i18n('labelShowIdle') . '</label>';
- 	echo '<div class="whiteCheck" title="'.i18n('labelShowIdle') .'" type="checkbox" id="showClosedSub" name="showClosedSub" value="showClosedSub" style="position:relative;left:5px" dojoType="dijit.form.CheckBox"'.$checked.'>';
- 	echo '<script type="dojo/method" event="onChange"> loadContent("objectDetail.php?&showClosedSub='.(($checked=='')?true:false).'", "detailDiv", "listForm"); </script>';
- 	echo '</div>';
- 	echo '</div>';
-  
+ 	if (! $print) {
+   	echo '<div style="position:absolute;right:5px;top:2px;">';
+   	echo '<label for="showClosedSub" class="dijitTitlePaneTitle" style="font-weight:normal !important;height:10px;width:250px">' . i18n('labelShowIdle') . '</label>';
+   	echo '<div class="whiteCheck" title="'.i18n('labelShowIdle') .'" type="checkbox" id="showClosedSub" name="showClosedSub" value="showClosedSub" style="position:relative;left:5px" dojoType="dijit.form.CheckBox"'.$checked.'>';
+   	echo '<script type="dojo/method" event="onChange"> loadContent("objectDetail.php?&showClosedSub='.(($checked=='')?true:false).'", "detailDiv", "listForm"); </script>';
+   	echo '</div>';
+   	echo '</div>';
+ 	}
   if (!$refresh) echo '<tr><td colspan="4">';
   echo '<table style="width:100%;">';
   echo '<tr>';
@@ -4965,18 +4966,17 @@ function drawTicketsList($obj, $refresh=false) {
   if ($comboDetail) {
     return;
   }
-  
   $canUpdate=securityGetAccessRightYesNo('menu'.get_class($obj), 'update', $obj)=="YES";
   if ($obj->idle==1) {
     $canUpdate=false;
   }
-  if (!$refresh) echo '<tr><td colspan="4">';
+  if (!$refresh) echo '<tr><td colspan="2">';
   echo '<table style="width:100%;">';
   echo '<tr>';
   $listClass='Ticket';
-  echo '<td class="linkHeader" style="width:'.(($print)?'20':'15').'%">'.i18n($listClass).'</td>';
+  echo '<td class="linkHeader" style="width:15%">'.i18n($listClass).'</td>';
   echo '<td class="linkHeader" style="width:60%">'.i18n('colName').'</td>';
-  echo '<td class="linkHeader" style="width:40%">'.i18n('colIdStatus').'</td>';
+  echo '<td class="linkHeader" style="width:25%">'.i18n('colIdStatus').'</td>';
   echo '</tr>';
   if (!$obj->id) {
     $list=array();
@@ -5017,22 +5017,23 @@ function drawTicketsList($obj, $refresh=false) {
     $list=$ticket->getSqlElementsFromCriteria($crit);
   }
   if (!isset($list)) $list=array();
-  
   foreach ($list as $ticket) {
     $canGoto=(securityCheckDisplayMenu(null, $listClass) and securityGetAccessRightYesNo('menu'.$listClass, 'read', $ticket)=="YES")?true:false;
     echo '<tr>';
     $classCompName=i18n($listClass);
-    echo '<td class="linkData" style="white-space:nowrap;width:'.(($print)?'20':'15').'%"><table><tr><td>'.formatIcon($listClass, 16).'</td><td style="vertical-align:top">&nbsp;'.'#'.$ticket->id.'</td></tr></table>';
+    echo '<td class="linkData" style="white-space:nowrap;width:15%">';
+    echo '<table><tr><td>'.formatIcon($listClass, 16).'</td><td style="vertical-align:top">&nbsp;'.'#'.$ticket->id.'</td></tr></table>';
     echo '</td>';
     $goto="";
     if (!$print and $canGoto) {
       $goto=' onClick="gotoElement('."'".$listClass."','".htmlEncode($ticket->id)."'".');" style="cursor: pointer;" ';
     }
-    echo '<td class="linkData" '.$goto.' style="position:relative;">';
+    echo '<td class="linkData" '.$goto.' style="position:relative;width:60%">';
     echo htmlEncode($ticket->name);
-    echo '</td><td class="linkData colorNameData">';
+    echo '</td>';
+    echo '<td class="linkData colorNameData" style="width:25%">';
     // $objStatus=new $statusClass($linkObj->$idStatus);
-    echo colorNameFormatter(SqlList::getNameFromId('Status', $ticket->idStatus)."#split#".SqlList::getFieldFromId('Status', $ticket->idStatus, 'color')).'</td>';
+    echo colorNameFormatter(SqlList::getNameFromId('Status', $ticket->idStatus)."#split#".SqlList::getFieldFromId('Status', $ticket->idStatus, 'color'));
     echo '</td>';
     echo '</tr>';
   }
