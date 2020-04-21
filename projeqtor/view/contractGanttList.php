@@ -47,6 +47,7 @@ $objectClass=(RequestHandler::isCodeSet('objectClass'))?RequestHandler::getClass
 if ($objectClass==='ClientContract') {
   $typeGanttContract='GanttClientContract';
 }
+$contractGantt=true;
 ?>
 <input type="hidden" name="objectGantt" id="objectGantt"
 	value="<?php echo $objectClass;?>" />
@@ -119,6 +120,33 @@ if ($objectClass==='ClientContract') {
 					<td style="width: 20%;">
 						<table>
 							<tr>
+							   <td colspan="1">
+                                <div dojoType="dijit.form.DropDownButton"
+                                   id="planningColumnSelector" jsId="planningColumnSelector" name="planningColumnSelector"  
+                                       showlabel="false" class="comboButton" iconClass="dijitButtonIcon dijitButtonIconColumn" 
+                                       title="<?php echo i18n('columnSelector');?>">
+                                  <span>title</span>
+                                  <div dojoType="dijit.TooltipDialog" id="planningColumnSelectorDialog" class="white" style="width:250px;">   
+                                      <script type="dojo/connect" event="onHide" data-dojo-args="evt">
+                                        if (dndMoveInProgress) {  setTimeout('dijit.byId("planningColumnSelector").openDropDown();',1); }
+                                      </script>
+                                    <div id="dndPlanningColumnSelector" jsId="dndPlanningColumnSelector" dojotype="dojo.dnd.Source"  
+                                       dndType="column"withhandles="true" class="container">    
+                                         <?php 
+                                           include('../tool/planningColumnSelector.php')?>
+                                    </div>
+                                    <div style="height:5px;"></div>    
+      					             <div style="text-align: center;"> 
+  					                   <button title="" dojoType="dijit.form.Button" 
+  					                      id="" name="" showLabel="true"><?php echo i18n('buttonOK');?>
+          					              <script type="dojo/connect" event="onClick" args="evt">
+                                            validatePlanningColumn();
+                                          </script>
+          					           </button>
+          					         </div>          
+                                    </div>
+                                  </div>
+                                </td>
 								<td style="width: 35px;">
 									<button title="<?php echo i18n('printPlanning')?>"
 										dojoType="dijit.form.Button" id="listPrint" name="listPrint"
