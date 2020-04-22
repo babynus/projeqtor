@@ -3265,7 +3265,7 @@ function drawOrigin($list, $refType, $refId, $obj, $col, $print) {
 }
 
 function drawHistoryFromObjects($refresh=false) {
-  global $cr, $print, $printWidth, $treatedObjects, $comboDetail, $displayWidth,$collapsedList, $paneHistory, $included, $layout;
+  global $cr, $print, $outMode, $printWidth, $treatedObjects, $comboDetail, $displayWidth,$collapsedList, $paneHistory, $included, $layout;
   $mainObj=null;
   $doc=false;
   $histList=array();
@@ -3348,15 +3348,18 @@ function drawHistoryFromObjects($refresh=false) {
     echo ' </script>';
 
   }
+  if ($print) 
+    echo '<table style="width:'.$printWidth.'px;">';
+  else   
   echo '<table style="width:100%;margin-right:10px;position:relative;">';
   echo '<tr>';
   echo '<td class="historyHeader" style="width:10%">'.i18n('colOperation').'</td>';
-  echo '<td class="historyHeader" style="width:14%">'.i18n('colColumn').'</td>';
-  echo '<td class="historyHeader" style="width:23%">'.i18n('colValueBefore').'</td>';
-  echo '<td class="historyHeader" style="width:23%">'.i18n('colValueAfter').'</td>';
-  echo '<td class="historyHeader" style="width:15%">'.i18n('colDate').'</td>';
+  echo '<td class="historyHeader" style="width:15%">'.i18n('colColumn').'</td>';
+  echo '<td class="historyHeader" style="width:25%">'.i18n('colValueBefore').'</td>';
+  echo '<td class="historyHeader" style="width:25%">'.i18n('colValueAfter').'</td>';
+  echo '<td class="historyHeader" style="width:10%">'.i18n('colDate').'</td>';
   echo '<td class="historyHeader" style="width:15%">'.i18n('colUser').'</td>';
-  if(RequestHandler::isCodeSet('dialog') and RequestHandler::getValue('dialog')=='dialogHistory' ){
+  if( (RequestHandler::isCodeSet('dialog') and RequestHandler::getValue('dialog')=='dialogHistory') or $print ){
     // Done on dynamicDialogHistory
   }else{
     echo '<div style="position:absolute;right:6px;top:3px;">';
@@ -3463,14 +3466,15 @@ function drawHistoryFromObjects($refresh=false) {
         }
       }
     }
+    if ($print and $outMode=='pdf') $class='';
     if (!$hide) {
       echo '<tr>';
-      echo '<td class="historyData'.$class.'" width="10%">'.$oper.'</td>';
+      echo '<td class="historyData'.$class.'" style="width:10%;">'.$oper.'</td>';
       //florent
       if($hist->refType=='Approver'){
           $colCaption=$hist->refType;
       }
-      echo '<td class="historyData" width="14%">'.$colCaption.'</td>';
+      echo '<td class="historyData" style="width:15%">'.$colCaption.'</td>';
       $oldValue=$hist->oldValue;
       $newValue=$hist->newValue;
       if ($dataType=='int' and $dataLength==1) { // boolean
@@ -3528,12 +3532,12 @@ function drawHistoryFromObjects($refresh=false) {
         $oldValue=htmlEncode($oldValue, 'print');
         $newValue=htmlEncode($newValue, 'print');
       }
-      echo '<td class="historyData'.(($colName=="color")?' colorNameData':'').'" width="23%">'.$oldValue.'</td>';
-      echo '<td class="historyData'.(($colName=="color")?' colorNameData':'').'" width="23%">'.$newValue.'</td>';
-      echo '<td class="historyData'.$class.'" width="15%">';
+      echo '<td class="historyData'.(($colName=="color")?' colorNameData':'').'" style="width:25%">'.$oldValue.'</td>';
+      echo '<td class="historyData'.(($colName=="color")?' colorNameData':'').'" style="width:25%">'.$newValue.'</td>';
+      echo '<td class="historyData'.$class.'" style="width:10%">';
       // echo formatDateThumb($creationDate, $updateDate);
       echo $date.'</td>';
-      echo '<td class="historyData'.$class.'" style="border-right: 1px solid #AAAAAA;" width="15%">';
+      echo '<td class="historyData'.$class.'" style="border-right: 1px solid #AAAAAA;width:15%">';
       if ($user) {
         echo formatUserThumb($hist->idUser, $user, null, '16', 'left').'&nbsp;';
       }
@@ -3546,12 +3550,12 @@ function drawHistoryFromObjects($refresh=false) {
     }
   }
   echo '<tr>';
-  echo '<td class="historyDataClosetable">&nbsp;</td>';
-  echo '<td class="historyDataClosetable">&nbsp;</td>';
-  echo '<td class="historyDataClosetable">&nbsp;</td>';
-  echo '<td class="historyDataClosetable">&nbsp;</td>';
-  echo '<td class="historyDataClosetable">&nbsp;</td>';
-  echo '<td class="historyDataClosetable">&nbsp;</td>';
+  echo '<td class="historyDataClosetable" style="width:10%">&nbsp;</td>';
+  echo '<td class="historyDataClosetable" style="width:15%">&nbsp;</td>';
+  echo '<td class="historyDataClosetable" style="width:25%">&nbsp;</td>';
+  echo '<td class="historyDataClosetable" style="width:25%">&nbsp;</td>';
+  echo '<td class="historyDataClosetable" style="width:10%">&nbsp;</td>';
+  echo '<td class="historyDataClosetable" style="width:15%">&nbsp;</td>';
   echo '</tr>';
   echo '</table>';
   if (!$print and !$refresh) {
