@@ -2463,7 +2463,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo '  <table style="width:100%">
                     <tr>
                       <td style="width:24px;padding-top:2px;padding-left:2px;">
-                        <div class="iconButtonList16">&nbsp;</div>
+                        <div class="iconView">&nbsp;</div>
                       </td>
                       <td class="emailHistorical"  style="vertical-align:middle;">'.i18n('comboSearchButton').'</td>
                     </tr>
