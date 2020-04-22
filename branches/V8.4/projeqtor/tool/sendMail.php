@@ -132,8 +132,10 @@ if ($typeSendMail=="User") {
         $mailDest[$organization->idResource]=$manager->email;
       }
     }
-    $mailDest=array_flip($mailDest); // remove duplicate
-    $mailDest=array_flip($mailDest);
+    //$mailDest=array_flip($mailDest); // remove duplicate
+    //$mailDest=array_flip($mailDest);
+    $mailDest=array_unique($mailDest); // remove duplicate
+    debugLog($mailDest);
     foreach ($mailDest as $mail) {
       $result=sendMail($mail, $title, $message);
     }
