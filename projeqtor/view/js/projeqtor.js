@@ -1527,9 +1527,9 @@ function finalizeMessageDisplay(destination, validationType) {
     // alert('validationType='+validationType);
     if (validationType) {
       if (validationType == 'note') {
-        if(!dijit.byId('dialogKanbanGetObjectStream')) loadContent("objectDetail.php?refreshNotes=true", dojo.byId('objectClass').value+ '_Note', 'listForm');
         if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", "listForm");
-        if (dijit.byId('dialogKanbanGetObjectStream')) loadContent("../tool/dynamicDialogKanbanGetObjectStream.php","dialogKanbanGetObjectStream","noteFormStreamKanban");    
+        if (dojo.byId('objectClassManual') && dojo.byId('objectClassManual')=='Kanban') loadContent("../tool/dynamicDialogKanbanGetObjectStream.php","dialogKanbanGetObjectStream","noteFormStreamKanban");
+        else loadContent("objectDetail.php?refreshNotes=true", dojo.byId('objectClass').value+ '_Note', 'listForm');
         if (dojo.byId('buttonDivCreationInfo')) {
           var url = '../tool/getObjectCreationInfo.php?objectClass='+ dojo.byId('objectClass').value +'&objectId='+dojo.byId('objectId').value;
           loadDiv(url, 'buttonDivCreationInfo', null);
