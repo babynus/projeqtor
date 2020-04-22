@@ -744,6 +744,7 @@ function selectDetailItem(selectedValue, lastSavedName) {
     hideDetail();
     return;
   }
+  
   if (combo) {
   	if(comboName == 'projectSelectorFiletering'){
   		var pos = idFldVal.indexOf('_');
@@ -7047,6 +7048,41 @@ function getTargetFromCurrentScreen(currentScreen){
     target=pluginMenuPage['menu'+currentScreen];
   } else {
     target=currentScreen.charAt(0).toLowerCase()+currentScreen.substr(1)+"Main.php";
+  }
+  return target;
+}
+
+function getTargetFromCurrentScreenChangeLang(currentScreen){
+  if (currentScreen=="Administration" || currentScreen=="Admin"){ 
+    target="admin.php";
+  } else if (currentScreen=="Import" || currentScreen=="ImportData"){ 
+    target="importData.php";
+  } else if (currentScreen=="DashboardTicket") {
+    target="dashboardTicketMain.php";
+  } else if (currentScreen=="DashboardRequirement") { //ADD qCazelles - Requirements dashboard - Ticket 90
+  target="dashboardRequirementMain.php";
+  } else if (currentScreen=="ActivityStream") {
+    target="activityStreamMain.php";
+  } else if (currentScreen=="Today"){ 
+    target="today.php";
+  } else if (currentScreen=="UserParameter") {
+    target="parameter.php?type=userParameter";
+  } else if (currentScreen=="ProjectParameter") {
+    target="parameter.php?type=projectParameter";
+  } else if (currentScreen=="GlobalParameter") {
+    target="parameter.php?type=globalParameter";
+  } else if (currentScreen=="Habilitation") {
+    target="parameter.php?type=habilitation";
+  } else if (currentScreen=="HabilitationReport") {
+    target="parameter.php?type=habilitationReport";
+  } else if (currentScreen=="HabilitationOther") {
+    target="parameter.php?type=habilitationOther";
+  } else if (currentScreen=="AccessRight") {
+    target="parameter.php?type=accessRight";
+  } else if (currentScreen=="AccessRightNoProject") {
+    target="parameter.php?type=accessRightNoProject";
+  } else {
+    target="parameter.php";
   }
   return target;
 }
