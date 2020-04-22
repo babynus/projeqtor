@@ -20,4 +20,4 @@ DELETE FROM `${prefix}columnselector` WHERE objectClass='Recipient' and field='b
 
 ALTER TABLE `${prefix}type` ADD COLUMN `icon` varchar(100);
 
-ALTER TABLE `${prefix}globalview` ADD COLUMN `creationDate` date DEFAULT NULL;
+ALTER TABLE `${prefix}globalview` ADD COLUMN `creationDate` datetime DEFAULT NULL;
