@@ -1076,7 +1076,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
                 padding='padding-top: 4px;';
               }
               vLeftTable += '<TD class="ganttDetail" style="width: ' + fieldWidth + 'px;">'
-                +'<span class="nobr hideLeftPart' + vRowType + '" style="width: ' + fieldWidth + 'px;text-overflow:ellipsis;'+padding+'">' + valueField
+                +'<span class="nobr hideLeftPart' + vRowType + '" style="width: ' + fieldWidth + 'px;top:2px;text-overflow:ellipsis;'+padding+'">' + valueField
                 +'</span></TD>' ;
             }
           }
