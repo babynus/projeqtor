@@ -76,12 +76,10 @@ if ($newObj->id and $obj->id and $newObj->id != $obj->id) {
 
 // save to database
 if (RequestHandler::isCodeSet('selectedResource') and ($newObj->id or RequestHandler::getValue('selectedResource')=='false')) {
-  debugLog("id=$newObj->id, selectedResource=".RequestHandler::getValue('selectedResource'));
   RequestHandler::unsetCode('selectedResource');
 }
 if(get_class ( $newObj )=='Activity' and RequestHandler::isCodeSet('selectedResource')){
   $selectedRes=RequestHandler::getValue('selectedResource');
-  debugLog($selectedRes);
   if ($selectedRes=='false') $selectedRes=null;
   $result = $newObj->save ($selectedRes);
 }else{
