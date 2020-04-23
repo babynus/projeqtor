@@ -92,6 +92,7 @@ class DocumentMain extends SqlElement {
     
    private static $_fieldsAttributes=array(
     "id"=>"nobr",
+    "idProject"=>"required",
     "idStatus"=>"required",
     "locked"=>"readonly",
     "idLocker"=>"readonly",
