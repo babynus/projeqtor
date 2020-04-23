@@ -3009,6 +3009,7 @@ function addDocumentVersion(defaultStatus, typeEvo, numVers, dateVers, nameVers,
     dojo.byId("lockedMsg").style.display = 'none';  
   }
   dijit.byId("dialogDocumentVersion").show();
+  dojo.setStyle('widget_documentVersionNewVersionDisplay',"border-color","#b3b3b3");
 }
 
 /**
@@ -3094,6 +3095,13 @@ function changeDocumentVersion(list) {
  */
 function saveDocumentVersion() {
   // dojo.byId('documentVersionForm').submit();
+  if(dojo.byId('typeEvo')=='EXT'){
+    if(checkValidNameVersion()==false){
+      showWait();
+      dijit.byId('dialogDocumentVersion').hide();
+      return false;
+    }
+  }
   if (!isHtml5()) {
     // dojo.byId('documentVersionForm').submit();
     showWait();
@@ -3288,10 +3296,17 @@ function setDisplayIsRefDocumentVersion() {
 function checkValidNameVersion(){
   var newName=dojo.byId('documentVersionNewVersionDisplay').value;
   var oldName=dojo.byId('oldDocumentVersionNewVersionDisplay').value;
-  if(newName==oldName){
+  dojo.setStyle('widget_documentVersionNewVersionDisplay',"border-color","#b3b3b3");
+  if(newName==''){
+    showAlert(i18n('colNextDocumentVersion')+' '+i18n('isEmpty'));
+    dojo.setStyle('widget_documentVersionNewVersionDisplay',"border-color","red");
+    return false;
+  }else if(newName==oldName){
     showAlert(i18n('errorSameName'));
-    dijit.byId('documentVersionNewVersionDisplay').set('value', '');
+    dojo.setStyle('widget_documentVersionNewVersionDisplay',"border-color","red");
+    return false;
   }
+  return true;
 }
 // =============================================================================
 // = Dependency
