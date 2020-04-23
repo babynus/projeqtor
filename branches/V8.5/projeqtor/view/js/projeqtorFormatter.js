@@ -417,15 +417,19 @@ function dateTimeFormatter(value) {
           (parseInt(value.substr(5, 2), 10)) - 1, value.substr(8, 2), value
               .substr(11, 2), value.substr(14, 2), value.substr(17, 2), 0);
       if (!vDate) {
-        return dateFormatter(value.substr(0, 10)) + ":" + value.substr(11, 5);
+        return dateFormatter(value.substr(0, 10)) + " " + value.substr(11, 5);
       }
     }
-    return dojo.date.locale.format(vDate, {
+    var displayDate=dojo.date.locale.format(vDate, {
       datePattern : fmt,
       formatLength : "short",
       timePattern : window.top.browserLocaleTimeFormat,
       fullYear : true
     });
+    if (displayDate.substr(11)=='00:00' || displayDate.substr(11)=='00:00:00') {
+      displayDate=displayDate.substr(0,10);
+    }
+    return displayDate;
   } else {
     return value;
   }
