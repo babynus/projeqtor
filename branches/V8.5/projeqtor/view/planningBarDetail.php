@@ -44,6 +44,10 @@ if ($class=='Resource' or $class=='ResourceTeam') {
 }
 $crit=array('refType'=>$class,'refId'=>$id);
 
+if (! class_exists($class.'PlanningElement')) {
+  echo "";
+  return;
+}
 $pe=SqlElement::getSingleSqlElementFromCriteria($class.'PlanningElement', $crit);
 if ($pe->assignedWork==0 and $pe->leftWork==0 and $pe->realWork==0) {
   echo '<div style="background-color:#FFF0F0;padding:3px;border:1px solid #E0E0E0;">'.i18n('noDataToDisplay')."</div>";
