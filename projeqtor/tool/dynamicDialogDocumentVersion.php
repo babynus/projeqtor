@@ -158,7 +158,7 @@ if (array_key_exists('isIE',$_REQUEST)) {
           id="documentVersionNewVersionDisplay" name="documentVersionNewVersionDisplay"
           style="width: 450px;" readonly required
           maxlength="100"
-          onblur="checkValidNameVersion();"
+          onChange="if(dojo.byId('typeEvo').value=='EXT'){checkValidNameVersion();}"
           class="input">  
          </div>  
         </td>
@@ -238,7 +238,7 @@ if (array_key_exists('isIE',$_REQUEST)) {
           </button>
           <button id="submitDocumentVersionUpload" dojoType="dijit.form.Button" type="submit" 
            <?php if ($isIE and $isIE<=9) {?>
-           onclick=" protectDblClick(this);saveDocumentVersion();"<?php }?> >
+           onclick="protectDblClick(this);saveDocumentVersion();"<?php }?> >
             <?php echo i18n("buttonOK");?>
           </button>
         </td>
