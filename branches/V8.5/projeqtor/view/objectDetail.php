@@ -8644,7 +8644,7 @@ function endBuffering($prevSection, $included) {
       'listtypeusingworkflow'=>array('2'=>'right', '3'=>'extra','99'=>'link'), 
       'lock'=>array('2'=>'left', '3'=>'left','99'=>'description'), 
       'mailtext'=>array('2'=>'bottom', '3'=>'bottom','99'=>'detail'), 
-      'members'=>array('2'=>'bottom', '3'=>'bottom','99'=>'resources'),
+      'members'=>array('2'=>'right', '3'=>'right','99'=>'resources'),
       'miscellaneous'=>array('2'=>'right', '3'=>'extra','99'=>'detail'), 
       'note'=>array('2'=>'bottom', '3'=>'extra','99'=>'note'), 
       'notificationtitle'=>array('2'=>'left', '3'=>'left','99'=>'description'), 
