@@ -213,6 +213,7 @@ if (!$error) {
 	}
 }
 
+$invalidControl=false;
 if (! $error) {
 	$dv=new DocumentVersion($documentVersionId);
   $dv->idDocument=$documentId;
@@ -235,11 +236,15 @@ if (! $error) {
   $dv->isRef=$documentVersionIsRef;
   $dv->name=$documentVersionNewVersionDisplay;
   $result=$dv->save();
+  if (getLastOperationStatus($result)=='INVALID') {
+    $invalidControl=$result;
+  }
+  debugLog("save version = $result");
   $newId= $dv->id;
 }
 
 $pathSeparator=Parameter::getGlobalParameter('paramPathSeparator');
-if (! $documentVersionId) {
+if (! $documentVersionId and ! $error and !$invalidControl) {
 	if (! $error and !$documentVersionLink ) {
 		$uploadfile = $dv->getUploadFileName();
 		$split=explode($pathSeparator,$uploadfile);
@@ -251,6 +256,7 @@ if (! $documentVersionId) {
 	      mkdir($dir,0777,true);
 	    }
 		}
+		debugLog("Move from ".$uploadedFile['tmp_name']." to $uploadfile");
 	  if ( ! move_uploaded_file($uploadedFile['tmp_name'], $uploadfile)) {
 	     $error=htmlGetErrorMessage(i18n('errorUploadFile',array('hacking')));
 	     errorLog(i18n('errorUploadFile',array('hacking')));
