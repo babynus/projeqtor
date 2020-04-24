@@ -3101,13 +3101,6 @@ function changeDocumentVersion(list) {
  */
 function saveDocumentVersion() {
   // dojo.byId('documentVersionForm').submit();
-  if(dojo.byId('typeEvo')=='EXT'){
-    if(checkValidNameVersion()==false){
-      showWait();
-      dijit.byId('dialogDocumentVersion').hide();
-      return false;
-    }
-  }
   if (!isHtml5()) {
     // dojo.byId('documentVersionForm').submit();
     showWait();
@@ -3299,21 +3292,6 @@ function setDisplayIsRefDocumentVersion() {
   }
 }
 
-function checkValidNameVersion(){
-  var newName=dojo.byId('documentVersionNewVersionDisplay').value;
-  var oldName=dojo.byId('oldDocumentVersionNewVersionDisplay').value;
-  dojo.setStyle('widget_documentVersionNewVersionDisplay',"border-color","#b3b3b3");
-  if(newName==''){
-    showAlert(i18n('colNextDocumentVersion')+' '+i18n('isEmpty'));
-    dojo.setStyle('widget_documentVersionNewVersionDisplay',"border-color","red");
-    return false;
-  }else if(newName==oldName){
-    showAlert(i18n('errorSameName'));
-    dojo.setStyle('widget_documentVersionNewVersionDisplay',"border-color","red");
-    return false;
-  }
-  return true;
-}
 // =============================================================================
 // = Dependency
 // =============================================================================
