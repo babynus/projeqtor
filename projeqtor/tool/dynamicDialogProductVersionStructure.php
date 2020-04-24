@@ -172,7 +172,8 @@ if ($way=='composition' and $directAccessToList=='true') {
               <label for="productVersionStructureListId" ><?php echo i18n($listClass) ?>&nbsp;:&nbsp;</label>
             </td>
             <td>
-              <select size="14" id="productVersionStructureListId" name="productVersionStructureListId[]"
+              <?php $listWidth=getSessionValue('screenWidth',800)/2;?>             
+              <select size="14" id="productVersionStructureListId" name="productVersionStructureListId[]" style="width:<?php echo $listWidth;?>px"
                 <?php if (!$structureId) echo 'multiple';?> class="selectList" onchange="enableWidget('dialogProductVersionStructureSubmit');"  ondblclick="<?php if($objectClass=='Asset'){?>saveProductVersionStructureAsset();<?php }else{?>saveProductVersionStructure();<?php }?>" value="">
                   <?php 
                     if (!$structureId) { 
