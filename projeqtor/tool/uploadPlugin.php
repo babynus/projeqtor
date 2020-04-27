@@ -154,6 +154,7 @@ if (!$error) {
     } else {
       $message="<div class='messageOK' >" . i18n('pluginFileUploaded') . "</div>"
       	      ."<input type='hidden' value='resultOK' />";
+      // Check if zip countains zip
     }
   }
 }
