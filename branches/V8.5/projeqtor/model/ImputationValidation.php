@@ -280,7 +280,7 @@ class ImputationValidation{
 				$result .='   <tr>';
   			if($countWeek == 0){
   				$result .='     <td rowSpan="'.count($periodValueListSorted).'" style="vertical-align:top;padding-top:5px;border: 1px solid grey;height:30px;width:16%;text-align:left;vertical-align:center;background:white;">';
-  				$result .='     <table width="100%">';
+  				$result .='     <table style="width:100%;">';
   				$result .='       <tr><td width="40%">'.formatUserThumb($idResource, $name, null, 22, 'right').'</td>';
   				$result .='       <td width="60%" float="left">&nbsp'.$name.'</td></tr>';
   				$result .='     </table></td>';
@@ -291,7 +291,7 @@ class ImputationValidation{
   			$result .='     <td onClick="'.$goto.'" style="cursor:pointer;border: 1px solid grey;height:30px;width:10%;text-align:center;vertical-align:center;">'.$displayWeek.'</td>';
   			$result .='     <td onClick="'.$goto.'" style="cursor:pointer;border: 1px solid grey;height:30px;width:8%;text-align:center;vertical-align:center;">'.$expected.'</td>';
   			$result .='     <td onClick="'.$goto.'" style="cursor:pointer;width:23%;border: 1px solid grey;">';
-  			$result .='      <table width="100%">';
+  			$result .='      <table style="width:100%;height:35px">';
   			$result .='        <tr><td style="border-right: 1px solid grey;width:33%;height:30px;text-align:center;vertical-align:center;">'.$inputWork.'</td>';
   			$result .='        <td style="border-right: 1px solid grey;width:33%;height:30px;text-align:center;vertical-align:center;">'.$inputAdm.'</td>';
   			$result .='        <td style="'.$backgroundColor.'width:33%;height:30px;text-align:center;vertical-align:center;">'.$inputTotal.'</td></tr>';
