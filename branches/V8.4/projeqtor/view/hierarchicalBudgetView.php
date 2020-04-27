@@ -76,7 +76,7 @@ $result=Sql::query($query);
 echo '<table id="hierarchicalBudgetListHeader" align="left" width="100%" style="min-width:1350px;">';
 echo '<TR class="ganttHeight" style="height:32px">';
 echo '  <TD class="reportTableHeader" style="width:20px;min-width:20px;max-width:20px; border-right: 0px;"></TD>';
-echo '  <TD class="reportTableHeader" style="border-left:0px; text-align: left;">' . i18n('colBudget') . '</TD>';
+echo '  <TD class="reportTableHeader" style="border-left:0px; text-align: left;width: 100%;">' . i18n('colBudget') . '</TD>';
 echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colEstimateAmount') . '</div></TD>' ;
 echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colInitialAmount') . '</div></TD>' ;
 echo '  <TD class="reportTableHeader amountTableHeaderTD" ><div class="amountTableHeaderDiv" >' . i18n('colUpdate1Amount') . '</div></TD>' ;
@@ -220,7 +220,7 @@ if (Sql::$lastQueryNbRows > 0) {
 		  echo '     <div class="ganttNoExpand" style="position: relative; z-index: 100000; width:16px; height:13px;" >&nbsp;&nbsp;&nbsp;&nbsp;</div>';
 		}
 		echo '     </td>';
-		echo '     <td style="position:relative" onClick="dojo.byId('."'objectId'".').value='.$id.';loadContent('."'objectDetail.php'".', '."'detailDiv'".','."'listForm'".');">' . htmlEncode($line['name']).'</td>';
+		echo '     <td style="position:relative" onClick="dojo.byId('."'objectId'".').value=\''.$id.'\';loadContent('."'objectDetail.php'".', '."'detailDiv'".','."'listForm'".');">' . htmlEncode($line['name']).'</td>';
 		echo '     </div></div>';
 		echo '  <tr></table>';
 		echo '</TD>';
