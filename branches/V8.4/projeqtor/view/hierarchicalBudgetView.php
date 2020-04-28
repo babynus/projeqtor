@@ -220,7 +220,7 @@ if (Sql::$lastQueryNbRows > 0) {
 		  echo '     <div class="ganttNoExpand" style="position: relative; z-index: 100000; width:16px; height:13px;" >&nbsp;&nbsp;&nbsp;&nbsp;</div>';
 		}
 		echo '     </td>';
-		echo '     <td style="position:relative" onClick="dojo.byId('."'objectId'".').value=\''.$id.'\';loadContent('."'objectDetail.php'".', '."'detailDiv'".','."'listForm'".');">' . htmlEncode($line['name']).'</td>';
+		echo '     <td style="position:relative" onClick="dojo.byId('."'objectId'".').value=\''.$id.'\';listClick();loadContent('."'objectDetail.php'".', '."'detailDiv'".','."'listForm'".');">' . htmlEncode($line['name']).'</td>';
 		echo '     </div></div>';
 		echo '  <tr></table>';
 		echo '</TD>';
