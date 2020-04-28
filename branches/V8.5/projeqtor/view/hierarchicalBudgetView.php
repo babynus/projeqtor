@@ -94,7 +94,7 @@ echo '</table>';
 
 $destHeight=RequestHandler::getValue('destinationHeight');
 $height=($destHeight)?(intval($destHeight)-40).'px':'100%';
-echo '<div id="hierarchicalBudgetListDiv" style="position:relative;height:200px;width:100%;min-width:1350px;overflow-y:scroll;overflow-x:hidden">';
+echo '<div id="hierarchicalBudgetListDiv" style="position:relative;height:100%;width:100%;min-width:1350px;overflow-y:scroll;overflow-x:hidden">';
 echo '<table id="dndHierarchicalBudgetList" dojoType="dojo.dnd.Source" jsId="dndSourceTableBudget" id="dndSourceTableBudget" align="left" width="100%" style="">';
 function getSubBudgetList($subList, &$subBudget){
 	foreach ($subList as $id=>$obj){
@@ -220,7 +220,7 @@ if (Sql::$lastQueryNbRows > 0) {
 		  echo '     <div class="ganttNoExpand" style="position: relative; z-index: 100000; width:16px; height:13px;" >&nbsp;&nbsp;&nbsp;&nbsp;</div>';
 		}
 		echo '     </td>';
-		echo '     <td style="position:relative" onClick="dojo.byId('."'objectId'".').value='.$id.';loadContent('."'objectDetail.php'".', '."'detailDiv'".','."'listForm'".');">' . htmlEncode($line['name']).'</td>';
+		echo '     <td style="position:relative" onClick="dojo.byId('."'objectId'".').value='.$id.';listClick();loadContent('."'objectDetail.php'".', '."'detailDiv'".','."'listForm'".');">' . htmlEncode($line['name']).'</td>';
 		echo '     </div></div>';
 		echo '  <tr></table>';
 		echo '</TD>';
