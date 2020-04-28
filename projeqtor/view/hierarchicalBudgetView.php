@@ -94,7 +94,7 @@ echo '</table>';
 
 $destHeight=RequestHandler::getValue('destinationHeight');
 $height=($destHeight)?(intval($destHeight)-40).'px':'100%';
-echo '<div id="hierarchicalBudgetListDiv" style="position:relative;height:200px;width:100%;min-width:1350px;overflow-y:scroll;overflow-x:hidden">';
+echo '<div id="hierarchicalBudgetListDiv" style="position:relative;height:100%;width:100%;min-width:1350px;overflow-y:scroll;overflow-x:hidden">';
 echo '<table id="dndHierarchicalBudgetList" dojoType="dojo.dnd.Source" jsId="dndSourceTableBudget" id="dndSourceTableBudget" align="left" width="100%" style="">';
 function getSubBudgetList($subList, &$subBudget){
 	foreach ($subList as $id=>$obj){
