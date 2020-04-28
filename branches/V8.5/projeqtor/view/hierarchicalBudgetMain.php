@@ -111,8 +111,10 @@ $budgetParent=getSessionValue('listBudgetParentFilter');
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="HierarchicalBudget" />
 <input type="hidden" name="HierarchicalBudget" id="HierarchicalBudget" value="true" />
 <div id="mainDivContainer" class="container" dojoType="dijit.layout.BorderContainer" onclick="hideDependencyRightClick();">
-<div dojoType="dijit.layout.ContentPane" region="top" id="listHeaderDiv" style="width:50%;">
-<table width="100%" class="listTitle" >
+  <div id="listDiv" dojoType="dijit.layout.ContentPane" region="<?php  echo $positionListDiv;?>" splitter="true" 
+   style="<?php if($positionListDiv=='top'){echo "height:".$listHeight;}else{ echo "width:".$tableWidth[0];}?>;overflow-y: none;">
+   <div dojoType="dijit.layout.ContentPane" region="<?php  echo $positionListDiv;?>" id="listHeaderDiv" style="width:100%;">
+  <table width="100%" class="listTitle" >
   <tr >
     <td style="width:50px;min-width:43px;" align="center">
        <div style="position:absolute;left:0px;width:43px;top:0px;height:36px;" class="iconHighlight">&nbsp;</div>
@@ -182,8 +184,10 @@ $budgetParent=getSessionValue('listBudgetParentFilter');
   </tr>
 </table>
 </div>
-  <div id="listDiv" dojoType="dijit.layout.ContentPane" region="<?php  echo $positionListDiv;?>" splitter="true" 
-   style="<?php if($positionListDiv=='top'){echo "height:".$listHeight;}else{ echo "width:".$tableWidth[0];}?>;overflow-y: none;">
+   <div id="listBarShow" class="dijitAccordionTitle"
+			onMouseover="showList('mouse')" onClick="showList('click');">
+			<div id="listBarIcon" align="center"></div>
+		</div>
     <script type="dojo/connect" event="resize" args="evt">
          if (switchedMode) return;
          var paramDiv=<?php  echo json_encode($positionListDiv); ?>;
