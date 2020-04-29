@@ -1695,6 +1695,7 @@ function finalizeMessageDisplay(destination, validationType) {
    // Refresh Hierarchical Budget list
       if (dojo.byId("HierarchicalBudget")) {
           refreshHierarchicalBudgetList();
+          loadContent('objectDetail.php', 'detailDiv','listForm');
 		}
       if (dojo.byId('id') && lastOperation && (lastOperation.value == "insert" || forceRefreshCreationInfo)) {
      // last operations depending on the executed operatoin (insert, delete, ...)
