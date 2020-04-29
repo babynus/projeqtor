@@ -43,7 +43,7 @@ if (sessionValueExists('projectSelectorDisplayMode')) {
              //loadContent("../view/menuProjectSelector.php", 'projectSelectorDiv');
              refreshProjectSelectorList();
              if (dojo.byId('objectClass') ) {
-               refreshGrid();
+               refreshGrid(true);
              }
            }
            saveDataToSession('projectSelectorShowIdle', ((this.checked)?1:0),false,callBack);
@@ -64,7 +64,7 @@ if (sessionValueExists('projectSelectorDisplayMode')) {
            var callBack = function(){
              refreshProjectSelectorList();
              if (dojo.byId('objectClass') ) {
-               refreshGrid();
+               refreshGrid(true);
              }
            }
            saveDataToSession('projectSelectorShowHandlelProject', ((this.checked)?1:0),true,callBack);
