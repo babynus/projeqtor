@@ -862,7 +862,7 @@ if (property_exists($objectClass,'idStatus')) {
                 title="<?php echo i18n('buttonRefreshList');?>"
                 iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
                 <script type="dojo/connect" event="onClick" args="evt">
-	                 refreshGrid();
+	                 refreshGrid(true);
                 </script>
               </button>
             </td>    
