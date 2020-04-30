@@ -1696,16 +1696,15 @@ function finalizeMessageDisplay(destination, validationType) {
             && dojo.byId('lastOperation').value == 'move') {
           refreshGrid();
         } else if (! avoidInfiniteLoop) {
+          avoidInfiniteLoop=true;
           if (dojo.byId("lastPlanStatus")) {
             refreshGrid(true);
           } else {
             refreshGrid();
           }
-          avoidInfiniteLoop=true;
         } else {
           avoidInfiniteLoop=false;
-          refreshJsonPlanning(); // Must not call refreshGrid() to avoid
-                                  // never ending loop
+          refreshJsonPlanning(); // Must not call refreshGrid() to avoid never ending loop
         }
       }
    // Refresh Hierarchical Budget list
@@ -1994,7 +1993,7 @@ function finalizeMessageDisplay(destination, validationType) {
       loadDiv(url, 'buttonDivCreationInfo', null);
       var objClass=dojo.byId('objectClass').value;
       if (lastOperationStatus.value=='NO_CHANGE' && !validationType && dojo.byId(objClass+'PlanningElement_assignedCost') 
-          && dojo.byId(objClass+'PlanningElement_assignedCost').style.textDecoration=="line-through") {
+          && (dojo.byId(objClass+'PlanningElement_assignedCost').style.textDecoration=="line-through" || dojo.byId(objClass+'PlanningElement_leftCost').style.textDecoration=="line-through")) {
         // No change but assignment changed so that refresh is required
         loadContent("objectDetail.php?", "detailDiv", 'listForm');
         refreshGrid();
