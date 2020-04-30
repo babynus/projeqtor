@@ -7084,7 +7084,6 @@ function drawProjectSituation($type, $obj){
       	$elementList = array_merge($elementList, $objectList);
       }
 	}
-	
 	echo '<table width="99.9%">';
 	echo '<tr>';
 	echo '<td class="noteHeader" style="width:30%">' . i18n('colElement') . '</td>';
@@ -7098,14 +7097,13 @@ function drawProjectSituation($type, $obj){
       $element = new $class($situation->refId);
       if($class == 'Tender'){
        if($element->idCallForTender){
-         $callForTender = new CallForTender($element->idCallForTender);
-         $TenderList = $element->getSqlElementsFromCriteria(array('idCallForTender'=>$element->idCallForTender),null,null,null);
-         if(count($TenderList)>1){
-         	$tenderStatus = SqlElement::getSingleSqlElementFromCriteria('TenderStatus', array('isSelected'=>1));
-         	$tender = SqlElement::getSingleSqlElementFromCriteria('Tender', array('idCallForTender'=>$element->idCallForTender, 'idTenderStatus'=>$tenderStatus->id));
-         	if($tender->id and $element->id != $tender->id and $element->idCallForTender == $tender->idCallForTender){
-         		continue;
-         	}
+         $selectedTenderStatusList = SqlList::getListWithCrit('TenderStatus', array('isSelected'=>1));
+         $crit="idCallForTender=$element->idCallForTender and idTenderStatus in ".transformListIntoInClause($selectedTenderStatusList);
+         $selectedTenderList = $element->getSqlElementsFromCriteria(null,null,$crit);
+         if(count($selectedTenderList)>=1){
+           if(! isset($selectedTenderStatusList[$element->idTenderStatus])){
+             continue;
+           }
          }
        }
       }
@@ -7136,12 +7134,11 @@ function drawProjectSituation($type, $obj){
 		$class = get_class($element);
 		if($class == 'Tender'){
 			if($element->idCallForTender){
-				$callForTender = new CallForTender($element->idCallForTender);
-				$TenderList = $element->getSqlElementsFromCriteria(array('idCallForTender'=>$element->idCallForTender),null,null,null);
-				if(count($TenderList)>1){
-					$tenderStatus = SqlElement::getSingleSqlElementFromCriteria('TenderStatus', array('isSelected'=>1));
-					$tender = SqlElement::getSingleSqlElementFromCriteria('Tender', array('idCallForTender'=>$element->idCallForTender, 'idTenderStatus'=>$tenderStatus->id));
-					if($tender->id and $element->id != $tender->id and $element->idCallForTender == $tender->idCallForTender){
+				$selectedTenderStatusList = SqlList::getListWithCrit('TenderStatus', array('isSelected'=>1));
+				$crit="idCallForTender=$element->idCallForTender and idTenderStatus in ".transformListIntoInClause($selectedTenderStatusList);
+				$selectedTenderList = $element->getSqlElementsFromCriteria(null,null,$crit);
+				if(count($selectedTenderList)>=1){
+					if(! isset($selectedTenderStatusList[$element->idTenderStatus])){
 						continue;
 					}
 				}
