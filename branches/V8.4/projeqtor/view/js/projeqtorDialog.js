@@ -5114,6 +5114,28 @@ function assUpdateLeftWork(id) {
   diff = 0;
   dojo.byId(objClass+'PlanningElement_assignedCost').style.textDecoration="line-through";
 }
+function assUpdateLeftWorkDirect(id) {
+  var initLeft=dojo.byId('initLeft_'+id).value;
+  var left=dijit.byId("assLeftWork_"+id).get('value');
+  if (left == null || isNaN(left)) {
+    left=0;
+  }
+  var diff = (left)-(initLeft);
+  // update left for PlanningElement
+  var objClass=dojo.byId('objectClass').value;
+  var assPeLeft=dijit.byId(objClass+'PlanningElement_leftWork');
+  if(assPeLeft){
+    assPeLeft.set("value", assPeLeft.get("value") + diff);
+  }
+  var assPePlanned=dijit.byId(objClass+'PlanningElement_plannedWork');
+  if(assPePlanned){
+    assPePlanned.set("value", assPePlanned.get("value") + diff);
+  }
+  //
+  dojo.byId('initLeft_'+id).value=left;
+  diff = 0;
+  dojo.byId(objClass+'PlanningElement_leftCost').style.textDecoration="line-through";
+}
   
 function saveAssignedWork(id, zone) {
   var value=dijit.byId("ass"+zone+"_"+id).get("value");
