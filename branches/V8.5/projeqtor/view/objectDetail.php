@@ -6096,7 +6096,10 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
       $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       // echo '<td class="assignData" align="right" style="vertical-align:middle">'
       // mehdi======================ticket#1776
-      if (!$print) echo '<input type="hidden" id="initAss_'.$assignment->id.'" value="'.Work::displayWork($assignment->assignedWork).'"/>';
+      if (!$print) {
+        echo '<input type="hidden" id="initAss_'.$assignment->id.'" value="'.Work::displayWork($assignment->assignedWork).'"/>';
+        echo '<input type="hidden" id="initleft_'.$assignment->id.'" value="'.Work::displayWork($assignment->leftWork).'"/>';
+      }
       echo '<td class="assignData'.$idleClass.'" align="right" style="width:15%;vertical-align:middle;">';
       if ($canUpdate and get_class($obj)!='PeriodicMeeting' and !$print and $planningMode!='RECW') {
         echo '<img  id="idImageAssignedWork'.$assignment->id.'" src="../view/img/savedOk.png" 
@@ -6129,6 +6132,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
         				value="'.Work::displayWork($assignment->leftWork).'"
                 style="padding:1px;max-width:100%; background:none;box-sizing:border-box;display:block;border:1px solid #A0A0A0 !important;margin:2px 0px"  >
                 <script type="dojo/method" event="onChange">
+                    assUpdateLeftWorkDirect('.$assignment->id.');
                     saveLeftWork('.$assignment->id.',\'LeftWork\');
                 </script>';
         echo $keyDownEventScript;
