@@ -230,7 +230,6 @@ if (! $error) {
   if (getLastOperationStatus($result)=='INVALID') {
     $invalidControl=$result;
   }
-  debugLog("save version = $result");
   $newId= $dv->id;
 }
 
@@ -247,7 +246,6 @@ if (! $documentVersionId and ! $error and !$invalidControl) {
 	      mkdir($dir,0777,true);
 	    }
 		}
-		debugLog("Move from ".$uploadedFile['tmp_name']." to $uploadfile");
 	  if ( ! move_uploaded_file($uploadedFile['tmp_name'], $uploadfile)) {
 	     $error=htmlGetErrorMessage(i18n('errorUploadFile',array('hacking')));
 	     errorLog(i18n('errorUploadFile',array('hacking')));
