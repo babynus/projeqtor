@@ -121,6 +121,7 @@
     if($objectClass=='Work'){
       $showIdle = true;
     }
+    if (getSessionValue("listShowIdle$objectClass",'off')=='on') $showIdle=true;
     if (!$showIdle and ! array_key_exists('idle',$_REQUEST) and ! $quickSearch) {
       $queryWhere.= ($queryWhere=='')?'':' and ';
       $queryWhere.= $table . "." . $obj->getDatabaseColumnName('idle') . "=0";
