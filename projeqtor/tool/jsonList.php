@@ -446,6 +446,9 @@ if ($type == 'empty') {
     } else {
       // END ADD qCazelles
       $list = SqlList::getListWithCrit ( $class, $crit, 'name', null, $showIdle );
+      if ($dataType=='idDocumentVersion') {
+        usort($list, 'version_compare');
+      }
       // Begin add gmartin /handle emailTemplates Ticket #157 - FIXED PBE
       if ($dataType=='idEmailTemplate' and isset ( $_REQUEST ['critField'] ) and isset ( $_REQUEST ['critValue'] ) ) {
         $list = array_merge_preserve_keys ( $list, SqlList::getListWithCrit ( $class, array($_REQUEST ['critField']=>null), 'name', null, false ) );
