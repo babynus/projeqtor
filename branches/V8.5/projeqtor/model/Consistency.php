@@ -664,6 +664,68 @@ class Consistency {
   }
   
   // =================================================================================================================
+  // Budget
+  // =================================================================================================================
+    
+  public static function checkBudget($correct=false,$trace=false) {
+    $errors=0;
+    // Direct Query : valid here for technical needs on grouping
+    $bud=new Budget();
+    $budTable=$bud->getDatabaseTableName();
+    $exp=new Expense();
+    $expTable=$exp->getDatabaseTableName();
+    $query="SELECT bud.id as idbudget, bud.usedAmount as usedamount, bud.usedFullAmount as usedfullamount,"
+        ." bud.billedAmount as billedamount, bud.billedFullAmount as billedfullamount,"
+        ." sum(exp.plannedAmount) as sumplannedamount, sum(exp.realAmount) as sumrealamount,"
+        ." sum(exp.plannedFullAmount) as sumplannedfullamount, sum(exp.realFullAmount) as sumrealfullamount"
+        ." FROM $budTable bud, $expTable exp"
+        ." WHERE bud.elementary=1 and bud.id=exp.idBudgetItem"
+        ." GROUP BY bud.id, bud.usedAmount, bud.usedFullAmount,bud.billedAmount, bud.billedFullAmount"
+        ." HAVING bud.usedAmount<>sum(exp.plannedAmount) or bud.usedFullAmount<>sum(exp.plannedFullAmount)"
+        ." or bud.billedAmount<>sum(exp.realAmount) or bud.billedFullAmount<>sum(exp.realFullAmount)";
+    $result=Sql::query($query);
+    while ($line = Sql::fetchLine($result)) {
+      $idBudget=$line['idbudget'];
+      $cause="";
+      if ($line['usedamount']!=$line['sumplannedamount']) {
+        $cause=i18n("colIdBudget")." ".$bud->getColCaption('usedAmount'). " (".$line['usedamount'].") <> "
+              .i18n('sum').' '.i18n("colExpense")." ".$exp->getColCaption('plannedAmount'). " (".$line['sumplannedamount'].")";
+        displayError(i18n("checkIncorrectBudgetAmounts",array($idBudget,$cause)));
+      }
+      if ($line['usedfullamount']!=$line['sumplannedfullamount']) {
+        $cause=i18n("colIdBudget")." ".$bud->getColCaption('usedFullAmount'). " (".$line['usedfullamount'].") <> "
+              .i18n('sum').' '.i18n("colExpense")." ".$exp->getColCaption('plannedFullAmount'). " (".$line['sumplannedfullamount'].")";
+        displayError(i18n("checkIncorrectBudgetAmounts",array($idBudget,$cause)));
+      }
+      if ($line['billedamount']!=$line['sumrealamount']){
+        $cause=i18n("colIdBudget")." ".$bud->getColCaption('billedAmount'). " (".$line['billedamount'].") <> "
+              .i18n('sum').' '.i18n("colExpense")." ".$exp->getColCaption('realAmount'). " (".$line['sumrealamount'].")";
+        displayError(i18n("checkIncorrectBudgetAmounts",array($idBudget,$cause)));
+      }
+      if ($line['billedfullamount']!=$line['sumrealfullamount']) {
+        $cause=i18n("colIdBudget")." ".$bud->getColCaption('billedFullAmount'). " (".$line['billedfullamount'].") <> "
+              .i18n('sum').' '.i18n("colExpense")." ".$exp->getColCaption('realFullAmount'). " (".$line['sumrealfullamount'].")";
+        displayError(i18n("checkIncorrectBudgetAmounts",array($idBudget,$cause)));
+      }
+      
+      $errors++;
+      if ($correct) {
+        $bud=new Budget($idBudget);
+        $res=$bud->save();
+        if (getLastOperationStatus($res)=='OK') {
+          displayOK(i18n("checkFixed"),true);
+        } else {
+          displayMsg(i18n("checkNotFixed"),true);
+        }
+      }
+    }
+  
+    if (!$errors) {
+      displayOK(i18n("checkNoError"));
+  
+    }
+  }
+  // =================================================================================================================
   // Idle consistency from Activity / PlanningElement / Assignment
   // =================================================================================================================
   
