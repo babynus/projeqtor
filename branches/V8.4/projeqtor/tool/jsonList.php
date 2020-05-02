@@ -890,6 +890,7 @@ echo ' ] }';
 
 function listFieldsForFilter($obj, $nbRows, $included = false) {
   // return result in json format
+  if (method_exists($obj,'setAttributes')) $obj->setAttributes();
   foreach ( $obj as $col => $val ) {
     if (get_class($obj)=='GlobalView' and $col=='id') continue;
     if ($col=='_Assignment') {
