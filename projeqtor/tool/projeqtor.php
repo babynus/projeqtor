@@ -5044,6 +5044,7 @@ function octectConvertSize($octet){
 }
 
 function searchAllAttachmentMailable($objectClass,$idObj){
+  if (!$objectClass or !$idObj) return array(array(),array());
   $forbidDownload = Parameter::getGlobalParameter('lockDocumentDownload');
   $attach= new Attachment();
   $link= new Link();
