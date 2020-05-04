@@ -782,8 +782,8 @@ static function isTheLeaveProject($id=null) {
           $result .='<tr>';
           if(!$drawCheckBox){
             $result .='<td valign="top" width="20px"><div dojoType="dijit.form.CheckBox" type="checkbox" class="projectSelectorCheckbox" style="float:left;position:relative;left:'.$left.'px" id="checkBoxProj'.$idPrj.'" value="'.$idPrj.'" '.$checked.'>';
-            $result .='</div></td>';
-            $result .='<input type="hidden" id="projectSelectorName'.$idPrj.'" name="projectSelectorName'.$idPrj.'" value="'.$prj->name.'">';
+            $result .='</div>';
+            $result .='<input type="hidden" id="projectSelectorName'.$idPrj.'" name="projectSelectorName'.$idPrj.'" value="'.$prj->name.'"></td>';
           }
           $result .='<td valign="top" width="20px"><img src="css/images/iconList16.png" height="16px" /></td>';
           if ($selectField==null) {
