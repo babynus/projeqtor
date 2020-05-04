@@ -207,7 +207,7 @@ $budgetParent=getSessionValue('listBudgetParentFilter');
       <input type="hidden" name="objectClass" id="objectClass" value="Budget" />
       <input type="hidden" id="objectId" name="objectId" value="<?php if (isset($_REQUEST['objectId']))  { echo htmlEncode($_REQUEST['objectId']);}?>"/>
     </form>
-    <div id="hierarchicalListDiv" dojoType="dijit.layout.ContentPane" name="hierarchicalListDiv"  style="overflow-x:auto;overflow-y:hidden;height:100%">
+    <div id="hierarchicalListDiv" dojoType="dijit.layout.ContentPane" name="hierarchicalListDiv"  style="overflow-x:auto;overflow-y:hidden;height:95%">
     <?php include 'hierarchicalBudgetView.php'?>
     </div>
   </div>
