@@ -2520,6 +2520,9 @@ table.dijitCalendarContainer {
 	empty-cells: show;
 	min-height:30px;
 }
+.dojoxGridRowTable tr {
+  height:30px;
+}
 .dj_ie .dojoxGridRowTable {
 	border-collapse: collapse;
 }
