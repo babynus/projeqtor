@@ -103,6 +103,7 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
             saveContentPaneResizing("contentPaneDetailDivWidth<?php echo $objectClass;?>", dojo.byId("contentDetailDiv").offsetWidth, true);
             refreshObjectDivAfterResize();
           }
+          if (paramMode=='switch' && dojo.byId('contentDetailDiv').offsetHeight<=15) setTimeout("dojo.byId('contentDetailDiv').style.top=(parseInt(dojo.byId('contentDetailDiv').style.top)-6)+'px';dijit.byId('contentDetailDiv').resize({h:21});",10);
          </script>
 	    <div class="container" dojoType="dijit.layout.BorderContainer"  liveSplitters="false">
 	       <div id="detailBarShow" class="dijitAccordionTitle"
