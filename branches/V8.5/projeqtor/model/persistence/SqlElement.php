@@ -4762,6 +4762,7 @@ abstract class SqlElement {
   public function deleteControl() {
     $result = "";
     $objects = "";
+    $realWorks = "";
     $right = securityGetAccessRightYesNo ( 'menu' . get_class ( $this ), 'delete', $this );
     if (get_class ( $this ) == 'Alert' or get_class ( $this ) == 'Mail' or get_class ( $this ) == 'MailToSend' 
      or get_class ( $this ) == 'Audit' or get_class ( $this ) == 'AuditSummary' or get_class ( $this ) == 'ColumnSelector'
@@ -4775,6 +4776,7 @@ abstract class SqlElement {
     }
     $relationShip = self::$_relationShip;
     $canForceDelete = false;
+    $canDeleteRealWork=false;
     if (getSessionUser ()->id) {
       $user = getSessionUser ();
       $crit = array('idProfile' => $user->getProfile ( $this ), 'scope' => 'canForceDelete');
@@ -4782,12 +4784,17 @@ abstract class SqlElement {
       if ($habil and $habil->id and $habil->rightAccess == '1') {
         $canForceDelete = true;
       }
+      $crit = array('idProfile' => $user->getProfile ( $this ), 'scope' => 'canDeleteRealWork');
+      $habil = SqlElement::getSingleSqlElementFromCriteria ( 'HabilitationOther', $crit );
+      if ($habil and $habil->id and $habil->rightAccess == '1') {
+      	$canDeleteRealWork = true;
+      }
     }
     if (array_key_exists ( get_class ( $this ), $relationShip )) {
       $relations = $relationShip [get_class ( $this )];
       $error = false;
       foreach ( $relations as $object => $mode ) {
-        if ($mode == "control" and $canForceDelete) {
+        if ($mode == "control" and ($canForceDelete or $canDeleteRealWork)) {
           $mode = "confirm";
         } else if ($mode == "controlStrict") {
           $mode = "control";
@@ -4841,6 +4848,14 @@ abstract class SqlElement {
               $objects .= "<br/>&nbsp;-&nbsp;" . i18n ( $object ) . " (" . $nb . ")";
             }
           }
+          if($object=='Work'){
+            $objList = $obj->getSqlElementsFromCriteria($crit);
+            if($canDeleteRealWork){
+              foreach ($objList as $work){
+                $realWorks .="<br/>&nbsp;-&nbsp;".i18n('realWorkElement',array($work->refType,SqlList::getNameFromId('Resource', $work->idResource),$work->displayWorkWithUnit($work->work),htmlFormatDateTime($work->inputDateTime)));
+              }
+            }
+          }
           if (get_class($this)=='Contact' and property_exists($obj,'idSponsor')) { 
             // Also search for sponsor
             $crit = array('idSponsor' => $this->id);
@@ -4862,6 +4877,9 @@ abstract class SqlElement {
           $result .= "<br/>" . i18n ( "errorControlDelete" ) . $objects;
         } else {
           $result .= '<input type="hidden" id="confirmControl" value="delete" /><br/>' . i18n ( "confirmControlDelete" ) . $objects;
+          if($canDeleteRealWork){
+            $result .= "<br/><br/>".i18n ( "confirmControlDeleteRealWork" ) . $realWorks;
+          }
         }
       }
     }

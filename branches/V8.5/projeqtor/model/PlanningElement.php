@@ -1247,9 +1247,14 @@ class PlanningElement extends SqlElement {
   public function deleteControl()
   {
   	$result="";
-  	 
+  	$canDeleteRealWork = false;
+  	$crit = array('idProfile' => getSessionUser()->getProfile ( $this ), 'scope' => 'canDeleteRealWork');
+  	$habil = SqlElement::getSingleSqlElementFromCriteria ( 'HabilitationOther', $crit );
+  	if ($habil and $habil->id and $habil->rightAccess == '1') {
+  		$canDeleteRealWork = true;
+  	} 
   	// Cannot delete item with real work
-  	if ($this->id and $this->realWork and $this->realWork>0)	{
+  	if ($this->id and $this->realWork and $this->realWork>0 and !$canDeleteRealWork)	{
  	    $result .= "<br/>" . i18n("msgUnableToDeleteRealWork");
   	}
 

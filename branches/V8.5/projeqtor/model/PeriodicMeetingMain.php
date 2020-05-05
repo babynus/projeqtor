@@ -342,7 +342,13 @@ class PeriodicMeetingMain extends SqlElement {
   
   public function deleteControl() { 
     $result='';
-    if ($this->MeetingPlanningElement and $this->MeetingPlanningElement->realWork>0) {
+    $canDeleteRealWork = false;
+    $crit = array('idProfile' => getSessionUser()->getProfile ( $this ), 'scope' => 'canDeleteRealWork');
+    $habil = SqlElement::getSingleSqlElementFromCriteria ( 'HabilitationOther', $crit );
+    if ($habil and $habil->id and $habil->rightAccess == '1') {
+    	$canDeleteRealWork = true;
+    }
+    if ($this->MeetingPlanningElement and $this->MeetingPlanningElement->realWork>0 and !$canDeleteRealWork) {
       $result.='<br/>' . i18n('msgUnableToDeleteRealWork');
     }
     if ($result=='') {

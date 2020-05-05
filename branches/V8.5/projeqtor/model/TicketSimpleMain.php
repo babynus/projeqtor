@@ -194,9 +194,15 @@ class TicketSimpleMain extends TicketMain {
 
   public function deleteControl() { 
     $result='';
+    $canDeleteRealWork = false;
+    $crit = array('idProfile' => getSessionUser()->getProfile ( $this ), 'scope' => 'canDeleteRealWork');
+    $habil = SqlElement::getSingleSqlElementFromCriteria ( 'HabilitationOther', $crit );
+    if ($habil and $habil->id and $habil->rightAccess == '1') {
+    	$canDeleteRealWork = true;
+    }
     $crit=array('refType'=>'Ticket', 'refId'=>$this->id);
     $this->WorkElement=SqlElement::getSingleSqlElementFromCriteria('WorkElement', $crit);
-    if ($this->WorkElement and $this->WorkElement->realWork>0) {
+    if ($this->WorkElement and $this->WorkElement->realWork>0 and !$canDeleteRealWork) {
       $result.='<br/>' . i18n('msgUnableToDeleteRealWork');
     }
     if ($result=='') {
