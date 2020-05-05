@@ -81,6 +81,19 @@ class ProjectPlanningElementMain extends PlanningElement {
   public $totalRealCost;
   public $totalLeftCost;
   public $totalPlannedCost;
+  public $_separator_menuTechnicalAvancement_marginTop;
+//   public $_tab_7_1_smallLabel_2 = array('toDeliver','', 'toRealised','', 'realised','', 'rest','unityOfWork');
+//   public $toDeliver;
+//   public $_void_res_32;
+//   public $toRealised;
+//   public $_void_res_33;
+//   public $realised;
+//   public $_void_res_34;
+//   public $rest;
+  public $uoAdvancement;
+  public $idAdvancement;
+  public $weight;
+  public $idWeight;
   public $_separator_menuReview_marginTop;
   public $_tab_5_1_smallLabel_1 = array('','','','','',
       'progress');
@@ -140,7 +153,7 @@ class ProjectPlanningElementMain extends PlanningElement {
     "idOrganization"=>"hidden",
     "organizationInherited"=>"hidden",
     "organizationElementary"=>"hidden",
-    "needReplan"=>"hidden"
+    "needReplan"=>"hidden",
   );   
   
   private static $_databaseTableName = 'planningelement';
@@ -157,9 +170,23 @@ class ProjectPlanningElementMain extends PlanningElement {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
+    if (!$this->id) {
+      $this->idAdvancement=2;
+      $this->idWeight=2;
+    }
   }
   
-  
+  function setAttributes(){
+    if(Parameter::getGlobalParameter('technicalAvancement')!='YES' or $this->weight==0){
+      debugLog($this->weight);
+      unset($this->_separator_menuTechnicalAvancement_marginTop);
+    }else{
+      self::$_fieldsAttributes['uoAdvancement']='readonly,nobr';
+      self::$_fieldsAttributes['idAdvancement']='readonly,nobr,size1/3';
+      self::$_fieldsAttributes['weight']='readonly,nobr';
+      self::$_fieldsAttributes['idWeight']='readonly,size1/3';
+    }
+  }
   /** ==========================================================================
    * Destructor
    * @return void
