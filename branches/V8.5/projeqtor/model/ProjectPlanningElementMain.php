@@ -82,16 +82,15 @@ class ProjectPlanningElementMain extends PlanningElement {
   public $totalLeftCost;
   public $totalPlannedCost;
   public $_separator_menuTechnicalAvancement_marginTop;
-//   public $_tab_7_1_smallLabel_2 = array('toDeliver','', 'toRealised','', 'realised','', 'rest','unityOfWork');
-//   public $toDeliver;
-//   public $_void_res_32;
-//   public $toRealised;
-//   public $_void_res_33;
-//   public $realised;
-//   public $_void_res_34;
-//   public $rest;
+  public $_tab_5_2_smallLabel_9 = array('', '','','','','','uoAdvancement');
+  public $_void_uo_20;
+  public $_void_uo_21;
+  public $_void_uo_22;
+  public $_void_uo_23;
+  public $_void_uo_24;
   public $uoAdvancement;
   public $idAdvancement;
+  public $_label_weight;
   public $weight;
   public $idWeight;
   public $_separator_menuReview_marginTop;
@@ -154,6 +153,10 @@ class ProjectPlanningElementMain extends PlanningElement {
     "organizationInherited"=>"hidden",
     "organizationElementary"=>"hidden",
     "needReplan"=>"hidden",
+    "idAdvancement"=>'size1/3',
+    "uoAdvancement"=>'',
+    "idWeight"=>'size1/3',
+    "weight"=>''
   );   
   
   private static $_databaseTableName = 'planningelement';
@@ -170,20 +173,15 @@ class ProjectPlanningElementMain extends PlanningElement {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
-    if (!$this->id) {
-      $this->idAdvancement=2;
-      $this->idWeight=2;
-    }
   }
   
   function setAttributes(){
     if(Parameter::getGlobalParameter('technicalAvancement')!='YES' or $this->weight==0){
-      debugLog($this->weight);
       unset($this->_separator_menuTechnicalAvancement_marginTop);
     }else{
-      self::$_fieldsAttributes['uoAdvancement']='readonly,nobr';
-      self::$_fieldsAttributes['idAdvancement']='readonly,nobr,size1/3';
-      self::$_fieldsAttributes['weight']='readonly,nobr';
+      self::$_fieldsAttributes['uoAdvancement']='readonly';
+      self::$_fieldsAttributes['idAdvancement']='readonly,size1/3';
+      self::$_fieldsAttributes['weight']='readonly';
       self::$_fieldsAttributes['idWeight']='readonly,size1/3';
     }
   }
