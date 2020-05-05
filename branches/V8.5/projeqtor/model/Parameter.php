@@ -355,7 +355,8 @@ class Parameter extends SqlElement {
                     'YES'=>i18n('displayYes')); 
         break;
       case 'pdfInNewWindow': case "paramConfirmQuit": case "paramShowThumb" : case "paramShowThumbList":
-      case 'dependencyStrictMode': 
+      case 'dependencyStrictMode':
+      case 'technicalAvancement':
       case 'useOrganizationBudgetElement' :
       case 'notificationSystemActiv':
       case 'updateMilestoneResponsibleFromDeliverable': case 'updateMilestoneResponsibleFromIncoming':
@@ -855,6 +856,8 @@ class Parameter extends SqlElement {
           	                  'displayResourcePlan'=>'list',
           	                  'maxProjectsToDisplay'=>'number',
           	                  'dependencyStrictMode'=>'list',
+          	                  'isManualProgress'=>'list',
+          	                  'technicalAvancement'=>'list',
           	                'sectionTicket'=>'section',
           	                  'realWorkOnlyForResponsible'=>'list',
           	                  'responsibleFromProduct'=>'list',
@@ -877,7 +880,6 @@ class Parameter extends SqlElement {
       	                      'setResponsibleIfNeeded'=>'list',
       	                      'autoSetAssignmentByResponsible'=>'list',
       	                      'autoUpdateActivityStatus'=>'list',
-      	                      'isManualProgress'=>'list',
       	                      'menuMilestone'=>'section',
       	                      'manageMilestoneOnItems'=>'list',
       	                      'autoLinkMilestone'=>'list',

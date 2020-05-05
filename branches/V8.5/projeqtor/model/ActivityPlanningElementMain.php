@@ -65,6 +65,23 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $realCost;
   public $leftCost;
   public $plannedCost;
+  public $_separator_menuTechnicalAvancement_marginTop;
+  public $_tab_4_1_smallLabel_2 = array('toDeliver', 'toRealised', 'realised', 'rest','unityOfWork');
+  public $toDeliver;
+  public $toRealised;
+  public $realised;
+  public $rest;
+  public $_tab_5_2_smallLabel_8 = array('', '','','','','','uoAdvancement');
+  public $_void_20;
+  public $_void_21;
+  public $_void_22;
+  public $_void_23;
+  public $_void_24;
+  public $uoAdvancement;
+  public $idAdvancement;
+  public $_label_weight;
+  public $weight;
+  public $idWeight;
   public $_separator_menuReview_marginTop;
   public $_tab_5_2_smallLabel_3 = array('', '', '', '', '', 'progress','priority');
   public $progress;
@@ -128,13 +145,18 @@ class ActivityPlanningElementMain extends PlanningElement {
     "_label_indivisibility"=>"",
     "indivisibility"=>"",
     "minimumThreshold"=>"",
-    "fixPlanning"=>"nobr"
+    "fixPlanning"=>"nobr",
+    "uoAdvancement"=>"nobr",
+    "idAdvancement"=>"size1/3",
+    "weight"=>"nobr",
+    "idWeight"=>"size1/3",
+    
   );
 
   private static $_fieldsTooltip = array(
   		"minimumThreshold"=> "tooltipMinimumThreshold",
   		"indivisibility"=> "tooltipIndivisibility",
-      "fixPlanning"=> "tooltipFixPlanningActivity",
+      "fixPlanning"=> "tooltipFixPlanningActivity"
   );
   
   private static $_databaseTableName = 'planningelement';
@@ -202,6 +224,23 @@ class ActivityPlanningElementMain extends PlanningElement {
     }
     if ($this->indivisibility){
       self::$_fieldsAttributes["minimumThreshold"]='required';
+    }
+    if(Parameter::getGlobalParameter('technicalAvancement')=='YES'){
+      $asSon=$this->getSonItemsArray();
+      if(!$asSon){
+        self::$_fieldsAttributes['toDeliver']='';
+        self::$_fieldsAttributes['toRealised']='';
+        self::$_fieldsAttributes['realised']='';
+        self::$_fieldsAttributes['rest']='readonly';
+      }
+      if($this->idAdvancement!=1){
+        self::$_fieldsAttributes['uoAdvancement']='readonly';
+      }
+      if($this->idWeight!=1){
+        self::$_fieldsAttributes['weight']='readonly';
+      
+      }
+       self::$_fieldsAttributes['_tab_2_1_smallLabel_8']='nobr';
     }
   }
   /** ==========================================================================
