@@ -89,6 +89,14 @@ class PlanningElement extends SqlElement {
   public $isManualProgress;
   public $surbooked;
   public $fixPlanning;
+  public $toDeliver;
+  public $toRealised;
+  public $realised;
+  public $rest;
+  public $uoAdvancement;
+  public $idAdvancement;
+  public $weight;
+  public $idWeight;
   
   private static $_fieldsAttributes=array(
                                   "id"=>"hidden",
@@ -141,7 +149,15 @@ class PlanningElement extends SqlElement {
                                   "surbooked"=>"hidden",
                                   "indivisibility"=>"hidden",
                                   "minimumThreshold"=>"hidden",
-                                  "fixPlanning"=>"hidden"
+                                  "fixPlanning"=>"hidden",
+                                  "toDeliver"=>"hidden,noImport",
+                                  "toRealised"=>"hidden,noImport",
+                                  "realised"=>"hidden,noImport",
+                                  "rest"=>"hidden,noImport",
+                                  "uoAdvancement"=>"hidden",
+                                  "idAdvancement"=>"hidden",
+                                  "weight"=>"hidden",
+                                  "idWeight"=>"hidden"
   );   
   
   private static $_predecessorItemsArray = array();
@@ -269,7 +285,40 @@ class PlanningElement extends SqlElement {
       $colScript .= '   dijit.byId("ActivityPlanningElement_minimumThreshold").set("class", "input");';
       $colScript .= '  }';
       $colScript .= '</script>';
-    } 
+    }else if($colName=='idAdvancement'){
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  if(this.value==2){';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_uoAdvancement").set("readonly", true);';
+      $colScript .= '  }else{';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_uoAdvancement").set("readonly", false);';
+      $colScript .= '  }';
+      $colScript .= '</script>';
+    }else if($colName=='idWeight'){
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  if(this.value==1){';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_weight").set("readonly", false);';
+      $colScript .= '  }else{';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_weight").set("readonly", true);';
+      $colScript .= '     if(this.value==3){';
+      $colScript .= '       dijit.byId("ActivityPlanningElement_weight").set("value", dojo.byId("ActivityPlanningElement_toRealised").value);';
+      $colScript .= '     }';
+      $colScript .= '  }';
+      $colScript .= '</script>';
+    }else if($colName=='toRealised'){
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  if(this.value!="" && dojo.byId("ActivityPlanningElement_realised").value!=""){';
+      $colScript .= '   var rest=this.value-dojo.byId("ActivityPlanningElement_realised").value;';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_rest").set("value", rest);';
+      $colScript .= '  }';
+      $colScript .= '</script>';
+    }else if($colName=='realised'){
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  if(this.value!="" && dojo.byId("ActivityPlanningElement_toRealised").value!=""){';
+      $colScript .= '   var rest=dojo.byId("ActivityPlanningElement_toRealised").value-this.value;';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_rest").set("value", rest);';
+      $colScript .= '  }';
+      $colScript .= '</script>';
+    }
     return $colScript;
   }
   
@@ -475,6 +524,13 @@ class PlanningElement extends SqlElement {
       $this->expectedProgress = 0;
       $this->updateSynthesisObj(true);
     }
+    if(Parameter::getGlobalParameter('technicalAvancement')=='YES'){
+      if($this->toRealised!='' and $this->realised!=''){
+        $this->rest=($this->toRealised-$this->realised );
+      }
+      $this->uoAdvancement=$this->setAdvancement();
+      $this->weight=$this->setWeight();
+    }
     //end
     $result=parent::save();
     if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
@@ -540,6 +596,7 @@ class PlanningElement extends SqlElement {
     if ($this->topId!='') { // and ($old->topId!=$this->topId or $old->cancelled!=$this->cancelled)) {
       if (! self::$_noDispatch) {
         if (!isset(self::$_noDispatchArray[$this->topRefType.'#'.$this->topRefId])) {
+          debugLog('yes');
           self::updateSynthesis($this->topRefType, $this->topRefId);
         }
       } else {
@@ -693,6 +750,100 @@ class PlanningElement extends SqlElement {
     return null; // OK nothing to do
   }
   
+  public function setAdvancement(){
+    debugLog($this->refName);
+    debugLog($this->idAdvancement);
+    if($this->idAdvancement=='2'){
+      $ref=$this->refType;
+      $idprojPlEl =array();
+      $idActPlEl =array();
+      $sons=$this->getSonItemsArray();
+      if($ref=='Project'){
+        if($sons){
+          foreach ($sons as $id=>$pe){
+            if($pe->refType=='Project'){
+              $idprojPlEl[$id]=$pe;
+            }else if ($pe->refType=='Activity'){
+              $idActPlEl[$id]=$pe;
+            }else{
+              continue;
+            }
+          }
+          if(!empty($idprojPlEl)){
+            $sons=$idprojPlEl;
+          }else{
+            $sons=$idActPlEl;
+          }
+        }else{
+          return 0;
+        }
+      }
+      if(!$sons and $ref!='Project'){
+        $result=(floatval(($this->realised/$this->toRealised)*100));
+        debugLog('resultat '.$result);
+      }else{
+        $sumWeight=0;
+        $sumAdvancement=0;
+        foreach ($sons as $son ){
+          if( $ref=='Project'){
+          }
+          if($son->uoAdvancement!=0){
+            $sumAdvancement=(floatval($sumAdvancement+($son->uoAdvancement*$son->weight)));
+            $sumWeight+=$son->weight;
+            continue;
+          }else{
+            continue;
+          }
+        }
+        if($sumWeight==0){
+          return 0;
+        }
+          $result=(floatval((($sumAdvancement)/($sumWeight))));
+      }
+    }else{
+      $result=$this->uoAdvancement;
+    }
+    return $result;
+  }
+  
+  public function setWeight(){
+    if($this->idWeight==2 or $this->refType=='Project'){
+      $summWeight=0;
+      $sons=$this->getSonItemsArray();
+      if($this->refType=='Project' and $sons){
+        foreach ($sons as $id=>$pe){
+          if($pe->refType=='Project'){
+            $idprojPlEl[$id]=$pe;
+          }else if ($pe->refType=='Activity'){
+            $idActPlEl[$id]=$pe;
+          }else{
+            continue;
+          }
+        }
+        if(!empty($idprojPlEl)){
+          $sons=$idprojPlEl;
+        }else{
+          $sons=$idActPlEl;
+        }
+      }
+      foreach ($sons as $son){
+        if($son->weight!=''){
+          $summWeight=$summWeight+$son->weight;
+          continue;
+        }else{
+          continue;
+        }
+      }
+      
+      $result=$summWeight;
+    }else if($this->idWeight==3){
+      $result=$this->toRealised;
+    }else{
+      $result=$this->weight;
+    }
+    return $result;
+  }
+  
   // Save without extra save() feature and without controls
   public function simpleSave() {
     if ($this->plannedStartDate>$this->plannedEndDate) $this->plannedEndDate=$this->plannedStartDate;
@@ -792,7 +943,8 @@ class PlanningElement extends SqlElement {
    */
   protected function updateSynthesisObj ($doNotSave=false) {
     $consolidateValidated=Parameter::getGlobalParameter('consolidateValidated');
-  	$this->validatedCalculated=0;
+    $technicalAdvancement=Parameter::getGlobalParameter('technicalAvancement');  	
+    $this->validatedCalculated=0;
   	$this->validatedExpenseCalculated=0;
     $assignedWork=0;
     $leftWork=0;
@@ -841,6 +993,10 @@ class PlanningElement extends SqlElement {
       if ( $ass->plannedEndDate and (! $plannedEndDate or $ass->plannedEndDate>$plannedEndDate )) {
         $plannedEndDate=$ass->plannedEndDate;
       }      
+    }
+    if($technicalAdvancement=='YES'){
+      $this->uoAdvancement=$this->setAdvancement();
+      $this->weight=$this->setWeight();
     }
     // Add data from other planningElements dependant from this one
     $critPla=array("topId"=>$this->id);
