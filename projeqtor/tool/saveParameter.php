@@ -143,6 +143,7 @@ if ($type=='habilitation') {
                                      'canDeleteAttachement'=>i18n('canDeleteAttachement'),     
                                      'canForceDelete'=>i18n('canForceDelete'),
                                      'canForceClose'=>i18n('canForceClose'),
+                                     'canDeleteRealWork'=>i18n('canDeleteRealWork'),
                                      'canUpdateCreation'=>i18n('canUpdateCreationInfo'), 
                                      'viewComponents'=>i18n('viewComponents'),
                                      'resVisibilityList'=>i18n('resourceVisibilityList'),

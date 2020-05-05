@@ -380,6 +380,7 @@ class WorkElementMain extends SqlElement {
     }
     return $result;
   }
+  
   // Save without extra save() feature and without controls
   public function simpleSave() {
     $result = parent::saveForced();

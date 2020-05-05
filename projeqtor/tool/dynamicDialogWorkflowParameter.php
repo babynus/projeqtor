@@ -47,7 +47,6 @@ $statusColorList=SqlList::getList('Status', 'color');
      ."and (select idle from $pTable p where p.id=idProfile)=0";
   $cptWs=$ws->countSqlElementsFromCriteria(null,$crit);
   if ($cptWs>0) {
-    debugLog($crit);
     $canUpdate=false;
   } else {
     $critArray=array('scope'=>'workflow', 'objectClass'=>'workflow#'.$id, 'idUser'=>$idStatus);
