@@ -140,9 +140,14 @@ use PhpOffice\PhpPresentation\Shape\RichText\Paragraph;
                 });
               }else {
                 saveContentPaneResizing("contentPaneRightDetailDivHeight<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetHeight, true);
+                if (paramMode=='left') saveContentPaneResizing("contentPaneRightDetailDivWidth<?php echo $objectClass;?>", dojo.byId("detailRightDiv").offsetWidth, true);
                 //if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
                 var newHeight=dojo.byId("detailRightDiv").offsetHeight;
                 if (dojo.byId("noteNoteStream")) dojo.byId("noteNoteStream").style.height=(newHeight-40)+'px';
+                var newWidth=dojo.byId("detailRightDiv").offsetWidth;
+                dojo.query(".activityStreamNoteContainer").forEach(function(node, index, nodelist) {
+                  node.style.maxWidth=((newWidth*.7)-30)+"px";
+                });
               }
               if (paramRightDiv=='trailing' && evt.w) {
                 refreshObjectDivAfterResize();
