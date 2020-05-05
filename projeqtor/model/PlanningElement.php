@@ -298,9 +298,17 @@ class PlanningElement extends SqlElement {
       $colScript .= '  if(this.value==1){';
       $colScript .= '   dijit.byId("ActivityPlanningElement_weight").set("readonly", false);';
       $colScript .= '  }else{';
-      $colScript .= '   dijit.byId("ActivityPlanningElement_weight").set("readonly", true);';
-      $colScript .= '     if(this.value==3){';
-      $colScript .= '       dijit.byId("ActivityPlanningElement_weight").set("value", dojo.byId("ActivityPlanningElement_toRealised").value);';
+      $colScript .= '     dijit.byId("ActivityPlanningElement_weight").set("readonly", true);';
+      $colScript .= '     if(this.value==3 && (!dojo.byId("ActivityPlanningElement_toRealised"))){';
+      $colScript .= '       dijit.byId("ActivityPlanningElement_idWeight").set("value", 2);';
+      $colScript .= '       showAlert(i18n("activityWithSon"));';
+      $colScript .= '       return; ';
+      $colScript .= '     }else if (this.value==3){';
+      $colScript .= '       if(dojo.byId("ActivityPlanningElement_toRealised").value==""){';
+      $colScript .= '         dijit.byId("ActivityPlanningElement_weight").set("value","0");';
+      $colScript .= '       }else{';
+      $colScript .= '         dijit.byId("ActivityPlanningElement_weight").set("value",dojo.byId("ActivityPlanningElement_toRealised").value);';
+      $colScript .= '       }';
       $colScript .= '     }';
       $colScript .= '  }';
       $colScript .= '</script>';
@@ -525,11 +533,26 @@ class PlanningElement extends SqlElement {
       $this->updateSynthesisObj(true);
     }
     if(Parameter::getGlobalParameter('technicalAvancement')=='YES'){
+      if(!$this->id){
+        if($this->refType=='Project'){
+          $this->idAdvancement=2;
+          $this->idWeight=2;
+          $this->uoAdvancement=0;
+          $this->weight=0;
+        }else{
+          $this->idAdvancement=1;
+          $this->idWeight=1;
+          $this->uoAdvancement=0;
+          $this->weight=0;
+          $this->rest=0;
+        }
+      }else if($refType=='Activity'){
+        $this->uoAdvancement=$this->setAdvancement();
+        $this->weight=$this->setWeight();
+      }
       if($this->toRealised!='' and $this->realised!=''){
         $this->rest=($this->toRealised-$this->realised );
       }
-      $this->uoAdvancement=$this->setAdvancement();
-      $this->weight=$this->setWeight();
     }
     //end
     $result=parent::save();
@@ -596,7 +619,6 @@ class PlanningElement extends SqlElement {
     if ($this->topId!='') { // and ($old->topId!=$this->topId or $old->cancelled!=$this->cancelled)) {
       if (! self::$_noDispatch) {
         if (!isset(self::$_noDispatchArray[$this->topRefType.'#'.$this->topRefId])) {
-          debugLog('yes');
           self::updateSynthesis($this->topRefType, $this->topRefId);
         }
       } else {
@@ -749,44 +771,46 @@ class PlanningElement extends SqlElement {
     }
     return null; // OK nothing to do
   }
-  
+  // florent
   public function setAdvancement(){
-    debugLog($this->refName);
-    debugLog($this->idAdvancement);
     if($this->idAdvancement=='2'){
       $ref=$this->refType;
-      $idprojPlEl =array();
-      $idActPlEl =array();
       $sons=$this->getSonItemsArray();
-      if($ref=='Project'){
-        if($sons){
+      if($ref=='Project' and $sons){
           foreach ($sons as $id=>$pe){
-            if($pe->refType=='Project'){
+            if($pe->refType=='Project' and $pe->topRefId==$this->refId){
               $idprojPlEl[$id]=$pe;
-            }else if ($pe->refType=='Activity'){
+            }else if ($pe->refType=='Activity' and $pe->topRefId==$this->refId){
               $idActPlEl[$id]=$pe;
             }else{
               continue;
             }
           }
-          if(!empty($idprojPlEl)){
+          if(isset($idprojPlEl)){
             $sons=$idprojPlEl;
-          }else{
+          }else if(isset($idActPlEl)){
             $sons=$idActPlEl;
+          }else{
+            return 0;
+          } 
+      }else if ($ref=='Activity' and $sons){
+        foreach ($sons as $id=>$pe){
+          if($pe->topRefId!=$this->refId){
+            unset($sons[$id]);
           }
-        }else{
-          return 0;
+          continue;
         }
       }
       if(!$sons and $ref!='Project'){
-        $result=(floatval(($this->realised/$this->toRealised)*100));
-        debugLog('resultat '.$result);
+        if($this->toRealised!=0){
+          $result=(floatval(($this->realised/$this->toRealised)*100));
+        }else{
+          $result=0;
+        }
       }else{
         $sumWeight=0;
         $sumAdvancement=0;
         foreach ($sons as $son ){
-          if( $ref=='Project'){
-          }
           if($son->uoAdvancement!=0){
             $sumAdvancement=(floatval($sumAdvancement+($son->uoAdvancement*$son->weight)));
             $sumWeight+=$son->weight;
@@ -805,26 +829,27 @@ class PlanningElement extends SqlElement {
     }
     return $result;
   }
-  
   public function setWeight(){
-    if($this->idWeight==2 or $this->refType=='Project'){
+    if($this->idWeight==2){
       $summWeight=0;
       $sons=$this->getSonItemsArray();
       if($this->refType=='Project' and $sons){
         foreach ($sons as $id=>$pe){
-          if($pe->refType=='Project'){
+          if($pe->refType=='Project' and $pe->topRefId==$this->refId){
             $idprojPlEl[$id]=$pe;
-          }else if ($pe->refType=='Activity'){
+          }else if ($pe->refType=='Activity' and $pe->topRefId==$this->refId){
             $idActPlEl[$id]=$pe;
           }else{
             continue;
           }
         }
-        if(!empty($idprojPlEl)){
+        if(isset($idprojPlEl)){
           $sons=$idprojPlEl;
-        }else{
+        }else if (isset($idActPlEl)){
           $sons=$idActPlEl;
-        }
+        }else{
+          return 0;
+        } 
       }
       foreach ($sons as $son){
         if($son->weight!=''){
@@ -834,7 +859,6 @@ class PlanningElement extends SqlElement {
           continue;
         }
       }
-      
       $result=$summWeight;
     }else if($this->idWeight==3){
       $result=$this->toRealised;
@@ -843,6 +867,7 @@ class PlanningElement extends SqlElement {
     }
     return $result;
   }
+  ///
   
   // Save without extra save() feature and without controls
   public function simpleSave() {
@@ -994,7 +1019,13 @@ class PlanningElement extends SqlElement {
         $plannedEndDate=$ass->plannedEndDate;
       }      
     }
+    // florent
     if($technicalAdvancement=='YES'){
+      if($this->idWeight==3){
+        $this->weight=0;
+        $this->idWeight=2;
+      }
+      $this->idAdvancement=2;
       $this->uoAdvancement=$this->setAdvancement();
       $this->weight=$this->setWeight();
     }
