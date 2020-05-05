@@ -573,7 +573,7 @@ function activityStreamDisplayNote ($note,$origin){
         if(Parameter::getUserParameter('paramRightDiv')==3){
           $rightWidth='70%';
         }else{
-          $rightWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-30).'px"';
+          $rightWidth=(intval(Parameter::getUserParameter('contentPaneRightDetailDivWidth'.$objectClass))-30).'px';
         }
     } else {
     	if (RequestHandler::isCodeSet('destinationWidth')) {
