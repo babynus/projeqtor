@@ -327,7 +327,7 @@ function showPrint(page, context, comboName, outMode, orientation) {
     params+='&OrganizationBudgetPeriod='+dijit.byId('OrganizationBudgetElementCurrent__byMet_periodYear').get("value");
   }
 // END ADD BY Marc TABARY - 2017-03-10 - PERIODIC YEAR BUDGET ELEMENT
-  if (context == 'list' || context == 'downloadList') {
+  if (context == 'list' || context == 'downloadList' || context == 'download') {
     if (dijit.byId("listShowIdle")) {
       if (dijit.byId("listShowIdle").get('checked')) {
         params+="&idle=true";
