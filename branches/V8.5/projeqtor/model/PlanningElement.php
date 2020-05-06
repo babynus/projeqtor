@@ -299,9 +299,13 @@ class PlanningElement extends SqlElement {
       $colScript .= '   dijit.byId("ActivityPlanningElement_weight").set("readonly", false);';
       $colScript .= '  }else{';
       $colScript .= '     dijit.byId("ActivityPlanningElement_weight").set("readonly", true);';
-      $colScript .= '     if(this.value==3 && (!dojo.byId("ActivityPlanningElement_toRealised"))){';
+      $colScript .= '     if(this.value==3 && (!dojo.byId("_tab_4_1_smallLabel_2"))){';
       $colScript .= '       dijit.byId("ActivityPlanningElement_idWeight").set("value", 2);';
       $colScript .= '       showAlert(i18n("activityWithSon"));';
+      $colScript .= '       return; ';
+      $colScript .= '     } else if(this.value==2 && dojo.byId("_tab_4_1_smallLabel_2")){';
+      $colScript .= '       dijit.byId("ActivityPlanningElement_idWeight").set("value", 1);';
+      $colScript .= '       showAlert(i18n("activityNoSons"));';
       $colScript .= '       return; ';
       $colScript .= '     }else if (this.value==3){';
       $colScript .= '       if(dojo.byId("ActivityPlanningElement_toRealised").value==""){';
@@ -532,31 +536,47 @@ class PlanningElement extends SqlElement {
       $this->expectedProgress = 0;
       $this->updateSynthesisObj(true);
     }
-    if(Parameter::getGlobalParameter('technicalAvancement')=='YES'){
+    ///florent
+    debugLog(Parameter::getGlobalParameter('technicalAvancement'));
+    if(Parameter::getGlobalParameter('technicalAvancement')=='YES' and ($this->refType=='Project' or $this->refType=='Activity')){
+      debugLog('chips');
       if(!$this->id){
         if($this->refType=='Project'){
           $this->idAdvancement=2;
           $this->idWeight=2;
           $this->uoAdvancement=0;
           $this->weight=0;
+          debugLog('oui');
         }else{
           $this->idAdvancement=1;
           $this->idWeight=1;
           $this->uoAdvancement=0;
           $this->weight=0;
+          $this->toDeliver=0;
+          $this->toRealised=0;
+          $this->realised=0;
           $this->rest=0;
         }
-      }else if($refType=='Activity'){
-        $this->uoAdvancement=$this->setAdvancement();
-        $this->weight=$this->setWeight();
-      }
-      if($this->toRealised!='' and $this->realised!=''){
-        $this->rest=($this->toRealised-$this->realised );
+      }else{
+        if($this->refType=='Activity'){
+          $sons=$this->getSonItemsArray();
+          if(!$sons and $this->idWeight==2){
+            $this->idWeight=1;
+          }
+          $this->uoAdvancement=$this->setAdvancement();
+          $this->weight=$this->setWeight();
+        }
+        if($this->toRealised!='' and $this->realised!=''){
+          $this->rest=($this->toRealised-$this->realised );
+        }
       }
     }
+    ///
+    
     //end
     $result=parent::save();
     if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
+      debugLog($result);
       return $result;     
     }
     // Update dependant objects
@@ -771,37 +791,40 @@ class PlanningElement extends SqlElement {
     }
     return null; // OK nothing to do
   }
-  // florent
+  /// florent
   public function setAdvancement(){
     if($this->idAdvancement=='2'){
       $ref=$this->refType;
       $sons=$this->getSonItemsArray();
       if($ref=='Project' and $sons){
-          foreach ($sons as $id=>$pe){
-            if($pe->refType=='Project' and $pe->topRefId==$this->refId){
-              $idprojPlEl[$id]=$pe;
-            }else if ($pe->refType=='Activity' and $pe->topRefId==$this->refId){
-              $idActPlEl[$id]=$pe;
-            }else{
-              continue;
-            }
+        foreach ($sons as $id=>$pe) {
+          if ($pe->refType=='Project' and $pe->topRefId==$this->refId) {
+            $idprojPlEl[$id]=$pe;
+          } else if ($pe->refType=='Activity' and $pe->topRefId==$this->refId) {
+            $idActPlEl[$id]=$pe;
+          } else {
+            continue;
           }
-          if(isset($idprojPlEl)){
-            $sons=$idprojPlEl;
-          }else if(isset($idActPlEl)){
-            $sons=$idActPlEl;
-          }else{
-            return 0;
-          } 
+        }
+        if (isset($idprojPlEl)) {
+          $sons=$idprojPlEl;
+        } else if (isset($idActPlEl)) {
+          $sons=$idActPlEl;
+        } else {
+          return 0;
+        }
+      }else if ($ref=='Project' and !$sons){
+        return 0; 
       }else if ($ref=='Activity' and $sons){
         foreach ($sons as $id=>$pe){
-          if($pe->topRefId!=$this->refId){
+          if($pe->topRefId!=$this->refId or $pe->refType!='Activity'){
             unset($sons[$id]);
           }
           continue;
         }
       }
-      if(!$sons and $ref!='Project'){
+      
+      if($ref=='Activity' and !$sons ){
         if($this->toRealised!=0){
           $result=(floatval(($this->realised/$this->toRealised)*100));
         }else{
@@ -829,11 +852,13 @@ class PlanningElement extends SqlElement {
     }
     return $result;
   }
+  
   public function setWeight(){
     if($this->idWeight==2){
+      $refType=$this->refType;
       $summWeight=0;
       $sons=$this->getSonItemsArray();
-      if($this->refType=='Project' and $sons){
+      if($refType=='Project' and $sons){
         foreach ($sons as $id=>$pe){
           if($pe->refType=='Project' and $pe->topRefId==$this->refId){
             $idprojPlEl[$id]=$pe;
@@ -850,6 +875,15 @@ class PlanningElement extends SqlElement {
         }else{
           return 0;
         } 
+      }else if($refType=='Activity' and $sons){
+        foreach ($sons as $id=>$pe){
+            if($pe->topRefId!=$this->refId or $pe->refType!='Activity'){
+              unset($sons[$id]);
+            }
+            continue;
+        }
+      }else {
+        return 0;
       }
       foreach ($sons as $son){
         if($son->weight!=''){
@@ -1019,8 +1053,8 @@ class PlanningElement extends SqlElement {
         $plannedEndDate=$ass->plannedEndDate;
       }      
     }
-    // florent
-    if($technicalAdvancement=='YES'){
+    /// florent
+    if($technicalAdvancement=='YES' and ($this->refType=='Project' or $this->refType=='Activity')){
       if($this->idWeight==3){
         $this->weight=0;
         $this->idWeight=2;
@@ -1029,6 +1063,7 @@ class PlanningElement extends SqlElement {
       $this->uoAdvancement=$this->setAdvancement();
       $this->weight=$this->setWeight();
     }
+    ///
     // Add data from other planningElements dependant from this one
     $critPla=array("topId"=>$this->id);
     $planningElement=new PlanningElement();

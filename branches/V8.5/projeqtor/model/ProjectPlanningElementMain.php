@@ -153,10 +153,6 @@ class ProjectPlanningElementMain extends PlanningElement {
     "organizationInherited"=>"hidden",
     "organizationElementary"=>"hidden",
     "needReplan"=>"hidden",
-    "idAdvancement"=>'size1/3',
-    "uoAdvancement"=>'',
-    "idWeight"=>'size1/3',
-    "weight"=>''
   );   
   
   private static $_databaseTableName = 'planningelement';
@@ -173,16 +169,20 @@ class ProjectPlanningElementMain extends PlanningElement {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
+    if(!$this->id){
+      $this->idAdvancement=2;
+      $this->idWeight=2;
+    }
   }
   
   function setAttributes(){
-    if(Parameter::getGlobalParameter('technicalAvancement')!='YES' or $this->weight==0){
-      unset($this->_separator_menuTechnicalAvancement_marginTop);
-    }else{
+    if(Parameter::getGlobalParameter('technicalAvancement')=='YES' and $this->weight!=0){
       self::$_fieldsAttributes['uoAdvancement']='readonly';
       self::$_fieldsAttributes['idAdvancement']='readonly,size1/3';
       self::$_fieldsAttributes['weight']='readonly';
       self::$_fieldsAttributes['idWeight']='readonly,size1/3';
+    }else{
+      unset($this->_separator_menuTechnicalAvancement_marginTop);
     }
   }
   /** ==========================================================================

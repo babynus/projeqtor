@@ -146,10 +146,6 @@ class ActivityPlanningElementMain extends PlanningElement {
     "indivisibility"=>"",
     "minimumThreshold"=>"",
     "fixPlanning"=>"nobr",
-    "idAdvancement"=>'size1/3',
-    "uoAdvancement"=>'',
-    "idWeight"=>'size1/3',
-    "weight"=>''
   );
 
   private static $_fieldsTooltip = array(
@@ -239,15 +235,16 @@ class ActivityPlanningElementMain extends PlanningElement {
         self::$_fieldsAttributes['toRealised']='';
         self::$_fieldsAttributes['realised']='';
         self::$_fieldsAttributes['rest']='readonly';
+        self::$_fieldsAttributes['uoAdvancement']='';
+        self::$_fieldsAttributes['weight']='';
         self::$_fieldsAttributes['idAdvancement']='size1/3,';
         self::$_fieldsAttributes['idWeight']='size1/3,';
       }else{
-        unset($this->toRealised);
-        unset($this->toDeliver);
-        unset($this->rest);
-        unset($this->realised);
         unset($this->_tab_4_1_smallLabel_2);
+        self::$_fieldsAttributes['uoAdvancement']='';
+        self::$_fieldsAttributes['weight']='';
         self::$_fieldsAttributes['idAdvancement']='readonly,size1/3';
+        self::$_fieldsAttributes['idWeight']='size1/3';
       }
       if($this->idAdvancement!=1){
         self::$_fieldsAttributes['uoAdvancement']='readonly';
@@ -256,6 +253,8 @@ class ActivityPlanningElementMain extends PlanningElement {
         self::$_fieldsAttributes['weight']='readonly';
       }
        self::$_fieldsAttributes['_tab_2_1_smallLabel_8']='nobr';
+    }else{
+      unset($this->_separator_menuTechnicalAvancement_marginTop);
     }
   }
   /** ==========================================================================
