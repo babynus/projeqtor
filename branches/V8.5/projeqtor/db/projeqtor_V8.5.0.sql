@@ -69,7 +69,18 @@ INSERT INTO `${prefix}weight` (`id`, `name`,  `sortOrder`, `idle`) VALUES
 (3,'UO',300,0);
 
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
-('technicalAvancement','NO');
+('technicalAdvancement','NO');
+
+INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `hasCsv`) VALUES
+(108, 'reportTechnicalAdvancement', 2, 'technicalAdvancement.php', 227,'1');
+
+INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
+(1, 108, 1);
+
+INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES 
+(108, 'showIdle', 'boolean', 20, 0),
+(108, 'idProject', 'projectList', 10, 'currentProject');
+('technicalAdvancement','NO');
 
 -- ======================================
 -- Email as ticket
