@@ -537,16 +537,13 @@ class PlanningElement extends SqlElement {
       $this->updateSynthesisObj(true);
     }
     ///florent
-    debugLog(Parameter::getGlobalParameter('technicalAvancement'));
     if(Parameter::getGlobalParameter('technicalAvancement')=='YES' and ($this->refType=='Project' or $this->refType=='Activity')){
-      debugLog('chips');
       if(!$this->id){
         if($this->refType=='Project'){
           $this->idAdvancement=2;
           $this->idWeight=2;
           $this->uoAdvancement=0;
           $this->weight=0;
-          debugLog('oui');
         }else{
           $this->idAdvancement=1;
           $this->idWeight=1;
@@ -576,7 +573,6 @@ class PlanningElement extends SqlElement {
     //end
     $result=parent::save();
     if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
-      debugLog($result);
       return $result;     
     }
     // Update dependant objects
