@@ -2745,7 +2745,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
          * $val=$text->getText();
          * echo htmlEncode($val);
          * } else {
-         * echo str_replace(array("\n",'<br>','<br/>','<br />'),array("","\n","\n","\n"),$val);
+         * echo str_replace(array("\n",'<br/>','<br/>','<br />'),array("","\n","\n","\n"),$val);
          * }
          */
         if ($dataLength>4000) echo formatAnyTextToPlainText($val);
