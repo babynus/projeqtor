@@ -94,7 +94,7 @@ class SituationMain extends SqlElement {
   	
   	$critWhere = array('refType'=>get_class($obj),'refId'=>$obj->id,'idProject'=>$obj->idProject);
   	$situationList = $this->getSqlElementsFromCriteria($critWhere,null,null, 'date desc');
-  	echo '</br>';
+  	echo '<br/>';
   	echo '<table width="99.9%">';
   	echo '<tr>';
   	if (!$print) {
