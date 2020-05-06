@@ -75,7 +75,7 @@ if(trim($commentImputation)==''){
     </tr>
     <tr>
       <td>
-       <br>
+       <br/>
       </td>
     </tr>
     <tr>
@@ -88,7 +88,7 @@ if(trim($commentImputation)==''){
     </tr>
     <tr>
       <td>
-       <br>
+       <br/>
       </td>
     </tr>
   <?php 

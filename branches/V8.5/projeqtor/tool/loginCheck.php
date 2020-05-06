@@ -258,7 +258,7 @@
     if ($notificationCounts['total']>0) {
         echo '<br/><div class="messageNotificationTotal">';
         echo '<input type="hidden" id="notificationOnLogin" value="'.$notificationCounts['total'].'" />';
-        echo '  <br><br>';
+        echo '  <br/><br/>';
         echo '<div>';
         echo i18n("unreadNotifications", array($notificationCounts['total']));
         echo '</div>';

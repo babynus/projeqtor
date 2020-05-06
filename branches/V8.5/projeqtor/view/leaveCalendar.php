@@ -343,7 +343,7 @@
 <!------------------------------------------------------------------------>
 <!-- SYNTHESIS OF LEAVE EARNED AND LEFT LEAVE FOR THE SELECTED EMPLOYEE -->
 <!------------------------------------------------------------------------>
-              <br>
+              <br/>
               <div id="summaryLeaveEarnedOfEmployee"><b><?php echo i18n("synthesisOfLeaveEarned"); ?></b>
                   <table style="width:96%; margin-left:2%; text-align:center; border: solid 1pt;">
                     <tr style="border: solid 1pt; height: 20px;">

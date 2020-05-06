@@ -94,7 +94,7 @@ if (isset($_GET['slo'])) { // Request SingleLogOut to IDP
 if (isset($_SESSION['samlUserdata'])) {
     if (!empty($_SESSION['samlUserdata'])) {
         $attributes = $_SESSION['samlUserdata'];
-        echo 'You have the following attributes:<br>';
+        echo 'You have the following attributes:<br/>';
         echo '<table><thead><th>Name</th><th>Values</th></thead><tbody>';
         foreach ($attributes as $attributeName => $attributeValues) {
             echo '<tr><td>' . htmlentities($attributeName) . '</td><td><ul>';

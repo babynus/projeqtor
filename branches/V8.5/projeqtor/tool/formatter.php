@@ -323,7 +323,7 @@ function formatDateThumb($creationDate,$updateDate,$float='right',$size=22,$addN
     if($title==''){
       $title.="<i>".i18n('thumbUpdateTitle',array('<b>'.htmlFormatDate($updateDate).'</b>')).'</i>';
     }else{
-      $title.="<br><i>".i18n('thumbUpdateTitle',array('<b>'.htmlFormatDate($updateDate).'</b>')).'</i>';
+      $title.="<br/><i>".i18n('thumbUpdateTitle',array('<b>'.htmlFormatDate($updateDate).'</b>')).'</i>';
     }
   }
   $title=htmlEncode($title,'quotes');
