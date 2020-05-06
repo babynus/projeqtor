@@ -68,3 +68,5 @@ INSERT INTO `${prefix}weight` (`id`, `name`,  `sortOrder`, `idle`) VALUES
 (2,'consolidated',200,0),
 (3,'UO',300,0);
 
+INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
+('technicalAvancement','NO');
