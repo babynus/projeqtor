@@ -3469,6 +3469,9 @@ function drawHistoryFromObjects($refresh=false) {
     if (substr($hist->colName, 0, 24)=='subDirectory|Attachment|' or substr($hist->colName, 0, 18)=='idTeam|Attachment|' or substr($hist->colName, 0, 25)=='subDirectory|Attachement|' or substr($hist->colName, 0, 19)=='idTeam|Attachement|') {
       continue;
     }
+    if ($hist->colName=='plannedStartFraction' or $hist->colName=='plannedEndFraction' or $hist->colName=='latestStartDate' or $hist->colName=='latestEndDate') {
+      continue;
+    }
     $colName=($hist->colName==null)?'':$hist->colName;
     $split=explode('|', $colName);
     if (count($split)==3) {
