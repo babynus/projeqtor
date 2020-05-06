@@ -657,9 +657,51 @@ class Consistency {
         }
       }
     }
+    
+    $act=new Activity();$actTable=$act->getDatabaseTableName();
+    $pro=new Project();$proTable=$pro->getDatabaseTableName();
+    $mil=new Milestone();$milTable=$mil->getDatabaseTableName();
+    $met=new Meeting();$metTable=$met->getDatabaseTableName();
+    $pme=new PeriodicMeeting();$pmeTable=$pme->getDatabaseTableName();
+    $tst=new TestSession();$tstTable=$tst->getDatabaseTableName();
+    $query ="SELECT pe.refType as reftype, pe.refId as refid, pe.id as id from $peTable pe"
+          . "  WHERE pe.refType='Activity' and not exists (select 'x' from $actTable x where x.id=pe.refId)";
+    $query.=" UNION "; 
+    $query.="SELECT pe.refType as reftype, pe.refId as refid, pe.id as id from $peTable pe"
+          . "  WHERE pe.refType='Project' and not exists (select 'x' from $proTable x where x.id=pe.refId)";
+    $query.=" UNION ";
+    $query.="SELECT pe.refType as reftype, pe.refId as refid, pe.id as id from $peTable pe"
+          . "  WHERE pe.refType='Milestone' and not exists (select 'x' from $milTable x where x.id=pe.refId)";
+    $query.=" UNION ";
+    $query.="SELECT pe.refType as reftype, pe.refId as refid, pe.id as id from $peTable pe"
+          . "  WHERE pe.refType='Meeting' and not exists (select 'x' from $metTable x where x.id=pe.refId)";
+    $query.=" UNION ";
+    $query.="SELECT pe.refType as reftype, pe.refId as refid, pe.id as id from $peTable pe"
+          . "  WHERE pe.refType='PeriodicMeeting' and not exists (select 'x' from $pmeTable x where x.id=pe.refId)";
+    $query.=" UNION ";
+    $query.="SELECT pe.refType as reftype, pe.refId as refid, pe.id as id from $peTable pe"
+          . "  WHERE pe.refType='TestSession' and not exists (select 'x' from $tstTable x where x.id=pe.refId)";
+    $result=Sql::query($query);
+    while ($line = Sql::fetchLine($result)) {
+      $refType=$line['reftype'];
+      $refId=$line['refid'];
+      $id=$line['id'];
+      $pe=new PlanningElement($id);
+      if ($pe->id) {
+        displayError(i18n("checkPlanningElementEmpty",array(i18n($refType),$refId,$id)));
+        $errors++;
+        if ($correct) {
+          $resultDeleteInvalidPlanningElement=$pe->delete();
+          if (getLastOperationStatus($resultDeleteInvalidPlanningElement=="OK")) {
+            displayOK(i18n("checkFixed"),true);
+          } else {
+            displayMsg(i18n("checkNotFixed"),true);
+          }
+        }
+      } 
+    }
     if (!$errors) {
       displayOK(i18n("checkNoError"));
-  
     }
   }
   
