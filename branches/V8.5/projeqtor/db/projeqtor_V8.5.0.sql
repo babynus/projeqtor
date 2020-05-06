@@ -70,3 +70,51 @@ INSERT INTO `${prefix}weight` (`id`, `name`,  `sortOrder`, `idle`) VALUES
 
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
 ('technicalAvancement','NO');
+
+-- ======================================
+-- Email as ticket
+-- ======================================
+
+INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
+(250,'menuInputMailbox',88,'object', 693,'Project',0,'Automation');
+
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
+(1,250,1);
+
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
+(1,250,8);
+
+CREATE TABLE `${prefix}inputmailbox` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) DEFAULT NULL,
+  `idProject` int(12) unsigned DEFAULT NULL,
+  `serverImap` varchar(200) DEFAULT NULL,
+  `userImap` varchar(200) DEFAULT NULL,
+  `passwordImap` varchar(50) DEFAULT NULL,
+  `securityConstraint` varchar(10) DEFAULT NULL,
+  `allowAttach` int(1) unsigned DEFAULT '0',
+  `sizeAttachment` int(12) unsigned DEFAULT '0',
+  `idTicketType` int(12) unsigned DEFAULT NULL,
+  `idAffectable` int(12) unsigned DEFAULT NULL,
+  `idActivity` int(12) unsigned DEFAULT NULL,
+  `lastInputDate` date DEFAULT NULL,
+  `idTicket` int(12) unsigned DEFAULT NULL,
+  `totalInputTicket` int(12) unsigned DEFAULT '0',
+  `failedRead` int(1) unsigned DEFAULT '0',
+  `failedMessage` int(1) unsigned DEFAULT '0',
+  `limitOfInputPerHour` int(12) unsigned DEFAULT '0',
+  `idle` int(1) unsigned DEFAULT '0',
+  `idleDate` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+CREATE INDEX assetType ON `${prefix}inputmailbox` (idProject);
+
+CREATE TABLE `${prefix}inputmailboxhistory` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `idInputMailbox` int(12) unsigned DEFAULT NULL,
+  `adress` varchar(200) DEFAULT NULL,
+  `title` varchar(200) DEFAULT NULL,
+  `date` datetime DEFAULT NULL,
+  `result` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=innoDB DEFAULT CHARSET=utf8 ;

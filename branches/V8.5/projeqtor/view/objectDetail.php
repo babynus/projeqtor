@@ -1846,6 +1846,42 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo ' class="display generalColClass '.$col.'Class" style="width:150px;position:relative; left: 3px;'.$specificStyle.'"';
         echo ' readonly tabindex="-1" ';
         echo ' value="'.htmlEncode($val).'" />';
+      } else if($col=='passwordImap'){
+        echo ' <div class="dijit dijitReset dijitInline dijitLeft input required generalColClass generalColClassNotReadonly userImapClass dijitTextBox dijitValidationTextBox">';
+        echo '<input type="password"  ';
+        echo $name;
+        echo ' class="dijitReset dijitInputInner" data-dojo-attach-point="textbox,focusNode"  autocomplete="off"  maxlength="200" tabindex="0" ';
+        echo ' value="'.htmlEncode($val).'" />';
+        echo ' </div>';
+      } else if($col=='securityConstraint'){
+        if(!$val)$val = 1;
+        echo '<table>';
+        echo '    <tr>';
+        echo '      <td style="text-align:right;  width:5%" class="tabLabel" >';
+        echo '        <input onClick="changeValueSecurityConstraint(1);" type="radio" dojoType="dijit.form.RadioButton" '.(($val=='1')?'checked':'').' name="securityConstraintHidden" id="securityConstraint1" value="1" />';
+        echo'       </td>';
+        echo '      <td style="text-align:left;" class="tabLabel" >';
+        echo '        <label>'.i18n('securityConstraint1').'</label>';
+        echo '      </td>';
+        echo '    </tr>';
+        echo '    <tr>';
+        echo '      <td style="text-align:right; width:5%" class="tabLabel">';
+        echo '        <input onClick="changeValueSecurityConstraint(2);" type="radio" dojoType="dijit.form.RadioButton" '.(($val=='2')?'checked':'').' name="securityConstraintHidden" id="securityConstraint2" value="2" />';
+        echo'       </td>';
+        echo '      <td style="text-align:left;" class="tabLabel">';
+        echo '        <label>'.i18n('securityConstraint2').'</label>';
+        echo '      </td>';
+        echo '    </tr>';
+        echo '    <tr>';
+        echo '      <td style="text-align:right; width:5%" class="tabLabel">';
+        echo '        <input onClick="changeValueSecurityConstraint(3);" type="radio" dojoType="dijit.form.RadioButton" '.(($val=='3')?'checked':'').' name="securityConstraintHidden" id="securityConstraint3" value="3" />';
+        echo'       </td>';
+        echo '      <td style="text-align:left;" class="tabLabel">';
+        echo '        <label>'.i18n('securityConstraint3').'</label>';
+        echo '      </td>';
+        echo '    </tr>';
+        echo '</table>';
+        echo '<input type="hidden" '.$name.' value="'.htmlEncode($val).'"  />';
       } else if (($col=='color' or (substr($col,0,5)=='color' and strlen($col)>5 and strtoupper(substr($col,5,1))==substr($col,5,1) ) ) and $dataType=='varchar' and $dataLength==7) {
         // Draw a color selector ============================================== COLOR
         echo '<table class="generalColClass '.$col.'Class" style="'.$specificStyleWithoutCustom.'"><tr><td class="detail">';
