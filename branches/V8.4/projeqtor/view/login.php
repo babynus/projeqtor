@@ -233,7 +233,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			                <td title="<?php echo i18n("login");?>" style="background:transparent !important;width: 100px;">
 			                  
 			                </td>
-			                <td title="<?php echo i18n("login");?>" style="width:200px">
+			                <td title="<?php echo i18n("login");?>" style="width:250px">
 			                  <div class="inputLoginIcon iconLoginUser">&nbsp;</div>
 			                  <input tabindex="1" id="login" type="text"  class="inputLogin"
 			                   dojoType="dijit.form.TextBox" />
