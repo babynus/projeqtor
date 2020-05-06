@@ -179,7 +179,7 @@ function checkPrerequisites($showOK=false,$dbType=null) {
   else if ($unit=='M') $val=$val*1;
   else if ($unit=='K') $val=$val/1024;
   else $val=$val/(1024*1024);
-  if ($val<128) {
+  if ($val>0 and $val<128) {
     showWarning("memory_limit=$ini_val ($val.$unit) is too small - value should be at least 128M, 512M is advised - check your php configuration (php.ini)");
     $checkWarnings++;
   } else {
