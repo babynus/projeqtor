@@ -88,6 +88,7 @@ class OrganizationMain extends SqlElement {
   public $_spe_Project=array();
   public $_sec_ResourcesOfObject;
   public $_Resource=array();
+  public $_spe_affectMembers;
   public $_sec_Link;
   public $_Link=array();
   public $_Attachment=array();
@@ -479,6 +480,17 @@ class OrganizationMain extends SqlElement {
         	$result.='  <label class="label" for="showIdleOrg">'.i18n('colShowIdleOrganizationStructure').'</label>';
         	$result.='</td>';
         	$result.='</tr></table>';
+        } else if ($item=='affectMembers') {
+        	if ($this->id and !$print) {
+    	    	$result .= '<button id="affectOrganizationMembers" dojoType="dijit.form.Button" showlabel="true"'; 
+    	      $result .= ' title="' . i18n('affectOrganizationMembers') . '" >';
+    	      $result .= '<span>' . i18n('affectOrganizationMembers') . '</span>';
+    	      $result .=  '<script type="dojo/connect" event="onClick" args="evt">';
+    	      $result .=  '  affectOrganizationMembers(' . htmlEncode($this->id) . ');';
+    	      $result .= '</script>';
+    	      $result .= '</button>';
+    	      return $result;
+        	}
         }    
      return $result;
   }

@@ -2468,7 +2468,7 @@ function removeOrigin(id, origType, origId) {
  * Display a add Assignment Box
  * 
  */
-function addAssignment(unit, rawUnit, hoursPerDay) {
+function addAssignment(unit, rawUnit, hoursPerDay, isTeam, isOrganization) {
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
     return;
@@ -2493,6 +2493,7 @@ function addAssignment(unit, rawUnit, hoursPerDay) {
     params+="&validatedWorkPe="+dijit.byId(objClass +"PlanningElement_validatedWork").get('value');
     params+="&assignedWorkPe="+dijit.byId(objClass +"PlanningElement_assignedWork").get('value');
   }
+  params+="&isTeam="+isTeam+"&isOrganization="+isOrganization; 
   params+="&mode=add";  
   loadDialog('dialogAssignment',callBack,false,params);
 }
@@ -6231,6 +6232,18 @@ function affectTeamMembers(idTeam) {
     dijit.byId("dialogAffectation").show();
   };
   var params="&affectationIdTeam="+idTeam;
+  loadDialog('dialogAffectation',callBack,false,params);
+}
+
+function affectOrganizationMembers(idOrganization) {
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  var callBack = function () {
+    dijit.byId("dialogAffectation").show();
+  };
+  var params="&affectationIdOrganization="+idOrganization;
   loadDialog('dialogAffectation',callBack,false,params);
 }
 

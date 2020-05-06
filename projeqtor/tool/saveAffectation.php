@@ -41,17 +41,19 @@ if (array_key_exists('affectationIdTeam',$_REQUEST)) {
 	$idTeam=$_REQUEST['affectationIdTeam']; // escaped before used in DB queries
 }
 
+$idOrganization=RequestHandler::getId('affectationIdOrganization');
+
 if (! array_key_exists('affectationProject',$_REQUEST)) {
   throwError('affectationProject parameter not found in REQUEST');
 }
 $project=($_REQUEST['affectationProject']); // escaped before used in DB queries
 
-if (! array_key_exists('affectationResource',$_REQUEST) and !$idTeam) {
+if (! array_key_exists('affectationResource',$_REQUEST) and !$idTeam and !$idOrganization) {
   throwError('affectationResource parameter not found in REQUEST');
 }
 $resource=($_REQUEST['affectationResource']); // escaped before used in DB queries
 
-if (! array_key_exists('affectationProfile',$_REQUEST) and !$idTeam) {
+if (! array_key_exists('affectationProfile',$_REQUEST) and !$idTeam and !$idOrganization) {
   throwError('affectationProfile parameter not found in REQUEST');
 }
 $profile=($_REQUEST['affectationProfile']); // escaped before used in DB queries
@@ -86,7 +88,7 @@ if (array_key_exists('affectationIdle',$_REQUEST)) {
 }
 $mailResult=null;
 Sql::beginTransaction();
-if (! $idTeam) {
+if (! $idTeam and !$idOrganization) {
 	$affectation=new Affectation($id);
 	
 	$affectation->idProject=$project;
@@ -102,7 +104,11 @@ if (! $idTeam) {
 	}
 	$result=$affectation->save();
 } else {
-	$crit=array('idTeam'=>$idTeam);
+    if($idOrganization){
+      $crit=array('idOrganization'=>$idOrganization);
+    }else if($idTeam){
+      $crit=array('idTeam'=>$idTeam);
+    }
 	$ress=new Resource();
 	$list=$ress->getSqlElementsFromCriteria($crit, false);
 	$nbAff=0;
