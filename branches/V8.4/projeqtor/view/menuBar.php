@@ -281,7 +281,7 @@
           <table style="width:100%">
             <tr>
               <td class="dijitTreeRow" style="position:relative; top:-2px;vertical-align: middle;text-align:center;width:70px">
-                <?php echo "$copyright<br>$version";?>
+                <?php echo "$copyright<br/>$version";?>
               </td>
               <td  style="width:35px">
                 <img style="height:28px;width:28px" src="img/logoSmall.png" />
