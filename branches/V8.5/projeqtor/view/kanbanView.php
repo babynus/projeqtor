@@ -812,9 +812,9 @@ function kanbanListSelect($user,$name,$type,$idKanban) {
                 <div data-dojo-type="dijit/TooltipDialog">';
   $iterateur=0;
   echo '<span class="kanbanTextTitle" style="float:left;height:15px;font-weight:bold;" disabled="disabled" value="-2" '
-      . ' title="' . i18n("kanbanSelectKanban") . '" >'.i18n("kanbanMine").'</span><br>';
+      . ' title="' . i18n("kanbanSelectKanban") . '" >'.i18n("kanbanMine").'</span><br/>';
   if(count($mineList)==0)echo '<span disabled="disabled" onclick="dijit.byId(\'kanbanListSelect\').closeDropDown();" style="float:left;height:15px;" '
-        . ' >&nbsp;&nbsp;&nbsp;&nbsp;'.i18n('noDataFound').'</span><br>';
+        . ' >&nbsp;&nbsp;&nbsp;&nbsp;'.i18n('noDataFound').'</span><br/>';
   foreach ($mineList as $line) {
     $jsonDecode=json_decode($line->param,true);
     if(!isset($jsonDecode['typeData'])){
@@ -844,14 +844,14 @@ function kanbanListSelect($user,$name,$type,$idKanban) {
           echo '  <a onClick="delKanban('.$line->id.', \''.i18n("kanbanDel").'\')" title="' . i18n('kanbanDelete'). '" >'
               .formatSmallButton('Remove')
               .'</a> ';
-          echo "<br>";
+          echo "<br/>";
   }
   echo '<span style="float:left;height:15px;" value="-1" '
-      . ' title="' . i18n("kanbanSelectKanban") . '" ></span><br>';
+      . ' title="' . i18n("kanbanSelectKanban") . '" ></span><br/>';
   echo '<span class="kanbanTextTitle" style="float:left;height:15px;font-weight:bold;" disabled="disabled" value="-2" '
-      . ' title="' . i18n("kanbanSelectKanban") . '" >'.i18n("kanbanShared").'</span><br>';
+      . ' title="' . i18n("kanbanSelectKanban") . '" >'.i18n("kanbanShared").'</span><br/>';
   if(count($kanbanList)==0)echo '<span disabled="disabled" onclick="dijit.byId(\'kanbanListSelect\').closeDropDown();" style="float:left;height:15px;" '
-        . ' >&nbsp;&nbsp;&nbsp;&nbsp;'.i18n('noDataFound').'</span><br>';
+        . ' >&nbsp;&nbsp;&nbsp;&nbsp;'.i18n('noDataFound').'</span><br/>';
   foreach ($kanbanList as $line) {
     $jsonDecode=json_decode($line->param,true);
     if(!isset($jsonDecode['typeData'])){
@@ -869,13 +869,13 @@ function kanbanListSelect($user,$name,$type,$idKanban) {
     echo '  <a onClick="copyKanban('.$line->id.')" title="' . i18n('kanbanCopy'). '" >'
         .formatSmallButton('Copy')
         .'</a> ';
-    echo "<br>";
+    echo "<br/>";
   }
   $seeWork=Parameter::getUserParameter("kanbanSeeWork".Parameter::getUserParameter("kanbanIdKanban"));
   
   if(($seeWork==1 || ($seeWork == null && $seeWork!=0)) && PlanningElement::getWorkVisibiliy(getSessionUser()->idProfile)=="ALL")$seeWork=true; else $seeWork=false;
   if ($typeKanbanC=='Requirement' or $typeKanbanC=='Action') $seeWork=false;
-  echo '<span style="float:left;height:30px;">&nbsp;</span><br></div></div>';
+  echo '<span style="float:left;height:30px;">&nbsp;</span><br/></div></div>';
   echo '<div dojoType="dijit.form.Button" class="detailButton" onclick="loadDialog(\'dialogKanbanUpdate\', function(){kanbanFindTitle(\'addKanban\');}, true, \'&typeDynamic=addKanban\', true, false);" "
       ." style="float:left;position:relative;margin-right:8px;margin-top:-1px;">'
       .formatIcon('KanbanAdd',22,i18n('kanbanAdd'))

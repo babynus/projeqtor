@@ -168,7 +168,7 @@ for ($i=1;$i<=2;$i++) {
      . ' group by ' . $queryGroupBy
      . ' order by t1.idResource asc '; 
   $result=Sql::query($query);
-  //echo $query."<br><br>";
+  //echo $query."<br/><br/>";
   
   
   while ($line = Sql::fetchLine($result)) {
@@ -188,7 +188,7 @@ for ($i=1;$i<=2;$i++) {
 	  }
 	}
     $tab[$proj][$ress][$date]= $work+$val;
-	//echo "on écrit $work dans tab [$proj][$ress][$date] qui prend pour valeur".$tab[$proj][$ress][$date]."<br>";
+	//echo "on écrit $work dans tab [$proj][$ress][$date] qui prend pour valeur".$tab[$proj][$ress][$date]."<br/>";
 	
     if ($start=="" or $start>$date) {
       $start=$date;

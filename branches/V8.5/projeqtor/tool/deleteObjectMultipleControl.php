@@ -82,7 +82,7 @@ foreach ($selectList as $id) {
 	    $returnValue .= '<input type="hidden" id="lastOperationStatus" value="CONFIRM" />';
 	    if($first){
 	      echo '<div style="height:250px;overflow:auto;border:1px solid #999;background-color:#f0f0f0;padding:10px;">';
-	      echo str_replace(i18n("confirmControlDelete"), i18n("confirmControlDelete").":<br><br><b>".$item->name."</b>",$returnValue); 
+	      echo str_replace(i18n("confirmControlDelete"), i18n("confirmControlDelete").":<br/><br/><b>".$item->name."</b>",$returnValue); 
 	    }else{
 	      echo str_replace(i18n("confirmControlDelete"), "<b>".$item->name."</b>", str_replace("<b>".i18n("messageConfirmationNeeded")."</b>", "", $returnValue));
 	    }

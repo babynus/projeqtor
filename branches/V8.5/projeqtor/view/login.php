@@ -233,11 +233,11 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			                <td title="<?php echo i18n("login");?>" style="background:transparent !important;width: 100px;">
 			                  
 			                </td>
-			                <td title="<?php echo i18n("login");?>" style="width:200px">
+			                <td title="<?php echo i18n("login");?>" style="width:250px">
 			                  <div class="inputLoginIcon iconLoginUser">&nbsp;</div>
 			                  <input tabindex="1" id="login" type="text"  class="inputLogin"
 			                   dojoType="dijit.form.TextBox" />
-                        <input type="hidden" id="hashStringLogin" name="login" style="width:200px" value=""/>  
+                        <input type="hidden" id="hashStringLogin" name="login" value=""/>  
 			                </td>
 			                <td width="100px">&nbsp;</td>
 			              </tr>
@@ -250,7 +250,7 @@ echo '<input type="hidden" id="objectId" value="' . htmlEncode($_REQUEST['object
 			                <div  class="inputLoginIcon iconLoginPassword">&nbsp;</div>
 			                  <input  tabindex="2" id="password" type="password" class="inputLogin"
 			                   dojoType="dijit.form.TextBox" />
-                        <input type="hidden" id="hashStringPassword" name="password" style="width:200px" value=""/>
+                        <input type="hidden" id="hashStringPassword" name="password" value=""/>
 			                </td>
 			                <td></td>
 			              </tr>

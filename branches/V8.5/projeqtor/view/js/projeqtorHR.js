@@ -59,7 +59,7 @@ function showXhrErrorInErrorPopup(error,msg) {
         dojo.removeClass(contentNode);
         dojo.addClass(contentNode, "messageERROR");
         dojo.addClass(contentNode, "closeBoxIconLeave");
-        contentNode.innerHTML = "<h3>"+errorTitle+"</h3><br>"+msg+"<br>"+theError+"<br><i>"+i18n("clickIntoToClose")+"</i>";
+        contentNode.innerHTML = "<h3>"+errorTitle+"</h3><br/>"+msg+"<br/>"+theError+"<br/><i>"+i18n("clickIntoToClose")+"</i>";
         // Show result
         contentNode.style.display = "block";
     } 
@@ -284,7 +284,7 @@ function initOffDayOfRes(idRes,startDate,endDate) {
             if (opStatus.indexOf("TYPEOF")===-1) {
                 if (opStatus==='NOT RESULT OF SQLELEMENT OPERATION') {
                     datas = setLikeResultDivMessage(null, 
-                                  opStatus+'<br>'+datas, 
+                                  opStatus+'<br/>'+datas, 
                                   false,
                                   "", 
                                   "InitOffDayOfRes",
@@ -1037,7 +1037,7 @@ function fillLeavesCalendarDataArray(startDate,endDate){
                     }
                     var textColor = oppositeColor(lvtColor, true);
                     var leaveType = '<span class="leaveType" style="background-color:'+lvtColor+'; color:'+textColor+';">&nbsp;'+lvT+'&nbsp;</span>';
-                    var summary = leaveType + "<br>" + nbDays + ' ' + (nbDays<=1?i18n('day'):i18n('days'))+statusSetLeaveChange;
+                    var summary = leaveType + "<br/>" + nbDays + ' ' + (nbDays<=1?i18n('day'):i18n('days'))+statusSetLeaveChange;
 
                     var startDate = new Date(leaves['leaves'][it]["startDate"]);
                     var endDate = new Date(leaves['leaves'][it]["endDate"]);
