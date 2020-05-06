@@ -32,6 +32,8 @@ $refType=RequestHandler::getValue('refType',false,null);
 $refId=RequestHandler::getId('refId',false,null);
 $idRole=RequestHandler::getId('idRole',false,null);
 $idResource = RequestHandler::getId('idResource',false,null);
+$isTeam = RequestHandler::getBoolean('isTeam');
+$isOrganization = RequestHandler::getBoolean('isOrganization');
 $idAssignment=RequestHandler::getId('idAssignment',false,null);
 $assignmentObj = new Assignment($idAssignment);
 $unit=RequestHandler::getValue('unit',false,null);
@@ -53,6 +55,20 @@ if($refType=="Meeting" || $refType=="PeriodicMeeting") {
 	$delay=Work::displayWork(workTimeDiffDateTime('2000-01-01T'.$obj->meetingStartTime,'2000-01-01T'.$obj->meetingEndTime));
 }
 $mode = RequestHandler::getValue('mode',false,true);
+
+$elementList = 'idResourceAll';
+$critFld ='idProject';
+$critVal =$idProject;
+if($isTeam){
+  $critFld =null;
+  $critVal =null;
+  $elementList = 'idTeam';
+}
+if($isOrganization){
+  $critFld =null;
+  $critVal =null;
+  $elementList = 'idOrganization';
+}
 
 // $arrayDefaultOffDays=array();
 // if (Parameter::getGlobalParameter('OpenDayMonday')=='offDays') $arrayDefaultOffDays[]=1;
@@ -99,10 +115,12 @@ if ($planningMode=='RECW') {
          <input id="assignmentRefId" name="assignmentRefId" type="hidden" value="<?php echo $refId ;?>" />
          <input id="assignedIdOrigin" name="assignedIdOrigin" type="hidden" value="<?php echo $assignedIdOrigin ;?>" />
          <input id="assignedWorkOrigin" name="assignedWorkOrigin" type="hidden" value="<?php echo $assignmentObj->assignedWork ;?>" />
+         <input id="isTeam" name="isTeam" type="hidden" value="<?php echo $isTeam;?>" />
+         <input id="isOrganization" name="isOrganization" type="hidden" value="<?php echo $isOrganization;?>" />
          <table>
            <tr>
              <td class="dialogLabel" >
-               <label for="assignmentIdResource" ><?php echo i18n("colIdResource");?>&nbsp;:&nbsp;</label>
+               <label for="assignmentIdResource" ><?php if($isTeam){  echo i18n("colIdTeam");}else if($isOrganization){  echo i18n("colIdOrganization");}else{ echo i18n("colIdResource");}?>&nbsp;:&nbsp;</label>
              </td>  
              <td>
               <select dojoType="dijit.form.FilteringSelect"
@@ -114,7 +132,7 @@ if ($planningMode=='RECW') {
                 <?php if($mode=='edit'){                      
                           htmlDrawOptionForReference('idResourceAll', $idResource,null,true,'idProject',$idProject);
                 }else{
-                          htmlDrawOptionForReference('idResourceAll', null,null,false,'idProject',$idProject);
+                          htmlDrawOptionForReference($elementList, null,null,false,$critFld,$critVal);
                 }?>
                </select>  
              </td>

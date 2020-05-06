@@ -29,6 +29,7 @@ $idProject=RequestHandler::getId('idProject',false,null);
 $class=RequestHandler::getClass('objectClass',false,null);
 $idResource=RequestHandler::getId('idResource',false,null);
 $affectationIdTeam=RequestHandler::getId('affectationIdTeam',false,null);
+$affectationIdOrganization=RequestHandler::getId('affectationIdOrganization',false,null);
 $type=RequestHandler::getValue('type',false,null);
 $mode = RequestHandler::getValue('mode',false,null);
 $idAffectation = RequestHandler::getId('id',false,null);
@@ -57,6 +58,7 @@ $objTeam=($obj)?get_class($obj):'';
        <form dojoType="dijit.form.Form" id='affectationForm' name='affectationForm' onSubmit="return false;">
          <input id="affectationId" name="affectationId" type="hidden" value="<?php echo $idAffectation;?>" />
          <input id="affectationIdTeam" name="affectationIdTeam" type="hidden" value="<?php echo $affectationIdTeam ;?>" />
+         <input id="affectationIdOrganization" name="affectationIdOrganization" type="hidden" value="<?php echo $affectationIdOrganization ;?>" />
          <table>
            <tr>
              <td class="dialogLabel" >
@@ -102,7 +104,7 @@ $objTeam=($obj)?get_class($obj):'';
                 id="affectationResource" name="affectationResource" 
                 onChange="affectationChangeResource();"
                 class="input" value="<?php if($class=="Project" && $type=="Resource"){ echo $affectation->idResource;}else if($class=="Project" && $type=="Contact"){ echo $affectation->idContact;}else{ echo $idResource;}?>" 
-                <?php echo ($objTeam=="Team")?"required=false":"";?> <?php echo ($class!="Project")?"readonly=readonly":"";?>>
+                <?php echo ($objTeam=="Team" or $objTeam=="Organization")?"required=false":"";?> <?php echo ($class!="Project")?"readonly=readonly":"";?>>
                  <?php if ($type=="Contact") htmlDrawOptionForReference('idContact', $idResource, null);
                        else if ($type=="User") htmlDrawOptionForReference('idUser', $idResource, null);
                        else htmlDrawOptionForReference('idResourceAll', $idResource, null,false);
@@ -139,7 +141,7 @@ $objTeam=($obj)?get_class($obj):'';
                   else if($mode=="add" && $class=="Resource"){echo $resource->idProfile;}
                   else if($mode=="add" && $class=="Contact"){echo $contact->idProfile;}
                   else if($mode=="add" && $class=="User"){echo $user->idProfile;}?>" 
-               <?php echo ($objTeam=="Team")?"required=false":"";?> <?php echo ($objTeam=="ResourceTeam")?"required=false":"";?> <?php echo ($objTeam=="Team")?"readonly=readonly":"";?>>
+               <?php echo ($objTeam=="Team" or $objTeam=="Organization")?"required=false":"";?> <?php echo ($objTeam=="ResourceTeam")?"required=false":"";?> <?php echo ($objTeam=="Team" or $objTeam=="Organization")?"readonly=readonly":"";?>>
                  <?php htmlDrawOptionForReference('idProfile', null, $obj);?>
                </select>
                </div>
@@ -205,7 +207,7 @@ $objTeam=($obj)?get_class($obj):'';
              </td>
              <td>
                <div id="affectationIdle" name="affectationIdle"
-                 dojoType="dijit.form.CheckBox" type="checkbox" <?php echo ($objTeam=="Team")?"readonly=readonly":"";?>>
+                 dojoType="dijit.form.CheckBox" type="checkbox" <?php echo ($objTeam=="Team" or $objTeam=="Organization")?"readonly=readonly":"";?>>
                </div>
              </td>    
            </tr>

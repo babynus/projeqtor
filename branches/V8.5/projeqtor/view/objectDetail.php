@@ -5951,8 +5951,12 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
   if (!$print and $canUpdate) {
     echo '<td class="assignHeader" style="width:10%;vertical-align:middle;">';
     if ($obj->id!=null and !$print and $canUpdate and !$obj->idle and $workVisible) {
-      echo '<a onClick="addAssignment(\''.Work::displayShortWorkUnit().'\',\''.Work::getWorkUnit().'\',\''.Work::getHoursPerDay().'\');" ';
+      echo '<a onClick="addAssignment(\''.Work::displayShortWorkUnit().'\',\''.Work::getWorkUnit().'\',\''.Work::getHoursPerDay().'\', false, false);" ';
       echo ' title="'.i18n('addAssignment').'" > '.formatSmallButton('Add').'</a>';
+      echo '<a onClick="addAssignment(\''.Work::displayShortWorkUnit().'\',\''.Work::getWorkUnit().'\',\''.Work::getHoursPerDay().'\', true, false);" ';
+      echo ' title="'.i18n('addAssignmentTeam').'" > '.formatSmallButton('Team', true).'</a>';
+      echo '<a onClick="addAssignment(\''.Work::displayShortWorkUnit().'\',\''.Work::getWorkUnit().'\',\''.Work::getHoursPerDay().'\', false, true);" ';
+      echo ' title="'.i18n('addAssignmentOrganization').'" > '.formatSmallButton('Organization', true).'</a>';
     }
     if($canSeeDirectAcces){
       $goto="var callback = accessImputationCallBack(); 
