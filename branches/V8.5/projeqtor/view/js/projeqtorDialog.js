@@ -2080,6 +2080,10 @@ function removeProductVersionStructureAsset(id,refType, refId,refTypeName) {
   showConfirm(msg, actionOK);
 }
 
+function changeValueSecurityConstraint(value) {
+  dojo.byId("securityConstraint").value=value;
+}
+
 // =============================================================================
 // = OtherVersions
 // =============================================================================

@@ -1305,6 +1305,13 @@
 .ProjeQtOrFlatGreen .iconAutoSendReport { background-image: url(customIcons/green/iconAutoSendReports.png); }
 .ProjeQtOrFlatGrey .iconAutoSendReport { background-image: url(customIcons/grey/iconAutoSendReports.png); }
 
+
+.iconInputMailbox { background-image: url(images/iconInputMailbox.png); }
+.ProjeQtOrFlatBlue .iconInputMailbox { background-image: url(customIcons/blue/iconInputMailbox.png); }
+.ProjeQtOrFlatRed .iconInputMailbox { background-image: url(customIcons/red/iconInputMailbox.png); }
+.ProjeQtOrFlatGreen .iconInputMailbox { background-image: url(customIcons/green/iconInputMailbox.png); }
+.ProjeQtOrFlatGrey .iconInputMailbox { background-image: url(customIcons/grey/iconInputMailbox.png); }
+
 .iconDataCloning { background-image: url(images/iconDataCloning.png); }
 .ProjeQtOrFlatBlue .iconDataCloning { background-image: url(customIcons/blue/iconDataCloning.png); }
 .ProjeQtOrFlatRed .iconDataCloning { background-image: url(customIcons/red/iconDataCloning.png); }

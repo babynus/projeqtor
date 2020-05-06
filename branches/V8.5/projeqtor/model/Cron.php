@@ -478,6 +478,11 @@ class Cron {
 	      }
       }
       // CheckEmails : automatically import notes from Reply to mails
+      try {
+        self::checkEmails();
+      } catch (Exception $e) {
+        traceLog("Cron::run() - Error on checkEmails()");
+      }
       if ($cronCheckEmails>0) {
 	      $cronCheckEmails-=$cronSleepTime;
 	      if ($cronCheckEmails<=0) {
@@ -815,6 +820,113 @@ class Cron {
     if (!$checkEmails or intval($checkEmails)<=0) {
       return; // disabled
     }
+    
+    //gautier #inputMailbox
+    $inputMb = new InputMailbox();
+    $lstIMb = $inputMb->getSqlElementsFromCriteria(array('idle'=>'0'));
+    $paramAttachDir=Parameter::getGlobalParameter('paramAttachmentDirectory');
+    if (substr($paramAttachDir,0,2)=='..') {
+      $curdir=dirname(__FILE__);
+      $paramAttachDir=str_replace(array('/model','\model'),array('',''),$curdir).substr($paramAttachDir,2);
+    }
+    $emailAttachmentsDir=((substr($paramAttachDir,-1)=='\\' or substr($paramAttachDir,-1)=="/")?$paramAttachDir:$paramAttachDir.$pathSeparator).'emails';
+    if (! file_exists($emailAttachmentsDir)) {
+      mkdir($emailAttachmentsDir,0777,true);
+    }
+    //parcourir toutes les imap
+    //imap default 
+    // {imap.projeqtor.org:143}INBOX
+    // test01@projeqtor.org
+    // test01ProjeQtOr
+    foreach ($lstIMb as $mb){
+      //$emailAttachmentsDir
+      try {
+        $inputMailbox = new ImapMailbox($mb->serverImap,$mb->userImap,$mb->passwordImap,$emailAttachmentsDir,'utf-8');
+      }catch (Exception $e) {
+        $mb->failedRead += 1;
+        if($mb->failedRead == 10)$mb->idle = 1;
+        $mb->save();
+      }
+      $mails = array();
+      //verifier si on a acces a l'imap sinon mettre l'input a faux
+      // parcourir les mails non lu
+      $mailsIds = $inputMailbox->searchMailBox('UNSEEN UNDELETED');
+      if(!$mailsIds)continue;
+      foreach ($mailsIds as $mailId){
+        $result = "";
+        $failMessage = false;
+        $mail = $inputMailbox->getMail($mailId);
+        $mailFrom = $mail->fromAddress;
+        //verifier les contraites de temps
+        $securityConstraint = $mb->securityConstraint;
+        //only for knows users
+        if($securityConstraint == '2' or $securityConstraint == '3'){
+          $res = new Resource();
+          $emailExist = $res->getSqlElementsFromCriteria(array('email'=>$mail->fromAddress));
+          if(!$emailExist)$result.= i18n('securityConstraint2');
+          //uniquement les gens allocate au projet
+          if($securityConstraint == '3' and $emailExist){
+            $aff= new Affectation();
+            $affExist = $aff->countSqlElementsFromCriteria(array('idResource'=>$res->id,'idProject'=>$mb->idProject));
+            if($affExist==0)$result.= i18n('securityConstraint3');
+          }
+        }
+        $inputMailbox->markMailAsUnread($mailId);
+        
+        // SI PAS DE SUJET JE REFUSE
+        if(!$mail->subject)$result = i18n('noSubject');
+        
+        $body=$mail->textPlain;
+        $bodyHtml=$mail->textHtml;
+        if ($bodyHtml) {
+          $toText=new Html2Text($bodyHtml);
+          $body=$toText->getText();
+        }
+        
+        //creer les tickets
+        if($result == ""){
+          $ticket = new Ticket();
+          $ticket->name = $mail->subject;
+          $ticket->idProject = $mb->idProject;
+          $ticket->idTicketType = $mb->idTicketType;
+          $ticket->idActivity = $mb->idActivity;
+          $ticket->idResolution = $mb->idAffectable;
+          if($body and $bodyHtml)$ticket->description = $body;
+          $idStatus = SqlElement::getFirstSqlElementFromCriteria('Status', $critArray);
+          $ticket->idStatus = $idStatus;
+          $ticket->save();
+        }
+        
+        //InputMailboxHistory
+        $inputMailboxHistory = new InputMailboxHistory();
+        $inputMailboxHistory->idInputMailbox = $mb->id;
+        $inputMailboxHistory->title = $mail->subject;
+        $inputMailboxHistory->adress = $mailFrom;
+        $inputMailboxHistory->date = date("Y-m-d H:i:s");
+        if($result == ""){
+          $result = i18n('ticketInserted').' #'.$ticket->id;
+        }else{
+          $result = i18n('ticketRejected').' '.$result;
+        }
+        $inputMailboxHistory->result = $result;
+        $inputMailboxHistory->save();
+        
+        //Mise a jour MB
+        $inputMailbox->markMailAsRead($mailId);
+        if(!$failMessage){
+          $mb->lastInputDate = date("Y-m-d");
+          $mb->idTicket = $ticket->id;
+          $mb->totalInputTicket += 1;
+          $mb->failedRead = 0;
+        }else{
+          $mb->$failMessage += 1;
+        } 
+        $mb->save();
+        
+      }
+    }
+    //end gautier
+    
 		// IMAP must be enabled in Google Mail Settings
 		$emailEmail=Parameter::getGlobalParameter('cronCheckEmailsUser');
 		$emailPassword=Parameter::getGlobalParameter('cronCheckEmailsPassword');
@@ -838,7 +950,6 @@ class Cron {
     if (! $imapServerEncoding) { $imapServerEncoding='utf-8'; }
 		$mailbox = new ImapMailbox($emailHost, $emailEmail, $emailPassword, $emailAttachmentsDir, $imapServerEncoding);
 		$mails = array();
-		
 		// Get some mail
 		//$mailsIds = $mailbox->searchMailBox('UNSEEN UNDELETED');
 		$imapFilterCriteria=Parameter::getGlobalParameter('imapFilterCriteria');
@@ -848,7 +959,6 @@ class Cron {
 		  debugTraceLog("Mailbox is empty (filter='$imapFilterCriteria')"); // Will be a debug level trace
 		  return;
 		}
-		
 	  foreach ($mailsIds as $mailId) {
   		$mail = $mailbox->getMail($mailId);
   		$mailbox->markMailAsUnread($mailId);
@@ -1059,6 +1169,7 @@ class Cron {
       if (substr(strtolower($v),-4)=='.php' or substr(strtolower($v),-5,4)=='.php') unlink($v); // Default, but not enough
       if (is_file($v)) unlink($v); // delete all files (as of today, we don't retreive attachments)
     }
+    
   }
   
   public static function checkMailGroup() {
