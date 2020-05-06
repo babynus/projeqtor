@@ -47,7 +47,7 @@ if (!$rl->id) {
 }
 $checkedArr=$rl->getCheckedInfo();
 
-echo "<br>".i18n("instructionsRestrictList")."<br>"."<br>";
+echo "<br/>".i18n("instructionsRestrictList")."<br/>"."<br/>";
 foreach ($checkedArr as $status=>$isChecked) {
   echo "<tr style='height:20px;'><td style='width:20px;vertical-align:top;'><input dojoType='dijit/form/RadioButton' type='radio' name='dialogRestrictListCheckProfileId_".$id."' value='".$status."' id='dialogRestrictListCheckProfileId_".$id."_Status_".$status."' "." style='margin-left:2em;' ".(($isChecked)?' checked ':'');
   echo ' '.(!$canUpdate?"readonly":"").'></td><td style="vertical-align:top">&nbsp;'.i18n($status).'</td></tr>';

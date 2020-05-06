@@ -1806,17 +1806,17 @@ function htmlDisplaySharedFilter($filterArray,$filterObjectClass,$currentFilter=
       foreach ($nFilterArray as $userName=>$filters) {
         $nameExplode=explode('|',$userName);
         echo '<span style="float:left;height:15px;font-weight:bold;" disabled="disabled" value="-2" '
-            . ' title="' . i18n("selectStoredFilter") . '" >'.$nameExplode[0].'</span><br>';
+            . ' title="' . i18n("selectStoredFilter") . '" >'.$nameExplode[0].'</span><br/>';
         foreach ($filters as $filterName=>$filter) {
           echo '<span onclick="selectStoredFilter('.htmlEncode($filter->id).',\'' . htmlEncode($context) . '\');dijit.byId(\'filterSharedSelect\').closeDropDown();" class="menuTree" style="float:left;height:15px;" '
               . ' >&nbsp;&nbsp;&nbsp;&nbsp;'
                   . htmlEncode($filter->name)
                   . ( ($defaultFilter==$filter->id and $context!='directFilterList')?' (' . i18n('defaultValue') . ')':'')
-                  . "</span><br>";
+                  . "</span><br/>";
         }
         $iterateur++;
         if(sizeof($nFilterArray)>$iterateur)echo '<span style="float:left;height:15px;" value="-1" '
-        . ' title="' . i18n("selectStoredFilter") . '" ></span><br>';
+        . ' title="' . i18n("selectStoredFilter") . '" ></span><br/>';
       }
     echo "</div></div>";
     echo "<span style='position:relative;left:20px;font-size:90%;color:#a0a0a0;'>".i18n("tipsSharedFilter").'</span>';

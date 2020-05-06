@@ -155,7 +155,8 @@ class ActivityPlanningElementMain extends PlanningElement {
   private static $_fieldsTooltip = array(
   		"minimumThreshold"=> "tooltipMinimumThreshold",
   		"indivisibility"=> "tooltipIndivisibility",
-      "fixPlanning"=> "tooltipFixPlanningActivity"
+      "fixPlanning"=> "tooltipFixPlanningActivity",
+      "expectedProgress"=> "tooltipFixPlanningActivity"
   );
   
   private static $_databaseTableName = 'planningelement';

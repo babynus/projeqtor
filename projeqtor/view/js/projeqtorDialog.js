@@ -5407,7 +5407,7 @@ if (checkFormChangeInProgress()) {
     loadContent("../tool/removeObjectLinkedByIdToMainObject.php"+param, "resultDivMain", "objectForm", true, 'linkObject');
   };
 
-  msg=i18n('confirmRemoveLinkObjFromObj') + '<br>' + nameLinkObject;
+  msg=i18n('confirmRemoveLinkObjFromObj') + '<br/>' + nameLinkObject;
   showConfirm(msg, actionOK);
 }
 
