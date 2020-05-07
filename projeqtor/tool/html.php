@@ -196,6 +196,18 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       $critArray['idVersionType'] = array_values($arrayType);        
     }
     $table=SqlList::getListWithCrit($listType,$critArray,$column,$selection);
+    if($col == 'idActivity'){
+      $activityTypeList = "(".implode(SqlList::getListWithCrit('ActivityType', array('canHaveSubActivity'=>'1', 'idle'=>'0'),'id')).")";
+      $activity = new Activity();
+      $critWhere = "idActivityType in $activityTypeList";
+      foreach ($critArray as $name=>$value){
+        $critWhere .= " and $name = $value";
+      }
+      $activityList = $activity->getSqlElementsFromCriteria(null,null,$critWhere);
+  	  foreach ($activityList as $id=>$act){
+  	    $table[$act->id]=$act->name;
+  	  }
+    }
     /*Florent 
      * Ticket 3868
      */

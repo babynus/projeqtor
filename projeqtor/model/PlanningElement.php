@@ -1348,6 +1348,15 @@ class PlanningElement extends SqlElement {
       $result='<br/>' . i18n('errorHierarchicLoop');
       return $result;
     }
+    
+    if($parentType == 'Activity'){
+      $activity = new Activity($parentId);
+      $activityType = new ActivityType($activity->idActivityType);
+      if(!$activityType->canHaveSubActivity){
+        $result='<br/>' . i18n('cantHaveSubActivity');
+        return $result;
+      }
+    }
       
     $precListObj=$this->getPredecessorItemsArray();
     $succListObj=$this->getSuccessorItemsArray();

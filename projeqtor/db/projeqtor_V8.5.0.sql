@@ -129,3 +129,5 @@ CREATE TABLE `${prefix}inputmailboxhistory` (
   `result` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
+
+ALTER TABLE `${prefix}type` ADD `canHaveSubActivity` int(1) unsigned DEFAULT NULL;
