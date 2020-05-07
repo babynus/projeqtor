@@ -2413,7 +2413,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         
         // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM
-        if ($col=='idStatusNotification' and $classObj!='StatusNotification'  and !$readOnly) {
+        if (($col=='idStatusNotification' and $classObj!='StatusNotification'  and !$readOnly) or $col=='idAdvancement' or $col=='idWeight') {
           $showExtraButton=true;
           $fieldWidth=round($fieldWidth/2)-5;
         }
@@ -2624,6 +2624,8 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $isWork=false;
         $isDuration=false;
         $isPercent=false;
+        $isAdvancement=false;
+        $uo=false;
         if (SqlElement::is_a($obj, 'PlanningElement')) {
           if ($col=='priority' and !$obj->id and $objType) {
             if (property_exists($objType, 'priority')&&$objType->priority) {
@@ -2642,6 +2644,12 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         if ($dataType=='decimal' AND (substr($col, -4, 4)=='Work' OR $col=='minimumThreshold') ){
           $isWork=true;
           $fieldWidth=$smallWidth;
+        }
+        if(Parameter::getUserParameter('technicalAvancement')=='YES'){
+          $isAdvancement=true;
+          if($col=='toDeliver' or $col=='toRealised' or $col=='realised' or $col=='weight'){
+            $uo=true;
+          }
         }
         if ($dataType=='int' and (substr($col, -8, 8)=='Duration')) {
           $isDuration=true;
@@ -2792,6 +2800,16 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         if ($isWork or $isDuration or $isPercent) {
           echo '<span class="generalColClass '.$col.'Class" style="'.$specificStyleWithoutCustom.';position:relative;top:2px">';
+        }
+        if($uo){
+          if($col!=='weight'){
+            echo '&nbsp;&nbsp;';
+          }else{
+            echo '&nbsp;';
+          }
+        }
+        if ($isAdvancement and $col=='uoAdvancement') {
+            echo '%&nbsp;';
         }
         if ($isWork) {
           if ($classObj=='WorkElement') {
