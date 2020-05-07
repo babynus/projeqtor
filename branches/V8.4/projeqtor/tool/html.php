@@ -1853,7 +1853,7 @@ function htmlDisplayColored($value,$color) {
   return $result;
 }
 function htmlDisplayColoredFull($value,$color) {
-  global $print, $outMode;
+  global $print, $outMode, $outModeBack;
   $minHeight=10;
   $result= "";
   $foreColor=htmlForeColorForBackgroundColor($color);
