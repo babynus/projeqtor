@@ -366,7 +366,7 @@ foreach ($lstUserP as $prof){
                             <div style="font-weight:bold; height:25px;text-align:center">
                             <?php echo i18n('comboNewButton');?>
                             </div>
-                            <?php $arrayItems=array('Project','Activity','Milestone','Meeting','TestSession');
+                            <?php $arrayItems=array('Project','Activity','Milestone','Meeting','PeriodicMeeting','TestSession');
                             foreach($arrayItems as $item) {
                               $canCreate=securityGetAccessRightYesNo('menu' . $item,'create');
                               if ($canCreate=='YES') {
