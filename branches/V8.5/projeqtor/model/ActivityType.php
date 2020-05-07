@@ -57,6 +57,7 @@ class ActivityType extends Type {
   public $_lib_statusMustChangeCancelled;
   public $showInFlash;
   public $internalData;
+  public $canHaveSubActivity;
   
   // Define the layout that will be used for lists
     
