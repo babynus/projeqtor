@@ -289,16 +289,20 @@ class PlanningElement extends SqlElement {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  if(this.value==2){';
       $colScript .= '   dijit.byId("ActivityPlanningElement_uoAdvancement").set("readonly", true);';
+      $colScript .= '   dojo.setStyle("ActivityPlanningElement_uoAdvancement","cursor", "not-allowed");';
       $colScript .= '  }else{';
       $colScript .= '   dijit.byId("ActivityPlanningElement_uoAdvancement").set("readonly", false);';
+      $colScript .= '   dojo.setStyle("ActivityPlanningElement_uoAdvancement","cursor", "auto");';
       $colScript .= '  }';
       $colScript .= '</script>';
     }else if($colName=='idWeight'){
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  if(this.value==1){';
       $colScript .= '   dijit.byId("ActivityPlanningElement_weight").set("readonly", false);';
+      $colScript .= '   dojo.setStyle("ActivityPlanningElement_weight","cursor", "auto");';
       $colScript .= '  }else{';
       $colScript .= '     dijit.byId("ActivityPlanningElement_weight").set("readonly", true);';
+      $colScript .= '   dojo.setStyle("ActivityPlanningElement_weight","cursor", "not-allowed");';
       $colScript .= '     if(this.value==3 && (!dojo.byId("_tab_4_1_smallLabel_2"))){';
       $colScript .= '       dijit.byId("ActivityPlanningElement_idWeight").set("value", 2);';
       $colScript .= '       showAlert(i18n("activityWithSon"));';
