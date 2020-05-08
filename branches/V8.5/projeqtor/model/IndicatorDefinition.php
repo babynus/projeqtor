@@ -117,8 +117,6 @@ class IndicatorDefinition extends SqlElement {
     
     private static $_colCaptionTransposition = array('idIndicatorable'=>'element',
                                                      'idType'=>'type',
-                                                     'warningValue'=>'warning',
-                                                     'alertValue'=>'alert',
                                                      'alertToUser'=>'mailToUser',
                                                      'mailToAccountable'=>'idAccountable',
                                                      'alertToAccountable'=>'idAccountable',
@@ -133,6 +131,10 @@ class IndicatorDefinition extends SqlElement {
                                                      'globalProjectTeamAlert'=>'globalProjectTeam',
                                                      'otherMail'=>'email');
   
+    private static $_fieldsTooltip = array(
+        "alertValue"=> "tooltipAlertValue",
+        "warningValue"=> "tooltipWarningValue"
+    );
    /** ==========================================================================
    * Constructor
    * @param $id the id of the object in the database (null if not stored yet)
@@ -175,6 +177,9 @@ class IndicatorDefinition extends SqlElement {
     return self::$_colCaptionTransposition;
   }
   
+  protected function getStaticFieldsTooltip() {
+    return self::$_fieldsTooltip;
+  }
 // ============================================================================**********
 // MISCELLANOUS FUNCTIONS
 // ============================================================================**********
