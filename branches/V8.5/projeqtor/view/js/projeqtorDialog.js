@@ -11007,7 +11007,7 @@ function repositionMenuDiv(id,idParent) {
   var totalHeight = dojo.byId('centerDiv').offsetHeight;
   currentDiv.style.maxHeight=(totalHeight-50)+'px';
   var height = currentDiv.offsetHeight;
-  if (top + height > totalHeight + 10){
+  if (top + height > totalHeight - 30){
     newTop = totalHeight - (top + height) - 10 ; 
     currentDiv.style.top = newTop+'px';
   };

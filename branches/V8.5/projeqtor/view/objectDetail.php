@@ -5155,10 +5155,10 @@ function drawActivityList($obj, $refresh=false) {
       if (!$print and $canGoto) {
         $goto=' onClick="gotoElement('."'".$listClass."','".htmlEncode($activity->id)."'".');" style="cursor: pointer;" ';
       }
-      echo '<td class="linkData" '.$goto.' style="position:relative;">';
+      echo '<td class="linkData" '.$goto.' style="position:relative;width:55%;">';
       echo htmlEncode($activity->name);
       echo '</td>';
-      echo '<td class="linkData">';
+      echo '<td class="linkData" style="width:15%">';
       //$pe=new PlanningElement();
       //$crit=array('refId'=>$activity->id);
       //$arrayActivity=$pe->getSqlElementsFromCriteria($crit);
@@ -5166,7 +5166,7 @@ function drawActivityList($obj, $refresh=false) {
       $activityProgress=$activity->ActivityPlanningElement->progress;
       echo progressFormatter($activityProgress, null);
       echo '</td>';
-      echo '<td class="linkData colorNameData">';  
+      echo '<td class="linkData colorNameData" style="width:20%">';  
       echo colorNameFormatter(SqlList::getNameFromId('Status', $activity->idStatus)."#split#".SqlList::getFieldFromId('Status', $activity->idStatus, 'color'));
       echo '</td>';
       echo '</tr>';
