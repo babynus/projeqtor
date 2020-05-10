@@ -2404,6 +2404,7 @@ helpSubmitAlertSendToTeamManager: "After submission what type of alert would you
 helpSubscriptionAuto: "automatically follow product or component versions when you follow the product or component.",
 helpSwitchedMode: "Определяет режим отображения между списком и деталями",
 helpTeam: "team of curent user",
+helpTechnicalProgress: "Allow to follow progress in unity of work additionnaly to progress in workload",
 helpTheme: "Изменение отображения цветов программы",
 helpTitle: "заголовок всплывающего сообщения",
 helpUnderConstruction: "the project is not started yet",

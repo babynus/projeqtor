@@ -2404,6 +2404,7 @@ helpSubmitAlertSendToTeamManager: "After submission what type of alert would you
 helpSubscriptionAuto: "sottoscrizione automatica alle versioni prodotti o componenti quando si è sottoscritto il prodotto o componente.",
 helpSwitchedMode: "Definisce il modo di visualizzazione tra lista e dettaglio",
 helpTeam: "team dell'utente attuale",
+helpTechnicalProgress: "Allow to follow progress in unity of work additionnaly to progress in workload",
 helpTheme: "Cambiare i colori di visualizzazione dell'applicazione",
 helpTitle: "titolo che sarà visualizzato come tooltip",
 helpUnderConstruction: "il progetto non è ancora iniziato",
