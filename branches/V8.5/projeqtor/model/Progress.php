@@ -4,7 +4,7 @@
  */
 
 require_once('_securityCheck.php');
-class Advancement  extends SqlElement {
+class Progress  extends SqlElement {
 	
 	// extends SqlElement, so has $id
 	public $_sec_Description;
@@ -15,7 +15,7 @@ class Advancement  extends SqlElement {
 	public $_isNameTranslatable = true;
 	//public $_sec_void;
 	
-	private static $_databaseTableName = 'advancement';
+	private static $_databaseTableName = 'progress';
 	private static $_databaseCriteria = array();
 	/** ==========================================================================
 	 * Constructor

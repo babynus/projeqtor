@@ -119,7 +119,7 @@
     echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('colReal') . '</TD>' ;
     echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('colToRealised') . '</TD>' ;
     echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('colRealised') . '</TD>' ;
-    echo '  <TD class="reportTableHeader" style="width:70px" nowrap>' . i18n('colUoAdvancement') . '</TD>' ;
+    echo '  <TD class="reportTableHeader" style="width:70px" nowrap>' . i18n('colUoProgress') . '</TD>' ;
     
     echo '</TR>';
     }else{
@@ -131,7 +131,7 @@
         echo i18n('colReal').';';
         echo i18n('colToRealised').';';
         echo i18n('colRealised').';';
-        echo i18n('colUoAdvancement');
+        echo i18n('colUoProgress');
         echo "\n";
     }
     // Treat each line
@@ -145,7 +145,7 @@
       $realWork=$line['realwork'];
       $toRealised=$line['torealised'];
       $realised=$line['realised'];
-      $advancement=$line['uoadvancement'];
+      $Progress=$line['uoprogress'];
       $pGroup=($line['elementary']=='0')?1:0;
       $compStyle="";
       if( $pGroup) {

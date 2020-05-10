@@ -27,8 +27,8 @@ ADD COLUMN `toDeliver` int(5) unsigned DEFAULT NULL,
 ADD COLUMN `toRealised` int(5) unsigned DEFAULT NULL,
 ADD COLUMN `realised` int(5) unsigned DEFAULT NULL,
 ADD COLUMN `rest` int(5) unsigned DEFAULT NULL,
-ADD COLUMN `uoAdvancement` decimal(7,2) DEFAULT NULL,
-ADD COLUMN `idAdvancement` int(12) unsigned DEFAULT NULL,
+ADD COLUMN `uoProgress` decimal(7,2) DEFAULT NULL,
+ADD COLUMN `idProgress` int(12) unsigned DEFAULT NULL,
 ADD COLUMN `weight` decimal(7,2) DEFAULT NULL,
 ADD COLUMN `idWeight` int(12) unsigned DEFAULT NULL;
 
@@ -37,12 +37,12 @@ ADD COLUMN `toDeliver` int(5) unsigned DEFAULT NULL,
 ADD COLUMN `toRealised` int(5) unsigned DEFAULT NULL,
 ADD COLUMN `realised` int(5) unsigned DEFAULT NULL,
 ADD COLUMN `rest` int(5) unsigned DEFAULT NULL,
-ADD COLUMN `uoAdvancement` decimal(7,2) DEFAULT NULL,
-ADD COLUMN `idAdvancement` int(12) unsigned DEFAULT NULL,
+ADD COLUMN `uoProgress` decimal(7,2) DEFAULT NULL,
+ADD COLUMN `idProgress` int(12) unsigned DEFAULT NULL,
 ADD COLUMN `weight` decimal(7,2) DEFAULT NULL,
 ADD COLUMN `idWeight` int(12) unsigned DEFAULT NULL;
 
-CREATE TABLE `${prefix}advancement` (
+CREATE TABLE `${prefix}progress` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `sortOrder` int(3) unsigned DEFAULT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE `${prefix}advancement` (
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
-INSERT INTO `${prefix}advancement` (`id`, `name`,  `sortOrder`, `idle`) VALUES
+INSERT INTO `${prefix}progress` (`id`, `name`,  `sortOrder`, `idle`) VALUES
 (1,'manual',100,0),
 (2,'calculated',200,0);
 
@@ -69,10 +69,10 @@ INSERT INTO `${prefix}weight` (`id`, `name`,  `sortOrder`, `idle`) VALUES
 (3,'UO',300,0);
 
 INSERT INTO `${prefix}parameter` (`parameterCode`, `parameterValue`) VALUES 
-('technicalAdvancement','NO');
+('technicalProgress','NO');
 
 INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`, `hasCsv`) VALUES
-(108, 'reportTechnicalAdvancement', 2, 'technicalAdvancement.php', 227,'1');
+(108, 'reportTechnicalProgress', 2, 'technicalProgress.php', 227,'1');
 
 INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
 (1, 108, 1);
@@ -80,7 +80,6 @@ INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess
 INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES 
 (108, 'showIdle', 'boolean', 20, 0),
 (108, 'idProject', 'projectList', 10, 'currentProject');
-('technicalAdvancement','NO');
 
 -- ======================================
 -- Email as ticket

@@ -2413,7 +2413,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         
         // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM
-        if (($col=='idStatusNotification' and $classObj!='StatusNotification'  and !$readOnly) or $col=='idAdvancement' or $col=='idWeight') {
+        if (($col=='idStatusNotification' and $classObj!='StatusNotification'  and !$readOnly) or $col=='idProgress' or $col=='idWeight') {
           $showExtraButton=true;
           $fieldWidth=round($fieldWidth/2)-5;
         }
@@ -2459,7 +2459,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
           $projSituation = SqlElement::getSingleSqlElementFromCriteria('ProjectSituation', array('idProject'=>$obj->idProject));
           $val = $projSituation->id;
-        }else if (($classObj=='ActivityPlanningElement' or $classObj=='ProjectPlanningElement') and ($col=='idWeight' or $col=='idAdvancement')) {
+        }else if (($classObj=='ActivityPlanningElement' or $classObj=='ProjectPlanningElement') and ($col=='idWeight' or $col=='idProgress')) {
           $next=htmlDrawOptionForReference($col, $val, $obj,true, $critFld, $critVal);
         }else {
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
@@ -2624,7 +2624,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         $isWork=false;
         $isDuration=false;
         $isPercent=false;
-        $isAdvancement=false;
+        $isProgress=false;
         $uo=false;
         if (SqlElement::is_a($obj, 'PlanningElement')) {
           if ($col=='priority' and !$obj->id and $objType) {
@@ -2646,7 +2646,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $fieldWidth=$smallWidth;
         }
         if(Parameter::getUserParameter('technicalAvancement')=='YES'){
-          $isAdvancement=true;
+          $isProgress=true;
           if($col=='toDeliver' or $col=='toRealised' or $col=='realised' or $col=='weight'){
             $uo=true;
           }
@@ -2808,7 +2808,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             echo '&nbsp;';
           }
         }
-        if ($isAdvancement and $col=='uoAdvancement') {
+        if ($isProgress and $col=='uoProgress') {
             echo '%&nbsp;';
         }
         if ($isWork) {
