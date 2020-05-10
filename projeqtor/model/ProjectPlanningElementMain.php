@@ -81,7 +81,7 @@ class ProjectPlanningElementMain extends PlanningElement {
   public $totalRealCost;
   public $totalLeftCost;
   public $totalPlannedCost;
-  public $_separator_menuTechnicalAvancement_marginTop;
+  public $_separator_menuTechnicalProgress_marginTop;
   public $_tab_5_2_smallLabel_9 = array('', '','','','','','uoProgress');
   public $_void_uo_20;
   public $_void_uo_21;
@@ -176,13 +176,13 @@ class ProjectPlanningElementMain extends PlanningElement {
   }
   
   function setAttributes(){
-    if(Parameter::getGlobalParameter('technicalAvancement')=='YES' and $this->weight!=0){
+    if(Parameter::getGlobalParameter('technicalProgress')=='YES' and $this->weight!=0){
       self::$_fieldsAttributes['uoProgress']='readonly';
       self::$_fieldsAttributes['idProgress']='readonly,size1/3';
       self::$_fieldsAttributes['weight']='readonly';
       self::$_fieldsAttributes['idWeight']='readonly,size1/3';
     }else{
-      unset($this->_separator_menuTechnicalAvancement_marginTop);
+      unset($this->_separator_menuTechnicalProgress_marginTop);
     }
   }
   /** ==========================================================================

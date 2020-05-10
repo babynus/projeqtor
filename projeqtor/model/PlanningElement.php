@@ -541,7 +541,7 @@ class PlanningElement extends SqlElement {
       $this->updateSynthesisObj(true);
     }
     ///florent
-    if(Parameter::getGlobalParameter('technicalAvancement')=='YES' and ($this->refType=='Project' or $this->refType=='Activity')){
+    if(Parameter::getGlobalParameter('technicalProgress')=='YES' and ($this->refType=='Project' or $this->refType=='Activity')){
       if(!$this->id){
         if($this->refType=='Project'){
           $this->idProgress=2;

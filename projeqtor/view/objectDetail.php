@@ -2645,7 +2645,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $isWork=true;
           $fieldWidth=$smallWidth;
         }
-        if(Parameter::getUserParameter('technicalAvancement')=='YES'){
+        if(Parameter::getUserParameter('technicalProgress')=='YES'){
           $isProgress=true;
           if($col=='toDeliver' or $col=='toRealised' or $col=='realised' or $col=='weight'){
             $uo=true;
@@ -5970,7 +5970,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
   echo '<tr><td colspan=2 style="width:100%;"><table style="width:100%;">';
   echo '<tr>';
   if (!$print and $canUpdate) {
-    echo '<td class="assignHeader" style="width:10%;vertical-align:middle;">';
+    echo '<td class="assignHeader" style="width:10%;vertical-align:middle;white-space:nowrap">';
     if ($obj->id!=null and !$print and $canUpdate and !$obj->idle and $workVisible) {
       echo '<a onClick="addAssignment(\''.Work::displayShortWorkUnit().'\',\''.Work::getWorkUnit().'\',\''.Work::getHoursPerDay().'\', false, false);" ';
       echo ' title="'.i18n('addAssignment').'" > '.formatSmallButton('Add').'</a>';

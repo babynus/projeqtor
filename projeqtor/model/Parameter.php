@@ -356,7 +356,7 @@ class Parameter extends SqlElement {
         break;
       case 'pdfInNewWindow': case "paramConfirmQuit": case "paramShowThumb" : case "paramShowThumbList":
       case 'dependencyStrictMode':
-      case 'technicalAvancement':
+      case 'technicalProgress':
       case 'useOrganizationBudgetElement' :
       case 'notificationSystemActiv':
       case 'updateMilestoneResponsibleFromDeliverable': case 'updateMilestoneResponsibleFromIncoming':
@@ -857,7 +857,7 @@ class Parameter extends SqlElement {
           	                  'maxProjectsToDisplay'=>'number',
           	                  'dependencyStrictMode'=>'list',
           	                  'isManualProgress'=>'list',
-          	                  'technicalAvancement'=>'list',
+          	                  'technicalProgress'=>'list',
           	                'sectionTicket'=>'section',
           	                  'realWorkOnlyForResponsible'=>'list',
           	                  'responsibleFromProduct'=>'list',
