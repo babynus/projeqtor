@@ -40,6 +40,7 @@ if (! $user->isResource) {
 }
 if (!isset($includePool)) $includePool=false;
 $table = getListForSpecificRights($specific,$includePool);
+debugLog($table);
 $selectedProject=getSessionValue('project');
 if ($selectedProject and $selectedProject!='*' and (isset($limitResourceByProj) and $limitResourceByProj=='on') ) {
   $lstTopPrj=array();

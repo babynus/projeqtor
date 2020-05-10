@@ -11269,7 +11269,7 @@ function controlChar (){
   var maj =new RegExp([ "^(?=.*[A-Z])"]);
   var num=new RegExp(["^(?=.*[0-9])"]);
   var char=new RegExp("(?=.*[!@#\$%\^&\*])");
-  var adv=dojo.byId('advancement');
+  var progress=dojo.byId('progress');
   var value=0;
   var curpwd=dojo.byId('dojox_form__NewPWBox_0').value;
   addVal=[0,0,0,0];
@@ -11289,7 +11289,7 @@ function controlChar (){
     addVal[3]=1;
     if (min.test(curpwd) || maj.test(curpwd) ) value+=1;
   }
-  adv.value=value;
+  progress.value=value;
   var strength=dojo.byId('parmPwdSth').value;
   var enough=false;
   var msg=i18n('pwdRequiredStrength');

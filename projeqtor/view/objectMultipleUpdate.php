@@ -645,17 +645,17 @@
             </tr>
      
             <?php }
-     // weight type  and advancement type 
+     // weight type  and Progress type 
             $pe=get_class($obj).'PlanningElement';
             if(Parameter::getGlobalParameter('technicalAvancement')=='YES' and $pe=="ActivityPlanningElement"){
             ?>
             <tr class="detail">
-              <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colUoAdvancement');?>&nbsp;:&nbsp;</td>
+              <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colUoProgress');?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
-                 id="<?php echo $pe.'_idAdvancement';?>" name="<?php echo  $pe.'_idAdvancement';?>">
-                 <?php htmlDrawOptionForReference('idAdvancement', null, null, false);?>
+                 id="<?php echo $pe.'_idProgress';?>" name="<?php echo  $pe.'_idProgress';?>">
+                 <?php htmlDrawOptionForReference('idProgress', null, null, false);?>
                 </select>
               </td>
             </tr>

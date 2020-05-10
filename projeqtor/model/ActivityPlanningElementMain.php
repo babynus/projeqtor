@@ -71,14 +71,14 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $toRealised;
   public $realised;
   public $rest;
-  public $_tab_5_2_smallLabel_8 = array('', '','','','','','uoAdvancement');
+  public $_tab_5_2_smallLabel_8 = array('', '','','','','','uoProgress');
   public $_void_20;
   public $_void_21;
   public $_void_22;
   public $_void_23;
   public $_void_24;
-  public $uoAdvancement;
-  public $idAdvancement;
+  public $uoProgress;
+  public $idProgress;
   public $_label_weight;
   public $weight;
   public $idWeight;
@@ -235,19 +235,19 @@ class ActivityPlanningElementMain extends PlanningElement {
         self::$_fieldsAttributes['toRealised']='';
         self::$_fieldsAttributes['realised']='';
         self::$_fieldsAttributes['rest']='readonly';
-        self::$_fieldsAttributes['uoAdvancement']='';
+        self::$_fieldsAttributes['uoProgress']='';
         self::$_fieldsAttributes['weight']='';
-        self::$_fieldsAttributes['idAdvancement']='size1/3,';
+        self::$_fieldsAttributes['idProgress']='size1/3,';
         self::$_fieldsAttributes['idWeight']='size1/3,';
       }else{
         unset($this->_tab_4_1_smallLabel_2);
-        self::$_fieldsAttributes['uoAdvancement']='';
+        self::$_fieldsAttributes['uoProgress']='';
         self::$_fieldsAttributes['weight']='';
-        self::$_fieldsAttributes['idAdvancement']='readonly,size1/3';
+        self::$_fieldsAttributes['idProgress']='readonly,size1/3';
         self::$_fieldsAttributes['idWeight']='size1/3';
       }
-      if($this->idAdvancement!=1){
-        self::$_fieldsAttributes['uoAdvancement']='readonly';
+      if($this->idProgress!=1){
+        self::$_fieldsAttributes['uoProgress']='readonly';
       }
       if($this->idWeight!=1){
         self::$_fieldsAttributes['weight']='readonly';

@@ -130,7 +130,7 @@
               <label class="label" style="width:150px;"><?php echo i18n('validatePassword');?>&nbsp;:&nbsp;</label>
               <input type="password" pwType="verify" class="input rounded"  style="color:#000000;"><br/>
             <br/>
-            <p><progress  id="advancement" max="4" style="margin-left:148px;width:185px;" value="0" ></progress> <span id="error" style="float:right;" ></span>  </p>
+            <p><progress  id="progress" max="4" style="margin-left:148px;width:185px;" value="0" ></progress> <span id="error" style="float:right;" ></span>  </p>
             <div style="width:200px;height:20px; position:absolute; left:170px;text-align:center;">
               <span id="strength"></span> 
             </div>
