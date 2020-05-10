@@ -647,7 +647,7 @@
             <?php }
      // weight type  and Progress type 
             $pe=get_class($obj).'PlanningElement';
-            if(Parameter::getGlobalParameter('technicalAvancement')=='YES' and $pe=="ActivityPlanningElement"){
+            if(Parameter::getGlobalParameter('technicalProgress')=='YES' and $pe=="ActivityPlanningElement"){
             ?>
             <tr class="detail">
               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colUoProgress');?>&nbsp;:&nbsp;</td>

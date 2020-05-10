@@ -198,6 +198,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     $table=SqlList::getListWithCrit($listType,$critArray,$column,$selection);
     if($col == 'idActivity'){
       $activityTypeList = "(".implode(SqlList::getListWithCrit('ActivityType', array('canHaveSubActivity'=>'1', 'idle'=>'0'),'id')).")";
+      if ($activityTypeList=='()') $activityTypeList='(0)';
       $activity = new Activity();
       $critWhere = "idActivityType in $activityTypeList";
       foreach ($critArray as $name=>$value){

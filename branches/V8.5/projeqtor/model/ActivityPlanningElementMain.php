@@ -65,7 +65,7 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $realCost;
   public $leftCost;
   public $plannedCost;
-  public $_separator_menuTechnicalAvancement_marginTop;
+  public $_separator_menuTechnicalProgress_marginTop;
   public $_tab_4_1_smallLabel_2 = array('toDeliver', 'toRealised', 'realised', 'rest','unityOfWork');
   public $toDeliver;
   public $toRealised;
@@ -221,7 +221,7 @@ class ActivityPlanningElementMain extends PlanningElement {
     if ($this->indivisibility){
       self::$_fieldsAttributes["minimumThreshold"]='required';
     }
-    if(Parameter::getGlobalParameter('technicalAvancement')=='YES'){
+    if(Parameter::getGlobalParameter('technicalProgress')=='YES'){
       $asSon=$this->getSonItemsArray();
       if($asSon){
         foreach ($asSon as $id=>$son ){
@@ -254,7 +254,7 @@ class ActivityPlanningElementMain extends PlanningElement {
       }
        self::$_fieldsAttributes['_tab_2_1_smallLabel_8']='nobr';
     }else{
-      unset($this->_separator_menuTechnicalAvancement_marginTop);
+      unset($this->_separator_menuTechnicalProgress_marginTop);
     }
   }
   /** ==========================================================================
