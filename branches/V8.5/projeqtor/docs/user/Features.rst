@@ -251,7 +251,7 @@ With its bug tracking to monitor incidents on your projects, you with the abilit
 
 A Ticket is any intervention not needing to be planned (or that cannot be planned).
  
-It is generally a short activity for which you want to follow advancement to describe (and possibly provide) a result.
+It is generally a short activity for which you want to follow progress to describe (and possibly provide) a result.
  
 For example, bugs or problems can be managed through Tickets:
  

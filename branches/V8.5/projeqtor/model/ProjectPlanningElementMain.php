@@ -82,14 +82,14 @@ class ProjectPlanningElementMain extends PlanningElement {
   public $totalLeftCost;
   public $totalPlannedCost;
   public $_separator_menuTechnicalAvancement_marginTop;
-  public $_tab_5_2_smallLabel_9 = array('', '','','','','','uoAdvancement');
+  public $_tab_5_2_smallLabel_9 = array('', '','','','','','uoProgress');
   public $_void_uo_20;
   public $_void_uo_21;
   public $_void_uo_22;
   public $_void_uo_23;
   public $_void_uo_24;
-  public $uoAdvancement;
-  public $idAdvancement;
+  public $uoProgress;
+  public $idProgress;
   public $_label_weight;
   public $weight;
   public $idWeight;
@@ -170,15 +170,15 @@ class ProjectPlanningElementMain extends PlanningElement {
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
     if(!$this->id){
-      $this->idAdvancement=2;
+      $this->idProgress=2;
       $this->idWeight=2;
     }
   }
   
   function setAttributes(){
     if(Parameter::getGlobalParameter('technicalAvancement')=='YES' and $this->weight!=0){
-      self::$_fieldsAttributes['uoAdvancement']='readonly';
-      self::$_fieldsAttributes['idAdvancement']='readonly,size1/3';
+      self::$_fieldsAttributes['uoProgress']='readonly';
+      self::$_fieldsAttributes['idProgress']='readonly,size1/3';
       self::$_fieldsAttributes['weight']='readonly';
       self::$_fieldsAttributes['idWeight']='readonly,size1/3';
     }else{
