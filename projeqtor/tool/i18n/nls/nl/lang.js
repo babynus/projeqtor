@@ -2404,6 +2404,7 @@ helpSubmitAlertSendToTeamManager: "After submission what type of alert would you
 helpSubscriptionAuto: "automatically follow product or component versions when you follow the product or component.",
 helpSwitchedMode: "Definiëerd de schermmodus tussen lijst en detail",
 helpTeam: "groep van huidige gebruiker",
+helpTechnicalProgress: "Allow to follow progress in unity of work additionnaly to progress in workload",
 helpTheme: "Wijzig de weergavekleuren van de toepassing",
 helpTitle: "titel die als tooltip wordt weergegeven",
 helpUnderConstruction: "the project is not started yet",

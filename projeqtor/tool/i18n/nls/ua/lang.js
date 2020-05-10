@@ -2404,6 +2404,7 @@ helpSubmitAlertSendToTeamManager: "Після подання&#44 який тип
 helpSubscriptionAuto: "автоматична підписка на версії продуктів або компонентів під час підписки на продукт або компоненту",
 helpSwitchedMode: "Визначає режим відобр. між списком та детально",
 helpTeam: "команда поточного користувача",
+helpTechnicalProgress: "Allow to follow progress in unity of work additionnaly to progress in workload",
 helpTheme: "Зміна відображення кольору програми",
 helpTitle: "заголовок&#44; який буде відображатися в якості підказки",
 helpUnderConstruction: "проект ще не розпочався",
