@@ -2404,6 +2404,7 @@ helpSubmitAlertSendToTeamManager: "After submission what type of alert would you
 helpSubscriptionAuto: "automatically follow product or component versions when you follow the product or component.",
 helpSwitchedMode: "一覧と詳細の表示モードを定義",
 helpTeam: "team of curent user",
+helpTechnicalProgress: "Allow to follow progress in unity of work additionnaly to progress in workload",
 helpTheme: "アプリケーションの表示色を変更",
 helpTitle: "ツールチップに表示するタイトル",
 helpUnderConstruction: "the project is not started yet",

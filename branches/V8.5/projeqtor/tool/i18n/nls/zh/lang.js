@@ -2404,6 +2404,7 @@ helpSubmitAlertSendToTeamManager: "After submission what type of alert would you
 helpSubscriptionAuto: "automatically follow product or component versions when you follow the product or component.",
 helpSwitchedMode: "定义显示模式-清单和明细",
 helpTeam: "当前用户的团队",
+helpTechnicalProgress: "Allow to follow progress in unity of work additionnaly to progress in workload",
 helpTheme: "更改界面颜色",
 helpTitle: "title that will be displayed as tooltip",
 helpUnderConstruction: "该项目尚未开始",

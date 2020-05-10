@@ -2404,6 +2404,7 @@ helpSubmitAlertSendToTeamManager: "Nakon podnošenja koju vrstu upozorenja želi
 helpSubscriptionAuto: "pretplata automatski na verzije proizvoda ili komponenti kada se pretplatite na proizvod ili komponentu.",
 helpSwitchedMode: "Definira način prikaza između popisa i detalje",
 helpTeam: "vaš trenutni tim",
+helpTechnicalProgress: "Allow to follow progress in unity of work additionnaly to progress in workload",
 helpTheme: "Promjena boje za prikaz",
 helpTitle: "naslov za tooltip",
 helpUnderConstruction: "projekt još nije započeo",

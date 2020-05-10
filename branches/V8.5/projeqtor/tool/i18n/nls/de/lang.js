@@ -2404,6 +2404,7 @@ helpSubmitAlertSendToTeamManager: "Welche Art von Benachrichtigung möchten Sie 
 helpSubscriptionAuto: "Automatisches Abonnement auf Versionen Produkte oder Komponenten&#44; wenn Sie Produkt oder Komponente abonnieren.",
 helpSwitchedMode: "Legt Anzeige zwischen Listen- und Detailanzeige fest",
 helpTeam: "Team des aktuellen Nutzers",
+helpTechnicalProgress: "Allow to follow progress in unity of work additionnaly to progress in workload",
 helpTheme: "Farbe für die Anzeige ändern",
 helpTitle: "Titel für Tooltip",
 helpUnderConstruction: "Projekt noch nicht gestartet",

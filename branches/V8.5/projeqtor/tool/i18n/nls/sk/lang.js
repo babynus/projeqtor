@@ -2404,6 +2404,7 @@ helpSubmitAlertSendToTeamManager: "After submission what type of alert would you
 helpSubscriptionAuto: "predplatné automatické verzie produktov alebo komponentov pri prihlásení na produkt alebo komponent",
 helpSwitchedMode: "Definuje režim zobrazenia medzi zoznamom a podrobnosťami",
 helpTeam: "skupina aktuálneho užívateľa",
+helpTechnicalProgress: "Allow to follow progress in unity of work additionnaly to progress in workload",
 helpTheme: "Zmeňte zobrazenie farieb aplikácie",
 helpTitle: "title that will be displayed as tooltip",
 helpUnderConstruction: "the project is not started yet",
