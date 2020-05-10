@@ -1639,7 +1639,7 @@ debugTraceLog("User->authenticate('$paramlogin', '$parampassword')" );
     foreach ($this->getAllProfiles() as $prof) {
       $crit=array('scope'=>$specific, 'idProfile'=>$prof);
       $habilitation=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', $crit);
-      if ($specific=='planning' or $specific=='changeValidatedData') {
+      if ($specific=='planning' or $specific=='resourcePlanning' or $specific=='changeValidatedData') {
         $scope=new ListYesNo($habilitation->rightAccess);
         $code=$scope->code;
       } else {

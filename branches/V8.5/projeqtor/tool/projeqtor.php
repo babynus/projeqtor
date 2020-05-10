@@ -4325,7 +4325,7 @@ function getListForSpecificRights($specific, $includePool=false) {
         break;
       } else if ($right=='TEAM' and in_array($user->idProfile, $profList)) {
         $table=array_merge_preserve_keys($table, $user->getManagedTeamResources(true, 'list'));
-      } else if ($right=='ALL' or $right=='PRO') {
+      } else if ($right=='ALL' or $right=='PRO' or $right=='YES') {
         $inClause='(0';
         foreach ($user->getSpecificAffectedProfiles() as $prj=>$prf) {
           if (in_array($prf, $profList)) {

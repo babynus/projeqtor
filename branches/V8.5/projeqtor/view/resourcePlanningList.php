@@ -338,11 +338,11 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                         </script>
                          <option value=""></option>
                         <?php 
-                         //$specific='resourcePlanning';
-                         $specific='imputation';
+                         //$specific='imputation';
+                         $specific='resourcePlanning';
                          $includePool=true;
                          $specificDoNotInitialize=true;                       
-                         include '../tool/drawResourceListForSpecificAccess.php';?>  
+                         include '../tool/drawResourceListForSpecificAccess.php';
                       </select>
                       </td>
                     </tr>
