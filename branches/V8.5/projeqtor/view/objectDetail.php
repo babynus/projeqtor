@@ -2808,9 +2808,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             echo '&nbsp;';
           }
         }
-        if ($isProgress and $col=='uoProgress') {
-            echo '%&nbsp;';
-        }
+//         if ($isProgress and $col=='uoProgress') {
+//             echo '%&nbsp;';
+//         }
         if ($isWork) {
           if ($classObj=='WorkElement') {
             echo Work::displayShortImputationUnit();

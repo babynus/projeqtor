@@ -169,10 +169,8 @@ class ProjectPlanningElementMain extends PlanningElement {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
-    if(!$this->id){
-      $this->idProgress=2;
-      $this->idWeight=2;
-    }
+    $this->idProgress=1;
+    $this->idWeight=2;
   }
   
   function setAttributes(){

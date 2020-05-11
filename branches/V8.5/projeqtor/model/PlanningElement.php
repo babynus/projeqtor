@@ -287,7 +287,7 @@ class PlanningElement extends SqlElement {
       $colScript .= '</script>';
     }else if($colName=='idProgress'){
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  if(this.value==2){';
+      $colScript .= '  if(this.value==1){';
       $colScript .= '   dijit.byId("ActivityPlanningElement_uoProgress").set("readonly", true);';
       $colScript .= '   dojo.setStyle("ActivityPlanningElement_uoProgress","cursor", "not-allowed");';
       $colScript .= '  }else{';
@@ -303,15 +303,7 @@ class PlanningElement extends SqlElement {
       $colScript .= '  }else{';
       $colScript .= '     dijit.byId("ActivityPlanningElement_weight").set("readonly", true);';
       $colScript .= '   dojo.setStyle("ActivityPlanningElement_weight","cursor", "not-allowed");';
-      $colScript .= '     if(this.value==3 && (!dojo.byId("_tab_4_1_smallLabel_2"))){';
-      $colScript .= '       dijit.byId("ActivityPlanningElement_idWeight").set("value", 2);';
-      $colScript .= '       showAlert(i18n("activityWithSon"));';
-      $colScript .= '       return; ';
-      $colScript .= '     } else if(this.value==2 && dojo.byId("_tab_4_1_smallLabel_2")){';
-      $colScript .= '       dijit.byId("ActivityPlanningElement_idWeight").set("value", 1);';
-      $colScript .= '       showAlert(i18n("activityNoSons"));';
-      $colScript .= '       return; ';
-      $colScript .= '     }else if (this.value==3){';
+      $colScript .= '     if (this.value==3){';
       $colScript .= '       if(dojo.byId("ActivityPlanningElement_toRealised").value==""){';
       $colScript .= '         dijit.byId("ActivityPlanningElement_weight").set("value","0");';
       $colScript .= '       }else{';
@@ -542,22 +534,20 @@ class PlanningElement extends SqlElement {
     }
     ///florent
     if(Parameter::getGlobalParameter('technicalProgress')=='YES' and ($this->refType=='Project' or $this->refType=='Activity')){
-      if(!$this->id){
-        if($this->refType=='Project'){
-          $this->idProgress=2;
-          $this->idWeight=2;
-          $this->uoProgress=0;
-          $this->weight=0;
-        }else{
-          $this->idProgress=1;
-          $this->idWeight=1;
-          $this->uoProgress=0;
-          $this->weight=0;
-          $this->toDeliver=0;
-          $this->toRealised=0;
-          $this->realised=0;
-          $this->rest=0;
-        }
+      if($this->refType=='Project' and ($this->idProgress=='' or $this->idWeight=='')){
+        $this->idProgress=1;
+        $this->idWeight=2;
+        $this->uoProgress=0;
+        $this->weight=0;
+      }else if($this->refType=='Activity' and ($this->idProgress=='' or $this->idWeight=='')){
+        $this->idProgress=2;
+        $this->idWeight=1;
+        $this->uoProgress=0;
+        $this->weight=0;
+        $this->toDeliver=0;
+        $this->toRealised=0;
+        $this->realised=0;
+        $this->rest=0;
       }else{
         if($this->refType=='Activity'){
           $sons=$this->getSonItemsArray();
@@ -793,7 +783,7 @@ class PlanningElement extends SqlElement {
   }
   /// florent
   public function setProgress(){
-    if($this->idProgress=='2'){
+    if($this->idProgress=='1'){
       $ref=$this->refType;
       $sons=$this->getSonItemsArray();
       if($ref=='Project' and $sons){
@@ -834,7 +824,7 @@ class PlanningElement extends SqlElement {
         $sumWeight=0;
         $sumProgress=0;
         foreach ($sons as $son ){
-          if($son->uoProgress!=0){
+          if($son->weight!=0){
             $sumProgress=(floatval($sumProgress+($son->uoProgress*$son->weight)));
             $sumWeight+=$son->weight;
             continue;
@@ -882,11 +872,11 @@ class PlanningElement extends SqlElement {
             }
             continue;
         }
-      }else {
+      }else if($refType=='Project' and !$sons){
         return 0;
       }
       foreach ($sons as $son){
-        if($son->weight!=''){
+        if($son->weight!=0){
           $summWeight=$summWeight+$son->weight;
           continue;
         }else{
@@ -1001,7 +991,7 @@ class PlanningElement extends SqlElement {
    * @return a boolean 
    */
   protected function updateSynthesisObj ($doNotSave=false) {
-    $consolidateValidated=Parameter::getGlobalParameter('consolidateValidated');
+    $consolidateValidated=Parameter::getGlobalParameter('consolidateValidated');	
     $technicalProgress=Parameter::getGlobalParameter('technicalProgress');  	
     $this->validatedCalculated=0;
   	$this->validatedExpenseCalculated=0;
@@ -1055,11 +1045,24 @@ class PlanningElement extends SqlElement {
     }
     /// florent
     if($technicalProgress=='YES' and ($this->refType=='Project' or $this->refType=='Activity')){
+      if($this->refType=='Project' and ($this->idProgress=='' or $this->idWeight=='')){
+        $this->idProgress=1;
+        $this->idWeight=2;
+      }else if($this->refType=='Activity' and ($this->idProgress=='' or $this->idWeight=='')) {
+        $this->idProgress=2;
+        $this->idWeight=1;
+        if($this->getSonItemsArray()){
+          $this->idProgress=1;
+          $this->idWeight=2;
+        }
+      }
       if($this->idWeight==3){
         $this->weight=0;
         $this->idWeight=2;
+      }else if ($this->idWeight==1 and $this->weight==0){
+        $this->idWeight=2;
       }
-      $this->idProgress=2;
+      $this->idProgress=1;
       $this->uoProgress=$this->setProgress();
       $this->weight=$this->setWeight();
     }

@@ -302,7 +302,19 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
   } else if ($col=='idTestCase') { 
     // List Test case with criteria on project or visible product
     $table=SqlList::getList($listType,$column,$selection, (! $obj)?!$limitToActiveProjects:false,true );
-  } else {
+  } if($col=="idWeight"){
+    $showIdleCriteria=$showIdle;
+    $table=SqlList::getList($listType,$column,$selection, $showIdleCriteria );
+      if(get_class($obj)=='Project'){
+        $table=$table[2];
+      }else{
+        if($obj->getSonItemsArray()){
+          unset($table[3]);
+        }else {
+          unset($table[2]);
+        }
+      }
+  }else {
     // None of the previous cases : no criteria and not of the expected above cases
     $showIdleCriteria=$showIdle;
     if (! $obj and property_exists($listType, 'idProject'))  $showIdleCriteria=(! $limitToActiveProjects);
@@ -342,6 +354,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       $restrictArray[$bl->id]=$bl->name;
     }
   }
+
   if ($obj) {
     // Current object is passed to the function, use it to apply restrictions or exclusions 
     // All lists froms objectDetail.php come here

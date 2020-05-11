@@ -113,13 +113,44 @@
     echo '  <TD class="reportTableHeader" style="width:10px; border-right: 0px;"></TD>';
     echo '  <TD class="reportTableHeader" style="width:200px; border-left:0px; text-align: left;">' . i18n('colTask') . '</TD>';
     echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('colWeight') . '</TD>' ;
-    echo '  <TD class="reportTableHeader" style="width:70px" nowrap>' . i18n('colPlannedStartDate') . '</TD>' ;
-    echo '  <TD class="reportTableHeader" style="width:70px" nowrap>' . i18n('colPlannedEndDate') . '</TD>' ;
-    echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('colAssigned') . '</TD>' ;
-    echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('colReal') . '</TD>' ;
-    echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('colToRealised') . '</TD>' ;
-    echo '  <TD class="reportTableHeader" style="width:50px" nowrap>' . i18n('colRealised') . '</TD>' ;
-    echo '  <TD class="reportTableHeader" style="width:70px" nowrap>' . i18n('colUoProgress') . '</TD>' ;
+    
+    echo '<TD  class="reportTableHeader" style="width:300px" nowrap>';
+//     echo '<table> ';
+//     echo '  <TR><TD class="reportTableHeader">';
+    echo '    <table> ';
+    echo '      <TR>' . i18n('colPlannedDate2') . '</TR>' ;
+    echo '      <TR>';
+    echo '        <TD style="width:150px" nowrap>' . i18n('colPlannedStartDate') . '</TD>' ;
+    echo '        <TD style="width:150px" nowrap >' . i18n('colPlannedEndDate') . '</TD>';
+    echo '      </TR>' ;
+    echo '    </table> ';
+    echo '</TD>';
+//     echo '  </TD>';
+//     echo '  <TD class="reportTableHeader" >';
+    echo '<TD  class="reportTableHeader" style="width:110px"  nowrap>';
+    echo '    <table> ';
+    echo '      <TR>' . i18n('technicalWork') . '</TR>' ;
+    echo '      <TR>';
+    echo '        <TD  style="width:55px" nowrap>' . i18n('colAssigned') . '</TD>' ;
+    echo '        <TD  style="width:55px" nowrap>' . i18n('colReal') . '</TD>' ;
+    echo '      </TR>' ;
+    echo '    </table > ';
+    echo '</TD>';
+//     echo '  </TD>';
+//     echo '  <TD class="reportTableHeader">';
+    echo '<TD  class="reportTableHeader" style="width:190px" nowrap>';
+    echo '    <table > ';
+    echo '      <TR>' . i18n('technicalProgress') . '</TR>' ;
+    echo '      <TR>';
+    echo '        <TD style="width:60px" nowrap>' . i18n('colToRealised') . '</TD>' ;
+    echo '        <TD  style="width:60px" nowrap>' . i18n('colRealised') . '</TD>' ;
+    echo '        <TD style="width:70px" nowrap>' . i18n('colUoProgress') . '</TD>' ;
+    echo '      </TR>' ;
+    echo '    </table > ';
+    echo '</TD>';
+//     echo '  </TD></TR>';
+//     echo '</table>';
+//     echo '</TD>';
     
     echo '</TR>';
     }else{
@@ -131,7 +162,7 @@
         echo i18n('colReal').';';
         echo i18n('colToRealised').';';
         echo i18n('colRealised').';';
-        echo i18n('colUoProgress');
+        echo i18n('colUoprogress');
         echo "\n";
     }
     // Treat each line
@@ -145,7 +176,7 @@
       $realWork=$line['realwork'];
       $toRealised=$line['torealised'];
       $realised=$line['realised'];
-      $Progress=$line['uoprogress'];
+      $progress=$line['uoprogress'];
       $pGroup=($line['elementary']=='0')?1:0;
       $compStyle="";
       if( $pGroup) {
@@ -165,16 +196,34 @@
       }
       if($outMode != 'csv'){
       echo '<TR>';
-      echo '  <TD class="reportTableData" style="border-right:0px;' . $compStyle . '">'.formatIcon($line['reftype'], 16).'</TD>'; 
-      echo '  <TD class="reportTableData" style="border-left:0px; text-align: left;' . $compStyle . '" nowrap>' . $tab . htmlEncode($line['refname']) . '</TD>';
-      echo '  <TD class="reportTableData" style="' . $compStyle . '">' .$weight. '</TD>' ;
-      echo '  <TD class="reportTableData" style="' . $compStyle . '">' .$startDate. '</TD>' ;
-      echo '  <TD class="reportTableData" style="' . $compStyle . '">' .$endDate. '</TD>' ;
-      echo '  <TD class="reportTableData" style="' . $compStyle . '">' . Work::displayWorkWithUnit($assignedWork)  . '</TD>' ;
-      echo '  <TD class="reportTableData" style="' . $compStyle . '">' . Work::displayWorkWithUnit($assignedWork). '</TD>' ;
-      echo '  <TD class="reportTableData" style="' . $compStyle . '">'  .$toRealised. '</TD>' ;
-      echo '  <TD class="reportTableData" style="' . $compStyle . '">'  .$realised . '</TD>' ;
-      echo '  <TD class="reportTableData" style="' . $compStyle . '">'  .$realised. '</TD>' ;
+      echo '    <TD class="reportTableData" style="border-right:0px;' . $compStyle . '">'.formatIcon($line['reftype'], 16).'</TD>'; 
+      echo '    <TD class="reportTableData" style="border-left:0px; text-align: left;' . $compStyle . '" nowrap>' . $tab . htmlEncode($line['refname']) . '</TD>';
+      echo '    <TD class="reportTableData" style="' . $compStyle . '">' .round($weight). '</TD>' ;
+      echo '  <TD class="reportTableData" class="" style="width:300px;' . $compStyle . '">';
+      echo '    <table >';
+      echo '      <TR>';
+      echo '        <TD class="" style="width:155px;">' . $startDate . '</TD>' ;
+      echo '        <TD class=""style="width:145px;">' . $endDate . '</TD>';
+      echo '      </TR>';
+      echo '    </table>';
+      echo '  </TD>';
+      echo '  <TD class="reportTableData" class="" style="width:110px;' . $compStyle . '">';
+      echo '    <table >';
+      echo '      <TR>';
+      echo '        <TD class="" style="width:60px;">' . Work::displayWorkWithUnit($assignedWork) . '</TD>' ;
+      echo '        <TD class="" style="width:50px;">' . Work::displayWorkWithUnit($realWork) . '</TD>' ;
+      echo '      </TR>';
+      echo '    </table>';
+      echo '  </TD>';
+      echo '  <TD class="reportTableData" class="" style="width:190px;' . $compStyle . '">';
+      echo '    <table >';
+      echo '      <TR>';
+      echo '        <TD class="" style="width:65px;">' . $toRealised . '</TD>' ;
+      echo '        <TD class="" style="width:65px;">' . $realised . '</TD>' ;
+      echo '        <TD class="" style="width:69px;">' . percentFormatter(round($progress)) . '</TD>' ;
+      echo '      </TR>';
+      echo '    </table>';
+      echo '  </TD>';
       echo '</TR>';
       }else{
         echo htmlEncode($line['refname']) .';';
@@ -182,10 +231,10 @@
         echo $startDate.';';
         echo $endDate.';';
         echo $assignedWork.';';
-        echo $assignedWork.';';
+        echo $realWork.';';
         echo $toRealised.';';
         echo $realised.';';
-        echo $realised;
+        echo $progress;
         echo "\n";
       }
     }

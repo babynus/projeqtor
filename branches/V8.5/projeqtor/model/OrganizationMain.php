@@ -445,6 +445,7 @@ class OrganizationMain extends SqlElement {
         switch($item) {
             // Draw the message that say if BudgetElement exits or not
             case 'Project' :
+              debugLog($item);
                 $this->drawProjectsOfOrganizationAndSubOrganizations('_spe_'.$item, $refresh);
                 break;
         }    
