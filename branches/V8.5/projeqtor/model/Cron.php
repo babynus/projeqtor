@@ -833,31 +833,46 @@ class Cron {
     if (! file_exists($emailAttachmentsDir)) {
       mkdir($emailAttachmentsDir,0777,true);
     }
-    //parcourir toutes les imap
-    //imap default 
-    // {imap.projeqtor.org:143}INBOX
-    // test01@projeqtor.org
-    // test01ProjeQtOr
+    
+    //imap default  {imap.projeqtor.org:143}INBOX test01@projeqtor.org test01ProjeQtOr
+    
+    //Parcours des Mailbox
     foreach ($lstIMb as $mb){
       //$emailAttachmentsDir
       try {
         $inputMailbox = new ImapMailbox($mb->serverImap,$mb->userImap,$mb->passwordImap,$emailAttachmentsDir,'utf-8');
       }catch (Exception $e) {
         $mb->failedRead += 1;
-        if($mb->failedRead == 10)$mb->idle = 1;
+        if($mb->failedRead == 2)$mb->idle = 1;
         $mb->save();
       }
       $mails = array();
-      //verifier si on a acces a l'imap sinon mettre l'input a faux
       // parcourir les mails non lu
       $mailsIds = $inputMailbox->searchMailBox('UNSEEN UNDELETED');
-      if(!$mailsIds)continue;
+      //Parcours des mails
       foreach ($mailsIds as $mailId){
+        if($mb->idle==1)break;
         $result = "";
         $failMessage = false;
         $mail = $inputMailbox->getMail($mailId);
         $mailFrom = $mail->fromAddress;
+        
         //verifier les contraites de temps
+        $limitOfInputPerHour = $mb->limitOfInputPerHour;
+        $inputHistory = new InputMailboxHistory();
+        $now = date('Y-m-d H:i:s');
+        $date = new DateTime($now);
+        $date->sub(new DateInterval('PT1H'));
+        $date = date_format($date, 'Y-m-d H:i:s');
+        $where =  " idInputMailbox = ".$mb->id." and date >='" . $date . "'" ;
+        $nbInputHistory = $inputHistory->countSqlElementsFromCriteria(null,$where);
+        if($nbInputHistory > $limitOfInputPerHour){
+          $mb->idle=1;
+          $result.= i18n('LimitOfTicketsPerHour');
+          $failMessage = true;
+        }
+        
+        //Verifier les contraintes de sécurité
         $securityConstraint = $mb->securityConstraint;
         //only for knows users
         if($securityConstraint == '2' or $securityConstraint == '3'){
@@ -871,7 +886,6 @@ class Cron {
             if($affExist==0)$result.= i18n('securityConstraint3');
           }
         }
-        $inputMailbox->markMailAsUnread($mailId);
         
         // SI PAS DE SUJET JE REFUSE
         if(!$mail->subject)$result = i18n('noSubject');
@@ -892,9 +906,24 @@ class Cron {
           $ticket->idActivity = $mb->idActivity;
           $ticket->idResolution = $mb->idAffectable;
           if($body and $bodyHtml)$ticket->description = $body;
-          $idStatus = SqlElement::getFirstSqlElementFromCriteria('Status', $critArray);
-          $ticket->idStatus = $idStatus;
+          $idStatus = SqlElement::getFirstSqlElementFromCriteria('Status', array('idle'=>'0'));
+          $ticket->idStatus = $idStatus->id;
           $ticket->save();
+          //Attachment
+          if($mb->allowAttach==0){
+            $sizeAttach = $mb->sizeAttachment;
+            $listAtt = $mail->getAttachments();
+            foreach ($listAtt as $att){
+              $attch = new Attachment();
+              $attch->refType = 'Ticket';
+              $attch->refId = $ticket->id;
+              $attch->fileName = $att->name;
+              $attch->subDirectory = $emailAttachmentsDir; 
+              $attch->creationDate = date('Y-m-d H:i:s');
+              //$attch->idUser
+              $attch->save();
+            }
+          }
         }
         
         //InputMailboxHistory
@@ -917,10 +946,9 @@ class Cron {
           $mb->lastInputDate = date("Y-m-d");
           $mb->idTicket = $ticket->id;
           $mb->totalInputTicket += 1;
-          $mb->failedRead = 0;
         }else{
-          $mb->$failMessage += 1;
-        } 
+          if($mb->failedRead == 1)$mb->failedRead=0;
+        }
         $mb->save();
         
       }
