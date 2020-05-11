@@ -4452,6 +4452,14 @@ abstract class SqlElement {
               $result .= '<br/>'. i18n ( 'messageMandatory', array($this->getColCaption ( $col )) );
             }
           }
+          if ($val and strpos($this->getFieldAttributes($col),'unique')!==false) {          
+            $where='UPPER('.$this->getDatabaseColumnName($col).")=".Sql::str(strtoupper($val));
+            if ($this->id) $where.=" and id<>".$this->id;
+            $count=$this->countSqlElementsFromCriteria(null,$where);
+            if ($count>0) {
+              $result .= '<br/>' . i18n ( 'messageUnique', array(i18n('col'.ucfirst($col)),$val) );
+            }
+          }
           if ($dataType == 'datetime') {
             if (strlen ( $val ) == 9) {
               $result .= '<br/>' . i18n ( 'messageDateMandatoryWithTime', array(i18n ( 'col' . ucfirst ( $col ) )) );
