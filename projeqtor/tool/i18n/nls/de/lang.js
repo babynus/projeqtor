@@ -3012,6 +3012,7 @@ messageResourceDouble: "Sie können keine Ressource hinzufügen&#44; die schon v
 messageSelectedNotAvailable: "Sie wählten '${1}'.<br/>Die Funktionalität ist nicht verfügbar in dieser Version von ProjeQtOr.<br/>Tut uns leid …",
 messageTextTooLong: "Länge für ${1} überschreitet ${2} Zeichen",
 MessageType: "Meldungstyp",
+messageUnique: "Another item already exists with value '${2}' for unique field '${1}'",
 messageUpgradeMigration: "Es läuft gerade eine Systemaktualiserung<br/>Bitte warten bis beendet!",
 messageWrongRule: "Benachrichtigungsregel ist unkorrekt",
 Milestone: "Meilenstein",
