@@ -104,7 +104,7 @@ CREATE TABLE `${prefix}inputmailbox` (
   `passwordImap` varchar(50) DEFAULT NULL,
   `securityConstraint` varchar(10) DEFAULT NULL,
   `allowAttach` int(1) unsigned DEFAULT '0',
-  `sizeAttachment` int(12) unsigned DEFAULT '0',
+  `sizeAttachment` int(6) unsigned DEFAULT '0',
   `idTicketType` int(12) unsigned DEFAULT NULL,
   `idAffectable` int(12) unsigned DEFAULT NULL,
   `idActivity` int(12) unsigned DEFAULT NULL,
