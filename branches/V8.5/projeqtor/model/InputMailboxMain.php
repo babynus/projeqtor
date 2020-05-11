@@ -38,9 +38,11 @@ class InputMailboxMain extends SqlElement {
   public $userImap;
   public $passwordImap;
   public $securityConstraint;
-  public $_tab_2_1 = array('attachment', 'sizeAttachment' ,'attachmentSecurityConstraint');
+  public $_tab_4_1_4 = array('','','','','Attachment');
   public $allowAttach;
+  public $_label_sizeAttachment1;
   public $sizeAttachment;
+  public $_label_sizeAttachment2;
   public $idle;
   public $_sec_treatment;
   public $idTicketType;
@@ -56,8 +58,11 @@ class InputMailboxMain extends SqlElement {
   
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="8%"># ${id}</th>
+    <th field="name" width="23%">${name}</th>
     <th field="nameProject" width="15%">${idProject}</th>
-    <th field="name" width="15%">${name}</th>
+    <th field="serverImap" width="20%">${serverImap}</th>
+    <th field="userImap" width="20%">${userImap}</th>
+    <th field="limitOfInputPerHour" width="10%">${limitOfInputPerHour}</th>
     <th field="idle" width="4%" formatter="booleanFormatter">${idle}</th>
     ';
   
@@ -138,6 +143,9 @@ class InputMailboxMain extends SqlElement {
   public function setAttributes() {
     if($this->allowAttach == '1'){
       self::$_fieldsAttributes['sizeAttachment']='hidden';
+      self::$_fieldsAttributes['_label_sizeAttachment1']='hidden';
+      self::$_fieldsAttributes['_label_sizeAttachment2']='hidden';
+      
     }
   }
   
