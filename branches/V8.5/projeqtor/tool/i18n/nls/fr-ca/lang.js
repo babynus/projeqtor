@@ -3015,6 +3015,7 @@ messageResourceDouble: "Vous ne pouvez pas ajouter une ressource déjà présent
 messageSelectedNotAvailable: "Vous avez sélectionné '${1}'.<br/>Cette fonctionnalité n'est pas disponible dans cette version de ProjeQtOr. <br/>Désolé…",
 messageTextTooLong: "La longueur du champ ${1} dépasse ${2} caractères",
 MessageType: "Type de messages",
+messageUnique: "Un autre élément existe déjà avec la valeur '${2} pour le champ unique '${1}'",
 messageUpgradeMigration: "Mise à niveau en cours d'exécution.<br/> Patientez jusqu'à la fin",
 messageWrongRule: "La règle de notification est incorrecte",
 Milestone: "Jalon",

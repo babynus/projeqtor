@@ -3012,6 +3012,7 @@ messageResourceDouble: "追加しようとしているリソースが存在し�
 messageSelectedNotAvailable: "「${1}」を選択しました。<br/>このバージョンのProjeQtOrではこの機能は利用できません。<br/>あしからず",
 messageTextTooLong: "${1}の長さが${2}文字を超えています",
 MessageType: "メッセージタイプ",
+messageUnique: "Another item already exists with value '${2}' for unique field '${1}'",
 messageUpgradeMigration: "Upgrade in currently running.<br/> Wait until it ends",
 messageWrongRule: "notification rule is incorrect",
 Milestone: "マイルストーン",
