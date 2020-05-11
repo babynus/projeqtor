@@ -848,26 +848,62 @@ class ResourceMain extends SqlElement {
     $result=$resultDelete.$result;
     return $result;
   }
-  
+  //florent ticket 4632
   public function drawMemberList($team, $showClosedItems) {
-    $result="<table>";
+    global $print;
     if ($showClosedItems == FALSE) $crit=array('idTeam'=>$team, 'idle'=>"0");
     if ($showClosedItems == TRUE) $crit=array('idTeam'=>$team);
-    $resList=$this->getSqlElementsFromCriteria($crit, false);
-    foreach ($resList as $res) {
-      $style = "";
-      if ($res->idle == 1) $style = "color#5555;text-decoration: line-through;";
-      $result.= '<tr><td valign="middle" width="20px">';
-      $result.= formatIcon('Right', 16);
-      $result.= '</td><td>';
-      $result.=''.$res->getPhotoThumb(32).'&nbsp;</td><td style="'.$style.'">';
-      $result.=htmlDrawLink($res);
-      $result.='</td></tr>';
+    $clauseOrderBy="id DESC";
+    $resList=$this->getSqlElementsFromCriteria($crit, false,false,$clauseOrderBy);
+    $listVisibleLinkedObj = getUserVisibleObjectsList(get_class($this));
+    
+    $result = '<table width="99.9%">';
+    $result .= '<tr>';
+    if (!$print) {
+      $result .= '<td class="assignHeader smallButtonsGroup" style="width:5%">';
+      if (!$print ) {
+        $result .='<a onClick="addLinkObjectToObject(\'Team\',\'' . htmlEncode($team) . '\',\'' . get_class($this) .'\');" title="' . i18n('addLinkObject') . '" >'.formatSmallButton('Add').'</a>';
+      }
+      $result .= '</td>';
     }
-    $result .="</table>";
-    return $result; 
+    $result .= '<td class="assignHeader" style="width:5%">' . i18n('colId') . '</td>';
+    $result .= '<td class="assignHeader" style="width:' . (($print)?'45':'40') . '%">' . i18n('colName') . '</td>';
+    $result .= '<td class="assignHeader" style="width:' . (($print)?'5':'10') . '%">' . i18n('colIdle') . '</td>';
+    $result .= '</tr>';
+    $result .= '</tr>';
+    foreach ($resList as $res){
+      $result .= '<tr>';
+      if (!$print) {
+        $result .= '<td class="noteData smallButtonsGroup">';
+        if (!$print) {
+          if($res->idle==0) {
+                      $result .= ' <a onClick="removeLinkObjectFromObject(\'Team\',\'' . get_class($this) .'\',\'' . htmlEncode($res->id) . 
+                                                                    '\',\'' . htmlEncode(str_replace("'"," ",$res->name)) .
+                                                                  '\');" title="' . i18n('removeLinkObject') . '" > '.formatSmallButton('Remove').'</a>';
+          }
+        }
+        $result .= '</td>';
+      }
+      if (array_key_exists($res->id, $listVisibleLinkedObj)) {
+        $result .= '<td class="assignData" style="width:5%">#' . htmlEncode($res->id) . '</td>';
+        if (!$print and  securityCheckDisplayMenu(null, get_class($res)) and securityGetAccessRightYesNo('menu'.get_class($res), 'read', '') == "YES"){
+          $goto=' onClick="gotoElement(\''.get_class($res).'\',\'' . htmlEncode($res->id) . '\');" style="cursor: pointer;" ';
+        }
+        $result .= '<td  class="assignData hyperlink" style="width:' . (($print)?'45':'40') . '%">';
+        $result .= '      <div style="float:left !important"> ' . $res->getPhotoThumb(22).'</div>';
+         $result .='      <div style="padding-top:5px;">&nbsp;&nbsp;' . htmlEncode($res->name) . '</div>';
+        $result .='</td>';
+      } else {
+          $result .= '<td class="assignData" style="width:5%"></td>';
+          $result .= '<td class="assignData" style="width:' . (($print)?'45':'40') . '%">' . i18n('isNotVisible') . '</td>';        
+      }
+      $result .= '<td class="noteData" style="text-align:center">' . htmlDisplayCheckbox($res->idle) . '</td>';
+      $result .= '</tr>';
+    }
+    $result .= '</table>';
+    return $result;
   }
-  
+  //
   public function getPhotoThumb($size) {
   	$result="";
   	$radius=round($size/2,0);
