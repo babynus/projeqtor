@@ -5925,10 +5925,10 @@ public function getLastChangeTabForObject($obj,$lastChangeDate) {
   $stockDate=null;               
   $stockUser=null;
   $stockOper=null;
-  if (is_array($historyList) and is_object($historyList[0]))
+  if (is_array($historyList) and count($historyList)>0 and is_object($historyList[0]))
     $dateCmp = new DateTime($historyList[0]->operationDate);
   else
-    return $html . '</table>';
+    return $historyTabHtml . '</table>';
   foreach ( $historyList as $hist ) {
     if ($hist->operationDate<$lastChangeToShow) break;
     if (substr($hist->colName, 0, 24) == 'subDirectory|Attachment|'  or substr($hist->colName, 0, 18) == 'idTeam|Attachment|'
