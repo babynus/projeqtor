@@ -3012,6 +3012,7 @@ messageResourceDouble: "Ви не можете додати&#44; ресурс в
 messageSelectedNotAvailable: "Ви обрали '${1}'.<br/> Ця функція недоступна для цієї версії ProjeQtOr.<br/>Пробачте .&#58;",
 messageTextTooLong: "довжина поля ${1} перевищує ${2} символів",
 MessageType: "Тип Повідомлення",
+messageUnique: "Another item already exists with value '${2}' for unique field '${1}'",
 messageUpgradeMigration: "Оновлення натепер запущено&#44;<br/> Зачекайте&#44; доки не закінчиться",
 messageWrongRule: "правило повідомлення помилкове",
 Milestone: "Репер (віха&#44;етап)",
