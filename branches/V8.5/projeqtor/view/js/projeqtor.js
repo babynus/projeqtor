@@ -6993,3 +6993,14 @@ function expandOrganizationGroup(idOrganization, subOrganization,recSubOrganizat
     });
   }
 }
+
+function setProgress(){
+  var toRealised=dijit.byId('ActivityPlanningElement_toRealised').get("value");
+  var real=dijit.byId('ActivityPlanningElement_realised').get("value");
+  var result=0;
+  if( toRealised!=0 ){
+    var adv=parseFloat((real/toRealised)).toFixed(4);
+    result=((adv)*100);
+  }
+  return result;
+}
