@@ -166,8 +166,8 @@ if ($planningMode=='RECW') {
               <select dojoType="dijit.form.FilteringSelect" 
               <?php echo autoOpenFilteringSelect();?>
                 id="assignmentIdRole" name="assignmentIdRole"
-                class="input" 
-                onChange="assignmentChangeRole();" <?php echo ($realWork!=0 && $idRole)?"readonly=readonly":"";?>>                
+                class="input" required
+                onChange="enableWidget('dialogAssignmentSubmit');assignmentChangeRole();" <?php echo ($realWork!=0 && $idRole)?"readonly=readonly":"";?>>                
                  <?php 
                  if($mode=='edit'){
                    if($isSelectFonction == 'YES' and !$resource->isResourceTeam){
@@ -478,7 +478,7 @@ if ($planningMode=='RECW') {
         <button class="mediumTextButton" dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogAssignment').hide();">
           <?php echo i18n("buttonCancel");?>
         </button>
-        <button class="mediumTextButton" dojoType="dijit.form.Button" id="dialogAssignmentSubmit" type="submit" onclick="protectDblClick(this);saveAssignment();return false;">
+        <button class="mediumTextButton" dojoType="dijit.form.Button" id="dialogAssignmentSubmit" <?php if (!$idRole) echo 'disabled';?> type="submit" onclick="protectDblClick(this);saveAssignment();return false;">
           <?php echo i18n("buttonOK");?>
         </button>
       </td>
