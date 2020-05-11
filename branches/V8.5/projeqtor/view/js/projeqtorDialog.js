@@ -2703,10 +2703,12 @@ function assignmentChangeResource() {
   if (editAssignmentLoading)
     return;
   var idResource=dijit.byId("assignmentIdResource").get("value");
+  var isTeam=dojo.byId("isTeam").value;
+  var isOrganization=dojo.byId("isOrganization").value;
   if (!idResource) {return;}
   if (dijit.byId('assignmentDailyCost')) {dijit.byId('assignmentDailyCost').reset();}
   dojo.xhrGet({
-    url : '../tool/getSingleData.php?dataType=resourceRole&idResource='+idResource,
+    url : '../tool/getSingleData.php?dataType=resourceRole&idResource='+idResource+'&isTeam='+isTeam+'&isOrganization='+isOrganization,
     handleAs : "text",
     load : function(data) {
       //if (data) dijit.byId('assignmentCapacity').set('value', parseInt(data)); // Error fixed by PBER : we retreive an idRole (and must)
@@ -2748,6 +2750,7 @@ function assignmentChangeRole() {
     return;
   var idResource=dijit.byId("assignmentIdResource").get("value");
   var idRole=dijit.byId("assignmentIdRole").get("value");
+  if(!idRole.trim())disableWidget('dialogAssignmentSubmit');
   if (!idResource || !idRole)
     return;
   dojo.xhrGet({

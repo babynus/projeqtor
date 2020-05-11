@@ -4804,7 +4804,7 @@ abstract class SqlElement {
       foreach ( $relations as $object => $mode ) {
         if ($mode == "control" and ($canForceDelete or $canDeleteRealWork)) {
           $mode = "confirm";
-        } else if ($mode == "controlStrict") {
+        } else if ($mode == "controlStrict" and !$canDeleteRealWork) {
           $mode = "control";
         }
         if ($mode == "control" or $mode == "confirm") {
@@ -4856,14 +4856,20 @@ abstract class SqlElement {
               $objects .= "<br/>&nbsp;-&nbsp;" . i18n ( $object ) . " (" . $nb . ")";
             }
           }
-          if($object=='Work'){
-            $objList = $obj->getSqlElementsFromCriteria($crit);
-            if($canDeleteRealWork){
-              foreach ($objList as $work){
+          if($canDeleteRealWork){
+            $objList = $obj->getSqlElementsFromCriteria($crit,null,$where);
+            foreach ($objList as $objWork){
+              $work = new Work();
+              $refType=$object;
+              if(isset($objWork->refType)){
+                $refType=$objWork->refType;
+              }
+              $workList = $work->getSqlElementsFromCriteria(array('refType'=>$refType,'idProject'=>$objWork->idProject));
+              foreach ($workList as $work){
                 $realWorks .="<br/>&nbsp;-&nbsp;".i18n('realWorkElement',array($work->refType,SqlList::getNameFromId('Resource', $work->idResource),$work->displayWorkWithUnit($work->work),htmlFormatDateTime($work->inputDateTime)));
               }
             }
-          }
+         }
           if (get_class($this)=='Contact' and property_exists($obj,'idSponsor')) { 
             // Also search for sponsor
             $crit = array('idSponsor' => $this->id);

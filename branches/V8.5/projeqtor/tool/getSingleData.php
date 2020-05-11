@@ -50,9 +50,41 @@
       }
     } else if ($type=='resourceRole') {
       $idRes=RequestHandler::getId('idResource'); // validated to be numeric value in SqlElement base constructor.
+      $isTeam=RequestHandler::getBoolean('isTeam');
+      $isOrganization=RequestHandler::getBoolean('isOrganization');
       if (! $idRes) return;
-      $r=new ResourceAll($idRes);
-      echo $r->idRole;
+      if($isTeam){
+        $crit = array('idTeam'=>$idRes);
+      	$resourceList = SqlList::getListWithCrit('Resource', $crit);
+      	$roleArray = array();
+      	foreach ($resourceList as $id=>$name){
+      	  $res = new ResourceAll($id);
+      	  $roleArray[$res->idRole]= $res->idTeam;
+      	}
+      	if(count($roleArray) == 1){
+      	  $roleArray = array_flip($roleArray);
+      	  echo $roleArray[$idRes];
+      	}else{
+      	  return;
+      	}
+      }else if($isOrganization){
+        $crit = array('idOrganization'=>$idRes);
+        $resourceList = SqlList::getListWithCrit('Resource', $crit);
+        $roleArray = array();
+        foreach ($resourceList as $id=>$name){
+            $res = new ResourceAll($id);
+        	$roleArray[$res->idRole]= $res->idOrganization;
+        }
+        if(count($roleArray) == 1){
+            $roleArray = array_flip($roleArray);
+        	echo $roleArray[$idRes];
+        }else{
+      	  return;
+      	}
+      }else{
+        $r=new ResourceAll($idRes);
+        echo $r->idRole;
+      }
       return;
     } else if ($type=='resourceProfile') {
       $idRes=RequestHandler::getId('idResource'); // validated to be numeric value in SqlElement base constructor.
