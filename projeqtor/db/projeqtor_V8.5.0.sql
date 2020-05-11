@@ -118,7 +118,7 @@ CREATE TABLE `${prefix}inputmailbox` (
   `idleDate` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
-CREATE INDEX assetType ON `${prefix}inputmailbox` (idProject);
+CREATE INDEX inputmailboxProject ON `${prefix}inputmailbox` (idProject);
 
 CREATE TABLE `${prefix}inputmailboxhistory` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
