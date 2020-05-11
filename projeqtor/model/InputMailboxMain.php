@@ -74,6 +74,7 @@ class InputMailboxMain extends SqlElement {
       'totalInputTicket'=>'readonly',
       'failedRead'=>'hidden',
       'failedMessage'=>'hidden',
+      'limitOfInputPerHour'=>'required',
   );
   
   private static $_colCaptionTransposition = array(
@@ -115,6 +116,14 @@ class InputMailboxMain extends SqlElement {
         if($old->idProject != $this->idProject)$result .= '<br/>' . i18n ( 'projectIsAlreadyUsed' );
       }else{
         $result .= '<br/>' . i18n ( 'projectIsAlreadyUsed' );
+      }
+    }
+    //unicity global parameters
+    $emailHost=Parameter::getGlobalParameter('cronCheckEmailsHost'); // {imap.gmail.com:993/imap/ssl}INBOX';
+    $emailEmail=Parameter::getGlobalParameter('cronCheckEmailsUser');
+    if($emailHost and $emailEmail){
+      if($this->serverImap == $emailHost and $this->userImap == $emailEmail){
+        $result .= '<br/>' . i18n ( 'imapIsAlreadyUsed' );
       }
     }
     if ($defaultControl!='OK') {
