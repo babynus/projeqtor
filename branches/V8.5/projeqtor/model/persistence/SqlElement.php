@@ -4016,7 +4016,7 @@ abstract class SqlElement {
         }
       }
       $typeName='id' . get_class ( $this ) . 'Type';
-      if (get_class ( $this )) $typeName='idMeetingType';
+      if (get_class($this)=='PeriodicMeeting') $typeName='idMeetingType';
       if ($colName == 'idStatus' or $colName == $typeName or substr ( $colName, - 12 ) == 'PlanningMode') {
         $colScript .= '   getExtraRequiredFields();';
       }
