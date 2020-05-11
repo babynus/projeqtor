@@ -1597,7 +1597,13 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       } else if (substr($col, 0, 7)=='_label_') {
         $captionName=substr($col, 7);
         if (!$hide) {
-          echo '<label class="label shortlabel">'.i18n('col'.ucfirst($captionName)).'&nbsp;:&nbsp;</label>';
+          if($col=="_label_sizeAttachment1"){
+            echo '<label class="label">'.i18n('col'.ucfirst($captionName)).'</label>';
+          }elseif($col=="_label_sizeAttachment2"){
+            echo i18n('col'.ucfirst($captionName));
+          }else{
+            echo '<label class="label shortlabel">'.i18n('col'.ucfirst($captionName)).'&nbsp;:&nbsp;</label>';
+          }
         }
       } else if (substr($col, 0, 8)=='_button_') {
         if (!$print and !$comboDetail and !$obj->isAttributeSetToField($col, 'hidden') and !$hide) {
@@ -1860,24 +1866,24 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo '      <td style="text-align:right;  width:5%" class="tabLabel" >';
         echo '        <input onClick="changeValueSecurityConstraint(1);" type="radio" dojoType="dijit.form.RadioButton" '.(($val=='1')?'checked':'').' name="securityConstraintHidden" id="securityConstraint1" value="1" />';
         echo'       </td>';
-        echo '      <td style="text-align:left;" class="tabLabel" >';
-        echo '        <label>'.i18n('securityConstraint1').'</label>';
+        echo '      <td style="text-align:left;" >';
+        echo '        '.i18n('securityConstraint1');
         echo '      </td>';
         echo '    </tr>';
         echo '    <tr>';
         echo '      <td style="text-align:right; width:5%" class="tabLabel">';
         echo '        <input onClick="changeValueSecurityConstraint(2);" type="radio" dojoType="dijit.form.RadioButton" '.(($val=='2')?'checked':'').' name="securityConstraintHidden" id="securityConstraint2" value="2" />';
         echo'       </td>';
-        echo '      <td style="text-align:left;" class="tabLabel">';
-        echo '        <label>'.i18n('securityConstraint2').'</label>';
+        echo '      <td style="text-align:left;">';
+        echo '        '.i18n('securityConstraint2');
         echo '      </td>';
         echo '    </tr>';
         echo '    <tr>';
         echo '      <td style="text-align:right; width:5%" class="tabLabel">';
         echo '        <input onClick="changeValueSecurityConstraint(3);" type="radio" dojoType="dijit.form.RadioButton" '.(($val=='3')?'checked':'').' name="securityConstraintHidden" id="securityConstraint3" value="3" />';
         echo'       </td>';
-        echo '      <td style="text-align:left;" class="tabLabel">';
-        echo '        <label>'.i18n('securityConstraint3').'</label>';
+        echo '      <td style="text-align:left;">';
+        echo '        '.i18n('securityConstraint3');
         echo '      </td>';
         echo '    </tr>';
         echo '</table>';

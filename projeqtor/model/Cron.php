@@ -825,31 +825,24 @@ class Cron {
     $inputMb = new InputMailbox();
     $lstIMb = $inputMb->getSqlElementsFromCriteria(array('idle'=>'0'));
     $paramAttachDir=Parameter::getGlobalParameter('paramAttachmentDirectory');
-    if (substr($paramAttachDir,0,2)=='..') {
-      $curdir=dirname(__FILE__);
-      $paramAttachDir=str_replace(array('/model','\model'),array('',''),$curdir).substr($paramAttachDir,2);
-    }
-    $emailAttachmentsDir=((substr($paramAttachDir,-1)=='\\' or substr($paramAttachDir,-1)=="/")?$paramAttachDir:$paramAttachDir.$pathSeparator).'emails';
-    if (! file_exists($emailAttachmentsDir)) {
-      mkdir($emailAttachmentsDir,0777,true);
+    $pathSeparator=Parameter::getGlobalParameter('paramPathSeparator');
+    
+    $uploaddir = $paramAttachDir . $pathSeparator . "emails" . $pathSeparator;
+    if (! file_exists($uploaddir)) {
+      mkdir($uploaddir,0777,true);
     }
     
-    //imap default  {imap.projeqtor.org:143}INBOX test01@projeqtor.org test01ProjeQtOr
-    
-    //Parcours des Mailbox
+    //default imap  {imap.projeqtor.org:143}INBOX test01@projeqtor.org test01ProjeQtOr
     foreach ($lstIMb as $mb){
-      //$emailAttachmentsDir
       try {
-        $inputMailbox = new ImapMailbox($mb->serverImap,$mb->userImap,$mb->passwordImap,$emailAttachmentsDir,'utf-8');
+        $inputMailbox = new ImapMailbox($mb->serverImap,$mb->userImap,$mb->passwordImap,$uploaddir,'utf-8');
       }catch (Exception $e) {
         $mb->failedRead += 1;
         if($mb->failedRead == 2)$mb->idle = 1;
         $mb->save();
       }
       $mails = array();
-      // parcourir les mails non lu
       $mailsIds = $inputMailbox->searchMailBox('UNSEEN UNDELETED');
-      //Parcours des mails
       foreach ($mailsIds as $mailId){
         if($mb->idle==1)break;
         $result = "";
@@ -857,7 +850,6 @@ class Cron {
         $mail = $inputMailbox->getMail($mailId);
         $mailFrom = $mail->fromAddress;
         
-        //verifier les contraites de temps
         $limitOfInputPerHour = $mb->limitOfInputPerHour;
         $inputHistory = new InputMailboxHistory();
         $now = date('Y-m-d H:i:s');
@@ -872,14 +864,11 @@ class Cron {
           $failMessage = true;
         }
         
-        //Verifier les contraintes de sécurité
         $securityConstraint = $mb->securityConstraint;
-        //only for knows users
         if($securityConstraint == '2' or $securityConstraint == '3'){
           $res = new Resource();
           $emailExist = $res->getSqlElementsFromCriteria(array('email'=>$mail->fromAddress));
           if(!$emailExist)$result.= i18n('securityConstraint2');
-          //uniquement les gens allocate au projet
           if($securityConstraint == '3' and $emailExist){
             $aff= new Affectation();
             $affExist = $aff->countSqlElementsFromCriteria(array('idResource'=>$res->id,'idProject'=>$mb->idProject));
@@ -887,29 +876,20 @@ class Cron {
           }
         }
         
-        // SI PAS DE SUJET JE REFUSE
         if(!$mail->subject)$result = i18n('noSubject');
-        
-        $body=$mail->textPlain;
         $bodyHtml=$mail->textHtml;
-        if ($bodyHtml) {
-          $toText=new Html2Text($bodyHtml);
-          $body=$toText->getText();
-        }
         
-        //creer les tickets
         if($result == ""){
           $ticket = new Ticket();
           $ticket->name = $mail->subject;
           $ticket->idProject = $mb->idProject;
           $ticket->idTicketType = $mb->idTicketType;
           $ticket->idActivity = $mb->idActivity;
-          $ticket->idResolution = $mb->idAffectable;
-          if($body and $bodyHtml)$ticket->description = $body;
+          $ticket->idResource = $mb->idAffectable;
+          if($bodyHtml)$ticket->description = $bodyHtml;
           $idStatus = SqlElement::getFirstSqlElementFromCriteria('Status', array('idle'=>'0'));
           $ticket->idStatus = $idStatus->id;
           $ticket->save();
-          //Attachment
           if($mb->allowAttach==0){
             $sizeAttach = $mb->sizeAttachment;
             $listAtt = $mail->getAttachments();
@@ -917,16 +897,22 @@ class Cron {
               $attch = new Attachment();
               $attch->refType = 'Ticket';
               $attch->refId = $ticket->id;
-              $attch->fileName = $att->name;
-              $attch->subDirectory = $emailAttachmentsDir; 
+              $namefile = explode("\\", $att->filePath);
+              $nbNamefile = count($namefile);
+              $namefile = $namefile[$nbNamefile-1];
+              $attch->fileName = $namefile;
+              $attch->subDirectory = str_replace(Parameter::getGlobalParameter('paramAttachmentDirectory'),'${attachmentDirectory}',$uploaddir);
               $attch->creationDate = date('Y-m-d H:i:s');
+              $attch->fileSize = filesize($att->filePath);
+              $attch->mimeType = mime_content_type($att->filePath);
               //$attch->idUser
-              $attch->save();
+              if($sizeAttach-$attch->fileSize > 0){
+                $attch->save();
+              }
             }
           }
         }
         
-        //InputMailboxHistory
         $inputMailboxHistory = new InputMailboxHistory();
         $inputMailboxHistory->idInputMailbox = $mb->id;
         $inputMailboxHistory->title = $mail->subject;
@@ -940,7 +926,6 @@ class Cron {
         $inputMailboxHistory->result = $result;
         $inputMailboxHistory->save();
         
-        //Mise a jour MB
         $inputMailbox->markMailAsRead($mailId);
         if(!$failMessage){
           $mb->lastInputDate = date("Y-m-d");
