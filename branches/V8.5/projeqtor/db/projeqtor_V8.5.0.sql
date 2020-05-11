@@ -51,8 +51,8 @@ CREATE TABLE `${prefix}progress` (
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
 INSERT INTO `${prefix}progress` (`id`, `name`,  `sortOrder`, `idle`) VALUES
-(1,'manual',100,0),
-(2,'calculated',200,0);
+(1,'calculated',100,0),
+(2,'manual',200,0);
 
 CREATE TABLE `${prefix}weight` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
@@ -80,6 +80,7 @@ INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess
 INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES 
 (108, 'showIdle', 'boolean', 20, 0),
 (108, 'idProject', 'projectList', 10, 'currentProject');
+
 
 -- ======================================
 -- Email as ticket

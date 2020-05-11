@@ -231,6 +231,16 @@ class ActivityPlanningElementMain extends PlanningElement {
         }
       }
       if(!$asSon){
+        if(!$this->id or $this->idProgress=='' or $this->idWeight=='' ){
+          $this->idProgress=2;
+          $this->idWeight=1;
+          $this->toDeliver=0;
+          $this->toRealised=0;
+          $this->realised=0;
+          $this->rest=0;
+          $this->weight=0;
+          $this->uoProgress=0;
+        }
         self::$_fieldsAttributes['toDeliver']='';
         self::$_fieldsAttributes['toRealised']='';
         self::$_fieldsAttributes['realised']='';
@@ -240,13 +250,21 @@ class ActivityPlanningElementMain extends PlanningElement {
         self::$_fieldsAttributes['idProgress']='size1/3,';
         self::$_fieldsAttributes['idWeight']='size1/3,';
       }else{
+        if( $this->idProgress=='' or $this->idWeight=='' ){
+          $this->idProgress=1;
+          $this->idWeight=2;
+        }
+        if($this->uoProgress=='' or $this->weight==''){
+          $this->uoProgress=0;
+          $this->weight=0;
+        }
         unset($this->_tab_4_1_smallLabel_2);
         self::$_fieldsAttributes['uoProgress']='';
         self::$_fieldsAttributes['weight']='';
         self::$_fieldsAttributes['idProgress']='readonly,size1/3';
         self::$_fieldsAttributes['idWeight']='size1/3';
       }
-      if($this->idProgress!=1){
+      if($this->idProgress==1){
         self::$_fieldsAttributes['uoProgress']='readonly';
       }
       if($this->idWeight!=1){
