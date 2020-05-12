@@ -132,6 +132,13 @@ CREATE TABLE `${prefix}inputmailboxhistory` (
 
 ALTER TABLE `${prefix}type` ADD `canHaveSubActivity` int(1) unsigned DEFAULT NULL;
 
+INSERT INTO `${prefix}habilitationother` (idProfile, rightAccess, scope) VALUES
+(1,1,'changePriorityOther'),
+(3,1,'changePriorityOther');
+
+UPDATE `${prefix}habilitationother` SET scope='changePriorityProj'
+WHERE scope='changePriority';
+
 ALTER TABLE `${prefix}location` 
 ADD `designation` varchar(200) DEFAULT NULL,
 ADD `street` varchar(200) DEFAULT NULL,
