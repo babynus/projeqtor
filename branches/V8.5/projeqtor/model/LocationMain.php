@@ -36,6 +36,14 @@ class LocationMain extends SqlElement {
   public $sortOrder=0;
   public $idle;
   public $description;
+  public $_sec_Adress;
+  public $designation;
+  public $street;
+  public $complement;
+  public $zipCode;
+  public $city;
+  public $state;
+  public $country;
   
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="10%"># ${id}</th>
