@@ -1817,8 +1817,12 @@ class PlanningElement extends SqlElement {
       self::$_fieldsAttributes['expenseValidatedAmount']='';
     }
     
+    $paramPriorit='changePriorityOther';
+    if($this->refType=='Project'){
+      $paramPriorit='changePriorityProj';
+    }
     //damian
-    $priority=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$profile,'scope'=>'changePriority'));
+    $priority=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$profile,'scope'=>$paramPriorit));
     if ($priority and ($priority->rightAccess == 2 or ! $priority->id ) ) { // If selected NO or not set (default is NO)
     	self::$_fieldsAttributes['priority']='readonly';
     } else {
