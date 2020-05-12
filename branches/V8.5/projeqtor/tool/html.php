@@ -196,23 +196,10 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       $critArray['idVersionType'] = array_values($arrayType);        
     }
     $table=SqlList::getListWithCrit($listType,$critArray,$column,$selection);
-    if($col == 'idActivity'){
-      $activityTypeList = "(".implode(SqlList::getListWithCrit('ActivityType', array('canHaveSubActivity'=>'1', 'idle'=>'0'),'id')).")";
-      if ($activityTypeList=='()') $activityTypeList='(0)';
-      $activity = new Activity();
-      $critWhere = "idActivityType in $activityTypeList";
-      foreach ($critArray as $name=>$value){
-        $critWhere .= " and $name = $value";
-      }
-      $activityList = $activity->getSqlElementsFromCriteria(null,null,$critWhere);
-  	  foreach ($activityList as $id=>$act){
-  	    $table[$act->id]=$act->name;
-  	  }
-    }
     /*Florent 
      * Ticket 3868
      */
-    if($col=='idActivity'or $col=='idTicket'){
+    if($col == 'idActivity' or $col=='idTicket'){
       foreach ($table as $idTable=>$val){
         $table[$idTable]= SqlList::formatValWithId($idTable,$val);
       }
@@ -319,6 +306,23 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     $showIdleCriteria=$showIdle;
     if (! $obj and property_exists($listType, 'idProject'))  $showIdleCriteria=(! $limitToActiveProjects);
     $table=SqlList::getList($listType,$column,$selection, $showIdleCriteria );
+    if($col == 'idActivity'){
+      foreach ($table as $id=>$val){
+      	unset($table[$id]);
+      }
+      $activityTypeList = "(".implode(',',SqlList::getListWithCrit('Type', array('scope'=>'Activity','canHaveSubActivity'=>'1', 'idle'=>'0'),'id')).")";
+      if ($activityTypeList=='()') $activityTypeList='(0)';
+      $activity = new Activity();
+      $critWhere = "idActivityType in $activityTypeList";
+      for0each ($critArray as $crit=>$val){
+      	$critWhere .= " and $crit = $val";
+      }
+      $activityList = $activity->getSqlElementsFromCriteria(null,null,$critWhere);
+      foreach ($activityList as $id=>$act){
+      	$table[$act->id]=$act->name;
+      }
+      //if(isset($table[$obj->id]))unset($table[$obj->id]);
+    }
     if ($col=="idProject" or $col=="planning") { 
       // $wbsList will able to order list depending on WBS
     	$wbsList=SqlList::getList($listType,'sortOrder',$selection, (! $obj)?!$limitToActiveProjects:false );
@@ -341,7 +345,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       $refTable=$listType;
       if (substr($listType,-7)=='Version' and SqlElement::is_a($refTable, 'Version')) $refTable='Version';
       $table[$selection]=SqlList::getFieldFromId($refTable, $selection,$column);
-    } 
+    }
   }
   // Here $table is full with items to list
   $restrictArray=array();  // Prepare restriction array : if empty, no restriction will be applied, if not empty, will limit list the these items
@@ -862,6 +866,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
   if (isLeavesSystemActiv()) { $leaveProjectId = Project::getLeaveProjectId();}
   $group=null;
 // MTY - LEAVE SYSTEM
+
   foreach($table as $key => $val) {
     
     if($col =="idAsset"){

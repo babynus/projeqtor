@@ -130,29 +130,4 @@ CREATE TABLE `${prefix}inputmailboxhistory` (
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
-ALTER TABLE `${prefix}type` ADD `canHaveSubActivity` int(1) unsigned DEFAULT NULL;
-
-INSERT INTO `${prefix}habilitationother` (idProfile, rightAccess, scope) VALUES
-(1,1,'changePriorityOther'),
-(3,1,'changePriorityOther');
-
-UPDATE `${prefix}habilitationother` SET scope='changePriorityProj'
-WHERE scope='changePriority';
-
-ALTER TABLE `${prefix}location` 
-ADD `designation` varchar(200) DEFAULT NULL,
-ADD `street` varchar(200) DEFAULT NULL,
-ADD `complement` varchar(200) DEFAULT NULL,
-ADD `zipCode` varchar(200) DEFAULT NULL,
-ADD `city` varchar(200) DEFAULT NULL,
-ADD `state` varchar(200) DEFAULT NULL,
-ADD `country` varchar(200) DEFAULT NULL;
-
-ALTER TABLE `${prefix}asset` 
-ADD `warantyDurationM` int(12) unsigned DEFAULT NULL,
-ADD `warantyEndDate` date DEFAULT NULL,
-ADD `depreciationDurationY` int(4) unsigned DEFAULT NULL,
-ADD `needInsurance` int(1) unsigned DEFAULT '0',
-ADD `purchaseValueHTAmount` decimal(11,2) DEFAULT NULL,
-ADD `purchaseValueTTCAmount` decimal(11,2) DEFAULT NULL;
-      
+ALTER TABLE `${prefix}type` ADD `canHaveSubActivity` int(1) unsigned DEFAULT 1;
