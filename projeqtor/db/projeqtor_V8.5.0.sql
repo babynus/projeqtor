@@ -131,3 +131,13 @@ CREATE TABLE `${prefix}inputmailboxhistory` (
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
 ALTER TABLE `${prefix}type` ADD `canHaveSubActivity` int(1) unsigned DEFAULT NULL;
+
+ALTER TABLE `${prefix}location` 
+ADD `designation` varchar(200) DEFAULT NULL,
+ADD `street` varchar(200) DEFAULT NULL,
+ADD `complement` varchar(200) DEFAULT NULL,
+ADD `zipCode` varchar(200) DEFAULT NULL,
+ADD `city` varchar(200) DEFAULT NULL,
+ADD `state` varchar(200) DEFAULT NULL,
+ADD `country` varchar(200) DEFAULT NULL;
+      
