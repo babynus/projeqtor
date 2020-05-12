@@ -353,6 +353,79 @@
               </td>
             </tr>
             <?php }
+
+          //gautier #asset
+            if(property_exists($obj, 'warantyDurationM')){?>
+            <tr class="detail">
+              <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colWarantyDurationM');?>&nbsp;:&nbsp;</td>
+              <td>
+                <div dojoType="dijit.form.NumberTextBox" name="changeWarantyDurationM" id="changeWarantyDurationM"
+                 style="width:60px;" maxlength="10" maxSize="4" class="input" ></div>
+                 <?php echo i18n('shortMonth');?>
+              </td>
+            </tr>
+            <?php }
+            if(property_exists($obj, 'warantyEndDate')){?>
+            <tr class="detail">
+              <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('changeWarantyEndDate');?>&nbsp;:&nbsp;</td>
+              <td>
+                <div dojoType="dijit.form.DateTextBox" name="changeWarantyEndDate" id="changeWarantyEndDate"
+                <?php if (sessionValueExists('browserLocaleDateFormatJs')) {
+										echo ' constraints="{datePattern:\''.getSessionValue('browserLocaleDateFormatJs').'\'}" ';
+									}?>
+                 style="width:100px;" class="input" value="" ></div>
+              </td>
+            </tr>
+            <?php }
+            if(property_exists($obj, 'depreciationDurationY')){?>
+            <tr class="detail">
+              <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colDepreciationDurationY');?>&nbsp;:&nbsp;</td>
+              <td>
+                <div dojoType="dijit.form.NumberTextBox" name="changeDepreciationDurationY" id="changeDepreciationDurationY"
+                 style="width:60px;" maxlength="10" maxSize="4" class="input" ></div>
+                 <?php echo i18n('shortYear');?>
+              </td>
+            </tr>
+            <?php }
+            $currency=Parameter::getGlobalParameter('currency');
+            $currencyPosition=Parameter::getGlobalParameter('currencyPosition');
+            if(property_exists($obj, 'purchaseValueHTAmount')){?>
+            <tr class="detail">
+              <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colUntaxedAmount');?>&nbsp;:&nbsp;</td>
+              <td>
+                <?php if ($currencyPosition=='before') echo $currency;?>
+                <div dojoType="dijit.form.NumberTextBox" name="changePurchaseValueHTAmount" id="changePurchaseValueHTAmount"
+                 style="width:60px;" maxlength="10" maxSize="4" class="input" ></div>
+                 <?php if ($currencyPosition=='after') echo $currency;?>
+              </td>
+            </tr>
+           <?php }
+           if(property_exists($obj, 'purchaseValueTTCAmount')){?>
+             <tr class="detail">
+               <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colFullAmount');?>&nbsp;:&nbsp;</td>
+               <td>
+                 <?php if ($currencyPosition=='before') echo $currency;?>
+                 <div dojoType="dijit.form.NumberTextBox" name="changePurchaseValueTTCAmount" id="changePurchaseValueTTCAmount"
+                  style="width:60px;" maxlength="10" maxSize="4" class="input" ></div>
+                  <?php if ($currencyPosition=='after') echo $currency;?>
+               </td>
+             </tr>
+            <?php }
+          if(property_exists($obj, 'needInsurance')){?>
+          <tr class="detail">
+            <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colChangeNeedInsurance');?>&nbsp;:&nbsp;</td>
+            <td>
+              <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth-25;?>px;" 
+              <?php echo autoOpenFilteringSelect();?>
+               id="changeNeedInsurance" name="changeNeedInsurance">
+                <option value=""></option>
+                <option value="true"><?php echo i18n('checkBox');?></option>
+                <option value="false"><?php echo i18n('uncheckedBox');?></option>
+              </select>
+            </td>
+          </tr>
+         <?php }
+         //end gautier #asset
       // Resolution
             if (isDisplayable($obj,'idResolution')) {?>
             <tr class="detail">
