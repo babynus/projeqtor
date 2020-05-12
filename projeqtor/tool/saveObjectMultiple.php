@@ -203,7 +203,13 @@ $rate= trim(RequestHandler::getValue('rate_multiple'));
 $team=trim(RequestHandler::getValue('idTeam_multiple'));
 $changeStatusIdle=trim(RequestHandler::getValue('changeStatusIdle'));
 $changeIsLDAP=trim(RequestHandler::getValue('changeIsLDAP'));
-
+//gautier #asset
+$changeWarantyDurationM = trim(RequestHandler::getValue('changeWarantyDurationM'));
+$changeWarantyEndDate = trim(RequestHandler::getValue('changeWarantyEndDate'));
+$changeDepreciationDurationY = trim(RequestHandler::getValue('changeDepreciationDurationY'));
+$changePurchaseValueHTAmount = trim(RequestHandler::getValue('changePurchaseValueHTAmount'));
+$changePurchaseValueTTCAmount = trim(RequestHandler::getValue('changePurchaseValueTTCAmount'));
+$changeNeedInsurance = trim(RequestHandler::getValue('changeNeedInsurance'));
 // MTY - LEAVE SYSTEM
 $startDate = "";
 if (array_key_exists('startDate',$_REQUEST)) {
@@ -384,6 +390,30 @@ foreach ($selectList as $id) {
   	  if (strtolower($pe_validatedWork)=='null') $item->$pe->validatedWork=null;
   		else $item->$pe->validatedWork=Work::convertWork($pe_validatedWork);
   	}
+  }
+  //gautier #asset
+  if ($changeWarantyDurationM and property_exists($item,'warantyDurationM')) {
+    $item->warantyDurationM=$changeWarantyDurationM;
+  }
+  if ($changeWarantyEndDate and property_exists($item,'warantyEndDate')) {
+    $item->warantyEndDate=$changeWarantyEndDate;
+  }
+  if ($changeDepreciationDurationY and property_exists($item,'depreciationDurationY')) {
+    $item->depreciationDurationY=$changeDepreciationDurationY;
+  }
+  if ($changePurchaseValueHTAmount and property_exists($item,'purchaseValueHTAmount')) {
+    $item->purchaseValueHTAmount=$changePurchaseValueHTAmount;
+  }
+  if ($changePurchaseValueTTCAmount and property_exists($item,'purchaseValueTTCAmount')) {
+    $item->purchaseValueTTCAmount=$changePurchaseValueTTCAmount;
+  }
+  if ($changeNeedInsurance and property_exists($item,'needInsurance')) {
+    if($changeNeedInsurance=="true"){
+      $changeNeedInsurance=1;
+    }else{
+      $changeNeedInsurance=0;
+    }
+    $item->needInsurance=$changeNeedInsurance;
   }
 // MTY - LEAVE SYSTEM
   if ($startDate and property_exists($item,'startDate')) {

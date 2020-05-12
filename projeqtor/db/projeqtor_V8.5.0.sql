@@ -147,4 +147,12 @@ ADD `zipCode` varchar(200) DEFAULT NULL,
 ADD `city` varchar(200) DEFAULT NULL,
 ADD `state` varchar(200) DEFAULT NULL,
 ADD `country` varchar(200) DEFAULT NULL;
+
+ALTER TABLE `${prefix}asset` 
+ADD `warantyDurationM` int(12) unsigned DEFAULT NULL,
+ADD `warantyEndDate` date DEFAULT NULL,
+ADD `depreciationDurationY` int(4) unsigned DEFAULT NULL,
+ADD `needInsurance` int(1) unsigned DEFAULT '0',
+ADD `purchaseValueHTAmount` decimal(11,2) DEFAULT NULL,
+ADD `purchaseValueTTCAmount` decimal(11,2) DEFAULT NULL;
       
