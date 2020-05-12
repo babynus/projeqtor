@@ -2662,6 +2662,11 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $fieldWidth=$smallWidth;
         }
         
+        if ($dataType=='int' and (substr($col, -9, 9)=='DurationY') or (substr($col, -9, 9)=='DurationM')) {
+          $isDuration=true;
+          $fieldWidth=$smallWidth;
+        }
+        
         if (strtolower(substr($col, -8, 8))=='progress' or substr($col, -3, 3)=='Pct' or substr($col, -4, 4)=='Rate') {
           $isPercent=true;
           // ADD BY Marc TABARY - 2017-03-01 - DIM CORRECT Pct
@@ -2828,7 +2833,13 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           }
         }
         if ($isDuration) {
-          echo i18n("shortDay");
+          if((substr($col, -9, 9)=='DurationY')){
+            echo i18n("shortYear");
+          }elseif((substr($col, -9, 9)=='DurationM')){
+            echo i18n("shortMonth");
+          }else{
+            echo i18n("shortDay");
+          }
         }
         if ($isPercent) {
             echo '%&nbsp;';
