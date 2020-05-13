@@ -749,7 +749,20 @@ class ImputationLine {
 //         }
 //       }
       $idAssignDirectAcces = RequestHandler::getValue('idAssignment');
-      if (($line->refType=='Activity'&&!SqlList::getFieldFromId("Project", SqlList::getFieldFromId("Activity", $line->refId, "idProject"), 'isUnderConstruction'))||($line->refType!='Project'&&$line->refType!='Activity'&&!SqlList::getFieldFromId("Project", $line->idProject, "isUnderConstruction"))||($line->refType=='Project'&&!SqlList::getFieldFromId("Project", $line->refId, "isUnderConstruction"))) if (($line->refType=='Activity'&&SqlList::getFieldFromId("ProjectType", SqlList::getFieldFromId("Project", SqlList::getFieldFromId("Activity", $line->refId, "idProject"), "idProjectType"), 'code')!='TMP')||($line->refType!='Project'&&$line->refType!='Activity'&&SqlList::getFieldFromId("ProjectType", SqlList::getFieldFromId("Project", $line->idProject, "idProjectType"), 'code')!='TMP')||($line->refType=='Project'&&SqlList::getFieldFromId("ProjectType", SqlList::getFieldFromId("Project", $line->refId, "idProjectType"), 'code')!='TMP')) {
+      $isTemplate=false;
+      $isUnderConstruction=false;
+      if ($line->refType=='Project') $idProj=$line->refId;
+      else if ($line->refType=='Activity') $idProj=SqlList::getFieldFromId("Activity", $line->refId, "idProject");
+      else $idProj=$line->idProject;
+      if (SqlList::getFieldFromId("Project", $idProj, 'isUnderConstruction')) $isUnderConstruction=true;
+      $idProjType=SqlList::getFieldFromId("Project", $idProj, "idProjectType");
+      if (SqlList::getFieldFromId("ProjectType", $idProjType, 'code')=='TMP') $isTemplate=true;
+      if ( (! $isUnderConstruction and ! $isTemplate) or $line->realWork>0) {
+        if ($isUnderConstruction or $isTemplate) {
+          $locked=true;
+          if ($isUnderConstruction) $line->name.="<img style='float:left;position:relative;height:12px;margin-right:5px;' src='../view/img/private.png' title='".i18n('Project').' '.i18n('colIsUnderConstruction')."' />";
+          if ($isTemplate) $line->name.="<img style='float:left;position:relative;height:12px;margin-right:5px;' src='../view/img/private.png' title='".i18n('Project').' '.i18n('colTemplate')."' />";
+        }
         if ($locked) $line->locked=true;
         $nbLine++;
         if ($line->elementary) {
