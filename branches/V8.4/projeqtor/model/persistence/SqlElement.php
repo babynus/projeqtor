@@ -3049,7 +3049,7 @@ abstract class SqlElement {
               }
             }
           } else if (ucfirst ( $col_name ) == $col_name) {
-            if (! $withoutDependentObjects and substr(get_class($this),-4)!='Main') {
+            if (! $withoutDependentObjects ) {
               $this->{$col_name} = $this->getDependantSqlElement ( $col_name );
             }
           } else if (strpos ( $this->getFieldAttributes ( $col_name ), 'calculated' ) !== false) {} else {
@@ -3120,12 +3120,13 @@ abstract class SqlElement {
     $obj = new $objClass ( null, true );
     $obj->refId = $this->id;
     $obj->refType = get_class ( $this );
+    if (substr($obj->refType,-4)=='Main') $obj->refType=substr($obj->refType,0,-4);
     // If id is set, get the elements from Database
     if (($curId != null) and ($obj instanceof SqlElement)) {
       $obj->getSqlElement ( true );
       // set the reference data
       // build query
-      $query = "select id from " . $obj->getDatabaseTableName () . ' where refId =' . $curId . " and refType ='" . get_class ( $this ) . "'";
+      $query = "select id from " . $obj->getDatabaseTableName () . ' where refId =' . $curId . " and refType ='" . $obj->refType . "'";
       foreach ( $obj->getDatabaseCriteria () as $critFld => $critVal ) {
         $query .= ' and ' . $critFld . ' = ' . Sql::str ( $critVal );
       }
