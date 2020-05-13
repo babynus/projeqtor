@@ -721,7 +721,7 @@ class Consistency {
         ." sum(exp.plannedAmount) as sumplannedamount, sum(exp.realAmount) as sumrealamount,"
         ." sum(exp.plannedFullAmount) as sumplannedfullamount, sum(exp.realFullAmount) as sumrealfullamount"
         ." FROM $budTable bud, $expTable exp"
-        ." WHERE bud.elementary=1 and bud.id=exp.idBudgetItem"
+        ." WHERE bud.elementary=1 and bud.id=exp.idBudgetItem and exp.cancelled=0"
         ." GROUP BY bud.id, bud.usedAmount, bud.usedFullAmount,bud.billedAmount, bud.billedFullAmount"
         ." HAVING bud.usedAmount<>sum(exp.plannedAmount) or bud.usedFullAmount<>sum(exp.plannedFullAmount)"
         ." or bud.billedAmount<>sum(exp.realAmount) or bud.billedFullAmount<>sum(exp.realFullAmount)";
