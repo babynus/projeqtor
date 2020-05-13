@@ -49,10 +49,12 @@ $meet = new $assignmentRefType($assignmentRefId);
 $aff = new Affectation();
 //Flo #4020
 if($assignmentRefType == 'PeriodicMeeting'){
-  $critWhere="idle=0 AND idProject= $meet->idProject AND ( endDate >= '$meet->periodicityEndDate' OR endDate IS NULL ) ";
+  $meetDate=$meet->periodicityEndDate;
 }else{
-  $critWhere="idle=0 AND idProject= $meet->idProject AND ( endDate >= '$meet->meetingDate' OR endDate IS NULL ) ";
+  $meetDate=$meet->meetingDate
 }
+if (!$meetDate) $meetDate=date('Y-m-d');
+$critWhere="idle=0 AND idProject= $meet->idProject AND ( endDate >= '$meetDate' OR endDate IS NULL ) ";
 $list=$aff->getSqlElementsFromCriteria(null,false,$critWhere);
 //end flo
 $canUpdate=securityGetAccessRightYesNo('menuMeeting', 'update', $meet) == "YES";
