@@ -309,6 +309,7 @@ cantDeleteTheLeaveMngWorkflow: "Ne peut supprimer le workflow dédié au module 
 CantHaveMoreThatOneManagerAtTheSameTime: "Ne peut avoir qu'un gestionnaire en même temps",
 CantHaveSubActivity: "Cette activitée ne peut pas avoir de sous-activitée",
 CantHaveTwoContractsUnclosedForAnEmployee: "Ne peut avoir plus d'un contrat ouvert pour un employé",
+cantMoveActivityWithoutAffectedResource: "Vous ne pouvez pas déplacer l'activité sous un nouveau projet&#44 la ressource affectée n'est pas affecté",
 CantStartPMEndAMIfOneDay: "Une absence sur une seule journée ne peut pas commencer l'après-midi et finir le matin",
 cantTakeAStartDatePriorTo: "Ne peut prendre une date de début avant",
 cantTakeAStartDateSuperiorTo: "Ne peut prendre une date de début supérieure à",

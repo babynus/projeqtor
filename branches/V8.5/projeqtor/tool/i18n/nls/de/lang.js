@@ -309,6 +309,7 @@ cantDeleteTheLeaveMngWorkflow: "Can't delete the workflow dedicated to the leave
 CantHaveMoreThatOneManagerAtTheSameTime: "kann nicht mehr als einen Manager gleichzeitig haben",
 CantHaveSubActivity: "This acativity can't have sub-activity",
 CantHaveTwoContractsUnclosedForAnEmployee: "kann nicht mehr als einen geöffneten Vertrag für einen Mitarbeiter haben",
+cantMoveActivityWithoutAffectedResource: "You can not moving activity under new project the assigned resource is not allocated",
 CantStartPMEndAMIfOneDay: "Ich kann Nachmittag und Morgen nicht auswählen&#44 wenn das Startdatum ein ganzer Tag ist",
 cantTakeAStartDatePriorTo: "Can't take a start date prior to",
 cantTakeAStartDateSuperiorTo: "Can't take a start date superior to",
