@@ -36,7 +36,7 @@ class WorkElementMain extends SqlElement {
 	public $idActivity;
 	public $idProject;
 	public $refName;
-	public $_tab_3_1 = array('estimated', 'real','left','work');
+	public $_tab_3_1 = array('estimated', 'real','left','ticketWork');
 	public $plannedWork;
 	public $realWork;
 	public $leftWork;
