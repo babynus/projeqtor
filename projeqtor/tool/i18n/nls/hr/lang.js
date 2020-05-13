@@ -309,6 +309,7 @@ cantDeleteTheLeaveMngWorkflow: "Ne može izbrisati workflow posvećen modulu reg
 CantHaveMoreThatOneManagerAtTheSameTime: "Ne može imati više od jednog upravitelja u isto vrijeme",
 CantHaveSubActivity: "This acativity can't have sub-activity",
 CantHaveTwoContractsUnclosedForAnEmployee: "Ne može imati više od jednog otvorenog ugovora za zaposlenika",
+cantMoveActivityWithoutAffectedResource: "You can not moving activity under new project the assigned resource is not allocated",
 CantStartPMEndAMIfOneDay: "Odsutnost na jedan dan ne može započeti poslijepodne i završiti ujutro",
 cantTakeAStartDatePriorTo: "Ne može uzeti datum početka prije",
 cantTakeAStartDateSuperiorTo: "Početni datum ne može biti veći od",

@@ -333,6 +333,22 @@ class ActivityMain extends SqlElement {
           $result .= '<br/>' . i18n ( 'cantAssociateAnActivityWithLeadProject' );
       }
     }
+    //Gautier #2505
+    if ($this->id && $old->idProject != $this->idProject) {
+      $ass = new Assignment();
+      $lstAss = $ass->getSqlElementsFromCriteria(array('idProject'=>$old->idProject,'refType'=>'Activity','refId'=>$this->id));
+      foreach ( $lstAss as $as){
+        $proj = new Project($this->idProject,true);
+        $topProject = $proj->getTopProjectList(true);
+        $aff = new Affectation();
+        $where = " idResource = ".$as->idResource." and idProject in " . transformValueListIntoInClause($topProject);
+        $affExist = $aff->countSqlElementsFromCriteria(null,$where);
+        if(!$affExist){
+          $result .= '<br/>' . i18n ( 'cantMoveActivityWithoutAffectedResource' );
+          break;
+        }
+      }
+    }
     
 // MTY - LEAVE SYSTEM
     if (isLeavesSystemActiv()) {
