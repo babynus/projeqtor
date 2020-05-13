@@ -2781,14 +2781,14 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           if(($isAmount or $isCost) and !in_array($col,$arrayPossibleNegativeAmounts) and $classObj != 'Bill'){
               echo ' constraints="{min:0,max:'.$max.(($isAmount)?',places:2':'').'}" ';
           } else if( ! in_array($col,$arrayPossibleNegativeAmounts) or $col=='minimumThreshold'){
-              echo ' constraints="{min:0,max:'.$max.',places:'.$dec.'}" ';
+              echo ' constraints="{min:0,max:'.$max.',places:\'0,'.$dec.'\'}" ';
           } else {
             echo ' constraints="{min:-'.$max.',max:'.$max.(($isAmount)?',places:2':'').'}" ';
           }
         } else if ($isAmount) {
           echo ' constraints="{places:2}" ';
         } else if ($dec>0) {
-          echo ' constraints="{places:'.$dec.'}" ';
+          echo ' constraints="{places:\'0,'.$dec.'\'}" ';
           debugLog("$col accepts $dec decimals");
         }
         echo ' class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" ';
