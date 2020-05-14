@@ -1584,12 +1584,14 @@ class PlannedWork extends GeneralWork {
           $select->endDate=$ass->plannedEndDate;
           if (isset($ura['SELECTED'])) $select->selected=1;
           else $select->selected=0;
+          $select->_noHistory=true;
           $select->save();
         }
       }
     }
     // save Assignment
     foreach ($arrayAssignment as $ass) {
+      $ass->_noHistory=true;
       $ass->simpleSave(); // Attention ! simpleSave for Assignment will execute direct query
     }
     
@@ -1608,9 +1610,11 @@ class PlannedWork extends GeneralWork {
       if (!$pe->refType) continue;
       if ($pe->refType!='Project' and $pe->idProject) $arrayProj[$pe->idProject]=$pe->idProject;
       if (property_exists($pe,'_profile') and $pe->_profile=='RECW') { 
+        $pe->_noHistory=true;
         $resPe=$pe->simpleSave();
         PlanningElement::updateSynthesis($pe->refType, $pe->refId);
       } else {
+        $pe->_noHistory=true;
    	    $resPe=$pe->simpleSave(); // Attention ! simpleSave for PlanningElement will execute direct query
       }
    	  if ($pe->refType=='Milestone' and method_exists($pe, "updateMilestonableItems")) {
@@ -1620,6 +1624,17 @@ class PlannedWork extends GeneralWork {
     foreach ($arrayProj as $idP) {
       Project::unsetNeedReplan($idP);
     }
+    // Save history for planning operation
+    $hist=new History();
+    $hist->idUser=getCurrentUserId();
+    $hist->newValue=transformListIntoInClause($arrayProj);
+    $hist->operationDate=date('Y-m-d');
+    $hist->operation="plan";
+    $hist->refType='Project';
+    $hist->refId=0;
+    $resHist=$hist->save();
+    debugLog($resHist);
+    
     $messageOn = false;
     $endTime=time();
     $endMicroTime=microtime(true);

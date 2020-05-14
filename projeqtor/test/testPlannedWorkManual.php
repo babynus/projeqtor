@@ -31,6 +31,9 @@ include_once("../tool/projeqtor.php");
 </head>
 <body id="body" class="tundra <?php echo getTheme();?>">
 <div class="centerDiv" style="width:100%;height:100%;overflow-y:auto;overflow-x:hidden;padding:30px 50px;" id="centerDiv">
+<h1>MODALITES</h1>
+<?php InterventionMode::drawList();?>
+
 <h1>TEST SAISIE INTERVENTION</h1>
 <?php 
 PlannedWorkManual::setSize(30);
@@ -40,7 +43,7 @@ PlannedWorkManual::drawTable('intervention',$listResource, '202006', false);
 
 <h1>TEST ASSIGNATION</h1>
 <?php 
-PlannedWorkManual::setSize(22);
+PlannedWorkManual::setSize(20);
 $listMonth=array('202005','202006','202007','202008','202009','202010');
 PlannedWorkManual::drawTable('assignment',1, $listMonth, false);
 ?>
