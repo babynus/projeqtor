@@ -169,7 +169,7 @@ CREATE TABLE `${prefix}plannedworkmanual` (
   `idResource` int(12) unsigned NOT NULL,
   `idProject` int(12) unsigned NOT NULL,
   `refType`  varchar(100) DEFAULT NULL,
-  `refId` int(12) unsigned NOT NULL,
+  `refId` int(12) unsigned DEFAULT NULL,
   `idAssignment` int(12) unsigned default NULL,
   `work` NUMERIC(8,5) UNSIGNED,
   `workDate` date DEFAULT NULL,
@@ -199,14 +199,15 @@ CREATE INDEX plannedworkmanualAssignment ON `${prefix}plannedworkmanual` (idAssi
 CREATE TABLE `${prefix}interventionmode` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
+  `letter` varchar(3) DEFAULT NULL,
   `sortOrder` int(3) unsigned DEFAULT NULL,
   `idle` int(1) unsigned DEFAULT '0',
   `idleDate` date DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
-INSERT INTO `${prefix}interventionmode` (name, sortOrder) VALUES
-('Teleworking',10),
-('On remote site',20),
-('On-call duty',30),
-('Hotline',40);
+INSERT INTO `${prefix}interventionmode` (name, letter, sortOrder) VALUES
+('Teleworking','T',10),
+('On remote site','R',20),
+('On-call duty','C',30),
+('Hotline','H',40);
