@@ -38,6 +38,9 @@ class Approver extends SqlElement {
   public $idAffectable;
   public $approved;
   public $approvedDate;
+  public $disapproved;
+  public $disapprovedDate;
+  public $disapprovedComment;
   public $idle;
 
   

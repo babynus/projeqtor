@@ -35,10 +35,21 @@ if (! array_key_exists('approverId',$_REQUEST)) {
 }
 $approverId=$_REQUEST['approverId'];
 $approverId=htmlspecialchars($approverId,ENT_QUOTES,'UTF-8');
+$action=RequestHandler::getValue('action');
+$comment=RequestHandler::getValue('disapproveDescription');
 
 $approver=new Approver($approverId);
-$approver->approved=1;
-$approver->approvedDate=date('Y-m-d H:i');
+if($action=='approved'){
+  $approver->approved=1;
+  $approver->approvedDate=date('Y-m-d H:i');
+  $approver->disapproved=0;
+  $approver->disapprovedDate=null;
+  $approver->disapprovedComment=null;
+}else{
+  $approver->disapproved=1;
+  $approver->disapprovedDate=date('Y-m-d H:i');
+  $approver->disapprovedComment=$comment;
+}
 Sql::beginTransaction();
 $result=$approver->save();
 

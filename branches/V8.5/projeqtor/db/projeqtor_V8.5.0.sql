@@ -130,7 +130,7 @@ CREATE TABLE `${prefix}inputmailboxhistory` (
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
-ALTER TABLE `${prefix}type` ADD `canHaveSubActivity` int(1) unsigned DEFAULT 1;
+ALTER TABLE `${prefix}type` ADD `canHaveSubActivity` int(1) unsigned DEFAULT '1';
 
 INSERT INTO `${prefix}habilitationother` (idProfile, rightAccess, scope) VALUES
 (1,1,'changePriorityOther'),
@@ -155,4 +155,11 @@ ADD `depreciationDurationY` int(4) unsigned DEFAULT NULL,
 ADD `needInsurance` int(1) unsigned DEFAULT '0',
 ADD `purchaseValueHTAmount` decimal(11,2) DEFAULT NULL,
 ADD `purchaseValueTTCAmount` decimal(11,2) DEFAULT NULL;
+
+ALTER TABLE `${prefix}approver` 
+ADD `disapproved` int(1) unsigned DEFAULT '0',
+ADD `disapprovedDate` datetime default NULL,
+ADD `disapprovedComment` varchar(400) default NULL;
+
+ALTER TABLE `${prefix}documentversion` ADD `disapproved` int(1) unsigned DEFAULT '0';
       

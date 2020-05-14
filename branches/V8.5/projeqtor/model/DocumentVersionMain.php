@@ -51,6 +51,7 @@ class DocumentVersionMain extends SqlElement {
   public $description;
   public $isRef;
   public $approved;
+  public $disapproved;
   public $importFile;
   public $target;
   public $idle;
@@ -307,15 +308,21 @@ class DocumentVersionMain extends SqlElement {
     $list=$app->getSqlElementsFromCriteria($crit);
     if (count($list)==0) {
       $approved=0;
+      $disapproved=0;
     } else {
 	    $approved=1;
+	    $disapproved=0;
     	foreach ($list as $app) {
-	      if (! $app->approved) {
+	      if (! $app->approved and !$disapproved) {
 	        $approved=0;
+	      }
+	      if ($app->disapproved) {
+	      	$disapproved=1;
 	      }
 	    }
     }
     $this->approved=$approved;
+    $this->disapproved=$disapproved;
     $this->save();
   }
   
