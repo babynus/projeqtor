@@ -163,3 +163,50 @@ ADD `disapprovedComment` varchar(400) default NULL;
 
 ALTER TABLE `${prefix}documentversion` ADD `disapproved` int(1) unsigned DEFAULT '0';
       
+-- Planned Work Manual
+CREATE TABLE `${prefix}plannedworkmanual` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `idResource` int(12) unsigned NOT NULL,
+  `idProject` int(12) unsigned NOT NULL,
+  `refType`  varchar(100) DEFAULT NULL,
+  `refId` int(12) unsigned NOT NULL,
+  `idAssignment` int(12) unsigned default NULL,
+  `work` NUMERIC(8,5) UNSIGNED,
+  `workDate` date DEFAULT NULL,
+  `day`  varchar(8),
+  `week` varchar(6),
+  `month` varchar(6),
+  `year` varchar(4),
+  `dailyCost` NUMERIC(7,2) DEFAULT NULL,
+  `cost` NUMERIC(11,2) DEFAULT NULL,
+  `period` varchar(2),
+  `inputUser` int(12) unsigned DEFAULT NULL,
+  `inputDateTime` datetime DEFAULT NULL,
+  `idInterventionMode` int(12) unsigned DEFAULT NULL,
+  `idWork` int(12) unsigned DEFAULT NULL,
+  `idPlannedWork` int(12) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+
+CREATE INDEX plannedworkmanualDay ON `${prefix}plannedworkmanual` (day);
+CREATE INDEX plannedworkmanualWeek ON `${prefix}plannedworkmanual` (week);
+CREATE INDEX plannedworkmanualMonth ON `${prefix}plannedworkmanual` (month);
+CREATE INDEX plannedworkmanualYear ON `${prefix}plannedworkmanual` (year);
+CREATE INDEX plannedworkmanualRef ON `${prefix}plannedworkmanual` (refType, refId);
+CREATE INDEX plannedworkmanualResource ON `${prefix}plannedworkmanual` (idResource);
+CREATE INDEX plannedworkmanualAssignment ON `${prefix}plannedworkmanual` (idAssignment);    
+      
+CREATE TABLE `${prefix}interventionmode` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `sortOrder` int(3) unsigned DEFAULT NULL,
+  `idle` int(1) unsigned DEFAULT '0',
+  `idleDate` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+
+INSERT INTO `${prefix}interventionmode` (name, sortOrder) VALUES
+('Teleworking',10),
+('On remote site',20),
+('On-call duty',30),
+('Hotline',40);
