@@ -3130,7 +3130,6 @@ abstract class SqlElement {
       foreach ( $obj->getDatabaseCriteria () as $critFld => $critVal ) {
         $query .= ' and ' . $critFld . ' = ' . Sql::str ( $critVal );
       }
-      debugLog($query);
       $result = Sql::query ( $query );
       // if no element in database, will return empty object
       //

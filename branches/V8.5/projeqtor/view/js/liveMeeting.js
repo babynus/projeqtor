@@ -644,3 +644,43 @@ function hideCounters(){
   liveMeetingResizeEditor();
 }
 
+function addNewLinkMeeting (item,comboName,idProj){
+  var objName=dijit.byId(item).get('value');
+  if(!objName)return;
+  var objClass=item.substring(3);
+  if(objName && objClass){
+    dojo.byId('comboName').value=comboName;
+    dojo.byId('comboClass').value=objClass;
+    showWait();
+    dojo.xhrPost({
+          url : "../tool/saveLiveMeetingAttachment.php?objectClass="+objClass+'&objName='+objName+'&idProj='+idProj,
+          form :null,
+          handleAs : "text",
+          load : function(data, args) {
+            var contentWidget=dijit.byId("resultDivMain");
+            if (!contentWidget) {
+              return;
+            }
+            contentWidget.set('content', data);
+            var lastOperationStatus=window.top.dojo
+                .byId('lastOperationStatus');
+            var lastSaveId=window.top.dojo.byId('lastSaveId');
+            console.log(lastSaveId);
+            console.log(lastOperationStatus);
+            if (lastOperationStatus.value == "OK") {
+              selectDetailItem(lastSaveId.value,objName);
+            }
+            hideWait();
+          },
+          error : function() {
+            hideWait();
+          }
+        });
+
+    }
+  
+}
+
+
+
+

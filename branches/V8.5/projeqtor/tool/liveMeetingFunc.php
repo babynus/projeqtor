@@ -24,6 +24,11 @@ function generateAttachment($type,$meeting,$last=false){
 	echo '<td width="33%" style="position:relative;min-width:300px;padding:5px;border-radius:10px;height:100%;background-color:#EEE;vertical-align:top;">'
         .'<div style="height:38px;width:32px">'.formatIcon($type,32,null,false).'</div>'
         .'<div class="messageData" style="position:absolute;background:url();border:0;top:7px;left:50px;font-size:200%;">'.i18n('menu'.$type).'</div>'
+        .'<div style="top:14px;left:55%;width:40%;position:absolute;" dojoType="dijit.layout.ContentPane">'
+        .'<div style="float:left;max-width:150px;" dojoType="dijit.form.TextBox" id="new'.$type.'" name="new'.$type.'" ></div>'
+        .'<a id="addLink"  onClick="addNewLinkMeeting(\'new'.$type.'\',\'refreshBottom'.$type.'\','.$meeting->idProject.');" title="'. i18n('addLink') .'" >'
+        .formatSmallButton('Add')
+        .'</a></div>'
         .'';
   echo '<table style="width:100%"><tr>'
     .'<td class="linkHeader" style="width:5%"><a class="roundedButtonSmall" onClick="dijit.byId(\'refreshBottom'.$type.'\').set(\'value\',\'\');showDetail(\'refreshBottom'.$type.'\',1,\''.$type.'\');" title="' . i18n('addLink') . '" >'
