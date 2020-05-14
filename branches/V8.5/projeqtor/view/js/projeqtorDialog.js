@@ -2382,14 +2382,33 @@ function removeApprover(approverId, approverName) {
   showConfirm(msg, actionOK);
 }
 
-function approveItem(approverId) {
+function approveItem(approverId, action) {
+  var form = null;
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
     return;
   }
-  loadContent("../tool/approveItem.php?approverId=" + approverId, "resultDivMain",
-      null, true, 'approver');
+  if(action=='disapproved'){
+	  form='confirmDisapproveForm';
+  }
+  loadContent("../tool/approveItem.php?approverId="+approverId+"&action="+action, "resultDivMain",form, true, 'approver');
 }
+
+function disapproveItem(approverId){
+	var params = "&approverId="+approverId;
+	loadDialog('dialogConfirmDisapprove',null, true, params, false);
+}
+
+function enableConfirmDisapproveSubmit(value){
+	var value = dijit.byId('disapproveDescription').get('value');
+	console.log(value);
+	if(value != ""){
+		enableWidget('dialogConfirmDisapproveSubmit');
+	}else{
+		disableWidget('dialogConfirmDisapproveSubmit');
+	}
+}
+
 // =============================================================================
 // = Origin
 // =============================================================================

@@ -3302,6 +3302,8 @@ function drawDocumentVersionFromObject($list, $obj, $refresh=false) {
     echo '<td class="assignData">'.(($version->isRef)?'<b>':'').htmlEncode($version->name).(($version->isRef)?'</b>':'');
     if ($version->approved) {
       echo '&nbsp;&nbsp;<img src="../view/img/check.png" height="12px" title="'.i18n('approved').'"/>';
+    }else if ($version->disapproved) {
+      echo '&nbsp;&nbsp;<img src="../view/img/uncheck.png" height="12px" title="'.i18n('disapproved').'"/>';
     }
     echo '</td>';
     echo '<td class="assignData">'.htmlFormatDate($version->versionDate).'</td>';
@@ -5750,37 +5752,66 @@ function drawApproverFromObject($list, $obj, $refresh=false) {
     echo '<td class="dependencyData">'.htmlEncode($appName).'</td>';
     echo '<td class="dependencyData">';
     $approved=0;
+    $disapproved=0;
     $compMsg="";
-    $date="";
+    $approvedDate="";
+    $disapprovedDate="";
     $approverId=null;
     if ($obj and get_class($obj)=='Document') {
       $crit=array('refType'=>'DocumentVersion', 'refId'=>$obj->idDocumentVersion, 'idAffectable'=>$app->idAffectable);
       $versApp=SqlElement::getSingleSqlElementFromCriteria('Approver', $crit);
       if ($versApp->id) {
         $approved=$versApp->approved;
+        $disapproved=$versApp->disapproved;
         $compMsg=' '.$docVers->name;
-        $date=" (".htmlFormatDateTime($versApp->approvedDate, false).")";
+        $approvedDate=" (".htmlFormatDateTime($versApp->approvedDate, false).")";
+        $disapprovedDate=" (".htmlFormatDateTime($versApp->disapprovedDate, false).")";
         $approverId=$versApp->id;
       }
     } else {
       $approved=$app->approved;
+      $disapproved=$app->disapproved;
       $approverId=$app->id;
-      $date=" (".htmlFormatDateTime($app->approvedDate, false).")";
+      $approvedDate=" (".htmlFormatDateTime($app->approvedDate, false).")";
+      $disapprovedDate=" (".htmlFormatDateTime($app->disapprovedDate, false).")";
     }
-    if ($approved) {
+    echo '<table style="width:100%"><tr>';
+    if ($approved and !$disapproved) {
+      echo '<td>';
       echo '<img src="../view/img/check.png" height="12px"/>&nbsp;';
-      echo i18n("approved").$compMsg.$date;
+      echo i18n("approved").$compMsg.$approvedDate;
+      echo '</td>';
+    }else if(!$approved and $disapproved){
+      echo '<td><img src="../view/img/uncheck.png" height="12px"/></td>';
+      echo '<td>'.i18n("disapproved").$compMsg.$disapprovedDate.'&nbsp;'.formatCommentThumb($versApp->disapprovedComment).'</td>';
+      if ($user->id==$app->idAffectable and !$print and $versApp->id) {
+      	echo '<td><button dojoType="dijit.form.Button" showlabel="true" >';
+      	echo i18n('approveNow');
+      	echo '  <script type="dojo/connect" event="onClick" args="evt">';
+      	echo '   approveItem('.$approverId.', \'approved\');';
+      	echo '  </script>';
+      	echo '</button></td>';
+      }
     } else {
+      echo '<td>';
       echo i18n("notApproved").$compMsg;
       if ($user->id==$app->idAffectable and !$print and $versApp->id) {
         echo '&nbsp;&nbsp;<button dojoType="dijit.form.Button" showlabel="true" >';
         echo i18n('approveNow');
         echo '  <script type="dojo/connect" event="onClick" args="evt">';
-        echo '   approveItem('.$approverId.');';
+        echo '   approveItem('.$approverId.', \'approved\');';
+        echo '  </script>';
+        echo '</button>';
+        echo '&nbsp;&nbsp;<button dojoType="dijit.form.Button" showlabel="true" >';
+        echo i18n('disapproveNow');
+        echo '  <script type="dojo/connect" event="onClick" args="evt">';
+        echo '   disapproveItem('.$approverId.');';
         echo '  </script>';
         echo '</button>';
       }
+      echo '</td>';
     }
+    echo '</tr></table>';
     echo '</td>';
     echo '</tr>';
   }
