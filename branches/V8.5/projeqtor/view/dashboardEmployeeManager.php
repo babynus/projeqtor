@@ -166,13 +166,9 @@
                              onclick="nextPrevYearDashboardEmployeeManager(-1,<?php echo $firstYear; ?>,<?php echo $lastYear; ?>)"
                              title="<?php echo i18n("previous"); ?>"
                              style="width:16px; height:16px; cursor:pointer;position:relative;top:5px;">
-                        <select id="yearSelect"
-                                name="yearSelect"
-                                dojoType="dijit.form.FilteringSelect" 
-                                data-dojo-id="yearSelect"
-                                class="input generalColClass Class"
-                                xlabelType="html"
-                                style="width:80px;font-weight:bold;text-align:center;"
+                        <select id="yearSelect" name="yearSelect" dojoType="dijit.form.FilteringSelect"  data-dojo-id="yearSelect"
+                                class="filterField roundedLeft"  xlabelType="html" style="width:80px;font-weight:bold;text-align:center;"
+                                <?php  echo autoOpenFilteringSelect();?>
                         >
                         <?php
                             for($i=$firstYear; $i<=$lastYear;$i++) {
@@ -198,19 +194,15 @@
                 <!------------------>
                 <!-- SELECT MONTH -->
                 <!------------------>
-                <td style="width:150px;">
-                    <div style="width:150px; margin:0 auto;">
+                <td style="width:170px;">
+                    <div style="width:170px; margin:0 auto;">
                         <img id="monthPrev" name = "monthPrev" src="css/images/left.png" 
                              onclick="nextPrevMonthDashboardEmployeeManager(-1)"
                              title="<?php echo i18n("previous"); ?>"
                              style="width:16px; height:16px; cursor:pointer;position:relative;top:5px;">
-                        <select id="monthSelect"
-                                name="monthSelect"
-                                dojoType="dijit.form.FilteringSelect" 
-                                data-dojo-id="monthSelect"
-                                class="input generalColClass Class"
-                                xlabelType="html"
-                                style="width:100px;font-weight:bold;text-align:center;"
+                        <select id="monthSelect" name="monthSelect" dojoType="dijit.form.FilteringSelect"  data-dojo-id="monthSelect"
+                                class="filterField roundedLeft"  xlabelType="html" style="width:100px;font-weight:bold;text-align:center;"
+                                <?php  echo autoOpenFilteringSelect();?>
                         >
                         <?php
                             $monthArray= getArrayMonth(null);
@@ -220,7 +212,7 @@
                                     echo " SELECTED ";
                                 }
                                 echo '>';
-                                echo '  <span >'. strtoupper($name) . '</span>';
+                                echo '  <span >'. $name . '</span>';
                                 echo '</option>';
                             }
                         ?>        
@@ -237,18 +229,14 @@
                 <!--------------------->
                 <!-- SELECT EMPLOYEE -->
                 <!--------------------->
-                <td width="200px">
-                    <div style="width:205px; margin:0 auto;">
+                <td width="240px">
+                    <div style="width:240px; margin:0 auto;">
                         <label style="text-shadow: none;width:80px;"
                                for='employeeSelect'><?php echo (i18n("colIdEmployee"));?> : 
                         </label>
-                        <select id="employeeSelect"
-                                name="employeeSelect"
-                                dojoType="dijit.form.FilteringSelect" 
-                                data-dojo-id="employeeSelect"
-                                class="input generalColClass Class"
-                                xlabelType="html"
-                                style="width:120px;"
+                        <select id="employeeSelect" name="employeeSelect" dojoType="dijit.form.FilteringSelect" 
+                                data-dojo-id="employeeSelect" class="filterField roundedLeft" xlabelType="html" style="width:120px;"
+                                <?php  echo autoOpenFilteringSelect();?>
                         >
                         <?php 
                             echo '<option value="0"';
@@ -273,18 +261,14 @@
                 <!----------------------->
                 <!-- SELECT LEAVE TYPE -->
                 <!----------------------->
-                <td width="200px">
-                    <div style="width:205px; margin:0 auto;">
+                <td width="240px">
+                    <div style="width:240px; margin:0 auto;">
                         <label style="text-shadow: none;width:80px;"
                                for='leaveTypeSelect'><?php echo (i18n("colType"));?> : 
                         </label>
-                        <select id="leaveTypeSelect"
-                                name="leaveTypeSelect"
-                                dojoType="dijit.form.FilteringSelect" 
-                                data-dojo-id="leaveTypeSelect"
-                                class="input generalColClass Class"
-                                xlabelType="html"
-                                style="width:120px;"
+                        <select id="leaveTypeSelect" name="leaveTypeSelect" dojoType="dijit.form.FilteringSelect"  data-dojo-id="leaveTypeSelect"
+                                class="filterField roundedLeft" xlabelType="html" style="width:120px;"
+                                <?php  echo autoOpenFilteringSelect();?>
                         >
                         <?php 
                             echo '<option value="0"';
@@ -309,20 +293,17 @@
                 <!------------------->
                 <!-- SELECT STATUS -->
                 <!------------------->
-                <td width="200px">
-                    <div style="width:210px; margin:0 auto;">
+                <td width="240px">
+                    <div style="width:240px; margin:0 auto;">
                         <label style="text-shadow: none;width:80px;"
                                for='leaveStatusSelect'><?php echo (i18n("colIdStatus"));?> : 
                         </label>
-                        <select id="leaveStatusSelect"
-                                name="leaveStatusSelect"
-                                dojoType="dijit.form.FilteringSelect" 
-                                data-dojo-id="leaveStatusSelect"
-                                class="input generalColClass Class"
-                                xlabelType="html"
-                                style="width:120px;"
+                        <select id="leaveStatusSelect" name="leaveStatusSelect" dojoType="dijit.form.FilteringSelect" 
+                                data-dojo-id="leaveStatusSelect" class="filterField roundedLeft" xlabelType="html" style="width:120px;"
+                                <?php  echo autoOpenFilteringSelect();?>
                         >
                         <?php 
+                        
                             echo '<option value="0"';
                             if ($idStatusRequest==0) {
                                 echo ' SELECTED ';
@@ -349,15 +330,14 @@
         <!--------------------------------->
         <!-- LIST OF EXISTING LEAVE TYPE -->
         <!--------------------------------->
-        <table>
-            <th class="label"><b><?php echo (i18n("colType")); ?> : </b></th>
+        <table style="margin-top:10px;margin-bottom:5px;font-size:12px;">
+            <th class="label" style="font-size:13px;"><b><?php echo (i18n("colType")); ?> : </b></th>
             <?php
                 foreach($leaveTypes as $lvt) {
                     $textColor = oppositeColor($lvt->color);
                     $echo  = '<td>&nbsp;</td>';
-                    $echo .= '<td ';
-                    $echo .= 'style="background-color:'.$lvt->color.';color:'.$textColor.';">';
-                    $echo .= ' <span class="leaveType">&nbsp;'.$lvt->name.'&nbsp;</span>';
+                    $echo .= '<td>';
+                    $echo .= ' <span class="leaveType" style="background-color:'.$lvt->color.';color:'.$textColor.';">&nbsp;'.$lvt->name.'&nbsp;</span>';
                     $echo .= '</td>';
                     echo $echo;
                 }
@@ -366,8 +346,8 @@
         <!------------------------------------------------------->
         <!-- LIST OF STATUS OF WORKFLOW DEDICATED TO THE LEAVE -->
         <!------------------------------------------------------->                
-        <table>
-            <th class="label"><b><?php echo (i18n("colIdStatus")); ?> : </b></th>
+        <table style="font-size:12px;margin-bottom:5px;">
+            <th class="label" style="font-size:13px;"><b><?php echo (i18n("colIdStatus")); ?> : </b></th>
             <td></td>
             <td>
                 <?php
@@ -393,50 +373,59 @@
                 }
             ?>
         </table>
-        <table style="width:100%; height:90%;text-align:center;">
-            <tr style="height:100%;width:100%;vertical-align:top;border: solid 1pt;">
+        <table style="width:100%; height:90%;text-align:center;border-top:1px solid black;">
+            <tr style="height:100%;width:100%;vertical-align:top;">
                 <!------------------------->
                 <!-- THE LEAVES CALENDAR -->
                 <!------------------------->
-                <td style="width:60%;border: solid 1pt;">
-                    <table style="height:5%;vertical-align:top;text-align:center;">
+                <td style="width:60%;">
+                    <table style="height:5%;vertical-align:top;text-align:center;margin-bottom:15px;">
                         <!----------->
                         <!-- TITLE -->
                         <!----------->
-                        <td style="width:20%;">
+                        <td style="width:20%;font-size:12px;">
                             <b><?php echo (i18n("leaveCalendar")); ?></b>
                         </td>
-                        <td style="width:30%;">
-                            <?php echo i18n("leaveRequestAfterLeaveDate");?>&nbsp;:&nbsp;
-                            <img src="<?php echo $imgDelay;?>" style="width:16px;height:16px;">
+                        <td style="width:30%;font-size:12px;">
+                          <div style="margin-left:20%;">
+                            <table>
+                              <tr>
+                                <td><?php echo i18n("leaveRequestAfterLeaveDate");?></td>
+                                <td width="30px"><img src="<?php echo $imgDelay;?>" style="width:16px;height:16px;left:5px;"></td>
+                              </tr>
+                            </table>
+                          </div>
                         </td>
                         <!--------------------->
                         <!-- EXPORT TO EXCEL -->
                         <!--------------------->
-                        <td style="width:10%;"><b><?php echo (i18n("dialogExport")); ?></b>
-                            <div style="width:150px; margin:0 auto;">
-                                <button id="exportLeaveCalendar" dojoType="dijit.form.Button"
-                                        showlabel="false"
-                                        title="<?php echo i18n('buttonExcel');?>"
-                                        iconClass="dijitButtonIcon dijitButtonIconExcel" class="detailButton">
-                                    <script type="dojo/connect" event="onClick" args="evt">
-                                        exportLeaveCalendarOfDashboardEmployeeManager();
-                                    </script>
-                                </button>
-                            </div>
-                        </td>
+                        <td style="width:10%;font-size:12px">
+                          <table>
+                              <tr>
+                                <td><b><?php echo (i18n("dialogExport")); ?></b></td>
+                                <td><div style="width:50px; margin:0 auto;">
+                                      <button id="exportLeaveCalendar" dojoType="dijit.form.Button"showlabel="false"
+                                        title="<?php echo i18n('buttonExcel');?>"iconClass="dijitButtonIcon dijitButtonIconExcel" class="detailButton">
+                                        <script type="dojo/connect" event="onClick" args="evt">
+                                          exportLeaveCalendarOfDashboardEmployeeManager();
+                                        </script>
+                                      </button>
+                                    </div>
+                                </td>
+                              </tr>
+                            </table>
                     </table>
                     <!---------------------->
                     <!-- CALENDAR CONTENT -->
                     <!---------------------->
-                    <table style="vertical-align:top;text-align:center;">
+                    <table style="margin-left:20px;vertical-align:top;text-align:center;">
                         <!------------>
                         <!-- HEADER -->
                         <!------------>
                         <tr style="height:15px;">
                             <td rowspan="2" class="assignHeader"><?php echo (i18n("Employee")); ?></td>
                             <?php
-                                $extraStyleOffDay = "color:white; background-color:black !important;";
+                                $extraStyleOffDay = " background-color:#E7E7E7 !important;";
                                 for($i=1;$i<=31;$i++) {
                                     $extraStyle = "";
                                     $htmlClass="linkData";
@@ -708,7 +697,7 @@
                             ?>
                     </table>
                 </td>    
-                <td style="width:40%;border: solid 1pt;">
+                <td style="width:39%;">
                     <table style="width:100%;">
                         <!------------------->
                         <!-- THE SYNTHESIS -->
@@ -1062,6 +1051,8 @@
                         
                         
                     </table>
+                </td>
+                <td width="1%">
                 </td>    
             </tr>
         </table>    
