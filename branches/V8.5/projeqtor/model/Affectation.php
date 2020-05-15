@@ -402,7 +402,14 @@ public $_noCopy;
       }
     }
     
-     
+    //gautier #4495
+    $nbAff = $this->countSqlElementsFromCriteria(array('idResource'=>$this->idResource,'idProject'=>$this->idProject));
+    if($nbAff<2){
+      $ass = new Assignment();
+      $listAss = $ass->countSqlElementsFromCriteria(array('idResource'=>$this->idResource,'idProject'=>$this->idProject,'idle'=>'0'));
+      if($listAss>0)$result.='<br/>' . i18n('assignmentsStillExist');
+    }
+    
     if (! $result) {
       $result=parent::deleteControl();
     }
