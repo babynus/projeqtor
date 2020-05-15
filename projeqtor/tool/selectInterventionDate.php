@@ -33,36 +33,114 @@ require_once "../tool/projeqtor.php";
 $date=RequestHandler::getDatetime('date');
 $resource=RequestHandler::getId('resource');
 $period=RequestHandler::getValue('period');
-if ($period!='AM' and $period!='PM') {
+if ($period!='AM' and $period!='PM' and $period!='AMX' and $period!='PMX') {
   traceLog("saveInterventionDate.php incorrect period '$period'");
   exit;
 }
 $idMode=RequestHandler::getValue('idMode');
-if ($idMode and $idMode!='none' and ! is_numeric($idMode)) {
+if ($idMode and ! is_numeric($idMode)) {
   traceLog("saveInterventionDate.php incorrect idMode '$idMode'");
   exit;
 }
 $letterMode=RequestHandler::getValue('letterMode');
-if ($letterMode!='none' and strlen($letterMode)>3) {
+if ($letterMode!='' and strlen($letterMode)>3) {
   traceLog("saveInterventionDate.php incorrect letterMode '$letterMode'");
   exit;
 }
+$refType=RequestHandler::getClass('refType');
+$refId=RequestHandler::getId('refId');
+$allDay=false;
+if (substr($period,-1)=="X") {
+  $allDay=true;
+  $period=substr($period,0,2);
+  $periodx=($period=='AM')?'PM':'AM';
+}
 $pwm=SqlElement::getSingleSqlElementFromCriteria('PlannedWorkManual', array('workDate'=>$date,'idResource'=>$resource,'period'=>$period));
+if ($allDay) $pwmx=SqlElement::getSingleSqlElementFromCriteria('PlannedWorkManual', array('workDate'=>$date,'idResource'=>$resource,'period'=>$periodx));
 Sql::beginTransaction();
 if (!$pwm->id) {
   $pwm->setDates($date);
   $pwm->idResource=$resource;
+  $pwm->period=$period;
 }
-if ($idMode!='none' and $idMode) {
-  if ($pwm->idInterventionMode==$idMode) {$pwm->idInterventionMode=null;}
-  else {$pwm->idInterventionMode=$idMode;}
+if ($allDay and !$pwmx->id) {
+  $pwmx->setDates($date);
+  $pwmx->idResource=$resource;
+  $pwmx->period=$periodx;
+}
+if ($refType and $refId and $idMode) {
+  if ($pwm->refType==$refType and $pwm->refId==$refId and $pwm->idInterventionMode==$idMode) {
+    $pwm->refType=null;
+    $pwm->refId=null;
+    $pwm->work=null;
+    $pwm->idInterventionMode=null;
+    if ($allDay) {
+      $pwmx->refType=null;
+      $pwmx->refId=null;
+      $pwmx->work=null;
+      $pwmx->idInterventionMode=null;
+    }
+  } else {
+    $pwm->refType=$refType;
+    $pwm->refId=$refId;
+    $pwm->work=0.5;
+    $pwm->idInterventionMode=$idMode;
+    if ($allDay) {
+      $pwmx->refType=$refType;
+      $pwmx->refId=$refId;
+      $pwmx->work=0.5;
+      $pwmx->idInterventionMode=$idMode;
+    }
+  }
+} else if ($idMode) {
+  if ($pwm->idInterventionMode==$idMode) {
+    $pwm->idInterventionMode=null;
+    if ($allDay) {
+      $pwmx->idInterventionMode=null;
+    }
+  } else {
+    $pwm->idInterventionMode=$idMode;
+    if ($allDay) {
+      $pwmx->idInterventionMode=$idMode;
+    }
+  }
+} else if ($refType and $refId) {
+  if ($pwm->refType==$refType and $pwm->refId==$refId) {
+    $pwm->refType=null;
+    $pwm->refId=null;
+    $pwm->work=null;
+    if ($allDay) {
+      $pwmx->refType=null;
+      $pwmx->refId=null;
+      $pwmx->work=null;
+    }
+  } else {
+    $pwm->refType=$refType;
+    $pwm->refId=$refId;
+    $pwm->work=0.5;
+    if ($allDay) {
+      $pwmx->refType=$refType;
+      $pwmx->refId=$refId;
+      $pwmx->work=0.5;
+    }
+  }
 }
 $pwm->inputUser=getCurrentUserId();
 $pwm->inputDateTime=date('Y-m-d H:i:s');
+if ($allDay) {
+  $pwmx->inputUser=getCurrentUserId();
+  $pwmx->inputDateTime=date('Y-m-d H:i:s');
+}
 if (!$pwm->idInterventionMode and !$pwm->refType and !$pwm->refId) {
   $result=$pwm->delete();
+  if ($allDay) {
+    $pwmx->delete();
+  }
 } else {
   $result=$pwm->save();
+  if ($allDay) {
+    $pwmx->save();
+  }
 }
 
 // Message of correct saving

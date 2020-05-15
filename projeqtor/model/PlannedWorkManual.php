@@ -105,12 +105,101 @@ class PlannedWorkManual extends GeneralWork {
     return $result;
   }
   
-  function save() {
-    
+  public function delete() {
+    debugLog("DELETE");
+    $old=$this->getOld();
+    $result=parent::delete();
+    if ($old->refType) {
+      // Save planned work depending on work type
+      $old->saveWork();
+    }
+    return $result;
+  }
+  
+  public function save() {
+    debugLog("SAVE");
+    $old=$this->getOld();
+    if ($this->refType) {
+      $refType=$this->refType;
+      $item=new $refType($this->refId);
+      $this->idProject=$item->idProject;
+    }
+    $result=parent::save();
+    if ($this->refType) {
+      // Save planned work depending on work type
+      $this->saveWork();
+    }
+    if ($old->refType and ($old->refType!=$this->refType or $old->refId!=$this->refId)) {
+      $old->work=0;
+      $old->saveWork();
+    }
+    return $result;
+  }
+  public function simpleSave() {
     return parent::save();
-    // Save planned work depending on work type
-    $type=getWorkType();
-    $w=($type='real')?new Work():new PlannedWork(); 
+  }
+  
+  function saveWork() {
+    debugLog("saveWork");
+    $type=self::getWorkType();
+    $wClass=($type=='real')?'Work':'PlannedWork';
+    debugLog("PlannedWorkManuel::save() - will save $wClass");
+    $w=new $wClass();
+    $critAss=array('idResource'=>$this->idResource, 'refType'=>$this->refType, 'refId'=>$this->refId);
+    $crit=array('workDate'=>$this->workDate, 'idResource'=>$this->idResource, 'refType'=>$this->refType, 'refId'=>$this->refId);
+    $sum=$this->sumSqlElementsFromCriteria('work', $crit);
+    $workList=$w->getSqlElementsFromCriteria($crit,true);
+    if (count($workList)>1) {
+      traceLog("ERROR - PlannedWorkManuel::save() : found more than one $wClass");
+      traceLog($crit);
+    }
+    $work=reset($workList);
+    if ($sum==0) {
+      if ($work->id) {
+        $workResult=$work->delete();
+        debugLog("PlannedWorkManuel::save() - delete $wClass : $workResult");
+      }
+    } else {
+      $ass=new Assignment();
+      $assList=$ass->getSqlElementsFromCriteria($critAss,true);
+      if (count($assList)>1) {
+        traceLog("ERROR - PlannedWorkManuel::save() : found more than one Assignment");
+        traceLog($critAss);
+      }
+      $ass=reset($assList);
+      if (!$ass->id) {
+        $ass->idProject=$this->idProject;
+        $assResult=$ass->save();
+        debugLog("PlannedWorkManuel::save() - save Assignment : $assResult");
+      }
+      $work->work=$sum;
+      $work->idProject=$this->idProject;
+      $work->setDates($this->workDate);
+      $work->idAssignment=$ass->id;
+      $workResult=$work->save();
+      debugLog("PlannedWorkManuel::save() - save $wClass : $workResult");
+      if (!$this->idAssignment or $this->idAssignment!=$ass->id) {
+        $this->idAssignment=$ass->id;
+        $this->simpleSave();
+      }
+    }
+    if ($this->idAssignment) {
+      $this->updateAssignment();
+    }
+  }
+  public function updateAssignment() {
+    if (!$this->idAssignment) return;
+    $ass=new Assignment($this->idAssignment);
+    $crit=array('refType'=>$this->refType, 'refId'=>$this->refId, 'idResource'=>$this->idResource);
+    $pw=new PlannedWork();
+    $w=new Work();
+    $realwork=$w->sumSqlElementsFromCriteria('work', $crit);
+    $plannedwork=$pw->sumSqlElementsFromCriteria('work', $crit);
+    $ass->assignedWork=$plannedwork+$realwork;
+    $ass->leftWork=$plannedwork;
+    $ass->realWork=$realwork;
+    $resAss=$ass->save();
+    debugLog("Save Assignment : $resAss");
   }
   
   
@@ -141,7 +230,8 @@ class PlannedWorkManual extends GeneralWork {
     $lstPwm=$pwm->getSqlElementsFromCriteria(null,null,$crit);
     $exist=array();
     foreach ($lstPwm as $pwm) {
-        $exist[$pwm->workDate]=array($pwm->period=>array('refType'=>$pwm->refType,'refId'=>$pwm->refId,'mode'=>$pwm->idInterventionMode));
+        if (!isset($exist[$pwm->workDate])) $exist[$pwm->workDate]=array();
+        $exist[$pwm->workDate][$pwm->period]=array('refType'=>$pwm->refType,'refId'=>$pwm->refId,'mode'=>$pwm->idInterventionMode);
     }
     for ($i=1;$i<=$max;$i++) {
       if ($i>$lastDay) {
@@ -177,9 +267,9 @@ class PlannedWorkManual extends GeneralWork {
       echo '<table style="width:100%;height:100%">';
       $color=getForeColor($colorAM);
       $cursor="pointer";
-      echo '<tr style="height:'.$midSize.'px;"><td onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'AM\')" style="cursor:'.$cursor.';width:100%;background:'.$colorAM.';border-bottom:1px solid #e0e0e0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterAM.'</div></td></tr>';
+      echo '<tr style="height:'.$midSize.'px;"><td onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'AM\',event)" style="cursor:'.$cursor.';width:100%;background:'.$colorAM.';border-bottom:1px solid #e0e0e0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterAM.'</div></td></tr>';
       $color=getForeColor($colorPM);
-      echo '<tr style="height:'.$midSize.'px;"><td onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'PM\')" style="cursor:'.$cursor.';width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterPM.'</div></td></tr>';
+      echo '<tr style="height:'.$midSize.'px;"><td onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'PM\',event)" style="cursor:'.$cursor.';width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterPM.'</div></td></tr>';
       echo '</table>';  
       echo '</td>';
     }
@@ -269,6 +359,50 @@ class PlannedWorkManual extends GeneralWork {
     }
   }
   
+  public static function drawActivityTable($monthYear=null) {
+    $crit=array('idPlanningMode'=>23,'idle'=>'0');
+    $pe=new PlanningElement();
+    $list=$pe->getSqlElementsFromCriteria($crit);
+    $nameWidth=250;
+    $idWidth=20;
+    $nbDays=31;
+    $year=null;
+    $projList=array();
+    if ($monthYear) {
+      $monthYear=str_replace('-','',$monthYear);
+      $year=substr($monthYear,0,4);
+      $month=substr($monthYear,4);
+      $nbDays=lastDayOfMonth(intval($month),$year);
+    }
+    echo '<table>';
+    echo '<tr>';
+    echo '<td class="reportTableHeader" style="width:'.$nameWidth.'px">'.i18n('Project').'</td>';
+    echo '<td class="reportTableHeader" style="width:'.($nameWidth+($idWidth*2)).'px" colspan="3">'.i18n('Activity').'</td>';
+    echo '<td class="reportTableHeader" style="width:'.$idWidth.'px">'.i18n('unitCapacity').'</td>';
+    if ($monthYear) {
+      
+    }
+    
+    echo '</tr>';
+    foreach ($list as $pe) {
+      if (!isset($projList[$pe->idProject])) {
+        $proj=new Project($pe->idProject,true);
+        $projList[$pe->idProject]=$proj->name;
+      }
+      $badgeSize=self::$_size-4;
+      $colorBadge='<div style="border-radius:'.($badgeSize/2+2).'px;border:1px solid #e0e0e0;width:'.$badgeSize.'px;height:'.$badgeSize.'px;float:left;background-color:'.self::getColor($pe->refType,$pe->refId).'" ></div>';
+      echo '<tr style="cursor:pointer" class="dojoxGridRow" onClick="selectInterventionActivity(\''.$pe->refType.'\','.$pe->refId.','.$pe->id.');">';
+      echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.$nameWidth.'px">'.$projList[$pe->idProject].'</td>';
+      echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.($idWidth).'px" >#'.$pe->refId.'</td>';
+      echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-right:0;width:'.($idWidth).'px" >'.$colorBadge.'</td>';
+      echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-left:0;width:'.($nameWidth).'px" >'.$pe->refName.'</td>';
+      echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.$idWidth.'px">'.'todo'.'</td>';
+      echo '</tr>';
+    }
+    echo '</table>';
+    echo '<input type="text" id="interventionActivityType" value="" style="width:80px;background:#ffe0e0" />';
+    echo '<input type="text" id="interventionActivityId" value="" style="width:30px;background:#ffe0e0" />';
+  }
   public static function setSize($size) {
     if ($size<20) {
       debugLog("PlannedWorkManual::setSize($size) cannot set less than 20");

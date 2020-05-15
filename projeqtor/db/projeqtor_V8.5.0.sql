@@ -211,3 +211,6 @@ INSERT INTO `${prefix}interventionmode` (name, letter, sortOrder) VALUES
 ('On remote site','R',20),
 ('On-call duty','C',30),
 ('Hotline','H',40);
+
+INSERT INTO `${prefix}planningmode` (`id`, `applyTo`, `name`, `code`, `sortOrder`, `idle`, `mandatoryStartDate`, `mandatoryEndDate`) VALUES
+(23, 'Activity', 'PlanningModeManual', 'MAN', 900, 0 , 0, 0);

@@ -25,14 +25,17 @@ include_once("../tool/projeqtor.php");
   <script type="text/javascript" src="../external/dojo/projeqtorDojo.js?version=<?php echo $version;?>"></script>
   <script type="text/javascript">
   dojo.addOnLoad(function(){
-    console.log("Hello World");
+    // alert("Hello World");
   });
   </script>
 </head>
 <body id="body" class="tundra <?php echo getTheme();?>">
 <div class="centerDiv" style="width:100%;height:100%;overflow-y:auto;overflow-x:hidden;padding:30px 50px;" id="centerDiv">
+<h2><?php echo i18n('helpInterventionInput');?></h2>
 <h1>MODALITES</h1>
 <?php InterventionMode::drawList();?>
+<h1>ACTIVITES</h1>
+<?php PlannedWorkManual::drawActivityTable();?>
 <h1>TEST SAISIE INTERVENTION</h1>
 <div id="plannedWorkManualInterventionDiv">
 <?php 
@@ -43,9 +46,9 @@ PlannedWorkManual::setSize($size);
 PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, false);
 ?>
 </div>
-<input type='text' id="plannedWorkManualInterventionSize" value="<?php echo $size;?>" />
-<input type='text' id="plannedWorkManualInterventionResourceList" value="<?php echo implode(',',$listResource);?>" />
-<input type='text' style="width:500px" id="plannedWorkManualInterventionMonthList" value="<?php echo implode(',',$listMonth);?>" />
+<input type='text' id="plannedWorkManualInterventionSize" value="<?php echo $size;?>" style="background:#ffe0e0"/>
+<input type='text' id="plannedWorkManualInterventionResourceList" value="<?php echo implode(',',$listResource);?>" style="background:#ffe0e0"/>
+<input type='text' style="width:500px;background:#ffe0e0" id="plannedWorkManualInterventionMonthList" value="<?php echo implode(',',$listMonth);?>" />
 <h1>TEST ASSIGNATION ADMIN</h1>
 <div id="plannedWorkManualAssignmentDiv">
 <?php 
@@ -56,9 +59,9 @@ PlannedWorkManual::setSize($size);
 PlannedWorkManual::drawTable('assignment',$listResource, $listMonth, false);
 ?>
 </div>
-<input type='text' id="plannedWorkManualAssignmentSize" value="<?php echo $size;?>" />
-<input type='text' id="plannedWorkManualAssignmentResourceList" value="<?php echo implode(',',$listResource);?>" />
-<input type='text' style="width:500px" id="plannedWorkManualAssignmentMonthList" value="<?php echo implode(',',$listMonth);?>" />
+<input type='text' id="plannedWorkManualAssignmentSize" value="<?php echo $size;?>" style="background:#ffe0e0"/>
+<input type='text' id="plannedWorkManualAssignmentResourceList" value="<?php echo implode(',',$listResource);?>" style="background:#ffe0e0"/>
+<input type='text' style="width:500px;background:#ffe0e0" id="plannedWorkManualAssignmentMonthList" value="<?php echo implode(',',$listMonth);?>" />
 <br/><br/><input type="text" id="selectInterventionDataResult" value="" style="width:800px;background:#ffe0e0" />
 </div>
 
