@@ -76,16 +76,10 @@
                     <!-- Manager => List of managed employees -->
                     <?php if ($isManager) {?>
                     <div style="width:500px; margin:0 auto;">
-                        <label style="text-shadow: none;"
-                               for='leaveEmployee'><?php echo i18n("selectAnEmployee");?> : 
+                        <label style="text-shadow: none;font-size:12px;width:165px;" for='leaveEmployee'><?php echo i18n("selectAnEmployee");?> : 
                         </label>
-                        <select id="leaveEmployeeSelect"
-                                name="leaveEmployeeSelect"
-                                dojoType="dijit.form.FilteringSelect" 
-                                data-dojo-id="leaveEmployeeSelect"
-                                class="input generalColClass Class"
-                                xlabelType="html"
-                                style="width:200px;"
+                        <select id="leaveEmployeeSelect" ame="leaveEmployeeSelect" dojoType="dijit.form.FilteringSelect"  data-dojo-id="leaveEmployeeSelect"
+                                class="filterField roundedLeft"  style="width:200px;"
                         >
                         <?php 
                             $employeeList = getUserVisibleResourcesList(true, "List",'', false,true,true,true);
@@ -109,11 +103,11 @@
 <!--------------------------------->
 <!-- LIST OF EXISTING LEAVE TYPE -->
 <!--------------------------------->
-    <table>
+    <table style="margin-top:5px;margin-bottom:5px;font-size:13px;">
         <?php
             foreach($leaveTypes as $lvt) {
                 $textColor = oppositeColor($lvt->color);
-                echo '<td style="background-color:'.$lvt->color.';color:'.$textColor.';"><span class="leaveType">&nbsp;'.$lvt->name.'&nbsp;</span></td>';
+                echo '<td><span class="leaveType" style="background-color:'.$lvt->color.';color:'.$textColor.';">&nbsp;'.$lvt->name.'&nbsp;</span></td>';
             }
         ?>
     </table>
@@ -121,8 +115,8 @@
 <!-------------------------------->
 <!-- TAG FOR THE LEAVE CALENDAR -->
 <!-------------------------------->
-        <tr style="height:70%;width:100%;vertical-align:top;border: solid 1pt;">
-            <td colspan="2" style="width:50%;border: solid 1pt;">
+        <tr style="height:70%;width:100%;vertical-align:top;">
+            <td colspan="2" style="width:50%;">
                 
                 <div style="position:relative;width:100%;height:90%">
                     <div id="calendarNode"></div>                        
@@ -216,13 +210,13 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <button data-dojo-type="dijit/form/Button" data-dojo-id="validateButtonCalendarPopup" type="button"><?php echo i18n("buttonValid"); ?></button>
+                              <button data-dojo-type="dijit/form/Button" data-dojo-id="cancelButtonCalendarPopup" type="button"><?php echo i18n("buttonCancel"); ?></button>
                             </td>
                             <td colspan="2">
                                 <button data-dojo-type="dijit/form/Button" data-dojo-id="deleteButtonCalendarPopup" type="button"><?php echo i18n("buttonErase"); ?></button>
                             </td>  
                             <td colspan="2">
-                                <button data-dojo-type="dijit/form/Button" data-dojo-id="cancelButtonCalendarPopup" type="button"><?php echo i18n("buttonCancel"); ?></button>
+                               <button data-dojo-type="dijit/form/Button" data-dojo-id="validateButtonCalendarPopup" type="button"><?php echo i18n("buttonValid"); ?></button>
                             </td>  
                         </tr>
                     </table>
@@ -237,7 +231,7 @@
 <!-- LIST OF STATUS OF WORKFLOW DEDICATED TO THE LEAVE -->
 <!------------------------------------------------------->                
                 <div>
-                    <table style="height:2.5%; width:100%;">
+                    <table style="height:2.5%; width:100%;font-size:12px;margin-left:15px;">
                         <tr style="width:100%;">
                         <?php
 //                            $listStatus = Workflow::getLeaveMngListStatus();
@@ -273,10 +267,7 @@
 <!------------------->
 <!-- DATE SELECTOR -->
 <!------------------->
-                                    <input type="text" 
-                                           id="widgetSelectDate" 
-                                           data-dojo-id='widgetSelectDate' 
-                                           data-dojo-type="dijit/form/DateTextBox" 
+                                    <input type="text"  id="widgetSelectDate"  data-dojo-id='widgetSelectDate'  data-dojo-type="dijit/form/DateTextBox" class="roundedLeft" 
                                            data-dojo-props="invalidMessage: '<?php echo i18n('invalidDate'); ?> !'"/>
                                 </div>
                             </td>
