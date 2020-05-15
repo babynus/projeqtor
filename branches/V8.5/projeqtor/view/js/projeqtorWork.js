@@ -694,23 +694,21 @@ function formatDecimalToDisplay(val) {
 }
 
 // PlannedWorkManual functions
-function selectInterventionMode(id,letter) {
-  console.log("selectInterventionMode("+id+","+letter+")");
-  if (dojo.byId('idInterventionMode')) dojo.byId('idInterventionMode').value=id;
-  if (dojo.byId('letterInterventionMode')) dojo.byId('letterInterventionMode').value=letter;
-  dojo.query(".interventionModeSelector").forEach(function(node, index, nodelist) {
-    dojo.removeClass(node,'dojoxGridRowSelected');
-  });
-  dojo.query(".interventionModeSelector"+id).forEach(function(node, index, nodelist) {
-    dojo.addClass(node,'dojoxGridRowSelected');
-  });
-}
-function selectInterventionDate(date,resource,period) {
-  console.log("selectInterventionDate("+date+","+resource+","+period+")");
-  var idMode=(dojo.byId('idInterventionMode'))?dojo.byId('idInterventionMode').value:'none';
-  var letterMode=(dojo.byId('letterInterventionMode'))?dojo.byId('letterInterventionMode').value:'none';
+
+function selectInterventionDate(date,resource,period,event) {
+  if(event.ctrlKey) period=period+'X';
+  console.log("selectInterventionDateTemp("+date+","+resource+","+period+")");
+  var idMode=(dojo.byId('idInterventionMode'))?dojo.byId('idInterventionMode').value:'';
+  var letterMode=(dojo.byId('letterInterventionMode'))?dojo.byId('letterInterventionMode').value:'';
+  var refType=(dojo.byId('interventionActivityType'))?dojo.byId('interventionActivityType').value:'';
+  var refId=(dojo.byId('interventionActivityId'))?dojo.byId('interventionActivityId').value:'';
   var url="../tool/selectInterventionDate.php?date="+date+"&resource="+resource+"&period="+period;
   url+='&idMode='+idMode+"&letterMode="+letterMode;
+  url+='&refType='+refType+"&refId="+refId;
+  if (!idMode && !refType && !refId) {
+    console.log("Select intervention date : nothing selected");
+    return;
+  }
   dojo.xhrGet({
     url:url,
     handleAs: "text",
@@ -724,7 +722,7 @@ function selectInterventionDate(date,resource,period) {
           +dojo.byId('plannedWorkManualInterventionResourceList').value+'&months='
           +dojo.byId('plannedWorkManualInterventionMonthList').value;
         if (dojo.byId('plannedWorkManualInterventionSize')) refreshUrl+='&size='+dojo.byId('plannedWorkManualInterventionSize').value;
-        console.log('refresh intervention table : '+refreshUrl);
+        //console.log('refresh intervention table : '+refreshUrl);
         loadDiv(refreshUrl,'plannedWorkManualInterventionDiv');}
       if (dojo.byId('plannedWorkManualAssignmentDiv')
        && dojo.byId('plannedWorkManualAssignmentResourceList')
@@ -733,9 +731,54 @@ function selectInterventionDate(date,resource,period) {
           +dojo.byId('plannedWorkManualAssignmentResourceList').value+'&months='
           +dojo.byId('plannedWorkManualAssignmentMonthList').value;
         if (dojo.byId('plannedWorkManualAssignmentSize')) refreshUrl+='&size='+dojo.byId('plannedWorkManualAssignmentSize').value;
-        console.log('refresh assignment table : '+refreshUrl);
+        //console.log('refresh assignment table : '+refreshUrl);
         loadDiv(refreshUrl,'plannedWorkManualAssignmentDiv');
       }
     }
   });
+}
+function selectInterventionMode(id,letter) {
+  //console.log("selectInterventionMode("+id+","+letter+")");
+  var mode='select';
+  if (dojo.byId('idInterventionMode')) {
+    if (dojo.byId('idInterventionMode').value==id) {
+      dojo.byId('idInterventionMode').value='';
+      if (dojo.byId('letterInterventionMode')) dojo.byId('letterInterventionMode').value='';
+      mode='unselect';
+    } else {
+      dojo.byId('idInterventionMode').value=id;
+      if (dojo.byId('letterInterventionMode')) dojo.byId('letterInterventionMode').value=letter;
+    }
+  }
+  dojo.query(".interventionModeSelector").forEach(function(node, index, nodelist) {
+    dojo.removeClass(node,'dojoxGridRowSelected');
+  });
+  if (mode=='select') { 
+    dojo.query(".interventionModeSelector"+id).forEach(function(node, index, nodelist) {
+      dojo.addClass(node,'dojoxGridRowSelected');
+    });
+  }
+}
+
+function selectInterventionActivity(refType,refId,peId) {
+  //console.log("selectInterventionActivity("+refType+","+refId+","+peId+")");
+  var mode='select';
+  if (dojo.byId('interventionActivityType') && dojo.byId('interventionActivityId')) {
+    if (dojo.byId('interventionActivityType').value==refType && dojo.byId('interventionActivityId').value==refId) {
+      dojo.byId('interventionActivityType').value='';
+      dojo.byId('interventionActivityId').value='';
+      mode='unselect';
+    } else {
+      dojo.byId('interventionActivityType').value=refType;
+      dojo.byId('interventionActivityId').value=refId;
+    }
+  }
+  dojo.query(".interventionActivitySelector").forEach(function(node, index, nodelist) {
+    dojo.removeClass(node,'dojoxGridRowSelected');
+  });
+  if (mode=='select') {
+    dojo.query(".interventionActivitySelector"+peId).forEach(function(node, index, nodelist) {
+      dojo.addClass(node,'dojoxGridRowSelected');
+    });
+  }
 }

@@ -1305,7 +1305,6 @@ function loadDiv(page, destinationDiv, formName, callback) {
     form : formName,
     handleAs : "text",
     load : function(data) {
-      console.log(data);
       contentNode.innerHTML = data;
       if (callback)
         setTimeout(callback, 10);
