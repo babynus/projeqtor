@@ -1664,7 +1664,7 @@ function leaveCalendarDisplay(){
                 domConstruct.destroy(calendar.matrixView.yearColumnHeader);
             
             //to display the current month and year of the calendar in the header
-                var calendarMonthYear = "<div id=\"calendarMonthYear\" style=\"position:absolute;\"><table><tbody><tr><td><span>"+formatMonthYearDate(calendar.date)+"</span></td></tr></tbody></table></div>";
+                var calendarMonthYear = "<div id=\"calendarMonthYear\" style=\"position:absolute;left:24%;top:5px;\"><table><tbody><tr><td><span>"+formatMonthYearDate(calendar.date)+"</span></td></tr></tbody></table></div>";
                 domConstruct.place(calendarMonthYear, calendar.matrixView.buttonContainer, "first");
             
             
