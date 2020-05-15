@@ -33,20 +33,34 @@ include_once("../tool/projeqtor.php");
 <div class="centerDiv" style="width:100%;height:100%;overflow-y:auto;overflow-x:hidden;padding:30px 50px;" id="centerDiv">
 <h1>MODALITES</h1>
 <?php InterventionMode::drawList();?>
-
 <h1>TEST SAISIE INTERVENTION</h1>
+<div id="plannedWorkManualInterventionDiv">
 <?php 
-PlannedWorkManual::setSize(30);
-$listResource=array('1'=>"admin","2"=>"Project Manager");
-PlannedWorkManual::drawTable('intervention',$listResource, '202006', false);
-?>
-
-<h1>TEST ASSIGNATION</h1>
-<?php 
-PlannedWorkManual::setSize(20);
-$listMonth=array('202005','202006','202007','202008','202009','202010');
-PlannedWorkManual::drawTable('assignment',1, $listMonth, false);
+$listResource=array('1','3');
+$listMonth=array('202006');
+$size=30;
+PlannedWorkManual::setSize($size);
+PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, false);
 ?>
 </div>
+<input type='text' id="plannedWorkManualInterventionSize" value="<?php echo $size;?>" />
+<input type='text' id="plannedWorkManualInterventionResourceList" value="<?php echo implode(',',$listResource);?>" />
+<input type='text' style="width:500px" id="plannedWorkManualInterventionMonthList" value="<?php echo implode(',',$listMonth);?>" />
+<h1>TEST ASSIGNATION ADMIN</h1>
+<div id="plannedWorkManualAssignmentDiv">
+<?php 
+$listResource=array('1');
+$listMonth=array('202005','202006','202007','202008','202009','202010');
+$size=20;
+PlannedWorkManual::setSize($size);
+PlannedWorkManual::drawTable('assignment',$listResource, $listMonth, false);
+?>
+</div>
+<input type='text' id="plannedWorkManualAssignmentSize" value="<?php echo $size;?>" />
+<input type='text' id="plannedWorkManualAssignmentResourceList" value="<?php echo implode(',',$listResource);?>" />
+<input type='text' style="width:500px" id="plannedWorkManualAssignmentMonthList" value="<?php echo implode(',',$listMonth);?>" />
+<br/><br/><input type="text" id="selectInterventionDataResult" value="" style="width:800px;background:#ffe0e0" />
+</div>
+
 </body>
 
