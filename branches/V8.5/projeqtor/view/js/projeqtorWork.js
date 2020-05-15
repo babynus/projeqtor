@@ -692,3 +692,50 @@ function formatDecimalToDisplay(val) {
   val=val.replace(".", browserLocaleDecimalSeparator);
   return val;
 }
+
+// PlannedWorkManual functions
+function selectInterventionMode(id,letter) {
+  console.log("selectInterventionMode("+id+","+letter+")");
+  if (dojo.byId('idInterventionMode')) dojo.byId('idInterventionMode').value=id;
+  if (dojo.byId('letterInterventionMode')) dojo.byId('letterInterventionMode').value=letter;
+  dojo.query(".interventionModeSelector").forEach(function(node, index, nodelist) {
+    dojo.removeClass(node,'dojoxGridRowSelected');
+  });
+  dojo.query(".interventionModeSelector"+id).forEach(function(node, index, nodelist) {
+    dojo.addClass(node,'dojoxGridRowSelected');
+  });
+}
+function selectInterventionDate(date,resource,period) {
+  console.log("selectInterventionDate("+date+","+resource+","+period+")");
+  var idMode=(dojo.byId('idInterventionMode'))?dojo.byId('idInterventionMode').value:'none';
+  var letterMode=(dojo.byId('letterInterventionMode'))?dojo.byId('letterInterventionMode').value:'none';
+  var url="../tool/selectInterventionDate.php?date="+date+"&resource="+resource+"&period="+period;
+  url+='&idMode='+idMode+"&letterMode="+letterMode;
+  dojo.xhrGet({
+    url:url,
+    handleAs: "text",
+    load: function (data) {
+      if (dojo.byId('selectInterventionDataResult')) dojo.byId('selectInterventionDataResult').value=data;
+      var refreshUrl='../tool/refreshInterventionTable.php';
+      if (dojo.byId('plannedWorkManualInterventionDiv') 
+       && dojo.byId('plannedWorkManualInterventionResourceList')
+       && dojo.byId('plannedWorkManualInterventionMonthList') ) {
+        refreshUrl="../tool/refreshInterventionTable.php?scope=intervention&resources="
+          +dojo.byId('plannedWorkManualInterventionResourceList').value+'&months='
+          +dojo.byId('plannedWorkManualInterventionMonthList').value;
+        if (dojo.byId('plannedWorkManualInterventionSize')) refreshUrl+='&size='+dojo.byId('plannedWorkManualInterventionSize').value;
+        console.log('refresh intervention table : '+refreshUrl);
+        loadDiv(refreshUrl,'plannedWorkManualInterventionDiv');}
+      if (dojo.byId('plannedWorkManualAssignmentDiv')
+       && dojo.byId('plannedWorkManualAssignmentResourceList')
+       && dojo.byId('plannedWorkManualAssignmentMonthList') ) {
+        refreshUrl="../tool/refreshInterventionTable.php?scope=assignment&resources="
+          +dojo.byId('plannedWorkManualAssignmentResourceList').value+'&months='
+          +dojo.byId('plannedWorkManualAssignmentMonthList').value;
+        if (dojo.byId('plannedWorkManualAssignmentSize')) refreshUrl+='&size='+dojo.byId('plannedWorkManualAssignmentSize').value;
+        console.log('refresh assignment table : '+refreshUrl);
+        loadDiv(refreshUrl,'plannedWorkManualAssignmentDiv');
+      }
+    }
+  });
+}

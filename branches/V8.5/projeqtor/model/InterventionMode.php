@@ -89,12 +89,14 @@ class InterventionMode extends SqlElement {
     echo '<td class="reportTableHeader" colspan="2" style="width:220px">'.i18n('menuInterventionMode').'</td>';
     echo '</tr>';
     foreach ($list as $im) {
-      echo '<tr>';
-      echo '<td class="noteData" style="width:20px;text-align:center">'.$im->letter.'</td>';
-      echo '<td class="noteData" style="width:200px">'.$im->name.'</td>';
+      echo '<tr class="dojoxGridRow interventionModeSelector interventionModeSelector'.$im->id.'" style="cursor:pointer" onClick="selectInterventionMode('.$im->id.',\''.$im->letter.'\');">';
+      echo '<td class="dojoxGridCell interventionModeSelector interventionModeSelector'.$im->id.'" style="width:20px;text-align:center">'.$im->letter.'</td>';
+      echo '<td class="dojoxGridCell interventionModeSelector interventionModeSelector'.$im->id.'" style="width:200px">'.$im->name.'</td>';
       echo '</tr>';
     }
     echo '</table>';
+    echo '<input type="text" id="idInterventionMode" value="" style="width:20px;background:#ffe0e0" />';
+    echo '<input type="text" id="letterInterventionMode" value="" style="width:20px;background:#ffe0e0" />';
   }
   
 }

@@ -167,7 +167,7 @@ ALTER TABLE `${prefix}documentversion` ADD `disapproved` int(1) unsigned DEFAULT
 CREATE TABLE `${prefix}plannedworkmanual` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `idResource` int(12) unsigned NOT NULL,
-  `idProject` int(12) unsigned NOT NULL,
+  `idProject` int(12) unsigned DEFAULT NULL,
   `refType`  varchar(100) DEFAULT NULL,
   `refId` int(12) unsigned DEFAULT NULL,
   `idAssignment` int(12) unsigned default NULL,
