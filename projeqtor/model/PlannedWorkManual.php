@@ -176,9 +176,10 @@ class PlannedWorkManual extends GeneralWork {
       echo '<td style="border:1px solid #a0a0a0;">';
       echo '<table style="width:100%;height:100%">';
       $color=getForeColor($colorAM);
-      echo '<tr style="height:'.$midSize.'px;"><td style="width:100%;background:'.$colorAM.';border-bottom:1px solid #e0e0e0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterAM.'</div></td></tr>';
+      $cursor="pointer";
+      echo '<tr style="height:'.$midSize.'px;"><td onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'AM\')" style="cursor:'.$cursor.';width:100%;background:'.$colorAM.';border-bottom:1px solid #e0e0e0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterAM.'</div></td></tr>';
       $color=getForeColor($colorPM);
-      echo '<tr style="height:'.$midSize.'px;"><td style="width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterPM.'</div></td></tr>';
+      echo '<tr style="height:'.$midSize.'px;"><td onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'PM\')" style="cursor:'.$cursor.';width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterPM.'</div></td></tr>';
       echo '</table>';  
       echo '</td>';
     }
@@ -233,7 +234,8 @@ class PlannedWorkManual extends GeneralWork {
         echo '<td class="'.$classDay.'" style="padding:0;font-weight:normal;width:'.$size.'px">'.$i.'</td>';
       }
       echo '</tr>';
-      foreach ($resourceList as $idRes=>$nameRes) {
+      foreach ($resourceList as $idRes) {
+        $nameRes=SqlList::getNameFromId('Affectable', $idRes);
         echo '<tr style="height:'.$size.'px">';
         echo '<td class="noteHeader" style="width:'.$nameWidth.'px;"><div style="white-space:nowrap;max-width:'.$nameWidth.'px;max-height:'.$size.'px;overflow:hidden;">'.$nameRes.'</div></td>';
         self::drawLine($scope, $idRes, $year, $month, $readonly);
