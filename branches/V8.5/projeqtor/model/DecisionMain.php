@@ -48,6 +48,9 @@ class DecisionMain extends SqlElement {
   public $idle;
   public $cancelled;
   public $_lib_cancelled;
+  public $_sec_Approver;
+  public $_Approver=Array();
+  public $_spe_buttonSendMail;
   //public $_sec_linkMeeting;
   //public $_Link_Meeting=array();
   public $_sec_Link;
@@ -75,7 +78,7 @@ class DecisionMain extends SqlElement {
                                   "idUser"=>"hidden",
                                   "idStatus"=>"required",
                                   "idle"=>"nobr",
-                                  "cancelled"=>"nobr"
+                                  "cancelled"=>"nobr",
   );  
   
   private static $_colCaptionTransposition = array('idResource'=>'decisionAccountable'
@@ -218,6 +221,29 @@ class DecisionMain extends SqlElement {
       $colScript .= '</script>';
     }
     return $colScript;
+  }
+  
+  public function drawSpecificItem($item){
+  	global $print;
+  	$result="";
+  	if ($item=='buttonSendMail') {
+  		if ($print or ! $this->id) {
+  			return "";
+  		}
+  		$result .= '<tr><td colspan="2">';
+  		$result .= '<button id="sendInfoToApprovers" dojoType="dijit.form.Button" showlabel="true"';
+  		$result .= ' title="' . i18n('sendInfoToApprovers') . '" >';
+  		$result .= '<span>' . i18n('sendInfoToApprovers') . '</span>';
+  		$result .=  '<script type="dojo/connect" event="onClick" args="evt">';
+  		$result .= '   if (checkFormChangeInProgress()) {return false;}';
+  		$result .=  '  var email="";';
+  		$result .=  '  if (dojo.byId("email")) {email = dojo.byId("email").value;}';
+  		$result .=  '  loadContent("../tool/sendMail.php","resultDivMain","objectForm",true);';
+  		$result .= '</script>';
+  		$result .= '</button>';
+  		$result .= '</td></tr>';
+  		return $result;
+  	}
   }
     
 }
