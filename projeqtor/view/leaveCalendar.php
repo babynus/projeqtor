@@ -76,7 +76,7 @@
                     <!-- Manager => List of managed employees -->
                     <?php if ($isManager) {?>
                     <div style="width:500px; margin:0 auto;">
-                        <label style="text-shadow: none;font-size:12px;width:165px;" for='leaveEmployee'><?php echo i18n("selectAnEmployee");?> : 
+                        <label style="text-shadow: none;font-size:12px;width:150px;" for='leaveEmployee'><?php echo i18n("selectAnEmployee");?> : 
                         </label>
                         <select id="leaveEmployeeSelect" ame="leaveEmployeeSelect" dojoType="dijit.form.FilteringSelect"  data-dojo-id="leaveEmployeeSelect"
                                 class="filterField roundedLeft"  style="width:200px;"
@@ -335,7 +335,7 @@
 <!-- SYNTHESIS OF LEAVE EARNED AND LEFT LEAVE FOR THE SELECTED EMPLOYEE -->
 <!------------------------------------------------------------------------>
               <br/>
-              <div id="summaryLeaveEarnedOfEmployee"><b><?php echo i18n("synthesisOfLeaveEarned"); ?></b>
+              <div id="summaryLeaveEarnedOfEmployee" style="font-size:12px;margin-bottom:5px;"><b style="margin-bottom:5px"><?php echo i18n("synthesisOfLeaveEarned"); ?></b>
                   <table style="width:96%; margin-left:2%; text-align:center; border: solid 1pt;">
                     <tr style="border: solid 1pt; height: 20px;">
                         <th style="text-align:center;"><b><?php echo i18n('colIdLeaveType'); ?></b></th>
