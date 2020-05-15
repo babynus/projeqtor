@@ -2401,7 +2401,6 @@ function disapproveItem(approverId){
 
 function enableConfirmDisapproveSubmit(value){
 	var value = dijit.byId('disapproveDescription').get('value');
-	console.log(value);
 	if(value != ""){
 		enableWidget('dialogConfirmDisapproveSubmit');
 	}else{

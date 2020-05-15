@@ -5768,7 +5768,18 @@ function drawApproverFromObject($list, $obj, $refresh=false) {
         $disapprovedDate=" (".htmlFormatDateTime($versApp->disapprovedDate, false).")";
         $approverId=$versApp->id;
       }
-    } else {
+    } else if($obj and get_class($obj)=='Decision'){ 
+      $crit=array('refType'=>'Decision', 'refId'=>$obj->id, 'idAffectable'=>$app->idAffectable);
+      $versApp=SqlElement::getSingleSqlElementFromCriteria('Approver', $crit);
+      if ($versApp->id) {
+      	$approved=$versApp->approved;
+      	$disapproved=$versApp->disapproved;
+      	$compMsg=' '.$obj->name;
+      	$approvedDate=" (".htmlFormatDateTime($versApp->approvedDate, false).")";
+      	$disapprovedDate=" (".htmlFormatDateTime($versApp->disapprovedDate, false).")";
+      	$approverId=$versApp->id;
+      }
+    }else {
       $approved=$app->approved;
       $disapproved=$app->disapproved;
       $approverId=$app->id;
@@ -5795,7 +5806,7 @@ function drawApproverFromObject($list, $obj, $refresh=false) {
     } else {
       echo '<td>';
       echo i18n("notApproved").$compMsg;
-      if ($user->id==$app->idAffectable and !$print and $versApp->id) {
+      if ($user->id==$app->idAffectable and !$print  and $versApp->id) {
         echo '&nbsp;&nbsp;<button dojoType="dijit.form.Button" showlabel="true" >';
         echo i18n('approveNow');
         echo '  <script type="dojo/connect" event="onClick" args="evt">';
