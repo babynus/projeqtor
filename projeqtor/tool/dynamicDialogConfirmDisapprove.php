@@ -27,7 +27,6 @@
 scriptLog('dynamicDialogConfirmDisapprove.php');
 
 $approverId=RequestHandler::getId('approverId');
-debugLog($approverId);
 ?>
 <form dojoType="dijit.form.Form" id='confirmDisapproveForm' name='confirmDisapproveForm' onSubmit="return false;">
   <table>
