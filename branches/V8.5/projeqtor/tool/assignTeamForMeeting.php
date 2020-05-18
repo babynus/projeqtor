@@ -51,7 +51,7 @@ $aff = new Affectation();
 if($assignmentRefType == 'PeriodicMeeting'){
   $meetDate=$meet->periodicityEndDate;
 }else{
-  $meetDate=$meet->meetingDate
+  $meetDate=$meet->meetingDate;
 }
 if (!$meetDate) $meetDate=date('Y-m-d');
 $critWhere="idle=0 AND idProject= $meet->idProject AND ( endDate >= '$meetDate' OR endDate IS NULL ) ";
