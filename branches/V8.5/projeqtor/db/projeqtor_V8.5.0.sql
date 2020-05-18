@@ -219,6 +219,7 @@ CREATE TABLE `${prefix}interventioncapacity` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `refType`  varchar(100) DEFAULT NULL,
   `refId` int(12) unsigned DEFAULT NULL,
+  `month` varchar(6) unsigned DEFAULT NULL,
   `fte` decimal(3,1) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
