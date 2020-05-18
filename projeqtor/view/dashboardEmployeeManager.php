@@ -472,8 +472,21 @@
                                     // Retrieve leaves of month for the employee
                                     $leavesDay=getLeavesInArrayDateForAPeriodAndAnEmployee($employee,$startDateRequest,$endDateRequest,$idStatusRequest,$idTypeRequest);
                                     $employeeLeavesDay[(int)$key]=$leavesDay;
+                                    if(strlen($name)>=15){
+                                      $showName="";
+                                      if($employee->initials!=''){
+                                        $showName=$employee->initials;
+                                       }else{
+                                        $words=mb_split(' ',str_replace(array('"',"'"), ' ',$employee->name));
+                                        foreach ($words as $word) {
+                                          $showName.=(mb_substr($word,0,1,'UTF-8'));
+                                        }
+                                      }
+                                    }else{
+                                      $showName=$name;
+                                    }
                                     echo '<tr style="height:15px;">';
-                                    echo '  <td class="assignHeader">'.$name.'</td>';
+                                    echo '  <td class="assignHeader"><div title="'.$name.'">'.$showName.'</di></td>';
                                     for($i=1;$i<=31;$i++) {
                                         $tdStyleAM = 'border-right:0px;max-width:5px;min-width:5px;width:5px;text-align:center;';
                                         $tdStylePM = 'border-left:0px;max-width:5px;min-width:5px;width:5px;text-align:center;';

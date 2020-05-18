@@ -76,7 +76,7 @@
                     <!-- Manager => List of managed employees -->
                     <?php if ($isManager) {?>
                     <div style="width:500px; margin:0 auto;">
-                        <label style="text-shadow: none;font-size:12px;width:150px;" for='leaveEmployee'><?php echo i18n("selectAnEmployee");?> : 
+                        <label style="text-shadow: none;font-size:12px;width:165px;" for='leaveEmployee'><?php echo i18n("selectAnEmployee");?> : 
                         </label>
                         <select id="leaveEmployeeSelect" ame="leaveEmployeeSelect" dojoType="dijit.form.FilteringSelect"  data-dojo-id="leaveEmployeeSelect"
                                 class="filterField roundedLeft"  style="width:200px;"
@@ -115,8 +115,61 @@
 <!-------------------------------->
 <!-- TAG FOR THE LEAVE CALENDAR -->
 <!-------------------------------->
-        <tr style="height:70%;width:100%;vertical-align:top;">
+        <tr style="height:70%;width:100%;vertical-align:top;border-top:1px solid black;">
             <td colspan="2" style="width:50%;">
+                
+<!---------------------------->
+<!-- TO LOAD LEAVE CALENDAR -->
+<!---------------------------->                
+                <!--to load the calendar, <script>leaveCalendarDisplay();</script> doesn't seem to work-->
+                <img id='leaveCalendarDisplay' style="display: none;" src onerror='leaveCalendarDisplay()'>
+<!------------------------------------------------------->
+<!-- LIST OF STATUS OF WORKFLOW DEDICATED TO THE LEAVE -->
+<!------------------------------------------------------->                
+                <div style="margin-top:5px;">
+                    <table style="height:2.5%; width:100%;font-size:12px;margin-left:15px;">
+                        <tr style="width:100%;">
+                        <?php
+//                            $listStatus = Workflow::getLeaveMngListStatus();
+                              $listStatus = LeaveType::getStatusList();
+                            echo '
+                                <td>
+                                    <span class="leaveStatus" style="background-color:#000000; color:#FFFFFF;">
+                                        &nbsp;U
+                                    </span>:'.i18n("unknown").'
+                                </td>
+                            ';
+                            
+                            foreach($listStatus as $key=>$status) {
+                                $textColor = oppositeColor($status->color);
+                                echo '
+                                    <td>
+                                        <span class="leaveStatus" style="background-color:'.$status->color.'; color:'.$textColor.';">
+                                            &nbsp;'.substr(strtoupper($status->name),0,1).'
+                                        </span>:'.$status->name.'
+                                    </td>
+                                ';
+                            }
+                        ?>
+                            <td>
+                                <div style="display: inline;">
+<!-------------------->
+<!-- REFRESH BUTTON -->
+<!-------------------->
+                                    <button data-dojo-type="dijit/form/Button" 
+                                            data-dojo-id="refreshCalendarButton" 
+                                            type="button" 
+                                            onclick=""><?php echo i18n("refreshTheCalendar"); ?></button>
+<!------------------->
+<!-- DATE SELECTOR -->
+<!------------------->
+                                    <input type="text"  id="widgetSelectDate"  data-dojo-id='widgetSelectDate'  data-dojo-type="dijit/form/DateTextBox" class="roundedLeft" 
+                                           data-dojo-props="invalidMessage: '<?php echo i18n('invalidDate'); ?> !'"/>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
                 
                 <div style="position:relative;width:100%;height:90%">
                     <div id="calendarNode"></div>                        
@@ -221,60 +274,6 @@
                         </tr>
                     </table>
                 </div>
-
-<!---------------------------->
-<!-- TO LOAD LEAVE CALENDAR -->
-<!---------------------------->                
-                <!--to load the calendar, <script>leaveCalendarDisplay();</script> doesn't seem to work-->
-                <img id='leaveCalendarDisplay' style="display: none;" src onerror='leaveCalendarDisplay()'>
-<!------------------------------------------------------->
-<!-- LIST OF STATUS OF WORKFLOW DEDICATED TO THE LEAVE -->
-<!------------------------------------------------------->                
-                <div>
-                    <table style="height:2.5%; width:100%;font-size:12px;margin-left:15px;">
-                        <tr style="width:100%;">
-                        <?php
-//                            $listStatus = Workflow::getLeaveMngListStatus();
-                              $listStatus = LeaveType::getStatusList();
-                            echo '
-                                <td>
-                                    <span class="leaveStatus" style="background-color:#000000; color:#FFFFFF;">
-                                        &nbsp;U
-                                    </span>:'.i18n("unknown").'
-                                </td>
-                            ';
-                            
-                            foreach($listStatus as $key=>$status) {
-                                $textColor = oppositeColor($status->color);
-                                echo '
-                                    <td>
-                                        <span class="leaveStatus" style="background-color:'.$status->color.'; color:'.$textColor.';">
-                                            &nbsp;'.substr(strtoupper($status->name),0,1).'
-                                        </span>:'.$status->name.'
-                                    </td>
-                                ';
-                            }
-                        ?>
-                            <td>
-                                <div style="display: inline;">
-<!-------------------->
-<!-- REFRESH BUTTON -->
-<!-------------------->
-                                    <button data-dojo-type="dijit/form/Button" 
-                                            data-dojo-id="refreshCalendarButton" 
-                                            type="button" 
-                                            onclick=""><?php echo i18n("refreshTheCalendar"); ?></button>
-<!------------------->
-<!-- DATE SELECTOR -->
-<!------------------->
-                                    <input type="text"  id="widgetSelectDate"  data-dojo-id='widgetSelectDate'  data-dojo-type="dijit/form/DateTextBox" class="roundedLeft" 
-                                           data-dojo-props="invalidMessage: '<?php echo i18n('invalidDate'); ?> !'"/>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                
             </td>
             <td colspan="2" style="width:50%;">
 
