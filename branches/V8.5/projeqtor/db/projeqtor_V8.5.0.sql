@@ -214,3 +214,18 @@ INSERT INTO `${prefix}interventionmode` (name, letter, sortOrder) VALUES
 
 INSERT INTO `${prefix}planningmode` (`id`, `applyTo`, `name`, `code`, `sortOrder`, `idle`, `mandatoryStartDate`, `mandatoryEndDate`) VALUES
 (23, 'Activity', 'PlanningModeManual', 'MAN', 900, 0 , 0, 0);
+
+CREATE TABLE `${prefix}interventioncapacity` (
+  `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
+  `refType`  varchar(100) DEFAULT NULL,
+  `refId` int(12) unsigned DEFAULT NULL,
+  `fte` decimal(3,1) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
+
+CREATE INDEX interventionfteRef ON `${prefix}interventionfte` (refType, refId);
+
+ALTER TABLE `${prefix}assignment` ADD `manual` int(1) unsigned DEFAULT '0';
+ALTER TABLE `${prefix}work` ADD `manual` int(1) unsigned DEFAULT '0';
+ALTER TABLE `${prefix}plannedwork` ADD `manual` int(1) unsigned DEFAULT '0';
+
