@@ -78,19 +78,11 @@
                     <div style="width:500px; margin:0 auto;">
                         <label style="text-shadow: none;font-size:12px;width:165px;" for='leaveEmployee'><?php echo i18n("selectAnEmployee");?> : 
                         </label>
-                        <select id="leaveEmployeeSelect" ame="leaveEmployeeSelect" dojoType="dijit.form.FilteringSelect"  data-dojo-id="leaveEmployeeSelect"
-                                class="filterField roundedLeft"  style="width:200px;"
+                        <select id="leaveEmployeeSelect" name="leaveEmployeeSelect" dojoType="dijit.form.FilteringSelect"  data-dojo-id="leaveEmployeeSelect"
+                                class="filterField roundedLeft"  style="width:200px;"  <?php  echo autoOpenFilteringSelect();?>
                         >
                         <?php 
-                            $employeeList = getUserVisibleResourcesList(true, "List",'', false,true,true,true);
-                            asort($employeeList, SORT_NATURAL | SORT_FLAG_CASE);
-                            foreach($employeeList as $key=>$val) {
-                                echo '<option value="' . $key . '"';
-                                if ( $key==$idUser ) { 
-                                    echo ' SELECTED ';
-                                }
-                                echo '><span >'. htmlEncode($val) . '</span></option>';
-                            }
+                              htmlDrawOptionForReference('idEmployee',1,null,true);
                         ?>        
                         </select>
                     </div>
