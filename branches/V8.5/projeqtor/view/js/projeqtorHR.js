@@ -2436,7 +2436,17 @@ function nextPrevYearDashboardEmployeeManager(plusMinus, startYear, endYear) {
 
 function nextPrevMonthDashboardEmployeeManager(plusMinus) {
     var month = parseInt(dijit.byId("monthSelect").value)+plusMinus;
-    if (month<1 || month>12) { return; }
+    var year = parseInt(dijit.byId("yearSelect").value);
+    if (month<1 || month>12) {
+      if(month>12){
+        month=1;
+        year+=1;
+      }else{
+        month=12;
+        year-=1;
+      }
+      dijit.byId("yearSelect").attr('value',year);
+    }
     dijit.byId("monthSelect").attr('value',month);    
 }
 
