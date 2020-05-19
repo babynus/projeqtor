@@ -219,12 +219,12 @@ CREATE TABLE `${prefix}interventioncapacity` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `refType`  varchar(100) DEFAULT NULL,
   `refId` int(12) unsigned DEFAULT NULL,
-  `month` varchar(6) unsigned DEFAULT NULL,
+  `month` varchar(6) DEFAULT NULL,
   `fte` decimal(3,1) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
-CREATE INDEX interventionfteRef ON `${prefix}interventionfte` (refType, refId);
+CREATE INDEX interventioncapacityRef ON `${prefix}interventioncapacity` (refType, refId);
 
 ALTER TABLE `${prefix}assignment` ADD `manual` int(1) unsigned DEFAULT '0';
 ALTER TABLE `${prefix}work` ADD `manual` int(1) unsigned DEFAULT '0';
