@@ -845,5 +845,43 @@ class Consistency {
       displayOK(i18n("checkNoError"));
   
     }
+    
+  }
+  
+  // Check pools
+  public static function checkPools($correct=false,$trace=false) {
+    $errors=0;
+    // Direct Query : valid here for technical needs on grouping
+    $res=new Resource();
+    $resTable=$res->getDatabaseTableName();
+    $rta=new ResourceTeamAffectation();
+    $rtaTable=$rta->getDatabaseTableName();
+    $query="SELECT rta.id as id, rta.idResourceTeam as idpool, rta.idResource as idres"
+        ." FROM $rtaTable rta"
+        ." WHERE (rta.idResource is null or rta.idResource=0 or not exists (select'x' from $resTable res where res.id=rta.idResource) )";
+    $result=Sql::query($query);
+    while ($line = Sql::fetchLine($result)) {
+      $idpool=$line['idpool'];
+      $idres=$line['idres'];
+      $id=$line['id'];
+      $poolItem=new ResourceTeam($idpool); 
+      $pool="#".$poolItem->id." - ".$poolItem->name;
+      displayError(i18n("checkInvalidPoolAllocation",array($pool,$idres)));
+      $errors++;
+      if ($correct) {
+        $rta=new ResourceTeamAffectation($id);
+        $res=$rta->delete();
+        if (getLastOperationStatus($res)=='OK') {
+          displayOK(i18n("checkFixed"),true);
+        } else {
+          displayMsg(i18n("checkNotFixed"),true);
+        }
+      }
+    }
+  
+    if (!$errors) {
+      displayOK(i18n("checkNoError"));
+  
+    }
   }
 }?>
