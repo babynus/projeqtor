@@ -106,6 +106,8 @@ if ($adminFunctionality=='sendAlert') {
   Consistency::checkBudget($correct, false);
   echo "<div class='consistencySection' style=''>".i18n('sectionCheckTechnicalData')."</div>";
   Consistency::checkInvalidFilters($correct, false);
+  echo "<div class='consistencySection' style=''>".i18n('sectionCheckPool')."</div>";
+  Consistency::checkPools($correct, false);
   
   $result=false;
   Sql::commitTransaction();
