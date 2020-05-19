@@ -652,19 +652,25 @@ function saveDataToSessionAndReload(param, value, saveUserParameter) {
     //gautier 3287
     if(param == 'currentLocale'){
       var currentItem=historyTable[historyPosition];
-      if(currentItem[2]=="object"){
-        var directAccessPage = "objectMain.php";
-        dojo.byId("changeCurrentLocale").value = "changeCurrentLocale";
-        dojo.byId("p1name").value = currentItem[0];
-        dojo.byId("p1value").value = currentItem[1];
-      }else{
-        var directAccessPage = getTargetFromCurrentScreenChangeLang(currentItem[2]);
-        if(directAccessPage == "parameter.php"){
-          dojo.byId("p1name").value = "type";
-          dojo.byId("p1value").value = "userParameter";
+      if(currentItem != undefined && currentItem[2] != undefined){
+        if(currentItem[2]=="object"){
+          var directAccessPage = "objectMain.php";
+          dojo.byId("changeCurrentLocale").value = "changeCurrentLocale";
+          dojo.byId("p1name").value = currentItem[0];
+          dojo.byId("p1value").value = currentItem[1];
+        }else{
+          var directAccessPage = getTargetFromCurrentScreenChangeLang(currentItem[2]);
+          if(directAccessPage == "parameter.php"){
+            dojo.byId("p1name").value = "type";
+            dojo.byId("p1value").value = "userParameter";
+          }
         }
+        dojo.byId("directAccessPage").value = directAccessPage;
+      }else{
+        dojo.byId("directAccessPage").value = "parameter.php";
+        dojo.byId("p1name").value = "type";
+        dojo.byId("p1value").value = "userParameter";
       }
-      dojo.byId("directAccessPage").value = directAccessPage;
     }else{
       dojo.byId("directAccessPage").value = "parameter.php";
       dojo.byId("p1name").value = "type";
