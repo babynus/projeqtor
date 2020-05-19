@@ -509,6 +509,8 @@ class Consistency {
         if ($proj) {
           $w->idProject=$proj;
           $res=$w->save();
+        } else if (! $refType and ! $refId) {
+          $res=$w->delete();
         } else {
           $res="No Project found for Assignment #$assid and for $refType #$refId";
         }
