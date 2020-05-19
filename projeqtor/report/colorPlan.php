@@ -122,6 +122,7 @@ if ($paramProject!='') {
 //   }
 //   $where.= ")";
 }
+
 $order="";
 $work=new Work();
 $lstWork=$work->getSqlElementsFromCriteria(null,false, $where, $order);
@@ -139,48 +140,42 @@ $resourcesAffect= array();
 $resourcesToShow = array();
 $specific='imputation';
 $commonElement = getListForSpecificRights($specific,true);
+$resourcesToShow=$commonElement;
 //$commonElement = $table;
 //no parameters
-if(!$paramProject && !$paramTeam){
-  $resourcesFull =SqlList::getList('ResourceAll');
-  $resourcesToShow = array_intersect($commonElement,$resourcesFull);
-}
 //project
-if($paramProject && !$paramTeam ){
+
+if($paramProject){
   $proj=new Project($paramProject);
   $listProj=$proj->getRecursiveSubProjectsFlatList(false,true);
   $resourcesAffect = SqlList::getListWithCrit('Affectation', array('idProject'=>array_keys($listProj)),'idResource');
   $resourcesProject = SqlList::getListWithCrit('ResourceAll', array('id'=>$resourcesAffect));
-  $resourcesToShow = array_intersect($commonElement,$resourcesProject);
+  $resourcesToShow = array_intersect($resourcesToShow,$resourcesProject);
 }
 //team
-if($paramTeam && !$paramProject){
-  $resourcesFull =SqlList::getListWithCrit('ResourceAll', array('idTeam'=>$paramTeam));
-  $resourcesToShow = array_intersect($commonElement,$resourcesFull);
+if($paramTeam){
+  $resourcesTeam =SqlList::getListWithCrit('ResourceAll', array('idTeam'=>$paramTeam));
+  $resourcesToShow = array_intersect($resourcesToShow,$resourcesTeam);
 }
-//team and project
-if($paramTeam && $paramProject){
-  $proj=new Project($paramProject);
-  $listProj=$proj->getRecursiveSubProjectsFlatList(false,true);
-  $resourcesAffect = SqlList::getListWithCrit('Affectation', array('idProject'=>array_keys($listProj)),'idResource');
-  $resourcesProject = SqlList::getListWithCrit('ResourceAll', array('id'=>$resourcesAffect));
-  $resourcesTeam = SqlList::getListWithCrit('ResourceAll', array('idTeam'=>$paramTeam));
-  $resourcesToShow = array_intersect($commonElement,$resourcesTeam, $resourcesProject);
-}
+// organization
 if($idOrganization){
   $orga = new Organization($idOrganization);
   $listResOrg=$orga->getResourcesOfAllSubOrganizationsListAsArray();
   foreach ($resourcesToShow as $idR=>$nameR){
-    if(! in_array($idR, $listResOrg))unset($resourcesToShow[$idR]);
+    if(! in_array($idR, $listResOrg)) unset($resourcesToShow[$idR]);
   }
 }
-
 foreach ($lstWork as $work) {
-  if (! isset($resourcesToShow[$work->idResource])) continue;
+  //if (! isset($resourcesToShow[$work->idResource])) continue;
+  if ($paramProject and isset($listProj) and !isset($listProj[$work->idProject]) ) continue;
   if (! array_key_exists($work->idResource,$resources)) {
     if ($paramTeam) {
       $team=SqlList::getFieldFromId('Resource', $work->idResource,'idTeam');
       if ($team!=$paramTeam) continue;
+    }
+    if ($idOrganization) {
+      $orga=SqlList::getFieldFromId('Resource', $work->idResource,'idOrganization');
+      if ($orga!=$idOrganization) continue;
     }
   	$resources[$work->idResource]=SqlList::getNameFromId('ResourceAll', $work->idResource);
   	$resourceCapacity[$work->idResource]=SqlList::getFieldFromId('ResourceAll', $work->idResource, 'capacity');
@@ -204,17 +199,19 @@ foreach ($lstWork as $work) {
 $planWork=new PlannedWork();
 $lstPlanWork=$planWork->getSqlElementsFromCriteria(null,false, $where, $order);
 foreach ($lstPlanWork as $work) {
-  if (! isset($resourcesToShow[$work->idResource])) continue;
+  //if (! isset($resourcesToShow[$work->idResource])) continue;
+  if ($paramProject and isset($listProj) and !isset($listProj[$work->idProject]) ) continue;
   if (! array_key_exists($work->idResource,$resources)) {
     if ($paramTeam) {
       $team=SqlList::getFieldFromId('Resource', $work->idResource,'idTeam');
       if ($team!=$paramTeam) continue;
     }
+    if ($idOrganization) {
+      $orga=SqlList::getFieldFromId('Resource', $work->idResource,'idOrganization');
+      if ($orga!=$idOrganization) continue;
+    }
     $resources[$work->idResource]=SqlList::getNameFromId('ResourceAll', $work->idResource);
     $resourceCapacity[$work->idResource]=SqlList::getFieldFromId('ResourceAll', $work->idResource, 'capacity');
-    if ($paramTeam) {
-      $resourcesTeam[$work->idResource]=SqlList::getFieldFromId('Resource', $work->idResource,'idTeam');
-    }
     $result[$work->idResource]=array();
   }
   if (! array_key_exists($work->idProject,$projects)) {
@@ -249,6 +246,7 @@ $weekendBGColor='#cfcfcf';
 $weekendFrontColor='#555555';
 $weekendStyle=' style="background-color:' . $weekendBGColor . '; color:' . $weekendFrontColor . '" ';
 
+$resourcesToShow=array_merge_preserve_keys($resourcesToShow,$resources);
 $month=$paramYear.'-'.$paramMonth;
 if (count($resourcesToShow)==0 and checkNoData($result,$month)) continue;
 
@@ -361,7 +359,7 @@ foreach ($resourcesToShow as $idR=>$nameR) {
 	    $day=$startDate+$i-1;
 	    $style="";
 	    //if ($days[$day]=="off") {
-	    if ($daysCal[$idCal][$day]=="off") {
+	    if ($idCal and $daysCal[$idCal][$day]=="off") {
 	      $style=$weekendStyle;
 	    }
 	    echo '<td class="reportTableDataFull" ' . $style . ' valign="top">';
