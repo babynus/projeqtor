@@ -2642,9 +2642,28 @@ function saveAssignment(definitive) {
     dijit.byId("assignmentLeftWork").focus();
     url="../tool/saveAssignment.php";
     if (definitive) url+="?definitive="+definitive;
+    var callback=function(){
+    	var planningMode = dojo.byId('planningMode').value;
+    	var idAssignment = dojo.byId('idAssignment').value;
+    	var mode = dojo.byId('mode').value;
+    	if(planningMode == 'MAN' && mode != 'edit'){
+    		var params="&idAssignment="+idAssignment;
+	    	params+="&refType="+dojo.byId('objectClass').value;
+	    	params+="&idProject="+dijit.byId('idProject').get('value');
+	    	params+="&refId="+dojo.byId("objectId").value;
+	    	params+="&idResource="+dijit.byId('assignmentIdResource').get('value');
+	    	params+="&idRole="+dijit.byId('assignmentIdRole').get('value');
+	    	params+="&unit="+dojo.byId('assignmentAssignedUnit').value;
+	    	params+="&realWork="+dijit.byId('assignmentRealWork').get('value');
+	    	params+=dijit.byId('assignmentDailyCost').get('value');
+	    	params+="&mode=edit";
+	    	loadDialog('dialogAssignment',null,false,params);
+	    }else{
+	    	dijit.byId('dialogAssignment').hide();
+	    }
+    };
     loadContent(url, "resultDivMain", "assignmentForm",
-        true, 'assignment');
-    dijit.byId('dialogAssignment').hide();
+        true, 'assignment', null,null,callback);
   } else {
     showAlert(i18n("alertInvalidForm"));
   }
@@ -2690,6 +2709,10 @@ function assignmentChangeResourceTeamForCapacity() {
         dojo.byId('assignmentCapacityResourceTeam').style.display="none";
         dojo.byId('assignmentUniqueSelection').style.display="none";
         dijit.byId('assignmentUnique').set('checked',false);
+      }
+      var planningMode = dojo.byId('planningMode').value;
+      if(planningMode=='MAN'){
+    	  dojo.byId('assignmentRateRow').style.display="none";
       }
     }
   });
