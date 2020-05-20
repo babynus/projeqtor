@@ -287,6 +287,7 @@ foreach ($resourceList as $idResource=>$name){
     $assSel->purge("idAssignment=$assignment->id");
   }
 }
+echo '<input id="idAssignment" name="idAssignment" type="hidden" value="'.$assignment->id.'"/>';
 // Message of correct saving
 displayLastOperationStatus($result);
 ?>
