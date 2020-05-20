@@ -162,8 +162,20 @@ ADD `disapprovedDate` datetime default NULL,
 ADD `disapprovedComment` varchar(400) default NULL;
 
 ALTER TABLE `${prefix}documentversion` ADD `disapproved` int(1) unsigned DEFAULT '0';
-      
+
+-- ======================================      
 -- Planned Work Manual
+-- ======================================
+
+INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
+(251,'menuInterventionMode',36,'object', 899,'ReadWriteList',0,'ListOfValues');
+
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
+(1,251,1);
+
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
+(1,251,8);
+
 CREATE TABLE `${prefix}plannedworkmanual` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `idResource` int(12) unsigned NOT NULL,
