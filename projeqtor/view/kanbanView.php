@@ -69,7 +69,7 @@ $arrayProject=array();
 $hasVersion=(property_exists($typeKanbanC,'idTargetProductVersion'))?true:false;
 ?>
 <div class="container" dojoType="dijit.layout.BorderContainer">
-  <div id="titleKanban" class="listTitle" style="z-index:3;overflow:visible"
+  <div id="titleKanban" class="listTitle" style="z-index:3;overflow:visible;min-height:65px;"
     dojoType="dijit.layout.ContentPane" region="top">
     <table width="100%">
       <tr height="100%" style="vertical-align: middle;">
@@ -891,7 +891,7 @@ function kanbanListSelect($user,$name,$type,$idKanban) {
                         .formatIcon('KanbanAdd'.$typeKanbanC,22, i18n('kanbanAdd'.$typeKanbanC))
                         ."</div>";
   echo "</div><div style=\"width:60%;float:left;font-size: 16px;font-weight: bold;text-align:center;\">
-                <span>$name</span></div><div style=\"float:left;height:10px;padding-top:5px;width:20%;text-align:right;\">";
+                <span>$name</span>&nbsp;</div><div style=\"float:left;height:10px;padding-top:5px;width:20%;text-align:right;\">";
   if(PlanningElement::getWorkVisibiliy(getSessionUser()->idProfile)=="ALL" and $typeKanbanC!='Requirement' and $typeKanbanC!='Action' )echo i18n('kanbanSeeWork').' <div style="margin-right:8px;" dojoType="dijit.form.CheckBox" type="checkbox" class="whiteCheck" onchange="kanbanSeeWork()" '.($seeWork ? ' checked="checked"':'').'></div><br/>';
   echo i18n('labelShowIdle').' 
       		<div style="margin-right:8px;margin-top:2px;" 
