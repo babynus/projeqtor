@@ -148,7 +148,6 @@ class Work extends GeneralWork {
                   'workDate'=>$this->workDate);
       $list=$pw->getSqlElementsFromCriteria($crit, null, null, 'workDate asc');
       $date= date("Y/m/d",strtotime("- 1 days"));
-      debugLog($date);
       $critM=array('idAssignment'=>$this->idAssignment,
                   'refType'=>$this->refType, 'refId'=>$this->refId,
                   'idResource'=>$this->idResource,
