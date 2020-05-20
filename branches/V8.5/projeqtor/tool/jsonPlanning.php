@@ -1649,6 +1649,13 @@ use PhpOffice\PhpSpreadsheet\Shared\Trend\Trend;
       echo $tab.$tab.'<Task>' . $nl;
       echo $tab.$tab.$tab.'<UID>' . $line['id'] . '</UID>' . $nl;
       echo $tab.$tab.$tab.'<projeqtorType>' . $line['reftype'] . '</projeqtorType>' . $nl;
+      //gautier #4648
+      if ($line['reftype']=='Activity') {
+        echo $tab.$tab.$tab.'<projeqtorPlanningMode>' . $line['idplanningmode'] . '</projeqtorPlanningMode>' . $nl;
+        $activ = new Activity($line['refid'],true);
+        echo $tab.$tab.$tab.'<projeqtorActivityType>' . $activ->idActivityType . '</projeqtorActivityType>' . $nl;
+      }
+      //end Gautier
       echo $tab.$tab.$tab.'<ID>' . $cpt . '</ID>' . $nl;  // TODO : should be order of the tack in the list
       echo $tab.$tab.$tab.'<Name>' . htmlEncode($line['refname'],'xml') . '</Name>' . $nl;
       echo $tab.$tab.$tab.'<Active>1</Active>'. $nl;
