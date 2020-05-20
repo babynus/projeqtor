@@ -574,7 +574,8 @@ function activityStreamDisplayNote ($note,$origin){
     echo formatPrivacyThumb($note->idPrivacy, $note->idTeam);
     echo '</div><div>';
     echo '<table style="float:right;"><tr><td>';
-    if($origin=="objectStream" || $origin=="objectStreamKanban") {
+    //if($origin=="objectStream" || $origin=="objectStreamKanban") {
+    if($origin=="objectStream") {
           if ($note->idUser == $user->id and !$print and $canUpdate){
             echo  '<div style="float:right;" ><a onClick="removeNote(' . htmlEncode($note->id) . ');" title="' . i18n('removeNote') . '" > '.formatSmallButton('Remove').'</a></div>';
           }
