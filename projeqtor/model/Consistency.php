@@ -521,8 +521,47 @@ class Consistency {
           displayOK(i18n("checkFixed"),true);
         }
       }
-      }  
-     
+    }  
+    $query="SELECT w.id as id, w.idResource as idres, w.idAssignment as idass, w.refType as reftype, w.refid as refid"
+        ." FROM $workTable w"
+        ." WHERE (w.idResource is null or w.idResource=0 or not exists (select'x' from $resTable res where res.id=w.idResource)" 
+        ."    or refType is null or refId is null )";
+    $result=Sql::query($query);
+    while ($line = Sql::fetchLine($result)) {
+      $id=$line['id'];
+      $idres=$line['idres'];
+      $idass=$line['idass'];
+      $refType=$line['reftype'];
+      $refId=$line['refid'];
+      $w=new Work($id);
+      displayError(i18n("checkInvalidReferenceOnWork",array($id,$idres,$refType,$refId)));
+      $errors++;
+      if ($correct) {
+        $ass=new Assignment($idass);
+        if ($ass->id and $ass->idResource and $ass->refType and $ass->refId) {
+          $res=new Affectable($idres);
+          if ($res->id) {
+            $w->idResource=$ass->idResource;
+            if (!$refType or !$refId) {
+              $w->refType=$ass->refType;
+              $w->refId=$ass->refId;
+            }
+            $res=$w->save();
+            $ass->saveWithRefresh();
+          } else {
+            $res=$w->delete();
+            $ass->delete();
+          }
+        } else {
+          $res=$w->delete();
+        }
+        if (getLastOperationStatus($res)=='OK') {
+          displayOK(i18n("checkFixed"),true);
+        } else {
+          displayMsg(i18n("checkNotFixed"),true);
+        }
+      }
+    } 
     if (!$errors) {
       displayOK(i18n("checkNoError"));
   
