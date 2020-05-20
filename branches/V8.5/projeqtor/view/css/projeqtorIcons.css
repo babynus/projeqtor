@@ -1276,6 +1276,12 @@
 .ProjeQtOrFlatGreen .iconAbsence { background-image: url(customIcons/green/iconAbsence.png); }
 .ProjeQtOrFlatGrey .iconAbsence { background-image: url(customIcons/grey/iconAbsence.png); }
 
+.iconPlannedWorkManual { background-image: url(images/iconPlannedWorkManual.png); }
+.ProjeQtOrFlatBlue .iconPlannedWorkManual { background-image: url(customIcons/blue/iconPlannedWorkManual.png); }
+.ProjeQtOrFlatRed .iconPlannedWorkManual { background-image: url(customIcons/red/iconPlannedWorkManual.png); }
+.ProjeQtOrFlatGreen .iconPlannedWorkManual { background-image: url(customIcons/green/iconPlannedWorkManual.png); }
+.ProjeQtOrFlatGrey .iconPlannedWorkManual { background-image: url(customIcons/grey/iconPlannedWorkManual.png); }
+
 .iconButtonReply16 { background-image: url(images/iconReply.png);  background-size: 16px 16px;}
 .ProjeQtOrFlatBlue .iconButtonReply16 { background-image: url(customIcons/blue/iconReply.png); width: 16px; height: 16px; background-size: 16px 16px;}
 .ProjeQtOrFlatRed .iconButtonReply16 { background-image: url(customIcons/red/iconReply.png); width: 16px; height: 16px; background-size: 16px 16px;}

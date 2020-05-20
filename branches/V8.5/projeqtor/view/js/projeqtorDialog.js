@@ -7401,6 +7401,8 @@ function loadMenuBarItem(item, itemName, from) {
     loadContent("reportsMain.php", "centerDiv");
   } else if (item == 'Absence') {
 	    loadContent("absenceMain.php", "centerDiv");
+  } else if (item == 'PlannedWorkManual') {
+    loadContent("plannedWorkManualMain.php", "centerDiv");
   } else if (item == 'ImputationValidation') {
 	    loadContent("imputationValidationMain.php", "centerDiv");  
   } else if (item == 'AutoSendReport') {

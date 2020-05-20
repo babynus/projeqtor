@@ -359,8 +359,12 @@ class PlannedWorkManual extends GeneralWork {
     }
   }
   
-  public static function drawActivityTable($monthYear=null) {
-    $crit=array('idPlanningMode'=>23,'idle'=>'0');
+  public static function drawActivityTable($idProject=null,$monthYear=null) {
+    if($idProject){
+      $crit=array('idPlanningMode'=>23,'idle'=>'0','idProject'=>$idProject);
+    }else{
+      $crit=array('idPlanningMode'=>23,'idle'=>'0');
+    }
     $pe=new PlanningElement();
     $list=$pe->getSqlElementsFromCriteria($crit);
     $nameWidth=250;

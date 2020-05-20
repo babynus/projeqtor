@@ -342,7 +342,7 @@ if (RequestHandler::isCodeSet('destinationWidth')) {
                          $specific='resourcePlanning';
                          $includePool=true;
                          $specificDoNotInitialize=true;                       
-                         include '../tool/drawResourceListForSpecificAccess.php';
+                         include '../tool/drawResourceListForSpecificAccess.php'; ?>
                       </select>
                       </td>
                     </tr>
