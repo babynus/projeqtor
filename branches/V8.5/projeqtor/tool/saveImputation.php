@@ -80,6 +80,7 @@ for ($i=0; $i<$nbLines; $i++) {
     $line->idResource=$userId;
     if (isset($_REQUEST['leftWork'][$i])) {
       $line->leftWork=Work::convertImputation($_REQUEST['leftWork'][$i]);
+      debugLog($line->leftWork);
     } else {
     	traceLog('WARNING - Left work not retrieved from screen');
     	traceLog('        - Maybe max_input_vars is too small in php.ini (actual value is '.ini_get('max_input_vars').')');
