@@ -335,12 +335,22 @@ class ActivityPlanningElementMain extends PlanningElement {
     if($this->idActivityPlanningMode){
       $this->idPlanningMode = $this->idActivityPlanningMode;
     }
-    
+    $old = $this->getOld();
     if($this->minimumThreshold){
-      $old = $this->getOld();
       if($old->minimumThreshold != $this->minimumThreshold){
         $this->minimumThreshold = Work::convertWork($this->minimumThreshold);
       }
+    }
+    if($this->idPlanningMode=='23' and $old->idPlanningMode!='23'){
+      $pw= new PlannedWork();
+      $clause= "idProject=".$this->idProject." and refType='".$this->refType."' and refId=".$this->refId;
+      $res=$pw->purge($clause);
+      $this->updateSynthesis($this->refType, $this->refId);
+    }else if($this->idPlanningMode!='23' and $old->idPlanningMode=='23'){
+      $pwm= new PlannedWorkManual();
+      $clause= "idProject=".$this->idProject." and refType='".$this->refType."' and refId=".$this->refId;
+      $pwm->purge($clause);
+      $this->updateSynthesis($this->refType, $this->refId);
     }
     return parent::save();
   }
@@ -369,8 +379,11 @@ class ActivityPlanningElementMain extends PlanningElement {
       }
    
     }
-   
-    
+    $old = $this->getOld();
+    if($this->idActivityPlanningMode!='23' and $old->idPlanningMode=='23' and !SqlElement::isSaveConfirmed()){
+        $result.='<br/>' . i18n('changePlanMan');
+        $result.='<input type="hidden" name="confirmControl" id="confirmControl" value="save" />';
+    }
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
       $result.=$defaultControl;

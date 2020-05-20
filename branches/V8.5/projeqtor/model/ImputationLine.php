@@ -320,8 +320,17 @@ class ImputationLine {
         $crit=array('refType'=>$ass->_topRefType, 'refId'=>$ass->_topRefId);
       }
       $plan=null;
+      $manuPlan=false;
       if ($ass->id) {
         $plan=SqlElement::getSingleSqlElementFromCriteria('PlanningElement', $crit);
+        //florent
+          if($plan->refType=='Activity' and $plan->idPlanningMode=='23'){
+            $manuPlan=true;
+            $critWhere="idProject='".$plan->idProject."' and refType='".$plan->refType."'";
+            $critWhere.=" and refId='$plan->refId' and workDate between'".$startDate."' and '".(($endDate<=date('Y-m-d'))?$endDate:date('Y-m-d'))."'";
+            $plannedManualWorkList=$plannedWork->getSqlElementsFromCriteria(null, false, $critWhere, null, false, true);
+          }
+        //
         if (! $plan->id and $plan->refType and SqlElement::class_exists($plan->refType) and $plan->refId) {
           // This is unconsistency that we'll try and fix, if planning element does not exist : save main item will recreate it
           $refType=$plan->refType;
@@ -418,6 +427,13 @@ class ImputationLine {
       $key=$elt->wbsSortable.' '.htmlEncode($ass->refType).'#'.$ass->refId;
       if (array_key_exists($key, $result)) {
         $key.='/#'.$ass->id;
+      }
+      if($manuPlan){
+        foreach ($plannedManualWorkList as $work) {
+          $workDate=$work->workDate;
+          $offset=dayDiffDates($startDate, $workDate)+1;
+          $elt->arrayWork[$offset]=$work;
+        }
       }
       // fetch all work stored in database for this assignment
       foreach ($workList as $work) {
@@ -1001,6 +1017,7 @@ class ImputationLine {
               echo '  style="width: 45px; text-align: center;'.$colorStyle.'" ';
               echo ' trim="true" maxlength="4" class="input imputation '.$colorClass.'" ';
               echo ' id="workValue_'.$nbLine.'_'.$i.'"';
+              debugLog($valWork);
               echo ' name="workValue_'.$i.'[]"';
               echo ' value="'.Work::displayImputation($valWork).'" ';
               if ($line->idle or $line->locked) {
