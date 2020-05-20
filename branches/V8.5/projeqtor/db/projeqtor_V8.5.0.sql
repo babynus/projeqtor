@@ -229,4 +229,6 @@ CREATE INDEX interventioncapacityRef ON `${prefix}interventioncapacity` (refType
 ALTER TABLE `${prefix}assignment` ADD `manual` int(1) unsigned DEFAULT '0';
 ALTER TABLE `${prefix}work` ADD `manual` int(1) unsigned DEFAULT '0';
 ALTER TABLE `${prefix}plannedwork` ADD `manual` int(1) unsigned DEFAULT '0';
+ALTER TABLE `${prefix}plannedworkbaseline` ADD `manual` int(1) unsigned DEFAULT '0';
+
 
