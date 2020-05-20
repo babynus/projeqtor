@@ -1093,10 +1093,17 @@ function saveNote() {
  */
 function removeNote(noteId) {
   var param="?noteId="+noteId;
-  param+="&noteRefType="+dojo.byId('objectClass').value;
-  param+="&noteRefId="+dojo.byId("objectId").value;
+  var dest="resultDivMain";
+  if (dojo.byId('objectClass') && dojo.byId("objectId")) {
+    param+="&noteRefType="+dojo.byId('objectClass').value;
+    param+="&noteRefId="+dojo.byId("objectId").value;
+  } else if (dojo.byId('noteRefType') && dojo.byId('noteRefId')) {
+    param+="&noteRefType="+dojo.byId('noteRefType').value;
+    param+="&noteRefId="+dojo.byId('noteRefId').value;
+    //dest="resultKanbanStreamDiv";
+  }
   actionOK=function() {
-    loadContent("../tool/removeNote.php"+param, "resultDivMain", "noteForm", true, 'note');
+    loadContent("../tool/removeNote.php"+param, dest, "noteForm", true, 'note');
   };
   msg=i18n('confirmDelete', new Array(i18n('Note'), noteId));
   showConfirm(msg, actionOK);
