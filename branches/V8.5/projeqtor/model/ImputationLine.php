@@ -326,9 +326,10 @@ class ImputationLine {
         //florent
           if($plan->refType=='Activity' and $plan->idPlanningMode=='23'){
             $manuPlan=true;
+            $plannedWorkMan=new PlannedWorkManual();
             $critWhere="idProject='".$plan->idProject."' and refType='".$plan->refType."'";
             $critWhere.=" and refId='$plan->refId' and workDate between'".$startDate."' and '".(($endDate<=date('Y-m-d'))?$endDate:date('Y-m-d'))."'";
-            $plannedManualWorkList=$plannedWork->getSqlElementsFromCriteria(null, false, $critWhere, null, false, true);
+            $plannedManualWorkList=$plannedWorkMan->getSqlElementsFromCriteria(null, false, $critWhere, null, false, true);
           }
         //
         if (! $plan->id and $plan->refType and SqlElement::class_exists($plan->refType) and $plan->refId) {
@@ -1017,7 +1018,6 @@ class ImputationLine {
               echo '  style="width: 45px; text-align: center;'.$colorStyle.'" ';
               echo ' trim="true" maxlength="4" class="input imputation '.$colorClass.'" ';
               echo ' id="workValue_'.$nbLine.'_'.$i.'"';
-              debugLog($valWork);
               echo ' name="workValue_'.$i.'[]"';
               echo ' value="'.Work::displayImputation($valWork).'" ';
               if ($line->idle or $line->locked) {
@@ -1312,6 +1312,7 @@ class ImputationLine {
   // MISCELLANOUS FUNCTIONS
   // ============================================================================**********
   public function save() {
+    
     $finalResult="";
     foreach ($this->arrayWork as $work) {
       $result="";

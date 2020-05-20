@@ -341,17 +341,32 @@ class ActivityPlanningElementMain extends PlanningElement {
         $this->minimumThreshold = Work::convertWork($this->minimumThreshold);
       }
     }
-    if($this->idPlanningMode=='23' and $old->idPlanningMode!='23'){
+    //florent
+    if(($this->idPlanningMode=='23' and $old->idPlanningMode!='23')or($this->idPlanningMode!='23' and $old->idPlanningMode=='23') ){
       $pw= new PlannedWork();
+      $ass=new Assignment();
+      if($old->idPlanningMode=='23'){
+        $pw= new PlannedWorkManual();
+      }
       $clause= "idProject=".$this->idProject." and refType='".$this->refType."' and refId=".$this->refId;
-      $res=$pw->purge($clause);
-      $this->updateSynthesis($this->refType, $this->refId);
-    }else if($this->idPlanningMode!='23' and $old->idPlanningMode=='23'){
-      $pwm= new PlannedWorkManual();
-      $clause= "idProject=".$this->idProject." and refType='".$this->refType."' and refId=".$this->refId;
-      $pwm->purge($clause);
-      $this->updateSynthesis($this->refType, $this->refId);
+      $pw->purge($clause);
+      if($old->idPlanningMode=='23'){
+        $ass->purge($clause);
+      }else{
+        $ass->plannedWork;
+        $lstAss=$ass->getSqlElementsFromCriteria(null, null,$clause);
+        if($lstAss){
+          foreach ( $lstAss as $assign){
+            $newLeft=$assign->leftWork-$assign->plannedWork;
+            $assign->assignedWork=GeneralWork::convertWork(0);
+            $assign->leftWork=GeneralWork::convertWork($newLeft);
+            $assign->save();
+          }
+        }
+      }
+       //$this->updateSynthesis($this->refType, $this->refId);
     }
+    //
     return parent::save();
   }
   
