@@ -243,4 +243,15 @@ ALTER TABLE `${prefix}work` ADD `manual` int(1) unsigned DEFAULT '0';
 ALTER TABLE `${prefix}plannedwork` ADD `manual` int(1) unsigned DEFAULT '0';
 ALTER TABLE `${prefix}plannedworkbaseline` ADD `manual` int(1) unsigned DEFAULT '0';
 
+INSERT INTO `${prefix}menu` (`id`, `name`, `idMenu`, `type`, `sortOrder`, `level`, `idle`, `menuClass`) VALUES
+(251, 'menuPlannedWorkManual', 7, 'item', 105, Null, 0, 'Work');
 
+INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
+(1, 251, 1),
+(2, 251, 1),
+(3, 251, 1);
+
+INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
+(1,203,8),
+(1,203,8),
+(1,203,8);
