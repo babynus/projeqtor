@@ -113,10 +113,14 @@ if ($planningMode=='RECW') {
          <input id="assignmentId" name="assignmentId" type="hidden" value="<?php echo $idAssignment ;?>" />
          <input id="assignmentRefType" name="assignmentRefType" type="hidden" value="<?php echo $refType ;?>" />
          <input id="assignmentRefId" name="assignmentRefId" type="hidden" value="<?php echo $refId ;?>" />
+         <input id="interventionActivityType" name="interventionActivityType" type="hidden" value="<?php echo $refType ;?>" />
+         <input id="interventionActivityId" name="interventionActivityId" type="hidden" value="<?php echo $refId ;?>" />
          <input id="assignedIdOrigin" name="assignedIdOrigin" type="hidden" value="<?php echo $assignedIdOrigin ;?>" />
          <input id="assignedWorkOrigin" name="assignedWorkOrigin" type="hidden" value="<?php echo $assignmentObj->assignedWork ;?>" />
          <input id="isTeam" name="isTeam" type="hidden" value="<?php echo $isTeam;?>" />
          <input id="isOrganization" name="isOrganization" type="hidden" value="<?php echo $isOrganization;?>" />
+         <input id="mode" name="mode" type="hidden" value="<?php echo $mode;?>" />
+         <input id="planningMode" name="planningMode" type="hidden" value="<?php echo $planningMode;?>" />
          <table>
            <tr>
              <td class="dialogLabel" >
@@ -125,7 +129,7 @@ if ($planningMode=='RECW') {
              <td>
               <select dojoType="dijit.form.FilteringSelect"
               <?php echo autoOpenFilteringSelect(); $isSelectFonction = Parameter::getGlobalParameter('selectFonction'); ?>
-                id="assignmentIdResource" name="assignmentIdResource"
+                id="assignmentIdResource" name="assignmentIdResource" <?php if($planningMode=='MAN' and $mode=="edit"){ echo "readonly";}?>
                 class="input" 
                 onChange="<?php if($isSelectFonction == 'YES'){?>assignmentChangeResourceSelectFonction();<?php }else{?> assignmentChangeResource(); <?php }?> assignmentChangeResourceTeamForCapacity();refreshReccurentAssignmentDiv(this.value);"
                 missingMessage="<?php echo i18n('messageMandatory',array(i18n('colIdResource')));?>" <?php echo ($realWork!=0 && $mode=='edit')?"readonly=readonly":"";?>>
@@ -210,7 +214,7 @@ if ($planningMode=='RECW') {
              </td>
            </tr>
 
-           <tr id="assignmentRateRow" name="assignmentRateRow" <?php if ($resource->isResourceTeam and !$assignmentObj->uniqueResource) echo 'style="display:none"';?>>
+           <tr id="assignmentRateRow" name="assignmentRateRow" <?php if (($resource->isResourceTeam and !$assignmentObj->uniqueResource) or $planningMode=="MAN") echo 'style="display:none"';?>>
              <td class="dialogLabel" >
                <label for="assignmentRate" ><?php echo i18n("colRate");?>&nbsp;:&nbsp;</label>
              </td>
@@ -222,7 +226,7 @@ if ($planningMode=='RECW') {
                <div id="assignmentRate" name="assignmentRate" value="<?php echo ($mode=='edit' and $planningMode!='RECW')?$assignmentObj->rate:"100";?>" 
                  dojoType="dijit.form.NumberTextBox" 
                  constraints="{min:0,max:100}" 
-                 style="width:97px" 
+                 style="width:97px;" 
                  <?php if ($planningMode=='RECW') echo ' readonly';?>
                  missingMessage="<?php echo i18n('messageMandatory',array(i18n('colRate')));?>" 
               <?php if (!$resource->isResourceTeam) { ?>  required="true" <?php } ?> >
@@ -254,7 +258,7 @@ if ($planningMode=='RECW') {
                <label for="assignmentAssignedWork" ><?php echo i18n("colAssignedWork");?>&nbsp;:&nbsp;</label>
              </td>
              <td>
-               <div id="assignmentAssignedWork" name="assignmentAssignedWork" 
+               <div id="assignmentAssignedWork" name="assignmentAssignedWork" <?php if($planningMode=='MAN'){ echo "readonly";}?>
                  value="<?php if(($refType=='Meeting' || $refType=='PeriodicMeeting') && $mode=="add" && $obj->meetingStartTime && $obj->meetingEndTime){ 
                                   echo $delay;
                               } else if ($mode=="edit"){
@@ -306,7 +310,7 @@ if ($planningMode=='RECW') {
                <label for="assignmentLeftWork" ><?php echo i18n("colLeftWork");?>&nbsp;:&nbsp;</label>
              </td>
              <td>
-               <div id="assignmentLeftWork" name="assignmentLeftWork"                  
+               <div id="assignmentLeftWork" name="assignmentLeftWork" <?php if($planningMode=='MAN'){ echo "readonly";}?>                 
                  value="<?php if(($refType=='Meeting' || $refType=='PeriodicMeeting') && $mode=="add" && $obj->meetingStartTime && $obj->meetingEndTime){ 
                                   echo $delay;
                               } else if($mode=="edit"){
@@ -472,14 +476,37 @@ if ($planningMode=='RECW') {
       </div>
       </td>
     </tr>
+    <?php if($mode=='edit' and $planningMode=='MAN'){  ?>
+    <tr>
+      <td align="center">
+        <div id="plannedWorkManualAssignmentDiv" style="padding-top:10px;padding-bottom:10px;">
+        <?php 
+        $listResource=array($idResource);
+        $listMonth=array('202005','202006','202007','202008','202009','202010');
+        $size=20;
+        PlannedWorkManual::setSize($size);
+        PlannedWorkManual::drawTable('assignment',$idResource, $listMonth, false);
+        ?>
+        </div>
+        <input type='hidden' id="plannedWorkManualAssignmentSize" value="<?php echo $size;?>"/>
+        <input type='hidden' id="plannedWorkManualAssignmentResourceList" value="<?php echo implode(',',$listResource);?>"/>
+        <input type='hidden' id="plannedWorkManualAssignmentMonthList" value="<?php echo implode(',',$listMonth);?>"/>
+      </td>
+    </tr>
+    <?php }?>
     <tr>
       <td align="center">
         <input type="hidden" id="dialogAssignmentAction">
-        <button class="mediumTextButton" dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogAssignment').hide();">
+        <button class="mediumTextButton" dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogAssignment').hide();" <?php if($planningMode=='MAN' and $mode=="edit"){ echo "disabled";}?>>
           <?php echo i18n("buttonCancel");?>
         </button>
-        <button class="mediumTextButton" dojoType="dijit.form.Button" id="dialogAssignmentSubmit" <?php if (!$idRole) echo 'disabled';?> type="submit" onclick="protectDblClick(this);saveAssignment();return false;">
-          <?php echo i18n("buttonOK");?>
+        <?php if($planningMode != 'MAN' and $mode != "edit"){
+          $buttonName = i18n("buttonOK");
+        }else{
+          $buttonName = i18n('saveLeavesSystemHabilitation');
+        }?>
+        <button class="mediumTextButton" dojoType="dijit.form.Button" id="dialogAssignmentSubmit" <?php if (!$idRole) echo 'disabled';?> type="submit" onClick="protectDblClick(this);saveAssignment();return false;">
+          <?php echo $buttonName;?>
         </button>
       </td>
     </tr>
