@@ -246,6 +246,7 @@ class PlannedWorkManual extends GeneralWork {
     $pwm=new PlannedWorkManual();
     $lstPwm=$pwm->getSqlElementsFromCriteria(null,null,$crit);
     $exist=array();
+    $resObj=new ResourceAll($idResource);
     foreach ($lstPwm as $pwm) {
         if (!isset($exist[$pwm->workDate])) $exist[$pwm->workDate]=array();
         $exist[$pwm->workDate][$pwm->period]=array('refType'=>$pwm->refType,'refId'=>$pwm->refId,'mode'=>$pwm->idInterventionMode);
@@ -260,7 +261,7 @@ class PlannedWorkManual extends GeneralWork {
       $letterAM='';
       $letterPM='';
       $date=$year.'-'.(($month<10)?'0':'').$month.'-'.(($i<10)?'0':'').$i;
-      if (isOffDay($date)) {
+      if (isOffDay($date,$resObj->idCalendarDefinition)) {
         $colorAM="#d0d0d0";
         $colorPM="#d0d0d0";
       }
