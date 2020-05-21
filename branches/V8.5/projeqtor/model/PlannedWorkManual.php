@@ -431,7 +431,9 @@ class PlannedWorkManual extends GeneralWork {
       echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.($idWidth).'px" >#'.$pe->refId.'</td>';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-right:0;width:'.($idWidth).'px" >'.$colorBadge.'</td>';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-left:0;width:'.($nameWidth).'px" >'.$pe->refName.'</td>';
-      echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.$idWidth.'px">'.'todo'.'</td>';
+      echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="text-align:center;margin:0;padding;0;width:'.$idWidth.'px">'
+          .'<input type="text" xdata-dojo-type="dijit.form.TextBox" value="1" style="font-family: Verdana, Arial, Tahoma, sans-serif;font-size: 8pt;text-align:center;width:'.($idWidth-2).'px;"/>' 
+          .'</td>';
       if ($monthYear) {
         for ($i=1;$i<=$nbDays;$i++) {
           $date=$year.'-'.$month.'-'.(($i<10)?'0':'').$i;
