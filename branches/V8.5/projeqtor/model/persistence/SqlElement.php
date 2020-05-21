@@ -4862,14 +4862,14 @@ abstract class SqlElement {
           if($canDeleteRealWork){
             $objList = $obj->getSqlElementsFromCriteria($crit,null,$where);
             foreach ($objList as $objWork){
+              debugLog(get_class($objWork). " #".$objWork->id);
               $work = new Work();
-              $refType=$object;
-              if(isset($objWork->refType)){
-                $refType=$objWork->refType;
-              }
-              $workList = $work->getSqlElementsFromCriteria(array('refType'=>$refType,'idProject'=>$objWork->idProject));
+              $refType=get_class($objWork);
+              $refId=$objWork->id;
+              $critWork=array('refType'=>$refType,'refId'=>$refId);
+              $workList = $work->getSqlElementsFromCriteria($critWork);
               foreach ($workList as $work){
-                $realWorks .="<br/>&nbsp;-&nbsp;".i18n('realWorkElement',array($work->refType,SqlList::getNameFromId('Resource', $work->idResource),$work->displayWorkWithUnit($work->work),htmlFormatDateTime($work->inputDateTime)));
+                $realWorks .="<br/>&nbsp;-&nbsp;".i18n('realWorkElement',array(i18n($work->refType).' #'.$refId,SqlList::getNameFromId('Resource', $work->idResource),$work->displayWorkWithUnit($work->work),htmlFormatDate($work->workDate,true)));
               }
             }
          }
