@@ -40,7 +40,7 @@ class InterventionMode extends SqlElement {
   public $idleDate;
   //public $_sec_void;
   
-  public $_isNameTranslatable = true;
+  //public $_isNameTranslatable = true;
   
   // Define the layout that will be used for lists
   private static $_layout='
@@ -51,6 +51,11 @@ class InterventionMode extends SqlElement {
     <th field="idle" width="5%" formatter="booleanFormatter">${idle}</th>
     ';
 
+  private static $_fieldsAttributes=array(
+      "name"=>"required",
+      "letter"=>"required",
+      "idle"=>"nobr"
+  );
    /** ==========================================================================
    * Constructor
    * @param $id the id of the object in the database (null if not stored yet)
@@ -79,6 +84,10 @@ class InterventionMode extends SqlElement {
    */
   protected function getStaticLayout() {
     return self::$_layout;
+  }
+  
+  protected function getStaticFieldsAttributes() {
+    return self::$_fieldsAttributes;
   }
   
   public static function drawList() {
