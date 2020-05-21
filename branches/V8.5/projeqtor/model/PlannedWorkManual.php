@@ -377,9 +377,9 @@ class PlannedWorkManual extends GeneralWork {
     }
     $listR=(is_array($resourceList))?implode(',',$resourceList):$resourceList;
     $listM=(is_array($monthList))?implode(',',$monthList):$monthList;
-    echo '<input type="text" id="plannedWorkManualInterventionSize" value="'.self::$_size.'" style="background:#ffe0e0"/>';
-    echo '<input type="text" id="plannedWorkManualInterventionResourceList" value="'.$listR.'" style="background:#ffe0e0"/>';
-    echo '<input type="text" style="width:500px;background:#ffe0e0" id="plannedWorkManualInterventionMonthList" value="'.$listM.'" />';
+    echo '<input type="hidden" id="plannedWorkManualInterventionSize" value="'.self::$_size.'" style="background:#ffe0e0"/>';
+    echo '<input type="hidden" id="plannedWorkManualInterventionResourceList" value="'.$listR.'" style="background:#ffe0e0"/>';
+    echo '<input type="hidden" style="width:500px;background:#ffe0e0" id="plannedWorkManualInterventionMonthList" value="'.$listM.'" />';
     
   }
   
@@ -395,6 +395,8 @@ class PlannedWorkManual extends GeneralWork {
     $idWidth=20;
     $nbDays=31;
     $year=null;
+    $size=self::$_size;
+    $midSize=($size-1)/2;
     $projList=array();
     if ($monthYear) {
       $monthYear=str_replace('-','',$monthYear);
@@ -408,7 +410,12 @@ class PlannedWorkManual extends GeneralWork {
     echo '<td class="reportTableHeader" style="width:'.($nameWidth+($idWidth*2)).'px" colspan="3">'.i18n('Activity').'</td>';
     echo '<td class="reportTableHeader" style="width:'.$idWidth.'px">'.i18n('unitCapacity').'</td>';
     if ($monthYear) {
-      
+      for ($i=1;$i<=$nbDays;$i++) {
+        $date=$year.'-'.$month.'-'.(($i<10)?'0':'').$i;
+        if (isOffDay($date)) $classDay="reportTableHeader";
+        else $classDay="noteHeader";
+        echo '<td class="'.$classDay.'" style="padding:0;font-weight:normal;width:'.$size.'px">'.$i.'</td>';
+      }
     }
     
     echo '</tr>';
@@ -425,11 +432,32 @@ class PlannedWorkManual extends GeneralWork {
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-right:0;width:'.($idWidth).'px" >'.$colorBadge.'</td>';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-left:0;width:'.($nameWidth).'px" >'.$pe->refName.'</td>';
       echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.$idWidth.'px">'.'todo'.'</td>';
+      if ($monthYear) {
+        for ($i=1;$i<=$nbDays;$i++) {
+          $date=$year.'-'.$month.'-'.(($i<10)?'0':'').$i;
+          //$date=$year.'-'.(($month<10)?'0':'').$month.'-'.(($i<10)?'0':'').$i;
+          $colorAM='#ffffff';
+          $colorPM='#ffffff';
+          if (isOffDay($date)) {
+            $colorAM="#d0d0d0";
+            $colorPM="#d0d0d0";
+          }
+          echo '<td style="border:1px solid #a0a0a0;">';
+          echo '<table style="width:100%;height:100%">';
+          $color=getForeColor($colorAM);
+          $cursor="pointer";
+          echo '<tr style="height:'.$midSize.'px;"><td style="width:100%;background:'.$colorAM.';border-bottom:1px solid #e0e0e0;position:relative;text-align:center;"></td></tr>';
+          $color=getForeColor($colorPM);
+          echo '<tr style="height:'.$midSize.'px;"><td style="width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"></td></tr>';
+          echo '</table>';  
+          echo '</td>';
+        }
+      }
       echo '</tr>';
     }
     echo '</table>';
-    echo '<input type="text" id="interventionActivityType" value="" style="width:80px;background:#ffe0e0" />';
-    echo '<input type="text" id="interventionActivityId" value="" style="width:30px;background:#ffe0e0" />';
+    echo '<input type="hidden" id="interventionActivityType" value="" style="width:80px;background:#ffe0e0" />';
+    echo '<input type="hidden" id="interventionActivityId" value="" style="width:30px;background:#ffe0e0" />';
   }
   public static function setSize($size) {
     if ($size<20) {
