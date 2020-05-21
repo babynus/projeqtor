@@ -280,14 +280,18 @@ $currentMonth = strftime("%m");
                   }
                } ?>
       </div>
-      <div id="plannedWorkManualInterventionDiv"  name="plannedWorkManualInterventionDiv" style="margin:20px;">
-        <table>
-          <tr>
-            <td style="padding-right:20px;">
+      <div style="margin:20px;float: left">
+      <?php 
+        if(!$displayNothing){
+          //MODALITES
+          InterventionMode::drawList();
+        }
+      ?>
+      </div>
+      <div id="plannedWorkManualInterventionDiv"  name="plannedWorkManualInterventionDiv" style="margin:20px 20px 20px 192px;float: left">
+        
               <?php 
               if(!$displayNothing){
-                //MODALITES
-                InterventionMode::drawList();
                 if(!isset($yearSpinner))$yearSpinner=$currentYear;
                 if(!isset($monthSpinner))$monthSpinner=$currentMonth;
                 $listMonth=array($yearSpinner.$monthSpinner);
@@ -299,15 +303,11 @@ $currentMonth = strftime("%m");
                 }
                 PlannedWorkManual::setSize($size);
               } ?>
-            </td>
-            <td>
+           
               <?php //TAB RESOURCES
               if(!$displayNothing){
                 PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, false);
               } ?>
-            </td>
-         </tr>
-        </table>  
       </div>
     </div>
   </div>  

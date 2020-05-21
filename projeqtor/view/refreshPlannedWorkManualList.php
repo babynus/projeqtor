@@ -46,19 +46,24 @@ if ($resourceId and !$inIdTeam and !$inIdOrga) {
 }else{
   $res = new Resource();
   if(!$resourceId and $inIdTeam and !$inIdOrga){
-    $listResource = $res->getSqlElementsFromCriteria(array('idTeam'=>$inIdTeam,'idle'=>'0'));
+    $listResourceObj = $res->getSqlElementsFromCriteria(array('idTeam'=>$inIdTeam,'idle'=>'0'),null,null,null,true);
   }elseif(!$resourceId and !$inIdTeam and $inIdOrga){
-    $listResource = $res->getSqlElementsFromCriteria(array('idOrganization'=>$inIdOrga,'idle'=>'0'));
+    $listResourceObj = $res->getSqlElementsFromCriteria(array('idOrganization'=>$inIdOrga,'idle'=>'0'),null,null,null,true);
   }elseif($resourceId and $inIdTeam and $inIdOrga){
-    $listResource = $res->getSqlElementsFromCriteria(array('id'=>$resourceId,'idTeam'=>$inIdTeam,'idOrganization'=>$inIdOrga,'idle'=>'0'));
+    $listResourceObj = $res->getSqlElementsFromCriteria(array('id'=>$resourceId,'idTeam'=>$inIdTeam,'idOrganization'=>$inIdOrga,'idle'=>'0'),null,null,null,true);
   }elseif($resourceId and $inIdTeam and !$inIdOrga){
-    $listResource = $res->getSqlElementsFromCriteria(array('id'=>$resourceId,'idTeam'=>$inIdTeam,'idle'=>'0'));
+    $listResourceObj = $res->getSqlElementsFromCriteria(array('id'=>$resourceId,'idTeam'=>$inIdTeam,'idle'=>'0'),null,null,null,true);
   }elseif($resourceId and !$inIdTeam and $inIdOrga){
-    $listResource = $res->getSqlElementsFromCriteria(array('id'=>$resourceId,'idOrganization'=>$inIdOrga,'idle'=>'0'));
+    $listResourceObj = $res->getSqlElementsFromCriteria(array('id'=>$resourceId,'idOrganization'=>$inIdOrga,'idle'=>'0'),null,null,null,true);
   }elseif(!$resourceId and $inIdTeam and $inIdOrga){
-    $listResource = $res->getSqlElementsFromCriteria(array('idTeam'=>$inIdTeam,'idOrganization'=>$inIdOrga,'idle'=>'0'));
+    $listResourceObj = $res->getSqlElementsFromCriteria(array('idTeam'=>$inIdTeam,'idOrganization'=>$inIdOrga,'idle'=>'0'),null,null,null,true);
   }else{
     $displayNothing = true;
+  }
+  if (isset($listResourceObj) and is_array($listResourceObj)) {
+    foreach ($listResourceObj as $obj) {
+      $listResource[]=$obj->id;
+    }
   }
 }
 
@@ -69,30 +74,20 @@ if ($resourceId and !$inIdTeam and !$inIdOrga) {
                 PlannedWorkManual::drawActivityTable($idProject); 
               }?>
       </div>
-      <div id="plannedWorkManualInterventionDiv"  name="plannedWorkManualInterventionDiv" style="margin:20px;">
-        <table>
-          <tr>
-            <td style="padding-right:20px;">
-              <?php  
-              //MODALITES
-              if(!$displayNothing){
-                if(!$onlyRes){
-                  foreach ($listResource as $id=>$val){
-                    $listResource[$id]=$val->id;
-                  }
-                }
-                InterventionMode::drawList();
-                $listMonth=array($yearSpinner.$monthSpinner);
-                $size=30;
-                PlannedWorkManual::setSize($size); 
-               } ?>
-            </td>
-            <td>
+      <div style="margin:20px;float: left">
+            <?php 
+        if(!$displayNothing){
+          //MODALITES
+          InterventionMode::drawList();
+        }
+      ?>
+      </div>
+      <div id="plannedWorkManualInterventionDiv"  name="plannedWorkManualInterventionDiv" style="margin:20px 20px 20px 192px;float: left">
               <?php //TAB RESOURCES
+              $listMonth=array($yearSpinner.$monthSpinner);
+              $size=30;
+              PlannedWorkManual::setSize($size);
               if(!$displayNothing){
                 PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, false); 
               }?>
-            </td>
-          </tr>
-        </table>  
       </div>

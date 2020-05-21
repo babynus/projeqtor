@@ -2834,9 +2834,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         if ($isDuration) {
           if((substr($col, -9, 9)=='DurationY')){
-            echo i18n("shortYear");
+            echo i18n("colYears");
           }elseif((substr($col, -9, 9)=='DurationM')){
-            echo i18n("shortMonth");
+            echo i18n("colMonths");
           }else{
             echo i18n("shortDay");
           }
