@@ -298,7 +298,7 @@ $currentMonth = strftime("%m");
             }
           ?>
           </div>
-          <div id="plannedWorkManualInterventionDiv"  name="plannedWorkManualInterventionDiv" style="min-width:1123px;left:470px;top:20px;position:absolute;">
+          <div id="plannedWorkManualInterventionDiv"  name="plannedWorkManualInterventionDiv" style="min-width:1123px;left:475px;top:20px;position:absolute;">
             
                   <?php 
                   if(!$displayNothing){
