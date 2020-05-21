@@ -38,7 +38,7 @@ $currentMonth = strftime("%m");
 ?>
 
 <div dojoType="dijit.layout.BorderContainer" id="plannedWorkManualParamDiv" name="plannedWorkManualParamDiv">  
-  <div dojoType="dijit.layout.ContentPane" region="top" id="plannedWorkManualButtonDiv" class="listTitle" >
+  <div dojoType="dijit.layout.ContentPane" region="top" id="plannedWorkManualButtonDiv" class="listTitle" splitter="false" >
       <form dojoType="dijit.form.Form" name="listFormPlannedWorkManual" id="listFormPlannedWorkManual" action="" method="post" >
       <table width="100%" height="64px" class="listTitle">
         <tr height="32px">
@@ -232,8 +232,16 @@ $currentMonth = strftime("%m");
       </table>
       </form>
     </div>
-    <div id="fullPlannedWorkManualList" name="fullPlannedWorkManualList" dojoType="dijit.layout.ContentPane" region="center" >
-       <?php  $listResource = array();
+    <?php 
+    if(!isset($yearSpinner))$yearSpinner=$currentYear;
+    if(!isset($monthSpinner))$monthSpinner=$currentMonth;
+    $size=30;
+    PlannedWorkManual::setSize($size);
+    ?>
+    <div id="fullPlannedWorkManualList" name="fullPlannedWorkManualList" dojoType="dijit.layout.ContentPane" region="center" splitter="false">
+      <div dojoType="dijit.layout.BorderContainer" >
+        <div  dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:30%">
+        <?php  $listResource = array();
               $resourceId = null;$inIdTeam = null;$inIdOrga = null;$onlyRes = false;
               if(isset($userName)){
                 $resourceId = trim($userName);
@@ -267,47 +275,47 @@ $currentMonth = strftime("%m");
                 }
               }?>
     
-      <div id="activityTable" name="activityTable" style="margin:20px;">
-        <?php if(!$displayNothing){
+          <div id="activityTable" name="activityTable" style="margin:20px;">
+          <?php if(!$displayNothing){
                   if(isset($idProject)){
                     if(trim($idProject)==''){
-                      PlannedWorkManual::drawActivityTable();
+                      PlannedWorkManual::drawActivityTable(null,$yearSpinner.$monthSpinner);
                     }else{
-                      PlannedWorkManual::drawActivityTable($idProject);
+                      PlannedWorkManual::drawActivityTable($idProject,$yearSpinner.$monthSpinner);
                     }
                   }else{
-                    PlannedWorkManual::drawActivityTable();
+                    PlannedWorkManual::drawActivityTable(null,$yearSpinner.$monthSpinner);
                   }
                } ?>
-      </div>
-      <div style="margin:20px;float: left">
-      <?php 
-        if(!$displayNothing){
-          //MODALITES
-          InterventionMode::drawList();
-        }
-      ?>
-      </div>
-      <div id="plannedWorkManualInterventionDiv"  name="plannedWorkManualInterventionDiv" style="margin:20px 20px 20px 192px;float: left">
-        
-              <?php 
-              if(!$displayNothing){
-                if(!isset($yearSpinner))$yearSpinner=$currentYear;
-                if(!isset($monthSpinner))$monthSpinner=$currentMonth;
-                $listMonth=array($yearSpinner.$monthSpinner);
-                $size=30;
-                if(!$onlyRes){
-                  foreach ($listResource as $id=>$val){
-                    $listResource[$id]=$val->id;
-                  } 
-                }
-                PlannedWorkManual::setSize($size);
-              } ?>
-           
-              <?php //TAB RESOURCES
-              if(!$displayNothing){
-                PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, false);
-              } ?>
+          </div>
+        </div>
+        <div  dojoType="dijit.layout.ContentPane" region="center" style="overflow:auto">
+          <div style="position: absolute; left:20px;top:20px;">
+          <?php 
+            if(!$displayNothing){
+              //MODALITES
+              InterventionMode::drawList();
+            }
+          ?>
+          </div>
+          <div id="plannedWorkManualInterventionDiv"  name="plannedWorkManualInterventionDiv" style="min-width:1123px;left:470px;top:20px;position:absolute;">
+            
+                  <?php 
+                  if(!$displayNothing){
+                    $listMonth=array($yearSpinner.$monthSpinner);
+                    if(!$onlyRes){
+                      foreach ($listResource as $id=>$val){
+                        $listResource[$id]=$val->id;
+                      } 
+                    }
+                  } ?>
+               
+                  <?php //TAB RESOURCES
+                  if(!$displayNothing){
+                    PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, false);
+                  } ?>
+          </div>
+        </div>
       </div>
     </div>
   </div>  
