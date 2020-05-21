@@ -733,8 +733,11 @@ class Parameter extends SqlElement {
    	    $list = array('NO'=>i18n('displayNo'),
    	    'YES'=>i18n('displayYes'));
    	    break;
-
    	  // MTY - EXPORT EXCEL OR ODS
+      case 'plannedWorkManualType':
+        $list = array('planned'=>i18n('colPlanned'),
+            'real'=>i18n('colReal'));
+        break;
     } 
     return $list;
   }
@@ -858,6 +861,7 @@ class Parameter extends SqlElement {
           	                  'dependencyStrictMode'=>'list',
           	                  'isManualProgress'=>'list',
           	                  'technicalProgress'=>'list',
+          	                  'plannedWorkManualType'=>'list',
           	                'sectionTicket'=>'section',
           	                  'realWorkOnlyForResponsible'=>'list',
           	                  'responsibleFromProduct'=>'list',

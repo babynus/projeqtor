@@ -695,9 +695,10 @@ function formatDecimalToDisplay(val) {
 
 // PlannedWorkManual functions
 
+var selectInterventionDateInProgress=0;
 function selectInterventionDate(date,resource,period,event) {
   if(event.ctrlKey) period=period+'X';
-  console.log("selectInterventionDateTemp("+date+","+resource+","+period+")");
+  console.log("selectInterventionDate("+date+","+resource+","+period+")");
   var idMode=(dojo.byId('idInterventionMode'))?dojo.byId('idInterventionMode').value:'';
   var letterMode=(dojo.byId('letterInterventionMode'))?dojo.byId('letterInterventionMode').value:'';
   var refType=(dojo.byId('interventionActivityType'))?dojo.byId('interventionActivityType').value:'';
@@ -706,13 +707,18 @@ function selectInterventionDate(date,resource,period,event) {
   url+='&idMode='+idMode+"&letterMode="+letterMode;
   url+='&refType='+refType+"&refId="+refId;
   if (!idMode && !refType && !refId) {
-    console.log("Select intervention date : nothing selected");
+    var msg=i18n('errorInterventionInput');
+    displayMessageInResultDiv(msg,'WARNING',true,false);
     return;
   }
+  selectInterventionDateInProgress+=1;
+  showWait();
   dojo.xhrGet({
     url:url,
     handleAs: "text",
     load: function (data) {
+      selectInterventionDateInProgress-=1;
+      if (selectInterventionDateInProgress==0) hideWait();
       if (dojo.byId('selectInterventionDataResult')) dojo.byId('selectInterventionDataResult').value=data;
       var refreshUrl='../tool/refreshInterventionTable.php';
       if (dojo.byId('plannedWorkManualInterventionDiv') 

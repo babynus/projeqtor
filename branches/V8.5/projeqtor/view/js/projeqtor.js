@@ -2064,6 +2064,32 @@ function finalizeMessageDisplay(destination, validationType) {
   }
   forceRefreshCreationInfo = false;
 }
+function displayMessageInResultDiv(message,type,fade,showCloseBox) {
+  if (!type) type='WARNING';
+  contentNode = dojo.byId('resultDivMain');
+  contentNode.innerHTML = '<div class="message'+type+'" >'+message+'</div>';
+  contentNode.style.display='block';
+  //addMessage(message);
+  dojo.fadeIn({
+    node : contentNode,
+    duration : 10,
+    onEnd : function() {
+      if (showCloseBox) {
+        addCloseBoxToMessage('resultDivMain');
+      }
+      if (fade) {
+        if (resultDivFadingOut) resultDivFadingOut.stop();
+        resultDivFadingOut=dojo.fadeOut({
+          node : contentNode,
+          duration : 5000,
+          onEnd : function() {
+            dojo.byId('resultDivMain').style.display='none';
+          }
+        }).play();
+      }
+    }
+  }).play();
+}
 function addCloseBoxToMessage(destination) {
   contentWidget = dijit.byId(destination);
   var closeBox = '<div class="closeBoxIcon" onClick="clickCloseBoxOnMessage('

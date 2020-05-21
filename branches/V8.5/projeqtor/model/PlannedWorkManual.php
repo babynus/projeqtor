@@ -34,6 +34,8 @@ class PlannedWorkManual extends GeneralWork {
 	 public $idInterventionMode;
    public $inputUser;
    public $inputDateTime;
+   public $idWork;
+   public $idPlannedWork;
    private static $_size='22';
    
    public static $_cacheColor=array();
@@ -143,6 +145,7 @@ class PlannedWorkManual extends GeneralWork {
     debugLog("saveWork");
     $type=self::getWorkType();
     $wClass=($type=='real')?'Work':'PlannedWork';
+    $wField='id'.$wClass;
     debugLog("PlannedWorkManuel::save() - will save $wClass");
     $w=new $wClass();
     $critAss=array('idResource'=>$this->idResource, 'refType'=>$this->refType, 'refId'=>$this->refId);
@@ -158,6 +161,7 @@ class PlannedWorkManual extends GeneralWork {
       if ($work->id) {
         $workResult=$work->delete();
         debugLog("PlannedWorkManuel::save() - delete $wClass : $workResult");
+        $this->$wField=null;
       }
     } else {
       $ass=new Assignment();
@@ -178,8 +182,13 @@ class PlannedWorkManual extends GeneralWork {
       $work->idAssignment=$ass->id;
       $workResult=$work->save();
       debugLog("PlannedWorkManuel::save() - save $wClass : $workResult");
-      if (!$this->idAssignment or $this->idAssignment!=$ass->id) {
-        $this->idAssignment=$ass->id;
+      if (!$this->idAssignment or $this->idAssignment!=$ass->id or !$this->$wField or $this->$wField!=$work->id) {
+        if (!$this->idAssignment or $this->idAssignment!=$ass->id) {
+          $this->idAssignment=$ass->id;
+        } 
+        if (!$this->$wField or $this->$wField!=$work->id) {
+          $this->$wField=$work->id;
+        }
         $this->simpleSave();
       }
     }
@@ -195,9 +204,17 @@ class PlannedWorkManual extends GeneralWork {
     $w=new Work();
     $realwork=$w->sumSqlElementsFromCriteria('work', $crit);
     $plannedwork=$pw->sumSqlElementsFromCriteria('work', $crit);
+    $realStart=$w->getMinValueFromCriteria('workDate', $crit,null,true);
+    $realEnd=$w->getMaxValueFromCriteria('workDate', $crit);
+    $plannedStart=$pw->getMinValueFromCriteria('workDate', $crit,null,true);
+    $plannedEnd=$pw->getMaxValueFromCriteria('workDate', $crit);
     $ass->assignedWork=$plannedwork+$realwork;
     $ass->leftWork=$plannedwork;
     $ass->realWork=$realwork;
+    $ass->plannedStartDate=$plannedStart;
+    $ass->plannedEndDate=$plannedEnd;
+    $ass->realStartDate=$realStart;
+    $ass->realEndDate=$realEnd;
     $resAss=$ass->save();
     debugLog("Save Assignment : $resAss");
   }
@@ -355,8 +372,14 @@ class PlannedWorkManual extends GeneralWork {
         self::drawLine($scope, $idRes, $year, $month, $readonly);
         echo '<tr>';
       }
-      echo '</table>';      
+      echo '</table>';            
     }
+    $listR=(is_array($resourceList))?implode(',',$resourceList):$resourceList;
+    $listM=(is_array($monthList))?implode(',',$monthList):$monthList;
+    echo '<input type="text" id="plannedWorkManualInterventionSize" value="'.self::$_size.'" style="background:#ffe0e0"/>';
+    echo '<input type="text" id="plannedWorkManualInterventionResourceList" value="'.$listR.'" style="background:#ffe0e0"/>';
+    echo '<input type="text" style="width:500px;background:#ffe0e0" id="plannedWorkManualInterventionMonthList" value="'.$listM.'" />';
+    
   }
   
   public static function drawActivityTable($idProject=null,$monthYear=null) {
