@@ -209,6 +209,7 @@ class Assignment extends SqlElement {
       return $result;     
     }
     if (property_exists($this, "_skipDispatch") and $this->_skipDispatch==true) { // When called from Assignment::insertAdministrativeLines(), no dispatch needed
+      debugLog("no dispatch" );
       return $result;
     }
     
@@ -242,8 +243,10 @@ class Assignment extends SqlElement {
       }
     }
     if (! PlanningElement::$_noDispatch) {
+      debugLog('updateSynthesis');
       PlanningElement::updateSynthesis($this->refType, $this->refId);
     } else {
+      debugLog('updateSynthesisNoDispatch');
       PlanningElement::updateSynthesisNoDispatch($this->refType, $this->refId);
     }
 

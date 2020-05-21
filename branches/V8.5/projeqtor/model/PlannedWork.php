@@ -202,6 +202,8 @@ class PlannedWork extends GeneralWork {
     $pe=new PlanningElement();
     $peTable=$pe->getDatabaseTableName();
     $inClause.=" and (refType, refId) not in (select refType, refId from $peTable peFixed where fixPlanning=1) ";
+    // Do not plan "Manual Planning" activities
+    $inClause.=" and (refType, refId) not in (select refType, refId from $peTable peFixed where idPlanningMode=23) ";
     //-- Purge existing planned work
     $plan=new PlannedWork();
     $plan->purge($inClause);

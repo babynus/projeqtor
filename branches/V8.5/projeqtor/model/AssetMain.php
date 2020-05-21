@@ -52,13 +52,13 @@ class AssetMain extends SqlElement {
   public $idAffectable;
   public $idle;
   public $_sec_Cost;
+  public $_tab_2_1_3 = array('untaxedAmount','fullAmount','purchaseValue');
+  public $purchaseValueHTAmount;
+  public $purchaseValueTTCAmount;
   public $warantyDurationM;
   public $warantyEndDate;
   public $depreciationDurationY;
   public $needInsurance;
-  public $_tab_2_1_3 = array('untaxedAmount','fullAmount','purchaseValue');
-  public $purchaseValueHTAmount;
-  public $purchaseValueTTCAmount;
   public $_sec_AssetComposition;
   public $_assetComposition=array();
   public $_spe_arboAsset;
