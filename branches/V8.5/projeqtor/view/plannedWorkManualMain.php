@@ -33,10 +33,7 @@ require_once "../tool/formatter.php";
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="PlannedWorkManual" />
 <div class="container" dojoType="dijit.layout.BorderContainer">
-  <div id="listDiv" dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:100%;">
+  <div id="listDiv" dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:100%;" splitter="false">
    <?php include 'plannedWorkManualList.php'?>
-  </div>
-  <div id="detailDiv" dojoType="dijit.layout.ContentPane" region="center">
-   <?php $noselect=true; ?>
   </div>
 </div>  

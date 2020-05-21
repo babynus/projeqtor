@@ -66,15 +66,20 @@ if ($resourceId and !$inIdTeam and !$inIdOrga) {
     }
   }
 }
-
+$size=30;
+PlannedWorkManual::setSize($size);
 
 ?>
+  <div dojoType="dijit.layout.BorderContainer" >
+    <div  dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:30%">
       <div id="activityTable" name="activityTable" style="margin:20px;">
         <?php if(!$displayNothing){
-                PlannedWorkManual::drawActivityTable($idProject); 
+                PlannedWorkManual::drawActivityTable($idProject,$yearSpinner.$monthSpinner); 
               }?>
       </div>
-      <div style="margin:20px;float: left">
+    </div>
+    <div  dojoType="dijit.layout.ContentPane" region="center" style="overflow:auto">
+      <div style="position: absolute; left:20px;top:20px;">
             <?php 
         if(!$displayNothing){
           //MODALITES
@@ -82,12 +87,12 @@ if ($resourceId and !$inIdTeam and !$inIdOrga) {
         }
       ?>
       </div>
-      <div id="plannedWorkManualInterventionDiv"  name="plannedWorkManualInterventionDiv" style="margin:20px 20px 20px 192px;float: left">
+      <div id="plannedWorkManualInterventionDiv"  name="plannedWorkManualInterventionDiv" style="min-width:1123px;left:470px;top:20px;position:absolute;">
               <?php //TAB RESOURCES
               $listMonth=array($yearSpinner.$monthSpinner);
-              $size=30;
-              PlannedWorkManual::setSize($size);
               if(!$displayNothing){
                 PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, false); 
               }?>
       </div>
+    </div>
+  </div>
