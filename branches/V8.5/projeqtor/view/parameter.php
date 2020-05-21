@@ -546,7 +546,17 @@ function drawTableFromObjectList($objectList) {
   	echo ' onHide="saveCollapsed(\'' . $titlePane . '\');"';
   	echo ' onShow="saveExpanded(\'' . $titlePane . '\');"';
   	echo ' title="' . i18n('sectionDelete') . '">';
-  	htmlDrawCrossTable(array('canChangeNote'=>i18n('canChangeNote'),'canDeleteAttachement'=>i18n('canDeleteAttachement'),'canForceDelete'=>i18n('canForceDelete'), 'canForceClose'=>i18n('canForceClose'),'canUpdateCreation'=>i18n('canUpdateCreationInfo'),'viewComponents'=>i18n('viewComponents'),'generateProjExpense'=>i18n('generateProjectExpenseButton'),'situation'=>i18n('situationRight'),'canDeleteRealWork'=>i18n('canDeleteRealWork')), 'scope', 'profile', 'idProfile', 'habilitationOther', 'rightAccess', 'list', 'listYesNo') ;
+  	htmlDrawCrossTable(array(
+  	    'canChangeNote'=>i18n('canChangeNote'),
+  	    'canDeleteAttachement'=>i18n('canDeleteAttachement'),
+  	    'canForceDelete'=>i18n('canForceDelete'),
+  	    'canDeleteRealWork'=>i18n('canDeleteRealWork'), 
+  	    'canForceClose'=>i18n('canForceClose'),
+  	    'canUpdateCreation'=>i18n('canUpdateCreationInfo'),
+  	    'viewComponents'=>i18n('viewComponents'),
+  	    'generateProjExpense'=>i18n('generateProjectExpenseButton'),
+  	    'situation'=>i18n('situationRight')), 
+  	  'scope', 'profile','idProfile', 'habilitationOther', 'rightAccess', 'list', 'listYesNo') ;
   	echo '</div><br/>';
   	$titlePane="habilitationOther_ResourceVisibility";
   	echo '<div dojoType="dijit.TitlePane"';
