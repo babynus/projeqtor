@@ -104,8 +104,8 @@ class InterventionMode extends SqlElement {
       echo '</tr>';
     }
     echo '</table>';
-    echo '<input type="text" id="idInterventionMode" value="" style="width:20px;background:#ffe0e0" />';
-    echo '<input type="text" id="letterInterventionMode" value="" style="width:20px;background:#ffe0e0" />';
+    echo '<input type="hidden" id="idInterventionMode" value="" style="width:20px;background:#ffe0e0" />';
+    echo '<input type="hidden" id="letterInterventionMode" value="" style="width:20px;background:#ffe0e0" />';
   }
   
 }
