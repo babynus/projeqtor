@@ -369,6 +369,7 @@ checkIncorrectIdle: "netočan idle za ${1} #${2}&#44 ilde=${3}&#44 planningeleme
 checkIncorrectSumWork: "suma posla na ${1} #${2 je netočna&#44 stvarno (${3}) lijevo (${4}) != ponovno ocijenjeno (${5})",
 checkIncorrectWork: "rad na ${1} #${2}  prikazan kao ${3}&#44&#44 ali suma posla je ${4}",
 checkInvalidPoolAllocation: "Pool ${1} includes non existing resource ${2}",
+checkInvalidReferenceOnWork: "Invalid references on work #${1} - idResource='${2}' - refType='${3}' - refId='${4}'",
 CheckLeavesEarned: "Izračun stečenih prava",
 Checklist: "Kontrolni popis",
 checklistAccess: "pristup provjeru",

@@ -369,6 +369,7 @@ checkIncorrectIdle: "Falscher Leerlauf für ${1} #${2}&#44 idle=${3}&#44 plannin
 checkIncorrectSumWork: "Arbeit für ${1} #${2} angezeigt als ${3}&#44 aber die Summe der Werte ist ${4}",
 checkIncorrectWork: "Arbeit für ${1} #${2} angezeigt als ${3}&#44 aber die Summe der Werte ist ${4}",
 checkInvalidPoolAllocation: "Pool ${1} includes non existing resource ${2}",
+checkInvalidReferenceOnWork: "Invalid references on work #${1} - idResource='${2}' - refType='${3}' - refId='${4}'",
 CheckLeavesEarned: "Abwesenheitsrechte verdient",
 Checklist: "Checkliste",
 checklistAccess: "Zugriff auf Checklisten",

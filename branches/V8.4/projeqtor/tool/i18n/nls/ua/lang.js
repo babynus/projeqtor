@@ -369,6 +369,7 @@ checkIncorrectIdle: "неправильний режим простою(idle) д
 checkIncorrectSumWork: "сума роботи на ${1} #${2} неправильна&#44 реальна (${3}) та&#44 що залишилася (${4}) ! = переоцінена (${5})",
 checkIncorrectWork: "робота в ${1} #${2} відображається як ${3}&#44 але сума роботи становить ${4}",
 checkInvalidPoolAllocation: "Pool ${1} includes non existing resource ${2}",
+checkInvalidReferenceOnWork: "Invalid references on work #${1} - idResource='${2}' - refType='${3}' - refId='${4}'",
 CheckLeavesEarned: "Leave rights earned",
 Checklist: "Перелік (Checklist)",
 checklistAccess: "доступ до переліків (checklists)",
