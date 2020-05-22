@@ -138,23 +138,33 @@ class Work extends GeneralWork {
       $old=new Work($this->id);
       $oldWork=$old->work;
     }
+    $manualPlan=false;
     $additionalWork=$this->work-$oldWork;
     if ($additionalWork>0) {
-      $pw=new PlannedWork();
-      $pwm=new PlannedWorkManual();
+      //florent
+      $pe=new PlanningElement();
+      $critArray=array('refType'=>$this->refType, 'refId'=>$this->refId);
+      $yestDay=date("Y-m-d",strtotime("- 1 days"));
+      $pe=$pe->getSingleSqlElementFromCriteria('PlanningElement', $critArray);
+      if($pe->idPlanningMode=='23'){
+        $manualPlan=true;
+      }
+      //
       $crit=array('idAssignment'=>$this->idAssignment, 
                   'refType'=>$this->refType, 'refId'=>$this->refId, 
                   'idResource'=>$this->idResource,
                   'workDate'=>$this->workDate);
-      $list=$pw->getSqlElementsFromCriteria($crit, null, null, 'workDate asc');
-      $date= date("Y/m/d",strtotime("- 1 days"));
-      $critM=array('idAssignment'=>$this->idAssignment,
-                  'refType'=>$this->refType, 'refId'=>$this->refId,
-                  'idResource'=>$this->idResource,
-                  'workDate'=>$date);
-      $listPM=$pwm->getSqlElementsFromCriteria($critM, null, null, 'workDate asc');
-      $needReplanOtherProjects=(count($list)==0 or count($listPM)==0)?true:false;
-      while ($additionalWork>0 and (count($list)>0 or count($listPM)>0)) {
+      //florent
+      if($manualPlan){
+        $pwm=new PlannedWorkManual();
+        $list=$pwm->getSqlElementsFromCriteria($crit, null, null, 'workDate asc');
+      }else{
+        $pw=new PlannedWork();
+        $list=$pw->getSqlElementsFromCriteria($crit, null, null, 'workDate asc');
+      }
+      //
+      $needReplanOtherProjects=(count($list)==0)?true:false;
+      while ($additionalWork>0 and count($list)>0) {
         $pw=array_shift($list);
         if ($pw->work > $additionalWork) {
           $pw->work-=$additionalWork;
@@ -162,49 +172,24 @@ class Work extends GeneralWork {
           $additionalWork=0;
         } else {
           $additionalWork-=$pw->work;
-          $pw->delete();
-        }
-        if(count($listPM)>0){
-          $pwm=array_shift($listPM);
-          if($pwm->work > $additionalWork){
-            $pwm->work-=$additionalWork;
-            $pwm->save();
-            $additionalWork=0;
-          }else{
-            $additionalWork-=$pwm->work;
-            $pwm->delete();
+          if(($pw->workDate<=$yestDay and $manualPlan)){
+            $pw->delete();
           }
         }
-        if ((count($list)==0 and isset($crit['workDate'])) or (count($listPM)==0 and  isset($critM['workDate']))) {
+        if (count($list)==0 and isset($crit['workDate']) ) {
           $needReplanOtherProjects=true;
           unset($crit['workDate']);
-          if(count($list)==0 and isset($crit['workDate'])){
-            $list=$pw->getSqlElementsFromCriteria($crit, null, null, 'workDate asc');
-          }else{
-            $listPM=$pwm->getSqlElementsFromCriteria($critM, null, null, 'workDate asc');
-          }
+          $list=$pw->getSqlElementsFromCriteria($crit, null, null, 'workDate asc');
         }
       }
       if ($needReplanOtherProjects) {
         $where="idResource=$this->idResource and workDate='$this->workDate' and idProject!=$this->idProject";
         $list=$pw->getSqlElementsFromCriteria(null, null, $where, 'workDate asc');
-        $whereM="idResource=$this->idResource and workDate='$date' and idProject!=$this->idProject";
-        $listPM=$pwm->getSqlElementsFromCriteria(null, null, $where, 'workDate asc');
         $arrayProjTreated=array();
-        if(!empty($list)){
-          foreach ($list as $pw) {
-            if (!isset($arrayProjTreated[$pw->idProject])) {
-              $arrayProjTreated[$pw->idProject]=$pw->idProject;
-              Project::setNeedReplan($pw->idProject);
-            }
-          }
-        }
-        if(!empty($listPM)){
-          foreach ($listPM as $pwm) {
-            if (!isset($arrayProjTreated[$pwm->idProject])) {
-              $arrayProjTreated[$pwm->idProject]=$pwm->idProject;
-              Project::setNeedReplan($pw->idProject);
-            }
+        foreach ($list as $pw) {
+          if (!isset($arrayProjTreated[$pw->idProject])) {
+            $arrayProjTreated[$pw->idProject]=$pw->idProject;
+            Project::setNeedReplan($pw->idProject);
           }
         }
       }
