@@ -369,6 +369,7 @@ checkIncorrectIdle: "incorrect idle for ${1} #${2}&#44 ilde=${3}&#44 planningele
 checkIncorrectSumWork: "sum of work on ${1} #${2} is incorrect&#44 real (${3}) &#43; left (${4}) != reassessed (${5})",
 checkIncorrectWork: "work on ${1} #${2} displayed as ${3}&#44 but sum of work is ${4}",
 checkInvalidPoolAllocation: "Pool ${1} includes non existing resource ${2}",
+checkInvalidReferenceOnWork: "Invalid references on work #${1} - idResource='${2}' - refType='${3}' - refId='${4}'",
 CheckLeavesEarned: "Leave rights earned",
 Checklist: "チェックリスト",
 checklistAccess: "チェックリストにアクセス",
