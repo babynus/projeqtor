@@ -326,7 +326,7 @@ class ImputationLine {
         //florent
           if($plan->refType=='Activity' and $plan->idPlanningMode=='23'){
             $manuPlan=true;
-            $plannedWorkMan=new PlannedWorkManual();
+            $plannedWorkMan=new PlannedWork();
             $critWhere="idProject='".$plan->idProject."' and refType='".$plan->refType."'";
             $critWhere.=" and refId='$plan->refId' and workDate between'".$startDate."' and '".(($endDate<=date('Y-m-d'))?$endDate:date('Y-m-d'))."'";
             $plannedManualWorkList=$plannedWorkMan->getSqlElementsFromCriteria(null, false, $critWhere, null, false, true);
