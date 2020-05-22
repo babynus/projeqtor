@@ -372,6 +372,7 @@ if ($type == 'empty') {
       $critField = $_REQUEST ['critField'];
       $critVal = $_REQUEST ['critValue'];
       if ($critField == 'idProject') {
+        if (strpos($critVal, ',')) $critVal=explode(',', $critVal);
         $rtListProjectType = Type::listRestritedTypesForClass ( $class, $critVal, null, null );
         if (count ( $rtListProjectType )) {
           foreach ( $list as $id => $val ) {
