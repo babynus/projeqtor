@@ -350,9 +350,7 @@ class ActivityPlanningElementMain extends PlanningElement {
       }
       $clause= "idProject=".$this->idProject." and refType='".$this->refType."' and refId=".$this->refId;
       $pw->purge($clause);
-      if($old->idPlanningMode=='23'){
-        $ass->purge($clause);
-      }else{
+      if($old->idPlanningMode!='23'){
         $ass->plannedWork;
         $lstAss=$ass->getSqlElementsFromCriteria(null, null,$clause);
         if($lstAss){
@@ -395,7 +393,7 @@ class ActivityPlanningElementMain extends PlanningElement {
    
     }
     $old = $this->getOld();
-    if($this->idActivityPlanningMode!='23' and $old->idPlanningMode=='23' and !SqlElement::isSaveConfirmed()){
+    if($this->idActivityPlanningMode!='23' and $old->idPlanningMode=='23' and $this->plannedWork!='' and !SqlElement::isSaveConfirmed()){
         $result.='<br/>' . i18n('changePlanMan');
         $result.='<input type="hidden" name="confirmControl" id="confirmControl" value="save" />';
     }
