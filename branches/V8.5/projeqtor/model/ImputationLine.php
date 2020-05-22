@@ -471,6 +471,7 @@ class ImputationLine {
           }
         }
       }
+      
       $result[$key]=$elt;
     }
     // If some not assigned work exists : add group line
@@ -497,7 +498,6 @@ class ImputationLine {
     foreach ($result as $key=>$elt) {
       $result=self::getParent($elt, $result, true, $accessRight);
     }
-    ksort($result);
     return $result;
   }
   
@@ -755,7 +755,16 @@ class ImputationLine {
       }
     }
     $listLienProject=ImputationLine::addProjectToListLienProject($listLienProject, $listAllProject);
+    $manuPlan=false;
     foreach ($tab as $key=>$line) {
+      $pe=new PlanningElement();
+      if($line->refType=='Activity'){
+        $critArray=array("refType"=>$line->refType,"refId"=>$line->refId,"idProject"=>$line->idProject);
+        $pe=$pe->getSingleSqlElementFromCriteria('PlanningElement', $critArray);
+        if($pe->idPlanningMode=='23'){
+          $manuPlan=true;
+        }
+      }
 // gautier hide activity with planning element isManualProgress = 1
 //       $isManualProgress = false;
 //       if($line->refType=='Activity'){
@@ -1077,6 +1086,19 @@ class ImputationLine {
         echo '<td class="ganttDetail" align="center" width="'.($workWidth*2+1).'px;" '.(($print)?'colspan="2"':'').'>';
         if ($line->imputable) {
           if (!$print) {
+            if($manuPlan){
+              $workPM=0;
+              foreach ($line->arrayWork as $id=>$planWork){
+                if($planWork->work!='' and $planWork->workDate<date("Y-m-d",strtotime("- 1 days"))){
+                  debugLog($planWork->work);
+                  $workPM+=$planWork->work;
+                }
+              }
+              if($workPM!=0){
+                $line->leftWork=$line->assignedWork-($line->realWork+$workPM);
+                if($line->leftWork<0)$line->leftWork=0;
+              }
+            }
             echo '<div type="text" dojoType="dijit.form.NumberTextBox" ';
             echo ' constraints="{min:0}"';
             echo '  style="width: 60px; text-align: center;'.(($line->idle or $line->locked)?'color:#A0A0A0; xbackground: #EEEEEE;':'').' " ';

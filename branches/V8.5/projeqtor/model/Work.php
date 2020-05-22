@@ -156,8 +156,8 @@ class Work extends GeneralWork {
                   'workDate'=>$this->workDate);
       //florent
       if($manualPlan){
-        $pwm=new PlannedWorkManual();
-        $list=$pwm->getSqlElementsFromCriteria($crit, null, null, 'workDate asc');
+        $pw=new PlannedWorkManual();
+        $list=$pw->getSqlElementsFromCriteria($crit, null, null, 'workDate asc');
       }else{
         $pw=new PlannedWork();
         $list=$pw->getSqlElementsFromCriteria($crit, null, null, 'workDate asc');
@@ -173,6 +173,14 @@ class Work extends GeneralWork {
         } else {
           $additionalWork-=$pw->work;
           if(($pw->workDate<=$yestDay and $manualPlan)){
+            if($manualPlan){
+              array('idAssignment'=>$pw->idAssignment, 
+                  'refType'=>$pw->refType, 'refId'=>$pw->refId, 
+                  'idResource'=>$pw->idResource,
+                  'workDate'=>$pw->workDate);
+              $planW=SqlElement::getSingleSqlElementFromCriteria('PlannedWork',$critArray );
+              $planW->delete();
+            }
             $pw->delete();
           }
         }
