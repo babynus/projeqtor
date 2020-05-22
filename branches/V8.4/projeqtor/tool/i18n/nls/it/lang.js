@@ -369,6 +369,7 @@ checkIncorrectIdle: "idle errato per ${1} #${2}&#44 idle=${3}&#44 planningelemen
 checkIncorrectSumWork: "la somma del lavoro su ${1} #${2} è errata&#44 real (${3}) left (${4}) != rivalutato (${5})",
 checkIncorrectWork: "il lavoro su ${1} #${2} mostrato come ${3}&#44 ma la somma del lavoro è ${4}",
 checkInvalidPoolAllocation: "Pool ${1} includes non existing resource ${2}",
+checkInvalidReferenceOnWork: "Invalid references on work #${1} - idResource='${2}' - refType='${3}' - refId='${4}'",
 CheckLeavesEarned: "Leave rights earned",
 Checklist: "Checklist",
 checklistAccess: "accedi alle checklists",

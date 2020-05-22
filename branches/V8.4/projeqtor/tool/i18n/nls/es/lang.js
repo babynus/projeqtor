@@ -369,6 +369,7 @@ checkIncorrectIdle: "Inactividad incorrecta para ${1} #${2}&#44 idle=${3}&#44 pl
 checkIncorrectSumWork: "el trabajo en ${1} #${2} se muestra como ${3}&#44 pero la suma del trabajo es ${4}",
 checkIncorrectWork: "el trabajo en ${1} #${2} se muestra como ${3}&#44 pero la suma del trabajo es ${4}",
 checkInvalidPoolAllocation: "Pool ${1} includes non existing resource ${2}",
+checkInvalidReferenceOnWork: "Invalid references on work #${1} - idResource='${2}' - refType='${3}' - refId='${4}'",
 CheckLeavesEarned: "Leave rights earned",
 Checklist: "Lista de verificación",
 checklistAccess: "Acceso a listas de verificación",

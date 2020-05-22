@@ -369,6 +369,7 @@ checkIncorrectIdle: "incorrect idle pour ${1} #${2}&#44 ilde=${3}&#44 planningel
 checkIncorrectSumWork: "somme du travail sur ${1} #${2} incorrecte&#44 réel (${3}) &#43; reste (${4}) != réévalué (${5})",
 checkIncorrectWork: "travail sur ${1} #${2} affiché à ${3}&#44 mais la somme du travail est de ${4}",
 checkInvalidPoolAllocation: "Le groupe de ressources ${1} intègre une ressource inconnue ${2}",
+checkInvalidReferenceOnWork: "References invalides sur le travail #${1} - idResource='${2}' - refType='${3}' - refId='${4}'",
 CheckLeavesEarned: "Calcul des droits acquis",
 Checklist: "Liste de contrôle",
 checklistAccess: "Accès aux listes de contrôle",
