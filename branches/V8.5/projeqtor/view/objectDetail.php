@@ -2789,7 +2789,6 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo ' constraints="{places:2}" ';
         } else if ($dec>0) {
           echo ' constraints="{places:\'0,'.$dec.'\'}" ';
-          debugLog("$col accepts $dec decimals");
         }
         echo ' class="input '.(($isRequired)?'required':'').' generalColClass '.$notReadonlyClass.$notRequiredClass.$col.'Class" ';
         // echo ' layoutAlign ="right" ';

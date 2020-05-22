@@ -108,7 +108,6 @@ class PlannedWorkManual extends GeneralWork {
   }
   
   public function delete() {
-    debugLog("DELETE");
     $old=$this->getOld();
     $result=parent::delete();
     if ($old->refType) {
@@ -119,7 +118,6 @@ class PlannedWorkManual extends GeneralWork {
   }
   
   public function save() {
-    debugLog("SAVE");
     $old=$this->getOld();
     if ($this->refType) {
       $refType=$this->refType;
@@ -142,11 +140,9 @@ class PlannedWorkManual extends GeneralWork {
   }
   
   function saveWork() {
-    debugLog("saveWork");
     $type=self::getWorkType();
     $wClass=($type=='real')?'Work':'PlannedWork';
     $wField='id'.$wClass;
-    debugLog("PlannedWorkManuel::save() - will save $wClass");
     $w=new $wClass();
     $critAss=array('idResource'=>$this->idResource, 'refType'=>$this->refType, 'refId'=>$this->refId);
     $crit=array('workDate'=>$this->workDate, 'idResource'=>$this->idResource, 'refType'=>$this->refType, 'refId'=>$this->refId);
@@ -160,7 +156,6 @@ class PlannedWorkManual extends GeneralWork {
     if ($sum==0) {
       if ($work->id) {
         $workResult=$work->delete();
-        debugLog("PlannedWorkManuel::save() - delete $wClass : $workResult");
         $this->$wField=null;
       }
     } else {
@@ -174,14 +169,12 @@ class PlannedWorkManual extends GeneralWork {
       if (!$ass->id) {
         $ass->idProject=$this->idProject;
         $assResult=$ass->save();
-        debugLog("PlannedWorkManuel::save() - save Assignment : $assResult");
       }
       $work->work=$sum;
       $work->idProject=$this->idProject;
       $work->setDates($this->workDate);
       $work->idAssignment=$ass->id;
       $workResult=$work->save();
-      debugLog("PlannedWorkManuel::save() - save $wClass : $workResult");
       if (!$this->idAssignment or $this->idAssignment!=$ass->id or !$this->$wField or $this->$wField!=$work->id) {
         if (!$this->idAssignment or $this->idAssignment!=$ass->id) {
           $this->idAssignment=$ass->id;
@@ -216,7 +209,6 @@ class PlannedWorkManual extends GeneralWork {
     $ass->realStartDate=$realStart;
     $ass->realEndDate=$realEnd;
     $resAss=$ass->save();
-    debugLog("Save Assignment : $resAss");
   }
   
   
@@ -463,7 +455,6 @@ class PlannedWorkManual extends GeneralWork {
   }
   public static function setSize($size) {
     if ($size<20) {
-      debugLog("PlannedWorkManual::setSize($size) cannot set less than 20");
       $size=20;
     }
     self::$_size=$size;
