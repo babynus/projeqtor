@@ -38,7 +38,6 @@ $where= "scope= '".$objClass."'";
 $valType=$getType->getSqlElementsFromCriteria(null,false,$where);
 $type='id'.$objClass.'Type';
 if(empty($valType)){
-  debugLog('ok');
   return;
 }
 Sql::beginTransaction();
