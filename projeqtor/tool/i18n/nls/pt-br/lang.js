@@ -1463,6 +1463,7 @@ confirmAssignWholeTeam: "This operation will assign all team members to the meet
 confirmChangeLoosing: "Alterações em andamento não estão salvas.<br/>Se continuar você perderá estas alterações.<br/>Deseja continuar?",
 confirmCloseBudgetElement: "Are you sure to close this budget period ?",
 confirmControlDelete: "Os itens dependentes também serão excluídos",
+confirmControlDeletePlannedWork: "<b>Warning&#44 some items with planned work will be deleted</b><br/>This cannot be undone and may lead to unconsitency of your data.",
 confirmControlSave: "Os itens dependentes também serão salvos",
 confirmCopy: "Copiar ${1} #${2} ?",
 confirmDelete: "Excluir o ${1} #${2} ?",

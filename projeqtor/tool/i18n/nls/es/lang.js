@@ -1463,6 +1463,7 @@ confirmAssignWholeTeam: "Esta operación asignará a todos los miembros del equi
 confirmChangeLoosing: "Los cambios en curso no se han guardado.<br/>Si continúa&#44; perderá los cambios.<br/>Realmente desea continuar ?",
 confirmCloseBudgetElement: "¿Está seguro de cerrar este período presupuestario?",
 confirmControlDelete: "Los ítems siguientes son dependientes y también serán eliminados",
+confirmControlDeletePlannedWork: "<b>Warning&#44 some items with planned work will be deleted</b><br/>This cannot be undone and may lead to unconsitency of your data.",
 confirmControlSave: "Los ítems siguientes son dependientes y también serán cerrados",
 confirmCopy: "Copiar ${1} #${2} ?",
 confirmDelete: "Eliminar ${1} #${2} ?",

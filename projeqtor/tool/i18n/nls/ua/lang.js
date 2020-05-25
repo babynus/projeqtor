@@ -1463,6 +1463,7 @@ confirmAssignWholeTeam: "Ця операція буде призначати у�
 confirmChangeLoosing: "Поточни зміни не збережені.<br/>Якщо ви продовжите ви втратите ці зміни.<br/>Ви дійсно бажаєте продовжити?",
 confirmCloseBudgetElement: "Ви впевнені&#44; що треба закрити цей бюджетний період?",
 confirmControlDelete: "Наступні залежні елементи також будуть вилучено",
+confirmControlDeletePlannedWork: "<b>Warning&#44 some items with planned work will be deleted</b><br/>This cannot be undone and may lead to unconsitency of your data.",
 confirmControlSave: "Наступні залежні елементи також будуть закрито",
 confirmCopy: "Копіювати ${1} #${2} ?",
 confirmDelete: "Усунути ${1} #${2} ?",

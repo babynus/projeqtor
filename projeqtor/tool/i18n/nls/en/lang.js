@@ -1465,6 +1465,7 @@ confirmAssignWholeTeam: "This operation will assign all team members to the meet
 confirmChangeLoosing: "Ongoing change are not saved.<br/>If you continue you will loose this changes.<br/>Do you realy want to continue ?",
 confirmCloseBudgetElement: "Are you sure to close this budget period ?",
 confirmControlDelete: "Following dependent items will also be deleted",
+confirmControlDeletePlannedWork: "<b>Warning&#44 some items with planned work will be deleted</b><br/>This cannot be undone and may lead to unconsitency of your data.",
 confirmControlDeleteRealWork: "<b>Warning&#44 some items with real work will be deleted</b><br/>This cannot be undone and may lead to unconsitency of your data.",
 confirmControlSave: "Following dependent items will also be closed",
 confirmCopy: "Copy the ${1} #${2} ?",

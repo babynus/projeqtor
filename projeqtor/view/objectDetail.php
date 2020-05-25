@@ -6217,7 +6217,6 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
       echo '<td class="assignData'.$idleClass.'" align="center" style="width:15%;vertical-align:middle;text-align:center;">'.htmlEncode($assignment->rate).' '.i18n('percent').'</td>';
     }
     if ($workVisible) {
-      $readOnly=($planningMode == 'MAN')?"readonly":"";
       $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
       // echo '<td class="assignData" align="right" style="vertical-align:middle">'
       // mehdi======================ticket#1776
@@ -6226,11 +6225,11 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
         echo '<input type="hidden" id="initleft_'.$assignment->id.'" value="'.Work::displayWork($assignment->leftWork).'"/>';
       }
       echo '<td class="assignData'.$idleClass.'" align="right" style="width:15%;vertical-align:middle;">';
-      if ($canUpdate and get_class($obj)!='PeriodicMeeting' and !$print and $planningMode!='RECW') {
+      if ($canUpdate and get_class($obj)!='PeriodicMeeting' and !$print and $planningMode!='RECW' and $planningMode !="MAN" and !$assignment->idle) {
         echo '<img  id="idImageAssignedWork'.$assignment->id.'" src="../view/img/savedOk.png" 
                 style="display: none; position:relative;top:2px;left:5px; height:16px;float:left;"/>';
         echo '<div dojoType="dijit.form.NumberTextBox" id="assAssignedWork_'.$assignment->id.'" name="assAssignedWork_'.$assignment->id.'"
-    						  class="dijitReset dijitInputInner dijitNumberTextBox" '.$readOnly.'
+    						  class="dijitReset dijitInputInner dijitNumberTextBox"
       					  value="'.Work::displayWork($assignment->assignedWork).'"
                   style="padding:1px;background:none;max-width:100%; box-sizing:border-box;display:block;border:1px solid #A0A0A0 !important;margin:2px 0px" >
                    <script type="dojo/method" event="onChange">
@@ -6250,10 +6249,10 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
       
       if (!$print) echo '<input type="hidden" id="initLeft_'.$assignment->id.'" value="'.Work::displayWork($assignment->leftWork).'"/>';
       echo '<td class="assignData'.$idleClass.'" align="right" style="width:15%;vertical-align:middle;">';
-      if ($canUpdate and get_class($obj)!='PeriodicMeeting' and !$print and $planningMode!='RECW') {
+      if ($canUpdate and get_class($obj)!='PeriodicMeeting' and !$print and $planningMode!='RECW' and $planningMode !="MAN" and !$assignment->idle) {
         echo '<img  id="idImageLeftWork'.$assignment->id.'" src="img/savedOk.png" style="display: none; position:relative;top:2px;left:5px; height:16px;float:left;"/>';
         echo '<div dojoType="dijit.form.NumberTextBox" id="assLeftWork_'.$assignment->id.'" name="assLeftWork_'.$assignment->id.'"
-        				class="dijitReset dijitInputInner dijitNumberTextBox" '.$readOnly.'
+        				class="dijitReset dijitInputInner dijitNumberTextBox"
         				value="'.Work::displayWork($assignment->leftWork).'"
                 style="padding:1px;max-width:100%; background:none;box-sizing:border-box;display:block;border:1px solid #A0A0A0 !important;margin:2px 0px"  >
                 <script type="dojo/method" event="onChange">
