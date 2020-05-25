@@ -717,6 +717,14 @@ function selectInterventionDate(date,resource,period,event) {
     url:url,
     handleAs: "text",
     load: function (data) {
+      console.log(data);
+      if (dijit.byId('assignmentAssignedWork') && dijit.byId('assignmentRealWork') && dijit.byId('assignmentLeftWork')) {
+        var result=JSON.parse(data);
+        if (result.assigned!==null) dijit.byId('assignmentAssignedWork').set('value',result.assigned);
+        if (result.real!==null) dijit.byId('assignmentRealWork').set('value',result.real);
+        if (result.left!==null) dijit.byId('assignmentLeftWork').set('value',result.left);
+        if (result.real!==null && result.left!==null) dijit.byId('assignmentPlannedWork').set('value',result.real+result.left);
+      }
       selectInterventionDateInProgress-=1;
       if (selectInterventionDateInProgress==0) hideWait();
       if (dojo.byId('selectInterventionDataResult')) dojo.byId('selectInterventionDataResult').value=data;
