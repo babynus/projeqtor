@@ -279,10 +279,12 @@ class PlannedWorkManual extends GeneralWork {
       echo '<td style="border:1px solid #a0a0a0;">';
       echo '<table style="width:100%;height:100%">';
       $color=getForeColor($colorAM);
-      $cursor="pointer";
-      echo '<tr style="height:'.$midSize.'px;"><td onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'AM\',event)" style="cursor:'.$cursor.';width:100%;background:'.$colorAM.';border-bottom:1px solid #e0e0e0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterAM.'</div></td></tr>';
+      $cursor=($readonly)?"normal":"pointer";
+      $onClickAM=($readonly)?'':'onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'AM\',event);"';
+      $onClickPM=($readonly)?'':'onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'PM\',event);"';
+      echo '<tr style="height:'.$midSize.'px;"><td '.$onClickAM.' style="cursor:'.$cursor.';width:100%;background:'.$colorAM.';border-bottom:1px solid #e0e0e0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterAM.'</div></td></tr>';
       $color=getForeColor($colorPM);
-      echo '<tr style="height:'.$midSize.'px;"><td onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'PM\',event)" style="cursor:'.$cursor.';width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterPM.'</div></td></tr>';
+      echo '<tr style="height:'.$midSize.'px;"><td '.$onClickPM.' style="cursor:'.$cursor.';width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterPM.'</div></td></tr>';
       echo '</table>';  
       echo '</td>';
     }
@@ -385,7 +387,7 @@ class PlannedWorkManual extends GeneralWork {
     
   }
   
-  public static function drawActivityTable($idProject=null,$monthYear=null) {
+  public static function drawActivityTable($idProject=null,$monthYear=null,$readonly=false) {
     if($idProject){
       $crit=array('idPlanningMode'=>23,'idle'=>'0','idProject'=>$idProject);
     }else{
@@ -427,8 +429,10 @@ class PlannedWorkManual extends GeneralWork {
         $projList[$pe->idProject]=$proj->name;
       }
       $badgeSize=self::$_size-4;
+      $onClick=($readonly)?'':'onClick="selectInterventionActivity(\''.$pe->refType.'\','.$pe->refId.','.$pe->id.');"';
+      $cursor=($readonly)?"normal":"pointer";
       $colorBadge='<div style="border-radius:'.($badgeSize/2+2).'px;border:1px solid #e0e0e0;width:'.$badgeSize.'px;height:'.$badgeSize.'px;float:left;background-color:'.self::getColor($pe->refType,$pe->refId).'" ></div>';
-      echo '<tr style="cursor:pointer" class="dojoxGridRow" onClick="selectInterventionActivity(\''.$pe->refType.'\','.$pe->refId.','.$pe->id.');">';
+      echo '<tr style="cursor:'.$cursor.'" class="dojoxGridRow" '.$onClick.'>';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.$nameWidth.'px">'.$projList[$pe->idProject].'</td>';
       echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.($idWidth).'px" >#'.$pe->refId.'</td>';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-right:0;width:'.($idWidth).'px" >'.$colorBadge.'</td>';
@@ -449,7 +453,6 @@ class PlannedWorkManual extends GeneralWork {
           echo '<td style="border:1px solid #a0a0a0;">';
           echo '<table style="width:100%;height:100%">';
           $color=getForeColor($colorAM);
-          $cursor="pointer";
           echo '<tr style="height:'.$midSize.'px;"><td style="width:100%;background:'.$colorAM.';border-bottom:1px solid #e0e0e0;position:relative;text-align:center;"></td></tr>';
           $color=getForeColor($colorPM);
           echo '<tr style="height:'.$midSize.'px;"><td style="width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"></td></tr>';

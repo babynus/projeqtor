@@ -90,7 +90,7 @@ class InterventionMode extends SqlElement {
     return self::$_fieldsAttributes;
   }
   
-  public static function drawList() {
+  public static function drawList($readonly=false) {
     $im=new InterventionMode();
     $list=$im->getSqlElementsFromCriteria(array('idle'=>'0'));
     echo '<table>';
@@ -98,7 +98,9 @@ class InterventionMode extends SqlElement {
     echo '<td class="reportTableHeader" colspan="2" style="width:220px">'.i18n('menuInterventionMode').'</td>';
     echo '</tr>';
     foreach ($list as $im) {
-      echo '<tr class="dojoxGridRow interventionModeSelector interventionModeSelector'.$im->id.'" style="cursor:pointer" onClick="selectInterventionMode('.$im->id.',\''.$im->letter.'\');">';
+      $onClick=($readonly)?'':'onClick="selectInterventionMode('.$im->id.',\''.$im->letter.'\');"';
+      $cursor=($readonly)?"normal":"pointer";
+      echo '<tr class="dojoxGridRow interventionModeSelector interventionModeSelector'.$im->id.'" style="cursor:'.$cursor.'" '.$onClick.'>';
       echo '<td class="dojoxGridCell interventionModeSelector interventionModeSelector'.$im->id.'" style="width:20px;text-align:center">'.$im->letter.'</td>';
       echo '<td class="dojoxGridCell interventionModeSelector interventionModeSelector'.$im->id.'" style="width:200px">'.$im->name.'</td>';
       echo '</tr>';
