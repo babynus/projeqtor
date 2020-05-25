@@ -371,6 +371,7 @@ if ($type == 'empty') {
     if (array_key_exists ( 'critField', $_REQUEST ) and array_key_exists ( 'critValue', $_REQUEST )) {
       $critField = $_REQUEST ['critField'];
       $critVal = $_REQUEST ['critValue'];
+      //if (strpos($critVal,',')>0) $critVal=null; // Is it really usefull to have selection of multile projects...
       if ($critField == 'idProject') {
         if (strpos($critVal, ',')) $critVal=explode(',', $critVal);
         $rtListProjectType = Type::listRestritedTypesForClass ( $class, $critVal, null, null );
