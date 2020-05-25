@@ -1201,6 +1201,14 @@
 .ProjeQtOrFlatGreen .iconLocation { background-image: url(customIcons/green/iconLocation.png); }
 .ProjeQtOrFlatGrey .iconLocation { background-image: url(customIcons/grey/iconLocation.png); }
 
+/* M */
+
+.iconInterventionMode { background-image: url(images/iconInterventionMode.png); }
+.ProjeQtOrFlatBlue .iconInterventionMode { background-image: url(customIcons/blue/iconInterventionMode.png); }
+.ProjeQtOrFlatRed .iconInterventionMode { background-image: url(customIcons/red/iconInterventionMode.png); }
+.ProjeQtOrFlatGreen .iconInterventionMode { background-image: url(customIcons/green/iconInterventionMode.png); }
+.ProjeQtOrFlatGrey .iconInterventionMode { background-image: url(customIcons/grey/iconInterventionMode.png); }
+
 /* P */
 .iconPeriod { background-image: url(images/iconPeriod.png); }
 .ProjeQtOrFlatBlue .iconPeriod { background-image: url(customIcons/blue/iconPeriod.png); }
