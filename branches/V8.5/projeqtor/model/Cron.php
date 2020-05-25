@@ -1172,6 +1172,7 @@ class Cron {
   		  } else {
   		  	traceLog("ERROR saving note from '$sender' to item $class #$id : $resSaveNote");
   		  }
+ 		    $mailResult=$obj->sendMailIfMailable(false,false,false,false,true,false,false,false,false,false,false,true);
   		} else {
   		  $mailbox->markMailAsUnread($mailId);
   		}

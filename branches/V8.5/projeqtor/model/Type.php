@@ -259,7 +259,7 @@ class Type extends SqlElement {
     return $result;
   }
   public static function listRestritedTypesForClass($class,$idProject,$idProjectType,$idProfile,$exclusive=false) {
-    $key="$class#$idProject#$idProjectType#$idProfile";
+    //$key="$class#".implode(',',$idProject)."#$idProjectType#$idProfile";
     /*if (self::$_cacheListRestritedTypesForClass and isset(self::$_cacheListRestritedTypesForClass[$key])) {
       return self::$_cacheListRestritedTypesForClass[$key];
     } else {
@@ -278,8 +278,17 @@ class Type extends SqlElement {
       global $doNotRestrictLeave;
       $doNotRestrictLeave=true; // It is the only place where this is used... will have impact on ProjectMain::__construct()
                                // This way is done to avoid changing the signature of constructor
-      $proj=new Project($idProject,true);
-      $idProjectType=$proj->idProjectType;
+      if (is_array($idProject)) {
+        $idProjectType=array();
+        foreach($idProject as $idProj) {
+          $proj=new Project($idProj,true);
+          $idProjectType[$proj->idProjectType]=$proj->idProjectType;
+        }
+        $idProject=null;
+      } else {
+        $proj=new Project($idProject,true);
+        $idProjectType=$proj->idProjectType;
+      }
     } // else will retreive from project type
     if (!count($result) and $idProjectType) { // If no restrictions exist for the project, get restriction for type
       $result=SqlList::getListWithCrit('RestrictType', array('idProjectType'=>$idProjectType, 'className'=>$class),'idType');
@@ -307,9 +316,9 @@ class Type extends SqlElement {
         }
       }
     }
-    self::$_cacheListRestritedTypesForClass[$key]=$result;
-    $sessionValue[$key]=$result;
-    setSessionValue('listRestritedTypesForClass', $sessionValue);
+    //self::$_cacheListRestritedTypesForClass[$key]=$result;
+    //$sessionValue[$key]=$result;
+    //setSessionValue('listRestritedTypesForClass', $sessionValue);
     return $result;
   }
   
