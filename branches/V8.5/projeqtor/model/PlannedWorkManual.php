@@ -222,7 +222,7 @@ class PlannedWorkManual extends GeneralWork {
     else return 'planned';
   }
   
-  public static function drawLine($scope, $idResource, $year, $month, $readonly=false) {
+  public static function drawLine($scope, $idResource, $year, $month, $refType, $refId, $readonly=false) {
     // draw line for given resource and month
     // if $idAssignment is not null, we are on update of existing assignment
     // if $idActivity is not null, we are on creation of new assignment (so no existing data to retreive)
@@ -235,6 +235,9 @@ class PlannedWorkManual extends GeneralWork {
     $midSize=($size-1)/2;
     $letterSize=($size/2)-2;
     $crit="idResource=$idResource and workDate>='$year-$monthWithZero-01 and workDate<=$year-$monthWithZero-$lastDayWithZero'";
+    if ($refType and $refId) {
+      $crit.=" and refType='$refType' and refId=$refId";
+    }
     $pwm=new PlannedWorkManual();
     $lstPwm=$pwm->getSqlElementsFromCriteria(null,null,$crit);
     $exist=array();
@@ -290,7 +293,7 @@ class PlannedWorkManual extends GeneralWork {
    * @param unknown $resourceList
    * @param unknown $monthsList
    */
-  public static function drawTable($scope, $resourceList, $monthList, $readonly=false) {
+  public static function drawTable($scope, $resourceList, $monthList, $refObj, $readonly=false) {
     if ($scope=='assignment') {
       if (is_array($resourceList) and count($resourceList)>1) { 
         echo "ERROR - Only one resource for assignment mode";
@@ -299,7 +302,14 @@ class PlannedWorkManual extends GeneralWork {
       if (! is_array($monthList) and count($monthList)>1) {
         echo "ERROR - monthList must be a list for assignment mode";
         exit;
-      }     
+      } 
+      if (! $refObj) {
+        echo "ERROR - refObj (refype#refId) must be a set for assignment mode";
+        exit;
+      } 
+      $split=explode('#',$refObj);
+      $refType=$split[0];
+      $refId=$split[1];
     } else if ($scope=='intervention') {
       if (is_array($monthList) and count($monthList)>1) {
         echo "ERROR - Only one month for intervention mode";
@@ -338,7 +348,7 @@ class PlannedWorkManual extends GeneralWork {
         $nameRes=SqlList::getNameFromId('Affectable', $idRes);
         echo '<tr style="height:'.$size.'px">';
         echo '<td class="noteHeader" style="width:'.$nameWidth.'px;"><div style="white-space:nowrap;max-width:'.$nameWidth.'px;max-height:'.$size.'px;overflow:hidden;">'.$nameRes.'</div></td>';
-        self::drawLine($scope, $idRes, $year, $month, $readonly);
+        self::drawLine($scope, $idRes, $year, $month, null, null, $readonly);
         echo '<tr>';
       }
       echo '</table>';
@@ -362,7 +372,7 @@ class PlannedWorkManual extends GeneralWork {
         $month=substr($monthYear,4);
         echo '<tr style="height:'.$size.'px">';
         echo '<td class="noteHeader" style="width:'.$nameWidth.'px"><div style="white-space:nowrap;max-width:'.$nameWidth.'px;max-height:'.$size.'px;overflow:hidden;">'.getMonthName($month).' '.$year.'</div></td>';
-        self::drawLine($scope, $idRes, $year, $month, $readonly);
+        self::drawLine($scope, $idRes, $year, $month, $refType, $refId, $readonly);
         echo '<tr>';
       }
       echo '</table>';            
