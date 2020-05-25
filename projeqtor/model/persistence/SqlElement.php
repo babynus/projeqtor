@@ -4774,6 +4774,7 @@ abstract class SqlElement {
     $result = "";
     $objects = "";
     $realWorks = "";
+    $plannedWorks = "";
     $right = securityGetAccessRightYesNo ( 'menu' . get_class ( $this ), 'delete', $this );
     if (get_class ( $this ) == 'Alert' or get_class ( $this ) == 'Mail' or get_class ( $this ) == 'MailToSend' 
      or get_class ( $this ) == 'Audit' or get_class ( $this ) == 'AuditSummary' or get_class ( $this ) == 'ColumnSelector'
@@ -4857,11 +4858,18 @@ abstract class SqlElement {
               // If mode confirm and message of confirmation occured : OK
             } else {
               $objects .= "<br/>&nbsp;-&nbsp;" . i18n ( $object ) . " (" . $nb . ")";
+              if($this->ActivityPlanningElement){
+              	$planningMode = new PlanningMode($this->ActivityPlanningElement->idPlanningMode);
+              	if($planningMode->code=='MAN' and $this->ActivityPlanningElement->plannedWork){
+              		$plannedWorks .= "<br/>&nbsp;-&nbsp;" . i18n ($this->ActivityPlanningElement->refType) . " #".$this->ActivityPlanningElement->refId." (" .Work::displayWorkWithUnit($this->ActivityPlanningElement->plannedWork). ")";
+              	}
+              }
             }
           }
           if($canDeleteRealWork){
             $objList = $obj->getSqlElementsFromCriteria($crit,null,$where);
             foreach ($objList as $objWork){
+              debugLog(get_class($objWork). " #".$objWork->id);
               $work = new Work();
               $refType=get_class($objWork);
               $refId=$objWork->id;
@@ -4895,6 +4903,9 @@ abstract class SqlElement {
           $result .= '<input type="hidden" id="confirmControl" value="delete" /><br/>' . i18n ( "confirmControlDelete" ) . $objects;
           if($canDeleteRealWork){
             $result .= "<br/><br/>".i18n ( "confirmControlDeleteRealWork" ) . $realWorks;
+          }
+          if($plannedWorks){
+          	$result .= "<br/><br/>".i18n ( "confirmControlDeletePlannedWork" ) . $plannedWorks;
           }
         }
       }

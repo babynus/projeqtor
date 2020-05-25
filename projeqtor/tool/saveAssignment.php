@@ -124,6 +124,7 @@ if (array_key_exists('attendantIsOptional',$_REQUEST)) {
 
 $isTeam = RequestHandler::getBoolean('isTeam');
 $isOrganization = RequestHandler::getBoolean('isOrganization');
+$mode = RequestHandler::getValue('mode');
 
 //gautier #resourceTeam
 $etp = RequestHandler::getNumeric('assignmentCapacity');
@@ -154,140 +155,143 @@ if($isOrganization){
   $resourceList = SqlList::getListWithCrit('Resource', $crit);
 }
 Sql::beginTransaction();
-
-foreach ($resourceList as $idResource=>$name){
-  // get the modifications (from request)
-  $assignment=new Assignment($assignmentId);
-  $oldCost=$assignment->dailyCost;
-  
-  $assignment->refId=$refId;
-  $assignment->refType=$refType;
-  if (! $realWork && $idResource) {
-    $assignment->idResource=$idResource;
-  }
-  $assignment->idRole=$idRole;
-  $assignment->dailyCost=$cost;
-  if (! $oldCost or $assignment->dailyCost!=$oldCost) {
-    $assignment->newDailyCost=$cost;
-  }
-  
-  $resource = new ResourceAll($assignment->idResource);
-  if($resource->isResourceTeam and !$unique){
-    $assignment->capacity=$etp;
-    $periods = ResourceTeamAffectation::buildResourcePeriods($idResource);
-    $today=date('Y-m-d');
-    $maxCapacity = 1;
-    foreach ($periods as $p) {
-      if($p['end']>$today and $maxCapacity < $p['rate']){
-        $maxCapacity = $p['rate'];
-      }
-    }
-    $rate = ($etp/$maxCapacity)*100;
-    if($rate > 100){
-      $rate = 100;
-    }
-    $assignment->rate = $rate;
-  }else{
-    $assignment->rate=$rate;
-  }
-  $assignment->uniqueResource=($unique)?1:0;;
-  $assignment->assignedWork=Work::convertWork($assignedWork);
-  //$assignment->realWork=Work::convertWork($realWork); // Should not be changed here
-  $assignment->leftWork=Work::convertWork($leftWork);
-  $assignment->plannedWork=Work::convertWork($plannedWork);
-  $assignment->idle=trim($idle);
-  $assignment->comment=$comment;
-  
-  if (! $assignment->idProject) {
-    $refObj=new $refType($refId);
-    $assignment->idProject=$refObj->idProject;
-  }
-  
-  if (! $oldCost and $cost and $assignment->realWork) {
-  	$wk=new Work();
-  	$where="idResource=" . Sql::fmtId($assignment->idResource);
-  	$where.=" and idAssignment=" . $assignment->id ;
-  	$where.=" and (cost=0 or cost is null) and work>0";
-  	$wkList=$wk->getSqlElementsFromCriteria(null, false, $where);
-  	foreach ($wkList as $wk) {
-  		$wk->dailyCost=$cost;
-  		$wk->cost=$cost*$wk->work;
-  		$wk->save();
-  	}
-  	$assignment->realCost=$assignment->realWork*$assignment->dailyCost;
-  }
-  if(isset($optional)){
-    $assignment->optional=$optional;
-  }
-  $result=$assignment->save();
-  // 
-  //$ar=new AssignmentRecurring();
-  if ($planningMode=='RECW') {
-    for ($i=1;$i<=7;$i++) {
-      $res='';
-      $ar=SqlElement::getSingleSqlElementFromCriteria('AssignmentRecurring', array('idAssignment'=>$assignment->id, 'day'=>$i));
-      if (!$assRec[$i]) {
-        if ($ar->id) $res=$ar->delete();
-      } else {
-        $ar->idAssignment=$assignment->id;
-        $ar->type=substr($planningMode,-1);
-        $ar->day=$i;
-        $ar->value=Work::convertWork($assRec[$i]);
-        $ar->refType=$refType;
-        $ar->refId=$refId;
-        $ar->idResource=$idResource;
-        $res=$ar->save();
-      }
-      if (getLastOperationStatus($result)=='NO_CHANGE' and getLastOperationStatus($res)=='OK') {
-        $result=str_replace('NO_CHANGE', 'OK', $result);
-        $result=i18n("Assignment").' #'.htmlEncode($assignment->id).' '.i18n('resultUpdated').substr($result,strpos($result,'<input'));
-      }
-    }
-  } else {
-    $ar=new AssignmentRecurring();
-    if ($assignment->id) $ar->purge("idAssignment=$assignment->id");
-  }
-  
-  $elt=new $assignment->refType($assignment->refId);
-  $mailResult=null;
-  if ($assignmentId) {
-    $mailResult=$elt->sendMailIfMailable(false,false,false,false,false,false,false,false,false,false,true,false);
-  } else {
-    $mailResult=$elt->sendMailIfMailable(false,false,false,false,false,false,false,false,false,true,false,false);
-  }
-  if ($mailResult) {
-    $pos=strpos($result,'<input type="hidden"');
-    if ($pos) {
-      $result=substr($result, 0,$pos).' - ' . Mail::getResultMessage($mailResult).substr($result, $pos);
-    }
-  }
-  if ($refType=='Meeting' or $refType=='PeriodicMeeting') {
-  	Meeting::removeDupplicateAttendees($refType, $refId);
-  }
-  
-  if ($idOrigin){
-    $assignmentOrigin = new Assignment($idOrigin);
-      $assignmentOrigin->assignedWork=$assignmentOrigin->assignedWork-Work::convertWork($assignedWork);
-      if ($assignmentOrigin->assignedWork<0) $assignmentOrigin->assignedWork=0;
-      $assignmentOrigin->leftWork=$assignmentOrigin->leftWork-Work::convertWork($leftWork);
-      if ($assignmentOrigin->leftWork<0) $assignmentOrigin->leftWork=0;
-      $assignmentOrigin->save();
-  }
+if($planningMode == 'MAN' and $mode =='edit'){
+  $result = i18n('Assignment').' #'.$assignmentId.' '.i18n("resultUpdated").'<input type="hidden" id="lastSaveId" value="'.$assignmentId.'" /><input type="hidden" id="lastOperation" value="update" /><input type="hidden" id="lastOperationStatus" value="OK" />';
+}else{
+  foreach ($resourceList as $idResource=>$name){
+    // get the modifications (from request)
+    $assignment=new Assignment($assignmentId);
+    $oldCost=$assignment->dailyCost;
     
-  // If uniquerResource, store list of resources
-  if ($assignment->isResourceTeam and $assignment->uniqueResource) {
-    $userSelected=RequestHandler::getValue("dialogAssignmentManualSelect");
-    $res=AssignmentSelection::addResourcesFromPool($assignment->id,$assignment->idResource,$userSelected);
-    if (getLastOperationStatus($result)=='NO_CHANGE' and $res and getLastOperationStatus($res)=='OK') {
-      $result=$res;
-    } 
+    $assignment->refId=$refId;
+    $assignment->refType=$refType;
+    if (! $realWork && $idResource) {
+      $assignment->idResource=$idResource;
+    }
+    $assignment->idRole=$idRole;
+    $assignment->dailyCost=$cost;
+    if (! $oldCost or $assignment->dailyCost!=$oldCost) {
+      $assignment->newDailyCost=$cost;
+    }
+    
+    $resource = new ResourceAll($assignment->idResource);
+    if($resource->isResourceTeam and !$unique){
+      $assignment->capacity=$etp;
+      $periods = ResourceTeamAffectation::buildResourcePeriods($idResource);
+      $today=date('Y-m-d');
+      $maxCapacity = 1;
+      foreach ($periods as $p) {
+        if($p['end']>$today and $maxCapacity < $p['rate']){
+          $maxCapacity = $p['rate'];
+        }
+      }
+      $rate = ($etp/$maxCapacity)*100;
+      if($rate > 100){
+        $rate = 100;
+      }
+      $assignment->rate = $rate;
+    }else{
+      $assignment->rate=$rate;
+    }
+    $assignment->uniqueResource=($unique)?1:0;;
+    $assignment->assignedWork=Work::convertWork($assignedWork);
+    //$assignment->realWork=Work::convertWork($realWork); // Should not be changed here
+    $assignment->leftWork=Work::convertWork($leftWork);
+    $assignment->plannedWork=Work::convertWork($plannedWork);
+    $assignment->idle=trim($idle);
+    $assignment->comment=$comment;
+    
+    if (! $assignment->idProject) {
+      $refObj=new $refType($refId);
+      $assignment->idProject=$refObj->idProject;
+    }
+    
+    if (! $oldCost and $cost and $assignment->realWork) {
+    	$wk=new Work();
+    	$where="idResource=" . Sql::fmtId($assignment->idResource);
+    	$where.=" and idAssignment=" . $assignment->id ;
+    	$where.=" and (cost=0 or cost is null) and work>0";
+    	$wkList=$wk->getSqlElementsFromCriteria(null, false, $where);
+    	foreach ($wkList as $wk) {
+    		$wk->dailyCost=$cost;
+    		$wk->cost=$cost*$wk->work;
+    		$wk->save();
+    	}
+    	$assignment->realCost=$assignment->realWork*$assignment->dailyCost;
+    }
+    if(isset($optional)){
+      $assignment->optional=$optional;
+    }
+    $result=$assignment->save();
+    // 
+    //$ar=new AssignmentRecurring();
+    if ($planningMode=='RECW') {
+      for ($i=1;$i<=7;$i++) {
+        $res='';
+        $ar=SqlElement::getSingleSqlElementFromCriteria('AssignmentRecurring', array('idAssignment'=>$assignment->id, 'day'=>$i));
+        if (!$assRec[$i]) {
+          if ($ar->id) $res=$ar->delete();
+        } else {
+          $ar->idAssignment=$assignment->id;
+          $ar->type=substr($planningMode,-1);
+          $ar->day=$i;
+          $ar->value=Work::convertWork($assRec[$i]);
+          $ar->refType=$refType;
+          $ar->refId=$refId;
+          $ar->idResource=$idResource;
+          $res=$ar->save();
+        }
+        if (getLastOperationStatus($result)=='NO_CHANGE' and getLastOperationStatus($res)=='OK') {
+          $result=str_replace('NO_CHANGE', 'OK', $result);
+          $result=i18n("Assignment").' #'.htmlEncode($assignment->id).' '.i18n('resultUpdated').substr($result,strpos($result,'<input'));
+        }
+      }
+    } else {
+      $ar=new AssignmentRecurring();
+      if ($assignment->id) $ar->purge("idAssignment=$assignment->id");
+    }
+    
+    $elt=new $assignment->refType($assignment->refId);
+    $mailResult=null;
+    if ($assignmentId) {
+      $mailResult=$elt->sendMailIfMailable(false,false,false,false,false,false,false,false,false,false,true,false);
+    } else {
+      $mailResult=$elt->sendMailIfMailable(false,false,false,false,false,false,false,false,false,true,false,false);
+    }
+    if ($mailResult) {
+      $pos=strpos($result,'<input type="hidden"');
+      if ($pos) {
+        $result=substr($result, 0,$pos).' - ' . Mail::getResultMessage($mailResult).substr($result, $pos);
+      }
+    }
+    if ($refType=='Meeting' or $refType=='PeriodicMeeting') {
+    	Meeting::removeDupplicateAttendees($refType, $refId);
+    }
+    
+    if ($idOrigin){
+      $assignmentOrigin = new Assignment($idOrigin);
+        $assignmentOrigin->assignedWork=$assignmentOrigin->assignedWork-Work::convertWork($assignedWork);
+        if ($assignmentOrigin->assignedWork<0) $assignmentOrigin->assignedWork=0;
+        $assignmentOrigin->leftWork=$assignmentOrigin->leftWork-Work::convertWork($leftWork);
+        if ($assignmentOrigin->leftWork<0) $assignmentOrigin->leftWork=0;
+        $assignmentOrigin->save();
+    }
+      
+    // If uniquerResource, store list of resources
+    if ($assignment->isResourceTeam and $assignment->uniqueResource) {
+      $userSelected=RequestHandler::getValue("dialogAssignmentManualSelect");
+      $res=AssignmentSelection::addResourcesFromPool($assignment->id,$assignment->idResource,$userSelected);
+      if (getLastOperationStatus($result)=='NO_CHANGE' and $res and getLastOperationStatus($res)=='OK') {
+        $result=$res;
+      } 
+    }
+    if ($definitive) {
+      $assSel=new AssignmentSelection();
+      $assSel->purge("idAssignment=$assignment->id");
+    }
   }
-  if ($definitive) {
-    $assSel=new AssignmentSelection();
-    $assSel->purge("idAssignment=$assignment->id");
-  }
+  echo '<input id="idAssignment" name="idAssignment" type="hidden" value="'.$assignment->id.'"/>';
 }
-echo '<input id="idAssignment" name="idAssignment" type="hidden" value="'.$assignment->id.'"/>';
-// Message of correct saving
 displayLastOperationStatus($result);
+// Message of correct saving
 ?>
