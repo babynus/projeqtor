@@ -142,7 +142,13 @@ if (!$pwm->idInterventionMode and !$pwm->refType and !$pwm->refId) {
     $pwmx->save();
   }
 }
-
 // Message of correct saving
+ob_start();
 displayLastOperationStatus($result);
+ob_clean();
+$ass=SqlElement::getSingleSqlElementFromCriteria('Assignment', array('refType'=>$refType,'refId'=>$refId,'idResource'=>$resource));
+$assigned=$ass->assignedWork;
+$real=$ass->realWork;
+$left=$ass->leftWork;
+echo '{"assigned":'.$assigned.',"real":'.$real.',"left":'.$left.'}';
 ?>
