@@ -485,7 +485,7 @@ if ($planningMode=='RECW') {
         $listMonth=array('202005','202006','202007','202008','202009','202010');
         $size=20;
         PlannedWorkManual::setSize($size);
-        PlannedWorkManual::drawTable('assignment',$idResource, $listMonth, false);
+        PlannedWorkManual::drawTable('assignment',$idResource, $listMonth, $refType.'#'.$refId, false);
         ?>
         </div>
         <input type='hidden' id="plannedWorkManualAssignmentSize" value="<?php echo $size;?>"/>
