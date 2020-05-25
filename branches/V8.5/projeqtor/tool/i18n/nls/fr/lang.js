@@ -1465,6 +1465,7 @@ confirmAssignWholeTeam: "Cette opération va assigner tous les membres de l'équ
 confirmChangeLoosing: "Des modifications n'ont pas été sauvegardées.<br/>Si vous continuez&#44; vous perdrez ces modifications.<br/>Souhaitez-vous tout de même continuer ?",
 confirmCloseBudgetElement: "Etes-vous sûr de vouloir clôturer cette période budgétaire ?",
 confirmControlDelete: "Les éléments dépendants suivants vont aussi être supprimés",
+confirmControlDeletePlannedWork: "<b> Attention&#44 cette opération va supprimer des éléments avec du travail plannifiés</b><br/>Ceci est irréversible et peut générer des incohérences dans vos données",
 confirmControlDeleteRealWork: "<b> Attention&#44 cette opération va supprimer des éléments avec du travail réels</b><br/>Ceci est irréversible et peut générer des incohérences dans vos données",
 confirmControlSave: "Les éléments dépendants suivants vont aussi être clos",
 confirmCopy: "Copier l'élément ${1} #${2} ?",

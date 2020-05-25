@@ -1463,6 +1463,7 @@ confirmAssignWholeTeam: "Esta operação irá assignar todos os elementos da equ
 confirmChangeLoosing: "Alterações em curso não serão salvadas.<br/>Se continuar você perderá estas alterações.<br/>Quer mesmo continuar?",
 confirmCloseBudgetElement: "Tem a certeza que deseja fechar este período de orçamento?",
 confirmControlDelete: "Os seguintes itens dependentes também serão eliminados",
+confirmControlDeletePlannedWork: "<b>Warning&#44 some items with planned work will be deleted</b><br/>This cannot be undone and may lead to unconsitency of your data.",
 confirmControlSave: "Os seguintes itens dependentes também serão fechados",
 confirmCopy: "Copiar o ${1} #${2} ?",
 confirmDelete: "Eliminar o ${1} #${2} ?",
