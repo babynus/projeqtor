@@ -1,6 +1,6 @@
 <?php
 include_once("../tool/projeqtor.php");
-
+$readonly=false;
 
 
 ?>
@@ -33,9 +33,9 @@ include_once("../tool/projeqtor.php");
 <div class="centerDiv" style="width:100%;height:100%;overflow-y:auto;overflow-x:hidden;padding:30px 50px;" id="centerDiv">
 <h2><?php echo i18n('helpInterventionInput');?></h2>
 <h1>MODALITES</h1>
-<?php InterventionMode::drawList();?>
+<?php InterventionMode::drawList($readonly);?>
 <h1>ACTIVITES</h1>
-<?php PlannedWorkManual::drawActivityTable();?>
+<?php PlannedWorkManual::drawActivityTable(null,null,$readonly);?>
 <h1>TEST SAISIE INTERVENTION</h1>
 <div id="plannedWorkManualInterventionDiv">
 <?php 
@@ -43,7 +43,7 @@ $listResource=array('1','3');
 $listMonth=array('202006');
 $size=30;
 PlannedWorkManual::setSize($size);
-PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, null, false);
+PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, null, $readonly);
 ?>
 </div>
 <input type='text' id="plannedWorkManualInterventionSize" value="<?php echo $size;?>" style="background:#ffe0e0"/>
@@ -56,7 +56,7 @@ $listResource=array('1');
 $listMonth=array('202005','202006','202007','202008','202009','202010');
 $size=20;
 PlannedWorkManual::setSize($size);
-PlannedWorkManual::drawTable('assignment',$listResource, $listMonth, null, false);
+PlannedWorkManual::drawTable('assignment',$listResource, $listMonth, 'Activity#10', $readonly);
 ?>
 </div>
 <input type='text' id="plannedWorkManualAssignmentSize" value="<?php echo $size;?>" style="background:#ffe0e0"/>
