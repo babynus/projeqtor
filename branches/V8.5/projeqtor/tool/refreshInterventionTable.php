@@ -33,6 +33,8 @@ require_once "../tool/projeqtor.php";
 $scope=RequestHandler::getValue('scope');
 $resources=RequestHandler::getValue('resources');
 $months=RequestHandler::getValue('months');
+$refType=RequestHandler::getValue('refType');
+$refId=RequestHandler::getValue('refId');
 if ($scope!='assignment' and $scope!='intervention') {
   traceLog("refreshInterventionTable.php incorrect scope '$scope'");
   exit;
@@ -43,5 +45,5 @@ if (RequestHandler::isCodeSet('size')) {
 }
 $listResource=explode(',',$resources);
 $listMonth=explode(',',$months);
-PlannedWorkManual::drawTable($scope,$listResource, $listMonth, false);
+PlannedWorkManual::drawTable($scope,$listResource, $listMonth, $refType.'#'.$refId, false);
 ?>

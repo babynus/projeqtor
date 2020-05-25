@@ -91,7 +91,7 @@ PlannedWorkManual::setSize($size);
               <?php //TAB RESOURCES
               $listMonth=array($yearSpinner.$monthSpinner);
               if(!$displayNothing){
-                PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, false); 
+                PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, null, false); 
               }?>
       </div>
     </div>

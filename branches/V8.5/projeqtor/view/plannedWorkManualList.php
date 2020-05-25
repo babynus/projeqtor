@@ -312,7 +312,7 @@ $currentMonth = strftime("%m");
                
                   <?php //TAB RESOURCES
                   if(!$displayNothing){
-                    PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, false);
+                    PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, null, false);
                   } ?>
           </div>
         </div>
