@@ -1008,8 +1008,10 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       if(1 or isset($decomp[3])){
         $margin = "margin-top:5px;";
       }
-      echo '<tr><td colspan="2" style="font-size:3px;border-bottom:1px solid grey;">&nbsp;</td></tr>'; 
-      echo '<tr><td colspan="2" class="assignHeader" id="'.$col.'" style="width:100%;height:14px; padding: 3px; margin-bottom:5px;'.$margin.';vertical-align:middle; border:1px solid grey;">'.$name.'</td></tr>';
+      echo '<tr><td colspan="2" style="font-size:3px;">&nbsp;</td></tr>'; 
+      echo '<tr><td colspan="2">';
+      echo '  <table style="width:99.9%"><tr><td class="assignHeader" id="'.$col.'" style="width:100%;height:14px; padding: 3px; margin-bottom:5px;'.$margin.';vertical-align:middle; border:1px solid grey;">'.$name.'</td></tr></table>';
+      echo '</td></tr>';
     } else if ($col=='_spe_tickets' and !$obj->isAttributeSetTofield($col, 'hidden')) {
       drawTicketsList($obj);
       // END ADD qCazelles - Manage ticket at customer level - Ticket #87
