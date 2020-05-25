@@ -737,6 +737,9 @@ function selectInterventionDate(date,resource,period,event) {
           +dojo.byId('plannedWorkManualAssignmentResourceList').value+'&months='
           +dojo.byId('plannedWorkManualAssignmentMonthList').value;
         if (dojo.byId('plannedWorkManualAssignmentSize')) refreshUrl+='&size='+dojo.byId('plannedWorkManualAssignmentSize').value;
+        if (dojo.byId('assignmentRefType') && dojo.byId('assignmentRefId')) {
+          refreshUrl+='&refType='+dojo.byId('assignmentRefType')+'&refId='+dojo.byId('assignmentRefId')
+        }
         //console.log('refresh assignment table : '+refreshUrl);
         loadDiv(refreshUrl,'plannedWorkManualAssignmentDiv');
       }
