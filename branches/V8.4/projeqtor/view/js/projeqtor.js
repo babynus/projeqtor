@@ -4875,7 +4875,7 @@ function getExtraHiddenFields(idType,idStatus,idProfile) {
   }
   if (!idType) {
     if (objectClass) {
-      var typeName='id'+objectClass.value+'Type';
+      var typeName='id'+objectClass+'Type';
       if (dijit.byId(typeName)) {
         idType=dijit.byId(typeName).get('value');
       }
@@ -4927,7 +4927,7 @@ function getExtraReadonlyFields(idType,idStatus,idProfile) {
   }
   if (!idType) {
     if (objectClass) {
-      var typeName='id'+objectClass.value+'Type';
+      var typeName='id'+objectClass+'Type';
       if (dijit.byId(typeName)) {
         idType=dijit.byId(typeName).get('value');
       }
