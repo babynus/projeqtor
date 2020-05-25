@@ -1463,6 +1463,7 @@ confirmAssignWholeTeam: "This operation will assign all team members to the meet
 confirmChangeLoosing: "変更が保存されていません。<br/>続けるとこの変更が破棄されます。<br/>本当に続けますか？",
 confirmCloseBudgetElement: "Are you sure to close this budget period ?",
 confirmControlDelete: "次の関連する項目も削除されます",
+confirmControlDeletePlannedWork: "<b>Warning&#44 some items with planned work will be deleted</b><br/>This cannot be undone and may lead to unconsitency of your data.",
 confirmControlSave: "次の関連する項目もクローズされます",
 confirmCopy: "${1}#${2}をコピーしますか ?",
 confirmDelete: "${1}#${2}を削除しますか？",

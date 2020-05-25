@@ -1463,6 +1463,7 @@ confirmAssignWholeTeam: "Ova operacija će dodijeliti sve članove tima na sasta
 confirmChangeLoosing: "Trenutno nije spremita modifikacija <br/>. Promjene će biti izgubljene. Želite li nastaviti?&#44; <br/",
 confirmCloseBudgetElement: "Jeste li sigurni da zatvorite ovaj period budžetiranja ?",
 confirmControlDelete: "Sljedeći ovisnosti brišu",
+confirmControlDeletePlannedWork: "<b>Warning&#44 some items with planned work will be deleted</b><br/>This cannot be undone and may lead to unconsitency of your data.",
 confirmControlSave: "Sljedeći ovisnosti su zatvorene",
 confirmCopy: "Kopirati ${1} #${2} ?",
 confirmDelete: "Brisanje ${1} #${2} ?",

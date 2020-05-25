@@ -1463,6 +1463,7 @@ confirmAssignWholeTeam: "This operation will assign all team members to the meet
 confirmChangeLoosing: "Wijzigingen worden niet opgeslagen. <br/> Als je doorgaat  verlies je deze wijzigingen. <br/> Wil je echt doorgaan?",
 confirmCloseBudgetElement: "Are you sure to close this budget period ?",
 confirmControlDelete: "De volgende afhankelijke items worden ook gewist",
+confirmControlDeletePlannedWork: "<b>Warning&#44 some items with planned work will be deleted</b><br/>This cannot be undone and may lead to unconsitency of your data.",
 confirmControlSave: "De volgende afhankelijke items worden ook gesloten",
 confirmCopy: "Kopiëer de ${1} #${2} ?",
 confirmDelete: "Verwijder de ${1} #${2} ?",

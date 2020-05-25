@@ -1463,6 +1463,7 @@ confirmAssignWholeTeam: "This operation will assign all team members to the meet
 confirmChangeLoosing: "Οι τρέχουσες αλλαγές δεν έχουν αποθηκευτεί.<br/>Αν συνεχίσετε οι αλλαγές θα χαθούν.<br/>Θέλετε σίγουρα να συνεχίσετε ?",
 confirmCloseBudgetElement: "Are you sure to close this budget period ?",
 confirmControlDelete: "Θα διαγραφούν επίσης&#44; τα επόμενα εξαρτημένα στοιχεία.",
+confirmControlDeletePlannedWork: "<b>Warning&#44 some items with planned work will be deleted</b><br/>This cannot be undone and may lead to unconsitency of your data.",
 confirmControlSave: "Θα κλείσουν επίσης&#44; τα επόμενα εξαρτημένα στοιχεία.",
 confirmCopy: "Αντιγραφή ${1} #${2} ?",
 confirmDelete: "Διαγραφή ${1} #${2} ?",

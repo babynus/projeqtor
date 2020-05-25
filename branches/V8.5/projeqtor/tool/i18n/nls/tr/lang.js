@@ -1463,6 +1463,7 @@ confirmAssignWholeTeam: "Bu işlem tüm takım üyelerini toplantıya atayacak. 
 confirmChangeLoosing: "Devam eden değişiklik kaydedilmez. <br/> Devam ederseniz bu değişiklikleri kaybedersiniz. <br/> Gerçekten devam etmek istiyor musunuz?",
 confirmCloseBudgetElement: "Bu bütçe dönemini kapattığınızdan emin misiniz?",
 confirmControlDelete: "Aşağıdaki bağımlı öğeler de silinecek",
+confirmControlDeletePlannedWork: "<b>Warning&#44 some items with planned work will be deleted</b><br/>This cannot be undone and may lead to unconsitency of your data.",
 confirmControlSave: "Bağımlı eşyaların takibi de kapalı olacaktır.",
 confirmCopy: "Kopyala ${1} #${2} ?",
 confirmDelete: "Sil ${1} #${2} ?",
