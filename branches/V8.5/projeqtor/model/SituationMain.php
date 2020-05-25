@@ -84,14 +84,17 @@ class SituationMain extends SqlElement {
   	if (!$obj->id) {
   		return;
   	}
-  	$menuAccess=securityGetAccessRightYesNo('menu'.get_class($obj), 'update')=="YES";
+  	$menuAccess=securityGetAccessRightYesNo('menu'.get_class($obj), 'update',$obj)=="YES";
   	$habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>getSessionUser()->getProfile($this->idProject), 'scope'=>'situation'));
+  	debugLog("menuAccess=$menuAccess");
+  	debugLog("profile=".getSessionUser()->getProfile($this->idProject));
+  	debugLog("habil=$habil->rightAccess");
   	if($habil->rightAccess == '2' or $obj->idle or $comboDetail or !$menuAccess){
   	  $canUpdate = false;
   	}else{
   	  $canUpdate = true;
   	}
-  	
+  	debugLog("canUpdate=$canUpdate");
   	$critWhere = array('refType'=>get_class($obj),'refId'=>$obj->id,'idProject'=>$obj->idProject);
   	$situationList = $this->getSqlElementsFromCriteria($critWhere,null,null, 'date desc');
   	echo '<br/>';
