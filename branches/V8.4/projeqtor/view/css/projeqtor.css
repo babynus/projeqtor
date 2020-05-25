@@ -371,7 +371,7 @@ html, body {
   height: 11px;
   position: absolute;
   top: 0px; left: 0px;
-  z-index: 99999;
+  z-index: 8888;
 }
 #listBarIcon {
   display: block;
