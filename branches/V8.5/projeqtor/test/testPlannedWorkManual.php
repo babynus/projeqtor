@@ -43,7 +43,7 @@ $listResource=array('1','3');
 $listMonth=array('202006');
 $size=30;
 PlannedWorkManual::setSize($size);
-PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, false);
+PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, null, false);
 ?>
 </div>
 <input type='text' id="plannedWorkManualInterventionSize" value="<?php echo $size;?>" style="background:#ffe0e0"/>
@@ -56,7 +56,7 @@ $listResource=array('1');
 $listMonth=array('202005','202006','202007','202008','202009','202010');
 $size=20;
 PlannedWorkManual::setSize($size);
-PlannedWorkManual::drawTable('assignment',$listResource, $listMonth, false);
+PlannedWorkManual::drawTable('assignment',$listResource, $listMonth, null, false);
 ?>
 </div>
 <input type='text' id="plannedWorkManualAssignmentSize" value="<?php echo $size;?>" style="background:#ffe0e0"/>
