@@ -358,8 +358,17 @@ A WBS structure is applied and a dynamic index is calculated for all activities.
 The WBS Activity Index can be changed in the Gantt schedule view using drag and drop.
 
 
+.. topic:: Planning Activity 
 
+   An activity can be linked to elements that cannot be planned.
+   So that the time spent on tickets, which cannot be scheduled, can be taken into account in the overall planning of the project, you can create a planning activity.
 
+   This option allows you to assign a time pool that will be scheduled and to link tickets to this tank.
+
+   The time spent on tickets will then be decremented to that of the planning activity.
+   
+   
+   
 .. raw:: latex
 
     \newpage
@@ -557,7 +566,6 @@ Links can be defined between versions of products and components, but only with 
 .. index:: Planning
 
 .. _planning:
-
 
 Planning
 ********
