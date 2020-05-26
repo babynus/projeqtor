@@ -161,6 +161,7 @@ if($planningMode == 'MAN' and $mode =='edit'){
   foreach ($resourceList as $idResource=>$name){
     // get the modifications (from request)
     $assignment=new Assignment($assignmentId);
+    $res = new ResourceAll($idResource);
     $oldCost=$assignment->dailyCost;
     
     $assignment->refId=$refId;
@@ -168,12 +169,14 @@ if($planningMode == 'MAN' and $mode =='edit'){
     if (! $realWork && $idResource) {
       $assignment->idResource=$idResource;
     }
+    if(!trim($idRole)){
+      $idRole = $res->idRole;
+    }
     $assignment->idRole=$idRole;
     $assignment->dailyCost=$cost;
     if (! $oldCost or $assignment->dailyCost!=$oldCost) {
       $assignment->newDailyCost=$cost;
     }
-    
     $resource = new ResourceAll($assignment->idResource);
     if($resource->isResourceTeam and !$unique){
       $assignment->capacity=$etp;
