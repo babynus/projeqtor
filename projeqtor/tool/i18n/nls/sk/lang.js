@@ -3164,6 +3164,7 @@ newVersion: "Nová verzia ${1} je k dispozícii na webovej lokalite spoločnosti
 next: "Next",
 nextDays: "next days",
 noAccessToThisElement: "No access to this item",
+noActivityManualPlanningModeFound: "To display selectable activities&#44 define activities in 'manual' planning mode",
 noActivityOnAdmProjectFound: "Pridajte niektoré činnosti týkajúce sa niektorých administratívnych projektov",
 noActivitySelected: "No activity selected",
 NoActivityTypeForLeaveSystem: "Missing activity type for leaves.<br/>You must have one (and one only) type with code 'LEAVESYST'",

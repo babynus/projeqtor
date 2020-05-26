@@ -3164,6 +3164,7 @@ newVersion: "Нова версія ${1} доступна на сайті ProjeQt
 next: "Next",
 nextDays: "наступні дні",
 noAccessToThisElement: "No access to this item",
+noActivityManualPlanningModeFound: "To display selectable activities&#44 define activities in 'manual' planning mode",
 noActivityOnAdmProjectFound: "Додати деякі справи(activities) до деяких адміністративних проектів",
 noActivitySelected: "Не вибрано жодної справи(activity)",
 NoActivityTypeForLeaveSystem: "Missing activity type for leaves.<br/>You must have one (and one only) type with code 'LEAVESYST'",
