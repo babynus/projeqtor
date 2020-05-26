@@ -3168,6 +3168,7 @@ newVersion: "Une nouvelle version ${1} est disponible sur le site web de ProjeQt
 next: "Suivant",
 nextDays: "prochains jours",
 noAccessToThisElement: "Pas d'accès à cet élément",
+noActivityManualPlanningModeFound: "Pour afficher des activités sélectionnable&#44 définissez des activités en mode de planning 'manuel'",
 noActivityOnAdmProjectFound: "Veuillez ajouter des activités sur des projets administratifs",
 noActivitySelected: "Pas d'activité sélectionnée",
 NoActivityTypeForLeaveSystem: "Type d'activité manquant pour les absences réglementées.<br/>Vous devez avoir un (et un seul) type avec le code 'LEAVESYST'",
