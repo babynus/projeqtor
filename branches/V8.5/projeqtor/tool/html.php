@@ -741,6 +741,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
         elseif (isLeavesManager()) {
             $manager = new EmployeeManager(getSessionUser()->id);
             $restrictArray = $manager->getManagedEmployees();
+            $restrictArray[getSessionUser()->id] = getSessionUser()->name;
         } 
         // If Employee, can see self only
         if (getSessionUser()->isEmployee==1 and !array_key_exists(getSessionUser()->id, $restrictArray)) {
@@ -873,7 +874,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
   
 // MTY - LEAVE SYSTEM
   if ($col=="idEmployee") {
-    $table = getUserVisibleResourcesList(true, "List",'', false, true,true);
+    $table = getUserVisibleResourcesList(true, "List",'', false, true,true,true);
   }
 
   if (isLeavesSystemActiv()) { $leaveProjectId = Project::getLeaveProjectId();}
