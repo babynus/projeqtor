@@ -6119,6 +6119,11 @@ function refreshPlannedWorkManualList() {
     return true;
 }
 
+function refreshConsultationPlannedWorkManualList() {
+  formInitialize();
+  loadContent('../view/refreshConsultationPlannedWorkManualList.php', 'fullConsPlannedWorkManualList', 'listFormConsPlannedWorkManual', false);
+  return true;
+}
 //Absence list refresh function
 function refreshAbsenceList() {
 	if (checkFormChangeInProgress()) {

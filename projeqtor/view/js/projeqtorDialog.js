@@ -7435,9 +7435,11 @@ function loadMenuBarItem(item, itemName, from) {
     loadContent("reportsMain.php", "centerDiv");
   } else if (item == 'Absence') {
 	    loadContent("absenceMain.php", "centerDiv");
-  } else if (item == 'PlannedWorkManual') {
-    loadContent("plannedWorkManualMain.php", "centerDiv");
-  } else if (item == 'ImputationValidation') {
+  } else if (item == 'PlannedWorkManual' || item=='ConsultationPlannedWorkManual') {
+    var param='false';
+    if (item=='ConsultationPlannedWorkManual')param='true';
+    loadContent("plannedWorkManualMain.php?readonly="+param, "centerDiv");
+  }else if (item == 'ImputationValidation') {
 	    loadContent("imputationValidationMain.php", "centerDiv");  
   } else if (item == 'AutoSendReport') {
     loadContent("autoSendReportMain.php", "centerDiv"); 

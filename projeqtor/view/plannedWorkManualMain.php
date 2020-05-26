@@ -30,10 +30,18 @@
 require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
   scriptLog('   ->/view/absenceMain.php');  
+  $readonly=(RequestHandler::isCodeSet('readonly'))?RequestHandler::getValue('readonly'):'false';
+  debugLog($readonly);
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="PlannedWorkManual" />
 <div class="container" dojoType="dijit.layout.BorderContainer">
   <div id="listDiv" dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:100%;" splitter="false">
-   <?php include 'plannedWorkManualList.php'?>
+   <?php
+    if($readonly=='true'){
+      include 'consultationPlannedWorkManualList.php';
+    }else{
+      include 'plannedWorkManualList.php';
+    }
+    ?>
   </div>
 </div>  
