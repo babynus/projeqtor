@@ -97,17 +97,28 @@ class InterventionMode extends SqlElement {
     echo '<tr>';
     echo '<td class="reportTableHeader" colspan="2" style="width:220px">'.i18n('menuInterventionMode').'</td>';
     echo '</tr>';
+    if(sessionValueExists('selectInterventionPlannedWorkManual'))$isSaveSessionInterventionPlannedWorkManual = getSessionValue('selectInterventionPlannedWorkManual');
+    $valueLetter = null;
+    $valueId = null;
     foreach ($list as $im) {
       $onClick=($readonly)?'':'onClick="selectInterventionMode('.$im->id.',\''.$im->letter.'\');"';
       $cursor=($readonly)?"normal":"pointer";
-      echo '<tr class="dojoxGridRow interventionModeSelector interventionModeSelector'.$im->id.'" style="cursor:'.$cursor.'" '.$onClick.'>';
+      $class  = "dojoxGridRow";
+      if(isset($isSaveSessionInterventionPlannedWorkManual)){
+        if($isSaveSessionInterventionPlannedWorkManual == $im->id){
+          $class = "dojoxGridRowSelected";
+          $valueLetter = $im->letter;
+          $valueId = $im->id;
+        }
+      }
+      echo '<tr class=" '.$class.' interventionModeSelector interventionModeSelector'.$im->id.'" style="cursor'.$cursor.'" '.$onClick.'>';
       echo '<td class="dojoxGridCell interventionModeSelector interventionModeSelector'.$im->id.'" style="width:20px;text-align:center">'.$im->letter.'</td>';
       echo '<td class="dojoxGridCell interventionModeSelector interventionModeSelector'.$im->id.'" style="width:200px">'.$im->name.'</td>';
       echo '</tr>';
     }
     echo '</table>';
-    echo '<input type="hidden" id="idInterventionMode" value="" style="width:20px;background:#ffe0e0" />';
-    echo '<input type="hidden" id="letterInterventionMode" value="" style="width:20px;background:#ffe0e0" />';
+    echo '<input type="hidden" id="idInterventionMode" value="'.$valueId.'" style="width:20px;background:#ffe0e0" />';
+    echo '<input type="hidden" id="letterInterventionMode" value="'.$valueLetter.'" style="width:20px;background:#ffe0e0" />';
   }
   
 }

@@ -37,7 +37,7 @@ $yearSpinner= RequestHandler::getYear('yearPlannedWorkManual');
 $monthSpinner= RequestHandler::getMonth('monthPlannedWorkManual');
 $displayNothing = false;$onlyRes=false;
 $listResource = array();
-$resourceId = trim(RequestHandler::getId('userName'));
+$resourceId = trim(RequestHandler::getId('userNamePlanned'));
 $inIdTeam = trim(RequestHandler::getId('idTeamPlannedWorkManual'));
 $inIdOrga = trim(RequestHandler::getId('idOrganizationPlannedWorkManual'));
 if ($resourceId and !$inIdTeam and !$inIdOrga) {
