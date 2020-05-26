@@ -169,19 +169,28 @@ ALTER TABLE `${prefix}documentversion` ADD `disapproved` int(1) unsigned DEFAULT
 
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
 (251,'menuInterventionMode',36,'object', 899,'ReadWriteList',0,'ListOfValues'),
-(252, 'menuPlannedWorkManual', 7, 'item', 119, Null, 0, 'Work');
+(252, 'menuPlannedWorkManual', 7, 'item', 119, Null, 0, 'Work'),
+(253, 'menuConsultationPlannedWorkManual', 7, 'item', 120, Null, 0, 'Work');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,251,1),
 (1, 252, 1),
 (2, 252, 1),
-(3, 252, 1);
+(3, 252, 1),
+(1, 253, 1),
+(2, 253, 1),
+(3, 253, 1),
+(4, 253, 1);
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,251,8),
 (1,252,8),
-(1,252,8),
-(1,252,8);
+(2,252,8),
+(3,252,8),
+(1,253,8),
+(2,253,8),
+(3,253,8),
+(4,253,8);
 
 CREATE TABLE `${prefix}plannedworkmanual` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
