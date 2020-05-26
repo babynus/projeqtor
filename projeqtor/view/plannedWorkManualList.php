@@ -55,16 +55,16 @@ $currentMonth = strftime("%m");
                   <?php echo i18n("colIdResource");?> &nbsp;
                   <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
                     style="width: 175px;"
-                    name="userName" id="userName"
+                    name="userNamePlanned" id="userNamePlanned"
                     <?php echo autoOpenFilteringSelect();?>
-                    value="<?php if(sessionValueExists('userName')){
-                                  $userName =  getSessionValue('userName');
+                    value="<?php if(sessionValueExists('userNamePlanned')){
+                                  $userName =  getSessionValue('userNamePlanned');
                                   echo $userName;
                                  }else{
                                   echo 0;
                                  }?>">
                       <script type="dojo/method" event="onChange" >
-                    saveDataToSession("userName",dijit.byId('userName').get('value'),true);
+                    saveDataToSession("userNamePlanned",dijit.byId('userNamePlanned').get('value'),true);
                     refreshPlannedWorkManualList();
                   </script>
                   <option value=""></option>
@@ -137,12 +137,6 @@ $currentMonth = strftime("%m");
 	                   refreshPlannedWorkManualList();
                     </script>
                   </button>
-                  <button id="addTodayButton" dojoType="dijit.form.Button" showlabel="false"
-                    title="<?php echo i18n('showInToday');?>"
-                    iconClass="dijitButtonIcon dijitButtonIconToday" class="detailButton">
-                    <script type="dojo/method" event="onClick" args="evt">
-                    </script>
-                  </button>    
                 </td>
               </tr>
             </table>

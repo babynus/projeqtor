@@ -389,12 +389,17 @@ class PlannedWorkManual extends GeneralWork {
   
   public static function drawActivityTable($idProject=null,$monthYear=null,$readonly=false) {
     if($idProject){
-      $crit=array('idPlanningMode'=>23,'idle'=>'0','idProject'=>$idProject);
+     $myProj = new Project($idProject);
+     $listProj = transformListIntoInClause($myProj->getRecursiveSubProjectsFlatList(false,true));
+     $crit=array('idPlanningMode'=>23,'idle'=>'0','idProject'=>$idProject);
+     $crit = null;
+     $where = " idPlanningMode = 23 and idle = '0' and idProject in $listProj" ;
     }else{
       $crit=array('idPlanningMode'=>23,'idle'=>'0');
+      $where = null;
     }
     $pe=new PlanningElement();
-    $list=$pe->getSqlElementsFromCriteria($crit);
+    $list=$pe->getSqlElementsFromCriteria($crit,null,$where);
     $nameWidth=250;
     $idWidth=20;
     $nbDays=31;
@@ -423,7 +428,16 @@ class PlannedWorkManual extends GeneralWork {
     }
     
     echo '</tr>';
+    if(count($list)== 0){
+      echo '<tr><td colspan="2">';
+      echo '<div style="background:#FFDDDD;font-size:150%;color:#808080;text-align:center;padding:15px 0px;width:100%;">'.i18n('noActivityManualPlanningModeFound').'</div>';
+      echo '</td></tr>';
+    }
+    if(sessionValueExists('selectActivityPlannedWorkManual'))$isSaveSession = getSessionValue('selectActivityPlannedWorkManual');
+    $valueRefType = null;
+    $valueRefId = null;
     foreach ($list as $pe) {
+      $class  = "dojoxGridRow"; 
       if (!isset($projList[$pe->idProject])) {
         $proj=new Project($pe->idProject,true);
         $projList[$pe->idProject]=$proj->name;
@@ -432,7 +446,14 @@ class PlannedWorkManual extends GeneralWork {
       $onClick=($readonly)?'':'onClick="selectInterventionActivity(\''.$pe->refType.'\','.$pe->refId.','.$pe->id.');"';
       $cursor=($readonly)?"normal":"pointer";
       $colorBadge='<div style="border-radius:'.($badgeSize/2+2).'px;border:1px solid #e0e0e0;width:'.$badgeSize.'px;height:'.$badgeSize.'px;float:left;background-color:'.self::getColor($pe->refType,$pe->refId).'" ></div>';
-      echo '<tr style="cursor:'.$cursor.'" class="dojoxGridRow" '.$onClick.'>';
+      if(isset($isSaveSession)){
+        if($isSaveSession == $pe->refId){
+          $class = "dojoxGridRowSelected";
+          $valueRefType = $pe->refType;
+          $valueRefId = $pe->refId;
+        }
+      }
+      echo '<tr id="'.$pe->refId.'" style="cursor'.$cursor.'" class="interventionActivitySelector '.$class.'" '.$onClick.'>';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.$nameWidth.'px">'.$projList[$pe->idProject].'</td>';
       echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.($idWidth).'px" >#'.$pe->refId.'</td>';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-right:0;width:'.($idWidth).'px" >'.$colorBadge.'</td>';
@@ -463,8 +484,8 @@ class PlannedWorkManual extends GeneralWork {
       echo '</tr>';
     }
     echo '</table>';
-    echo '<input type="hidden" id="interventionActivityType" value="" style="width:80px;background:#ffe0e0" />';
-    echo '<input type="hidden" id="interventionActivityId" value="" style="width:30px;background:#ffe0e0" />';
+    echo '<input type="hidden" id="interventionActivityType" value="'.$valueRefType.'" style="width:80px;background:#ffe0e0" />';
+    echo '<input type="hidden" id="interventionActivityId" value="'.$valueRefId.'" style="width:30px;background:#ffe0e0" />';
   }
   public static function setSize($size) {
     if ($size<20) {
