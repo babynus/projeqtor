@@ -698,7 +698,6 @@ function formatDecimalToDisplay(val) {
 var selectInterventionDateInProgress=0;
 function selectInterventionDate(date,resource,period,event) {
   if(event.ctrlKey) period=period+'X';
-  console.log("selectInterventionDate("+date+","+resource+","+period+")");
   var idMode=(dojo.byId('idInterventionMode'))?dojo.byId('idInterventionMode').value:'';
   var letterMode=(dojo.byId('letterInterventionMode'))?dojo.byId('letterInterventionMode').value:'';
   var refType=(dojo.byId('interventionActivityType'))?dojo.byId('interventionActivityType').value:'';
@@ -775,6 +774,7 @@ function selectInterventionMode(id,letter) {
       dojo.addClass(node,'dojoxGridRowSelected');
     });
   }
+  saveDataToSession('selectInterventionPlannedWorkManual', id);
 }
 
 function selectInterventionActivity(refType,refId,peId) {
@@ -798,4 +798,5 @@ function selectInterventionActivity(refType,refId,peId) {
       dojo.addClass(node,'dojoxGridRowSelected');
     });
   }
+  saveDataToSession('selectActivityPlannedWorkManual', refId);
 }
