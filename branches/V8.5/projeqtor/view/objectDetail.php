@@ -6078,7 +6078,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
   $fmt=new NumberFormatter52($browserLocale, NumberFormatter52::DECIMAL);
   foreach ($list as $assignment) {
     $idleClass=($assignment->idle or $assignment->supportedAssignment)?' affectationIdleClass':'';
-    echo '<tr>';
+    echo '<tr height="29px">';
     $isResource=true;
     $resName=SqlList::getNameFromId('Resource', $assignment->idResource);
     if ($resName==$assignment->idResource) {

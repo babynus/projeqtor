@@ -171,7 +171,7 @@ if ($planningMode=='RECW') {
               <?php echo autoOpenFilteringSelect();?>
                 id="assignmentIdRole" name="assignmentIdRole"
                 class="input" required
-                onChange="enableWidget('dialogAssignmentSubmit');assignmentChangeRole();" <?php echo ($realWork!=0 && $idRole)?"readonly=readonly":"";?>>                
+                onChange="assignmentChangeRole();" <?php echo ($realWork!=0 && $idRole)?"readonly=readonly":"";?>>                
                  <?php 
                  if($mode=='edit'){
                    if($isSelectFonction == 'YES' and !$resource->isResourceTeam){
@@ -505,7 +505,7 @@ if ($planningMode=='RECW') {
         }else{
           $buttonName = i18n('saveLeavesSystemHabilitation');
         }?>
-        <button class="mediumTextButton" dojoType="dijit.form.Button" id="dialogAssignmentSubmit" <?php if (!$idRole) echo 'disabled';?> type="submit" onClick="protectDblClick(this);saveAssignment();return false;">
+        <button class="mediumTextButton" dojoType="dijit.form.Button" id="dialogAssignmentSubmit" type="submit" onClick="protectDblClick(this);saveAssignment();return false;">
           <?php echo $buttonName;?>
         </button>
       </td>
