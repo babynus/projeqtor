@@ -2100,7 +2100,7 @@ function sendMail($to, $subject, $messageBody, $object=null, $headers=null, $sen
   // florent
   if(Parameter::getUserParameter('notReceiveHisOwnEmails')=='YES' and $canSend==false and $autoSendReport!=true and ! $cronnedScript ){
     $curUser=new Affectable(getSessionUser()->id);
-    if($curUser->email and stristr($to,$curUser->email)){
+    if($curUser->email and strpos($to,$curUser->email)!==false){
       $to=trim(str_replace($curUser->email,"",$to));
       $to=str_replace(';;',';',$to);
       if($to!="" ){
