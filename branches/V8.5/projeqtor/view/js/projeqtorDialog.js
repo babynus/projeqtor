@@ -2646,13 +2646,15 @@ function saveAssignment(definitive) {
   var formVar=dijit.byId('assignmentForm');
   var planningMode = dojo.byId('planningMode').value;
   var mode = dojo.byId('mode').value;
+  var isTeam = dojo.byId('isTeam').value;
+  var isOrga = dojo.byId('isOrganization').value;
   
   if (formVar.validate()) {
     dijit.byId("assignmentPlannedWork").focus();
     dijit.byId("assignmentLeftWork").focus();
     url="../tool/saveAssignment.php";
     if (definitive) url+="?definitive="+definitive;
-    if(planningMode == 'MAN' && mode != 'edit'){
+    if(planningMode == 'MAN' && mode != 'edit' && !isTeam && !isOrga){
     	var callback=function(){
         		var params="&idAssignment="+dojo.byId('idAssignment').value;;
     	    	params+="&refType="+dojo.byId('objectClass').value;
