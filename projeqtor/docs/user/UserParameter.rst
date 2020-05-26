@@ -58,7 +58,7 @@ This section allows you to define whether you want to print the history, whether
 
 
 
-.. _userparam_miscelleaneous:
+.. _UP-automation:
 
 Tab Automation
 --------------

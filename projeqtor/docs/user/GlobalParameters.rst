@@ -142,7 +142,7 @@ Defines behavior of tasks in the real work allocation screen.
       After submission what type of alert would you want to send to the organism manager  
   
   
-.. _planning:
+.. _gp-tabActivity:
 
 Tab Activity
 ************
@@ -983,7 +983,7 @@ It will manage connection to IMAP INBOX to retrieve email answers.
 
    * Must be an IMAP connection string.
    * To connect to GMAIL input box, host must be: {imap.gmail.com:993/imap/ssl}INBOX
-   * You must set these parameters if you want to use the :ref:`Not receive his own mails<UP-sectionemailing>` option in the user settings 
+   * You must set these parameters if you want to use the :ref:`Not receive his own mails<UP-automation>` option in the user settings 
    
 .. _automatic-planning-calcul:
 
