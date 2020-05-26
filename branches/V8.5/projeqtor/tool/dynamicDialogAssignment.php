@@ -263,7 +263,7 @@ if ($planningMode=='RECW') {
                                   echo $delay;
                               } else if ($mode=="edit"){
                                   echo Work::displayWork($assignmentObj->assignedWork);
-                              } else if($mode=="add") { 
+                              } else if($mode=="add" and $planningMode != 'MAN') { 
                                   $assignedWork = GeneralWork::convertWork($validatedWorkPeOld)-GeneralWork::convertWork($assignedWorkPeOld);
                                   if($assignedWork < 0 or $planningMode=='RECW'){
                                     echo "0";
@@ -272,6 +272,8 @@ if ($planningMode=='RECW') {
                                   }                             
                               } else if($mode=="divide"){
                                   echo Work::displayWork($assignmentObjOrigin->leftWork/2);
+                              }else{
+                                echo '0';
                               }
                  ?>" 
                  dojoType="dijit.form.NumberTextBox" 
@@ -317,13 +319,15 @@ if ($planningMode=='RECW') {
                                   echo Work::displayWork($assignmentObj->leftWork);
                               } else if($mode=="divide"){
                                   echo Work::displayWork($assignmentObjOrigin->leftWork/2);                                                       
-                              } else { 
+                              } else if($planningMode != 'MAN') {
                                   $assignedWork = GeneralWork::convertWork($validatedWorkPeOld)-GeneralWork::convertWork($assignedWorkPeOld);
                                     if($assignedWork < 0 or $planningMode=='RECW'){
                                       echo "0";
                                     } else {
                                       echo Work::displayWork($assignedWork) ;
                                   }
+                              }else{
+                                echo '0';
                               } 
                  ?>" 
                  dojoType="dijit.form.NumberTextBox" 
@@ -357,14 +361,16 @@ if ($planningMode=='RECW') {
                <div id="assignmentPlannedWork" name="assignmentPlannedWork"                  
                  value="<?php if(($refType=='Meeting' || $refType=='PeriodicMeeting') && $mode=="add" && $obj->meetingStartTime && $obj->meetingEndTime){ 
                                   echo $delay;
-                              } else { 
+                              } else if($planningMode != 'MAN') {
                                   $assignedWork = GeneralWork::convertWork($validatedWorkPeOld)-GeneralWork::convertWork($assignedWorkPeOld);
                                   if($assignedWork < 0){
                                     echo "0";
                                   } else {
                                     echo Work::displayWork($assignedWork) ;
                                   }
-                              } 
+                              }else{
+                                echo '0';
+                              }  
                  ?>" 
                  dojoType="dijit.form.NumberTextBox" 
                  constraints="{min:0,max:9999999.99}" 
