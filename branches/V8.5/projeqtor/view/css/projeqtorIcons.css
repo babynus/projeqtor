@@ -1284,6 +1284,12 @@
 .ProjeQtOrFlatGreen .iconAbsence { background-image: url(customIcons/green/iconAbsence.png); }
 .ProjeQtOrFlatGrey .iconAbsence { background-image: url(customIcons/grey/iconAbsence.png); }
 
+.iconConsultationPlannedWorkManual  { background-image: url(images/iconConsultationPlannedWorkManual.png); }
+.ProjeQtOrFlatBlue .iconConsultationPlannedWorkManual  { background-image: url(customIcons/blue/iconConsultationPlannedWorkManual.png); }
+.ProjeQtOrFlatRed .iconConsultationPlannedWorkManual  { background-image: url(customIcons/red/iconConsultationPlannedWorkManual.png); }
+.ProjeQtOrFlatGreen .iconConsultationPlannedWorkManual  { background-image: url(customIcons/green/iconConsultationPlannedWorkManual.png); }
+.ProjeQtOrFlatGrey .iconConsultationPlannedWorkManual  { background-image: url(customIcons/grey/iconConsultationPlannedWorkManual.png); }
+
 .iconPlannedWorkManual { background-image: url(images/iconPlannedWorkManual.png); }
 .ProjeQtOrFlatBlue .iconPlannedWorkManual { background-image: url(customIcons/blue/iconPlannedWorkManual.png); }
 .ProjeQtOrFlatRed .iconPlannedWorkManual { background-image: url(customIcons/red/iconPlannedWorkManual.png); }
