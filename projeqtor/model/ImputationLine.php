@@ -330,6 +330,11 @@ class ImputationLine {
             $critWhere="idProject='".$plan->idProject."' and refType='".$plan->refType."'";
             $critWhere.=" and refId='$plan->refId' and workDate between'".$startDate."' and '".(($endDate<=date('Y-m-d'))?$endDate:date('Y-m-d'))."'";
             $plannedManualWorkList=$plannedWorkMan->getSqlElementsFromCriteria(null, false, $critWhere, null, false, true);
+            if(!$showPlanned){
+              $critWhere="idResource in ($ressList)";
+              $critWhere.=" and $rangeType='$rangeValue'";
+              $plannedWorkList=$plannedWork->getSqlElementsFromCriteria(null, false, $critWhere, null, false, true);
+            }
           }
         //
         if (! $plan->id and $plan->refType and SqlElement::class_exists($plan->refType) and $plan->refId) {
@@ -456,7 +461,7 @@ class ImputationLine {
           $elt->arrayWork[$i]=new Work();
         }
       }
-      if ($showPlanned) {
+      if ($showPlanned or $manuPlan) {
         foreach ($plannedWorkList as $plannedWork) {
           if ($plannedWork->idAssignment==$elt->idAssignment) {
             $workDate=$plannedWork->workDate;
@@ -1025,7 +1030,7 @@ class ImputationLine {
                   $colorClass = "";
                 }
               }
-              echo '  style="width: 45px; text-align: center;'.$colorStyle.'" ';
+              echo '  style="width: 45px; text-align: center;'.$colorStyle.';color:'.(($manuPlan and isset($line->arrayPlannedWork{$i}->work) and  $line->arrayPlannedWork{$i}->work!="")?"#8080DD":"black").';" ';
               echo ' trim="true" maxlength="4" class="input imputation '.$colorClass.'" ';
               echo ' id="workValue_'.$nbLine.'_'.$i.'"';
               echo ' name="workValue_'.$i.'[]"';
