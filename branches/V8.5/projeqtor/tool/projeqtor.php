@@ -4490,8 +4490,8 @@ function decodeCSV($val) {
   return utf8_encode($val);
 }
 //
-function autoOpenFilteringSelect($comboDatail=false) {
-  if ($comboDatail) return ' onMouseDown="window.top.frames[\'comboDetailFrame\'].dijit.byId(this.name.replace(\'_detail\',\'\')).toggleDropDown();"  selectOnClick="true"';
+function autoOpenFilteringSelect($comboDetail=false) {
+  if ($comboDetail) return ' onMouseDown="window.top.frames[\'comboDetailFrame\'].dijit.byId(this.name.replace(\'_detail\',\'\')).toggleDropDown();"  selectOnClick="true"';
   else return ' onMouseDown="dijit.byId(this.name).toggleDropDown();"  selectOnClick="true"';
 }
 
