@@ -144,7 +144,7 @@ class Work extends GeneralWork {
       //florent
       $pe=new PlanningElement();
       $critArray=array('refType'=>$this->refType, 'refId'=>$this->refId);
-      $yestDay=date("Y-m-d",strtotime("- 1 days"));
+      $toDay=date("Y-m-d");
       $pe=$pe->getSingleSqlElementFromCriteria('PlanningElement', $critArray);
       if($pe->idPlanningMode=='23'){
         $manualPlan=true;
@@ -154,16 +154,10 @@ class Work extends GeneralWork {
                   'refType'=>$this->refType, 'refId'=>$this->refId, 
                   'idResource'=>$this->idResource,
                   'workDate'=>$this->workDate);
-      //florent
-      if($manualPlan){
-        $pw=new PlannedWorkManual();
-        $list=$pw->getSqlElementsFromCriteria($crit, null, null, 'workDate asc');
-      }else{
-        $pw=new PlannedWork();
-        $list=$pw->getSqlElementsFromCriteria($crit, null, null, 'workDate asc');
-      }
-      //
+      $pw=new PlannedWork();
+      $list=$pw->getSqlElementsFromCriteria($crit, null, null, 'workDate asc');
       $needReplanOtherProjects=(count($list)==0)?true:false;
+      $deletManPlan=false;
       while ($additionalWork>0 and count($list)>0) {
         $pw=array_shift($list);
         if ($pw->work > $additionalWork) {
@@ -172,23 +166,25 @@ class Work extends GeneralWork {
           $additionalWork=0;
         } else {
           $additionalWork-=$pw->work;
-          if(($pw->workDate<=$yestDay and $manualPlan)){
-            if($manualPlan){
-              array('idAssignment'=>$pw->idAssignment, 
-                  'refType'=>$pw->refType, 'refId'=>$pw->refId, 
-                  'idResource'=>$pw->idResource,
-                  'workDate'=>$pw->workDate);
-              $planW=SqlElement::getSingleSqlElementFromCriteria('PlannedWork',$critArray );
-              $planW->delete();
-            }
-            $pw->delete();
-          }
+            if($manualPlan and !$deletManPlan){
+              $deletManPlan=true;
+           }
+           if(!$manualPlan or($manualPlan and $pw->workDate<$toDay)){
+             $pw->delete();
+           }
         }
         if (count($list)==0 and isset($crit['workDate']) ) {
           $needReplanOtherProjects=true;
           unset($crit['workDate']);
           $list=$pw->getSqlElementsFromCriteria($crit, null, null, 'workDate asc');
         }
+      }
+      if($deletManPlan){
+        $pwm= new PlannedWorkManual();
+        $date=($this->workDate>=$toDay)?$toDay:$this->workDate;
+        $where="idAssignment=$this->idAssignment and refType='$this->refType' and refId=$this->refId and idResource=$this->idResource and workDate<'$date'";
+        $pw->purge($where);
+        $pwm->purge($where);
       }
       if ($needReplanOtherProjects) {
         $where="idResource=$this->idResource and workDate='$this->workDate' and idProject!=$this->idProject";
