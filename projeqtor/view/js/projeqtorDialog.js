@@ -566,7 +566,7 @@ function showDetail(comboName, canCreate, objectClass, multiSelect, objectId, fo
       window.frames['comboDetailFrame'].document.body.innerHTML='<i>'
           + i18n("messagePreview") + '</i>';
       dijit.byId("dialogDetail").show();
-      frames['comboDetailFrame'].location.href="print.php?print=true&page=preparePreview.php";
+      //frames['comboDetailFrame'].location.href="print.php?print=true&page=preparePreview.php";
       newDetailItem(objectClass);
     } else {
       cl=objectClass;
@@ -574,7 +574,7 @@ function showDetail(comboName, canCreate, objectClass, multiSelect, objectId, fo
       window.frames['comboDetailFrame'].document.body.innerHTML='<i>'
           + i18n("messagePreview") + '</i>';
       dijit.byId("dialogDetail").show();
-      frames['comboDetailFrame'].location.href="print.php?print=true&page=preparePreview.php";
+      //frames['comboDetailFrame'].location.href="print.php?print=true&page=preparePreview.php";
       gotoDetailItem(objectClass,objectId);
     }
     
@@ -799,6 +799,7 @@ function newDetailItem(objectClass) {
 }
 function gotoDetailItem(objectClass,objectId) {
   // comboName=dojo.byId('comboName').value;
+  dijit.byId("dialogDetail").show();
   hideField('comboSearchButton');
   var objClass=objectClass;
   if (!objectClass) {
@@ -828,7 +829,7 @@ function gotoDetailItem(objectClass,objectId) {
   }
   page+="&destinationWidth=" + destinationWidth;
   window.top.frames['comboDetailFrame'].location.href=page;
-  setTimeout('dijit.byId("dialogDetail").show()', 10);
+  setTimeout('dijit.byId("dialogDetail").show()', 10);   
 }
 
 function saveDetailItem() {
