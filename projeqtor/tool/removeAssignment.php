@@ -41,7 +41,13 @@ if ($assignmentId=='') {
 if ($assignmentId==null) {
   throwError('assignmentId parameter not found in REQUEST');
 }
+
+$planningMode = RequestHandler::getValue('planningMode');
 Sql::beginTransaction();
+if($planningMode=='MAN'){
+  $pwm = new PlannedWorkManual();
+  $pwm->purge('idAssignment='.$assignmentId);
+}
 $obj=new Assignment($assignmentId);
 $result=$obj->delete();
 

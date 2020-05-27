@@ -4058,7 +4058,7 @@ function drawNotesFromObject($obj, $refresh=false) {
       	} else {
       		$strDataHTML=preg_replace('@(https?://([-\w\.]<+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" target="_blank">$1</a>', $strDataHTML);
       	}
-      	$strDataHTML = str_replace('<img', '<img onClick="showImage(\''.$note->refType.'\',\''.htmlEncode($note->refId).'\');"', $strDataHTML);
+      	//$strDataHTML = str_replace('<img', '<img onClick="showImage(\''.$note->refType.'\',\''.htmlEncode($note->refId).'\');"', $strDataHTML);
       }
       echo $strDataHTML;
       if (!$print) echo '</div>';
@@ -6031,6 +6031,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
     $pmObj=new PlanningMode($idPm);
     $planningMode=$pmObj->code;
   }
+  echo '<input id="planningMode" name="planningMode" type="hidden" value="'.$planningMode.'"/>';
   echo '<tr><td colspan=2 style="width:100%;"><table style="width:100%;">';
   echo '<tr>';
   if (!$print and $canUpdate) {
@@ -6099,7 +6100,9 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
         echo '  <a onClick="removeAssignment('."'".htmlEncode($assignment->id)."','".(Work::displayWork($assignment->realWork)*100)."','".htmlEncode($resName, 'quotes')."'".');" '.'title="'.i18n('removeAssignment').'" > '.formatSmallButton('Remove').'</a>';
       }
       if ($canUpdate and !$print and $workVisible and !$assignment->idle and !$assignment->supportedAssignment) {
-        echo '  <a onClick="divideAssignment('.htmlEncode($assignment->id).',\''.Work::displayShortWorkUnit().'\');" '.'title="'.i18n('divideAssignment').'" > '.formatSmallButton('Split').'</a>';
+        if($planningMode != 'MAN'){
+          echo '  <a onClick="divideAssignment('.htmlEncode($assignment->id).',\''.Work::displayShortWorkUnit().'\');" '.'title="'.i18n('divideAssignment').'" > '.formatSmallButton('Split').'</a>';
+        }
         //gautier #directAcces
         $listUser=getListForSpecificRights('Imputation');
         if(!$assignment->isResourceTeam and isset($listUser[$assignment->idResource])){
