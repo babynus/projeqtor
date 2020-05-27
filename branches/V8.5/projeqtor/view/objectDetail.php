@@ -5791,12 +5791,12 @@ function drawApproverFromObject($list, $obj, $refresh=false) {
     echo '<table style="width:100%"><tr>';
     if ($approved and !$disapproved) {
       echo '<td>';
-      echo '<img src="../view/img/check.png" height="12px"/>&nbsp;';
+      echo '<img src="../view/img/check.png" style="position:relative;height:12px;top:3px;"/>&nbsp;';
       echo i18n("approved").$compMsg.$approvedDate;
       echo '</td>';
     }else if(!$approved and $disapproved){
-      echo '<td><img src="../view/img/uncheck.png" height="12px"/></td>';
-      echo '<td>'.i18n("disapproved").$compMsg.$disapprovedDate.'&nbsp;'.formatCommentThumb($versApp->disapprovedComment).'</td>';
+      echo '<td style="white-space:nowrap"><img src="../view/img/uncheck.png" style="position:relative;height:12px;top:4px;"/>'.formatCommentThumb($versApp->disapprovedComment).'</td>';
+      echo '<td>'.i18n("disapproved").$compMsg.$disapprovedDate.'&nbsp;</td>';
       if ($user->id==$app->idAffectable and !$print and $versApp->id) {
       	echo '<td><button dojoType="dijit.form.Button" showlabel="true" >';
       	echo i18n('approveNow');
