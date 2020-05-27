@@ -498,6 +498,7 @@ class ImputationLine {
     foreach ($result as $key=>$elt) {
       $result=self::getParent($elt, $result, true, $accessRight);
     }
+    ksort($result);
     return $result;
   }
   
