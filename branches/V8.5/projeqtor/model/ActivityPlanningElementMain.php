@@ -392,10 +392,27 @@ class ActivityPlanningElementMain extends PlanningElement {
       }
    
     }
+    
     $old = $this->getOld();
     if($this->idActivityPlanningMode!='23' and $old->idPlanningMode=='23' and $this->plannedWork!='' and !SqlElement::isSaveConfirmed()){
+      if(Parameter::getGlobalParameter('plannedWorkManualType')=="real" ){
+        $result.='<br/>' . i18n('errorPlannedWorkManualType');
+      }else{
         $result.='<br/>' . i18n('changePlanMan');
         $result.='<input type="hidden" name="confirmControl" id="confirmControl" value="save" />';
+      }
+    }else if($this->idActivityPlanningMode=='23' and $old->idPlanningMode!='23'){
+      $ass=new Assignment();
+      $critArray=array("idProject"=>$this->idProject,"refType"=>$this->refType,"refId"=>$this->refId);
+      $assLst=$ass->getSqlElementsFromCriteria($critArray);
+      $lstRes=array();
+      foreach ($assLst as $ass){
+         if(in_array($ass->idResource, $lstRes)){
+           $result.='<br/>' . i18n('errorPlanWorkManDuplicate');
+           break;
+         }
+        $lstRes["Assignement".$ass->id]=$ass->idResource;
+      }
     }
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
