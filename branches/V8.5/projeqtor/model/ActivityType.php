@@ -58,7 +58,7 @@ class ActivityType extends Type {
   public $showInFlash;
   public $internalData;
   public $canHaveSubActivity;
-  
+  public $_lib_helpCanHaveSubActivity;
   // Define the layout that will be used for lists
     
   private static $_fieldsAttributes=array("name"=>"required", 
@@ -77,7 +77,10 @@ class ActivityType extends Type {
                                           "idPlanningMode"=>"hidden",
                                           "scope"=>"hidden",
                                           "idActivityPlanningMode"=>"required",
-                                          "lockNoLeftOnDone"=>"nobr");
+                                          "lockNoLeftOnDone"=>"nobr",
+                                          "lockCancelled"=>"nobr",
+                                          "canHaveSubActivity"=>"nobr"
+  );
   private static $_colCaptionTransposition = array('idActivityPlanningMode'=>'defaultPlanningMode');
   private static $_databaseColumnName = array('idActivityPlanningMode'=>'idPlanningMode');
   private static $_databaseCriteria = array('scope'=>'Activity');
