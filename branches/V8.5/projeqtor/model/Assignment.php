@@ -336,7 +336,6 @@ class Assignment extends SqlElement {
         $rs->manageSupportAssignment($this);
       }
     }
-    
     return $result;
   }
   
@@ -410,6 +409,13 @@ class Assignment extends SqlElement {
     // Delete planned work for the assignment
     $pw=new PlannedWork();
     $pwList=$pw->purge('idAssignment='.Sql::fmtId($this->id));
+    
+    $obj = new $this->refType($this->refId);
+    $planningMode = new PlanningMode($obj->ActivityPlanningElement->idPlanningMode);
+    if($planningMode->code == 'MAN'){
+    	$pwm = new PlannedWorkManual();
+    	$pwm->purge('idAssignment='.$this->id);
+    }
     
     //gautier #3646
     // If Resource is part of Resource Team (Pool) and Pool is assigned, add work from Pool
@@ -494,11 +500,15 @@ class Assignment extends SqlElement {
     $result="";
     if (! $this->idResource) {
       $result.='<br/>' . i18n('messageMandatory', array(i18n('colIdResource')));
-    } 
+    }
+    
+    $obj = new $this->refType($this->refId);
+    $planningMode = new PlanningMode($obj->ActivityPlanningElement->idPlanningMode);
+
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
       $result.=$defaultControl;
-    }else if($this->refType=="Meeting"){
+    }else if($this->refType=="Meeting" or $planningMode->code == 'MAN'){
       $elm=SqlElement::getSingleSqlElementFromCriteria("Assignment", array('refType'=>$this->refType,'refId'=>$this->refId,'idResource'=>$this->idResource));
       if($elm && $elm->id!=$this->id){
         $result.='<br/>' . i18n('messageResourceDouble');

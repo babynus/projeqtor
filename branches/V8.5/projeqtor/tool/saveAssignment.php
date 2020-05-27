@@ -295,6 +295,8 @@ if($planningMode == 'MAN' and $mode =='edit'){
   }
   echo '<input id="idAssignment" name="idAssignment" type="hidden" value="'.$assignment->id.'"/>';
 }
+$status = getLastOperationStatus($result);
+echo '<input id="lastOperationStatus" name="lastOperationStatus" type="hidden" value="'.$status.'"/>';
 displayLastOperationStatus($result);
 // Message of correct saving
 ?>
