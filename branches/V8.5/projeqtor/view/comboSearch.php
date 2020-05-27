@@ -36,11 +36,13 @@
    if (array_key_exists('mode', $_REQUEST)) {
      $mode=$_REQUEST['mode'];
    }
+   //header("Cache-Control: public, max-age=86400");
  ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" 
   "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>   
+  <meta http-equiv="Cache-control" content="public">
   <title><?php echo i18n("applicationTitle");?></title>
   <link rel="stylesheet" type="text/css" href="css/projeqtor.css" />
   <link rel="stylesheet" type="text/css" href="css/projeqtorFlat.css" />
