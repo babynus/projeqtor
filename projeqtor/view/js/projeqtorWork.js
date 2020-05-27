@@ -800,3 +800,23 @@ function selectInterventionActivity(refType,refId,peId) {
   }
   saveDataToSession('selectActivityPlannedWorkManual', refId);
 }
+
+function saveInterventionCapacity(refType,refId,month,id,mode) {
+  var value=dijit.byId("interventionActivitySelector"+id).get("value");
+  if(isNaN(value) || value==null){
+    value=0;
+    dijit.byId("interventionActivitySelector"+id).set("value",0);
+  }
+  //
+  var url = '../tool/saveInterventionCapacity.php?refType='+refType +'&refId='+refId +'&month='+month+'&value='+value+'&mode='+mode;
+  dojo.xhrPut({
+    url : url,
+    form : 'listFormPlannedWorkManual',
+    handleAs : "text",
+    load : function(data) {
+      document.getElementById('idImageInterventionActivitySelector'+id).style.display="block";
+      setTimeout("dojo.byId('idImageInterventionActivitySelector"+id+"').style.display='none';", 1000);
+    }
+  });
+}
+
