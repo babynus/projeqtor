@@ -2656,17 +2656,22 @@ function saveAssignment(definitive) {
     if (definitive) url+="?definitive="+definitive;
     if(planningMode == 'MAN' && mode != 'edit' && !isTeam && !isOrga){
     	var callback=function(){
-        		var params="&idAssignment="+dojo.byId('idAssignment').value;;
-    	    	params+="&refType="+dojo.byId('objectClass').value;
-    	    	params+="&idProject="+dijit.byId('idProject').get('value');
-    	    	params+="&refId="+dojo.byId("objectId").value;
-    	    	params+="&idResource="+dijit.byId('assignmentIdResource').get('value');
-    	    	params+="&idRole="+dijit.byId('assignmentIdRole').get('value');
-    	    	params+="&unit="+dojo.byId('assignmentAssignedUnit').value;
-    	    	params+="&realWork="+dijit.byId('assignmentRealWork').get('value');
-    	    	params+=dijit.byId('assignmentDailyCost').get('value');
-    	    	params+="&mode=edit";
-    	    	loadDialog('dialogAssignment',null,false,params);
+    	    	var lastOperationStatus = dojo.byId('lastOperationStatus').value;
+    	    	if(lastOperationStatus != 'INVALID'){
+    	    		var params="&idAssignment="+dojo.byId('idAssignment').value;
+        	    	params+="&refType="+dojo.byId('objectClass').value;
+        	    	params+="&idProject="+dijit.byId('idProject').get('value');
+        	    	params+="&refId="+dojo.byId("objectId").value;
+        	    	params+="&idResource="+dijit.byId('assignmentIdResource').get('value');
+        	    	params+="&idRole="+dijit.byId('assignmentIdRole').get('value');
+        	    	params+="&unit="+dojo.byId('assignmentAssignedUnit').value;
+        	    	params+="&realWork="+dijit.byId('assignmentRealWork').get('value');
+        	    	params+=dijit.byId('assignmentDailyCost').get('value');
+        	    	params+="&mode=edit";
+    	    		loadDialog('dialogAssignment',null,false,params);
+    	    	}else{
+    	    		dijit.byId('dialogAssignment').hide();
+    	    	}
         };
         loadContent(url, "resultDivMain", "assignmentForm",
             true, 'assignment', null,null,callback);
@@ -2685,6 +2690,7 @@ function saveAssignment(definitive) {
  * 
  */
 function removeAssignment(assignmentId, realWork, resource) {
+  var planningMode = dojo.byId('planningMode').value;
   if (checkFormChangeInProgress()) {
     showAlert(i18n('alertOngoingChange'));
     return;
@@ -2695,10 +2701,13 @@ function removeAssignment(assignmentId, realWork, resource) {
     return;
   }
   actionOK=function() {
-    loadContent("../tool/removeAssignment.php?assignmentId="+assignmentId+"&assignmentRefType="+dojo.byId('objectClass').value+"&assignmentRefId="+dojo.byId("objectId").value, "resultDivMain", null,
+    loadContent("../tool/removeAssignment.php?assignmentId="+assignmentId+"&assignmentRefType="+dojo.byId('objectClass').value+"&assignmentRefId="+dojo.byId("objectId").value+"&planningMode="+planningMode, "resultDivMain", null,
         true, "assignment");
   };
   msg=i18n('confirmDeleteAssignment', new Array(resource));
+  if(planningMode == 'MAN'){
+	  msg += '<br/><br/>'+i18n("confirmControlDeletePlannedWork");
+  }
   showConfirm(msg, actionOK);
 }
 //gautier #resourceTeam
