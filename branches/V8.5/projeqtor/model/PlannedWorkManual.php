@@ -388,6 +388,7 @@ class PlannedWorkManual extends GeneralWork {
   }
   
   public static function drawActivityTable($idProject=null,$monthYear=null,$readonly=false) {
+    $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     if($idProject){
      $myProj = new Project($idProject);
      $listProj = transformListIntoInClause($myProj->getRecursiveSubProjectsFlatList(false,true));
@@ -437,6 +438,12 @@ class PlannedWorkManual extends GeneralWork {
     $valueRefType = null;
     $valueRefId = null;
     foreach ($list as $pe) {
+      if(strlen($month)==1){
+        $month = '0'.$month;
+      }
+      $peIntervention = SqlElement::getSingleSqlElementFromCriteria('InterventionCapacity', array('refType'=>$pe->refType,'refId'=>$pe->refId,'month'=>$month));
+      $valueFte = $peIntervention->fte;
+      $mode = ($peIntervention->id)?$peIntervention->id:0;
       $class  = "dojoxGridRow"; 
       if (!isset($projList[$pe->idProject])) {
         $proj=new Project($pe->idProject,true);
@@ -458,9 +465,24 @@ class PlannedWorkManual extends GeneralWork {
       echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.($idWidth).'px" >#'.$pe->refId.'</td>';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-right:0;width:'.($idWidth).'px" >'.$colorBadge.'</td>';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-left:0;width:'.($nameWidth).'px" >'.$pe->refName.'</td>';
-      echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="text-align:center;margin:0;padding;0;width:'.$idWidth.'px">'
-          .'<input type="text" xdata-dojo-type="dijit.form.TextBox" value="1" style="font-family: Verdana, Arial, Tahoma, sans-serif;font-size: 8pt;text-align:center;width:'.($idWidth-2).'px;"/>' 
-          .'</td>';
+      echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="text-align:center;margin:0;padding;0;width:'.$idWidth.'px">';
+      if(!$readonly){
+        echo '<img  id="idImageInterventionActivitySelector'.$pe->id.'" src="../view/img/savedOk.png"
+                    style="display: none; position:relative;top:2px;left:5px; height:16px;float:left;"/>';
+        echo '<div dojoType="dijit.form.NumberTextBox" id="interventionActivitySelector'.$pe->id.'" name="interventionActivitySelector'.$pe->id.'"
+      						  class="dijitReset dijitInputInner dijitNumberTextBox"
+        					  value="'.$valueFte.'"
+                    style="padding:1px;background:none;max-width:100%; box-sizing:border-box;display:block;border:1px solid #A0A0A0 !important;margin:2px 0px" >
+                     <script type="dojo/method" event="onChange">
+                      saveInterventionCapacity("'.$pe->refType.'",'.$pe->refId.','.$month.','.$pe->id.','.$mode.'); 
+                     </script>';
+      } else {
+        echo $peIntervention->fte;
+      }
+      echo $keyDownEventScript;
+      echo '</div>';
+     // echo '<input type="text" xdata-dojo-type="dijit.form.TextBox" value="" style="font-family: Verdana, Arial, Tahoma, sans-serif;font-size: 8pt;text-align:center;width:'.($idWidth-2).'px;"/>';
+      echo'</td>';
       if ($monthYear) {
         for ($i=1;$i<=$nbDays;$i++) {
           $date=$year.'-'.$month.'-'.(($i<10)?'0':'').$i;
