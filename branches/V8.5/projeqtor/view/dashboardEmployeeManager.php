@@ -723,7 +723,7 @@
                                 &nbsp;
                             </th>
                         </tr>
-                        <tr style="height:32px;"><td><b><?php echo (i18n("synthesis")); ?></b></td></tr>
+                        <tr style="height:39px;"><td><b><?php echo (i18n("synthesis")); ?></b></td></tr>
                         <tr>
                             <td style="text-align:center;vertical-align:top;width:100%;">
                                 <!----------------------->
