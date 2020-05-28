@@ -922,6 +922,7 @@ class Cron {
           $result = i18n('ticketInserted').' #'.$ticket->id;
         }else{
           $result = i18n('ticketRejected').' '.$result;
+          $failMessage=true;
         }
         $inputMailboxHistory->result = $result;
         $inputMailboxHistory->save();
