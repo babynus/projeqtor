@@ -302,7 +302,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
   } else if ($col=='idTestCase') { 
     // List Test case with criteria on project or visible product
     $table=SqlList::getList($listType,$column,$selection, (! $obj)?!$limitToActiveProjects:false,true );
-  } if($col=="idWeight"){
+  } else if($col=="idWeight"){
     $showIdleCriteria=$showIdle;
     $table=SqlList::getList($listType,$column,$selection, $showIdleCriteria );
       if(get_class($obj)=='Project'){
