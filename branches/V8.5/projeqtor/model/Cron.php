@@ -832,17 +832,25 @@ class Cron {
       mkdir($uploaddir,0777,true);
     }
     
-    //default imap  {imap.projeqtor.org:143}INBOX test01@projeqtor.org test01ProjeQtOr
+    $imapFilterCriteria=Parameter::getGlobalParameter('imapFilterCriteria');
+    if (! $imapFilterCriteria) { $imapFilterCriteria='UNSEEN UNDELETED'; }
+    //
     foreach ($lstIMb as $mb){
       try {
         $inputMailbox = new ImapMailbox($mb->serverImap,$mb->userImap,$mb->passwordImap,$uploaddir,'utf-8');
       }catch (Exception $e) {
         $mb->failedRead += 1;
-        if($mb->failedRead == 2)$mb->idle = 1;
+        if($mb->failedRead == 3) {
+          $mb->idle = 1;
+        }
         $mb->save();
       }
       $mails = array();
-      $mailsIds = $inputMailbox->searchMailBox('UNSEEN UNDELETED');
+      $mailsIds = $inputMailbox->searchMailBox($imapFilterCriteria);
+      if(!$mailsIds) {
+        debugTraceLog("Mailbox $mb->serverImap for $mb->userImap is empty (filter='$imapFilterCriteria')"); // Will be a debug level trace
+        continue;
+      }
       foreach ($mailsIds as $mailId){
         if($mb->idle==1)break;
         $result = "";
@@ -919,11 +927,12 @@ class Cron {
         $inputMailboxHistory->adress = $mailFrom;
         $inputMailboxHistory->date = date("Y-m-d H:i:s");
         if($result == ""){
-          $result = i18n('ticketInserted').' #'.$ticket->id;
+          $result = i18n('ticketInserted').' : #'.$ticket->id;
         }else{
-          $result = i18n('ticketRejected').' '.$result;
+          $result = i18n('ticketRejected').' : '.$result;
           $failMessage=true;
         }
+        debugTraceLog("Mailbox $emailHost for $emailEmail : $result"); // Will be a debug level trace
         $inputMailboxHistory->result = $result;
         $inputMailboxHistory->save();
         
@@ -941,7 +950,7 @@ class Cron {
     }
     //end gautier
     
-		// IMAP must be enabled in Google Mail Settings
+		// IMAP must be enabled in Mail Settings
 		$emailEmail=Parameter::getGlobalParameter('cronCheckEmailsUser');
 		$emailPassword=Parameter::getGlobalParameter('cronCheckEmailsPassword');
 		//$emailAttachmentsDir=dirname(__FILE__) . '/../files/attach';
@@ -966,11 +975,9 @@ class Cron {
 		$mails = array();
 		// Get some mail
 		//$mailsIds = $mailbox->searchMailBox('UNSEEN UNDELETED');
-		$imapFilterCriteria=Parameter::getGlobalParameter('imapFilterCriteria');
-		if (! $imapFilterCriteria) { $imapFilterCriteria='UNSEEN UNDELETED'; }
 		$mailsIds = $mailbox->searchMailBox($imapFilterCriteria);
 		if(!$mailsIds) {
-		  debugTraceLog("Mailbox is empty (filter='$imapFilterCriteria')"); // Will be a debug level trace
+		  debugTraceLog("Mailbox $emailHost for $emailEmail is empty (filter='$imapFilterCriteria')"); // Will be a debug level trace
 		  return;
 		}
 	  foreach ($mailsIds as $mailId) {
