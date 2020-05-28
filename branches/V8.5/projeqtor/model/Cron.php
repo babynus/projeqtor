@@ -932,7 +932,7 @@ class Cron {
           $result = i18n('ticketRejected').' : '.$result;
           $failMessage=true;
         }
-        debugTraceLog("Mailbox $emailHost for $emailEmail : $result"); // Will be a debug level trace
+        debugTraceLog("Mailbox $mb->serverImap for $mb->userImap : $result"); // Will be a debug level trace
         $inputMailboxHistory->result = $result;
         $inputMailboxHistory->save();
         
