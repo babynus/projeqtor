@@ -2027,6 +2027,8 @@ errorObjectId: "Ошибка на новые кнопки;objectId не явля
 errorOneOfTheRequestFieldsIsMissing: "Erro &#58; On of the request's field is missing",
 errorOnUpdatingLeaves: "Error on update of leave period",
 errorPeriodCantOverlap: "Periods of variation must not overlap",
+errorPlannedWorkManualType: "Impossible to leave &#34manual&#34 planning mode as some &#34real&#34 planning exists",
+errorPlanWorkManDuplicate: "Impossibile to set planning mode to &#34manual&#34 if a resource has duplicate assignments on the activity",
 errorQuantityNotModuloOfZeroPointFive: "Quantity is not a module of 0.5",
 errorQuantityStartDateEndDateMustBeDefinedTogether: "The quantity&#44 start date and end date must be defined together",
 errorRegisterGlobals: "register_globals  должен быть отключен (значение false). <br/>Обновите ваш Php.ini file.",
