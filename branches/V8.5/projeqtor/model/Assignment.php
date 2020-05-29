@@ -504,7 +504,22 @@ class Assignment extends SqlElement {
     
     $obj = new $this->refType($this->refId);
     $planningMode = new PlanningMode($obj->ActivityPlanningElement->idPlanningMode);
-
+      
+    //gautier #4495
+    if($this->id){
+      $old=$this->getOld();
+      if($this->idle==0 and $old->idle==1){
+        $proj = new Project($this->idProject,true);
+        $topProject = $proj->getTopProjectList(true);
+        $aff = new Affectation();
+        $where = " idResource = ".$this->idResource." and idProject in " . transformValueListIntoInClause($topProject);
+        $affExist = $aff->countSqlElementsFromCriteria(null,$where);
+        if(!$affExist){
+          $result .= '<br/>' . i18n ( 'cantOpenActivityWithoutAffectedResource' );
+        }
+      }
+    }
+    
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
       $result.=$defaultControl;
