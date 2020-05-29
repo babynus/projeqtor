@@ -3746,7 +3746,11 @@ function runReport() {
 }
 function saveReportInToday() {
   var fileName = dojo.byId('reportFile').value;
-    loadContent("../tool/saveReportInToday.php", "resultDivMain", "reportForm", true,
+  var form="reportForm";
+  if(fileName=="showIntervention" && dojo.byId("consultationPlannedWorkManualParamDiv")){
+    form="listFormConsPlannedWorkManual";
+  }
+    loadContent("../tool/saveReportInToday.php", "resultDivMain", form, true,
     'report');
 }
 function saveReportParametersForDialog() {
