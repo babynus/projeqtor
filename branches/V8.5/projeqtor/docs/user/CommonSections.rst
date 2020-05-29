@@ -18,22 +18,40 @@ Those sections allows to set information or add information to an item of the el
    
    A view of ProjeQtOr's global interface
 
+
+
+.. topic:: Interface areas:
+
+   |one| :ref:`description-section`
+   
+   |two| :ref:`search-view-item` 
+   
+   |three| :ref:`treatment-section` 
+   
+   |four| :ref:`allocation-section`
+   
+   |five| :ref:`assignment-section`
+   
+   |six| :ref:`progress-section` 
+   
+   |seven| :ref:`display-sub-project-activity` 
+   
+   |eight| :ref:`predSuces-element-section`
+   
+   |nine| :ref:`linkelement-section`
+   
+   |ten| :ref:`attachment-section`
+   
+   |eleven| :ref:`note-section`
+   
+
+.. _description-section:
+
 Description section
 -------------------
 
 This section allows to identify items of the element.
 
-* Information grouped under this section are:
-
-  * :term:`Id`
-  * Element type
-  * Name
-  * Description
-  * Current situation
-  * Stakeholder
-  * Objective
-  * Reference
-  * Link
 
 .. tabularcolumns:: |l|l|
 
@@ -58,9 +76,57 @@ This section allows to identify items of the element.
      - Complete description of the allocation.
    * - Closed
      - Flag to indicate that allocation in not active anymore, without deleting it.
+     
+     
+     
 .. raw:: latex
 
     \newpage
+
+
+.. _search-view-item: 
+
+Search view item
+----------------
+
+Most of the fields available for each element offer the possibility of having a search view and an accelerator to access other elements.
+
+These are the icons |buttonIconSearch| and |iconGoto|
+
+The GOTO icon allows you to access the page of the selected item. 
+
+You will then be redirected to this element with the detail of the latter displayed. 
+
+You can right click on the search icon, you will then have more search choices.
+
+.. figure:: /images/GUI/COMMON_BOX_SearchPlus.png
+   :alt: Right click on search icon
+   
+   Right click on the search icon
+   
+
+L'icone |view| vous permet de visualiser les détails de l'élément sélectionné parmi ceux existants dans un popup
+
+L'icone |buttonIconSearch| vous permet de rechercher un élément parmi la liste des éléments sélectionnés
+
+L'icône |buttonAdd| vous permet de créer un élément directement depuis n'importe quelle page
+
+   
+     
+     
+     
+     
+     
+     
+     
+     
+     
+.. raw:: latex
+
+    \newpage
+
+
+.. _treatment-section: 
 
 Treatment section
 -----------------
@@ -69,14 +135,109 @@ This section contains information about item treatment.
 
 Depending on the element, this section  may have a different name.
 
-* Information grouped under this section are:
 
-  * Status and Dates
-  * :term:`Responsible`
-  * Link
-  * Outcome
-  * Comment
+.. figure:: /images/GUI/COMMON_ZONE_TreatmentSection.png
+   :alt: Example of presentation for the processing section 
+   
+   Example of presentation for the processing section for projects
+   
+.. rubric:: Treatment section for project
+    
+.. list-table::
+   :header-rows: 1
 
+   * - Field
+     - Description
+   * - Status 
+     - Actual :term:`status` of the project.
+   * - Health status 
+     - Manual tracking status 
+   * - Quality level 
+     - Manual tracking status 
+   * - Trend 
+     - Manual tracking status 
+   * - Overall progress  
+     - Manual tracking status 
+   * - Fix planning  
+     - Fix the planning prevents it from being calculated when planning your projects 
+   * - Non extendable project   
+     - You can't add, delete or move to/from a element to this project
+   * - Under construction 
+     - The project has not started. You'll don't receive the alerts and email concerning him.
+   * - Exclude from global plan 
+     - Do not display the "unplannable" elements of this project in the overall planning view. This means that only "standard" planning elements will be displayed, with the exception of actions, decisions, deliveries ...  
+   * - :term:`Handled`
+     - Box checked indicates the ticket is taken over
+   * - :term:`Done`
+     - Box checked indicates the ticket has been treated
+   * - :term:`Closed`
+     - Box checked indicates the ticket is archived
+
+
+.. rubric:: Treatment section for activity
+
+.. list-table::
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - Parent activity  
+     - Determines if the activity is the daughter of another activity.
+   * - Status 
+     - Actual :term:`status` of the project.
+   * - :term:`Responsible`
+     - The person working on the ticket     
+   * - :term:`Handled`
+     - Box checked indicates the ticket is taken over
+   * - :term:`Done`
+     - Box checked indicates the ticket has been treated
+   * - :term:`Closed`
+     - Box checked indicates the ticket is archived  
+
+
+
+.. rubric:: Treatment section for tickets
+
+
+.. list-table::
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - Planning activity  
+     - Activity on which the load of ticket treatment was planned
+   * - Resolution
+     - Whether the ticket has been resolved or not. Several statuses (customizable) are available 
+   * - Is a regression  
+     - Indicates if the incident / bug designated by the ticket must be a regression
+   * - Accountable   
+     - Person for whom the ticket work is carried out
+   * - :term:`Responsible`
+     - The person working on the ticket
+   * - Criticality    
+     - Criticality for processing the ticket   
+   * - Priority    
+     - Priority for processing the ticket
+   * - Due date   
+     - Due date for the resolution of the ticket
+   * - Work   
+     - Estimated charge for ticket processing, actual work performed on the ticket (decremented from the estimated) and remaining work on this ticket
+   * - Dispatch   
+     - Click on the button to distribute the load to one or more resources
+   * - Start work   
+     - Click the button to start the stopwatch and record the working time automatically. Please note, if you exit the ticket screen, the stopwatch stops running. If you work in hours, it takes about 4 minutes to display
+   * - :term:`Handled`
+     - Box checked indicates the ticket is taken over
+   * - :term:`Done`
+     - Box checked indicates the ticket has been treated
+   * - :term:`Closed`
+     - Box checked indicates the ticket is archived     
+   * - Solved
+     - Box checked indicates the ticket is solved      
+   * - Cancelled
+     - Box checked indicates the ticket is cancelled       
+
+     
 .. raw:: latex
 
     \newpage
@@ -93,16 +254,16 @@ Allocations section
    
    Allocation section
 
+This section allows to manage resource allocation to projects.
+
+
 .. sidebar:: Concepts 
 
    * :ref:`profiles-definition`
    * :ref:`allocation-to-project`
-
-This section allows to manage resource allocation to projects.
-
-
-
-.. list-table:: Fields - Resource allocation list
+   
+   
+.. list-table::
    :header-rows: 1
 
    * - Field
@@ -126,7 +287,10 @@ This section allows to manage resource allocation to projects.
 * Click on |buttonAdd| to create a new allocation. 
 * Click on |buttonEdit| to update an existing allocation.
 * Click on |buttonIconDelete| to delete the corresponding allocation.
-* Click on |iconSwitch| to replace resource on the corresponding allocation. (See: :ref:`Replace resource on an allocation<replace-resource-allocation>`)
+* Click on |iconSwitch| to replace resource on the corresponding allocation. 
+
+  (See: :ref:`Replace resource on an allocation<replace-resource-allocation>`)
+
 * The icon |closeIcon| indicates that allocation to project is closed.
 
 .. note:: **Direct access to information**
@@ -254,6 +418,11 @@ This section allows to manage assignment of resources to tasks.
 
 Assigning a resource to a task makes it possible to define its function on the latter and its daily cost, if defined during the creation of the resource.
 
+.. figure:: /images/GUI/COMMON_ZONE_PageAssignment.png
+   :alt: activity page with assigment
+
+   Activity page with assigment
+
 .. warning::
     * Only resources allocated to a project can be assigned to its tasks.
     * If real work exists for an assignment, it can not be deleted.
@@ -287,6 +456,8 @@ Assigning a resource to a task makes it possible to define its function on the l
 
 
 * Click on |buttonAdd| to assign a new resource.
+* Click on |iconTeam| to assign an entire  team to the activity
+* Click on |iconOrganization| to assign an entire organization to the activity
 * Click on |buttonEdit| to modify the assignment.
 * Click on |buttonIconDelete| to delete the assignment.
 * Click on |iconSplit| to divide the assignment of a resource with a second resource into two equal parts 
@@ -1372,7 +1543,7 @@ Highlighting the date that will most constrain the next activity
 
     \newpage
 
-.. _linkElement-section:
+.. _linkelement-section:
 
 Linked Elements section
 -----------------------
@@ -1566,13 +1737,6 @@ Select an attachment depends on whether is a file or a hyperlink.
      - Attachment is visible to every member of the creator’s team.
    * - Private
      - Attachment is visible only to the creator.
-
-
-
-
-.. note:: These files can be attached to the item details. See: :ref:`
-
-
 
 
 .. raw:: latex

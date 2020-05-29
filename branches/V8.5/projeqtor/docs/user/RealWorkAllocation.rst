@@ -252,7 +252,7 @@ Entry field
    
    |three| :ref:`Left work<left-work>`
    
-   |four| :ref:`Task list<task-list>`
+   |four| :ref:`Task list<realwork-task-list>`
    
    |five| :ref:`Assigned task function<assignedtask-function>`   
    
@@ -389,7 +389,7 @@ Entry field
 
 
 
-.. _task-list:
+.. _realwork-task-list:
 
 .. rubric:: |fourBLC| Tasks list
 

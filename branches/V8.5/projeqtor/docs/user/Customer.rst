@@ -55,17 +55,24 @@ The customer defined here is not a person. Real persons into a customer entity a
    * - :term:`Description`
      - Complete description of the customer.
 
-.. rubric:: Section Address
+.. rubric:: Address section
 
 Full address of the customer.
 
-.. rubric:: Section Projects
+.. rubric:: Projects section
 
 List of the projects of the customer.
 
-.. rubric:: Section Contacts
+.. rubric:: Contacts section
 
-List of the contacts known in the entity of the customer.
+Displays the names of customer-related contacts. 
+
+You can create the contacts directly on the contact screen.
+
+But you can create the contacts directly into the contact section
+
+* Click on |buttonAdd| to create the contact
+* Click on |buttonIconDelete| to delete the contact
 
 
 .. raw:: latex

@@ -44,13 +44,9 @@ or choose default behaviors like closing the page or flipping mode
 
 .. figure:: /images/GUI/USERPARAM_ZONE_SectionDisplay.PNG
    :alt: Display Parameters section 
-
-.. _UP-sectionemailing:
-
- .. compound:: Section Emailing
  
-  The **not receive his own mails** option in the 'emailing' section allows you to not receive alerts and send emails on your own actions on the item
-
+ 
+ 
 .. _UP-print-export:
 
 Tab Export
@@ -63,7 +59,7 @@ This section allows you to define whether you want to print the history, whether
 
 
 
-.. _userparam_miscelleaneous:
+.. _UP-automation:
 
 Tab Automation
 --------------

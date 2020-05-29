@@ -33,27 +33,12 @@ For instance, bugs should be managed through tickets :
    * This screen is a limited version of screen "Tickets".
    * It's dedicated to users who want to create and follow their own tickets without be involved in their treatment.
    * When fields and features are available, the description is similar.
+    
 
+.. topic:: Restrict the entry of real work in the ticket
 
-.. index:: Planning activity
-
-.. _planning-activity:
-
-.. rubric:: Planning activity
-
-* Planning activity field allows to link the ticket with a planning activity.
-* Work on the ticket will be included in this activity.
-
- .. compound:: **Put the real work from tickets to the resource timesheet**
-
-    * When a resource has entered the real work on the ticket and the ticket is linked to a planning activity.
-    * The resource is automatically assigned to this activity.
-    * Real work set on tickets is automatically set in resource timesheet.
-
-.. rubric:: Restrict the entry of real work in the ticket
-
-* Possibility to define that only the responsible of ticket can enter real work.
-* This behavior can be set in  :ref:`Global parameters<auto-responsible>` screen.
+   * Possibility to define that only the responsible of ticket can enter real work.
+   * This behavior can be set in  :ref:`Global parameters<auto-responsible>` screen.
 
 
 .. rubric:: Due dates
@@ -295,6 +280,77 @@ This button allows to dispatch ticket.
      - Work dispatch to a resource.
    * - Work
      - Planned work to this resource. 
+
+
+
+
+
+.. raw:: latex
+
+    \newpage
+    
+.. index:: Planning activity    
+
+.. _ticket-planning-activity:
+
+Planning activity
+"""""""""""""""""
+
+* Planning activity field allows to link the ticket with a planning activity.
+* You must check the "Planning activity" box on the activity to be linked.
+* It will then be visible in the planning activities list of your ticket.
+* Work on the ticket will be included in this activity.
+
+
+.. figure:: /images/GUI/TICKET_ZONE_SteeringActivityPlanning.png
+   :alt: Activity planning option on the Activities screen
+   
+   Activity planning option on the Activities screen
+   
+* After saving the option, new fields are displayed.
+
+* You can see the number of tickets linked to this activity and time information corresponding to all of these tickets.
+
+
+.. figure:: /images/GUI/TICKET_ZONE_SteeringActivityPlanningOK.PNG
+   :alt: Planning activity news fields
+   
+   New fields displayed after saving the Planning activity option
+   
+   
+* Click on |buttonIconSearch| to open a popup which will display the details of these tickets.
+
+
+.. figure:: /images/GUI/TICKET_BOX_ActivityPlanningLISTTICKETS.png
+   :alt: List of tickets linked to the activity
+   
+   List of tickets linked to the activity
+   
+   
+
+.. rubric:: Real work
+
+Put the real work from tickets to the resource timesheet.
+
+* When a resource has entered the real work on the ticket and the ticket is linked to a planning activity.
+* The resource is automatically assigned to this activity.
+* Real work set on tickets is automatically set in resource timesheet.
+    
+    
+.. figure:: /images/GUI/TICKET_ZONE_Timesheet.png
+   :alt: Timesheet
+   
+   imputations of actual work on linked tickets.
+
+* The tickets are very dependent on the planning activity.
+* The time indicated by the resources will be decremented to that planned for the activity.
+
+
+
+
+
+
+
 
 .. raw:: latex
 
