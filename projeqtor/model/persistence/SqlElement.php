@@ -4858,7 +4858,7 @@ abstract class SqlElement {
               // If mode confirm and message of confirmation occured : OK
             } else {
               $objects .= "<br/>&nbsp;-&nbsp;" . i18n ( $object ) . " (" . $nb . ")";
-              if($this->ActivityPlanningElement){
+              if(property_exists(get_class ($this), $this->ActivityPlanningElement)){
               	$planningMode = new PlanningMode($this->ActivityPlanningElement->idPlanningMode);
               	if($planningMode->code=='MAN' and $this->ActivityPlanningElement->plannedWork){
               		$plannedWorks .= "<br/>&nbsp;-&nbsp;" . i18n ($this->ActivityPlanningElement->refType) . " #".$this->ActivityPlanningElement->refId." (" .Work::displayWorkWithUnit($this->ActivityPlanningElement->plannedWork). ")";
