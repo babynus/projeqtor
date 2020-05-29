@@ -13,15 +13,15 @@
 Providers
 ---------
 
-Allows to manage provider list.
+Allows to manage provider list.  
+
+.. rubric:: Section Description
 
 .. sidebar:: Other sections
   
    * :ref:`Attachments<attachment-section>`   
-   * :ref:`Notes<note-section>`   
-
-.. rubric:: Section Description
-
+   * :ref:`Notes<note-section>` 
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -53,3 +53,18 @@ Allows to manage provider list.
 
 Full address of the provider.
 
+.. rubric:: Section Contact
+
+.. figure:: /images/GUI/PROVIDER_ContactSection.png
+   :alt: Contact section
+   
+   Contact section
+
+Displays the names of provider-related contacts. 
+
+You can create the contacts directly on the contact screen.
+
+But you can create the contacts directly into the contact section
+
+* Click on |buttonAdd| to create the contact
+* Click on |buttonIconDelete| to delete the contact

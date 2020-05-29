@@ -1,7 +1,5 @@
 .. include:: ImageReplacement.txt
 
-.. raw:: latex
-
 .. title:: Configuration Management
 
 .. index:: Configuration Management

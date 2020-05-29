@@ -194,6 +194,7 @@ In order to ease his work, ProjeQtOr provides several reporting tools, from the 
    Diary
    Report
    RealWorkAllocation
+   AssetManagement
 
 
 

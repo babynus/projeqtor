@@ -110,7 +110,7 @@ Definition of the "default" project for new elements.
 
    **default project** Defines the project that will be selected and display by default into the project selector
    
-   See: :ref:`User parameters - section miscelleanous<userparam_miscelleaneous>`
+   See: :ref:`User parameters - section automation<UP-automation>`
 
 
 .. figure:: /images/GUI/GUI_ZONE_SelectorProject.png
@@ -1139,18 +1139,18 @@ See: :ref:`thumbnails`
          
       
       
-      **Display of list of tracked items**
+      **Display of list of followed items**
          
-      You can view the list of tracked items in two ways:
+      You can view the list of followed items in two ways:
             
          * click on the button "View the list of subscriptions" in the subscription menu
             
-         * In the user settings of the :ref:`Miscellaneous section<userparam_miscelleaneous>`, click on the "Show subscription list" button.
+         * In the user settings of the :ref:`Automation section<UP-automation>`, click on the "show list of followed items" button.
          
       .. figure:: /images/GUI/GUI_BOX_ListSubscribe.png
          :alt: Dialog box - Display list of tracked items
             
-         Display list of tracked items
+         Display list of followed items
       
       
       .. note:: 
