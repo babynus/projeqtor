@@ -230,7 +230,7 @@ class ActivityPlanningElementMain extends PlanningElement {
           }
         }
       }
-      if(!$asSon){
+      if(!$asSon or (!$this->id)){
         if(!$this->id or $this->idProgress=='' or $this->idWeight=='' ){
           $this->idProgress=2;
           $this->idWeight=1;
