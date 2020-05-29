@@ -1030,7 +1030,7 @@ class ImputationLine {
                   $colorClass = "";
                 }
               }
-              echo '  style="width: 45px; text-align: center;'.$colorStyle.';color:'.(($manuPlan and isset($line->arrayPlannedWork{$i}->work) and  $line->arrayPlannedWork{$i}->work!="")?"#8080DD":"black").';" ';
+              echo '  style="width: 45px; text-align: center;'.$colorStyle.';'.(($manuPlan and isset($line->arrayPlannedWork{$i}->work) and  $line->arrayPlannedWork{$i}->work!="")?"color:#8080DD;font-style:italic":"color:black;ont-style:normal").';" ';
               echo ' trim="true" maxlength="4" class="input imputation '.$colorClass.'" ';
               echo ' id="workValue_'.$nbLine.'_'.$i.'"';
               echo ' name="workValue_'.$i.'[]"';
