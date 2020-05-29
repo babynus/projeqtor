@@ -170,9 +170,10 @@ if($planningMode == 'MAN' and $mode =='edit'){
       $assignment->idResource=$idResource;
     }
     if(!trim($idRole)){
-      $idRole = $res->idRole;
+      $assignment->idRole = $res->idRole;
+    }else{
+      $assignment->idRole=$idRole;
     }
-    $assignment->idRole=$idRole;
     $assignment->dailyCost=$cost;
     if (! $oldCost or $assignment->dailyCost!=$oldCost) {
       $assignment->newDailyCost=$cost;
@@ -226,6 +227,7 @@ if($planningMode == 'MAN' and $mode =='edit'){
       $assignment->optional=$optional;
     }
     $result=$assignment->save();
+    debugLog($assignment);
     // 
     //$ar=new AssignmentRecurring();
     if ($planningMode=='RECW') {
