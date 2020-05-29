@@ -967,6 +967,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       }
       // ADD qCazelles - Manage ticket at customer level - Ticket #87
     } else if (substr($col, 0, 10)=='_separator') {    //Doris #3687
+      if ($parentHidden) continue;
       $decomp=explode("_", $col);
       $name = i18n($decomp[2]);
       if($decomp[2] == 'sectionCostWork'){
