@@ -9017,7 +9017,9 @@ function showImage(objectClass, objectId, imageName) {
   if (objectClass == 'Affectable' || objectClass == 'Resource'
       || objectClass == 'User' || objectClass == 'Contact') {
     imageUrl="../files/thumbs/Affectable_" + objectId + "/thumb80.png";
-  } else {
+  }else if(objectClass == 'Note'){
+	  imageUrl=objectId;
+  }else {
     imageUrl="../tool/download.php?class=" + objectClass + "&id=" + objectId;
   }
   var dialogShowImage=dijit.byId("dialogShowImage");
