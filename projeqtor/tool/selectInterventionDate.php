@@ -29,7 +29,6 @@
  * The new values are fetched in $_REQUEST
  */
 require_once "../tool/projeqtor.php";
-
 $date=RequestHandler::getDatetime('date');
 $resource=RequestHandler::getId('resource');
 $period=RequestHandler::getValue('period');
@@ -57,7 +56,25 @@ if (substr($period,-1)=="X") {
 }
 $pwm=SqlElement::getSingleSqlElementFromCriteria('PlannedWorkManual', array('workDate'=>$date,'idResource'=>$resource,'period'=>$period));
 if ($allDay) $pwmx=SqlElement::getSingleSqlElementFromCriteria('PlannedWorkManual', array('workDate'=>$date,'idResource'=>$resource,'period'=>$periodx));
+if($pwm->id){
+  $project =new Project($pwm->idProject,true);
+  $profile=getSessionUser()->getProfile($project);
+  $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$profile, 'scope'=>'assignmentEdit'));
+  if($habil->rightAccess!=1){
+    exit;
+  }
+}
+if($allDay and $pwmx->id){
+  $project =new Project($pwmx->idProject,true);
+  $profile=getSessionUser()->getProfile($project);
+  $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$profile, 'scope'=>'assignmentEdit'));
+  if($habil->rightAccess!=1){
+    exit;
+  } 
+}
 Sql::beginTransaction();
+//gautier habilation
+
 if (!$pwm->id) {
   $pwm->setDates($date);
   $pwm->idResource=$resource;

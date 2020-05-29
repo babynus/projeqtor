@@ -414,6 +414,16 @@ class PlannedWorkManual extends GeneralWork {
       $month=substr($monthYear,4);
       $nbDays=lastDayOfMonth(intval($month),$year);
     }
+    $tabRefId = array();
+    foreach ($list as $val){
+      $tabRefId[]=$val->refId;
+    }
+    if(strlen($monthYear)==5){
+      $monthYear = substr_replace($monthYear,'0',4,-1);
+    }
+    $where= ' month="'.$monthYear.'" and refType = "Activity" and refId in '.transformValueListIntoInClause($tabRefId);
+    $obj=new PlannedWorkManual();
+    $listOfDayByEtp=$obj->countGroupedSqlElementsFromCriteria(null,array('refId','day','period'), $where);
     echo '<table>';
     echo '<tr>';
     echo '<td class="reportTableHeader" style="width:'.$nameWidth.'px">'.i18n('Project').'</td>';
@@ -438,10 +448,10 @@ class PlannedWorkManual extends GeneralWork {
     $valueRefType = null;
     $valueRefId = null;
     foreach ($list as $pe) {
-      if(strlen($month)==1){
-        $month = '0'.$month;
+      if(strlen($monthYear)==5){
+        $monthYear = substr_replace($monthYear,'0',4,-1);
       }
-      $peIntervention = SqlElement::getSingleSqlElementFromCriteria('InterventionCapacity', array('refType'=>$pe->refType,'refId'=>$pe->refId,'month'=>$month));
+      $peIntervention = SqlElement::getSingleSqlElementFromCriteria('InterventionCapacity', array('refType'=>$pe->refType,'refId'=>$pe->refId,'month'=>$monthYear));
       $valueFte = $peIntervention->fte;
       $mode = ($peIntervention->id)?$peIntervention->id:0;
       $class  = "dojoxGridRow"; 
@@ -450,8 +460,15 @@ class PlannedWorkManual extends GeneralWork {
         $projList[$pe->idProject]=$proj->name;
       }
       $badgeSize=self::$_size-4;
-      $onClick=($readonly)?'':'onClick="selectInterventionActivity(\''.$pe->refType.'\','.$pe->refId.','.$pe->id.');"';
-      $cursor=($readonly)?"normal":"pointer";
+      
+      $project =new Project($pe->idProject,true);
+      $profile=getSessionUser()->getProfile($project);
+      $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$profile, 'scope'=>'assignmentEdit'));
+      $readonlyHabil = false;
+      if($habil->rightAccess!=1)$readonlyHabil=true;
+      
+      $onClick=($readonly or $readonlyHabil)?'':'onClick="selectInterventionActivity(\''.$pe->refType.'\','.$pe->refId.','.$pe->id.');"';
+      $cursor=($readonly or $readonlyHabil)?"normal":"pointer";
       $colorBadge='<div style="border-radius:'.($badgeSize/2+2).'px;border:1px solid #e0e0e0;width:'.$badgeSize.'px;height:'.$badgeSize.'px;float:left;background-color:'.self::getColor($pe->refType,$pe->refId).'" ></div>';
       if(isset($isSaveSession)){
         if($isSaveSession == $pe->refId){
@@ -460,13 +477,13 @@ class PlannedWorkManual extends GeneralWork {
           $valueRefId = $pe->refId;
         }
       }
-      echo '<tr id="'.$pe->refId.'" style="cursor'.$cursor.'" class="interventionActivitySelector '.$class.'" '.$onClick.'>';
+      echo '<tr id="'.$pe->refId.'" style="cursor:'.$cursor.'" class="interventionActivitySelector '.$class.'" '.$onClick.'>';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.$nameWidth.'px">'.$projList[$pe->idProject].'</td>';
       echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.($idWidth).'px" >#'.$pe->refId.'</td>';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-right:0;width:'.($idWidth).'px" >'.$colorBadge.'</td>';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-left:0;width:'.($nameWidth).'px" >'.$pe->refName.'</td>';
       echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="text-align:center;margin:0;padding;0;width:'.$idWidth.'px">';
-      if(!$readonly){
+      if(!$readonly and !$readonlyHabil){
         echo '<img  id="idImageInterventionActivitySelector'.$pe->id.'" src="../view/img/savedOk.png"
                     style="display: none; position:relative;top:2px;left:5px; height:16px;float:left;"/>';
         echo '<div dojoType="dijit.form.NumberTextBox" id="interventionActivitySelector'.$pe->id.'" name="interventionActivitySelector'.$pe->id.'"
@@ -474,14 +491,13 @@ class PlannedWorkManual extends GeneralWork {
         					  value="'.$valueFte.'"
                     style="padding:1px;background:none;max-width:100%; box-sizing:border-box;display:block;border:1px solid #A0A0A0 !important;margin:2px 0px" >
                      <script type="dojo/method" event="onChange">
-                      saveInterventionCapacity("'.$pe->refType.'",'.$pe->refId.','.$month.','.$pe->id.','.$mode.'); 
+                      saveInterventionCapacity("'.$pe->refType.'",'.$pe->refId.','.$monthYear.','.$pe->id.','.$mode.'); 
                      </script>';
+        echo $keyDownEventScript;
+        echo '</div>';
       } else {
         echo $peIntervention->fte;
       }
-      echo $keyDownEventScript;
-      echo '</div>';
-     // echo '<input type="text" xdata-dojo-type="dijit.form.TextBox" value="" style="font-family: Verdana, Arial, Tahoma, sans-serif;font-size: 8pt;text-align:center;width:'.($idWidth-2).'px;"/>';
       echo'</td>';
       if ($monthYear) {
         for ($i=1;$i<=$nbDays;$i++) {
@@ -493,12 +509,34 @@ class PlannedWorkManual extends GeneralWork {
             $colorAM="#d0d0d0";
             $colorPM="#d0d0d0";
           }
+          if(strlen($month)==1){
+            $month = '0'.$month;
+          }
+          $y = $i;
+          if(strlen($y)==1){
+            $y = '0'.$y;
+          }
+          $myDate = $year.$month.$y;
+          if($peIntervention->fte){
+            if(isset($listOfDayByEtp[$pe->refId.'|'.$myDate.'|AM'])){
+              if($listOfDayByEtp[$pe->refId.'|'.$myDate.'|AM']==$peIntervention->fte)$colorAM = "#60DC00";
+              if($listOfDayByEtp[$pe->refId.'|'.$myDate.'|AM']>$peIntervention->fte)$colorAM = "#FF0000";
+            }
+            if(isset($listOfDayByEtp[$pe->refId.'|'.$myDate.'|PM'])){
+              if($listOfDayByEtp[$pe->refId.'|'.$myDate.'|PM']==$peIntervention->fte)$colorPM = "#60DC00";
+              if($listOfDayByEtp[$pe->refId.'|'.$myDate.'|PM']>$peIntervention->fte)$colorPM = "#FF0000";
+            }
+          }
           echo '<td style="border:1px solid #a0a0a0;">';
           echo '<table style="width:100%;height:100%">';
           $color=getForeColor($colorAM);
-          echo '<tr style="height:'.$midSize.'px;"><td style="width:100%;background:'.$colorAM.';border-bottom:1px solid #e0e0e0;position:relative;text-align:center;"></td></tr>';
+          echo '<tr style="height:'.$midSize.'px;">
+                <td style="width:100%;background:'.$colorAM.';border-bottom:1px solid #e0e0e0;position:relative;text-align:center;"></td>
+                </tr>';
           $color=getForeColor($colorPM);
-          echo '<tr style="height:'.$midSize.'px;"><td style="width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"></td></tr>';
+          echo '<tr style="height:'.$midSize.'px;">
+                <td style="width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"></td>
+                </tr>';
           echo '</table>';  
           echo '</td>';
         }
