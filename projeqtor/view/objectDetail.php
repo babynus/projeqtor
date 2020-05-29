@@ -2424,7 +2424,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM
         if (($col=='idStatusNotification' and $classObj!='StatusNotification'  and !$readOnly) or $col=='idProgress' or $col=='idWeight') {
           $showExtraButton=true;
-          $fieldWidth=round($fieldWidth/2)-5;
+          $fieldWidth=round($fieldWidth/2)-23;
         }
         // END - ADD BY TABARY - NOTIFICATION SYSTEM
         
