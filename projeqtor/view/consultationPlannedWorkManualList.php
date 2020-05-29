@@ -30,6 +30,7 @@
  */
 require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
+require_once "../tool/formatter.php";
 
 $displayNothing = false;
 $currentYear=strftime("%Y");
@@ -47,6 +48,8 @@ $userName=($team==0 and $orga==0)?$currentUser:0;
 <div dojoType="dijit.layout.BorderContainer" id="consultationPlannedWorkManualParamDiv" name="consultationPlannedWorkManualParamDiv">  
   <div dojoType="dijit.layout.ContentPane" region="top" id="consPlannedWorkManualButtonDiv" class="listTitle" splitter="false" >
       <form dojoType="dijit.form.Form" name="listFormConsPlannedWorkManual" id="listFormConsPlannedWorkManual" action="" method="post" >
+      <input id="reportFile" name="reportFile" value="showIntervention" hidden/>
+      <input id="reportId" name="reportId" value="109" hidden/>
       <table width="100%" height="64px" class="listTitle">
         <tr height="32px">
           <td width="50px" align="center">
@@ -63,7 +66,7 @@ $userName=($team==0 and $orga==0)?$currentUser:0;
                   <?php echo i18n("colIdResource");?> &nbsp;
                   <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
                     style="width: 175px;"
-                    name="userNameConsultation" id="userNameConsultation"
+                    name="userName" id="userName"
                     <?php echo ($team==0 and $orga==0)?"readonly":autoOpenFilteringSelect();?>
                     value="<?php echo ($team==0 and $orga==0)?$currentUser:0;?>">
                       <script type="dojo/method" event="onChange" >
@@ -79,7 +82,7 @@ $userName=($team==0 and $orga==0)?$currentUser:0;
                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo i18n("team");?> &nbsp;
               <td nowrap="nowrap" style="text-align: right;">
                   <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
-                    style="width: 175px;" name="idTeamCons" id="idTeamCons" readonly
+                    style="width: 175px;" name="idTeam" id="idTeam" readonly
                     value="<?php echo $team;?>">
                       <?php htmlDrawOptionForReference('idTeam', null)?>
                   </select>
@@ -90,7 +93,7 @@ $userName=($team==0 and $orga==0)?$currentUser:0;
               </td>
               <td nowrap="nowrap" style="text-align: right;">
                   <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
-                    style="width: 175px;" name="idOrganizationCons" id="idOrganizationCons" readonly
+                    style="width: 175px;" name="idOrganization" id="idOrganization" readonly
                     value="<?php echo $orga;?>">
                       <?php htmlDrawOptionForReference('idOrganization', null)?>
                   </select>
@@ -104,13 +107,6 @@ $userName=($team==0 and $orga==0)?$currentUser:0;
             <table width="100%"  >
               <tr height="27px">
                 <td style="min-width:200px"> 
-                  <button title="<?php echo i18n('print')?>"  
-                   dojoType="dijit.form.Button" 
-                   id="printButton" name="printButton"
-                   iconClass="dijitButtonIcon dijitButtonIconPrint" class="detailButton" showLabel="false">
-                    <script type="dojo/method" event="onClick" args="evt">
-                    </script>
-                  </button>
                   <button id="refreshButton" dojoType="dijit.form.Button" showlabel="false"
                     title="<?php echo i18n('buttonRefreshList');?>"
                     iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
@@ -118,11 +114,9 @@ $userName=($team==0 and $orga==0)?$currentUser:0;
 	                   refreshConsultationPlannedWorkManualList();
                     </script>
                   </button>
-                  <button id="addTodayButton" dojoType="dijit.form.Button" showlabel="false"
+                  <button id="addTodayButton" dojoType="dijit.form.Button" showlabel="false" onclick="saveReportInToday();"
                     title="<?php echo i18n('showInToday');?>"
                     iconClass="dijitButtonIcon dijitButtonIconToday" class="detailButton">
-                    <script type="dojo/method" event="onClick" args="evt">
-                    </script>
                   </button>    
                 </td>
               </tr>
@@ -135,16 +129,16 @@ $userName=($team==0 and $orga==0)?$currentUser:0;
                     <?php echo i18n("colIdProject");?> &nbsp;
                     <select dojoType="dijit.form.FilteringSelect" class="input roundedLeft" 
                       style="width: 175px;"
-                      name="idProjectPlannedCons" id="idProjectPlannedCons"
+                      name="idProject" id="idProject"
                       <?php echo autoOpenFilteringSelect();?>
-                      value="<?php if(sessionValueExists('idProjectPlannedCons')){
-                                    $idProject =  getSessionValue('idProjectPlannedCons');
+                      value="<?php if(sessionValueExists('idProjectCons')){
+                                    $idProject =  getSessionValue('idProjectCons');
                                     echo $idProject;
                                    }else{
                                     echo 0;
                                    }?>">
                         <script type="dojo/method" event="onChange" >
-                          saveDataToSession("idProjectPlannedCons",dijit.byId('idProjectPlannedCons').get('value'),true);
+                          saveDataToSession("idProjectCons",dijit.byId('idProject').get('value'),true);
                           refreshConsultationPlannedWorkManualList();
                         </script>
                          <option value=""></option>
@@ -165,16 +159,16 @@ $userName=($team==0 and $orga==0)?$currentUser:0;
                   constraints="{min:2000,max:2100,places:0,pattern:'###0'}"
                   intermediateChanges="true"
                   maxlength="4" class="roundedLeft"
-                  value="<?php if(sessionValueExists('yearConsPlannedWorkManual')){
-                                  $yearSpinner = getSessionValue('yearConsPlannedWorkManual') ;
+                  value="<?php if(sessionValueExists('yearSpinnerCons')){
+                                  $yearSpinner = getSessionValue('yearSpinnerCons') ;
                                   echo $yearSpinner;
                                 }else{
                                   echo $currentYear;    
                                 }?>" 
                   smallDelta="1"
-                  id="yearConsPlannedWorkManual" name="yearConsPlannedWorkManual" >
+                  id="yearSpinner" name="yearSpinner" >
                   <script type="dojo/method" event="onChange" >
-                   saveDataToSession("yearConsPlannedWorkManual",dijit.byId('yearConsPlannedWorkManual').get('value'),false);
+                   saveDataToSession("yearSpinnerCons",dijit.byId('yearSpinner').get('value'),false);
                    refreshConsultationPlannedWorkManualList();
               </script>
                 </div>
@@ -188,26 +182,26 @@ $userName=($team==0 and $orga==0)?$currentUser:0;
                    constraints="{min:0,max:13,places:0,pattern:'00'}"
                    intermediateChanges="true"
                    maxlength="2" class="roundedLeft"
-                   value="<?php if(sessionValueExists('monthConsPlannedWorkManual')){
-                                  $monthSpinner = getSessionValue('monthConsPlannedWorkManual') ;
+                   value="<?php if(sessionValueExists('monthSpinnerCons')){
+                                  $monthSpinner = getSessionValue('monthSpinnerCons') ;
                                   echo $monthSpinner;  
                                  }else{
                                   echo $currentMonth;    
                                  }?>" 
                    smallDelta="1"
-                   id="monthConsPlannedWorkManual" name="monthConsPlannedWorkManual" >
+                   id="monthSpinner" name="monthSpinner" >
                    <script type="dojo/method" event="onChange" >
-                var year=dijit.byId('yearConsPlannedWorkManual').get('value');
+                var year=dijit.byId('yearSpinner').get('value');
                 if (this.value==13) {
-                  dijit.byId('monthConsPlannedWorkManual').set('value','01');
+                  dijit.byId('monthSpinner').set('value','01');
                   year=parseInt(year)+1;
-                  dijit.byId('yearConsPlannedWorkManual').set('value',year);
+                  dijit.byId('yearSpinner').set('value',year);
                 } else if (this.value==0) {
-                  dijit.byId('monthConsPlannedWorkManual').set('value','12');
+                  dijit.byId('monthSpinner').set('value','12');
                   year=parseInt(year)-1;
-                  dijit.byId('yearConsPlannedWorkManual').set('value',year);
+                  dijit.byId('yearSpinner').set('value',year);
                 }
-                saveDataToSession("monthConsPlannedWorkManual",dijit.byId('monthConsPlannedWorkManual').get('value'),false);
+                saveDataToSession("monthSpinnerCons",dijit.byId('monthSpinner').get('value'),false);
                 refreshConsultationPlannedWorkManualList();
               </script>
                 </div>
