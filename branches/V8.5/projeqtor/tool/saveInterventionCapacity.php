@@ -33,7 +33,7 @@ scriptLog('   ->/tool/saveResourceCapacity.php');
 
 $refType= RequestHandler::getValue('refType');
 $refId= RequestHandler::getId('refId');
-$month= trim(RequestHandler::getMonth('month'));
+$month= trim(RequestHandler::getValue('month'));
 if(strlen($month)==1){
   $month = '0'.$month;
 }
