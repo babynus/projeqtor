@@ -311,6 +311,7 @@ CantHaveMoreThatOneManagerAtTheSameTime: "kann nicht mehr als einen Manager glei
 cantHaveSubActivity: "The new parrent activity cannot have sub-tasks corresponding to its activity type",
 CantHaveTwoContractsUnclosedForAnEmployee: "kann nicht mehr als einen geöffneten Vertrag für einen Mitarbeiter haben",
 cantMoveActivityWithoutAffectedResource: "You can not moving activity under new project the assigned resource is not allocated",
+cantOpenActivityWithoutAffectedResource: "",
 CantStartPMEndAMIfOneDay: "Ich kann Nachmittag und Morgen nicht auswählen&#44 wenn das Startdatum ein ganzer Tag ist",
 cantTakeAStartDatePriorTo: "Can't take a start date prior to",
 cantTakeAStartDateSuperiorTo: "Can't take a start date superior to",
