@@ -458,9 +458,11 @@ At the end of the first zone, you have the choice to display or not, certain inf
       Display of name
       
       
-   A parameter allows you to choose between displaying names or initials.
+   A user parameter allows you to choose between displaying names or initials.
 
-   Choose if you want names, initials or nothing to appear on the Gantt chart
+   Choose if you want names, initials or nothing to appear on the Gantt chart.
+   
+   See: :ref:`display-parameters`
    
    
    .. figure:: /images/GUI/GANTT_ZONE_ParamInitiales.png

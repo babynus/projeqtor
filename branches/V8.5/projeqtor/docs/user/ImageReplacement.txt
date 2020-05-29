@@ -223,6 +223,16 @@
 
 .. |buttonIconSearch| image:: images/buttonIconSearch.png
    :alt: button icon search
+   
+.. |view| image:: images/iconFollowup16.png
+   :alt: button icon Follow up
+     
+.. |iconTeam| image:: images/iconTeam16.png
+   :alt: button icon Assign Team
+   
+   
+.. |iconOrganization| image:: images/iconOrganization16.png
+   :alt: button icon Assign Organization      
 
 .. |buttonIconActiveFilter| image:: images/iconActiveFilter.png
    :alt: Button icon active filter

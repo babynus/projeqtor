@@ -156,7 +156,7 @@ The main objective is to balance production and demand.
   * **Target product version:** you can distribute the tickets among the target product version
   * **Planning activity:** You will be able to send tickets among planning activities, which can be your Sprints in the Scrum method.
   
-  .. seealso:: See :ref:`planning-activity` on the tickets screen
+  .. seealso:: See :ref:`ticket-planning-activity` on the tickets screen
     
     
     

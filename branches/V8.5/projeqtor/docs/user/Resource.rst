@@ -95,6 +95,7 @@ Resource availability is defined by assigning it to a project.
      - Fax number of the resource.
    * - Entry date
      - Date to which the resource arrived 
+       The start and end dates are taking into account in planning and reports
    * - Is a contact
      - Is this resource also a contact?
    * - Is a user
@@ -584,6 +585,15 @@ Teams
 .. compound:: **Team members**
 
 List of the resources members of the team.
+
+.. figure:: /images/GUI/RESOURCE_ZONE_Teams.png
+   :alt: Team members section
+   
+   Team members section
+   
+   
+* Click on |buttonAdd| to add a new member to the team
+* Click on |buttonIconDelete| to delete the member to the team
 
 .. topic:: Button **Allocate all team members of a project**
 

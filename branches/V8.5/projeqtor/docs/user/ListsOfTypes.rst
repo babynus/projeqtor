@@ -33,8 +33,10 @@ Restrictions can be defined for a project, a project type or a profile.
 
 .. rubric:: Type restriction management
 
-   1 - Click on "Restrict types" button to display the dialog box.
-   2 - For each element type, select values that will be in the list of values displayed.
+1 - Click on "Restrict types" button to display the dialog box.
+   
+2 - For each element type, select values that will be in the list of values displayed.
+
 
 By default, if no type of element is selected, all the values of the line will be displayed on each screen that will be affected. 
 
