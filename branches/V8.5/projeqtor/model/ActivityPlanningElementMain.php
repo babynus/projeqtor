@@ -66,7 +66,7 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $leftCost;
   public $plannedCost;
   public $_separator_menuTechnicalProgress_marginTop;
-  public $_tab_4_1_smallLabel_2 = array('toDeliver', 'toRealised', 'realised', 'rest','unityOfWork');
+  public $_tab_4_1_smallLabel_2 = array('toDeliver', 'toRealised', 'realised', 'left','unityOfWork');
   public $toDeliver;
   public $toRealised;
   public $realised;
