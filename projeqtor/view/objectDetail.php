@@ -4059,7 +4059,10 @@ function drawNotesFromObject($obj, $refresh=false) {
       	} else {
       		$strDataHTML=preg_replace('@(https?://([-\w\.]<+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" target="_blank">$1</a>', $strDataHTML);
       	}
-      	//$strDataHTML = str_replace('<img', '<img onClick="showImage(\''.$note->refType.'\',\''.htmlEncode($note->refId).'\');"', $strDataHTML);
+      	$sub = substr($strDataHTML, strpos($strDataHTML,'src="')+strlen('scr="'),strlen($strDataHTML));
+      	$imageUrl = substr($sub,0,strpos($sub,'.png"')+4);
+      	$imageName = substr($imageUrl,strpos($imageUrl,'../files/images/')+strlen('../files/images/'),strpos($sub,'.png"')+4);
+      	$strDataHTML = str_replace('<img', '<img onClick="showImage(\'Note\',\''.$imageUrl.'\',\''.$imageName.'\');"', $strDataHTML);
       }
       echo $strDataHTML;
       if (!$print) echo '</div>';
