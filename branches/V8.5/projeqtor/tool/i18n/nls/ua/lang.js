@@ -2027,6 +2027,8 @@ errorObjectId: "Помилка на кнопку &#34;Створити&#34;&#58;
 errorOneOfTheRequestFieldsIsMissing: "Erro &#58; On of the request's field is missing",
 errorOnUpdatingLeaves: "Error on update of leave period",
 errorPeriodCantOverlap: "Periods of variation must not overlap",
+errorPlannedWorkManualType: "Impossible to leave &#34manual&#34 planning mode as some &#34real&#34 planning exists",
+errorPlanWorkManDuplicate: "Impossibile to set planning mode to &#34manual&#34 if a resource has duplicate assignments on the activity",
 errorQuantityNotModuloOfZeroPointFive: "Quantity is not a module of 0.5",
 errorQuantityStartDateEndDateMustBeDefinedTogether: "The quantity&#44 start date and end date must be defined together",
 errorRegisterGlobals: "&#34;register_globals&#34; мусить бути вимкнений (встановити FALSE). <br/>Оновіть файл php.ini.",
