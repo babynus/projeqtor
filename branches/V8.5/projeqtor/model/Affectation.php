@@ -403,10 +403,15 @@ public $_noCopy;
     }
     
     //gautier #4495
-    $nbAff = $this->countSqlElementsFromCriteria(array('idResource'=>$this->idResource,'idProject'=>$this->idProject));
+    $proj = new Project($this->idProject,true);
+    $topProject = $proj->getTopProjectList(true);
+    $where =  "idResource = ".$this->idResource." and idProject in " . transformValueListIntoInClause($topProject);
+    $nbAff = $this->countSqlElementsFromCriteria(null,$where);
     if($nbAff<2){
+      $subProject = $proj->getRecursiveSubProjectsFlatList(false,true);
+      $where = " idle='0' and idResource = ".$this->idResource." and idProject in " . transformListIntoInClause($subProject);
       $ass = new Assignment();
-      $listAss = $ass->countSqlElementsFromCriteria(array('idResource'=>$this->idResource,'idProject'=>$this->idProject,'idle'=>'0'));
+      $listAss = $ass->countSqlElementsFromCriteria(null,$where);
       if($listAss>0)$result.='<br/>' . i18n('assignmentsStillExist');
     }
     
