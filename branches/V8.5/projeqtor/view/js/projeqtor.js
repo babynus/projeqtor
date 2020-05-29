@@ -3746,8 +3746,8 @@ function runReport() {
 }
 function saveReportInToday() {
   var fileName = dojo.byId('reportFile').value;
-  loadContent("../tool/saveReportInToday.php", "resultDivMain", "reportForm", true,
-      'report');
+    loadContent("../tool/saveReportInToday.php", "resultDivMain", "reportForm", true,
+    'report');
 }
 function saveReportParametersForDialog() {
   var callback=function(){

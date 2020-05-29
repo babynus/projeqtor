@@ -29,17 +29,34 @@
  *
  */
 require_once "../tool/projeqtor.php";
-require_once "../tool/formatter.php";
-scriptLog('   ->/view/refrehConsultationPlannedWorkManualList.php'); 
+include_once('../tool/formatter.php');
 
+
+$listResource = array();
+$size=30;
+// $print=false;
+// if ( array_key_exists('print',$_REQUEST) and RequestHandler::getValue('print')==true ) {
+//   $print=true;
+//   $size=20;
+// }
+
+PlannedWorkManual::setSize($size);
+$headerParameters="";
+$resourceId = getCurrentUserId();
 $idProject = trim(RequestHandler::getId('idProject'));
 $yearSpinner= RequestHandler::getYear('yearSpinner');
 $monthSpinner= RequestHandler::getMonth('monthSpinner');
-$displayNothing = false;$onlyRes=false;
-$listResource = array();
-$resourceId = trim(RequestHandler::getId('userName'));
 $inIdTeam = trim(RequestHandler::getId('idTeam'));
 $inIdOrga = trim(RequestHandler::getId('idOrganization'));
+$onlyRes = false;
+// Header
+if (array_key_exists('idProject',$_REQUEST) and trim($_REQUEST['idProject'])!="") {
+  $paramProject=trim($_REQUEST['idProject']);
+  Security::checkValidId($paramProject);
+  $headerParameters.= i18n("colIdProject") . ' : ' . htmlEncode(SqlList::getNameFromId('Project', $paramProject)) . '<br/>';
+}
+include "header.php";
+
 if ($resourceId and !$inIdTeam and !$inIdOrga) {
   $listResource[0] = $resourceId;
   $onlyRes = true;
@@ -57,8 +74,6 @@ if ($resourceId and !$inIdTeam and !$inIdOrga) {
     $listResourceObj = $res->getSqlElementsFromCriteria(array('id'=>$resourceId,'idOrganization'=>$inIdOrga,'idle'=>'0'),null,null,null,true);
   }elseif(!$resourceId and $inIdTeam and $inIdOrga){
     $listResourceObj = $res->getSqlElementsFromCriteria(array('idTeam'=>$inIdTeam,'idOrganization'=>$inIdOrga,'idle'=>'0'),null,null,null,true);
-  }else{
-    $displayNothing = true;
   }
   if (isset($listResourceObj) and is_array($listResourceObj)) {
     foreach ($listResourceObj as $obj) {
@@ -66,33 +81,44 @@ if ($resourceId and !$inIdTeam and !$inIdOrga) {
     }
   }
 }
-$size=30;
-PlannedWorkManual::setSize($size);
 
-?>
-  <div dojoType="dijit.layout.BorderContainer" >
-    <div  dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:30%">
-      <div id="activityTableCons" name="activityTableCons" style="margin:20px;">
-        <?php if(!$displayNothing){
-                PlannedWorkManual::drawActivityTable($idProject,$yearSpinner.$monthSpinner,true); 
-              }?>
-      </div>
-    </div>
-    <div  dojoType="dijit.layout.ContentPane" region="center" style="overflow:auto">
-      <div style="position: absolute; left:20px;top:20px;">
-            <?php 
-        if(!$displayNothing){
-          //MODALITES
-          InterventionMode::drawList(true);
-        }
-      ?>
-      </div>
-      <div id="consPlannedWorkManualInterventionDiv"  name="consPlannedWorkManualInterventionDiv" style="min-width:1123px;left:475px;top:20px;position:absolute;">
-              <?php //TAB RESOURCES
-              $listMonth=array($yearSpinner.$monthSpinner);
-              if(!$displayNothing){
-                PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, null, true); 
-              }?>
-      </div>
-    </div>
-  </div>
+
+  echo' <table id="bodyPlanMan" name="bodyPlanMan" >';
+  echo'  <tr>';
+  echo'    <td colspan="2">';       
+                if(isset($idProject)){
+                 if(trim($idProject)==''){
+                    PlannedWorkManual::drawActivityTable(null,$yearSpinner.$monthSpinner,true);
+                  }else{
+                    PlannedWorkManual::drawActivityTable($idProject,$yearSpinner.$monthSpinner,true);
+                  }
+                }else{
+                    PlannedWorkManual::drawActivityTable(null,$yearSpinner.$monthSpinner,true);
+                }
+  
+  echo'    </td>';
+  echo'  </tr>';
+  echo'  <tr><td>';
+  echo'     <div style="height:15px;">&nbsp;</div>';
+  echo'  </td></tr>';
+  echo'  <tr>';
+  echo'    <td>';
+  echo'       <div style="width:240px;">';
+                  InterventionMode::drawList(true);
+  echo'       </div>';
+  echo'    </td>';
+  echo'    <td >';
+  echo'       <div style="min-width:1123px;margin-left:215px;top:20px;">';
+                  $listMonth=array($yearSpinner.$monthSpinner);
+                  if(!$onlyRes){
+                    foreach ($listResource as $id=>$val){
+                      $listResource[$id]=$val->id;
+                    } 
+                  }
+                    PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, null, true);
+  echo'       </div>';
+  echo'     </td>';
+  echo'  </tr>';
+  echo' </table>';
+  
+ ?>

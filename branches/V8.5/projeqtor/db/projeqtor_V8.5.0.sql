@@ -259,6 +259,15 @@ ALTER TABLE `${prefix}work` ADD `manual` int(1) unsigned DEFAULT '0';
 ALTER TABLE `${prefix}plannedwork` ADD `manual` int(1) unsigned DEFAULT '0';
 ALTER TABLE `${prefix}plannedworkbaseline` ADD `manual` int(1) unsigned DEFAULT '0';
 
+INSERT INTO `${prefix}report` (`id`, `name`, `idReportCategory`, `file`, `sortOrder`) VALUES
+(109, 'reportShowIntervention', 2, 'plannedWorkManual.php', 285);
 
+INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess`) VALUES 
+(1, 109, 1);
 
+INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES 
+(109,'idProject','projectList',10,'currentProject'), 
+(109,'idTeam','teamList',20,null), 
+(109,'idOrganization','organizationList',15,null),
+(109,'month','month',40,'currentMonth');
 

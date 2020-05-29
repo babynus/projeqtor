@@ -1096,7 +1096,6 @@ class ImputationLine {
               $workPM=0;
               foreach ($line->arrayWork as $id=>$planWork){
                 if($planWork->work!='' and $planWork->workDate<=date("Y-m-d")){
-                  debugLog($planWork->work);
                   $workPM+=$planWork->work;
                 }
               }
