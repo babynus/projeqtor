@@ -2110,3 +2110,61 @@ function htmlTransformRichtextToPlaintext($string) {
   $string=strip_tags(html_entity_decode($string));
   return $string;
 }
+
+function htmlSetClickableImages($text,$maxWidth) {
+  //$text=preg_replace('/<img src="(.*?)" style="/', '<img onClick="showImage(\'Note\',\'$1\',\'preview\');" src="$1" style="cursor:pointer;', $text);
+  //$text=preg_replace('/<img src="(.*?)"/', '<img onClick="showImage(\'Note\',\'$1\',\'preview\');" src="$1" style="cursor:pointer;"', $text);
+  //return $text;
+  global $widthToPass;
+  $widthToPass=$maxWidth;
+  $text=preg_replace_callback(
+      '/<img src="(.*?)" style="(.*?)"/', 
+      function ($matches) { 
+        global $widthToPass;
+        $maxWidth=$widthToPass;
+        $style=$matches[2];
+        debugLog($maxWidth);
+        if ($maxWidth) {
+          $maxWidth=intval($maxWidth);
+          debugLog($matches[2]);
+          $attrs=explode(';', $matches[2]);
+          $style="";
+          $height=null;
+          $width=null;
+          foreach ($attrs as $att) {
+            $att=strtolower(trim($att,' '));
+            debugLog($att);
+            $vals=explode(':',$att);
+            debugLog($vals);
+            if (count($vals)!=2) continue;
+            $key=$vals[0];
+            $val=$vals[1];
+            if ($key=='width') {
+              $width=intval($val);
+            } else if ($key=='height') {
+              $height=intval($val);
+            } else {
+              $style.=$att.';';
+            }
+            
+          }
+          
+          if ($height and $width and $width>$maxWidth) {
+            $newWidth=$maxWidth;
+            $newHeight=intval($height*$newWidth/$width);
+            $newWidth.='px';
+            $newHeight.='px';
+            $style.="height:$newHeight;width:$newWidth";
+          }
+        }
+        return '<img onClick="showImage(\'Note\',\''.$matches[1].'\',\'preview\');" src="'.$matches[1].'" style="cursor:pointer;'.$style.'"';
+      },
+      $text);
+   $text=preg_replace_callback(
+       '/<img src="(.*?)"/', 
+       function ($matches) { 
+         return '<img onClick="showImage(\'Note\',\''.$matches[1].'\',\'preview\');" src="'.$matches[1].'" style="cursor:pointer;"';
+       },
+      $text);
+  return $text;
+}
