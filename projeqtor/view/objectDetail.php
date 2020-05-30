@@ -3939,7 +3939,8 @@ function drawNotificationsLinkedToObject($obj, $unreadOnly=true, $refresh=false)
 function drawNotesFromObject($obj, $refresh=false) {
   global $cr, $print, $outMode, $user, $comboDetail, $displayWidth, $printWidth, $preseveHtmlFormatingForPDF;
   $widthPct=setWidthPct($displayWidth, $print, $printWidth, $obj);
-  $widthPctNote=((substr($widthPct, 0, strlen($widthPct)-2)*0.85)-45).'px';
+  $widthPctNote=((substr($widthPct, 0, strlen($widthPct)-2)*0.85)-40).'px';
+  //$widthPctNote=((substr($widthPct, 0, strlen($widthPct)-2)*0.85)+5).'px';
   if ($comboDetail) {
     return;
   }
@@ -4029,6 +4030,7 @@ function drawNotesFromObject($obj, $refresh=false) {
       }else{
         echo '<td colspan="6" class="noteData" style="width:'.(($print)?'95':'85').'%">';
       }
+      echo "<div style='position:absolute;right:3px;height:20px;width:100px;'>";
       echo formatUserThumb($userId, $userName, 'Creator');
       echo formatDateThumb($creationDate, $updateDate);
       echo formatPrivacyThumb($note->idPrivacy, $note->idTeam);
@@ -4046,7 +4048,8 @@ function drawNotesFromObject($obj, $refresh=false) {
           }
         }
       }
-      if (!$print) echo '<div style="max-width:'.$widthPctNote.';overflow-x:auto;" >';
+      echo "</div>";
+      if (!$print) echo '<div style="min-height:23px;max-width:'.$widthPctNote.';overflow-x:auto;" >';
       $strDataHTML=$note->note;
       if ($print and $outMode=="pdf") {
       	if ($preseveHtmlFormatingForPDF) {
@@ -4059,10 +4062,11 @@ function drawNotesFromObject($obj, $refresh=false) {
       	} else {
       		$strDataHTML=preg_replace('@(https?://([-\w\.]<+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" target="_blank">$1</a>', $strDataHTML);
       	}
-      	$sub = substr($strDataHTML, strpos($strDataHTML,'src="')+strlen('scr="'),strlen($strDataHTML));
-      	$imageUrl = substr($sub,0,strpos($sub,'.png"')+4);
-      	$imageName = substr($imageUrl,strpos($imageUrl,'../files/images/')+strlen('../files/images/'),strpos($sub,'.png"')+4);
-      	$strDataHTML = str_replace('<img', '<img onClick="showImage(\'Note\',\''.$imageUrl.'\',\''.$imageName.'\');"', $strDataHTML);
+      	//$sub = substr($strDataHTML, strpos($strDataHTML,'src="')+strlen('scr="'),strlen($strDataHTML));
+      	//$imageUrl = substr($sub,$sub+5,strpos($sub,'.png"')+4);
+      	//$imageName = substr($imageUrl,strpos($imageUrl,'../files/images/')+strlen('../files/images/'),strpos($sub,'.png"')+4);
+      	//$strDataHTML = str_replace('<img', '<img onClick="showImage(\'Note\',\''.$imageUrl.'\',\''.$imageName.'\');"', $strDataHTML);
+      	$strDataHTML=htmlSetClickableImages($strDataHTML,$widthPctNote);
       }
       echo $strDataHTML;
       if (!$print) echo '</div>';
