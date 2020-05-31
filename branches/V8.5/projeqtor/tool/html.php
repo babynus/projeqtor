@@ -2158,13 +2158,13 @@ function htmlSetClickableImages($text,$maxWidth) {
             $style.="height:$newHeight;width:$newWidth";
           }
         }
-        return '<img onClick="showImage(\'Note\',\''.$matches[1].'\',\'preview\');" src="'.$matches[1].'" style="cursor:pointer;'.$style.'"';
+        return '<img onClick="showImage(\'Note\',\''.$matches[1].'\',\''.basename($matches[1]).'\');" src="'.$matches[1].'" style="cursor:pointer;'.$style.'"';
       },
       $text);
    $text=preg_replace_callback(
        '/<img src="(.*?)"/', 
        function ($matches) { 
-         return '<img onClick="showImage(\'Note\',\''.$matches[1].'\',\'preview\');" src="'.$matches[1].'" style="cursor:pointer;"';
+         return '<img onClick="showImage(\'Note\',\''.$matches[1].'\',\''.basename($matches[1]).'\');" src="'.$matches[1].'" style="cursor:pointer;"';
        },
       $text);
   return $text;
