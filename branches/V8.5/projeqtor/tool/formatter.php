@@ -609,7 +609,10 @@ function activityStreamDisplayNote ($note,$origin){
     } else {
      echo '<div style="margin-top:8px;">'.htmlFormatDateTime($note->creationDate,true).'</div></div>';
     }
-    $strDataHTML=htmlSetClickableImages($strDataHTML,intval($rightWidthScreen)-30);
+    $noteImgWidth=intval($rightWidthScreen)-30;
+    debugLog($origin);
+    if ($origin=='activityStream') $noteImgWidth-=40;
+    $strDataHTML=htmlSetClickableImages($strDataHTML,$noteImgWidth);
     if($rightWidthScreen<100){
       echo '<div class="activityStreamNoteContent" id="activityStreamNoteContent_'.$note->id.'" style="display:block;height:'.(($isNoteClosed)?'0px':'100%').';margin-left:'.(($origin=='activityStream')?'36':'0').'px;margin-bottom:'.(($isNoteClosed)?'0px':'10px').';word-break:break-all;">';
       if($noteDiscussionMode != 'YES'){
