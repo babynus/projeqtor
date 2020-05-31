@@ -1635,7 +1635,6 @@ class PlannedWork extends GeneralWork {
     $hist->refType='Project';
     $hist->refId=0;
     $resHist=$hist->save();
-    debugLog($resHist);
     
     $messageOn = false;
     $endTime=time();

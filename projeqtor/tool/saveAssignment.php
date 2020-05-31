@@ -227,7 +227,6 @@ if($planningMode == 'MAN' and $mode =='edit'){
       $assignment->optional=$optional;
     }
     $result=$assignment->save();
-    debugLog($assignment);
     // 
     //$ar=new AssignmentRecurring();
     if ($planningMode=='RECW') {

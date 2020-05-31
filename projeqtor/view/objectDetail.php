@@ -97,6 +97,39 @@ if($insertPlanningItem){
       $selectedResource=RequestHandler::getValue('resourcePlanningSelectedResource');
   }
 }
+$print=false;
+if (array_key_exists('print', $_REQUEST) or isset($callFromMail)) {
+  $print=true;
+}
+
+$displayWidth='98%';
+if ($print) $reorg=false;
+if ($print and isset($outMode) and $outMode=='pdf') {
+  $reorg=false;
+  if (isset($orientation) and $orientation=='L') $printWidth=1080;
+  else $printWidth=760;
+} else {
+  if (isset($outModeBack) and $outModeBack=='pdf') {
+    $printWidth='980';
+  } else {
+    $printWidth=980;
+  }
+}
+if (array_key_exists('destinationWidth', $_REQUEST)) {
+  $width=$_REQUEST['destinationWidth'];
+  $width-=30;
+  $displayWidth=$width.'px';
+} else {
+  if (sessionValueExists('screenWidth')) {
+    $detailWidth=round((getSessionValue('screenWidth')*0.8)-15); // 80% of screen - split barr - padding (x2)
+  } else {
+    $displayWidth='98%';
+  }
+}
+if ($print) {
+  $displayWidth=$printWidth.'px'; // must match iFrame size (see main.php)
+}
+$colWidth=intval($displayWidth); // Initialized to be sure...
 
 if ($noselect) {
   $objId="";
@@ -126,6 +159,7 @@ if ($noselect) {
     $obj=new ResourceTeam($objId);
   }
   if (array_key_exists('refreshNotes', $_REQUEST)) {
+    $nbColMax=1;
     drawNotesFromObject($obj, true);
     exit();
   }
@@ -193,10 +227,7 @@ if ($noselect) {
   }
 }
 // save the current object in session
-$print=false;
-if (array_key_exists('print', $_REQUEST) or isset($callFromMail)) {
-  $print=true;
-}
+
 if (!$print and $obj) {
   if (!$comboDetail) {
     SqlElement::setCurrentObject($obj);
@@ -210,35 +241,6 @@ if (array_key_exists('refresh', $_REQUEST)) {
 }
 
 $treatedObjects=array();
-
-$displayWidth='98%';
-if ($print) $reorg=false;
-if ($print and isset($outMode) and $outMode=='pdf') {
-  $reorg=false;
-  if (isset($orientation) and $orientation=='L') $printWidth=1080;
-  else $printWidth=760;
-} else {
-  if (isset($outModeBack) and $outModeBack=='pdf') {
-    $printWidth='980';
-  } else {
-    $printWidth=980;
-  }
-}
-if (array_key_exists('destinationWidth', $_REQUEST)) {
-  $width=$_REQUEST['destinationWidth'];
-  $width-=30;
-  $displayWidth=$width.'px';
-} else {
-  if (sessionValueExists('screenWidth')) {
-    $detailWidth=round((getSessionValue('screenWidth')*0.8)-15); // 80% of screen - split barr - padding (x2)
-  } else {
-    $displayWidth='98%';
-  }
-}
-if ($print) {
-  $displayWidth=$printWidth.'px'; // must match iFrame size (see main.php)
-}
-$colWidth=intval($displayWidth); // Initialized to be sure...
 
 if ($print) {
   echo '<br/>';
@@ -3934,12 +3936,13 @@ function drawNotificationsLinkedToObject($obj, $unreadOnly=true, $refresh=false)
   if (!$print) {
     echo '<input id="NotificationSectionCount" type="hidden" value="'.count($list).'" />';
   }
-}
-// END - ADD BY TABARY - NOTIFICATION SYSTEM
+}// END - ADD BY TABARY - NOTIFICATION SYSTEM
 function drawNotesFromObject($obj, $refresh=false) {
   global $cr, $print, $outMode, $user, $comboDetail, $displayWidth, $printWidth, $preseveHtmlFormatingForPDF;
   $widthPct=setWidthPct($displayWidth, $print, $printWidth, $obj);
-  $widthPctNote=((substr($widthPct, 0, strlen($widthPct)-2)*0.85)-40).'px';
+  $widthPctNote=((intval($widthPct)-2)*0.85)-40;
+  if (RequestHandler::isCodeSet('refreshNotes')) $widthPctNote+=30;
+  $widthPctNote.='px';
   //$widthPctNote=((substr($widthPct, 0, strlen($widthPct)-2)*0.85)+5).'px';
   if ($comboDetail) {
     return;
