@@ -2121,21 +2121,18 @@ function htmlSetClickableImages($text,$maxWidth) {
       '/<img src="(.*?)" style="(.*?)"/', 
       function ($matches) { 
         global $widthToPass;
-        $maxWidth=$widthToPass;
+        $maxWidth=$widthToPass; 
         $style=$matches[2];
-        debugLog($maxWidth);
         if ($maxWidth) {
-          $maxWidth=intval($maxWidth);
-          debugLog($matches[2]);
+          $maxWidth=intval($maxWidth)-3;
+          if (RequestHandler::isCodeSet('refreshNotes')) $maxWidth-=1;
           $attrs=explode(';', $matches[2]);
           $style="";
           $height=null;
           $width=null;
           foreach ($attrs as $att) {
             $att=strtolower(trim($att,' '));
-            debugLog($att);
             $vals=explode(':',$att);
-            debugLog($vals);
             if (count($vals)!=2) continue;
             $key=$vals[0];
             $val=$vals[1];
@@ -2147,11 +2144,15 @@ function htmlSetClickableImages($text,$maxWidth) {
               $style.=$att.';';
             }
             
-          }
-          
-          if ($height and $width and $width>$maxWidth) {
-            $newWidth=$maxWidth;
-            $newHeight=intval($height*$newWidth/$width);
+          }       
+          if ($height and $width) {
+            if ($width>$maxWidth) {
+              $newWidth=$maxWidth;
+              $newHeight=intval($height*$newWidth/$width);
+            } else {
+              $newWidth=$width;
+              $newHeight=$height;
+            }
             $newWidth.='px';
             $newHeight.='px';
             $style.="height:$newHeight;width:$newWidth";

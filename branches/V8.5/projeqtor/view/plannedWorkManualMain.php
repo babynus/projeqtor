@@ -31,7 +31,6 @@ require_once "../tool/projeqtor.php";
 require_once "../tool/formatter.php";
   scriptLog('   ->/view/absenceMain.php');  
   $readonly=(RequestHandler::isCodeSet('readonly'))?RequestHandler::getValue('readonly'):'false';
-  debugLog($readonly);
 ?>
 <input type="hidden" name="objectClassManual" id="objectClassManual" value="PlannedWorkManual" />
 <div class="container" dojoType="dijit.layout.BorderContainer">
