@@ -4869,7 +4869,6 @@ abstract class SqlElement {
           if($canDeleteRealWork){
             $objList = $obj->getSqlElementsFromCriteria($crit,null,$where);
             foreach ($objList as $objWork){
-              debugLog(get_class($objWork). " #".$objWork->id);
               $work = new Work();
               $refType=get_class($objWork);
               $refId=$objWork->id;
