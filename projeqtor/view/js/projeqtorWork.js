@@ -716,9 +716,19 @@ function selectInterventionDate(date,resource,period,event) {
     url:url,
     handleAs: "text",
     load: function (data) {
-      console.log(data);
+      hideWait();
+      var result={};
+      if (data) try { result=JSON.parse(data); }
+      catch (error) {
+        console.log(data);
+        return;
+      }
+      if (result.error) {
+        displayMessageInResultDiv(result.error,'WARNING',true,false);
+        return;
+      }
       if (dijit.byId('assignmentAssignedWork') && dijit.byId('assignmentRealWork') && dijit.byId('assignmentLeftWork')) {
-        var result=JSON.parse(data);
+        //var result=JSON.parse(data);
         if (result.assigned!==null) dijit.byId('assignmentAssignedWork').set('value',result.assigned);
         if (result.real!==null) dijit.byId('assignmentRealWork').set('value',result.real);
         if (result.left!==null) dijit.byId('assignmentLeftWork').set('value',result.left);

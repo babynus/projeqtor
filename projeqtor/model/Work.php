@@ -35,6 +35,7 @@ class Work extends GeneralWork {
    public $idLeave;//Eliott - LEAVE MANAGEMENT	 
    public $inputUser;
    public $inputDateTime;
+   public $manual;
 	 private static $_colCaptionTransposition = array(
 	     'workDate'=>'date'
 	 );

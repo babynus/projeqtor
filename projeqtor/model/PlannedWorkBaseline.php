@@ -32,6 +32,7 @@ require_once('_securityCheck.php');
 class PlannedWorkBaseline extends GeneralWork {
 
   public $idBaseline;
+  public $manual;
   public $_noHistory;
     
   // List of fields that will be exposed in general user interface
