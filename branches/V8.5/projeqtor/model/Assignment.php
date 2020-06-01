@@ -67,6 +67,7 @@ class Assignment extends SqlElement {
   public $supportedAssignment;
   public $supportedResource;
   public $hasSupport;
+  public $manual;
   
   private static $_fieldsAttributes=array("idProject"=>"required", 
     "idResource"=>"required", 
@@ -149,7 +150,7 @@ class Assignment extends SqlElement {
     
     $r=new ResourceAll($this->idResource);
     $this->isResourceTeam=$r->isResourceTeam; // Store isResourceTeam from Resource for convenient use
-    if (!$this->id and !$this->supportedAssignment) { // on creation
+    if (!$this->id and !$this->supportedAssignment and !$this->manual) { // on creation
       $this->hasSupport=0;
       $rs=new ResourceSupport();
       $cpt=$rs->countSqlElementsFromCriteria(array('idResource'=>$this->idResource));

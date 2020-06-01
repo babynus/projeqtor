@@ -168,12 +168,14 @@ class PlannedWorkManual extends GeneralWork {
       $ass=reset($assList);
       if (!$ass->id) {
         $ass->idProject=$this->idProject;
+        $ass->manual=1;
         $assResult=$ass->save();
       }
       $work->work=$sum;
       $work->idProject=$this->idProject;
       $work->setDates($this->workDate);
       $work->idAssignment=$ass->id;
+      $work->manual=1;
       $workResult=$work->save();
       if (!$this->idAssignment or $this->idAssignment!=$ass->id or !$this->$wField or $this->$wField!=$work->id) {
         if (!$this->idAssignment or $this->idAssignment!=$ass->id) {
@@ -208,6 +210,7 @@ class PlannedWorkManual extends GeneralWork {
     $ass->plannedEndDate=$plannedEnd;
     $ass->realStartDate=$realStart;
     $ass->realEndDate=$realEnd;
+    $ass->manual=1;
     $resAss=$ass->save();
   }
   

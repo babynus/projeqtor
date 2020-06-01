@@ -54,6 +54,16 @@ if (substr($period,-1)=="X") {
   $period=substr($period,0,2);
   $periodx=($period=='AM')?'PM':'AM';
 }
+$resourceIncompatible = new ResourceIncompatible();
+$critArray=array('idResource'=>$resource);
+$incompatibleResourceList=$resourceIncompatible->getSqlElementsFromCriteria($critArray, false);
+$lstIncompatible=array();
+foreach ($incompatibleResourceList as $inc) {
+  $lstIncompatible[$inc->idIncompatible]=$inc->idIncompatible;
+}
+$critIncompatible="idResource in ".transformListIntoInClause($lstIncompatible)." and workDate='$date'";
+$critIncompatible.=" and refType is not null and refId is not null";
+//$critIncompatible.=" and refType='$refType' and refId=$refId";
 $pwm=SqlElement::getSingleSqlElementFromCriteria('PlannedWorkManual', array('workDate'=>$date,'idResource'=>$resource,'period'=>$period));
 if ($allDay) $pwmx=SqlElement::getSingleSqlElementFromCriteria('PlannedWorkManual', array('workDate'=>$date,'idResource'=>$resource,'period'=>$periodx));
 if($pwm->id){
@@ -61,6 +71,7 @@ if($pwm->id){
   $profile=getSessionUser()->getProfile($project);
   $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$profile, 'scope'=>'assignmentEdit'));
   if($habil->rightAccess!=1){
+    echo '{"error":"'.i18n('errorUpdateRights').'"}';
     exit;
   }
 }
@@ -69,8 +80,23 @@ if($allDay and $pwmx->id){
   $profile=getSessionUser()->getProfile($project);
   $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$profile, 'scope'=>'assignmentEdit'));
   if($habil->rightAccess!=1){
+    echo '{"error":"'.i18n('errorUpdateRights').'"}';
     exit;
   } 
+}
+if ($refType and $refId and (!$pwm->id or $pwm->refType!=$refType or $pwm->refId!=$refId) and count($lstIncompatible)>0) {
+  $nb=$pwm->countSqlElementsFromCriteria(null,"$critIncompatible and period='$period'");
+  if ($nb>0) {
+    echo '{"error":"'.i18n('errorIncompatibleAlreadyPlanned').'"}';
+    exit;
+  }
+}
+if ($allDay and $refType and $refId and (!$pwmx->id or $pwmx->refType!=$refType or $pwmx->refId!=$refId) and count($lstIncompatible)>0) {
+  $nb=$pwm->countSqlElementsFromCriteria(null,"$critIncompatible and period='$periodx'");
+  if ($nb>0) {
+    echo '{"error":"'.i18n('errorIncompatibleAlreadyPlanned').'"}';
+    exit;
+  }
 }
 Sql::beginTransaction();
 //gautier habilation
@@ -164,8 +190,8 @@ ob_start();
 displayLastOperationStatus($result);
 ob_clean();
 $ass=SqlElement::getSingleSqlElementFromCriteria('Assignment', array('refType'=>$refType,'refId'=>$refId,'idResource'=>$resource));
-$assigned=$ass->assignedWork;
-$real=$ass->realWork;
-$left=$ass->leftWork;
+$assigned=($ass->assignedWork)?$ass->assignedWork:0;
+$real=($ass->realWork)?$ass->realWork:0;
+$left=($ass->leftWork)?$ass->leftWork:0;
 echo '{"assigned":'.$assigned.',"real":'.$real.',"left":'.$left.'}';
 ?>
