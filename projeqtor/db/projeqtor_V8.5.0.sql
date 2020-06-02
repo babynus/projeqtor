@@ -170,7 +170,7 @@ ALTER TABLE `${prefix}documentversion` ADD `disapproved` int(1) unsigned DEFAULT
 INSERT INTO `${prefix}menu` (`id`,`name`,`idMenu`,`type`,`sortOrder`,`level`,`idle`,`menuClass`) VALUES
 (251,'menuInterventionMode',36,'object', 899,'ReadWriteList',0,'ListOfValues'),
 (252, 'menuPlannedWorkManual', 7, 'item', 119, Null, 0, 'Work'),
-(253, 'menuConsultationPlannedWorkManual', 7, 'item', 120, Null, 0, 'Work');
+(253, 'menuConsultationPlannedWorkManual', 7, 'item', 150, Null, 0, 'Work');
 
 INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUES
 (1,251,1),
