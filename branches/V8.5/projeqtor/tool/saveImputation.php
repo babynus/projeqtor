@@ -126,12 +126,22 @@ for ($i=0; $i<$nbLines; $i++) {
         $finalResult=$result;
       }
     }
+    $pe=SqlElement::getSingleSqlElementFromCriteria('PlanningElement', array("refType"=>$ass->refType,"refId"=>$ass->refId));
+    if($pe->idPlanningMode=="23"){
+      $crit=array('refType'=>$line->refType, 'refId'=>$line->refId, 'idResource'=>$line->idResource);
+      $pw= new PlannedWork();
+      $w=new Work();
+      $realwork=$w->sumSqlElementsFromCriteria('work', $crit);
+      $plannedwork=$pw->sumSqlElementsFromCriteria('work', $crit);
+      $ass->assignedWork=$plannedwork+$realwork;
+    }
     if ($ass->leftWork!=$line->leftWork) {
     	$changed=true;
     	$ass->leftWork=$line->leftWork;
     }
     if ($changed) {
        $resultAss=$ass->saveWithRefresh();
+
        $stat=getLastOperationStatus($resultAss);
        if ($stat=="OK") {
        	$status='OK';
