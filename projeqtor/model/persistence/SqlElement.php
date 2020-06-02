@@ -6229,6 +6229,7 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
           $cls=substr($expl[1],2);
         }
         if (property_exists($this, $fld)) {
+          if ($cls=='User' or $cls=='Resource' or $cls=='Comtact') $cls='Affectable';
           return SqlList::getNameFromId($cls, $this->$fld);
         } else {
           return "\$$fld not a property to define $property of " . get_class($this);
