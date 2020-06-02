@@ -495,6 +495,7 @@ class PlannedWorkManual extends GeneralWork {
                     style="padding:1px;background:none;max-width:100%; box-sizing:border-box;display:block;border:1px solid #A0A0A0 !important;margin:2px 0px" >
                      <script type="dojo/method" event="onChange">
                       saveInterventionCapacity("'.$pe->refType.'",'.$pe->refId.','.$monthYear.','.$pe->id.','.$mode.'); 
+                      refreshPlannedWorkManualList();    
                      </script>';
         echo $keyDownEventScript;
         echo '</div>';
@@ -522,23 +523,23 @@ class PlannedWorkManual extends GeneralWork {
           $myDate = $year.$month.$y;
           if($peIntervention->fte){
             if(isset($listOfDayByEtp[$pe->refId.'|'.$myDate.'|AM'])){
-              if($listOfDayByEtp[$pe->refId.'|'.$myDate.'|AM']==$peIntervention->fte)$colorAM = "#60DC00";
-              if($listOfDayByEtp[$pe->refId.'|'.$myDate.'|AM']>$peIntervention->fte)$colorAM = "#FF0000";
+              if($listOfDayByEtp[$pe->refId.'|'.$myDate.'|AM']==$peIntervention->fte)$colorAM = "#50BB50";
+              if($listOfDayByEtp[$pe->refId.'|'.$myDate.'|AM']>$peIntervention->fte)$colorAM = "#BB5050";
             }
             if(isset($listOfDayByEtp[$pe->refId.'|'.$myDate.'|PM'])){
-              if($listOfDayByEtp[$pe->refId.'|'.$myDate.'|PM']==$peIntervention->fte)$colorPM = "#60DC00";
-              if($listOfDayByEtp[$pe->refId.'|'.$myDate.'|PM']>$peIntervention->fte)$colorPM = "#FF0000";
+              if($listOfDayByEtp[$pe->refId.'|'.$myDate.'|PM']==$peIntervention->fte)$colorPM = "#50BB50";
+              if($listOfDayByEtp[$pe->refId.'|'.$myDate.'|PM']>$peIntervention->fte)$colorPM = "#BB5050";
             }
           }
           echo '<td style="border:1px solid #a0a0a0;">';
           echo '<table style="width:100%;height:100%">';
           $color=getForeColor($colorAM);
           echo '<tr style="height:'.$midSize.'px;">
-                <td style="width:100%;background:'.$colorAM.';border-bottom:1px solid #e0e0e0;position:relative;text-align:center;"></td>
+                <td id="'.$myDate.'AM" style="width:100%;background:'.$colorAM.';border-bottom:1px solid #e0e0e0;position:relative;text-align:center;"></td>
                 </tr>';
           $color=getForeColor($colorPM);
           echo '<tr style="height:'.$midSize.'px;">
-                <td style="width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"></td>
+                <td id="'.$myDate.'PM" style="width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"></td>
                 </tr>';
           echo '</table>';  
           echo '</td>';
