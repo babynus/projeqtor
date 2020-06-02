@@ -251,6 +251,11 @@ class PlannedWork extends GeneralWork {
       if (isset($plan->_noPlan) and $plan->_noPlan) {
       	continue;
       }
+//       if ($plan->idPlanningMode==23) { // manual planning
+//         $plan->_noPlan=true;
+//         $fullListPlan=self::storeListPlan($fullListPlan,$plan);
+//         continue;
+//       }
       $startPlan=$startDate;
       $startFraction=0;
       $endPlan=null;
@@ -1317,7 +1322,13 @@ class PlannedWork extends GeneralWork {
                       if (! isOpenDay($currentDate,$supRes['calendar'] )) {
                         $value=0;
                       } else if (isset($supRes[$currentDate])) {
-                        $capaSup=$supRes['capacity'];
+                        if (!isset($supRes['capacity']) ) { debugLog($supRes); debugLog($plan);}
+                        if ($supRes['variableCapacity']) {
+                          $resSup=new Resource($sup);
+                          $capaSup=$resSup->getCapacityPeriod($currentDate);
+                        } else {
+                          $capaSup=$supRes['normalCapacity'];
+                        }
                         $leftSup=$capaSup-$supRes[$currentDate];
                         if ($leftSup<0) $leftSup=0;
                         if ($value>($leftSup/$supRate*100)) {
@@ -1538,6 +1549,7 @@ class PlannedWork extends GeneralWork {
     // Moved transaction at end of procedure (out of script plan.php) to minimize lock possibilities
     foreach ($fullListPlan as $keyPe=>$pe) {
       if (property_exists($pe, 'fixPlanning') and $pe->fixPlanning) unset($fullListPlan[$keyPe]);
+      if ($pe->idPlanningMode==23) unset($fullListPlan[$keyPe]);
     }
     //$templateProjectsList=Project::getTemplateList();
     Sql::beginTransaction();
