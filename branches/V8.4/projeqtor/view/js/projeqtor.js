@@ -5740,12 +5740,12 @@ function hideDirectChangeStatus() {
 }
 
 function drawGraphStatus() {
-  if (! dijit.byId("idStatus") || ! dijit.byId("idProject") || ! dojo.byId('objectClass') ) return;
+  if (! dijit.byId("idStatus") || ! dojo.byId('objectClass') ) return;
   var callBack = function(){
     dojo.byId('graphStatusContentDiv');
   };
   graphIdStatus=dijit.byId("idStatus").get('value');
-  graphIdProject=dijit.byId("idProject").get('value');
+  graphIdProject=(dijit.byId("idProject"))?dijit.byId("idProject").get('value'):'';
   objectClass=dojo.byId('objectClass').value;
   graphIdType=dijit.byId("id"+objectClass+"Type").get('value');
   var url = '../tool/dynamicDialogGraphStatus.php?idStatus='+graphIdStatus + '&idProject='+graphIdProject + '&idType='+graphIdType;
