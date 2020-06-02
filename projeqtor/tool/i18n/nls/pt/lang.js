@@ -1996,6 +1996,7 @@ errorFinalizeMessage: "Erro em finalizeMessageDisplay('${1}') &#58; <br/>Destino
 errorHierarchicLoop: "Não é possível criar um ciclo hierárquico",
 errorIdleWithLeftWork: "Não é possível fechar um elemento com trabalho pendente",
 errorImportFormat: "<b>ERRO - Tipo de ficheiro especificado e o tipo de ficheiro especificado não são compatíveis</b><br/>Operação abortada",
+errorIncompatibleAlreadyPlanned: "An incompatible resource is already manually planned on this period",
 errorIncompatibleFields: "campos '${1}' não é compatível com '${2}'",
 errorInterventionInput: "Select an activity and/or an intervention mode.",
 ErrorInTheAttributesNeededForCalculation: "Error in the attributes needed for calculation",

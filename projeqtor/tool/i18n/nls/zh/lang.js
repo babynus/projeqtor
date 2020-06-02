@@ -1996,6 +1996,7 @@ errorFinalizeMessage: "<br/>Destination or is not a node or not a widget<br/>or 
 errorHierarchicLoop: "不能创建层次循环。",
 errorIdleWithLeftWork: "不能关闭有遗留工作的要素",
 errorImportFormat: "<b>错误 - 文件类别与格式不匹配</b><br/>导入终止",
+errorIncompatibleAlreadyPlanned: "An incompatible resource is already manually planned on this period",
 errorIncompatibleFields: "字段 '${1}' 不兼容于 '${2}'",
 errorInterventionInput: "Select an activity and/or an intervention mode.",
 ErrorInTheAttributesNeededForCalculation: "Error in the attributes needed for calculation",

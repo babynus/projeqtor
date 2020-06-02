@@ -1996,6 +1996,7 @@ errorFinalizeMessage: "最終メッセージ表示時にエラー(${1}) &#58; <b
 errorHierarchicLoop: "階層が循環しています",
 errorIdleWithLeftWork: "残存作業がある要素をクローズできません。",
 errorImportFormat: "<b>エラー - ファイルタイプと選択されたファイルフォーマットがあっていません。</b><br/>インポートは中止されました",
+errorIncompatibleAlreadyPlanned: "An incompatible resource is already manually planned on this period",
 errorIncompatibleFields: "フィールド「${1}」は「${2}」と互換性がありません",
 errorInterventionInput: "Select an activity and/or an intervention mode.",
 ErrorInTheAttributesNeededForCalculation: "Error in the attributes needed for calculation",

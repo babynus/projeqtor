@@ -1996,6 +1996,7 @@ errorFinalizeMessage: "Mesaj Görüntüsünü sonlandırılırken hata oluştu (
 errorHierarchicLoop: "Hiyerarşik döngü oluşturulamıyor",
 errorIdleWithLeftWork: "Sol çalışma ile bir öğe kapatılamıyor",
 errorImportFormat: "<b>HATA - Sağlanan dosya türü ve seçili dosya formatı eşleşmiyor </ b> <br/> İçe aktarma iptal edildi",
+errorIncompatibleAlreadyPlanned: "An incompatible resource is already manually planned on this period",
 errorIncompatibleFields: "'$ {1}' alanları '$ {2}' ile uyumlu değil",
 errorInterventionInput: "Select an activity and/or an intervention mode.",
 ErrorInTheAttributesNeededForCalculation: "Error in the attributes needed for calculation",

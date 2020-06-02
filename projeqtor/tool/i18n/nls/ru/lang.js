@@ -1996,6 +1996,7 @@ errorFinalizeMessage: "Ошибка в finalizeMessageDisplay('${1}') ;<br/>На
 errorHierarchicLoop: "Невозможно создать иерархический цикл",
 errorIdleWithLeftWork: "Невозможно закрыть элемент с остальными работами",
 errorImportFormat: "<b>ОШИБКА — Предоставленный тип файла и выбранный формат файла не совпадают<br/><br/>Импорт прерван",
+errorIncompatibleAlreadyPlanned: "An incompatible resource is already manually planned on this period",
 errorIncompatibleFields: "поле '${1}' не совместимо с '${2}'",
 errorInterventionInput: "Select an activity and/or an intervention mode.",
 ErrorInTheAttributesNeededForCalculation: "Error in the attributes needed for calculation",

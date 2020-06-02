@@ -1996,6 +1996,7 @@ errorFinalizeMessage: "Error on finalizeMessageDisplay('${1}') &#58; <br/>Destin
 errorHierarchicLoop: "Can't create hierarchic loop",
 errorIdleWithLeftWork: "Unable to close an element with left work",
 errorImportFormat: "<b>ERROR - Provided file type and selected file format do not match</b><br/>Import aborted",
+errorIncompatibleAlreadyPlanned: "An incompatible resource is already manually planned on this period",
 errorIncompatibleFields: "fields '${1}' is not compatible with '${2}'",
 errorInterventionInput: "Select an activity and/or an intervention mode.",
 ErrorInTheAttributesNeededForCalculation: "Error in the attributes needed for calculation",
