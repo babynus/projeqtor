@@ -760,6 +760,7 @@ function selectInterventionDate(date,resource,period,event) {
         //console.log('refresh assignment table : '+refreshUrl);
         loadDiv(refreshUrl,'plannedWorkManualAssignmentDiv');
       }
+      refreshInterventionCapacity(date,refId,period);
     }
   });
 }
@@ -830,3 +831,16 @@ function saveInterventionCapacity(refType,refId,month,id,mode) {
   });
 }
 
+function refreshInterventionCapacity(date,idActivity,period) {
+  var url = '../tool/refreshInterventionCapacity.php?date='+date+'&refId='+idActivity +'&period='+period;
+  dojo.xhrPut({
+    url : url,
+    form : 'listFormPlannedWorkManual',
+    handleAs : "text",
+    load : function(data) {
+      date = date.replace("-", "");
+      date = date.replace("-", "");
+      document.getElementById(date+period).style.background=data;
+    }
+  });
+}
