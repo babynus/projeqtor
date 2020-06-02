@@ -1996,6 +1996,7 @@ errorFinalizeMessage: "Помилка завершення повідомлен�
 errorHierarchicLoop: "Неможливо створити ієрархічний цикл",
 errorIdleWithLeftWork: "Неможливо закрити елемент з доробками(реша роботи)",
 errorImportFormat: "<b>ПОМИЛКА - Підготовлений тип файлу та обраний формат файлу не збігаються</b><br/>Імпорт скасовано",
+errorIncompatibleAlreadyPlanned: "An incompatible resource is already manually planned on this period",
 errorIncompatibleFields: "Поля '${1}' не сумісні з '${2}'",
 errorInterventionInput: "Select an activity and/or an intervention mode.",
 ErrorInTheAttributesNeededForCalculation: "Error in the attributes needed for calculation",

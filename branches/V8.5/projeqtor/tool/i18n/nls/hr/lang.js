@@ -1996,6 +1996,7 @@ errorFinalizeMessage: "Pogreška finalizeMessageDisplay (&#34;${1}')&#58; <br/> 
 errorHierarchicLoop: "Ne mogu stvoriti hijerarhijskoj ovisnosti.",
 errorIdleWithLeftWork: "Element s otvorenim radom ne mogu biti zatvorene.",
 errorImportFormat: "<b> GREŠKA - Tip polja i odabrani format datoteke ne podudaraju </ b> ukinut <br/> uvoz",
+errorIncompatibleAlreadyPlanned: "An incompatible resource is already manually planned on this period",
 errorIncompatibleFields: "polje &#34;${1}'nije u skladu s&#34; ${2}'",
 errorInterventionInput: "Select an activity and/or an intervention mode.",
 ErrorInTheAttributesNeededForCalculation: "Pogreška u atributima potrebnim za izračun",

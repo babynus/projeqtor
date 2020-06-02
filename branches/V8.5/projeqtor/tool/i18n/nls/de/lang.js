@@ -1996,6 +1996,7 @@ errorFinalizeMessage: "Fehler bei finalizeMessageDisplay('${1}') &#58; <br/>Ziel
 errorHierarchicLoop: "Kann keine Hierarchie-Abhängigkeiten erstellen.",
 errorIdleWithLeftWork: "Element mit offener Arbeit kann nicht geschlossen werden.",
 errorImportFormat: "<b>FEHLER - Feldtyp und gewähltes Dateiformat stimmen nicht überein</b><br/>Import abgebrochen",
+errorIncompatibleAlreadyPlanned: "An incompatible resource is already manually planned on this period",
 errorIncompatibleFields: "Feld '${1}' ist nicht kompatibel mit '${2}'",
 errorInterventionInput: "Select an activity and/or an intervention mode.",
 ErrorInTheAttributesNeededForCalculation: "Fehler in den zur Berechnung benötigten Attributen",

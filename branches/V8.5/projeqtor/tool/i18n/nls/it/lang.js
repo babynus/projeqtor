@@ -1996,6 +1996,7 @@ errorFinalizeMessage: "Errore in finalizeMessageDisplay('${1}') &#58; <br/>La de
 errorHierarchicLoop: "Impossibile creare un loop gerarchico",
 errorIdleWithLeftWork: "Impossibile chiudere un elemento con il lavoro restante",
 errorImportFormat: "<b>ERROR - Il tipo e il formato del file selezionato non corrispondono</b><br/>Importazione annullata",
+errorIncompatibleAlreadyPlanned: "An incompatible resource is already manually planned on this period",
 errorIncompatibleFields: "i campi '${1}' non sono compatibili con '${2}'",
 errorInterventionInput: "Select an activity and/or an intervention mode.",
 ErrorInTheAttributesNeededForCalculation: "Error in the attributes needed for calculation",

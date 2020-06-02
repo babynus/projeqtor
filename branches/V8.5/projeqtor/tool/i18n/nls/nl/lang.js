@@ -1996,6 +1996,7 @@ errorFinalizeMessage: "Fout op finalizeMessageDisplay('${1}') &#58; <br/>Bestemm
 errorHierarchicLoop: "Kan geen hiërarchische lus maken",
 errorIdleWithLeftWork: "Niet in staat om een element met openstaand werk te sluiten",
 errorImportFormat: "<B> FOUT - Opgegeven bestandstype en geselecteerde bestandsindeling komen niet overeen </ b> <br/> Import afgebroken",
+errorIncompatibleAlreadyPlanned: "An incompatible resource is already manually planned on this period",
 errorIncompatibleFields: "velden '${1}' zijn niet compatible met '${2}'",
 errorInterventionInput: "Select an activity and/or an intervention mode.",
 ErrorInTheAttributesNeededForCalculation: "Error in the attributes needed for calculation",
