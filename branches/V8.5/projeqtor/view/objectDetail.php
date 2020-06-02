@@ -6191,7 +6191,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
     }
     $resSupp = new ResourceSupport();
     $support = $resSupp->getSqlElementsFromCriteria(array('idResource'=>$assignment->idResource));
-    if ($support and !$print) {
+    if ($support and !$print and $assignment->manual!=1) {
         $listSupport=i18n('ResourceSupport').' :</br>';
         foreach ($support as $id=>$val){
         	$res = new ResourceAll($val->idSupport);
