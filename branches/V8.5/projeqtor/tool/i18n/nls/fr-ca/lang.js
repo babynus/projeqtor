@@ -1996,6 +1996,7 @@ errorFinalizeMessage: "Erreur sur finalizeMessageDisplay('${1}') &#58; <br/>La d
 errorHierarchicLoop: "Impossible de créer une boucle hiérarchique",
 errorIdleWithLeftWork: "Impossible de fermer un élément avec du reste à faire",
 errorImportFormat: "<b>Erreur - Le type de fichier fourni ne correspond pas au format de fichier sélectionné</b><br/>Import annulé",
+errorIncompatibleAlreadyPlanned: "Une ressource incompatible est déjà planifiée sur cette période",
 errorIncompatibleFields: "Le champ '${1}' n'est pas compatible avec '${2}'",
 errorInterventionInput: "Sélectionner une activité et/ou un mode d'intervention.",
 ErrorInTheAttributesNeededForCalculation: "Erreur dans les attributs nécessaires au calcul",
