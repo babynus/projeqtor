@@ -58,6 +58,7 @@ class Consistency {
    * @param string $correct
    */
   public static function checkWbs($correct=false,$trace=false) {
+    debugTraceLog("checkWbs - correct WBS index in Projects Structure");
     $pe=new PlanningElement();
     $peList=$pe->getSqlElementsFromCriteria(null,null,"1=1",'wbsSortable asc');
     $lastWbs='';
@@ -178,6 +179,7 @@ class Consistency {
   }
 
   private static function fixOrder($pe, $issue,$peList,$idx) {
+    debugTraceLog("fixOrder - $issue");
     $actual=new PlanningElement($pe->id);
     if ($pe->wbsSortable!=$actual->wbsSortable) {
       displayOK(i18n("checkFixed"),true);
@@ -248,6 +250,7 @@ class Consistency {
   // =================================================================================================================
   
   public static function checkDuplicateWork($correct=false,$trace=false) {
+    debugTraceLog("checkDuplicateWork - Check for duplicates on idAssignment, idResource, refType, refId, idWorkElement");
     $errors=0;
     // Direct Query : valid here for technical needs on grouping
     $work=new Work();
@@ -293,6 +296,7 @@ class Consistency {
   // =================================================================================================================
   
   public static function checkWorkOnTicket($correct=false,$trace=false) {
+    debugTraceLog("checkWorkOnTicket - Check work on WorkElement compared to sum of Work");
     $errors=0;
     // Direct Query : valid here for technical needs on grouping
     $work=new Work();
@@ -345,6 +349,7 @@ class Consistency {
   // =================================================================================================================
   
   public static function checkWorkOnActivity($correct=false,$trace=false) {
+    debugTraceLog("checkWorkOnActivity - Check work on PlanningElement compared to sum of Work");
     $errors=0;
     // Direct Query : valid here for technical needs on grouping
     $work=new Work();
@@ -422,6 +427,7 @@ class Consistency {
   // =================================================================================================================
   
   public static function checkWorkOnAssignment($correct=false,$trace=false) {
+    debugTraceLog("checkWorkOnAssignment - Check work on Assignment compared to sum of Work");
     $errors=0;
     // Direct Query : valid here for technical needs on grouping
     $work=new Work();
@@ -458,6 +464,7 @@ class Consistency {
       }
     }
     // Check Resource 
+    debugTraceLog("checkWorkOnAssignment - Check Resource on Work compared to Resource on Assignment");
     $res=new Resource();
     $resTable=$res->getDatabaseTableName();
     $query="SELECT a.id as assid, a.idResource as assress, w.id as workid, w.idResource as workres, w.workDate as workdate, w.refType as reftype, w.refid as refid "
@@ -482,6 +489,7 @@ class Consistency {
         }
       }
     }
+    debugTraceLog("checkWorkOnAssignment - Check Work with no project");
     // Check work with no project
     $query="SELECT w.id as id, w.idAssignment as assid, w.refType as reftype, w.refId as refid"
         ." FROM $workTable w "
@@ -522,6 +530,7 @@ class Consistency {
         }
       }
     }  
+    debugTraceLog("checkWorkOnAssignment - Check Work with no resource or not existing resource");
     $query="SELECT w.id as id, w.idResource as idres, w.idAssignment as idass, w.refType as reftype, w.refid as refid"
         ." FROM $workTable w"
         ." WHERE (w.idResource is null or w.idResource=0 or not exists (select'x' from $resTable res where res.id=w.idResource)" 
@@ -573,6 +582,7 @@ class Consistency {
   // =================================================================================================================
   
   public static function checkIdlePropagation($correct=false,$trace=false) {
+    debugTraceLog("checkIdlePropagation - Check idle on PlanningElement compared to idle on Activity, Meeting or TestSession");
     $errors=0;
     // Direct Query : valid here for technical needs on grouping
     $actArray=array('Activity','Meeting','TestSession');
@@ -630,6 +640,7 @@ class Consistency {
   // =================================================================================================================
   
   public static function checkMissingPlanningElement($correct=false,$trace=false) {
+    debugTraceLog("checkMissingPlanningElement - Plannable items that have no or more than 1 PlanningElement");
     $errors=0;
     // Direct Query : valid here for technical needs on grouping
     $work=new Work();
@@ -705,6 +716,7 @@ class Consistency {
     $met=new Meeting();$metTable=$met->getDatabaseTableName();
     $pme=new PeriodicMeeting();$pmeTable=$pme->getDatabaseTableName();
     $tst=new TestSession();$tstTable=$tst->getDatabaseTableName();
+    debugTraceLog("checkMissingPlanningElement - PlanningElement refering to not existing item (Activity, Project, Milestone, Periodic Meeeting or TestSession)");
     $query ="SELECT pe.refType as reftype, pe.refId as refid, pe.id as id from $peTable pe"
           . "  WHERE pe.refType='Activity' and not exists (select 'x' from $actTable x where x.id=pe.refId)";
     $query.=" UNION "; 
@@ -751,6 +763,7 @@ class Consistency {
   // =================================================================================================================
     
   public static function checkBudget($correct=false,$trace=false) {
+    debugTraceLog("checkBudget - Compare amounts on budget with sum of amounts of expenses");
     $errors=0;
     // Direct Query : valid here for technical needs on grouping
     $bud=new Budget();
@@ -813,6 +826,7 @@ class Consistency {
   // =================================================================================================================
   
   public static function checkInvalidFilters($correct=false,$trace=false) {
+    debugTraceLog("checkInvalidFilters - Check filters with criteria on list with value 0");
     $errors=0;
     // Direct Query : valid here for technical needs on grouping
     $crit=new FilterCriteria();
@@ -851,6 +865,7 @@ class Consistency {
   
   // Check pools
   public static function checkPools($correct=false,$trace=false) {
+    debugTraceLog("checkPools - Check pools including not existing resource");
     $errors=0;
     // Direct Query : valid here for technical needs on grouping
     $res=new Resource();
@@ -882,7 +897,47 @@ class Consistency {
   
     if (!$errors) {
       displayOK(i18n("checkNoError"));
+    }
+  }
+  
+  public static function checkProject($correct=false,$trace=false) {
+    debugTraceLog("checkProject - Check Project on Work compared to Project on PlanningElement");
+    $errors=0;
+    // Direct Query : valid here for technical needs on grouping
+    $wk=new Work();
+    $wkTable=$wk->getDatabaseTableName();
+    $pe=new PlanningElement();
+    $peTable=$pe->getDatabaseTableName();
+    $as=new Assignment(); 
+    $asTable=$as->getDatabaseTableName();
+    $query="SELECT w.id, w.idProject as idproject, w.refType as reftype, w.refId as refid from $wkTable w where w.idProject <> ( select idProject from $peTable pe where pe.refType=w.refType and pe.refId=w.refId)";
+    debugLog($query);
+    $result=Sql::query($query);
+    while ($line = Sql::fetchLine($result)) {
+      $id=$line['id'];
+      $idProject=$line['idproject'];
+      $refType=$line['reftype'];
+      $refId=$line['refid'];
+      $obj=new $refType($refId);
+      displayError(i18n("checkProjectInvalid",array($idProject,i18n('Work').' #'.$id, $obj->idProject,i18n($refType).' #'.$refId)));
+      $errors++;
+      if ($correct) {
+        $w=new Work($id);
+        $w->idProject=$obj->idProject;
+        $res=$w->saveForced();
+        if (getLastOperationStatus($res)=='OK') {
+          displayOK(i18n("checkFixed"),true);
+        } else {
+          displayMsg(i18n("checkNotFixed"),true);
+        }
+      }
+    }
+  
+    if (!$errors) {
+      displayOK(i18n("checkNoError"));
   
     }
   }
+  
+  
 }?>
