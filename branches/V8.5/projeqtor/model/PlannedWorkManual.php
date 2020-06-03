@@ -429,9 +429,9 @@ class PlannedWorkManual extends GeneralWork {
     $listOfDayByEtp=$obj->countGroupedSqlElementsFromCriteria(null,array('refId','day','period'), $where);
     echo '<table>';
     echo '<tr>';
-    echo '<td class="reportTableHeader" style="width:'.$nameWidth.'px">'.i18n('Project').'</td>';
-    echo '<td class="reportTableHeader" style="width:'.($nameWidth+($idWidth*2)).'px" colspan="3">'.i18n('Activity').'</td>';
-    echo '<td class="reportTableHeader" style="width:'.$idWidth.'px">'.i18n('unitCapacity').'</td>';
+    echo '<td class="reportTableHeader" style="min-width: '.$nameWidth.'px;width:'.$nameWidth.'px">'.i18n('Project').'</td>';
+    echo '<td class="reportTableHeader" style="min-width: '.($nameWidth+($idWidth*2)).'px;width:'.($nameWidth+($idWidth*2)).'px" colspan="3">'.i18n('Activity').'</td>';
+    echo '<td class="reportTableHeader" style="min-width: '.$idWidth.'px;width:'.$idWidth.'px">'.i18n('unitCapacity').'</td>';
     if ($monthYear) {
       for ($i=1;$i<=$nbDays;$i++) {
         $date=$year.'-'.$month.'-'.(($i<10)?'0':'').$i;
@@ -439,8 +439,7 @@ class PlannedWorkManual extends GeneralWork {
         else $classDay="noteHeader";
         echo '<td class="'.$classDay.'" style="padding:0;font-weight:normal;width:'.$size.'px">'.$i.'</td>';
       }
-    }
-    
+    }   
     echo '</tr>';
     if(count($list)== 0){
       echo '<tr><td colspan="2">';
