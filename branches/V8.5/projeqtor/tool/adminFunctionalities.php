@@ -108,6 +108,8 @@ if ($adminFunctionality=='sendAlert') {
   Consistency::checkInvalidFilters($correct, false);
   echo "<div class='consistencySection' style=''>".i18n('sectionCheckPool')."</div>";
   Consistency::checkPools($correct, false);
+  echo "<div class='consistencySection' style=''>".i18n('sectionCheckProject')."</div>";
+  Consistency::checkProject($correct, false); 
   
   $result=false;
   Sql::commitTransaction();
