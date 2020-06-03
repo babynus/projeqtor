@@ -11,10 +11,50 @@
    :scale: 60
    
 
+.. |CronRunning| image:: images/iconCronRunning.png
+	:alt: icon Cron Running
 
+.. |CronStopped| image:: images/iconCronStopped.png
+	:alt: icon Cron Running
+	
+	
+	
+	
+	
+	
+	
+.. |switchmode| image:: images/iconChangeLayout.png
+	:alt: Switch mode	
+	
+.. |horizontalLayout| image:: images/horizontalLayout.png	
+	:alt: Mode horizontal
+	
+.. |verticalLayout| image:: images/verticalLayout.png	
+	:alt: Mode vertical		
+	
+.. |LayoutList| image:: images/iconLayoutList.png	
+	:alt: Layout list	
 
+.. |LayoutTab| image:: images/iconLayoutTab.png	
+	:alt: Layout tab	
+		
+.. |HideLeft| image:: images/iconHideStreamLeft.png	
+	:alt: Hide stream left	
 
+.. |HideTop| image:: images/iconHideStreamTop.png	
+	:alt: Hide stream top	
 
+.. |ActivityStream| image:: images/iconActivityStream.png	
+	:alt: Show/Hide Activity Stream	
+
+.. |FullScreen| image:: images/iconFullScreen.png	
+	:alt: Full screen	
+	
+		
+	
+	
+	
+	
 .. |meetingPlay| image:: images/meetingPlay.png
    :alt: LiveMeeting Play
    :scale: 60

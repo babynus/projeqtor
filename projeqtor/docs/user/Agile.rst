@@ -348,7 +348,7 @@ Find below the details of the tiles of your kanbans
   
   |ten| Priority of the element
   
-  |eleven| Add a commentary on the element
+  |eleven| Add a commentary on the element. If there are notes, the number of these is then indicated on the note icon of the tile.
   
   |twelve| Edit the element
   

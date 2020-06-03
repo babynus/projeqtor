@@ -43,7 +43,14 @@ Starts and stops background jobs that process and periodically checks the flags 
    
    Background tasks is running in Administration console
    
+You can activate or deactivate CRON directly from the info bar
 
+See: :ref:`The CRON button<ib-cron-button>`
+
+.. figure:: /images/GUI/ADMIN_ZONE_ButtonCRON.PNG
+   :alt: CRON Button
+   
+   CRON activation button
 
 
 .. index:: Internal alert, Background tasks

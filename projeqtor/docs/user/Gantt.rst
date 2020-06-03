@@ -670,10 +670,19 @@ For each planning element, the progress data are displayed at them right.
    
 
 
-For more explanations and understanding of the mechanism on the display of columns, 
+.. note:: for more explanations and understanding of the mechanism on the display of columns, 
 
-see the chapter on :ref:`Display the columns<displayed-columns>` in the graphical user interface.
+   see the chapter on :ref:`Display the columns<displayed-columns>` in the graphical user interface.
 
+
+On the Project Portfolio screen, colored columns are displayed in addition to those in the simple planning view.
+
+It is about the life and general health of your project. With the health status, quality level, trend and progress columns.
+
+.. figure:: /images/GUI/GANTT_ZONE_ProjectPortfolio_Columns.png
+   :alt: Projects portfolio columns
+   
+   Projects portfolio columns
 
 
 
