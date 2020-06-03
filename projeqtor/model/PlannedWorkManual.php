@@ -226,6 +226,7 @@ class PlannedWorkManual extends GeneralWork {
   }
   
   public static function drawLine($scope, $idResource, $year, $month, $refType, $refId, $readonly=false) {
+    SqlElement::$_cachedQuery['WorkPeriod']=array();
     // draw line for given resource and month
     // if $idAssignment is not null, we are on update of existing assignment
     // if $idActivity is not null, we are on creation of new assignment (so no existing data to retreive)
@@ -254,6 +255,8 @@ class PlannedWorkManual extends GeneralWork {
         echo '<td style="border:0;background-color:transparent"></td>'; 
         continue;
       }
+      $locked=false;
+      $validated=false;
       $colorAM='#ffffff';
       $colorPM='#ffffff';
       $letterAM='';
@@ -262,6 +265,13 @@ class PlannedWorkManual extends GeneralWork {
       if (isOffDay($date,$resObj->idCalendarDefinition)) {
         $colorAM="#d0d0d0";
         $colorPM="#d0d0d0";
+      }
+      $week=weekFormat($date);
+      $week=substr($week, 0,4).substr($week, 5,7);
+      $workPeriod=SqlElement::getSingleSqlElementFromCriteria('WorkPeriod', array('idResource'=>$idResource,'periodValue'=>$week));
+      if($workPeriod->validated or $workPeriod->submitted){
+        $validated=true;
+        $locked=true;
       }
       //if ($i%4==0) $colorAM='#f0a0a0';
       //if ($i%5==0) $colorAM='#a0a0f0';
@@ -279,16 +289,21 @@ class PlannedWorkManual extends GeneralWork {
           }
         }
       }
-      echo '<td style="border:1px solid #a0a0a0;">';
+      echo '<td style="border:1px solid #a0a0a0; position:relative">';
       echo '<table style="width:100%;height:100%">';
       $color=getForeColor($colorAM);
-      $cursor=($readonly)?"normal":"pointer";
-      $onClickAM=($readonly)?'':'onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'AM\',event);"';
-      $onClickPM=($readonly)?'':'onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'PM\',event);"';
+      $cursor=($readonly or $locked)?"normal":"pointer";
+      $onClickAM=($readonly or $locked)?'':'onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'AM\',event);"';
+      $onClickPM=($readonly or $locked)?'':'onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'PM\',event);"';
       echo '<tr style="height:'.$midSize.'px;"><td '.$onClickAM.' style="cursor:'.$cursor.';width:100%;background:'.$colorAM.';border-bottom:1px solid #e0e0e0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterAM.'</div></td></tr>';
       $color=getForeColor($colorPM);
       echo '<tr style="height:'.$midSize.'px;"><td '.$onClickPM.' style="cursor:'.$cursor.';width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterPM.'</div></td></tr>';
       echo '</table>';  
+      if ($validated) {
+        //$positionGrid=($totalRemplissage<100)?$totalRemplissage:100;
+        $background = 'repeating-linear-gradient(-45deg,#505050,#505050 2px,transparent 2px,transparent 8px);#00BFFF';
+        echo '<div style="position:absolute;top:0;background:'.$background.'; height:'.$size.'px;width:'.$size.'px"> </div>';
+      }
       echo '</td>';
     }
   }
