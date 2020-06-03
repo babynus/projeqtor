@@ -888,6 +888,7 @@ See: :ref:`thumbnails`
    * |buttonIconEmail| :ref:`Send details<email-detail>`
    * |iconSubscribe| :ref:`Subscribe detail<subscribe-detail>`
    * |buttonIconMultipleUpdate| :ref:`Multiple update<multiple-update>`
+   * |ActivityStream| :ref:`Activity Stream<gui-activity-stream>`
    * |buttonIconShowHistory| :ref:`Show history<change-history>`
    * |buttonIconShowChecklist| :ref:`Show checklist<dw-show-checklist>`
 
@@ -959,6 +960,8 @@ See: :ref:`thumbnails`
 
       The new item has the status **copied**.
       
+      The information to copy is different depending on the item selected
+      
       
       .. figure:: /images/GUI/GUI_BOX_CopyItem.png 
          :alt: Dialog box - Copy element
@@ -966,7 +969,13 @@ See: :ref:`thumbnails`
          
          Copy element
          
- 
+
+      .. figure:: /images/GUI/GUI_BOX_CopyItemProject.png 
+         :alt: Dialog box - Copy element
+         :align: center
+         
+         Copy project
+          
       The options displayed in dialog box depends on whether the element is simple or complex.
 
 
@@ -1218,6 +1227,25 @@ See: :ref:`thumbnails`
       
 
       :ref:`Return to details windows buttons<detail-window-button>`
+
+
+
+.. index:: Activity Stream
+
+.. _gui-activity-stream:
+
+ .. compound:: |ActivityStream| Activity Stream
+  
+  This icon allows you to display the Stream activity in a unique way on the selected element.
+  
+  Unlike the Activity Stream icon in the Display layout menu which activates it globally on all screens.
+  
+  The last position of the activity stream is always saved.
+ 
+ See: :ref:`activity-stream`
+
+
+
 
 
 .. index:: Change history
@@ -1496,11 +1524,23 @@ The access to view the checklist depends on your access rights.
 Info bar
 --------
 
+
+
+.. figure:: /images/GUI/GUI_ZONE_InfosBar.png
+   :alt: Info bar zone
+   :align: center
+
+   Info bar
+   
+   
+   
 .. topic:: Interface areas:
 
-   |one| :ref:`Version button<ib-version-button>` 
+   |one| :ref:`CRON button<ib-cron-button>`
    
-   |two| :ref:`Session<session_loginwindows>` 
+   |two| :ref:`Version button<ib-version-button>` 
+   
+   |three| :ref:`Session<session_loginwindows>` 
    
          |a|  :ref:`Log out button<log-out-button>` 
    
@@ -1523,26 +1563,36 @@ Info bar
          |i|  :ref:`About ProjeQtOr<ib-about-projeqtor>`    
               
             
-   |three| :ref:`Switched mode button<ib-switch-mode-button>`
-      
-   |four| :ref:`Full-screen button<ib-fullscr-button>` 
+   |four| :ref:`Screen layout<ib-screen-layout>`
+     
    
-   |five| :ref:`Hide and show menu button<ib-menu-button>`
+   
    
 
 
-.. figure:: /images/GUI/GUI_ZONE_InfosBar.png
-   :alt: Info bar zone
-   :align: center
 
-   Info bar
-   
-   
+.. _ib-cron-button:
+
+.. rubric:: |oneBLC| Cron button
+
+The CRON activation button allows you to quickly see if your CRON is launched or not.
+
+|CronRunning| the CRON is running
+
+|CronStopped| the CRON is stopped
+
+Click on the button to start or stop CRON in the same way as on the Administration page.
+
+See: :ref:`background-task`
+
+:ref:`Return to Info bar<info-bar>`
+
+
    
 
 .. _ib-version-button:
 
-.. rubric:: |oneBLC| Version button
+.. rubric:: |twoBLC| Version button
 
 Displays the version of ProjeQtOr installed
 
@@ -1554,7 +1604,7 @@ Click on the button to access the site of ProjeQtOr.org
 
 .. _session_loginwindows:
 
-.. rubric:: |twoBLC| Session 
+.. rubric:: |threeBLC| Session 
 
 .. figure:: /images/GUI/GUI_BOX_LogoInfos.png
    :alt: Infos Area
@@ -1720,48 +1770,69 @@ login window with many setup shortcuts.
          
          
          
-.. _ib-switch-mode-button:
+.. _ib-screen-layout:
 
-.. rubric:: |threeBLC| Switched mode button
+.. rubric:: |fourBLC| Screen layout
 
-Allows to enable or disable switched mode that allows to switch between list and detail windows.
-      
-Window selected is displayed in "full screen" mode.
-      
-Hidden window are replaced by a gray bar.
-      
-Click on the gray bar to switch between windows. 
+Screen layout allows you to choose how you want to display the ProjeQtOr interface.
 
-.. note:: **User parameter Switched mode**
-      
-      This parameter defines whether switching mode is enabled or not.
-      
+.. figure:: /images/GUI/GUI_ZONE_ScreenLayout.png
+   :alt: Screen layout 
+   
+   Screen layout
 
-:ref:`Return to Info bar<info-bar>`
+Many modes are available!
 
 
+      .. compound:: |switchmode| switched mode 
+   
+        Allows to enable or disable switched mode that allows to switch between list and detail windows. Window selected is displayed in "full screen" mode.
+         
+        Hidden window are replaced by a gray bar. Click on the gray bar to switch between windows. 
+   
+      .. compound:: |horizontalLayout| Horizontal mode - |verticalLayout| vertical layout
+   
+        The horizontal mode corresponds to the historical presentation of ProjeQtOr. 
+    
+        List area at the top of the screen and the detail area below.
+    
+        Vertical mode allows you to have the list box on the left of the screen and the details box on the right.
+         
+      .. compound:: |LayoutList| Mode List
+   
+        Column mode corresponds to the historical presentation of ProjeQtOr, where the different parts making up the details area are displayed in one, two or three columns
+   
+      .. compound:: |LayoutTab| Mode Tab
+   
+        The sections present in the columns are dispatched under tabs with the tab mode.
+   
+      .. compound:: |HideLeft| Show/Hide left Menu - |HideTop| Show/Hide top Menu
+   
+        You can either hide the left menu, the top menu, or both.
+   
+      .. compound:: |ActivityStream| Show/Hide Activity Stream
+   
+        Show or hide globally (on all screens), the notes area for each element.
+   
+        To display notes only on a specific screen, choose |ActivityStream| from the details area toolbar.
+   
+        See: :ref:`detail-window-button`
+   
+      .. compound:: |FullScreen| Full screen mode
+   
+        With this mode, you make your browser invisible, the menus, navigation bar, buttons ... are hidden. You can enjoy your ProjeQtOr instance in full screen mode.
+   
+        :ref:`Return to Info bar<info-bar>`
 
 
-.. _ib-fullscr-button:
-
-.. rubric::  |fourBLC| Full-screen button
-
-One-click to displays in full Screen view.
-
-:ref:`Return to Info bar<info-bar>`
 
 
-.. _ib-menu-button:
 
-.. rubric:: |fiveBLC| Hide and show menu button
 
-Allows to hide or show the menu section.
 
-:ref:`Return to Info bar<info-bar>`
 
-.. note:: **User parameter "Hide menu"**
 
-    This parameter defines whether the menu is hidden by default.
+
 
 
 

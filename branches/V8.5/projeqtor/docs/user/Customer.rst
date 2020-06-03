@@ -4,22 +4,27 @@
 
     \newpage
 
-.. title:: Customers & Contacts
+.. title:: Clients & Contacts
 
-.. index:: Customer
+.. index:: Client
 
 .. _customer:
 
-Customers
----------
+Clients
+-------
 
-The customer is the entity for which the project is set.
+The client is the entity for which the project is set.
 
 It is generally the owner of the project, and in many cases it is the payer.
 
 It can be an internal entity, into the same enterprise, or a different enterprise, or the entity of an enterprise.
 
-The customer defined here is not a person. Real persons into a customer entity are called “Contacts”. 
+The client defined here is not a person. Real persons into a client entity are called “Contacts”. 
+
+.. figure:: /images/GUI/CUSTOMER_SCR_Clients.PNG
+   :alt: Clients screen
+   
+   Clients screen
 
 .. rubric:: Section Description
 
@@ -37,36 +42,42 @@ The customer defined here is not a person. Real persons into a customer entity a
    * - Field
      - Description
    * - :term:`Id`
-     - Unique Id for the customer.
-   * - |RequiredField| Customer name
-     - Short name of the customer.
-   * - |RequiredField| Type of customer
-     - Type of customer.
-   * - Customer code
-     - Code of the customer.
+     - Unique Id for the client.
+   * - |RequiredField| client name
+     - Short name of the client.
+   * - |RequiredField| Type of client
+     - Type of client.
+   * - Client code
+     - Code of the client.
    * - Payment deadline
-     - The payment deadline is stated on the bill for this customer.
+     - The payment deadline is stated on the bill for this client.
    * - Tax
-     - Tax rates that are applied to bill amounts for this customer.
+     - Tax rates that are applied to bill amounts for this client.
    * - Tax number
      - Tax reference number, to be displayed on the bill. 
    * - :term:`Closed`
-     - Flag to indicate that the customer is archived.
+     - Flag to indicate that the client is archived.
    * - :term:`Description`
-     - Complete description of the customer.
+     - Complete description of the client.
 
 .. rubric:: Address section
 
-Full address of the customer.
+Full address of the client.
 
 .. rubric:: Projects section
 
-List of the projects of the customer.
+List of projects related to the client.
 
 .. rubric:: Contacts section
 
-Displays the names of customer-related contacts. 
+Displays the names of client-related contacts. 
 
+.. figure:: /images/GUI/CUSTOMER_ZONE_Contacts.PNG
+   :alt: Contacts section
+   
+   Contacts section
+   
+   
 You can create the contacts directly on the contact screen.
 
 But you can create the contacts directly into the contact section
@@ -74,13 +85,51 @@ But you can create the contacts directly into the contact section
 * Click on |buttonAdd| to create the contact
 * Click on |buttonIconDelete| to delete the contact
 
+When you want to add a contact, the window with the existing list of clients is displayed.
+
+You can select or create a contact from this window, the information will be reflected directly in the contact screen.
+
+.. figure:: /images/GUI/CUSTOMER_ZONE_AddContacts.PNG
+   :alt: Details of list element
+   
+   Details of list element
+   
+   
+.. rubric:: Client quotation, client commands list and client bill list 
+
+These sections allow you to have a summary of the various financial documents concerning the client selected.
+
+You find the list of quotes, orders and invoices of this client in tables for easy reading
+
+.. figure:: /images/GUI/CUSTOMER_ZONE_Financial.png
+   :alt: financial monitoring sections
+   
+   Financial monitoring sections
+
+
+
+.. rubric:: List of tickets
+
+This section allows you to see all open tickets for the selected client.
+
+
+.. figure:: /images/GUI/CUSTOMER_ZONE_Tickets.PNG
+   :alt: List of tickets for this client
+   
+   List of tickets for this client
+   
+.. note:: To display these sections, you must set the options "list quotes, commands and bills on client form" on yes in the global parameters but also in the user parameters.   
+
+   See: :ref:`Global Parameters TAB Display<display>`
+   See: :ref:`Users Parameters TAB Display<display-parameters>`  
+
 
 .. raw:: latex
 
     \newpage
 
 .. index:: Contact (Screen)
-.. index:: Customer (Contact) 
+.. index:: Client (Contact) 
 
 .. _contact:
 
@@ -97,7 +146,7 @@ A contact is a person in a business relationship with the company.
 
 The company keeps all information data to be able to contact him when needed.
 
-A contact can be a person in the customer organization.
+A contact can be a person in the client organization.
 
 A contact can be the contact person for contracts, sales and billing.
 
@@ -137,7 +186,7 @@ A contact can be the contact person for contracts, sales and billing.
    * - Profile
      - Profile of the user.
    * - Customer
-     - The customer the contact belongs to
+     - The client the contact belongs to
    * - Function
      - Function of contact
    * - Phone
