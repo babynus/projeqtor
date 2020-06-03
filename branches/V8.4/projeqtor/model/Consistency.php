@@ -911,7 +911,6 @@ class Consistency {
     $as=new Assignment(); 
     $asTable=$as->getDatabaseTableName();
     $query="SELECT w.id, w.idProject as idproject, w.refType as reftype, w.refId as refid from $wkTable w where w.idProject <> ( select idProject from $peTable pe where pe.refType=w.refType and pe.refId=w.refId)";
-    debugLog($query);
     $result=Sql::query($query);
     while ($line = Sql::fetchLine($result)) {
       $id=$line['id'];
