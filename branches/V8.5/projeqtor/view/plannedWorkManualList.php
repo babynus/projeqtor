@@ -223,46 +223,53 @@ $currentMonth = strftime("%m");
     <?php 
     if(!isset($yearSpinner))$yearSpinner=$currentYear;
     if(!isset($monthSpinner))$monthSpinner=$currentMonth;
+    
+    
+    
+    $listResource = array();
+    $resourceId = null;$inIdTeam = null;$inIdOrga = null;$onlyRes = false;
+    if(isset($userName)){
+      $resourceId = trim($userName);
+    }
+    if(isset($idOrganization)){
+      $inIdOrga = trim($idOrganization);
+    }
+    if(isset($team)){
+      $inIdTeam = trim($team);
+    }
+    if ($resourceId and !$inIdTeam and !$inIdOrga) {
+      $listResource[0] = $resourceId;
+      $onlyRes=true;
+    }else{
+      $res = new Resource();
+      if(!$resourceId and $inIdTeam and !$inIdOrga){
+        $listResource = $res->getSqlElementsFromCriteria(array('idTeam'=>$inIdTeam,'idle'=>'0'));
+      }elseif(!$resourceId and !$inIdTeam and $inIdOrga){
+        $listResource = $res->getSqlElementsFromCriteria(array('idOrganization'=>$inIdOrga,'idle'=>'0'));
+      }elseif($resourceId and $inIdTeam and $inIdOrga){
+        $listResource = $res->getSqlElementsFromCriteria(array('id'=>$resourceId,'idTeam'=>$inIdTeam,'idOrganization'=>$inIdOrga,'idle'=>'0'));
+      }elseif($resourceId and $inIdTeam and !$inIdOrga){
+        $listResource = $res->getSqlElementsFromCriteria(array('id'=>$resourceId,'idTeam'=>$inIdTeam,'idle'=>'0'));
+      }elseif($resourceId and !$inIdTeam and $inIdOrga){
+        $listResource = $res->getSqlElementsFromCriteria(array('id'=>$resourceId,'idOrganization'=>$inIdOrga,'idle'=>'0'));
+      }elseif(!$resourceId and $inIdTeam and $inIdOrga){
+        $listResource = $res->getSqlElementsFromCriteria(array('idTeam'=>$inIdTeam,'idOrganization'=>$inIdOrga,'idle'=>'0'));
+      }else{
+        $displayNothing = true;
+      }
+    }
     $size=30;
     PlannedWorkManual::setSize($size);
+    $topHeight=Parameter::getUserParameter('contentPanePlanningManualTopAreaHeight');
+    if ($topHeight) $topHeight.='px';
+    else $topHeight='30%';
     ?>
     <div id="fullPlannedWorkManualList" name="fullPlannedWorkManualList" dojoType="dijit.layout.ContentPane" region="center" splitter="false">
       <div dojoType="dijit.layout.BorderContainer" >
-        <div  dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:30%" id="planningManualTopArea" onscroll="dojo.byId('planningManualBottomArea').scrollLeft=(this.scrollLeft);">
-        <?php  $listResource = array();
-              $resourceId = null;$inIdTeam = null;$inIdOrga = null;$onlyRes = false;
-              if(isset($userName)){
-                $resourceId = trim($userName);
-              }
-              if(isset($idOrganization)){
-                $inIdOrga = trim($idOrganization);
-              }
-              if(isset($team)){
-                $inIdTeam = trim($team);
-              }
-             
-              if ($resourceId and !$inIdTeam and !$inIdOrga) {
-                $listResource[0] = $resourceId;
-                $onlyRes=true;
-              }else{
-                $res = new Resource();
-                if(!$resourceId and $inIdTeam and !$inIdOrga){
-                  $listResource = $res->getSqlElementsFromCriteria(array('idTeam'=>$inIdTeam,'idle'=>'0'));
-                }elseif(!$resourceId and !$inIdTeam and $inIdOrga){
-                  $listResource = $res->getSqlElementsFromCriteria(array('idOrganization'=>$inIdOrga,'idle'=>'0'));
-                }elseif($resourceId and $inIdTeam and $inIdOrga){
-                  $listResource = $res->getSqlElementsFromCriteria(array('id'=>$resourceId,'idTeam'=>$inIdTeam,'idOrganization'=>$inIdOrga,'idle'=>'0'));
-                }elseif($resourceId and $inIdTeam and !$inIdOrga){
-                  $listResource = $res->getSqlElementsFromCriteria(array('id'=>$resourceId,'idTeam'=>$inIdTeam,'idle'=>'0'));
-                }elseif($resourceId and !$inIdTeam and $inIdOrga){
-                  $listResource = $res->getSqlElementsFromCriteria(array('id'=>$resourceId,'idOrganization'=>$inIdOrga,'idle'=>'0'));
-                }elseif(!$resourceId and $inIdTeam and $inIdOrga){
-                  $listResource = $res->getSqlElementsFromCriteria(array('idTeam'=>$inIdTeam,'idOrganization'=>$inIdOrga,'idle'=>'0'));
-                }else{
-                  $displayNothing = true;
-                }
-              }?>
-    
+        <div  dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:<?php echo $topHeight;?>" id="planningManualTopArea" onscroll="dojo.byId('planningManualBottomArea').scrollLeft=(this.scrollLeft);">
+          <script type="dojo/connect" event="resize" args="evt">
+            saveContentPaneResizing("contentPanePlanningManualTopAreaHeight", dojo.byId("planningManualTopArea").offsetHeight, true);
+         </script>
           <div id="activityTable" name="activityTable" style="margin:20px;min-width:1575px">
           <?php if(!$displayNothing){
                   if(isset($idProject)){
@@ -286,8 +293,7 @@ $currentMonth = strftime("%m");
             }
           ?>
           </div>
-          <div id="plannedWorkManualInterventionDiv"  name="plannedWorkManualInterventionDiv" style="min-width:1123px;left:474px;top:20px;position:absolute;">
-            
+          <div id="plannedWorkManualInterventionDiv"  name="plannedWorkManualInterventionDiv" style="min-width:1123px;left:474px;top:20px;position:absolute;">         
                   <?php 
                   if(!$displayNothing){
                     $listMonth=array($yearSpinner.$monthSpinner);

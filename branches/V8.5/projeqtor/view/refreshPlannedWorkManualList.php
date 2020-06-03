@@ -68,17 +68,22 @@ if ($resourceId and !$inIdTeam and !$inIdOrga) {
 }
 $size=30;
 PlannedWorkManual::setSize($size);
-
+$topHeight=Parameter::getUserParameter('contentPanePlanningManualTopAreaHeight');
+if ($topHeight) $topHeight.='px';
+else $topHeight='30%';
 ?>
   <div dojoType="dijit.layout.BorderContainer" >
-    <div  dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:30%">
-      <div id="activityTable" name="activityTable" style="margin:20px;">
+    <div  dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:<?php echo $topHeight;?>" id="planningManualTopArea" onscroll="dojo.byId('planningManualBottomArea').scrollLeft=(this.scrollLeft);">
+      <script type="dojo/connect" event="resize" args="evt">
+        saveContentPaneResizing("contentPanePlanningManualTopAreaHeight", dojo.byId("planningManualTopArea").offsetHeight, true);
+      </script>
+      <div id="activityTable" name="activityTable" style="margin:20px;min-width:1575px">
         <?php if(!$displayNothing){
                 PlannedWorkManual::drawActivityTable($idProject,$yearSpinner.$monthSpinner); 
               }?>
       </div>
     </div>
-    <div  dojoType="dijit.layout.ContentPane" region="center" style="overflow:auto">
+    <div  dojoType="dijit.layout.ContentPane" region="center" style="overflow:auto" id="planningManualBottomArea" onscroll="dojo.byId('planningManualTopArea').scrollLeft=(this.scrollLeft);">
       <div style="position: absolute; left:20px;top:20px;">
             <?php 
         if(!$displayNothing){

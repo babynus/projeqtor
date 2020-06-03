@@ -250,6 +250,7 @@ class Absence{
   }
   
   static function drawCalandarDiv($userID, $currentYear){
+    SqlElement::$_cachedQuery['WorkPeriod']=array();
     // Activity calendar view
     $proj = new Project();
     $act = new Activity();
