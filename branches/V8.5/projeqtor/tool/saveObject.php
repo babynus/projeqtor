@@ -73,7 +73,11 @@ if ($newObj->id == '0') {
 if ($newObj->id and $obj->id and $newObj->id != $obj->id) {
   throwError ( 'last save object (' . get_class ( $obj ) . ' #' . $obj->id . ') is not the expected object (' . $className . ' #' . $newObj->id . ').' );
 }
-
+if ((get_class ($newObj)=='Ticket' or get_class ($newObj)=='TicketSimple') and $newObj->id and (!is_object($newObj->WorkElement) or !$newObj->WorkElement->id)) {
+  $we=SqlElement::getSingleSqlElementFromCriteria('WorkElement', array('refType'=>'Ticket','refId'=>$newObj->id));
+  $newObj->WorkElement=$we;
+  $newObj->fillFromRequest($ext); // Execute again fillFromRequest to get data
+}
 // save to database
 if (RequestHandler::isCodeSet('selectedResource') and ($newObj->id or RequestHandler::getValue('selectedResource')=='false')) {
   RequestHandler::unsetCode('selectedResource');
