@@ -263,7 +263,7 @@ $currentMonth = strftime("%m");
                 }
               }?>
     
-          <div id="activityTable" name="activityTable" style="margin:20px;">
+          <div id="activityTable" name="activityTable" style="margin:20px;min-width:1570px">
           <?php if(!$displayNothing){
                   if(isset($idProject)){
                     if(trim($idProject)==''){
@@ -286,7 +286,7 @@ $currentMonth = strftime("%m");
             }
           ?>
           </div>
-          <div id="plannedWorkManualInterventionDiv"  name="plannedWorkManualInterventionDiv" style="min-width:1123px;left:475px;top:20px;position:absolute;">
+          <div id="plannedWorkManualInterventionDiv"  name="plannedWorkManualInterventionDiv" style="min-width:1123px;left:474px;top:20px;position:absolute;">
             
                   <?php 
                   if(!$displayNothing){
