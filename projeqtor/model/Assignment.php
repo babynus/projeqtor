@@ -504,7 +504,8 @@ class Assignment extends SqlElement {
     }
     
     $obj = new $this->refType($this->refId);
-    $planningMode = new PlanningMode($obj->ActivityPlanningElement->idPlanningMode);
+    $peFld=get_class($obj)."PlanningElement";
+    $planningMode = new PlanningMode($obj->$peFld->idPlanningMode);
       
     //gautier #4495
     if($this->id){
