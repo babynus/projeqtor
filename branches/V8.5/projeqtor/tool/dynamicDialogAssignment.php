@@ -488,7 +488,22 @@ if ($planningMode=='RECW') {
         <div id="plannedWorkManualAssignmentDiv" style="padding-top:10px;padding-bottom:10px;">
         <?php 
         $listResource=array($idResource);
-        $listMonth=array('202005','202006','202007','202008','202009','202010');
+        $listMonth=array();
+        $date = 12;
+        $diffDate = $date-7;
+        if($diffDate<=0){
+          $maxDate=$diffDate+12;
+          for($i=$date; $i<=$maxDate; $i++){
+	         array_push($listMonth, date('Y').$i);
+          }
+        }else{
+          for($i=$date; $i<=12; $i++){
+          	array_push($listMonth, date('Y').$i);
+          }
+          for($i=1; $i<=$diffDate; $i++){
+          	array_push($listMonth, date('Y').$i);
+          }
+        }
         $size=20;
         PlannedWorkManual::setSize($size);
         PlannedWorkManual::drawTable('assignment',$idResource, $listMonth, $refType.'#'.$refId, false);
