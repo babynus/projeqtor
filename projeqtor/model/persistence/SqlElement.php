@@ -2739,7 +2739,11 @@ abstract class SqlElement {
       if ($grouped) {
         $res=array();
         while ($line) {
-          $res[]=$line;
+          $resLine=array();
+          foreach($line as $key=>$val) {
+            $resLine[strtolower($key)]=$val;
+          }
+          $res[]=$resLine;
           $line = Sql::fetchLine ( $result );
         }
         return $res;
