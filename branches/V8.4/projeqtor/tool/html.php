@@ -1448,6 +1448,7 @@ function htmlEncodeJson($val, $numericLength=0) {
   $val = preg_replace('/[ ]{2,}|[\t]/', ' ', trim($val));
   
   if ($numericLength>0) {
+    if (strpos($val,'.')>0) $numericLength+=strlen($val)-strpos($val,'.');
     $val=str_pad($val,$numericLength,'0', STR_PAD_LEFT);
   }
   return $val;
