@@ -228,7 +228,7 @@ $currentMonth = strftime("%m");
     ?>
     <div id="fullPlannedWorkManualList" name="fullPlannedWorkManualList" dojoType="dijit.layout.ContentPane" region="center" splitter="false">
       <div dojoType="dijit.layout.BorderContainer" >
-        <div  dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:30%">
+        <div  dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height:30%" id="planningManualTopArea" onscroll="dojo.byId('planningManualBottomArea').scrollLeft=(this.scrollLeft);">
         <?php  $listResource = array();
               $resourceId = null;$inIdTeam = null;$inIdOrga = null;$onlyRes = false;
               if(isset($userName)){
@@ -263,7 +263,7 @@ $currentMonth = strftime("%m");
                 }
               }?>
     
-          <div id="activityTable" name="activityTable" style="margin:20px;min-width:1570px">
+          <div id="activityTable" name="activityTable" style="margin:20px;min-width:1575px">
           <?php if(!$displayNothing){
                   if(isset($idProject)){
                     if(trim($idProject)==''){
@@ -277,7 +277,7 @@ $currentMonth = strftime("%m");
                } ?>
           </div>
         </div>
-        <div  dojoType="dijit.layout.ContentPane" region="center" style="overflow:auto">
+        <div  dojoType="dijit.layout.ContentPane" region="center" style="overflow:auto" id="planningManualBottomArea" onscroll="dojo.byId('planningManualTopArea').scrollLeft=(this.scrollLeft);">
           <div style="position: absolute; left:20px;top:20px;">
           <?php 
             if(!$displayNothing){
