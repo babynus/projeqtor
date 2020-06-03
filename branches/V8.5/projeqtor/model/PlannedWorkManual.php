@@ -238,10 +238,20 @@ class PlannedWorkManual extends GeneralWork {
     $size=self::$_size;
     $midSize=($size-1)/2;
     $letterSize=($size/2)-2;
-    $crit="idResource=$idResource and workDate>='$year-$monthWithZero-01 and workDate<=$year-$monthWithZero-$lastDayWithZero'";
+    $crit="idResource=$idResource and workDate>='$year-$monthWithZero-01' and workDate<='$year-$monthWithZero-$lastDayWithZero'";
+    $critWork=$crit;
     if ($refType and $refId) {
       $crit.=" and refType='$refType' and refId=$refId";
     }
+    $w=new Work();
+    $wList=$w->sumSqlElementsFromCriteria('work', null, $critWork." and manual=0", 'workDate');
+    $realWork=array();
+    if ($wList) {
+      foreach ($wList as $sum) {
+        $realWork[$sum['workdate']]=$sum['sumwork'];
+      }
+    }
+    //$realWork=
     $pwm=new PlannedWorkManual();
     $lstPwm=$pwm->getSqlElementsFromCriteria(null,null,$crit);
     $exist=array();
@@ -273,12 +283,22 @@ class PlannedWorkManual extends GeneralWork {
         $validated=true;
         $locked=true;
       }
+      $real=(isset($realWork[$date]))?$realWork[$date]:0;
       //if ($i%4==0) $colorAM='#f0a0a0';
       //if ($i%5==0) $colorAM='#a0a0f0';
       //if ($i%3==0) $colorPM='#a0f0e0';
       if (isset($exist[$date])) {
         foreach (array('AM','PM') as $period) {
           if (isset($exist[$date][$period])) {
+            if ($real>0) {
+              if ($period=='AM') {
+                if ($locked=='AM') $locked=false;
+                else $locked='PM';  
+              } else {
+                if ($locked=='PM') $locked=false;
+                else $locked='AM';
+              }
+            }
             $type=$exist[$date][$period]['refType'];
             $id=$exist[$date][$period]['refId'];
             $mode=$exist[$date][$period]['mode'];
@@ -289,16 +309,24 @@ class PlannedWorkManual extends GeneralWork {
           }
         }
       }
+      if ($real>0.5) $locked='ALL';
       echo '<td style="border:1px solid #a0a0a0; position:relative">';
       echo '<table style="width:100%;height:100%">';
       $color=getForeColor($colorAM);
       $cursor=($readonly or $locked)?"normal":"pointer";
-      $onClickAM=($readonly or $locked)?'':'onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'AM\',event);"';
-      $onClickPM=($readonly or $locked)?'':'onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'PM\',event);"';
+      $onClickAM=($readonly or $locked=='AM' or $locked=='ALL')?'':'onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'AM\',event);"';
+      $onClickPM=($readonly or $locked=='PM' or $locked=='ALL')?'':'onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'PM\',event);"';
       echo '<tr style="height:'.$midSize.'px;"><td '.$onClickAM.' style="cursor:'.$cursor.';width:100%;background:'.$colorAM.';border-bottom:1px solid #e0e0e0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterAM.'</div></td></tr>';
       $color=getForeColor($colorPM);
       echo '<tr style="height:'.$midSize.'px;"><td '.$onClickPM.' style="cursor:'.$cursor.';width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterPM.'</div></td></tr>';
       echo '</table>';  
+      if ($real) {
+        $capacity=1;
+        $height=intval($size*$real/$capacity);
+        if ($height>$size) $height=$size;
+        $background = 'background-color:#aaaaaa;opacity:0.5';
+        echo '<div style="pointer-events: none;position:absolute;top:0;'.$background.'; height:'.$height.'px;width:'.$size.'px"> </div>';
+      }
       if ($validated) {
         //$positionGrid=($totalRemplissage<100)?$totalRemplissage:100;
         $background = 'repeating-linear-gradient(-45deg,#505050,#505050 2px,transparent 2px,transparent 8px);#00BFFF';
