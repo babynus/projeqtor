@@ -838,9 +838,17 @@ function refreshInterventionCapacity(date,idActivity,period) {
     form : 'listFormPlannedWorkManual',
     handleAs : "text",
     load : function(data) {
-      date = date.replace("-", "");
-      date = date.replace("-", "");
-      document.getElementById(date+period).style.background=data;
+      if(data){
+        var obj = JSON.parse(data);
+        date = date.replace("-", "");
+        date = date.replace("-", "");
+        if(obj.length == 7){
+          document.getElementById(idActivity+date+period).style.background=obj;
+        }else{
+          document.getElementById(idActivity+date+'AM').style.background=obj.substr(0,7);
+          document.getElementById(idActivity+date+'PM').style.background=obj.substr(7,13);
+        }
+      }
     }
   });
 }

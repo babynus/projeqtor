@@ -39,21 +39,44 @@ $period= trim(RequestHandler::getValue('period'));
 if (isOffDay($date)) {
   $color="#d0d0d0";
 }
-$month = substr($date, 0,-3);
-$month = str_replace ( '-' , "" , $month);
-$where= ' workdate="'.$date.'" and refType = "Activity" and period = "'.$period.'" and refId='.$refId;
-$obj=new PlannedWorkManual();
-$listOfDayByEtp=$obj->countGroupedSqlElementsFromCriteria(null,array('workdate'), $where);
 
-$myEtp = SqlElement::getSingleSqlElementFromCriteria("InterventionCapacity", array('refType'=>'Activity','refId'=>$refId,'month'=>$month));
-$etp = $myEtp->fte;
-
-if(isset($listOfDayByEtp[$date])){
-  $value = $listOfDayByEtp[$date];
-  if($value == $etp)$color = "#50BB50";
-  if($value > $etp)$color = "#BB5050";
+if(strlen($period)=="3"){
+ $colorAM = $color;
+ $colorPM = $color;
+ $month = substr($date, 0,-3);
+ $month = str_replace ( '-' , "" , $month);
+ $where= ' workdate="'.$date.'" and refType = "Activity" and refId='.$refId;
+ $obj=new PlannedWorkManual();
+ $listOfDayByEtp=$obj->countGroupedSqlElementsFromCriteria(null,array('workdate','period'), $where);
+ $myEtp = SqlElement::getSingleSqlElementFromCriteria("InterventionCapacity", array('refType'=>'Activity','refId'=>$refId,'month'=>$month));
+ $etp = $myEtp->fte;
+   if(isset($listOfDayByEtp[$date.'|AM'])){
+     $value = $listOfDayByEtp[$date.'|AM'];
+     if($value == $etp)$colorAM = "#50BB50";
+     if($value > $etp)$colorAM = "#BB5050";
+   }
+   if(isset($listOfDayByEtp[$date.'|PM'])){
+     $value = $listOfDayByEtp[$date.'|PM'];
+     if($value == $etp)$colorPM = "#50BB50";
+     if($value > $etp)$colorPM = "#BB5050";
+   }
+ $color = $colorAM.$colorPM;
+}else{
+  $month = substr($date, 0,-3);
+  $month = str_replace ( '-' , "" , $month);
+  $where= ' workdate="'.$date.'" and refType = "Activity" and period = "'.$period.'" and refId='.$refId;
+  $obj=new PlannedWorkManual();
+  $listOfDayByEtp=$obj->countGroupedSqlElementsFromCriteria(null,array('workdate'), $where);
+  $myEtp = SqlElement::getSingleSqlElementFromCriteria("InterventionCapacity", array('refType'=>'Activity','refId'=>$refId,'month'=>$month));
+  $etp = $myEtp->fte;
+  
+  if(isset($listOfDayByEtp[$date])){
+    $value = $listOfDayByEtp[$date];
+    if($value == $etp)$color = "#50BB50";
+    if($value > $etp)$color = "#BB5050";
+  }
 }
 
-echo $color;
+echo json_encode($color);
 
 ?>
