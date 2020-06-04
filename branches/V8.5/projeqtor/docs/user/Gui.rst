@@ -1041,7 +1041,11 @@ See: :ref:`thumbnails`
 
    .. compound:: |buttonIconDelete| Delete the item
    
-      To delete the selected element
+      To delete the selected element.
+      
+      Basically, some items cannot be deleted. For example, if actual work has been saved on an activity. The latter, as well as the project on which it depends, cannot be deleted.
+
+      To be able to delete these elements, go to the :ref:`Acces_Right` menu in the :ref:`specific_access` and choose YES in can force the deletion of the actual work in the "specific update rights" section.
       
       :ref:`Return to details windows buttons<detail-window-button>`
 
@@ -1189,13 +1193,14 @@ See: :ref:`thumbnails`
 
       Allows to update several items in one operation.
 
-         * The fields that can be updated depends on the element.
+         * The fields that can be updated depends on the selected element.
          * The fields are grouped by section.
          * Click on |buttonQuit| to quit the multiple mode window.
       
             .. compound:: **Select items**
       
                * Selection of items can be done by selecting one or more items in the list window. |one|
+               * You can use the shift key or the control key to select several consecutive lines or not.
                * Click to select the item, click again to deselect
                * Or use checkboxes to select/unselect all items in the list. |two|
                * The count of items selected is displayed. |three|
@@ -1223,8 +1228,25 @@ See: :ref:`thumbnails`
          .. figure:: /images/GUI/GUI_ZONE_MultipleUpdate.png
             :alt: multiple update on resource
             
-            multiple update on resource          
+            Multiple update on resource          
+
+
+.. _reset-all-password:
+
+      .. note:: 
       
+         The passwords of all users can be reset at the same time.
+
+         On the users screen, click on the multiple update button 
+
+         In the update area, click on the Reset button. 
+         
+         An email will be send to the selected users.
+         
+         .. figure:: /images/GUI/GUI_ZONE_MultipleUpdate_ResetPassword.png
+            :alt: Reset password with multiple update on user
+            
+            Reset password with multiple update on user        
 
       :ref:`Return to details windows buttons<detail-window-button>`
 

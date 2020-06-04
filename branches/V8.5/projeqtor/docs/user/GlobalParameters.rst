@@ -829,8 +829,11 @@ Parameters to manage how the connection behaves
          
          You can display or no the check box on the login screen "remember me" 
          
-         You can initialize password on user creation and defined a new password to random value 
+         You can initialize password on user creation 
 
+         You can defined a new password to random value 
+
+         You can reset all the password with the :ref:`multiple update fonction<reset-all-password>`
 
 .. _ldap_user:
 
