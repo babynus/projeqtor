@@ -141,9 +141,17 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     if ($selection) {
        $table[$selection]=SqlList::getNameFromId('Affectable', $selection);
     }
+    $planningMode = null;
+    if(property_exists(get_class($obj), get_class($obj).'PlanningElement')){
+      $peFld=get_class($obj)."PlanningElement";
+      $pMode = new PlanningMode($obj->$peFld->idPlanningMode);
+      $planningMode = $pMode->code;
+    }
     foreach ($list as $aff) {
       if (! array_key_exists($aff->idResource, $table)) {
         $id=$aff->idResource;
+        $isResourceTeam=SqlList::getFieldFromId(substr($col, 2), $id, 'isResourceTeam');
+        if($planningMode == 'MAN' and $isResourceTeam)continue;
         $name=SqlList::getNameFromId(substr($col, 2), $id);
         //if ($name==$id and $col=='idResource') { // PBE V6.0 : this would insert users in Reosurce list (for instance responsible on Ticket)
         //	$name=SqlList::getNameFromId('User', $id);
