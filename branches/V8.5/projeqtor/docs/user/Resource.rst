@@ -2,6 +2,7 @@
 
     \newpage
     
+.. title:: Resource
     
 .. include:: ImageReplacement.txt
 
@@ -14,12 +15,6 @@
 Resources
 *********
 
-.. figure:: /images/GUI/RESOURCE_SCR_CreateResource.png
-   :alt: create a resource
-   :align: center
-   
-   Details area of the resources screen
-    
 .. sidebar:: Concepts 
 
    * :ref:`projeqtor-roles`
@@ -28,15 +23,6 @@ Resources
    * :ref:`resource-function-cost`
    * :ref:`resource-calendar`
    * :ref:`photo`
-   
-   **Other section**
-   
-   * :ref:`Allocations<allocation-section>`
-   * :ref:`Assignment<assignment-section>`
-   * :ref:`Resource planning<resource-planning>`
-
-
-.. rubric:: Description zone
 
 The resources of a project can be human or material 
 Resource availability is defined by assigning it to a project.
@@ -50,14 +36,37 @@ Resource availability is defined by assigning it to a project.
   or a fictitious resource with a FTE> 1
   
   See: :ref:`pool`
+     
+   
+.. figure:: /images/GUI/RESOURCE_SCR_CreateResource.png
+   :alt: create a resource
+   :align: center
+   
+   Details area of the resources screen
+    
+
+   
 
 
+
+.. rubric:: Description zone
+
+  
+   
 .. figure:: /images/GUI/RESOURCE_ZONE_DescriptionResource.png
    :alt: Description zone
    :align: center
    
    Description field for creating a resource
 
+
+.. sidebar:: Other section
+   
+   * :ref:`Allocations<allocation-section>`
+   * :ref:`Assignment<assignment-section>`
+   * :ref:`Resource planning<resource-planning>`
+   
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -228,13 +237,16 @@ The resource will continue to report their charges normally, with no extra or re
    overbooking is a way of planning in the future without interacting with the behavior of the working time of the resources
    
 
+.. _allocated-asset-resource:
 
+.. rubric:: Allocated asset
 
+This section allows you to view all the equipment connected to the resource in the form of a simple table.
 
+each line of equipment is clickable and directs to the element screen.
 
-.. raw:: latex
+See: :ref:`asset-management`
 
-    \newpage
 
 .. index:: Resource (Function & Cost definition)   
    
@@ -377,8 +389,6 @@ The display of the scheduled load for the support resource, although it is not a
 .. raw:: latex
 
     \newpage
-
-.. title:: Pool of Resource
 
 .. index:: Pool of Resource (Definition) 
 

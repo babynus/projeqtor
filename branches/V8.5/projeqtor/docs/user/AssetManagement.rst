@@ -39,6 +39,12 @@ This new screen allows you to manage lists of licenses, versions, products or ev
    Asset management screen
 
 
+.. note:: 
+
+   Each asset related to a resource or an user, is displayed on the Resource screen and the user screen
+   
+   See: :ref:`Resource<allocated-asset-resource>` - See: :ref:`User<allocated-asset-user>`
+
 .. rubric:: Description
 
 This section allows you to enter the details of the composition of an item of equipment.
@@ -92,7 +98,24 @@ This section allow to define:
 
 * the closed check box. Which allows to put the equipment in archive mode.     
 
+.. rubric:: Costs section
 
+This section allow to define costs for the selected asset.
+
+You can set a cost for:
+
+* Purchase value
+* The warranty period
+* End of warranty date
+* The amortization period
+* The need for insurance
+
+.. figure:: /images/GUI/ASSETMANAGMENT_ZONE_Costs.png
+   :alt: Costs section
+   
+   Costs section
+   
+   
 
 .. rubric:: Asset composition section
 
@@ -153,6 +176,20 @@ But you can also create even more detailed lists with types of information stora
      - Description of the type.
 
 
+You can define an icon for each type of asset.  
+
+ProjeQtOr puts some icons at your disposal but you can create and import yours in the application.
+ 
+
+.. figure:: /images/GUI/ASSETMANAGMENT_ZONE_Description.png
+   :alt: Description section
+   
+   Choose your icon in th description section
+   
+   
+Save your icons in the **www\\projeqtor\\view\\icons** folder and relaunch the application.    
+   
+   
 .. _asset-category:
 
 Asset category
@@ -236,6 +273,15 @@ Location
 
 Location screen allow to create a list of places so that you can locate your equipment.
 
+
+.. figure:: /images/GUI/ASSETMANAGMENT_SCR_Location.PNG
+   :alt: Location screen
+   
+   Location screen
+   
+
+.. rubric:: Description section
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Required fields |ReqFieldLegend|
@@ -256,4 +302,16 @@ Location screen allow to create a list of places so that you can locate your equ
      
 The "location" fields in the assets screen offers the possibility of selecting from the recorded list of locations and a manual entry field allowing you to add details with alphanumeric characters.
 
-    
+
+
+.. rubric:: Adress section
+
+
+You can complete the axacte address by filling in numerous fields : 
+   
+* Street 
+* Complement
+* Zip code
+* City
+* State
+* Country

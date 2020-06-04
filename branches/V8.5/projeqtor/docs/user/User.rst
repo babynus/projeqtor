@@ -16,9 +16,18 @@ Users
 
 The user is a person that will be able to connect to the application.
 
-.. attention:: 
+.. warning:: 
 
    To be able to connect, the user must have a password and a user profile defined.
+
+
+.. figure:: /images/GUI/USER_SCR_Userscreen.png
+   :alt: User screen
+   
+   User screen
+   
+   
+
 
 .. _ldap_users:
 
@@ -31,6 +40,8 @@ ProjeQtOr offers three modes of authentication.
     * Users' information is kept in the application database.
     * Password policy and login behavior are managed by the application.
     * See: :ref:`user_password`
+    
+    
     .. note::
        
        The users "admin" and "guest" are created during installation.
@@ -64,6 +75,18 @@ ProjeQtOr offers three modes of authentication.
 
 .. rubric:: Section Description
 
+.. sidebar:: Other sections
+
+   * :ref:`Allocations<allocation-section>`   
+
+   **Concepts**
+
+   * :ref:`projeqtor-roles`
+   * :ref:`profiles-definition`
+   * :ref:`user-ress-contact-demystify`
+   * :ref:`photo`
+   
+   
 .. tabularcolumns:: |l|l|
 
 .. list-table:: Users description section fields - Required Field |ReqFieldLegend| 
@@ -97,16 +120,7 @@ ProjeQtOr offers three modes of authentication.
    * - Description
      - Complete description of the user.
 
-.. sidebar:: Other sections
 
-   * :ref:`Allocations<allocation-section>`   
-
-   **Concepts**
-
-   * :ref:`projeqtor-roles`
-   * :ref:`profiles-definition`
-   * :ref:`user-ress-contact-demystify`
-   * :ref:`photo`
 
 .. warning:: **User name**
 
@@ -114,13 +128,35 @@ ProjeQtOr offers three modes of authentication.
 
 .. topic:: Is a contact
    
-   * Check this if you want created a contact to this user.
+   * Check this if you want created a :ref:`contact` to this user.
    * This user will then appear in the “Contact” list 
 
 .. topic:: Is a resource
 
-   * Check this if you want created a resource to this user.
+   * Check this if you want created a :ref:`resource` to this user.
    * The user will then also appear in the “Resources” list.
+
+
+
+
+.. _allocated-asset-user:
+
+.. rubric:: Allocated asset
+
+This section allows you to view all the equipment connected to the user in the form of a simple table.
+
+.. figure:: /images/GUI/USER_ZONE_AllocatedAsset.png
+   :alt: Allocated asset
+   
+   Allocated asset for the selected user
+   
+   
+Each line of equipment is clickable and directs to the element screen.
+
+See::ref:`asset-management`
+
+
+
  
 .. rubric:: Section Miscellanous
 
