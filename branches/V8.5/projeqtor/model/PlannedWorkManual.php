@@ -577,11 +577,11 @@ class PlannedWorkManual extends GeneralWork {
           echo '<table style="width:100%;height:100%">';
           $color=getForeColor($colorAM);
           echo '<tr style="height:'.$midSize.'px;">
-                <td id="'.$myDate.'AM" style="width:100%;background:'.$colorAM.';border-bottom:1px solid #e0e0e0;position:relative;text-align:center;"></td>
+                <td id="'.$pe->refId.$myDate.'AM" style="width:100%;background:'.$colorAM.';border-bottom:1px solid #e0e0e0;position:relative;text-align:center;"></td>
                 </tr>';
           $color=getForeColor($colorPM);
           echo '<tr style="height:'.$midSize.'px;">
-                <td id="'.$myDate.'PM" style="width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"></td>
+                <td id="'.$pe->refId.$myDate.'PM" style="width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"></td>
                 </tr>';
           echo '</table>';  
           echo '</td>';
