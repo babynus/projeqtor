@@ -489,7 +489,7 @@ if ($planningMode=='RECW') {
         <?php 
         $listResource=array($idResource);
         $listMonth=array();
-        $date = 12;
+        $date = date('m');
         $diffDate = $date-7;
         if($diffDate<=0){
           $maxDate=$diffDate+12;
