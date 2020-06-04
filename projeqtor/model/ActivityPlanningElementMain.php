@@ -66,22 +66,22 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $leftCost;
   public $plannedCost;
   public $_separator_menuTechnicalProgress_marginTop;
-  public $_tab_4_1_smallLabel_2 = array('toDeliver', 'toRealised', 'realised', 'left','unityOfWork');
-  public $toDeliver;
-  public $toRealised;
-  public $realised;
-  public $rest;
-  public $_tab_5_2_smallLabel_8 = array('', '','','','','','uoProgress');
+  public $_tab_4_1_smallLabel_2 = array('toDeliver', 'toRealise', 'realised', 'left','workUnit');
+  public $unitToDeliver;
+  public $unitToRealise;
+  public $unitRealised;
+  public $unitLeft;
+  public $_tab_5_2_smallLabel_8 = array('', '','','','','','progress');
   public $_void_20;
   public $_void_21;
   public $_void_22;
   public $_void_23;
   public $_void_24;
-  public $uoProgress;
-  public $idProgress;
+  public $unitProgress;
+  public $idProgressMode;
   public $_label_weight;
-  public $weight;
-  public $idWeight;
+  public $unitWeight;
+  public $idWeightMode;
   public $_separator_menuReview_marginTop;
   public $_tab_5_2_smallLabel_3 = array('', '', '', '', '', 'progress','priority');
   public $progress;
@@ -231,44 +231,44 @@ class ActivityPlanningElementMain extends PlanningElement {
         }
       }
       if(!$asSon or (!$this->id)){
-        if(!$this->id or $this->idProgress=='' or $this->idWeight=='' ){
-          $this->idProgress=2;
-          $this->idWeight=1;
-          $this->toDeliver=0;
-          $this->toRealised=0;
-          $this->realised=0;
-          $this->rest=0;
-          $this->weight=0;
-          $this->uoProgress=0;
+        if(!$this->id or $this->idProgressMode=='' or $this->idWeightMode=='' ){
+          $this->idProgressMode=2;
+          $this->idWeightMode=1;
+          $this->unitToDeliver=0;
+          $this->unitToRealise=0;
+          $this->unitRealised=0;
+          $this->unitLeft=0;
+          $this->unitWeight=0;
+          $this->unitProgress=0;
         }
-        self::$_fieldsAttributes['toDeliver']='';
-        self::$_fieldsAttributes['toRealised']='';
-        self::$_fieldsAttributes['realised']='';
-        self::$_fieldsAttributes['rest']='readonly';
-        self::$_fieldsAttributes['uoProgress']='';
-        self::$_fieldsAttributes['weight']='';
-        self::$_fieldsAttributes['idProgress']='size1/3,';
-        self::$_fieldsAttributes['idWeight']='size1/3,';
+        self::$_fieldsAttributes['unitToDeliver']='';
+        self::$_fieldsAttributes['unitToRealise']='';
+        self::$_fieldsAttributes['unitRealised']='';
+        self::$_fieldsAttributes['unitLeft']='readonly';
+        self::$_fieldsAttributes['unitProgress']='';
+        self::$_fieldsAttributes['unitWeight']='';
+        self::$_fieldsAttributes['idProgressMode']='size1/3,';
+        self::$_fieldsAttributes['idWeightMode']='size1/3,';
       }else{
-        if( $this->idProgress=='' or $this->idWeight=='' ){
-          $this->idProgress=1;
-          $this->idWeight=2;
+        if( $this->idProgressMode=='' or $this->idWeightMode=='' ){
+          $this->idProgressMode=1;
+          $this->idWeightMode=2;
         }
-        if($this->uoProgress=='' or $this->weight==''){
-          $this->uoProgress=0;
-          $this->weight=0;
+        if($this->unitProgress=='' or $this->unitWeight==''){
+          $this->unitProgress=0;
+          $this->unitWeight=0;
         }
         unset($this->_tab_4_1_smallLabel_2);
-        self::$_fieldsAttributes['uoProgress']='';
-        self::$_fieldsAttributes['weight']='';
-        self::$_fieldsAttributes['idProgress']='readonly,size1/3';
-        self::$_fieldsAttributes['idWeight']='size1/3';
+        self::$_fieldsAttributes['unitProgress']='';
+        self::$_fieldsAttributes['unitWeight']='';
+        self::$_fieldsAttributes['idProgressMode']='readonly,size1/3';
+        self::$_fieldsAttributes['idWeightMode']='size1/3';
       }
-      if($this->idProgress==1){
-        self::$_fieldsAttributes['uoProgress']='readonly';
+      if($this->idProgressMode==1){
+        self::$_fieldsAttributes['unitProgress']='readonly';
       }
-      if($this->idWeight!=1){
-        self::$_fieldsAttributes['weight']='readonly';
+      if($this->idWeightMode!=1){
+        self::$_fieldsAttributes['unitWeight']='readonly';
       }
        self::$_fieldsAttributes['_tab_2_1_smallLabel_8']='nobr';
     }else{
@@ -405,7 +405,6 @@ class ActivityPlanningElementMain extends PlanningElement {
         $result.='<input type="hidden" name="confirmControl" id="confirmControl" value="save" />';
       }
     }else if($this->idActivityPlanningMode=='23' and $old->idPlanningMode!='23'){
-      
       $ass=new Assignment();
       $critArray=array("idProject"=>$this->idProject,"refType"=>$this->refType,"refId"=>$this->refId);
       $assLst=$ass->getSqlElementsFromCriteria($critArray);
@@ -421,7 +420,6 @@ class ActivityPlanningElementMain extends PlanningElement {
          }
         $lstRes["Assignement".$ass->id]=$ass->idResource;
       }
-      
     }
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
