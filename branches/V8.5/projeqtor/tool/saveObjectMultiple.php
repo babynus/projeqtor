@@ -34,6 +34,7 @@
 
 require_once "../tool/projeqtor.php";
 
+debugLog($_REQUEST);
 // Get the object class from request
 if (! array_key_exists('objectClass',$_REQUEST)) {
   throwError('objectClass parameter not found in REQUEST');
@@ -227,6 +228,8 @@ $isEmployee="";
 if (array_key_exists('isEmployee',$_REQUEST)) {
 	$isEmployee=trim($_REQUEST['isEmployee']);
 }
+$idProgressMode = trim(RequestHandler::getValue($pe.'_idProgressMode'));
+$idWeightMode = trim(RequestHandler::getValue($pe.'_idWeightMode'));
 
 // MTY - LEAVE SYSTEM
 SqlElement::unsetCurrentObject();
@@ -389,6 +392,12 @@ foreach ($selectList as $id) {
   	if ($pe_validatedWork and property_exists($item->$pe,'validatedWork')) {
   	  if (strtolower($pe_validatedWork)=='null') $item->$pe->validatedWork=null;
   		else $item->$pe->validatedWork=Work::convertWork($pe_validatedWork);
+  	}
+  	if ($idWeightMode and property_exists($item->$pe,'idWeightMode')) {
+  	  $item->$pe->idWeightMode=$idWeightMode;
+  	}
+  	if ($idProgressMode and property_exists($item->$pe,'idProgressMode')) {
+  	  $item->$pe->idProgressMode=$idProgressMode;
   	}
   }
   //gautier #asset
