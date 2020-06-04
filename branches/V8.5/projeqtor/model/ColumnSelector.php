@@ -187,6 +187,7 @@ class ColumnSelector extends SqlElement {
 	private static function addAllFields($result, $obj, $included=false, $sourceClass=null) {
 		$fieldsArray=$obj->getFieldsArray();
 		$extrahiddenFields=$obj->getExtraHiddenFields('*','*');
+		if (method_exists($obj, 'setAttributes')) $obj->setAttributes();
 		$user=getSessionUser();
 		$cpt=count($result);
 		foreach($obj as $col => $val) {

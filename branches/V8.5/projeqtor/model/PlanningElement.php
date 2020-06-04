@@ -89,14 +89,14 @@ class PlanningElement extends SqlElement {
   public $isManualProgress;
   public $surbooked;
   public $fixPlanning;
-  public $toDeliver;
-  public $toRealised;
-  public $realised;
-  public $rest;
-  public $uoProgress;
-  public $idProgress;
-  public $weight;
-  public $idWeight;
+  public $unitToDeliver;
+  public $unitToRealise;
+  public $unitRealised;
+  public $unitLeft;
+  public $unitProgress;
+  public $idProgressMode;
+  public $unitWeight;
+  public $idWeightMode;
   
   private static $_fieldsAttributes=array(
                                   "id"=>"hidden",
@@ -150,14 +150,14 @@ class PlanningElement extends SqlElement {
                                   "indivisibility"=>"hidden",
                                   "minimumThreshold"=>"hidden",
                                   "fixPlanning"=>"hidden",
-                                  "toDeliver"=>"hidden,noImport",
-                                  "toRealised"=>"hidden,noImport",
-                                  "realised"=>"hidden,noImport",
-                                  "rest"=>"hidden,noImport",
-                                  "uoProgress"=>"hidden",
-                                  "idProgress"=>"hidden",
-                                  "weight"=>"hidden",
-                                  "idWeight"=>"hidden"
+                                  "unitToDeliver"=>"hidden,noImport",
+                                  "unitToRealise"=>"hidden,noImport",
+                                  "unitRealised"=>"hidden,noImport",
+                                  "unitLeft"=>"hidden,noImport",
+                                  "unitProgress"=>"hidden",
+                                  "idProgressMode"=>"hidden",
+                                  "unitWeight"=>"hidden",
+                                  "idWeightMode"=>"hidden"
   );   
   
   private static $_predecessorItemsArray = array();
@@ -285,16 +285,16 @@ class PlanningElement extends SqlElement {
       $colScript .= '   dijit.byId("ActivityPlanningElement_minimumThreshold").set("class", "input");';
       $colScript .= '  }';
       $colScript .= '</script>';
-    }else if($colName=='idProgress'){
+    }else if($colName=='idProgressMode'){
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  var widget=dijit.byId("ActivityPlanningElement_uoProgress");';
+      $colScript .= '  var widget=dijit.byId("ActivityPlanningElement_unitProgress");';
       $colScript .= '  if(this.value==1){';
       $colScript .= '   if (widget) {';
       $colScript .= '     widget.set("readOnly",true);';
       $colScript .= '   }';
-      $colScript .= '   if(dijit.byId("ActivityPlanningElement_toRealised").get("value")!="0"){';
-      $colScript .= '     var progress=setProgress();';
-      $colScript .= '     dijit.byId("ActivityPlanningElement_uoProgress").set("value", progress);';
+      $colScript .= '   if(dijit.byId("ActivityPlanningElement_unitToRealise").get("value")!="0"){';
+      $colScript .= '     var progress=setUnitProgress();';
+      $colScript .= '     dijit.byId("ActivityPlanningElement_unitProgress").set("value", progress);';
       $colScript .= '   }';
       $colScript .= '  }else{';
       $colScript .= '   if (widget) {';
@@ -302,9 +302,9 @@ class PlanningElement extends SqlElement {
       $colScript .= '   }';
       $colScript .= '  }';
       $colScript .= '</script>';
-    }else if($colName=='idWeight'){
+    }else if($colName=='idWeightMode'){
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  var widget=dijit.byId("ActivityPlanningElement_weight");';
+      $colScript .= '  var widget=dijit.byId("ActivityPlanningElement_unitWeight");';
       $colScript .= '  if(this.value==1){';
       $colScript .= '   if (widget) {';
       $colScript .= '     widget.set("readOnly",false);';
@@ -314,40 +314,40 @@ class PlanningElement extends SqlElement {
       $colScript .= '     widget.set("readOnly",true);';
       $colScript .= '   }';
       $colScript .= '     if (this.value==3){';
-      $colScript .= '       if(dojo.byId("ActivityPlanningElement_toRealised").value==""){';
-      $colScript .= '         dijit.byId("ActivityPlanningElement_weight").set("value","0");';
+      $colScript .= '       if(dojo.byId("ActivityPlanningElement_unitToRealise").value==""){';
+      $colScript .= '         dijit.byId("ActivityPlanningElement_unitWeight").set("value","0");';
       $colScript .= '       }else{';
-      $colScript .= '         dijit.byId("ActivityPlanningElement_weight").set("value",dojo.byId("ActivityPlanningElement_toRealised").value);';
+      $colScript .= '         dijit.byId("ActivityPlanningElement_unitWeight").set("value",dojo.byId("ActivityPlanningElement_unitToRealise").value);';
       $colScript .= '       }';
       $colScript .= '     }';
       $colScript .= '  }';
       $colScript .= '</script>';
-    }else if($colName=='toDeliver'){
+    }else if($colName=='unitToDeliver'){
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  if(this.value!="0" && dojo.byId("ActivityPlanningElement_toRealised").value=="0"){';
-      $colScript .= '   dijit.byId("ActivityPlanningElement_toRealised").set("value", this.value);';
+      $colScript .= '  if(this.value!="0" && dojo.byId("ActivityPlanningElement_unitToRealise").value=="0"){';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_unitToRealise").set("value", this.value);';
       $colScript .= '  }';
       $colScript .= '</script>';
-    }else if($colName=='toRealised'){
+    }else if($colName=='unitToRealise'){
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  if(this.value!="" && dojo.byId("ActivityPlanningElement_realised").value!=""){';
-      $colScript .= '   var rest=this.value-dojo.byId("ActivityPlanningElement_realised").value;';
-      $colScript .= '   dijit.byId("ActivityPlanningElement_rest").set("value", rest);';
+      $colScript .= '  if(this.value!="" && dojo.byId("ActivityPlanningElement_unitRealised").value!=""){';
+      $colScript .= '   var left=this.value-dojo.byId("ActivityPlanningElement_unitRealised").value;';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_unitLeft").set("value", left);';
       $colScript .= '  }';
-      $colScript .= '   if(dijit.byId("ActivityPlanningElement_idProgress").get("value")=="1"){';
-      $colScript .= '     var progress=setProgress();';
-      $colScript .= '     dijit.byId("ActivityPlanningElement_uoProgress").set("value", progress);';
+      $colScript .= '   if(dijit.byId("ActivityPlanningElement_idProgressMode").get("value")=="1"){';
+      $colScript .= '     var progress=setUnitProgress();';
+      $colScript .= '     dijit.byId("ActivityPlanningElement_unitProgress").set("value", progress);';
       $colScript .= '   }';
       $colScript .= '</script>';
-    }else if($colName=='realised'){
+    }else if($colName=='unitRealised'){
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  if(this.value!="" && dojo.byId("ActivityPlanningElement_toRealised").value!=""){';
-      $colScript .= '   var rest=dojo.byId("ActivityPlanningElement_toRealised").value-this.value;';
-      $colScript .= '   dijit.byId("ActivityPlanningElement_rest").set("value", rest);';
+      $colScript .= '  if(this.value!="" && dojo.byId("ActivityPlanningElement_unitToRealise").value!=""){';
+      $colScript .= '   var left=dojo.byId("ActivityPlanningElement_unitToRealise").value-this.value;';
+      $colScript .= '   dijit.byId("ActivityPlanningElement_unitLeft").set("value", left);';
       $colScript .= '  }';
-      $colScript .= '   if(dijit.byId("ActivityPlanningElement_idProgress").get("value")=="1"){';
-      $colScript .= '     var progress=setProgress();';
-      $colScript .= '     dijit.byId("ActivityPlanningElement_uoProgress").set("value", progress);';
+      $colScript .= '   if(dijit.byId("ActivityPlanningElement_idProgressMode").get("value")=="1"){';
+      $colScript .= '     var progress=setUnitProgress();';
+      $colScript .= '     dijit.byId("ActivityPlanningElement_unitProgress").set("value", progress);';
       $colScript .= '   }';
       $colScript .= '</script>';
     }
@@ -558,31 +558,31 @@ class PlanningElement extends SqlElement {
     }
     ///florent
     if(Parameter::getGlobalParameter('technicalProgress')=='YES' and ($this->refType=='Project' or $this->refType=='Activity')){
-      if($this->refType=='Project' and ($this->idProgress=='' or $this->idWeight=='')){
-        $this->idProgress=1;
-        $this->idWeight=2;
-        $this->uoProgress=0;
-        $this->weight=0;
-      }else if($this->refType=='Activity' and ($this->idProgress=='' or $this->idWeight=='')){
-        $this->idProgress=2;
-        $this->idWeight=1;
-        $this->uoProgress=0;
-        $this->weight=0;
-        $this->toDeliver=0;
-        $this->toRealised=0;
-        $this->realised=0;
-        $this->rest=0;
+      if($this->refType=='Project' and ($this->idProgressMode=='' or $this->idWeightMode=='')){
+        $this->idProgressMode=1;
+        $this->idWeightMode=2;
+        $this->unitProgress=0;
+        $this->unitWeight=0;
+      }else if($this->refType=='Activity' and ($this->idProgressMode=='' or $this->idWeightMode=='')){
+        $this->idProgressMode=2;
+        $this->idWeightMode=1;
+        $this->unitProgress=0;
+        $this->unitWeight=0;
+        $this->unitToDeliver=0;
+        $this->unitToRealise=0;
+        $this->unitRealised=0;
+        $this->unitLeft=0;
       }else{
         if($this->refType=='Activity'){
           $sons=$this->getSonItemsArray();
-          if(!$sons and $this->idWeight==2){
-            $this->idWeight=1;
+          if(!$sons and $this->idWeightMode==2){
+            $this->idWeightMode=1;
           }
-          $this->uoProgress=$this->setProgress();
-          $this->weight=$this->setWeight();
+          $this->unitProgress=$this->setUnitProgress();
+          $this->unitWeight=$this->setUnitWeight();
         }
-        if($this->toRealised!='' and $this->realised!=''){
-          $this->rest=($this->toRealised-$this->realised );
+        if($this->unitToRealise!='' and $this->unitRealised!=''){
+          $this->unitLeft=($this->unitToRealise-$this->unitRealised );
         }
       }
     }
@@ -806,8 +806,8 @@ class PlanningElement extends SqlElement {
     return null; // OK nothing to do
   }
   /// florent
-  public function setProgress(){
-    if($this->idProgress=='1'){
+  public function setUnitProgress(){
+    if($this->idProgressMode=='1'){
       $ref=$this->refType;
       $sons=$this->getSonItemsArray();
       if($ref=='Project' and $sons){
@@ -839,8 +839,8 @@ class PlanningElement extends SqlElement {
       }
       
       if($ref=='Activity' and !$sons ){
-        if($this->toRealised!=0){
-          $result=(floatval(($this->realised/$this->toRealised)*100));
+        if($this->unitToRealise!=0){
+          $result=(floatval(($this->unitRealised/$this->unitToRealise)*100));
         }else{
           $result=0;
         }
@@ -848,9 +848,9 @@ class PlanningElement extends SqlElement {
         $sumWeight=0;
         $sumProgress=0;
         foreach ($sons as $son ){
-          if($son->weight!=0){
-            $sumProgress=(floatval($sumProgress+($son->uoProgress*$son->weight)));
-            $sumWeight+=$son->weight;
+          if($son->unitWeight!=0){
+            $sumProgress=(floatval($sumProgress+($son->unitProgress*$son->unitWeight)));
+            $sumWeight+=$son->unitWeight;
             continue;
           }else{
             continue;
@@ -862,13 +862,13 @@ class PlanningElement extends SqlElement {
           $result=(floatval((($sumProgress)/($sumWeight))));
       }
     }else{
-      $result=$this->uoProgress;
+      $result=$this->unitProgress;
     }
     return $result;
   }
   
-  public function setWeight(){
-    if($this->idWeight==2){
+  public function setUnitWeight(){
+    if($this->idWeightMode==2){
       $refType=$this->refType;
       $summWeight=0;
       $sons=$this->getSonItemsArray();
@@ -900,18 +900,18 @@ class PlanningElement extends SqlElement {
         return 0;
       }
       foreach ($sons as $son){
-        if($son->weight!=0){
-          $summWeight=$summWeight+$son->weight;
+        if($son->unitWeight!=0){
+          $summWeight=$summWeight+$son->unitWeight;
           continue;
         }else{
           continue;
         }
       }
       $result=$summWeight;
-    }else if($this->idWeight==3){
-      $result=$this->toRealised;
+    }else if($this->idWeightMode==3){
+      $result=$this->unitToRealise;
     }else{
-      $result=$this->weight;
+      $result=$this->unitWeight;
     }
     return $result;
   }
@@ -1069,26 +1069,26 @@ class PlanningElement extends SqlElement {
     }
     /// florent
     if($technicalProgress=='YES' and ($this->refType=='Project' or $this->refType=='Activity')){
-      if($this->refType=='Project' and ($this->idProgress=='' or $this->idWeight=='')){
-        $this->idProgress=1;
-        $this->idWeight=2;
-      }else if($this->refType=='Activity' and ($this->idProgress=='' or $this->idWeight=='')) {
-        $this->idProgress=2;
-        $this->idWeight=1;
+      if($this->refType=='Project' and ($this->idProgressMode=='' or $this->idWeightMode=='')){
+        $this->idProgressMode=1;
+        $this->idWeightMode=2;
+      }else if($this->refType=='Activity' and ($this->idProgressMode=='' or $this->idWeightMode=='')) {
+        $this->idProgressMode=2;
+        $this->idWeightMode=1;
         if($this->getSonItemsArray()){
-          $this->idProgress=1;
-          $this->idWeight=2;
+          $this->idProgressMode=1;
+          $this->idWeightMode=2;
         }
       }
-      if($this->idWeight==3){
-        $this->weight=0;
-        $this->idWeight=2;
-      }else if ($this->idWeight==1 and $this->weight==0){
-        $this->idWeight=2;
+      if($this->idWeightMode==3){
+        $this->unitWeight=0;
+        $this->idWeightMode=2;
+      }else if ($this->idWeightMode==1 and $this->unitWeight==0){
+        $this->idWeightMode=2;
       }
-      $this->idProgress=1;
-      $this->uoProgress=$this->setProgress();
-      $this->weight=$this->setWeight();
+      $this->idProgressMode=1;
+      $this->unitProgress=$this->setUnitProgress();
+      $this->unitWeight=$this->setUnitWeight();
     }
     ///
     // Add data from other planningElements dependant from this one
