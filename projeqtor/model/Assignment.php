@@ -412,7 +412,8 @@ class Assignment extends SqlElement {
     $pwList=$pw->purge('idAssignment='.Sql::fmtId($this->id));
     
     $obj = new $this->refType($this->refId);
-    $planningMode = new PlanningMode($obj->ActivityPlanningElement->idPlanningMode);
+    $peName=$this->refType.'PlanningElement';
+    $planningMode = new PlanningMode($obj->$peName->idPlanningMode);
     if($planningMode->code == 'MAN'){
     	$pwm = new PlannedWorkManual();
     	$pwm->purge('idAssignment='.$this->id);
