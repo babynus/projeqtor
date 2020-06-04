@@ -2412,8 +2412,18 @@ abstract class SqlElement {
           $ass->refId = $newObj->id;
           $ass->comment = null;
           $ass->realWork = 0;
-          $ass->leftWork = $ass->assignedWork;
-          $ass->plannedWork = $ass->assignedWork;
+          $planningName = get_class ( $this ).'PlanningElement';
+          if($this->$planningName->idPlanningMode){
+            $planningMode = new PlanningMode($this->$planningName->idPlanningMode);
+          }
+          if($planningMode and $planningMode->code=='MAN'){
+            $ass->assignedWork = null;
+            $ass->leftWork = null;
+            $ass->plannedWork = null;
+          }else{
+            $ass->leftWork = $ass->assignedWork;
+            $ass->plannedWork = $ass->assignedWork;
+          }
           $ass->realStartDate = null;
           $ass->realEndDate = null;
           $ass->plannedStartDate = null;
@@ -4862,10 +4872,11 @@ abstract class SqlElement {
               // If mode confirm and message of confirmation occured : OK
             } else {
               $objects .= "<br/>&nbsp;-&nbsp;" . i18n ( $object ) . " (" . $nb . ")";
-              if(property_exists(get_class ($this), $this->ActivityPlanningElement)){
-              	$planningMode = new PlanningMode($this->ActivityPlanningElement->idPlanningMode);
-              	if($planningMode->code=='MAN' and $this->ActivityPlanningElement->plannedWork){
-              		$plannedWorks .= "<br/>&nbsp;-&nbsp;" . i18n ($this->ActivityPlanningElement->refType) . " #".$this->ActivityPlanningElement->refId." (" .Work::displayWorkWithUnit($this->ActivityPlanningElement->plannedWork). ")";
+              if(property_exists(get_class ($this), get_class ($this).'PlanningElement')){
+                $ple = get_class ($this).'PlanningElement';
+              	$planningMode = new PlanningMode($this->$ple->idPlanningMode);
+              	if($planningMode->code=='MAN' and $this->$ple->plannedWork){
+              		$plannedWorks .= "<br/>&nbsp;-&nbsp;" . i18n ($this->$ple->refType) . " #".$this->$ple->refId." (" .Work::displayWorkWithUnit($this->$ple->plannedWork). ")";
               	}
               }
             }
