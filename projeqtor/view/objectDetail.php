@@ -2424,7 +2424,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         
         // BEGIN - ADD BY TABARY - NOTIFICATION SYSTEM
-        if (($col=='idStatusNotification' and $classObj!='StatusNotification'  and !$readOnly) or $col=='idProgress' or $col=='idWeight') {
+        if (($col=='idStatusNotification' and $classObj!='StatusNotification'  and !$readOnly) or $col=='idProgressMode' or $col=='idWeightMode') {
           $showExtraButton=true;
           $fieldWidth=round($fieldWidth/2)-23;
         }
@@ -2470,7 +2470,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
           $projSituation = SqlElement::getSingleSqlElementFromCriteria('ProjectSituation', array('idProject'=>$obj->idProject));
           $val = $projSituation->id;
-        }else if (($classObj=='ActivityPlanningElement' or $classObj=='ProjectPlanningElement') and ($col=='idWeight' or $col=='idProgress')) {
+        }else if (($classObj=='ActivityPlanningElement' or $classObj=='ProjectPlanningElement') and ($col=='idWeightMode' or $col=='idProgressMode')) {
           $next=htmlDrawOptionForReference($col, $val, $obj,true, $critFld, $critVal);
         }else {
           $next=htmlDrawOptionForReference($col, $val, $obj, $isRequired, $critFld, $critVal);
@@ -2658,7 +2658,7 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         if(Parameter::getUserParameter('technicalProgress')=='YES'){
           $isProgress=true;
-          if($col=='toDeliver' or $col=='toRealised' or $col=='realised' or $col=='weight'){
+          if($col=='unitToDeliver' or $col=='unitToRealise' or $col=='unitRealised' or $col=='unitWeight'){
             $uo=true;
           }
         }
@@ -2820,13 +2820,13 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
           echo '<span class="generalColClass '.$col.'Class" style="'.$specificStyleWithoutCustom.';position:relative;top:2px">';
         }
         if($uo){
-          if($col!=='weight'){
+          if($col!=='unitWeight'){
             echo '&nbsp;&nbsp;';
           }else{
             echo '&nbsp;';
           }
         }
-//         if ($isProgress and $col=='uoProgress') {
+//         if ($isProgress and $col=='unitProgress') {
 //             echo '%&nbsp;';
 //         }
         if ($isWork) {
