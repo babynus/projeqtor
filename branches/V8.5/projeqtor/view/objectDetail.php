@@ -5787,7 +5787,7 @@ function drawApproverFromObject($list, $obj, $refresh=false) {
       if ($versApp->id) {
       	$approved=$versApp->approved;
       	$disapproved=$versApp->disapproved;
-      	$compMsg=' '.$obj->name;
+      	//$compMsg=' '.$obj->name;
       	$approvedDate=" (".htmlFormatDateTime($versApp->approvedDate, false).")";
       	$disapprovedDate=" (".htmlFormatDateTime($versApp->disapprovedDate, false).")";
       	$approverId=$versApp->id;
