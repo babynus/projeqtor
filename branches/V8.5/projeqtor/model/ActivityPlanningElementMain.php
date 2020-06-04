@@ -355,6 +355,9 @@ class ActivityPlanningElementMain extends PlanningElement {
         $lstAss=$ass->getSqlElementsFromCriteria(null, null,$clause);
         if($lstAss){
           foreach ( $lstAss as $assign){
+            if($assign->isResourceTeam==1){
+              $assign->delete();
+            }
             $newLeft=$assign->leftWork-$assign->plannedWork;
             $assign->assignedWork=GeneralWork::convertWork(0);
             $assign->leftWork=GeneralWork::convertWork($newLeft);
@@ -402,6 +405,7 @@ class ActivityPlanningElementMain extends PlanningElement {
         $result.='<input type="hidden" name="confirmControl" id="confirmControl" value="save" />';
       }
     }else if($this->idActivityPlanningMode=='23' and $old->idPlanningMode!='23'){
+      
       $ass=new Assignment();
       $critArray=array("idProject"=>$this->idProject,"refType"=>$this->refType,"refId"=>$this->refId);
       $assLst=$ass->getSqlElementsFromCriteria($critArray);
@@ -411,8 +415,13 @@ class ActivityPlanningElementMain extends PlanningElement {
            $result.='<br/>' . i18n('errorPlanWorkManDuplicate');
            break;
          }
+         if($ass->isResourceTeam==1 and !SqlElement::isSaveConfirmed()){
+           $result.='<br/>' . i18n('removePoolIntervention');
+           $result.='<input type="hidden" name="confirmControl" id="confirmControl" value="save" />';
+         }
         $lstRes["Assignement".$ass->id]=$ass->idResource;
       }
+      
     }
     $defaultControl=parent::control();
     if ($defaultControl!='OK') {
