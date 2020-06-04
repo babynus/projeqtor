@@ -134,9 +134,9 @@ if ($planningMode=='RECW') {
                 onChange="<?php if($isSelectFonction == 'YES'){?>assignmentChangeResourceSelectFonction();<?php }else{?> assignmentChangeResource(); <?php }?> assignmentChangeResourceTeamForCapacity();refreshReccurentAssignmentDiv(this.value);"
                 missingMessage="<?php echo i18n('messageMandatory',array(i18n('colIdResource')));?>" <?php echo ($realWork!=0 && $mode=='edit')?"readonly=readonly":"";?>>
                 <?php if($mode=='edit'){                      
-                          htmlDrawOptionForReference('idResourceAll', $idResource,null,true,'idProject',$idProject);
+                          htmlDrawOptionForReference('idResourceAll', $idResource,$obj,true,'idProject',$idProject);
                 }else{
-                          htmlDrawOptionForReference($elementList, null,null,false,$critFld,$critVal);
+                          htmlDrawOptionForReference($elementList, null,$obj,false,$critFld,$critVal);
                 }?>
                </select>  
              </td>
