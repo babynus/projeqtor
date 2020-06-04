@@ -723,22 +723,22 @@
             if(Parameter::getGlobalParameter('technicalProgress')=='YES' and $pe=="ActivityPlanningElement"){
             ?>
             <tr class="detail">
-              <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colUoProgress');?>&nbsp;:&nbsp;</td>
+              <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colIdProgressMode');?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
-                 id="<?php echo $pe.'_idProgress';?>" name="<?php echo  $pe.'_idProgress';?>">
-                 <?php htmlDrawOptionForReference('idProgress', null, null, false);?>
+                 id="<?php echo $pe.'_idProgressMode';?>" name="<?php echo  $pe.'_idProgressMode';?>">
+                 <?php htmlDrawOptionForReference('idProgressMode', null, null, false);?>
                 </select>
               </td>
             </tr>
             <tr class="detail">
-              <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colWeight');?>&nbsp;:&nbsp;</td>
+              <td class="labelMultiple" style="width:<?php echo $displayWidth;?>px;"><?php echo i18n('colIdWeightMode');?>&nbsp;:&nbsp;</td>
               <td>
                 <select dojoType="dijit.form.FilteringSelect" class="input" style="width:<?php echo $fieldWidth;?>px;" 
                 <?php echo autoOpenFilteringSelect();?>
-                 id="<?php echo $pe.'_idWeight';?>" name="<?php echo $pe.'_idWeight';?>">
-                 <?php htmlDrawOptionForReference('idWeight', null, null, false);?>
+                 id="<?php echo $pe.'_idWeightMode';?>" name="<?php echo $pe.'_idWeightMode';?>">
+                 <?php htmlDrawOptionForReference('idWeightMode', null, null, false);?>
                 </select>
               </td>
             </tr>
