@@ -23,26 +23,26 @@ ALTER TABLE `${prefix}type` ADD COLUMN `icon` varchar(100);
 ALTER TABLE `${prefix}globalview` ADD COLUMN `creationDate` datetime DEFAULT NULL;
 
 ALTER TABLE `${prefix}planningelement` 
-ADD COLUMN `toDeliver` int(5) unsigned DEFAULT NULL,
-ADD COLUMN `toRealised` int(5) unsigned DEFAULT NULL,
-ADD COLUMN `realised` int(5) unsigned DEFAULT NULL,
-ADD COLUMN `rest` int(5) unsigned DEFAULT NULL,
-ADD COLUMN `uoProgress` decimal(7,2) DEFAULT NULL,
-ADD COLUMN `idProgress` int(12) unsigned DEFAULT NULL,
-ADD COLUMN `weight` decimal(7,2) DEFAULT NULL,
-ADD COLUMN `idWeight` int(12) unsigned DEFAULT NULL;
+ADD COLUMN `unitToDeliver` int(5) unsigned DEFAULT NULL,
+ADD COLUMN `unitToRealise` int(5) unsigned DEFAULT NULL,
+ADD COLUMN `unitRealised` int(5) unsigned DEFAULT NULL,
+ADD COLUMN `unitLeft` int(5) unsigned DEFAULT NULL,
+ADD COLUMN `unitProgress` decimal(7,2) DEFAULT NULL,
+ADD COLUMN `idProgressMode` int(12) unsigned DEFAULT NULL,
+ADD COLUMN `unitWeight` decimal(7,2) DEFAULT NULL,
+ADD COLUMN `idWeightMode` int(12) unsigned DEFAULT NULL;
 
 ALTER TABLE `${prefix}planningelementbaseline` 
-ADD COLUMN `toDeliver` int(5) unsigned DEFAULT NULL,
-ADD COLUMN `toRealised` int(5) unsigned DEFAULT NULL,
-ADD COLUMN `realised` int(5) unsigned DEFAULT NULL,
-ADD COLUMN `rest` int(5) unsigned DEFAULT NULL,
-ADD COLUMN `uoProgress` decimal(7,2) DEFAULT NULL,
-ADD COLUMN `idProgress` int(12) unsigned DEFAULT NULL,
-ADD COLUMN `weight` decimal(7,2) DEFAULT NULL,
-ADD COLUMN `idWeight` int(12) unsigned DEFAULT NULL;
+ADD COLUMN `unitToDeliver` int(5) unsigned DEFAULT NULL,
+ADD COLUMN `unitToRealise` int(5) unsigned DEFAULT NULL,
+ADD COLUMN `unitRealised` int(5) unsigned DEFAULT NULL,
+ADD COLUMN `unitLeft` int(5) unsigned DEFAULT NULL,
+ADD COLUMN `unitProgress` decimal(7,2) DEFAULT NULL,
+ADD COLUMN `idProgressMode` int(12) unsigned DEFAULT NULL,
+ADD COLUMN `unitWeight` decimal(7,2) DEFAULT NULL,
+ADD COLUMN `idWeightMode` int(12) unsigned DEFAULT NULL;
 
-CREATE TABLE `${prefix}progress` (
+CREATE TABLE `${prefix}progressmode` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `sortOrder` int(3) unsigned DEFAULT NULL,
@@ -50,11 +50,11 @@ CREATE TABLE `${prefix}progress` (
   PRIMARY KEY (`id`)
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
-INSERT INTO `${prefix}progress` (`id`, `name`,  `sortOrder`, `idle`) VALUES
+INSERT INTO `${prefix}progressmode` (`id`, `name`,  `sortOrder`, `idle`) VALUES
 (1,'calculated',100,0),
 (2,'manual',200,0);
 
-CREATE TABLE `${prefix}weight` (
+CREATE TABLE `${prefix}weightmode` (
   `id` int(12) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   `sortOrder` int(3) unsigned DEFAULT NULL,
@@ -63,7 +63,7 @@ CREATE TABLE `${prefix}weight` (
 ) ENGINE=innoDB DEFAULT CHARSET=utf8 ;
 
 
-INSERT INTO `${prefix}weight` (`id`, `name`,  `sortOrder`, `idle`) VALUES
+INSERT INTO `${prefix}weightmode` (`id`, `name`,  `sortOrder`, `idle`) VALUES
 (1,'manual',100,0),
 (2,'consolidated',200,0),
 (3,'UO',300,0);
