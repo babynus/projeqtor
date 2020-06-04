@@ -48,6 +48,13 @@ if ($letterMode!='' and strlen($letterMode)>3) {
 }
 $refType=RequestHandler::getClass('refType');
 $refId=RequestHandler::getId('refId');
+$resObj=new Resource($resource);
+$manageCapacity=PlannedWorkManual::getManageCapacity($resObj);
+$halfDayDuration=0.5;
+if ($manageCapacity=='DURATION') {
+  $capacity=$resObj->getCapacityPeriod($date);
+  $halfDayDuration=$capacity/2;
+}
 $allDay=false;
 if (substr($period,-1)=="X") {
   $allDay=true;
@@ -126,12 +133,12 @@ if ($refType and $refId and $idMode) {
   } else {
     $pwm->refType=$refType;
     $pwm->refId=$refId;
-    $pwm->work=0.5;
+    $pwm->work=$halfDayDuration;
     $pwm->idInterventionMode=$idMode;
     if ($allDay) {
       $pwmx->refType=$refType;
       $pwmx->refId=$refId;
-      $pwmx->work=0.5;
+      $pwmx->work=$halfDayDuration;
       $pwmx->idInterventionMode=$idMode;
     }
   }
@@ -160,11 +167,11 @@ if ($refType and $refId and $idMode) {
   } else {
     $pwm->refType=$refType;
     $pwm->refId=$refId;
-    $pwm->work=0.5;
+    $pwm->work=$halfDayDuration;
     if ($allDay) {
       $pwmx->refType=$refType;
       $pwmx->refId=$refId;
-      $pwmx->work=0.5;
+      $pwmx->work=$halfDayDuration;
     }
   }
 }
