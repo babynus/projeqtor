@@ -112,7 +112,7 @@
     echo '<TR>';
     echo '  <TD class="reportTableHeader" style="width:10px; border-right: 0px;" rowspan="2"></TD>';
     echo '  <TD class="reportTableHeader" style="width:200px; border-left:0px; text-align: left;" rowspan="2">' . i18n('colTask') . '</TD>';
-    echo '  <TD class="reportTableHeader" style="width:50px" rowspan="2" nowrap>' . i18n('colUnitWeight') . '</TD>' ;
+    echo '  <TD class="reportTableHeader" style="width:50px" rowspan="2" nowrap>' . i18n('colWeight') . '</TD>' ;
     echo '  <TD class="reportTableHeader" style="width:50px" colSpan="2" nowrap>' . i18n('colPlannedDate2') . '</TD>' ;
     echo '  <TD class="reportTableHeader" style="width:50px" colSpan="2"nowrap>' . i18n('technicalWork') . '</TD>' ;
     echo '  <TD class="reportTableHeader" style="width:50px" colSpan="3"nowrap>' . i18n('technicalProgress') . '</TD>' ;
@@ -122,9 +122,9 @@
     echo '  <TD class="reportTableHeader" style="width:100px" nowrap >' . i18n('colEnd') . '</TD>';
     echo '  <TD  class="reportTableHeader" style="width:55px" nowrap>' . i18n('colAssigned') . '</TD>' ;
     echo '  <TD  class="reportTableHeader" style="width:55px" nowrap>' . i18n('colReal') . '</TD>' ;
-    echo '  <TD class="reportTableHeader" style="width:60px" nowrap>' . i18n('colUnitToRealise') . '</TD>' ;
-    echo '  <TD class="reportTableHeader" style="width:60px" nowrap>' . i18n('colUnitRealised') . '</TD>' ;
-    echo '  <TD class="reportTableHeader" style="width:70px" nowrap>' . i18n('colUnitProgress') . '</TD>' ;
+    echo '  <TD class="reportTableHeader" style="width:60px" nowrap>' . i18n('colToRealise') . '</TD>' ;
+    echo '  <TD class="reportTableHeader" style="width:60px" nowrap>' . i18n('colRealised') . '</TD>' ;
+    echo '  <TD class="reportTableHeader" style="width:70px" nowrap>' . i18n('colProgress') . '</TD>' ;
 
     echo '</TR>';
     }else{
