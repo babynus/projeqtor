@@ -498,7 +498,17 @@ class PlannedWorkManual extends GeneralWork {
       echo '<div style="background:#FFDDDD;font-size:150%;color:#808080;text-align:center;padding:15px 0px;width:100%;">'.i18n('noActivityManualPlanningModeFound').'</div>';
       echo '</td></tr>';
     }
-    if(sessionValueExists('selectActivityPlannedWorkManual'))$isSaveSession = getSessionValue('selectActivityPlannedWorkManual');
+    if(sessionValueExists('selectActivityPlannedWorkManual')){
+      $isSaveSession = getSessionValue('selectActivityPlannedWorkManual');
+      $act = new Activity($isSaveSession,true);
+      $project =new Project($act->idProject,true);
+      $profile=getSessionUser()->getProfile($project);
+      $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$profile, 'scope'=>'assignmentEdit'));
+      if($habil->rightAccess!=1){
+        $isSaveSession = null;
+        setSessionValue('selectActivityPlannedWorkManual', null);
+      }
+    }
     $valueRefType = null;
     $valueRefId = null;
     foreach ($list as $pe) {
