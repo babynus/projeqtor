@@ -610,7 +610,8 @@ function iconName(value, size) {
   if (tab.length<2) return value;
   var icon=tab[1];
   var name=tab[0];
-  return '<table><tr><td><img style="height:'+size+'px" src="icons/' + icon + '" /></td><td>&nbsp;</td><td >'+name+'</td></tr></table>';
+  if (icon) return '<table><tr><td><img style="height:'+size+'px" src="icons/' + icon + '" /></td><td>&nbsp;</td><td >'+name+'</td></tr></table>';
+  else return '<table><tr><td></td><td>&nbsp;</td><td >'+name+'</td></tr></table>';
 }
 
 function privateFormatter(value) {
