@@ -442,6 +442,7 @@ Click this button to access the Live Meeting Management screen.
    
    The Live Meeting screen
 
+* Click on **Hide time counters** to show or hide participants' tabs with their speaking time    
 * Click on |buttonQuit| to exit the LiveMeeting screen
 * Click on |iconKanban| to manage your kanbans since the livemeeting
 * Click on |buttonIconSave| to save the live meeting report
@@ -453,6 +454,142 @@ Click this button to access the Live Meeting Management screen.
 * Click on |LiveMeetingSpeak| twice to design an organizer and to get the icon |meetingOrganizer| 
 
  
-You can also manage the action, decisions and the questions that will be linked to your meeting / project
 
-.. seealso:: Find all the information about :ref:`Live Meeting<live-meeting-steering>` in the section :ref:`Steering<steering-page>` in the meeting section
+
+.. rubric:: Starting a meeting 
+
+When the Live Meeting screen opens, the duration of the meeting is automatically distributed equally to all participants.
+
+.. figure:: /images/GUI/AGILE_ZONE_LiveMeeting-Time.PNG
+   :alt: Live meeting screen
+   
+   Time distribution
+   
+ 
+* Click on |meetingPlay| to start the meeting and to start decrementing the speaking time
+
+* Click on |meetingStop| To stop the meeting and therefore close the LiveMeeting window to return to the current meeting screen
+
+* Click on |meetingPause| to pause the speaker's time
+  
+
+
+
+ .. compound:: Set the organizer
+
+   Before starting the meeting, you can define an organizer who will need additional speaking time to be able to lead the meeting.
+
+   To designate it, click twice on the hourglass | LiveMeetingSpeak | to obtain the symbol | moreButton | on the icon.
+
+   The organizer is designated, and sees his time increment double by taking equitable time on the other participants.
+
+
+   .. figure:: /images/GUI/AGILE_ZONE_Organizer.png
+      :alt: set an organizer
+      
+      The designated organizer has a PLus on the hourglass icon of his tab
+
+   Note that only one participant can be defined as an organizer.
+
+   To set another participant as an organizer, you must first redefine the current organizer as a normal participant by clicking the hourglass button again.
+
+
+
+ .. compound:: Speaking Time
+ 
+  If you started the meeting by clicking on the Play icon at the top right of the screen, then this is the first speaker displayed, the one with the green sign that will begin speaking.
+
+  Otherwise, click on the speaker's tab of your choice to start your speaking time.
+  
+  
+  * Click on |LiveMeetingDtSpeak| to prevent a speaker from speaking
+
+  * Click on |LiveMeetingSpeak| to give him the floor again
+    
+  If you prevent a speaker's speaking time by clicking on the hourglass, then the remaining speaking time of the speaker will be redistributed to the other participants entitled to speak.
+
+
+
+
+ .. compound:: Write a meeting report 
+
+   During the course of the meeting, the person in charge of the report can inform and report the words of the various participants.
+
+   The text editor is dynamic and reacts to speakers who have the floor.
+
+   When one speaker is finished and another speaker speaks, a field is added in the text editor with the name of the speaker with the detail of the time
+
+   The pause is also mentioned always with the detail of the time.
+
+
+   .. figure:: /images/GUI/AGILE_ZONE_Speaker.png
+      :alt: The field with the speaker's name
+   
+      Field with the speaker's name
+
+   When you stop LiveMeeting by clicking | meetingStop | the meeting report is automatically copied to the Minutes field in the treatment section. 
+   
+   .. figure:: /images/GUI/AGILE_ZONE_Minutes.png
+      :alt: Meeting report 
+      
+      The meeting report is copied in the minutes field in the treament section
+      
+      
+      
+.. rubric:: Actions, Decisions and Actions
+
+
+In the lower part of the screen, if the kanban is not open, you have direct access to actions, decisions and questions.
+
+.. figure:: /images/GUI/AGILE_ZONE_ADQManagement.png
+   :alt: Actions, Decisions, Questions Management
+   
+   Actions, Decisions, Questions Management
+
+Each list acts as the standard "linked element" element present on almost every element screen.
+
+You can then list an item to add it to the list of related items, but also create a new item to add to the list, just like for the Linked Items feature.
+
+All linked items through this feature will appear in linked items in the meeting.
+
+There is a slight difference with related items, when you click on the name of an item, you are not redirected to it. 
+   
+It simply opens in a pop-up form, allowing you to update it without leaving the LiveMeeting screen.      
+
+
+ .. compound:: New element
+ 
+  You can create, edit, or delete an action, decision, or question from the live meeting screen.
+  
+  Click on |buttonAdd| at the top right of each section to add a new element
+  
+  A pop up opens and allows you to create and edit the selected element.
+  
+   .. figure:: /images/GUI/AGILE_BOX_NewAction.png
+      :alt: Creating a new action
+   
+      Creating a new action 
+
+   * Click on |buttonIconSelect| to select an item into the list by 
+   
+   * Click on |createNewItem| to create an item 
+   
+   * Click on |buttonIconUndo| to undo the current manipulating and close the window
+
+   .. figure:: /images/GUI/AGILE_BOX_CreateAction.png
+      :alt: Creating a new action
+   
+      Creating a new action 
+      
+      
+      
+  You can also create a new item directly.
+  
+  Fill in the fields with an explicit title and click on |buttonAdd| to validate.
+  
+  .. figure:: /images/GUI/AGILE_ZONE_NewElement.png
+   :alt: Add new element
+   
+   Add a new element
+  
+  The line is displayed directly in the corresponding section without opening the pop up
