@@ -4,7 +4,7 @@
  */
 
 require_once('_securityCheck.php');
-class Progress  extends SqlElement {
+class WeightMode extends SqlElement {
 	
 	// extends SqlElement, so has $id
 	public $_sec_Description;
@@ -15,7 +15,7 @@ class Progress  extends SqlElement {
 	public $_isNameTranslatable = true;
 	//public $_sec_void;
 	
-	private static $_databaseTableName = 'progress';
+	private static $_databaseTableName = 'weightmode';
 	private static $_databaseCriteria = array();
 	/** ==========================================================================
 	 * Constructor
