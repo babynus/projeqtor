@@ -328,7 +328,7 @@ class ImputationLine {
             $manuPlan=true;
             $plannedWorkMan=new PlannedWork();
             $critWhere="idProject='".$plan->idProject."' and refType='".$plan->refType."'";
-            $critWhere.=" and refId='$plan->refId' and workDate between'".$startDate."' and '".(($endDate<=date('Y-m-d'))?$endDate:date('Y-m-d'))."'";
+            $critWhere.=" and refId='$plan->refId' and workDate between'".$startDate."' and '".(($endDate<date('Y-m-d'))?$endDate:date('Y-m-d'))."'";
             $plannedManualWorkList=$plannedWorkMan->getSqlElementsFromCriteria(null, false, $critWhere, null, false, true);
             if(!$showPlanned){
               $critWhere="idResource in ($ressList)";
@@ -434,13 +434,17 @@ class ImputationLine {
       if (array_key_exists($key, $result)) {
         $key.='/#'.$ass->id;
       }
+      //florent
       if($manuPlan){
         foreach ($plannedManualWorkList as $work) {
-          $workDate=$work->workDate;
-          $offset=dayDiffDates($startDate, $workDate)+1;
-          $elt->arrayWork[$offset]=$work;
+          if (($work->idAssignment and $work->idAssignment==$elt->idAssignment ) or (!$work->idAssignment and $work->refType==$elt->refType and $work->refId==$elt->refId) or ($work->idAssignment and $work->idAssignment==$elt->idAssignment)) {
+            $workDate=$work->workDate;
+            $offset=dayDiffDates($startDate, $workDate)+1;
+            $elt->arrayWork[$offset]=$work;
+          }
         }
       }
+      //
       // fetch all work stored in database for this assignment
       foreach ($workList as $work) {
         if (($work->idAssignment and $work->idAssignment==$elt->idAssignment and !$work->idWorkElement and !isset($elt->_idWorkElement)) or (!$work->idAssignment and $work->refType==$elt->refType and $work->refId==$elt->refId) or ($work->idAssignment and $work->idAssignment==$elt->idAssignment and $work->idWorkElement and isset($elt->_idWorkElement) and $elt->_idWorkElement==$work->idWorkElement)) {
