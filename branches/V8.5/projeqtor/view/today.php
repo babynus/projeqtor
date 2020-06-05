@@ -298,8 +298,11 @@ function showDocuments() {
   $approver=new Approver();
   $critApprover=array('refType'=>"Document", 'idAffectable'=>$user->id);
   $critApprover2=array('refType'=>"DocumentVersion", 'approved'=>'1', 'idAffectable'=>$user->id);
+  $critApprover3=array('refType'=>"Decision", 'approved'=>'0','idAffectable'=>$user->id);
   $listApprover=$approver->getSqlElementsFromCriteria($critApprover, false, null);
   $listApprover2=$approver->getSqlElementsFromCriteria($critApprover2, false, null);
+  $listApprover3=$approver->getSqlElementsFromCriteria($critApprover3, false, null);
+  $arrayDec=array();
   $arrayDoc=array();
   $arrayDocVers=array();
   // Liste of document version approved and approved by me
@@ -315,6 +318,10 @@ function showDocuments() {
     // recupérer version document new documentversion ($valApp->refId) , acceder au document , si iddocumentversion du document est bien la version recupérer dans le foreach , alors je stocke le $arrayDoc[iddudocument]
     $arrayDoc[$valApp->refId]=$valApp->refId;
   }
+  foreach ($listApprover3 as $valApp) {
+  	// recupérer version document new documentversion ($valApp->refId) , acceder au document , si iddocumentversion du document est bien la version recupérer dans le foreach , alors je stocke le $arrayDoc[iddudocument]
+  	$arrayDec[$valApp->refId]=$valApp->refId;
+  }
   $arrayD=array_diff($arrayDoc, $arrayDocVers);
   if (count($arrayD)==0) $arrayD=array(0=>" ");
   $whereDocument="id in ".transformListIntoInClause($arrayD);
@@ -322,7 +329,8 @@ function showDocuments() {
   $where=$whereActivity;
   $whereTicket=$where;
   $whereMeeting=$whereTicket;
-  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument, 'Today_DocumentDiv', 'documentsApproval');
+  $whereDecision="id in ".transformListIntoInClause($arrayDec);
+  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument,$whereDecision, 'Today_DocumentDiv', 'documentsApproval');
 }
 
 function countFrom($list, $idProj, $type, $scope) {
@@ -400,7 +408,8 @@ function showAssignedTasks() {
   $whereDocument=$where;
   $whereActivity=" (exists (select 'x' from ".$ass->getDatabaseTableName()." x "."where x.refType='Activity' and x.refId=".$act->getDatabaseTableName().".id and x.idResource='".Sql::fmtId($user->id)."')".") and idle=0 and done=0";
   $whereMeeting=str_replace(array('Activity', $act->getDatabaseTableName()), array('Meeting', $meet->getDatabaseTableName()), $whereActivity);
-  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument, 'Today_WorkDiv', 'todayAssignedTasks');
+  $whereDecision=$where;
+  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument,$whereDecision, 'Today_WorkDiv', 'todayAssignedTasks');
 }
 
 function showAccountableTasks() {
@@ -411,7 +420,8 @@ function showAccountableTasks() {
   $whereActivity=$where;
   $whereMeeting=$whereActivity;
   $whereDocument=$whereMeeting;
-  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument, 'Today_AccDiv', 'todayAccountableTasks');
+  $whereDecision=$where;
+  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument,$whereDecision, 'Today_AccDiv', 'todayAccountableTasks');
 }
 
 function showResponsibleTasks() {
@@ -424,7 +434,8 @@ function showResponsibleTasks() {
   $whereActivity=$where;
   $whereMeeting=$whereActivity;
   $whereDocument="1=0";
-  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument, 'Today_RespDiv', 'todayResponsibleTasks');
+  $whereDecision=$whereDocument;
+  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument,$whereDecision, 'Today_RespDiv', 'todayResponsibleTasks');
 }
 
 function showIssuerRequestorTasks() {
@@ -434,7 +445,8 @@ function showIssuerRequestorTasks() {
   $whereActivity=$whereTicket;
   $whereMeeting=$where;
   $whereDocument="1=0";
-  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument, 'Today_FollowDiv', 'todayIssuerRequestorTasks');
+  $whereDecision=$whereDocument;
+  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument,$whereDecision, 'Today_FollowDiv', 'todayIssuerRequestorTasks');
 }
 
 function showProjectsTasks() {
@@ -443,10 +455,11 @@ function showProjectsTasks() {
   $whereActivity=$where;
   $whereMeeting=$where;
   $whereDocument="1=0";
-  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument, 'Today_ProjectTasks', 'todayProjectsTasks');
+  $whereDecision=$whereDocument;
+  showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument,$whereDecision, 'Today_ProjectTasks', 'todayProjectsTasks');
 }
 
-function showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument, $divName, $title) {
+function showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting, $whereDocument, $whereDecision, $divName, $title) {
   // Assign idRess idUser idCont Items
   // $where : NO YES YES NO Milestone, Risk, Action, Issue, Opportunity, Decision, Question, Quote, Order, Bill
   // $whereActivity : YES YES YES YES Activity
@@ -487,6 +500,9 @@ function showActivitiesList($where, $whereActivity, $whereTicket, $whereMeeting,
   $document=new Document();
   $listDoc=$document->getSqlElementsFromCriteria(null, false, $whereDocument);
   $list=array_merge($list, $listDoc);
+  $decision=new Decision();
+  $listDec=$decision->getSqlElementsFromCriteria(null, false, $whereDecision);
+  $list=array_merge($list, $listDec);
   $action=new Action();
   $listAction=$action->getSqlElementsFromCriteria(null, null, $where, $order, null, true, $cptMax+1);
   $list=array_merge($list, $listAction);
