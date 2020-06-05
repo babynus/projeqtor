@@ -23,91 +23,110 @@ The document element describes the general information.
 
 The file will be stored in the tool as versions.
 
-.. rubric:: files storage
-
-Document will always refer to a directory where the file is physically stored.
+.. figure:: /images/GUI/DOCUMENT_SCR_Documents.png
+   :alt: Documents screen
    
-Directories are defined in :ref:`document-directory` screen.
-
-.. rubric:: Approval process
-   
-You can define approvers to a document.
-   
-When all approvers have approved the document version, it is considered as approved and then appears with a check in the list of versions.
-   
-When creating an approver in the list, the approver is also automatically added to the latest version of the document.
-   
-When adding a version to the document, the approvers are automatically added to the version.
+   Documents screen
 
 
-.. raw:: latex
 
-    \newpage
 
-.. title:: Document directories management
 
-.. index:: Document (Directories management) 
+.. rubric:: Description section
 
-.. _document-directory:
+.. sidebar:: Other sections
 
-Document directories
---------------------
+   * :ref:`Linked element<linkElement-section>`
+   * :ref:`Notes<note-section>`
 
-Document directories management allows to define a structure for document storage.
-
-* The files of document will be stored in the folder defined by the parameters  **Document root** and **Location**.
-* **Document root** is defined in :ref:`Global parameters<file-directory-section>` screen. 
-
-.. rubric:: Section Description
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required field |ReqFieldLegend|
-   :widths: 20, 80
+     
+.. list-table:: Required fields |ReqFieldLegend|
    :header-rows: 1
 
    * - Field
      - Description
    * - :term:`Id`
-     - Unique Id for the directory.
-   * - |RequiredField| Name
-     - Name of the directory.
-   * - Parent directory
-     - Name of the parent directory to define hierarchic structure.
-   * - Location
-     - Folder where files will be stored.
-   * - Project
-     - Directory is dedicated to this project.
+     - Unique Id for the context.
+   * - |RequiredField| Type
+     - Type of the document
+   * - |RequiredField| Project
+     - Name of the project to which the document is attached    
    * - Product
-     - Directory is dedicated to this product.
-   * - Default type
-     - Type of document the directory is dedicated to.
+     - Name of the product to wich the document is attached
+   * - |RequiredField| Directory
+     - Choose the :ref:`directory<document-directory>` in which the document should be saved
+   * - Document reference 
+     - Automatic reference created from the parameters saved in the :ref:`global parameters<gp-reference>` 
+   * - External reference   
+     - Manual reference corresponding to your activity 
+   * - Author
+     - The author, the creator of the document.
    * - :term:`Closed`
-     - Flag to indicate that directory is archived.
+     - Box checked indicates the document is archived.
+   * - Cancelled
+     - Box checked indicates the document is cancelled. 
+
+
+.. rubric:: Project and Product
+
+Must be concerned either with a project, a product or both.
+
+If the project is specified, the list of values for field "Product" contains only products linked the selected project.
+
+.. rubric:: Field Author
+
+Positioned by default as the connected user.
+
+Can be changed (for instance if the author is not the current user).
+
+
+
+.. index:: lock document
+
+.. rubric:: Section Lock
+
+This section allows to manage document locking.
+
+When a document is locked the following fields are displayed.
+
+
+.. figure:: /images/GUI/DOCUMENT_ZONE_LockDocument.png
+   :alt: Lock the document section
+   
+   Lock document section
+   
+  
+
+
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Fields when the document is locked
+   :widths: 20, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - Locked
+     - Box checked indicates the document is locked.
+   * - Locked by
+     - User who locked the document.
+   * - Locked since
+     - Date and time when document was locked.
+
+.. compound:: lock/unlock this document
  
-.. topic:: Field **Parent directory**
-
-   The current directory is then a sub-directory of parent.
-
-.. topic:: Field **Location**
-
-   Location is automatically defined as «Parent directory» / «Name».
-
-.. topic:: Field **Project**
-
-   This project will be the default to new stored documents in this directory.
-
-.. topic:: Field **Product**
-
-   This product will be the default to new stored documents in this directory.
+   * Button to lock or unlock the document to preserve it from being editing, or new version added.
+         
+   * When document is locked it cannot be modified
+         
+   * When the document is locked, it can not be downloaded except for the user who locked it or a user with privilege
+         
+   * Only the user who locked the document, or a user with privilege can unlock it
+         
+   * You can forbid :ref:`Global Parameters<format_reference_doc>`
    
-   If the project is specified, the list of values contains the products linked the selected project.
    
-   If the project is not specified, the list of values contains all products defined.
-
-.. topic:: Field **Default type**
-
-   This document type will be the default to new stored documents in this directory.
 
 
 
@@ -122,13 +141,47 @@ Document directories management allows to define a structure for document storag
 .. _versioning:
 
 Document versioning
--------------------
+___________________
+
+This section allows to manage version list of document.
 
 Document versioning allows to keep different version at each evolution of the document.
 
 Document can evolve and a new file is generated at each evolution.
 
 Type of versioning must be defined for a document. 
+
+.. figure:: /images/GUI/DOCUMENT_ZONE_Versioning.png
+   :alt: Versionning section
+   
+   Versioning section
+   
+   
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required field |ReqFieldLegend|
+   :widths: 40, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - |RequiredField| Versioning type
+     - Type of versioning for the document.
+   * - Last version
+     - Caption of the last version of the document.
+   * - :term:`Status`
+     - Status of the last version of the document.
+
+
+
+* Click on |buttonAdd| to add a new version. 
+* Click on |iconDownload| to download file at this version.
+* Click on |buttonEdit| to modifiy a version.
+* Click on |buttonIconDelete| to delete a version.
+* Click on |ListApprovers| to display the history for approvals for version
+
+   
+  
 
 
 .. rubric:: Type of versioning
@@ -159,99 +212,20 @@ A document can evolve following four ways defined as versioning type :
     * Version is manually set. 
     * This versioning type is commonly used for external documents, when version is not managed by the tool, or when the format cannot fit any other versioning type.
 
-.. rubric:: Section Description
 
-.. sidebar:: Other sections
-
-   * :ref:`Linked element<linkElement-section>`
-   * :ref:`Notes<note-section>`
-   
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required field |ReqFieldLegend|
-   :widths: 50, 80
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - :term:`Id`
-     - Unique Id for the document.
-   * - |RequiredField| Name
-     - Short description of the document.
-   * - |RequiredField| Type
-     - Type of document.
-   * - Project
-     - The project concerned by the document.
-   * - Product
-     - The product concerned by the document.
-   * - |RequiredField| Directory
-     - Place where the document is stored  to organize document structure. 
-   * - Document reference
-     - Document reference name.
-   * - :term:`External reference`
-     - External reference of the document.
-   * - Author
-     - User or Resource or Contact who created the document. 
-   * - :term:`Closed`
-     - Box checked indicates the document is archived.
-   * - Cancelled
-     - Box checked indicates the document is cancelled.
-
-.. rubric:: Project and Product
-
-Must be concerned either with a project, a product or both.
-
-If the project is specified, the list of values for field "Product" contains only products linked the selected project.
-
-.. rubric:: Document reference
-
-Document reference name is calculated from format defined in the :ref:`Global parameters<format_reference_doc>` screen.
-
-.. rubric:: Field Author
-
-Positioned by default as the connected user.
-
-Can be changed (for instance if the author is not  the current user).
-
-.. raw:: latex
-
-    \newpage
-
-.. index:: Version Managment
-
-.. _version_Managment:
-
-Version management
-------------------
-
-This section allows to manage version list of document.
-
-.. tabularcolumns:: |l|l|
-
-.. list-table:: Required field |ReqFieldLegend|
-   :widths: 40, 80
-   :header-rows: 1
-
-   * - Field
-     - Description
-   * - |RequiredField| Versioning type
-     - Type of versioning for the document.
-   * - Last version
-     - Caption of the last version of the document.
-   * - :term:`Status`
-     - Status of the last version of the document.
-
-
-
-* Click on |buttonAdd| to add a new version. 
-* Click on |buttonEdit| to modifiy a version.
-* Click on |buttonIconDelete| to delete a version.
-* Click on |iconDownload| to download file at this version.
 
 .. rubric:: Document viewer
 
 * Document viewer available for image, text and PDF files.
-* Click on icon.
+* Click on |buttonAdd| to display the pop up.
+
+
+.. figure:: /images/GUI/BOX_DocumentVersion.png
+   :alt: Dialog box - Document version 
+   :align: center
+   
+   Document version dialog box
+
 
 .. note:: 
 
@@ -261,11 +235,7 @@ This section allows to manage version list of document.
    
    If you want to preserve the uploaded file name, set the parameter in  the :ref:`Global parameters <format_reference_doc>`
 
-.. figure:: /images/GUI/BOX_DocumentVersion.png
-   :alt: Dialog box - Document version 
-   :align: center
-   
-   Document version dialog box
+
 
 .. tabularcolumns:: |l|l|
 
@@ -313,78 +283,144 @@ This icon |Note| appears when the description field is filled.
 Moving the mouse over the icon will display description text.
 
 
-.. rubric:: Section Approvers
 
-This section allows to manage approver list of a document.
 
-.. tabularcolumns:: |l|l|
 
-.. list-table:: Approver list fields
-   :widths: 20, 80
-   :header-rows: 1
 
-   * - Field
-     - Description
-   * - Id
-     - Id of the approver.
-   * - Name
-     - Name of the approver.
-   * - Status
-     - Status of the approval of the last version of document.
 
-.. note:: 
+Approval process
+________________
 
-   :kbd:`Approve now`
 
-   This button appears in approver list.
-
-   Just click on the button to approve the latest version of the document.
-
-   :kbd:`Send a reminder email to the approvers`
+.. figure:: /images/GUI/DOCUMENT_ZONE_Approvers.png
+   :alt: Approvers section
    
-   This button allows to send a reminder email to all the approvers who have not yet approved the document.
+   Approvers section
+   
+      
+You can define approvers for a document.
+  
+* Click on |buttonAdd| to add an approver
+* Click on |buttonIconDelete| to delete an approver
 
- 
-.. rubric:: Approver list management
+.. warning :: Only users assigned to the project linked to the document can be added
+    
+When an approver is created in the list, the approver is also automatically added to the latest version of the document.
+   
+When adding a version to the document, approvers are automatically added to the version.
 
-* Click on |buttonAdd| to add a new approver. 
-* Click on |buttonIconDelete| to delete the approver.
+
+.. rubric:: The approvers
 
 
-.. index:: lock document
+Each approver can see the list of documents to approve on their Today screen.
 
-.. rubric:: Section Lock
 
-This section allows to manage document locking.
 
-When a document is locked the following fields are displayed.
+.. figure:: /images/GUI/DOCUMENT_ZONE_ApproverValidation.png
+   :alt: Details zone for the approvers
+   
+   Document details area for the approvers
+   
+   
+   
+On the Documents screen, the approver can approve or reject the document.
+
+Once the document is approved, the line is then checked and the date and time of the approval recorded.   
+
+.. figure:: /images/GUI/DOCUMENT_ZONE_DocumentApprove.png
+   :alt: Document is approved
+   
+   Document is approved
+
+When all approvers have approved the document version, it is considered approved and then appears with a check mark in the list of versions.
+  
+   
+
+  .. compound:: Send a reminder email to approvers
+
+   Send an email to approvers who have not yet validated the document. 
+
+   Those who have already validated it will not receive this email.
+
+   The sending will be effective if an email address has been registered for the user.
+
+
+
+
+
+
+
+.. raw:: latex
+
+    \newpage
+
+.. title:: Document directories management
+
+.. index:: Document (Directories management) 
+
+.. _document-directory:
+
+Document directories
+--------------------
+
+Document directories management allows to define a structure for document storage.
+
+* The files of document will be stored in the folder defined by the parameters  **Document root** and **Location**.
+* **Document root** is defined in :ref:`Global parameters<file-directory-section>` screen. 
+
+.. rubric:: Section Description
 
 .. tabularcolumns:: |l|l|
 
-.. list-table:: Fields when the document is locked
-   :widths: 20, 80
+.. list-table:: Required field |ReqFieldLegend|
    :header-rows: 1
 
    * - Field
      - Description
-   * - Locked
-     - Box checked indicates the document is locked.
-   * - Locked by
-     - User who locked the document.
-   * - Locked since
-     - Date and time when document was locked.
-
-.. compound:: lock/unlock this document
+   * - :term:`Id`
+     - Unique Id for the directory.
+   * - |RequiredField| Name
+     - Name of the directory.
+   * - Parent directory
+     - Name of the parent directory to define hierarchic structure.
+   * - Location
+     - Folder where files will be stored.
+   * - Project
+     - Directory is dedicated to this project.
+   * - Product
+     - Directory is dedicated to this product.
+   * - Default type
+     - Type of document the directory is dedicated to.
+   * - :term:`Closed`
+     - Flag to indicate that directory is archived.
  
-   * Button to lock or unlock the document to preserve it from being editing, or new version added.
-         
-   * When document is locked it cannot be modified
-         
-   * When the document is locked, it can not be downloaded except for the user who locked it or a user with privilege
-         
-   * Only the user who locked the document, or a user with privilege can unlock it
-         
-   * You can forbid :ref:`Global Parameters<format_reference_doc>`
+.. topic:: Field **Parent directory**
+
+   The current directory is then a sub-directory of parent.
+
+.. topic:: Field **Location**
+
+   Location is automatically defined as «Parent directory» / «Name».
+
+.. topic:: Field **Project**
+
+   This project will be the default to new stored documents in this directory.
+
+.. topic:: Field **Product**
+
+   This product will be the default to new stored documents in this directory.
+   
+   If the project is specified, the list of values contains the products linked the selected project.
+   
+   If the project is not specified, the list of values contains all products defined.
+
+.. topic:: Field **Default type**
+
+   This document type will be the default to new stored documents in this directory.
+
+
+
       
 
 Nomenclature

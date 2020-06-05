@@ -426,7 +426,8 @@ Assigning a resource to a task makes it possible to define its function on the l
 .. warning::
     * Only resources allocated to a project can be assigned to its tasks.
     * If real work exists for an assignment, it can not be deleted.
-    
+    * Basic, if an actual job exists for an assignment, it cannot be deleted.
+    * Only a profile with the specific right "force deletions with real work" activated can delete an element with real work.
     
 .. figure:: /images/GUI/COMMON_ZONE_AssignmentSection.PNG
    :alt: assignment section

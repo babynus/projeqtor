@@ -465,7 +465,7 @@ Default values for user
       Display of notes in discussion mode with indentation for answers 
  
 
-.. _miscellaneous:
+.. _gp-reference:
 
 Tab References
 **************
