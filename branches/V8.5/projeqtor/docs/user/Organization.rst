@@ -104,13 +104,25 @@ This section displays a summary of the costs recorded on the projects related to
 In this section you will find the list of projects and sub-projects linked to the selected organization.
 
 
+.. _linked-resource-organization:
+
 .. rubric:: Linked resources
-   
+
 This section allows you to see the resources attached to the selected organization.
 
-Click the "allocate all organization members to a project" button to assign all of an organization's resources to a project.
+.. figure:: /images/GUI/ORGANIZATION_ZONE_LinkedResources.png
+   :alt: Linked resource section
+   
+   Linked resource section
+   
+      
+* Click on |buttonAdd| to add a new resource in the organization
 
-The project assignment pop-up opens and allows you to choose your resources.
+* Click on |buttonIconDelete| to delete a resource of the organization
+
+* Click the **allocate all organization members to a project** button to assign all of an organization's resources to a project.
+
+* The project assignment pop-up opens and allows you to choose your resources.
 
 
 .. figure:: /images/GUI/ORGANIZATION_BOX_AllocatoinProject.png

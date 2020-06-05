@@ -157,6 +157,8 @@ Resource availability is defined by assigning it to a project.
   
    * :ref:`Allocations<allocation-section>`
    * :ref:`Assignment<assignment-section>`
+
+.. _allocation-project-resource:
    
 .. compound:: **Allocations to projects**
    
@@ -441,6 +443,10 @@ You assign resources to the pool at a given rate for a given period.
      - Initials of the pool of resource.
    * - |RequiredField| Calendar
      - :ref:`Calendar<calendars>` defines the availability of the resource.
+   * - Organization
+     - Name of the organization to which the pool is attached
+   * - Team 
+     - Name of the team to which the pool is attached  
    * - Start date
      - Start date of activity for this pool
    * - is a student
@@ -449,6 +455,8 @@ You assign resources to the pool at a given rate for a given period.
      - Indicates if the pool is made up of outsourced.     
    * - :term:`Closed`
      - Flag to indicate that the resource is archived.
+   * - End date
+     - End date of activity for this pool  
    * - Description
      - Complete description of the resource.
 
