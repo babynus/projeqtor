@@ -1149,11 +1149,11 @@ function loadContent(page, destination, formName, isResultMessage, validationTyp
                 directAccess=parseInt(directAccess);
               }
               showWait();
-              loadContent("objectDetail.php", "detailDiv", 'listForm');
+              var callBackFinal=function() {setTimeout('selectRowById("objectGrid", '+directAccess+');', 10);};
+              loadContent("objectDetail.php", "detailDiv", 'listForm',null,null,null,null,callBackFinal);
               if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv",'listForm');
               showWait();
-              hideList();
-              setTimeout('selectRowById("objectGrid", '+directAccess+');', 100);
+              hideList();              
             }
           }
           if (isResultMessage) {    
@@ -3664,6 +3664,9 @@ function openInNewWindow(eltClass, eltId) {
   window.open(url,'_blank',params).focus;
 }
 function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target) {
+if (noHistory==undefined) noHistory=false;
+if (forceListRefresh==undefined) forceListRefresh=false;
+if (target==undefined) target='object';
   if (eltClass=='BudgetItem') eltClass='Budget'; 
   var ctrlPressed=(window.event && (window.event.ctrlKey || window.event.shiftKey))?true:false;
   if (ctrlPressed && eltClass && eltId) {
@@ -3713,8 +3716,8 @@ function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target) {
     if ( ( (!dojo.byId('objectClass') || dojo.byId('objectClass').value != eltClass) && (!dojo.byId('objectClassList') || dojo.byId('objectClassList').value != eltClass))
         || forceListRefresh || dojo.byId('titleKanban')) {
       var callBack=null;
-      if (dijit.byId("detailRightDiv")) callBack=function(){loadContent("objectStream.php", "detailRightDiv", "listForm");};
-      
+      //if (dijit.byId("detailRightDiv")) callBack=function(){loadContent("objectStream.php", "detailRightDiv", "listForm");};
+      //callBack=function(){setTimeout('selectRowById("objectGrid", '+eltId+');', 100);};
       loadContent("objectMain.php?objectClass=" + eltClass, "centerDiv", false,
           false, false, eltId,false,callBack);
     } else {
