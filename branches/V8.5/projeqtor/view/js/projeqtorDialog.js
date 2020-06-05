@@ -1115,6 +1115,10 @@ function removeNote(noteId) {
 //=============================================================================
 
 function addSituation() {
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+   }
   if (dijit.byId("situationToolTip")) {
     dijit.byId("situationToolTip").destroy();
     dijit.byId("situationComment").set("class", "");
@@ -1141,7 +1145,11 @@ function addSituation() {
 }
 
 function editSituation(situationId) {
-if (dijit.byId("situationToolTip")) {
+  if (checkFormChangeInProgress()) {
+    showAlert(i18n('alertOngoingChange'));
+    return;
+  }
+  if (dijit.byId("situationToolTip")) {
     dijit.byId("situationToolTip").destroy();
     dijit.byId("situationComment").set("class", "");
   }
