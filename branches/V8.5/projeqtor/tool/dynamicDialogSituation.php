@@ -200,10 +200,10 @@ $predefinedList = $predefinedSituation->getSqlElementsFromCriteria(null, null, $
     <tr>
       <td align="center">
         <input type="hidden" id="dialogSituationAction">
-        <button class="mediumTextButton"  dojoType="dijit.form.Button" type="button" onclick="dijit.byId('dialogSituation').hide();">
+        <button class="mediumTextButton"  dojoType="dijit.form.Button" type="button" onclick="formInitialize();dijit.byId('dialogSituation').hide();">
           <?php echo i18n("buttonCancel");?>
         </button>
-        <button class="mediumTextButton"  id="dialogSituationSubmit" dojoType="dijit.form.Button" type="submit" onclick="protectDblClick(this);saveSituation();return false;">
+        <button class="mediumTextButton"  id="dialogSituationSubmit" dojoType="dijit.form.Button" type="submit" onclick="protectDblClick(this);formInitialize();saveSituation();return false;">
           <?php echo i18n("buttonOK");?>
         </button>
       </td>
