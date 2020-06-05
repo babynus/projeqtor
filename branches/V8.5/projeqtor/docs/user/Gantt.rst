@@ -563,6 +563,9 @@ The selector |buttonIconDrag| allows to reorder the planning elements.
    Ability to move multiple tasks at one time from one location to another using the key control to select the lines and then dragging and dropping them.
 
 
+.. warning:: 
+
+   If you move an activity to a new project, the assigned resource must be allocated to the new project to allow this move.
 
 
 

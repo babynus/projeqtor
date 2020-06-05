@@ -211,6 +211,31 @@ Allocation to project is used to:
    * - :term:`Description`
      - Complete description of the allocation.
 
+
+
+.. rubric:: Allocation behavior
+
+**Example 1**
+
+* R allocated to project A
+* B is a subproject of A 
+* B has no allocation
+
+   * R can be assigned to an activity of B
+   * It is impossible to delete the allocation of R on project A because R is assigned on the activity of project B
+
+**Example 2**
+
+* R allocated to projects A and B
+* B is a subproject of A
+* R is assigned to the activity of B
+
+
+   * It is possible to remove the allocation from R to B because the allocation on A preserves coherence
+   * A being the parent project, it is not possible to delete the allocation from R to A although the allocation from R to B exists 
+
+
+
 .. topic:: Fields Resource & Contact
 
    * You can select resource or contact.
@@ -270,7 +295,8 @@ A resource may be allocated to projects at a specified rate for a period.
 
 Allocation to project can be defined in :ref:`planningelem_project` and :ref:`resource` screens.
 
-It is also possible to allocate a team to a project in :ref:`team` screens.
+You can also allocate a team or an organization to a project in :ref:`team` and :ref:`Organization<linked-resource-organization>` screens.
+
 
 .. note::
 
@@ -386,7 +412,9 @@ Consists to assign a resource to a task in a specific function. The function all
 
 A resource assignment contains data about work on task (planned, real, left and reassessed work).
 
-You can not remove a resource assignment once the resource has entered real work on the activity.
+Basic, you cannot delete a resource assignment after the resource has entered actual work on the activity.
+
+This assignment can be deleted by a profile including the option "Can delete items with real work" in the access rights menu in the specific acces.
 
 Similarly, if the resource has completed its activity, deletion is not possible. 
 
@@ -1378,7 +1406,6 @@ They can be changed to be adapted to any kind of project.
 .. tabularcolumns:: |l|l|
 
 .. list-table::
-   :widths: 30, 80
    :header-rows: 1
 
    * - Field

@@ -19,7 +19,8 @@
 	
 	
 	
-	
+.. |ListApprovers| image:: images/iconButtonListApprover.png
+	:alt: icon List of approvers	
 	
 	
 	
