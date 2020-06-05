@@ -179,6 +179,7 @@ class ProjectPlanningElementMain extends PlanningElement {
       self::$_fieldsAttributes['idProgressMode']='readonly,size1/3';
       self::$_fieldsAttributes['unitWeight']='readonly';
       self::$_fieldsAttributes['idWeightMode']='readonly,size1/3';
+      self::$_fieldsAttributes['idWeightMode']='size1/3';
     }else{
       unset($this->_separator_menuTechnicalProgress_marginTop);
     }

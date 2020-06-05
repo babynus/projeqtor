@@ -313,8 +313,9 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
   } else if($col=="idWeightMode"){
     $showIdleCriteria=$showIdle;
     $table=SqlList::getList($listType,$column,$selection, $showIdleCriteria );
-      if(isset($obj) and get_class($obj)=='Project'){
-        $table=$table[2];
+      if(isset($obj) and get_class($obj)=='ProjectPlanningElement'){
+        unset($table[3]);
+        unset($table[1]);
       }else{
         if(isset($obj)){
           if($obj->getSonItemsArray()){
