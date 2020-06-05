@@ -34,7 +34,6 @@
 
 require_once "../tool/projeqtor.php";
 
-debugLog($_REQUEST);
 // Get the object class from request
 if (! array_key_exists('objectClass',$_REQUEST)) {
   throwError('objectClass parameter not found in REQUEST');

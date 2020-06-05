@@ -135,6 +135,7 @@ class Work extends GeneralWork {
   function save() {
     // On saving remove corresponding planned work if exists
     $oldWork=0;
+    $toDay=date("Y-m-d");
     if ($this->id) { // Update existing
       $old=new Work($this->id);
       $oldWork=$old->work;
@@ -145,7 +146,6 @@ class Work extends GeneralWork {
       //florent
       $pe=new PlanningElement();
       $critArray=array('refType'=>$this->refType, 'refId'=>$this->refId);
-      $toDay=date("Y-m-d");
       $pe=$pe->getSingleSqlElementFromCriteria('PlanningElement', $critArray);
       if($pe->idPlanningMode=='23'){
         $manualPlan=true;
@@ -158,7 +158,7 @@ class Work extends GeneralWork {
       $pw=new PlannedWork();
       $list=$pw->getSqlElementsFromCriteria($crit, null, null, 'workDate asc');
       $needReplanOtherProjects=(count($list)==0)?true:false;
-      $deletManPlan=false;
+      //$deletManPlan=false;
       while ($additionalWork>0 and count($list)>0) {
         $pw=array_shift($list);
         if ($pw->work > $additionalWork) {
@@ -167,10 +167,10 @@ class Work extends GeneralWork {
           $additionalWork=0;
         } else {
           $additionalWork-=$pw->work;
-            if($manualPlan and !$deletManPlan){
-              $deletManPlan=true;
-           }
-           if(!$manualPlan or($manualPlan and $pw->workDate<$toDay)){
+//             if($manualPlan and !$deletManPlan){
+//               $deletManPlan=true;
+//            }
+           if(!$manualPlan or($manualPlan and $pw->workDate<=$toDay)){
              $pw->delete();
            }
         }
@@ -180,13 +180,15 @@ class Work extends GeneralWork {
           $list=$pw->getSqlElementsFromCriteria($crit, null, null, 'workDate asc');
         }
       }
-      if($deletManPlan){
+      //florent
+      if($manualPlan){
         $pwm= new PlannedWorkManual();
-        $date=($this->workDate>=$toDay)?$toDay:$this->workDate;
-        $where="idAssignment=$this->idAssignment and refType='$this->refType' and refId=$this->refId and idResource=$this->idResource and workDate<'$date'";
+        $date=($this->workDate>$toDay)?$toDay:$this->workDate;
+        $where="idAssignment=$this->idAssignment and refType='$this->refType' and refId=$this->refId and idResource=$this->idResource and workDate<='$date'";
         $pw->purge($where);
         $pwm->purge($where);
       }
+      //
       if ($needReplanOtherProjects) {
         $where="idResource=$this->idResource and workDate='$this->workDate' and idProject!=$this->idProject";
         $list=$pw->getSqlElementsFromCriteria(null, null, $where, 'workDate asc');
