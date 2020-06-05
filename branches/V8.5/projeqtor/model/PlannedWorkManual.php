@@ -447,15 +447,16 @@ class PlannedWorkManual extends GeneralWork {
     if($idProject){
      $myProj = new Project($idProject);
      $listProj = transformListIntoInClause($myProj->getRecursiveSubProjectsFlatList(false,true));
-     $crit=array('idPlanningMode'=>23,'idle'=>'0','idProject'=>$idProject);
-     $crit = null;
      $where = " idPlanningMode = 23 and idle = '0' and idProject in $listProj" ;
+     $order = null;
     }else{
-      $crit=array('idPlanningMode'=>23,'idle'=>'0');
-      $where = null;
+      $user = new User(getCurrentUserId());
+      $listProj = transformListIntoInClause($user->getVisibleProjects());
+      $where = " idPlanningMode = 23 and idle = '0' and idProject in $listProj" ;
+      $order = " wbs asc";
     }
     $pe=new PlanningElement();
-    $list=$pe->getSqlElementsFromCriteria($crit,null,$where);
+    $list=$pe->getSqlElementsFromCriteria(null,null,$where,$order);
     $nameWidth=250;
     $idWidth=20;
     $nbDays=31;

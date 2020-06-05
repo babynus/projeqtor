@@ -74,19 +74,22 @@ $critIncompatible.=" and refType is not null and refId is not null";
 $pwm=SqlElement::getSingleSqlElementFromCriteria('PlannedWorkManual', array('workDate'=>$date,'idResource'=>$resource,'period'=>$period));
 if ($allDay) $pwmx=SqlElement::getSingleSqlElementFromCriteria('PlannedWorkManual', array('workDate'=>$date,'idResource'=>$resource,'period'=>$periodx));
 if($pwm->id){
+  $lstProjectVisible = $user->getVisibleProjects();
   $project =new Project($pwm->idProject,true);
   $profile=getSessionUser()->getProfile($project);
   $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$profile, 'scope'=>'assignmentEdit'));
-  if($habil->rightAccess!=1){
+  if($habil->rightAccess!=1 or !array_key_exists($pwm->idProject, $lstProjectVisible)){
     echo '{"error":"'.i18n('errorUpdateRights').'"}';
     exit;
   }
 }
+debugLog($pwmx->idProject);
 if($allDay and $pwmx->id){
+  $lstProjectVisible = $user->getVisibleProjects();
   $project =new Project($pwmx->idProject,true);
   $profile=getSessionUser()->getProfile($project);
   $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$profile, 'scope'=>'assignmentEdit'));
-  if($habil->rightAccess!=1){
+  if($habil->rightAccess!=1 or !array_key_exists($pwmx->idProject, $lstProjectVisible)){
     echo '{"error":"'.i18n('errorUpdateRights').'"}';
     exit;
   } 

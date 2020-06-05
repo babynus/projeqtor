@@ -7160,6 +7160,8 @@ function getTargetFromCurrentScreenChangeLang(currentScreen){
     target="dashboardRequirementMain.php";
   } else if (currentScreen=="ActivityStream") {
     target="activityStreamMain.php";
+  } else if (currentScreen=="PlannedWorkManual") {
+    target="plannedWorkManualMain.php";
   } else if (currentScreen=="Today"){ 
     target="today.php";
   } else {
