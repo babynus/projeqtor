@@ -7370,7 +7370,6 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
       $result[$fld]=$value;
       $dataType=$this->getDataType($fld);
       $dataLength=$this->getDataLength($fld);
-      
       if ($dataLength>4000) { // Big text html formatted : must be transformed into plain text
         $text=new Html2Text($value);
         $result[$fld.'Text']=$text->getText();
@@ -7380,7 +7379,7 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
         $fldName='name'.substr($fld,2);
         if ($class=='Resource' or $class=='User' or $class=='Contact') {
           $result[$fldName]=SqlList::getFieldFromId('Affectable', $value, 'fullName');
-        } else if (SqlElement::class_exists($class)) {
+        } else if (SqlElement::class_exists($class) and property_exists($class,'name')) {
           $result[$fldName]=SqlList::getNameFromId($class, $value);
         }
         if ($fld=='id'.get_class($this).'Type') {
