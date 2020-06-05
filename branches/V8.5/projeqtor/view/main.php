@@ -452,7 +452,9 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                     $rights=$user->getAccessControlRights();
                     echo "dojo.byId('directAccessPage').value='';";
                     echo "dojo.byId('menuActualStatus').value='';";
-                    echo 'gotoElement("' . $class . '","' . $id . '");';
+                    echo "waitingForReply=false;";
+                    //echo 'gotoElement("' . $class . '","' . $id . '");';
+                    echo 'setTimeout(\'gotoElement("' . $class . '","' . $id . '");\',100);';
                     $firstPage="";
                   }
                 }
