@@ -7514,7 +7514,7 @@ public function getMailDetailFromTemplate($templateToReplace, $lastChangeDate=nu
         self::$_lastRefObject=$refObj;
       }
     } else {
-      if ($refType) {
+      if ($refType and ! SqlElement::class_exists($refType)) {
         traceLog("SqlElement::getRefObj() : '$refType' does not reference a valid object class");
         //debugPrintTraceStack();
       }

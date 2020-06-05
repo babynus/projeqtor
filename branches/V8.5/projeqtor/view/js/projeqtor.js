@@ -7047,6 +7047,7 @@ function expandOrganizationGroup(idOrganization, subOrganization,recSubOrganizat
 }
 
 function setUnitProgress(){
+  if (!dijit.byId('ActivityPlanningElement_unitToRealise') || !dijit.byId('ActivityPlanningElement_unitRealised')) return null;
   var todo=dijit.byId('ActivityPlanningElement_unitToRealise').get("value");
   var real=dijit.byId('ActivityPlanningElement_unitRealised').get("value");
   var result=0;

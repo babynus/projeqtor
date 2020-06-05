@@ -991,6 +991,15 @@ static function isTheLeaveProject($id=null) {
     	}
     }
     // MTY - LEAVE SYSTEM
+    
+    // report name to project situation
+    if ($this->name!=$old->name) {
+      $ps=SqlElement::getSingleSqlElementFromCriteria('ProjectSituation', array('idProject'=>$this->id));
+      if ($ps->id) {
+        $ps->name=i18n('ProjectSituation').' - '.$this->name;
+        $ps->save();
+      }
+    }
     return $result; 
 
   }
