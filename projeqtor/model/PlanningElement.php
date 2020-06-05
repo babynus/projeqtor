@@ -278,23 +278,23 @@ class PlanningElement extends SqlElement {
     } else if($colName=='indivisibility'){
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  if(this.checked){';
-      $colScript .= '   dijit.byId("ActivityPlanningElement_minimumThreshold").set("required", true);';
-      $colScript .= '   dijit.byId("ActivityPlanningElement_minimumThreshold").set("class", "input required");';
+      $colScript .= '   dijit.byId("'.$this->refType.'PlanningElement_minimumThreshold").set("required", true);';
+      $colScript .= '   dijit.byId("'.$this->refType.'PlanningElement_minimumThreshold").set("class", "input required");';
       $colScript .= '  }else{';
-      $colScript .= '   dijit.byId("ActivityPlanningElement_minimumThreshold").set("required", false);';
-      $colScript .= '   dijit.byId("ActivityPlanningElement_minimumThreshold").set("class", "input");';
+      $colScript .= '   dijit.byId("'.$this->refType.'PlanningElement_minimumThreshold").set("required", false);';
+      $colScript .= '   dijit.byId("'.$this->refType.'PlanningElement_minimumThreshold").set("class", "input");';
       $colScript .= '  }';
       $colScript .= '</script>';
     }else if($colName=='idProgressMode'){
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  var widget=dijit.byId("ActivityPlanningElement_unitProgress");';
+      $colScript .= '  var widget=dijit.byId("'.$this->refType.'PlanningElement_unitProgress");';
       $colScript .= '  if(this.value==1){';
       $colScript .= '   if (widget) {';
       $colScript .= '     widget.set("readOnly",true);';
       $colScript .= '   }';
-      $colScript .= '   if(dijit.byId("ActivityPlanningElement_unitToRealise").get("value")!="0"){';
+      $colScript .= '   if(dijit.byId("'.$this->refType.'PlanningElement_unitToRealise").get("value")!="0"){';
       $colScript .= '     var progress=setUnitProgress();';
-      $colScript .= '     dijit.byId("ActivityPlanningElement_unitProgress").set("value", progress);';
+      $colScript .= '     dijit.byId("'.$this->refType.'PlanningElement_unitProgress").set("value", progress);';
       $colScript .= '   }';
       $colScript .= '  }else{';
       $colScript .= '   if (widget) {';
@@ -304,7 +304,7 @@ class PlanningElement extends SqlElement {
       $colScript .= '</script>';
     }else if($colName=='idWeightMode'){
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  var widget=dijit.byId("ActivityPlanningElement_unitWeight");';
+      $colScript .= '  var widget=dijit.byId("'.$this->refType.'PlanningElement_unitWeight");';
       $colScript .= '  if(this.value==1){';
       $colScript .= '   if (widget) {';
       $colScript .= '     widget.set("readOnly",false);';
@@ -314,40 +314,40 @@ class PlanningElement extends SqlElement {
       $colScript .= '     widget.set("readOnly",true);';
       $colScript .= '   }';
       $colScript .= '     if (this.value==3){';
-      $colScript .= '       if(dojo.byId("ActivityPlanningElement_unitToRealise").value==""){';
-      $colScript .= '         dijit.byId("ActivityPlanningElement_unitWeight").set("value","0");';
+      $colScript .= '       if(dojo.byId("'.$this->refType.'PlanningElement_unitToRealise").value==""){';
+      $colScript .= '         dijit.byId("'.$this->refType.'PlanningElement_unitWeight").set("value","0");';
       $colScript .= '       }else{';
-      $colScript .= '         dijit.byId("ActivityPlanningElement_unitWeight").set("value",dojo.byId("ActivityPlanningElement_unitToRealise").value);';
+      $colScript .= '         dijit.byId("'.$this->refType.'PlanningElement_unitWeight").set("value",dojo.byId("'.$this->refType.'PlanningElement_unitToRealise").value);';
       $colScript .= '       }';
       $colScript .= '     }';
       $colScript .= '  }';
       $colScript .= '</script>';
     }else if($colName=='unitToDeliver'){
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  if(this.value!="0" && dojo.byId("ActivityPlanningElement_unitToRealise").value=="0"){';
-      $colScript .= '   dijit.byId("ActivityPlanningElement_unitToRealise").set("value", this.value);';
+      $colScript .= '  if(this.value!="0" && dojo.byId("'.$this->refType.'PlanningElement_unitToRealise").value=="0"){';
+      $colScript .= '   dijit.byId("'.$this->refType.'PlanningElement_unitToRealise").set("value", this.value);';
       $colScript .= '  }';
       $colScript .= '</script>';
     }else if($colName=='unitToRealise'){
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  if(this.value!="" && dojo.byId("ActivityPlanningElement_unitRealised").value!=""){';
-      $colScript .= '   var left=this.value-dojo.byId("ActivityPlanningElement_unitRealised").value;';
-      $colScript .= '   dijit.byId("ActivityPlanningElement_unitLeft").set("value", left);';
+      $colScript .= '  if(this.value!="" && dojo.byId("'.$this->refType.'PlanningElement_unitRealised").value!=""){';
+      $colScript .= '   var left=this.value-dojo.byId("'.$this->refType.'PlanningElement_unitRealised").value;';
+      $colScript .= '   dijit.byId("'.$this->refType.'PlanningElement_unitLeft").set("value", left);';
       $colScript .= '  }';
-      $colScript .= '   if(dijit.byId("ActivityPlanningElement_idProgressMode").get("value")=="1"){';
+      $colScript .= '   if(dijit.byId("'.$this->refType.'PlanningElement_idProgressMode").get("value")=="1"){';
       $colScript .= '     var progress=setUnitProgress();';
-      $colScript .= '     dijit.byId("ActivityPlanningElement_unitProgress").set("value", progress);';
+      $colScript .= '     dijit.byId("'.$this->refType.'PlanningElement_unitProgress").set("value", progress);';
       $colScript .= '   }';
       $colScript .= '</script>';
     }else if($colName=='unitRealised'){
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  if(this.value!="" && dojo.byId("ActivityPlanningElement_unitToRealise").value!=""){';
-      $colScript .= '   var left=dojo.byId("ActivityPlanningElement_unitToRealise").value-this.value;';
-      $colScript .= '   dijit.byId("ActivityPlanningElement_unitLeft").set("value", left);';
+      $colScript .= '  if(this.value!="" && dojo.byId("'.$this->refType.'PlanningElement_unitToRealise").value!=""){';
+      $colScript .= '   var left=dojo.byId("'.$this->refType.'PlanningElement_unitToRealise").value-this.value;';
+      $colScript .= '   dijit.byId("'.$this->refType.'PlanningElement_unitLeft").set("value", left);';
       $colScript .= '  }';
-      $colScript .= '   if(dijit.byId("ActivityPlanningElement_idProgressMode").get("value")=="1"){';
+      $colScript .= '   if(dijit.byId("'.$this->refType.'PlanningElement_idProgressMode").get("value")=="1"){';
       $colScript .= '     var progress=setUnitProgress();';
-      $colScript .= '     dijit.byId("ActivityPlanningElement_unitProgress").set("value", progress);';
+      $colScript .= '     dijit.byId("'.$this->refType.'PlanningElement_unitProgress").set("value", progress);';
       $colScript .= '   }';
       $colScript .= '</script>';
     }
