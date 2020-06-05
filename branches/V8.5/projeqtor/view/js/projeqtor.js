@@ -3670,7 +3670,6 @@ function gotoElement(eltClass, eltId, noHistory, forceListRefresh, target) {
     openInNewWindow(eltClass, eltId);
     return;
   }
-  
   if (checkFormChangeInProgress()) {
     return false;
   }
