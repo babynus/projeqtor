@@ -2154,8 +2154,8 @@ class PlanningElement extends SqlElement {
         $type='idMeetingType';
       } else {
         $type='id'.get_class($item).'Type';
-      }   
-      $newItem=$item->copyTo(get_class($item),$item->$type, $pe->idProject, $item->name, $copyToOrigin,
+      }
+      $newItem=$item->copyTo(get_class($item),$item->$type, $item->name ,$pe->idProject, $copyToOrigin,
           $copyToWithNotes, $copyToWithAttachments,$copyToWithLinks,
           $copyAssignments, $copyAffectations, $toProject,null );
       $resultItem=$newItem->_copyResult;
