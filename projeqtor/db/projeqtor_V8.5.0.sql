@@ -271,3 +271,5 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (109,'idOrganization','organizationList',15,null),
 (109,'month','month',40,'currentMonth');
 
+-- Fix for Financial situation
+ALTER TABLE `${prefix}projectsituation` CHANGE `name` `name` VARCHAR(200) DEFAULT NULL;
