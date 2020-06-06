@@ -36,7 +36,9 @@ if (! array_key_exists('objectClass',$_REQUEST)) {
 }
 $className=$_REQUEST['objectClass'];
 Security::checkValidClass($className);
-
+if ($className=='Project') {
+  Project::$_deleteProjectInProgress=true;
+}
 if (! array_key_exists('selection',$_REQUEST)) {
   throwError('selection parameter not found in REQUEST');
 }

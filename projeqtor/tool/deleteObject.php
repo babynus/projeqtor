@@ -41,7 +41,9 @@ if (! array_key_exists('objectClassName',$_REQUEST)) {
   throwError('className parameter not found in REQUEST');
 }
 $className=$_REQUEST['objectClassName'];
-
+if ($className=='Project') {
+  Project::$_deleteProjectInProgress=true;
+}
 // compare expected class with object class
 if ($className!=get_class($obj)) {
   throwError('last save object (' . get_class($obj) . ') is not of the expected class (' . $className . ').'); 

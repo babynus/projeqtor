@@ -82,7 +82,7 @@ class ProjectPlanningElementMain extends PlanningElement {
   public $totalLeftCost;
   public $totalPlannedCost;
   public $_separator_menuTechnicalProgress_marginTop;
-  public $_tab_5_2_smallLabel_9 = array('', '','','','','','unitProgress');
+  public $_tab_5_2_smallLabel_9 = array('', '','','','','','progress');
   public $_void_uo_20;
   public $_void_uo_21;
   public $_void_uo_22;
@@ -169,8 +169,6 @@ class ProjectPlanningElementMain extends PlanningElement {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
-    $this->idProgressMode=1;
-    $this->idWeightMode=2;
   }
   
   function setAttributes(){
@@ -179,7 +177,6 @@ class ProjectPlanningElementMain extends PlanningElement {
       self::$_fieldsAttributes['idProgressMode']='readonly,size1/3';
       self::$_fieldsAttributes['unitWeight']='readonly';
       self::$_fieldsAttributes['idWeightMode']='readonly,size1/3';
-      self::$_fieldsAttributes['idWeightMode']='size1/3';
     }else{
       unset($this->_separator_menuTechnicalProgress_marginTop);
     }

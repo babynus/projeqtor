@@ -338,6 +338,9 @@ class PlanningElement extends SqlElement {
       $colScript .= '     var progress=setUnitProgress();';
       $colScript .= '     dijit.byId("'.$this->refType.'PlanningElement_unitProgress").set("value", progress);';
       $colScript .= '   }';
+      $colScript .= '   if(dijit.byId("'.$this->refType.'PlanningElement_idWeightMode").get("value")=="3"){';
+      $colScript .= '     dijit.byId("'.$this->refType.'PlanningElement_unitWeight").set("value", this.value);';
+      $colScript .= '   }';      
       $colScript .= '</script>';
     }else if($colName=='unitRealised'){
       $colScript .= '<script type="dojo/connect" event="onChange" >';
