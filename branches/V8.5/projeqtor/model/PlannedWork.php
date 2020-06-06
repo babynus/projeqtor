@@ -1638,16 +1638,17 @@ class PlannedWork extends GeneralWork {
      }
     foreach ($arrayProj as $idP) {
       Project::unsetNeedReplan($idP);
+      // Save history for planning operation
+      $hist=new History();
+      $hist->idUser=getCurrentUserId();
+      $hist->newValue=null;
+      $hist->operationDate=date('Y-m-d H:i:s');
+      $hist->operation="plan";
+      $hist->refType='Project';
+      $hist->refId=$idP;
+      $hist->isWorkHistory=1;
+      $resHist=$hist->save();
     }
-    // Save history for planning operation
-    $hist=new History();
-    $hist->idUser=getCurrentUserId();
-    $hist->newValue=transformListIntoInClause($arrayProj);
-    $hist->operationDate=date('Y-m-d');
-    $hist->operation="plan";
-    $hist->refType='Project';
-    $hist->refId=0;
-    $resHist=$hist->save();
     
     $messageOn = false;
     $endTime=time();
