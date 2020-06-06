@@ -316,13 +316,12 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
       if(isset($obj) and get_class($obj)=='ProjectPlanningElement'){
         unset($table[3]);
         unset($table[1]);
-      }else{
-        if(isset($obj)){
-          if($obj->getSonItemsArray()){
-            unset($table[3]);
-          }else {
-            unset($table[2]);
-          }
+        $selection=2;
+      }else if(isset($obj)){
+        if($obj->getSonItemsArray()){
+          unset($table[3]);
+        }else {
+          unset($table[2]);
         }
       }
   }else {

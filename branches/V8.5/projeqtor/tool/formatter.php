@@ -610,7 +610,6 @@ function activityStreamDisplayNote ($note,$origin){
      echo '<div style="margin-top:8px;">'.htmlFormatDateTime($note->creationDate,true).'</div></div>';
     }
     $noteImgWidth=intval($rightWidthScreen)-30;
-    debugLog($origin);
     if ($origin=='activityStream') $noteImgWidth-=40;
     $strDataHTML=htmlSetClickableImages($strDataHTML,$noteImgWidth);
     if($rightWidthScreen<100){
