@@ -83,7 +83,6 @@ if($pwm->id){
     exit;
   }
 }
-debugLog($pwmx->idProject);
 if($allDay and $pwmx->id){
   $lstProjectVisible = $user->getVisibleProjects();
   $project =new Project($pwmx->idProject,true);

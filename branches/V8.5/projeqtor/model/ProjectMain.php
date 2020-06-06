@@ -116,6 +116,8 @@ class ProjectMain extends SqlElement {
   public $_nbColMax=3;
   
   private static $_administrativeProjectList=null;
+  public static $_deleteProjectInProgress=false;
+  
   // Define the layout that will be used for lists
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="5%" ># ${id}</th>

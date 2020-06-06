@@ -1322,7 +1322,6 @@ class PlannedWork extends GeneralWork {
                       if (! isOpenDay($currentDate,$supRes['calendar'] )) {
                         $value=0;
                       } else if (isset($supRes[$currentDate])) {
-                        if (!isset($supRes['capacity']) ) { debugLog($supRes); debugLog($plan);}
                         if ($supRes['variableCapacity']) {
                           $resSup=new Resource($sup);
                           $capaSup=$resSup->getCapacityPeriod($currentDate);
