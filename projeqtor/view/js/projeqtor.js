@@ -5901,10 +5901,12 @@ function hideStreamMode(show,position,dimension,modeGlobal){
     if (dimension && menuRightDivLastWidth) dimension=menuRightDivLastWidth;
     dijit.byId("detailRightDiv").resize({ w : dimension });
     dijit.byId("centerDiv").resize();
+    loadContent("objectStream.php", "detailRightDiv", "listForm");  
     //var detailHidden=false;
     //if (dojo.byId('detailBarShow') && dojo.byId('detailBarShow').style.display=='block') detailHidden=true;
   }
-  refreshObjectDivAfterResize();
+  if (dimension==0) setTimeout("refreshObjectDivAfterResize();",100);
+  else setTimeout('loadContent("objectButtons.php?refreshButtons=true","buttonDiv", "listForm");',100);
 }
 
 function focusStream() {
