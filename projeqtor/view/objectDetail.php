@@ -1899,6 +1899,11 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // BEGIN - ADD BY TABARY - TOOLTIP
         echo htmlDisplayTooltip($toolTip, $fieldId, $print, $outMode);
         // END - ADD BY TABARY - TOOLTIP
+        if ($included) {
+          $nameColor=$classObj.'_'.$col;
+        } else {
+          $nameColor=$col;
+        }
         echo '<input xdojoType="dijit.form.TextBox" class="colorDisplay" type="text" readonly tabindex="-1" ';
         echo $name;
         echo $attributes;
@@ -1915,13 +1920,13 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         // echo '</div>';
         echo '</td><td class="detail">';
         if (!$readOnly) {
-          echo '<div id="'.'colorButton'.$col.'" dojoType="dijit.form.DropDownButton"  ';
+          echo '<div id="'.'colorButton'.$nameColor.'" dojoType="dijit.form.DropDownButton"  ';
           // echo ' style="width: 100px; background-color: ' . $val . ';"';
           echo ' showlabel="false" iconClass="colorSelector" style="position:relative;top:-2px;height:19px">';
           echo '  <span>'.i18n('selectColor').'</span>';
-          echo '  <div dojoType="dijit.ColorPalette" id="colorPicker'.$col.'" >';
+          echo '  <div dojoType="dijit.ColorPalette" id="colorPicker'.$nameColor.'" >';
           echo '    <script type="dojo/method" event="onChange" >';
-          echo '      var fld=dojo.byId("'.$col.'");';
+          echo '      var fld=dojo.byId("'.$nameColor.'");';
           echo '      fld.style.color=this.value;';
           echo '      fld.style.backgroundColor=this.value;';
           echo '      fld.value=this.value;';
@@ -1932,11 +1937,11 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         }
         echo '</td><td>';
         if (!$readOnly) {
-          echo '<button id="resetColor'.$col.'" dojoType="dijit.form.Button" showlabel="true"';
+          echo '<button id="resetColor'.$nameColor.'" dojoType="dijit.form.Button" showlabel="true"';
           echo ' title="'.i18n('helpResetColor').'" >';
           echo '<span>'.i18n('resetColor').'</span>';
           echo '<script type="dojo/connect" event="onClick" args="evt">';
-          echo '      var fld=dojo.byId("'.$col.'");';
+          echo '      var fld=dojo.byId("'.$nameColor.'");';
           echo '      fld.style.color="transparent";';
           echo '      fld.style.backgroundColor="transparent";';
           echo '      fld.value="";';

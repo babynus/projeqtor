@@ -469,6 +469,7 @@ class PeriodicMeetingMain extends SqlElement {
       $this->MeetingPlanningElement->wbsSortable=null;
     }
     $result=parent::save();
+    if (isset($this->_moveToAfterCreate)) unset($this->_moveToAfterCreate);
     if (stripos($result,'id="lastOperationStatus" value="OK"')==0 ) {
     	return $result;
     }    
@@ -630,6 +631,8 @@ class PeriodicMeetingMain extends SqlElement {
     if ($old->location!=$this->idResource) $meeting->idResource=$this->idResource;
     if ($old->MeetingPlanningElement->priority!=$this->MeetingPlanningElement->priority) 
         $meeting->MeetingPlanningElement->priority=$this->MeetingPlanningElement->priority;
+    $meeting->MeetingPlanningElement->color=$this->MeetingPlanningElement->color;
+    if (isset($meeting->_moveToAfterCreate)) unset($meeting->_moveToAfterCreate);
     $resultMeetingSave=$meeting->save();
     $resultMeetingSaveStatus=getLastOperationStatus($resultMeetingSave);
     if ($resultMeetingSaveStatus!='OK' and $resultMeetingSaveStatus!='NO_CHANGE') {

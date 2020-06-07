@@ -92,6 +92,8 @@ class ActivityPlanningElementMain extends PlanningElement {
   public $priority;
   public $_label_planning;
   public $idActivityPlanningMode;
+  public $_tab_1_1_smallLabel_1 = array('', 'color');
+  public $color;
   public $_tab_3_1_3 = array('', '', '', 'minimumThreshold');
   public $minimumThreshold;
   public $_label_indivisibility;

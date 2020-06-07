@@ -73,7 +73,8 @@ class TestSessionPlanningElementMain extends PlanningElement {
   public $priority;
   public $_label_planning;
   public $idTestSessionPlanningMode;
-  
+  public $_tab_1_1_smallLabel_1 = array('', 'color');
+  public $color;
   public $wbsSortable;
   public $topId;
   public $topRefType;
