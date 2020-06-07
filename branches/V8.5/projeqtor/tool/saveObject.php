@@ -66,7 +66,9 @@ if (array_key_exists ( 'confirmed', $_REQUEST )) {
 Sql::beginTransaction ();
 // get the modifications (from request)
 $newObj = new $className ();
+if ($className=='PeriodicMeeting') RequestHandler::unsetCode('moveToAfterCreate');
 $newObj->fillFromRequest ( $ext );
+
 if ($newObj->id == '0') {
   $newObj->id = null;
 }

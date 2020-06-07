@@ -273,3 +273,12 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 
 -- Fix for Financial situation
 ALTER TABLE `${prefix}projectsituation` CHANGE `name` `name` VARCHAR(200) DEFAULT NULL;
+
+ALTER TABLE `${prefix}planningelement` 
+ADD COLUMN `color` varchar(7) DEFAULT NULL;
+
+ALTER TABLE `${prefix}planningelementbaseline` 
+ADD COLUMN `color` varchar(7) DEFAULT NULL;
+
+UPDATE `${prefix}planningelement` SET `color`=(select `color` from `${prefix}project` where id=refId) WHERE refType='Project';
+UPDATE `${prefix}planningelementbaseline` SET `color`=(select `color` from `${prefix}project` where id=refId) WHERE refType='Project';

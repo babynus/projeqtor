@@ -874,6 +874,7 @@ static function isTheLeaveProject($id=null) {
     } else if (! $this->sortOrder and $this->ProjectPlanningElement->wbsSortable) {
       $this->sortOrder=$this->ProjectPlanningElement->wbsSortable;
     }
+    $this->ProjectPlanningElement->color=$this->color;
     
     // Organization
     if ( (!$this->id or $this->idProject!=$old->idProject) and ! trim($this->idOrganization) and $this->idProject ) {

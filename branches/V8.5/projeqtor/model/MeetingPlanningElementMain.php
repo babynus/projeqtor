@@ -45,6 +45,8 @@ class MeetingPlanningElementMain extends PlanningElement {
   public $realCost;
   public $leftCost;
   //public $_tab_1_1=array('','priority');
+  public $_tab_1_1_smallLabel_1 = array('', 'color');
+  public $color;
   public $priority;
   public $idMeetingPlanningMode;
   

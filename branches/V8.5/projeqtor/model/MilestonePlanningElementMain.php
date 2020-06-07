@@ -45,6 +45,8 @@ class MilestonePlanningElementMain extends PlanningElement {
   public $idMilestonePlanningMode;
   public $_label_wbs;
   public $wbs;
+  public $_tab_1_1_smallLabel_1 = array('', 'color');
+  public $color;
   public $wbsSortable;
   public $topId;
   public $topRefType;
