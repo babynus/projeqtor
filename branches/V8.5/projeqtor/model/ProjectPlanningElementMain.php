@@ -355,6 +355,19 @@ class ProjectPlanningElementMain extends PlanningElement {
   	$this->expenseLeftAmount=$left;
   	$this->expensePlannedAmount=$planned;
   	$this->expenseRealAmount=$real;
+  	if (!$doNotSave and !$this->elementary) {
+  	  $critPla=array("refType"=>'Project',"topId"=>$this->id);
+  	  $plaList=$this->getSqlElementsFromCriteria($critPla, false);
+  	  // Add data from other planningElements dependant from this one
+  	  foreach ($plaList as $pla) {
+  	    // if (!$pla->cancelled and $pla->expenseValidatedAmount) $this->expenseValidatedAmount+=$pla->expenseValidatedAmount;
+  	    if (!$pla->cancelled and $pla->expenseAssignedAmount) $this->expenseAssignedAmount+=$pla->expenseAssignedAmount;
+  	    if (!$pla->cancelled and $pla->expensePlannedAmount) $this->expensePlannedAmount+=$pla->expensePlannedAmount;
+  	    if (!$pla->cancelled and $pla->expenseLeftAmount) $this->expenseLeftAmount+=$pla->expenseLeftAmount;
+  	    if ($pla->expenseRealAmount) $this->expenseRealAmount+=$pla->expenseRealAmount;
+  	    if (isset($pla->reserveAmount) and $pla->reserveAmount) $this->reserveAmount+=$pla->reserveAmount;
+  	  }
+  	}
   	$this->updateTotal();
   	if (! $doNotSave) {
   		$this->simpleSave();
