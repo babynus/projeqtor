@@ -627,6 +627,7 @@ if (Sql::$lastQueryNbRows == 0) {
 				}
 			}
 			echo ', "depend":"' . '"'; // No dependency to display on Resource Planning
+			echo ', "color":"'.trim($line['color'],'#').'"';
 			echo '}';
 		}
 		echo ' ] }';

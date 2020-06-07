@@ -665,8 +665,6 @@ function addNewLinkMeeting (item,comboName,idProj){
             var lastOperationStatus=window.top.dojo
                 .byId('lastOperationStatus');
             var lastSaveId=window.top.dojo.byId('lastSaveId');
-            console.log(lastSaveId);
-            console.log(lastOperationStatus);
             if (lastOperationStatus.value == "OK") {
               selectDetailItem(lastSaveId.value,objName);
             }
