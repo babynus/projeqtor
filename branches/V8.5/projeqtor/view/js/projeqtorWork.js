@@ -720,7 +720,6 @@ function selectInterventionDate(date,resource,period,event) {
       var result={};
       if (data) try { result=JSON.parse(data); }
       catch (error) {
-        console.log(data);
         return;
       }
       if (result.error) {
@@ -745,7 +744,6 @@ function selectInterventionDate(date,resource,period,event) {
           +dojo.byId('plannedWorkManualInterventionResourceList').value+'&months='
           +dojo.byId('plannedWorkManualInterventionMonthList').value;
         if (dojo.byId('plannedWorkManualInterventionSize')) refreshUrl+='&size='+dojo.byId('plannedWorkManualInterventionSize').value;
-        //console.log('refresh intervention table : '+refreshUrl);
         loadDiv(refreshUrl,'plannedWorkManualInterventionDiv');}
       if (dojo.byId('plannedWorkManualAssignmentDiv')
        && dojo.byId('plannedWorkManualAssignmentResourceList')
@@ -757,7 +755,6 @@ function selectInterventionDate(date,resource,period,event) {
         if (dojo.byId('assignmentRefType') && dojo.byId('assignmentRefId')) {
           refreshUrl+='&refType='+dojo.byId('assignmentRefType').value+'&refId='+dojo.byId('assignmentRefId').value
         }
-        //console.log('refresh assignment table : '+refreshUrl);
         loadDiv(refreshUrl,'plannedWorkManualAssignmentDiv');
       }
       refreshInterventionCapacity(date,refId,period);
@@ -765,7 +762,6 @@ function selectInterventionDate(date,resource,period,event) {
   });
 }
 function selectInterventionMode(id,letter) {
-  //console.log("selectInterventionMode("+id+","+letter+")");
   var mode='select';
   if (dojo.byId('idInterventionMode')) {
     if (dojo.byId('idInterventionMode').value==id) {
@@ -789,7 +785,6 @@ function selectInterventionMode(id,letter) {
 }
 
 function selectInterventionActivity(refType,refId,peId) {
-  //console.log("selectInterventionActivity("+refType+","+refId+","+peId+")");
   var mode='select';
   if (dojo.byId('interventionActivityType') && dojo.byId('interventionActivityId')) {
     if (dojo.byId('interventionActivityType').value==refType && dojo.byId('interventionActivityId').value==refId) {

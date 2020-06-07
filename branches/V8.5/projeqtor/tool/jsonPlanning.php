@@ -591,6 +591,7 @@ use PhpOffice\PhpSpreadsheet\Shared\Trend\Trend;
           $listPred.="$dep->predecessorId#$dep->id#$dep->successorRefType#$dep->dependencyType";
         }
         echo ', "depend":"' . $listPred . '"';
+        echo ', "color":"'.trim($line['color'],'#').'"';
         echo '}';
       }
     }

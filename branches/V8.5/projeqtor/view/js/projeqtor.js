@@ -3248,7 +3248,7 @@ function drawGantt() {
           pColor = (pGroup)?'650000':'BB5050';
         }
       } else if (! pGroup && item.reftype!='Milestone' && ( ! item.assignedwork || item.assignedwork==0 ) && ( ! item.leftwork || item.leftwork==0 ) && ( ! item.realwork || item.realwork==0 ) ) { // No workassigned : greyed green
-        pColor = 'aec5ae';
+        pColor = 'AEC5AE';
       }
       if (item.surbooked==1) pColor='f4bf42';
       
@@ -3258,7 +3258,7 @@ function drawGantt() {
       else if(item.redElement == '0') {
         pColor = '50BB50';
       }      
-      
+      var pItemColor=item.color;
       // pMile : is it a milestone ?      
       var pMile = (item.reftype == 'Milestone') ? 1 : 0;
       if (pMile) {
@@ -3296,7 +3296,7 @@ function drawGantt() {
         topId = '';
       }
       keys += "#" + curKey + "#";
-      g.AddTaskItem(new JSGantt.TaskItem(item.id, pName, pStart, pEnd, pColor,
+      g.AddTaskItem(new JSGantt.TaskItem(item.id, pName, pStart, pEnd, pColor, pItemColor,
           runScript, contextMenu, pMile, pResource, progress, pGroup, 
           topId, pOpen, pDepend,
           pCaption, pClass, pScope, pRealEnd, pPlannedStart,
