@@ -151,7 +151,7 @@ div .scrollRightTop {
 
 
 .ganttTaskrowBar {
-   height: 13px; 
+   height: 11px; 
    /*cursor: pointer;*/
    opacity:0.9;
    filter: alpha(opacity=90);

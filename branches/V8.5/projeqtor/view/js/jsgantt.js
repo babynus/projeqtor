@@ -141,7 +141,7 @@ function getPlanningField(attribute,field) {
 
 
 
-JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, 
+JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor, pTaskColor,
                             pLink, pContextMenu, pMile, pRes, pComp, pGroup, 
                             pParent, pOpen, pDepend, 
                             pCaption, pClass, pScope, pRealEnd, pPlanStart,
@@ -156,6 +156,7 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor,
   var vStart = new Date();  
   var vEnd   = new Date();
   var vColor = pColor;
+  var vTaskColor = pTaskColor;
   var vLink  = pLink;
   var vContextMenu  = pContextMenu;
   var vMile  = pMile;
@@ -281,7 +282,13 @@ JSGantt.TaskItem = function(pID, pName, pStart, pEnd, pColor,
   this.getBaseBottomStart     = function(){ return vBaseBottomStart;  };
   this.getBaseBottomEnd     = function(){ return vBaseBottomEnd;  };
   this.getIsOnCriticalPath     = function(){ if (g.getShowCriticalPath()) {return vIsOnCriticalPath;} else {return 0;}  };
-  this.getColor    = function(){ return vColor;};
+  this.getColor    = function(){ 
+    if (vTaskColor) return vTaskColor;
+    else return vColor;
+  };
+  this.getTaskStatusColor    = function(){ 
+    return vColor;
+  };
   this.getLink     = function(){ return vLink; };
   this.getContextMenu = function(){ return vContextMenu; };
   this.getMile     = function(){ return vMile; };
@@ -1006,7 +1013,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
         if (vTaskList[i].getGroup() && vTaskList[i].getClass() != 'ProductVersionhasChild' &&  vTaskList[i].getClass() != 'ComponentVersionhasChild' &&  vTaskList[i].getClass() != 'SupplierContracthasChild' &&  vTaskList[i].getClass() != 'ClientContracthasChild') {
           vLeftTable += '<div style="margin-left:3px;width:8px;">&nbsp</div>';
         } else {
-          vLeftTable += '<div style="margin-left:3px;width:8px;background-color:#'+vTaskList[i].getColor()+'">&nbsp</div>';
+          vLeftTable += '<div style="margin-left:3px;width:8px;background-color:#'+vTaskList[i].getTaskStatusColor()+'">&nbsp</div>';
         }        
         vLeftTable += '</div>';
         vLeftTable +='</td><td>';
@@ -1447,7 +1454,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
               + ' onMouseover=JSGantt.enterBarLink('+i+'); '
               + ' onMouseout=JSGantt.exitBarLink('+i+'); '
               + '  onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '");'
-                + ' class="ganttTaskgroupBar" style="width:' + vBarWidth + 'px;background-color:#'+vTaskList[i].getColor()+'">'
+                + ' class="ganttTaskgroupBar" style="width:' + vBarWidth + 'px;background-color:#'+vTaskList[i].getTaskStatusColor()+'">'
                 + '<div style="width:' + vTaskList[i].getCompStr() + ';"' 
                 + ' onmousedown=JSGantt.startLink('+i+'); '
                 + ' onmouseup=JSGantt.endLink('+i+'); '
@@ -1458,15 +1465,15 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
                 + ' class="ganttGrouprowBarComplete">' 
                 + '</div>' 
                 + '</div>' 
-                + '<div class="ganttTaskgroupBarExt" style="float:left; height:4px;background-color:#'+vTaskList[i].getColor()+'"></div>'               
-                + '<div class="ganttTaskgroupBarExt" style="float:left; height:3px;background-color:#'+vTaskList[i].getColor()+'"></div>'                 
-                + '<div class="ganttTaskgroupBarExt" style="float:left; height:2px;background-color:#'+vTaskList[i].getColor()+'"></div>'              
-                + '<div class="ganttTaskgroupBarExt" style="float:left; height:1px;background-color:#'+vTaskList[i].getColor()+'"></div>' ;
+                + '<div class="ganttTaskgroupBarExt" style="float:left; height:4px;background-color:#'+vTaskList[i].getTaskStatusColor()+'"></div>'               
+                + '<div class="ganttTaskgroupBarExt" style="float:left; height:3px;background-color:#'+vTaskList[i].getTaskStatusColor()+'"></div>'                 
+                + '<div class="ganttTaskgroupBarExt" style="float:left; height:2px;background-color:#'+vTaskList[i].getTaskStatusColor()+'"></div>'              
+                + '<div class="ganttTaskgroupBarExt" style="float:left; height:1px;background-color:#'+vTaskList[i].getTaskStatusColor()+'"></div>' ;
               if (Date.parse(vMaxDate)>=Date.parse(vTaskEnd)) {
-                vRightTable += '<div class="ganttTaskgroupBarExt" style="float:right; height:4px;background-color:#'+vTaskList[i].getColor()+'"></div>' 
-                  + '<div class="ganttTaskgroupBarExt" style="float:right; height:3px;background-color:#'+vTaskList[i].getColor()+'"></div>'
-                  + '<div class="ganttTaskgroupBarExt" style="float:right; height:2px;background-color:#'+vTaskList[i].getColor()+'"></div>' 
-                  + '<div class="ganttTaskgroupBarExt" style="float:right; height:1px;background-color:#'+vTaskList[i].getColor()+'"></div>';  
+                vRightTable += '<div class="ganttTaskgroupBarExt" style="float:right; height:4px;background-color:#'+vTaskList[i].getTaskStatusColor()+'"></div>' 
+                  + '<div class="ganttTaskgroupBarExt" style="float:right; height:3px;background-color:#'+vTaskList[i].getTaskStatusColor()+'"></div>'
+                  + '<div class="ganttTaskgroupBarExt" style="float:right; height:2px;background-color:#'+vTaskList[i].getTaskStatusColor()+'"></div>' 
+                  + '<div class="ganttTaskgroupBarExt" style="float:right; height:1px;background-color:#'+vTaskList[i].getTaskStatusColor()+'"></div>';  
               }
               if( g.getCaptionType() ) {
                 vCaptionStr = '';
@@ -1533,7 +1540,13 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             vIsOnCriticalPath=vTaskList[i].getIsOnCriticalPath();
             vRightTable += '<div id=' + vBardivName + ' class="barDivTask" style="';
             if (! vTaskList[i].getGlobal() )
-              vRightTable += ' border-bottom: 2px solid #' + vTaskList[i].getColor() + ';';
+              var vBorderBottomColor=vTaskList[i].getColor();
+              var vBorderBottomSize=2;
+              if (vTaskList[i].getTaskStatusColor()!='50BB50' && vTaskList[i].getTaskStatusColor()!='AEC5AE') {
+                vBorderBottomColor=vTaskList[i].getTaskStatusColor();
+                vBorderBottomSize=3;
+              }
+              vRightTable += ' border-bottom: '+vBorderBottomSize+'px solid #' + vBorderBottomColor + ';';
             vRightTable += ' left:' + vBarLeft + 'px; height:11px; '
 	            + ' width:' + vBarWidth + 'px" '
 	            + ' oncontextmenu="'+vTaskList[i].getContextMenu()+';return false;" '
@@ -1554,15 +1567,15 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
   	        		vBarWidth=vBarWidthReal;
   	        	}
               var imgColor='grey';
-              var imgStaturate=1;
+              var imgSaturate=1;
   	        	if (vTaskList[i].getGlobal()) {
   	        	  tmpColor='transparent';
-  	        	  if (vTaskList[i].getColor()=='BB5050' || vTaskList[i].getColor()=='BB9099') {
+  	        	  if (vTaskList[i].getTaskStatusColor()=='BB5050' || vTaskList[i].getTaskStatusColor()=='BB9099') {
   	        	    imgColor='red';
-  	        	    imgStaturate='2';
-  	        	  } else if (vTaskList[i].getColor()=='50BB50' || vTaskList[i].getColor()=='aec5ae') {
+  	        	    imgSaturate='2';
+  	        	  } else if (vTaskList[i].getTaskStatusColor()=='50BB50' || vTaskList[i].getTaskStatusColor()=='AEC5AE') {
   	        	    imgColor='green';
-  	        	    imgStaturate='4';
+  	        	    imgSaturate='4';
   	        	  }
   	        	}
   	        	vIsOnCriticalPath=vTaskList[i].getIsOnCriticalPath();
@@ -1576,7 +1589,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
                 + ' oncontextmenu="'+vTaskList[i].getContextMenu()+';return false;" '
   	            + ' onclick=JSGantt.taskLink("' + vTaskList[i].getLink() + '"); >';
   	        	  if (vTaskList[i].getGlobal()) {
-  	        	    vRightTable +='<img src="../view/css/customIcons/'+imgColor+'/icon'+vTaskList[i].getClass()+'.png" style="pointer-events: none;filter:saturate('+imgStaturate+');width:16px;height:16px;z-index:13;position:absolute;right:2px;" />';
+  	        	    vRightTable +='<img src="../view/css/customIcons/'+imgColor+'/icon'+vTaskList[i].getClass()+'.png" style="pointer-events: none;filter:saturate('+imgSaturate+');width:16px;height:16px;z-index:13;position:absolute;right:2px;" />';
   	        	  }
   	            vRightTable += ' </div>';	        	
   	        	if (g.getSplitted()) {
