@@ -97,6 +97,7 @@ class PlanningElement extends SqlElement {
   public $idProgressMode;
   public $unitWeight;
   public $idWeightMode;
+  public $color;
   
   private static $_fieldsAttributes=array(
                                   "id"=>"hidden",

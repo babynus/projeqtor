@@ -120,6 +120,8 @@ class ProjectPlanningElementMain extends PlanningElement {
   public $organizationInherited;
   public $organizationElementary;
   public $needReplan;
+  public $color;
+  
   
   private static $_fieldsAttributes=array(
     "plannedStartDate"=>"readonly,noImport",
@@ -153,6 +155,7 @@ class ProjectPlanningElementMain extends PlanningElement {
     "organizationInherited"=>"hidden",
     "organizationElementary"=>"hidden",
     "needReplan"=>"hidden",
+    "color"=>"hidden"
   );   
   
   private static $_databaseTableName = 'planningelement';
