@@ -1542,7 +1542,7 @@ JSGantt.GanttChart =  function(pGanttVar, pDiv, pFormat) {
             if (! vTaskList[i].getGlobal() )
               var vBorderBottomColor=vTaskList[i].getColor();
               var vBorderBottomSize=2;
-              if (vTaskList[i].getTaskStatusColor()!='50BB50' && vTaskList[i].getTaskStatusColor()!='AEC5AE') {
+              if (vTaskList[i].getTaskStatusColor()!=vTaskList[i].getColor() && vTaskList[i].getTaskStatusColor()!='50BB50' && vTaskList[i].getTaskStatusColor()!='AEC5AE') {
                 vBorderBottomColor=vTaskList[i].getTaskStatusColor();
                 vBorderBottomSize=3;
               }
