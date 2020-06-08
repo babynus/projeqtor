@@ -57,23 +57,23 @@ class ProjectSituationMain extends SqlElement {
   
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="4%" ># ${id}</th>
-    <th field="nameProject" width="8%" >${idProject}</th>
-    <th field="name" width="8%" >${name}</th>
-    <th field="refTypeExpense" width="8%" formatter="translateFormatter">${refTypeExpense}</th>
+    <th field="nameProject" width="10%" >${idProject}</th>
+    <th field="refTypeExpense" width="10%" formatter="translateFormatter">${refTypeExpense}</th>
     <th field="refIdExpense" width="4%">${refIdExpense}</th>
     <th field="situationNameExpense" width="11%">${situationNameExpense}</th>
     <th field="situationDateExpense" width="6%" formatter="dateTimeFormatter">${situationDateExpense}</th>
-    <th field="nameResourceExpense" formatter="thumbName22" width="8%">${idResourceExpense}</th>
-    <th field="refTypeIncome" width="8%" formatter="translateFormatter">${refTypeIncome}</th>
+    <th field="nameResourceExpense" formatter="thumbName22" width="10%">${idResourceExpense}</th>
+    <th field="refTypeIncome" width="10%" formatter="translateFormatter">${refTypeIncome}</th>
     <th field="refIdIncome" width="4%">${refIdIncome}</th>
     <th field="situationNameIncome" width="11%">${situationNameIncome}</th>
     <th field="situationDateIncome" width="6%" formatter="dateTimeFormatter">${situationDateIncome}</th>
-    <th field="nameResourceIncome" formatter="thumbName22" width="8%">${idResourceIncome}</th>
+    <th field="nameResourceIncome" formatter="thumbName22" width="10%">${idResourceIncome}</th>
     <th field="idle" width="4%" formatter="booleanFormatter" >${idle}</th>';
 
   
   private static $_fieldsAttributes=array(
-        '_sec_Description'=>'hidden',
+      '_sec_Description'=>'hidden',
+      'name'=>'hidden'
   );
   
   private static $_colCaptionTransposition = array();
