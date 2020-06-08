@@ -681,7 +681,7 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
   <div id="wait" >
   </div>
   <div id="errorPopup" data-dojo-type="dijit.Dialog" title=<?php echo strtoupper(i18n("ERROR")) ?>></div>
-  <div dojoType="dijit.layout.ContentPane" id="resultPopup" style ="vertical-align:middle;min-height:20px;max-height:500px;height:auto" onclick="dojo.byId('resultPopup').style.display='none';"></div>
+  <div dojoType="dijit.layout.ContentPane" id="resultPopup" style ="pointer-events: none;vertical-align:middle;min-height:20px;max-height:500px;height:auto" onclick="dojo.byId('resultPopup').style.display='none';dojo.byId('resultPopup').style.pointerEvents='none';"></div>
   <div id="temporaryMessage" style="display:none;z-index:999;text-align:center;position:fixed;width:500px;left:50%;top:10px;margin-left:-250px">
     <div id="temporaryMessageText" style="text-align:center;cursor:pointer;" onClick="dojo.byId('temporaryMessage').style.display='none';"></div>
   </div>
