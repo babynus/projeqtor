@@ -1024,16 +1024,48 @@ $listStatus = $object->getExistingStatus();
       dojo.byId('objectClass').value=className[1];
 <?php }?>
 	  //cleanContent("detailDiv");
-      formChangeInProgress=false; 
+      formChangeInProgress=false;
+      dojo.byId('isResult').value = false;
+      saveObject(false);
       listClick();
       loadContent("objectDetail.php", "detailDiv", 'listForm');
       if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
    	}
     actionNo = function () {
-	    //unselectAllRows("objectGrid");
-      selectRowById('objectGrid', parseInt(dojo.byId('objectId').value));
+	  rows=objectGrid.selection.getSelected();
+      row=rows[0]; 
+      var id = row.id;
+	    dojo.byId('objectId').value=id;
+<?php if (get_class($obj)=='GlobalView') {?>
+      dojo.byId('objectId').value=row.objectId;
+      classNameCol=row.objectClass+"";
+      className=classNameCol.split('|');
+      dojo.byId('objectClass').value=className[1];
+<?php }?>
+	  //cleanContent("detailDiv");
+      formChangeInProgress=false;
+      listClick();
+      loadContent("objectDetail.php", "detailDiv", 'listForm');
+      if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
     }
-    if (checkFormChangeInProgress(actionYes, actionNo)) {
+    actionDefault = function () {
+	  rows=objectGrid.selection.getSelected();
+      row=rows[0]; 
+      var id = row.id;
+	    dojo.byId('objectId').value=id;
+<?php if (get_class($obj)=='GlobalView') {?>
+      dojo.byId('objectId').value=row.objectId;
+      classNameCol=row.objectClass+"";
+      className=classNameCol.split('|');
+      dojo.byId('objectClass').value=className[1];
+<?php }?>
+	  //cleanContent("detailDiv");
+      formChangeInProgress=false;
+      listClick();
+      loadContent("objectDetail.php", "detailDiv", 'listForm');
+      if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
+    }
+    if (checkFormChangeInProgress(actionYes, actionNo, actionDefault)) {
       return true;
     }
   </script>
