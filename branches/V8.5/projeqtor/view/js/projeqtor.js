@@ -1639,8 +1639,13 @@ function finalizeMessageDisplay(destination, validationType) {
       } else if (validationType == 'dispatchWork') {
         if (lastOperationStatus.value == "OK") {
           sum=dijit.byId('dispatchWorkTotal').get('value');
+          
           if (dijit.byId('WorkElement_realWork')) {
+            var stock=formChangeInProgress;
             dijit.byId('WorkElement_realWork').set('value',sum);
+            if (!stock) {
+              setTimeout("formInitialize();",10);
+            }
           }
         }
         dijit.byId('dialogDispatchWork').hide();
