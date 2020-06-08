@@ -282,3 +282,5 @@ ADD COLUMN `color` varchar(7) DEFAULT NULL;
 
 UPDATE `${prefix}planningelement` SET `color`=(select `color` from `${prefix}project` where id=refId) WHERE refType='Project';
 UPDATE `${prefix}planningelementbaseline` SET `color`=(select `color` from `${prefix}project` where id=refId) WHERE refType='Project';
+
+DELETE from `${prefix}columnselector` where scope='list' and objectClass like 'ProjectSituation%' and field='name';
