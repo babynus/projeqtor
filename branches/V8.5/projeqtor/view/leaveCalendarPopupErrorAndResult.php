@@ -43,8 +43,7 @@ require_once "../tool/projeqtor.php";
 <div
     dojoType="dijit.layout.ContentPane"
     id="resultPopup"
-    style ="
-           "
-    onclick="dojo.byId('resultPopup').style.display='none';"       
+    style ="  "
+    onclick="dojo.byId('resultPopup').style.display='none';dojo.byId('resultPopup').style.pointerEvents='none';"       
     >
 </div>
