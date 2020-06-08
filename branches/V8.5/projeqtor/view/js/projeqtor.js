@@ -7062,3 +7062,37 @@ function setUnitProgress(){
   }
   return result;
 }
+
+function showProjectToDay(val,projList){
+  var projList = projList.split(',');
+  if(val==1){
+    projList.forEach(function(item){
+      saveCollapsed('todayProjectRow_'+item);
+    });
+  }else{
+    projList.forEach(function(item){
+      saveExpanded('todayProjectRow_'+item);
+    });
+  }
+  
+  loadContent("../view/today.php?", "centerDiv");
+}
+
+function expandProjectInToDay(id,subProj,visibleRow){
+  var visibleRowList = visibleRow.split(',');
+  var subProjList = subProj.split(',');
+  var projClass = dojo.attr('group_'+id, 'class');
+  if(visibleRowList == ''){
+    visibleRowList = subProjList;
+  }
+  if(projClass == 'ganttExpandOpened'){
+    visibleRowList.forEach(function(item){
+      saveExpanded('todayProjectRow_'+item);
+    });
+  }else{
+    subProjList.forEach(function(item){
+      saveCollapsed('todayProjectRow_'+item);
+    });
+  }
+  loadContent("../view/today.php", "centerDiv");
+}
