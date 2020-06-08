@@ -89,7 +89,8 @@ function showSqlElementResultInPopup(msg) {
 
         // Show result
         contentNode.style.display = "block";
-
+        contentNode.style.pointerEvents='auto';
+        
         // If type = "OK" or "NO_CHANGE" => fade short time
         if (type=="OK" || type=="NO_CHANGE") {
             dojo.fadeIn({
