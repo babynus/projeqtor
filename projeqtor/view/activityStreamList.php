@@ -126,7 +126,7 @@ if (trim($paramStreamIdNote)!="") {
 }
 
 if ($paramProject!='*') {
-	$critWhere.=" and (idProject is null or idProject in ".getVisibleProjectsList(true).')';
+	$critWhere.=" and (idProject in ".getVisibleProjectsList(true).')';
 } else {
 	$critWhere.=" and (idProject is null or idProject in ".getVisibleProjectsList($paramProject).')';
 }
