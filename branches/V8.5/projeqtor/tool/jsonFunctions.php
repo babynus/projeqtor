@@ -43,6 +43,11 @@ function jsonGetFilterArray($filterObjectClass, $comboDetail=false) {
       $arrayFilter=getSessionUser()->_arrayFiltersDetail[$filterObjectClass];
     }
   }
+  foreach ($arrayFilter as $idx=>$arr) {
+    if (strpos($arr['sql']['attribute'],'PlanningMode')>0) {
+      $arrayFilter[$idx]['sql']['attribute']=str_replace(array('idActivityPlanningMode','idTestSessionPlanningMode','idMilestonePlanningMode'),'idPlanningMode',$arr['sql']['attribute']);
+    }
+  } 
   return $arrayFilter;
 }
 
