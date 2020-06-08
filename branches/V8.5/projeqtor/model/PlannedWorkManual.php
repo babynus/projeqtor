@@ -632,8 +632,9 @@ class PlannedWorkManual extends GeneralWork {
     if (isset(self::$_cacheColor[$key])) {
       return self::$_cacheColor[$key];
     }
-    if (property_exists($type, 'color')) {
-      $obj=new $type($id,true);
+    $pe=$type.'PlanningElement';
+    if (property_exists($pe, 'color')) {
+      $obj=SqlElement::getSingleSqlElementFromCriteria($pe, array('refType'=>$type,'refId'=>$id));
       if ($obj->color) {
         self::$_cacheColor[$key]=$obj->color;
         return self::$_cacheColor[$key];
