@@ -227,9 +227,12 @@ class PlannedWorkManual extends GeneralWork {
   
   public static function getManageCapacity($resource) {
     // First version, not dependant of resource
-    //return 'NO';         // half day is O.5, do not use capacity of resource (always considered as 1)  
-    //return 'LIMIT';      // half day is always 0.5, but use capacity of resource to limit (resource with capacity of 0.8, cannot have 2 half days same day)
-    return 'DURATION';   // half day is half capcacity of resource, and use capacity of resource to limit (resource with capacity of 0.8, can have 2 half days same day, will reserve 0.4 each)
+    // 'NO';         // half day is O.5, do not use capacity of resource (always considered as 1)
+    // 'LIMIT';      // half day is always 0.5, but use capacity of resource to limit (resource with capacity of 0.8, cannot have 2 half days same day)
+    // 'DURATION';   // half day is half capcacity of resource, and use capacity of resource to limit (resource with capacity of 0.8, can have 2 half days same day, will reserve 0.4 each)
+    $manageCapacity=Parameter::getGlobalParameter('manageCapacityForIntervention');
+    if (!$manageCapacity) return 'LIMIT';
+    else return $manageCapacity;
   }
   public static function drawLine($scope, $idResource, $year, $month, $refType, $refId, $readonly=false) {
     SqlElement::$_cachedQuery['WorkPeriod']=array();
@@ -291,14 +294,15 @@ class PlannedWorkManual extends GeneralWork {
         $locked=true;
       }
       $capacity=1;
-      if ($manageCapacity=='LIMIT') $capacity=$resObj->getCapacityPeriod($date);
+      if ($manageCapacity=='LIMIT' or $manageCapacity=='DURATION') $capacity=$resObj->getCapacityPeriod($date);
       $halfDayDuration=0.5;
       if ($manageCapacity=='DURATION') $halfDayDuration=$capacity/2;
       $real=(isset($realWork[$date]))?$realWork[$date]:0;
+      if (($capacity-$real)<$halfDayDuration) $locked='ALL';
       if (isset($exist[$date])) {
         foreach (array('AM','PM') as $period) {
           if (isset($exist[$date][$period])) {
-            if ( ($manageCapacity=='NO' and $real>0) or ($manageCapacity=='DURATION' and $real>0) or ($manageCapacity=='LIMIT' and $real>$capacity-1) ) {
+            if ( (($capacity-$real)<(2*$halfDayDuration)) ) {
               if ($period=='AM') {
                 if ($locked=='AM') $locked=false;
                 else $locked='PM';  
@@ -317,14 +321,15 @@ class PlannedWorkManual extends GeneralWork {
           }
         }
       }
-      if ($real>$halfDayDuration) $locked='ALL';
       echo '<td style="border:1px solid #a0a0a0; position:relative">';
       echo '<table style="width:100%;height:100%">';
       $color=getForeColor($colorAM);
       $cursorAM=($readonly or $locked=='AM' or $locked=='ALL')?"normal":"pointer";
       $cursorPM=($readonly or $locked=='PM' or $locked=='ALL')?"normal":"pointer";
-      $onClickAM=($readonly or $locked=='AM' or $locked=='ALL')?'':'onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'AM\',event);"';
-      $onClickPM=($readonly or $locked=='PM' or $locked=='ALL')?'':'onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'PM\',event);"';
+      $allowDouble=true;
+      if ($capacity-$real-$halfDayDuration<$halfDayDuration) $allowDouble=false;
+      $onClickAM=($readonly or $locked=='AM' or $locked=='ALL')?'':'onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'AM\','.(($allowDouble)?'true':'false').',event);"';
+      $onClickPM=($readonly or $locked=='PM' or $locked=='ALL')?'':'onClick="selectInterventionDate(\''.$date.'\',\''.$idResource.'\',\'PM\','.(($allowDouble)?'true':'false').',event);"';
       echo '<tr style="height:'.$midSize.'px;"><td '.$onClickAM.' style="cursor:'.$cursorAM.';width:100%;background:'.$colorAM.';border-bottom:1px solid #e0e0e0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterAM.'</div></td></tr>';
       $color=getForeColor($colorPM);
       echo '<tr style="height:'.$midSize.'px;"><td '.$onClickPM.' style="cursor:'.$cursorPM.';width:100%;background:'.$colorPM.';border:0;position:relative;text-align:center;"><div style="max-height:'.$midSize.'px;width:100%;overflow-hidden;font-size:'.$letterSize.'px;position:absolute;top:-1px;color:'.$color.';">'.$letterPM.'</div></td></tr>';
