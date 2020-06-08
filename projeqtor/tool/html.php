@@ -42,6 +42,7 @@ require_once "../tool/projeqtor.php";
 function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false, $critFld=null, $critVal=null, $limitToActiveProjects=true, $limitToActiveOrganizations=true,$showIdle=false) { 
 	scriptLog("      =>htmlDrawOptionForReference(col=$col,selection=$selection,object=" .debugDisplayObj($obj).",required=$required,critFld=".debugDisplayObj($critFld).",critVal=".debugDisplayObj($critVal).")");
   // Take into account array of $critFld // TODO : check where it is used 
+	$col=str_replace(array('ActivityPlanningElement_','ProjectPlanningElement_','MilestonePlanningElement_','MeetingPlanningElement_','TestSessionPlanningElement_'),'',$col);
 	if($col =="idBudgetItem"){
 	  $col='idBudget';
 	  $listShowIdle = false;
