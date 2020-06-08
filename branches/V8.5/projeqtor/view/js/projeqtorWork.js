@@ -696,8 +696,8 @@ function formatDecimalToDisplay(val) {
 // PlannedWorkManual functions
 
 var selectInterventionDateInProgress=0;
-function selectInterventionDate(date,resource,period,event) {
-  if(event.ctrlKey) period=period+'X';
+function selectInterventionDate(date,resource,period,allowDouble,event) {
+  if(allowDouble && event.ctrlKey) period=period+'X';
   var idMode=(dojo.byId('idInterventionMode'))?dojo.byId('idInterventionMode').value:'';
   var letterMode=(dojo.byId('letterInterventionMode'))?dojo.byId('letterInterventionMode').value:'';
   var refType=(dojo.byId('interventionActivityType'))?dojo.byId('interventionActivityType').value:'';
