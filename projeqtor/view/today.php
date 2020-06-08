@@ -111,6 +111,10 @@ function showProjects() {
   $user=getSessionUser();
   $prjVisLst=$user->getVisibleProjects();
   $prjLst=$user->getHierarchicalViewOfVisibleProjects(true);
+  $lstProj=array();
+  foreach ($prjLst as $idProject=>$p){
+    $lstProj[]=substr($idProject,1);
+  }
   $showProject=securityCheckDisplayMenu(null, 'Project');
   $showOne=false;
   if ($showProject) $showOne=true;
@@ -168,8 +172,16 @@ function showProjects() {
     echo '</tr>';
     echo '</table></form>';
     $width=($print)?'45':'55';
+    $lstProj=implode(",",$lstProj);
     echo '<table align="center" style="width:100%; ">';
-    echo '<tr>'.'  <td class="messageHeader" colspan="'.(($showProject)?'3':'1').'">'.i18n('menuProject').'</td>';
+    echo '<tr>'.'  <td class="messageHeader" colspan="'.(($showProject)?'4':'1').'">'.i18n('menuProject');
+    echo '     <div id="showProjectToDay" class="ganttExpandOpened"';
+    echo '      style="float:left; width:16px; height:13px;"';
+    echo '      onclick="showProjectToDay(0,\''.$lstProj.'\')">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
+    echo '     <div id="hideProjectToDay" class="ganttExpandClosed"';
+    echo '      style="float:left; width:16px; height:13px;"';
+    echo '      onclick="showProjectToDay(1,\''.$lstProj.'\')">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
+    echo '</td>';
     if ($showProject) echo '  <td class="messageHeader" colspan="2" width="'.($width).'px;"><div xstyle="width:50px; xoverflow: hidden; xtext-overflow: ellipsis;">'.ucfirst(i18n('progress')).'</div></td>';
     if ($workVisibility=='ALL' and $showProject) {
       echo '  <td class="messageHeader" width="'.$width.'px;"><div xstyle="width:50px; xoverflow: hidden; xtext-overflow: ellipsis;">'.ucfirst(i18n('colLeft')).'</div></td>';
@@ -186,6 +198,7 @@ function showProjects() {
     $levels=array();
     foreach ($prjLst as $sharpid=>$sharpName) {
       $cpt++;
+      $visibleRows=array();
       if ($cpt>$cptMax) {
         echo '<tr><td colspan="12" class="messageData">'.i18n('limitedDisplay', array($cptMax)).'</td></tr>';
         break;
@@ -194,6 +207,36 @@ function showProjects() {
       $wbs=$split[0];
       $name=str_replace('&sharp;', '#', $split[1]);
       $id=substr($sharpid, 1);
+      $project= new Project($id);
+      $isSubProj=$project->getTopProjectList();
+      $listSub=array();
+      $hiddenSubProj=true;
+      //florent
+      $subProj=$project->getSubProjectsList();
+      $user=getCurrentUserId();
+      $colParent = SqlElement::getSingleSqlElementFromCriteria('Collapsed', array('scope'=>'todayProjectRow_'.$id, 'idUser'=>$user));
+      $idProj=$id;
+      if($colParent!=""){
+        $visibleRows[]=$id;
+      }
+      foreach ($subProj as $id=>$sub){
+        $listSub[]=$id;
+        $critArray=array('scope'=>'todayProjectRow_'.$id, 'idUser'=>$user);
+        $col = SqlElement::getSingleSqlElementFromCriteria('Collapsed', $critArray);
+          $visibleRows[]=$id;
+        if($col->id=='' and $hiddenSubProj==true){
+          $hiddenSubProj=false;
+        }
+      }
+      if($colParent->id=="" and $isSubProj   ){
+        continue;
+      }
+      if($hiddenSubProj ){
+        $class="ganttExpandOpened";
+      }else{
+        $class="ganttExpandClosed";
+      }
+      //
       foreach ($arrayCols as $col) {
         $nbItem[$col]=countFrom($cptCol[$col], $id, '', $countScope);
         $nbItemAll[$col]=countFrom($cptCol[$col], $id, 'All', $countScope);
@@ -262,7 +305,15 @@ function showProjects() {
         $trendIcon=SqlList::getFieldFromId("Trend", $proj->idTrend, "icon");
         $trendName=SqlList::getNameFromId("Trend", $proj->idTrend);
         $styleHealth=($print)?'width:10px;height:10px;margin:1px;padding:0;-moz-border-radius:6px;border-radius:6px;border:1px solid #AAAAAA;':'';
-        echo '<tr style="text-align: center">'.'  <td class="messageData" '.$goto.'><div style="width:100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; ">'.$tab.htmlEncode($name).'</div></td>';
+        echo '<tr style="text-align: center">';
+        echo '  <td class="messageData" >';
+        if($subProj){
+          echo '     <div id="group_'.$idProj.'" class="'.$class.'"';
+          echo '      style="float:left; width:16px; height:13px;"';
+          echo '      onclick="expandProjectInToDay(\''.$idProj.'\',\''.implode(",", $listSub).'\',\''.implode(',', $visibleRows).'\');">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
+        }
+        echo '<div '.$goto.' style="width:100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; ">'.$tab.htmlEncode($name);
+        echo '</div></td>';
         if ($showProject) {
           echo ' <td class="messageData" style="vertical-align:middle;width:12px;margin:0;padding:0;spacing:0;border-left:0px;border-right:0px;" '.$goto.' >'.(($trendIcon)?'    <img height="12px" src="icons/'.$trendIcon.'" title="'.$trendName.'"/>':'').'  </td>';
           if ($healthIcon) {
