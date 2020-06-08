@@ -62,6 +62,7 @@ function showXhrErrorInErrorPopup(error,msg) {
         contentNode.innerHTML = "<h3>"+errorTitle+"</h3><br/>"+msg+"<br/>"+theError+"<br/><i>"+i18n("clickIntoToClose")+"</i>";
         // Show result
         contentNode.style.display = "block";
+        contentNode.style.pointerEvents='auto';
     } 
 }
 
