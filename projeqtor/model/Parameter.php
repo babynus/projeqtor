@@ -738,6 +738,11 @@ class Parameter extends SqlElement {
         $list = array('planned'=>i18n('colPlanned'),
             'real'=>i18n('colReal'));
         break;
+      case 'manageCapacityForIntervention':
+        $list = array('LIMIT'=>i18n('capacityForInterventionLIMIT'),
+            'DURATION'=>i18n('capacityForInterventionDURATION'),
+            'NO'=>i18n('capacityForInterventionNO'));
+        break;
     } 
     return $list;
   }
@@ -862,6 +867,7 @@ class Parameter extends SqlElement {
           	                  'isManualProgress'=>'list',
           	                  'technicalProgress'=>'list',
           	                  'plannedWorkManualType'=>'list',
+          	                  'manageCapacityForIntervention'=>'list',
           	                'sectionTicket'=>'section',
           	                  'realWorkOnlyForResponsible'=>'list',
           	                  'responsibleFromProduct'=>'list',
