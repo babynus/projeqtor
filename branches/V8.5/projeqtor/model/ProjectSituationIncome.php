@@ -43,6 +43,7 @@ class ProjectSituationIncome extends ProjectSituation {
   		'situationDateExpense'=>'hidden',
   		'idResourceExpense'=>'hidden',
   		'commentExpense'=>'hidden',
+      'name'=>'hidden'
   );
   
   private static $_colCaptionTransposition = array('idResourceIncome'=> 'responsible');
