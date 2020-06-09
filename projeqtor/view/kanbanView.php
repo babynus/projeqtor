@@ -188,7 +188,7 @@ function getLastStatus(){
   $status=new Status();
   $tableName=$status->getDatabaseTableName();
   $result=Sql::query("SELECT t.id as id
-    FROM $tableName t order by t.sortOrder desc");
+    FROM $tableName t where idle=0 order by t.sortOrder desc");
   while ($line = Sql::fetchLine($result)) {
     return $line["id"];
   }
@@ -406,6 +406,7 @@ function getNextFrom($from,$next,$type){
 function getNameFromTypeKanban($itemKanban,$to,$type,$isStatus,$nb,$idKanban,$realWork,$plannedWork,$leftWork){
   $name=$itemKanban['name'];
   $from=$itemKanban['from'];
+  debugLog("$from => $to");
   $itemWork['realWork']=$realWork;
   $itemWork['plannedWork']=$plannedWork;
   $itemWork['leftWork']=$leftWork;
