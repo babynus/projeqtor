@@ -103,7 +103,7 @@ class InterventionMode extends SqlElement {
     foreach ($list as $im) {
       $onClick=($readonly)?'':'onClick="selectInterventionMode('.$im->id.',\''.$im->letter.'\');"';
       $cursor=($readonly)?"normal":"pointer";
-      $class  = "dojoxGridRow";
+      $class  = "";
       if(isset($isSaveSessionInterventionPlannedWorkManual)){
         if($isSaveSessionInterventionPlannedWorkManual == $im->id){
           $class = "dojoxGridRowSelected";
@@ -111,7 +111,7 @@ class InterventionMode extends SqlElement {
           $valueId = $im->id;
         }
       }
-      echo '<tr class=" '.$class.' interventionModeSelector interventionModeSelector'.$im->id.'" style="cursor'.$cursor.'" '.$onClick.'>';
+      echo '<tr class=" '.$class.' interventionModeSelector interventionModeSelector'.$im->id.'" style="border:1px solid #a0a0a0;height:25px;cursor'.$cursor.'" '.$onClick.'>';
       echo '<td class="dojoxGridCell interventionModeSelector interventionModeSelector'.$im->id.'" style="width:20px;text-align:center">'.$im->letter.'</td>';
       echo '<td class="dojoxGridCell interventionModeSelector interventionModeSelector'.$im->id.'" style="width:200px">'.$im->name.'</td>';
       echo '</tr>';
