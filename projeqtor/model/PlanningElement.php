@@ -527,7 +527,7 @@ class PlanningElement extends SqlElement {
       $this->plannedDuration=workDayDiffDates($this->plannedStartDate, $this->plannedEndDate);
     }
     if ($this->realStartDate){
-    	$this->plannedStartDate=$this->realStartDate;
+    	if ($this->plannedStartDate>$this->realStartDate) $this->plannedStartDate=$this->realStartDate;
     	if ($this->plannedStartDate>$this->plannedEndDate) $this->plannedEndDate=$this->plannedStartDate;
     	$this->plannedDuration=workDayDiffDates($this->plannedStartDate, $this->plannedEndDate);
     }
