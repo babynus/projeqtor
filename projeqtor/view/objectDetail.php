@@ -7237,8 +7237,9 @@ function drawProjectSituation($type, $obj){
 	echo '<table width="99.9%">';
 	echo '<tr>';
 	echo '<td class="noteHeader" style="width:30%">' . i18n('colElement') . '</td>';
+	echo '<td class="noteHeader" style="width:5%">' . i18n('colIdStatus') . '</td>';
 	echo '<td class="noteHeader" style="width:15%">' . i18n('colDate') . '</td>';
-	echo '<td class="noteHeader" style="width:25%">' . i18n('colSituation') . '</td>';
+	echo '<td class="noteHeader" style="width:20%">' . i18n('colSituation') . '</td>';
 	echo '<td class="noteHeader" style="width:20%">' . i18n('colComment') . '</td>';
 	echo '<td class="noteHeader" style="width:10%">' . i18n('colResponsible') . '</td>';
 	echo '</tr>';
@@ -7259,6 +7260,7 @@ function drawProjectSituation($type, $obj){
       }
       if($situation->id){
    		$item = new $class($situation->refId);
+   		$status= new Status($item->idStatus);
    		echo '<tr>';
    		echo '<td class="noteData" style="text-align:left;">';
    		echo '<table style="width:100%;">';
@@ -7272,6 +7274,7 @@ function drawProjectSituation($type, $obj){
        		echo '</tr>';
    		echo '</table>';
    		echo '</td>';
+   		echo '<td class="noteData" style="text-align:center;background-color:'.$status->color.';" >' .htmlFormatDateTime($status->name). '</td>';
    		echo '<td class="noteData" style="text-align:center">' . htmlFormatDateTime($situation->date) . '</td>';
    		echo '<td class="noteData" style="text-align:left">'.htmlEncode($situation->name).'</td>';
    		echo '<td class="noteData" style="text-align:left">'.$situation->comment.'</td>';
@@ -7305,6 +7308,8 @@ function drawProjectSituation($type, $obj){
 		echo '</tr>';
 		echo '</table>';
 		echo '</td>';
+		$statusEl= new Status($element->idStatus);
+		echo '<td class="noteData" style="text-align:center;background-color:'.$statusEl->color.';">'.htmlFormatDateTime($statusEl->name).'</td>';
 		echo '<td class="noteData" style="text-align:center"></td>';
 		echo '<td class="noteData" style="text-align:left"></td>';
 		echo '<td class="noteData" style="text-align:left"></td>';
