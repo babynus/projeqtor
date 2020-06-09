@@ -524,7 +524,8 @@ class PlannedWorkManual extends GeneralWork {
       $peIntervention = SqlElement::getSingleSqlElementFromCriteria('InterventionCapacity', array('refType'=>$pe->refType,'refId'=>$pe->refId,'month'=>$monthYear));
       $valueFte = $peIntervention->fte;
       $mode = ($peIntervention->id)?$peIntervention->id:0;
-      $class  = "dojoxGridRow"; 
+      //$class  = "dojoxGridRow"; 
+      $class = "";
       if (!isset($projList[$pe->idProject])) {
         $proj=new Project($pe->idProject,true);
         $projList[$pe->idProject]=$proj->name;
@@ -547,7 +548,7 @@ class PlannedWorkManual extends GeneralWork {
           $valueRefId = $pe->refId;
         }
       }
-      echo '<tr id="'.$pe->refId.'" style="cursor:'.$cursor.'" class="interventionActivitySelector '.$class.'" '.$onClick.'>';
+      echo '<tr id="'.$pe->refId.'" style="border:1px solid #a0a0a0;cursor:'.$cursor.'" class="interventionActivitySelector '.$class.'" '.$onClick.'>';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.$nameWidth.'px">'.$projList[$pe->idProject].'</td>';
       echo '<td class="dojoxGridCell noteDataCenter interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="width:'.($idWidth).'px" >#'.$pe->refId.'</td>';
       echo '<td class="dojoxGridCell interventionActivitySelector interventionActivitySelector'.$pe->id.'" style="border-right:0;width:'.($idWidth).'px" >'.$colorBadge.'</td>';
