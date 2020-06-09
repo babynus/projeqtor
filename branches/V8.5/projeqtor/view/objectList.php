@@ -1024,48 +1024,16 @@ $listStatus = $object->getExistingStatus();
       dojo.byId('objectClass').value=className[1];
 <?php }?>
 	  //cleanContent("detailDiv");
-      formChangeInProgress=false;
-      dojo.byId('isResult').value = false;
-      saveObject(false);
+      formChangeInProgress=false; 
       listClick();
       loadContent("objectDetail.php", "detailDiv", 'listForm');
       if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
    	}
     actionNo = function () {
-	  rows=objectGrid.selection.getSelected();
-      row=rows[0]; 
-      var id = row.id;
-	    dojo.byId('objectId').value=id;
-<?php if (get_class($obj)=='GlobalView') {?>
-      dojo.byId('objectId').value=row.objectId;
-      classNameCol=row.objectClass+"";
-      className=classNameCol.split('|');
-      dojo.byId('objectClass').value=className[1];
-<?php }?>
-	  //cleanContent("detailDiv");
-      formChangeInProgress=false;
-      listClick();
-      loadContent("objectDetail.php", "detailDiv", 'listForm');
-      if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
+	    //unselectAllRows("objectGrid");
+      selectRowById('objectGrid', parseInt(dojo.byId('objectId').value));
     }
-    actionDefault = function () {
-	  rows=objectGrid.selection.getSelected();
-      row=rows[0]; 
-      var id = row.id;
-	    dojo.byId('objectId').value=id;
-<?php if (get_class($obj)=='GlobalView') {?>
-      dojo.byId('objectId').value=row.objectId;
-      classNameCol=row.objectClass+"";
-      className=classNameCol.split('|');
-      dojo.byId('objectClass').value=className[1];
-<?php }?>
-	  //cleanContent("detailDiv");
-      formChangeInProgress=false;
-      listClick();
-      loadContent("objectDetail.php", "detailDiv", 'listForm');
-      if (dijit.byId('detailRightDiv')) loadContent("objectStream.php", "detailRightDiv", 'listForm');
-    }
-    if (checkFormChangeInProgress(actionYes, actionNo, actionDefault)) {
+    if (checkFormChangeInProgress(actionYes, actionNo)) {
       return true;
     }
   </script>
