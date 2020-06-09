@@ -2572,7 +2572,7 @@ function terminateChange() {
  * 
  * @return boolean indicating if change is in progress for the form
  */
-function checkFormChangeInProgress(actionYes, actionNo, actionDefault) {
+function checkFormChangeInProgress(actionYes, actionNo) {
   if (waitingForReply) {
     showInfo(i18n("alertOngoingQuery"));
     return true;
@@ -2592,8 +2592,8 @@ function checkFormChangeInProgress(actionYes, actionNo, actionDefault) {
     }
     return true;
   } else {
-    if (actionDefault) {
-    	actionDefault();
+    if (actionYes) {
+    	actionYes();
     }
     return false;
   }
