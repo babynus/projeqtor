@@ -6710,14 +6710,14 @@ function hideSplitterStream (paramDiv){
 function refreshObjectDivAfterResize() {
   if( multiSelection==false){
     if (!formChangeInProgress && dijit.byId('id')) { 
-      setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm");', 50); 
+      setTimeout('loadContent("objectDetail.php", "detailDiv", "listForm",null,null,null,null,null,true);', 50); 
     } else {
       setTimeout('loadContent("objectButtons.php?refreshButtons=true","buttonDiv", "listForm",false,false,false,false,'
                   +((formChangeInProgress)?'function() {formChanged();}':'null')
-                  +',false);', 50);
+                  +',true);', 50);
     }
   } else if(multiSelection==true && formChangeInProgress==false){
-    loadContent('objectMultipleUpdate.php?objectClass=' + dojo.byId('objectClass').value,'detailDiv');
+    loadContent('objectMultipleUpdate.php?objectClass=' + dojo.byId('objectClass').value,'detailDiv',null,null,null,null,null,null,true);
   }
 }
 //florent 4299
