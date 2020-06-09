@@ -1400,7 +1400,7 @@ function checkLogin() {
  *          the name of the form containing data to send to the page
  * @return void
  */
-function submitForm(page, destination, formName, isResultDiv) {
+function submitForm(page, destination, formName) {
   var formVar = dijit.byId(formName);
   if (!formVar) {
     showError(i18n("errorSubmitForm", new Array(page, destination, formName)));
@@ -1410,7 +1410,7 @@ function submitForm(page, destination, formName, isResultDiv) {
   if (formVar.validate()) {
     formLock();
     // form is valid, continue and submit it
-    //var isResultDiv = true;
+    var isResultDiv = true;
     if (formName == 'passwordForm') {
       isResultDiv = false;
     }
@@ -4635,7 +4635,7 @@ function newObject() {
   }
 }
 
-function saveObject(isResultDiv) {
+function saveObject() {
   var param=false;
   if(dojo.byId('resourcePlanningAssignment') && dojo.byId('resourcePlanningAssignment').value!='false'){
     param=dojo.byId('resourcePlanningAssignment').value;
@@ -4647,7 +4647,6 @@ function saveObject(isResultDiv) {
     showInfo(i18n("alertOngoingQuery"));
     return true;
   }
-  if(isResultDiv == null)isResultDiv=true;
   for (name in CKEDITOR.instances) { // Necessary to update CKEditor field
                                       // whith focus, otherwise changes are not
                                       // detected
@@ -4656,9 +4655,9 @@ function saveObject(isResultDiv) {
   if (dojo.byId("saveButton")) dojo.byId("saveButton").blur();
   else if (dojo.byId("comboSaveButton")) dojo.byId("comboSaveButton").blur();
   if(param && dojo.byId('resourcePlanning')){
-    submitForm("../tool/saveObject.php?selectedResource="+param, "resultDivMain", "objectForm", isResultDiv);
+    submitForm("../tool/saveObject.php?selectedResource="+param, "resultDivMain", "objectForm", true);
   }else{
-    submitForm("../tool/saveObject.php", "resultDivMain", "objectForm", isResultDiv);
+    submitForm("../tool/saveObject.php", "resultDivMain", "objectForm", true);
   }
   
 }
