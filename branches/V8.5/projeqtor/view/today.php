@@ -175,12 +175,14 @@ function showProjects() {
     $lstProj=implode(",",$lstProj);
     echo '<table align="center" style="width:100%; ">';
     echo '<tr>'.'  <td class="messageHeader" colspan="'.(($showProject)?'4':'1').'">'.i18n('menuProject');
-    echo '     <div id="showProjectToDay" class="ganttExpandOpened"';
-    echo '      style="float:left; width:16px; height:13px;"';
-    echo '      onclick="showProjectToDay(0,\''.$lstProj.'\')">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
-    echo '     <div id="hideProjectToDay" class="ganttExpandClosed"';
-    echo '      style="float:left; width:16px; height:13px;"';
-    echo '      onclick="showProjectToDay(1,\''.$lstProj.'\')">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
+    if(!$print){
+      echo '     <div id="showProjectToDay" class="ganttExpandOpened"';
+      echo '      style="float:left; width:16px; height:13px;"';
+      echo '      onclick="showProjectToDay(0,\''.$lstProj.'\')">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
+      echo '     <div id="hideProjectToDay" class="ganttExpandClosed"';
+      echo '      style="float:left; width:16px; height:13px;"';
+      echo '      onclick="showProjectToDay(1,\''.$lstProj.'\')">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
+    }
     echo '</td>';
     if ($showProject) echo '  <td class="messageHeader" colspan="2" width="'.($width).'px;"><div xstyle="width:50px; xoverflow: hidden; xtext-overflow: ellipsis;">'.ucfirst(i18n('progress')).'</div></td>';
     if ($workVisibility=='ALL' and $showProject) {
@@ -219,11 +221,11 @@ function showProjects() {
       if($colParent!=""){
         $visibleRows[]=$id;
       }
-      foreach ($subProj as $id=>$sub){
-        $listSub[]=$id;
-        $critArray=array('scope'=>'todayProjectRow_'.$id, 'idUser'=>$user);
+      foreach ($subProj as $idSub=>$sub){
+        $listSub[]=$idSub;
+        $critArray=array('scope'=>'todayProjectRow_'.$idSub, 'idUser'=>$user);
         $col = SqlElement::getSingleSqlElementFromCriteria('Collapsed', $critArray);
-          $visibleRows[]=$id;
+          $visibleRows[]=$idSub;
         if($col->id=='' and $hiddenSubProj==true){
           $hiddenSubProj=false;
         }
@@ -307,10 +309,14 @@ function showProjects() {
         $styleHealth=($print)?'width:10px;height:10px;margin:1px;padding:0;-moz-border-radius:6px;border-radius:6px;border:1px solid #AAAAAA;':'';
         echo '<tr style="text-align: center">';
         echo '  <td class="messageData" >';
-        if($subProj){
+        if($subProj and !$print){
           echo '     <div id="group_'.$idProj.'" class="'.$class.'"';
           echo '      style="float:left; width:16px; height:13px;"';
           echo '      onclick="expandProjectInToDay(\''.$idProj.'\',\''.implode(",", $listSub).'\',\''.implode(',', $visibleRows).'\');">&nbsp;&nbsp;&nbsp;&nbsp;</div>';
+        }else{
+          echo '     <div id="group_'.$idProj.'"';
+          echo '      style="float:left; width:16px; height:13px;"';
+          echo '     >&nbsp;&nbsp;&nbsp;&nbsp;</div>';
         }
         echo '<div '.$goto.' style="width:100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; ">'.$tab.htmlEncode($name);
         echo '</div></td>';
