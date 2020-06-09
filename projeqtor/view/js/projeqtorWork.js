@@ -838,10 +838,10 @@ function refreshInterventionCapacity(date,idActivity,period) {
         date = date.replace("-", "");
         date = date.replace("-", "");
         if(obj.length == 7){
-          document.getElementById(idActivity+date+period).style.background=obj;
+          document.getElementById(date+period+idActivity).style.background=obj;
         }else{
-          document.getElementById(idActivity+date+'AM').style.background=obj.substr(0,7);
-          document.getElementById(idActivity+date+'PM').style.background=obj.substr(7,13);
+          document.getElementById(date+'AM'+idActivity).style.background=obj.substr(0,7);
+          document.getElementById(date+'PM'+idActivity).style.background=obj.substr(7,13);
         }
       }
     }
