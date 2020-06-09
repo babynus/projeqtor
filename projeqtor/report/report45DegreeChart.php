@@ -130,14 +130,18 @@ if ($showIdle) {
 $query=$querySelect.$queryFrom.$queryWhere;
 $resultMile=Sql::query($query);
 $arrayMile=array();
+$arrayMileID=array();
 $existingDates=array();
 $listMilePE='(0';
+$listMile='(0';
 while ($line = Sql::fetchLine($resultMile)) {
   $id=$line['id'];
   $idpe=$line['idpe'];
   $name=$line['name'];
   $tp=$line['type'];
   $listMilePE.=','.$idpe;
+  $listMile.=','.$id;
+  $arrayMileID[$id]=$idpe;
   $arrayMile[$idpe]=array('id'=>$id, 'idpe'=>$idpe, 'name'=>$name,'type'=>$tp,'dates'=>array(), 'periods'=>array(), 'current'=>VOID, 'lastDate'=>null);
   $mpeEndDate=null;
   if ($line['realend']) {
@@ -152,16 +156,26 @@ while ($line = Sql::fetchLine($resultMile)) {
   if ($end=="" or $end<$mpeEndDate) { $end=$mpeEndDate;}
 }
 $listMilePE.=')';
-
+$listMile.=')';
+debugLog($listMilePE);
 $h=new History();
 $hTable=$h->getDatabaseTableName();
-$querySelect= "select h.refId as idpe, h.oldValue as old, h.newValue as new, h.operationDate as date";
+$ha=new HistoryArchive();
+$haTable=$ha->getDatabaseTableName();
+$querySelect= "select h.refId as idpe, h.oldValue as old, h.newValue as new, h.operationDate as date, h.refType as reftype";
 $queryFrom=   " from $hTable h";
-$queryWhere=  " where h.refType='MilestonePlanningElement'" ;
-$queryWhere.= " and h.refId in $listMilePE" ;
+$queryWhere=  " where ( (h.refType='MilestonePlanningElement' and h.refId in $listMilePE) " ;
+$queryWhere.= "      or (h.refType='Milestone' and h.refId in $listMile ) )" ;
 $queryWhere.= " and colName='plannedEndDate' ";
-$queryOrder= "  order by h.operationDate";
-$query=$querySelect.$queryFrom.$queryWhere.$queryOrder;
+$queryOrder= "  order by date";
+
+if (!$showIdle) {
+  $query=$querySelect.$queryFrom.$queryWhere.$queryOrder;
+} else {
+  $query=$querySelect.$queryFrom.$queryWhere;
+  $query.=' UNION '.$querySelect.str_replace($hTable,$haTable,$queryFrom).$queryWhere.$queryOrder;
+}
+
 $resultPlanned=Sql::query($query);
 $tablePlanned=array();
 //$existingDates=array();
@@ -169,7 +183,8 @@ while ($line = Sql::fetchLine($resultPlanned)) {
   $day=substr($line['date'],0,10);
   if (!$day or $day=='' or $day<'2000-01-01' ) continue;
   $existingDates[$day]=$day;
-  $idpe=$line['idpe'];
+  $type=$line['reftype'];
+  $idpe=($type=='Milestone')?$arrayMileID[$line['idpe']]:$line['idpe'];
   $old=$line['old'];
   $new=$line['new'];
   if (!$arrayMile[$idpe]['real'] or $day<$arrayMile[$idpe]['lastDate']) { // #2590
