@@ -34,15 +34,10 @@ include_once('../tool/formatter.php');
 
 $listResource = array();
 $size=30;
-// $print=false;
-// if ( array_key_exists('print',$_REQUEST) and RequestHandler::getValue('print')==true ) {
-//   $print=true;
-//   $size=20;
-// }
 
 PlannedWorkManual::setSize($size);
 $headerParameters="";
-$resourceId = getCurrentUserId();
+$resourceId =trim(RequestHandler::getId('idResource'));
 $idProject = trim(RequestHandler::getId('idProject'));
 $yearSpinner= RequestHandler::getYear('yearSpinner');
 $monthSpinner= RequestHandler::getMonth('monthSpinner');
@@ -112,7 +107,7 @@ if ($resourceId and !$inIdTeam and !$inIdOrga) {
                   $listMonth=array($yearSpinner.$monthSpinner);
                   if(!$onlyRes){
                     foreach ($listResource as $id=>$val){
-                      $listResource[$id]=$val->id;
+                      $listResource[$id]=$val;
                     } 
                   }
                     PlannedWorkManual::drawTable('intervention',$listResource, $listMonth, null, true);
