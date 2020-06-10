@@ -277,9 +277,9 @@ if($idOrganization){
 }
 foreach ($resources as $idR=>$nameR) {
   $sumNpw=0;
-	if ($paramTeam) {
+	//if ($paramTeam) {
     $res=new Resource($idR);
-  }
+  //}
   if (!$paramTeam or $res->idTeam==$paramTeam) {
 	  $sum=array();
 	  for ($i=1; $i<=$nbDays;$i++) {
@@ -346,7 +346,13 @@ foreach ($resources as $idR=>$nameR) {
 	    if ($days[$day]=="off") {
 	          $style=$weekendStyle;
 	    }
-	    echo '<td class="reportTableColumnHeader" ' . $style . ' >' . Work::displayWork($sum[$startDate+$i-1]) . '</td>';
+	    $sumDay=$sum[$startDate+$i-1];
+	    $day=$startDate+$i-1;
+	    $day=substr($day,0,4).'-'.substr($day,4,2).'-'.substr($day,6,2);
+	    if ($res->getCapacityPeriod($day)<$sumDay) {
+	      $style=' style="color:#a05050 !important;font-weight:bold"';
+	    }
+	    echo '<td class="reportTableColumnHeader" ' . $style . ' >' . Work::displayWork($sumDay) . '</td>';
 	    $lineSum+=$sum[$startDate+$i-1];
 	  	}
 	  echo '<td class="reportTableHeader">' . Work::displayWork($lineSum) . '</td>';

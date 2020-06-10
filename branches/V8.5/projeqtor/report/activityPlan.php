@@ -412,7 +412,16 @@ for ($i=1; $i<=$nbDays;$i++) {
   if ($days[$day]=="off") {
     $style=$weekendStyle;
   }
-  echo '<td class="reportTableHeader" ' . $style . '>' . Work::displayWork($globalSum[$startDate+$i-1]) . '</td>';
+  $sumDay=$globalSum[$startDate+$i-1];
+  if ($paramResource) {
+    $res=new Resource($paramResource);
+    $day=$startDate+$i-1;
+    $day=substr($day,0,4).'-'.substr($day,4,2).'-'.substr($day,6,2);
+    if ($res->getCapacityPeriod($day)<$sumDay) {
+      $style=' style="color:#ffc0c0 !important;font-weight:bold"';
+    }
+  }
+  echo '<td class="reportTableHeader" ' . $style . '>' . Work::displayWork($sumDay) . '</td>';
   $lineSum+=$globalSum[$startDate+$i-1];
 }
 echo '<td class="reportTableHeader">' . Work::displayWork($lineSum) . '</td>';

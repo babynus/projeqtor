@@ -279,9 +279,11 @@ foreach ($resources as $idR=>$nameR) {
       $val=$period[$idR];
 	    if ($resultPeriodFmt[$idP][$idR]=='plan') {
 	      $style.='background-color:' . $plannedBGColor . ';';
+	      if ($val<0) $style.="color:#d05050;font-weight:bold;";
 	      $italic=true;
 	    } else if ($resultPeriodFmt[$idP][$idR]=='real') {
-	    	$style.='color: #000000;';
+	      if ($val<0) $style.='color: #d05050;font-weight:bold;';
+	      else $style.='color: #000000;'; 
 	    } else {
 	    	$style.='color: #00AA00;color: #00AA00;background-color:#FAFAFA;';
 	    }      	
