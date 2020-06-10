@@ -288,7 +288,7 @@ cannotDeleteBilledTerm: "Não é possível excluir uma condição pré-acordada 
 cannotDeletePaidTerm: "Não é possível excluir uma condição pré-acordada que já foi faturada",
 cannotExcludeFromGlobalPlanning: "You cannot exclude this project from global planning as it already has dependencies involving ${1} global item(s) (action&#44 decision&#44 delivery&#44 ...).<br/>Please remove these dependencies first.",
 cannotGoto: "Não é possível executar esta ação.<br/>Por favor selecione um item da lista.",
-canPlanWithInfiniteCapacity: "Can plan with overuse",
+canPlanWithInfiniteCapacity: "Can plan with overuse of resource",
 canSubscribeForOthers: "Can define users as followers",
 cantAssociateAnActivityWithLeadProject: "can not associate an activity with lead project",
 cantAssociateAnActivityWithProjectLeave: "Can't associate an activity on the project dedicated to leaves system",
