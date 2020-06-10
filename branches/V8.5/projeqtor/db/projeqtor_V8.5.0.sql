@@ -266,6 +266,7 @@ INSERT INTO `${prefix}habilitationreport` (`idProfile`, `idReport`, `allowAccess
 (1, 109, 1);
 
 INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOrder`, `defaultValue`) VALUES 
+(109,'idResource','resourceList',5,'currentResource'), 
 (109,'idProject','projectList',10,'currentProject'), 
 (109,'idTeam','teamList',20,null), 
 (109,'idOrganization','organizationList',15,null),
