@@ -37,6 +37,7 @@ $minSurbooking=array();
 $ressAll=array();
 $start=null;
 $end=null;
+$resourceList = array();
 
 if ($class=='Resource' or $class=='ResourceTeam') {
   echo '<div style="background-color:#FFF0F0;padding:3px;border:1px solid #E0E0E0;">'.i18n('noDataToDisplay')."</div>";
@@ -57,7 +58,6 @@ if ($pe->assignedWork==0 and $pe->leftWork==0 and $pe->realWork==0) {
 if($objectClassManual == 'ResourcePlanning' ){
   $crit=array('refType'=>$class,'refId'=>$id,'idAssignment'=>$idAssignment);
 }
-
 $wk=new Work();
 $wkLst=$wk->getSqlElementsFromCriteria($crit);
 foreach($wkLst as $wk) {
@@ -65,6 +65,7 @@ foreach($wkLst as $wk) {
   if (!$start or $start>$wk->workDate) $start=$wk->workDate;
   if (!$end or $end<$wk->workDate) $end=$wk->workDate;
   $keyAss=$wk->idAssignment.'#'.$wk->idResource;
+  $resourceList[$keyAss]=$wk->idResource;
   if (! isset($work[$keyAss])) $work[$keyAss]=array();
   if (! isset($work[$keyAss]['resource'])) {
     $ress=new ResourceAll($wk->idResource);
@@ -86,6 +87,7 @@ foreach($wkLst as $wk) {
   $maxSurbooking[$wk->idResource]=0;
   $minSurbooking[$wk->idResource]=0;
 }
+
 $wk=new PlannedWork();
 $wkLst=$wk->getSqlElementsFromCriteria($crit);
 foreach($wkLst as $wk) {
@@ -93,6 +95,7 @@ foreach($wkLst as $wk) {
   if (!$start or $start>$wk->workDate) $start=$wk->workDate;
   if (!$end or $end<$wk->workDate) $end=$wk->workDate;
   $keyAss=$wk->idAssignment.'#'.$wk->idResource;
+  $resourceList[$keyAss]=$wk->idResource;
   if (! isset($work[$keyAss])) $work[$keyAss]=array();
   if (! isset($work[$keyAss]['resource'])) {
     $ress=new ResourceAll($wk->idResource);
@@ -116,6 +119,45 @@ foreach($wkLst as $wk) {
   $maxSurbooking[$wk->idResource]=0;
   $minSurbooking[$wk->idResource]=0;
 }
+
+$where="idProject in ".Project::getAdminitrativeProjectList();
+$act = new Activity();
+$actList = $act->getSqlElementsFromCriteria(null,null,$where);
+foreach ($actList as $activity){
+	$actListId[$activity->id]=$activity->id;
+}
+$wk=new Work();
+$where = "refType='Activity' and refId in (".implode(',', $actListId).") and idResource in (".implode(',', $resourceList).")";
+$actWorkList = $wk->getSqlElementsFromCriteria(null,null,$where);
+$resourceList = array_flip($resourceList);
+
+foreach($actWorkList as $wk) {
+	$dates[$wk->workDate]=$wk->workDate;
+	if (!$start or $start>$wk->workDate) $start=$wk->workDate;
+	if (!$end or $end<$wk->workDate) $end=$wk->workDate;
+	$keyAss=$resourceList[$wk->idResource];
+	if (! isset($work[$keyAss])) $work[$keyAss]=array();
+	if (! isset($work[$keyAss]['resource'])) {
+		$ress=new ResourceAll($wk->idResource);
+		$ressAll[$wk->idResource]=$ress;
+		$work[$keyAss]['capacity']=($ress->capacity>1)?$ress->capacity:'1';
+		$work[$keyAss]['resource']=$ress->name;
+		$work[$keyAss]['idResource']=$ress->id;
+		if ($ress->isResourceTeam) {
+			$ass=new Assignment($wk->idAssignment);
+			$work[$keyAss]['capacity']=($ass->capacity>1)?$ass->capacity:'1';
+		}
+		if ($work[$keyAss]['capacity']>1) {
+			$work[$keyAss]['resource'].=' ('.i18n('max').' = '.htmlDisplayNumericWithoutTrailingZeros($work[$keyAss]['capacity']).' '.i18n('days').')';
+		}
+	}
+	$work[$keyAss][$wk->workDate]=array('work'=>$wk->work,'type'=>'administrative');
+	$maxCapacity[$wk->idResource]=$work[$keyAss]['capacity'];
+	$minCapacity[$wk->idResource]=$work[$keyAss]['capacity'];
+	$maxSurbooking[$wk->idResource]=0;
+	$minSurbooking[$wk->idResource]=0;
+}
+
 if ($pe->idPlanningMode=='22') { // RECW
   $start=$pe->plannedStartDate;
   $end=$pe->plannedEndDate;
@@ -131,7 +173,6 @@ if($objectClassManual != 'ResourcePlanning' ){
     $start=$pe->plannedStartDate;
   }
 }
-
 $variableCapacity=array();
 $surbooking=array();
 $dt=$start;
@@ -172,6 +213,7 @@ foreach ($work as $resWork) {
   $surbooked=null;
   foreach ($dates as $dt) {
     $color="#ffffff";
+    $tdColor="";
     $height=20; $w=0;    
     $heightSurbooked=0;
     $capacityTop=$maxCapacity[$resWork['idResource']]; //$resWork['capacity'];
@@ -200,6 +242,9 @@ foreach ($work as $resWork) {
       } else {
         $color=($resWork[$dt]['type']=='real')?"#705050":"#BB5050";
       }
+      if($resWork[$dt]['type']=='administrative'){
+      	$color="#3d668f";
+      }
       if (isset($resWork[$dt]['surbooked']) and $resWork[$dt]['surbooked']==1) {
         $sb=$resWork[$dt]['surbookedWork'];
         $height=round(($w-$sb)*20/$capacityTop,0);
@@ -208,7 +253,11 @@ foreach ($work as $resWork) {
         $height=round($w*20/$capacityTop,0);
       }
     }
-    echo '<td style="padding:0;width:'.$width.'px;border-right:1px solid #eeeeee;position:relative;">';
+    if(isOffDay($dt, SqlList::getFieldFromId('ResourceAll', $resWork['idResource'], 'idCalendarDefinition'))){
+      $color="#dddddd";
+      $tdColor="background-color:#dddddd;";
+    }
+    echo '<td style="padding:0;width:'.$width.'px;border-right:1px solid #eeeeee;position:relative;'.$tdColor.'">';
     echo '<div style="display:block;background-color:'.$color.';position:absolute;bottom:0px;left:0px;width:100%;height:'.$height.'px;"></div>';
     if ($heightSurbooked>0) echo '<div style="display:block;background-color:#f4bf42;position:absolute;bottom:'.$height.'px;left:0px;width:100%;height:'.$heightSurbooked.'px;"></div>';
     if ($maxCapacity[$resWork['idResource']]!=$resWork['capacity'] or $minCapacity[$resWork['idResource']]!=$resWork['capacity']) {
