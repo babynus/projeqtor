@@ -191,7 +191,9 @@ while ($date<=$end) {
 // Header
 $plannedBGColor='#FFFFDD';
 $plannedFrontColor='#777777';
+$styleRed=' style="color:#d05050;font-weight:bold;" ';
 $plannedStyle=' style="width:20px;text-align:center;background-color:' . $plannedBGColor . '; color: ' . $plannedFrontColor . ';" ';
+$plannedStyleRed=' style="width:20px;text-align:center;background-color:' . $plannedBGColor . ';'.$styleRed.'" ';
  
 echo "<table width='95%' align='center'><tr>";
 echo '<td>';
@@ -217,7 +219,7 @@ echo '</tr>';
 echo '<tr>';
 $arrSum=array();
 foreach ($arrDates as $date) {
-  echo '<td class="reportTableColumnHeader" >';
+  echo '<td class="reportTableColumnHeader" style="width:40px" >';
   echo substr($date,4,2); 
   echo '</td>';
   $arrSum[$date]=0;
@@ -225,6 +227,26 @@ foreach ($arrDates as $date) {
 echo '</tr>';
 $sumProj=array();
 $sumProjUnit=array();
+$capaResDate=array();
+foreach($tab as $res=>$lists) {
+  $currentRes=new Resource($res);
+  $capaResDate[$res]=array();
+  foreach($arrDates as $date) {
+    if ($scale=='week') {
+      $firstDay=date('Y-m-d',firstDayofWeek(substr($date,4,2),substr($date,0,4)));
+      $lastDay=addDaysToDate($firstDay, 7);
+    } else {
+      $firstDay=substr($date,0,4) . '-' . substr($date,4,2) . '-01';
+      $lastDay=substr($date,0,4) . '-' . substr($date,4,2).'-'.lastDayOfMonth(intval(substr($date,4,2)),substr($date,0,4));
+    }
+    $capa=0;
+    for ($dt=$firstDay;$dt<=$lastDay;$dt=addDaysToDate($dt,1)) {
+      if (isOffDay($dt,$currentRes->idCalendarDefinition)) continue;
+      $capa+=$currentRes->getCapacityPeriod($dt);
+    }
+    $capaResDate[$res][$date]=$capa;
+  }
+}
 foreach($tab as $res=>$lists) {
   $sumProj[$res]=array();
   $sumProjUnit[$res]=array();
@@ -250,7 +272,12 @@ foreach($tab as $res=>$lists) {
       if (array_key_exists($mode, $lists) and array_key_exists($date,$lists[$mode])) {
         $val=round($lists[$mode][$date],2);
       }
-      echo '<td class="reportTableData" ' . $style . '>';
+      $styleDate=$style;
+      if ($capaResDate[$res][$date]<$val) {   
+        if ($style==$plannedStyle) $styleDate=$plannedStyleRed;
+        else $styleDate=$styleRed;
+      }
+      echo '<td class="reportTableData" ' . $styleDate . '>';
       echo ($ital)?'<i>':'';
       echo Work::displayWork($val);
       echo ($ital)?'</i>':'';
@@ -260,7 +287,7 @@ foreach($tab as $res=>$lists) {
       $sumProj[$res][$date]+=$val;
       $sumProjUnit[$res][$date]+=Work::displayWork($val);
     }
-    echo '<td class="reportTableColumnHeader">';
+    echo '<td class="reportTableColumnHeader" style="width:50px">';
     echo ($ital)?'<i>':'';
     echo Work::displayWork($sum);
     echo ($ital)?'</i>':'';
