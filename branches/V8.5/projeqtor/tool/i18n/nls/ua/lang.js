@@ -288,7 +288,7 @@ cannotDeleteBilledTerm: "не можна вилучити термін облі�
 cannotDeletePaidTerm: "не можна вилучити термін облікованних видатків (billed)",
 cannotExcludeFromGlobalPlanning: "Ви не можете вилучити цей проект із глобального планування&#44 оскільки він вже включає залежності ${1} з об'єктами&#44 (операції (action)&#44 рішення(decision)&#44 достави (delivery)&#44 ...).<br/>Перш за все&#44 усуньте ці залежности.",
 cannotGoto: "Не можу &#34;зайти&#34; в цей елемент.<br/>Будь ласка&#44; оберіть позицію в першому списку простим натисненням кнопки.",
-canPlanWithInfiniteCapacity: "Can plan with overuse",
+canPlanWithInfiniteCapacity: "Can plan with overuse of resource",
 canSubscribeForOthers: "Можна підписатися на обстеження для користувачів",
 cantAssociateAnActivityWithLeadProject: "can not associate an activity with lead project",
 cantAssociateAnActivityWithProjectLeave: "Can't associate an activity on the project dedicated to leaves system",
