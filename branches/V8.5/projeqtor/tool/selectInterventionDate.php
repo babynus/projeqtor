@@ -73,7 +73,7 @@ $critIncompatible.=" and refType is not null and refId is not null";
 //$critIncompatible.=" and refType='$refType' and refId=$refId";
 $pwm=SqlElement::getSingleSqlElementFromCriteria('PlannedWorkManual', array('workDate'=>$date,'idResource'=>$resource,'period'=>$period));
 if ($allDay) $pwmx=SqlElement::getSingleSqlElementFromCriteria('PlannedWorkManual', array('workDate'=>$date,'idResource'=>$resource,'period'=>$periodx));
-if($pwm->id){
+if($pwm->id and $pwm->refType and $pwm->refId){
   $lstProjectVisible = $user->getVisibleProjects();
   $project =new Project($pwm->idProject,true);
   $profile=getSessionUser()->getProfile($project);
@@ -83,7 +83,7 @@ if($pwm->id){
     exit;
   }
 }
-if($allDay and $pwmx->id){
+if($allDay and $pwmx->id and $pwmx->refType and $pwmx->refId){
   $lstProjectVisible = $user->getVisibleProjects();
   $project =new Project($pwmx->idProject,true);
   $profile=getSessionUser()->getProfile($project);
