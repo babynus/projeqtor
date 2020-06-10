@@ -107,13 +107,6 @@ $userName=($team==0 and $orga==0)?$currentUser:0;
             <table width="100%"  >
               <tr height="27px">
                 <td style="min-width:200px"> 
-                  <button id="refreshButton" dojoType="dijit.form.Button" showlabel="false"
-                    title="<?php echo i18n('buttonRefreshList');?>"
-                    iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
-                    <script type="dojo/method" event="onClick" args="evt">
-	                   refreshConsultationPlannedWorkManualList();
-                    </script>
-                  </button>
                   <button id="addTodayButton" dojoType="dijit.form.Button" showlabel="false" onclick="saveReportInToday();"
                     title="<?php echo i18n('showInToday');?>"
                     iconClass="dijitButtonIcon dijitButtonIconToday" class="detailButton">
