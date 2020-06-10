@@ -288,7 +288,7 @@ cannotDeleteBilledTerm: "Нельзя удалить срок для счето�
 cannotDeletePaidTerm: "Нельзя удалить срок для счетов",
 cannotExcludeFromGlobalPlanning: "You cannot exclude this project from global planning as it already has dependencies involving ${1} global item(s) (action&#44 decision&#44 delivery&#44 ...).<br/>Please remove these dependencies first.",
 cannotGoto: "Не могу перейти на этот элемент.<br/>Пожалуйста&#44; сначала выберите элемент.",
-canPlanWithInfiniteCapacity: "Can plan with overuse",
+canPlanWithInfiniteCapacity: "Can plan with overuse of resource",
 canSubscribeForOthers: "Can define users as followers",
 cantAssociateAnActivityWithLeadProject: "can not associate an activity with lead project",
 cantAssociateAnActivityWithProjectLeave: "Can't associate an activity on the project dedicated to leaves system",

@@ -43,11 +43,16 @@ if (! array_key_exists('startDatePlan',$_REQUEST)) {
 $startDatePlan=trim($_REQUEST['startDatePlan']);
 Security::checkValidDateTime($startDatePlan);
 
+$infinitecapacity=false;
+if (array_key_exists('infinitecapacity',$_REQUEST)) {
+	$infinitecapacity=true;
+}
+traceLog("infinitecapacity: $infinitecapacity");
 // Moved transaction at end of procedure (out of script plan.php) to minimize lock possibilities
 // Sql::beginTransaction();
 
 projeqtor_set_time_limit(600);
-$result=PlannedWork::plan($idProjectPlan, $startDatePlan);
+$result=PlannedWork::plan($idProjectPlan, $startDatePlan,true,$infinitecapacity);
 
 // Message of correct saving
 

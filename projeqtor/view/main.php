@@ -1966,7 +1966,31 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                </div>
              </td>
            </tr>
-           <tr>
+           <?php 
+            $canPlanWithOveruse=false; 
+            $right=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$user->getProfile(),'scope'=>'planningWithOveruse'));
+            if($right->rightAccess==1){
+              $canPlanWithOveruse=true;
+            }
+            if ($canPlanWithOveruse) {?>
+		       <tr style="height:30px">
+				     <td class="dialogLabel" >		   
+				     </td>
+             <td title="<?php echo i18n("helpPlanWithInfiniteCapacity");?>">
+               <table>
+                <tr>
+                  <td>
+                    <div dojoType="dijit.form.CheckBox" type="checkbox" role="checkbox" class="dijit dijitReset dijitInline dijitCheckBox"
+                     id="infinitecapacity" name="infinitecapacity"
+                     style="user-select: none;margin-right: 5px;" class="input"></div>
+                   </td>
+                   <td class="dialogLabel" style="white-space:nowrap"><label for="infinitecapacity" ><?php echo i18n("planWithInfiniteCapacity");?></label></td>
+                </tr>
+               </table>             
+             </td>
+           </tr>
+           <?php }?>
+           <tr style="height:30px">
              <td>
              </td>
              <td>
@@ -1974,22 +1998,20 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                 <tr>
                   <td>
                     <div dojoType="dijit.form.CheckBox" type="checkbox" id="onlyCheckedProject" name="onlyCheckedProject" 
-                      style="margin-right: 5px;" onChange="showSelectedProject(this.checked);">
-                    </div>
+                      style="margin-right: 5px;" onChange="showSelectedProject(this.checked);"></div>
                   </td>
-                  <td class="dialogLabel" style="white-space:nowrap">
-                    <label for="onlyCheckedProject" ><?php echo i18n("showSelectedProject"); ?></label>
-                  </td>
+                  <td class="dialogLabel" style="white-space:nowrap"><label for="onlyCheckedProject" ><?php echo i18n("showSelectedProject"); ?></label></td>
                 </tr>
                </table>
              </td>
            </tr>
-           <tr>
-             <?php 
-                $user=getSessionUser();
-                $priority=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$user->idProfile,'scope'=>'feedingOfTheReal'));
-                if( $priority and ($priority->rightAccess == 1)){
-             ?>
+           <?php 
+           $user=getSessionUser();
+           $priority=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther',array('idProfile'=>$user->idProfile,'scope'=>'feedingOfTheReal'));
+           if( $priority and ($priority->rightAccess == 1)){
+           ?>
+           <tr style="height:30px">
+
              <td class="dialogLabel" >
                <label style="width:200px;display:none;" for="allowAutomaticFeedingOfTheReal" ><?php echo i18n("allowAutomaticFeedingOfTheReal").'&nbsp;:' ?></label>
              </td>
@@ -1997,12 +2019,11 @@ $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
                <div title="<?php echo i18n('allowAutomaticFeedingOfTheReal')?>" dojoType="dijit.form.CheckBox" style="margin-left:5px;margin-top:2px;display:none;"
                     class="" type="checkbox" id="allowAutomaticFeedingOfTheReal" name="allowAutomaticFeedingOfTheReal"   
                     <?php if (Parameter::getGlobalParameter('automaticFeedingOfTheReal')=='YES') { echo ' checked="checked" '; }?> >
-		       </div>&nbsp;
+		           </div>&nbsp;
              </td>
-             <?php 
-             }
-             ?>
            </tr>
+           <?php } ?>
+           <tr><td></td><td>&nbsp;</td></tr>
          </table>
         </form>
       </td>
