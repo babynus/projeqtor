@@ -35,8 +35,8 @@ class InputMailboxMain extends SqlElement {
   public $name;
   public $idProject;
   public $serverImap;
-  public $userImap;
-  public $passwordImap;
+  public $imapUserAccount;
+  public $pwdImap;
   public $securityConstraint;
   public $_tab_4_1_4 = array('','','','','Attachment');
   public $allowAttach;
@@ -56,12 +56,14 @@ class InputMailboxMain extends SqlElement {
   public $failedMessage;
   public $_nbColMax = 3;
   
+  public $_noCopy;
+  
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="8%"># ${id}</th>
     <th field="name" width="23%">${name}</th>
     <th field="nameProject" width="15%">${idProject}</th>
     <th field="serverImap" width="20%">${serverImap}</th>
-    <th field="userImap" width="20%">${userImap}</th>
+    <th field="imapUserAccount" width="20%">${imapUserAccount}</th>
     <th field="limitOfInputPerHour" width="10%">${limitOfInputPerHour}</th>
     <th field="idle" width="4%" formatter="booleanFormatter">${idle}</th>
     ';
@@ -70,8 +72,8 @@ class InputMailboxMain extends SqlElement {
       'name'=>'required',
       'idProject'=>'required',
       'serverImap'=>'required',
-      'userImap'=>'required',
-      'passwordImap'=>'required',
+      'imapUserAccount'=>'required',
+      'pwdImap'=>'required',
       'securityConstraint'=>'required',
       'idTicketType'=>'required',
       'lastInputDate'=>'readonly',
@@ -127,7 +129,7 @@ class InputMailboxMain extends SqlElement {
     $emailHost=Parameter::getGlobalParameter('cronCheckEmailsHost'); // {imap.gmail.com:993/imap/ssl}INBOX';
     $emailEmail=Parameter::getGlobalParameter('cronCheckEmailsUser');
     if($emailHost and $emailEmail){
-      if($this->serverImap == $emailHost and $this->userImap == $emailEmail){
+      if($this->serverImap == $emailHost and $this->imapUserAccount == $emailEmail){
         $result .= '<br/>' . i18n ( 'imapIsAlreadyUsed' );
       }
     }
@@ -141,7 +143,7 @@ class InputMailboxMain extends SqlElement {
   }
   
   public function setAttributes() {
-    if($this->allowAttach == '1'){
+    if($this->allowAttach == '0'){
       self::$_fieldsAttributes['sizeAttachment']='hidden';
       self::$_fieldsAttributes['_label_sizeAttachment1']='hidden';
       self::$_fieldsAttributes['_label_sizeAttachment2']='hidden';
@@ -155,16 +157,18 @@ class InputMailboxMain extends SqlElement {
   * @return the return message of persistence/SqlElement#save() method
   */
   public function save() {
+    $old = $this->getOld();
     $result = parent::save();
+    if(!$old->id and $this->id == 1){
+      $checkEmails=Parameter::getGlobalParameter('cronCheckEmails');
+      if (!$checkEmails or intval($checkEmails)<=0) {
+        Parameter::storeGlobalParameter('cronCheckEmails', 10);
+      }
+    }
     return $result;
   }
   public function delete() {
     $result=parent::delete();
-    return $result;
-  }
-  
-  public function copyTo($newClass, $newType, $newName, $newProject, $structure, $withNotes, $withAttachments, $withLinks, $withAssignments = false, $withAffectations = false, $toProject = NULL, $toActivity = NULL, $copyToWithResult = false,$copyToWithVersionProjects=false) {
-    $result=parent::copyTo($newClass, $newType, $newName, $newProject, $structure, $withNotes, $withAttachments, $withLinks);
     return $result;
   }
   
@@ -178,15 +182,22 @@ class InputMailboxMain extends SqlElement {
    */
   public function getValidationScript($colName) {
     $colScript = parent::getValidationScript($colName);
-//     if ($colName=="attachment") {
-//       $colScript .= '<script type="dojo/connect" event="onChange" >';
-//       $colScript .= '  if(dojo.byId("attachment").checked){ ';
-//       // afficher la taille max
-//       $colScript .= '  ';
-//       $colScript .= '  }';
-//       $colScript .= '  formChanged();';
-//       $colScript .= '</script>';
-//     }
+    if ($colName=="allowAttach") {
+      $colScript .= '<script type="dojo/connect" event="onChange" >';
+      $colScript .= '  if(dojo.byId("allowAttach").checked){ ';
+      //$colScript .= "   showWidget('allowAttach');";
+      $colScript .= "   enableWidget('sizeAttachment');";
+      $colScript .= "   showWidget('sizeAttachment');";
+      //$colScript .= "   hideWidget('allowAttach');";
+     // $colScript .= "   dojo.style(dijit.byId('sizeAttachment').domNode.display = 'inline-block' ; ";
+      $colScript .= '  }else{';
+      $colScript .= "   disableWidget('sizeAttachment');";
+      $colScript .= "   hideWidget('sizeAttachment');";
+      //$colScript .= "   dojo.byId('sizeAttachment').style.display='block';";
+      $colScript .= '  }';
+      $colScript .= '  formChanged();';
+      $colScript .= '</script>';
+    }
     return $colScript;
   }
   
@@ -236,9 +247,7 @@ class InputMailboxMain extends SqlElement {
   public function drawSpecificItem($item){
     global $print;
     $result = "";
-    if($item == 'test'){
-     
-    }else if($item=='history'){
+    if($item=='history'){
         $history = new InputMailboxHistory();
         //$history->drawInputMailboxHistory($this);
     }
