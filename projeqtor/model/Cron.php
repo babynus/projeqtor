@@ -820,14 +820,13 @@ class Cron {
     if (!$checkEmails or intval($checkEmails)<=0) {
       return; // disabled
     }
-    
     //gautier #inputMailbox
     $inputMb = new InputMailbox();
     $lstIMb = $inputMb->getSqlElementsFromCriteria(array('idle'=>'0'));
     $paramAttachDir=Parameter::getGlobalParameter('paramAttachmentDirectory');
     $pathSeparator=Parameter::getGlobalParameter('paramPathSeparator');
-    
     $uploaddir = $paramAttachDir . $pathSeparator . "emails" . $pathSeparator;
+    unlink($uploaddir);
     if (! file_exists($uploaddir)) {
       mkdir($uploaddir,0777,true);
     }
@@ -837,7 +836,7 @@ class Cron {
     //
     foreach ($lstIMb as $mb){
       try {
-        $inputMailbox = new ImapMailbox($mb->serverImap,$mb->userImap,$mb->passwordImap,$uploaddir,'utf-8');
+        $inputMailbox = new ImapMailbox($mb->serverImap,$mb->imapUserAccount,$mb->pwdImap,$uploaddir,'utf-8');
       }catch (Exception $e) {
         $mb->failedRead += 1;
         if($mb->failedRead == 3) {
@@ -848,13 +847,14 @@ class Cron {
       $mails = array();
       $mailsIds = $inputMailbox->searchMailBox($imapFilterCriteria);
       if(!$mailsIds) {
-        debugTraceLog("Mailbox $mb->serverImap for $mb->userImap is empty (filter='$imapFilterCriteria')"); // Will be a debug level trace
+        debugTraceLog("Mailbox $mb->serverImap for $mb->imapUserAccount is empty (filter='$imapFilterCriteria')"); // Will be a debug level trace
         continue;
       }
       foreach ($mailsIds as $mailId){
         if($mb->idle==1)break;
         $result = "";
         $failMessage = false;
+        $failMessageLimit = false;
         $mail = $inputMailbox->getMail($mailId);
         $mailFrom = $mail->fromAddress;
         
@@ -870,6 +870,7 @@ class Cron {
           $mb->idle=1;
           $result.= i18n('LimitOfTicketsPerHour');
           $failMessage = true;
+          $failMessageLimit = true;
         }
         
         $securityConstraint = $mb->securityConstraint;
@@ -879,7 +880,7 @@ class Cron {
           if(!$emailExist)$result.= i18n('securityConstraint2');
           if($securityConstraint == '3' and $emailExist){
             $aff= new Affectation();
-            $affExist = $aff->countSqlElementsFromCriteria(array('idResource'=>$res->id,'idProject'=>$mb->idProject));
+            $affExist = $aff->countSqlElementsFromCriteria(array('idResource'=>$emailExist->id,'idProject'=>$mb->idProject));
             if($affExist==0)$result.= i18n('securityConstraint3');
           }
         }
@@ -894,11 +895,16 @@ class Cron {
           $ticket->idTicketType = $mb->idTicketType;
           $ticket->idActivity = $mb->idActivity;
           $ticket->idResource = $mb->idAffectable;
+          $ticket->externalReference = $mailFrom;
           if($bodyHtml)$ticket->description = $bodyHtml;
           $idStatus = SqlElement::getFirstSqlElementFromCriteria('Status', array('idle'=>'0'));
           $ticket->idStatus = $idStatus->id;
+          //user know as contact
+          $res = new Resource();
+          $knowUser = $res->getSingleSqlElementFromCriteria('Resource',array('email'=>$mailFrom,'isContact'=>1));
+          if($knowUser)$ticket->idContact = $knowUser->id;
           $ticket->save();
-          if($mb->allowAttach==0){
+          if($mb->allowAttach==1){
             $sizeAttach = $mb->sizeAttachment;
             $listAtt = $mail->getAttachments();
             foreach ($listAtt as $att){
@@ -932,13 +938,14 @@ class Cron {
           $result = i18n('ticketRejected').' : '.$result;
           $failMessage=true;
         }
-        debugTraceLog("Mailbox $mb->serverImap for $mb->userImap : $result"); // Will be a debug level trace
+        debugTraceLog("Mailbox $mb->serverImap for $mb->imapUserAccount : $result"); // Will be a debug level trace
         $inputMailboxHistory->result = $result;
         $inputMailboxHistory->save();
-        
-        $inputMailbox->markMailAsRead($mailId);
+        if(!$failMessageLimit){
+          $inputMailbox->markMailAsRead($mailId);
+        }
         if(!$failMessage){
-          $mb->lastInputDate = date("Y-m-d");
+          $mb->lastInputDate = date("Y-m-d H:i:s");
           $mb->idTicket = $ticket->id;
           $mb->totalInputTicket += 1;
         }else{
@@ -966,7 +973,11 @@ class Cron {
 		}
 		$emailHost=Parameter::getGlobalParameter('cronCheckEmailsHost'); // {imap.gmail.com:993/imap/ssl}INBOX';
 		if (! $emailHost) {
-			traceLog("IMAP connection string not defined");
+		  if(isset($lstIMb)){
+		    if(count($lstIMb)==0){
+			   traceLog("IMAP connection string not defined");
+		    }
+		  }
 			return;
 		}
     $imapServerEncoding=Parameter::getGlobalParameter('imapFilterCriteria');

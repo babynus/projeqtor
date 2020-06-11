@@ -1857,9 +1857,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo ' class="display generalColClass '.$col.'Class" style="width:150px;position:relative; left: 3px;'.$specificStyle.'"';
         echo ' readonly tabindex="-1" ';
         echo ' value="'.htmlEncode($val).'" />';
-      } else if($col=='passwordImap'){
+      } else if($col=='pwdImap'){
         echo ' <div class="dijit dijitReset dijitInline dijitLeft input required generalColClass generalColClassNotReadonly userImapClass dijitTextBox dijitValidationTextBox">';
-        echo '<input type="password"  ';
+        echo '<input type="password" autocomplete="new-password"  ';
         echo $name;
         echo ' class="dijitReset dijitInputInner" data-dojo-attach-point="textbox,focusNode"  autocomplete="off"  maxlength="200" tabindex="0" ';
         echo ' value="'.htmlEncode($val).'" />';
