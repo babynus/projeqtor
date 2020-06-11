@@ -203,7 +203,7 @@ $queryWhere.= ($queryWhere=='')?'':' and ';
 $queryWhere.=  $table . ".idProject not in " . Project::getAdminitrativeProjectList() ;
 $ass=new Assignment();
 $res=new Resource();
-$querySelect .= "pe.idProject as idProj, pe.id idPe, pe.wbs wbs, pe.wbsSortable wbsSortable, pe.priority priority, pe.idplanningmode idplanningmode, pe.validatedenddate, pe.notplannedwork  , pe.plannedenddate as peplannedend, pe.plannedstartdate as peplannedstart, ass.* , usr.fullName as name, pe.refName refName";
+$querySelect .= "pe.idProject as idProj, pe.id idPe, pe.wbs wbs, pe.wbsSortable wbsSortable, pe.priority priority, pe.idplanningmode idplanningmode, pe.validatedenddate, pe.notplannedwork  , pe.plannedenddate as peplannedend, pe.plannedstartdate as peplannedstart, pe.color as color, ass.* , usr.fullName as name, pe.refName refName";
 $querySelect .= ", pe.topRefType as topreftype, pe.toprefid as toprefid, pe.topid as topid ";
 $queryFrom .= $table . ' pe, ' . $ass->getDatabaseTableName() . ' ass, ' . $res->getDatabaseTableName() . ' usr';
 $queryWhere= ' pe.refType=ass.refType and pe.RefId=ass.refId and usr.id=ass.idResource and ' . str_replace($table, 'pe', $queryWhere);
@@ -322,7 +322,6 @@ $query='select ' . $querySelect
 . ' where ' . $queryWhere
 . ' order by ' . $queryOrderBy;
 $result=Sql::query($query);
-
 
 if (isset($debugJsonQuery) and $debugJsonQuery) { // Trace in configured to
   debugTraceLog("jsonResourcePlanning: ".$query); // Trace query
@@ -627,7 +626,7 @@ if (Sql::$lastQueryNbRows == 0) {
 				}
 			}
 			echo ', "depend":"' . '"'; // No dependency to display on Resource Planning
-			echo ', "color":"'.trim($line['color'],'#').'"';
+			echo ', "color":"'.((isset($line['color']))?trim($line['color'],'#'):'').'"';
 			echo '}';
 		}
 		echo ' ] }';
