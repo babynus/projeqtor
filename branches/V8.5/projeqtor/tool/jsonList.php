@@ -33,7 +33,6 @@
 require_once "../tool/projeqtor.php";
 // scriptLog(' ->/tool/jsonList.php');
 $type = $_REQUEST ['listType']; // Note: checked against constant values.
-debugLog($_REQUEST);
 if (isset ( $_REQUEST ['critField'] )) {
   $field = $_REQUEST ['critField'];
   Security::checkValidAlphanumeric ( $field );

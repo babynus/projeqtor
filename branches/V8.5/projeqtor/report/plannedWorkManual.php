@@ -44,12 +44,37 @@ $monthSpinner= RequestHandler::getMonth('monthSpinner');
 $inIdTeam = trim(RequestHandler::getId('idTeam'));
 $inIdOrga = trim(RequestHandler::getId('idOrganization'));
 $onlyRes = false;
+
+if ($resourceId!="") {
+  $idResource = Security::checkValidId($resourceId);
+}
+
+if ($yearSpinner!="") {
+  $paramYear=Security::checkValidYear($yearSpinner);
+  $headerParameters.= i18n("year") . ' : ' . $paramYear . '<br/>';
+};
+if ($monthSpinner!="") {
+  $paramMonth=Security::checkValidMonth($monthSpinner);
+  $headerParameters.= i18n("month") . ' : ' . $paramMonth . '<br/>';
+};
 // Header
-if (array_key_exists('idProject',$_REQUEST) and trim($_REQUEST['idProject'])!="") {
-  $paramProject=trim($_REQUEST['idProject']);
-  Security::checkValidId($paramProject);
+if ($idResource!="") {
+  $headerParameters.= i18n("colIdResource") . ' : ' . htmlEncode(SqlList::getNameFromId('Affectable',$idResource)) . '<br/>';
+}
+if ($idProject!="") {
+  $paramProject=Security::checkValidId($idProject);
   $headerParameters.= i18n("colIdProject") . ' : ' . htmlEncode(SqlList::getNameFromId('Project', $paramProject)) . '<br/>';
 }
+if ($inIdOrga!="") {
+  $paramOrga=Security::checkValidId($inIdOrga);
+  $headerParameters.= i18n("colIdOrganization") . ' : ' . htmlEncode(SqlList::getNameFromId('Organization',$paramOrga)) . '<br/>';
+}
+if ($inIdTeam!="") {
+  $paramTeam=Security::checkValidId($inIdTeam);
+  $headerParameters.= i18n("colIdTeam") . ' : ' . SqlList::getNameFromId('Team', $paramTeam) . '<br/>';
+}
+
+
 include "header.php";
 
 if ($resourceId and !$inIdTeam and !$inIdOrga) {
@@ -78,7 +103,7 @@ if ($resourceId and !$inIdTeam and !$inIdOrga) {
 }
 
 
-  echo' <table id="bodyPlanMan" name="bodyPlanMan" >';
+  echo' <table id="bodyPlanMan" name="bodyPlanMan"  style="margin-left:15px;">';
   echo'  <tr>';
   echo'    <td colspan="2">';       
                 if(isset($idProject)){
