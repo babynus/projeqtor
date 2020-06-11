@@ -132,9 +132,9 @@ $actWorkList = $wk->getSqlElementsFromCriteria(null,null,$where);
 $resourceList = array_flip($resourceList);
 
 foreach($actWorkList as $wk) {
+  if ($start>$wk->workDate) continue;
+  if ($end<$wk->workDate) continue;
 	$dates[$wk->workDate]=$wk->workDate;
-	if (!$start or $start>$wk->workDate) $start=$wk->workDate;
-	if (!$end or $end<$wk->workDate) $end=$wk->workDate;
 	$keyAss=$resourceList[$wk->idResource];
 	if (! isset($work[$keyAss])) $work[$keyAss]=array();
 	if (! isset($work[$keyAss]['resource'])) {
