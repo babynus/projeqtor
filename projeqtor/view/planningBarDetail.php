@@ -123,6 +123,7 @@ foreach($wkLst as $wk) {
 $where="idProject in ".Project::getAdminitrativeProjectList();
 $act = new Activity();
 $actList = $act->getSqlElementsFromCriteria(null,null,$where);
+$actListId=array();
 foreach ($actList as $activity){
 	$actListId[$activity->id]=$activity->id;
 }
