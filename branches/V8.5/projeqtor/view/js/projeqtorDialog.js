@@ -7124,6 +7124,7 @@ function undoItemButton(curClass,curId) {
   if (historyPosition == 0) {
     disableWidget('menuBarUndoButton');
   }
+  selectIconMenuBar(currentItem[0]);
 }
 
 function getTargetFromCurrentScreen(currentScreen){
@@ -7139,8 +7140,10 @@ function getTargetFromCurrentScreen(currentScreen){
     target="activityStreamMain.php";
   } else if (currentScreen=="Plugin"){ 
     target="pluginManagement.php";
-  } else if (currentScreen=="Today"){ 
+  }else if (currentScreen=="Today"){ 
     target="today.php";
+  } else if (currentScreen=="Kanban"){ 
+    target="KanbanViewMain.php";
   } else if (currentScreen=="UserParameter") {
     target="parameter.php?type=userParameter";
   } else if (currentScreen=="ProjectParameter") {
@@ -7227,6 +7230,7 @@ function redoItemButton() {
   if (historyPosition == (len - 1)) {
     disableWidget('menuBarRedoButton');
   }
+  selectIconMenuBar(currentItem[0]);
   getTargetFromCurrentScreen(currentScreen);
 }
 
@@ -7534,7 +7538,7 @@ function loadMenuBarItem(item, itemName, from) {
     showInfo(i18n("messageSelectedNotAvailable", new Array(itemName)));
   }
   loadDiv("menuUserScreenOrganization.php?currentScreen="+currentScreen+'&objectExist='+objectExist,"mainDivMenu");
-  stockHistory(null,null,currentScreen);
+  stockHistory(item,null,currentScreen);
   selectIconMenuBar(item);
   return true;
 }
