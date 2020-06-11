@@ -122,7 +122,6 @@ class PlannedWork extends GeneralWork {
 // ================================================================================================================================
 
   public static function plan($projectIdArray, $startDate,$withCriticalPath=true,$infinitecapacity=false) {
-	  debugLog("infinitecapacity: $infinitecapacity");
     global $strictDependency,$workUnit,$hoursPerDay,$hour,$halfHour,$daysPerWeek,$withProjectRepartition,$globalMaxDate,$globalMinDate;
     global $arrayPlannedWork,$arrayRealWork,$arrayAssignment,$arrayPlanningElement;
     global $listPlan,$fullListPlan,$resources,$topList,$reserved,$arrayNotPlanned,$arrayWarning;
@@ -898,10 +897,8 @@ class PlannedWork extends GeneralWork {
               if ($ress['variableCapacity'] or $infinitecapacity) {
                 if (!$infinitecapacity) {
                   $capacity=$r->getSurbookingCapacity($currentDate); 
-                  debugLog("capacity: $capacity");
                 } else {
                   $capacity=999; 
-                  debugLog("infinitecapacity");
                 }
                 if ($ress['team']) {
                   $capacityRate=$ass->capacity;
@@ -944,10 +941,8 @@ class PlannedWork extends GeneralWork {
                   $capacityNormal=$capacity;
                   if (!$infinitecapacity) {
                     $capacity+=$r->getSurbookingCapacity($currentDate,true); 
-                    debugLog("capacity2: $capacity");
                   } else {
                     $capacity+=999; 
-                    debugLog("infinitecapacity2");
                   }
                   if ($capacityNormal==$capacity) unset($capacityNormal);
                 }
