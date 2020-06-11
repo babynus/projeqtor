@@ -47,6 +47,8 @@ $onlyRes = false;
 
 if ($resourceId!="") {
   $idResource = Security::checkValidId($resourceId);
+}else {
+  $idResource=getCurrentUserId();
 }
 
 if ($yearSpinner!="") {
