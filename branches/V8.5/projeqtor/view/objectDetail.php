@@ -1307,8 +1307,12 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
             $obj->getColCaption($col))).'"';
         $isRequired=true;
       }
-      if (strpos($obj->getFieldAttributes($col), 'hidden')!==false) {
-        $hide=true;
+      if (strpos($obj->getFieldAttributes($col), 'hidden')!==false) { // TODO : adapt so that $obj->getFieldAttributes($col), 'hidden')!==false is treated like in_array($col, $extraHiddenFields)
+        if (!$print and property_exists($obj, '_dynamicHiddenFields') and in_array($col,$obj->_dynamicHiddenFields)) {
+          $specificStyle.=' display:none';
+        } else {
+          $hide=true;
+        }
       } else if (in_array($col, $extraHiddenFields)) {
         $specificStyle.=' display:none';
         if ($print) $hide=true;
@@ -1602,12 +1606,10 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
       } else if (substr($col, 0, 7)=='_label_') {
         $captionName=substr($col, 7);
         if (!$hide) {
-          if($col=="_label_sizeAttachment1"){
-            echo '<label class="label">'.i18n('col'.ucfirst($captionName)).'</label>';
-          }elseif($col=="_label_sizeAttachment2"){
-            echo i18n('col'.ucfirst($captionName));
-          }else{
-            echo '<label class="label shortlabel">'.i18n('col'.ucfirst($captionName)).'&nbsp;:&nbsp;</label>';
+          if ($obj->isAttributeSetToField($col, 'leftAlign')) {
+            echo '<span class=" '.$col.'Class" style="'.$specificStyle.'">&nbsp;'.i18n('col'.ucfirst($captionName)).'</span>';
+          } else {
+            echo '<label class="label '.(($obj->isAttributeSetToField($col, 'longLabel'))?'':'shortlabel').' '.$col.'Class" style="'.$specificStyle.'">'.i18n('col'.ucfirst($captionName)).'&nbsp;:&nbsp;</label>';
           }
         }
       } else if (substr($col, 0, 8)=='_button_') {
@@ -1858,10 +1860,10 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo ' readonly tabindex="-1" ';
         echo ' value="'.htmlEncode($val).'" />';
       } else if($col=='pwdImap'){
-        echo ' <div class="dijit dijitReset dijitInline dijitLeft input required generalColClass generalColClassNotReadonly userImapClass dijitTextBox dijitValidationTextBox">';
-        echo '<input type="password" autocomplete="new-password"  ';
+        echo ' <div class="dijit dijitReset dijitInline dijitLeft input required generalColClass generalColClassNotReadonly userImapClass dijitTextBox dijitValidationTextBox" style="width:'.$largeWidth.'px">';
+        echo '<input type="password" autocomplete="off" style="max-width:'.($largeWidth-5).'px;border:1px solid blue;"  ';
         echo $name;
-        echo ' class="dijitReset dijitInputInner" data-dojo-attach-point="textbox,focusNode"  autocomplete="off"  maxlength="200" tabindex="0" ';
+        echo ' class="dijitReset dijitInputInner" data-dojo-attach-point="textbox,focusNode"  autocomplete="off"  maxlength="100" tabindex="0" ';
         echo ' value="'.htmlEncode($val).'" />';
         echo ' </div>';
       } else if($col=='securityConstraint'){
