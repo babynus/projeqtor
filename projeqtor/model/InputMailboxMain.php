@@ -38,7 +38,7 @@ class InputMailboxMain extends SqlElement {
   public $imapUserAccount;
   public $pwdImap;
   public $securityConstraint;
-  public $_tab_4_1_4 = array('','','','','Attachment');
+  public $_tab_4_1_4 = array('','','','','allowAttach');
   public $allowAttach;
   public $_label_sizeAttachment1;
   public $sizeAttachment;
@@ -57,6 +57,7 @@ class InputMailboxMain extends SqlElement {
   public $_nbColMax = 3;
   
   public $_noCopy;
+  public $_dynamicHiddenFields=array('sizeAttachment','_label_sizeAttachment1','_label_sizeAttachment2');
   
   private static $_layout='
     <th field="id" formatter="numericFormatter" width="8%"># ${id}</th>
@@ -82,12 +83,15 @@ class InputMailboxMain extends SqlElement {
       'failedRead'=>'hidden',
       'failedMessage'=>'hidden',
       'limitOfInputPerHour'=>'required',
+      '_label_sizeAttachment2'=>'leftAlign',
+      '_label_sizeAttachment1'=>'longLabel'
   );
   
   private static $_colCaptionTransposition = array(
       'idAffectable' => 'responsible',
       'idActivity' => 'PlanningActivity',
-      'idTicket' => 'lastInputTicket'
+      'idTicket' => 'lastInputTicket',
+      'sizeAttachment'=>'sizeAttachment1'
   );
   
   private static $_databaseColumnName = array();
@@ -145,9 +149,8 @@ class InputMailboxMain extends SqlElement {
   public function setAttributes() {
     if($this->allowAttach == '0'){
       self::$_fieldsAttributes['sizeAttachment']='hidden';
-      self::$_fieldsAttributes['_label_sizeAttachment1']='hidden';
-      self::$_fieldsAttributes['_label_sizeAttachment2']='hidden';
-      
+      self::$_fieldsAttributes['_label_sizeAttachment1']='hidden,longLabel';
+      self::$_fieldsAttributes['_label_sizeAttachment2']='hidden,leftAlign';
     }
   }
   
@@ -185,15 +188,13 @@ class InputMailboxMain extends SqlElement {
     if ($colName=="allowAttach") {
       $colScript .= '<script type="dojo/connect" event="onChange" >';
       $colScript .= '  if(dojo.byId("allowAttach").checked){ ';
-      //$colScript .= "   showWidget('allowAttach');";
-      $colScript .= "   enableWidget('sizeAttachment');";
-      $colScript .= "   showWidget('sizeAttachment');";
-      //$colScript .= "   hideWidget('allowAttach');";
-     // $colScript .= "   dojo.style(dijit.byId('sizeAttachment').domNode.display = 'inline-block' ; ";
+      $colScript .= '    dojo.query(".generalColClass.sizeAttachmentClass").style("display", "inline-block");';
+      $colScript .= '    dojo.query("._label_sizeAttachment1Class").style("display", "inline-block");';
+      $colScript .= '    dojo.query("._label_sizeAttachment2Class").style("display", "inline-block");';
       $colScript .= '  }else{';
-      $colScript .= "   disableWidget('sizeAttachment');";
-      $colScript .= "   hideWidget('sizeAttachment');";
-      //$colScript .= "   dojo.byId('sizeAttachment').style.display='block';";
+      $colScript .= '    dojo.query(".generalColClass.sizeAttachmentClass").style("display", "none");';
+      $colScript .= '    dojo.query("._label_sizeAttachment1Class").style("display", "none");';
+      $colScript .= '    dojo.query("._label_sizeAttachment2Class").style("display", "none");';
       $colScript .= '  }';
       $colScript .= '  formChanged();';
       $colScript .= '</script>';
