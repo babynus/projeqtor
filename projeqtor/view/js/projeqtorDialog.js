@@ -2724,7 +2724,12 @@ function assignmentChangeResourceTeamForCapacity() {
   if (editAssignmentLoading)
     return;
   var idResource=dijit.byId("assignmentIdResource").get("value");
-  if (!idResource) {return;}
+  if (idResource.trim()) {
+	  enableWidget('dialogAssignmentSubmit');
+  }else{
+	  disableWidget('dialogAssignmentSubmit');
+  }
+  if (!idResource.trim()) {return;}
   dojo.xhrGet({
     url : '../tool/getIfResourceTeamOrResource.php?idResource='+idResource,
     handleAs : "text",
