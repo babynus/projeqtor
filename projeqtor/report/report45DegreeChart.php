@@ -157,7 +157,6 @@ while ($line = Sql::fetchLine($resultMile)) {
 }
 $listMilePE.=')';
 $listMile.=')';
-debugLog($listMilePE);
 $h=new History();
 $hTable=$h->getDatabaseTableName();
 $ha=new HistoryArchive();

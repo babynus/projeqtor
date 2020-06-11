@@ -406,7 +406,6 @@ function getNextFrom($from,$next,$type){
 function getNameFromTypeKanban($itemKanban,$to,$type,$isStatus,$nb,$idKanban,$realWork,$plannedWork,$leftWork){
   $name=$itemKanban['name'];
   $from=$itemKanban['from'];
-  debugLog("$from => $to");
   $itemWork['realWork']=$realWork;
   $itemWork['plannedWork']=$plannedWork;
   $itemWork['leftWork']=$leftWork;
