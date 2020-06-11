@@ -482,7 +482,7 @@ class PlannedWorkManual extends GeneralWork {
     if(strlen($monthYear)==5){
       $monthYear = substr_replace($monthYear,'0',4,-1);
     }
-    $where= ' month="'.$monthYear.'" and refType = "Activity" and refId in '.transformValueListIntoInClause($tabRefId);
+    $where= " month='$monthYear' and refType='Activity' and refId in ".transformValueListIntoInClause($tabRefId);
     $obj=new PlannedWorkManual();
     $listOfDayByEtp=$obj->countGroupedSqlElementsFromCriteria(null,array('refId','day','period'), $where);
     echo '<table>';
