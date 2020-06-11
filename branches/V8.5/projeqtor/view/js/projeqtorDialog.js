@@ -4074,6 +4074,9 @@ function filterSelectAtribute(value) {
       onItem : function(item) {
         var dataType=dijit.byId('idFilterAttribute').store.store.getValue(
             item, "dataType", "inconnu");
+        if(value=="refTypeIncome" || value=="refTypeExpense"){
+          dataType="list";
+        }
         var datastoreOperator=new dojo.data.ItemFileReadStore({
           url : '../tool/jsonList.php?listType=operator&dataType=' + dataType
         });
