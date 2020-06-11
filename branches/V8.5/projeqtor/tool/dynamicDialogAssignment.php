@@ -526,7 +526,7 @@ if ($planningMode=='RECW') {
         }else{
           $buttonName = i18n('saveLeavesSystemHabilitation');
         }?>
-        <button class="mediumTextButton" dojoType="dijit.form.Button" id="dialogAssignmentSubmit" type="submit" onClick="protectDblClick(this);saveAssignment();return false;">
+        <button class="mediumTextButton" dojoType="dijit.form.Button" id="dialogAssignmentSubmit" <?php if(!trim($idResource)){echo 'disabled';}?> type="submit" onClick="protectDblClick(this);saveAssignment();return false;">
           <?php echo $buttonName;?>
         </button>
       </td>
