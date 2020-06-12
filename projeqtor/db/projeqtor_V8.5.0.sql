@@ -274,7 +274,7 @@ INSERT INTO `${prefix}reportparameter` (`idReport`, `name`, `paramType`, `sortOr
 (109,'month','month',40,'currentMonth');
 
 -- Fix for Financial situation
-ALTER TABLE `${prefix}projectsituation` CHANGE `name` `name` VARCHAR(200) DEFAULT NULL;
+ALTER TABLE `${prefix}projectsituation` CHANGE `name` `name` VARCHAR(200);
 
 ALTER TABLE `${prefix}planningelement` 
 ADD COLUMN `color` varchar(7) DEFAULT NULL;
