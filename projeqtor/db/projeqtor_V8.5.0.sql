@@ -288,6 +288,6 @@ UPDATE `${prefix}planningelementbaseline` SET `color`=(select `color` from `${pr
 DELETE from `${prefix}columnselector` where scope='list' and objectClass like 'ProjectSituation%' and field='name';
 
 ALTER TABLE `${prefix}situationable` ADD COLUMN `type` VARCHAR(100) NOT NULL;
-UPDATE `${prefix}situationable` SET `type`='Income' WHERE name in ('CallForTender','Tender','ProviderOrder','Command');
-UPDATE `${prefix}situationable` SET `type`='Expense' WHERE name in ('ProviderBill','Bill','Quotation');
+UPDATE `${prefix}situationable` SET `type`='Income' WHERE name in ('Quotation','Command','Bill');
+UPDATE `${prefix}situationable` SET `type`='Expense' WHERE name in ('CallForTender','Tender','ProviderOrder','ProviderBill');
 
