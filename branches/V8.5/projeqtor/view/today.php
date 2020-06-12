@@ -762,6 +762,7 @@ if (!$paramScrollDelay) $paramScrollDelay=10;
         iconClass="dijitButtonIcon dijitButtonIconRefresh">
         <script type="dojo/connect" event="onClick" args="evt">
         if(typeof refreshEnabled === 'undefined') {
+          enterFullScreen();
           if (menuActualStatus == 'visible' || !menuHidden) {
             hideShowMenu(false);
           }
@@ -842,6 +843,7 @@ if (!$paramScrollDelay) $paramScrollDelay=10;
           animateScrollReport();
         }, refreshDelay * 60 * 1000);
       } else {
+        exitFullScreen();
         formChangeInProgress=false;
           dojo.byId('statusBarDiv').style.top='30px';
           dijit.byId("toolBarDiv").resize({h :30});
