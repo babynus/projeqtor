@@ -837,7 +837,7 @@ function refreshInterventionCapacity(date,idActivity,period) {
         var obj = JSON.parse(data);
         date = date.replace("-", "");
         date = date.replace("-", "");
-        if(obj.length == 7 && dojo.byId(date+period+idActivity){
+        if(obj.length == 7 && dojo.byId(date+period+idActivity)){
           dojo.byId(date+period+idActivity).style.background=obj;
         }else if (dojo.byId(date+'AM'+idActivity) && dojo.byId(date+'PM'+idActivity)){
           dojo.byId(date+'AM'+idActivity).style.background=obj.substr(0,7);
