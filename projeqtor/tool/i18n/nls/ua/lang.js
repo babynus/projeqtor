@@ -960,7 +960,7 @@ colLegalNotice: "юридично передбачене повідомленн�
 colLetter: "letter",
 colLikelihood: "ймовірність",
 colLikelihoodShort: "%",
-colLimitOfHistory: "Number of history",
+colLimitOfHistory: "number to display",
 colLimitOfInputPerHour: "limit of ticket / hour",
 colLineCount: "Кількість ліній",
 colLineNumber: "№",

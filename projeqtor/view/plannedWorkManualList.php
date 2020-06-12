@@ -131,6 +131,13 @@ $currentMonth = strftime("%m");
                       showPrint('../report/plannedWorkManual.php?idProject='+dijit.byId('idProjectPlannedInt').get('value')+'&idTeam='+dijit.byId('idTeamPlannedWorkManual').get('value')+'&idOrganization='+dijit.byId('idOrganizationPlannedWorkManual').get('value')+'&yearSpinner='+dijit.byId('yearPlannedWorkManual').get('value')+'&monthSpinner='+dijit.byId('monthPlannedWorkManual').get('value'), 'print');
                     </script>
                   </button>
+                  <button id="refreshButton" dojoType="dijit.form.Button" showlabel="false"
+                    title="<?php echo i18n('buttonRefreshList');?>"
+                    iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
+                    <script type="dojo/method" event="onClick" args="evt">
+	                   refreshPlannedWorkManualList();
+                    </script>
+                  </button>
                 </td>
               </tr>
             </table>
