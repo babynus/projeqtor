@@ -54,6 +54,9 @@ class InputMailboxMain extends SqlElement {
   public $totalInputTicket;
   public $failedRead;
   public $failedMessage;
+  public $limitOfHistory;
+  public $_sec_TicketHistory;
+  public $_spe_ticketHistory;
   public $_nbColMax = 3;
   
   public $_noCopy;
@@ -147,6 +150,10 @@ class InputMailboxMain extends SqlElement {
   }
   
   public function setAttributes() {
+    self::$_fieldsAttributes['_sec_TicketHistory']='hidden';
+    if($this->limitOfHistory > 0){
+      self::$_fieldsAttributes['_sec_TicketHistory']='readonly';
+    }
     if($this->allowAttach == '0'){
       self::$_fieldsAttributes['sizeAttachment']='hidden';
       self::$_fieldsAttributes['_label_sizeAttachment1']='hidden,longLabel';
@@ -248,9 +255,12 @@ class InputMailboxMain extends SqlElement {
   public function drawSpecificItem($item){
     global $print;
     $result = "";
-    if($item=='history'){
+    if($item=='ticketHistory'){
         $history = new InputMailboxHistory();
-        //$history->drawInputMailboxHistory($this);
+        $critArray=array('idInputMailbox'=>$this->id);
+        $order = " date desc ";
+        $historyList=$history->getSqlElementsFromCriteria($critArray, false,null,$order,false,false,$this->limitOfHistory);
+        drawInputMailboxHistory($historyList,$this);
     }
     return $result;
   }
