@@ -154,7 +154,7 @@ class InputMailboxMain extends SqlElement {
     if($this->limitOfHistory > 0){
       self::$_fieldsAttributes['_sec_TicketHistory']='readonly';
     }
-    if($this->allowAttach == '0'){
+    if(!$this->id or $this->allowAttach == '0'){
       self::$_fieldsAttributes['sizeAttachment']='hidden';
       self::$_fieldsAttributes['_label_sizeAttachment1']='hidden,longLabel';
       self::$_fieldsAttributes['_label_sizeAttachment2']='hidden,leftAlign';
