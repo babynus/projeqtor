@@ -31,7 +31,6 @@
 require_once "../tool/projeqtor.php";
 
 $user=getSessionUser();
-
 $comboDetail=false;
 if (array_key_exists('comboDetail',$_REQUEST)) {
   $comboDetail=true;
@@ -227,8 +226,14 @@ if ($idFilterAttribute and $idFilterOperator) {
     foreach ($filterValueList as $key=>$val) {
       $arrayDisp["value"].=($key==0)?"":", ";
       $arraySql["value"].=($key==0)?"":", ";
-      $arrayDisp["value"].="'" . Sql::fmtStr(SqlList::getNameFromId(Sql::fmtStr(substr(($foreignKey)?$foreignKey:$idFilterAttribute,2)),$val)) . "'";
-      $arraySql["value"].=Security::checkValidId($val);
+      if($idFilterAttribute=="refTypeExpense" or $idFilterAttribute=="refTypeIncome" ){
+        $situation= new Situationable($val);
+        $arrayDisp["value"].="'".Sql::fmtStr($situation->name)."'";
+        $arraySql["value"].="'".Sql::fmtStr($situation->name)."'";
+      }else{
+        $arrayDisp["value"].="'" . Sql::fmtStr(SqlList::getNameFromId(Sql::fmtStr(substr(($foreignKey)?$foreignKey:$idFilterAttribute,2)),$val)) . "'";
+        $arraySql["value"].=Security::checkValidId($val);
+      }
     }
     //$arrayDisp["value"].=")";
     $arraySql["value"].=")";
