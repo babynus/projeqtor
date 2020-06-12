@@ -1861,9 +1861,9 @@ function drawTableFromObject($obj, $included=false, $parentReadOnly=false, $pare
         echo ' value="'.htmlEncode($val).'" />';
       } else if($col=='pwdImap'){
         echo ' <div class="dijit dijitReset dijitInline dijitLeft input required generalColClass generalColClassNotReadonly userImapClass dijitTextBox dijitValidationTextBox" style="width:'.$largeWidth.'px">';
-        echo '<input type="password" autocomplete="off" style="max-width:'.($largeWidth-5).'px;border:1px solid blue;"  ';
+        echo '<input type="password" autocomplete="new-password" style="max-width:'.($largeWidth-5).'px;border:1px solid blue;"  ';
         echo $name;
-        echo ' class="dijitReset dijitInputInner" data-dojo-attach-point="textbox,focusNode"  autocomplete="off"  maxlength="100" tabindex="0" ';
+        echo ' class="dijitReset dijitInputInner" data-dojo-attach-point="textbox,focusNode"  maxlength="100" tabindex="0" ';
         echo ' value="'.htmlEncode($val).'" />';
         echo ' </div>';
       } else if($col=='securityConstraint'){
