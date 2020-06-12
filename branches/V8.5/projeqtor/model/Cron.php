@@ -884,7 +884,7 @@ class Cron {
           if($securityConstraint == '3' and $emailExist){
             $aff= new Affectation();
             $affExist = $aff->countSqlElementsFromCriteria(array('idResource'=>$emailExist->id,'idProject'=>$mb->idProject));
-            if($affExist==0)$result.= i18n('securityConstraint3');
+            if($affExist)$result.= i18n('securityConstraint3');
           }
         }
         
