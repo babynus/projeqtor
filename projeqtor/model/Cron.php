@@ -837,6 +837,7 @@ class Cron {
       $inputMailbox = new ImapMailbox($mb->serverImap,$mb->imapUserAccount,$mb->pwdImap,$uploaddir,'utf-8');
       $mails = array();
       enableCatchErrors();
+      $mailsIds = null;
       try {
         $mailsIds = $inputMailbox->searchMailBox($imapFilterCriteria);
         if (file_exists ( $uploaddir )) {
