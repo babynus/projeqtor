@@ -114,6 +114,7 @@ CREATE TABLE `${prefix}inputmailbox` (
   `failedRead` int(1) unsigned DEFAULT '0',
   `failedMessage` int(1) unsigned DEFAULT '0',
   `limitOfInputPerHour` int(12) unsigned DEFAULT '0',
+  `limitOfHistory` int(12) unsigned DEFAULT '0',
   `idle` int(1) unsigned DEFAULT '0',
   `idleDate` date DEFAULT NULL,
   PRIMARY KEY (`id`)

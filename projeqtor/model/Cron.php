@@ -826,17 +826,17 @@ class Cron {
     $paramAttachDir=Parameter::getGlobalParameter('paramAttachmentDirectory');
     $pathSeparator=Parameter::getGlobalParameter('paramPathSeparator');
     $uploaddir = $paramAttachDir . $pathSeparator . "emails" . $pathSeparator;
-    unlink($uploaddir);
     if (! file_exists($uploaddir)) {
       mkdir($uploaddir,0777,true);
     }
     
     $imapFilterCriteria=Parameter::getGlobalParameter('imapFilterCriteria');
     if (! $imapFilterCriteria) { $imapFilterCriteria='UNSEEN UNDELETED'; }
-    //
     foreach ($lstIMb as $mb){
+      enableCatchErrors();
       try {
         $inputMailbox = new ImapMailbox($mb->serverImap,$mb->imapUserAccount,$mb->pwdImap,$uploaddir,'utf-8');
+        array_map('unlink', glob($uploaddir));
       }catch (Exception $e) {
         $mb->failedRead += 1;
         if($mb->failedRead == 3) {
@@ -844,6 +844,7 @@ class Cron {
         }
         $mb->save();
       }
+      disableCatchErrors();
       $mails = array();
       $mailsIds = $inputMailbox->searchMailBox($imapFilterCriteria);
       if(!$mailsIds) {

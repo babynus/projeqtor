@@ -6728,6 +6728,39 @@ function drawAssetFromUser($list, $obj) {
   echo '</table>';
 }
 
+function drawInputMailboxHistory($list, $obj) {
+  global $cr, $print, $user, $browserLocale, $comboDetail;
+  $pluginObjectClass='InputMailbox';
+  $tableObject=$list;
+  $lstPluginEvt=Plugin::getEventScripts('list', $pluginObjectClass);
+  foreach ($lstPluginEvt as $script) {
+    require $script; // execute code
+  }
+  $listTemp=$tableObject;
+  if ($comboDetail) {
+    return;
+  }
+  echo '<table style="width:100%">';
+  echo '<tr>';
+  echo '<td class="assignHeader" style="width:40%">'.i18n('colEmail').'</td>';
+  echo '<td class="assignHeader" style="width:20%">'.i18n('colDate').'</td>';
+  echo '<td class="assignHeader" style="width:40%">'.i18n('colResult').'</td>';
+  echo '</tr>';
+  foreach ($list as $id=>$val){
+    $idTicket = explode('#', $val->result);
+    $goto="";
+    if (!$print and securityCheckDisplayMenu(null, 'Ticket') and securityGetAccessRightYesNo('menuTicket', 'read', '')=="YES") {
+      $goto=' onClick="gotoElement(\'Ticket\',\''.htmlEncode($idTicket[1]).'\');" style="cursor: pointer;" ';
+    }
+      echo '<tr>';
+      echo '  <td  class="assignData" align="left" style="white-space: nowrap;">'.htmlEncode($val->adress).'</td>';
+      echo '  <td  class="assignData" align="left" style="white-space: nowrap;">'.htmlEncode($val->date).'</td>';
+      echo '  <td  '.$goto.' class="assignData" align="left" style="white-space: nowrap;">'.htmlEncode($val->result).'</td>';
+      echo '</tr>';
+  }
+  echo '</table>';
+}
+
 function drawModelFromBrand($list, $obj) {
   global $cr, $print, $user, $browserLocale, $comboDetail;
   $pluginObjectClass='Brand';
@@ -8841,6 +8874,7 @@ function endBuffering($prevSection, $included) {
       'ticket'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
       'ticketscontact'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
       'ticketsclient'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
+      'ticketHistory'=>array('2'=>'extra', '3'=>'extra','99'=>'extra'),
       'tenders'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
       'testcaserun'=>array('2'=>'bottom', '3'=>'bottom','99'=>'coverage'), 
       'testcaserunsummary'=>array('2'=>'left', '3'=>'extra','99'=>'coverage'), 
