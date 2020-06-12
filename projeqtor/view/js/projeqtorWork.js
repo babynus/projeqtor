@@ -837,11 +837,11 @@ function refreshInterventionCapacity(date,idActivity,period) {
         var obj = JSON.parse(data);
         date = date.replace("-", "");
         date = date.replace("-", "");
-        if(obj.length == 7){
-          document.getElementById(date+period+idActivity).style.background=obj;
-        }else{
-          document.getElementById(date+'AM'+idActivity).style.background=obj.substr(0,7);
-          document.getElementById(date+'PM'+idActivity).style.background=obj.substr(7,13);
+        if(obj.length == 7 && dojo.byId(date+period+idActivity){
+          dojo.byId(date+period+idActivity).style.background=obj;
+        }else if (dojo.byId(date+'AM'+idActivity) && dojo.byId(date+'PM'+idActivity)){
+          dojo.byId(date+'AM'+idActivity).style.background=obj.substr(0,7);
+          dojo.byId(date+'PM'+idActivity).style.background=obj.substr(7,13);
         }
       }
     }
