@@ -250,7 +250,7 @@ class PlannedWorkManual extends GeneralWork {
     $crit="idResource=$idResource and workDate>='$year-$monthWithZero-01' and workDate<='$year-$monthWithZero-$lastDayWithZero'";
     $critWork=$crit;
     if ($refType and $refId) {
-      $crit.=" and refType='$refType' and refId=$refId";
+      $crit.=" and ( (refType='$refType' and refId=$refId) or refType is null)";
     }
     $w=new Work();
     $wList=$w->sumSqlElementsFromCriteria('work', null, $critWork." and manual=0", 'workDate');
