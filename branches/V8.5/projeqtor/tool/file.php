@@ -67,7 +67,7 @@ function purgeFiles($dir, $pattern, $removeDirs=false) {
 		return;
 	}
 	while (($file = readdir($handle)) !== false) {
-		if ($file == '.' || $file == '..') {
+		if ($file == '.' || $file == '..' || $file=='.svn') {
 			continue;
 		}
 		$filepath = $dir == '.' ? $file : $dir . '/' . $file;
