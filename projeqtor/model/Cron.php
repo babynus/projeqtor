@@ -879,8 +879,7 @@ class Cron {
         
         $securityConstraint = $mb->securityConstraint;
         if($securityConstraint == '2' or $securityConstraint == '3'){
-          $res = new Resource();
-          $emailExist = $res->getSqlElementsFromCriteria(array('email'=>$mail->fromAddress));
+          $emailExist = SqlElement::getSingleSqlElementFromCriteria('Resource', array('email'=>$mail->fromAddress));
           if(!$emailExist)$result.= i18n('securityConstraint2');
           if($securityConstraint == '3' and $emailExist){
             $aff= new Affectation();
