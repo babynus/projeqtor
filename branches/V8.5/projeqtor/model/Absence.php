@@ -159,6 +159,13 @@ class Absence{
     	  if(sessionValueExists('selectAbsenceActivity'))$isSaveUserParam = getSessionValue('selectAbsenceActivity');
     	  if(sessionValueExists('inputIdProject'))$inputIdProject = getSessionValue('inputIdProject');
     	  if(sessionValueExists('inputAssId'))$inputAssId = getSessionValue('inputAssId');
+//     	  // #4658 - Add control of access rights for user on project
+//     	  $profile=getSessionUser()->getProfile($val3->idProject);
+//     	  $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$profile, 'scope'=>'assignmentEdit'));
+//     	  $readonlyHabil = false;
+//     	  if($habil->rightAccess!=1)$readonlyHabil=true;
+//     	  if(!$idle and !$readonlyHabil){
+//     	  // #4658 - End
     	  if(!$idle){
     	    if("actRow".$isSaveUserParam == $actRowId){
     	      $result .=' <tr class="absActivityRow dojoxGridRowSelected" id="'.$actRowId.'" align="center" style="height:20px; border: 1px solid grey; cursor:pointer;" onClick="selectActivity('.$actRowId.','.$actId.','.$idProject.','.$assId.')">';
