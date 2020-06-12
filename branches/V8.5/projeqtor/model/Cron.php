@@ -833,10 +833,12 @@ class Cron {
     $imapFilterCriteria=Parameter::getGlobalParameter('imapFilterCriteria');
     if (! $imapFilterCriteria) { $imapFilterCriteria='UNSEEN UNDELETED'; }
     foreach ($lstIMb as $mb){
+      $inputMailbox = new ImapMailbox($mb->serverImap,$mb->imapUserAccount,$mb->pwdImap,$uploaddir,'utf-8');
+      array_map('unlink', glob($uploaddir));
+      $mails = array();
       enableCatchErrors();
       try {
-        $inputMailbox = new ImapMailbox($mb->serverImap,$mb->imapUserAccount,$mb->pwdImap,$uploaddir,'utf-8');
-        array_map('unlink', glob($uploaddir));
+        $mailsIds = $inputMailbox->searchMailBox($imapFilterCriteria);
       }catch (Exception $e) {
         $mb->failedRead += 1;
         if($mb->failedRead == 3) {
@@ -845,8 +847,6 @@ class Cron {
         $mb->save();
       }
       disableCatchErrors();
-      $mails = array();
-      $mailsIds = $inputMailbox->searchMailBox($imapFilterCriteria);
       if(!$mailsIds) {
         debugTraceLog("Mailbox $mb->serverImap for $mb->imapUserAccount is empty (filter='$imapFilterCriteria')"); // Will be a debug level trace
         continue;
