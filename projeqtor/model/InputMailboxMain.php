@@ -54,8 +54,8 @@ class InputMailboxMain extends SqlElement {
   public $totalInputTicket;
   public $failedRead;
   public $failedMessage;
-  public $limitOfHistory;
   public $_sec_TicketHistory;
+  public $limitOfHistory;
   public $_spe_ticketHistory;
   public $_nbColMax = 3;
   
@@ -150,9 +150,9 @@ class InputMailboxMain extends SqlElement {
   }
   
   public function setAttributes() {
-    self::$_fieldsAttributes['_sec_TicketHistory']='hidden';
+    self::$_fieldsAttributes['_spe_ticketHistory']='hidden';
     if($this->limitOfHistory > 0){
-      self::$_fieldsAttributes['_sec_TicketHistory']='readonly';
+      self::$_fieldsAttributes['_spe_ticketHistory']='readonly';
     }
     if(!$this->id or $this->allowAttach == '0'){
       self::$_fieldsAttributes['sizeAttachment']='hidden';
