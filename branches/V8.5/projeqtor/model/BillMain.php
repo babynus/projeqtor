@@ -73,6 +73,7 @@ class BillMain extends SqlElement {
   public $billingType; 
   public $_sec_situation;
   public $idSituation;
+  public $_spe_situation;
   
   //public $_sec_BillLine;
   public $_BillLine=array();
@@ -488,6 +489,7 @@ class BillMain extends SqlElement {
       $situation = new Situation();
       $situation->drawSituationHistory($this);
     }
+    debugLog($item);
     return $result;
   }
   
