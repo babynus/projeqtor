@@ -116,7 +116,7 @@ $userName=($team==0 and $orga==0)?$currentUser:0;
                    id="printButton" name="printButton"
                    iconClass="dijitButtonIcon dijitButtonIconPrint" class="detailButton" showLabel="false">
                     <script type="dojo/method" event="onClick" args="evt">
-                      showPrint('../report/plannedWorkManual.php?idProject='+dijit.byId('idProject').get('value')+'&idTeam='+dijit.byId('idTeam').get('value')+'&idOrganization='+dijit.byId('idOrganization').get('value')+'&yearSpinner='+dijit.byId('yearSpinner').get('value')+'&monthSpinner='+dijit.byId('monthSpinner').get('value'), 'print');
+                      showPrint('../report/plannedWorkManual.php?idProject='+dijit.byId('idProject').get('value')+'&idResource='+dijit.byId('userName').get('value')+'&idTeam='+dijit.byId('idTeam').get('value')+'&idOrganization='+dijit.byId('idOrganization').get('value')+'&yearSpinner='+dijit.byId('yearSpinner').get('value')+'&monthSpinner='+dijit.byId('monthSpinner').get('value'), 'print');
                     </script>
                   </button>   
                 </td>
