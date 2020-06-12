@@ -4039,7 +4039,7 @@ function indentTask(way) {
 }
 
 var arrayCollapsed=[];
-function saveCollapsed(scope) {
+function saveCollapsed(scope,callBack) {
   if (waitingForReply == true)  return;
   if (!scope) {
     if (dijit.byId(scope)) {
@@ -4054,11 +4054,12 @@ function saveCollapsed(scope) {
     url : "../tool/saveCollapsed.php?scope=" + scope + "&value=true",
     handleAs : "text",
     load : function(data, args) {
+      if (callBack) setTimeout(callBack, 10);
     }
   });
 }
 
-function saveExpanded(scope) {
+function saveExpanded(scope,callBack) {
   if (waitingForReply == true)
     return;
   if (!scope) {
@@ -4074,6 +4075,7 @@ function saveExpanded(scope) {
     url : "../tool/saveCollapsed.php?scope=" + scope + "&value=false",
     handleAs : "text",
     load : function(data, args) {
+      if (callBack) setTimeout(callBack, 10);
     }
   });
 }
@@ -7069,17 +7071,18 @@ function setUnitProgress(){
 
 function showProjectToDay(val,projList){
   var projList = projList.split(',');
+  var callBack=function() {refreshTodayProjectsList();};
   if(val==1){
     projList.forEach(function(item){
-      saveCollapsed('todayProjectRow_'+item);
+      saveCollapsed('todayProjectRow_'+item,callBack);
     });
   }else{
     projList.forEach(function(item){
-      saveExpanded('todayProjectRow_'+item);
+      saveExpanded('todayProjectRow_'+item,callBack);
     });
   }
   
-  loadContent("../view/today.php?", "centerDiv");
+  //loadContent("../view/today.php?", "centerDiv");
 }
 
 function expandProjectInToDay(id,subProj,visibleRow){
@@ -7089,14 +7092,15 @@ function expandProjectInToDay(id,subProj,visibleRow){
   if(visibleRowList == ''){
     visibleRowList = subProjList;
   }
+  var callBack=function() {refreshTodayProjectsList();};
   if(projClass == 'ganttExpandOpened'){
     visibleRowList.forEach(function(item){
-      saveExpanded('todayProjectRow_'+item);
+      saveExpanded('todayProjectRow_'+item,callBack);
     });
   }else{
     subProjList.forEach(function(item){
-      saveCollapsed('todayProjectRow_'+item);
+      saveCollapsed('todayProjectRow_'+item,callBack);
     });
   }
-  loadContent("../view/today.php", "centerDiv");
+  //loadContent("../view/today.php", "centerDiv");
 }
