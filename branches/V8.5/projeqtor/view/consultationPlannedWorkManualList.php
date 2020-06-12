@@ -106,11 +106,19 @@ $userName=($team==0 and $orga==0)?$currentUser:0;
           <td colspan="2">
             <table width="100%"  >
               <tr height="27px">
-                <td style="min-width:200px"> 
+                <td style="min-width:32px"> 
                   <button id="addTodayButton" dojoType="dijit.form.Button" showlabel="false" onclick="saveReportInToday();"
                     title="<?php echo i18n('showInToday');?>"
                     iconClass="dijitButtonIcon dijitButtonIconToday" class="detailButton">
-                  </button>    
+                  </button> 
+                  <button title="<?php echo i18n('print')?>"  
+                   dojoType="dijit.form.Button" 
+                   id="printButton" name="printButton"
+                   iconClass="dijitButtonIcon dijitButtonIconPrint" class="detailButton" showLabel="false">
+                    <script type="dojo/method" event="onClick" args="evt">
+                      showPrint('../report/plannedWorkManual.php?idProject='+dijit.byId('idProjectPlannedInt').get('value')+'&idTeam='+dijit.byId('idTeamPlannedWorkManual').get('value')+'&idOrganization='+dijit.byId('idOrganizationPlannedWorkManual').get('value')+'&yearSpinner='+dijit.byId('yearPlannedWorkManual').get('value')+'&monthSpinner='+dijit.byId('monthPlannedWorkManual').get('value'), 'print');
+                    </script>
+                  </button>   
                 </td>
               </tr>
             </table>
