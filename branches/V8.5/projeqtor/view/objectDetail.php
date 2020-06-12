@@ -8874,7 +8874,7 @@ function endBuffering($prevSection, $included) {
       'ticket'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
       'ticketscontact'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
       'ticketsclient'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
-      'ticketHistory'=>array('2'=>'extra', '3'=>'extra','99'=>'extra'),
+      'tickethistory'=>array('2'=>'right', '3'=>'extra','99'=>'History'),
       'tenders'=>array('2'=>'bottom', '3'=>'extra','99'=>'link'),
       'testcaserun'=>array('2'=>'bottom', '3'=>'bottom','99'=>'coverage'), 
       'testcaserunsummary'=>array('2'=>'left', '3'=>'extra','99'=>'coverage'), 

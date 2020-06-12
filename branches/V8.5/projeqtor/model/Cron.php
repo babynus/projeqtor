@@ -889,8 +889,8 @@ class Cron {
         if(!$mail->subject)$result = i18n('noSubject');
         $bodyHtml=$mail->textHtml;
         
+        $ticket = new Ticket();
         if($result == ""){
-          $ticket = new Ticket();
           $ticket->name = $mail->subject;
           $ticket->idProject = $mb->idProject;
           $ticket->idTicketType = $mb->idTicketType;
