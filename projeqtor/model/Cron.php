@@ -922,7 +922,6 @@ class Cron {
               $attch->creationDate = date('Y-m-d H:i:s');
               $attch->fileSize = filesize($att->filePath);
               $attch->mimeType = mime_content_type($att->filePath);
-              //$attch->idUser
               if($sizeAttach-$attch->fileSize > 0){
                 $attch->save();
               }
