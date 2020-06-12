@@ -130,7 +130,7 @@ if ($resourceId and !$inIdTeam and !$inIdOrga) {
   echo'       </div>';
   echo'    </td>';
   echo'    <td >';
-  echo'       <div style="min-width:1123px;margin-left:215px;top:20px;">';
+  echo'       <div style="min-width:1123px;margin-left:201px;top:20px;">';
                   $listMonth=array($yearSpinner.$monthSpinner);
                   if(!$onlyRes){
                     foreach ($listResource as $id=>$val){
