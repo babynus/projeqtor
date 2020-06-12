@@ -45,10 +45,8 @@ $inIdTeam = trim(RequestHandler::getId('idTeam'));
 $inIdOrga = trim(RequestHandler::getId('idOrganization'));
 $onlyRes = false;
 
-if ($resourceId!="") {
-  $idResource = Security::checkValidId($resourceId);
-}else {
-  $idResource=getCurrentUserId();
+if (!$resourceId and !$inIdTeam and !$inIdOrga) {
+  $resourceId=getCurrentUserId();
 }
 
 if ($yearSpinner!="") {
@@ -60,8 +58,8 @@ if ($monthSpinner!="") {
   $headerParameters.= i18n("month") . ' : ' . $paramMonth . '<br/>';
 };
 // Header
-if ($idResource!="") {
-  $headerParameters.= i18n("colIdResource") . ' : ' . htmlEncode(SqlList::getNameFromId('Affectable',$idResource)) . '<br/>';
+if ($resourceId!="") {
+  $headerParameters.= i18n("colIdResource") . ' : ' . htmlEncode(SqlList::getNameFromId('Affectable',$resourceId)) . '<br/>';
 }
 if ($idProject!="") {
   $paramProject=Security::checkValidId($idProject);

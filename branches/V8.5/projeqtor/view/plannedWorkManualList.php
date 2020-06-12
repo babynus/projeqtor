@@ -128,7 +128,7 @@ $currentMonth = strftime("%m");
                    id="printButton" name="printButton"
                    iconClass="dijitButtonIcon dijitButtonIconPrint" class="detailButton" showLabel="false">
                     <script type="dojo/method" event="onClick" args="evt">
-                      showPrint('../report/plannedWorkManual.php?idProject='+dijit.byId('idProjectPlannedInt').get('value')+'&idTeam='+dijit.byId('idTeamPlannedWorkManual').get('value')+'&idOrganization='+dijit.byId('idOrganizationPlannedWorkManual').get('value')+'&yearSpinner='+dijit.byId('yearPlannedWorkManual').get('value')+'&monthSpinner='+dijit.byId('monthPlannedWorkManual').get('value'), 'print');
+                      showPrint('../report/plannedWorkManual.php?idProject='+dijit.byId('idProjectPlannedInt').get('value')+'&idResource='+dijit.byId('userNamePlanned').get('value')+'&idTeam='+dijit.byId('idTeamPlannedWorkManual').get('value')+'&idOrganization='+dijit.byId('idOrganizationPlannedWorkManual').get('value')+'&yearSpinner='+dijit.byId('yearPlannedWorkManual').get('value')+'&monthSpinner='+dijit.byId('monthPlannedWorkManual').get('value'), 'print');
                     </script>
                   </button>
                   <button id="refreshButtonAlwaysAvailable" dojoType="dijit.form.Button" showlabel="false"
