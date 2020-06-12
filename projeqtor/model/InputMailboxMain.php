@@ -168,7 +168,7 @@ class InputMailboxMain extends SqlElement {
   */
   public function save() {
     $old = $this->getOld();
-    if(!this->id and !$this->limitOfHistory){
+    if(!$this->id and !$this->limitOfHistory){
      $this->limitOfHistory = 10; 
     }
     $result = parent::save();
