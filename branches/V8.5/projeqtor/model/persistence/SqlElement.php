@@ -2090,6 +2090,14 @@ abstract class SqlElement {
     }
     if (get_class ( $this ) == 'User') {
       $newObj->name = i18n ( 'copiedFrom' ) . ' ' . $newObj->name;
+      if ($newObj->resourceName) {
+        $newObj->resourceName = i18n ( 'copiedFrom' ) . ' ' . $newObj->resourceName;
+      }
+    } else if ( get_class($newObj)=='Resource' or get_class($newObj)=='Contact' or get_class($newObj)=='Employee') {
+      $newObj->name = i18n ( 'copiedFrom' ) . ' ' . $newObj->name;
+      if ($newObj->userName) {
+        $newObj->userName = i18n ( 'copiedFrom' ) . ' ' . $newObj->userName;
+      }
     }
     if (is_a ( $this, 'Version' ) and $newObj->versionNumber) {
       $existWithName = $newObj->countSqlElementsFromCriteria ( null, "name='$newObj->name'" );
