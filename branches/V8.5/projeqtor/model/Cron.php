@@ -825,7 +825,8 @@ class Cron {
     $lstIMb = $inputMb->getSqlElementsFromCriteria(array('idle'=>'0'));
     $paramAttachDir=Parameter::getGlobalParameter('paramAttachmentDirectory');
     $pathSeparator=Parameter::getGlobalParameter('paramPathSeparator');
-    $uploaddir = $paramAttachDir . $pathSeparator . "emails" . $pathSeparator;
+    if (substr($paramAttachDir, -1)!=$pathSeparator) $paramAttachDir.=$pathSeparator;
+    $uploaddir = $paramAttachDir . "emails" . $pathSeparator;
     if (! file_exists($uploaddir)) {
       mkdir($uploaddir,0777,true);
     }
@@ -834,11 +835,13 @@ class Cron {
     if (! $imapFilterCriteria) { $imapFilterCriteria='UNSEEN UNDELETED'; }
     foreach ($lstIMb as $mb){
       $inputMailbox = new ImapMailbox($mb->serverImap,$mb->imapUserAccount,$mb->pwdImap,$uploaddir,'utf-8');
-      array_map('unlink', glob($uploaddir));
       $mails = array();
       enableCatchErrors();
       try {
         $mailsIds = $inputMailbox->searchMailBox($imapFilterCriteria);
+        if (file_exists ( $uploaddir )) {
+          purgeFiles ( $uploaddir, null );
+        }
       }catch (Exception $e) {
         $mb->failedRead += 1;
         if($mb->failedRead == 3) {
