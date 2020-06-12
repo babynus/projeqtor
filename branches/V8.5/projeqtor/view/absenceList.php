@@ -129,7 +129,7 @@ $yearSpinner = $currentYear;
                   showPrint('../report/absenceReport.php?userName='+dijit.byId('userName').get('value')+'&yearSpinner='+dijit.byId('yearSpinner').get('value'), 'print', null, 'pdf');
                 </script>
               </button>               
-              <button id="refreshButton" dojoType="dijit.form.Button" showlabel="false"
+              <button id="refreshButtonAlwaysAvailable" dojoType="dijit.form.Button" showlabel="false"
                 title="<?php echo i18n('buttonRefreshList');?>"
                 iconClass="dijitButtonIcon dijitButtonIconRefresh" class="detailButton">
                 <script type="dojo/method" event="onClick" args="evt">
