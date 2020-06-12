@@ -113,7 +113,7 @@ CREATE TABLE `${prefix}inputmailbox` (
   `totalInputTicket` int(12) unsigned DEFAULT '0',
   `failedRead` int(1) unsigned DEFAULT '0',
   `failedMessage` int(1) unsigned DEFAULT '0',
-  `limitOfInputPerHour` int(12) unsigned DEFAULT '0',
+  `limitOfInputPerHour` int(6) unsigned DEFAULT '0',
   `limitOfHistory` int(12) unsigned DEFAULT '0',
   `idle` int(1) unsigned DEFAULT '0',
   `idleDate` date DEFAULT NULL,
