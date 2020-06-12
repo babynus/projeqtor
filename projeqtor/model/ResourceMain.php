@@ -594,7 +594,7 @@ class ResourceMain extends SqlElement {
   	// MTY - LEAVE SYSTEM
   	if (isLeavesSystemActiv()) {
   	  // isEmployee changes
-  	  if ($this->isEmployee != $oldResource->isEmployee) {
+  	  if ($this->isEmployee != $oldResource->isEmployee and ($oldResource->id or $this->isEmployee==1)) {
   	    // => Init or purge elements of leave system for the resource
   	    $resultI = initPurgeLeaveSystemElementsOfResource($this);
   	    if (getLastOperationStatus($resultI)!="OK") {
