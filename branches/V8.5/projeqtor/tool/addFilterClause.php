@@ -228,7 +228,7 @@ if ($idFilterAttribute and $idFilterOperator) {
       $arraySql["value"].=($key==0)?"":", ";
       if($idFilterAttribute=="refTypeExpense" or $idFilterAttribute=="refTypeIncome" ){
         $situation= new Situationable($val);
-        $arrayDisp["value"].="'".Sql::fmtStr($situation->name)."'";
+        $arrayDisp["value"].="'".Sql::fmtStr(i18n($situation->name))."'";
         $arraySql["value"].="'".Sql::fmtStr($situation->name)."'";
       }else{
         $arrayDisp["value"].="'" . Sql::fmtStr(SqlList::getNameFromId(Sql::fmtStr(substr(($foreignKey)?$foreignKey:$idFilterAttribute,2)),$val)) . "'";
