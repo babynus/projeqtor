@@ -814,7 +814,21 @@ class PlannedWork extends GeneralWork {
             $left=$ass->leftWork;
             $regul=false;
             if ($profile=="REGUL" or $profile=="FULL" or $profile=="HALF" or $profile=="QUART" or $profile=="FDUR") {
-            	$delaiTh=workDayDiffDates($currentDate,$endPlan);
+              $endToTake=$endPlan;
+              if ($profile=="REGUL" or $profile=="FULL" or $profile=="HALF" or $profile=="QUART") {
+                $tmpInc=0.1;
+                if ($profile=="FULL") $tmpInc=1;
+                if ($profile=="HALF") $tmpInc=0.5;
+                if ($profile=="QUART") $tmpInc=0.25;
+                for ($endToTake=$endPlan; $endToTake>=$currentDate;$endToTake=addDaysToDate($endToTake, -1)) {
+                  if (isOffDay($endToTake,$r->idCalendarDefinition)) continue;
+                  if (!isset($ress[$endToTake])) break;
+                  if ($ress[$endToTake]+$tmpInc<$r->getCapacityPeriod($endToTake)) {
+                    break;
+                  }
+                }
+              }
+            	$delaiTh=workDayDiffDates($currentDate,$endToTake);
             	if ($delaiTh and $delaiTh>0) { 
                 $regulTh=round($ass->leftWork/$delaiTh,10);
             	}
