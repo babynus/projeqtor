@@ -855,11 +855,11 @@ class Cron {
         debugTraceLog("Mailbox $mb->serverImap for $mb->imapUserAccount is empty (filter='$imapFilterCriteria')"); // Will be a debug level trace
         continue;
       }
+      $failMessageLimit = false;
       foreach ($mailsIds as $mailId){
-        if($mb->idle==1)break;
+        if($mb->idle==1) break;
         $result = "";
         $failMessage = false;
-        $failMessageLimit = false;
         $mail = $inputMailbox->getMail($mailId);
         $mailFrom = $mail->fromAddress;
         
@@ -873,19 +873,20 @@ class Cron {
         $nbInputHistory = $inputHistory->countSqlElementsFromCriteria(null,$where);
         if($nbInputHistory > $limitOfInputPerHour){
           $mb->idle=1;
-          $result.= i18n('LimitOfTicketsPerHour');
+          $result.= i18n('colLimitOfInputPerHour');
+          debugLog(i18n('colLimitOfInputPerHour'));
           $failMessage = true;
           $failMessageLimit = true;
         }
         
         $securityConstraint = $mb->securityConstraint;
         if($securityConstraint == '2' or $securityConstraint == '3'){
-          $emailExist = SqlElement::getSingleSqlElementFromCriteria('Resource', array('email'=>$mail->fromAddress));
-          if(!$emailExist)$result.= i18n('securityConstraint2');
-          if($securityConstraint == '3' and $emailExist){
+          $emailExist = SqlElement::getSingleSqlElementFromCriteria('Affectable', array('email'=>$mail->fromAddress));
+          if(! $emailExist->id)$result.= i18n('securityConstraint2');
+          if($securityConstraint == '3' and $emailExist->id){
             $aff= new Affectation();
             $affExist = $aff->countSqlElementsFromCriteria(array('idResource'=>$emailExist->id,'idProject'=>$mb->idProject));
-            if($affExist)$result.= i18n('securityConstraint3');
+            if($affExist<1)$result.= i18n('securityConstraint3');
           }
         }
         
@@ -911,6 +912,7 @@ class Cron {
           if($mb->allowAttach==1){
             $sizeAttach = $mb->sizeAttachment;
             $listAtt = $mail->getAttachments();
+            debugLog("Treat Attachments");
             foreach ($listAtt as $att){
               $attch = new Attachment();
               $attch->refType = 'Ticket';
@@ -944,8 +946,12 @@ class Cron {
         debugTraceLog("Mailbox $mb->serverImap for $mb->imapUserAccount : $result"); // Will be a debug level trace
         $inputMailboxHistory->result = $result;
         $inputMailboxHistory->save();
-        if(!$failMessageLimit){
+        if(! $failMessageLimit){
+          debugLog("Mark mail as read");
           $inputMailbox->markMailAsRead($mailId);
+        } else {
+          debugLog("Mark mail as unread");
+          $inputMailbox->markMailAsUnread($mailId);
         }
         if(!$failMessage){
           $mb->lastInputDate = date("Y-m-d H:i:s");

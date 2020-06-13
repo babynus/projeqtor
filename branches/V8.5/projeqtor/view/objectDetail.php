@@ -6740,7 +6740,7 @@ function drawInputMailboxHistory($list, $obj) {
   if ($comboDetail) {
     return;
   }
-  echo '<table style="width:100%">';
+  echo '<table style="width:99.5%">';
   echo '<tr>';
   echo '<td class="assignHeader" style="width:40%">'.i18n('colEmail').'</td>';
   echo '<td class="assignHeader" style="width:20%">'.i18n('colDate').'</td>';
@@ -6749,13 +6749,13 @@ function drawInputMailboxHistory($list, $obj) {
   foreach ($list as $id=>$val){
     $idTicket = explode('#', $val->result);
     $goto="";
-    if (!$print and securityCheckDisplayMenu(null, 'Ticket') and securityGetAccessRightYesNo('menuTicket', 'read', '')=="YES") {
+    if (count($idTicket)>1 and !$print and securityCheckDisplayMenu(null, 'Ticket') and securityGetAccessRightYesNo('menuTicket', 'read', '')=="YES") {
       $goto=' onClick="gotoElement(\'Ticket\',\''.htmlEncode($idTicket[1]).'\');" style="cursor: pointer;" ';
     }
       echo '<tr>';
       echo '  <td  class="assignData" align="left" style="white-space: nowrap;">'.htmlEncode($val->adress).'</td>';
       echo '  <td  class="assignData" align="left" style="white-space: nowrap;">'.htmlEncode($val->date).'</td>';
-      echo '  <td  '.$goto.' class="assignData" align="left" style="white-space: nowrap;">'.htmlEncode($val->result).'</td>';
+      echo '  <td  '.$goto.' class="assignData" align="left" style="">'.htmlEncode($val->result).'</td>';
       echo '</tr>';
   }
   echo '</table>';
