@@ -1708,10 +1708,11 @@ function finalizeMessageDisplay(destination, validationType) {
           refreshGrid();
         } else if (! avoidInfiniteLoop) {
           avoidInfiniteLoop=true;
+          setTimeout("avoidInfiniteLoop=false;",1000);
           if (dojo.byId("lastPlanStatus")) {
             refreshGrid(true);
           } else {
-            refreshGrid();
+            refreshGrid(false);
           }
         } else {
           avoidInfiniteLoop=false;
