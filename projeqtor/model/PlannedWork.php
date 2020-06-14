@@ -1184,14 +1184,14 @@ class PlannedWork extends GeneralWork {
                       if ($toPlan<0.5) {
                         $value=0;
                       } else {
-                        $value=0.5;
+                        $value=(floor($toPlan/0.5))*0.5;
                       }
                     }
                     if ($profile=="QUART" and $interval<$delaiTh) {
                       if ($toPlan<0.25) {
                         $value=0;
                       } else {
-                        $value=0.25;
+                        $value=(floor($toPlan/0.25))*0.25;
                       }
                     }
                     if ($value>$capacityRate) {

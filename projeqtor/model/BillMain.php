@@ -489,7 +489,6 @@ class BillMain extends SqlElement {
       $situation = new Situation();
       $situation->drawSituationHistory($this);
     }
-    debugLog($item);
     return $result;
   }
   
