@@ -443,11 +443,11 @@ class BudgetMain extends SqlElement {
       $this->billedAmount=0;
       $this->billedFullAmount=0;
       foreach ($expList as $exp) {
-        if ($this->actualAmount) {
+        if ($this->actualAmount or !$this->actualFullAmount) {
           $this->usedAmount+=$exp->plannedAmount;
           $this->billedAmount+=$exp->realAmount;
         }
-        if ($this->actualFullAmount) {
+        if ($this->actualFullAmount or !$this->actualAmount) {
           $this->usedFullAmount+=$exp->plannedFullAmount;
           $this->billedFullAmount+=$exp->realFullAmount;
         }
