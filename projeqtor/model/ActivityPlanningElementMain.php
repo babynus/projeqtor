@@ -234,7 +234,7 @@ class ActivityPlanningElementMain extends PlanningElement {
       }
       if(!$asSon or (!$this->id)){
         if(!$this->id or $this->idProgressMode=='' or $this->idWeightMode=='' ){
-          $this->idProgressMode=2;
+          $this->idProgressMode=1;
           $this->idWeightMode=1;
           $this->unitToDeliver=0;
           $this->unitToRealise=0;
