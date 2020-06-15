@@ -118,7 +118,15 @@ Defines behavior of tasks in the real work allocation screen.
   
    .. compound:: Alert resource on input done by someone else
    
+      Alert the resource when some real work is entered by someone else.
+      
       Select your type of alert : Internal, Email, both or none.
+      
+   .. compound:: Alert when timesheet canceled by other
+   
+      Send an alert or mail when timesheet is cancelled by another resource.
+      
+      Select your type of alert : Internal, Email, both or none   
    
    .. compound:: Display pools on timesheet
    
@@ -179,6 +187,45 @@ Specific parameters about Gantt planning presentation.
    
         * If yes, the successor should begin the next day 
         * If no, the successor can start the same day.
+        
+   .. compound:: Manual progress of fixed-duration activities 
+   
+      Choose whether the progress should be calculated or entered manually.
+      
+
+   .. compound:: Progress in unity of work. 
+   
+      Displays a technical progress in unit of work independent of the planning progress by the load.
+      
+      See: :ref:`Technical progress<technical-progress>`
+      
+.. _GP-manualplan-workas:
+           
+   .. compound:: Manual planned interventions enter work as
+      
+      Choose whether the work entered in the manual schedule should be saved as real work or planned work.
+      
+      See: :ref:`Manual planning mode<mode-manualplanning>`
+      
+      See: :ref:`Planned Interventions<planned-interventions>`
+      
+
+.. _GP-effectCapacity:
+
+    
+   .. compound:: Effect of capacity on planned interventions 
+      
+      **Limit duration**
+      
+      Limit duration a resource with capacity 0.8 can be planned only one half-day of 0.5d   
+      
+      **Determine Duration**
+      
+      Determine duration a resource with capacity 0.8 can be planned on 2 half-days of 0.4d each
+      
+      **none**
+      
+      A resource with capacité 0.8 can be planned on 2 half-days of 0.5d each    
 
 .. _globalParam_tickets:
 
@@ -224,6 +271,22 @@ Specific parameter for Organization management
    
       If yes, can display and work on budget for an organization.
 
+
+.. _gp-pool-section:
+
+.. rubric:: Pool of resource
+
+Specific parameter for Pool of resource
+
+   .. compound:: Automatic allocation of pool resources 
+   
+      Automatic allocation of resources of the pool when allocating a pool to a project.
+      
+      The explicit allocation will generate visible allocations that won't be changed afterwards (if allocation of pool changes). 
+      
+      The implicit allocation will generate invisible allocations that will follow changes of the pool (allocation of the pool to the project or of resources to the pool).
+
+
 .. _GlobalParam_automation:
 
 .. rubric:: Automation
@@ -264,34 +327,15 @@ Parameters to manage automations
    .. compound:: Auto assign Responsible to activity:
     
       Assign automatically the Responsible to activities
-   
-   .. compound:: Update milestone from deliverable: (Have to link elements)
     
-      Update milestone Responsible automatically when the Responsible of deliverable has changed.
-   
-   .. compound:: Update milestone from incoming: (Have to link elements)
-    
-      Update milestone Responsible automatically when the Responsible of deliverable has changed.
-   
-   .. compound:: Update deliverable from milestone (have to link elements):
-    
-      Update deliverable Responsible automatically when the Responsible of mielstone has changed.
-   
-   .. compound:: Update incoming from milestone (have to link elements):
-    
-      Update incoming Responsible automatically when the Responsible of milestone has changed.
-   
    .. compound:: Auto set parent activity status:
     
       Auto set status of parent activity from the status of children activity. 
      
-   .. compound:: Manual progress of fixed-duration activities:
       
-      Allows you to manually enter a value in% in the progress field in the "steering" detail area on all the elements that proposes a duration  
-
-
-
-
+      
+      
+      
 
 .. _gp-milestones-section:
 
@@ -311,7 +355,21 @@ Specific parameters for Milstones management
     
       It optionally allows you to automatically retrieve the milestone from the milestone of the Project Version.
        
-       
+   .. compound:: Update milestone from deliverable (Have to link elements)
+    
+      Update milestone Responsible automatically when the Responsible of deliverable has changed.
+   
+   .. compound:: Update milestone from incoming (Have to link elements)
+    
+      Update milestone Responsible automatically when the Responsible of deliverable has changed.
+   
+   .. compound:: Update deliverable from milestone (have to link elements)
+    
+      Update deliverable Responsible automatically when the Responsible of mielstone has changed.
+   
+   .. compound:: Update incoming from milestone (have to link elements)
+    
+      Update incoming Responsible automatically when the Responsible of milestone has changed.  
        
        
        
@@ -321,7 +379,7 @@ Specific parameters for Milstones management
 
 Specific parameters for the control and management of restrictions
 
-   .. compound:: allow the type restriction on project
+   .. compound:: Allow the type restriction on project
    
       Allow to define additional restriction's type on each project additionally to restrictions defined at project type level. 
    
@@ -340,6 +398,10 @@ Specific parameters for the control and management of restrictions
          :align: center
          
          Restrict type box
+
+   .. compound:: Limit the functions to those of the resource 
+   
+     On assignments limit functions to those of the resource. Ones with cost and defaut one.
 
 
 
@@ -391,7 +453,7 @@ Graphic interface behavior and generic display parameters.
    
       Display one button. Allow to filter on lists the element by status checking boxes. Refresh to make appear on boxe a new state just created on list .
 
-
+  
 .. _gp-localization-section: 
 
 .. rubric:: Localization
@@ -460,9 +522,22 @@ Default values for user
     
       When creating an element, name of the project stays like than the one selected at the selector or on contrary offers choice on global list of projects
     
+   .. compound:: Export in XLS or ODS 
+    
+      Choose the format in which you want to export either in native excel format or with the ODS format of OpenDocument.     
+    
    .. compound:: Displaying notes in discussion mode
    
       Display of notes in discussion mode with indentation for answers 
+      
+   .. compound:: Not receive his own emails 
+   
+      You don't receive the emails you create. 
+  
+   .. compound:: List quotations, commands and bills on client form
+  
+      Display or not the list of financial elements related to the customer on the screen of the latter.
+      
  
 
 .. _gp-reference:
@@ -493,10 +568,13 @@ Sections for format references
          * {TYPE} for type code, 
          * {YEAR} for current year 
          * {MONTH} for current month.
-        
-      .. compound:: Change reference on type or project change
+   .. compound:: Number of digits for reference number 
    
-         Change the reference on type change of element will generate missing numbers in reference
+      Indicate the number of digits you want to appear in your reference.
+                 
+   .. compound:: Change reference on type or project change
+   
+      Change the reference on type change of element will generate missing numbers in reference
 
 .. _format_reference_doc:
 
@@ -558,19 +636,11 @@ Tab Configuration
 .. topic:: References tab's sections
 
    * :ref:`Product and component<gp-product-component-section>`
+   * :ref:`Versions<gp-versions-section>`
 
 .. _gp-product-component-section:
 
 .. rubric:: Product and Component
-
-New menu context in product and component configuration
-
-.. figure:: /images/GUI/GLOBALPARAM_ZONE_configuration.PNG
-   :alt: Configuration zone
-   :align: center
-   :scale: 80%
-   
-   Configuration zone
    
 This menu contains all the parameters for configuration management   
    
@@ -578,9 +648,6 @@ This menu contains all the parameters for configuration management
    
          Filter on date
    
-   .. compound:: Display the start and delivery milestones
-   
-         Display start and delivery milestones for product/component version and delivery dates in flat structure
    
    .. compound:: Display language in Product/Component (Version)
    
@@ -593,6 +660,23 @@ This menu contains all the parameters for configuration management
    .. compound:: Display Tenders on Products, Components, Versions
    
          Display a section to list linked Tenders on products, component, product version and component versions
+   
+   .. compound:: Include sub-products in structure    
+   
+         Include sub-products in display of product structure (flat or not)
+   
+   
+
+.. _gp-versions-section:
+
+.. rubric:: Versions section
+
+This section allows you to manage more details in the behavior of the elements linked to the versions. 
+
+   
+   .. compound:: Display the start and delivery milestones
+   
+         Display start and delivery milestones for product/component version and delivery dates in flat structure
    
    .. compound:: List of activity on component version
    
@@ -657,6 +741,10 @@ This menu contains all the parameters for configuration management
          Automatically set component version if there is only one component version of the selected component that is linked to the selected product version
 
 
+
+
+
+
 .. _financial:
 
 Tab Financial
@@ -666,7 +754,7 @@ Tab Financial
 
    * :ref:`Input of amounts for expenses<gp-input-amount-expenses>`
    * :ref:`Input of amounts for incomes<gp-input-amount-incomes>`
-   * :ref:`deferral of expense<deferral-expense>`
+   * :ref:`Automation of financial<deferral-expense>`
    
 .. _gp-input-amount-expenses:
    
@@ -912,6 +1000,7 @@ Tab Automation
    * :ref:`Automatic import of files<automatic-import>`
    * :ref:`Automatic import of replies to emails<gp-automatic-import-replies>`
    * :ref:`Automatic planning calculation<automatic-planning-calcul>`
+   * :ref:`Atuomatic archiving of history<automatic-history>`   
    * :ref:`Generation of alerts for real work<gp-genereation-alert-realwork>`
 
 .. _automated-service:
@@ -932,6 +1021,29 @@ Parameters for the :term:`Cron` process.
      
 .. warning:: **Cron working directory** should be set out of the path web..
 
+
+
+.. _automatic-history:
+     
+.. rubric:: Automatic archiving of history
+
+This section allows you to manage the behavior of the history
+
+  .. compound:: Archive history older than (in days) 
+
+   Determines how often your history is archived.
+
+  .. compound:: Start time of daily archiving 
+
+   Choose the time at which the daily archiving will start.
+   
+  .. compound:: Archive all history for idle items
+
+   Choose whether the history of closed items should be archived or not. 
+   
+   
+   
+      
 .. _automatic-import:
      
 .. rubric:: Automatic import of files
@@ -944,6 +1056,12 @@ Parameters for the :term:`Cron` process.
 Automatic import settings for :term:`cron` processes.
 
 .. warning:: **Directory of automated integration files** should be set out of the path web.
+
+
+
+
+
+
 
 .. _gp-automatic-import-replies:
 
@@ -1027,7 +1145,7 @@ See: :ref:`automatic-inuptwork`
 
 .. _gp-genereation-alert-realwork:
 
-.. rubric:: Generation of alerts for real work
+.. rubric:: Generation of alerts if real work is not entered
 
 Specific settings for alerts based on a profile.
  

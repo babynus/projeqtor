@@ -374,13 +374,13 @@ The test session is defined for a project, a product or one these components.
 
 .. rubric:: Monitoring indicator
 
-* The indicators can be defined on the progress data.
-* See: :ref:`progress-section-monitor-indicator`
+* The indicators can be defined in the :ref:`List of Values<list-of-values>`.
+* See: :ref:`health-status` and :ref:`overall-progress`
 
 .. sidebar:: Other sections
 
    * :ref:`Assignment<assignment-section>`
-   * :ref:`Progress<progress-section-activity>`
+   * :ref:`Progress<progress-section>`
    * :ref:`Summary of test cases<summary-test-case-section>`
    * :ref:`Predecessor and Sucessor element<predSuces-element-section>`
    * :ref:`Linked element<linkElement-section>`   

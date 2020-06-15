@@ -176,11 +176,48 @@ By checking the "Hide unselected projects" box, you will only have the projects 
   See: Global Parameters into the chapter :ref:`Automatic planning Calculation<automatic-planning-calcul>`
 
 
+.. index:: Overuse
+
+.. _overuse-calculation:
+
+
+ .. compound:: Overuse
+
+   .. figure:: /images/GUI/GANTT_BOX_CalculationOversuse.png
+    :alt: Oversuse option
+   
+    Calculation window with the overuse option
+
+  
+   The overuse option allows you to allocate to all the resources and this, on the projects of your choice, maximum overbooking.
+
+   This allows you to see the amount of work that is overused for the resources assigned to the task for each period of time.
+
+   .. Warning::
+
+      This function is dangerous, it does not reflect reality.
+   
+      For this reason, by default, it is not activated, even for the administrator.
+
+      See: :ref:`specific_access` in the Planning section access rights
 
 
 
 
 
+ .. compound:: Manual Planning
+ 
+   
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 .. _display-from:
 
 .. rubric:: |threeBLC| Display from... to... 
@@ -817,7 +854,7 @@ The bars displayed in the gantt chart can appear with different colors. Each col
    
 
 
-  .. compound:: SURBOOKING BAR
+  .. compound:: SURBOOKING and OVERUSE BAR
   
    .. figure:: /images/GUI/GANTT_BAR_Yellow.png
       :alt: Surbooking
@@ -827,8 +864,10 @@ The bars displayed in the gantt chart can appear with different colors. Each col
       Resource capacity overbooking
 
    Condition: Add extra work time on the standard capabilities of your resources to plan more projects that you will not process.
-   
-   For more information see: :ref:`surbooking`
+      
+      See: :ref:`surbooking`
+      
+      See: :ref:`overuse<overuse-calculation>` 
 
 
 
@@ -875,12 +914,36 @@ The bars displayed in the gantt chart can appear with different colors. Each col
      
 
 
-   .. figure:: /images/GUI/GANTT_ZONE_DisplayDates.png 
-      :alt: View the item name and scheduled dates on the selected bar
-      :figwidth: 100% 
+  .. compound:: CUSTOM COLORS
+  
+   you can apply the color of your choice on the bars of the Gantt chart representing activities, milestones and meetings. 
+
+   .. figure:: /images/GUI/GANTT_ZONE_CustomBars.png 
+      :alt: Custom colors n the gantt chart bars
       :align: left
       
-      item name and scheduled dates on the selected bar
+      Custom colors on the gantt chart bars
+
+   If the Planned end date> Validated end date then the bar should be colored red. In case you have set a custom color, this state will still be indicated
+   
+   .. figure:: /images/GUI/GANTT_ZONE_CustomBarsRED.PNG 
+      :alt: Custom colors n the gantt chart bars
+      :align: left
+      
+      Custom colors on the gantt chart bars   
+      
+
+   On the one hand, directly on the bar and on the other hand in the task list, where the indicators remain the original color.   
+      
+   Click on the reset button to come back to original colors.   
+      
+      
+  .. compound:: Item name display      
+
+   .. figure:: /images/GUI/GANTT_ZONE_DisplayDates.png 
+      :alt: View the item name and scheduled dates on the selected bar
+      
+      Item name and scheduled dates on the selected bar
       
    Move the cursor over the bar to display item name and planned dates.   
 
@@ -979,18 +1042,18 @@ Dependencies between planning elements are displayed with an arrow.
 
  .. compound:: Strict mode for dependencies
 
-   ..figure:: /images/GUI/PARAMGLOB_ZONE_ModStrict.png
+   .. figure:: /images/GUI/PARAMGLOB_ZONE_ModStrict.png
       :alt: Strict mode for dependencies 
       
       Strict mode for dependencies  
    
    The strict dependency mode is a global parameter in the work tab, planning section.
 
-By default, the strict dependency mode is set to YES.
+   By default, the strict dependency mode is set to YES.
 
-The strict dependency mode forces the successor planning element not to start on the same day as the same predecessor but the next day. Even if the task is finished before the end of the day.
+   The strict dependency mode forces the successor planning element not to start on the same day as the same predecessor but the next day. Even if the task is finished before the end of the day.
 
-To have the successor start on the same day or before the end of the predecessor task, select NO for strict mode or you can also put a negative delay.
+   To have the successor start on the same day or before the end of the predecessor task, select NO for strict mode or you can also put a negative delay.
 
 
      
@@ -1036,24 +1099,35 @@ Real end date > Validated end date
 
 
 
-.. _real-work:
-
-.. rubric:: |fiveBLC| Real work
-   
-   
-   
-   
 .. _detail-work:
+
+.. rubric:: |fiveBLC| Detail of the work 
    
-.. rubric:: |sixBLC| Detail of the work 
 
 Right click on a bar to displays the detail of the work for this bar.
 
 .. figure:: /images/GUI/GANTT_ZONE_Resources.png 
    :alt: Display details of the work
-   :align: center
-   
+      
    Display details of the work
+
+
+Meaning of colors
+ 
+ 
+   |greenBox| Planned workload
+   
+   |realBox| Real work - charged to the timesheet
+   
+   |redBox| Excess workload over dates
+   
+   |blueBox| Absence of the resource
+
+
+
+
+
+
 
 
 .. Warning:: 
@@ -1072,6 +1146,268 @@ Details area
 The details area is the same as on all the ProjeQtOr element screens and adapts according to the selected element.
 
 For more details on this area, see the chapter :ref:`Details window<detail-window>` in the :ref:`graphic-user-interface`
+
+
+
+.. _planning-mode-gantt:
+
+Planning Modes
+==============
+
+Projeqtor offers several ways to plan the workload for your resource with 11 different planning modes.
+
+* :ref:`As soon as possible<mode-assoon>`
+* :ref:`Work together<mode-worktogether>`
+* :ref:`Must start before...<mode-startbefore>`
+* :ref:`Should end before...<mode-endbefore>`
+* :ref:`Regular between dates<mode-regular>`
+* :ref:`Regular between dates in full dat<mode-regularFull>`
+* :ref:`Regular between dates in half day<mode-regularHalf>`
+* :ref:`Regular between dates in quarter day<mode-regularQuarter>`
+* :ref:`Recurring<mode-recurring>`
+* :ref:`Fixed duration<mode-fixedduration>`
+* :ref:`Manual planning<mode-manualplanning>`
+
+
+
+.. _mode-assoon:
+
+.. rubric:: :ref:`|MODE|<planning-mode-gantt>` As soon as possible
+
+The task is planned to finish as soon as possible.
+
+.. note:: For tasks "as soon as possible", if no assignment is created but the validated work is defined, take the validated work as the default duration (instead of 1 days)
+
+
+.. _mode-worktogether:
+
+.. rubric:: :ref:`|MODE|<planning-mode-gantt>` Work together
+
+When two or more resources are assigned to the same task, planning tries to find periods where all resources are available to work together.
+
+Periods are searched "as soon as possible".
+
+If only one resource is assigned, this planning mode is exactly the same as "As soon as possible".
+
+If one resource is assigned more work than the other, the extra work is planned after working together periods.
+
+
+
+.. _mode-startbefore:
+
+.. rubric:: :ref:`|MODE|<planning-mode-gantt>` Must not start before validated date
+
+The validated start date field must be set.
+
+The task must not begin before a specific date.
+     
+     
+.. _mode-endbefore:
+
+.. rubric:: :ref:`|MODE|<planning-mode-gantt>` Should end before validated end date
+
+The validated end date field must be set.
+
+The task is planned backward from end to start.
+     
+"Floating" backward planning is not possible, validated end date must be defined. 
+
+
+
+
+.. _mode-regular:
+
+.. rubric:: :ref:`|MODE|<planning-mode-gantt>` Regular between dates
+
+* Allows to evenly distribute work between two dates.
+* Used for management recurrent activities.
+* The validated dates fields must be set.
+
+Examples of the planning modes upcoming are based on 2 work days to plan on 10 days.
+
+Work will be evenly divided between on working days. For instance, 0.2 days during 10 days.
+   
+   .. image:: /images/GUI/GANTT_ZONE_Regular.png
+      :alt: Regular between dates
+
+
+
+.. _mode-regularFull:
+
+.. rubric:: :ref:`|MODE|<planning-mode-gantt>` Regular in full days
+ 
+Work will be distributed on full day between on working days.
+
+.. list-table::
+   :widths: 30,10,10,10,10,10,10,10,10,10,10
+   :header-rows: 1
+
+   * - Day
+     - 1
+     - 2
+     - 3
+     - 4
+     - 5
+     - 6
+     - 7
+     - 8
+     - 9
+     - 10
+   * - Distribution
+     - 0
+     - 0
+     - 0
+     - 0
+     - 1
+     - 0
+     - 0
+     - 0
+     - 0
+     - 1
+
+       
+
+
+.. _mode-regularHalf:
+
+.. rubric:: :ref:`|MODE|<planning-mode-gantt>` Regular in half days
+
+The work will be distributed over half of the day between working days. 
+   
+
+.. list-table::
+   :widths: 30,10,10,10,10,10,10,10,10,10,10
+   :header-rows: 1
+
+   * - Day
+     - 1
+     - 2
+     - 3
+     - 4
+     - 5
+     - 6
+     - 7
+     - 8
+     - 9
+     - 10
+   * - Distribution
+     - 0
+     - 0
+     - 0.5
+     - 0
+     - 0.5
+     - 0
+     - 0
+     - 0.5
+     - 0
+     - 0.5
+
+
+
+
+.. _mode-regularQuarter:
+
+.. rubric:: :ref:`|MODE|<planning-mode-gantt>` Regular in quarter days
+ 
+Work will be distributed on one quarter of the day between on working days.
+
+.. list-table::
+   :widths: 30,10,10,10,10,10,10,10,10,10,10
+   :header-rows: 1
+
+   * - Day
+     - 1
+     - 2
+     - 3
+     - 4
+     - 5
+     - 6
+     - 7
+     - 8
+     - 9
+     - 10
+   * - Distribution
+     - 0
+     - 0.25
+     - 0.25
+     - 0.25
+     - 0.25
+     - 0
+     - 0.25
+     - 0.25
+     - 0.25
+     - 0.25
+
+
+See also: :ref:`Regular modes with excess workload<mode-regularExcess>`
+
+
+
+.. _mode-regularExcess:
+
+ .. compound:: Regular modes with excess workload
+
+    If the dates are too short compared to the assigned load, the excess load will be divided and added in the same way as the chosen mode.
+    
+    So you can get full days even in regular mode in quarter day or half days.
+    
+      * Example with 8 days of workload to plan over 10 days with the Regular mode in half days between dates 
+    
+      .. image:: /images/GUI/GANTT_ZONE_RegularHalf.png
+         :alt: Regular in half day with excess workload
+         
+         
+    The load is distributed regularly so as to respect the dates.
+
+
+      .. image:: /images/GUI/GANTT_ZONE_RegularExcess.png
+
+    If the load is too high to meet the dates, the excess load will be distributed over the whole day after the validated end date and will therefore be late (red color)
+
+
+
+
+.. _mode-recurring:
+
+.. rubric:: :ref:`|MODE|<planning-mode-gantt>` Recurring (on a weekly basis)
+  
+This new mode allows reserving availability on recurring tasks on a weekly basis, for example 1/2 day every Monday, 1h every day, ... 
+    
+Activities in this mode dynamically assign the work based on the start and end bounds:
+    
+       * Start defined with a dependence End-Start or Start-Start
+       * End defined with an end-end dependency
+       * Planning mode for which the assigned work is not fixed
+       * Workload distributed weekly
+       * Adapts to the duration of the project
+
+      See: :ref:`Recurrent mode assignment<recurrent-mode-assign>`
+   
+
+
+.. _mode-fixedduration:
+
+.. rubric:: :ref:`|MODE|<planning-mode-gantt>` Fixed duration
+
+* The task is planned by duration.
+* The task is “floating” depending on predecessors.
+* The validated duration field must be set.
+* It is not necessary to assign resources to the task.
+* If work is assigned to the task, planning behavior is the same as "Regular between dates" but with floating task. 
+
+.. note::
+
+   If you want fixed duration with fixed start, use "Regular between dates", or use milestone to define start.
+
+
+.. _mode-manualplanning:
+
+.. rubric:: :ref:`|MODE|<planning-mode-gantt>` Manual planning
+
+* Selection of activities through manual planning mode
+* Choice for planned workload between **planned work** or **real work** data 
+  See: :ref:`global parameters<GP-effectCapacity>`.
+* Display of a monthly calendar of the same type as Absence with :ref:`planned interventions<planned-interventions>`
 
 
 
@@ -1339,3 +1675,291 @@ Click on the icon to define an advanced filter.
 The advanced filter allows to define clause to filter and sort.
 
 Fore more details, see :ref:`Advanced filters<advanced-filter>` in the :ref:`Graphical user interface section<graphic-user-interface>`
+
+
+
+
+
+
+
+.. raw:: latex
+
+    \newpage
+
+.. index:: Gantt chart (Manual planning)
+
+.. index:: Manual planning
+
+.. _planned-interventions:
+
+Planned Interventions
+---------------------
+
+The objective of this evolution is to be able to manage in ProjeQtOr periods of on-call on support activities. Here we propose an estimate adapting the need expressed to make it a community development. 
+
+The goal is to make the specifications more flexible to cover broader and more generic needs.
+
+
+
+
+.. _assignment-manualplanning:
+
+.. rubric:: Assignment
+
+The assigned workload is no longer determined but will be entered on a calendar which can be clicked, per half-day.
+
+See: :ref:`Planned interventions assignment<plannedintervention-assign>`
+
+ .. compound:: Display Manual planning calendar  
+
+   * Click on |buttonAdd| to add a new assignment. 
+   
+   * Select the resource and save.
+
+   * A clickable calendar is displayed. 
+   
+   * The display starts in the current month and spans the next six months.
+   
+   * Each box is divided into two half days. The assigned work is then automatically the sum of the selected half-days.
+   
+   * If the assignment already exists, click on |buttonEdit|. The calendar will be displayed in the assignment window.
+
+
+   
+
+.. figure:: /images/GUI/GANTT_BOX_PlanningManual-Assignment.png
+   :alt: Assigment with the Manual planning mode
+   
+   Assigment with the Manual planning mode
+   
+The workload saved in this window will be displayed to the planned interventions screen.
+
+
+
+
+ .. compound:: Distribution of the workload for a new assignment 
+
+   * click on a box to enter a workload.
+
+     Depending on the :ref:`global parameter<GP-effectCapacity>`, this workload will be either planned work or actual work. 
+   
+   * Each day is represented by two half-days (am and pm)
+
+   * You can plan for the 6 months following the date of the assignment
+
+   * The half-days filled in will be visible on the screen of planned interventions
+
+   * Save this data with the save button
+
+
+
+   
+
+.. rubric:: The planned Interventions
+
+The planned interventions screen allow you to manage the manual planning.
+
+This screen is available if at least one activity has a planning mode set to manual planning. 
+
+
+.. figure:: /images/GUI/GANTT_SCR_PlannedInterventions.png
+   :alt: Planned interventions screen
+   
+   Planned interventions screen
+
+   
+.. topic:: Interface areas
+
+   |one| :ref:`Display zone<manualPlan-display>`
+   
+   |two| :ref:`List of Projects and activity<manualPlan-ListProjectActivity>`
+   
+   |three| :ref:`FTE<manuelPlan-fte>`
+   
+   |four| :ref:`Interventions mode<manualPlan-InterventionMode>`
+   
+   |five| :ref:`Interventions Calendar<manualPlan-InterventionIntervention>` 
+    
+   
+
+.. _manualPlan-display:
+
+.. rubric:: |oneBLC| Display zone    
+   
+The display area allows you to filter the resources you want to display.
+
+The screen is blank until you select the resource, the team or the organization.
+
+The calendar is displayed for the resource or for all members of the selected team or organization.
+
+These parameters are not exclusive, you can select team and organization.
+
+ .. compound:: Resource
+ 
+   Filter by resource on calendar display.
+
+ .. compound:: Team
+ 
+   Filter by team on calendar display.   
+
+ .. compound:: Organization
+ 
+   Filter by organization on calendar display.
+
+ .. compound:: Project
+ 
+   Filter by project on calendar display. 
+   
+ .. compound:: Year
+ 
+   Select the year to display.     
+   
+ .. compound:: Month
+ 
+   Select the month to display.  
+   
+
+.. note:: 
+
+   The selected parameters, except the month, always set by default to the current month, are saved as a user parameter. 
+
+   When the user returns to the screen, he therefore finds the last parameters entered   
+   
+   
+.. _manualPlan-ListProjectActivity:
+
+.. rubric:: |twoBLC| List of Projects and activity    
+   
+We display the list of activities whose planning mode is "manual planning" of the selected project and its sub-projects
+
+If no project is selected, all the projects to which it is assigned will be displayed 
+
+You can't create new activities in manual planning mode from the intervention screen.
+
+Go to the activities screen to create the new activity in manual planning mode.
+
+The new activity will then appear in the list.  
+
+
+
+   .. _manuelPlan-fte:
+
+.. rubric:: |twoBLC| FTE    
+   
+In this calendar, we graphically display if we respect the quantity of FTE requested.
+
+Fill in one FTE for each activity to be checked.
+
+If you enter 1, you expect that 1 FTE in total will be performed over half a day on this activity, regardless of the number of resources.
+
+A control is then carried out and takes into account all the resources assigned to each activity, and not only those selected and visible on the calendar
+
+
+
+
+ .. compound:: Green Box
+ 
+   If the entry respects the workload constraint expected in FTE the box is green
+
+   .. image:: /images/GUI/GANTT_ZONE_FTEGreen.PNG
+   
+   The FTE value entered for the selected activity is set to 1.
+   
+   This FTE is defined for each half-day.
+
+   You must therefore have 1 effective FTE planned for this day regardless of the resource or resources that will be planned
+   
+   
+   
+ .. compound:: Red Box
+ 
+   If the total entry is greater than the expected workload in FTE the bos is red 
+   
+   .. image:: /images/GUI/GANTT_ZONE_FTERed.png
+   
+   In this example, my FTE is set to 1 for each half day
+
+   We see that for the first two days, two resources are planned on the same half day.
+
+   The FTE is then 2. The box turns red. The workload is higher than expected
+   
+   
+ .. compound:: Non-colored box
+ 
+   The total entry is less than the expected workload in FTE or there is no expected workload
+   
+
+.. _manualPlan-InterventionMode:
+
+.. rubric:: |fourBLC| Interventions mode
+
+The list of possible intervention methods is customizable.
+
+This list can be modified via a setting screen in the :ref:`list of values<intervention-mode-value>`.
+
+The saved modes will remain fixed for all projects and all teams.
+
+.. figure:: /images/GUI/GANTT_ZONE_InterventionsModes.png
+   :alt: Interventions mode
+   
+   Intervention mode
+
+The manager will have to select an activity or a modality or both.
+
+* If the intervention mode is not selected, the box is colored according to activity but no letter appears, and vice versa.
+
+* If only the intervention mode is selected, it will be saved without modifying the planned or actual work.
+
+You can however add one or the other after planning the intervention or intervention mode.
+
+A second click with the same parameters will delete the assignment.
+
+
+
+.. _manualPlan-InterventionIntervention:
+
+.. rubric:: |fiveBLC| Interventions Calendar
+
+
+* Click on an activity to plan workload on it
+
+* Click on half a day to plan the workload
+
+ 
+.. image:: /images/GUI/GANTT_ZONE_PLanWork.png
+   :alt: Workload on calendar
+      
+* the targeted half day is filled with the color of the selected activity and the letter of the chosen intervention mode.
+
+   
+ .. compound:: Gray color
+
+   The gray boxes indicate the unavailability, the absence of your resource.
+ 
+   .. image:: /images/GUI/GANTT_ZONE_PLannedInterventionAbsence.png
+
+
+.. note:: Planned or Real
+
+   The workload can be recorded as a planned load or as a real load.   
+
+   This option can be set in the :ref:`global settings<GP-manualplan-workas>`. 
+   
+
+
+.. _view-interventions:
+   
+View intervention
+=================
+
+This screen allows you to see your planned interventions.
+
+You cannot modify these interventions or plan another half day on this screen.
+
+It is a bit the equivalent of planning by resource but in manual planning mode
+
+
+.. figure:: /images/GUI/GANTT_SCR_ViewInterventions.png
+   :alt: View interventions screen
+   
+   View interventions screen     

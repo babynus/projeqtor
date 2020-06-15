@@ -85,7 +85,7 @@ It is also the top-level of visibility, depending on profiles.
 
 .. sidebar:: Other sections
 
-   * :ref:`Progress<progress-section-activity>`
+   * :ref:`Progress<progress-section-steering>`
    * :ref:`Allocations<allocation-section>`
    * :ref:`Versions linked to this project<Link-version-project-section>`  
    * :ref:`Types restrictions<type-restriction-section>`  
@@ -183,7 +183,7 @@ Activity
 .. sidebar:: Other sections
 
    * :ref:`Assignment<assignment-section>`
-   * :ref:`Progress<progress-section-activity>`
+   * :ref:`Progress<progress-section>`
    * :ref:`Predecessor and Sucessor element<predSuces-element-section>`
    * :ref:`Linked element<linkElement-section>`   
    * :ref:`Attachments<attachment-section>`   
@@ -243,8 +243,11 @@ Ability to filter activities by data or type, for instance by assigned resources
 
 .. rubric:: Monitoring indicator
 
-* The indicators can be defined on the progress data.
-* See: :ref:`progress-section-monitor-indicator`   
+* The indicators can be defined in the :ref:`List of Values<list-of-values>`.
+
+* See: :ref:`health-status` and :ref:`overall-progress`
+
+ 
 
 .. rubric:: Section Description
 
@@ -346,8 +349,9 @@ ProjeQtOr offers two types of milestone:
 
 .. rubric:: Monitoring indicator
 
-* The indicators can be defined on the progress data.
-* See: :ref:`progress-section-monitor-indicator`
+* The indicators can be defined in the :ref:`List of Values<list-of-values>`.
+
+* See: :ref:`health-status` and :ref:`overall-progress`
 
 .. rubric:: Section Description
 

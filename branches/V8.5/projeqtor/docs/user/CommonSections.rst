@@ -562,6 +562,47 @@ You can have a goto button at the top of the assignments area if you are assigne
    Moving the mouse over the icon will display the comment.  
 
 
+.. _recurrent-mode-assign:
+
+Recurrent mode assignment
+=========================
+
+When you use the RECURRENT planning mode, during the assignment, ProjeQtOr offers to distribute the workload of your resource on a weekly basis which will affect the entire duration of the project. The total charge will be calculated after validation.
+
+Please note, this mode adds a significant workload depending on the duration of your project.
+
+.. figure:: /images/GUI/GANTT_BOX_RecurrentAssignment.png
+   :alt: Recurring assignment
+   
+   Recurring assignment
+
+You can enter a different value for each day of the week.
+
+The copy button is an accelerator to copy the value entered on Monday on all other days.
+
+   
+
+.. _plannedintervention-assign:
+
+Planned Interventions assignment
+================================
+
+.. rubric:: Assignment
+
+The assigned workload is no longer determined but will be entered on a calendar which can be clicked, per half-day.
+
+See: :ref:`Manual planning assignment<assignment-manualplanning>`
+
+
+
+.. figure:: /images/GUI/GANTT_BOX_PlanningManual-Assignment.png
+   :alt: Assigment with the Manual planning mode
+   
+   Assigment with the Manual planning mode
+   
+  
+
+
 .. raw:: latex
 
     \newpage
@@ -573,282 +614,44 @@ You can have a goto button at the top of the assignments area if you are assigne
 Progress section
 ----------------
 
+This section allows all at once, define planning and follow-up the progress.
+
+All planning elements have a progress section.
+
 .. figure:: /images/GUI/COMMON_ZONE_ProgressSection.png
    :alt: Progress Section
    :align: center
    
    Progress section
    
-This section allows all at once, define planning and follow-up the progress.
-
-All planning elements have a progress section.
 
 Description of the different sections is grouped by the planning elements that have common fields and behavior.
 
 Progress data are displayed in the same format, **but according to the planning element, fields can have another meaning or behavior.**
 
-The following sections displayed first a general description of progress data.
-
-Next, description of fields and information in sections will be displayed.
-
-.. raw:: latex
-
-    \newpage
-
-.. _progress-section-column-def:
-
-General description
-===================
-
 Below is the definition of the different columns that make up the Progress section.
 
-.. rubric:: Column "Requested"
 
-Requested dates allows to define initial dates (wished dates).
-
-Useful to define preliminary dates in a project, in a change request or other.
-
-Requested dates can be used:
-
-   * as a first draft of planned dates.
-   * with indicators to monitor the respect of start and end dates.
-
-.. rubric:: Column "Validated"
-
-Validated data are used by project leader to define committed dates,  work and cost expected.
-
-Validated data can be used:
-
-  * to fix a limit or a target and for some planning mode they are used to define parameter entries.
-  * with indicators to monitor the respect of start and end dates, work and cost expected.
-  * like the project's baseline.
-
-.. note:: 
- 
-   **Validated end date (due date)**
-
-    * The validated end date allows to fix a due date at which the work must be completed.
-    * If the work is planned or completed beyond this limit, the error field will be highlighted.
-    * For task and milestone, their Gantt element will be red. (See: :ref:`gantt-chart-view`)
-
-.. rubric:: Column "Planned"
-
-* Planned dates are the estimated time to complete tasks or the estimated end date of milestones.
-* Planned dates are the estimated duration to complete tasks by resources according to assigned work.
-* Planned dates can be used to initialize validated and requested dates.
- 
-.. rubric:: Column "Assigned"
-
-This column displays the planned work and cost of resources and the planned project expenses.
-
-Assigned work is the planned work assigned to resources for completing tasks
-
- .. compound:: **Planned work and cost of resources**
-
-    * Scheduled work time assigned to a resource for completing a task.
-    * The estimated cost is the scheduled work time assigned to a resource for completing a task multiplied by its current daily cost.
-
- .. compound:: **Planned project expenses**
-
-    * Sum of the planned amount of all project expenses.
-
-.. rubric:: Column "Real"
-
-This column displays the duration, completion date, work done and cost incurred by resources and the project expenses.
-
- .. compound:: **Dates**
-
-    * Allows to determine when a planning element has really begun and completed. 
-
- .. compound:: **Work done and cost incurred by resources**
-
-    * Work done by a resource on an assigned task.
-    * Work done are entered by resources, on a daily basis by real work allocation screen. 
-    * The cost incurred is the work done by a resource on a task on daily base multiplied by its daily cost defined for the period.
-
- .. compound:: **Project expenses**
-
-    * Sum of the real amount of all project expenses.
-
-.. rubric:: Column "Left"
-
-This column displays the remaining of planned work and planned amount.
-
-By default : Left = Assigned - Real
-
-Left work should be re-estimated by the resource.
-
- .. compound:: **Work and cost remaining of resources**
-
-    * Scheduled work time assigned to resources for completing tasks minus the work done.
-    * The remaining cost is the remaining work by a resource on a task multiplied by the latest daily cost defined for it.
-
- .. compound:: **Project expense**
- 
-    * Sum of the planned amount of project expenses not incurred yet.
-
-.. rubric:: Column "Reassessed"
-
-This column displays the resources work reassess and the spending projection.
-
-Always calculated as [Reassessed] = [Real] + [Left] 
-
-  
-
-.. rubric:: **Work and cost consolidation**
-
-Work and cost from tasks (Activity, Test session and Meeting) are summarized for each parent element.
-         
-Allows to follow-up progress on grouped tasks like phase, delivery, test group, sub-project and project. 
-       
-.. _progress-section-consolidation:
-         
-.. rubric:: **Consolidate validated work and cost**
-
-Consolidation can be done on validated work and cost.
-         
-Allows to calculate the scheduled work and budgeted cost from lower planning elements.
-         
-The calculation depends on consolidation method selected and on which level the validated values are entered.
-
-
-          .. compound:: **Consolidation method "Never"**
-
-            * Values are not consolidated.
-
-          .. compound:: **Consolidation method "Always"**
-
-            * Values on the lower levels are consolidate up to project level.
-            * Will overwrite existing values
-
-          .. compound:: **Consolidation method "Only if set"**
-
-            * Zero values at lower levels do not overwrite values on upper level
-            * non-zero values on the lower level are consolidated up to project level.
- 
-         
-            .. figure:: /images/GUI/COMMON_ZONE_ParamConsolidation.png
-               :alt: Consolidation work
-               :align: center
-           
-               The parameter "Consolidated validated cost & work" 
-               
-.. seealso:: 
-
-   For more details. See: :ref:`GlobalParam_automation` screen allows to select consolidation method.
-           
-.. _progress-section-monitor-indicator:
-
-.. rubric:: Monitoring indicator
-
-The indicators can be defined on the progress data.
-
-.. rubric:: Project, Activity and Test session.
-
-Next indicators defined for Project, Activity and Test session
-
-   .. compound:: **Respect of start or end date for the requested, validated and planned values**
-
-      These indicators can be programmed as a reminder and an alert, 
-        according to the number of days or hours before the start or end date.
-
-   .. compound:: **On resource work and cost**
-
-      These indicators can be programmed as a reminder and an alert, 
-        according to percentage of progress on monitored value compared to the target value.
-
-         .. describe:: Reassessed cost compared to validated cost
-
-         The reassessed cost compared to budgeted (validated) cost.
-
-         .. describe:: Reassessed cost compared to assigned cost
-
-         The reassessed cost compared to cost calculated from assigned work for resources.
-
-         .. describe:: Reassessed work compared to validated work
-
-         The reassessed work compared to scheduled (validated) work.
-
-         .. describe:: Reassessed work compared to assigned work
-
-         The reassessed work compared to work assigned to resources.
-
-         .. describe:: Real work compared to validated work
-
-         The work really done by resources compared to scheduled (validated) work.
-
-         .. describe:: Real work compared to assigned work
-
-         The work really done by resources compared to work assigned to resources.
-
-.. rubric:: Milestone
-
-Next indicators defined for Milestone.
-
- .. compound:: **Respect of end date for the requested, validated and planned values**
-
-    These indicators can be programmed as a reminder and an alert, according to the number of days or hours before the end date.
-
-.. raw:: latex
-
-    \newpage
-
-.. _progress-section-activity:
-
-Others sections
-===============
-
-Next sections describe each part of progress section display.
-
-Some parts are used only by a specific planning element.
-
-Parts used by planning elements are:
-
-
-.. topic:: Project
-
-   * :ref:`progress-section-date-duration`
-   * :ref:`progress-section-resource`
-   * :ref:`progress-section-expense-reserve`
-   * :ref:`progress-section-miscellaneous`
-   * :ref:`progress-section-margin`
-
-.. topic:: Activity
-
-   * :ref:`progress-section-date-duration`
-   * :ref:`progress-section-resource`
-   * :ref:`progress-section-miscellaneous`
-   * :ref:`progress-section-planning-mode`
-   * :ref:`progress-section-ticket`
-
-.. topic:: Test session
-
-   * :ref:`progress-section-date-duration`
-   * :ref:`progress-section-resource`
-   * :ref:`progress-section-miscellaneous`
-   * :ref:`progress-section-planning-mode`
 
 .. _progress-section-date-duration:
 
 Dates and duration
-""""""""""""""""""
+==================
 
-.. sidebar:: See 
+The dates and durations section allow you to record and display different time information on your element.
 
-    * :ref:`progress-section-column-def`
-    * :ref:`progress-section-monitor-indicator`
-
-.. rubric:: Requested
-
-* Allows to define preliminary planned dates.
 
 .. rubric:: Validated
 
-Validated dates are used to:
+Validated dates are used for:
 
-* Define entry parameters according to selected planning mode.
-* Define initial planned dates, as a baseline.
-* Fix a due date at which the work must be completed.
+* Define the input parameters according to the selected planning mode - See: :ref:`Planning mode<planning-mode-gantt>`
+
+* Define the initial due dates as a reference in order to check any drifts in your project
+
+* Set a deadline by which the work must be completed.
+
+
 
 .. rubric:: Planned
 
@@ -874,33 +677,56 @@ Planned dates can be defined with:
 
       The planned start date is adjusted to the real start date when work began.
 
+
+
+
 .. rubric:: Real
+
+These are the dates of work actually carried out. The work actually charged
 
 The real start date is set when work began (handled).
 
 The real end date is set when no more remaining work (done).
 
-.. topic:: Real dates of parent element 
+.. note:: Real dates of parent element 
 
    The real start date will be propagated to parent elements up to project.
    
    The real end date for parent element will be initialized, when all sub-element have been completed.
+   
+   
+
+.. rubric:: Requested
+
+Allows you to define forecast dates. These are generally the dates agreed with your client or the beneficiary of your activity..
+
+
+
+.. rubric:: Duration
+
+The durations correspond to the number of days between the start and end dates.
+
+They are calculated automatically.
+
+But you can also enter a start date and a number of days, the end date will be automatically calculated.
+
+
+
 
 .. _progress-section-resource:
 
-Resources (Work & Cost)
-"""""""""""""""""""""""
+Costs and works
+===============
 
-.. only:: html
+The cost of resources is calculated thanks to the workload allocated to each resource on the tasks.
 
- .. sidebar:: See 
+You must fill in a function associated with a daily cost for your resources.
 
-    * :ref:`progress-section-column-def`
-    * :ref:`progress-section-consolidation`
-    * :ref:`progress-section-monitor-indicator`
+See: :ref:`Function and cost<function-cost-resource>` on the resources screen
 
 
-Work of resources are calculated by the work assigned to each resource for tasks.
+
+
 
 .. rubric:: Validated
 
@@ -949,24 +775,19 @@ Sum of resource total work that will be needed from start to end and the ensuing
    * Sum of work done on tickets and costs is included in work of activity linked through the “planning activity” of tickets.
    * Sum of work done on tickets that don't link to any activity will be integrated in the work of the project.
 
-.. raw:: latex
 
-    \newpage
+
+
+
 
 .. _progress-section-expense-reserve:
 
-expense tracking
-""""""""""""""""
 
-.. only:: html
+Expense tracking
+================
+This section is used by Project.
 
- .. sidebar:: See 
-
-    * :ref:`progress-section-column-def`
-    * :ref:`Project reserve<project-reserve>`
-
-
-This section is used by Project
+See: :ref:`Project reserve<project-reserve>`
 
 .. rubric:: Validated (Expense)
 
@@ -1008,14 +829,82 @@ Project reserve.
    Total is the sum of resources cost, expenses and reserve of their corresponding column.
 
 
+
+
+.. _technical-progress:
+
+Technical Progress
+==================
+
+The Technical Progress section allows you to display an advancement in units of work.
+
+.. note:: To display the technical progression section, which corresponds to an advancement in Unit of Work, you must position the option in the global parameters.
+   
+   See: :ref:`Global Parameters<gp_planning-section>`
+
+The section technical progress is displayed on Project and Activity screen.
+
+you determine the number of units of work to be performed on the tasks.
+
+The progress and the rest will be consolidated towards the father project and / or the mother activity. 
+
+
+.. rubric:: Number of units
+
+As for the dates and durations, you can enter several values for the realization of your units of works.
+
+ .. compound:: To delivred
+
+  Number of units to be delivered.
+   
+ .. compound:: To realise
+
+  Number of units to be produced.
+
+   
+ .. compound:: Realised
+ 
+  Number of units actually produced.
+  
+ .. compound:: Progress
+ 
+  For advancement in unit of work, you can choose the way so it will be evaluated.
+  
+   .. compound:: Calculated
+   
+     Progress is calculated by software.
+     
+   .. compound:: Manual
+   
+     You define yourself the progress of the realization of your units of works.    
+
+ .. compound:: Weight
+ 
+  The weight defines a certain importance on the realization of these units.
+
+  It determines how the calculation of the progress of the work units will be calculated and consolidated.
+      
+   .. compound:: Manual
+   
+     You enter a value manually according to the unit of work to be done.
+     
+   .. compound:: Unity of work
+   
+     It is the number of units to deliver or to realize.  
+     
+        
+
+
+
+
 .. raw:: latex
 
     \newpage
 
-.. _progress-section-miscellaneous:
+.. _progress-section-steering:
 
-Progress
-""""""""
+Steering
+========
 
 .. rubric:: Progress
 
@@ -1043,234 +932,89 @@ Calculated by the sum of the work done divided by scheduled work.
 
 Hierarchical position in the global planning.
 
-.. rubric:: Priority
 
-Allows to define priority.
+.. rubric:: Color
+ 
+You can set a color on an activity.
+  
+This color will be displayed on the bars of the Gantt chart.
+  
+  
+.. rubric:: Minimum threshold
+ 
+When this value is set, the activity will only be scheduled on the day that the daily availability will be greater than or equal to this threshold.
 
-By default, the value is set to "500" (medium priority).
+You also have the option to add a new property to a "not splitted work" task.
 
-See: :ref:`Scheduling priority<scheduling-priority>`.
+This will require defining the minimum work to be allocated each day and thus filling in the minimum threshold field
 
-.. raw:: latex
+Planning will require finding consecutive days with at least the given value possible.
 
-    \newpage
+
+.. rubric:: Fix planning
+ 
+Fix planning will avoid the recalculation of planning for an activity.
+  
+To fix the project see: :ref:`treatment-section`
+
+
+.. _margin:
+
+Margin
+""""""
+
+  .. compound:: Margin (work)
+  
+    Used by Project.
+    
+    Calculated by the scheduled work minus the sum of work reassessed.
+
+    .. code:: 
+   
+      [Margin] = [Validated work] - [Reassessed work]
+   
+      [Margin(%)] = ([Validated work] - [Reassessed work]) / [Validated work] 
+
+
+  .. compound:: Margin (cost)
+
+    Calculated by the budgeted cost (resource & expense) minus the total of reassessed cost.
+
+    .. code:: 
+
+      [Margin] = [Validated cost] - [Reassessed cost]
+ 
+      [Margin(%)] = ([Validated cost] - [Reassessed cost]) / [Validated cost] 
+
+Priority
+""""""""
+
+  Allows to define priority to a project or activity.
+  
+  A project or an activity with a priority 
+
+  By default, the value is set to "500" (medium priority).
+  
+  1 being the highest priority and 999 the lowest priority.
+
+  See: :ref:`Scheduling priority<scheduling-priority>`.
+
+
+
+
 
 .. _progress-section-planning-mode:
 
 Planning mode
 """""""""""""
 
-Used by Activity & Test session
+  Used by Activity & Test session.
 
-.. rubric:: As soon as possible
+  Depending on the planning mode selected, the calculation of your planning will not be executed in the same way.
 
-The task is planned to finish as soon as possible.
+  * See :ref:`Concepts<planning-mode-concept>`
+  * See :ref:`Planning modes<planning-mode-gantt>`
 
-.. note:: For tasks "as soon as possible", if no assignment is created but the validated work is defined, take the validated work as the default duration (instead of 1 days)
-
-
-.. rubric:: Work together
-
-When two or more resources are assigned to the same task, planning tries to find periods where all resources are available to work together.
-
-Periods are searched "as soon as possible".
-
-If only one resource is assigned, this planning mode is exactly the same as "As soon as possible".
-
-If one resource is assigned more work than the other, the extra work is planned after working together periods.
-
-.. rubric:: Constraint by date
-
-The validated start or end date field must be set.
-
-  .. compound:: **Must not start before validated date**
-
-     The task must not begin before a specific date.
-
-  .. compound:: **As late as possible**
-
-     The task is planned backward from end to start.
-     
-     "Floating" backward planning is not possible, validated end date must be defined. 
-
-
-.. rubric:: Recurrent activities
-
-* Allows to evenly distribute work between two dates.
-* Used for management recurrent activities.
-* The validated dates fields must be set.
-
-
-
-.. Warning::
-
-    Examples of the planning modes upcoming are based on 2 work days to plan on 10 days.
-
-
-.. compound:: **Regular between dates**
- 
-Work will be evenly divided between on working days. For instance, 0.2 days during 10 days.
-
-.. compound:: **Regular in full days**
- 
-Work will be distributed on full day between on working days.
-
-.. list-table::
-           :widths: 30,9,9,9,9,9,9,9,9,9,9
-           :header-rows: 1
-           :stub-columns: 1
-           :align: left
-
-           * - Day
-             - 1
-             - 2
-             - 3
-             - 4
-             - 5
-             - 6
-             - 7
-             - 8
-             - 9
-             - 10
-           * - Distribution
-             - 0
-             - 0
-             - 0
-             - 0
-             - 1
-             - 0
-             - 0
-             - 0
-             - 0
-             - 1
-
-       
-
-.. compound:: **Regular in half days**
-
-Work will be distributed on half of the day between on working days.
-
-
-.. list-table::
-           :widths: 30,9,9,9,9,9,9,9,9,9,9
-           :header-rows: 1
-           :stub-columns: 1
-           :align: left
-
-           * - Day
-             - 1
-             - 2
-             - 3
-             - 4
-             - 5
-             - 6
-             - 7
-             - 8
-             - 9
-             - 10
-           * - Distribution
-             - 0
-             - 0
-             - 0.5
-             - 0
-             - 0.5
-             - 0
-             - 0
-             - 0.5
-             - 0
-             - 0.5
-
-.. compound:: **Regular in quarter days**
- 
-Work will be distributed on one quarter of the day between on working days.
-
-.. list-table::
-           :widths: 30,9,9,9,9,9,9,9,9,9,9
-           :header-rows: 1
-           :stub-columns: 1
-           :align: left
-
-           * - Day
-             - 1
-             - 2
-             - 3
-             - 4
-             - 5
-             - 6
-             - 7
-             - 8
-             - 9
-             - 10
-           * - Distribution
-             - 0
-             - 0.25
-             - 0.25
-             - 0.25
-             - 0.25
-             - 0
-             - 0.25
-             - 0.25
-             - 0.25
-             - 0.25
-
-.. compound:: Recurring (on a weekly basis)
-  
-This new mode allows reserving availability on recurring tasks on a weekly basis, for example 1/2 day every Monday, 1h every day, ... 
-    
-    Activities in this mode dynamically assign the work based on the start and end bounds:
-    
-       * start defined with a dependence End-Start or Start-Start
-       * end defined with an end-end dependency. This is the first planning mode in ProjeQtOr that defines activities whose assigned work is not fixed, but adapts to the duration of the project.
-
-
-.. rubric:: Fixed duration
-
-* The task is planned by duration.
-* The task is “floating” depending on predecessors.
-* The validated duration field must be set.
-* It is not necessary to assign resources to the task.
-* If work is assigned to the task, planning behavior is the same as "Regular between dates" but with floating task. 
-
-.. note::
-
-   If you want fixed duration with fixed start, use "Regular between dates", or use milestone to define start.
-
-.. raw:: latex
-
-    \newpage
-
-.. _progress-section-margin:
-
-Margin
-""""""
-
-Used by Project.
-
-Displays remaining margin.
-
-.. note::
-   
-   The percentage of remaining margins will be displayed on the right.
-
-.. rubric:: Margin (work)
- 
-Calculated by the scheduled work minus the sum of work reassessed.
-
-.. code:: 
-   
-   [Margin] = [Validated work] - [Reassessed work]
-   
-   [Margin (%)] = ([Validated work] - [Reassessed work]) / [Validated work] 
-
-.. rubric:: Margin (cost)
-
-Calculated by the budgeted cost (resource & expense) minus the total of reassessed cost.
-
-.. code:: 
-
-   [Margin] = [Validated cost] - [Reassessed cost]
-   
-   [Margin (%)] = ([Validated cost] - [Reassessed cost]) / [Validated cost] 
 
 
 .. _progress-section-ticket:
@@ -1316,23 +1060,15 @@ Allows tracking of tickets attached to the activity throught the "planning activ
    :alt: Dialog box - List of tickets 
    :align: center
 
- 
-.. raw:: latex
 
-    \newpage
+
+
    
 
 .. _progress-section-milestone:
 
-Milestone
-^^^^^^^^^
-
-.. only:: html
-
- .. sidebar:: See 
-
-    * :ref:`progress-section-column-def`
-    * :ref:`progress-section-monitor-indicator`
+Progress section Milestone
+--------------------------
 
 This section allows to define planning and follow progress on a milestone.
 
@@ -1368,10 +1104,6 @@ Defined according to the selected planning mode.
 Determined when the status of the milestone is “done”.
 
 
-.. rubric:: WBS
-
-Hierarchical position of the milestone in the global planning.
-
 .. rubric:: Planning mode
 
 Fixed milestone
@@ -1382,6 +1114,19 @@ Floating milestone
    
    A milestone has no duration, so there are no start and end dates for a milestone, just a single date.
    
+   
+.. rubric:: WBS
+
+Hierarchical position of the milestone in the global planning.
+
+
+.. rubric:: Color
+
+You can set a color on a milestone.
+  
+This color will be displayed on the bars of the Gantt chart.
+   
+
 .. raw:: latex
 
     \newpage
@@ -1389,43 +1134,39 @@ Floating milestone
 
 .. _progress-section-meeting:
 
-Meeting
-^^^^^^^
-
-.. only:: html
-
- .. sidebar:: See 
-
-    * :ref:`progress-section-column-def`
-    * :ref:`progress-section-consolidation`
+Progress section Meeting
+------------------------
 
 This section allows to define priority and follow progress on a meeting.
 
-.. rubric:: Validated
+ .. compound:: Validated
 
-Allows to define scheduled work and budgeted cost.
+   Allows to define scheduled work and budgeted cost.
 
-Used to consolidate validated work and cost to the project.
+   Used to consolidate validated work and cost to the project.
 
-.. rubric:: Assigned
+ .. compound:: Assigned
 
-Sum of planned work assigned to attendees and the planned cost.
+   Sum of planned work assigned to attendees and the planned cost.
 
-.. rubric:: Real
+ .. compound:: Real
 
-Sum of work done by attendees and the cost.
+   Sum of work done by attendees and the cost.
 
-.. rubric:: Left
+ .. compound:: Left
 
-Sum of planned work remaining and the remaining amount.
+   Sum of planned work remaining and the remaining amount.
 
-.. rubric:: Priority
 
-Allows to define meeting priority.
+ .. compound:: Color
 
-By default, the value is set to "1" (highest priority).
+   You can set a color on a meeting. 
+  
+   This color will be displayed on the bars of the Gantt chart.
 
-See: :ref:`Scheduling priority<scheduling-priority>`.
+
+
+
 
 .. raw:: latex
 
