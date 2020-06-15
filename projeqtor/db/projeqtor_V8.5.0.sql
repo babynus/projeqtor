@@ -253,7 +253,7 @@ CREATE TABLE `${prefix}interventioncapacity` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;
 
-CREATE INDEX interventioncapacityRef ON `${prefix}interventioncapacity` (refType, refId);
+CREATE UNIQUE INDEX interventioncapacityRef ON `${prefix}interventioncapacity` (`refType`,`refId`,`month`);
 
 ALTER TABLE `${prefix}assignment` ADD `manual` int(1) unsigned DEFAULT '0';
 ALTER TABLE `${prefix}work` ADD `manual` int(1) unsigned DEFAULT '0';
