@@ -341,7 +341,7 @@ On the order form, you can record all the information of the received order.
 
 * The scheduled work (field: "validated work") of the project will be initialized with the sum of total work from all orders.
 * The budgeted cost (field: "validated cost") of the project will be initialized with the sum of the total amount before taxes for all orders. 
-* See: :ref:`progress-section-resource`
+* See: :ref:`progress-section`
 
 .. rubric:: Bill lines section
 

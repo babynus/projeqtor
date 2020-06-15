@@ -1542,18 +1542,3 @@ When your financial elements have been linked and attached to a project expense 
 
    
    
-   
-   
-.. raw:: latex
-
-    \newpage
-
-.. index::  Financial items 
-
-.. _situation-expense:
-
-Expenses detail lines
-=====================
-
-
-   

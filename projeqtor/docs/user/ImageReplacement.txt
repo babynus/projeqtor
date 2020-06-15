@@ -1,3 +1,35 @@
+.. |greenBox| image:: images/BoxDetail_green.png
+   :alt: Planned workload 
+   :scale: 60
+
+.. |realBox| image:: images/BoxDetail_Realwork.png
+   :alt: Real work
+   :scale: 60
+
+.. |redBox| image:: images/BoxDetail_red.png
+   :alt: Excess workload
+   :scale: 60
+
+.. |blueBox| image:: images/BoxDetail_Absence.png
+   :alt: Absence
+   :scale: 60
+
+
+
+
+
+.. |BackBLC| image:: images/BackWhite.png
+   :alt: Back to chapter
+   :scale: 60
+   
+.. |Back| image:: images/Back.png
+   :alt: Back to chapter
+   :scale: 60   
+   
+   
+   
+
+
 .. |support| image:: images/iconSupport.png
    :alt: support resource
    :scale: 60

@@ -874,17 +874,10 @@ Planning modes are grouped under two types for milestone :
 
 .. seealso:: 
 
-   :ref:`Activity and Test session  planning modes<progress-section-planning-mode>` and :ref:`Milestone planning modes<planning-mode-milestone>`.
+   :ref:`Activity and Test session planning modes<progress-section-planning-mode>` and :ref:`Milestone planning modes<planning-mode-milestone>`.
 
-.. note:: 
 
-   Because ProjeQtOr does not backward planning, the planning mode "As late as possible" with no constraint date  (Floating) is not available.
-
-   **Default planning mode**
-
-   Possibility to define the default planning mode according to element type.
-   
-   See: :ref:`activity-type`, :ref:`milestone-type` and :ref:`test-session-type` screens. 
+.. _planning-mode-concept:
 
 .. rubric:: Planning element planning mode
 
@@ -900,17 +893,33 @@ several planning modes for your project elements are proposed to best manage the
 * Regular in half days
 * Regular in quarter days
 * Recurry (on weekly basis)
+* Manual planning
 
  .. compound:: Prioritized planning elements
 
    Planning elements are scheduled in this order of priority:
    
+   #. Manual planning
    #. Fixed date (Fixed milestone, Meeting)
    #. Recurrent activities - Planning modes "Regular..." (Activity, Test session)
    #. Fixed duration (Activity, Test session)
    #. Others
 
+.. note:: 
 
+   Since ProjeQtOr does not plan in advance, the "As fast as possible" planning mode without constraint date (floating point) is not available.
+
+
+   **Default planning mode**
+
+   Possibility to define the default planning mode according to element type.
+   
+   See: :ref:`activity-type`, :ref:`milestone-type` and :ref:`test-session-type` screens. 
+   
+   
+   
+   
+   
 .. _minimum-threshold:
 
 minimum threshold & not splitted work

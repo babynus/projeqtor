@@ -30,7 +30,7 @@ Depending on the profile, you can limit the visibility of resources to people in
 
 .. sidebar:: Other sections
 
-   * :ref:`Current project<progress-section-activity>`
+   * :ref:`Current project<progress-section>`
    * :ref:`Linked element<linkElement-section>`   
    * :ref:`Attachments<attachment-section>`   
    * :ref:`Notes<note-section>`
