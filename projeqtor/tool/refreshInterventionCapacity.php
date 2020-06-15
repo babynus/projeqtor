@@ -45,7 +45,7 @@ if(strlen($period)=="3"){
  $colorPM = $color;
  $month = substr($date, 0,-3);
  $month = str_replace ( '-' , "" , $month);
- $where= ' workdate="'.$date.'" and refType = "Activity" and refId='.$refId;
+ $where= ' workdate="'.$date.'" and refType = \'Activity\' and refId='.$refId;
  $obj=new PlannedWorkManual();
  $listOfDayByEtp=$obj->countGroupedSqlElementsFromCriteria(null,array('workdate','period'), $where);
  $myEtp = SqlElement::getSingleSqlElementFromCriteria("InterventionCapacity", array('refType'=>'Activity','refId'=>$refId,'month'=>$month));
@@ -66,7 +66,7 @@ if(strlen($period)=="3"){
 }else{
   $month = substr($date, 0,-3);
   $month = str_replace ( '-' , "" , $month);
-  $where= ' workdate="'.$date.'" and refType = "Activity" and period = "'.$period.'" and refId='.$refId;
+  $where= ' workdate="'.$date.'" and refType = \'Activity\' and period = \''.$period.'\' and refId='.$refId;
   $obj=new PlannedWorkManual();
   $listOfDayByEtp=$obj->countGroupedSqlElementsFromCriteria(null,array('workdate'), $where);
   $myEtp = SqlElement::getSingleSqlElementFromCriteria("InterventionCapacity", array('refType'=>'Activity','refId'=>$refId,'month'=>$month));
