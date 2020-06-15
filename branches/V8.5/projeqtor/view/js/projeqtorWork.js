@@ -813,7 +813,6 @@ function saveInterventionCapacity(refType,refId,month,id,mode) {
     value=0;
     dijit.byId("interventionActivitySelector"+refId).set("value",0);
   }
-  //
   var url = '../tool/saveInterventionCapacity.php?refType='+refType +'&refId='+refId +'&month='+month+'&value='+value+'&mode='+mode;
   dojo.xhrPut({
     url : url,
@@ -822,6 +821,7 @@ function saveInterventionCapacity(refType,refId,month,id,mode) {
     load : function(data) {
       document.getElementById('idImageInterventionActivitySelector'+refId).style.display="block";
       setTimeout("dojo.byId('idImageInterventionActivitySelector"+refId+"').style.display='none';", 1000);
+      refreshPlannedWorkManualList();
     }
   });
 }
