@@ -206,7 +206,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     }
     $table=SqlList::getListWithCrit($listType,$critArray,$column,$selection);
     if($col == 'idActivity'){
-      $activityTypeList = "(".implode(SqlList::getListWithCrit('ActivityType', array('canHaveSubActivity'=>'1', 'idle'=>'0'),'id')).")";
+      $activityTypeList = "(".implode(',' ,SqlList::getListWithCrit('ActivityType', array('canHaveSubActivity'=>'1', 'idle'=>'0'),'id')).")";
       if ($activityTypeList=='()') $activityTypeList='(0)';
       $activity = new Activity();
       $critWhere = "idActivityType in $activityTypeList";
@@ -214,6 +214,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
         $critWhere .= " and $name = $value";
       }
       $activityList = $activity->getSqlElementsFromCriteria(null,null,$critWhere);
+      if(count($activityList)>0)unset($table);
       foreach ($activityList as $id=>$act){
         $table[$act->id]=$act->name;
       }
@@ -330,23 +331,6 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
     $showIdleCriteria=$showIdle;
     if (! $obj and property_exists($listType, 'idProject'))  $showIdleCriteria=(! $limitToActiveProjects);
     $table=SqlList::getList($listType,$column,$selection, $showIdleCriteria );
-    if($col == 'idActivity'){
-      foreach ($table as $id=>$val){
-      	unset($table[$id]);
-      }
-      $activityTypeList = "(".implode(',',SqlList::getListWithCrit('Type', array('scope'=>'Activity','canHaveSubActivity'=>'1', 'idle'=>'0'),'id')).")";
-      if ($activityTypeList=='()') $activityTypeList='(0)';
-      $activity = new Activity();
-      $critWhere = "idActivityType in $activityTypeList";
-      foreach ($critArray as $crit=>$val){
-      	$critWhere .= " and $crit = $val";
-      }
-      $activityList = $activity->getSqlElementsFromCriteria(null,null,$critWhere);
-      foreach ($activityList as $id=>$act){
-      	$table[$act->id]=$act->name;
-      }
-      //if(isset($table[$obj->id]))unset($table[$obj->id]);
-    }
     if ($col=="idProject" or $col=="planning") { 
       // $wbsList will able to order list depending on WBS
     	$wbsList=SqlList::getList($listType,'sortOrder',$selection, (! $obj)?!$limitToActiveProjects:false );
