@@ -38,15 +38,14 @@ if(strlen($month)==1){
   $month = '0'.$month;
 }
 $value= RequestHandler::getValue('value');
-$mode = RequestHandler::getValue('mode');
-if($mode==0){
+$interventionCap = SqlElement::getSingleSqlElementFromCriteria('InterventionCapacity', array('refType'=>$refType,'refId'=>$refId,'month'=>$month)); 
+if(! $interventionCap->id) {
   $interventionCap = new InterventionCapacity();
   $interventionCap->fte = $value;
   $interventionCap->refId = $refId;
   $interventionCap->refType = $refType;
   $interventionCap->month = $month;
 }else{
-  $interventionCap = new InterventionCapacity($mode);
   $interventionCap->fte = $value;
 }
 $interventionCap->save();
