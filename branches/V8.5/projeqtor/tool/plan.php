@@ -47,7 +47,6 @@ $infinitecapacity=false;
 if (array_key_exists('infinitecapacity',$_REQUEST)) {
 	$infinitecapacity=true;
 }
-traceLog("infinitecapacity: $infinitecapacity");
 // Moved transaction at end of procedure (out of script plan.php) to minimize lock possibilities
 // Sql::beginTransaction();
 

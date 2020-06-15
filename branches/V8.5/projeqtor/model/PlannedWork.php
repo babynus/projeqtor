@@ -1214,7 +1214,7 @@ class PlannedWork extends GeneralWork {
   	                		    if (!$infinitecapacity) {
   	                		      $resourceOfTheGroup[$id]['capacity'][$currentDate]=$rTemp->getSurbookingCapacity($currentDate);traceLog("capacity3: $resourceOfTheGroup[$id]['capacity'][$currentDate]");
   	                		    } else {
-  	                		      $resourceOfTheGroup[$id]['capacity'][$currentDate]=999;traceLog("infinitecapacity3");
+  	                		      $resourceOfTheGroup[$id]['capacity'][$currentDate]=999;
   	                		    }
   	                		  } 
   	                		  $grpCapacity=$resourceOfTheGroup[$id]['capacity'][$currentDate]*$grp['assRate'];
