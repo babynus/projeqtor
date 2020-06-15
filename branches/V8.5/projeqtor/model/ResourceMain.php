@@ -885,13 +885,15 @@ class ResourceMain extends SqlElement {
         $result .= '</td>';
       }
       if (array_key_exists($res->id, $listVisibleLinkedObj)) {
-        $result .= '<td class="assignData" style="width:5%">#' . htmlEncode($res->id) . '</td>';
         if (!$print and  securityCheckDisplayMenu(null, get_class($res)) and securityGetAccessRightYesNo('menu'.get_class($res), 'read', '') == "YES"){
           $goto=' onClick="gotoElement(\''.get_class($res).'\',\'' . htmlEncode($res->id) . '\');" style="cursor: pointer;" ';
+        }else {
+          $goto="";
         }
+        $result .= '<td class="assignData" style="width:5%">#' . htmlEncode($res->id) . '</td>';
         $result .= '<td  class="assignData hyperlink" style="width:' . (($print)?'45':'40') . '%">';
         $result .= '      <div style="float:left !important"> ' . $res->getPhotoThumb(22).'</div>';
-         $result .='      <div style="padding-top:5px;">&nbsp;&nbsp;' . htmlEncode($res->name) . '</div>';
+        $result .='      <div style="padding-top:5px;" '.$goto.'>&nbsp;&nbsp;' . htmlEncode($res->name) . '</div>';
         $result .='</td>';
       } else {
           $result .= '<td class="assignData" style="width:5%"></td>';

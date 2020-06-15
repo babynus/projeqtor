@@ -174,7 +174,7 @@ function showProjects() {
     $width=($print)?'45':'55';
     $lstProj=implode(",",$lstProj);
     echo '<table align="center" style="width:100%; ">';
-    echo '<tr>'.'  <td class="messageHeader" colspan="'.(($showProject)?'4':'1').'">'.i18n('menuProject');
+    echo '<tr>'.'  <td class="messageHeader" colspan="'.(($showProject)?'3':'1').'">'.i18n('menuProject');
     if(!$print){
       echo '     <div id="showProjectToDay" class="ganttExpandOpened"';
       echo '      style="float:left; width:16px; height:13px;"';
@@ -218,9 +218,6 @@ function showProjects() {
       $user=getCurrentUserId();
       $colParent = SqlElement::getSingleSqlElementFromCriteria('Collapsed', array('scope'=>'todayProjectRow_'.$id, 'idUser'=>$user));
       $idProj=$id;
-      if($colParent!=""){
-        $visibleRows[]=$id;
-      }
       foreach ($subProj as $idSub=>$sub){
         $listSub[]=$idSub;
         $critArray=array('scope'=>'todayProjectRow_'.$idSub, 'idUser'=>$user);
@@ -228,6 +225,13 @@ function showProjects() {
           $visibleRows[]=$idSub;
         if($col->id=='' and $hiddenSubProj==true){
           $hiddenSubProj=false;
+        }
+        $newSub=new Project($idSub);
+        $asSub=$newSub->getSubProjectsList();
+        if($asSub){
+          foreach ($asSub as $idsub2=>$sub2){
+            $visibleRows[]=$idsub2;
+          }
         }
       }
       if($colParent->id=="" and $isSubProj   ){
@@ -310,6 +314,7 @@ function showProjects() {
         echo '<tr style="text-align: center">';
         echo '  <td class="messageData" >';
         if($subProj and !$print){
+          echo '     <input id="group_asSub_'.$idProj.'" hidden value="'.implode(',', $listSub).'">';
           echo '     <div id="group_'.$idProj.'" class="'.$class.'"';
           echo '      style="float:left; width:16px; height:13px;"';
           echo '      onclick="expandProjectInToDay(\''.$idProj.'\',\''.implode(",", $listSub).'\',\''.implode(',', $visibleRows).'\');">&nbsp;&nbsp;&nbsp;&nbsp;</div>';

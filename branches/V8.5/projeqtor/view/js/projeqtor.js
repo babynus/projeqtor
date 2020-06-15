@@ -7096,6 +7096,10 @@ function expandProjectInToDay(id,subProj,visibleRow){
   var callBack=function() {refreshTodayProjectsList();};
   if(projClass == 'ganttExpandOpened'){
     visibleRowList.forEach(function(item){
+      if(dojo.byId('group_asSub_'+item)){
+        var newItem=dojo.byId('group_asSub_'+item).value;
+        visibleRowList.push(newItem.split(','));
+      }
       saveExpanded('todayProjectRow_'+item,callBack);
     });
   }else{
