@@ -143,6 +143,8 @@ if ($planningMode=='RECW') {
 }
 $idle=RequestHandler::getBoolean('assignmentIdle');
 
+$assignment=new Assignment();
+$result=null;
 //$comment=htmlEncode($_REQUEST['assignmentComment']);
 $comment=$_REQUEST['assignmentComment']; // Must not escape : will be done on display
 $resourceList=array($idResource=>$idResource);
@@ -297,7 +299,12 @@ if($planningMode == 'MAN' and $mode =='edit'){
   echo '<input id="idAssignment" name="idAssignment" type="hidden" value="'.$assignment->id.'"/>';
 }
 $status = getLastOperationStatus($result);
-echo '<input id="lastOperationStatus" name="lastOperationStatus" type="hidden" value="'.$status.'"/>';
-displayLastOperationStatus($result);
+if ($result==null) {
+  echo '<div class="messageNO_CHANGE" >'.i18n("messageNoChange").' '.i18n("Assignment").'</div>';
+  echo '<input id="lastOperationStatus" name="lastOperationStatus" type="hidden" value="NO_CHANGE"/>';
+} else {
+   echo '<input id="lastOperationStatus" name="lastOperationStatus" type="hidden" value="'.$status.'"/>';
+   displayLastOperationStatus($result);
+}
 // Message of correct saving
 ?>
