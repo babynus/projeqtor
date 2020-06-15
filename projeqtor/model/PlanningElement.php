@@ -416,7 +416,7 @@ class PlanningElement extends SqlElement {
         $this->realEndDate=null;
       }
       if(!$this->isManualProgress){
-    	 $this->progress = round($this->realWork / ($this->realWork + $this->leftWork) * 100);
+    	  $this->progress = ($this->realWork)?round($this->realWork / ($this->realWork + $this->leftWork) * 100):0;
       }
     }
     if ($this->validatedWork!=0) {
