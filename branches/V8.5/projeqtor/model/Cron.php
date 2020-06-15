@@ -826,23 +826,24 @@ class Cron {
     $paramAttachDir=Parameter::getGlobalParameter('paramAttachmentDirectory');
     $pathSeparator=Parameter::getGlobalParameter('paramPathSeparator');
     if (substr($paramAttachDir, -1)!=$pathSeparator) $paramAttachDir.=$pathSeparator;
-    $uploaddir = $paramAttachDir . "emails" . $pathSeparator;
-    if (! file_exists($uploaddir)) {
-      mkdir($uploaddir,0777,true);
+    $uploaddirMail = $paramAttachDir . "emails" . $pathSeparator;
+    $uploaddirAttach = $paramAttachDir;
+    if (! file_exists($uploaddirMail)) {
+      mkdir($uploaddirMail,0777,true);
     }
     
     $imapFilterCriteria=Parameter::getGlobalParameter('imapFilterCriteria');
     if (! $imapFilterCriteria) { $imapFilterCriteria='UNSEEN UNDELETED'; }
+    if (file_exists ( $uploaddirMail )) {
+      purgeFiles ( $uploaddirMail, null );
+    }
     foreach ($lstIMb as $mb){
-      $inputMailbox = new ImapMailbox($mb->serverImap,$mb->imapUserAccount,$mb->pwdImap,$uploaddir,'utf-8');
+      $inputMailbox = new ImapMailbox($mb->serverImap,$mb->imapUserAccount,$mb->pwdImap,$uploaddirMail,'utf-8');
       $mails = array();
       enableCatchErrors();
       $mailsIds = null;
       try {
         $mailsIds = $inputMailbox->searchMailBox($imapFilterCriteria);
-        if (file_exists ( $uploaddir )) {
-          purgeFiles ( $uploaddir, null );
-        }
       }catch (Exception $e) {
         $mb->failedRead += 1;
         if($mb->failedRead == 3) {
@@ -861,8 +862,7 @@ class Cron {
         $result = "";
         $failMessage = false;
         $mail = $inputMailbox->getMail($mailId);
-        $mailFrom = $mail->fromAddress;
-        
+        $mailFrom = $mail->fromAddress;      
         $limitOfInputPerHour = $mb->limitOfInputPerHour;
         $inputHistory = new InputMailboxHistory();
         $now = date('Y-m-d H:i:s');
@@ -909,23 +909,52 @@ class Cron {
           if($knowUser)$ticket->idContact = $knowUser->id;
           $ticket->save();
           if($mb->allowAttach==1){
-            $sizeAttach = $mb->sizeAttachment;
+            $sizeAttach = ($mb->sizeAttachment)*1024*1024;
             $listAtt = $mail->getAttachments();
-            debugLog("Treat Attachments");
             foreach ($listAtt as $att){
               $attch = new Attachment();
               $attch->refType = 'Ticket';
               $attch->refId = $ticket->id;
-              $namefile = explode("\\", $att->filePath);
-              $nbNamefile = count($namefile);
-              $namefile = $namefile[$nbNamefile-1];
-              $attch->fileName = $namefile;
-              $attch->subDirectory = str_replace(Parameter::getGlobalParameter('paramAttachmentDirectory'),'${attachmentDirectory}',$uploaddir);
+              $attch->idPrivacy=1;
+              $namefileWithPath = $att->filePath;
+              $embededImg='src="cid:'.$att->id.'"';
+              if (strpos($ticket->description, $embededImg)!=0) {
+                // This is an embeded image, do not save as attachement but as image embeded 
+                rename($att->filePath, '../files/images/'.$att->id);
+                $ticket->description=str_replace($embededImg, 'src="../files/images/'.$att->id.'"', $ticket->description);
+                $ticket->_noHistory=true;
+                $ticket->save();
+                continue; // Do not trat as attachment
+              }
+              $attch->fileName = $att->name;
+              $ext = strtolower ( pathinfo ( $attch->fileName, PATHINFO_EXTENSION ) );
+              if (substr($ext,0,3)=='php' or substr($ext,0,3)=='pht' or substr($ext,0,3)=='sht') {
+                $attch->fileName.=".projeqtor";
+              }           
               $attch->creationDate = date('Y-m-d H:i:s');
               $attch->fileSize = filesize($att->filePath);
               $attch->mimeType = mime_content_type($att->filePath);
               if($sizeAttach-$attch->fileSize > 0){
                 $attch->save();
+                $sizeAttach-=$attch->fileSize;
+              }
+              $uploaddir = $uploaddirAttach . "attachment_" . $attch->id . $pathSeparator;
+              if (! file_exists($uploaddir)) {
+                mkdir($uploaddir,0777,true);
+              }
+              $paramFilenameCharset=Parameter::getGlobalParameter('filenameCharset');
+              if ($paramFilenameCharset) {
+                $uploadfile = $uploaddir . iconv("UTF-8", $paramFilenameCharset.'//TRANSLIT//IGNORE',$attch->fileName);
+              } else {
+                $uploadfile = $uploaddir . $attch->fileName;
+              }
+              if ( ! rename($namefileWithPath, $uploadfile)) {
+                $error = htmlGetErrorMessage(i18n('errorUploadFile',array('hacking')));
+                errorLog($error);
+                $attch->delete();
+              } else {
+                $attch->subDirectory = str_replace(Parameter::getGlobalParameter('paramAttachmentDirectory'),'${attachmentDirectory}',$uploaddir);
+                $otherResult=$attch->save();
               }
             }
           }
@@ -946,12 +975,9 @@ class Cron {
         $inputMailboxHistory->result = $result;
         $inputMailboxHistory->save();
         if(! $failMessageLimit){
-          debugLog("Mark mail as read");
           $inputMailbox->markMailAsRead($mailId);
         } else {
-          debugLog("Mark mail as unread");
           $inputMailbox->markMailAsUnread($mailId);
-          debugLog($mailId);
         }
         if(!$failMessage){
           $mb->lastInputDate = date("Y-m-d H:i:s");
@@ -963,6 +989,9 @@ class Cron {
         $mb->save();
         
       }
+    }
+    if (file_exists ( $uploaddirMail )) {
+      purgeFiles ( $uploaddirMail, null );
     }
     //end gautier
     
