@@ -1027,6 +1027,7 @@
             }
             if (substr($formatter[$nbFields],0,8)=='iconName') {
               $nameClass=substr($id,4);
+              if (Sql::isPgsql()) $nameClass=strtolower($nameClass);
               if ($val and property_exists($nameClass,'icon')) {
                 $val=$val.'#!#'.SqlList::getFieldFromId($nameClass,$line['id'.$nameClass], 'icon');
               }
