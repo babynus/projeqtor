@@ -807,13 +807,13 @@ function selectInterventionActivity(refType,refId,peId) {
   saveDataToSession('selectActivityPlannedWorkManual', refId);
 }
 
-function saveInterventionCapacity(refType,refId,month,id,mode) {
+function saveInterventionCapacity(refType,refId,month,id) {
   var value=dijit.byId("interventionActivitySelector"+refId).get("value");
   if(isNaN(value) || value==null){
     value=0;
     dijit.byId("interventionActivitySelector"+refId).set("value",0);
   }
-  var url = '../tool/saveInterventionCapacity.php?refType='+refType +'&refId='+refId +'&month='+month+'&value='+value+'&mode='+mode;
+  var url = '../tool/saveInterventionCapacity.php?refType='+refType +'&refId='+refId +'&month='+month+'&value='+value;
   dojo.xhrPut({
     url : url,
     form : 'listFormPlannedWorkManual',

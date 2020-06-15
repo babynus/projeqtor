@@ -562,7 +562,7 @@ class PlannedWorkManual extends GeneralWork {
         					  value="'.$valueFte.'"
                     style="padding:1px;background:none;max-width:100%; box-sizing:border-box;display:block;border:1px solid #A0A0A0 !important;margin:2px 0px" >
                      <script type="dojo/method" event="onChange">
-                      saveInterventionCapacity("'.$pe->refType.'",'.$pe->refId.','.$monthYear.','.$pe->id.','.$mode.'); 
+                      saveInterventionCapacity("'.$pe->refType.'",'.$pe->refId.','.$monthYear.','.$pe->id.'); 
                      </script>';
         echo $keyDownEventScript;
         echo '</div>';
