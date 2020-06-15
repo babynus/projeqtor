@@ -871,10 +871,9 @@ class Cron {
         $date = date_format($date, 'Y-m-d H:i:s');
         $where =  " idInputMailbox = ".$mb->id." and date >='" . $date . "'" ;
         $nbInputHistory = $inputHistory->countSqlElementsFromCriteria(null,$where);
-        if($nbInputHistory > $limitOfInputPerHour){
+        if($nbInputHistory >= $limitOfInputPerHour){
           $mb->idle=1;
           $result.= i18n('colLimitOfInputPerHour');
-          debugLog(i18n('colLimitOfInputPerHour'));
           $failMessage = true;
           $failMessageLimit = true;
         }
@@ -952,6 +951,7 @@ class Cron {
         } else {
           debugLog("Mark mail as unread");
           $inputMailbox->markMailAsUnread($mailId);
+          debugLog($mailId);
         }
         if(!$failMessage){
           $mb->lastInputDate = date("Y-m-d H:i:s");
