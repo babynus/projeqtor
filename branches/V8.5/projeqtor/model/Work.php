@@ -159,34 +159,42 @@ class Work extends GeneralWork {
       $list=$pw->getSqlElementsFromCriteria($crit, null, null, 'workDate asc');
       $needReplanOtherProjects=(count($list)==0)?true:false;
       //$deletManPlan=false;
-      while ($additionalWork>0 and count($list)>0) {
-        $pw=array_shift($list);
-        if ($pw->work > $additionalWork) {
-          $pw->work-=$additionalWork;
-          $pw->save();
-          $additionalWork=0;
-        } else {
-          $additionalWork-=$pw->work;
-//             if($manualPlan and !$deletManPlan){
-//               $deletManPlan=true;
-//            }
-           if(!$manualPlan or($manualPlan and $pw->workDate<=$toDay)){
-             $pw->delete();
-           }
+      if ($manualPlan) {
+        foreach ($list as $pw) {
+          $pw->delete();
         }
-        if (count($list)==0 and isset($crit['workDate']) ) {
-          $needReplanOtherProjects=true;
-          unset($crit['workDate']);
-          $list=$pw->getSqlElementsFromCriteria($crit, null, null, 'workDate asc');
+      } else {
+        while ($additionalWork>0 and count($list)>0) {
+          $pw=array_shift($list);
+          if ($pw->work > $additionalWork) {
+            $pw->work-=$additionalWork;
+            $pw->save();
+            $additionalWork=0;
+          } else {
+            $additionalWork-=$pw->work;
+            $pw->delete();
+          }
+          if (count($list)==0 and isset($crit['workDate']) ) {
+            $needReplanOtherProjects=true;
+            unset($crit['workDate']);
+            $list=$pw->getSqlElementsFromCriteria($crit, null, null, 'workDate asc');
+          }
         }
       }
       //florent
       if($manualPlan){
         $pwm= new PlannedWorkManual();
+        $pwmTable=$pwm->getDatabaseTableName();
+        $pw=new PlannedWork();
+        $pwTable=$pw->getDatabaseTableName();
+        $w=new Work();
+        $wTable=$w->getDatabaseTableName();
         $date=($this->workDate>$toDay)?$toDay:$this->workDate;
-        $where="idAssignment=$this->idAssignment and refType='$this->refType' and refId=$this->refId and idResource=$this->idResource and workDate<='$date'";
-        $pw->purge($where);
-        $pwm->purge($where);
+        $where="idAssignment=$this->idAssignment and refType='$this->refType' and refId=$this->refId and idResource=$this->idResource and workDate<'$date'";
+        $wherePw=$where." and exists (select 'x' from $wTable w where w.workDate=$pwTable.workDate and w.idResource=$pwTable.idResource)";
+        $wherePwm=$where." and exists (select 'x' from $wTable w where w.workDate=$pwmTable.workDate and w.idResource=$pwmTable.idResource)";
+        $pw->purge($wherePw);
+        //$pwm->purge($wherePwm);
       }
       //
       if ($needReplanOtherProjects) {
