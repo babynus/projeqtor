@@ -860,6 +860,7 @@ class Cron {
       foreach ($mailsIds as $mailId){
         if($mb->idle==1) break;
         $result = "";
+        $resultTicket=null;
         $failMessage = false;
         $mail = $inputMailbox->getMail($mailId);
         $mailFrom = $mail->fromAddress;      
@@ -894,7 +895,7 @@ class Cron {
         
         $ticket = new Ticket();
         if($result == ""){
-          $ticket->name = $mail->subject;
+          $ticket->name = mb_substr($mail->subject,0,100);
           $ticket->idProject = $mb->idProject;
           $ticket->idTicketType = $mb->idTicketType;
           $ticket->idActivity = $mb->idActivity;
@@ -907,8 +908,8 @@ class Cron {
           $res = new Resource();
           $knowUser = $res->getSingleSqlElementFromCriteria('Resource',array('email'=>$mailFrom,'isContact'=>1));
           if($knowUser)$ticket->idContact = $knowUser->id;
-          $ticket->save();
-          if($mb->allowAttach==1){
+          $resultTicket=$ticket->save();
+          if(getLastOperationStatus($resultTicket)=='OK' and $mb->allowAttach==1){
             $sizeAttach = ($mb->sizeAttachment)*1024*1024;
             $listAtt = $mail->getAttachments();
             foreach ($listAtt as $att){
@@ -965,13 +966,12 @@ class Cron {
         $inputMailboxHistory->title = $mail->subject;
         $inputMailboxHistory->adress = $mailFrom;
         $inputMailboxHistory->date = date("Y-m-d H:i:s");
-        if($result == ""){
+        if($result == "" and getLastOperationStatus($resultTicket)=='OK'){
           $result = i18n('ticketInserted').' : #'.$ticket->id;
         }else{
-          $result = i18n('ticketRejected').' : '.$result;
+          $result = mb_substr(i18n('ticketRejected').' : '.(($result!=='')?$result:strip_tags(getLastOperationMessage($resultTicket))),0,200);
           $failMessage=true;
         }
-        debugTraceLog("Mailbox $mb->serverImap for $mb->imapUserAccount : $result"); // Will be a debug level trace
         $inputMailboxHistory->result = $result;
         $inputMailboxHistory->save();
         if(! $failMessageLimit){
