@@ -92,6 +92,7 @@ class ActivityType extends Type {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
     parent::__construct($id,$withoutDependentObjects);
+    if (!$this->id) $this->canHaveSubActivity=1;
   }
 
   
