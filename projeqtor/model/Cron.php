@@ -938,6 +938,8 @@ class Cron {
               if($sizeAttach-$attch->fileSize > 0){
                 $attch->save();
                 $sizeAttach-=$attch->fileSize;
+              } else {
+                break;
               }
               $uploaddir = $uploaddirAttach . "attachment_" . $attch->id . $pathSeparator;
               if (! file_exists($uploaddir)) {
