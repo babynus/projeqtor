@@ -251,6 +251,8 @@ See: :ref:`asset-management`
 
 
 .. index:: Resource (Function & Cost definition)   
+
+.. _function-cost-resource:
    
 .. rubric:: Function and cost zone
 

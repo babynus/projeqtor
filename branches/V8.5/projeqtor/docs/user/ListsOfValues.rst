@@ -4,8 +4,10 @@
 
 .. index:: Function - Lists of values
 
-Lis of Values
-#############
+.. _list-of-values:
+
+List of Values
+##############
 
 Each screen in List of values allows to define your own values.
 
@@ -1163,10 +1165,11 @@ See: :ref:`incomes<renewal>`
             
 
             
-Models
-******
+Predefined situation
+********************
 
-Allows you to define and create your own list of equipment models. These values are used in the IT asset management screens.
+xoixoioxioxioix
+
 
 .. rubric:: Section Description
 
@@ -1182,14 +1185,46 @@ Allows you to define and create your own list of equipment models. These values 
      - Unique Id for this value.
    * - |RequiredField| Name
      - Name of this value.
-   * - Asset type 
-     - Type of equipment. See: :ref:`List of Types<asset-type>`
-   * - Brand
+   * - Element 
+     - Type of element affected
+   * - Type
      - Name of the :ref:`brands` 
+   * - Sort order 
+     - Number which defines the display order of the finacial elements
+   * - Financial situation
+     - The financial situation which will be taken into account  
    * - :term:`Closed`
      - Flag to indicate this value is archived. 
             
+
+.. _intervention-mode-value:
             
-            
+Intervention modes
+******************
+
+Allows you to define and create your own list of interventions mode. 
+
+These values are used in the :ref:`planned interventions<planned-interventions>` screens and :ref:`view interventions<view-interventions>`.
+
+.. rubric:: Section Description
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :widths: 20, 80
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for this value.
+   * - |RequiredField| Name
+     - Name of this value.
+   * - |RequiredField| Letter
+     - Letter displayed on the intervention schedule and which refers to the corresponding intervention mode  
+   * - Sort order 
+     - Number which defines the display order of intervention modes on the planned interventions and view interventions screen
+   * - :term:`Closed`
+     - Flag to indicate this value is archived.             
             
             

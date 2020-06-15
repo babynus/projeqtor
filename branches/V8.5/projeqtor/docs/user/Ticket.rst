@@ -406,7 +406,12 @@ Priority numeric value is determined by a simple equation as follows:
 
 
 
+.. _ticket-fromemail:
 
+Receive tickets from emails
+"""""""""""""""""""""""""""
+
+Under construction.
 
 
 

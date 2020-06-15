@@ -19,22 +19,25 @@ Its particularity, in addition to its completeness, is to be oriented towards qu
 
     \newpage
     
-What's new in version 8.4 ?
+What's new in version 8.5 ?
 ---------------------------
 
-Find in this manual, every 3 months, the latest news integrated into ProjeQtOr   
+Find in this manual, every 3 months, the latest features integrated into ProjeQtOr.
 
+We offer you a small overview of the major developments and you will find the full list of developments covered in the update here_.  
+
+.. _here: https://www.projeqtor.org/en/product-en/downloads/change-history-en
 
 .. container:: 
    
-   **Asset Management**
+   **Planned Interventions**
 
-   .. image:: /images/iconAsset.png
+   .. image:: /images/iconPlannedWorkManual.png
       :align: center
       
-   Projeqtor now includes the management of your IT equipment and your network.
+   ProjeQtOr offers you a new planning mode which allows you to manually plan half days.
    
-   :ref:`asset-management`
+   :ref:`planned-interventions`
    
    
    
@@ -42,14 +45,14 @@ Find in this manual, every 3 months, the latest news integrated into ProjeQtOr
 
 .. container:: 
 
-   **Supplier and Client contract**
+   **Receive Tickets from Emails**
 
-   .. image:: /images/iconSupplierContract.png
+   .. image:: /images/iconInputMailbox.png
       :align: center
 
-   Follow the details of your customer or supplier contracts with a view of the Gantt chart.
+   Vous pouvez désormais recevoir vos billets directement dans projeqtor par e-mails.
          
-   :ref:`supplier-contrat` et :ref:`client-contract`
+   :ref:`ticket-fromemail`
    
    
    
@@ -57,36 +60,17 @@ Find in this manual, every 3 months, the latest news integrated into ProjeQtOr
 
 .. container:: 
 
-   **Attachments on emails**
+   **Progress in units of work**
 
-   .. image:: /images/iconAttachment.png
+   .. image:: /images/iconUnitWork.png
       :align: center
       
-   You can now attach the attached files to the detail of the element. 
+   You can now follow the progress of your project in unit of work. 
          
-   :ref:`Email detail<email-detail>`
+   :ref:`Technical progress<technical-progress>`
    
-   
-   
-   
-   
-
-.. container:: 
-
-   **Financial situation**
-
-   .. image:: /images/iconSituation.png
-      :align: center
-      
-   Financial follow-up on the elements of expenses and incomes.
-         
-   :ref:`financial-situation`
-      
 
       
-And others news_ that you can discover on the Change History web page
-
-.. _news: https://www.projeqtor.org/en/product-en/downloads/change-history-en
 
 
 
