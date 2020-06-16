@@ -23,23 +23,23 @@ ALTER TABLE `${prefix}type` ADD COLUMN `icon` varchar(100);
 ALTER TABLE `${prefix}globalview` ADD COLUMN `creationDate` datetime DEFAULT NULL;
 
 ALTER TABLE `${prefix}planningelement` 
-ADD COLUMN `unitToDeliver` int(5) unsigned DEFAULT NULL,
-ADD COLUMN `unitToRealise` int(5) unsigned DEFAULT NULL,
-ADD COLUMN `unitRealised` int(5) unsigned DEFAULT NULL,
-ADD COLUMN `unitLeft` int(5) unsigned DEFAULT NULL,
-ADD COLUMN `unitProgress` decimal(7,2) DEFAULT NULL,
+ADD COLUMN `unitToDeliver` int(6) unsigned DEFAULT NULL,
+ADD COLUMN `unitToRealise` int(6) unsigned DEFAULT NULL,
+ADD COLUMN `unitRealised` int(6) unsigned DEFAULT NULL,
+ADD COLUMN `unitLeft` int(6) unsigned DEFAULT NULL,
+ADD COLUMN `unitProgress` decimal(8,2) DEFAULT NULL,
 ADD COLUMN `idProgressMode` int(12) unsigned DEFAULT NULL,
-ADD COLUMN `unitWeight` decimal(7,2) DEFAULT NULL,
+ADD COLUMN `unitWeight` decimal(8,2) DEFAULT NULL,
 ADD COLUMN `idWeightMode` int(12) unsigned DEFAULT NULL;
 
 ALTER TABLE `${prefix}planningelementbaseline` 
-ADD COLUMN `unitToDeliver` int(5) unsigned DEFAULT NULL,
-ADD COLUMN `unitToRealise` int(5) unsigned DEFAULT NULL,
-ADD COLUMN `unitRealised` int(5) unsigned DEFAULT NULL,
-ADD COLUMN `unitLeft` int(5) unsigned DEFAULT NULL,
-ADD COLUMN `unitProgress` decimal(7,2) DEFAULT NULL,
+ADD COLUMN `unitToDeliver` int(6) unsigned DEFAULT NULL,
+ADD COLUMN `unitToRealise` int(6) unsigned DEFAULT NULL,
+ADD COLUMN `unitRealised` int(6) unsigned DEFAULT NULL,
+ADD COLUMN `unitLeft` int(6) unsigned DEFAULT NULL,
+ADD COLUMN `unitProgress` decimal(8,2) DEFAULT NULL,
 ADD COLUMN `idProgressMode` int(12) unsigned DEFAULT NULL,
-ADD COLUMN `unitWeight` decimal(7,2) DEFAULT NULL,
+ADD COLUMN `unitWeight` decimal(8,2) DEFAULT NULL,
 ADD COLUMN `idWeightMode` int(12) unsigned DEFAULT NULL;
 
 CREATE TABLE `${prefix}progressmode` (
