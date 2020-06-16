@@ -838,6 +838,7 @@ class Cron {
       purgeFiles ( $uploaddirMail, null );
     }
     foreach ($lstIMb as $mb){
+      
       $inputMailbox = new ImapMailbox($mb->serverImap,$mb->imapUserAccount,$mb->pwdImap,$uploaddirMail,'utf-8');
       $mails = array();
       enableCatchErrors();
@@ -850,6 +851,8 @@ class Cron {
           $mb->idle = 1;
         }
         $mb->save();
+        errorLog("ImapMailbox($mb->serverImap,$mb->imapUserAccount,$mb->pwdImap,$uploaddirMail,'utf-8')");
+        continue;
       }
       disableCatchErrors();
       if(!$mailsIds) {
