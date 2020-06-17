@@ -851,7 +851,8 @@ class Cron {
           $mb->idle = 1;
         }
         $mb->save();
-        errorLog("ImapMailbox($mb->serverImap,$mb->imapUserAccount,$mb->pwdImap,$uploaddirMail,'utf-8')");
+        debugTraceLog("ImapMailbox($mb->serverImap,$mb->imapUserAccount,$mb->pwdImap,$uploaddirMail,'utf-8')");
+        errorLog(imap_last_error());
         continue;
       }
       disableCatchErrors();
