@@ -729,6 +729,9 @@ class Parameter extends SqlElement {
        	'OpenDocument'=>i18n('OpenDocument')
        	);
        	break;
+      case 'orderNoteMail':
+        $list = array('YES'=>i18n('displayYes'),
+            'NO'=>i18n('displayNo'));
       case 'notReceiveHisOwnEmails':
    	    $list = array('NO'=>i18n('displayNo'),
    	    'YES'=>i18n('displayYes'));
@@ -795,7 +798,8 @@ class Parameter extends SqlElement {
                            'markAlertsAsRead'=>'specific',
                            'showSubscribedItems'=>'specific',
                          'sectionMail'=>'section',
-                           "notReceiveHisOwnEmails"=>'list',
+                           'notReceiveHisOwnEmails'=>'list',
+                           'orderNoteMail'=>'list',
                        'column_Aut_2'=>'newColumn',
                          'tabConfiguration'=>'section',
                            "directAccessToComponentList"=>'list',                        
@@ -936,6 +940,7 @@ class Parameter extends SqlElement {
       	                      // MTY - EXPORT XLS OR ODS
       	                      "globalNoteDiscussionMode"=>'list',
       	                      "notReceiveHisOwnEmails"=>'list',
+      	                      'orderNoteMail'=>'list',
       	                      "clientElementList"=>'list',
       	                'tabMiscellaneous'=>"tab",
       	                  'columnMiscellanousLeft'=>'newColumn',
