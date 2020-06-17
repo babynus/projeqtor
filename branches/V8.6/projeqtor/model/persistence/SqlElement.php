@@ -6178,7 +6178,11 @@ function getNotesHtmlTab() {
   $html = '';
   $note = new Note();
   $critArray = array('refType' => get_class($this), 'refId' => $this->id, 'idPrivacy'=>'1');
+  $order=Parameter::getGlobalParameter("YES");
   $noteList = $note->getSqlElementsFromCriteria($critArray);
+  if($order=='YES'){
+    arsort($noteList);
+  }
   $style = 'border-top: 1px solid #7b7b7b ; border-bottom: 1px solid #7b7b7b;
             background-color:#dddddd; padding:4px;';
   $html = '<table style="width:95%; border-collapse:collapse;border:1px solid #7b7b7b;">
