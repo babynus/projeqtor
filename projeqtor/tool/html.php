@@ -143,7 +143,7 @@ function htmlDrawOptionForReference($col, $selection, $obj=null, $required=false
        $table[$selection]=SqlList::getNameFromId('Affectable', $selection);
     }
     $planningMode = null;
-    if(property_exists(get_class($obj), get_class($obj).'PlanningElement')){
+    if($obj and property_exists($obj, get_class($obj).'PlanningElement')){
       $peFld=get_class($obj)."PlanningElement";
       $pMode = new PlanningMode($obj->$peFld->idPlanningMode);
       $planningMode = $pMode->code;
