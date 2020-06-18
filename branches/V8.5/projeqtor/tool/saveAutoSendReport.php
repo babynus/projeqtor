@@ -76,7 +76,7 @@ if($action == null){
   $arrayParam = array();
   foreach ($param as $paramName=>$paramValue){
     if($paramName != 'yearSpinner' and $paramName != 'monthSpinner' and $paramName != 'weekSpinner' and $paramName != 'startDate'){
-      if(!isset($param['periodScale']) and $paramName != 'periodValue')continue;  
+      //if($paramName != 'periodScale' and !isset($param['periodScale']) and $paramName != 'periodValue')continue;  
       $arrayParam[$paramName] = $paramValue;
     }
   }
