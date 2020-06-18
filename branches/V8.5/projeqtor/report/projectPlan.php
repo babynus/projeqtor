@@ -57,8 +57,7 @@ if (array_key_exists('weekSpinner',$_REQUEST)) {
 };
 
 $user=getSessionUser();
-
-$periodType=$_REQUEST['periodType']; // not filtering as data as data is only compared against fixed strings
+$periodType=RequestHandler::getValue('periodType'); // not filtering as data as data is only compared against fixed strings
 $periodValue='';
 if (array_key_exists('periodValue',$_REQUEST))
 {
@@ -124,6 +123,7 @@ $projects=array();
 $projectsColor=array();
 $resources=array();
 $realDays=array();
+
 foreach ($lstWork as $work) {
   if (! array_key_exists($work->idResource,$resources)) {
     $resources[$work->idResource]=SqlList::getNameFromId('Affectable', $work->idResource);
