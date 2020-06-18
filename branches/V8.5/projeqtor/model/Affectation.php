@@ -392,7 +392,7 @@ public $_noCopy;
       $result.='<br/>' . i18n('errorDeleteRights');
     }*/
     $affectable=new Affectable($this->idResourceSelect);
-    if (!$affectable->isResourceTeam) {
+    if (!$affectable->isResourceTeam and !$this->idResourceTeam) {
       $prfOrder=SqlList::getFieldFromId('Profile', $this->idProfile, 'sortOrder',false);
       if (!$prfOrder) $prfOrder=0;
       $usrPrfOrder=SqlList::getFieldFromId('Profile', getSessionUser()->getProfile($this->idProject),'sortOrder',false);
@@ -402,7 +402,7 @@ public $_noCopy;
       }
     }
     
-    if (!Project::$_deleteProjectInProgress) {
+    if (!Project::$_deleteProjectInProgress and !$this->idResourceTeam) {
       //gautier #4495
       $proj = new Project($this->idProject,true);
       $topProject = $proj->getTopProjectList(true);
