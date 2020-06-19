@@ -407,6 +407,14 @@ class ActivityPlanningElementMain extends PlanningElement {
         $result.='<input type="hidden" name="confirmControl" id="confirmControl" value="save" />';
       }
     }else if($this->idActivityPlanningMode=='23' and $old->idPlanningMode!='23'){
+      //gautier #4719
+      $isPlannedWork = Parameter::getGlobalParameter('plannedWorkManualType');
+      if($isPlannedWork =='planned'){
+        $listAdmProj = Project::getAdminitrativeProjectList(true);
+        if(in_array($this->idProject, $listAdmProj)){
+          $result.='<br/>' . i18n('noPlannedWorkOnAdmProject');
+        }
+      }
       $ass=new Assignment();
       $critArray=array("idProject"=>$this->idProject,"refType"=>$this->refType,"refId"=>$this->refId);
       $assLst=$ass->getSqlElementsFromCriteria($critArray);
