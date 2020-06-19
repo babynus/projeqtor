@@ -39,6 +39,7 @@ $period= trim(RequestHandler::getValue('period'));
 if (isOffDay($date)) {
   $color="#d0d0d0";
 }
+if(!trim($refId))$refId=0;
 
 if(strlen($period)=="3"){
  $colorAM = $color;

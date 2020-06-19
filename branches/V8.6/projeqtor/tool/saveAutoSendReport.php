@@ -37,7 +37,7 @@ $monthDay = RequestHandler::getValue('monthFrequency');
 $destination = RequestHandler::getValue('destinationInput');
 $otherDestination = RequestHandler::getValue('otherDestinationInput');
 $name = RequestHandler::getValue('name');
-$name = trim(str_replace(array("'", '"','&','<','>','@','#','$','£','€','²','*','-','/','+','.',',',';',':','!','?',',','(',')','[',']','|'), "", $name));
+$name = trim(str_replace(array("'", '"','&','<','>','@','#','$','Â£','â‚¬','Â²','*','-','/','+','.',',',';',':','!','?',',','(',')','[',']','|'), "", $name));
 $sendTime = RequestHandler::getValue('sendTime');
 $hours = substr($sendTime, 1, 2);
 $minutes = substr($sendTime, 4, -3);
@@ -76,7 +76,7 @@ if($action == null){
   $arrayParam = array();
   foreach ($param as $paramName=>$paramValue){
     if($paramName != 'yearSpinner' and $paramName != 'monthSpinner' and $paramName != 'weekSpinner' and $paramName != 'startDate'){
-      if(!isset($param['periodScale']) and $paramName != 'periodValue')continue;  
+      //if($paramName != 'periodScale' and !isset($param['periodScale']) and $paramName != 'periodValue')continue;  
       $arrayParam[$paramName] = $paramValue;
     }
   }
