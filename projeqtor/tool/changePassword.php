@@ -97,10 +97,6 @@ scriptLog("changePassword.php");
    * @return void
    */
   function changePassword ($user, $newPassword, $salt, $crypto) {
-    debugLog($user);
-    debugLog($newPassword);
-    debugLog($salt);
-    debugLog($crypto);
   	Sql::beginTransaction();
     //$user->password=md5($newPassword); password is encryted in JS
     $user->password=$newPassword;
