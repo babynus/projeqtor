@@ -70,7 +70,6 @@ scriptLog("changePassword.php");
    * @return void
    */
   function passwordError($cause=null,$userIssue=false) {
-    debugLog('passwordError');
     echo '<div class="messageERROR">';
     echo i18n('invalidPasswordChange');
     if (!$cause) {
