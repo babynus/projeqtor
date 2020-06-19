@@ -106,12 +106,14 @@ class UserOld extends SqlElement {
    */ 
   function __construct($id = NULL, $withoutDependentObjects=false) {
     global $objClass;
-    $paramDefaultPassword=Parameter::getGlobalParameter('paramDefaultPassword');
+    //$paramDefaultPassword=Parameter::getGlobalParameter('paramDefaultPassword');
   	parent::__construct($id,$withoutDependentObjects);
     
   	if (! $this->id and Parameter::getGlobalParameter('initializePassword')=="YES") {
-  		$tmpSalt=hash('sha256',"projeqtor".date('YmdHis'));
-  		$this->password=hash('sha256',$paramDefaultPassword.$tmpSalt);
+//   		$tmpSalt=hash('sha256',"projeqtor".date('YmdHis'));
+//   		$this->password=hash('sha256',$paramDefaultPassword.$tmpSalt);
+  	  $this->crypto='NULL';
+  	  $this->password=User::getRandomPassword();
   	}
     if (! $this->id) {
       $this->idProfile=Parameter::getGlobalParameter('defaultProfile');
@@ -659,11 +661,12 @@ class UserOld extends SqlElement {
   	if ($old->locked and ! $this->locked) {
   		$this->loginTry=0;
   	}
-  	$paramDefaultPassword=Parameter::getGlobalParameter('paramDefaultPassword');
+  	//$paramDefaultPassword=Parameter::getGlobalParameter('paramDefaultPassword');
     if (! $this->id and Parameter::getGlobalParameter('initializePassword')=="YES") {
-      $this->salt=hash('sha256',"projeqtor".date('YmdHis'));
-      $this->password=hash('sha256',$paramDefaultPassword.$this->salt);
+//       $this->salt=hash('sha256',"projeqtor".date('YmdHis'));
+//       $this->password=hash('sha256',$paramDefaultPassword.$this->salt);
       $this->crypto='sha256';
+      $this->password=User::getRandomPassword();
     }
     $result=parent::save();
     if (! strpos($result,'id="lastOperationStatus" value="OK"')) {
