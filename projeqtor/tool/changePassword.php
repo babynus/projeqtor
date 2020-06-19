@@ -42,9 +42,9 @@ scriptLog("changePassword.php");
   if ($password=="") {
     passwordError(i18n("isEmpty"));
   }
-  if ($password==hash('sha256',Parameter::getGlobalParameter('paramDefaultPassword').$userSalt)) {
-    passwordError(i18n("isDefault"));
-  }
+//   if ($password==hash('sha256',Parameter::getGlobalParameter('paramDefaultPassword').$userSalt)) {
+//     passwordError(i18n("isDefault"));
+//   }
   $user=getSessionUser();
   if ( ! $user ) {
    passwordError(i18n("colUser").' '.i18n("undefinedValue"),true);
@@ -70,6 +70,7 @@ scriptLog("changePassword.php");
    * @return void
    */
   function passwordError($cause=null,$userIssue=false) {
+    debugLog('passwordError');
     echo '<div class="messageERROR">';
     echo i18n('invalidPasswordChange');
     if (!$cause) {
@@ -96,6 +97,10 @@ scriptLog("changePassword.php");
    * @return void
    */
   function changePassword ($user, $newPassword, $salt, $crypto) {
+    debugLog($user);
+    debugLog($newPassword);
+    debugLog($salt);
+    debugLog($crypto);
   	Sql::beginTransaction();
     //$user->password=md5($newPassword); password is encryted in JS
     $user->password=$newPassword;
