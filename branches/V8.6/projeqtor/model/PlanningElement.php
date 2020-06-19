@@ -325,7 +325,7 @@ class PlanningElement extends SqlElement {
       $colScript .= '</script>';
     }else if($colName=='unitToDeliver'){
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  if(this.value!="0" && dojo.byId("'.$this->refType.'PlanningElement_unitToRealise").value=="0"){';
+      $colScript .= '  if(this.value!="0" && dojo.byId("'.$this->refType.'PlanningElement_unitToRealise").value=="0" || dojo.byId("'.$this->refType.'PlanningElement_unitToRealise").value==""){';
       $colScript .= '   dijit.byId("'.$this->refType.'PlanningElement_unitToRealise").set("value", this.value);';
       $colScript .= '  }';
       $colScript .= '</script>';
