@@ -302,7 +302,7 @@ if (!(isset($maintenance) and $maintenance) and !(isset($batchMode) and $batchMo
         if (!$user->crypto) {
           $changePassword=true;
         } else {
-          $defaultPwd=Parameter::getGlobalParameter('paramDefaultPassword');
+          $defaultPwd=$user->getRandomPassword();
           if ($user->crypto=="md5") {
             $defaultPwd=md5($defaultPwd.$user->salt);
           } else if ($user->crypto=="sha256") {
