@@ -4468,6 +4468,11 @@ function selectFilterContinue() {
   }else if (dojo.byId('objectClass') && dojo.byId('objectClass').value){
     objectClass=dojo.byId('objectClass').value;
   } 
+  if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Kanban') {
+    compUrl+='&context=directFilterList';
+    compUrl+='&contentLoad=../view/kanbanView.php';
+    compUrl+='&container=divKanbanContainer';
+  }
   doc.loadContent(
      "../tool/displayFilterList.php?context=directFilterList&filterObjectClass="
          + objectClass + compUrl, "directFilterList", null,
@@ -4482,7 +4487,7 @@ function selectFilterContinue() {
    }else{
      setTimeout("dijit.byId('listFilterFilter').set('iconClass', 'iconFilter')",500);
    }
-  if(! window.top.dijit.byId('dialogDetail').open && dojo.byId('objectClassManual') && (dojo.byId('objectClassManual').value=='Plugin_kanban' || dojo.byId('objectClassManual').value=='Plugin_liveMeeting')){
+  if(! window.top.dijit.byId('dialogDetail').open && dojo.byId('objectClassManual') && (dojo.byId('objectClassManual').value=='Kanban' || dojo.byId('objectClassManual').value=='LiveMeeting')){
     loadContent("../view/kanbanView.php?idKanban="+dojo.byId('idKanban').value, "divKanbanContainer");
   }else if (!dijit.byId('filterDynamicParameter').get("checked")) {
     if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Planning' && ! window.top.dijit.byId('dialogDetail').open) {
@@ -4698,9 +4703,15 @@ function selectDynamicFilterContinue() {
 	  if (dojo.byId('objectClassList') && dojo.byId('objectClassList').value) objectClass=dojo.byId('objectClassList').value;
 	  else if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value) objectClass=dojo.byId("objectClassManual").value;
     else if (dojo.byId('objectClass') && dojo.byId('objectClass').value) objectClass=dojo.byId('objectClass').value;
+	  var compUrl='';
+	  if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Kanban') {
+	    compUrl+='&context=directFilterList';
+	    compUrl+='&contentLoad=../view/kanbanView.php';
+	    compUrl+='&container=divKanbanContainer';
+	  }
     doc.loadContent(
 	      "../tool/displayFilterList.php?context=directFilterList&filterObjectClass="
-	          + objectClass, "directFilterList", null,
+	          + objectClass+compUrl, "directFilterList", null,
 	      false, 'returnFromFilter', false);
 	  if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Planning' && ! window.top.dijit.byId('dialogDetail').open) {
       refreshJsonPlanning();
@@ -8041,7 +8052,11 @@ function moveFilterListColumn() {
           var objectClass=dojo.byId('objectClass').value;
         } 
         var compUrl=(window.top.dijit.byId("dialogDetail").open) ? '?comboDetail=true' : '';
-        
+        if (dojo.byId("objectClassManual") && dojo.byId("objectClassManual").value=='Kanban') {
+          compUrl+='&context=directFilterList';
+          compUrl+='&contentLoad=../view/kanbanView.php';
+          compUrl+='&container=divKanbanContainer';
+        }
         doc.loadContent(
             "../tool/displayFilterList.php?context=directFilterList&filterObjectClass="
                 + objectClass + compUrl, "directFilterList", null,

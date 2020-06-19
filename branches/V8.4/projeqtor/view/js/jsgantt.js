@@ -2386,7 +2386,7 @@ JSGantt.exitBarLink = function (idRow) {
 	  document.body.style.cursor='default';
 	}
 	if (dojo.byId('rightTableBarDetail') && ! ongoingRunScriptContextMenu) {
-	  setTimeout("dojo.byId('rightTableBarDetail').innerHTML='';dojo.byId('rightTableBarDetail').style.display='none';",500);
+	  setTimeout("if (dojo.byId('rightTableBarDetail')) {dojo.byId('rightTableBarDetail').innerHTML='';dojo.byId('rightTableBarDetail').style.display='none';}",500);
 	}
 };
 
