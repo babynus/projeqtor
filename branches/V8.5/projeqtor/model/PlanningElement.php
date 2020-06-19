@@ -2108,7 +2108,6 @@ class PlanningElement extends SqlElement {
       if ($pe->refType=='Project' and ! $copySubProjects) continue;
       $item=new $pe->refType($pe->refId);
       $type='id'.get_class($item).'Type';
-      debugLog($item);
       $newItem=$item->copyTo(get_class($item),$item->$type, $item->name, ($toProject)?$toProject:$pe->idProject, $copyToOrigin, 
                              $copyToWithNotes, $copyToWithAttachments,$copyToWithLinks, 
                              $copyAssignments, $copyAffectations, $toProject, (get_class($newObj)=='Activity')?$newObj->id:null );
