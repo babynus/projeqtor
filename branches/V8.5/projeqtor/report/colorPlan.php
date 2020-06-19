@@ -122,7 +122,6 @@ if ($paramProject!='') {
 //   }
 //   $where.= ")";
 }
-
 $order="";
 $work=new Work();
 $lstWork=$work->getSqlElementsFromCriteria(null,false, $where, $order);
@@ -148,6 +147,11 @@ $resourcesToShow=$commonElement;
 if($paramProject){
   $proj=new Project($paramProject);
   $listProj=$proj->getRecursiveSubProjectsFlatList(false,true);
+  if ($paramShowAdminProj) {
+    foreach (Project::getAdminitrativeProjectList(true) as $idP=>$nameP) {
+      $listProj[$idP]=$nameP;
+    }
+  }
   $resourcesAffect = SqlList::getListWithCrit('Affectation', array('idProject'=>array_keys($listProj)),'idResource');
   $resourcesProject = SqlList::getListWithCrit('ResourceAll', array('id'=>$resourcesAffect));
   $resourcesToShow = array_intersect($resourcesToShow,$resourcesProject);
