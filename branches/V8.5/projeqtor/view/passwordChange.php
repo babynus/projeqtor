@@ -153,7 +153,7 @@
             </button>
             <br/>
             <div style="height:5px">&nbsp;</div>
-            <?php if ( $user->password != md5(Parameter::getGlobalParameter('paramDefaultPassword')) ) {?>
+            <?php if ( $user->password != md5($user->getRandomPassword()) ) {?>
             <button class="largeTextButton" type="button" style="margin-left:150px;width:200px;color:#555555;" id="cancelButton" dojoType="dijit.form.Button" showlabel="true"><?php echo i18n('buttonCancel');?>
               <script type="dojo/connect" event="onClick" args="evt">
               showWait(); 
