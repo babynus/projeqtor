@@ -325,7 +325,7 @@ class PlanningElement extends SqlElement {
       $colScript .= '</script>';
     }else if($colName=='unitToDeliver'){
       $colScript .= '<script type="dojo/connect" event="onChange" >';
-      $colScript .= '  if(this.value!="0" && dojo.byId("'.$this->refType.'PlanningElement_unitToRealise").value=="0"){';
+      $colScript .= '  if(this.value!="0" && dojo.byId("'.$this->refType.'PlanningElement_unitToRealise").value=="0" || dojo.byId("'.$this->refType.'PlanningElement_unitToRealise").value==""){';
       $colScript .= '   dijit.byId("'.$this->refType.'PlanningElement_unitToRealise").set("value", this.value);';
       $colScript .= '  }';
       $colScript .= '</script>';
@@ -2108,6 +2108,7 @@ class PlanningElement extends SqlElement {
       if ($pe->refType=='Project' and ! $copySubProjects) continue;
       $item=new $pe->refType($pe->refId);
       $type='id'.get_class($item).'Type';
+      debugLog($item);
       $newItem=$item->copyTo(get_class($item),$item->$type, $item->name, ($toProject)?$toProject:$pe->idProject, $copyToOrigin, 
                              $copyToWithNotes, $copyToWithAttachments,$copyToWithLinks, 
                              $copyAssignments, $copyAffectations, $toProject, (get_class($newObj)=='Activity')?$newObj->id:null );
