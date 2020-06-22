@@ -1007,19 +1007,6 @@ static function isTheLeaveProject($id=null) {
 
   }
   public function delete() {
-    if($this->isSelectedProjectMultiple()){
-      $selectedProj = explode(',', getSessionValue('project'));
-      if(in_array($this->id, $selectedProj)){
-        $pos = array_search($this->id, $selectedProj);
-        unset($selectedProj[$pos]);
-        if(count($selectedProj) > 0){
-          setSessionValue('project', implode(',', $selectedProj));
-        }else{
-          setSessionValue('project', '*');
-        }
-      }
-    }
-    
     // MTY - LEAVE SYSTEM
     if (isLeavesSystemActiv()) {
     	if ($this->isLeaveMngProject) {
@@ -1033,7 +1020,21 @@ static function isTheLeaveProject($id=null) {
     }
     // MTY - LEAVE SYSTEM
   	$result = parent::delete();
-  	User::resetAllVisibleProjects($this->id,null);
+  	 if(getLastOperationStatus($result)=="OK"){
+  	  if($this->isSelectedProjectMultiple()){
+  	    $selectedProj = explode(',', getSessionValue('project'));
+  	    if(in_array($this->id, $selectedProj)){
+  	      $pos = array_search($this->id, $selectedProj);
+  	      unset($selectedProj[$pos]);
+  	      if(count($selectedProj) > 0){
+  	        setSessionValue('project', implode(',', $selectedProj));
+  	      }else{
+  	        setSessionValue('project', '*');
+  	      }
+  	    }
+  	  }
+  	 User::resetAllVisibleProjects($this->id,null);
+  	}
     return $result;
   }
   
