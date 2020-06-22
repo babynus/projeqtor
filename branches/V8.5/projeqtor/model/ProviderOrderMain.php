@@ -133,7 +133,8 @@ class ProviderOrderMain extends SqlElement {
       "validatedPricePerDayAmount"=>"hidden",
       "idProject"=>"required",
       "discountFrom"=>"hidden",
-      "idSituation"=>"readonly");
+      "idSituation"=>"readonly"
+  );
  
   
   private static $_colCaptionTransposition = array('idResource'=> 'responsible', 'idSituation'=>'actualSituation');
