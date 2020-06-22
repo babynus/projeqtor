@@ -6178,9 +6178,9 @@ function getNotesHtmlTab() {
   $html = '';
   $note = new Note();
   $critArray = array('refType' => get_class($this), 'refId' => $this->id, 'idPrivacy'=>'1');
-  $order=Parameter::getGlobalParameter("YES");
+  $order=Parameter::getGlobalParameter("paramOrderNoteMail");
   $noteList = $note->getSqlElementsFromCriteria($critArray);
-  if($order=='YES'){
+  if($order=='ASC'){
     arsort($noteList);
   }
   $style = 'border-top: 1px solid #7b7b7b ; border-bottom: 1px solid #7b7b7b;

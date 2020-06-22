@@ -182,19 +182,31 @@ class Work extends GeneralWork {
         }
       }
       //florent
+      $pw=new PlannedWork();
+      $pwm= new PlannedWorkManual();
       if($manualPlan){
-        $pwm= new PlannedWorkManual();
         $pwmTable=$pwm->getDatabaseTableName();
-        $pw=new PlannedWork();
         $pwTable=$pw->getDatabaseTableName();
         $w=new Work();
         $wTable=$w->getDatabaseTableName();
         $date=($this->workDate>$toDay)?$toDay:$this->workDate;
-        $where="idAssignment=$this->idAssignment and refType='$this->refType' and refId=$this->refId and idResource=$this->idResource and workDate<'$date'";
+        $where="idAssignment=$this->idAssignment and refType='$this->refType' and refId=$this->refId and idResource=$this->idResource and workDate<='$date'";
         $wherePw=$where." and exists (select 'x' from $wTable w where w.workDate=$pwTable.workDate and w.idResource=$pwTable.idResource)";
         $wherePwm=$where." and exists (select 'x' from $wTable w where w.workDate=$pwmTable.workDate and w.idResource=$pwmTable.idResource)";
         $pw->purge($wherePw);
         //$pwm->purge($wherePwm);
+      }
+      if($this->workDate<=$toDay and $this->refType=='Activity'){
+        $critArray=array("idResource"=>$this->idResource, "workDate"=>$this->workDate);
+        $where="idAssignment<>$this->idAssignment and refType<>'$this->refType' and refId<>$this->refId'";
+        $pwExist=$pw->getSqlElementsFromCriteria($critArray,null,$where);
+        foreach ($pwExist as $value){
+          $critPe=array("refType"=>$value->refType,"refId"=>$value->refId,"idProject"=>$value->idProject);
+          $pe=SqlElement::getSingleSqlElementFromCriteria('PlanningElement', $critPe);
+          if($pe->idPlanningMode=="23"){
+            $value->delete();
+          }
+        }
       }
       //
       if ($needReplanOtherProjects) {

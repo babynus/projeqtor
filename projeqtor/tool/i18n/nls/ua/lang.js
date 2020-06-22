@@ -3508,6 +3508,7 @@ paramParamMailTitleResult: "тема листа якщо модифікован�
 paramParamMailTitleStatus: "тема листа якщо зміна статусу",
 paramParamMailTitleUser: "тема листа користувачеві",
 paramParamMemoryLimitForPDF: "обмеження пам'яті для генерації PDF",
+paramParamOrderNoteMail: "order notes ascending in mail model",
 paramParamPasswordMinLength: "мінімальна довжина паролю",
 paramParamPasswordStrength: "password strength",
 paramParamReportTempDirectory: "тимчасовий каталог для звітів",
