@@ -3508,6 +3508,7 @@ paramParamMailTitleResult: "заголовок почты при изменен�
 paramParamMailTitleStatus: "загловок почты при изменении статуса",
 paramParamMailTitleUser: "заголовок почты пользователю",
 paramParamMemoryLimitForPDF: "ограничение памяти для генерации pdf",
+paramParamOrderNoteMail: "order notes ascending in mail model",
 paramParamPasswordMinLength: "минимальная длина пароля",
 paramParamPasswordStrength: "password strength",
 paramParamReportTempDirectory: "временная директория для отчетов",
