@@ -3508,6 +3508,7 @@ paramParamMailTitleResult: "título da mensagem de correio para modificação de
 paramParamMailTitleStatus: "título do email quanto o estado altera",
 paramParamMailTitleUser: "título da mensagem de correio enviada ao utilizador",
 paramParamMemoryLimitForPDF: "limite de memoria para a geração de PDF",
+paramParamOrderNoteMail: "order notes ascending in mail model",
 paramParamPasswordMinLength: "tamanho minino da password",
 paramParamPasswordStrength: "password strength",
 paramParamReportTempDirectory: "diretorio temporario para os relatorios",
