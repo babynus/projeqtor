@@ -23,7 +23,8 @@
  * about contributors at http://www.projeqtor.org 
  *     
  *** DO NOT REMOVE THIS NOTICE ************************************************/
-
+if (!isset($outMode)) $outMode='html';
+include_once('headerFunctions.php');
 $reportContext=true;
 // Header
 //echo "<page_header>";
@@ -58,25 +59,27 @@ foreach ($_REQUEST as $reqParam=>$reqValue) {
 		}
 	}
 }
-
-echo "<table style='width:100%'><tr>";
-echo "<td style='width:1%' class='reportHeader'>&nbsp;</td>";
-echo "<td style='width:10%' class='reportHeader'>" . i18n('colParameters') . "</td>";
-echo "<td style='width:1%' class='reportHeader'>&nbsp;</td>";
-echo "<td style='width:1%' >&nbsp;</td>";
-echo "<td style='width:30%'>"; 
+debugLog($headerParameters);
+if ($outMode=='excel') $headerParameters=br2nl(rtrim($headerParameters,'<br/>'));
+echo '<table _excel-name="'.i18n("menuParameter").'" style="width:100%">';
+echo '<tr>';
+if ($outMode!='excel') echo "<td style='width:1%' class='reportHeader' ".excelFormatCell('data',1,null,null,null,null,null,null,null,null,true).">&nbsp;</td>";
+echo "<td style='width:10%' class='reportHeader' ".excelFormatCell('header',20,null,null,null,null,null,null,null,null,true).">" . i18n('colParameters') . "</td>";
+if ($outMode!='excel') echo "<td style='width:1%' class='reportHeader' ".excelFormatCell('data',1,null,null,null,null,null,null,null,null,true).">&nbsp;</td>";
+if ($outMode!='excel') echo "<td style='width:1%' ".excelFormatCell('data',1,null,null,null,null,null,null,null,null,true).">&nbsp;</td>";
+echo "<td style='width:30%' ".excelFormatCell('data',50,null,null,false,'left',null,null,null,null,true).">"; 
 echo $headerParameters;
 echo "</td>";
-echo "<td align='center' style='width:40%; font-size: 150%; font-weight: bold;'>"; 
+echo "<td align='center' style='width:40%; font-size: 150%; font-weight: bold;' ".excelFormatCell('header',80,null,null,null,null,null,16,null,null, true).">"; 
 
 if (array_key_exists('reportName', $_REQUEST)) {
-  echo '<table><tr><td class="reportTableHeader" style="text-align: center; padding: 3px 10px 3px 10px;">';
+  if ($outMode!='excel') echo '<table><tr><td class="reportTableHeader" style="text-align: center; padding: 3px 10px 3px 10px;">';
   echo htmlEncode(ucfirst($_REQUEST['reportName']),'html');
-  echo '</td></tr></table>';
+  if ($outMode!='excel') echo '</td></tr></table>';
 }
 echo "</td>";
-echo "<td style='width:1%'>&nbsp;</td>";
-echo "<td style='width:15%; text-align:right'>";
+if ($outMode!='excel') echo "<td style='width:1%'>&nbsp;</td>";
+echo "<td style='width:15%; text-align:right' ".excelFormatCell('data',30,null,null,false,'right',null,null,null,null,true).">";
 echo  htmlFormatDate(date('Y-m-d')) . " " . date('H:i');
 echo "</td>";
 echo "<td style='width:1%'>&nbsp;</td>";
@@ -114,5 +117,6 @@ $arrayColors=array('#1abc9c', '#2ecc71', '#3498db',
 '#8e44ad', '#2c3e50', '#f1c40f', '#e67e22', '#99CC00',
 '#e74c3c', '#95a5a6', '#d35400', '#c0392b', '#bdc3c7', '#7f8c8d');
 
-include_once('headerFunctions.php');
+
+
 ?>
