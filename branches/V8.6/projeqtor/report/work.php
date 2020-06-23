@@ -224,11 +224,15 @@ foreach ($resources as $idR=>$nameR) {
   }
 }
 $nbProj=0;
-
+$hasCode=false;
+$arrayCodes=array();
 foreach ($projects as $id=>$name) {
   $idExplo=explode('-',$id);
-  $id=$idExplo[1];
-  if($sumProj[$id] != 0)
+  $idS=$idExplo[1];
+  if($sumProj[$idS] != 0)
+    $cdProj=SqlList::getFieldFromId('Project',$idS,'projectCode');
+    $arrayCodes[$id]=($cdProj)?$cdProj:'&nbsp;';
+    if (trim($cdProj)!='') $hasCode=true;
     $nbProj+=1;
 }
 if($nbProj != 0)
@@ -236,20 +240,30 @@ $colWidth=round(80/$nbProj);
 else
 $colWidth=round(80/1);
 
+$rowspan=($hasCode)?'3':'2';
 echo '<table style="width:95%;" align="center" '.excelName().'>';
 echo '<tr>';
-echo '<td style="width:10%" class="reportTableHeader" rowspan="2" '.excelFormatCell('header',20).'>' . i18n('Resource') . '</td>';
+echo '<td style="width:10%" class="reportTableHeader" rowspan="'.$rowspan.'" '.excelFormatCell('header',20).'>' . i18n('Resource') . '</td>';
 echo '<td style="width:80%" colspan="' . $nbProj . '" class="reportTableHeader" '.excelFormatCell('header').'>' . i18n('Project') . '</td>';
-echo '<td style="width:10%" class="reportTableHeader" rowspan="2" '.excelFormatCell('header',10).'>' . i18n('sum') . '</td>';
+echo '<td style="width:10%" class="reportTableHeader" rowspan="'.$rowspan.'" '.excelFormatCell('header',10).'>' . i18n('sum') . '</td>';
 echo '</tr><tr>';
-
 foreach ($projects as $id=>$name) {
   $idExplo=explode('-',$id);
   $id=$idExplo[1];
-  if($sumProj[$id] != 0)
-  echo '<td style="width:'.$colWidth.'%" class="reportTableColumnHeader" '.excelFormatCell('subheader',15).'>' . htmlEncode($name) . '</td>';
+  if($sumProj[$id] != 0) {
+    echo '<td style="width:'.$colWidth.'%" class="reportTableColumnHeader" '.excelFormatCell('subheader',20).'>' . htmlEncode($name) . '</td>';
+  }
 }
 echo '</tr>';
+if ($hasCode) {
+echo '<tr>';
+foreach ($projects as $id=>$name) {
+  if (isset($arrayCodes[$id])) {
+    echo '<td style="width:'.$colWidth.'%" class="reportTableColumnHeader" '.excelFormatCell('subheader',20).'>' . $arrayCodes[$id] . '</td>';
+  }
+}
+echo '</tr>';
+}
 
 $sum=0;
 foreach ($resources as $idR=>$nameR) {
