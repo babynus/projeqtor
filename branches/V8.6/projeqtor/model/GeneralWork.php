@@ -258,6 +258,8 @@ class GeneralWork extends SqlElement {
   }
   
   public static function displayWorkWithUnit($val) {
+    global $outMode;
+    if (isset($outMode) and $outMode=='excel') return self::displayWork($val);
     $ret=rtrim(htmlDisplayNumeric(self::displayWork($val)),'0');
     if (substr($ret,-1)==',' or substr($ret,-1)=='.') $ret=substr($ret,0,strlen($ret)-1);
     return $ret . '&nbsp;' . self::displayShortWorkUnit();
