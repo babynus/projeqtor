@@ -393,6 +393,7 @@ class BudgetMain extends SqlElement {
       $this->update4Amount=0;
       $this->update4FullAmount=0;
       foreach ($budList as $bud) {
+        if ($bud->cancelled==1) continue;
         //$this->actualSubAmount+=$bud->actualAmount;
         //$this->actualSubFullAmount+=$bud->actualFullAmount;
         if ($bud->actualAmount or $bud->initialAmount or $bud->plannedAmount) {
