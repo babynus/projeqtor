@@ -5818,6 +5818,9 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
     require $script; // execute code
   }
   
+  $today = date('Y-m-d');
+  $firstDay = date('Y-m-d', firstDayofWeek(substr($today, 4, 2),substr($today, 0, 4)));
+  $list=$tableObject;
   //gautier #accesImputation
   $canSeeDirectAcces = false;
   foreach ($list as $assignment) {
@@ -5826,9 +5829,6 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
       $idAssignment = $assignment->id;
     }
   }
-  $today = date('Y-m-d');
-  $firstDay = date('Y-m-d', firstDayofWeek(substr($today, 4, 2),substr($today, 0, 4)));
-  $list=$tableObject;
   $habil=SqlElement::getSingleSqlElementFromCriteria('HabilitationOther', array('idProfile'=>$profile, 'scope'=>'assignmentView'));
   if ($habil and $habil->rightAccess!=1) {
     if($canSeeDirectAcces){
@@ -5883,7 +5883,7 @@ function drawAssignmentsFromObject($list, $obj, $refresh=false) {
       echo ' title="'.i18n('gotoMyImputation').'" > '.formatSmallButton('Goto',true).'</a>';
     }
     echo '</td>';
-  }if(!$print and !$canUpdate ){
+  } else if(!$print and !$canUpdate and $canSeeDirectAcces){
     echo '<td class="assignHeader" style="width:10%;vertical-align:middle;">';
     if($canSeeDirectAcces){
           $goto="var callback = accessImputationCallBack();
