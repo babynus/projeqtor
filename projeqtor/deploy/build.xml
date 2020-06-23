@@ -98,6 +98,9 @@
     <copy todir="${deploy.dir}/external/PHPOffice">
        <fileset dir="${src.dir}/external/PHPOffice"/>
     </copy>
+    <copy todir="${deploy.dir}/external/HtmlPhpExcel">
+       <fileset dir="${src.dir}/external/HtmlPhpExcel"/>
+    </copy>
   </target>
   
   <target name="copyFiles">
