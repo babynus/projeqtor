@@ -1,6 +1,7 @@
 <?php
 use Spipu\Html2Pdf\Html2Pdf;
 use Mpdf\Mpdf;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 /*** COPYRIGHT NOTICE *********************************************************
  *
  * Copyright 2009-2017 ProjeQtOr - Pascal BERNARD - support@projeqtor.org
@@ -283,7 +284,16 @@ use Mpdf\Mpdf;
     $outputFileName=Security::checkValidFileName($outputFileName,false);
   } else if (isset($_REQUEST['reportName'])) {
     $outputFileName=$_REQUEST['reportName'].'_'.date('Ymd_His');
-    $outputFileName.=".pdf";
+    if ($outMode=='excel') {
+      $outputFileName.=".xlsx";
+      $content=ob_get_clean();
+      require_once('../external/HtmlPhpExcel/vendor/autoload.php');
+      //$htmlPhpExcel = new \Ticketpark\HtmlPhpExcel\HtmlPhpExcel(iconv('UTF-8', 'Windows-1252',$content));
+      $htmlPhpExcel = new \Ticketpark\HtmlPhpExcel\HtmlPhpExcel(encodeCSV($content));
+      $htmlPhpExcel->process()->output($outputFileName);
+    } else {
+      $outputFileName.=".pdf";
+    }
   }
   if (isset($pdfNamePrefix)) $outputFileName=$pdfNamePrefix.$outputFileName;
   if ($outMode=='pdf') {
