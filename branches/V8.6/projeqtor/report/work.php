@@ -27,7 +27,6 @@
  *** DO NOT REMOVE THIS NOTICE ************************************************/
 
 include_once '../tool/projeqtor.php';
-//echo "work.php";
 
 $paramProject = trim(RequestHandler::getId('idProject'));
 $paramTeam = trim(RequestHandler::getId('idTeam'));
@@ -115,6 +114,10 @@ if ( $periodType=='week') {
 // if ( $paramResource=='') {
 //   $headerParameters.= i18n("colIdResource") . ' : ' . htmlEncode(SqlList::getNameFromId('Resource',$paramResource)) . '<br/>';
 // }
+if (isset($outMode) and $outMode=='excel') {
+  $headerParameters.=str_replace('- ','<br/>',Work::displayWorkUnit()).'<br/>';
+}
+  
 include "header.php";
 
 
@@ -233,18 +236,18 @@ $colWidth=round(80/$nbProj);
 else
 $colWidth=round(80/1);
 
-echo '<table style="width:95%;" align="center">';
+echo '<table style="width:95%;" align="center" '.excelName().'>';
 echo '<tr>';
-echo '<td style="width:10%" class="reportTableHeader" rowspan="2">' . i18n('Resource') . '</td>';
-echo '<td style="width:80%" colspan="' . $nbProj . '" class="reportTableHeader">' . i18n('Project') . '</td>';
-echo '<td style="width:10%" class="reportTableHeader" rowspan="2">' . i18n('sum') . '</td>';
+echo '<td style="width:10%" class="reportTableHeader" rowspan="2" '.excelFormatCell('header',20).'>' . i18n('Resource') . '</td>';
+echo '<td style="width:80%" colspan="' . $nbProj . '" class="reportTableHeader" '.excelFormatCell('header').'>' . i18n('Project') . '</td>';
+echo '<td style="width:10%" class="reportTableHeader" rowspan="2" '.excelFormatCell('header',10).'>' . i18n('sum') . '</td>';
 echo '</tr><tr>';
 
 foreach ($projects as $id=>$name) {
   $idExplo=explode('-',$id);
   $id=$idExplo[1];
   if($sumProj[$id] != 0)
-  echo '<td style="width:'.$colWidth.'%" class="reportTableColumnHeader">' . htmlEncode($name) . '</td>';
+  echo '<td style="width:'.$colWidth.'%" class="reportTableColumnHeader" '.excelFormatCell('subheader',15).'>' . htmlEncode($name) . '</td>';
 }
 echo '</tr>';
 
@@ -255,13 +258,13 @@ foreach ($resources as $idR=>$nameR) {
 	}
   if (!$paramTeam or $res->idTeam==$paramTeam) {
 		$sumRes=0;
-	  echo '<tr><td style="width:10%" class="reportTableLineHeader">' . htmlEncode($nameR) . '</td>';
+	  echo '<tr><td style="width:10%" class="reportTableLineHeader" '.excelFormatCell('rowheader').'>' . htmlEncode($nameR) . '</td>';
 	  foreach ($projects as $idP=>$nameP) {
 	    
       $idExplo=explode('-',$idP);
       $idP=$idExplo[1];
     if($sumProj[$idP] != 0){
-	    echo '<td style="width:' . $colWidth . '%" class="reportTableData">';
+	    echo '<td style="width:' . $colWidth . '%" class="reportTableData" '.excelFormatCell('data',null,null,null,null,null,null,null,(($val)?'work':null)).'>';
 	    if (array_key_exists($idR, $result)) {
 	      if (array_key_exists($idP, $result[$idR])) {
 	        $val=$result[$idR][$idP];
@@ -273,19 +276,19 @@ foreach ($resources as $idR=>$nameR) {
 	    echo '</td>';
 	  }
   }
-	  echo '<td style="width:20%" class="reportTableColumnHeader">' . Work::displayWorkWithUnit($sumRes) . '</td>';
+	  echo '<td style="width:20%" class="reportTableColumnHeader" '.excelFormatCell('subheader').'>' . Work::displayWorkWithUnit($sumRes) . '</td>';
 	  echo '</tr>';
   }
 }
-echo '<tr><td class="reportTableHeader">' . i18n('sum') . '</td>';
+echo '<tr><td class="reportTableHeader" '.excelFormatCell('header').'>' . i18n('sum') . '</td>';
 if ($nbProj == 0)
-   echo '<td class="reportTableHeader">' . "" . '</td>';
+   echo '<td class="reportTableHeader" '.excelFormatCell('subheader').'>' . "" . '</td>';
 
 foreach ($projects as $id=>$name) {
   $idExplo=explode('-',$id);
   $id=$idExplo[1];
   if($sumProj[$id] != 0)
-  echo '<td class="reportTableColumnHeader">' . Work::displayWorkWithUnit($sumProj[$id]) . '</td>';
+  echo '<td class="reportTableColumnHeader" '.excelFormatCell('subheader').'>' . Work::displayWorkWithUnit($sumProj[$id]) . '</td>';
 }
-echo '<td class="reportTableHeader">' . Work::displayWorkWithUnit($sum) . '</td></tr>';
+echo '<td class="reportTableHeader" '.excelFormatCell('header').'>' . Work::displayWorkWithUnit($sum) . '</td></tr>';
 echo '</table>';
