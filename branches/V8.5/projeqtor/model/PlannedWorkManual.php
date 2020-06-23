@@ -406,8 +406,13 @@ class PlannedWorkManual extends GeneralWork {
         echo '<td class="'.$classDay.'" style="padding:0;font-weight:normal;width:'.$size.'px">'.$i.'</td>';
       }
       echo '</tr>';
-      foreach ($resourceList as $idRes) {
-        $nameRes=SqlList::getNameFromId('Affectable', $idRes);
+      $resourceListName =  array_flip($resourceList);
+      foreach ($resourceListName as $idName=>$idResourceListName){
+        $resourceListName[$idName]=$nameRes=SqlList::getNameFromId('Affectable', $idName);
+      }
+      $resourceListName = new ArrayObject($resourceListName);
+      $resourceListName->asort();
+      foreach ($resourceListName as $idRes=>$nameRes) {
         echo '<tr style="height:'.$size.'px">';
         echo '<td class="noteHeader" style="width:'.$nameWidth.'px;"><div style="white-space:nowrap;max-width:'.$nameWidth.'px;max-height:'.$size.'px;overflow:hidden;">'.$nameRes.'</div></td>';
         self::drawLine($scope, $idRes, $year, $month, null, null, $readonly);
