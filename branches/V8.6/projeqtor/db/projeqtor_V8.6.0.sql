@@ -16,3 +16,5 @@ INSERT INTO `${prefix}habilitation` (`idProfile`, `idMenu`, `allowAccess`) VALUE
 
 INSERT INTO `${prefix}accessright` (`idProfile`, `idMenu`, `idAccessProfile`) VALUES
 (1,254,8);
+
+UPDATE `${prefix}report` SET hasExcel=1 WHERE id in (1,2,3);
