@@ -256,7 +256,7 @@ class GlobalPlanningElement extends SqlElement {
 	  $formatChar=(Sql::isPgsql())?'VARCHAR':'CHAR';
 	  $formatCollation=(Sql::isPgsql())?'':'COLLATE '.Sql::getDbCollation();
     if (!$limitToClass) {
-      $query.="SELECT cast(id as $formatChar) $formatCollation as id,idProject,cast(refType AS $formatChar) $formatCollation as refType,refId,refName,topId,topRefType,topRefId,
+      $query.="SELECT cast(id as $formatChar) $formatCollation as id,color,idProject,cast(refType AS $formatChar) $formatCollation as refType,refId,refName,topId,topRefType,topRefId,
         priority,elementary,idle,done,cancelled,idPlanningMode,idBill,
         initialStartDate,validatedStartDate,validatedStartFraction,plannedStartDate,plannedStartFraction,realStartDate,
         initialEndDate,validatedEndDate,validatedEndFraction,plannedEndDate,plannedEndFraction,realEndDate,
@@ -281,7 +281,7 @@ class GlobalPlanningElement extends SqlElement {
       $table=$clsObj->getDatabaseTableName();
       $convert=self::$_globalizables[$class];
       if (!$limitToClass) {$query.="\n  UNION ";}
-      $query.="\n    SELECT coalesce(cast( (pex.id+$pexRef) AS $formatChar) $formatCollation,concat('$class','_',$table.id)) as id";
+      $query.="\n    SELECT coalesce(cast( (pex.id+$pexRef) AS $formatChar) $formatCollation,concat('$class','_',$table.id)) as id, null as color";
       foreach ($obj as $fld=>$val) {
         if (substr($fld,0,1)=='_' or $fld=='id') continue;        
         $query.=", ";
