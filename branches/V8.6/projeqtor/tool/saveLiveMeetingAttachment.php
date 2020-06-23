@@ -1,5 +1,4 @@
 <?php
-use PhpOffice\PhpSpreadsheet\Calculation\Database;
 /*** COPYRIGHT NOTICE *********************************************************
  *
 * Copyright 2009-2016 ProjeQtOr - Pascal BERNARD - support@projeqtor.org
