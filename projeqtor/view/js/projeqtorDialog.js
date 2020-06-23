@@ -7484,7 +7484,9 @@ function loadMenuBarItem(item, itemName, from) {
     loadContent("plannedWorkManualMain.php?readonly="+param, "centerDiv");
   }else if (item == 'ImputationValidation') {
 	    loadContent("imputationValidationMain.php", "centerDiv");  
-  } else if (item == 'AutoSendReport') {
+  }else if(item == 'ConsultationValidation'){
+    loadContent("consultationValidationMain.php", "centerDiv");  
+  }else if (item == 'AutoSendReport') {
     loadContent("autoSendReportMain.php", "centerDiv"); 
   } else if (item == 'DataCloning') {
 		loadContent("dataCloningMain.php", "centerDiv");
