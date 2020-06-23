@@ -141,7 +141,10 @@ function excelFormatCell($cellType='data',$width=null, $color=null, $bgcolor=nul
       $color=getColorFromTheme('dark');
       if (! $hAlign) $hAlign='left';
       if (! $vAlign) $vAlign='center';
-      
+    }
+    if ($bgcolor=='eeeeee') {
+      $color='000000';
+      $borderColor='aaaaaa';
     }
   }
   if (! $vAlign) $vAlign='center';
@@ -179,7 +182,7 @@ function getColorFromTheme($val) {
       "ProjeQtOrFlatRed"=>array("dark"=>"833e3e","header"=>"b07878","subheader"=>"bda1a6","rowheader"=>"ddcdce"),
       "ProjeQtOrFlatGreen"=>array("dark"=>"537665","header"=>"779a84","subheader"=>"86a790","rowheader"=>"c9dbce"),
       "ProjeQtOrFlatGrey"=>array("dark"=>"656565","header"=>"898989","subheader"=>"AEAEAE","rowheader"=>"D4D1D1"),
-      "default"=>array("dark"=>"000000","header"=>"909090","subheader"=>"cccccc","rowheader"=>"eeeeee")
+      "default"=>array("dark"=>"000000","header"=>"909090","subheader"=>"eeeeee","rowheader"=>"eeeeee")
   );
   $theme=Parameter::getUserParameter('theme');
   $row=(isset($array[$theme]))?$array[$theme]:$array['default'];
