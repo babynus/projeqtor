@@ -455,10 +455,19 @@ class PlannedWorkManual extends GeneralWork {
   public static function drawActivityTable($idProject=null,$monthYear=null,$readonly=false) {
     $keyDownEventScript=NumberFormatter52::getKeyDownEvent();
     if($idProject){
-     $myProj = new Project($idProject);
-     $listProj = transformListIntoInClause($myProj->getRecursiveSubProjectsFlatList(false,true));
-     $where = " idPlanningMode = 23 and idle = '0' and idProject in $listProj" ;
-     $order = null;
+      if(is_array($idProject)){
+        $listProj=array();
+        foreach ($idProject as $proj){
+          $myProj = new Project($proj);
+          array_push($listProj, $myProj->getRecursiveSubProjectsFlatList(false,true));
+        }
+      }else{
+        $myProj = new Project($idProject);
+        $listProj = $myProj->getRecursiveSubProjectsFlatList(false,true);
+      }
+      $listProj=transformListIntoInClause($listProj);
+      $where = " idPlanningMode = 23 and idle = '0' and idProject in $listProj" ;
+      $order = null;
     }else{
       $user = new User(getCurrentUserId());
       $listProj = transformListIntoInClause($user->getVisibleProjects());
