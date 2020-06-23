@@ -411,10 +411,150 @@ Priority numeric value is determined by a simple equation as follows:
 Receive tickets from emails
 """""""""""""""""""""""""""
 
-Under construction.
+ProjeQtOr offers to save tickets from e-mail directly in the application.
+
+.. figure:: /images/GUI/TICKET_SCR_EmailTicket.png
+   :alt: Receive email from ticket screen
+   
+   Receive email from ticket screen
+   
+   
+
+.. rubric:: Description section
+
+This section allows you to enter the parameters of your mailbox. 
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required field |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - :term:`Id`
+     - Unique Id for the ticket.
+   * - |RequiredField| Name
+     - Short description of the ticket.
+   * - |RequiredField| Project
+     - name of the project to which the ticket is attached.
+   * - |RequiredField| IMAP host
+     - Name of your IMAP host. 
+   * - |RequiredField| IMAP User
+     - Mail of the IMAP user.
+   * - |RequiredField| IMAP Password
+     - IMAP user account password entered.
 
 
+You can create a new mailbox for tickets on each project and for each type of ticket configured in ProjeQtOr.
+ 
 
 
+ .. compound:: IMAP Host
+
+   The address must be an IMAP connection string.
+   
+   Example to connect to the GMAIL input area, the host must be
+
+   {imap.gmail.com:143}INBOX
+   
+   No protocol is required 
+   
+
+   
+ .. compound:: security constraints
+ 
+   * **Mails from any source (may lead to spam**
+     Allow you to receive emails from anyone and therefore can cause spam 
+     
+   * **Only mails from known users**
+     Can only receive emails saved in your ProjeQtOr application
+     
+   * **Only mails from known users allocated to the project**
+     Only allows you to receive emails saved in your ProjeQtOr application 
+     and which are assigned to the project selected in the settings of your mailbox
+     
+   * Include attachments  
+     Indicates whether or not you allow your users to attach attachments.
+     
+   * allow up to   
+     maximum weight allowed for receiving emails.     
+     
+     .. warning:: maximum weight 
+
+       There is no weight limit in ProjeQtOr but probably your mail server. 
+       
+       Most of the time emails are blocked beyond 5 to 10 MB
+       
+       
+.. rubric:: Description treatment       
 
 
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - |RequiredField| Ticket type
+     - Type of ticket for which emails will be sent.
+   * - Responsible 
+     - Name of the person who will work on the default ticket.
+   * - Planning activity
+     - Name of the planning activity on which the tickets will be decremented. The parent activity must belong to the same project. 
+   * - |RequiredField| Limit of tickets / hour 
+     - Maximum number of emails per hour allowed.
+   * - Last input date
+     - Date of last ticket received
+   * - Last input ticket    
+     - Display the name of the last ticket received
+   * - Total input tickets
+     - Total number of the tickets since the mailbox creation
+
+
+.. warning:: 
+   Cron must be launched for tickets to be processed in ProjeQtOr.
+   If you do not receive a ticket, try to stop the cron so that it can restart with a refresh of the code.
+
+
+Some fields can be decisive for the reception of your emails.
+     
+     
+ .. compound:: limit of tickets / hour
+ 
+   * This limit allows you to restrict the reception of emails by hour.
+     
+     If the number of tickets received is much higher than your limitation then the probability of spam is to be considered or you have incorrectly evaluated the number of tickets to be processed.
+     
+   * When the maximum number of tickets is reached then the mailbox freezes
+
+     Only manual intervention by the administrator can unlock it
+
+     Its role will consist in reassessing the number of tickets to allow their receipt
+     
+   * If the maximum number of tickets per hour has been reached then you have a rejection message on the history line: **rejected ticket: ticket limit per hour**  
+      
+      
+.. rubric:: History of ticket created
+
+You can choose the number of tickets to display in the history by filling in the "history to display" field
+
+.. tabularcolumns:: |l|l|
+
+.. list-table:: Required fields |ReqFieldLegend|
+   :header-rows: 1
+
+   * - Field
+     - Description
+   * - |RequiredField| Email adresse
+     - address of the ticket sender
+   * - Date
+     - date of receipt of the ticket 
+   * - Result 
+     - Indicates whether the ticket has been processed or rejected
+     
+     
+     
+      
+     
+      
