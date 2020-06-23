@@ -291,3 +291,5 @@ ALTER TABLE `${prefix}situationable` ADD COLUMN `type` VARCHAR(100);
 UPDATE `${prefix}situationable` SET `type`='Income' WHERE name in ('Quotation','Command','Bill');
 UPDATE `${prefix}situationable` SET `type`='Expense' WHERE name in ('CallForTender','Tender','ProviderOrder','ProviderBill');
 
+DELETE from `${prefix}accessright` where idMenu in (251,252,253);
+
