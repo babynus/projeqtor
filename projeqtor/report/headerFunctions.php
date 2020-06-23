@@ -96,4 +96,94 @@ function dirname_recursive($path, $count=1){
     return dirname($path);
   }
 }
+$page=1;
+$lastName=null;
+function excelName($name=null, $quote='"') {
+  global $lastName;
+  if (!$name) $name=$_REQUEST['reportName'];
+  if ($name==$lastName) {
+    $page++;
+    $name.=" ($page)";
+  } else {
+    $lastName=$name;
+  }
+  return ' _excel-name='.$quote.$name.$quote.' ';
+  
+}
+function excelFormatCell($cellType='data',$width=null, $color=null, $bgcolor=null, $bold=null, $hAlign=null, $vAlign=null,$fontSize=null,$valueType=null,$noWrap=false, $noBorder=false) {
+  // cellType = data, header, subheader
+  $format="";
+  if ($width) {
+    $format=" _excel-dimensions='{"
+        .'"column":{"width":'.$width.'}'
+        ."}' ";
+  }
+  $borderColor="aaaaaa";
+  if (!$color) $color='000000';
+  else $color=ltrim($color,'#');
+  if ($bgcolor) {
+    $bgcolor=ltrim($bgcolor,'#');
+  } else {
+    if ($cellType=='data') {
+      $bgcolor='ffffff';
+    } else if ($cellType=='header') {
+      $bgcolor=getColorFromTheme('header');
+      $color='ffffff';
+      if (! $hAlign) $hAlign='center';
+      if (! $vAlign) $vAlign='center';
+      if ($bold===null) $bold=true;
+    } else if ($cellType=='subheader') {
+      $bgcolor=getColorFromTheme('subheader');
+      $color='ffffff';
+      $borderColor=getColorFromTheme('rowheader');
+    } else if ($cellType=='rowheader') {
+      $bgcolor=getColorFromTheme('rowheader');
+      $color=getColorFromTheme('dark');
+      if (! $hAlign) $hAlign='left';
+      if (! $vAlign) $vAlign='center';
+      
+    }
+  }
+  if (! $vAlign) $vAlign='center';
+  if (! $hAlign) $hAlign='center';
+  if ($bold===null) $bold=false;
+  if (!$fontSize) $fontSize='11';
+  $numberFormat='';
+  if ($valueType=='work') {
+    //$format.=" _excel-explicit='n' ";
+    $numberFormat='###\ d';
+  }
+  $format.=" _excel-styles='{"
+      .'"alignment":{"horizontal":"'.$hAlign.'","vertical":"'.$vAlign.'"'.(($noWrap)?'':',"wrapText":true').'},'
+      .'"font":{"size":'.$fontSize.',"color":{"rgb":"'.$color.'"}'.(($bold==true)?',"bold":true':'').'},'
+      .'"fill":{"fillType":"solid","color":{"rgb":"'.$bgcolor.'"}}'
+      .(($noBorder)?'':',"borders":{"outline":{"borderStyle":"thin","color":{"rgb":"'.$borderColor.'"}}}')
+     // .(($numberFormat)?',"numberFormat":{"formatCode":"'.$numberFormat.'"}':'')
+    ."}' ";
+  
+  return $format;
+}
+function excelFormatLine($height=null) {
+  // cellType = data, header, subheader
+  $foramt="";
+  if ($height) {
+    $format="_excel-dimensions='{"
+        .' "row":{"rowHeight":'.$height.'}'
+      ."}' ";
+  }
+  return $format;
+}
+function getColorFromTheme($val) {
+  $array=array(
+      "ProjeQtOrFlatBlue"=>array("dark"=>"545381","header"=>"7b769c","subheader"=>"a6a0bc","rowheader"=>"cdcadb"),
+      "ProjeQtOrFlatRed"=>array("dark"=>"833e3e","header"=>"b07878","subheader"=>"bda1a6","rowheader"=>"ddcdce"),
+      "ProjeQtOrFlatGreen"=>array("dark"=>"537665","header"=>"779a84","subheader"=>"86a790","rowheader"=>"c9dbce"),
+      "ProjeQtOrFlatGrey"=>array("dark"=>"656565","header"=>"898989","subheader"=>"AEAEAE","rowheader"=>"D4D1D1"),
+      "default"=>array("dark"=>"000000","header"=>"909090","subheader"=>"cccccc","rowheader"=>"eeeeee")
+  );
+  $theme=Parameter::getUserParameter('theme');
+  $row=(isset($array[$theme]))?$array[$theme]:$array['default'];
+  $result=(isset($row[$val])) ?$row[$val]:'ff0000';
+  return $result;
+}
 ?>
