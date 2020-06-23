@@ -546,7 +546,8 @@ A checklist is built from checklist lines.
    * - Choice #n
      - Possible choices (checks) for the list (up to 5 choices).
    * - Exclusive
-     - Are the choices exclusive (select one will unselect others).
+     - Indicates whether the choices are exclusive or not.
+       Check the box so that there is only one choice possible
 
 .. topic:: Details of dialog box
 
